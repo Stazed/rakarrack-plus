@@ -1,0 +1,2963 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+
+
+
+
+
+
+
+
+
+
+  
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
+  
+
+  
+  
+  <meta name="GENERATOR" content="OpenOffice.org 2.4  (Linux)">
+
+  
+  <meta name="AUTHOR" content="Josep Andreu">
+
+  
+  <meta name="CREATED" content="0;0">
+
+  
+  <meta name="CHANGED" content="20100112;22402500">
+
+  
+  <meta name="DESCRIPTION" content="rakarrack help in html file">
+
+  
+  <meta http-equiv="content-style-type" content="text/css">
+
+  
+  <style type="text/css">
+	<!--
+		@page { size: 8.5in 11in }
+		P { color: #000000; font-family: "Arial" }
+		TD P { color: #000000; font-family: "Arial" }
+		H1 { color: #000000 }
+		TH P { color: #000000; font-family: "Arial" }
+		H4 { color: #000000 }
+		H4.western { font-family: "Albany", sans-serif; font-size: 11pt; font-style: italic }
+		H4.cjk { font-family: "HG Mincho Light J"; font-size: 11pt; font-style: italic }
+		H4.ctl { font-family: "Arial Unicode MS"; font-size: 11pt; font-style: italic }
+		H2 { color: #000000 }
+		H2.western { font-family: "Albany", sans-serif; font-size: 14pt; font-style: italic }
+		H2.cjk { font-family: "HG Mincho Light J"; font-size: 14pt; font-style: italic }
+		H2.ctl { font-family: "Arial Unicode MS"; font-size: 14pt; font-style: italic }
+		H3 { color: #000000 }
+		H3.western { font-family: "Albany", sans-serif }
+		H3.cjk { font-family: "HG Mincho Light J" }
+		H3.ctl { font-family: "Arial Unicode MS" }
+	-->
+	</style></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+<p style="margin-bottom: 0in;" align="left"><a name="top"></a><br>
+</p>
+
+<table cellpadding="0" cellspacing="0">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000080"><a href="http://rakarrack.sourceforge.net/"><font color="#000080"><img style="border: 2px solid ; width: 400px; height: 435px;" src="imagenes/icono_rakarrack_128x128.png" name="graphics1" alt="rakarrack Logo"></font></a></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <h1>Help Contents</h1>
+      
+      <h2><a href="#desc">General</a></h2>
+
+      <p><a href="#cmd">Command line options</a> <a href="#screen">The
+Main Screen</a> <a href="#conn">Connecting</a> <a href="#pyb">Presets
+&amp; banks</a> <a href="#settings">Preferences</a> <a href="#scuts">Shortcuts</a>&nbsp;<a href="#MLearn">MIDI Learn</a>
+      </p>
+      
+      <h2><a href="#Effx">Effects</a></h2>
+
+      <p><a href="#eql">Lineal EQ</a> <a href="#comp">Compressor</a> <a href="#dist">Distorsion</a> <a href="#ovrd">Overdrive</a> <a href="#eco">Echo</a> <a href="#chor">Chorus</a> <a href="#phas">Phaser</a>
+      <a href="#aphas">Analog Phaser</a> <a href="#flan">Flanger</a> <a href="#reve">Reverb</a> <a href="#eqp">Parametric EQ</a> <a href="#cabe">Cabinet Emulation</a> <a href="#pan">AutoPan/Stereo
+Expander</a> <a href="#har">Harmonizer</a> <a href="#delm">Musical
+Delay</a> <a href="#gate">Noise Gate</a> <a href="#wha">WhaWha</a> <a href="#awha">AlienWha</a>&nbsp;<a href="#dere">Derelict</a> </p>
+      
+      <h3><a href="#midi">MIDI Converter</a></h3>
+
+      
+      <h3><a href="#tuner">Tuner</a></h3>
+
+      
+      <h3><a href="#autores">Credits</a></h3>
+
+      
+      <h3><a href="#midispec">MIDI Implementation Chart</a></h3>
+
+      
+      <h3><a href="license.html">License</a></h3>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="western">GENERAL</h2>
+
+
+<p>RAKARRACK is a multi-effect processor for guitar players but the
+signal processing engine allows a full range of parameter adjustment
+making it suitable for almost any audio processing task. Nineteen
+effects are included in this version: Lineal EQ, Compressor,
+Distortion, Overdrive, Derelict, Echo, Chorus, Phaser, Analogic
+Phaser, Flanger, Reverb,&nbsp; Parametric EQ, WahWah, Alienwah,
+Cabinet, AutoPan/Extra Stereo, Harmonizer, Musical Delay, Noise Gate,
+New Dist and Analog Phaser. Ten can be used simultaneously on a
+chain. Also has a Tuner and a monophonic MIDI Converter. Rakarrack
+can be managed externally by MIDI, the program receive Program Change
+and the parameters can be controlled via Control Change MIDI
+messages.</p>
+
+<p>One of the most important things of RAKARRACK is that everything
+is on a single mouse click. All the effect parameters are on the
+screen.</p>
+
+<p>The effects are processed on a chain, the chain order processing
+is fully configurable by the user for each preset. The preset saves
+all the effects parameters. These presets can be grouped into banks
+to manage more efficiently. Saving a preset is as easy as typing a
+name </p>
+
+<p>Rakarrack is capable of generating high volume output. It has Gain
+controls in general and some of the effects allow high gain
+adjustments. Use these gains with caution because they can produce
+unwanted effects. However, a limiter is applied to the final output
+which prevents signal level from increasing beyond 0dB. Bear this in
+mind, for high gains triggering limiting in the output will initiate
+high-ratio hard-knee compression. This is better than hard clipping
+distortion, but the audio effect can be undesirable.</p>
+
+<p align="left">Rakarrack is a JACK application, Dave Phillips wrote
+some good articles in their blog of how to use linux audio with jack,
+if you don't know about jack, or you have problems running rakarrack,
+please read this series of articles:</p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000244">Troubleshooting
+Linux Audio, Part 1</a></p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000254">Troubleshooting
+Linux Audio, Part 2</a></p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000262">Troubleshooting
+Linux Audio, Part 3a</a></p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000295">Troubleshooting
+Linux Audio, Part 3b</a></p>
+
+<p><br>
+<br>
+</p>
+<p><a href="#top">Contents</a> </p>
+
+<h3 class="western"><a name="cmd"></a>Command Line Options</h3>
+
+<table style="background-color: rgb(251, 251, 251);" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <th style="width: 150px;">
+      <p align="left">Short Format</p>
+      </th>
+      <th style="width: 150px;">
+      <p align="left">Long Format</p>
+      </th>
+      <th>
+      <p>&nbsp;</p>
+      </th>
+    </tr>
+    <tr>
+      <td>
+      <p>-h</p>
+      </td>
+      <td>
+      <p>--help</p>
+      </td>
+      <td>
+      <p>Shows the command line options and exits.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-n</p>
+      </td>
+      <td>
+      <p>--no-gui</p>
+      </td>
+      <td>
+      <p>Start the application without GUI</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-l file</p>
+      </td>
+      <td>
+      <p>--load=file</p>
+      </td>
+      <td>
+      <p>Load file single Preset</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-b file</p>
+      </td>
+      <td>
+      <p>--bank=file</p>
+      </td>
+      <td>
+      <p>Load a file Bank</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="western">Examples:</h4>
+
+<p>rakarrack -l mypreset.rkr &nbsp;&nbsp;&nbsp; Starts Rakarrack and
+load the preset file mypreset.rkr</p>
+
+<p>rakarrack -n -b mybank.rkrb &nbsp;&nbsp;&nbsp;Starts Rakarrack
+without GUI and load the bank file mybank.rkrb</p>
+
+<h3 class="western"><a name="screen"></a>The Main Screen</h3>
+
+<p><a name="conn"></a><font color="#000000"><font color="#000000"><img src="imagenes/screen.png" name="graphics2" alt="rakarrack Main Screen" align="bottom" border="1" height="420" width="640"></font></font>
+</p>
+
+<h3 class="western">Connecting</h3>
+
+<p>The connections shown in the screenshot correspond to a
+motherboard sound card. The guitar is connected to the input line.
+Obviously this configuration can vary depending of your sound card.
+RAKARRACK has two inputs to allow use of stereo devices. The
+screenshot shows the connection of a guitar, usually mono aural.</p>
+
+<p><a name="pyb"></a><font color="#000000"><font color="#000000"><img src="imagenes/jack_conections.jpg" name="graphics3" alt="rakarrack Qjackctl Connect" align="bottom" border="1" height="313" vspace="10" width="562"></font></font>
+</p>
+
+<h3 class="western">Presets &amp; Banks</h3>
+
+<p align="justify">The state of the rack can be saved to a file at any
+time, either pressing the "Save" buttons or via the menu
+File-&gt;Save Preset. Rakarrack suggest the preset name for the
+filename.rkr in the save operation, but you can put what you want.
+You can assign the preset name here:</p>
+
+<p><font color="#000000"><font color="#000000"><img style="border: 1px solid ; width: 571px; height: 140px;" src="imagenes/preset_name1.png" name="graphics4" alt="rakarrack Preset Box"></font></font>
+</p>
+
+<p>If the user modifies any preset bank, The "compare"
+button allows you to compare the sound of the current state of
+rakarrack with the original bank preset from which it departed.</p>
+
+<p>You can use banks to store groups of presets. 80 preset can be
+saved on a bank. To include a preset in a bank must first indicate
+the name of preset on the main screen, open the bank window and click
+on a empty slot with the right mouse button. To retrieve a preset
+stored in a bank must open the window of banks and clicking the left
+button on the preset desired, also you can use the Preset selector of
+the main window.</p>
+
+<p>To save a preset in a bank:</p>
+
+<ul>
+
+  <li>
+    <p style="margin-bottom: 0in;">Put descriptive name to the preset </p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Open the bank window (B) </p>
+  </li>
+  <li>
+    <p>Press the <b>right mouse button</b> in a empty place OR </p>
+  </li>
+  <li>
+    <p>Press the <b>right mouse button</b> on an existing preset if
+you wish to overwrite it.</p>
+  </li>
+</ul>
+
+<p>To retrieve a preset from a bank:</p>
+
+<ul>
+
+  <li>
+    <p style="margin-bottom: 0in;">Open the bank window (B) </p>
+  </li>
+  <li>
+    <p>Click the <b>left mouse button</b> on the preset </p>
+  </li>
+</ul>
+
+<p>When rakarrack starts always load the bank selected in <a href="#settings">preferences</a>
+unless you specify another bank in the <a href="#cmd">command line</a>.
+Of course you can load/save any bank via menu File. By default, is
+allocated in preferences the installation included bank. This bank
+("Default.rkrb") is installed with root properties, then
+you can't overwrite as user. But is easy to save in any place to work
+with it. The bank contains default presets developed by <a href="#autores">the
+development team and some friends</a> who have contributed in this
+facet.</p>
+
+<p><font color="#000000"><font color="#000000"><img src="imagenes/bank_mgmt.jpg" name="graphics5" alt="rakarrack Bank Window" align="bottom" border="1" height="500" width="640"></font></font>
+</p>
+
+<p align="justify">Up the Bank windows screenshot, the tittle bar show
+the loaded bank. Click on preset or use preset counter in the Preset
+section to change the preset.</p>
+
+<p align="justify">Presets marked with (*) use the Select mode in the
+Harmonizer effect, that means you need to play a monophonic melody in
+the Key/Chord selected. The harmonizer recognizes what note you play
+and creates a second voice in the Key/Chord selected.</p>
+
+<h3 class="western"><a name="settings"></a>Preferences (Settings)</h3>
+
+<p><font color="#000000"><font color="#000000"><img src="imagenes/settings.jpg" name="graphics6" alt="rakarrack Settings Window" align="bottom" border="1" height="473" width="600"></font></font>
+</p>
+
+<p align="justify">Through the Settings window you can configure
+different aspects of the application. The colors of he four elements
+on the screen, <b>background, buttons, labels and leds.</b></p>
+
+<p><font color="#000000"><font color="#000000"><img src="imagenes/thema1b.jpg" name="graphics7" alt="rakarrack buttons color" align="bottom" border="1" height="213" width="219"></font></font>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000"><font color="#000000"><img src="imagenes/thema2b.jpg" name="graphics8" alt="rakarrack background color" align="bottom" border="1" height="214" width="219"></font></font>
+&nbsp; &nbsp;<font color="#000000"><font color="#000000"><img src="imagenes/thema3b.jpg" name="graphics9" alt="rakarrack leds color" align="bottom" border="1" height="215" width="218"></font></font>
+&nbsp;&nbsp;&nbsp;</p>
+
+<p align="justify">Also you can select the following schemes of widget
+decoration, X11, fltk, gtk+ y plastic. Some small example of fltk and
+plastic.</p>
+
+<p align="justify"><font color="#000000"><font color="#000000"><img style="border: 1px solid ; width: 214px; height: 216px;" src="imagenes/schema1b.jpg" name="graphics10" alt="srakarrack chema fltk"></font></font>&nbsp;
+<font color="#000000"><font color="#000000"><img style="border: 1px solid ; width: 214px; height: 216px;" src="imagenes/schema2b.jpg" name="graphics11" alt="rakarrack schema gtk+" hspace="10"></font></font></p>
+
+<p align="justify">You can also select a PNG background image clicking
+on the 'Browse' button and adjust the font sizes.</p>
+
+<p align="justify"><u><b>Audio<br>
+</b></u></p>
+
+<p align="justify"><b>Fx On at start<br>
+</b></p>
+<p align="justify">This option put the FX On at the start, by default is Off.<br>
+</p>
+<p align="justify"><b>Preserve Gain/Master</b></p>
+
+
+<p align="justify">The Input Gain and Master Volume are stored in the
+preset, activating this option the Input Level and Master Volume was
+not modified when preset changes</p>
+
+<p align="justify"><b>Harmonizer Quality</b></p>
+
+<p align="justify">Selects the quality of the harmonizer audio
+engine,&nbsp;
+the available values are "4,8,16", the default value is "4".
+Incrementing the quality increments the CPU usage by this effect.
+This parameter will take effect the next time you run rakarrack.</p>
+
+<p align="justify"><u><b>MIDI</b></u></p>
+
+<p align="justify">Here you can select if you want to auto connect the
+rakarrack MIDI IN to another device when the program starts, and you
+can select the device, also when the program is running you can
+connect here o use other utilities to do that.<br>
+</p>
+<p align="justify">The MIDI Implementation radio buttons selects how
+rakarrack interpret the incoming MIDI Control mesages, by default we
+use our MIDI implementation table, but you can also use MIDI learn to
+create your own tables.<br>
+</p>
+
+
+<p align="justify"><u><b>Jack</b></u></p>
+
+<p align="justify">Here you can select if you want to auto connect the
+Jack output ports, you can select the ports available, the number of
+selected ports needs to be an odd number.</p>
+
+<p align="justify"><u><b>Misc</b></u></p>
+
+<p align="justify">Here you can define a nickname that was recorded in
+the presets that are created. The development team intends to create
+banks of effects created by users. These presets should assume the
+same license with which this program is released (GPL version 2 or
+higher) and suggest carrying an identification in the form First Name
+Last Name (nick). Of course you have to give a descriptive name to
+your preset. If you have a good preset and want to share or want to
+be included in future versions, send it to this address
+<a href="mailto:holborn@users.sourceforge.net">holborn@users.sourceforge.net</a></p>
+
+<p align="justify"><u><b>Bank</b></u></p>
+
+<p align="justify">Here you can specify what file bank is loaded when
+program starts.</p>
+
+<h3 class="western"><a name="scuts"></a>Shortcuts</h3>
+
+<p align="justify">We created a few shortcuts to make it easier to
+manage the program.</p>
+
+<table bgcolor="#fbfbfb" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr><th>Key</th>
+    <th>Function</th>
+    </tr>
+    <tr>
+      <td>R</td>
+      <td>Enable rakarrack</td>
+    </tr>
+    <tr>
+      <td>T</td>
+      <td>Enable Tuner</td>
+    </tr>
+    <tr>
+      <td>
+      M
+      </td>
+      <td>
+      Enable MIDI Converter
+      </td>
+    </tr>
+    <tr>
+      <td>
+      L
+      </td>
+      <td>
+      Open the load preset window
+      </td>
+    </tr>
+    <tr>
+      <td>
+      S
+      </td>
+      <td>
+      Open the save preset window
+      </td>
+    </tr>
+    <tr>
+      <td>
+      B
+      </td>
+      <td>
+      Open the bank window
+      </td>
+    </tr>
+    <tr>
+      <td>E
+      </td>
+      <td>Open the MIDI Learn Window
+      </td>
+    </tr>
+<tr>
+      <td>
+      I
+      </td>
+      <td>
+      Open the Settings window
+      </td>
+    </tr>
+    <tr>
+      <td>
+      O
+      </td>
+      <td>
+      Open the Order window
+      </td>
+    </tr>
+    <tr>
+      <td>
+      N
+      </td>
+      <td>
+      New preset
+      </td>
+    </tr>
+    <tr>
+      <td>
+      P
+      </td>
+      <td>
+      Compare
+      </td>
+    </tr>
+    <tr>
+      <td>
+      F1
+      </td>
+      <td>
+      Open the Help window
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p align="justify">The effects are enabled pressing the keys
+(1,2,3,4,5,6,7,8,9,0) . These keys are unrelated to the effects but
+with his position. So the key 1 trigger the effect that in the first
+position (the first effect of the left in the first line) and so on
+until 0 (the latter effect to the right in the second line).</p>
+
+<p><a href="#top">Contents</a><br>
+</p>
+
+<hr>
+<h2 class="western"><a name="MLearn"></a></h2>
+<h2><span style="font-weight: bold;"><span class="western"></span><span class="western">MIDI Learn</span></span><br>
+</h2>
+<h2 class="western"><img style="width: 600px; height: 468px;" alt="MIDI Learn window" src="imagenes/midilearn.jpg"></h2>
+<p>This is the MIDI Learn window, that brings the posibility to create
+a MIDI implementation table for each preset in the bank. You can see
+two browsers, one at the left with all the available effect&nbsp; parameters,
+and another at the right with all the presets in the Bank.<br>
+</p>
+<p>The most important thing here is the input box located below the
+parameter browser, here you can select the number of the MIDI Control
+Message, you can edit by hand, or selecting and draging, or capturing
+an incoming MIDI message clicking on the Get MIDI Message button. When
+you have the desired control number you need to assign to the effect
+parameters, clicking on the button assing, this message will be engaged
+to the selected effect parameter on the browser.<br>
+</p>
+<p>You can "Assign" up to 20 effects parameter&nbsp; for a single
+control number message, also you can use different&nbsp; control
+messages to&nbsp; manage&nbsp; only one effect parameter.<br>
+</p>
+<p>The grid boxes in the middle display the engaged MIDI
+control messages to the selected effect parameter on the browser, the
+Assignement for a single effect parameter can be cleared with the
+button "Clear Assignements", also you can clear all the assignements
+for this preset with the button Clear Preset".<br>
+</p>
+<p>In the left part of the window you have the list of presets in the
+working bank, you can copy from or to the selected preset, that copy
+all the preset table of a single preset.<br>
+</p>
+<p>The midi learn implementatition tables is saved on the preset file
+for a single preset, and in a separate file in the case of the Banks,
+the program read this bank preset file when read the normal bank file. <br>
+</p>
+<p><a href="#top">Contents</a> </p>
+<hr style="width: 100%; height: 2px;">
+<h2 class="western"><a name="Effx"></a></h2>
+<h2 style="font-weight: bold;" class="western">EFFECTS</h2>
+<p align="justify">The chain has nineteen effects, you can select any
+of the available effects: Linear EQ, Compressor, Distortion,
+Overdrive, Derelict, Echo, Chorus, Phaser, Analog Phaser, Flanger,
+Reverb, EQ parametric, WahWah, Alienwah, Cabient, Pan, Harmonizer,
+MusicDelay and NoiseGate. Ten can be used simultaneously. It
+cascading process, following the order that appears on the screen,
+from left to right and top to bottom. The order is configurable by
+the user via the button "Put in your order Rack" giving
+access to this screen. The effect selected moves up or down using the
+arrows. The double arrow button interchange the selected effects
+between the two browsers.</p>
+
+<p><font color="#000000"><img src="imagenes/order.jpg" name="graphics12" alt="rakarrack Order Window" align="middle" border="1" height="284" width="400"></font></p>
+
+<p align="justify">The effects have two common elements. The "On"
+button and "Preset" input choice. These individual effect
+presets are not modified by the user and in most cases are those that
+Octavian Paul Nasca defined for the purposes of ZynAddSubFX. The
+value of preset individual is not stored in presets general and can
+not relate to the parameters in effect.</p>
+
+<h3 class="western">Parameter Adjustement</h3>
+
+<p>&nbsp;&nbsp;&nbsp; All the parameters managed with a slider widget
+can be adjusted fine with the mouse wheel or the Up/Down - Left/Right
+arrows in the keyboard, also you can navigate and adjust trough the
+parameters with you computer keyboard with the Tab, Up/Down arrow and
+space bar keys.</p>
+
+<h3 class="western">MIDI Control</h3>
+
+<p>&nbsp;&nbsp;&nbsp; For control the parameter values via MIDI see
+the <a href="#MIDI_Implementation_Chart">MIDI Implementation Chart</a>&nbsp;
+for the complete list of MIDI message commands recognized.</p>
+
+<h3 class="western"><a name="eql"></a>EQ Lineal</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="206"> <col width="471"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/eq.jpg" name="graphics13" alt="rakarrack Lineal EQ" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Equalizer.</p>
+      <p>Gain: Overall output level</p>
+      <p>Q: Resonance of individual filters. Generally helps smooth
+extreme settings...or make extreme settings yet more extreme.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="comp"></a>Compressor</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="204"> <col width="478"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/compresor.jpg" name="graphics14" alt="rakarrack Compressor" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Originally adapted from ArtsCompressor. DSP routine has been
+rewritten entirely as the code had been adapted at a stage in
+ArtsCompressor development prior to many bug fixes that occurred later
+in its evolution – which unfortunately removed calculation of a
+soft-knee compression characteristic. This is mentioned to give hope to
+those who were aware of the bugs in compressor in Rakarrack 0.3.0.
+These bugs have been fixed, and this compressor has been traced using
+test signals to confirm it does what we think it does. </p>
+      <p>A. Time : Attack Time. Time in milliseconds for attack to
+settle to 64% of final amount of compression.</p>
+      <p>R. Time: Release Time. Time in milliseconds for gain to return
+to 64% of it's initial setting.</p>
+      <p>Note: For the curious, the strange number, 64%, relates to the
+RC time constant (RC means Resistor-Capacitor), which follows a natural
+exponential curve. The use of this behavior will make this compressor
+feel more natural to one who is most familiar with rack-mounted analog
+compressors.</p>
+      <p>Ratio: For every Ratio (dB) that the input exceeds the
+Threshold, the output will be allowed to increase by 1 dB. For example,
+using compression ratio of 2, if the signal gets 2dB above the
+threshold, the output will only go 1dB above the threshold.</p>
+      <p>Knee: Percentage of the region in dB of space between
+Threshold and 0dB (basically is Knee X -Threshold). Within this region,
+the ratio increases from 1 to log2(ratio). Threshold + Knee marks the
+point of full compression onset. For example, if knee is set to 100%, a
+very gradual compression characteristic will be obtained, but the
+maximum compression available is log2(ratio). A ratio of 32 will result
+in a real ratio ranging from 1 to 5. This is useful for processing
+cymbals as it does not crunch the dynamic attack quite so badly, but
+helps sustain the trailing resonance.</p>
+      <p>Thrhold: Threshold. Defines the onset of compression. </p>
+      <p>Output: How much gain to remove from the final stage of the
+compressor.</p>
+      <p>Auto Output: Automatically calculate makeup gain. If this is
+unchecked, then adjustments of Ratio, Knee, and Thrhold will make
+changes to the overall output level. Unchecking may be useful to
+interpret Thrhold as a limiting threshold, and one would likely use a
+high ratio in this case.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="dist"></a>Distortion</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="204"> <col width="482"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/dist.jpg" name="graphics15" alt="rakarrack Distorsion" align="bottom" border="1" height="250" width="184"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX 'Distorsion'</p>
+      <p>This is a waveshaper, and not particularly an amp or stompbox
+modeling effect. This must be used judiciously with EQ's as well as the
+LPF and HPF settings (Low Pass Filter, High Pass Filter).</p>
+      <p>Tip: Your classic green stompbox has a Pre Filter curve with
+cutoff at 720Hz. This corresponds to approximately 51 on the HPF
+setting. If trying to emulate stompbox or amp sounds, it is highly
+advisable to use the Pre Filter option with HPF higher than 30 and LPF
+lower than 70. As you increase drive, decrease LPF. </p>
+      <p>Rakarrack attempts to be friendly to computers limited in both
+RAM and CPU. Because of this, the waveshaper does not use oversampling
+to reduce the effects of digital aliasing. Without going deep into DSP
+theory, this means that hard clipping with a lot of drive will create
+harmonics that are greater than half the sampling rate. These harmonics
+get mirrored back into the audio range. If they are significant in
+magnitude, then there will be a "grainy" non-musical sound. This is
+what most guitarists are talking about when making reference to
+"digital distortion". Functions like Sine, Pow and Atan generate a lot
+of harmonics, and even at lower signal levels. Lmt, Clip and Zigzag are
+among the worst, but these are generally used for nasty noisey sounds,
+so a little digital aliasing may not be a bad thing.</p>
+      <p>Fortunately, for instruments such as guitars, you can
+significantly limit the bandwidth of the input signal without
+catastrophically discoloring the timbre of the instrument by applying
+Low Pass Pre-filtering. By reducing the high frequency content of the
+input, you can greatly minimize the level of aliasing harmonics present
+in the output. </p>
+      <p>The main point is that great sounding distortions can be
+obtained from Rakarrack, but the distortion module is not meant to
+emulate your favorite stompbox, but to off the flexibility create these
+sounds as well as unique flavors of distortion.</p>
+      <p>The Crunch waveshaping type is the most physically informed of
+the waveshaping functions currently used. The clipping characteristic
+is most closely related to curve produced by a JFET amplifier stage.
+With proper EQ settings, a sound reminiscent of high gain British
+stacks can be obtained.</p>
+      <p>Sub Octv: Allows you to mix some sub-octave rumble into the
+output. Technically speaking, this modulates the output with a square
+wave at half the fundamental frequency (sub octave). </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="ovrd"></a>Overdrive</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="204"> <col width="480"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/ovrd.jpg" name="graphics16" alt="rakarrack Overdrive" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Distorsion</p>
+      <p>Same as Distortion, but without sub-octave.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="eco"></a>Echo</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="204"> <col width="477"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/eco.jpg" name="graphics17" alt="rakarrack Echo" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Echo</p>
+      <p>Wet/Dry: Mix level of echo with original.</p>
+      <p>Reverse: Mixes reverse delay with forward delay.</p>
+      <p>More about reverse: Echo works by storing audio samples in
+memory and playing back samples that were stored a while ago. At a
+sample rate of 48kHz, the number of samples stored in memory for a 1
+second delay is 48,000. To play back audio from 1 second ago, there is
+a reader that increments through, right in front of the write. The
+reader reads a sample from a second ago, and the writer writes that
+memory location with a new sample from the present.</p>
+      <p>Now, what if we could read this block of memory backwards?
+Then everything stored in memory comes out in reverse, and has an
+interesting reverse envelop sound. In the digital word, we can read it
+forward as easily as backwards, so why not keep track of both and let
+you mix them together?</p>
+      <p>Pan: Sends the delay more to the right or left. Zero balances
+it in the middle.</p>
+      <p>Delay: Amount of time before you hear the echo.</p>
+      <p>Lrdl. : Left/Right delay difference. A setting of 64 means
+that the delay time is the same for left and right channels. If larger
+than 64, the right channel is delayed longer than the left channel.
+Less than 64 the reverse is true. This allows you to achieve the stereo
+'Ping Pong' effect.</p>
+      <p>L/R Cr : Left/Right Crossing. This mixes left and right
+channels.</p>
+      <p>Fb : Feedback. How much of the delayed output to add to the
+input. This makes the echo regenerate, like it's bouncing around in a
+canyon.</p>
+      <p>Damp: Low pass filter on the delayed signal. This rolls off
+the high frequencies on every regeneration. Setting to a higher level
+will make the echo sound more natural. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="chor"></a>Chorus</h3>
+
+<table cellpadding="5" cellspacing="0">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/chorus.jpg" name="graphics18" alt="rakarrack Chorus" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Chorus</p>
+      <p>Tips</p>
+      <p>Freq: LFO Rate</p>
+      <p>Rnd: Add noise to LFO to make it more natural sounding.</p>
+      <p>St.df : Stereo difference of LFO.</p>
+      <p>L/R Cr. : Mix left into right, Right into left. At maximum
+level, left and right channels are swapped.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="phas"></a>Phaser</h3>
+
+<table cellpadding="5" cellspacing="0">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/phaser.jpg" name="graphics19" alt="rakarrack Phaser" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Phaser</p>
+      <p>More mild digital phaser with exponential LFO sweep.</p>
+      <p>Phase: This is the offset for the "center" of the sweep. </p>
+      <p>Depth: LFO deviation or some may like to think of it as LFO
+amplitude. This is the same type of function that has been labeled
+'width' in Analog Phaser.</p>
+      <p>Fb: Feedback. Some phasers title this "Regen". Feedback is
+negative as this moves toward zero, positive from 64+. 64, strangely,
+corresponds to zero feedback.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="aphas"></a>Analog Phaser</h3>
+
+<table cellpadding="5" cellspacing="0">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/Aphaser.jpg" name="graphics20" alt="rakarrack Analog Phaser" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>ZynAddSubFX Phaser Seriously Hacked</p>
+      <p>Overhauled DSP engine in Zyn phaser and used shell to create a
+"Physically Informed Digital Model of an Analog FET Phaser". Don't
+forget to spit after chewing that mouthful.</p>
+      <p>When should you want to use Phaser instead?</p>
+      <p>A) Next to the pitch shifter, Analog Phaser is one of the most
+CPU intensive FX in Rakarrack. If you find your computer can't handle
+it, then Phaser is much more friendly to slow processors.</p>
+      <p>B) You just plain like the original Phaser Effect and want to
+use it.</p>
+      <p>C) When you want to use two phasers at the same time, you can
+chain Analog Phaser and Phaser together for some unique filtering
+sounds.</p>
+      <p>A Phaser works by adding a delay to a certain group of
+frequencies and shifting the filter that selects the group of
+frequencies up and down the spectrum. When mixed with the original
+input, some of the delayed parts of the signal cancel with the the
+original (destructive interference). The technical term for this is
+'notch filter'. For every two phase stages, a new notch appears in the
+spectrum, so for 4 stages and up we have a 'comb filter' because a plot
+of the frequency response begins to look like something you use to
+brush your hair as the number of phase stages increases.</p>
+      <p>If you don't care about what's under the hood, skip this
+paragraph -- To get the basic behavior of an Analog Phaser, the
+transfer function of a real analog phaser all-pass filter stage was
+computed and transformed into a discrete-time equivalent transfer
+function, then broken down into the resulting numerical computation
+algorithm. These all-pass filter stages were chained together in
+sequence of the overall analog circuit. Five or six different
+schematics were referenced in the design of this model to see what
+different units do to achieve a certain sound. The resulting 'Virtual
+Circuit' is an original creation. Finally, some of the non-perfect
+physical components and distortion were modeled in a simplistic way to
+add a certain warmth to the effect without sinking your CPU into an ice
+age.</p>
+      <p>Wet/Dry: At zero, both the phase shifted signal and input
+signal are mixed equally. This creates the deepest notch filter. Why
+would you want to mix all Wet? Modulating the all-pass filter stages
+can create frequency shifting at faster modulation rates. This produces
+a chorus-like effect, and you may want the frequency bending without
+the notch filtering. Think UniVibe.</p>
+      <p>LFO Type: More or less self explanatory. The Barber Pole
+setting will disappoint you if you're looking for a true barber pole
+phaser. This is simply an arrangement of multiple ramps modulating the
+phaser, so you hear the thump every time the ramp starts over. It's a
+pleasant enough effect at really slow rates, and creates something
+interesting at very high rates. In between it's annoying :) .</p>
+      <p>Freq. : LFO frequency.</p>
+      <p>Depth: How deep the phaser can sweep. It's an LFO offset. 64
+is dead center. If you want it to stay in the high range, set this
+higher than 64. If you want the phaser to spend more time carving out
+the lower frequency range, set this to some thing less than 64.</p>
+      <p>Width: This is how far the LFO travels. It's the LFO amplitude.</p>
+      <p>Fb : Feedback. Usually named 'Regen' on a phaser stompbox. For
+deeper notches keep Fb negative for even number stages and positive for
+odd number stages.</p>
+      <p>Mismatch: FET Phasers suffer from the manufacturing process of
+JFET transistors. These things generally vary over a very wide range of
+properties per batch. What does this mean to a Phaser? It means that
+the frequency where 45 degrees phase shift occurs varies from stage to
+stage. This mismatch makes the notches wider, but less deep. This
+parameter best aligns with reality at a setting of 5 to 10. Large
+settings may be used to obtain a better 'Vibe sound.</p>
+      <p>Distort: FETs used as variable resistors are only linear over
+a certain range. This nonlinearity adds harmonics to the processed
+signal and somewhat warps the frequency response. This is a very subtle
+effect, but worthwhile to be able to zero it if you don't want it
+modeled.</p>
+      <p>St. Diff : Stereo Difference. Delay the LFO in the right or
+left channel. This combined with the panner effect can make it sound
+like something is twirling in an elliptical orbit around your head.</p>
+      <p>Stages: First order all-pass filter networks to be chained
+together. Set to one for a high pass filter (or low pass filter with
+subtract checked). 4 stages is very typical in the average stompbox.
+Bi-mode and Tri-mode phasers include switchable 6 and 8 stage filters.
+It's rare to see an analog phaser with more than 8 stages in stompbox
+form because parts get expensive, and noise becomes an expensive design
+problem to mitigate. In the digital world, adding more stages is just
+another time through the filter loop if you can spare the CPU time.</p>
+      <p>Subtract: Subtract wet from dry instead of add.</p>
+      <p>Hyper: Flattens out the lower end of the LFO. Used with a Tri
+wave, this emulates the "Hyper Sine" found in some analog phaser
+pedals. It was a clever way that analog filter designers contrived to
+make the LFO behave according to the human's perception of frequency.
+To our ears, musical pitch increases exponentially with frequency.</p>
+      <p><br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="flan"></a>Flanger</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/flanger.jpg" name="graphics21" alt="rakarrack Flanger" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Chorus</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="reve"></a>Reverb</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="204"> <col width="487"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/reverb.jpg" name="graphics22" alt="rakarrack Reverb" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Reverb</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="eqp"></a>EQ Parametric</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="206"> <col width="489"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/peq.jpg" name="graphics23" alt="rakarrack Parametric EQ" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Equalizer</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="cabe"></a>Cabinet Emulation</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="205"> <col width="471"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/cabinet.jpg" name="graphics24" alt="rakarrack Cabinet" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p align="justify">&nbsp; Effect using the ZynAddSubFx Equalizer
+engine</p>
+      <p align="justify">This applies an approximation of certain
+speakers, cabinets, speaker/cabinet combinations according to publicly
+available frequency plots. For those wanting convolution-based cabinet
+modeling...hold on for future releases.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="pan"></a>AutoPan/Stereo Expander</h3>
+
+<table border="0" cellpadding="5" cellspacing="0">
+
+  <col width="207"> <col width="487"> <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/pan.jpg" name="graphics25" alt="rakarrack AutoPan" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p align="justify">For the stompbox minded people, this is a
+stereo tremolo effect. Extra Stereo setting creates a more spacious
+stereo imaging effect.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="har"></a>Harmonizer</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/har.jpg" name="graphics26" alt="rakarrack Harmonizer" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <h3 class="western">Intelligent Harmonizer Explained</h3>
+      <p align="justify">Rakarrack harmonizer effect use the audio
+engine of the smbPtichShifter.cpp located at
+http://www.dspdimension.com. In order to save CPU use only a mono
+pitch-shifter in the lowest quality available, you can change this on
+the program <a href="#settings">Settings</a> window, but only for a
+low quality values because high quality ones use too much CPU. The
+audio signal converted to mono is send it to the pitch-shifter and
+returned to the two pole Peak filter, panned and send it to both
+channels L/R. The rakarrack Harmonizer has 3 modes:</p>
+      <h4 class="western">Normal Mode</h4>
+      <p align="justify">Is how a normal pitchshifter run, the pitch
+ratio is fixed and can be selected in the <b>Interval</b> effect
+parameter of the effect.</p>
+      <h4 class="western">Select Mode</h4>
+      <p align="justify">In this mode the pitch ratio is variable, this
+value depends of the selected <b>Interval</b> parameter, and the <b>Note</b>
+and <b>Chord</b> effect parameters. Rakarrack then recognize the audio
+note played (Only "melodies" monophonic data can be played in this
+mode) and modifies the pitch ratio in order to do a musical
+harmonization with the Tonality/Chord selected in the parameters, of
+course the twelve tonality's are available and 33 chords:</p>
+      <p align="justify">,6,Maj7,lyd,Maj(9),Maj7(9),6/9,+,m,m6,m7,m7(b5),m9,m7(9),m7(11)<br>
+,m(Maj7),m(Maj7)(9),dim,dim7,7,7(Sus4),7(b5),7(9),7(#11),7(13),7(b9)<br>
+,7(b13),7(#9),+Maj7,+7,1+8,1+5,(Sus4),2</p>
+      <h4 class="western">MIDI Mode</h4>
+      <p align="justify">This mode run in the same way as <b>Select
+Mode</b> but the Tonality/Chord is recognized via MIDI notes, the MIDI
+chord recognizer recognizes all the above chords plus all the
+inversions and bass changed chords, also has memory, they use the chord
+just another chord is send it and recognized. The MIDI channel can be
+selected in the <a href="#settings">Settings</a> window, then the
+Harmonizer adjust the pitch ratio with the audio note recognized,
+played by the user, and the Tonality/Chord received via MIDI.
+(Sequencer track ... )</p>
+      <p><br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a name="delm"></a><br>
+<br>
+</p>
+
+<h3 class="western">Musical Delay</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/md.jpg" name="graphics27" alt="rakarrack Musical Delay" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <h3 class="western">Musical Delay Explained</h3>
+      <p align="justify">The musical delay effect is a dual line delay,
+the word "musical" is due that you can adjust the delay time in both
+lines in a musical terms, with Tempo effect parameter, and the Delay1,
+Delay2, Delay3 effect parameters.</p>
+      <p align="justify">The Delay lines are measured in fractions of
+quarter notes at the <b>Tempo</b> selected. That means 1/2 is an
+Eighth note and 1/4 is a Sixteenth note. (1,1/2,1/3,1/4,1/5,1/6) are
+the possible values, that include eighth triplets, etc.</p>
+      <p align="justify">The center delay parameter, is the delay
+between the two delay lines, and is the only one can be set equal to
+zero.</p>
+      <p align="justify">The <b>Tempo</b> effect parameter value range
+is big (10~480) that's for admit half or double song Tempo in order to
+obtain largest or shortest delays.</p>
+      <p align="justify">Off course you have Gain, Pan and Feedback
+parameters for each delay line in order to adjust the desired effect.</p>
+      <p align="justify"><br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="dere"></a>Derelict</h3>
+
+<table border="0" cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/derelict.jpg" name="graphics28" alt="Derelict" align="bottom" border="0" height="250" width="185"></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Distortion using resonant filter engine and standard
+Distortion waveshaping functions. Controls are mostly like Distortion
+module, but includes "Color" to add resonance to the waveshaper signal.
+This allows for a "bigger" sound that is useful for fuzzes and so on.
+Your imagination will take it where you want. Addition of this module
+also allows the user to have up to 3 simultaneous distortion modules, 2
+of with can have sub-octave modulation.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br>
+<br>
+</p>
+
+<h3 class="western"><a name="gate"></a>Noise Gate</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/ng.jpg" name="graphics29" alt="rakarrack Noise Gate" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p align="justify">New Effect based on Gate, Steve Harris LADSPA
+plugin. Only use the noise gate when you really need it. This can be a
+life saver, but it can also be a source of great frustration if
+improperly configured.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="wha"></a>WahWah</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/ww.jpg" name="graphics30" alt="rakarrack WahWah" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p align="justify">&nbsp; Adapted from the ZynAddSubFX
+DynamicFilter</p>
+      <p align="justify">By now you're saying, "Ok, I get the Pan,
+Freq, Rnd, St. Dif, and Depth thing, but what the..."</p>
+      <p align="justify">In addition to use as Auto-wah (LFO-modulated
+Wah-Wah), this is also an envelope filter. </p>
+      <p align="justify">Currently, here are the three parameters
+related to envelope control:</p>
+      <p align="justify">Amp S.: Amplitude sensitivity. This is like
+the sweep range. If sensitivity is set low, you have to pluck really
+hard to make the filter move. If set high, then the filter will sweep
+to the limit.</p>
+      <p align="justify">Amp. S.I.: This stands for "Amplitude
+Sensitivity Inverse", but is applied in a somewhat interesting way.
+This slider offsets the base frequency for the wah wah filter
+resonance. At the same time, it acts as a logical check for which
+direction to sweep. When this is set less than 64, the filter responds
+to plucking by sweeping upward in frequency. When this is set higher
+than 64, then the filter responds to plucking by sweeping downward in
+frequency. <b>Tip: If you want to control wah-wah with a MIDI foot
+pedal, this is the parameter you will want to map. For pure
+pedal-controlled wah-wah, set Amp. S and Depth to zero.</b></p>
+      <p align="justify">Smooth: How much to smooth the signal
+envelope. At a low level, the sound is like a bubble maker. At a high
+level, the filter responds very slowly to signal attack.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="western"><a name="awha"></a>Alienwah</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img src="imagenes/aw.jpg" name="graphics31" alt="rakarrack Alienwah" align="bottom" border="1" height="250" width="185"></font></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p align="justify">Adapted from the ZynAddSubFX Alienwah</p>
+      <p align="justify">A cross between a Flanger, Phaser and a
+Wah-Wah...</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#top">Contents</a> </p>
+<hr>
+<h2 class="western"><a name="midi"></a>MIDI Converter</h2>
+
+<p align="justify">This is a experimental monophonic MIDI converter.
+The parameters are not stored on presets but are saved as preferences
+and is remembered each time you start the program.</p>
+
+<p align="justify">The most important thing for a better results is
+<b>tune your guitar.</b> You need to connect with qjackctl or
+whatever Alsa-Seq connect utility the rakarrack MC OUT port to a
+synthesizer or sequencer device in order to produce sound or record
+something.</p>
+
+<p align="justify">The <b>Trigger</b>parameter controls the volume
+passed to the note recognition algorithm.</p>
+
+<p align="justify">The <b>Velocity</b> is for adjust the MIDI velocity
+sensitivity message send.</p>
+
+<p align="justify">The <b>Channel</b> is the channel selected for the
+MIDI message, of course.</p>
+
+<p style="margin-bottom: 0in;"><img src="imagenes/midi.jpg" name="graphics32" alt="rakarrack MIDI Converter" align="bottom" border="0" height="61" width="351">
+</p>
+<p><a href="#top">Contents</a> </p>
+<hr>
+<h2 class="western"><a name="tuner"></a>TUNER</h2>
+
+
+<p><img style="border: 0px solid ; width: 346px; height: 129px;" src="imagenes/tuner1.png" name="graphics33" alt="rakarrack Tuner"></p>
+
+<p align="justify">When "Your frequency" is outside the acceptable range is shown in red.</p>
+<p><a href="#top">Contents</a> </p>
+<hr>
+<h2 class="western"><a name="autores"></a>Credits</h2>
+<br>
+<b>Rakarrack Team</b><p></p>
+<hr>
+<ul>
+  <li>
+    <p style="margin-bottom: 0in;">Josep Andreu</p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Ryan Billing </p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Douglas McClendon</p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Jose Luis Di Biase </p>
+  </li>
+  <li>
+    <p>Hernan Ordiales</p>
+  </li>
+</ul>
+
+<p style="margin-bottom: 0in;"><b>Presets</b></p>
+
+<hr>
+<ul>
+  <li>
+    <p style="margin-bottom: 0in;">Eugenio Rubio</p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Carlos Pino </p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Alberto Mendez </p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Daniel Vidal </p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Hernan Ordiales </p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Josep Andreu </p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Ryan Billing </p>
+  </li>
+  <li>
+    <p>Douglas McClendon </p>
+  </li>
+</ul>
+
+<p style="margin-bottom: 0in;"><b>Thanks to</b>:</p>
+
+<hr>
+<ul>
+  <li>
+    <p style="margin-bottom: 0in;">Paul Nasca Ocatavian, ZynAddSubFx
+author.</p>
+  </li>
+  <li>
+    <p style="margin-bottom: 0in;">Mario Lang, Tuneit author</p>
+  </li>
+  <li>
+    <p>Matthias Kretzer &amp; Stefan Westerfeld, ArtsCompressor Authors</p>
+  </li>
+</ul>
+
+<hr>
+<p><a href="#top">Contents</a> </p>
+<h2 class="western"><a name="midispec"></a><a name="MIDI_Implementation_Chart"></a>MIDI Implementation Chart</h2>
+<table style="background-color: rgb(251, 251, 251);" border="1" cellpadding="2">
+   <tbody>
+    <tr><td>Program Change</td>
+      <td>( x )</td>
+      <td><br></td>
+      <td>0~80</td>
+    </tr>
+    <tr><td>Control Change</td>
+      <td>Volume 0x07 (x)</td>
+      <td>7</td>
+      <td>1~127</td></tr>
+    <tr><td><br>
+</td>
+      <td>Modulation 0x01 (x)</td>
+      <td>1</td>
+      <td>1~127 (WahWah Depth)</td></tr>
+    <tr><td><br>
+</td>
+      <td>Undefined 0x02 (x)</td>
+      <td>2</td>
+      <td>1~127 (Derelict Dist Drive)</td></tr>
+    <tr>
+      <td> 
+      <br>
+</td>
+      <td>
+      Undefined 0x03 (x)
+      </td>
+      <td>
+      3
+      </td>
+      <td>
+      1~127 (Derelict Dist Level)
+      
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x04 (x)
+      </td>
+      <td>
+      4
+      </td>
+      <td>
+      1~127 (Derelict Dist LPF)
+      
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x05 (x)
+      </td>
+      <td>
+      5
+      </td>
+      <td>
+      1~127 (Derelict Dist HPF)
+      
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x06 (x)
+      </td>
+      <td>
+      6
+      </td>
+      <td>
+      1~127 (Derelict Dist Color)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x08 (x)
+      </td>
+      <td>
+      8
+      </td>
+      <td>
+      1~127 (Derelict Sub Octave) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x09 (x)
+      </td>
+      <td>
+      9
+      </td>
+      <td>
+      1~127 (Distortion Sub Octave)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <br>
+</td>
+      <td>Undefined 0x0C(x)
+      </td>
+      <td>12
+      </td>
+      <td>1~127 (FX/%) Balance
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <br>
+</td>
+      <td>Undefined 0x0E(x)
+      </td>
+      <td>14
+      </td>
+      <td>1~127 (Input Gain)
+      </td>
+    </tr>
+<tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x14 (x)
+      </td>
+      <td>
+      20
+      </td>
+      <td>
+      1~127 (Alienwah Depth)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x15 (x)
+      </td>
+      <td>
+      21
+      </td>
+      <td>
+      1~127 (Phaser Depth)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x16 (x)
+      </td>
+      <td>
+      22
+      </td>
+      <td>
+      1~127 (Flanger Depth)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x17 (x)
+      </td>
+      <td>
+      23
+      </td>
+      <td>
+      1~127 (Chorus Depth)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x18 (x)
+      </td>
+      <td>
+      24
+      </td>
+      <td>
+      1~127 (Musical Delay Gain 1)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x19 (x)
+      </td>
+      <td>
+      25
+      </td>
+      <td>
+      1~127 (Musical Delay Gain 2)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x1A (x)
+      </td>
+      <td>
+      26
+      </td>
+      <td>
+      1~127 (Harmonizer Freq)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x1B (x)
+      </td>
+      <td>
+      27
+      </td>
+      <td>
+      1~127 (Harmonizer Interval)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x1C (x)
+      </td>
+      <td>
+      28
+      </td>
+      <td>
+      1~127 (Wah Wah Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x1D (x)
+      </td>
+      <td>
+      29
+      </td>
+      <td>
+      1~127 (Overdrive Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x1E (x)
+      </td>
+      <td>
+      30
+      </td>
+      <td>
+      1~127 (Distortion Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x1F (x)
+      </td>
+      <td>
+      31
+      </td>
+      <td>
+      1~127 (Harmonizer Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x2E (x)
+      </td>
+      <td>
+      46
+      </td>
+      <td>
+      1~127 (Echo Pan)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x2F (x)
+      </td>
+      <td>
+      47
+      </td>
+      <td>
+      1~127 (Overdrive Pan)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x30 (x)
+      </td>
+      <td>
+      48
+      </td>
+      <td>
+      1~127 (Distortion Pan)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x31 (x)
+      </td>
+      <td>
+      49
+      </td>
+      <td>
+      1~127 (Harmonizer Pan)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x32 (x)
+      </td>
+      <td>
+      50
+      </td>
+      <td>
+      1~127 (Chorus Pan)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x33 (x)
+      </td>
+      <td>
+      51
+      </td>
+      <td>
+      1~127 (Flanger Pan)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x34 (x)
+      </td>
+      <td>
+      52
+      </td>
+      <td>
+      1~127 (Chorus Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x35 (x)
+      </td>
+      <td>
+      53
+      </td>
+      <td>
+      1~127 (Flanger Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x36 (x)
+      </td>
+      <td>
+      54
+      </td>
+      <td>
+      1~127 (Phaser Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x37 (x)
+      </td>
+      <td>
+      55
+      </td>
+      <td>
+      1~127 (Alienwah Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x38 (x)
+      </td>
+      <td>
+      56
+      </td>
+      <td>
+      1~127 (Musical Delay Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x39 (x)
+      </td>
+      <td>
+      57
+      </td>
+      <td>
+      1~127 (Reverb Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x3A (x)
+      </td>
+      <td>
+      58
+      </td>
+      <td>
+      1~127 (AutoPan/Extra Stereo Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x3B (x)
+      </td>
+      <td>
+      59
+      </td>
+      <td>
+      1~127 (Echo Wet/Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x3C (x)
+      </td>
+      <td>
+      60
+      </td>
+      <td>
+      1~127 (Phaser Pan)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x3D (x)
+      </td>
+      <td>
+      61
+      </td>
+      <td>
+      1~127 (Alienwah Pan) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x3E (x)
+      </td>
+      <td>
+      62
+      </td>
+      <td>
+      1~127 (Musical Delay Pan 1) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x3F (x)
+      </td>
+      <td>
+      63
+      </td>
+      <td>
+      1~127 (Reverb Pan) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x41 (x)
+      </td>
+      <td>
+      65
+      </td>
+      <td>
+      1~127 (Musical Delay Pan 2) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x42 (x)
+      </td>
+      <td>
+      66
+      </td>
+      <td>
+      1~127 (WahWah Pan) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x43 (x)
+      </td>
+      <td>
+      67
+      </td>
+      <td>
+      1~127 (AutoPan/Extra Stereo Pan) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x44 (x)
+      </td>
+      <td>
+      68
+      </td>
+      <td>
+      1~127 (Overdrive Drive)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x45 (x)
+      </td>
+      <td>
+      69
+      </td>
+      <td>
+      1~127 (Distortion Drive) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x46 (x)
+      </td>
+      <td>
+      70
+      </td>
+      <td>
+      1~127 (Overdrive Level)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x47 (x)
+      </td>
+      <td>
+      71
+      </td>
+      <td>
+      1~127 (Distortion Level) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x48 (x)
+      </td>
+      <td>
+      72
+      </td>
+      <td>
+      1~127 (Chorus Freq.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x49 (x)
+      </td>
+      <td>
+      73
+      </td>
+      <td>
+      1~127 (Flanger Freq.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x4A (x)
+      </td>
+      <td>
+      74
+      </td>
+      <td>
+      1~127 (Phaser Freq.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x4B (x)
+      </td>
+      <td>
+      75
+      </td>
+      <td>
+      1~127 (WahWah Freq.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x4C (x)
+      </td>
+      <td>
+      76
+      </td>
+      <td>
+      1~127 (Alienwah Freq.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x4D (x)
+      </td>
+      <td>
+      77
+      </td>
+      <td>
+      1~127 (AutoPan/Extra Stereo Freq.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x4E (x)
+      </td>
+      <td>
+      78
+      </td>
+      <td>
+      1~127 (Echo Fb)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x4F (x)
+      </td>
+      <td>
+      79
+      </td>
+      <td>
+      1~127 (Chorus Fb)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x50 (x)
+      </td>
+      <td>
+      80
+      </td>
+      <td>
+      1~127 (Flanger Fb)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x51 (x)
+      </td>
+      <td>
+      81
+      </td>
+      <td>
+      1~127 (Phaser Fb)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x52 (x)
+      </td>
+      <td>
+      82
+      </td>
+      <td>
+      1~127 (Alienwah Fb)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x53 (x)
+      </td>
+      <td>
+      83
+      </td>
+      <td>
+      1~127 (Musical Delay Fb 1)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x54 (x)
+      </td>
+      <td>
+      84
+      </td>
+      <td>
+      1~127 (Musical Delay Fb 2)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x55 (x)
+      </td>
+      <td>
+      85
+      </td>
+      <td>
+      1~127 (Overdrive LPF)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x56 (x)
+      </td>
+      <td>
+      86
+      </td>
+      <td>
+      1~127 (Distortion LPF)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x57 (x)
+      </td>
+      <td>
+      87
+      </td>
+      <td>
+      1~127 (Reverb LPF)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x58 (x)
+      </td>
+      <td>
+      88
+      </td>
+      <td>
+      1~127 (Overdrive LPF)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x59 (x)
+      </td>
+      <td>
+      89
+      </td>
+      <td>
+      1~127 (Distortion HPF)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x5A (x)
+      </td>
+      <td>
+      90
+      </td>
+      <td>
+      1~127 (Reverb HPF)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x5B (x)
+      </td>
+      <td>
+      91
+      </td>
+      <td>
+      1~127 (Chorus LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x5C (x)
+      </td>
+      <td>
+      92
+      </td>
+      <td>
+      1~127 (Flanger LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x5D (x)
+      </td>
+      <td>
+      93
+      </td>
+      <td>
+      1~127 (Phaser LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x5E (x)
+      </td>
+      <td>
+      94
+      </td>
+      <td>
+      1~127 (Overdrive LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x5F (x)
+      </td>
+      <td>
+      95
+      </td>
+      <td>
+      1~127 (Distortion LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x60 (x)
+      </td>
+      <td>
+      96
+      </td>
+      <td>
+      1~127 (Alienwah LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x61 (x)
+      </td>
+      <td>
+      97
+      </td>
+      <td>
+      1~127 (Echo LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x62 (x)
+      </td>
+      <td>
+      98
+      </td>
+      <td>
+      1~127 (Musical Delay LR_Cr)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x63 (x)
+      </td>
+      <td>
+      99
+      </td>
+      <td>
+      1~127 (Chorus St_df)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x64 (x)
+      </td>
+      <td>
+      100
+      </td>
+      <td>
+      1~127 (Flanger St_df)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x65 (x)
+      </td>
+      <td>
+      101
+      </td>
+      <td>
+      1~127 (Phaser St_df)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x66 (x)
+      </td>
+      <td>
+      102
+      </td>
+      <td>
+      1~127 (WahWah St_df.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x67 (x)
+      </td>
+      <td>
+      103
+      </td>
+      <td>
+      1~127 (Alienwah St_df.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x68 (x)
+      </td>
+      <td>
+      104
+      </td>
+      <td>
+      1~127 (AutoPan/Extra Stereo St_df.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x69 (x)
+      </td>
+      <td>
+      105
+      </td>
+      <td>
+      1~127 (Chorus Rnd)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x6A (x)
+      </td>
+      <td>
+      106
+      </td>
+      <td>
+      1~127 (Flanger Rnd)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x6B (x)
+      </td>
+      <td>
+      107
+      </td>
+      <td>
+      1~127 (Phaser Rnd)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x6C (x)
+      </td>
+      <td>
+      108
+      </td>
+      <td>
+      1~127 (WahWah Rnd.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x6D (x)
+      </td>
+      <td>
+      109
+      </td>
+      <td>
+      1~127 (Alienwah Rnd.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x6E (x)
+      </td>
+      <td>
+      110
+      </td>
+      <td>
+      1~127 (AutoPan/Extra Stereo Rnd)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x6F (x)
+      </td>
+      <td>
+      111
+      </td>
+      <td>
+      1~127 (WahWah Amp S.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x70 (x)
+      </td>
+      <td>
+      112
+      </td>
+      <td>
+      1~127 (WahWah Amp S.I.)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x71 (x)
+      </td>
+      <td>
+      113
+      </td>
+      <td>
+      1~127 (WahWah Smooth)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x72 (x)
+      </td>
+      <td>
+      114
+      </td>
+      <td>
+      1~127 (Phaser Phase)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x73 (x)
+      </td>
+      <td>
+      115
+      </td>
+      <td>
+      1~127 (Alienwah Phase)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x74 (x)
+      </td>
+      <td>
+      116
+      </td>
+      <td>
+      0&nbsp;&nbsp; = Efx 1 Off<br>
+1&nbsp;&nbsp; = Efx 1 On<br>
+2&nbsp;&nbsp; = Efx 2 Off<br>
+3&nbsp;&nbsp; = Efx 2 On<br>
+4&nbsp;&nbsp; = Efx 3 Off<br>
+5&nbsp;&nbsp; = Efx 3 On<br>
+6&nbsp;&nbsp; = Efx 4 Off<br>
+7&nbsp;&nbsp; = Efx 4 On<br>
+8&nbsp;&nbsp; = Efx 5 Off<br>
+9&nbsp;&nbsp; = Efx 5 On<br>
+10 = Efx 6 Off<br>
+11 = Efx 6 On<br>
+12 = Efx 7 Off<br>
+13 = Efx 7 On<br>
+14 = Efx 8 Off<br>
+15 = Efx 8 On<br>
+16 = Efx 9 Off<br>
+17 = Efx 9 On<br>
+18 = Efx 10 Off<br>
+19 = Efx 10 On
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x75 (x)
+      </td>
+      <td>
+      117
+      </td>
+      <td>
+      1~127 (Analog Phaser Wet-Dry)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x76 (x)
+      </td>
+      <td>
+      118
+      </td>
+      <td>
+      1~127 (Analog Phaser Distortion)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x77 (x)
+      </td>
+      <td>
+      119
+      </td>
+      <td>
+      1~127 (Analog Phaser Freq)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x78 (x)
+      </td>
+      <td>
+      120
+      </td>
+      <td>
+      1~127 (Analog Phaser Depth)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x79 (x)
+      </td>
+      <td>
+      121
+      </td>
+      <td>
+      1~127 (Analog Phaser Width)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x7A (x)
+      </td>
+      <td>
+      122
+      </td>
+      <td>
+      1~127 (Analog Phaser Feedback)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x7B (x)
+      </td>
+      <td>
+      123
+      </td>
+      <td>
+      1~127 (Analog Phaser Mismatch)
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x7C (x)
+      </td>
+      <td>
+      124
+      </td>
+      <td>
+      1~127 (Analog Phaser St.df) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x7D (x)
+      </td>
+      <td>
+      125
+      </td>
+      <td>
+      1~127 (Derelict Wet-Dry) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x7E (x)
+      </td>
+      <td>
+      126
+      </td>
+      <td>
+      1~127 (Derelict Dist Pan) 
+      </td>
+    </tr>
+    <tr>
+      <td>
+      
+      
+      <br>
+</td>
+      <td>
+      Undefined 0x7F (x)
+      </td>
+      <td>
+      127
+      </td>
+      <td>
+      1~127 (Derelict Dist LR Cross) 
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="#top">Contents</a></p>
+</body></html>
