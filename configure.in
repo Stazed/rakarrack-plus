@@ -1,0 +1,99 @@
+AC_PREREQ(2.61)
+AC_INIT([rakarrack],[0.4.2],[Josep Andreu <holborn@telefonica.net>]) 
+AM_INIT_AUTOMAKE
+AC_CONFIG_SRCDIR([src/main.C])
+AC_CONFIG_HEADER([src/config.h])
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_MAKE_SET
+AC_CHECK_PROG([FLTKCONFIG], [fltk-config], [fltk-config])
+if test -z "$FLTKCONFIG"; then
+  AC_MSG_ERROR([fltk not installed!])
+fi
+AC_CHECK_PROG([ACONNECT],[aconnect],[aconnect])
+if test -z "$ACONNECT"; then
+  AC_MSG_ERROR([aconnect not installed!])
+fi
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+AC_PROG_GCC_TRADITIONAL
+AC_FUNC_CLOSEDIR_VOID
+AC_FUNC_MALLOC
+AC_FUNC_SELECT_ARGTYPES
+AC_CHECK_FUNCS([bzero floor memset memmove pow select sqrt strdup strstr])
+
+# Checks for libraries.
+AC_CHECK_LIB([Xft], [main])
+AC_CHECK_LIB([Xrender], [main])
+AC_CHECK_LIB([asound], [main])
+AC_CHECK_LIB([dl], [main])
+AC_CHECK_LIB([fltk], [main])
+AC_CHECK_LIB([fontconfig], [main])
+AC_CHECK_LIB([freetype], [main])
+AC_CHECK_LIB([m], [main])
+AC_CHECK_LIB([pthread], [main])
+AC_CHECK_LIB([rt], [main])
+AC_CHECK_LIB([z], [main])
+AC_CHECK_LIB([jack],main)
+AC_CHECK_LIB([Xpm],[main])
+
+if test "x$prefix" = "xNONE"; then
+AC_DEFINE_UNQUOTED(PREFIX, "/usr/local", [Install prefix])
+else
+AC_DEFINE_UNQUOTED(PREFIX, "$prefix", [Install prefix])
+fi
+AC_HEADER_DIRENT
+AC_HEADER_STDC
+AC_CHECK_HEADERS([fcntl.h libintl.h stdlib.h string.h sys/ioctl.h unistd.h X11/xpm.h])
+AC_CHECK_HEADER(alsa/asoundlib.h, true, AC_MSG_ERROR([Alsa is required]))
+
+if test "x$prefix" == "xNONE"; then
+prefix=/usr/local
+fi
+
+DATADIR="$prefix/share/${PACKAGE}"
+HELPDIR="$prefix/share/doc/${PACKAGE}"
+
+AC_DEFINE_UNQUOTED(DATADIR,"$DATADIR",[DATADIR])
+AC_DEFINE_UNQUOTED(HELPDIR,"$HELPDIR",[HELPDIR])
+AC_DEFINE([WEBSITE],["rakarrack.sf.net"],[WEBSITE])
+
+SSE=$(cat /proc/cpuinfo | grep sse2)
+if test -z "$SSE"; then
+SSE=""
+else
+SSE="-msse2 -mfpmath=sse"
+fi
+if test -z "$SSE"; then
+SSE=$(cat /proc/cpuinfo | grep sse)
+if test -z "$SSE"; then
+SSE=""
+else
+SSE="-msse -mfpmath=sse"
+fi
+fi
+
+
+ALTIVEC=$(cat /proc/cpuinfo | grep altivec)
+if test -z "$ALTIVEC"; then
+ALTIVEC=""
+else
+ALTIVEC="-maltivec"
+fi
+
+
+
+
+LIBS="`$FLTKCONFIG --use-images --ldflags` -lasound `pkg-config --libs jack` -lXpm $LIBS"
+CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math -fno-rtti -pipe -ffunction-sections -fomit-frame-pointer -fsigned-char -Wno-format-y2k -fPIC -fno-exceptions -fno-strict-aliasing `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags jack` $CXXFLAGS"
+AC_CONFIG_FILES([Makefile src/Makefile man/Makefile data/Makefile icons/Makefile doc/Makefile doc/help/Makefile doc/help/imagenes/Makefile doc/help/css/Makefile])
+AC_OUTPUT
+

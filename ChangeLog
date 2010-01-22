@@ -1,0 +1,122 @@
+==v0.4.2 (  /01/2009) ==
+-------------------------------------------------------------------------------
+- Midi Learn
+- WhaWha Improved.
+- New options in settings.
+- Small GUI changes.
+- Added scope.
+- Compressor can be switch Mono/Stereo.
+- Added Limiter at the end of the chain.
+- Fixed BOF in Recognize Chord, thanks to davidtimms (Fedora package maintainer)
+- New Presets
+- New waveshape type Modulated Sqare.
+- Completly overwrite the Cabinet presets.
+- Added background image to the GUI.
+- Improves on Tuner and Harmonizer.
+- Fixed endianess for PowerPC.
+- Added SubOctave in Derelict.
+- Ligth the Selected Preset in window bank.
+- Added SubOctave in Distortion effect.
+- Added new waveshape type Dirty Octave+.
+- Removed hundred of compiler warnings.
+- Derelict Dist revision.
+- Added new LFO type Modulated Square.
+- Added new LFO type Ramp Down.
+- Added new waveshape distorsion type Hard Crunch.
+- Added new LFO type Zig Zag
+- Added MIDI automatization to Analog Phaser and Derelict
+- Help updated.
+- New tuner widget.
+- added Asymetric sqared root distortion, called "Crunch" 
+- Ryan Billing adds a denormal_guard in AnalogFilter, that fix the CPU
+  problem and permit to remove shit tricks. Thanks Gad.
+- More CPU bug fixes.
+- fix denormals.
+- added new LFO type, Ramp Up.
+- added Reverse to Echo parameter.
+- fix Compressor and Analog Phaser.
+- small bugs fixed.
+- added New Analog Phaser Effect by Ryan Billing. 
+- Compressor fixes.
+- Compressor code modified by Ryan Billing (a.k.a. Transmogrifox)
+       --Modified DSP code to fix discontinuous gain change at threshold.
+       --Improved automatic gain adjustment function
+       --Improved handling of knee
+       --Added support for user-adjustable knee
+               
+- Fix stupid bug on auto connect jack ports.
+- added MIDI support for On/Off effects.
+- added Derelict Distorsion Effect.
+- added -mfpmath=sse if sse is available and -ffast-math to config -> less CPU usage 
+- jackmidi
+- Global Wet/Dry (FX%) by Douglas McClendon
+- Input Gain now mapped to midi parameter 14 - dmc
+	
+
+
+
+
+
+
+
+==v0.3.0 (25/11/2008) ==
+------------------------------------------------------------------------------------------
+- Add more parameters for MIDI control. (Phase for all, and  WahWah AmpS, AmpSI, Smooth
+- Add more parameters for MIDI control. (Rnd/LR_Cr for all the effects).  
+- Add more parameters for MIDI control. (Overdrive/Distorsion/Reverb LPF/HPF).
+- Add more parameters for MIDI control. (Echo/Chorus/Flanger/Phaser/Alienwah/Musical Delay Fb.)
+- Add more parameters for MIDI control. (Chorus/Flanger/Phaser/WahWah/Alienwah/Pan/ExtraStereo Freq).
+- Add more parameters for MIDI control. (Distortion/Overdrive Drive/Level).
+- Fix minimum signal to process that fix the problem with reverb.
+- Fixed crash bug on Musical Delay effect.
+- Added more parameters for MIDI control. (Wet/dry Pan for all the effects) 
+- Fix bug in MIDI implementation.
+- More CPU bug fixes.
+- Preset can be selected by keyboard in Bank Window.
+- Fixed draw things in plastic scheme.
+- Preferences saved for each instance of rakarrack.
+- Fixed bug that excesive CPU usage when no input signal.
+- Fixed bug in no-gui options.
+- Change to float math functions
+- Docs rewrited.
+- GUI now reflects the parameter changes made by MIDI messages, sorry I was
+  forget it.
+- Fixed bug that cause excesive CPU usage when jack input ports are disconnected with FX
+  On.
+- Fixed minor bug in shortcuts.
+
+
+
+
+
+
+== v0.2.0 (08/07/2008) ==
+-------------------------------------------------------------------------------------------
+- More parameters controlable via MIDI.
+- Update Help.
+- Clean Code.
+- Added Cabinet Preset.
+- Compressor changes.
+- Added Cabinet Preset.
+- Added new Slider widget.
+- Added Cabinet Preset.
+- Added NoiseGate Effect.
+- Added MusicDelay Effect.
+- Added RGB selector color.
+- Added Cabinet Preset.
+- Added auto connection Jack ports selector.
+- Added Harmonizer Effect.
+- Added Cabinet Preset.
+- Added AutoPan Effect.
+- Added Cabinet Effect.
+- Added Alienwah Effect.
+- Added WahWah Effect.
+- Bug fixes of 0.1.2.
+
+
+
+
+== v0.1.2 (20/05/2008) ==
+-------------------------------------------------------------------------------------------
+Rakarrack Version 0.1.2 Fisrt Release
+
