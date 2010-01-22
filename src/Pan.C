@@ -1,0 +1,264 @@
+/*
+  rakarrack - a guitar effects software
+
+ pan.C  -  Auto/Pan -  Extra Stereo
+  Copyright (C) 2008 Daniel Vidal & Josep Andreu
+  Author: Daniel Vidal & Josep Andreu
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of version 2 of the GNU General Public License
+ as published by the Free Software Foundation.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License (version 2) for more details.
+
+ You should have received a copy of the GNU General Public License
+ (version2)  along with this program; if not, write to the Free Software
+ Foundation,
+ Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+
+*/
+
+
+#include "Pan.h"
+
+
+
+Pan::Pan (float *efxoutl_, float *efxoutr_)
+{
+
+  efxoutl = efxoutl_;
+  efxoutr = efxoutr_;
+
+
+  Ppreset = 0;
+  setpreset (Ppreset);
+  
+  lfo.effectlfoout (&lfol, &lfor);
+
+  cleanup ();
+
+
+};
+
+
+
+Pan::~Pan ()
+{
+
+};
+
+void
+Pan::cleanup ()
+{
+};
+
+
+
+
+void
+Pan::out (float *smpsl, float *smpsr)
+{
+
+  int i;
+  float avg, ldiff, rdiff, tmp;
+  float pp;
+  float coeff_PERIOD = 1.0 / (float) PERIOD; 
+  float fi,P_i;
+
+  if (PextraON)
+    {
+
+      for (i = 0; i < PERIOD; i++)
+
+	{
+
+	  avg = (smpsl[i] + smpsr[i]) * .5f;
+	  ldiff = smpsl[i] - avg;
+	  rdiff = smpsr[i] - avg;
+
+	  tmp = avg + ldiff * mul;
+	  if (tmp < -1.0)
+	    tmp = -1.0f;
+	  if (tmp > 1.0)
+	    tmp = 1.0f;
+	  smpsl[i] = tmp;
+
+
+	  tmp = avg + rdiff * mul;
+	  if (tmp < -1.0)
+	    tmp = -1.0f;
+	  if (tmp > 1.0)
+	    tmp = 1.0f;
+	  smpsr[i] = tmp;
+
+	}
+
+    }
+
+  if (PAutoPan)
+    {
+
+      ll = lfol;
+      lr = lfor;
+      lfo.effectlfoout (&lfol, &lfor);
+      for (i = 0; i < PERIOD; i++)
+	{
+	  fi = (float) i;
+	  P_i = (float) (PERIOD - i);
+	  
+	  pp = (ll * P_i + lfol * fi) * coeff_PERIOD;
+
+	  smpsl[i] *= pp * panning;
+
+	  pp =  (lr * P_i + lfor * fi) * coeff_PERIOD;
+
+          smpsr[i] *= pp * (1.0f - panning);
+
+	}
+
+    }
+
+
+
+
+
+
+
+};
+
+
+
+void
+Pan::setvolume (unsigned char Pvolume)
+{
+  this->Pvolume = Pvolume;
+  outvolume = (float)Pvolume / 127.0f;
+};
+
+
+
+void
+Pan::setpanning (unsigned char Ppanning)
+{
+  this->Ppanning = Ppanning;
+  panning = ((float)Ppanning + .5f)/ 127.0f;
+};
+
+
+
+void
+Pan::setextra (unsigned char Pextra)
+{
+  this->Pextra = Pextra;
+  mul = 8.0f * (float)Pextra / 127.0f;
+};
+
+
+void
+Pan::setpreset (unsigned char npreset)
+{
+  const int PRESET_SIZE = 9;
+  const int NUM_PRESETS = 2;
+  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+    //AutoPan
+    {64, 64, 50, 0, 0, 0, 0, 1, 0},
+    //Extra Stereo
+    {64, 64, 45, 0, 0, 0, 10, 0, 1}
+  };
+
+  if (npreset >= NUM_PRESETS)
+    npreset = NUM_PRESETS - 1;
+  for (int n = 0; n < PRESET_SIZE; n++)
+    changepar (n, presets[npreset][n]);
+  Ppreset = npreset;
+
+
+};
+
+
+
+void
+Pan::changepar (int npar, unsigned char value)
+{
+
+  switch (npar)
+    {
+    case 0:
+      setvolume (value);
+      break;
+    case 1:
+      setpanning (value);
+      break;
+    case 2:
+      lfo.Pfreq = value;
+      lfo.updateparams ();
+      break;
+    case 3:
+      lfo.Prandomness = value;
+      lfo.updateparams ();
+      break;
+    case 4:
+      lfo.PLFOtype = value;
+      lfo.updateparams ();
+      break;
+    case 5:
+      lfo.Pstereo = value;
+      lfo.updateparams ();
+      break;
+    case 6:
+      setextra (value);
+      break;
+    case 7:
+      PAutoPan = value;
+      break;
+    case 8:
+      PextraON = value;
+      break;
+
+    }
+
+
+};
+
+
+unsigned char
+Pan::getpar (int npar)
+{
+  switch (npar)
+    {
+    case 0:
+      return (Pvolume);
+      break;
+    case 1:
+      return (Ppanning);
+      break;
+    case 2:
+      return (lfo.Pfreq);
+      break;
+    case 3:
+      return (lfo.Prandomness);
+      break;
+    case 4:
+      return (lfo.PLFOtype);
+      break;
+    case 5:
+      return (lfo.Pstereo);
+      break;
+    case 6:
+      return (Pextra);
+      break;
+    case 7:
+      return (PAutoPan);
+      break;
+    case 8:
+      return (PextraON);
+      break;
+    default:
+      return (0);
+
+    }
+
+};

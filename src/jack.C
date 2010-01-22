@@ -1,0 +1,196 @@
+/*
+  rakarrack - a guitar efects software
+
+  jack.C  -   jack I/O
+  Copyright (C) 2008 Daniel Vidal & Josep Andreu
+  Author: Daniel Vidal & Josep Andreu
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of version 2 of the GNU General Public License
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License (version 2) for more details.
+
+  You should have received a copy of the GNU General Public License
+(version2)
+  along with this program; if not, write to the Free Software Foundation,
+  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+
+*/
+
+#include <jack/jack.h>
+#include <jack/midiport.h>
+#include "jack.h"
+#include "global.h"
+
+
+pthread_mutex_t jmutex;
+
+
+jack_client_t *jackclient;
+jack_port_t *outport_left, *outport_right;
+jack_port_t *inputport_left, *inputport_right;
+jack_port_t *jack_midi_in, *jack_midi_out;
+
+void *dataout;
+
+int jackprocess (jack_nframes_t nframes, void *arg);
+
+RKR *JackOUT;
+
+
+
+int
+JACKstart (RKR * rkr_, jack_client_t * jackclient_)
+{
+
+
+  JackOUT = rkr_;
+  jackclient = jackclient_;
+
+  jack_set_process_callback (jackclient, jackprocess, 0);
+  jack_on_shutdown (jackclient, jackshutdown, 0);
+
+
+
+  inputport_left =
+    jack_port_register (jackclient, "in_1", JACK_DEFAULT_AUDIO_TYPE,
+			JackPortIsInput, 0);
+  inputport_right =
+    jack_port_register (jackclient, "in_2", JACK_DEFAULT_AUDIO_TYPE,
+			JackPortIsInput, 0);
+
+
+  outport_left =
+    jack_port_register (jackclient, "out_1", JACK_DEFAULT_AUDIO_TYPE,
+			JackPortIsOutput, 0);
+  outport_right =
+    jack_port_register (jackclient, "out_2", JACK_DEFAULT_AUDIO_TYPE,
+			JackPortIsOutput, 0);
+
+  jack_midi_in =  
+    jack_port_register(jackclient, "in", JACK_DEFAULT_MIDI_TYPE, JackPortIsInput, 0);
+
+  jack_midi_out = 
+    jack_port_register(jackclient, "MC out", JACK_DEFAULT_MIDI_TYPE, JackPortIsOutput, 0);
+  
+
+  if (jack_activate (jackclient))
+    {
+      fprintf (stderr, "Cannot activate jack client.\n");
+      return (2);
+    };
+
+  if (JackOUT->aconnect_JA)
+    {
+
+      for (int i = 0; i < JackOUT->cuan_jack; i += 2)
+	{
+	  jack_connect (jackclient, jack_port_name (outport_left),
+			JackOUT->jack_po[i].name);
+	  jack_connect (jackclient, jack_port_name (outport_right),
+			JackOUT->jack_po[i + 1].name);
+	}
+    }
+
+  pthread_mutex_init (&jmutex, NULL);
+
+
+  return 3;
+
+};
+
+
+
+int
+jackprocess (jack_nframes_t nframes, void *arg)
+{
+
+  int i,count;
+
+  jack_midi_event_t midievent;
+
+  jack_default_audio_sample_t *outl = (jack_default_audio_sample_t *)
+    jack_port_get_buffer (outport_left, nframes);
+  jack_default_audio_sample_t *outr = (jack_default_audio_sample_t *)
+    jack_port_get_buffer (outport_right, nframes);
+
+
+  jack_default_audio_sample_t *inl = (jack_default_audio_sample_t *)
+    jack_port_get_buffer (inputport_left, nframes);
+  jack_default_audio_sample_t *inr = (jack_default_audio_sample_t *)
+    jack_port_get_buffer (inputport_right, nframes);
+
+
+  pthread_mutex_lock (&jmutex);
+
+  float *data = (float *)jack_port_get_buffer(jack_midi_in, nframes); 
+  count = jack_midi_get_event_count(data);
+
+  dataout = jack_port_get_buffer(jack_midi_out, nframes); 
+  jack_midi_clear_buffer(dataout);   	
+
+
+  for (i = 0; i < count; i++)
+   {                  
+   jack_midi_event_get(&midievent, data, i);
+   JackOUT->jack_process_midievents(&midievent);
+   }  
+
+  for (i=0; i<=JackOUT->efx_MIDIConverter->ev_count; i++)
+  { 
+    jack_midi_event_write(dataout,
+    JackOUT->efx_MIDIConverter->Midi_event[i].time,
+    JackOUT->efx_MIDIConverter->Midi_event[i].dataloc,
+    JackOUT->efx_MIDIConverter->Midi_event[i].len);
+  }
+
+  JackOUT->efx_MIDIConverter->moutdatasize = 0;
+  JackOUT->efx_MIDIConverter->ev_count = 0;
+
+   
+  memcpy (JackOUT->efxoutl, inl,
+	  sizeof (jack_default_audio_sample_t) * nframes);
+  memcpy (JackOUT->efxoutr, inr,
+	  sizeof (jack_default_audio_sample_t) * nframes);
+
+  JackOUT->Alg (JackOUT->efxoutl, JackOUT->efxoutr, inl, inr ,0);
+
+  memcpy (outl, JackOUT->efxoutl,
+	  sizeof (jack_default_audio_sample_t) * nframes);
+  memcpy (outr, JackOUT->efxoutr,
+	  sizeof (jack_default_audio_sample_t) * nframes);
+
+  pthread_mutex_unlock (&jmutex);
+
+
+  return 0;
+
+};
+
+
+void
+JACKfinish ()
+{
+  jack_client_close (jackclient);
+  pthread_mutex_destroy (&jmutex);
+  usleep (100000);
+};
+
+
+
+void
+jackshutdown (void *arg)
+{
+  if (gui == 0)
+    printf ("Jack Shut Down, sorry.\n");
+  else
+    JackOUT->Message (JackOUT->jackcliname,
+		      "Jack Shut Down, try to save your work");
+};
+
+
+

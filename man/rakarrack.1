@@ -1,0 +1,64 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH RACKARRACK SECTION "abril  24, 2008"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+rackarrack \- for guitar players and musicians ...
+.SH SYNOPSIS
+.B rakarrack
+.RI [ options ] " files" ...
+.br
+.SH DESCRIPTION
+.B Rakarrack is a richly featured multi-effects processor emulating a 
+guitar effects pedalboard.  Effects include compressor, noise gate, 
+graphic equalizer, parametric equalizer, flanger, chorus, echo with 
+reverse playback, musical delay,  reverb, digital phaser, analogic 
+phaser, wah-wah, alien-wah, harmonizer, and three flexible distortion 
+modules including sub-octave modulation and dirty octave up.  Most of 
+the effects engine is built from modules found in the excellent software 
+synthesizer ZynAddSubFX.  Presets and user interface are optimized for 
+guitar, but Rakarrack processes signals in stereo while it does not 
+apply internal band-limiting filtering, and thus is well suited to all 
+musical instruments and vocals.  Rakarrack is designed for Linux 
+distributions with Jack Audio Connection Kit.
+.TP
+
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics, 
+.\" respectively.
+
+
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-n, \-\-no-gui
+disable GUI
+.TP
+.B \-b, \-\-Bank [File] 
+Load a Bank File
+.TP
+.B \-l, \-\-Load [File] 
+Load a Preset File
+
+.SH AUTHOR
+This manual page was written by holborn <holborn@telefonica.net>,
+
