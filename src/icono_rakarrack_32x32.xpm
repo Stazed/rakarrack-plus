@@ -1,5 +1,5 @@
 /* XPM */
-static char *icono_rakarrack_32x32_xpm[] = {
+static const char *icono_rakarrack_32x32_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "32 32 218 2",
 "   c #090000",
