@@ -12,4 +12,19 @@
 - Anderson wanna help us with that.
 - Complete list of assignable effect parameters to MIDI learn.
 
+DSP TODO:
+*This is a wish-list.  Some of these may not be done for 0.5.0.
+- Reverse delay fade between old and new at wrap instead of ducking volume.  It will sound more smooth :)
+- Improve sub-octave modulator for distortion.  Perhaps this can be a new effect.
+- Dynamic echo:  Delay time changes with input signal dynamics....possible to get a "bouncing ball" effect.
+- Vocoder
+- CPU-friendly pitch shifter, flexible for Whammy effect
+- Synth filters
+- Sample/Hold modulator -- maybe just add to LFO effect using random sequence.
+- 8-step sequencer effect.  Invoke phaser, flanger, wah and volume modulation.  Perhaps this can be a global variable with a GUI front-end?
+- Ring modulator + arpeggiated carrier.
+- Upsampling option for distortions and waveshapers.
+- Distortion pedal & preamp modeling series:  Ibanez Tubescreamer, Thrash metal, Boss Metal Zone, DOD Death metal, MXR Dist +, some tube preamps ...  
+- Infinite series:  i.e. Barberpole phaser, flanger and maybe some unique comb filter types.
+
 
