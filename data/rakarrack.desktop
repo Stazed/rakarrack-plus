@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Categories=AudioVideo;Audio;
+Exec=rakarrack
+Name=Rakarrack
+Comment=Guitar Effects Processor
+Terminal=false
+Icon=icono_rakarrack_128x128
