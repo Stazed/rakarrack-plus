@@ -32,8 +32,9 @@ decl {\#include <FL/Fl_File_Chooser.H>} {public global
 decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 } 
 
-decl {\#include "icono_rakarrack_128x128.xpm"} {selected
-} 
+decl {\#include "icono_rakarrack_128x128.xpm"} {} 
+
+decl {Fl_Tiled_Image *back;} {} 
 
 decl {Fl_Color leds_color;} {} 
 
@@ -98,7 +99,7 @@ double scale = (double) ly ;
 if (damage()!=1)
 {
 
-draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+back->draw(ox,oy,lx,ly,0,0);
 
 }
 
@@ -108,7 +109,9 @@ if (Analyzer_ON)
 //Draw Response  
  
 
-draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+//draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+
+back->draw(ox,oy,lx,ly,0,0);
 
 fl_color(leds_color);
 
@@ -138,7 +141,7 @@ for(i=0; i<30; i++)
             
       
       fl_color(leds_color);
-      fl_rectf(px+ox+px*i+4,oy+ly-py,px-5,py);
+      fl_rectf(12+px+ox+px*i+4,oy+ly-py,px-5,py);
 
    
    //   printf("%d %f %d\\n",py,y,i);
@@ -149,7 +152,8 @@ for(i=0; i<30; i++)
 
 else
 
-draw_label();} {}
+draw_label();} {selected
+    }
   }
   Function {handle(int event)} {return_type int
   } {
@@ -213,7 +217,8 @@ double dSW = (double) SW;
 
 if (damage()!=1)
 {
-draw_box(box(),ox,oy,lx,ly,back_color);
+back->draw(ox,oy);
+
 }
 
 if (Scope_ON)
@@ -221,8 +226,7 @@ if (Scope_ON)
 
 //Draw Curve Reponse  
  
-
-draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+back->draw(ox,oy);
 
 fl_color(leds_color);
 
@@ -302,7 +306,9 @@ class NewVum {: {public Fl_Slider}
   Function {NewVum(int x,int y, int w, int h, const char *label=0):Fl_Slider(x,y,w,h,label)} {} {}
   Function {draw_bg(int X, int Y, int W, int H)} {} {
     code {fl_push_clip(X, Y, W, H);
-  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+//  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+back->draw(X,Y);
+
   fl_pop_clip();
 
 //Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;} {}
@@ -452,13 +458,14 @@ class TunerLed {: {public Fl_Slider}
   Function {TunerLed(int x,int y, int w, int h, const char *label=0):Fl_Slider(x,y,w,h,label)} {} {}
   Function {draw_bg(int X, int Y, int W, int H)} {} {
     code {fl_push_clip(X, Y, W, H);
-  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+ // draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+ 
+ back->draw(X,Y);
   fl_pop_clip();
 
 //Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;} {}
   }
-  Function {draw_rest(int X, int Y, int W, int H)} {open
-  } {
+  Function {draw_rest(int X, int Y, int W, int H)} {} {
     code {double val;
 int x = X;
 int y = Y;
@@ -679,7 +686,8 @@ return handle2(event,
     return 0;
   }} {}
   }
-  Function {draw()} {} {
+  Function {draw()} {open
+  } {
     code {int X,Y,W,H;
 
 
@@ -698,7 +706,6 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 
 //  if (damage()&FL_DAMAGE_ALL) draw_box(box(),sxx,syy,sww,shh,back_color);
 
- 
                   X=sxx+Fl::box_dx(box());
                   Y=syy+Fl::box_dy(box());
                   W=sww-Fl::box_dw(box());
@@ -742,14 +749,9 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 
 
-  Fl_Color Fondo = back_color;
-  
   fl_push_clip(X, Y, W, H);
-  //draw_box();
-
-  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
-  draw_box(FL_PLASTIC_DOWN_BOX,X,Y,W,H,Fondo);
-  else draw_box(FL_FLAT_BOX,X,Y,W,H,Fondo);
+ 
+  back->draw(X,Y);
     
   fl_pop_clip();
 
@@ -760,6 +762,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
    } else if (type() == FL_HOR_NICE_SLIDER) {
      draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2, W-4, 4, black);
   }
+ 
  
  //Line to the knob --- I dont like 
 
@@ -801,8 +804,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   } else {
     if (wsl>0 && hsl>0) draw_box(box1, xsl, ysl, wsl, hsl, juan);
 
+
     if (type()!=FL_HOR_FILL_SLIDER && type() != FL_VERT_FILL_SLIDER &&
         Fl::scheme_ && !strcmp(Fl::scheme_, "gtk+")) {
+ 
+
+ 
       if (W>H && wsl>(hsl+8)) {
         // Draw horizontal grippers
         int yy, hh;
@@ -841,6 +848,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
         fl_line(xx, yy+ww+12, xx+ww, yy+12);
       }
     }
+ 
+      
   }
 
   
@@ -857,14 +866,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   
   if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   {
-  if (type() == FL_HOR_NICE_SLIDER)
-  draw_box(FL_PLASTIC_DOWN_BOX,bxx+2,byy,bww-4,bhh,Fondo); 
-  else
-  draw_box(FL_PLASTIC_DOWN_BOX,bxx,byy,bww,bhh,Fondo); 
-  }
-  else
-  draw_box(box(),bxx,byy,bww,bhh,Fondo);
-
+  
+  
+   if (type() == FL_HOR_NICE_SLIDER)
+     back->draw(bxx+2,byy,bww,bhh,0,0);
+     
+   else
+     back->draw(bxx,byy,bww,bhh,0,0); 
+  
+   }
+   else
+    back->draw(bxx,byy,bww,bhh,0,0);
+    
   char buf[128];
   format(buf);
   fl_font(textfont(), textsize());
@@ -876,8 +889,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -886,13 +898,13 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {303 34 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1411 148 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
       }
       Fl_Menu_Bar MenuP {
-        xywh {2 2 795 18} down_box DOWN_BOX color 178 selection_color 7 labelcolor 7 align 16 textcolor 7
+        xywh {2 2 795 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
           label {&File}
@@ -1183,7 +1195,7 @@ Scope_ON=1;
       }
       Fl_Box Sco {
         label Rakarrack
-        xywh {545 19 226 65} labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 labelcolor 7 align 17 hide
+        xywh {545 19 226 65} labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 labelcolor 7 align 80 hide
         class Scope
       }
       Fl_Box DESC_L {
@@ -3804,7 +3816,7 @@ WNfreq->copy_label("");}
           xywh {526 88 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Progress tuner_bar {
-          xywh {586 91 206 14} box FLAT_BOX selection_color 88
+          xywh {586 91 206 14} box THIN_DOWN_BOX color 47 selection_color 88 align 80
           code0 {o->minimum(-32);}
           code1 {o->maximum(32);}
           code2 {o->value(-32);}
@@ -3882,11 +3894,11 @@ rkr->calculavol(2);}
           class SliderW
         }
         Fl_Slider input_vu {
-          xywh {84 50 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 when 0 minimum 15 maximum -48 step 1 value -48
+          xywh {84 50 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
           class NewVum
         }
         Fl_Slider output_vu {
-          xywh {142 50 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 when 0 minimum 15 maximum -48 step 1 value -48
+          xywh {142 50 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
           class NewVum
         }
         Fl_Box LABEL_IO {
@@ -4068,7 +4080,7 @@ put_icon(Order);}
           xywh {255 136 195 25} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Box Analy {
-          xywh {170 163 345 29} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 hide
+          xywh {174 162 340 27} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 112 hide
           class Analyzer
         }
         Fl_Button Etit {
@@ -4078,7 +4090,7 @@ o->hide();
 Analy->show();
 Analyzer_ON=1;
 }}
-          xywh {170 163 345 29} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
+          xywh {174 162 340 27} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 81
         }
       }
     }
@@ -4091,7 +4103,7 @@ save_stat(1);}
         xywh {1 1 800 600}
       }
       Fl_Menu_Bar MenuB {
-        xywh {0 0 800 20} down_box DOWN_BOX color 4 selection_color 7 labelcolor 7 textcolor 7
+        xywh {0 0 800 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
           label {&File} open
@@ -4543,7 +4555,7 @@ strcpy(rkr->BankFilename,filename);}
     Fl_Window MIDILearn {
       callback {save_stat(5);
 MIDILearn->hide();}
-      xywh {1310 298 640 480} type Double hide
+      xywh {1303 291 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
@@ -4575,7 +4587,7 @@ DisAssigns();}
         xywh {535 20 95 30}
       }
       Fl_Group Ares {
-        xywh {215 60 205 180} box THIN_DOWN_BOX
+        xywh {215 60 205 180} box THIN_DOWN_BOX align 80
       } {
         Fl_Box Ar1 {
           xywh {220 65 45 30} box DOWN_BOX
@@ -4758,6 +4770,9 @@ Fl::visual(FL_DOUBLE|FL_INDEX);
 Fl::get_system_colors();
 fl_register_images();
 rkr=rkr_;
+
+back = NULL;
+
 make_window();
 
 Principal->icon((char *)p);
@@ -4803,14 +4818,8 @@ void * v=MT;
 Fl::add_timeout(.04,tick,v);} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
-    code {Principal->color(bcolor);
-MenuP->color(bcolor);
-BankWindow->color(bcolor);
+    code {MenuP->color(bcolor);
 MenuB->color(bcolor);
-Order->color(bcolor);
-Settings->color(bcolor);
-MIDILearn->color(bcolor);
-Ares->color(bcolor);
 
 eq_preset->selection_color(bcolor);
 compress_preset->selection_color(bcolor);
@@ -5038,6 +5047,7 @@ AB_A2->labelcolor(bcolor);
 AB_A3->labelcolor(bcolor);
 AB_url->labelcolor(bcolor);
 }
+
 
 
 label_color = bcolor;
@@ -7006,7 +7016,8 @@ for (int t=0; t<ob->children();t++)
   }} {}
   }
   Function {PutBackground()} {} {
-    code {InOut->image(new Fl_Tiled_Image( new Fl_PNG_Image(rkr->BackgroundImage)));
+    code {back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
+InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());
 DIST->image(InOut->image());
@@ -7036,15 +7047,13 @@ Fondo2->image(InOut->image());
 Fondo3->image(InOut->image());
 Fondo4->image(InOut->image());
 Etit->image(InOut->image());
+Ares->image(InOut->image());
+
+MenuP->image(InOut->image());
+MenuB->image(InOut->image());
 
 
-
-
-Principal->redraw();
-BankWindow->redraw();
-Order->redraw();
-Settings->redraw();
-MIDILearn->redraw();} {}
+Fl::redraw();} {}
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;

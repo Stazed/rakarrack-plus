@@ -3,6 +3,7 @@
 #include <libintl.h>
 #include "rakarrack.h"
 #include "icono_rakarrack_128x128.xpm"
+static Fl_Tiled_Image *back; 
 static Fl_Color leds_color; 
 static Fl_Color back_color; 
 static Fl_Color fore_color; 
@@ -54,7 +55,7 @@ double scale = (double) ly ;
 if (damage()!=1)
 {
 
-draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+back->draw(ox,oy,lx,ly,0,0);
 
 }
 
@@ -64,7 +65,9 @@ if (Analyzer_ON)
 //Draw Response  
  
 
-draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+//draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+
+back->draw(ox,oy,lx,ly,0,0);
 
 fl_color(leds_color);
 
@@ -94,7 +97,7 @@ for(i=0; i<30; i++)
             
       
       fl_color(leds_color);
-      fl_rectf(px+ox+px*i+4,oy+ly-py,px-5,py);
+      fl_rectf(12+px+ox+px*i+4,oy+ly-py,px-5,py);
 
    
    //   printf("%d %f %d\n",py,y,i);
@@ -167,7 +170,8 @@ double dSW = (double) SW;
 
 if (damage()!=1)
 {
-draw_box(box(),ox,oy,lx,ly,back_color);
+back->draw(ox,oy);
+
 }
 
 if (Scope_ON)
@@ -175,8 +179,7 @@ if (Scope_ON)
 
 //Draw Curve Reponse  
  
-
-draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+back->draw(ox,oy);
 
 fl_color(leds_color);
 
@@ -254,7 +257,9 @@ NewVum::NewVum(int x,int y, int w, int h, const char *label):Fl_Slider(x,y,w,h,l
 
 void NewVum::draw_bg(int X, int Y, int W, int H) {
   fl_push_clip(X, Y, W, H);
-  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+//  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+back->draw(X,Y);
+
   fl_pop_clip();
 
 //Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;
@@ -405,7 +410,9 @@ TunerLed::TunerLed(int x,int y, int w, int h, const char *label):Fl_Slider(x,y,w
 
 void TunerLed::draw_bg(int X, int Y, int W, int H) {
   fl_push_clip(X, Y, W, H);
-  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+ // draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+ 
+ back->draw(X,Y);
   fl_pop_clip();
 
 //Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;
@@ -651,7 +658,6 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 
 //  if (damage()&FL_DAMAGE_ALL) draw_box(box(),sxx,syy,sww,shh,back_color);
 
- 
                   X=sxx+Fl::box_dx(box());
                   Y=syy+Fl::box_dy(box());
                   W=sww-Fl::box_dw(box());
@@ -695,14 +701,9 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 
 
-  Fl_Color Fondo = back_color;
-  
   fl_push_clip(X, Y, W, H);
-  //draw_box();
-
-  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
-  draw_box(FL_PLASTIC_DOWN_BOX,X,Y,W,H,Fondo);
-  else draw_box(FL_FLAT_BOX,X,Y,W,H,Fondo);
+ 
+  back->draw(X,Y);
     
   fl_pop_clip();
 
@@ -713,6 +714,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
    } else if (type() == FL_HOR_NICE_SLIDER) {
      draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2, W-4, 4, black);
   }
+ 
  
  //Line to the knob --- I dont like 
 
@@ -754,8 +756,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   } else {
     if (wsl>0 && hsl>0) draw_box(box1, xsl, ysl, wsl, hsl, juan);
 
+
     if (type()!=FL_HOR_FILL_SLIDER && type() != FL_VERT_FILL_SLIDER &&
         Fl::scheme_ && !strcmp(Fl::scheme_, "gtk+")) {
+ 
+
+ 
       if (W>H && wsl>(hsl+8)) {
         // Draw horizontal grippers
         int yy, hh;
@@ -794,6 +800,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
         fl_line(xx, yy+ww+12, xx+ww, yy+12);
       }
     }
+ 
+      
   }
 
   
@@ -810,14 +818,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   
   if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   {
-  if (type() == FL_HOR_NICE_SLIDER)
-  draw_box(FL_PLASTIC_DOWN_BOX,bxx+2,byy,bww-4,bhh,Fondo); 
-  else
-  draw_box(FL_PLASTIC_DOWN_BOX,bxx,byy,bww,bhh,Fondo); 
-  }
-  else
-  draw_box(box(),bxx,byy,bww,bhh,Fondo);
-
+  
+  
+   if (type() == FL_HOR_NICE_SLIDER)
+     back->draw(bxx+2,byy,bww,bhh,0,0);
+     
+   else
+     back->draw(bxx,byy,bww,bhh,0,0); 
+  
+   }
+   else
+    back->draw(bxx,byy,bww,bhh,0,0);
+    
   char buf[128];
   format(buf);
   fl_font(textfont(), textsize());
@@ -4249,12 +4261,12 @@ Fl_Double_Window* RKRGUI::make_window() {
     { fondo = new Fl_Box(1, 1, 800, 600);
     } // Fl_Box* fondo
     { MenuP = new Fl_Menu_Bar(2, 2, 795, 18);
-      MenuP->down_box(FL_DOWN_BOX);
+      MenuP->box(FL_NO_BOX);
       MenuP->color((Fl_Color)178);
       MenuP->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
       MenuP->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       MenuP->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      MenuP->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      MenuP->align(96|FL_ALIGN_INSIDE);
       MenuP->menu(menu_MenuP);
     } // Fl_Menu_Bar* MenuP
     { MT = new Fl_Box(579, 128, 20, 22);
@@ -4278,7 +4290,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       Sco->labelfont(1);
       Sco->labelsize(40);
       Sco->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      Sco->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
+      Sco->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
       Sco->when(FL_WHEN_RELEASE);
       Sco->hide();
     } // Scope* Sco
@@ -7775,14 +7787,14 @@ R average."));
         tuner_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* tuner_activar
       { TunerLed* o = tuner_bar = new TunerLed(586, 91, 206, 14);
-        tuner_bar->box(FL_FLAT_BOX);
-        tuner_bar->color((Fl_Color)FL_BACKGROUND2_COLOR);
+        tuner_bar->box(FL_THIN_DOWN_BOX);
+        tuner_bar->color((Fl_Color)FL_DARK1);
         tuner_bar->selection_color((Fl_Color)FL_RED);
         tuner_bar->labeltype(FL_NORMAL_LABEL);
         tuner_bar->labelfont(0);
         tuner_bar->labelsize(14);
         tuner_bar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        tuner_bar->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+        tuner_bar->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         tuner_bar->when(FL_WHEN_RELEASE);
         o->minimum(-32);
         o->maximum(32);
@@ -7894,7 +7906,7 @@ R average."));
         input_vu->maximum(-48);
         input_vu->step(1);
         input_vu->value(-48);
-        input_vu->align(FL_ALIGN_BOTTOM);
+        input_vu->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         input_vu->when(FL_WHEN_NEVER);
       } // NewVum* input_vu
       { output_vu = new NewVum(142, 50, 15, 122);
@@ -7910,7 +7922,7 @@ R average."));
         output_vu->maximum(-48);
         output_vu->step(1);
         output_vu->value(-48);
-        output_vu->align(FL_ALIGN_BOTTOM);
+        output_vu->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         output_vu->when(FL_WHEN_NEVER);
       } // NewVum* output_vu
       { LABEL_IO = new Fl_Box(68, 30, 62, 14, gettext("In/Out"));
@@ -8067,7 +8079,7 @@ R average."));
         Open_Order->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
-      { Analy = new Analyzer(170, 163, 345, 29);
+      { Analy = new Analyzer(174, 162, 340, 27);
         Analy->box(FL_NO_BOX);
         Analy->color((Fl_Color)FL_BACKGROUND_COLOR);
         Analy->selection_color((Fl_Color)FL_BACKGROUND_COLOR);
@@ -8075,18 +8087,18 @@ R average."));
         Analy->labelfont(1);
         Analy->labelsize(22);
         Analy->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        Analy->align(FL_ALIGN_CENTER);
+        Analy->align(96|FL_ALIGN_INSIDE);
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { Etit = new Fl_Button(170, 163, 345, 29);
+      { Etit = new Fl_Button(174, 162, 340, 27);
         Etit->type(1);
         Etit->box(FL_NO_BOX);
         Etit->labeltype(FL_EMBOSSED_LABEL);
         Etit->labelfont(1);
         Etit->labelsize(21);
         Etit->callback((Fl_Callback*)cb_Etit);
-        Etit->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
+        Etit->align(65|FL_ALIGN_INSIDE);
       } // Fl_Button* Etit
       Presets->end();
     } // Fl_Group* Presets
@@ -8101,11 +8113,12 @@ R average."));
     { Fondo3 = new Fl_Box(1, 1, 800, 600);
     } // Fl_Box* Fondo3
     { MenuB = new Fl_Menu_Bar(0, 0, 800, 20);
-      MenuB->down_box(FL_DOWN_BOX);
-      MenuB->color((Fl_Color)4);
+      MenuB->box(FL_NO_BOX);
+      MenuB->color((Fl_Color)55);
       MenuB->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
       MenuB->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       MenuB->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      MenuB->align(96|FL_ALIGN_INSIDE);
       MenuB->menu(menu_MenuB);
     } // Fl_Menu_Bar* MenuB
     { ob = new Fl_Group(0, 20, 800, 580);
@@ -8391,6 +8404,7 @@ R average."));
     } // Fl_Button* CopyT
     { Ares = new Fl_Group(215, 60, 205, 180);
       Ares->box(FL_THIN_DOWN_BOX);
+      Ares->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
       { Ar1 = new Fl_Box(220, 65, 45, 30);
         Ar1->box(FL_DOWN_BOX);
       } // Fl_Box* Ar1
@@ -8553,6 +8567,9 @@ Fl::visual(FL_DOUBLE|FL_INDEX);
 Fl::get_system_colors();
 fl_register_images();
 rkr=rkr_;
+
+back = NULL;
+
 make_window();
 
 Principal->icon((char *)p);
@@ -8599,14 +8616,8 @@ Fl::add_timeout(.04,tick,v);
 }
 
 void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
-  Principal->color(bcolor);
-MenuP->color(bcolor);
-BankWindow->color(bcolor);
+  MenuP->color(bcolor);
 MenuB->color(bcolor);
-Order->color(bcolor);
-Settings->color(bcolor);
-MIDILearn->color(bcolor);
-Ares->color(bcolor);
 
 eq_preset->selection_color(bcolor);
 compress_preset->selection_color(bcolor);
@@ -8835,6 +8846,7 @@ AB_A2->labelcolor(bcolor);
 AB_A3->labelcolor(bcolor);
 AB_url->labelcolor(bcolor);
 }
+
 
 
 label_color = bcolor;
@@ -10824,7 +10836,8 @@ for (int t=0; t<ob->children();t++)
 }
 
 void RKRGUI::PutBackground() {
-  InOut->image(new Fl_Tiled_Image( new Fl_PNG_Image(rkr->BackgroundImage)));
+  back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
+InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());
 DIST->image(InOut->image());
@@ -10854,15 +10867,13 @@ Fondo2->image(InOut->image());
 Fondo3->image(InOut->image());
 Fondo4->image(InOut->image());
 Etit->image(InOut->image());
+Ares->image(InOut->image());
+
+MenuP->image(InOut->image());
+MenuB->image(InOut->image());
 
 
-
-
-Principal->redraw();
-BankWindow->redraw();
-Order->redraw();
-Settings->redraw();
-MIDILearn->redraw();
+Fl::redraw();
 }
 
 void RKRGUI::chfsize(int value) {
