@@ -816,20 +816,20 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
     else draw_focus(box1, xsl, ysl, wsl, hsl);
   }
   
-  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
+/*  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   {
   
   
    if (type() == FL_HOR_NICE_SLIDER)
-     back->draw(bxx+2,byy,bww,bhh,0,0);
+     back->draw(bxx+2,byy);
      
    else
-     back->draw(bxx,byy,bww,bhh,0,0); 
+     back->draw(bxx,byy); 
   
    }
    else
-    back->draw(bxx,byy,bww,bhh,0,0);
-    
+    back->draw(bxx,byy);
+*/    
   char buf[128];
   format(buf);
   fl_font(textfont(), textsize());
@@ -837,7 +837,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   fl_color(active_r() ? label_color: fl_inactive(textcolor()));
   else
   fl_color(active_r() ? textcolor(): fl_inactive(textcolor()));
-  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
+  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
+   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
 }
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
