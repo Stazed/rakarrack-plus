@@ -1,15 +1,5 @@
-- Redefine the Bank Structure ( that ... will cause a lot of work ... )
 - Arrange memory allocations of delay buffers in effects.
-- Effect parameter count variable for each effect. 
-- Possible virtual class effect, that will help for use more than one
-- instance of each effect, but this has really problems of how to allocate
-- the memory when the program start, and probably will be unusable with
-- RT-Kernels.
-- Class EffectLFOTempo and a new version of each effect that use LFO with
-- this new class and other possible improvements on each one in order to
-- differentiate. That is 7 new effects.
-- All the widgets with images .. that will help for a better look, Timothy
-- Anderson wanna help us with that.
+- Change EffectLFO  Tempo no Freq
 - Complete list of assignable effect parameters to MIDI learn.
 
 DSP TODO:
