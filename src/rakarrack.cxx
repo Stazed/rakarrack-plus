@@ -1481,6 +1481,7 @@ Fl_Menu_Item RKRGUI::menu_dist_tipo[] = {
  {gettext("Hard Crunch"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Dirty Octave+"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -1621,6 +1622,7 @@ Fl_Menu_Item RKRGUI::menu_ovrd_tipo[] = {
  {gettext("Hard Crunch"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Dirty Octave+"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -3229,6 +3231,7 @@ Fl_Menu_Item RKRGUI::menu_newdist_tipo[] = {
  {gettext("Hard Crunch"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Dirty Octave+"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

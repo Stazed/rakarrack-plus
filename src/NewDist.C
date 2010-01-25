@@ -354,8 +354,8 @@ NewDist::changepar (int npar, unsigned char value)
       Plevel = value;
       break;
     case 5:
-      if (value > 17)
-	value = 17;		//this must be increased if more distorsion types are added
+      if (value > 18)
+	value = 18;		//this must be increased if more distorsion types are added
       Ptype = value;
       break;
     case 6:

@@ -278,6 +278,17 @@ waveshapesmps (int n, REALTYPE * smps, unsigned char type,
         smps[i]=sinf(ws * smps[i] + sinf( ws * 2.0f*smps[i]))/ tmpv;  
 
       break;                                                               
+
+       case 19:
+      ws =  ws * ws * ws * D_PI + 0.0001f;
+       if (ws < 1.57f)
+	tmpv = sinf (ws);
+      else
+	tmpv = 1.0f;
+       for (i = 0; i < n; i++)
+       smps[i]=sinf(ws * smps[i] + sinf(ws * 1.5 * smps[i])/tmpv);  
+      break;                                                               
+        
         
 
  
@@ -591,8 +602,8 @@ Distorsion::changepar (int npar, unsigned char value)
       Plevel = value;
       break;
     case 5:
-      if (value > 17)
-	value = 17;		//this must be increased if more distorsion types are added
+      if (value > 18)
+	value = 18;		//this must be increased if more distorsion types are added
       Ptype = value;
       break;
     case 6:

@@ -1532,7 +1532,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
-          callback {rkr->efx_Distorsion->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Distorsion->changepar(5,(unsigned char)o->value());} open
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -1605,6 +1605,10 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           }
           MenuItem {} {
             label {M.Square}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Saw}
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -1710,7 +1714,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
         Fl_Choice ovrd_tipo {
           label Type
-          callback {rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());} open
           xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -1783,6 +1787,10 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
           }
           MenuItem {} {
             label {M.Square}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Saw}
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -3602,6 +3610,10 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
             label {M.Square}
             xywh {0 0 36 21} labelsize 9
           }
+          MenuItem {} {
+            label {M.Saw} selected
+            xywh {0 0 36 21} labelsize 10
+          }
         }
         Fl_Check_Button newdist_neg {
           label {Neg.}
@@ -4092,7 +4104,7 @@ Analyzer_ON=1;
     }
     Fl_Window BankWindow {
       callback {o->hide();
-save_stat(1);} open
+save_stat(1);}
       xywh {1349 172 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
@@ -4150,7 +4162,7 @@ rkr->ConvertOldFile(filename);
 rkr->Message(name, "Please, now try to load the new files");
 }
 else
-rkr->Message(name, "This file has already the new format");} selected
+rkr->Message(name, "This file has already the new format");}
             xywh {0 0 36 21} divider
           }
           MenuItem salirB {
