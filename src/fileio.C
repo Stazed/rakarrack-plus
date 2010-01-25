@@ -741,7 +741,20 @@ RKR::loadbank (char *filename)
 {
 
   int i;
+  char meslabel[64];
   FILE *fn;
+
+  bzero(meslabel,sizeof(meslabel));
+  sprintf(meslabel, "%s %s",jackcliname,VERSION);
+
+  if(CheckOldBank(filename)) 
+  {
+  Message(meslabel, "Can not load this file because is from a old rakarrack version,\n please use 'Convert Old Bank' menu entry in the Bank window.");
+  
+  return(0);
+  }
+
+
   if ((fn = fopen (filename, "rb")) != NULL)
     {
       New_Bank();
@@ -1348,6 +1361,26 @@ RKR::dump_preset_names (void)
            Bank[i].Preset_Name);
    }
  
+}
+
+
+int
+RKR::CheckOldBank(char *filename)
+{
+
+long Pos,Length;
+FILE *fs;
+
+if ((fs = fopen (filename, "rb")) != NULL)
+
+Pos = ftell(fs);
+
+fseek(fs, 0L, SEEK_END);
+
+Length = ftell(fs);
+
+if (Length != 993488) return (1); else return(0);
+
 }
 
 

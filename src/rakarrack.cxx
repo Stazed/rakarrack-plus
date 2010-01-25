@@ -43,9 +43,10 @@ double acoeff= (1.0/dsr)/(0.005+(1.0/dsr));
 double image=0.0;
 double oldimage =0.0;
 double factor = (double) ns / 64.0;
-
+char buf[1];
 int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1000,1200,1500,2000,2500,3200,4000,5000,6000,8000,10000,12000,16000,20000};
 
+sprintf(buf," ");
 
 px = (lx-22) / 30;
 hy = ly;
@@ -59,7 +60,8 @@ if (Analyzer_ON)
 //Draw Response  
 // draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
 
-back->draw(ox,oy,lx,ly,0,0);
+fl_draw(buf, ox, oy, lx, ly, FL_ALIGN_CLIP ,back);
+
     
 fl_color(leds_color);
 
@@ -159,18 +161,13 @@ Yr=Yl;
 double dSW = (double) SW;
 
 
-
-if (damage()!=1)
-{
-back->draw(ox,oy);
-
-}
-
 if (Scope_ON)
 {
 
 //Draw Curve Reponse  
  
+
+
 back->draw(ox,oy);
 
 fl_color(leds_color);
@@ -4283,6 +4280,12 @@ Fl_Double_Window* RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
     } // Fl_Button* TITTLE_L
+    { DESC_L = new Fl_Box(588, 64, 142, 14, gettext("Audio F/X"));
+      DESC_L->labeltype(FL_EMBOSSED_LABEL);
+      DESC_L->labelfont(1);
+      DESC_L->labelsize(16);
+      DESC_L->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+    } // Fl_Box* DESC_L
     { Sco = new Scope(545, 19, 226, 65, gettext("Rakarrack"));
       Sco->box(FL_NO_BOX);
       Sco->color((Fl_Color)FL_BACKGROUND_COLOR);
@@ -4295,12 +4298,6 @@ Fl_Double_Window* RKRGUI::make_window() {
       Sco->when(FL_WHEN_RELEASE);
       Sco->hide();
     } // Scope* Sco
-    { DESC_L = new Fl_Box(588, 64, 142, 14, gettext("Audio F/X"));
-      DESC_L->labeltype(FL_EMBOSSED_LABEL);
-      DESC_L->labelfont(1);
-      DESC_L->labelsize(16);
-      DESC_L->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-    } // Fl_Box* DESC_L
     { E1 = new Fl_Box(2, 212, 1, 1);
       E1->labelsize(18);
       E1->hide();

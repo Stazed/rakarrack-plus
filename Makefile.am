@@ -1,1 +1,1 @@
-SUBDIRS = src data doc man icons
+SUBDIRS = src data doc man icons extra

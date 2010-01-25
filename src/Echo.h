@@ -28,8 +28,8 @@
 #define ECHO_H
 
 #include "global.h"
-#define  ATTACK  0.150f  //150ms volume ducking on reverse delay at buffer crossover (75ms on either side of buffer crossover)
-
+#define  ATTACK  0.175f  //crossover time for reverse delay
+#define  MAX_DELAY 2	// Number of Seconds
 class Echo
 {
 public:
@@ -78,7 +78,7 @@ private:
   void initdelays ();
   REALTYPE *ldelay, *rdelay;
   REALTYPE oldl, oldr;		//pt. lpf
-  int kl, kr, rvkl, rvkr;
+  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
   REALTYPE  Srate_Attack_Coeff;
 };
 

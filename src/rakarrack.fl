@@ -87,9 +87,10 @@ double acoeff= (1.0/dsr)/(0.005+(1.0/dsr));
 double image=0.0;
 double oldimage =0.0;
 double factor = (double) ns / 64.0;
-
+char buf[1];
 int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1000,1200,1500,2000,2500,3200,4000,5000,6000,8000,10000,12000,16000,20000};
 
+sprintf(buf," ");
 
 px = (lx-22) / 30;
 hy = ly;
@@ -103,7 +104,8 @@ if (Analyzer_ON)
 //Draw Response  
 // draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
 
-back->draw(ox,oy,lx,ly,0,0);
+fl_draw(buf, ox, oy, lx, ly, FL_ALIGN_CLIP ,back);
+
     
 fl_color(leds_color);
 
@@ -205,18 +207,13 @@ Yr=Yl;
 double dSW = (double) SW;
 
 
-
-if (damage()!=1)
-{
-back->draw(ox,oy);
-
-}
-
 if (Scope_ON)
 {
 
 //Draw Curve Reponse  
  
+
+
 back->draw(ox,oy);
 
 fl_color(leds_color);
@@ -1184,14 +1181,14 @@ Scope_ON=1;
 }}
         xywh {555 25 226 65} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
       }
+      Fl_Box DESC_L {
+        label {Audio F/X} selected
+        xywh {588 64 142 14} labeltype EMBOSSED_LABEL labelfont 1 labelsize 16 labelcolor 7
+      }
       Fl_Box Sco {
         label Rakarrack
         xywh {545 19 226 65} labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 labelcolor 7 align 80 hide
         class Scope
-      }
-      Fl_Box DESC_L {
-        label {Audio F/X}
-        xywh {588 64 142 14} labeltype EMBOSSED_LABEL labelfont 1 labelsize 16 labelcolor 7
       }
       Fl_Box E1 {
         xywh {2 212 1 1} labelsize 18 hide deactivate
@@ -3866,7 +3863,7 @@ if (!o->value())
 rkr->cleanup_efx();
 
   
-}} selected
+}}
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Value_Slider Balance {

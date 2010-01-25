@@ -47,6 +47,11 @@ Echo::Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   rdelay = NULL;
   lrdelay = 0;
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
+  maxx_delay = SAMPLE_RATE * MAX_DELAY;
+  fade = (int) SAMPLE_RATE / 5;    //200ms fade time available
+
+  ldelay = new REALTYPE[maxx_delay];  
+  rdelay = new REALTYPE[maxx_delay];
   
   setpreset (Ppreset);
   cleanup ();
@@ -65,9 +70,9 @@ void
 Echo::cleanup ()
 {
   int i;
-  for (i = 0; i < dl; i++)
+  for (i = 0; i < maxx_delay; i++)
     ldelay[i] = 0.0;
-  for (i = 0; i < dr; i++)
+  for (i = 0; i < maxx_delay; i++)
     rdelay[i] = 0.0;
   oldl = 0.0;
   oldr = 0.0;
@@ -92,13 +97,8 @@ Echo::initdelays ()
 
   rvkl = dl - 1;
   rvkr = dr - 1;
+  Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
 
-  if (ldelay != NULL)
-    delete[]ldelay;
-  if (rdelay != NULL)
-    delete[]rdelay;
-  ldelay = new REALTYPE[dl];
-  rdelay = new REALTYPE[dr];
 
   cleanup ();
 };
@@ -124,29 +124,47 @@ Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       ldl = smpsl[i] * panning - ldl * fb;
       rdl = smpsr[i] * (1.0f - panning) - rdl * fb;
-
+      
+      if(reverse > 0.0)
+      {
 
       lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
-      rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;
-      
-      if (lswell > 1.0f)  lswell = 1.0f;
-      if (rswell > 1.0f)  rswell = 1.0f;
-      
-      //lswell = dB2rap(-60.0 * (1.0 - lswell));  //Log swell
-      //rswell = dB2rap(-60.0 * (1.0 - rswell));
+	      if (lswell <= PI) 
+	      {
+	      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
+	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell + ldelay[rvfl] * (1.0f - lswell))  + (ldl * (1-reverse));   //Volume ducking near zero crossing.     
+	      }  
+	      else
+	      {
+	      efxoutl[i] = (ldelay[rvkl] * reverse)  + (ldl * (1-reverse));        
+	      }
+       
+      rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
+	      if (rswell <= PI)
+	      {
+	       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
+	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell + rdelay[rvfr] * (1.0f - rswell))  + (rdl * (1-reverse));  //Volume ducking near zero crossing.
+	      }
+	      else
+	      {
+	      efxoutr[i] = (rdelay[rvkr] * reverse)  + (rdl * (1-reverse));
+	      }
       
 
-      //This is what you hear:
-      efxoutl[i] = 2.0f * ((ldelay[rvkl] * reverse * lswell*lswell*lswell*lswell)  + (ldl * (1-reverse)));   //x^4 exponential sounds about the best w/o using e^x
-      efxoutr[i] = 2.0f * ((rdelay[rvkr] * reverse * rswell*rswell*rswell*rswell)  + (rdl * (1-reverse)));
-
+      }
+      else
+      {
+      efxoutl[i]= ldl;
+      efxoutr[i]= rdl;
+      }
+      
+      
       //LowPass Filter
       ldelay[kl] = ldl = ldl * hidamp + oldl * (1.0f - hidamp);
       rdelay[kr] = rdl = rdl * hidamp + oldr * (1.0f - hidamp);
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
-      oldl -=  DENORMAL_GUARD;  // These are likely to resolve to denormals in a short time period.
-      oldr -=  DENORMAL_GUARD;
+
       
       if (++kl >= dl)
 	kl = 0;
@@ -154,6 +172,9 @@ Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	kr = 0;
       rvkl = dl - 1 - kl;
       rvkr = dr - 1 - kr;
+      
+      rvfl = dl + fade - kl;
+      rvfr = dr + fade - kr;
     };
 
 };

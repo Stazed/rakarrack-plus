@@ -152,7 +152,7 @@ public:
   void fix_endianess();
   void copy_IO();
   void convert_IO();
-
+  int CheckOldBank(char *filename);
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;

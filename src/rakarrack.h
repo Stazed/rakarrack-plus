@@ -163,8 +163,8 @@ private:
   void cb_TITTLE_L_i(Fl_Button*, void*);
   static void cb_TITTLE_L(Fl_Button*, void*);
 public:
-  Scope *Sco;
   Fl_Box *DESC_L;
+  Scope *Sco;
   Fl_Box *E1;
   Fl_Box *E2;
   Fl_Box *E3;
