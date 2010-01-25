@@ -3529,7 +3529,7 @@ void RKRGUI::cb_MIDI_LABEL_i(Fl_Box*, void*) {
 char *filename;
 
 #define EXT ".rkrb"
-filename=fl_file_chooser("Save Bank:","(*"EXT")",rkr->Bank_Saved,0);
+filename=fl_file_chooser("Save Bank File:","(*"EXT")",rkr->Bank_Saved,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 #undef EXT
@@ -3700,7 +3700,7 @@ void RKRGUI::cb_Load_Bank_i(Fl_Menu_*, void*) {
   int ok;
 char *filename;
 is_modified();
-filename=fl_file_chooser("Load File:","(*.rkrb)",NULL,0);
+filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 ok=rkr->loadbank(filename);
@@ -3720,6 +3720,28 @@ void RKRGUI::cb_Save_Bank_i(Fl_Menu_*, void*) {
 }
 void RKRGUI::cb_Save_Bank(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Bank_i(o,v);
+}
+
+void RKRGUI::cb_Convert_Old_Bank_i(Fl_Menu_*, void*) {
+  char *filename;
+char name[64];
+bzero(name,sizeof(name));
+sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+
+filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rkrb");
+
+if(rkr->CheckOldBank(filename))
+{
+rkr->ConvertOldFile(filename);
+rkr->Message(name, "Please, now try to load the new files");
+}
+else
+rkr->Message(name, "This file has already the new format");
+}
+void RKRGUI::cb_Convert_Old_Bank(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_Convert_Old_Bank_i(o,v);
 }
 
 void RKRGUI::cb_salirB_i(Fl_Menu_*, void*) {
@@ -3755,6 +3777,7 @@ Fl_Menu_Item RKRGUI::menu_MenuB[] = {
  {gettext("New"), 0,  (Fl_Callback*)RKRGUI::cb_NewB, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Load Bank"), 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Save Bank"), 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {gettext("Convert Old Bank"), 0,  (Fl_Callback*)RKRGUI::cb_Convert_Old_Bank, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
  {gettext("Close"), 0,  (Fl_Callback*)RKRGUI::cb_salirB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {gettext("&Help"), 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
@@ -3767,10 +3790,11 @@ Fl_Menu_Item* RKRGUI::ArchivoB = RKRGUI::menu_MenuB + 0;
 Fl_Menu_Item* RKRGUI::NewB = RKRGUI::menu_MenuB + 1;
 Fl_Menu_Item* RKRGUI::Load_Bank = RKRGUI::menu_MenuB + 2;
 Fl_Menu_Item* RKRGUI::Save_Bank = RKRGUI::menu_MenuB + 3;
-Fl_Menu_Item* RKRGUI::salirB = RKRGUI::menu_MenuB + 4;
-Fl_Menu_Item* RKRGUI::AyudaB = RKRGUI::menu_MenuB + 6;
-Fl_Menu_Item* RKRGUI::ContenidoB = RKRGUI::menu_MenuB + 7;
-Fl_Menu_Item* RKRGUI::Acerca_deB = RKRGUI::menu_MenuB + 8;
+Fl_Menu_Item* RKRGUI::Convert_Old_Bank = RKRGUI::menu_MenuB + 4;
+Fl_Menu_Item* RKRGUI::salirB = RKRGUI::menu_MenuB + 5;
+Fl_Menu_Item* RKRGUI::AyudaB = RKRGUI::menu_MenuB + 7;
+Fl_Menu_Item* RKRGUI::ContenidoB = RKRGUI::menu_MenuB + 8;
+Fl_Menu_Item* RKRGUI::Acerca_deB = RKRGUI::menu_MenuB + 9;
 
 void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
   save_stat(2);
@@ -8578,10 +8602,7 @@ AboutWin->icon((char *)p);
 MIDILearn->icon((char *)p);
 
 made=0;
-
 char tmp[256];
-
-
 nt=0;
 at=0;
 tta=0;

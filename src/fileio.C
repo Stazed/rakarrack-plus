@@ -1386,6 +1386,18 @@ if (Length != 993488) return (1); else return(0);
 }
 
 
+void
+RKR::ConvertOldFile(char * filename)
+{
+
+char buff[255];
+bzero(buff,sizeof(buff));
+sprintf(buff,"rakconvert -c %s",filename);
+system(buff);
+
+}
+
+
 
 void 
 RKR::update_bank()

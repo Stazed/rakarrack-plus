@@ -1521,6 +1521,11 @@ private:
   void cb_Save_Bank_i(Fl_Menu_*, void*);
   static void cb_Save_Bank(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *Convert_Old_Bank;
+private:
+  void cb_Convert_Old_Bank_i(Fl_Menu_*, void*);
+  static void cb_Convert_Old_Bank(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *salirB;
 private:
   void cb_salirB_i(Fl_Menu_*, void*);

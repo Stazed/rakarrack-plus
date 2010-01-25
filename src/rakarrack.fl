@@ -3941,7 +3941,7 @@ MIDI_LABEL->redraw();}
 char *filename;
 
 \#define EXT ".rkrb"
-filename=fl_file_chooser("Save Bank:","(*"EXT")",rkr->Bank_Saved,0);
+filename=fl_file_chooser("Save Bank File:","(*"EXT")",rkr->Bank_Saved,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
@@ -4092,13 +4092,13 @@ Analyzer_ON=1;
     }
     Fl_Window BankWindow {
       callback {o->hide();
-save_stat(1);}
+save_stat(1);} open
       xywh {1349 172 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuB {
+      Fl_Menu_Bar MenuB {open
         xywh {0 0 800 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
@@ -4116,7 +4116,7 @@ BankWindow->redraw();}
             callback {int ok;
 char *filename;
 is_modified();
-filename=fl_file_chooser("Load File:","(*.rkrb)",NULL,0);
+filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 ok=rkr->loadbank(filename);
@@ -4133,6 +4133,26 @@ Put_Loaded_Bank();
             callback {MIDI_LABEL->do_callback();}
             xywh {10 10 45 26} divider
           }
+          MenuItem Convert_Old_Bank {
+            label {Convert Old Bank}
+            callback {char *filename;
+char name[64];
+bzero(name,sizeof(name));
+sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+
+filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rkrb");
+
+if(rkr->CheckOldBank(filename))
+{
+rkr->ConvertOldFile(filename);
+rkr->Message(name, "Please, now try to load the new files");
+}
+else
+rkr->Message(name, "This file has already the new format");} selected
+            xywh {0 0 36 21} divider
+          }
           MenuItem salirB {
             label Close
             callback {BankWindow->do_callback();}
@@ -4140,7 +4160,7 @@ Put_Loaded_Bank();
           }
         }
         Submenu AyudaB {
-          label {&Help} open
+          label {&Help}
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem ContenidoB {
@@ -4779,10 +4799,7 @@ AboutWin->icon((char *)p);
 MIDILearn->icon((char *)p);
 
 made=0;
-
 char tmp[256];
-
-
 nt=0;
 at=0;
 tta=0;
@@ -5863,8 +5880,7 @@ ob->end();
 
 made=1;
 
-light_preset(rkr->Selected_Preset);} {selected
-    }
+light_preset(rkr->Selected_Preset);} {}
   }
   Function {reordena()} {} {
     code {int i,j,k,t;
