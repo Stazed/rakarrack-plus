@@ -91,31 +91,21 @@ double factor = (double) ns / 64.0;
 int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1000,1200,1500,2000,2500,3200,4000,5000,6000,8000,10000,12000,16000,20000};
 
 
-px = (lx-34) / 30;
+px = (lx-22) / 30;
 hy = ly;
 
 double scale = (double) ly ;
 
-if (damage()!=1)
-{
-
-back->draw(ox,oy,lx,ly,0,0);
-
-}
 
 if (Analyzer_ON)
 {
 
 //Draw Response  
- 
-
-//draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+// draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
 
 back->draw(ox,oy,lx,ly,0,0);
-
+    
 fl_color(leds_color);
-
-
 
 for(i=0; i<30; i++)
 {
@@ -141,7 +131,7 @@ for(i=0; i<30; i++)
             
       
       fl_color(leds_color);
-      fl_rectf(12+px+ox+px*i+4,oy+ly-py,px-5,py);
+      fl_rectf(px+ox+px*i+4,oy+ly-py,px-2,py);
 
    
    //   printf("%d %f %d\\n",py,y,i);
@@ -151,8 +141,10 @@ for(i=0; i<30; i++)
 }
 
 else
-
-draw_label();} {}
+{
+draw_box(box(),ox,oy,lx,ly,back_color);
+draw_label();
+}} {}
   }
   Function {handle(int event)} {return_type int
   } {
@@ -884,21 +876,22 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   else
   fl_color(active_r() ? textcolor(): fl_inactive(textcolor()));
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
-   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {selected
-    }
+   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {}
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1411 148 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} open
+      xywh {1351 50 800 600} type Double box DOWN_BOX color 0 resizable size_range {640 480 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -3963,7 +3956,7 @@ rkr->modified=0;
         }
       }
       Fl_Group Presets {
-        xywh {168 24 351 170} box UP_BOX color 0 selection_color 0 align 112
+        xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
           label Presets
@@ -4033,7 +4026,7 @@ light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 FillML(0);
 Put_Loaded();}
-          xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 80 step 1 value 1 textsize 11
+          xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
         Fl_Box DAuthor {
           xywh {246 107 266 18} box DOWN_BOX color 62 align 116
@@ -4077,11 +4070,7 @@ Avail_Bro->select(1);
 
 Order->show();
 put_icon(Order);}
-          xywh {255 136 195 25} shortcut 0x6f color 62 align 80 when 6
-        }
-        Fl_Box Analy {
-          xywh {174 162 340 27} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 112 hide
-          class Analyzer
+          xywh {255 132 195 25} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)
@@ -4090,14 +4079,18 @@ o->hide();
 Analy->show();
 Analyzer_ON=1;
 }}
-          xywh {174 162 340 27} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 81
+          xywh {174 160 340 28} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
+        }
+        Fl_Box Analy {selected
+          xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
+          class Analyzer
         }
       }
     }
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1363 186 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {1356 179 800 400} type Double color 4 selection_color 7 hide resizable size_range {640 320 3200 1600}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -4555,7 +4548,7 @@ strcpy(rkr->BankFilename,filename);}
     Fl_Window MIDILearn {
       callback {save_stat(5);
 MIDILearn->hide();}
-      xywh {1303 291 640 480} type Double hide
+      xywh {1296 284 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
@@ -4576,14 +4569,14 @@ rkr->RControl=1;}
       }
       Fl_Button CopyF {
         label {Copy from: }
-        callback {memcpy(rkr->XUserMIDI,rkr->PML[TPresets->value()].XUserMIDI,sizeof(rkr->XUserMIDI));
+        callback {memcpy(rkr->XUserMIDI,rkr->Bank[TPresets->value()].XUserMIDI,sizeof(rkr->XUserMIDI));
 
 DisAssigns();}
         xywh {430 20 95 30}
       }
       Fl_Button CopyT {
         label {Copy to: }
-        callback {memcpy(rkr->PML[TPresets->value()].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));}
+        callback {memcpy(rkr->Bank[TPresets->value()].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));}
         xywh {535 20 95 30}
       }
       Fl_Group Ares {
@@ -5233,14 +5226,14 @@ Principal->resize(x,y,w,h);
 rakarrack.get(rkr->PrefNom("BankWindow X"),x,1);
 rakarrack.get(rkr->PrefNom("BankWindow Y"),y,1);
 rakarrack.get(rkr->PrefNom("BankWindow W"),w,800);
-rakarrack.get(rkr->PrefNom("BankWindow H"),h,600);
+rakarrack.get(rkr->PrefNom("BankWindow H"),h,400);
 
 BankWindow->resize(x,y,w,h);
 
 rakarrack.get(rkr->PrefNom("Order X"),x,1);
 rakarrack.get(rkr->PrefNom("Order Y"),y,1);
 rakarrack.get(rkr->PrefNom("Order W"),w,600);
-rakarrack.get(rkr->PrefNom("Order H"),h,400);
+rakarrack.get(rkr->PrefNom("Order H"),h,480);
 
 Order->resize(x,y,w,h);
 
@@ -5822,7 +5815,7 @@ Put_Loaded();
 int elw,elh;
 
 elw=176*BankWindow->w()/800;
-elh=24*BankWindow->h()/600;
+elh=24*BankWindow->h()/400;
 
 
 
@@ -5831,7 +5824,7 @@ ob->begin();
 x=40;y=10;
 num=1;
 
-for (i=1;i<21;i++)
+for (i=1;i<13;i++)
 {
 y +=elh+2;
 
@@ -7491,7 +7484,7 @@ Epar->select(1,1);
 if (type<3)
 {
 TPresets->clear();
-for(i=1; i<=80; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
+for(i=1; i<=60; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
 TPresets->select(rkr->Selected_Preset,1);
 TPresets->redraw();
 }

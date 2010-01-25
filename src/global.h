@@ -117,8 +117,6 @@ public:
   void saveskin (char *filename);
   int loadbank (char *filename);
   int savebank (char *filename);
-  int checkPreset(int Preset);
-  int checkControl(int Preset, int Control);
   void dump_preset_names ();
   void New ();
   void New_Bank ();
@@ -231,11 +229,11 @@ public:
   int NewDist_B;
   int Cabinet_Preset;
   int Selected_Preset;
-  int lv[24][24];
+  int lv[50][20];
   int saved_order[24];
   int efx_order[24];
   int new_order[24];
-  int availables[14];
+  int availables[32];
   int active[12];
   int MidiCh;
   int HarCh;
@@ -259,7 +257,7 @@ public:
   int ControlGet;
   int CountWait;
   int XUserMIDI[128][20];
-
+  
 
   int Mvalue;
   int Mnumeff;
@@ -327,12 +325,6 @@ public:
   } efx_params[256];
 
 
-  struct ML
-  {
-    int XUserMIDI[128][20];
-  } PML[82]; 
-
-
   struct Preset_Bank_Struct
   {
     char Preset_Name[64];
@@ -341,11 +333,19 @@ public:
     char Type[4];
     char Reserva[64];
     char Reserva1[64];
+    char cInput_Gain[64];
+    char cMaster_Volume[64];
+    char cBalance[64];
     float Input_Gain;
     float Master_Volume;
+    float Balance;
     int Bypass;
-    int lv[24][22];
-  } Bank[82];
+    int Res[64];
+    int lv[50][20];
+    int XUserMIDI[128][20];
+    int XMIDIrangeMin[128];
+    int XMIDIrangeMax[128];
+  } Bank[62];
 
 
   // Alsa MIDI

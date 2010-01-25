@@ -1491,12 +1491,12 @@ private:
   void cb_Open_Order_i(Fl_Button*, void*);
   static void cb_Open_Order(Fl_Button*, void*);
 public:
-  Analyzer *Analy;
   Fl_Button *Etit;
 private:
   void cb_Etit_i(Fl_Button*, void*);
   static void cb_Etit(Fl_Button*, void*);
 public:
+  Analyzer *Analy;
   Fl_Double_Window *BankWindow;
 private:
   void cb_BankWindow_i(Fl_Double_Window*, void*);

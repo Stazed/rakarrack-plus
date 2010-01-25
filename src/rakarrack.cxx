@@ -47,31 +47,21 @@ double factor = (double) ns / 64.0;
 int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1000,1200,1500,2000,2500,3200,4000,5000,6000,8000,10000,12000,16000,20000};
 
 
-px = (lx-34) / 30;
+px = (lx-22) / 30;
 hy = ly;
 
 double scale = (double) ly ;
 
-if (damage()!=1)
-{
-
-back->draw(ox,oy,lx,ly,0,0);
-
-}
 
 if (Analyzer_ON)
 {
 
 //Draw Response  
- 
-
-//draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
+// draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
 
 back->draw(ox,oy,lx,ly,0,0);
-
+    
 fl_color(leds_color);
-
-
 
 for(i=0; i<30; i++)
 {
@@ -97,7 +87,7 @@ for(i=0; i<30; i++)
             
       
       fl_color(leds_color);
-      fl_rectf(12+px+ox+px*i+4,oy+ly-py,px-5,py);
+      fl_rectf(px+ox+px*i+4,oy+ly-py,px-2,py);
 
    
    //   printf("%d %f %d\n",py,y,i);
@@ -107,8 +97,10 @@ for(i=0; i<30; i++)
 }
 
 else
-
+{
+draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
+}
 }
 
 int Analyzer::handle(int event) {
@@ -4156,7 +4148,7 @@ void RKRGUI::cb_GMM(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_CopyF_i(Fl_Button*, void*) {
-  memcpy(rkr->XUserMIDI,rkr->PML[TPresets->value()].XUserMIDI,sizeof(rkr->XUserMIDI));
+  memcpy(rkr->XUserMIDI,rkr->Bank[TPresets->value()].XUserMIDI,sizeof(rkr->XUserMIDI));
 
 DisAssigns();
 }
@@ -4165,7 +4157,7 @@ void RKRGUI::cb_CopyF(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_CopyT_i(Fl_Button*, void*) {
-  memcpy(rkr->PML[TPresets->value()].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));
+  memcpy(rkr->Bank[TPresets->value()].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));
 }
 void RKRGUI::cb_CopyT(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_CopyT_i(o,v);
@@ -8005,7 +7997,7 @@ R average."));
       } // Fl_Box* Mled
       Midi->end();
     } // Fl_Group* Midi
-    { Presets = new Fl_Group(168, 24, 351, 170);
+    { Presets = new Fl_Group(168, 24, 352, 170);
       Presets->box(FL_UP_BOX);
       Presets->color((Fl_Color)FL_FOREGROUND_COLOR);
       Presets->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -8062,7 +8054,7 @@ R average."));
         Preset_Counter->labelsize(11);
         Preset_Counter->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Preset_Counter->minimum(1);
-        Preset_Counter->maximum(80);
+        Preset_Counter->maximum(60);
         Preset_Counter->step(1);
         Preset_Counter->value(1);
         Preset_Counter->textsize(11);
@@ -8073,14 +8065,23 @@ R average."));
         DAuthor->color((Fl_Color)62);
         DAuthor->align(100|FL_ALIGN_INSIDE);
       } // Fl_Box* DAuthor
-      { Open_Order = new Fl_Button(255, 136, 195, 25, gettext("Put Order in your Rack"));
+      { Open_Order = new Fl_Button(255, 132, 195, 25, gettext("Put Order in your Rack"));
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
         Open_Order->callback((Fl_Callback*)cb_Open_Order);
         Open_Order->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
-      { Analy = new Analyzer(174, 162, 340, 27);
+      { Etit = new Fl_Button(174, 160, 340, 28);
+        Etit->type(1);
+        Etit->box(FL_NO_BOX);
+        Etit->labeltype(FL_EMBOSSED_LABEL);
+        Etit->labelfont(1);
+        Etit->labelsize(21);
+        Etit->callback((Fl_Callback*)cb_Etit);
+        Etit->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
+      } // Fl_Button* Etit
+      { Analy = new Analyzer(174, 160, 340, 28);
         Analy->box(FL_NO_BOX);
         Analy->color((Fl_Color)FL_BACKGROUND_COLOR);
         Analy->selection_color((Fl_Color)FL_BACKGROUND_COLOR);
@@ -8088,26 +8089,17 @@ R average."));
         Analy->labelfont(1);
         Analy->labelsize(22);
         Analy->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        Analy->align(96|FL_ALIGN_INSIDE);
+        Analy->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { Etit = new Fl_Button(174, 162, 340, 27);
-        Etit->type(1);
-        Etit->box(FL_NO_BOX);
-        Etit->labeltype(FL_EMBOSSED_LABEL);
-        Etit->labelfont(1);
-        Etit->labelsize(21);
-        Etit->callback((Fl_Callback*)cb_Etit);
-        Etit->align(65|FL_ALIGN_INSIDE);
-      } // Fl_Button* Etit
       Presets->end();
     } // Fl_Group* Presets
     Principal->size_range(640, 480, 3200, 2400);
     Principal->end();
     Principal->resizable(Principal);
   } // Fl_Double_Window* Principal
-  { BankWindow = new Fl_Double_Window(800, 600);
+  { BankWindow = new Fl_Double_Window(800, 400);
     BankWindow->color((Fl_Color)4);
     BankWindow->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
     BankWindow->callback((Fl_Callback*)cb_BankWindow, (void*)(this));
@@ -8126,7 +8118,7 @@ R average."));
       ob->labelsize(18);
       ob->end();
     } // Fl_Group* ob
-    BankWindow->size_range(640, 480, 3200, 2400);
+    BankWindow->size_range(640, 320, 3200, 1600);
     BankWindow->end();
     BankWindow->resizable(BankWindow);
   } // Fl_Double_Window* BankWindow
@@ -9037,14 +9029,14 @@ Principal->resize(x,y,w,h);
 rakarrack.get(rkr->PrefNom("BankWindow X"),x,1);
 rakarrack.get(rkr->PrefNom("BankWindow Y"),y,1);
 rakarrack.get(rkr->PrefNom("BankWindow W"),w,800);
-rakarrack.get(rkr->PrefNom("BankWindow H"),h,600);
+rakarrack.get(rkr->PrefNom("BankWindow H"),h,400);
 
 BankWindow->resize(x,y,w,h);
 
 rakarrack.get(rkr->PrefNom("Order X"),x,1);
 rakarrack.get(rkr->PrefNom("Order Y"),y,1);
 rakarrack.get(rkr->PrefNom("Order W"),w,600);
-rakarrack.get(rkr->PrefNom("Order H"),h,400);
+rakarrack.get(rkr->PrefNom("Order H"),h,480);
 
 Order->resize(x,y,w,h);
 
@@ -9629,7 +9621,7 @@ void RKRGUI::make_window_banks() {
 int elw,elh;
 
 elw=176*BankWindow->w()/800;
-elh=24*BankWindow->h()/600;
+elh=24*BankWindow->h()/400;
 
 
 
@@ -9638,7 +9630,7 @@ ob->begin();
 x=40;y=10;
 num=1;
 
-for (i=1;i<21;i++)
+for (i=1;i<13;i++)
 {
 y +=elh+2;
 
@@ -11318,7 +11310,7 @@ Epar->select(1,1);
 if (type<3)
 {
 TPresets->clear();
-for(i=1; i<=80; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
+for(i=1; i<=60; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
 TPresets->select(rkr->Selected_Preset,1);
 TPresets->redraw();
 }

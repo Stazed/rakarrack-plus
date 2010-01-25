@@ -740,10 +740,7 @@ int
 RKR::loadbank (char *filename)
 {
 
-  int i,j,k,t;
-  k=0;
-  char buf[256];
-  char nfilename[256];
+  int i;
   FILE *fn;
   if ((fn = fopen (filename, "rb")) != NULL)
     {
@@ -755,41 +752,6 @@ RKR::loadbank (char *filename)
       fclose (fn);
       if(BigEndian()) fix_endianess();
       convert_IO();
- 
-    sprintf(nfilename, "%s.ml",filename);
-    if ((fn = fopen (nfilename, "r")) == NULL)
-    return(1);
-
-for(j=0;j<80;j++)
-   {
-    bzero(buf,sizeof(buf));
-    fgets (buf, sizeof buf, fn);
-    sscanf(buf,"%d\n",&k);
-      if(k)
-          { 
-           for(i=0;i<128;i++)
-             {
-              bzero(buf,sizeof(buf));
-              fgets (buf, sizeof buf, fn);
-              sscanf(buf,"%d\n",&t);
-              if(t)
-                 { 
-                  bzero(buf,sizeof(buf));
-                  fgets (buf, sizeof buf, fn);
-                  sscanf(buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-           &PML[j].XUserMIDI[i][0], &PML[j].XUserMIDI[i][1], &PML[j].XUserMIDI[i][2], &PML[j].XUserMIDI[i][3], &PML[j].XUserMIDI[i][4],
-           &PML[j].XUserMIDI[i][5], &PML[j].XUserMIDI[i][6], &PML[j].XUserMIDI[i][7], &PML[j].XUserMIDI[i][8], &PML[j].XUserMIDI[i][9],
-           &PML[j].XUserMIDI[i][10], &PML[j].XUserMIDI[i][10], &PML[j].XUserMIDI[i][12], &PML[j].XUserMIDI[i][13], &PML[j].XUserMIDI[i][14],
-           &PML[j].XUserMIDI[i][15], &PML[j].XUserMIDI[i][16], &PML[j].XUserMIDI[i][17], &PML[j].XUserMIDI[i][18], &PML[j].XUserMIDI[i][19]);
-                  }
-     
-              }                
-            }
-
-    }  
-       
-  fclose(fn);
-
       return (1);
     }
   return (0);
@@ -800,11 +762,7 @@ int
 RKR::savebank (char *filename)
 {
 
-  int i,j,k,t;
-  char buf[256];
-  char nfilename[256];
   FILE *fn;
-  k=0;
   
   if ((fn = fopen (filename, "wb")) != NULL)
  {
@@ -813,48 +771,9 @@ RKR::savebank (char *filename)
       fwrite (&Bank, sizeof (Bank), 1, fn);
       if(BigEndian()) fix_endianess();
       fclose (fn);
-    
-   sprintf(nfilename, "%s.ml",filename); 
-   if ((fn = fopen (nfilename, "w")) != NULL)
-   {
-    for(j=0;j<80;j++)
-       {  
-         k=checkPreset(j);
-         bzero(buf,sizeof(buf));
-         sprintf(buf,"%d\n",k);
-         fputs (buf, fn);
-                                   
-         if(k)
-         { 
-           for(i=0;i<128;i++)
-             {
-               t=checkControl(j,i);
-               bzero(buf,sizeof(buf));
-               sprintf(buf,"%d\n",t);
-               fputs (buf, fn);
-               if(t)
-                  {
-                   bzero(buf,sizeof(buf)); 
-                   sprintf(buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-         PML[j].XUserMIDI[i][0], PML[j].XUserMIDI[i][1], PML[j].XUserMIDI[i][2], PML[j].XUserMIDI[i][3], PML[j].XUserMIDI[i][4],
-         PML[j].XUserMIDI[i][5], PML[j].XUserMIDI[i][6], PML[j].XUserMIDI[i][7], PML[j].XUserMIDI[i][8], PML[j].XUserMIDI[i][9],
-         PML[j].XUserMIDI[i][10], PML[j].XUserMIDI[i][10], PML[j].XUserMIDI[i][12], PML[j].XUserMIDI[i][13], PML[j].XUserMIDI[i][14],
-         PML[j].XUserMIDI[i][15], PML[j].XUserMIDI[i][16], PML[j].XUserMIDI[i][17], PML[j].XUserMIDI[i][18], PML[j].XUserMIDI[i][19]);
-                    fputs (buf, fn);
-                   }
-              } 
-         }       
-       
-       
-       }
-    fclose(fn);
-    return (1);
-    
-    
-    }
+      return(1);     
   }
  return (0);
-
 };
 
 void
@@ -1019,7 +938,7 @@ RKR::New_Bank ()
 
 
 
-  for (i = 0; i < 82; i++)
+  for (i = 0; i < 62; i++)
     {
       bzero (Bank[i].Preset_Name, sizeof (Bank[i].Preset_Name));
       bzero (Bank[i].Author, sizeof (Bank[i].Author));
@@ -1035,10 +954,12 @@ RKR::New_Bank ()
 	      Bank[i].lv[j][k] = presets[j][k];
 	    }
 	}
+    
+      memset(Bank[i].XUserMIDI, 0, sizeof(Bank[i].XUserMIDI));     
+    
     }
 
 
-memset(PML, 0, sizeof(PML));
 
 
 };
@@ -1070,29 +991,29 @@ RKR::Bank_to_Preset (int i)
     efx_order[k] = Bank[i].lv[10][k];
 
 
-  Reverb_B = Bank[i].lv[0][12];
-  Echo_B = Bank[i].lv[1][7];
-  Chorus_B = Bank[i].lv[2][12];
-  Flanger_B = Bank[i].lv[3][12];
-  Phaser_B = Bank[i].lv[4][12];
-  Overdrive_B = Bank[i].lv[5][11];
-  Distorsion_B = Bank[i].lv[6][11];
-  EQ1_B = Bank[i].lv[7][12];
-  EQ2_B = Bank[i].lv[8][10];
-  Compressor_B = Bank[i].lv[9][8];
-  WhaWha_B = Bank[i].lv[11][11];
-  Alienwah_B = Bank[i].lv[12][11];
-  Cabinet_B = Bank[i].lv[13][2];
-  Pan_B = Bank[i].lv[14][8];
-  Harmonizer_B = Bank[i].lv[15][11];
-  MusDelay_B = Bank[i].lv[16][13];
-  Gate_B = Bank[i].lv[17][7];
-  NewDist_B = Bank[i].lv[18][12];
-  APhaser_B = Bank[i].lv[19][12];
+  Reverb_B = Bank[i].lv[0][19];
+  Echo_B = Bank[i].lv[1][19];
+  Chorus_B = Bank[i].lv[2][19];
+  Flanger_B = Bank[i].lv[3][19];
+  Phaser_B = Bank[i].lv[4][19];
+  Overdrive_B = Bank[i].lv[5][19];
+  Distorsion_B = Bank[i].lv[6][19];
+  EQ1_B = Bank[i].lv[7][19];
+  EQ2_B = Bank[i].lv[8][19];
+  Compressor_B = Bank[i].lv[9][19];
+  WhaWha_B = Bank[i].lv[11][19];
+  Alienwah_B = Bank[i].lv[12][19];
+  Cabinet_B = Bank[i].lv[13][19];
+  Pan_B = Bank[i].lv[14][19];
+  Harmonizer_B = Bank[i].lv[15][19];
+  MusDelay_B = Bank[i].lv[16][19];
+  Gate_B = Bank[i].lv[17][19];
+  NewDist_B = Bank[i].lv[18][19];
+  APhaser_B = Bank[i].lv[19][19];
   Bypass_B = Bypass;
 
 
-  memcpy(XUserMIDI, PML[i].XUserMIDI, sizeof(XUserMIDI));
+  memcpy(XUserMIDI, Bank[i].XUserMIDI, sizeof(XUserMIDI));
 
 
 
@@ -1187,28 +1108,28 @@ RKR::Preset_to_Bank (int i)
 
 
 
-  Bank[i].lv[0][12] = Reverb_Bypass;
-  Bank[i].lv[1][7] = Echo_Bypass;
-  Bank[i].lv[2][12] = Chorus_Bypass;
-  Bank[i].lv[3][12] = Flanger_Bypass;
-  Bank[i].lv[4][12] = Phaser_Bypass;
-  Bank[i].lv[5][11] = Overdrive_Bypass;
-  Bank[i].lv[6][11] = Distorsion_Bypass;
-  Bank[i].lv[7][12] = EQ1_Bypass;
-  Bank[i].lv[8][10] = EQ2_Bypass;
-  Bank[i].lv[9][8] = Compressor_Bypass;
-  Bank[i].lv[11][10] = efx_WhaWha->Ppreset;
-  Bank[i].lv[11][11] = WhaWha_Bypass;
-  Bank[i].lv[12][11] = Alienwah_Bypass;
-  Bank[i].lv[13][2] = Cabinet_Bypass;
-  Bank[i].lv[14][8] = Pan_Bypass;
-  Bank[i].lv[15][11] = Harmonizer_Bypass;
-  Bank[i].lv[16][13] = MusDelay_Bypass;
-  Bank[i].lv[17][7] = Gate_Bypass;
-  Bank[i].lv[18][12] = NewDist_Bypass;
-  Bank[i].lv[19][12] = APhaser_Bypass;
+  Bank[i].lv[0][19] = Reverb_Bypass;
+  Bank[i].lv[1][19] = Echo_Bypass;
+  Bank[i].lv[2][19] = Chorus_Bypass;
+  Bank[i].lv[3][19] = Flanger_Bypass;
+  Bank[i].lv[4][19] = Phaser_Bypass;
+  Bank[i].lv[5][19] = Overdrive_Bypass;
+  Bank[i].lv[6][19] = Distorsion_Bypass;
+  Bank[i].lv[7][19] = EQ1_Bypass;
+  Bank[i].lv[8][19] = EQ2_Bypass;
+  Bank[i].lv[9][19] = Compressor_Bypass;
+  Bank[i].lv[11][19] = efx_WhaWha->Ppreset;
+  Bank[i].lv[11][19] = WhaWha_Bypass;
+  Bank[i].lv[12][19] = Alienwah_Bypass;
+  Bank[i].lv[13][19] = Cabinet_Bypass;
+  Bank[i].lv[14][19] = Pan_Bypass;
+  Bank[i].lv[15][19] = Harmonizer_Bypass;
+  Bank[i].lv[16][19] = MusDelay_Bypass;
+  Bank[i].lv[17][19] = Gate_Bypass;
+  Bank[i].lv[18][19] = NewDist_Bypass;
+  Bank[i].lv[19][19] = APhaser_Bypass;
   
-  memcpy(PML[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
+  memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
   
   
 };
@@ -1249,12 +1170,12 @@ RKR::copy_IO()
 
 int i;
 
-for(i=0; i<82; i++)
+for(i=0; i<62; i++)
 {
-  bzero(Bank[i].Reserva, sizeof(Bank[i].Reserva));
-  sprintf(Bank[i].Reserva, "%f", Bank[i].Input_Gain);
-  bzero(Bank[i].Reserva1, sizeof(Bank[i].Reserva1));
-  sprintf(Bank[i].Reserva1, "%f", Bank[i].Master_Volume);
+  bzero(Bank[i].cInput_Gain, sizeof(Bank[i].cInput_Gain));
+  sprintf(Bank[i].cInput_Gain, "%f", Bank[i].Input_Gain);
+  bzero(Bank[i].cMaster_Volume, sizeof(Bank[i].cMaster_Volume));
+  sprintf(Bank[i].cMaster_Volume, "%f", Bank[i].Master_Volume);
 }  
 
 
@@ -1267,13 +1188,19 @@ RKR::convert_IO()
 
 int i;
 
-for(i=0; i<82; i++)
+for(i=0; i<62; i++)
 {
-   sscanf(Bank[i].Reserva, "%f", &Bank[i].Input_Gain);
+   sscanf(Bank[i].cInput_Gain, "%f", &Bank[i].Input_Gain);
    if(Bank[i].Input_Gain == 0.0) Bank[i].Input_Gain=0.5f;
    
-   sscanf(Bank[i].Reserva1, "%f", &Bank[i].Master_Volume);
+   sscanf(Bank[i].cMaster_Volume, "%f", &Bank[i].Master_Volume);
    if(Bank[i].Master_Volume == 0.0) Bank[i].Master_Volume=0.5f;
+
+   sscanf(Bank[i].cBalance, "%f", &Bank[i].Balance);
+   if(Bank[i].Balance == 0.0) Bank[i].Balance=1.0f;
+
+
+
 }
 
 
@@ -1288,16 +1215,16 @@ RKR::fix_endianess()
 int i,j,k;
 unsigned int data;
   
-for(i=0; i<82; i++)
+for(i=0; i<62; i++)
 {
 
    data = Bank[i].Bypass;
    data = SwapFourBytes(data);
    Bank[i].Bypass=data;
    
-   for(j=0; j<24; j++)
+   for(j=0; j<50; j++)
      {
-       for(k=0;k<22;k++)
+       for(k=0;k<20;k++)
            {
              data = Bank[i].lv[j][k];
              data = SwapFourBytes(data);
@@ -1392,49 +1319,13 @@ RKR::dump_preset_names (void)
 {
    int i;
    
-   for (i = 0; i < 82; i++) {
+   for (i = 0; i < 62; i++) {
      fprintf(stderr,
            "RKR_BANK_NAME:%d:%s\n",
            i,
            Bank[i].Preset_Name);
    }
  
-}
-
-
-
-int
-RKR::checkPreset(int Preset)
-{
-  int i,j,sum;
-
-   sum = 0;
-   for(i=0;i<128;i++)
-       {
-       for(j=0;j<20;j++)
-         sum+=PML[Preset].XUserMIDI[i][j];
-         if(sum>0) break; 
-       } 
-
-if(sum>0) return(1); else return(0);
-
-
-}
-
-int
-RKR::checkControl(int Preset, int Control)
-{
-  int j,sum;
-
-   sum = 0;
-       for(j=0;j<20;j++)
-         { 
-         sum+=PML[Preset].XUserMIDI[Control][j];
-         if(sum>0) break; 
-         }
-if(sum>0) return(1); else return(0);
-
-
 }
 
 
@@ -1451,7 +1342,7 @@ int preset[16]= {0, 64, 64, 83, 65, 15, 0, 75, 31, 68, 0, 0, 0, 0, 0, 0};
        
 
 
-for (i=0; i<82; i++)
+for (i=0; i<62; i++)
   {
  
  for (j=0; j<16; j++)   
