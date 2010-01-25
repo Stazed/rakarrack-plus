@@ -1,12 +1,6 @@
 
-News on v0.3.0
+News on v0.5.0
 ---------------
-
-Each instance of rakarrack now saves their own preferences, older config are
-deprecated, then maybe you will need to reconfigure.
-
-MIDI support to up 59 effects parameters.
-
-Bug fixed, now you can use as insert on DAWs programas like ardour,
-rosegarden.
-
+New Bank File format, we include a utility "rakconvert" to convert Bank files
+to the new format.
+  
