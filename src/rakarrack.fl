@@ -880,18 +880,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {1351 50 800 600} type Double box DOWN_BOX color 0 resizable size_range {640 480 3200 2400} visible
+Pexitprogram=1;}
+      xywh {1344 43 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -3805,7 +3803,9 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
 tuner_bar->value(-32);
 WNote->copy_label("");
 WRfreq->copy_label("");
-WNfreq->copy_label("");}
+WNfreq->copy_label("");
+ChangeActives();
+TUNER_LABEL->redraw();}
           xywh {526 88 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Progress tuner_bar {
@@ -3846,6 +3846,9 @@ rkr->old_i_sum=-50.0;
 input_vu->value(-50.0);
 output_vu->value(-50.0);
 
+ChangeActives();  
+LABEL_IO->redraw();
+
 if (!o->value())
    {
     if (rkr->Tuner_Bypass)
@@ -3861,9 +3864,9 @@ if (!o->value())
              
   
 rkr->cleanup_efx();
+
   
-  
-}}
+}} selected
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Value_Slider Balance {
@@ -3912,7 +3915,10 @@ rkr->efx_MIDIConverter->panic();
 }
 
 
-rkr->MIDIConverter_Bypass=(int)o->value();}
+rkr->MIDIConverter_Bypass=(int)o->value();
+
+ChangeActives();
+MIDI_LABEL->redraw();}
           xywh {526 148 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Counter Midi_out_Counter {
@@ -4081,7 +4087,7 @@ Analyzer_ON=1;
 }}
           xywh {174 160 340 28} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
         }
-        Fl_Box Analy {selected
+        Fl_Box Analy {
           xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
           class Analyzer
         }
@@ -4877,6 +4883,10 @@ L7->labelcolor(bcolor);
 L8->labelcolor(bcolor);
 L9->labelcolor(bcolor);
 L10->labelcolor(bcolor);
+MIDI_LABEL->labelcolor(bcolor);
+TUNER_LABEL->labelcolor(bcolor);
+LABEL_IO->labelcolor(bcolor);
+
 ChangeActives();
 
 Etit->labelcolor(bcolor);
@@ -4984,7 +4994,7 @@ musdelay_delay2->labelcolor(bcolor);
 gate_preset->labelcolor(bcolor);
 
 
-MIDI_LABEL->labelcolor(bcolor);
+
 Midi_out_Counter->labelcolor(bcolor);
 
 LABEL_IO->labelcolor(bcolor);
@@ -4992,7 +5002,7 @@ LABEL_IO->labelcolor(bcolor);
 Preset_Counter->labelcolor(bcolor);
 PRESETS_LABEL->labelcolor(bcolor);
 
-TUNER_LABEL->labelcolor(bcolor);
+
 WNote->labelcolor(bcolor);
 WRfreq->labelcolor(bcolor);
 WNfreq->labelcolor(bcolor);
@@ -7363,7 +7373,11 @@ if(rkr->active[5]) L6->labelcolor(on); else L6->labelcolor(off);
 if(rkr->active[6]) L7->labelcolor(on); else L7->labelcolor(off);
 if(rkr->active[7]) L8->labelcolor(on); else L8->labelcolor(off);
 if(rkr->active[8]) L9->labelcolor(on); else L9->labelcolor(off);
-if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);} {}
+if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
+
+if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
+if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);} {}
   }
   Function {findpos(int num, int value)} {} {
     code {int i;

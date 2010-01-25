@@ -3423,6 +3423,8 @@ tuner_bar->value(-32);
 WNote->copy_label("");
 WRfreq->copy_label("");
 WNfreq->copy_label("");
+ChangeActives();
+TUNER_LABEL->redraw();
 }
 void RKRGUI::cb_tuner_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_tuner_activar_i(o,v);
@@ -3436,6 +3438,9 @@ rkr->old_v_sum=-50.0;
 rkr->old_i_sum=-50.0;
 input_vu->value(-50.0);
 output_vu->value(-50.0);
+
+ChangeActives();  
+LABEL_IO->redraw();
 
 if (!o->value())
    {
@@ -3452,7 +3457,7 @@ if (!o->value())
              
   
 rkr->cleanup_efx();
-  
+
   
 };
 }
@@ -3493,6 +3498,9 @@ rkr->efx_MIDIConverter->panic();
 
 
 rkr->MIDIConverter_Bypass=(int)o->value();
+
+ChangeActives();
+MIDI_LABEL->redraw();
 }
 void RKRGUI::cb_nidi_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_nidi_activar_i(o,v);
@@ -8676,6 +8684,10 @@ L7->labelcolor(bcolor);
 L8->labelcolor(bcolor);
 L9->labelcolor(bcolor);
 L10->labelcolor(bcolor);
+MIDI_LABEL->labelcolor(bcolor);
+TUNER_LABEL->labelcolor(bcolor);
+LABEL_IO->labelcolor(bcolor);
+
 ChangeActives();
 
 Etit->labelcolor(bcolor);
@@ -8783,7 +8795,7 @@ musdelay_delay2->labelcolor(bcolor);
 gate_preset->labelcolor(bcolor);
 
 
-MIDI_LABEL->labelcolor(bcolor);
+
 Midi_out_Counter->labelcolor(bcolor);
 
 LABEL_IO->labelcolor(bcolor);
@@ -8791,7 +8803,7 @@ LABEL_IO->labelcolor(bcolor);
 Preset_Counter->labelcolor(bcolor);
 PRESETS_LABEL->labelcolor(bcolor);
 
-TUNER_LABEL->labelcolor(bcolor);
+
 WNote->labelcolor(bcolor);
 WRfreq->labelcolor(bcolor);
 WNfreq->labelcolor(bcolor);
@@ -11187,6 +11199,10 @@ if(rkr->active[6]) L7->labelcolor(on); else L7->labelcolor(off);
 if(rkr->active[7]) L8->labelcolor(on); else L8->labelcolor(off);
 if(rkr->active[8]) L9->labelcolor(on); else L9->labelcolor(off);
 if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
+
+if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
+if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
 }
 
 void RKRGUI::findpos(int num, int value) {
