@@ -1,5 +1,6 @@
 datadir = $(prefix)/share/${PACKAGE}
 data_DATA= Default.rkrb \
+	Extra.rkrb \
 	bg1.png \
 	bg_gray_furr.png \
 	bg.png

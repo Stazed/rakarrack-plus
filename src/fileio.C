@@ -848,6 +848,7 @@ RKR::New ()
   Master_Volume = .5f;
   Fraction_Bypass = 1.0f;
   Bypass = 0;
+  memset(lv, 0 , sizeof(lv));
 
   for (j = 0; j < 20; j++)
     {
@@ -959,6 +960,7 @@ RKR::New_Bank ()
       Bank[i].Master_Volume = .5f;
       Bank[i].Balance = 1.0f;
       Bank[i].Bypass = 0;
+      memset(Bank[i].lv , 0 , sizeof(Bank[i].lv));
 
       for (j = 0; j < 20; j++)
 	{

@@ -239,6 +239,8 @@ New_Bank ()
       NewBank[i].Balance = 1.0f;
       NewBank[i].Bypass = 0;
 
+      memset(NewBank[i].lv ,0, sizeof(NewBank[i].lv));
+
       for (j = 0; j < 20; j++)
 	{
 	  for (k = 0; k < 16; k++)
