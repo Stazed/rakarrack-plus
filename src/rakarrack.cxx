@@ -8104,7 +8104,7 @@ R average."));
     Principal->end();
     Principal->resizable(Principal);
   } // Fl_Double_Window* Principal
-  { BankWindow = new Fl_Double_Window(800, 400);
+  { BankWindow = new Fl_Double_Window(800, 600);
     BankWindow->color((Fl_Color)4);
     BankWindow->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
     BankWindow->callback((Fl_Callback*)cb_BankWindow, (void*)(this));
@@ -8123,7 +8123,7 @@ R average."));
       ob->labelsize(18);
       ob->end();
     } // Fl_Group* ob
-    BankWindow->size_range(640, 320, 3200, 1600);
+    BankWindow->size_range(640, 480, 3200, 2400);
     BankWindow->end();
     BankWindow->resizable(BankWindow);
   } // Fl_Double_Window* BankWindow
@@ -9038,7 +9038,7 @@ Principal->resize(x,y,w,h);
 rakarrack.get(rkr->PrefNom("BankWindow X"),x,1);
 rakarrack.get(rkr->PrefNom("BankWindow Y"),y,1);
 rakarrack.get(rkr->PrefNom("BankWindow W"),w,800);
-rakarrack.get(rkr->PrefNom("BankWindow H"),h,400);
+rakarrack.get(rkr->PrefNom("BankWindow H"),h,600);
 
 BankWindow->resize(x,y,w,h);
 
@@ -9630,7 +9630,7 @@ void RKRGUI::make_window_banks() {
 int elw,elh;
 
 elw=176*BankWindow->w()/800;
-elh=24*BankWindow->h()/400;
+elh=32*BankWindow->h()/600;
 
 
 
@@ -9639,7 +9639,7 @@ ob->begin();
 x=40;y=10;
 num=1;
 
-for (i=1;i<13;i++)
+for (i=1;i<16;i++)
 {
 y +=elh+2;
 

@@ -1182,7 +1182,7 @@ Scope_ON=1;
         xywh {555 25 226 65} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
       }
       Fl_Box DESC_L {
-        label {Audio F/X} selected
+        label {Audio F/X}
         xywh {588 64 142 14} labeltype EMBOSSED_LABEL labelfont 1 labelsize 16 labelcolor 7
       }
       Fl_Box Sco {
@@ -4093,7 +4093,7 @@ Analyzer_ON=1;
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1356 179 800 400} type Double color 4 selection_color 7 hide resizable size_range {640 320 3200 1600}
+      xywh {1349 172 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -5233,7 +5233,7 @@ Principal->resize(x,y,w,h);
 rakarrack.get(rkr->PrefNom("BankWindow X"),x,1);
 rakarrack.get(rkr->PrefNom("BankWindow Y"),y,1);
 rakarrack.get(rkr->PrefNom("BankWindow W"),w,800);
-rakarrack.get(rkr->PrefNom("BankWindow H"),h,400);
+rakarrack.get(rkr->PrefNom("BankWindow H"),h,600);
 
 BankWindow->resize(x,y,w,h);
 
@@ -5822,7 +5822,7 @@ Put_Loaded();
 int elw,elh;
 
 elw=176*BankWindow->w()/800;
-elh=24*BankWindow->h()/400;
+elh=32*BankWindow->h()/600;
 
 
 
@@ -5831,7 +5831,7 @@ ob->begin();
 x=40;y=10;
 num=1;
 
-for (i=1;i<13;i++)
+for (i=1;i<16;i++)
 {
 y +=elh+2;
 
@@ -5863,7 +5863,8 @@ ob->end();
 
 made=1;
 
-light_preset(rkr->Selected_Preset);} {}
+light_preset(rkr->Selected_Preset);} {selected
+    }
   }
   Function {reordena()} {} {
     code {int i,j,k,t;

@@ -1,4 +1,22 @@
-==v0.4.2 (  /01/2009) ==
+==v0.5.0 (  /  /2009) ==
+-------------------------------------------------------------------------------
+- Utility to convert Old Bank files (rakconvert).
+- New Bank structure file (60 Presets, up to 50 effects, Midi Learn Data inclosed)
+- Fixed GUI
+
+
+
+
+
+
+
+
+
+
+
+
+
+==v0.4.2 (21/01/2009) ==
 -------------------------------------------------------------------------------
 - Midi Learn
 - WhaWha Improved.
