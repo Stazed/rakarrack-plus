@@ -831,8 +831,9 @@ RKR::New ()
   bzero (Preset_Name, sizeof (Preset_Name));
   bzero (Author, sizeof (Author));
 
-  Input_Gain = .5;
-  Master_Volume = .5;
+  Input_Gain = .5f;
+  Master_Volume = .5f;
+  Fraction_Bypass = 1.0f;
   Bypass = 0;
 
   for (j = 0; j < 20; j++)
@@ -842,8 +843,6 @@ RKR::New ()
 	  lv[j][k] = presets[j][k];
 	}
     }
-
-
 
 
   for (k = 0; k < 16; k++)
@@ -943,8 +942,9 @@ RKR::New_Bank ()
       bzero (Bank[i].Preset_Name, sizeof (Bank[i].Preset_Name));
       bzero (Bank[i].Author, sizeof (Bank[i].Author));
 
-      Bank[i].Input_Gain = .5;
-      Bank[i].Master_Volume = .5;
+      Bank[i].Input_Gain = .5f;
+      Bank[i].Master_Volume = .5f;
+      Bank[i].Balance = 1.0f;
       Bank[i].Bypass = 0;
 
       for (j = 0; j < 20; j++)
@@ -977,9 +977,9 @@ RKR::Bank_to_Preset (int i)
   bzero (Author, sizeof (Author));
   strcpy (Author, Bank[i].Author);
 
-  for (j = 0; j < 20; j++)
+  for (j = 0; j < 50; j++)
     {
-      for (k = 0; k < 16; k++)
+      for (k = 0; k < 19; k++)
 	{
 	  lv[j][k] = Bank[i].lv[j][k];
 	}
@@ -987,8 +987,7 @@ RKR::Bank_to_Preset (int i)
 
 
   for (k = 0; k < 16; k++)
-
-    efx_order[k] = Bank[i].lv[10][k];
+  efx_order[k] = Bank[i].lv[10][k];
 
 
   Reverb_B = Bank[i].lv[0][19];
@@ -1023,6 +1022,7 @@ RKR::Bank_to_Preset (int i)
     {
       Input_Gain = Bank[i].Input_Gain;
       Master_Volume = Bank[i].Master_Volume;
+      Fraction_Bypass = Bank[i].Balance;
     }
 
 
@@ -1041,6 +1041,7 @@ RKR::Preset_to_Bank (int i)
   strcpy (Bank[i].Author, Author);
   Bank[i].Input_Gain = Input_Gain;
   Bank[i].Master_Volume = Master_Volume;
+  Bank[i].Balance = Fraction_Bypass;
 
 
   for (j = 0; j <= 11; j++)
@@ -1098,9 +1099,9 @@ RKR::Preset_to_Bank (int i)
   lv[13][1] = efx_Cabinet->getpar (0);
 
 
-  for (j = 0; j < 20; j++)
+  for (j = 0; j < 50; j++)
     {
-      for (k = 0; k < 16; k++)
+      for (k = 0; k < 19; k++)
 	{
 	  Bank[i].lv[j][k] = lv[j][k];
 	}
@@ -1176,6 +1177,11 @@ for(i=0; i<62; i++)
   sprintf(Bank[i].cInput_Gain, "%f", Bank[i].Input_Gain);
   bzero(Bank[i].cMaster_Volume, sizeof(Bank[i].cMaster_Volume));
   sprintf(Bank[i].cMaster_Volume, "%f", Bank[i].Master_Volume);
+  bzero(Bank[i].cBalance, sizeof(Bank[i].cBalance));
+  sprintf(Bank[i].cBalance, "%f", Bank[i].Balance);
+
+
+
 }  
 
 
@@ -1232,6 +1238,22 @@ for(i=0; i<62; i++)
            }  
  
      } 
+
+   for(j=0; j<128; j++)
+     {
+       for(k=0;k<20;k++)
+           {
+             data = Bank[i].XUserMIDI[j][k];
+             data = SwapFourBytes(data);
+             Bank[i].XUserMIDI[j][k]=data;
+           }  
+ 
+     } 
+
+
+
+
+
 
 }
 
