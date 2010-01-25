@@ -1,6 +1,4 @@
-ui_PROGRAMS = rakconvert
-
-uidir = $prefix/bin
+bin_PROGRAMS = rakconvert
 
 rakconvert_SOURCES = rakconvert.C
 
