@@ -921,8 +921,6 @@ RKR::process_midi_controller_events(int parameter, int value)
 	  Fraction_Bypass = (float) value / 127.0f;
       break; 
 
-    // note, that 14 was chosen in ever so slight accordance with this
-    // table: http://www.midi.org/techspecs/midimessages.php
     case 14:
 	  Input_Gain =
 	    (float) value / 128.0f;
