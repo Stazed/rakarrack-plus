@@ -1957,7 +1957,7 @@ findpos(5,(int)o->value());}
         }
         Fl_Choice chorux_preset {
           label Preset
-          callback {rkr->efx_Chorus->setpreset((unsigned char) o->value());
+          callback {rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -1994,31 +1994,31 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
         Fl_Value_Slider chorus_WD {
           label {Wet/Dry}
-          callback {rkr->efx_Chorus->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Chorus->changepar(0,(int)(o->value()+64));}
           xywh {51 442 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider chorus_pan {
           label Pan
-          callback {rkr->efx_Chorus->changepar(1,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Chorus->changepar(1,(int)(o->value()+64));}
           xywh {51 454 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider chorus_freq {
-          label Freq
-          callback {rkr->efx_Chorus->changepar(2,(unsigned char)o->value());}
-          xywh {51 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          label Tempo
+          callback {rkr->efx_Chorus->changepar(2,(int)o->value());}
+          xywh {51 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 480 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider chorus_rnd {
           label Rnd
-          callback {rkr->efx_Chorus->changepar(3,(unsigned char)o->value());}
+          callback {rkr->efx_Chorus->changepar(3,(int)o->value());}
           xywh {51 478 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice chorus_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Chorus->changepar(4,(unsigned char)o->value())}
+          callback {rkr->efx_Chorus->changepar(4,(int)o->value())}
           xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -2048,36 +2048,36 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
         Fl_Check_Button chorus_subs {
           label Subtract
-          callback {rkr->efx_Chorus->changepar(11,(unsigned char)o->value())}
+          callback {rkr->efx_Chorus->changepar(11,(int)o->value())}
           xywh {37 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider chorus_stdf {
           label {St.df}
-          callback {rkr->efx_Chorus->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Chorus->changepar(5,(int)o->value());}
           xywh {51 528 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider chorus_dpth {
           label Depth
-          callback {rkr->efx_Chorus->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_Chorus->changepar(6,(int)o->value());}
           xywh {51 541 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider chorus_delay {
           label Delay
-          callback {rkr->efx_Chorus->changepar(7,(unsigned char)o->value());}
+          callback {rkr->efx_Chorus->changepar(7,(int)o->value());}
           xywh {51 554 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider chorus_fb {
           label Fb
-          callback {rkr->efx_Chorus->changepar(8,(unsigned char)o->value());}
+          callback {rkr->efx_Chorus->changepar(8,(int)o->value());}
           xywh {51 567 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider chorus_LR {
           label {L/R.Cr}
-          callback {rkr->efx_Chorus->changepar(9,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Chorus->changepar(9,(int)(o->value()+64));}
           xywh {51 581 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
@@ -2095,7 +2095,7 @@ findpos(6,(int)o->value());}
         }
         Fl_Choice phaser_preset {
           label Preset
-          callback {rkr->efx_Phaser->setpreset((unsigned char) o->value());
+          callback {rkr->efx_Phaser->setpreset((int) o->value());
 phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
@@ -2138,31 +2138,31 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
         }
         Fl_Value_Slider phaser_WD {
           label {Wet/Dry}
-          callback {rkr->efx_Phaser->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Phaser->changepar(0,(int)(o->value()+64));}
           xywh {210 442 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider phaser_pan {
           label Pan
-          callback {rkr->efx_Phaser->changepar(1,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Phaser->changepar(1,(int)(o->value()+64));}
           xywh {210 454 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 value 64 textcolor 7
           class SliderW
         }
         Fl_Value_Slider phaser_freq {
-          label Freq
-          callback {rkr->efx_Phaser->changepar(2,(unsigned char)o->value());}
-          xywh {210 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          label Tempo
+          callback {rkr->efx_Phaser->changepar(2,(int)o->value());}
+          xywh {210 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 480 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider phaser_rnd {
           label Rnd
-          callback {rkr->efx_Phaser->changepar(3,(unsigned char)o->value());}
+          callback {rkr->efx_Phaser->changepar(3,(int)o->value());}
           xywh {210 478 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice phaser_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Phaser->changepar(4,(unsigned char)o->value());}
+          callback {rkr->efx_Phaser->changepar(4,(int)o->value());}
           xywh {221 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -2192,41 +2192,41 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
         }
         Fl_Check_Button phaser_subs {
           label Subtract
-          callback {rkr->efx_Phaser->changepar(10,(unsigned char)o->value())}
+          callback {rkr->efx_Phaser->changepar(10,(int)o->value())}
           xywh {201 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider phaser_phase {
           label Phase
-          callback {rkr->efx_Phaser->changepar(11,(unsigned char)o->value());}
+          callback {rkr->efx_Phaser->changepar(11,(int)o->value());}
           xywh {210 523 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider phaser_stdf {
           label {St.df}
-          callback {rkr->efx_Phaser->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Phaser->changepar(5,(int)o->value());}
           xywh {210 534 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider phaser_dpth {
           label Depth
-          callback {rkr->efx_Phaser->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_Phaser->changepar(6,(int)o->value());}
           xywh {210 545 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider phaser_fb {
           label Fb
-          callback {rkr->efx_Phaser->changepar(7,(unsigned char)o->value());}
+          callback {rkr->efx_Phaser->changepar(7,(int)o->value());}
           xywh {210 557 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Counter phaser_stages {
           label Stages
-          callback {rkr->efx_Phaser->changepar(8,(unsigned char)o->value());}
+          callback {rkr->efx_Phaser->changepar(8,(int)o->value());}
           xywh {233 569 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
         }
         Fl_Value_Slider phaser_LR {
           label {L/R.Cr}
-          callback {rkr->efx_Phaser->changepar(9,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Phaser->changepar(9,(int)(o->value()+64));}
           xywh {210 584 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
@@ -2244,7 +2244,7 @@ findpos(7,(int)o->value());}
         }
         Fl_Choice flanger_preset {
           label Preset
-          callback {rkr->efx_Flanger->setpreset((unsigned char)(o->value()+5));
+          callback {rkr->efx_Flanger->setpreset((int)(o->value()+5));
 flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));
@@ -2281,31 +2281,31 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         }
         Fl_Value_Slider flanger_WD {
           label {Wet/Dry}
-          callback {rkr->efx_Flanger->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Flanger->changepar(0,(int)(o->value()+64));}
           xywh {373 442 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider flanger_pan {
           label Pan
-          callback {rkr->efx_Flanger->changepar(1,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Flanger->changepar(1,(int)(o->value()+64));}
           xywh {373 454 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider flanger_freq {
-          label Freq
-          callback {rkr->efx_Flanger->changepar(2,(unsigned char)o->value());}
-          xywh {373 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          label Tempo
+          callback {rkr->efx_Flanger->changepar(2,(int)o->value());}
+          xywh {373 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 480 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider flanger_rnd {
           label Rnd
-          callback {rkr->efx_Flanger->changepar(3,(unsigned char)o->value());}
+          callback {rkr->efx_Flanger->changepar(3,(int)o->value());}
           xywh {373 478 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice flanger_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Flanger->changepar(4,(unsigned char)o->value());}
+          callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
           xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -2335,36 +2335,36 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         }
         Fl_Check_Button flanger_subs {
           label Subtract
-          callback {rkr->efx_Flanger->changepar(11,(unsigned char)o->value());}
+          callback {rkr->efx_Flanger->changepar(11,(int)o->value());}
           xywh {363 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider flanger_stdf {
           label {St.df}
-          callback {rkr->efx_Flanger->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Flanger->changepar(5,(int)o->value());}
           xywh {373 528 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider flanger_dpth {
           label Depth
-          callback {rkr->efx_Flanger->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_Flanger->changepar(6,(int)o->value());}
           xywh {373 541 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider flanger_delay {
           label Delay
-          callback {rkr->efx_Flanger->changepar(7,(unsigned char)o->value());}
+          callback {rkr->efx_Flanger->changepar(7,(int)o->value());}
           xywh {373 554 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider flanger_fb {
           label Fb
-          callback {rkr->efx_Flanger->changepar(8,(unsigned char)o->value());}
+          callback {rkr->efx_Flanger->changepar(8,(int)o->value());}
           xywh {373 567 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider flanger_LR {
           label {L/R.Cr}
-          callback {rkr->efx_Flanger->changepar(9,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Flanger->changepar(9,(int)(o->value()+64));}
           xywh {373 581 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
@@ -2638,7 +2638,7 @@ findpos(10,(int)o->value());}
         Fl_Choice WhaWha_preset {
           label Preset
           callback {rkr->WhaWha_Bypass=0;
-rkr->efx_WhaWha->setpreset((unsigned char) o->value());
+rkr->efx_WhaWha->setpreset((int) o->value());
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
@@ -2675,31 +2675,31 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
         }
         Fl_Value_Slider WhaWha_WD {
           label {Wet/Dry}
-          callback {rkr->efx_WhaWha->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_WhaWha->changepar(0,(int)(o->value()+64));}
           xywh {211 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_pan {
           label Pan
-          callback {rkr->efx_WhaWha->changepar(1,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_WhaWha->changepar(1,(int)(o->value()+64));}
           xywh {211 67 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_freq {
-          label Freq
-          callback {rkr->efx_WhaWha->changepar(2,(unsigned char)o->value());}
-          xywh {211 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          label Tempo
+          callback {rkr->efx_WhaWha->changepar(2,(int)o->value());}
+          xywh {211 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 480 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_rnd {
           label Rnd
-          callback {rkr->efx_WhaWha->changepar(3,(unsigned char)o->value());}
+          callback {rkr->efx_WhaWha->changepar(3,(int)o->value());}
           xywh {211 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice WhaWha_lfotype {
           label {LFO Type}
-          callback {rkr->efx_WhaWha->changepar(4,(unsigned char)o->value())}
+          callback {rkr->efx_WhaWha->changepar(4,(int)o->value())}
           xywh {223 105 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -2729,31 +2729,31 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
         }
         Fl_Value_Slider WhaWha_stdf {
           label {St.df}
-          callback {rkr->efx_WhaWha->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_WhaWha->changepar(5,(int)o->value());}
           xywh {211 143 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_dpth {
           label Depth
-          callback {rkr->efx_WhaWha->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_WhaWha->changepar(6,(int)o->value());}
           xywh {211 155 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_ampsns {
           label {Amp.S.}
-          callback {rkr->efx_WhaWha->changepar(7,(unsigned char)o->value());}
+          callback {rkr->efx_WhaWha->changepar(7,(int)o->value());}
           xywh {211 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_ampsnsinv {
           label {Amp.S.I}
-          callback {rkr->efx_WhaWha->changepar(8,(unsigned char)o->value());}
+          callback {rkr->efx_WhaWha->changepar(8,(int)o->value());}
           xywh {211 179 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_smooth {
           label Smooth
-          callback {rkr->efx_WhaWha->changepar(9,(unsigned char)o->value());}
+          callback {rkr->efx_WhaWha->changepar(9,(int)o->value());}
           xywh {211 191 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -2772,7 +2772,7 @@ findpos(11,(int)o->value());}
         Fl_Choice Alienwah_preset {
           label Preset
           callback {rkr->Alienwah_Bypass=0;
-rkr->efx_Alienwah->setpreset((unsigned char) o->value());
+rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
@@ -2806,31 +2806,31 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
         }
         Fl_Value_Slider Alienwah_WD {
           label {Wet/Dry}
-          callback {rkr->efx_Alienwah->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Alienwah->changepar(0,(int)(o->value()+64));}
           xywh {404 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_pan {
           label Pan
-          callback {rkr->efx_Alienwah->changepar(1,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Alienwah->changepar(1,(int)(o->value()+64));}
           xywh {404 64 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_freq {
-          label Freq
-          callback {rkr->efx_Alienwah->changepar(2,(unsigned char)o->value());}
-          xywh {404 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          label Tempo
+          callback {rkr->efx_Alienwah->changepar(2,(int)o->value());}
+          xywh {404 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 480 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_rnd {
           label Rnd
-          callback {rkr->efx_Alienwah->changepar(3,(unsigned char)o->value());}
+          callback {rkr->efx_Alienwah->changepar(3,(int)o->value());}
           xywh {404 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice Alienwah_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Alienwah->changepar(4,(unsigned char)o->value())}
+          callback {rkr->efx_Alienwah->changepar(4,(int)o->value())}
           xywh {416 102 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -2860,39 +2860,39 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
         }
         Fl_Value_Slider Alienwah_phase {
           label Phase
-          callback {rkr->efx_Alienwah->changepar(10,(unsigned char)o->value());}
+          callback {rkr->efx_Alienwah->changepar(10,(int)o->value());}
           xywh {404 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_stdf {
           label {St.df}
-          callback {rkr->efx_Alienwah->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Alienwah->changepar(5,(int)o->value());}
           xywh {404 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_dpth {
           label Depth
-          callback {rkr->efx_Alienwah->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_Alienwah->changepar(6,(int)o->value());}
           xywh {404 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_delay {
           label Delay
           callback {rkr->Alienwah_Bypass=0;
-rkr->efx_Alienwah->changepar(8,(unsigned char)o->value());
+rkr->efx_Alienwah->changepar(8,(int)o->value());
 if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
           xywh {404 164 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_fb {
           label Fb
-          callback {rkr->efx_Alienwah->changepar(7,(unsigned char)o->value());}
+          callback {rkr->efx_Alienwah->changepar(7,(int)o->value());}
           xywh {404 176 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Alienwah_LR {
           label {L/R.Cr}
-          callback {rkr->efx_Alienwah->changepar(9,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
           xywh {404 189 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
@@ -3015,9 +3015,9 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
           class SliderW
         }
         Fl_Value_Slider pan_freq {
-          label Freq
+          label Tempo
           callback {rkr->efx_Pan->changepar(2,(unsigned char)o->value());}
-          xywh {52 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {52 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 480 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider pan_rnd {
@@ -3669,7 +3669,7 @@ findpos(18,(int)o->value());}
         }
         Fl_Choice aphaser_preset {
           label Preset
-          callback {rkr->efx_APhaser->setpreset((unsigned char) o->value());
+          callback {rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
 aphaser_pan->value(rkr->efx_APhaser->getpar(1));
 aphaser_freq->value(rkr->efx_APhaser->getpar(2));
@@ -3711,13 +3711,13 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
         }
         Fl_Value_Slider aphaser_WD {
           label {Wet/Dry}
-          callback {rkr->efx_APhaser->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_APhaser->changepar(0,(int)(o->value()+64));}
           xywh {369 243 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice aphaser_lfotype {
           label {LFO Type}
-          callback {rkr->efx_APhaser->changepar(4,(unsigned char)o->value());}
+          callback {rkr->efx_APhaser->changepar(4,(int)o->value());}
           xywh {395 257 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -3746,60 +3746,60 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
           }
         }
         Fl_Value_Slider aphaser_freq {
-          label Freq
-          callback {rkr->efx_APhaser->changepar(2,(unsigned char)o->value());}
-          xywh {368 278 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          label Tempo
+          callback {rkr->efx_APhaser->changepar(2,(int)o->value());}
+          xywh {368 278 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 480 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider aphaser_dpth {
           label Width
-          callback {rkr->efx_APhaser->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_APhaser->changepar(6,(int)o->value());}
           xywh {368 302 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider aphaser_phase {
           label Depth
-          callback {rkr->efx_APhaser->changepar(11,(unsigned char)o->value());}
+          callback {rkr->efx_APhaser->changepar(11,(int)o->value());}
           xywh {369 290 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider aphaser_fb {
           label Fb
-          callback {rkr->efx_APhaser->changepar(7,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_APhaser->changepar(7,(int)(o->value()+64));}
           xywh {368 314 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider aphaser_LR {
           label Mismatch
-          callback {rkr->efx_APhaser->changepar(9,(unsigned char)o->value());}
+          callback {rkr->efx_APhaser->changepar(9,(int)o->value());}
           xywh {368 327 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 7 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider aphaser_pan {
           label Distort
-          callback {rkr->efx_APhaser->changepar(1,(unsigned char)o->value());}
+          callback {rkr->efx_APhaser->changepar(1,(int)o->value());}
           xywh {368 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider aphaser_stdf {
           label {St.df}
-          callback {rkr->efx_APhaser->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_APhaser->changepar(5,(int)o->value());}
           xywh {369 350 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Counter aphaser_stages {
           label Stages
-          callback {rkr->efx_APhaser->changepar(8,(unsigned char)o->value());}
+          callback {rkr->efx_APhaser->changepar(8,(int)o->value());}
           xywh {400 367 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
         }
         Fl_Check_Button aphaser_hyper {
           label Hyper
-          callback {rkr->efx_APhaser->changepar(12,(unsigned char)o->value())}
+          callback {rkr->efx_APhaser->changepar(12,(int)o->value())}
           xywh {395 381 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button aphaser_subs {
           label Subtract
-          callback {rkr->efx_APhaser->changepar(10,(unsigned char)o->value())}
+          callback {rkr->efx_APhaser->changepar(10,(int)o->value())} selected
           xywh {330 381 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
@@ -6977,8 +6977,7 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {selected
-    }
+rkr->Mvalue=0;} {}
   }
   Function {ActOnOff()} {} {
     code {switch(rkr->efx_order[rkr->Mnumeff])

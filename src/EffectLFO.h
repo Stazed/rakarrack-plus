@@ -37,10 +37,10 @@ public:
   ~EffectLFO ();
   void effectlfoout (REALTYPE * outl, REALTYPE * outr);
   void updateparams ();
-  unsigned char Pfreq;
-  unsigned char Prandomness;
-  unsigned char PLFOtype;
-  unsigned char Pstereo;	//"64"=0
+  int Pfreq;
+  int Prandomness;
+  int PLFOtype;
+  int Pstereo;	//"64"=0
 private:
     REALTYPE getlfoshape (REALTYPE x);
 
@@ -49,7 +49,7 @@ private:
   REALTYPE ampl1, ampl2, ampr1, ampr2;	//necesar pentru "randomness"
   REALTYPE lfointensity;
   REALTYPE lfornd;
-  unsigned char lfotype;
+  int lfotype;
 };
 
 

@@ -34,12 +34,12 @@ public:
   Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
   ~Phaser ();
   void out (REALTYPE * smpsl, REALTYPE * smpsr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
   void setdryonly ();
-  unsigned char Ppreset;
+  int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
 
@@ -52,23 +52,23 @@ public:
 private:
   //Parametrii Phaser
     EffectLFO lfo;		//lfo-ul Phaser
-  unsigned char Pvolume;
-  unsigned char Ppanning;
-  unsigned char Pdepth;		//the depth of the Phaser
-  unsigned char Pfb;		//feedback
-  unsigned char Plrcross;	//feedback
-  unsigned char Pstages;
-  unsigned char Poutsub;	//if I wish to substract the output instead of the adding it
-  unsigned char Pphase;
+  int Pvolume;
+  int Ppanning;
+  int Pdepth;		//the depth of the Phaser
+  int Pfb;		//feedback
+  int Plrcross;	//feedback
+  int Pstages;
+  int Poutsub;	//if I wish to substract the output instead of the adding it
+  int Pphase;
 
   //Control Parametrii
-  void setvolume (unsigned char Pvolume);
-  void setpanning (unsigned char Ppanning);
-  void setdepth (unsigned char Pdepth);
-  void setfb (unsigned char Pfb);
-  void setlrcross (unsigned char Plrcross);
-  void setstages (unsigned char Pstages);
-  void setphase (unsigned char Pphase);
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setdepth (int Pdepth);
+  void setfb (int Pfb);
+  void setlrcross (int Plrcross);
+  void setstages (int Pstages);
+  void setphase (int Pphase);
 
   //Valorile interne
   REALTYPE panning, fb, depth, lrcross, fbl, fbr, phase;

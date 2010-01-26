@@ -148,7 +148,7 @@ Phaser::cleanup ()
  * Parameter control
  */
 void
-Phaser::setdepth (unsigned char Pdepth)
+Phaser::setdepth (int Pdepth)
 {
   this->Pdepth = Pdepth;
   depth = ((float)Pdepth / 127.0f);
@@ -156,35 +156,35 @@ Phaser::setdepth (unsigned char Pdepth)
 
 
 void
-Phaser::setfb (unsigned char Pfb)
+Phaser::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = ((float)Pfb - 64.0f) / 64.1f;
 };
 
 void
-Phaser::setvolume (unsigned char Pvolume)
+Phaser::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
 };
 
 void
-Phaser::setpanning (unsigned char Ppanning)
+Phaser::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + .5f)/ 127.0f;
 };
 
 void
-Phaser::setlrcross (unsigned char Plrcross)
+Phaser::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float)Plrcross / 127.0f;
 };
 
 void
-Phaser::setstages (unsigned char Pstages)
+Phaser::setstages (int Pstages)
 {
   if (oldl != NULL)
     delete[]oldl;
@@ -199,7 +199,7 @@ Phaser::setstages (unsigned char Pstages)
 };
 
 void
-Phaser::setphase (unsigned char Pphase)
+Phaser::setphase (int Pphase)
 {
   this->Pphase = Pphase;
   phase = ((float)Pphase / 127.0f);
@@ -207,11 +207,11 @@ Phaser::setphase (unsigned char Pphase)
 
 
 void
-Phaser::setpreset (unsigned char npreset)
+Phaser::setpreset (int npreset)
 {
   const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 6;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Phaser1
     {64, 64, 36, 0, 0, 64, 110, 64, 1, 0, 0, 20},
     //Phaser2
@@ -234,7 +234,7 @@ Phaser::setpreset (unsigned char npreset)
 
 
 void
-Phaser::changepar (int npar, unsigned char value)
+Phaser::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -283,7 +283,7 @@ Phaser::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 Phaser::getpar (int npar)
 {
   switch (npar)

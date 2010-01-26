@@ -122,7 +122,7 @@ DynamicFilter::cleanup ()
  */
 
 void
-DynamicFilter::setdepth (unsigned char Pdepth)
+DynamicFilter::setdepth (int Pdepth)
 {
   this->Pdepth = Pdepth;
   depth = powf (((float)Pdepth / 127.0f), 2.0f);
@@ -130,7 +130,7 @@ DynamicFilter::setdepth (unsigned char Pdepth)
 
 
 void
-DynamicFilter::setvolume (unsigned char Pvolume)
+DynamicFilter::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
@@ -138,7 +138,7 @@ DynamicFilter::setvolume (unsigned char Pvolume)
 };
 
 void
-DynamicFilter::setpanning (unsigned char Pp)
+DynamicFilter::setpanning (int Pp)
 {
   Ppanning = Pp;
   panning = ((float)Ppanning + .5f) / 127.0f;
@@ -146,7 +146,7 @@ DynamicFilter::setpanning (unsigned char Pp)
 
 
 void
-DynamicFilter::setampsns (unsigned char Pp)
+DynamicFilter::setampsns (int Pp)
 {
   Pampsns = Pp;
   ampsns = powf ((float)Pampsns / 127.0f, 2.5f) * 100.0f;
@@ -169,11 +169,11 @@ DynamicFilter::reinitfilter ()
 };
 
 void
-DynamicFilter::setpreset (unsigned char npreset)
+DynamicFilter::setpreset (int npreset)
 {
   const int PRESET_SIZE = 10;
   const int NUM_PRESETS = 5;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //WahWah
     {0, 64, 80, 0, 0, 64, 70, 90, 0, 60},
     //AutoWah
@@ -287,7 +287,7 @@ DynamicFilter::setpreset (unsigned char npreset)
 
 
 void
-DynamicFilter::changepar (int npar, unsigned char value)
+DynamicFilter::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -330,7 +330,7 @@ DynamicFilter::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 DynamicFilter::getpar (int npar)
 {
   switch (npar)

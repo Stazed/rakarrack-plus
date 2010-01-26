@@ -1779,7 +1779,7 @@ void RKRGUI::cb_chorus_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_chorux_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Chorus->setpreset((unsigned char) o->value());
+  rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -1806,35 +1806,35 @@ Fl_Menu_Item RKRGUI::menu_chorux_preset[] = {
 };
 
 void RKRGUI::cb_chorus_WD_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Chorus->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_chorus_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_WD_i(o,v);
 }
 
 void RKRGUI::cb_chorus_pan_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Chorus->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_chorus_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_pan_i(o,v);
 }
 
 void RKRGUI::cb_chorus_freq_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(2,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_chorus_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_freq_i(o,v);
 }
 
 void RKRGUI::cb_chorus_rnd_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(3,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_chorus_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_rnd_i(o,v);
 }
 
 void RKRGUI::cb_chorus_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Chorus->changepar(4,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_chorus_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_lfotype_i(o,v);
@@ -1851,42 +1851,42 @@ Fl_Menu_Item RKRGUI::menu_chorus_lfotype[] = {
 };
 
 void RKRGUI::cb_chorus_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Chorus->changepar(11,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(11,(int)o->value());
 }
 void RKRGUI::cb_chorus_subs(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_subs_i(o,v);
 }
 
 void RKRGUI::cb_chorus_stdf_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(5,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_chorus_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_stdf_i(o,v);
 }
 
 void RKRGUI::cb_chorus_dpth_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(6,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_chorus_dpth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_dpth_i(o,v);
 }
 
 void RKRGUI::cb_chorus_delay_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(7,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_chorus_delay(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_delay_i(o,v);
 }
 
 void RKRGUI::cb_chorus_fb_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(8,(unsigned char)o->value());
+  rkr->efx_Chorus->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_chorus_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_fb_i(o,v);
 }
 
 void RKRGUI::cb_chorus_LR_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(9,(unsigned char)(o->value()+64));
+  rkr->efx_Chorus->changepar(9,(int)(o->value()+64));
 }
 void RKRGUI::cb_chorus_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_LR_i(o,v);
@@ -1903,7 +1903,7 @@ void RKRGUI::cb_phaser_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_phaser_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Phaser->setpreset((unsigned char) o->value());
+  rkr->efx_Phaser->setpreset((int) o->value());
 phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
@@ -1933,35 +1933,35 @@ Fl_Menu_Item RKRGUI::menu_phaser_preset[] = {
 };
 
 void RKRGUI::cb_phaser_WD_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Phaser->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_phaser_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_WD_i(o,v);
 }
 
 void RKRGUI::cb_phaser_pan_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Phaser->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_phaser_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_pan_i(o,v);
 }
 
 void RKRGUI::cb_phaser_freq_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(2,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_phaser_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_freq_i(o,v);
 }
 
 void RKRGUI::cb_phaser_rnd_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(3,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_phaser_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_rnd_i(o,v);
 }
 
 void RKRGUI::cb_phaser_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Phaser->changepar(4,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_phaser_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_lfotype_i(o,v);
@@ -1978,49 +1978,49 @@ Fl_Menu_Item RKRGUI::menu_phaser_lfotype[] = {
 };
 
 void RKRGUI::cb_phaser_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Phaser->changepar(10,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(10,(int)o->value());
 }
 void RKRGUI::cb_phaser_subs(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_subs_i(o,v);
 }
 
 void RKRGUI::cb_phaser_phase_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(11,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(11,(int)o->value());
 }
 void RKRGUI::cb_phaser_phase(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_phase_i(o,v);
 }
 
 void RKRGUI::cb_phaser_stdf_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(5,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_phaser_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_stdf_i(o,v);
 }
 
 void RKRGUI::cb_phaser_dpth_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(6,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_phaser_dpth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_dpth_i(o,v);
 }
 
 void RKRGUI::cb_phaser_fb_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(7,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_phaser_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_fb_i(o,v);
 }
 
 void RKRGUI::cb_phaser_stages_i(Fl_Counter* o, void*) {
-  rkr->efx_Phaser->changepar(8,(unsigned char)o->value());
+  rkr->efx_Phaser->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_phaser_stages(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_stages_i(o,v);
 }
 
 void RKRGUI::cb_phaser_LR_i(SliderW* o, void*) {
-  rkr->efx_Phaser->changepar(9,(unsigned char)(o->value()+64));
+  rkr->efx_Phaser->changepar(9,(int)(o->value()+64));
 }
 void RKRGUI::cb_phaser_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_LR_i(o,v);
@@ -2037,7 +2037,7 @@ void RKRGUI::cb_flanger_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_flanger_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Flanger->setpreset((unsigned char)(o->value()+5));
+  rkr->efx_Flanger->setpreset((int)(o->value()+5));
 flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));
@@ -2064,35 +2064,35 @@ Fl_Menu_Item RKRGUI::menu_flanger_preset[] = {
 };
 
 void RKRGUI::cb_flanger_WD_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Flanger->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_flanger_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_WD_i(o,v);
 }
 
 void RKRGUI::cb_flanger_pan_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Flanger->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_flanger_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_pan_i(o,v);
 }
 
 void RKRGUI::cb_flanger_freq_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(2,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_flanger_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_freq_i(o,v);
 }
 
 void RKRGUI::cb_flanger_rnd_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(3,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_flanger_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_rnd_i(o,v);
 }
 
 void RKRGUI::cb_flanger_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Flanger->changepar(4,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_flanger_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_lfotype_i(o,v);
@@ -2109,42 +2109,42 @@ Fl_Menu_Item RKRGUI::menu_flanger_lfotype[] = {
 };
 
 void RKRGUI::cb_flanger_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Flanger->changepar(11,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(11,(int)o->value());
 }
 void RKRGUI::cb_flanger_subs(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_subs_i(o,v);
 }
 
 void RKRGUI::cb_flanger_stdf_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(5,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_flanger_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_stdf_i(o,v);
 }
 
 void RKRGUI::cb_flanger_dpth_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(6,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_flanger_dpth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_dpth_i(o,v);
 }
 
 void RKRGUI::cb_flanger_delay_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(7,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_flanger_delay(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_delay_i(o,v);
 }
 
 void RKRGUI::cb_flanger_fb_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(8,(unsigned char)o->value());
+  rkr->efx_Flanger->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_flanger_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_fb_i(o,v);
 }
 
 void RKRGUI::cb_flanger_LR_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(9,(unsigned char)(o->value()+64));
+  rkr->efx_Flanger->changepar(9,(int)(o->value()+64));
 }
 void RKRGUI::cb_flanger_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_LR_i(o,v);
@@ -2399,7 +2399,7 @@ void RKRGUI::cb_WhaWha_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_WhaWha_preset_i(Fl_Choice* o, void*) {
   rkr->WhaWha_Bypass=0;
-rkr->efx_WhaWha->setpreset((unsigned char) o->value());
+rkr->efx_WhaWha->setpreset((int) o->value());
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
@@ -2426,35 +2426,35 @@ Fl_Menu_Item RKRGUI::menu_WhaWha_preset[] = {
 };
 
 void RKRGUI::cb_WhaWha_WD_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_WhaWha->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_WhaWha_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_WD_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_pan_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_WhaWha->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_WhaWha_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_pan_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_freq_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(2,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_freq_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_rnd_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(3,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_rnd_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_WhaWha->changepar(4,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_lfotype_i(o,v);
@@ -2471,35 +2471,35 @@ Fl_Menu_Item RKRGUI::menu_WhaWha_lfotype[] = {
 };
 
 void RKRGUI::cb_WhaWha_stdf_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(5,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_stdf_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_dpth_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(6,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_dpth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_dpth_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_ampsns_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(7,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_ampsns(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_ampsns_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_ampsnsinv_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(8,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_ampsnsinv(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_ampsnsinv_i(o,v);
 }
 
 void RKRGUI::cb_WhaWha_smooth_i(SliderW* o, void*) {
-  rkr->efx_WhaWha->changepar(9,(unsigned char)o->value());
+  rkr->efx_WhaWha->changepar(9,(int)o->value());
 }
 void RKRGUI::cb_WhaWha_smooth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_smooth_i(o,v);
@@ -2517,7 +2517,7 @@ void RKRGUI::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_Alienwah_preset_i(Fl_Choice* o, void*) {
   rkr->Alienwah_Bypass=0;
-rkr->efx_Alienwah->setpreset((unsigned char) o->value());
+rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
@@ -2544,35 +2544,35 @@ Fl_Menu_Item RKRGUI::menu_Alienwah_preset[] = {
 };
 
 void RKRGUI::cb_Alienwah_WD_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Alienwah->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_Alienwah_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_WD_i(o,v);
 }
 
 void RKRGUI::cb_Alienwah_pan_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Alienwah->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_Alienwah_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_pan_i(o,v);
 }
 
 void RKRGUI::cb_Alienwah_freq_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(2,(unsigned char)o->value());
+  rkr->efx_Alienwah->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_Alienwah_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_freq_i(o,v);
 }
 
 void RKRGUI::cb_Alienwah_rnd_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(3,(unsigned char)o->value());
+  rkr->efx_Alienwah->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_Alienwah_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_rnd_i(o,v);
 }
 
 void RKRGUI::cb_Alienwah_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Alienwah->changepar(4,(unsigned char)o->value());
+  rkr->efx_Alienwah->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_Alienwah_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_lfotype_i(o,v);
@@ -2589,21 +2589,21 @@ Fl_Menu_Item RKRGUI::menu_Alienwah_lfotype[] = {
 };
 
 void RKRGUI::cb_Alienwah_phase_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(10,(unsigned char)o->value());
+  rkr->efx_Alienwah->changepar(10,(int)o->value());
 }
 void RKRGUI::cb_Alienwah_phase(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_phase_i(o,v);
 }
 
 void RKRGUI::cb_Alienwah_stdf_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(5,(unsigned char)o->value());
+  rkr->efx_Alienwah->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_Alienwah_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_stdf_i(o,v);
 }
 
 void RKRGUI::cb_Alienwah_dpth_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(6,(unsigned char)o->value());
+  rkr->efx_Alienwah->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_Alienwah_dpth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_dpth_i(o,v);
@@ -2611,7 +2611,7 @@ void RKRGUI::cb_Alienwah_dpth(SliderW* o, void* v) {
 
 void RKRGUI::cb_Alienwah_delay_i(SliderW* o, void*) {
   rkr->Alienwah_Bypass=0;
-rkr->efx_Alienwah->changepar(8,(unsigned char)o->value());
+rkr->efx_Alienwah->changepar(8,(int)o->value());
 if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;
 }
 void RKRGUI::cb_Alienwah_delay(SliderW* o, void* v) {
@@ -2619,14 +2619,14 @@ void RKRGUI::cb_Alienwah_delay(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_Alienwah_fb_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(7,(unsigned char)o->value());
+  rkr->efx_Alienwah->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_Alienwah_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_fb_i(o,v);
 }
 
 void RKRGUI::cb_Alienwah_LR_i(SliderW* o, void*) {
-  rkr->efx_Alienwah->changepar(9,(unsigned char)(o->value()+64));
+  rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));
 }
 void RKRGUI::cb_Alienwah_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_LR_i(o,v);
@@ -3295,7 +3295,7 @@ void RKRGUI::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_aphaser_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_APhaser->setpreset((unsigned char) o->value());
+  rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
 aphaser_pan->value(rkr->efx_APhaser->getpar(1));
 aphaser_freq->value(rkr->efx_APhaser->getpar(2));
@@ -3324,14 +3324,14 @@ Fl_Menu_Item RKRGUI::menu_aphaser_preset[] = {
 };
 
 void RKRGUI::cb_aphaser_WD_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_APhaser->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_aphaser_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_WD_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_APhaser->changepar(4,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_aphaser_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_lfotype_i(o,v);
@@ -3348,70 +3348,70 @@ Fl_Menu_Item RKRGUI::menu_aphaser_lfotype[] = {
 };
 
 void RKRGUI::cb_aphaser_freq_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(2,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_aphaser_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_freq_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_dpth_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(6,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_aphaser_dpth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_dpth_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_phase_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(11,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(11,(int)o->value());
 }
 void RKRGUI::cb_aphaser_phase(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_phase_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_fb_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(7,(unsigned char)(o->value()+64));
+  rkr->efx_APhaser->changepar(7,(int)(o->value()+64));
 }
 void RKRGUI::cb_aphaser_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_fb_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_LR_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(9,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(9,(int)o->value());
 }
 void RKRGUI::cb_aphaser_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_LR_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_pan_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(1,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(1,(int)o->value());
 }
 void RKRGUI::cb_aphaser_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_pan_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_stdf_i(SliderW* o, void*) {
-  rkr->efx_APhaser->changepar(5,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_aphaser_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_stdf_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_stages_i(Fl_Counter* o, void*) {
-  rkr->efx_APhaser->changepar(8,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_aphaser_stages(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_stages_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_hyper_i(Fl_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(12,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(12,(int)o->value());
 }
 void RKRGUI::cb_aphaser_hyper(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_hyper_i(o,v);
 }
 
 void RKRGUI::cb_aphaser_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(10,(unsigned char)o->value());
+  rkr->efx_APhaser->changepar(10,(int)o->value());
 }
 void RKRGUI::cb_aphaser_subs(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_subs_i(o,v);
@@ -5364,7 +5364,7 @@ R average."));
         chorus_pan->align(FL_ALIGN_LEFT);
         chorus_pan->when(FL_WHEN_CHANGED);
       } // SliderW* chorus_pan
-      { chorus_freq = new SliderW(51, 466, 100, 10, gettext("Freq"));
+      { chorus_freq = new SliderW(51, 466, 100, 10, gettext("Tempo"));
         chorus_freq->type(5);
         chorus_freq->box(FL_FLAT_BOX);
         chorus_freq->color((Fl_Color)178);
@@ -5373,7 +5373,8 @@ R average."));
         chorus_freq->labelfont(0);
         chorus_freq->labelsize(10);
         chorus_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        chorus_freq->maximum(127);
+        chorus_freq->minimum(10);
+        chorus_freq->maximum(480);
         chorus_freq->step(1);
         chorus_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorus_freq->callback((Fl_Callback*)cb_chorus_freq);
@@ -5554,7 +5555,7 @@ R average."));
         phaser_pan->align(FL_ALIGN_LEFT);
         phaser_pan->when(FL_WHEN_CHANGED);
       } // SliderW* phaser_pan
-      { phaser_freq = new SliderW(210, 466, 100, 10, gettext("Freq"));
+      { phaser_freq = new SliderW(210, 466, 100, 10, gettext("Tempo"));
         phaser_freq->type(5);
         phaser_freq->box(FL_FLAT_BOX);
         phaser_freq->color((Fl_Color)178);
@@ -5563,7 +5564,8 @@ R average."));
         phaser_freq->labelfont(0);
         phaser_freq->labelsize(10);
         phaser_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        phaser_freq->maximum(127);
+        phaser_freq->minimum(10);
+        phaser_freq->maximum(480);
         phaser_freq->step(1);
         phaser_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_freq->callback((Fl_Callback*)cb_phaser_freq);
@@ -5756,7 +5758,7 @@ R average."));
         flanger_pan->align(FL_ALIGN_LEFT);
         flanger_pan->when(FL_WHEN_CHANGED);
       } // SliderW* flanger_pan
-      { flanger_freq = new SliderW(373, 466, 100, 10, gettext("Freq"));
+      { flanger_freq = new SliderW(373, 466, 100, 10, gettext("Tempo"));
         flanger_freq->type(5);
         flanger_freq->box(FL_FLAT_BOX);
         flanger_freq->color((Fl_Color)178);
@@ -5765,7 +5767,8 @@ R average."));
         flanger_freq->labelfont(0);
         flanger_freq->labelsize(10);
         flanger_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        flanger_freq->maximum(127);
+        flanger_freq->minimum(10);
+        flanger_freq->maximum(480);
         flanger_freq->step(1);
         flanger_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_freq->callback((Fl_Callback*)cb_flanger_freq);
@@ -6331,7 +6334,7 @@ R average."));
         WhaWha_pan->align(FL_ALIGN_LEFT);
         WhaWha_pan->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_pan
-      { WhaWha_freq = new SliderW(211, 79, 100, 10, gettext("Freq"));
+      { WhaWha_freq = new SliderW(211, 79, 100, 10, gettext("Tempo"));
         WhaWha_freq->type(5);
         WhaWha_freq->box(FL_FLAT_BOX);
         WhaWha_freq->color((Fl_Color)178);
@@ -6340,7 +6343,8 @@ R average."));
         WhaWha_freq->labelfont(0);
         WhaWha_freq->labelsize(10);
         WhaWha_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        WhaWha_freq->maximum(127);
+        WhaWha_freq->minimum(10);
+        WhaWha_freq->maximum(480);
         WhaWha_freq->step(1);
         WhaWha_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_freq->callback((Fl_Callback*)cb_WhaWha_freq);
@@ -6514,7 +6518,7 @@ R average."));
         Alienwah_pan->align(FL_ALIGN_LEFT);
         Alienwah_pan->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_pan
-      { Alienwah_freq = new SliderW(404, 76, 100, 10, gettext("Freq"));
+      { Alienwah_freq = new SliderW(404, 76, 100, 10, gettext("Tempo"));
         Alienwah_freq->type(5);
         Alienwah_freq->box(FL_FLAT_BOX);
         Alienwah_freq->color((Fl_Color)178);
@@ -6523,7 +6527,8 @@ R average."));
         Alienwah_freq->labelfont(0);
         Alienwah_freq->labelsize(10);
         Alienwah_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Alienwah_freq->maximum(127);
+        Alienwah_freq->minimum(10);
+        Alienwah_freq->maximum(480);
         Alienwah_freq->step(1);
         Alienwah_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_freq->callback((Fl_Callback*)cb_Alienwah_freq);
@@ -6765,7 +6770,7 @@ R average."));
         pan_pan->align(FL_ALIGN_LEFT);
         pan_pan->when(FL_WHEN_CHANGED);
       } // SliderW* pan_pan
-      { pan_freq = new SliderW(52, 285, 100, 10, gettext("Freq"));
+      { pan_freq = new SliderW(52, 285, 100, 10, gettext("Tempo"));
         pan_freq->type(5);
         pan_freq->box(FL_FLAT_BOX);
         pan_freq->color((Fl_Color)178);
@@ -6774,7 +6779,8 @@ R average."));
         pan_freq->labelfont(0);
         pan_freq->labelsize(10);
         pan_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        pan_freq->maximum(127);
+        pan_freq->minimum(10);
+        pan_freq->maximum(480);
         pan_freq->step(1);
         pan_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_freq->callback((Fl_Callback*)cb_pan_freq);
@@ -7658,7 +7664,7 @@ R average."));
         aphaser_lfotype->callback((Fl_Callback*)cb_aphaser_lfotype);
         aphaser_lfotype->menu(menu_aphaser_lfotype);
       } // Fl_Choice* aphaser_lfotype
-      { aphaser_freq = new SliderW(368, 278, 100, 10, gettext("Freq"));
+      { aphaser_freq = new SliderW(368, 278, 100, 10, gettext("Tempo"));
         aphaser_freq->type(5);
         aphaser_freq->box(FL_FLAT_BOX);
         aphaser_freq->color((Fl_Color)178);
@@ -7667,7 +7673,8 @@ R average."));
         aphaser_freq->labelfont(0);
         aphaser_freq->labelsize(10);
         aphaser_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        aphaser_freq->maximum(127);
+        aphaser_freq->minimum(10);
+        aphaser_freq->maximum(480);
         aphaser_freq->step(1);
         aphaser_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_freq->callback((Fl_Callback*)cb_aphaser_freq);

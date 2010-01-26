@@ -133,14 +133,14 @@ Alienwah::cleanup ()
  */
 
 void
-Alienwah::setdepth (unsigned char Pdepth)
+Alienwah::setdepth (int Pdepth)
 {
   this->Pdepth = Pdepth;
   depth = ((float)Pdepth / 127.0f);
 };
 
 void
-Alienwah::setfb (unsigned char Pfb)
+Alienwah::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = fabsf (((float)Pfb - 64.0f) / 64.1f);
@@ -152,7 +152,7 @@ Alienwah::setfb (unsigned char Pfb)
 };
 
 void
-Alienwah::setvolume (unsigned char Pvolume)
+Alienwah::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
@@ -160,28 +160,28 @@ Alienwah::setvolume (unsigned char Pvolume)
 };
 
 void
-Alienwah::setpanning (unsigned char Ppanning)
+Alienwah::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + .5f)/ 127.0f;
 };
 
 void
-Alienwah::setlrcross (unsigned char Plrcross)
+Alienwah::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float)Plrcross / 127.0f;
 };
 
 void
-Alienwah::setphase (unsigned char Pphase)
+Alienwah::setphase (int Pphase)
 {
   this->Pphase = Pphase;
   phase = ((float)Pphase - 64.0f) / 64.0f * PI;
 };
 
 void
-Alienwah::setdelay (unsigned char Pdelay)
+Alienwah::setdelay (int Pdelay)
 {
   if (oldl != NULL)
     delete[]oldl;
@@ -196,11 +196,11 @@ Alienwah::setdelay (unsigned char Pdelay)
 };
 
 void
-Alienwah::setpreset (unsigned char npreset)
+Alienwah::setpreset (int npreset)
 {
   const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 4;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //AlienWah1
     {64, 64, 70, 0, 0, 62, 60, 105, 25, 0, 64},
     //AlienWah2
@@ -220,7 +220,7 @@ Alienwah::setpreset (unsigned char npreset)
 
 
 void
-Alienwah::changepar (int npar, unsigned char value)
+Alienwah::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -264,7 +264,7 @@ Alienwah::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 Alienwah::getpar (int npar)
 {
   switch (npar)

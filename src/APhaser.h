@@ -37,11 +37,11 @@ public:
   Analog_Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
   ~Analog_Phaser ();
   void out (REALTYPE * smpsl, REALTYPE * smpsr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
-  unsigned char Ppreset;
+  int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
   REALTYPE outvolume;
@@ -49,25 +49,25 @@ public:
 private:
   //Phaser parameters
     EffectLFO lfo;		//Phaser modulator
-  unsigned char Pvolume;        //Used in Process.C to set wet/dry mix
-  unsigned char Pdistortion;    //Model distortion added by FET element
-  unsigned char Pwidth;		//Phaser width (LFO amplitude)
-  unsigned char Pfb;		//feedback
-  unsigned char Poffset;	//Model mismatch between variable resistors
-  unsigned char Pstages;	//Number of first-order All-Pass stages
-  unsigned char Poutsub;	//if I wish to subtract the output instead of the adding it
-  unsigned char Phyper;		//lfo^2 -- converts tri into hyper-sine
-  unsigned char Pdepth;         //Depth of phaser sweep
-  unsigned char Pbarber;         //Enable barber pole phasing
+  int Pvolume;        //Used in Process.C to set wet/dry mix
+  int Pdistortion;    //Model distortion added by FET element
+  int Pwidth;		//Phaser width (LFO amplitude)
+  int Pfb;		//feedback
+  int Poffset;	//Model mismatch between variable resistors
+  int Pstages;	//Number of first-order All-Pass stages
+  int Poutsub;	//if I wish to subtract the output instead of the adding it
+  int Phyper;		//lfo^2 -- converts tri into hyper-sine
+  int Pdepth;         //Depth of phaser sweep
+  int Pbarber;         //Enable barber pole phasing
 
   //Control parameters
-  void setvolume (unsigned char Pvolume);
-  void setdistortion (unsigned char Pdistortion);
-  void setwidth (unsigned char Pwidth);
-  void setfb (unsigned char Pfb);
-  void setoffset (unsigned char Poffset);
-  void setstages (unsigned char Pstages);
-  void setdepth (unsigned char Pdepth);
+  void setvolume (int Pvolume);
+  void setdistortion (int Pdistortion);
+  void setwidth (int Pwidth);
+  void setfb (int Pfb);
+  void setoffset (int Poffset);
+  void setstages (int Pstages);
+  void setdepth (int Pdepth);
 
   //Internal Variables
   bool barber;			//Barber pole phasing flag

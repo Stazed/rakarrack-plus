@@ -59,8 +59,8 @@ EffectLFO::~EffectLFO ()
 void
 EffectLFO::updateparams ()
 {
-  REALTYPE lfofreq = (powf (2.0f, (float)Pfreq / 127.0f * 10.0f) - 1.0f) * 0.03f;
-  incx = fabsf (lfofreq) * (REALTYPE) PERIOD / (REALTYPE) SAMPLE_RATE;
+    incx = 60.0f / (float)Pfreq * (float) PERIOD / (float) SAMPLE_RATE;
+
   if (incx > 0.49999999)
     incx = 0.499999999f;		//Limit the Frequency
 

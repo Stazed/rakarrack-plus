@@ -653,11 +653,11 @@ RKR::Actualizar_Audio ()
     efx_Echo->changepar (i, (unsigned char)lv[1][i]);
     efx_Echo->changepar (7, (unsigned char)lv[1][8]);
   for (i = 0; i <= 11; i++)
-    efx_Chorus->changepar (i, (unsigned char)lv[2][i]);
+    efx_Chorus->changepar (i, lv[2][i]);
   for (i = 0; i <= 11; i++)
-    efx_Flanger->changepar (i, (unsigned char)lv[3][i]);
+    efx_Flanger->changepar (i, lv[3][i]);
   for (i = 0; i <= 11; i++)
-    efx_Phaser->changepar (i, (unsigned char)lv[4][i]);
+    efx_Phaser->changepar (i,lv[4][i]);
   for (i = 0; i <= 10; i++)
     efx_Overdrive->changepar (i, (unsigned char)lv[5][i]);
   for (i = 0; i <= 12; i++)
@@ -666,11 +666,11 @@ RKR::Actualizar_Audio ()
     efx_Compressor->Compressor_Change (i + 1, lv[9][i]);
   efx_WhaWha->setpreset (lv[11][10]);
   for (i = 0; i <= 9; i++)
-    efx_WhaWha->changepar (i, (unsigned char)lv[11][i]);
+    efx_WhaWha->changepar (i, lv[11][i]);
   for (i = 0; i <= 10; i++)
-    efx_Alienwah->changepar (i, (unsigned char)lv[12][i]);
+    efx_Alienwah->changepar (i, lv[12][i]);
   for (i = 0; i <= 7; i++)
-    efx_Pan->changepar (i, (unsigned char)lv[14][i]);
+    efx_Pan->changepar (i, lv[14][i]);
   for (i = 0; i <= 10; i++)
     efx_Har->changepar (i, (unsigned char)lv[15][i]);
   for (i = 0; i <= 12; i++)
@@ -680,7 +680,7 @@ RKR::Actualizar_Audio ()
   for (i = 0; i <= 11; i++)
     efx_NewDist->changepar (i, (unsigned char)lv[18][i]);
   for (i = 0; i <= 12; i++)
-    efx_APhaser->changepar (i, (unsigned char) lv[19][i]);
+    efx_APhaser->changepar (i, lv[19][i]);
 
 
   for (i = 0; i < 19; i++)

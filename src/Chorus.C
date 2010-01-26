@@ -167,53 +167,53 @@ Chorus::cleanup ()
  * Parameter control
  */
 void
-Chorus::setdepth (unsigned char Pdepth)
+Chorus::setdepth (int Pdepth)
 {
   this->Pdepth = Pdepth;
   depth = (powf (8.0f, ((float)Pdepth / 127.0f) * 2.0f) - 1.0f) / 1000.0f;	//seconds
 };
 
 void
-Chorus::setdelay (unsigned char Pdelay)
+Chorus::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
   delay = (powf (10.0f, ((float)Pdelay / 127.0f) * 2.0f) - 1.0f) / 1000.0f;	//seconds
 };
 
 void
-Chorus::setfb (unsigned char Pfb)
+Chorus::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = ((float)Pfb - 64.0f) / 64.1f;
 };
 
 void
-Chorus::setvolume (unsigned char Pvolume)
+Chorus::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
 };
 
 void
-Chorus::setpanning (unsigned char Ppanning)
+Chorus::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning +.5f) / 127.0f;
 };
 
 void
-Chorus::setlrcross (unsigned char Plrcross)
+Chorus::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float)Plrcross / 127.0f;
 };
 
 void
-Chorus::setpreset (unsigned char npreset)
+Chorus::setpreset (int npreset)
 {
   const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 10;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Chorus1
     {64, 64, 50, 0, 0, 90, 40, 85, 64, 119, 0, 0},
     //Chorus2
@@ -245,7 +245,7 @@ Chorus::setpreset (unsigned char npreset)
 
 
 void
-Chorus::changepar (int npar, unsigned char value)
+Chorus::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -296,7 +296,7 @@ Chorus::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 Chorus::getpar (int npar)
 {
   switch (npar)

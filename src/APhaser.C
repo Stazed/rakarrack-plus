@@ -237,7 +237,7 @@ Analog_Phaser::cleanup ()
  * Parameter control
  */
 void
-Analog_Phaser::setwidth (unsigned char Pwidth)
+Analog_Phaser::setwidth (int Pwidth)
 {
   this->Pwidth = Pwidth;
   width = ((float)Pwidth / 127.0f);
@@ -245,14 +245,14 @@ Analog_Phaser::setwidth (unsigned char Pwidth)
 
 
 void
-Analog_Phaser::setfb (unsigned char Pfb)
+Analog_Phaser::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = (float) (Pfb - 64) / 64.2f;
 };
 
 void
-Analog_Phaser::setvolume (unsigned char Pvolume)
+Analog_Phaser::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   // outvolume is needed in calling program
@@ -260,21 +260,21 @@ Analog_Phaser::setvolume (unsigned char Pvolume)
 };
 
 void
-Analog_Phaser::setdistortion (unsigned char Pdistortion)
+Analog_Phaser::setdistortion (int Pdistortion)
 {
   this->Pdistortion = Pdistortion;
   distortion = (float)Pdistortion / 127.0f;
 };
 
 void
-Analog_Phaser::setoffset (unsigned char Poffset)
+Analog_Phaser::setoffset (int Poffset)
 {
   this->Poffset = Poffset;  
   offsetpct = (float)Poffset / 127.0f;
 };
 
 void
-Analog_Phaser::setstages (unsigned char Pstages)
+Analog_Phaser::setstages (int Pstages)
 {
 
   if (lxn1 != NULL)
@@ -305,7 +305,7 @@ Analog_Phaser::setstages (unsigned char Pstages)
 };
 
 void
-Analog_Phaser::setdepth (unsigned char Pdepth)
+Analog_Phaser::setdepth (int Pdepth)
 {
   this->Pdepth = Pdepth;
   depth = (float)(Pdepth - 64) / 127.0f;  //Pdepth input should be 0-127.  depth shall range 0-0.5 since we don't need to shift the full spectrum.
@@ -313,11 +313,11 @@ Analog_Phaser::setdepth (unsigned char Pdepth)
 
 
 void
-Analog_Phaser::setpreset (unsigned char npreset)
+Analog_Phaser::setpreset (int npreset)
 {
   const int PRESET_SIZE = 13;
   const int NUM_PRESETS = 6;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Phaser1
     {64, 20, 40, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1},
     //Phaser2
@@ -340,7 +340,7 @@ Analog_Phaser::setpreset (unsigned char npreset)
 
 
 void
-Analog_Phaser::changepar (int npar, unsigned char value)
+Analog_Phaser::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -396,7 +396,7 @@ Analog_Phaser::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 Analog_Phaser::getpar (int npar)
 {
   switch (npar)

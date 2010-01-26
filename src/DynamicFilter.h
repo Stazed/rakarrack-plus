@@ -36,15 +36,15 @@ public:
   ~DynamicFilter ();
   void out (REALTYPE * smpsl, REALTYPE * smpsr);
 
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
 
 //      void setdryonly();
 
 
-  unsigned char Ppreset;
+  int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
   REALTYPE outvolume;
@@ -56,18 +56,18 @@ public:
 private:
   //Parametrii DynamicFilter
     EffectLFO lfo;		//lfo-ul DynamicFilter
-  unsigned char Pvolume;
-  unsigned char Ppanning;
-  unsigned char Pdepth;		//the depth of the lfo of the DynamicFilter
-  unsigned char Pampsns;	//how the filter varies according to the input amplitude
-  unsigned char Pampsnsinv;	//if the filter freq is lowered if the input amplitude rises
-  unsigned char Pampsmooth;	//how smooth the input amplitude changes the filter
+  int Pvolume;
+  int Ppanning;
+  int Pdepth;		//the depth of the lfo of the DynamicFilter
+  int Pampsns;	//how the filter varies according to the input amplitude
+  int Pampsnsinv;	//if the filter freq is lowered if the input amplitude rises
+  int Pampsmooth;	//how smooth the input amplitude changes the filter
 
   //Control Parametrii
-  void setvolume (unsigned char Pvolume);
-  void setpanning (unsigned char Ppanning);
-  void setdepth (unsigned char Pdepth);
-  void setampsns (unsigned char Pampsns);
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setdepth (int Pdepth);
+  void setampsns (int Pampsns);
 
   void reinitfilter ();
 

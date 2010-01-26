@@ -35,13 +35,13 @@ public:
   Chorus (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
   ~Chorus ();
   void out (REALTYPE * smpsl, REALTYPE * smpsr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
 
 
-  unsigned char Ppreset;
+  int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
 
@@ -53,23 +53,23 @@ public:
 private:
   //Parametrii Chorus
     EffectLFO lfo;		//lfo-ul chorus
-  unsigned char Pvolume;
-  unsigned char Ppanning;
-  unsigned char Pdepth;		//the depth of the Chorus(ms)
-  unsigned char Pdelay;		//the delay (ms)
-  unsigned char Pfb;		//feedback
-  unsigned char Plrcross;	//feedback
-  unsigned char Pflangemode;	//how the LFO is scaled, to result chorus or flange
-  unsigned char Poutsub;	//if I wish to substract the output instead of the adding it
+  int Pvolume;
+  int Ppanning;
+  int Pdepth;		//the depth of the Chorus(ms)
+  int Pdelay;		//the delay (ms)
+  int Pfb;		//feedback
+  int Plrcross;	//feedback
+  int Pflangemode;	//how the LFO is scaled, to result chorus or flange
+  int Poutsub;	//if I wish to substract the output instead of the adding it
 
 
   //Control Parametrii
-  void setvolume (unsigned char Pvolume);
-  void setpanning (unsigned char Ppanning);
-  void setdepth (unsigned char Pdepth);
-  void setdelay (unsigned char Pdelay);
-  void setfb (unsigned char Pfb);
-  void setlrcross (unsigned char Plrcross);
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setdepth (int Pdepth);
+  void setdelay (int Pdelay);
+  void setfb (int Pfb);
+  void setlrcross (int Plrcross);
 
   //Valorile interne
   REALTYPE depth, delay, fb, lrcross, panning;
