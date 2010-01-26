@@ -1,5 +1,6 @@
 ==v0.5.0 (  /  /2009) ==
 -------------------------------------------------------------------------------
+- Changed LFO Freq for Tempo, good to Synchronize with sequencers. drum machines etc.
 - Utility to convert Old Bank files (rakconvert).
 - New Bank structure file (60 Presets, up to 50 effects, Midi Learn Data inclosed)
 - Fixed GUI

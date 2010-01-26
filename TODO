@@ -1,5 +1,4 @@
 - Arrange memory allocations of delay buffers in effects.
-- Change EffectLFO  Tempo no Freq
 - Complete list of assignable effect parameters to MIDI learn.
 
 DSP TODO:
