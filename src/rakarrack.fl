@@ -877,7 +877,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -886,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1344 43 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1334 59 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -1532,7 +1533,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
-          callback {rkr->efx_Distorsion->changepar(5,(unsigned char)o->value());} open
+          callback {rkr->efx_Distorsion->changepar(5,(unsigned char)o->value());}
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -1714,7 +1715,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
         Fl_Choice ovrd_tipo {
           label Type
-          callback {rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());} open
+          callback {rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());}
           xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
         } {
           MenuItem {} {
@@ -3769,7 +3770,7 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label {M.Saw} selected
+            label {M.Saw}
             xywh {40 40 36 21} labelsize 9
           }
         }
@@ -3829,6 +3830,114 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
           label Subtract
           callback {rkr->efx_APhaser->changepar(10,(int)o->value())}
           xywh {330 381 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+      }
+      Fl_Group VALVE {
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button valve_activar {
+          label On
+          callback {rkr->Valve_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Valve->cleanup();
+findpos(19,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice valve_preset {
+          label Preset
+          callback {rkr->efx_Valve->setpreset((int)(o->value()+2));
+valve_WD->value(rkr->efx_Distorsion->getpar(0)-64);
+valve_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
+valve_drive->value(rkr->efx_Distorsion->getpar(3));
+valve_level->value(rkr->efx_Distorsion->getpar(4));
+valve_neg->value(rkr->efx_Distorsion->getpar(5));
+valve_st->value(rkr->efx_Distorsion->getpar(8));
+valve_pan->value(rkr->efx_Distorsion->getpar(1)-64);
+valve_pf->value(rkr->efx_Distorsion->getpar(9));
+valve_lpf->value(rkr->efx_Distorsion->getpar(6));
+valve_hpf->value(rkr->efx_Distorsion->getpar(7));
+valve_Q->value(rkr->efx_Distorsion->getpar(10));}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+        } {
+          MenuItem {} {
+            label {Distorsion 1}
+            xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Distorsion 2}
+            xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Distorsion 3}
+            xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Guitar Amp}
+            xywh {42 42 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider valve_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Valve->changepar(0,(int)(o->value()+64));}
+          xywh {373 242 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_LRc {
+          label {L/R.Cr}
+          callback {rkr->efx_Valve->changepar(2,(int)(o->value()+64));}
+          xywh {373 255 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_drive {
+          label Drive
+          callback {rkr->efx_Valve->changepar(3,(int)o->value());}
+          xywh {373 268 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_Q {
+          label {Drive 2}
+          callback {rkr->efx_Valve->changepar(10,(int)o->value());}
+          xywh {373 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_level {
+          label Level
+          callback {rkr->efx_Valve->changepar(4,(int)o->value());}
+          xywh {373 301 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button valve_pf {
+          label {Pre Filter}
+          callback {rkr->efx_Valve->changepar(9,(int)o->value());}
+          xywh {325 315 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button valve_st {
+          label Stereo
+          callback {rkr->efx_Valve->changepar(8,(int)o->value());}
+          xywh {385 315 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button valve_neg {
+          label {Neg.}
+          callback {rkr->efx_Valve->changepar(5,(int)o->value());}
+          xywh {434 315 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Value_Slider valve_pan {
+          label Pan
+          callback {rkr->efx_Valve->changepar(1,(int)(o->value()+64));}
+          xywh {373 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_lpf {
+          label LPF
+          callback {rkr->efx_Valve->changepar(6,(int)o->value());}
+          xywh {373 364 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_hpf {
+          label HPF
+          callback {rkr->efx_Valve->changepar(7,(int)o->value());}
+          xywh {373 376 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
         }
       }
       Fl_Group Tuner {
@@ -4090,7 +4199,7 @@ Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
 
 t=1;
 
-for (i=0; i<19;i++)
+for (i=0; i<rkr->NumEffects;i++)
 {
     k=0;
  for (j=0;j<10;j++)
@@ -4112,7 +4221,7 @@ Order_Bro->select(1);
 Avail_Bro->select(1);
 
 Order->show();
-put_icon(Order);}
+put_icon(Order);} selected
           xywh {255 132 195 25} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
@@ -4968,6 +5077,12 @@ newdist_neg->labelcolor(bcolor);
 newdist_pf->labelcolor(bcolor);
 
 
+valve_preset->labelcolor(bcolor);
+valve_st->labelcolor(bcolor);
+valve_neg->labelcolor(bcolor);
+valve_pf->labelcolor(bcolor);
+
+
 ovrd_preset->labelcolor(bcolor);
 ovrd_tipo->labelcolor(bcolor);
 ovrd_st->labelcolor(bcolor);
@@ -5132,6 +5247,7 @@ har_activar->color(bcolor);
 musdelay_activar->color(bcolor);
 gate_activar->color(bcolor);
 newdist_activar->color(bcolor);
+valve_activar->color(bcolor);
 Cabinet_activar->color(bcolor);
 tuner_activar->color(bcolor);
 Preset_Counter->color(bcolor);
@@ -5235,6 +5351,10 @@ ovrd_pf->selection_color(bcolor);
 dist_neg->selection_color(bcolor);
 dist_st->selection_color(bcolor);
 dist_pf->selection_color(bcolor);
+valve_neg->selection_color(bcolor);
+valve_st->selection_color(bcolor);
+valve_pf->selection_color(bcolor);
+
 Auto_Output->selection_color(bcolor);
 Stereo->selection_color(bcolor);
  
@@ -5967,7 +6087,7 @@ y[9]=E10->y();
 
 t=1;
 
-for (i=0; i<19;i++)
+for (i=0; i<rkr->NumEffects;i++)
 {
 
  k=0;
@@ -6052,6 +6172,9 @@ for (i=1; i<=9; i++)
         break;
         case 18:
         APHASER->hide();
+        break;
+        case 19:
+        VALVE->hide();
         break;
       }
       
@@ -6255,6 +6378,14 @@ switch ( rkr->efx_order[i])
        if(rkr->APhaser_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
  
+     case 19:
+       VALVE->position(x[i],y[i]);
+       valve_activar->shortcut(s[i]);
+       VALVE->show();
+       if(rkr->Valve_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;
+
+
  }
  
  }
@@ -6522,7 +6653,7 @@ rkr->RC->cc=1;} {}
 
 int i;
 
-for (i=1; i<142; i++)
+for (i=1; i<148; i++)
 
 {
 
@@ -6998,6 +7129,34 @@ switch (i)
      eq_10->value(rkr->efx_EQ1->getpar(57)-64);
      eq_10->redraw();
      break;
+     case 142:
+     compress_ATime->value(rkr->efx_Compressor->getpar(4));
+     compress_ATime->redraw();
+     break;
+     case 143:
+     compress_RTime->value(rkr->efx_Compressor->getpar(5));
+     compress_RTime->redraw();
+     break;
+     case 144:
+     compress_Ratio->value(rkr->efx_Compressor->getpar(2));
+     compress_Ratio->redraw();
+     break;
+     case 145:
+     compress_Knee->value(rkr->efx_Compressor->getpar(7));
+     compress_Knee->redraw();
+     break;
+     case 146:
+     compress_threshold->value(rkr->efx_Compressor->getpar(1));
+     compress_threshold->redraw();
+     break;
+     case 147:
+     compress_output->value(rkr->efx_Compressor->getpar(3));
+     compress_output->redraw();
+     break;
+    
+
+
+
 
 }
 
@@ -7141,6 +7300,7 @@ MUSDELAY->image(InOut->image());
 GATE->image(InOut->image());
 NEWDIST->image(InOut->image());
 APHASER->image(InOut->image());
+VALVE->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());

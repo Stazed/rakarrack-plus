@@ -62,6 +62,8 @@ rakarrack_SOURCES = main.C \
 	NewDist.C \
 	APhaser.C \
 	APhaser.h \
+	Valve.C \
+	Valve.h \
 	MIDIConverter.C \
 	MIDIConverter.h
 	

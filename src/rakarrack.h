@@ -1385,6 +1385,73 @@ private:
   void cb_aphaser_subs_i(Fl_Check_Button*, void*);
   static void cb_aphaser_subs(Fl_Check_Button*, void*);
 public:
+  Fl_Group *VALVE;
+  Fl_Light_Button *valve_activar;
+private:
+  void cb_valve_activar_i(Fl_Light_Button*, void*);
+  static void cb_valve_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *valve_preset;
+private:
+  void cb_valve_preset_i(Fl_Choice*, void*);
+  static void cb_valve_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_valve_preset[];
+public:
+  SliderW *valve_WD;
+private:
+  void cb_valve_WD_i(SliderW*, void*);
+  static void cb_valve_WD(SliderW*, void*);
+public:
+  SliderW *valve_LRc;
+private:
+  void cb_valve_LRc_i(SliderW*, void*);
+  static void cb_valve_LRc(SliderW*, void*);
+public:
+  SliderW *valve_drive;
+private:
+  void cb_valve_drive_i(SliderW*, void*);
+  static void cb_valve_drive(SliderW*, void*);
+public:
+  SliderW *valve_Q;
+private:
+  void cb_valve_Q_i(SliderW*, void*);
+  static void cb_valve_Q(SliderW*, void*);
+public:
+  SliderW *valve_level;
+private:
+  void cb_valve_level_i(SliderW*, void*);
+  static void cb_valve_level(SliderW*, void*);
+public:
+  Fl_Check_Button *valve_pf;
+private:
+  void cb_valve_pf_i(Fl_Check_Button*, void*);
+  static void cb_valve_pf(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *valve_st;
+private:
+  void cb_valve_st_i(Fl_Check_Button*, void*);
+  static void cb_valve_st(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *valve_neg;
+private:
+  void cb_valve_neg_i(Fl_Check_Button*, void*);
+  static void cb_valve_neg(Fl_Check_Button*, void*);
+public:
+  SliderW *valve_pan;
+private:
+  void cb_valve_pan_i(SliderW*, void*);
+  static void cb_valve_pan(SliderW*, void*);
+public:
+  SliderW *valve_lpf;
+private:
+  void cb_valve_lpf_i(SliderW*, void*);
+  static void cb_valve_lpf(SliderW*, void*);
+public:
+  SliderW *valve_hpf;
+private:
+  void cb_valve_hpf_i(SliderW*, void*);
+  static void cb_valve_hpf(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

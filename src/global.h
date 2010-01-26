@@ -59,11 +59,13 @@ void deleteFFTFREQS(FFTFREQS *f);
 #include "RecChord.h"
 #include "NewDist.h"
 #include "APhaser.h"
+#include "Valve.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f
 #define LOG_10 2.302585f
 #define LOG_2  0.693147f
+#define LN2R 1.442695041f
 #define AMPLITUDE_INTERPOLATION_THRESHOLD 0.0001f
 #define FF_MAX_VOWELS 6
 #define FF_MAX_FORMANTS 12
@@ -80,7 +82,6 @@ void deleteFFTFREQS(FFTFREQS *f);
 #define POLY 8
 #define DENORMAL_GUARD 1e-18f	// Make it smaller until CPU problem re-appears
 #define SwapFourBytes(data) ( (((data) >> 24) & 0x000000ff) | (((data) >> 8) & 0x0000ff00) | (((data) << 8) & 0x00ff0000) | (((data) << 24) & 0xff000000) )
-
 
 
 extern int Pexitprogram, preset;
@@ -179,6 +180,7 @@ public:
   class Recognize *RecNote;
   class RecChord *RC;
   class Compressor *efx_FLimiter;
+  class Valve *efx_Valve;
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
@@ -208,6 +210,7 @@ public:
   int Gate_Bypass;
   int NewDist_Bypass;
   int APhaser_Bypass;
+  int Valve_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -228,6 +231,7 @@ public:
   int MusDelay_B;
   int Gate_B;
   int NewDist_B;
+  int Valve_B;
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];
@@ -265,6 +269,7 @@ public:
 
   int MIDIway;
   int NumParams;
+  int NumEffects;
   int relfontsize;
   int resolution;
   int sh;
@@ -317,7 +322,7 @@ public:
   struct Effects_Names
   {
     char Nom[32];
-  } efx_names[24];
+  } efx_names[50];
 
   struct Effects_Params
   {

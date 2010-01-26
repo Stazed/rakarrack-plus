@@ -164,7 +164,7 @@ Pan::setpreset (unsigned char npreset)
   const int NUM_PRESETS = 2;
   unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
     //AutoPan
-    {64, 64, 50, 0, 0, 0, 0, 1, 0},
+    {64, 64, 140, 0, 0, 0, 0, 1, 0},
     //Extra Stereo
     {64, 64, 45, 0, 0, 0, 10, 0, 1}
   };
