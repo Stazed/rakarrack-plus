@@ -280,13 +280,13 @@ waveshapesmps (int n, REALTYPE * smps, unsigned char type,
       break;                                                               
 
        case 19:
-      ws =  ws * ws * ws * D_PI + 0.0001f;
+      ws =  ws * D_PI + 0.0001f;
        if (ws < 1.57f)
 	tmpv = sinf (ws);
       else
 	tmpv = 1.0f;
        for (i = 0; i < n; i++)
-       smps[i]=sinf(ws * smps[i] + sinf(ws * 1.5 * smps[i])/tmpv);  
+       smps[i]=sinf(ws * smps[i] + sinf(ws * smps[i])/tmpv);  
       break;                                                               
         
         

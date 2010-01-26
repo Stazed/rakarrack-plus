@@ -2045,6 +2045,10 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
             label {M. Sqare}
             xywh {0 0 36 21} labelsize 9
           }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {0 0 36 21} labelsize 9
+          }
         }
         Fl_Check_Button chorus_subs {
           label Subtract
@@ -2189,6 +2193,10 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
             label {M.Square}
             xywh {0 0 36 21} labelsize 9
           }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {10 10 36 21} labelsize 9
+          }
         }
         Fl_Check_Button phaser_subs {
           label Subtract
@@ -2331,6 +2339,10 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
           MenuItem {} {
             label {M. Square}
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {5 5 36 21} labelsize 9
           }
         }
         Fl_Check_Button flanger_subs {
@@ -2726,6 +2738,10 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
             label {M.Square}
             xywh {0 0 36 21} labelsize 9
           }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {10 10 36 21} labelsize 9
+          }
         }
         Fl_Value_Slider WhaWha_stdf {
           label {St.df}
@@ -2856,6 +2872,10 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
           MenuItem {} {
             label {M.Square}
             xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {20 20 36 21} labelsize 9
           }
         }
         Fl_Value_Slider Alienwah_phase {
@@ -3054,6 +3074,10 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
           MenuItem {} {
             label {M.Square}
             xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {30 30 36 21} labelsize 9
           }
         }
         Fl_Value_Slider pan_stdf {
@@ -3744,10 +3768,14 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
             label {M.Square}
             xywh {0 0 36 21} labelsize 9
           }
+          MenuItem {} {
+            label {M.Saw} selected
+            xywh {40 40 36 21} labelsize 9
+          }
         }
         Fl_Value_Slider aphaser_freq {
           label Tempo
-          callback {rkr->efx_APhaser->changepar(2,(int)o->value());} selected
+          callback {rkr->efx_APhaser->changepar(2,(int)o->value());}
           xywh {368 278 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
           class SliderW
         }

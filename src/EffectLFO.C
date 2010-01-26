@@ -71,7 +71,7 @@ EffectLFO::updateparams ()
   else if (lfornd > 1.0)
     lfornd = 1.0;
 
-  if (PLFOtype > 5)
+  if (PLFOtype > 6)
     PLFOtype = 0;		//this has to be updated if more lfo's are added
   lfotype = PLFOtype;
 
@@ -111,6 +111,13 @@ REALTYPE EffectLFO::getlfoshape (REALTYPE x)
        tmpv = x * D_PI;
        out=sinf(tmpv+sinf(2.0f*tmpv));  
      break; 
+    case 6:                     // Modulated Saw 
+       tmpv = x * D_PI;
+       out=sinf(tmpv+sinf(tmpv));  
+     break; 
+        
+
+
       //more to be added here; also ::updateparams() need to be updated (to allow more lfotypes)
     default:
       out = cosf (x * 2.0f * PI);	//EffectLFO_SINE

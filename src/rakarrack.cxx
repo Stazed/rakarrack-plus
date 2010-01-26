@@ -1847,6 +1847,7 @@ Fl_Menu_Item RKRGUI::menu_chorus_lfotype[] = {
  {gettext("Ramp Down"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("ZigZag"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M. Sqare"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -1974,6 +1975,7 @@ Fl_Menu_Item RKRGUI::menu_phaser_lfotype[] = {
  {gettext("Ramp Down"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Zig Zag"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -2105,6 +2107,7 @@ Fl_Menu_Item RKRGUI::menu_flanger_lfotype[] = {
  {gettext("Ramp Down"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Zig Zag"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M. Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -2467,6 +2470,7 @@ Fl_Menu_Item RKRGUI::menu_WhaWha_lfotype[] = {
  {gettext("Ramp Down"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Zig Zag"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -2585,6 +2589,7 @@ Fl_Menu_Item RKRGUI::menu_Alienwah_lfotype[] = {
  {gettext("Ramp Down"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Zig Zag"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -2750,6 +2755,7 @@ Fl_Menu_Item RKRGUI::menu_pan_lfotype[] = {
  {gettext("Ramp Down"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Zig Zag"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -3344,6 +3350,7 @@ Fl_Menu_Item RKRGUI::menu_aphaser_lfotype[] = {
  {gettext("Ramp Down"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("Zig Zag"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {gettext("M.Square"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {gettext("M.Saw"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
