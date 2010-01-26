@@ -140,6 +140,7 @@ RKR::RKR ()
   efx_NewDist = new NewDist(efxoutl, efxoutr);
   efx_FLimiter = new Compressor (efxoutl, efxoutr);
   efx_Valve = new Valve(efxoutl, efxoutr);   
+//  efx_DFlange = new Dflange(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);

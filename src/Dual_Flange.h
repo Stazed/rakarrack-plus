@@ -27,7 +27,7 @@
 
 #include "global.h"
 
-#define  MAX_DELAY 0.05f	// Number of Seconds  - 50ms corresponds to fdepth = 20 (Hz)
+#define  FMAX_DELAY 0.05f	// Number of Seconds  - 50ms corresponds to fdepth = 20 (Hz)
 class Dflange
 {
 public:
@@ -55,7 +55,7 @@ private:
   int Poffset;		// Offset of notch 1 to notch 2.  Range 0 to 100 (percent)
   int Pfb;		//Feedback parameter.  Range 0 to 100 (percent)
   int Phidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
-  int Psubtract		//Subtract wet/dry instead of add.  Nonzero is true
+  int Psubtract;		//Subtract wet/dry instead of add.  Nonzero is true
   int Pzero;		//Enable through-zero flanging
 
   REALTYPE fwetdry;		//Wet/Dry mix.  Range -100 to 100 (percent)
@@ -66,7 +66,7 @@ private:
   REALTYPE foffset;		// Offset of notch 1 to notch 2.  Range 0 to 100 (percent)
   REALTYPE ffb;			//Feedback parameter.  Range 0 to 100 (percent)
   REALTYPE fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
-  REALTYPE fsubtract		//Subtract wet/dry instead of add.  Nonzero is true
+  REALTYPE fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
   REALTYPE fzero;		//Enable through-zero flanging
 
   //Internally used variables
