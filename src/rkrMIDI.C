@@ -489,8 +489,8 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
 void
 RKR::process_midi_controller_events(int parameter, int value)
 {
-  
-
+   
+  int i;
   // for real parameter changes, flag need for a GUI update
   if(parameter > 0)
    {
@@ -927,7 +927,55 @@ RKR::process_midi_controller_events(int parameter, int value)
 	  calculavol (1);
       break; 
 
+    case 130:
+          efx_EQ1->changepar(0,(unsigned char) value); 
+       break;   
+    
+    case 131:       
+          for(i=0;i<10;i++) efx_EQ1->changepar(i*5+13,(unsigned char) value);
+       break;
+       
+    case 132:   
+          efx_EQ1->changepar(12,(unsigned char) value); 
+       break;   
+     
+    case 133:   
+          efx_EQ1->changepar(5+12,(unsigned char) value); 
+       break;   
+       
+    case 134:   
+          efx_EQ1->changepar(10+12,(unsigned char) value); 
+       break;   
+       
+    case 135:   
+          efx_EQ1->changepar(15+12,(unsigned char) value); 
+       break;   
 
+    case 136:   
+          efx_EQ1->changepar(20+12,(unsigned char) value); 
+       break;   
+
+    case 137:   
+          efx_EQ1->changepar(25+12,(unsigned char) value); 
+       break;   
+
+    case 138:   
+          efx_EQ1->changepar(30+12,(unsigned char) value); 
+       break;   
+
+    case 139:   
+          efx_EQ1->changepar(35+12,(unsigned char) value); 
+       break;   
+
+    case 140:   
+          efx_EQ1->changepar(40+12,(unsigned char) value); 
+       break;   
+
+    case 141:   
+          efx_EQ1->changepar(45+12,(unsigned char) value); 
+       break;   
+       
+       
    } 
       
     

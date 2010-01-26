@@ -10307,7 +10307,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<128; i++)
+for (i=1; i<142; i++)
 
 {
 
@@ -10735,7 +10735,54 @@ switch (i)
      dist_oct->value(rkr->efx_NewDist->getpar(12));
      dist_oct->redraw();
      break;
-
+     case 130:
+     eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
+     eq_Gain->redraw();
+     break;
+     case 131:
+     eq_Q->value(rkr->efx_EQ1->getpar(13)-64);
+     eq_Q->redraw();
+     break;
+     case 132:
+     eq_1->value(rkr->efx_EQ1->getpar(12)-64);
+     eq_1->redraw();
+     break;
+     case 133:
+     eq_2->value(rkr->efx_EQ1->getpar(17)-64);
+     eq_2->redraw();
+     break;
+     case 134:
+     eq_3->value(rkr->efx_EQ1->getpar(22)-64);
+     eq_3->redraw();
+     break;
+     case 135:
+     eq_4->value(rkr->efx_EQ1->getpar(27)-64);
+     eq_4->redraw();
+     break;
+     case 136:
+     eq_5->value(rkr->efx_EQ1->getpar(32)-64);
+     eq_5->redraw();
+     break;
+     case 137:
+     eq_6->value(rkr->efx_EQ1->getpar(37)-64);
+     eq_6->redraw();
+     break;
+     case 138:
+     eq_7->value(rkr->efx_EQ1->getpar(42)-64);
+     eq_7->redraw();
+     break;
+     case 139:
+     eq_8->value(rkr->efx_EQ1->getpar(47)-64);
+     eq_8->redraw();
+     break;
+     case 140:
+     eq_9->value(rkr->efx_EQ1->getpar(52)-64);
+     eq_9->redraw();
+     break;
+     case 141:
+     eq_10->value(rkr->efx_EQ1->getpar(57)-64);
+     eq_10->redraw();
+     break;
 
 }
 

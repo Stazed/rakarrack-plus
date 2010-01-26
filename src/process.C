@@ -171,7 +171,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 104;
+  NumParams= 116;
 
 {
    static const char *los_params[] = 
@@ -194,7 +194,8 @@ RKR::RKR ()
       "AutoPan/Extra Stereo Rnd","WahWah Amp S.","WahWah Amp S.I.","WahWah Smooth","Phaser Phase","Alienwah Phase",
       "Analog Phaser Wet-Dry","Analog Phaser Distortion","Analog Phaser Freq","Analog Phaser Depth","Analog Phaser Width",
       "Analog Phaser Feedback","Analog Phaser Mismatch","Analog Phaser St.df","Derelict Wet-Dry","Derelict Dist Pan",
-      "Derelict Dist LR Cross","Volume","Balance","Input", "Multi On/Off"
+      "Derelict Dist LR Cross","Volume","Balance","Input", "Multi On/Off", "EQ Gain", "EQ Q", "EQ 31 Hz", "EQ 63 Hz",
+      "EQ 125 Hz", "EQ 250 Hz", "EQ 500 Hz", "EQ 1 Khz", "EQ 2 Khz", "EQ 4 Khz", "EQ 8 Khz", "EQ 16 Khz"
 
       };
          for(i=0; i<NumParams; i++)
@@ -205,7 +206,7 @@ RKR::RKR ()
 unsigned char Atos[] = { 1,2,3,4,5,6,8,9,20,21,22,23,24,25,26,27,28,29,30,31,46,47,48,49,50,51,52,53,54,55,56,
          57,58,59,60,61,62,63,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,
          92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,117,118,119,120,
-         121,122,123,124,125,126,127,7,12,14,116};
+         121,122,123,124,125,126,127,7,12,14,116,130,131,132,133,134,135,136,137,138,139,140,141};
           
          for(i=0;i<NumParams; i++) efx_params[i].Ato=(int)Atos[i];
 

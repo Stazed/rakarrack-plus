@@ -252,7 +252,7 @@ public:
   int Pcin;
 
   // bank of flags telling GUI which midi controlled items to update
-  int Mcontrol[128];
+  int Mcontrol[256];
   // flag telling GUI that Mcontrol has at least one set flag
   int RControl;
   int ControlGet;
