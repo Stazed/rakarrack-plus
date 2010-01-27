@@ -57,6 +57,8 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Pprefiltering = 0;
   q = 0.0f;
   dist = 0.0f;
+  setlpf(127);
+  sethpf(1);
 
   setpreset (Ppreset);
   cleanup ();
@@ -151,6 +153,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
               otml = 0.999f * otml + fx - itml;
               itml = fx;
+              if(otml>0.0) otml*=(fabsf(q)+1.0)*.5;
               efxoutl[i]= otml;
              }
         } 
@@ -162,6 +165,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otml = 0.999f * otml + fx - itml;
                itml = fx;
+               if(otml>0.0) otml*=(fabsf(q)+1.0)*.5;
                efxoutl[i]= otml;
               }
         }
@@ -178,6 +182,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
               otmr = 0.999f * otmr + fx - itmr;
               itmr = fx;
+              if(otmr>0.0) otmr*=(fabsf(q)+1.0)*.5;
               efxoutr[i]= otmr;
              }
         } 
@@ -189,6 +194,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otmr = 0.999f * otmr + fx - itmr;
                itmr = fx;
+               if(otmr> 0.0) otmr*=(fabsf(q)+1.0)*.5;
                efxoutr[i]= otmr;
               }
         }
@@ -281,9 +287,9 @@ Valve::setpreset (int npreset)
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Overdrive 1
-    {84, 64, 35, 56, 40, 0, 0, 96, 0, 0, 0},
+    {0, 64, 64, 64, 64, 0, 127, 0, 0, 0, 0},
     //Overdrive 2
-    {85, 64, 35, 29, 45, 1, 0, 127, 0, 0, 0},
+    {0, 64, 35, 29, 45, 1, 0, 127, 0, 0, 0},
     //Valve 1
     {0, 64, 0, 87, 14, 6, 0, 80, 30, 0, 1},
     //Valve 2
@@ -320,7 +326,7 @@ Valve::changepar (int npar, int value)
       break;
     case 3:
       Pdrive = value;
-      dist = (float) Pdrive / 127.0f * 40.0f + .1f;
+      dist = (float) Pdrive / 127.0f * 80.0f + .5f;
       break;
     case 4:
       Plevel = value;
@@ -346,7 +352,7 @@ Valve::changepar (int npar, int value)
       break;
     case 10:
       Q_q = value;
-      q = (float)Q_q / 127.0f - 0.999f;
+      q = (float)Q_q /127.0f - .999;
       break;       
 
     };

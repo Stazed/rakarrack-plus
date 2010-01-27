@@ -3435,18 +3435,18 @@ void RKRGUI::cb_valve_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_valve_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Valve->setpreset((int)(o->value()+2));
-valve_WD->value(rkr->efx_Distorsion->getpar(0)-64);
-valve_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
-valve_drive->value(rkr->efx_Distorsion->getpar(3));
-valve_level->value(rkr->efx_Distorsion->getpar(4));
-valve_neg->value(rkr->efx_Distorsion->getpar(5));
-valve_st->value(rkr->efx_Distorsion->getpar(8));
-valve_pan->value(rkr->efx_Distorsion->getpar(1)-64);
-valve_pf->value(rkr->efx_Distorsion->getpar(9));
-valve_lpf->value(rkr->efx_Distorsion->getpar(6));
-valve_hpf->value(rkr->efx_Distorsion->getpar(7));
-valve_Q->value(rkr->efx_Distorsion->getpar(10));
+  rkr->efx_Valve->setpreset((int)o->value());
+valve_WD->value(rkr->efx_Valve->getpar(0)-64);
+valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
+valve_drive->value(rkr->efx_Valve->getpar(3));
+valve_level->value(rkr->efx_Valve->getpar(4));
+valve_neg->value(rkr->efx_Valve->getpar(5));
+valve_st->value(rkr->efx_Valve->getpar(8));
+valve_pan->value(rkr->efx_Valve->getpar(1)-64);
+valve_pf->value(rkr->efx_Valve->getpar(9));
+valve_lpf->value(rkr->efx_Valve->getpar(6));
+valve_hpf->value(rkr->efx_Valve->getpar(7));
+valve_Q->value(rkr->efx_Valve->getpar(10));
 }
 void RKRGUI::cb_valve_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_preset_i(o,v);
