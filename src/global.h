@@ -243,7 +243,7 @@ public:
   int saved_order[24];
   int efx_order[24];
   int new_order[24];
-  int availables[32];
+  int availables[40];
   int active[12];
   int MidiCh;
   int HarCh;

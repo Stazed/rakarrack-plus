@@ -10078,7 +10078,7 @@ for (i=0; i<rkr->NumEffects;i++)
 //Hide
 
 
-for (i=1; i<=9; i++)
+for (i=1; i<=t; i++)
 
  {
 

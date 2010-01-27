@@ -877,8 +877,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -4221,7 +4220,7 @@ Order_Bro->select(1);
 Avail_Bro->select(1);
 
 Order->show();
-put_icon(Order);} selected
+put_icon(Order);}
           xywh {255 132 195 25} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
@@ -6042,7 +6041,8 @@ made=1;
 
 light_preset(rkr->Selected_Preset);} {}
   }
-  Function {reordena()} {} {
+  Function {reordena()} {open
+  } {
     code {int i,j,k,t;
 unsigned int x[10],y[10];
 ulong s[10];
@@ -6107,7 +6107,7 @@ for (i=0; i<rkr->NumEffects;i++)
 //Hide
 
 
-for (i=1; i<=9; i++)
+for (i=1; i<=t; i++)
 
  {
 
@@ -6394,7 +6394,8 @@ switch ( rkr->efx_order[i])
  
   ChangeActives();
  
-  Fl::redraw();} {}
+  Fl::redraw();} {selected
+    }
   }
   Function {show_help()} {} {
     code {char temp[128];
