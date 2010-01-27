@@ -8420,7 +8420,7 @@ R average."));
         dflange_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_subs->callback((Fl_Callback*)cb_dflange_subs);
       } // Fl_Check_Button* dflange_subs
-      { dflange_tz = new Fl_Check_Button(395, 324, 64, 15, gettext("Through zero"));
+      { dflange_tz = new Fl_Check_Button(395, 324, 64, 15, gettext("Th. zero"));
         dflange_tz->down_box(FL_BORDER_BOX);
         dflange_tz->labelsize(10);
         dflange_tz->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
