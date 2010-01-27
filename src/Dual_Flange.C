@@ -36,18 +36,17 @@ Dflange::Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   //default values
   Ppreset = 0;
   Pvolume = 50;
-  Ppanning = 64;
+  Ppanning = 0;
   Pdelay = 60;
-  Plrdelay = 100;
   Plrcross = 100;
   Pfb = 40;
   Phidamp = 60;
 
   ldelay = NULL;
   rdelay = NULL;
-  lrdelay = 0;
+
   
-  maxx_delay = SAMPLE_RATE * MAX_DELAY;
+  maxx_delay = SAMPLE_RATE * D_FLANGE_MAX_DELAY;
   ldelay = new REALTYPE[maxx_delay];  
   rdelay = new REALTYPE[maxx_delay];
   
@@ -183,8 +182,8 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
       r = rdl * (1.0f - lrcross) + ldl * lrcross;
       ldl = l;
       rdl = r;
-      ldl = smpsl[i] * panning - ldl * fb;
-      rdl = smpsr[i] * (1.0f - panning) - rdl * fb;
+      ldl = smpsl[i] * lpan - ldl * fb;
+      rdl = smpsr[i] * rpan - rdl * fb;
       
       
       //LowPass Filter
@@ -200,28 +199,28 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	tmp0 = (kr + (int) floor(drA)) % dr;
 	tmp1 = tmp0 + 1;
 	if (tmp1 < 0) tmp1 = dr;	
-	rsA = rdelay[tmp0] + rdif0 * rdelay[tmp1]	//here is the first right channel delay
+	rsA = rdelay[tmp0] + rdif0 * (rdelay[tmp1] - rdelay[tmp0] )	//here is the first right channel delay
 	
 	//Right Channel, delay B	
 	rdif1 = drB - floor(drB);
 	tmp0 = (kr + (int) floor(drB)) % dr;
 	tmp1 = tmp0 + 1;
 	if (tmp1 < 0) tmp1 = dr;
-	rsB = rdelay[tmp0] + rdif1 * rdelay[tmp1]	//here is the second right channel delay	
+	rsB = rdelay[tmp0] + rdif1 * (rdelay[tmp1] - rdelay[tmp0])	//here is the second right channel delay	
 	
 	//Left Channel, delay A
 	ldif0 = dlA - floor(dlA);
 	tmp0 = (kl + (int) floor(dlA)) % dl;
 	tmp1 = tmp0 + 1;
 	if (tmp1 < 0) tmp1 = dl;
-	lsA = ldelay[tmp0] + ldif0 * ldelay[tmp1]	//here is the first left channel delay
+	lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - rdelay[tmp0])	//here is the first left channel delay
 	
 	//Left Channel, delay B	
 	ldif1 = drB - floor(drB);
 	tmp0 = (kl + (int) floor(dlB)) % dl;
 	tmp1 = tmp0 + 1;
 	if (tmp1 < 0) tmp1 = dl;
-	lsB = ldelay[tmp0] + ldif1 * ldelay[tmp1]	//here is the second leftt channel delay
+	lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - rdelay[tmp0])	//here is the second leftt channel delay
 		
 	//End flanging, next process outputs
 
@@ -263,29 +262,57 @@ Dflange::changepar (int npar, int value)
   switch (npar)
     {
     case 0:
-      setvolume (value);
+      Pwetdry = value;
+      wet = (REALTYPE) Pwetdry/127.0f;
+      dry = 1.0f - wet;
       break;
     case 1:
-      setpanning (value);
+      Ppanning = value;
+      if (value < 0)
+      {
+      rpan = 1.0f + (REALTYPE) Ppanning/127.0;     
+      lpan = 1.0f;
+      }
+      else 
+      {
+      lpan = 1.0f - (REALTYPE) Ppanning/127.0;   
+      rpan = 1.0f;
+      };
       break;
     case 2:
-      setdelay (value);
+      Plrcross = value;
+      flrcross = (REALTYPE) Plrcross;
       break;
     case 3:
-      setlrdelay (value);
+      Pdepth = value;
+      fdepth =  (REALTYPE) Pdepth;
       break;
     case 4:
-      setlrcross (value);
+      Pwidth = value;
+      fwidth = (REALTYPE) Pwidth;
       break;
     case 5:
-      setfb (value);
+      Poffset = value;
+      foffset = REALTYPE) Poffset/127.0; 
       break;
     case 6:
-      sethidamp (value);
+      Pfb = value;
       break;
     case 7:
-      setreverse (value);
+      Phidamp = value;
       break;
+    case 8:
+      Psubtract = value;
+      break;      
+     case 9:
+      Pzero = value;
+      break;   
+     case 10:
+      Prate = value;
+      break;      
+     case 11:
+      Pstdiff = value;
+      break;        
     };
 };
 
@@ -295,29 +322,42 @@ Dflange::getpar (int npar)
   switch (npar)
     {
     case 0:
-      return (Pvolume);
+      return (Pwetdry);
       break;
     case 1:
       return (Ppanning);
       break;
     case 2:
-      return (Pdelay);
-      break;
-    case 3:
-      return (Plrdelay);
-      break;
-    case 4:
       return (Plrcross);
       break;
+    case 3:
+      return (Pdepth);
+      break;
+    case 4:
+      return (Pwidth);
+      break;
     case 5:
-      return (Pfb);
+      return (Poffset);
       break;
     case 6:
-      return (Phidamp);
+      return (Pfb);
       break;
     case 7:
-      return (Preverse);
+      return (Phidamp);
       break;
+    case 8:
+      return (Psubtract);
+      break;      
+     case 9:
+      return (Pzero);
+      break;
+     case 10:
+      return (Prate);
+      break;      
+     case 11:
+      return (Pstdiff);
+      break;      
+           
     };
   return (0);			//in case of bogus parameter number
 };
@@ -326,27 +366,27 @@ Dflange::getpar (int npar)
 void
 Dflange::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 8;
+  const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Dflange 1
-    {67, 64, 35, 64, 30, 59, 0, 127},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Dflange 2
-    {67, 64, 21, 64, 30, 59, 0, 64},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Dflange 3
-    {67, 75, 60, 64, 30, 59, 10, 0},
+     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Simple Dflange
-    {67, 60, 44, 64, 30, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Canyon
-    {67, 60, 102, 50, 30, 82, 48, 0},
+     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Panning Dflange 1
-    {67, 64, 44, 17, 0, 82, 24, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Panning Dflange 2
-    {81, 60, 46, 118, 100, 68, 18, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
     //Panning Dflange 3
-    {81, 60, 26, 100, 127, 67, 36, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Feedback Dflange
-    {62, 64, 28, 64, 100, 90, 55, 0}
+
   };
 
 
