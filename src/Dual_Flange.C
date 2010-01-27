@@ -44,7 +44,8 @@ Dflange::Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   maxx_delay = (int) SAMPLE_RATE * D_FLANGE_MAX_DELAY;
   ldelay = new REALTYPE[maxx_delay];  
   rdelay = new REALTYPE[maxx_delay];
-  
+        fsubtract = 0.5f;
+	fhidamp = 1.0f;
   //default values
   Ppreset = 0;  
   setpreset (Ppreset);
@@ -119,9 +120,9 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
     rmodfreq = 20.0f;
 
  rflange0 = SAMPLE_RATE * 0.5f/rmodfreq;		//Turn the notch frequency into a number for delay
- rflange1 = foffset * rflange0;				//Set relationship of second delay line
+ rflange1 = rflange0/foffset;				//Set relationship of second delay line
  lflange0 = SAMPLE_RATE * 0.5f/lmodfreq;
- lflange1 = foffset * lflange0;
+ lflange1 = lflange0/foffset;
  
  //now is a delay expressed in number of samples.  Number here
  //will be fractional, but will use linear interpolation inside the loop to make a decent guess at 
@@ -138,7 +139,11 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
  dlA = oldlflange0;
  dlB = oldlflange1;
   // dr, dl variables are the LFO inside the loop.
-  
+
+ oldrflange0 = rflange0;
+ oldrflange1 = rflange1;
+ oldlflange0 = lflange0;
+ oldlflange1 = lflange1;
   //lfo ready...
 
 
@@ -231,7 +236,7 @@ Dflange::changepar (int npar, int value)
     case 0:
       Pwetdry = value;
       dry = (REALTYPE) Pwetdry/127.0f;
-      wet = 1.0f - dry;
+      wet = 0.5f - dry;
       break;
     case 1:
       Ppanning = value;
@@ -264,12 +269,12 @@ Dflange::changepar (int npar, int value)
       foffset = 0.5f + (REALTYPE) Poffset/255.0; 
       break;
     case 6:
-      Pfb = value - 64;
+      Pfb = value;
       ffb = (REALTYPE) Pfb/64.2f;  
       break;
     case 7:
       Phidamp = value;
-      fhidamp = 1.0f - (REALTYPE) value/256.0;
+      fhidamp = 1.0f - (REALTYPE) value/80000.0f;
       break;
     case 8:
       Psubtract = value;
@@ -358,7 +363,7 @@ Dflange::setpreset (int npreset)
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Preset 1
-    {64, 0, 64, 60, 2000, 10, 0, 127, 0, 0, 30, 64, 0, 10},
+    {64, 0, 64, 60, 2000, 10, 0, 20, 0, 0, 30, 64, 0, 10},
     //Preset 2
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Preset 3

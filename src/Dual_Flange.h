@@ -60,7 +60,7 @@ private:
   int Pdepth;		// 3 //Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 4000
   int Pwidth;		// 4 //LFO amplitude.  Range 0 to 16000 (Hz)
   int Poffset;		// 5 //Offset of notch 1 to notch 2.  Range 0 to 100 (percent)
-  int Pfb;		// 6 //Feedback parameter.  Range 0 to 0.99
+  int Pfb;		// 6 //Feedback parameter.  Range -64 to 64
   int Phidamp;		// 7 //Lowpass filter delay line.  Range 20 to 20000 (Hz)
   int Psubtract;	// 8 //Subtract wet/dry instead of add.  Nonzero is true
   int Pzero;		// 9 //Enable through-zero flanging,   Nonzero is true
@@ -75,7 +75,7 @@ private:
   REALTYPE fdepth;		//Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 15000
   REALTYPE fwidth;		//LFO amplitude.  
   REALTYPE foffset;		// Offset of notch 1 to notch 2.  Range 0 to 1.0 
-  REALTYPE ffb;			//Feedback parameter.  Range 0 to 
+  REALTYPE ffb;			//Feedback parameter.  Range -0.99 to 0.99
   REALTYPE fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
   REALTYPE fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
   REALTYPE fzero;		//Enable through-zero flanging
