@@ -3548,7 +3548,7 @@ void RKRGUI::cb_dflange_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_dflange_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_DFlange->setpreset((int)(o->value()+5));
+  rkr->efx_DFlange->setpreset((int)(o->value()));
 dflange_WD->value(rkr->efx_DFlange->getpar(0)-64);
 dflange_pan->value(rkr->efx_DFlange->getpar(1)-64);
 dflange_freq->value(rkr->efx_DFlange->getpar(10));
@@ -8386,8 +8386,10 @@ R average."));
         dflange_fb->labelfont(0);
         dflange_fb->labelsize(10);
         dflange_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        dflange_fb->minimum(64);
         dflange_fb->maximum(127);
         dflange_fb->step(1);
+        dflange_fb->value(64);
         dflange_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_fb->callback((Fl_Callback*)cb_dflange_fb);
         dflange_fb->align(FL_ALIGN_LEFT);
