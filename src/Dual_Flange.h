@@ -29,10 +29,10 @@
 #include "EffectLFO.h"
 
 #define  D_FLANGE_MAX_DELAY	0.055f			// Number of Seconds  - 50ms corresponds to fdepth = 20 (Hz). Added some extra for padding
-#define  LFO_CONSTANT		.00006103515625		// 1/(e^LOG_FMAX - 1)
-#define  LOG_FMAX		14.0f			// 2^14 = 16384 -- This optimizes LFO sweep for 20Hz to about 16kHz
+#define  LFO_CONSTANT		9.765625e-04		// 1/(2^LOG_FMAX - 1)
+#define  LOG_FMAX		10.0f			//  -- This optimizes LFO sweep for useful range.
 #define  MINDEPTH		20.0f			// won't allow filter lower than 20Hz
-#define	 MAXDEPTH		20000.0f		// Keeps delay greater than 2 samples at 44kHz SR
+#define	 MAXDEPTH		15000.0f		// Keeps delay greater than 2 samples at 44kHz SR
 
 class Dflange
 {

@@ -110,19 +110,19 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
   lmodfreq = fdepth + lmod * fwidth;	//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
   rmodfreq = fdepth + rmod * fwidth;
 
-  if (lmodfreq > 20000.0f)
-    lmodfreq = 20000.0f;
+  if (lmodfreq > 10000.0f)
+    lmodfreq = 10000.0f;
   else if (lmodfreq < 20.0f)
     lmodfreq = 20.0f;
-  if (rmodfreq > 20000.0)
-    rmodfreq = 20000.0f;
+  if (rmodfreq > 10000.0)
+    rmodfreq = 10000.0f;
   else if (rmodfreq < 20.0f)
     rmodfreq = 20.0f;
 
  rflange0 = SAMPLE_RATE * 0.5f/rmodfreq;		//Turn the notch frequency into a number for delay
- rflange1 = rflange0/foffset;				//Set relationship of second delay line
+ rflange1 = rflange0 * foffset;				//Set relationship of second delay line
  lflange0 = SAMPLE_RATE * 0.5f/lmodfreq;
- lflange1 = lflange0/foffset;
+ lflange1 = lflange0 * foffset;
  
  //now is a delay expressed in number of samples.  Number here
  //will be fractional, but will use linear interpolation inside the loop to make a decent guess at 
@@ -153,8 +153,8 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
     //Delay line utility
       ldl = ldelay[kl];
       rdl = rdelay[kr];
-      l = ldl * frlcross + rdl * flrcross;
-      r = rdl * frlcross + ldl * flrcross;
+      l = ldl * flrcross + rdl * frlcross;
+      r = rdl * flrcross + ldl * frlcross;
       ldl = l;
       rdl = r;
       ldl = smpsl[i] * lpan - ldl * ffb;
@@ -273,8 +273,8 @@ Dflange::changepar (int npar, int value)
       ffb = (REALTYPE) Pfb/64.5f;  
       break;
     case 7:
-      Phidamp = value;
-      fhidamp = 1.0f - (REALTYPE) value/80000.0f;
+      Phidamp = 20020 - value;
+      fhidamp = 1.0f - (REALTYPE) Phidamp/40000.0f;
       break;
     case 8:
       Psubtract = value;
@@ -363,7 +363,7 @@ Dflange::setpreset (int npreset)
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Preset 1
-    {64, 0, 64, 60, 2000, 10, 0, 20, 0, 0, 30, 64, 0, 10},
+    {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 150, 64, 1, 10},
     //Preset 2
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Preset 3
