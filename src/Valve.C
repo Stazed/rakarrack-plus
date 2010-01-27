@@ -258,6 +258,7 @@ Valve::setlpf (int Plpf)
 {
   this->Plpf = Plpf;
   REALTYPE fr = expf (powf ((float)Plpf / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
