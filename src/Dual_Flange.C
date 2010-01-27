@@ -106,7 +106,7 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
   rmod = (powf (2.0f, rmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;
 
 
-  lmodfreq = fdepth + lmod * fwidth;				//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
+  lmodfreq = fdepth + lmod * fwidth;	//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
   rmodfreq = fdepth + rmod * fwidth;
 
   if (lmodfreq > 20000.0f)
@@ -121,7 +121,7 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
  rflange0 = SAMPLE_RATE * 0.5f/rmodfreq;		//Turn the notch frequency into a number for delay
  rflange1 = foffset * rflange0;				//Set relationship of second delay line
  lflange0 = SAMPLE_RATE * 0.5f/lmodfreq;
- lflange1 = foffset * rflange0;
+ lflange1 = foffset * lflange0;
  
  //now is a delay expressed in number of samples.  Number here
  //will be fractional, but will use linear interpolation inside the loop to make a decent guess at 
@@ -168,29 +168,29 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	rdif0 = drA - floor(drA);
 	tmp0 = (kr + (int) floor(drA)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 =  maxx_delay;	
+	if (tmp1 >= maxx_delay) tmp1 =  0;	
 	rsA = rdelay[tmp0] + rdif0 * (rdelay[tmp1] - rdelay[tmp0] );	//here is the first right channel delay
 	
 	//Right Channel, delay B	
 	rdif1 = drB - floor(drB);
 	tmp0 = (kr + (int) floor(drB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 =  maxx_delay;
+	if (tmp1 >= maxx_delay) tmp1 =  0;
 	rsB = rdelay[tmp0] + rdif1 * (rdelay[tmp1] - rdelay[tmp0]);	//here is the second right channel delay	
 	
 	//Left Channel, delay A
 	ldif0 = dlA - floor(dlA);
 	tmp0 = (kl + (int) floor(dlA)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 =  maxx_delay;
-	lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - rdelay[tmp0]);	//here is the first left channel delay
+	if (tmp1 >= maxx_delay) tmp1 =  0;
+	lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the first left channel delay
 	
 	//Left Channel, delay B	
 	ldif1 = drB - floor(drB);
 	tmp0 = (kl + (int) floor(dlB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 =  maxx_delay;
-	lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - rdelay[tmp0]);	//here is the second leftt channel delay
+	if (tmp1 >= maxx_delay) tmp1 =  0;
+	lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the second leftt channel delay
 		
 	//End flanging, next process outputs
 
@@ -214,10 +214,7 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
  
     };
     
-    oldrflange0 =  rflange0; 
-    oldrflange1 =  rflange1;
-    oldlflange0 =  lflange0;
-    oldlflange1 =  lflange1;
+
 
 };
 
@@ -233,19 +230,19 @@ Dflange::changepar (int npar, int value)
     {
     case 0:
       Pwetdry = value;
-      wet = (REALTYPE) Pwetdry/127.0f;
-      dry = 1.0f - wet;
+      dry = (REALTYPE) Pwetdry/127.0f;
+      wet = 1.0f - dry;
       break;
     case 1:
       Ppanning = value;
       if (value < 0)
       {
-      rpan = 1.0f + (REALTYPE) Ppanning/127.0;     
+      rpan = 1.0f + (REALTYPE) Ppanning/64.0;     
       lpan = 1.0f;
       }
       else 
       {
-      lpan = 1.0f - (REALTYPE) Ppanning/127.0;   
+      lpan = 1.0f - (REALTYPE) Ppanning/64.0;   
       rpan = 1.0f;
       };
       break;
@@ -361,7 +358,7 @@ Dflange::setpreset (int npreset)
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Preset 1
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {64, 0, 64, 60, 2000, 10, 0, 127, 0, 0, 30, 64, 0, 10},
     //Preset 2
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Preset 3
