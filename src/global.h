@@ -182,7 +182,7 @@ public:
   class RecChord *RC;
   class Compressor *efx_FLimiter;
   class Valve *efx_Valve;
-  //class Dflange *efx_DFlange;
+  class Dflange *efx_DFlange;
   
   jack_client_t *jackclient;
   jack_options_t options;

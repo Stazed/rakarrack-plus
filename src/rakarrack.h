@@ -1452,6 +1452,89 @@ private:
   void cb_valve_hpf_i(SliderW*, void*);
   static void cb_valve_hpf(SliderW*, void*);
 public:
+  Fl_Group *DFLANGE;
+  Fl_Light_Button *dflange_activar;
+private:
+  void cb_dflange_activar_i(Fl_Light_Button*, void*);
+  static void cb_dflange_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *dflange_preset;
+private:
+  void cb_dflange_preset_i(Fl_Choice*, void*);
+  static void cb_dflange_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_dflange_preset[];
+public:
+  SliderW *dflange_WD;
+private:
+  void cb_dflange_WD_i(SliderW*, void*);
+  static void cb_dflange_WD(SliderW*, void*);
+public:
+  SliderW *dflange_pan;
+private:
+  void cb_dflange_pan_i(SliderW*, void*);
+  static void cb_dflange_pan(SliderW*, void*);
+public:
+  SliderW *dflange_LR;
+private:
+  void cb_dflange_LR_i(SliderW*, void*);
+  static void cb_dflange_LR(SliderW*, void*);
+public:
+  SliderW *dflange_delay;
+private:
+  void cb_dflange_delay_i(SliderW*, void*);
+  static void cb_dflange_delay(SliderW*, void*);
+public:
+  SliderW *dflange_dpth;
+private:
+  void cb_dflange_dpth_i(SliderW*, void*);
+  static void cb_dflange_dpth(SliderW*, void*);
+public:
+  SliderW *dflange_offset;
+private:
+  void cb_dflange_offset_i(SliderW*, void*);
+  static void cb_dflange_offset(SliderW*, void*);
+public:
+  SliderW *dflange_fb;
+private:
+  void cb_dflange_fb_i(SliderW*, void*);
+  static void cb_dflange_fb(SliderW*, void*);
+public:
+  SliderW *dflange_lpf;
+private:
+  void cb_dflange_lpf_i(SliderW*, void*);
+  static void cb_dflange_lpf(SliderW*, void*);
+public:
+  Fl_Check_Button *dflange_subs;
+private:
+  void cb_dflange_subs_i(Fl_Check_Button*, void*);
+  static void cb_dflange_subs(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *dflange_tz;
+private:
+  void cb_dflange_tz_i(Fl_Check_Button*, void*);
+  static void cb_dflange_tz(Fl_Check_Button*, void*);
+public:
+  SliderW *dflange_freq;
+private:
+  void cb_dflange_freq_i(SliderW*, void*);
+  static void cb_dflange_freq(SliderW*, void*);
+public:
+  SliderW *dflange_stdf;
+private:
+  void cb_dflange_stdf_i(SliderW*, void*);
+  static void cb_dflange_stdf(SliderW*, void*);
+public:
+  Fl_Choice *dflange_lfotype;
+private:
+  void cb_dflange_lfotype_i(Fl_Choice*, void*);
+  static void cb_dflange_lfotype(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_dflange_lfotype[];
+public:
+  SliderW *dflange_rnd;
+private:
+  void cb_dflange_rnd_i(SliderW*, void*);
+  static void cb_dflange_rnd(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
