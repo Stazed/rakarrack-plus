@@ -234,9 +234,9 @@ Dflange::changepar (int npar, int value)
   switch (npar)
     {
     case 0:
-      Pwetdry = value;
-      dry = (REALTYPE) Pwetdry/127.0f;
-      wet = 0.5f - dry;
+      Pwetdry = 64 + value;
+      dry = (REALTYPE) Pwetdry/128.0f;
+      wet = 1.0f - dry;
       break;
     case 1:
       Ppanning = value;
@@ -270,7 +270,7 @@ Dflange::changepar (int npar, int value)
       break;
     case 6:
       Pfb = value;
-      ffb = (REALTYPE) Pfb/64.2f;  
+      ffb = (REALTYPE) Pfb/64.5f;  
       break;
     case 7:
       Phidamp = value;

@@ -34,7 +34,6 @@
 #define  MINDEPTH		20.0f			// won't allow filter lower than 20Hz
 #define	 MAXDEPTH		20000.0f		// Keeps delay greater than 2 samples at 44kHz SR
 
-
 class Dflange
 {
 public:
