@@ -33,23 +33,20 @@ Dflange::Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   efxoutr = efxoutr_;
   
   period_const = (float) 1.0f/PERIOD;
+  
   //default values
   Ppreset = 0;
-  Pvolume = 50;
-  Ppanning = 0;
-  Pdelay = 60;
-  Plrcross = 100;
-  Pfb = 40;
-  Phidamp = 60;
 
   ldelay = NULL;
   rdelay = NULL;
 
   
-  maxx_delay = SAMPLE_RATE * D_FLANGE_MAX_DELAY;
+  maxx_delay = (int) SAMPLE_RATE * D_FLANGE_MAX_DELAY;
   ldelay = new REALTYPE[maxx_delay];  
   rdelay = new REALTYPE[maxx_delay];
   
+  //default values
+  Ppreset = 0;  
   setpreset (Ppreset);
   cleanup ();
 };
@@ -71,8 +68,7 @@ Dflange::cleanup ()
     ldelay[i] = 0.0;
   for (i = 0; i < maxx_delay; i++)
     rdelay[i] = 0.0;
-  oldl = 0.0;
-  oldr = 0.0;
+
   
   //loop variables
   l = 0.0f;
@@ -87,32 +83,6 @@ Dflange::cleanup ()
 };
 
 
-/*
- * Initialize the delays
- */
-void
-Dflange::initdelays ()
-{
-  kl = 0;
-  kr = 0;
-
-  dl = delay;
-  if (dl < 1)
-    dl = 1;
-  dr = delay;
-  if (dr < 1)
-    dr = 1;
-
-//Make sure calling program cannot request longer delay than buffer:
- if (dl > maxx_delay) dl = maxx_delay - 1;
- if (dr > maxx_delay) dr = maxx_delay - 1;
- 
- fdl = (float) dl;
- fdr = (float) dr;
- 
-
-  cleanup ();
-};
 
 /*
  * Effect output
@@ -136,8 +106,8 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
   rmod = (powf (2.0f, rmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;
 
 
-  lmodfreq = fdepth + lmod * width;				//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
-  rmodfreq = fdepth + rmod * width;
+  lmodfreq = fdepth + lmod * fwidth;				//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
+  rmodfreq = fdepth + rmod * fwidth;
 
   if (lmodfreq > 20000.0f)
     lmodfreq = 20000.0f;
@@ -178,17 +148,17 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
     //Delay line utility
       ldl = ldelay[kl];
       rdl = rdelay[kr];
-      l = ldl * (1.0f - lrcross) + rdl * lrcross;
-      r = rdl * (1.0f - lrcross) + ldl * lrcross;
+      l = ldl * frlcross + rdl * flrcross;
+      r = rdl * frlcross + ldl * flrcross;
       ldl = l;
       rdl = r;
-      ldl = smpsl[i] * lpan - ldl * fb;
-      rdl = smpsr[i] * rpan - rdl * fb;
+      ldl = smpsl[i] * lpan - ldl * ffb;
+      rdl = smpsr[i] * rpan - rdl * ffb;
       
       
       //LowPass Filter
-      ldelay[kl] = ldl = ldl * hidamp + oldl * (1.0f - hidamp);
-      rdelay[kr] = rdl = rdl * hidamp + oldr * (1.0f - hidamp);
+      ldelay[kl] = ldl = ldl * fhidamp + oldl * (1.0f - fhidamp);
+      rdelay[kr] = rdl = rdl * fhidamp + oldr * (1.0f - fhidamp);
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
 
@@ -196,45 +166,45 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	
 	//Right Channel, delay A
 	rdif0 = drA - floor(drA);
-	tmp0 = (kr + (int) floor(drA)) % dr;
+	tmp0 = (kr + (int) floor(drA)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 = dr;	
-	rsA = rdelay[tmp0] + rdif0 * (rdelay[tmp1] - rdelay[tmp0] )	//here is the first right channel delay
+	if (tmp1 < 0) tmp1 =  maxx_delay;	
+	rsA = rdelay[tmp0] + rdif0 * (rdelay[tmp1] - rdelay[tmp0] );	//here is the first right channel delay
 	
 	//Right Channel, delay B	
 	rdif1 = drB - floor(drB);
-	tmp0 = (kr + (int) floor(drB)) % dr;
+	tmp0 = (kr + (int) floor(drB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 = dr;
-	rsB = rdelay[tmp0] + rdif1 * (rdelay[tmp1] - rdelay[tmp0])	//here is the second right channel delay	
+	if (tmp1 < 0) tmp1 =  maxx_delay;
+	rsB = rdelay[tmp0] + rdif1 * (rdelay[tmp1] - rdelay[tmp0]);	//here is the second right channel delay	
 	
 	//Left Channel, delay A
 	ldif0 = dlA - floor(dlA);
-	tmp0 = (kl + (int) floor(dlA)) % dl;
+	tmp0 = (kl + (int) floor(dlA)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 = dl;
-	lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - rdelay[tmp0])	//here is the first left channel delay
+	if (tmp1 < 0) tmp1 =  maxx_delay;
+	lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - rdelay[tmp0]);	//here is the first left channel delay
 	
 	//Left Channel, delay B	
 	ldif1 = drB - floor(drB);
-	tmp0 = (kl + (int) floor(dlB)) % dl;
+	tmp0 = (kl + (int) floor(dlB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
-	if (tmp1 < 0) tmp1 = dl;
-	lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - rdelay[tmp0])	//here is the second leftt channel delay
+	if (tmp1 < 0) tmp1 =  maxx_delay;
+	lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - rdelay[tmp0]);	//here is the second leftt channel delay
 		
 	//End flanging, next process outputs
 
 
-      efxoutl[i]= dry * smpsl[i] + 0.5f * wet * (lsA + lsB);    // Make final FX out mix
-      efxoutr[i]= dry * smpsr[i] + 0.5f * wet * (rsA + rsB);
+      efxoutl[i]= dry * smpsl[i] +  wet * fsubtract * (lsA + lsB);    // Make final FX out mix
+      efxoutr[i]= dry * smpsr[i] +  wet * fsubtract * (rsA + rsB);
      
 
 
       
-      if (--kl < 0)   //Cycle delay buffer in reverse so delay time can be indexed directly with addition (above)
-	kl = dl;
+      if (--kl < 0)   //Cycle delay buffer in reverse so delay time can be indexed directly with addition 
+	kl =  maxx_delay;
       if (--kr < 0)
-	kr = dr;
+	kr =  maxx_delay;
 
 // Increment LFO
  drA += rx0;
@@ -281,7 +251,8 @@ Dflange::changepar (int npar, int value)
       break;
     case 2:
       Plrcross = value;
-      flrcross = (REALTYPE) Plrcross;
+      flrcross = (REALTYPE) Plrcross/127.0;
+      frlcross = 1.0f - flrcross;	//keep this out of the DSP loop
       break;
     case 3:
       Pdepth = value;
@@ -293,26 +264,41 @@ Dflange::changepar (int npar, int value)
       break;
     case 5:
       Poffset = value;
-      foffset = REALTYPE) Poffset/127.0; 
+      foffset = 0.5f + (REALTYPE) Poffset/255.0; 
       break;
     case 6:
-      Pfb = value;
+      Pfb = value - 64;
+      ffb = (REALTYPE) Pfb/64.2f;  
       break;
     case 7:
       Phidamp = value;
+      fhidamp = 1.0f - (REALTYPE) value/256.0;
       break;
     case 8:
       Psubtract = value;
+      fsubtract = 0.5f;
+      if(Psubtract) fsubtract = -0.5f;  //In loop a mult by 0.5f is necessary, so this kills 2 birds with 1...
       break;      
      case 9:
       Pzero = value;
+      fzero = (REALTYPE) Pzero;
       break;   
      case 10:
-      Prate = value;
+      lfo.Pfreq = value;
+      lfo.updateparams ();
       break;      
      case 11:
-      Pstdiff = value;
-      break;        
+      lfo.Pstereo = value;
+      lfo.updateparams ();
+      break;   
+     case 12:
+      lfo.PLFOtype = value;
+      lfo.updateparams ();
+      break;   
+     case 13:
+      lfo.Prandomness = value;
+      lfo.updateparams ();  
+      break;              
     };
 };
 
@@ -352,12 +338,17 @@ Dflange::getpar (int npar)
       return (Pzero);
       break;
      case 10:
-      return (Prate);
+      return (lfo.Pfreq);
       break;      
      case 11:
-      return (Pstdiff);
+      return (lfo.Pstereo);
       break;      
-           
+     case 12:
+      return (lfo.PLFOtype);
+      break;            
+     case 13:
+      return (lfo.Prandomness);
+      break;
     };
   return (0);			//in case of bogus parameter number
 };
@@ -366,27 +357,27 @@ Dflange::getpar (int npar)
 void
 Dflange::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 12;
+  const int PRESET_SIZE = 14;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Dflange 1
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Dflange 2
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Dflange 3
-     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Simple Dflange
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Canyon
-     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Panning Dflange 1
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Panning Dflange 2
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
-    //Panning Dflange 3
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Feedback Dflange
-
+    //Preset 1
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Preset 2
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Preset 3
+     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Preset 4
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Preset 5
+     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Preset 6
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Preset 7
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+    //Preset 8
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Preset 9
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
   };
 
 
