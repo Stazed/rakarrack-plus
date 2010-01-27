@@ -115,7 +115,7 @@ Valve::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
 float
 Valve::Wshape(float x)
 {
-float fq=fabsf(q);
+float fq=.5+q;
 if(x<fq) return(x);
 if(x>fq) return(fq+(x-fq)/powf(1.0+((x-fq)/(1.0-fq)),2.0));
 if(x>1.0) return((fq+1.0)*.5);
