@@ -2,6 +2,7 @@
 #include <string.h>
 #include <strings.h>
 #include <getopt.h>
+#include <math.h>
 #define SwapFourBytes(data) ( (((data) >> 24) & 0x000000ff) | (((data) >> 8) & 0x0000ff00) | (((data) << 8) & 0x00ff0000) | (((data) << 24) & 0xff000000) )
 
 
@@ -356,6 +357,31 @@ show_help ()
 
 }
 
+
+int
+setTempo(int old)
+{
+  int i;
+  float incx;
+  float diff, p_diff;
+  p_diff=100000.0;
+  float lfofreq = (powf (2.0f, (float)old / 127.0f * 10.0f) - 1.0f) * 0.03f;
+  float old_incx = fabsf (lfofreq) * 256.0 / 48000.0;
+
+  for(i=1; i<=600; i++)
+   {
+    incx = 60.0f / (float)i * 256.0 / 48000.0;
+    if (incx == old_incx) return(i);
+    diff = fabsf(incx - old_incx);
+    if (diff < p_diff) p_diff = diff;
+    else
+    return(i-1);
+   }
+
+return(600);
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -470,7 +496,14 @@ for (i=1; i<61; i++)
    NewBank[i].lv[17][19] = Bank[i].lv[17][7];
    NewBank[i].lv[18][19] = Bank[i].lv[18][12];
    NewBank[i].lv[19][19] = Bank[i].lv[19][12];
-  
+
+   NewBank[i].lv[2][2] = setTempo(NewBank[i].lv[2][2]);  
+   NewBank[i].lv[3][2] = setTempo(NewBank[i].lv[3][2]);  
+   NewBank[i].lv[4][2] = setTempo(NewBank[i].lv[4][2]);  
+   NewBank[i].lv[11][2] = setTempo(NewBank[i].lv[11][2]);  
+   NewBank[i].lv[12][2] = setTempo(NewBank[i].lv[12][2]);  
+   NewBank[i].lv[14][2] = setTempo(NewBank[i].lv[14][2]);  
+   NewBank[i].lv[19][2] = setTempo(NewBank[i].lv[19][2]);  
 
 
 }
@@ -526,6 +559,17 @@ for (i=61; i<81; i++)
    NewBank[i-60].lv[18][19] = Bank[i].lv[18][12];
    NewBank[i-60].lv[19][19] = Bank[i].lv[19][12];
   
+
+
+   NewBank[i-60].lv[2][2] = setTempo(NewBank[i-60].lv[2][2]);  
+   NewBank[i-60].lv[3][2] = setTempo(NewBank[i-60].lv[3][2]);  
+   NewBank[i-60].lv[4][2] = setTempo(NewBank[i-60].lv[4][2]);  
+   NewBank[i-60].lv[11][2] = setTempo(NewBank[i-60].lv[11][2]);  
+   NewBank[i-60].lv[12][2] = setTempo(NewBank[i-60].lv[12][2]);  
+   NewBank[i-60].lv[14][2] = setTempo(NewBank[i-60].lv[14][2]);  
+   NewBank[i-60].lv[19][2] = setTempo(NewBank[i-60].lv[19][2]);  
+
+
 
 
 }

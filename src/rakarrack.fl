@@ -877,17 +877,15 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {42 67 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -3931,13 +3929,13 @@ valve_Q->value(rkr->efx_Distorsion->getpar(10));}
         Fl_Value_Slider valve_lpf {
           label LPF
           callback {rkr->efx_Valve->changepar(6,(int)o->value());}
-          xywh {373 364 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 22000 step 1 value 22000 textcolor 7
+          xywh {373 364 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
           class SliderW
         }
         Fl_Value_Slider valve_hpf {
           label HPF
           callback {rkr->efx_Valve->changepar(7,(int)o->value());} selected
-          xywh {373 376 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 22000 step 1 value 20 textcolor 7
+          xywh {373 376 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
       }
