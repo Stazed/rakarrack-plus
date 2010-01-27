@@ -26,8 +26,15 @@
 #define DUAL_FLANGE_H
 
 #include "global.h"
+#include "EffectLFO.h"
 
-#define  FMAX_DELAY 0.05f	// Number of Seconds  - 50ms corresponds to fdepth = 20 (Hz)
+#define  MAX_DELAY		0.055f			// Number of Seconds  - 50ms corresponds to fdepth = 20 (Hz). Added some extra for padding
+#define  LFO_CONSTANT		.00006103515625		// 1/(e^LOG_FMAX - 1)
+#define  LOG_FMAX		14.0f			// 2^14 = 16384 -- This optimizes LFO sweep for 20Hz to about 16kHz
+#define  MINDEPTH		20.0f			// won't allow filter lower than 20Hz
+#define	 MAXDEPTH		20000.0f		// Keeps delay greater than 2 samples at 44kHz SR
+
+
 class Dflange
 {
 public:
@@ -50,8 +57,8 @@ private:
   int Pwetdry;		//Wet/Dry mix.  Range -100 to 100 (percent)
   int Ppanning;		//Panning.  Range -100 to 100 (percent)
   int Plrcross;		// L/R Mixing.  Range 0 to 100 (percent)
-  int Pdepth;		//Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 15000
-  int Pwidth;		//LFO amplitude.  Range 0 to 100 (percent)
+  int Pdepth;		//Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 4000
+  int Pwidth;		//LFO amplitude.  Range 0 to 16000 (Hz)
   int Poffset;		// Offset of notch 1 to notch 2.  Range 0 to 100 (percent)
   int Pfb;		//Feedback parameter.  Range 0 to 100 (percent)
   int Phidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
@@ -68,9 +75,16 @@ private:
   REALTYPE fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
   REALTYPE fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
   REALTYPE fzero;		//Enable through-zero flanging
-
+  EffectLFO lfo;		//lfo Flanger
+  
   //Internally used variables
+  int lfptrA, lfptrB, rfptrA, rfptrB;  //index to each current delay adder
 
+  
+  REALTYPE l, r, ldl, rdl;
+  REALTYPE fdl, fdr;  //float representation of delay line length
+  REALTYPE rflange0, rflange1, lflange0, lflange1, oldrflange0, oldrflange1, oldlflange0, oldlflange1;
+  REALTYPE period_const;
   REALTYPE *ldelay, *rdelay;
   REALTYPE oldl, oldr;		//pt. lpf
 
