@@ -877,7 +877,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -3855,7 +3856,7 @@ valve_pan->value(rkr->efx_Valve->getpar(1)-64);
 valve_pf->value(rkr->efx_Valve->getpar(9));
 valve_lpf->value(rkr->efx_Valve->getpar(6));
 valve_hpf->value(rkr->efx_Valve->getpar(7));
-valve_Q->value(rkr->efx_Valve->getpar(10));} selected
+valve_Q->value(rkr->efx_Valve->getpar(10));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
@@ -3952,9 +3953,9 @@ findpos(20,(int)o->value());}
         }
         Fl_Choice dflange_preset {
           label Preset
-          callback {rkr->efx_DFlange->setpreset((int)(o->value()));
-dflange_WD->value(rkr->efx_DFlange->getpar(0)-64);
-dflange_pan->value(rkr->efx_DFlange->getpar(1)-64);
+          callback {rkr->efx_DFlange->setpreset((int)o->value());
+dflange_WD->value(rkr->efx_DFlange->getpar(0));
+dflange_pan->value(rkr->efx_DFlange->getpar(1));
 dflange_freq->value(rkr->efx_DFlange->getpar(10));
 dflange_rnd->value(rkr->efx_DFlange->getpar(13));
 dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
@@ -3992,19 +3993,19 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
         }
         Fl_Value_Slider dflange_WD {
           label {Wet/Dry}
-          callback {rkr->efx_DFlange->changepar(0,(int)(o->value()+64));}
-          xywh {372 235 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          callback {rkr->efx_DFlange->changepar(0,(int)(o->value()));}
+          xywh {372 235 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider dflange_pan {
           label Pan
-          callback {rkr->efx_DFlange->changepar(1,(int)(o->value()+64));}
-          xywh {372 246 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          callback {rkr->efx_DFlange->changepar(1,(int)o->value());}
+          xywh {372 246 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider dflange_LR {
           label {L/R.Cr}
-          callback {rkr->efx_DFlange->changepar(2,(int)(o->value()+64));}
+          callback {rkr->efx_DFlange->changepar(2,(int)o->value());}
           xywh {372 257 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -4028,8 +4029,8 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
         }
         Fl_Value_Slider dflange_fb {
           label Fb
-          callback {rkr->efx_DFlange->changepar(6,(int)o->value());}
-          xywh {372 302 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
+          callback {rkr->efx_DFlange->changepar(6,(int)o->value());} selected
+          xywh {372 302 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider dflange_lpf {

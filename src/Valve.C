@@ -112,6 +112,19 @@ Valve::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
 };
 
 
+float
+Valve::Wshape(float x)
+{
+float fq=fabsf(q);
+
+if(x<fq) return(x);
+if(x>fq) return(fq + (x-fq)/powf(1.0+((x-fq)/(1.0-fq)),2.0));
+if(x>1.0) return((fq+1.0)*.5);
+return(1.0);
+}
+
+
+
 /*
  * Effect output
  */
@@ -153,7 +166,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
               otml = 0.999f * otml + fx - itml;
               itml = fx;
-              if(otml>0.0) otml*=(fabsf(q)+1.0)*.5;
+              if(otml>0.0) otml=Wshape(otml);
               efxoutl[i]= otml;
              }
         } 
@@ -165,7 +178,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otml = 0.999f * otml + fx - itml;
                itml = fx;
-               if(otml>0.0) otml*=(fabsf(q)+1.0)*.5;
+               if(otml>0.0)otml=Wshape(otml);
                efxoutl[i]= otml;
               }
         }
@@ -182,7 +195,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
               otmr = 0.999f * otmr + fx - itmr;
               itmr = fx;
-              if(otmr>0.0) otmr*=(fabsf(q)+1.0)*.5;
+              if(otmr>0.0)otmr=Wshape(otmr);
               efxoutr[i]= otmr;
              }
         } 
@@ -194,7 +207,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otmr = 0.999f * otmr + fx - itmr;
                itmr = fx;
-               if(otmr> 0.0) otmr*=(fabsf(q)+1.0)*.5;
+               if(otmr>0.0)otmr=Wshape(otmr);
                efxoutr[i]= otmr;
               }
         }

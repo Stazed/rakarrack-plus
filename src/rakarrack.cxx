@@ -3548,9 +3548,9 @@ void RKRGUI::cb_dflange_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_dflange_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_DFlange->setpreset((int)(o->value()));
-dflange_WD->value(rkr->efx_DFlange->getpar(0)-64);
-dflange_pan->value(rkr->efx_DFlange->getpar(1)-64);
+  rkr->efx_DFlange->setpreset((int)o->value());
+dflange_WD->value(rkr->efx_DFlange->getpar(0));
+dflange_pan->value(rkr->efx_DFlange->getpar(1));
 dflange_freq->value(rkr->efx_DFlange->getpar(10));
 dflange_rnd->value(rkr->efx_DFlange->getpar(13));
 dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
@@ -3578,21 +3578,21 @@ Fl_Menu_Item RKRGUI::menu_dflange_preset[] = {
 };
 
 void RKRGUI::cb_dflange_WD_i(SliderW* o, void*) {
-  rkr->efx_DFlange->changepar(0,(int)(o->value()+64));
+  rkr->efx_DFlange->changepar(0,(int)(o->value()));
 }
 void RKRGUI::cb_dflange_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_WD_i(o,v);
 }
 
 void RKRGUI::cb_dflange_pan_i(SliderW* o, void*) {
-  rkr->efx_DFlange->changepar(1,(int)(o->value()+64));
+  rkr->efx_DFlange->changepar(1,(int)o->value());
 }
 void RKRGUI::cb_dflange_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_pan_i(o,v);
 }
 
 void RKRGUI::cb_dflange_LR_i(SliderW* o, void*) {
-  rkr->efx_DFlange->changepar(2,(int)(o->value()+64));
+  rkr->efx_DFlange->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_dflange_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_LR_i(o,v);
@@ -8288,7 +8288,7 @@ R average."));
         dflange_WD->labelsize(10);
         dflange_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_WD->minimum(-64);
-        dflange_WD->maximum(63);
+        dflange_WD->maximum(64);
         dflange_WD->step(1);
         dflange_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_WD->callback((Fl_Callback*)cb_dflange_WD);
@@ -8305,7 +8305,7 @@ R average."));
         dflange_pan->labelsize(10);
         dflange_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_pan->minimum(-64);
-        dflange_pan->maximum(63);
+        dflange_pan->maximum(64);
         dflange_pan->step(1);
         dflange_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_pan->callback((Fl_Callback*)cb_dflange_pan);
@@ -8387,10 +8387,9 @@ R average."));
         dflange_fb->labelfont(0);
         dflange_fb->labelsize(10);
         dflange_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_fb->minimum(64);
-        dflange_fb->maximum(127);
+        dflange_fb->minimum(-64);
+        dflange_fb->maximum(64);
         dflange_fb->step(1);
-        dflange_fb->value(64);
         dflange_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_fb->callback((Fl_Callback*)cb_dflange_fb);
         dflange_fb->align(FL_ALIGN_LEFT);

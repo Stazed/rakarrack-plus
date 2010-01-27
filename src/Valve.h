@@ -38,6 +38,7 @@ public:
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
+  float Wshape(float x);
   void cleanup ();
   void applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr);
 
