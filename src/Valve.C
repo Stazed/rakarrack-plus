@@ -116,11 +116,10 @@ float
 Valve::Wshape(float x)
 {
 float fq=fabsf(q);
-
 if(x<fq) return(x);
-if(x>fq) return(fq + (x-fq)/powf(1.0+((x-fq)/(1.0-fq)),2.0));
+if(x>fq) return(fq+(x-fq)/powf(1.0+((x-fq)/(1.0-fq)),2.0));
 if(x>1.0) return((fq+1.0)*.5);
-return(1.0);
+return(0.0);
 }
 
 
@@ -158,6 +157,8 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
   if (Pprefiltering != 0)
     applyfilters (efxoutl, efxoutr);
 
+
+
      if (q == 0.0f) 
        {
            for (i =0; i<PERIOD; i++) 
@@ -166,7 +167,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
               otml = 0.999f * otml + fx - itml;
               itml = fx;
-              if(otml>0.0) otml=Wshape(otml);
+              otml=Wshape(otml);
               efxoutl[i]= otml;
              }
         } 
@@ -178,7 +179,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otml = 0.999f * otml + fx - itml;
                itml = fx;
-               if(otml>0.0)otml=Wshape(otml);
+               otml=Wshape(otml);
                efxoutl[i]= otml;
               }
         }
@@ -195,7 +196,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
               otmr = 0.999f * otmr + fx - itmr;
               itmr = fx;
-              if(otmr>0.0)otmr=Wshape(otmr);
+              otmr=Wshape(otmr);
               efxoutr[i]= otmr;
              }
         } 
@@ -207,7 +208,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otmr = 0.999f * otmr + fx - itmr;
                itmr = fx;
-               if(otmr>0.0)otmr=Wshape(otmr);
+               otmr=Wshape(otmr);
                efxoutr[i]= otmr;
               }
         }
@@ -339,7 +340,7 @@ Valve::changepar (int npar, int value)
       break;
     case 3:
       Pdrive = value;
-      dist = (float) Pdrive / 127.0f * 80.0f + .5f;
+      dist = (float) Pdrive / 127.0f * 40.0f + .5f;
       break;
     case 4:
       Plevel = value;

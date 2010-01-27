@@ -1479,15 +1479,15 @@ private:
   void cb_dflange_LR_i(SliderW*, void*);
   static void cb_dflange_LR(SliderW*, void*);
 public:
-  SliderW *dflange_delay;
+  SliderW *dflange_depth;
 private:
-  void cb_dflange_delay_i(SliderW*, void*);
-  static void cb_dflange_delay(SliderW*, void*);
+  void cb_dflange_depth_i(SliderW*, void*);
+  static void cb_dflange_depth(SliderW*, void*);
 public:
-  SliderW *dflange_dpth;
+  SliderW *dflange_width;
 private:
-  void cb_dflange_dpth_i(SliderW*, void*);
-  static void cb_dflange_dpth(SliderW*, void*);
+  void cb_dflange_width_i(SliderW*, void*);
+  static void cb_dflange_width(SliderW*, void*);
 public:
   SliderW *dflange_offset;
 private:

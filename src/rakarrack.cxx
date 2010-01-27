@@ -3555,8 +3555,8 @@ dflange_freq->value(rkr->efx_DFlange->getpar(10));
 dflange_rnd->value(rkr->efx_DFlange->getpar(13));
 dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
 dflange_stdf->value(rkr->efx_DFlange->getpar(11));
-dflange_dpth->value(rkr->efx_DFlange->getpar(4));
-dflange_delay->value(rkr->efx_DFlange->getpar(3));
+dflange_width->value(rkr->efx_DFlange->getpar(4));
+dflange_depth->value(rkr->efx_DFlange->getpar(3));
 dflange_fb->value(rkr->efx_DFlange->getpar(6));
 dflange_LR->value(rkr->efx_DFlange->getpar(2));
 dflange_subs->value(rkr->efx_DFlange->getpar(8));
@@ -3598,18 +3598,18 @@ void RKRGUI::cb_dflange_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_LR_i(o,v);
 }
 
-void RKRGUI::cb_dflange_delay_i(SliderW* o, void*) {
+void RKRGUI::cb_dflange_depth_i(SliderW* o, void*) {
   rkr->efx_DFlange->changepar(3,(int)o->value());
 }
-void RKRGUI::cb_dflange_delay(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_delay_i(o,v);
+void RKRGUI::cb_dflange_depth(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_depth_i(o,v);
 }
 
-void RKRGUI::cb_dflange_dpth_i(SliderW* o, void*) {
+void RKRGUI::cb_dflange_width_i(SliderW* o, void*) {
   rkr->efx_DFlange->changepar(4,(int)o->value());
 }
-void RKRGUI::cb_dflange_dpth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_dpth_i(o,v);
+void RKRGUI::cb_dflange_width(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_width_i(o,v);
 }
 
 void RKRGUI::cb_dflange_offset_i(SliderW* o, void*) {
@@ -8328,40 +8328,40 @@ R average."));
         dflange_LR->align(FL_ALIGN_LEFT);
         dflange_LR->when(FL_WHEN_CHANGED);
       } // SliderW* dflange_LR
-      { dflange_delay = new SliderW(372, 268, 100, 10, gettext("Delay"));
-        dflange_delay->type(5);
-        dflange_delay->box(FL_FLAT_BOX);
-        dflange_delay->color((Fl_Color)178);
-        dflange_delay->selection_color((Fl_Color)62);
-        dflange_delay->labeltype(FL_NORMAL_LABEL);
-        dflange_delay->labelfont(0);
-        dflange_delay->labelsize(10);
-        dflange_delay->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_delay->minimum(20);
-        dflange_delay->maximum(4000);
-        dflange_delay->step(1);
-        dflange_delay->value(20);
-        dflange_delay->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_delay->callback((Fl_Callback*)cb_dflange_delay);
-        dflange_delay->align(FL_ALIGN_LEFT);
-        dflange_delay->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_delay
-      { dflange_dpth = new SliderW(372, 280, 100, 10, gettext("Depth"));
-        dflange_dpth->type(5);
-        dflange_dpth->box(FL_FLAT_BOX);
-        dflange_dpth->color((Fl_Color)178);
-        dflange_dpth->selection_color((Fl_Color)62);
-        dflange_dpth->labeltype(FL_NORMAL_LABEL);
-        dflange_dpth->labelfont(0);
-        dflange_dpth->labelsize(10);
-        dflange_dpth->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_dpth->maximum(16000);
-        dflange_dpth->step(1);
-        dflange_dpth->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_dpth->callback((Fl_Callback*)cb_dflange_dpth);
-        dflange_dpth->align(FL_ALIGN_LEFT);
-        dflange_dpth->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_dpth
+      { dflange_depth = new SliderW(372, 268, 100, 10, gettext("Depth"));
+        dflange_depth->type(5);
+        dflange_depth->box(FL_FLAT_BOX);
+        dflange_depth->color((Fl_Color)178);
+        dflange_depth->selection_color((Fl_Color)62);
+        dflange_depth->labeltype(FL_NORMAL_LABEL);
+        dflange_depth->labelfont(0);
+        dflange_depth->labelsize(10);
+        dflange_depth->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        dflange_depth->minimum(20);
+        dflange_depth->maximum(500);
+        dflange_depth->step(1);
+        dflange_depth->value(20);
+        dflange_depth->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        dflange_depth->callback((Fl_Callback*)cb_dflange_depth);
+        dflange_depth->align(FL_ALIGN_LEFT);
+        dflange_depth->when(FL_WHEN_CHANGED);
+      } // SliderW* dflange_depth
+      { dflange_width = new SliderW(372, 280, 100, 10, gettext("Width"));
+        dflange_width->type(5);
+        dflange_width->box(FL_FLAT_BOX);
+        dflange_width->color((Fl_Color)178);
+        dflange_width->selection_color((Fl_Color)62);
+        dflange_width->labeltype(FL_NORMAL_LABEL);
+        dflange_width->labelfont(0);
+        dflange_width->labelsize(10);
+        dflange_width->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        dflange_width->maximum(3000);
+        dflange_width->step(1);
+        dflange_width->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        dflange_width->callback((Fl_Callback*)cb_dflange_width);
+        dflange_width->align(FL_ALIGN_LEFT);
+        dflange_width->when(FL_WHEN_CHANGED);
+      } // SliderW* dflange_width
       { dflange_offset = new SliderW(372, 291, 100, 10, gettext("Offset"));
         dflange_offset->type(5);
         dflange_offset->box(FL_FLAT_BOX);
