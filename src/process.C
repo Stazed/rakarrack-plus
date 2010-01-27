@@ -140,7 +140,7 @@ RKR::RKR ()
   efx_NewDist = new NewDist(efxoutl, efxoutr);
   efx_FLimiter = new Compressor (efxoutl, efxoutr);
   efx_Valve = new Valve(efxoutl, efxoutr);   
-  //efx_DFlange = new Dflange(efxoutl,efxoutr);
+  efx_DFlange = new Dflange(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
@@ -682,6 +682,8 @@ RKR::cleanup_efx ()
   efx_NewDist->cleanup();
   efx_APhaser->cleanup();
   efx_Valve->cleanup();
+  efx_DFlange->cleanup();
+  
   RC->cleanup ();
 };
 
@@ -885,7 +887,15 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                   efx_Valve->out(efxoutl, efxoutr);
                   Vol_Efx (19, efx_Valve->outvolume);
                 }
-              break;        
+              break; 
+	        
+            case 20:
+              if (DFlange_Bypass)
+                {
+                  efx_DFlange->out(efxoutl, efxoutr);
+		  Vol2_Efx ();
+                }
+              break; 	           
 	    }
 	}
 

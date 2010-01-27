@@ -60,7 +60,7 @@ void deleteFFTFREQS(FFTFREQS *f);
 #include "NewDist.h"
 #include "APhaser.h"
 #include "Valve.h"
-//#include "Dual_Flange.h"
+#include "Dual_Flange.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f

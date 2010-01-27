@@ -54,40 +54,41 @@ public:
 
 private:
   //Parameters
-  int Pwetdry;		// 0 //Wet/Dry mix.  Range -100 to 100 (percent)
-  int Ppanning;		// 1 //Panning.  Range -100 to 100 (percent)
-  int Plrcross;		// 2 //L/R Mixing.  Range 0 to 100 (percent)
+  int Pwetdry;		// 0 //Wet/Dry mix.  Range -64 to 64 
+  int Ppanning;		// 1 //Panning.  Range -64 to 64 
+  int Plrcross;		// 2 //L/R Mixing.  Range 0 to 127
   int Pdepth;		// 3 //Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 4000
   int Pwidth;		// 4 //LFO amplitude.  Range 0 to 16000 (Hz)
   int Poffset;		// 5 //Offset of notch 1 to notch 2.  Range 0 to 100 (percent)
-  int Pfb;		// 6 //Feedback parameter.  Range 0 to 100 (percent)
+  int Pfb;		// 6 //Feedback parameter.  Range 0 to 0.99
   int Phidamp;		// 7 //Lowpass filter delay line.  Range 20 to 20000 (Hz)
   int Psubtract;	// 8 //Subtract wet/dry instead of add.  Nonzero is true
-  int Pzero;		// 9 //Enable through-zero flanging
-  int Prate;		// 10 //LFO Speed
-  int Pstdiff		// 11 //LFO stereo diff
+  int Pzero;		// 9 //Enable through-zero flanging,   Nonzero is true
+			// 10 //LFO Speed
+			// 11 //LFO stereo diff
+			// 12 //LFO type
+			// 13 //LFO Randomness
 
-  REALTYPE wet, dry;		//Wet/Dry mix.  Range -100 to 100 (percent)
-  REALTYPE lpan, rpan;		//Panning.  Range -100 to 100 (percent)
-  REALTYPE flrcross;		// L/R Mixing.  Range 0 to 100 (percent)
+  REALTYPE wet, dry;		//Wet/Dry mix.  
+  REALTYPE lpan, rpan;		//Panning.  
+  REALTYPE flrcross, frlcross;	// L/R Mixing.  
   REALTYPE fdepth;		//Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 15000
-  REALTYPE fwidth;		//LFO amplitude.  Range 0 to 100 (percent)
-  REALTYPE foffset;		// Offset of notch 1 to notch 2.  Range 0 to 100 (percent)
-  REALTYPE ffb;			//Feedback parameter.  Range 0 to 100 (percent)
+  REALTYPE fwidth;		//LFO amplitude.  
+  REALTYPE foffset;		// Offset of notch 1 to notch 2.  Range 0 to 1.0 
+  REALTYPE ffb;			//Feedback parameter.  Range 0 to 
   REALTYPE fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
   REALTYPE fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
   REALTYPE fzero;		//Enable through-zero flanging
   EffectLFO lfo;		//lfo Flanger
   
   //Internally used variables
-  int lfptrA, lfptrB, rfptrA, rfptrB;  //index to each current delay adder
-
+  int maxx_delay;
+  int kl, kr;
   
   REALTYPE l, r, ldl, rdl;
-  REALTYPE fdl, fdr;  //float representation of delay line length
   REALTYPE rflange0, rflange1, lflange0, lflange1, oldrflange0, oldrflange1, oldlflange0, oldlflange1;
   REALTYPE period_const;
-  REALTYPE *ldelay, *rdelay;
+  REALTYPE *ldelay, *rdelay, *zldelay, *zrdelay;
   REALTYPE oldl, oldr;		//pt. lpf
 
 };
