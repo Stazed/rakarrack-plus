@@ -8150,7 +8150,7 @@ R average."));
         valve_drive->align(FL_ALIGN_LEFT);
         valve_drive->when(FL_WHEN_CHANGED);
       } // SliderW* valve_drive
-      { valve_Q = new SliderW(373, 284, 100, 10, gettext("Drive 2"));
+      { valve_Q = new SliderW(373, 284, 100, 10, gettext("Character"));
         valve_Q->type(5);
         valve_Q->box(FL_FLAT_BOX);
         valve_Q->color((Fl_Color)178);

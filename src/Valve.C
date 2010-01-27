@@ -148,7 +148,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutl[i] == q) fx = 1.0f / dist;
-              else fx = efxoutl[i] / (1.0f - powf(2, -dist * efxoutl[i] * LN2R));
+              else fx = efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
               otml = 0.999f * otml + fx - itml;
               itml = fx;
               efxoutl[i]= otml;
@@ -175,7 +175,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutr[i] == q) fx = 1.0f / dist;
-              else fx = efxoutr[i] / (1.0f - powf(2, -dist * efxoutr[i] * LN2R));
+              else fx = efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
               otmr = 0.999f * otmr + fx - itmr;
               itmr = fx;
               efxoutr[i]= otmr;
