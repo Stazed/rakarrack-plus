@@ -44,6 +44,8 @@ Dflange::Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   maxx_delay = (int) SAMPLE_RATE * D_FLANGE_MAX_DELAY;
   ldelay = new REALTYPE[maxx_delay];  
   rdelay = new REALTYPE[maxx_delay];
+  zldelay = new REALTYPE[maxx_delay];  
+  zrdelay = new REALTYPE[maxx_delay];  
         fsubtract = 0.5f;
 	fhidamp = 1.0f;
   //default values
@@ -66,10 +68,12 @@ Dflange::cleanup ()
 {
   int i;
   for (i = 0; i < maxx_delay; i++)
+  {
     ldelay[i] = 0.0;
-  for (i = 0; i < maxx_delay; i++)
-    rdelay[i] = 0.0;
-
+    rdelay[i] = 0.0;   
+    zldelay[i] = 0.0;
+    zrdelay[i] = 0.0;       
+  };
   
   //loop variables
   l = 0.0f;
@@ -99,6 +103,7 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
     REALTYPE drA, drB, dlA, dlB;	//LFO inside the loop.
     REALTYPE rsA, rsB, lsA, lsB;	//Audio sample at given delay
     int tmp0, tmp1;
+
     
   lfo.effectlfoout (&lfol, &lfor);
   lmod = lfol;
@@ -109,6 +114,7 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   lmodfreq = fdepth + lmod * fwidth;	//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
   rmodfreq = fdepth + rmod * fwidth;
+
 
   if (lmodfreq > 10000.0f)
     lmodfreq = 10000.0f;
@@ -162,10 +168,23 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
       
       
       //LowPass Filter
-      ldelay[kl] = ldl = ldl * fhidamp + oldl * (1.0f - fhidamp);
-      rdelay[kr] = rdl = rdl * fhidamp + oldr * (1.0f - fhidamp);
+      ldelay[kl] = ldl = ldl * (1.0f - fhidamp) + oldl * fhidamp;
+      rdelay[kr] = rdl = rdl * (1.0f - fhidamp) + oldr * fhidamp;
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
+  
+      if(Pzero)
+      {    
+      //Offset zero reference delay
+      zdl = zldelay[zl];
+      zdr = zrdelay[zr];
+      zldelay[zl] = smpsl[i];
+      zrdelay[zr] = smpsr[i];   
+      if (--zl < 0)   //Cycle delay buffer in reverse so delay time can be indexed directly with addition 
+	zl =  zcenter;
+      if (--zr < 0)
+	zr =  zcenter;  
+      }
 
 	//End delay line management, start flanging:
 	
@@ -199,9 +218,16 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 		
 	//End flanging, next process outputs
 
-
+	if(Pzero)
+	{
+      efxoutl[i]= dry * smpsl[i] +  fsubtract * wet * (fsubtract * (lsA + lsB)  + zdl);    // Make final FX out mix
+      efxoutr[i]= dry * smpsr[i] +  fsubtract * wet * (fsubtract * (rsA + rsB)  + zdr);
+       }
+       else
+       {
       efxoutl[i]= dry * smpsl[i] +  wet * fsubtract * (lsA + lsB);    // Make final FX out mix
-      efxoutr[i]= dry * smpsr[i] +  wet * fsubtract * (rsA + rsB);
+      efxoutr[i]= dry * smpsr[i] +  wet * fsubtract * (rsA + rsB);       
+       }
      
 
 
@@ -210,6 +236,8 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	kl =  maxx_delay;
       if (--kr < 0)
 	kr =  maxx_delay;
+
+
 
 // Increment LFO
  drA += rx0;
@@ -259,10 +287,12 @@ Dflange::changepar (int npar, int value)
     case 3:
       Pdepth = value;
       fdepth =  (REALTYPE) Pdepth;
+        zcenter = (int) floor(0.5f * (fdepth + fwidth));
       break;
     case 4:
       Pwidth = value;
       fwidth = (REALTYPE) Pwidth;
+        zcenter = (int) floor(0.5f * (fdepth + fwidth));
       break;
     case 5:
       Poffset = value;
@@ -273,8 +303,8 @@ Dflange::changepar (int npar, int value)
       ffb = (REALTYPE) Pfb/64.5f;  
       break;
     case 7:
-      Phidamp = 20020 - value;
-      fhidamp = 1.0f - (REALTYPE) Phidamp/40000.0f;
+      Phidamp = value;
+      fhidamp = expf(-D_PI * (float) Phidamp/SAMPLE_RATE);
       break;
     case 8:
       Psubtract = value;
@@ -283,7 +313,7 @@ Dflange::changepar (int npar, int value)
       break;      
      case 9:
       Pzero = value;
-      fzero = (REALTYPE) Pzero;
+      if (Pzero) fzero = 1.0f;
       break;   
      case 10:
       lfo.Pfreq = value;

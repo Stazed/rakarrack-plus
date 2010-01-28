@@ -82,9 +82,10 @@ private:
   
   //Internally used variables
   int maxx_delay;
-  int kl, kr;
+  int kl, kr, zl, zr;
+  int zcenter;
   
-  REALTYPE l, r, ldl, rdl;
+  REALTYPE l, r, ldl, rdl, zdr, zdl;
   REALTYPE rflange0, rflange1, lflange0, lflange1, oldrflange0, oldrflange1, oldlflange0, oldlflange1;
   REALTYPE period_const;
   REALTYPE *ldelay, *rdelay, *zldelay, *zrdelay;
