@@ -3,7 +3,12 @@
  
   Dual_Flange.C - Super Flanger
   Copyright (C) 2010 Ryan Billing
-  Author: Ryan Billing
+  Authors: 
+  Ryan Billing (a.k.a Transmogrifox)  --  Signal Processing
+  Copyright (C) 2010 Ryan Billing
+
+  Nasca Octavian Paul -- Remnants of ZynAddSubFX Echo.h structure and utility routines common to ZynSubFX source
+  Copyright (C) 2002-2005 Nasca Octavian Paul
 
   Higher intensity flanging accomplished by picking two points out of the delay line to create a wider notch filter.
     
