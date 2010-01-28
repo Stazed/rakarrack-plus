@@ -1,10 +1,10 @@
 /*
   Rakarrack Audio FX
-  Valve DSP Code based Steve Harris valve LADSPA plugin(swh-plugins).
+  Ring DSP Code based on "(author)" LADSPA plugin(swh-plugins).
   ZynAddSubFX effect structure - Copyright (C) 2002-2005 Nasca Octavian Paul
   Modified and adapted for rakarrack by Josep Andreu
 
-  Valve.C - Distorsion effect
+  Ring.C - Ring Modulator effect
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -139,11 +139,11 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
   for (i=0;i < PERIOD; i++)
     {
 
-     efxoutl[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
+     efxoutl[i] *= ( depth * ( scale * ( sin * sin_tbl[offset] + (tri * tri_tbl[offset]) + (saw * saw_tbl[offset]) + (squ * squ_tbl[offset])) + ( 1.0f - depth)));
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   if (Pstereo != 0)
      {
-      efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
+      efxoutr[i] *= ( depth * ( scale * (( sin) * sin_tbl[offset] + (tri * tri_tbl[offset]) + (saw * saw_tbl[offset]) + (squ * squ_tbl[offset])) + ( 1.0f - depth)));
      }
 
       offset += Pfreq;
@@ -265,7 +265,18 @@ Ring::changepar (int npar, int value)
       depth = (float) Pdepthp / 100.0;
       break;
     case 5:
+      if(value > 20000)		//Make sure bad inputs can't cause buffer overflow
+      {
+      Pfreq = 20000;
+      }
+      else if (value < 1)
+      {
+      Pfreq = 1;
+      }
+      else
+      {
       Pfreq = value;
+      }
       break;
     case 6:
       if (value > 1)
