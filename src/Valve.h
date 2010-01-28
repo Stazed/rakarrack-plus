@@ -1,11 +1,10 @@
 /*
-  ZynAddSubFX - a software synthesizer
+  ZynAddSubFX - a software synthesizer 
+  Copyright (C) 2002-2005 Nasca Octavian Paul
   Based on valve Steve Harris LADSPA plugin.
   Valve.h - Distorsion Effect
-  Copyright (C) 2002-2005 Nasca Octavian Paul
-  Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu & Hernan Ordiales
+  Modified and adapted to rakarrack by Josep Andreu.
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -45,8 +44,6 @@ public:
   int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
-  REALTYPE *octoutl;
-  REALTYPE *octoutr;
   REALTYPE outvolume;
   REALTYPE volume;
 

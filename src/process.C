@@ -141,6 +141,7 @@ RKR::RKR ()
   efx_FLimiter = new Compressor (efxoutl, efxoutr);
   efx_Valve = new Valve(efxoutl, efxoutr);   
   efx_DFlange = new Dflange(efxoutl,efxoutr);
+  efx_Ring = new Ring(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
@@ -160,14 +161,14 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 21;
+  NumEffects = 22;
 
   {
     static const char *los_names[] =
       { "EQ", "Compressor", "Distortion", "Overdrive", "Echo", "Chorus",
       "Phaser", "Flanger", "Reverb",
       "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
-      "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange"
+      "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -683,7 +684,7 @@ RKR::cleanup_efx ()
   efx_APhaser->cleanup();
   efx_Valve->cleanup();
   efx_DFlange->cleanup();
-  
+  efx_Ring->cleanup();  
   RC->cleanup ();
 };
 
@@ -896,7 +897,18 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 		  Vol2_Efx ();
                 }
               break; 	           
+	    
+	    case 21:
+              if (Ring_Bypass)
+                {
+                  efx_Ring->out(efxoutl, efxoutr);
+		  Vol2_Efx ();
+                }
+              break; 	           
+	    
+	    
 	    }
+
 	}
 
 

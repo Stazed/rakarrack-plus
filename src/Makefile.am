@@ -66,6 +66,8 @@ rakarrack_SOURCES = main.C \
 	Dual_Flange.h \
 	Valve.C \
 	Valve.h \
+	Ring.C \
+	Ring.h \
 	MIDIConverter.C \
 	MIDIConverter.h
 	

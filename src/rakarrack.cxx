@@ -3686,6 +3686,77 @@ void RKRGUI::cb_dflange_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_rnd_i(o,v);
 }
 
+void RKRGUI::cb_ring_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Ring_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Ring->cleanup();
+findpos(21,(int)o->value());
+}
+void RKRGUI::cb_ring_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_activar_i(o,v);
+}
+
+void RKRGUI::cb_ring_preset_i(Fl_Choice* o, void*) {
+  rkr->efx_Overdrive->setpreset((int) o->value());
+ring_WD->value(rkr->efx_Ring->getpar(0));
+ring_LRc->value(rkr->efx_Ring->getpar(2));
+ring_input->value(rkr->efx_Ring->getpar(3));
+ring_level->value(rkr->efx_Ring->getpar(4));
+ring_st->value(rkr->efx_Ring->getpar(9));
+ring_pan->value(rkr->efx_Ring->getpar(1));
+}
+void RKRGUI::cb_ring_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_ring_preset[] = {
+ {gettext("Ring 1"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Ring 2"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_ring_WD_i(SliderW* o, void*) {
+  rkr->efx_Ring->changepar(0,(int)o->value());
+}
+void RKRGUI::cb_ring_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_WD_i(o,v);
+}
+
+void RKRGUI::cb_ring_LRc_i(SliderW* o, void*) {
+  rkr->efx_Ring->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_ring_LRc(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_LRc_i(o,v);
+}
+
+void RKRGUI::cb_ring_input_i(SliderW* o, void*) {
+  rkr->efx_Ring->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_ring_input(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_input_i(o,v);
+}
+
+void RKRGUI::cb_ring_level_i(SliderW* o, void*) {
+  rkr->efx_Ring->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_ring_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_level_i(o,v);
+}
+
+void RKRGUI::cb_ring_st_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Ring->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_ring_st(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_st_i(o,v);
+}
+
+void RKRGUI::cb_ring_pan_i(SliderW* o, void*) {
+  rkr->efx_Ring->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_ring_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_pan_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -8486,6 +8557,123 @@ R average."));
       } // SliderW* dflange_rnd
       DFLANGE->end();
     } // Fl_Group* DFLANGE
+    { RING = new Fl_Group(320, 211, 158, 184);
+      RING->box(FL_UP_BOX);
+      RING->color((Fl_Color)FL_FOREGROUND_COLOR);
+      RING->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      RING->labelfont(1);
+      RING->align(96|FL_ALIGN_INSIDE);
+      RING->hide();
+      { ring_activar = new Fl_Light_Button(325, 215, 34, 18, gettext("On"));
+        ring_activar->shortcut(0x34);
+        ring_activar->color((Fl_Color)62);
+        ring_activar->selection_color((Fl_Color)1);
+        ring_activar->labelsize(10);
+        ring_activar->callback((Fl_Callback*)cb_ring_activar);
+        ring_activar->align(68|FL_ALIGN_INSIDE);
+        ring_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* ring_activar
+      { ring_preset = new Fl_Choice(397, 215, 76, 18, gettext("Preset"));
+        ring_preset->down_box(FL_BORDER_BOX);
+        ring_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        ring_preset->labelsize(10);
+        ring_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_preset->textsize(10);
+        ring_preset->callback((Fl_Callback*)cb_ring_preset);
+        ring_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        ring_preset->menu(menu_ring_preset);
+      } // Fl_Choice* ring_preset
+      { ring_WD = new SliderW(371, 246, 100, 10, gettext("Wet/Dry"));
+        ring_WD->type(5);
+        ring_WD->box(FL_FLAT_BOX);
+        ring_WD->color((Fl_Color)178);
+        ring_WD->selection_color((Fl_Color)62);
+        ring_WD->labeltype(FL_NORMAL_LABEL);
+        ring_WD->labelfont(0);
+        ring_WD->labelsize(10);
+        ring_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_WD->minimum(-64);
+        ring_WD->maximum(64);
+        ring_WD->step(1);
+        ring_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_WD->callback((Fl_Callback*)cb_ring_WD);
+        ring_WD->align(FL_ALIGN_LEFT);
+        ring_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* ring_WD
+      { ring_LRc = new SliderW(371, 259, 100, 10, gettext("L/R Cr."));
+        ring_LRc->type(5);
+        ring_LRc->box(FL_FLAT_BOX);
+        ring_LRc->color((Fl_Color)178);
+        ring_LRc->selection_color((Fl_Color)62);
+        ring_LRc->labeltype(FL_NORMAL_LABEL);
+        ring_LRc->labelfont(0);
+        ring_LRc->labelsize(10);
+        ring_LRc->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_LRc->minimum(-64);
+        ring_LRc->maximum(64);
+        ring_LRc->step(1);
+        ring_LRc->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_LRc->callback((Fl_Callback*)cb_ring_LRc);
+        ring_LRc->align(FL_ALIGN_LEFT);
+        ring_LRc->when(FL_WHEN_CHANGED);
+      } // SliderW* ring_LRc
+      { ring_input = new SliderW(371, 272, 100, 10, gettext("Drive"));
+        ring_input->type(5);
+        ring_input->box(FL_FLAT_BOX);
+        ring_input->color((Fl_Color)178);
+        ring_input->selection_color((Fl_Color)62);
+        ring_input->labeltype(FL_NORMAL_LABEL);
+        ring_input->labelfont(0);
+        ring_input->labelsize(10);
+        ring_input->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_input->maximum(127);
+        ring_input->step(1);
+        ring_input->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_input->callback((Fl_Callback*)cb_ring_input);
+        ring_input->align(FL_ALIGN_LEFT);
+        ring_input->when(FL_WHEN_CHANGED);
+      } // SliderW* ring_input
+      { ring_level = new SliderW(371, 286, 100, 10, gettext("Level"));
+        ring_level->type(5);
+        ring_level->box(FL_FLAT_BOX);
+        ring_level->color((Fl_Color)178);
+        ring_level->selection_color((Fl_Color)62);
+        ring_level->labeltype(FL_NORMAL_LABEL);
+        ring_level->labelfont(0);
+        ring_level->labelsize(10);
+        ring_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_level->maximum(127);
+        ring_level->step(1);
+        ring_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_level->callback((Fl_Callback*)cb_ring_level);
+        ring_level->align(FL_ALIGN_LEFT);
+        ring_level->when(FL_WHEN_CHANGED);
+      } // SliderW* ring_level
+      { ring_st = new Fl_Check_Button(361, 321, 30, 15, gettext("Stereo"));
+        ring_st->down_box(FL_BORDER_BOX);
+        ring_st->labelsize(10);
+        ring_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_st->callback((Fl_Callback*)cb_ring_st);
+      } // Fl_Check_Button* ring_st
+      { ring_pan = new SliderW(371, 336, 100, 10, gettext("Pan"));
+        ring_pan->type(5);
+        ring_pan->box(FL_FLAT_BOX);
+        ring_pan->color((Fl_Color)178);
+        ring_pan->selection_color((Fl_Color)62);
+        ring_pan->labeltype(FL_NORMAL_LABEL);
+        ring_pan->labelfont(0);
+        ring_pan->labelsize(10);
+        ring_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_pan->minimum(-64);
+        ring_pan->maximum(63);
+        ring_pan->step(1);
+        ring_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_pan->callback((Fl_Callback*)cb_ring_pan);
+        ring_pan->align(FL_ALIGN_LEFT);
+        ring_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* ring_pan
+      RING->end();
+    } // Fl_Group* RING
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -10546,7 +10734,9 @@ for (i=1; i<=t; i++)
         case 20:
         DFLANGE->hide();
         break;
-        
+        case 21:
+        RING->hide();
+        break;
       }
       
     }
@@ -10761,6 +10951,13 @@ switch ( rkr->efx_order[i])
        dflange_activar->shortcut(s[i]);
        DFLANGE->show();
        if(rkr->DFlange_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;
+
+     case 21:
+       RING->position(x[i],y[i]);
+       ring_activar->shortcut(s[i]);
+       RING->show();
+       if(rkr->Ring_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
 
 
@@ -11697,6 +11894,8 @@ NEWDIST->image(InOut->image());
 APHASER->image(InOut->image());
 VALVE->image(InOut->image());
 DFLANGE->image(InOut->image());
+RING->image(InOut->image());
+
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
@@ -12557,6 +12756,12 @@ Fl_Color boff = fore_color;
    
      if(value) dflange_activar->color(bon); else dflange_activar->color(boff);
      break;
+
+     case 21: 
+   
+     if(value) ring_activar->color(bon); else ring_activar->color(boff);
+     break;
+
 
 
     }

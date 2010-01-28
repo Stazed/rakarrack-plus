@@ -886,7 +886,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {42 67 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1442 117 800 600} type Double box DOWN_BOX color 0 resizable size_range {640 480 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4101,6 +4101,73 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
           class SliderW
         }
       }
+      Fl_Group RING {selected
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button ring_activar {
+          label On
+          callback {rkr->Ring_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Ring->cleanup();
+findpos(21,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice ring_preset {
+          label Preset
+          callback {rkr->efx_Overdrive->setpreset((int) o->value());
+ring_WD->value(rkr->efx_Ring->getpar(0));
+ring_LRc->value(rkr->efx_Ring->getpar(2));
+ring_input->value(rkr->efx_Ring->getpar(3));
+ring_level->value(rkr->efx_Ring->getpar(4));
+ring_st->value(rkr->efx_Ring->getpar(9));
+ring_pan->value(rkr->efx_Ring->getpar(1));}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+        } {
+          MenuItem {} {
+            label {Ring 1}
+            xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Ring 2}
+            xywh {52 52 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider ring_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Ring->changepar(0,(int)o->value());}
+          xywh {371 246 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_LRc {
+          label {L/R Cr.}
+          callback {rkr->efx_Ring->changepar(2,(int)o->value());}
+          xywh {371 259 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_input {
+          label Drive
+          callback {rkr->efx_Ring->changepar(3,(int)o->value());}
+          xywh {371 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_level {
+          label Level
+          callback {rkr->efx_Ring->changepar(4,(int)o->value());}
+          xywh {371 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button ring_st {
+          label Stereo
+          callback {rkr->efx_Ring->changepar(9,(int)o->value());}
+          xywh {361 321 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Value_Slider ring_pan {
+          label Pan
+          callback {rkr->efx_Ring->changepar(1,(int)o->value());}
+          xywh {371 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+      }
       Fl_Group Tuner {
         xywh {521 84 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
@@ -5478,8 +5545,7 @@ CancelRec->color(bcolor);
 
 fore_color= bcolor;
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {ActivarGeneral->selection_color(bcolor);
@@ -6353,7 +6419,9 @@ for (i=1; i<=t; i++)
         case 20:
         DFLANGE->hide();
         break;
-        
+        case 21:
+        RING->hide();
+        break;
       }
       
     }
@@ -6568,6 +6636,13 @@ switch ( rkr->efx_order[i])
        dflange_activar->shortcut(s[i]);
        DFLANGE->show();
        if(rkr->DFlange_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;
+
+     case 21:
+       RING->position(x[i],y[i]);
+       ring_activar->shortcut(s[i]);
+       RING->show();
+       if(rkr->Ring_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
 
 
@@ -7491,6 +7566,8 @@ NEWDIST->image(InOut->image());
 APHASER->image(InOut->image());
 VALVE->image(InOut->image());
 DFLANGE->image(InOut->image());
+RING->image(InOut->image());
+
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
@@ -8343,6 +8420,12 @@ Fl_Color boff = fore_color;
    
      if(value) dflange_activar->color(bon); else dflange_activar->color(boff);
      break;
+
+     case 21: 
+   
+     if(value) ring_activar->color(bon); else ring_activar->color(boff);
+     break;
+
 
 
     }} {}

@@ -34,9 +34,6 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  octoutl = (float *) malloc (sizeof (float) * PERIOD);
-  octoutr = (float *) malloc (sizeof (float) * PERIOD);
-
   lpfl = new AnalogFilter (2, 22000, 1, 0);
   lpfr = new AnalogFilter (2, 22000, 1, 0);
   hpfl = new AnalogFilter (3, 20, 1, 0);

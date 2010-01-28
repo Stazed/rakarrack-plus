@@ -61,6 +61,7 @@ void deleteFFTFREQS(FFTFREQS *f);
 #include "APhaser.h"
 #include "Valve.h"
 #include "Dual_Flange.h"
+#include "Ring.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f
@@ -183,6 +184,7 @@ public:
   class Compressor *efx_FLimiter;
   class Valve *efx_Valve;
   class Dflange *efx_DFlange;
+  class Ring *efx_Ring;
   
   jack_client_t *jackclient;
   jack_options_t options;
@@ -215,6 +217,7 @@ public:
   int APhaser_Bypass;
   int Valve_Bypass;
   int DFlange_Bypass;
+  int Ring_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -237,6 +240,7 @@ public:
   int Gate_B;
   int NewDist_B;
   int Valve_B;
+  int Ring_B;
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];
