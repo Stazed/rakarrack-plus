@@ -9621,6 +9621,9 @@ B_preset->color(bcolor);
 Compare->color(bcolor);
 nidi_activar->color(bcolor);
 
+for(int i=0; i<10;i++) 
+     ChangeActivesB(rkr->efx_order[i], rkr->active[i]);
+
 
 if (made)
 {
@@ -10298,8 +10301,6 @@ aphaser_activar->value(rkr->APhaser_Bypass);
 
 
 
-
-
 reordena();
 }
 
@@ -10604,7 +10605,7 @@ switch ( rkr->efx_order[i])
        EQ->position(x[i],y[i]);
        eq_activar->shortcut(s[i]);
        EQ->show();
-       if(rkr->EQ1_Bypass) rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->EQ1_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
        
        
@@ -10770,6 +10771,10 @@ switch ( rkr->efx_order[i])
   Principal->init_sizes();
  
   ChangeActives();
+  
+  for(i=0; i<10;i++) 
+     ChangeActivesB(rkr->efx_order[i], rkr->active[i]);
+  
  
   Fl::redraw();
 }
@@ -12044,6 +12049,7 @@ void RKRGUI::ChangeActives() {
   Fl_Color on = fl_lighter(label_color);
 Fl_Color off = fl_darker(label_color);
 
+
 if(rkr->active[0]) L1->labelcolor(on); else L1->labelcolor(off);
 if(rkr->active[1]) L2->labelcolor(on); else L2->labelcolor(off);
 if(rkr->active[2]) L3->labelcolor(on); else L3->labelcolor(off);
@@ -12055,6 +12061,7 @@ if(rkr->active[7]) L8->labelcolor(on); else L8->labelcolor(off);
 if(rkr->active[8]) L9->labelcolor(on); else L9->labelcolor(off);
 if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
+
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
@@ -12065,7 +12072,7 @@ void RKRGUI::findpos(int num, int value) {
 Fl_Color on = fl_lighter(label_color);
 Fl_Color off= fl_darker(label_color);
 
-for(i=0; i<9; i++)
+for(i=0; i<10; i++)
  {
     if (rkr->efx_order[i]== num)
       {
@@ -12128,12 +12135,9 @@ for(i=0; i<9; i++)
      L10->redraw();  
      break;  
        
-       
-       
-       
-       
-       
-   }
+ }
+ 
+ ChangeActivesB(num,value);
 }
 
 void RKRGUI::Put_Skin(int last) {
@@ -12436,4 +12440,124 @@ for(i=0;i<128;i++)
 }          
 
 }
+}
+
+void RKRGUI::ChangeActivesB(int num,int value) {
+  Fl_Color bon = fl_lighter(fore_color);
+Fl_Color boff = fore_color;
+
+
+
+ switch(num)
+   {
+     case 0: 
+   
+     if(value) eq_activar->color(bon); else eq_activar->color(boff);
+     break;
+   
+     case 1: 
+   
+     if(value) compress_activar->color(bon); else compress_activar->color(boff);
+     break;
+      
+     case 2: 
+   
+     if(value) dist_activar->color(bon); else dist_activar->color(boff);
+     break;
+     
+     
+     case 3: 
+   
+     if(value) ovrd_activar->color(bon); else ovrd_activar->color(boff);
+     break;
+     
+     
+     case 4: 
+   
+     if(value) echo_activar->color(bon); else echo_activar->color(boff);
+     break;
+     
+     
+     case 5: 
+   
+     if(value) chorus_activar->color(bon); else chorus_activar->color(boff);
+     break;
+     
+     case 6: 
+   
+     if(value) phaser_activar->color(bon); else phaser_activar->color(boff);
+     break;
+     
+     case 7: 
+   
+     if(value) flanger_activar->color(bon); else flanger_activar->color(boff);
+     break;
+     
+     case 8: 
+   
+     if(value) reverb_activar->color(bon); else reverb_activar->color(boff);
+     break;
+     
+     case 9: 
+   
+     if(value) eqp_activar->color(bon); else eqp_activar->color(boff);
+     break;
+     
+     case 10: 
+   
+     if(value) WhaWha_activar->color(bon); else WhaWha_activar->color(boff);
+     break;
+     
+     case 11: 
+   
+     if(value) Alienwah_activar->color(bon); else Alienwah_activar->color(boff);
+     break;
+     
+     case 12: 
+   
+     if(value) Cabinet_activar->color(bon); else Cabinet_activar->color(boff);
+     break;
+     
+     case 13: 
+   
+     if(value) pan_activar->color(bon); else pan_activar->color(boff);
+     break;
+     
+     case 14: 
+   
+     if(value) har_activar->color(bon); else har_activar->color(boff);
+     break;
+     
+     case 15: 
+   
+     if(value) musdelay_activar->color(bon); else musdelay_activar->color(boff);
+     break;
+     
+     case 16: 
+   
+     if(value) gate_activar->color(bon); else gate_activar->color(boff);
+     break;
+     
+     case 17: 
+   
+     if(value) newdist_activar->color(bon); else newdist_activar->color(boff);
+     break;
+     
+     case 18: 
+   
+     if(value) aphaser_activar->color(bon); else aphaser_activar->color(boff);
+     break;
+     
+     case 19: 
+   
+     if(value) valve_activar->color(bon); else valve_activar->color(boff);
+     break;
+     
+     case 20: 
+   
+     if(value) dflange_activar->color(bon); else dflange_activar->color(boff);
+     break;
+
+
+    }
 }

@@ -1,11 +1,10 @@
 /*
-  ZynAddSubFX - a software synthesizer
-  Based on Steve Harris valve LADSPA plugin
-  Valve.C - Distorsion effect
-  Copyright (C) 2002-2005 Nasca Octavian Paul
-  Author: Nasca Octavian Paul
+  Rakarrack Audio FX
+  Valve DSP Code based Steve Harris valve LADSPA plugin(swh-plugins).
+  ZynAddSubFX effect structure - Copyright (C) 2002-2005 Nasca Octavian Paul
+  Modified and adapted for rakarrack by Josep Andreu
 
-  Modified for rakarrack by Josep Andreu
+  Valve.C - Distorsion effect
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 

@@ -994,7 +994,7 @@ RKR::Bank_to_Preset (int i)
 
   for (j = 0; j < 50; j++)
     {
-      for (k = 0; k < 19; k++)
+      for (k = 0; k < 20; k++)
 	{
 	  lv[j][k] = Bank[i].lv[j][k];
 	}
