@@ -59,7 +59,9 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_)
     {
       freqs[i] = freqs[i - 1] * D_NOTE;
       lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
-    } schmittInit (PERIOD);
+    } 
+    
+  schmittInit (36);
 
 
 }
@@ -154,7 +156,7 @@ Recognize::schmittFloat (float *indatal, float *indatar)
 
   for (i = 0; i < PERIOD; i++)
     {
-      buf[i] = (short) (((indatal[i]+indatar[i])*.1) * 32768);
+      buf[i] = (short) (((indatal[i]+indatar[i])*.025) * 32768);
     }
   schmittS16LE (buf);
 };
@@ -189,32 +191,36 @@ Recognize::displayFrequency (float freq)
     }
 
   nfreq = freqs[note];
+
   while (nfreq / freq > D_NOTE_SQRT)
     {
-      nfreq *= .5f;
+      nfreq *=0.5f;
       octave--;
-      if (octave < -1)
-	{
-	  noteoff = 1;
-	  break;
-	}
-
+      if(octave < -1)
+       {
+         noteoff = 1;
+         break;
+       }  
     }
   while (freq / nfreq > D_NOTE_SQRT)
     {
       nfreq *= 2.0f;
       octave++;
       if (octave > 7)
-	{
-	  noteoff = 1;
-	  break;
-	}
+       {
+         noteoff = 1;
+         break;
+       }
     }
+
 
 
   if (!noteoff)
     {
     reconota = 24 + (octave * 12) + note - 3;
-
+    if (fabsf(lafreq-freq)>10) lafreq = freq;
     }
+
+
+
 };

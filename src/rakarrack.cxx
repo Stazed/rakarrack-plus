@@ -8719,7 +8719,7 @@ R average."));
         ring_pan->labelsize(10);
         ring_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_pan->minimum(-64);
-        ring_pan->maximum(63);
+        ring_pan->maximum(64);
         ring_pan->step(1);
         ring_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_pan->callback((Fl_Callback*)cb_ring_pan);

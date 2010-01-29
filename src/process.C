@@ -724,14 +724,19 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
 	    }
 	}
-/*
+
       if((Ring_Bypass) && (efx_Ring->Pafreq))
         {
        	    RecNote->schmittFloat (efxoutl, efxoutr);
             if ((reconota != -1) && (reconota != last))
-            efx_Ring->Pfreq=lrintf(RecNote->afreq);
+            {
+             if(RecNote->afreq > 0.0) 
+             {
+             efx_Ring->Pfreq=lrintf(RecNote->lafreq);
+             }
+            }
         }    
-*/            
+            
       for (i = 0; i < 10; i++)
 	{
 	    switch (efx_order[i])
@@ -908,7 +913,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Ring_Bypass)
                 {
                   efx_Ring->out(efxoutl, efxoutr);
-		  Vol2_Efx ();
+		  Vol_Efx (21,efx_Ring->outvolume);
                 }
               break; 	           
 	    

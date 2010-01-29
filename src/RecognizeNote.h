@@ -38,9 +38,10 @@ public:
   signed short int *schmittPointer;
   const char **notes;
   int note;
+  float lafreq;
   float nfreq, afreq, freq;
   void schmittFloat (float *indatal, float *indatar);
-
+  
 
 
 private:

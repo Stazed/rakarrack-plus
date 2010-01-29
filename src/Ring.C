@@ -137,13 +137,20 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i=0;i < PERIOD; i++)
     {
-     tmpfactor = ( depth * scale * (( sin + idepth) * sin_tbl[offset] + (tri + idepth) * tri_tbl[offset] + (saw  + idepth)* saw_tbl[offset] + (squ + idepth) * squ_tbl[offset]) );
-     efxoutl[i] *= tmpfactor;
+//     tmpfactor = ( depth * scale * (( sin + idepth) * sin_tbl[offset] + (tri + idepth) * tri_tbl[offset] + (saw  + idepth)* saw_tbl[offset] + (squ + idepth) * squ_tbl[offset]) );
+//     efxoutl[i] *= tmpfactor;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-  if (Pstereo != 0)
-     {
-      efxoutr[i] *= tmpfactor;
-     }
+//  if (Pstereo != 0)
+//     {
+//     efxoutr[i] *= tmpfactor;
+//     }
+
+        efxoutl[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    if (Pstereo != 0)
+        {
+         efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
+        } 
 
       offset += Pfreq;
       if (offset > SAMPLE_RATE) offset -=SAMPLE_RATE;
@@ -154,7 +161,7 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   REALTYPE level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
-  for (i = 0; i < PERIOD; i++)
+  for (i= 0;i<PERIOD;i++)
     {
       lout = efxoutl[i];
       rout = efxoutr[i];
@@ -166,11 +173,13 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
       lout = l;
       rout = r;  
        
-      efxoutl[i] = dry * smpsl[i] + wet * lout * 2.0f * level * panning;
-      efxoutr[i] = dry * smpsr[i] + wet * rout * 2.0f * level * (1.0f -panning);  
+      efxoutl[i] = lout * 2.0f * level * panning;
+      efxoutr[i] = rout * 2.0f * level * (1.0f-panning);  
 
-    };
+    }
     
+
+
 };
 
 
@@ -180,18 +189,20 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
 
 void
-Ring::setpanning (int Ppanning)
+Ring::setpanning (int Ppan)
 {
-  this->Ppanning = Ppanning;
-  panning = ((float)Ppanning) / 127.0f  + 0.5f;
+  Ppanning = Ppan;
+  panning = (float)(Ppanning+64) / 128.0f;
+
 };
 
 
 void
-Ring::setlrcross (int Plrcross)
+Ring::setlrcross (int Plrc)
 {
-  this->Plrcross = Plrcross;
-  lrcross = (float)Plrcross / 64.0f;
+  Plrcross = Plrc;
+  lrcross = (float)(Plrcross+64) / 128.0f;
+
 };
 
 
@@ -206,21 +217,21 @@ Ring::setscale()
 void
 Ring::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 12;
+  const int PRESET_SIZE = 13;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //A 440
-    {0, 0, 0, 64, 100, 440, 0, 20, 0, 100, 0, 64},
+    {0, 0, 0, 64, 100, 440, 0, 20, 0, 100, 0, 64, 0},
     //E string
-    {0, 0, 0, 64, 100, 82, 0, 100, 0, 0, 0, 64},
+    {0, 0, 0, 64, 100, 82, 0, 100, 0, 0, 0, 64, 0},
     //A string
-    {0, 0, 0, 64, 100, 110, 0, 0, 100, 50, 0, 64},
+    {0, 0, 0, 64, 100, 110, 0, 0, 100, 50, 0, 64, 0},
     //dissonance
-    {0, 0, 0, 64, 100, 817, 0, 20, 0, 100, 0, 64},
+    {0, 0, 0, 64, 100, 817, 0, 20, 0, 100, 0, 64, 0},
     //Fast Beat
-    {0, 0, 0, 64, 100, 15, 0, 20, 0, 100, 0, 64},
+    {0, 0, 0, 64, 100, 15, 0, 20, 0, 100, 0, 64, 0},
     //Ring Amp
-    {0, 0, 0, 64, 100, 1, 0, 20, 0, 100, 0, 64},
+    {0, 0, 0, 64, 100, 1, 0, 20, 0, 100, 0, 64, 0},
   };
 
 
@@ -239,7 +250,8 @@ Ring::changepar (int npar, int value)
   switch (npar)
     {
     case 0:
-    outvolume = 0.5f + (float)value/64.0f;
+     Pvolume = value;
+    outvolume = (float)(64+value)/128.0f;
       break;
     case 1:
       setpanning (value);
@@ -297,6 +309,9 @@ Ring::changepar (int npar, int value)
     case 11:
       Pinput = value;
       break;
+    case 12:
+      Pafreq = value;
+      break;
       
     };
 };
@@ -342,7 +357,8 @@ Ring::getpar (int npar)
     case 11:
       return (Pinput);
       break;
-
+    case 12:
+      return (Pafreq); 
 
     };
   return (0);			//in case of bogus parameter number

@@ -46,6 +46,8 @@ public:
 
   REALTYPE volume;
   REALTYPE outvolume;
+  int Pafreq;
+  int Pfreq;
 private:
 
 
@@ -56,7 +58,6 @@ private:
   int Pinput;
   int Plevel;		//the ouput amplification
   int Pdepthp; 
-  int Pfreq;		
   int Psin;		//highpass filter
   int Ptri;
   int Psaw;
