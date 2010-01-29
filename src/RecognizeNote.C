@@ -213,6 +213,8 @@ Recognize::displayFrequency (float freq)
 
 
   if (!noteoff)
+    {
     reconota = 24 + (octave * 12) + note - 3;
-   
+
+    }
 };

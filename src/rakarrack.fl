@@ -877,8 +877,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -4127,7 +4126,8 @@ ring_sin->value(rkr->efx_Ring->getpar(7));
 ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
-ring_pan->value(rkr->efx_Ring->getpar(1));} open
+ring_pan->value(rkr->efx_Ring->getpar(1));
+ring_afreq->value(rkr->efx_Ring->getpar(12));} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
@@ -4189,6 +4189,11 @@ ring_pan->value(rkr->efx_Ring->getpar(1));} open
           label Stereo
           callback {rkr->efx_Ring->changepar(6,(int)o->value());}
           xywh {348 303 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button ring_afreq {
+          label {Auto Freq}
+          callback {rkr->efx_Ring->changepar(12,(int)o->value());}
+          xywh {400 303 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider ring_depth {
           label Depth
@@ -5370,6 +5375,7 @@ valve_neg->labelcolor(bcolor);
 valve_pf->labelcolor(bcolor);
 
 ring_st->labelcolor(bcolor);
+ring_afreq->labelcolor(bcolor);
 
 ovrd_preset->labelcolor(bcolor);
 ovrd_tipo->labelcolor(bcolor);
@@ -5609,8 +5615,7 @@ fore_color= bcolor;
 
 Fl::redraw();} {}
   }
-  Function {Leds_Color_Change(Fl_Color bcolor)} {open
-  } {
+  Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {ActivarGeneral->selection_color(bcolor);
 eq_activar->selection_color(bcolor);
 compress_activar->selection_color(bcolor);
@@ -5660,6 +5665,8 @@ valve_neg->selection_color(bcolor);
 valve_st->selection_color(bcolor);
 valve_pf->selection_color(bcolor);
 ring_st->selection_color(bcolor);
+ring_afreq->selection_color(bcolor);
+
 Auto_Output->selection_color(bcolor);
 Stereo->selection_color(bcolor);
  
@@ -5671,8 +5678,7 @@ leds_color=bcolor;
 
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)

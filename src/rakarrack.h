@@ -1577,6 +1577,11 @@ private:
   void cb_ring_st_i(Fl_Check_Button*, void*);
   static void cb_ring_st(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *ring_afreq;
+private:
+  void cb_ring_afreq_i(Fl_Check_Button*, void*);
+  static void cb_ring_afreq(Fl_Check_Button*, void*);
+public:
   SliderW *ring_depth;
 private:
   void cb_ring_depth_i(SliderW*, void*);

@@ -3710,6 +3710,7 @@ ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
 ring_pan->value(rkr->efx_Ring->getpar(1));
+ring_afreq->value(rkr->efx_Ring->getpar(12));
 }
 void RKRGUI::cb_ring_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_preset_i(o,v);
@@ -3765,6 +3766,13 @@ void RKRGUI::cb_ring_st_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_ring_st(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_st_i(o,v);
+}
+
+void RKRGUI::cb_ring_afreq_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Ring->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_ring_afreq(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_afreq_i(o,v);
 }
 
 void RKRGUI::cb_ring_depth_i(SliderW* o, void*) {
@@ -8724,6 +8732,12 @@ R average."));
         ring_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_st->callback((Fl_Callback*)cb_ring_st);
       } // Fl_Check_Button* ring_st
+      { ring_afreq = new Fl_Check_Button(400, 303, 30, 15, gettext("Auto Freq"));
+        ring_afreq->down_box(FL_BORDER_BOX);
+        ring_afreq->labelsize(10);
+        ring_afreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_afreq->callback((Fl_Callback*)cb_ring_afreq);
+      } // Fl_Check_Button* ring_afreq
       { ring_depth = new SliderW(371, 317, 100, 10, gettext("Depth"));
         ring_depth->type(5);
         ring_depth->box(FL_FLAT_BOX);
@@ -9767,6 +9781,7 @@ valve_neg->labelcolor(bcolor);
 valve_pf->labelcolor(bcolor);
 
 ring_st->labelcolor(bcolor);
+ring_afreq->labelcolor(bcolor);
 
 ovrd_preset->labelcolor(bcolor);
 ovrd_tipo->labelcolor(bcolor);
@@ -10058,6 +10073,8 @@ valve_neg->selection_color(bcolor);
 valve_st->selection_color(bcolor);
 valve_pf->selection_color(bcolor);
 ring_st->selection_color(bcolor);
+ring_afreq->selection_color(bcolor);
+
 Auto_Output->selection_color(bcolor);
 Stereo->selection_color(bcolor);
  
