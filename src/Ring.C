@@ -193,7 +193,7 @@ void
 Ring::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
-  panning = ((float)Ppanning + 0.5f) / 127.0f;
+  panning = ((float)Ppanning) / 127.0f  + 0.5f;
 };
 
 
@@ -201,7 +201,7 @@ void
 Ring::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
-  lrcross = (float)Plrcross / 127.0f * 1.0f;
+  lrcross = (float)Plrcross / 64.0f;
 };
 
 
@@ -219,18 +219,18 @@ Ring::setpreset (int npreset)
   const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Ring 1
-    {0, 64, 64, 64, 64, 0, 127, 0, 0, 0, 0},
-    //Rong 2
-    {0, 64, 35, 29, 45, 1, 0, 127, 0, 0, 0},
-    //Ring 3
-    {0, 64, 0, 87, 14, 6, 0, 80, 30, 0, 1},
-    //Ring 4
-    {0, 64, 127, 87, 14, 0, 1, 80, 24, 0, 0},
-    //Ring 5
-    {0, 64, 127, 127, 12, 13, 0, 90, 16, 0, 1},
+    //A 440
+    {0, 0, 0, 64, 100, 440, 0, 20, 0, 100, 0, 64},
+    //E string
+    {0, 0, 0, 64, 100, 82, 0, 100, 0, 0, 0, 64},
+    //A string
+    {0, 0, 0, 64, 100, 110, 0, 0, 100, 50, 0, 64},
+    //dissonance
+    {0, 0, 0, 64, 100, 817, 0, 20, 0, 100, 0, 64},
+    //Fast Beat
+    {0, 0, 0, 64, 100, 15, 0, 20, 0, 100, 0, 64},
     //Ring Amp
-    {84, 64, 35, 63, 50, 2, 0, 55, 0, 0, 0}
+
   };
 
 
