@@ -43,7 +43,7 @@ public:
   int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
-  REALTYPE outvolume;
+
   REALTYPE volume;
 
 private:
@@ -71,7 +71,7 @@ private:
   unsigned int offset;
   REALTYPE panning, lrcross; 
   float *sin_tbl, *tri_tbl, *saw_tbl, *squ_tbl;
-  float sin,tri,saw,squ,scale,depth;
+  float sin,tri,saw,squ,scale,depth, idepth, wet, dry;
 
 };
 

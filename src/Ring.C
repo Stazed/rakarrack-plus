@@ -113,7 +113,7 @@ void
 Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
-  REALTYPE l, r, lout, rout;
+  REALTYPE l, r, lout, rout, tmpfactor;
 
   REALTYPE inputvol = powf (5.0f, ((float)Pinput - 32.0f) / 127.0f);
 
@@ -129,8 +129,7 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
     {
       for (i = 0; i < PERIOD; i++)
 	{
-	  efxoutl[i] =
-	    (smpsl[i]  +  smpsr[i] ) * inputvol;
+	  efxoutl[i] =   (smpsl[i]  +  smpsr[i] ) * inputvol;
 	};
     };
 
@@ -138,12 +137,12 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i=0;i < PERIOD; i++)
     {
-
-     efxoutl[i] *= ( depth * ( scale * ( sin * sin_tbl[offset] + (tri * tri_tbl[offset]) + (saw * saw_tbl[offset]) + (squ * squ_tbl[offset])) + ( 1.0f - depth)));
+     tmpfactor = ( depth * scale * (( sin + idepth) * sin_tbl[offset] + (tri + idepth) * tri_tbl[offset] + (saw  + idepth)* saw_tbl[offset] + (squ + idepth) * squ_tbl[offset]) );
+     efxoutl[i] *= tmpfactor;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   if (Pstereo != 0)
      {
-      efxoutr[i] *= ( depth * ( scale * (( sin) * sin_tbl[offset] + (tri * tri_tbl[offset]) + (saw * saw_tbl[offset]) + (squ * squ_tbl[offset])) + ( 1.0f - depth)));
+      efxoutr[i] *= tmpfactor;
      }
 
       offset += Pfreq;
@@ -167,8 +166,8 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
       lout = l;
       rout = r;  
        
-      efxoutl[i] = lout * 2.0f * level * panning;
-      efxoutr[i] = rout * 2.0f * level * (1.0f -panning);  
+      efxoutl[i] = dry * smpsl[i] + wet * lout * 2.0f * level * panning;
+      efxoutr[i] = dry * smpsr[i] + wet * rout * 2.0f * level * (1.0f -panning);  
 
     };
     
@@ -178,16 +177,7 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 /*
  * Parameter control
  */
-void
-Ring::setvolume (int Pvolume)
-{
-  this->Pvolume = Pvolume;
 
-  outvolume = (float)Pvolume / 127.0f;
-  if (Pvolume == 0)
-    cleanup ();
-
-};
 
 void
 Ring::setpanning (int Ppanning)
@@ -249,7 +239,8 @@ Ring::changepar (int npar, int value)
   switch (npar)
     {
     case 0:
-      setvolume (value);
+    dry = (float) (value + 64) / 127.0f;
+    wet = 1.0f - dry;
       break;
     case 1:
       setpanning (value);
@@ -263,6 +254,7 @@ Ring::changepar (int npar, int value)
     case 4:
       Pdepthp = value;
       depth = (float) Pdepthp / 100.0;
+      idepth = 1.0f - depth;
       break;
     case 5:
       if(value > 20000)		//Make sure bad inputs can't cause buffer overflow
@@ -306,6 +298,7 @@ Ring::changepar (int npar, int value)
     case 11:
       Pinput = value;
       break;
+      
     };
 };
 
