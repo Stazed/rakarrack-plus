@@ -216,7 +216,7 @@ Ring::setscale()
 void
 Ring::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
+  const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //A 440
@@ -230,7 +230,7 @@ Ring::setpreset (int npreset)
     //Fast Beat
     {0, 0, 0, 64, 100, 15, 0, 20, 0, 100, 0, 64},
     //Ring Amp
-
+    {0, 0, 0, 64, 100, 1, 0, 20, 0, 100, 0, 64},
   };
 
 
