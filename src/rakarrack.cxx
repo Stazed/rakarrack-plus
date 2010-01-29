@@ -3716,8 +3716,12 @@ void RKRGUI::cb_ring_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_ring_preset[] = {
- {gettext("Ring 1"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {gettext("Ring 2"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("A 440"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("E string"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("A string"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Dissonance"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Fast Beat"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Ring Amp"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

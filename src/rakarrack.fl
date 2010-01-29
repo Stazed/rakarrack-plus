@@ -881,12 +881,11 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1609 82 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4127,16 +4126,32 @@ ring_sin->value(rkr->efx_Ring->getpar(7));
 ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
-ring_pan->value(rkr->efx_Ring->getpar(1));}
+ring_pan->value(rkr->efx_Ring->getpar(1));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
-            label {Ring 1}
+            label {A 440}
             xywh {52 52 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Ring 2}
+            label {E string}
             xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {A string}
+            xywh {62 62 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Dissonance
+            xywh {72 72 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Fast Beat}
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Ring Amp} selected
+            xywh {92 92 36 21} labelsize 10
           }
         }
         Fl_Value_Slider ring_WD {
@@ -5591,8 +5606,7 @@ CancelRec->color(bcolor);
 
 fore_color= bcolor;
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {ActivarGeneral->selection_color(bcolor);
