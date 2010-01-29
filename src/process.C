@@ -733,6 +733,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
              if(RecNote->afreq > 0.0) 
              {
              efx_Ring->Pfreq=lrintf(RecNote->lafreq);
+             // printf("%d\n"efx_Ring->Pfreq);
              }
             }
         }    

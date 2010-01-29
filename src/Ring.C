@@ -147,10 +147,9 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
         efxoutl[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-    if (Pstereo != 0)
-        {
+    if (Pstereo != 0)        
          efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
-        } 
+         
 
       offset += Pfreq;
       if (offset > SAMPLE_RATE) offset -=SAMPLE_RATE;
