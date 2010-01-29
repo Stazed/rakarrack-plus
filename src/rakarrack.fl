@@ -881,12 +881,13 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1442 117 800 600} type Double box DOWN_BOX color 0 resizable size_range {640 480 3200 2400} visible
+Pexitprogram=1;} open
+      xywh {1609 82 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4101,7 +4102,7 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
           class SliderW
         }
       }
-      Fl_Group RING {selected
+      Fl_Group RING {
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button ring_activar {
@@ -4117,9 +4118,15 @@ findpos(21,(int)o->value());}
           callback {rkr->efx_Overdrive->setpreset((int) o->value());
 ring_WD->value(rkr->efx_Ring->getpar(0));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
-ring_input->value(rkr->efx_Ring->getpar(3));
-ring_level->value(rkr->efx_Ring->getpar(4));
-ring_st->value(rkr->efx_Ring->getpar(9));
+ring_input->value(rkr->efx_Ring->getpar(11));
+ring_level->value(rkr->efx_Ring->getpar(3));
+ring_st->value(rkr->efx_Ring->getpar(6));
+ring_depth->value(rkr->efx_Ring->getpar(4));
+ring_freq->value(rkr->efx_Ring->getpar(5));
+ring_sin->value(rkr->efx_Ring->getpar(7));
+ring_tri->value(rkr->efx_Ring->getpar(8));
+ring_saw->value(rkr->efx_Ring->getpar(9));
+ring_squ->value(rkr->efx_Ring->getpar(10));
 ring_pan->value(rkr->efx_Ring->getpar(1));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
@@ -4135,36 +4142,72 @@ ring_pan->value(rkr->efx_Ring->getpar(1));}
         Fl_Value_Slider ring_WD {
           label {Wet/Dry}
           callback {rkr->efx_Ring->changepar(0,(int)o->value());}
-          xywh {371 246 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {371 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider ring_LRc {
           label {L/R Cr.}
           callback {rkr->efx_Ring->changepar(2,(int)o->value());}
-          xywh {371 259 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {371 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider ring_input {
-          label Drive
-          callback {rkr->efx_Ring->changepar(3,(int)o->value());}
-          xywh {371 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          label Input
+          callback {rkr->efx_Ring->changepar(11,(int)o->value());}
+          xywh {371 266 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider ring_level {
           label Level
-          callback {rkr->efx_Ring->changepar(4,(int)o->value());}
-          xywh {371 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          callback {rkr->efx_Ring->changepar(3,(int)o->value());}
+          xywh {371 279 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
-        }
-        Fl_Check_Button ring_st {
-          label Stereo
-          callback {rkr->efx_Ring->changepar(9,(int)o->value());}
-          xywh {361 321 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider ring_pan {
           label Pan
           callback {rkr->efx_Ring->changepar(1,(int)o->value());}
-          xywh {371 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 292 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button ring_st {
+          label Stereo
+          callback {rkr->efx_Ring->changepar(6,(int)o->value());}
+          xywh {348 303 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Value_Slider ring_depth {
+          label Depth
+          callback {rkr->efx_Ring->changepar(4,(int)o->value());}
+          xywh {371 317 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_freq {
+          label Freq
+          callback {rkr->efx_Ring->changepar(5,(int)o->value());}
+          xywh {371 329 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_sin {
+          label Sin
+          callback {rkr->efx_Ring->changepar(7,(int)o->value());}
+          xywh {371 341 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_tri {
+          label Tri
+          callback {rkr->efx_Ring->changepar(8,(int)o->value());}
+          xywh {371 353 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_saw {
+          label Saw
+          callback {rkr->efx_Ring->changepar(9,(int)o->value());}
+          xywh {371 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ring_squ {
+          label Squ
+          callback {rkr->efx_Ring->changepar(10,(int)o->value());}
+          xywh {371 378 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
           class SliderW
         }
       }
@@ -5310,6 +5353,7 @@ valve_st->labelcolor(bcolor);
 valve_neg->labelcolor(bcolor);
 valve_pf->labelcolor(bcolor);
 
+ring_st->labelcolor(bcolor);
 
 ovrd_preset->labelcolor(bcolor);
 ovrd_tipo->labelcolor(bcolor);
@@ -5391,6 +5435,7 @@ musdelay_preset->labelcolor(bcolor);
 musdelay_delay1->labelcolor(bcolor);
 musdelay_delay3->labelcolor(bcolor);
 musdelay_delay2->labelcolor(bcolor);
+
 
 
 
@@ -5483,6 +5528,7 @@ musdelay_activar->color(bcolor);
 gate_activar->color(bcolor);
 newdist_activar->color(bcolor);
 valve_activar->color(bcolor);
+ring_activar->color(bcolor);
 Cabinet_activar->color(bcolor);
 tuner_activar->color(bcolor);
 Preset_Counter->color(bcolor);
@@ -5545,7 +5591,8 @@ CancelRec->color(bcolor);
 
 fore_color= bcolor;
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {ActivarGeneral->selection_color(bcolor);

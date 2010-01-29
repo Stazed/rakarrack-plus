@@ -1567,15 +1567,45 @@ private:
   void cb_ring_level_i(SliderW*, void*);
   static void cb_ring_level(SliderW*, void*);
 public:
+  SliderW *ring_pan;
+private:
+  void cb_ring_pan_i(SliderW*, void*);
+  static void cb_ring_pan(SliderW*, void*);
+public:
   Fl_Check_Button *ring_st;
 private:
   void cb_ring_st_i(Fl_Check_Button*, void*);
   static void cb_ring_st(Fl_Check_Button*, void*);
 public:
-  SliderW *ring_pan;
+  SliderW *ring_depth;
 private:
-  void cb_ring_pan_i(SliderW*, void*);
-  static void cb_ring_pan(SliderW*, void*);
+  void cb_ring_depth_i(SliderW*, void*);
+  static void cb_ring_depth(SliderW*, void*);
+public:
+  SliderW *ring_freq;
+private:
+  void cb_ring_freq_i(SliderW*, void*);
+  static void cb_ring_freq(SliderW*, void*);
+public:
+  SliderW *ring_sin;
+private:
+  void cb_ring_sin_i(SliderW*, void*);
+  static void cb_ring_sin(SliderW*, void*);
+public:
+  SliderW *ring_tri;
+private:
+  void cb_ring_tri_i(SliderW*, void*);
+  static void cb_ring_tri(SliderW*, void*);
+public:
+  SliderW *ring_saw;
+private:
+  void cb_ring_saw_i(SliderW*, void*);
+  static void cb_ring_saw(SliderW*, void*);
+public:
+  SliderW *ring_squ;
+private:
+  void cb_ring_squ_i(SliderW*, void*);
+  static void cb_ring_squ(SliderW*, void*);
 public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
