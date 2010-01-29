@@ -137,19 +137,19 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i=0;i < PERIOD; i++)
     {
-//     tmpfactor = ( depth * scale * (( sin + idepth) * sin_tbl[offset] + (tri + idepth) * tri_tbl[offset] + (saw  + idepth)* saw_tbl[offset] + (squ + idepth) * squ_tbl[offset]) );
-//     efxoutl[i] *= tmpfactor;
+    tmpfactor =  depth * (scale * ( sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset] ) + idepth) ;    //This is now mathematically equivalent, but less computation
+    efxoutl[i] *= tmpfactor;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-//  if (Pstereo != 0)
-//     {
-//     efxoutr[i] *= tmpfactor;
-//     }
+ if (Pstereo != 0)
+    {
+    efxoutr[i] *= tmpfactor;
+    }
 
-        efxoutl[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-    if (Pstereo != 0)        
-        efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
-         
+//         efxoutl[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
+//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+//     if (Pstereo != 0)        
+//         efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
+//          
 
       offset += Pfreq;
       if (offset > SAMPLE_RATE) offset -=SAMPLE_RATE;
