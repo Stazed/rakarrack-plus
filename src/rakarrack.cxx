@@ -10057,7 +10057,7 @@ dist_pf->selection_color(bcolor);
 valve_neg->selection_color(bcolor);
 valve_st->selection_color(bcolor);
 valve_pf->selection_color(bcolor);
-
+ring_st->selection_color(bcolor);
 Auto_Output->selection_color(bcolor);
 Stereo->selection_color(bcolor);
  

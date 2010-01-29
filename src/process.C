@@ -902,7 +902,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Ring_Bypass)
                 {
                   efx_Ring->out(efxoutl, efxoutr);
-		  Vol2_Efx ();
+		  Vol_Efx (21,efx_Ring->outvolume);
                 }
               break; 	           
 	    
