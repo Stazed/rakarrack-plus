@@ -885,7 +885,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1609 82 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4114,7 +4114,7 @@ findpos(21,(int)o->value());}
         }
         Fl_Choice ring_preset {
           label Preset
-          callback {rkr->efx_Overdrive->setpreset((int) o->value());
+          callback {rkr->efx_Ring->setpreset((int) o->value());
 ring_WD->value(rkr->efx_Ring->getpar(0));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
 ring_input->value(rkr->efx_Ring->getpar(11));
@@ -4126,7 +4126,7 @@ ring_sin->value(rkr->efx_Ring->getpar(7));
 ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
-ring_pan->value(rkr->efx_Ring->getpar(1));} open
+ring_pan->value(rkr->efx_Ring->getpar(1));} open selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
@@ -4150,7 +4150,7 @@ ring_pan->value(rkr->efx_Ring->getpar(1));} open
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Ring Amp} selected
+            label {Ring Amp}
             xywh {92 92 36 21} labelsize 10
           }
         }

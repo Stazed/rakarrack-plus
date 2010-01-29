@@ -3697,7 +3697,7 @@ void RKRGUI::cb_ring_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ring_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Overdrive->setpreset((int) o->value());
+  rkr->efx_Ring->setpreset((int) o->value());
 ring_WD->value(rkr->efx_Ring->getpar(0));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
 ring_input->value(rkr->efx_Ring->getpar(11));
