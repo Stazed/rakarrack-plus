@@ -115,14 +115,18 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
   int i;
   REALTYPE l, r, lout, rout, tmpfactor;
 
-/*  REALTYPE inputvol = powf (5.0f, ((float)Pinput - 32.0f) / 127.0f);
+  REALTYPE inputvol = (float) Pinput /127.0f;
 
   if (Pstereo != 0)
     {				//Stereo
       for (i = 0; i < PERIOD; i++)
 	{
-	  efxoutl[i] = smpsl[i] * inputvol * 2.0f;
-	  efxoutr[i] = smpsr[i] * inputvol * 2.0f;
+	  efxoutl[i] = smpsl[i] * inputvol;
+	  efxoutr[i] = smpsr[i] * inputvol;
+          if(inputvol == 0.0)
+          { 
+	  efxoutl[i]=1.0; efxoutr[i]=1.0;
+	  }
 	};
     }
   else
@@ -131,9 +135,10 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	{
 	  efxoutl[i] =
 	    (smpsl[i]  +  smpsr[i] ) * inputvol;
+	  if (inputvol == 0.0) efxoutl[i]=1.0;
 	};
     };
-*/
+
 
   for (i=0;i < PERIOD; i++)
     {
