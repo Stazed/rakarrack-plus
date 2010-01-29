@@ -877,11 +877,13 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -4126,7 +4128,7 @@ ring_sin->value(rkr->efx_Ring->getpar(7));
 ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
-ring_pan->value(rkr->efx_Ring->getpar(1));} open selected
+ring_pan->value(rkr->efx_Ring->getpar(1));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
@@ -4197,8 +4199,8 @@ ring_pan->value(rkr->efx_Ring->getpar(1));} open selected
         }
         Fl_Value_Slider ring_freq {
           label Freq
-          callback {rkr->efx_Ring->changepar(5,(int)o->value());}
-          xywh {371 329 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 textcolor 7
+          callback {rkr->efx_Ring->changepar(5,(int)o->value());} selected
+          xywh {371 329 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 20000 step 10 textcolor 7
           class SliderW
         }
         Fl_Value_Slider ring_sin {
