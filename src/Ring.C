@@ -115,7 +115,7 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
   int i;
   REALTYPE l, r, lout, rout, tmpfactor;
 
-  REALTYPE inputvol = powf (5.0f, ((float)Pinput - 32.0f) / 127.0f);
+/*  REALTYPE inputvol = powf (5.0f, ((float)Pinput - 32.0f) / 127.0f);
 
   if (Pstereo != 0)
     {				//Stereo
@@ -129,11 +129,11 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
     {
       for (i = 0; i < PERIOD; i++)
 	{
-	  efxoutl[i] =   (smpsl[i]  +  smpsr[i] ) * inputvol;
+	  efxoutl[i] =
+	    (smpsl[i]  +  smpsr[i] ) * inputvol;
 	};
     };
-
-
+*/
 
   for (i=0;i < PERIOD; i++)
     {
@@ -148,7 +148,7 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
         efxoutl[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     if (Pstereo != 0)        
-         efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
+        efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
          
 
       offset += Pfreq;
@@ -220,16 +220,16 @@ Ring::setpreset (int npreset)
   const int PRESET_SIZE = 13;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //A 440
-    {0, 0, 0, 64, 100, 440, 0, 20, 0, 100, 0, 64, 0},
+    //Saw-Sin
+    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1},
     //E string
     {0, 0, 0, 64, 100, 82, 0, 100, 0, 0, 0, 64, 0},
     //A string
     {0, 0, 0, 64, 100, 110, 0, 0, 100, 50, 0, 64, 0},
     //dissonance
-    {0, 0, 0, 64, 100, 817, 0, 20, 0, 100, 0, 64, 0},
+    {0, 0, 0, 64, 100, 817, 0, 20, 0, 100, 0, 64, 1},
     //Fast Beat
-    {0, 0, 0, 64, 100, 15, 0, 20, 0, 100, 0, 64, 0},
+    {0, 0, 0, 64, 100, 15, 0, 20, 0, 100, 0, 64, 1},
     //Ring Amp
     {0, 0, 0, 64, 100, 1, 0, 20, 0, 100, 0, 64, 0},
   };

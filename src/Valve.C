@@ -294,20 +294,15 @@ void
 Valve::setpreset (int npreset)
 {
   const int PRESET_SIZE = 11;
-  const int NUM_PRESETS = 6;
+  const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Overdrive 1
-    {0, 64, 64, 64, 64, 0, 127, 0, 0, 0, 0},
-    //Overdrive 2
-    {0, 64, 35, 29, 45, 1, 0, 127, 0, 0, 0},
     //Valve 1
-    {0, 64, 0, 87, 14, 6, 0, 80, 30, 0, 1},
+    {0, 64, 64, 127, 64, 1, 93, 17, 1, 0, 69},
     //Valve 2
-    {0, 64, 127, 87, 14, 0, 1, 80, 24, 0, 0},
+    {0, 64, 64, 127, 64, 0, 90, 17, 1, 0, 112},
     //Valve 3
-    {0, 64, 127, 127, 12, 13, 0, 90, 16, 0, 1},
-    //Guitar Amp
-    {84, 64, 35, 63, 50, 2, 0, 55, 0, 0, 0}
+    {0, 64, 35, 80, 64, 0, 80, 40, 1, 1, 100}
+
   };
 
 

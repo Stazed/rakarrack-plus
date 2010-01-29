@@ -3453,10 +3453,9 @@ void RKRGUI::cb_valve_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_valve_preset[] = {
- {gettext("Distorsion 1"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {gettext("Distorsion 2"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {gettext("Distorsion 3"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {gettext("Guitar Amp"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Valve 1"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Valve 2"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Valve 3"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -3717,7 +3716,7 @@ void RKRGUI::cb_ring_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_ring_preset[] = {
- {gettext("A 440"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Saw_Sin"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {gettext("E string"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {gettext("A string"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {gettext("Dissonance"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
@@ -8281,7 +8280,7 @@ R average."));
         valve_drive->align(FL_ALIGN_LEFT);
         valve_drive->when(FL_WHEN_CHANGED);
       } // SliderW* valve_drive
-      { valve_Q = new SliderW(373, 284, 100, 10, gettext("Character"));
+      { valve_Q = new SliderW(373, 284, 100, 10, gettext("Dist."));
         valve_Q->type(5);
         valve_Q->box(FL_FLAT_BOX);
         valve_Q->color((Fl_Color)178);
@@ -10655,6 +10654,62 @@ aphaser_fb->value(rkr->lv[19][7]-64);
 aphaser_stages->value(rkr->lv[19][8]);
 aphaser_LR->value(rkr->lv[19][9]);
 aphaser_activar->value(rkr->APhaser_Bypass);
+
+
+//Valve
+
+valve_WD->value(rkr->lv[20][0]-64);
+valve_neg->value(rkr->lv[20][5]);
+valve_st->value(rkr->lv[20][8]);
+valve_pf->value(rkr->lv[20][9]);
+valve_LRc->value(rkr->lv[20][2]-64);
+valve_drive->value(rkr->lv[20][3]);
+valve_Q->value(rkr->lv[20][10]);
+valve_level->value(rkr->lv[20][4]);
+valve_pan->value(rkr->lv[20][1]-64);
+valve_lpf->value(rkr->lv[20][6]);
+valve_hpf->value(rkr->lv[20][7]);
+valve_activar->value(rkr->Valve_Bypass);
+
+//Dual_Flange
+
+
+dflange_WD->value(rkr->lv[21][0]);
+dflange_pan->value(rkr->lv[21][1]);
+dflange_freq->value(rkr->lv[21][10]);
+dflange_rnd->value(rkr->lv[21][13]);
+dflange_lfotype->value(rkr->lv[21][12]);
+dflange_stdf->value(rkr->lv[21][11]);
+dflange_width->value(rkr->lv[21][4]);
+dflange_depth->value(rkr->lv[21][3]);
+dflange_fb->value(rkr->lv[21][6]);
+dflange_LR->value(rkr->lv[21][2]);
+dflange_subs->value(rkr->lv[21][8]);
+dflange_tz->value(rkr->lv[21][9]);
+dflange_offset->value(rkr->lv[21][5]);
+dflange_lpf->value(rkr->lv[21][7]);
+dflange_activar->value(rkr->DFlange_Bypass);
+
+
+// Ring
+
+ring_WD->value(rkr->lv[22][0]);
+ring_LRc->value(rkr->lv[22][2]);
+ring_input->value(rkr->lv[22][11]);
+ring_level->value(rkr->lv[22][3]);
+ring_st->value(rkr->lv[22][6]);
+ring_depth->value(rkr->lv[22][4]);
+ring_freq->value(rkr->lv[22][5]);
+ring_sin->value(rkr->lv[22][7]);
+ring_tri->value(rkr->lv[22][8]);
+ring_saw->value(rkr->lv[22][9]);
+ring_squ->value(rkr->lv[22][10]);
+ring_pan->value(rkr->lv[22][1]);
+ring_afreq->value(rkr->lv[22][12]);
+ring_activar->value(rkr->Ring_Bypass);
+
+
+
 
 
 

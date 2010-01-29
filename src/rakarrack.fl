@@ -882,12 +882,11 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1609 82 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -3861,20 +3860,16 @@ valve_Q->value(rkr->efx_Valve->getpar(10));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
-            label {Distorsion 1}
+            label {Valve 1}
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Distorsion 2}
+            label {Valve 2}
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Distorsion 3}
+            label {Valve 3}
             xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Guitar Amp}
-            xywh {42 42 36 21} labelsize 10
           }
         }
         Fl_Value_Slider valve_WD {
@@ -3896,7 +3891,7 @@ valve_Q->value(rkr->efx_Valve->getpar(10));}
           class SliderW
         }
         Fl_Value_Slider valve_Q {
-          label Character
+          label {Dist.}
           callback {rkr->efx_Valve->changepar(10,(int)o->value());}
           xywh {373 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
@@ -4129,11 +4124,11 @@ ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
 ring_pan->value(rkr->efx_Ring->getpar(1));
-ring_afreq->value(rkr->efx_Ring->getpar(12));}
+ring_afreq->value(rkr->efx_Ring->getpar(12));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
-            label {A 440}
+            label Saw_Sin selected
             xywh {52 52 36 21} labelsize 10
           }
           MenuItem {} {
@@ -4183,7 +4178,7 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
         }
         Fl_Value_Slider ring_pan {
           label Pan
-          callback {rkr->efx_Ring->changepar(1,(int)o->value());} selected
+          callback {rkr->efx_Ring->changepar(1,(int)o->value());}
           xywh {371 292 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -6245,6 +6240,62 @@ aphaser_fb->value(rkr->lv[19][7]-64);
 aphaser_stages->value(rkr->lv[19][8]);
 aphaser_LR->value(rkr->lv[19][9]);
 aphaser_activar->value(rkr->APhaser_Bypass);
+
+
+//Valve
+
+valve_WD->value(rkr->lv[20][0]-64);
+valve_neg->value(rkr->lv[20][5]);
+valve_st->value(rkr->lv[20][8]);
+valve_pf->value(rkr->lv[20][9]);
+valve_LRc->value(rkr->lv[20][2]-64);
+valve_drive->value(rkr->lv[20][3]);
+valve_Q->value(rkr->lv[20][10]);
+valve_level->value(rkr->lv[20][4]);
+valve_pan->value(rkr->lv[20][1]-64);
+valve_lpf->value(rkr->lv[20][6]);
+valve_hpf->value(rkr->lv[20][7]);
+valve_activar->value(rkr->Valve_Bypass);
+
+//Dual_Flange
+
+
+dflange_WD->value(rkr->lv[21][0]);
+dflange_pan->value(rkr->lv[21][1]);
+dflange_freq->value(rkr->lv[21][10]);
+dflange_rnd->value(rkr->lv[21][13]);
+dflange_lfotype->value(rkr->lv[21][12]);
+dflange_stdf->value(rkr->lv[21][11]);
+dflange_width->value(rkr->lv[21][4]);
+dflange_depth->value(rkr->lv[21][3]);
+dflange_fb->value(rkr->lv[21][6]);
+dflange_LR->value(rkr->lv[21][2]);
+dflange_subs->value(rkr->lv[21][8]);
+dflange_tz->value(rkr->lv[21][9]);
+dflange_offset->value(rkr->lv[21][5]);
+dflange_lpf->value(rkr->lv[21][7]);
+dflange_activar->value(rkr->DFlange_Bypass);
+
+
+// Ring
+
+ring_WD->value(rkr->lv[22][0]);
+ring_LRc->value(rkr->lv[22][2]);
+ring_input->value(rkr->lv[22][11]);
+ring_level->value(rkr->lv[22][3]);
+ring_st->value(rkr->lv[22][6]);
+ring_depth->value(rkr->lv[22][4]);
+ring_freq->value(rkr->lv[22][5]);
+ring_sin->value(rkr->lv[22][7]);
+ring_tri->value(rkr->lv[22][8]);
+ring_saw->value(rkr->lv[22][9]);
+ring_squ->value(rkr->lv[22][10]);
+ring_pan->value(rkr->lv[22][1]);
+ring_afreq->value(rkr->lv[22][12]);
+ring_activar->value(rkr->Ring_Bypass);
+
+
+
 
 
 

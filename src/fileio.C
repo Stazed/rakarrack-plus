@@ -277,6 +277,41 @@ RKR::savefile (char *filename)
 		   APhaser_Bypass);
 	  break;
 
+	case 19:
+	  //Valve
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Valve->getpar (0), efx_Valve->getpar (1),
+		   efx_Valve->getpar (2), efx_Valve->getpar (3),
+		   efx_Valve->getpar (4), efx_Valve->getpar (5),
+		   efx_Valve->getpar (6), efx_Valve->getpar (7),
+		   efx_Valve->getpar (8), efx_Valve->getpar (9),
+		   efx_Valve->getpar (10), Valve_Bypass);
+	  break;
+
+	case 20:
+	  //Dual_Flange
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_DFlange->getpar (0), efx_DFlange->getpar (1),
+		   efx_DFlange->getpar (2), efx_DFlange->getpar (3),
+		   efx_DFlange->getpar (4), efx_DFlange->getpar (5),
+		   efx_DFlange->getpar (6), efx_DFlange->getpar (7),
+		   efx_DFlange->getpar (8), efx_DFlange->getpar (9),
+		   efx_DFlange->getpar (10), efx_DFlange->getpar (11),
+		   efx_DFlange->getpar (12), efx_DFlange->getpar (13),
+		   DFlange_Bypass);
+	  break;
+
+	case 21:
+	  //Ring
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Ring->getpar (0), efx_Ring->getpar (1),
+		   efx_Ring->getpar (2), efx_Ring->getpar (3),
+		   efx_Ring->getpar (4), efx_Ring->getpar (5),
+		   efx_Ring->getpar (6), efx_Ring->getpar (7),
+		   efx_Ring->getpar (8), efx_Ring->getpar (9),
+		   efx_Ring->getpar (10), efx_Ring->getpar (11),
+		   efx_Ring->getpar (12),  Ring_Bypass);
+	  break;
 
 
 
@@ -582,6 +617,30 @@ RKR::loadfile (char *filename)
 		  &lv[19][10], &lv[19][11], &APhaser_B);
 	  break;
 
+	case 19:
+	  //Valve
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[20][0], &lv[20][1], &lv[20][2], &lv[20][3], &lv[20][4],
+		  &lv[20][5], &lv[20][6], &lv[20][7], &lv[20][8], &lv[20][9],
+		  &lv[20][10], &Valve_B);
+	  break;
+
+	case 20:
+	  //Dual Flnage
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[21][0], &lv[21][1], &lv[21][2], &lv[21][3], &lv[21][4],
+		  &lv[21][5], &lv[21][6], &lv[21][7], &lv[21][8], &lv[21][9],
+		  &lv[21][10], &lv[21][11], &lv[21][12], &lv[21][13],&DFlange_B);
+	  break;
+
+	case 21:
+	  //Ring
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[22][0], &lv[22][1], &lv[22][2], &lv[22][3], &lv[22][4],
+		  &lv[22][5], &lv[22][6], &lv[22][7], &lv[22][8], &lv[22][9],
+		  &lv[22][10], &lv[22][11], &lv[22][12],&Ring_B);
+	  break;
+
 
 	}
     }
@@ -644,7 +703,10 @@ RKR::Actualizar_Audio ()
   Gate_Bypass = 0;
   NewDist_Bypass = 0;
   APhaser_Bypass = 0;
-
+  DFlange_Bypass = 0;
+  Valve_Bypass = 0;
+  Ring_Bypass = 0;
+  
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -681,6 +743,12 @@ RKR::Actualizar_Audio ()
     efx_NewDist->changepar (i, (unsigned char)lv[18][i]);
   for (i = 0; i <= 12; i++)
     efx_APhaser->changepar (i, lv[19][i]);
+  for (i = 0; i <= 11; i++)
+    efx_Valve->changepar (i, lv[20][i]);
+ for (i = 0; i <= 13; i++)
+    efx_DFlange->changepar (i, lv[21][i]);
+ for (i = 0; i <= 12; i++)
+    efx_Ring->changepar (i, lv[22][i]);
 
 
   for (i = 0; i < 19; i++)
@@ -729,6 +797,9 @@ RKR::Actualizar_Audio ()
   Gate_Bypass = Gate_B;
   NewDist_Bypass = NewDist_B;
   APhaser_Bypass = APhaser_B;
+  Valve_Bypass = Valve_B;
+  DFlange_Bypass = DFlange_B;
+  Ring_Bypass = Ring_B;
 
   Bypass = Bypass_B;
 
@@ -795,7 +866,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[20][16] = {
+  int presets[23][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -835,7 +906,16 @@ RKR::New ()
 //NewDist
     {0, 64, 64, 83, 15, 15, 0, 75, 31, 68, 0, 0, 0, 0, 0, 0},
 //APhaser
-    {64, 20, 254, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0}
+    {64, 20, 254, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0},
+// Valve
+    {0, 64, 64, 127, 64, 1, 93, 17, 1, 0, 69, 0, 0 ,0 ,0 ,0},
+// Dual Flange
+    {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 150, 64, 1, 10, 0, 0},
+//Ring
+    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0 ,0}
+
+
+
   };
 
 
@@ -850,9 +930,9 @@ RKR::New ()
   Bypass = 0;
   memset(lv, 0 , sizeof(lv));
 
-  for (j = 0; j < 20; j++)
+  for (j = 0; j < NumEffects; j++)
     {
-      for (k = 0; k < 16; k++)
+      for (k = 0; k < 20; k++)
 	{
 	  lv[j][k] = presets[j][k];
 	}
@@ -883,6 +963,9 @@ RKR::New ()
   Gate_B = 0;
   NewDist_B = 0;
   APhaser_B = 0;
+  Valve_B = 0;
+  DFlange_B = 0;
+  Ring_B = 0;
   Bypass_B = 0;
 
   
@@ -905,7 +988,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[20][16] = {
+  int presets[23][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -945,7 +1028,16 @@ RKR::New_Bank ()
 //NewDist
     {0, 64, 64, 83, 65, 15, 0, 75, 31, 68, 0, 0, 0, 0, 0, 0},
 //APhaser
-    {64, 20, 254, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0}
+    {64, 20, 254, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0},
+//Valve
+     {0, 64, 64, 127, 64, 1, 93, 17, 1, 0, 69, 0, 0 ,0 ,0 ,0},
+// Dual Flange
+    {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 150, 64, 1, 10, 0, 0},
+//Ring
+    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0 ,0}
+    
+     
+         
   };
 
 
@@ -962,9 +1054,9 @@ RKR::New_Bank ()
       Bank[i].Bypass = 0;
       memset(Bank[i].lv , 0 , sizeof(Bank[i].lv));
 
-      for (j = 0; j < 20; j++)
+      for (j = 0; j < NumEffects; j++)
 	{
-	  for (k = 0; k < 16; k++)
+	  for (k = 0; k < 20; k++)
 	    {
 	      Bank[i].lv[j][k] = presets[j][k];
 	    }
@@ -1024,6 +1116,10 @@ RKR::Bank_to_Preset (int i)
   Gate_B = Bank[i].lv[17][19];
   NewDist_B = Bank[i].lv[18][19];
   APhaser_B = Bank[i].lv[19][19];
+  Valve_B = Bank[i].lv[20][19];
+  DFlange_B = Bank[i].lv[21][19];
+  Ring_B = Bank[i].lv[22][19];
+  
   Bypass_B = Bypass;
 
 
@@ -1092,6 +1188,12 @@ RKR::Preset_to_Bank (int i)
     lv[18][j] = efx_NewDist->getpar (j);
   for (j = 0; j <= 12; j++)
     lv[19][j] = efx_APhaser->getpar(j);
+  for (j = 0; j <= 11; j++)
+    lv[20][j] = efx_Valve->getpar(j);
+  for (j = 0; j <= 13; j++)
+    lv[21][j] = efx_DFlange->getpar(j);
+  for (j = 0; j <= 12; j++)
+    lv[22][j] = efx_Ring->getpar(j);
 
 
   for (j = 0; j <= 16; j++)
@@ -1144,6 +1246,9 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[17][19] = Gate_Bypass;
   Bank[i].lv[18][19] = NewDist_Bypass;
   Bank[i].lv[19][19] = APhaser_Bypass;
+  Bank[i].lv[20][19] = Valve_Bypass;
+  Bank[i].lv[21][19] = DFlange_Bypass;
+  Bank[i].lv[22][19] = Ring_Bypass;
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
   

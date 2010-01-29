@@ -61,7 +61,7 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_)
       lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
     } 
     
-  schmittInit (32);
+  schmittInit (16);
 
 
 }
@@ -168,7 +168,7 @@ Recognize::displayFrequency (float freq)
 {
   float ldf, mldf;
   float lfreq;
-  int i;
+  int i; int offset=4;
   int noteoff = 0;
   int octave = 4;
 
@@ -218,9 +218,13 @@ Recognize::displayFrequency (float freq)
   if (!noteoff)
     {
     reconota = 24 + (octave * 12) + note - 3;
-    if (fabsf(lafreq-freq)>4) lafreq = freq;
+    offset = lrintf(nfreq / 20.0);
+    if (fabsf(lafreq-freq)>offset)
+    { 
+    lafreq = nfreq;
+//    printf("%f\n",lafreq);
     }
-
+    }
 
 
 };
