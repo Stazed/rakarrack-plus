@@ -239,8 +239,7 @@ Ring::changepar (int npar, int value)
   switch (npar)
     {
     case 0:
-    dry = (float) (value + 64) / 127.0f;
-    wet = 1.0f - dry;
+    outvolume = 0.5f + (float)value/64.0f;
       break;
     case 1:
       setpanning (value);
