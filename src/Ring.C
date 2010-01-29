@@ -239,7 +239,9 @@ Ring::changepar (int npar, int value)
   switch (npar)
     {
     case 0:
-    outvolume = 0.5f + (float)value/64.0f;
+  outvolume = (float) value / 127.0f;
+  if (Pvolume == 0)
+    cleanup ();
       break;
     case 1:
       setpanning (value);
