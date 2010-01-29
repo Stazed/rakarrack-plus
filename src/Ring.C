@@ -193,6 +193,7 @@ Ring::setpanning (int Ppan)
 {
   Ppanning = Ppan;
   panning = (float)(Ppanning+64) / 128.0f;
+// is Ok ... 
 
 };
 
