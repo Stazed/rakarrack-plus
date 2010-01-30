@@ -26,7 +26,7 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
-
+#include "HarmonicEnhancer.h"
 
 class Valve
 {
@@ -71,7 +71,9 @@ private:
 
   //Parametrii reali
   REALTYPE panning, lrcross, q, dist, otml,otmr, itml, itmr;
+  float rm[10];
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
+  class HarmEnhancer *harm;
 
 };
 

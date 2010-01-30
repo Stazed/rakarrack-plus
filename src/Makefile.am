@@ -33,6 +33,8 @@ rakarrack_SOURCES = main.C \
 	Alienwah.h \
 	Filter.h \
 	Filter.C \
+	HarmonicEnhancer.C \
+	HarmonicEnhancer.h \
 	DynamicFilter.h \
 	DynamicFilter.C \
 	SVFilter.h \

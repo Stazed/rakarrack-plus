@@ -38,6 +38,8 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   lpfr = new AnalogFilter (2, 22000, 1, 0);
   hpfl = new AnalogFilter (3, 20, 1, 0);
   hpfr = new AnalogFilter (3, 20, 1, 0);
+  harm = new HarmEnhancer (rm, 2200.0f,4.0f);
+
 
   //default values
   Ppreset = 0;
@@ -55,6 +57,9 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   dist = 0.0f;
   setlpf(127);
   sethpf(1);
+
+  for(int i=0;i<10;i++) rm[i]=-1.0;
+  rm[1]=1.0; rm[6]=1.0; rm[9]=1.0;
 
   setpreset (Ppreset);
   cleanup ();
@@ -211,6 +216,9 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   }
 
+     
+  harm->harm_out(efxoutl,efxoutr);
+  
 
   if (Pprefiltering == 0)
     applyfilters (efxoutl, efxoutr);
