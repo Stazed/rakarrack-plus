@@ -33,7 +33,7 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float freq, float gain)
  inputl = (float *) malloc (sizeof (float) * PERIOD);
  inputr = (float *) malloc (sizeof (float) * PERIOD);
 
-  vol = gain;
+   set_vol(gain);
 
   itm1l = 0.0f;
   itm1r = 0.0f;
@@ -57,7 +57,7 @@ HarmEnhancer::~HarmEnhancer()
 void
 HarmEnhancer::set_vol(float gain)
 {
-  vol = gain;
+  vol = gain * 4.0f;
 }
 
 void  
@@ -191,8 +191,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
       otm1r = 0.999f * otm1r + yr - itm1r;
       itm1r = yr;
 
-      smpsl[i] += otm1l * 4.0f * vol;
-      smpsr[i] += otm1r * 4.0f * vol;
+      smpsl[i] += otm1l * vol;
+      smpsr[i] += otm1r * vol;
 
      }
 

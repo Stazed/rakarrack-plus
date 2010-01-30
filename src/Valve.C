@@ -59,7 +59,7 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   sethpf(1);
 
   for(int i=0;i<10;i++) rm[i]=-1.0;
-  rm[1]=1.0; rm[6]=1.0; rm[9]=1.0;
+  rm[1]=1.0; rm[5]=1.0; rm[9]=1.0;
   harm->calcula_mag(rm);
 
   setpreset (Ppreset);
