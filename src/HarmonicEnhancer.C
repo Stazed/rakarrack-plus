@@ -29,18 +29,9 @@
 
 HarmEnhancer::HarmEnhancer(float *Rmag, float freq, float gain) 
 {
-  int i;
 
  inputl = (float *) malloc (sizeof (float) * PERIOD);
  inputr = (float *) malloc (sizeof (float) * PERIOD);
-   
-
-
-
-static int phfl[10]={12,19,24,28,31,34,36,38,40,42};
-for (i=0; i<10; i++) harmonic_flist[i]=phfl[i];
-static int phnl[5]={12,24,31,36,40};
-for(i=0;i<5;i++) harmonic_nlist[i]=phnl[i];
 
   vol = gain;
 
@@ -63,8 +54,20 @@ HarmEnhancer::~HarmEnhancer()
 };
 
 
+void
+HarmEnhancer::set_vol(float gain)
+{
+  vol = gain;
+}
 
+void  
+HarmEnhancer::set_freq(float freq)
+{
+hpfl->setfreq(freq);
+hpfr->setfreq(freq);
+}
 
+ 
 
 /* Calculate Chebychev coefficents from partial magnitudes, adapted from
  * example in Num. Rec. */
@@ -148,8 +151,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
   for(i=0;i<PERIOD;i++)
    {
-     inputl[i]=smpsl[i];
-     inputr[i]=smpsr[i];
+     inputl[i]=smpsl[i]*.25;
+     inputr[i]=smpsr[i]*.25;
    }  
 
   hpfl->filterout(inputl);
@@ -188,8 +191,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
       otm1r = 0.999f * otm1r + yr - itm1r;
       itm1r = yr;
 
-      smpsl[i] += otm1l * vol;
-      smpsr[i] += otm1r * vol;
+      smpsl[i] += otm1l * 4.0f * vol;
+      smpsr[i] += otm1r * 4.0f * vol;
 
      }
 

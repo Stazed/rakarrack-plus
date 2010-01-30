@@ -39,7 +39,8 @@ public:
    void chebpc(float c[], float d[]);
    void calcula_mag(float *Rmag);
    void harm_out(float *smpsl, float *smpsr);
- 
+   void set_vol(float gain);
+   void set_freq(float freq); 
 
 
 private:
@@ -53,8 +54,6 @@ private:
   float otm1r;
   float vol;
   
-  int harmonic_flist[10];
-  int harmonic_nlist[5];
   float p[HARMONICS];
   
   AnalogFilter *hpfl, *hpfr;

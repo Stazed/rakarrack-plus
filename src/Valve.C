@@ -38,7 +38,7 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   lpfr = new AnalogFilter (2, 22000, 1, 0);
   hpfl = new AnalogFilter (3, 20, 1, 0);
   hpfr = new AnalogFilter (3, 20, 1, 0);
-  harm = new HarmEnhancer (rm, 2200.0f,4.0f);
+  harm = new HarmEnhancer (rm, 1100.0f,1.0f);
 
 
   //default values
@@ -60,6 +60,7 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 
   for(int i=0;i<10;i++) rm[i]=-1.0;
   rm[1]=1.0; rm[6]=1.0; rm[9]=1.0;
+  harm->calcula_mag(rm);
 
   setpreset (Ppreset);
   cleanup ();
@@ -245,6 +246,8 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
     };
     
+
+
 };
 
 
@@ -295,6 +298,7 @@ Valve::sethpf (int Phpf)
 
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
+
   //Prefiltering of 51 is approx 630 Hz. 50 - 60 generally good for OD pedal.
 };
 
