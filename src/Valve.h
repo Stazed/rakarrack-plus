@@ -70,7 +70,7 @@ private:
   void sethpf (int Phpf);
 
   //Parametrii reali
-  REALTYPE panning, lrcross, q, dist, otml,otmr, itml, itmr;
+  REALTYPE panning, lrcross, q, dist, otml,otmr, itml, itmr, factor;
   float rm[10];
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
   class HarmEnhancer *harm;

@@ -38,7 +38,7 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   lpfr = new AnalogFilter (2, 22000, 1, 0);
   hpfl = new AnalogFilter (3, 20, 1, 0);
   hpfr = new AnalogFilter (3, 20, 1, 0);
-  harm = new HarmEnhancer (rm, 1100.0f,1.0f);
+  harm = new HarmEnhancer (rm, 500.0f,1.0f);
 
 
   //default values
@@ -59,7 +59,7 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   sethpf(1);
 
   for(int i=0;i<10;i++) rm[i]=-1.0;
-  rm[1]=1.0; rm[5]=1.0; rm[9]=1.0;
+  rm[0]=1.0; rm[4]=1.0; rm[8]=1.0;
   harm->calcula_mag(rm);
 
   setpreset (Ppreset);
@@ -117,10 +117,10 @@ Valve::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
 float
 Valve::Wshape(float x)
 {
-float fq=fabsf(q);
-if(x<fq) return(x);
-if(x>fq) return(fq+(x-fq)/powf(1.0+((x-fq)/(1.0-fq)),2.0));
-if(x>1.0) return((fq+1.0)*.5);
+
+if(x<factor) return(x);
+if(x>factor) return(factor+(x-factor)/powf(1.0+((x-factor)/(1.0-factor)),2.0));
+if(x>1.0) return((factor+1.0)*.5);
 return(0.0);
 }
 
@@ -159,7 +159,13 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
   if (Pprefiltering != 0)
     applyfilters (efxoutl, efxoutr);
 
+    harm->harm_out(efxoutl,efxoutr);
 
+           for (i =0; i<PERIOD; i++) 
+             {
+               efxoutl[i]=Wshape(efxoutl[i]);
+               efxoutr[i]=Wshape(efxoutr[i]);
+             }
 
      if (q == 0.0f) 
        {
@@ -218,7 +224,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
   }
 
      
-  harm->harm_out(efxoutl,efxoutr);
   
 
   if (Pprefiltering == 0)
@@ -370,6 +375,7 @@ Valve::changepar (int npar, int value)
     case 10:
       Q_q = value;
       q = (float)Q_q /127.0f - .999;
+      factor = 1.0f - ((float)Q_q / 128.0); 
       break;       
 
     };
