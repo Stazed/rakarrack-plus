@@ -45,7 +45,7 @@ MIDIConverter::MIDIConverter ()
       freqs[i] = freqs[i - 1] * D_NOTE;
       lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
     }
-  schmittInit (36);
+  schmittInit (32);
 
 
   // Open Alsa Seq
