@@ -159,14 +159,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
   if (Pprefiltering != 0)
     applyfilters (efxoutl, efxoutr);
 
-    harm->harm_out(efxoutl,efxoutr);
-
-           for (i =0; i<PERIOD; i++) 
-             {
-               efxoutl[i]=Wshape(efxoutl[i]);
-               efxoutr[i]=Wshape(efxoutr[i]);
-             }
-
      if (q == 0.0f) 
        {
            for (i =0; i<PERIOD; i++) 
@@ -223,6 +215,8 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   }
 
+
+      harm->harm_out(efxoutl,efxoutr);
      
   
 
