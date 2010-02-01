@@ -157,9 +157,20 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	};
     };
 
+      harm->harm_out(efxoutl,efxoutr);
+
+
   if (Pprefiltering != 0)
     applyfilters (efxoutl, efxoutr);
 
+ if(Ped)
+    {
+      for (i =0; i<PERIOD; i++) 
+             {
+               efxoutl[i]=Wshape(efxoutl[i]);   
+               efxoutr[i]=Wshape(efxoutr[i]);
+             }
+    } 
      if (q == 0.0f) 
        {
            for (i =0; i<PERIOD; i++) 
@@ -168,7 +179,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
               otml = 0.999f * otml + fx - itml;
               itml = fx;
-              if(Ped) otml=Wshape(otml);
               efxoutl[i]= otml;
              }
         } 
@@ -180,7 +190,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otml = 0.999f * otml + fx - itml;
                itml = fx;
-               if(Ped)otml=Wshape(otml);
                efxoutl[i]= otml;
               }
         }
@@ -197,7 +206,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
               otmr = 0.999f * otmr + fx - itmr;
               itmr = fx;
-              if(Ped)otmr=Wshape(otmr);
               efxoutr[i]= otmr;
              }
         } 
@@ -209,16 +217,12 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otmr = 0.999f * otmr + fx - itmr;
                itmr = fx;
-               if(Ped)otmr=Wshape(otmr);
                efxoutr[i]= otmr;
               }
         }
 
   }
 
-
-      harm->harm_out(efxoutl,efxoutr);
-     
   
 
   if (Pprefiltering == 0)
@@ -327,11 +331,11 @@ Valve::setpreset (int npreset)
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Valve 1
-    {0, 64, 64, 127, 64, 1, 93, 17, 1, 0, 69, 0, 0},
+    {0, 64, 64, 127, 64, 1, 93, 17, 1, 0, 69, 1, 84},
     //Valve 2
-    {0, 64, 64, 127, 64, 0, 90, 17, 1, 0, 112, 0, 0},
+    {0, 64, 64, 127, 64, 0, 90, 17, 1, 0, 112, 0, 30},
     //Valve 3
-    {0, 64, 35, 80, 64, 0, 80, 40, 1, 1, 100, 0, 0}
+    {0, 64, 35, 80, 64, 0, 80, 40, 1, 1, 100, 1, 30}
 
   };
 
