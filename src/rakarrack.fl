@@ -877,8 +877,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -887,7 +886,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1609 82 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1595 68 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -3833,7 +3832,7 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
         }
       }
       Fl_Group VALVE {
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button valve_activar {
           label On
@@ -3856,7 +3855,9 @@ valve_pan->value(rkr->efx_Valve->getpar(1)-64);
 valve_pf->value(rkr->efx_Valve->getpar(9));
 valve_lpf->value(rkr->efx_Valve->getpar(6));
 valve_hpf->value(rkr->efx_Valve->getpar(7));
-valve_Q->value(rkr->efx_Valve->getpar(10));}
+valve_Q->value(rkr->efx_Valve->getpar(10));
+valve_ed->value(rkr->efx_Valve->getpar(11));
+valve_Pre->value(rkr->efx_Valve->getpar(12));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
@@ -3884,55 +3885,66 @@ valve_Q->value(rkr->efx_Valve->getpar(10));}
           xywh {373 255 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
-        Fl_Value_Slider valve_drive {
-          label Drive
-          callback {rkr->efx_Valve->changepar(3,(int)o->value());}
-          xywh {373 268 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider valve_Q {
-          label {Dist.}
-          callback {rkr->efx_Valve->changepar(10,(int)o->value());}
-          xywh {373 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+        Fl_Value_Slider valve_pan {
+          label Pan
+          callback {rkr->efx_Valve->changepar(1,(int)(o->value()+64));}
+          xywh {373 268 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider valve_level {
           label Level
           callback {rkr->efx_Valve->changepar(4,(int)o->value());}
-          xywh {373 301 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {373 282 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_drive {
+          label Drive
+          callback {rkr->efx_Valve->changepar(3,(int)o->value());}
+          xywh {373 295 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button valve_ed {
+          label {Extra Dist.}
+          callback {rkr->efx_Valve->changepar(11,(int)o->value());}
+          xywh {335 307 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Value_Slider valve_Q {
+          label {Dist,}
+          callback {rkr->efx_Valve->changepar(10,(int)o->value());}
+          xywh {373 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider valve_Pre {
+          label Presence
+          callback {rkr->efx_Valve->changepar(12,(int)o->value());} selected
+          xywh {373 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
           class SliderW
         }
         Fl_Check_Button valve_pf {
           label {Pre Filter}
           callback {rkr->efx_Valve->changepar(9,(int)o->value());}
-          xywh {325 315 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {325 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button valve_st {
           label Stereo
           callback {rkr->efx_Valve->changepar(8,(int)o->value());}
-          xywh {385 315 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {385 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button valve_neg {
           label {Neg.}
           callback {rkr->efx_Valve->changepar(5,(int)o->value());}
-          xywh {434 315 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider valve_pan {
-          label Pan
-          callback {rkr->efx_Valve->changepar(1,(int)(o->value()+64));}
-          xywh {373 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
+          xywh {434 350 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider valve_lpf {
           label LPF
           callback {rkr->efx_Valve->changepar(6,(int)o->value());}
-          xywh {373 364 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
+          xywh {373 367 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
           class SliderW
         }
         Fl_Value_Slider valve_hpf {
           label HPF
           callback {rkr->efx_Valve->changepar(7,(int)o->value());}
-          xywh {373 376 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {373 380 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
       }
@@ -4124,11 +4136,11 @@ ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
 ring_pan->value(rkr->efx_Ring->getpar(1));
-ring_afreq->value(rkr->efx_Ring->getpar(12));} open
+ring_afreq->value(rkr->efx_Ring->getpar(12));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
-            label Saw_Sin selected
+            label Saw_Sin
             xywh {52 52 36 21} labelsize 10
           }
           MenuItem {} {
@@ -5370,6 +5382,8 @@ valve_preset->labelcolor(bcolor);
 valve_st->labelcolor(bcolor);
 valve_neg->labelcolor(bcolor);
 valve_pf->labelcolor(bcolor);
+valve_ed->labelcolor(bcolor);
+
 
 ring_st->labelcolor(bcolor);
 ring_afreq->labelcolor(bcolor);
@@ -5660,6 +5674,7 @@ dist_st->selection_color(bcolor);
 dist_pf->selection_color(bcolor);
 valve_neg->selection_color(bcolor);
 valve_st->selection_color(bcolor);
+valve_ed->selection_color(bcolor);
 valve_pf->selection_color(bcolor);
 ring_st->selection_color(bcolor);
 ring_afreq->selection_color(bcolor);
@@ -6255,6 +6270,9 @@ valve_level->value(rkr->lv[20][4]);
 valve_pan->value(rkr->lv[20][1]-64);
 valve_lpf->value(rkr->lv[20][6]);
 valve_hpf->value(rkr->lv[20][7]);
+valve_ed->value(rkr->lv[20][11]);
+valve_Pre->value(rkr->lv[20][12]);
+
 valve_activar->value(rkr->Valve_Bypass);
 
 //Dual_Flange

@@ -39,20 +39,22 @@ public:
    void chebpc(float c[], float d[]);
    void calcula_mag(float *Rmag);
    void harm_out(float *smpsl, float *smpsr);
-   void set_vol(float gain);
-   void set_freq(float freq); 
+   void set_vol(int mode, float gain);
+   void set_freq(int mode, float freq); 
+
+  float realvol;
+  float hpffreq;
 
 
 private:
 
   float *inputl;
   float *inputr;
-
+  float vol;
   float itm1l;
   float itm1r;
   float otm1l;
   float otm1r;
-  float vol;
   
   float p[HARMONICS];
   

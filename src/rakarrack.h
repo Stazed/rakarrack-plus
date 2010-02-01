@@ -1407,20 +1407,35 @@ private:
   void cb_valve_LRc_i(SliderW*, void*);
   static void cb_valve_LRc(SliderW*, void*);
 public:
+  SliderW *valve_pan;
+private:
+  void cb_valve_pan_i(SliderW*, void*);
+  static void cb_valve_pan(SliderW*, void*);
+public:
+  SliderW *valve_level;
+private:
+  void cb_valve_level_i(SliderW*, void*);
+  static void cb_valve_level(SliderW*, void*);
+public:
   SliderW *valve_drive;
 private:
   void cb_valve_drive_i(SliderW*, void*);
   static void cb_valve_drive(SliderW*, void*);
+public:
+  Fl_Check_Button *valve_ed;
+private:
+  void cb_valve_ed_i(Fl_Check_Button*, void*);
+  static void cb_valve_ed(Fl_Check_Button*, void*);
 public:
   SliderW *valve_Q;
 private:
   void cb_valve_Q_i(SliderW*, void*);
   static void cb_valve_Q(SliderW*, void*);
 public:
-  SliderW *valve_level;
+  SliderW *valve_Pre;
 private:
-  void cb_valve_level_i(SliderW*, void*);
-  static void cb_valve_level(SliderW*, void*);
+  void cb_valve_Pre_i(SliderW*, void*);
+  static void cb_valve_Pre(SliderW*, void*);
 public:
   Fl_Check_Button *valve_pf;
 private:
@@ -1436,11 +1451,6 @@ public:
 private:
   void cb_valve_neg_i(Fl_Check_Button*, void*);
   static void cb_valve_neg(Fl_Check_Button*, void*);
-public:
-  SliderW *valve_pan;
-private:
-  void cb_valve_pan_i(SliderW*, void*);
-  static void cb_valve_pan(SliderW*, void*);
 public:
   SliderW *valve_lpf;
 private:

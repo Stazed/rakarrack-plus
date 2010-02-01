@@ -62,13 +62,15 @@ private:
   int Pstereo;	//0=mono,1=stereo
   int Pprefiltering;	//if you want to do the filtering before the distorsion
   int Q_q;
+  int Ped;
+  int Presence;
   
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void setlrcross (int Plrcross);
   void setlpf (int Plpf);
   void sethpf (int Phpf);
-
+  void setpresence(int value);
   //Parametrii reali
   REALTYPE panning, lrcross, q, dist, otml,otmr, itml, itmr, factor;
   float rm[10];

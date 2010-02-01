@@ -33,13 +33,14 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float freq, float gain)
  inputl = (float *) malloc (sizeof (float) * PERIOD);
  inputr = (float *) malloc (sizeof (float) * PERIOD);
 
-   set_vol(gain);
-
+  set_vol(0,gain);
+  realvol = gain;
   itm1l = 0.0f;
   itm1r = 0.0f;
   otm1l = 0.0f;
   otm1r = 0.0f;
 
+  hpffreq = freq;
   hpfl = new AnalogFilter(3, freq, 1, 0);
   hpfr = new AnalogFilter(3, freq, 1, 0);
 
@@ -55,19 +56,21 @@ HarmEnhancer::~HarmEnhancer()
 
 
 void
-HarmEnhancer::set_vol(float gain)
+HarmEnhancer::set_vol(int mode, float gain)
 {
-  vol = gain*4.0;
+  if(!mode) vol = gain*4.0;
+  else
+  vol = 4.0f * realvol + 2.0 * gain;
 }
 
 void  
-HarmEnhancer::set_freq(float freq)
+HarmEnhancer::set_freq(int mode, float freq)
 {
-hpfl->setfreq(freq);
-hpfr->setfreq(freq);
+if(!mode) hpffreq = freq;
+hpfl->setfreq(hpffreq+freq);
+hpfr->setfreq(hpffreq+freq);
 }
 
- 
 
 /* Calculate Chebychev coefficents from partial magnitudes, adapted from
  * example in Num. Rec. */

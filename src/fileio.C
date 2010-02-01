@@ -279,13 +279,14 @@ RKR::savefile (char *filename)
 
 	case 19:
 	  //Valve
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Valve->getpar (0), efx_Valve->getpar (1),
 		   efx_Valve->getpar (2), efx_Valve->getpar (3),
 		   efx_Valve->getpar (4), efx_Valve->getpar (5),
 		   efx_Valve->getpar (6), efx_Valve->getpar (7),
 		   efx_Valve->getpar (8), efx_Valve->getpar (9),
-		   efx_Valve->getpar (10), Valve_Bypass);
+		   efx_Valve->getpar (10), efx_Valve->getpar (11), 
+		   efx_Valve->getpar (12), Valve_Bypass);
 	  break;
 
 	case 20:
@@ -619,10 +620,10 @@ RKR::loadfile (char *filename)
 
 	case 19:
 	  //Valve
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[20][0], &lv[20][1], &lv[20][2], &lv[20][3], &lv[20][4],
 		  &lv[20][5], &lv[20][6], &lv[20][7], &lv[20][8], &lv[20][9],
-		  &lv[20][10], &Valve_B);
+		  &lv[20][10],&lv[20][11],&lv[20][12], &Valve_B);
 	  break;
 
 	case 20:
@@ -743,7 +744,7 @@ RKR::Actualizar_Audio ()
     efx_NewDist->changepar (i, (unsigned char)lv[18][i]);
   for (i = 0; i <= 12; i++)
     efx_APhaser->changepar (i, lv[19][i]);
-  for (i = 0; i <= 11; i++)
+  for (i = 0; i <= 12; i++)
     efx_Valve->changepar (i, lv[20][i]);
  for (i = 0; i <= 13; i++)
     efx_DFlange->changepar (i, lv[21][i]);
@@ -1188,7 +1189,7 @@ RKR::Preset_to_Bank (int i)
     lv[18][j] = efx_NewDist->getpar (j);
   for (j = 0; j <= 12; j++)
     lv[19][j] = efx_APhaser->getpar(j);
-  for (j = 0; j <= 11; j++)
+  for (j = 0; j <= 12; j++)
     lv[20][j] = efx_Valve->getpar(j);
   for (j = 0; j <= 13; j++)
     lv[21][j] = efx_DFlange->getpar(j);
