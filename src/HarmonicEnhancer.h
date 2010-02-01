@@ -40,11 +40,12 @@ public:
    void calcula_mag(float *Rmag);
    void harm_out(float *smpsl, float *smpsr);
    void set_vol(int mode, float gain);
-   void set_freq(int mode, float freq); 
+   void set_freqh(int mode, float freq); 
+   void set_freql(int mode, float freq); 
 
   float realvol;
   float hpffreq;
-
+  float lpffreq;
 
 private:
 
@@ -59,6 +60,8 @@ private:
   float p[HARMONICS];
   
   AnalogFilter *hpfl, *hpfr;
+  AnalogFilter *lpfl, *lpfr;
+  
     
 };
 

@@ -310,12 +310,10 @@ void
 Valve::setpresence(int value)
 {
 
-float freq=50.0*value;
-float nvol=(float)value/100.0;
+float freq=50.0f*value;
+float nvol=(float)value*.01;
 
-printf("%f %f\n",freq,nvol);
-
-harm->set_freq(1, freq);
+harm->set_freqh(1, freq);
 harm->set_vol(1,  nvol);
 
 
@@ -392,7 +390,7 @@ Valve::changepar (int npar, int value)
     case 10:
       Q_q = value;
       q = (float)Q_q /127.0f - .999;
-      factor = 1.0f - ((float)Q_q / 128.0); 
+      factor = 1.0f - ((float)Q_q / 128.0f); 
       break;       
     case 11:
       Ped = value;

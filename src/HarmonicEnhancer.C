@@ -43,6 +43,11 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float freq, float gain)
   hpffreq = freq;
   hpfl = new AnalogFilter(3, freq, 1, 0);
   hpfr = new AnalogFilter(3, freq, 1, 0);
+  lpffreq = 8000.0;
+  lpfl = new AnalogFilter(2, 8000.0, 1, 0);
+  lpfr = new AnalogFilter(2, 8000.0, 1, 0);
+
+
 
   calcula_mag(Rmag);
   
@@ -64,12 +69,24 @@ HarmEnhancer::set_vol(int mode, float gain)
 }
 
 void  
-HarmEnhancer::set_freq(int mode, float freq)
+HarmEnhancer::set_freqh(int mode, float freq)
 {
 if(!mode) hpffreq = freq;
 hpfl->setfreq(hpffreq+freq);
 hpfr->setfreq(hpffreq+freq);
 }
+
+
+void  
+HarmEnhancer::set_freql(int mode, float freq)
+{
+if(!mode) lpffreq = freq;
+lpfl->setfreq(lpffreq+freq);
+lpfr->setfreq(lpffreq+freq);
+
+}
+
+
 
 
 /* Calculate Chebychev coefficents from partial magnitudes, adapted from
@@ -180,12 +197,20 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
       itm1l = yl;
       otm1r = 0.999f * otm1r + yr - itm1r;
       itm1r = yr;
-
-      smpsl[i] += otm1l * vol;
-      smpsr[i] += otm1r * vol;
+      inputl[i] = otm1l * vol;
+      inputr[i] = otm1r * vol;
 
      }
 
+  lpfl->filterout(inputl);
+  lpfr->filterout(inputr);
+
+    for (i=0; i<PERIOD; i++)
+    {
+      smpsl[i] +=inputl[i];
+      smpsr[i] +=inputr[i];
+    }
+    
 }
 
 
