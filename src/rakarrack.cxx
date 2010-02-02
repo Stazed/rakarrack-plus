@@ -143,7 +143,7 @@ int i;
 int Xl,Xr,Yl,Yr;
 int SW,SH;
 int px,py,old_px,old_py,oldr_px,oldr_py;
-
+int posx;
 double pP = (double) ns; 
 double value=0.0;
 
@@ -159,6 +159,8 @@ Yr=Yl;
 
 
 double dSW = (double) SW;
+double coeff = 1.0 / pP * dSW;
+
 
 
 if (Scope_ON)
@@ -180,12 +182,14 @@ oldr_py = Yr;
 
 for(i=0; i<ns; i++)
 {
+  posx = (int) ((double) i * coeff);
+
   value=spr[i];
   if (value>1.0) value=1.0;
   if (value<-1.0) value=-1.0;
   
 
-  px = Xl + (int) ((double) i / pP * dSW);
+  px = Xl + posx;
   py = Yl + (int) (value / 2.0 * SH);
    
   // printf("%d %d %d\n",i,px,py);
@@ -201,7 +205,7 @@ if (i>0) fl_line(old_px, old_py,px,py);
 
 
 
-  px = Xr + (int) ((double) i / pP * dSW);
+  px = Xr + posx;
   py = Yr + (int) (value / 2.0 * SH);
  
 if (i>0) fl_line(oldr_px, oldr_py,px,py);
