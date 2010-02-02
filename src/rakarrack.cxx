@@ -11512,7 +11512,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<148; i++)
+for (i=1; i<158; i++)
 
 {
 
@@ -12012,9 +12012,46 @@ switch (i)
      compress_output->value(rkr->efx_Compressor->getpar(3));
      compress_output->redraw();
      break;
-    
-
-
+     case 148:
+     eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);
+     eqp_Gain->redraw();
+     break;
+     case 149:
+     eqp_LF->value(rkr->efx_EQ2->getpar(11));
+     eqp_LF->redraw();
+     break;
+     case 150:
+     eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
+     eqp_LFg->redraw();
+     break;
+     case 151:
+     eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
+     eqp_LQ->redraw();
+     break;	
+     case 152:
+     eqp_MF->value(rkr->efx_EQ2->getpar(16));
+     eqp_MF->redraw();
+     break;
+      case 153:
+     eqp_MFg->value(rkr->efx_EQ2->getpar(17)-64);
+     eqp_MFg->redraw();
+     break;
+     case 154:
+     eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
+     eqp_MQ->redraw();
+     break;
+     case 155:
+     eqp_HF->value(rkr->efx_EQ2->getpar(21));
+     eqp_HF->redraw();
+     break;
+     case 156:
+     eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
+     eqp_HFg->redraw();
+     break;
+     case 157:
+     eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
+     eqp_HQ->redraw();
+     break;
 
 
 }
