@@ -114,15 +114,15 @@ harm->calcula_mag(rm);
 void
 Exciter::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
+  const int PRESET_SIZE = 13;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
+    //Plain
+    {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20},
     //Exciter 1
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {127, 64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 20000, 20},
     //Exciter 2
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Exciter 3
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {127, 64, 0, 0, 0, 0, 64, 0, 0, 0, 64, 20000, 100},
   };
 
 

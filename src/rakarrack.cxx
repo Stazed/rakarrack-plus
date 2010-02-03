@@ -3836,6 +3836,134 @@ void RKRGUI::cb_ring_squ(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_squ_i(o,v);
 }
 
+void RKRGUI::cb_exciter_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Exciter_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Exciter->cleanup();
+findpos(22,(int)o->value());
+}
+void RKRGUI::cb_exciter_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_exciter_activar_i(o,v);
+}
+
+void RKRGUI::cb_exciter_preset_i(Fl_Choice* o, void*) {
+  rkr->efx_Exciter->setpreset((int) o->value());
+ex_Gain->value(rkr->efx_Exciter->getpar(0));
+ex_1->value(rkr->efx_Exciter->getpar(1));
+ex_2->value(rkr->efx_Exciter->getpar(2));
+ex_3->value(rkr->efx_Exciter->getpar(3));
+ex_4->value(rkr->efx_Exciter->getpar(4));
+ex_5->value(rkr->efx_Exciter->getpar(5));
+ex_6->value(rkr->efx_Exciter->getpar(6));
+ex_7->value(rkr->efx_Exciter->getpar(7));
+ex_8->value(rkr->efx_Exciter->getpar(8));
+ex_9->value(rkr->efx_Exciter->getpar(9));
+ex_10->value(rkr->efx_Exciter->getpar(10));
+ex_lfreq->value(rkr->efx_Exciter->getpar(11));
+ex_hfreq->value(rkr->efx_Exciter->getpar(12));
+}
+void RKRGUI::cb_exciter_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_exciter_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_exciter_preset[] = {
+ {gettext("Plain"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Exciter 1"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {gettext("Exciter 2"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_ex_Gain_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(0,(int)o->value());
+}
+void RKRGUI::cb_ex_Gain(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_Gain_i(o,v);
+}
+
+void RKRGUI::cb_ex_hfreq_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_ex_hfreq(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_hfreq_i(o,v);
+}
+
+void RKRGUI::cb_ex_lfreq_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(11,(int)o->value());
+}
+void RKRGUI::cb_ex_lfreq(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_lfreq_i(o,v);
+}
+
+void RKRGUI::cb_ex_1_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_ex_1(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_1_i(o,v);
+}
+
+void RKRGUI::cb_ex_2_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_ex_2(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_2_i(o,v);
+}
+
+void RKRGUI::cb_ex_3_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_ex_3(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_3_i(o,v);
+}
+
+void RKRGUI::cb_ex_4_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_ex_4(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_4_i(o,v);
+}
+
+void RKRGUI::cb_ex_5_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_ex_5(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_5_i(o,v);
+}
+
+void RKRGUI::cb_ex_6_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_ex_6(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_6_i(o,v);
+}
+
+void RKRGUI::cb_ex_7_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_ex_7(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_7_i(o,v);
+}
+
+void RKRGUI::cb_ex_8_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_ex_8(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_8_i(o,v);
+}
+
+void RKRGUI::cb_ex_9_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_ex_9(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_9_i(o,v);
+}
+
+void RKRGUI::cb_ex_10_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_ex_10(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_10_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -8899,6 +9027,257 @@ R average."));
       } // SliderW* ring_squ
       RING->end();
     } // Fl_Group* RING
+    { EXCITER = new Fl_Group(320, 211, 159, 184);
+      EXCITER->box(FL_UP_BOX);
+      EXCITER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      EXCITER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      EXCITER->labelfont(1);
+      EXCITER->user_data((void*)(1));
+      EXCITER->align(96|FL_ALIGN_INSIDE);
+      EXCITER->hide();
+      { exciter_activar = new Fl_Light_Button(325, 215, 34, 18, gettext("On"));
+        exciter_activar->shortcut(0x31);
+        exciter_activar->color((Fl_Color)62);
+        exciter_activar->selection_color((Fl_Color)1);
+        exciter_activar->labelsize(10);
+        exciter_activar->callback((Fl_Callback*)cb_exciter_activar);
+        exciter_activar->align(68|FL_ALIGN_INSIDE);
+        exciter_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* exciter_activar
+      { exciter_preset = new Fl_Choice(397, 215, 76, 18, gettext("Preset"));
+        exciter_preset->down_box(FL_BORDER_BOX);
+        exciter_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        exciter_preset->labelsize(10);
+        exciter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        exciter_preset->textsize(10);
+        exciter_preset->callback((Fl_Callback*)cb_exciter_preset);
+        exciter_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        exciter_preset->menu(menu_exciter_preset);
+      } // Fl_Choice* exciter_preset
+      { ex_Gain = new SliderW(369, 236, 100, 10, gettext("Gain"));
+        ex_Gain->type(5);
+        ex_Gain->box(FL_FLAT_BOX);
+        ex_Gain->color((Fl_Color)178);
+        ex_Gain->selection_color((Fl_Color)62);
+        ex_Gain->labeltype(FL_NORMAL_LABEL);
+        ex_Gain->labelfont(0);
+        ex_Gain->labelsize(10);
+        ex_Gain->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_Gain->maximum(127);
+        ex_Gain->step(1);
+        ex_Gain->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_Gain->callback((Fl_Callback*)cb_ex_Gain);
+        ex_Gain->align(FL_ALIGN_LEFT);
+        ex_Gain->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_Gain
+      { ex_hfreq = new SliderW(369, 260, 100, 10, gettext("HPF"));
+        ex_hfreq->type(5);
+        ex_hfreq->box(FL_FLAT_BOX);
+        ex_hfreq->color((Fl_Color)178);
+        ex_hfreq->selection_color((Fl_Color)62);
+        ex_hfreq->labeltype(FL_NORMAL_LABEL);
+        ex_hfreq->labelfont(0);
+        ex_hfreq->labelsize(10);
+        ex_hfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_hfreq->minimum(20);
+        ex_hfreq->maximum(20000);
+        ex_hfreq->step(1);
+        ex_hfreq->value(20);
+        ex_hfreq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_hfreq->callback((Fl_Callback*)cb_ex_hfreq);
+        ex_hfreq->align(FL_ALIGN_LEFT);
+        ex_hfreq->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_hfreq
+      { ex_lfreq = new SliderW(369, 248, 100, 10, gettext("LPF"));
+        ex_lfreq->type(5);
+        ex_lfreq->box(FL_FLAT_BOX);
+        ex_lfreq->color((Fl_Color)178);
+        ex_lfreq->selection_color((Fl_Color)62);
+        ex_lfreq->labeltype(FL_NORMAL_LABEL);
+        ex_lfreq->labelfont(0);
+        ex_lfreq->labelsize(10);
+        ex_lfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_lfreq->minimum(20);
+        ex_lfreq->maximum(20000);
+        ex_lfreq->step(1);
+        ex_lfreq->value(20000);
+        ex_lfreq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_lfreq->callback((Fl_Callback*)cb_ex_lfreq);
+        ex_lfreq->align(FL_ALIGN_LEFT);
+        ex_lfreq->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_lfreq
+      { ex_1 = new SliderW(369, 272, 100, 10, gettext("Har 1"));
+        ex_1->type(5);
+        ex_1->box(FL_FLAT_BOX);
+        ex_1->color((Fl_Color)178);
+        ex_1->selection_color((Fl_Color)62);
+        ex_1->labeltype(FL_NORMAL_LABEL);
+        ex_1->labelfont(0);
+        ex_1->labelsize(10);
+        ex_1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_1->minimum(-64);
+        ex_1->maximum(64);
+        ex_1->step(1);
+        ex_1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_1->callback((Fl_Callback*)cb_ex_1);
+        ex_1->align(FL_ALIGN_LEFT);
+        ex_1->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_1
+      { ex_2 = new SliderW(369, 284, 100, 10, gettext("Har 2"));
+        ex_2->type(5);
+        ex_2->box(FL_FLAT_BOX);
+        ex_2->color((Fl_Color)178);
+        ex_2->selection_color((Fl_Color)62);
+        ex_2->labeltype(FL_NORMAL_LABEL);
+        ex_2->labelfont(0);
+        ex_2->labelsize(10);
+        ex_2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_2->minimum(-64);
+        ex_2->maximum(64);
+        ex_2->step(1);
+        ex_2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_2->callback((Fl_Callback*)cb_ex_2);
+        ex_2->align(FL_ALIGN_LEFT);
+        ex_2->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_2
+      { ex_3 = new SliderW(369, 296, 100, 10, gettext("Har 3"));
+        ex_3->type(5);
+        ex_3->box(FL_FLAT_BOX);
+        ex_3->color((Fl_Color)178);
+        ex_3->selection_color((Fl_Color)62);
+        ex_3->labeltype(FL_NORMAL_LABEL);
+        ex_3->labelfont(0);
+        ex_3->labelsize(10);
+        ex_3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_3->minimum(-64);
+        ex_3->maximum(64);
+        ex_3->step(1);
+        ex_3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_3->callback((Fl_Callback*)cb_ex_3);
+        ex_3->align(FL_ALIGN_LEFT);
+        ex_3->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_3
+      { ex_4 = new SliderW(369, 308, 100, 10, gettext("Har 4"));
+        ex_4->type(5);
+        ex_4->box(FL_FLAT_BOX);
+        ex_4->color((Fl_Color)178);
+        ex_4->selection_color((Fl_Color)62);
+        ex_4->labeltype(FL_NORMAL_LABEL);
+        ex_4->labelfont(0);
+        ex_4->labelsize(10);
+        ex_4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_4->minimum(-64);
+        ex_4->maximum(64);
+        ex_4->step(1);
+        ex_4->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_4->callback((Fl_Callback*)cb_ex_4);
+        ex_4->align(FL_ALIGN_LEFT);
+        ex_4->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_4
+      { ex_5 = new SliderW(369, 320, 100, 10, gettext("Har 5"));
+        ex_5->type(5);
+        ex_5->box(FL_FLAT_BOX);
+        ex_5->color((Fl_Color)178);
+        ex_5->selection_color((Fl_Color)62);
+        ex_5->labeltype(FL_NORMAL_LABEL);
+        ex_5->labelfont(0);
+        ex_5->labelsize(10);
+        ex_5->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_5->minimum(-64);
+        ex_5->maximum(64);
+        ex_5->step(1);
+        ex_5->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_5->callback((Fl_Callback*)cb_ex_5);
+        ex_5->align(FL_ALIGN_LEFT);
+        ex_5->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_5
+      { ex_6 = new SliderW(369, 332, 100, 10, gettext("Har 6"));
+        ex_6->type(5);
+        ex_6->box(FL_FLAT_BOX);
+        ex_6->color((Fl_Color)178);
+        ex_6->selection_color((Fl_Color)62);
+        ex_6->labeltype(FL_NORMAL_LABEL);
+        ex_6->labelfont(0);
+        ex_6->labelsize(10);
+        ex_6->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_6->minimum(-64);
+        ex_6->maximum(64);
+        ex_6->step(1);
+        ex_6->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_6->callback((Fl_Callback*)cb_ex_6);
+        ex_6->align(FL_ALIGN_LEFT);
+        ex_6->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_6
+      { ex_7 = new SliderW(369, 345, 100, 10, gettext("Har 7"));
+        ex_7->type(5);
+        ex_7->box(FL_FLAT_BOX);
+        ex_7->color((Fl_Color)178);
+        ex_7->selection_color((Fl_Color)62);
+        ex_7->labeltype(FL_NORMAL_LABEL);
+        ex_7->labelfont(0);
+        ex_7->labelsize(10);
+        ex_7->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_7->minimum(-64);
+        ex_7->maximum(64);
+        ex_7->step(1);
+        ex_7->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_7->callback((Fl_Callback*)cb_ex_7);
+        ex_7->align(FL_ALIGN_LEFT);
+        ex_7->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_7
+      { ex_8 = new SliderW(369, 357, 100, 10, gettext("Har 8"));
+        ex_8->type(5);
+        ex_8->box(FL_FLAT_BOX);
+        ex_8->color((Fl_Color)178);
+        ex_8->selection_color((Fl_Color)62);
+        ex_8->labeltype(FL_NORMAL_LABEL);
+        ex_8->labelfont(0);
+        ex_8->labelsize(10);
+        ex_8->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_8->minimum(-64);
+        ex_8->maximum(64);
+        ex_8->step(1);
+        ex_8->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_8->callback((Fl_Callback*)cb_ex_8);
+        ex_8->align(FL_ALIGN_LEFT);
+        ex_8->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_8
+      { ex_9 = new SliderW(369, 369, 100, 10, gettext("Har 9"));
+        ex_9->type(5);
+        ex_9->box(FL_FLAT_BOX);
+        ex_9->color((Fl_Color)178);
+        ex_9->selection_color((Fl_Color)62);
+        ex_9->labeltype(FL_NORMAL_LABEL);
+        ex_9->labelfont(0);
+        ex_9->labelsize(10);
+        ex_9->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_9->minimum(-64);
+        ex_9->maximum(64);
+        ex_9->step(1);
+        ex_9->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_9->callback((Fl_Callback*)cb_ex_9);
+        ex_9->align(FL_ALIGN_LEFT);
+        ex_9->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_9
+      { ex_10 = new SliderW(369, 380, 100, 10, gettext("Har 10"));
+        ex_10->type(5);
+        ex_10->box(FL_FLAT_BOX);
+        ex_10->color((Fl_Color)178);
+        ex_10->selection_color((Fl_Color)62);
+        ex_10->labeltype(FL_NORMAL_LABEL);
+        ex_10->labelfont(0);
+        ex_10->labelsize(10);
+        ex_10->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_10->minimum(-64);
+        ex_10->maximum(64);
+        ex_10->step(1);
+        ex_10->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_10->callback((Fl_Callback*)cb_ex_10);
+        ex_10->align(FL_ALIGN_LEFT);
+        ex_10->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_10
+      EXCITER->end();
+    } // Fl_Group* EXCITER
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -10026,6 +10405,7 @@ gate_activar->color(bcolor);
 newdist_activar->color(bcolor);
 valve_activar->color(bcolor);
 ring_activar->color(bcolor);
+exciter_activar->color(bcolor);
 Cabinet_activar->color(bcolor);
 tuner_activar->color(bcolor);
 Preset_Counter->color(bcolor);
@@ -11035,6 +11415,10 @@ for (i=1; i<=t; i++)
         case 21:
         RING->hide();
         break;
+        case 22:
+        EXCITER->hide();
+        break;
+        
       }
       
     }
@@ -11256,6 +11640,13 @@ switch ( rkr->efx_order[i])
        ring_activar->shortcut(s[i]);
        RING->show();
        if(rkr->Ring_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;
+
+     case 22:
+       EXCITER->position(x[i],y[i]);
+       exciter_activar->shortcut(s[i]);
+       EXCITER->show();
+       if(rkr->Exciter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
 
 
@@ -12230,6 +12621,8 @@ APHASER->image(InOut->image());
 VALVE->image(InOut->image());
 DFLANGE->image(InOut->image());
 RING->image(InOut->image());
+EXCITER->image(InOut->image());
+
 
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
@@ -12816,6 +13209,10 @@ Fl_Color boff = fore_color;
      if(value) ring_activar->color(bon); else ring_activar->color(boff);
      break;
 
+     case 22: 
+   
+     if(value) exciter_activar->color(bon); else exciter_activar->color(boff);
+     break;
 
 
     }

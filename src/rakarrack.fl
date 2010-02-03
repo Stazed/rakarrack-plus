@@ -890,7 +890,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1595 68 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1588 61 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4267,6 +4267,128 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
           class SliderW
         }
       }
+      Fl_Group EXCITER {
+        user_data 1
+        xywh {320 211 159 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button exciter_activar {
+          label On
+          callback {rkr->Exciter_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Exciter->cleanup();
+findpos(22,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice exciter_preset {
+          label Preset
+          callback {rkr->efx_Exciter->setpreset((int) o->value());
+ex_Gain->value(rkr->efx_Exciter->getpar(0));
+ex_1->value(rkr->efx_Exciter->getpar(1));
+ex_2->value(rkr->efx_Exciter->getpar(2));
+ex_3->value(rkr->efx_Exciter->getpar(3));
+ex_4->value(rkr->efx_Exciter->getpar(4));
+ex_5->value(rkr->efx_Exciter->getpar(5));
+ex_6->value(rkr->efx_Exciter->getpar(6));
+ex_7->value(rkr->efx_Exciter->getpar(7));
+ex_8->value(rkr->efx_Exciter->getpar(8));
+ex_9->value(rkr->efx_Exciter->getpar(9));
+ex_10->value(rkr->efx_Exciter->getpar(10));
+ex_lfreq->value(rkr->efx_Exciter->getpar(11));
+ex_hfreq->value(rkr->efx_Exciter->getpar(12));} selected
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+        } {
+          MenuItem {} {
+            label Plain
+            xywh {22 22 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Exciter 1}
+            xywh {22 22 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Exciter 2}
+            xywh {22 22 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider ex_Gain {
+          label Gain
+          callback {rkr->efx_Exciter->changepar(0,(int)o->value());}
+          xywh {369 236 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_hfreq {
+          label HPF
+          callback {rkr->efx_Exciter->changepar(12,(int)o->value());}
+          xywh {369 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_lfreq {
+          label LPF
+          callback {rkr->efx_Exciter->changepar(11,(int)o->value());}
+          xywh {369 248 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20000 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_1 {
+          label {Har 1}
+          callback {rkr->efx_Exciter->changepar(1,(int)o->value());}
+          xywh {369 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_2 {
+          label {Har 2}
+          callback {rkr->efx_Exciter->changepar(2,(int)o->value());}
+          xywh {369 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_3 {
+          label {Har 3}
+          callback {rkr->efx_Exciter->changepar(3,(int)o->value());}
+          xywh {369 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_4 {
+          label {Har 4}
+          callback {rkr->efx_Exciter->changepar(4,(int)o->value());}
+          xywh {369 308 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_5 {
+          label {Har 5}
+          callback {rkr->efx_Exciter->changepar(5,(int)o->value());}
+          xywh {369 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_6 {
+          label {Har 6}
+          callback {rkr->efx_Exciter->changepar(6,(int)o->value());}
+          xywh {369 332 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_7 {
+          label {Har 7}
+          callback {rkr->efx_Exciter->changepar(7,(int)o->value());}
+          xywh {369 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_8 {
+          label {Har 8}
+          callback {rkr->efx_Exciter->changepar(8,(int)o->value());}
+          xywh {369 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_9 {
+          label {Har 9}
+          callback {rkr->efx_Exciter->changepar(1,(int)o->value());}
+          xywh {369 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider ex_10 {
+          label {Har 10}
+          callback {rkr->efx_Exciter->changepar(10,(int)o->value());}
+          xywh {369 380 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {521 84 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -5592,6 +5714,7 @@ gate_activar->color(bcolor);
 newdist_activar->color(bcolor);
 valve_activar->color(bcolor);
 ring_activar->color(bcolor);
+exciter_activar->color(bcolor);
 Cabinet_activar->color(bcolor);
 tuner_activar->color(bcolor);
 Preset_Counter->color(bcolor);
@@ -6594,6 +6717,10 @@ for (i=1; i<=t; i++)
         case 21:
         RING->hide();
         break;
+        case 22:
+        EXCITER->hide();
+        break;
+        
       }
       
     }
@@ -6815,6 +6942,13 @@ switch ( rkr->efx_order[i])
        ring_activar->shortcut(s[i]);
        RING->show();
        if(rkr->Ring_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;
+
+     case 22:
+       EXCITER->position(x[i],y[i]);
+       exciter_activar->shortcut(s[i]);
+       EXCITER->show();
+       if(rkr->Exciter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
 
 
@@ -7776,6 +7910,8 @@ APHASER->image(InOut->image());
 VALVE->image(InOut->image());
 DFLANGE->image(InOut->image());
 RING->image(InOut->image());
+EXCITER->image(InOut->image());
+
 
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
@@ -7830,8 +7966,7 @@ for (int t=0; t<Principal->children();t++)
  
   }
 
-  Fl::redraw();} {selected
-    }
+  Fl::redraw();} {}
   }
   Function {adjustfont()} {} {
     code {int change,value;
@@ -8355,6 +8490,10 @@ Fl_Color boff = fore_color;
      if(value) ring_activar->color(bon); else ring_activar->color(boff);
      break;
 
+     case 22: 
+   
+     if(value) exciter_activar->color(bon); else exciter_activar->color(boff);
+     break;
 
 
     }} {}

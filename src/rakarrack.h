@@ -1622,6 +1622,83 @@ private:
   void cb_ring_squ_i(SliderW*, void*);
   static void cb_ring_squ(SliderW*, void*);
 public:
+  Fl_Group *EXCITER;
+  Fl_Light_Button *exciter_activar;
+private:
+  void cb_exciter_activar_i(Fl_Light_Button*, void*);
+  static void cb_exciter_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *exciter_preset;
+private:
+  void cb_exciter_preset_i(Fl_Choice*, void*);
+  static void cb_exciter_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_exciter_preset[];
+public:
+  SliderW *ex_Gain;
+private:
+  void cb_ex_Gain_i(SliderW*, void*);
+  static void cb_ex_Gain(SliderW*, void*);
+public:
+  SliderW *ex_hfreq;
+private:
+  void cb_ex_hfreq_i(SliderW*, void*);
+  static void cb_ex_hfreq(SliderW*, void*);
+public:
+  SliderW *ex_lfreq;
+private:
+  void cb_ex_lfreq_i(SliderW*, void*);
+  static void cb_ex_lfreq(SliderW*, void*);
+public:
+  SliderW *ex_1;
+private:
+  void cb_ex_1_i(SliderW*, void*);
+  static void cb_ex_1(SliderW*, void*);
+public:
+  SliderW *ex_2;
+private:
+  void cb_ex_2_i(SliderW*, void*);
+  static void cb_ex_2(SliderW*, void*);
+public:
+  SliderW *ex_3;
+private:
+  void cb_ex_3_i(SliderW*, void*);
+  static void cb_ex_3(SliderW*, void*);
+public:
+  SliderW *ex_4;
+private:
+  void cb_ex_4_i(SliderW*, void*);
+  static void cb_ex_4(SliderW*, void*);
+public:
+  SliderW *ex_5;
+private:
+  void cb_ex_5_i(SliderW*, void*);
+  static void cb_ex_5(SliderW*, void*);
+public:
+  SliderW *ex_6;
+private:
+  void cb_ex_6_i(SliderW*, void*);
+  static void cb_ex_6(SliderW*, void*);
+public:
+  SliderW *ex_7;
+private:
+  void cb_ex_7_i(SliderW*, void*);
+  static void cb_ex_7(SliderW*, void*);
+public:
+  SliderW *ex_8;
+private:
+  void cb_ex_8_i(SliderW*, void*);
+  static void cb_ex_8(SliderW*, void*);
+public:
+  SliderW *ex_9;
+private:
+  void cb_ex_9_i(SliderW*, void*);
+  static void cb_ex_9(SliderW*, void*);
+public:
+  SliderW *ex_10;
+private:
+  void cb_ex_10_i(SliderW*, void*);
+  static void cb_ex_10(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
