@@ -27,7 +27,7 @@
 #include "HarmonicEnhancer.h"
 
 
-HarmEnhancer::HarmEnhancer(float *Rmag, float freq, float gain) 
+HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain) 
 {
 
  inputl = (float *) malloc (sizeof (float) * PERIOD);
@@ -40,24 +40,27 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float freq, float gain)
   otm1l = 0.0f;
   otm1r = 0.0f;
 
-  hpffreq = freq;
-  hpfl = new AnalogFilter(3, freq, 1, 0);
-  hpfr = new AnalogFilter(3, freq, 1, 0);
-  lpffreq = 8000.0;
-  lpfl = new AnalogFilter(2, 8000.0, 1, 0);
-  lpfr = new AnalogFilter(2, 8000.0, 1, 0);
-
-
+  hpffreq = hfreq;
+  lpffreq = lfreq;
+  hpfl = new AnalogFilter(3, hfreq, 1, 0);
+  hpfr = new AnalogFilter(3, hfreq, 1, 0);
+  lpfl = new AnalogFilter(2, lfreq, 1, 0);
+  lpfr = new AnalogFilter(2, lfreq, 1, 0);
 
   calcula_mag(Rmag);
-  
-
 }
 
 
 HarmEnhancer::~HarmEnhancer()
 {
 };
+
+void
+HarmEnhancer::cleanup()
+{
+};
+
+
 
 
 void
@@ -71,16 +74,27 @@ HarmEnhancer::set_vol(int mode, float gain)
 void  
 HarmEnhancer::set_freqh(int mode, float freq)
 {
-if(!mode) hpffreq = freq;
+if(!mode) 
+{
+hpffreq = freq;
+freq = 0.0;
+}
+
 hpfl->setfreq(hpffreq+freq);
 hpfr->setfreq(hpffreq+freq);
+
 }
 
 
 void  
 HarmEnhancer::set_freql(int mode, float freq)
 {
-if(!mode) lpffreq = freq;
+if(!mode)
+{
+ lpffreq = freq;
+ freq = 0.0;
+} 
+
 lpfl->setfreq(lpffreq+freq);
 lpfr->setfreq(lpffreq+freq);
 

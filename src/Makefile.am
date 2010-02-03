@@ -66,6 +66,8 @@ rakarrack_SOURCES = main.C \
 	APhaser.h \
 	Dual_Flange.C \
 	Dual_Flange.h \
+	Exciter.C \
+	Exciter.h \
 	Valve.C \
 	Valve.h \
 	Ring.C \

@@ -34,8 +34,9 @@
 class HarmEnhancer
 {
 public:
-  HarmEnhancer(float *harmonics, float freq, float gain);
+  HarmEnhancer(float *harmonics, float hfreq, float lfreq, float gain);
   ~HarmEnhancer(); 
+   void cleanup();
    void chebpc(float c[], float d[]);
    void calcula_mag(float *Rmag);
    void harm_out(float *smpsl, float *smpsr);

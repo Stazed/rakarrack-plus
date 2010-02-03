@@ -38,7 +38,7 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   lpfr = new AnalogFilter (2, 22000, 1, 0);
   hpfl = new AnalogFilter (3, 20, 1, 0);
   hpfr = new AnalogFilter (3, 20, 1, 0);
-  harm = new HarmEnhancer (rm, 500.0f,1.0f);
+  harm = new HarmEnhancer (rm, 500.0f,8000.0,1.0f);
 
 
   //default values
