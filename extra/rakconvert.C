@@ -370,7 +370,7 @@ setTempo(int old)
 
   for(i=1; i<=600; i++)
    {
-    incx = 60.0f / (float)i * 256.0 / 48000.0;
+    incx = (float)i * 256.0 / (48000.0 * 60.0f);
     if (incx == old_incx) return(i);
     diff = fabsf(incx - old_incx);
     if (diff < p_diff) p_diff = diff;
@@ -378,7 +378,7 @@ setTempo(int old)
     return(i-1);
    }
 
-return(600);
+return(1);
 }
 
 
