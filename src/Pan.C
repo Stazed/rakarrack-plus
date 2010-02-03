@@ -80,18 +80,9 @@ Pan::out (float *smpsl, float *smpsr)
 	  rdiff = smpsr[i] - avg;
 
 	  tmp = avg + ldiff * mul;
-	  if (tmp < -1.0)
-	    tmp = -1.0f;
-	  if (tmp > 1.0)
-	    tmp = 1.0f;
 	  smpsl[i] = tmp;
 
-
 	  tmp = avg + rdiff * mul;
-	  if (tmp < -1.0)
-	    tmp = -1.0f;
-	  if (tmp > 1.0)
-	    tmp = 1.0f;
 	  smpsr[i] = tmp;
 
 	}

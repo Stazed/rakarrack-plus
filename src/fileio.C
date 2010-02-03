@@ -214,11 +214,12 @@ RKR::savefile (char *filename)
 
 	case 13:
 	  //Pan
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Pan->getpar (0), efx_Pan->getpar (1),
 		   efx_Pan->getpar (2), efx_Pan->getpar (3),
 		   efx_Pan->getpar (4), efx_Pan->getpar (5),
-		   efx_Pan->getpar (6), efx_Pan->getpar (7), Pan_Bypass);
+		   efx_Pan->getpar (6), efx_Pan->getpar (7), 
+		   efx_Pan->getpar (8), Pan_Bypass);
 	  break;
 
 	case 14:
@@ -573,9 +574,9 @@ RKR::loadfile (char *filename)
 
 	case 13:
 	  //Pan
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[14][0], &lv[14][1], &lv[14][2], &lv[14][3], &lv[14][4],
-		  &lv[14][5], &lv[14][6], &lv[14][7], &Pan_B);
+		  &lv[14][5], &lv[14][6], &lv[14][7], &lv[14][8],&Pan_B);
 	  break;
 
 	case 14:
@@ -732,7 +733,7 @@ RKR::Actualizar_Audio ()
     efx_WhaWha->changepar (i, lv[11][i]);
   for (i = 0; i <= 10; i++)
     efx_Alienwah->changepar (i, lv[12][i]);
-  for (i = 0; i <= 7; i++)
+  for (i = 0; i <= 8; i++)
     efx_Pan->changepar (i, lv[14][i]);
   for (i = 0; i <= 10; i++)
     efx_Har->changepar (i, (unsigned char)lv[15][i]);
