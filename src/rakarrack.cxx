@@ -4839,6 +4839,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       EQ->color((Fl_Color)FL_FOREGROUND_COLOR);
       EQ->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       EQ->labelfont(1);
+      EQ->user_data((void*)(1));
       EQ->align(96|FL_ALIGN_INSIDE);
       { eq_activar = new Fl_Light_Button(7, 216, 34, 18, gettext("On"));
         eq_activar->shortcut(0x31);
@@ -5070,6 +5071,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       COMPRESS->color((Fl_Color)FL_FOREGROUND_COLOR);
       COMPRESS->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       COMPRESS->labelfont(1);
+      COMPRESS->user_data((void*)(1));
       COMPRESS->align(96|FL_ALIGN_INSIDE);
       { compress_activar = new Fl_Light_Button(166, 216, 34, 18, gettext("On"));
         compress_activar->shortcut(0x32);
@@ -5217,6 +5219,7 @@ R average."));
       DIST->color((Fl_Color)FL_FOREGROUND_COLOR);
       DIST->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       DIST->labelfont(1);
+      DIST->user_data((void*)(1));
       DIST->align(96|FL_ALIGN_INSIDE);
       { dist_activar = new Fl_Light_Button(326, 216, 34, 18, gettext("On"));
         dist_activar->shortcut(0x33);
@@ -5402,6 +5405,7 @@ R average."));
       OVRD->color((Fl_Color)FL_FOREGROUND_COLOR);
       OVRD->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       OVRD->labelfont(1);
+      OVRD->user_data((void*)(1));
       OVRD->align(96|FL_ALIGN_INSIDE);
       { ovrd_activar = new Fl_Light_Button(485, 216, 34, 18, gettext("On"));
         ovrd_activar->shortcut(0x34);
@@ -5571,6 +5575,7 @@ R average."));
       ECHO->color((Fl_Color)FL_FOREGROUND_COLOR);
       ECHO->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       ECHO->labelfont(1);
+      ECHO->user_data((void*)(1));
       ECHO->align(96|FL_ALIGN_INSIDE);
       { echo_activar = new Fl_Light_Button(644, 216, 34, 18, gettext("On"));
         echo_activar->shortcut(0x35);
@@ -5729,6 +5734,7 @@ R average."));
       CHORUS->color((Fl_Color)FL_FOREGROUND_COLOR);
       CHORUS->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       CHORUS->labelfont(1);
+      CHORUS->user_data((void*)(1));
       CHORUS->align(96|FL_ALIGN_INSIDE);
       { chorus_activar = new Fl_Light_Button(7, 417, 34, 18, gettext("On"));
         chorus_activar->shortcut(0x36);
@@ -5919,6 +5925,7 @@ R average."));
       PHASER->color((Fl_Color)FL_FOREGROUND_COLOR);
       PHASER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       PHASER->labelfont(1);
+      PHASER->user_data((void*)(1));
       PHASER->align(96|FL_ALIGN_INSIDE);
       { phaser_activar = new Fl_Light_Button(166, 417, 34, 18, gettext("On"));
         phaser_activar->shortcut(0x37);
@@ -6123,6 +6130,7 @@ R average."));
       FLANGER->color((Fl_Color)FL_FOREGROUND_COLOR);
       FLANGER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       FLANGER->labelfont(1);
+      FLANGER->user_data((void*)(1));
       FLANGER->align(96|FL_ALIGN_INSIDE);
       { flanger_activar = new Fl_Light_Button(326, 417, 34, 18, gettext("On"));
         flanger_activar->shortcut(0x38);
@@ -6313,6 +6321,7 @@ R average."));
       REVERB->color((Fl_Color)FL_FOREGROUND_COLOR);
       REVERB->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       REVERB->labelfont(1);
+      REVERB->user_data((void*)(1));
       REVERB->align(96|FL_ALIGN_INSIDE);
       { reverb_activar = new Fl_Light_Button(485, 417, 34, 18, gettext("On"));
         reverb_activar->shortcut(0x39);
@@ -6499,6 +6508,7 @@ R average."));
       PEQ->color((Fl_Color)FL_FOREGROUND_COLOR);
       PEQ->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       PEQ->labelfont(1);
+      PEQ->user_data((void*)(1));
       PEQ->align(96|FL_ALIGN_INSIDE);
       { eqp_activar = new Fl_Light_Button(644, 417, 34, 18, gettext("On"));
         eqp_activar->shortcut(0x30);
@@ -6698,6 +6708,7 @@ R average."));
       WHAWHA->color((Fl_Color)FL_FOREGROUND_COLOR);
       WHAWHA->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       WHAWHA->labelfont(1);
+      WHAWHA->user_data((void*)(1));
       WHAWHA->align(96|FL_ALIGN_INSIDE);
       WHAWHA->hide();
       { WhaWha_activar = new Fl_Light_Button(167, 30, 34, 18, gettext("On"));
@@ -6882,6 +6893,7 @@ R average."));
       ALIENWAH->color((Fl_Color)FL_FOREGROUND_COLOR);
       ALIENWAH->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       ALIENWAH->labelfont(1);
+      ALIENWAH->user_data((void*)(1));
       ALIENWAH->align(96|FL_ALIGN_INSIDE);
       ALIENWAH->hide();
       { Alienwah_activar = new Fl_Light_Button(360, 27, 34, 18, gettext("On"));
@@ -7083,6 +7095,7 @@ R average."));
       CABINET->color((Fl_Color)FL_FOREGROUND_COLOR);
       CABINET->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       CABINET->labelfont(1);
+      CABINET->user_data((void*)(1));
       CABINET->align(96|FL_ALIGN_INSIDE);
       CABINET->hide();
       { Cabinet_activar = new Fl_Light_Button(40, 48, 34, 18, gettext("On"));
@@ -7128,6 +7141,7 @@ R average."));
       PAN->color((Fl_Color)FL_FOREGROUND_COLOR);
       PAN->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       PAN->labelfont(1);
+      PAN->user_data((void*)(1));
       PAN->align(96|FL_ALIGN_INSIDE);
       PAN->hide();
       { pan_activar = new Fl_Light_Button(8, 216, 34, 18, gettext("On"));
@@ -7276,6 +7290,7 @@ R average."));
       HAR->color((Fl_Color)FL_FOREGROUND_COLOR);
       HAR->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       HAR->labelfont(1);
+      HAR->user_data((void*)(1));
       HAR->align(96|FL_ALIGN_INSIDE);
       HAR->hide();
       { har_activar = new Fl_Light_Button(326, 216, 34, 18, gettext("On"));
@@ -7471,6 +7486,7 @@ R average."));
       MUSDELAY->color((Fl_Color)FL_FOREGROUND_COLOR);
       MUSDELAY->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       MUSDELAY->labelfont(1);
+      MUSDELAY->user_data((void*)(1));
       MUSDELAY->align(96|FL_ALIGN_INSIDE);
       MUSDELAY->hide();
       { musdelay_activar = new Fl_Light_Button(484, 215, 34, 18, gettext("On"));
@@ -7690,6 +7706,7 @@ R average."));
       GATE->color((Fl_Color)FL_FOREGROUND_COLOR);
       GATE->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       GATE->labelfont(1);
+      GATE->user_data((void*)(1));
       GATE->align(96|FL_ALIGN_INSIDE);
       GATE->hide();
       { gate_activar = new Fl_Light_Button(326, 417, 34, 18, gettext("On"));
@@ -7838,6 +7855,7 @@ R average."));
       NEWDIST->color((Fl_Color)FL_FOREGROUND_COLOR);
       NEWDIST->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       NEWDIST->labelfont(1);
+      NEWDIST->user_data((void*)(1));
       NEWDIST->align(96|FL_ALIGN_INSIDE);
       NEWDIST->hide();
       { newdist_activar = new Fl_Light_Button(325, 215, 34, 18, gettext("On"));
@@ -8036,6 +8054,7 @@ R average."));
       APHASER->color((Fl_Color)FL_FOREGROUND_COLOR);
       APHASER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       APHASER->labelfont(1);
+      APHASER->user_data((void*)(1));
       APHASER->align(96|FL_ALIGN_INSIDE);
       APHASER->hide();
       { aphaser_activar = new Fl_Light_Button(325, 220, 34, 18, gettext("On"));
@@ -8229,6 +8248,7 @@ R average."));
       VALVE->color((Fl_Color)FL_FOREGROUND_COLOR);
       VALVE->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       VALVE->labelfont(1);
+      VALVE->user_data((void*)(1));
       VALVE->align(96|FL_ALIGN_INSIDE);
       { valve_activar = new Fl_Light_Button(325, 215, 34, 18, gettext("On"));
         valve_activar->shortcut(0x33);
@@ -8428,6 +8448,7 @@ R average."));
       DFLANGE->color((Fl_Color)FL_FOREGROUND_COLOR);
       DFLANGE->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       DFLANGE->labelfont(1);
+      DFLANGE->user_data((void*)(1));
       DFLANGE->align(96|FL_ALIGN_INSIDE);
       DFLANGE->hide();
       { dflange_activar = new Fl_Light_Button(325, 215, 34, 18, gettext("On"));
@@ -8662,6 +8683,7 @@ R average."));
       RING->color((Fl_Color)FL_FOREGROUND_COLOR);
       RING->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       RING->labelfont(1);
+      RING->user_data((void*)(1));
       RING->align(96|FL_ALIGN_INSIDE);
       RING->hide();
       { ring_activar = new Fl_Light_Button(325, 215, 34, 18, gettext("On"));
@@ -8881,6 +8903,7 @@ R average."));
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
       Tuner->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      Tuner->user_data((void*)(1));
       Tuner->align(96|FL_ALIGN_INSIDE);
       { tuner_activar = new Fl_Light_Button(526, 88, 38, 18, gettext("On"));
         tuner_activar->shortcut(0x74);
@@ -8935,6 +8958,7 @@ R average."));
       InOut->box(FL_UP_BOX);
       InOut->color((Fl_Color)FL_FOREGROUND_COLOR);
       InOut->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      InOut->user_data((void*)(1));
       InOut->align(96|FL_ALIGN_INSIDE);
       { ActivarGeneral = new Fl_Light_Button(6, 30, 52, 18, gettext("FX On"));
         ActivarGeneral->shortcut(0x72);
@@ -9040,6 +9064,7 @@ R average."));
       Midi->box(FL_UP_BOX);
       Midi->color((Fl_Color)FL_FOREGROUND_COLOR);
       Midi->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      Midi->user_data((void*)(1));
       Midi->align(96|FL_ALIGN_INSIDE);
       { nidi_activar = new Fl_Light_Button(526, 148, 38, 18, gettext("On"));
         nidi_activar->shortcut(0x6d);
@@ -9112,6 +9137,7 @@ R average."));
       Presets->box(FL_UP_BOX);
       Presets->color((Fl_Color)FL_FOREGROUND_COLOR);
       Presets->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      Presets->user_data((void*)(1));
       Presets->align(96|FL_ALIGN_INSIDE);
       { PRESETS_LABEL = new Fl_Box(174, 28, 62, 14, gettext("Presets"));
         PRESETS_LABEL->labelfont(1);
@@ -12236,326 +12262,30 @@ for (int t=0; t<Principal->children();t++)
      k= w->labelsize();
      k+=value;
      w->labelsize(k);
-        
-  }
        
-    Principal->redraw();
+   
+    long long ud = (long long) w->user_data();
     
+    if (ud==1)
+    {
+          
+     Fl_Group *g = (Fl_Group *)w;     
+      
+     for(int i=0;i<g->children();i++)
+       {
 
-for (int t=0; t<EQ->children();t++)
-  {
-    Fl_Widget *w = EQ->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    EQ->redraw();
-    
-for (int t=0; t<COMPRESS->children();t++)
-  {
-    Fl_Widget *w = COMPRESS->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    COMPRESS->redraw();
-    
-for (int t=0; t<DIST->children();t++)
-  {
-    Fl_Widget *w = DIST->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    DIST->redraw();
-
-for (int t=0; t<OVRD->children();t++)
-  {
-    Fl_Widget *w = OVRD->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    OVRD->redraw();
-    
-    
-for (int t=0; t<ECHO->children();t++)
-  {
-    Fl_Widget *w = ECHO->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    ECHO->redraw();    
-    
-for (int t=0; t<CHORUS->children();t++)
-  {
-    Fl_Widget *w = CHORUS->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    CHORUS->redraw();    
-
-for (int t=0; t<PHASER->children();t++)
-  {
-    Fl_Widget *w = PHASER->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    PHASER->redraw();
-    
-for (int t=0; t<FLANGER->children();t++)
-  {
-    Fl_Widget *w = FLANGER->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    FLANGER->redraw();
-    
-for (int t=0; t<REVERB->children();t++)
-  {
-    Fl_Widget *w = REVERB->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    REVERB->redraw();
-    
-for (int t=0; t<PEQ->children();t++)
-  {
-    Fl_Widget *w = PEQ->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    PEQ->redraw();
-    
-for (int t=0; t<WHAWHA->children();t++)
-  {
-    Fl_Widget *w = WHAWHA->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    WHAWHA->redraw();
-    
-for (int t=0; t<ALIENWAH->children();t++)
-  {
-    Fl_Widget *w = ALIENWAH->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    ALIENWAH->redraw();
-    
-for (int t=0; t<CABINET->children();t++)
-  {
-    Fl_Widget *w = CABINET->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    CABINET->redraw();
-    
-for (int t=0; t<PAN->children();t++)
-  {
-    Fl_Widget *w = PAN->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    PAN->redraw();
-    
-for (int t=0; t<HAR->children();t++)
-  {
-    Fl_Widget *w = HAR->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    HAR->redraw();
-    
-for (int t=0; t<MUSDELAY->children();t++)
-  {
-    Fl_Widget *w = MUSDELAY->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    MUSDELAY->redraw();
-    
-for (int t=0; t<GATE->children();t++)
-  {
-    Fl_Widget *w = GATE->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    GATE->redraw();                                
-    
-for (int t=0; t<NEWDIST->children();t++)
-  {
-    Fl_Widget *w = NEWDIST->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    NEWDIST->redraw();    
-    
-for (int t=0; t<APHASER->children();t++)
-  {
-    Fl_Widget *w = APHASER->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    APHASER->redraw();
-    
-for (int t=0; t<VALVE->children();t++)
-  {
-    Fl_Widget *w = VALVE->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    VALVE->redraw();
-
-for (int t=0; t<DFLANGE->children();t++)
-  {
-    Fl_Widget *w = DFLANGE->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    DFLANGE->redraw();
+         Fl_Widget *c = g->child(i);
 
 
-for (int t=0; t<RING->children();t++)
-  {
-    Fl_Widget *w = RING->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    RING->redraw();
+          k= c->labelsize();
+          k+=value;
+          c->labelsize(k);
+       } 
+    } 
+ 
+  }
 
-for (int t=0; t<Tuner->children();t++)
-  {
-    Fl_Widget *w = Tuner->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    Tuner->redraw();
-    
-for (int t=0; t<InOut->children();t++)
-  {
-    Fl_Widget *w = InOut->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    InOut->redraw();
-    
-for (int t=0; t<Midi->children();t++)
-  {
-    Fl_Widget *w = Midi->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    Midi->redraw();
-    
-
-for (int t=0; t<Presets->children();t++)
-  {
-    Fl_Widget *w = Presets->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    Presets->redraw();
+  Fl::redraw();
 }
 
 void RKRGUI::adjustfont() {

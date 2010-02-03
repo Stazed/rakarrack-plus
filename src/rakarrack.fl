@@ -1265,6 +1265,7 @@ Scope_ON=1;
         xywh {642 396 154 17} labelfont 1 labelcolor 7
       }
       Fl_Group EQ {
+        user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button eq_activar {
@@ -1381,6 +1382,7 @@ for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(unsigned char)(o->value()+64))
         }
       }
       Fl_Group COMPRESS {
+        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button compress_activar {
@@ -1466,6 +1468,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
         }
       }
       Fl_Group DIST {
+        user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button dist_activar {
@@ -1657,6 +1660,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
       }
       Fl_Group OVRD {
+        user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button ovrd_activar {
@@ -1833,6 +1837,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
       }
       Fl_Group ECHO {
+        user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button echo_activar {
@@ -1949,6 +1954,7 @@ if((int)echo_activar->value())rkr->Echo_Bypass=1;}
         }
       }
       Fl_Group CHORUS {
+        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button chorus_activar {
@@ -2091,6 +2097,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
       }
       Fl_Group PHASER {
+        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button phaser_activar {
@@ -2244,6 +2251,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
         }
       }
       Fl_Group FLANGER {
+        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button flanger_activar {
@@ -2386,6 +2394,7 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         }
       }
       Fl_Group REVERB {
+        user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button reverb_activar {
@@ -2539,6 +2548,7 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
         }
       }
       Fl_Group PEQ {
+        user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button eqp_activar {
@@ -2641,6 +2651,7 @@ eqp_Gain->value(rkr->EQ2_setpreset(1,9,(unsigned char)o->value())-64);}
         }
       }
       Fl_Group WHAWHA {
+        user_data 1
         xywh {162 26 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button WhaWha_activar {
@@ -2779,6 +2790,7 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
         }
       }
       Fl_Group ALIENWAH {
+        user_data 1
         xywh {356 23 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button Alienwah_activar {
@@ -2922,6 +2934,7 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
         }
       }
       Fl_Group CABINET {
+        user_data 1
         xywh {35 44 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button Cabinet_activar {
@@ -2988,6 +3001,7 @@ findpos(12,(int)o->value());}
         }
       }
       Fl_Group PAN {
+        user_data 1
         xywh {3 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button pan_activar {
@@ -3103,6 +3117,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         }
       }
       Fl_Group HAR {
+        user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button har_activar {
@@ -3220,6 +3235,7 @@ Chord();}
         }
       }
       Fl_Group MUSDELAY {
+        user_data 1
         xywh {479 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button musdelay_activar {
@@ -3420,6 +3436,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
         }
       }
       Fl_Group GATE {
+        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button gate_activar {
@@ -3497,6 +3514,7 @@ gate_LPF->value(rkr->efx_Gate->getpar(5));}
         }
       }
       Fl_Group NEWDIST {
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button newdist_activar {
@@ -3685,6 +3703,7 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
         }
       }
       Fl_Group APHASER {
+        user_data 1
         xywh {320 216 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button aphaser_activar {
@@ -3836,6 +3855,7 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
         }
       }
       Fl_Group VALVE {
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button valve_activar {
@@ -3953,6 +3973,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
         }
       }
       Fl_Group DFLANGE {
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button dflange_activar {
@@ -4115,6 +4136,7 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
         }
       }
       Fl_Group RING {
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button ring_activar {
@@ -4246,6 +4268,7 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
         }
       }
       Fl_Group Tuner {
+        user_data 1
         xywh {521 84 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
@@ -4285,6 +4308,7 @@ TUNER_LABEL->redraw();}
         }
       }
       Fl_Group InOut {
+        user_data 1
         xywh {2 24 164 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button ActivarGeneral {
@@ -4354,6 +4378,7 @@ rkr->calculavol(2);}
         }
       }
       Fl_Group Midi {
+        user_data 1
         xywh {521 144 276 50} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button nidi_activar {
@@ -4413,6 +4438,7 @@ rkr->modified=0;
         }
       }
       Fl_Group Presets {
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -6322,8 +6348,7 @@ ring_activar->value(rkr->Ring_Bypass);
 
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {
@@ -7782,326 +7807,31 @@ for (int t=0; t<Principal->children();t++)
      k= w->labelsize();
      k+=value;
      w->labelsize(k);
-        
-  }
        
-    Principal->redraw();
+   
+    long long ud = (long long) w->user_data();
     
+    if (ud==1)
+    {
+          
+     Fl_Group *g = (Fl_Group *)w;     
+      
+     for(int i=0;i<g->children();i++)
+       {
 
-for (int t=0; t<EQ->children();t++)
-  {
-    Fl_Widget *w = EQ->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    EQ->redraw();
-    
-for (int t=0; t<COMPRESS->children();t++)
-  {
-    Fl_Widget *w = COMPRESS->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    COMPRESS->redraw();
-    
-for (int t=0; t<DIST->children();t++)
-  {
-    Fl_Widget *w = DIST->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    DIST->redraw();
-
-for (int t=0; t<OVRD->children();t++)
-  {
-    Fl_Widget *w = OVRD->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    OVRD->redraw();
-    
-    
-for (int t=0; t<ECHO->children();t++)
-  {
-    Fl_Widget *w = ECHO->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    ECHO->redraw();    
-    
-for (int t=0; t<CHORUS->children();t++)
-  {
-    Fl_Widget *w = CHORUS->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    CHORUS->redraw();    
-
-for (int t=0; t<PHASER->children();t++)
-  {
-    Fl_Widget *w = PHASER->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    PHASER->redraw();
-    
-for (int t=0; t<FLANGER->children();t++)
-  {
-    Fl_Widget *w = FLANGER->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    FLANGER->redraw();
-    
-for (int t=0; t<REVERB->children();t++)
-  {
-    Fl_Widget *w = REVERB->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    REVERB->redraw();
-    
-for (int t=0; t<PEQ->children();t++)
-  {
-    Fl_Widget *w = PEQ->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    PEQ->redraw();
-    
-for (int t=0; t<WHAWHA->children();t++)
-  {
-    Fl_Widget *w = WHAWHA->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    WHAWHA->redraw();
-    
-for (int t=0; t<ALIENWAH->children();t++)
-  {
-    Fl_Widget *w = ALIENWAH->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    ALIENWAH->redraw();
-    
-for (int t=0; t<CABINET->children();t++)
-  {
-    Fl_Widget *w = CABINET->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    CABINET->redraw();
-    
-for (int t=0; t<PAN->children();t++)
-  {
-    Fl_Widget *w = PAN->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    PAN->redraw();
-    
-for (int t=0; t<HAR->children();t++)
-  {
-    Fl_Widget *w = HAR->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    HAR->redraw();
-    
-for (int t=0; t<MUSDELAY->children();t++)
-  {
-    Fl_Widget *w = MUSDELAY->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    MUSDELAY->redraw();
-    
-for (int t=0; t<GATE->children();t++)
-  {
-    Fl_Widget *w = GATE->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    GATE->redraw();                                
-    
-for (int t=0; t<NEWDIST->children();t++)
-  {
-    Fl_Widget *w = NEWDIST->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    NEWDIST->redraw();    
-    
-for (int t=0; t<APHASER->children();t++)
-  {
-    Fl_Widget *w = APHASER->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    APHASER->redraw();
-    
-for (int t=0; t<VALVE->children();t++)
-  {
-    Fl_Widget *w = VALVE->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    VALVE->redraw();
-
-for (int t=0; t<DFLANGE->children();t++)
-  {
-    Fl_Widget *w = DFLANGE->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    DFLANGE->redraw();
+         Fl_Widget *c = g->child(i);
 
 
-for (int t=0; t<RING->children();t++)
-  {
-    Fl_Widget *w = RING->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    RING->redraw();
+          k= c->labelsize();
+          k+=value;
+          c->labelsize(k);
+       } 
+    } 
+ 
+  }
 
-for (int t=0; t<Tuner->children();t++)
-  {
-    Fl_Widget *w = Tuner->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
+  Fl::redraw();} {selected
     }
-        
-    Tuner->redraw();
-    
-for (int t=0; t<InOut->children();t++)
-  {
-    Fl_Widget *w = InOut->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    InOut->redraw();
-    
-for (int t=0; t<Midi->children();t++)
-  {
-    Fl_Widget *w = Midi->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    Midi->redraw();
-    
-
-for (int t=0; t<Presets->children();t++)
-  {
-    Fl_Widget *w = Presets->child(t);
-    
-     k= w->labelsize();
-     k+=value;
-     w->labelsize(k);
-     
-    }
-        
-    Presets->redraw();} {}
   }
   Function {adjustfont()} {} {
     code {int change,value;
