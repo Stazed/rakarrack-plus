@@ -10396,6 +10396,7 @@ Nivel_Entrada->value((int) (rkr->Input_Gain*100.0)-50);
 rkr->calculavol(1);
 Nivel_Salida->value((int) (rkr->Master_Volume*100.0)-50);
 rkr->calculavol(2);
+Balance->value((int)(rkr->Fraction_Bypass*100.0));
 
 
 ActivarGeneral->value(rkr->Bypass);
@@ -12226,18 +12227,21 @@ Fl::redraw();
 void RKRGUI::chfsize(int value) {
   unsigned char k;
 
+
+
 for (int t=0; t<Principal->children();t++)
   {
     Fl_Widget *w = Principal->child(t);
-    
+  
      k= w->labelsize();
      k+=value;
      w->labelsize(k);
-     
-    }
         
+  }
+       
     Principal->redraw();
     
+
 for (int t=0; t<EQ->children();t++)
   {
     Fl_Widget *w = EQ->child(t);
@@ -12491,6 +12495,18 @@ for (int t=0; t<DFLANGE->children();t++)
         
     DFLANGE->redraw();
 
+
+for (int t=0; t<RING->children();t++)
+  {
+    Fl_Widget *w = RING->child(t);
+    
+     k= w->labelsize();
+     k+=value;
+     w->labelsize(k);
+     
+    }
+        
+    RING->redraw();
 
 for (int t=0; t<Tuner->children();t++)
   {
