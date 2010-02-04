@@ -889,8 +889,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1588 61 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} open
+      xywh {1581 54 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4269,7 +4269,7 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
       }
       Fl_Group EXCITER {
         user_data 1
-        xywh {320 211 159 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button exciter_activar {
           label On
@@ -4296,7 +4296,7 @@ ex_9->value(rkr->efx_Exciter->getpar(9));
 ex_10->value(rkr->efx_Exciter->getpar(10));
 ex_lfreq->value(rkr->efx_Exciter->getpar(11));
 ex_hfreq->value(rkr->efx_Exciter->getpar(12));
-if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;} selected
+if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
         } {
           MenuItem {} {
@@ -4389,6 +4389,369 @@ if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;} selected
           callback {rkr->efx_Exciter->changepar(10,(int)o->value());}
           xywh {369 380 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
+        }
+      }
+      Fl_Group MBDIST {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button mbdist_activar {
+          label On
+          callback {rkr->MBDist_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_MBDist->cleanup();
+findpos(23,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice mbdist_preset {
+          label Preset
+          callback {rkr->efx_MBDist->setpreset((int)o->value());
+mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
+mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
+mbdist_drive->value(rkr->efx_MBDist->getpar(3));
+mbdist_level->value(rkr->efx_MBDist->getpar(4));
+mbdist_tipoL->value(rkr->efx_MBDist->getpar(5));
+mbdist_tipoM->value(rkr->efx_MBDist->getpar(6));
+mbdist_tipoH->value(rkr->efx_MBDist->getpar(7));
+mbdist_volL->value(rkr->efx_MBDist->getpar(8));
+mbdist_volM->value(rkr->efx_MBDist->getpar(8));
+mbdist_volH->value(rkr->efx_MBDist->getpar(8));
+mbdist_neg->value(rkr->efx_MBDist->getpar(6));
+mbdist_st->value(rkr->efx_MBDist->getpar(9));
+mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
+mbdist_cross1->value(rkr->efx_MBDist->getpar(7));
+mbdist_cross2->value(rkr->efx_MBDist->getpar(8));}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+        } {
+          MenuItem {} {
+            label {Distorsion 1}
+            xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Distorsion 2}
+            xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Distorsion 3}
+            xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Guitar Amp}
+            xywh {42 42 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider mbdist_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_MBDist->changepar(0,(int)(o->value()+64));}
+          xywh {372 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_LRc {
+          label {L/R.Cr}
+          callback {rkr->efx_MBDist->changepar(2,(int)(o->value()+64));}
+          xywh {372 249 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_drive {
+          label Drive
+          callback {rkr->efx_MBDist->changepar(3,(int)o->value());}
+          xywh {372 261 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_level {
+          label Level
+          callback {rkr->efx_MBDist->changepar(4,(int)o->value());}
+          xywh {372 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_volL {
+          label {L.Gain}
+          callback {rkr->efx_MBDist->changepar(8,(int)o->value());}
+          xywh {372 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_volM {
+          label {M.Gain}
+          callback {rkr->efx_MBDist->changepar(9,(int)o->value());}
+          xywh {372 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_volH {
+          label {H. Gain}
+          callback {rkr->efx_MBDist->changepar(10,(int)o->value());}
+          xywh {372 313 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_cross1 {
+          label Cross1
+          callback {rkr->efx_MBDist->changepar(12,(int)o->value());}
+          xywh {372 326 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbdist_cross2 {
+          label Cross2
+          callback {rkr->efx_MBDist->changepar(13,(int)o->value());}
+          xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2500 maximum 20000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Choice mbdist_tipoL {
+          callback {rkr->efx_MBDist->changepar(5,(int)o->value());}
+          xywh {323 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+        } {
+          MenuItem {} {
+            label Atan
+            xywh {42 42 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Asym1
+            xywh {42 42 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Pow
+            xywh {42 42 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Sine
+            xywh {52 52 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Qnts
+            xywh {62 62 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Zigzg
+            xywh {72 72 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Lmt
+            xywh {82 82 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label LmtU
+            xywh {92 92 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label LmtL
+            xywh {102 102 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label ILmt
+            xywh {112 112 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Clip
+            xywh {122 122 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Asym2
+            xywh {132 132 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Pow2
+            xywh {142 142 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Sgm
+            xywh {152 152 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Crunch
+            xywh {10 10 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Hard Crunch}
+            xywh {20 20 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dirty Octave+}
+            xywh {30 30 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Square}
+            xywh {10 10 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {10 10 36 21} labelsize 9
+          }
+        }
+        Fl_Choice mbdist_tipoM {
+          callback {rkr->efx_MBDist->changepar(6,(int)o->value());}
+          xywh {374 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+        } {
+          MenuItem {} {
+            label Atan
+            xywh {52 52 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Asym1
+            xywh {52 52 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Pow
+            xywh {52 52 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Sine
+            xywh {62 62 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Qnts
+            xywh {72 72 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Zigzg
+            xywh {82 82 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Lmt
+            xywh {92 92 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label LmtU
+            xywh {102 102 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label LmtL
+            xywh {112 112 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label ILmt
+            xywh {122 122 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Clip
+            xywh {132 132 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Asym2
+            xywh {142 142 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Pow2
+            xywh {152 152 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Sgm
+            xywh {162 162 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Crunch
+            xywh {20 20 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Hard Crunch}
+            xywh {30 30 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dirty Octave+}
+            xywh {40 40 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Square}
+            xywh {20 20 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {20 20 36 21} labelsize 9
+          }
+        }
+        Fl_Choice mbdist_tipoH {
+          callback {rkr->efx_MBDist->changepar(7,(int)o->value());}
+          xywh {425 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+        } {
+          MenuItem {} {
+            label Atan
+            xywh {62 62 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Asym1
+            xywh {62 62 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Pow
+            xywh {62 62 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Sine
+            xywh {72 72 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Qnts
+            xywh {82 82 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Zigzg
+            xywh {92 92 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Lmt
+            xywh {102 102 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label LmtU
+            xywh {112 112 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label LmtL
+            xywh {122 122 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label ILmt
+            xywh {132 132 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Clip
+            xywh {142 142 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Asym2
+            xywh {152 152 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Pow2
+            xywh {162 162 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Sgm
+            xywh {172 172 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Crunch
+            xywh {30 30 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Hard Crunch}
+            xywh {40 40 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dirty Octave+}
+            xywh {50 50 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Square}
+            xywh {30 30 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {M.Saw}
+            xywh {30 30 36 21} labelsize 9
+          }
+        }
+        Fl_Value_Slider mbdist_pan {
+          label Pan
+          callback {rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
+          xywh {372 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button mbdist_st {
+          label Stereo
+          callback {rkr->efx_MBDist->changepar(14,(int)o->value());}
+          xywh {352 379 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button mbdist_neg {
+          label {Neg.}
+          callback {rkr->efx_MBDist->changepar(11,(int)o->value());}
+          xywh {421 378 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tuner {
@@ -5717,6 +6080,7 @@ newdist_activar->color(bcolor);
 valve_activar->color(bcolor);
 ring_activar->color(bcolor);
 exciter_activar->color(bcolor);
+mbdist_activar->color(bcolor);
 Cabinet_activar->color(bcolor);
 tuner_activar->color(bcolor);
 Preset_Counter->color(bcolor);
@@ -5786,6 +6150,7 @@ Fl::redraw();} {}
 eq_activar->selection_color(bcolor);
 compress_activar->selection_color(bcolor);
 dist_activar->selection_color(bcolor);
+mbdist_activar->selection_color(bcolor);
 ovrd_activar->selection_color(bcolor);
 echo_activar->selection_color(bcolor);
 chorus_activar->selection_color(bcolor);
@@ -5794,6 +6159,8 @@ aphaser_activar->selection_color(bcolor);
 flanger_activar->selection_color(bcolor);
 dflange_activar->selection_color(bcolor);
 valve_activar->selection_color(bcolor);
+exciter_activar->selection_color(bcolor);
+ring_activar->selection_color(bcolor);
 reverb_activar->selection_color(bcolor);
 eqp_activar->selection_color(bcolor);
 WhaWha_activar->selection_color(bcolor);
@@ -5804,6 +6171,8 @@ pan_activar->selection_color(bcolor);
 har_activar->selection_color(bcolor);
 musdelay_activar->selection_color(bcolor);
 gate_activar->selection_color(bcolor);
+
+
 tuner_activar->selection_color(bcolor);
 nidi_activar->selection_color(bcolor);
 Compare->selection_color(bcolor);
@@ -5833,6 +6202,9 @@ valve_ed->selection_color(bcolor);
 valve_pf->selection_color(bcolor);
 ring_st->selection_color(bcolor);
 ring_afreq->selection_color(bcolor);
+mbdist_neg->selection_color(bcolor);
+mbdist_st->selection_color(bcolor);
+
 
 Auto_Output->selection_color(bcolor);
 Stereo->selection_color(bcolor);
@@ -6722,6 +7094,9 @@ for (i=1; i<=t; i++)
         case 22:
         EXCITER->hide();
         break;
+        case 23:
+        MBDIST->hide();
+        break;
         
       }
       
@@ -6953,6 +7328,12 @@ switch ( rkr->efx_order[i])
        if(rkr->Exciter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
 
+     case 23:
+       MBDIST->position(x[i],y[i]);
+       mbdist_activar->shortcut(s[i]);
+       MBDIST->show();
+       if(rkr->MBDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;
 
  }
  
@@ -7913,6 +8294,7 @@ VALVE->image(InOut->image());
 DFLANGE->image(InOut->image());
 RING->image(InOut->image());
 EXCITER->image(InOut->image());
+MBDIST->image(InOut->image());
 
 
 Presets->image(InOut->image());
@@ -8497,7 +8879,13 @@ Fl_Color boff = fore_color;
      if(value) exciter_activar->color(bon); else exciter_activar->color(boff);
      break;
 
+     case 23: 
+   
+     if(value) mbdist_activar->color(bon); else mbdist_activar->color(boff);
+     break;
 
-    }} {}
+
+    }} {selected
+    }
   }
 } 

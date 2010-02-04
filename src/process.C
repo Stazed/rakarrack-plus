@@ -143,6 +143,7 @@ RKR::RKR ()
   efx_DFlange = new Dflange(efxoutl,efxoutr);
   efx_Ring = new Ring(efxoutl,efxoutr);
   efx_Exciter = new Exciter(efxoutl,efxoutr);
+  efx_MBDist = new MBDist(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
@@ -162,14 +163,15 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 23;
+  NumEffects = 24;
 
   {
     static const char *los_names[] =
       { "EQ", "Compressor", "Distortion", "Overdrive", "Echo", "Chorus",
       "Phaser", "Flanger", "Reverb",
       "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
-      "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter"
+      "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",
+      "DistBand" 
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -928,6 +930,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 {
                   efx_Exciter->out(efxoutl, efxoutr);
 		  Vol2_Efx();
+                }
+              break; 	           
+	    
+	    case 23:
+              if (MBDist_Bypass)
+                {
+                  efx_MBDist->out(efxoutl, efxoutr);
+		  Vol_Efx(22,efx_MBDist->outvolume);
                 }
               break; 	           
 	    

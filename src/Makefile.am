@@ -68,6 +68,8 @@ rakarrack_SOURCES = main.C \
 	Dual_Flange.h \
 	Exciter.C \
 	Exciter.h \
+	MBDist.C \
+	MBDist.h \
 	Valve.C \
 	Valve.h \
 	Ring.C \

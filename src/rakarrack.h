@@ -1699,6 +1699,96 @@ private:
   void cb_ex_10_i(SliderW*, void*);
   static void cb_ex_10(SliderW*, void*);
 public:
+  Fl_Group *MBDIST;
+  Fl_Light_Button *mbdist_activar;
+private:
+  void cb_mbdist_activar_i(Fl_Light_Button*, void*);
+  static void cb_mbdist_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *mbdist_preset;
+private:
+  void cb_mbdist_preset_i(Fl_Choice*, void*);
+  static void cb_mbdist_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbdist_preset[];
+public:
+  SliderW *mbdist_WD;
+private:
+  void cb_mbdist_WD_i(SliderW*, void*);
+  static void cb_mbdist_WD(SliderW*, void*);
+public:
+  SliderW *mbdist_LRc;
+private:
+  void cb_mbdist_LRc_i(SliderW*, void*);
+  static void cb_mbdist_LRc(SliderW*, void*);
+public:
+  SliderW *mbdist_drive;
+private:
+  void cb_mbdist_drive_i(SliderW*, void*);
+  static void cb_mbdist_drive(SliderW*, void*);
+public:
+  SliderW *mbdist_level;
+private:
+  void cb_mbdist_level_i(SliderW*, void*);
+  static void cb_mbdist_level(SliderW*, void*);
+public:
+  SliderW *mbdist_volL;
+private:
+  void cb_mbdist_volL_i(SliderW*, void*);
+  static void cb_mbdist_volL(SliderW*, void*);
+public:
+  SliderW *mbdist_volM;
+private:
+  void cb_mbdist_volM_i(SliderW*, void*);
+  static void cb_mbdist_volM(SliderW*, void*);
+public:
+  SliderW *mbdist_volH;
+private:
+  void cb_mbdist_volH_i(SliderW*, void*);
+  static void cb_mbdist_volH(SliderW*, void*);
+public:
+  SliderW *mbdist_cross1;
+private:
+  void cb_mbdist_cross1_i(SliderW*, void*);
+  static void cb_mbdist_cross1(SliderW*, void*);
+public:
+  SliderW *mbdist_cross2;
+private:
+  void cb_mbdist_cross2_i(SliderW*, void*);
+  static void cb_mbdist_cross2(SliderW*, void*);
+public:
+  Fl_Choice *mbdist_tipoL;
+private:
+  void cb_mbdist_tipoL_i(Fl_Choice*, void*);
+  static void cb_mbdist_tipoL(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbdist_tipoL[];
+public:
+  Fl_Choice *mbdist_tipoM;
+private:
+  void cb_mbdist_tipoM_i(Fl_Choice*, void*);
+  static void cb_mbdist_tipoM(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbdist_tipoM[];
+public:
+  Fl_Choice *mbdist_tipoH;
+private:
+  void cb_mbdist_tipoH_i(Fl_Choice*, void*);
+  static void cb_mbdist_tipoH(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbdist_tipoH[];
+public:
+  SliderW *mbdist_pan;
+private:
+  void cb_mbdist_pan_i(SliderW*, void*);
+  static void cb_mbdist_pan(SliderW*, void*);
+public:
+  Fl_Check_Button *mbdist_st;
+private:
+  void cb_mbdist_st_i(Fl_Check_Button*, void*);
+  static void cb_mbdist_st(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *mbdist_neg;
+private:
+  void cb_mbdist_neg_i(Fl_Check_Button*, void*);
+  static void cb_mbdist_neg(Fl_Check_Button*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
