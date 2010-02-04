@@ -1038,7 +1038,88 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 157:
          efx_EQ2->changepar(23,(unsigned char) value);   
        break; 
-       
+    
+    case 158:
+         efx_DFlange->changepar(0,value-64);       
+         break;
+ 
+    case 159:
+         efx_DFlange->changepar(1,value-64);       
+         break;
+ 
+    case 160:
+         efx_DFlange->changepar(2,value);       
+         break;
+ 
+    case 161:
+         efx_DFlange->changepar(3,20+(int)((float)value*3.7795f));       
+         break;
+ 
+    case 162:
+         efx_DFlange->changepar(4,(int)((float)value*23.622f));       
+         break;
+ 
+    case 163:
+         efx_DFlange->changepar(5,(int)((float)value*0.7874f));       
+         break;
+ 
+    case 164:
+         efx_DFlange->changepar(6,value-64);       
+         break;
+ 
+    case 165:
+         efx_DFlange->changepar(7,20+(int)((float)value*157.32f));       
+         break;
+ 
+    case 166:
+         efx_DFlange->changepar(10,1+(int)((float)value*4.716f));       
+         break;
+ 
+    case 167:
+         efx_DFlange->changepar(11,value);       
+         break;
+ 
+    case 168:
+         efx_DFlange->changepar(13,value);       
+         break;
+            
+    case 169:
+         efx_Valve->changepar(0,value);
+         break;
+ 
+    case 170:
+         efx_Valve->changepar(2,value);
+         break;
+
+    case 171:
+         efx_Valve->changepar(1,value);
+         break;
+
+    case 172:
+         efx_Valve->changepar(4,value);
+         break;
+
+    case 173:
+         efx_Valve->changepar(3,value);
+         break;
+
+    case 174:
+         efx_Valve->changepar(10,value);
+         break;
+
+    case 175:
+         efx_Valve->changepar(12,(int)((float)value*.7874f));
+         break;
+
+    case 176:
+         efx_Valve->changepar(6,value);
+         break;
+
+    case 177:
+         efx_Valve->changepar(7,value);
+         break;
+ 
+
    } 
       
     

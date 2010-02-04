@@ -315,7 +315,35 @@ RKR::savefile (char *filename)
 		   efx_Ring->getpar (12),  Ring_Bypass);
 	  break;
 
+	case 22:
+	  //Exciter
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Exciter->getpar (0), efx_Exciter->getpar (1),
+		   efx_Exciter->getpar (2), efx_Exciter->getpar (3),
+		   efx_Exciter->getpar (4), efx_Exciter->getpar (5),
+		   efx_Exciter->getpar (6), efx_Exciter->getpar (7),
+		   efx_Exciter->getpar (8), efx_Exciter->getpar (9),
+		   efx_Exciter->getpar (10), efx_Exciter->getpar (11),
+		   efx_Exciter->getpar (12),  Exciter_Bypass);
+	  break;
 
+	case 23:
+	  //MBDist
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_MBDist->getpar (0), efx_MBDist->getpar (1),
+		   efx_MBDist->getpar (2), efx_MBDist->getpar (3),
+		   efx_MBDist->getpar (4), efx_MBDist->getpar (5),
+		   efx_MBDist->getpar (6), efx_MBDist->getpar (7),
+		   efx_MBDist->getpar (8), efx_MBDist->getpar (9),
+		   efx_MBDist->getpar (10), efx_MBDist->getpar (11),
+		   efx_MBDist->getpar (12), efx_MBDist->getpar (13),
+		   efx_MBDist->getpar (14), MBDist_Bypass);
+	  break;
+
+
+
+
+ 
 
 
 	}
@@ -643,6 +671,23 @@ RKR::loadfile (char *filename)
 		  &lv[22][10], &lv[22][11], &lv[22][12],&Ring_B);
 	  break;
 
+	case 22:
+	  //Exciter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[23][0], &lv[23][1], &lv[23][2], &lv[23][3], &lv[23][4],
+		  &lv[23][5], &lv[23][6], &lv[23][7], &lv[23][8], &lv[23][9],
+		  &lv[23][10], &lv[23][11], &lv[23][12],&Exciter_B);
+	  break;
+
+	case 23:
+	  //Exciter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[24][0], &lv[24][1], &lv[24][2], &lv[24][3], &lv[24][4],
+		  &lv[24][5], &lv[24][6], &lv[24][7], &lv[24][8], &lv[24][9],
+		  &lv[24][10], &lv[24][11], &lv[24][12], &lv[24][13], &lv[24][14],
+		  &Exciter_B);
+	  break;
+
 
 	}
     }
@@ -708,6 +753,9 @@ RKR::Actualizar_Audio ()
   DFlange_Bypass = 0;
   Valve_Bypass = 0;
   Ring_Bypass = 0;
+  Exciter_Bypass = 0;
+  MBDist_Bypass = 0;
+  
   
   cleanup_efx ();
 
@@ -751,6 +799,10 @@ RKR::Actualizar_Audio ()
     efx_DFlange->changepar (i, lv[21][i]);
  for (i = 0; i <= 12; i++)
     efx_Ring->changepar (i, lv[22][i]);
+ for (i = 0; i <= 12; i++)
+    efx_Exciter->changepar (i, lv[23][i]);
+ for (i = 0; i <= 14; i++)
+    efx_MBDist->changepar (i, lv[24][i]);
 
 
   for (i = 0; i < 19; i++)
@@ -802,6 +854,8 @@ RKR::Actualizar_Audio ()
   Valve_Bypass = Valve_B;
   DFlange_Bypass = DFlange_B;
   Ring_Bypass = Ring_B;
+  Exciter_Bypass = Exciter_B;
+  MBDist_Bypass = MBDist_B;
 
   Bypass = Bypass_B;
 
@@ -868,7 +922,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[23][16] = {
+  int presets[25][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -914,9 +968,12 @@ RKR::New ()
 // Dual Flange
     {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0, 0},
 //Ring
-    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0 ,0}
-
-
+    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0 ,0},
+//Exciter
+    {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0 },
+//MBDist
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0}
+    
 
   };
 
@@ -968,6 +1025,8 @@ RKR::New ()
   Valve_B = 0;
   DFlange_B = 0;
   Ring_B = 0;
+  Exciter_B = 0;
+  MBDist_B = 0;
   Bypass_B = 0;
 
   
@@ -990,7 +1049,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[23][16] = {
+  int presets[25][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1036,7 +1095,11 @@ RKR::New_Bank ()
 // Dual Flange
     {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0, 0},
 //Ring
-    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0 ,0}
+    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0 ,0},
+//Exciter
+    {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0 },
+//MBDist
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0}
     
      
          
@@ -1121,7 +1184,8 @@ RKR::Bank_to_Preset (int i)
   Valve_B = Bank[i].lv[20][19];
   DFlange_B = Bank[i].lv[21][19];
   Ring_B = Bank[i].lv[22][19];
-  
+  Exciter_B = Bank[i].lv[23][19];
+  MBDist_B = Bank[i].lv[24][19];  
   Bypass_B = Bypass;
 
 
@@ -1196,6 +1260,10 @@ RKR::Preset_to_Bank (int i)
     lv[21][j] = efx_DFlange->getpar(j);
   for (j = 0; j <= 12; j++)
     lv[22][j] = efx_Ring->getpar(j);
+  for (j = 0; j <= 12; j++)
+    lv[23][j] = efx_Exciter->getpar(j);
+  for (j = 0; j <= 14; j++)
+    lv[24][j] = efx_MBDist->getpar(j);
 
 
   for (j = 0; j <= 16; j++)
@@ -1251,6 +1319,8 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[20][19] = Valve_Bypass;
   Bank[i].lv[21][19] = DFlange_Bypass;
   Bank[i].lv[22][19] = Ring_Bypass;
+  Bank[i].lv[23][19] = Exciter_Bypass;
+  Bank[i].lv[24][19] = MBDist_Bypass;
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
   

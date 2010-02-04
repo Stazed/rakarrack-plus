@@ -1,8 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0110 
-i18n_type 1 
-i18n_include <libintl.h> 
-i18n_function gettext 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -4490,7 +4487,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
         Fl_Value_Slider mbdist_cross2 {
           label Cross2
-          callback {rkr->efx_MBDist->changepar(13,(int)o->value());} selected
+          callback {rkr->efx_MBDist->changepar(13,(int)o->value());}
           xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
           class SliderW
         }
@@ -7606,7 +7603,7 @@ rkr->RC->cc=1;} {}
 
 int i;
 
-for (i=1; i<158; i++)
+for (i=1; i<178; i++)
 
 {
 
@@ -8146,6 +8143,88 @@ switch (i)
      eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
      eqp_HQ->redraw();
      break;
+     case 158:
+     dflange_WD->value(rkr->efx_DFlange->getpar(0));
+     dflange_WD->redraw();
+     break;
+     case 159:
+     dflange_pan->value(rkr->efx_DFlange->getpar(1));
+     dflange_pan->redraw();
+     break;
+     case 160:
+     dflange_LR->value(rkr->efx_DFlange->getpar(2));
+     dflange_LR->redraw();
+     break;
+     case 161:
+     dflange_depth->value(rkr->efx_DFlange->getpar(3));
+     dflange_depth->redraw();
+     break;
+     case 162:
+     dflange_width->value(rkr->efx_DFlange->getpar(4));
+     dflange_width->redraw();
+     break;
+     case 163:
+     dflange_offset->value(rkr->efx_DFlange->getpar(5));
+     dflange_offset->redraw();
+     break;
+     case 164:
+     dflange_fb->value(rkr->efx_DFlange->getpar(6));
+     dflange_fb->redraw();
+     break;
+     case 165:
+     dflange_lpf->value(rkr->efx_DFlange->getpar(7));
+     dflange_lpf->redraw();
+     break;
+     case 166:
+     dflange_freq->value(rkr->efx_DFlange->getpar(10));
+     dflange_freq->redraw();
+     break;
+     case 167:
+     dflange_stdf->value(rkr->efx_DFlange->getpar(11));
+     dflange_stdf->redraw();
+     break;
+     case 168:
+     dflange_rnd->value(rkr->efx_DFlange->getpar(13));
+     dflange_rnd->redraw();
+     break;
+     case 169:
+     valve_WD->value(rkr->efx_Valve->getpar(0)-64);
+     valve_WD->redraw();
+     break;
+     case 170:
+     valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
+     valve_LRc->redraw();
+     break;
+     case 171:
+     valve_pan->value(rkr->efx_Valve->getpar(1)-64);
+     valve_pan->redraw();
+     break;
+     case 172:
+     valve_level->value(rkr->efx_Valve->getpar(4));
+     valve_level->redraw();
+     break;
+     case 173:
+     valve_drive->value(rkr->efx_Valve->getpar(3));
+     valve_drive->redraw();
+     break;
+     case 174:
+     valve_Q->value(rkr->efx_Valve->getpar(10));
+     valve_Q->redraw();
+     break;
+     case 175:
+     valve_Pre->value(rkr->efx_Valve->getpar(12));
+     valve_Pre->redraw();
+     break;
+     case 176:
+     valve_lpf->value(rkr->efx_Valve->getpar(6));
+     valve_lpf->redraw();
+     break;
+     case 177:
+     valve_hpf->value(rkr->efx_Valve->getpar(7));
+     valve_hpf->redraw();
+     break;
+
+
 
 
 }
@@ -8154,7 +8233,8 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {}
+rkr->Mvalue=0;} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {switch(rkr->efx_order[rkr->Mnumeff])

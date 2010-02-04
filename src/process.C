@@ -178,7 +178,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 132;
+  NumParams= 152;
 
 {
    static const char *los_params[] = 
@@ -205,7 +205,10 @@ RKR::RKR ()
       "EQ 125 Hz", "EQ 250 Hz", "EQ 500 Hz", "EQ 1 Khz", "EQ 2 Khz", "EQ 4 Khz", "EQ 8 Khz", "EQ 16 Khz", "Compressor A.Time",
       "Compressor R.Time", "Compressor Ratio", "Compressor Knee", "Compressor Threshold", "Compressor Output", "P.EQ Gain",
       "P.EQ Low Freq","P.EQ Low Gain","P.EQ Low Q","P.EQ Mid Freq","P.EQ Mid Gain","P.EQ Mid Q", "P.EQ High Freq",
-      "P.EQ High Gain","P.EQ High Q"
+      "P.EQ High Gain","P.EQ High Q", "Dual Flange WD", "Dual Flange Pan", "Dual Flange LR_Cr","Dual Flange Dpeth",
+      "Dual Flange Width", "Dual Flange Offset", "Dual Flange FB", "Dual Flange LPF", "Dual Flange Tenpo", "Dual Flange St_df.",
+      "Dual Flange Rnd","Valve WD","Valve LR_Cr","Valve Pan","Valve Level","Valve Drive", "Valve Dist","Valve Presence",
+      "Valve LPF", "Valve HPF"       
 
       };
          for(i=0; i<NumParams; i++)
@@ -217,7 +220,8 @@ unsigned char Atos[] = { 1,2,3,4,5,6,8,9,20,21,22,23,24,25,26,27,28,29,30,31,46,
          57,58,59,60,61,62,63,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,
          92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,117,118,119,120,
          121,122,123,124,125,126,127,7,12,14,116,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,
-         146,147,148,149,150,151,152,153,154,155,156,157};
+         146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,
+         172,173,174,175,176,177,178,179,180,181,182,183,184};
           
          for(i=0;i<NumParams; i++) efx_params[i].Ato=(int)Atos[i];
 
