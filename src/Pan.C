@@ -80,18 +80,9 @@ Pan::out (float *smpsl, float *smpsr)
 	  rdiff = smpsr[i] - avg;
 
 	  tmp = avg + ldiff * mul;
-	  if (tmp < -1.0)
-	    tmp = -1.0f;
-	  if (tmp > 1.0)
-	    tmp = 1.0f;
 	  smpsl[i] = tmp;
 
-
 	  tmp = avg + rdiff * mul;
-	  if (tmp < -1.0)
-	    tmp = -1.0f;
-	  if (tmp > 1.0)
-	    tmp = 1.0f;
 	  smpsr[i] = tmp;
 
 	}
@@ -164,9 +155,9 @@ Pan::setpreset (unsigned char npreset)
   const int NUM_PRESETS = 2;
   unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
     //AutoPan
-    {64, 64, 140, 0, 0, 0, 0, 1, 0},
+    {64, 64, 26, 0, 0, 0, 0, 1, 0},
     //Extra Stereo
-    {64, 64, 45, 0, 0, 0, 10, 0, 1}
+    {64, 64, 80, 0, 0, 0, 10, 0, 1}
   };
 
   if (npreset >= NUM_PRESETS)

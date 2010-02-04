@@ -33,6 +33,8 @@ rakarrack_SOURCES = main.C \
 	Alienwah.h \
 	Filter.h \
 	Filter.C \
+	HarmonicEnhancer.C \
+	HarmonicEnhancer.h \
 	DynamicFilter.h \
 	DynamicFilter.C \
 	SVFilter.h \
@@ -64,6 +66,10 @@ rakarrack_SOURCES = main.C \
 	APhaser.h \
 	Dual_Flange.C \
 	Dual_Flange.h \
+	Exciter.C \
+	Exciter.h \
+	MBDist.C \
+	MBDist.h \
 	Valve.C \
 	Valve.h \
 	Ring.C \

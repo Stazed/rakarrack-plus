@@ -38,6 +38,8 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   lpfr = new AnalogFilter (2, 22000, 1, 0);
   hpfl = new AnalogFilter (3, 20, 1, 0);
   hpfr = new AnalogFilter (3, 20, 1, 0);
+  harm = new HarmEnhancer (rm, 500.0f,8000.0,1.0f);
+
 
   //default values
   Ppreset = 0;
@@ -49,12 +51,17 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Plpf = 127;
   Phpf = 0;
   Q_q = 64;
+  Ped = 0;
   Pstereo = 0;
   Pprefiltering = 0;
   q = 0.0f;
   dist = 0.0f;
   setlpf(127);
   sethpf(1);
+
+  for(int i=0;i<10;i++) rm[i]=-1.0;
+  rm[0]=1.0; rm[4]=1.0; rm[8]=1.0;
+  harm->calcula_mag(rm);
 
   setpreset (Ppreset);
   cleanup ();
@@ -111,10 +118,10 @@ Valve::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
 float
 Valve::Wshape(float x)
 {
-float fq=fabsf(q);
-if(x<fq) return(x);
-if(x>fq) return(fq+(x-fq)/powf(1.0+((x-fq)/(1.0-fq)),2.0));
-if(x>1.0) return((fq+1.0)*.5);
+
+if(x<factor) return(x);
+if(x>factor) return(factor+(x-factor)/powf(1.0+((x-factor)/(1.0-factor)),2.0));
+if(x>1.0) return((factor+1.0)*.5);
 return(0.0);
 }
 
@@ -150,11 +157,20 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	};
     };
 
+      harm->harm_out(efxoutl,efxoutr);
+
+
   if (Pprefiltering != 0)
     applyfilters (efxoutl, efxoutr);
 
-
-
+ if(Ped)
+    {
+      for (i =0; i<PERIOD; i++) 
+             {
+               efxoutl[i]=Wshape(efxoutl[i]);   
+               efxoutr[i]=Wshape(efxoutr[i]);
+             }
+    } 
      if (q == 0.0f) 
        {
            for (i =0; i<PERIOD; i++) 
@@ -163,7 +179,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
               otml = 0.999f * otml + fx - itml;
               itml = fx;
-              otml=Wshape(otml);
               efxoutl[i]= otml;
              }
         } 
@@ -175,7 +190,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otml = 0.999f * otml + fx - itml;
                itml = fx;
-               otml=Wshape(otml);
                efxoutl[i]= otml;
               }
         }
@@ -192,7 +206,6 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
               else fx = efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
               otmr = 0.999f * otmr + fx - itmr;
               itmr = fx;
-              otmr=Wshape(otmr);
               efxoutr[i]= otmr;
              }
         } 
@@ -204,13 +217,13 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
                else fx = (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
                otmr = 0.999f * otmr + fx - itmr;
                itmr = fx;
-               otmr=Wshape(otmr);
                efxoutr[i]= otmr;
               }
         }
 
   }
 
+  
 
   if (Pprefiltering == 0)
     applyfilters (efxoutl, efxoutr);
@@ -237,6 +250,8 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
     };
     
+
+
 };
 
 
@@ -287,21 +302,38 @@ Valve::sethpf (int Phpf)
 
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
+
   //Prefiltering of 51 is approx 630 Hz. 50 - 60 generally good for OD pedal.
 };
 
 void
+Valve::setpresence(int value)
+{
+
+float freq=50.0f*value;
+float nvol=(float)value*.01;
+
+harm->set_freqh(1, freq);
+harm->set_vol(1,  nvol);
+
+
+
+}
+
+
+
+void
 Valve::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
+  const int PRESET_SIZE = 13;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Valve 1
-    {0, 64, 64, 127, 64, 1, 93, 17, 1, 0, 69},
+    {0, 64, 64, 127, 64, 0, 93, 17, 1, 0, 69, 1, 84},
     //Valve 2
-    {0, 64, 64, 127, 64, 0, 90, 17, 1, 0, 112},
+    {0, 64, 64, 127, 64, 0, 90, 17, 1, 0, 112, 0, 30},
     //Valve 3
-    {0, 64, 35, 80, 64, 0, 80, 40, 1, 1, 100}
+    {0, 64, 35, 80, 64, 1, 80, 40, 1, 1, 100, 1, 30}
 
   };
 
@@ -358,8 +390,17 @@ Valve::changepar (int npar, int value)
     case 10:
       Q_q = value;
       q = (float)Q_q /127.0f - .999;
+      factor = 1.0f - ((float)Q_q / 128.0f); 
       break;       
-
+    case 11:
+      Ped = value;
+      break;
+    case 12:
+      Presence=value;
+      setpresence(value);
+      break;  
+      
+      
     };
 };
 
@@ -401,6 +442,11 @@ Valve::getpar (int npar)
     case 10:
       return (Q_q);
       break;  
+    case 11:
+      return (Ped);
+    case 12:
+      return (Presence);
+      break;   
     };
   return (0);			//in case of bogus parameter number
 };

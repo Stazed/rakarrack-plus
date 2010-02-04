@@ -1,21 +1,13 @@
 ==v0.5.0 (  /  /2009) ==
 -------------------------------------------------------------------------------
+- Added Effect Exciter.
+- Added Effect Ring.
 - Added Effect Dual Flange.
 - Added Effect Valve.
 - Changed LFO Freq for Tempo, good to Synchronize with sequencers. drum machines etc.
 - Utility to convert Old Bank files (rakconvert).
 - New Bank structure file (60 Presets, up to 50 effects, Midi Learn Data inclosed)
 - Fixed GUI
-
-
-
-
-
-
-
-
-
-
 
 
 

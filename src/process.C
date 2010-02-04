@@ -142,6 +142,8 @@ RKR::RKR ()
   efx_Valve = new Valve(efxoutl, efxoutr);   
   efx_DFlange = new Dflange(efxoutl,efxoutr);
   efx_Ring = new Ring(efxoutl,efxoutr);
+  efx_Exciter = new Exciter(efxoutl,efxoutr);
+  efx_MBDist = new MBDist(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
@@ -161,21 +163,22 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 22;
+  NumEffects = 24;
 
   {
     static const char *los_names[] =
       { "EQ", "Compressor", "Distortion", "Overdrive", "Echo", "Chorus",
       "Phaser", "Flanger", "Reverb",
       "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
-      "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring"
+      "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",
+      "DistBand" 
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
   }
 
 
-  NumParams= 122;
+  NumParams= 132;
 
 {
    static const char *los_params[] = 
@@ -200,7 +203,9 @@ RKR::RKR ()
       "Analog Phaser Feedback","Analog Phaser Mismatch","Analog Phaser St.df","Derelict Wet-Dry","Derelict Dist Pan",
       "Derelict Dist LR Cross","Volume","Balance","Input", "Multi On/Off", "EQ Gain", "EQ Q", "EQ 31 Hz", "EQ 63 Hz",
       "EQ 125 Hz", "EQ 250 Hz", "EQ 500 Hz", "EQ 1 Khz", "EQ 2 Khz", "EQ 4 Khz", "EQ 8 Khz", "EQ 16 Khz", "Compressor A.Time",
-      "Compressor R.Time", "Compressor Ratio", "Compressor Knee", "Compressor Threshold", "Compressor Output"
+      "Compressor R.Time", "Compressor Ratio", "Compressor Knee", "Compressor Threshold", "Compressor Output", "P.EQ Gain",
+      "P.EQ Low Freq","P.EQ Low Gain","P.EQ Low Q","P.EQ Mid Freq","P.EQ Mid Gain","P.EQ Mid Q", "P.EQ High Freq",
+      "P.EQ High Gain","P.EQ High Q"
 
       };
          for(i=0; i<NumParams; i++)
@@ -211,7 +216,8 @@ RKR::RKR ()
 unsigned char Atos[] = { 1,2,3,4,5,6,8,9,20,21,22,23,24,25,26,27,28,29,30,31,46,47,48,49,50,51,52,53,54,55,56,
          57,58,59,60,61,62,63,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,
          92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,117,118,119,120,
-         121,122,123,124,125,126,127,7,12,14,116,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147};
+         121,122,123,124,125,126,127,7,12,14,116,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,
+         146,147,148,149,150,151,152,153,154,155,156,157};
           
          for(i=0;i<NumParams; i++) efx_params[i].Ato=(int)Atos[i];
 
@@ -733,6 +739,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
              if(RecNote->afreq > 0.0) 
              {
              efx_Ring->Pfreq=lrintf(RecNote->lafreq);
+             last = reconota; 
              // printf("%d\n"efx_Ring->Pfreq);
              }
             }
@@ -915,6 +922,22 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 {
                   efx_Ring->out(efxoutl, efxoutr);
 		  Vol_Efx (21,efx_Ring->outvolume);
+                }
+              break; 	           
+
+	    case 22:
+              if (Exciter_Bypass)
+                {
+                  efx_Exciter->out(efxoutl, efxoutr);
+		  Vol2_Efx();
+                }
+              break; 	           
+	    
+	    case 23:
+              if (MBDist_Bypass)
+                {
+                  efx_MBDist->out(efxoutl, efxoutr);
+		  Vol_Efx(22,efx_MBDist->outvolume);
                 }
               break; 	           
 	    

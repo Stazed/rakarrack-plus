@@ -61,7 +61,7 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_)
       lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
     } 
     
-  schmittInit (16);
+  schmittInit (32);
 
 
 }

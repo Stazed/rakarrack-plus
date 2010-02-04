@@ -149,13 +149,6 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
     {
     efxoutr[i] *= tmpfactor;
     }
-
-//         efxoutl[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
-//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-//     if (Pstereo != 0)        
-//         efxoutr[i] *= ( depth * ((( sin * scale) * sin_tbl[offset] + ((tri * scale) * tri_tbl[offset]) + ((saw * scale) * saw_tbl[offset]) + ((squ * scale) * squ_tbl[offset])) + ( 1.0f - depth)));
-//          
-
       offset += Pfreq;
       if (offset > SAMPLE_RATE) offset -=SAMPLE_RATE;
   }
@@ -177,8 +170,8 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
       lout = l;
       rout = r;  
        
-      efxoutl[i] = lout * 2.0f * level * panning;
-      efxoutr[i] = rout * 2.0f * level * (1.0f-panning);  
+      efxoutl[i] = lout * level * panning;
+      efxoutr[i] = rout * level * (1.0f-panning);  
 
     }
     

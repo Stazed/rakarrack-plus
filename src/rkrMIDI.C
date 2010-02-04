@@ -998,8 +998,46 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 147:
          efx_Compressor->Compressor_Change(3,  -40 + (int) ((float) value * .314f));
        break;
-    
-    
+       
+    case 148:
+         efx_EQ2->changepar(0,(unsigned char) value);   
+       break; 
+
+    case 149:
+         efx_EQ2->changepar(11,(unsigned char) (48.0f/127.0f*value));   
+       break; 
+
+    case 150:
+         efx_EQ2->changepar(12,(unsigned char) value);   
+       break; 
+
+    case 151:
+         efx_EQ2->changepar(13,(unsigned char) value);   
+       break; 
+
+    case 152:
+         efx_EQ2->changepar(16,(unsigned char) (49 + 50.0f/127.0f*value));   
+       break; 
+
+    case 153:
+         efx_EQ2->changepar(17,(unsigned char) value);   
+       break; 
+
+    case 154:
+         efx_EQ2->changepar(18,(unsigned char) value);   
+       break; 
+
+    case 155:
+         efx_EQ2->changepar(21,(unsigned char) (100 + 27.0f/127.0f*value));   
+       break; 
+
+    case 156:
+         efx_EQ2->changepar(22,(unsigned char) value);   
+       break; 
+
+    case 157:
+         efx_EQ2->changepar(23,(unsigned char) value);   
+       break; 
        
    } 
       
