@@ -13282,57 +13282,49 @@ for(i=0; i<10; i++)
   
      case 0:
      if(value) L1->labelcolor(on); else L1->labelcolor(off);
-     L1->redraw();  
      break;  
      
      case 1:
      if(value) L2->labelcolor(on); else L2->labelcolor(off);
-     L2->redraw();  
      break;  
        
      case 2:
      if(value) L3->labelcolor(on); else L3->labelcolor(off);
-     L3->redraw();  
      break;  
        
      case 3:
      if(value) L4->labelcolor(on); else L4->labelcolor(off);
-     L4->redraw();  
      break;  
        
      case 4:
      if(value) L5->labelcolor(on); else L5->labelcolor(off);
-     L5->redraw();  
      break;  
        
      case 5:
      if(value) L6->labelcolor(on); else L6->labelcolor(off);
-     L6->redraw();  
      break;  
        
      case 6:
      if(value) L7->labelcolor(on); else L7->labelcolor(off);
-     L7->redraw();  
      break;  
        
      case 7:
      if(value) L8->labelcolor(on); else L8->labelcolor(off);
-     L8->redraw();  
      break;  
        
      case 8:
      if(value) L9->labelcolor(on); else L9->labelcolor(off);
-     L9->redraw();  
      break;  
        
      case 9:
      if(value) L10->labelcolor(on); else L10->labelcolor(off);
-     L10->redraw();  
      break;  
        
  }
  
  ChangeActivesB(num,value);
+ 
+ Fl::redraw();
 }
 
 void RKRGUI::Put_Skin(int last) {
