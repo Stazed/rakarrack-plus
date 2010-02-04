@@ -3986,13 +3986,13 @@ mbdist_tipoL->value(rkr->efx_MBDist->getpar(5));
 mbdist_tipoM->value(rkr->efx_MBDist->getpar(6));
 mbdist_tipoH->value(rkr->efx_MBDist->getpar(7));
 mbdist_volL->value(rkr->efx_MBDist->getpar(8));
-mbdist_volM->value(rkr->efx_MBDist->getpar(8));
-mbdist_volH->value(rkr->efx_MBDist->getpar(8));
-mbdist_neg->value(rkr->efx_MBDist->getpar(6));
-mbdist_st->value(rkr->efx_MBDist->getpar(9));
+mbdist_volM->value(rkr->efx_MBDist->getpar(9));
+mbdist_volH->value(rkr->efx_MBDist->getpar(10));
+mbdist_neg->value(rkr->efx_MBDist->getpar(11));
+mbdist_st->value(rkr->efx_MBDist->getpar(14));
 mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
-mbdist_cross1->value(rkr->efx_MBDist->getpar(7));
-mbdist_cross2->value(rkr->efx_MBDist->getpar(8));
+mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
+mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
 }
 void RKRGUI::cb_mbdist_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_preset_i(o,v);
@@ -9661,7 +9661,7 @@ R average."));
         mbdist_cross2->labelfont(0);
         mbdist_cross2->labelsize(10);
         mbdist_cross2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbdist_cross2->minimum(1500);
+        mbdist_cross2->minimum(1000);
         mbdist_cross2->maximum(8000);
         mbdist_cross2->step(1);
         mbdist_cross2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);

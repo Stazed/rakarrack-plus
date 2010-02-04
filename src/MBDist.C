@@ -65,10 +65,9 @@ MBDist::MBDist (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   PtypeL = 0;
   PtypeM = 0;
   PtypeH = 0;
-  PvolL = 1.0;
-  PvolM = 1.0;
-  PvolH = 1.0;
-  
+  PvolL = 0;
+  PvolM = 0;
+  PvolH = 0;
   Pnegate = 0;
   Pstereo = 0;
 
@@ -123,40 +122,45 @@ MBDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  efxoutr[i] = smpsr[i] * inputvol * 2.0f;        
 	};
  
+
   memcpy(lowl,efxoutl,sizeof(float) * PERIOD);
   memcpy(midl,efxoutl,sizeof(float) * PERIOD);
   memcpy(highl,efxoutl,sizeof(float) * PERIOD);
-  memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
-  memcpy(midr,efxoutr,sizeof(float) * PERIOD);
-  memcpy(highr,efxoutr,sizeof(float) * PERIOD);
 
   lpf1l->filterout(lowl);
   hpf1l->filterout(midl);
   lpf2l->filterout(midl);
   hpf2l->filterout(highl);
 
+  waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
+  waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
+  waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
 
+
+if (Pstereo)
+{
+  memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
+  memcpy(midr,efxoutr,sizeof(float) * PERIOD);
+  memcpy(highr,efxoutr,sizeof(float) * PERIOD);
 
   lpf1r->filterout(lowr);
   hpf1r->filterout(midr);
   lpf2r->filterout(midr);
   hpf2r->filterout(highr);
 
-
-  waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
-  waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
-  waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
   waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
   waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
   waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
 
+}
+
   for (i = 0; i < PERIOD; i++)
   {
     efxoutl[i]=lowl[i]*volL+midl[i]*volM+highl[i]*volH;
-    efxoutr[i]=lowr[i]*volL+midr[i]*volM+highr[i]*volH;
+    if (Pstereo) efxoutr[i]=lowr[i]*volL+midr[i]*volM+highr[i]*volH;
   }      
     
-    
+  if (!Pstereo) memcpy(efxoutr, efxoutl, sizeof(float)* PERIOD);    
  
 
   REALTYPE level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
@@ -230,21 +234,18 @@ MBDist::setCross2 (int value)
 void
 MBDist::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
-  const int NUM_PRESETS = 6;
+  const int PRESET_SIZE = 15;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Overdrive 1
-    {84, 64, 35, 56, 40, 0, 0, 96, 0, 0, 0},
-    //Overdrive 2
-    {85, 64, 35, 29, 45, 1, 0, 127, 0, 0, 0},
-    //Distorsion 1
-    {0, 64, 0, 87, 14, 6, 0, 80, 30, 0, 1},
-    //Distorsion 2
-    {0, 64, 127, 87, 14, 0, 1, 80, 24, 0, 0},
-    //Distorsion 3
-    {0, 64, 127, 127, 12, 13, 0, 90, 16, 0, 1},
-    //Guitar Amp
-    {84, 64, 35, 63, 50, 2, 0, 55, 0, 0, 0}
+    //Dist 1
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1},
+    //Dist 2
+    {0, 64, 64, 56, 45, 6, 6, 6, 27, 40, 80, 0, 500, 1800, 1},
+    //Dist 3
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1},
+    //Dist 4
+    {0, 64, 64, 56, 45, 6, 6, 6, 27, 40, 80, 0, 500, 1800, 1}
+
   };
 
 
