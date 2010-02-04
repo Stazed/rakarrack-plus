@@ -273,6 +273,9 @@ MBDist::changepar (int npar, int value)
       break;
     case 3:
       Pdrive = value;
+      PdriveL = (int)((float)Pdrive*volL);
+      PdriveM = (int)((float)Pdrive*volM);
+      PdriveH = (int)((float)Pdrive*volH);
       break;
     case 4:
       Plevel = value;
