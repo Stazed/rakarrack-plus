@@ -127,8 +127,8 @@ MBDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
   memcpy(midl,efxoutl,sizeof(float) * PERIOD);
   memcpy(highl,efxoutl,sizeof(float) * PERIOD);
   memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
-  memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
-  memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
+  memcpy(midr,efxoutr,sizeof(float) * PERIOD);
+  memcpy(highr,efxoutr,sizeof(float) * PERIOD);
 
   lpf1l->filterout(lowl);
   hpf1l->filterout(midl);
@@ -143,12 +143,12 @@ MBDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
   hpf2r->filterout(highr);
 
 
-  waveshapesmps (PERIOD, lowl, PtypeL, Pdrive, 1);
-  waveshapesmps (PERIOD, midl, PtypeM, Pdrive, 1);
-  waveshapesmps (PERIOD, highl, PtypeH, Pdrive, 1);
-  waveshapesmps (PERIOD, lowr, PtypeL, Pdrive, 1);
-  waveshapesmps (PERIOD, midr, PtypeM, Pdrive, 1);
-  waveshapesmps (PERIOD, highr, PtypeH, Pdrive, 1);
+  waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
+  waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
+  waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
+  waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
+  waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
+  waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
 
   for (i = 0; i < PERIOD; i++)
   {
@@ -289,14 +289,17 @@ MBDist::changepar (int npar, int value)
     case 8:
       PvolL = value;
       volL = (float) value /100.0;
+      PdriveL = (int)((float)Pdrive*volL);
       break;
     case 9:
       PvolM = value;
       volM = (float) value /100.0;
+      PdriveM = (int)((float)Pdrive*volM);
       break;
     case 10:
       PvolH = value;
       volH = (float) value /100.0;
+      PdriveH = (int)((float)Pdrive*volH);
       break;
     case 11:
       Pnegate = value;

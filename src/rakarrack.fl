@@ -881,7 +881,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -889,7 +890,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1581 54 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4467,31 +4468,31 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(8));}
         Fl_Value_Slider mbdist_volL {
           label {L.Gain}
           callback {rkr->efx_MBDist->changepar(8,(int)o->value());}
-          xywh {372 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider mbdist_volM {
           label {M.Gain}
           callback {rkr->efx_MBDist->changepar(9,(int)o->value());}
-          xywh {372 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider mbdist_volH {
           label {H. Gain}
           callback {rkr->efx_MBDist->changepar(10,(int)o->value());}
-          xywh {372 313 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 313 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider mbdist_cross1 {
           label Cross1
-          callback {rkr->efx_MBDist->changepar(12,(int)o->value());}
-          xywh {372 326 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
+          callback {rkr->efx_MBDist->changepar(12,(int)o->value());} selected
+          xywh {372 326 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 1000 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider mbdist_cross2 {
           label Cross2
           callback {rkr->efx_MBDist->changepar(13,(int)o->value());}
-          xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2500 maximum 20000 step 1 textcolor 7
+          xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1500 maximum 8000 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice mbdist_tipoL {
@@ -8885,7 +8886,6 @@ Fl_Color boff = fore_color;
      break;
 
 
-    }} {selected
-    }
+    }} {}
   }
 } 

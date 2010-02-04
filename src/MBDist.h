@@ -69,6 +69,9 @@ private:
   int PvolL;
   int PvolM;
   int PvolH;
+  int PdriveL;
+  int PdriveM;
+  int PdriveH;
   		//MBDist type
   int Pnegate;	//if the input is negated 
   int Cross1;		//lowpass filter
