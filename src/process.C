@@ -144,6 +144,7 @@ RKR::RKR ()
   efx_Ring = new Ring(efxoutl,efxoutr);
   efx_Exciter = new Exciter(efxoutl,efxoutr);
   efx_MBDist = new MBDist(efxoutl,efxoutr);
+  efx_Arpie = new Arpie(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
@@ -163,7 +164,7 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 24;
+  NumEffects = 25;
 
   {
     static const char *los_names[] =
@@ -171,7 +172,7 @@ RKR::RKR ()
       "Phaser", "Flanger", "Reverb",
       "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
       "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",
-      "DistBand" 
+      "DistBand", "Arpie" 
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -950,7 +951,13 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 }
               break; 	           
 	    
-	    
+	     case 24:
+              if (Arpie_Bypass)
+                {
+                  efx_Arpie->out(efxoutl, efxoutr);
+		  Vol_Efx(6,efx_Arpie->outvolume);
+                }
+              break;  
 	    }
 
 	}

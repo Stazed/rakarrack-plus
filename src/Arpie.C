@@ -28,9 +28,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "Echo.h"
+#include "Arpie.h"
 
-Echo::Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Arpie::Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -62,7 +62,7 @@ Echo::Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   cleanup ();
 };
 
-Echo::~Echo ()
+Arpie::~Arpie ()
 {
   delete[]ldelay;
   delete[]rdelay;
@@ -72,7 +72,7 @@ Echo::~Echo ()
  * Cleanup the effect
  */
 void
-Echo::cleanup ()
+Arpie::cleanup ()
 {
   int i;
   for (i = 0; i < maxx_delay; i++)
@@ -93,7 +93,7 @@ Echo::cleanup ()
  * Initialize the delays
  */
 void
-Echo::initdelays ()
+Arpie::initdelays ()
 {
   kl = 0;
   kr = 0;
@@ -120,7 +120,7 @@ Echo::initdelays ()
  * Effect output
  */
 void
-Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Arpie::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
   REALTYPE l, r, ldl, rdl, rswell, lswell;
@@ -211,7 +211,7 @@ Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
  * Parameter control
  */
 void
-Echo::setvolume (unsigned char Pvolume)
+Arpie::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   volume = outvolume = (float)Pvolume / 127.0f;
@@ -221,21 +221,21 @@ Echo::setvolume (unsigned char Pvolume)
 };
 
 void
-Echo::setpanning (unsigned char Ppanning)
+Arpie::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + 0.5f) / 127.0f;
 };
 
 void
-Echo::setreverse (unsigned char Preverse)
+Arpie::setreverse (int Preverse)
 {
   this->Preverse = Preverse;
   reverse = (float) Preverse / 127.0f;
 };
 
 void
-Echo::setdelay (unsigned char Pdelay)
+Arpie::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
   delay = 1 + lrintf ((float)Pdelay / 127.0f * (float)SAMPLE_RATE * 2.0f);	//0 .. 1.5 sec
@@ -244,7 +244,7 @@ Echo::setdelay (unsigned char Pdelay)
 };
 
 void
-Echo::setlrdelay (unsigned char Plrdelay)
+Arpie::setlrdelay (int Plrdelay)
 {
   REALTYPE tmp;
   this->Plrdelay = Plrdelay;
@@ -258,49 +258,49 @@ Echo::setlrdelay (unsigned char Plrdelay)
 };
 
 void
-Echo::setlrcross (unsigned char Plrcross)
+Arpie::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float)Plrcross / 127.0f * 1.0f;
 };
 
 void
-Echo::setfb (unsigned char Pfb)
+Arpie::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = (float)Pfb / 128.0f;
 };
 
 void
-Echo::sethidamp (unsigned char Phidamp)
+Arpie::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
   hidamp = 0.5f - (float)Phidamp / 254.0f;
 };
 
 void
-Echo::setpreset (unsigned char npreset)
+Arpie::setpreset (int npreset)
 {
   const int PRESET_SIZE = 8;
   const int NUM_PRESETS = 9;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Echo 1
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
+    //Arpie 1
     {67, 64, 35, 64, 30, 59, 0, 127},
-    //Echo 2
+    //Arpie 2
     {67, 64, 21, 64, 30, 59, 0, 64},
-    //Echo 3
+    //Arpie 3
     {67, 75, 60, 64, 30, 59, 10, 0},
-    //Simple Echo
+    //Simple Arpie
     {67, 60, 44, 64, 30, 0, 0, 0},
     //Canyon
     {67, 60, 102, 50, 30, 82, 48, 0},
-    //Panning Echo 1
+    //Panning Arpie 1
     {67, 64, 44, 17, 0, 82, 24, 0},
-    //Panning Echo 2
+    //Panning Arpie 2
     {81, 60, 46, 118, 100, 68, 18, 0},
-    //Panning Echo 3
+    //Panning Arpie 3
     {81, 60, 26, 100, 127, 67, 36, 0},
-    //Feedback Echo
+    //Feedback Arpie
     {62, 64, 28, 64, 100, 90, 55, 0}
   };
 
@@ -314,7 +314,7 @@ Echo::setpreset (unsigned char npreset)
 
 
 void
-Echo::changepar (int npar, unsigned char value)
+Arpie::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -342,11 +342,14 @@ Echo::changepar (int npar, unsigned char value)
     case 7:
       setreverse (value);
       break;
+    case 8:
+      break;
+
     };
 };
 
-unsigned char
-Echo::getpar (int npar)
+int
+Arpie::getpar (int npar)
 {
   switch (npar)
     {
@@ -374,6 +377,9 @@ Echo::getpar (int npar)
     case 7:
       return (Preverse);
       break;
+    case 8:
+      return (0);
+      break;  
     };
   return (0);			//in case of bogus parameter number
 };

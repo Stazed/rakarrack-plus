@@ -72,6 +72,8 @@ rakarrack_SOURCES = main.C \
 	MBDist.h \
 	Valve.C \
 	Valve.h \
+	Arpie.C \
+	Arpie.h \
 	Ring.C \
 	Ring.h \
 	MIDIConverter.C \

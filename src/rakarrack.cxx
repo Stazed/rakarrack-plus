@@ -4179,6 +4179,113 @@ void RKRGUI::cb_mbdist_neg(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_neg_i(o,v);
 }
 
+void RKRGUI::cb_arpie_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Arpie_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Arpie->cleanup();
+findpos(24,(int)o->value());
+}
+void RKRGUI::cb_arpie_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_activar_i(o,v);
+}
+
+void RKRGUI::cb_arpie_preset_i(Fl_Choice* o, void*) {
+  rkr->Echo_Bypass=0;
+rkr->efx_Arpie->setpreset((int) o->value());
+arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
+arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
+arpie_delay->value(rkr->efx_Arpie->getpar(2));
+arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
+arpie_LRc->value(rkr->efx_Arpie->getpar(4)-64);
+arpie_fb->value(rkr->efx_Arpie->getpar(5));
+arpie_damp->value(rkr->efx_Arpie->getpar(6));
+arpie_arpe->value(rkr->efx_Arpie->getpar(7));
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
+}
+void RKRGUI::cb_arpie_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_arpie_preset[] = {
+ {"Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Simple Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Canyon", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Feedback Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_arpie_WD_i(SliderW* o, void*) {
+  rkr->efx_Arpie->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_arpie_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_WD_i(o,v);
+}
+
+void RKRGUI::cb_arpie_arpe_i(SliderW* o, void*) {
+  rkr->efx_Arpie->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_arpie_arpe(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_arpe_i(o,v);
+}
+
+void RKRGUI::cb_arpie_pan_i(SliderW* o, void*) {
+  rkr->efx_Arpie->changepar(1,(int)(o->value()+64));
+}
+void RKRGUI::cb_arpie_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_pan_i(o,v);
+}
+
+void RKRGUI::cb_arpie_delay_i(SliderW* o, void*) {
+  rkr->Arpie_Bypass=0;
+rkr->efx_Arpie->changepar(2,(int)o->value());
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
+}
+void RKRGUI::cb_arpie_delay(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_delay_i(o,v);
+}
+
+void RKRGUI::cb_arpie_LRdl_i(SliderW* o, void*) {
+  rkr->Arpie_Bypass=0;
+rkr->efx_Arpie->changepar(3,(int)o->value());
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
+}
+void RKRGUI::cb_arpie_LRdl(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_LRdl_i(o,v);
+}
+
+void RKRGUI::cb_arpie_LRc_i(SliderW* o, void*) {
+  rkr->efx_Arpie->changepar(4,(int)(o->value()+64));
+}
+void RKRGUI::cb_arpie_LRc(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_LRc_i(o,v);
+}
+
+void RKRGUI::cb_arpie_fb_i(SliderW* o, void*) {
+  rkr->efx_Arpie->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_arpie_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_fb_i(o,v);
+}
+
+void RKRGUI::cb_arpie_damp_i(SliderW* o, void*) {
+  rkr->efx_Arpie->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_arpie_damp(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_damp_i(o,v);
+}
+
+void RKRGUI::cb_arpie_harm_i(Fl_Counter* o, void*) {
+  rkr->efx_Arpie->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_arpie_harm(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_harm_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -9726,6 +9833,179 @@ R average.");
       } // Fl_Check_Button* mbdist_neg
       MBDIST->end();
     } // Fl_Group* MBDIST
+    { ARPIE = new Fl_Group(320, 212, 158, 184);
+      ARPIE->box(FL_UP_BOX);
+      ARPIE->color((Fl_Color)FL_FOREGROUND_COLOR);
+      ARPIE->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      ARPIE->labelfont(1);
+      ARPIE->user_data((void*)(1));
+      ARPIE->align(96|FL_ALIGN_INSIDE);
+      ARPIE->hide();
+      { arpie_activar = new Fl_Light_Button(325, 216, 34, 18, "On");
+        arpie_activar->shortcut(0x35);
+        arpie_activar->color((Fl_Color)62);
+        arpie_activar->selection_color((Fl_Color)1);
+        arpie_activar->labelsize(10);
+        arpie_activar->callback((Fl_Callback*)cb_arpie_activar);
+        arpie_activar->align(68|FL_ALIGN_INSIDE);
+        arpie_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* arpie_activar
+      { arpie_preset = new Fl_Choice(397, 216, 76, 18, "Preset");
+        arpie_preset->down_box(FL_BORDER_BOX);
+        arpie_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        arpie_preset->labelsize(10);
+        arpie_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_preset->textsize(10);
+        arpie_preset->callback((Fl_Callback*)cb_arpie_preset);
+        arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        arpie_preset->menu(menu_arpie_preset);
+      } // Fl_Choice* arpie_preset
+      { arpie_WD = new SliderW(371, 247, 100, 10, "Wet/Dry");
+        arpie_WD->type(5);
+        arpie_WD->box(FL_FLAT_BOX);
+        arpie_WD->color((Fl_Color)178);
+        arpie_WD->selection_color((Fl_Color)62);
+        arpie_WD->labeltype(FL_NORMAL_LABEL);
+        arpie_WD->labelfont(0);
+        arpie_WD->labelsize(10);
+        arpie_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_WD->minimum(-64);
+        arpie_WD->maximum(63);
+        arpie_WD->step(1);
+        arpie_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_WD->callback((Fl_Callback*)cb_arpie_WD);
+        arpie_WD->align(FL_ALIGN_LEFT);
+        arpie_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* arpie_WD
+      { arpie_arpe = new SliderW(371, 270, 100, 10, "Arpe\'s");
+        arpie_arpe->type(5);
+        arpie_arpe->box(FL_FLAT_BOX);
+        arpie_arpe->color((Fl_Color)178);
+        arpie_arpe->selection_color((Fl_Color)62);
+        arpie_arpe->labeltype(FL_NORMAL_LABEL);
+        arpie_arpe->labelfont(0);
+        arpie_arpe->labelsize(10);
+        arpie_arpe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_arpe->maximum(127);
+        arpie_arpe->step(1);
+        arpie_arpe->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_arpe->callback((Fl_Callback*)cb_arpie_arpe);
+        arpie_arpe->align(FL_ALIGN_LEFT);
+        arpie_arpe->when(FL_WHEN_CHANGED);
+      } // SliderW* arpie_arpe
+      { arpie_pan = new SliderW(371, 285, 100, 10, "Pan");
+        arpie_pan->type(5);
+        arpie_pan->box(FL_FLAT_BOX);
+        arpie_pan->color((Fl_Color)178);
+        arpie_pan->selection_color((Fl_Color)62);
+        arpie_pan->labeltype(FL_NORMAL_LABEL);
+        arpie_pan->labelfont(0);
+        arpie_pan->labelsize(10);
+        arpie_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_pan->minimum(-64);
+        arpie_pan->maximum(63);
+        arpie_pan->step(1);
+        arpie_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_pan->callback((Fl_Callback*)cb_arpie_pan);
+        arpie_pan->align(FL_ALIGN_LEFT);
+        arpie_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* arpie_pan
+      { arpie_delay = new SliderW(371, 300, 100, 10, "Delay");
+        arpie_delay->type(5);
+        arpie_delay->box(FL_FLAT_BOX);
+        arpie_delay->color((Fl_Color)178);
+        arpie_delay->selection_color((Fl_Color)62);
+        arpie_delay->labeltype(FL_NORMAL_LABEL);
+        arpie_delay->labelfont(0);
+        arpie_delay->labelsize(10);
+        arpie_delay->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_delay->maximum(127);
+        arpie_delay->step(1);
+        arpie_delay->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_delay->callback((Fl_Callback*)cb_arpie_delay);
+        arpie_delay->align(FL_ALIGN_LEFT);
+        arpie_delay->when(FL_WHEN_RELEASE);
+      } // SliderW* arpie_delay
+      { arpie_LRdl = new SliderW(371, 315, 100, 10, "LRdl.");
+        arpie_LRdl->type(5);
+        arpie_LRdl->box(FL_FLAT_BOX);
+        arpie_LRdl->color((Fl_Color)178);
+        arpie_LRdl->selection_color((Fl_Color)62);
+        arpie_LRdl->labeltype(FL_NORMAL_LABEL);
+        arpie_LRdl->labelfont(0);
+        arpie_LRdl->labelsize(10);
+        arpie_LRdl->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_LRdl->maximum(127);
+        arpie_LRdl->step(1);
+        arpie_LRdl->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_LRdl->callback((Fl_Callback*)cb_arpie_LRdl);
+        arpie_LRdl->align(FL_ALIGN_LEFT);
+        arpie_LRdl->when(FL_WHEN_RELEASE);
+      } // SliderW* arpie_LRdl
+      { arpie_LRc = new SliderW(371, 330, 100, 10, "L/R.Cr");
+        arpie_LRc->type(5);
+        arpie_LRc->box(FL_FLAT_BOX);
+        arpie_LRc->color((Fl_Color)178);
+        arpie_LRc->selection_color((Fl_Color)62);
+        arpie_LRc->labeltype(FL_NORMAL_LABEL);
+        arpie_LRc->labelfont(0);
+        arpie_LRc->labelsize(10);
+        arpie_LRc->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_LRc->minimum(-64);
+        arpie_LRc->maximum(63);
+        arpie_LRc->step(1);
+        arpie_LRc->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_LRc->callback((Fl_Callback*)cb_arpie_LRc);
+        arpie_LRc->align(FL_ALIGN_LEFT);
+        arpie_LRc->when(FL_WHEN_CHANGED);
+      } // SliderW* arpie_LRc
+      { arpie_fb = new SliderW(371, 345, 100, 10, "Fb.");
+        arpie_fb->type(5);
+        arpie_fb->box(FL_FLAT_BOX);
+        arpie_fb->color((Fl_Color)178);
+        arpie_fb->selection_color((Fl_Color)62);
+        arpie_fb->labeltype(FL_NORMAL_LABEL);
+        arpie_fb->labelfont(0);
+        arpie_fb->labelsize(10);
+        arpie_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_fb->maximum(127);
+        arpie_fb->step(1);
+        arpie_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_fb->callback((Fl_Callback*)cb_arpie_fb);
+        arpie_fb->align(FL_ALIGN_LEFT);
+        arpie_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* arpie_fb
+      { arpie_damp = new SliderW(371, 379, 100, 10, "Damp");
+        arpie_damp->type(5);
+        arpie_damp->box(FL_FLAT_BOX);
+        arpie_damp->color((Fl_Color)178);
+        arpie_damp->selection_color((Fl_Color)62);
+        arpie_damp->labeltype(FL_NORMAL_LABEL);
+        arpie_damp->labelfont(0);
+        arpie_damp->labelsize(10);
+        arpie_damp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_damp->maximum(127);
+        arpie_damp->step(1);
+        arpie_damp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_damp->callback((Fl_Callback*)cb_arpie_damp);
+        arpie_damp->align(FL_ALIGN_LEFT);
+        arpie_damp->when(FL_WHEN_CHANGED);
+      } // SliderW* arpie_damp
+      { arpie_harm = new Fl_Counter(370, 362, 52, 12, "Harm\'s");
+        arpie_harm->type(1);
+        arpie_harm->box(FL_THIN_UP_BOX);
+        arpie_harm->labelsize(10);
+        arpie_harm->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_harm->minimum(1);
+        arpie_harm->maximum(12);
+        arpie_harm->step(1);
+        arpie_harm->value(1);
+        arpie_harm->textsize(9);
+        arpie_harm->callback((Fl_Callback*)cb_arpie_harm);
+        arpie_harm->align(FL_ALIGN_LEFT);
+      } // Fl_Counter* arpie_harm
+      ARPIE->end();
+    } // Fl_Group* ARPIE
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -10687,6 +10967,8 @@ ovrd_pf->labelcolor(bcolor);
 
 echo_preset->labelcolor(bcolor);
 
+arpie_preset->labelcolor(bcolor);
+arpie_harm->labelcolor(bcolor);
 
 
 chorux_preset->labelcolor(bcolor);
@@ -10832,30 +11114,6 @@ Fl::redraw();
 
 void RKRGUI::Buttons_Color_Change(Fl_Color bcolor) {
   ActivarGeneral->color(bcolor);
-eq_activar->color(bcolor);
-compress_activar->color(bcolor);
-dist_activar->color(bcolor);
-ovrd_activar->color(bcolor);
-echo_activar->color(bcolor);
-chorus_activar->color(bcolor);
-phaser_activar->color(bcolor);
-aphaser_activar->color(bcolor);
-flanger_activar->color(bcolor);
-dflange_activar->color(bcolor);
-reverb_activar->color(bcolor);
-eqp_activar->color(bcolor);
-WhaWha_activar->color(bcolor);
-Alienwah_activar->color(bcolor);
-pan_activar->color(bcolor);
-har_activar->color(bcolor);
-musdelay_activar->color(bcolor);
-gate_activar->color(bcolor);
-newdist_activar->color(bcolor);
-valve_activar->color(bcolor);
-ring_activar->color(bcolor);
-exciter_activar->color(bcolor);
-mbdist_activar->color(bcolor);
-Cabinet_activar->color(bcolor);
 tuner_activar->color(bcolor);
 Preset_Counter->color(bcolor);
 Midi_In_Counter->color(bcolor);
@@ -10946,6 +11204,8 @@ pan_activar->selection_color(bcolor);
 har_activar->selection_color(bcolor);
 musdelay_activar->selection_color(bcolor);
 gate_activar->selection_color(bcolor);
+arpie_activar->selection_color(bcolor);
+
 
 
 tuner_activar->selection_color(bcolor);
@@ -11878,7 +12138,9 @@ for (i=1; i<=t; i++)
         case 23:
         MBDIST->hide();
         break;
-        
+        case 24:
+        ARPIE->hide();
+        break;
       }
       
     }
@@ -12115,7 +12377,13 @@ switch ( rkr->efx_order[i])
        MBDIST->show();
        if(rkr->MBDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
-
+     
+     case 24:
+       ARPIE->position(x[i],y[i]);
+       arpie_activar->shortcut(s[i]);
+       ARPIE->show();
+       if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
  }
  
  }
@@ -13306,6 +13574,7 @@ DFLANGE->image(InOut->image());
 RING->image(InOut->image());
 EXCITER->image(InOut->image());
 MBDIST->image(InOut->image());
+ARPIE->image(InOut->image());
 
 
 Presets->image(InOut->image());
@@ -13895,6 +14164,9 @@ Fl_Color boff = fore_color;
      if(value) mbdist_activar->color(bon); else mbdist_activar->color(boff);
      break;
 
-
+     case 24: 
+   
+     if(value) arpie_activar->color(bon); else arpie_activar->color(boff);
+     break; 
     }
 }

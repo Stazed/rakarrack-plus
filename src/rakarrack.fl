@@ -887,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1581 54 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1574 47 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4751,6 +4751,128 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
           xywh {421 378 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
+      Fl_Group ARPIE {
+        user_data 1
+        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button arpie_activar {
+          label On
+          callback {rkr->Arpie_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Arpie->cleanup();
+findpos(24,(int)o->value());}
+          xywh {325 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice arpie_preset {
+          label Preset
+          callback {rkr->Echo_Bypass=0;
+rkr->efx_Arpie->setpreset((int) o->value());
+arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
+arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
+arpie_delay->value(rkr->efx_Arpie->getpar(2));
+arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
+arpie_LRc->value(rkr->efx_Arpie->getpar(4)-64);
+arpie_fb->value(rkr->efx_Arpie->getpar(5));
+arpie_damp->value(rkr->efx_Arpie->getpar(6));
+arpie_arpe->value(rkr->efx_Arpie->getpar(7));
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
+          xywh {397 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+        } {
+          MenuItem {} {
+            label {Echo 1}
+            xywh {67 67 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Echo 2}
+            xywh {67 67 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Echo 3}
+            xywh {67 67 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Simple Echo}
+            xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Canyon
+            xywh {87 87 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Panning Echo 1}
+            xywh {107 107 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Panning Echo 2}
+            xywh {117 117 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Panning Echo 3}
+            xywh {127 127 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Feedback Echo}
+            xywh {137 137 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider arpie_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Arpie->changepar(0,(int)(o->value()+64));}
+          xywh {371 247 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider arpie_arpe {
+          label {Arpe's}
+          callback {rkr->efx_Arpie->changepar(7,(int)o->value());}
+          xywh {371 270 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider arpie_pan {
+          label Pan
+          callback {rkr->efx_Arpie->changepar(1,(int)(o->value()+64));}
+          xywh {371 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider arpie_delay {
+          label Delay
+          callback {rkr->Arpie_Bypass=0;
+rkr->efx_Arpie->changepar(2,(int)o->value());
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
+          xywh {371 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider arpie_LRdl {
+          label {LRdl.}
+          callback {rkr->Arpie_Bypass=0;
+rkr->efx_Arpie->changepar(3,(int)o->value());
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
+          xywh {371 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider arpie_LRc {
+          label {L/R.Cr}
+          callback {rkr->efx_Arpie->changepar(4,(int)(o->value()+64));}
+          xywh {371 330 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider arpie_fb {
+          label {Fb.}
+          callback {rkr->efx_Arpie->changepar(5,(int)o->value());}
+          xywh {371 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider arpie_damp {
+          label Damp
+          callback {rkr->efx_Arpie->changepar(6,(int)o->value());}
+          xywh {371 379 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Counter arpie_harm {
+          label {Harm's}
+          callback {rkr->efx_Arpie->changepar(8,(int)o->value());}
+          xywh {370 362 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {521 84 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -5911,6 +6033,8 @@ ovrd_pf->labelcolor(bcolor);
 
 echo_preset->labelcolor(bcolor);
 
+arpie_preset->labelcolor(bcolor);
+arpie_harm->labelcolor(bcolor);
 
 
 chorux_preset->labelcolor(bcolor);
@@ -6055,30 +6179,6 @@ Fl::redraw();} {}
   }
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
     code {ActivarGeneral->color(bcolor);
-eq_activar->color(bcolor);
-compress_activar->color(bcolor);
-dist_activar->color(bcolor);
-ovrd_activar->color(bcolor);
-echo_activar->color(bcolor);
-chorus_activar->color(bcolor);
-phaser_activar->color(bcolor);
-aphaser_activar->color(bcolor);
-flanger_activar->color(bcolor);
-dflange_activar->color(bcolor);
-reverb_activar->color(bcolor);
-eqp_activar->color(bcolor);
-WhaWha_activar->color(bcolor);
-Alienwah_activar->color(bcolor);
-pan_activar->color(bcolor);
-har_activar->color(bcolor);
-musdelay_activar->color(bcolor);
-gate_activar->color(bcolor);
-newdist_activar->color(bcolor);
-valve_activar->color(bcolor);
-ring_activar->color(bcolor);
-exciter_activar->color(bcolor);
-mbdist_activar->color(bcolor);
-Cabinet_activar->color(bcolor);
 tuner_activar->color(bcolor);
 Preset_Counter->color(bcolor);
 Midi_In_Counter->color(bcolor);
@@ -6140,7 +6240,8 @@ CancelRec->color(bcolor);
 
 fore_color= bcolor;
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {ActivarGeneral->selection_color(bcolor);
@@ -6168,6 +6269,8 @@ pan_activar->selection_color(bcolor);
 har_activar->selection_color(bcolor);
 musdelay_activar->selection_color(bcolor);
 gate_activar->selection_color(bcolor);
+arpie_activar->selection_color(bcolor);
+
 
 
 tuner_activar->selection_color(bcolor);
@@ -7094,7 +7197,9 @@ for (i=1; i<=t; i++)
         case 23:
         MBDIST->hide();
         break;
-        
+        case 24:
+        ARPIE->hide();
+        break;
       }
       
     }
@@ -7331,7 +7436,13 @@ switch ( rkr->efx_order[i])
        MBDIST->show();
        if(rkr->MBDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;
-
+     
+     case 24:
+       ARPIE->position(x[i],y[i]);
+       arpie_activar->shortcut(s[i]);
+       ARPIE->show();
+       if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
  }
  
  }
@@ -8368,8 +8479,7 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {selected
-    }
+rkr->Mvalue=0;} {}
   }
   Function {ActOnOff()} {} {
     code {switch(rkr->efx_order[rkr->Mnumeff])
@@ -8510,6 +8620,7 @@ DFLANGE->image(InOut->image());
 RING->image(InOut->image());
 EXCITER->image(InOut->image());
 MBDIST->image(InOut->image());
+ARPIE->image(InOut->image());
 
 
 Presets->image(InOut->image());
@@ -9091,7 +9202,10 @@ Fl_Color boff = fore_color;
      if(value) mbdist_activar->color(bon); else mbdist_activar->color(boff);
      break;
 
-
+     case 24: 
+   
+     if(value) arpie_activar->color(bon); else arpie_activar->color(boff);
+     break; 
     }} {}
   }
 } 

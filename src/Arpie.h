@@ -27,25 +27,25 @@
 
 */
 
-#ifndef ECHO_H
-#define ECHO_H
+#ifndef ARPIE_H
+#define ARPIE_H
 
 #include "global.h"
 #define  ATTACK  0.175f  //crossover time for reverse delay
 #define  MAX_DELAY 2	// Number of Seconds
-class Echo
+class Arpie
 {
 public:
-  Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
-  ~Echo ();
+  Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  ~Arpie ();
   void out (REALTYPE * smpsl, REALTYPE * smpr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
 
   void setdryonly ();
-  unsigned char Ppreset;
+  int Ppreset;
 
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
@@ -56,23 +56,23 @@ public:
 
 private:
   //Parametrii
-  unsigned char Pvolume;	//Volumul or E/R
-  unsigned char Ppanning;	//Panning
-  unsigned char Pdelay;
-  unsigned char Plrdelay;	// L/R delay difference
-  unsigned char Plrcross;	// L/R Mixing
-  unsigned char Pfb;		//Feed-back-ul
-  unsigned char Phidamp;
-  unsigned char Preverse;
+  int Pvolume;	//Volumul or E/R
+  int Ppanning;	//Panning
+  int Pdelay;
+  int Plrdelay;	// L/R delay difference
+  int Plrcross;	// L/R Mixing
+  int Pfb;		//Feed-back-ul
+  int Phidamp;
+  int Preverse;
 
-  void setvolume (unsigned char Pvolume);
-  void setpanning (unsigned char Ppanning);
-  void setdelay (unsigned char Pdelay);
-  void setlrdelay (unsigned char Plrdelay);
-  void setlrcross (unsigned char Plrcross);
-  void setfb (unsigned char Pfb);
-  void sethidamp (unsigned char Phidamp);
-  void setreverse (unsigned char Preverse);
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setdelay (int Pdelay);
+  void setlrdelay (int Plrdelay);
+  void setlrcross (int Plrcross);
+  void setfb (int Pfb);
+  void sethidamp (int Phidamp);
+  void setreverse (int Preverse);
 
   //Parametrii reali
   REALTYPE panning, lrcross, fb, hidamp, reverse;
