@@ -51,8 +51,12 @@ Dflange::Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   rdelay = new REALTYPE[maxx_delay];
   zldelay = new REALTYPE[maxx_delay];  
   zrdelay = new REALTYPE[maxx_delay];  
-        fsubtract = 0.5f;
-	fhidamp = 1.0f;
+  fsubtract = 0.5f;
+  fhidamp = 1.0f;
+  fwidth = 800;
+  fdepth = 50;
+  zcenter = (int) floorf(0.5f * (fdepth + fwidth));
+
   //default values
   Ppreset = 0;  
   setpreset (Ppreset);
@@ -123,12 +127,12 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   if (lmodfreq > 10000.0f)
     lmodfreq = 10000.0f;
-  else if (lmodfreq < 20.0f)
-    lmodfreq = 20.0f;
+  else if (lmodfreq < 10.0f)
+    lmodfreq = 10.0f;
   if (rmodfreq > 10000.0)
     rmodfreq = 10000.0f;
-  else if (rmodfreq < 20.0f)
-    rmodfreq = 20.0f;
+  else if (rmodfreq < 10.0f)
+    rmodfreq = 10.0f;
 
  rflange0 = SAMPLE_RATE * 0.5f/rmodfreq;		//Turn the notch frequency into a number for delay
  rflange1 = rflange0 * foffset;				//Set relationship of second delay line
@@ -293,11 +297,13 @@ Dflange::changepar (int npar, int value)
       Pdepth = value;
       fdepth =  (REALTYPE) Pdepth;
         zcenter = (int) floor(0.5f * (fdepth + fwidth));
+
       break;
     case 4:
       Pwidth = value;
       fwidth = (REALTYPE) Pwidth;
         zcenter = (int) floor(0.5f * (fdepth + fwidth));
+
       break;
     case 5:
       Poffset = value;
