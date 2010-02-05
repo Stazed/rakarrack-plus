@@ -178,7 +178,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 152;
+  NumParams= 186;
 
 {
    static const char *los_params[] = 
@@ -208,7 +208,11 @@ RKR::RKR ()
       "P.EQ High Gain","P.EQ High Q", "Dual Flange WD", "Dual Flange Pan", "Dual Flange LR_Cr","Dual Flange Dpeth",
       "Dual Flange Width", "Dual Flange Offset", "Dual Flange FB", "Dual Flange LPF", "Dual Flange Tenpo", "Dual Flange St_df.",
       "Dual Flange Rnd","Valve WD","Valve LR_Cr","Valve Pan","Valve Level","Valve Drive", "Valve Dist","Valve Presence",
-      "Valve LPF", "Valve HPF"       
+      "Valve LPF", "Valve HPF", "Ring WD", "Ring LR_Cr", "Ring Input", "Ring Level", "Ring Pan", "Ring Depth", "Ring Freq",
+      "Ring Sin", "Ring Tri", "Ring Saw", "Ring Squ", "Exciter Gain", "Exciter LPF", "Exciter HPF", "Exciter Har 1",
+      "Exciter Har 2", "Exciter Har 3","Exciter Har 4","Exciter Har 5","Exciter Har 6","Exciter Har 7","Exciter Har 8",
+      "Exciter Har 9", "Exciter Har 10", "DistBand WD", "DistBand LR_Cr", "DistBand Drive", "DistBand Level", 
+      "DistBand L.Gain", "DistBand M.Gain", "DistBand H.Gain", "DistBand Cross1", "DistBand Cross2", "DistBand Pan"   
 
       };
          for(i=0; i<NumParams; i++)
@@ -221,7 +225,8 @@ unsigned char Atos[] = { 1,2,3,4,5,6,8,9,20,21,22,23,24,25,26,27,28,29,30,31,46,
          92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,117,118,119,120,
          121,122,123,124,125,126,127,7,12,14,116,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,
          146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,
-         172,173,174,175,176,177,178,179,180,181,182,183,184};
+         172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,
+         198,199,200,201,202,203,204,205,206,207,208,209,210,211,212};
           
          for(i=0;i<NumParams; i++) efx_params[i].Ato=(int)Atos[i];
 

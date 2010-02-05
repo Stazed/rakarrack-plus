@@ -12396,7 +12396,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<178; i++)
+for (i=1; i<212; i++)
 
 {
 
@@ -13016,8 +13016,143 @@ switch (i)
      valve_hpf->value(rkr->efx_Valve->getpar(7));
      valve_hpf->redraw();
      break;
-
-
+     case 178:
+     ring_WD->value(rkr->efx_Ring->getpar(0));
+     ring_WD->redraw();
+     break;  
+     case 179:
+     ring_LRc->value(rkr->efx_Ring->getpar(2));
+     ring_LRc->redraw();
+     break;  
+     case 180:
+     ring_input->value(rkr->efx_Ring->getpar(11));
+     ring_input->redraw();
+     break;  
+     case 181:
+     ring_level->value(rkr->efx_Ring->getpar(3));
+     ring_level->redraw();
+     break;  
+     case 182:
+     ring_pan->value(rkr->efx_Ring->getpar(1));
+     ring_pan->redraw();
+     break;  
+     case 183:
+     ring_depth->value(rkr->efx_Ring->getpar(4));
+     ring_depth->redraw();
+     break;  
+     case 184:
+     ring_freq->value(rkr->efx_Ring->getpar(5));
+     ring_freq->redraw();
+     break;  
+     case 185:
+     ring_sin->value(rkr->efx_Ring->getpar(7));
+     ring_sin->redraw();
+     break;  
+     case 186:
+     ring_tri->value(rkr->efx_Ring->getpar(8));
+     ring_tri->redraw();
+     break;  
+     case 187:
+     ring_saw->value(rkr->efx_Ring->getpar(9));
+     ring_saw->redraw();
+     break;  
+     case 188:
+     ring_squ->value(rkr->efx_Ring->getpar(10));
+     ring_squ->redraw();
+     break;  
+     case 189:
+     ex_Gain->value(rkr->efx_Exciter->getpar(0));
+     ex_Gain->redraw();
+     break;
+     case 190:
+     ex_hfreq->value(rkr->efx_Exciter->getpar(11));
+     ex_hfreq->redraw();
+     break;
+     case 191:
+     ex_lfreq->value(rkr->efx_Exciter->getpar(12));
+     ex_lfreq->redraw();
+     break;
+     case 192:
+     ex_1->value(rkr->efx_Exciter->getpar(1));
+     ex_1->redraw();
+     break;
+     case 193:
+     ex_2->value(rkr->efx_Exciter->getpar(2));
+     ex_2->redraw();
+     break;
+     case 194:
+     ex_3->value(rkr->efx_Exciter->getpar(3));
+     ex_3->redraw();
+     break;
+     case 195:
+     ex_4->value(rkr->efx_Exciter->getpar(4));
+     ex_4->redraw();
+     break;
+     case 196:
+     ex_5->value(rkr->efx_Exciter->getpar(5));
+     ex_5->redraw();
+     break;
+     case 197:
+     ex_6->value(rkr->efx_Exciter->getpar(6));
+     ex_6->redraw();
+     break;
+     case 198:
+     ex_7->value(rkr->efx_Exciter->getpar(7));
+     ex_7->redraw();
+     break;
+     case 199:
+     ex_8->value(rkr->efx_Exciter->getpar(8));
+     ex_8->redraw();
+     break;
+     case 200:
+     ex_9->value(rkr->efx_Exciter->getpar(9));
+     ex_9->redraw();
+     break;
+     case 201:
+     ex_10->value(rkr->efx_Exciter->getpar(10));
+     ex_10->redraw();
+     break;
+     case 202:
+     mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
+     mbdist_WD->redraw();
+     break;
+     case 203:
+     mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
+     mbdist_LRc->redraw();
+     break;
+     case 204:
+     mbdist_drive->value(rkr->efx_MBDist->getpar(3));
+     mbdist_drive->redraw();
+     break;
+     case 205:
+     mbdist_level->value(rkr->efx_MBDist->getpar(4));
+     mbdist_level->redraw();
+     break;
+     case 206:
+     mbdist_volL->value(rkr->efx_MBDist->getpar(8));
+     mbdist_volL->redraw();
+     break;
+     case 207:
+     mbdist_volM->value(rkr->efx_MBDist->getpar(9));
+     mbdist_volM->redraw();
+     break;
+     case 208:
+     mbdist_volH->value(rkr->efx_MBDist->getpar(10));
+     mbdist_volH->redraw();
+     break;
+     case 209:
+     mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
+     mbdist_cross1->redraw();
+     break;
+     case 210:
+     mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
+     mbdist_cross2->redraw();
+     break;
+     case 211:
+     mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
+     mbdist_pan->redraw();
+     break;
+      	
 
 
 }

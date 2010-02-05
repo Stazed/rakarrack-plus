@@ -1118,8 +1118,144 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 177:
          efx_Valve->changepar(7,value);
          break;
- 
+   
+    case 178:
+         efx_Ring->changepar(0,value-64);
+         break;
+    
+    case 179:
+         efx_Ring->changepar(2,value-64);
+         break;
+                   
+    case 180:
+         efx_Ring->changepar(11,value);
+         break;
+    
+    case 181:
+         efx_Ring->changepar(3,value);
+         break;
+                   
+    case 182:
+         efx_Ring->changepar(1,value-64);
+         break;
+    
+    case 183:
+         efx_Ring->changepar(4,(int)((float)value*.7874f));
+         break;
+                   
+    case 184:
+         efx_Ring->changepar(5,1 + (int)((float)value*157.472f));
+         break;
+    
+    case 185:
+         efx_Ring->changepar(7,(int)((float)value*.7874f));
+         break;
+                   
+    case 186:
+         efx_Ring->changepar(8,(int)((float)value*.7874f));
+         break;
+    
+    case 187:
+         efx_Ring->changepar(9,(int)((float)value*.7874f));
+         break;
+                   
+    case 188:
+         efx_Ring->changepar(10,(int)((float)value*.7874f));
+         break;
 
+    case 189:
+         efx_Exciter->changepar(0,value);
+         break;
+
+    case 190:
+         efx_Exciter->changepar(11,20+(int)((float)value *157.3228f));
+         break;              
+
+    case 191:
+         efx_Exciter->changepar(12,20+(int)((float)value *157.3228f));
+         break;              
+ 
+    case 192:
+         efx_Exciter->changepar(1,value-64);
+         break;
+
+    case 193:
+         efx_Exciter->changepar(2,value-64);
+         break;
+
+    case 194:
+         efx_Exciter->changepar(3,value-64);
+         break;
+
+    case 195:
+         efx_Exciter->changepar(4,value-64);
+         break;
+
+    case 196:
+         efx_Exciter->changepar(5,value-64);
+         break;
+
+    case 197:
+         efx_Exciter->changepar(6,value-64);
+         break;
+
+    case 198:
+         efx_Exciter->changepar(7,value-64);
+         break;
+
+    case 199:
+         efx_Exciter->changepar(8,value-64);
+         break;
+
+    case 200:
+         efx_Exciter->changepar(9,value-64);
+         break;
+
+    case 201:
+         efx_Exciter->changepar(10,value-64);
+         break;
+    
+    case 202:
+         efx_MBDist->changepar(0,value);
+         break;
+             
+    case 203:
+         efx_MBDist->changepar(2,value);
+         break;
+             
+    case 204:
+         efx_MBDist->changepar(3,value);
+         break;
+             
+    case 205:
+         efx_MBDist->changepar(4,value);
+         break;
+             
+    case 206:
+         efx_MBDist->changepar(8,(int)((float)value*.7874f));
+         break;
+             
+    case 207:
+         efx_MBDist->changepar(9,(int)((float)value*.7874f));
+         break;
+             
+    case 208:
+         efx_MBDist->changepar(10,(int)((float)value*.7874f));
+         break;
+             
+    case 209:
+         efx_MBDist->changepar(12,40+(int)((float)value*7.559f));
+         break;
+             
+    case 210:
+         efx_MBDist->changepar(13,1000+(int)((float)value*55.1181f));
+         break;
+             
+    case 211:
+         efx_MBDist->changepar(1,value);
+         break;
+             
+    
    } 
       
     
