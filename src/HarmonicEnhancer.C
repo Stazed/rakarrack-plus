@@ -39,6 +39,7 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
   itm1r = 0.0f;
   otm1l = 0.0f;
   otm1r = 0.0f;
+  coeff = 1.0;
 
   hpffreq = hfreq;
   lpffreq = lfreq;
@@ -66,9 +67,9 @@ HarmEnhancer::cleanup()
 void
 HarmEnhancer::set_vol(int mode, float gain)
 {
-  if(!mode) vol = gain*4.0;
+  if(!mode) vol = gain;
   else
-  vol = 4.0f * realvol + 2.0 * gain;
+  vol = realvol + 2.0 * gain;
 }
 
 void  
@@ -182,15 +183,25 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 {
 
   int i;
+  float max=0.0;
 
   for(i=0;i<PERIOD;i++)
    {
-     
-     inputl[i]=smpsl[i]*.25;
-     inputr[i]=smpsr[i]*.25;
-   
-   
+     if(fabsf(smpsl[i])> max) max = smpsl[i];
+     if(fabsf(smpsr[i])> max) max = smpsr[i];     
    }  
+
+     coeff = fabsf(max)+8.0;
+     max = 1.0f / coeff;
+             
+
+    for(i=0;i<PERIOD;i++)
+   {
+     
+     inputl[i] =smpsl[i]*max;
+     inputr[i] =smpsr[i]*max;
+   }  
+       
 
   hpfl->filterout(inputl);
   hpfr->filterout(inputr);
@@ -211,8 +222,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
       itm1l = yl;
       otm1r = 0.999f * otm1r + yr - itm1r;
       itm1r = yr;
-      inputl[i] = otm1l * vol;
-      inputr[i] = otm1r * vol;
+      inputl[i] = otm1l * vol * coeff;
+      inputr[i] = otm1r * vol * coeff;
 
      }
 
@@ -221,8 +232,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
     for (i=0; i<PERIOD; i++)
     {
-      smpsl[i] +=inputl[i];
-      smpsr[i] +=inputr[i];
+      smpsl[i] = (smpsl[i]+inputl[i])*.5;
+      smpsr[i] = (smpsr[i]+inputr[i])*.5;
     }
     
 }
