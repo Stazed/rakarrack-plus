@@ -59,6 +59,22 @@ decl {int Scope_ON;} {}
 
 decl {int Analyzer_ON;} {} 
 
+class LC_Button {: {public Fl_Light_Button}
+} {
+  Function {LC_Button(int x,int y, int w, int h, const char *label=0):Fl_Light_Button(x,y,w,h,label)} {open
+  } {}
+  Function {draw()} {open
+  } {
+    code {Fl_Color bon = fl_lighter(fore_color);
+Fl_Color col = value() ? bon : fore_color;
+color(col);
+selection_color(leds_color);
+
+Fl_Light_Button::draw();} {}
+  }
+  decl {EQ *efx_EQ1;} {}
+} 
+
 class Analyzer {: {public Fl_Box}
 } {
   Function {Analyzer(int x,int y, int w, int h, const char *label=0):Fl_Box(x,y,w,h,label)} {} {
@@ -1272,6 +1288,7 @@ if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
 findpos(0,(int)o->value());}
           xywh {7 216 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice eq_preset {
           label Preset
@@ -1388,6 +1405,7 @@ for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(unsigned char)(o->value()+64))
 rkr->efx_Compressor->cleanup();
 findpos(1,(int)o->value());}
           xywh {166 216 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice compress_preset {
           label Preset
@@ -1475,6 +1493,7 @@ if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
 findpos(2,(int)o->value());}
           xywh {326 216 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice dist_preset {
           label Preset
@@ -1667,6 +1686,7 @@ if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
 findpos(3,(int)o->value());}
           xywh {485 216 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice ovrd_preset {
           label Preset
@@ -1844,6 +1864,7 @@ if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
 findpos(4,(int)o->value());}
           xywh {644 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice echo_preset {
           label Preset
@@ -1961,6 +1982,7 @@ if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
 findpos(5,(int)o->value());}
           xywh {7 417 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice chorux_preset {
           label Preset
@@ -2104,6 +2126,7 @@ if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
 findpos(6,(int)o->value());}
           xywh {166 417 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice phaser_preset {
           label Preset
@@ -2258,6 +2281,7 @@ if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
 findpos(7,(int)o->value());}
           xywh {326 417 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice flanger_preset {
           label Preset
@@ -2401,6 +2425,7 @@ if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
 findpos(8,(int)o->value());}
           xywh {485 417 34 18} shortcut 0x39 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice reverb_preset {
           label Preset
@@ -2555,6 +2580,7 @@ if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
 findpos(9,(int)o->value());}
           xywh {644 417 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+          class LC_Button
         }
         Fl_Choice eqp_preset {
           label Preset
@@ -2658,6 +2684,7 @@ if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
 findpos(10,(int)o->value());}
           xywh {167 30 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice WhaWha_preset {
           label Preset
@@ -2797,6 +2824,7 @@ if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
 findpos(11,(int)o->value());}
           xywh {360 27 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice Alienwah_preset {
           label Preset
@@ -2939,6 +2967,7 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
           callback {rkr->Cabinet_Bypass=(int)o->value();
 findpos(12,(int)o->value());}
           xywh {40 48 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice Cabinet_preset {
           label Preset
@@ -3008,6 +3037,7 @@ if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
 findpos(13,(int)o->value());}
           xywh {8 216 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice pan_preset {
           label Preset
@@ -3124,6 +3154,7 @@ if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 findpos(14,(int)o->value());}
           xywh {326 216 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+          class LC_Button
         }
         Fl_Choice har_preset {
           label Preset
@@ -3242,6 +3273,7 @@ if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
 findpos(15,(int)o->value());}
           xywh {484 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice musdelay_preset {
           label Preset
@@ -3441,6 +3473,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
           callback {rkr->Gate_Bypass=(int)o->value();
 findpos(16,(int)o->value());}
           xywh {326 417 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice gate_preset {
           label Preset
@@ -3521,6 +3554,7 @@ if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
 findpos(17,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice newdist_preset {
           label Preset
@@ -3710,6 +3744,7 @@ if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
 findpos(18,(int)o->value());}
           xywh {325 220 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice aphaser_preset {
           label Preset
@@ -3862,6 +3897,7 @@ if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
 findpos(19,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice valve_preset {
           label Preset
@@ -3980,6 +4016,7 @@ if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
 findpos(20,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice dflange_preset {
           label Preset
@@ -4143,6 +4180,7 @@ if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
 findpos(21,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice ring_preset {
           label Preset
@@ -4275,6 +4313,7 @@ if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
 findpos(22,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice exciter_preset {
           label Preset
@@ -4377,7 +4416,7 @@ if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;}
         }
         Fl_Value_Slider ex_9 {
           label {Har 9}
-          callback {rkr->efx_Exciter->changepar(1,(int)o->value());}
+          callback {rkr->efx_Exciter->changepar(9,(int)o->value());}
           xywh {369 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -4399,6 +4438,7 @@ if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
 findpos(23,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice mbdist_preset {
           label Preset
@@ -4762,6 +4802,7 @@ if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
 findpos(24,(int)o->value());}
           xywh {325 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Choice arpie_preset {
           label Preset
@@ -4887,6 +4928,7 @@ WNfreq->copy_label("");
 ChangeActives();
 TUNER_LABEL->redraw();}
           xywh {526 88 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
+          class LC_Button
         }
         Fl_Progress tuner_bar {
           xywh {586 91 206 14} box THIN_DOWN_BOX color 47 selection_color 88 align 80
@@ -4949,6 +4991,7 @@ rkr->cleanup_efx();
   
 }}
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class LC_Button
         }
         Fl_Value_Slider Balance {
           label {FX%}
@@ -5002,6 +5045,7 @@ rkr->MIDIConverter_Bypass=(int)o->value();
 ChangeActives();
 MIDI_LABEL->redraw();}
           xywh {526 148 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
+          class LC_Button
         }
         Fl_Counter Midi_out_Counter {
           label Channel
@@ -5094,6 +5138,7 @@ else
  Put_Loaded();
 }}
           xywh {373 44 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
+          class LC_Button
         }
         Fl_Button B_preset {
           label Bank
@@ -6178,9 +6223,7 @@ label_color = bcolor;
 Fl::redraw();} {}
   }
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
-    code {ActivarGeneral->color(bcolor);
-tuner_activar->color(bcolor);
-Preset_Counter->color(bcolor);
+    code {Preset_Counter->color(bcolor);
 Midi_In_Counter->color(bcolor);
 Har_In_Counter->color(bcolor);
 FSplus->color(bcolor);
@@ -6193,11 +6236,8 @@ S_new->color(bcolor);
 S_preset->color(bcolor);
 L_preset->color(bcolor);
 B_preset->color(bcolor);
-Compare->color(bcolor);
-nidi_activar->color(bcolor);
 
-for(int i=0; i<10;i++) 
-     ChangeActivesB(rkr->efx_order[i], rkr->active[i]);
+
 
 
 if (made)
@@ -6243,40 +6283,7 @@ fore_color= bcolor;
 Fl::redraw();} {}
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
-    code {ActivarGeneral->selection_color(bcolor);
-eq_activar->selection_color(bcolor);
-compress_activar->selection_color(bcolor);
-dist_activar->selection_color(bcolor);
-mbdist_activar->selection_color(bcolor);
-ovrd_activar->selection_color(bcolor);
-echo_activar->selection_color(bcolor);
-chorus_activar->selection_color(bcolor);
-phaser_activar->selection_color(bcolor);
-aphaser_activar->selection_color(bcolor);
-flanger_activar->selection_color(bcolor);
-dflange_activar->selection_color(bcolor);
-valve_activar->selection_color(bcolor);
-exciter_activar->selection_color(bcolor);
-ring_activar->selection_color(bcolor);
-reverb_activar->selection_color(bcolor);
-eqp_activar->selection_color(bcolor);
-WhaWha_activar->selection_color(bcolor);
-Alienwah_activar->selection_color(bcolor);
-newdist_activar->selection_color(bcolor);
-Cabinet_activar->selection_color(bcolor);
-pan_activar->selection_color(bcolor);
-har_activar->selection_color(bcolor);
-musdelay_activar->selection_color(bcolor);
-gate_activar->selection_color(bcolor);
-arpie_activar->selection_color(bcolor);
-
-
-
-tuner_activar->selection_color(bcolor);
-nidi_activar->selection_color(bcolor);
-Compare->selection_color(bcolor);
-
-aphaser_hyper->selection_color(bcolor);
+    code {aphaser_hyper->selection_color(bcolor);
 aphaser_subs->selection_color(bcolor);
 newdist_pf->selection_color(bcolor);
 newdist_neg->selection_color(bcolor);
@@ -6940,11 +6947,50 @@ ring_afreq->value(rkr->lv[22][12]);
 ring_activar->value(rkr->Ring_Bypass);
 
 
+// Exciter
+
+ex_Gain->value(rkr->lv[23][0]);
+ex_1->value(rkr->lv[23][1]);
+ex_2->value(rkr->lv[23][2]);
+ex_3->value(rkr->lv[23][3]);
+ex_4->value(rkr->lv[23][4]);
+ex_5->value(rkr->lv[23][5]);
+ex_6->value(rkr->lv[23][6]);
+ex_7->value(rkr->lv[23][7]);
+ex_8->value(rkr->lv[23][8]);
+ex_9->value(rkr->lv[23][9]);
+ex_10->value(rkr->lv[23][10]);
+ex_hfreq->value(rkr->lv[23][12]);
+ex_lfreq->value(rkr->lv[23][11]);
+exciter_activar->value(rkr->Exciter_Bypass);
+
+
+//MBDist
+
+mbdist_WD->value(rkr->lv[24][0]-64);
+mbdist_LRc->value(rkr->lv[24][2]-64);
+mbdist_drive->value(rkr->lv[24][3]);
+mbdist_level->value(rkr->lv[24][4]);
+mbdist_volL->value(rkr->lv[24][8]);
+mbdist_volM->value(rkr->lv[24][9]);
+mbdist_volH->value(rkr->lv[24][10]);
+mbdist_cross1->value(rkr->lv[24][12]);
+mbdist_cross2->value(rkr->lv[24][13]);
+mbdist_tipoL->value(rkr->lv[24][5]);
+mbdist_tipoM->value(rkr->lv[24][6]);
+mbdist_tipoH->value(rkr->lv[24][7]);
+mbdist_pan->value(rkr->lv[24][1]-64);
+mbdist_st->value(rkr->lv[24][14]);
+mbdist_neg->value(rkr->lv[24][11]);
+
+
+mbdist_activar->value(rkr->MBDist_Bypass);
 
 
 
 
-reordena();} {}
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {
@@ -7450,8 +7496,6 @@ switch ( rkr->efx_order[i])
  
   ChangeActives();
   
-  for(i=0; i<10;i++) 
-     ChangeActivesB(rkr->efx_order[i], rkr->active[i]);
   
  
   Fl::redraw();} {}
@@ -8294,8 +8338,7 @@ switch (i)
 
 
 rkr->Mvalue=0;
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {ActOnOff()} {} {
     code {switch(rkr->efx_order[rkr->Mnumeff])
@@ -8584,7 +8627,7 @@ for(i=0; i<10; i++)
        
  }
  
- ChangeActivesB(num,value);
+
  
  Fl::redraw();} {}
   }
@@ -8886,142 +8929,5 @@ for(i=0;i<128;i++)
 }          
 
 }} {}
-  }
-  Function {ChangeActivesB(int num,int value)} {} {
-    code {Fl_Color bon = fl_lighter(fore_color);
-Fl_Color boff = fore_color;
-
-
-
- switch(num)
-   {
-     case 0: 
-   
-     if(value) eq_activar->color(bon); else eq_activar->color(boff);
-     break;
-   
-     case 1: 
-   
-     if(value) compress_activar->color(bon); else compress_activar->color(boff);
-     break;
-      
-     case 2: 
-   
-     if(value) dist_activar->color(bon); else dist_activar->color(boff);
-     break;
-     
-     
-     case 3: 
-   
-     if(value) ovrd_activar->color(bon); else ovrd_activar->color(boff);
-     break;
-     
-     
-     case 4: 
-   
-     if(value) echo_activar->color(bon); else echo_activar->color(boff);
-     break;
-     
-     
-     case 5: 
-   
-     if(value) chorus_activar->color(bon); else chorus_activar->color(boff);
-     break;
-     
-     case 6: 
-   
-     if(value) phaser_activar->color(bon); else phaser_activar->color(boff);
-     break;
-     
-     case 7: 
-   
-     if(value) flanger_activar->color(bon); else flanger_activar->color(boff);
-     break;
-     
-     case 8: 
-   
-     if(value) reverb_activar->color(bon); else reverb_activar->color(boff);
-     break;
-     
-     case 9: 
-   
-     if(value) eqp_activar->color(bon); else eqp_activar->color(boff);
-     break;
-     
-     case 10: 
-   
-     if(value) WhaWha_activar->color(bon); else WhaWha_activar->color(boff);
-     break;
-     
-     case 11: 
-   
-     if(value) Alienwah_activar->color(bon); else Alienwah_activar->color(boff);
-     break;
-     
-     case 12: 
-   
-     if(value) Cabinet_activar->color(bon); else Cabinet_activar->color(boff);
-     break;
-     
-     case 13: 
-   
-     if(value) pan_activar->color(bon); else pan_activar->color(boff);
-     break;
-     
-     case 14: 
-   
-     if(value) har_activar->color(bon); else har_activar->color(boff);
-     break;
-     
-     case 15: 
-   
-     if(value) musdelay_activar->color(bon); else musdelay_activar->color(boff);
-     break;
-     
-     case 16: 
-   
-     if(value) gate_activar->color(bon); else gate_activar->color(boff);
-     break;
-     
-     case 17: 
-   
-     if(value) newdist_activar->color(bon); else newdist_activar->color(boff);
-     break;
-     
-     case 18: 
-   
-     if(value) aphaser_activar->color(bon); else aphaser_activar->color(boff);
-     break;
-     
-     case 19: 
-   
-     if(value) valve_activar->color(bon); else valve_activar->color(boff);
-     break;
-     
-     case 20: 
-   
-     if(value) dflange_activar->color(bon); else dflange_activar->color(boff);
-     break;
-
-     case 21: 
-   
-     if(value) ring_activar->color(bon); else ring_activar->color(boff);
-     break;
-
-     case 22: 
-   
-     if(value) exciter_activar->color(bon); else exciter_activar->color(boff);
-     break;
-
-     case 23: 
-   
-     if(value) mbdist_activar->color(bon); else mbdist_activar->color(boff);
-     break;
-
-     case 24: 
-   
-     if(value) arpie_activar->color(bon); else arpie_activar->color(boff);
-     break; 
-    }} {}
   }
 } 

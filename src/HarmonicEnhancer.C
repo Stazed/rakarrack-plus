@@ -63,8 +63,6 @@ HarmEnhancer::cleanup()
   hpfl->cleanup ();
   lpfr->cleanup ();
   hpfr->cleanup ();
-
-
 };
 
 
@@ -238,8 +236,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
     for (i=0; i<PERIOD; i++)
     {
-      smpsl[i] = (smpsl[i]+inputl[i])*.5;
-      smpsr[i] = (smpsr[i]+inputr[i])*.5;
+      smpsl[i] +=inputl[i];
+      smpsr[i] +=inputr[i];
     }
     
 }
