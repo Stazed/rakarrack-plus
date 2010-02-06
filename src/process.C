@@ -701,6 +701,9 @@ RKR::cleanup_efx ()
   efx_Valve->cleanup();
   efx_DFlange->cleanup();
   efx_Ring->cleanup();  
+  efx_Exciter->cleanup();
+  efx_MBDist->cleanup();
+  efx_Arpie->cleanup(); 
   RC->cleanup ();
 };
 

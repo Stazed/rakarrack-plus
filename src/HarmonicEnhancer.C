@@ -59,6 +59,12 @@ HarmEnhancer::~HarmEnhancer()
 void
 HarmEnhancer::cleanup()
 {
+  lpfl->cleanup ();
+  hpfl->cleanup ();
+  lpfr->cleanup ();
+  hpfr->cleanup ();
+
+
 };
 
 

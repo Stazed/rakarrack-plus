@@ -60,7 +60,7 @@ Exciter::~Exciter ()
 void
 Exciter::cleanup ()
 {
-  
+
  harm->cleanup ();
 
 };
