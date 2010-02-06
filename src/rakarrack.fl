@@ -59,22 +59,6 @@ decl {int Scope_ON;} {}
 
 decl {int Analyzer_ON;} {} 
 
-class LC_Button {: {public Fl_Light_Button}
-} {
-  Function {LC_Button(int x,int y, int w, int h, const char *label=0):Fl_Light_Button(x,y,w,h,label)} {open
-  } {}
-  Function {draw()} {open
-  } {
-    code {Fl_Color bon = fl_lighter(fore_color);
-Fl_Color col = value() ? bon : fore_color;
-color(col);
-selection_color(leds_color);
-
-Fl_Light_Button::draw();} {}
-  }
-  decl {EQ *efx_EQ1;} {}
-} 
-
 class Analyzer {: {public Fl_Box}
 } {
   Function {Analyzer(int x,int y, int w, int h, const char *label=0):Fl_Box(x,y,w,h,label)} {} {
@@ -902,8 +886,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1574 47 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} open
+      xywh {1567 40 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -1283,12 +1267,12 @@ Scope_ON=1;
       } {
         Fl_Light_Button eq_activar {
           label On
+          user_data 2
           callback {rkr->EQ1_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
 findpos(0,(int)o->value());}
           xywh {7 216 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice eq_preset {
           label Preset
@@ -1306,7 +1290,7 @@ eq_9->value(rkr->EQ1_setpreset(1,8,(unsigned char)o->value())-64);
 eq_10->value(rkr->EQ1_setpreset(1,9,(unsigned char)o->value())-64);
 eq_Gain->value(rkr->EQ1_setpreset(1,10,(unsigned char)o->value())-64);
 eq_Q->value(rkr->EQ1_setpreset(1,11,(unsigned char)o->value())-64);}
-          xywh {79 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {79 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Plain
@@ -1401,11 +1385,11 @@ for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(unsigned char)(o->value()+64))
       } {
         Fl_Light_Button compress_activar {
           label On
+          user_data 2
           callback {rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
 findpos(1,(int)o->value());}
           xywh {166 216 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice compress_preset {
           label Preset
@@ -1418,7 +1402,7 @@ compress_threshold->value(rkr->efx_Compressor->getpar(1));
 compress_output->value(rkr->efx_Compressor->getpar(3));
 Auto_Output->value(rkr->efx_Compressor->getpar(6));
 Stereo->value(rkr->efx_Compressor->getpar(8));}
-          xywh {238 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {238 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {2:1}
@@ -1471,12 +1455,14 @@ Stereo->value(rkr->efx_Compressor->getpar(8));}
         }
         Fl_Check_Button Auto_Output {
           label {Auto Output}
+          user_data 2
           callback {rkr->efx_Compressor->Compressor_Change(6,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
           xywh {180 378 20 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button Stereo {
           label Stereo
+          user_data 2
           callback {rkr->efx_Compressor->Compressor_Change(8,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
           tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {265 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
@@ -1488,12 +1474,12 @@ if ((int) o->value() == 0) compress_output->do_callback();}
       } {
         Fl_Light_Button dist_activar {
           label On
+          user_data 2
           callback {rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
 findpos(2,(int)o->value());}
           xywh {326 216 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice dist_preset {
           label Preset
@@ -1510,7 +1496,7 @@ dist_pf->value(rkr->efx_Distorsion->getpar(10));
 dist_lpf->value(rkr->efx_Distorsion->getpar(7));
 dist_hpf->value(rkr->efx_Distorsion->getpar(8));
 dist_oct->value(rkr->efx_Distorsion->getpar(12));}
-          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Distorsion 1}
@@ -1556,7 +1542,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         Fl_Choice dist_tipo {
           label Type
           callback {rkr->efx_Distorsion->changepar(5,(unsigned char)o->value());}
-          xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Atan
@@ -1637,16 +1623,19 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Check_Button dist_neg {
           label {Neg.}
+          user_data 2
           callback {rkr->efx_Distorsion->changepar(6,(unsigned char)o->value());}
           xywh {431 304 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button dist_pf {
           label {Pre Filter}
+          user_data 2
           callback {rkr->efx_Distorsion->changepar(10,(unsigned char)o->value());}
           xywh {330 320 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button dist_st {
           label Stereo
+          user_data 2
           callback {rkr->efx_Distorsion->changepar(9,(unsigned char)o->value());}
           xywh {395 320 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -1681,12 +1670,12 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
       } {
         Fl_Light_Button ovrd_activar {
           label On
+          user_data 2
           callback {rkr->Overdrive_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
 findpos(3,(int)o->value());}
           xywh {485 216 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice ovrd_preset {
           label Preset
@@ -1702,7 +1691,7 @@ ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
 ovrd_pf->value(rkr->efx_Overdrive->getpar(10));
 ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
 ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
-          xywh {557 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {557 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Overdrive 1}
@@ -1740,7 +1729,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         Fl_Choice ovrd_tipo {
           label Type
           callback {rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());}
-          xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Atan
@@ -1821,11 +1810,13 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
         Fl_Check_Button ovrd_neg {
           label {Neg.}
+          user_data 2
           callback {rkr->efx_Overdrive->changepar(6,(unsigned char)o->value());}
           xywh {589 304 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button ovrd_st {
           label Stereo
+          user_data 2
           callback {rkr->efx_Overdrive->changepar(9,(unsigned char)o->value());}
           xywh {521 322 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -1837,6 +1828,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
         Fl_Check_Button ovrd_pf {
           label {Pre Filter}
+          user_data 2
           callback {rkr->efx_Overdrive->changepar(10,(unsigned char)o->value());}
           xywh {521 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -1859,12 +1851,12 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
       } {
         Fl_Light_Button echo_activar {
           label On
+          user_data 2
           callback {rkr->Echo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
 findpos(4,(int)o->value());}
           xywh {644 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice echo_preset {
           label Preset
@@ -1879,7 +1871,7 @@ echo_fb->value(rkr->efx_Echo->getpar(5));
 echo_damp->value(rkr->efx_Echo->getpar(6));
 echo_RV->value(rkr->efx_Echo->getpar(7));
 if((int)echo_activar->value())rkr->Echo_Bypass=1;}
-          xywh {716 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {716 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Echo 1}
@@ -1977,12 +1969,12 @@ if((int)echo_activar->value())rkr->Echo_Bypass=1;}
       } {
         Fl_Light_Button chorus_activar {
           label On
+          user_data 2
           callback {rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
 findpos(5,(int)o->value());}
           xywh {7 417 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice chorux_preset {
           label Preset
@@ -1998,7 +1990,7 @@ chorus_delay->value(rkr->efx_Chorus->getpar(7));
 chorus_fb->value(rkr->efx_Chorus->getpar(8));
 chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
 chorus_subs->value(rkr->efx_Chorus->getpar(11));}
-          xywh {79 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {79 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Chorus 1}
@@ -2048,7 +2040,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         Fl_Choice chorus_lfotype {
           label {LFO Type}
           callback {rkr->efx_Chorus->changepar(4,(int)o->value())}
-          xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -2081,6 +2073,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
         Fl_Check_Button chorus_subs {
           label Subtract
+          user_data 2
           callback {rkr->efx_Chorus->changepar(11,(int)o->value())}
           xywh {37 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -2121,12 +2114,12 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
       } {
         Fl_Light_Button phaser_activar {
           label On
+          user_data 2
           callback {rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
 findpos(6,(int)o->value());}
           xywh {166 417 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice phaser_preset {
           label Preset
@@ -2144,7 +2137,7 @@ phaser_stages->value(rkr->efx_Phaser->getpar(8));
 phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
 phaser_subs->value(rkr->efx_Phaser->getpar(10));
 phaser_phase->value(rkr->efx_Phaser->getpar(11));}
-          xywh {238 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {238 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Phaser 1}
@@ -2198,7 +2191,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
         Fl_Choice phaser_lfotype {
           label {LFO Type}
           callback {rkr->efx_Phaser->changepar(4,(int)o->value());}
-          xywh {221 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {221 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -2231,6 +2224,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
         }
         Fl_Check_Button phaser_subs {
           label Subtract
+          user_data 2
           callback {rkr->efx_Phaser->changepar(10,(int)o->value())}
           xywh {201 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -2276,12 +2270,12 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
       } {
         Fl_Light_Button flanger_activar {
           label On
+          user_data 2
           callback {rkr->Flanger_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
 findpos(7,(int)o->value());}
           xywh {326 417 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice flanger_preset {
           label Preset
@@ -2297,7 +2291,7 @@ flanger_delay->value(rkr->efx_Flanger->getpar(7));
 flanger_fb->value(rkr->efx_Flanger->getpar(8));
 flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
 flanger_subs->value(rkr->efx_Flanger->getpar(11));}
-          xywh {398 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {398 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Flange 1}
@@ -2347,7 +2341,7 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         Fl_Choice flanger_lfotype {
           label {LFO Type}
           callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
-          xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -2380,6 +2374,7 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         }
         Fl_Check_Button flanger_subs {
           label Subtract
+          user_data 2
           callback {rkr->efx_Flanger->changepar(11,(int)o->value());}
           xywh {363 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -2420,12 +2415,12 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
       } {
         Fl_Light_Button reverb_activar {
           label On
+          user_data 2
           callback {rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
 findpos(8,(int)o->value());}
           xywh {485 417 34 18} shortcut 0x39 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice reverb_preset {
           label Preset
@@ -2442,7 +2437,7 @@ reverb_damp->value(rkr->efx_Rev->getpar(9));
 reverb_RS->value(rkr->efx_Rev->getpar(11));
 reverb_type->value(rkr->efx_Rev->getpar(10));
 if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
-          xywh {557 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {557 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Cathedral 1}
@@ -2530,7 +2525,7 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
         Fl_Choice reverb_type {
           label Type
           callback {rkr->efx_Rev->changepar(10,(unsigned char)o->value());}
-          xywh {542 505 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {542 505 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Freeverb
@@ -2575,12 +2570,12 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
       } {
         Fl_Light_Button eqp_activar {
           label On
+          user_data 2
           callback {rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
 findpos(9,(int)o->value());}
           xywh {644 417 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
-          class LC_Button
         }
         Fl_Choice eqp_preset {
           label Preset
@@ -2597,7 +2592,7 @@ eqp_HF->value(rkr->EQ2_setpreset(1,6,(unsigned char)o->value()));
 eqp_HFg->value(rkr->EQ2_setpreset(1,7,(unsigned char)o->value())-64);
 eqp_HQ->value(rkr->EQ2_setpreset(1,8,(unsigned char)o->value())-64);
 eqp_Gain->value(rkr->EQ2_setpreset(1,9,(unsigned char)o->value())-64);}
-          xywh {716 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {716 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Plain
@@ -2679,12 +2674,12 @@ eqp_Gain->value(rkr->EQ2_setpreset(1,9,(unsigned char)o->value())-64);}
       } {
         Fl_Light_Button WhaWha_activar {
           label On
+          user_data 2
           callback {rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
 findpos(10,(int)o->value());}
           xywh {167 30 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice WhaWha_preset {
           label Preset
@@ -2701,7 +2696,7 @@ WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
 WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
 WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
 if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
-          xywh {239 30 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {239 30 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label WahWah
@@ -2751,7 +2746,7 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
         Fl_Choice WhaWha_lfotype {
           label {LFO Type}
           callback {rkr->efx_WhaWha->changepar(4,(int)o->value())}
-          xywh {223 105 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {223 105 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -2819,12 +2814,12 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
       } {
         Fl_Light_Button Alienwah_activar {
           label On
+          user_data 2
           callback {rkr->Alienwah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
 findpos(11,(int)o->value());}
           xywh {360 27 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice Alienwah_preset {
           label Preset
@@ -2842,7 +2837,7 @@ Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
 Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
 Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
 if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
-          xywh {432 27 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {432 27 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label AlienWah1
@@ -2888,7 +2883,7 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
         Fl_Choice Alienwah_lfotype {
           label {LFO Type}
           callback {rkr->efx_Alienwah->changepar(4,(int)o->value())}
-          xywh {416 102 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {416 102 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -2964,15 +2959,15 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
       } {
         Fl_Light_Button Cabinet_activar {
           label On
+          user_data 2
           callback {rkr->Cabinet_Bypass=(int)o->value();
 findpos(12,(int)o->value());}
           xywh {40 48 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice Cabinet_preset {
           label Preset
           callback {rkr->Cabinet_setpreset((unsigned char) o->value());}
-          xywh {80 89 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {80 89 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Marshall-4-12}
@@ -3032,12 +3027,12 @@ findpos(12,(int)o->value());}
       } {
         Fl_Light_Button pan_activar {
           label On
+          user_data 2
           callback {rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
 findpos(13,(int)o->value());}
           xywh {8 216 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice pan_preset {
           label Preset
@@ -3051,7 +3046,7 @@ pan_stdf->value(rkr->efx_Pan->getpar(5));
 pan_extra->value(rkr->efx_Pan->getpar(6));
 pan_autopan->value(rkr->efx_Pan->getpar(7));
 pan_extraon->value(rkr->efx_Pan->getpar(8));}
-          xywh {80 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {80 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label AutoPan
@@ -3070,6 +3065,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         }
         Fl_Check_Button pan_autopan {
           label AutoPan
+          user_data 2
           callback {rkr->efx_Pan->changepar(7,(unsigned char)o->value())}
           xywh {38 256 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -3094,7 +3090,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         Fl_Choice pan_lfotype {
           label {LFO Type}
           callback {rkr->efx_Pan->changepar(4,(unsigned char)o->value())}
-          xywh {64 315 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {64 315 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -3133,6 +3129,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         }
         Fl_Check_Button pan_extraon {
           label {Extra Stereo}
+          user_data 2
           callback {rkr->efx_Pan->changepar(8,(unsigned char)o->value())}
           xywh {38 352 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -3149,12 +3146,12 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
       } {
         Fl_Light_Button har_activar {
           label On
+          user_data 2
           callback {rkr->Harmonizer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 findpos(14,(int)o->value());}
           xywh {326 216 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
-          class LC_Button
         }
         Fl_Choice har_preset {
           label Preset
@@ -3172,7 +3169,7 @@ har_gan1->value(rkr->efx_Har->getpar(8)-64);
 har_q1->value(rkr->efx_Har->getpar(9)-64);
 har_MIDI->value(rkr->efx_Har->getpar(10));
 Chord();}
-          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Plain
@@ -3233,12 +3230,14 @@ if((int)har_activar->value())rkr->Harmonizer_Bypass=1;}
         }
         Fl_Check_Button har_MIDI {
           label MIDI
+          user_data 2
           callback {rkr->efx_Har->changepar(10,(unsigned char)o->value());
 rkr->RC->cleanup();}
           xywh {330 336 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 24
         }
         Fl_Check_Button har_SELECT {
           label SEL
+          user_data 2
           callback {rkr->efx_Har->changepar(5,(unsigned char)o->value());
 rkr->RC->cleanup();
 Chord();}
@@ -3268,12 +3267,12 @@ Chord();}
       } {
         Fl_Light_Button musdelay_activar {
           label On
+          user_data 2
           callback {rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
 findpos(15,(int)o->value());}
           xywh {484 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice musdelay_preset {
           label Preset
@@ -3293,7 +3292,7 @@ musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
 musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
 musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {556 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {556 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Echo 1}
@@ -3332,7 +3331,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(2,o->value()+1);
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {489 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {489 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 1
@@ -3363,7 +3362,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(3,o->value()+1);
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {541 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {541 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 1
@@ -3398,7 +3397,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(8,o->value()+1);
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {593 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {593 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 1
@@ -3470,10 +3469,10 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
       } {
         Fl_Light_Button gate_activar {
           label On
+          user_data 2
           callback {rkr->Gate_Bypass=(int)o->value();
 findpos(16,(int)o->value());}
           xywh {326 417 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice gate_preset {
           label Preset
@@ -3485,7 +3484,7 @@ gate_threshold->value(rkr->efx_Gate->getpar(1));
 gate_hold->value(rkr->efx_Gate->getpar(7));
 gate_HPF->value(rkr->efx_Gate->getpar(6));
 gate_LPF->value(rkr->efx_Gate->getpar(5));}
-          xywh {398 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {398 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 0dB
@@ -3549,12 +3548,12 @@ gate_LPF->value(rkr->efx_Gate->getpar(5));}
       } {
         Fl_Light_Button newdist_activar {
           label On
+          user_data 2
           callback {rkr->NewDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
 findpos(17,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice newdist_preset {
           label Preset
@@ -3571,7 +3570,7 @@ newdist_pan->value(rkr->efx_NewDist->getpar(1)-64);
 newdist_pf->value(rkr->efx_NewDist->getpar(10));
 newdist_lpf->value(rkr->efx_NewDist->getpar(7));
 newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
-          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {New Dist 1}
@@ -3613,7 +3612,7 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
         Fl_Choice newdist_tipo {
           label Type
           callback {rkr->efx_NewDist->changepar(5,(unsigned char)o->value());}
-          xywh {354 295 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {354 295 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Atan
@@ -3694,6 +3693,7 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
         }
         Fl_Check_Button newdist_neg {
           label {Neg.}
+          user_data 2
           callback {rkr->efx_NewDist->changepar(6,(unsigned char)o->value());}
           xywh {430 295 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -3717,6 +3717,7 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
         }
         Fl_Check_Button newdist_pf {
           label {Pre Filter}
+          user_data 2
           callback {rkr->efx_NewDist->changepar(10,(unsigned char)o->value());}
           xywh {370 355 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -3739,12 +3740,12 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
       } {
         Fl_Light_Button aphaser_activar {
           label On
+          user_data 2
           callback {rkr->APhaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
 findpos(18,(int)o->value());}
           xywh {325 220 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice aphaser_preset {
           label Preset
@@ -3761,7 +3762,7 @@ aphaser_LR->value(rkr->efx_APhaser->getpar(9));
 aphaser_subs->value(rkr->efx_APhaser->getpar(10));
 aphaser_phase->value(rkr->efx_APhaser->getpar(11));
 aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
-          xywh {397 220 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 220 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Phaser 1}
@@ -3797,7 +3798,7 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
         Fl_Choice aphaser_lfotype {
           label {LFO Type}
           callback {rkr->efx_APhaser->changepar(4,(int)o->value());}
-          xywh {395 257 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {395 257 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -3877,11 +3878,13 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
         }
         Fl_Check_Button aphaser_hyper {
           label Hyper
+          user_data 2
           callback {rkr->efx_APhaser->changepar(12,(int)o->value())}
           xywh {395 381 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button aphaser_subs {
           label Subtract
+          user_data 2
           callback {rkr->efx_APhaser->changepar(10,(int)o->value())}
           xywh {330 381 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -3892,12 +3895,12 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
       } {
         Fl_Light_Button valve_activar {
           label On
+          user_data 2
           callback {rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
 findpos(19,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice valve_preset {
           label Preset
@@ -3915,7 +3918,7 @@ valve_hpf->value(rkr->efx_Valve->getpar(7));
 valve_Q->value(rkr->efx_Valve->getpar(10));
 valve_ed->value(rkr->efx_Valve->getpar(11));
 valve_Pre->value(rkr->efx_Valve->getpar(12));}
-          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Valve 1}
@@ -3962,6 +3965,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
         }
         Fl_Check_Button valve_ed {
           label {Extra Dist.}
+          user_data 2
           callback {rkr->efx_Valve->changepar(11,(int)o->value());}
           xywh {335 307 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -3979,16 +3983,19 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
         }
         Fl_Check_Button valve_pf {
           label {Pre Filter}
+          user_data 2
           callback {rkr->efx_Valve->changepar(9,(int)o->value());}
           xywh {325 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button valve_st {
           label Stereo
+          user_data 2
           callback {rkr->efx_Valve->changepar(8,(int)o->value());}
           xywh {385 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button valve_neg {
           label {Neg.}
+          user_data 2
           callback {rkr->efx_Valve->changepar(5,(int)o->value());}
           xywh {434 350 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -4011,12 +4018,12 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
       } {
         Fl_Light_Button dflange_activar {
           label On
+          user_data 2
           callback {rkr->DFlange_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
 findpos(20,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice dflange_preset {
           label Preset
@@ -4035,7 +4042,7 @@ dflange_subs->value(rkr->efx_DFlange->getpar(8));
 dflange_tz->value(rkr->efx_DFlange->getpar(9));
 dflange_offset->value(rkr->efx_DFlange->getpar(5));
 dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
-          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Flange 1}
@@ -4108,11 +4115,13 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
         }
         Fl_Check_Button dflange_subs {
           label Subtract
+          user_data 2
           callback {rkr->efx_DFlange->changepar(8,(int)o->value());}
           xywh {332 324 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button dflange_tz {
           label {Th. zero}
+          user_data 2
           callback {rkr->efx_DFlange->changepar(9,(int)o->value());}
           xywh {395 324 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -4131,7 +4140,7 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
         Fl_Choice dflange_lfotype {
           label {LFO Type}
           callback {rkr->efx_DFlange->changepar(12,(int)o->value());}
-          xywh {383 364 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {383 364 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Sine
@@ -4175,12 +4184,12 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
       } {
         Fl_Light_Button ring_activar {
           label On
+          user_data 2
           callback {rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
 findpos(21,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice ring_preset {
           label Preset
@@ -4198,7 +4207,7 @@ ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
 ring_pan->value(rkr->efx_Ring->getpar(1));
 ring_afreq->value(rkr->efx_Ring->getpar(12));}
-          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Saw_Sin
@@ -4257,11 +4266,13 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
         }
         Fl_Check_Button ring_st {
           label Stereo
+          user_data 2
           callback {rkr->efx_Ring->changepar(6,(int)o->value());}
           xywh {348 303 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button ring_afreq {
           label {Auto Freq}
+          user_data 2
           callback {rkr->efx_Ring->changepar(12,(int)o->value());}
           xywh {400 303 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -4308,12 +4319,12 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
       } {
         Fl_Light_Button exciter_activar {
           label On
+          user_data 2
           callback {rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
 findpos(22,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice exciter_preset {
           label Preset
@@ -4333,7 +4344,7 @@ ex_10->value(rkr->efx_Exciter->getpar(10));
 ex_lfreq->value(rkr->efx_Exciter->getpar(11));
 ex_hfreq->value(rkr->efx_Exciter->getpar(12));
 if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;}
-          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Plain
@@ -4433,12 +4444,12 @@ if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;}
       } {
         Fl_Light_Button mbdist_activar {
           label On
+          user_data 2
           callback {rkr->MBDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
 findpos(23,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice mbdist_preset {
           label Preset
@@ -4458,7 +4469,7 @@ mbdist_st->value(rkr->efx_MBDist->getpar(14));
 mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
 mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
 mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
-          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Distorsion 1}
@@ -4533,7 +4544,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
         Fl_Choice mbdist_tipoL {
           callback {rkr->efx_MBDist->changepar(5,(int)o->value());}
-          xywh {323 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {323 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Atan
@@ -4614,7 +4625,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
         Fl_Choice mbdist_tipoM {
           callback {rkr->efx_MBDist->changepar(6,(int)o->value());}
-          xywh {374 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {374 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Atan
@@ -4695,7 +4706,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
         Fl_Choice mbdist_tipoH {
           callback {rkr->efx_MBDist->changepar(7,(int)o->value());}
-          xywh {425 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10
+          xywh {425 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Atan
@@ -4782,11 +4793,13 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
         Fl_Check_Button mbdist_st {
           label Stereo
+          user_data 2
           callback {rkr->efx_MBDist->changepar(14,(int)o->value());}
           xywh {352 379 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button mbdist_neg {
           label {Neg.}
+          user_data 2
           callback {rkr->efx_MBDist->changepar(11,(int)o->value());}
           xywh {421 378 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
@@ -4797,12 +4810,12 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
       } {
         Fl_Light_Button arpie_activar {
           label On
+          user_data 2
           callback {rkr->Arpie_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
 findpos(24,(int)o->value());}
           xywh {325 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Choice arpie_preset {
           label Preset
@@ -4817,7 +4830,7 @@ arpie_fb->value(rkr->efx_Arpie->getpar(5));
 arpie_damp->value(rkr->efx_Arpie->getpar(6));
 arpie_arpe->value(rkr->efx_Arpie->getpar(7));
 if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
-          xywh {397 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10
+          xywh {397 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Echo 1}
@@ -4920,6 +4933,7 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
       } {
         Fl_Light_Button tuner_activar {
           label On
+          user_data 2
           callback {rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
 WNote->copy_label("");
@@ -4928,7 +4942,6 @@ WNfreq->copy_label("");
 ChangeActives();
 TUNER_LABEL->redraw();}
           xywh {526 88 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
-          class LC_Button
         }
         Fl_Progress tuner_bar {
           xywh {586 91 206 14} box THIN_DOWN_BOX color 47 selection_color 88 align 80
@@ -4961,6 +4974,7 @@ TUNER_LABEL->redraw();}
       } {
         Fl_Light_Button ActivarGeneral {
           label {FX On}
+          user_data 2
           callback {rkr->Bypass=o->value();
 rkr->val_i_sum=-50.0;
 rkr->val_v_sum=-50.0;
@@ -4991,7 +5005,6 @@ rkr->cleanup_efx();
   
 }}
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
-          class LC_Button
         }
         Fl_Value_Slider Balance {
           label {FX%}
@@ -5032,6 +5045,7 @@ rkr->calculavol(2);}
       } {
         Fl_Light_Button nidi_activar {
           label On
+          user_data 2
           callback {if ((int)o->value()==0)
 { 
 rkr->efx_MIDIConverter->panic();
@@ -5045,7 +5059,6 @@ rkr->MIDIConverter_Bypass=(int)o->value();
 ChangeActives();
 MIDI_LABEL->redraw();}
           xywh {526 148 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
-          class LC_Button
         }
         Fl_Counter Midi_out_Counter {
           label Channel
@@ -5125,6 +5138,7 @@ rkr->savefile(filename);}
         }
         Fl_Light_Button Compare {
           label Compare
+          user_data 2
           callback {if ((int) o->value())
 {
 rkr->Preset_to_Bank(0);
@@ -5138,7 +5152,6 @@ else
  Put_Loaded();
 }}
           xywh {373 44 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
-          class LC_Button
         }
         Fl_Button B_preset {
           label Bank
@@ -5149,7 +5162,7 @@ if(!made) make_window_banks();}
         }
         Fl_Input WPreset_Name {
           callback {strcpy(rkr->Preset_Name,o->value());}
-          xywh {174 66 338 36} color 62 labelcolor 7 align 20 textsize 24
+          xywh {174 66 338 36} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->maximum_size(22);}
         }
         Fl_Counter Preset_Counter {
@@ -5330,7 +5343,7 @@ Order->hide();}
         xywh {88 21 438 37} labelfont 1 labelsize 33 labelcolor 7
       }
       Fl_Browser Avail_Bro {
-        xywh {12 77 185 225} type Hold labelsize 18 textsize 18
+        xywh {12 77 185 225} type Hold labelsize 18 textsize 18 textcolor 7
       }
       Fl_Button Pon {
         label {@<->}
@@ -5358,7 +5371,7 @@ rkr->availables[j]=x;}
         xywh {217 168 72 25} labelsize 18
       }
       Fl_Browser Order_Bro {
-        xywh {305 77 185 225} type Hold labelsize 18 textsize 18
+        xywh {305 77 185 225} type Hold labelsize 18 textsize 18 textcolor 7
       }
       Fl_Button Sube {
         label {@$2->}
@@ -5419,7 +5432,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1454 287 640 528} type Double color 4 hide
+      xywh {1447 280 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5431,6 +5444,7 @@ Settings->hide();}
       }
       Fl_Group Look {
         label {Look & Feel}
+        user_data 1
         xywh {10 20 615 98} box PLASTIC_DOWN_FRAME color 7 labelfont 1 labelcolor 7 align 5
       } {
         Fl_Button B_C {
@@ -5501,7 +5515,7 @@ Fl::redraw();
 break;
 
 }}
-          xywh {520 35 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12
+          xywh {520 35 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12 textcolor 7
         } {
           MenuItem {} {
             label X11
@@ -5522,7 +5536,7 @@ break;
         }
         Fl_File_Input BackFiname {
           label {Background Image}
-          xywh {20 80 390 30} labelsize 11 labelcolor 7 align 5 textsize 12
+          xywh {20 80 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
         }
         Fl_Button BI_Browser {
           label Browse
@@ -5554,6 +5568,7 @@ chfsize(-1);}
       }
       Fl_Group AUDIO_SET {
         label Audio
+        user_data 1
         xywh {10 138 615 35} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button Pre_Serve {
@@ -5582,7 +5597,7 @@ switch(i)
 Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
 fl_message("This setting will be changed the next time you run rakarrack");}
-          xywh {563 150 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {563 150 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 4
@@ -5605,6 +5620,7 @@ fl_message("This setting will be changed the next time you run rakarrack");}
       }
       Fl_Group MIDI_SET {
         label MIDI
+        user_data 1
         xywh {10 194 313 195} box PLASTIC_DOWN_FRAME color 7 labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button D_A_Connect {
@@ -5622,7 +5638,7 @@ valor = (int) o->value();
 strcpy(rkr->MID,o->text(valor));
 o->select(valor,1);
 rkr->Conecta();}
-          xywh {20 232 190 111} type Hold selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12
+          xywh {20 232 190 111} type Hold selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
         }
         Fl_Counter Midi_In_Counter {
           label Channel
@@ -5654,6 +5670,7 @@ ML_Menu->activate();}
       }
       Fl_Group JACK_SET {
         label Jack
+        user_data 1
         xywh {333 194 293 195} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button D_J_Connect {
@@ -5666,26 +5683,28 @@ else JackCo->deactivate();}
         }
         Fl_Browser JackCo {
           label {Jack Ports}
-          xywh {350 245 191 142} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12
+          xywh {350 245 191 142} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
         }
       }
       Fl_Group MISC_SET {
         label Misc
+        user_data 1
         xywh {10 410 615 35} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Input Username {
           label {Username:}
           callback {rkr->UserRealName=(char*) o->value();}
-          xywh {85 423 240 21} labelsize 11 labelcolor 7 textsize 11
+          xywh {85 417 240 21} labelsize 11 labelcolor 7 textsize 11 textcolor 7
         }
       }
       Fl_Group BANK_SET {
         label Bank
+        user_data 1 open
         xywh {10 468 510 55} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_File_Input BFiname {
           label {Bank Filename}
-          xywh {20 488 390 30} labelsize 11 labelcolor 7 align 5 textsize 12
+          xywh {20 488 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
         }
         Fl_Button BF_Browser {
           label Browse
@@ -5702,14 +5721,14 @@ strcpy(rkr->BankFilename,filename);}
     Fl_Window MIDILearn {
       callback {save_stat(5);
 MIDILearn->hide();}
-      xywh {1296 284 640 480} type Double hide
+      xywh {1289 277 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
       }
       Fl_Browser Epar {
         callback {DisAssigns();}
-        xywh {10 58 201 348} type Hold
+        xywh {10 58 201 348} type Hold textcolor 7
       }
       Fl_Button GMM {
         label {Get MIDI Message}
@@ -5719,7 +5738,7 @@ rkr->RControl=1;}
         xywh {10 410 135 30}
       }
       Fl_Browser TPresets {
-        xywh {430 61 201 348} type Hold when 3
+        xywh {430 61 201 348} type Hold when 3 textcolor 7
       }
       Fl_Button CopyF {
         label {Copy from: }
@@ -5850,7 +5869,7 @@ GMM->redraw();}
         xywh {10 445 135 30}
       }
       Fl_Value_Input Disp_Control {
-        xywh {155 410 45 30} minimum 1 maximum 127 step 1 value 1
+        xywh {155 410 45 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
       }
     }
     Fl_Window AboutWin {
@@ -5965,242 +5984,61 @@ Fl::add_timeout(.04,tick,v);} {}
     code {MenuP->color(bcolor);
 MenuB->color(bcolor);
 
-eq_preset->selection_color(bcolor);
-compress_preset->selection_color(bcolor);
-dist_preset->selection_color(bcolor);
-dist_tipo->selection_color(bcolor);
-ovrd_preset->selection_color(bcolor);
-ovrd_tipo->selection_color(bcolor);
-echo_preset->selection_color(bcolor);
-chorux_preset->selection_color(bcolor);
-chorus_lfotype->selection_color(bcolor);
-phaser_preset->selection_color(bcolor);
-phaser_lfotype->selection_color(bcolor);
-aphaser_preset->selection_color(bcolor);
-aphaser_lfotype->selection_color(bcolor);
-flanger_preset->selection_color(bcolor);
-flanger_lfotype->selection_color(bcolor);
-reverb_preset->selection_color(bcolor);
-reverb_type->selection_color(bcolor);
-eqp_preset->selection_color(bcolor);
-WhaWha_preset->selection_color(bcolor);
-WhaWha_lfotype->selection_color(bcolor);
-Alienwah_preset->selection_color(bcolor);
-Alienwah_lfotype->selection_color(bcolor);
-Cabinet_preset->selection_color(bcolor);
-pan_preset->selection_color(bcolor);
-pan_lfotype->selection_color(bcolor);
-har_preset->selection_color(bcolor);
-musdelay_preset->selection_color(bcolor);
-musdelay_delay1->selection_color(bcolor);
-musdelay_delay2->selection_color(bcolor);
-musdelay_delay3->selection_color(bcolor);
-gate_preset->selection_color(bcolor);
-
-scheme_ch->selection_color(bcolor);
-Har_Qual->selection_color(bcolor);
-BMidiIn->selection_color(bcolor);
-JackCo->selection_color(bcolor);
-BFiname->selection_color(bcolor);
-
-
-Avail_Bro->selection_color(bcolor);
-Order_Bro->selection_color(bcolor);
-
-
-
-
-
-
-
 back_color = bcolor;
+
+Label_Color_Change(label_color);
 
 Fl::redraw();} {}
   }
   Function {Label_Color_Change(Fl_Color bcolor)} {} {
-    code {L1->labelcolor(bcolor);
-L2->labelcolor(bcolor);
-L3->labelcolor(bcolor);
-L4->labelcolor(bcolor);
-L5->labelcolor(bcolor);
-L6->labelcolor(bcolor);
-L7->labelcolor(bcolor);
-L8->labelcolor(bcolor);
-L9->labelcolor(bcolor);
-L10->labelcolor(bcolor);
-MIDI_LABEL->labelcolor(bcolor);
-TUNER_LABEL->labelcolor(bcolor);
-LABEL_IO->labelcolor(bcolor);
-
+    code {chfsize(0);
 ChangeActives();
 
-Etit->labelcolor(bcolor);
-
-eq_preset->labelcolor(bcolor);
-
-
-compress_preset->labelcolor(bcolor);
-Auto_Output->labelcolor(bcolor);
-Stereo->labelcolor(bcolor);
-
-
-
-dist_preset->labelcolor(bcolor);
-dist_tipo->labelcolor(bcolor);
-dist_st->labelcolor(bcolor);
-dist_neg->labelcolor(bcolor);
-dist_pf->labelcolor(bcolor);
-
-
-newdist_preset->labelcolor(bcolor);
-newdist_tipo->labelcolor(bcolor);
-newdist_st->labelcolor(bcolor);
-newdist_neg->labelcolor(bcolor);
-newdist_pf->labelcolor(bcolor);
-
-
-valve_preset->labelcolor(bcolor);
-valve_st->labelcolor(bcolor);
-valve_neg->labelcolor(bcolor);
-valve_pf->labelcolor(bcolor);
-valve_ed->labelcolor(bcolor);
-
-
-ring_st->labelcolor(bcolor);
-ring_afreq->labelcolor(bcolor);
-
-ovrd_preset->labelcolor(bcolor);
-ovrd_tipo->labelcolor(bcolor);
-ovrd_st->labelcolor(bcolor);
-ovrd_neg->labelcolor(bcolor);
-ovrd_pf->labelcolor(bcolor);
-
-
-echo_preset->labelcolor(bcolor);
-
-arpie_preset->labelcolor(bcolor);
-arpie_harm->labelcolor(bcolor);
-
-
-chorux_preset->labelcolor(bcolor);
-chorus_lfotype->labelcolor(bcolor);
-chorus_subs->labelcolor(bcolor);
-
-
-phaser_preset->labelcolor(bcolor);
-phaser_lfotype->labelcolor(bcolor);
-phaser_subs->labelcolor(bcolor);
-phaser_stages->labelcolor(bcolor);
-
-
-aphaser_preset->labelcolor(bcolor);
-aphaser_lfotype->labelcolor(bcolor);
-aphaser_subs->labelcolor(bcolor);
-aphaser_hyper->labelcolor(bcolor);
-aphaser_stages->labelcolor(bcolor);
-
-
-
-flanger_preset->labelcolor(bcolor);
-flanger_subs->labelcolor(bcolor);
-flanger_lfotype->labelcolor(bcolor);
-
-dflange_preset->labelcolor(bcolor);
-dflange_subs->labelcolor(bcolor);
-dflange_lfotype->labelcolor(bcolor);
-dflange_tz->labelcolor(bcolor);
-
-
-
-reverb_preset->labelcolor(bcolor);
-reverb_type->labelcolor(bcolor);
-
-
-
-eqp_preset->labelcolor(bcolor);
-
-
-
-WhaWha_preset->labelcolor(bcolor);
-WhaWha_lfotype->labelcolor(bcolor);
-
-Alienwah_preset->labelcolor(bcolor);
-Alienwah_lfotype->labelcolor(bcolor);
-
-
-
-Cabinet_preset->labelcolor(bcolor);
-
-
-
-
-pan_preset->labelcolor(bcolor);
-pan_lfotype->labelcolor(bcolor);
-pan_extraon->labelcolor(bcolor);
-pan_autopan->labelcolor(bcolor);
-
-
-
-har_preset->labelcolor(bcolor);
-har_SELECT->labelcolor(bcolor);
-har_MIDI->labelcolor(bcolor);
-har_chordname->labelcolor(bcolor);
-
-
-musdelay_preset->labelcolor(bcolor);
-musdelay_delay1->labelcolor(bcolor);
-musdelay_delay3->labelcolor(bcolor);
-musdelay_delay2->labelcolor(bcolor);
-
-
-
-
-gate_preset->labelcolor(bcolor);
-
-
-
-Midi_out_Counter->labelcolor(bcolor);
-
-LABEL_IO->labelcolor(bcolor);
-
-Preset_Counter->labelcolor(bcolor);
-PRESETS_LABEL->labelcolor(bcolor);
-
-
-WNote->labelcolor(bcolor);
-WRfreq->labelcolor(bcolor);
-WNfreq->labelcolor(bcolor);
-
-TITTLE_L->labelcolor(bcolor);
-DESC_L->labelcolor(bcolor);
-
-O_TITLE->labelcolor(bcolor);
-
-Look->labelcolor(bcolor);
-scheme_ch->labelcolor(bcolor);
-MIDI_SET->labelcolor(bcolor);
-BMidiIn->labelcolor(bcolor);
-D_A_Connect->labelcolor(bcolor);
-JACK_SET->labelcolor(bcolor);
-JackCo->labelcolor(bcolor);
-D_J_Connect->labelcolor(bcolor);
-Midi_In_Counter->labelcolor(bcolor);
-Har_In_Counter->labelcolor(bcolor);
-Har_Qual->labelcolor(bcolor);
-AUDIO_SET->labelcolor(bcolor);
-Pre_Serve->labelcolor(bcolor);
-INSTATE->labelcolor(bcolor);
-MISC_SET->labelcolor(bcolor);
-Username->labelcolor(bcolor);
-BANK_SET->labelcolor(bcolor);
-BFiname->labelcolor(bcolor);
-FSLabel->labelcolor(bcolor);
-BackFiname->labelcolor(bcolor);
-
-Mw0->labelcolor(bcolor);
-Mw1->labelcolor(bcolor);
-wMIDI->labelcolor(bcolor);
-
+for (int t=0; t<Settings->children();t++)
+  {
+    Fl_Widget *w = Settings->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);   
+    long long ud = (long long) w->user_data();
+    
+    if (ud==1)
+    {
+          
+     Fl_Group *g = (Fl_Group *)w;     
+      
+     for(int i=0;i<g->children();i++)
+       {
+
+         Fl_Widget *c = g->child(i);
+
+          c->labelcolor(label_color);
+          c->selection_color(back_color);
+          c->color(fore_color);
+       } 
+    } 
+ 
+  }
+
+for (int t=0; t<Order->children();t++)
+  {
+    Fl_Widget *w = Order->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);
+  }  
+  
+
+for (int t=0; t<MIDILearn->children();t++)
+  {
+    Fl_Widget *w = MIDILearn->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);
+  }  
 
 
 if (scheme_ch->value()==3)
@@ -6223,24 +6061,7 @@ label_color = bcolor;
 Fl::redraw();} {}
   }
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
-    code {Preset_Counter->color(bcolor);
-Midi_In_Counter->color(bcolor);
-Har_In_Counter->color(bcolor);
-FSplus->color(bcolor);
-FSless->color(bcolor);
-Midi_out_Counter->color(bcolor);
-DAuthor->color(bcolor);
-WPreset_Name->color(bcolor);
-Open_Order->color(bcolor);
-S_new->color(bcolor);
-S_preset->color(bcolor);
-L_preset->color(bcolor);
-B_preset->color(bcolor);
-
-
-
-
-if (made)
+    code {if (made)
 {
 for (int t=0; t<ob->children();t++)
   {
@@ -6253,77 +6074,17 @@ for (int t=0; t<ob->children();t++)
 
 }
 
-ok_order->color(bcolor);
-Cancel_order->color(bcolor);
-Sube->color(bcolor);
-Baja->color(bcolor);
-Pon->color(bcolor);
 
-A_C->color(bcolor);
-B_C->color(bcolor);
-L_C->color(bcolor);
-K_C->color(bcolor);
-Prefs_OK->color(bcolor);
-BF_Browser->color(bcolor);
-BI_Browser->color(bcolor);
-
-GMM->color(bcolor);
-CopyF->color(bcolor);
-CopyT->color(bcolor);
-ClearA->color(bcolor);
-ClearP->color(bcolor);
-Assign->color(bcolor);
-CloseML->color(bcolor);
-CancelRec->color(bcolor);
-
-
-
-fore_color= bcolor;
-
-Fl::redraw();} {}
+ fore_color= bcolor;
+ Label_Color_Change(label_color);} {}
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
-    code {aphaser_hyper->selection_color(bcolor);
-aphaser_subs->selection_color(bcolor);
-newdist_pf->selection_color(bcolor);
-newdist_neg->selection_color(bcolor);
-har_MIDI->selection_color(bcolor);
-har_SELECT->selection_color(bcolor);
-pan_extraon->selection_color(bcolor);
-pan_autopan->selection_color(bcolor);
-flanger_subs->selection_color(bcolor);
-dflange_subs->selection_color(bcolor);
-dflange_tz->selection_color(bcolor);
-phaser_subs->selection_color(bcolor);
-chorus_subs->selection_color(bcolor);
-ovrd_neg->selection_color(bcolor);
-ovrd_st->selection_color(bcolor);
-ovrd_pf->selection_color(bcolor);
-dist_neg->selection_color(bcolor);
-dist_st->selection_color(bcolor);
-dist_pf->selection_color(bcolor);
-valve_neg->selection_color(bcolor);
-valve_st->selection_color(bcolor);
-valve_ed->selection_color(bcolor);
-valve_pf->selection_color(bcolor);
-ring_st->selection_color(bcolor);
-ring_afreq->selection_color(bcolor);
-mbdist_neg->selection_color(bcolor);
-mbdist_st->selection_color(bcolor);
+    code {leds_color=bcolor;
+chfsize(0);
 
 
-Auto_Output->selection_color(bcolor);
-Stereo->selection_color(bcolor);
- 
-
-
-
-
-leds_color=bcolor;
-
-
-
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)
@@ -6989,8 +6750,7 @@ mbdist_activar->value(rkr->MBDist_Bypass);
 
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {
@@ -8508,13 +8268,15 @@ Fl::redraw();} {}
 for (int t=0; t<Principal->children();t++)
   {
     Fl_Widget *w = Principal->child(t);
+    long long ud = (long long) w->user_data();
   
      k= w->labelsize();
      k+=value;
      w->labelsize(k);
-       
+     w->labelcolor(label_color);  
+     if (ud !=2) w->selection_color(back_color); else w->selection_color(leds_color);
+     
    
-    long long ud = (long long) w->user_data();
     
     if (ud==1)
     {
@@ -8525,16 +8287,22 @@ for (int t=0; t<Principal->children();t++)
        {
 
          Fl_Widget *c = g->child(i);
-
+         long long uh = (long long) c->user_data();
+         
 
           k= c->labelsize();
           k+=value;
           c->labelsize(k);
+          c->labelcolor(label_color);
+          if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
+          c->color(fore_color);
+          
        } 
     } 
  
   }
 
+ 
   Fl::redraw();} {}
   }
   Function {adjustfont()} {} {

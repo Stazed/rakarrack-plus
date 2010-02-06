@@ -17,18 +17,6 @@ static int tta;
 static int Scope_ON; 
 static int Analyzer_ON; 
 
-LC_Button::LC_Button(int x,int y, int w, int h, const char *label):Fl_Light_Button(x,y,w,h,label) {
-}
-
-void LC_Button::draw() {
-  Fl_Color bon = fl_lighter(fore_color);
-Fl_Color col = value() ? bon : fore_color;
-color(col);
-selection_color(leds_color);
-
-Fl_Light_Button::draw();
-}
-
 Analyzer::Analyzer(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
   spl=NULL;
 spr=NULL;
@@ -1194,13 +1182,13 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_eq_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_eq_activar_i(Fl_Light_Button* o, void*) {
   rkr->EQ1_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
 findpos(0,(int)o->value());
 }
-void RKRGUI::cb_eq_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_eq_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_activar_i(o,v);
 }
 
@@ -1316,12 +1304,12 @@ void RKRGUI::cb_eq_10(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_10_i(o,v);
 }
 
-void RKRGUI::cb_compress_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_compress_activar_i(Fl_Light_Button* o, void*) {
   rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
 findpos(1,(int)o->value());
 }
-void RKRGUI::cb_compress_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_compress_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_activar_i(o,v);
 }
 
@@ -1405,13 +1393,13 @@ void RKRGUI::cb_Stereo(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Stereo_i(o,v);
 }
 
-void RKRGUI::cb_dist_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_dist_activar_i(Fl_Light_Button* o, void*) {
   rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
 findpos(2,(int)o->value());
 }
-void RKRGUI::cb_dist_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_activar_i(o,v);
 }
 
@@ -1549,13 +1537,13 @@ void RKRGUI::cb_dist_hpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_hpf_i(o,v);
 }
 
-void RKRGUI::cb_ovrd_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_ovrd_activar_i(Fl_Light_Button* o, void*) {
   rkr->Overdrive_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
 findpos(3,(int)o->value());
 }
-void RKRGUI::cb_ovrd_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_activar_i(o,v);
 }
 
@@ -1683,13 +1671,13 @@ void RKRGUI::cb_ovrd_hpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_hpf_i(o,v);
 }
 
-void RKRGUI::cb_echo_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_echo_activar_i(Fl_Light_Button* o, void*) {
   rkr->Echo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
 findpos(4,(int)o->value());
 }
-void RKRGUI::cb_echo_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_echo_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_activar_i(o,v);
 }
 
@@ -1783,13 +1771,13 @@ void RKRGUI::cb_echo_damp(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_damp_i(o,v);
 }
 
-void RKRGUI::cb_chorus_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_chorus_activar_i(Fl_Light_Button* o, void*) {
   rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
 findpos(5,(int)o->value());
 }
-void RKRGUI::cb_chorus_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_chorus_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_activar_i(o,v);
 }
 
@@ -1908,13 +1896,13 @@ void RKRGUI::cb_chorus_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_LR_i(o,v);
 }
 
-void RKRGUI::cb_phaser_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_phaser_activar_i(Fl_Light_Button* o, void*) {
   rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
 findpos(6,(int)o->value());
 }
-void RKRGUI::cb_phaser_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_phaser_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_activar_i(o,v);
 }
 
@@ -2043,13 +2031,13 @@ void RKRGUI::cb_phaser_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_LR_i(o,v);
 }
 
-void RKRGUI::cb_flanger_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_flanger_activar_i(Fl_Light_Button* o, void*) {
   rkr->Flanger_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
 findpos(7,(int)o->value());
 }
-void RKRGUI::cb_flanger_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_flanger_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_activar_i(o,v);
 }
 
@@ -2168,13 +2156,13 @@ void RKRGUI::cb_flanger_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_LR_i(o,v);
 }
 
-void RKRGUI::cb_reverb_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_reverb_activar_i(Fl_Light_Button* o, void*) {
   rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
 findpos(8,(int)o->value());
 }
-void RKRGUI::cb_reverb_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_reverb_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_activar_i(o,v);
 }
 
@@ -2299,13 +2287,13 @@ void RKRGUI::cb_reverb_damp(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_damp_i(o,v);
 }
 
-void RKRGUI::cb_eqp_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_eqp_activar_i(Fl_Light_Button* o, void*) {
   rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
 findpos(9,(int)o->value());
 }
-void RKRGUI::cb_eqp_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_eqp_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_activar_i(o,v);
 }
 
@@ -2405,13 +2393,13 @@ void RKRGUI::cb_eqp_HQ(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_HQ_i(o,v);
 }
 
-void RKRGUI::cb_WhaWha_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_WhaWha_activar_i(Fl_Light_Button* o, void*) {
   rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
 findpos(10,(int)o->value());
 }
-void RKRGUI::cb_WhaWha_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_WhaWha_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_activar_i(o,v);
 }
 
@@ -2524,13 +2512,13 @@ void RKRGUI::cb_WhaWha_smooth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_smooth_i(o,v);
 }
 
-void RKRGUI::cb_Alienwah_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_Alienwah_activar_i(Fl_Light_Button* o, void*) {
   rkr->Alienwah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
 findpos(11,(int)o->value());
 }
-void RKRGUI::cb_Alienwah_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_activar_i(o,v);
 }
 
@@ -2652,11 +2640,11 @@ void RKRGUI::cb_Alienwah_LR(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_LR_i(o,v);
 }
 
-void RKRGUI::cb_Cabinet_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_Cabinet_activar_i(Fl_Light_Button* o, void*) {
   rkr->Cabinet_Bypass=(int)o->value();
 findpos(12,(int)o->value());
 }
-void RKRGUI::cb_Cabinet_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_Cabinet_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_activar_i(o,v);
 }
 
@@ -2689,13 +2677,13 @@ void RKRGUI::cb_Cabinet_output(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_output_i(o,v);
 }
 
-void RKRGUI::cb_pan_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_pan_activar_i(Fl_Light_Button* o, void*) {
   rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
 findpos(13,(int)o->value());
 }
-void RKRGUI::cb_pan_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_pan_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_activar_i(o,v);
 }
 
@@ -2795,13 +2783,13 @@ void RKRGUI::cb_pan_extra(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_extra_i(o,v);
 }
 
-void RKRGUI::cb_har_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_har_activar_i(Fl_Light_Button* o, void*) {
   rkr->Harmonizer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 findpos(14,(int)o->value());
 }
-void RKRGUI::cb_har_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_har_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_activar_i(o,v);
 }
 
@@ -2916,13 +2904,13 @@ void RKRGUI::cb_har_type(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_type_i(o,v);
 }
 
-void RKRGUI::cb_musdelay_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_musdelay_activar_i(Fl_Light_Button* o, void*) {
   rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
 findpos(15,(int)o->value());
 }
-void RKRGUI::cb_musdelay_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_musdelay_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_activar_i(o,v);
 }
 
@@ -3084,11 +3072,11 @@ void RKRGUI::cb_musdelay_damp(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_damp_i(o,v);
 }
 
-void RKRGUI::cb_gate_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_gate_activar_i(Fl_Light_Button* o, void*) {
   rkr->Gate_Bypass=(int)o->value();
 findpos(16,(int)o->value());
 }
-void RKRGUI::cb_gate_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_gate_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_activar_i(o,v);
 }
 
@@ -3162,13 +3150,13 @@ void RKRGUI::cb_gate_HPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_HPF_i(o,v);
 }
 
-void RKRGUI::cb_newdist_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_newdist_activar_i(Fl_Light_Button* o, void*) {
   rkr->NewDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
 findpos(17,(int)o->value());
 }
-void RKRGUI::cb_newdist_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_newdist_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_activar_i(o,v);
 }
 
@@ -3305,13 +3293,13 @@ void RKRGUI::cb_newdist_hpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_hpf_i(o,v);
 }
 
-void RKRGUI::cb_aphaser_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_aphaser_activar_i(Fl_Light_Button* o, void*) {
   rkr->APhaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
 findpos(18,(int)o->value());
 }
-void RKRGUI::cb_aphaser_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_activar_i(o,v);
 }
 
@@ -3439,13 +3427,13 @@ void RKRGUI::cb_aphaser_subs(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_subs_i(o,v);
 }
 
-void RKRGUI::cb_valve_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_valve_activar_i(Fl_Light_Button* o, void*) {
   rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
 findpos(19,(int)o->value());
 }
-void RKRGUI::cb_valve_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_valve_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_activar_i(o,v);
 }
 
@@ -3567,13 +3555,13 @@ void RKRGUI::cb_valve_hpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_hpf_i(o,v);
 }
 
-void RKRGUI::cb_dflange_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_dflange_activar_i(Fl_Light_Button* o, void*) {
   rkr->DFlange_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
 findpos(20,(int)o->value());
 }
-void RKRGUI::cb_dflange_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_dflange_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_activar_i(o,v);
 }
 
@@ -3716,13 +3704,13 @@ void RKRGUI::cb_dflange_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_rnd_i(o,v);
 }
 
-void RKRGUI::cb_ring_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_ring_activar_i(Fl_Light_Button* o, void*) {
   rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
 findpos(21,(int)o->value());
 }
-void RKRGUI::cb_ring_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_ring_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_activar_i(o,v);
 }
 
@@ -3847,13 +3835,13 @@ void RKRGUI::cb_ring_squ(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_squ_i(o,v);
 }
 
-void RKRGUI::cb_exciter_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_exciter_activar_i(Fl_Light_Button* o, void*) {
   rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
 findpos(22,(int)o->value());
 }
-void RKRGUI::cb_exciter_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_exciter_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_exciter_activar_i(o,v);
 }
 
@@ -3977,13 +3965,13 @@ void RKRGUI::cb_ex_10(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_10_i(o,v);
 }
 
-void RKRGUI::cb_mbdist_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_mbdist_activar_i(Fl_Light_Button* o, void*) {
   rkr->MBDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
 findpos(23,(int)o->value());
 }
-void RKRGUI::cb_mbdist_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_mbdist_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_activar_i(o,v);
 }
 
@@ -4191,13 +4179,13 @@ void RKRGUI::cb_mbdist_neg(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_neg_i(o,v);
 }
 
-void RKRGUI::cb_arpie_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_arpie_activar_i(Fl_Light_Button* o, void*) {
   rkr->Arpie_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
 findpos(24,(int)o->value());
 }
-void RKRGUI::cb_arpie_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_arpie_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_activar_i(o,v);
 }
 
@@ -4298,7 +4286,7 @@ void RKRGUI::cb_arpie_harm(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_harm_i(o,v);
 }
 
-void RKRGUI::cb_tuner_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
 WNote->copy_label("");
@@ -4307,11 +4295,11 @@ WNfreq->copy_label("");
 ChangeActives();
 TUNER_LABEL->redraw();
 }
-void RKRGUI::cb_tuner_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_tuner_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_tuner_activar_i(o,v);
 }
 
-void RKRGUI::cb_ActivarGeneral_i(LC_Button* o, void*) {
+void RKRGUI::cb_ActivarGeneral_i(Fl_Light_Button* o, void*) {
   rkr->Bypass=o->value();
 rkr->val_i_sum=-50.0;
 rkr->val_v_sum=-50.0;
@@ -4342,7 +4330,7 @@ rkr->cleanup_efx();
   
 };
 }
-void RKRGUI::cb_ActivarGeneral(LC_Button* o, void* v) {
+void RKRGUI::cb_ActivarGeneral(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ActivarGeneral_i(o,v);
 }
 
@@ -4369,7 +4357,7 @@ void RKRGUI::cb_Nivel_Salida(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Salida_i(o,v);
 }
 
-void RKRGUI::cb_nidi_activar_i(LC_Button* o, void*) {
+void RKRGUI::cb_nidi_activar_i(Fl_Light_Button* o, void*) {
   if ((int)o->value()==0)
 { 
 rkr->efx_MIDIConverter->panic();
@@ -4383,7 +4371,7 @@ rkr->MIDIConverter_Bypass=(int)o->value();
 ChangeActives();
 MIDI_LABEL->redraw();
 }
-void RKRGUI::cb_nidi_activar(LC_Button* o, void* v) {
+void RKRGUI::cb_nidi_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_nidi_activar_i(o,v);
 }
 
@@ -4463,7 +4451,7 @@ void RKRGUI::cb_S_preset(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_preset_i(o,v);
 }
 
-void RKRGUI::cb_Compare_i(LC_Button* o, void*) {
+void RKRGUI::cb_Compare_i(Fl_Light_Button* o, void*) {
   if ((int) o->value())
 {
 rkr->Preset_to_Bank(0);
@@ -4477,7 +4465,7 @@ else
  Put_Loaded();
 };
 }
-void RKRGUI::cb_Compare(LC_Button* o, void* v) {
+void RKRGUI::cb_Compare(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Compare_i(o,v);
 }
 
@@ -5303,25 +5291,22 @@ Fl_Double_Window* RKRGUI::make_window() {
       EQ->labelfont(1);
       EQ->user_data((void*)(1));
       EQ->align(96|FL_ALIGN_INSIDE);
-      { eq_activar = new LC_Button(7, 216, 34, 18, "On");
-        eq_activar->box(FL_UP_BOX);
+      { eq_activar = new Fl_Light_Button(7, 216, 34, 18, "On");
         eq_activar->shortcut(0x31);
         eq_activar->color((Fl_Color)62);
         eq_activar->selection_color((Fl_Color)1);
-        eq_activar->labeltype(FL_NORMAL_LABEL);
-        eq_activar->labelfont(0);
         eq_activar->labelsize(10);
-        eq_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        eq_activar->callback((Fl_Callback*)cb_eq_activar);
+        eq_activar->callback((Fl_Callback*)cb_eq_activar, (void*)(2));
         eq_activar->align(68|FL_ALIGN_INSIDE);
         eq_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* eq_activar
+      } // Fl_Light_Button* eq_activar
       { eq_preset = new Fl_Choice(79, 216, 76, 18, "Preset");
         eq_preset->down_box(FL_BORDER_BOX);
         eq_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         eq_preset->labelsize(10);
         eq_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eq_preset->textsize(10);
+        eq_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eq_preset->callback((Fl_Callback*)cb_eq_preset);
         eq_preset->when(FL_WHEN_RELEASE_ALWAYS);
         eq_preset->menu(menu_eq_preset);
@@ -5539,25 +5524,22 @@ Fl_Double_Window* RKRGUI::make_window() {
       COMPRESS->labelfont(1);
       COMPRESS->user_data((void*)(1));
       COMPRESS->align(96|FL_ALIGN_INSIDE);
-      { compress_activar = new LC_Button(166, 216, 34, 18, "On");
-        compress_activar->box(FL_UP_BOX);
+      { compress_activar = new Fl_Light_Button(166, 216, 34, 18, "On");
         compress_activar->shortcut(0x32);
         compress_activar->color((Fl_Color)62);
         compress_activar->selection_color((Fl_Color)1);
-        compress_activar->labeltype(FL_NORMAL_LABEL);
-        compress_activar->labelfont(0);
         compress_activar->labelsize(10);
-        compress_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        compress_activar->callback((Fl_Callback*)cb_compress_activar);
+        compress_activar->callback((Fl_Callback*)cb_compress_activar, (void*)(2));
         compress_activar->align(68|FL_ALIGN_INSIDE);
         compress_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* compress_activar
+      } // Fl_Light_Button* compress_activar
       { compress_preset = new Fl_Choice(238, 216, 76, 18, "Preset");
         compress_preset->down_box(FL_BORDER_BOX);
         compress_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         compress_preset->labelsize(10);
         compress_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         compress_preset->textsize(10);
+        compress_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         compress_preset->callback((Fl_Callback*)cb_compress_preset);
         compress_preset->when(FL_WHEN_RELEASE_ALWAYS);
         compress_preset->menu(menu_compress_preset);
@@ -5672,7 +5654,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         Auto_Output->down_box(FL_BORDER_BOX);
         Auto_Output->labelsize(10);
         Auto_Output->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Auto_Output->callback((Fl_Callback*)cb_Auto_Output);
+        Auto_Output->callback((Fl_Callback*)cb_Auto_Output, (void*)(2));
       } // Fl_Check_Button* Auto_Output
       { Stereo = new Fl_Check_Button(265, 378, 15, 15, "Stereo");
         Stereo->tooltip("Level detect Left and Right separately.  Unchecked compresses according to L/\
@@ -5680,7 +5662,7 @@ R average.");
         Stereo->down_box(FL_BORDER_BOX);
         Stereo->labelsize(10);
         Stereo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Stereo->callback((Fl_Callback*)cb_Stereo);
+        Stereo->callback((Fl_Callback*)cb_Stereo, (void*)(2));
       } // Fl_Check_Button* Stereo
       COMPRESS->end();
     } // Fl_Group* COMPRESS
@@ -5691,25 +5673,22 @@ R average.");
       DIST->labelfont(1);
       DIST->user_data((void*)(1));
       DIST->align(96|FL_ALIGN_INSIDE);
-      { dist_activar = new LC_Button(326, 216, 34, 18, "On");
-        dist_activar->box(FL_UP_BOX);
+      { dist_activar = new Fl_Light_Button(326, 216, 34, 18, "On");
         dist_activar->shortcut(0x33);
         dist_activar->color((Fl_Color)62);
         dist_activar->selection_color((Fl_Color)1);
-        dist_activar->labeltype(FL_NORMAL_LABEL);
-        dist_activar->labelfont(0);
         dist_activar->labelsize(10);
-        dist_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        dist_activar->callback((Fl_Callback*)cb_dist_activar);
+        dist_activar->callback((Fl_Callback*)cb_dist_activar, (void*)(2));
         dist_activar->align(68|FL_ALIGN_INSIDE);
         dist_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* dist_activar
+      } // Fl_Light_Button* dist_activar
       { dist_preset = new Fl_Choice(398, 216, 76, 18, "Preset");
         dist_preset->down_box(FL_BORDER_BOX);
         dist_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         dist_preset->labelsize(10);
         dist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_preset->textsize(10);
+        dist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_preset->callback((Fl_Callback*)cb_dist_preset);
         dist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         dist_preset->menu(menu_dist_preset);
@@ -5786,6 +5765,7 @@ R average.");
         dist_tipo->labelsize(10);
         dist_tipo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_tipo->textsize(10);
+        dist_tipo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_tipo->callback((Fl_Callback*)cb_dist_tipo);
         dist_tipo->menu(menu_dist_tipo);
       } // Fl_Choice* dist_tipo
@@ -5793,19 +5773,19 @@ R average.");
         dist_neg->down_box(FL_BORDER_BOX);
         dist_neg->labelsize(10);
         dist_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_neg->callback((Fl_Callback*)cb_dist_neg);
+        dist_neg->callback((Fl_Callback*)cb_dist_neg, (void*)(2));
       } // Fl_Check_Button* dist_neg
       { dist_pf = new Fl_Check_Button(330, 320, 30, 15, "Pre Filter");
         dist_pf->down_box(FL_BORDER_BOX);
         dist_pf->labelsize(10);
         dist_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_pf->callback((Fl_Callback*)cb_dist_pf);
+        dist_pf->callback((Fl_Callback*)cb_dist_pf, (void*)(2));
       } // Fl_Check_Button* dist_pf
       { dist_st = new Fl_Check_Button(395, 320, 30, 15, "Stereo");
         dist_st->down_box(FL_BORDER_BOX);
         dist_st->labelsize(10);
         dist_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_st->callback((Fl_Callback*)cb_dist_st);
+        dist_st->callback((Fl_Callback*)cb_dist_st, (void*)(2));
       } // Fl_Check_Button* dist_st
       { dist_pan = new SliderW(373, 337, 100, 10, "Pan");
         dist_pan->type(5);
@@ -5881,25 +5861,22 @@ R average.");
       OVRD->labelfont(1);
       OVRD->user_data((void*)(1));
       OVRD->align(96|FL_ALIGN_INSIDE);
-      { ovrd_activar = new LC_Button(485, 216, 34, 18, "On");
-        ovrd_activar->box(FL_UP_BOX);
+      { ovrd_activar = new Fl_Light_Button(485, 216, 34, 18, "On");
         ovrd_activar->shortcut(0x34);
         ovrd_activar->color((Fl_Color)62);
         ovrd_activar->selection_color((Fl_Color)1);
-        ovrd_activar->labeltype(FL_NORMAL_LABEL);
-        ovrd_activar->labelfont(0);
         ovrd_activar->labelsize(10);
-        ovrd_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        ovrd_activar->callback((Fl_Callback*)cb_ovrd_activar);
+        ovrd_activar->callback((Fl_Callback*)cb_ovrd_activar, (void*)(2));
         ovrd_activar->align(68|FL_ALIGN_INSIDE);
         ovrd_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* ovrd_activar
+      } // Fl_Light_Button* ovrd_activar
       { ovrd_preset = new Fl_Choice(557, 216, 76, 18, "Preset");
         ovrd_preset->down_box(FL_BORDER_BOX);
         ovrd_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         ovrd_preset->labelsize(10);
         ovrd_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_preset->textsize(10);
+        ovrd_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset);
         ovrd_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ovrd_preset->menu(menu_ovrd_preset);
@@ -5976,6 +5953,7 @@ R average.");
         ovrd_tipo->labelsize(10);
         ovrd_tipo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_tipo->textsize(10);
+        ovrd_tipo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_tipo->callback((Fl_Callback*)cb_ovrd_tipo);
         ovrd_tipo->menu(menu_ovrd_tipo);
       } // Fl_Choice* ovrd_tipo
@@ -5983,13 +5961,13 @@ R average.");
         ovrd_neg->down_box(FL_BORDER_BOX);
         ovrd_neg->labelsize(10);
         ovrd_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ovrd_neg->callback((Fl_Callback*)cb_ovrd_neg);
+        ovrd_neg->callback((Fl_Callback*)cb_ovrd_neg, (void*)(2));
       } // Fl_Check_Button* ovrd_neg
       { ovrd_st = new Fl_Check_Button(521, 322, 30, 15, "Stereo");
         ovrd_st->down_box(FL_BORDER_BOX);
         ovrd_st->labelsize(10);
         ovrd_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ovrd_st->callback((Fl_Callback*)cb_ovrd_st);
+        ovrd_st->callback((Fl_Callback*)cb_ovrd_st, (void*)(2));
       } // Fl_Check_Button* ovrd_st
       { ovrd_pan = new SliderW(531, 337, 100, 10, "Pan");
         ovrd_pan->type(5);
@@ -6012,7 +5990,7 @@ R average.");
         ovrd_pf->down_box(FL_BORDER_BOX);
         ovrd_pf->labelsize(10);
         ovrd_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ovrd_pf->callback((Fl_Callback*)cb_ovrd_pf);
+        ovrd_pf->callback((Fl_Callback*)cb_ovrd_pf, (void*)(2));
       } // Fl_Check_Button* ovrd_pf
       { ovrd_lpf = new SliderW(531, 369, 100, 10, "LPF");
         ovrd_lpf->type(5);
@@ -6055,25 +6033,22 @@ R average.");
       ECHO->labelfont(1);
       ECHO->user_data((void*)(1));
       ECHO->align(96|FL_ALIGN_INSIDE);
-      { echo_activar = new LC_Button(644, 216, 34, 18, "On");
-        echo_activar->box(FL_UP_BOX);
+      { echo_activar = new Fl_Light_Button(644, 216, 34, 18, "On");
         echo_activar->shortcut(0x35);
         echo_activar->color((Fl_Color)62);
         echo_activar->selection_color((Fl_Color)1);
-        echo_activar->labeltype(FL_NORMAL_LABEL);
-        echo_activar->labelfont(0);
         echo_activar->labelsize(10);
-        echo_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        echo_activar->callback((Fl_Callback*)cb_echo_activar);
+        echo_activar->callback((Fl_Callback*)cb_echo_activar, (void*)(2));
         echo_activar->align(68|FL_ALIGN_INSIDE);
         echo_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* echo_activar
+      } // Fl_Light_Button* echo_activar
       { echo_preset = new Fl_Choice(716, 216, 76, 18, "Preset");
         echo_preset->down_box(FL_BORDER_BOX);
         echo_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         echo_preset->labelsize(10);
         echo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echo_preset->textsize(10);
+        echo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echo_preset->callback((Fl_Callback*)cb_echo_preset);
         echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
         echo_preset->menu(menu_echo_preset);
@@ -6218,25 +6193,22 @@ R average.");
       CHORUS->labelfont(1);
       CHORUS->user_data((void*)(1));
       CHORUS->align(96|FL_ALIGN_INSIDE);
-      { chorus_activar = new LC_Button(7, 417, 34, 18, "On");
-        chorus_activar->box(FL_UP_BOX);
+      { chorus_activar = new Fl_Light_Button(7, 417, 34, 18, "On");
         chorus_activar->shortcut(0x36);
         chorus_activar->color((Fl_Color)62);
         chorus_activar->selection_color((Fl_Color)1);
-        chorus_activar->labeltype(FL_NORMAL_LABEL);
-        chorus_activar->labelfont(0);
         chorus_activar->labelsize(10);
-        chorus_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        chorus_activar->callback((Fl_Callback*)cb_chorus_activar);
+        chorus_activar->callback((Fl_Callback*)cb_chorus_activar, (void*)(2));
         chorus_activar->align(68|FL_ALIGN_INSIDE);
         chorus_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* chorus_activar
+      } // Fl_Light_Button* chorus_activar
       { chorux_preset = new Fl_Choice(79, 417, 76, 18, "Preset");
         chorux_preset->down_box(FL_BORDER_BOX);
         chorux_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         chorux_preset->labelsize(10);
         chorux_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorux_preset->textsize(10);
+        chorux_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorux_preset->callback((Fl_Callback*)cb_chorux_preset);
         chorux_preset->when(FL_WHEN_RELEASE_ALWAYS);
         chorux_preset->menu(menu_chorux_preset);
@@ -6314,6 +6286,7 @@ R average.");
         chorus_lfotype->labelsize(10);
         chorus_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorus_lfotype->textsize(10);
+        chorus_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype);
         chorus_lfotype->menu(menu_chorus_lfotype);
       } // Fl_Choice* chorus_lfotype
@@ -6321,7 +6294,7 @@ R average.");
         chorus_subs->down_box(FL_BORDER_BOX);
         chorus_subs->labelsize(10);
         chorus_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        chorus_subs->callback((Fl_Callback*)cb_chorus_subs);
+        chorus_subs->callback((Fl_Callback*)cb_chorus_subs, (void*)(2));
       } // Fl_Check_Button* chorus_subs
       { chorus_stdf = new SliderW(51, 528, 100, 10, "St.df");
         chorus_stdf->type(5);
@@ -6413,25 +6386,22 @@ R average.");
       PHASER->labelfont(1);
       PHASER->user_data((void*)(1));
       PHASER->align(96|FL_ALIGN_INSIDE);
-      { phaser_activar = new LC_Button(166, 417, 34, 18, "On");
-        phaser_activar->box(FL_UP_BOX);
+      { phaser_activar = new Fl_Light_Button(166, 417, 34, 18, "On");
         phaser_activar->shortcut(0x37);
         phaser_activar->color((Fl_Color)62);
         phaser_activar->selection_color((Fl_Color)1);
-        phaser_activar->labeltype(FL_NORMAL_LABEL);
-        phaser_activar->labelfont(0);
         phaser_activar->labelsize(10);
-        phaser_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        phaser_activar->callback((Fl_Callback*)cb_phaser_activar);
+        phaser_activar->callback((Fl_Callback*)cb_phaser_activar, (void*)(2));
         phaser_activar->align(68|FL_ALIGN_INSIDE);
         phaser_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* phaser_activar
+      } // Fl_Light_Button* phaser_activar
       { phaser_preset = new Fl_Choice(238, 417, 76, 18, "Preset");
         phaser_preset->down_box(FL_BORDER_BOX);
         phaser_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         phaser_preset->labelsize(10);
         phaser_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_preset->textsize(10);
+        phaser_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_preset->callback((Fl_Callback*)cb_phaser_preset);
         phaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
         phaser_preset->menu(menu_phaser_preset);
@@ -6510,6 +6480,7 @@ R average.");
         phaser_lfotype->labelsize(10);
         phaser_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_lfotype->textsize(10);
+        phaser_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_lfotype->callback((Fl_Callback*)cb_phaser_lfotype);
         phaser_lfotype->menu(menu_phaser_lfotype);
       } // Fl_Choice* phaser_lfotype
@@ -6517,7 +6488,7 @@ R average.");
         phaser_subs->down_box(FL_BORDER_BOX);
         phaser_subs->labelsize(10);
         phaser_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        phaser_subs->callback((Fl_Callback*)cb_phaser_subs);
+        phaser_subs->callback((Fl_Callback*)cb_phaser_subs, (void*)(2));
       } // Fl_Check_Button* phaser_subs
       { phaser_phase = new SliderW(210, 523, 100, 10, "Phase");
         phaser_phase->type(5);
@@ -6622,25 +6593,22 @@ R average.");
       FLANGER->labelfont(1);
       FLANGER->user_data((void*)(1));
       FLANGER->align(96|FL_ALIGN_INSIDE);
-      { flanger_activar = new LC_Button(326, 417, 34, 18, "On");
-        flanger_activar->box(FL_UP_BOX);
+      { flanger_activar = new Fl_Light_Button(326, 417, 34, 18, "On");
         flanger_activar->shortcut(0x38);
         flanger_activar->color((Fl_Color)62);
         flanger_activar->selection_color((Fl_Color)1);
-        flanger_activar->labeltype(FL_NORMAL_LABEL);
-        flanger_activar->labelfont(0);
         flanger_activar->labelsize(10);
-        flanger_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        flanger_activar->callback((Fl_Callback*)cb_flanger_activar);
+        flanger_activar->callback((Fl_Callback*)cb_flanger_activar, (void*)(2));
         flanger_activar->align(68|FL_ALIGN_INSIDE);
         flanger_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* flanger_activar
+      } // Fl_Light_Button* flanger_activar
       { flanger_preset = new Fl_Choice(398, 417, 76, 18, "Preset");
         flanger_preset->down_box(FL_BORDER_BOX);
         flanger_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         flanger_preset->labelsize(10);
         flanger_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_preset->textsize(10);
+        flanger_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_preset->callback((Fl_Callback*)cb_flanger_preset);
         flanger_preset->when(FL_WHEN_RELEASE_ALWAYS);
         flanger_preset->menu(menu_flanger_preset);
@@ -6718,6 +6686,7 @@ R average.");
         flanger_lfotype->labelsize(10);
         flanger_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_lfotype->textsize(10);
+        flanger_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_lfotype->callback((Fl_Callback*)cb_flanger_lfotype);
         flanger_lfotype->menu(menu_flanger_lfotype);
       } // Fl_Choice* flanger_lfotype
@@ -6725,7 +6694,7 @@ R average.");
         flanger_subs->down_box(FL_BORDER_BOX);
         flanger_subs->labelsize(10);
         flanger_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        flanger_subs->callback((Fl_Callback*)cb_flanger_subs);
+        flanger_subs->callback((Fl_Callback*)cb_flanger_subs, (void*)(2));
       } // Fl_Check_Button* flanger_subs
       { flanger_stdf = new SliderW(373, 528, 100, 10, "St.df");
         flanger_stdf->type(5);
@@ -6817,25 +6786,22 @@ R average.");
       REVERB->labelfont(1);
       REVERB->user_data((void*)(1));
       REVERB->align(96|FL_ALIGN_INSIDE);
-      { reverb_activar = new LC_Button(485, 417, 34, 18, "On");
-        reverb_activar->box(FL_UP_BOX);
+      { reverb_activar = new Fl_Light_Button(485, 417, 34, 18, "On");
         reverb_activar->shortcut(0x39);
         reverb_activar->color((Fl_Color)62);
         reverb_activar->selection_color((Fl_Color)1);
-        reverb_activar->labeltype(FL_NORMAL_LABEL);
-        reverb_activar->labelfont(0);
         reverb_activar->labelsize(10);
-        reverb_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        reverb_activar->callback((Fl_Callback*)cb_reverb_activar);
+        reverb_activar->callback((Fl_Callback*)cb_reverb_activar, (void*)(2));
         reverb_activar->align(68|FL_ALIGN_INSIDE);
         reverb_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* reverb_activar
+      } // Fl_Light_Button* reverb_activar
       { reverb_preset = new Fl_Choice(557, 417, 76, 18, "Preset");
         reverb_preset->down_box(FL_BORDER_BOX);
         reverb_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         reverb_preset->labelsize(10);
         reverb_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_preset->textsize(10);
+        reverb_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_preset->callback((Fl_Callback*)cb_reverb_preset);
         reverb_preset->when(FL_WHEN_RELEASE_ALWAYS);
         reverb_preset->menu(menu_reverb_preset);
@@ -6928,6 +6894,7 @@ R average.");
         reverb_type->labelsize(10);
         reverb_type->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_type->textsize(10);
+        reverb_type->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_type->callback((Fl_Callback*)cb_reverb_type);
         reverb_type->menu(menu_reverb_type);
       } // Fl_Choice* reverb_type
@@ -7008,25 +6975,21 @@ R average.");
       PEQ->labelfont(1);
       PEQ->user_data((void*)(1));
       PEQ->align(96|FL_ALIGN_INSIDE);
-      { eqp_activar = new LC_Button(644, 417, 34, 18, "On");
-        eqp_activar->box(FL_UP_BOX);
+      { eqp_activar = new Fl_Light_Button(644, 417, 34, 18, "On");
         eqp_activar->shortcut(0x30);
         eqp_activar->color((Fl_Color)62);
         eqp_activar->selection_color((Fl_Color)1);
-        eqp_activar->labeltype(FL_NORMAL_LABEL);
-        eqp_activar->labelfont(0);
         eqp_activar->labelsize(10);
-        eqp_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        eqp_activar->callback((Fl_Callback*)cb_eqp_activar);
-        eqp_activar->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+        eqp_activar->callback((Fl_Callback*)cb_eqp_activar, (void*)(2));
         eqp_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* eqp_activar
+      } // Fl_Light_Button* eqp_activar
       { eqp_preset = new Fl_Choice(716, 417, 76, 18, "Preset");
         eqp_preset->down_box(FL_BORDER_BOX);
         eqp_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         eqp_preset->labelsize(10);
         eqp_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eqp_preset->textsize(10);
+        eqp_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eqp_preset->callback((Fl_Callback*)cb_eqp_preset);
         eqp_preset->when(FL_WHEN_RELEASE_ALWAYS);
         eqp_preset->menu(menu_eqp_preset);
@@ -7214,25 +7177,22 @@ R average.");
       WHAWHA->user_data((void*)(1));
       WHAWHA->align(96|FL_ALIGN_INSIDE);
       WHAWHA->hide();
-      { WhaWha_activar = new LC_Button(167, 30, 34, 18, "On");
-        WhaWha_activar->box(FL_UP_BOX);
+      { WhaWha_activar = new Fl_Light_Button(167, 30, 34, 18, "On");
         WhaWha_activar->shortcut(0x36);
         WhaWha_activar->color((Fl_Color)62);
         WhaWha_activar->selection_color((Fl_Color)1);
-        WhaWha_activar->labeltype(FL_NORMAL_LABEL);
-        WhaWha_activar->labelfont(0);
         WhaWha_activar->labelsize(10);
-        WhaWha_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        WhaWha_activar->callback((Fl_Callback*)cb_WhaWha_activar);
+        WhaWha_activar->callback((Fl_Callback*)cb_WhaWha_activar, (void*)(2));
         WhaWha_activar->align(68|FL_ALIGN_INSIDE);
         WhaWha_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* WhaWha_activar
+      } // Fl_Light_Button* WhaWha_activar
       { WhaWha_preset = new Fl_Choice(239, 30, 76, 18, "Preset");
         WhaWha_preset->down_box(FL_BORDER_BOX);
         WhaWha_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         WhaWha_preset->labelsize(10);
         WhaWha_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_preset->textsize(10);
+        WhaWha_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_preset->callback((Fl_Callback*)cb_WhaWha_preset);
         WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
         WhaWha_preset->menu(menu_WhaWha_preset);
@@ -7310,6 +7270,7 @@ R average.");
         WhaWha_lfotype->labelsize(10);
         WhaWha_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_lfotype->textsize(10);
+        WhaWha_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_lfotype->callback((Fl_Callback*)cb_WhaWha_lfotype);
         WhaWha_lfotype->menu(menu_WhaWha_lfotype);
       } // Fl_Choice* WhaWha_lfotype
@@ -7403,25 +7364,22 @@ R average.");
       ALIENWAH->user_data((void*)(1));
       ALIENWAH->align(96|FL_ALIGN_INSIDE);
       ALIENWAH->hide();
-      { Alienwah_activar = new LC_Button(360, 27, 34, 18, "On");
-        Alienwah_activar->box(FL_UP_BOX);
+      { Alienwah_activar = new Fl_Light_Button(360, 27, 34, 18, "On");
         Alienwah_activar->shortcut(0x36);
         Alienwah_activar->color((Fl_Color)62);
         Alienwah_activar->selection_color((Fl_Color)1);
-        Alienwah_activar->labeltype(FL_NORMAL_LABEL);
-        Alienwah_activar->labelfont(0);
         Alienwah_activar->labelsize(10);
-        Alienwah_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        Alienwah_activar->callback((Fl_Callback*)cb_Alienwah_activar);
+        Alienwah_activar->callback((Fl_Callback*)cb_Alienwah_activar, (void*)(2));
         Alienwah_activar->align(68|FL_ALIGN_INSIDE);
         Alienwah_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* Alienwah_activar
+      } // Fl_Light_Button* Alienwah_activar
       { Alienwah_preset = new Fl_Choice(432, 27, 76, 18, "Preset");
         Alienwah_preset->down_box(FL_BORDER_BOX);
         Alienwah_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         Alienwah_preset->labelsize(10);
         Alienwah_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_preset->textsize(10);
+        Alienwah_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset);
         Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
         Alienwah_preset->menu(menu_Alienwah_preset);
@@ -7499,6 +7457,7 @@ R average.");
         Alienwah_lfotype->labelsize(10);
         Alienwah_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_lfotype->textsize(10);
+        Alienwah_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_lfotype->callback((Fl_Callback*)cb_Alienwah_lfotype);
         Alienwah_lfotype->menu(menu_Alienwah_lfotype);
       } // Fl_Choice* Alienwah_lfotype
@@ -7609,25 +7568,22 @@ R average.");
       CABINET->user_data((void*)(1));
       CABINET->align(96|FL_ALIGN_INSIDE);
       CABINET->hide();
-      { Cabinet_activar = new LC_Button(40, 48, 34, 18, "On");
-        Cabinet_activar->box(FL_UP_BOX);
+      { Cabinet_activar = new Fl_Light_Button(40, 48, 34, 18, "On");
         Cabinet_activar->shortcut(0x32);
         Cabinet_activar->color((Fl_Color)62);
         Cabinet_activar->selection_color((Fl_Color)1);
-        Cabinet_activar->labeltype(FL_NORMAL_LABEL);
-        Cabinet_activar->labelfont(0);
         Cabinet_activar->labelsize(10);
-        Cabinet_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        Cabinet_activar->callback((Fl_Callback*)cb_Cabinet_activar);
+        Cabinet_activar->callback((Fl_Callback*)cb_Cabinet_activar, (void*)(2));
         Cabinet_activar->align(68|FL_ALIGN_INSIDE);
         Cabinet_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* Cabinet_activar
+      } // Fl_Light_Button* Cabinet_activar
       { Cabinet_preset = new Fl_Choice(80, 89, 106, 18, "Preset");
         Cabinet_preset->down_box(FL_BORDER_BOX);
         Cabinet_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         Cabinet_preset->labelsize(10);
         Cabinet_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Cabinet_preset->textsize(10);
+        Cabinet_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset);
         Cabinet_preset->when(FL_WHEN_RELEASE_ALWAYS);
         Cabinet_preset->menu(menu_Cabinet_preset);
@@ -7659,25 +7615,22 @@ R average.");
       PAN->user_data((void*)(1));
       PAN->align(96|FL_ALIGN_INSIDE);
       PAN->hide();
-      { pan_activar = new LC_Button(8, 216, 34, 18, "On");
-        pan_activar->box(FL_UP_BOX);
+      { pan_activar = new Fl_Light_Button(8, 216, 34, 18, "On");
         pan_activar->shortcut(0x36);
         pan_activar->color((Fl_Color)62);
         pan_activar->selection_color((Fl_Color)1);
-        pan_activar->labeltype(FL_NORMAL_LABEL);
-        pan_activar->labelfont(0);
         pan_activar->labelsize(10);
-        pan_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        pan_activar->callback((Fl_Callback*)cb_pan_activar);
+        pan_activar->callback((Fl_Callback*)cb_pan_activar, (void*)(2));
         pan_activar->align(68|FL_ALIGN_INSIDE);
         pan_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* pan_activar
+      } // Fl_Light_Button* pan_activar
       { pan_preset = new Fl_Choice(80, 216, 76, 18, "Preset");
         pan_preset->down_box(FL_BORDER_BOX);
         pan_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         pan_preset->labelsize(10);
         pan_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_preset->textsize(10);
+        pan_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_preset->callback((Fl_Callback*)cb_pan_preset);
         pan_preset->when(FL_WHEN_RELEASE_ALWAYS);
         pan_preset->menu(menu_pan_preset);
@@ -7703,7 +7656,7 @@ R average.");
         pan_autopan->down_box(FL_BORDER_BOX);
         pan_autopan->labelsize(10);
         pan_autopan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        pan_autopan->callback((Fl_Callback*)cb_pan_autopan);
+        pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
       } // Fl_Check_Button* pan_autopan
       { pan_pan = new SliderW(52, 273, 100, 10, "Pan");
         pan_pan->type(5);
@@ -7761,6 +7714,7 @@ R average.");
         pan_lfotype->labelsize(10);
         pan_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_lfotype->textsize(10);
+        pan_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_lfotype->callback((Fl_Callback*)cb_pan_lfotype);
         pan_lfotype->menu(menu_pan_lfotype);
       } // Fl_Choice* pan_lfotype
@@ -7784,7 +7738,7 @@ R average.");
         pan_extraon->down_box(FL_BORDER_BOX);
         pan_extraon->labelsize(10);
         pan_extraon->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        pan_extraon->callback((Fl_Callback*)cb_pan_extraon);
+        pan_extraon->callback((Fl_Callback*)cb_pan_extraon, (void*)(2));
       } // Fl_Check_Button* pan_extraon
       { pan_extra = new SliderW(52, 373, 100, 10, "E.S.");
         pan_extra->type(5);
@@ -7812,25 +7766,21 @@ R average.");
       HAR->user_data((void*)(1));
       HAR->align(96|FL_ALIGN_INSIDE);
       HAR->hide();
-      { har_activar = new LC_Button(326, 216, 34, 18, "On");
-        har_activar->box(FL_UP_BOX);
+      { har_activar = new Fl_Light_Button(326, 216, 34, 18, "On");
         har_activar->shortcut(0x30);
         har_activar->color((Fl_Color)62);
         har_activar->selection_color((Fl_Color)1);
-        har_activar->labeltype(FL_NORMAL_LABEL);
-        har_activar->labelfont(0);
         har_activar->labelsize(10);
-        har_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        har_activar->callback((Fl_Callback*)cb_har_activar);
-        har_activar->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+        har_activar->callback((Fl_Callback*)cb_har_activar, (void*)(2));
         har_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* har_activar
+      } // Fl_Light_Button* har_activar
       { har_preset = new Fl_Choice(398, 216, 76, 18, "Preset");
         har_preset->down_box(FL_BORDER_BOX);
         har_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         har_preset->labelsize(10);
         har_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_preset->textsize(10);
+        har_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_preset->callback((Fl_Callback*)cb_har_preset);
         har_preset->when(FL_WHEN_RELEASE_ALWAYS);
         har_preset->menu(menu_har_preset);
@@ -7957,14 +7907,14 @@ R average.");
         har_MIDI->down_box(FL_BORDER_BOX);
         har_MIDI->labelsize(10);
         har_MIDI->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        har_MIDI->callback((Fl_Callback*)cb_har_MIDI);
+        har_MIDI->callback((Fl_Callback*)cb_har_MIDI, (void*)(2));
         har_MIDI->align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE);
       } // Fl_Check_Button* har_MIDI
       { har_SELECT = new Fl_Check_Button(330, 354, 37, 15, "SEL");
         har_SELECT->down_box(FL_BORDER_BOX);
         har_SELECT->labelsize(10);
         har_SELECT->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        har_SELECT->callback((Fl_Callback*)cb_har_SELECT);
+        har_SELECT->callback((Fl_Callback*)cb_har_SELECT, (void*)(2));
         har_SELECT->align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE);
       } // Fl_Check_Button* har_SELECT
       { har_chordname = new Fl_Box(377, 338, 98, 27);
@@ -8013,25 +7963,22 @@ R average.");
       MUSDELAY->user_data((void*)(1));
       MUSDELAY->align(96|FL_ALIGN_INSIDE);
       MUSDELAY->hide();
-      { musdelay_activar = new LC_Button(484, 215, 34, 18, "On");
-        musdelay_activar->box(FL_UP_BOX);
+      { musdelay_activar = new Fl_Light_Button(484, 215, 34, 18, "On");
         musdelay_activar->shortcut(0x35);
         musdelay_activar->color((Fl_Color)62);
         musdelay_activar->selection_color((Fl_Color)1);
-        musdelay_activar->labeltype(FL_NORMAL_LABEL);
-        musdelay_activar->labelfont(0);
         musdelay_activar->labelsize(10);
-        musdelay_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        musdelay_activar->callback((Fl_Callback*)cb_musdelay_activar);
+        musdelay_activar->callback((Fl_Callback*)cb_musdelay_activar, (void*)(2));
         musdelay_activar->align(68|FL_ALIGN_INSIDE);
         musdelay_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* musdelay_activar
+      } // Fl_Light_Button* musdelay_activar
       { musdelay_preset = new Fl_Choice(556, 215, 76, 18, "Preset");
         musdelay_preset->down_box(FL_BORDER_BOX);
         musdelay_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         musdelay_preset->labelsize(10);
         musdelay_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_preset->textsize(10);
+        musdelay_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset);
         musdelay_preset->when(FL_WHEN_RELEASE_ALWAYS);
         musdelay_preset->menu(menu_musdelay_preset);
@@ -8109,6 +8056,7 @@ R average.");
         musdelay_delay1->labelsize(10);
         musdelay_delay1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay1->textsize(10);
+        musdelay_delay1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay1->callback((Fl_Callback*)cb_musdelay_delay1);
         musdelay_delay1->menu(menu_musdelay_delay1);
       } // Fl_Choice* musdelay_delay1
@@ -8117,6 +8065,7 @@ R average.");
         musdelay_delay3->labelsize(10);
         musdelay_delay3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay3->textsize(10);
+        musdelay_delay3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay3->callback((Fl_Callback*)cb_musdelay_delay3);
         musdelay_delay3->menu(menu_musdelay_delay3);
       } // Fl_Choice* musdelay_delay3
@@ -8125,6 +8074,7 @@ R average.");
         musdelay_delay2->labelsize(10);
         musdelay_delay2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay2->textsize(10);
+        musdelay_delay2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay2->callback((Fl_Callback*)cb_musdelay_delay2);
         musdelay_delay2->menu(menu_musdelay_delay2);
       } // Fl_Choice* musdelay_delay2
@@ -8237,25 +8187,22 @@ R average.");
       GATE->user_data((void*)(1));
       GATE->align(96|FL_ALIGN_INSIDE);
       GATE->hide();
-      { gate_activar = new LC_Button(326, 417, 34, 18, "On");
-        gate_activar->box(FL_UP_BOX);
+      { gate_activar = new Fl_Light_Button(326, 417, 34, 18, "On");
         gate_activar->shortcut(0x32);
         gate_activar->color((Fl_Color)62);
         gate_activar->selection_color((Fl_Color)1);
-        gate_activar->labeltype(FL_NORMAL_LABEL);
-        gate_activar->labelfont(0);
         gate_activar->labelsize(10);
-        gate_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        gate_activar->callback((Fl_Callback*)cb_gate_activar);
+        gate_activar->callback((Fl_Callback*)cb_gate_activar, (void*)(2));
         gate_activar->align(68|FL_ALIGN_INSIDE);
         gate_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* gate_activar
+      } // Fl_Light_Button* gate_activar
       { gate_preset = new Fl_Choice(398, 417, 76, 18, "Preset");
         gate_preset->down_box(FL_BORDER_BOX);
         gate_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         gate_preset->labelsize(10);
         gate_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         gate_preset->textsize(10);
+        gate_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         gate_preset->callback((Fl_Callback*)cb_gate_preset);
         gate_preset->when(FL_WHEN_RELEASE_ALWAYS);
         gate_preset->menu(menu_gate_preset);
@@ -8390,25 +8337,22 @@ R average.");
       NEWDIST->user_data((void*)(1));
       NEWDIST->align(96|FL_ALIGN_INSIDE);
       NEWDIST->hide();
-      { newdist_activar = new LC_Button(325, 215, 34, 18, "On");
-        newdist_activar->box(FL_UP_BOX);
+      { newdist_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         newdist_activar->shortcut(0x33);
         newdist_activar->color((Fl_Color)62);
         newdist_activar->selection_color((Fl_Color)1);
-        newdist_activar->labeltype(FL_NORMAL_LABEL);
-        newdist_activar->labelfont(0);
         newdist_activar->labelsize(10);
-        newdist_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        newdist_activar->callback((Fl_Callback*)cb_newdist_activar);
+        newdist_activar->callback((Fl_Callback*)cb_newdist_activar, (void*)(2));
         newdist_activar->align(68|FL_ALIGN_INSIDE);
         newdist_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* newdist_activar
+      } // Fl_Light_Button* newdist_activar
       { newdist_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         newdist_preset->down_box(FL_BORDER_BOX);
         newdist_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         newdist_preset->labelsize(10);
         newdist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_preset->textsize(10);
+        newdist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_preset->callback((Fl_Callback*)cb_newdist_preset);
         newdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         newdist_preset->menu(menu_newdist_preset);
@@ -8487,6 +8431,7 @@ R average.");
         newdist_tipo->labelsize(10);
         newdist_tipo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_tipo->textsize(10);
+        newdist_tipo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_tipo->callback((Fl_Callback*)cb_newdist_tipo);
         newdist_tipo->menu(menu_newdist_tipo);
       } // Fl_Choice* newdist_tipo
@@ -8494,7 +8439,7 @@ R average.");
         newdist_neg->down_box(FL_BORDER_BOX);
         newdist_neg->labelsize(10);
         newdist_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        newdist_neg->callback((Fl_Callback*)cb_newdist_neg);
+        newdist_neg->callback((Fl_Callback*)cb_newdist_neg, (void*)(2));
       } // Fl_Check_Button* newdist_neg
       { newdist_st = new SliderW(372, 317, 100, 10, "Color");
         newdist_st->type(5);
@@ -8549,7 +8494,7 @@ R average.");
         newdist_pf->down_box(FL_BORDER_BOX);
         newdist_pf->labelsize(10);
         newdist_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        newdist_pf->callback((Fl_Callback*)cb_newdist_pf);
+        newdist_pf->callback((Fl_Callback*)cb_newdist_pf, (void*)(2));
       } // Fl_Check_Button* newdist_pf
       { newdist_lpf = new SliderW(372, 370, 100, 10, "LPF");
         newdist_lpf->type(5);
@@ -8593,25 +8538,22 @@ R average.");
       APHASER->user_data((void*)(1));
       APHASER->align(96|FL_ALIGN_INSIDE);
       APHASER->hide();
-      { aphaser_activar = new LC_Button(325, 220, 34, 18, "On");
-        aphaser_activar->box(FL_UP_BOX);
+      { aphaser_activar = new Fl_Light_Button(325, 220, 34, 18, "On");
         aphaser_activar->shortcut(0x37);
         aphaser_activar->color((Fl_Color)62);
         aphaser_activar->selection_color((Fl_Color)1);
-        aphaser_activar->labeltype(FL_NORMAL_LABEL);
-        aphaser_activar->labelfont(0);
         aphaser_activar->labelsize(10);
-        aphaser_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        aphaser_activar->callback((Fl_Callback*)cb_aphaser_activar);
+        aphaser_activar->callback((Fl_Callback*)cb_aphaser_activar, (void*)(2));
         aphaser_activar->align(68|FL_ALIGN_INSIDE);
         aphaser_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* aphaser_activar
+      } // Fl_Light_Button* aphaser_activar
       { aphaser_preset = new Fl_Choice(397, 220, 76, 18, "Preset");
         aphaser_preset->down_box(FL_BORDER_BOX);
         aphaser_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         aphaser_preset->labelsize(10);
         aphaser_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_preset->textsize(10);
+        aphaser_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset);
         aphaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
         aphaser_preset->menu(menu_aphaser_preset);
@@ -8639,6 +8581,7 @@ R average.");
         aphaser_lfotype->labelsize(10);
         aphaser_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_lfotype->textsize(10);
+        aphaser_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_lfotype->callback((Fl_Callback*)cb_aphaser_lfotype);
         aphaser_lfotype->menu(menu_aphaser_lfotype);
       } // Fl_Choice* aphaser_lfotype
@@ -8773,13 +8716,13 @@ R average.");
         aphaser_hyper->down_box(FL_BORDER_BOX);
         aphaser_hyper->labelsize(10);
         aphaser_hyper->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        aphaser_hyper->callback((Fl_Callback*)cb_aphaser_hyper);
+        aphaser_hyper->callback((Fl_Callback*)cb_aphaser_hyper, (void*)(2));
       } // Fl_Check_Button* aphaser_hyper
       { aphaser_subs = new Fl_Check_Button(330, 381, 60, 15, "Subtract");
         aphaser_subs->down_box(FL_BORDER_BOX);
         aphaser_subs->labelsize(10);
         aphaser_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        aphaser_subs->callback((Fl_Callback*)cb_aphaser_subs);
+        aphaser_subs->callback((Fl_Callback*)cb_aphaser_subs, (void*)(2));
       } // Fl_Check_Button* aphaser_subs
       APHASER->end();
     } // Fl_Group* APHASER
@@ -8790,25 +8733,22 @@ R average.");
       VALVE->labelfont(1);
       VALVE->user_data((void*)(1));
       VALVE->align(96|FL_ALIGN_INSIDE);
-      { valve_activar = new LC_Button(325, 215, 34, 18, "On");
-        valve_activar->box(FL_UP_BOX);
+      { valve_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         valve_activar->shortcut(0x33);
         valve_activar->color((Fl_Color)62);
         valve_activar->selection_color((Fl_Color)1);
-        valve_activar->labeltype(FL_NORMAL_LABEL);
-        valve_activar->labelfont(0);
         valve_activar->labelsize(10);
-        valve_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        valve_activar->callback((Fl_Callback*)cb_valve_activar);
+        valve_activar->callback((Fl_Callback*)cb_valve_activar, (void*)(2));
         valve_activar->align(68|FL_ALIGN_INSIDE);
         valve_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* valve_activar
+      } // Fl_Light_Button* valve_activar
       { valve_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         valve_preset->down_box(FL_BORDER_BOX);
         valve_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         valve_preset->labelsize(10);
         valve_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_preset->textsize(10);
+        valve_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_preset->callback((Fl_Callback*)cb_valve_preset);
         valve_preset->when(FL_WHEN_RELEASE_ALWAYS);
         valve_preset->menu(menu_valve_preset);
@@ -8900,7 +8840,7 @@ R average.");
         valve_ed->down_box(FL_BORDER_BOX);
         valve_ed->labelsize(10);
         valve_ed->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_ed->callback((Fl_Callback*)cb_valve_ed);
+        valve_ed->callback((Fl_Callback*)cb_valve_ed, (void*)(2));
       } // Fl_Check_Button* valve_ed
       { valve_Q = new SliderW(373, 323, 100, 10, "Dist,");
         valve_Q->type(5);
@@ -8938,19 +8878,19 @@ R average.");
         valve_pf->down_box(FL_BORDER_BOX);
         valve_pf->labelsize(10);
         valve_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_pf->callback((Fl_Callback*)cb_valve_pf);
+        valve_pf->callback((Fl_Callback*)cb_valve_pf, (void*)(2));
       } // Fl_Check_Button* valve_pf
       { valve_st = new Fl_Check_Button(385, 350, 30, 15, "Stereo");
         valve_st->down_box(FL_BORDER_BOX);
         valve_st->labelsize(10);
         valve_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_st->callback((Fl_Callback*)cb_valve_st);
+        valve_st->callback((Fl_Callback*)cb_valve_st, (void*)(2));
       } // Fl_Check_Button* valve_st
       { valve_neg = new Fl_Check_Button(434, 350, 40, 15, "Neg.");
         valve_neg->down_box(FL_BORDER_BOX);
         valve_neg->labelsize(10);
         valve_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_neg->callback((Fl_Callback*)cb_valve_neg);
+        valve_neg->callback((Fl_Callback*)cb_valve_neg, (void*)(2));
       } // Fl_Check_Button* valve_neg
       { valve_lpf = new SliderW(373, 367, 100, 10, "LPF");
         valve_lpf->type(5);
@@ -8995,25 +8935,22 @@ R average.");
       DFLANGE->user_data((void*)(1));
       DFLANGE->align(96|FL_ALIGN_INSIDE);
       DFLANGE->hide();
-      { dflange_activar = new LC_Button(325, 215, 34, 18, "On");
-        dflange_activar->box(FL_UP_BOX);
+      { dflange_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         dflange_activar->shortcut(0x38);
         dflange_activar->color((Fl_Color)62);
         dflange_activar->selection_color((Fl_Color)1);
-        dflange_activar->labeltype(FL_NORMAL_LABEL);
-        dflange_activar->labelfont(0);
         dflange_activar->labelsize(10);
-        dflange_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        dflange_activar->callback((Fl_Callback*)cb_dflange_activar);
+        dflange_activar->callback((Fl_Callback*)cb_dflange_activar, (void*)(2));
         dflange_activar->align(68|FL_ALIGN_INSIDE);
         dflange_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* dflange_activar
+      } // Fl_Light_Button* dflange_activar
       { dflange_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         dflange_preset->down_box(FL_BORDER_BOX);
         dflange_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         dflange_preset->labelsize(10);
         dflange_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_preset->textsize(10);
+        dflange_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_preset->callback((Fl_Callback*)cb_dflange_preset);
         dflange_preset->when(FL_WHEN_RELEASE_ALWAYS);
         dflange_preset->menu(menu_dflange_preset);
@@ -9157,13 +9094,13 @@ R average.");
         dflange_subs->down_box(FL_BORDER_BOX);
         dflange_subs->labelsize(10);
         dflange_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_subs->callback((Fl_Callback*)cb_dflange_subs);
+        dflange_subs->callback((Fl_Callback*)cb_dflange_subs, (void*)(2));
       } // Fl_Check_Button* dflange_subs
       { dflange_tz = new Fl_Check_Button(395, 324, 64, 15, "Th. zero");
         dflange_tz->down_box(FL_BORDER_BOX);
         dflange_tz->labelsize(10);
         dflange_tz->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_tz->callback((Fl_Callback*)cb_dflange_tz);
+        dflange_tz->callback((Fl_Callback*)cb_dflange_tz, (void*)(2));
       } // Fl_Check_Button* dflange_tz
       { dflange_freq = new SliderW(372, 339, 100, 10, "Tempo");
         dflange_freq->type(5);
@@ -9205,6 +9142,7 @@ R average.");
         dflange_lfotype->labelsize(10);
         dflange_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_lfotype->textsize(10);
+        dflange_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_lfotype->callback((Fl_Callback*)cb_dflange_lfotype);
         dflange_lfotype->menu(menu_dflange_lfotype);
       } // Fl_Choice* dflange_lfotype
@@ -9234,25 +9172,22 @@ R average.");
       RING->user_data((void*)(1));
       RING->align(96|FL_ALIGN_INSIDE);
       RING->hide();
-      { ring_activar = new LC_Button(325, 215, 34, 18, "On");
-        ring_activar->box(FL_UP_BOX);
+      { ring_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         ring_activar->shortcut(0x34);
         ring_activar->color((Fl_Color)62);
         ring_activar->selection_color((Fl_Color)1);
-        ring_activar->labeltype(FL_NORMAL_LABEL);
-        ring_activar->labelfont(0);
         ring_activar->labelsize(10);
-        ring_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        ring_activar->callback((Fl_Callback*)cb_ring_activar);
+        ring_activar->callback((Fl_Callback*)cb_ring_activar, (void*)(2));
         ring_activar->align(68|FL_ALIGN_INSIDE);
         ring_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* ring_activar
+      } // Fl_Light_Button* ring_activar
       { ring_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         ring_preset->down_box(FL_BORDER_BOX);
         ring_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         ring_preset->labelsize(10);
         ring_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_preset->textsize(10);
+        ring_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_preset->callback((Fl_Callback*)cb_ring_preset);
         ring_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ring_preset->menu(menu_ring_preset);
@@ -9344,13 +9279,13 @@ R average.");
         ring_st->down_box(FL_BORDER_BOX);
         ring_st->labelsize(10);
         ring_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ring_st->callback((Fl_Callback*)cb_ring_st);
+        ring_st->callback((Fl_Callback*)cb_ring_st, (void*)(2));
       } // Fl_Check_Button* ring_st
       { ring_afreq = new Fl_Check_Button(400, 303, 30, 15, "Auto Freq");
         ring_afreq->down_box(FL_BORDER_BOX);
         ring_afreq->labelsize(10);
         ring_afreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ring_afreq->callback((Fl_Callback*)cb_ring_afreq);
+        ring_afreq->callback((Fl_Callback*)cb_ring_afreq, (void*)(2));
       } // Fl_Check_Button* ring_afreq
       { ring_depth = new SliderW(371, 317, 100, 10, "Depth");
         ring_depth->type(5);
@@ -9459,25 +9394,22 @@ R average.");
       EXCITER->user_data((void*)(1));
       EXCITER->align(96|FL_ALIGN_INSIDE);
       EXCITER->hide();
-      { exciter_activar = new LC_Button(325, 215, 34, 18, "On");
-        exciter_activar->box(FL_UP_BOX);
+      { exciter_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         exciter_activar->shortcut(0x31);
         exciter_activar->color((Fl_Color)62);
         exciter_activar->selection_color((Fl_Color)1);
-        exciter_activar->labeltype(FL_NORMAL_LABEL);
-        exciter_activar->labelfont(0);
         exciter_activar->labelsize(10);
-        exciter_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        exciter_activar->callback((Fl_Callback*)cb_exciter_activar);
+        exciter_activar->callback((Fl_Callback*)cb_exciter_activar, (void*)(2));
         exciter_activar->align(68|FL_ALIGN_INSIDE);
         exciter_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* exciter_activar
+      } // Fl_Light_Button* exciter_activar
       { exciter_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         exciter_preset->down_box(FL_BORDER_BOX);
         exciter_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         exciter_preset->labelsize(10);
         exciter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         exciter_preset->textsize(10);
+        exciter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         exciter_preset->callback((Fl_Callback*)cb_exciter_preset);
         exciter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         exciter_preset->menu(menu_exciter_preset);
@@ -9714,25 +9646,22 @@ R average.");
       MBDIST->user_data((void*)(1));
       MBDIST->align(96|FL_ALIGN_INSIDE);
       MBDIST->hide();
-      { mbdist_activar = new LC_Button(325, 215, 34, 18, "On");
-        mbdist_activar->box(FL_UP_BOX);
+      { mbdist_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         mbdist_activar->shortcut(0x33);
         mbdist_activar->color((Fl_Color)62);
         mbdist_activar->selection_color((Fl_Color)1);
-        mbdist_activar->labeltype(FL_NORMAL_LABEL);
-        mbdist_activar->labelfont(0);
         mbdist_activar->labelsize(10);
-        mbdist_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        mbdist_activar->callback((Fl_Callback*)cb_mbdist_activar);
+        mbdist_activar->callback((Fl_Callback*)cb_mbdist_activar, (void*)(2));
         mbdist_activar->align(68|FL_ALIGN_INSIDE);
         mbdist_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* mbdist_activar
+      } // Fl_Light_Button* mbdist_activar
       { mbdist_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         mbdist_preset->down_box(FL_BORDER_BOX);
         mbdist_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         mbdist_preset->labelsize(10);
         mbdist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_preset->textsize(10);
+        mbdist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_preset->callback((Fl_Callback*)cb_mbdist_preset);
         mbdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         mbdist_preset->menu(menu_mbdist_preset);
@@ -9891,6 +9820,7 @@ R average.");
         mbdist_tipoL->labelsize(10);
         mbdist_tipoL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoL->textsize(10);
+        mbdist_tipoL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoL->callback((Fl_Callback*)cb_mbdist_tipoL);
         mbdist_tipoL->menu(menu_mbdist_tipoL);
       } // Fl_Choice* mbdist_tipoL
@@ -9900,6 +9830,7 @@ R average.");
         mbdist_tipoM->labelsize(10);
         mbdist_tipoM->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoM->textsize(10);
+        mbdist_tipoM->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoM->callback((Fl_Callback*)cb_mbdist_tipoM);
         mbdist_tipoM->menu(menu_mbdist_tipoM);
       } // Fl_Choice* mbdist_tipoM
@@ -9909,6 +9840,7 @@ R average.");
         mbdist_tipoH->labelsize(10);
         mbdist_tipoH->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoH->textsize(10);
+        mbdist_tipoH->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoH->callback((Fl_Callback*)cb_mbdist_tipoH);
         mbdist_tipoH->menu(menu_mbdist_tipoH);
       } // Fl_Choice* mbdist_tipoH
@@ -9933,13 +9865,13 @@ R average.");
         mbdist_st->down_box(FL_BORDER_BOX);
         mbdist_st->labelsize(10);
         mbdist_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbdist_st->callback((Fl_Callback*)cb_mbdist_st);
+        mbdist_st->callback((Fl_Callback*)cb_mbdist_st, (void*)(2));
       } // Fl_Check_Button* mbdist_st
       { mbdist_neg = new Fl_Check_Button(421, 378, 40, 15, "Neg.");
         mbdist_neg->down_box(FL_BORDER_BOX);
         mbdist_neg->labelsize(10);
         mbdist_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbdist_neg->callback((Fl_Callback*)cb_mbdist_neg);
+        mbdist_neg->callback((Fl_Callback*)cb_mbdist_neg, (void*)(2));
       } // Fl_Check_Button* mbdist_neg
       MBDIST->end();
     } // Fl_Group* MBDIST
@@ -9951,25 +9883,22 @@ R average.");
       ARPIE->user_data((void*)(1));
       ARPIE->align(96|FL_ALIGN_INSIDE);
       ARPIE->hide();
-      { arpie_activar = new LC_Button(325, 216, 34, 18, "On");
-        arpie_activar->box(FL_UP_BOX);
+      { arpie_activar = new Fl_Light_Button(325, 216, 34, 18, "On");
         arpie_activar->shortcut(0x35);
         arpie_activar->color((Fl_Color)62);
         arpie_activar->selection_color((Fl_Color)1);
-        arpie_activar->labeltype(FL_NORMAL_LABEL);
-        arpie_activar->labelfont(0);
         arpie_activar->labelsize(10);
-        arpie_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        arpie_activar->callback((Fl_Callback*)cb_arpie_activar);
+        arpie_activar->callback((Fl_Callback*)cb_arpie_activar, (void*)(2));
         arpie_activar->align(68|FL_ALIGN_INSIDE);
         arpie_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* arpie_activar
+      } // Fl_Light_Button* arpie_activar
       { arpie_preset = new Fl_Choice(397, 216, 76, 18, "Preset");
         arpie_preset->down_box(FL_BORDER_BOX);
         arpie_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         arpie_preset->labelsize(10);
         arpie_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         arpie_preset->textsize(10);
+        arpie_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         arpie_preset->callback((Fl_Callback*)cb_arpie_preset);
         arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
         arpie_preset->menu(menu_arpie_preset);
@@ -10126,19 +10055,14 @@ R average.");
       Tuner->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       Tuner->user_data((void*)(1));
       Tuner->align(96|FL_ALIGN_INSIDE);
-      { tuner_activar = new LC_Button(526, 88, 38, 18, "On");
-        tuner_activar->box(FL_UP_BOX);
+      { tuner_activar = new Fl_Light_Button(526, 88, 38, 18, "On");
         tuner_activar->shortcut(0x74);
         tuner_activar->color((Fl_Color)62);
         tuner_activar->selection_color((Fl_Color)1);
-        tuner_activar->labeltype(FL_NORMAL_LABEL);
-        tuner_activar->labelfont(0);
         tuner_activar->labelsize(10);
-        tuner_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        tuner_activar->callback((Fl_Callback*)cb_tuner_activar);
-        tuner_activar->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+        tuner_activar->callback((Fl_Callback*)cb_tuner_activar, (void*)(2));
         tuner_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* tuner_activar
+      } // Fl_Light_Button* tuner_activar
       { TunerLed* o = tuner_bar = new TunerLed(586, 91, 206, 14);
         tuner_bar->box(FL_THIN_DOWN_BOX);
         tuner_bar->color((Fl_Color)FL_DARK1);
@@ -10186,19 +10110,15 @@ R average.");
       InOut->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       InOut->user_data((void*)(1));
       InOut->align(96|FL_ALIGN_INSIDE);
-      { ActivarGeneral = new LC_Button(6, 30, 52, 18, "FX On");
-        ActivarGeneral->box(FL_UP_BOX);
+      { ActivarGeneral = new Fl_Light_Button(6, 30, 52, 18, "FX On");
         ActivarGeneral->shortcut(0x72);
         ActivarGeneral->color((Fl_Color)62);
         ActivarGeneral->selection_color((Fl_Color)1);
-        ActivarGeneral->labeltype(FL_NORMAL_LABEL);
-        ActivarGeneral->labelfont(0);
         ActivarGeneral->labelsize(10);
-        ActivarGeneral->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        ActivarGeneral->callback((Fl_Callback*)cb_ActivarGeneral);
+        ActivarGeneral->callback((Fl_Callback*)cb_ActivarGeneral, (void*)(2));
         ActivarGeneral->align(68|FL_ALIGN_INSIDE);
         ActivarGeneral->when(FL_WHEN_CHANGED);
-      } // LC_Button* ActivarGeneral
+      } // Fl_Light_Button* ActivarGeneral
       { Balance = new SliderW(15, 48, 19, 126, "FX%");
         Balance->type(4);
         Balance->box(FL_FLAT_BOX);
@@ -10296,19 +10216,14 @@ R average.");
       Midi->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       Midi->user_data((void*)(1));
       Midi->align(96|FL_ALIGN_INSIDE);
-      { nidi_activar = new LC_Button(526, 148, 38, 18, "On");
-        nidi_activar->box(FL_UP_BOX);
+      { nidi_activar = new Fl_Light_Button(526, 148, 38, 18, "On");
         nidi_activar->shortcut(0x6d);
         nidi_activar->color((Fl_Color)62);
         nidi_activar->selection_color((Fl_Color)1);
-        nidi_activar->labeltype(FL_NORMAL_LABEL);
-        nidi_activar->labelfont(0);
         nidi_activar->labelsize(10);
-        nidi_activar->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        nidi_activar->callback((Fl_Callback*)cb_nidi_activar);
-        nidi_activar->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+        nidi_activar->callback((Fl_Callback*)cb_nidi_activar, (void*)(2));
         nidi_activar->when(FL_WHEN_CHANGED);
-      } // LC_Button* nidi_activar
+      } // Fl_Light_Button* nidi_activar
       { Midi_out_Counter = new Fl_Counter(602, 154, 60, 20, "Channel");
         Midi_out_Counter->type(1);
         Midi_out_Counter->color((Fl_Color)62);
@@ -10396,19 +10311,15 @@ R average.");
         S_preset->labelsize(12);
         S_preset->callback((Fl_Callback*)cb_S_preset);
       } // Fl_Button* S_preset
-      { Compare = new LC_Button(373, 44, 72, 18, "Compare");
-        Compare->box(FL_UP_BOX);
+      { Compare = new Fl_Light_Button(373, 44, 72, 18, "Compare");
         Compare->shortcut(0x70);
         Compare->color((Fl_Color)62);
         Compare->selection_color((Fl_Color)1);
-        Compare->labeltype(FL_NORMAL_LABEL);
-        Compare->labelfont(0);
         Compare->labelsize(12);
-        Compare->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
-        Compare->callback((Fl_Callback*)cb_Compare);
+        Compare->callback((Fl_Callback*)cb_Compare, (void*)(2));
         Compare->align(68|FL_ALIGN_INSIDE);
         Compare->when(FL_WHEN_CHANGED);
-      } // LC_Button* Compare
+      } // Fl_Light_Button* Compare
       { B_preset = new Fl_Button(448, 44, 64, 18, "Bank");
         B_preset->shortcut(0x62);
         B_preset->color((Fl_Color)62);
@@ -10419,6 +10330,7 @@ R average.");
         WPreset_Name->color((Fl_Color)62);
         WPreset_Name->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WPreset_Name->textsize(24);
+        WPreset_Name->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WPreset_Name->callback((Fl_Callback*)cb_WPreset_Name);
         WPreset_Name->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
         o->maximum_size(22);
@@ -10512,6 +10424,7 @@ R average.");
       Avail_Bro->type(2);
       Avail_Bro->labelsize(18);
       Avail_Bro->textsize(18);
+      Avail_Bro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Browser* Avail_Bro
     { Pon = new Fl_Button(217, 168, 72, 25, "@<->");
       Pon->labelsize(18);
@@ -10521,6 +10434,7 @@ R average.");
       Order_Bro->type(2);
       Order_Bro->labelsize(18);
       Order_Bro->textsize(18);
+      Order_Bro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Browser* Order_Bro
     { Sube = new Fl_Button(508, 141, 72, 25, "@$2->");
       Sube->labelsize(18);
@@ -10553,6 +10467,7 @@ R average.");
       Look->color((Fl_Color)FL_BACKGROUND2_COLOR);
       Look->labelfont(1);
       Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      Look->user_data((void*)(1));
       Look->align(FL_ALIGN_TOP_LEFT);
       { B_C = new Fl_Button(20, 30, 90, 30, "Buttons");
         B_C->callback((Fl_Callback*)cb_B_C);
@@ -10571,6 +10486,7 @@ R average.");
         scheme_ch->labelsize(11);
         scheme_ch->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         scheme_ch->textsize(12);
+        scheme_ch->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         scheme_ch->callback((Fl_Callback*)cb_scheme_ch);
         scheme_ch->menu(menu_scheme_ch);
       } // Fl_Choice* scheme_ch
@@ -10578,6 +10494,7 @@ R average.");
         BackFiname->labelsize(11);
         BackFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BackFiname->textsize(12);
+        BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BackFiname->align(FL_ALIGN_TOP_LEFT);
       } // Fl_File_Input* BackFiname
       { BI_Browser = new Fl_Button(415, 80, 65, 25, "Browse");
@@ -10599,6 +10516,7 @@ R average.");
       AUDIO_SET->box(FL_PLASTIC_DOWN_FRAME);
       AUDIO_SET->labelfont(1);
       AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      AUDIO_SET->user_data((void*)(1));
       AUDIO_SET->align(FL_ALIGN_TOP_LEFT);
       { Pre_Serve = new Fl_Check_Button(358, 150, 90, 20, "Preserve Gain/Master");
         Pre_Serve->down_box(FL_DOWN_BOX);
@@ -10612,6 +10530,7 @@ R average.");
         Har_Qual->labelsize(10);
         Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Har_Qual->textsize(10);
+        Har_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
         Har_Qual->menu(menu_Har_Qual);
       } // Fl_Choice* Har_Qual
@@ -10629,6 +10548,7 @@ R average.");
       MIDI_SET->color((Fl_Color)FL_BACKGROUND2_COLOR);
       MIDI_SET->labelfont(1);
       MIDI_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      MIDI_SET->user_data((void*)(1));
       MIDI_SET->align(FL_ALIGN_TOP_LEFT);
       { D_A_Connect = new Fl_Check_Button(140, 198, 105, 20, "Auto Connect MIDI In");
         D_A_Connect->down_box(FL_DOWN_BOX);
@@ -10643,6 +10563,7 @@ R average.");
         BMidiIn->labelsize(11);
         BMidiIn->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BMidiIn->textsize(12);
+        BMidiIn->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
         BMidiIn->align(FL_ALIGN_TOP_LEFT);
       } // Fl_Browser* BMidiIn
@@ -10701,6 +10622,7 @@ R average.");
       JACK_SET->box(FL_PLASTIC_DOWN_FRAME);
       JACK_SET->labelfont(1);
       JACK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      JACK_SET->user_data((void*)(1));
       JACK_SET->align(FL_ALIGN_TOP_LEFT);
       { D_J_Connect = new Fl_Check_Button(455, 210, 105, 20, "Auto Connect Jack");
         D_J_Connect->down_box(FL_DOWN_BOX);
@@ -10715,6 +10637,7 @@ R average.");
         JackCo->labelsize(11);
         JackCo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         JackCo->textsize(12);
+        JackCo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         JackCo->align(FL_ALIGN_TOP_LEFT);
       } // Fl_Browser* JackCo
       JACK_SET->end();
@@ -10723,11 +10646,13 @@ R average.");
       MISC_SET->box(FL_PLASTIC_DOWN_FRAME);
       MISC_SET->labelfont(1);
       MISC_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      MISC_SET->user_data((void*)(1));
       MISC_SET->align(FL_ALIGN_TOP_LEFT);
-      { Username = new Fl_Input(85, 423, 240, 21, "Username:");
+      { Username = new Fl_Input(85, 417, 240, 21, "Username:");
         Username->labelsize(11);
         Username->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Username->textsize(11);
+        Username->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Username->callback((Fl_Callback*)cb_Username);
       } // Fl_Input* Username
       MISC_SET->end();
@@ -10736,11 +10661,13 @@ R average.");
       BANK_SET->box(FL_PLASTIC_DOWN_FRAME);
       BANK_SET->labelfont(1);
       BANK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      BANK_SET->user_data((void*)(1));
       BANK_SET->align(FL_ALIGN_TOP_LEFT);
       { BFiname = new Fl_File_Input(20, 488, 390, 30, "Bank Filename");
         BFiname->labelsize(11);
         BFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BFiname->textsize(12);
+        BFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BFiname->align(FL_ALIGN_TOP_LEFT);
       } // Fl_File_Input* BFiname
       { BF_Browser = new Fl_Button(415, 488, 65, 30, "Browse");
@@ -10756,6 +10683,7 @@ R average.");
     } // Fl_Box* Fondo4
     { Epar = new Fl_Browser(10, 58, 201, 348);
       Epar->type(2);
+      Epar->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       Epar->callback((Fl_Callback*)cb_Epar);
     } // Fl_Browser* Epar
     { GMM = new Fl_Button(10, 410, 135, 30, "Get MIDI Message");
@@ -10763,6 +10691,7 @@ R average.");
     } // Fl_Button* GMM
     { TPresets = new Fl_Browser(430, 61, 201, 348);
       TPresets->type(2);
+      TPresets->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       TPresets->when(3);
     } // Fl_Browser* TPresets
     { CopyF = new Fl_Button(430, 20, 95, 30, "Copy from: ");
@@ -10856,6 +10785,7 @@ R average.");
       Disp_Control->maximum(127);
       Disp_Control->step(1);
       Disp_Control->value(1);
+      Disp_Control->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Value_Input* Disp_Control
     MIDILearn->end();
   } // Fl_Double_Window* MIDILearn
@@ -10985,243 +10915,62 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
   MenuP->color(bcolor);
 MenuB->color(bcolor);
 
-eq_preset->selection_color(bcolor);
-compress_preset->selection_color(bcolor);
-dist_preset->selection_color(bcolor);
-dist_tipo->selection_color(bcolor);
-ovrd_preset->selection_color(bcolor);
-ovrd_tipo->selection_color(bcolor);
-echo_preset->selection_color(bcolor);
-chorux_preset->selection_color(bcolor);
-chorus_lfotype->selection_color(bcolor);
-phaser_preset->selection_color(bcolor);
-phaser_lfotype->selection_color(bcolor);
-aphaser_preset->selection_color(bcolor);
-aphaser_lfotype->selection_color(bcolor);
-flanger_preset->selection_color(bcolor);
-flanger_lfotype->selection_color(bcolor);
-reverb_preset->selection_color(bcolor);
-reverb_type->selection_color(bcolor);
-eqp_preset->selection_color(bcolor);
-WhaWha_preset->selection_color(bcolor);
-WhaWha_lfotype->selection_color(bcolor);
-Alienwah_preset->selection_color(bcolor);
-Alienwah_lfotype->selection_color(bcolor);
-Cabinet_preset->selection_color(bcolor);
-pan_preset->selection_color(bcolor);
-pan_lfotype->selection_color(bcolor);
-har_preset->selection_color(bcolor);
-musdelay_preset->selection_color(bcolor);
-musdelay_delay1->selection_color(bcolor);
-musdelay_delay2->selection_color(bcolor);
-musdelay_delay3->selection_color(bcolor);
-gate_preset->selection_color(bcolor);
-
-scheme_ch->selection_color(bcolor);
-Har_Qual->selection_color(bcolor);
-BMidiIn->selection_color(bcolor);
-JackCo->selection_color(bcolor);
-BFiname->selection_color(bcolor);
-
-
-Avail_Bro->selection_color(bcolor);
-Order_Bro->selection_color(bcolor);
-
-
-
-
-
-
-
 back_color = bcolor;
+
+Label_Color_Change(label_color);
 
 Fl::redraw();
 }
 
 void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
-  L1->labelcolor(bcolor);
-L2->labelcolor(bcolor);
-L3->labelcolor(bcolor);
-L4->labelcolor(bcolor);
-L5->labelcolor(bcolor);
-L6->labelcolor(bcolor);
-L7->labelcolor(bcolor);
-L8->labelcolor(bcolor);
-L9->labelcolor(bcolor);
-L10->labelcolor(bcolor);
-MIDI_LABEL->labelcolor(bcolor);
-TUNER_LABEL->labelcolor(bcolor);
-LABEL_IO->labelcolor(bcolor);
-
+  chfsize(0);
 ChangeActives();
 
-Etit->labelcolor(bcolor);
-
-eq_preset->labelcolor(bcolor);
-
-
-compress_preset->labelcolor(bcolor);
-Auto_Output->labelcolor(bcolor);
-Stereo->labelcolor(bcolor);
-
-
-
-dist_preset->labelcolor(bcolor);
-dist_tipo->labelcolor(bcolor);
-dist_st->labelcolor(bcolor);
-dist_neg->labelcolor(bcolor);
-dist_pf->labelcolor(bcolor);
-
-
-newdist_preset->labelcolor(bcolor);
-newdist_tipo->labelcolor(bcolor);
-newdist_st->labelcolor(bcolor);
-newdist_neg->labelcolor(bcolor);
-newdist_pf->labelcolor(bcolor);
-
-
-valve_preset->labelcolor(bcolor);
-valve_st->labelcolor(bcolor);
-valve_neg->labelcolor(bcolor);
-valve_pf->labelcolor(bcolor);
-valve_ed->labelcolor(bcolor);
-
-
-ring_st->labelcolor(bcolor);
-ring_afreq->labelcolor(bcolor);
-
-ovrd_preset->labelcolor(bcolor);
-ovrd_tipo->labelcolor(bcolor);
-ovrd_st->labelcolor(bcolor);
-ovrd_neg->labelcolor(bcolor);
-ovrd_pf->labelcolor(bcolor);
-
-
-echo_preset->labelcolor(bcolor);
-
-arpie_preset->labelcolor(bcolor);
-arpie_harm->labelcolor(bcolor);
-
-
-chorux_preset->labelcolor(bcolor);
-chorus_lfotype->labelcolor(bcolor);
-chorus_subs->labelcolor(bcolor);
-
-
-phaser_preset->labelcolor(bcolor);
-phaser_lfotype->labelcolor(bcolor);
-phaser_subs->labelcolor(bcolor);
-phaser_stages->labelcolor(bcolor);
-
-
-aphaser_preset->labelcolor(bcolor);
-aphaser_lfotype->labelcolor(bcolor);
-aphaser_subs->labelcolor(bcolor);
-aphaser_hyper->labelcolor(bcolor);
-aphaser_stages->labelcolor(bcolor);
-
-
-
-flanger_preset->labelcolor(bcolor);
-flanger_subs->labelcolor(bcolor);
-flanger_lfotype->labelcolor(bcolor);
-
-dflange_preset->labelcolor(bcolor);
-dflange_subs->labelcolor(bcolor);
-dflange_lfotype->labelcolor(bcolor);
-dflange_tz->labelcolor(bcolor);
-
-
-
-reverb_preset->labelcolor(bcolor);
-reverb_type->labelcolor(bcolor);
-
-
-
-eqp_preset->labelcolor(bcolor);
-
-
-
-WhaWha_preset->labelcolor(bcolor);
-WhaWha_lfotype->labelcolor(bcolor);
-
-Alienwah_preset->labelcolor(bcolor);
-Alienwah_lfotype->labelcolor(bcolor);
-
-
-
-Cabinet_preset->labelcolor(bcolor);
-
-
-
-
-pan_preset->labelcolor(bcolor);
-pan_lfotype->labelcolor(bcolor);
-pan_extraon->labelcolor(bcolor);
-pan_autopan->labelcolor(bcolor);
-
-
-
-har_preset->labelcolor(bcolor);
-har_SELECT->labelcolor(bcolor);
-har_MIDI->labelcolor(bcolor);
-har_chordname->labelcolor(bcolor);
-
-
-musdelay_preset->labelcolor(bcolor);
-musdelay_delay1->labelcolor(bcolor);
-musdelay_delay3->labelcolor(bcolor);
-musdelay_delay2->labelcolor(bcolor);
-
-
-
-
-gate_preset->labelcolor(bcolor);
-
-
-
-Midi_out_Counter->labelcolor(bcolor);
-
-LABEL_IO->labelcolor(bcolor);
-
-Preset_Counter->labelcolor(bcolor);
-PRESETS_LABEL->labelcolor(bcolor);
-
-
-WNote->labelcolor(bcolor);
-WRfreq->labelcolor(bcolor);
-WNfreq->labelcolor(bcolor);
-
-TITTLE_L->labelcolor(bcolor);
-DESC_L->labelcolor(bcolor);
-
-O_TITLE->labelcolor(bcolor);
-
-Look->labelcolor(bcolor);
-scheme_ch->labelcolor(bcolor);
-MIDI_SET->labelcolor(bcolor);
-BMidiIn->labelcolor(bcolor);
-D_A_Connect->labelcolor(bcolor);
-JACK_SET->labelcolor(bcolor);
-JackCo->labelcolor(bcolor);
-D_J_Connect->labelcolor(bcolor);
-Midi_In_Counter->labelcolor(bcolor);
-Har_In_Counter->labelcolor(bcolor);
-Har_Qual->labelcolor(bcolor);
-AUDIO_SET->labelcolor(bcolor);
-Pre_Serve->labelcolor(bcolor);
-INSTATE->labelcolor(bcolor);
-MISC_SET->labelcolor(bcolor);
-Username->labelcolor(bcolor);
-BANK_SET->labelcolor(bcolor);
-BFiname->labelcolor(bcolor);
-FSLabel->labelcolor(bcolor);
-BackFiname->labelcolor(bcolor);
-
-Mw0->labelcolor(bcolor);
-Mw1->labelcolor(bcolor);
-wMIDI->labelcolor(bcolor);
-
+for (int t=0; t<Settings->children();t++)
+  {
+    Fl_Widget *w = Settings->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);   
+    long long ud = (long long) w->user_data();
+    
+    if (ud==1)
+    {
+          
+     Fl_Group *g = (Fl_Group *)w;     
+      
+     for(int i=0;i<g->children();i++)
+       {
+
+         Fl_Widget *c = g->child(i);
+
+          c->labelcolor(label_color);
+          c->selection_color(back_color);
+          c->color(fore_color);
+       } 
+    } 
+ 
+  }
+
+for (int t=0; t<Order->children();t++)
+  {
+    Fl_Widget *w = Order->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);
+  }  
+  
+
+for (int t=0; t<MIDILearn->children();t++)
+  {
+    Fl_Widget *w = MIDILearn->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);
+  }  
 
 
 if (scheme_ch->value()==3)
@@ -11245,24 +10994,7 @@ Fl::redraw();
 }
 
 void RKRGUI::Buttons_Color_Change(Fl_Color bcolor) {
-  Preset_Counter->color(bcolor);
-Midi_In_Counter->color(bcolor);
-Har_In_Counter->color(bcolor);
-FSplus->color(bcolor);
-FSless->color(bcolor);
-Midi_out_Counter->color(bcolor);
-DAuthor->color(bcolor);
-WPreset_Name->color(bcolor);
-Open_Order->color(bcolor);
-S_new->color(bcolor);
-S_preset->color(bcolor);
-L_preset->color(bcolor);
-B_preset->color(bcolor);
-
-
-
-
-if (made)
+  if (made)
 {
 for (int t=0; t<ob->children();t++)
   {
@@ -11275,75 +11007,14 @@ for (int t=0; t<ob->children();t++)
 
 }
 
-ok_order->color(bcolor);
-Cancel_order->color(bcolor);
-Sube->color(bcolor);
-Baja->color(bcolor);
-Pon->color(bcolor);
 
-A_C->color(bcolor);
-B_C->color(bcolor);
-L_C->color(bcolor);
-K_C->color(bcolor);
-Prefs_OK->color(bcolor);
-BF_Browser->color(bcolor);
-BI_Browser->color(bcolor);
-
-GMM->color(bcolor);
-CopyF->color(bcolor);
-CopyT->color(bcolor);
-ClearA->color(bcolor);
-ClearP->color(bcolor);
-Assign->color(bcolor);
-CloseML->color(bcolor);
-CancelRec->color(bcolor);
-
-
-
-fore_color= bcolor;
-
-Fl::redraw();
+ fore_color= bcolor;
+ Label_Color_Change(label_color);
 }
 
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor) {
-  aphaser_hyper->selection_color(bcolor);
-aphaser_subs->selection_color(bcolor);
-newdist_pf->selection_color(bcolor);
-newdist_neg->selection_color(bcolor);
-har_MIDI->selection_color(bcolor);
-har_SELECT->selection_color(bcolor);
-pan_extraon->selection_color(bcolor);
-pan_autopan->selection_color(bcolor);
-flanger_subs->selection_color(bcolor);
-dflange_subs->selection_color(bcolor);
-dflange_tz->selection_color(bcolor);
-phaser_subs->selection_color(bcolor);
-chorus_subs->selection_color(bcolor);
-ovrd_neg->selection_color(bcolor);
-ovrd_st->selection_color(bcolor);
-ovrd_pf->selection_color(bcolor);
-dist_neg->selection_color(bcolor);
-dist_st->selection_color(bcolor);
-dist_pf->selection_color(bcolor);
-valve_neg->selection_color(bcolor);
-valve_st->selection_color(bcolor);
-valve_ed->selection_color(bcolor);
-valve_pf->selection_color(bcolor);
-ring_st->selection_color(bcolor);
-ring_afreq->selection_color(bcolor);
-mbdist_neg->selection_color(bcolor);
-mbdist_st->selection_color(bcolor);
-
-
-Auto_Output->selection_color(bcolor);
-Stereo->selection_color(bcolor);
- 
-
-
-
-
-leds_color=bcolor;
-
+  leds_color=bcolor;
+chfsize(0);
 
 
 Fl::redraw();
@@ -13550,13 +13221,15 @@ void RKRGUI::chfsize(int value) {
 for (int t=0; t<Principal->children();t++)
   {
     Fl_Widget *w = Principal->child(t);
+    long long ud = (long long) w->user_data();
   
      k= w->labelsize();
      k+=value;
      w->labelsize(k);
-       
+     w->labelcolor(label_color);  
+     if (ud !=2) w->selection_color(back_color); else w->selection_color(leds_color);
+     
    
-    long long ud = (long long) w->user_data();
     
     if (ud==1)
     {
@@ -13567,16 +13240,22 @@ for (int t=0; t<Principal->children();t++)
        {
 
          Fl_Widget *c = g->child(i);
-
+         long long uh = (long long) c->user_data();
+         
 
           k= c->labelsize();
           k+=value;
           c->labelsize(k);
+          c->labelcolor(label_color);
+          if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
+          c->color(fore_color);
+          
        } 
     } 
  
   }
 
+ 
   Fl::redraw();
 }
 

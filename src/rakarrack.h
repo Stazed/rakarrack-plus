@@ -13,14 +13,6 @@
 #include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Color_Chooser.H>
 
-class LC_Button : public Fl_Light_Button {
-public:
-  LC_Button(int x,int y, int w, int h, const char *label=0);
-  void draw();
-private:
-  EQ *efx_EQ1; 
-};
-
 class Analyzer : public Fl_Box {
 public:
   Analyzer(int x,int y, int w, int h, const char *label=0);
@@ -71,6 +63,7 @@ public:
 #include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Group.H>
+#include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
@@ -193,10 +186,10 @@ public:
   Fl_Box *L9;
   Fl_Box *L10;
   Fl_Group *EQ;
-  LC_Button *eq_activar;
+  Fl_Light_Button *eq_activar;
 private:
-  void cb_eq_activar_i(LC_Button*, void*);
-  static void cb_eq_activar(LC_Button*, void*);
+  void cb_eq_activar_i(Fl_Light_Button*, void*);
+  static void cb_eq_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *eq_preset;
 private:
@@ -265,10 +258,10 @@ private:
   static void cb_eq_10(SliderW*, void*);
 public:
   Fl_Group *COMPRESS;
-  LC_Button *compress_activar;
+  Fl_Light_Button *compress_activar;
 private:
-  void cb_compress_activar_i(LC_Button*, void*);
-  static void cb_compress_activar(LC_Button*, void*);
+  void cb_compress_activar_i(Fl_Light_Button*, void*);
+  static void cb_compress_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *compress_preset;
 private:
@@ -317,10 +310,10 @@ private:
   static void cb_Stereo(Fl_Check_Button*, void*);
 public:
   Fl_Group *DIST;
-  LC_Button *dist_activar;
+  Fl_Light_Button *dist_activar;
 private:
-  void cb_dist_activar_i(LC_Button*, void*);
-  static void cb_dist_activar(LC_Button*, void*);
+  void cb_dist_activar_i(Fl_Light_Button*, void*);
+  static void cb_dist_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *dist_preset;
 private:
@@ -390,10 +383,10 @@ private:
   static void cb_dist_hpf(SliderW*, void*);
 public:
   Fl_Group *OVRD;
-  LC_Button *ovrd_activar;
+  Fl_Light_Button *ovrd_activar;
 private:
-  void cb_ovrd_activar_i(LC_Button*, void*);
-  static void cb_ovrd_activar(LC_Button*, void*);
+  void cb_ovrd_activar_i(Fl_Light_Button*, void*);
+  static void cb_ovrd_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *ovrd_preset;
 private:
@@ -458,10 +451,10 @@ private:
   static void cb_ovrd_hpf(SliderW*, void*);
 public:
   Fl_Group *ECHO;
-  LC_Button *echo_activar;
+  Fl_Light_Button *echo_activar;
 private:
-  void cb_echo_activar_i(LC_Button*, void*);
-  static void cb_echo_activar(LC_Button*, void*);
+  void cb_echo_activar_i(Fl_Light_Button*, void*);
+  static void cb_echo_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *echo_preset;
 private:
@@ -510,10 +503,10 @@ private:
   static void cb_echo_damp(SliderW*, void*);
 public:
   Fl_Group *CHORUS;
-  LC_Button *chorus_activar;
+  Fl_Light_Button *chorus_activar;
 private:
-  void cb_chorus_activar_i(LC_Button*, void*);
-  static void cb_chorus_activar(LC_Button*, void*);
+  void cb_chorus_activar_i(Fl_Light_Button*, void*);
+  static void cb_chorus_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *chorux_preset;
 private:
@@ -578,10 +571,10 @@ private:
   static void cb_chorus_LR(SliderW*, void*);
 public:
   Fl_Group *PHASER;
-  LC_Button *phaser_activar;
+  Fl_Light_Button *phaser_activar;
 private:
-  void cb_phaser_activar_i(LC_Button*, void*);
-  static void cb_phaser_activar(LC_Button*, void*);
+  void cb_phaser_activar_i(Fl_Light_Button*, void*);
+  static void cb_phaser_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *phaser_preset;
 private:
@@ -651,10 +644,10 @@ private:
   static void cb_phaser_LR(SliderW*, void*);
 public:
   Fl_Group *FLANGER;
-  LC_Button *flanger_activar;
+  Fl_Light_Button *flanger_activar;
 private:
-  void cb_flanger_activar_i(LC_Button*, void*);
-  static void cb_flanger_activar(LC_Button*, void*);
+  void cb_flanger_activar_i(Fl_Light_Button*, void*);
+  static void cb_flanger_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *flanger_preset;
 private:
@@ -719,10 +712,10 @@ private:
   static void cb_flanger_LR(SliderW*, void*);
 public:
   Fl_Group *REVERB;
-  LC_Button *reverb_activar;
+  Fl_Light_Button *reverb_activar;
 private:
-  void cb_reverb_activar_i(LC_Button*, void*);
-  static void cb_reverb_activar(LC_Button*, void*);
+  void cb_reverb_activar_i(Fl_Light_Button*, void*);
+  static void cb_reverb_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *reverb_preset;
 private:
@@ -784,10 +777,10 @@ private:
   static void cb_reverb_damp(SliderW*, void*);
 public:
   Fl_Group *PEQ;
-  LC_Button *eqp_activar;
+  Fl_Light_Button *eqp_activar;
 private:
-  void cb_eqp_activar_i(LC_Button*, void*);
-  static void cb_eqp_activar(LC_Button*, void*);
+  void cb_eqp_activar_i(Fl_Light_Button*, void*);
+  static void cb_eqp_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *eqp_preset;
 private:
@@ -846,10 +839,10 @@ private:
   static void cb_eqp_HQ(SliderW*, void*);
 public:
   Fl_Group *WHAWHA;
-  LC_Button *WhaWha_activar;
+  Fl_Light_Button *WhaWha_activar;
 private:
-  void cb_WhaWha_activar_i(LC_Button*, void*);
-  static void cb_WhaWha_activar(LC_Button*, void*);
+  void cb_WhaWha_activar_i(Fl_Light_Button*, void*);
+  static void cb_WhaWha_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *WhaWha_preset;
 private:
@@ -909,10 +902,10 @@ private:
   static void cb_WhaWha_smooth(SliderW*, void*);
 public:
   Fl_Group *ALIENWAH;
-  LC_Button *Alienwah_activar;
+  Fl_Light_Button *Alienwah_activar;
 private:
-  void cb_Alienwah_activar_i(LC_Button*, void*);
-  static void cb_Alienwah_activar(LC_Button*, void*);
+  void cb_Alienwah_activar_i(Fl_Light_Button*, void*);
+  static void cb_Alienwah_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *Alienwah_preset;
 private:
@@ -977,10 +970,10 @@ private:
   static void cb_Alienwah_LR(SliderW*, void*);
 public:
   Fl_Group *CABINET;
-  LC_Button *Cabinet_activar;
+  Fl_Light_Button *Cabinet_activar;
 private:
-  void cb_Cabinet_activar_i(LC_Button*, void*);
-  static void cb_Cabinet_activar(LC_Button*, void*);
+  void cb_Cabinet_activar_i(Fl_Light_Button*, void*);
+  static void cb_Cabinet_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *Cabinet_preset;
 private:
@@ -994,10 +987,10 @@ private:
   static void cb_Cabinet_output(SliderW*, void*);
 public:
   Fl_Group *PAN;
-  LC_Button *pan_activar;
+  Fl_Light_Button *pan_activar;
 private:
-  void cb_pan_activar_i(LC_Button*, void*);
-  static void cb_pan_activar(LC_Button*, void*);
+  void cb_pan_activar_i(Fl_Light_Button*, void*);
+  static void cb_pan_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *pan_preset;
 private:
@@ -1052,10 +1045,10 @@ private:
   static void cb_pan_extra(SliderW*, void*);
 public:
   Fl_Group *HAR;
-  LC_Button *har_activar;
+  Fl_Light_Button *har_activar;
 private:
-  void cb_har_activar_i(LC_Button*, void*);
-  static void cb_har_activar(LC_Button*, void*);
+  void cb_har_activar_i(Fl_Light_Button*, void*);
+  static void cb_har_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *har_preset;
 private:
@@ -1120,10 +1113,10 @@ private:
   static void cb_har_type(SliderW*, void*);
 public:
   Fl_Group *MUSDELAY;
-  LC_Button *musdelay_activar;
+  Fl_Light_Button *musdelay_activar;
 private:
-  void cb_musdelay_activar_i(LC_Button*, void*);
-  static void cb_musdelay_activar(LC_Button*, void*);
+  void cb_musdelay_activar_i(Fl_Light_Button*, void*);
+  static void cb_musdelay_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *musdelay_preset;
 private:
@@ -1200,10 +1193,10 @@ private:
   static void cb_musdelay_damp(SliderW*, void*);
 public:
   Fl_Group *GATE;
-  LC_Button *gate_activar;
+  Fl_Light_Button *gate_activar;
 private:
-  void cb_gate_activar_i(LC_Button*, void*);
-  static void cb_gate_activar(LC_Button*, void*);
+  void cb_gate_activar_i(Fl_Light_Button*, void*);
+  static void cb_gate_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *gate_preset;
 private:
@@ -1247,10 +1240,10 @@ private:
   static void cb_gate_HPF(SliderW*, void*);
 public:
   Fl_Group *NEWDIST;
-  LC_Button *newdist_activar;
+  Fl_Light_Button *newdist_activar;
 private:
-  void cb_newdist_activar_i(LC_Button*, void*);
-  static void cb_newdist_activar(LC_Button*, void*);
+  void cb_newdist_activar_i(Fl_Light_Button*, void*);
+  static void cb_newdist_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *newdist_preset;
 private:
@@ -1320,10 +1313,10 @@ private:
   static void cb_newdist_hpf(SliderW*, void*);
 public:
   Fl_Group *APHASER;
-  LC_Button *aphaser_activar;
+  Fl_Light_Button *aphaser_activar;
 private:
-  void cb_aphaser_activar_i(LC_Button*, void*);
-  static void cb_aphaser_activar(LC_Button*, void*);
+  void cb_aphaser_activar_i(Fl_Light_Button*, void*);
+  static void cb_aphaser_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *aphaser_preset;
 private:
@@ -1393,10 +1386,10 @@ private:
   static void cb_aphaser_subs(Fl_Check_Button*, void*);
 public:
   Fl_Group *VALVE;
-  LC_Button *valve_activar;
+  Fl_Light_Button *valve_activar;
 private:
-  void cb_valve_activar_i(LC_Button*, void*);
-  static void cb_valve_activar(LC_Button*, void*);
+  void cb_valve_activar_i(Fl_Light_Button*, void*);
+  static void cb_valve_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *valve_preset;
 private:
@@ -1470,10 +1463,10 @@ private:
   static void cb_valve_hpf(SliderW*, void*);
 public:
   Fl_Group *DFLANGE;
-  LC_Button *dflange_activar;
+  Fl_Light_Button *dflange_activar;
 private:
-  void cb_dflange_activar_i(LC_Button*, void*);
-  static void cb_dflange_activar(LC_Button*, void*);
+  void cb_dflange_activar_i(Fl_Light_Button*, void*);
+  static void cb_dflange_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *dflange_preset;
 private:
@@ -1553,10 +1546,10 @@ private:
   static void cb_dflange_rnd(SliderW*, void*);
 public:
   Fl_Group *RING;
-  LC_Button *ring_activar;
+  Fl_Light_Button *ring_activar;
 private:
-  void cb_ring_activar_i(LC_Button*, void*);
-  static void cb_ring_activar(LC_Button*, void*);
+  void cb_ring_activar_i(Fl_Light_Button*, void*);
+  static void cb_ring_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *ring_preset;
 private:
@@ -1630,10 +1623,10 @@ private:
   static void cb_ring_squ(SliderW*, void*);
 public:
   Fl_Group *EXCITER;
-  LC_Button *exciter_activar;
+  Fl_Light_Button *exciter_activar;
 private:
-  void cb_exciter_activar_i(LC_Button*, void*);
-  static void cb_exciter_activar(LC_Button*, void*);
+  void cb_exciter_activar_i(Fl_Light_Button*, void*);
+  static void cb_exciter_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *exciter_preset;
 private:
@@ -1707,10 +1700,10 @@ private:
   static void cb_ex_10(SliderW*, void*);
 public:
   Fl_Group *MBDIST;
-  LC_Button *mbdist_activar;
+  Fl_Light_Button *mbdist_activar;
 private:
-  void cb_mbdist_activar_i(LC_Button*, void*);
-  static void cb_mbdist_activar(LC_Button*, void*);
+  void cb_mbdist_activar_i(Fl_Light_Button*, void*);
+  static void cb_mbdist_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *mbdist_preset;
 private:
@@ -1797,10 +1790,10 @@ private:
   static void cb_mbdist_neg(Fl_Check_Button*, void*);
 public:
   Fl_Group *ARPIE;
-  LC_Button *arpie_activar;
+  Fl_Light_Button *arpie_activar;
 private:
-  void cb_arpie_activar_i(LC_Button*, void*);
-  static void cb_arpie_activar(LC_Button*, void*);
+  void cb_arpie_activar_i(Fl_Light_Button*, void*);
+  static void cb_arpie_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *arpie_preset;
 private:
@@ -1854,10 +1847,10 @@ private:
   static void cb_arpie_harm(Fl_Counter*, void*);
 public:
   Fl_Group *Tuner;
-  LC_Button *tuner_activar;
+  Fl_Light_Button *tuner_activar;
 private:
-  void cb_tuner_activar_i(LC_Button*, void*);
-  static void cb_tuner_activar(LC_Button*, void*);
+  void cb_tuner_activar_i(Fl_Light_Button*, void*);
+  static void cb_tuner_activar(Fl_Light_Button*, void*);
 public:
   TunerLed *tuner_bar;
   Fl_Box *WNote;
@@ -1866,10 +1859,10 @@ public:
   Fl_Box *PINCHO;
   Fl_Box *TUNER_LABEL;
   Fl_Group *InOut;
-  LC_Button *ActivarGeneral;
+  Fl_Light_Button *ActivarGeneral;
 private:
-  void cb_ActivarGeneral_i(LC_Button*, void*);
-  static void cb_ActivarGeneral(LC_Button*, void*);
+  void cb_ActivarGeneral_i(Fl_Light_Button*, void*);
+  static void cb_ActivarGeneral(Fl_Light_Button*, void*);
 public:
   SliderW *Balance;
 private:
@@ -1890,10 +1883,10 @@ public:
   NewVum *output_vu;
   Fl_Box *LABEL_IO;
   Fl_Group *Midi;
-  LC_Button *nidi_activar;
+  Fl_Light_Button *nidi_activar;
 private:
-  void cb_nidi_activar_i(LC_Button*, void*);
-  static void cb_nidi_activar(LC_Button*, void*);
+  void cb_nidi_activar_i(Fl_Light_Button*, void*);
+  static void cb_nidi_activar(Fl_Light_Button*, void*);
 public:
   Fl_Counter *Midi_out_Counter;
 private:
@@ -1933,10 +1926,10 @@ private:
   void cb_S_preset_i(Fl_Button*, void*);
   static void cb_S_preset(Fl_Button*, void*);
 public:
-  LC_Button *Compare;
+  Fl_Light_Button *Compare;
 private:
-  void cb_Compare_i(LC_Button*, void*);
-  static void cb_Compare(LC_Button*, void*);
+  void cb_Compare_i(Fl_Light_Button*, void*);
+  static void cb_Compare(Fl_Light_Button*, void*);
 public:
   Fl_Button *B_preset;
 private:
