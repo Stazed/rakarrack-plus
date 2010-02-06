@@ -156,7 +156,7 @@ Recognize::schmittFloat (float *indatal, float *indatar)
 
   for (i = 0; i < PERIOD; i++)
     {
-      buf[i] = (short) (((indatal[i]+indatar[i])*.025) * 32768);
+      buf[i] = (short) ((indatal[i]+indatar[i]) * 32768);
     }
   schmittS16LE (buf);
 };
