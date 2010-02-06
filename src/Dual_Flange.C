@@ -219,7 +219,7 @@ Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the first left channel delay
 	
 	//Left Channel, delay B	
-	ldif1 = drB - floor(drB);
+	ldif1 = dlB - floor(dlB);
 	tmp0 = (kl + (int) floor(dlB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
 	if (tmp1 >= maxx_delay) tmp1 =  0;
