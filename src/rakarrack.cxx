@@ -10923,7 +10923,8 @@ Fl::redraw();
 }
 
 void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
-  chfsize(0);
+  label_color = bcolor;
+chfsize(0);
 ChangeActives();
 
 for (int t=0; t<Settings->children();t++)
@@ -10971,23 +10972,6 @@ for (int t=0; t<MIDILearn->children();t++)
      w->selection_color(back_color);
      w->color(fore_color);
   }  
-
-
-if (scheme_ch->value()==3)
-{
-About_Version->labelcolor(bcolor);
-AB_Title->labelcolor(bcolor);
-AB_SubTitle->labelcolor(bcolor);
-AB_Authors->labelcolor(bcolor);
-AB_A1->labelcolor(bcolor);
-AB_A2->labelcolor(bcolor);
-AB_A3->labelcolor(bcolor);
-AB_url->labelcolor(bcolor);
-}
-
-
-
-label_color = bcolor;
 
 
 Fl::redraw();
