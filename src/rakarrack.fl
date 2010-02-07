@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -878,18 +878,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {476 55 800 600} type Double box DOWN_BOX color 0 resizable size_range {640 480 3200 2400} visible
+Pexitprogram=1;}
+      xywh {469 48 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4345,7 +4343,7 @@ ex_9->value(rkr->efx_Exciter->getpar(9));
 ex_10->value(rkr->efx_Exciter->getpar(10));
 ex_lfreq->value(rkr->efx_Exciter->getpar(11));
 ex_hfreq->value(rkr->efx_Exciter->getpar(12));
-if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;}
+if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4359,6 +4357,10 @@ if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;}
           MenuItem {} {
             label {Exciter 2}
             xywh {22 22 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Exciter 3} selected
+            xywh {32 32 36 21} labelsize 10
           }
         }
         Fl_Value_Slider ex_Gain {
@@ -4807,7 +4809,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
       }
       Fl_Group ARPIE {
-        user_data 1 open
+        user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button arpie_activar {
@@ -4925,7 +4927,7 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
         }
         Fl_Counter arpie_harm {
           label H
-          callback {rkr->efx_Arpie->changepar(8,(int)o->value());} selected
+          callback {rkr->efx_Arpie->changepar(8,(int)o->value());}
           tooltip {Number of steps in the pattern} xywh {340 362 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
         }
         Fl_Choice arpie_pattern {

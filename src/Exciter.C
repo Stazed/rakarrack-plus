@@ -115,7 +115,7 @@ void
 Exciter::setpreset (int npreset)
 {
   const int PRESET_SIZE = 13;
-  const int NUM_PRESETS = 3;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Plain
     {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20},
@@ -123,6 +123,9 @@ Exciter::setpreset (int npreset)
     {127, 64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 20000, 20},
     //Exciter 2
     {127, 64, 0, 0, 0, 0, 64, 0, 0, 0, 64, 12000, 100},
+    //Exciter 3
+    {40, 64, 0, -64, 0, 64, 0, -64, 0, 64, 0, 20000, 20}
+
   };
 
 
