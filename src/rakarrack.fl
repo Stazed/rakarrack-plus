@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -878,16 +878,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;} open
-      xywh {1567 40 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {476 55 800 600} type Double box DOWN_BOX color 0 resizable size_range {640 480 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4805,8 +4807,8 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
       }
       Fl_Group ARPIE {
-        user_data 1
-        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 open
+        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button arpie_activar {
           label On
@@ -4922,9 +4924,38 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           class SliderW
         }
         Fl_Counter arpie_harm {
-          label {Harm's}
-          callback {rkr->efx_Arpie->changepar(8,(int)o->value());}
-          xywh {370 362 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+          label H
+          callback {rkr->efx_Arpie->changepar(8,(int)o->value());} selected
+          tooltip {Number of steps in the pattern} xywh {340 362 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
+        }
+        Fl_Choice arpie_pattern {
+          callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
+          xywh {397 359 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Ascending
+            xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Descending
+            xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label UpDown
+            xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Stutter
+            xywh {87 87 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Interrupted Descent}
+            xywh {97 97 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Double Descend }
+            xywh {117 117 36 21} labelsize 10
+          }
         }
       }
       Fl_Group Tuner {
@@ -6083,8 +6114,7 @@ for (int t=0; t<ob->children();t++)
 chfsize(0);
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)

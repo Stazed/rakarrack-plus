@@ -1,9 +1,4 @@
-
-//Proof of concept.  Needs object renamed and all that.
-
 /*
-  ZynAddSubFX - a software synthesizer
- 
   Arpie.h - Echo Effect w/ arpeggiated delay
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -33,6 +28,8 @@
 #include "global.h"
 #define  ATTACK  0.175f  //crossover time for reverse delay
 #define  MAX_DELAY 2	// Number of Seconds
+#define  MAXHARMS  8    // max number of harmonics available
+
 class Arpie
 {
 public:
@@ -64,6 +61,8 @@ private:
   int Pfb;		//Feed-back-ul
   int Phidamp;
   int Preverse;
+  int Ppattern;
+  int Pharms;
 
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
@@ -73,6 +72,7 @@ private:
   void setfb (int Pfb);
   void sethidamp (int Phidamp);
   void setreverse (int Preverse);
+  void setpattern (int Ppattern);
 
   //Parametrii reali
   REALTYPE panning, lrcross, fb, hidamp, reverse;
@@ -80,6 +80,7 @@ private:
 
   void initdelays ();
   REALTYPE *ldelay, *rdelay;
+  int *pattern;
   REALTYPE oldl, oldr;		//pt. lpf
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade, harmonic, envcnt, invattack;
   REALTYPE  Srate_Attack_Coeff, envattack, envswell;

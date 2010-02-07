@@ -1,8 +1,4 @@
-
-//Proof of concept.  Rename as Echo.C to test.
 /*
-  ZynAddSubFX - a software synthesizer
- 
   Arpie.C - Echo effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -44,6 +40,7 @@ Arpie::Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Plrcross = 100;
   Pfb = 40;
   Phidamp = 60;
+  Pharms = 3;
 
   ldelay = NULL;
   rdelay = NULL;
@@ -57,8 +54,10 @@ Arpie::Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 
   ldelay = new REALTYPE[maxx_delay];  
   rdelay = new REALTYPE[maxx_delay];
+  pattern = new int[MAXHARMS];
   
   setpreset (Ppreset);
+  setpattern (0);
   cleanup ();
 };
 
@@ -66,6 +65,7 @@ Arpie::~Arpie ()
 {
   delete[]ldelay;
   delete[]rdelay;
+  delete[]pattern;
 };
 
 /*
@@ -105,8 +105,6 @@ Arpie::initdelays ()
   if (dr < 1)
     dr = 1;
     
-    harmonic = 1;
-
   rvkl = 0;
   rvkr = 0;
   Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
@@ -188,14 +186,13 @@ Arpie::out (REALTYPE * smpsl, REALTYPE * smpsr)
       {
 	kl = 0;
 	envcnt = 0;
-	harmonic += 1;
-	if (harmonic > 4) harmonic = 2;
+	if (++harmonic >= Pharms) harmonic = 0;
       }
       if (++kr >= dr)
 	kr = 0;
-      rvkl += harmonic;
+      rvkl += pattern[harmonic];
       if (rvkl >= (dl )) rvkl = rvkl%(dl);
-      rvkr += harmonic;
+      rvkr += pattern[harmonic];
       if (rvkr >= (dr )) rvkr = rvkr%(dr);    
 
       rvfl = rvkl + fade;
@@ -278,6 +275,33 @@ Arpie::sethidamp (int Phidamp)
   hidamp = 0.5f - (float)Phidamp / 254.0f;
 };
 
+ 
+void
+Arpie::setpattern (int Ppattern)
+{
+  this->Ppattern = Ppattern;
+  
+  const int PATTERN_SIZE = MAXHARMS;
+  const int NUM_PATTERNS = 7;
+  int setpatterns[NUM_PATTERNS][PATTERN_SIZE] = 
+  {
+{2, 3, 4, 5, 6, 7, 8, 9},
+{9, 8, 7, 6, 5, 4, 3, 2},
+{2, 4, 3, 5, 4, 6, 5, 7},
+{2, 2, 4, 3, 6, 2, 5, 3},
+{3, 2, 4, 3, 5, 4, 6, 5},
+{4, 3, 2, 7, 5, 3, 4, 2},
+{2, 3, 4, 5, 6, 7, 8, 9}
+  };
+
+
+  if (Ppattern >= PATTERN_SIZE)
+    Ppattern = PATTERN_SIZE - 1;
+  for (int ii = 0; ii < PATTERN_SIZE; ii++)
+    pattern[ii] = setpatterns[Ppattern][ii];
+ 
+};
+
 void
 Arpie::setpreset (int npreset)
 {
@@ -343,6 +367,14 @@ Arpie::changepar (int npar, int value)
       setreverse (value);
       break;
     case 8:
+      Pharms = value;
+      if ( (Pharms < 2) && (Pharms >= MAXHARMS))
+      {
+      Pharms = 2;
+      }
+      break;
+    case 9:
+      setpattern(value);
       break;
 
     };
