@@ -38,7 +38,7 @@ Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   lpfr = new AnalogFilter (2, 22000, 1, 0);
   hpfl = new AnalogFilter (3, 20, 1, 0);
   hpfr = new AnalogFilter (3, 20, 1, 0);
-  harm = new HarmEnhancer (rm, 40.0f,20000.0f,1.0f);
+  harm = new HarmEnhancer (rm, 20.0f,20000.0f,1.0f);
 
 
   //default values
@@ -310,8 +310,8 @@ void
 Valve::setpresence(int value)
 {
 
-float freq=5.0f*(100-value);
-float nvol=1.0+(float)(value*.05);
+float freq=5.0f*(100.0-(float)value);
+float nvol=(float)(value*.01);
 
 harm->set_freqh(1, freq);
 harm->set_vol(1,  nvol);
