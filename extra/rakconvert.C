@@ -184,7 +184,7 @@ New_Bank ()
 
   int i, j, k;
 
-  int presets[20][16] = {
+  int presets[26][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -224,7 +224,20 @@ New_Bank ()
 //NewDist
     {0, 64, 64, 83, 65, 15, 0, 75, 31, 68, 0, 0, 0, 0, 0, 0},
 //APhaser
-    {64, 20, 40, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0}
+    {64, 20, 40, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0},
+//Valve
+     {0, 64, 64, 127, 64, 0, 93, 17, 1, 0, 69, 1, 80 ,0 ,0 ,0},
+//Dual Flange
+    {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0, 0},
+//Ring
+    {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0 ,0},
+//Exciter
+    {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0 },
+//MBDist
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0},
+//Arpie
+    {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0}
+
   };
 
 
@@ -386,7 +399,7 @@ int
 main (int argc, char *argv[])
 {
 
- int i,j,k;
+ int i,j,k,y;
  int option_index = 0, opt;
  int exitwithhelp = 0;
  char *OldBankFile = NULL;
@@ -398,9 +411,11 @@ main (int argc, char *argv[])
   fprintf (stderr,
    "\nrackconvert convert old data bank files to the new file format and store the new ones in the home user directory.\nrackconvert - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon - Hernan Ordiales - Jose Luis Di Biase\n\n");
 
-  if (argc == 1)
+  if (argc < 3)
+{
     fprintf (stderr, "Try 'rakconvert --help' for usage options.\n");
-
+    return(0);
+}    
 
   struct option opts[] = {
     {"convert", 1, NULL, 'c'},
@@ -425,7 +440,8 @@ main (int argc, char *argv[])
         if (optarguments != NULL)
 	    {
 	      OldBankFile=strdup(optarguments);
-	      loadbank(optarguments);
+	      y=loadbank(optarguments);
+	      if(!y) return(0);
 	      break;
             }
          }
