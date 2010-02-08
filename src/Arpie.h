@@ -63,6 +63,7 @@ private:
   int Preverse;
   int Ppattern;
   int Pharms;
+  int Psubdiv;
 
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);

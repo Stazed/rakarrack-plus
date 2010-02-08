@@ -41,6 +41,7 @@ Arpie::Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Pfb = 40;
   Phidamp = 60;
   Pharms = 3;
+  Psubdiv = 1;
 
   ldelay = NULL;
   rdelay = NULL;
@@ -140,7 +141,7 @@ Arpie::out (REALTYPE * smpsl, REALTYPE * smpsr)
       {
 
       lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
-      envswell = 0.5f * (1.0f - cosf(PI * envcnt*envattack));
+      envswell = (1.0f - cosf(PI * envcnt*envattack));
       if (envswell > 1.0f) envswell = 1.0f;
 	      if (lswell <= PI) 
 	      {
@@ -235,7 +236,9 @@ void
 Arpie::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
-  delay = 1 + lrintf ((float)Pdelay / 127.0f * (float)SAMPLE_RATE * 2.0f);	//0 .. 1.5 sec
+  if (Pdelay < 2) Pdelay = 2;
+  if (Pdelay > 600) Pdelay = 600;	//100ms .. 2 sec constraint
+  delay = 1 + lrintf ( (60.0f/((float)(Psubdiv *Pdelay))) * (float)SAMPLE_RATE );	//quarter notes
 
   initdelays ();
 };
@@ -309,23 +312,23 @@ Arpie::setpreset (int npreset)
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Arpie 1
-    {67, 64, 35, 64, 30, 59, 0, 127},
+    {67, 64, 35, 64, 30, 59, 0, 127, 4},
     //Arpie 2
-    {67, 64, 21, 64, 30, 59, 0, 64},
+    {67, 64, 21, 64, 30, 59, 0, 64, 4},
     //Arpie 3
-    {67, 75, 60, 64, 30, 59, 10, 0},
+    {67, 75, 60, 64, 30, 59, 10, 0, 4},
     //Simple Arpie
-    {67, 60, 44, 64, 30, 0, 0, 0},
+    {67, 60, 44, 64, 30, 0, 0, 0, 4},
     //Canyon
-    {67, 60, 102, 50, 30, 82, 48, 0},
+    {67, 60, 102, 50, 30, 82, 48, 0, 4},
     //Panning Arpie 1
-    {67, 64, 44, 17, 0, 82, 24, 0},
+    {67, 64, 44, 17, 0, 82, 24, 0, 4},
     //Panning Arpie 2
-    {81, 60, 46, 118, 100, 68, 18, 0},
+    {81, 60, 46, 118, 100, 68, 18, 0, 4},
     //Panning Arpie 3
-    {81, 60, 26, 100, 127, 67, 36, 0},
+    {81, 60, 26, 100, 127, 67, 36, 0, 4},
     //Feedback Arpie
-    {62, 64, 28, 64, 100, 90, 55, 0}
+    {62, 64, 28, 64, 100, 90, 55, 0, 4}
   };
 
 
@@ -376,6 +379,10 @@ Arpie::changepar (int npar, int value)
     case 9:
       setpattern(value);
       break;
+    case 10:
+      Psubdiv = 1 + value;
+      setdelay (Pdelay);
+      break;
 
     };
 };
@@ -414,6 +421,9 @@ Arpie::getpar (int npar)
       break;  
     case 9:
       return(Ppattern); 
+      break;
+    case 10:
+      return (Psubdiv);
       break;
     };
   return (0);			//in case of bogus parameter number
