@@ -186,15 +186,15 @@ void
 HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 {
 
-  int i;
+  int i,j;
   float max=0.0;
 
   for(i=0;i<PERIOD;i++)
    {
-     if(fabsf(smpsl[i])> max) max = smpsl[i];
-     if(fabsf(smpsr[i])> max) max = smpsr[i];     
+     if((smpsl[i] < -max) || (smpsl[i] > max )) max = smpsl[i];
+     if((smpsr[i] < -max) || (smpsr[i] > max )) max = smpsr[i];     
    }  
-
+     
      coeff = fabsf(max)+8.0;
      max = 1.0f / coeff;
              
@@ -214,14 +214,19 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
     {
       float xl = inputl[i];
       float xr = inputr[i];
-      float yl,yr;
+      float yl=0.0;
+      float yr=0.0;
 
-      // Calculate the polynomial using Horner's Rule
-      yl = p[0] + (p[1] + (p[2] + (p[3] + (p[4] + (p[5] + (p[6] + (p[7] + (p[8] + (p[9] + p[10] * xl) * xl) * xl) * xl) * xl) * xl) * xl) * xl) * xl) * xl;
+      for(j=10;j>0;j--)
+        {
+          yl = (yl+p[j])*xl;
+          yr = (yr+p[j])*xr;
+        }
+          yl+=p[0];
+          yr+=p[0];
+           
 
-      yr = p[0] + (p[1] + (p[2] + (p[3] + (p[4] + (p[5] + (p[6] + (p[7] + (p[8] + (p[9] + p[10] * xr) * xr) * xr) * xr) * xr) * xr) * xr) * xr) * xr) * xr;
 
-      // DC offset remove (odd harmonics cause DC offset)
       otm1l = 0.999f * otm1l + yl - itm1l;
       itm1l = yl;
       otm1r = 0.999f * otm1r + yr - itm1r;
