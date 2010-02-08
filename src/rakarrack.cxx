@@ -13178,7 +13178,8 @@ for (int t=0; t<ob->children();t++)
 }
 
 void RKRGUI::PutBackground() {
-  back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
+  delete back;
+back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());
@@ -13377,15 +13378,11 @@ fore_color=(Fl_Color)rkr->sfore_color;
 leds_color=(Fl_Color)rkr->sleds_color;
 label_color=(Fl_Color)rkr->slabel_color;
 
-Background_Color_Change(back_color);
-Buttons_Color_Change(fore_color);
-Leds_Color_Change(leds_color);
-Label_Color_Change(label_color);
-
 scheme_ch->value(rkr->sschema);
 scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
+Label_Color_Change(label_color);
 save_stat(3);
 
 Fl::redraw();

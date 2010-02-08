@@ -887,16 +887,16 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {469 48 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {462 41 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 795 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File}
+          label {&File} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -4359,7 +4359,7 @@ if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;} open
             xywh {22 22 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Exciter 3} selected
+            label {Exciter 3}
             xywh {32 32 36 21} labelsize 10
           }
         }
@@ -8229,7 +8229,8 @@ for (int t=0; t<ob->children();t++)
   }} {}
   }
   Function {PutBackground()} {} {
-    code {back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
+    code {delete back;
+back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());
@@ -8423,18 +8424,15 @@ fore_color=(Fl_Color)rkr->sfore_color;
 leds_color=(Fl_Color)rkr->sleds_color;
 label_color=(Fl_Color)rkr->slabel_color;
 
-Background_Color_Change(back_color);
-Buttons_Color_Change(fore_color);
-Leds_Color_Change(leds_color);
-Label_Color_Change(label_color);
-
 scheme_ch->value(rkr->sschema);
 scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
+Label_Color_Change(label_color);
 save_stat(3);
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {FillML(int type)} {} {
     code {int i;
