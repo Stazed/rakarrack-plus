@@ -373,7 +373,7 @@ show_help ()
 int
 setdelay(int old)
 {
- return(1 + lrintf((float) old / 127.0f * 96000.0));
+ return(20 + lrintf((float)old / 127.0f * 1980.0f));
 
 }
 
@@ -527,6 +527,8 @@ for (i=1; i<61; i++)
    NewBank[i].lv[12][2] = setTempo(NewBank[i].lv[12][2]);  
    NewBank[i].lv[14][2] = setTempo(NewBank[i].lv[14][2]);  
    NewBank[i].lv[19][2] = setTempo(NewBank[i].lv[19][2]);  
+
+   NewBank[i].lv[1][2] = setdelay(NewBank[i].lv[1][2]);
 
 
 }
