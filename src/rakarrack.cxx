@@ -4203,6 +4203,8 @@ arpie_damp->value(rkr->efx_Arpie->getpar(6));
 arpie_arpe->value(rkr->efx_Arpie->getpar(7));
 arpie_harm->value(rkr->efx_Arpie->getpar(8));
 arpie_pattern->value(rkr->efx_Arpie->getpar(9));
+arpie_subdiv->value(rkr->efx_Arpie->getpar(10));
+
 if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
 }
 void RKRGUI::cb_arpie_preset(Fl_Choice* o, void* v) {
@@ -4251,6 +4253,23 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
 void RKRGUI::cb_arpie_delay(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_delay_i(o,v);
 }
+
+void RKRGUI::cb_arpie_subdiv_i(Fl_Choice* o, void*) {
+  rkr->efx_Arpie->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_arpie_subdiv(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_subdiv_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_arpie_subdiv[] = {
+ {"1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_arpie_LRdl_i(SliderW* o, void*) {
   rkr->Arpie_Bypass=0;
@@ -9895,14 +9914,15 @@ R average.");
       } // Fl_Check_Button* mbdist_neg
       MBDIST->end();
     } // Fl_Group* MBDIST
-    { ARPIE = new Fl_Group(320, 212, 158, 184);
+    { ARPIE = new Fl_Group(320, 211, 158, 184);
       ARPIE->box(FL_UP_BOX);
       ARPIE->color((Fl_Color)FL_FOREGROUND_COLOR);
       ARPIE->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       ARPIE->labelfont(1);
       ARPIE->user_data((void*)(1));
       ARPIE->align(96|FL_ALIGN_INSIDE);
-      { arpie_activar = new Fl_Light_Button(325, 216, 34, 18, "On");
+      ARPIE->hide();
+      { arpie_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         arpie_activar->shortcut(0x35);
         arpie_activar->color((Fl_Color)62);
         arpie_activar->selection_color((Fl_Color)1);
@@ -9911,7 +9931,7 @@ R average.");
         arpie_activar->align(68|FL_ALIGN_INSIDE);
         arpie_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* arpie_activar
-      { arpie_preset = new Fl_Choice(397, 216, 76, 18, "Preset");
+      { arpie_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         arpie_preset->down_box(FL_BORDER_BOX);
         arpie_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         arpie_preset->labelsize(10);
@@ -9922,7 +9942,7 @@ R average.");
         arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
         arpie_preset->menu(menu_arpie_preset);
       } // Fl_Choice* arpie_preset
-      { arpie_WD = new SliderW(371, 247, 100, 10, "Wet/Dry");
+      { arpie_WD = new SliderW(371, 239, 100, 10, "Wet/Dry");
         arpie_WD->type(5);
         arpie_WD->box(FL_FLAT_BOX);
         arpie_WD->color((Fl_Color)178);
@@ -9939,7 +9959,7 @@ R average.");
         arpie_WD->align(FL_ALIGN_LEFT);
         arpie_WD->when(FL_WHEN_CHANGED);
       } // SliderW* arpie_WD
-      { arpie_arpe = new SliderW(371, 270, 100, 10, "Arpe\'s");
+      { arpie_arpe = new SliderW(371, 253, 100, 10, "Arpe\'s");
         arpie_arpe->type(5);
         arpie_arpe->box(FL_FLAT_BOX);
         arpie_arpe->color((Fl_Color)178);
@@ -9955,7 +9975,7 @@ R average.");
         arpie_arpe->align(FL_ALIGN_LEFT);
         arpie_arpe->when(FL_WHEN_CHANGED);
       } // SliderW* arpie_arpe
-      { arpie_pan = new SliderW(371, 285, 100, 10, "Pan");
+      { arpie_pan = new SliderW(371, 267, 100, 10, "Pan");
         arpie_pan->type(5);
         arpie_pan->box(FL_FLAT_BOX);
         arpie_pan->color((Fl_Color)178);
@@ -9972,7 +9992,7 @@ R average.");
         arpie_pan->align(FL_ALIGN_LEFT);
         arpie_pan->when(FL_WHEN_CHANGED);
       } // SliderW* arpie_pan
-      { arpie_delay = new SliderW(371, 300, 100, 10, "Delay");
+      { arpie_delay = new SliderW(371, 281, 100, 10, "Tempo");
         arpie_delay->type(5);
         arpie_delay->box(FL_FLAT_BOX);
         arpie_delay->color((Fl_Color)178);
@@ -9988,7 +10008,18 @@ R average.");
         arpie_delay->align(FL_ALIGN_LEFT);
         arpie_delay->when(FL_WHEN_RELEASE);
       } // SliderW* arpie_delay
-      { arpie_LRdl = new SliderW(371, 315, 100, 10, "LRdl.");
+      { arpie_subdiv = new Fl_Choice(398, 293, 76, 18, "SubDivision");
+        arpie_subdiv->down_box(FL_BORDER_BOX);
+        arpie_subdiv->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        arpie_subdiv->labelsize(10);
+        arpie_subdiv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_subdiv->textsize(10);
+        arpie_subdiv->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        arpie_subdiv->callback((Fl_Callback*)cb_arpie_subdiv);
+        arpie_subdiv->when(FL_WHEN_RELEASE_ALWAYS);
+        arpie_subdiv->menu(menu_arpie_subdiv);
+      } // Fl_Choice* arpie_subdiv
+      { arpie_LRdl = new SliderW(371, 314, 100, 10, "LRdl.");
         arpie_LRdl->type(5);
         arpie_LRdl->box(FL_FLAT_BOX);
         arpie_LRdl->color((Fl_Color)178);
@@ -10004,7 +10035,7 @@ R average.");
         arpie_LRdl->align(FL_ALIGN_LEFT);
         arpie_LRdl->when(FL_WHEN_RELEASE);
       } // SliderW* arpie_LRdl
-      { arpie_LRc = new SliderW(371, 330, 100, 10, "L/R.Cr");
+      { arpie_LRc = new SliderW(371, 329, 100, 10, "L/R.Cr");
         arpie_LRc->type(5);
         arpie_LRc->box(FL_FLAT_BOX);
         arpie_LRc->color((Fl_Color)178);
@@ -10021,7 +10052,7 @@ R average.");
         arpie_LRc->align(FL_ALIGN_LEFT);
         arpie_LRc->when(FL_WHEN_CHANGED);
       } // SliderW* arpie_LRc
-      { arpie_fb = new SliderW(371, 345, 100, 10, "Fb.");
+      { arpie_fb = new SliderW(371, 344, 100, 10, "Fb.");
         arpie_fb->type(5);
         arpie_fb->box(FL_FLAT_BOX);
         arpie_fb->color((Fl_Color)178);
@@ -10037,7 +10068,7 @@ R average.");
         arpie_fb->align(FL_ALIGN_LEFT);
         arpie_fb->when(FL_WHEN_CHANGED);
       } // SliderW* arpie_fb
-      { arpie_damp = new SliderW(371, 379, 100, 10, "Damp");
+      { arpie_damp = new SliderW(371, 378, 100, 10, "Damp");
         arpie_damp->type(5);
         arpie_damp->box(FL_FLAT_BOX);
         arpie_damp->color((Fl_Color)178);
@@ -10053,7 +10084,7 @@ R average.");
         arpie_damp->align(FL_ALIGN_LEFT);
         arpie_damp->when(FL_WHEN_CHANGED);
       } // SliderW* arpie_damp
-      { arpie_harm = new Fl_Counter(340, 362, 52, 12, "H");
+      { arpie_harm = new Fl_Counter(340, 361, 52, 12, "H");
         arpie_harm->tooltip("Number of steps in the pattern");
         arpie_harm->type(1);
         arpie_harm->box(FL_THIN_UP_BOX);
@@ -10067,7 +10098,7 @@ R average.");
         arpie_harm->callback((Fl_Callback*)cb_arpie_harm);
         arpie_harm->align(FL_ALIGN_LEFT);
       } // Fl_Counter* arpie_harm
-      { arpie_pattern = new Fl_Choice(397, 359, 76, 18);
+      { arpie_pattern = new Fl_Choice(397, 358, 76, 18);
         arpie_pattern->down_box(FL_BORDER_BOX);
         arpie_pattern->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         arpie_pattern->labelsize(10);
@@ -11707,6 +11738,8 @@ arpie_damp->value(rkr->lv[25][6]);
 arpie_arpe->value(rkr->lv[25][7]);
 arpie_harm->value(rkr->lv[25][8]);
 arpie_pattern->value(rkr->lv[25][9]);
+arpie_subdiv->value(rkr->lv[25][10]);
+
 arpie_activar->value(rkr->Arpie_Bypass);
 
 

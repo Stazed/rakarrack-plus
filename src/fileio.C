@@ -342,13 +342,13 @@ RKR::savefile (char *filename)
 
 	case 24:
 	  //Arpie
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Arpie->getpar (0), efx_Arpie->getpar (1),
 		   efx_Arpie->getpar (2), efx_Arpie->getpar (3),
 		   efx_Arpie->getpar (4), efx_Arpie->getpar (5),
 		   efx_Arpie->getpar (6), efx_Arpie->getpar (7),
 		   efx_Arpie->getpar (8), efx_Arpie->getpar (9),
-		   Arpie_Bypass);
+                   efx_Arpie->getpar (10), Arpie_Bypass);
 	  break;
 
 
@@ -705,10 +705,10 @@ RKR::loadfile (char *filename)
 
 	case 24:
 	  //Arpie
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[25][0], &lv[25][1], &lv[25][2], &lv[25][3], &lv[25][4],
 		  &lv[25][5], &lv[25][6], &lv[25][7], &lv[25][8], &lv[25][9],
-		  &Arpie_B);
+		  &lv[25][10],&Arpie_B);
 	  break;
 
 
@@ -826,7 +826,7 @@ RKR::Actualizar_Audio ()
     efx_Exciter->changepar (i, lv[23][i]);
  for (i = 0; i <= 14; i++)
     efx_MBDist->changepar (i, lv[24][i]);
- for (i = 0; i <= 9; i++)
+ for (i = 0; i <= 10; i++)
     efx_Arpie->changepar (i, lv[25][i]);
 
 
@@ -1297,7 +1297,7 @@ RKR::Preset_to_Bank (int i)
     lv[23][j] = efx_Exciter->getpar(j);
   for (j = 0; j <= 14; j++)
     lv[24][j] = efx_MBDist->getpar(j);
-  for (j = 0; j <= 9; j++)
+  for (j = 0; j <= 10; j++)
     lv[25][j] = efx_Arpie->getpar(j);
 
 

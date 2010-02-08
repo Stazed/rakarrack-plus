@@ -1821,6 +1821,12 @@ private:
   void cb_arpie_delay_i(SliderW*, void*);
   static void cb_arpie_delay(SliderW*, void*);
 public:
+  Fl_Choice *arpie_subdiv;
+private:
+  void cb_arpie_subdiv_i(Fl_Choice*, void*);
+  static void cb_arpie_subdiv(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_arpie_subdiv[];
+public:
   SliderW *arpie_LRdl;
 private:
   void cb_arpie_LRdl_i(SliderW*, void*);
