@@ -61,7 +61,7 @@ RKR::savefile (char *filename)
 
   //General
   bzero (buf, sizeof (buf));
-  sprintf (buf, "%f,%f,%d\n", Input_Gain, Master_Volume, Bypass_B);
+  sprintf (buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass_B);
   fputs (buf, fn);
 
 
@@ -404,7 +404,7 @@ RKR::loadfile (char *filename)
 
   int i, j;
   int Num_Version=0;
-  float in_vol, out_vol;
+  float in_vol, out_vol, balance;
   FILE *fn;
   char buf[256];
   int l[10];
@@ -482,10 +482,14 @@ RKR::loadfile (char *filename)
 
   bzero (buf, sizeof (buf));
   fgets (buf, sizeof buf, fn);
+  if(Num_Version < 50)
   sscanf (buf, "%f,%f,%d\n", &in_vol, &out_vol, &Bypass_B);
+  else
+  sscanf (buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &Bypass_B);
 
   if (actuvol == 0)
     {
+      Fraction_Bypass = balance;
       Input_Gain = in_vol;
       Master_Volume = out_vol;
     }
@@ -1370,14 +1374,10 @@ RKR::Conv_Data_Version(char* D_Version)
 char tmp[8];
 int NumVersion=0;
 
-
 tmp[0]=D_Version[0];
 tmp[1]=D_Version[2];
 tmp[2]=D_Version[4];
-
 sscanf(tmp , "%d", &NumVersion);
-
-
 return(NumVersion);
 }
 
