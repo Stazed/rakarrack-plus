@@ -308,7 +308,7 @@ Arpie::setpattern (int Ppattern)
 void
 Arpie::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 8;
+  const int PRESET_SIZE = 9;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Arpie 1
