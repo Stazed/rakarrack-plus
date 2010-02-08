@@ -4899,8 +4899,8 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           label Tempo
           callback {rkr->Arpie_Bypass=0;
 rkr->efx_Arpie->changepar(2,(int)o->value());
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
-          xywh {371 281 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;} selected
+          xywh {371 281 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 1 textcolor 7
           class SliderW
         }
         Fl_Choice arpie_subdiv {
@@ -6813,8 +6813,7 @@ arpie_activar->value(rkr->Arpie_Bypass);
 
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {
