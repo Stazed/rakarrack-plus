@@ -896,7 +896,7 @@ Pexitprogram=1;}
         xywh {2 2 795 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -1005,7 +1005,7 @@ y = Principal->y()+((Principal->h()-230)/2);
 AboutWin->position(x,y);
 AboutWin->show();
 put_icon(AboutWin);}
-            xywh {0 0 100 20} labelcolor 7 divider
+            xywh {0 0 100 20} labelcolor 7
           }
         }
       }
@@ -5956,10 +5956,8 @@ GMM->redraw();}
     }
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
-About_Version->copy_label(tmp);
-
-
-Mled->color(fl_darker(FL_RED));} {}
+About_Version->copy_label(tmp);} {selected
+    }
   }
   Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
   } {
@@ -6782,8 +6780,7 @@ arpie_activar->value(rkr->Arpie_Bypass);
 
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {

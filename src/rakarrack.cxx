@@ -984,7 +984,7 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {0,0,0,0,0,0,0,0,0},
  {"&Help", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
  {"Help Contents", 0xffbe,  (Fl_Callback*)RKRGUI::cb_Contenido, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
- {"About...", 0,  (Fl_Callback*)RKRGUI::cb_Acerca_de, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
+ {"About...", 0,  (Fl_Callback*)RKRGUI::cb_Acerca_de, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {0,0,0,0,0,0,0,0,0}
 };
@@ -10882,9 +10882,6 @@ ld");
   char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);
-
-
-Mled->color(fl_darker(FL_RED));
   return AboutWin;
 }
 
