@@ -48,7 +48,7 @@ Echo::Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   lrdelay = 0;
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
   maxx_delay = SAMPLE_RATE * MAX_DELAY;
-  fade = (int) SAMPLE_RATE / 5;    //200ms fade time available
+  fade = (int) SAMPLE_RATE / 5;    //1/5 SR fade time available
 
   ldelay = new REALTYPE[maxx_delay];  
   rdelay = new REALTYPE[maxx_delay];
@@ -175,6 +175,11 @@ Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
       
       rvfl = dl + fade - kl;
       rvfr = dr + fade - kr;
+      //Safety checks to avoid addressing data outside of buffer
+      if (rvfl > dl) rvfl = rvfl - dl;  
+      if (rvfl < 0) rvfl = 0;    
+      if (rvfr > dr) rvfr = rvfr - dr;
+      if (rvfr < 0) rvfr = 0;       
     };
 
 };
@@ -184,7 +189,7 @@ Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
  * Parameter control
  */
 void
-Echo::setvolume (unsigned char Pvolume)
+Echo::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   volume = outvolume = (float)Pvolume / 127.0f;
@@ -194,30 +199,33 @@ Echo::setvolume (unsigned char Pvolume)
 };
 
 void
-Echo::setpanning (unsigned char Ppanning)
+Echo::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + 0.5f) / 127.0f;
 };
 
 void
-Echo::setreverse (unsigned char Preverse)
+Echo::setreverse (int Preverse)
 {
   this->Preverse = Preverse;
   reverse = (float) Preverse / 127.0f;
 };
 
 void
-Echo::setdelay (unsigned char Pdelay)
+Echo::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
-  delay = 1 + lrintf ((float)Pdelay / 127.0f * (float)SAMPLE_RATE * 2.0f);	//0 .. 1.5 sec
+  delay = (int) Pdelay;
+  if (delay < 10) delay = 10;
+  if (delay > MAX_DELAY * 1000) delay = 1000 * MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
+  delay = 1 + lrintf ( ((float) delay / 1000.0f) * (float)SAMPLE_RATE );	
 
   initdelays ();
 };
 
 void
-Echo::setlrdelay (unsigned char Plrdelay)
+Echo::setlrdelay (int Plrdelay)
 {
   REALTYPE tmp;
   this->Plrdelay = Plrdelay;
@@ -231,32 +239,32 @@ Echo::setlrdelay (unsigned char Plrdelay)
 };
 
 void
-Echo::setlrcross (unsigned char Plrcross)
+Echo::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float)Plrcross / 127.0f * 1.0f;
 };
 
 void
-Echo::setfb (unsigned char Pfb)
+Echo::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = (float)Pfb / 128.0f;
 };
 
 void
-Echo::sethidamp (unsigned char Phidamp)
+Echo::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
   hidamp = 1.0f - (float)Phidamp / 127.0f;
 };
 
 void
-Echo::setpreset (unsigned char npreset)
+Echo::setpreset (int npreset)
 {
   const int PRESET_SIZE = 8;
   const int NUM_PRESETS = 9;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Echo 1
     {67, 64, 35, 64, 30, 59, 0, 127},
     //Echo 2
@@ -287,7 +295,7 @@ Echo::setpreset (unsigned char npreset)
 
 
 void
-Echo::changepar (int npar, unsigned char value)
+Echo::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -315,10 +323,11 @@ Echo::changepar (int npar, unsigned char value)
     case 7:
       setreverse (value);
       break;
+
     };
 };
 
-unsigned char
+int
 Echo::getpar (int npar)
 {
   switch (npar)
@@ -347,6 +356,7 @@ Echo::getpar (int npar)
     case 7:
       return (Preverse);
       break;
+
     };
   return (0);			//in case of bogus parameter number
 };
