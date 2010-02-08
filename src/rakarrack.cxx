@@ -1683,7 +1683,7 @@ void RKRGUI::cb_echo_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_echo_preset_i(Fl_Choice* o, void*) {
   rkr->Echo_Bypass=0;
-rkr->efx_Echo->setpreset((unsigned char) o->value());
+rkr->efx_Echo->setpreset((int) o->value());
 echo_WD->value(rkr->efx_Echo->getpar(0)-64);
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
@@ -1712,21 +1712,21 @@ Fl_Menu_Item RKRGUI::menu_echo_preset[] = {
 };
 
 void RKRGUI::cb_echo_WD_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Echo->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_echo_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_WD_i(o,v);
 }
 
 void RKRGUI::cb_echo_RV_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(7,(unsigned char)o->value());
+  rkr->efx_Echo->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_echo_RV(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_RV_i(o,v);
 }
 
 void RKRGUI::cb_echo_pan_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Echo->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_echo_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_pan_i(o,v);
@@ -1734,7 +1734,7 @@ void RKRGUI::cb_echo_pan(SliderW* o, void* v) {
 
 void RKRGUI::cb_echo_delay_i(SliderW* o, void*) {
   rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(2,(unsigned char)o->value());
+rkr->efx_Echo->changepar(2,(int)o->value());
 if((int)echo_activar->value())rkr->Echo_Bypass=1;
 }
 void RKRGUI::cb_echo_delay(SliderW* o, void* v) {
@@ -1743,7 +1743,7 @@ void RKRGUI::cb_echo_delay(SliderW* o, void* v) {
 
 void RKRGUI::cb_echo_LRdl_i(SliderW* o, void*) {
   rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(3,(unsigned char)o->value());
+rkr->efx_Echo->changepar(3,(int)o->value());
 if((int)echo_activar->value())rkr->Echo_Bypass=1;
 }
 void RKRGUI::cb_echo_LRdl(SliderW* o, void* v) {
@@ -1751,21 +1751,21 @@ void RKRGUI::cb_echo_LRdl(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_echo_LRc_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(4,(unsigned char)(o->value()+64));
+  rkr->efx_Echo->changepar(4,(int)(o->value()+64));
 }
 void RKRGUI::cb_echo_LRc(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_LRc_i(o,v);
 }
 
 void RKRGUI::cb_echo_fb_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(5,(unsigned char)o->value());
+  rkr->efx_Echo->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_echo_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_fb_i(o,v);
 }
 
 void RKRGUI::cb_echo_damp_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(6,(unsigned char)o->value());
+  rkr->efx_Echo->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_echo_damp(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_damp_i(o,v);
@@ -6151,8 +6151,10 @@ R average.");
         echo_delay->labelfont(0);
         echo_delay->labelsize(10);
         echo_delay->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        echo_delay->maximum(127);
+        echo_delay->minimum(20);
+        echo_delay->maximum(2000);
         echo_delay->step(1);
+        echo_delay->value(20);
         echo_delay->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echo_delay->callback((Fl_Callback*)cb_echo_delay);
         echo_delay->align(FL_ALIGN_LEFT);
@@ -11366,7 +11368,7 @@ echo_LRdl->value(rkr->lv[1][3]);
 echo_LRc->value(rkr->lv[1][4]-64);
 echo_fb->value(rkr->lv[1][5]);
 echo_damp->value(rkr->lv[1][6]);
-echo_RV->value(rkr->lv[1][8]);
+echo_RV->value(rkr->lv[1][7]);
 echo_activar->value(rkr->Echo_Bypass);
 
 //Chorus
