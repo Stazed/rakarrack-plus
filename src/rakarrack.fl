@@ -1861,7 +1861,7 @@ findpos(4,(int)o->value());}
         Fl_Choice echo_preset {
           label Preset
           callback {rkr->Echo_Bypass=0;
-rkr->efx_Echo->setpreset((unsigned char) o->value());
+rkr->efx_Echo->setpreset((int) o->value());
 echo_WD->value(rkr->efx_Echo->getpar(0)-64);
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
@@ -1912,53 +1912,53 @@ if((int)echo_activar->value())rkr->Echo_Bypass=1;}
         }
         Fl_Value_Slider echo_WD {
           label {Wet/Dry}
-          callback {rkr->efx_Echo->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Echo->changepar(0,(int)(o->value()+64));}
           xywh {690 247 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_RV {
           label Reverse
-          callback {rkr->efx_Echo->changepar(7,(unsigned char)o->value());}
+          callback {rkr->efx_Echo->changepar(7,(int)o->value());}
           xywh {690 270 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_pan {
           label Pan
-          callback {rkr->efx_Echo->changepar(1,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
           xywh {690 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_delay {
           label Delay
           callback {rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(2,(unsigned char)o->value());
+rkr->efx_Echo->changepar(2,(int)o->value());
 if((int)echo_activar->value())rkr->Echo_Bypass=1;}
-          xywh {690 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          xywh {690 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_LRdl {
           label {LRdl.}
           callback {rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(3,(unsigned char)o->value());
+rkr->efx_Echo->changepar(3,(int)o->value());
 if((int)echo_activar->value())rkr->Echo_Bypass=1;}
           xywh {690 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_LRc {
           label {L/R.Cr}
-          callback {rkr->efx_Echo->changepar(4,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Echo->changepar(4,(int)(o->value()+64));}
           xywh {690 330 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_fb {
           label {Fb.}
-          callback {rkr->efx_Echo->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Echo->changepar(5,(int)o->value());}
           xywh {690 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_damp {
           label Damp
-          callback {rkr->efx_Echo->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_Echo->changepar(6,(int)o->value());}
           xywh {690 379 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -4899,7 +4899,7 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           label Tempo
           callback {rkr->Arpie_Bypass=0;
 rkr->efx_Arpie->changepar(2,(int)o->value());
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;} selected
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           xywh {371 281 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 1 textcolor 7
           class SliderW
         }
@@ -6431,7 +6431,7 @@ echo_LRdl->value(rkr->lv[1][3]);
 echo_LRc->value(rkr->lv[1][4]-64);
 echo_fb->value(rkr->lv[1][5]);
 echo_damp->value(rkr->lv[1][6]);
-echo_RV->value(rkr->lv[1][8]);
+echo_RV->value(rkr->lv[1][7]);
 echo_activar->value(rkr->Echo_Bypass);
 
 //Chorus
@@ -6813,7 +6813,8 @@ arpie_activar->value(rkr->Arpie_Bypass);
 
 
 
-reordena();} {}
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {

@@ -88,7 +88,8 @@ RKR::savefile (char *filename)
 		   efx_Echo->getpar (0), efx_Echo->getpar (1),
 		   efx_Echo->getpar (2), efx_Echo->getpar (3),
 		   efx_Echo->getpar (4), efx_Echo->getpar (5),
-		   efx_Echo->getpar (6), Echo_Bypass, efx_Echo->getpar(7));
+		   efx_Echo->getpar (6), efx_Echo->getpar(7),
+		   Echo_Bypass);
 	  break;
 
 	case 5:
@@ -148,7 +149,7 @@ RKR::savefile (char *filename)
 		   efx_Distorsion->getpar (6), efx_Distorsion->getpar (7),
 		   efx_Distorsion->getpar (8), efx_Distorsion->getpar (9),
 		   efx_Distorsion->getpar (10), efx_Distorsion->getpar (11),
-		   Distorsion_Bypass,efx_Distorsion->getpar(12));
+		   efx_Distorsion->getpar(12),Distorsion_Bypass);
 	  break;
 
 	case 0:
@@ -263,7 +264,7 @@ RKR::savefile (char *filename)
 		   efx_NewDist->getpar (6), efx_NewDist->getpar (7),
 		   efx_NewDist->getpar (8), efx_NewDist->getpar (9),
 		   efx_NewDist->getpar (10), efx_NewDist->getpar (11),
-		   NewDist_Bypass,efx_NewDist->getpar(11));
+		   efx_NewDist->getpar(11),NewDist_Bypass);
 	  break;
          
 	case 18:
@@ -517,7 +518,7 @@ RKR::loadfile (char *filename)
 
 	case 4:
 	  //Echo  
-          if( Num_Version > 30)
+          if( Num_Version < 30)
           {
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[1][0], &lv[1][1], &lv[1][2], &lv[1][3], &lv[1][4],
@@ -525,9 +526,9 @@ RKR::loadfile (char *filename)
 	  }
 	  else
 	 { 
-	   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+	   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[1][0], &lv[1][1], &lv[1][2], &lv[1][3], &lv[1][4],
-		  &lv[1][5], &lv[1][6], &Echo_B);
+		  &lv[1][5], &lv[1][6], &lv[1][7], &Echo_B);
 	 }
 	  break;
 
@@ -568,7 +569,7 @@ RKR::loadfile (char *filename)
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[6][0], &lv[6][1], &lv[6][2], &lv[6][3], &lv[6][4],
 		  &lv[6][5], &lv[6][6], &lv[6][7], &lv[6][8], &lv[6][9],
-		  &lv[6][10], &lv[6][11], &Distorsion_B, &lv[6][12]);
+		  &lv[6][10], &lv[6][11], &lv[6][12], &Distorsion_B);
 	  break;
 
 	case 0:
@@ -651,7 +652,7 @@ RKR::loadfile (char *filename)
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[18][0], &lv[18][1], &lv[18][2], &lv[18][3], &lv[18][4],
 		  &lv[18][5], &lv[18][6], &lv[18][7], &lv[18][8], &lv[18][9],
-		  &lv[18][10], &lv[18][11], &Distorsion_B);
+		  &lv[18][10], &lv[18][11], &NewDist_B);
 	  break;
 
 	case 18:
@@ -784,9 +785,8 @@ RKR::Actualizar_Audio ()
 
   for (i = 0; i <= 11; i++)
     efx_Rev->changepar (i, (unsigned char)lv[0][i]);
-  for (i = 0; i <= 6; i++)
-    efx_Echo->changepar (i, (unsigned char)lv[1][i]);
-    efx_Echo->changepar (7, (unsigned char)lv[1][8]);
+  for (i = 0; i <= 7; i++)
+    efx_Echo->changepar (i, lv[1][i]);
   for (i = 0; i <= 11; i++)
     efx_Chorus->changepar (i, lv[2][i]);
   for (i = 0; i <= 11; i++)
@@ -1256,9 +1256,8 @@ RKR::Preset_to_Bank (int i)
 
   for (j = 0; j <= 11; j++)
     lv[0][j] = efx_Rev->getpar (j);
-  for (j = 0; j <= 6; j++)
+  for (j = 0; j <= 7; j++)
     lv[1][j] = efx_Echo->getpar (j);
-    lv[1][8] = efx_Echo->getpar(7);
   for (j = 0; j <= 11; j++)
     lv[2][j] = efx_Chorus->getpar (j);
   for (j = 0; j <= 11; j++)
