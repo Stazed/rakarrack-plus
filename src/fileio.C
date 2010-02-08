@@ -340,6 +340,17 @@ RKR::savefile (char *filename)
 		   efx_MBDist->getpar (14), MBDist_Bypass);
 	  break;
 
+	case 24:
+	  //Arpie
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Arpie->getpar (0), efx_Arpie->getpar (1),
+		   efx_Arpie->getpar (2), efx_Arpie->getpar (3),
+		   efx_Arpie->getpar (4), efx_Arpie->getpar (5),
+		   efx_Arpie->getpar (6), efx_Arpie->getpar (7),
+		   efx_Arpie->getpar (8), efx_Arpie->getpar (9),
+		   Arpie_Bypass);
+	  break;
+
 
 
 
@@ -680,12 +691,20 @@ RKR::loadfile (char *filename)
 	  break;
 
 	case 23:
-	  //Exciter
+	  //MBDist
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[24][0], &lv[24][1], &lv[24][2], &lv[24][3], &lv[24][4],
 		  &lv[24][5], &lv[24][6], &lv[24][7], &lv[24][8], &lv[24][9],
 		  &lv[24][10], &lv[24][11], &lv[24][12], &lv[24][13], &lv[24][14],
 		  &Exciter_B);
+	  break;
+
+	case 24:
+	  //Arpie
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[25][0], &lv[25][1], &lv[25][2], &lv[25][3], &lv[25][4],
+		  &lv[25][5], &lv[25][6], &lv[25][7], &lv[25][8], &lv[25][9],
+		  &Arpie_B);
 	  break;
 
 
@@ -755,7 +774,7 @@ RKR::Actualizar_Audio ()
   Ring_Bypass = 0;
   Exciter_Bypass = 0;
   MBDist_Bypass = 0;
-  
+  Arpie_Bypass = 0;  
   
   cleanup_efx ();
 
@@ -803,6 +822,8 @@ RKR::Actualizar_Audio ()
     efx_Exciter->changepar (i, lv[23][i]);
  for (i = 0; i <= 14; i++)
     efx_MBDist->changepar (i, lv[24][i]);
+ for (i = 0; i <= 9; i++)
+    efx_Arpie->changepar (i, lv[25][i]);
 
 
   for (i = 0; i < 19; i++)
@@ -856,6 +877,7 @@ RKR::Actualizar_Audio ()
   Ring_Bypass = Ring_B;
   Exciter_Bypass = Exciter_B;
   MBDist_Bypass = MBDist_B;
+  Arpie_Bypass = Arpie_B;
 
   Bypass = Bypass_B;
 
@@ -922,7 +944,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[25][16] = {
+  int presets[26][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -972,8 +994,10 @@ RKR::New ()
 //Exciter
     {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0 },
 //MBDist
-    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0}
-    
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0},
+//Arpie
+    {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0}
+     
 
   };
 
@@ -1027,6 +1051,7 @@ RKR::New ()
   Ring_B = 0;
   Exciter_B = 0;
   MBDist_B = 0;
+  Arpie_B = 0;
   Bypass_B = 0;
 
   
@@ -1049,7 +1074,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[25][16] = {
+  int presets[26][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1099,7 +1124,10 @@ RKR::New_Bank ()
 //Exciter
     {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0 },
 //MBDist
-    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0}
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0},
+//Arpie
+    {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0}
+    
     
      
          
@@ -1186,6 +1214,7 @@ RKR::Bank_to_Preset (int i)
   Ring_B = Bank[i].lv[22][19];
   Exciter_B = Bank[i].lv[23][19];
   MBDist_B = Bank[i].lv[24][19];  
+  Arpie_B = Bank[i].lv[25][19];
   Bypass_B = Bypass;
 
 
@@ -1264,6 +1293,8 @@ RKR::Preset_to_Bank (int i)
     lv[23][j] = efx_Exciter->getpar(j);
   for (j = 0; j <= 14; j++)
     lv[24][j] = efx_MBDist->getpar(j);
+  for (j = 0; j <= 9; j++)
+    lv[25][j] = efx_Arpie->getpar(j);
 
 
   for (j = 0; j <= 16; j++)
@@ -1321,6 +1352,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[22][19] = Ring_Bypass;
   Bank[i].lv[23][19] = Exciter_Bypass;
   Bank[i].lv[24][19] = MBDist_Bypass;
+  Bank[i].lv[25][19] = Arpie_Bypass;
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
   

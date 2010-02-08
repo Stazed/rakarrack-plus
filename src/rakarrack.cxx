@@ -4201,6 +4201,8 @@ arpie_LRc->value(rkr->efx_Arpie->getpar(4)-64);
 arpie_fb->value(rkr->efx_Arpie->getpar(5));
 arpie_damp->value(rkr->efx_Arpie->getpar(6));
 arpie_arpe->value(rkr->efx_Arpie->getpar(7));
+arpie_harm->value(rkr->efx_Arpie->getpar(8));
+arpie_pattern->value(rkr->efx_Arpie->getpar(9));
 if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
 }
 void RKRGUI::cb_arpie_preset(Fl_Choice* o, void* v) {
@@ -11693,9 +11695,23 @@ mbdist_tipoH->value(rkr->lv[24][7]);
 mbdist_pan->value(rkr->lv[24][1]-64);
 mbdist_st->value(rkr->lv[24][14]);
 mbdist_neg->value(rkr->lv[24][11]);
-
-
 mbdist_activar->value(rkr->MBDist_Bypass);
+
+
+//Arpie
+
+arpie_WD->value(rkr->lv[25][0]-64);
+arpie_pan->value(rkr->lv[25][1]-64);
+arpie_delay->value(rkr->lv[25][2]);
+arpie_LRdl->value(rkr->lv[25][3]);
+arpie_LRc->value(rkr->lv[25][4]-64);
+arpie_fb->value(rkr->lv[25][5]);
+arpie_damp->value(rkr->lv[25][6]);
+arpie_arpe->value(rkr->lv[25][7]);
+arpie_harm->value(rkr->lv[25][8]);
+arpie_pattern->value(rkr->lv[25][9]);
+arpie_activar->value(rkr->Arpie_Bypass);
+
 
 
 

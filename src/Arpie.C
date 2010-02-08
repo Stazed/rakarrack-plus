@@ -410,8 +410,11 @@ Arpie::getpar (int npar)
       return (Preverse);
       break;
     case 8:
-      return (0);
+      return (Pharms);
       break;  
+    case 9:
+      return(Ppattern); 
+      break;
     };
   return (0);			//in case of bogus parameter number
 };
