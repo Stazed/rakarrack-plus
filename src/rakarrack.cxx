@@ -10953,7 +10953,7 @@ Fl::redraw();
 void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
   label_color = bcolor;
 chfsize(0);
-ChangeActives();
+
 
 for (int t=0; t<Settings->children();t++)
   {
@@ -13282,8 +13282,9 @@ for (int t=0; t<Principal->children();t++)
  
   }
 
+ChangeActives();
  
-  Fl::redraw();
+Fl::redraw();
 }
 
 void RKRGUI::adjustfont() {
@@ -13395,7 +13396,6 @@ scheme_ch->value(rkr->sschema);
 scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
-Label_Color_Change(label_color);
 save_stat(3);
 
 Fl::redraw();

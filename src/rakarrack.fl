@@ -5956,8 +5956,7 @@ GMM->redraw();}
     }
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
-About_Version->copy_label(tmp);} {selected
-    }
+About_Version->copy_label(tmp);} {}
   }
   Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
   } {
@@ -6026,7 +6025,7 @@ Fl::redraw();} {}
   Function {Label_Color_Change(Fl_Color bcolor)} {} {
     code {label_color = bcolor;
 chfsize(0);
-ChangeActives();
+
 
 for (int t=0; t<Settings->children();t++)
   {
@@ -8333,8 +8332,10 @@ for (int t=0; t<Principal->children();t++)
  
   }
 
+ChangeActives();
  
-  Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {adjustfont()} {} {
     code {int change,value;
@@ -8442,7 +8443,6 @@ scheme_ch->value(rkr->sschema);
 scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
-Label_Color_Change(label_color);
 save_stat(3);
 
 Fl::redraw();} {}
