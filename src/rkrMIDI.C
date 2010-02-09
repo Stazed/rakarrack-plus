@@ -666,27 +666,27 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 72:
-	  efx_Chorus->changepar (2, (int)((float)value*4.724f));
+	  efx_Chorus->changepar (2, 1+(int)((float)value*4.724f));
       break;
       
     case 73:
-	  efx_Flanger->changepar (2,(int)((float)value*4.724f));
+	  efx_Flanger->changepar (2,1+(int)((float)value*4.724f));
       break;
       
     case 74:
-	  efx_Phaser->changepar (2, (int)((float)value*4.724f));
+	  efx_Phaser->changepar (2, 1+(int)((float)value*4.724f));
       break;
       
     case 75:
-	  efx_WhaWha->changepar (2,(int)((float)value*4.724f));
+	  efx_WhaWha->changepar (2,1+(int)((float)value*4.724f));
       break;
       
     case 76:
-	  efx_Alienwah->changepar (2, (int)((float)value*4.724f));
+	  efx_Alienwah->changepar (2, 1+(int)((float)value*4.724f));
       break;
       
     case 77:
-	  efx_Pan->changepar (2, (int)((float)value*4.724f));
+	  efx_Pan->changepar (2, 1+(int)((float)value*4.724f));
       break;
       
     case 78:
