@@ -11017,6 +11017,16 @@ for (int t=0; t<Settings->children();t++)
  
   }
 
+
+
+for (int t=0; t<ob->children();t++)
+  {
+    Fl_Widget *w = ob->child(t);
+
+     w->labelcolor(label_color);  
+  }  
+
+
 for (int t=0; t<Order->children();t++)
   {
     Fl_Widget *w = Order->child(t);
@@ -11835,6 +11845,7 @@ for (j=1; j<5; j++)
       butX->color(fore_color);
       butX->box(FL_FLAT_BOX);
       butX->selection_color(leds_color);
+      butX->labelcolor(label_color);
       butX->labelsize(14);
       butX->align(68|FL_ALIGN_INSIDE);
       butX->user_data((void*) (num));
