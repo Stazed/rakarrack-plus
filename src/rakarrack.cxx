@@ -11843,7 +11843,7 @@ for (j=1; j<5; j++)
      Fl_Button* butX = new Fl_Button(x+1, y+1, elw,elh,rkr->Bank[num].Preset_Name);
       butX->type(0);
       butX->color(fore_color);
-      butX->box(FL_FLAT_BOX);
+      butX->box(FL_UP_BOX);
       butX->selection_color(leds_color);
       butX->labelcolor(label_color);
       butX->labelsize(14);
