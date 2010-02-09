@@ -5104,14 +5104,17 @@ void RKRGUI::cb_CopyT(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ClearA_i(Fl_Button*, void*) {
-  int i, j;
+  int i, j,k;
 
 for(i=0; i<128; i++)
   {
     for(j=0;j<20;j++)
       {
          if (rkr->XUserMIDI[i][j] == rkr->efx_params[(int)Epar->value()-1].Ato)
-            rkr->XUserMIDI[i][j]=0; 
+           {
+             for(k=j+1;k<20;k++) rkr->XUserMIDI[i][k-1]=rkr->XUserMIDI[i][k];
+             rkr->XUserMIDI[i][19]=0;             
+           }
        
        }  
    }

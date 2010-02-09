@@ -878,8 +878,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -5886,19 +5885,22 @@ DisAssigns();}
       }
       Fl_Button ClearA {
         label {Clear Assignements}
-        callback {int i, j;
+        callback {int i, j,k;
 
 for(i=0; i<128; i++)
   {
     for(j=0;j<20;j++)
       {
          if (rkr->XUserMIDI[i][j] == rkr->efx_params[(int)Epar->value()-1].Ato)
-            rkr->XUserMIDI[i][j]=0; 
+           {
+             for(k=j+1;k<20;k++) rkr->XUserMIDI[i][k-1]=rkr->XUserMIDI[i][k];
+             rkr->XUserMIDI[i][19]=0;             
+           }
        
        }  
    }
    
-DisAssigns();}
+DisAssigns();} selected
         xywh {245 250 150 30}
       }
       Fl_Button ClearP {
@@ -6929,8 +6931,7 @@ ob->end();
 
 made=1;
 
-light_preset(rkr->Selected_Preset);} {selected
-    }
+light_preset(rkr->Selected_Preset);} {}
   }
   Function {reordena()} {} {
     code {int i,j,k,t;
