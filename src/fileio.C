@@ -1010,7 +1010,7 @@ RKR::New ()
 
   bzero (Preset_Name, sizeof (Preset_Name));
   bzero (Author, sizeof (Author));
-
+  strcpy(Author,UserRealName);
   Input_Gain = .5f;
   Master_Volume = .5f;
   Fraction_Bypass = 1.0f;
@@ -1144,7 +1144,7 @@ RKR::New_Bank ()
     {
       bzero (Bank[i].Preset_Name, sizeof (Bank[i].Preset_Name));
       bzero (Bank[i].Author, sizeof (Bank[i].Author));
-
+      strcpy(Bank[i].Author,UserRealName);
       Bank[i].Input_Gain = .5f;
       Bank[i].Master_Volume = .5f;
       Bank[i].Balance = 1.0f;
@@ -1605,31 +1605,6 @@ system(buff);
 
 }
 
-
-
-void 
-RKR::update_bank()
-{
-
-int i,j;
-
-//NewDist   
-
-int preset[16]= {0, 64, 64, 83, 65, 15, 0, 75, 31, 68, 0, 0, 0, 0, 0, 0};
-       
-
-
-for (i=0; i<62; i++)
-  {
- 
- for (j=0; j<16; j++)   
-    {
-      Bank[i].lv[18][j]=preset[j];
-    }   
-  }
-  
-
-}
 
 
 

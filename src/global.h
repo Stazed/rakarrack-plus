@@ -153,7 +153,6 @@ public:
   void Conecta ();
   void disconectaaconnect ();
   void conectaaconnect ();
-  void update_bank();
   int Conv_Data_Version(char* D_Version);
   int BigEndian();
   void fix_endianess();
