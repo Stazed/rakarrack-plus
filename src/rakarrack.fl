@@ -3970,8 +3970,8 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
           xywh {335 307 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider valve_Q {
-          label {Dist,}
-          callback {rkr->efx_Valve->changepar(10,(int)o->value());}
+          label {Dist.}
+          callback {rkr->efx_Valve->changepar(10,(int)o->value());} selected
           xywh {373 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -5900,7 +5900,7 @@ for(i=0; i<128; i++)
        }  
    }
    
-DisAssigns();} selected
+DisAssigns();}
         xywh {245 250 150 30}
       }
       Fl_Button ClearP {

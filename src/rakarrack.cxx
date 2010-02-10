@@ -8886,7 +8886,7 @@ R average.");
         valve_ed->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_ed->callback((Fl_Callback*)cb_valve_ed, (void*)(2));
       } // Fl_Check_Button* valve_ed
-      { valve_Q = new SliderW(373, 323, 100, 10, "Dist,");
+      { valve_Q = new SliderW(373, 323, 100, 10, "Dist.");
         valve_Q->type(5);
         valve_Q->box(FL_FLAT_BOX);
         valve_Q->color((Fl_Color)178);
