@@ -643,11 +643,13 @@ RKR::Control_Volume (float *origl,float *origr)
   float temp_sum;
   float tmp;
 
+  if (have_signal) efx_FLimiter->out(efxoutl, efxoutr); 
+
+
    memcpy(anall, efxoutl, sizeof(float)* PERIOD);
    memcpy(analr, efxoutr, sizeof(float)* PERIOD);
 
 
-  if (have_signal) efx_FLimiter->out(efxoutl, efxoutr); 
 
   for (i = 0; i <= PERIOD; i++)
     {

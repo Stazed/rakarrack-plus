@@ -3971,7 +3971,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
         }
         Fl_Value_Slider valve_Q {
           label {Dist.}
-          callback {rkr->efx_Valve->changepar(10,(int)o->value());} selected
+          callback {rkr->efx_Valve->changepar(10,(int)o->value());}
           xywh {373 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -5222,9 +5222,14 @@ else
         }
         Fl_Button B_preset {
           label Bank
-          callback {BankWindow->show();
+          callback {if(!BankWindow->visible())
+{
+if(!made) make_window_banks();
+BankWindow->show();
 put_icon(BankWindow);
-if(!made) make_window_banks();}
+}
+else
+BankWindow->hide();}
           xywh {448 44 64 18} shortcut 0x62 color 62 labelsize 12
         }
         Fl_Input WPreset_Name {
@@ -5239,6 +5244,7 @@ rkr->Bank_to_Preset((int) o->value());
 light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 FillML(0);
+Prepare_Order();
 Put_Loaded();}
           xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
@@ -5247,43 +5253,13 @@ Put_Loaded();}
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
-          callback {int i,j,k,t;
-Order_Bro->clear();
-Avail_Bro->clear();
-
-for (i=0; i<10;i++) 
+          callback {if (!Order->visible())
 {
-rkr->new_order[i]=rkr->efx_order[i];
-rkr->saved_order[i]=rkr->efx_order[i];
-Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
-}
-
-
-t=1;
-
-for (i=0; i<rkr->NumEffects;i++)
-{
-    k=0;
- for (j=0;j<10;j++)
-   { 
-     if (rkr->efx_order[j]==i) k=1;
-   }     
- 
- if(!k)
- 
- { 
-  Avail_Bro->add(rkr->efx_names[i].Nom);
-  rkr->availables[t]=i;
-  t++;
- }
-
-}
-
-Order_Bro->select(1);
-Avail_Bro->select(1);
-
 Order->show();
-put_icon(Order);}
+put_icon(Order);
+}
+else
+Order->hide();} selected
           xywh {255 132 195 25} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
@@ -6234,7 +6210,7 @@ if (!commandline)
 rakarrack.get(rkr->PrefNom("Preset Num"),k ,1);
 rkr->Selected_Preset=k;
 Preset_Counter->value(k);
-rkr->Bank_to_Preset(k);
+Preset_Counter->do_callback();
 }
 
 rakarrack.get(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway,0); 
@@ -6879,9 +6855,7 @@ unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;
 w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
-rkr->Bank_to_Preset(num);
-FillML(0);
-Put_Loaded();
+Preset_Counter->do_callback();
 }} {}
   }
   Function {make_window_banks()} {} {
@@ -8771,5 +8745,41 @@ for(i=0;i<128;i++)
 }          
 
 }} {}
+  }
+  Function {Prepare_Order()} {} {
+    code {int i,j,k,t;
+Order_Bro->clear();
+Avail_Bro->clear();
+
+for (i=0; i<10;i++) 
+{
+rkr->new_order[i]=rkr->efx_order[i];
+rkr->saved_order[i]=rkr->efx_order[i];
+Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
+}
+
+
+t=1;
+
+for (i=0; i<rkr->NumEffects;i++)
+{
+    k=0;
+ for (j=0;j<10;j++)
+   { 
+     if (rkr->efx_order[j]==i) k=1;
+   }     
+ 
+ if(!k)
+ 
+ { 
+  Avail_Bro->add(rkr->efx_names[i].Nom);
+  rkr->availables[t]=i;
+  t++;
+ }
+
+}
+
+Order_Bro->select(1);
+Avail_Bro->select(1);} {}
   }
 } 

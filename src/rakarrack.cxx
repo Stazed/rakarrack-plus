@@ -4509,9 +4509,14 @@ void RKRGUI::cb_Compare(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_B_preset_i(Fl_Button*, void*) {
-  BankWindow->show();
-put_icon(BankWindow);
+  if(!BankWindow->visible())
+{
 if(!made) make_window_banks();
+BankWindow->show();
+put_icon(BankWindow);
+}
+else
+BankWindow->hide();
 }
 void RKRGUI::cb_B_preset(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_preset_i(o,v);
@@ -4530,6 +4535,7 @@ rkr->Bank_to_Preset((int) o->value());
 light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 FillML(0);
+Prepare_Order();
 Put_Loaded();
 }
 void RKRGUI::cb_Preset_Counter(Fl_Counter* o, void* v) {
@@ -4537,43 +4543,13 @@ void RKRGUI::cb_Preset_Counter(Fl_Counter* o, void* v) {
 }
 
 void RKRGUI::cb_Open_Order_i(Fl_Button*, void*) {
-  int i,j,k,t;
-Order_Bro->clear();
-Avail_Bro->clear();
-
-for (i=0; i<10;i++) 
+  if (!Order->visible())
 {
-rkr->new_order[i]=rkr->efx_order[i];
-rkr->saved_order[i]=rkr->efx_order[i];
-Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
-}
-
-
-t=1;
-
-for (i=0; i<rkr->NumEffects;i++)
-{
-    k=0;
- for (j=0;j<10;j++)
-   { 
-     if (rkr->efx_order[j]==i) k=1;
-   }     
- 
- if(!k)
- 
- { 
-  Avail_Bro->add(rkr->efx_names[i].Nom);
-  rkr->availables[t]=i;
-  t++;
- }
-
-}
-
-Order_Bro->select(1);
-Avail_Bro->select(1);
-
 Order->show();
 put_icon(Order);
+}
+else
+Order->hide();
 }
 void RKRGUI::cb_Open_Order(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Open_Order_i(o,v);
@@ -11169,7 +11145,7 @@ if (!commandline)
 rakarrack.get(rkr->PrefNom("Preset Num"),k ,1);
 rkr->Selected_Preset=k;
 Preset_Counter->value(k);
-rkr->Bank_to_Preset(k);
+Preset_Counter->do_callback();
 }
 
 rakarrack.get(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway,0); 
@@ -11816,9 +11792,7 @@ unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;
 w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
-rkr->Bank_to_Preset(num);
-FillML(0);
-Put_Loaded();
+Preset_Counter->do_callback();
 }
 }
 
@@ -13730,4 +13704,41 @@ for(i=0;i<128;i++)
 }          
 
 }
+}
+
+void RKRGUI::Prepare_Order() {
+  int i,j,k,t;
+Order_Bro->clear();
+Avail_Bro->clear();
+
+for (i=0; i<10;i++) 
+{
+rkr->new_order[i]=rkr->efx_order[i];
+rkr->saved_order[i]=rkr->efx_order[i];
+Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
+}
+
+
+t=1;
+
+for (i=0; i<rkr->NumEffects;i++)
+{
+    k=0;
+ for (j=0;j<10;j++)
+   { 
+     if (rkr->efx_order[j]==i) k=1;
+   }     
+ 
+ if(!k)
+ 
+ { 
+  Avail_Bro->add(rkr->efx_names[i].Nom);
+  rkr->availables[t]=i;
+  t++;
+ }
+
+}
+
+Order_Bro->select(1);
+Avail_Bro->select(1);
 }
