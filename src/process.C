@@ -295,10 +295,10 @@ RKR::init_rkr ()
 
 efx_FLimiter->Compressor_Change(1,-3);
 efx_FLimiter->Compressor_Change(2,15);
-efx_FLimiter->Compressor_Change(3,0);
+efx_FLimiter->Compressor_Change(3,-4);
 efx_FLimiter->Compressor_Change(4,10);
 efx_FLimiter->Compressor_Change(5,500);
-efx_FLimiter->Compressor_Change(6,0);
+efx_FLimiter->Compressor_Change(6,1);
 efx_FLimiter->Compressor_Change(7,0);
 efx_FLimiter->Compressor_Change(8,1);
 
