@@ -886,7 +886,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1695 152 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1728,86 +1728,10 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
         Fl_Choice ovrd_tipo {
           label Type
-          callback {rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());} open
           xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Atan
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym1
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sine
-            xywh {52 52 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Qnts
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Zigzg
-            xywh {72 72 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Lmt
-            xywh {82 82 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtU
-            xywh {92 92 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtL
-            xywh {102 102 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label ILmt
-            xywh {112 112 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Clip
-            xywh {122 122 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym2
-            xywh {132 132 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow2
-            xywh {142 142 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sgm
-            xywh {152 152 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Crunch
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Hard Crunch}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Dirty Octave+}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {0 0 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_dist_tipo);}
+        } {}
         Fl_Check_Button ovrd_neg {
           label {Neg.}
           user_data 2
@@ -2190,38 +2114,10 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
         }
         Fl_Choice phaser_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Phaser->changepar(4,(int)o->value());}
+          callback {rkr->efx_Phaser->changepar(4,(int)o->value());} open
           xywh {221 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Zig Zag}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {10 10 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
         Fl_Check_Button phaser_subs {
           label Subtract
           user_data 2
@@ -2340,38 +2236,10 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         }
         Fl_Choice flanger_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
+          callback {rkr->efx_Flanger->changepar(4,(int)o->value());} open
           xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Zig Zag}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M. Square}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {5 5 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
         Fl_Check_Button flanger_subs {
           label Subtract
           user_data 2
@@ -2745,38 +2613,10 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
         }
         Fl_Choice WhaWha_lfotype {
           label {LFO Type}
-          callback {rkr->efx_WhaWha->changepar(4,(int)o->value())}
+          callback {rkr->efx_WhaWha->changepar(4,(int)o->value())} open
           xywh {223 105 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Zig Zag}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {10 10 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
         Fl_Value_Slider WhaWha_stdf {
           label {St.df}
           callback {rkr->efx_WhaWha->changepar(5,(int)o->value());}
@@ -2882,38 +2722,10 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
         }
         Fl_Choice Alienwah_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Alienwah->changepar(4,(int)o->value())}
+          callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open
           xywh {416 102 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Zig Zag}
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {20 20 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
         Fl_Value_Slider Alienwah_phase {
           label Phase
           callback {rkr->efx_Alienwah->changepar(10,(int)o->value());}
@@ -3089,38 +2901,10 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         }
         Fl_Choice pan_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Pan->changepar(4,(unsigned char)o->value())}
+          callback {rkr->efx_Pan->changepar(4,(unsigned char)o->value())} open
           xywh {64 315 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Zig Zag}
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {30 30 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
         Fl_Value_Slider pan_stdf {
           label {St.df}
           callback {rkr->efx_Pan->changepar(5,(unsigned char)o->value());}
@@ -3396,34 +3180,10 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
         Fl_Choice musdelay_delay2 {
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(8,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
+if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} open selected
           xywh {593 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label 1
-            xywh {10 10 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/2}
-            xywh {20 20 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/3}
-            xywh {30 30 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/4}
-            xywh {40 40 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/5}
-            xywh {50 50 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/6}
-            xywh {60 60 45 26} labelsize 10
-          }
-        }
+          code0 {o->menu(menu_musdelay_delay1);}
+        } {}
         Fl_Value_Slider musdelay_tempo {
           label Tempo
           callback {rkr->MusDelay_Bypass=0;
@@ -3611,86 +3371,10 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
         }
         Fl_Choice newdist_tipo {
           label Type
-          callback {rkr->efx_NewDist->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_NewDist->changepar(5,(unsigned char)o->value());} open
           xywh {354 295 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Atan
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym1
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sine
-            xywh {52 52 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Qnts
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Zigzg
-            xywh {72 72 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Lmt
-            xywh {82 82 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtU
-            xywh {92 92 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtL
-            xywh {102 102 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label ILmt
-            xywh {112 112 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Clip
-            xywh {122 122 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym2
-            xywh {132 132 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow2
-            xywh {142 142 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sgm
-            xywh {152 152 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Crunch
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Hard Crunch}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Dirty Octave+}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
+          code0 {o->menu(menu_dist_tipo);}
+        } {}
         Fl_Check_Button newdist_neg {
           label {Neg.}
           user_data 2
@@ -3797,38 +3481,10 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
         }
         Fl_Choice aphaser_lfotype {
           label {LFO Type}
-          callback {rkr->efx_APhaser->changepar(4,(int)o->value());}
+          callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open
           xywh {395 257 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Zig Zag}
-            xywh {40 40 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {40 40 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
         Fl_Value_Slider aphaser_freq {
           label Tempo
           callback {rkr->efx_APhaser->changepar(2,(int)o->value());}
@@ -4139,38 +3795,10 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
         }
         Fl_Choice dflange_lfotype {
           label {LFO Type}
-          callback {rkr->efx_DFlange->changepar(12,(int)o->value());}
+          callback {rkr->efx_DFlange->changepar(12,(int)o->value());} open
           xywh {383 364 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Zig Zag}
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M. Square}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {15 15 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
         Fl_Value_Slider dflange_rnd {
           label Rnd
           callback {rkr->efx_DFlange->changepar(13,(int)o->value());}
@@ -4343,7 +3971,7 @@ ex_9->value(rkr->efx_Exciter->getpar(9));
 ex_10->value(rkr->efx_Exciter->getpar(10));
 ex_lfreq->value(rkr->efx_Exciter->getpar(11));
 ex_hfreq->value(rkr->efx_Exciter->getpar(12));
-if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;} open
+if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4547,248 +4175,20 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
           class SliderW
         }
         Fl_Choice mbdist_tipoL {
-          callback {rkr->efx_MBDist->changepar(5,(int)o->value());}
+          callback {rkr->efx_MBDist->changepar(5,(int)o->value());} open
           xywh {323 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Atan
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym1
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sine
-            xywh {52 52 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Qnts
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Zigzg
-            xywh {72 72 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Lmt
-            xywh {82 82 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtU
-            xywh {92 92 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtL
-            xywh {102 102 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label ILmt
-            xywh {112 112 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Clip
-            xywh {122 122 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym2
-            xywh {132 132 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow2
-            xywh {142 142 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sgm
-            xywh {152 152 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Crunch
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Hard Crunch}
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Dirty Octave+}
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {10 10 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_dist_tipo);}
+        } {}
         Fl_Choice mbdist_tipoM {
-          callback {rkr->efx_MBDist->changepar(6,(int)o->value());}
+          callback {rkr->efx_MBDist->changepar(6,(int)o->value());} open
           xywh {374 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Atan
-            xywh {52 52 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym1
-            xywh {52 52 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow
-            xywh {52 52 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sine
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Qnts
-            xywh {72 72 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Zigzg
-            xywh {82 82 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Lmt
-            xywh {92 92 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtU
-            xywh {102 102 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtL
-            xywh {112 112 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label ILmt
-            xywh {122 122 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Clip
-            xywh {132 132 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym2
-            xywh {142 142 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow2
-            xywh {152 152 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sgm
-            xywh {162 162 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Crunch
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Hard Crunch}
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Dirty Octave+}
-            xywh {40 40 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {20 20 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_dist_tipo);}
+        } {}
         Fl_Choice mbdist_tipoH {
-          callback {rkr->efx_MBDist->changepar(7,(int)o->value());}
+          callback {rkr->efx_MBDist->changepar(7,(int)o->value());} open
           xywh {425 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Atan
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym1
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sine
-            xywh {72 72 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Qnts
-            xywh {82 82 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Zigzg
-            xywh {92 92 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Lmt
-            xywh {102 102 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtU
-            xywh {112 112 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtL
-            xywh {122 122 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label ILmt
-            xywh {132 132 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Clip
-            xywh {142 142 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym2
-            xywh {152 152 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow2
-            xywh {162 162 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sgm
-            xywh {172 172 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Crunch
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Hard Crunch}
-            xywh {40 40 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Dirty Octave+}
-            xywh {50 50 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {30 30 36 21} labelsize 9
-          }
-        }
+          code0 {o->menu(menu_dist_tipo);}
+        } {}
         Fl_Value_Slider mbdist_pan {
           label Pan
           callback {rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
@@ -8781,7 +8181,6 @@ for (i=0; i<rkr->NumEffects;i++)
 
 
 Order_Bro->select(1);
-Avail_Bro->select(1);} {selected
-    }
+Avail_Bro->select(1);} {}
   }
 } 

@@ -1606,29 +1606,6 @@ void RKRGUI::cb_ovrd_tipo(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_tipo_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_ovrd_tipo[] = {
- {"Atan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_ovrd_neg_i(Fl_Check_Button* o, void*) {
   rkr->efx_Overdrive->changepar(6,(unsigned char)o->value());
 }
@@ -1971,17 +1948,6 @@ void RKRGUI::cb_phaser_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_lfotype_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_phaser_lfotype[] = {
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zig Zag", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_phaser_subs_i(Fl_Check_Button* o, void*) {
   rkr->efx_Phaser->changepar(10,(int)o->value());
 }
@@ -2102,17 +2068,6 @@ void RKRGUI::cb_flanger_lfotype_i(Fl_Choice* o, void*) {
 void RKRGUI::cb_flanger_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_lfotype_i(o,v);
 }
-
-Fl_Menu_Item RKRGUI::menu_flanger_lfotype[] = {
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zig Zag", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M. Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void RKRGUI::cb_flanger_subs_i(Fl_Check_Button* o, void*) {
   rkr->efx_Flanger->changepar(11,(int)o->value());
@@ -2466,17 +2421,6 @@ void RKRGUI::cb_WhaWha_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_lfotype_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_WhaWha_lfotype[] = {
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zig Zag", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_WhaWha_stdf_i(SliderW* o, void*) {
   rkr->efx_WhaWha->changepar(5,(int)o->value());
 }
@@ -2584,17 +2528,6 @@ void RKRGUI::cb_Alienwah_lfotype_i(Fl_Choice* o, void*) {
 void RKRGUI::cb_Alienwah_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_lfotype_i(o,v);
 }
-
-Fl_Menu_Item RKRGUI::menu_Alienwah_lfotype[] = {
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zig Zag", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void RKRGUI::cb_Alienwah_phase_i(SliderW* o, void*) {
   rkr->efx_Alienwah->changepar(10,(int)o->value());
@@ -2750,17 +2683,6 @@ void RKRGUI::cb_pan_lfotype_i(Fl_Choice* o, void*) {
 void RKRGUI::cb_pan_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_lfotype_i(o,v);
 }
-
-Fl_Menu_Item RKRGUI::menu_pan_lfotype[] = {
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zig Zag", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void RKRGUI::cb_pan_stdf_i(SliderW* o, void*) {
   rkr->efx_Pan->changepar(5,(unsigned char)o->value());
@@ -3018,16 +2940,6 @@ void RKRGUI::cb_musdelay_delay2(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_delay2_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_musdelay_delay2[] = {
- {"1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"1/2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"1/3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"1/5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"1/6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_musdelay_tempo_i(SliderW* o, void*) {
   rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(10,(int)o->value());
@@ -3221,29 +3133,6 @@ void RKRGUI::cb_newdist_tipo(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_tipo_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_newdist_tipo[] = {
- {"Atan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_newdist_neg_i(Fl_Check_Button* o, void*) {
   rkr->efx_NewDist->changepar(6,(unsigned char)o->value());
 }
@@ -3345,17 +3234,6 @@ void RKRGUI::cb_aphaser_lfotype_i(Fl_Choice* o, void*) {
 void RKRGUI::cb_aphaser_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_lfotype_i(o,v);
 }
-
-Fl_Menu_Item RKRGUI::menu_aphaser_lfotype[] = {
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zig Zag", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void RKRGUI::cb_aphaser_freq_i(SliderW* o, void*) {
   rkr->efx_APhaser->changepar(2,(int)o->value());
@@ -3685,17 +3563,6 @@ void RKRGUI::cb_dflange_lfotype_i(Fl_Choice* o, void*) {
 void RKRGUI::cb_dflange_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_lfotype_i(o,v);
 }
-
-Fl_Menu_Item RKRGUI::menu_dflange_lfotype[] = {
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zig Zag", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M. Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void RKRGUI::cb_dflange_rnd_i(SliderW* o, void*) {
   rkr->efx_DFlange->changepar(13,(int)o->value());
@@ -4076,29 +3943,6 @@ void RKRGUI::cb_mbdist_tipoL(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_tipoL_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_mbdist_tipoL[] = {
- {"Atan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_mbdist_tipoM_i(Fl_Choice* o, void*) {
   rkr->efx_MBDist->changepar(6,(int)o->value());
 }
@@ -4106,58 +3950,12 @@ void RKRGUI::cb_mbdist_tipoM(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_tipoM_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_mbdist_tipoM[] = {
- {"Atan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_mbdist_tipoH_i(Fl_Choice* o, void*) {
   rkr->efx_MBDist->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_mbdist_tipoH(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_tipoH_i(o,v);
 }
-
-Fl_Menu_Item RKRGUI::menu_mbdist_tipoH[] = {
- {"Atan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void RKRGUI::cb_mbdist_pan_i(SliderW* o, void*) {
   rkr->efx_MBDist->changepar(1,(int)(o->value()+64));
@@ -5965,7 +5763,7 @@ R average.");
         ovrd_level->align(FL_ALIGN_LEFT);
         ovrd_level->when(FL_WHEN_CHANGED);
       } // SliderW* ovrd_level
-      { ovrd_tipo = new Fl_Choice(513, 303, 72, 16, "Type");
+      { Fl_Choice* o = ovrd_tipo = new Fl_Choice(513, 303, 72, 16, "Type");
         ovrd_tipo->down_box(FL_BORDER_BOX);
         ovrd_tipo->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         ovrd_tipo->labelsize(10);
@@ -5973,7 +5771,7 @@ R average.");
         ovrd_tipo->textsize(10);
         ovrd_tipo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_tipo->callback((Fl_Callback*)cb_ovrd_tipo);
-        ovrd_tipo->menu(menu_ovrd_tipo);
+        o->menu(menu_dist_tipo);
       } // Fl_Choice* ovrd_tipo
       { ovrd_neg = new Fl_Check_Button(589, 304, 46, 15, "Neg.");
         ovrd_neg->down_box(FL_BORDER_BOX);
@@ -6494,7 +6292,7 @@ R average.");
         phaser_rnd->align(FL_ALIGN_LEFT);
         phaser_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* phaser_rnd
-      { phaser_lfotype = new Fl_Choice(221, 490, 72, 16, "LFO Type");
+      { Fl_Choice* o = phaser_lfotype = new Fl_Choice(221, 490, 72, 16, "LFO Type");
         phaser_lfotype->down_box(FL_BORDER_BOX);
         phaser_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         phaser_lfotype->labelsize(10);
@@ -6502,7 +6300,7 @@ R average.");
         phaser_lfotype->textsize(10);
         phaser_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_lfotype->callback((Fl_Callback*)cb_phaser_lfotype);
-        phaser_lfotype->menu(menu_phaser_lfotype);
+        o->menu(menu_chorus_lfotype);
       } // Fl_Choice* phaser_lfotype
       { phaser_subs = new Fl_Check_Button(201, 507, 64, 15, "Subtract");
         phaser_subs->down_box(FL_BORDER_BOX);
@@ -6700,7 +6498,7 @@ R average.");
         flanger_rnd->align(FL_ALIGN_LEFT);
         flanger_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* flanger_rnd
-      { flanger_lfotype = new Fl_Choice(384, 490, 72, 16, "LFO Type");
+      { Fl_Choice* o = flanger_lfotype = new Fl_Choice(384, 490, 72, 16, "LFO Type");
         flanger_lfotype->down_box(FL_BORDER_BOX);
         flanger_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         flanger_lfotype->labelsize(10);
@@ -6708,7 +6506,7 @@ R average.");
         flanger_lfotype->textsize(10);
         flanger_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_lfotype->callback((Fl_Callback*)cb_flanger_lfotype);
-        flanger_lfotype->menu(menu_flanger_lfotype);
+        o->menu(menu_chorus_lfotype);
       } // Fl_Choice* flanger_lfotype
       { flanger_subs = new Fl_Check_Button(363, 507, 64, 15, "Subtract");
         flanger_subs->down_box(FL_BORDER_BOX);
@@ -7284,7 +7082,7 @@ R average.");
         WhaWha_rnd->align(FL_ALIGN_LEFT);
         WhaWha_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_rnd
-      { WhaWha_lfotype = new Fl_Choice(223, 105, 72, 16, "LFO Type");
+      { Fl_Choice* o = WhaWha_lfotype = new Fl_Choice(223, 105, 72, 16, "LFO Type");
         WhaWha_lfotype->down_box(FL_BORDER_BOX);
         WhaWha_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         WhaWha_lfotype->labelsize(10);
@@ -7292,7 +7090,7 @@ R average.");
         WhaWha_lfotype->textsize(10);
         WhaWha_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_lfotype->callback((Fl_Callback*)cb_WhaWha_lfotype);
-        WhaWha_lfotype->menu(menu_WhaWha_lfotype);
+        o->menu(menu_chorus_lfotype);
       } // Fl_Choice* WhaWha_lfotype
       { WhaWha_stdf = new SliderW(211, 143, 100, 10, "St.df");
         WhaWha_stdf->type(5);
@@ -7471,7 +7269,7 @@ R average.");
         Alienwah_rnd->align(FL_ALIGN_LEFT);
         Alienwah_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_rnd
-      { Alienwah_lfotype = new Fl_Choice(416, 102, 72, 16, "LFO Type");
+      { Fl_Choice* o = Alienwah_lfotype = new Fl_Choice(416, 102, 72, 16, "LFO Type");
         Alienwah_lfotype->down_box(FL_BORDER_BOX);
         Alienwah_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         Alienwah_lfotype->labelsize(10);
@@ -7479,7 +7277,7 @@ R average.");
         Alienwah_lfotype->textsize(10);
         Alienwah_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_lfotype->callback((Fl_Callback*)cb_Alienwah_lfotype);
-        Alienwah_lfotype->menu(menu_Alienwah_lfotype);
+        o->menu(menu_chorus_lfotype);
       } // Fl_Choice* Alienwah_lfotype
       { Alienwah_phase = new SliderW(404, 128, 100, 10, "Phase");
         Alienwah_phase->type(5);
@@ -7728,7 +7526,7 @@ R average.");
         pan_rnd->align(FL_ALIGN_LEFT);
         pan_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* pan_rnd
-      { pan_lfotype = new Fl_Choice(64, 315, 72, 16, "LFO Type");
+      { Fl_Choice* o = pan_lfotype = new Fl_Choice(64, 315, 72, 16, "LFO Type");
         pan_lfotype->down_box(FL_BORDER_BOX);
         pan_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         pan_lfotype->labelsize(10);
@@ -7736,7 +7534,7 @@ R average.");
         pan_lfotype->textsize(10);
         pan_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_lfotype->callback((Fl_Callback*)cb_pan_lfotype);
-        pan_lfotype->menu(menu_pan_lfotype);
+        o->menu(menu_chorus_lfotype);
       } // Fl_Choice* pan_lfotype
       { pan_stdf = new SliderW(52, 336, 100, 10, "St.df");
         pan_stdf->type(5);
@@ -8089,14 +7887,14 @@ R average.");
         musdelay_delay3->callback((Fl_Callback*)cb_musdelay_delay3);
         musdelay_delay3->menu(menu_musdelay_delay3);
       } // Fl_Choice* musdelay_delay3
-      { musdelay_delay2 = new Fl_Choice(593, 293, 38, 14);
+      { Fl_Choice* o = musdelay_delay2 = new Fl_Choice(593, 293, 38, 14);
         musdelay_delay2->down_box(FL_BORDER_BOX);
         musdelay_delay2->labelsize(10);
         musdelay_delay2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay2->textsize(10);
         musdelay_delay2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay2->callback((Fl_Callback*)cb_musdelay_delay2);
-        musdelay_delay2->menu(menu_musdelay_delay2);
+        o->menu(menu_musdelay_delay1);
       } // Fl_Choice* musdelay_delay2
       { musdelay_tempo = new SliderW(532, 314, 100, 10, "Tempo");
         musdelay_tempo->type(5);
@@ -8445,7 +8243,7 @@ R average.");
         newdist_level->align(FL_ALIGN_LEFT);
         newdist_level->when(FL_WHEN_CHANGED);
       } // SliderW* newdist_level
-      { newdist_tipo = new Fl_Choice(354, 295, 70, 16, "Type");
+      { Fl_Choice* o = newdist_tipo = new Fl_Choice(354, 295, 70, 16, "Type");
         newdist_tipo->down_box(FL_BORDER_BOX);
         newdist_tipo->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         newdist_tipo->labelsize(10);
@@ -8453,7 +8251,7 @@ R average.");
         newdist_tipo->textsize(10);
         newdist_tipo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_tipo->callback((Fl_Callback*)cb_newdist_tipo);
-        newdist_tipo->menu(menu_newdist_tipo);
+        o->menu(menu_dist_tipo);
       } // Fl_Choice* newdist_tipo
       { newdist_neg = new Fl_Check_Button(430, 295, 40, 15, "Neg.");
         newdist_neg->down_box(FL_BORDER_BOX);
@@ -8595,7 +8393,7 @@ R average.");
         aphaser_WD->align(FL_ALIGN_LEFT);
         aphaser_WD->when(FL_WHEN_CHANGED);
       } // SliderW* aphaser_WD
-      { aphaser_lfotype = new Fl_Choice(395, 257, 72, 16, "LFO Type");
+      { Fl_Choice* o = aphaser_lfotype = new Fl_Choice(395, 257, 72, 16, "LFO Type");
         aphaser_lfotype->down_box(FL_BORDER_BOX);
         aphaser_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         aphaser_lfotype->labelsize(10);
@@ -8603,7 +8401,7 @@ R average.");
         aphaser_lfotype->textsize(10);
         aphaser_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_lfotype->callback((Fl_Callback*)cb_aphaser_lfotype);
-        aphaser_lfotype->menu(menu_aphaser_lfotype);
+        o->menu(menu_chorus_lfotype);
       } // Fl_Choice* aphaser_lfotype
       { aphaser_freq = new SliderW(368, 278, 100, 10, "Tempo");
         aphaser_freq->type(5);
@@ -9156,7 +8954,7 @@ R average.");
         dflange_stdf->align(FL_ALIGN_LEFT);
         dflange_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* dflange_stdf
-      { dflange_lfotype = new Fl_Choice(383, 364, 72, 15, "LFO Type");
+      { Fl_Choice* o = dflange_lfotype = new Fl_Choice(383, 364, 72, 15, "LFO Type");
         dflange_lfotype->down_box(FL_BORDER_BOX);
         dflange_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         dflange_lfotype->labelsize(10);
@@ -9164,7 +8962,7 @@ R average.");
         dflange_lfotype->textsize(10);
         dflange_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_lfotype->callback((Fl_Callback*)cb_dflange_lfotype);
-        dflange_lfotype->menu(menu_dflange_lfotype);
+        o->menu(menu_chorus_lfotype);
       } // Fl_Choice* dflange_lfotype
       { dflange_rnd = new SliderW(372, 381, 100, 10, "Rnd");
         dflange_rnd->type(5);
@@ -9836,7 +9634,7 @@ R average.");
         mbdist_cross2->align(FL_ALIGN_LEFT);
         mbdist_cross2->when(FL_WHEN_CHANGED);
       } // SliderW* mbdist_cross2
-      { mbdist_tipoL = new Fl_Choice(323, 350, 50, 16);
+      { Fl_Choice* o = mbdist_tipoL = new Fl_Choice(323, 350, 50, 16);
         mbdist_tipoL->down_box(FL_BORDER_BOX);
         mbdist_tipoL->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         mbdist_tipoL->labelsize(10);
@@ -9844,9 +9642,9 @@ R average.");
         mbdist_tipoL->textsize(10);
         mbdist_tipoL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoL->callback((Fl_Callback*)cb_mbdist_tipoL);
-        mbdist_tipoL->menu(menu_mbdist_tipoL);
+        o->menu(menu_dist_tipo);
       } // Fl_Choice* mbdist_tipoL
-      { mbdist_tipoM = new Fl_Choice(374, 350, 50, 16);
+      { Fl_Choice* o = mbdist_tipoM = new Fl_Choice(374, 350, 50, 16);
         mbdist_tipoM->down_box(FL_BORDER_BOX);
         mbdist_tipoM->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         mbdist_tipoM->labelsize(10);
@@ -9854,9 +9652,9 @@ R average.");
         mbdist_tipoM->textsize(10);
         mbdist_tipoM->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoM->callback((Fl_Callback*)cb_mbdist_tipoM);
-        mbdist_tipoM->menu(menu_mbdist_tipoM);
+        o->menu(menu_dist_tipo);
       } // Fl_Choice* mbdist_tipoM
-      { mbdist_tipoH = new Fl_Choice(425, 350, 50, 16);
+      { Fl_Choice* o = mbdist_tipoH = new Fl_Choice(425, 350, 50, 16);
         mbdist_tipoH->down_box(FL_BORDER_BOX);
         mbdist_tipoH->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         mbdist_tipoH->labelsize(10);
@@ -9864,7 +9662,7 @@ R average.");
         mbdist_tipoH->textsize(10);
         mbdist_tipoH->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_tipoH->callback((Fl_Callback*)cb_mbdist_tipoH);
-        mbdist_tipoH->menu(menu_mbdist_tipoH);
+        o->menu(menu_dist_tipo);
       } // Fl_Choice* mbdist_tipoH
       { mbdist_pan = new SliderW(372, 369, 100, 10, "Pan");
         mbdist_pan->type(5);

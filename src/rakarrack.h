@@ -418,7 +418,6 @@ public:
 private:
   void cb_ovrd_tipo_i(Fl_Choice*, void*);
   static void cb_ovrd_tipo(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_ovrd_tipo[];
 public:
   Fl_Check_Button *ovrd_neg;
 private:
@@ -606,7 +605,6 @@ public:
 private:
   void cb_phaser_lfotype_i(Fl_Choice*, void*);
   static void cb_phaser_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_phaser_lfotype[];
 public:
   Fl_Check_Button *phaser_subs;
 private:
@@ -679,7 +677,6 @@ public:
 private:
   void cb_flanger_lfotype_i(Fl_Choice*, void*);
   static void cb_flanger_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_flanger_lfotype[];
 public:
   Fl_Check_Button *flanger_subs;
 private:
@@ -874,7 +871,6 @@ public:
 private:
   void cb_WhaWha_lfotype_i(Fl_Choice*, void*);
   static void cb_WhaWha_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_WhaWha_lfotype[];
 public:
   SliderW *WhaWha_stdf;
 private:
@@ -937,7 +933,6 @@ public:
 private:
   void cb_Alienwah_lfotype_i(Fl_Choice*, void*);
   static void cb_Alienwah_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_Alienwah_lfotype[];
 public:
   SliderW *Alienwah_phase;
 private:
@@ -1027,7 +1022,6 @@ public:
 private:
   void cb_pan_lfotype_i(Fl_Choice*, void*);
   static void cb_pan_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_pan_lfotype[];
 public:
   SliderW *pan_stdf;
 private:
@@ -1160,7 +1154,6 @@ public:
 private:
   void cb_musdelay_delay2_i(Fl_Choice*, void*);
   static void cb_musdelay_delay2(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_musdelay_delay2[];
 public:
   SliderW *musdelay_tempo;
 private:
@@ -1275,7 +1268,6 @@ public:
 private:
   void cb_newdist_tipo_i(Fl_Choice*, void*);
   static void cb_newdist_tipo(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_newdist_tipo[];
 public:
   Fl_Check_Button *newdist_neg;
 private:
@@ -1333,7 +1325,6 @@ public:
 private:
   void cb_aphaser_lfotype_i(Fl_Choice*, void*);
   static void cb_aphaser_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_aphaser_lfotype[];
 public:
   SliderW *aphaser_freq;
 private:
@@ -1538,7 +1529,6 @@ public:
 private:
   void cb_dflange_lfotype_i(Fl_Choice*, void*);
   static void cb_dflange_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_dflange_lfotype[];
 public:
   SliderW *dflange_rnd;
 private:
@@ -1760,19 +1750,16 @@ public:
 private:
   void cb_mbdist_tipoL_i(Fl_Choice*, void*);
   static void cb_mbdist_tipoL(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_mbdist_tipoL[];
 public:
   Fl_Choice *mbdist_tipoM;
 private:
   void cb_mbdist_tipoM_i(Fl_Choice*, void*);
   static void cb_mbdist_tipoM(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_mbdist_tipoM[];
 public:
   Fl_Choice *mbdist_tipoH;
 private:
   void cb_mbdist_tipoH_i(Fl_Choice*, void*);
   static void cb_mbdist_tipoH(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_mbdist_tipoH[];
 public:
   SliderW *mbdist_pan;
 private:
