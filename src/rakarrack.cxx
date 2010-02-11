@@ -4545,6 +4545,7 @@ void RKRGUI::cb_Preset_Counter(Fl_Counter* o, void* v) {
 void RKRGUI::cb_Open_Order_i(Fl_Button*, void*) {
   if (!Order->visible())
 {
+Prepare_Order();
 Order->show();
 put_icon(Order);
 }
@@ -4711,7 +4712,6 @@ Avail_Bro->select(1);
 
 x=rkr->new_order[i-1];
 rkr->new_order[i-1]=rkr->availables[j];
-
 rkr->availables[j]=x;
 }
 void RKRGUI::cb_Pon(Fl_Button* o, void* v) {
@@ -4764,7 +4764,7 @@ void RKRGUI::cb_Baja(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_ok_order_i(Fl_Button*, void*) {
   int i;
-for (i=0;i<14;i++) rkr->efx_order[i]=rkr->new_order[i];
+for (i=0;i<10;i++) rkr->efx_order[i]=rkr->new_order[i];
 reordena();
 Order->do_callback();
 }
@@ -9255,8 +9255,10 @@ R average.");
         ring_input->labelfont(0);
         ring_input->labelsize(10);
         ring_input->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ring_input->minimum(1);
         ring_input->maximum(127);
         ring_input->step(1);
+        ring_input->value(1);
         ring_input->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_input->callback((Fl_Callback*)cb_ring_input);
         ring_input->align(FL_ALIGN_LEFT);
@@ -11893,7 +11895,6 @@ t=1;
 
 for (i=0; i<rkr->NumEffects;i++)
 {
-
  k=0;
  for (j=0;j<10;j++) if (rkr->efx_order[j]==i) k=1;
        
@@ -12045,7 +12046,7 @@ switch(i)
        break;
 }
 
-switch ( rkr->efx_order[i])
+switch (rkr->efx_order[i])
   {
   
     case 0:
@@ -13718,11 +13719,11 @@ rkr->saved_order[i]=rkr->efx_order[i];
 Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
 }
 
-
 t=1;
 
 for (i=0; i<rkr->NumEffects;i++)
 {
+    
     k=0;
  for (j=0;j<10;j++)
    { 
@@ -13733,11 +13734,13 @@ for (i=0; i<rkr->NumEffects;i++)
  
  { 
   Avail_Bro->add(rkr->efx_names[i].Nom);
+   
   rkr->availables[t]=i;
   t++;
  }
 
 }
+
 
 Order_Bro->select(1);
 Avail_Bro->select(1);

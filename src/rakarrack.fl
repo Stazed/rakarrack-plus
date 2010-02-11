@@ -4249,7 +4249,7 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
         Fl_Value_Slider ring_input {
           label Input
           callback {rkr->efx_Ring->changepar(11,(int)o->value());}
-          xywh {371 266 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {371 266 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider ring_level {
@@ -5255,11 +5255,12 @@ Put_Loaded();}
           label {Put Order in your Rack}
           callback {if (!Order->visible())
 {
+Prepare_Order();
 Order->show();
 put_icon(Order);
 }
 else
-Order->hide();} selected
+Order->hide();}
           xywh {255 132 195 25} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
@@ -5409,7 +5410,6 @@ Avail_Bro->select(1);
 
 x=rkr->new_order[i-1];
 rkr->new_order[i-1]=rkr->availables[j];
-
 rkr->availables[j]=x;}
         xywh {217 168 72 25} labelsize 18
       }
@@ -5459,7 +5459,7 @@ rkr->new_order[i+1]=x;
       Fl_Button ok_order {
         label Ok
         callback {int i;
-for (i=0;i<14;i++) rkr->efx_order[i]=rkr->new_order[i];
+for (i=0;i<10;i++) rkr->efx_order[i]=rkr->new_order[i];
 reordena();
 Order->do_callback();}
         xywh {436 354 72 26}
@@ -6954,7 +6954,6 @@ t=1;
 
 for (i=0; i<rkr->NumEffects;i++)
 {
-
  k=0;
  for (j=0;j<10;j++) if (rkr->efx_order[j]==i) k=1;
        
@@ -7106,7 +7105,7 @@ switch(i)
        break;
 }
 
-switch ( rkr->efx_order[i])
+switch (rkr->efx_order[i])
   {
   
     case 0:
@@ -8758,11 +8757,11 @@ rkr->saved_order[i]=rkr->efx_order[i];
 Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
 }
 
-
 t=1;
 
 for (i=0; i<rkr->NumEffects;i++)
 {
+    
     k=0;
  for (j=0;j<10;j++)
    { 
@@ -8773,13 +8772,16 @@ for (i=0; i<rkr->NumEffects;i++)
  
  { 
   Avail_Bro->add(rkr->efx_names[i].Nom);
+   
   rkr->availables[t]=i;
   t++;
  }
 
 }
 
+
 Order_Bro->select(1);
-Avail_Bro->select(1);} {}
+Avail_Bro->select(1);} {selected
+    }
   }
 } 
