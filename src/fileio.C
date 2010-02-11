@@ -830,7 +830,7 @@ RKR::Actualizar_Audio ()
     efx_Arpie->changepar (i, lv[25][i]);
 
 
-  for (i = 0; i < 19; i++)
+  for (i = 0; i < 12; i++)
     efx_order[i] = lv[10][i];
 
 
@@ -1026,7 +1026,7 @@ RKR::New ()
     }
 
 
-  for (k = 0; k < 16; k++)
+  for (k = 0; k < 12; k++)
     efx_order[k] = presets[10][k];
 
 
@@ -1190,7 +1190,7 @@ RKR::Bank_to_Preset (int i)
     }
 
 
-  for (k = 0; k < 16; k++)
+  for (k = 0; k < 12; k++)
   efx_order[k] = Bank[i].lv[10][k];
 
 
@@ -1300,7 +1300,7 @@ RKR::Preset_to_Bank (int i)
     lv[25][j] = efx_Arpie->getpar(j);
 
 
-  for (j = 0; j <= 16; j++)
+  for (j = 0; j <= 12; j++)
     lv[10][j] = efx_order[j];
 
   for (j = 0; j < 10; j++)

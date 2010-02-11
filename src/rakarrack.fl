@@ -886,7 +886,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1695 152 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -972,17 +972,27 @@ rkr->saveskin(filename);}
         } {
           MenuItem Ajustes {
             label Preferences
-            callback {MiraClientes();
+            callback {if(!Settings->visible())
+{
+MiraClientes();
 MiraConfig();
 Settings->show();
-put_icon(Settings);}
+put_icon(Settings);
+}
+else
+Settings->hide();}
             xywh {10 10 45 26} shortcut 0x69 labelcolor 7 divider
           }
           MenuItem ML_Menu {
             label {MIDI Learn}
-            callback {FillML(0);
+            callback {if(!MIDILearn->visible())
+{
+FillML(0);
 MIDILearn->show();
-put_icon(MIDILearn);}
+put_icon(MIDILearn);
+}
+else
+MIDILearn->hide();}
             xywh {0 0 36 21} shortcut 0x65 labelcolor 7
           }
         }
@@ -3180,7 +3190,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
         Fl_Choice musdelay_delay2 {
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(8,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} open selected
+if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} open
           xywh {593 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_musdelay_delay1);}
         } {}
@@ -4867,7 +4877,7 @@ Order->do_callback();}
       Fl_Button Cancel_order {
         label Cancel
         callback {int i;
-for (i=0;i<14;i++) rkr->efx_order[i]=rkr->saved_order[i];
+for (i=0;i<10;i++) rkr->efx_order[i]=rkr->saved_order[i];
 Order->do_callback();}
         xywh {516 354 72 26}
       }
@@ -6708,7 +6718,8 @@ switch (rkr->efx_order[i])
   
   
  
-  Fl::redraw();} {}
+  Fl::redraw();} {selected
+    }
   }
   Function {show_help()} {} {
     code {char temp[128];

@@ -927,19 +927,29 @@ void RKRGUI::cb_Bank_Menu(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_Ajustes_i(Fl_Menu_*, void*) {
-  MiraClientes();
+  if(!Settings->visible())
+{
+MiraClientes();
 MiraConfig();
 Settings->show();
 put_icon(Settings);
+}
+else
+Settings->hide();
 }
 void RKRGUI::cb_Ajustes(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Ajustes_i(o,v);
 }
 
 void RKRGUI::cb_ML_Menu_i(Fl_Menu_*, void*) {
-  FillML(0);
+  if(!MIDILearn->visible())
+{
+FillML(0);
 MIDILearn->show();
 put_icon(MIDILearn);
+}
+else
+MIDILearn->hide();
 }
 void RKRGUI::cb_ML_Menu(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ML_Menu_i(o,v);
@@ -4572,7 +4582,7 @@ void RKRGUI::cb_ok_order(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_Cancel_order_i(Fl_Button*, void*) {
   int i;
-for (i=0;i<14;i++) rkr->efx_order[i]=rkr->saved_order[i];
+for (i=0;i<10;i++) rkr->efx_order[i]=rkr->saved_order[i];
 Order->do_callback();
 }
 void RKRGUI::cb_Cancel_order(Fl_Button* o, void* v) {

@@ -255,9 +255,9 @@ public:
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];
-  int saved_order[24];
-  int efx_order[24];
-  int new_order[24];
+  int saved_order[16];
+  int efx_order[16];
+  int new_order[16];
   int availables[40];
   int active[12];
   int MidiCh;
