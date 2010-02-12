@@ -122,7 +122,6 @@ MBDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  efxoutr[i] = smpsr[i] * inputvol * 2.0f;        
 	};
  
-
   memcpy(lowl,efxoutl,sizeof(float) * PERIOD);
   memcpy(midl,efxoutl,sizeof(float) * PERIOD);
   memcpy(highl,efxoutl,sizeof(float) * PERIOD);

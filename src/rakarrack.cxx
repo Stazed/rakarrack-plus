@@ -11763,7 +11763,7 @@ for (i=1; i<=t; i++)
         WHAWHA->hide();
         break;
         case 11:
-        ALIENWAH->hide();        
+        ALIENWAH->hide(); 
         break;
         case 12:
         CABINET->hide();
@@ -11773,6 +11773,8 @@ for (i=1; i<=t; i++)
         break;
         case 14:
         HAR->hide();
+        har_activar->value(0);
+        rkr->Harmonizer_Bypass = 0;
         break;
         case 15:
         MUSDELAY->hide();
@@ -11794,6 +11796,8 @@ for (i=1; i<=t; i++)
         break;
         case 21:
         RING->hide();
+        ring_activar->value(0);
+        rkr->Ring_Bypass = 0;
         break;
         case 22:
         EXCITER->hide();
