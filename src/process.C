@@ -338,9 +338,6 @@ efx_FLimiter->Compressor_Change(8,1);
   RC->cleanup ();
   reconota = -1;
 
-
-
-
 }
 
 
@@ -358,7 +355,6 @@ RKR::ConnectMIDI ()
   rakarrack.get (PrefNom ("MIDI IN Device"), MID, "", 40);
   if (aconnect_MI)
     Conecta ();
-
 
 
 }
@@ -535,15 +531,8 @@ RKR::EQ2_setpreset (int func, int num, unsigned char npreset)
 void
 RKR::Vol2_Efx ()
 {
-
-  int i;
-
-  for (i = 0; i < PERIOD; i++)
-    {
-      smpl[i] = efxoutl[i];
-      smpr[i] = efxoutr[i];
-    }
-
+  memcpy(smpl,efxoutl, PERIOD * sizeof(float));
+  memcpy(smpr,efxoutr, PERIOD * sizeof(float));
 }
 
 
@@ -648,7 +637,6 @@ RKR::Control_Volume (float *origl,float *origr)
 
    memcpy(anall, efxoutl, sizeof(float)* PERIOD);
    memcpy(analr, efxoutr, sizeof(float)* PERIOD);
-
 
 
   for (i = 0; i <= PERIOD; i++)
