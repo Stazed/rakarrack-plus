@@ -122,7 +122,7 @@ Expander::Expander_Change (int np, int value)
       break;
     case 7:
       Plevel = value;
-      level = dB2rap((float) value/6.0f)
+      level = dB2rap((float) value/6.0f);
       break;
 
     }
