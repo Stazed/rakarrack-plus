@@ -4149,6 +4149,7 @@ expander_shape->value(rkr->efx_Expander->getpar(2));
 expander_threshold->value(rkr->efx_Expander->getpar(1));
 expander_HPF->value(rkr->efx_Expander->getpar(6));
 expander_LPF->value(rkr->efx_Expander->getpar(5));
+expander_level->value(rkr->efx_Expander->getpar(7));
 }
 void RKRGUI::cb_expander_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_preset_i(o,v);
@@ -4187,6 +4188,13 @@ void RKRGUI::cb_expander_threshold_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_expander_threshold(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_threshold_i(o,v);
+}
+
+void RKRGUI::cb_expander_level_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(7, (int) o->value());
+}
+void RKRGUI::cb_expander_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_level_i(o,v);
 }
 
 void RKRGUI::cb_expander_LPF_i(SliderW* o, void*) {
@@ -9974,7 +9982,7 @@ R average.");
       } // Fl_Choice* arpie_pattern
       ARPIE->end();
     } // Fl_Group* ARPIE
-    { EXPANDER = new Fl_Group(325, 211, 158, 184);
+    { EXPANDER = new Fl_Group(320, 211, 158, 184);
       EXPANDER->box(FL_UP_BOX);
       EXPANDER->color((Fl_Color)FL_FOREGROUND_COLOR);
       EXPANDER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -9982,7 +9990,7 @@ R average.");
       EXPANDER->user_data((void*)(1));
       EXPANDER->align(96|FL_ALIGN_INSIDE);
       EXPANDER->hide();
-      { expander_activar = new Fl_Light_Button(330, 215, 34, 18, "On");
+      { expander_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         expander_activar->shortcut(0x32);
         expander_activar->color((Fl_Color)62);
         expander_activar->selection_color((Fl_Color)1);
@@ -9991,7 +9999,7 @@ R average.");
         expander_activar->align(68|FL_ALIGN_INSIDE);
         expander_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* expander_activar
-      { expander_preset = new Fl_Choice(402, 215, 76, 18, "Preset");
+      { expander_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
         expander_preset->down_box(FL_BORDER_BOX);
         expander_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         expander_preset->labelsize(10);
@@ -10002,7 +10010,7 @@ R average.");
         expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
         expander_preset->menu(menu_expander_preset);
       } // Fl_Choice* expander_preset
-      { expander_ATime = new SliderW(376, 250, 100, 10, "A. Time");
+      { expander_ATime = new SliderW(371, 250, 100, 10, "A. Time");
         expander_ATime->type(5);
         expander_ATime->box(FL_FLAT_BOX);
         expander_ATime->color((Fl_Color)178);
@@ -10020,7 +10028,7 @@ R average.");
         expander_ATime->align(FL_ALIGN_LEFT);
         expander_ATime->when(FL_WHEN_CHANGED);
       } // SliderW* expander_ATime
-      { expander_RTime = new SliderW(375, 272, 100, 10, "R. Time");
+      { expander_RTime = new SliderW(370, 272, 100, 10, "R. Time");
         expander_RTime->type(5);
         expander_RTime->box(FL_FLAT_BOX);
         expander_RTime->color((Fl_Color)178);
@@ -10038,7 +10046,7 @@ R average.");
         expander_RTime->align(FL_ALIGN_LEFT);
         expander_RTime->when(FL_WHEN_CHANGED);
       } // SliderW* expander_RTime
-      { expander_shape = new SliderW(375, 294, 100, 10, "Shape");
+      { expander_shape = new SliderW(370, 294, 100, 10, "Shape");
         expander_shape->type(5);
         expander_shape->box(FL_FLAT_BOX);
         expander_shape->color((Fl_Color)178);
@@ -10056,7 +10064,7 @@ R average.");
         expander_shape->align(FL_ALIGN_LEFT);
         expander_shape->when(FL_WHEN_CHANGED);
       } // SliderW* expander_shape
-      { expander_threshold = new SliderW(375, 316, 100, 10, "Thrhold");
+      { expander_threshold = new SliderW(370, 316, 100, 10, "Thrhold");
         expander_threshold->type(5);
         expander_threshold->box(FL_FLAT_BOX);
         expander_threshold->color((Fl_Color)178);
@@ -10073,7 +10081,25 @@ R average.");
         expander_threshold->align(FL_ALIGN_LEFT);
         expander_threshold->when(FL_WHEN_CHANGED);
       } // SliderW* expander_threshold
-      { expander_LPF = new SliderW(375, 357, 100, 10, "LPF");
+      { expander_level = new SliderW(370, 336, 100, 10, "Level");
+        expander_level->type(5);
+        expander_level->box(FL_FLAT_BOX);
+        expander_level->color((Fl_Color)178);
+        expander_level->selection_color((Fl_Color)62);
+        expander_level->labeltype(FL_NORMAL_LABEL);
+        expander_level->labelfont(0);
+        expander_level->labelsize(10);
+        expander_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_level->minimum(1);
+        expander_level->maximum(127);
+        expander_level->step(1);
+        expander_level->value(1);
+        expander_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_level->callback((Fl_Callback*)cb_expander_level);
+        expander_level->align(FL_ALIGN_LEFT);
+        expander_level->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_level
+      { expander_LPF = new SliderW(370, 357, 100, 10, "LPF");
         expander_LPF->type(5);
         expander_LPF->box(FL_FLAT_BOX);
         expander_LPF->color((Fl_Color)178);
@@ -10090,7 +10116,7 @@ R average.");
         expander_LPF->align(FL_ALIGN_LEFT);
         expander_LPF->when(FL_WHEN_CHANGED);
       } // SliderW* expander_LPF
-      { expander_HPF = new SliderW(375, 373, 100, 10, "HPF");
+      { expander_HPF = new SliderW(370, 373, 100, 10, "HPF");
         expander_HPF->type(5);
         expander_HPF->box(FL_FLAT_BOX);
         expander_HPF->color((Fl_Color)178);

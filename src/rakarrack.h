@@ -1877,6 +1877,11 @@ private:
   void cb_expander_threshold_i(SliderW*, void*);
   static void cb_expander_threshold(SliderW*, void*);
 public:
+  SliderW *expander_level;
+private:
+  void cb_expander_level_i(SliderW*, void*);
+  static void cb_expander_level(SliderW*, void*);
+public:
   SliderW *expander_LPF;
 private:
   void cb_expander_LPF_i(SliderW*, void*);
