@@ -172,12 +172,13 @@ Expander::Expander_Change_Preset (int npreset)
   const int PRESET_SIZE = 7;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //0
-    {0, 10, 50, 50, 65, 20, 0},
+
     //Noise Gate
     {-50, 20, 50, 50, 80, 20, 0},
+    //Boost Gate
+    {-55, 30, 50, 50, 65, 30, 50},
     //Treble swell
-    {-12, 9, 1500, 85, 96, 45, 10}
+    {-30, 9, 950, 25, 96, 48, 90}
   };
 
   if (npreset >= NUM_PRESETS)
