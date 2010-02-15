@@ -65,6 +65,7 @@ void deleteFFTFREQS(FFTFREQS *f);
 #include "Exciter.h"
 #include "MBDist.h"
 #include "Arpie.h"
+#include "Expander.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f
@@ -190,7 +191,7 @@ public:
   class Exciter *efx_Exciter;
   class MBDist *efx_MBDist;
   class Arpie *efx_Arpie;
-     
+  class Expander *efx_Expander;     
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
@@ -226,6 +227,7 @@ public:
   int Exciter_Bypass;
   int MBDist_Bypass;
   int Arpie_Bypass;
+  int Expander_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -252,6 +254,7 @@ public:
   int Exciter_B;
   int MBDist_B;
   int Arpie_B;
+  int Expander_B;
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];

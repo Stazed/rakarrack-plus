@@ -4133,6 +4133,76 @@ Fl_Menu_Item RKRGUI::menu_arpie_pattern[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_expander_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Expander_Bypass=(int)o->value();
+findpos(25,(int)o->value());
+}
+void RKRGUI::cb_expander_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_activar_i(o,v);
+}
+
+void RKRGUI::cb_expander_preset_i(Fl_Choice* o, void*) {
+  rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+expander_ATime->value(rkr->efx_Expander->getpar(3));
+expander_RTime->value(rkr->efx_Expander->getpar(4));
+expander_shape->value(rkr->efx_Expander->getpar(2));
+expander_threshold->value(rkr->efx_Expander->getpar(1));
+expander_HPF->value(rkr->efx_Expander->getpar(6));
+expander_LPF->value(rkr->efx_Expander->getpar(5));
+}
+void RKRGUI::cb_expander_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_expander_preset[] = {
+ {"0dB", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"-10dB", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"-20dB", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_expander_ATime_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(3,(int)o->value());
+}
+void RKRGUI::cb_expander_ATime(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_ATime_i(o,v);
+}
+
+void RKRGUI::cb_expander_RTime_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(4,(int) o->value());
+}
+void RKRGUI::cb_expander_RTime(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_RTime_i(o,v);
+}
+
+void RKRGUI::cb_expander_shape_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(2, (int) o->value());
+}
+void RKRGUI::cb_expander_shape(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_shape_i(o,v);
+}
+
+void RKRGUI::cb_expander_threshold_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(1, (int)o->value());
+}
+void RKRGUI::cb_expander_threshold(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_threshold_i(o,v);
+}
+
+void RKRGUI::cb_expander_LPF_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(5, (int)o->value());
+}
+void RKRGUI::cb_expander_LPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_LPF_i(o,v);
+}
+
+void RKRGUI::cb_expander_HPF_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(6, (int)o->value());
+}
+void RKRGUI::cb_expander_HPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_HPF_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -9904,6 +9974,140 @@ R average.");
       } // Fl_Choice* arpie_pattern
       ARPIE->end();
     } // Fl_Group* ARPIE
+    { EXPANDER = new Fl_Group(325, 211, 158, 184);
+      EXPANDER->box(FL_UP_BOX);
+      EXPANDER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      EXPANDER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      EXPANDER->labelfont(1);
+      EXPANDER->user_data((void*)(1));
+      EXPANDER->align(96|FL_ALIGN_INSIDE);
+      EXPANDER->hide();
+      { expander_activar = new Fl_Light_Button(330, 215, 34, 18, "On");
+        expander_activar->shortcut(0x32);
+        expander_activar->color((Fl_Color)62);
+        expander_activar->selection_color((Fl_Color)1);
+        expander_activar->labelsize(10);
+        expander_activar->callback((Fl_Callback*)cb_expander_activar, (void*)(2));
+        expander_activar->align(68|FL_ALIGN_INSIDE);
+        expander_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* expander_activar
+      { expander_preset = new Fl_Choice(402, 215, 76, 18, "Preset");
+        expander_preset->down_box(FL_BORDER_BOX);
+        expander_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        expander_preset->labelsize(10);
+        expander_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_preset->textsize(10);
+        expander_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_preset->callback((Fl_Callback*)cb_expander_preset);
+        expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        expander_preset->menu(menu_expander_preset);
+      } // Fl_Choice* expander_preset
+      { expander_ATime = new SliderW(376, 250, 100, 10, "A. Time");
+        expander_ATime->type(5);
+        expander_ATime->box(FL_FLAT_BOX);
+        expander_ATime->color((Fl_Color)178);
+        expander_ATime->selection_color((Fl_Color)62);
+        expander_ATime->labeltype(FL_NORMAL_LABEL);
+        expander_ATime->labelfont(0);
+        expander_ATime->labelsize(10);
+        expander_ATime->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_ATime->minimum(10);
+        expander_ATime->maximum(2000);
+        expander_ATime->step(1);
+        expander_ATime->value(10);
+        expander_ATime->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_ATime->callback((Fl_Callback*)cb_expander_ATime);
+        expander_ATime->align(FL_ALIGN_LEFT);
+        expander_ATime->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_ATime
+      { expander_RTime = new SliderW(375, 272, 100, 10, "R. Time");
+        expander_RTime->type(5);
+        expander_RTime->box(FL_FLAT_BOX);
+        expander_RTime->color((Fl_Color)178);
+        expander_RTime->selection_color((Fl_Color)62);
+        expander_RTime->labeltype(FL_NORMAL_LABEL);
+        expander_RTime->labelfont(0);
+        expander_RTime->labelsize(10);
+        expander_RTime->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_RTime->minimum(10);
+        expander_RTime->maximum(500);
+        expander_RTime->step(1);
+        expander_RTime->value(500);
+        expander_RTime->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_RTime->callback((Fl_Callback*)cb_expander_RTime);
+        expander_RTime->align(FL_ALIGN_LEFT);
+        expander_RTime->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_RTime
+      { expander_shape = new SliderW(375, 294, 100, 10, "Shape");
+        expander_shape->type(5);
+        expander_shape->box(FL_FLAT_BOX);
+        expander_shape->color((Fl_Color)178);
+        expander_shape->selection_color((Fl_Color)62);
+        expander_shape->labeltype(FL_NORMAL_LABEL);
+        expander_shape->labelfont(0);
+        expander_shape->labelsize(10);
+        expander_shape->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_shape->minimum(1);
+        expander_shape->maximum(50);
+        expander_shape->step(1);
+        expander_shape->value(1);
+        expander_shape->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_shape->callback((Fl_Callback*)cb_expander_shape);
+        expander_shape->align(FL_ALIGN_LEFT);
+        expander_shape->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_shape
+      { expander_threshold = new SliderW(375, 316, 100, 10, "Thrhold");
+        expander_threshold->type(5);
+        expander_threshold->box(FL_FLAT_BOX);
+        expander_threshold->color((Fl_Color)178);
+        expander_threshold->selection_color((Fl_Color)62);
+        expander_threshold->labeltype(FL_NORMAL_LABEL);
+        expander_threshold->labelfont(0);
+        expander_threshold->labelsize(10);
+        expander_threshold->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_threshold->minimum(-80);
+        expander_threshold->maximum(0);
+        expander_threshold->step(1);
+        expander_threshold->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_threshold->callback((Fl_Callback*)cb_expander_threshold);
+        expander_threshold->align(FL_ALIGN_LEFT);
+        expander_threshold->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_threshold
+      { expander_LPF = new SliderW(375, 357, 100, 10, "LPF");
+        expander_LPF->type(5);
+        expander_LPF->box(FL_FLAT_BOX);
+        expander_LPF->color((Fl_Color)178);
+        expander_LPF->selection_color((Fl_Color)62);
+        expander_LPF->labeltype(FL_NORMAL_LABEL);
+        expander_LPF->labelfont(0);
+        expander_LPF->labelsize(10);
+        expander_LPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_LPF->maximum(127);
+        expander_LPF->step(1);
+        expander_LPF->value(127);
+        expander_LPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_LPF->callback((Fl_Callback*)cb_expander_LPF);
+        expander_LPF->align(FL_ALIGN_LEFT);
+        expander_LPF->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_LPF
+      { expander_HPF = new SliderW(375, 373, 100, 10, "HPF");
+        expander_HPF->type(5);
+        expander_HPF->box(FL_FLAT_BOX);
+        expander_HPF->color((Fl_Color)178);
+        expander_HPF->selection_color((Fl_Color)62);
+        expander_HPF->labeltype(FL_NORMAL_LABEL);
+        expander_HPF->labelfont(0);
+        expander_HPF->labelsize(10);
+        expander_HPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_HPF->maximum(127);
+        expander_HPF->step(1);
+        expander_HPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_HPF->callback((Fl_Callback*)cb_expander_HPF);
+        expander_HPF->align(FL_ALIGN_LEFT);
+        expander_HPF->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_HPF
+      EXPANDER->end();
+    } // Fl_Group* EXPANDER
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -11808,6 +12012,9 @@ for (i=1; i<=t; i++)
         case 24:
         ARPIE->hide();
         break;
+        case 25:
+        EXPANDER->hide();
+        break;
       }
       
     }
@@ -12051,6 +12258,14 @@ switch (rkr->efx_order[i])
        ARPIE->show();
        if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
+
+     case 25:
+       EXPANDER->position(x[i],y[i]);
+       expander_activar->shortcut(s[i]);
+       EXPANDER->show();
+       if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+
  }
  
  }
@@ -13057,6 +13272,7 @@ RING->image(InOut->image());
 EXCITER->image(InOut->image());
 MBDIST->image(InOut->image());
 ARPIE->image(InOut->image());
+EXPANDER->image(InOut->image());
 
 
 Presets->image(InOut->image());

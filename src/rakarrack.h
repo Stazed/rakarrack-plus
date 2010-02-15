@@ -1845,6 +1845,48 @@ private:
   static void cb_arpie_pattern(Fl_Choice*, void*);
   static Fl_Menu_Item menu_arpie_pattern[];
 public:
+  Fl_Group *EXPANDER;
+  Fl_Light_Button *expander_activar;
+private:
+  void cb_expander_activar_i(Fl_Light_Button*, void*);
+  static void cb_expander_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *expander_preset;
+private:
+  void cb_expander_preset_i(Fl_Choice*, void*);
+  static void cb_expander_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_expander_preset[];
+public:
+  SliderW *expander_ATime;
+private:
+  void cb_expander_ATime_i(SliderW*, void*);
+  static void cb_expander_ATime(SliderW*, void*);
+public:
+  SliderW *expander_RTime;
+private:
+  void cb_expander_RTime_i(SliderW*, void*);
+  static void cb_expander_RTime(SliderW*, void*);
+public:
+  SliderW *expander_shape;
+private:
+  void cb_expander_shape_i(SliderW*, void*);
+  static void cb_expander_shape(SliderW*, void*);
+public:
+  SliderW *expander_threshold;
+private:
+  void cb_expander_threshold_i(SliderW*, void*);
+  static void cb_expander_threshold(SliderW*, void*);
+public:
+  SliderW *expander_LPF;
+private:
+  void cb_expander_LPF_i(SliderW*, void*);
+  static void cb_expander_LPF(SliderW*, void*);
+public:
+  SliderW *expander_HPF;
+private:
+  void cb_expander_HPF_i(SliderW*, void*);
+  static void cb_expander_HPF(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

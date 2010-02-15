@@ -103,7 +103,7 @@ Expander::Expander_Change (int np, int value)
       break;
     case 2:
       Pshape = -value/2;
-      sfactor = dB2rap ((float)Prange);
+      sfactor = dB2rap ((float)Pshape);
       sgain = expf(-sfactor);
       break;
     case 3:
