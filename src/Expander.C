@@ -224,8 +224,8 @@ Expander::out (float *efxoutl, float *efxoutr)
       }
       else
       {
-      efxoutl[i] *= gain;
-      efxoutr[i] *= gain;
+      efxoutl[i] *= expenv;
+      efxoutr[i] *= expenv;
       }
 
     }
