@@ -886,7 +886,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} selected
+Pexitprogram=1;}
       xywh {1681 138 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4424,19 +4424,19 @@ expander_shape->value(rkr->efx_Expander->getpar(2));
 expander_threshold->value(rkr->efx_Expander->getpar(1));
 expander_HPF->value(rkr->efx_Expander->getpar(6));
 expander_LPF->value(rkr->efx_Expander->getpar(5));
-expander_level->value(rkr->efx_Expander->getpar(7));}
+expander_level->value(rkr->efx_Expander->getpar(7));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label 0dB
+            label {Noise Gate}
             xywh {52 52 36 21} labelsize 10
           }
           MenuItem {} {
-            label {-10dB}
+            label {Boost Gate}
             xywh {52 52 36 21} labelsize 10
           }
           MenuItem {} {
-            label {-20dB}
+            label {Treble swell}
             xywh {52 52 36 21} labelsize 10
           }
         }
@@ -6284,14 +6284,22 @@ arpie_arpe->value(rkr->lv[25][7]);
 arpie_harm->value(rkr->lv[25][8]);
 arpie_pattern->value(rkr->lv[25][9]);
 arpie_subdiv->value(rkr->lv[25][10]);
-
 arpie_activar->value(rkr->Arpie_Bypass);
 
+//Expander
+expander_ATime->value(rkr->lv[26][2]);
+expander_RTime->value(rkr->lv[26][3]);
+expander_shape->value(rkr->lv[26][1]);
+expander_level->value(rkr->lv[26][6]);
+expander_LPF->value(rkr->lv[26][4]);
+expander_HPF->value(rkr->lv[26][5]);
+expander_threshold->value(rkr->lv[26][0]);
+expander_activar->value(rkr->Expander_Bypass);
 
 
 
-
-reordena();} {}
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {

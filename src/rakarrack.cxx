@@ -4156,9 +4156,9 @@ void RKRGUI::cb_expander_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_expander_preset[] = {
- {"0dB", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"-10dB", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"-20dB", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Noise Gate", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Boost Gate", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Treble swell", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -11772,10 +11772,17 @@ arpie_arpe->value(rkr->lv[25][7]);
 arpie_harm->value(rkr->lv[25][8]);
 arpie_pattern->value(rkr->lv[25][9]);
 arpie_subdiv->value(rkr->lv[25][10]);
-
 arpie_activar->value(rkr->Arpie_Bypass);
 
-
+//Expander
+expander_ATime->value(rkr->lv[26][2]);
+expander_RTime->value(rkr->lv[26][3]);
+expander_shape->value(rkr->lv[26][1]);
+expander_level->value(rkr->lv[26][6]);
+expander_LPF->value(rkr->lv[26][4]);
+expander_HPF->value(rkr->lv[26][5]);
+expander_threshold->value(rkr->lv[26][0]);
+expander_activar->value(rkr->Expander_Bypass);
 
 
 
