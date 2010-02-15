@@ -62,6 +62,7 @@ public:
   int Pshape;			// Sharpness of transition from off to on.  Range is 0 ... 50
   int Plpf;
   int Phpf;
+  int Plevel;
   int efollower;		// This is a mode allowing this object to be used as a "dynamics detector"
 				// (envelope follower).  If efollower == 1, then efxoutl is a level to be used in place of an LFO
 				// for filter modulation, etc. Then efxoutr is signal + envelope for things such as dynamic distortion.
@@ -80,6 +81,7 @@ private:
   float oldgain;
   float gain;
   float fs;
+  float level;
 
   void setlpf (int Plpf);
   void sethpf (int Phpf);

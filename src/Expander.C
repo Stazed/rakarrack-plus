@@ -120,6 +120,10 @@ Expander::Expander_Change (int np, int value)
     case 6:
       sethpf(value);
       break;
+    case 7:
+      Plevel = value;
+      level = dB2rap((float) value/6.0f)
+      break;
 
     }
 
@@ -151,7 +155,9 @@ Expander::getpar (int np)
     case 6:
       return (Phpf);
       break;
-
+    case 7:
+      return (Plevel);
+      break;
     }
 
   return (0);
@@ -163,15 +169,15 @@ void
 Expander::Expander_Change_Preset (int npreset)
 {
 
-  const int PRESET_SIZE = 6;
+  const int PRESET_SIZE = 7;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //0
-    {0, 10, 50, 50, 65, 20},
+    {0, 10, 50, 50, 65, 20, 0},
     //Noise Gate
-    {-50, 20, 50, 50, 80, 20},
+    {-50, 20, 50, 50, 80, 20, 0},
     //Treble swell
-    {-12, 9, 1500, 85, 96, 45}
+    {-12, 9, 1500, 85, 96, 45, 10}
   };
 
   if (npreset >= NUM_PRESETS)
@@ -224,8 +230,8 @@ Expander::out (float *efxoutl, float *efxoutr)
       }
       else
       {
-      efxoutl[i] *= expenv;
-      efxoutr[i] *= expenv;
+      efxoutl[i] *= gain*level;
+      efxoutr[i] *= gain*level;
       }
 
     }
