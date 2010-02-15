@@ -887,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1695 152 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1688 145 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4404,6 +4404,78 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           }
         }
       }
+      Fl_Group EXPANDER {
+        user_data 1
+        xywh {325 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button expander_activar {
+          label On
+          user_data 2
+          callback {rkr->Expander_Bypass=(int)o->value();
+findpos(25,(int)o->value());}
+          xywh {330 215 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice expander_preset {
+          label Preset
+          callback {rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+expander_ATime->value(rkr->efx_Expander->getpar(3));
+expander_RTime->value(rkr->efx_Expander->getpar(4));
+expander_shape->value(rkr->efx_Expander->getpar(2));
+expander_threshold->value(rkr->efx_Expander->getpar(1));
+expander_HPF->value(rkr->efx_Expander->getpar(6));
+expander_LPF->value(rkr->efx_Expander->getpar(5));}
+          xywh {402 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label 0dB
+            xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {-10dB}
+            xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {-20dB}
+            xywh {52 52 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider expander_ATime {
+          label {A. Time}
+          callback {rkr->efx_Expander->Expander_Change(3,(int)o->value());}
+          xywh {376 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 2000 step 1 value 10 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider expander_RTime {
+          label {R. Time}
+          callback {rkr->efx_Expander->Expander_Change(4,(int) o->value());}
+          xywh {375 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 500 step 1 value 500 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider expander_shape {
+          label Shape
+          callback {rkr->efx_Expander->Expander_Change(2, (int) o->value());}
+          xywh {375 294 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 50 step 1 value 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider expander_threshold {
+          label Thrhold
+          callback {rkr->efx_Expander->Expander_Change(1, (int)o->value());}
+          xywh {375 316 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -80 maximum 0 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider expander_LPF {
+          label LPF
+          callback {rkr->efx_Expander->Expander_Change(5, (int)o->value());} selected
+          xywh {375 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider expander_HPF {
+          label HPF
+          callback {rkr->efx_Expander->Expander_Change(6, (int)o->value());}
+          xywh {375 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {521 84 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -6469,6 +6541,9 @@ for (i=1; i<=t; i++)
         case 24:
         ARPIE->hide();
         break;
+        case 25:
+        EXPANDER->hide();
+        break;
       }
       
     }
@@ -6712,6 +6787,14 @@ switch (rkr->efx_order[i])
        ARPIE->show();
        if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
+
+     case 25:
+       EXPANDER->position(x[i],y[i]);
+       expander_activar->shortcut(s[i]);
+       EXPANDER->show();
+       if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+
  }
  
  }
@@ -7705,6 +7788,7 @@ RING->image(InOut->image());
 EXCITER->image(InOut->image());
 MBDIST->image(InOut->image());
 ARPIE->image(InOut->image());
+EXPANDER->image(InOut->image());
 
 
 Presets->image(InOut->image());
@@ -7882,8 +7966,7 @@ Buttons_Color_Change(fore_color);
 
 
 save_stat(3);
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {FillML(int type)} {} {
     code {int i;
