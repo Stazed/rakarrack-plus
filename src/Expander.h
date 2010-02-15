@@ -59,7 +59,7 @@ public:
   int Pthreshold;		// Threshold, -80 to 0dB
   int Pattack;			// attack time  (ms)  Set range from 10ms ... 2000ms	 
   int Pdecay;			// release time (ms)  Set range from 10ms ... 500ms
-  int Pshape;			// Sharpness of transition from off to on.  Range is 0
+  int Pshape;			// Sharpness of transition from off to on.  Range is 0 ... 50
   int Plpf;
   int Phpf;
   int efollower;		// This is a mode allowing this object to be used as a "dynamics detector"

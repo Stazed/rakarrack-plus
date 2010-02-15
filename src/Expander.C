@@ -102,7 +102,7 @@ Expander::Expander_Change (int np, int value)
       tlevel = 1.0f/tfactor;
       break;
     case 2:
-      Pshape = -value/2;
+      Pshape = value/2;
       sfactor = dB2rap ((float)Pshape);
       sgain = expf(-sfactor);
       break;
@@ -112,7 +112,7 @@ Expander::Expander_Change (int np, int value)
       break;
     case 4:
       Pdecay = value;
-      d_rate = fmaxf(1000.0f/((float)Pdecay * fs), 0.99f);
+      d_rate = 1000.0f/((float)Pdecay * fs);
       break;
     case 5:
       setlpf(value);
