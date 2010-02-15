@@ -6722,8 +6722,7 @@ switch (rkr->efx_order[i])
   
   
  
-  Fl::redraw();} {selected
-    }
+  Fl::redraw();} {}
   }
   Function {show_help()} {} {
     code {char temp[128];
@@ -7878,9 +7877,13 @@ scheme_ch->value(rkr->sschema);
 scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
-save_stat(3);
+Leds_Color_Change(leds_color);
+Buttons_Color_Change(fore_color);
 
-Fl::redraw();} {}
+
+save_stat(3);
+Fl::redraw();} {selected
+    }
   }
   Function {FillML(int type)} {} {
     code {int i;

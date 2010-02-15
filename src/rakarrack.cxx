@@ -13234,8 +13234,11 @@ scheme_ch->value(rkr->sschema);
 scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
-save_stat(3);
+Leds_Color_Change(leds_color);
+Buttons_Color_Change(fore_color);
 
+
+save_stat(3);
 Fl::redraw();
 }
 
