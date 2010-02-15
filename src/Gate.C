@@ -101,7 +101,7 @@ Gate::Gate_Change (int np, int value)
     {
 
     case 1:
-      Pthreshold = value - 20;
+      Pthreshold = value;
       t_level = dB2rap ((float)Pthreshold);
       break;
     case 2:
@@ -110,11 +110,11 @@ Gate::Gate_Change (int np, int value)
       break;
     case 3:
       Pattack = value;
-      a_rate = (float)Pattack /(fs*1000.0f);
+      a_rate = 1000.0f / ((float)Pattack * fs);
       break;
     case 4:
       Pdecay = value;
-      d_rate = (float)Pdecay /(fs*1000.0f);
+      d_rate = 1000.0f / ((float)Pdecay * fs);
       break;
     case 5:
       setlpf(value);
@@ -199,8 +199,7 @@ Gate::out (float *efxoutl, float *efxoutr)
 
 
   int i;
-  float delta = 0.0f;
-  float expenv = 0.0f;
+  float sum;
 
 
   lpfl->filterout (efxoutl);
@@ -211,24 +210,57 @@ Gate::out (float *efxoutl, float *efxoutr)
 
   for (i = 0; i < PERIOD; i++)
     {
-    
-      delta = 0.5f*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
-      if (delta > 0.0)
-	env += a_rate * delta;
+
+      sum = fabsf (efxoutl[i]) + fabsf (efxoutr[i]);
+
+
+      if (sum > env)
+	env = sum;
       else
-	env += d_rate * delta;
-	
-	if (env > 2.0f) env = 2.0f;
-	
-	expenv = t_level * expf(env);
-	if (expenv > 1.0f) expenv = 1.0f;
-		
+	env = sum * ENV_TR + env * (1.0f - ENV_TR);
 
+      if (state == CLOSED)
+	{
+	  if (env >= t_level)
+	    state = OPENING;
+	}
+      else if (state == OPENING)
+	{
+	  gate += a_rate;
+	  if (gate >= 1.0)
+	    {
+	      gate = 1.0f;
+	      state = OPEN;
+	      hold_count = lrintf (hold * fs * 0.001f);
+	    }
+	}
+      else if (state == OPEN)
+	{
+	  if (hold_count <= 0)
+	    {
+	      if (env < t_level)
+		{
+		  state = CLOSING;
+		}
+	    }
+	  else
+	    hold_count--;
 
+	}
+      else if (state == CLOSING)
+	{
+	  gate -= d_rate;
+	  if (env >= t_level)
+	    state = OPENING;
+	  else if (gate <= 0.0)
+	    {
+	      gate = 0.0;
+	      state = CLOSED;
+	    }
+	}
 
-
-      efxoutl[i] *= expenv;
-      efxoutr[i] *= expenv;
+      efxoutl[i] *= (cut * (1.0f - gate) + gate);
+      efxoutr[i] *= (cut * (1.0f - gate) + gate);
 
     }
 
