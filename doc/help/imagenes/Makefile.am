@@ -32,6 +32,13 @@ doc_DATA= icono_rakarrack_128x128.png \
 	md.jpg \
 	ww.jpg \
 	aw.jpg \
+	val.jpg \
+	ex.jpg \
+	exp.jpg \
+	ring.jpg \
+	df.jpg \
+	db.jpg \
+	arp.jpg \
 	pan.jpg
 	
 EXTRA_DIST = $(doc_DATA)
