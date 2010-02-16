@@ -45,6 +45,9 @@ Expander::Expander (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   efollower = 0;
   fs = (float)SAMPLE_RATE;
 
+  Expander_Change_Preset(0);
+
+
 }
 
 Expander::~Expander ()
