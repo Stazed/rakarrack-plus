@@ -39,8 +39,8 @@
 //End waveshaping constants
 
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
-void waveshapesmps (int n, REALTYPE * smps, unsigned char type,
-		    unsigned char drive, int eff);
+void waveshapesmps (int n, REALTYPE * smps, int type,
+		    int drive, int eff);
 
 class Distorsion
 {
@@ -48,13 +48,13 @@ public:
   Distorsion (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
   ~Distorsion ();
   void out (REALTYPE * smpsl, REALTYPE * smpr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
   void applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr);
 
-  unsigned char Ppreset;
+  int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
   REALTYPE *octoutl;
@@ -66,25 +66,25 @@ private:
 
 
   //Parametrii
-  unsigned char Pvolume;	//Volumul or E/R
-  unsigned char Ppanning;	//Panning
-  unsigned char Plrcross;	// L/R Mixing
-  unsigned char Pdrive;		//the input amplification
-  unsigned char Plevel;		//the ouput amplification
-  unsigned char Ptype;		//Distorsion type
-  unsigned char Pnegate;	//if the input is negated 
-  unsigned char Plpf;		//lowpass filter
-  unsigned char Phpf;		//highpass filter
-  unsigned char Pstereo;	//0=mono,1=stereo
-  unsigned char Pprefiltering;	//if you want to do the filtering before the distorsion
-  unsigned char Poctave;	//mix sub octave
+  int Pvolume;	//Volumul or E/R
+  int Ppanning;	//Panning
+  int Plrcross;	// L/R Mixing
+  int Pdrive;		//the input amplification
+  int Plevel;		//the ouput amplification
+  int Ptype;		//Distorsion type
+  int Pnegate;	//if the input is negated 
+  int Plpf;		//lowpass filter
+  int Phpf;		//highpass filter
+  int Pstereo;	//0=mono,1=stereo
+  int Pprefiltering;	//if you want to do the filtering before the distorsion
+  int Poctave;	//mix sub octave
   
-  void setvolume (unsigned char Pvolume);
-  void setpanning (unsigned char Ppanning);
-  void setlrcross (unsigned char Plrcross);
-  void setoctave (unsigned char Poctave);
-  void setlpf (unsigned char Plpf);
-  void sethpf (unsigned char Phpf);
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setlrcross (int Plrcross);
+  void setoctave (int Poctave);
+  void setlpf (int Plpf);
+  void sethpf (int Phpf);
 
   //Parametrii reali
   REALTYPE panning, lrcross, octave_memoryl, togglel, octave_memoryr,toggler,octmix;

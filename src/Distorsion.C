@@ -33,8 +33,8 @@
  */
 
 void
-waveshapesmps (int n, REALTYPE * smps, unsigned char type,
-	       unsigned char drive, int eff)
+waveshapesmps (int n, REALTYPE * smps, int type,
+	       int drive, int eff)
 {
   int i;
   REALTYPE ws = (float)drive / 127.0f + .00001f;
@@ -499,7 +499,7 @@ Distorsion::out (REALTYPE * smpsl, REALTYPE * smpsr)
  * Parameter control
  */
 void
-Distorsion::setvolume (unsigned char Pvolume)
+Distorsion::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
 
@@ -510,7 +510,7 @@ Distorsion::setvolume (unsigned char Pvolume)
 };
 
 void
-Distorsion::setpanning (unsigned char Ppanning)
+Distorsion::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + 0.5f) / 127.0f;
@@ -518,26 +518,26 @@ Distorsion::setpanning (unsigned char Ppanning)
 
 
 void
-Distorsion::setlrcross (unsigned char Plrcross)
+Distorsion::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float)Plrcross / 127.0f * 1.0f;
 };
 
 void
-Distorsion::setlpf (unsigned char Plpf)
+Distorsion::setlpf (int value)
 {
-  this->Plpf = Plpf;
-  REALTYPE fr = expf (powf ((float)Plpf / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+  Plpf = value;
+  REALTYPE fr = (float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
 
 void
-Distorsion::sethpf (unsigned char Phpf)
+Distorsion::sethpf (int value)
 {
-  this->Phpf = Phpf;
-  REALTYPE fr = expf (powf ((float)Phpf / 127.0f, 0.5f) * logf (25000.0f)) + 20.0f;
+  Phpf = value;
+  REALTYPE fr = (float)Phpf;
 
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
@@ -545,30 +545,30 @@ Distorsion::sethpf (unsigned char Phpf)
 };
 
 void
-Distorsion::setoctave (unsigned char Poctave)
+Distorsion::setoctave (int Poctave)
 {
   this->Poctave = Poctave;
   octmix = (REALTYPE) (Poctave) / 127.0f;
 };
 
 void
-Distorsion::setpreset (unsigned char npreset)
+Distorsion::setpreset (int npreset)
 {
   const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 6;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Overdrive 1
-    {84, 64, 35, 56, 40, 0, 0, 96, 0, 0, 0},
+    {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0},
     //Overdrive 2
-    {85, 64, 35, 29, 45, 1, 0, 127, 0, 0, 0},
+    {85, 64, 35, 29, 45, 1, 0, 25040, 21, 0, 0},
     //Distorsion 1
-    {0, 64, 0, 87, 14, 6, 0, 80, 30, 0, 1},
+    {0, 64, 0, 87, 14, 6, 0, 3134, 157, 0, 1},
     //Distorsion 2
-    {0, 64, 127, 87, 14, 0, 1, 80, 24, 0, 0},
+    {0, 64, 127, 87, 14, 0, 1, 3134, 102, 0, 0},
     //Distorsion 3
-    {0, 64, 127, 127, 12, 13, 0, 90, 16, 0, 1},
+    {0, 64, 127, 127, 12, 13, 0, 5078, 56, 0, 1},
     //Guitar Amp
-    {84, 64, 35, 63, 50, 2, 0, 55, 0, 0, 0}
+    {84, 64, 35, 63, 50, 2, 0, 824, 21, 0, 0}
   };
 
 
@@ -582,7 +582,7 @@ Distorsion::setpreset (unsigned char npreset)
 
 
 void
-Distorsion::changepar (int npar, unsigned char value)
+Distorsion::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -633,7 +633,7 @@ Distorsion::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 Distorsion::getpar (int npar)
 {
   switch (npar)

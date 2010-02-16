@@ -75,19 +75,19 @@ Gate::cleanup ()
 
 
 void
-Gate::setlpf (int Plpf)
+Gate::setlpf (int value)
 {
-  this->Plpf = Plpf;
-  REALTYPE fr = expf (powf ((float)Plpf / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+  Plpf = value;
+  REALTYPE fr = (float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
 
 void
-Gate::sethpf (int Phpf)
+Gate::sethpf (int value)
 {
-  this->Phpf = Phpf;
-  REALTYPE fr = expf (powf ((float)Phpf / 127.0f, 0.5f) * logf (25000.0f)) + 20.0f;
+  Phpf = value;
+  REALTYPE fr = (float)Phpf;
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
 };
@@ -176,11 +176,11 @@ Gate::Gate_Change_Preset (int npreset)
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //0
-    {0, 0, 1, 2, 96, 20, 2},
+    {0, 0, 1, 2, 6703, 76, 2},
     //-10
-    {0, -10, 1, 2, 96, 20, 2},
+    {0, -10, 1, 2, 6703, 76, 2},
     //-20
-    {0, -20, 1, 2, 96, 20, 2}
+    {0, -20, 1, 2, 6703, 76, 2}
   };
 
   if (npreset >= NUM_PRESETS)

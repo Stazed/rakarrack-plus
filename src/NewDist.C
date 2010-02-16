@@ -257,7 +257,7 @@ NewDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
  * Parameter control
  */
 void
-NewDist::setvolume (unsigned char Pvolume)
+NewDist::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
 
@@ -268,7 +268,7 @@ NewDist::setvolume (unsigned char Pvolume)
 };
 
 void
-NewDist::setpanning (unsigned char Ppanning)
+NewDist::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + 0.5f) / 127.0f;
@@ -276,33 +276,33 @@ NewDist::setpanning (unsigned char Ppanning)
 
 
 void
-NewDist::setlrcross (unsigned char Plrcross)
+NewDist::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float) Plrcross / 127.0f * 1.0f;
 };
 
 void
-NewDist::setlpf (unsigned char Plpf)
+NewDist::setlpf (int value)
 {
-  this->Plpf = Plpf;
-  REALTYPE fr = expf (powf ((float)Plpf / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+  Plpf = value;
+  REALTYPE fr =(float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
 
 void
-NewDist::sethpf (unsigned char Phpf)
+NewDist::sethpf (int value)
 {
-  this->Phpf = Phpf;
-  REALTYPE fr = expf (powf ((float)Phpf / 127.0f, 0.5f) * logf (25000.0f)) + 20.0f;
+  Phpf = value;
+  REALTYPE fr = (float)Phpf;
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
 };
 
 
 void
-NewDist::setoctave (unsigned char Poctave)
+NewDist::setoctave (int Poctave)
 {
   this->Poctave = Poctave;
   octmix = (REALTYPE) (Poctave) / 127.0f;
@@ -310,17 +310,17 @@ NewDist::setoctave (unsigned char Poctave)
 
 
 void
-NewDist::setpreset (unsigned char npreset)
+NewDist::setpreset (int npreset)
 {
   const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 3;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //NewDist 1
-    {0, 64, 64, 83, 65, 15, 0, 75, 31, 68, 0},
+    {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0},
     //NewDist 2
-    {0, 64, 64, 95, 45, 6, 0, 82, 34, 60, 1},
+    {0, 64, 64, 95, 45, 6, 0, 3459, 209, 60, 1},
     //NewDist 3
-    {0, 64, 64, 43, 77, 16, 0, 79, 26, 83, 0}
+    {0, 64, 64, 43, 77, 16, 0, 2983, 118, 83, 0}
   };
 
 
@@ -334,7 +334,7 @@ NewDist::setpreset (unsigned char npreset)
 
 
 void
-NewDist::changepar (int npar, unsigned char value)
+NewDist::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -387,7 +387,7 @@ NewDist::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 NewDist::getpar (int npar)
 {
   switch (npar)

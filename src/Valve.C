@@ -285,20 +285,20 @@ Valve::setlrcross (int Plrcross)
 };
 
 void
-Valve::setlpf (int Plpf)
+Valve::setlpf (int value)
 {
-  this->Plpf = Plpf;
-  REALTYPE fr = expf (powf ((float)Plpf / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+  Plpf = value;
+  REALTYPE fr = (float)Plpf;
 
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
 
 void
-Valve::sethpf (int Phpf)
+Valve::sethpf (int value)
 {
-  this->Phpf = Phpf;
-  REALTYPE fr = expf (powf ((float)Phpf / 127.0f, 0.5f) * logf (25000.0f)) + 20.0f;
+  Phpf = value;
+  REALTYPE fr = (float)Phpf;
 
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
@@ -329,11 +329,11 @@ Valve::setpreset (int npreset)
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Valve 1
-    {0, 64, 64, 127, 64, 0, 93, 17, 1, 0, 69, 1, 84},
+    {0, 64, 64, 127, 64, 0, 5841, 61, 1, 0, 69, 1, 84},
     //Valve 2
-    {0, 64, 64, 127, 64, 0, 90, 17, 1, 0, 112, 0, 30},
+    {0, 64, 64, 127, 64, 0, 5078, 61, 1, 0, 112, 0, 30},
     //Valve 3
-    {0, 64, 35, 80, 64, 1, 80, 40, 1, 1, 100, 1, 30}
+    {0, 64, 35, 80, 64, 1, 3134, 358, 1, 1, 100, 1, 30}
 
   };
 

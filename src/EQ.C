@@ -100,7 +100,7 @@ EQ::out (REALTYPE * smpsl, REALTYPE * smpsr)
  * Parameter control
  */
 void
-EQ::setvolume (unsigned char Pvolume)
+EQ::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
 
@@ -111,11 +111,11 @@ EQ::setvolume (unsigned char Pvolume)
 
 
 void
-EQ::setpreset (unsigned char npreset)
+EQ::setpreset (int npreset)
 {
   const int PRESET_SIZE = 1;
   const int NUM_PRESETS = 2;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //EQ 1
     {67},
     //EQ 2
@@ -131,7 +131,7 @@ EQ::setpreset (unsigned char npreset)
 
 
 void
-EQ::changepar (int npar, unsigned char value)
+EQ::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -162,7 +162,7 @@ EQ::changepar (int npar, unsigned char value)
       break;
     case 1:
       filter[nb].Pfreq = value;
-      tmp = 600.0f * powf (30.0f, ((float)value - 64.0f) / 64.0f);
+      tmp = (float)value;
       filter[nb].l->setfreq (tmp);
       filter[nb].r->setfreq (tmp);
       break;
@@ -188,7 +188,7 @@ EQ::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 EQ::getpar (int npar)
 {
   switch (npar)

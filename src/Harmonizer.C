@@ -131,7 +131,7 @@ Harmonizer::out (float *smpsl, float *smpsr)
 
 
 void
-Harmonizer::setvolume (unsigned char value)
+Harmonizer::setvolume (int value)
 {
   this->Pvolume = value;
   volume = outvolume = (float)Pvolume / 127.0f;
@@ -140,7 +140,7 @@ Harmonizer::setvolume (unsigned char value)
 
 
 void
-Harmonizer::setpanning (unsigned char value)
+Harmonizer::setpanning (int value)
 {
   this->Ppan = value;
   panning = (float)Ppan / 127.0f;
@@ -149,7 +149,7 @@ Harmonizer::setpanning (unsigned char value)
 
 
 void
-Harmonizer::setgain (unsigned char value)
+Harmonizer::setgain (int value)
 {
   this->Pgain = value;
   gain = (float)Pgain / 127.0f;
@@ -158,7 +158,7 @@ Harmonizer::setgain (unsigned char value)
 
 
 void
-Harmonizer::setinterval (unsigned char value)
+Harmonizer::setinterval (int value)
 {
 
   this->Pinterval = value;
@@ -172,18 +172,16 @@ Harmonizer::setinterval (unsigned char value)
 };
 
 void
-Harmonizer::fsetfreq (unsigned char value)
+Harmonizer::fsetfreq (int value)
 {
 
-  float tmp;
-
-  this->fPfreq = value;
-  tmp = 600.0f * powf (30.0f, ((float)value - 64.0f) / 64.0f);
+  fPfreq = value;
+  float tmp = (float)value;
   pl->setfreq (tmp);
 }
 
 void
-Harmonizer::fsetgain (unsigned char value)
+Harmonizer::fsetgain (int value)
 {
 
   float tmp;
@@ -195,7 +193,7 @@ Harmonizer::fsetgain (unsigned char value)
 }
 
 void
-Harmonizer::fsetq (unsigned char value)
+Harmonizer::fsetq (int value)
 {
 
   float tmp;
@@ -206,7 +204,7 @@ Harmonizer::fsetq (unsigned char value)
 }
 
 void
-Harmonizer::setMIDI (unsigned char value)
+Harmonizer::setMIDI (int value)
 {
 
   this->PMIDI = value;
@@ -216,17 +214,17 @@ Harmonizer::setMIDI (unsigned char value)
 
 
 void
-Harmonizer::setpreset (unsigned char npreset)
+Harmonizer::setpreset (int npreset)
 {
   const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 3;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Plain
-    {64, 64, 64, 12, 64, 0, 0, 0, 64, 64, 0},
+    {64, 64, 64, 12, 6000, 0, 0, 0, 64, 64, 0},
     //Octavador
-    {64, 64, 64, 0, 64, 0, 0, 0, 64, 64, 0},
+    {64, 64, 64, 0, 6000, 0, 0, 0, 64, 64, 0},
     //3mdown
-    {64, 64, 64, 9, 64, 0, 0, 0, 64, 64, 0}
+    {64, 64, 64, 9, 6000, 0, 0, 0, 64, 64, 0}
   };
 
   if (npreset >= NUM_PRESETS)
@@ -241,7 +239,7 @@ Harmonizer::setpreset (unsigned char npreset)
 
 
 void
-Harmonizer::changepar (int npar, unsigned char value)
+Harmonizer::changepar (int npar, int value)
 {
 
   switch (npar)
@@ -288,7 +286,7 @@ Harmonizer::changepar (int npar, unsigned char value)
 };
 
 
-unsigned char
+int
 Harmonizer::getpar (int npar)
 {
   switch (npar)

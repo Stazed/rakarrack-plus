@@ -74,19 +74,19 @@ Expander::cleanup ()
 
 
 void
-Expander::setlpf (int Plpf)
+Expander::setlpf (int value)
 {
-  this->Plpf = Plpf;
-  REALTYPE fr = expf (powf ((float)Plpf / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+  Plpf = value;
+  REALTYPE fr = (float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
 
 void
-Expander::sethpf (int Phpf)
+Expander::sethpf (int value)
 {
-  this->Phpf = Phpf;
-  REALTYPE fr = expf (powf ((float)Phpf / 127.0f, 0.5f) * logf (25000.0f)) + 20.0f;
+  Phpf = value;
+  REALTYPE fr = (float)Phpf;
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
 };
@@ -177,11 +177,11 @@ Expander::Expander_Change_Preset (int npreset)
   int presets[NUM_PRESETS][PRESET_SIZE] = {
 
     //Noise Gate
-    {-50, 20, 50, 50, 80, 20, 0},
+    {-50, 20, 50, 50, 3134, 76, 0},
     //Boost Gate
-    {-55, 30, 50, 50, 65, 30, 50},
+    {-55, 30, 50, 50, 1441, 157, 50},
     //Treble swell
-    {-30, 9, 950, 25, 96, 48, 90}
+    {-30, 9, 950, 25, 6703, 526, 90}
   };
 
   if (npreset >= NUM_PRESETS)
