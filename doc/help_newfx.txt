@@ -1,0 +1,81 @@
+//Arpie
+"Arpie" is a pet name for Arpeggiator.  This effect is a modified version of Echo.  The delay
+line is played back at higher rates to create arpeggios at octave intervals.  You can select a 
+preset sequence, then adjust the number of steps to repeat from the sequence to gain a wide variety of
+patterns. Arpie can be adjusted to achieve thick and beautiful soundscapes as well as very edgy electronic
+trance and techno sounds.  Of course, with slower  tempos such that several phrases are repeated one can
+get the tempo-doubling side effect to lay out paint-pealing leads without hardly moving your fingers.
+
+Wet/Dry			Amount of arpeggiated accompaniment in the mix
+Arpe's			Mix pitch shifted delay line with normal delay
+Pan
+Tempo			Measured in beats per minute
+Subdivision		Ratio to subdivide measure.  A setting of 1 is equal to 1 measure at Tempo.
+			For example, 1/4 means the length of the delay line is equal to a quarter note
+			at the selected tempo.  The sequence will jump 4 steps per measure.  
+LRdl.			Same as for Echo
+L/R.Cr			Same as for Echo
+
+
+
+//Dual Flange
+Another Flanger alternative.  
+Basic operation of a flanger:  Delay the incoming signal and add it to the input signal.  This creates destructive interference in a similar 
+manner to a Phaser, but the notch filter frequencies are evenly spaced from the lowest notch up to infinity (in theory).
+
+Dual Flange picks two different delays and adds them to the input signal.  The two separately delayed paths have a spacing relationship that 
+follows the other by a percentage, and not a constant offset.  At maximum wet, these two delay "taps" are added equally, thus the notches between 
+the two are infinitely deep, and the effect is at its maximum severity.  Mixing in the clean signal reduces the depth of the notches, but also 
+creates a complex and interesting frequency response.  The result is a unique color to the tone not available by a standard flanger.
+
+Wet/Dry			Mix delayed signal with Dry
+Pan
+L/R.Cr
+Depth			Frequency (Hz) of the lowest notch frequency on lowest end of sweep range
+Width			LFO sweep width, deviation measured in Hz. 
+Offset			Percent difference in delay between delay A and delay B.
+Fb			Feedback.  0 is none, negative and positive.
+LPF			Damp the delay line.  This makes the high frequency notches more shallow, thus the sound approaches that of a 
+			Phaser or other mellow sweeping comb filter
+Subtract		Subtract delayed signal instead of add
+Th. zero		Through Zero.  Delay Dry signal to 1/2 way between high and low delay deviations of delayed signal.
+Tempo			Sweep speed 
+St.df			Stereo Difference between LFO's
+LFO Type
+Rnd			Random.  Add random noise to LFO to help reduce unmusical effects of linear interpolation between samples.
+
+
+//Expander
+The primary purpose for this effect is to offer a differently natured Noise Gate than the "Noise Gate" module.  The turn-on characteristic is
+modeled after that of a BJT transistor, thus it behaves more similarly to an analog noise gate.  It is likely that Expander
+uses less CPU resources than Noise Gate, but neither are very resource intensive modules.
+
+The basic behavior is the louder you play, the louder it gets until it gets pinned at the maximum "Level".  As a noise gate, 
+the volume is exponentially increased in the lower volume levels until Threshold, at which point the gate
+is entirely open.
+
+To use the effect as an expander, it is best to set the threshold at higher levels, and shape at moderate levels (less than 10). 
+Short attack/release times in this mode will cause it to work much like one would expect from a dynamics expander.  In this mode
+it is essentially a compressor in reverse.
+
+To take the idea of expander a little further, one can set long attack times and short release times to achieve a string swell 
+effect akin to adjusting the volume pot on the guitar...only the effect does it automatically for you.
+
+Finally, the filters may be used for a bit of frequency shaping before a distortion effect, or used in front of the Compressor to help brighten
+the tone.
+
+
+A. Time		Attack Time  -- Time to open the gate
+R. Time		Release Time -- Time it takes the gate to return to off state
+
+Shape		Gate transition shape.  Large number means gate turns on suddenly at threshold.  Small number means gate gradually turns on
+		Noise suppression is best at higher numbers, but the gradual expansion above the threshold can be a more musical
+		way for gate  to turn on.
+
+Thrhold		Threshold.  The gate is reducing signal volume below this level.  Moderate threshold setting with smaller number for shape
+		is useful for string swell effects.
+
+Level		Boost the output. 1 ... 127 represents a fractional increase in volume from 0dB to 20dB
+
+HPF		High Pass Filter
+LPF		Low Pass Filter
