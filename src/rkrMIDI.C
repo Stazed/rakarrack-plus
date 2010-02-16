@@ -537,14 +537,14 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 26:
-	  efx_Har->changepar (4,(unsigned char) value);
+	  efx_Har->changepar (4, value);
       break;
       
     case 27:
       if (Harmonizer_Bypass)
 	{
 	  Harmonizer_Bypass = 0;
-	  efx_Har->changepar (3,(unsigned char) value);
+	  efx_Har->changepar (3, value);
 	  Harmonizer_Bypass = 1;
 	}
       break;
@@ -554,15 +554,15 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 29:
-	  efx_Overdrive->changepar (0,(unsigned char) value);
+	  efx_Overdrive->changepar (0, value);
       break;
       
     case 30:
-	  efx_Distorsion->changepar (0,(unsigned char) value);
+	  efx_Distorsion->changepar (0, value);
       break;
       
     case 31:
-	  efx_Har->changepar (0,(unsigned char) value);
+	  efx_Har->changepar (0, value);
       break;
       
     case 52:
@@ -586,7 +586,7 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 57:
-	  efx_Rev->changepar (0,(unsigned char) value);
+	  efx_Rev->changepar (0, value);
       break;
       
     case 58:
@@ -594,23 +594,23 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 59:
-	  efx_Echo->changepar (0,(unsigned char) value);
+	  efx_Echo->changepar (0, value);
       break;
       
     case 46:
-	  efx_Echo->changepar (1,(unsigned char) value);
+	  efx_Echo->changepar (1, value);
       break;
       
     case 47:
-	  efx_Overdrive->changepar (1,(unsigned char) value);
+	  efx_Overdrive->changepar (1, value);
       break;
       
     case 48:
-	  efx_Distorsion->changepar (1,(unsigned char) value);
+	  efx_Distorsion->changepar (1, value);
       break;
       
     case 49:
-	  efx_Har->changepar (1,(unsigned char) value);
+	  efx_Har->changepar (1, value);
       break;
       
     case 50:
@@ -634,7 +634,7 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 63:
-	  efx_Rev->changepar (1,(unsigned char) value);
+	  efx_Rev->changepar (1, value);
       break;
       
     case 65:
@@ -650,47 +650,47 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 68:
-	  efx_Overdrive->changepar (3,(unsigned char) value);
+	  efx_Overdrive->changepar (3, value);
       break;
       
     case 69:
-	  efx_Distorsion->changepar (3,(unsigned char) value);
+	  efx_Distorsion->changepar (3, value);
       break;
 
     case 70:
-	  efx_Overdrive->changepar (4,(unsigned char) value);
+	  efx_Overdrive->changepar (4, value);
       break;
       
     case 71:
-	  efx_Distorsion->changepar (4,(unsigned char) value);
+	  efx_Distorsion->changepar (4, value);
       break;
       
     case 72:
-	  efx_Chorus->changepar (2, 1+(int)((float)value*4.724f));
+	  efx_Chorus->changepar (2, ret_Tempo(value));
       break;
       
     case 73:
-	  efx_Flanger->changepar (2,1+(int)((float)value*4.724f));
+	  efx_Flanger->changepar (2,ret_Tempo(value));
       break;
       
     case 74:
-	  efx_Phaser->changepar (2, 1+(int)((float)value*4.724f));
+	  efx_Phaser->changepar (2, ret_Tempo(value));
       break;
       
     case 75:
-	  efx_WhaWha->changepar (2,1+(int)((float)value*4.724f));
+	  efx_WhaWha->changepar (2,ret_Tempo(value));
       break;
       
     case 76:
-	  efx_Alienwah->changepar (2, 1+(int)((float)value*4.724f));
+	  efx_Alienwah->changepar (2, ret_Tempo(value));
       break;
       
     case 77:
-	  efx_Pan->changepar (2, 1+(int)((float)value*4.724f));
+	  efx_Pan->changepar (2, ret_Tempo(value));
       break;
       
     case 78:
-	  efx_Echo->changepar (5,(unsigned char) value);
+	  efx_Echo->changepar (5, value);
       break;
       
     case 79:
@@ -718,27 +718,27 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 85:
-	  efx_Overdrive->changepar (7,(unsigned char) value);
+	  efx_Overdrive->changepar (7, ret_LPF(value));
       break;
       
     case 86:
-	  efx_Distorsion->changepar (7,(unsigned char) value);
+	  efx_Distorsion->changepar (7, ret_LPF(value));
       break;
       
     case 87:
-	  efx_Rev->changepar (7,(unsigned char) value);
+	  efx_Rev->changepar (7, ret_LPF(value));
       break;
       
     case 88:
-	  efx_Overdrive->changepar (8,(unsigned char) value);
+	  efx_Overdrive->changepar (8, ret_HPF(value));
       break;
       
     case 89:
-	  efx_Distorsion->changepar (8,(unsigned char) value);
+	  efx_Distorsion->changepar (8, ret_HPF(value));
       break;
       
     case 90:
-	  efx_Rev->changepar (8,(unsigned char) value);
+	  efx_Rev->changepar (8, ret_HPF(value));
       break;
       
     case 91:
@@ -754,11 +754,11 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 94:
-	  efx_Overdrive->changepar (2,(unsigned char) value);
+	  efx_Overdrive->changepar (2, value);
       break;
       
     case 95:
-	  efx_Distorsion->changepar (2,(unsigned char) value);
+	  efx_Distorsion->changepar (2, value);
       break;
       
     case 96:
@@ -766,7 +766,7 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 97:
-	  efx_Echo->changepar (4,(unsigned char) value);
+	  efx_Echo->changepar (4, value);
       break;
       
     case 98:
@@ -842,7 +842,7 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
 
     case 116:
-      ActiveUn((unsigned char) value);
+      ActiveUn( value);
       break;
       
     case 117:
@@ -878,43 +878,43 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
       
     case 125:
-	  efx_NewDist->changepar (0,(unsigned char) value);
+	  efx_NewDist->changepar (0, value);
       break;
       
     case 126:
-	  efx_NewDist->changepar (1,(unsigned char) value);
+	  efx_NewDist->changepar (1, value);
       break;
             
     case 127:
-	  efx_NewDist->changepar (2,(unsigned char) value);
+	  efx_NewDist->changepar (2, value);
       break;
       
     case 2:
-	  efx_NewDist->changepar (3,(unsigned char) value);
+	  efx_NewDist->changepar (3, value);
       break;
       
     case 3:
-	  efx_NewDist->changepar (4,(unsigned char) value);
+	  efx_NewDist->changepar (4, value);
       break;
       
     case 4:
-	  efx_NewDist->changepar (7,(unsigned char) value);
+	  efx_NewDist->changepar (7, ret_LPF(value));
       break;
       
     case 5:
-	  efx_NewDist->changepar (8,(unsigned char) value);
+	  efx_NewDist->changepar (8, ret_HPF(value));
       break;
       
     case 6:
-	  efx_NewDist->changepar (9,(unsigned char) value);
+	  efx_NewDist->changepar (9, value);
       break;
       
     case 8:
-	  efx_NewDist->changepar (11,(unsigned char) value);
+	  efx_NewDist->changepar (11, value);
       break;
       
     case 9:
-	  efx_NewDist->changepar (12,(unsigned char) value);
+	  efx_NewDist->changepar (12, value);
       break;
 
     case 12:
@@ -928,51 +928,51 @@ RKR::process_midi_controller_events(int parameter, int value)
       break; 
 
     case 130:
-          efx_EQ1->changepar(0,(unsigned char) value); 
+          efx_EQ1->changepar(0, value); 
        break;   
     
     case 131:       
-          for(i=0;i<10;i++) efx_EQ1->changepar(i*5+13,(unsigned char) value);
+          for(i=0;i<10;i++) efx_EQ1->changepar(i*5+13, value);
        break;
        
     case 132:   
-          efx_EQ1->changepar(12,(unsigned char) value); 
+          efx_EQ1->changepar(12, value); 
        break;   
      
     case 133:   
-          efx_EQ1->changepar(5+12,(unsigned char) value); 
+          efx_EQ1->changepar(5+12, value); 
        break;   
        
     case 134:   
-          efx_EQ1->changepar(10+12,(unsigned char) value); 
+          efx_EQ1->changepar(10+12, value); 
        break;   
        
     case 135:   
-          efx_EQ1->changepar(15+12,(unsigned char) value); 
+          efx_EQ1->changepar(15+12, value); 
        break;   
 
     case 136:   
-          efx_EQ1->changepar(20+12,(unsigned char) value); 
+          efx_EQ1->changepar(20+12, value); 
        break;   
 
     case 137:   
-          efx_EQ1->changepar(25+12,(unsigned char) value); 
+          efx_EQ1->changepar(25+12, value); 
        break;   
 
     case 138:   
-          efx_EQ1->changepar(30+12,(unsigned char) value); 
+          efx_EQ1->changepar(30+12, value); 
        break;   
 
     case 139:   
-          efx_EQ1->changepar(35+12,(unsigned char) value); 
+          efx_EQ1->changepar(35+12, value); 
        break;   
 
     case 140:   
-          efx_EQ1->changepar(40+12,(unsigned char) value); 
+          efx_EQ1->changepar(40+12, value); 
        break;   
 
     case 141:   
-          efx_EQ1->changepar(45+12,(unsigned char) value); 
+          efx_EQ1->changepar(45+12, value); 
        break;   
     
     case 142:
@@ -1000,43 +1000,43 @@ RKR::process_midi_controller_events(int parameter, int value)
        break;
        
     case 148:
-         efx_EQ2->changepar(0,(unsigned char) value);   
+         efx_EQ2->changepar(0, value);   
        break; 
 
     case 149:
-         efx_EQ2->changepar(11,(unsigned char) (48.0f/127.0f*value));   
+         efx_EQ2->changepar(11, 20+(int)((float)value*7.7165f ));   
        break; 
 
     case 150:
-         efx_EQ2->changepar(12,(unsigned char) value);   
+         efx_EQ2->changepar(12, value);   
        break; 
 
     case 151:
-         efx_EQ2->changepar(13,(unsigned char) value);   
+         efx_EQ2->changepar(13, value);   
        break; 
 
     case 152:
-         efx_EQ2->changepar(16,(unsigned char) (49 + 50.0f/127.0f*value));   
+         efx_EQ2->changepar(16, 800 + (int)((float)value*56.692f));   
        break; 
 
     case 153:
-         efx_EQ2->changepar(17,(unsigned char) value);   
+         efx_EQ2->changepar(17, value);   
        break; 
 
     case 154:
-         efx_EQ2->changepar(18,(unsigned char) value);   
+         efx_EQ2->changepar(18, value);   
        break; 
 
     case 155:
-         efx_EQ2->changepar(21,(unsigned char) (100 + 27.0f/127.0f*value));   
+         efx_EQ2->changepar(21, 20000 + (int)((float)value*157.48f));   
        break; 
 
     case 156:
-         efx_EQ2->changepar(22,(unsigned char) value);   
+         efx_EQ2->changepar(22, value);   
        break; 
 
     case 157:
-         efx_EQ2->changepar(23,(unsigned char) value);   
+         efx_EQ2->changepar(23, value);   
        break; 
     
     case 158:
@@ -1112,11 +1112,11 @@ RKR::process_midi_controller_events(int parameter, int value)
          break;
 
     case 176:
-         efx_Valve->changepar(6,value);
+         efx_Valve->changepar(6,ret_LPF(value));
          break;
 
     case 177:
-         efx_Valve->changepar(7,value);
+         efx_Valve->changepar(7,ret_HPF(value));
          break;
    
     case 178:
@@ -1260,3 +1260,21 @@ RKR::process_midi_controller_events(int parameter, int value)
       
     
 }
+
+
+int
+RKR::ret_Tempo(int value)
+{
+return( 1+(int)((float)value*4.724f));
+}
+int
+RKR::ret_LPF(int value)
+{
+return( 20+(int)((float)value*204.566f));
+}
+int
+RKR::ret_HPF(int value)
+{
+return( 20+(int)((float)value*157.322f));
+}
+
