@@ -274,16 +274,16 @@ RKR::init_rkr ()
       efx_EQ1->changepar (i + 14, 0);
     }
 
-  efx_EQ1->changepar (0 + 11, 8);
-  efx_EQ1->changepar (5 + 11, 22);
-  efx_EQ1->changepar (10 + 11, 35);
-  efx_EQ1->changepar (15 + 11, 48);
-  efx_EQ1->changepar (20 + 11, 61);
-  efx_EQ1->changepar (25 + 11, 74);
-  efx_EQ1->changepar (30 + 11, 87);
-  efx_EQ1->changepar (35 + 11, 100);
-  efx_EQ1->changepar (40 + 11, 113);
-  efx_EQ1->changepar (45 + 11, 126);
+  efx_EQ1->changepar (0 + 11, 31);
+  efx_EQ1->changepar (5 + 11, 63);
+  efx_EQ1->changepar (10 + 11, 125);
+  efx_EQ1->changepar (15 + 11, 250);
+  efx_EQ1->changepar (20 + 11, 500);
+  efx_EQ1->changepar (25 + 11, 1000);
+  efx_EQ1->changepar (30 + 11, 2000);
+  efx_EQ1->changepar (35 + 11, 4000);
+  efx_EQ1->changepar (40 + 11, 8000);
+  efx_EQ1->changepar (45 + 11, 16000);
 
   for (int i = 0; i <= 10; i += 5)
     {
