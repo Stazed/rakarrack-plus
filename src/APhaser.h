@@ -73,7 +73,7 @@ private:
   bool barber;			//Barber pole phasing flag
   REALTYPE distortion, fb, width, offsetpct, fbl, fbr, depth;
   REALTYPE *lxn1, *lyn1,*rxn1, *ryn1, *offset;
-  REALTYPE oldlgain, oldrgain;
+  REALTYPE oldlgain, oldrgain, rdiff, ldiff, invperiod;
   
   REALTYPE mis;
   REALTYPE Rmin;	// 2N5457 typical on resistance at Vgs = 0

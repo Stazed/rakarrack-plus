@@ -76,6 +76,7 @@ Analog_Phaser::Analog_Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
    Rconst = 1.0f + Rmx;  // Handle parallel resistor relationship
    C = 0.00000005f;	     // 50 nF
    CFs = (float) 2.0f*(float)SAMPLE_RATE*C;
+   invperiod = 1.0f/(float) PERIOD;
 
 
   Ppreset = 0;
@@ -110,7 +111,7 @@ void
 Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i, j;
-  REALTYPE lfol, lfor, lgain, rgain, bl, br, rmod, lmod, d, hpfr, hpfl;
+  REALTYPE lfol, lfor, lgain, rgain, bl, br, gl, gr, rmod, lmod, d, hpfr, hpfl;
   lgain = 0.0;
   rgain = 0.0;
   
@@ -131,11 +132,15 @@ Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
   else if (rmod < ZERO_)
     rmod = ZERO_;
 
+    rdiff = (rmod - oldrgain) / invperiod;
+    ldiff = (lmod - oldlgain) / invperiod;
+    gl = oldlgain;
+    gr = oldrgain;
+    
   for (i = 0; i < PERIOD; i++)
     {
-      REALTYPE x = (REALTYPE) i / (float)PERIOD;
-      REALTYPE gl = (lmod  - oldlgain) * x + oldlgain;	// Linear interpolation between LFO samples
-      REALTYPE gr = (rmod - oldrgain) * x + oldrgain;
+      gl += ldiff;	// Linear interpolation between LFO samples
+      gr += rdiff;
       REALTYPE lxn = smpsl[i];
       REALTYPE rxn = smpsr[i];
 
