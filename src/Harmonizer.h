@@ -36,17 +36,17 @@ public:
   Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality);
    ~Harmonizer ();
   void out (float *smpsl, float *smpsr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
   void applyfilters (REALTYPE * efxoutl);
 
 
-  unsigned char Ppreset;
-  unsigned char Pinterval;
-  unsigned char PMIDI;
-  unsigned char PSELECT;
+  int Ppreset;
+  int Pinterval;
+  int PMIDI;
+  int PSELECT;
   int mira;
 
   float *efxoutl;
@@ -62,28 +62,28 @@ public:
 
 private:
 
-  unsigned char Pvolume;
-  unsigned char Pgain;
-  unsigned char Ppan;
-  unsigned char Pnote;
-  unsigned char Ptype;
+  int Pvolume;
+  int Pgain;
+  int Ppan;
+  int Pnote;
+  int Ptype;
 
-  unsigned char fPfreq;
-  unsigned char fPgain;
-  unsigned char fPq;
+  int fPfreq;
+  int fPgain;
+  int fPq;
 
   float panning;
   float gain;
   float interval;
 
-  void setvolume (unsigned char Pvolume);
-  void setpanning (unsigned char Ppan);
-  void setinterval (unsigned char Pinterval);
-  void setgain (unsigned char Pgain);
-  void setMIDI (unsigned char PMIDI);
-  void fsetfreq (unsigned char value);
-  void fsetgain (unsigned char value);
-  void fsetq (unsigned char value);
+  void setvolume (int Pvolume);
+  void setpanning (int Ppan);
+  void setinterval (int Pinterval);
+  void setgain (int Pgain);
+  void setMIDI (int PMIDI);
+  void fsetfreq (int value);
+  void fsetgain (int value);
+  void fsetq (int value);
 
 
   AnalogFilter *pl;

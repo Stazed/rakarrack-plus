@@ -352,6 +352,14 @@ RKR::savefile (char *filename)
                    efx_Arpie->getpar (10), Arpie_Bypass);
 	  break;
 
+	case 25:
+	  //Expander
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Expander->getpar (1), efx_Expander->getpar (2),
+		   efx_Expander->getpar (3), efx_Expander->getpar (4),
+		   efx_Expander->getpar (5), efx_Expander->getpar (6),
+		   efx_Expander->getpar (7), Expander_Bypass);
+	  break;
 
 
 
@@ -712,6 +720,14 @@ RKR::loadfile (char *filename)
 		  &lv[25][10],&Arpie_B);
 	  break;
 
+	case 25:
+	  //Expander
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[26][0], &lv[26][1], &lv[26][2], &lv[26][3], &lv[26][4],
+		  &lv[26][5], &lv[26][6], &Expander_B);
+
+	  break;
+
 
 	}
     }
@@ -780,11 +796,12 @@ RKR::Actualizar_Audio ()
   Exciter_Bypass = 0;
   MBDist_Bypass = 0;
   Arpie_Bypass = 0;  
+  Expander_Bypass = 0;
   
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
-    efx_Rev->changepar (i, (unsigned char)lv[0][i]);
+    efx_Rev->changepar (i, lv[0][i]);
   for (i = 0; i <= 7; i++)
     efx_Echo->changepar (i, lv[1][i]);
   for (i = 0; i <= 11; i++)
@@ -794,9 +811,9 @@ RKR::Actualizar_Audio ()
   for (i = 0; i <= 11; i++)
     efx_Phaser->changepar (i,lv[4][i]);
   for (i = 0; i <= 10; i++)
-    efx_Overdrive->changepar (i, (unsigned char)lv[5][i]);
+    efx_Overdrive->changepar (i, lv[5][i]);
   for (i = 0; i <= 12; i++)
-    efx_Distorsion->changepar (i, (unsigned char)lv[6][i]);
+    efx_Distorsion->changepar (i, lv[6][i]);
   for (i = 0; i <= 7; i++)
     efx_Compressor->Compressor_Change (i + 1, lv[9][i]);
   efx_WhaWha->setpreset (lv[11][10]);
@@ -807,13 +824,13 @@ RKR::Actualizar_Audio ()
   for (i = 0; i <= 8; i++)
     efx_Pan->changepar (i, lv[14][i]);
   for (i = 0; i <= 10; i++)
-    efx_Har->changepar (i, (unsigned char)lv[15][i]);
+    efx_Har->changepar (i, lv[15][i]);
   for (i = 0; i <= 12; i++)
-    efx_MusDelay->changepar (i, (unsigned char)lv[16][i]);
+    efx_MusDelay->changepar (i, lv[16][i]);
   for (i = 0; i <= 6; i++)
     efx_Gate->Gate_Change (i + 1,lv[17][i]);
   for (i = 0; i <= 11; i++)
-    efx_NewDist->changepar (i, (unsigned char)lv[18][i]);
+    efx_NewDist->changepar (i, lv[18][i]);
   for (i = 0; i <= 12; i++)
     efx_APhaser->changepar (i, lv[19][i]);
   for (i = 0; i <= 12; i++)
@@ -828,7 +845,9 @@ RKR::Actualizar_Audio ()
     efx_MBDist->changepar (i, lv[24][i]);
  for (i = 0; i <= 10; i++)
     efx_Arpie->changepar (i, lv[25][i]);
-
+for (i = 0; i <= 6; i++)
+    efx_Expander->Expander_Change (i + 1,lv[26][i]);
+  
 
   for (i = 0; i < 12; i++)
     efx_order[i] = lv[10][i];
@@ -839,20 +858,20 @@ RKR::Actualizar_Audio ()
 
   for (i = 0; i < 10; i++)
     {
-      efx_EQ1->changepar (i * 5 + 12, (unsigned char)lv[7][i]);
-      efx_EQ1->changepar (i * 5 + 13, (unsigned char)lv[7][11]);
+      efx_EQ1->changepar (i * 5 + 12, lv[7][i]);
+      efx_EQ1->changepar (i * 5 + 13, lv[7][11]);
     }
-  efx_EQ1->changepar (0, (unsigned char)lv[7][10]);
+  efx_EQ1->changepar (0, lv[7][10]);
   for (i = 0; i < 3; i++)
     {
-      efx_EQ2->changepar (i * 5 + 11, (unsigned char)lv[8][0 + i * 3]);
-      efx_EQ2->changepar (i * 5 + 12, (unsigned char)lv[8][1 + i * 3]);
-      efx_EQ2->changepar (i * 5 + 13, (unsigned char)lv[8][2 + i * 3]);
+      efx_EQ2->changepar (i * 5 + 11, lv[8][0 + i * 3]);
+      efx_EQ2->changepar (i * 5 + 12, lv[8][1 + i * 3]);
+      efx_EQ2->changepar (i * 5 + 13, lv[8][2 + i * 3]);
     }
-  efx_EQ2->changepar (0, (unsigned char)lv[8][9]);
+  efx_EQ2->changepar (0, lv[8][9]);
 
-  Cabinet_setpreset ((unsigned char)lv[13][0]);
-  efx_Cabinet->changepar (0, (unsigned char)lv[13][1]);
+  Cabinet_setpreset (lv[13][0]);
+  efx_Cabinet->changepar (0,lv[13][1]);
 
 
 
@@ -882,6 +901,7 @@ RKR::Actualizar_Audio ()
   Exciter_Bypass = Exciter_B;
   MBDist_Bypass = MBDist_B;
   Arpie_Bypass = Arpie_B;
+  Expander_Bypass = Expander_B;
 
   Bypass = Bypass_B;
 
@@ -948,7 +968,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[26][16] = {
+  int presets[27][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -960,9 +980,9 @@ RKR::New ()
 //Phaser
     {64, 64, 11, 0, 0, 64, 110, 64, 1, 0, 0, 20, 0, 0, 0, 0},
 //Overdrive
-    {84, 64, 35, 56, 40, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0, 0},
+    {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0, 0, 0, 0, 0, 0},
 //Distorsion
-    {0, 64, 0, 87, 14, 6, 0, 80, 30, 0, 1, 0, 0, 0, 0, 0},
+    {0, 64, 0, 87, 14, 6, 0, 3134, 157, 0, 1, 0, 0, 0, 0, 0},
 //EQ1
     {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 0, 0, 0, 0},
 //EQ2
@@ -980,17 +1000,17 @@ RKR::New ()
 //Pan
     {64, 64, 26, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 //Harmonizer
-    {64, 64, 64, 12, 64, 0, 0, 0, 64, 64, 0, 0, 0, 0, 0, 0},
+    {64, 64, 64, 12, 6000, 0, 0, 0, 64, 64, 0, 0, 0, 0, 0, 0},
 //MusicDelay
     {64, 0, 2, 7, 0, 59, 0, 127, 4, 59, 106, 75, 75, 0, 0, 0},
 //NoiseGate
-    {0, 0, 1, 2, 96, 20, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 2, 6703, 76, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //NewDist
-    {0, 64, 64, 83, 15, 15, 0, 75, 31, 68, 0, 0, 0, 0, 0, 0},
+    {0, 64, 64, 83, 15, 15, 0, 2437, 169, 68, 0, 0, 0, 0, 0, 0},
 //APhaser
     {64, 20, 14, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0},
 //Valve
-    {0, 64, 64, 127, 64, 0, 93, 17, 1, 0, 69, 1, 80 ,0 ,0 ,0},
+    {0, 64, 64, 127, 64, 0, 5841, 61, 1, 0, 69, 1, 80 ,0 ,0 ,0},
 //Dual Flange
     {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0, 0},
 //Ring
@@ -1000,7 +1020,10 @@ RKR::New ()
 //MBDist
     {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0},
 //Arpie
-    {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0}
+    {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0},
+//Expander
+    {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
+
      
 
   };
@@ -1056,6 +1079,7 @@ RKR::New ()
   Exciter_B = 0;
   MBDist_B = 0;
   Arpie_B = 0;
+  Expander_B = 0;
   Bypass_B = 0;
 
   
@@ -1078,7 +1102,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[26][16] = {
+  int presets[27][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1090,9 +1114,9 @@ RKR::New_Bank ()
 //Phaser
     {64, 64, 11, 0, 0, 64, 110, 64, 1, 0, 0, 20, 0, 0, 0, 0},
 //Overdrive
-    {84, 64, 35, 56, 40, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0, 0},
+    {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0, 0, 0, 0, 0, 0},
 //Distorsion
-    {0, 64, 0, 87, 14, 6, 0, 80, 30, 0, 1, 0, 0, 0, 0, 0},
+    {0, 64, 0, 87, 14, 6, 0, 3134, 157, 0, 1, 0, 0, 0, 0, 0},
 //EQ1
     {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 0, 0, 0, 0},
 //EQ2
@@ -1110,17 +1134,17 @@ RKR::New_Bank ()
 //Pan
     {64, 64, 26, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 //Harmonizer
-    {64, 64, 64, 12, 64, 0, 0, 0, 64, 64, 0, 0, 0, 0, 0, 0},
+    {64, 64, 64, 12, 6000, 0, 0, 0, 64, 64, 0, 0, 0, 0, 0, 0},
 //MusicDelay
     {64, 0, 2, 7, 0, 59, 0, 127, 4, 59, 106, 75, 75, 0, 0, 0},
 //NoiseGate
-    {0, 0, 1, 2, 96, 20, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 2, 6703, 76, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //NewDist
-    {0, 64, 64, 83, 65, 15, 0, 75, 31, 68, 0, 0, 0, 0, 0, 0},
+    {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0, 0, 0, 0, 0, 0},
 //APhaser
     {64, 20, 14, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0},
 //Valve
-     {0, 64, 64, 127, 64, 0, 93, 17, 1, 0, 69, 1, 80 ,0 ,0 ,0},
+     {0, 64, 64, 127, 64, 0, 5841, 61, 1, 0, 69, 1, 80 ,0 ,0 ,0},
 //Dual Flange
     {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0, 0},
 //Ring
@@ -1130,7 +1154,9 @@ RKR::New_Bank ()
 //MBDist
     {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0},
 //Arpie
-    {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0}
+    {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0},
+//Expander
+    {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
     
     
      
@@ -1219,6 +1245,7 @@ RKR::Bank_to_Preset (int i)
   Exciter_B = Bank[i].lv[23][19];
   MBDist_B = Bank[i].lv[24][19];  
   Arpie_B = Bank[i].lv[25][19];
+  Expander_B = Bank[i].lv[26][19];
   Bypass_B = Bypass;
 
 
@@ -1298,6 +1325,8 @@ RKR::Preset_to_Bank (int i)
     lv[24][j] = efx_MBDist->getpar(j);
   for (j = 0; j <= 10; j++)
     lv[25][j] = efx_Arpie->getpar(j);
+  for (j = 0; j <= 6; j++)
+    lv[26][j] = efx_Expander->getpar(j+1);
 
 
   for (j = 0; j <= 12; j++)
@@ -1356,6 +1385,8 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[23][19] = Exciter_Bypass;
   Bank[i].lv[24][19] = MBDist_Bypass;
   Bank[i].lv[25][19] = Arpie_Bypass;
+  Bank[i].lv[26][19] = Expander_Bypass;
+  
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
   

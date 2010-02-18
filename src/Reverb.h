@@ -41,11 +41,11 @@ public:
   void out (REALTYPE * smps_l, REALTYPE * smps_r);
   void cleanup ();
 
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
 
-  unsigned char Ppreset;
+  int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
 
@@ -60,52 +60,52 @@ public:
 private:
   //Parametrii
   //Amount of the reverb,
-  unsigned char Pvolume;
+  int Pvolume;
 
   //LefT/Right Panning
-  unsigned char Ppan;
+  int Ppan;
 
   //duration of reverb
-  unsigned char Ptime;
+  int Ptime;
 
   //Initial delay 
-  unsigned char Pidelay;
+  int Pidelay;
 
   //Initial delay feedback
-  unsigned char Pidelayfb;
+  int Pidelayfb;
 
   //delay between ER/Reverbs
-  unsigned char Prdelay;
+  int Prdelay;
 
   //EarlyReflections/Reverb Balance
-  unsigned char Perbalance;
+  int Perbalance;
 
   //HighPassFilter 
-  unsigned char Plpf;
+  int Plpf;
 
   //LowPassFilter
-  unsigned char Phpf;
+  int Phpf;
 
   //Low/HighFrequency Damping
-  unsigned char Plohidamp;	// 0..63 lpf,64=off,65..127=hpf(TODO)
+  int Plohidamp;	// 0..63 lpf,64=off,65..127=hpf(TODO)
 
   //Reverb type
-  unsigned char Ptype;
+  int Ptype;
 
   //Room Size
-  unsigned char Proomsize;
+  int Proomsize;
 
   //parameter control
-  void setvolume (unsigned char Pvolume);
-  void setpan (unsigned char Ppan);
-  void settime (unsigned char Ptime);
-  void setlohidamp (unsigned char Plohidamp);
-  void setidelay (unsigned char Pidelay);
-  void setidelayfb (unsigned char Pidelayfb);
-  void sethpf (unsigned char Phpf);
-  void setlpf (unsigned char Plpf);
-  void settype (unsigned char Ptype);
-  void setroomsize (unsigned char Proomsize);
+  void setvolume (int Pvolume);
+  void setpan (int Ppan);
+  void settime (int Ptime);
+  void setlohidamp (int Plohidamp);
+  void setidelay (int Pidelay);
+  void setidelayfb (int Pidelayfb);
+  void sethpf (int Phpf);
+  void setlpf (int Plpf);
+  void settype (int Ptype);
+  void setroomsize (int Proomsize);
 
   REALTYPE pan, erbalance;
   //Parametrii 2  

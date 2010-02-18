@@ -65,6 +65,7 @@ void deleteFFTFREQS(FFTFREQS *f);
 #include "Exciter.h"
 #include "MBDist.h"
 #include "Arpie.h"
+#include "Expander.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f
@@ -140,15 +141,18 @@ public:
   int Message (const char *labelwin, const char *message_text);
   char *PrefNom (const char *dato);
 
-  int EQ1_setpreset (int func, int num, unsigned char npreset);
-  int EQ2_setpreset (int func, int num, unsigned char npreset);
-  int Cabinet_setpreset (unsigned char npreset);
+  int EQ1_setpreset (int func, int num, int npreset);
+  int EQ2_setpreset (int func, int num, int npreset);
+  int Cabinet_setpreset (int npreset);
   void miramidi ();
   void InitMIDI ();
   void ConnectMIDI ();
   void ActiveUn(int value);
   void jack_process_midievents (jack_midi_event_t *midievent);
   void process_midi_controller_events(int parameter, int value);
+  int ret_Tempo(int value);
+  int ret_LPF(int value);
+  int ret_HPF(int value);
   void calculavol (int i);
   void Conecta ();
   void disconectaaconnect ();
@@ -190,7 +194,7 @@ public:
   class Exciter *efx_Exciter;
   class MBDist *efx_MBDist;
   class Arpie *efx_Arpie;
-     
+  class Expander *efx_Expander;     
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
@@ -226,6 +230,7 @@ public:
   int Exciter_Bypass;
   int MBDist_Bypass;
   int Arpie_Bypass;
+  int Expander_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -252,6 +257,7 @@ public:
   int Exciter_B;
   int MBDist_B;
   int Arpie_B;
+  int Expander_B;
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];

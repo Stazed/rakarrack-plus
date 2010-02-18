@@ -40,7 +40,7 @@ public:
   void cleanup ();
 
   void setdryonly ();
-  unsigned char Ppreset;
+  int Ppreset;
 
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;

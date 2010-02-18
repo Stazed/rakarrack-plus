@@ -223,7 +223,7 @@ Reverb::out (REALTYPE * smps_l, REALTYPE * smps_r)
  * Parameter control
  */
 void
-Reverb::setvolume (unsigned char Pvolume)
+Reverb::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   volume = outvolume = (float)Pvolume / 127.0f;
@@ -234,14 +234,14 @@ Reverb::setvolume (unsigned char Pvolume)
 };
 
 void
-Reverb::setpan (unsigned char Ppan)
+Reverb::setpan (int Ppan)
 {
   this->Ppan = Ppan;
   pan = (REALTYPE) Ppan / 127.0f;
 };
 
 void
-Reverb::settime (unsigned char Ptime)
+Reverb::settime (int Ptime)
 {
   int i;
   REALTYPE t;
@@ -258,7 +258,7 @@ Reverb::settime (unsigned char Ptime)
 };
 
 void
-Reverb::setlohidamp (unsigned char Plohidamp)
+Reverb::setlohidamp (int Plohidamp)
 {
   REALTYPE x;
 
@@ -283,7 +283,7 @@ Reverb::setlohidamp (unsigned char Plohidamp)
 };
 
 void
-Reverb::setidelay (unsigned char Pidelay)
+Reverb::setidelay (int Pidelay)
 {
   REALTYPE delay;
   this->Pidelay = Pidelay;
@@ -304,34 +304,32 @@ Reverb::setidelay (unsigned char Pidelay)
 };
 
 void
-Reverb::setidelayfb (unsigned char Pidelayfb)
+Reverb::setidelayfb (int Pidelayfb)
 {
   this->Pidelayfb = Pidelayfb;
   idelayfb = (float)Pidelayfb / 128.0f;
 };
 
 void
-Reverb::sethpf (unsigned char Phpf)
+Reverb::sethpf (int value)
 {
-  this->Phpf = Phpf;
-
-    REALTYPE fr = expf (powf ((float)Phpf / 127.0f, 0.5f) * logf (10000.0f)) + 20.0f;
-    hpf->setfreq (fr);
+  Phpf = value;
+  REALTYPE fr = (float)Phpf;
+  hpf->setfreq (fr);
     
 };
 
 void
-Reverb::setlpf (unsigned char Plpf)
+Reverb::setlpf (int value)
 {
-  this->Plpf = Plpf;
-    
-  REALTYPE fr = expf (powf ((float)Plpf / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+  Plpf = value;
+  REALTYPE fr = (float)Plpf;
   lpf->setfreq (fr);
     
 };
 
 void
-Reverb::settype (unsigned char Ptype)
+Reverb::settype (int Ptype)
 {
   const int NUM_TYPES = 2;
   int combtunings[NUM_TYPES][REV_COMBS] = {
@@ -396,7 +394,7 @@ Reverb::settype (unsigned char Ptype)
 };
 
 void
-Reverb::setroomsize (unsigned char Proomsize)
+Reverb::setroomsize (int Proomsize)
 {
   if (Proomsize == 0)
     Proomsize = 64;		//this is because the older versions consider roomsize=0
@@ -411,37 +409,37 @@ Reverb::setroomsize (unsigned char Proomsize)
 };
 
 void
-Reverb::setpreset (unsigned char npreset)
+Reverb::setpreset (int npreset)
 {
   const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 13;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Cathedral1
-    {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64},
+    {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64},
     //Cathedral2
-    {80, 64, 69, 35, 0, 0, 0, 127, 0, 71, 0, 64},
+    {80, 64, 69, 35, 0, 0, 0, 25040, 21, 71, 0, 64},
     //Cathedral3
-    {80, 64, 69, 24, 0, 0, 0, 127, 75, 78, 1, 85},
+    {80, 64, 69, 24, 0, 0, 0, 25040, 2417, 78, 1, 85},
     //Hall1
-    {90, 64, 51, 10, 0, 0, 0, 127, 21, 78, 1, 64},
+    {90, 64, 51, 10, 0, 0, 0, 25040, 81, 78, 1, 64},
     //Hall2
-    {90, 64, 53, 20, 0, 0, 0, 127, 75, 71, 1, 64},
+    {90, 64, 53, 20, 0, 0, 0, 25040, 2417, 71, 1, 64},
     //Room1
-    {100, 64, 33, 0, 0, 0, 0, 127, 0, 106, 0, 30},
+    {100, 64, 33, 0, 0, 0, 0, 25040, 21, 106, 0, 30},
     //Room2
-    {100, 64, 21, 26, 0, 0, 0, 62, 0, 77, 1, 45},
+    {100, 64, 21, 26, 0, 0, 0, 1223, 21, 77, 1, 45},
     //Basement
-    {110, 64, 14, 0, 0, 0, 0, 127, 5, 71, 0, 25},
+    {110, 64, 14, 0, 0, 0, 0, 25040, 27, 71, 0, 25},
     //Tunnel
-    {85, 80, 84, 20, 42, 0, 0, 51, 0, 78, 1, 105},
+    {85, 80, 84, 20, 42, 0, 0, 652, 21, 78, 1, 105},
     //Echoed1
-    {95, 64, 26, 60, 71, 0, 0, 114, 0, 64, 1, 64},
+    {95, 64, 26, 60, 71, 0, 0, 14722, 21, 64, 1, 64},
     //Echoed2
-    {90, 64, 40, 88, 71, 0, 0, 114, 0, 88, 1, 64},
+    {90, 64, 40, 88, 71, 0, 0, 14722, 21, 88, 1, 64},
     //VeryLong1
-    {90, 64, 93, 15, 0, 0, 0, 114, 0, 77, 0, 95},
+    {90, 64, 93, 15, 0, 0, 0, 14722, 21, 77, 0, 95},
     //VeryLong2
-    {90, 64, 111, 30, 0, 0, 0, 114, 90, 74, 1, 80}
+    {90, 64, 111, 30, 0, 0, 0, 14722, 5058, 74, 1, 80}
   };
 
   if (npreset >= NUM_PRESETS)
@@ -453,7 +451,7 @@ Reverb::setpreset (unsigned char npreset)
 
 
 void
-Reverb::changepar (int npar, unsigned char value)
+Reverb::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -494,7 +492,7 @@ Reverb::changepar (int npar, unsigned char value)
     };
 };
 
-unsigned char
+int
 Reverb::getpar (int npar)
 {
   switch (npar)

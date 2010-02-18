@@ -401,6 +401,28 @@ setTempo(int old)
 return(1);
 }
 
+int
+setFreql(int old)
+{
+  float fr = expf (powf ((float)old / 127.0f, 0.5f) * logf (25000.0f)) + 40.0f;
+  return(lrintf(fr));
+}
+
+int
+setFreqh(int old)
+{
+  float fr = expf (powf ((float)old / 127.0f, 0.5f) * logf (25000.0f)) + 20.0f;
+  return(lrintf(fr));
+}
+
+int
+setFreq(int old)
+{
+  float fr = 600.0f * powf (30.0f, ((float)old - 64.0f) / 64.0f);
+  return(lrintf(fr));
+}
+
+
 
 int
 main (int argc, char *argv[])
@@ -529,6 +551,22 @@ for (i=1; i<61; i++)
    NewBank[i].lv[19][2] = setTempo(NewBank[i].lv[19][2]);  
 
    NewBank[i].lv[1][2] = setdelay(NewBank[i].lv[1][2]);
+   
+   NewBank[i].lv[6][7] = setFreql(NewBank[i].lv[6][7]);
+   NewBank[i].lv[6][8] = setFreqh(NewBank[i].lv[6][8]);
+   NewBank[i].lv[5][7] = setFreql(NewBank[i].lv[5][7]);
+   NewBank[i].lv[5][8] = setFreqh(NewBank[i].lv[5][8]);
+   NewBank[i].lv[18][7] = setFreql(NewBank[i].lv[18][7]);
+   NewBank[i].lv[18][8] = setFreqh(NewBank[i].lv[18][8]);
+   NewBank[i].lv[0][7] = setFreql(NewBank[i].lv[0][7]);
+   NewBank[i].lv[0][8] = setFreqh(NewBank[i].lv[0][8]);
+   NewBank[i].lv[17][4] = setFreql(NewBank[i].lv[17][4]);
+   NewBank[i].lv[17][5] = setFreqh(NewBank[i].lv[17][5]);
+   NewBank[i].lv[15][4] = setFreq(NewBank[i].lv[15][4]);
+   NewBank[i].lv[8][0] = setFreq(NewBank[i].lv[8][0]);
+   NewBank[i].lv[8][3] = setFreq(NewBank[i].lv[8][3]);
+   NewBank[i].lv[8][6] = setFreq(NewBank[i].lv[8][6]);
+   
 
 
 }
@@ -596,7 +634,21 @@ for (i=61; i<81; i++)
 
    NewBank[i-60].lv[1][2] = setdelay(NewBank[i-60].lv[1][2]);
    
-
+   NewBank[i-60].lv[6][7] = setFreql(NewBank[i-60].lv[6][7]);
+   NewBank[i-60].lv[6][8] = setFreqh(NewBank[i-60].lv[6][8]);
+   NewBank[i-60].lv[5][7] = setFreql(NewBank[i-60].lv[5][7]);
+   NewBank[i-60].lv[5][8] = setFreqh(NewBank[i-60].lv[5][8]);
+   NewBank[i-60].lv[18][7] = setFreql(NewBank[i-60].lv[18][7]);
+   NewBank[i-60].lv[18][8] = setFreqh(NewBank[i-60].lv[18][8]);
+   NewBank[i-60].lv[0][7] = setFreql(NewBank[i-60].lv[0][7]);
+   NewBank[i-60].lv[0][8] = setFreqh(NewBank[i-60].lv[0][8]);
+   NewBank[i-60].lv[17][4] = setFreql(NewBank[i-60].lv[17][4]);
+   NewBank[i-60].lv[17][5] = setFreqh(NewBank[i-60].lv[17][5]);
+   NewBank[i-60].lv[15][4] = setFreq(NewBank[i-60].lv[15][4]);
+   NewBank[i-60].lv[8][0] = setFreq(NewBank[i-60].lv[8][0]);
+   NewBank[i-60].lv[8][3] = setFreq(NewBank[i-60].lv[8][3]);
+   NewBank[i-60].lv[8][6] = setFreq(NewBank[i-60].lv[8][6]);
+  
 
 }
 

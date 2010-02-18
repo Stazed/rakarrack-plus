@@ -1204,19 +1204,19 @@ void RKRGUI::cb_eq_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_eq_preset_i(Fl_Choice* o, void*) {
   int i=0;
-i=rkr->EQ1_setpreset(0,0,(unsigned char)o->value());
-eq_1->value(rkr->EQ1_setpreset(1,0,(unsigned char)o->value())-64);
-eq_2->value(rkr->EQ1_setpreset(1,1,(unsigned char)o->value())-64);
-eq_3->value(rkr->EQ1_setpreset(1,2,(unsigned char)o->value())-64);
-eq_4->value(rkr->EQ1_setpreset(1,3,(unsigned char)o->value())-64);
-eq_5->value(rkr->EQ1_setpreset(1,4,(unsigned char)o->value())-64);
-eq_6->value(rkr->EQ1_setpreset(1,5,(unsigned char)o->value())-64);
-eq_7->value(rkr->EQ1_setpreset(1,6,(unsigned char)o->value())-64);
-eq_8->value(rkr->EQ1_setpreset(1,7,(unsigned char)o->value())-64);
-eq_9->value(rkr->EQ1_setpreset(1,8,(unsigned char)o->value())-64);
-eq_10->value(rkr->EQ1_setpreset(1,9,(unsigned char)o->value())-64);
-eq_Gain->value(rkr->EQ1_setpreset(1,10,(unsigned char)o->value())-64);
-eq_Q->value(rkr->EQ1_setpreset(1,11,(unsigned char)o->value())-64);
+i=rkr->EQ1_setpreset(0,0,(int)o->value());
+eq_1->value(rkr->EQ1_setpreset(1,0,(int)o->value())-64);
+eq_2->value(rkr->EQ1_setpreset(1,1,(int)o->value())-64);
+eq_3->value(rkr->EQ1_setpreset(1,2,(int)o->value())-64);
+eq_4->value(rkr->EQ1_setpreset(1,3,(int)o->value())-64);
+eq_5->value(rkr->EQ1_setpreset(1,4,(int)o->value())-64);
+eq_6->value(rkr->EQ1_setpreset(1,5,(int)o->value())-64);
+eq_7->value(rkr->EQ1_setpreset(1,6,(int)o->value())-64);
+eq_8->value(rkr->EQ1_setpreset(1,7,(int)o->value())-64);
+eq_9->value(rkr->EQ1_setpreset(1,8,(int)o->value())-64);
+eq_10->value(rkr->EQ1_setpreset(1,9,(int)o->value())-64);
+eq_Gain->value(rkr->EQ1_setpreset(1,10,(int)o->value())-64);
+eq_Q->value(rkr->EQ1_setpreset(1,11,(int)o->value())-64);
 }
 void RKRGUI::cb_eq_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_preset_i(o,v);
@@ -1230,7 +1230,7 @@ Fl_Menu_Item RKRGUI::menu_eq_preset[] = {
 };
 
 void RKRGUI::cb_eq_Gain_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_Gain(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_Gain_i(o,v);
@@ -1238,77 +1238,77 @@ void RKRGUI::cb_eq_Gain(SliderW* o, void* v) {
 
 void RKRGUI::cb_eq_Q_i(SliderW* o, void*) {
   int i;
-for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(unsigned char)(o->value()+64));
+for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_Q(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_Q_i(o,v);
 }
 
 void RKRGUI::cb_eq_1_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_1_i(o,v);
 }
 
 void RKRGUI::cb_eq_2_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(5+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(5+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_2(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_2_i(o,v);
 }
 
 void RKRGUI::cb_eq_3_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(10+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(10+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_3(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_3_i(o,v);
 }
 
 void RKRGUI::cb_eq_4_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(15+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(15+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_4(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_4_i(o,v);
 }
 
 void RKRGUI::cb_eq_5_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(20+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(20+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_5(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_5_i(o,v);
 }
 
 void RKRGUI::cb_eq_6_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(25+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(25+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_6(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_6_i(o,v);
 }
 
 void RKRGUI::cb_eq_7_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(30+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(30+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_7(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_7_i(o,v);
 }
 
 void RKRGUI::cb_eq_8_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(35+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(35+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_8(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_8_i(o,v);
 }
 
 void RKRGUI::cb_eq_9_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(40+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(40+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_9(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_9_i(o,v);
 }
 
 void RKRGUI::cb_eq_10_i(SliderW* o, void*) {
-  rkr->efx_EQ1->changepar(45+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eq_10(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_10_i(o,v);
@@ -1414,7 +1414,7 @@ void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_dist_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Distorsion->setpreset((unsigned char)(o->value()+2));
+  rkr->efx_Distorsion->setpreset((int)(o->value()+2));
 dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
 dist_drive->value(rkr->efx_Distorsion->getpar(3));
@@ -1441,35 +1441,35 @@ Fl_Menu_Item RKRGUI::menu_dist_preset[] = {
 };
 
 void RKRGUI::cb_dist_WD_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Distorsion->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_dist_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_WD_i(o,v);
 }
 
 void RKRGUI::cb_dist_LRc_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(2,(unsigned char)(o->value()+64));
+  rkr->efx_Distorsion->changepar(2,(int)(o->value()+64));
 }
 void RKRGUI::cb_dist_LRc(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_LRc_i(o,v);
 }
 
 void RKRGUI::cb_dist_drive_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(3,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_dist_drive(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_drive_i(o,v);
 }
 
 void RKRGUI::cb_dist_level_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(4,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_dist_level(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_level_i(o,v);
 }
 
 void RKRGUI::cb_dist_tipo_i(Fl_Choice* o, void*) {
-  rkr->efx_Distorsion->changepar(5,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_dist_tipo(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_tipo_i(o,v);
@@ -1499,49 +1499,49 @@ Fl_Menu_Item RKRGUI::menu_dist_tipo[] = {
 };
 
 void RKRGUI::cb_dist_neg_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(6,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_dist_neg(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_neg_i(o,v);
 }
 
 void RKRGUI::cb_dist_pf_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(10,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(10,(int)o->value());
 }
 void RKRGUI::cb_dist_pf(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_pf_i(o,v);
 }
 
 void RKRGUI::cb_dist_st_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(9,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(9,(int)o->value());
 }
 void RKRGUI::cb_dist_st(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_st_i(o,v);
 }
 
 void RKRGUI::cb_dist_pan_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_dist_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_pan_i(o,v);
 }
 
 void RKRGUI::cb_dist_oct_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(12,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(12,(int)o->value());
 }
 void RKRGUI::cb_dist_oct(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_oct_i(o,v);
 }
 
 void RKRGUI::cb_dist_lpf_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(7,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_dist_lpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_lpf_i(o,v);
 }
 
 void RKRGUI::cb_dist_hpf_i(SliderW* o, void*) {
-  rkr->efx_Distorsion->changepar(8,(unsigned char)o->value());
+  rkr->efx_Distorsion->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_dist_hpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_hpf_i(o,v);
@@ -1558,7 +1558,7 @@ void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ovrd_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Overdrive->setpreset((unsigned char) o->value());
+  rkr->efx_Overdrive->setpreset((int) o->value());
 ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
 ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
@@ -1582,77 +1582,77 @@ Fl_Menu_Item RKRGUI::menu_ovrd_preset[] = {
 };
 
 void RKRGUI::cb_ovrd_WD_i(SliderW* o, void*) {
-  rkr->efx_Overdrive->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Overdrive->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_ovrd_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_WD_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_LRc_i(SliderW* o, void*) {
-  rkr->efx_Overdrive->changepar(2,(unsigned char)(o->value()+64));
+  rkr->efx_Overdrive->changepar(2,(int)(o->value()+64));
 }
 void RKRGUI::cb_ovrd_LRc(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_LRc_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_drive_i(SliderW* o, void*) {
-  rkr->efx_Overdrive->changepar(3,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_ovrd_drive(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_drive_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_level_i(SliderW* o, void*) {
-  rkr->efx_Overdrive->changepar(4,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_ovrd_level(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_level_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_tipo_i(Fl_Choice* o, void*) {
-  rkr->efx_Overdrive->changepar(5,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_ovrd_tipo(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_tipo_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_neg_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(6,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_ovrd_neg(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_neg_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_st_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(9,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(9,(int)o->value());
 }
 void RKRGUI::cb_ovrd_st(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_st_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_pan_i(SliderW* o, void*) {
-  rkr->efx_Overdrive->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_ovrd_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_pan_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_pf_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(10,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(10,(int)o->value());
 }
 void RKRGUI::cb_ovrd_pf(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_pf_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_lpf_i(SliderW* o, void*) {
-  rkr->efx_Overdrive->changepar(7,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_ovrd_lpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_lpf_i(o,v);
 }
 
 void RKRGUI::cb_ovrd_hpf_i(SliderW* o, void*) {
-  rkr->efx_Overdrive->changepar(8,(unsigned char)o->value());
+  rkr->efx_Overdrive->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_ovrd_hpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_hpf_i(o,v);
@@ -2133,7 +2133,7 @@ void RKRGUI::cb_reverb_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_reverb_preset_i(Fl_Choice* o, void*) {
   rkr->Reverb_Bypass=0;
-rkr->efx_Rev->setpreset((unsigned char) o->value());
+rkr->efx_Rev->setpreset((int) o->value());
 reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
 reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
 reverb_time->value(rkr->efx_Rev->getpar(2));
@@ -2168,42 +2168,42 @@ Fl_Menu_Item RKRGUI::menu_reverb_preset[] = {
 };
 
 void RKRGUI::cb_reverb_WD_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Rev->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_reverb_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_WD_i(o,v);
 }
 
 void RKRGUI::cb_reverb_pan_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Rev->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_reverb_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_pan_i(o,v);
 }
 
 void RKRGUI::cb_reverb_time_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(2,(unsigned char)o->value());
+  rkr->efx_Rev->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_reverb_time(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_time_i(o,v);
 }
 
 void RKRGUI::cb_reverb_ldel_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(3,(unsigned char)o->value());
+  rkr->efx_Rev->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_reverb_ldel(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_ldel_i(o,v);
 }
 
 void RKRGUI::cb_reverb_ldelft_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(4,(unsigned char)o->value());
+  rkr->efx_Rev->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_reverb_ldelft(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_ldelft_i(o,v);
 }
 
 void RKRGUI::cb_reverb_type_i(Fl_Choice* o, void*) {
-  rkr->efx_Rev->changepar(10,(unsigned char)o->value());
+  rkr->efx_Rev->changepar(10,(int)o->value());
 }
 void RKRGUI::cb_reverb_type(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_type_i(o,v);
@@ -2224,7 +2224,7 @@ Fl_Menu_Item RKRGUI::menu_reverb_type[] = {
 
 void RKRGUI::cb_reverb_RS_i(SliderW* o, void*) {
   rkr->Reverb_Bypass=0;
-rkr->efx_Rev->changepar(11,(unsigned char)o->value());
+rkr->efx_Rev->changepar(11,(int)o->value());
 if((int)reverb_activar->value())rkr->Reverb_Bypass=1;
 }
 void RKRGUI::cb_reverb_RS(SliderW* o, void* v) {
@@ -2232,21 +2232,21 @@ void RKRGUI::cb_reverb_RS(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_reverb_LPF_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(7,(unsigned char)o->value());
+  rkr->efx_Rev->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_reverb_LPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_LPF_i(o,v);
 }
 
 void RKRGUI::cb_reverb_HPF_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(8,(unsigned char)o->value());
+  rkr->efx_Rev->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_reverb_HPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_HPF_i(o,v);
 }
 
 void RKRGUI::cb_reverb_damp_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(9,(unsigned char)o->value());
+  rkr->efx_Rev->changepar(9,(int)o->value());
 }
 void RKRGUI::cb_reverb_damp(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_damp_i(o,v);
@@ -2265,17 +2265,17 @@ void RKRGUI::cb_eqp_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_eqp_preset_i(Fl_Choice* o, void*) {
   int i=0;
 
-i=rkr->EQ2_setpreset(0,0,(unsigned char)o->value());
-eqp_LF->value(rkr->EQ2_setpreset(1,0,(unsigned char)o->value()));
-eqp_LFg->value(rkr->EQ2_setpreset(1,1,(unsigned char)o->value())-64);
-eqp_LQ->value(rkr->EQ2_setpreset(1,2,(unsigned char)o->value())-64);
-eqp_MF->value(rkr->EQ2_setpreset(1,3,(unsigned char)o->value()));
-eqp_MFg->value(rkr->EQ2_setpreset(1,4,(unsigned char)o->value())-64);
-eqp_MQ->value(rkr->EQ2_setpreset(1,5,(unsigned char)o->value())-64);
-eqp_HF->value(rkr->EQ2_setpreset(1,6,(unsigned char)o->value()));
-eqp_HFg->value(rkr->EQ2_setpreset(1,7,(unsigned char)o->value())-64);
-eqp_HQ->value(rkr->EQ2_setpreset(1,8,(unsigned char)o->value())-64);
-eqp_Gain->value(rkr->EQ2_setpreset(1,9,(unsigned char)o->value())-64);
+i=rkr->EQ2_setpreset(0,0,(int)o->value());
+eqp_LF->value(rkr->EQ2_setpreset(1,0,(int)o->value()));
+eqp_LFg->value(rkr->EQ2_setpreset(1,1,(int)o->value())-64);
+eqp_LQ->value(rkr->EQ2_setpreset(1,2,(int)o->value())-64);
+eqp_MF->value(rkr->EQ2_setpreset(1,3,(int)o->value()));
+eqp_MFg->value(rkr->EQ2_setpreset(1,4,(int)o->value())-64);
+eqp_MQ->value(rkr->EQ2_setpreset(1,5,(int)o->value())-64);
+eqp_HF->value(rkr->EQ2_setpreset(1,6,(int)o->value()));
+eqp_HFg->value(rkr->EQ2_setpreset(1,7,(int)o->value())-64);
+eqp_HQ->value(rkr->EQ2_setpreset(1,8,(int)o->value())-64);
+eqp_Gain->value(rkr->EQ2_setpreset(1,9,(int)o->value())-64);
 }
 void RKRGUI::cb_eqp_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_preset_i(o,v);
@@ -2289,70 +2289,70 @@ Fl_Menu_Item RKRGUI::menu_eqp_preset[] = {
 };
 
 void RKRGUI::cb_eqp_Gain_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_EQ2->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_eqp_Gain(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_Gain_i(o,v);
 }
 
 void RKRGUI::cb_eqp_LF_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(11,(unsigned char)o->value());
+  rkr->efx_EQ2->changepar(11,(int)o->value());
 }
 void RKRGUI::cb_eqp_LF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_LF_i(o,v);
 }
 
 void RKRGUI::cb_eqp_LFg_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ2->changepar(12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eqp_LFg(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_LFg_i(o,v);
 }
 
 void RKRGUI::cb_eqp_LQ_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(13,(unsigned char)(o->value()+64));
+  rkr->efx_EQ2->changepar(13,(int)(o->value()+64));
 }
 void RKRGUI::cb_eqp_LQ(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_LQ_i(o,v);
 }
 
 void RKRGUI::cb_eqp_MF_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(5+11,(unsigned char)o->value());
+  rkr->efx_EQ2->changepar(5+11,(int)o->value());
 }
 void RKRGUI::cb_eqp_MF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_MF_i(o,v);
 }
 
 void RKRGUI::cb_eqp_MFg_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(5+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eqp_MFg(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_MFg_i(o,v);
 }
 
 void RKRGUI::cb_eqp_MQ_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(5+13,(unsigned char)(o->value()+64));
+  rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));
 }
 void RKRGUI::cb_eqp_MQ(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_MQ_i(o,v);
 }
 
 void RKRGUI::cb_eqp_HF_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(10+11,(unsigned char)o->value());
+  rkr->efx_EQ2->changepar(10+11,(int)o->value());
 }
 void RKRGUI::cb_eqp_HF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_HF_i(o,v);
 }
 
 void RKRGUI::cb_eqp_HFg_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(10+12,(unsigned char)(o->value()+64));
+  rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));
 }
 void RKRGUI::cb_eqp_HFg(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_HFg_i(o,v);
 }
 
 void RKRGUI::cb_eqp_HQ_i(SliderW* o, void*) {
-  rkr->efx_EQ2->changepar(10+13,(unsigned char)(o->value()+64));
+  rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));
 }
 void RKRGUI::cb_eqp_HQ(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_HQ_i(o,v);
@@ -2592,7 +2592,7 @@ void RKRGUI::cb_Cabinet_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Cabinet_preset_i(Fl_Choice* o, void*) {
-  rkr->Cabinet_setpreset((unsigned char) o->value());
+  rkr->Cabinet_setpreset((int) o->value());
 }
 void RKRGUI::cb_Cabinet_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_preset_i(o,v);
@@ -2614,7 +2614,7 @@ Fl_Menu_Item RKRGUI::menu_Cabinet_preset[] = {
 };
 
 void RKRGUI::cb_Cabinet_output_i(SliderW* o, void*) {
-  rkr->efx_Cabinet->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_Cabinet_output(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_output_i(o,v);
@@ -2726,7 +2726,7 @@ void RKRGUI::cb_har_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_har_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Har->setpreset((unsigned char)o->value());
+  rkr->efx_Har->setpreset((int)o->value());
 har_WD->value(rkr->efx_Har->getpar(0)-64);
 
 har_pan->value(rkr->efx_Har->getpar(1)-64);
@@ -2753,7 +2753,7 @@ Fl_Menu_Item RKRGUI::menu_har_preset[] = {
 };
 
 void RKRGUI::cb_har_WD_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Har->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_har_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_WD_i(o,v);
@@ -2761,7 +2761,7 @@ void RKRGUI::cb_har_WD(SliderW* o, void* v) {
 
 void RKRGUI::cb_har_int_i(SliderW* o, void*) {
   rkr->Harmonizer_Bypass=0;
-rkr->efx_Har->changepar(3,(unsigned char)(o->value()+12));
+rkr->efx_Har->changepar(3,(int)(o->value()+12));
 if((int)har_activar->value())rkr->Harmonizer_Bypass=1;
 }
 void RKRGUI::cb_har_int(SliderW* o, void* v) {
@@ -2769,42 +2769,42 @@ void RKRGUI::cb_har_int(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_har_gan_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(2,(unsigned char)(o->value()+64));
+  rkr->efx_Har->changepar(2,(int)(o->value()+64));
 }
 void RKRGUI::cb_har_gan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_gan_i(o,v);
 }
 
 void RKRGUI::cb_har_pan_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Har->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_har_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_pan_i(o,v);
 }
 
 void RKRGUI::cb_har_freq1_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(4,(unsigned char)o->value());
+  rkr->efx_Har->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_har_freq1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_freq1_i(o,v);
 }
 
 void RKRGUI::cb_har_gan1_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(8,(unsigned char)(o->value()+64));
+  rkr->efx_Har->changepar(8,(int)(o->value()+64));
 }
 void RKRGUI::cb_har_gan1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_gan1_i(o,v);
 }
 
 void RKRGUI::cb_har_q1_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(9,(unsigned char)(o->value()+64));
+  rkr->efx_Har->changepar(9,(int)(o->value()+64));
 }
 void RKRGUI::cb_har_q1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_q1_i(o,v);
 }
 
 void RKRGUI::cb_har_MIDI_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Har->changepar(10,(unsigned char)o->value());
+  rkr->efx_Har->changepar(10,(int)o->value());
 rkr->RC->cleanup();
 }
 void RKRGUI::cb_har_MIDI(Fl_Check_Button* o, void* v) {
@@ -2812,7 +2812,7 @@ void RKRGUI::cb_har_MIDI(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_har_SELECT_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Har->changepar(5,(unsigned char)o->value());
+  rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC->cleanup();
 Chord();
 }
@@ -3083,7 +3083,7 @@ void RKRGUI::cb_newdist_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_newdist_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_NewDist->setpreset((unsigned char) o->value());
+  rkr->efx_NewDist->setpreset((int) o->value());
 newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
 newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
 newdist_drive->value(rkr->efx_NewDist->getpar(3));
@@ -3109,84 +3109,84 @@ Fl_Menu_Item RKRGUI::menu_newdist_preset[] = {
 };
 
 void RKRGUI::cb_newdist_WD_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_NewDist->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_newdist_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_WD_i(o,v);
 }
 
 void RKRGUI::cb_newdist_LRc_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(2,(unsigned char)(o->value()+64));
+  rkr->efx_NewDist->changepar(2,(int)(o->value()+64));
 }
 void RKRGUI::cb_newdist_LRc(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_LRc_i(o,v);
 }
 
 void RKRGUI::cb_newdist_drive_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(3,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_newdist_drive(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_drive_i(o,v);
 }
 
 void RKRGUI::cb_newdist_level_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(4,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_newdist_level(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_level_i(o,v);
 }
 
 void RKRGUI::cb_newdist_tipo_i(Fl_Choice* o, void*) {
-  rkr->efx_NewDist->changepar(5,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_newdist_tipo(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_tipo_i(o,v);
 }
 
 void RKRGUI::cb_newdist_neg_i(Fl_Check_Button* o, void*) {
-  rkr->efx_NewDist->changepar(6,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_newdist_neg(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_neg_i(o,v);
 }
 
 void RKRGUI::cb_newdist_st_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(9,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(9,(int)o->value());
 }
 void RKRGUI::cb_newdist_st(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_st_i(o,v);
 }
 
 void RKRGUI::cb_newdist_oct_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(11,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(11,(int)o->value());
 }
 void RKRGUI::cb_newdist_oct(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_oct_i(o,v);
 }
 
 void RKRGUI::cb_newdist_pan_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_NewDist->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_newdist_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_pan_i(o,v);
 }
 
 void RKRGUI::cb_newdist_pf_i(Fl_Check_Button* o, void*) {
-  rkr->efx_NewDist->changepar(10,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(10,(int)o->value());
 }
 void RKRGUI::cb_newdist_pf(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_pf_i(o,v);
 }
 
 void RKRGUI::cb_newdist_lpf_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(7,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_newdist_lpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_lpf_i(o,v);
 }
 
 void RKRGUI::cb_newdist_hpf_i(SliderW* o, void*) {
-  rkr->efx_NewDist->changepar(8,(unsigned char)o->value());
+  rkr->efx_NewDist->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_newdist_hpf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_hpf_i(o,v);
@@ -4132,6 +4132,84 @@ Fl_Menu_Item RKRGUI::menu_arpie_pattern[] = {
  {"Double Descend ", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
+
+void RKRGUI::cb_expander_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Expander_Bypass=(int)o->value();
+findpos(25,(int)o->value());
+}
+void RKRGUI::cb_expander_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_activar_i(o,v);
+}
+
+void RKRGUI::cb_expander_preset_i(Fl_Choice* o, void*) {
+  rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+expander_ATime->value(rkr->efx_Expander->getpar(3));
+expander_RTime->value(rkr->efx_Expander->getpar(4));
+expander_shape->value(rkr->efx_Expander->getpar(2));
+expander_threshold->value(rkr->efx_Expander->getpar(1));
+expander_HPF->value(rkr->efx_Expander->getpar(6));
+expander_LPF->value(rkr->efx_Expander->getpar(5));
+expander_level->value(rkr->efx_Expander->getpar(7));
+}
+void RKRGUI::cb_expander_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_expander_preset[] = {
+ {"Noise Gate", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Boost Gate", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Treble swell", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_expander_ATime_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(3,(int)o->value());
+}
+void RKRGUI::cb_expander_ATime(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_ATime_i(o,v);
+}
+
+void RKRGUI::cb_expander_RTime_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(4,(int) o->value());
+}
+void RKRGUI::cb_expander_RTime(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_RTime_i(o,v);
+}
+
+void RKRGUI::cb_expander_shape_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(2, (int) o->value());
+}
+void RKRGUI::cb_expander_shape(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_shape_i(o,v);
+}
+
+void RKRGUI::cb_expander_threshold_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(1, (int)o->value());
+}
+void RKRGUI::cb_expander_threshold(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_threshold_i(o,v);
+}
+
+void RKRGUI::cb_expander_level_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(7, (int) o->value());
+}
+void RKRGUI::cb_expander_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_level_i(o,v);
+}
+
+void RKRGUI::cb_expander_LPF_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(5, (int)o->value());
+}
+void RKRGUI::cb_expander_LPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_LPF_i(o,v);
+}
+
+void RKRGUI::cb_expander_HPF_i(SliderW* o, void*) {
+  rkr->efx_Expander->Expander_Change(6, (int)o->value());
+}
+void RKRGUI::cb_expander_HPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_HPF_i(o,v);
+}
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
@@ -5655,8 +5733,10 @@ R average.");
         dist_lpf->labelfont(0);
         dist_lpf->labelsize(10);
         dist_lpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_lpf->maximum(127);
+        dist_lpf->minimum(20);
+        dist_lpf->maximum(26000);
         dist_lpf->step(1);
+        dist_lpf->value(20000);
         dist_lpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_lpf->callback((Fl_Callback*)cb_dist_lpf);
         dist_lpf->align(FL_ALIGN_LEFT);
@@ -5671,8 +5751,10 @@ R average.");
         dist_hpf->labelfont(0);
         dist_hpf->labelsize(10);
         dist_hpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_hpf->maximum(127);
+        dist_hpf->minimum(20);
+        dist_hpf->maximum(20000);
         dist_hpf->step(1);
+        dist_hpf->value(20);
         dist_hpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_hpf->callback((Fl_Callback*)cb_dist_hpf);
         dist_hpf->align(FL_ALIGN_LEFT);
@@ -5827,8 +5909,10 @@ R average.");
         ovrd_lpf->labelfont(0);
         ovrd_lpf->labelsize(10);
         ovrd_lpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ovrd_lpf->maximum(127);
+        ovrd_lpf->minimum(20);
+        ovrd_lpf->maximum(26000);
         ovrd_lpf->step(1);
+        ovrd_lpf->value(20000);
         ovrd_lpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_lpf->callback((Fl_Callback*)cb_ovrd_lpf);
         ovrd_lpf->align(FL_ALIGN_LEFT);
@@ -5843,8 +5927,10 @@ R average.");
         ovrd_hpf->labelfont(0);
         ovrd_hpf->labelsize(10);
         ovrd_hpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ovrd_hpf->maximum(127);
+        ovrd_hpf->minimum(20);
+        ovrd_hpf->maximum(20000);
         ovrd_hpf->step(1);
+        ovrd_hpf->value(20);
         ovrd_hpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_hpf->callback((Fl_Callback*)cb_ovrd_hpf);
         ovrd_hpf->align(FL_ALIGN_LEFT);
@@ -6753,8 +6839,10 @@ R average.");
         reverb_LPF->labelfont(0);
         reverb_LPF->labelsize(10);
         reverb_LPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        reverb_LPF->maximum(127);
+        reverb_LPF->minimum(20);
+        reverb_LPF->maximum(26000);
         reverb_LPF->step(1);
+        reverb_LPF->value(20000);
         reverb_LPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_LPF->callback((Fl_Callback*)cb_reverb_LPF);
         reverb_LPF->align(FL_ALIGN_LEFT);
@@ -6769,8 +6857,10 @@ R average.");
         reverb_HPF->labelfont(0);
         reverb_HPF->labelsize(10);
         reverb_HPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        reverb_HPF->maximum(127);
+        reverb_HPF->minimum(20);
+        reverb_HPF->maximum(20000);
         reverb_HPF->step(1);
+        reverb_HPF->value(20);
         reverb_HPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_HPF->callback((Fl_Callback*)cb_reverb_HPF);
         reverb_HPF->align(FL_ALIGN_LEFT);
@@ -6848,10 +6938,10 @@ R average.");
         eqp_LF->labelfont(0);
         eqp_LF->labelsize(10);
         eqp_LF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        eqp_LF->minimum(1);
-        eqp_LF->maximum(48);
+        eqp_LF->minimum(20);
+        eqp_LF->maximum(1000);
         eqp_LF->step(1);
-        eqp_LF->value(24);
+        eqp_LF->value(400);
         eqp_LF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eqp_LF->callback((Fl_Callback*)cb_eqp_LF);
         eqp_LF->align(FL_ALIGN_LEFT);
@@ -6900,10 +6990,10 @@ R average.");
         eqp_MF->labelfont(0);
         eqp_MF->labelsize(10);
         eqp_MF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        eqp_MF->minimum(49);
-        eqp_MF->maximum(99);
+        eqp_MF->minimum(800);
+        eqp_MF->maximum(8000);
         eqp_MF->step(1);
-        eqp_MF->value(75);
+        eqp_MF->value(2000);
         eqp_MF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eqp_MF->callback((Fl_Callback*)cb_eqp_MF);
         eqp_MF->align(FL_ALIGN_LEFT);
@@ -6952,10 +7042,10 @@ R average.");
         eqp_HF->labelfont(0);
         eqp_HF->labelsize(10);
         eqp_HF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        eqp_HF->minimum(100);
-        eqp_HF->maximum(127);
+        eqp_HF->minimum(6000);
+        eqp_HF->maximum(26000);
         eqp_HF->step(1);
-        eqp_HF->value(106);
+        eqp_HF->value(8000);
         eqp_HF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eqp_HF->callback((Fl_Callback*)cb_eqp_HF);
         eqp_HF->align(FL_ALIGN_LEFT);
@@ -7690,8 +7780,10 @@ R average.");
         har_freq1->labelfont(0);
         har_freq1->labelsize(10);
         har_freq1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        har_freq1->maximum(127);
+        har_freq1->minimum(20);
+        har_freq1->maximum(26000);
         har_freq1->step(1);
+        har_freq1->value(2000);
         har_freq1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_freq1->callback((Fl_Callback*)cb_har_freq1);
         har_freq1->align(FL_ALIGN_LEFT);
@@ -8131,9 +8223,10 @@ R average.");
         gate_LPF->labelfont(0);
         gate_LPF->labelsize(10);
         gate_LPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        gate_LPF->maximum(127);
+        gate_LPF->minimum(20);
+        gate_LPF->maximum(26000);
         gate_LPF->step(1);
-        gate_LPF->value(127);
+        gate_LPF->value(20000);
         gate_LPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         gate_LPF->callback((Fl_Callback*)cb_gate_LPF);
         gate_LPF->align(FL_ALIGN_LEFT);
@@ -8148,8 +8241,10 @@ R average.");
         gate_HPF->labelfont(0);
         gate_HPF->labelsize(10);
         gate_HPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        gate_HPF->maximum(127);
+        gate_HPF->minimum(20);
+        gate_HPF->maximum(20000);
         gate_HPF->step(1);
+        gate_HPF->value(20);
         gate_HPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         gate_HPF->callback((Fl_Callback*)cb_gate_HPF);
         gate_HPF->align(FL_ALIGN_LEFT);
@@ -8333,8 +8428,10 @@ R average.");
         newdist_lpf->labelfont(0);
         newdist_lpf->labelsize(10);
         newdist_lpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        newdist_lpf->maximum(127);
+        newdist_lpf->minimum(20);
+        newdist_lpf->maximum(26000);
         newdist_lpf->step(1);
+        newdist_lpf->value(20000);
         newdist_lpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_lpf->callback((Fl_Callback*)cb_newdist_lpf);
         newdist_lpf->align(FL_ALIGN_LEFT);
@@ -8349,8 +8446,10 @@ R average.");
         newdist_hpf->labelfont(0);
         newdist_hpf->labelsize(10);
         newdist_hpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        newdist_hpf->maximum(127);
+        newdist_hpf->minimum(20);
+        newdist_hpf->maximum(20000);
         newdist_hpf->step(1);
+        newdist_hpf->value(20);
         newdist_hpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_hpf->callback((Fl_Callback*)cb_newdist_hpf);
         newdist_hpf->align(FL_ALIGN_LEFT);
@@ -8729,9 +8828,10 @@ R average.");
         valve_lpf->labelfont(0);
         valve_lpf->labelsize(10);
         valve_lpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_lpf->maximum(127);
+        valve_lpf->minimum(20);
+        valve_lpf->maximum(26000);
         valve_lpf->step(1);
-        valve_lpf->value(127);
+        valve_lpf->value(20000);
         valve_lpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_lpf->callback((Fl_Callback*)cb_valve_lpf);
         valve_lpf->align(FL_ALIGN_LEFT);
@@ -8746,8 +8846,10 @@ R average.");
         valve_hpf->labelfont(0);
         valve_hpf->labelsize(10);
         valve_hpf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_hpf->maximum(127);
+        valve_hpf->minimum(20);
+        valve_hpf->maximum(20000);
         valve_hpf->step(1);
+        valve_hpf->value(20);
         valve_hpf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_hpf->callback((Fl_Callback*)cb_valve_hpf);
         valve_hpf->align(FL_ALIGN_LEFT);
@@ -9288,7 +9390,7 @@ R average.");
         ex_lfreq->labelsize(10);
         ex_lfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ex_lfreq->minimum(20);
-        ex_lfreq->maximum(20000);
+        ex_lfreq->maximum(26000);
         ex_lfreq->step(1);
         ex_lfreq->value(20000);
         ex_lfreq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -9904,6 +10006,161 @@ R average.");
       } // Fl_Choice* arpie_pattern
       ARPIE->end();
     } // Fl_Group* ARPIE
+    { EXPANDER = new Fl_Group(320, 211, 158, 184);
+      EXPANDER->box(FL_UP_BOX);
+      EXPANDER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      EXPANDER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      EXPANDER->labelfont(1);
+      EXPANDER->user_data((void*)(1));
+      EXPANDER->align(96|FL_ALIGN_INSIDE);
+      EXPANDER->hide();
+      { expander_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        expander_activar->shortcut(0x32);
+        expander_activar->color((Fl_Color)62);
+        expander_activar->selection_color((Fl_Color)1);
+        expander_activar->labelsize(10);
+        expander_activar->callback((Fl_Callback*)cb_expander_activar, (void*)(2));
+        expander_activar->align(68|FL_ALIGN_INSIDE);
+        expander_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* expander_activar
+      { expander_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        expander_preset->down_box(FL_BORDER_BOX);
+        expander_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        expander_preset->labelsize(10);
+        expander_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_preset->textsize(10);
+        expander_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_preset->callback((Fl_Callback*)cb_expander_preset);
+        expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        expander_preset->menu(menu_expander_preset);
+      } // Fl_Choice* expander_preset
+      { expander_ATime = new SliderW(371, 250, 100, 10, "A. Time");
+        expander_ATime->type(5);
+        expander_ATime->box(FL_FLAT_BOX);
+        expander_ATime->color((Fl_Color)178);
+        expander_ATime->selection_color((Fl_Color)62);
+        expander_ATime->labeltype(FL_NORMAL_LABEL);
+        expander_ATime->labelfont(0);
+        expander_ATime->labelsize(10);
+        expander_ATime->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_ATime->minimum(10);
+        expander_ATime->maximum(2000);
+        expander_ATime->step(1);
+        expander_ATime->value(10);
+        expander_ATime->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_ATime->callback((Fl_Callback*)cb_expander_ATime);
+        expander_ATime->align(FL_ALIGN_LEFT);
+        expander_ATime->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_ATime
+      { expander_RTime = new SliderW(370, 272, 100, 10, "R. Time");
+        expander_RTime->type(5);
+        expander_RTime->box(FL_FLAT_BOX);
+        expander_RTime->color((Fl_Color)178);
+        expander_RTime->selection_color((Fl_Color)62);
+        expander_RTime->labeltype(FL_NORMAL_LABEL);
+        expander_RTime->labelfont(0);
+        expander_RTime->labelsize(10);
+        expander_RTime->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_RTime->minimum(10);
+        expander_RTime->maximum(500);
+        expander_RTime->step(1);
+        expander_RTime->value(500);
+        expander_RTime->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_RTime->callback((Fl_Callback*)cb_expander_RTime);
+        expander_RTime->align(FL_ALIGN_LEFT);
+        expander_RTime->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_RTime
+      { expander_shape = new SliderW(370, 294, 100, 10, "Shape");
+        expander_shape->type(5);
+        expander_shape->box(FL_FLAT_BOX);
+        expander_shape->color((Fl_Color)178);
+        expander_shape->selection_color((Fl_Color)62);
+        expander_shape->labeltype(FL_NORMAL_LABEL);
+        expander_shape->labelfont(0);
+        expander_shape->labelsize(10);
+        expander_shape->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_shape->minimum(1);
+        expander_shape->maximum(50);
+        expander_shape->step(1);
+        expander_shape->value(1);
+        expander_shape->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_shape->callback((Fl_Callback*)cb_expander_shape);
+        expander_shape->align(FL_ALIGN_LEFT);
+        expander_shape->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_shape
+      { expander_threshold = new SliderW(370, 316, 100, 10, "Thrhold");
+        expander_threshold->type(5);
+        expander_threshold->box(FL_FLAT_BOX);
+        expander_threshold->color((Fl_Color)178);
+        expander_threshold->selection_color((Fl_Color)62);
+        expander_threshold->labeltype(FL_NORMAL_LABEL);
+        expander_threshold->labelfont(0);
+        expander_threshold->labelsize(10);
+        expander_threshold->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_threshold->minimum(-80);
+        expander_threshold->maximum(0);
+        expander_threshold->step(1);
+        expander_threshold->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_threshold->callback((Fl_Callback*)cb_expander_threshold);
+        expander_threshold->align(FL_ALIGN_LEFT);
+        expander_threshold->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_threshold
+      { expander_level = new SliderW(370, 336, 100, 10, "Level");
+        expander_level->type(5);
+        expander_level->box(FL_FLAT_BOX);
+        expander_level->color((Fl_Color)178);
+        expander_level->selection_color((Fl_Color)62);
+        expander_level->labeltype(FL_NORMAL_LABEL);
+        expander_level->labelfont(0);
+        expander_level->labelsize(10);
+        expander_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_level->minimum(1);
+        expander_level->maximum(127);
+        expander_level->step(1);
+        expander_level->value(1);
+        expander_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_level->callback((Fl_Callback*)cb_expander_level);
+        expander_level->align(FL_ALIGN_LEFT);
+        expander_level->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_level
+      { expander_LPF = new SliderW(370, 357, 100, 10, "LPF");
+        expander_LPF->type(5);
+        expander_LPF->box(FL_FLAT_BOX);
+        expander_LPF->color((Fl_Color)178);
+        expander_LPF->selection_color((Fl_Color)62);
+        expander_LPF->labeltype(FL_NORMAL_LABEL);
+        expander_LPF->labelfont(0);
+        expander_LPF->labelsize(10);
+        expander_LPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_LPF->minimum(20);
+        expander_LPF->maximum(26000);
+        expander_LPF->step(1);
+        expander_LPF->value(20000);
+        expander_LPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_LPF->callback((Fl_Callback*)cb_expander_LPF);
+        expander_LPF->align(FL_ALIGN_LEFT);
+        expander_LPF->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_LPF
+      { expander_HPF = new SliderW(370, 373, 100, 10, "HPF");
+        expander_HPF->type(5);
+        expander_HPF->box(FL_FLAT_BOX);
+        expander_HPF->color((Fl_Color)178);
+        expander_HPF->selection_color((Fl_Color)62);
+        expander_HPF->labeltype(FL_NORMAL_LABEL);
+        expander_HPF->labelfont(0);
+        expander_HPF->labelsize(10);
+        expander_HPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_HPF->minimum(20);
+        expander_HPF->maximum(20000);
+        expander_HPF->step(1);
+        expander_HPF->value(20);
+        expander_HPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        expander_HPF->callback((Fl_Callback*)cb_expander_HPF);
+        expander_HPF->align(FL_ALIGN_LEFT);
+        expander_HPF->when(FL_WHEN_CHANGED);
+      } // SliderW* expander_HPF
+      EXPANDER->end();
+    } // Fl_Group* EXPANDER
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -11542,10 +11799,17 @@ arpie_arpe->value(rkr->lv[25][7]);
 arpie_harm->value(rkr->lv[25][8]);
 arpie_pattern->value(rkr->lv[25][9]);
 arpie_subdiv->value(rkr->lv[25][10]);
-
 arpie_activar->value(rkr->Arpie_Bypass);
 
-
+//Expander
+expander_ATime->value(rkr->lv[26][2]);
+expander_RTime->value(rkr->lv[26][3]);
+expander_shape->value(rkr->lv[26][1]);
+expander_level->value(rkr->lv[26][6]);
+expander_LPF->value(rkr->lv[26][4]);
+expander_HPF->value(rkr->lv[26][5]);
+expander_threshold->value(rkr->lv[26][0]);
+expander_activar->value(rkr->Expander_Bypass);
 
 
 
@@ -11808,6 +12072,9 @@ for (i=1; i<=t; i++)
         case 24:
         ARPIE->hide();
         break;
+        case 25:
+        EXPANDER->hide();
+        break;
       }
       
     }
@@ -12051,6 +12318,14 @@ switch (rkr->efx_order[i])
        ARPIE->show();
        if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
+
+     case 25:
+       EXPANDER->position(x[i],y[i]);
+       expander_activar->shortcut(s[i]);
+       EXPANDER->show();
+       if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+
  }
  
  }
@@ -13057,6 +13332,7 @@ RING->image(InOut->image());
 EXCITER->image(InOut->image());
 MBDIST->image(InOut->image());
 ARPIE->image(InOut->image());
+EXPANDER->image(InOut->image());
 
 
 Presets->image(InOut->image());
@@ -13234,8 +13510,11 @@ scheme_ch->value(rkr->sschema);
 scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
-save_stat(3);
+Leds_Color_Change(leds_color);
+Buttons_Color_Change(fore_color);
 
+
+save_stat(3);
 Fl::redraw();
 }
 

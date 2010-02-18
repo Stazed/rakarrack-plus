@@ -1,13 +1,12 @@
-// Based in gate_1410.c LADSPA Swh-plugins
-
 
 /*
   rakarrack - a guitar effects software
 
- Gate.C  -  Noise Gate Effect
+ Expander.C  -  Noise Gate Effect
  
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2010 Ryan Billing & Josep Andreu
+  Author: Ryan Billing & Josep Andreu
+  Adapted from swh-plugins Noise Gate by Steve Harris
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of version 2 of the GNU General Public License
@@ -26,10 +25,10 @@
 */
 
 #include <math.h>
-#include "Gate.h"
+#include "Expander.h"
 
 
-Gate::Gate (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Expander::Expander (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 {
 
   efxoutl = efxoutl_;
@@ -42,17 +41,16 @@ Gate::Gate (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   hpfr = new AnalogFilter (3, 20, 1, 0);
 
   env = 0.0;
-  gate = 0.0;
+  oldgain = 0.0;
+  efollower = 0;
   fs = (float)SAMPLE_RATE;
-  state = CLOSED;
-  hold_count = 0;
 
-
+  Expander_Change_Preset(0);
 
 
 }
 
-Gate::~Gate ()
+Expander::~Expander ()
 {
 
 
@@ -62,12 +60,13 @@ Gate::~Gate ()
 
 
 void
-Gate::cleanup ()
+Expander::cleanup ()
 {
   lpfl->cleanup ();
   hpfl->cleanup ();
   lpfr->cleanup ();
   hpfr->cleanup ();
+  oldgain = 0.0f;
 
 }
 
@@ -75,7 +74,7 @@ Gate::cleanup ()
 
 
 void
-Gate::setlpf (int value)
+Expander::setlpf (int value)
 {
   Plpf = value;
   REALTYPE fr = (float)Plpf;
@@ -84,7 +83,7 @@ Gate::setlpf (int value)
 };
 
 void
-Gate::sethpf (int value)
+Expander::sethpf (int value)
 {
   Phpf = value;
   REALTYPE fr = (float)Phpf;
@@ -94,7 +93,7 @@ Gate::sethpf (int value)
 
 
 void
-Gate::Gate_Change (int np, int value)
+Expander::Expander_Change (int np, int value)
 {
 
   switch (np)
@@ -102,19 +101,21 @@ Gate::Gate_Change (int np, int value)
 
     case 1:
       Pthreshold = value;
-      t_level = dB2rap ((float)Pthreshold);
+      tfactor = dB2rap (-((float) Pthreshold));
+      tlevel = 1.0f/tfactor;
       break;
     case 2:
-      Prange = value;
-      cut = dB2rap ((float)Prange);
+      Pshape = value/2;
+      sfactor = dB2rap ((float)Pshape);
+      sgain = expf(-sfactor);
       break;
     case 3:
       Pattack = value;
-      a_rate = 1000.0f / ((float)Pattack * fs);
+      a_rate = 1000.0f/((float)Pattack * fs);
       break;
     case 4:
       Pdecay = value;
-      d_rate = 1000.0f / ((float)Pdecay * fs);
+      d_rate = 1000.0f/((float)Pdecay * fs);
       break;
     case 5:
       setlpf(value);
@@ -123,8 +124,8 @@ Gate::Gate_Change (int np, int value)
       sethpf(value);
       break;
     case 7:
-      Phold = value;
-      hold = (float)Phold;
+      Plevel = value;
+      level = dB2rap((float) value/6.0f);
       break;
 
     }
@@ -133,7 +134,7 @@ Gate::Gate_Change (int np, int value)
 }
 
 int
-Gate::getpar (int np)
+Expander::getpar (int np)
 {
 
   switch (np)
@@ -143,7 +144,7 @@ Gate::getpar (int np)
       return (Pthreshold);
       break;
     case 2:
-      return (Prange);
+      return (Pshape);
       break;
     case 3:
       return (Pattack);
@@ -158,9 +159,8 @@ Gate::getpar (int np)
       return (Phpf);
       break;
     case 7:
-      return (Phold);
+      return (Plevel);
       break;
-
     }
 
   return (0);
@@ -169,24 +169,25 @@ Gate::getpar (int np)
 
 
 void
-Gate::Gate_Change_Preset (int npreset)
+Expander::Expander_Change_Preset (int npreset)
 {
 
   const int PRESET_SIZE = 7;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //0
-    {0, 0, 1, 2, 6703, 76, 2},
-    //-10
-    {0, -10, 1, 2, 6703, 76, 2},
-    //-20
-    {0, -20, 1, 2, 6703, 76, 2}
+
+    //Noise Gate
+    {-50, 20, 50, 50, 3134, 76, 0},
+    //Boost Gate
+    {-55, 30, 50, 50, 1441, 157, 50},
+    //Treble swell
+    {-30, 9, 950, 25, 6703, 526, 90}
   };
 
   if (npreset >= NUM_PRESETS)
     npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
-    Gate_Change (n + 1, presets[npreset][n]);
+    Expander_Change (n + 1, presets[npreset][n]);
 
 
 }
@@ -194,12 +195,13 @@ Gate::Gate_Change_Preset (int npreset)
 
 
 void
-Gate::out (float *efxoutl, float *efxoutr)
+Expander::out (float *efxoutl, float *efxoutr)
 {
 
 
   int i;
-  float sum;
+  float delta = 0.0f;
+  float expenv = 0.0f;
 
 
   lpfl->filterout (efxoutl);
@@ -210,57 +212,31 @@ Gate::out (float *efxoutl, float *efxoutr)
 
   for (i = 0; i < PERIOD; i++)
     {
-
-      sum = fabsf (efxoutl[i]) + fabsf (efxoutr[i]);
-
-
-      if (sum > env)
-	env = sum;
+    
+      delta = 0.5f*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
+      if (delta > 0.0)
+	env += a_rate * delta;
       else
-	env = sum * ENV_TR + env * (1.0f - ENV_TR);
-
-      if (state == CLOSED)
-	{
-	  if (env >= t_level)
-	    state = OPENING;
-	}
-      else if (state == OPENING)
-	{
-	  gate += a_rate;
-	  if (gate >= 1.0)
-	    {
-	      gate = 1.0f;
-	      state = OPEN;
-	      hold_count = lrintf (hold * fs * 0.001f);
-	    }
-	}
-      else if (state == OPEN)
-	{
-	  if (hold_count <= 0)
-	    {
-	      if (env < t_level)
-		{
-		  state = CLOSING;
-		}
-	    }
-	  else
-	    hold_count--;
-
-	}
-      else if (state == CLOSING)
-	{
-	  gate -= d_rate;
-	  if (env >= t_level)
-	    state = OPENING;
-	  else if (gate <= 0.0)
-	    {
-	      gate = 0.0;
-	      state = CLOSED;
-	    }
-	}
-
-      efxoutl[i] *= (cut * (1.0f - gate) + gate);
-      efxoutr[i] *= (cut * (1.0f - gate) + gate);
+	env += d_rate * delta;
+	
+	//End envelope power detection
+	
+	if (env > tlevel) env = tlevel;	
+	expenv = sgain * (expf(env*sfactor*tfactor) - 1.0f);		//Envelope waveshaping
+      
+      gain = (1.0f - d_rate) * oldgain + d_rate * expenv;
+      oldgain = gain;				//smooth it out a little bit
+      
+      if(efollower)
+      {
+      efxoutl[i] = gain;
+      efxoutr[i] += gain;
+      }
+      else
+      {
+      efxoutl[i] *= gain*level;
+      efxoutr[i] *= gain*level;
+      }
 
     }
 

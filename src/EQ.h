@@ -36,12 +36,12 @@ public:
   EQ (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
   ~EQ ();
   void out (REALTYPE * smpsl, REALTYPE * smpr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
   REALTYPE getfreqresponse (REALTYPE freq);
-  unsigned char Ppreset;
+  int Ppreset;
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;
 
@@ -49,23 +49,23 @@ public:
 
   REALTYPE volume;
 
-  unsigned char Pvolume;	//Volumul 
+  int Pvolume;	//Volumul 
 
-  void setvolume (unsigned char Pvolume);
+  void setvolume (int Pvolume);
 
 
 
 
 private:
   //Parametrii
-//      unsigned char Pvolume;//Volumul 
+//      int Pvolume;//Volumul 
 
-//      void setvolume(unsigned char Pvolume);
+//      void setvolume(int Pvolume);
 
   struct
   {
     //parameters
-    unsigned char Ptype, Pfreq, Pgain, Pq, Pstages;
+    int Ptype, Pfreq, Pgain, Pq, Pstages;
     //internal values
     AnalogFilter *l, *r;
   } filter[MAX_EQ_BANDS];

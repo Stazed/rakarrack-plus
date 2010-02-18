@@ -336,7 +336,7 @@ MusicDelay::setpreset (int npreset)
 {
   const int PRESET_SIZE = 13;
   const int NUM_PRESETS = 3;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Echo 1
     {64, 0, 2, 7, 0, 59, 0, 127, 4, 59, 106, 75, 75},
     //Echo 2
@@ -348,7 +348,7 @@ MusicDelay::setpreset (int npreset)
     npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
-  Ppreset = (unsigned char) npreset;
+  Ppreset = (int) npreset;
 };
 
 
