@@ -78,6 +78,8 @@ rakarrack_SOURCES = main.C \
 	Expander.h \
 	Ring.C \
 	Ring.h \
+	Shuffle.h \
+	Shuffle.C \
 	MIDIConverter.C \
 	MIDIConverter.h
 	

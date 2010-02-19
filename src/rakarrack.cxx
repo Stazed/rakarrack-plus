@@ -4211,6 +4211,79 @@ void RKRGUI::cb_expander_HPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_HPF_i(o,v);
 }
 
+void RKRGUI::cb_shuffle_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Shuffle_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Shuffle->cleanup();
+findpos(26,(int)o->value());
+}
+void RKRGUI::cb_shuffle_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_activar_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_preset_i(Fl_Choice* o, void*) {
+  rkr->efx_Shuffle->setpreset((int)o->value());
+shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
+shuffle_volM->value(rkr->efx_Shuffle->getpar(2));
+shuffle_volH->value(rkr->efx_Shuffle->getpar(3));
+shuffle_cross1->value(rkr->efx_Shuffle->getpar(4));
+shuffle_cross2->value(rkr->efx_Shuffle->getpar(5));
+shuffle_cross3->value(rkr->efx_Shuffle->getpar(6));
+}
+void RKRGUI::cb_shuffle_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_shuffle_preset[] = {
+ {"Shuffle 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Shuffle 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Shuffle 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Shuffle 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_shuffle_volL_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_shuffle_volL(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volL_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_volM_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_shuffle_volM(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volM_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_volH_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_shuffle_volH(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volH_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_cross1_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_shuffle_cross1(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross1_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_cross2_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_shuffle_cross2(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross2_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_cross3_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_shuffle_cross3(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross3_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -5052,7 +5125,7 @@ void RKRGUI::cb_OK(Fl_Button* o, void* v) {
 }
 
 Fl_Double_Window* RKRGUI::make_window() {
-  { Principal = new Fl_Double_Window(800, 600);
+  { Principal = new Fl_Double_Window(800, 599);
     Principal->box(FL_DOWN_BOX);
     Principal->color((Fl_Color)FL_FOREGROUND_COLOR);
     Principal->callback((Fl_Callback*)cb_Principal, (void*)(this));
@@ -10161,6 +10234,138 @@ R average.");
       } // SliderW* expander_HPF
       EXPANDER->end();
     } // Fl_Group* EXPANDER
+    { SHUFFLE = new Fl_Group(320, 211, 158, 184, "High Freq");
+      SHUFFLE->box(FL_UP_BOX);
+      SHUFFLE->color((Fl_Color)FL_FOREGROUND_COLOR);
+      SHUFFLE->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      SHUFFLE->labelfont(1);
+      SHUFFLE->user_data((void*)(1));
+      SHUFFLE->align(96|FL_ALIGN_INSIDE);
+      SHUFFLE->hide();
+      { shuffle_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        shuffle_activar->shortcut(0x33);
+        shuffle_activar->color((Fl_Color)62);
+        shuffle_activar->selection_color((Fl_Color)1);
+        shuffle_activar->labelsize(10);
+        shuffle_activar->callback((Fl_Callback*)cb_shuffle_activar, (void*)(2));
+        shuffle_activar->align(68|FL_ALIGN_INSIDE);
+        shuffle_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* shuffle_activar
+      { shuffle_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        shuffle_preset->down_box(FL_BORDER_BOX);
+        shuffle_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        shuffle_preset->labelsize(10);
+        shuffle_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_preset->textsize(10);
+        shuffle_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_preset->callback((Fl_Callback*)cb_shuffle_preset);
+        shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        shuffle_preset->menu(menu_shuffle_preset);
+      } // Fl_Choice* shuffle_preset
+      { shuffle_volL = new SliderW(375, 260, 100, 10, "L.Gain");
+        shuffle_volL->type(5);
+        shuffle_volL->box(FL_FLAT_BOX);
+        shuffle_volL->color((Fl_Color)178);
+        shuffle_volL->selection_color((Fl_Color)62);
+        shuffle_volL->labeltype(FL_NORMAL_LABEL);
+        shuffle_volL->labelfont(0);
+        shuffle_volL->labelsize(10);
+        shuffle_volL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volL->minimum(-64);
+        shuffle_volL->maximum(64);
+        shuffle_volL->step(1);
+        shuffle_volL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volL->callback((Fl_Callback*)cb_shuffle_volL);
+        shuffle_volL->align(FL_ALIGN_LEFT);
+        shuffle_volL->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_volL
+      { shuffle_volM = new SliderW(375, 290, 100, 10, "M.Gain");
+        shuffle_volM->type(5);
+        shuffle_volM->box(FL_FLAT_BOX);
+        shuffle_volM->color((Fl_Color)178);
+        shuffle_volM->selection_color((Fl_Color)62);
+        shuffle_volM->labeltype(FL_NORMAL_LABEL);
+        shuffle_volM->labelfont(0);
+        shuffle_volM->labelsize(10);
+        shuffle_volM->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volM->minimum(-64);
+        shuffle_volM->maximum(64);
+        shuffle_volM->step(1);
+        shuffle_volM->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volM->callback((Fl_Callback*)cb_shuffle_volM);
+        shuffle_volM->align(FL_ALIGN_LEFT);
+        shuffle_volM->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_volM
+      { shuffle_volH = new SliderW(375, 320, 100, 10, "High Gain");
+        shuffle_volH->type(5);
+        shuffle_volH->box(FL_FLAT_BOX);
+        shuffle_volH->color((Fl_Color)178);
+        shuffle_volH->selection_color((Fl_Color)62);
+        shuffle_volH->labeltype(FL_NORMAL_LABEL);
+        shuffle_volH->labelfont(0);
+        shuffle_volH->labelsize(10);
+        shuffle_volH->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volH->minimum(-64);
+        shuffle_volH->maximum(64);
+        shuffle_volH->step(1);
+        shuffle_volH->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volH->callback((Fl_Callback*)cb_shuffle_volH);
+        shuffle_volH->align(FL_ALIGN_LEFT);
+        shuffle_volH->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_volH
+      { shuffle_cross1 = new SliderW(375, 245, 100, 10, "Low Freq");
+        shuffle_cross1->type(5);
+        shuffle_cross1->box(FL_FLAT_BOX);
+        shuffle_cross1->color((Fl_Color)178);
+        shuffle_cross1->selection_color((Fl_Color)62);
+        shuffle_cross1->labeltype(FL_NORMAL_LABEL);
+        shuffle_cross1->labelfont(0);
+        shuffle_cross1->labelsize(10);
+        shuffle_cross1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross1->minimum(40);
+        shuffle_cross1->maximum(1000);
+        shuffle_cross1->step(1);
+        shuffle_cross1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross1->callback((Fl_Callback*)cb_shuffle_cross1);
+        shuffle_cross1->align(FL_ALIGN_LEFT);
+        shuffle_cross1->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_cross1
+      { shuffle_cross2 = new SliderW(375, 275, 100, 10, "Mid Freq");
+        shuffle_cross2->type(5);
+        shuffle_cross2->box(FL_FLAT_BOX);
+        shuffle_cross2->color((Fl_Color)178);
+        shuffle_cross2->selection_color((Fl_Color)62);
+        shuffle_cross2->labeltype(FL_NORMAL_LABEL);
+        shuffle_cross2->labelfont(0);
+        shuffle_cross2->labelsize(10);
+        shuffle_cross2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross2->minimum(800);
+        shuffle_cross2->maximum(8000);
+        shuffle_cross2->step(1);
+        shuffle_cross2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross2->callback((Fl_Callback*)cb_shuffle_cross2);
+        shuffle_cross2->align(FL_ALIGN_LEFT);
+        shuffle_cross2->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_cross2
+      { shuffle_cross3 = new SliderW(375, 305, 100, 10, "High Freq");
+        shuffle_cross3->type(5);
+        shuffle_cross3->box(FL_FLAT_BOX);
+        shuffle_cross3->color((Fl_Color)178);
+        shuffle_cross3->selection_color((Fl_Color)62);
+        shuffle_cross3->labeltype(FL_NORMAL_LABEL);
+        shuffle_cross3->labelfont(0);
+        shuffle_cross3->labelsize(10);
+        shuffle_cross3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross3->minimum(6000);
+        shuffle_cross3->maximum(26000);
+        shuffle_cross3->step(1);
+        shuffle_cross3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross3->callback((Fl_Callback*)cb_shuffle_cross3);
+        shuffle_cross3->align(FL_ALIGN_LEFT);
+        shuffle_cross3->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_cross3
+      SHUFFLE->end();
+    } // Fl_Group* SHUFFLE
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -12075,6 +12280,9 @@ for (i=1; i<=t; i++)
         case 25:
         EXPANDER->hide();
         break;
+        case 26:
+        SHUFFLE->hide();
+        break;
       }
       
     }
@@ -12324,6 +12532,13 @@ switch (rkr->efx_order[i])
        expander_activar->shortcut(s[i]);
        EXPANDER->show();
        if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+
+     case 26:
+       SHUFFLE->position(x[i],y[i]);
+       shuffle_activar->shortcut(s[i]);
+       SHUFFLE->show();
+       if(rkr->Shuffle_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
 
  }
@@ -13333,6 +13548,7 @@ EXCITER->image(InOut->image());
 MBDIST->image(InOut->image());
 ARPIE->image(InOut->image());
 EXPANDER->image(InOut->image());
+SHUFFLE->image(InOut->image());
 
 
 Presets->image(InOut->image());
