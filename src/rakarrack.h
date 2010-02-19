@@ -1954,6 +1954,78 @@ private:
   void cb_shuffle_Q_i(SliderW*, void*);
   static void cb_shuffle_Q(SliderW*, void*);
 public:
+  Fl_Group *SYNTHFILTER;
+  Fl_Light_Button *synthfilter_activar;
+private:
+  void cb_synthfilter_activar_i(Fl_Light_Button*, void*);
+  static void cb_synthfilter_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *synthfilter_preset;
+private:
+  void cb_synthfilter_preset_i(Fl_Choice*, void*);
+  static void cb_synthfilter_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_synthfilter_preset[];
+public:
+  SliderW *synthfilter_WD;
+private:
+  void cb_synthfilter_WD_i(SliderW*, void*);
+  static void cb_synthfilter_WD(SliderW*, void*);
+public:
+  Fl_Choice *synthfilter_lfotype;
+private:
+  void cb_synthfilter_lfotype_i(Fl_Choice*, void*);
+  static void cb_synthfilter_lfotype(Fl_Choice*, void*);
+public:
+  SliderW *synthfilter_freq;
+private:
+  void cb_synthfilter_freq_i(SliderW*, void*);
+  static void cb_synthfilter_freq(SliderW*, void*);
+public:
+  SliderW *synthfilter_dpth;
+private:
+  void cb_synthfilter_dpth_i(SliderW*, void*);
+  static void cb_synthfilter_dpth(SliderW*, void*);
+public:
+  SliderW *synthfilter_phase;
+private:
+  void cb_synthfilter_phase_i(SliderW*, void*);
+  static void cb_synthfilter_phase(SliderW*, void*);
+public:
+  SliderW *synthfilter_fb;
+private:
+  void cb_synthfilter_fb_i(SliderW*, void*);
+  static void cb_synthfilter_fb(SliderW*, void*);
+public:
+  SliderW *synthfilter_LR;
+private:
+  void cb_synthfilter_LR_i(SliderW*, void*);
+  static void cb_synthfilter_LR(SliderW*, void*);
+public:
+  SliderW *synthfilter_pan;
+private:
+  void cb_synthfilter_pan_i(SliderW*, void*);
+  static void cb_synthfilter_pan(SliderW*, void*);
+public:
+  SliderW *synthfilter_stdf;
+private:
+  void cb_synthfilter_stdf_i(SliderW*, void*);
+  static void cb_synthfilter_stdf(SliderW*, void*);
+public:
+  Fl_Counter *synthfilter_stages;
+private:
+  void cb_synthfilter_stages_i(Fl_Counter*, void*);
+  static void cb_synthfilter_stages(Fl_Counter*, void*);
+public:
+  Fl_Check_Button *synthfilter_hyper;
+private:
+  void cb_synthfilter_hyper_i(Fl_Check_Button*, void*);
+  static void cb_synthfilter_hyper(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *synthfilter_subs;
+private:
+  void cb_synthfilter_subs_i(Fl_Check_Button*, void*);
+  static void cb_synthfilter_subs(Fl_Check_Button*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
