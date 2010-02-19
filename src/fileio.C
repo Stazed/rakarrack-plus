@@ -361,6 +361,16 @@ RKR::savefile (char *filename)
 		   efx_Expander->getpar (7), Expander_Bypass);
 	  break;
 
+	case 26:
+	  //Shuffle
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Shuffle->getpar (0), efx_Shuffle->getpar (1),
+		   efx_Shuffle->getpar (2), efx_Shuffle->getpar (3),
+		   efx_Shuffle->getpar (4), efx_Shuffle->getpar (5),
+		   efx_Shuffle->getpar (6), efx_Shuffle->getpar (7),
+		   efx_Shuffle->getpar (8), efx_Shuffle->getpar (9),
+                   Shuffle_Bypass);
+	  break;
 
 
  
@@ -728,6 +738,13 @@ RKR::loadfile (char *filename)
 
 	  break;
 
+	case 26:
+	  //Shuffle
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[27][0], &lv[27][1], &lv[27][2], &lv[27][3], &lv[27][4],
+		  &lv[27][5], &lv[27][6], &lv[27][7], &lv[27][8], &lv[27][9],
+		  &Shuffle_B);
+	  break;
 
 	}
     }
@@ -797,6 +814,7 @@ RKR::Actualizar_Audio ()
   MBDist_Bypass = 0;
   Arpie_Bypass = 0;  
   Expander_Bypass = 0;
+  Shuffle_Bypass = 0;
   
   cleanup_efx ();
 
@@ -847,6 +865,8 @@ RKR::Actualizar_Audio ()
     efx_Arpie->changepar (i, lv[25][i]);
 for (i = 0; i <= 6; i++)
     efx_Expander->Expander_Change (i + 1,lv[26][i]);
+ for (i = 0; i <= 9; i++)
+    efx_Shuffle->changepar (i, lv[27][i]);
   
 
   for (i = 0; i < 12; i++)
@@ -902,6 +922,7 @@ for (i = 0; i <= 6; i++)
   MBDist_Bypass = MBDist_B;
   Arpie_Bypass = Arpie_B;
   Expander_Bypass = Expander_B;
+  Shuffle_Bypass = Shuffle_B;
 
   Bypass = Bypass_B;
 
@@ -968,7 +989,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[27][16] = {
+  int presets[28][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1022,8 +1043,9 @@ RKR::New ()
 //Arpie
     {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0},
 //Expander
-    {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
-
+    {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
+//Shuffle 1
+    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 0, 0, 0 ,0 ,0, 0}
      
 
   };
@@ -1080,6 +1102,7 @@ RKR::New ()
   MBDist_B = 0;
   Arpie_B = 0;
   Expander_B = 0;
+  Shuffle_B = 0;
   Bypass_B = 0;
 
   
@@ -1102,7 +1125,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[27][16] = {
+  int presets[28][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1156,7 +1179,9 @@ RKR::New_Bank ()
 //Arpie
     {67, 64, 35, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0},
 //Expander
-    {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
+    {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
+//Shuffle 1
+    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 0, 0, 0 ,0 ,0, 0}
     
     
      
@@ -1246,6 +1271,8 @@ RKR::Bank_to_Preset (int i)
   MBDist_B = Bank[i].lv[24][19];  
   Arpie_B = Bank[i].lv[25][19];
   Expander_B = Bank[i].lv[26][19];
+  Shuffle_B = Bank[i].lv[27][19];
+  
   Bypass_B = Bypass;
 
 
@@ -1327,6 +1354,8 @@ RKR::Preset_to_Bank (int i)
     lv[25][j] = efx_Arpie->getpar(j);
   for (j = 0; j <= 6; j++)
     lv[26][j] = efx_Expander->getpar(j+1);
+  for (j = 0; j <= 9; j++)
+    lv[27][j] = efx_Shuffle->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1386,6 +1415,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[24][19] = MBDist_Bypass;
   Bank[i].lv[25][19] = Arpie_Bypass;
   Bank[i].lv[26][19] = Expander_Bypass;
+  Bank[i].lv[27][19] = Shuffle_Bypass;
   
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

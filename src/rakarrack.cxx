@@ -12091,6 +12091,19 @@ expander_HPF->value(rkr->lv[26][5]);
 expander_threshold->value(rkr->lv[26][0]);
 expander_activar->value(rkr->Expander_Bypass);
 
+//Shuffle
+
+shuffle_volL->value(rkr->lv[27][1]);
+shuffle_volML->value(rkr->lv[27][2]);
+shuffle_volMH->value(rkr->lv[27][3]);
+shuffle_volH->value(rkr->lv[27][4]);
+shuffle_cross1->value(rkr->lv[27][5]);
+shuffle_cross2->value(rkr->lv[27][6]);
+shuffle_cross3->value(rkr->lv[27][7]);
+shuffle_cross4->value(rkr->lv[27][8]);
+shuffle_Q->value(rkr->lv[27][9]);
+shuffle_activar->value(rkr->Shuffle_Bypass);
+
 
 
 reordena();

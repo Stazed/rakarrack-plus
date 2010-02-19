@@ -4485,7 +4485,7 @@ expander_level->value(rkr->efx_Expander->getpar(7));}
       }
       Fl_Group SHUFFLE {
         label {High Freq}
-        user_data 1
+        user_data 1 selected
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button shuffle_activar {
@@ -4566,7 +4566,7 @@ shuffle_Q->value(rkr->efx_Shuffle->getpar(9));}
         }
         Fl_Value_Slider shuffle_cross4 {
           label {High Freq}
-          callback {rkr->efx_Shuffle->changepar(8,(int)o->value());} selected
+          callback {rkr->efx_Shuffle->changepar(8,(int)o->value());}
           xywh {375 335 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 textcolor 7
           class SliderW
         }
@@ -6395,6 +6395,19 @@ expander_LPF->value(rkr->lv[26][4]);
 expander_HPF->value(rkr->lv[26][5]);
 expander_threshold->value(rkr->lv[26][0]);
 expander_activar->value(rkr->Expander_Bypass);
+
+//Shuffle
+
+shuffle_volL->value(rkr->lv[27][1]);
+shuffle_volML->value(rkr->lv[27][2]);
+shuffle_volMH->value(rkr->lv[27][3]);
+shuffle_volH->value(rkr->lv[27][4]);
+shuffle_cross1->value(rkr->lv[27][5]);
+shuffle_cross2->value(rkr->lv[27][6]);
+shuffle_cross3->value(rkr->lv[27][7]);
+shuffle_cross4->value(rkr->lv[27][8]);
+shuffle_Q->value(rkr->lv[27][9]);
+shuffle_activar->value(rkr->Shuffle_Bypass);
 
 
 
