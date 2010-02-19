@@ -56,22 +56,25 @@ private:
   //Parametrii
   int Pvolume;	//Volumul or E/R
   int PvolL;
-  int PvolM;
+  int PvolML;
+  int PvolMH;
   int PvolH;
   
   int Cross1;		//lowpass filter
   int Cross2;		//highpass filter
   int Cross3;
+  int Cross4;
   
   void setvolume (int Pvolume);
   void setCross1 (int value);
   void setCross2 (int value);
   void setCross3 (int value);
+  void setCross4 (int value);
 
   //Parametrii reali
-  float volL,volM,volH,volLr,volMr,volHr;
+  float volL,volML,volMH,volH,volLr,volMLr,volMHr,volHr;
   AnalogFilter *ll, *lr, *hl, *hr;
-  AnalogFilter *ml, *mr;
+  AnalogFilter *mll, *mlr,*mhl,*mhr;
   
 
 };
