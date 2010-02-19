@@ -887,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1660 117 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1653 110 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4509,7 +4509,7 @@ shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
-shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);} selected
+shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4588,6 +4588,133 @@ shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);} selected
           callback {rkr->efx_Shuffle->changepar(9,(int)o->value());}
           xywh {375 380 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
+        }
+      }
+      Fl_Group SYNTHFILTER {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button synthfilter_activar {
+          label On
+          user_data 2
+          callback {rkr->Synthfilter_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Synthfilter->cleanup();
+findpos(27,(int)o->value());} selected
+          xywh {325 215 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice synthfilter_preset {
+          label Preset
+          callback {rkr->efx_APhaser->setpreset((int) o->value());
+synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
+synthfilter_pan->value(rkr->efx_Synthfilter->getpar(1));
+synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
+synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
+synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(6));
+synthfilter_stages->value(rkr->efx_Synthfilter->getpar(8));
+synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7)-64);
+synthfilter_LR->value(rkr->efx_Synthfilter->getpar(9));
+synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
+synthfilter_phase->value(rkr->efx_Synthfilter->getpar(11));
+synthfilter_hyper->value(rkr->efx_Synthfilter->getpar(12));}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Phaser 1}
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Phaser 2}
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Phaser 3}
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Phaser 4}
+            xywh {92 92 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Phaser 5}
+            xywh {102 102 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Phaser 6}
+            xywh {112 112 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider synthfilter_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Synthfilter->changepar(0,(int)(o->value()+64));}
+          xywh {369 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Choice synthfilter_lfotype {
+          label {LFO Type}
+          callback {rkr->efx_Synthfilter->changepar(4,(int)o->value());} open
+          xywh {395 252 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
+        Fl_Value_Slider synthfilter_freq {
+          label Tempo
+          callback {rkr->efx_Synthfilter->changepar(2,(int)o->value());}
+          xywh {368 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider synthfilter_dpth {
+          label Width
+          callback {rkr->efx_Synthfilter->changepar(6,(int)o->value());}
+          xywh {368 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider synthfilter_phase {
+          label Depth
+          callback {rkr->efx_Synthfilter->changepar(11,(int)o->value());}
+          xywh {369 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider synthfilter_fb {
+          label Fb
+          callback {rkr->efx_Synthfilter->changepar(7,(int)(o->value()+64));}
+          xywh {368 309 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider synthfilter_LR {
+          label Mismatch
+          callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());}
+          xywh {368 322 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 7 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider synthfilter_pan {
+          label Distort
+          callback {rkr->efx_Synthfilter->changepar(1,(int)o->value());}
+          xywh {368 333 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider synthfilter_stdf {
+          label {St.df}
+          callback {rkr->efx_Synthfilter->changepar(5,(int)o->value());}
+          xywh {369 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Counter synthfilter_stages {
+          label Stages
+          callback {rkr->efx_Synthfilter->changepar(8,(int)o->value());}
+          xywh {400 362 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+        }
+        Fl_Check_Button synthfilter_hyper {
+          label Hyper
+          user_data 2
+          callback {rkr->efx_Synthfilter->changepar(12,(int)o->value())}
+          xywh {395 376 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button synthfilter_subs {
+          label Subtract
+          user_data 2
+          callback {rkr->efx_Synthfilter->changepar(10,(int)o->value())}
+          xywh {330 376 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tuner {
@@ -6682,6 +6809,11 @@ for (i=1; i<=t; i++)
         case 26:
         SHUFFLE->hide();
         break;
+        case 27:
+        SYNTHFILTER->hide();
+        break;
+        
+        
       }
       
     }
@@ -6938,6 +7070,13 @@ switch (rkr->efx_order[i])
        shuffle_activar->shortcut(s[i]);
        SHUFFLE->show();
        if(rkr->Shuffle_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+
+     case 27:
+       SYNTHFILTER->position(x[i],y[i]);
+       synthfilter_activar->shortcut(s[i]);
+       SYNTHFILTER->show();
+       if(rkr->Synthfilter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
 
  }
@@ -7935,7 +8074,7 @@ MBDIST->image(InOut->image());
 ARPIE->image(InOut->image());
 EXPANDER->image(InOut->image());
 SHUFFLE->image(InOut->image());
-
+SYNTHFILTER->image(InOut->image());
 
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
