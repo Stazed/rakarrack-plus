@@ -886,7 +886,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open selected
+Pexitprogram=1;}
       xywh {1667 124 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4507,7 +4507,8 @@ shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
 shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
 shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
-shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));}
+shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
+shuffle_Q->value(rkr->efx_Shuffle->getpar(9));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4534,7 +4535,7 @@ shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));}
           class SliderW
         }
         Fl_Value_Slider shuffle_volL {
-          label {L.Gain}
+          label {Low Gain}
           callback {rkr->efx_Shuffle->changepar(1,(int)o->value());}
           xywh {375 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
@@ -4573,6 +4574,12 @@ shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));}
           label {High Gain}
           callback {rkr->efx_Shuffle->changepar(4,(int)o->value());}
           xywh {375 350 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shuffle_Q {
+          label Q
+          callback {rkr->efx_Shuffle->changepar(9,(int)o->value());} selected
+          xywh {375 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
       }

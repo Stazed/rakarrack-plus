@@ -1944,6 +1944,11 @@ private:
   void cb_shuffle_volH_i(SliderW*, void*);
   static void cb_shuffle_volH(SliderW*, void*);
 public:
+  SliderW *shuffle_Q;
+private:
+  void cb_shuffle_Q_i(SliderW*, void*);
+  static void cb_shuffle_Q(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

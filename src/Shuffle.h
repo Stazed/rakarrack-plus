@@ -59,6 +59,7 @@ private:
   int PvolML;
   int PvolMH;
   int PvolH;
+  int PQ;
   
   int Cross1;		//lowpass filter
   int Cross2;		//highpass filter

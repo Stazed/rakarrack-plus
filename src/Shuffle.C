@@ -126,27 +126,27 @@ Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
   {
     
     avg = (inputl[i] + inputr[i]) * .5f;
-	  ldiff = inputl[i] - avg;
+	  ldiff = inputl[i] + avg;
 	  rdiff = inputr[i] - avg;
 
-	  tmp = avg + ldiff * 8.0f;
-	  inputl[i] = tmp*.5f;
+	  tmp = avg + ldiff*2.0f;
+	  inputl[i] = tmp*.5;
 
-	  tmp = avg + rdiff * 8.0f;
-	  inputr[i] = tmp*.5f;
+	  tmp = avg - rdiff*2.0f;
+	  inputr[i] = tmp*.5;
 
 
-    efxoutl[i]=(inputl[i]+inputr[i])*.5f+smpsl[i];
-    efxoutr[i]=(inputl[i]-inputr[i])*.5f+smpsr[i];
+    efxoutl[i]=(inputl[i]+inputr[i])*.5f;
+    efxoutr[i]=(inputl[i]-inputr[i])*.5f;
 
     avg = (efxoutl[i] + efxoutr[i]) * .5f;
 	  ldiff = efxoutl[i] - avg;
 	  rdiff = efxoutr[i] - avg;
 
-	  tmp = avg + ldiff;
-	  efxoutl[i] = tmp;
+	  tmp = avg + ldiff*8.0f;
+	  efxoutl[i] = tmp*.25;
 
-	  tmp = avg + rdiff;
+	  tmp = avg + rdiff*2.0f;
 	  efxoutr[i] = tmp;
 
 
@@ -250,28 +250,28 @@ Shuffle::changepar (int npar, int value)
       PvolL = value+64;
       volL = 30.0f * ((float)PvolL - 64.0f) / 64.0f;
       ll->setgain(volL);
-      volLr = 30.0f * ((float)-1.0f*PvolL - 64.0f) / 64.0f;
+      volLr = -1.0f*volL;
       lr->setgain(volLr);
       break;
     case 2:
       PvolML = value+64;
       volML = 30.0f * ((float)PvolML - 64.0f) / 64.0f;;
       mll->setgain(volML);
-      volMLr= 30.0f * ((float)-1.0f*PvolML - 64.0f) / 64.0f;;
+      volMLr= -1.0f*volML;
       mlr->setgain(volMLr);
       break;
     case 3:
       PvolMH = value+64;
       volMH = 30.0f * ((float)PvolMH - 64.0f) / 64.0f;;
       mhl->setgain(volMH);
-      volMHr= 30.0f * ((float)-1.0f*PvolMH - 64.0f) / 64.0f;;
+      volMHr= -1.0f*volMH;
       mhr->setgain(volMHr);
       break;
     case 4:
       PvolH = value+64;
       volH = 30.0f * ((float)PvolH - 64.0f) / 64.0f;;
       hl->setgain(volH);
-      volHr = 30.0f * ((float)-1.0f*PvolH - 64.0f) / 64.0f;;
+      volHr = -1.0f*volH;
       hr->setgain(volHr);
       break;
     case 5:
@@ -286,8 +286,19 @@ Shuffle::changepar (int npar, int value)
     case 8:
       setCross4 (value);
       break;
-
-
+    case 9:
+      PQ = value;
+      value +=64;
+      float tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+      ll->setq(tmp);
+      lr->setq(tmp);
+      mll->setq(tmp);
+      mlr->setq(tmp);
+      mhl->setq(tmp);
+      mhr->setq(tmp);
+      hl->setq(tmp);
+      hr->setq(tmp);
+      break;
 
     };
 };
@@ -323,6 +334,9 @@ Shuffle::getpar (int npar)
       break;
     case 8:
       return (Cross4);
+      break;
+    case 9:
+      return (PQ);
       break;
       
     };
