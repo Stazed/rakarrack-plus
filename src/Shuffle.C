@@ -144,10 +144,10 @@ Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  rdiff = efxoutr[i] - avg;
 
 	  tmp = avg + ldiff* 2.0f;
-	  efxoutl[i] = tmp;
+	  efxoutl[i] = tmp*.5f;
 
 	  tmp = avg + rdiff* 2.0f;
-	  efxoutr[i] = tmp;
+	  efxoutr[i] = tmp*.5f;
 
 
 
