@@ -92,7 +92,8 @@ void
 Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
-
+  float avg,ldiff,rdiff,tmp;
+ 
       for (i = 0; i < PERIOD; i++)
 	{
 	  inputl[i] = smpsl[i] + smpsr[i];
@@ -112,8 +113,23 @@ Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i = 0; i < PERIOD; i++)
   {
-    efxoutl[i]=inputl[i]+inputr[i]+smpsl[i];
-    efxoutr[i]=inputl[i]-inputr[i]+smpsr[i];
+    efxoutl[i]=(inputl[i]+inputr[i])*.5f+smpsl[i];
+    efxoutr[i]=(inputl[i]-inputr[i])*.5f+smpsr[i];
+
+    
+    avg = (efxoutl[i] + efxoutr[i]) * .5f;
+	  ldiff = efxoutl[i] - avg;
+	  rdiff = efxoutr[i] - avg;
+
+	  tmp = avg + ldiff * 8.0f;
+	  efxoutl[i] = tmp*.5f;
+
+	  tmp = avg + rdiff * 8.0f;
+	  efxoutr[i] = tmp*.5f;
+
+
+
+
   }      
     
  
