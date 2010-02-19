@@ -887,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1681 138 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1674 131 800 599} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4424,7 +4424,7 @@ expander_shape->value(rkr->efx_Expander->getpar(2));
 expander_threshold->value(rkr->efx_Expander->getpar(1));
 expander_HPF->value(rkr->efx_Expander->getpar(6));
 expander_LPF->value(rkr->efx_Expander->getpar(5));
-expander_level->value(rkr->efx_Expander->getpar(7));} open
+expander_level->value(rkr->efx_Expander->getpar(7));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4472,7 +4472,7 @@ expander_level->value(rkr->efx_Expander->getpar(7));} open
         }
         Fl_Value_Slider expander_LPF {
           label LPF
-          callback {rkr->efx_Expander->Expander_Change(5, (int)o->value());} selected
+          callback {rkr->efx_Expander->Expander_Change(5, (int)o->value());}
           xywh {370 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
           class SliderW
         }
@@ -4480,6 +4480,85 @@ expander_level->value(rkr->efx_Expander->getpar(7));} open
           label HPF
           callback {rkr->efx_Expander->Expander_Change(6, (int)o->value());}
           xywh {370 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+          class SliderW
+        }
+      }
+      Fl_Group SHUFFLE {
+        label {High Freq}
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button shuffle_activar {
+          label On
+          user_data 2
+          callback {rkr->Shuffle_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Shuffle->cleanup();
+findpos(26,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice shuffle_preset {
+          label Preset
+          callback {rkr->efx_Shuffle->setpreset((int)o->value());
+shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
+shuffle_volM->value(rkr->efx_Shuffle->getpar(2));
+shuffle_volH->value(rkr->efx_Shuffle->getpar(3));
+shuffle_cross1->value(rkr->efx_Shuffle->getpar(4));
+shuffle_cross2->value(rkr->efx_Shuffle->getpar(5));
+shuffle_cross3->value(rkr->efx_Shuffle->getpar(6));}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Shuffle 1}
+            xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Shuffle 2}
+            xywh {52 52 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Shuffle 3}
+            xywh {62 62 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Shuffle 4}
+            xywh {72 72 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider shuffle_volL {
+          label {L.Gain}
+          callback {rkr->efx_Shuffle->changepar(1,(int)o->value());}
+          xywh {375 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shuffle_volM {
+          label {M.Gain}
+          callback {rkr->efx_Shuffle->changepar(2,(int)o->value());}
+          xywh {375 290 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shuffle_volH {
+          label {High Gain}
+          callback {rkr->efx_Shuffle->changepar(3,(int)o->value());}
+          xywh {375 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shuffle_cross1 {
+          label {Low Freq}
+          callback {rkr->efx_Shuffle->changepar(4,(int)o->value());}
+          xywh {375 245 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 1000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shuffle_cross2 {
+          label {Mid Freq}
+          callback {rkr->efx_Shuffle->changepar(5,(int)o->value());}
+          xywh {375 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 8000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shuffle_cross3 {
+          label {High Freq}
+          callback {rkr->efx_Shuffle->changepar(6,(int)o->value());} selected
+          xywh {375 305 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 textcolor 7
           class SliderW
         }
       }
@@ -6558,6 +6637,9 @@ for (i=1; i<=t; i++)
         case 25:
         EXPANDER->hide();
         break;
+        case 26:
+        SHUFFLE->hide();
+        break;
       }
       
     }
@@ -6807,6 +6889,13 @@ switch (rkr->efx_order[i])
        expander_activar->shortcut(s[i]);
        EXPANDER->show();
        if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+
+     case 26:
+       SHUFFLE->position(x[i],y[i]);
+       shuffle_activar->shortcut(s[i]);
+       SHUFFLE->show();
+       if(rkr->Shuffle_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
 
  }
@@ -7803,6 +7892,7 @@ EXCITER->image(InOut->image());
 MBDIST->image(InOut->image());
 ARPIE->image(InOut->image());
 EXPANDER->image(InOut->image());
+SHUFFLE->image(InOut->image());
 
 
 Presets->image(InOut->image());

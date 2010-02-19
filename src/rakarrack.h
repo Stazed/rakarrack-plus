@@ -1892,6 +1892,48 @@ private:
   void cb_expander_HPF_i(SliderW*, void*);
   static void cb_expander_HPF(SliderW*, void*);
 public:
+  Fl_Group *SHUFFLE;
+  Fl_Light_Button *shuffle_activar;
+private:
+  void cb_shuffle_activar_i(Fl_Light_Button*, void*);
+  static void cb_shuffle_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *shuffle_preset;
+private:
+  void cb_shuffle_preset_i(Fl_Choice*, void*);
+  static void cb_shuffle_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_shuffle_preset[];
+public:
+  SliderW *shuffle_volL;
+private:
+  void cb_shuffle_volL_i(SliderW*, void*);
+  static void cb_shuffle_volL(SliderW*, void*);
+public:
+  SliderW *shuffle_volM;
+private:
+  void cb_shuffle_volM_i(SliderW*, void*);
+  static void cb_shuffle_volM(SliderW*, void*);
+public:
+  SliderW *shuffle_volH;
+private:
+  void cb_shuffle_volH_i(SliderW*, void*);
+  static void cb_shuffle_volH(SliderW*, void*);
+public:
+  SliderW *shuffle_cross1;
+private:
+  void cb_shuffle_cross1_i(SliderW*, void*);
+  static void cb_shuffle_cross1(SliderW*, void*);
+public:
+  SliderW *shuffle_cross2;
+private:
+  void cb_shuffle_cross2_i(SliderW*, void*);
+  static void cb_shuffle_cross2(SliderW*, void*);
+public:
+  SliderW *shuffle_cross3;
+private:
+  void cb_shuffle_cross3_i(SliderW*, void*);
+  static void cb_shuffle_cross3(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
