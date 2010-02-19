@@ -968,7 +968,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Shuffle_Bypass)
                 {
                   efx_Shuffle->out(efxoutl, efxoutr);
-		  Vol2_Efx();
+		  Vol_Efx(26,efx_Shuffle->outvolume);
                 }
               break;  
 

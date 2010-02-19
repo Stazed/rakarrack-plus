@@ -887,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1667 124 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1660 117 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4485,7 +4485,7 @@ expander_level->value(rkr->efx_Expander->getpar(7));}
       }
       Fl_Group SHUFFLE {
         label {High Freq}
-        user_data 1 selected
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button shuffle_activar {
@@ -4508,7 +4508,8 @@ shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
 shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
-shuffle_Q->value(rkr->efx_Shuffle->getpar(9));}
+shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
+shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4528,58 +4529,64 @@ shuffle_Q->value(rkr->efx_Shuffle->getpar(9));}
             xywh {72 72 36 21} labelsize 10
           }
         }
+        Fl_Value_Slider shuffle_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Shuffle->changepar(0,(int)o->value()+64);}
+          xywh {375 242 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
         Fl_Value_Slider shuffle_cross1 {
           label {Low Freq}
           callback {rkr->efx_Shuffle->changepar(5,(int)o->value());}
-          xywh {375 245 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 1000 step 1 textcolor 7
+          xywh {375 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 1000 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_volL {
           label {Low Gain}
           callback {rkr->efx_Shuffle->changepar(1,(int)o->value());}
-          xywh {375 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {375 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_cross2 {
           label {M.L. Freq}
           callback {rkr->efx_Shuffle->changepar(6,(int)o->value());}
-          xywh {375 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 600 maximum 4000 step 1 textcolor 7
+          xywh {375 290 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 600 maximum 4000 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_volML {
           label {M.L Gain}
           callback {rkr->efx_Shuffle->changepar(2,(int)o->value());}
-          xywh {375 290 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {375 305 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_cross3 {
           label {M.H. Freq}
           callback {rkr->efx_Shuffle->changepar(7,(int)o->value());}
-          xywh {375 305 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1200 maximum 8000 step 1 textcolor 7
+          xywh {375 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1200 maximum 8000 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_volMH {
           label {M.L Gain}
           callback {rkr->efx_Shuffle->changepar(3,(int)o->value());}
-          xywh {375 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {375 335 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_cross4 {
           label {High Freq}
           callback {rkr->efx_Shuffle->changepar(8,(int)o->value());}
-          xywh {375 335 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 textcolor 7
+          xywh {375 350 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_volH {
           label {High Gain}
           callback {rkr->efx_Shuffle->changepar(4,(int)o->value());}
-          xywh {375 350 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {375 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shuffle_Q {
           label Q
           callback {rkr->efx_Shuffle->changepar(9,(int)o->value());}
-          xywh {375 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {375 380 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
       }
@@ -6407,6 +6414,7 @@ shuffle_cross2->value(rkr->lv[27][6]);
 shuffle_cross3->value(rkr->lv[27][7]);
 shuffle_cross4->value(rkr->lv[27][8]);
 shuffle_Q->value(rkr->lv[27][9]);
+shuffle_WD->value(rkr->lv[27][0]-64);
 shuffle_activar->value(rkr->Shuffle_Bypass);
 
 

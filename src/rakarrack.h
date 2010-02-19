@@ -1904,6 +1904,11 @@ private:
   static void cb_shuffle_preset(Fl_Choice*, void*);
   static Fl_Menu_Item menu_shuffle_preset[];
 public:
+  SliderW *shuffle_WD;
+private:
+  void cb_shuffle_WD_i(SliderW*, void*);
+  static void cb_shuffle_WD(SliderW*, void*);
+public:
   SliderW *shuffle_cross1;
 private:
   void cb_shuffle_cross1_i(SliderW*, void*);

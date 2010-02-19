@@ -4232,6 +4232,7 @@ shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
+shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
 }
 void RKRGUI::cb_shuffle_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_preset_i(o,v);
@@ -4244,6 +4245,13 @@ Fl_Menu_Item RKRGUI::menu_shuffle_preset[] = {
  {"Shuffle 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
+
+void RKRGUI::cb_shuffle_WD_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(0,(int)o->value()+64);
+}
+void RKRGUI::cb_shuffle_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_WD_i(o,v);
+}
 
 void RKRGUI::cb_shuffle_cross1_i(SliderW* o, void*) {
   rkr->efx_Shuffle->changepar(5,(int)o->value());
@@ -10286,7 +10294,24 @@ R average.");
         shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shuffle_preset->menu(menu_shuffle_preset);
       } // Fl_Choice* shuffle_preset
-      { shuffle_cross1 = new SliderW(375, 245, 100, 10, "Low Freq");
+      { shuffle_WD = new SliderW(375, 242, 100, 10, "Wet/Dry");
+        shuffle_WD->type(5);
+        shuffle_WD->box(FL_FLAT_BOX);
+        shuffle_WD->color((Fl_Color)178);
+        shuffle_WD->selection_color((Fl_Color)62);
+        shuffle_WD->labeltype(FL_NORMAL_LABEL);
+        shuffle_WD->labelfont(0);
+        shuffle_WD->labelsize(10);
+        shuffle_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_WD->minimum(-64);
+        shuffle_WD->maximum(64);
+        shuffle_WD->step(1);
+        shuffle_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_WD->callback((Fl_Callback*)cb_shuffle_WD);
+        shuffle_WD->align(FL_ALIGN_LEFT);
+        shuffle_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_WD
+      { shuffle_cross1 = new SliderW(375, 260, 100, 10, "Low Freq");
         shuffle_cross1->type(5);
         shuffle_cross1->box(FL_FLAT_BOX);
         shuffle_cross1->color((Fl_Color)178);
@@ -10303,7 +10328,7 @@ R average.");
         shuffle_cross1->align(FL_ALIGN_LEFT);
         shuffle_cross1->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross1
-      { shuffle_volL = new SliderW(375, 260, 100, 10, "Low Gain");
+      { shuffle_volL = new SliderW(375, 275, 100, 10, "Low Gain");
         shuffle_volL->type(5);
         shuffle_volL->box(FL_FLAT_BOX);
         shuffle_volL->color((Fl_Color)178);
@@ -10320,7 +10345,7 @@ R average.");
         shuffle_volL->align(FL_ALIGN_LEFT);
         shuffle_volL->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_volL
-      { shuffle_cross2 = new SliderW(375, 275, 100, 10, "M.L. Freq");
+      { shuffle_cross2 = new SliderW(375, 290, 100, 10, "M.L. Freq");
         shuffle_cross2->type(5);
         shuffle_cross2->box(FL_FLAT_BOX);
         shuffle_cross2->color((Fl_Color)178);
@@ -10337,7 +10362,7 @@ R average.");
         shuffle_cross2->align(FL_ALIGN_LEFT);
         shuffle_cross2->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross2
-      { shuffle_volML = new SliderW(375, 290, 100, 10, "M.L Gain");
+      { shuffle_volML = new SliderW(375, 305, 100, 10, "M.L Gain");
         shuffle_volML->type(5);
         shuffle_volML->box(FL_FLAT_BOX);
         shuffle_volML->color((Fl_Color)178);
@@ -10354,7 +10379,7 @@ R average.");
         shuffle_volML->align(FL_ALIGN_LEFT);
         shuffle_volML->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_volML
-      { shuffle_cross3 = new SliderW(375, 305, 100, 10, "M.H. Freq");
+      { shuffle_cross3 = new SliderW(375, 320, 100, 10, "M.H. Freq");
         shuffle_cross3->type(5);
         shuffle_cross3->box(FL_FLAT_BOX);
         shuffle_cross3->color((Fl_Color)178);
@@ -10371,7 +10396,7 @@ R average.");
         shuffle_cross3->align(FL_ALIGN_LEFT);
         shuffle_cross3->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross3
-      { shuffle_volMH = new SliderW(375, 320, 100, 10, "M.L Gain");
+      { shuffle_volMH = new SliderW(375, 335, 100, 10, "M.L Gain");
         shuffle_volMH->type(5);
         shuffle_volMH->box(FL_FLAT_BOX);
         shuffle_volMH->color((Fl_Color)178);
@@ -10388,7 +10413,7 @@ R average.");
         shuffle_volMH->align(FL_ALIGN_LEFT);
         shuffle_volMH->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_volMH
-      { shuffle_cross4 = new SliderW(375, 335, 100, 10, "High Freq");
+      { shuffle_cross4 = new SliderW(375, 350, 100, 10, "High Freq");
         shuffle_cross4->type(5);
         shuffle_cross4->box(FL_FLAT_BOX);
         shuffle_cross4->color((Fl_Color)178);
@@ -10405,7 +10430,7 @@ R average.");
         shuffle_cross4->align(FL_ALIGN_LEFT);
         shuffle_cross4->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross4
-      { shuffle_volH = new SliderW(375, 350, 100, 10, "High Gain");
+      { shuffle_volH = new SliderW(375, 365, 100, 10, "High Gain");
         shuffle_volH->type(5);
         shuffle_volH->box(FL_FLAT_BOX);
         shuffle_volH->color((Fl_Color)178);
@@ -10422,7 +10447,7 @@ R average.");
         shuffle_volH->align(FL_ALIGN_LEFT);
         shuffle_volH->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_volH
-      { shuffle_Q = new SliderW(375, 365, 100, 10, "Q");
+      { shuffle_Q = new SliderW(375, 380, 100, 10, "Q");
         shuffle_Q->type(5);
         shuffle_Q->box(FL_FLAT_BOX);
         shuffle_Q->color((Fl_Color)178);
@@ -12102,6 +12127,7 @@ shuffle_cross2->value(rkr->lv[27][6]);
 shuffle_cross3->value(rkr->lv[27][7]);
 shuffle_cross4->value(rkr->lv[27][8]);
 shuffle_Q->value(rkr->lv[27][9]);
+shuffle_WD->value(rkr->lv[27][0]-64);
 shuffle_activar->value(rkr->Shuffle_Bypass);
 
 

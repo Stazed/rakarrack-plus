@@ -167,7 +167,7 @@ void
 Shuffle::setvolume (int value)
 {
   Pvolume = value;
-  outvolume = (float)Pvolume / 127.0f;
+  outvolume = (float)Pvolume / 128.0f;
 };
 
 
