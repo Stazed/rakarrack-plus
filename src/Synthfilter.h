@@ -31,8 +31,9 @@
 #define SYNTHFILTER_H
 #include "global.h"
 #include "EffectLFO.h"
+#include "Expander.h"
 
-#define MAX_PHASER_STAGES 12
+#define MAX_SFILTER_STAGES 12
 
 class Synthfilter
 {
@@ -52,12 +53,14 @@ public:
 private:
   //Phaser parameters
     EffectLFO lfo;		//Phaser modulator
+    Expander envelope;
   int Pvolume;        //Used in Process.C to set wet/dry mix
   int Pdistortion;    //Model distortion added by FET element
   int Pwidth;		//Phaser width (LFO amplitude)
   int Pfb;		//feedback
   int Poffset;	//Model mismatch between variable resistors
-  int Pstages;	//Number of first-order All-Pass stages
+  int Plpstages;	//Number of first-order Low-Pass stages
+  int Phpstages;
   int Poutsub;	//if I wish to subtract the output instead of the adding it
   int Phyper;		//lfo^2 -- converts tri into hyper-sine
   int Pdepth;         //Depth of phaser sweep

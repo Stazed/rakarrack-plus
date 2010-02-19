@@ -45,13 +45,12 @@ Synthfilter::Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  lxn1 = NULL;
-
-  lyn1 = NULL;
-
-  rxn1 = NULL;
-
-  ryn1 = NULL;
+  ly1hp = new REALTYPE[MAX_SFILTER_STAGES];
+  lyn1 = new REALTYPE[MAX_SFILTER_STAGES];
+  ry1hp = new REALTYPE[MAX_SFILTER_STAGES];
+  ryn1 = new REALTYPE[MAX_SFILTER_STAGES];
+  
+  
 
   offset = new REALTYPE[12];	//model mismatch between JFET devices
   offset[0] = -0.2509303f;
@@ -86,14 +85,14 @@ Synthfilter::Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 Synthfilter::~Synthfilter ()
 {
 
-  if (lxn1 != NULL)
-    delete[]lxn1;
+  if (ly1hp != NULL)
+    delete[]ly1hp;
 
   if (lyn1 != NULL)
     delete[]lyn1;
 
-  if (rxn1 != NULL)
-    delete[]rxn1;
+  if (ry1hp != NULL)
+    delete[]ry1hp;
 
   if (ryn1 != NULL)
     delete[]ryn1;
@@ -161,7 +160,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 //alpha = lgain = dt/(RC + dt)
 	  lyn1[j] = lgain * lxn + (1.0f - lgain) * lyn1[j];
 	  lyn1[j] += DENORMAL_GUARD;
-	  //lxn1[j] = lxn;
+	  //ly1hp[j] = lxn;
 	  lxn = lyn1[j];
 	if (j==1) lxn += fbl;  //Insert feedback after first filter stage
 
@@ -176,7 +175,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 //alpha = rgain = dt/(RC + dt)
 	  ryn1[j] = rgain * rxn + (1.0f - rgain) * ryn1[j];
 	  ryn1[j] += DENORMAL_GUARD;
-	  //rxn1[j] = rxn;
+	  //ry1hp[j] = rxn;
 	  rxn = ryn1[j];
 	if (j==1) rxn += fbr;  //Insert feedback after first filter stage
 
@@ -213,11 +212,11 @@ Synthfilter::cleanup ()
   oldrgain = 0.0;
   for (int i = 0; i < Pstages; i++)
     {
-      lxn1[i] = 0.0;
+      ly1hp[i] = 0.0;
 
       lyn1[i] = 0.0;
 
-      rxn1[i] = 0.0;
+      ry1hp[i] = 0.0;
 
       ryn1[i] = 0.0;
 
@@ -269,30 +268,9 @@ Synthfilter::setoffset (int Poffset)
 void
 Synthfilter::setstages (int Pstages)
 {
-
-  if (lxn1 != NULL)
-    delete[]lxn1;
-
-  if (lyn1 != NULL)
-    delete[]lyn1;
-
-  if (rxn1 != NULL)
-    delete[]rxn1;
-
-  if (ryn1 != NULL)
-    delete[]ryn1;
-
-
-  if (Pstages >= MAX_PHASER_STAGES)
-    Pstages = MAX_PHASER_STAGES ;
+  if (Pstages >= MAX_SFILTER_STAGES)
+    Pstages = MAX_SFILTER_STAGES ;
   this->Pstages = Pstages;
-
-
-      lxn1 = new REALTYPE[Pstages];
-      lyn1 = new REALTYPE[Pstages];
- 
-      rxn1 = new REALTYPE[Pstages];
-      ryn1 = new REALTYPE[Pstages];
  
   cleanup ();
 };
