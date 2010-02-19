@@ -214,17 +214,17 @@ Shuffle::setCross4 (int value)
 void
 Shuffle::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 9;
+  const int PRESET_SIZE = 10;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Shuffle 1
-    {64, 10, 0, 0, 0,600, 1200,2000, 6000},
+    {64, 10, 0, 0, 0,600, 1200,2000, 6000,-14},
     //Shuffle 2
-    {64, 0, 0, 0, 0, 120, 1000,2400, 8000},
+    {64, 0, 0, 0, 0, 120, 1000,2400, 8000,-7},
     //Shuffle 3
-    {64, 0, 0, 0, 0, 60, 1800, 3700, 12000},
+    {64, 0, 0, 0, 0, 60, 1800, 3700, 12000, 7},
     //Shuffle 4
-    {64, 0, 0, 0, 0, 100, 1200, 2400 , 5600}
+    {64, 0, 0, 0, 0, 100, 1200, 2400 , 5600,14}
 
   };
 
