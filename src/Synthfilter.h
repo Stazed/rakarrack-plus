@@ -61,6 +61,8 @@ private:
   int Phpstages;
   int Poutsub;	//if I wish to subtract the output instead of the adding it
   int Pdepth;         //Depth of phaser sweep
+  int Phyper;
+  int Pstages;
  
   //Control parameters
   void setvolume (int Pvolume);
@@ -71,7 +73,7 @@ private:
 
   //Internal Variables
   REALTYPE distortion, fb, width, offsetpct, fbl, fbr, depth;
-  REALTYPE *lxn1, *lyn1,*rxn1, *ryn1, *offset;
+  REALTYPE *lxn1, *lyn1, *rxn1, *ryn1, *ly1hp, *ry1hp, *offset;
   REALTYPE oldlgain, oldrgain, inv_period;
   
   REALTYPE delta;

@@ -110,7 +110,10 @@ void
 Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i, j;
-  REALTYPE lfol, lfor, lgain, rgain, bl, br, rmod, lmod, d, hpfr, hpfl;
+  REALTYPE lfol, lfor, lgain, rgain, rmod, lmod, d, hpfr, hpfl;
+
+  float C=1.0; // just to compile :-)
+
   lgain = 0.0;
   rgain = 0.0;
   
@@ -268,7 +271,7 @@ Synthfilter::setdistortion (int Pdistortion)
   this->Pdistortion = Pdistortion;
   distortion = (float)Pdistortion / 100.0f;
 };
-
+/*
 void
 Synthfilter::setoffset (int Poffset)
 {
@@ -285,7 +288,7 @@ Synthfilter::setstages (int Pstages)
  
   cleanup ();
 };
-
+*/
 void
 Synthfilter::setdepth (int Pdepth)
 {
