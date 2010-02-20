@@ -61,6 +61,7 @@ private:
   int Phpstages;
   int Poutsub;	//if I wish to subtract the output instead of the adding it
   int Pdepth;         //Depth of phaser sweep
+  int Penvelope;	//envelope sensitivity
  
   //Control parameters
   void setvolume (int Pvolume);
@@ -71,14 +72,13 @@ private:
 
   //Internal Variables
   REALTYPE distortion, fb, width, offsetpct, fbl, fbr, depth;
-  REALTYPE *lxn1, *lyn1,*rxn1, *ryn1, *offset;
+  REALTYPE *lyn1, *ryn1, *lx1hp, *ly1hp, *rx1hp, *ry1hp;
   REALTYPE oldlgain, oldrgain, inv_period;
   
   REALTYPE delta;
   REALTYPE Rmin;	// 2N5457 typical on resistance at Vgs = 0
   REALTYPE Rmax;	// Resistor parallel to FET
-  REALTYPE Clp;	        // Capacitor
-  REALTYPE Chp;		// A constant derived from capacitor and resistor relationships
+  REALTYPE C, Clp, Chp;	        // Capacitor
 
 
 };
