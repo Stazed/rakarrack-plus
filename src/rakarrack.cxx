@@ -4224,11 +4224,15 @@ void RKRGUI::cb_shuffle_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_shuffle_preset_i(Fl_Choice* o, void*) {
   rkr->efx_Shuffle->setpreset((int)o->value());
 shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
-shuffle_volM->value(rkr->efx_Shuffle->getpar(2));
-shuffle_volH->value(rkr->efx_Shuffle->getpar(3));
-shuffle_cross1->value(rkr->efx_Shuffle->getpar(4));
-shuffle_cross2->value(rkr->efx_Shuffle->getpar(5));
-shuffle_cross3->value(rkr->efx_Shuffle->getpar(6));
+shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
+shuffle_volMH->value(rkr->efx_Shuffle->getpar(2));
+shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
+shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
+shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
+shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
+shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
+shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
+shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
 }
 void RKRGUI::cb_shuffle_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_preset_i(o,v);
@@ -4242,6 +4246,20 @@ Fl_Menu_Item RKRGUI::menu_shuffle_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_shuffle_WD_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(0,(int)o->value()+64);
+}
+void RKRGUI::cb_shuffle_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_WD_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_cross1_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_shuffle_cross1(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross1_i(o,v);
+}
+
 void RKRGUI::cb_shuffle_volL_i(SliderW* o, void*) {
   rkr->efx_Shuffle->changepar(1,(int)o->value());
 }
@@ -4249,39 +4267,176 @@ void RKRGUI::cb_shuffle_volL(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volL_i(o,v);
 }
 
-void RKRGUI::cb_shuffle_volM_i(SliderW* o, void*) {
-  rkr->efx_Shuffle->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_shuffle_volM(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volM_i(o,v);
-}
-
-void RKRGUI::cb_shuffle_volH_i(SliderW* o, void*) {
-  rkr->efx_Shuffle->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_shuffle_volH(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volH_i(o,v);
-}
-
-void RKRGUI::cb_shuffle_cross1_i(SliderW* o, void*) {
-  rkr->efx_Shuffle->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_shuffle_cross1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross1_i(o,v);
-}
-
 void RKRGUI::cb_shuffle_cross2_i(SliderW* o, void*) {
-  rkr->efx_Shuffle->changepar(5,(int)o->value());
+  rkr->efx_Shuffle->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_shuffle_cross2(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross2_i(o,v);
 }
 
+void RKRGUI::cb_shuffle_volML_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_shuffle_volML(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volML_i(o,v);
+}
+
 void RKRGUI::cb_shuffle_cross3_i(SliderW* o, void*) {
-  rkr->efx_Shuffle->changepar(6,(int)o->value());
+  rkr->efx_Shuffle->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_shuffle_cross3(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross3_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_volMH_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_shuffle_volMH(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volMH_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_cross4_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_shuffle_cross4(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_cross4_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_volH_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_shuffle_volH(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_volH_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_Q_i(SliderW* o, void*) {
+  rkr->efx_Shuffle->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_shuffle_Q(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_Q_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Synthfilter_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Synthfilter->cleanup();
+findpos(27,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_activar_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_preset_i(Fl_Choice* o, void*) {
+  rkr->efx_APhaser->setpreset((int) o->value());
+synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
+synthfilter_pan->value(rkr->efx_Synthfilter->getpar(1));
+synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
+synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
+synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(6));
+synthfilter_stages->value(rkr->efx_Synthfilter->getpar(8));
+synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7)-64);
+synthfilter_LR->value(rkr->efx_Synthfilter->getpar(9));
+synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
+synthfilter_phase->value(rkr->efx_Synthfilter->getpar(11));
+synthfilter_hyper->value(rkr->efx_Synthfilter->getpar(12));
+}
+void RKRGUI::cb_synthfilter_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_synthfilter_preset[] = {
+ {"Phaser 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Phaser 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Phaser 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Phaser 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Phaser 5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Phaser 6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_synthfilter_WD_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_synthfilter_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_WD_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_lfotype_i(Fl_Choice* o, void*) {
+  rkr->efx_Synthfilter->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_lfotype(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_lfotype_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_freq_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_freq(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_freq_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_dpth_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_dpth(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_dpth_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_phase_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(11,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_phase(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_phase_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_fb_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(7,(int)(o->value()+64));
+}
+void RKRGUI::cb_synthfilter_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_fb_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_LR_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_LR(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_LR_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_pan_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_pan_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_stdf_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_stdf(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_stdf_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_stages_i(Fl_Counter* o, void*) {
+  rkr->efx_Synthfilter->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_stages(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_stages_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_hyper_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Synthfilter->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_hyper(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_hyper_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_subs_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Synthfilter->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_subs(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_subs_i(o,v);
 }
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
@@ -5125,7 +5280,7 @@ void RKRGUI::cb_OK(Fl_Button* o, void* v) {
 }
 
 Fl_Double_Window* RKRGUI::make_window() {
-  { Principal = new Fl_Double_Window(800, 599);
+  { Principal = new Fl_Double_Window(800, 600);
     Principal->box(FL_DOWN_BOX);
     Principal->color((Fl_Color)FL_FOREGROUND_COLOR);
     Principal->callback((Fl_Callback*)cb_Principal, (void*)(this));
@@ -10262,58 +10417,24 @@ R average.");
         shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shuffle_preset->menu(menu_shuffle_preset);
       } // Fl_Choice* shuffle_preset
-      { shuffle_volL = new SliderW(375, 260, 100, 10, "L.Gain");
-        shuffle_volL->type(5);
-        shuffle_volL->box(FL_FLAT_BOX);
-        shuffle_volL->color((Fl_Color)178);
-        shuffle_volL->selection_color((Fl_Color)62);
-        shuffle_volL->labeltype(FL_NORMAL_LABEL);
-        shuffle_volL->labelfont(0);
-        shuffle_volL->labelsize(10);
-        shuffle_volL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_volL->minimum(-64);
-        shuffle_volL->maximum(64);
-        shuffle_volL->step(1);
-        shuffle_volL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_volL->callback((Fl_Callback*)cb_shuffle_volL);
-        shuffle_volL->align(FL_ALIGN_LEFT);
-        shuffle_volL->when(FL_WHEN_CHANGED);
-      } // SliderW* shuffle_volL
-      { shuffle_volM = new SliderW(375, 290, 100, 10, "M.Gain");
-        shuffle_volM->type(5);
-        shuffle_volM->box(FL_FLAT_BOX);
-        shuffle_volM->color((Fl_Color)178);
-        shuffle_volM->selection_color((Fl_Color)62);
-        shuffle_volM->labeltype(FL_NORMAL_LABEL);
-        shuffle_volM->labelfont(0);
-        shuffle_volM->labelsize(10);
-        shuffle_volM->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_volM->minimum(-64);
-        shuffle_volM->maximum(64);
-        shuffle_volM->step(1);
-        shuffle_volM->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_volM->callback((Fl_Callback*)cb_shuffle_volM);
-        shuffle_volM->align(FL_ALIGN_LEFT);
-        shuffle_volM->when(FL_WHEN_CHANGED);
-      } // SliderW* shuffle_volM
-      { shuffle_volH = new SliderW(375, 320, 100, 10, "High Gain");
-        shuffle_volH->type(5);
-        shuffle_volH->box(FL_FLAT_BOX);
-        shuffle_volH->color((Fl_Color)178);
-        shuffle_volH->selection_color((Fl_Color)62);
-        shuffle_volH->labeltype(FL_NORMAL_LABEL);
-        shuffle_volH->labelfont(0);
-        shuffle_volH->labelsize(10);
-        shuffle_volH->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_volH->minimum(-64);
-        shuffle_volH->maximum(64);
-        shuffle_volH->step(1);
-        shuffle_volH->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_volH->callback((Fl_Callback*)cb_shuffle_volH);
-        shuffle_volH->align(FL_ALIGN_LEFT);
-        shuffle_volH->when(FL_WHEN_CHANGED);
-      } // SliderW* shuffle_volH
-      { shuffle_cross1 = new SliderW(375, 245, 100, 10, "Low Freq");
+      { shuffle_WD = new SliderW(375, 242, 100, 10, "Wet/Dry");
+        shuffle_WD->type(5);
+        shuffle_WD->box(FL_FLAT_BOX);
+        shuffle_WD->color((Fl_Color)178);
+        shuffle_WD->selection_color((Fl_Color)62);
+        shuffle_WD->labeltype(FL_NORMAL_LABEL);
+        shuffle_WD->labelfont(0);
+        shuffle_WD->labelsize(10);
+        shuffle_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_WD->minimum(-64);
+        shuffle_WD->maximum(64);
+        shuffle_WD->step(1);
+        shuffle_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_WD->callback((Fl_Callback*)cb_shuffle_WD);
+        shuffle_WD->align(FL_ALIGN_LEFT);
+        shuffle_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_WD
+      { shuffle_cross1 = new SliderW(375, 260, 100, 10, "Low Freq");
         shuffle_cross1->type(5);
         shuffle_cross1->box(FL_FLAT_BOX);
         shuffle_cross1->color((Fl_Color)178);
@@ -10330,7 +10451,24 @@ R average.");
         shuffle_cross1->align(FL_ALIGN_LEFT);
         shuffle_cross1->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross1
-      { shuffle_cross2 = new SliderW(375, 275, 100, 10, "Mid Freq");
+      { shuffle_volL = new SliderW(375, 275, 100, 10, "Low Gain");
+        shuffle_volL->type(5);
+        shuffle_volL->box(FL_FLAT_BOX);
+        shuffle_volL->color((Fl_Color)178);
+        shuffle_volL->selection_color((Fl_Color)62);
+        shuffle_volL->labeltype(FL_NORMAL_LABEL);
+        shuffle_volL->labelfont(0);
+        shuffle_volL->labelsize(10);
+        shuffle_volL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volL->minimum(-64);
+        shuffle_volL->maximum(64);
+        shuffle_volL->step(1);
+        shuffle_volL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volL->callback((Fl_Callback*)cb_shuffle_volL);
+        shuffle_volL->align(FL_ALIGN_LEFT);
+        shuffle_volL->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_volL
+      { shuffle_cross2 = new SliderW(375, 290, 100, 10, "M.L. Freq");
         shuffle_cross2->type(5);
         shuffle_cross2->box(FL_FLAT_BOX);
         shuffle_cross2->color((Fl_Color)178);
@@ -10339,15 +10477,32 @@ R average.");
         shuffle_cross2->labelfont(0);
         shuffle_cross2->labelsize(10);
         shuffle_cross2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_cross2->minimum(800);
-        shuffle_cross2->maximum(8000);
+        shuffle_cross2->minimum(600);
+        shuffle_cross2->maximum(4000);
         shuffle_cross2->step(1);
         shuffle_cross2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shuffle_cross2->callback((Fl_Callback*)cb_shuffle_cross2);
         shuffle_cross2->align(FL_ALIGN_LEFT);
         shuffle_cross2->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross2
-      { shuffle_cross3 = new SliderW(375, 305, 100, 10, "High Freq");
+      { shuffle_volML = new SliderW(375, 305, 100, 10, "M.L Gain");
+        shuffle_volML->type(5);
+        shuffle_volML->box(FL_FLAT_BOX);
+        shuffle_volML->color((Fl_Color)178);
+        shuffle_volML->selection_color((Fl_Color)62);
+        shuffle_volML->labeltype(FL_NORMAL_LABEL);
+        shuffle_volML->labelfont(0);
+        shuffle_volML->labelsize(10);
+        shuffle_volML->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volML->minimum(-64);
+        shuffle_volML->maximum(64);
+        shuffle_volML->step(1);
+        shuffle_volML->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volML->callback((Fl_Callback*)cb_shuffle_volML);
+        shuffle_volML->align(FL_ALIGN_LEFT);
+        shuffle_volML->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_volML
+      { shuffle_cross3 = new SliderW(375, 320, 100, 10, "M.H. Freq");
         shuffle_cross3->type(5);
         shuffle_cross3->box(FL_FLAT_BOX);
         shuffle_cross3->color((Fl_Color)178);
@@ -10356,16 +10511,280 @@ R average.");
         shuffle_cross3->labelfont(0);
         shuffle_cross3->labelsize(10);
         shuffle_cross3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_cross3->minimum(6000);
-        shuffle_cross3->maximum(26000);
+        shuffle_cross3->minimum(1200);
+        shuffle_cross3->maximum(8000);
         shuffle_cross3->step(1);
         shuffle_cross3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shuffle_cross3->callback((Fl_Callback*)cb_shuffle_cross3);
         shuffle_cross3->align(FL_ALIGN_LEFT);
         shuffle_cross3->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross3
+      { shuffle_volMH = new SliderW(375, 335, 100, 10, "M.L Gain");
+        shuffle_volMH->type(5);
+        shuffle_volMH->box(FL_FLAT_BOX);
+        shuffle_volMH->color((Fl_Color)178);
+        shuffle_volMH->selection_color((Fl_Color)62);
+        shuffle_volMH->labeltype(FL_NORMAL_LABEL);
+        shuffle_volMH->labelfont(0);
+        shuffle_volMH->labelsize(10);
+        shuffle_volMH->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volMH->minimum(-64);
+        shuffle_volMH->maximum(64);
+        shuffle_volMH->step(1);
+        shuffle_volMH->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volMH->callback((Fl_Callback*)cb_shuffle_volMH);
+        shuffle_volMH->align(FL_ALIGN_LEFT);
+        shuffle_volMH->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_volMH
+      { shuffle_cross4 = new SliderW(375, 350, 100, 10, "High Freq");
+        shuffle_cross4->type(5);
+        shuffle_cross4->box(FL_FLAT_BOX);
+        shuffle_cross4->color((Fl_Color)178);
+        shuffle_cross4->selection_color((Fl_Color)62);
+        shuffle_cross4->labeltype(FL_NORMAL_LABEL);
+        shuffle_cross4->labelfont(0);
+        shuffle_cross4->labelsize(10);
+        shuffle_cross4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross4->minimum(6000);
+        shuffle_cross4->maximum(26000);
+        shuffle_cross4->step(1);
+        shuffle_cross4->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_cross4->callback((Fl_Callback*)cb_shuffle_cross4);
+        shuffle_cross4->align(FL_ALIGN_LEFT);
+        shuffle_cross4->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_cross4
+      { shuffle_volH = new SliderW(375, 365, 100, 10, "High Gain");
+        shuffle_volH->type(5);
+        shuffle_volH->box(FL_FLAT_BOX);
+        shuffle_volH->color((Fl_Color)178);
+        shuffle_volH->selection_color((Fl_Color)62);
+        shuffle_volH->labeltype(FL_NORMAL_LABEL);
+        shuffle_volH->labelfont(0);
+        shuffle_volH->labelsize(10);
+        shuffle_volH->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volH->minimum(-64);
+        shuffle_volH->maximum(64);
+        shuffle_volH->step(1);
+        shuffle_volH->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_volH->callback((Fl_Callback*)cb_shuffle_volH);
+        shuffle_volH->align(FL_ALIGN_LEFT);
+        shuffle_volH->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_volH
+      { shuffle_Q = new SliderW(375, 380, 100, 10, "Q");
+        shuffle_Q->type(5);
+        shuffle_Q->box(FL_FLAT_BOX);
+        shuffle_Q->color((Fl_Color)178);
+        shuffle_Q->selection_color((Fl_Color)62);
+        shuffle_Q->labeltype(FL_NORMAL_LABEL);
+        shuffle_Q->labelfont(0);
+        shuffle_Q->labelsize(10);
+        shuffle_Q->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_Q->minimum(-64);
+        shuffle_Q->maximum(64);
+        shuffle_Q->step(1);
+        shuffle_Q->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_Q->callback((Fl_Callback*)cb_shuffle_Q);
+        shuffle_Q->align(FL_ALIGN_LEFT);
+        shuffle_Q->when(FL_WHEN_CHANGED);
+      } // SliderW* shuffle_Q
       SHUFFLE->end();
     } // Fl_Group* SHUFFLE
+    { SYNTHFILTER = new Fl_Group(320, 211, 158, 184);
+      SYNTHFILTER->box(FL_UP_BOX);
+      SYNTHFILTER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      SYNTHFILTER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      SYNTHFILTER->labelfont(1);
+      SYNTHFILTER->user_data((void*)(1));
+      SYNTHFILTER->align(96|FL_ALIGN_INSIDE);
+      SYNTHFILTER->hide();
+      { synthfilter_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        synthfilter_activar->shortcut(0x37);
+        synthfilter_activar->color((Fl_Color)62);
+        synthfilter_activar->selection_color((Fl_Color)1);
+        synthfilter_activar->labelsize(10);
+        synthfilter_activar->callback((Fl_Callback*)cb_synthfilter_activar, (void*)(2));
+        synthfilter_activar->align(68|FL_ALIGN_INSIDE);
+        synthfilter_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* synthfilter_activar
+      { synthfilter_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        synthfilter_preset->down_box(FL_BORDER_BOX);
+        synthfilter_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        synthfilter_preset->labelsize(10);
+        synthfilter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_preset->textsize(10);
+        synthfilter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset);
+        synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        synthfilter_preset->menu(menu_synthfilter_preset);
+      } // Fl_Choice* synthfilter_preset
+      { synthfilter_WD = new SliderW(369, 238, 100, 10, "Wet/Dry");
+        synthfilter_WD->type(5);
+        synthfilter_WD->box(FL_FLAT_BOX);
+        synthfilter_WD->color((Fl_Color)178);
+        synthfilter_WD->selection_color((Fl_Color)62);
+        synthfilter_WD->labeltype(FL_NORMAL_LABEL);
+        synthfilter_WD->labelfont(0);
+        synthfilter_WD->labelsize(10);
+        synthfilter_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_WD->minimum(-64);
+        synthfilter_WD->maximum(63);
+        synthfilter_WD->step(1);
+        synthfilter_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_WD->callback((Fl_Callback*)cb_synthfilter_WD);
+        synthfilter_WD->align(FL_ALIGN_LEFT);
+        synthfilter_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_WD
+      { Fl_Choice* o = synthfilter_lfotype = new Fl_Choice(395, 252, 72, 16, "LFO Type");
+        synthfilter_lfotype->down_box(FL_BORDER_BOX);
+        synthfilter_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        synthfilter_lfotype->labelsize(10);
+        synthfilter_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_lfotype->textsize(10);
+        synthfilter_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
+        o->menu(menu_chorus_lfotype);
+      } // Fl_Choice* synthfilter_lfotype
+      { synthfilter_freq = new SliderW(368, 273, 100, 10, "Tempo");
+        synthfilter_freq->type(5);
+        synthfilter_freq->box(FL_FLAT_BOX);
+        synthfilter_freq->color((Fl_Color)178);
+        synthfilter_freq->selection_color((Fl_Color)62);
+        synthfilter_freq->labeltype(FL_NORMAL_LABEL);
+        synthfilter_freq->labelfont(0);
+        synthfilter_freq->labelsize(10);
+        synthfilter_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_freq->minimum(1);
+        synthfilter_freq->maximum(600);
+        synthfilter_freq->step(1);
+        synthfilter_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_freq->callback((Fl_Callback*)cb_synthfilter_freq);
+        synthfilter_freq->align(FL_ALIGN_LEFT);
+        synthfilter_freq->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_freq
+      { synthfilter_dpth = new SliderW(368, 297, 100, 10, "Width");
+        synthfilter_dpth->type(5);
+        synthfilter_dpth->box(FL_FLAT_BOX);
+        synthfilter_dpth->color((Fl_Color)178);
+        synthfilter_dpth->selection_color((Fl_Color)62);
+        synthfilter_dpth->labeltype(FL_NORMAL_LABEL);
+        synthfilter_dpth->labelfont(0);
+        synthfilter_dpth->labelsize(10);
+        synthfilter_dpth->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_dpth->maximum(127);
+        synthfilter_dpth->step(1);
+        synthfilter_dpth->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_dpth->callback((Fl_Callback*)cb_synthfilter_dpth);
+        synthfilter_dpth->align(FL_ALIGN_LEFT);
+        synthfilter_dpth->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_dpth
+      { synthfilter_phase = new SliderW(369, 285, 100, 10, "Depth");
+        synthfilter_phase->type(5);
+        synthfilter_phase->box(FL_FLAT_BOX);
+        synthfilter_phase->color((Fl_Color)178);
+        synthfilter_phase->selection_color((Fl_Color)62);
+        synthfilter_phase->labeltype(FL_NORMAL_LABEL);
+        synthfilter_phase->labelfont(0);
+        synthfilter_phase->labelsize(10);
+        synthfilter_phase->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_phase->maximum(127);
+        synthfilter_phase->step(1);
+        synthfilter_phase->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_phase->callback((Fl_Callback*)cb_synthfilter_phase);
+        synthfilter_phase->align(FL_ALIGN_LEFT);
+        synthfilter_phase->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_phase
+      { synthfilter_fb = new SliderW(368, 309, 100, 10, "Fb");
+        synthfilter_fb->type(5);
+        synthfilter_fb->box(FL_FLAT_BOX);
+        synthfilter_fb->color((Fl_Color)178);
+        synthfilter_fb->selection_color((Fl_Color)62);
+        synthfilter_fb->labeltype(FL_NORMAL_LABEL);
+        synthfilter_fb->labelfont(0);
+        synthfilter_fb->labelsize(10);
+        synthfilter_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_fb->minimum(-64);
+        synthfilter_fb->maximum(64);
+        synthfilter_fb->step(1);
+        synthfilter_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_fb->callback((Fl_Callback*)cb_synthfilter_fb);
+        synthfilter_fb->align(FL_ALIGN_LEFT);
+        synthfilter_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_fb
+      { synthfilter_LR = new SliderW(368, 322, 100, 10, "Mismatch");
+        synthfilter_LR->type(5);
+        synthfilter_LR->box(FL_FLAT_BOX);
+        synthfilter_LR->color((Fl_Color)178);
+        synthfilter_LR->selection_color((Fl_Color)62);
+        synthfilter_LR->labeltype(FL_NORMAL_LABEL);
+        synthfilter_LR->labelfont(0);
+        synthfilter_LR->labelsize(7);
+        synthfilter_LR->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_LR->maximum(100);
+        synthfilter_LR->step(1);
+        synthfilter_LR->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_LR->callback((Fl_Callback*)cb_synthfilter_LR);
+        synthfilter_LR->align(FL_ALIGN_LEFT);
+        synthfilter_LR->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_LR
+      { synthfilter_pan = new SliderW(368, 333, 100, 10, "Distort");
+        synthfilter_pan->type(5);
+        synthfilter_pan->box(FL_FLAT_BOX);
+        synthfilter_pan->color((Fl_Color)178);
+        synthfilter_pan->selection_color((Fl_Color)62);
+        synthfilter_pan->labeltype(FL_NORMAL_LABEL);
+        synthfilter_pan->labelfont(0);
+        synthfilter_pan->labelsize(10);
+        synthfilter_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_pan->maximum(100);
+        synthfilter_pan->step(1);
+        synthfilter_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_pan->callback((Fl_Callback*)cb_synthfilter_pan);
+        synthfilter_pan->align(FL_ALIGN_LEFT);
+        synthfilter_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_pan
+      { synthfilter_stdf = new SliderW(369, 345, 100, 10, "St.df");
+        synthfilter_stdf->type(5);
+        synthfilter_stdf->box(FL_FLAT_BOX);
+        synthfilter_stdf->color((Fl_Color)178);
+        synthfilter_stdf->selection_color((Fl_Color)62);
+        synthfilter_stdf->labeltype(FL_NORMAL_LABEL);
+        synthfilter_stdf->labelfont(0);
+        synthfilter_stdf->labelsize(10);
+        synthfilter_stdf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_stdf->maximum(127);
+        synthfilter_stdf->step(1);
+        synthfilter_stdf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_stdf->callback((Fl_Callback*)cb_synthfilter_stdf);
+        synthfilter_stdf->align(FL_ALIGN_LEFT);
+        synthfilter_stdf->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_stdf
+      { synthfilter_stages = new Fl_Counter(400, 362, 52, 12, "Stages");
+        synthfilter_stages->type(1);
+        synthfilter_stages->box(FL_THIN_UP_BOX);
+        synthfilter_stages->labelsize(10);
+        synthfilter_stages->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_stages->minimum(1);
+        synthfilter_stages->maximum(12);
+        synthfilter_stages->step(1);
+        synthfilter_stages->value(1);
+        synthfilter_stages->textsize(9);
+        synthfilter_stages->callback((Fl_Callback*)cb_synthfilter_stages);
+        synthfilter_stages->align(FL_ALIGN_LEFT);
+      } // Fl_Counter* synthfilter_stages
+      { synthfilter_hyper = new Fl_Check_Button(395, 376, 60, 15, "Hyper");
+        synthfilter_hyper->down_box(FL_BORDER_BOX);
+        synthfilter_hyper->labelsize(10);
+        synthfilter_hyper->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_hyper->callback((Fl_Callback*)cb_synthfilter_hyper, (void*)(2));
+      } // Fl_Check_Button* synthfilter_hyper
+      { synthfilter_subs = new Fl_Check_Button(330, 376, 60, 15, "Subtract");
+        synthfilter_subs->down_box(FL_BORDER_BOX);
+        synthfilter_subs->labelsize(10);
+        synthfilter_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
+      } // Fl_Check_Button* synthfilter_subs
+      SYNTHFILTER->end();
+    } // Fl_Group* SYNTHFILTER
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -12016,6 +12435,20 @@ expander_HPF->value(rkr->lv[26][5]);
 expander_threshold->value(rkr->lv[26][0]);
 expander_activar->value(rkr->Expander_Bypass);
 
+//Shuffle
+
+shuffle_volL->value(rkr->lv[27][1]);
+shuffle_volML->value(rkr->lv[27][2]);
+shuffle_volMH->value(rkr->lv[27][3]);
+shuffle_volH->value(rkr->lv[27][4]);
+shuffle_cross1->value(rkr->lv[27][5]);
+shuffle_cross2->value(rkr->lv[27][6]);
+shuffle_cross3->value(rkr->lv[27][7]);
+shuffle_cross4->value(rkr->lv[27][8]);
+shuffle_Q->value(rkr->lv[27][9]);
+shuffle_WD->value(rkr->lv[27][0]-64);
+shuffle_activar->value(rkr->Shuffle_Bypass);
+
 
 
 reordena();
@@ -12283,6 +12716,11 @@ for (i=1; i<=t; i++)
         case 26:
         SHUFFLE->hide();
         break;
+        case 27:
+        SYNTHFILTER->hide();
+        break;
+        
+        
       }
       
     }
@@ -12539,6 +12977,13 @@ switch (rkr->efx_order[i])
        shuffle_activar->shortcut(s[i]);
        SHUFFLE->show();
        if(rkr->Shuffle_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+
+     case 27:
+       SYNTHFILTER->position(x[i],y[i]);
+       synthfilter_activar->shortcut(s[i]);
+       SYNTHFILTER->show();
+       if(rkr->Synthfilter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
 
  }
@@ -13549,7 +13994,7 @@ MBDIST->image(InOut->image());
 ARPIE->image(InOut->image());
 EXPANDER->image(InOut->image());
 SHUFFLE->image(InOut->image());
-
+SYNTHFILTER->image(InOut->image());
 
 Presets->image(InOut->image());
 Tuner->image(InOut->image());

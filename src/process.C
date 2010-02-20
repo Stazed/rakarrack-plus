@@ -147,6 +147,7 @@ RKR::RKR ()
   efx_Arpie = new Arpie(efxoutl,efxoutr);
   efx_Expander = new Expander(efxoutl,efxoutr);
   efx_Shuffle = new Shuffle(efxoutl,efxoutr);
+  efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
@@ -166,7 +167,7 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 27;
+  NumEffects = 28;
 
   {
     static const char *los_names[] =
@@ -174,7 +175,7 @@ RKR::RKR ()
       "Phaser", "Flanger", "Reverb",
       "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
       "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",
-      "DistBand", "Arpie", "Expander", "Shuffle"
+      "DistBand", "Arpie", "Expander", "Shuffle", "Synthfilter"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -698,6 +699,7 @@ RKR::cleanup_efx ()
   efx_Arpie->cleanup(); 
   efx_Expander->cleanup();
   efx_Shuffle->cleanup();
+  efx_Synthfilter->cleanup();
   RC->cleanup ();
 };
 
@@ -968,7 +970,15 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Shuffle_Bypass)
                 {
                   efx_Shuffle->out(efxoutl, efxoutr);
-		  Vol2_Efx();
+		  Vol_Efx(26,efx_Shuffle->outvolume);
+                }
+              break;  
+
+	     case 27:
+              if (Synthfilter_Bypass)
+                {
+                  efx_Synthfilter->out(efxoutl, efxoutr);
+		  Vol_Efx(27,efx_Synthfilter->outvolume);
                 }
               break;  
 
