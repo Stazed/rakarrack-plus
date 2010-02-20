@@ -31,7 +31,6 @@
 #define SYNTHFILTER_H
 #include "global.h"
 #include "EffectLFO.h"
-#include "Expander.h"
 
 #define MAX_SFILTER_STAGES 12
 
@@ -53,7 +52,6 @@ public:
 private:
   //Phaser parameters
     EffectLFO lfo;		//Phaser modulator
-    Expander envelope;
   int Pvolume;        //Used in Process.C to set wet/dry mix
   int Pdistortion;    //Model distortion added by FET element
   int Pwidth;		//Phaser width (LFO amplitude)
@@ -62,32 +60,25 @@ private:
   int Plpstages;	//Number of first-order Low-Pass stages
   int Phpstages;
   int Poutsub;	//if I wish to subtract the output instead of the adding it
-  int Phyper;		//lfo^2 -- converts tri into hyper-sine
   int Pdepth;         //Depth of phaser sweep
-  int Pbarber;         //Enable barber pole phasing
-
+ 
   //Control parameters
   void setvolume (int Pvolume);
   void setdistortion (int Pdistortion);
   void setwidth (int Pwidth);
   void setfb (int Pfb);
-  void setoffset (int Poffset);
-  void setstages (int Pstages);
   void setdepth (int Pdepth);
 
   //Internal Variables
-  bool barber;			//Barber pole phasing flag
   REALTYPE distortion, fb, width, offsetpct, fbl, fbr, depth;
   REALTYPE *lxn1, *lyn1,*rxn1, *ryn1, *offset;
-  REALTYPE oldlgain, oldrgain;
+  REALTYPE oldlgain, oldrgain, inv_period;
   
-  REALTYPE mis;
+  REALTYPE delta;
   REALTYPE Rmin;	// 2N5457 typical on resistance at Vgs = 0
   REALTYPE Rmax;	// Resistor parallel to FET
-  REALTYPE Rmx;		// Rmin/Rmax to avoid division in loop
-  REALTYPE Rconst;      // Handle parallel resistor relationship
-  REALTYPE C;	        // Capacitor
-  REALTYPE CFs;		// A constant derived from capacitor and resistor relationships
+  REALTYPE Clp;	        // Capacitor
+  REALTYPE Chp;		// A constant derived from capacitor and resistor relationships
 
 
 };

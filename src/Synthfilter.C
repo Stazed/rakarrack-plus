@@ -45,12 +45,16 @@ Synthfilter::Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
+
   ly1hp = new REALTYPE[MAX_SFILTER_STAGES];
   lyn1 = new REALTYPE[MAX_SFILTER_STAGES];
   ry1hp = new REALTYPE[MAX_SFILTER_STAGES];
   ryn1 = new REALTYPE[MAX_SFILTER_STAGES];
+  Plpstages = 4;
+  Phpstages = 2;
   
-  
+  inv_period = 1.0f/((float) PERIOD);
+
 
   offset = new REALTYPE[12];	//model mismatch between JFET devices
   offset[0] = -0.2509303f;
@@ -65,16 +69,13 @@ Synthfilter::Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   offset[9] = 0.3486182f;
   offset[10] = 0.2762545f;
   offset[11] = 0.5215785f;
+
    
-   barber = 0;  //Deactivate barber pole phasing by default
-   
-   mis = 1.0f/((float) SAMPLE_RATE);
+   delta = 1.0f/((float) SAMPLE_RATE);
    Rmin = 125.0f;	// 2N5457 typical on resistance at Vgs = 0
    Rmax = 25000.0f;	// Resistor parallel to FET
-   Rmx = Rmin/Rmax;
-   Rconst = 1.0f/((float) SAMPLE_RATE);  // Handle parallel resistor relationship
-   C = 0.00000005f;	     // 50 nF
-   CFs = (float) 2.0f*(float)SAMPLE_RATE*C;
+   Chp = 0.00000005f;	     // 50 nF
+   Clp = 0.00000005f;
 
 
   Ppreset = 0;
@@ -135,44 +136,54 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
     lmod*=lmod;
     rmod*=rmod;
 
-
+      REALTYPE xl = (lmod  - oldlgain) * inv_period;
+      REALTYPE xr = (rmod - oldrgain)*inv_period;
+      REALTYPE gl = oldlgain;	// Linear interpolation between LFO samples
+      REALTYPE gr = oldrgain;
+           
   for (i = 0; i < PERIOD; i++)
     {
-      REALTYPE x = (REALTYPE) i / (float)PERIOD;
-      REALTYPE gl = (lmod  - oldlgain) * x + oldlgain;	// Linear interpolation between LFO samples
-      REALTYPE gr = (rmod - oldrgain) * x + oldrgain;
+
       REALTYPE lxn = smpsl[i];
       REALTYPE rxn = smpsr[i];
-
-
-	if (barber) {
-	gl = fmodf((gl + 0.25f) , ONE_);
-	gr = fmodf((gr + 0.25f) , ONE_);
-	 };
-
+      gl += xl;
+      gr += xr;   //linear interpolation of LFO
     
-      //Left channel
-       for (j = 0; j < Pstages; j++)
+      //Left channel Low Pass Filter
+       for (j = 0; j < Plpstages; j++)
 	{			//Phasing
 	d = 1.0f + fabs(lxn)*distortion;  //This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
 
-	lgain = mis/( (Rmax * gl * d + Rmin) * C + mis);
-//alpha = lgain = dt/(RC + dt)
+	lgain = delta/( (Rmax * gl * d + Rmin) * C + delta);
+//low pass filter:  alpha*x[n] + (1-alpha)*y[n-1] // alpha = lgain = dt/(RC + dt)
 	  lyn1[j] = lgain * lxn + (1.0f - lgain) * lyn1[j];
 	  lyn1[j] += DENORMAL_GUARD;
-	  //ly1hp[j] = lxn;
 	  lxn = lyn1[j];
 	if (j==1) lxn += fbl;  //Insert feedback after first filter stage
 
 	};
 	
-      //Right channel
-       for (j = 0; j < Pstages; j++)
+      //Left channel High Pass Filter
+       for (j = 0; j < Phpstages; j++)
 	{			//Phasing
+	d = 1.0f + fabs(lxn)*distortion;  //This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
+
+	lgain = delta/( (Rmax * gl * d + Rmin) * C + delta);
+//high pass filter:  alpha*x[n] + (1-alpha)*y[n-1] // alpha = lgain = dt/(RC + dt)
+	  //lyn1[j] = lgain * lxn + (1.0f - lgain) * lyn1[j];
+	  lyn1[j] += DENORMAL_GUARD;
+	  lxn = lyn1[j];
+	if (j==1) lxn += fbl;  //Insert feedback after first filter stage
+
+	};	
+	
+	
+      //Right channel Low Pass Filter
+       for (j = 0; j < Plpstages; j++)
+	{			
 	d = 1.0f + fabs(rxn)*distortion;  //This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
 
-	rgain = mis/((Rmax*gr*d + Rmin)*C + mis);
-//alpha = rgain = dt/(RC + dt)
+	rgain = delta/((Rmax*gr*d + Rmin)*C + delta);
 	  ryn1[j] = rgain * rxn + (1.0f - rgain) * ryn1[j];
 	  ryn1[j] += DENORMAL_GUARD;
 	  //ry1hp[j] = rxn;
@@ -332,8 +343,6 @@ Synthfilter::changepar (int npar, int value)
     case 4:
       lfo.PLFOtype = value;
       lfo.updateparams ();
-      barber = 0;
-      if (value == 2) barber = 1;
       break;
     case 5:
       lfo.Pstereo = value;
@@ -346,10 +355,16 @@ Synthfilter::changepar (int npar, int value)
       setfb (value);
       break;
     case 8:
-      setstages (value);
+      Plpstages = value;
+      if (Plpstages >= MAX_SFILTER_STAGES)
+      Pstages = MAX_SFILTER_STAGES ;
+      cleanup ();
       break;
     case 9:
-      setoffset (value);
+     Phpstages = value;
+      if (Phpstages >= MAX_SFILTER_STAGES)
+      Pstages = MAX_SFILTER_STAGES ;
+      cleanup ();
       break;
     case 10:
       if (value > 1)
