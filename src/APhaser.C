@@ -76,7 +76,7 @@ Analog_Phaser::Analog_Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
    Rconst = 1.0f + Rmx;  // Handle parallel resistor relationship
    C = 0.00000005f;	     // 50 nF
    CFs = (float) 2.0f*(float)SAMPLE_RATE*C;
-   invperiod = 1.0f/(float) PERIOD;
+   invperiod = 1.0f / (float) PERIOD;
 
 
   Ppreset = 0;
@@ -132,8 +132,9 @@ Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
   else if (rmod < ZERO_)
     rmod = ZERO_;
 
-    rdiff = (rmod - oldrgain) / invperiod;
-    ldiff = (lmod - oldlgain) / invperiod;
+    rdiff = (rmod - oldrgain) * invperiod;
+    ldiff = (lmod - oldlgain) * invperiod;
+
     gl = oldlgain;
     gr = oldrgain;
     
