@@ -4337,17 +4337,20 @@ void RKRGUI::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_synthfilter_preset_i(Fl_Choice* o, void*) {
   rkr->efx_APhaser->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
-synthfilter_pan->value(rkr->efx_Synthfilter->getpar(1));
+synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
 synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
 synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
-synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(6));
-synthfilter_stages->value(rkr->efx_Synthfilter->getpar(8));
-synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7)-64);
-synthfilter_LR->value(rkr->efx_Synthfilter->getpar(9));
+synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
+synthfilter_Lstages->value(rkr->efx_Synthfilter->getpar(8));
+synthfilter_Hstages->value(rkr->efx_Synthfilter->getpar(9));
+synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
+synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
 synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
-synthfilter_phase->value(rkr->efx_Synthfilter->getpar(11));
-synthfilter_hyper->value(rkr->efx_Synthfilter->getpar(12));
+synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
+synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
+synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
 }
 void RKRGUI::cb_synthfilter_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_preset_i(o,v);
@@ -4370,11 +4373,11 @@ void RKRGUI::cb_synthfilter_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_WD_i(o,v);
 }
 
-void RKRGUI::cb_synthfilter_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Synthfilter->changepar(4,(int)o->value());
+void RKRGUI::cb_synthfilter_Distort_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(1,(int)o->value());
 }
-void RKRGUI::cb_synthfilter_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_lfotype_i(o,v);
+void RKRGUI::cb_synthfilter_Distort(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Distort_i(o,v);
 }
 
 void RKRGUI::cb_synthfilter_freq_i(SliderW* o, void*) {
@@ -4384,39 +4387,18 @@ void RKRGUI::cb_synthfilter_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_freq_i(o,v);
 }
 
-void RKRGUI::cb_synthfilter_dpth_i(SliderW* o, void*) {
-  rkr->efx_Synthfilter->changepar(6,(int)o->value());
+void RKRGUI::cb_synthfilter_lfotype_i(Fl_Choice* o, void*) {
+  rkr->efx_Synthfilter->changepar(4,(int)o->value());
 }
-void RKRGUI::cb_synthfilter_dpth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_dpth_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_phase_i(SliderW* o, void*) {
-  rkr->efx_Synthfilter->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_phase(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_phase_i(o,v);
+void RKRGUI::cb_synthfilter_lfotype(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_lfotype_i(o,v);
 }
 
-void RKRGUI::cb_synthfilter_fb_i(SliderW* o, void*) {
-  rkr->efx_Synthfilter->changepar(7,(int)(o->value()+64));
+void RKRGUI::cb_synthfilter_subs_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Synthfilter->changepar(10,(int)o->value());
 }
-void RKRGUI::cb_synthfilter_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_fb_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_LR_i(SliderW* o, void*) {
-  rkr->efx_Synthfilter->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_LR(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_LR_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_pan_i(SliderW* o, void*) {
-  rkr->efx_Synthfilter->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_pan_i(o,v);
+void RKRGUI::cb_synthfilter_subs(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_subs_i(o,v);
 }
 
 void RKRGUI::cb_synthfilter_stdf_i(SliderW* o, void*) {
@@ -4426,25 +4408,67 @@ void RKRGUI::cb_synthfilter_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_stdf_i(o,v);
 }
 
-void RKRGUI::cb_synthfilter_stages_i(Fl_Counter* o, void*) {
+void RKRGUI::cb_synthfilter_width_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_width(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_width_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_fb_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_fb_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_Lstages_i(Fl_Counter* o, void*) {
   rkr->efx_Synthfilter->changepar(8,(int)o->value());
 }
-void RKRGUI::cb_synthfilter_stages(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_stages_i(o,v);
+void RKRGUI::cb_synthfilter_Lstages(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Lstages_i(o,v);
 }
 
-void RKRGUI::cb_synthfilter_hyper_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Synthfilter->changepar(12,(int)o->value());
+void RKRGUI::cb_synthfilter_Hstages_i(Fl_Counter* o, void*) {
+  rkr->efx_Synthfilter->changepar(9,(int)o->value());
 }
-void RKRGUI::cb_synthfilter_hyper(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_hyper_i(o,v);
+void RKRGUI::cb_synthfilter_Hstages(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Hstages_i(o,v);
 }
 
-void RKRGUI::cb_synthfilter_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Synthfilter->changepar(10,(int)o->value());
+void RKRGUI::cb_synthfilter_dpth_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(11,(int)o->value());
 }
-void RKRGUI::cb_synthfilter_subs(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_subs_i(o,v);
+void RKRGUI::cb_synthfilter_dpth(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_dpth_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_EnvSens_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(12,(int)(o->value()));
+}
+void RKRGUI::cb_synthfilter_EnvSens(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_EnvSens_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_ATime_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(13,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_ATime(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_ATime_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_RTime_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(14,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_RTime(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_RTime_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_Offset_i(SliderW* o, void*) {
+  rkr->efx_Synthfilter->changepar(15,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_Offset(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Offset_i(o,v);
 }
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
@@ -10631,7 +10655,7 @@ R average.");
         synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         synthfilter_preset->menu(menu_synthfilter_preset);
       } // Fl_Choice* synthfilter_preset
-      { synthfilter_WD = new SliderW(369, 238, 100, 10, "Wet/Dry");
+      { synthfilter_WD = new SliderW(369, 236, 100, 10, "Wet/Dry");
         synthfilter_WD->type(5);
         synthfilter_WD->box(FL_FLAT_BOX);
         synthfilter_WD->color((Fl_Color)178);
@@ -10648,17 +10672,23 @@ R average.");
         synthfilter_WD->align(FL_ALIGN_LEFT);
         synthfilter_WD->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_WD
-      { Fl_Choice* o = synthfilter_lfotype = new Fl_Choice(395, 252, 72, 16, "LFO Type");
-        synthfilter_lfotype->down_box(FL_BORDER_BOX);
-        synthfilter_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
-        synthfilter_lfotype->labelsize(10);
-        synthfilter_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_lfotype->textsize(10);
-        synthfilter_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
-        o->menu(menu_chorus_lfotype);
-      } // Fl_Choice* synthfilter_lfotype
-      { synthfilter_freq = new SliderW(368, 273, 100, 10, "Tempo");
+      { synthfilter_Distort = new SliderW(369, 248, 100, 10, "Distort");
+        synthfilter_Distort->type(5);
+        synthfilter_Distort->box(FL_FLAT_BOX);
+        synthfilter_Distort->color((Fl_Color)178);
+        synthfilter_Distort->selection_color((Fl_Color)62);
+        synthfilter_Distort->labeltype(FL_NORMAL_LABEL);
+        synthfilter_Distort->labelfont(0);
+        synthfilter_Distort->labelsize(10);
+        synthfilter_Distort->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_Distort->maximum(127);
+        synthfilter_Distort->step(1);
+        synthfilter_Distort->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_Distort->callback((Fl_Callback*)cb_synthfilter_Distort);
+        synthfilter_Distort->align(FL_ALIGN_LEFT);
+        synthfilter_Distort->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_Distort
+      { synthfilter_freq = new SliderW(369, 260, 100, 10, "Tempo");
         synthfilter_freq->type(5);
         synthfilter_freq->box(FL_FLAT_BOX);
         synthfilter_freq->color((Fl_Color)178);
@@ -10675,39 +10705,55 @@ R average.");
         synthfilter_freq->align(FL_ALIGN_LEFT);
         synthfilter_freq->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_freq
-      { synthfilter_dpth = new SliderW(368, 297, 100, 10, "Width");
-        synthfilter_dpth->type(5);
-        synthfilter_dpth->box(FL_FLAT_BOX);
-        synthfilter_dpth->color((Fl_Color)178);
-        synthfilter_dpth->selection_color((Fl_Color)62);
-        synthfilter_dpth->labeltype(FL_NORMAL_LABEL);
-        synthfilter_dpth->labelfont(0);
-        synthfilter_dpth->labelsize(10);
-        synthfilter_dpth->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_dpth->maximum(127);
-        synthfilter_dpth->step(1);
-        synthfilter_dpth->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_dpth->callback((Fl_Callback*)cb_synthfilter_dpth);
-        synthfilter_dpth->align(FL_ALIGN_LEFT);
-        synthfilter_dpth->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_dpth
-      { synthfilter_phase = new SliderW(369, 285, 100, 10, "Depth");
-        synthfilter_phase->type(5);
-        synthfilter_phase->box(FL_FLAT_BOX);
-        synthfilter_phase->color((Fl_Color)178);
-        synthfilter_phase->selection_color((Fl_Color)62);
-        synthfilter_phase->labeltype(FL_NORMAL_LABEL);
-        synthfilter_phase->labelfont(0);
-        synthfilter_phase->labelsize(10);
-        synthfilter_phase->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_phase->maximum(127);
-        synthfilter_phase->step(1);
-        synthfilter_phase->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_phase->callback((Fl_Callback*)cb_synthfilter_phase);
-        synthfilter_phase->align(FL_ALIGN_LEFT);
-        synthfilter_phase->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_phase
-      { synthfilter_fb = new SliderW(368, 309, 100, 10, "Fb");
+      { Fl_Choice* o = synthfilter_lfotype = new Fl_Choice(374, 271, 52, 13, "LFO Type");
+        synthfilter_lfotype->down_box(FL_BORDER_BOX);
+        synthfilter_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        synthfilter_lfotype->labelsize(10);
+        synthfilter_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_lfotype->textsize(10);
+        synthfilter_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
+        o->menu(menu_chorus_lfotype);
+      } // Fl_Choice* synthfilter_lfotype
+      { synthfilter_subs = new Fl_Check_Button(429, 270, 46, 15, "Subtr.");
+        synthfilter_subs->down_box(FL_BORDER_BOX);
+        synthfilter_subs->labelsize(10);
+        synthfilter_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
+      } // Fl_Check_Button* synthfilter_subs
+      { synthfilter_stdf = new SliderW(369, 286, 100, 10, "St.df");
+        synthfilter_stdf->type(5);
+        synthfilter_stdf->box(FL_FLAT_BOX);
+        synthfilter_stdf->color((Fl_Color)178);
+        synthfilter_stdf->selection_color((Fl_Color)62);
+        synthfilter_stdf->labeltype(FL_NORMAL_LABEL);
+        synthfilter_stdf->labelfont(0);
+        synthfilter_stdf->labelsize(10);
+        synthfilter_stdf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_stdf->maximum(127);
+        synthfilter_stdf->step(1);
+        synthfilter_stdf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_stdf->callback((Fl_Callback*)cb_synthfilter_stdf);
+        synthfilter_stdf->align(FL_ALIGN_LEFT);
+        synthfilter_stdf->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_stdf
+      { synthfilter_width = new SliderW(369, 298, 100, 10, "Width");
+        synthfilter_width->type(5);
+        synthfilter_width->box(FL_FLAT_BOX);
+        synthfilter_width->color((Fl_Color)178);
+        synthfilter_width->selection_color((Fl_Color)62);
+        synthfilter_width->labeltype(FL_NORMAL_LABEL);
+        synthfilter_width->labelfont(0);
+        synthfilter_width->labelsize(10);
+        synthfilter_width->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_width->maximum(127);
+        synthfilter_width->step(1);
+        synthfilter_width->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_width->callback((Fl_Callback*)cb_synthfilter_width);
+        synthfilter_width->align(FL_ALIGN_LEFT);
+        synthfilter_width->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_width
+      { synthfilter_fb = new SliderW(369, 310, 100, 10, "Fb");
         synthfilter_fb->type(5);
         synthfilter_fb->box(FL_FLAT_BOX);
         synthfilter_fb->color((Fl_Color)178);
@@ -10724,79 +10770,113 @@ R average.");
         synthfilter_fb->align(FL_ALIGN_LEFT);
         synthfilter_fb->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_fb
-      { synthfilter_LR = new SliderW(368, 322, 100, 10, "Mismatch");
-        synthfilter_LR->type(5);
-        synthfilter_LR->box(FL_FLAT_BOX);
-        synthfilter_LR->color((Fl_Color)178);
-        synthfilter_LR->selection_color((Fl_Color)62);
-        synthfilter_LR->labeltype(FL_NORMAL_LABEL);
-        synthfilter_LR->labelfont(0);
-        synthfilter_LR->labelsize(7);
-        synthfilter_LR->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_LR->maximum(100);
-        synthfilter_LR->step(1);
-        synthfilter_LR->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_LR->callback((Fl_Callback*)cb_synthfilter_LR);
-        synthfilter_LR->align(FL_ALIGN_LEFT);
-        synthfilter_LR->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_LR
-      { synthfilter_pan = new SliderW(368, 333, 100, 10, "Distort");
-        synthfilter_pan->type(5);
-        synthfilter_pan->box(FL_FLAT_BOX);
-        synthfilter_pan->color((Fl_Color)178);
-        synthfilter_pan->selection_color((Fl_Color)62);
-        synthfilter_pan->labeltype(FL_NORMAL_LABEL);
-        synthfilter_pan->labelfont(0);
-        synthfilter_pan->labelsize(10);
-        synthfilter_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_pan->maximum(100);
-        synthfilter_pan->step(1);
-        synthfilter_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_pan->callback((Fl_Callback*)cb_synthfilter_pan);
-        synthfilter_pan->align(FL_ALIGN_LEFT);
-        synthfilter_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_pan
-      { synthfilter_stdf = new SliderW(369, 345, 100, 10, "St.df");
-        synthfilter_stdf->type(5);
-        synthfilter_stdf->box(FL_FLAT_BOX);
-        synthfilter_stdf->color((Fl_Color)178);
-        synthfilter_stdf->selection_color((Fl_Color)62);
-        synthfilter_stdf->labeltype(FL_NORMAL_LABEL);
-        synthfilter_stdf->labelfont(0);
-        synthfilter_stdf->labelsize(10);
-        synthfilter_stdf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_stdf->maximum(127);
-        synthfilter_stdf->step(1);
-        synthfilter_stdf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_stdf->callback((Fl_Callback*)cb_synthfilter_stdf);
-        synthfilter_stdf->align(FL_ALIGN_LEFT);
-        synthfilter_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_stdf
-      { synthfilter_stages = new Fl_Counter(400, 362, 52, 12, "Stages");
-        synthfilter_stages->type(1);
-        synthfilter_stages->box(FL_THIN_UP_BOX);
-        synthfilter_stages->labelsize(10);
-        synthfilter_stages->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_stages->minimum(1);
-        synthfilter_stages->maximum(12);
-        synthfilter_stages->step(1);
-        synthfilter_stages->value(1);
-        synthfilter_stages->textsize(9);
-        synthfilter_stages->callback((Fl_Callback*)cb_synthfilter_stages);
-        synthfilter_stages->align(FL_ALIGN_LEFT);
-      } // Fl_Counter* synthfilter_stages
-      { synthfilter_hyper = new Fl_Check_Button(395, 376, 60, 15, "Hyper");
-        synthfilter_hyper->down_box(FL_BORDER_BOX);
-        synthfilter_hyper->labelsize(10);
-        synthfilter_hyper->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_hyper->callback((Fl_Callback*)cb_synthfilter_hyper, (void*)(2));
-      } // Fl_Check_Button* synthfilter_hyper
-      { synthfilter_subs = new Fl_Check_Button(330, 376, 60, 15, "Subtract");
-        synthfilter_subs->down_box(FL_BORDER_BOX);
-        synthfilter_subs->labelsize(10);
-        synthfilter_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
-      } // Fl_Check_Button* synthfilter_subs
+      { synthfilter_Lstages = new Fl_Counter(368, 322, 28, 11, "LPF Stg.");
+        synthfilter_Lstages->type(1);
+        synthfilter_Lstages->box(FL_THIN_UP_BOX);
+        synthfilter_Lstages->labelsize(10);
+        synthfilter_Lstages->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_Lstages->minimum(1);
+        synthfilter_Lstages->maximum(12);
+        synthfilter_Lstages->step(1);
+        synthfilter_Lstages->value(1);
+        synthfilter_Lstages->textsize(9);
+        synthfilter_Lstages->callback((Fl_Callback*)cb_synthfilter_Lstages);
+        synthfilter_Lstages->align(FL_ALIGN_LEFT);
+      } // Fl_Counter* synthfilter_Lstages
+      { synthfilter_Hstages = new Fl_Counter(445, 322, 28, 11, "HPF Stg.");
+        synthfilter_Hstages->type(1);
+        synthfilter_Hstages->box(FL_THIN_UP_BOX);
+        synthfilter_Hstages->labelsize(10);
+        synthfilter_Hstages->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_Hstages->minimum(1);
+        synthfilter_Hstages->maximum(12);
+        synthfilter_Hstages->step(1);
+        synthfilter_Hstages->value(1);
+        synthfilter_Hstages->textsize(9);
+        synthfilter_Hstages->callback((Fl_Callback*)cb_synthfilter_Hstages);
+        synthfilter_Hstages->align(FL_ALIGN_LEFT);
+      } // Fl_Counter* synthfilter_Hstages
+      { synthfilter_dpth = new SliderW(369, 335, 100, 10, "Depth");
+        synthfilter_dpth->type(5);
+        synthfilter_dpth->box(FL_FLAT_BOX);
+        synthfilter_dpth->color((Fl_Color)178);
+        synthfilter_dpth->selection_color((Fl_Color)62);
+        synthfilter_dpth->labeltype(FL_NORMAL_LABEL);
+        synthfilter_dpth->labelfont(0);
+        synthfilter_dpth->labelsize(10);
+        synthfilter_dpth->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_dpth->maximum(127);
+        synthfilter_dpth->step(1);
+        synthfilter_dpth->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_dpth->callback((Fl_Callback*)cb_synthfilter_dpth);
+        synthfilter_dpth->align(FL_ALIGN_LEFT);
+        synthfilter_dpth->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_dpth
+      { synthfilter_EnvSens = new SliderW(369, 347, 100, 10, "Env.Sens");
+        synthfilter_EnvSens->type(5);
+        synthfilter_EnvSens->box(FL_FLAT_BOX);
+        synthfilter_EnvSens->color((Fl_Color)178);
+        synthfilter_EnvSens->selection_color((Fl_Color)62);
+        synthfilter_EnvSens->labeltype(FL_NORMAL_LABEL);
+        synthfilter_EnvSens->labelfont(0);
+        synthfilter_EnvSens->labelsize(10);
+        synthfilter_EnvSens->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_EnvSens->minimum(-64);
+        synthfilter_EnvSens->maximum(64);
+        synthfilter_EnvSens->step(1);
+        synthfilter_EnvSens->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_EnvSens->callback((Fl_Callback*)cb_synthfilter_EnvSens);
+        synthfilter_EnvSens->align(FL_ALIGN_LEFT);
+        synthfilter_EnvSens->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_EnvSens
+      { synthfilter_ATime = new SliderW(369, 359, 100, 10, "A.Time");
+        synthfilter_ATime->type(5);
+        synthfilter_ATime->box(FL_FLAT_BOX);
+        synthfilter_ATime->color((Fl_Color)178);
+        synthfilter_ATime->selection_color((Fl_Color)62);
+        synthfilter_ATime->labeltype(FL_NORMAL_LABEL);
+        synthfilter_ATime->labelfont(0);
+        synthfilter_ATime->labelsize(10);
+        synthfilter_ATime->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_ATime->maximum(1000);
+        synthfilter_ATime->step(1);
+        synthfilter_ATime->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_ATime->callback((Fl_Callback*)cb_synthfilter_ATime);
+        synthfilter_ATime->align(FL_ALIGN_LEFT);
+        synthfilter_ATime->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_ATime
+      { synthfilter_RTime = new SliderW(369, 371, 100, 10, "R.Time");
+        synthfilter_RTime->type(5);
+        synthfilter_RTime->box(FL_FLAT_BOX);
+        synthfilter_RTime->color((Fl_Color)178);
+        synthfilter_RTime->selection_color((Fl_Color)62);
+        synthfilter_RTime->labeltype(FL_NORMAL_LABEL);
+        synthfilter_RTime->labelfont(0);
+        synthfilter_RTime->labelsize(10);
+        synthfilter_RTime->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_RTime->maximum(500);
+        synthfilter_RTime->step(1);
+        synthfilter_RTime->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_RTime->callback((Fl_Callback*)cb_synthfilter_RTime);
+        synthfilter_RTime->align(FL_ALIGN_LEFT);
+        synthfilter_RTime->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_RTime
+      { synthfilter_Offset = new SliderW(369, 383, 100, 10, "Offset");
+        synthfilter_Offset->type(5);
+        synthfilter_Offset->box(FL_FLAT_BOX);
+        synthfilter_Offset->color((Fl_Color)178);
+        synthfilter_Offset->selection_color((Fl_Color)62);
+        synthfilter_Offset->labeltype(FL_NORMAL_LABEL);
+        synthfilter_Offset->labelfont(0);
+        synthfilter_Offset->labelsize(10);
+        synthfilter_Offset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_Offset->maximum(127);
+        synthfilter_Offset->step(1);
+        synthfilter_Offset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        synthfilter_Offset->callback((Fl_Callback*)cb_synthfilter_Offset);
+        synthfilter_Offset->align(FL_ALIGN_LEFT);
+        synthfilter_Offset->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_Offset
       SYNTHFILTER->end();
     } // Fl_Group* SYNTHFILTER
     { Tuner = new Fl_Group(521, 84, 276, 58);
