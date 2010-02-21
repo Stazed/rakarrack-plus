@@ -5814,7 +5814,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         compress_output->align(FL_ALIGN_LEFT);
         compress_output->when(FL_WHEN_CHANGED);
       } // SliderW* compress_output
-      { Auto_Output = new Fl_Check_Button(180, 378, 20, 15, "Auto Output");
+      { Auto_Output = new Fl_Check_Button(180, 378, 15, 15, "Auto Output");
         Auto_Output->down_box(FL_BORDER_BOX);
         Auto_Output->labelsize(10);
         Auto_Output->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -5933,19 +5933,19 @@ R average.");
         dist_tipo->callback((Fl_Callback*)cb_dist_tipo);
         dist_tipo->menu(menu_dist_tipo);
       } // Fl_Choice* dist_tipo
-      { dist_neg = new Fl_Check_Button(431, 304, 40, 15, "Neg.");
+      { dist_neg = new Fl_Check_Button(431, 304, 15, 15, "Neg.");
         dist_neg->down_box(FL_BORDER_BOX);
         dist_neg->labelsize(10);
         dist_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_neg->callback((Fl_Callback*)cb_dist_neg, (void*)(2));
       } // Fl_Check_Button* dist_neg
-      { dist_pf = new Fl_Check_Button(330, 320, 30, 15, "Pre Filter");
+      { dist_pf = new Fl_Check_Button(330, 320, 15, 15, "Pre Filter");
         dist_pf->down_box(FL_BORDER_BOX);
         dist_pf->labelsize(10);
         dist_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_pf->callback((Fl_Callback*)cb_dist_pf, (void*)(2));
       } // Fl_Check_Button* dist_pf
-      { dist_st = new Fl_Check_Button(395, 320, 30, 15, "Stereo");
+      { dist_st = new Fl_Check_Button(395, 320, 15, 15, "Stereo");
         dist_st->down_box(FL_BORDER_BOX);
         dist_st->labelsize(10);
         dist_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -6125,13 +6125,13 @@ R average.");
         ovrd_tipo->callback((Fl_Callback*)cb_ovrd_tipo);
         o->menu(menu_dist_tipo);
       } // Fl_Choice* ovrd_tipo
-      { ovrd_neg = new Fl_Check_Button(589, 304, 46, 15, "Neg.");
+      { ovrd_neg = new Fl_Check_Button(589, 304, 15, 15, "Neg.");
         ovrd_neg->down_box(FL_BORDER_BOX);
         ovrd_neg->labelsize(10);
         ovrd_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_neg->callback((Fl_Callback*)cb_ovrd_neg, (void*)(2));
       } // Fl_Check_Button* ovrd_neg
-      { ovrd_st = new Fl_Check_Button(521, 322, 30, 15, "Stereo");
+      { ovrd_st = new Fl_Check_Button(521, 322, 15, 15, "Stereo");
         ovrd_st->down_box(FL_BORDER_BOX);
         ovrd_st->labelsize(10);
         ovrd_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -6154,7 +6154,7 @@ R average.");
         ovrd_pan->align(FL_ALIGN_LEFT);
         ovrd_pan->when(FL_WHEN_CHANGED);
       } // SliderW* ovrd_pan
-      { ovrd_pf = new Fl_Check_Button(521, 350, 30, 15, "Pre Filter");
+      { ovrd_pf = new Fl_Check_Button(521, 350, 15, 15, "Pre Filter");
         ovrd_pf->down_box(FL_BORDER_BOX);
         ovrd_pf->labelsize(10);
         ovrd_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -6464,7 +6464,7 @@ R average.");
         chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype);
         chorus_lfotype->menu(menu_chorus_lfotype);
       } // Fl_Choice* chorus_lfotype
-      { chorus_subs = new Fl_Check_Button(37, 507, 64, 15, "Subtract");
+      { chorus_subs = new Fl_Check_Button(37, 507, 15, 15, "Subtract");
         chorus_subs->down_box(FL_BORDER_BOX);
         chorus_subs->labelsize(10);
         chorus_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -6658,7 +6658,7 @@ R average.");
         phaser_lfotype->callback((Fl_Callback*)cb_phaser_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* phaser_lfotype
-      { phaser_subs = new Fl_Check_Button(201, 507, 64, 15, "Subtract");
+      { phaser_subs = new Fl_Check_Button(201, 507, 15, 15, "Subtract");
         phaser_subs->down_box(FL_BORDER_BOX);
         phaser_subs->labelsize(10);
         phaser_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -6864,7 +6864,7 @@ R average.");
         flanger_lfotype->callback((Fl_Callback*)cb_flanger_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* flanger_lfotype
-      { flanger_subs = new Fl_Check_Button(363, 507, 64, 15, "Subtract");
+      { flanger_subs = new Fl_Check_Button(363, 507, 15, 15, "Subtract");
         flanger_subs->down_box(FL_BORDER_BOX);
         flanger_subs->labelsize(10);
         flanger_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -7830,7 +7830,7 @@ R average.");
         pan_WD->align(FL_ALIGN_LEFT);
         pan_WD->when(FL_WHEN_CHANGED);
       } // SliderW* pan_WD
-      { pan_autopan = new Fl_Check_Button(38, 256, 64, 15, "AutoPan");
+      { pan_autopan = new Fl_Check_Button(38, 256, 15, 15, "AutoPan");
         pan_autopan->down_box(FL_BORDER_BOX);
         pan_autopan->labelsize(10);
         pan_autopan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -7912,7 +7912,7 @@ R average.");
         pan_stdf->align(FL_ALIGN_LEFT);
         pan_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* pan_stdf
-      { pan_extraon = new Fl_Check_Button(38, 352, 64, 15, "Extra Stereo");
+      { pan_extraon = new Fl_Check_Button(38, 352, 15, 15, "Extra Stereo");
         pan_extraon->down_box(FL_BORDER_BOX);
         pan_extraon->labelsize(10);
         pan_extraon->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -8083,14 +8083,14 @@ R average.");
         har_q1->align(FL_ALIGN_LEFT);
         har_q1->when(FL_WHEN_CHANGED);
       } // SliderW* har_q1
-      { har_MIDI = new Fl_Check_Button(330, 336, 41, 15, "MIDI");
+      { har_MIDI = new Fl_Check_Button(330, 336, 15, 15, "MIDI");
         har_MIDI->down_box(FL_BORDER_BOX);
         har_MIDI->labelsize(10);
         har_MIDI->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_MIDI->callback((Fl_Callback*)cb_har_MIDI, (void*)(2));
         har_MIDI->align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE);
       } // Fl_Check_Button* har_MIDI
-      { har_SELECT = new Fl_Check_Button(330, 354, 37, 15, "SEL");
+      { har_SELECT = new Fl_Check_Button(330, 354, 15, 15, "SEL");
         har_SELECT->down_box(FL_BORDER_BOX);
         har_SELECT->labelsize(10);
         har_SELECT->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -8618,7 +8618,7 @@ R average.");
         newdist_tipo->callback((Fl_Callback*)cb_newdist_tipo);
         o->menu(menu_dist_tipo);
       } // Fl_Choice* newdist_tipo
-      { newdist_neg = new Fl_Check_Button(430, 295, 40, 15, "Neg.");
+      { newdist_neg = new Fl_Check_Button(430, 295, 15, 15, "Neg.");
         newdist_neg->down_box(FL_BORDER_BOX);
         newdist_neg->labelsize(10);
         newdist_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -8673,7 +8673,7 @@ R average.");
         newdist_pan->align(FL_ALIGN_LEFT);
         newdist_pan->when(FL_WHEN_CHANGED);
       } // SliderW* newdist_pan
-      { newdist_pf = new Fl_Check_Button(370, 355, 30, 15, "Pre Filter");
+      { newdist_pf = new Fl_Check_Button(370, 355, 15, 15, "Pre Filter");
         newdist_pf->down_box(FL_BORDER_BOX);
         newdist_pf->labelsize(10);
         newdist_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -8899,13 +8899,13 @@ R average.");
         aphaser_stages->callback((Fl_Callback*)cb_aphaser_stages);
         aphaser_stages->align(FL_ALIGN_LEFT);
       } // Fl_Counter* aphaser_stages
-      { aphaser_hyper = new Fl_Check_Button(395, 381, 60, 15, "Hyper");
+      { aphaser_hyper = new Fl_Check_Button(395, 381, 15, 15, "Hyper");
         aphaser_hyper->down_box(FL_BORDER_BOX);
         aphaser_hyper->labelsize(10);
         aphaser_hyper->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_hyper->callback((Fl_Callback*)cb_aphaser_hyper, (void*)(2));
       } // Fl_Check_Button* aphaser_hyper
-      { aphaser_subs = new Fl_Check_Button(330, 381, 60, 15, "Subtract");
+      { aphaser_subs = new Fl_Check_Button(330, 381, 15, 15, "Subtract");
         aphaser_subs->down_box(FL_BORDER_BOX);
         aphaser_subs->labelsize(10);
         aphaser_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -8920,6 +8920,7 @@ R average.");
       VALVE->labelfont(1);
       VALVE->user_data((void*)(1));
       VALVE->align(96|FL_ALIGN_INSIDE);
+      VALVE->hide();
       { valve_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         valve_activar->shortcut(0x33);
         valve_activar->color((Fl_Color)62);
@@ -9023,7 +9024,7 @@ R average.");
         valve_drive->align(FL_ALIGN_LEFT);
         valve_drive->when(FL_WHEN_CHANGED);
       } // SliderW* valve_drive
-      { valve_ed = new Fl_Check_Button(335, 307, 30, 15, "Extra Dist.");
+      { valve_ed = new Fl_Check_Button(335, 307, 15, 15, "Extra Dist.");
         valve_ed->down_box(FL_BORDER_BOX);
         valve_ed->labelsize(10);
         valve_ed->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -9061,19 +9062,19 @@ R average.");
         valve_Pre->align(FL_ALIGN_LEFT);
         valve_Pre->when(FL_WHEN_CHANGED);
       } // SliderW* valve_Pre
-      { valve_pf = new Fl_Check_Button(325, 350, 30, 15, "Pre Filter");
+      { valve_pf = new Fl_Check_Button(325, 350, 15, 15, "Pre Filter");
         valve_pf->down_box(FL_BORDER_BOX);
         valve_pf->labelsize(10);
         valve_pf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_pf->callback((Fl_Callback*)cb_valve_pf, (void*)(2));
       } // Fl_Check_Button* valve_pf
-      { valve_st = new Fl_Check_Button(385, 350, 30, 15, "Stereo");
+      { valve_st = new Fl_Check_Button(385, 350, 15, 15, "Stereo");
         valve_st->down_box(FL_BORDER_BOX);
         valve_st->labelsize(10);
         valve_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_st->callback((Fl_Callback*)cb_valve_st, (void*)(2));
       } // Fl_Check_Button* valve_st
-      { valve_neg = new Fl_Check_Button(434, 350, 40, 15, "Neg.");
+      { valve_neg = new Fl_Check_Button(434, 350, 15, 15, "Neg.");
         valve_neg->down_box(FL_BORDER_BOX);
         valve_neg->labelsize(10);
         valve_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -9280,13 +9281,13 @@ R average.");
         dflange_lpf->align(FL_ALIGN_LEFT);
         dflange_lpf->when(FL_WHEN_CHANGED);
       } // SliderW* dflange_lpf
-      { dflange_subs = new Fl_Check_Button(332, 324, 64, 15, "Subtract");
+      { dflange_subs = new Fl_Check_Button(332, 324, 15, 15, "Subtract");
         dflange_subs->down_box(FL_BORDER_BOX);
         dflange_subs->labelsize(10);
         dflange_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_subs->callback((Fl_Callback*)cb_dflange_subs, (void*)(2));
       } // Fl_Check_Button* dflange_subs
-      { dflange_tz = new Fl_Check_Button(395, 324, 64, 15, "Th. zero");
+      { dflange_tz = new Fl_Check_Button(395, 324, 15, 15, "Th. zero");
         dflange_tz->down_box(FL_BORDER_BOX);
         dflange_tz->labelsize(10);
         dflange_tz->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -9467,13 +9468,13 @@ R average.");
         ring_pan->align(FL_ALIGN_LEFT);
         ring_pan->when(FL_WHEN_CHANGED);
       } // SliderW* ring_pan
-      { ring_st = new Fl_Check_Button(348, 303, 30, 15, "Stereo");
+      { ring_st = new Fl_Check_Button(348, 303, 15, 15, "Stereo");
         ring_st->down_box(FL_BORDER_BOX);
         ring_st->labelsize(10);
         ring_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_st->callback((Fl_Callback*)cb_ring_st, (void*)(2));
       } // Fl_Check_Button* ring_st
-      { ring_afreq = new Fl_Check_Button(400, 303, 30, 15, "Auto Freq");
+      { ring_afreq = new Fl_Check_Button(400, 303, 15, 15, "Auto Freq");
         ring_afreq->down_box(FL_BORDER_BOX);
         ring_afreq->labelsize(10);
         ring_afreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -10053,13 +10054,13 @@ R average.");
         mbdist_pan->align(FL_ALIGN_LEFT);
         mbdist_pan->when(FL_WHEN_CHANGED);
       } // SliderW* mbdist_pan
-      { mbdist_st = new Fl_Check_Button(352, 379, 30, 15, "Stereo");
+      { mbdist_st = new Fl_Check_Button(352, 379, 15, 15, "Stereo");
         mbdist_st->down_box(FL_BORDER_BOX);
         mbdist_st->labelsize(10);
         mbdist_st->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_st->callback((Fl_Callback*)cb_mbdist_st, (void*)(2));
       } // Fl_Check_Button* mbdist_st
-      { mbdist_neg = new Fl_Check_Button(421, 378, 40, 15, "Neg.");
+      { mbdist_neg = new Fl_Check_Button(421, 378, 15, 15, "Neg.");
         mbdist_neg->down_box(FL_BORDER_BOX);
         mbdist_neg->labelsize(10);
         mbdist_neg->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -10619,7 +10620,7 @@ R average.");
         shuffle_Q->align(FL_ALIGN_LEFT);
         shuffle_Q->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_Q
-      { shuffle_E = new Fl_Check_Button(322, 378, 30, 15, "Rev");
+      { shuffle_E = new Fl_Check_Button(322, 378, 15, 15, "Rev");
         shuffle_E->down_box(FL_BORDER_BOX);
         shuffle_E->labelsize(10);
         shuffle_E->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -10715,7 +10716,7 @@ R average.");
         synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* synthfilter_lfotype
-      { synthfilter_subs = new Fl_Check_Button(429, 270, 46, 15, "Subtr.");
+      { synthfilter_subs = new Fl_Check_Button(429, 270, 15, 15, "Subtr.");
         synthfilter_subs->down_box(FL_BORDER_BOX);
         synthfilter_subs->labelsize(10);
         synthfilter_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

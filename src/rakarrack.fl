@@ -887,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {473 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1737 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -1468,7 +1468,7 @@ Stereo->value(rkr->efx_Compressor->getpar(8));}
           user_data 2
           callback {rkr->efx_Compressor->Compressor_Change(6,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
-          xywh {180 378 20 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {180 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button Stereo {
           label Stereo
@@ -1635,19 +1635,19 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           label {Neg.}
           user_data 2
           callback {rkr->efx_Distorsion->changepar(6,(int)o->value());}
-          xywh {431 304 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {431 304 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button dist_pf {
           label {Pre Filter}
           user_data 2
           callback {rkr->efx_Distorsion->changepar(10,(int)o->value());}
-          xywh {330 320 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {330 320 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button dist_st {
           label Stereo
           user_data 2
           callback {rkr->efx_Distorsion->changepar(9,(int)o->value());}
-          xywh {395 320 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {395 320 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider dist_pan {
           label Pan
@@ -1746,13 +1746,13 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
           label {Neg.}
           user_data 2
           callback {rkr->efx_Overdrive->changepar(6,(int)o->value());}
-          xywh {589 304 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {589 304 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button ovrd_st {
           label Stereo
           user_data 2
           callback {rkr->efx_Overdrive->changepar(9,(int)o->value());}
-          xywh {521 322 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {521 322 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider ovrd_pan {
           label Pan
@@ -1764,7 +1764,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
           label {Pre Filter}
           user_data 2
           callback {rkr->efx_Overdrive->changepar(10,(int)o->value());}
-          xywh {521 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {521 350 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider ovrd_lpf {
           label LPF
@@ -2009,7 +2009,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
           label Subtract
           user_data 2
           callback {rkr->efx_Chorus->changepar(11,(int)o->value())}
-          xywh {37 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {37 507 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider chorus_stdf {
           label {St.df}
@@ -2132,7 +2132,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
           label Subtract
           user_data 2
           callback {rkr->efx_Phaser->changepar(10,(int)o->value())}
-          xywh {201 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {201 507 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider phaser_phase {
           label Phase
@@ -2254,7 +2254,7 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
           label Subtract
           user_data 2
           callback {rkr->efx_Flanger->changepar(11,(int)o->value());}
-          xywh {363 507 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {363 507 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider flanger_stdf {
           label {St.df}
@@ -2889,7 +2889,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
           label AutoPan
           user_data 2
           callback {rkr->efx_Pan->changepar(7,(unsigned char)o->value())}
-          xywh {38 256 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {38 256 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider pan_pan {
           label Pan
@@ -2925,7 +2925,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
           label {Extra Stereo}
           user_data 2
           callback {rkr->efx_Pan->changepar(8,(unsigned char)o->value())}
-          xywh {38 352 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {38 352 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider pan_extra {
           label {E.S.}
@@ -3027,7 +3027,7 @@ if((int)har_activar->value())rkr->Harmonizer_Bypass=1;}
           user_data 2
           callback {rkr->efx_Har->changepar(10,(int)o->value());
 rkr->RC->cleanup();}
-          xywh {330 336 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 24
+          xywh {330 336 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 24
         }
         Fl_Check_Button har_SELECT {
           label SEL
@@ -3035,7 +3035,7 @@ rkr->RC->cleanup();}
           callback {rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC->cleanup();
 Chord();}
-          xywh {330 354 37 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 24
+          xywh {330 354 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 24
         }
         Fl_Box har_chordname {
           xywh {377 338 98 27} labelsize 12 labelcolor 7
@@ -3389,7 +3389,7 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
           label {Neg.}
           user_data 2
           callback {rkr->efx_NewDist->changepar(6,(int)o->value());}
-          xywh {430 295 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {430 295 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider newdist_st {
           label Color
@@ -3413,7 +3413,7 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
           label {Pre Filter}
           user_data 2
           callback {rkr->efx_NewDist->changepar(10,(int)o->value());}
-          xywh {370 355 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {370 355 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider newdist_lpf {
           label LPF
@@ -3546,18 +3546,18 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
           label Hyper
           user_data 2
           callback {rkr->efx_APhaser->changepar(12,(int)o->value())}
-          xywh {395 381 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {395 381 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button aphaser_subs {
           label Subtract
           user_data 2
           callback {rkr->efx_APhaser->changepar(10,(int)o->value())}
-          xywh {330 381 60 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {330 381 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group VALVE {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button valve_activar {
           label On
@@ -3633,7 +3633,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
           label {Extra Dist.}
           user_data 2
           callback {rkr->efx_Valve->changepar(11,(int)o->value());}
-          xywh {335 307 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {335 307 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider valve_Q {
           label {Dist.}
@@ -3651,19 +3651,19 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
           label {Pre Filter}
           user_data 2
           callback {rkr->efx_Valve->changepar(9,(int)o->value());}
-          xywh {325 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {325 350 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button valve_st {
           label Stereo
           user_data 2
           callback {rkr->efx_Valve->changepar(8,(int)o->value());}
-          xywh {385 350 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {385 350 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button valve_neg {
           label {Neg.}
           user_data 2
           callback {rkr->efx_Valve->changepar(5,(int)o->value());}
-          xywh {434 350 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {434 350 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider valve_lpf {
           label LPF
@@ -3783,13 +3783,13 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
           label Subtract
           user_data 2
           callback {rkr->efx_DFlange->changepar(8,(int)o->value());}
-          xywh {332 324 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {332 324 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button dflange_tz {
           label {Th. zero}
           user_data 2
           callback {rkr->efx_DFlange->changepar(9,(int)o->value());}
-          xywh {395 324 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {395 324 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider dflange_freq {
           label Tempo
@@ -3906,13 +3906,13 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));}
           label Stereo
           user_data 2
           callback {rkr->efx_Ring->changepar(6,(int)o->value());}
-          xywh {348 303 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {348 303 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button ring_afreq {
           label {Auto Freq}
           user_data 2
           callback {rkr->efx_Ring->changepar(12,(int)o->value());}
-          xywh {400 303 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {400 303 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider ring_depth {
           label Depth
@@ -4209,13 +4209,13 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
           label Stereo
           user_data 2
           callback {rkr->efx_MBDist->changepar(14,(int)o->value());}
-          xywh {352 379 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {352 379 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button mbdist_neg {
           label {Neg.}
           user_data 2
           callback {rkr->efx_MBDist->changepar(11,(int)o->value());}
-          xywh {421 378 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {421 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group ARPIE {
@@ -4593,8 +4593,8 @@ shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
         Fl_Check_Button shuffle_E {
           label Rev
           user_data 2
-          callback {rkr->efx_Shuffle->changepar(10,(int)o->value());} selected
-          xywh {322 378 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          callback {rkr->efx_Shuffle->changepar(10,(int)o->value());}
+          xywh {322 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group SYNTHFILTER {
@@ -4682,8 +4682,8 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
         Fl_Check_Button synthfilter_subs {
           label {Subtr.}
           user_data 2
-          callback {rkr->efx_Synthfilter->changepar(10,(int)o->value())}
-          xywh {429 270 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          callback {rkr->efx_Synthfilter->changepar(10,(int)o->value())} selected
+          xywh {429 270 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider synthfilter_stdf {
           label {St.df}
