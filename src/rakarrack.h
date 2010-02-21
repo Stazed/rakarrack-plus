@@ -1954,6 +1954,11 @@ private:
   void cb_shuffle_Q_i(SliderW*, void*);
   static void cb_shuffle_Q(SliderW*, void*);
 public:
+  Fl_Check_Button *shuffle_E;
+private:
+  void cb_shuffle_E_i(Fl_Check_Button*, void*);
+  static void cb_shuffle_E(Fl_Check_Button*, void*);
+public:
   Fl_Group *SYNTHFILTER;
   Fl_Light_Button *synthfilter_activar;
 private:

@@ -363,13 +363,13 @@ RKR::savefile (char *filename)
 
 	case 26:
 	  //Shuffle
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Shuffle->getpar (0), efx_Shuffle->getpar (1),
 		   efx_Shuffle->getpar (2), efx_Shuffle->getpar (3),
 		   efx_Shuffle->getpar (4), efx_Shuffle->getpar (5),
 		   efx_Shuffle->getpar (6), efx_Shuffle->getpar (7),
 		   efx_Shuffle->getpar (8), efx_Shuffle->getpar (9),
-                   Shuffle_Bypass);
+                   efx_Shuffle->getpar(10), Shuffle_Bypass);
 	  break;
 
 
@@ -740,10 +740,10 @@ RKR::loadfile (char *filename)
 
 	case 26:
 	  //Shuffle
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[27][0], &lv[27][1], &lv[27][2], &lv[27][3], &lv[27][4],
 		  &lv[27][5], &lv[27][6], &lv[27][7], &lv[27][8], &lv[27][9],
-		  &Shuffle_B);
+		  &lv[27][10],&Shuffle_B);
 	  break;
 
 	}
@@ -865,7 +865,7 @@ RKR::Actualizar_Audio ()
     efx_Arpie->changepar (i, lv[25][i]);
 for (i = 0; i <= 6; i++)
     efx_Expander->Expander_Change (i + 1,lv[26][i]);
- for (i = 0; i <= 9; i++)
+ for (i = 0; i <= 10; i++)
     efx_Shuffle->changepar (i, lv[27][i]);
   
 
@@ -1045,7 +1045,7 @@ RKR::New ()
 //Expander
     {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
 //Shuffle 1
-    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 0, 0, 0 ,0 ,0, 0}
+    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 1, 0, 0 ,0 ,0, 0}
      
 
   };
@@ -1181,7 +1181,7 @@ RKR::New_Bank ()
 //Expander
     {-50, 20, 50, 50, 3134, 76, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
 //Shuffle 1
-    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 0, 0, 0 ,0 ,0, 0}
+    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 1, 0, 0 ,0 ,0, 0}
     
     
      
@@ -1354,7 +1354,7 @@ RKR::Preset_to_Bank (int i)
     lv[25][j] = efx_Arpie->getpar(j);
   for (j = 0; j <= 6; j++)
     lv[26][j] = efx_Expander->getpar(j+1);
-  for (j = 0; j <= 9; j++)
+  for (j = 0; j <= 10; j++)
     lv[27][j] = efx_Shuffle->getpar(j);
 
 

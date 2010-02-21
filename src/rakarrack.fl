@@ -887,7 +887,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1653 110 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1646 103 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4485,7 +4485,7 @@ expander_level->value(rkr->efx_Expander->getpar(7));}
       }
       Fl_Group SHUFFLE {
         label {High Freq}
-        user_data 1
+        user_data 1 selected
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button shuffle_activar {
@@ -4509,7 +4509,8 @@ shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
-shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);}
+shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
+shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4589,6 +4590,12 @@ shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);}
           xywh {375 380 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
+        Fl_Check_Button shuffle_E {
+          label E
+          user_data 2
+          callback {rkr->efx_Shuffle->changepar(10,(int)o->value());}
+          xywh {327 378 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
       }
       Fl_Group SYNTHFILTER {
         user_data 1
@@ -4600,7 +4607,7 @@ shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);}
           callback {rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
-findpos(27,(int)o->value());} selected
+findpos(27,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice synthfilter_preset {
@@ -6542,6 +6549,7 @@ shuffle_cross3->value(rkr->lv[27][7]);
 shuffle_cross4->value(rkr->lv[27][8]);
 shuffle_Q->value(rkr->lv[27][9]);
 shuffle_WD->value(rkr->lv[27][0]-64);
+shuffle_E->value(rkr->lv[27][10]);
 shuffle_activar->value(rkr->Shuffle_Bypass);
 
 

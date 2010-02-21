@@ -4233,6 +4233,7 @@ shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
 shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
+shuffle_E->value(rkr->efx_Shuffle->getpar(10));
 }
 void RKRGUI::cb_shuffle_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_preset_i(o,v);
@@ -4314,6 +4315,13 @@ void RKRGUI::cb_shuffle_Q_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_shuffle_Q(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_Q_i(o,v);
+}
+
+void RKRGUI::cb_shuffle_E_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Shuffle->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_shuffle_E(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_E_i(o,v);
 }
 
 void RKRGUI::cb_synthfilter_activar_i(Fl_Light_Button* o, void*) {
@@ -10587,6 +10595,12 @@ R average.");
         shuffle_Q->align(FL_ALIGN_LEFT);
         shuffle_Q->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_Q
+      { shuffle_E = new Fl_Check_Button(327, 378, 30, 15, "E");
+        shuffle_E->down_box(FL_BORDER_BOX);
+        shuffle_E->labelsize(10);
+        shuffle_E->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shuffle_E->callback((Fl_Callback*)cb_shuffle_E, (void*)(2));
+      } // Fl_Check_Button* shuffle_E
       SHUFFLE->end();
     } // Fl_Group* SHUFFLE
     { SYNTHFILTER = new Fl_Group(320, 211, 158, 184);
@@ -12447,6 +12461,7 @@ shuffle_cross3->value(rkr->lv[27][7]);
 shuffle_cross4->value(rkr->lv[27][8]);
 shuffle_Q->value(rkr->lv[27][9]);
 shuffle_WD->value(rkr->lv[27][0]-64);
+shuffle_E->value(rkr->lv[27][10]);
 shuffle_activar->value(rkr->Shuffle_Bypass);
 
 
