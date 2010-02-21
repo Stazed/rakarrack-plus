@@ -58,11 +58,13 @@ Synthfilter::Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   inv_period = 1.0f/((float) PERIOD);
 
    delta = 1.0f/((float) SAMPLE_RATE);
-   Rmin = 85.0f;	// 2N5457 typical on resistance at Vgs = 0
-   Rmax = 25000.0f;	// Resistor parallel to FET
-   C = 0.00000005f;  	     // 50 nF
+   Rmin = 85.0f;		// 2N5457 typical on resistance at Vgs = 0
+   Rmax = 25000.0f;		// Resistor parallel to FET
+   C = 0.00000005f;		// 50 nF
    Chp = 0.00000005f;
    Clp = 0.00000005f;
+   att = delta * 5.0f;		//200ms
+   rls = delta * 5.0f;		//200ms
 
 
   Ppreset = 0;
@@ -123,7 +125,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
     lmod*=lmod;
     rmod*=rmod;
 
-      REALTYPE xl = (lmod  - oldlgain) * inv_period;
+      REALTYPE xl = (lmod - oldlgain) * inv_period;
       REALTYPE xr = (rmod - oldrgain) * inv_period;
       REALTYPE gl = oldlgain;	// Linear interpolation between LFO samples
       REALTYPE gr = oldrgain;
@@ -135,8 +137,20 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
       REALTYPE rxn = smpsr[i];
       gl += xl;
       gr += xr;   //linear interpolation of LFO
+      
+      //Envelope detection
+      envdelta = sns*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
+      if (delta > 0.0)
+	env += att * envdelta;
+      else
+	env += rls * envdelta;
+      gl = fabs(gl + env);
+      gr = fabs(gr + env);  	
+	
+	
+	//End envelope power detection
     
-      //Left channel Low Pass Filter
+      //Left channel Low Pass Filter      
        for (j = 0; j < Plpstages; j++)
 	{			
 	d = 1.0f + fabs(lxn)*distortion;  // gain decreases as signal amplitude increases.
@@ -148,7 +162,6 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  lyn1[j] += DENORMAL_GUARD;
 	  lxn = lyn1[j];
 	if (j==1) lxn += fbl;  //Insert feedback after first filter stage
-
 	};
 	
       //Left channel High Pass Filter
@@ -163,6 +176,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  ly1hp[j] += DENORMAL_GUARD;
 	  lx1hp[j] = lxn;
 	  lxn = ly1hp[j];
+	  if (j==1) lxn += fbl;  //Insert feedback after first filter stage
 	};	
 	
 	
@@ -191,6 +205,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  ry1hp[j] += DENORMAL_GUARD;
 	  rx1hp[j] = rxn;
 	  rxn = ry1hp[j];
+	  if (j==1) rxn += fbr;  //Insert feedback after first filter stage
 	};
 
       fbl = lxn * fb;
@@ -250,7 +265,7 @@ Synthfilter::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = (float) (Pfb - 64);
-  if (fb<0.0f) fb /= 32.0f;
+  if (fb<0.0f) fb /= 26.0f;
   else if (fb>0.0f) fb/=128.2f;
 };
 
@@ -274,28 +289,29 @@ void
 Synthfilter::setdepth (int Pdepth)
 {
   this->Pdepth = Pdepth;
-  depth = (float)(Pdepth - 64) / 64.0f;  //Pdepth input should be 0-127.  depth shall range 0-0.5 since we don't need to shift the full spectrum.
+  depth = (float)(Pdepth - 32) / 95.0f;  //Pdepth input should be 0-127. .
 };
 
 
 void
 Synthfilter::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 13;
+  const int PRESET_SIZE = 16;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Phaser1
-    {64, 20, 14, 0, 1, 64, 110, 40, 4, 2, 0, 64, 1},
-    //Phaser2
-    {64, 20, 14, 5, 1, 64, 110, 40, 6, 2, 0, 70, 1},
-    //Phaser3
-    {64, 20, 9, 0, 0, 64, 40, 40, 8, 10, 2, 60, 0},
+  //{0,  1,  2, 3, 4,  5,   6, 7,  8, 9, 10, 11, 12, 13, 14, 15}
+    //Low Pass
+    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0},
+    //High Pass
+    {0, 20, 14, 0, 1, 64, 110, -40, 0, 6, 0, 32, -32, 500, 100, 0},
+    //Band Pass
+    {0, 20, 14, 0, 1, 64, 110, -40, 4, 4, 0, 32, -32, 500, 100, 0},
     //Phaser4
-    {64, 20, 14, 10, 0, 64, 110, 80, 7, 2, 1, 45, 1},
+    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, 32, 500, 100, 0},
     //Phaser5
-    {25, 20, 240, 10, 0, 64, 25, 16, 8, 2, 0, 25, 0},
+    {0, 20, 14, 0, 1, 64, 110, -40, 0, 6, 0, 32, 32, 500, 100, 0},
     //Phaser6
-    {64, 20, 1, 10, 1, 64, 110, 40, 12, 2, 0, 70, 1}
+    {0, 20, 14, 0, 1, 64, 110, -40, 4, 4, 0, 32, 32, 500, 100, 0},
   };
   if (npreset >= NUM_PRESETS)
     npreset = NUM_PRESETS - 1;
@@ -359,10 +375,23 @@ Synthfilter::changepar (int npar, int value)
       setdepth (value);
       break;
     case 12:
-      if (value > 1)
-	value = 1;
       Penvelope = value;
+      sns = (float) value/6.4f;
       break;
+    case 13:
+      Pattack = value;
+      sns = (float) value/6.4f;
+      att = delta * 1000.0f/((float) value);
+      break;
+    case 14:
+      Prelease = value;
+      rls = delta * 1000.0f/((float) value);
+      break;      
+    case 15:
+      Pbandwidth = value;
+      Chp = C * (1.0f + ((float) value)/64.0f);  // C*3
+      Clp = C * (1.0f - ((float) value)/190.0f); // C/3
+      break;        
     };
 };
 
@@ -410,7 +439,16 @@ Synthfilter::getpar (int npar)
     case 12:
       return (Penvelope);
       break;
-
+    case 13:
+      return (Pattack);
+      break;
+    case 14:
+      return (Prelease);
+      break;
+    case 15:
+      return (Pbandwidth);
+      break;
+      
     default:
       return (0);
     };

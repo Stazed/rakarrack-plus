@@ -76,7 +76,7 @@ Analog_Phaser::Analog_Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
    Rconst = 1.0f + Rmx;  // Handle parallel resistor relationship
    C = 0.00000005f;	     // 50 nF
    CFs = (float) 2.0f*(float)SAMPLE_RATE*C;
-   invperiod = 1.0f / (float) PERIOD;
+   invperiod = 1.0f / ((float) PERIOD);
 
 
   Ppreset = 0;
@@ -131,17 +131,31 @@ Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
     rmod = ONE_;
   else if (rmod < ZERO_)
     rmod = ZERO_;
+    
+  if (Phyper != 0)
+      {
+	lmod *= lmod;  //Triangle wave squared is approximately sin on bottom, tri on top
+	rmod *= rmod;  //Result is exponential sweep more akin to filter in synth with exponential generator circuitry.
+      };
+	 
+    lmod = sqrtf(1.0f - lmod);  //gl,gr is Vp - Vgs. Typical FET drain-source resistance follows constant/[1-sqrt(Vp - Vgs)] 
+    rmod = sqrtf(1.0f - rmod);
 
     rdiff = (rmod - oldrgain) * invperiod;
     ldiff = (lmod - oldlgain) * invperiod;
 
     gl = oldlgain;
     gr = oldrgain;
+
+    oldlgain = lmod;
+    oldrgain = rmod;
     
   for (i = 0; i < PERIOD; i++)
     {
+    
       gl += ldiff;	// Linear interpolation between LFO samples
       gr += rdiff;
+
       REALTYPE lxn = smpsl[i];
       REALTYPE rxn = smpsr[i];
 
@@ -151,14 +165,6 @@ Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	gr = fmodf((gr + 0.25f) , ONE_);
 	 };
 
-  if (Phyper != 0)
-      {
-	gl *= gl;  //Triangle wave squared is approximately sin on bottom, tri on top
-	gr *= gr;  //Result is exponential sweep more akin to filter in synth with exponential generator circuitry.
-      };
-	 
-	gl = sqrtf(1 - gl);  //gl,gr is Vp - Vgs. Typical FET drain-source resistance follows constant/[1-sqrt(Vp - Vgs)] 
-	gr = sqrtf(1 - gr);
 
       //Left channel
       for (j = 0; j < Pstages; j++)
@@ -176,7 +182,6 @@ Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  lxn1[j] = lxn;
 	  lxn = lyn1[j];
 	if (j==1) lxn += fbl;  //Insert feedback after first phase stage
-
 	};
 	
       //Right channel
@@ -203,9 +208,6 @@ Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
       efxoutr[i] = rxn;
 
     };
-
-  oldlgain = lmod;
-  oldrgain = rmod;
 
   if (Poutsub != 0)
     for (i = 0; i < PERIOD; i++)
