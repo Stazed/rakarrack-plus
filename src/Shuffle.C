@@ -59,7 +59,7 @@ Shuffle::Shuffle (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   PvolML = 0;
   PvolMH = 0;
   PvolH = 0;
-
+  E=0;
   setpreset (Ppreset);
   cleanup ();
 };
@@ -101,14 +101,34 @@ void
 Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
- 
-      for (i = 0; i < PERIOD; i++)
-	{
-	  inputl[i] = smpsl[i] + smpsr[i];
-	  inputr[i] = smpsl[i] - smpsr[i];        
-	};
+  float avg,ldiff,rdiff,vtmp;
  
 
+         
+
+
+
+      for (i = 0; i < PERIOD; i++)
+	{
+     	  inputl[i] = smpsl[i] + smpsr[i];
+	  inputr[i] = smpsl[i] - smpsr[i];        
+
+      if(E)
+       {
+
+       	  avg = (inputl[i] + inputr[i]);
+	  ldiff = inputl[i] + avg;
+	  rdiff = inputr[i] + avg;
+
+	  vtmp = avg + ldiff;
+	  inputl[i] = vtmp;
+
+	  vtmp = avg + rdiff;
+	  inputr[i] = vtmp;
+        }
+
+        }
+        
   ll->filterout(inputl);
   lr->filterout(inputr);
   mll->filterout(inputl);
@@ -123,11 +143,12 @@ Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i = 0; i < PERIOD; i++)
   {
-    efxoutl[i]=(inputl[i]+inputr[i])*.5f;
-    efxoutr[i]=(inputl[i]-inputr[i])*.5f;
+    efxoutl[i]=(inputl[i]+inputr[i])*.1f;
+    efxoutr[i]=(inputl[i]-inputr[i])*.1f;
   }      
     
- 
+
+
 
 
     
@@ -188,17 +209,17 @@ Shuffle::setCross4 (int value)
 void
 Shuffle::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 10;
+  const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Shuffle 1
-    {64, 10, 0, 0, 0,600, 1200,2000, 6000,-14},
+    {64, 10, 0, 0, 0,600, 1200,2000, 6000,-14, 1},
     //Shuffle 2
-    {64, 0, 0, 0, 0, 120, 1000,2400, 8000,-7},
+    {64, 0, 0, 0, 0, 120, 1000,2400, 8000,-7, 1},
     //Shuffle 3
-    {64, 0, 0, 0, 0, 60, 1800, 3700, 12000, 7},
+    {64, 0, 0, 0, 0, 60, 1800, 3700, 12000, 7, 0},
     //Shuffle 4
-    {64, 0, 0, 0, 0, 100, 1200, 2400 , 5600,14}
+    {64, 0, 0, 0, 0, 100, 1200, 2400 , 5600, 14, 0}
 
   };
 
@@ -263,7 +284,7 @@ Shuffle::changepar (int npar, int value)
     case 9:
       PQ = value;
       value +=64;
-      float tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+      tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
       ll->setq(tmp);
       lr->setq(tmp);
       mll->setq(tmp);
@@ -273,7 +294,9 @@ Shuffle::changepar (int npar, int value)
       hl->setq(tmp);
       hr->setq(tmp);
       break;
-
+    case 10:
+       E=value;
+       break;  
     };
 };
 
@@ -312,6 +335,8 @@ Shuffle::getpar (int npar)
     case 9:
       return (PQ);
       break;
+    case 10:
+      return (E);  
       
     };
   return (0);			//in case of bogus parameter number

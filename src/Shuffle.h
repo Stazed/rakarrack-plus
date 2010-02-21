@@ -60,7 +60,8 @@ private:
   int PvolMH;
   int PvolH;
   int PQ;
-  
+  int E;
+    
   int Cross1;		//lowpass filter
   int Cross2;		//highpass filter
   int Cross3;
@@ -73,6 +74,7 @@ private:
   void setCross4 (int value);
 
   //Parametrii reali
+  float tmp;
   float volL,volML,volMH,volH,volLr,volMLr,volMHr,volHr;
   AnalogFilter *ll, *lr, *hl, *hr;
   AnalogFilter *mll, *mlr,*mhl,*mhr;
