@@ -4591,10 +4591,10 @@ shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
           class SliderW
         }
         Fl_Check_Button shuffle_E {
-          label E
+          label Rev
           user_data 2
-          callback {rkr->efx_Shuffle->changepar(10,(int)o->value());}
-          xywh {327 378 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          callback {rkr->efx_Shuffle->changepar(10,(int)o->value());} selected
+          xywh {322 378 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group SYNTHFILTER {
@@ -4627,7 +4627,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} selected
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {

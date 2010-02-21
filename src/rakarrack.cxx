@@ -10619,7 +10619,7 @@ R average.");
         shuffle_Q->align(FL_ALIGN_LEFT);
         shuffle_Q->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_Q
-      { shuffle_E = new Fl_Check_Button(327, 378, 30, 15, "E");
+      { shuffle_E = new Fl_Check_Button(322, 378, 30, 15, "Rev");
         shuffle_E->down_box(FL_BORDER_BOX);
         shuffle_E->labelsize(10);
         shuffle_E->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

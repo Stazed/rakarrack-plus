@@ -60,6 +60,7 @@ Shuffle::Shuffle (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   PvolMH = 0;
   PvolH = 0;
   E=0;
+  Rev=1.0f;
   setpreset (Ppreset);
   cleanup ();
 };
@@ -101,32 +102,11 @@ void
 Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
-  float avg,ldiff,rdiff,vtmp;
  
-
-         
-
-
-
       for (i = 0; i < PERIOD; i++)
 	{
-     	  inputl[i] = smpsl[i] + smpsr[i];
+  	  inputl[i] = smpsl[i] + smpsr[i];
 	  inputr[i] = smpsl[i] - smpsr[i];        
-
-      if(E)
-       {
-
-       	  avg = (inputl[i] + inputr[i]);
-	  ldiff = inputl[i] + avg;
-	  rdiff = inputr[i] + avg;
-
-	  vtmp = avg + ldiff;
-	  inputl[i] = vtmp;
-
-	  vtmp = avg + rdiff;
-	  inputr[i] = vtmp;
-        }
-
         }
         
   ll->filterout(inputl);
@@ -139,12 +119,10 @@ Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
   hr->filterout(inputr);
   
 
-
-
   for (i = 0; i < PERIOD; i++)
   {
-    efxoutl[i]=(inputl[i]+inputr[i])*.1f;
-    efxoutr[i]=(inputl[i]-inputr[i])*.1f;
+    efxoutl[i]=(inputl[i]+inputr[i])*.5f;
+    efxoutr[i]=(inputl[i]-inputr[i]);
   }      
     
 
@@ -164,7 +142,6 @@ Shuffle::setvolume (int value)
   Pvolume = value;
   outvolume = (float)Pvolume / 128.0f;
 };
-
 
 void
 Shuffle::setCross1 (int value)
@@ -203,7 +180,45 @@ Shuffle::setCross4 (int value)
 
 };
 
+void
+Shuffle::setGainL(int value)
+{
+      PvolL = value+64;
+      volL = 30.0f * ((float)PvolL - 64.0f) / 64.0f;
+      ll->setgain(volL);
+      volLr = Rev*volL;
+      lr->setgain(volLr);
+}      
 
+void
+Shuffle::setGainML(int value)
+{
+      PvolML = value+64;
+      volML = 30.0f * ((float)PvolML - 64.0f) / 64.0f;;
+      mll->setgain(volML);
+      volMLr= Rev*volML;
+      mlr->setgain(volMLr);
+}
+
+void
+Shuffle::setGainMH(int value)
+{
+      PvolMH = value+64;
+      volMH = 30.0f * ((float)PvolMH - 64.0f) / 64.0f;;
+      mhl->setgain(volMH);
+      volMHr= Rev*volMH;
+      mhr->setgain(volMHr);
+}
+
+void
+Shuffle::setGainH(int value)
+{
+      PvolH = value+64;
+      volH = 30.0f * ((float)PvolH - 64.0f) / 64.0f;;
+      hl->setgain(volH);
+      volHr = Rev*volH;
+      hr->setgain(volHr);
+}
 
 
 void
@@ -242,32 +257,16 @@ Shuffle::changepar (int npar, int value)
       setvolume (value);
       break;
     case 1:
-      PvolL = value+64;
-      volL = 30.0f * ((float)PvolL - 64.0f) / 64.0f;
-      ll->setgain(volL);
-      volLr = -1.0f*volL;
-      lr->setgain(volLr);
+      setGainL(value);
       break;
     case 2:
-      PvolML = value+64;
-      volML = 30.0f * ((float)PvolML - 64.0f) / 64.0f;;
-      mll->setgain(volML);
-      volMLr= -1.0f*volML;
-      mlr->setgain(volMLr);
+      setGainML(value);
       break;
     case 3:
-      PvolMH = value+64;
-      volMH = 30.0f * ((float)PvolMH - 64.0f) / 64.0f;;
-      mhl->setgain(volMH);
-      volMHr= -1.0f*volMH;
-      mhr->setgain(volMHr);
+      setGainMH(value);
       break;
     case 4:
-      PvolH = value+64;
-      volH = 30.0f * ((float)PvolH - 64.0f) / 64.0f;;
-      hl->setgain(volH);
-      volHr = -1.0f*volH;
-      hr->setgain(volHr);
+      setGainH(value);
       break;
     case 5:
       setCross1 (value);
@@ -296,6 +295,11 @@ Shuffle::changepar (int npar, int value)
       break;
     case 10:
        E=value;
+       if(E) Rev=-1.0f; else Rev=1.0f;
+       setGainL(getpar(1));
+       setGainML(getpar(2));
+       setGainMH(getpar(3));
+       setGainH(getpar(4));
        break;  
     };
 };

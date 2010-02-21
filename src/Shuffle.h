@@ -72,9 +72,13 @@ private:
   void setCross2 (int value);
   void setCross3 (int value);
   void setCross4 (int value);
+  void setGainL (int value);
+  void setGainML (int value);
+  void setGainMH (int value);
+  void setGainH (int value);
 
   //Parametrii reali
-  float tmp;
+  float tmp,Rev;
   float volL,volML,volMH,volH,volLr,volMLr,volMHr,volHr;
   AnalogFilter *ll, *lr, *hl, *hr;
   AnalogFilter *mll, *mlr,*mhl,*mhr;
