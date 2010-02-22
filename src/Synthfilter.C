@@ -387,7 +387,7 @@ Synthfilter::changepar (int npar, int value)
       break;
     case 12:
       Penvelope = value;
-      sns = (float) Penvelope/16.0f;
+      sns = (float) Penvelope/8.0f;
       break;
     case 13:
       Pattack = value;
@@ -401,7 +401,7 @@ Synthfilter::changepar (int npar, int value)
       break;      
     case 15:
       Pbandwidth = value;
-      bandgain = 2.0f + 10.0f * (1.0f - (float) value/127.0f);
+      bandgain = 1.0f + 10.0f * (1.0f - (float) value/127.0f);
       Chp = C * (1.0f + ((float) value)/64.0f);  // C*3
       Clp = C * (1.0f - ((float) value)/190.0f); // C/3
       break;        
@@ -467,4 +467,3 @@ Synthfilter::getpar (int npar)
     };
 
 };
-
