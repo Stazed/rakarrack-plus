@@ -122,13 +122,9 @@ Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
   for (i = 0; i < PERIOD; i++)
   {
     efxoutl[i]=(inputl[i]+inputr[i])*.5f;
-    efxoutr[i]=(inputl[i]-inputr[i]);
+    efxoutr[i]=(inputl[i]-inputr[i])*-.5f;
   }      
     
-
-
-
-
     
 };
 
