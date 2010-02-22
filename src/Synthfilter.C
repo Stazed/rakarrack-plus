@@ -108,8 +108,8 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
   rgain = 0.0;
   	
   lfo.effectlfoout (&lfol, &lfor);
-  lmod = lfol*width + depth;
-  rmod = lfor*width + depth;
+  lmod = lfol*width + depth + env*sns;
+  rmod = lfor*width + depth + env*sns;
 
   if (lmod > ONE_)
     lmod = ONE_;
@@ -146,9 +146,6 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
       else
 	env += rls * envdelta;
 	
-      gl = fabs(gl * sns*env);
-      gr = fabs(gr * sns*env);  	
-
 	//End envelope power detection
     
       //Left channel Low Pass Filter      
@@ -165,6 +162,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	if (j==1) lxn += fbl;  //Insert feedback after first filter stage
 	};
 	
+	if (Plpstages < 2) lxn += fbl;	
       //Left channel High Pass Filter
        for (j = 0; j < Phpstages; j++)
 	{			
@@ -176,7 +174,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  ly1hp[j] += DENORMAL_GUARD;
 	  lx1hp[j] = lxn;
 	  lxn = ly1hp[j];
-	if (j==1) lxn += 0.5f*fbl;  //Insert feedback after first filter stage
+
 	};	
 	
 	
@@ -192,6 +190,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  if (j==1) rxn += fbr;  //Insert feedback after first filter stage
 	};
 	
+	if (Plpstages < 2) rxn += fbr;
       //Right channel High Pass Filter
        for (j = 0; j < Phpstages; j++)
 	{			
@@ -204,7 +203,6 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  ry1hp[j] += DENORMAL_GUARD;
 	  rx1hp[j] = rxn;
 	  rxn = ry1hp[j];
-	  if (j==1) rxn += 0.5f*fbr;
 	};
 
       fbl = lxn * fb;
