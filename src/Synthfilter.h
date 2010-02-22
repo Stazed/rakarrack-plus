@@ -78,7 +78,7 @@ private:
   void setdepth (int Pdepth);
 
   //Internal Variables
-  REALTYPE distortion, fb, width, env, envdelta, sns, att, rls, fbl, fbr, depth;
+  REALTYPE distortion, fb, width, env, envdelta, sns, att, rls, fbl, fbr, depth, bandgain;
   REALTYPE *lyn1, *ryn1, *lx1hp, *ly1hp, *rx1hp, *ry1hp;
   REALTYPE oldlgain, oldrgain, inv_period;
   

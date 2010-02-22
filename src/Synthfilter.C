@@ -133,8 +133,8 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
   for (i = 0; i < PERIOD; i++)
     {
 
-      REALTYPE lxn = 5.0f*smpsl[i];
-      REALTYPE rxn = 5.0f*smpsr[i]; //extra gain
+      REALTYPE lxn = bandgain*smpsl[i];
+      REALTYPE rxn = bandgain*smpsr[i]; //extra gain
 
       gl += xl;
       gr += xr;   //linear interpolation of LFO
@@ -147,7 +147,14 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	env += rls * envdelta;
 	
 	//End envelope power detection
-    
+   
+	if (Plpstages<1) 
+	{
+	lxn += fbl;
+	rxn += fbr;
+	}
+	
+	 
       //Left channel Low Pass Filter      
        for (j = 0; j < Plpstages; j++)
 	{			
@@ -159,10 +166,10 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  lyn1[j] = lgain * lxn + (1.0f - lgain) * lyn1[j];
 	  lyn1[j] += DENORMAL_GUARD;
 	  lxn = lyn1[j];
-	if (j==1) lxn += fbl;  //Insert feedback after first filter stage
+	if (j==0) lxn += fbl;  //Insert feedback after first filter stage
 	};
 	
-	if (Plpstages < 2) lxn += fbl;	
+
       //Left channel High Pass Filter
        for (j = 0; j < Phpstages; j++)
 	{			
@@ -187,10 +194,9 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  ryn1[j] = rgain * rxn + (1.0f - rgain) * ryn1[j];
 	  ryn1[j] += DENORMAL_GUARD;
 	  rxn = ryn1[j];
-	  if (j==1) rxn += fbr;  //Insert feedback after first filter stage
+	  if (j==0) rxn += fbr;  //Insert feedback after first filter stage
 	};
 	
-	if (Plpstages < 2) rxn += fbr;
       //Right channel High Pass Filter
        for (j = 0; j < Phpstages; j++)
 	{			
@@ -207,6 +213,7 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       fbl = lxn * fb;
       fbr = rxn * fb;
+  
       efxoutl[i] = lxn;
       efxoutr[i] = rxn;
 
@@ -264,9 +271,10 @@ Synthfilter::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = (float) Pfb;
-  if (fb<0.0f) fb /= 22.0f;
+  if (fb<0.0f) fb /= 18.0f;
   else if (fb>0.0f) fb/=65.0f;
-  cleanup();
+  if(Plpstages<=2) fb *= 0.3;  //keep filter stable when phase shift is small
+
 };
 
 void
@@ -358,6 +366,9 @@ Synthfilter::changepar (int npar, int value)
       Plpstages = value;
       if (Plpstages >= MAX_SFILTER_STAGES)
       Plpstages = MAX_SFILTER_STAGES ;
+//      if (Plpstages < 1) 
+//      Plpstages = 1;
+        if(Plpstages<=2) fb = (float) Pfb * 0.3;  //keep filter stable when phase shift is small
       cleanup ();
       break;
     case 9:
@@ -376,20 +387,21 @@ Synthfilter::changepar (int npar, int value)
       break;
     case 12:
       Penvelope = value;
-      sns = (float) Penvelope/64.0f;
+      sns = (float) Penvelope/16.0f;
       break;
     case 13:
       Pattack = value;
+      if(Pattack < 5) Pattack = 5;
       att = delta * 1000.0f/((float) value);
-      cleanup();
       break;
     case 14:
       Prelease = value;
+      if(Prelease < 5) Prelease = 5;
       rls = delta * 1000.0f/((float) value);
-      cleanup();
       break;      
     case 15:
       Pbandwidth = value;
+      bandgain = 2.0f + 10.0f * (1.0f - (float) value/127.0f);
       Chp = C * (1.0f + ((float) value)/64.0f);  // C*3
       Clp = C * (1.0f - ((float) value)/190.0f); // C/3
       break;        
