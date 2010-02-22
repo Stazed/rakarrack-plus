@@ -133,8 +133,8 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
   for (i = 0; i < PERIOD; i++)
     {
 
-      REALTYPE lxn = smpsl[i];
-      REALTYPE rxn = smpsr[i];
+      REALTYPE lxn = 5.0f*smpsl[i];
+      REALTYPE rxn = 5.0f*smpsr[i]; //extra gain
 
       gl += xl;
       gr += xr;   //linear interpolation of LFO
@@ -230,19 +230,21 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 void
 Synthfilter::cleanup ()
 {
-  fbl = 0.0;
-  fbr = 0.0;
-  oldlgain = 0.0;
-  oldrgain = 0.0;
-  for (int i = 0; i < Plpstages; i++)
+  fbl = 0.0f;
+  fbr = 0.0f;
+  oldlgain = 0.0f;
+  oldrgain = 0.0f;
+  env = 0.0f;
+  envdelta = 0.0f;
+  for (int i = 0; i <MAX_SFILTER_STAGES; i++)
     {
-      lyn1[i] = 0.0;
-      ryn1[i] = 0.0;
+      lyn1[i] = 0.0f;
+      ryn1[i] = 0.0f;
       
-      ly1hp[i] = 0.0;
-      lx1hp[i] = 0.0;      
-      ry1hp[i] = 0.0;
-      rx1hp[i] = 0.0;
+      ly1hp[i] = 0.0f;
+      lx1hp[i] = 0.0f;      
+      ry1hp[i] = 0.0f;
+      rx1hp[i] = 0.0f;
     };
 };
 
@@ -262,8 +264,9 @@ Synthfilter::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = (float) Pfb;
-  if (fb<0.0f) fb /= 26.0f;
-  else if (fb>0.0f) fb/=128.2f;
+  if (fb<0.0f) fb /= 22.0f;
+  else if (fb>0.0f) fb/=65.0f;
+  cleanup();
 };
 
 void
@@ -278,7 +281,7 @@ void
 Synthfilter::setdistortion (int Pdistortion)
 {
   this->Pdistortion = Pdistortion;
-  distortion = (float)Pdistortion / 100.0f;
+  distortion = (float)Pdistortion / 127.0f;
 };
 
 
@@ -373,15 +376,17 @@ Synthfilter::changepar (int npar, int value)
       break;
     case 12:
       Penvelope = value;
-      sns = (float) Penvelope/127.0f;
+      sns = (float) Penvelope/64.0f;
       break;
     case 13:
       Pattack = value;
       att = delta * 1000.0f/((float) value);
+      cleanup();
       break;
     case 14:
       Prelease = value;
       rls = delta * 1000.0f/((float) value);
+      cleanup();
       break;      
     case 15:
       Pbandwidth = value;
