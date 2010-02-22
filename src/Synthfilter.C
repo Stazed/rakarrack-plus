@@ -58,8 +58,8 @@ Synthfilter::Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   inv_period = 1.0f/((float) PERIOD);
 
    delta = 1.0f/((float) SAMPLE_RATE);
-   Rmin = 85.0f;		// 2N5457 typical on resistance at Vgs = 0
-   Rmax = 25000.0f;		// Resistor parallel to FET
+   Rmin = 185.0f;		// 2N5457 typical on resistance at Vgs = 0
+   Rmax = 22000.0f;		// Resistor 
    C = 0.00000005f;		// 50 nF
    Chp = 0.00000005f;
    Clp = 0.00000005f;
@@ -135,19 +135,20 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       REALTYPE lxn = smpsl[i];
       REALTYPE rxn = smpsr[i];
+
       gl += xl;
       gr += xr;   //linear interpolation of LFO
       
       //Envelope detection
-      envdelta = sns*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
+      envdelta = (fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
       if (delta > 0.0)
 	env += att * envdelta;
       else
 	env += rls * envdelta;
-      gl = fabs(gl + env);
-      gr = fabs(gr + env);  	
 	
-	
+      gl = fabs(gl * sns*env);
+      gr = fabs(gr * sns*env);  	
+
 	//End envelope power detection
     
       //Left channel Low Pass Filter      
@@ -167,16 +168,15 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
       //Left channel High Pass Filter
        for (j = 0; j < Phpstages; j++)
 	{			
-	d = 1.0f + fabs(lxn)*distortion;  // gain decreases as signal amplitude increases.
 	
 	  //high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = lgain = RC/(RC + dt)
-	  lgain = (Rmax * gl * d + Rmin) * Chp/( (Rmax * gl * d + Rmin) * Chp + delta);
-	  ly1hp[j] = lgain * (lxn + ly1hp[j] + lx1hp[j]);
+	  lgain = (Rmax * gl + Rmin) * Chp/( (Rmax * gl  + Rmin) * Chp + delta);
+	  ly1hp[j] = lgain * (lxn + ly1hp[j] - lx1hp[j]);
 	  	  
 	  ly1hp[j] += DENORMAL_GUARD;
 	  lx1hp[j] = lxn;
 	  lxn = ly1hp[j];
-	  if (j==1) lxn += fbl;  //Insert feedback after first filter stage
+	if (j==1) lxn += 0.5f*fbl;  //Insert feedback after first filter stage
 	};	
 	
 	
@@ -188,9 +188,8 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	rgain = delta/((Rmax*gr*d + Rmin)*Clp + delta);
 	  ryn1[j] = rgain * rxn + (1.0f - rgain) * ryn1[j];
 	  ryn1[j] += DENORMAL_GUARD;
-	  //ry1hp[j] = rxn;
 	  rxn = ryn1[j];
-	if (j==1) rxn += fbr;  //Insert feedback after first filter stage
+	  if (j==1) rxn += fbr;  //Insert feedback after first filter stage
 	};
 	
       //Right channel High Pass Filter
@@ -199,13 +198,13 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	d = 1.0f + fabs(rxn)*distortion;  // gain decreases as signal amplitude increases.
 	
 	  //high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = rgain = RC/(RC + dt)
-	  rgain = (Rmax * gr * d + Rmin) * Chp/( (Rmax * gr * d + Rmin) * Chp + delta);
-	  ry1hp[j] = rgain * (rxn + ry1hp[j] + rx1hp[j]);
+	  rgain = (Rmax * gr  + Rmin) * Chp/( (Rmax * gr + Rmin) * Chp + delta);
+	  ry1hp[j] = rgain * (rxn + ry1hp[j] - rx1hp[j]);
 	  	  
 	  ry1hp[j] += DENORMAL_GUARD;
 	  rx1hp[j] = rxn;
 	  rxn = ry1hp[j];
-	  if (j==1) rxn += fbr;  //Insert feedback after first filter stage
+	  if (j==1) rxn += 0.5f*fbr;
 	};
 
       fbl = lxn * fb;
@@ -264,7 +263,7 @@ void
 Synthfilter::setfb (int Pfb)
 {
   this->Pfb = Pfb;
-  fb = (float) (Pfb - 64);
+  fb = (float) Pfb;
   if (fb<0.0f) fb /= 26.0f;
   else if (fb>0.0f) fb/=128.2f;
 };
@@ -376,11 +375,10 @@ Synthfilter::changepar (int npar, int value)
       break;
     case 12:
       Penvelope = value;
-      sns = (float) value/6.4f;
+      sns = (float) Penvelope/127.0f;
       break;
     case 13:
       Pattack = value;
-      sns = (float) value/6.4f;
       att = delta * 1000.0f/((float) value);
       break;
     case 14:
