@@ -4335,7 +4335,7 @@ void RKRGUI::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_synthfilter_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_APhaser->setpreset((int) o->value());
+  rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
@@ -12544,6 +12544,26 @@ shuffle_Q->value(rkr->lv[27][9]);
 shuffle_WD->value(rkr->lv[27][0]-64);
 shuffle_E->value(rkr->lv[27][10]);
 shuffle_activar->value(rkr->Shuffle_Bypass);
+
+//Synthfilter
+
+synthfilter_WD->value(rkr->lv[28][0]-64);
+synthfilter_Distort->value(rkr->lv[28][1]);
+synthfilter_freq->value(rkr->lv[28][2]);
+synthfilter_lfotype->value(rkr->lv[28][4]);
+synthfilter_subs->value(rkr->lv[28][10]);
+synthfilter_stdf->value(rkr->lv[28][5]);
+synthfilter_width->value(rkr->lv[28][6]);
+synthfilter_fb->value(rkr->lv[28][7]);
+synthfilter_Lstages->value(rkr->lv[28][8]);
+synthfilter_Hstages->value(rkr->lv[28][9]);
+synthfilter_dpth->value(rkr->lv[28][11]);
+synthfilter_EnvSens->value(rkr->lv[28][12]);
+synthfilter_ATime->value(rkr->lv[28][13]);
+synthfilter_RTime->value(rkr->lv[28][14]);
+synthfilter_Offset->value(rkr->lv[28][15]);
+synthfilter_activar->value(rkr->Synthfilter_Bypass);
+
 
 
 
