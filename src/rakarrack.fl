@@ -4707,12 +4707,12 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
         Fl_Counter synthfilter_Lstages {
           label {LPF Stg.}
           callback {rkr->efx_Synthfilter->changepar(8,(int)o->value());}
-          xywh {368 322 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+          xywh {368 322 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
         }
         Fl_Counter synthfilter_Hstages {
           label {HPF Stg.}
-          callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());}
-          xywh {445 322 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+          callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());} selected
+          xywh {445 322 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
         }
         Fl_Value_Slider synthfilter_dpth {
           label Depth
@@ -4722,7 +4722,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
         }
         Fl_Value_Slider synthfilter_EnvSens {
           label {E.Sens}
-          callback {rkr->efx_Synthfilter->changepar(12,(int)(o->value()));} selected
+          callback {rkr->efx_Synthfilter->changepar(12,(int)(o->value()));}
           xywh {369 347 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
