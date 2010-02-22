@@ -10813,7 +10813,7 @@ R average.");
         synthfilter_dpth->align(FL_ALIGN_LEFT);
         synthfilter_dpth->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_dpth
-      { synthfilter_EnvSens = new SliderW(369, 347, 100, 10, "Env.Sens");
+      { synthfilter_EnvSens = new SliderW(369, 347, 100, 10, "E.Sens");
         synthfilter_EnvSens->type(5);
         synthfilter_EnvSens->box(FL_FLAT_BOX);
         synthfilter_EnvSens->color((Fl_Color)178);

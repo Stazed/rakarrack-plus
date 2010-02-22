@@ -302,7 +302,8 @@ back->draw(X,Y);
 
 //Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;} {}
   }
-  Function {draw_rest(int X, int Y, int W, int H)} {} {
+  Function {draw_rest(int X, int Y, int W, int H)} {open
+  } {
     code {double val;
 int x = X;
 int y = Y;
@@ -4682,7 +4683,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
         Fl_Check_Button synthfilter_subs {
           label {Subtr.}
           user_data 2
-          callback {rkr->efx_Synthfilter->changepar(10,(int)o->value())} selected
+          callback {rkr->efx_Synthfilter->changepar(10,(int)o->value())}
           xywh {429 270 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider synthfilter_stdf {
@@ -4720,8 +4721,8 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
           class SliderW
         }
         Fl_Value_Slider synthfilter_EnvSens {
-          label {Env.Sens}
-          callback {rkr->efx_Synthfilter->changepar(12,(int)(o->value()));}
+          label {E.Sens}
+          callback {rkr->efx_Synthfilter->changepar(12,(int)(o->value()));} selected
           xywh {369 347 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
