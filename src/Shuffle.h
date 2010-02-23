@@ -78,10 +78,10 @@ private:
   void setGainH (int value);
 
   //Parametrii reali
-  float tmp,Rev;
-  float volL,volML,volMH,volH,volLr,volMLr,volMHr,volHr;
-  AnalogFilter *ll, *lr, *hl, *hr;
-  AnalogFilter *mll, *mlr,*mhl,*mhr;
+  float tmp;
+  float volL,volML,volMH,volH;
+  AnalogFilter  *lr, *hr;
+  AnalogFilter  *mlr,*mhr;
   
 
 };
