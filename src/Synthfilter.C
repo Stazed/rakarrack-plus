@@ -390,12 +390,12 @@ Synthfilter::changepar (int npar, int value)
     case 13:
       Pattack = value;
       if(Pattack < 5) Pattack = 5;
-      att = delta * 1000.0f/((float) value);
+      att = delta * 1000.0f/((float) Pattack);
       break;
     case 14:
       Prelease = value;
       if(Prelease < 5) Prelease = 5;
-      rls = delta * 1000.0f/((float) value);
+      rls = delta * 1000.0f/((float) Prelease);
       break;      
     case 15:
       Pbandwidth = value;
