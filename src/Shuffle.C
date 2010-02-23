@@ -97,10 +97,21 @@ Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  inputr[i] = smpsl[i] - smpsr[i];        
         }
 
+if(E)
+ {
+
   lr->filterout(inputr);
   mlr->filterout(inputr);
   mhr->filterout(inputr);
   hr->filterout(inputr);
+ }
+  else
+ { 
+  lr->filterout(inputl);
+  mlr->filterout(inputl);
+  mhr->filterout(inputl);
+  hr->filterout(inputl);
+ }
   
 
   for (i = 0; i < PERIOD; i++)
