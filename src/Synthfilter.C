@@ -366,9 +366,7 @@ Synthfilter::changepar (int npar, int value)
       Plpstages = value;
       if (Plpstages >= MAX_SFILTER_STAGES)
       Plpstages = MAX_SFILTER_STAGES ;
-//      if (Plpstages < 1) 
-//      Plpstages = 1;
-        if(Plpstages<=2) fb = (float) Pfb * 0.3;  //keep filter stable when phase shift is small
+        if(Plpstages<=2) fb = (float) Pfb * 0.25/65.0f;  //keep filter stable when phase shift is small
       cleanup ();
       break;
     case 9:
