@@ -47,7 +47,7 @@ int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1
 
 sprintf(buf," ");
 
-px = (lx-22) / 30;
+px = (lx-22) / 29;
 hy = ly;
 
 double scale = (double) ly ;
@@ -64,7 +64,7 @@ fl_draw(buf, ox, oy, lx, ly, FL_ALIGN_CLIP ,back);
     
 fl_color(leds_color);
 
-for(i=0; i<30; i++)
+for(i=0; i<29; i++)
 {
       y = 0.0;
       double coeff = (double)xscale[i]/dsr;
