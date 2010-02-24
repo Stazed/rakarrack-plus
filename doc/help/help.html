@@ -1,42 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head>
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
-  
-
-  
-  
   <meta name="GENERATOR" content="OpenOffice.org 2.4  (Linux)">
-
-  
   <meta name="AUTHOR" content="Josep Andreu">
-
-  
   <meta name="CREATED" content="0;0">
-
-  
   <meta name="CHANGED" content="20100112;22402500">
-
-  
   <meta name="DESCRIPTION" content="rakarrack help in html file">
-
-  
   <meta http-equiv="content-style-type" content="text/css">
-
-  
   <style type="text/css">
 	<!--
 		@page { size: 8.5in 11in }
@@ -580,7 +551,9 @@ not relate to the parameters in effect.</p>
 
 <p>&nbsp;&nbsp;&nbsp; All the parameters managed with a slider widget
 can be adjusted fine with the mouse wheel or the Up/Down - Left/Right
-arrows in the keyboard, also you can navigate and adjust trough the
+arrows in the keyboard decrease/increase value by "1",
+Shift+(Left/Right Arrow) decrease/increase value by "10" also you can
+navigate and adjust trough the
 parameters with you computer keyboard with the Tab, Up/Down arrow and
 space bar keys.</p>
 
@@ -588,7 +561,8 @@ space bar keys.</p>
 
 <p>&nbsp;&nbsp;&nbsp; For control the parameter values via MIDI see
 the <a href="#MIDI_Implementation_Chart">MIDI Implementation Chart</a>&nbsp;
-for the complete list of MIDI message commands recognized.</p>
+for the complete list of MIDI message commands recognized, to easy controlrakarrack with MIDI messages use the MIDI Learn way.<br>
+</p>
 
 <h3 class="western"><a name="eql"></a>EQ Lineal</h3>
 
@@ -1529,7 +1503,10 @@ author.</p>
     <tr><td>Program Change</td>
       <td>( x )</td>
       <td><br></td>
-      <td>0~80</td>
+      <td>0~60<br>
+81&nbsp; Previous Preset<br>
+82&nbsp; Next Preset
+</td>
     </tr>
     <tr><td>Control Change</td>
       <td>Volume 0x07 (x)</td>

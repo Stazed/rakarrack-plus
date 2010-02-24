@@ -1,5 +1,18 @@
 ==v0.5.0 (  /  /2009) ==
 -------------------------------------------------------------------------------
+- MIDI Learn Alpha Sort.
+- Prog Change 81/82 -->Prev/Next Preset. 
+- Freqs in effects are now displayed as real freqs.
+- Fixed bug in Auto/Pan.
+- Fixed bug, all windows updated when preset is changed.
+- Fixed bug MIDI Learn when reasign control numbers.
+- Fixed bug on final Limiter.
+- Removed malloc in Echo.C when delay is changed.
+- Improved Tuner and Recognize Note functions.
+- Fixed second Easter Egg.
+- Added Shift Arrows keyboard control increment/decrement +/- 10.
+- Added Balance (FX%) as preset parameter.
+- Added Effect Synthfilter
 - Added Effect Shuffle.
 - Added Effect Expander.
 - Added Effect DistBand.
@@ -7,6 +20,7 @@
 - Added Effect Ring.
 - Added Effect Dual Flange.
 - Added Effect Valve.
+- Added LFO type M.Saw
 - Changed LFO Freq for Tempo, good to Synchronize with sequencers. drum machines etc.
 - Utility to convert Old Bank files (rakconvert).
 - New Bank structure file (60 Presets, up to 50 effects, Midi Learn Data inclosed)
