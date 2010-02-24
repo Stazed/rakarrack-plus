@@ -5193,7 +5193,35 @@ void RKRGUI::cb_MIDILearn(Fl_Double_Window* o, void* v) {
 }
 
 void RKRGUI::cb_Epar_i(Fl_Browser*, void*) {
-  DisAssigns();
+  int i;
+char tecla[32];
+int lakey;
+
+lakey = Fl::event_key();
+
+
+if (lakey != 65257)
+
+{
+bzero(tecla,sizeof(tecla));
+sprintf(tecla,"%s",Fl::event_text());
+if (strlen(tecla)>0)
+{
+  for(i=1;i<Epar->size();i++)
+   {
+   if(strncmp(Epar->text(i),tecla,1)== 0)
+    {  
+       Epar->select(i,1);
+       Epar->redraw(); 
+       bzero(tecla,sizeof(tecla));  
+       break; 
+    } 
+   }
+}
+}
+
+
+ DisAssigns();
 }
 void RKRGUI::cb_Epar(Fl_Browser* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Epar_i(o,v);
