@@ -504,7 +504,8 @@ return handle2(event,
 }
 
 int SliderW::handle2(int event, int X, int Y, int W, int H) {
-  switch (event) {
+  int mul=1;
+switch (event) {
   case FL_PUSH:
     if (!Fl::event_inside(X, Y, W, H)) return 0;
     handle_push();
@@ -524,6 +525,8 @@ int SliderW::handle2(int event, int X, int Y, int W, int H) {
     int S=0;
     static int offcenter;
 
+   
+    
     if (type() == FL_HOR_FILL_SLIDER || type() == FL_VERT_FILL_SLIDER) {
 
       S = 1;
@@ -542,6 +545,7 @@ int SliderW::handle2(int event, int X, int Y, int W, int H) {
       if (S < T) S = T;
       if (event == FL_PUSH) {
        int xx = int(val*(ww-S)+.5);
+      
         offcenter = mx-xx;
         if (offcenter < 0) offcenter = 0;
         else if (offcenter > S) offcenter = S;
@@ -562,8 +566,9 @@ int SliderW::handle2(int event, int X, int Y, int W, int H) {
         xx = ww-S;
         offcenter = mx-xx; if (offcenter > S) offcenter = S;
       }
-      v = round(xx*(maximum()-minimum())/(ww-S) + minimum());
-      // make sure a click outside the sliderbar moves it:
+        v = round(xx*(maximum()-minimum())/(ww-S) + minimum());
+        
+        // make sure a click outside the sliderbar moves it:
       if (event == FL_PUSH && v == value()) {
         offcenter = S/2;
         event = FL_DRAG;
@@ -588,29 +593,31 @@ int SliderW::handle2(int event, int X, int Y, int W, int H) {
     handle_release();
     return 1;
   case FL_KEYBOARD :
-    switch (Fl::event_key()) {
+       if (Fl::event_state(FL_SHIFT)) mul=10; else mul = 1;
+        
+      switch (Fl::event_key()) {
       case FL_Up:
         if (horizontal()) return 0;
         handle_push();
-        handle_drag(clamp(increment(value(),-1)));
+        handle_drag(clamp(increment(value(),-1*mul)));
         handle_release();
         return 1;
       case FL_Down:
         if (horizontal()) return 0;
         handle_push();
-        handle_drag(clamp(increment(value(),1)));
+        handle_drag(clamp(increment(value(),1*mul)));
         handle_release();
         return 1;
       case FL_Left:
         if (!horizontal()) return 0;
         handle_push();
-        handle_drag(clamp(increment(value(),-1)));
+        handle_drag(clamp(increment(value(),-1*mul)));
         handle_release();
         return 1;
       case FL_Right:
         if (!horizontal()) return 0;
         handle_push();
-        handle_drag(clamp(increment(value(),1)));
+        handle_drag(clamp(increment(value(),1*mul)));
         handle_release();
         return 1;
       default:
