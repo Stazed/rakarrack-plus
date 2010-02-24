@@ -209,7 +209,7 @@ main (int argc, char *argv[])
 	  usleep (1500);
 	  if (preset != 1000)
 	    {
-	      rkr.Bank_to_Preset (preset);
+	      if( (preset>0) && (preset<61)) rkr.Bank_to_Preset (preset);
 	      preset = 1000;
 	    }
 

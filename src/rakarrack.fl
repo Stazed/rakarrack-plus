@@ -4375,7 +4375,7 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           tooltip {Number of steps in the pattern} xywh {340 361 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
         }
         Fl_Choice arpie_pattern {
-          callback {rkr->efx_Arpie->changepar(9,(int)o->value());} selected
+          callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
           xywh {397 358 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5513,14 +5513,14 @@ strcpy(rkr->BankFilename,filename);}
     }
     Fl_Window MIDILearn {
       callback {save_stat(5);
-MIDILearn->hide();}
+MIDILearn->hide();} open
       xywh {1289 277 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
       }
       Fl_Browser Epar {
-        callback {DisAssigns();}
+        callback {DisAssigns();} selected
         xywh {10 58 201 348} type Hold textcolor 7
       }
       Fl_Button GMM {
