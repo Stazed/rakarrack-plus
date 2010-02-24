@@ -1727,18 +1727,14 @@ void RKRGUI::cb_echo_pan(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_echo_delay_i(SliderW* o, void*) {
-  rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(2,(int)o->value());
-if((int)echo_activar->value())rkr->Echo_Bypass=1;
+  rkr->efx_Echo->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_echo_delay(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_delay_i(o,v);
 }
 
 void RKRGUI::cb_echo_LRdl_i(SliderW* o, void*) {
-  rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(3,(int)o->value());
-if((int)echo_activar->value())rkr->Echo_Bypass=1;
+  rkr->efx_Echo->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_echo_LRdl(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_LRdl_i(o,v);
@@ -4061,9 +4057,7 @@ void RKRGUI::cb_arpie_pan(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_arpie_delay_i(SliderW* o, void*) {
-  rkr->Arpie_Bypass=0;
-rkr->efx_Arpie->changepar(2,(int)o->value());
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
+  rkr->efx_Arpie->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_arpie_delay(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_delay_i(o,v);
@@ -4087,9 +4081,7 @@ Fl_Menu_Item RKRGUI::menu_arpie_subdiv[] = {
 };
 
 void RKRGUI::cb_arpie_LRdl_i(SliderW* o, void*) {
-  rkr->Arpie_Bypass=0;
-rkr->efx_Arpie->changepar(3,(int)o->value());
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
+  rkr->efx_Arpie->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_arpie_LRdl(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_LRdl_i(o,v);

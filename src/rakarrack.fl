@@ -681,8 +681,7 @@ switch (event) {
     return 1;
   default:
     return 0;
-  }} {selected
-    }
+  }} {}
   }
   Function {draw()} {} {
     code {int X,Y,W,H;
@@ -887,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1874,17 +1872,13 @@ if((int)echo_activar->value())rkr->Echo_Bypass=1;}
         }
         Fl_Value_Slider echo_delay {
           label Delay
-          callback {rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(2,(int)o->value());
-if((int)echo_activar->value())rkr->Echo_Bypass=1;}
+          callback {rkr->efx_Echo->changepar(2,(int)o->value());}
           xywh {690 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echo_LRdl {
           label {LRdl.}
-          callback {rkr->Echo_Bypass=0;
-rkr->efx_Echo->changepar(3,(int)o->value());
-if((int)echo_activar->value())rkr->Echo_Bypass=1;}
+          callback {rkr->efx_Echo->changepar(3,(int)o->value());}
           xywh {690 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -4317,9 +4311,7 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
         }
         Fl_Value_Slider arpie_delay {
           label Tempo
-          callback {rkr->Arpie_Bypass=0;
-rkr->efx_Arpie->changepar(2,(int)o->value());
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
+          callback {rkr->efx_Arpie->changepar(2,(int)o->value());}
           xywh {371 281 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 1 textcolor 7
           class SliderW
         }
@@ -4355,9 +4347,7 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
         }
         Fl_Value_Slider arpie_LRdl {
           label {LRdl.}
-          callback {rkr->Arpie_Bypass=0;
-rkr->efx_Arpie->changepar(3,(int)o->value());
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
+          callback {rkr->efx_Arpie->changepar(3,(int)o->value());}
           xywh {371 314 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -4385,7 +4375,7 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           tooltip {Number of steps in the pattern} xywh {340 361 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
         }
         Fl_Choice arpie_pattern {
-          callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
+          callback {rkr->efx_Arpie->changepar(9,(int)o->value());} selected
           xywh {397 358 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
