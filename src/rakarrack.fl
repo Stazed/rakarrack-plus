@@ -886,7 +886,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -5513,7 +5514,7 @@ strcpy(rkr->BankFilename,filename);}
     }
     Fl_Window MIDILearn {
       callback {save_stat(5);
-MIDILearn->hide();} open
+MIDILearn->hide();}
       xywh {1289 277 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
