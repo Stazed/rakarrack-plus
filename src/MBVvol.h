@@ -61,7 +61,7 @@ private:
 
   //Parametrii
   int Pvolume;	//Volumul or E/R
-
+  int Pcombi;
   int Cross1;
   int Cross2;
   int Cross3;
@@ -71,10 +71,12 @@ private:
   void setCross1 (int value);
   void setCross2 (int value);
   void setCross3 (int value);
-
+  void setCombi (int value);
   //Parametrii reali
   
   float lfo1l,lfo1r,lfo2l,lfo2r;
+  float v1l,v1r,v2l,v2r;
+
   float volL,volML,volMH,volH;
   float volLr,volMLr,volMHr,volHr;
   AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;

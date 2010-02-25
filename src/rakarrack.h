@@ -2108,6 +2108,12 @@ private:
   void cb_mbvvol_cross3_i(SliderW*, void*);
   static void cb_mbvvol_cross3(SliderW*, void*);
 public:
+  Fl_Choice *mbvvol_combi;
+private:
+  void cb_mbvvol_combi_i(Fl_Choice*, void*);
+  static void cb_mbvvol_combi(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbvvol_combi[];
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

@@ -4492,6 +4492,7 @@ mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
 mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
 mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
 mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
+mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));
 }
 void RKRGUI::cb_mbvvol_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_preset_i(o,v);
@@ -4573,6 +4574,28 @@ void RKRGUI::cb_mbvvol_cross3_i(SliderW* o, void*) {
 void RKRGUI::cb_mbvvol_cross3(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_cross3_i(o,v);
 }
+
+void RKRGUI::cb_mbvvol_combi_i(Fl_Choice* o, void*) {
+  rkr->efx_MBVvol->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_mbvvol_combi(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_combi_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_mbvvol_combi[] = {
+ {"1122", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1221", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1212", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"o11o", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"o12o", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x11x", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x12x", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1oo1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1oo2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1xx1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"1xx2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
@@ -11015,7 +11038,7 @@ R average.");
         mbvvol_preset->when(FL_WHEN_RELEASE_ALWAYS);
         mbvvol_preset->menu(menu_mbvvol_preset);
       } // Fl_Choice* mbvvol_preset
-      { mbvvol_WD = new SliderW(372, 240, 100, 10, "Wet/Dry");
+      { mbvvol_WD = new SliderW(372, 238, 100, 10, "Wet/Dry");
         mbvvol_WD->type(5);
         mbvvol_WD->box(FL_FLAT_BOX);
         mbvvol_WD->color((Fl_Color)178);
@@ -11032,7 +11055,7 @@ R average.");
         mbvvol_WD->align(FL_ALIGN_LEFT);
         mbvvol_WD->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_WD
-      { mbvvol_freq1 = new SliderW(372, 254, 100, 10, "Tempo");
+      { mbvvol_freq1 = new SliderW(372, 250, 100, 10, "Tempo");
         mbvvol_freq1->type(5);
         mbvvol_freq1->box(FL_FLAT_BOX);
         mbvvol_freq1->color((Fl_Color)178);
@@ -11049,7 +11072,7 @@ R average.");
         mbvvol_freq1->align(FL_ALIGN_LEFT);
         mbvvol_freq1->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_freq1
-      { Fl_Choice* o = mbvvol_lfotype1 = new Fl_Choice(383, 269, 72, 16, "LFO Type");
+      { Fl_Choice* o = mbvvol_lfotype1 = new Fl_Choice(383, 263, 72, 16, "LFO Type");
         mbvvol_lfotype1->down_box(FL_BORDER_BOX);
         mbvvol_lfotype1->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         mbvvol_lfotype1->labelsize(10);
@@ -11059,7 +11082,7 @@ R average.");
         mbvvol_lfotype1->callback((Fl_Callback*)cb_mbvvol_lfotype1);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* mbvvol_lfotype1
-      { mbvvol_stdf1 = new SliderW(372, 289, 100, 10, "St.df");
+      { mbvvol_stdf1 = new SliderW(372, 282, 100, 10, "St.df");
         mbvvol_stdf1->type(5);
         mbvvol_stdf1->box(FL_FLAT_BOX);
         mbvvol_stdf1->color((Fl_Color)178);
@@ -11075,7 +11098,7 @@ R average.");
         mbvvol_stdf1->align(FL_ALIGN_LEFT);
         mbvvol_stdf1->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_stdf1
-      { mbvvol_freq2 = new SliderW(372, 303, 100, 10, "Tempo");
+      { mbvvol_freq2 = new SliderW(372, 294, 100, 10, "Tempo");
         mbvvol_freq2->type(5);
         mbvvol_freq2->box(FL_FLAT_BOX);
         mbvvol_freq2->color((Fl_Color)178);
@@ -11092,7 +11115,7 @@ R average.");
         mbvvol_freq2->align(FL_ALIGN_LEFT);
         mbvvol_freq2->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_freq2
-      { Fl_Choice* o = mbvvol_lfotype2 = new Fl_Choice(383, 316, 72, 16, "LFO Type");
+      { Fl_Choice* o = mbvvol_lfotype2 = new Fl_Choice(383, 307, 72, 16, "LFO Type");
         mbvvol_lfotype2->down_box(FL_BORDER_BOX);
         mbvvol_lfotype2->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         mbvvol_lfotype2->labelsize(10);
@@ -11102,7 +11125,7 @@ R average.");
         mbvvol_lfotype2->callback((Fl_Callback*)cb_mbvvol_lfotype2);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* mbvvol_lfotype2
-      { mbvvol_stdf2 = new SliderW(372, 337, 100, 10, "St.df");
+      { mbvvol_stdf2 = new SliderW(372, 326, 100, 10, "St.df");
         mbvvol_stdf2->type(5);
         mbvvol_stdf2->box(FL_FLAT_BOX);
         mbvvol_stdf2->color((Fl_Color)178);
@@ -11118,7 +11141,7 @@ R average.");
         mbvvol_stdf2->align(FL_ALIGN_LEFT);
         mbvvol_stdf2->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_stdf2
-      { mbvvol_cross1 = new SliderW(372, 351, 100, 10, "Cross1");
+      { mbvvol_cross1 = new SliderW(372, 338, 100, 10, "Cross1");
         mbvvol_cross1->type(5);
         mbvvol_cross1->box(FL_FLAT_BOX);
         mbvvol_cross1->color((Fl_Color)178);
@@ -11135,7 +11158,7 @@ R average.");
         mbvvol_cross1->align(FL_ALIGN_LEFT);
         mbvvol_cross1->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_cross1
-      { mbvvol_cross2 = new SliderW(372, 365, 100, 10, "Cross2");
+      { mbvvol_cross2 = new SliderW(372, 350, 100, 10, "Cross2");
         mbvvol_cross2->type(5);
         mbvvol_cross2->box(FL_FLAT_BOX);
         mbvvol_cross2->color((Fl_Color)178);
@@ -11152,7 +11175,7 @@ R average.");
         mbvvol_cross2->align(FL_ALIGN_LEFT);
         mbvvol_cross2->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_cross2
-      { mbvvol_cross3 = new SliderW(372, 379, 100, 10, "Cross2");
+      { mbvvol_cross3 = new SliderW(372, 362, 100, 10, "Cross2");
         mbvvol_cross3->type(5);
         mbvvol_cross3->box(FL_FLAT_BOX);
         mbvvol_cross3->color((Fl_Color)178);
@@ -11169,6 +11192,16 @@ R average.");
         mbvvol_cross3->align(FL_ALIGN_LEFT);
         mbvvol_cross3->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_cross3
+      { mbvvol_combi = new Fl_Choice(383, 374, 72, 16, "Combi");
+        mbvvol_combi->down_box(FL_BORDER_BOX);
+        mbvvol_combi->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        mbvvol_combi->labelsize(10);
+        mbvvol_combi->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        mbvvol_combi->textsize(10);
+        mbvvol_combi->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        mbvvol_combi->callback((Fl_Callback*)cb_mbvvol_combi);
+        mbvvol_combi->menu(menu_mbvvol_combi);
+      } // Fl_Choice* mbvvol_combi
       MBVVOL->end();
     } // Fl_Group* MBVVOL
     { Tuner = new Fl_Group(521, 84, 276, 58);

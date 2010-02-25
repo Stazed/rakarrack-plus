@@ -64,7 +64,7 @@ MBVvol::MBVvol (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   //default values
   Ppreset = 0;
   Pvolume = 50;
-  volL=volLr=volML=volMLr=volMH=volMHr=volH=volHr=.25f;
+  volL=volLr=volML=volMLr=volMH=volMHr=volH=volHr=2.0f;
 
   setpreset (Ppreset);
   cleanup ();
@@ -143,16 +143,8 @@ MBVvol::out (REALTYPE * smpsl, REALTYPE * smpsr)
   lfo1.effectlfoout (&lfo1l, &lfo1r);
   lfo2.effectlfoout (&lfo2l, &lfo2r);
 
-  volL=lfo1l*2.0f;
-  volLr=lfo1r*2.0f;
-  volML=lfo2l*2.0f;
-  volMLr=lfo2r*2.0f;
-  volMH=lfo1l*2.0f;
-  volMHr=lfo1r*2.0f;
-  volH =lfo2l*2.0f;
-  volHr=lfo2r*2.0f;
-  
-  printf("%f %f\n",lfo1l,lfo1r); 
+
+  setCombi(Pcombi);
 
   for (i = 0; i < PERIOD; i++)
   {
@@ -173,6 +165,144 @@ MBVvol::setvolume (int value)
   outvolume = (float)Pvolume / 127.0f;
 };
 
+void
+MBVvol::setCombi(int value)
+{
+
+float m1l,m1r,m2l,m2r;
+
+
+
+if(lfo1l<0) m1l=-1.0f; else m1l=1.0f;
+if(lfo1r<0) m1r=-1.0f; else m1r=1.0f;
+if(lfo2l<0) m2l=-1.0f; else m2l=1.0f;
+if(lfo2r<0) m2r=-1.0f; else m2r=1.0f;
+
+
+v1l=v1l*.4f+lfo1l*m1l*.6f;
+v1r=v1r*.4f+lfo1r*m1r*.6f;
+v2l=v2l*.4f+lfo2l*m2l*.6f;
+v2r=v2r*.4f+lfo2r*m2r*.6f;
+
+
+
+switch(value)
+  {
+   case 0: 
+   volL=v1l;
+   volLr=v1r;
+   volML=v1l;
+   volMLr=v1r;
+   volMH=v2l;
+   volMHr=v2r;
+   volH =v2l;
+   volHr=v2r;
+   break;
+   case 1:
+   volL=v1l;
+   volLr=v1r;
+   volML=v2l;
+   volMLr=v2r;
+   volMH=v2l;
+   volMHr=v2r;
+   volH =v1l;
+   volHr=v1r;
+   break;
+   case 2:
+   volL=v1l;
+   volLr=v1r;
+   volML=v2l;
+   volMLr=v2r;
+   volMH=v1l;
+   volMHr=v1r;
+   volH =v2l;
+   volHr=v2r;
+   break;
+ case 3:
+   volL=1.0f;
+   volLr=1.0f;
+   volML=v1l;
+   volMLr=v1r;
+   volMH=v1l;
+   volMHr=v1r;
+   volH =1.0f;
+   volHr=1.0f;
+   break;
+ case 4:
+   volL=1.0f;
+   volLr=1.0f;
+   volML=v1l;
+   volMLr=v1r;
+   volMH=v2l;
+   volMHr=v2r;
+   volH =1.0f;
+   volHr=1.0f;
+   break;
+ case 5:
+   volL=0.0f;
+   volLr=0.0f;
+   volML=v1l;
+   volMLr=v1r;
+   volMH=v1l;
+   volMHr=v1r;
+   volH =0.0f;
+   volHr=0.0f;
+   break;
+ case 6:
+   volL=0.0f;
+   volLr=0.0f;
+   volML=v1l;
+   volMLr=v1r;
+   volMH=v2l;
+   volMHr=v2r;
+   volH =0.0f;
+   volHr=0.0f;
+   break;
+ case 7:
+   volL=v1l;
+   volLr=v1r;
+   volML=1.0f;
+   volMLr=1.0f;
+   volMH=1.0f;
+   volMHr=1.0f;
+   volH =v1l;
+   volHr=v1r;
+   break;
+ case 8:
+   volL=v1l;
+   volLr=v1r;
+   volML=1.0f;
+   volMLr=1.0f;
+   volMH=1.0f;
+   volMHr=1.0f;
+   volH =v2l;
+   volHr=v2r;
+   break;
+ case 9:
+   volL=v1l;
+   volLr=v1r;
+   volML=0.0f;
+   volMLr=0.0f;
+   volMH=0.0f;
+   volMHr=0.0f;
+   volH =v1l;
+   volHr=v1r;
+   break;
+ case 10:
+   volL=v1l;
+   volLr=v1r;
+   volML=0.0f;
+   volMLr=0.0f;
+   volMH=0.0f;
+   volMHr=0.0f;
+   volH =v2l;
+   volHr=v2r;
+   break;
+
+}
+
+
+}
 
 void
 MBVvol::setCross1 (int value)
@@ -211,15 +341,15 @@ MBVvol::setCross3 (int value)
 void
 MBVvol::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 10;
+  const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Vary1
-    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000},
+    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0},
     //Vary2
-    {0, 80, 0, 64, 40, 0, 0, 120, 600, 2300},
+    {0, 80, 0, 64, 40, 0, 0, 120, 600, 2300, 1},
     //Vary3
-    {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200}
+    {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2}
   };
 
 
@@ -273,6 +403,9 @@ MBVvol::changepar (int npar, int value)
     case 9:
       setCross3(value);
       break;
+    case 10:
+      Pcombi=value;
+      break;  
     };
 };
 
@@ -311,6 +444,10 @@ MBVvol::getpar (int npar)
     case 9:
       return (Cross3);
       break;
+    case 10:
+      return (Pcombi);
+      break;
+
     };
   return (0);			//in case of bogus parameter number
 };
