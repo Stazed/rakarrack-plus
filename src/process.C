@@ -148,6 +148,7 @@ RKR::RKR ()
   efx_Expander = new Expander(efxoutl,efxoutr);
   efx_Shuffle = new Shuffle(efxoutl,efxoutr);
   efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
+  efx_MBVvol = new MBVvol(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
@@ -167,7 +168,7 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 28;
+  NumEffects = 29;
 
   {
     static const char *los_names[] =
@@ -175,7 +176,7 @@ RKR::RKR ()
       "Phaser", "Flanger", "Reverb",
       "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
       "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",
-      "DistBand", "Arpie", "Expander", "Shuffle", "Synthfilter"
+      "DistBand", "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -846,6 +847,7 @@ RKR::cleanup_efx ()
   efx_Expander->cleanup();
   efx_Shuffle->cleanup();
   efx_Synthfilter->cleanup();
+  efx_MBVvol->cleanup();
   RC->cleanup ();
 };
 
@@ -895,7 +897,6 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
              {
              efx_Ring->Pfreq=lrintf(RecNote->lafreq);
              last = reconota; 
-             // printf("%d\n"efx_Ring->Pfreq);
              }
             }
         }    
@@ -1125,6 +1126,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 {
                   efx_Synthfilter->out(efxoutl, efxoutr);
 		  Vol_Efx(27,efx_Synthfilter->outvolume);
+                }
+              break;  
+
+	     case 28:
+              if (MBVvol_Bypass)
+                {
+                  efx_MBVvol->out(efxoutl, efxoutr);
+		  Vol_Efx(28,efx_MBVvol->outvolume);
                 }
               break;  
 

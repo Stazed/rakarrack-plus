@@ -80,6 +80,8 @@ rakarrack_SOURCES = main.C \
 	Ring.h \
 	Shuffle.h \
 	Shuffle.C \
+	MBVvol.C \
+	MBVvol.h \
 	Synthfilter.C \
 	Synthfilter.h \
 	MIDIConverter.C \

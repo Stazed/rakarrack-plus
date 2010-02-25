@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -896,7 +895,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1737 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1730 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -2251,7 +2250,7 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         }
         Fl_Choice flanger_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Flanger->changepar(4,(int)o->value());} open
+          callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
           xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
@@ -4676,7 +4675,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
         }
         Fl_Choice synthfilter_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Synthfilter->changepar(4,(int)o->value());} open
+          callback {rkr->efx_Synthfilter->changepar(4,(int)o->value());}
           xywh {374 271 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
@@ -4742,6 +4741,108 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
           label Offset
           callback {rkr->efx_Synthfilter->changepar(15,(int)o->value());}
           xywh {369 383 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+      }
+      Fl_Group MBVVOL {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button mbvvol_activar {
+          label On
+          user_data 2
+          callback {rkr->MBVvol_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_MBVvol->cleanup();
+findpos(28,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice mbvvol_preset {
+          label Preset
+          callback {rkr->efx_MBVvol->setpreset((int)o->value());
+mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
+mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
+mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
+mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
+mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
+mbvvol_lfotype2->value(rkr->efx_MBVvol->getpar(5));
+mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
+mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
+mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
+mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));} open
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {VaryVol 1}
+            xywh {72 72 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {VaryVol 2}
+            xywh {72 72 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {VaryVol 3}
+            xywh {72 72 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider mbvvol_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_MBVvol->changepar(0,(int)(o->value()+64));}
+          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbvvol_freq1 {
+          label Tempo
+          callback {rkr->efx_MBVvol->changepar(1,(int)o->value());}
+          xywh {372 254 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Choice mbvvol_lfotype1 {
+          label {LFO Type}
+          callback {rkr->efx_MBVvol->changepar(2,(int)o->value());}
+          xywh {383 269 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
+        Fl_Value_Slider mbvvol_stdf1 {
+          label {St.df}
+          callback {rkr->efx_MBVvol->changepar(3,(int)o->value());}
+          xywh {372 289 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbvvol_freq2 {
+          label Tempo
+          callback {rkr->efx_MBVvol->changepar(4,(int)o->value());}
+          xywh {372 303 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Choice mbvvol_lfotype2 {
+          label {LFO Type}
+          callback {rkr->efx_MBVvol->changepar(5,(int)o->value());}
+          xywh {383 316 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
+        Fl_Value_Slider mbvvol_stdf2 {
+          label {St.df}
+          callback {rkr->efx_MBVvol->changepar(6,(int)o->value());}
+          xywh {372 337 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbvvol_cross1 {
+          label Cross1
+          callback {rkr->efx_MBVvol->changepar(7,(int)o->value());}
+          xywh {372 351 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbvvol_cross2 {
+          label Cross2
+          callback {rkr->efx_MBVvol->changepar(8,(int)o->value());}
+          xywh {372 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider mbvvol_cross3 {
+          label Cross2
+          callback {rkr->efx_MBVvol->changepar(9,(int)o->value());} selected
+          xywh {372 379 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
           class SliderW
         }
       }
@@ -5521,7 +5622,7 @@ MIDILearn->hide();}
         xywh {1 1 640 480}
       }
       Fl_Browser Epar {
-        callback {DisAssigns();} selected
+        callback {DisAssigns();}
         xywh {10 58 201 348} type Hold textcolor 7
       }
       Fl_Button GMM {
@@ -6861,6 +6962,9 @@ for (i=1; i<=t; i++)
         case 27:
         SYNTHFILTER->hide();
         break;
+        case 28:
+        MBVVOL->hide();
+        break;
         
         
       }
@@ -7127,6 +7231,14 @@ switch (rkr->efx_order[i])
        SYNTHFILTER->show();
        if(rkr->Synthfilter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
+
+     case 28:
+       MBVVOL->position(x[i],y[i]);
+       mbvvol_activar->shortcut(s[i]);
+       MBVVOL->show();
+       if(rkr->MBVvol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break;   
+  
 
  }
  
