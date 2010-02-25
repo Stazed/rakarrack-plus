@@ -14446,6 +14446,8 @@ ARPIE->image(InOut->image());
 EXPANDER->image(InOut->image());
 SHUFFLE->image(InOut->image());
 SYNTHFILTER->image(InOut->image());
+MBVVOL->image(InOut->image());
+
 
 Presets->image(InOut->image());
 Tuner->image(InOut->image());

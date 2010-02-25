@@ -894,7 +894,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} selected
+Pexitprogram=1;}
       xywh {1723 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -8255,7 +8255,8 @@ for (int t=0; t<ob->children();t++)
   
   }} {}
   }
-  Function {PutBackground()} {} {
+  Function {PutBackground()} {selected
+  } {
     code {delete back;
 back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 InOut->image(back);
@@ -8287,6 +8288,8 @@ ARPIE->image(InOut->image());
 EXPANDER->image(InOut->image());
 SHUFFLE->image(InOut->image());
 SYNTHFILTER->image(InOut->image());
+MBVVOL->image(InOut->image());
+
 
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
