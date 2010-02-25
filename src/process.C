@@ -848,7 +848,8 @@ RKR::cleanup_efx ()
   efx_Shuffle->cleanup();
   efx_Synthfilter->cleanup();
   efx_MBVvol->cleanup();
-  RC->cleanup ();
+  RC->cleanup();
+  efx_FLimiter->cleanup();
 };
 
 
