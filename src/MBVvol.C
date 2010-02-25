@@ -64,6 +64,7 @@ MBVvol::MBVvol (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   //default values
   Ppreset = 0;
   Pvolume = 50;
+  coeff = 1.0 / (float) PERIOD;
   volL=volLr=volML=volMLr=volMH=volMHr=volH=volHr=2.0f;
 
   setpreset (Ppreset);
@@ -143,11 +144,16 @@ MBVvol::out (REALTYPE * smpsl, REALTYPE * smpsr)
   lfo1.effectlfoout (&lfo1l, &lfo1r);
   lfo2.effectlfoout (&lfo2l, &lfo2r);
 
-
-  setCombi(Pcombi);
+  d1=(lfo1l-v1l)*coeff;
+  d2=(lfo1r-v1r)*coeff;
+  d3=(lfo2l-v2l)*coeff;
+  d4=(lfo2r-v2r)*coeff;
 
   for (i = 0; i < PERIOD; i++)
   {
+
+    setCombi(Pcombi);
+
     efxoutl[i]=lowl[i]*volL+midll[i]*volML+midhl[i]*volMH+highl[i]*volH;
     efxoutr[i]=lowr[i]*volLr+midlr[i]*volMLr+midhr[i]*volMHr+highr[i]*volHr;
   }      
@@ -169,21 +175,11 @@ void
 MBVvol::setCombi(int value)
 {
 
-float m1l,m1r,m2l,m2r;
 
-
-
-if(lfo1l<0) m1l=-1.0f; else m1l=1.0f;
-if(lfo1r<0) m1r=-1.0f; else m1r=1.0f;
-if(lfo2l<0) m2l=-1.0f; else m2l=1.0f;
-if(lfo2r<0) m2r=-1.0f; else m2r=1.0f;
-
-
-v1l=v1l*.4f+lfo1l*m1l*.6f;
-v1r=v1r*.4f+lfo1r*m1r*.6f;
-v2l=v2l*.4f+lfo2l*m2l*.6f;
-v2r=v2r*.4f+lfo2r*m2r*.6f;
-
+v1l+=d1;
+v1r+=d2;
+v2l+=d3;
+v2r+=d4;
 
 
 switch(value)

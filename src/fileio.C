@@ -386,6 +386,16 @@ RKR::savefile (char *filename)
                    Synthfilter_Bypass);
 	  break;
 
+	case 28:
+	  //MBVvol
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_MBVvol->getpar (0), efx_MBVvol->getpar (1),
+		   efx_MBVvol->getpar (2), efx_MBVvol->getpar (3),
+		   efx_MBVvol->getpar (4), efx_MBVvol->getpar (5),
+		   efx_MBVvol->getpar (6), efx_MBVvol->getpar (7),
+		   efx_MBVvol->getpar (8), efx_MBVvol->getpar (9),
+                   efx_MBVvol->getpar (10), MBVvol_Bypass);
+	  break;
 
  
 
@@ -769,6 +779,16 @@ RKR::loadfile (char *filename)
 		  &lv[28][15],&Synthfilter_B);
 	  break;
 
+	case 28:
+	  //MBVvol
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[29][0], &lv[29][1], &lv[29][2], &lv[29][3], &lv[29][4],
+		  &lv[29][5], &lv[29][6], &lv[29][7], &lv[29][8], &lv[29][9],
+		  &lv[29][10],&MBVvol_B);
+	  break;
+
+
+
 	}
     }
 
@@ -839,6 +859,7 @@ RKR::Actualizar_Audio ()
   Expander_Bypass = 0;
   Shuffle_Bypass = 0;
   Synthfilter_Bypass = 0;
+  MBVvol_Bypass = 0;
   
   cleanup_efx ();
 
@@ -892,7 +913,9 @@ for (i = 0; i <= 6; i++)
  for (i = 0; i <= 10; i++)
     efx_Shuffle->changepar (i, lv[27][i]);
  for (i = 0; i <= 15; i++)
-    efx_Synthfilter->changepar (i, lv[27][i]);
+    efx_Synthfilter->changepar (i, lv[28][i]);
+ for (i = 0; i <= 10; i++)
+    efx_MBVvol->changepar (i, lv[29][i]);
   
 
   for (i = 0; i < 12; i++)
@@ -950,6 +973,7 @@ for (i = 0; i <= 6; i++)
   Expander_Bypass = Expander_B;
   Shuffle_Bypass = Shuffle_B;
   Synthfilter_Bypass = Synthfilter_B;
+  MBVvol_Bypass = MBVvol_B;
   Bypass = Bypass_B;
 
 }
@@ -1015,7 +1039,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[29][16] = {
+  int presets[30][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1073,8 +1097,10 @@ RKR::New ()
 //Shuffle 1
     {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 1, 0, 0 ,0 ,0, 0},
 //Synthfilter
-    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0}
-     
+    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0},
+//MBVvol    
+    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0}
+ 
 
   };
 
@@ -1132,6 +1158,7 @@ RKR::New ()
   Expander_B = 0;
   Shuffle_B = 0;
   Synthfilter_B = 0;
+  MBVvol_B = 0;
   Bypass_B = 0;
 
   
@@ -1154,7 +1181,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[29][16] = {
+  int presets[30][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1212,7 +1239,9 @@ RKR::New_Bank ()
 //Shuffle 1
     {64, 10, 0, 0, 0, 600, 1200, 2000, 6000,-14, 1, 0, 0 ,0 ,0, 0},
 //Synthfilter
-    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0}
+    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0},
+//MBVvol    
+    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0}
     
     
      
@@ -1304,7 +1333,8 @@ RKR::Bank_to_Preset (int i)
   Expander_B = Bank[i].lv[26][19];
   Shuffle_B = Bank[i].lv[27][19];
   Synthfilter_B = Bank[i].lv[28][19];
-  
+  MBVvol_B = Bank[i].lv[29][19];
+    
   
   Bypass_B = Bypass;
 
@@ -1391,6 +1421,8 @@ RKR::Preset_to_Bank (int i)
     lv[27][j] = efx_Shuffle->getpar(j);
   for (j = 0; j <= 15; j++)
     lv[28][j] = efx_Synthfilter->getpar(j);
+  for (j = 0; j <= 15; j++)
+    lv[29][j] = efx_MBVvol->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1452,6 +1484,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[26][19] = Expander_Bypass;
   Bank[i].lv[27][19] = Shuffle_Bypass;
   Bank[i].lv[28][19] = Synthfilter_Bypass;
+  Bank[i].lv[29][19] = MBVvol_Bypass;
   
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

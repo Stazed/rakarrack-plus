@@ -74,9 +74,10 @@ private:
   void setCombi (int value);
   //Parametrii reali
   
+  float coeff;
   float lfo1l,lfo1r,lfo2l,lfo2r;
   float v1l,v1r,v2l,v2r;
-
+  float d1,d2,d3,d4;
   float volL,volML,volMH,volH;
   float volLr,volMLr,volMHr,volHr;
   AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
