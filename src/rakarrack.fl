@@ -886,15 +886,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1478 61 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4898,7 +4900,7 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
         }
       }
       Fl_Group CONVOLOTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button convo_activar {
@@ -4907,7 +4909,7 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
           callback {rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
-findpos(29,(int)o->value());} selected
+findpos(29,(int)o->value());}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice convo_preset {
@@ -4965,17 +4967,16 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
         }
         Fl_Choice convo_fnum {
           label Preset
-          callback {rkr->efx_Convol->changepar(2,(int)o->value());}
-          xywh {389 345 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          callback {rkr->efx_Convol->changepar(2,(int)o->value());} open
+          xywh {389 345 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Marshall
             xywh {44 44 36 21} labelsize 10
           }
           MenuItem {} {
-            label Fender
-            callback {rkr->efx_Rev->changepar(10,1)}
-            xywh {44 44 36 21} labelsize 10
+            label Fender selected
+            xywh {54 54 36 21} labelsize 10
           }
         }
       }

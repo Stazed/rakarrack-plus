@@ -2151,8 +2151,6 @@ private:
   void cb_convo_fnum_i(Fl_Choice*, void*);
   static void cb_convo_fnum(Fl_Choice*, void*);
   static Fl_Menu_Item menu_convo_fnum[];
-  void cb_Fender_i(Fl_Menu_*, void*);
-  static void cb_Fender(Fl_Menu_*, void*);
 public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;

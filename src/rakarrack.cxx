@@ -4664,16 +4664,9 @@ void RKRGUI::cb_convo_fnum(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_fnum_i(o,v);
 }
 
-void RKRGUI::cb_Fender_i(Fl_Menu_*, void*) {
-  rkr->efx_Rev->changepar(10,1);
-}
-void RKRGUI::cb_Fender(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fender_i(o,v);
-}
-
 Fl_Menu_Item RKRGUI::menu_convo_fnum[] = {
  {"Marshall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender", 0,  (Fl_Callback*)RKRGUI::cb_Fender, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -11386,6 +11379,7 @@ R average.");
         convo_fnum->textsize(10);
         convo_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_fnum->callback((Fl_Callback*)cb_convo_fnum);
+        convo_fnum->when(FL_WHEN_CHANGED);
         convo_fnum->menu(menu_convo_fnum);
       } // Fl_Choice* convo_fnum
       CONVOLOTRON->end();

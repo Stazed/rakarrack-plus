@@ -39,6 +39,7 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Ppanning = 64;
   Plrcross = 100;
   Phidamp = 60;
+  Filenum = 0;
   maxx_size = SAMPLE_RATE * MAX_C_SIZE;
   buf = (float *) malloc (sizeof (float) * maxx_size);
 
@@ -132,10 +133,10 @@ int readcount;
 memset(buf,0,sizeof(float) * maxx_size);
 Filenum = value;
 bzero(Filename,sizeof(Filename));
-sprintf(Filename, "%s/%d.wav",DATADIR,Filenum);
+sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
 if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) return(0);
 if (sfinfo.frames > maxx_size) howmany = maxx_size; else howmany=sfinfo.frames;
-readcount = sf_seek (infile,0, SEEK_CUR);
+readcount = sf_seek (infile,0, SEEK_SET);
 readcount = sf_readf_float(infile,buf,howmany);
 return(1);
 };
@@ -161,13 +162,13 @@ Convolotron::setpreset (int npreset)
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Convolotron 1
-    {67, 64, 1, 64, 30, 20},
+    {67, 64, 0, 64, 30, 20},
     //Convolotron 2
-    {67, 64, 2, 64, 30, 20},
+    {67, 64, 1, 64, 30, 20},
     //Convolotron 3
-    {67, 75, 1, 64, 30, 20},
+    {67, 75, 0, 64, 30, 20},
     //Convolotron 4
-    {67, 60, 2, 64, 30, 20}
+    {67, 60, 1, 64, 30, 20}
   };
 
 
