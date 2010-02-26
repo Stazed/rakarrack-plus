@@ -41,7 +41,7 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Phidamp = 60;
   Filenum = 0;
   Pquality = 1;
-  Plength = 1;
+  Plength = 100;
   howmany = 0;
   convlength = MAX_C_SIZE / Plength;
   maxx_size = (int) ((float) SAMPLE_RATE * convlength);
@@ -175,7 +175,7 @@ Convolotron::process_rbuf()
  float val;
  memset(buf,0, sizeof(float)*maxx_size);
  k=0;
- printf("before howmany %d Quality %d\n",howmany,Pquality);
+ printf("before howmany %d Quality %d Length %d\n",howmany,Pquality, Plength);
  
 for(i=0;i<=real_length;i+=Pquality)
 {
@@ -188,7 +188,7 @@ for(i=0;i<=real_length;i+=Pquality)
 
   howmany = k-1;
 
- printf("after howmany %d Quality %d\n",howmany,Pquality);
+ printf("after howmany %d Quality %d Length %d\n",howmany,Pquality,Plength);
 
 
 }
