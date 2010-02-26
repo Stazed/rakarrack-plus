@@ -53,11 +53,12 @@ public:
 
 private:
   //Parametrii
-  int Pvolume;	//Volumul or E/R
+  int Pvolume;	//This is master wet/dry mix like other FX.
   int Ppanning;	//Panning
   int Plrcross;	// L/R Mixing
   int Phidamp;
-  int Plevel;
+  int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
+  int Plength;		//1...1000 ms// Set maximum length of IR.
   int Filenum;
   char Filename[128];
   int setfile (int value);
