@@ -2126,15 +2126,15 @@ private:
   static void cb_convo_preset(Fl_Choice*, void*);
   static Fl_Menu_Item menu_convo_preset[];
 public:
-  SliderW *convo_pan;
-private:
-  void cb_convo_pan_i(SliderW*, void*);
-  static void cb_convo_pan(SliderW*, void*);
-public:
   SliderW *convo_LRc;
 private:
   void cb_convo_LRc_i(SliderW*, void*);
   static void cb_convo_LRc(SliderW*, void*);
+public:
+  SliderW *convo_pan;
+private:
+  void cb_convo_pan_i(SliderW*, void*);
+  static void cb_convo_pan(SliderW*, void*);
 public:
   SliderW *convo_level;
 private:
@@ -2146,6 +2146,27 @@ private:
   void cb_convo_damp_i(SliderW*, void*);
   static void cb_convo_damp(SliderW*, void*);
 public:
+  SliderW *convo_length;
+private:
+  void cb_convo_length_i(SliderW*, void*);
+  static void cb_convo_length(SliderW*, void*);
+public:
+  SliderW *convo_qual;
+private:
+  void cb_convo_qual_i(SliderW*, void*);
+  static void cb_convo_qual(SliderW*, void*);
+public:
+  Fl_Check_Button *convo_stereo;
+private:
+  void cb_convo_stereo_i(Fl_Check_Button*, void*);
+  static void cb_convo_stereo(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *convo_reverb;
+private:
+  void cb_convo_reverb_i(Fl_Check_Button*, void*);
+  static void cb_convo_reverb(Fl_Check_Button*, void*);
+public:
+  Fl_Button *B_wav;
   Fl_Choice *convo_fnum;
 private:
   void cb_convo_fnum_i(Fl_Choice*, void*);

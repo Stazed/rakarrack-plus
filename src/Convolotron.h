@@ -61,6 +61,7 @@ private:
   int Plength;		//1...1000 ms// Set maximum length of IR.
   int Pstereo;		//0 or 1//Process in stereo.
   int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
+  int Pquality;
   int Filenum;
   char Filename[128];
   int setfile (int value);
@@ -68,15 +69,17 @@ private:
   void setpanning (int Ppanning);
   void setlrcross (int Plrcross);
   void sethidamp (int Phidamp);
+  void process_rbuf();
 
   SNDFILE *infile;
   SF_INFO sfinfo;
-  unsigned int howmany,offset;
+  int howmany,offset,real_length;
 
   //Parametrii reali
   REALTYPE panning, lrcross,  hidamp, convlength;
-  REALTYPE *buf, *lxn, *rxn;
+  REALTYPE *rbuf, *buf, *lxn, *rxn;
   float maxx_size;
+  float fquality,level;
 };
 
 

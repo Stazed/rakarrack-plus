@@ -891,13 +891,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {1478 61 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {1375 40 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -1979,7 +1978,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
         Fl_Choice chorus_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open
+          callback {rkr->efx_Chorus->changepar(4,(int)o->value())}
           xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4900,8 +4899,8 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
         }
       }
       Fl_Group CONVOLOTRON {
-        user_data 1 open
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        user_data 1
+        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button convo_activar {
           label On
@@ -4917,10 +4916,14 @@ findpos(29,(int)o->value());}
           callback {rkr->Convol_Bypass=0;
 rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
-convo_level->value(rkr->efx_Convol->getpar(5));
-convo_LRc->value(rkr->efx_Convol->getpar(3)-64);
-convo_damp->value(rkr->efx_Convol->getpar(4));
-convo_fnum->value(rkr->efx_Convol->getpar(2));
+convo_level->value(rkr->efx_Convol->getpar(7));
+convo_LRc->value(rkr->efx_Convol->getpar(5)-64);
+convo_damp->value(rkr->efx_Convol->getpar(6));
+convo_fnum->value(rkr->efx_Convol->getpar(4));
+convo_length->value(rkr->efx_Convol->getpar(2));
+convo_stereo->value(rkr->efx_Convol->getpar(8));
+convo_reverb->value(rkr->efx_Convol->getpar(9));
+convo_qual->value(rkr->efx_Convol->getpar(3));
 if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -4941,41 +4944,70 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
             xywh {77 77 36 21} labelsize 10
           }
         }
+        Fl_Value_Slider convo_LRc {
+          label {L/R.Cr}
+          callback {rkr->efx_Convol->changepar(5,(int)(o->value()+64));}
+          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
         Fl_Value_Slider convo_pan {
           label Pan
           callback {rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
           xywh {372 255 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
-        Fl_Value_Slider convo_LRc {
-          label {L/R.Cr}
-          callback {rkr->efx_Convol->changepar(3,(int)(o->value()+64));}
-          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
         Fl_Value_Slider convo_level {
           label Level
-          callback {rkr->efx_Convol->changepar(5,(int)o->value());}
-          xywh {372 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          callback {rkr->efx_Convol->changepar(7,(int)o->value());}
+          xywh {372 270 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider convo_damp {
           label Damp
-          callback {rkr->efx_Convol->changepar(4,(int)o->value());}
-          xywh {373 288 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          callback {rkr->efx_Convol->changepar(6,(int)o->value());}
+          xywh {372 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Value_Slider convo_length {
+          label Length
+          callback {rkr->efx_Convol->changepar(2,(int)o->value());} selected
+          xywh {372 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 100 maximum 1000 step 1 value 1000 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider convo_qual {
+          label Quality
+          callback {rkr->efx_Convol->changepar(3,(int)o->value());}
+          xywh {372 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 64 step 1 value 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button convo_stereo {
+          label Stereo
+          user_data 2
+          callback {rkr->efx_Convol->changepar(8,(int)o->value())}
+          xywh {339 332 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button convo_reverb {
+          label Reverb
+          user_data 2
+          callback {rkr->efx_Convol->changepar(9,(int)o->value())}
+          xywh {417 332 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Button B_wav {
+          label Browse
+          user_data 2
+          xywh {414 353 48 12} labelsize 10 deactivate
         }
         Fl_Choice convo_fnum {
           label Preset
-          callback {rkr->efx_Convol->changepar(2,(int)o->value());} open
-          xywh {389 345 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
+          callback {rkr->efx_Convol->changepar(4,(int)o->value());}
+          xywh {390 369 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Marshall
             xywh {44 44 36 21} labelsize 10
           }
           MenuItem {} {
-            label Fender selected
+            label Fender
             xywh {54 54 36 21} labelsize 10
           }
         }
