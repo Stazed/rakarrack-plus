@@ -149,8 +149,9 @@ readcount = sf_seek (infile,0, SEEK_SET);
 readcount = sf_readf_float(infile,buf,howmany);
 if (sfinfo.samplerate != SAMPLE_RATE)
 {
-  printf("File is read butt need to be reesamnpled");
+  printf("File is read but need to be reesamnpled\n");
   // call the resample function here
+  // call envelope function here
 }
 
 return(1);

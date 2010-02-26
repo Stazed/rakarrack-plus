@@ -59,6 +59,8 @@ private:
   int Phidamp;
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
   int Plength;		//1...1000 ms// Set maximum length of IR.
+  int Pstereo;		//0 or 1//Process in stereo.
+  int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
   int Filenum;
   char Filename[128];
   int setfile (int value);
