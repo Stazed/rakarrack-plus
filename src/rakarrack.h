@@ -2114,6 +2114,46 @@ private:
   static void cb_mbvvol_combi(Fl_Choice*, void*);
   static Fl_Menu_Item menu_mbvvol_combi[];
 public:
+  Fl_Group *CONVOLOTRON;
+  Fl_Light_Button *convo_activar;
+private:
+  void cb_convo_activar_i(Fl_Light_Button*, void*);
+  static void cb_convo_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *convo_preset;
+private:
+  void cb_convo_preset_i(Fl_Choice*, void*);
+  static void cb_convo_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_convo_preset[];
+public:
+  SliderW *convo_pan;
+private:
+  void cb_convo_pan_i(SliderW*, void*);
+  static void cb_convo_pan(SliderW*, void*);
+public:
+  SliderW *convo_LRc;
+private:
+  void cb_convo_LRc_i(SliderW*, void*);
+  static void cb_convo_LRc(SliderW*, void*);
+public:
+  SliderW *convo_level;
+private:
+  void cb_convo_level_i(SliderW*, void*);
+  static void cb_convo_level(SliderW*, void*);
+public:
+  SliderW *convo_damp;
+private:
+  void cb_convo_damp_i(SliderW*, void*);
+  static void cb_convo_damp(SliderW*, void*);
+public:
+  Fl_Choice *convo_fnum;
+private:
+  void cb_convo_fnum_i(Fl_Choice*, void*);
+  static void cb_convo_fnum(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_convo_fnum[];
+  void cb_Fender_i(Fl_Menu_*, void*);
+  static void cb_Fender(Fl_Menu_*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

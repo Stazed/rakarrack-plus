@@ -69,6 +69,7 @@ void deleteFFTFREQS(FFTFREQS *f);
 #include "Shuffle.h"
 #include "Synthfilter.h"
 #include "MBVvol.h"
+#include "Convolotron.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f
@@ -201,6 +202,7 @@ public:
   class Synthfilter *efx_Synthfilter;
   class Shuffle *efx_Shuffle;
   class MBVvol *efx_MBVvol;
+  class Convolotron *efx_Convol;
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
@@ -240,6 +242,7 @@ public:
   int Shuffle_Bypass;
   int Synthfilter_Bypass;
   int MBVvol_Bypass;
+  int Convol_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -270,6 +273,7 @@ public:
   int Shuffle_B;
   int Synthfilter_B;
   int MBVvol_B;
+  int Convol_B;
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];

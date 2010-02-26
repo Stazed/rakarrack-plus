@@ -19,6 +19,7 @@ libfltk1.1
 libxpm
 libjack100.0
 libasound2
+libsndfile1
 aconnect
 jackd
 
@@ -28,6 +29,7 @@ If you want to compile you will also need the development packages:
 libxpm-dev 
 libfltk1.1-dev
 libjack-dev
+libsndfile1-dev
 libasound2-dev
 
 The name of the packages are typical of the naming convention for Debian-based distributions.

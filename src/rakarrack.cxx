@@ -4597,6 +4597,86 @@ Fl_Menu_Item RKRGUI::menu_mbvvol_combi[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_convo_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Convol_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Convol->cleanup();
+findpos(29,(int)o->value());
+}
+void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_activar_i(o,v);
+}
+
+void RKRGUI::cb_convo_preset_i(Fl_Choice* o, void*) {
+  rkr->Convol_Bypass=0;
+rkr->efx_Convol->setpreset((int) o->value());
+convo_pan->value(rkr->efx_Convol->getpar(1)-64);
+convo_level->value(rkr->efx_Convol->getpar(5));
+convo_LRc->value(rkr->efx_Convol->getpar(3)-64);
+convo_damp->value(rkr->efx_Convol->getpar(4));
+convo_fnum->value(rkr->efx_Convol->getpar(2));
+if((int)convo_activar->value())rkr->Convol_Bypass=1;
+}
+void RKRGUI::cb_convo_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_convo_preset[] = {
+ {"Convolotron 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Convolotron 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Convolotron 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Convolotron 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_convo_pan_i(SliderW* o, void*) {
+  rkr->efx_Convol->changepar(1,(int)(o->value()+64));
+}
+void RKRGUI::cb_convo_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_pan_i(o,v);
+}
+
+void RKRGUI::cb_convo_LRc_i(SliderW* o, void*) {
+  rkr->efx_Convol->changepar(3,(int)(o->value()+64));
+}
+void RKRGUI::cb_convo_LRc(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_LRc_i(o,v);
+}
+
+void RKRGUI::cb_convo_level_i(SliderW* o, void*) {
+  rkr->efx_Convol->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_convo_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_level_i(o,v);
+}
+
+void RKRGUI::cb_convo_damp_i(SliderW* o, void*) {
+  rkr->efx_Convol->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_convo_damp(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_damp_i(o,v);
+}
+
+void RKRGUI::cb_convo_fnum_i(Fl_Choice* o, void*) {
+  rkr->efx_Convol->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_convo_fnum(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_fnum_i(o,v);
+}
+
+void RKRGUI::cb_Fender_i(Fl_Menu_*, void*) {
+  rkr->efx_Rev->changepar(10,1);
+}
+void RKRGUI::cb_Fender(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fender_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_convo_fnum[] = {
+ {"Marshall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender", 0,  (Fl_Callback*)RKRGUI::cb_Fender, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -11204,6 +11284,112 @@ R average.");
       } // Fl_Choice* mbvvol_combi
       MBVVOL->end();
     } // Fl_Group* MBVVOL
+    { CONVOLOTRON = new Fl_Group(320, 210, 158, 185);
+      CONVOLOTRON->box(FL_UP_BOX);
+      CONVOLOTRON->color((Fl_Color)FL_FOREGROUND_COLOR);
+      CONVOLOTRON->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      CONVOLOTRON->labelfont(1);
+      CONVOLOTRON->user_data((void*)(1));
+      CONVOLOTRON->align(96|FL_ALIGN_INSIDE);
+      { convo_activar = new Fl_Light_Button(326, 214, 34, 18, "On");
+        convo_activar->shortcut(0x35);
+        convo_activar->color((Fl_Color)62);
+        convo_activar->selection_color((Fl_Color)1);
+        convo_activar->labelsize(10);
+        convo_activar->callback((Fl_Callback*)cb_convo_activar, (void*)(2));
+        convo_activar->align(68|FL_ALIGN_INSIDE);
+        convo_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* convo_activar
+      { convo_preset = new Fl_Choice(399, 214, 76, 18, "Preset");
+        convo_preset->down_box(FL_BORDER_BOX);
+        convo_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        convo_preset->labelsize(10);
+        convo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_preset->textsize(10);
+        convo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_preset->callback((Fl_Callback*)cb_convo_preset);
+        convo_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        convo_preset->menu(menu_convo_preset);
+      } // Fl_Choice* convo_preset
+      { convo_pan = new SliderW(372, 255, 100, 10, "Pan");
+        convo_pan->type(5);
+        convo_pan->box(FL_FLAT_BOX);
+        convo_pan->color((Fl_Color)178);
+        convo_pan->selection_color((Fl_Color)62);
+        convo_pan->labeltype(FL_NORMAL_LABEL);
+        convo_pan->labelfont(0);
+        convo_pan->labelsize(10);
+        convo_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_pan->minimum(-64);
+        convo_pan->maximum(63);
+        convo_pan->step(1);
+        convo_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_pan->callback((Fl_Callback*)cb_convo_pan);
+        convo_pan->align(FL_ALIGN_LEFT);
+        convo_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* convo_pan
+      { convo_LRc = new SliderW(372, 240, 100, 10, "L/R.Cr");
+        convo_LRc->type(5);
+        convo_LRc->box(FL_FLAT_BOX);
+        convo_LRc->color((Fl_Color)178);
+        convo_LRc->selection_color((Fl_Color)62);
+        convo_LRc->labeltype(FL_NORMAL_LABEL);
+        convo_LRc->labelfont(0);
+        convo_LRc->labelsize(10);
+        convo_LRc->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_LRc->minimum(-64);
+        convo_LRc->maximum(63);
+        convo_LRc->step(1);
+        convo_LRc->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_LRc->callback((Fl_Callback*)cb_convo_LRc);
+        convo_LRc->align(FL_ALIGN_LEFT);
+        convo_LRc->when(FL_WHEN_CHANGED);
+      } // SliderW* convo_LRc
+      { convo_level = new SliderW(372, 272, 100, 10, "Level");
+        convo_level->type(5);
+        convo_level->box(FL_FLAT_BOX);
+        convo_level->color((Fl_Color)178);
+        convo_level->selection_color((Fl_Color)62);
+        convo_level->labeltype(FL_NORMAL_LABEL);
+        convo_level->labelfont(0);
+        convo_level->labelsize(10);
+        convo_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_level->minimum(-64);
+        convo_level->maximum(63);
+        convo_level->step(1);
+        convo_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_level->callback((Fl_Callback*)cb_convo_level);
+        convo_level->align(FL_ALIGN_LEFT);
+        convo_level->when(FL_WHEN_CHANGED);
+      } // SliderW* convo_level
+      { convo_damp = new SliderW(373, 288, 100, 10, "Damp");
+        convo_damp->type(5);
+        convo_damp->box(FL_FLAT_BOX);
+        convo_damp->color((Fl_Color)178);
+        convo_damp->selection_color((Fl_Color)62);
+        convo_damp->labeltype(FL_NORMAL_LABEL);
+        convo_damp->labelfont(0);
+        convo_damp->labelsize(10);
+        convo_damp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_damp->maximum(127);
+        convo_damp->step(1);
+        convo_damp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_damp->callback((Fl_Callback*)cb_convo_damp);
+        convo_damp->align(FL_ALIGN_LEFT);
+        convo_damp->when(FL_WHEN_CHANGED);
+      } // SliderW* convo_damp
+      { convo_fnum = new Fl_Choice(389, 345, 72, 16, "Preset");
+        convo_fnum->down_box(FL_BORDER_BOX);
+        convo_fnum->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        convo_fnum->labelsize(10);
+        convo_fnum->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_fnum->textsize(10);
+        convo_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_fnum->callback((Fl_Callback*)cb_convo_fnum);
+        convo_fnum->menu(menu_convo_fnum);
+      } // Fl_Choice* convo_fnum
+      CONVOLOTRON->end();
+    } // Fl_Group* CONVOLOTRON
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -13162,6 +13348,9 @@ for (i=1; i<=t; i++)
         case 28:
         MBVVOL->hide();
         break;
+        case 29:
+        CONVOLOTRON->hide();
+        break;
         
         
       }
@@ -13435,7 +13624,13 @@ switch (rkr->efx_order[i])
        MBVVOL->show();
        if(rkr->MBVvol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
-  
+
+     case 29:
+       CONVOLOTRON->position(x[i],y[i]);
+       convo_activar->shortcut(s[i]);
+       CONVOLOTRON->show();
+       if(rkr->Convol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
 
  }
  
@@ -14447,6 +14642,7 @@ EXPANDER->image(InOut->image());
 SHUFFLE->image(InOut->image());
 SYNTHFILTER->image(InOut->image());
 MBVVOL->image(InOut->image());
+CONVOLOTRON->image(InOut->image());
 
 
 Presets->image(InOut->image());

@@ -895,7 +895,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1723 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1478 61 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4770,7 +4770,7 @@ mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
 mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
 mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
 mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
-mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));} open
+mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4894,6 +4894,88 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));} open
           MenuItem {} {
             label 1xx2
             xywh {70 70 36 21} labelsize 10
+          }
+        }
+      }
+      Fl_Group CONVOLOTRON {
+        user_data 1
+        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+      } {
+        Fl_Light_Button convo_activar {
+          label On
+          user_data 2
+          callback {rkr->Convol_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Convol->cleanup();
+findpos(29,(int)o->value());} selected
+          xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice convo_preset {
+          label Preset
+          callback {rkr->Convol_Bypass=0;
+rkr->efx_Convol->setpreset((int) o->value());
+convo_pan->value(rkr->efx_Convol->getpar(1)-64);
+convo_level->value(rkr->efx_Convol->getpar(5));
+convo_LRc->value(rkr->efx_Convol->getpar(3)-64);
+convo_damp->value(rkr->efx_Convol->getpar(4));
+convo_fnum->value(rkr->efx_Convol->getpar(2));
+if((int)convo_activar->value())rkr->Convol_Bypass=1;}
+          xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Convolotron 1}
+            xywh {67 67 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Convolotron 2}
+            xywh {67 67 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Convolotron 3}
+            xywh {67 67 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Convolotron 4}
+            xywh {77 77 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider convo_pan {
+          label Pan
+          callback {rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
+          xywh {372 255 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider convo_LRc {
+          label {L/R.Cr}
+          callback {rkr->efx_Convol->changepar(3,(int)(o->value()+64));}
+          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider convo_level {
+          label Level
+          callback {rkr->efx_Convol->changepar(5,(int)o->value());}
+          xywh {372 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider convo_damp {
+          label Damp
+          callback {rkr->efx_Convol->changepar(4,(int)o->value());}
+          xywh {373 288 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Choice convo_fnum {
+          label Preset
+          callback {rkr->efx_Convol->changepar(2,(int)o->value());}
+          xywh {389 345 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Marshall
+            xywh {44 44 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Fender
+            callback {rkr->efx_Rev->changepar(10,1)}
+            xywh {44 44 36 21} labelsize 10
           }
         }
       }
@@ -7016,6 +7098,9 @@ for (i=1; i<=t; i++)
         case 28:
         MBVVOL->hide();
         break;
+        case 29:
+        CONVOLOTRON->hide();
+        break;
         
         
       }
@@ -7289,7 +7374,13 @@ switch (rkr->efx_order[i])
        MBVVOL->show();
        if(rkr->MBVvol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break;   
-  
+
+     case 29:
+       CONVOLOTRON->position(x[i],y[i]);
+       convo_activar->shortcut(s[i]);
+       CONVOLOTRON->show();
+       if(rkr->Convol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
 
  }
  
@@ -8255,8 +8346,7 @@ for (int t=0; t<ob->children();t++)
   
   }} {}
   }
-  Function {PutBackground()} {selected
-  } {
+  Function {PutBackground()} {} {
     code {delete back;
 back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 InOut->image(back);
@@ -8289,6 +8379,7 @@ EXPANDER->image(InOut->image());
 SHUFFLE->image(InOut->image());
 SYNTHFILTER->image(InOut->image());
 MBVVOL->image(InOut->image());
+CONVOLOTRON->image(InOut->image());
 
 
 Presets->image(InOut->image());
