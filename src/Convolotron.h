@@ -29,7 +29,7 @@
 
 #include <sndfile.h>
 #include "global.h"
-#define  MAX_C_SIZE 2	// Number of Seconds
+#define  MAX_C_SIZE 100.0f // Number of milliseconds
 class Convolotron
 {
 public:
@@ -71,8 +71,8 @@ private:
   unsigned int howmany,offset;
 
   //Parametrii reali
-  REALTYPE panning, lrcross,  hidamp;
-  REALTYPE *buf;
+  REALTYPE panning, lrcross,  hidamp, convlength;
+  REALTYPE *buf, *lxn, *rxn;
   float maxx_size;
 };
 

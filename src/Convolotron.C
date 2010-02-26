@@ -40,10 +40,10 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Plrcross = 100;
   Phidamp = 60;
   Filenum = 0;
-  maxx_size = SAMPLE_RATE * MAX_C_SIZE;
+  convlength = MAX_C_SIZE/1000.0f;
+  maxx_size = (int) ((float) SAMPLE_RATE * convlength);
   buf = (float *) malloc (sizeof (float) * maxx_size);
-
-    
+  lxn = (float *) malloc (sizeof (float) * maxx_size);  
   
   setpreset (Ppreset);
   cleanup ();
@@ -68,8 +68,8 @@ Convolotron::cleanup ()
 void
 Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
-  int i;
-  float l,r,lout,rout;
+  int i, j, xindex;
+  float l,r,lout,rout,lyn,ryn;
 
 
 
@@ -85,13 +85,22 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
    
       l = lout * (1.0f - lrcross) + rout * lrcross;
       r = rout * (1.0f - lrcross) + lout * lrcross;
-  
-
-      lout=buf[offset] + l;
-      rout=buf[offset] + r;
       
-      efxoutl[i] = lout * 2.0f * level * panning;
-      efxoutr[i] = rout * 2.0f * level * (1.0f -panning);  
+      lxn[offset] = l + r;
+      
+      //Convolve left channel
+      lyn = 0;
+      xindex = offset;
+      for (j =0; j<howmany; j++)
+      {
+      xindex--;
+      if (xindex<0) xindex = howmany;		//input signal scrolls backward with each iteration
+
+      lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
+      }
+      
+      efxoutl[i] = lyn * 2.0f * level * panning;
+      efxoutr[i] = lyn * 2.0f * level * (1.0f -panning);  
 
       offset++;
       if (offset>howmany) offset = 0;     
