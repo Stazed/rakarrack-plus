@@ -138,6 +138,12 @@ if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) return(0);
 if (sfinfo.frames > maxx_size) howmany = maxx_size; else howmany=sfinfo.frames;
 readcount = sf_seek (infile,0, SEEK_SET);
 readcount = sf_readf_float(infile,buf,howmany);
+if (sfinfo.samplerate != SAMPLE_RATE)
+{
+  printf("File is read butt need to be reesamnpled");
+  // call the resample function here
+}
+
 return(1);
 };
 

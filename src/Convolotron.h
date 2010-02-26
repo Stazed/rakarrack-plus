@@ -68,7 +68,7 @@ private:
 
   SNDFILE *infile;
   SF_INFO sfinfo;
-  long howmany,offset;
+  unsigned int howmany,offset;
 
   //Parametrii reali
   REALTYPE panning, lrcross,  hidamp;
