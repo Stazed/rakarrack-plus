@@ -177,6 +177,7 @@ Convolotron::process_rbuf()
  float tailfader, val, alpha, a0, a1, a2, Nm1p, Nm1pp;
  memset(buf,0, sizeof(float)*maxx_size);
  k=0;
+ val = 0;
  printf("before howmany %d Quality %d Length %d real_length %d Envelope %d\n",howmany,Pquality, Plength, real_length, applyenvelope);
  
  if(howmany>maxx_size) howmany = maxx_size;
@@ -216,14 +217,17 @@ applyenvelope = 0;
 
   if(Pquality > 1) 
   {
-for(i=0;i<=real_length;i++)
-{
-  val= val*fquality;	//residual...leaky integrator
 
+for(i=0;i<=real_length;i+=Pquality)
+{
+  
+   val= val * fquality;	//residual...leaky integrator
+  
   for(j=0;j<Pquality;j++)
     val +=rbuf[i+j]; 
-   
-   buf[k]=val * fquality;   
+ 
+ //  buf[k]=val / fquality;   Ummh ... I think sounds better :-))))
+     buf[k]=val * fquality;   
   k++;   
 }
   howmany = k-1;

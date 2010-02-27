@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -886,17 +886,15 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {875 40 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1400,7 +1398,7 @@ for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(int)(o->value()+64));}
         }
       }
       Fl_Group COMPRESS {
-        user_data 1 open
+        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button compress_activar {
@@ -1491,7 +1489,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
           label Peak
           user_data 2
           callback {rkr->efx_Compressor->Compressor_Change(9,(int)o->value());
-if ((int) o->value() == 0) compress_output->do_callback();} selected
+if ((int) o->value() == 0) compress_output->do_callback();}
           tooltip {Peak Mode Compression} xywh {180 365 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
@@ -4907,7 +4905,7 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
         }
       }
       Fl_Group CONVOLOTRON {
-        user_data 1 open
+        user_data 1
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button convo_activar {
@@ -4925,14 +4923,14 @@ findpos(29,(int)o->value());}
 rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
-convo_LRc->value(rkr->efx_Convol->getpar(5)-64);
+convo_WD->value(rkr->efx_Convol->getpar(5)-64);
 convo_damp->value(rkr->efx_Convol->getpar(6));
 convo_fnum->value(rkr->efx_Convol->getpar(4));
 convo_length->value(rkr->efx_Convol->getpar(2));
 convo_stereo->value(rkr->efx_Convol->getpar(8));
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_qual->value(rkr->efx_Convol->getpar(3));
-if((int)convo_activar->value())rkr->Convol_Bypass=1;}
+if((int)convo_activar->value())rkr->Convol_Bypass=1;} selected
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4952,10 +4950,10 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
             xywh {77 77 36 21} labelsize 10
           }
         }
-        Fl_Value_Slider convo_LRc {
-          label {W/D}
-          callback {rkr->efx_Convol->changepar(5,(int)(o->value()+64));}
-          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+        Fl_Value_Slider convo_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Convol->changepar(0,(int)(o->value()+64));}
+          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider convo_pan {
