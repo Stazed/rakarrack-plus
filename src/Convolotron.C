@@ -263,13 +263,13 @@ Convolotron::setpreset (int npreset)
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Convolotron 1
-    {67, 64, 1000, 1, 0, 64, 30, 20, 1, 0},
+    {67, 64, 100, 1, 0, 64, 30, 20, 1, 0},
     //Convolotron 2
-    {67, 64, 1000, 1, 1, 64, 30, 20, 1, 0},
+    {67, 64, 100, 1, 1, 64, 30, 20, 1, 0},
     //Convolotron 3
-    {67, 75, 1000, 1, 0, 64, 30, 20, 1, 0},
+    {67, 75, 100, 1, 0, 64, 30, 20, 1, 0},
     //Convolotron 4
-    {67, 60, 1000, 1, 1, 64, 30, 20, 1, 0}
+    {67, 60, 100, 1, 1, 64, 30, 20, 1, 0}
   };
 
   howmany = 0;
