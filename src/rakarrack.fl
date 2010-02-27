@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -895,8 +894,8 @@ class RKRGUI {open
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {875 40 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1448 60 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -5002,12 +5001,12 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
         Fl_Button B_wav {
           label Browse
           user_data 2
-          xywh {414 353 48 12} labelsize 10 deactivate
+          xywh {426 353 46 12} labelsize 10 deactivate
         }
         Fl_Choice convo_fnum {
           label Preset
           callback {rkr->efx_Convol->changepar(4,(int)o->value());} open
-          xywh {390 369 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
+          xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Marshall
@@ -5022,7 +5021,7 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Mesa Boogie 2} selected
+            label {Mesa Boogie 2}
             xywh {0 0 36 21} labelsize 10
           }
         }

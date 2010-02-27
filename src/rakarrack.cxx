@@ -11468,12 +11468,12 @@ R average.");
         convo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_reverb->callback((Fl_Callback*)cb_convo_reverb, (void*)(2));
       } // Fl_Check_Button* convo_reverb
-      { B_wav = new Fl_Button(414, 353, 48, 12, "Browse");
+      { B_wav = new Fl_Button(426, 353, 46, 12, "Browse");
         B_wav->labelsize(10);
         B_wav->user_data((void*)(2));
         B_wav->deactivate();
       } // Fl_Button* B_wav
-      { convo_fnum = new Fl_Choice(390, 369, 72, 16, "Preset");
+      { convo_fnum = new Fl_Choice(371, 369, 101, 16, "Preset");
         convo_fnum->down_box(FL_BORDER_BOX);
         convo_fnum->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         convo_fnum->labelsize(10);
