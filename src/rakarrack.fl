@@ -894,7 +894,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} selected
+Pexitprogram=1;}
       xywh {1448 60 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -5005,15 +5005,15 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
         }
         Fl_Choice convo_fnum {
           label Preset
-          callback {rkr->efx_Convol->changepar(4,(int)o->value());} open
+          callback {rkr->efx_Convol->changepar(4,(int)o->value());}
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Marshall
+            label {Marshall JCM200}
             xywh {44 44 36 21} labelsize 10
           }
           MenuItem {} {
-            label Fender
+            label {Fender Superchamp}
             xywh {54 54 36 21} labelsize 10
           }
           MenuItem {} {
@@ -5022,6 +5022,10 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           }
           MenuItem {} {
             label {Mesa Boogie 2}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Marshall Plexi} selected
             xywh {0 0 36 21} labelsize 10
           }
         }

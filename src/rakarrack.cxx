@@ -4705,10 +4705,11 @@ void RKRGUI::cb_convo_fnum(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_convo_fnum[] = {
- {"Marshall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Marshall JCM200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Superchamp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Mesa Boogie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Mesa Boogie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Marshall Plexi", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

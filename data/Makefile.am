@@ -5,6 +5,7 @@ data_DATA= Default.rkrb \
 	2.wav \
 	3.wav \
 	4.wav \
+	5.wav \
 	bg1.png \
 	bg2.png \
 	bg3.png \
