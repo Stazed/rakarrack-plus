@@ -62,6 +62,9 @@ Compressor::Compressor (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   rgain_t = 1.0f;
   ratio = 1.0;
   kpct = 0.0f;
+  peak = 0;
+  lpeak = 0.0f;
+  rpeak = 0.0f;
 
 
 }
@@ -79,6 +82,8 @@ Compressor::cleanup ()
 
   lgain = rgain = 1.0f;
   lgain_old = rgain_old = 1.0f;
+  rpeak = 0.0f;
+  lpeak = 0.0f;
 
 }
 
@@ -126,6 +131,10 @@ Compressor::Compressor_Change (int np, int value)
     case 8:
       stereo = value;
       break;
+    case 9:
+      peak = value;
+      break;      
+
 
     }
 
@@ -181,6 +190,9 @@ Compressor::getpar (int np)
     case 8:
       return (stereo);
       break;
+    case 9:
+      return (peak);
+      break;   
     }
 
   return (0);
@@ -225,9 +237,27 @@ Compressor::out (float *efxoutl, float *efxoutr)
     float rdelta = 0.0f;
     float ldelta = 0.0f;
 //Right Channel
+
+     if(peak)
+     {
+     if(rpeak<efxoutr[i]) rpeak = fabs(efxoutr[i]);
+     if(lpeak<efxoutl[i]) lpeak = fabs(efxoutl[i]);
+     rpeak -= rpeak*rel;
+     lpeak -= lpeak*rel;	//leaky peak detector.
+     
+     if(lpeak>5.0f) lpeak = 5.0f;
+     if(rpeak>5.0f) rpeak = 5.0f; //keeps limiter from getting locked up when signal levels go way out of bounds (like hundreds)
+     
+     }
+     else
+     {
+     rpeak = efxoutr[i];
+     lpeak = efxoutl[i];
+     }
+     
 	if(stereo) 
 	{
-      rdelta = fabsf (efxoutr[i]) - rvolume;
+      rdelta = fabsf (rpeak) - rvolume;
 
       if (rdelta > 0.0)
 	rvolume += att * rdelta;
@@ -259,10 +289,10 @@ Compressor::out (float *efxoutl, float *efxoutr)
 
 //Left Channel
 	if(stereo)  {
-	  ldelta = fabsf (efxoutl[i]) - lvolume;
+	  ldelta = fabsf (lpeak) - lvolume;
 	}	
 	else  {
-	  ldelta = 0.5f*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - lvolume;
+	  ldelta = 0.5f*(fabsf (lpeak) + fabsf (rpeak)) - lvolume;
 	    };  //It's not as efficient to check twice, but it's small expense worth code clarity
 		
       if (ldelta > 0.0)
@@ -302,6 +332,13 @@ Compressor::out (float *efxoutl, float *efxoutr)
       lgain_old = lgain;
       }
 
+      if(peak)
+      {
+      if(efxoutl[i]>0.999f) efxoutl[i] = 0.999f;	//output hard limiting
+      if(efxoutl[i]<-0.999f) efxoutl[i] = -0.999f;
+      if(efxoutr[i]>0.999f) efxoutr[i] = 0.999f;	
+      if(efxoutr[i]<-0.999f) efxoutr[i] = -0.999f;      
+      }
     }
 
 }

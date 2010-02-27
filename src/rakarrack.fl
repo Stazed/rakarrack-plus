@@ -897,7 +897,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;} open
-      xywh {1375 40 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {875 40 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -1400,7 +1400,7 @@ for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(int)(o->value()+64));}
         }
       }
       Fl_Group COMPRESS {
-        user_data 1
+        user_data 1 open
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button compress_activar {
@@ -1486,6 +1486,13 @@ if ((int) o->value() == 0) compress_output->do_callback();}
           callback {rkr->efx_Compressor->Compressor_Change(8,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
           tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {265 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button Peak {
+          label Peak
+          user_data 2
+          callback {rkr->efx_Compressor->Compressor_Change(9,(int)o->value());
+if ((int) o->value() == 0) compress_output->do_callback();} selected
+          tooltip {Peak Mode Compression} xywh {180 365 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group DIST {
@@ -4947,7 +4954,7 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
         }
         Fl_Value_Slider convo_LRc {
           label {W/D}
-          callback {rkr->efx_Convol->changepar(5,(int)(o->value()+64));} selected
+          callback {rkr->efx_Convol->changepar(5,(int)(o->value()+64));}
           xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }

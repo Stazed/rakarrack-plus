@@ -1410,6 +1410,14 @@ void RKRGUI::cb_Stereo(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Stereo_i(o,v);
 }
 
+void RKRGUI::cb_Peak_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Compressor->Compressor_Change(9,(int)o->value());
+if ((int) o->value() == 0) compress_output->do_callback();
+}
+void RKRGUI::cb_Peak(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Peak_i(o,v);
+}
+
 void RKRGUI::cb_dist_activar_i(Fl_Light_Button* o, void*) {
   rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
@@ -4634,7 +4642,7 @@ Fl_Menu_Item RKRGUI::menu_convo_preset[] = {
 };
 
 void RKRGUI::cb_convo_LRc_i(SliderW* o, void*) {
-  rkr->efx_Convol->changepar(0,(int)(o->value()+64));
+  rkr->efx_Convol->changepar(5,(int)(o->value()+64));
 }
 void RKRGUI::cb_convo_LRc(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_LRc_i(o,v);
@@ -6059,6 +6067,13 @@ R average.");
         Stereo->labelcolor(FL_BACKGROUND2_COLOR);
         Stereo->callback((Fl_Callback*)cb_Stereo, (void*)(2));
       } // Fl_Check_Button* Stereo
+      { Peak = new Fl_Check_Button(180, 365, 15, 15, "Peak");
+        Peak->tooltip("Peak Mode Compression");
+        Peak->down_box(FL_BORDER_BOX);
+        Peak->labelsize(10);
+        Peak->labelcolor(FL_BACKGROUND2_COLOR);
+        Peak->callback((Fl_Callback*)cb_Peak, (void*)(2));
+      } // Fl_Check_Button* Peak
       COMPRESS->end();
     } // Fl_Group* COMPRESS
     { DIST = new Fl_Group(321, 212, 158, 184);

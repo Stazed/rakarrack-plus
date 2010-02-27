@@ -43,7 +43,7 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Pquality = 1;
   Plength = 100;
   howmany = 0;
-  convlength = MAX_C_SIZE / Plength;
+  convlength = MAX_C_SIZE / 1000.0;
   maxx_size = (int) ((float) SAMPLE_RATE * convlength);  //just to get 1 second memory allocated
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
@@ -292,8 +292,10 @@ Convolotron::changepar (int npar, int value)
       break;
     case 2:
       Plength = value;
-      convlength = (1 + (float) Plength)/1000.0f;
-      maxx_size = (int) ((float) SAMPLE_RATE * convlength);
+      if(Plength > 500) Plength = 500;
+      if(Plength < 5 ) Plength =5;				//time in milliseconds
+      convlength = ((float) Plength)/1000.0f;			//time in seconds
+      maxx_size = (int) ((float) SAMPLE_RATE * convlength);	//time in samples
        break;
     case 3:
       Pquality = value;
@@ -304,7 +306,7 @@ Convolotron::changepar (int npar, int value)
     case 4:
       if(!setfile(value))
       {
-       printf("shit\n"); // if dont find the file .... do something :-)
+       printf("shit\n"); // if dont find the file .... do something :-) <--Yes, spew forth profanity when something is wrong :-)
       }
       break;
     case 5:
@@ -318,7 +320,7 @@ Convolotron::changepar (int npar, int value)
       level = dB2rap (40.0f - (float)Plevel / 127.0f - 40.0f);
       break;
     case 8:
-      Pstereo = value;
+      Pfb = value;
       break;
     case 9:
       Preverb = value;      
@@ -357,7 +359,7 @@ Convolotron::getpar (int npar)
       return(Plevel);
       break;
     case 8:
-      return(Pstereo);
+      return(Pfb);
       break;
     case 9:
       return(Preverb);

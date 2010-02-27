@@ -29,7 +29,7 @@
 
 #include <sndfile.h>
 #include "global.h"
-#define  MAX_C_SIZE 1000.0f // Number of milliseconds
+#define  MAX_C_SIZE 500.0f // Number of milliseconds
 class Convolotron
 {
 public:
@@ -53,13 +53,13 @@ public:
 
 private:
   //Parametrii
-  int Pvolume;	//This is master wet/dry mix like other FX.
+  int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
-  int Plrcross;	// L/R Mixing
+  int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
   int Phidamp;
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
-  int Plength;		//1...1000 ms// Set maximum length of IR.
-  int Pstereo;		//0 or 1//Process in stereo.
+  int Plength;		//5...500 ms// Set maximum length of IR.
+  int Pfb;		//-64...64//Feedback.
   int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
   int Pquality;
   int Filenum;

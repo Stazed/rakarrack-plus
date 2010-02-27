@@ -68,6 +68,7 @@ public:
   int a_out;
   int stereo;
   int tknee;
+  int peak;
 
 private:
 
@@ -102,7 +103,8 @@ private:
   REALTYPE coeff_ratio;
   REALTYPE coeff_knee;
   REALTYPE coeff_kk;               
-
+  REALTYPE lpeak;
+  REALTYPE rpeak;  
 
 };
 

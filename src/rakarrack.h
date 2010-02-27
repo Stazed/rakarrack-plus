@@ -309,6 +309,11 @@ private:
   void cb_Stereo_i(Fl_Check_Button*, void*);
   static void cb_Stereo(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *Peak;
+private:
+  void cb_Peak_i(Fl_Check_Button*, void*);
+  static void cb_Peak(Fl_Check_Button*, void*);
+public:
   Fl_Group *DIST;
   Fl_Light_Button *dist_activar;
 private:
