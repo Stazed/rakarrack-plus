@@ -29,7 +29,7 @@
 
 #include <sndfile.h>
 #include "global.h"
-#define  MAX_C_SIZE 100.0f // Number of milliseconds
+#define  MAX_C_SIZE 1000.0f // Number of milliseconds
 class Convolotron
 {
 public:
@@ -73,7 +73,7 @@ private:
 
   SNDFILE *infile;
   SF_INFO sfinfo;
-  int howmany,offset,real_length;
+  int howmany,offset,real_length, applyenvelope;
 
   //Parametrii reali
   REALTYPE panning, lrcross,  hidamp, convlength;

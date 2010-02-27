@@ -44,11 +44,12 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Plength = 100;
   howmany = 0;
   convlength = MAX_C_SIZE / Plength;
-  maxx_size = (int) ((float) SAMPLE_RATE * convlength);
+  maxx_size = (int) ((float) SAMPLE_RATE * convlength);  //just to get 1 second memory allocated
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
+  maxx_size = (int) maxx_size/20;  //initialize into something less likely to kill CPU by default
   setpreset (Ppreset);
   cleanup ();
 };
@@ -102,16 +103,16 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       for (j =0; j<howmany; j++)
       {
       xindex--;
-      if (xindex<0) xindex = howmany;		//input signal scrolls backward with each iteration
+      if (xindex<0) xindex = maxx_size;		//input signal scrolls backward with each iteration
 
-      lyn += buf[j] * lxn[xindex] * fquality;		//this is all there is to convolution
+      lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
       }
       
       efxoutl[i] = lyn * 2.0f * level * panning;
       efxoutr[i] = lyn * 2.0f * level * (1.0f -panning);  
 
       offset++;
-      if (offset>howmany) offset = 0;     
+      if (offset>maxx_size) offset = 0;     
 
       
     };
@@ -156,6 +157,7 @@ if (sfinfo.frames > maxx_size) howmany = maxx_size; else howmany=sfinfo.frames;
 real_length = howmany;
 readcount = sf_seek (infile,0, SEEK_SET);
 readcount = sf_readf_float(infile,rbuf,howmany);
+applyenvelope = 1;
 process_rbuf();
 if (sfinfo.samplerate != (int)SAMPLE_RATE)
 {
@@ -171,22 +173,68 @@ return(1);
 void
 Convolotron::process_rbuf()
 {
- int i,j,k;
- float val;
+ int i,j,k,ii,N,N2;
+ float tailfader, val, alpha, a0, a1, a2, Nm1p, Nm1pp;
  memset(buf,0, sizeof(float)*maxx_size);
  k=0;
- printf("before howmany %d Quality %d Length %d\n",howmany,Pquality, Plength);
+ printf("before howmany %d Quality %d Length %d real_length %d Envelope %d\n",howmany,Pquality, Plength, real_length, applyenvelope);
  
-for(i=0;i<=real_length;i+=Pquality)
+ if(howmany>maxx_size) howmany = maxx_size;
+ /*Blackman Window function
+ wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
+ a0 = (1 - alpha)/2; a1 = 0.5; a2 = alpha/2
+ */
+ alpha = 0.16f;
+ a0 = 0.5f*(1.0f - alpha);
+ a1 = 0.5f;
+ a2 = 0.5*alpha;
+ N = real_length;
+ N2 = (int) (real_length/2);
+ Nm1p = 2.0f * PI/((float) (N - 1));
+ Nm1pp = 4.0f * PI/((float) (N - 1));
+ 
+ if(applyenvelope)	//make sure it is only applied when new file loaded.
+ { 
+for(ii=0;ii<real_length;ii++)
+{   
+  if (ii<N2)
+  {
+  tailfader = 1.0f;
+  }
+  else
+  { 
+  tailfader = a0 - a1*cosf(ii*Nm1p) + a2 * cosf(ii*Nm1pp);   //Calculate Blackman Window for right half of IR
+  }
+  
+  rbuf[ii]*=tailfader;   //Apply window function
+ }
+  }
+  
+   printf("after applyenvelope %d Quality %d Length %d\n",howmany,Pquality,Plength);
+  
+applyenvelope = 0;
+
+  if(Pquality > 1) 
+  {
+for(i=0;i<=real_length;i++)
 {
-  val= 0.0;
+  val= val*fquality;	//residual...leaky integrator
+
   for(j=0;j<Pquality;j++)
     val +=rbuf[i+j]; 
-  buf[k]=val;
-  k++;
+   
+   buf[k]=val * fquality;   
+  k++;   
 }
-
   howmany = k-1;
+ }
+ else
+  {
+ for(i=0;i<real_length;i++) 
+  buf[i] = rbuf[i];
+  howmany = i;
+  }
+
 
  printf("after howmany %d Quality %d Length %d\n",howmany,Pquality,Plength);
 
@@ -244,12 +292,13 @@ Convolotron::changepar (int npar, int value)
       break;
     case 2:
       Plength = value;
-      convlength = MAX_C_SIZE / Plength;
+      convlength = (1 + (float) Plength)/1000.0f;
       maxx_size = (int) ((float) SAMPLE_RATE * convlength);
-      break;
+       break;
     case 3:
       Pquality = value;
-      fquality = (float)Pquality;
+      if (Pquality < 1) Pquality = 1;
+      fquality = 1.0f/(float)Pquality;
       if(howmany>0) process_rbuf();
       break;
     case 4:
@@ -266,7 +315,7 @@ Convolotron::changepar (int npar, int value)
       break;
     case 7:
       Plevel = value;
-      level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+      level = dB2rap (40.0f - (float)Plevel / 127.0f - 40.0f);
       break;
     case 8:
       Pstereo = value;
