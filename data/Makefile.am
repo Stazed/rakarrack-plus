@@ -3,6 +3,8 @@ data_DATA= Default.rkrb \
 	Extra.rkrb \
 	1.wav \
 	2.wav \
+	3.wav \
+	4.wav \
 	bg1.png \
 	bg2.png \
 	bg3.png \

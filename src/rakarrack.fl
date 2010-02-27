@@ -886,7 +886,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -4930,7 +4931,7 @@ convo_length->value(rkr->efx_Convol->getpar(2));
 convo_stereo->value(rkr->efx_Convol->getpar(8));
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_qual->value(rkr->efx_Convol->getpar(3));
-if((int)convo_activar->value())rkr->Convol_Bypass=1;} selected
+if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5005,7 +5006,7 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;} selected
         }
         Fl_Choice convo_fnum {
           label Preset
-          callback {rkr->efx_Convol->changepar(4,(int)o->value());}
+          callback {rkr->efx_Convol->changepar(4,(int)o->value());} open
           xywh {390 369 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5015,6 +5016,14 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;} selected
           MenuItem {} {
             label Fender
             xywh {54 54 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Mesa Boogie}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Mesa Boogie 2} selected
+            xywh {0 0 36 21} labelsize 10
           }
         }
       }
