@@ -218,16 +218,14 @@ applyenvelope = 0;
   if(Pquality > 1) 
   {
 
-for(i=0;i<=real_length;i+=Pquality)
+for(i=0;i<=real_length;i++)
 {
   
-   val= val * fquality;	//residual...leaky integrator
-  
+  val= val * fquality;	//residual...leaky integrator
   for(j=0;j<Pquality;j++)
     val +=rbuf[i+j]; 
  
- //  buf[k]=val / fquality;   Ummh ... I think sounds better :-))))
-     buf[k]=val * fquality;   
+   buf[k]=val * fquality;
   k++;   
 }
   howmany = k-1;
