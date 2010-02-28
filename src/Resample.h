@@ -34,7 +34,16 @@
 class Resample
 {
 public:
-  Resample(int type);
+  Resample(int type);	
+/*
+Types:
+          SRC_SINC_BEST_QUALITY       = 0,
+          SRC_SINC_MEDIUM_QUALITY     = 1,
+          SRC_SINC_FASTEST            = 2,
+          SRC_ZERO_ORDER_HOLD         = 3,
+          SRC_LINEAR                  = 4
+*/
+
   ~Resample(); 
   void cleanup();
   void out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio);

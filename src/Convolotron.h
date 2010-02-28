@@ -29,7 +29,10 @@
 
 #include <sndfile.h>
 #include "global.h"
+#include "Resample.h"
 #define  MAX_C_SIZE 500.0f // Number of milliseconds
+#define  RSMP_QUAL  0	   // Best quality Sinc interpolation
+
 class Convolotron
 {
 public:
@@ -73,7 +76,8 @@ private:
 
   SNDFILE *infile;
   SF_INFO sfinfo;
-  int howmany,offset,real_length, applyenvelope;
+
+  int howmany,offset;
 
   //Parametrii reali
   REALTYPE panning, lrcross,  hidamp, convlength;
