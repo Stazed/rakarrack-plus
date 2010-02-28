@@ -37,7 +37,9 @@ public:
   Resample(int type);
   ~Resample(); 
   void cleanup();
-  void out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio, int sent);
+  void out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio);
+
+  // ratio Equal to output_sample_rate / input_sample_rate.
 
 
 SRC_STATE *statel;

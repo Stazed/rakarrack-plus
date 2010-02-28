@@ -30,13 +30,6 @@
 Resample::Resample(int type) 
 {
 
-
-//minl = (float *) malloc (sizeof(float) * PERIOD);
-//minr = (float *) malloc (sizeof(float) * PERIOD);
-//moutl = (float *) malloc (sizeof(float) * PERIOD);
-//moutr = (float *) malloc (sizeof(float) * PERIOD);
-
-
 statel = src_new(type , 1 , errorl);
 stater = src_new(type , 1 , errorr);
 
@@ -65,28 +58,13 @@ src_reset(stater);
 
 
 void
-Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio, int sent)
+Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio)
 {
 
-int i_frames = 0;
-int o_frames = 0;
+// ratio = output_sample_rate / input_sample_rate. 
 
-switch (sent)
-
-{
-   case 0: //Up
-   i_frames = frames / 2; 
-   o_frames = frames; 
-   break;
-   case 1:
-   i_frames = frames;
-   o_frames = frames / 2;
-   break;
-}   
-
-
-
-
+int i_frames = frames;
+int o_frames = (int) ((float)frames*ratio);
 
 srcinfol.data_in = inl;
 srcinfol.input_frames = i_frames;

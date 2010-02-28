@@ -789,7 +789,7 @@ RKR::Control_Gain (float *origl, float *origr)
   memcpy(smpl, efxoutl, sizeof(float) * J_PERIOD);
   memcpy(smpr, efxoutr, sizeof(float) * J_PERIOD);
 
-  U_Resample->out(smpl,smpr,efxoutl,efxoutr,PERIOD,2.0,0);
+  U_Resample->out(smpl,smpr,efxoutl,efxoutr,J_PERIOD,2.0);
   }
 
   for (i = 0; i <= PERIOD; i++)
@@ -827,7 +827,7 @@ RKR::Control_Volume (float *origl,float *origr)
 
    if(upsample)
     {
-     D_Resample->out(anall,analr,efxoutl,efxoutr,PERIOD,.5,1);
+     D_Resample->out(anall,analr,efxoutl,efxoutr,PERIOD,.5);
     }  
 
 
