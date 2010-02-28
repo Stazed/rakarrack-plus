@@ -2426,21 +2426,32 @@ private:
   static void cb_FSless(Fl_Button*, void*);
 public:
   Fl_Group *AUDIO_SET;
+  Fl_Check_Button *INSTATE;
+private:
+  void cb_INSTATE_i(Fl_Check_Button*, void*);
+  static void cb_INSTATE(Fl_Check_Button*, void*);
+public:
   Fl_Check_Button *Pre_Serve;
 private:
   void cb_Pre_Serve_i(Fl_Check_Button*, void*);
   static void cb_Pre_Serve(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *UPSAMPLE_C;
+private:
+  void cb_UPSAMPLE_C_i(Fl_Check_Button*, void*);
+  static void cb_UPSAMPLE_C(Fl_Check_Button*, void*);
+public:
+  Fl_Choice *Upr_Qual;
+private:
+  void cb_Upr_Qual_i(Fl_Choice*, void*);
+  static void cb_Upr_Qual(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Upr_Qual[];
 public:
   Fl_Choice *Har_Qual;
 private:
   void cb_Har_Qual_i(Fl_Choice*, void*);
   static void cb_Har_Qual(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Har_Qual[];
-public:
-  Fl_Check_Button *INSTATE;
-private:
-  void cb_INSTATE_i(Fl_Check_Button*, void*);
-  static void cb_INSTATE(Fl_Check_Button*, void*);
 public:
   Fl_Group *MIDI_SET;
   Fl_Check_Button *D_A_Connect;
@@ -2622,5 +2633,6 @@ public:
   void FillML(int type);
   void DisAssigns();
   void Prepare_Order();
+  void Show_Next_Time();
 };
 #endif

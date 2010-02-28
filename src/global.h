@@ -26,9 +26,9 @@
 
 
 
-struct FFTFREQS{ float *s,*c;};//sine and cosine components
-void newFFTFREQS(FFTFREQS *f,int size);
-void deleteFFTFREQS(FFTFREQS *f);
+//struct FFTFREQS{ float *s,*c;};//sine and cosine components
+//void newFFTFREQS(FFTFREQS *f,int size);
+//void deleteFFTFREQS(FFTFREQS *f);
 
 
 
@@ -70,6 +70,7 @@ void deleteFFTFREQS(FFTFREQS *f);
 #include "Synthfilter.h"
 #include "MBVvol.h"
 #include "Convolotron.h"
+#include "Resample.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f
@@ -135,12 +136,13 @@ public:
   void Bank_to_Preset (int Num);
   void Preset_to_Bank (int i);
   void Actualizar_Audio ();
+  void Adjust_Upsample();
   void init_rkr ();
   void Vol_Efx (int NumEffect, float volume);
   void Vol2_Efx ();
   void Vol3_Efx ();
   void cleanup_efx ();
-  void Control_Gain ();
+  void Control_Gain (float *origl, float *origr);
   void Control_Volume (float *origl, float *origr);
   int Message (const char *labelwin, const char *message_text);
   char *PrefNom (const char *dato);
@@ -203,6 +205,9 @@ public:
   class Shuffle *efx_Shuffle;
   class MBVvol *efx_MBVvol;
   class Convolotron *efx_Convol;
+  class Resample *U_Resample;
+  class Resample *D_Resample;
+
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
@@ -304,7 +309,11 @@ public:
   int ControlGet;
   int CountWait;
   int XUserMIDI[128][20];
-  
+
+  int upsample;
+  int UpQual;
+  int J_SAMPLE_RATE;
+  int J_PERIOD;  
 
   int Mvalue;
   int Mnumeff;

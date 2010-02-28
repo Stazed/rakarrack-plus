@@ -5025,7 +5025,7 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Marshall Plexi} selected
+            label {Marshall Plexi}
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -5511,7 +5511,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1447 280 640 528} type Double color 4 hide
+      xywh {1426 259 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5650,10 +5650,48 @@ chfsize(-1);}
         user_data 1
         xywh {10 138 615 35} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
+        Fl_Check_Button INSTATE {
+          label {FX On at start}
+          callback {rkr->init_state=(int) o->value();}
+          xywh {95 150 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        }
         Fl_Check_Button Pre_Serve {
           label {Preserve Gain/Master}
           callback {rkr->actuvol=(int) o->value();}
-          xywh {358 150 90 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          xywh {240 150 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        }
+        Fl_Check_Button UPSAMPLE_C {
+          label Upsampling
+          callback {Show_Next_Time();} selected
+          xywh {326 150 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
+        }
+        Fl_Choice Upr_Qual {
+          label Quality
+          callback {rkr->UpQual =(int) o->value();
+
+Show_Next_Time();}
+          xywh {389 150 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Best
+            xywh {20 20 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label Medium
+            xywh {20 20 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label Fastest
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Zero Order}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Linear
+            xywh {0 0 36 21} labelsize 10
+          }
         }
         Fl_Choice Har_Qual {
           label {Harmonizer Quality}
@@ -5673,10 +5711,8 @@ switch(i)
 }
 
 
-Fl_Widget *w = fl_message_icon();
-w->parent()->copy_label(rkr->jackcliname);         
-fl_message("This setting will be changed the next time you run rakarrack");}
-          xywh {563 150 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+Show_Next_Time();}
+          xywh {576 150 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 4
@@ -5690,11 +5726,6 @@ fl_message("This setting will be changed the next time you run rakarrack");}
             label 16
             xywh {0 0 36 21} labelsize 10
           }
-        }
-        Fl_Check_Button INSTATE {
-          label {FX On at start}
-          callback {rkr->init_state=(int) o->value();}
-          xywh {103 150 90 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
         }
       }
       Fl_Group MIDI_SET {
@@ -5730,7 +5761,7 @@ rkr->Conecta();}
           xywh {235 271 60 24} type Simple color 62 labelsize 10 labelcolor 7 align 1 minimum 1 maximum 16 step 1 value 1 textsize 11
         }
         Fl_Group wMIDI {
-          label {MIDI implementation} open
+          label {MIDI implementation}
           xywh {20 360 295 25} box PLASTIC_DOWN_FRAME labelsize 10 labelcolor 7 align 5
         } {
           Fl_Check_Button Mw0 {
@@ -5778,7 +5809,7 @@ else JackCo->deactivate();}
       }
       Fl_Group BANK_SET {
         label Bank
-        user_data 1 open
+        user_data 1
         xywh {10 468 510 55} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_File_Input BFiname {
@@ -6362,6 +6393,10 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
+rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
+rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
+
+
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
 rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
@@ -7607,6 +7642,8 @@ BackFiname->value(rkr->BackgroundImage);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
 INSTATE->value(rkr->init_state);
+UPSAMPLE_C->value(rkr->upsample);
+Upr_Qual->value(rkr->UpQual);
 D_A_Connect->value(rkr->aconnect_MI);
 D_J_Connect->value(rkr->aconnect_JA);
 Midi_In_Counter->value(rkr->MidiCh+1);
@@ -8925,5 +8962,10 @@ for (i=0; i<rkr->NumEffects;i++)
 
 Order_Bro->select(1);
 Avail_Bro->select(1);} {}
+  }
+  Function {Show_Next_Time()} {} {
+    code {Fl_Widget *w = fl_message_icon();
+w->parent()->copy_label(rkr->jackcliname);         
+fl_message("This setting will be changed the next time you run rakarrack");} {}
   }
 } 

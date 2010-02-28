@@ -5301,12 +5301,44 @@ void RKRGUI::cb_FSless(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_FSless_i(o,v);
 }
 
+void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
+  rkr->init_state=(int) o->value();
+}
+void RKRGUI::cb_INSTATE(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_INSTATE_i(o,v);
+}
+
 void RKRGUI::cb_Pre_Serve_i(Fl_Check_Button* o, void*) {
   rkr->actuvol=(int) o->value();
 }
 void RKRGUI::cb_Pre_Serve(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Pre_Serve_i(o,v);
 }
+
+void RKRGUI::cb_UPSAMPLE_C_i(Fl_Check_Button*, void*) {
+  Show_Next_Time();
+}
+void RKRGUI::cb_UPSAMPLE_C(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_UPSAMPLE_C_i(o,v);
+}
+
+void RKRGUI::cb_Upr_Qual_i(Fl_Choice* o, void*) {
+  rkr->UpQual =(int) o->value();
+
+Show_Next_Time();
+}
+void RKRGUI::cb_Upr_Qual(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Upr_Qual_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_Upr_Qual[] = {
+ {"Best", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Medium", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fastest", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Zero Order", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Linear", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_Har_Qual_i(Fl_Choice* o, void*) {
   int i = (int) o->value();
@@ -5325,9 +5357,7 @@ switch(i)
 }
 
 
-Fl_Widget *w = fl_message_icon();
-w->parent()->copy_label(rkr->jackcliname);         
-fl_message("This setting will be changed the next time you run rakarrack");
+Show_Next_Time();
 }
 void RKRGUI::cb_Har_Qual(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Har_Qual_i(o,v);
@@ -5339,13 +5369,6 @@ Fl_Menu_Item RKRGUI::menu_Har_Qual[] = {
  {"16", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
-
-void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
-  rkr->init_state=(int) o->value();
-}
-void RKRGUI::cb_INSTATE(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_INSTATE_i(o,v);
-}
 
 void RKRGUI::cb_D_A_Connect_i(Fl_Check_Button* o, void*) {
   rkr->aconnect_MI=(int) o->value();
@@ -11956,14 +11979,38 @@ R average.");
       AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       AUDIO_SET->user_data((void*)(1));
       AUDIO_SET->align(FL_ALIGN_TOP_LEFT);
-      { Pre_Serve = new Fl_Check_Button(358, 150, 90, 20, "Preserve Gain/Master");
+      { INSTATE = new Fl_Check_Button(95, 150, 23, 20, "FX On at start");
+        INSTATE->down_box(FL_DOWN_BOX);
+        INSTATE->labelsize(11);
+        INSTATE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        INSTATE->callback((Fl_Callback*)cb_INSTATE);
+        INSTATE->align(FL_ALIGN_LEFT);
+      } // Fl_Check_Button* INSTATE
+      { Pre_Serve = new Fl_Check_Button(240, 150, 21, 20, "Preserve Gain/Master");
         Pre_Serve->down_box(FL_DOWN_BOX);
         Pre_Serve->labelsize(11);
         Pre_Serve->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
         Pre_Serve->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* Pre_Serve
-      { Har_Qual = new Fl_Choice(563, 150, 43, 18, "Harmonizer Quality");
+      { UPSAMPLE_C = new Fl_Check_Button(326, 150, 23, 20, "Upsampling");
+        UPSAMPLE_C->down_box(FL_DOWN_BOX);
+        UPSAMPLE_C->labelsize(11);
+        UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        UPSAMPLE_C->callback((Fl_Callback*)cb_UPSAMPLE_C);
+        UPSAMPLE_C->align(FL_ALIGN_LEFT);
+        UPSAMPLE_C->when(FL_WHEN_CHANGED);
+      } // Fl_Check_Button* UPSAMPLE_C
+      { Upr_Qual = new Fl_Choice(389, 150, 75, 18, "Quality");
+        Upr_Qual->down_box(FL_BORDER_BOX);
+        Upr_Qual->labelsize(10);
+        Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Upr_Qual->textsize(10);
+        Upr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
+        Upr_Qual->menu(menu_Upr_Qual);
+      } // Fl_Choice* Upr_Qual
+      { Har_Qual = new Fl_Choice(576, 150, 43, 18, "Harmonizer Quality");
         Har_Qual->down_box(FL_BORDER_BOX);
         Har_Qual->labelsize(10);
         Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -11972,13 +12019,6 @@ R average.");
         Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
         Har_Qual->menu(menu_Har_Qual);
       } // Fl_Choice* Har_Qual
-      { INSTATE = new Fl_Check_Button(103, 150, 90, 20, "FX On at start");
-        INSTATE->down_box(FL_DOWN_BOX);
-        INSTATE->labelsize(11);
-        INSTATE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        INSTATE->callback((Fl_Callback*)cb_INSTATE);
-        INSTATE->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* INSTATE
       AUDIO_SET->end();
     } // Fl_Group* AUDIO_SET
     { MIDI_SET = new Fl_Group(10, 194, 313, 195, "MIDI");
@@ -12655,6 +12695,10 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
+rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
+rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
+
+
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
 rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
@@ -13907,6 +13951,8 @@ BackFiname->value(rkr->BackgroundImage);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
 INSTATE->value(rkr->init_state);
+UPSAMPLE_C->value(rkr->upsample);
+Upr_Qual->value(rkr->UpQual);
 D_A_Connect->value(rkr->aconnect_MI);
 D_J_Connect->value(rkr->aconnect_JA);
 Midi_In_Counter->value(rkr->MidiCh+1);
@@ -15242,4 +15288,10 @@ for (i=0; i<rkr->NumEffects;i++)
 
 Order_Bro->select(1);
 Avail_Bro->select(1);
+}
+
+void RKRGUI::Show_Next_Time() {
+  Fl_Widget *w = fl_message_icon();
+w->parent()->copy_label(rkr->jackcliname);         
+fl_message("This setting will be changed the next time you run rakarrack");
 }

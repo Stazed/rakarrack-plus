@@ -68,10 +68,15 @@ RKR::RKR ()
     }
 
   strcpy (jackcliname, jack_get_client_name (jackclient));
-  SAMPLE_RATE = jack_get_sample_rate (jackclient);
-  PERIOD = jack_get_buffer_size (jackclient);
+  J_SAMPLE_RATE = jack_get_sample_rate (jackclient);
+  J_PERIOD = jack_get_buffer_size (jackclient);
 
+  rakarrack.get (PrefNom ("UpSampling"), upsample, 0); 
+  rakarrack.get (PrefNom ("UpQuality"), UpQual, 4); 
 
+  Adjust_Upsample();
+  
+  
   Fraction_Bypass = 1.0f;
   Master_Volume = 0.50f;
   Input_Gain = 0.50f;
@@ -112,11 +117,8 @@ RKR::RKR ()
   analr = (float *) malloc (sizeof (float) * PERIOD);
 
 
-  denormal = (float *) malloc (sizeof (float) * PERIOD);
-
-  for (i = 0; i < PERIOD; i++)
-
-    denormal[i] = (float)(RND-0.5) * 1e-16f;
+  U_Resample = new Resample(UpQual);
+  D_Resample = new Resample(UpQual);
 
 
   efx_Chorus = new Chorus (efxoutl, efxoutr);
@@ -154,6 +156,8 @@ RKR::RKR ()
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);
   RC = new RecChord ();
+
+  
 
 
   Data_Version = (char *) malloc (sizeof (char) * 16);
@@ -492,6 +496,27 @@ efx_FLimiter->Compressor_Change(9,1);
 }
 
 
+void 
+RKR::Adjust_Upsample()
+{
+
+ if(upsample)
+  {
+   SAMPLE_RATE = J_SAMPLE_RATE*2;
+   PERIOD = J_PERIOD*2;
+  }
+   else
+  {  
+   SAMPLE_RATE = J_SAMPLE_RATE;
+   PERIOD = J_PERIOD;
+  }
+ 
+}
+
+
+
+
+
 void
 RKR::ConnectMIDI ()
 {
@@ -750,7 +775,7 @@ RKR::calculavol (int i)
 }
 
 void
-RKR::Control_Gain ()
+RKR::Control_Gain (float *origl, float *origr)
 {
 
   int i;
@@ -758,6 +783,15 @@ RKR::Control_Gain ()
   float temp_sum;
   float tmp;
   
+
+  if(upsample)
+  {
+  memcpy(smpl, efxoutl, sizeof(float) * J_PERIOD);
+  memcpy(smpr, efxoutr, sizeof(float) * J_PERIOD);
+
+  U_Resample->out(smpl,smpr,efxoutl,efxoutr,PERIOD,2.0,0);
+  }
+
   for (i = 0; i <= PERIOD; i++)
     {
       efxoutl[i] *= Log_I_Gain;
@@ -789,6 +823,13 @@ RKR::Control_Volume (float *origl,float *origr)
    memcpy(anall, efxoutl, sizeof(float)* PERIOD);
    memcpy(analr, efxoutr, sizeof(float)* PERIOD);
 
+   
+
+   if(upsample)
+    {
+     D_Resample->out(anall,analr,efxoutl,efxoutr,PERIOD,.5,1);
+    }  
+
 
   for (i = 0; i <= PERIOD; i++)
     {
@@ -815,6 +856,7 @@ RKR::Control_Volume (float *origl,float *origr)
   
 
 }
+
 
 
 void
@@ -866,7 +908,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
   if (Bypass)
     {
 
-       Control_Gain ();
+       Control_Gain (origl, origr);
       
       if (Tuner_Bypass)
 	efx_Tuner->schmittFloat (PERIOD, efxoutl, efxoutr);

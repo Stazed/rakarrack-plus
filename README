@@ -19,6 +19,7 @@ libfltk1.1
 libxpm
 libjack100.0
 libasound2
+libsamplerate0
 libsndfile1
 aconnect
 jackd
@@ -30,7 +31,9 @@ libxpm-dev
 libfltk1.1-dev
 libjack-dev
 libsndfile1-dev
+libsamplerate0-dev
 libasound2-dev
+
 
 The name of the packages are typical of the naming convention for Debian-based distributions.
 These can be a little different for each distro. Use your package manager search function
