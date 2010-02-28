@@ -5340,6 +5340,24 @@ Fl_Menu_Item RKRGUI::menu_Upr_Qual[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_Upr_Amo_i(Fl_Choice* o, void*) {
+  rkr->UpAmo =(int) o->value();
+
+Show_Next_Time();
+}
+void RKRGUI::cb_Upr_Amo(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Upr_Amo_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_Upr_Amo[] = {
+ {"x2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_Har_Qual_i(Fl_Choice* o, void*) {
   int i = (int) o->value();
 
@@ -11923,26 +11941,26 @@ R average.");
     { Prefs_OK = new Fl_Button(535, 496, 90, 25, "Ok");
       Prefs_OK->callback((Fl_Callback*)cb_Prefs_OK);
     } // Fl_Button* Prefs_OK
-    { Look = new Fl_Group(10, 20, 615, 98, "Look & Feel");
+    { Look = new Fl_Group(10, 20, 615, 83, "Look & Feel");
       Look->box(FL_PLASTIC_DOWN_FRAME);
       Look->color((Fl_Color)FL_BACKGROUND2_COLOR);
       Look->labelfont(1);
       Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       Look->user_data((void*)(1));
       Look->align(FL_ALIGN_TOP_LEFT);
-      { B_C = new Fl_Button(20, 30, 90, 30, "Buttons");
+      { B_C = new Fl_Button(20, 25, 90, 25, "Buttons");
         B_C->callback((Fl_Callback*)cb_B_C);
       } // Fl_Button* B_C
-      { L_C = new Fl_Button(120, 30, 90, 30, "Leds");
+      { L_C = new Fl_Button(120, 25, 90, 25, "Leds");
         L_C->callback((Fl_Callback*)cb_L_C);
       } // Fl_Button* L_C
-      { K_C = new Fl_Button(220, 30, 90, 30, "Background");
+      { K_C = new Fl_Button(220, 25, 90, 25, "Background");
         K_C->callback((Fl_Callback*)cb_K_C);
       } // Fl_Button* K_C
-      { A_C = new Fl_Button(320, 30, 90, 30, "Labels");
+      { A_C = new Fl_Button(320, 25, 90, 25, "Labels");
         A_C->callback((Fl_Callback*)cb_A_C);
       } // Fl_Button* A_C
-      { scheme_ch = new Fl_Choice(520, 35, 88, 20, "schema");
+      { scheme_ch = new Fl_Choice(520, 26, 88, 20, "schema");
         scheme_ch->down_box(FL_BORDER_BOX);
         scheme_ch->labelsize(11);
         scheme_ch->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -11951,49 +11969,49 @@ R average.");
         scheme_ch->callback((Fl_Callback*)cb_scheme_ch);
         scheme_ch->menu(menu_scheme_ch);
       } // Fl_Choice* scheme_ch
-      { BackFiname = new Fl_File_Input(20, 80, 390, 30, "Background Image");
+      { BackFiname = new Fl_File_Input(20, 65, 390, 30, "Background Image");
         BackFiname->labelsize(11);
         BackFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BackFiname->textsize(12);
         BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BackFiname->align(FL_ALIGN_TOP_LEFT);
       } // Fl_File_Input* BackFiname
-      { BI_Browser = new Fl_Button(415, 80, 65, 25, "Browse");
+      { BI_Browser = new Fl_Button(415, 65, 65, 20, "Browse");
         BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
       } // Fl_Button* BI_Browser
-      { FSLabel = new Fl_Box(538, 63, 60, 17, "Font Size");
+      { FSLabel = new Fl_Box(538, 51, 60, 17, "Font Size");
         FSLabel->labelsize(11);
         FSLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* FSLabel
-      { FSplus = new Fl_Button(535, 85, 30, 20, "+");
+      { FSplus = new Fl_Button(535, 70, 30, 20, "+");
         FSplus->callback((Fl_Callback*)cb_FSplus);
       } // Fl_Button* FSplus
-      { FSless = new Fl_Button(570, 85, 30, 20, "-");
+      { FSless = new Fl_Button(570, 70, 30, 20, "-");
         FSless->callback((Fl_Callback*)cb_FSless);
       } // Fl_Button* FSless
       Look->end();
     } // Fl_Group* Look
-    { AUDIO_SET = new Fl_Group(10, 138, 615, 35, "Audio");
+    { AUDIO_SET = new Fl_Group(10, 125, 615, 49, "Audio");
       AUDIO_SET->box(FL_PLASTIC_DOWN_FRAME);
       AUDIO_SET->labelfont(1);
       AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       AUDIO_SET->user_data((void*)(1));
       AUDIO_SET->align(FL_ALIGN_TOP_LEFT);
-      { INSTATE = new Fl_Check_Button(95, 150, 23, 20, "FX On at start");
+      { INSTATE = new Fl_Check_Button(101, 129, 23, 20, "FX On at start");
         INSTATE->down_box(FL_DOWN_BOX);
         INSTATE->labelsize(11);
         INSTATE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         INSTATE->callback((Fl_Callback*)cb_INSTATE);
         INSTATE->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* INSTATE
-      { Pre_Serve = new Fl_Check_Button(240, 150, 21, 20, "Preserve Gain/Master");
+      { Pre_Serve = new Fl_Check_Button(144, 149, 21, 20, "Preserve Gain/Master");
         Pre_Serve->down_box(FL_DOWN_BOX);
         Pre_Serve->labelsize(11);
         Pre_Serve->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
         Pre_Serve->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* Pre_Serve
-      { UPSAMPLE_C = new Fl_Check_Button(326, 150, 23, 20, "Upsampling");
+      { UPSAMPLE_C = new Fl_Check_Button(297, 129, 23, 20, "Upsampling");
         UPSAMPLE_C->down_box(FL_DOWN_BOX);
         UPSAMPLE_C->labelsize(11);
         UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12001,7 +12019,7 @@ R average.");
         UPSAMPLE_C->align(FL_ALIGN_LEFT);
         UPSAMPLE_C->when(FL_WHEN_CHANGED);
       } // Fl_Check_Button* UPSAMPLE_C
-      { Upr_Qual = new Fl_Choice(389, 150, 75, 18, "Quality");
+      { Upr_Qual = new Fl_Choice(217, 148, 75, 18, "Quality");
         Upr_Qual->down_box(FL_BORDER_BOX);
         Upr_Qual->labelsize(10);
         Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12010,7 +12028,16 @@ R average.");
         Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
         Upr_Qual->menu(menu_Upr_Qual);
       } // Fl_Choice* Upr_Qual
-      { Har_Qual = new Fl_Choice(576, 150, 43, 18, "Harmonizer Quality");
+      { Upr_Amo = new Fl_Choice(312, 148, 47, 18, "#");
+        Upr_Amo->down_box(FL_BORDER_BOX);
+        Upr_Amo->labelsize(10);
+        Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Upr_Amo->textsize(10);
+        Upr_Amo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
+        Upr_Amo->menu(menu_Upr_Amo);
+      } // Fl_Choice* Upr_Amo
+      { Har_Qual = new Fl_Choice(576, 137, 43, 18, "Harmonizer Quality");
         Har_Qual->down_box(FL_BORDER_BOX);
         Har_Qual->labelsize(10);
         Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12697,7 +12724,7 @@ rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
-
+rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
 
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
@@ -13953,6 +13980,7 @@ Pre_Serve->value(rkr->actuvol);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
+Upr_Amo->value(rkr->UpAmo);
 D_A_Connect->value(rkr->aconnect_MI);
 D_J_Connect->value(rkr->aconnect_JA);
 Midi_In_Counter->value(rkr->MidiCh+1);

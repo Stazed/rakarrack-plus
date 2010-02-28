@@ -2447,6 +2447,12 @@ private:
   static void cb_Upr_Qual(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Upr_Qual[];
 public:
+  Fl_Choice *Upr_Amo;
+private:
+  void cb_Upr_Amo_i(Fl_Choice*, void*);
+  static void cb_Upr_Amo(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Upr_Amo[];
+public:
   Fl_Choice *Har_Qual;
 private:
   void cb_Har_Qual_i(Fl_Choice*, void*);

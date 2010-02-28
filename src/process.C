@@ -73,6 +73,7 @@ RKR::RKR ()
 
   rakarrack.get (PrefNom ("UpSampling"), upsample, 0); 
   rakarrack.get (PrefNom ("UpQuality"), UpQual, 4); 
+  rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
   Adjust_Upsample();
   
@@ -502,8 +503,11 @@ RKR::Adjust_Upsample()
 
  if(upsample)
   {
-   SAMPLE_RATE = J_SAMPLE_RATE*2;
-   PERIOD = J_PERIOD*2;
+   SAMPLE_RATE = J_SAMPLE_RATE*(UpAmo+2);
+   PERIOD = J_PERIOD*(UpAmo+2);
+   u_up = (double)UpAmo+2.0;
+   u_down = 1.0 / u_up;
+
   }
    else
   {  
@@ -520,9 +524,6 @@ RKR::Adjust_Upsample()
 void
 RKR::ConnectMIDI ()
 {
-
-
-// Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
 // Get config settings and init settings
 // Get MIDI IN Setting
@@ -785,7 +786,7 @@ RKR::Control_Gain (float *origl, float *origr)
   
 
   if(upsample)
-  U_Resample->out(origl,origr,efxoutl,efxoutr,J_PERIOD,2.0);
+  U_Resample->out(origl,origr,efxoutl,efxoutr,J_PERIOD,u_up);
 
   for (i = 0; i <= PERIOD; i++)
     {
@@ -821,7 +822,7 @@ RKR::Control_Volume (float *origl,float *origr)
    
 
    if(upsample)
-    D_Resample->out(anall,analr,efxoutl,efxoutr,PERIOD,.5);
+    D_Resample->out(anall,analr,efxoutl,efxoutr,PERIOD,u_down);
       
 
 

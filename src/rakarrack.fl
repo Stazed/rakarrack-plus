@@ -5511,7 +5511,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1426 259 640 528} type Double color 4 hide
+      xywh {1589 58 640 528} type Double color 4 visible
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5524,7 +5524,7 @@ Settings->hide();}
       Fl_Group Look {
         label {Look & Feel}
         user_data 1
-        xywh {10 20 615 98} box PLASTIC_DOWN_FRAME color 7 labelfont 1 labelcolor 7 align 5
+        xywh {10 20 615 83} box PLASTIC_DOWN_FRAME color 7 labelfont 1 labelcolor 7 align 5
       } {
         Fl_Button B_C {
           label Buttons
@@ -5534,7 +5534,7 @@ Fl::get_color(fore_color,r,g,b);
 if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
 fore_color=fl_rgb_color(r,g,b);
 Buttons_Color_Change(fore_color);}
-          xywh {20 30 90 30}
+          xywh {20 25 90 25}
         }
         Fl_Button L_C {
           label Leds
@@ -5543,7 +5543,7 @@ Fl::get_color(leds_color,r,g,b);
 if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
 leds_color=fl_rgb_color(r,g,b);
 Leds_Color_Change(leds_color);}
-          xywh {120 30 90 30}
+          xywh {120 25 90 25}
         }
         Fl_Button K_C {
           label Background
@@ -5552,7 +5552,7 @@ Fl::get_color(back_color,r,g,b);
 if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
 back_color=fl_rgb_color(r,g,b);
 Background_Color_Change(back_color);}
-          xywh {220 30 90 30}
+          xywh {220 25 90 25}
         }
         Fl_Button A_C {
           label Labels
@@ -5561,7 +5561,7 @@ Fl::get_color(label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
 Label_Color_Change(label_color);}
-          xywh {320 30 90 30}
+          xywh {320 25 90 25}
         }
         Fl_Choice scheme_ch {
           label schema
@@ -5594,7 +5594,7 @@ Fl::redraw();
 break;
 
 }}
-          xywh {520 35 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12 textcolor 7
+          xywh {520 26 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12 textcolor 7
         } {
           MenuItem {} {
             label X11
@@ -5615,7 +5615,7 @@ break;
         }
         Fl_File_Input BackFiname {
           label {Background Image}
-          xywh {20 80 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+          xywh {20 65 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
         }
         Fl_Button BI_Browser {
           label Browse
@@ -5626,51 +5626,51 @@ filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
 strcpy(rkr->BackgroundImage,filename);
 PutBackground();}
-          xywh {415 80 65 25}
+          xywh {415 65 65 20}
         }
         Fl_Box FSLabel {
           label {Font Size}
-          xywh {538 63 60 17} labelsize 11 labelcolor 7
+          xywh {538 51 60 17} labelsize 11 labelcolor 7
         }
         Fl_Button FSplus {
           label {+}
           callback {rkr->relfontsize++;
 chfsize(1);}
-          xywh {535 85 30 20}
+          xywh {535 70 30 20}
         }
         Fl_Button FSless {
           label {-}
           callback {rkr->relfontsize--;
 chfsize(-1);}
-          xywh {570 85 30 20}
+          xywh {570 70 30 20}
         }
       }
       Fl_Group AUDIO_SET {
         label Audio
         user_data 1
-        xywh {10 138 615 35} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
+        xywh {10 125 615 49} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button INSTATE {
           label {FX On at start}
           callback {rkr->init_state=(int) o->value();}
-          xywh {95 150 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          xywh {101 129 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
         }
         Fl_Check_Button Pre_Serve {
           label {Preserve Gain/Master}
           callback {rkr->actuvol=(int) o->value();}
-          xywh {240 150 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          xywh {144 149 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
         }
         Fl_Check_Button UPSAMPLE_C {
           label Upsampling
-          callback {Show_Next_Time();} selected
-          xywh {326 150 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
+          callback {Show_Next_Time();}
+          xywh {297 129 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
         }
         Fl_Choice Upr_Qual {
           label Quality
           callback {rkr->UpQual =(int) o->value();
 
 Show_Next_Time();}
-          xywh {389 150 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {217 148 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Best
@@ -5693,6 +5693,34 @@ Show_Next_Time();}
             xywh {0 0 36 21} labelsize 10
           }
         }
+        Fl_Choice Upr_Amo {
+          label {\#}
+          callback {rkr->UpAmo =(int) o->value();
+
+Show_Next_Time();}
+          xywh {312 148 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label x2
+            xywh {30 30 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label x3
+            xywh {30 30 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label x4
+            xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label x5
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label x6
+            xywh {10 10 36 21} labelsize 10
+          }
+        }
         Fl_Choice Har_Qual {
           label {Harmonizer Quality}
           callback {int i = (int) o->value();
@@ -5712,7 +5740,7 @@ switch(i)
 
 
 Show_Next_Time();}
-          xywh {576 150 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {576 137 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 4
@@ -6395,7 +6423,7 @@ rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
-
+rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
 
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
@@ -7644,6 +7672,7 @@ Pre_Serve->value(rkr->actuvol);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
+Upr_Amo->value(rkr->UpAmo);
 D_A_Connect->value(rkr->aconnect_MI);
 D_J_Connect->value(rkr->aconnect_JA);
 Midi_In_Counter->value(rkr->MidiCh+1);
@@ -7668,7 +7697,8 @@ if (rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 
 if (rkr->aconnect_JA) JackCo->activate();
-else JackCo->deactivate();} {}
+else JackCo->deactivate();} {selected
+    }
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
