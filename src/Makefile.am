@@ -86,6 +86,8 @@ rakarrack_SOURCES = main.C \
 	Convolotron.C \
 	Synthfilter.C \
 	Synthfilter.h \
+	Resample.h \
+	Resample.C \
 	MIDIConverter.C \
 	MIDIConverter.h
 	

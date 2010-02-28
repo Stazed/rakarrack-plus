@@ -45,6 +45,7 @@ AC_CHECK_LIB([z], [main])
 AC_CHECK_LIB([jack],main)
 AC_CHECK_LIB([sndfile],sf_open)
 AC_CHECK_LIB([Xpm],[main])
+AC_CHECK_LIB([samplerate],src_simple)
 
 if test "x$prefix" = "xNONE"; then
 AC_DEFINE_UNQUOTED(PREFIX, "/usr/local", [Install prefix])
@@ -53,8 +54,11 @@ AC_DEFINE_UNQUOTED(PREFIX, "$prefix", [Install prefix])
 fi
 AC_HEADER_DIRENT
 AC_HEADER_STDC
-AC_CHECK_HEADERS([fcntl.h libintl.h stdlib.h string.h sys/ioctl.h unistd.h sndfile.h X11/xpm.h])
+AC_CHECK_HEADERS([fcntl.h libintl.h stdlib.h string.h sys/ioctl.h unistd.h sndfile.h samplerate.h X11/xpm.h])
 AC_CHECK_HEADER(alsa/asoundlib.h, true, AC_MSG_ERROR([Alsa is required]))
+AC_SUBST(SAMPLERATE_CFLAG)
+AC_SUBST(SAMPLERATE_LIBS)
+
 
 if test "x$prefix" == "xNONE"; then
 prefix=/usr/local
@@ -93,7 +97,7 @@ fi
 
 
 
-LIBS="`$FLTKCONFIG --use-images --ldflags` `pkg-config --libs sndfile` $LIBS"
+LIBS="`$FLTKCONFIG --use-images --ldflags` $LIBS"
 CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math -fno-rtti -pipe -ffunction-sections -fomit-frame-pointer -fsigned-char -Wno-format-y2k -fPIC -fno-exceptions -fno-strict-aliasing `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags sndfile` `pkg-config --cflags jack` $CXXFLAGS"
 AC_CONFIG_FILES([Makefile src/Makefile man/Makefile data/Makefile icons/Makefile doc/Makefile doc/help/Makefile doc/help/imagenes/Makefile doc/help/css/Makefile extra/Makefile])
 AC_OUTPUT
