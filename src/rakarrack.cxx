@@ -11466,7 +11466,7 @@ R average.");
         convo_length->labelsize(10);
         convo_length->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_length->minimum(5);
-        convo_length->maximum(1000);
+        convo_length->maximum(500);
         convo_length->step(1);
         convo_length->value(100);
         convo_length->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -11987,7 +11987,7 @@ R average.");
         Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
         Pre_Serve->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* Pre_Serve
-      { UPSAMPLE_C = new Fl_Check_Button(297, 129, 23, 20, "Upsampling");
+      { UPSAMPLE_C = new Fl_Check_Button(351, 129, 23, 20, "Upsampling");
         UPSAMPLE_C->down_box(FL_DOWN_BOX);
         UPSAMPLE_C->labelsize(11);
         UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -11995,7 +11995,7 @@ R average.");
         UPSAMPLE_C->align(FL_ALIGN_LEFT);
         UPSAMPLE_C->when(FL_WHEN_CHANGED);
       } // Fl_Check_Button* UPSAMPLE_C
-      { Upr_Qual = new Fl_Choice(217, 148, 75, 18, "Quality");
+      { Upr_Qual = new Fl_Choice(257, 148, 75, 18, "Quality");
         Upr_Qual->down_box(FL_BORDER_BOX);
         Upr_Qual->labelsize(10);
         Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12004,7 +12004,7 @@ R average.");
         Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
         Upr_Qual->menu(menu_Upr_Qual);
       } // Fl_Choice* Upr_Qual
-      { Upr_Amo = new Fl_Choice(312, 148, 47, 18, "#");
+      { Upr_Amo = new Fl_Choice(353, 148, 47, 18, "#");
         Upr_Amo->down_box(FL_BORDER_BOX);
         Upr_Amo->labelsize(10);
         Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12013,7 +12013,7 @@ R average.");
         Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
         Upr_Amo->menu(menu_Upr_Amo);
       } // Fl_Choice* Upr_Amo
-      { Har_Qual = new Fl_Choice(576, 137, 43, 18, "Harmonizer Quality");
+      { Har_Qual = new Fl_Choice(573, 137, 43, 18, "Harmonizer Quality");
         Har_Qual->down_box(FL_BORDER_BOX);
         Har_Qual->labelsize(10);
         Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

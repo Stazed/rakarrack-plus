@@ -4977,8 +4977,8 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           label Length
           callback {rkr->Convol_Bypass = 0;
 rkr->efx_Convol->changepar(2,(int)o->value());
-if ((int)convo_activar->value()) rkr->Convol_Bypass=1;} selected
-          xywh {372 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 1000 step 1 value 100 textcolor 7
+if ((int)convo_activar->value()) rkr->Convol_Bypass=1;}
+          xywh {372 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 500 step 1 value 100 textcolor 7
           class SliderW
         }
         Fl_Check_Button convo_stereo {
@@ -5506,7 +5506,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1582 51 640 528} type Double color 4 hide
+      xywh {1575 44 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5658,14 +5658,14 @@ chfsize(-1);}
         Fl_Check_Button UPSAMPLE_C {
           label Upsampling
           callback {Show_Next_Time();}
-          xywh {297 129 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
+          xywh {351 129 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
         }
         Fl_Choice Upr_Qual {
           label Quality
           callback {rkr->UpQual =(int) o->value();
 
-Show_Next_Time();}
-          xywh {217 148 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+Show_Next_Time();} selected
+          xywh {257 148 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Best
@@ -5693,7 +5693,7 @@ Show_Next_Time();}
           callback {rkr->UpAmo =(int) o->value();
 
 Show_Next_Time();}
-          xywh {312 148 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {353 148 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label x2
@@ -5735,7 +5735,7 @@ switch(i)
 
 
 Show_Next_Time();}
-          xywh {576 137 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {573 137 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 4
