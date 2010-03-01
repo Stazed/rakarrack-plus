@@ -79,8 +79,6 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
 
-  U_Resample = new Resample(UpQual);
-  D_Resample = new Resample(UpQual);
 
 
 
@@ -129,6 +127,7 @@ RKR::RKR ()
   anall = (float *) malloc (sizeof (float) * PERIOD);
   analr = (float *) malloc (sizeof (float) * PERIOD);
 
+ 
 
 
 
@@ -162,6 +161,8 @@ RKR::RKR ()
   efx_Shuffle = new Shuffle(efxoutl,efxoutr);
   efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
+  U_Resample = new Resample(UpQual);
+  D_Resample = new Resample(UpQual);
 
 
 
