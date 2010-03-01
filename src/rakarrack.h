@@ -2290,6 +2290,7 @@ private:
   static void cb_Etit(Fl_Button*, void*);
 public:
   Analyzer *Analy;
+  Fl_Box *UPS_LED;
   Fl_Double_Window *BankWindow;
 private:
   void cb_BankWindow_i(Fl_Double_Window*, void*);

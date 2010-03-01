@@ -894,8 +894,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} selected
-      xywh {1594 110 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {1587 103 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -5219,7 +5219,7 @@ rkr->modified=0;
           callback {rkr->New();
 DisAssigns();
 Put_Loaded();}
-          xywh {174 44 64 18} shortcut 0x6e color 62 labelsize 12
+          xywh {174 50 64 18} shortcut 0x6e color 62 labelsize 12
         }
         Fl_Button L_preset {
           label Load
@@ -5229,7 +5229,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkr");
 rkr->loadfile(filename);
 Put_Loaded();}
-          xywh {240 44 64 18} shortcut 0x6c color 62 labelsize 12
+          xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
         }
         Fl_Button S_preset {
           label Save
@@ -5240,7 +5240,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
 rkr->savefile(filename);}
-          xywh {306 44 64 18} shortcut 0x73 color 62 labelsize 12
+          xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
         }
         Fl_Light_Button Compare {
           label Compare
@@ -5257,7 +5257,7 @@ else
  rkr->Bank_to_Preset(0);
  Put_Loaded();
 }}
-          xywh {373 44 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
+          xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
         }
         Fl_Button B_preset {
           label Bank
@@ -5269,11 +5269,11 @@ put_icon(BankWindow);
 }
 else
 BankWindow->hide();}
-          xywh {448 44 64 18} shortcut 0x62 color 62 labelsize 12
+          xywh {448 50 64 18} shortcut 0x62 color 62 labelsize 12
         }
         Fl_Input WPreset_Name {
           callback {strcpy(rkr->Preset_Name,o->value());}
-          xywh {174 66 338 36} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
+          xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->maximum_size(22);}
         }
         Fl_Counter Preset_Counter {
@@ -5314,6 +5314,11 @@ Analyzer_ON=1;
         Fl_Box Analy {
           xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
           class Analyzer
+        }
+        Fl_Box UPS_LED {
+          label Upsampling
+          user_data 2
+          xywh {439 32 8 8} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
         }
       }
     }
@@ -6117,7 +6122,6 @@ Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
 
-
 void * v=MT;
 Fl::add_timeout(.04,tick,v);} {}
   }
@@ -6216,9 +6220,8 @@ for (int t=0; t<ob->children();t++)
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
 chfsize(0);
-
-
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)
@@ -8563,6 +8566,7 @@ for (int t=0; t<Principal->children();t++)
   }
 
 ChangeActives();
+
  
 Fl::redraw();} {}
   }
@@ -8594,7 +8598,8 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
-if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);} {}
+if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
+if(rkr->upsample) UPS_LED->color(leds_color); else UPS_LED->color(back_color);} {}
   }
   Function {findpos(int num, int value)} {} {
     code {int i;

@@ -11763,25 +11763,25 @@ R average.");
         PRESETS_LABEL->labelfont(1);
         PRESETS_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* PRESETS_LABEL
-      { S_new = new Fl_Button(174, 44, 64, 18, "New");
+      { S_new = new Fl_Button(174, 50, 64, 18, "New");
         S_new->shortcut(0x6e);
         S_new->color((Fl_Color)62);
         S_new->labelsize(12);
         S_new->callback((Fl_Callback*)cb_S_new);
       } // Fl_Button* S_new
-      { L_preset = new Fl_Button(240, 44, 64, 18, "Load");
+      { L_preset = new Fl_Button(240, 50, 64, 18, "Load");
         L_preset->shortcut(0x6c);
         L_preset->color((Fl_Color)62);
         L_preset->labelsize(12);
         L_preset->callback((Fl_Callback*)cb_L_preset);
       } // Fl_Button* L_preset
-      { S_preset = new Fl_Button(306, 44, 64, 18, "Save");
+      { S_preset = new Fl_Button(306, 50, 64, 18, "Save");
         S_preset->shortcut(0x73);
         S_preset->color((Fl_Color)62);
         S_preset->labelsize(12);
         S_preset->callback((Fl_Callback*)cb_S_preset);
       } // Fl_Button* S_preset
-      { Compare = new Fl_Light_Button(373, 44, 72, 18, "Compare");
+      { Compare = new Fl_Light_Button(373, 50, 72, 18, "Compare");
         Compare->shortcut(0x70);
         Compare->color((Fl_Color)62);
         Compare->selection_color((Fl_Color)1);
@@ -11790,13 +11790,13 @@ R average.");
         Compare->align(68|FL_ALIGN_INSIDE);
         Compare->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Compare
-      { B_preset = new Fl_Button(448, 44, 64, 18, "Bank");
+      { B_preset = new Fl_Button(448, 50, 64, 18, "Bank");
         B_preset->shortcut(0x62);
         B_preset->color((Fl_Color)62);
         B_preset->labelsize(12);
         B_preset->callback((Fl_Callback*)cb_B_preset);
       } // Fl_Button* B_preset
-      { Fl_Input* o = WPreset_Name = new Fl_Input(174, 66, 338, 36);
+      { Fl_Input* o = WPreset_Name = new Fl_Input(174, 72, 338, 30);
         WPreset_Name->color((Fl_Color)62);
         WPreset_Name->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WPreset_Name->textsize(24);
@@ -11851,6 +11851,13 @@ R average.");
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
+      { UPS_LED = new Fl_Box(439, 32, 8, 8, "Upsampling");
+        UPS_LED->box(FL_ROUNDED_BOX);
+        UPS_LED->labelsize(10);
+        UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        UPS_LED->user_data((void*)(2));
+        UPS_LED->align(FL_ALIGN_RIGHT);
+      } // Fl_Box* UPS_LED
       Presets->end();
     } // Fl_Group* Presets
     Principal->size_range(640, 480, 3200, 2400);
@@ -12399,7 +12406,6 @@ Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
 
-
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
 }
@@ -12502,8 +12508,6 @@ for (int t=0; t<ob->children();t++)
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor) {
   leds_color=bcolor;
 chfsize(0);
-
-
 Fl::redraw();
 }
 
@@ -14869,6 +14873,7 @@ for (int t=0; t<Principal->children();t++)
   }
 
 ChangeActives();
+
  
 Fl::redraw();
 }
@@ -14903,6 +14908,7 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
+if(rkr->upsample) UPS_LED->color(leds_color); else UPS_LED->color(back_color);
 }
 
 void RKRGUI::findpos(int num, int value) {
