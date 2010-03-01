@@ -115,6 +115,8 @@ RKR::RKR ()
   bogomips = 0.0f;
   i = Get_Bogomips();
 
+  U_Resample = new Resample(UpQual);
+  D_Resample = new Resample(UpQual);
 
   
   efxoutl = (float *) malloc (sizeof (float) * PERIOD);
@@ -125,10 +127,6 @@ RKR::RKR ()
 
   anall = (float *) malloc (sizeof (float) * PERIOD);
   analr = (float *) malloc (sizeof (float) * PERIOD);
-
-  U_Resample = new Resample(UpQual);
-  D_Resample = new Resample(UpQual);
-
 
 
   efx_Chorus = new Chorus (efxoutl, efxoutr);
