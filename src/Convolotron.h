@@ -1,14 +1,11 @@
 /*
-  ZynAddSubFX - a software synthesizer
- 
   Convolotron.h - Convolotron Effect
-  Copyright (C) 2002-2005 Nasca Octavian Paul
-  Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Author: Ryam Billing & Jospe Andreu
   
-  Reverse Echo by Transmogrifox
-    
+  Adapted effect structure of ZynAddSubFX - a software synthesizer
+  Author: Nasca Octavian Paul
+   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
   as published by the Free Software Foundation.
