@@ -51,6 +51,7 @@ Types:
 
   // ratio Equal to output_sample_rate / input_sample_rate.
 
+private:
 
 SRC_STATE *statel;
 SRC_STATE *stater;
