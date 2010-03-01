@@ -784,19 +784,19 @@ RKR::Control_Gain (float *origl, float *origr)
   float temp_sum;
   float tmp;
   
-
   if(upsample)
   U_Resample->out(origl,origr,efxoutl,efxoutr,J_PERIOD,u_up);
 
   for (i = 0; i <= PERIOD; i++)
     {
       efxoutl[i] *= Log_I_Gain;
-      smpl[i] = efxoutl[i];
       efxoutr[i] *= Log_I_Gain;
-      smpr[i] = efxoutr[i];
       tmp = fabsf(efxoutr[i] + efxoutl[i]);
       if (tmp > i_sum) i_sum = tmp;
     }
+      memcpy(smpl,efxoutl,sizeof(float)*PERIOD);
+      memcpy(smpr,efxoutr,sizeof(float)*PERIOD);
+
   temp_sum = (float)CLAMP (rap2dB (i_sum), -48.0, 15.0);
   val_i_sum = .6f * old_i_sum + .4f * temp_sum;
   val_sum = val_i_sum;
