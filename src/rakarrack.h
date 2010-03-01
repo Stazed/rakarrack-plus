@@ -2156,11 +2156,6 @@ private:
   void cb_convo_length_i(SliderW*, void*);
   static void cb_convo_length(SliderW*, void*);
 public:
-  SliderW *convo_qual;
-private:
-  void cb_convo_qual_i(SliderW*, void*);
-  static void cb_convo_qual(SliderW*, void*);
-public:
   Fl_Check_Button *convo_stereo;
 private:
   void cb_convo_stereo_i(Fl_Check_Button*, void*);

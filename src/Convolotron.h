@@ -64,26 +64,27 @@ private:
   int Plength;		//5...500 ms// Set maximum length of IR.
   int Pfb;		//-64...64//Feedback.
   int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
-  int Pquality;
   int Filenum;
   char Filename[128];
   int setfile (int value);
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
   void sethidamp (int Phidamp);
   void process_rbuf();
 
   SNDFILE *infile;
   SF_INFO sfinfo;
-
   int howmany,offset;
 
   //Parametrii reali
-  REALTYPE panning, lrcross,  hidamp, convlength;
+  REALTYPE panning, hidamp, convlength;
   REALTYPE *rbuf, *buf, *lxn, *rxn;
-  float maxx_size;
-  float fquality,level;
+  int maxx_size;
+  float level;
+  
+  class Resample *M_Resample;
+
+
 };
 
 

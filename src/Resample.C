@@ -87,7 +87,25 @@ src_process(statel, &srcinfol);
 src_process(stater, &srcinfor);
 
 
+}
 
+void
+Resample::mono_out(float *inl, float *outl, int frames, double ratio)
+{
+
+int i_frames = frames;
+int o_frames = (int) ((float)frames*ratio);
+
+srcinfol.data_in = inl;
+srcinfol.input_frames = i_frames;
+srcinfol.data_out = outl;
+srcinfol.output_frames = o_frames;
+srcinfol.src_ratio = ratio;
+srcinfol.end_of_input = 0;
+srcinfol.src_ratio = ratio;
+
+
+src_process(statel, &srcinfol);
 
 }
 

@@ -40,7 +40,6 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Plrcross = 100;
   Phidamp = 60;
   Filenum = 0;
-  Pquality = 1;
   Plength = 100;
   howmany = 0;
   convlength = MAX_C_SIZE / 1000.0;
@@ -49,7 +48,7 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
-  maxx_size = (int) maxx_size/20;  //initialize into something less likely to kill CPU by default
+  M_Resample = new Resample(0);
   setpreset (Ppreset);
   cleanup ();
 };
@@ -95,7 +94,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       for (j =0; j<howmany; j++)
       {
       xindex--;
-      if (xindex<0) xindex = maxx_size;		//input signal scrolls backward with each iteration
+      if (xindex<0) xindex = howmany;		//input signal scrolls backward with each iteration
 
       lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
       }
@@ -104,7 +103,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       efxoutr[i] = lyn * 2.0f * level * (1.0f -panning);  
 
       offset++;
-      if (offset>maxx_size) offset = 0;     
+      if (offset>howmany) offset = 0;     
 
       
     };
@@ -140,22 +139,23 @@ Convolotron::setfile(int value)
 
 int readcount;
 double sr_ratio;
-
+offset = 0;
+memset(buf,0,sizeof(float) * maxx_size);
 memset(rbuf,0,sizeof(float) * maxx_size);
+
 Filenum = value;
 bzero(Filename,sizeof(Filename));
 sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
 if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) return(0);
 if (sfinfo.frames > maxx_size) howmany = maxx_size; else howmany=sfinfo.frames;
 readcount = sf_seek (infile,0, SEEK_SET);
-readcount = sf_readf_float(infile,rbuf,howmany);
+readcount = sf_readf_float(infile,buf,howmany);
 
 if (sfinfo.samplerate != (int)SAMPLE_RATE)
 {
   sr_ratio = (double)SAMPLE_RATE/((double) sfinfo.samplerate);
-  printf("File is read but need to be resampled\n");
-  //IR_Resample->simple(inrbuf,outrbuf,PERIOD,sr_ratio);  //This is "Pseudo Code"
-							//really need to use SRC simple API to do this.  My C++ skills limit here :-)
+  M_Resample->mono_out(buf,rbuf,maxx_size,sr_ratio);
+  howmany =lrintf((float)maxx_size*(float)sr_ratio);
 
 }
 
@@ -168,14 +168,11 @@ return(1);
 void
 Convolotron::process_rbuf()
 {
- int i,j,k,ii,N,N2;
- float tailfader, val, alpha, a0, a1, a2, Nm1p, Nm1pp;
+ int ii,N,N2;
+ float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp;
  memset(buf,0, sizeof(float)*maxx_size);
- k=0;
- val = 0;
- printf("before howmany %d Quality %d Length %d \n",howmany,Pquality, Plength);
+ printf("Period %d howmany %d Length %d \n",PERIOD, maxx_size, Plength);
  
- if(howmany>maxx_size) howmany = maxx_size;
  /*Blackman Window function
  wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
  a0 = (1 - alpha)/2; a1 = 0.5; a2 = alpha/2
@@ -202,45 +199,7 @@ for(ii=0;ii<howmany;ii++)
   
   buf[ii]= rbuf[ii] * tailfader;   //Apply window function
  }
-
-  
-   printf("after envelope application %d Quality %d Length %d\n",howmany,Pquality,Plength);
-  
-//We can probably eliminate this implementation of Pquality...use resampling of whole effect if changing quality.
-
-//   if(Pquality > 1) 
-//   {
-//
-// for(i=0;i<=real_length;i++)
-// {
-//   
-//   val= val * fquality;	//residual...leaky integrator
-//   for(j=0;j<Pquality;j++)
-//     val +=rbuf[i+j]; 
-//  
-//    buf[k]=val * fquality;
-//   k++;   
-// }
-//   howmany = k-1;
-//  }
-//  else
-//   {
-//  for(i=0;i<real_length;i++) 
-//   buf[i] = rbuf[i];
-//   howmany = i;
-//   }
-
-
- printf("after howmany %d Quality %d Length %d\n",howmany,Pquality,Plength);
-
-
 }
-void
-Convolotron::setlrcross (int Plrcross)
-{
-  this->Plrcross = Plrcross;
-  lrcross = (float)Plrcross / 127.0f * 1.0f;
-};
 
 void
 Convolotron::sethidamp (int Phidamp)
@@ -287,17 +246,11 @@ Convolotron::changepar (int npar, int value)
       break;
     case 2:
       Plength = value;
-      if(Plength > 200) Plength = 500;
-      if(Plength < 5 ) Plength =5;				//time in milliseconds
       convlength = ((float) Plength)/1000.0f;			//time in seconds
       maxx_size = (int) ((float) SAMPLE_RATE * convlength);	//time in samples
-      process_rbuf();
+      setfile(Filenum);
        break;
     case 3:
-      Pquality = value;
-      if (Pquality < 1) Pquality = 1;
-      fquality = 1.0f/(float)Pquality;
-      if(howmany>0) process_rbuf();
       break;
     case 4:
       if(!setfile(value))
@@ -306,7 +259,6 @@ Convolotron::changepar (int npar, int value)
       }
       break;
     case 5:
-      setlrcross (value);
       break;
     case 6:
       sethidamp (value);
@@ -340,13 +292,13 @@ Convolotron::getpar (int npar)
       return(Plength);
       break;
     case 3:
-      return(Pquality);
+      return(0);
       break;  
     case 4:
       return (Filenum);
       break;
     case 5:
-      return (Plrcross);
+      return (0);
       break;
     case 6:
       return (Phidamp);

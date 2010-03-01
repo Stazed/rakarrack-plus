@@ -4620,13 +4620,12 @@ void RKRGUI::cb_convo_preset_i(Fl_Choice* o, void*) {
 rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
-convo_WD->value(rkr->efx_Convol->getpar(5)-64);
+convo_WD->value(rkr->efx_Convol->getpar(0)-64);
 convo_damp->value(rkr->efx_Convol->getpar(6));
 convo_fnum->value(rkr->efx_Convol->getpar(4));
 convo_length->value(rkr->efx_Convol->getpar(2));
 convo_stereo->value(rkr->efx_Convol->getpar(8));
 convo_reverb->value(rkr->efx_Convol->getpar(9));
-convo_qual->value(rkr->efx_Convol->getpar(3));
 if((int)convo_activar->value())rkr->Convol_Bypass=1;
 }
 void RKRGUI::cb_convo_preset(Fl_Choice* o, void* v) {
@@ -4670,17 +4669,12 @@ void RKRGUI::cb_convo_damp(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_convo_length_i(SliderW* o, void*) {
-  rkr->efx_Convol->changepar(2,(int)o->value());
+  rkr->Convol_Bypass = 0;
+rkr->efx_Convol->changepar(2,(int)o->value());
+if ((int)convo_activar->value()) rkr->Convol_Bypass=1;
 }
 void RKRGUI::cb_convo_length(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_length_i(o,v);
-}
-
-void RKRGUI::cb_convo_qual_i(SliderW* o, void*) {
-  rkr->efx_Convol->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_convo_qual(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_qual_i(o,v);
 }
 
 void RKRGUI::cb_convo_stereo_i(Fl_Check_Button* o, void*) {
@@ -11413,7 +11407,7 @@ R average.");
         convo_WD->align(FL_ALIGN_LEFT);
         convo_WD->when(FL_WHEN_CHANGED);
       } // SliderW* convo_WD
-      { convo_pan = new SliderW(372, 255, 100, 10, "Pan");
+      { convo_pan = new SliderW(372, 256, 100, 10, "Pan");
         convo_pan->type(5);
         convo_pan->box(FL_FLAT_BOX);
         convo_pan->color((Fl_Color)178);
@@ -11430,7 +11424,7 @@ R average.");
         convo_pan->align(FL_ALIGN_LEFT);
         convo_pan->when(FL_WHEN_CHANGED);
       } // SliderW* convo_pan
-      { convo_level = new SliderW(372, 270, 100, 10, "Level");
+      { convo_level = new SliderW(372, 273, 100, 10, "Level");
         convo_level->type(5);
         convo_level->box(FL_FLAT_BOX);
         convo_level->color((Fl_Color)178);
@@ -11446,7 +11440,7 @@ R average.");
         convo_level->align(FL_ALIGN_LEFT);
         convo_level->when(FL_WHEN_CHANGED);
       } // SliderW* convo_level
-      { convo_damp = new SliderW(372, 285, 100, 10, "Damp");
+      { convo_damp = new SliderW(372, 288, 100, 10, "Damp");
         convo_damp->type(5);
         convo_damp->box(FL_FLAT_BOX);
         convo_damp->color((Fl_Color)178);
@@ -11462,7 +11456,7 @@ R average.");
         convo_damp->align(FL_ALIGN_LEFT);
         convo_damp->when(FL_WHEN_CHANGED);
       } // SliderW* convo_damp
-      { convo_length = new SliderW(372, 300, 100, 10, "Length");
+      { convo_length = new SliderW(372, 304, 100, 10, "Length");
         convo_length->type(5);
         convo_length->box(FL_FLAT_BOX);
         convo_length->color((Fl_Color)178);
@@ -11474,37 +11468,19 @@ R average.");
         convo_length->minimum(5);
         convo_length->maximum(1000);
         convo_length->step(1);
-        convo_length->value(1000);
+        convo_length->value(100);
         convo_length->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_length->callback((Fl_Callback*)cb_convo_length);
         convo_length->align(FL_ALIGN_LEFT);
-        convo_length->when(FL_WHEN_CHANGED);
+        convo_length->when(FL_WHEN_RELEASE);
       } // SliderW* convo_length
-      { convo_qual = new SliderW(372, 315, 100, 10, "Quality");
-        convo_qual->type(5);
-        convo_qual->box(FL_FLAT_BOX);
-        convo_qual->color((Fl_Color)178);
-        convo_qual->selection_color((Fl_Color)62);
-        convo_qual->labeltype(FL_NORMAL_LABEL);
-        convo_qual->labelfont(0);
-        convo_qual->labelsize(10);
-        convo_qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_qual->minimum(1);
-        convo_qual->maximum(64);
-        convo_qual->step(1);
-        convo_qual->value(1);
-        convo_qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_qual->callback((Fl_Callback*)cb_convo_qual);
-        convo_qual->align(FL_ALIGN_LEFT);
-        convo_qual->when(FL_WHEN_CHANGED);
-      } // SliderW* convo_qual
-      { convo_stereo = new Fl_Check_Button(339, 332, 15, 15, "Stereo");
+      { convo_stereo = new Fl_Check_Button(339, 326, 15, 15, "Stereo");
         convo_stereo->down_box(FL_BORDER_BOX);
         convo_stereo->labelsize(10);
         convo_stereo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_stereo->callback((Fl_Callback*)cb_convo_stereo, (void*)(2));
       } // Fl_Check_Button* convo_stereo
-      { convo_reverb = new Fl_Check_Button(417, 332, 15, 15, "Reverb");
+      { convo_reverb = new Fl_Check_Button(417, 326, 15, 15, "Reverb");
         convo_reverb->down_box(FL_BORDER_BOX);
         convo_reverb->labelsize(10);
         convo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
