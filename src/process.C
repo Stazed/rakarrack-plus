@@ -79,7 +79,7 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
 
-
+  
 
 
   Adjust_Upsample();
@@ -118,6 +118,8 @@ RKR::RKR ()
   bogomips = 0.0f;
   i = Get_Bogomips();
 
+
+  
   efxoutl = (float *) malloc (sizeof (float) * PERIOD);
   efxoutr = (float *) malloc (sizeof (float) * PERIOD);
 
@@ -126,9 +128,6 @@ RKR::RKR ()
 
   anall = (float *) malloc (sizeof (float) * PERIOD);
   analr = (float *) malloc (sizeof (float) * PERIOD);
-
- 
-
 
 
   efx_Chorus = new Chorus (efxoutl, efxoutr);
@@ -161,12 +160,12 @@ RKR::RKR ()
   efx_Shuffle = new Shuffle(efxoutl,efxoutr);
   efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
+  efx_Convol = new Convolotron(efxoutl,efxoutr);
+
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(UpQual);
 
 
-
-  efx_Convol = new Convolotron(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr);

@@ -57,7 +57,6 @@ SRC_STATE *statel;
 SRC_STATE *stater;
 SRC_DATA srcinfol;
 SRC_DATA srcinfor;
-  
 int *errorl,*errorr;
 
 
