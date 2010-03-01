@@ -171,7 +171,6 @@ Convolotron::process_rbuf()
  int ii,N,N2;
  float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp;
  memset(buf,0, sizeof(float)*maxx_size);
- printf("Period %d howmany %d Length %d \n",PERIOD, maxx_size, Plength);
  
  /*Blackman Window function
  wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
