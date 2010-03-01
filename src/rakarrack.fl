@@ -894,8 +894,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1368 86 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1594 110 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -4926,9 +4926,11 @@ convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
 convo_damp->value(rkr->efx_Convol->getpar(6));
 convo_fnum->value(rkr->efx_Convol->getpar(4));
-convo_length->value(rkr->efx_Convol->getpar(2));
+convo_length->value(rkr->efx_Convol->getpar(3));
 convo_stereo->value(rkr->efx_Convol->getpar(8));
 convo_reverb->value(rkr->efx_Convol->getpar(9));
+convo_safe->value(rkr->efx_Convol->getpar(2));
+
 if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -4976,7 +4978,7 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
         Fl_Value_Slider convo_length {
           label Length
           callback {rkr->Convol_Bypass = 0;
-rkr->efx_Convol->changepar(2,(int)o->value());
+rkr->efx_Convol->changepar(3,(int)o->value());
 if ((int)convo_activar->value()) rkr->Convol_Bypass=1;}
           xywh {372 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 500 step 1 value 100 textcolor 7
           class SliderW
@@ -4992,6 +4994,12 @@ if ((int)convo_activar->value()) rkr->Convol_Bypass=1;}
           user_data 2
           callback {rkr->efx_Convol->changepar(9,(int)o->value())}
           xywh {417 326 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button convo_safe {
+          label {Safe Mode}
+          user_data 2
+          callback {rkr->efx_Convol->changepar(2,(int)o->value())}
+          xywh {339 343 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Button B_wav {
           label Browse
@@ -5664,7 +5672,7 @@ chfsize(-1);}
           label Quality
           callback {rkr->UpQual =(int) o->value();
 
-Show_Next_Time();} selected
+Show_Next_Time();}
           xywh {257 148 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {

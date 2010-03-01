@@ -58,6 +58,7 @@ private:
   int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
   int Phidamp;
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
+  int Psafe;
   int Plength;		//5...500 ms// Set maximum length of IR.
   int Pfb;		//-64...64//Feedback.
   int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.

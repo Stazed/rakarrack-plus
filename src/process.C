@@ -42,6 +42,7 @@ int rnote[POLY];
 int gate[POLY];
 int reconota;
 float r__ratio;
+int maxx_len;
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 Pixmap p, mask;
 XWMHints *hints;
@@ -67,6 +68,8 @@ RKR::RKR ()
 
     }
 
+
+
   strcpy (jackcliname, jack_get_client_name (jackclient));
   J_SAMPLE_RATE = jack_get_sample_rate (jackclient);
   J_PERIOD = jack_get_buffer_size (jackclient);
@@ -75,7 +78,14 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("UpQuality"), UpQual, 4); 
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
+
+  U_Resample = new Resample(UpQual);
+  D_Resample = new Resample(UpQual);
+
+
+
   Adjust_Upsample();
+
   
   
   Fraction_Bypass = 1.0f;
@@ -106,9 +116,9 @@ RKR::RKR ()
 
     }
 
-  bogomips = 0.0f;
-  Get_Bogomips();
 
+  bogomips = 0.0f;
+  i = Get_Bogomips();
 
   efxoutl = (float *) malloc (sizeof (float) * PERIOD);
   efxoutr = (float *) malloc (sizeof (float) * PERIOD);
@@ -120,8 +130,6 @@ RKR::RKR ()
   analr = (float *) malloc (sizeof (float) * PERIOD);
 
 
-  U_Resample = new Resample(UpQual);
-  D_Resample = new Resample(UpQual);
 
 
   efx_Chorus = new Chorus (efxoutl, efxoutr);
@@ -154,6 +162,9 @@ RKR::RKR ()
   efx_Shuffle = new Shuffle(efxoutl,efxoutr);
   efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
+
+
+
   efx_Convol = new Convolotron(efxoutl,efxoutr);
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
@@ -401,6 +412,9 @@ RKR::RKR ()
   New_Bank ();
 
   init_rkr ();
+
+
+
 
 
 }

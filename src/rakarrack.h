@@ -2166,6 +2166,11 @@ private:
   void cb_convo_reverb_i(Fl_Check_Button*, void*);
   static void cb_convo_reverb(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *convo_safe;
+private:
+  void cb_convo_safe_i(Fl_Check_Button*, void*);
+  static void cb_convo_safe(Fl_Check_Button*, void*);
+public:
   Fl_Button *B_wav;
   Fl_Choice *convo_fnum;
 private:

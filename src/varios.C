@@ -61,7 +61,7 @@ RKR::PrefNom (const char *dato)
 
 
 
-void
+int
 RKR::Get_Bogomips()
 {
 
@@ -87,10 +87,27 @@ char *tmp;
 
          }
          
+
+         maxx_len = lrintf(150.0f / 4800.0f * bogomips);
+         if(upsample) 
+         {
+          maxx_len /= (UpAmo + 8); 
+          maxx_len /= (6 - UpQual); 
+          // printf("Max Len: %d\n",maxx_len);
+
+         }
+         if(maxx_len < 5 ) 
+         {
+         Message("!! Alert !!","Be carefully with Convolotron effect because Seems that your CPU can not afford this settings");
+         }
+       
+       
+       
        fclose(fp);
+       return(1); 
      }
 
-
+ return(0);
 
 }
 

@@ -108,7 +108,7 @@ extern int rnote[POLY];
 extern int gate[POLY];
 extern int reconota;
 extern float r__ratio;
-
+extern int maxx_len;
 
 
 class RKR
@@ -169,7 +169,7 @@ public:
   void copy_IO();
   void convert_IO();
   int CheckOldBank(char *filename);
-  void Get_Bogomips();
+  int Get_Bogomips();
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;
@@ -344,9 +344,6 @@ public:
 
   float Master_Volume;
   float Input_Gain;
-  
-  float bogomips;
-
   float Fraction_Bypass;
   float Log_I_Gain;
   float Log_M_Volume;
@@ -356,6 +353,8 @@ public:
   float val_v_sum;
   float val_i_sum;
   int have_signal;
+
+  float bogomips;
 
 // Tunner
 

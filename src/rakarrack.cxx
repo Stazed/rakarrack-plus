@@ -4623,9 +4623,11 @@ convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
 convo_damp->value(rkr->efx_Convol->getpar(6));
 convo_fnum->value(rkr->efx_Convol->getpar(4));
-convo_length->value(rkr->efx_Convol->getpar(2));
+convo_length->value(rkr->efx_Convol->getpar(3));
 convo_stereo->value(rkr->efx_Convol->getpar(8));
 convo_reverb->value(rkr->efx_Convol->getpar(9));
+convo_safe->value(rkr->efx_Convol->getpar(2));
+
 if((int)convo_activar->value())rkr->Convol_Bypass=1;
 }
 void RKRGUI::cb_convo_preset(Fl_Choice* o, void* v) {
@@ -4670,7 +4672,7 @@ void RKRGUI::cb_convo_damp(SliderW* o, void* v) {
 
 void RKRGUI::cb_convo_length_i(SliderW* o, void*) {
   rkr->Convol_Bypass = 0;
-rkr->efx_Convol->changepar(2,(int)o->value());
+rkr->efx_Convol->changepar(3,(int)o->value());
 if ((int)convo_activar->value()) rkr->Convol_Bypass=1;
 }
 void RKRGUI::cb_convo_length(SliderW* o, void* v) {
@@ -4689,6 +4691,13 @@ void RKRGUI::cb_convo_reverb_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_convo_reverb(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_reverb_i(o,v);
+}
+
+void RKRGUI::cb_convo_safe_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Convol->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_convo_safe(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_safe_i(o,v);
 }
 
 void RKRGUI::cb_convo_fnum_i(Fl_Choice* o, void*) {
@@ -11486,6 +11495,12 @@ R average.");
         convo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_reverb->callback((Fl_Callback*)cb_convo_reverb, (void*)(2));
       } // Fl_Check_Button* convo_reverb
+      { convo_safe = new Fl_Check_Button(339, 343, 15, 15, "Safe Mode");
+        convo_safe->down_box(FL_BORDER_BOX);
+        convo_safe->labelsize(10);
+        convo_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_safe->callback((Fl_Callback*)cb_convo_safe, (void*)(2));
+      } // Fl_Check_Button* convo_safe
       { B_wav = new Fl_Button(426, 353, 46, 12, "Browse");
         B_wav->labelsize(10);
         B_wav->user_data((void*)(2));

@@ -36,9 +36,10 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Pvolume = 50;
   Ppanning = 64;
   Plrcross = 100;
+  Psafe = 1;
   Phidamp = 60;
   Filenum = 0;
-  Plength = 100;
+  Plength = 50;
   howmany = 0;
   convlength = MAX_C_SIZE / 1000.0;
   maxx_size = (int) ((float) SAMPLE_RATE * convlength);  //just to get 1 second memory allocated
@@ -212,13 +213,13 @@ Convolotron::setpreset (int npreset)
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Convolotron 1
-    {67, 64, 100, 1, 0, 64, 30, 20, 1, 0},
+    {67, 64, 1, 100, 0, 64, 30, 20, 1, 0},
     //Convolotron 2
-    {67, 64, 100, 1, 1, 64, 30, 20, 1, 0},
+    {67, 64, 1, 100, 1, 64, 30, 20, 1, 0},
     //Convolotron 3
-    {67, 75, 100, 1, 3, 64, 30, 20, 1, 0},
+    {67, 75, 1, 100, 3, 64, 30, 20, 1, 0},
     //Convolotron 4
-    {67, 60, 100, 1, 3, 64, 30, 20, 1, 0}
+    {67, 60, 1, 100, 3, 64, 30, 20, 1, 0}
   };
 
   howmany = 0;
@@ -242,12 +243,20 @@ Convolotron::changepar (int npar, int value)
       setpanning (value);
       break;
     case 2:
+      Psafe = value;
+      break;
+    case 3:
+      if (Psafe)
+      {
+      if (value < maxx_len)
       Plength = value;
+      else
+      Plength = maxx_len;
+      }
+      else Plength = value;
       convlength = ((float) Plength)/1000.0f;			//time in seconds
       maxx_size = (int) ((float) SAMPLE_RATE * convlength);	//time in samples
       setfile(Filenum);
-       break;
-    case 3:
       break;
     case 4:
       if(!setfile(value))
@@ -286,10 +295,10 @@ Convolotron::getpar (int npar)
       return (Ppanning);
       break;
     case 2:
-      return(Plength);
+      return(Psafe);
       break;
     case 3:
-      return(0);
+      return(Plength); 
       break;  
     case 4:
       return (Filenum);
