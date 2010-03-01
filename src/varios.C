@@ -98,7 +98,7 @@ char *tmp;
          }
          if(maxx_len < 5 ) 
          {
-         Message("!! Alert !!","Be carefully with Convolotron effect because Seems that your CPU can not afford this settings");
+         Message("!! Alert !!","You have selected a challenging upsampling setting for your CPU.  Be very careful with the Convolotron effect.");
          }
        
        
