@@ -169,6 +169,7 @@ public:
   void copy_IO();
   void convert_IO();
   int CheckOldBank(char *filename);
+  void Get_Bogomips();
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;
@@ -343,6 +344,8 @@ public:
 
   float Master_Volume;
   float Input_Gain;
+  
+  float bogomips;
 
   float Fraction_Bypass;
   float Log_I_Gain;

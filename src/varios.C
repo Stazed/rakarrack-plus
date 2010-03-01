@@ -60,3 +60,37 @@ RKR::PrefNom (const char *dato)
 }
 
 
+
+void
+RKR::Get_Bogomips()
+{
+
+FILE *fp;
+char temp[256];
+char *tmp;
+
+  if ((fp = fopen ("/proc/cpuinfo", "r")) != NULL)
+    {
+      bzero (temp, sizeof (temp));
+
+      while (fgets (temp, sizeof temp, fp) != NULL)
+	{
+
+	  if (strstr (temp, "bogomips") != NULL)
+
+	    {
+	      strcpy(tmp,temp);
+	      strsep(&tmp,":");
+              sscanf (tmp, "%f", &bogomips);
+              break;
+	    }
+
+         }
+         
+       fclose(fp);
+     }
+
+
+
+}
+

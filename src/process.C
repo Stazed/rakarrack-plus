@@ -106,6 +106,8 @@ RKR::RKR ()
 
     }
 
+  bogomips = 0.0f;
+  Get_Bogomips();
 
 
   efxoutl = (float *) malloc (sizeof (float) * PERIOD);
