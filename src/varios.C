@@ -79,7 +79,7 @@ char *tmp;
 	  if (strstr (temp, "bogomips") != NULL)
 
 	    {
-	      strcpy(tmp,temp);
+	      tmp=strdup(temp);
 	      strsep(&tmp,":");
               sscanf (tmp, "%f", &bogomips);
               break;

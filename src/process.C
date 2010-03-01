@@ -79,9 +79,6 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
 
-  
-
-
   Adjust_Upsample();
 
   
@@ -129,6 +126,10 @@ RKR::RKR ()
   anall = (float *) malloc (sizeof (float) * PERIOD);
   analr = (float *) malloc (sizeof (float) * PERIOD);
 
+  U_Resample = new Resample(UpQual);
+  D_Resample = new Resample(UpQual);
+
+
 
   efx_Chorus = new Chorus (efxoutl, efxoutr);
   efx_Flanger = new Chorus (efxoutl, efxoutr);
@@ -162,8 +163,6 @@ RKR::RKR ()
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
   efx_Convol = new Convolotron(efxoutl,efxoutr);
 
-  U_Resample = new Resample(UpQual);
-  D_Resample = new Resample(UpQual);
 
 
   efx_Tuner = new Tuner ();
