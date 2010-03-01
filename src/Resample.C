@@ -29,8 +29,8 @@
 
 Resample::Resample(int type) 
 {
-statel = src_new(type , 1 , errorl);
-stater = src_new(type , 1 , errorr);
+statel = src_new(type , 1 , &errorl);
+stater = src_new(type , 1 , &errorr);
 }
 
 
