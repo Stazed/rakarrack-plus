@@ -40,8 +40,8 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Phidamp = 60;
   Filenum = 0;
   Plength = 50;
-  howmany = 0;
-  convlength = MAX_C_SIZE / 1000.0;
+  real_len = 0;
+  convlength = 1.0f;
   maxx_size = (int) ((float) SAMPLE_RATE * convlength);  //just to get the max memory allocated
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
@@ -83,7 +83,6 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
     {
 
       l = smpsl[i] + smpsr[i];
-      
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
       
@@ -93,7 +92,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       for (j =0; j<length; j++)
       {
       xindex--;
-      if (xindex<0) xindex = maxx_size;		//input signal scrolls backward with each iteration
+      if (xindex<0) xindex = length;		//input signal scrolls backward with each iteration
 
       lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
       }
@@ -102,7 +101,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 
       offset++;
-      if (offset>maxx_size) offset = 0;     
+      if (offset>length) offset = 0;     
 
       
     };
@@ -140,22 +139,28 @@ Convolotron::setfile(int value)
 int readcount;
 double sr_ratio;
 offset = 0;
+maxx_read = maxx_size / 4;
 memset(buf,0,sizeof(float) * maxx_size);
 memset(rbuf,0,sizeof(float) * maxx_size);
 
 Filenum = value;
 bzero(Filename,sizeof(Filename));
 sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
+sfinfo.format = 0;
 if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) return(0);
-if (sfinfo.frames > maxx_size) howmany = maxx_size; else howmany=sfinfo.frames;
+if (sfinfo.frames > maxx_read) real_len = maxx_read; else real_len=sfinfo.frames;
 readcount = sf_seek (infile,0, SEEK_SET);
-readcount = sf_readf_float(infile,rbuf,howmany);
+readcount = sf_readf_float(infile,buf,real_len);
+sf_close(infile);
+
+
+
 
 if (sfinfo.samplerate != (int)SAMPLE_RATE)
 {
   sr_ratio = (double)SAMPLE_RATE/((double) sfinfo.samplerate);
-  M_Resample->mono_out(buf,rbuf,maxx_size,sr_ratio);
-  howmany =lrintf((float)maxx_size*(float)sr_ratio);
+  M_Resample->mono_out(buf,rbuf,real_len,sr_ratio);
+  real_len =lrintf((float)real_len*(float)sr_ratio);
 
 }
 
@@ -170,10 +175,8 @@ Convolotron::process_rbuf()
 {
  int ii,j,N,N2;
  float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp, IRpowa, IRpowb, ngain, maxamp;
- memset(buf,0, sizeof(float)*maxx_size);
+ memset(buf,0, sizeof(float)*real_len);
  
- if(length > howmany) length = howmany;
-
  
  /*Blackman Window function
  wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
@@ -184,7 +187,7 @@ Convolotron::process_rbuf()
  a1 = 0.5f;
  a2 = 0.5*alpha;
  N = length;
- N2 = (int) (length/2);
+ N2 = length/2;
  Nm1p = 2.0f * PI/((float) (N - 1));
  Nm1pp = 4.0f * PI/((float) (N - 1));
  
@@ -205,23 +208,24 @@ Convolotron::process_rbuf()
 	
 	IRpowa = IRpowb = maxamp = 0.0f;
 	//compute IR signal power
-	 for(j=0;j<maxx_size;j++)
+	 for(j=0;j<maxx_read;j++)
 	 {
-	 IRpowa += fabs(rbuf[j]);
- 
+	 IRpowa += fabsf(rbuf[j]);
 		 if(j < length) 
 		 {
 
-                  IRpowb += fabs(buf[j]);
-		   if(maxamp < fabs(buf[j])) maxamp = fabs(buf[j]);   //find maximum level to normalize
+                  IRpowb += fabsf(buf[j]);
+            if(maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]);   //find maximum level to normalize
 		 }
  
 	 }
 	 
-	 if(maxamp < 0.3f) maxamp = 0.3f;
-	 ngain = IRpowa/(IRpowb * maxamp);
+//	 if(maxamp < 0.003f) maxamp = 0.003f;
+	 ngain = IRpowa/(IRpowb*maxamp);
 	 for(j=0; j<length; j++) buf[j] *= ngain; 
-	 printf("maxamp %f  IRpowa %f  IRpowb %f ngain %f length %d\n", maxamp, IRpowa, IRpowb, ngain, length);
+	 printf("maxamp %f  IRpowa %f  IRpowb %f ngain %f maxx_read %d length %d\n", maxamp, IRpowa, IRpowb, ngain, maxx_read, length);
+
+
 }
 
 void
@@ -248,7 +252,7 @@ Convolotron::setpreset (int npreset)
     {67, 60, 1, 100, 3, 64, 30, 20, 1, 0}
   };
 
-  howmany = 0;
+  
   if (npreset >= NUM_PRESETS)
     npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
@@ -280,9 +284,9 @@ Convolotron::changepar (int npar, int value)
       Plength = maxx_len;
       }
       else Plength = value;
-      convlength = ((float) Plength)/1000.0f;			//time in seconds
-      length = (int) ((float) SAMPLE_RATE * convlength);	//time in samples
-      setfile(Filenum);
+      convlength = ((float) Plength)/1000.0f;                   //time in seconds
+      length = (int) ((float) SAMPLE_RATE * convlength);        //time in samples       
+      process_rbuf();
       break;
     case 4:
       if(!setfile(value))
