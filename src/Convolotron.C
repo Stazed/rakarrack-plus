@@ -91,8 +91,8 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       xindex = offset;
       for (j =0; j<length; j++)
       {
-      xindex--;
-      if (xindex<0) xindex = length;		//input signal scrolls backward with each iteration
+      xindex--;		//input signal scrolls backward with each iteration
+      if (xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
 
       lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
       }
@@ -101,7 +101,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 
       offset++;
-      if (offset>length) offset = 0;     
+      if (offset>maxx_size) offset = 0;     
 
       
     };
@@ -214,16 +214,16 @@ Convolotron::process_rbuf()
 	 for(j=0;j<maxx_read;j++)
 	 {
 	 IRpowa += fabsf(rbuf[j]);
+            if(maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]);   //find maximum level to normalize	
+	     
 		 if(j < length) 
 		 {
-
                   IRpowb += fabsf(buf[j]);
-            if(maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]);   //find maximum level to normalize
 		 }
  
 	 }
 	 
-	 if(maxamp < 0.3f) maxamp = 0.3f;
+	 //if(maxamp < 0.3f) maxamp = 0.3f;
 	 ngain = IRpowa/(IRpowb*maxamp);
 	 if (ngain > maxx_read) ngain = maxx_read;
 	 for(j=0; j<length; j++) buf[j] *= ngain; 
