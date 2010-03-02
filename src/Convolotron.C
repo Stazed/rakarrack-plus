@@ -42,6 +42,8 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Plength = 50;
   real_len = 0;
   convlength = .5f;
+  fb = 0.0f;
+  feedback = 0.0f;
   maxx_size = (int) ((float) SAMPLE_RATE * convlength);  //just to get the max memory allocated
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
@@ -83,9 +85,18 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
   for (i = 0; i < PERIOD; i++)
     {
 
-      l = smpsl[i] + smpsr[i];
+      l = smpsl[i] + smpsr[i] + feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
+      
+      //Multitap feedback for reverbs
+      //verbindex = offset;
+      //for (j = 0; j<roomdelay; j++)
+      //{
+      //verbindex-=interval;
+      //if(verbindex<0) verbindex += maxx_delay;
+      //lxn[some_index] += feedback;
+      //}
       
       //Convolve left channel
       lyn = 0;
@@ -98,14 +109,11 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       xindex--;		//input signal scrolls backward with each iteration
       if (xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
 
-      lyn += buf[f_offset+j] * lxn[xindex];		//this is all there is to convolution
-      // lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
+      lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
 
       }
 
-      f_offset+=j;
-      if (f_offset > maxx_read) f_offset = 0;
-      
+      feedback = fb * lyn;
       efxoutl[i] = lyn * 2.0f * level * lpanning;
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 

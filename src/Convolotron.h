@@ -64,6 +64,7 @@ private:
   int Puser;		//-64...64//Feedback.
   int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
   int Filenum;
+  int Pfb;		//-64 ... 64// amount of feedback
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
@@ -78,7 +79,7 @@ private:
   REALTYPE lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   REALTYPE *rbuf, *buf, *lxn, *rxn;
   int maxx_size,maxx_read,real_len,length;
-  float level;
+  float level,fb, feedback;
   
   class Resample *M_Resample;
 
