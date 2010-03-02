@@ -72,6 +72,7 @@ private:
   SNDFILE *infile;
   SF_INFO sfinfo;
   int offset;
+  int f_offset;
 
   //Parametrii reali
   REALTYPE lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;

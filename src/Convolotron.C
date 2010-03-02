@@ -47,6 +47,7 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
+  f_offset = 0;
   M_Resample = new Resample(0);
   setpreset (Ppreset);
   cleanup ();
@@ -89,13 +90,21 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       //Convolve left channel
       lyn = 0;
       xindex = offset;
+
+      if ((f_offset+length)> maxx_read) f_offset=0;
+
       for (j =0; j<length; j++)
       {
       xindex--;		//input signal scrolls backward with each iteration
       if (xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
 
-      lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
+      lyn += buf[f_offset+j] * lxn[xindex];		//this is all there is to convolution
+      // lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
+
       }
+
+      f_offset+=j;
+      if (f_offset > maxx_read) f_offset = 0;
       
       efxoutl[i] = lyn * 2.0f * level * lpanning;
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
@@ -139,6 +148,7 @@ Convolotron::setfile(int value)
 int readcount;
 double sr_ratio;
 offset = 0;
+f_offset = 0;
 maxx_read = maxx_size / 2;
 memset(buf,0,sizeof(float) * maxx_size);
 memset(rbuf,0,sizeof(float) * maxx_size);
@@ -208,7 +218,10 @@ Convolotron::process_rbuf()
 		  buf[ii]= rbuf[ii] * tailfader;   //Apply window function
 		  
 	}
-	
+
+
+ 	memcpy(buf,rbuf,real_len*sizeof(float));
+
 	IRpowa = IRpowb = maxamp = 0.0f;
 	//compute IR signal power
 	 for(j=0;j<maxx_read;j++)
