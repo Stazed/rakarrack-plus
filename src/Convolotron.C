@@ -41,7 +41,7 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   Filenum = 0;
   Plength = 50;
   real_len = 0;
-  convlength = 1.0f;
+  convlength = .5f;
   maxx_size = (int) ((float) SAMPLE_RATE * convlength);  //just to get the max memory allocated
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
@@ -139,7 +139,7 @@ Convolotron::setfile(int value)
 int readcount;
 double sr_ratio;
 offset = 0;
-maxx_read = maxx_size / 4;
+maxx_read = maxx_size / 2;
 memset(buf,0,sizeof(float) * maxx_size);
 memset(rbuf,0,sizeof(float) * maxx_size);
 
@@ -161,8 +161,9 @@ if (sfinfo.samplerate != (int)SAMPLE_RATE)
   sr_ratio = (double)SAMPLE_RATE/((double) sfinfo.samplerate);
   M_Resample->mono_out(buf,rbuf,real_len,sr_ratio);
   real_len =lrintf((float)real_len*(float)sr_ratio);
-
 }
+
+else memcpy(rbuf,buf,real_len*sizeof(float));
 
 process_rbuf();
 

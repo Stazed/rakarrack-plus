@@ -4671,9 +4671,7 @@ void RKRGUI::cb_convo_damp(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_convo_length_i(SliderW* o, void*) {
-  rkr->Convol_Bypass = 0;
-rkr->efx_Convol->changepar(3,(int)o->value());
-if ((int)convo_activar->value()) rkr->Convol_Bypass=1;
+  rkr->efx_Convol->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_convo_length(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_length_i(o,v);
@@ -11475,7 +11473,7 @@ R average.");
         convo_length->labelsize(10);
         convo_length->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_length->minimum(5);
-        convo_length->maximum(500);
+        convo_length->maximum(250);
         convo_length->step(1);
         convo_length->value(100);
         convo_length->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
