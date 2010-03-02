@@ -98,7 +98,7 @@ char *tmp;
          }
          if(maxx_len < 5 ) 
          {
-         Message("!! Alert !!","You have selected a challenging upsampling setting for your CPU.  Be very careful with the Convolotron effect.");
+         Message("!! Rakarrack CPU Usage Warning !!","It appears your CPU will not easily handle convolution.  Be very careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
          }
        
        
