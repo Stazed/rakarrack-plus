@@ -142,10 +142,12 @@ offset = 0;
 maxx_read = maxx_size / 2;
 memset(buf,0,sizeof(float) * maxx_size);
 memset(rbuf,0,sizeof(float) * maxx_size);
-
+if(!Puser)
+{
 Filenum = value;
 bzero(Filename,sizeof(Filename));
 sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
+}
 sfinfo.format = 0;
 if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) return(0);
 if (sfinfo.frames > maxx_read) real_len = maxx_read; else real_len=sfinfo.frames;
@@ -306,7 +308,7 @@ Convolotron::changepar (int npar, int value)
       level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);;
       break;
     case 8:
-      Pfb = value;
+      Puser = value;
       break;
     case 9:
       Preverb = value;      
@@ -345,7 +347,7 @@ Convolotron::getpar (int npar)
       return(Plevel);
       break;
     case 8:
-      return(Pfb);
+      return(Puser);
       break;
     case 9:
       return(Preverb);

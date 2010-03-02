@@ -4624,7 +4624,8 @@ convo_WD->value(rkr->efx_Convol->getpar(0)-64);
 convo_damp->value(rkr->efx_Convol->getpar(6));
 convo_fnum->value(rkr->efx_Convol->getpar(4));
 convo_length->value(rkr->efx_Convol->getpar(3));
-convo_stereo->value(rkr->efx_Convol->getpar(8));
+convo_user->value(rkr->efx_Convol->getpar(8));
+if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
 
@@ -4677,11 +4678,13 @@ void RKRGUI::cb_convo_length(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_length_i(o,v);
 }
 
-void RKRGUI::cb_convo_stereo_i(Fl_Check_Button* o, void*) {
+void RKRGUI::cb_convo_user_i(Fl_Check_Button* o, void*) {
   rkr->efx_Convol->changepar(8,(int)o->value());
+
+if((int)o->value())B_wav->activate(); else B_wav->deactivate();
 }
-void RKRGUI::cb_convo_stereo(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_stereo_i(o,v);
+void RKRGUI::cb_convo_user(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_user_i(o,v);
 }
 
 void RKRGUI::cb_convo_reverb_i(Fl_Check_Button* o, void*) {
@@ -4696,6 +4699,18 @@ void RKRGUI::cb_convo_safe_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_convo_safe(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_safe_i(o,v);
+}
+
+void RKRGUI::cb_B_wav_i(Fl_Button*, void*) {
+  char *filename;
+filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".wav");
+strcpy(rkr->efx_Convol->Filename,filename);
+rkr->efx_Convol->setfile(100);
+}
+void RKRGUI::cb_B_wav(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_wav_i(o,v);
 }
 
 void RKRGUI::cb_convo_fnum_i(Fl_Choice* o, void*) {
@@ -11481,13 +11496,13 @@ R average.");
         convo_length->align(FL_ALIGN_LEFT);
         convo_length->when(FL_WHEN_RELEASE);
       } // SliderW* convo_length
-      { convo_stereo = new Fl_Check_Button(339, 326, 15, 15, "Stereo");
-        convo_stereo->down_box(FL_BORDER_BOX);
-        convo_stereo->labelsize(10);
-        convo_stereo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_stereo->callback((Fl_Callback*)cb_convo_stereo, (void*)(2));
-      } // Fl_Check_Button* convo_stereo
-      { convo_reverb = new Fl_Check_Button(417, 326, 15, 15, "Reverb");
+      { convo_user = new Fl_Check_Button(430, 336, 15, 15, "User");
+        convo_user->down_box(FL_BORDER_BOX);
+        convo_user->labelsize(10);
+        convo_user->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_user->callback((Fl_Callback*)cb_convo_user, (void*)(2));
+      } // Fl_Check_Button* convo_user
+      { convo_reverb = new Fl_Check_Button(339, 326, 15, 15, "Reverb");
         convo_reverb->down_box(FL_BORDER_BOX);
         convo_reverb->labelsize(10);
         convo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -11501,7 +11516,7 @@ R average.");
       } // Fl_Check_Button* convo_safe
       { B_wav = new Fl_Button(426, 353, 46, 12, "Browse");
         B_wav->labelsize(10);
-        B_wav->user_data((void*)(2));
+        B_wav->callback((Fl_Callback*)cb_B_wav, (void*)(2));
         B_wav->deactivate();
       } // Fl_Button* B_wav
       { convo_fnum = new Fl_Choice(371, 369, 101, 16, "Preset");

@@ -38,6 +38,7 @@ public:
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
+  int setfile (int value);
 
   void setdryonly ();
   int Ppreset;
@@ -46,8 +47,10 @@ public:
   REALTYPE *efxoutr;
 
   REALTYPE volume;
-
   REALTYPE outvolume;
+
+  char Filename[128];
+
 
 private:
   //Parametrii
@@ -58,11 +61,9 @@ private:
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
   int Psafe;
   int Plength;		//5...500 ms// Set maximum length of IR.
-  int Pfb;		//-64...64//Feedback.
+  int Puser;		//-64...64//Feedback.
   int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
   int Filenum;
-  char Filename[128];
-  int setfile (int value);
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);

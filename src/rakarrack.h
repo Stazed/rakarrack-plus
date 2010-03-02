@@ -2156,10 +2156,10 @@ private:
   void cb_convo_length_i(SliderW*, void*);
   static void cb_convo_length(SliderW*, void*);
 public:
-  Fl_Check_Button *convo_stereo;
+  Fl_Check_Button *convo_user;
 private:
-  void cb_convo_stereo_i(Fl_Check_Button*, void*);
-  static void cb_convo_stereo(Fl_Check_Button*, void*);
+  void cb_convo_user_i(Fl_Check_Button*, void*);
+  static void cb_convo_user(Fl_Check_Button*, void*);
 public:
   Fl_Check_Button *convo_reverb;
 private:
@@ -2172,6 +2172,10 @@ private:
   static void cb_convo_safe(Fl_Check_Button*, void*);
 public:
   Fl_Button *B_wav;
+private:
+  void cb_B_wav_i(Fl_Button*, void*);
+  static void cb_B_wav(Fl_Button*, void*);
+public:
   Fl_Choice *convo_fnum;
 private:
   void cb_convo_fnum_i(Fl_Choice*, void*);
