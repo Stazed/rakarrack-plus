@@ -49,7 +49,6 @@ Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
-  f_offset = 0;
   M_Resample = new Resample(0);
   setpreset (Ppreset);
   cleanup ();
@@ -101,8 +100,6 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
       //Convolve left channel
       lyn = 0;
       xindex = offset;
-
-      if ((f_offset+length)> maxx_read) f_offset=0;
 
       for (j =0; j<length; j++)
       {
@@ -156,7 +153,6 @@ Convolotron::setfile(int value)
 int readcount;
 double sr_ratio;
 offset = 0;
-f_offset = 0;
 maxx_read = maxx_size / 2;
 memset(buf,0,sizeof(float) * maxx_size);
 memset(rbuf,0,sizeof(float) * maxx_size);
@@ -264,17 +260,17 @@ Convolotron::sethidamp (int Phidamp)
 void
 Convolotron::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 10;
+  const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Convolotron 1
-    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0},
+    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0},
     //Convolotron 2
-    {67, 64, 1, 100, 1, 64, 30, 20, 0, 0},
+    {67, 64, 1, 100, 1, 64, 30, 20, 0, 0, 0},
     //Convolotron 3
-    {67, 75, 1, 100, 3, 64, 30, 20, 0, 0},
+    {67, 75, 1, 100, 3, 64, 30, 20, 0, 0, 0},
     //Convolotron 4
-    {67, 60, 1, 100, 3, 64, 30, 20, 0, 0}
+    {67, 60, 1, 100, 3, 64, 30, 20, 0, 0, 0}
   };
 
   

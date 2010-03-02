@@ -4628,7 +4628,7 @@ convo_user->value(rkr->efx_Convol->getpar(8));
 if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
-
+convo_fb->value(rkr->efx_Convol->getpar(10));
 if((int)convo_activar->value())rkr->Convol_Bypass=1;
 }
 void RKRGUI::cb_convo_preset(Fl_Choice* o, void* v) {
@@ -4678,13 +4678,11 @@ void RKRGUI::cb_convo_length(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_length_i(o,v);
 }
 
-void RKRGUI::cb_convo_user_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Convol->changepar(8,(int)o->value());
-
-if((int)o->value())B_wav->activate(); else B_wav->deactivate();
+void RKRGUI::cb_convo_fb_i(SliderW* o, void*) {
+  rkr->efx_Convol->changepar(10,(int)o->value());
 }
-void RKRGUI::cb_convo_user(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_user_i(o,v);
+void RKRGUI::cb_convo_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_fb_i(o,v);
 }
 
 void RKRGUI::cb_convo_reverb_i(Fl_Check_Button* o, void*) {
@@ -4692,6 +4690,15 @@ void RKRGUI::cb_convo_reverb_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_convo_reverb(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_reverb_i(o,v);
+}
+
+void RKRGUI::cb_convo_user_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Convol->changepar(8,(int)o->value());
+
+if((int)o->value())B_wav->activate(); else B_wav->deactivate();
+}
+void RKRGUI::cb_convo_user(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_user_i(o,v);
 }
 
 void RKRGUI::cb_convo_safe_i(Fl_Check_Button* o, void*) {
@@ -11446,7 +11453,7 @@ R average.");
         convo_pan->align(FL_ALIGN_LEFT);
         convo_pan->when(FL_WHEN_CHANGED);
       } // SliderW* convo_pan
-      { convo_level = new SliderW(372, 273, 100, 10, "Level");
+      { convo_level = new SliderW(372, 272, 100, 10, "Level");
         convo_level->type(5);
         convo_level->box(FL_FLAT_BOX);
         convo_level->color((Fl_Color)178);
@@ -11478,7 +11485,7 @@ R average.");
         convo_damp->align(FL_ALIGN_LEFT);
         convo_damp->when(FL_WHEN_CHANGED);
       } // SliderW* convo_damp
-      { convo_length = new SliderW(372, 304, 100, 10, "Length");
+      { convo_length = new SliderW(372, 320, 100, 10, "Length");
         convo_length->type(5);
         convo_length->box(FL_FLAT_BOX);
         convo_length->color((Fl_Color)178);
@@ -11496,19 +11503,36 @@ R average.");
         convo_length->align(FL_ALIGN_LEFT);
         convo_length->when(FL_WHEN_RELEASE);
       } // SliderW* convo_length
+      { convo_fb = new SliderW(372, 304, 100, 10, "Fb");
+        convo_fb->type(5);
+        convo_fb->box(FL_FLAT_BOX);
+        convo_fb->color((Fl_Color)178);
+        convo_fb->selection_color((Fl_Color)62);
+        convo_fb->labeltype(FL_NORMAL_LABEL);
+        convo_fb->labelfont(0);
+        convo_fb->labelsize(10);
+        convo_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_fb->minimum(-64);
+        convo_fb->maximum(64);
+        convo_fb->step(1);
+        convo_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_fb->callback((Fl_Callback*)cb_convo_fb);
+        convo_fb->align(FL_ALIGN_LEFT);
+        convo_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* convo_fb
+      { convo_reverb = new Fl_Check_Button(339, 336, 15, 15, "Reverb");
+        convo_reverb->down_box(FL_BORDER_BOX);
+        convo_reverb->labelsize(10);
+        convo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        convo_reverb->callback((Fl_Callback*)cb_convo_reverb, (void*)(2));
+      } // Fl_Check_Button* convo_reverb
       { convo_user = new Fl_Check_Button(430, 336, 15, 15, "User");
         convo_user->down_box(FL_BORDER_BOX);
         convo_user->labelsize(10);
         convo_user->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_user->callback((Fl_Callback*)cb_convo_user, (void*)(2));
       } // Fl_Check_Button* convo_user
-      { convo_reverb = new Fl_Check_Button(339, 326, 15, 15, "Reverb");
-        convo_reverb->down_box(FL_BORDER_BOX);
-        convo_reverb->labelsize(10);
-        convo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_reverb->callback((Fl_Callback*)cb_convo_reverb, (void*)(2));
-      } // Fl_Check_Button* convo_reverb
-      { convo_safe = new Fl_Check_Button(339, 343, 15, 15, "Safe Mode");
+      { convo_safe = new Fl_Check_Button(339, 351, 15, 15, "Safe Mode");
         convo_safe->down_box(FL_BORDER_BOX);
         convo_safe->labelsize(10);
         convo_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
