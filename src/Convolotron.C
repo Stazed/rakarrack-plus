@@ -334,6 +334,10 @@ Convolotron::changepar (int npar, int value)
     case 9:
       Preverb = value;      
       break;
+    case 10:
+      Pfb = value;
+      fb = (float) value/64.2f;      
+      break;
 
    };
 };
@@ -372,7 +376,10 @@ Convolotron::getpar (int npar)
       break;
     case 9:
       return(Preverb);
-      break;    
+      break;   
+    case 10:
+      return(Pfb);
+      break; 
 
     };
   return (0);			//in case of bogus parameter number
