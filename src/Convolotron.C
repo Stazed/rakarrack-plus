@@ -224,7 +224,7 @@ Convolotron::process_rbuf()
 	 }
 	 
 	 //if(maxamp < 0.3f) maxamp = 0.3f;
-	 ngain = IRpowa/(IRpowb*maxamp);
+	 ngain = IRpowa/IRpowb;
 	 if (ngain > maxx_read) ngain = maxx_read;
 	 for(j=0; j<length; j++) buf[j] *= ngain; 
 	 printf("maxamp %f  IRpowa %f  IRpowb %f ngain %f maxx_read %d length %d\n", maxamp, IRpowa, IRpowb, ngain, maxx_read, length);
