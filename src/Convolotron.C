@@ -110,7 +110,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       }
 
-      feedback = fb * lyn;
+      feedback =  fb * lyn;
       efxoutl[i] = lyn * 2.0f * level * lpanning;
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 
@@ -307,6 +307,7 @@ Convolotron::changepar (int npar, int value)
       else Plength = value;
       convlength = ((float) Plength)/1000.0f;                   //time in seconds
       length = (int) ((float) SAMPLE_RATE * convlength);        //time in samples       
+
       process_rbuf();
       break;
     case 4:
