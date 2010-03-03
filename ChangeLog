@@ -2,7 +2,7 @@
 -------------------------------------------------------------------------------
 - Added Effect Convolotron.
 - Added dependencies of libsamplerate and libsndfile.
-- Added Resampling in settings (Quality,Amount).
+- Added Upsampling in settings (Quality,Amount).
 - Added Effect VaryBand.
 - Added Peak in Compressor and final Limiter.
 - 255 Parameters in MIDI Learn.
