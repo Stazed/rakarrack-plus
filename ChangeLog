@@ -1,5 +1,12 @@
-==v0.5.0 (  /  /2009) ==
+==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Added Effect Convolotron.
+- Added dependencies of libsamplerate and libsndfile.
+- Added Resampling in settings (Quality,Amount).
+- Added Effect VaryBand.
+- Added Peak in Compressor and final Limiter.
+- 255 Parameters in MIDI Learn.
+- MIDI (On/Off) for effect.
 - MIDI Learn Alpha Sort.
 - Prog Change 81/82 -->Prev/Next Preset. 
 - Freqs in effects are now displayed as real freqs.
@@ -12,7 +19,7 @@
 - Fixed second Easter Egg.
 - Added Shift Arrows keyboard control increment/decrement +/- 10.
 - Added Balance (FX%) as preset parameter.
-- Added Effect Synthfilter
+- Added Effect Synthfilter.
 - Added Effect Shuffle.
 - Added Effect Expander.
 - Added Effect DistBand.
