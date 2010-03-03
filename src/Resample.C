@@ -31,6 +31,13 @@ Resample::Resample(int type)
 {
 statel = src_new(type , 1 , &errorl);
 stater = src_new(type , 1 , &errorr);
+
+srcinfol.input_frames = 0 ;
+srcinfol.output_frames_gen = 0 ;
+srcinfor.input_frames = 0 ;
+srcinfor.output_frames_gen = 0 ;
+                                         
+
 }
 
 
@@ -39,7 +46,6 @@ Resample::~Resample()
 statel = src_delete(statel);
 stater = src_delete(stater);
 
-
 };
 
 void
@@ -47,8 +53,6 @@ Resample::cleanup()
 {
 src_reset(statel);
 src_reset(stater);
-
-
 
 };
 
@@ -80,8 +84,8 @@ srcinfor.end_of_input = 0;
 srcinfor.src_ratio=ratio;
 
 
-src_process(statel, &srcinfol);
-src_process(stater, &srcinfor);
+errorl = src_process(statel, &srcinfol);
+errorr = src_process(stater, &srcinfor);
 
 
 }
@@ -102,7 +106,7 @@ srcinfol.end_of_input = 0;
 srcinfol.src_ratio = ratio;
 
 
-src_process(statel, &srcinfol);
+errorl = src_process(statel, &srcinfol);
 
 }
 
