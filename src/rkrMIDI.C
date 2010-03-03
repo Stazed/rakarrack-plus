@@ -1516,8 +1516,82 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Shuffle->changepar(9,value-64);
          break;
              
+    case 237:
+         efx_Synthfilter->changepar(0,value);
+         break;   
    
-   
+    case 238:
+         efx_Synthfilter->changepar(1,value);
+         break;   
+
+    case 239:
+         efx_Synthfilter->changepar(2,ret_Tempo(value));
+         break;   
+
+    case 240:
+         efx_Synthfilter->changepar(5,value);
+         break;   
+
+    case 241:
+         efx_Synthfilter->changepar(6,value);
+         break;   
+
+    case 242:
+         efx_Synthfilter->changepar(7,value-64);
+         break;   
+
+    case 243:
+         efx_Synthfilter->changepar(11,value);
+         break;   
+
+    case 244:
+         efx_Synthfilter->changepar(12,value-64);
+         break;   
+
+    case 245:
+         efx_Synthfilter->changepar(13,5+(int)((float)value*7.83464));
+         break;   
+
+    case 246:
+         efx_Synthfilter->changepar(14,5+(int)((float)value*3.8976378));
+         break;   
+
+    case 247:
+         efx_Synthfilter->changepar(15,value);
+         break;   
+    
+    case 248:
+         efx_MBVvol->changepar(0,value);
+         break;
+         
+    case 249:
+         efx_MBVvol->changepar(1,ret_Tempo(value));
+         break;
+         
+    case 250:
+         efx_MBVvol->changepar(3,value);
+         break;
+         
+    case 251:
+         efx_MBVvol->changepar(4,ret_Tempo(value));
+         break;
+         
+    case 252:
+         efx_MBVvol->changepar(6,value);
+         break;
+         
+    case 253:
+         efx_MBVvol->changepar(7,20+(int)((float)value*7.71653));
+         break;
+         
+    case 254:
+         efx_MBVvol->changepar(8,1000+(int)((float)value*55.11811));
+         break;
+         
+    case 255:
+         efx_MBVvol->changepar(9,2000+(int)((float)value*188.97638));
+         break;
+         
    
    
    } 

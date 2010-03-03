@@ -29,7 +29,7 @@
 
 #include "global.h"
 #define  ATTACK  0.175f  //crossover time for reverse delay
-#define  MAX_LOOP_DELAY 20	// Number of Seconds
+#define  MAX_LOOP_DELAY 12	// Number of Seconds
 class Looper
 {
 public:

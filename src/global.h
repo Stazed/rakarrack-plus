@@ -383,14 +383,14 @@ public:
 
   struct Effects_Names
   {
-    char Nom[32];
+    char Nom[24];
   } efx_names[50];
 
   struct Effects_Params
   {
-    char Nom[64];
+    char Nom[32];
     int Ato;
-  } efx_params[384];
+  } efx_params[320];
 
 
   struct Preset_Bank_Struct

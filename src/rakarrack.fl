@@ -7874,7 +7874,7 @@ rkr->RC->cc=1;} {}
 
 int i;
 
-for (i=1; i<237; i++)
+for (i=1; i<256; i++)
 
 {
 
@@ -8520,8 +8520,64 @@ switch (i)
      case 236:
      shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
      break; 
-     
-
+     case 237:
+     synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
+     break;
+     case 238:
+     synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
+     break;
+     case 239:
+     synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+     break;
+     case 240:
+     synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
+     break;
+     case 241:
+     synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
+     break;
+     case 242:
+     synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
+     break;
+     case 243:
+     synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
+     break;
+     case 244:
+     synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
+     break;
+     case 245:
+     synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
+     break;
+     case 246:
+     synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
+     break;
+     case 247:
+     synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
+     break;
+     case 248:
+     mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
+     break;
+     case 249:
+     mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
+     break;
+     case 250:
+     mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
+     break;
+     case 251:
+     mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
+     break;
+     case 252:
+     mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
+     break;
+     case 253:
+     mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
+     break;
+     case 254:
+     mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
+     break;
+     case 255:
+     mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
+     break;
+      
 
 }
 

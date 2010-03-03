@@ -203,7 +203,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 211;
+  NumParams= 230;
 
 {
    static const char *los_params[] = 
@@ -401,6 +401,17 @@ RKR::RKR ()
 "Shuffle M.L. Gain","231",
 "Shuffle Q","236",
 "Shuffle WD","227",
+"Synthfilter A.Time","245",
+"Synthfilter Depth","243",
+"Synthfilter Distort","238",
+"Synthfilter E.Sens","244",
+"Synthfilter Fb","242",
+"Synthfilter Offset","247",
+"Synthfilter R.Time","246",
+"Synthfilter St.df","240",
+"Synthfilter Tempo","239",
+"Synthfilter WD","237",
+"Synthfilter Width","241",
 "Valve Dist","174",
 "Valve Drive","173",
 "Valve HPF","177",
@@ -410,6 +421,14 @@ RKR::RKR ()
 "Valve Pan","171",
 "Valve Presence","175",
 "Valve WD","169",
+"VaryBand Cross1","253",
+"VaryBand Cross2","254",
+"VaryBand Cross3","255",
+"VaryBand St.df 2","252",
+"VaryBand St.df","250",
+"VaryBand Tempo 2","251",
+"VaryBand Tempo","249",
+"VaryBand WD","248",
 "Volume","7",
 "WahWah Amp S.","111",
 "WahWah Amp S.I.","112",
