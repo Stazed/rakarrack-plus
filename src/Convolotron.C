@@ -115,7 +115,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       }
 
-      feedback = 0.1f * fb * lyn;
+      feedback = 0.2f * fb * lyn;
       efxoutl[i] = lyn * 2.0f * level * lpanning;
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 
