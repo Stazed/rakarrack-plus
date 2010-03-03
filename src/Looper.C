@@ -34,7 +34,11 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   efxoutr = efxoutr_;
 
   //default values
-
+      Pclear = 1;
+      Pplay = 0;
+      Precord = 0;
+      Pstop = 1;
+      
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
   maxx_delay = SAMPLE_RATE * MAX_LOOP_DELAY;
   fade = (int) SAMPLE_RATE / 2;    //1/2 SR fade time available
@@ -60,9 +64,9 @@ Looper::cleanup ()
 {
   int i;
   for (i = 0; i < maxx_delay; i++)
-    ldelay[i] = 0.0;
+    ldelay[i] = 0.0f;
   for (i = 0; i < maxx_delay; i++)
-    rdelay[i] = 0.0;
+    rdelay[i] = 0.0f;
     
 };
 
@@ -74,9 +78,8 @@ void
 Looper::initdelays ()
 {
   kl = 0;
-  kr = 0;
 
-  dl = delay;
+  dl = maxx_delay;
 
   rvkl = dl - 1;
 
@@ -91,59 +94,66 @@ void
 Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
-  REALTYPE ldl, rdl, rswell, lswell;
+  REALTYPE rswell, lswell;
 
   for (i = 0; i < PERIOD; i++)
     {
-
-      ldl = smpsl[i];
-      rdl = smpsr[i];
-      
-      if(Preverse)
+    
+      if(Precord)
       {
+      ldelay[kl] += smpsl[i];
+      rdelay[kl] += smpsr[i];
+      }
+    
+    if(!Pclear)
+    {
+    if (++kl >= dl)
+    kl = 0;
+    rvkl = dl - 1 - kl;  
+    } 
+      
+      if(Pplay)
+      {
+	      if(Preverse)
+	      {
 
-      lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
-	      if (lswell <= PI) 
-	      {
-	      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
-	      efxoutl[i] = ldelay[rvkl] * lswell + ldelay[rvfl] * (1.0f - lswell);   //Volume ducking near zero crossing.     
-	      }  
-	      else
-	      {
-	      efxoutl[i] = ldelay[rvkl];        
-	      }
+	      lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
+		      if (lswell <= PI) 
+		      {
+		      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
+		      efxoutl[i] = ldelay[rvkl] * lswell;   //Volume ducking near zero crossing.     
+		      }  
+		      else
+		      {
+		      efxoutl[i] = ldelay[rvkl];        
+		      }
        
-      rswell = 	(float)(abs(kr - rvkl)) * Srate_Attack_Coeff;  
-	      if (rswell <= PI)
-	      {
-	       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
-	       efxoutr[i] = rdelay[rvkl] * rswell + rdelay[rvfr] * (1.0f - rswell);  //Volume ducking near zero crossing.
+	      rswell = 	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;  
+		      if (rswell <= PI)
+		      {
+		       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
+		       efxoutr[i] = rdelay[rvkl] * rswell;  //Volume ducking near zero crossing.
+		      }
+		      else
+		      {
+		      efxoutr[i] = rdelay[rvkl];
+		      }
+      
 	      }
 	      else
 	      {
-	      efxoutr[i] = rdelay[rvkl];
+	      efxoutl[i]= ldelay[kl];
+	      efxoutr[i]= rdelay[kl];
 	      }
       
-
       }
       else
       {
-      efxoutl[i]= ldl;
-      efxoutr[i]= rdl;
+	      efxoutl[i]= 0.0f;
+	      efxoutr[i]= 0.0f;      
       }
-      
-      ldelay[kl] = ldl;
-      rdelay[kr] = rdl;
-      
-      if (++kl >= dl)
-	kl = 0;
-
-      rvkl = dl - 1 - kl;    
-      rvfl = dl + fade - kl;
-
-      //Safety checks to avoid addressing data outside of buffer
-      if (rvfl > dl) rvfl = rvfl - dl;  
-      if (rvfl < 0) rvfl = 0;    
+          
+ 
       
     };
 
@@ -162,8 +172,8 @@ Looper::setpreset (int npreset)
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 0, 0, 0, 0, 0, 1000}
- 
+    {64, 0, 0, 0, 1, 0, 1000},
+    {64, 0, 0, 0, 1, 1, 1000} 
   };
 
 
@@ -183,35 +193,68 @@ Looper::changepar (int npar, int value)
     case 0:
     Pvolume = value;
     volume = outvolume = (float)Pvolume / 127.0f;
-    if (Pvolume == 0)
-    cleanup ();
+//    if (Pvolume == 0)
+//    cleanup ();
       break;
-    case 1:
+    case 1:	//Play at current pointer position
+    if(Pplay)
+    {
+    Pplay = 0;
+    printf("Play was true:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl);
+    }
+    else
+    {
       Pplay = 1;
-      Precord = 0;
-      Pstop = 0;
-      Pclear = 0;
+         printf("Play was false:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
+    }
+    if(Pstop)
+    {
+    Pstop = 0;
+    kl = 0;
+    printf("Play mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, kl, dl);
+    }
+    Pclear=0;
+    printf("Play mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, kl, dl);
       break;
-    case 2:
+    case 2:	//stop and reset pointer to 0
       Pstop = 1;
       Precord = 0;
       Pplay = 0;
-      Pclear = 0;
+      kl = 0;
+     printf("Stop Mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl);     
       break;
-    case 3:
+    case 3:		//Record at current position.  If first time (clear = true), then set end of loop, "dl"
+      if(Precord)
+      {
+      if(first_time)
+        {
+	   dl = kl;
+	   first_time = 0;
+	   printf("End Record:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
+	}  
+      Precord = 0;
+      }
+      else
+      {
       Precord = 1;
+      printf("Start Record:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl);
+      }
       Pstop = 0;
       Pclear = 0;
+     printf("Record Mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
       break;
     case 4:
-      Pclear = 1;
+      Pclear = 1;    //Clear everything and erase the loop
+      first_time = 1;
       Pplay = 0;
       Precord = 0;
       Pstop = 1;
-      cleanup();
+      initdelays ();
+      printf("Clear mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
       break;
     case 5:
-      Preverse = value;
+      Preverse = value;		//Playback in reverse
+     printf("Reverse Mode...play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
       break;
     case 6:
       Pfade = value;

@@ -65,8 +65,8 @@ private:
   void initdelays ();
   REALTYPE *ldelay, *rdelay;
   REALTYPE oldl, oldr;		//pt. lpf
-  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
-  float dl, delay;
+  int kl, rvkl, rvfl, maxx_delay, fade, dl, first_time;
+
   REALTYPE  Srate_Attack_Coeff;
 };
 
