@@ -790,12 +790,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   if (type() == FL_VERT_NICE_SLIDER) {
      
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
-    int d = (hsl-4)/2;
+    int d = (hsl-6)/2;
    
     draw_box(FL_THIN_DOWN_BOX, xsl+2, ysl+d, wsl-4, hsl-2*d,juan);
   } else if (type() == FL_HOR_NICE_SLIDER) {
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
-    int d = (wsl-4)/2;
+    int d = (wsl-6)/2;
     draw_box(FL_THIN_DOWN_BOX, xsl+d, ysl+2, wsl-2*d, hsl-4,pepe);
   } else {
     if (wsl>0 && hsl>0) draw_box(box1, xsl, ysl, wsl, hsl, juan);
@@ -882,7 +882,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   else
   fl_color(active_r() ? textcolor(): fl_inactive(textcolor()));
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
-   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {}
+   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {selected
+    }
   }
 } 
 
@@ -4932,7 +4933,7 @@ if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
 convo_fb->value(rkr->efx_Convol->getpar(10));
-if((int)convo_activar->value())rkr->Convol_Bypass=1;} selected
+if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {

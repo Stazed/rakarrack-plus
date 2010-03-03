@@ -745,12 +745,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   if (type() == FL_VERT_NICE_SLIDER) {
      
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
-    int d = (hsl-4)/2;
+    int d = (hsl-6)/2;
    
     draw_box(FL_THIN_DOWN_BOX, xsl+2, ysl+d, wsl-4, hsl-2*d,juan);
   } else if (type() == FL_HOR_NICE_SLIDER) {
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
-    int d = (wsl-4)/2;
+    int d = (wsl-6)/2;
     draw_box(FL_THIN_DOWN_BOX, xsl+d, ysl+2, wsl-2*d, hsl-4,pepe);
   } else {
     if (wsl>0 && hsl>0) draw_box(box1, xsl, ysl, wsl, hsl, juan);
