@@ -115,7 +115,8 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       }
 
-      feedback = 0.2f * fb * lyn;
+
+      feedback = fb * lyn;
       efxoutl[i] = lyn * 2.0f * level * lpanning;
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 
@@ -339,11 +340,11 @@ Convolotron::changepar (int npar, int value)
       Pfb = value;
       if(Pfb<0)
       {
-      fb = (float) value/250.0f;  
+      fb = (float) .1f*value/250.0f;  
       }
       else
       {
-      fb = (float) value/500.0f; 
+      fb = (float) .1f*value/500.0f; 
       }    
       break;
 
