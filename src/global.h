@@ -399,8 +399,7 @@ public:
     char Author[64];
     char Classe[36];
     char Type[4];
-    char Reserva[64];
-    char Reserva1[64];
+    char ConvoFiname[128];
     char cInput_Gain[64];
     char cMaster_Volume[64];
     char cBalance[64];

@@ -397,6 +397,17 @@ RKR::savefile (char *filename)
                    efx_MBVvol->getpar (10), MBVvol_Bypass);
 	  break;
 
+	case 29:
+	  //Convolotron
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		   efx_Convol->getpar (0), efx_Convol->getpar (1),
+		   efx_Convol->getpar (2), efx_Convol->getpar (3),
+		   efx_Convol->getpar (4), efx_Convol->getpar (5),
+		   efx_Convol->getpar (6), efx_Convol->getpar (7),
+		   efx_Convol->getpar (8), efx_Convol->getpar (9),
+                   efx_Convol->getpar (10), Convol_Bypass, efx_Convol->Filename);
+	  break;
+
  
 
 
@@ -449,11 +460,15 @@ RKR::loadfile (char *filename)
   int Num_Version=0;
   float in_vol, out_vol, balance;
   FILE *fn;
+  char *cfilename;
   char buf[256];
   int l[10];
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;
+
+  cfilename = (char *) malloc (sizeof (char) * 128);
+
   New();
 
   for (i = 0; i < 14; i++)
@@ -787,6 +802,17 @@ RKR::loadfile (char *filename)
 		  &lv[29][10],&MBVvol_B);
 	  break;
 
+	case 29:
+	  //Convolotron
+	  bzero(efx_Convol->Filename,sizeof(efx_Convol->Filename));
+	  bzero(cfilename,sizeof(cfilename));
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		  &lv[30][0], &lv[30][1], &lv[30][2], &lv[30][3], &lv[30][4],
+		  &lv[30][5], &lv[30][6], &lv[30][7], &lv[30][8], &lv[30][9],
+		  &lv[30][10],&Convol_B,cfilename);
+          strcpy(efx_Convol->Filename,cfilename);		  
+	  break;
+
 
 
 	}
@@ -860,6 +886,7 @@ RKR::Actualizar_Audio ()
   Shuffle_Bypass = 0;
   Synthfilter_Bypass = 0;
   MBVvol_Bypass = 0;
+  Convol_Bypass = 0;
   
   cleanup_efx ();
 
@@ -916,6 +943,8 @@ for (i = 0; i <= 6; i++)
     efx_Synthfilter->changepar (i, lv[28][i]);
  for (i = 0; i <= 10; i++)
     efx_MBVvol->changepar (i, lv[29][i]);
+ for (i = 0; i <= 10; i++)
+    efx_Convol->changepar (i, lv[30][i]);
   
 
   for (i = 0; i < 12; i++)
@@ -974,6 +1003,7 @@ for (i = 0; i <= 6; i++)
   Shuffle_Bypass = Shuffle_B;
   Synthfilter_Bypass = Synthfilter_B;
   MBVvol_Bypass = MBVvol_B;
+  Convol_Bypass =Convol_B;
   Bypass = Bypass_B;
 
 }
@@ -1039,7 +1069,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[30][16] = {
+  int presets[31][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1099,7 +1129,9 @@ RKR::New ()
 //Synthfilter
     {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0},
 //MBVvol    
-    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0}
+    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0},
+//Convolotron 1
+    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0}
  
 
   };
@@ -1108,6 +1140,7 @@ RKR::New ()
   for (j=0;j<10;j++) active[j]=0;
 
   bzero (Preset_Name, sizeof (Preset_Name));
+  bzero (efx_Convol->Filename,sizeof(efx_Convol->Filename));
   bzero (Author, sizeof (Author));
   strcpy(Author,UserRealName);
   Input_Gain = .5f;
@@ -1159,6 +1192,7 @@ RKR::New ()
   Shuffle_B = 0;
   Synthfilter_B = 0;
   MBVvol_B = 0;
+  Convol_B = 0;
   Bypass_B = 0;
 
   
@@ -1181,7 +1215,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[30][16] = {
+  int presets[31][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1241,10 +1275,10 @@ RKR::New_Bank ()
 //Synthfilter
     {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0},
 //MBVvol    
-    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0}
+    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0},
+//Convolotron 1
+    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0}
     
-    
-     
          
   };
 
@@ -1256,6 +1290,8 @@ RKR::New_Bank ()
       bzero (Bank[i].Preset_Name, sizeof (Bank[i].Preset_Name));
       bzero (Bank[i].Author, sizeof (Bank[i].Author));
       strcpy(Bank[i].Author,UserRealName);
+      bzero (Bank[i].ConvoFiname,sizeof(Bank[i].ConvoFiname));
+       
       Bank[i].Input_Gain = .5f;
       Bank[i].Master_Volume = .5f;
       Bank[i].Balance = 1.0f;
@@ -1291,6 +1327,9 @@ RKR::Bank_to_Preset (int i)
   strcpy (Preset_Name, Bank[i].Preset_Name);
   bzero (Author, sizeof (Author));
   strcpy (Author, Bank[i].Author);
+  bzero (efx_Convol->Filename, sizeof (efx_Convol->Filename));
+  strcpy (efx_Convol->Filename,Bank[i].ConvoFiname);
+
 
   for (j = 0; j < 50; j++)
     {
@@ -1334,7 +1373,8 @@ RKR::Bank_to_Preset (int i)
   Shuffle_B = Bank[i].lv[27][19];
   Synthfilter_B = Bank[i].lv[28][19];
   MBVvol_B = Bank[i].lv[29][19];
-    
+  Convol_B = Bank[i].lv[30][19];
+     
   
   Bypass_B = Bypass;
 
@@ -1366,6 +1406,10 @@ RKR::Preset_to_Bank (int i)
   strcpy (Bank[i].Preset_Name, Preset_Name);
   bzero (Bank[i].Author, sizeof (Bank[i].Author));
   strcpy (Bank[i].Author, Author);
+  bzero (Bank[i].ConvoFiname,sizeof(Bank[i].ConvoFiname));
+  strcpy(Bank[i].ConvoFiname, efx_Convol->Filename);
+
+
   Bank[i].Input_Gain = Input_Gain;
   Bank[i].Master_Volume = Master_Volume;
   Bank[i].Balance = Fraction_Bypass;
@@ -1421,8 +1465,10 @@ RKR::Preset_to_Bank (int i)
     lv[27][j] = efx_Shuffle->getpar(j);
   for (j = 0; j <= 15; j++)
     lv[28][j] = efx_Synthfilter->getpar(j);
-  for (j = 0; j <= 15; j++)
+  for (j = 0; j <= 10; j++)
     lv[29][j] = efx_MBVvol->getpar(j);
+  for (j = 0; j <= 10; j++)
+    lv[30][j] = efx_Convol->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1485,6 +1531,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[27][19] = Shuffle_Bypass;
   Bank[i].lv[28][19] = Synthfilter_Bypass;
   Bank[i].lv[29][19] = MBVvol_Bypass;
+  Bank[i].lv[30][19] = Convol_Bypass;
   
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
