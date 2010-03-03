@@ -215,11 +215,29 @@ RKR::midievents()
 void
 RKR::ActiveUn(int value)
 {
-  int numef = value / 2;
-  int inoff = value % 2; 
+
+  int numef;
+  int inoff=0;
+  int miraque=0;
+
+
+if(value < 20)
+{
+  numef = value / 2;
+  inoff = value % 2; 
+  miraque = efx_order[numef];
   Mnumeff = numef;
-  
-  switch(efx_order[numef])
+}
+
+if(value > 149)
+{
+  numef = value -150;
+  inoff = checkonoff(numef); 
+  miraque = numef;
+  Mnumeff = numef;
+}
+
+  switch(miraque)
    {
    case 0:
      if (inoff) EQ1_Bypass=1; else EQ1_Bypass=0;
@@ -277,8 +295,136 @@ RKR::ActiveUn(int value)
      break;
    case 18: 
      if (inoff) APhaser_Bypass=1; else APhaser_Bypass=0;
+     break;
+   case 19: 
+     if (inoff) Valve_Bypass=1; else Valve_Bypass=0;
+     break;
+   case 20: 
+     if (inoff) DFlange_Bypass=1; else DFlange_Bypass=0;
+     break;
+   case 21: 
+     if (inoff) Ring_Bypass=1; else Ring_Bypass=0;
+     break;
+   case 22: 
+     if (inoff) Exciter_Bypass=1; else Exciter_Bypass=0;
+     break;
+   case 23: 
+     if (inoff) MBDist_Bypass=1; else MBDist_Bypass=0;
+     break;
+   case 24: 
+     if (inoff) Arpie_Bypass=1; else Arpie_Bypass=0;
+     break;
+   case 25: 
+     if (inoff) Expander_Bypass=1; else Expander_Bypass=0;
+     break;
+   case 26: 
+     if (inoff) Synthfilter_Bypass=1; else Synthfilter_Bypass=0;
+     break;
+   case 27: 
+     if (inoff) MBVvol_Bypass=1; else MBVvol_Bypass=0;
+     break;
 }   
 }
+
+
+
+int
+RKR::checkonoff(int miraque)
+{
+
+
+  switch(miraque)
+   {
+   case 0:
+     if(EQ1_Bypass) return(0);
+     break;
+   case 1:
+     if (Compressor_Bypass) return(0);  
+     break;
+   case 2:
+     if (Distorsion_Bypass) return(0);
+     break;
+   case 3:
+     if (Overdrive_Bypass)return(0);
+     break;
+   case 4:
+     if (Echo_Bypass)return(0);
+     break;
+   case 5:
+     if (Chorus_Bypass) return(0);
+     break;
+   case 6:
+     if (Phaser_Bypass) return(0);
+     break;
+   case 7:
+     if (Flanger_Bypass) return(0);
+     break;
+   case 8:
+     if (Reverb_Bypass) return(0);
+     break;
+   case 9:
+     if (EQ2_Bypass) return(0);
+     break;
+   case 10:
+     if (WhaWha_Bypass) return(0);
+     break;
+   case 11:
+     if (Alienwah_Bypass) return(0);
+     break;
+   case 12:
+     if (Cabinet_Bypass) return(0);
+     break;
+   case 13:
+     if (Pan_Bypass) return(0);
+     break;
+   case 14:
+     if (Harmonizer_Bypass) return(0);
+     break;
+   case 15:
+     if (MusDelay_Bypass) return(0);
+     break;
+   case 16:
+     if (Gate_Bypass) return(0);
+     break;
+   case 17:
+     if (NewDist_Bypass) return(0);
+     break;
+   case 18: 
+     if (APhaser_Bypass) return(0);
+     break;
+   case 19: 
+     if (Valve_Bypass) return(0);
+     break;
+   case 20: 
+     if (DFlange_Bypass) return(0);
+     break;
+   case 21: 
+     if (Ring_Bypass) return(0);
+     break;
+   case 22: 
+     if (Exciter_Bypass) return(0);
+     break;
+   case 23: 
+     if (MBDist_Bypass) return(0);
+     break;
+   case 24: 
+     if (Arpie_Bypass) return(0);
+     break;
+   case 25: 
+     if (Expander_Bypass) return(0);
+     break;
+   case 26: 
+     if (Synthfilter_Bypass) return(0);
+     break;
+   case 27: 
+     if (MBVvol_Bypass) return(0);
+     break;
+}   
+return(1);
+
+}
+
+
 
 void
 RKR::Conecta ()
@@ -857,7 +1003,7 @@ RKR::process_midi_controller_events(int parameter, int value)
       break;
 
     case 116:
-      ActiveUn( value);
+      ActiveUn(value);
       break;
       
     case 117:

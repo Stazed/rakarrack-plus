@@ -14776,6 +14776,42 @@ void RKRGUI::ActOnOff() {
   aphaser_activar->value(rkr->APhaser_Bypass);
   aphaser_activar->do_callback();
   break;
+  case 19:
+  valve_activar->value(rkr->Valve_Bypass);
+  valve_activar->do_callback();
+  break;
+  case 20:
+  dflange_activar->value(rkr->DFlange_Bypass);
+  dflange_activar->do_callback();
+  break;
+  case 21:
+  ring_activar->value(rkr->Ring_Bypass);
+  ring_activar->do_callback();
+  break;
+  case 22:
+  exciter_activar->value(rkr->Exciter_Bypass);
+  exciter_activar->do_callback();
+  break;
+  case 23:
+  mbdist_activar->value(rkr->MBDist_Bypass);
+  mbdist_activar->do_callback();
+  break;
+  case 24:
+  arpie_activar->value(rkr->Arpie_Bypass);
+  arpie_activar->do_callback();
+  break;
+  case 25:
+  expander_activar->value(rkr->Expander_Bypass);
+  expander_activar->do_callback();
+  break;
+  case 26:
+  synthfilter_activar->value(rkr->Synthfilter_Bypass);
+  synthfilter_activar->do_callback();
+  break;
+  case 27:
+  mbvvol_activar->value(rkr->MBVvol_Bypass);
+  mbvvol_activar->do_callback();
+  break;
   
 }
 }

@@ -170,6 +170,8 @@ public:
   void convert_IO();
   int CheckOldBank(char *filename);
   int Get_Bogomips();
+  int checkonoff(int value);
+
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;
