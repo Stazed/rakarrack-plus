@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -896,7 +895,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1573 89 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1376 47 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -5047,6 +5046,82 @@ rkr->efx_Convol->setfile(100);}
           }
         }
       }
+      Fl_Group LOOPER {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button looper_activar {
+          label On
+          user_data 2
+          callback {rkr->Looper_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Looper->cleanup();
+findpos(30,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice looper_preset {
+          label Preset
+          callback {rkr->Looper_Bypass=0;
+rkr->efx_Looper->setpreset((int) o->value());
+looper_WD->value(rkr->efx_Looper->getpar(0)-64);
+looper_play->value(rkr->efx_Looper->getpar(1));
+looper_stop->value(rkr->efx_Looper->getpar(2));
+looper_record->value(rkr->efx_Looper->getpar(3));
+looper_clear->value(rkr->efx_Looper->getpar(4));
+looper_rv->value(rkr->efx_Looper->getpar(5));
+looper_fade->value(rkr->efx_Looper->getpar(6));
+
+if((int)looper_activar->value())rkr->Looper_Bypass=1;} selected
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Looper 1}
+            xywh {67 67 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider looper_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Looper->changepar(0,(int)(o->value()+64));}
+          xywh {371 246 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider looper_fade {
+          label Fade
+          callback {rkr->efx_Looper->changepar(6,(int)o->value());}
+          xywh {371 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 100 maximum 2000 step 1 value 1000 textcolor 7
+          class SliderW
+        }
+        Fl_Button looper_play {
+          label {@>}
+          user_data 2
+          callback {rkr->efx_Looper->changepar(1,(int)o->value());}
+          xywh {328 295 44 22}
+        }
+        Fl_Button looper_stop {
+          label {@square}
+          user_data 2
+          callback {rkr->efx_Looper->changepar(2,(int)o->value());}
+          xywh {379 295 44 22}
+        }
+        Fl_Button looper_record {
+          label {@circle}
+          user_data 2
+          callback {rkr->efx_Looper->changepar(3,(int)o->value());}
+          xywh {429 295 44 22} labelcolor 1
+        }
+        Fl_Button looper_clear {
+          label Clear
+          user_data 2
+          callback {rkr->efx_Looper->changepar(4,(int)o->value());}
+          xywh {371 322 57 14} labelsize 10
+        }
+        Fl_Check_Button looper_rv {
+          label Reverse
+          user_data 2
+          callback {rkr->efx_Looper->changepar(5,(int)o->value())}
+          xywh {358 348 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {521 84 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -7234,6 +7309,9 @@ for (i=1; i<=t; i++)
         case 29:
         CONVOLOTRON->hide();
         break;
+        case 30:
+        LOOPER->hide();
+        break;
         
         
       }
@@ -7514,6 +7592,15 @@ switch (rkr->efx_order[i])
        CONVOLOTRON->show();
        if(rkr->Convol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
+
+     case 30:
+       LOOPER->position(x[i],y[i]);
+       looper_activar->shortcut(s[i]);
+       LOOPER->show();
+       if(rkr->Looper_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+
 
  }
  
@@ -8486,8 +8573,7 @@ Fl::redraw();} {}
   mbvvol_activar->do_callback();
   break;
   
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;
@@ -8553,6 +8639,7 @@ SHUFFLE->image(InOut->image());
 SYNTHFILTER->image(InOut->image());
 MBVVOL->image(InOut->image());
 CONVOLOTRON->image(InOut->image());
+LOOPER->image(InOut->image());
 
 
 Presets->image(InOut->image());

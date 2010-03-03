@@ -1,12 +1,12 @@
 /*
   ZynAddSubFX - a software synthesizer
  
-  Echo.C - Echo effect
+  Looper.C - Looper effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
   Modified for rakarrack by Josep Andreu
-  Reverse Echo effect by Transmogrifox
+  Reverse Looper effect by Transmogrifox
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -26,9 +26,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "Echo.h"
+#include "Looper.h"
 
-Echo::Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -36,7 +36,7 @@ Echo::Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   //default values
 
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
-  maxx_delay = SAMPLE_RATE * MAX_DELAY;
+  maxx_delay = SAMPLE_RATE * MAX_LOOP_DELAY;
   fade = (int) SAMPLE_RATE / 2;    //1/2 SR fade time available
 
   ldelay = new REALTYPE[maxx_delay];  
@@ -46,7 +46,7 @@ Echo::Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   cleanup ();
 };
 
-Echo::~Echo ()
+Looper::~Looper ()
 {
   delete[]ldelay;
   delete[]rdelay;
@@ -56,7 +56,7 @@ Echo::~Echo ()
  * Cleanup the effect
  */
 void
-Echo::cleanup ()
+Looper::cleanup ()
 {
   int i;
   for (i = 0; i < maxx_delay; i++)
@@ -71,7 +71,7 @@ Echo::cleanup ()
  * Initialize the delays
  */
 void
-Echo::initdelays ()
+Looper::initdelays ()
 {
   kl = 0;
   kr = 0;
@@ -88,7 +88,7 @@ Echo::initdelays ()
  * Effect output
  */
 void
-Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
   REALTYPE ldl, rdl, rswell, lswell;
@@ -117,7 +117,7 @@ Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	      if (rswell <= PI)
 	      {
 	       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
-	       efxoutr[i] =(rdelay[rvkl] * rswell + rdelay[rvfr] * (1.0f - rswell);  //Volume ducking near zero crossing.
+	       efxoutr[i] = rdelay[rvkl] * rswell + rdelay[rvfr] * (1.0f - rswell);  //Volume ducking near zero crossing.
 	      }
 	      else
 	      {
@@ -156,13 +156,13 @@ Echo::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
 
 void
-Echo::setpreset (int npreset)
+Looper::setpreset (int npreset)
 {
   const int PRESET_SIZE = 7;
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 60, 2, 0, 0, 59, 0, 127},
+    {64, 0, 0, 0, 0, 0, 1000}
  
   };
 
@@ -176,7 +176,7 @@ Echo::setpreset (int npreset)
 
 
 void
-Echo::changepar (int npar, int value)
+Looper::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -213,12 +213,14 @@ Echo::changepar (int npar, int value)
     case 5:
       Preverse = value;
       break;
-
+    case 6:
+      Pfade = value;
+      break;
     };
 };
 
 int
-Echo::getpar (int npar)
+Looper::getpar (int npar)
 {
   switch (npar)
     {
@@ -226,27 +228,23 @@ Echo::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return (Ppanning);
+      return (Pplay);
       break;
     case 2:
-      return (Pdelay);
+      return (Pstop);
       break;
     case 3:
-      return (Plrdelay);
+      return (Precord);
       break;
     case 4:
-      return (Plrcross);
+      return (Pclear);
       break;
     case 5:
-      return (Pfb);
-      break;
-    case 6:
-      return (Phidamp);
-      break;
-    case 7:
       return (Preverse);
       break;
-
+    case 6:
+      return (Pfade);
+      break;
     };
   return (0);			//in case of bogus parameter number
 };

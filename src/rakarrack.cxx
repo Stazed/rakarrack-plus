@@ -4736,6 +4736,87 @@ Fl_Menu_Item RKRGUI::menu_convo_fnum[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_looper_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Looper_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Looper->cleanup();
+findpos(30,(int)o->value());
+}
+void RKRGUI::cb_looper_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_activar_i(o,v);
+}
+
+void RKRGUI::cb_looper_preset_i(Fl_Choice* o, void*) {
+  rkr->Looper_Bypass=0;
+rkr->efx_Looper->setpreset((int) o->value());
+looper_WD->value(rkr->efx_Looper->getpar(0)-64);
+looper_play->value(rkr->efx_Looper->getpar(1));
+looper_stop->value(rkr->efx_Looper->getpar(2));
+looper_record->value(rkr->efx_Looper->getpar(3));
+looper_clear->value(rkr->efx_Looper->getpar(4));
+looper_rv->value(rkr->efx_Looper->getpar(5));
+looper_fade->value(rkr->efx_Looper->getpar(6));
+
+if((int)looper_activar->value())rkr->Looper_Bypass=1;
+}
+void RKRGUI::cb_looper_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_looper_preset[] = {
+ {"Looper 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_looper_WD_i(SliderW* o, void*) {
+  rkr->efx_Looper->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_looper_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_WD_i(o,v);
+}
+
+void RKRGUI::cb_looper_fade_i(SliderW* o, void*) {
+  rkr->efx_Looper->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_looper_fade(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_fade_i(o,v);
+}
+
+void RKRGUI::cb_looper_play_i(Fl_Button* o, void*) {
+  rkr->efx_Looper->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_looper_play(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_play_i(o,v);
+}
+
+void RKRGUI::cb_looper_stop_i(Fl_Button* o, void*) {
+  rkr->efx_Looper->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_looper_stop(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_stop_i(o,v);
+}
+
+void RKRGUI::cb_looper_record_i(Fl_Button* o, void*) {
+  rkr->efx_Looper->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_looper_record(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_record_i(o,v);
+}
+
+void RKRGUI::cb_looper_clear_i(Fl_Button* o, void*) {
+  rkr->efx_Looper->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_looper_clear(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_clear_i(o,v);
+}
+
+void RKRGUI::cb_looper_rv_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Looper->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_looper_rv(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_rv_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -11556,6 +11637,91 @@ R average.");
       } // Fl_Choice* convo_fnum
       CONVOLOTRON->end();
     } // Fl_Group* CONVOLOTRON
+    { LOOPER = new Fl_Group(320, 211, 158, 184);
+      LOOPER->box(FL_UP_BOX);
+      LOOPER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      LOOPER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      LOOPER->labelfont(1);
+      LOOPER->user_data((void*)(1));
+      LOOPER->align(96|FL_ALIGN_INSIDE);
+      LOOPER->hide();
+      { looper_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        looper_activar->shortcut(0x35);
+        looper_activar->color((Fl_Color)62);
+        looper_activar->selection_color((Fl_Color)1);
+        looper_activar->labelsize(10);
+        looper_activar->callback((Fl_Callback*)cb_looper_activar, (void*)(2));
+        looper_activar->align(68|FL_ALIGN_INSIDE);
+        looper_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* looper_activar
+      { looper_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        looper_preset->down_box(FL_BORDER_BOX);
+        looper_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        looper_preset->labelsize(10);
+        looper_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_preset->textsize(10);
+        looper_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_preset->callback((Fl_Callback*)cb_looper_preset);
+        looper_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        looper_preset->menu(menu_looper_preset);
+      } // Fl_Choice* looper_preset
+      { looper_WD = new SliderW(371, 246, 100, 10, "Wet/Dry");
+        looper_WD->type(5);
+        looper_WD->box(FL_FLAT_BOX);
+        looper_WD->color((Fl_Color)178);
+        looper_WD->selection_color((Fl_Color)62);
+        looper_WD->labeltype(FL_NORMAL_LABEL);
+        looper_WD->labelfont(0);
+        looper_WD->labelsize(10);
+        looper_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_WD->minimum(-64);
+        looper_WD->maximum(63);
+        looper_WD->step(1);
+        looper_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_WD->callback((Fl_Callback*)cb_looper_WD);
+        looper_WD->align(FL_ALIGN_LEFT);
+        looper_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* looper_WD
+      { looper_fade = new SliderW(371, 263, 100, 10, "Fade");
+        looper_fade->type(5);
+        looper_fade->box(FL_FLAT_BOX);
+        looper_fade->color((Fl_Color)178);
+        looper_fade->selection_color((Fl_Color)62);
+        looper_fade->labeltype(FL_NORMAL_LABEL);
+        looper_fade->labelfont(0);
+        looper_fade->labelsize(10);
+        looper_fade->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_fade->minimum(100);
+        looper_fade->maximum(2000);
+        looper_fade->step(1);
+        looper_fade->value(1000);
+        looper_fade->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_fade->callback((Fl_Callback*)cb_looper_fade);
+        looper_fade->align(FL_ALIGN_LEFT);
+        looper_fade->when(FL_WHEN_RELEASE);
+      } // SliderW* looper_fade
+      { looper_play = new Fl_Button(328, 295, 44, 22, "@>");
+        looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
+      } // Fl_Button* looper_play
+      { looper_stop = new Fl_Button(379, 295, 44, 22, "@square");
+        looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
+      } // Fl_Button* looper_stop
+      { looper_record = new Fl_Button(429, 295, 44, 22, "@circle");
+        looper_record->labelcolor((Fl_Color)1);
+        looper_record->callback((Fl_Callback*)cb_looper_record, (void*)(2));
+      } // Fl_Button* looper_record
+      { looper_clear = new Fl_Button(371, 322, 57, 14, "Clear");
+        looper_clear->labelsize(10);
+        looper_clear->callback((Fl_Callback*)cb_looper_clear, (void*)(2));
+      } // Fl_Button* looper_clear
+      { looper_rv = new Fl_Check_Button(358, 348, 15, 15, "Reverse");
+        looper_rv->down_box(FL_BORDER_BOX);
+        looper_rv->labelsize(10);
+        looper_rv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_rv->callback((Fl_Callback*)cb_looper_rv, (void*)(2));
+      } // Fl_Check_Button* looper_rv
+      LOOPER->end();
+    } // Fl_Group* LOOPER
     { Tuner = new Fl_Group(521, 84, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -13551,6 +13717,9 @@ for (i=1; i<=t; i++)
         case 29:
         CONVOLOTRON->hide();
         break;
+        case 30:
+        LOOPER->hide();
+        break;
         
         
       }
@@ -13831,6 +14000,15 @@ switch (rkr->efx_order[i])
        CONVOLOTRON->show();
        if(rkr->Convol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
+
+     case 30:
+       LOOPER->position(x[i],y[i]);
+       looper_activar->shortcut(s[i]);
+       LOOPER->show();
+       if(rkr->Looper_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+
 
  }
  
@@ -14882,6 +15060,7 @@ SHUFFLE->image(InOut->image());
 SYNTHFILTER->image(InOut->image());
 MBVVOL->image(InOut->image());
 CONVOLOTRON->image(InOut->image());
+LOOPER->image(InOut->image());
 
 
 Presets->image(InOut->image());

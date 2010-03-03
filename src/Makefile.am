@@ -88,6 +88,8 @@ rakarrack_SOURCES = main.C \
 	Synthfilter.h \
 	Resample.h \
 	Resample.C \
+	Looper.h \
+	Looper.C \
 	MIDIConverter.C \
 	MIDIConverter.h
 	

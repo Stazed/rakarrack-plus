@@ -2187,6 +2187,53 @@ private:
   static void cb_convo_fnum(Fl_Choice*, void*);
   static Fl_Menu_Item menu_convo_fnum[];
 public:
+  Fl_Group *LOOPER;
+  Fl_Light_Button *looper_activar;
+private:
+  void cb_looper_activar_i(Fl_Light_Button*, void*);
+  static void cb_looper_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *looper_preset;
+private:
+  void cb_looper_preset_i(Fl_Choice*, void*);
+  static void cb_looper_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_looper_preset[];
+public:
+  SliderW *looper_WD;
+private:
+  void cb_looper_WD_i(SliderW*, void*);
+  static void cb_looper_WD(SliderW*, void*);
+public:
+  SliderW *looper_fade;
+private:
+  void cb_looper_fade_i(SliderW*, void*);
+  static void cb_looper_fade(SliderW*, void*);
+public:
+  Fl_Button *looper_play;
+private:
+  void cb_looper_play_i(Fl_Button*, void*);
+  static void cb_looper_play(Fl_Button*, void*);
+public:
+  Fl_Button *looper_stop;
+private:
+  void cb_looper_stop_i(Fl_Button*, void*);
+  static void cb_looper_stop(Fl_Button*, void*);
+public:
+  Fl_Button *looper_record;
+private:
+  void cb_looper_record_i(Fl_Button*, void*);
+  static void cb_looper_record(Fl_Button*, void*);
+public:
+  Fl_Button *looper_clear;
+private:
+  void cb_looper_clear_i(Fl_Button*, void*);
+  static void cb_looper_clear(Fl_Button*, void*);
+public:
+  Fl_Check_Button *looper_rv;
+private:
+  void cb_looper_rv_i(Fl_Check_Button*, void*);
+  static void cb_looper_rv(Fl_Check_Button*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

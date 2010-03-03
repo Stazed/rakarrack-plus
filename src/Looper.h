@@ -24,17 +24,17 @@
 
 */
 
-#ifndef ECHO_H
-#define ECHO_H
+#ifndef LOOPER_H
+#define LOOPER_H
 
 #include "global.h"
 #define  ATTACK  0.175f  //crossover time for reverse delay
-#define  MAX_DELAY 20	// Number of Seconds
-class Echo
+#define  MAX_LOOP_DELAY 20	// Number of Seconds
+class Looper
 {
 public:
-  Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
-  ~Echo ();
+  Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  ~Looper ();
   void out (REALTYPE * smpsl, REALTYPE * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
@@ -66,6 +66,7 @@ private:
   REALTYPE *ldelay, *rdelay;
   REALTYPE oldl, oldr;		//pt. lpf
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
+  float dl, delay;
   REALTYPE  Srate_Attack_Coeff;
 };
 
