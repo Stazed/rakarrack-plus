@@ -310,7 +310,7 @@ public:
   int Pcin;
 
   // bank of flags telling GUI which midi controlled items to update
-  int Mcontrol[256];
+  int Mcontrol[384];
   // flag telling GUI that Mcontrol has at least one set flag
   int RControl;
   int ControlGet;
@@ -390,7 +390,7 @@ public:
   {
     char Nom[64];
     int Ato;
-  } efx_params[256];
+  } efx_params[384];
 
 
   struct Preset_Bank_Struct

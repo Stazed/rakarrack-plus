@@ -14291,7 +14291,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<220; i++)
+for (i=1; i<227; i++)
 
 {
 
@@ -14886,7 +14886,31 @@ switch (i)
      case 219:
      arpie_damp->value(rkr->efx_Arpie->getpar(6));
      break; 	
-     
+     case 220:
+     expander_ATime->value(rkr->efx_Expander->getpar(3));
+     break;
+     case 221:
+     expander_RTime->value(rkr->efx_Expander->getpar(4));
+     break;
+     case 222:
+     expander_shape->value(rkr->efx_Expander->getpar(2));
+     break;
+     case 223:
+     expander_threshold->value(rkr->efx_Expander->getpar(1));
+     break;
+     case 224:
+     expander_level->value(rkr->efx_Expander->getpar(7));
+     break;
+     case 225:
+     expander_LPF->value(rkr->efx_Expander->getpar(5));
+     break;
+     case 226:
+     expander_HPF->value(rkr->efx_Expander->getpar(6));
+     break;
+
+
+
+
 
 }
 

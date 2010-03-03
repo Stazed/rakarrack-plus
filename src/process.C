@@ -203,7 +203,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 194;
+  NumParams= 201;
 
 {
    static const char *los_params[] = 
@@ -321,6 +321,13 @@ RKR::RKR ()
 "Exciter Har 9","200",
 "Exciter HPF","191",
 "Exciter LPF","190",
+"Expander A.Time","220",
+"Expander HPF","226",
+"Expander Level","224",
+"Expander LPF","225",
+"Expander R.Time","221",
+"Expander Shape","222",
+"Expander Threshold","223",
 "Flanger Depth","22",
 "Flanger Fb","80",
 "Flanger Freq.","73",

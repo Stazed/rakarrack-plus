@@ -105,8 +105,8 @@ Expander::Expander_Change (int np, int value)
       tlevel = 1.0f/tfactor;
       break;
     case 2:
-      Pshape = value/2;
-      sfactor = dB2rap ((float)Pshape);
+      Pshape = value;
+      sfactor = dB2rap ((float)Pshape/2);
       sgain = expf(-sfactor);
       break;
     case 3:

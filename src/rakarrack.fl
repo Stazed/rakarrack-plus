@@ -886,7 +886,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -4230,7 +4231,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         }
       }
       Fl_Group ARPIE {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button arpie_activar {
@@ -7869,12 +7870,13 @@ rkr->RC->ctipo=tipo;
 rkr->RC->fundi=undi;
 rkr->RC->cc=1;} {}
   }
-  Function {ActMIDI()} {} {
+  Function {ActMIDI()} {open
+  } {
     code {if (rkr->Mvalue==0) return;
 
 int i;
 
-for (i=1; i<220; i++)
+for (i=1; i<227; i++)
 
 {
 
@@ -8469,7 +8471,31 @@ switch (i)
      case 219:
      arpie_damp->value(rkr->efx_Arpie->getpar(6));
      break; 	
-     
+     case 220:
+     expander_ATime->value(rkr->efx_Expander->getpar(3));
+     break;
+     case 221:
+     expander_RTime->value(rkr->efx_Expander->getpar(4));
+     break;
+     case 222:
+     expander_shape->value(rkr->efx_Expander->getpar(2));
+     break;
+     case 223:
+     expander_threshold->value(rkr->efx_Expander->getpar(1));
+     break;
+     case 224:
+     expander_level->value(rkr->efx_Expander->getpar(7));
+     break;
+     case 225:
+     expander_LPF->value(rkr->efx_Expander->getpar(5));
+     break;
+     case 226:
+     expander_HPF->value(rkr->efx_Expander->getpar(6));
+     break;
+
+
+
+
 
 }
 
