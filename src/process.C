@@ -203,7 +203,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 201;
+  NumParams= 211;
 
 {
    static const char *los_params[] = 
@@ -391,6 +391,16 @@ RKR::RKR ()
 "Ring Squ","188",
 "Ring Tri","186",
 "Ring WD","178",
+"Shuffle High Freq","234",
+"Shuffle High Gain","235",
+"Shuffle Low Freq","228",
+"Shuffle Low Gain","229",
+"Shuffle M.H. Freq","232",
+"Shuffle M.H. Gain","233",
+"Shuffle M.L. Freq","230",
+"Shuffle M.L. Gain","231",
+"Shuffle Q","236",
+"Shuffle WD","227",
 "Valve Dist","174",
 "Valve Drive","173",
 "Valve HPF","177",

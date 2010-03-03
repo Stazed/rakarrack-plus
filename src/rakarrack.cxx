@@ -14291,7 +14291,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<227; i++)
+for (i=1; i<237; i++)
 
 {
 
@@ -14907,9 +14907,37 @@ switch (i)
      case 226:
      expander_HPF->value(rkr->efx_Expander->getpar(6));
      break;
-
-
-
+     case 227:
+     shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
+     break;
+     case 228:
+     shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
+     break; 
+     case 229:
+     shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
+     break; 
+     case 230:
+     shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
+     break; 
+     case 231:
+     shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
+     break; 
+     case 232:
+     shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
+     break; 
+     case 233:
+     shuffle_volMH->value(rkr->efx_Shuffle->getpar(3));
+     break; 
+     case 234:
+     shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
+     break; 
+     case 235:
+     shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
+     break; 
+     case 236:
+     shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
+     break; 
+     
 
 
 }

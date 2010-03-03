@@ -1415,53 +1415,107 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 211:
          efx_MBDist->changepar(1,value);
          break;
+
     case 212:
          efx_Arpie->changepar(0,value-64);
          break;
+
     case 213:
          efx_Arpie->changepar(7,value);
          break;
+
     case 214:
          efx_Arpie->changepar(1,value-64);
          break;
+
     case 215:
          efx_Arpie->changepar(2,ret_Tempo(value));
          break;
+
     case 216:
          efx_Arpie->changepar(3,value);
          break;
+
     case 217:
          efx_Arpie->changepar(4,value-64);
          break;
+
     case 218:
          efx_Arpie->changepar(5,value);
          break;
+
     case 219:
          efx_Arpie->changepar(6,value);
          break;
+
     case 220:
          efx_Expander->Expander_Change(3,10+(int)((float)value*15.669291f));                      
          break;
+
     case 221:
          efx_Expander->Expander_Change(4,10+(int)((float)value*3.8582677f));                      
          break;
+
     case 222:
          efx_Expander->Expander_Change(2,1+(int)((float)value*.3858f));               
          break;
+
     case 223:
          efx_Expander->Expander_Change(1,(int)((float)value*-.629921f));                      
          break;
+
     case 224:
          efx_Expander->Expander_Change(7,value);         
          break;
+
     case 225:
          efx_Expander->Expander_Change(5,ret_LPF(value));         
          break;
+
     case 226:
          efx_Expander->Expander_Change(6,ret_HPF(value));         
          break;
    
-   
+    case 227:
+         efx_Shuffle->changepar(0,value);
+         break;
+ 
+    case 228:
+         efx_Shuffle->changepar(5,20+(int)((float)value*7.7165));
+         break;
+ 
+    case 229:
+         efx_Shuffle->changepar(1,value-64);
+         break;
+ 
+    case 230:
+         efx_Shuffle->changepar(6,400+(int)((float)value*28.3464));
+         break;
+ 
+    case 231:
+         efx_Shuffle->changepar(2,value-64);
+         break;
+ 
+    case 232:
+         efx_Shuffle->changepar(7,1200+(int)((float)value*53.5433));
+         break;
+ 
+    case 233:
+         efx_Shuffle->changepar(3,value-64);
+         break;
+ 
+    case 234:
+         efx_Shuffle->changepar(8,6000+(int)((float)value*157.48031));
+         break;
+ 
+    case 235:
+         efx_Shuffle->changepar(4,value-64);
+         break;
+ 
+    case 236:
+         efx_Shuffle->changepar(9,value-64);
+         break;
+             
    
    
    
