@@ -14291,7 +14291,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<212; i++)
+for (i=1; i<220; i++)
 
 {
 
@@ -14862,8 +14862,31 @@ switch (i)
      case 211:
      mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
      break;
-      	
-
+     case 212:
+     arpie_WD->value(rkr->efx_Arpie->getpar(0));
+     break; 	
+     case 213:
+     arpie_arpe->value(rkr->efx_Arpie->getpar(7));
+     break; 	
+     case 214:
+     arpie_pan->value(rkr->efx_Arpie->getpar(1));
+     break; 	
+     case 215:
+     arpie_delay->value(rkr->efx_Arpie->getpar(2));
+     break; 	
+     case 216:
+     arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
+     break; 	
+     case 217:
+     arpie_LRc->value(rkr->efx_Arpie->getpar(4));
+     break; 	
+     case 218:
+     arpie_fb->value(rkr->efx_Arpie->getpar(5));
+     break; 	
+     case 219:
+     arpie_damp->value(rkr->efx_Arpie->getpar(6));
+     break; 	
+     
 
 }
 

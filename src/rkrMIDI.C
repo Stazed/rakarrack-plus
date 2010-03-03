@@ -1415,7 +1415,31 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 211:
          efx_MBDist->changepar(1,value);
          break;
-             
+    case 212:
+         efx_Arpie->changepar(0,value-64);
+         break;
+    case 213:
+         efx_Arpie->changepar(7,value);
+         break;
+    case 214:
+         efx_Arpie->changepar(1,value-64);
+         break;
+    case 215:
+         efx_Arpie->changepar(2,ret_Tempo(value));
+         break;
+    case 216:
+         efx_Arpie->changepar(3,value);
+         break;
+    case 217:
+         efx_Arpie->changepar(4,value-64);
+         break;
+    case 218:
+         efx_Arpie->changepar(5,value);
+         break;
+    case 219:
+         efx_Arpie->changepar(6,value);
+         break;
+                      
     
    } 
       

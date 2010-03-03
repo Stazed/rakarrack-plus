@@ -203,7 +203,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 186;
+  NumParams= 194;
 
 {
    static const char *los_params[] = 
@@ -226,6 +226,14 @@ RKR::RKR ()
 "Analog Phaser St.df","124",
 "Analog Phaser Wet-Dry","117",
 "Analog Phaser Width","121",
+"Arpie Arpe's","213",
+"Arpie Damp","219",
+"Arpie Fb","218",
+"Arpie LR_Cr","217",
+"Arpie LRdl","216",
+"Arpie Pan","214",
+"Arpie Tempo","215",
+"Arpie WD","212",
 "AutoPan/Extra Stereo Freq.","77",
 "AutoPan/Extra Stereo Pan","67",
 "AutoPan/Extra Stereo Rnd","110",
