@@ -78,24 +78,29 @@ Convolotron::cleanup ()
 void
 Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
-  int i, j, xindex;
+  int i, j, xindex, verbindex;
   float l,lyn;
+  int interval = length/2;
+  int numtaps = 5;
 
   for (i = 0; i < PERIOD; i++)
     {
 
-      l = smpsl[i] + smpsr[i] + feedback;
+      l = smpsl[i] + smpsr[i] + (float)Preverb*fb*lxn[offset] + feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
-      
+
+      if(Preverb)
+      {
       //Multitap feedback for reverbs
-      //verbindex = offset;
-      //for (j = 0; j<roomdelay; j++)
-      //{
-      //verbindex-=interval;
-      //if(verbindex<0) verbindex += maxx_delay;
-      //lxn[some_index] += feedback;
-      //}
+     verbindex = offset - length;
+      for (j = 0; j<numtaps; j++)
+      {
+      verbindex-=interval;
+      if(verbindex<0) verbindex += maxx_size;
+      lxn[offset] += fb * lxn[verbindex];
+      }
+      }
       
       //Convolve left channel
       lyn = 0;
@@ -110,7 +115,7 @@ Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       }
 
-      feedback = fb * lyn;
+      feedback = 0.1f * fb * lyn;
       efxoutl[i] = lyn * 2.0f * level * lpanning;
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 
@@ -332,7 +337,14 @@ Convolotron::changepar (int npar, int value)
       break;
     case 10:
       Pfb = value;
-      fb = (float) value/64.2f;      
+      if(Pfb<0)
+      {
+      fb = (float) value/250.0f;  
+      }
+      else
+      {
+      fb = (float) value/500.0f; 
+      }    
       break;
 
    };
