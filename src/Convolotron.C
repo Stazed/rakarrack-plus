@@ -272,11 +272,11 @@ Convolotron::setpreset (int npreset)
     //Convolotron 1
     {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0},
     //Convolotron 2
-    {67, 64, 1, 100, 1, 64, 30, 20, 0, 0, 0},
+    {67, 64, 1, 100, 0, 64, 30, 20, 1, 0, 0},
     //Convolotron 3
-    {67, 75, 1, 100, 3, 64, 30, 20, 0, 0, 0},
+    {67, 75, 1, 100, 0, 64, 30, 20, 3, 0, 0},
     //Convolotron 4
-    {67, 60, 1, 100, 3, 64, 30, 20, 0, 0, 0}
+    {67, 60, 1, 100, 0, 64, 30, 20, 3, 0, 0}
   };
 
   
@@ -315,7 +315,7 @@ Convolotron::changepar (int npar, int value)
       length = (int) ((float) SAMPLE_RATE * convlength);        //time in samples       
       process_rbuf();
       break;
-    case 4:
+    case 8:
       if(!setfile(value))
       {
        printf("shit\n"); // if dont find the file .... do something :-) <--Yes, spew forth profanity when something is wrong :-)
@@ -330,7 +330,7 @@ Convolotron::changepar (int npar, int value)
       Plevel = value;
       level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);;
       break;
-    case 8:
+    case 4:
       Puser = value;
       break;
     case 9:
@@ -368,7 +368,7 @@ Convolotron::getpar (int npar)
     case 3:
       return(Plength); 
       break;  
-    case 4:
+    case 8:
       return (Filenum);
       break;
     case 5:
@@ -380,7 +380,7 @@ Convolotron::getpar (int npar)
     case 7:
       return(Plevel);
       break;
-    case 8:
+    case 4:
       return(Puser);
       break;
     case 9:

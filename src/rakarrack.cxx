@@ -4622,9 +4622,9 @@ convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
 convo_damp->value(rkr->efx_Convol->getpar(6));
-convo_fnum->value(rkr->efx_Convol->getpar(4));
+convo_fnum->value(rkr->efx_Convol->getpar(8));
 convo_length->value(rkr->efx_Convol->getpar(3));
-convo_user->value(rkr->efx_Convol->getpar(8));
+convo_user->value(rkr->efx_Convol->getpar(4));
 if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
@@ -4693,7 +4693,7 @@ void RKRGUI::cb_convo_reverb(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_convo_user_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Convol->changepar(8,(int)o->value());
+  rkr->efx_Convol->changepar(4,(int)o->value());
 
 if((int)o->value())B_wav->activate(); else B_wav->deactivate();
 }
@@ -4721,7 +4721,7 @@ void RKRGUI::cb_B_wav(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_convo_fnum_i(Fl_Choice* o, void*) {
-  rkr->efx_Convol->changepar(4,(int)o->value());
+  rkr->efx_Convol->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_convo_fnum(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_fnum_i(o,v);
@@ -13441,6 +13441,37 @@ synthfilter_Offset->value(rkr->lv[28][15]);
 synthfilter_activar->value(rkr->Synthfilter_Bypass);
 
 
+
+//VaryBand
+
+mbvvol_WD->value(rkr->lv[29][0]-64);
+mbvvol_freq1->value(rkr->lv[29][1]);
+mbvvol_lfotype1->value(rkr->lv[29][2]);
+mbvvol_stdf1->value(rkr->lv[29][3]);
+mbvvol_freq2->value(rkr->lv[29][4]);
+mbvvol_lfotype2->value(rkr->lv[29][5]);
+mbvvol_stdf2->value(rkr->lv[29][6]);
+mbvvol_cross1->value(rkr->lv[29][7]);
+mbvvol_cross2->value(rkr->lv[29][8]);
+mbvvol_cross3->value(rkr->lv[29][9]);
+mbvvol_combi->value(rkr->lv[29][10]);
+mbvvol_activar->value(rkr->MBVvol_Bypass);
+
+
+
+//Convolotron
+
+convo_WD->value(rkr->lv[30][0]-64);
+convo_pan->value(rkr->lv[30][1]-64);
+convo_level->value(rkr->lv[30][7]);
+convo_damp->value(rkr->lv[30][6]);
+convo_length->value(rkr->lv[30][3]);
+convo_fb->value(rkr->lv[30][10]);
+convo_reverb->value(rkr->lv[30][9]);
+convo_user->value(rkr->lv[30][4]);
+convo_safe->value(rkr->lv[30][2]);
+convo_fnum->value(rkr->lv[30][8]);
+convo_activar->value(rkr->Convol_Bypass);
 
 
 reordena();

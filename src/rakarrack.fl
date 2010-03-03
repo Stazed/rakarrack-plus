@@ -4925,9 +4925,9 @@ convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
 convo_damp->value(rkr->efx_Convol->getpar(6));
-convo_fnum->value(rkr->efx_Convol->getpar(4));
+convo_fnum->value(rkr->efx_Convol->getpar(8));
 convo_length->value(rkr->efx_Convol->getpar(3));
-convo_user->value(rkr->efx_Convol->getpar(8));
+convo_user->value(rkr->efx_Convol->getpar(4));
 if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
@@ -4997,7 +4997,7 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
         Fl_Check_Button convo_user {
           label User
           user_data 2
-          callback {rkr->efx_Convol->changepar(8,(int)o->value());
+          callback {rkr->efx_Convol->changepar(4,(int)o->value());
 
 if((int)o->value())B_wav->activate(); else B_wav->deactivate();}
           xywh {430 336 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
@@ -5021,7 +5021,7 @@ rkr->efx_Convol->setfile(100);}
         }
         Fl_Choice convo_fnum {
           label Preset
-          callback {rkr->efx_Convol->changepar(4,(int)o->value());}
+          callback {rkr->efx_Convol->changepar(8,(int)o->value());}
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7036,8 +7036,40 @@ synthfilter_activar->value(rkr->Synthfilter_Bypass);
 
 
 
+//VaryBand
 
-reordena();} {}
+mbvvol_WD->value(rkr->lv[29][0]-64);
+mbvvol_freq1->value(rkr->lv[29][1]);
+mbvvol_lfotype1->value(rkr->lv[29][2]);
+mbvvol_stdf1->value(rkr->lv[29][3]);
+mbvvol_freq2->value(rkr->lv[29][4]);
+mbvvol_lfotype2->value(rkr->lv[29][5]);
+mbvvol_stdf2->value(rkr->lv[29][6]);
+mbvvol_cross1->value(rkr->lv[29][7]);
+mbvvol_cross2->value(rkr->lv[29][8]);
+mbvvol_cross3->value(rkr->lv[29][9]);
+mbvvol_combi->value(rkr->lv[29][10]);
+mbvvol_activar->value(rkr->MBVvol_Bypass);
+
+
+
+//Convolotron
+
+convo_WD->value(rkr->lv[30][0]-64);
+convo_pan->value(rkr->lv[30][1]-64);
+convo_level->value(rkr->lv[30][7]);
+convo_damp->value(rkr->lv[30][6]);
+convo_length->value(rkr->lv[30][3]);
+convo_fb->value(rkr->lv[30][10]);
+convo_reverb->value(rkr->lv[30][9]);
+convo_user->value(rkr->lv[30][4]);
+convo_safe->value(rkr->lv[30][2]);
+convo_fnum->value(rkr->lv[30][8]);
+convo_activar->value(rkr->Convol_Bypass);
+
+
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {
@@ -8586,8 +8618,7 @@ switch (i)
 
 
 rkr->Mvalue=0;
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {ActOnOff()} {} {
     code {switch(rkr->efx_order[rkr->Mnumeff])
