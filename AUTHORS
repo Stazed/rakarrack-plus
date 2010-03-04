@@ -1,8 +1,6 @@
 Rakarrack is written and mantained by:
 
 	Josep Andreu          holborn@telefonica.net
-        José Luis Di Biase    josx@interorganic.com.ar
-	Hernán Ordiales       h@ordia.com.ar
         Ryan Billing          ryjobil@gmail.com
         Douglas McClendon     dmc@filteredperception.org
 
@@ -10,6 +8,9 @@ Rakarrack is written and mantained by:
 Also other people who collaborate:
 
         Daniel Vidal          hdanielvidalchornet@gmail.com
+        José Luis Di Biase    josx@interorganic.com.ar
+	Hernán Ordiales       h@ordia.com.ar
+
 
 Presets by:
 
@@ -37,5 +38,6 @@ Parts of code of this app are taken and/or adapted from
 	ZynAddSubFX	Paul Nasca Octavian
 	tuneit		Mario Lang
 	ArtsCompressor	Mathias Kretz & Stefan Westerfeld
+        swh-plugins     Steve Harris
 
 Thanks very much to these programmers

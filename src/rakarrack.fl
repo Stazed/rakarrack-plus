@@ -5826,7 +5826,7 @@ Show_Next_Time();}
         }
         Fl_Counter L_SIZE {
           label {Looper Size Sec.}
-          callback {Show_Next_Time();} selected
+          callback {Show_Next_Time();}
           xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 1 maximum 20 step 1 value 1 textsize 10
         }
         Fl_Choice Har_Qual {
@@ -6124,7 +6124,7 @@ GMM->redraw();}
     Fl_Window AboutWin {
       label {About Rakarrack}
       callback {AboutWin->hide();}
-      xywh {853 124 375 235} type Double color 45 hide
+      xywh {846 117 375 235} type Double color 45 hide
     } {
       Fl_Box AB_Title {
         label Rakarrack
@@ -6142,7 +6142,7 @@ GMM->redraw();}
         xywh {68 77 234 22} labelfont 1 labelsize 13 labelcolor 6
       }
       Fl_Box AB_Authors {
-        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon Jose Luis Di Biase Hernán Ordiales  2010}
+        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>} selected
         xywh {89 96 192 32} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
       Fl_Box AB_A1 {

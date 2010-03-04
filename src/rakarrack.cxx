@@ -12544,8 +12544,7 @@ R average.");
       AB_url->labelsize(13);
       AB_url->labelcolor((Fl_Color)6);
     } // Fl_Box* AB_url
-    { AB_Authors = new Fl_Box(89, 96, 192, 32, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon Jose Luis Di Biase Hern\
-\341n Ordiales  2010");
+    { AB_Authors = new Fl_Box(89, 96, 192, 32, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>");
       AB_Authors->labelfont(1);
       AB_Authors->labelsize(8);
       AB_Authors->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
