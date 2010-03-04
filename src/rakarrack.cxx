@@ -8340,7 +8340,7 @@ R average.");
       } // SliderW* pan_extra
       PAN->end();
     } // Fl_Group* PAN
-    { HAR = new Fl_Group(321, 212, 158, 184);
+    { HAR = new Fl_Group(321, 211, 158, 184);
       HAR->box(FL_UP_BOX);
       HAR->color((Fl_Color)FL_FOREGROUND_COLOR);
       HAR->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -8348,7 +8348,7 @@ R average.");
       HAR->user_data((void*)(1));
       HAR->align(96|FL_ALIGN_INSIDE);
       HAR->hide();
-      { har_activar = new Fl_Light_Button(326, 216, 34, 18, "On");
+      { har_activar = new Fl_Light_Button(326, 215, 34, 18, "On");
         har_activar->shortcut(0x30);
         har_activar->color((Fl_Color)62);
         har_activar->selection_color((Fl_Color)1);
@@ -8356,7 +8356,7 @@ R average.");
         har_activar->callback((Fl_Callback*)cb_har_activar, (void*)(2));
         har_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* har_activar
-      { har_preset = new Fl_Choice(398, 216, 76, 18, "Preset");
+      { har_preset = new Fl_Choice(398, 215, 76, 18, "Preset");
         har_preset->down_box(FL_BORDER_BOX);
         har_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         har_preset->labelsize(10);
@@ -8367,7 +8367,7 @@ R average.");
         har_preset->when(FL_WHEN_RELEASE_ALWAYS);
         har_preset->menu(menu_har_preset);
       } // Fl_Choice* har_preset
-      { har_WD = new SliderW(371, 242, 100, 10, "Wet/Dry");
+      { har_WD = new SliderW(371, 241, 100, 10, "Wet/Dry");
         har_WD->type(5);
         har_WD->box(FL_FLAT_BOX);
         har_WD->color((Fl_Color)178);
@@ -8384,7 +8384,7 @@ R average.");
         har_WD->align(FL_ALIGN_LEFT);
         har_WD->when(FL_WHEN_CHANGED);
       } // SliderW* har_WD
-      { har_int = new SliderW(371, 255, 100, 10, "Int.");
+      { har_int = new SliderW(371, 254, 100, 10, "Int.");
         har_int->type(5);
         har_int->box(FL_FLAT_BOX);
         har_int->color((Fl_Color)178);
@@ -8401,7 +8401,7 @@ R average.");
         har_int->align(FL_ALIGN_LEFT);
         har_int->when(FL_WHEN_CHANGED);
       } // SliderW* har_int
-      { har_gan = new SliderW(371, 270, 100, 10, "Gain");
+      { har_gan = new SliderW(371, 269, 100, 10, "Gain");
         har_gan->type(5);
         har_gan->box(FL_FLAT_BOX);
         har_gan->color((Fl_Color)178);
@@ -8418,7 +8418,7 @@ R average.");
         har_gan->align(FL_ALIGN_LEFT);
         har_gan->when(FL_WHEN_CHANGED);
       } // SliderW* har_gan
-      { har_pan = new SliderW(371, 283, 100, 10, "Pan");
+      { har_pan = new SliderW(371, 282, 100, 10, "Pan");
         har_pan->type(5);
         har_pan->box(FL_FLAT_BOX);
         har_pan->color((Fl_Color)178);
@@ -8435,7 +8435,7 @@ R average.");
         har_pan->align(FL_ALIGN_LEFT);
         har_pan->when(FL_WHEN_CHANGED);
       } // SliderW* har_pan
-      { har_freq1 = new SliderW(372, 300, 100, 10, "Freq");
+      { har_freq1 = new SliderW(372, 299, 100, 10, "Freq");
         har_freq1->type(5);
         har_freq1->box(FL_FLAT_BOX);
         har_freq1->color((Fl_Color)178);
@@ -8453,7 +8453,7 @@ R average.");
         har_freq1->align(FL_ALIGN_LEFT);
         har_freq1->when(FL_WHEN_CHANGED);
       } // SliderW* har_freq1
-      { har_gan1 = new SliderW(371, 312, 100, 10, "Gain");
+      { har_gan1 = new SliderW(371, 311, 100, 10, "Gain");
         har_gan1->type(5);
         har_gan1->box(FL_FLAT_BOX);
         har_gan1->color((Fl_Color)178);
@@ -8470,7 +8470,7 @@ R average.");
         har_gan1->align(FL_ALIGN_LEFT);
         har_gan1->when(FL_WHEN_CHANGED);
       } // SliderW* har_gan1
-      { har_q1 = new SliderW(371, 324, 100, 10, "Q");
+      { har_q1 = new SliderW(371, 323, 100, 10, "Q");
         har_q1->type(5);
         har_q1->box(FL_FLAT_BOX);
         har_q1->color((Fl_Color)178);
@@ -8487,25 +8487,25 @@ R average.");
         har_q1->align(FL_ALIGN_LEFT);
         har_q1->when(FL_WHEN_CHANGED);
       } // SliderW* har_q1
-      { har_MIDI = new Fl_Check_Button(330, 336, 15, 15, "MIDI");
+      { har_MIDI = new Fl_Check_Button(330, 335, 15, 15, "MIDI");
         har_MIDI->down_box(FL_BORDER_BOX);
         har_MIDI->labelsize(10);
         har_MIDI->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_MIDI->callback((Fl_Callback*)cb_har_MIDI, (void*)(2));
-        har_MIDI->align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE);
+        har_MIDI->align(FL_ALIGN_RIGHT);
       } // Fl_Check_Button* har_MIDI
-      { har_SELECT = new Fl_Check_Button(330, 354, 15, 15, "SEL");
+      { har_SELECT = new Fl_Check_Button(330, 353, 15, 15, "SEL");
         har_SELECT->down_box(FL_BORDER_BOX);
         har_SELECT->labelsize(10);
         har_SELECT->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_SELECT->callback((Fl_Callback*)cb_har_SELECT, (void*)(2));
-        har_SELECT->align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE);
+        har_SELECT->align(FL_ALIGN_RIGHT);
       } // Fl_Check_Button* har_SELECT
-      { har_chordname = new Fl_Box(377, 338, 98, 27);
+      { har_chordname = new Fl_Box(377, 337, 98, 27);
         har_chordname->labelsize(12);
         har_chordname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* har_chordname
-      { har_note = new SliderW(371, 370, 100, 10, "Note");
+      { har_note = new SliderW(371, 369, 100, 10, "Note");
         har_note->type(5);
         har_note->box(FL_FLAT_BOX);
         har_note->color((Fl_Color)178);
@@ -8521,7 +8521,7 @@ R average.");
         har_note->align(FL_ALIGN_LEFT);
         har_note->when(FL_WHEN_CHANGED);
       } // SliderW* har_note
-      { har_type = new SliderW(371, 382, 100, 10, "Chord");
+      { har_type = new SliderW(371, 381, 100, 10, "Chord");
         har_type->type(5);
         har_type->box(FL_FLAT_BOX);
         har_type->color((Fl_Color)178);
@@ -11710,28 +11710,40 @@ R average.");
         looper_fade->align(FL_ALIGN_LEFT);
         looper_fade->when(FL_WHEN_RELEASE);
       } // SliderW* looper_fade
-      { looper_play = new Fl_Button(328, 295, 44, 22, "@>");
+      { looper_play = new Fl_Button(328, 307, 44, 22, "@>");
         looper_play->type(1);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
-      { looper_stop = new Fl_Button(379, 295, 44, 22, "@square");
+      { looper_stop = new Fl_Button(379, 307, 44, 22, "@square");
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
-      { looper_record = new Fl_Button(429, 295, 44, 22, "@circle");
+      { looper_record = new Fl_Button(429, 307, 44, 22, "@circle");
         looper_record->type(1);
         looper_record->labelcolor((Fl_Color)1);
         looper_record->callback((Fl_Callback*)cb_looper_record, (void*)(2));
       } // Fl_Button* looper_record
-      { looper_clear = new Fl_Button(371, 322, 57, 14, "Clear");
+      { looper_clear = new Fl_Button(371, 341, 57, 14, "Clear");
         looper_clear->labelsize(10);
         looper_clear->callback((Fl_Callback*)cb_looper_clear, (void*)(2));
       } // Fl_Button* looper_clear
-      { looper_rv = new Fl_Check_Button(358, 348, 15, 15, "Reverse");
+      { looper_rv = new Fl_Check_Button(332, 372, 15, 15, "Reverse");
         looper_rv->down_box(FL_BORDER_BOX);
         looper_rv->labelsize(10);
         looper_rv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_rv->callback((Fl_Callback*)cb_looper_rv, (void*)(2));
       } // Fl_Check_Button* looper_rv
+      { Fl_Box* o = new Fl_Box(328, 292, 44, 14, "Play");
+        o->labelsize(10);
+        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* o
+      { Fl_Box* o = new Fl_Box(378, 292, 44, 14, "Stop");
+        o->labelsize(10);
+        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* o
+      { Fl_Box* o = new Fl_Box(429, 292, 44, 14, "Record");
+        o->labelsize(10);
+        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* o
       LOOPER->end();
     } // Fl_Group* LOOPER
     { Tuner = new Fl_Group(521, 84, 276, 58);

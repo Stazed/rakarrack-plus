@@ -67,7 +67,10 @@ Convolotron::~Convolotron ()
 void
 Convolotron::cleanup ()
 {
-
+memset(buf,0,sizeof(float) * maxx_size);
+memset(rbuf,0,sizeof(float) * maxx_size);
+memset(lxn,0,sizeof(float) * maxx_size);
+offset = 0;
 
 
 };

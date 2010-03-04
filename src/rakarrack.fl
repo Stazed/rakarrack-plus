@@ -894,8 +894,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1376 47 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1362 33 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -2947,7 +2947,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
       }
       Fl_Group HAR {
         user_data 1
-        xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {321 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button har_activar {
           label On
@@ -2956,7 +2956,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 findpos(14,(int)o->value());}
-          xywh {326 216 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+          xywh {326 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice har_preset {
           label Preset
@@ -2974,7 +2974,7 @@ har_gan1->value(rkr->efx_Har->getpar(8)-64);
 har_q1->value(rkr->efx_Har->getpar(9)-64);
 har_MIDI->value(rkr->efx_Har->getpar(10));
 Chord();}
-          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+          xywh {398 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Plain
@@ -2992,7 +2992,7 @@ Chord();}
         Fl_Value_Slider har_WD {
           label {Wet/Dry}
           callback {rkr->efx_Har->changepar(0,(int)(o->value()+64));}
-          xywh {371 242 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_int {
@@ -3000,37 +3000,37 @@ Chord();}
           callback {rkr->Harmonizer_Bypass=0;
 rkr->efx_Har->changepar(3,(int)(o->value()+12));
 if((int)har_activar->value())rkr->Harmonizer_Bypass=1;}
-          xywh {371 255 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
+          xywh {371 254 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_gan {
           label Gain
           callback {rkr->efx_Har->changepar(2,(int)(o->value()+64));}
-          xywh {371 270 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 269 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_pan {
           label Pan
           callback {rkr->efx_Har->changepar(1,(int)(o->value()+64));}
-          xywh {371 283 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 282 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_freq1 {
           label Freq
           callback {rkr->efx_Har->changepar(4,(int)o->value());}
-          xywh {372 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 2000 textcolor 7
+          xywh {372 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 2000 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_gan1 {
           label Gain
           callback {rkr->efx_Har->changepar(8,(int)(o->value()+64));}
-          xywh {371 312 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 311 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_q1 {
           label Q
           callback {rkr->efx_Har->changepar(9,(int)(o->value()+64));}
-          xywh {371 324 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Check_Button har_MIDI {
@@ -3038,7 +3038,7 @@ if((int)har_activar->value())rkr->Harmonizer_Bypass=1;}
           user_data 2
           callback {rkr->efx_Har->changepar(10,(int)o->value());
 rkr->RC->cleanup();}
-          xywh {330 336 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 24
+          xywh {330 335 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Check_Button har_SELECT {
           label SEL
@@ -3046,23 +3046,23 @@ rkr->RC->cleanup();}
           callback {rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC->cleanup();
 Chord();}
-          xywh {330 354 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 24
+          xywh {330 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Box har_chordname {
-          xywh {377 338 98 27} labelsize 12 labelcolor 7
+          xywh {377 337 98 27} labelsize 12 labelcolor 7
         }
         Fl_Value_Slider har_note {
           label Note
           callback {rkr->efx_Har->changepar(6,(unsigned char)o->value());
 Chord();}
-          xywh {371 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
+          xywh {371 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_type {
           label Chord
           callback {rkr->efx_Har->changepar(7,(unsigned char)o->value());
 Chord();}
-          xywh {371 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
+          xywh {371 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
           class SliderW
         }
       }
@@ -5097,7 +5097,7 @@ if((int)looper_activar->value())rkr->Looper_Bypass=1;}
           label {@>}
           user_data 2
           callback {rkr->efx_Looper->changepar(1,(int)o->value());}
-          xywh {328 295 44 22} type Toggle
+          xywh {328 307 44 22} type Toggle
         }
         Fl_Button looper_stop {
           label {@square}
@@ -5105,13 +5105,13 @@ if((int)looper_activar->value())rkr->Looper_Bypass=1;}
           callback {rkr->efx_Looper->changepar(2,(int)o->value());
 looper_play->value(0);
 looper_record->value(0);}
-          xywh {379 295 44 22}
+          xywh {379 307 44 22}
         }
         Fl_Button looper_record {
           label {@circle}
           user_data 2
           callback {rkr->efx_Looper->changepar(3,(int)o->value());}
-          xywh {429 295 44 22} type Toggle labelcolor 1
+          xywh {429 307 44 22} type Toggle labelcolor 1
         }
         Fl_Button looper_clear {
           label Clear
@@ -5119,13 +5119,25 @@ looper_record->value(0);}
           callback {rkr->efx_Looper->changepar(4,(int)o->value());
 looper_play->value(0);
 looper_record->value(0);}
-          xywh {371 322 57 14} labelsize 10
+          xywh {371 341 57 14} labelsize 10
         }
         Fl_Check_Button looper_rv {
           label Reverse
           user_data 2
           callback {rkr->efx_Looper->changepar(5,(int)o->value())}
-          xywh {358 348 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {332 372 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Box {} {
+          label Play
+          xywh {328 292 44 14} labelsize 10 labelcolor 7
+        }
+        Fl_Box {} {
+          label Stop
+          xywh {378 292 44 14} labelsize 10 labelcolor 7
+        }
+        Fl_Box {} {
+          label Record
+          xywh {429 292 44 14} labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tuner {
@@ -6142,7 +6154,7 @@ GMM->redraw();}
         xywh {68 77 234 22} labelfont 1 labelsize 13 labelcolor 6
       }
       Fl_Box AB_Authors {
-        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>} selected
+        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>}
         xywh {89 96 192 32} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
       Fl_Box AB_A1 {
