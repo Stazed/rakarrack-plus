@@ -29,11 +29,10 @@
 
 #include "global.h"
 #define  ATTACK  0.175f  //crossover time for reverse delay
-#define  MAX_LOOP_DELAY 12	// Number of Seconds
 class Looper
 {
 public:
-  Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, int size);
   ~Looper ();
   void out (REALTYPE * smpsl, REALTYPE * smpr);
   void setpreset (int npreset);

@@ -28,7 +28,7 @@
 #include <math.h>
 #include "Looper.h"
 
-Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, int size)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -40,7 +40,7 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
       Pstop = 1;
       
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
-  maxx_delay = SAMPLE_RATE * MAX_LOOP_DELAY;
+  maxx_delay = SAMPLE_RATE * size;
   fade = (int) SAMPLE_RATE / 2;    //1/2 SR fade time available
 
   ldelay = new REALTYPE[maxx_delay];  

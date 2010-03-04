@@ -78,12 +78,10 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("UpQuality"), UpQual, 4); 
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
-
-
-
   Adjust_Upsample();
 
-  
+  rakarrack.get (PrefNom ("Looper Size"), looper_size, 1);
+
   
   Fraction_Bypass = 1.0f;
   Master_Volume = 0.50f;
@@ -160,7 +158,7 @@ RKR::RKR ()
   efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
   efx_Convol = new Convolotron(efxoutl,efxoutr);
-  efx_Looper = new Looper(efxoutl,efxoutr);
+  efx_Looper = new Looper(efxoutl,efxoutr,looper_size);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(UpQual);

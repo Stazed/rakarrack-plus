@@ -2510,6 +2510,11 @@ private:
   static void cb_Upr_Amo(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Upr_Amo[];
 public:
+  Fl_Counter *L_SIZE;
+private:
+  void cb_L_SIZE_i(Fl_Counter*, void*);
+  static void cb_L_SIZE(Fl_Counter*, void*);
+public:
   Fl_Choice *Har_Qual;
 private:
   void cb_Har_Qual_i(Fl_Choice*, void*);

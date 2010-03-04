@@ -320,8 +320,6 @@ public:
   int upsample;
   int UpQual;
   int UpAmo;
-  double u_down;
-  double u_up;
   int J_SAMPLE_RATE;
   int J_PERIOD;  
 
@@ -339,6 +337,14 @@ public:
   int sfore_color;
   int sback_color;
   int sleds_color;
+
+  int have_signal;
+
+  int looper_size;
+
+  double u_down;
+  double u_up;
+
 
   float *efxoutl;
   float *efxoutr;
@@ -358,7 +364,6 @@ public:
   float old_v_sum;
   float val_v_sum;
   float val_i_sum;
-  int have_signal;
 
   float bogomips;
 

@@ -5118,7 +5118,7 @@ looper_record->value(0);}
           user_data 2
           callback {rkr->efx_Looper->changepar(4,(int)o->value());
 looper_play->value(0);
-looper_record->value(0);} selected
+looper_record->value(0);}
           xywh {371 322 57 14} labelsize 10
         }
         Fl_Check_Button looper_rv {
@@ -5614,7 +5614,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1575 44 640 528} type Double color 4 hide
+      xywh {1568 37 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5766,14 +5766,14 @@ chfsize(-1);}
         Fl_Check_Button UPSAMPLE_C {
           label Upsampling
           callback {Show_Next_Time();}
-          xywh {351 129 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
+          xywh {243 129 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
         }
         Fl_Choice Upr_Qual {
           label Quality
           callback {rkr->UpQual =(int) o->value();
 
 Show_Next_Time();}
-          xywh {257 148 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {214 148 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Best
@@ -5801,7 +5801,7 @@ Show_Next_Time();}
           callback {rkr->UpAmo =(int) o->value();
 
 Show_Next_Time();}
-          xywh {353 148 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {304 148 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label x2
@@ -5824,6 +5824,11 @@ Show_Next_Time();}
             xywh {10 10 36 21} labelsize 10
           }
         }
+        Fl_Counter L_SIZE {
+          label {Looper Size Sec.}
+          callback {Show_Next_Time();} selected
+          xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 1 maximum 20 step 1 value 1 textsize 10
+        }
         Fl_Choice Har_Qual {
           label {Harmonizer Quality}
           callback {int i = (int) o->value();
@@ -5843,7 +5848,7 @@ switch(i)
 
 
 Show_Next_Time();}
-          xywh {573 137 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {546 147 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label 4
@@ -6524,6 +6529,8 @@ rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
 rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
+rakarrack.set(rkr->PrefNom("Looper Size"),(int)L_SIZE->value());
+
 
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
@@ -7816,6 +7823,7 @@ INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
 Upr_Amo->value(rkr->UpAmo);
+L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
 D_J_Connect->value(rkr->aconnect_JA);
 Midi_In_Counter->value(rkr->MidiCh+1);

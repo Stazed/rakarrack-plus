@@ -5465,6 +5465,13 @@ Fl_Menu_Item RKRGUI::menu_Upr_Amo[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_L_SIZE_i(Fl_Counter*, void*) {
+  Show_Next_Time();
+}
+void RKRGUI::cb_L_SIZE(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
+}
+
 void RKRGUI::cb_Har_Qual_i(Fl_Choice* o, void*) {
   int i = (int) o->value();
 
@@ -12217,7 +12224,7 @@ R average.");
         Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
         Pre_Serve->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* Pre_Serve
-      { UPSAMPLE_C = new Fl_Check_Button(351, 129, 23, 20, "Upsampling");
+      { UPSAMPLE_C = new Fl_Check_Button(243, 129, 23, 20, "Upsampling");
         UPSAMPLE_C->down_box(FL_DOWN_BOX);
         UPSAMPLE_C->labelsize(11);
         UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12225,7 +12232,7 @@ R average.");
         UPSAMPLE_C->align(FL_ALIGN_LEFT);
         UPSAMPLE_C->when(FL_WHEN_CHANGED);
       } // Fl_Check_Button* UPSAMPLE_C
-      { Upr_Qual = new Fl_Choice(257, 148, 75, 18, "Quality");
+      { Upr_Qual = new Fl_Choice(214, 148, 75, 18, "Quality");
         Upr_Qual->down_box(FL_BORDER_BOX);
         Upr_Qual->labelsize(10);
         Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12234,7 +12241,7 @@ R average.");
         Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
         Upr_Qual->menu(menu_Upr_Qual);
       } // Fl_Choice* Upr_Qual
-      { Upr_Amo = new Fl_Choice(353, 148, 47, 18, "#");
+      { Upr_Amo = new Fl_Choice(304, 148, 47, 18, "#");
         Upr_Amo->down_box(FL_BORDER_BOX);
         Upr_Amo->labelsize(10);
         Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12243,13 +12250,27 @@ R average.");
         Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
         Upr_Amo->menu(menu_Upr_Amo);
       } // Fl_Choice* Upr_Amo
-      { Har_Qual = new Fl_Choice(573, 137, 43, 18, "Harmonizer Quality");
+      { L_SIZE = new Fl_Counter(438, 148, 47, 18, "Looper Size Sec.");
+        L_SIZE->type(1);
+        L_SIZE->labelsize(10);
+        L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        L_SIZE->minimum(1);
+        L_SIZE->maximum(20);
+        L_SIZE->step(1);
+        L_SIZE->value(1);
+        L_SIZE->textsize(10);
+        L_SIZE->callback((Fl_Callback*)cb_L_SIZE);
+        L_SIZE->align(FL_ALIGN_TOP);
+        L_SIZE->when(FL_WHEN_RELEASE);
+      } // Fl_Counter* L_SIZE
+      { Har_Qual = new Fl_Choice(546, 147, 43, 18, "Harmonizer Quality");
         Har_Qual->down_box(FL_BORDER_BOX);
         Har_Qual->labelsize(10);
         Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Har_Qual->textsize(10);
         Har_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
+        Har_Qual->align(FL_ALIGN_TOP);
         Har_Qual->menu(menu_Har_Qual);
       } // Fl_Choice* Har_Qual
       AUDIO_SET->end();
@@ -12928,6 +12949,8 @@ rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
 rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
+rakarrack.set(rkr->PrefNom("Looper Size"),(int)L_SIZE->value());
+
 
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
@@ -14227,6 +14250,7 @@ INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
 Upr_Amo->value(rkr->UpAmo);
+L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
 D_J_Connect->value(rkr->aconnect_JA);
 Midi_In_Counter->value(rkr->MidiCh+1);
