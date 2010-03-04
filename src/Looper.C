@@ -200,28 +200,23 @@ Looper::changepar (int npar, int value)
     if(Pplay)
     {
     Pplay = 0;
-    printf("Play was true:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl);
     }
     else
     {
       Pplay = 1;
-         printf("Play was false:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
     }
     if(Pstop)
     {
     Pstop = 0;
     kl = 0;
-    printf("Play mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, kl, dl);
     }
     Pclear=0;
-    printf("Play mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, kl, dl);
       break;
     case 2:	//stop and reset pointer to 0
       Pstop = 1;
       Precord = 0;
       Pplay = 0;
       kl = 0;
-     printf("Stop Mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl);     
       break;
     case 3:		//Record at current position.  If first time (clear = true), then set end of loop, "dl"
       if(Precord)
@@ -230,18 +225,15 @@ Looper::changepar (int npar, int value)
         {
 	   dl = kl;
 	   first_time = 0;
-	   printf("End Record:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
 	}  
       Precord = 0;
       }
       else
       {
       Precord = 1;
-      printf("Start Record:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl);
       }
       Pstop = 0;
       Pclear = 0;
-     printf("Record Mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
       break;
     case 4:
       Pclear = 1;    //Clear everything and erase the loop
@@ -250,11 +242,9 @@ Looper::changepar (int npar, int value)
       Precord = 0;
       Pstop = 1;
       initdelays ();
-      printf("Clear mode:  play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
       break;
     case 5:
       Preverse = value;		//Playback in reverse
-     printf("Reverse Mode...play %d stop %d record %d clear %d dl %d kl %d\n", Pplay, Pstop, Precord, Pclear, dl, kl); 
       break;
     case 6:
       Pfade = value;
