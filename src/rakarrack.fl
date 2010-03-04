@@ -886,7 +886,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -5095,24 +5096,28 @@ if((int)looper_activar->value())rkr->Looper_Bypass=1;}
           label {@>}
           user_data 2
           callback {rkr->efx_Looper->changepar(1,(int)o->value());}
-          xywh {328 295 44 22}
+          xywh {328 295 44 22} type Toggle
         }
         Fl_Button looper_stop {
           label {@square}
           user_data 2
-          callback {rkr->efx_Looper->changepar(2,(int)o->value());}
+          callback {rkr->efx_Looper->changepar(2,(int)o->value());
+looper_play->value(0);
+looper_record->value(0);}
           xywh {379 295 44 22}
         }
         Fl_Button looper_record {
           label {@circle}
           user_data 2
           callback {rkr->efx_Looper->changepar(3,(int)o->value());}
-          xywh {429 295 44 22} labelcolor 1
+          xywh {429 295 44 22} type Toggle labelcolor 1
         }
         Fl_Button looper_clear {
           label Clear
           user_data 2
-          callback {rkr->efx_Looper->changepar(4,(int)o->value());}
+          callback {rkr->efx_Looper->changepar(4,(int)o->value());
+looper_play->value(0);
+looper_record->value(0);} selected
           xywh {371 322 57 14} labelsize 10
         }
         Fl_Check_Button looper_rv {
@@ -7068,8 +7073,7 @@ convo_fnum->value(rkr->lv[30][8]);
 convo_activar->value(rkr->Convol_Bypass);
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {

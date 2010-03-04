@@ -4791,6 +4791,8 @@ void RKRGUI::cb_looper_play(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_looper_stop_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(2,(int)o->value());
+looper_play->value(0);
+looper_record->value(0);
 }
 void RKRGUI::cb_looper_stop(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_stop_i(o,v);
@@ -4805,6 +4807,8 @@ void RKRGUI::cb_looper_record(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_looper_clear_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(4,(int)o->value());
+looper_play->value(0);
+looper_record->value(0);
 }
 void RKRGUI::cb_looper_clear(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_clear_i(o,v);
@@ -11701,12 +11705,14 @@ R average.");
         looper_fade->when(FL_WHEN_RELEASE);
       } // SliderW* looper_fade
       { looper_play = new Fl_Button(328, 295, 44, 22, "@>");
+        looper_play->type(1);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
       { looper_stop = new Fl_Button(379, 295, 44, 22, "@square");
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
       { looper_record = new Fl_Button(429, 295, 44, 22, "@circle");
+        looper_record->type(1);
         looper_record->labelcolor((Fl_Color)1);
         looper_record->callback((Fl_Callback*)cb_looper_record, (void*)(2));
       } // Fl_Button* looper_record
