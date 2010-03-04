@@ -59,7 +59,8 @@ private:
   int Pclear;   //set to 1
   int Preverse;	//0 or 1
   int Pfade;    //100ms to 2000ms//  loop self-fading
-
+  int PT1;
+  int PT2;
 
   void initdelays ();
   REALTYPE *ldelay, *rdelay;

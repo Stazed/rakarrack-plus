@@ -168,12 +168,12 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 void
 Looper::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 7;
+  const int PRESET_SIZE = 9;
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 0, 1, 0, 1, 0, 1000},
-    {64, 0, 1, 0, 1, 1, 1000} 
+    {64, 0, 1, 0, 1, 0, 1000, 1, 0},
+    {64, 0, 1, 0, 1, 1, 1000, 1, 0} 
   };
 
 
@@ -249,6 +249,13 @@ Looper::changepar (int npar, int value)
     case 6:
       Pfade = value;
       break;
+    case 7:
+      PT1 = value;
+      break;
+    case 8:
+      PT2 = value;
+      break;  
+
     };
 };
 
@@ -277,6 +284,12 @@ Looper::getpar (int npar)
       break;
     case 6:
       return (Pfade);
+      break;
+    case 7:
+      return (PT1);
+      break;
+    case 8:
+      return (PT2);    
       break;
     };
   return (0);			//in case of bogus parameter number

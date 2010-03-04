@@ -4753,6 +4753,8 @@ looper_play->value(rkr->efx_Looper->getpar(1));
 looper_record->value(rkr->efx_Looper->getpar(3));
 looper_rv->value(rkr->efx_Looper->getpar(5));
 looper_fade->value(rkr->efx_Looper->getpar(6));
+looper_t1->value(rkr->efx_Looper->getpar(7));
+looper_t2->value(rkr->efx_Looper->getpar(8));
 
 if((int)looper_activar->value())rkr->Looper_Bypass=1;
 }
@@ -4817,6 +4819,20 @@ void RKRGUI::cb_looper_rv_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_looper_rv(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_rv_i(o,v);
+}
+
+void RKRGUI::cb_looper_t1_i(Fl_Button* o, void*) {
+  rkr->efx_Looper->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_looper_t1(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_t1_i(o,v);
+}
+
+void RKRGUI::cb_looper_t2_i(Fl_Button* o, void*) {
+  rkr->efx_Looper->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_looper_t2(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_t2_i(o,v);
 }
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
@@ -11709,37 +11725,53 @@ R average.");
         looper_fade->align(FL_ALIGN_LEFT);
         looper_fade->when(FL_WHEN_RELEASE);
       } // SliderW* looper_fade
-      { looper_play = new Fl_Button(328, 307, 44, 22, "@>");
+      { looper_play = new Fl_Button(328, 311, 44, 22, "@>");
         looper_play->type(1);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
-      { looper_stop = new Fl_Button(379, 307, 44, 22, "@square");
+      { looper_stop = new Fl_Button(379, 311, 44, 22, "@square");
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
-      { looper_record = new Fl_Button(429, 307, 44, 22, "@circle");
+      { looper_record = new Fl_Button(429, 311, 44, 22, "@circle");
         looper_record->type(1);
         looper_record->labelcolor((Fl_Color)1);
         looper_record->callback((Fl_Callback*)cb_looper_record, (void*)(2));
       } // Fl_Button* looper_record
-      { looper_clear = new Fl_Button(371, 341, 57, 14, "Clear");
+      { looper_clear = new Fl_Button(371, 376, 57, 14, "Clear");
         looper_clear->labelsize(10);
         looper_clear->callback((Fl_Callback*)cb_looper_clear, (void*)(2));
       } // Fl_Button* looper_clear
-      { looper_rv = new Fl_Check_Button(332, 372, 15, 15, "Reverse");
+      { looper_rv = new Fl_Check_Button(332, 278, 15, 15, "Reverse");
         looper_rv->down_box(FL_BORDER_BOX);
         looper_rv->labelsize(10);
         looper_rv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_rv->callback((Fl_Callback*)cb_looper_rv, (void*)(2));
       } // Fl_Check_Button* looper_rv
-      { Fl_Box* o = new Fl_Box(328, 292, 44, 14, "Play");
+      { Fl_Box* o = new Fl_Box(328, 296, 44, 14, "Play");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
-      { Fl_Box* o = new Fl_Box(378, 292, 44, 14, "Stop");
+      { Fl_Box* o = new Fl_Box(378, 296, 44, 14, "Stop");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
-      { Fl_Box* o = new Fl_Box(429, 292, 44, 14, "Record");
+      { Fl_Box* o = new Fl_Box(429, 296, 44, 14, "Record");
+        o->labelsize(10);
+        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* o
+      { looper_t1 = new Fl_Button(420, 343, 18, 22, "1");
+        looper_t1->type(1);
+        looper_t1->labelsize(10);
+        looper_t1->callback((Fl_Callback*)cb_looper_t1, (void*)(2));
+        looper_t1->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      } // Fl_Button* looper_t1
+      { looper_t2 = new Fl_Button(444, 343, 18, 22, "2");
+        looper_t2->type(1);
+        looper_t2->labelsize(10);
+        looper_t2->callback((Fl_Callback*)cb_looper_t2, (void*)(2));
+        looper_t2->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
+      } // Fl_Button* looper_t2
+      { Fl_Box* o = new Fl_Box(369, 347, 44, 14, "Track");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o

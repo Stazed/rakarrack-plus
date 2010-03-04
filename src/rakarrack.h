@@ -2234,6 +2234,16 @@ private:
   void cb_looper_rv_i(Fl_Check_Button*, void*);
   static void cb_looper_rv(Fl_Check_Button*, void*);
 public:
+  Fl_Button *looper_t1;
+private:
+  void cb_looper_t1_i(Fl_Button*, void*);
+  static void cb_looper_t1(Fl_Button*, void*);
+public:
+  Fl_Button *looper_t2;
+private:
+  void cb_looper_t2_i(Fl_Button*, void*);
+  static void cb_looper_t2(Fl_Button*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
