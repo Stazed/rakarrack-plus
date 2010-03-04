@@ -4608,7 +4608,6 @@ Fl_Menu_Item RKRGUI::menu_mbvvol_combi[] = {
 void RKRGUI::cb_convo_activar_i(Fl_Light_Button* o, void*) {
   rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Convol->cleanup();
 findpos(29,(int)o->value());
 }
 void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {

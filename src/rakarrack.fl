@@ -894,7 +894,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} selected
+Pexitprogram=1;}
       xywh {1362 33 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4913,8 +4913,7 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
           user_data 2
           callback {rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Convol->cleanup();
-findpos(29,(int)o->value());}
+findpos(29,(int)o->value());} selected
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice convo_preset {

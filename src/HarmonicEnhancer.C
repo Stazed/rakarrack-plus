@@ -195,7 +195,7 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
      if((smpsr[i] < -max) || (smpsr[i] > max )) max = smpsr[i];     
    }  
      
-     coeff = fabsf(max)+8.0;
+     coeff = fabsf(max)+16.0;
      max = 1.0f / coeff;
              
 
