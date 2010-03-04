@@ -31,13 +31,7 @@ Resample::Resample(int type)
 {
 statel = src_new(type , 1 , &errorl);
 stater = src_new(type , 1 , &errorr);
-
-srcinfol.input_frames = 0 ;
-srcinfol.output_frames_gen = 0 ;
-srcinfor.input_frames = 0 ;
-srcinfor.output_frames_gen = 0 ;
-                                         
-
+is_already = 0;
 }
 
 
@@ -45,7 +39,6 @@ Resample::~Resample()
 {
 statel = src_delete(statel);
 stater = src_delete(stater);
-
 };
 
 void
@@ -63,25 +56,28 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
 {
 
 // ratio = output_sample_rate / input_sample_rate. 
+if(!is_already)
+{
 
-int i_frames = frames;
-int o_frames = (int) ((float)frames*ratio);
-
+int o_frames = lrintf((float)frames*ratio);
 srcinfol.data_in = inl;
-srcinfol.input_frames = i_frames;
+srcinfol.input_frames = frames;
 srcinfol.data_out = outl;
 srcinfol.output_frames = o_frames;
 srcinfol.src_ratio = ratio;
 srcinfol.end_of_input = 0;
-srcinfol.src_ratio = ratio;
 
 srcinfor.data_in = inr;
-srcinfor.input_frames = i_frames;
+srcinfor.input_frames = frames;
 srcinfor.data_out = outr;
 srcinfor.output_frames = o_frames;
 srcinfor.src_ratio = ratio;
 srcinfor.end_of_input = 0;
-srcinfor.src_ratio=ratio;
+
+is_already = 1;
+
+}
+
 
 
 errorl = src_process(statel, &srcinfol);
