@@ -340,7 +340,6 @@ public:
 
   int have_signal;
 
-  int looper_size;
 
   double u_down;
   double u_up;
@@ -366,6 +365,7 @@ public:
   float val_i_sum;
 
   float bogomips;
+  float looper_size;
 
 // Tunner
 

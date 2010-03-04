@@ -12297,10 +12297,10 @@ R average.");
         L_SIZE->type(1);
         L_SIZE->labelsize(10);
         L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        L_SIZE->minimum(1);
+        L_SIZE->minimum(0.5);
         L_SIZE->maximum(20);
-        L_SIZE->step(1);
-        L_SIZE->value(1);
+        L_SIZE->step(0.5);
+        L_SIZE->value(0.5);
         L_SIZE->textsize(10);
         L_SIZE->callback((Fl_Callback*)cb_L_SIZE);
         L_SIZE->align(FL_ALIGN_TOP);
@@ -12991,7 +12991,7 @@ rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
 rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
-rakarrack.set(rkr->PrefNom("Looper Size"),(int)L_SIZE->value());
+rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
 
 

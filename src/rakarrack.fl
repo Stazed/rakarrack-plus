@@ -5149,7 +5149,7 @@ looper_record->value(0);}
         Fl_Button looper_t2 {
           label 2
           user_data 2
-          callback {rkr->efx_Looper->changepar(8,(int)o->value());} selected
+          callback {rkr->efx_Looper->changepar(8,(int)o->value());}
           xywh {444 343 18 22} type Toggle labelsize 10 align 16
         }
         Fl_Box {} {
@@ -5779,7 +5779,7 @@ chfsize(-1);}
       }
       Fl_Group AUDIO_SET {
         label Audio
-        user_data 1
+        user_data 1 open
         xywh {10 125 615 49} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button INSTATE {
@@ -5856,7 +5856,7 @@ Show_Next_Time();}
         Fl_Counter L_SIZE {
           label {Looper Size Sec.}
           callback {Show_Next_Time();}
-          xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 1 maximum 20 step 1 value 1 textsize 10
+          xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 0.5 maximum 20 step 0.5 value 0.5 textsize 10
         }
         Fl_Choice Har_Qual {
           label {Harmonizer Quality}
@@ -6558,7 +6558,7 @@ rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
 rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
-rakarrack.set(rkr->PrefNom("Looper Size"),(int)L_SIZE->value());
+rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
 
 
@@ -7877,7 +7877,8 @@ if (rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 
 if (rkr->aconnect_JA) JackCo->activate();
-else JackCo->deactivate();} {}
+else JackCo->deactivate();} {selected
+    }
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];

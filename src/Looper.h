@@ -32,7 +32,7 @@
 class Looper
 {
 public:
-  Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, int size);
+  Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size);
   ~Looper ();
   void out (REALTYPE * smpsl, REALTYPE * smpr);
   void setpreset (int npreset);
