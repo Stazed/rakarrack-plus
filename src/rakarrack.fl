@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -5066,9 +5065,7 @@ findpos(30,(int)o->value());}
 rkr->efx_Looper->setpreset((int) o->value());
 looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
-looper_stop->value(rkr->efx_Looper->getpar(2));
 looper_record->value(rkr->efx_Looper->getpar(3));
-looper_clear->value(rkr->efx_Looper->getpar(4));
 looper_rv->value(rkr->efx_Looper->getpar(5));
 looper_fade->value(rkr->efx_Looper->getpar(6));
 
@@ -5076,8 +5073,12 @@ if((int)looper_activar->value())rkr->Looper_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {Looper 1}
+            label Looper
             xywh {67 67 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Reverse
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider looper_WD {

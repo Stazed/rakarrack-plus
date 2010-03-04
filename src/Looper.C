@@ -99,8 +99,8 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
   for (i = 0; i < PERIOD; i++)
     {
     
-      if(Precord)
-      {
+    if(Precord)
+     {
       ldelay[kl] += smpsl[i];
       rdelay[kl] += smpsr[i];
       }
@@ -172,8 +172,8 @@ Looper::setpreset (int npreset)
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 0, 0, 0, 1, 0, 1000},
-    {64, 0, 0, 0, 1, 1, 1000} 
+    {64, 0, 1, 0, 1, 0, 1000},
+    {64, 0, 1, 0, 1, 1, 1000} 
   };
 
 

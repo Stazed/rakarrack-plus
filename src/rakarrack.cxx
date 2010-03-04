@@ -4751,9 +4751,7 @@ void RKRGUI::cb_looper_preset_i(Fl_Choice* o, void*) {
 rkr->efx_Looper->setpreset((int) o->value());
 looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
-looper_stop->value(rkr->efx_Looper->getpar(2));
 looper_record->value(rkr->efx_Looper->getpar(3));
-looper_clear->value(rkr->efx_Looper->getpar(4));
 looper_rv->value(rkr->efx_Looper->getpar(5));
 looper_fade->value(rkr->efx_Looper->getpar(6));
 
@@ -4764,7 +4762,8 @@ void RKRGUI::cb_looper_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_looper_preset[] = {
- {"Looper 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Looper", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Reverse", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
