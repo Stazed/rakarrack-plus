@@ -61,10 +61,11 @@ private:
   int Pstop;	//set to 1
   int Pclear;   //set to 1
   int Preverse;	//0 or 1
-  int Pfade;    //100ms to 2000ms//  loop self-fading
+  int Pfade;    //0...127//  crossfade track1 & 2
   int PT1;
   int PT2;
-
+  int Pautoplay;
+  
   void initdelays ();
   void setfade ();
 

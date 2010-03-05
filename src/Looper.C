@@ -40,6 +40,7 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size)
       Pstop = 1;
       PT1 = 1;
       PT2 = 0;
+      Pautoplay = 0;
       
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
   maxx_delay = lrintf((float)SAMPLE_RATE * size);
@@ -297,7 +298,17 @@ Looper::changepar (int npar, int value)
      }
      track2gain = (float) PT2;
      setfade ();
-      break;  
+      break; 
+      
+    case 9:
+    if(Pautoplay) {
+     Pautoplay = 0;
+     }
+     else 
+     {
+     Pautoplay = 1;
+     } 
+     break;
       
     };
     
