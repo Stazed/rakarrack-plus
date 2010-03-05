@@ -42,6 +42,8 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size)
       PT2 = 0;
       Pautoplay = 0;
       rplaystate = 0;
+      first_time1 = 1;
+      first_time2 = 1;
       
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
   maxx_delay = lrintf((float)SAMPLE_RATE * size);
@@ -68,34 +70,58 @@ Looper::~Looper ()
  * Cleanup the effect
  */
 void
-Looper::cleanup ()
+Looper::cleanuppt1 ()
 {
   int i;
   for (i = 0; i < maxx_delay; i++)
   {
     ldelay[i] = 0.0f;
     rdelay[i] = 0.0f;
+    }
+    
+};
+void
+Looper::cleanuppt2 ()
+{
+  int i;
+  for (i = 0; i < maxx_delay; i++)
+  {
     t2ldelay[i] = 0.0f;
     t2rdelay[i] = 0.0f;
     }
     
 };
 
-
+void Looper::cleanup ()
+{
+  cleanuppt1 ();
+  cleanuppt2 (); 
+    
+};
 /*
  * Initialize the delays
  */
 void
 Looper::initdelays ()
 {
+
+if(PT1)
+{
   kl = 0;
-
   dl = maxx_delay;
-
   rvkl = dl - 1;
+  cleanuppt1 ();
+  }
 
-  Srate_Attack_Coeff = 45.0f / dl;   // Set swell time
-  cleanup ();
+if(PT2)
+{
+  kl2 = 0;
+  dl2 = maxx_delay;
+  rvkl2 = dl2 - 1;
+  cleanuppt2 ();
+  }
+  Srate_Attack_Coeff = 90.0f / (dl + dl2);   // Set swell time
+
 };
 
 /*
@@ -120,8 +146,8 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	      }
 	     if(PT2)
 	     {
-	      t2ldelay[kl] += smpsl[i];
-	      t2rdelay[kl] += smpsr[i];
+	      t2ldelay[kl2] += smpsl[i];
+	      t2rdelay[kl2] += smpsr[i];
 	      }      
       
       }
@@ -131,7 +157,11 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
     if (++kl >= dl)
     kl = 0;
     rvkl = dl - 1 - kl;  
+    if (++kl2 >= dl2)
+    kl2 = 0;
+    rvkl2 = dl2 - 1 - kl2;     
     } 
+     
       
       if(Pplay)
       {
@@ -142,30 +172,30 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 		      if (lswell <= PI) 
 		      {
 		      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
-		      efxoutl[i] = (fade1 * ldelay[rvkl] + fade2 * t2ldelay[rvkl]) * lswell;   //Volume ducking near zero crossing.     
+		      efxoutl[i] = (fade1 * ldelay[rvkl] + fade2 * t2ldelay[rvkl2]) * lswell;   //Volume ducking near zero crossing.     
 		      }  
 		      else
 		      {
-		      efxoutl[i] = fade1 * ldelay[rvkl] + fade2 * t2ldelay[rvkl];        
+		      efxoutl[i] = fade1 * ldelay[rvkl] + fade2 * t2ldelay[rvkl2];        
 		      }
        
 	      rswell = 	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;  
 		      if (rswell <= PI)
 		      {
 		       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
-		       efxoutr[i] = ( fade1 * rdelay[rvkl] + fade2 * t2rdelay[rvkl] )* rswell;  //Volume ducking near zero crossing.
+		       efxoutr[i] = ( fade1 * rdelay[rvkl] + fade2 * t2rdelay[rvkl2] )* rswell;  //Volume ducking near zero crossing.
 		      }
 		      else
 		      {
-		      efxoutr[i] = fade1 * rdelay[rvkl] + fade2 * t2rdelay[rvkl];
+		      efxoutr[i] = fade1 * rdelay[rvkl] + fade2 * t2rdelay[rvkl2];
 		      }
       
 	      }
 	      else
 	      {
 
-	      efxoutl[i]= fade1*ldelay[kl] + fade2*t2ldelay[kl];
-	      efxoutr[i]= fade1*rdelay[kl] + fade2*t2rdelay[kl];
+	      efxoutl[i]= fade1*ldelay[kl] + fade2*t2ldelay[kl2];
+	      efxoutr[i]= fade1*rdelay[kl] + fade2*t2rdelay[kl2];
 
 	      }
       
@@ -189,8 +219,8 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
 void Looper::setfade ()
 {
-      fade1 = (float) Pfade1/127.0f;
-      fade2 = (float) Pfade2/127.0f;
+      fade1 = (float) Pfade1/64.0f;
+      fade2 = (float) Pfade2/64.0f;
       fade1 *= track1gain;
       fade2 *= track2gain;
 };
@@ -249,11 +279,16 @@ Looper::changepar (int npar, int value)
     case 3:		//Record at current position.  If first time (clear = true), then set end of loop, "dl"
       if(Precord)
       {
-      if(first_time)
+      if(first_time1)
         {
 	   dl = kl;
-	   first_time = 0;
+	   first_time1 = 0;
 	}  
+      if(first_time2)
+      {
+           dl2 = kl2;
+	   first_time2 = 0;
+      }
       Precord = 0;
       Pplay = rplaystate;
       if(Pautoplay) Pplay = 1;
@@ -269,10 +304,10 @@ Looper::changepar (int npar, int value)
       break;
     case 4:
       Pclear = 1;    //Clear everything and erase the loop
-      first_time = 1;
-      Pplay = 0;
+      if(PT1) first_time1 = 1;
+      if(PT2) first_time2 = 1;
+
       Precord = 0;
-      Pstop = 1;
       initdelays ();
       break;
     case 5:

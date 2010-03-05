@@ -39,8 +39,9 @@ public:
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
+  void cleanuppt1 ();
+  void cleanuppt2 ();
   void cleanup ();
-
   void setdryonly ();
   int Ppreset;
   int progstate[6];
@@ -74,7 +75,7 @@ private:
   REALTYPE *t2ldelay, *t2rdelay;
   
   REALTYPE oldl, oldr;		//pt. lpf
-  int kl, rvkl, rvfl, maxx_delay, fade, dl, first_time, rplaystate;
+  int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
 
   REALTYPE  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2;
 };
