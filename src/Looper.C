@@ -110,8 +110,17 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
     
     if(Precord)
      {
+     if(PT1)
+     {
       ldelay[kl] += smpsl[i];
       rdelay[kl] += smpsr[i];
+      }
+     if(PT2)
+     {
+      t2ldelay[kl] += smpsl[i];
+      t2rdelay[kl] += smpsr[i];
+      }      
+      
       }
     
     if(!Pclear)
@@ -257,6 +266,7 @@ Looper::changepar (int npar, int value)
       break;
     case 6:
       Pfade = value;
+      upfade = (float) Pfade/
       break;
     case 7:
     if(PT2) {
