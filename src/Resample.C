@@ -31,7 +31,6 @@ Resample::Resample(int type)
 {
 statel = src_new(type , 1 , &errorl);
 stater = src_new(type , 1 , &errorr);
-is_already = 0;
 }
 
 
@@ -55,9 +54,6 @@ void
 Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio)
 {
 
-// ratio = output_sample_rate / input_sample_rate. 
-if(!is_already)
-{
 
 int o_frames = lrintf((float)frames*ratio);
 srcinfol.data_in = inl;
@@ -73,10 +69,6 @@ srcinfor.data_out = outr;
 srcinfor.output_frames = o_frames;
 srcinfor.src_ratio = ratio;
 srcinfor.end_of_input = 0;
-
-is_already = 1;
-
-}
 
 
 
