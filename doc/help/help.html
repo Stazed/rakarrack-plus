@@ -1,9 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head>
-
   
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
-  
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Rakarrack Help</title>
 
   
   
@@ -45,7 +44,8 @@
 		H3.cjk { font-family: "HG Mincho Light J" }
 		H3.ctl { font-family: "Arial Unicode MS" }
 	-->
-	</style></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+	</style>
+</head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
 <p style="margin-bottom: 0in;" align="left"><a name="top"></a><br>
 </p>
 
@@ -321,21 +321,46 @@ plastic.</p>
 <p align="justify">You can also select a PNG background image clicking
 on the 'Browse' button and adjust the font sizes.</p>
 
-<p align="justify"><u><b>Audio<br>
-</b></u></p>
+<p align="justify"><u><b>Audio<br></b></u></p>
 
-<p align="justify"><b>Fx On at start<br>
-</b></p>
+<p align="justify"><b>Fx On at start<br></b></p>
 
 <p align="justify">This option put the FX On at the start, by default
-is Off.<br>
-</p>
+is Off.</p>
 
 <p align="justify"><b>Preserve Gain/Master</b></p>
 
 <p align="justify">The Input Gain and Master Volume are stored in the
 preset, activating this option the Input Level and Master Volume was
 not modified when preset changes</p>
+
+<p align="justify"><b>Upsampling<br></b></p>
+
+<p align="justify">Enable upsampling using libsamplerate process the
+effects with higher samplerate then the sound quality is imporved, all
+the resample parameters will take effect the next time you launch
+rakarrack.&nbsp; Enabling upsampling rakarrack will use a lot more CPU
+resources of your computer, then take care to adjust all the upsampling
+settings, you can hang your computer if your main processor can not
+handle the resampling parameters. Each level of libsamplerate quality
+use more nd more resources, and of course each effect use more CPU
+resources because need to process a higher amount of data. I higly
+recommend start with Linear quality and amount "x2" and check your CPU
+usage with "top", and then increase the amount/quality as desired.</p>
+
+<p align="justify"><b>#<br></b></p>
+
+<p align="justify">Amount of resampling (x2, x3, x4, x5, x6)</p>
+
+<p align="justify"><b>Up.Q.</b><br></p>
+
+<p align="justify">Upsampling quality, selects the libsamplerate quality in the upsampling
+procedure.</p>
+
+<p align="justify"><b>Down Q.</b></p>
+
+<p align="justify">Downsamplin quality, select the
+libsamplerate quality in the downsampling procedure.</p>
 
 <p align="justify"><b>Harmonizer Quality</b></p>
 
@@ -1519,9 +1544,7 @@ interesting phase-wah sounds.</p>
 
 <br>
 
-
 <table cellpadding="5" cellspacing="2">
-
 
   <tbody>
     <tr>
@@ -1533,27 +1556,24 @@ interesting phase-wah sounds.</p>
 Bands volume modulated with two LFOs. You can select for each LFO the
 type, Tempo(speed) and LR difference (St.df). Cross points are to
 defining the band frequency range.<br>
-</p>
+      </p>
       <p align="justify">20-&gt; Cross1 = Low<br>
 Cross1-&gt;Cross2 = Mid Low<br>
 Cross2-&gt;Cross3 = High Low<br>
 Cross3-&gt;26 KHz = High<br>
       </p>
-      <p align="justify">The Combi choice select the LFO for each band, <br>
+      <p align="justify">The Combi choice select the LFO for each band,
+      <br>
       </p>
       <p align="justify">1 = LFO1<br>
 2 = LFO2<br>
 o = Bypass<br>
 x = Disable Band.<br>
       </p>
-
       </td>
     </tr>
   </tbody>
 </table>
-
-
-
 
 <p><a href="#top">Contents</a> </p>
 
