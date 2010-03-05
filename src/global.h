@@ -323,7 +323,7 @@ public:
   int UpAmo;
   int J_SAMPLE_RATE;
   int J_PERIOD;  
-
+  int m_displayed;
   int Mvalue;
   int Mnumeff;
 

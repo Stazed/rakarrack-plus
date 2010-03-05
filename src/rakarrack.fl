@@ -5643,7 +5643,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1561 30 640 528} type Double color 4 hide
+      xywh {1554 23 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5857,7 +5857,7 @@ Show_Next_Time();}
           label {Down Q.}
           callback {rkr->DownQual =(int) o->value();
 
-Show_Next_Time();} selected
+Show_Next_Time();}
           xywh {328 152 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5883,7 +5883,11 @@ Show_Next_Time();} selected
         }
         Fl_Counter L_SIZE {
           label {Looper Size Sec.}
-          callback {Show_Next_Time();}
+          callback {if(!rkr->m_displayed)
+{
+Show_Next_Time();
+rkr->m_displayed=1;
+}} selected
           xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 0.5 maximum 20 step 0.5 value 0.5 textsize 10
         }
         Fl_Choice Har_Qual {
@@ -7872,7 +7876,7 @@ i++;
 
 if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
 
-
+rkr->m_displayed = 0;
 
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);

@@ -5499,7 +5499,11 @@ Fl_Menu_Item RKRGUI::menu_Downr_Qual[] = {
 };
 
 void RKRGUI::cb_L_SIZE_i(Fl_Counter*, void*) {
-  Show_Next_Time();
+  if(!rkr->m_displayed)
+{
+Show_Next_Time();
+rkr->m_displayed=1;
+};
 }
 void RKRGUI::cb_L_SIZE(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
@@ -14311,7 +14315,7 @@ i++;
 
 if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
 
-
+rkr->m_displayed = 0;
 
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
