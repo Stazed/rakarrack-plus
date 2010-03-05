@@ -12329,7 +12329,7 @@ R average.");
         L_SIZE->labelsize(10);
         L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         L_SIZE->minimum(0.5);
-        L_SIZE->maximum(20);
+        L_SIZE->maximum(30);
         L_SIZE->step(0.5);
         L_SIZE->value(0.5);
         L_SIZE->textsize(10);

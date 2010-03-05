@@ -5779,7 +5779,7 @@ chfsize(-1);}
       }
       Fl_Group AUDIO_SET {
         label Audio
-        user_data 1
+        user_data 1 open
         xywh {10 122 615 54} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button INSTATE {
@@ -5888,7 +5888,7 @@ Show_Next_Time();}
 Show_Next_Time();
 rkr->m_displayed=1;
 }} selected
-          xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 0.5 maximum 20 step 0.5 value 0.5 textsize 10
+          xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
         }
         Fl_Choice Har_Qual {
           label {Harmonizer Quality}
