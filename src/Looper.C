@@ -312,6 +312,7 @@ Looper::changepar (int npar, int value)
     case 10:
     Pfade1 = value;
     setfade();
+     break;
       
     };
     
@@ -341,13 +342,19 @@ Looper::getpar (int npar)
       return (Preverse);
       break;
     case 6:
-      return (Pfade);
+      return (Pfade1);
       break;
     case 7:
       return (PT1);
       break;
     case 8:
       return (PT2);    
+      break;
+    case 9:
+      return (Pautoplay);
+      break;
+    case 10:
+      return (Pfade2);
       break;
     };
   return (0);			//in case of bogus parameter number
