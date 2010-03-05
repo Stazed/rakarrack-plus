@@ -47,7 +47,9 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size)
 
   ldelay = new REALTYPE[maxx_delay];  
   rdelay = new REALTYPE[maxx_delay];
-  
+  t2ldelay = new REALTYPE[maxx_delay];  
+  t2rdelay = new REALTYPE[maxx_delay];
+    
   setpreset (Ppreset);
   cleanup ();
 };
@@ -56,6 +58,8 @@ Looper::~Looper ()
 {
   delete[]ldelay;
   delete[]rdelay;
+  delete[]t2ldelay;
+  delete[]t2rdelay;
 };
 
 /*
@@ -66,9 +70,12 @@ Looper::cleanup ()
 {
   int i;
   for (i = 0; i < maxx_delay; i++)
+  {
     ldelay[i] = 0.0f;
-  for (i = 0; i < maxx_delay; i++)
     rdelay[i] = 0.0f;
+    t2ldelay[i] = 0.0f;
+    t2rdelay[i] = 0.0f;
+    }
     
 };
 
@@ -270,14 +277,14 @@ Looper::changepar (int npar, int value)
      }
       break;  
       
+    };
+    
       progstate[0] = Pplay;
       progstate[1] = Pstop;
       progstate[2] = Precord;
       progstate[3] = Pclear;
       progstate[4] = PT1;
       progstate[5] = PT2;
-
-    };
 };
 
 int
