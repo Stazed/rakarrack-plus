@@ -4752,6 +4752,7 @@ looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
 looper_record->value(rkr->efx_Looper->getpar(3));
 looper_rv->value(rkr->efx_Looper->getpar(5));
+looper_ap->value(rkr->efx_Looper->getpar(9));
 looper_fade->value(rkr->efx_Looper->getpar(6));
 looper_t1->value(rkr->efx_Looper->getpar(7));
 looper_t2->value(rkr->efx_Looper->getpar(8));
@@ -4784,6 +4785,7 @@ void RKRGUI::cb_looper_fade(SliderW* o, void* v) {
 
 void RKRGUI::cb_looper_play_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(1,(int)o->value());
+update_looper();
 }
 void RKRGUI::cb_looper_play(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_play_i(o,v);
@@ -4791,8 +4793,7 @@ void RKRGUI::cb_looper_play(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_looper_stop_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(2,(int)o->value());
-looper_play->value(0);
-looper_record->value(0);
+update_looper();
 }
 void RKRGUI::cb_looper_stop(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_stop_i(o,v);
@@ -4800,6 +4801,7 @@ void RKRGUI::cb_looper_stop(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_looper_record_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(3,(int)o->value());
+update_looper();
 }
 void RKRGUI::cb_looper_record(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_record_i(o,v);
@@ -4807,8 +4809,7 @@ void RKRGUI::cb_looper_record(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_looper_clear_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(4,(int)o->value());
-looper_play->value(0);
-looper_record->value(0);
+update_looper();
 }
 void RKRGUI::cb_looper_clear(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_clear_i(o,v);
@@ -4821,8 +4822,16 @@ void RKRGUI::cb_looper_rv(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_rv_i(o,v);
 }
 
+void RKRGUI::cb_looper_ap_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Looper->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_looper_ap(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_ap_i(o,v);
+}
+
 void RKRGUI::cb_looper_t1_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(7,(int)o->value());
+update_looper();
 }
 void RKRGUI::cb_looper_t1(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_t1_i(o,v);
@@ -4830,6 +4839,7 @@ void RKRGUI::cb_looper_t1(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_looper_t2_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(8,(int)o->value());
+update_looper();
 }
 void RKRGUI::cb_looper_t2(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_t2_i(o,v);
@@ -11738,28 +11748,34 @@ R average.");
         looper_fade->align(FL_ALIGN_LEFT);
         looper_fade->when(FL_WHEN_RELEASE);
       } // SliderW* looper_fade
-      { looper_play = new Fl_Button(328, 311, 44, 22, "@>");
+      { looper_play = new Fl_Button(328, 310, 44, 22, "@>");
         looper_play->type(1);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
-      { looper_stop = new Fl_Button(379, 311, 44, 22, "@square");
+      { looper_stop = new Fl_Button(379, 310, 44, 22, "@square");
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
-      { looper_record = new Fl_Button(429, 311, 44, 22, "@circle");
+      { looper_record = new Fl_Button(429, 310, 44, 22, "@circle");
         looper_record->type(1);
         looper_record->labelcolor((Fl_Color)1);
         looper_record->callback((Fl_Callback*)cb_looper_record, (void*)(2));
       } // Fl_Button* looper_record
-      { looper_clear = new Fl_Button(371, 376, 57, 14, "Clear");
+      { looper_clear = new Fl_Button(375, 371, 57, 14, "Clear");
         looper_clear->labelsize(10);
         looper_clear->callback((Fl_Callback*)cb_looper_clear, (void*)(2));
       } // Fl_Button* looper_clear
-      { looper_rv = new Fl_Check_Button(332, 278, 15, 15, "Reverse");
+      { looper_rv = new Fl_Check_Button(328, 278, 15, 15, "Reverse");
         looper_rv->down_box(FL_BORDER_BOX);
         looper_rv->labelsize(10);
         looper_rv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_rv->callback((Fl_Callback*)cb_looper_rv, (void*)(2));
       } // Fl_Check_Button* looper_rv
+      { looper_ap = new Fl_Check_Button(398, 278, 15, 15, "Auto Play");
+        looper_ap->down_box(FL_BORDER_BOX);
+        looper_ap->labelsize(10);
+        looper_ap->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_ap->callback((Fl_Callback*)cb_looper_ap, (void*)(2));
+      } // Fl_Check_Button* looper_ap
       { Fl_Box* o = new Fl_Box(328, 296, 44, 14, "Play");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -11772,19 +11788,19 @@ R average.");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
-      { looper_t1 = new Fl_Button(420, 343, 18, 22, "1");
+      { looper_t1 = new Fl_Button(431, 343, 18, 22, "1");
         looper_t1->type(1);
         looper_t1->labelsize(10);
         looper_t1->callback((Fl_Callback*)cb_looper_t1, (void*)(2));
         looper_t1->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Button* looper_t1
-      { looper_t2 = new Fl_Button(444, 343, 18, 22, "2");
+      { looper_t2 = new Fl_Button(454, 343, 18, 22, "2");
         looper_t2->type(1);
         looper_t2->labelsize(10);
         looper_t2->callback((Fl_Callback*)cb_looper_t2, (void*)(2));
         looper_t2->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Button* looper_t2
-      { Fl_Box* o = new Fl_Box(369, 347, 44, 14, "Track");
+      { Fl_Box* o = new Fl_Box(391, 347, 39, 14, "Track");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
@@ -15830,4 +15846,13 @@ void RKRGUI::Show_Next_Time() {
   Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
 fl_message("This setting will be changed the next time you run rakarrack");
+}
+
+void RKRGUI::update_looper() {
+  rkr->efx_Looper->getstate();
+
+looper_play->value(rkr->efx_Looper->progstate[0]);
+looper_record->value(rkr->efx_Looper->progstate[2]);
+looper_t1->value(rkr->efx_Looper->progstate[4]);
+looper_t2->value(rkr->efx_Looper->progstate[5]);
 }
