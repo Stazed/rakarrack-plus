@@ -5642,7 +5642,7 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();}
+Settings->hide();} selected
       xywh {1554 23 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
@@ -5779,7 +5779,7 @@ chfsize(-1);}
       }
       Fl_Group AUDIO_SET {
         label Audio
-        user_data 1 open
+        user_data 1
         xywh {10 122 615 54} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button INSTATE {
@@ -5857,37 +5857,17 @@ Show_Next_Time();}
           label {Down Q.}
           callback {rkr->DownQual =(int) o->value();
 
-Show_Next_Time();}
+Show_Next_Time();} open
           xywh {328 152 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Best
-            xywh {30 30 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label Medium
-            xywh {30 30 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label Fastest
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Zero Order}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Linear
-            xywh {10 10 36 21} labelsize 10
-          }
-        }
+          code0 {o->menu(menu_Upr_Qual);}
+        } {}
         Fl_Counter L_SIZE {
           label {Looper Size Sec.}
           callback {if(!rkr->m_displayed)
 {
 Show_Next_Time();
 rkr->m_displayed=1;
-}} selected
+}}
           xywh {438 148 47 18} type Simple labelsize 10 labelcolor 7 align 1 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
         }
         Fl_Choice Har_Qual {

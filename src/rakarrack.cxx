@@ -5489,15 +5489,6 @@ void RKRGUI::cb_Downr_Qual(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Downr_Qual_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_Downr_Qual[] = {
- {"Best", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Medium", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Fastest", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Zero Order", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Linear", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_L_SIZE_i(Fl_Counter*, void*) {
   if(!rkr->m_displayed)
 {
@@ -12315,14 +12306,14 @@ R average.");
         Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
         Upr_Qual->menu(menu_Upr_Qual);
       } // Fl_Choice* Upr_Qual
-      { Downr_Qual = new Fl_Choice(328, 152, 75, 18, "Down Q.");
+      { Fl_Choice* o = Downr_Qual = new Fl_Choice(328, 152, 75, 18, "Down Q.");
         Downr_Qual->down_box(FL_BORDER_BOX);
         Downr_Qual->labelsize(10);
         Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Downr_Qual->textsize(10);
         Downr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
-        Downr_Qual->menu(menu_Downr_Qual);
+        o->menu(menu_Upr_Qual);
       } // Fl_Choice* Downr_Qual
       { L_SIZE = new Fl_Counter(438, 148, 47, 18, "Looper Size Sec.");
         L_SIZE->type(1);

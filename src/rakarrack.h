@@ -2524,7 +2524,6 @@ public:
 private:
   void cb_Downr_Qual_i(Fl_Choice*, void*);
   static void cb_Downr_Qual(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_Downr_Qual[];
 public:
   Fl_Counter *L_SIZE;
 private:
