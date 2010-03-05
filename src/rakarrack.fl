@@ -5643,7 +5643,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1568 37 640 528} type Double color 4 hide
+      xywh {1561 30 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5779,8 +5779,8 @@ chfsize(-1);}
       }
       Fl_Group AUDIO_SET {
         label Audio
-        user_data 1 open
-        xywh {10 125 615 49} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
+        user_data 1
+        xywh {10 122 615 54} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button INSTATE {
           label {FX On at start}
@@ -5797,12 +5797,40 @@ chfsize(-1);}
           callback {Show_Next_Time();}
           xywh {243 129 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
         }
+        Fl_Choice Upr_Amo {
+          label {\#}
+          callback {rkr->UpAmo =(int) o->value();
+
+Show_Next_Time();}
+          xywh {277 129 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label x2
+            xywh {30 30 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label x3
+            xywh {30 30 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label x4
+            xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label x5
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label x6
+            xywh {10 10 36 21} labelsize 10
+          }
+        }
         Fl_Choice Upr_Qual {
-          label Quality
+          label {Up Q}
           callback {rkr->UpQual =(int) o->value();
 
 Show_Next_Time();}
-          xywh {214 148 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {201 152 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Best
@@ -5825,31 +5853,31 @@ Show_Next_Time();}
             xywh {0 0 36 21} labelsize 10
           }
         }
-        Fl_Choice Upr_Amo {
-          label {\#}
-          callback {rkr->UpAmo =(int) o->value();
+        Fl_Choice Downr_Qual {
+          label {Down Q.}
+          callback {rkr->DownQual =(int) o->value();
 
-Show_Next_Time();}
-          xywh {304 148 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+Show_Next_Time();} selected
+          xywh {328 152 75 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label x2
+            label Best
             xywh {30 30 45 26} labelsize 10
           }
           MenuItem {} {
-            label x3
+            label Medium
             xywh {30 30 45 26} labelsize 10
           }
           MenuItem {} {
-            label x4
+            label Fastest
             xywh {20 20 36 21} labelsize 10
           }
           MenuItem {} {
-            label x5
+            label {Zero Order}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label x6
+            label Linear
             xywh {10 10 36 21} labelsize 10
           }
         }
@@ -6557,6 +6585,8 @@ rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
+rakarrack.set(rkr->PrefNom("DownQuality"),(int)Downr_Qual->value());
+
 rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
 rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
@@ -7851,6 +7881,8 @@ Pre_Serve->value(rkr->actuvol);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
+Downr_Qual->value(rkr->DownQual);
+
 Upr_Amo->value(rkr->UpAmo);
 L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
@@ -7877,8 +7909,7 @@ if (rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 
 if (rkr->aconnect_JA) JackCo->activate();
-else JackCo->deactivate();} {selected
-    }
+else JackCo->deactivate();} {}
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];

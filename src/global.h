@@ -319,6 +319,7 @@ public:
 
   int upsample;
   int UpQual;
+  int DownQual;
   int UpAmo;
   int J_SAMPLE_RATE;
   int J_PERIOD;  

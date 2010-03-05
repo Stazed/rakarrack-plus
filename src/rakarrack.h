@@ -2508,17 +2508,23 @@ private:
   void cb_UPSAMPLE_C_i(Fl_Check_Button*, void*);
   static void cb_UPSAMPLE_C(Fl_Check_Button*, void*);
 public:
+  Fl_Choice *Upr_Amo;
+private:
+  void cb_Upr_Amo_i(Fl_Choice*, void*);
+  static void cb_Upr_Amo(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Upr_Amo[];
+public:
   Fl_Choice *Upr_Qual;
 private:
   void cb_Upr_Qual_i(Fl_Choice*, void*);
   static void cb_Upr_Qual(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Upr_Qual[];
 public:
-  Fl_Choice *Upr_Amo;
+  Fl_Choice *Downr_Qual;
 private:
-  void cb_Upr_Amo_i(Fl_Choice*, void*);
-  static void cb_Upr_Amo(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_Upr_Amo[];
+  void cb_Downr_Qual_i(Fl_Choice*, void*);
+  static void cb_Downr_Qual(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Downr_Qual[];
 public:
   Fl_Counter *L_SIZE;
 private:

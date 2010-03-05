@@ -76,9 +76,10 @@ RKR::RKR ()
 
   rakarrack.get (PrefNom ("UpSampling"), upsample, 0); 
   rakarrack.get (PrefNom ("UpQuality"), UpQual, 4); 
+  rakarrack.get (PrefNom ("DownQuality"), DownQual, 4); 
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
-  Adjust_Upsample();
+  if(upsample) Adjust_Upsample();
 
   rakarrack.get (PrefNom ("Looper Size"), looper_size, 1);
 
@@ -161,7 +162,7 @@ RKR::RKR ()
   efx_Looper = new Looper(efxoutl,efxoutr,looper_size);
 
   U_Resample = new Resample(UpQual);
-  D_Resample = new Resample(UpQual);
+  D_Resample = new Resample(DownQual);
 
 
 

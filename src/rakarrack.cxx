@@ -5444,6 +5444,24 @@ void RKRGUI::cb_UPSAMPLE_C(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_UPSAMPLE_C_i(o,v);
 }
 
+void RKRGUI::cb_Upr_Amo_i(Fl_Choice* o, void*) {
+  rkr->UpAmo =(int) o->value();
+
+Show_Next_Time();
+}
+void RKRGUI::cb_Upr_Amo(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Upr_Amo_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_Upr_Amo[] = {
+ {"x2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_Upr_Qual_i(Fl_Choice* o, void*) {
   rkr->UpQual =(int) o->value();
 
@@ -5462,21 +5480,21 @@ Fl_Menu_Item RKRGUI::menu_Upr_Qual[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RKRGUI::cb_Upr_Amo_i(Fl_Choice* o, void*) {
-  rkr->UpAmo =(int) o->value();
+void RKRGUI::cb_Downr_Qual_i(Fl_Choice* o, void*) {
+  rkr->DownQual =(int) o->value();
 
 Show_Next_Time();
 }
-void RKRGUI::cb_Upr_Amo(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Upr_Amo_i(o,v);
+void RKRGUI::cb_Downr_Qual(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Downr_Qual_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_Upr_Amo[] = {
- {"x2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"x3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"x4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"x5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"x6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+Fl_Menu_Item RKRGUI::menu_Downr_Qual[] = {
+ {"Best", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Medium", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fastest", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Zero Order", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Linear", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -12247,7 +12265,7 @@ R average.");
       } // Fl_Button* FSless
       Look->end();
     } // Fl_Group* Look
-    { AUDIO_SET = new Fl_Group(10, 125, 615, 49, "Audio");
+    { AUDIO_SET = new Fl_Group(10, 122, 615, 54, "Audio");
       AUDIO_SET->box(FL_PLASTIC_DOWN_FRAME);
       AUDIO_SET->labelfont(1);
       AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12275,16 +12293,7 @@ R average.");
         UPSAMPLE_C->align(FL_ALIGN_LEFT);
         UPSAMPLE_C->when(FL_WHEN_CHANGED);
       } // Fl_Check_Button* UPSAMPLE_C
-      { Upr_Qual = new Fl_Choice(214, 148, 75, 18, "Quality");
-        Upr_Qual->down_box(FL_BORDER_BOX);
-        Upr_Qual->labelsize(10);
-        Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Upr_Qual->textsize(10);
-        Upr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
-        Upr_Qual->menu(menu_Upr_Qual);
-      } // Fl_Choice* Upr_Qual
-      { Upr_Amo = new Fl_Choice(304, 148, 47, 18, "#");
+      { Upr_Amo = new Fl_Choice(277, 129, 47, 18, "#");
         Upr_Amo->down_box(FL_BORDER_BOX);
         Upr_Amo->labelsize(10);
         Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -12293,6 +12302,24 @@ R average.");
         Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
         Upr_Amo->menu(menu_Upr_Amo);
       } // Fl_Choice* Upr_Amo
+      { Upr_Qual = new Fl_Choice(201, 152, 75, 18, "Up Q");
+        Upr_Qual->down_box(FL_BORDER_BOX);
+        Upr_Qual->labelsize(10);
+        Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Upr_Qual->textsize(10);
+        Upr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
+        Upr_Qual->menu(menu_Upr_Qual);
+      } // Fl_Choice* Upr_Qual
+      { Downr_Qual = new Fl_Choice(328, 152, 75, 18, "Down Q.");
+        Downr_Qual->down_box(FL_BORDER_BOX);
+        Downr_Qual->labelsize(10);
+        Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Downr_Qual->textsize(10);
+        Downr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
+        Downr_Qual->menu(menu_Downr_Qual);
+      } // Fl_Choice* Downr_Qual
       { L_SIZE = new Fl_Counter(438, 148, 47, 18, "Looper Size Sec.");
         L_SIZE->type(1);
         L_SIZE->labelsize(10);
@@ -12990,6 +13017,8 @@ rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
+rakarrack.set(rkr->PrefNom("DownQuality"),(int)Downr_Qual->value());
+
 rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
 rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
@@ -14291,6 +14320,8 @@ Pre_Serve->value(rkr->actuvol);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
+Downr_Qual->value(rkr->DownQual);
+
 Upr_Amo->value(rkr->UpAmo);
 L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
