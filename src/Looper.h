@@ -66,6 +66,7 @@ private:
   int PT2;
 
   void initdelays ();
+  void setfade ();
 
   REALTYPE *ldelay, *rdelay;
   REALTYPE *t2ldelay, *t2rdelay;
@@ -73,7 +74,7 @@ private:
   REALTYPE oldl, oldr;		//pt. lpf
   int kl, rvkl, rvfl, maxx_delay, fade, dl, first_time;
 
-  REALTYPE  Srate_Attack_Coeff;
+  REALTYPE  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2;
 };
 
 

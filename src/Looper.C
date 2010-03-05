@@ -110,16 +110,17 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
     
     if(Precord)
      {
-     if(PT1)
-     {
-      ldelay[kl] += smpsl[i];
-      rdelay[kl] += smpsr[i];
-      }
-     if(PT2)
-     {
-      t2ldelay[kl] += smpsl[i];
-      t2rdelay[kl] += smpsr[i];
-      }      
+     
+	     if(PT1)
+	     {
+	      ldelay[kl] += smpsl[i];
+	      rdelay[kl] += smpsr[i];
+	      }
+	     if(PT2)
+	     {
+	      t2ldelay[kl] += smpsl[i];
+	      t2rdelay[kl] += smpsr[i];
+	      }      
       
       }
     
@@ -139,29 +140,31 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 		      if (lswell <= PI) 
 		      {
 		      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
-		      efxoutl[i] = ldelay[rvkl] * lswell;   //Volume ducking near zero crossing.     
+		      efxoutl[i] = (fade1 * ldelay[rvkl] + fade2 * t2ldelay[rvkl]) * lswell;   //Volume ducking near zero crossing.     
 		      }  
 		      else
 		      {
-		      efxoutl[i] = ldelay[rvkl];        
+		      efxoutl[i] = fade1 * ldelay[rvkl] + fade2 * t2ldelay[rvkl];        
 		      }
        
 	      rswell = 	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;  
 		      if (rswell <= PI)
 		      {
 		       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
-		       efxoutr[i] = rdelay[rvkl] * rswell;  //Volume ducking near zero crossing.
+		       efxoutr[i] = ( fade1 * rdelay[rvkl] + fade2 * t2rdelay[rvkl] )* rswell;  //Volume ducking near zero crossing.
 		      }
 		      else
 		      {
-		      efxoutr[i] = rdelay[rvkl];
+		      efxoutr[i] = fade1 * rdelay[rvkl] + fade2 * t2rdelay[rvkl];
 		      }
       
 	      }
 	      else
 	      {
-	      efxoutl[i]= ldelay[kl];
-	      efxoutr[i]= rdelay[kl];
+
+	      efxoutl[i]= fade1*ldelay[kl] + fade2*t2ldelay[kl];
+	      efxoutr[i]= fade1*rdelay[kl] + fade2*t2rdelay[kl];
+
 	      }
       
       }
@@ -182,7 +185,13 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
  * Parameter control
  */
 
-
+void Looper::setfade ()
+{
+      fade1 = (float) Pfade/127.0f;
+      fade2 = 1.0f - fade1;
+      fade1 *= track1gain;
+      fade2 *= track2gain;
+};
 void
 Looper::setpreset (int npreset)
 {
@@ -211,8 +220,7 @@ Looper::changepar (int npar, int value)
     case 0:
     Pvolume = value;
     volume = outvolume = (float)Pvolume / 127.0f;
-//    if (Pvolume == 0)
-//    cleanup ();
+
       break;
     case 1:	//Play at current pointer position
     if(Pplay)
@@ -266,16 +274,18 @@ Looper::changepar (int npar, int value)
       break;
     case 6:
       Pfade = value;
-      upfade = (float) Pfade/
+      setfade ();
       break;
     case 7:
-    if(PT2) {
-     PT2 = 0;
+    if(PT1) {
+     PT1 = 0;
      }
      else 
      {
-     PT2 = 1;
+     PT1 = 1;
      }
+     track1gain = (float) PT1;
+     setfade ();
       break;
     case 8:
     if(PT2) {
@@ -285,6 +295,8 @@ Looper::changepar (int npar, int value)
      {
      PT2 = 1;
      }
+     track2gain = (float) PT2;
+     setfade ();
       break;  
       
     };
