@@ -11481,7 +11481,7 @@ R average.");
         mbvvol_cross2->align(FL_ALIGN_LEFT);
         mbvvol_cross2->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_cross2
-      { mbvvol_cross3 = new SliderW(372, 362, 100, 10, "Cross2");
+      { mbvvol_cross3 = new SliderW(372, 362, 100, 10, "Cross3");
         mbvvol_cross3->type(5);
         mbvvol_cross3->box(FL_FLAT_BOX);
         mbvvol_cross3->color((Fl_Color)178);
