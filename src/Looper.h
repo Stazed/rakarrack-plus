@@ -66,7 +66,10 @@ private:
   int PT2;
 
   void initdelays ();
-  REALTYPE *ldelay, *rdelay, t2ldelay, t2rdelay;
+
+  REALTYPE *ldelay, *rdelay;
+  REALTYPE *t2ldelay, *t2rdelay;
+  
   REALTYPE oldl, oldr;		//pt. lpf
   int kl, rvkl, rvfl, maxx_delay, fade, dl, first_time;
 

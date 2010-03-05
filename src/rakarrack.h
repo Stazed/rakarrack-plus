@@ -2234,6 +2234,11 @@ private:
   void cb_looper_rv_i(Fl_Check_Button*, void*);
   static void cb_looper_rv(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *looper_ap;
+private:
+  void cb_looper_ap_i(Fl_Check_Button*, void*);
+  static void cb_looper_ap(Fl_Check_Button*, void*);
+public:
   Fl_Button *looper_t1;
 private:
   void cb_looper_t1_i(Fl_Button*, void*);
@@ -2717,5 +2722,6 @@ public:
   void DisAssigns();
   void Prepare_Order();
   void Show_Next_Time();
+  void update_looper();
 };
 #endif
