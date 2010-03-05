@@ -279,7 +279,7 @@ Looper::changepar (int npar, int value)
       Preverse = value;		//Playback in reverse
       break;
     case 6:
-      Pfade2 = value;
+      Pfade1 = value;
       setfade ();
       break;
     case 7:
@@ -310,7 +310,7 @@ Looper::changepar (int npar, int value)
      break;
     
     case 10:
-    Pfade1 = value;
+    Pfade2 = value;
     setfade();
      break;
       
