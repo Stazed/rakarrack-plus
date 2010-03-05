@@ -189,8 +189,8 @@ Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
 void Looper::setfade ()
 {
-      fade1 = (float) Pfade/127.0f;
-      fade2 = 1.0f - fade1;
+      fade1 = (float) Pfade1/127.0f;
+      fade2 = (float) Pfade2/127.0f;
       fade1 *= track1gain;
       fade2 *= track2gain;
 };
@@ -279,7 +279,7 @@ Looper::changepar (int npar, int value)
       Preverse = value;		//Playback in reverse
       break;
     case 6:
-      Pfade = value;
+      Pfade2 = value;
       setfade ();
       break;
     case 7:
@@ -308,6 +308,10 @@ Looper::changepar (int npar, int value)
     case 9:
     Pautoplay = value;
      break;
+    
+    case 10:
+    Pfade1 = value;
+    setfade();
       
     };
     
