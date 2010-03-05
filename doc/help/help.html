@@ -1,8 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head>
+
   
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>Rakarrack Help</title>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
+  
 
   
   
@@ -44,8 +45,7 @@
 		H3.cjk { font-family: "HG Mincho Light J" }
 		H3.ctl { font-family: "Arial Unicode MS" }
 	-->
-	</style>
-</head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+	</style></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
 <p style="margin-bottom: 0in;" align="left"><a name="top"></a><br>
 </p>
 
@@ -66,7 +66,8 @@ Main Screen</a> <a href="#conn">Connecting</a> <a href="#pyb">Presets
       <p><a href="#eql">Lineal EQ</a> <a href="#comp">Compressor</a> <a href="#dist">Distorsion</a> <a href="#ovrd">Overdrive</a> <a href="#eco">Echo</a> <a href="#chor">Chorus</a> <a href="#phas">Phaser</a>
       <a href="#aphas">Analog Phaser</a> <a href="#flan">Flanger</a> <a href="#reve">Reverb</a> <a href="#eqp">Parametric EQ</a> <a href="#cabe">Cabinet Emulation</a> <a href="#pan">AutoPan/Stereo
 Expander</a> <a href="#har">Harmonizer</a> <a href="#delm">Musical
-Delay</a> <a href="#gate">Noise Gate</a> <a href="#wha">WhaWha</a> <a href="#awha">AlienWha</a>&nbsp;<a href="#dere">Derelict</a>&nbsp;<a href="#Valve">Valve</a>&nbsp;<a href="#Dual_Flange">Dual Flange</a>&nbsp;<a href="#Ring">Ring</a>&nbsp;<a href="#Exciter">Exciter</a>&nbsp;<a href="#DistBand">DistBand</a>&nbsp;<a href="#Arpie">Arpie</a>&nbsp;<a href="#Expander">Expander</a> </p>
+Delay</a> <a href="#gate">Noise Gate</a> <a href="#wha">WhaWha</a> <a href="#awha">AlienWha</a>&nbsp;<a href="#dere">Derelict</a>&nbsp;<a href="#Valve">Valve</a>&nbsp;<a href="#Dual_Flange">Dual Flange</a>&nbsp;<a href="#Ring">Ring</a>&nbsp;<a href="#Exciter">Exciter</a>&nbsp;<a href="#DistBand">DistBand</a>&nbsp;<a href="#Arpie">Arpie</a>&nbsp;<a href="#Expander">Expander</a>&nbsp;<a href="#Shuffle">Shuffle</a>&nbsp;<a href="#Synthfilter">Synthfilter</a>&nbsp;<a href="#VaryBand">VaryBand</a>
+      </p>
       <h3><a href="#midi">MIDI Converter</a></h3>
       <h3><a href="#tuner">Tuner</a></h3>
       <h3><a href="#autores">Credits</a></h3>
@@ -1435,13 +1436,124 @@ Low Pass Filter<br>
   </tbody>
 </table>
 
-<h3 class="western"><a name="wha"></a></h3>
+<h3 class="western"><a name="Shuffle"></a>Shuffle</h3>
 
 <br>
 
-<h3 class="western"><a name="wha"></a></h3>
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/shu.jpg" name="graphics29" alt="rakarrack Shuffle"></font></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p align="justify">Effect based on&nbsp; Stereo Shuffling
+paper&nbsp; by Michael Gerzon. That convert L/R signals to M/S, Mid and
+Side. You can equalize one of this bands with a parametric four band,
+the Rev selector select the M/S band to equalize, ON = S, OFF = M. That
+produce interesting spatial sound, also can be used to remove certain
+frequencys on the M/S channels.<br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <br>
+
+<br>
+
+<h3 class="western"><a name="Synthfilter"></a>Synthfilter</h3>
+
+<br>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/syn.jpg" name="graphics29" alt="rakarrack Synthfilter"></font></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p align="justify">A different type of view of
+the Analog Phaser effect revealed a basic structure supporting
+high-order filters with adjustable number of filter stages…most of the
+work was already done, so thanks again to Paul Nasca for this piece of
+code from the original ZynAddSubFX Phaser.&nbsp; <br>
+Starting with a phaser
+(as opposed to wah-wah or EQ) was inspired by a phaser circuit
+modification suggested by Mark Hammer, a frequent forum poster at
+diystompboxes.com/smfforum.&nbsp; This modification allowed two phase
+stages to be converted to low-pass stages with a switch in an analog
+phaser.&nbsp; This is the type of effect marketed as a
+“phase-wah”.&nbsp; Of course, converting all of these phase stages to
+low pass stages makes this circuit look an aweful lot like what is
+found inside the old Korg Delta DL-50 synthesizer.&nbsp; <br>
+Converting a
+normal OTA phaser into a synth filter would be a relatively ugly hack
+in the circuit bending world, but a simple excercise in software
+bending, and with a more elegant final product. With a little bit of
+experimentation, I had a filter sounding much like something found in
+an analog synthesizer.&nbsp; Thinking back to an analog envelope filter
+I once built, I determined high pass filter stages would also be of
+great utility.&nbsp; The final result:&nbsp; A very flexible filter
+module able to accomplish many flavors of low pass, band pass and high
+pass filter shapes.&nbsp; Possibilities range anywhere from simple
+wah-wah sounds to definite mushy filters from synthland.&nbsp; You can
+operate up to 12 high-pass and 12 low pass stages simultaneously. At
+present, the user is protected from resonance near instability.&nbsp;
+If you are a synth filter lover and want to be able to make your filter
+unstable, then it is a very minor adjustment to the source code if you
+wish to internally amp up the feedback range to allow this. Finally,
+the SynthFilter comes with wet/dry mix so you can accomplish
+interesting phase-wah sounds.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<h3 class="western"><a name="VaryBand"></a>VaryBand</h3>
+
+<br>
+
+
+<table cellpadding="5" cellspacing="2">
+
+
+  <tbody>
+    <tr>
+      <td>
+      <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/var.jpg" name="graphics29" alt="rakarrack VaryBand"></font></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p align="justify">Four
+Bands volume modulated with two LFOs. You can select for each LFO the
+type, Tempo(speed) and LR difference (St.df). Cross points are to
+defining the band frequency range.<br>
+</p>
+      <p align="justify">20-&gt; Cross1 = Low<br>
+Cross1-&gt;Cross2 = Mid Low<br>
+Cross2-&gt;Cross3 = High Low<br>
+Cross3-&gt;26 KHz = High<br>
+      </p>
+      <p align="justify">The Combi choice select the LFO for each band, <br>
+      </p>
+      <p align="justify">1 = LFO1<br>
+2 = LFO2<br>
+o = Bypass<br>
+x = Disable Band.<br>
+      </p>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 
 <p><a href="#top">Contents</a> </p>
 
@@ -1509,8 +1621,10 @@ range is shown in red.</p>
 </ul>
 
 <p><b>Presets</b></p>
+
 <p>
 </p>
+
 <hr>
 <ul>
 
