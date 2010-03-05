@@ -44,6 +44,7 @@ public:
   void setdryonly ();
   int Ppreset;
   int progstate[6];
+  void getstate ();
 
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;

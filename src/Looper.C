@@ -279,12 +279,6 @@ Looper::changepar (int npar, int value)
       
     };
     
-      progstate[0] = Pplay;
-      progstate[1] = Pstop;
-      progstate[2] = Precord;
-      progstate[3] = Pclear;
-      progstate[4] = PT1;
-      progstate[5] = PT2;
 };
 
 int
@@ -321,4 +315,14 @@ Looper::getpar (int npar)
       break;
     };
   return (0);			//in case of bogus parameter number
+};
+
+void Looper::getstate ()
+{
+      progstate[0] = Pplay;
+      progstate[1] = Pstop;
+      progstate[2] = Precord;
+      progstate[3] = Pclear;
+      progstate[4] = PT1;
+      progstate[5] = PT2;
 };
