@@ -79,7 +79,7 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("DownQuality"), DownQual, 4); 
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
-  if(upsample) Adjust_Upsample();
+  Adjust_Upsample();
 
   rakarrack.get (PrefNom ("Looper Size"), looper_size, 1);
 
