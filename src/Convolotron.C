@@ -257,7 +257,7 @@ void
 Convolotron::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
-  hidamp = 1.0f - (float)Phidamp / 127.0f;
+  hidamp = 1.0f - (float)Phidamp / 127.1f;
   alpha_hidamp = 1.0f - hidamp;
 };
 

@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -5092,8 +5091,8 @@ if((int)looper_activar->value())rkr->Looper_Bypass=1;}
         }
         Fl_Value_Slider looper_fade {
           label Fade
-          callback {rkr->efx_Looper->changepar(6,(int)o->value());}
-          xywh {371 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 100 maximum 2000 step 1 value 1000 textcolor 7
+          callback {rkr->efx_Looper->changepar(6,(int)o->value());} selected
+          xywh {371 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Button looper_play {
@@ -9379,7 +9378,6 @@ fl_message("This setting will be changed the next time you run rakarrack");} {}
 looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_t1->value(rkr->efx_Looper->progstate[4]);
-looper_t2->value(rkr->efx_Looper->progstate[5]);} {selected
-    }
+looper_t2->value(rkr->efx_Looper->progstate[5]);} {}
   }
 } 
