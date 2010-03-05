@@ -200,8 +200,8 @@ Looper::setpreset (int npreset)
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 0, 1, 0, 1, 0, 1000, 1, 0},
-    {64, 0, 1, 0, 1, 1, 1000, 1, 0} 
+    {64, 0, 1, 0, 1, 0, 1, 1, 0},
+    {64, 0, 1, 0, 1, 1, 1, 1, 0} 
   };
 
 
