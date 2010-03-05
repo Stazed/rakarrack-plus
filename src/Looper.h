@@ -73,7 +73,7 @@ private:
   REALTYPE *t2ldelay, *t2rdelay;
   
   REALTYPE oldl, oldr;		//pt. lpf
-  int kl, rvkl, rvfl, maxx_delay, fade, dl, first_time;
+  int kl, rvkl, rvfl, maxx_delay, fade, dl, first_time, rplaystate;
 
   REALTYPE  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2;
 };

@@ -41,6 +41,7 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size)
       PT1 = 1;
       PT2 = 0;
       Pautoplay = 0;
+      rplaystate = 0;
       
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
   maxx_delay = lrintf((float)SAMPLE_RATE * size);
@@ -200,8 +201,8 @@ Looper::setpreset (int npreset)
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 0, 1, 0, 1, 0, 1, 1, 0},
-    {64, 0, 1, 0, 1, 1, 1, 1, 0} 
+    {64, 0, 1, 0, 1, 0, 1000, 1, 0},
+    {64, 0, 1, 0, 1, 1, 1000, 1, 0} 
   };
 
 
@@ -254,10 +255,14 @@ Looper::changepar (int npar, int value)
 	   first_time = 0;
 	}  
       Precord = 0;
+      Pplay = rplaystate;
+      if(Pautoplay) Pplay = 1;
       }
       else
       {
       Precord = 1;
+      rplaystate = Pplay;
+      Pplay = 1;
       }
       Pstop = 0;
       Pclear = 0;
@@ -301,13 +306,7 @@ Looper::changepar (int npar, int value)
       break; 
       
     case 9:
-    if(Pautoplay) {
-     Pautoplay = 0;
-     }
-     else 
-     {
-     Pautoplay = 1;
-     } 
+    Pautoplay = value;
      break;
       
     };
