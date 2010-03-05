@@ -29,6 +29,7 @@
 
 #include "global.h"
 #define  ATTACK  0.175f  //crossover time for reverse delay
+
 class Looper
 {
 public:
@@ -42,6 +43,7 @@ public:
 
   void setdryonly ();
   int Ppreset;
+  int progstate[6];
 
   REALTYPE *efxoutl;
   REALTYPE *efxoutr;

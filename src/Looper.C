@@ -38,6 +38,8 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size)
       Pplay = 0;
       Precord = 0;
       Pstop = 1;
+      PT1 = 1;
+      PT2 = 0;
       
   Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
   maxx_delay = lrintf((float)SAMPLE_RATE * size);
@@ -250,11 +252,30 @@ Looper::changepar (int npar, int value)
       Pfade = value;
       break;
     case 7:
-      PT1 = value;
+    if(PT2) {
+     PT2 = 0;
+     }
+     else 
+     {
+     PT2 = 1;
+     }
       break;
     case 8:
-      PT2 = value;
+    if(PT2) {
+     PT2 = 0;
+     }
+     else 
+     {
+     PT2 = 1;
+     }
       break;  
+      
+      progstate[0] = Pplay;
+      progstate[1] = Pstop;
+      progstate[2] = Precord;
+      progstate[3] = Pclear;
+      progstate[4] = PT1;
+      progstate[5] = PT2;
 
     };
 };
