@@ -292,6 +292,7 @@ Looper::changepar (int npar, int value)
       Precord = 0;
       Pplay = rplaystate;
       if(Pautoplay) Pplay = 1;
+      Pstop = 0;
       }
       else
       {
@@ -306,7 +307,7 @@ Looper::changepar (int npar, int value)
       Pclear = 1;    //Clear everything and erase the loop
       if(PT1) first_time1 = 1;
       if(PT2) first_time2 = 1;
-
+      if((PT1) && (PT2)) Pplay = 0;
       Precord = 0;
       initdelays ();
       break;
