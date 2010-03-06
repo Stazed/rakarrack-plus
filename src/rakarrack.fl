@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -886,15 +886,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1334 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -2558,8 +2560,8 @@ eqp_Gain->value(rkr->EQ2_setpreset(1,9,(int)o->value())-64);}
         }
       }
       Fl_Group WHAWHA {
-        user_data 1
-        xywh {162 26 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 open selected
+        xywh {162 26 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button WhaWha_activar {
           label On
@@ -2653,11 +2655,11 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
         Fl_Value_Slider WhaWha_ampsns {
           label {Amp.S.}
           callback {rkr->efx_WhaWha->changepar(7,(int)o->value());}
-          xywh {211 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {211 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider WhaWha_ampsnsinv {
-          label {Amp.S.I}
+          label Wah
           callback {rkr->efx_WhaWha->changepar(8,(int)o->value());}
           xywh {211 179 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
@@ -5073,7 +5075,7 @@ looper_level2->value(rkr->efx_Looper->getpar(10));
 looper_t1->value(rkr->efx_Looper->getpar(7));
 looper_t2->value(rkr->efx_Looper->getpar(8));
 
-if((int)looper_activar->value())rkr->Looper_Bypass=1;} selected
+if((int)looper_activar->value())rkr->Looper_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {

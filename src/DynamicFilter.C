@@ -71,7 +71,7 @@ DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
   lfo.effectlfoout (&lfol, &lfor);
   lfol *= depth * 5.0f;
   lfor *= depth * 5.0f;
-  REALTYPE freq = fbias + filterpars->getfreq ();  //fbias offsets frequency.  By the time it gets to reverse, frequency is high enough.
+  REALTYPE freq = oldfbias2 + filterpars->getfreq ();  //fbias offsets frequency.  By the time it gets to reverse, frequency is high enough.
   REALTYPE q = filterpars->getq ();
 
   for (i = 0; i < PERIOD; i++)
@@ -81,6 +81,11 @@ DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       REALTYPE x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
       ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
+      
+      //oldfbias -= 0.001 * oldfbias2;
+      oldfbias = oldfbias * (1.0f - ampsmooth) + fbias * ampsmooth + 1e-10f;  //smooth MIDI control
+      oldfbias1 = oldfbias1 * (1.0f - ampsmooth) + oldfbias * ampsmooth + 1e-10f;
+      oldfbias2 = oldfbias2 * (1.0f - ampsmooth) + oldfbias1 * ampsmooth + 1e-10f;
     };
 
 
@@ -149,10 +154,15 @@ void
 DynamicFilter::setampsns (int Pp)
 {
   Pampsns = Pp;
-  ampsns = powf ((float)Pampsns / 127.0f, 2.5f) * 100.0f;
+  if(Pampsns>0)
+  {
+  ampsns = powf (((float)Pampsns) / 64.0f, 2.5f) * 100.0f;
+  }  
+  else
+  {
+  ampsns = - powf (( -((float) Pampsns)) / 64.0f, 2.5f) * 100.0f;
+  }  
   fbias  =  powf ((float)Pampsnsinv / 127.0f, 2.5f) * 5.0f;
-  if (Pampsnsinv > 64)
-    ampsns = -ampsns;
   ampsmooth = expf (-(70.0f + (float) Pampsmooth) / 127.0f * 10.0f) * 0.99f;
 
 };

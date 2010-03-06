@@ -73,7 +73,7 @@ private:
 
   //Valorile interne
 
-  REALTYPE panning, depth, ampsns, ampsmooth, fbias;
+  REALTYPE panning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2;
 
   class Filter *filterl, *filterr;
 
