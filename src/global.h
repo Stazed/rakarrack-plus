@@ -72,6 +72,7 @@
 #include "Convolotron.h"
 #include "Resample.h"
 #include "Looper.h"
+#include "RyanWah.h"
 
 #define D_PI 6.283185f
 #define PI 3.141598f
@@ -212,6 +213,7 @@ public:
   class Resample *U_Resample;
   class Resample *D_Resample;
   class Looper *efx_Looper;
+  class RyanWah *efx_RyanWah;
 
   jack_client_t *jackclient;
   jack_options_t options;
@@ -254,6 +256,7 @@ public:
   int MBVvol_Bypass;
   int Convol_Bypass;
   int Looper_Bypass;
+  int RyanWah_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -286,6 +289,7 @@ public:
   int MBVvol_B;
   int Convol_B;
   int Looper_B;
+  int RyanWah_B;
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];

@@ -1,11 +1,11 @@
 /*
   ZynAddSubFX - a software synthesizer
  
-  DynamicFilter.h - "WahWah" effect and others
+  RyanWah.h - "WahWah" effect and others
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Ryan Billing
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -22,18 +22,18 @@
 
 */
 
-#ifndef DYNAMICFILTER_H
-#define DYNAMICFILTER_H
+#ifndef RYANWAH_H
+#define RYANWAH_H
 #include "global.h"
 #include "EffectLFO.h"
 
 #include "Filter.h"
 
-class DynamicFilter
+class RyanWah
 {
 public:
-  DynamicFilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
-  ~DynamicFilter ();
+  RyanWah (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  ~RyanWah ();
   void out (REALTYPE * smpsl, REALTYPE * smpsr);
 
   void setpreset (int npreset);
@@ -54,11 +54,11 @@ public:
 
 
 private:
-  //Parametrii DynamicFilter
-    EffectLFO lfo;		//lfo-ul DynamicFilter
+  //Parametrii RyanWah
+    EffectLFO lfo;		//lfo-ul RyanWah
   int Pvolume;
   int Ppanning;
-  int Pdepth;		//the depth of the lfo of the DynamicFilter
+  int Pdepth;		//the depth of the lfo of the RyanWah
   int Pampsns;	//how the filter varies according to the input amplitude
   int Pampsnsinv;	//if the filter freq is lowered if the input amplitude rises
   int Pampsmooth;	//how smooth the input amplitude changes the filter
@@ -73,11 +73,11 @@ private:
 
   //Valorile interne
 
-  REALTYPE panning, depth, ampsns, ampsmooth;
+  REALTYPE panning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2;
 
   class Filter *filterl, *filterr;
 
-  REALTYPE ms1, ms2, ms3, ms4;	//mean squares
+  REALTYPE ms1;	//mean squares
 
   class FilterParams *filterpars;
 

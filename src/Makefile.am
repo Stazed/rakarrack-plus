@@ -90,6 +90,8 @@ rakarrack_SOURCES = main.C \
 	Resample.C \
 	Looper.h \
 	Looper.C \
+	RyanWah.h \
+	RyanWah.C \
 	MIDIConverter.C \
 	MIDIConverter.h
 	

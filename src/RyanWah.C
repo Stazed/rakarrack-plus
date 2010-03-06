@@ -1,11 +1,11 @@
 /*
   ZynAddSubFX - a software synthesizer
  
-  DynamicFilter.C - "WahWah" effect and others
+  RyanWah.C - "WahWah" effect and others
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Ryan Billing
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -23,24 +23,30 @@
 */
 
 #include <math.h>
-#include "DynamicFilter.h"
+#include "RyanWah.h"
 #include <stdio.h>
 
-DynamicFilter::DynamicFilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+RyanWah::RyanWah (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-
   Ppreset = 0;
+
   filterl = NULL;
   filterr = NULL;
   filterpars = new FilterParams (0, 64, 64);
+
+  Pampsns = 0;
+  Pampsnsinv= 0;
+  Pampsmooth= 0;
+
   setpreset (Ppreset);
+
   cleanup ();
 };
 
-DynamicFilter::~DynamicFilter ()
+RyanWah::~RyanWah ()
 {
   delete (filterpars);
   delete (filterl);
@@ -52,7 +58,7 @@ DynamicFilter::~DynamicFilter ()
  * Apply the effect
  */
 void
-DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
+RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
   if (filterpars->changed)
@@ -65,7 +71,7 @@ DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
   lfo.effectlfoout (&lfol, &lfor);
   lfol *= depth * 5.0f;
   lfor *= depth * 5.0f;
-  REALTYPE freq = filterpars->getfreq ();
+  REALTYPE freq = oldfbias2 + filterpars->getfreq ();  //fbias offsets frequency.  By the time it gets to reverse, frequency is high enough.
   REALTYPE q = filterpars->getq ();
 
   for (i = 0; i < PERIOD; i++)
@@ -75,14 +81,15 @@ DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
       REALTYPE x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
       ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
+      
+      //oldfbias -= 0.001 * oldfbias2;
+      oldfbias = oldfbias * (1.0f - ampsmooth) + fbias * ampsmooth + 1e-10f;  //smooth MIDI control
+      oldfbias1 = oldfbias1 * (1.0f - ampsmooth) + oldfbias * ampsmooth + 1e-10f;
+      oldfbias2 = oldfbias2 * (1.0f - ampsmooth) + oldfbias1 * ampsmooth + 1e-10f;
     };
 
 
-  REALTYPE ampsmooth2 = powf (ampsmooth, 0.2f) * 0.3f;
-  ms2 = ms2 * (1.0f - ampsmooth2) + ms1 * ampsmooth2;
-  ms3 = ms3 * (1.0f - ampsmooth2) + ms2 * ampsmooth2;
-  ms4 = ms4 * (1.0f - ampsmooth2) + ms3 * ampsmooth2;
-  REALTYPE rms = (sqrtf (ms4)) * ampsns;
+  REALTYPE rms = ms1 * ampsns;
 
   REALTYPE frl = filterl->getrealfreq (freq + lfol + rms);
   REALTYPE frr = filterr->getrealfreq (freq + lfor + rms);
@@ -107,13 +114,11 @@ DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
  * Cleanup the effect
  */
 void
-DynamicFilter::cleanup ()
+RyanWah::cleanup ()
 {
   reinitfilter ();
   ms1 = 0.0;
-  ms2 = 0.0;
-  ms3 = 0.0;
-  ms4 = 0.0;
+
 };
 
 
@@ -122,7 +127,7 @@ DynamicFilter::cleanup ()
  */
 
 void
-DynamicFilter::setdepth (int Pdepth)
+RyanWah::setdepth (int Pdepth)
 {
   this->Pdepth = Pdepth;
   depth = powf (((float)Pdepth / 127.0f), 2.0f);
@@ -130,7 +135,7 @@ DynamicFilter::setdepth (int Pdepth)
 
 
 void
-DynamicFilter::setvolume (int Pvolume)
+RyanWah::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
@@ -138,25 +143,32 @@ DynamicFilter::setvolume (int Pvolume)
 };
 
 void
-DynamicFilter::setpanning (int Ppanning)
+RyanWah::setpanning (int Pp)
 {
-  this->Ppanning = Ppanning;
+  Ppanning = Pp;
   panning = ((float)Ppanning + .5f) / 127.0f;
 };
 
 
 void
-DynamicFilter::setampsns (int Pampsns)
+RyanWah::setampsns (int Pp)
 {
-  ampsns = powf ((float)Pampsns / 127.0f, 2.5f) * 10.0f;
-  if (Pampsnsinv != 0)
-    ampsns = -ampsns;
-  ampsmooth = expf ((float)-Pampsmooth / 127.0f * 10.0f) * 0.99f;
-  this->Pampsns = Pampsns;
+  Pampsns = Pp;
+  if(Pampsns>0)
+  {
+  ampsns = powf (((float)Pampsns) / 64.0f, 2.5f) * 100.0f;
+  }  
+  else
+  {
+  ampsns = - powf (( -((float) Pampsns)) / 64.0f, 2.5f) * 100.0f;
+  }  
+  fbias  =  powf ((float)Pampsnsinv / 127.0f, 2.5f) * 5.0f;
+  ampsmooth = expf (-(70.0f + (float) Pampsmooth) / 127.0f * 10.0f) * 0.99f;
+
 };
 
 void
-DynamicFilter::reinitfilter ()
+RyanWah::reinitfilter ()
 {
   if (filterl != NULL)
     delete (filterl);
@@ -167,21 +179,21 @@ DynamicFilter::reinitfilter ()
 };
 
 void
-DynamicFilter::setpreset (int npreset)
+RyanWah::setpreset (int npreset)
 {
   const int PRESET_SIZE = 10;
   const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //WahWah
-    {64, 64, 80, 0, 0, 64, 70, 90, 0, 60},
+    {0, 64, 138, 0, 0, 64, 70, 90, 0, 60},
     //AutoWah
-    {64, 64, 70, 0, 0, 80, 70, 0, 0, 60},
+    {64, 64, 80, 0, 0, 80, 70, 0, 0, 60},
     //Sweep
-    {64, 64, 30, 0, 0, 50, 80, 0, 0, 60},
+    {64, 64, 7, 0, 0, 50, 80, 0, 0, 60},
     //VocalMorph1
-    {64, 64, 80, 0, 0, 64, 70, 64, 0, 60},
+    {64, 64, 138, 0, 0, 64, 70, 64, 0, 60},
     //VocalMorph1
-    {64, 64, 50, 0, 0, 96, 64, 0, 0, 60}
+    {64, 64, 33, 0, 0, 96, 64, 0, 0, 60}
   };
 
   if (npreset >= NUM_PRESETS)
@@ -196,25 +208,25 @@ DynamicFilter::setpreset (int npreset)
       filterpars->Pcategory = 0;
       filterpars->Ptype = 2;
       filterpars->Pfreq = 45;
-      filterpars->Pq = 64;
+      filterpars->Pq = 70;
       filterpars->Pstages = 1;
-      filterpars->Pgain = 64;
+      filterpars->Pgain = 70;
       break;
     case 1:
       filterpars->Pcategory = 2;
       filterpars->Ptype = 0;
-      filterpars->Pfreq = 72;
+      filterpars->Pfreq = 60;
       filterpars->Pq = 64;
       filterpars->Pstages = 0;
-      filterpars->Pgain = 64;
+      filterpars->Pgain = 90;
       break;
     case 2:
       filterpars->Pcategory = 0;
       filterpars->Ptype = 4;
-      filterpars->Pfreq = 64;
-      filterpars->Pq = 64;
+      filterpars->Pfreq = 45;
+      filterpars->Pq = 70;
       filterpars->Pstages = 2;
-      filterpars->Pgain = 64;
+      filterpars->Pgain = 90;
       break;
     case 3:
       filterpars->Pcategory = 1;
@@ -222,7 +234,7 @@ DynamicFilter::setpreset (int npreset)
       filterpars->Pfreq = 50;
       filterpars->Pq = 70;
       filterpars->Pstages = 1;
-      filterpars->Pgain = 64;
+      filterpars->Pgain = 70;
 
       filterpars->Psequencesize = 2;
       // "I"
@@ -252,7 +264,7 @@ DynamicFilter::setpreset (int npreset)
       filterpars->Pfreq = 64;
       filterpars->Pq = 70;
       filterpars->Pstages = 1;
-      filterpars->Pgain = 64;
+      filterpars->Pgain = 70;
 
       filterpars->Psequencesize = 2;
       filterpars->Pnumformants = 2;
@@ -285,7 +297,7 @@ DynamicFilter::setpreset (int npreset)
 
 
 void
-DynamicFilter::changepar (int npar, int value)
+RyanWah::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -329,7 +341,7 @@ DynamicFilter::changepar (int npar, int value)
 };
 
 int
-DynamicFilter::getpar (int npar)
+RyanWah::getpar (int npar)
 {
   switch (npar)
     {

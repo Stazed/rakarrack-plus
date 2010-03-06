@@ -160,6 +160,7 @@ RKR::RKR ()
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
   efx_Convol = new Convolotron(efxoutl,efxoutr);
   efx_Looper = new Looper(efxoutl,efxoutr,looper_size);
+  efx_RyanWah = new RyanWah(efxoutl,efxoutr);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -187,7 +188,7 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 31;
+  NumEffects = 32;
 
   {
     static const char *los_names[] =
@@ -195,7 +196,7 @@ RKR::RKR ()
       "Phaser", "Flanger", "Reverb",
       "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
       "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",
-      "DistBand", "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", "Looper"
+      "DistBand", "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", "Looper", "RyanWah"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -948,6 +949,7 @@ RKR::cleanup_efx ()
   efx_MBVvol->cleanup();
   efx_Convol->cleanup();
   efx_Looper->cleanup();
+  efx_RyanWah->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 };
@@ -1251,6 +1253,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 {
                   efx_Looper->out(efxoutl, efxoutr);
 		  Vol_Efx(30,efx_Looper->outvolume);
+                }
+              break;  
+
+	     case 31:
+              if (RyanWah_Bypass)
+                {
+                  efx_RyanWah->out(efxoutl, efxoutr);
+		  Vol_Efx(30,efx_RyanWah->outvolume);
                 }
               break;  
 
