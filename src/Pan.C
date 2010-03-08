@@ -142,7 +142,7 @@ Pan::setpanning (unsigned char Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + .5f)/ 127.0f;
-  dvalue= panning*PI/2.0f;
+  dvalue= panning*PI/8.0f;
 
 
 };
