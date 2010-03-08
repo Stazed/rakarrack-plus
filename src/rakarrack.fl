@@ -2905,7 +2905,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         Fl_Check_Button pan_autopan {
           label AutoPan
           user_data 2
-          callback {rkr->efx_Pan->changepar(7,(unsigned char)o->value())} selected
+          callback {rkr->efx_Pan->changepar(7,(unsigned char)o->value())}
           xywh {38 268 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider pan_freq {
@@ -9100,7 +9100,15 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if(rkr->upsample) UPS_LED->color(leds_color); else UPS_LED->color(back_color);} {}
+if(rkr->upsample)
+{
+ UPS_LED->color(leds_color); 
+ UPS_LED->labelcolor(on); 
+ UPS_LED->show();
+
+} 
+ else  UPS_LED->hide();} {selected
+    }
   }
   Function {findpos(int num, int value)} {} {
     code {int i;

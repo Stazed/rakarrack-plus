@@ -15760,7 +15760,14 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if(rkr->upsample) UPS_LED->color(leds_color); else UPS_LED->color(back_color);
+if(rkr->upsample)
+{
+ UPS_LED->color(leds_color); 
+ UPS_LED->labelcolor(on); 
+ UPS_LED->show();
+
+} 
+ else  UPS_LED->hide();
 }
 
 void RKRGUI::findpos(int num, int value) {
