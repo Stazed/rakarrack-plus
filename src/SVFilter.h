@@ -41,6 +41,7 @@ public:
   void settype (int type_);
   void setgain (REALTYPE dBgain);
   void setstages (int stages_);
+  void setmix (int mix, float lpmix, float bpmix, float hpmix);
   void cleanup ();
 
 private:
@@ -62,10 +63,11 @@ private:
   REALTYPE freq;		//Frequency given in Hz
   REALTYPE q;			//Q factor (resonance or Q factor)
   REALTYPE gain;		//the gain of the filter (if are shelf/peak) filters
+  REALTYPE hpg, lpg, bpg;
 
   int abovenq;			//this is 1 if the frequency is above the nyquist
   int oldabovenq;
-  int needsinterpolation, firsttime;
+  int needsinterpolation, firsttime, en_mix;
 };
 
 

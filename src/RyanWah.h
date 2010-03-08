@@ -27,7 +27,7 @@
 #include "global.h"
 #include "EffectLFO.h"
 
-#include "Filter.h"
+#include "SVFilter.h"
 
 class RyanWah
 {
@@ -51,8 +51,6 @@ public:
   REALTYPE volume;
 
 
-
-
 private:
   //Parametrii RyanWah
     EffectLFO lfo;		//lfo-ul RyanWah
@@ -73,13 +71,14 @@ private:
 
   //Valorile interne
 
-  REALTYPE panning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2;
-
-  class Filter *filterl, *filterr;
+  REALTYPE rpanning, lpanning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, minfreq;
+  unsigned char Ftype;
+  unsigned char Fstages;
+  class SVFilter *filterl, *filterr;
 
   REALTYPE ms1;	//mean squares
 
-  class FilterParams *filterpars;
+
 
 };
 

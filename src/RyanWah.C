@@ -35,12 +35,18 @@ RyanWah::RyanWah (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 
   filterl = NULL;
   filterr = NULL;
-  filterpars = new FilterParams (0, 64, 64);
 
   Pampsns = 0;
   Pampsnsinv= 0;
   Pampsmooth= 0;
-
+  maxfreq = 5000.0f;
+  minfreq = 40.0f;
+  frequency = 40.0f;
+  q = 75.0f;
+  Fstages = 1;
+  Ftype = 1;
+  filterl = new SVFilter (0, 80.0f, 70.0f, 1);
+  filterr = new SVFilter (0, 80.0f, 70.0f, 1);
   setpreset (Ppreset);
 
   cleanup ();
@@ -48,7 +54,7 @@ RyanWah::RyanWah (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 
 RyanWah::~RyanWah ()
 {
-  delete (filterpars);
+
   delete (filterl);
   delete (filterr);
 };
@@ -61,18 +67,11 @@ void
 RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
 {
   int i;
-  if (filterpars->changed)
-    {
-      filterpars->changed = false;
-      cleanup ();
-    };
 
   REALTYPE lfol, lfor;
   lfo.effectlfoout (&lfol, &lfor);
   lfol *= depth * 5.0f;
   lfor *= depth * 5.0f;
-  REALTYPE freq = oldfbias2 + filterpars->getfreq ();  //fbias offsets frequency.  By the time it gets to reverse, frequency is high enough.
-  REALTYPE q = filterpars->getq ();
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -89,10 +88,11 @@ RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
     };
 
 
-  REALTYPE rms = ms1 * ampsns;
+  REALTYPE rms = ms1 * ampsns + oldfbias2;
+  if(rms>1.0f) rms = 1.0f;
 
-  REALTYPE frl = filterl->getrealfreq (freq + lfol + rms);
-  REALTYPE frr = filterr->getrealfreq (freq + lfor + rms);
+   REALTYPE frl = minfreq + maxfreq*(lfol + rms);
+   REALTYPE frr = minfreq + maxfreq*(lfor + rms);
 
   filterl->setfreq_and_q (frl, q);
   filterr->setfreq_and_q (frr, q);
@@ -104,8 +104,8 @@ RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
   //panning    
   for (i = 0; i < PERIOD; i++)
     {
-      efxoutl[i] *= panning;
-      efxoutr[i] *= (1.0f - panning);
+      efxoutl[i] *= lpanning;
+      efxoutr[i] *= rpanning;
     };
 
 };
@@ -118,6 +118,7 @@ RyanWah::cleanup ()
 {
   reinitfilter ();
   ms1 = 0.0;
+  oldfbias = oldfbias1 = oldfbias2 = 0.0f;
 
 };
 
@@ -146,7 +147,8 @@ void
 RyanWah::setpanning (int Pp)
 {
   Ppanning = Pp;
-  panning = ((float)Ppanning + .5f) / 127.0f;
+  lpanning = 0.5f + ((float)Ppanning) / 127.0f;
+  rpanning = 1.0f - lpanning;
 };
 
 
@@ -162,7 +164,7 @@ RyanWah::setampsns (int Pp)
   {
   ampsns = - powf (( -((float) Pampsns)) / 64.0f, 2.5f) * 100.0f;
   }  
-  fbias  =  powf ((float)Pampsnsinv / 127.0f, 2.5f) * 5.0f;
+  fbias  =  powf ((float)Pampsnsinv / 127.0f, 2.5f);
   ampsmooth = expf (-(70.0f + (float) Pampsmooth) / 127.0f * 10.0f) * 0.99f;
 
 };
@@ -170,12 +172,11 @@ RyanWah::setampsns (int Pp)
 void
 RyanWah::reinitfilter ()
 {
-  if (filterl != NULL)
-    delete (filterl);
-  if (filterr != NULL)
-    delete (filterr);
-  filterl = new Filter (filterpars);
-  filterr = new Filter (filterpars);
+  filterl->cleanup();
+  filterr->cleanup();
+  //setmix (int mix, float lpmix, float bpmix, float hpmix)
+  filterl->setmix(1, 0.5f, 2.0f, 0.0f);
+  filterr->setmix(1, 0.5f, 2.0f, 0.0f);
 };
 
 void
@@ -200,95 +201,6 @@ RyanWah::setpreset (int npreset)
     npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
-
-  filterpars->defaults ();
-  switch (npreset)
-    {
-    case 0:
-      filterpars->Pcategory = 0;
-      filterpars->Ptype = 2;
-      filterpars->Pfreq = 45;
-      filterpars->Pq = 70;
-      filterpars->Pstages = 1;
-      filterpars->Pgain = 70;
-      break;
-    case 1:
-      filterpars->Pcategory = 2;
-      filterpars->Ptype = 0;
-      filterpars->Pfreq = 60;
-      filterpars->Pq = 64;
-      filterpars->Pstages = 0;
-      filterpars->Pgain = 90;
-      break;
-    case 2:
-      filterpars->Pcategory = 0;
-      filterpars->Ptype = 4;
-      filterpars->Pfreq = 45;
-      filterpars->Pq = 70;
-      filterpars->Pstages = 2;
-      filterpars->Pgain = 90;
-      break;
-    case 3:
-      filterpars->Pcategory = 1;
-      filterpars->Ptype = 0;
-      filterpars->Pfreq = 50;
-      filterpars->Pq = 70;
-      filterpars->Pstages = 1;
-      filterpars->Pgain = 70;
-
-      filterpars->Psequencesize = 2;
-      // "I"
-      filterpars->Pvowels[0].formants[0].freq = 34;
-      filterpars->Pvowels[0].formants[0].amp = 127;
-      filterpars->Pvowels[0].formants[0].q = 64;
-      filterpars->Pvowels[0].formants[1].freq = 99;
-      filterpars->Pvowels[0].formants[1].amp = 122;
-      filterpars->Pvowels[0].formants[1].q = 64;
-      filterpars->Pvowels[0].formants[2].freq = 108;
-      filterpars->Pvowels[0].formants[2].amp = 112;
-      filterpars->Pvowels[0].formants[2].q = 64;
-      // "A"
-      filterpars->Pvowels[1].formants[0].freq = 61;
-      filterpars->Pvowels[1].formants[0].amp = 127;
-      filterpars->Pvowels[1].formants[0].q = 64;
-      filterpars->Pvowels[1].formants[1].freq = 71;
-      filterpars->Pvowels[1].formants[1].amp = 121;
-      filterpars->Pvowels[1].formants[1].q = 64;
-      filterpars->Pvowels[1].formants[2].freq = 99;
-      filterpars->Pvowels[1].formants[2].amp = 117;
-      filterpars->Pvowels[1].formants[2].q = 64;
-      break;
-    case 4:
-      filterpars->Pcategory = 1;
-      filterpars->Ptype = 0;
-      filterpars->Pfreq = 64;
-      filterpars->Pq = 70;
-      filterpars->Pstages = 1;
-      filterpars->Pgain = 70;
-
-      filterpars->Psequencesize = 2;
-      filterpars->Pnumformants = 2;
-      filterpars->Pvowelclearness = 0;
-
-      filterpars->Pvowels[0].formants[0].freq = 70;
-      filterpars->Pvowels[0].formants[0].amp = 127;
-      filterpars->Pvowels[0].formants[0].q = 64;
-      filterpars->Pvowels[0].formants[1].freq = 80;
-      filterpars->Pvowels[0].formants[1].amp = 122;
-      filterpars->Pvowels[0].formants[1].q = 64;
-
-      filterpars->Pvowels[1].formants[0].freq = 20;
-      filterpars->Pvowels[1].formants[0].amp = 127;
-      filterpars->Pvowels[1].formants[0].q = 64;
-      filterpars->Pvowels[1].formants[1].freq = 100;
-      filterpars->Pvowels[1].formants[1].amp = 121;
-      filterpars->Pvowels[1].formants[1].q = 64;
-      break;
-    };
-
-//          for (int i=0;i<5;i++){
-//              printf("freq=%d  amp=%d  q=%d\n",filterpars->Pvowels[0].formants[i].freq,filterpars->Pvowels[0].formants[i].amp,filterpars->Pvowels[0].formants[i].q);
-//          };
 
   Ppreset = npreset;
 

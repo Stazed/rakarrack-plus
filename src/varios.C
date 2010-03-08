@@ -98,11 +98,10 @@ char *tmp;
          }
          if(maxx_len < 5 ) 
          {
-         Message("!! Rakarrack CPU Usage Warning !!","It appears your CPU will not easily handle convolution.  Be very careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
+         Message("!! Rakarrack CPU Usage Warning !!","It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
          }
        
-       
-       
+              
        fclose(fp);
        return(1); 
      }

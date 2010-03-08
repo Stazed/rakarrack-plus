@@ -37,6 +37,8 @@ SVFilter::SVFilter (unsigned char Ftype, REALTYPE Ffreq, REALTYPE Fq,
   outgain = 1.0f;
   needsinterpolation = 0;
   firsttime = 1;
+  en_mix = 0;
+  hpg = lpg = bpg = 0.0f;
   if (stages >= MAX_FILTER_STAGES)
     stages = MAX_FILTER_STAGES;
   cleanup ();
@@ -137,6 +139,24 @@ SVFilter::setstages (int stages_)
   cleanup ();
   computefiltercoefs ();
 };
+void
+SVFilter::setmix (int mix, float lpmix, float bpmix, float hpmix)
+{
+  if(mix) 
+  {
+  en_mix = 1;
+  }
+  else
+  {
+  en_mix = 0;
+  }
+  
+  lpg = lpmix;
+  bpg = bpmix;
+  hpg = hpmix;
+
+};
+
 
 void
 SVFilter::singlefilterout (REALTYPE * smp, fstage & x, parameters & par)
@@ -164,10 +184,19 @@ SVFilter::singlefilterout (REALTYPE * smp, fstage & x, parameters & par)
       x.low = x.low + par.f * x.band;
       x.high = par.q_sqrt * smp[i] - x.low - par.q * x.band;
       x.band = par.f * x.high + x.band;
+      
+      if(en_mix)
+      {
+      smp[i] = lpg * x.low + hpg * x.high + bpg * x.band;
+      }
+      else
+      {
       x.notch = x.high + x.low;
-
       smp[i] = *out;
+      }
     };
+    
+    
 };
 
 void
