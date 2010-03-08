@@ -891,7 +891,7 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
+  Function {make_window()} {open selected
   } {
     Fl_Window Principal {
       callback {is_modified();
@@ -2654,7 +2654,7 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
         }
         Fl_Value_Slider WhaWha_ampsns {
           label {Amp.S.}
-          callback {rkr->efx_WhaWha->changepar(7,(int)o->value());} selected
+          callback {rkr->efx_WhaWha->changepar(7,(int)o->value());}
           xywh {369 340 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -5774,7 +5774,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1554 23 640 528} type Double color 4 hide
+      xywh {1547 23 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -5786,7 +5786,7 @@ Settings->hide();}
       }
       Fl_Group Look {
         label {Look & Feel}
-        user_data 1
+        user_data 1 open
         xywh {10 20 615 83} box PLASTIC_DOWN_FRAME color 7 labelfont 1 labelcolor 7 align 5
       } {
         Fl_Button B_C {
@@ -5889,7 +5889,7 @@ filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
 strcpy(rkr->BackgroundImage,filename);
 PutBackground();}
-          xywh {415 65 65 20}
+          xywh {415 75 65 20}
         }
         Fl_Box FSLabel {
           label {Font Size}
@@ -6117,7 +6117,7 @@ else JackCo->deactivate();}
       }
       Fl_Group BANK_SET {
         label Bank
-        user_data 1
+        user_data 1 open
         xywh {10 468 510 55} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_File_Input BFiname {
@@ -6132,7 +6132,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
 strcpy(rkr->BankFilename,filename);}
-          xywh {415 488 65 30}
+          xywh {415 498 65 20}
         }
       }
     }

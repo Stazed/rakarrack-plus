@@ -26,7 +26,6 @@
 #define DYNAMICFILTER_H
 #include "global.h"
 #include "EffectLFO.h"
-
 #include "Filter.h"
 
 class DynamicFilter

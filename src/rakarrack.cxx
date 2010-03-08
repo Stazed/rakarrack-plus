@@ -12570,7 +12570,7 @@ R average.");
         BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BackFiname->align(FL_ALIGN_TOP_LEFT);
       } // Fl_File_Input* BackFiname
-      { BI_Browser = new Fl_Button(415, 65, 65, 20, "Browse");
+      { BI_Browser = new Fl_Button(415, 75, 65, 20, "Browse");
         BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
       } // Fl_Button* BI_Browser
       { FSLabel = new Fl_Box(538, 51, 60, 17, "Font Size");
@@ -12792,7 +12792,7 @@ R average.");
         BFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BFiname->align(FL_ALIGN_TOP_LEFT);
       } // Fl_File_Input* BFiname
-      { BF_Browser = new Fl_Button(415, 488, 65, 30, "Browse");
+      { BF_Browser = new Fl_Button(415, 498, 65, 20, "Browse");
         BF_Browser->callback((Fl_Callback*)cb_BF_Browser);
       } // Fl_Button* BF_Browser
       BANK_SET->end();

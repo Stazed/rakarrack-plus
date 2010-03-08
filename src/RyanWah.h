@@ -26,7 +26,6 @@
 #define RYANWAH_H
 #include "global.h"
 #include "EffectLFO.h"
-
 #include "SVFilter.h"
 
 class RyanWah
