@@ -27,7 +27,7 @@
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+EQ::EQ (float * efxoutl_, float * efxoutr_)
 {
 
   efxoutl = efxoutl_; 
@@ -75,7 +75,7 @@ EQ::cleanup ()
  * Effect output
  */
 void
-EQ::out (REALTYPE * smpsl, REALTYPE * smpsr)
+EQ::out (float * smpsl, float * smpsr)
 {
   int i;
   for (i = 0; i < MAX_EQ_BANDS; i++)
@@ -147,7 +147,7 @@ EQ::changepar (int npar, int value)
     return;
   int bp = npar % 5;		//band paramenter
 
-  REALTYPE tmp;
+  float tmp;
   switch (bp)
     {
     case 0:
@@ -230,9 +230,9 @@ EQ::getpar (int npar)
 
 
 
-REALTYPE EQ::getfreqresponse (REALTYPE freq)
+float EQ::getfreqresponse (float freq)
 {
-  REALTYPE
+  float
     resp = 1.0f;
 
   for (int i = 0; i < MAX_EQ_BANDS; i++)

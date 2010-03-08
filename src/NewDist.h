@@ -30,28 +30,28 @@
 
 
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
-void waveshapesmps (int n, REALTYPE * smps, int type,
+void waveshapesmps (int n, float * smps, int type,
 		    int drive);
 
 class NewDist
 {
 public:
-  NewDist (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  NewDist (float * efxoutl_, float * efxoutr_);
   ~NewDist ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
-  void applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr);
+  void applyfilters (float * efxoutl, float * efxoutr);
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE outvolume;
-  REALTYPE volume;
-  REALTYPE inpll[4096];
-  REALTYPE inplr[4096];
+  float *efxoutl;
+  float *efxoutr;
+  float outvolume;
+  float volume;
+  float inpll[4096];
+  float inplr[4096];
 
 private:
   //Parametrii
@@ -79,7 +79,7 @@ private:
   void sethpf (int Phpf);
 
   //Parametrii reali
-  REALTYPE panning, lrcross, octave_memoryl, togglel, octave_memoryr, toggler, octmix;
+  float panning, lrcross, octave_memoryl, togglel, octave_memoryr, toggler, octmix;
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
 
   float *octoutl, *octoutr;

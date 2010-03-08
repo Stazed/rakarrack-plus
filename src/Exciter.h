@@ -29,9 +29,9 @@
 class Exciter
 {
 public:
-  Exciter (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Exciter (float * efxoutl_, float * efxoutr_);
   ~Exciter ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -39,10 +39,10 @@ public:
 
   int Ppreset;
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float *efxoutl;
+  float *efxoutr;
+  float outvolume;
+  float volume;
 
 private:
 

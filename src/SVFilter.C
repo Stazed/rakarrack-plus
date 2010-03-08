@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include "SVFilter.h"
 
-SVFilter::SVFilter (unsigned char Ftype, REALTYPE Ffreq, REALTYPE Fq,
+SVFilter::SVFilter (unsigned char Ftype, float Ffreq, float Fq,
 		    unsigned char Fstages)
 {
   stages = Fstages;
@@ -76,11 +76,11 @@ SVFilter::computefiltercoefs ()
 
 
 void
-SVFilter::setfreq (REALTYPE frequency)
+SVFilter::setfreq (float frequency)
 {
   if (frequency < 0.1)
     frequency = 0.1f;
-  REALTYPE rap = freq / frequency;
+  float rap = freq / frequency;
   if (rap < 1.0)
     rap = 1.0f / rap;
 
@@ -103,14 +103,14 @@ SVFilter::setfreq (REALTYPE frequency)
 };
 
 void
-SVFilter::setfreq_and_q (REALTYPE frequency, REALTYPE q_)
+SVFilter::setfreq_and_q (float frequency, float q_)
 {
   q = q_;
   setfreq (frequency);
 };
 
 void
-SVFilter::setq (REALTYPE q_)
+SVFilter::setq (float q_)
 {
   q = q_;
   computefiltercoefs ();
@@ -124,7 +124,7 @@ SVFilter::settype (int type_)
 };
 
 void
-SVFilter::setgain (REALTYPE dBgain)
+SVFilter::setgain (float dBgain)
 {
   gain = dB2rap (dBgain);
   computefiltercoefs ();
@@ -159,10 +159,10 @@ SVFilter::setmix (int mix, float lpmix, float bpmix, float hpmix)
 
 
 void
-SVFilter::singlefilterout (REALTYPE * smp, fstage & x, parameters & par)
+SVFilter::singlefilterout (float * smp, fstage & x, parameters & par)
 {
   int i;
-  REALTYPE *out = NULL;
+  float *out = NULL;
   switch (type)
     {
     case 0:
@@ -200,14 +200,14 @@ SVFilter::singlefilterout (REALTYPE * smp, fstage & x, parameters & par)
 };
 
 void
-SVFilter::filterout (REALTYPE * smp)
+SVFilter::filterout (float * smp)
 {
   int i;
-  REALTYPE *ismp = NULL;
+  float *ismp = NULL;
 
   if (needsinterpolation != 0)
     {
-      ismp = new REALTYPE[PERIOD];
+      ismp = new float[PERIOD];
       for (i = 0; i < PERIOD; i++)
 	ismp[i] = smp[i];
       for (i = 0; i < stages + 1; i++)
@@ -221,7 +221,7 @@ SVFilter::filterout (REALTYPE * smp)
     {
       for (i = 0; i < PERIOD; i++)
 	{
-	  REALTYPE x = (float) i / (REALTYPE) PERIOD;
+	  float x = (float) i / (float) PERIOD;
 	  smp[i] = ismp[i] * (1.0f - x) + smp[i] * x;
 	};
       delete (ismp);

@@ -27,19 +27,18 @@
 
 #include "global.h"
 
-#define REALTYPE float
 
 
 class Filter_
 {
 public:
   virtual ~ Filter_ ()  {};
-  virtual void filterout (REALTYPE * smp) { };
-  virtual void setfreq (REALTYPE frequency) {};
-  virtual void setfreq_and_q (REALTYPE frequency, REALTYPE q_) { };
-  virtual void setq (REALTYPE q_) { };
-  virtual void setgain (REALTYPE dBgain) {};
-  REALTYPE outgain;
+  virtual void filterout (float * smp) { };
+  virtual void setfreq (float frequency) {};
+  virtual void setfreq_and_q (float frequency, float q_) { };
+  virtual void setq (float q_) { };
+  virtual void setgain (float dBgain) {};
+  float outgain;
 private:
 };
 

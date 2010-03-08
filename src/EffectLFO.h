@@ -25,9 +25,7 @@
 
 #ifndef EFFECT_LFO_H
 #define EFFECT_LFO_H
-
 #include "global.h"
-#define REALTYPE float
 
 
 class EffectLFO
@@ -35,20 +33,20 @@ class EffectLFO
 public:
   EffectLFO ();
   ~EffectLFO ();
-  void effectlfoout (REALTYPE * outl, REALTYPE * outr);
+  void effectlfoout (float * outl, float * outr);
   void updateparams ();
   int Pfreq;
   int Prandomness;
   int PLFOtype;
   int Pstereo;	//"64"=0
 private:
-    REALTYPE getlfoshape (REALTYPE x);
+    float getlfoshape (float x);
 
-  REALTYPE xl, xr;
-  REALTYPE incx;
-  REALTYPE ampl1, ampl2, ampr1, ampr2;	//necesar pentru "randomness"
-  REALTYPE lfointensity;
-  REALTYPE lfornd;
+  float xl, xr;
+  float incx;
+  float ampl1, ampl2, ampr1, ampr2;	//necesar pentru "randomness"
+  float lfointensity;
+  float lfornd;
   int lfotype;
 };
 

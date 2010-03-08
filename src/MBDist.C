@@ -33,7 +33,7 @@
 
 
 
-MBDist::MBDist (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+MBDist::MBDist (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -107,12 +107,12 @@ MBDist::cleanup ()
  * Effect output
  */
 void
-MBDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
+MBDist::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE l, r, lout, rout;
+  float l, r, lout, rout;
 
-  REALTYPE inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
+  float inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
   if (Pnegate != 0)
     inputvol *= -1.0f;
 
@@ -162,7 +162,7 @@ if (Pstereo)
   if (!Pstereo) memcpy(efxoutr, efxoutl, sizeof(float)* PERIOD);    
  
 
-  REALTYPE level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+  float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
   for (i = 0; i < PERIOD; i++)
     {

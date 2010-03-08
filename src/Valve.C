@@ -29,7 +29,7 @@
 
 
 
-Valve::Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Valve::Valve (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -101,7 +101,7 @@ Valve::cleanup ()
  */
 
 void
-Valve::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
+Valve::applyfilters (float * efxoutl, float * efxoutr)
 {
   lpfl->filterout (efxoutl);
   hpfl->filterout (efxoutl);
@@ -131,12 +131,12 @@ return(0.0);
  * Effect output
  */
 void
-Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Valve::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE l, r, lout, rout, fx;
+  float l, r, lout, rout, fx;
 
-  REALTYPE inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
+  float inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
   if (Pnegate != 0)
     inputvol *= -1.0f;
 
@@ -231,7 +231,7 @@ Valve::out (REALTYPE * smpsl, REALTYPE * smpsr)
   if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
 
 
-  REALTYPE level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+  float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -288,7 +288,7 @@ void
 Valve::setlpf (int value)
 {
   Plpf = value;
-  REALTYPE fr = (float)Plpf;
+  float fr = (float)Plpf;
 
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
@@ -298,7 +298,7 @@ void
 Valve::sethpf (int value)
 {
   Phpf = value;
-  REALTYPE fr = (float)Phpf;
+  float fr = (float)Phpf;
 
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);

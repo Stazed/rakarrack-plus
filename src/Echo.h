@@ -28,14 +28,13 @@
 #define ECHO_H
 
 #include "global.h"
-#define  ATTACK  0.175f  //crossover time for reverse delay
-#define  MAX_DELAY 2	// Number of Seconds
+
 class Echo
 {
 public:
-  Echo (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Echo (float * efxoutl_, float * efxoutr_);
   ~Echo ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -44,12 +43,12 @@ public:
   void setdryonly ();
   int Ppreset;
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE volume;
+  float volume;
 
-  REALTYPE outvolume;
+  float outvolume;
 
 private:
   //Parametrii
@@ -72,14 +71,14 @@ private:
   void setreverse (int Preverse);
 
   //Parametrii reali
-  REALTYPE panning, lrcross, fb, hidamp, reverse;
+  float panning, lrcross, fb, hidamp, reverse;
   int dl, dr, delay, lrdelay;
 
   void initdelays ();
-  REALTYPE *ldelay, *rdelay;
-  REALTYPE oldl, oldr;		//pt. lpf
+  float *ldelay, *rdelay;
+  float oldl, oldr;		//pt. lpf
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
-  REALTYPE  Srate_Attack_Coeff;
+  float  Srate_Attack_Coeff;
 };
 
 

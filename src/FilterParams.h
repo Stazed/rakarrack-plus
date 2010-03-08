@@ -29,15 +29,6 @@
 
 #include "global.h"
 
-
-#define FF_MAX_VOWELS 6
-#define FF_MAX_FORMANTS 12
-#define FF_MAX_SEQUENCE 8
-#define MAX_FILTER_STAGES 5
-
-
-
-
 class FilterParams
 {
 public:
@@ -48,10 +39,10 @@ public:
 
   void getfromFilterParams (FilterParams * pars);
 
-  REALTYPE getfreq ();
-  REALTYPE getq ();
-  REALTYPE getfreqtracking (REALTYPE notefreq);
-  REALTYPE getgain ();
+  float getfreq ();
+  float getq ();
+  float getfreqtracking (float notefreq);
+  float getgain ();
 
   unsigned char Pcategory;	//Filter category (Analog/Formant/StVar)
   unsigned char Ptype;		// Filter type  (for analog lpf,hpf,bpf..)
@@ -84,16 +75,16 @@ public:
     unsigned char nvowel;	//the vowel from the position
   } Psequence[FF_MAX_SEQUENCE];
 
-  REALTYPE getcenterfreq ();
-  REALTYPE getoctavesfreq ();
-  REALTYPE getfreqpos (REALTYPE freq);
-  REALTYPE getfreqx (REALTYPE x);
+  float getcenterfreq ();
+  float getoctavesfreq ();
+  float getfreqpos (float freq);
+  float getfreqx (float x);
 
-  void formantfilterH (int nvowel, int nfreqs, REALTYPE * freqs);	//used by UI
+  void formantfilterH (int nvowel, int nfreqs, float * freqs);	//used by UI
 
-  REALTYPE getformantfreq (unsigned char freq);
-  REALTYPE getformantamp (unsigned char amp);
-  REALTYPE getformantq (unsigned char q);
+  float getformantfreq (unsigned char freq);
+  float getformantamp (unsigned char amp);
+  float getformantq (unsigned char q);
 
   bool changed;
 

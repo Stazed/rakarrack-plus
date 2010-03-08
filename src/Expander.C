@@ -28,7 +28,7 @@
 #include "Expander.h"
 
 
-Expander::Expander (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Expander::Expander (float * efxoutl_, float * efxoutr_)
 {
 
   efxoutl = efxoutl_;
@@ -77,7 +77,7 @@ void
 Expander::setlpf (int value)
 {
   Plpf = value;
-  REALTYPE fr = (float)Plpf;
+  float fr = (float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
@@ -86,7 +86,7 @@ void
 Expander::sethpf (int value)
 {
   Phpf = value;
-  REALTYPE fr = (float)Phpf;
+  float fr = (float)Phpf;
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
 };

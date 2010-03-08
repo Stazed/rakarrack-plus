@@ -31,9 +31,9 @@
 class RyanWah
 {
 public:
-  RyanWah (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  RyanWah (float * efxoutl_, float * efxoutr_);
   ~RyanWah ();
-  void out (REALTYPE * smpsl, REALTYPE * smpsr);
+  void out (float * smpsl, float * smpsr);
 
   void setpreset (int npreset);
   void changepar (int npar, int value);
@@ -44,10 +44,10 @@ public:
 
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float *efxoutl;
+  float *efxoutr;
+  float outvolume;
+  float volume;
 
 
 private:
@@ -70,12 +70,12 @@ private:
 
   //Valorile interne
 
-  REALTYPE rpanning, lpanning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, minfreq;
+  float rpanning, lpanning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, minfreq;
   unsigned char Ftype;
   unsigned char Fstages;
   class SVFilter *filterl, *filterr;
 
-  REALTYPE ms1;	//mean squares
+  float ms1;	//mean squares
 
 
 

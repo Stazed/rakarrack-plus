@@ -33,26 +33,26 @@
 class MBDist
 {
 public:
-  MBDist (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  MBDist (float * efxoutl_, float * efxoutr_);
   ~MBDist ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE *lowl;
-  REALTYPE *lowr;
-  REALTYPE *midl;
-  REALTYPE *midr;
-  REALTYPE *highl;
-  REALTYPE *highr;
+  float *efxoutl;
+  float *efxoutr;
+  float *lowl;
+  float *lowr;
+  float *midl;
+  float *midr;
+  float *highl;
+  float *highr;
   
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float outvolume;
+  float volume;
 
 private:
 
@@ -85,7 +85,7 @@ private:
   void setCross2 (int value);
 
   //Parametrii reali
-  REALTYPE panning, lrcross;
+  float panning, lrcross;
   float volL,volM,volH;
   AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
   AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;

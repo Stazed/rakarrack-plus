@@ -33,7 +33,7 @@
 
 
 
-Shuffle::Shuffle (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Shuffle::Shuffle (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -86,7 +86,7 @@ Shuffle::cleanup ()
  * Effect output
  */
 void
-Shuffle::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Shuffle::out (float * smpsl, float * smpsr)
 {
   int i;
  

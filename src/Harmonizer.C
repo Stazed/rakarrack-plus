@@ -86,7 +86,7 @@ Harmonizer::cleanup ()
 
 
 void
-Harmonizer::applyfilters (REALTYPE * efxoutl)
+Harmonizer::applyfilters (float * efxoutl)
 {
   pl->filterout (efxoutl);
 };

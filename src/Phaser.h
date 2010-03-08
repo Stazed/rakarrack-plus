@@ -27,24 +27,23 @@
 #include "global.h"
 #include "EffectLFO.h"
 
-#define MAX_PHASER_STAGES 12
 class Phaser
 {
 public:
-  Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Phaser (float * efxoutl_, float * efxoutr_);
   ~Phaser ();
-  void out (REALTYPE * smpsl, REALTYPE * smpsr);
+  void out (float * smpsl, float * smpsr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
   void setdryonly ();
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float outvolume;
+  float volume;
 
 
 
@@ -71,9 +70,9 @@ private:
   void setphase (int Pphase);
 
   //Valorile interne
-  REALTYPE panning, fb, depth, lrcross, fbl, fbr, phase;
-  REALTYPE *oldl, *oldr;
-  REALTYPE oldlgain, oldrgain;
+  float panning, fb, depth, lrcross, fbl, fbr, phase;
+  float *oldl, *oldr;
+  float oldlgain, oldrgain;
 };
 
 #endif

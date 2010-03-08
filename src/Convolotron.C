@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Convolotron.h"
 
-Convolotron::Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Convolotron::Convolotron (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -75,7 +75,7 @@ Convolotron::cleanup ()
  * Effect output
  */
 void
-Convolotron::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Convolotron::out (float * smpsl, float * smpsr)
 {
   int i, j, xindex, verbindex;
   float l,lyn;

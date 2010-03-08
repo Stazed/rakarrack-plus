@@ -26,7 +26,7 @@
 
 
 
-Exciter::Exciter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Exciter::Exciter (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -70,7 +70,7 @@ Exciter::cleanup ()
  * Effect output
  */
 void
-Exciter::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Exciter::out (float * smpsl, float * smpsr)
 {
 harm->harm_out(smpsl,smpsr);
 };

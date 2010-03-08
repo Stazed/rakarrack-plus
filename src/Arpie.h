@@ -26,16 +26,13 @@
 #define ARPIE_H
 
 #include "global.h"
-#define  ATTACK  0.175f  //crossover time for reverse delay
-#define  MAX_DELAY 2	// Number of Seconds
-#define  MAXHARMS  8    // max number of harmonics available
 
 class Arpie
 {
 public:
-  Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Arpie (float * efxoutl_, float * efxoutr_);
   ~Arpie ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -44,12 +41,12 @@ public:
   void setdryonly ();
   int Ppreset;
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE volume;
+  float volume;
 
-  REALTYPE outvolume;
+  float outvolume;
 
 private:
   //Parametrii
@@ -76,15 +73,15 @@ private:
   void setpattern (int Ppattern);
 
   //Parametrii reali
-  REALTYPE panning, lrcross, fb, hidamp, reverse;
+  float panning, lrcross, fb, hidamp, reverse;
   int dl, dr, delay, lrdelay;
 
   void initdelays ();
-  REALTYPE *ldelay, *rdelay;
+  float *ldelay, *rdelay;
   int *pattern;
-  REALTYPE oldl, oldr;		//pt. lpf
+  float oldl, oldr;		//pt. lpf
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade, harmonic, envcnt, invattack;
-  REALTYPE  Srate_Attack_Coeff, envattack, envswell;
+  float  Srate_Attack_Coeff, envattack, envswell;
 };
 
 

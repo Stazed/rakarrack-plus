@@ -28,39 +28,29 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
-//Crunch waveshaping constants
-#define Thi		0.67f			//High threshold for limiting onset
-#define Tlo		-0.65f			//Low threshold for limiting onset
-#define Tlc		-0.6139445f		//Tlo + sqrt(Tlo/500)
-#define Thc		0.6365834f	        //Thi - sqrt(Thi/600)
-#define CRUNCH_GAIN	100.0f			//Typical voltage gain for most OD stompboxes
-#define DIV_TLC_CONST   0.002f			// 1/300
-#define DIV_THC_CONST	0.0016666f		// 1/600 (approximately)
-//End waveshaping constants
-
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
-void waveshapesmps (int n, REALTYPE * smps, int type,
+void waveshapesmps (int n, float * smps, int type,
 		    int drive, int eff);
 
 class Distorsion
 {
 public:
-  Distorsion (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Distorsion (float * efxoutl_, float * efxoutr_);
   ~Distorsion ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
-  void applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr);
+  void applyfilters (float * efxoutl, float * efxoutr);
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE *octoutl;
-  REALTYPE *octoutr;
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float *efxoutl;
+  float *efxoutr;
+  float *octoutl;
+  float *octoutr;
+  float outvolume;
+  float volume;
 
 private:
 
@@ -87,7 +77,7 @@ private:
   void sethpf (int Phpf);
 
   //Parametrii reali
-  REALTYPE panning, lrcross, octave_memoryl, togglel, octave_memoryr,toggler,octmix;
+  float panning, lrcross, octave_memoryl, togglel, octave_memoryr,toggler,octmix;
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
 
 };

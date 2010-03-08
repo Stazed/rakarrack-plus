@@ -26,7 +26,7 @@
 #include "RyanWah.h"
 #include <stdio.h>
 
-RyanWah::RyanWah (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -64,11 +64,11 @@ RyanWah::~RyanWah ()
  * Apply the effect
  */
 void
-RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
+RyanWah::out (float * smpsl, float * smpsr)
 {
   int i;
 
-  REALTYPE lfol, lfor;
+  float lfol, lfor;
   lfo.effectlfoout (&lfol, &lfor);
   lfol *= depth * 5.0f;
   lfor *= depth * 5.0f;
@@ -78,7 +78,7 @@ RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
       efxoutl[i] = smpsl[i];
       efxoutr[i] = smpsr[i];
 
-      REALTYPE x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
+      float x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
       ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
       
       //oldfbias -= 0.001 * oldfbias2;
@@ -88,11 +88,11 @@ RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
     };
 
 
-  REALTYPE rms = ms1 * ampsns + oldfbias2;
+  float rms = ms1 * ampsns + oldfbias2;
   if(rms>1.0f) rms = 1.0f;
 
-   REALTYPE frl = minfreq + maxfreq*(lfol + rms);
-   REALTYPE frr = minfreq + maxfreq*(lfor + rms);
+   float frl = minfreq + maxfreq*(lfol + rms);
+   float frr = minfreq + maxfreq*(lfor + rms);
 
   filterl->setfreq_and_q (frl, q);
   filterr->setfreq_and_q (frr, q);

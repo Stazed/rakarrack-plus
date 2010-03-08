@@ -31,7 +31,7 @@
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
  */
 
-NewDist::NewDist (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+NewDist::NewDist (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -141,7 +141,7 @@ NewDist::cleanup ()
  */
 
 void
-NewDist::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
+NewDist::applyfilters (float * efxoutl, float * efxoutr)
 {
   lpfl->filterout(efxoutl);
   hpfl->filterout(efxoutl);
@@ -155,10 +155,10 @@ NewDist::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
  * Effect output
  */
 void
-NewDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
+NewDist::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE l, r, lout, rout;
+  float l, r, lout, rout;
   
   float inputvol = .5f;
   
@@ -220,7 +220,7 @@ NewDist::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
 
    
- REALTYPE level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+ float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -286,7 +286,7 @@ void
 NewDist::setlpf (int value)
 {
   Plpf = value;
-  REALTYPE fr =(float)Plpf;
+  float fr =(float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
@@ -295,7 +295,7 @@ void
 NewDist::sethpf (int value)
 {
   Phpf = value;
-  REALTYPE fr = (float)Phpf;
+  float fr = (float)Phpf;
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
 };
@@ -305,7 +305,7 @@ void
 NewDist::setoctave (int Poctave)
 {
   this->Poctave = Poctave;
-  octmix = (REALTYPE) (Poctave) / 127.0f;
+  octmix = (float) (Poctave) / 127.0f;
 };
 
 

@@ -31,21 +31,21 @@
 class Valve
 {
 public:
-  Valve (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Valve (float * efxoutl_, float * efxoutr_);
   ~Valve ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   float Wshape(float x);
   void cleanup ();
-  void applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr);
+  void applyfilters (float * efxoutl, float * efxoutr);
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float *efxoutl;
+  float *efxoutr;
+  float outvolume;
+  float volume;
 
 private:
 
@@ -72,7 +72,7 @@ private:
   void sethpf (int Phpf);
   void setpresence(int value);
   //Parametrii reali
-  REALTYPE panning, lrcross, q, dist, otml,otmr, itml, itmr, factor;
+  float panning, lrcross, q, dist, otml,otmr, itml, itmr, factor;
   float rm[10];
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
   class HarmEnhancer *harm;

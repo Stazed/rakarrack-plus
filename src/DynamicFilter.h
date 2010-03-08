@@ -31,9 +31,9 @@
 class DynamicFilter
 {
 public:
-  DynamicFilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  DynamicFilter (float * efxoutl_, float * efxoutr_);
   ~DynamicFilter ();
-  void out (REALTYPE * smpsl, REALTYPE * smpsr);
+  void out (float * smpsl, float * smpsr);
 
   void setpreset (int npreset);
   void changepar (int npar, int value);
@@ -44,10 +44,10 @@ public:
 
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float *efxoutl;
+  float *efxoutr;
+  float outvolume;
+  float volume;
 
 
 
@@ -72,11 +72,11 @@ private:
 
   //Valorile interne
 
-  REALTYPE panning, depth, ampsns, ampsmooth;
+  float panning, depth, ampsns, ampsmooth;
 
   class Filter *filterl, *filterr;
 
-  REALTYPE ms1, ms2, ms3, ms4;	//mean squares
+  float ms1, ms2, ms3, ms4;	//mean squares
 
   class FilterParams *filterpars;
 

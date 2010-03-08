@@ -30,9 +30,9 @@
 class Ring
 {
 public:
-  Ring (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Ring (float * efxoutl_, float * efxoutr_);
   ~Ring ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -41,11 +41,11 @@ public:
   void Create_Tables();
   
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE volume;
-  REALTYPE outvolume;
+  float volume;
+  float outvolume;
   int Pafreq;
   int Pfreq;
 private:
@@ -70,7 +70,7 @@ private:
 
   //Parametrii reali
   unsigned int offset;
-  REALTYPE panning, lrcross; 
+  float panning, lrcross; 
   float *sin_tbl, *tri_tbl, *saw_tbl, *squ_tbl;
   float sin,tri,saw,squ,scale,depth, idepth;
 

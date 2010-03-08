@@ -27,7 +27,7 @@
 #include <math.h>
 #include "MusicDelay.h"
 
-MusicDelay::MusicDelay (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+MusicDelay::MusicDelay (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -121,14 +121,14 @@ MusicDelay::initdelays ()
     delete[]ldelay1;
   if (rdelay1 != NULL)
     delete[]rdelay1;
-  ldelay1 = new REALTYPE[dl1];
-  rdelay1 = new REALTYPE[dr1];
+  ldelay1 = new float[dl1];
+  rdelay1 = new float[dr1];
   if (ldelay2 != NULL)
     delete[]ldelay2;
   if (rdelay2 != NULL)
     delete[]rdelay2;
-  ldelay2 = new REALTYPE[dl2];
-  rdelay2 = new REALTYPE[dr2];
+  ldelay2 = new float[dl2];
+  rdelay2 = new float[dr2];
 
 
 
@@ -139,10 +139,10 @@ MusicDelay::initdelays ()
  * Effect output
  */
 void
-MusicDelay::out (REALTYPE * smpsl, REALTYPE * smpsr)
+MusicDelay::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE l1, r1, ldl1, rdl1, l2, r2, ldl2, rdl2;
+  float l1, r1, ldl1, rdl1, l2, r2, ldl2, rdl2;
 
   for (i = 0; i < PERIOD; i++)
     {

@@ -33,28 +33,28 @@
 class MBVvol
 {
 public:
-  MBVvol (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  MBVvol (float * efxoutl_, float * efxoutr_);
   ~MBVvol ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE *lowl;
-  REALTYPE *lowr;
-  REALTYPE *midll;
-  REALTYPE *midlr;
-  REALTYPE *midhl;
-  REALTYPE *midhr;
-  REALTYPE *highl;
-  REALTYPE *highr;
+  float *efxoutl;
+  float *efxoutr;
+  float *lowl;
+  float *lowr;
+  float *midll;
+  float *midlr;
+  float *midhl;
+  float *midhr;
+  float *highl;
+  float *highr;
   
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float outvolume;
+  float volume;
 
 private:
 

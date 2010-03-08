@@ -25,7 +25,7 @@
 #include "AnalogFilter.h"
 
 
-AnalogFilter::AnalogFilter (unsigned char Ftype, REALTYPE Ffreq, REALTYPE Fq,
+AnalogFilter::AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,
 			    unsigned char Fstages)
 {
   stages = Fstages;
@@ -78,12 +78,12 @@ AnalogFilter::cleanup ()
 void
 AnalogFilter::computefiltercoefs ()
 {
-  REALTYPE tmp;
-  REALTYPE omega, sn, cs, alpha, beta;
+  float tmp;
+  float omega, sn, cs, alpha, beta;
   int zerocoefs = 0;		//this is used if the freq is too high
 
   //do not allow frequencies bigger than samplerate/2
-  REALTYPE freq = this->freq;
+  float freq = this->freq;
   if (freq > (SAMPLE_RATE / 2 - 500.0))
     {
       freq = (float)SAMPLE_RATE * .5f - 500.0f;
@@ -94,7 +94,7 @@ AnalogFilter::computefiltercoefs ()
   //do not allow bogus Q
   if (q < 0.0)
     q = 0.0;
-  REALTYPE tmpq, tmpgain;
+  float tmpq, tmpgain;
   if (stages == 0)
     {
       tmpq = q;
@@ -332,11 +332,11 @@ AnalogFilter::computefiltercoefs ()
 
 
 void
-AnalogFilter::setfreq (REALTYPE frequency)
+AnalogFilter::setfreq (float frequency)
 {
   if (frequency < 0.1)
     frequency = 0.1f;
-  REALTYPE rap = freq / frequency;
+  float rap = freq / frequency;
   if (rap < 1.0)
     rap = 1.0f / rap;
 
@@ -368,14 +368,14 @@ AnalogFilter::setfreq (REALTYPE frequency)
 };
 
 void
-AnalogFilter::setfreq_and_q (REALTYPE frequency, REALTYPE q_)
+AnalogFilter::setfreq_and_q (float frequency, float q_)
 {
   q = q_;
   setfreq (frequency);
 };
 
 void
-AnalogFilter::setq (REALTYPE q_)
+AnalogFilter::setq (float q_)
 {
   q = q_;
   computefiltercoefs ();
@@ -389,7 +389,7 @@ AnalogFilter::settype (int type_)
 };
 
 void
-AnalogFilter::setgain (REALTYPE dBgain)
+AnalogFilter::setgain (float dBgain)
 {
   gain = dB2rap(dBgain);
   computefiltercoefs ();
@@ -406,11 +406,11 @@ AnalogFilter::setstages (int stages_)
 };
 
 void
-AnalogFilter::singlefilterout (REALTYPE * smp, fstage & x, fstage & y,
-			       REALTYPE * c, REALTYPE * d)
+AnalogFilter::singlefilterout (float * smp, fstage & x, fstage & y,
+			       float * c, float * d)
 {
   int i;
-  REALTYPE y0;
+  float y0;
   if (order == 1)
     {				//First order filter
       for (i = 0; i < PERIOD; i++)
@@ -441,13 +441,13 @@ AnalogFilter::singlefilterout (REALTYPE * smp, fstage & x, fstage & y,
 };
 
 void
-AnalogFilter::filterout (REALTYPE * smp)
+AnalogFilter::filterout (float * smp)
 {
-  REALTYPE *ismp = NULL;	//used if it needs interpolation
+  float *ismp = NULL;	//used if it needs interpolation
   int i;
   if (needsinterpolation != 0)
     {
-      ismp = new REALTYPE[PERIOD];
+      ismp = new float[PERIOD];
       for (i = 0; i < PERIOD; i++)
 	ismp[i] = smp[i];
       for (i = 0; i < stages + 1; i++)
@@ -461,7 +461,7 @@ AnalogFilter::filterout (REALTYPE * smp)
     {
       for (i = 0; i < PERIOD; i++)
 	{
-	  REALTYPE x = (float) i / (float) PERIOD;
+	  float x = (float) i / (float) PERIOD;
 	  smp[i] = ismp[i] * (1.0f - x) + smp[i] * x;
 	};
       delete (ismp);
@@ -470,18 +470,18 @@ AnalogFilter::filterout (REALTYPE * smp)
 
 };
 
-REALTYPE AnalogFilter::H (REALTYPE freq)
+float AnalogFilter::H (float freq)
 {
-  REALTYPE
+  float
     fr = freq / (float)SAMPLE_RATE * PI * 2.0f;
-  REALTYPE
+  float
     x = c[0], y = 0.0;
   for (int n = 1; n < 3; n++)
     {
       x += cosf ((float)n * fr) * c[n];
       y -= sinf ((float)n * fr) * c[n];
     };
-  REALTYPE
+  float
     h = x * x + y * y;
   x = 1.0;
   y = 0.0;

@@ -29,16 +29,12 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
-#define REALTYPE float
-#define REV_COMBS 8
-#define REV_APS 4
-
 class Reverb
 {
 public:
-  Reverb (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Reverb (float * efxoutl_, float * efxoutr_);
   ~Reverb ();
-  void out (REALTYPE * smps_l, REALTYPE * smps_r);
+  void out (float * smps_l, float * smps_r);
   void cleanup ();
 
   void setpreset (int npreset);
@@ -46,12 +42,12 @@ public:
   int getpar (int npar);
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su
+  float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su
 
-  REALTYPE volume;
+  float volume;
 
 
 
@@ -107,33 +103,33 @@ private:
   void settype (int Ptype);
   void setroomsize (int Proomsize);
 
-  REALTYPE pan, erbalance;
+  float pan, erbalance;
   //Parametrii 2  
   int lohidamptype;		//0=disable,1=highdamp(lowpass),2=lowdamp(highpass)
   int idelaylen, rdelaylen;
   int idelayk;
-  REALTYPE lohifb, idelayfb, roomsize, rs;	//rs is used to "normalise" the volume according to the roomsize
-  REALTYPE rs_coeff;
+  float lohifb, idelayfb, roomsize, rs;	//rs is used to "normalise" the volume according to the roomsize
+  float rs_coeff;
   int comblen[REV_COMBS * 2];
   int aplen[REV_APS * 2];
 
   //Valorile interne
 
-  REALTYPE *comb[REV_COMBS * 2];
+  float *comb[REV_COMBS * 2];
 
   int combk[REV_COMBS * 2];
-  REALTYPE combfb[REV_COMBS * 2];	//feedback-ul fiecarui filtru "comb"
-  REALTYPE lpcomb[REV_COMBS * 2];	//pentru Filtrul LowPass
+  float combfb[REV_COMBS * 2];	//feedback-ul fiecarui filtru "comb"
+  float lpcomb[REV_COMBS * 2];	//pentru Filtrul LowPass
 
-  REALTYPE *ap[REV_APS * 2];
+  float *ap[REV_APS * 2];
 
   int apk[REV_APS * 2];
 
-  REALTYPE *idelay;
+  float *idelay;
   class AnalogFilter *lpf, *hpf;	//filters
-  REALTYPE *inputbuf;
+  float *inputbuf;
 
-  void processmono (int ch, REALTYPE * output);
+  void processmono (int ch, float * output);
 };
 
 

@@ -27,7 +27,7 @@
 #include <stdio.h>
 #define PHASER_LFO_SHAPE 2
 
-Phaser::Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Phaser::Phaser (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -53,10 +53,10 @@ Phaser::~Phaser ()
  * Effect output
  */
 void
-Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Phaser::out (float * smpsl, float * smpsr)
 {
   int i, j;
-  REALTYPE lfol, lfor, lgain, rgain, tmp;
+  float lfol, lfor, lgain, rgain, tmp;
 
   lfo.effectlfoout (&lfol, &lfor);
   lgain = lfol;
@@ -81,12 +81,12 @@ Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-      REALTYPE x = (REALTYPE) i / (float)PERIOD;
-      REALTYPE x1 = 1.0f - x;
-      REALTYPE gl = lgain * x + oldlgain * x1;
-      REALTYPE gr = rgain * x + oldrgain * x1;
-      REALTYPE inl = smpsl[i] * panning + fbl;
-      REALTYPE inr = smpsr[i] * (1.0f - panning) + fbr;
+      float x = (float) i / (float)PERIOD;
+      float x1 = 1.0f - x;
+      float gl = lgain * x + oldlgain * x1;
+      float gr = rgain * x + oldrgain * x1;
+      float inl = smpsl[i] * panning + fbl;
+      float inr = smpsr[i] * (1.0f - panning) + fbr;
 
       //Left channel
       for (j = 0; j < Pstages * 2; j++)
@@ -103,8 +103,8 @@ Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
 	  inr = tmp - (gr * oldr[j]);
 	};
       //Left/Right crossing
-      REALTYPE l = inl;
-      REALTYPE r = inr;
+      float l = inl;
+      float r = inr;
       inl = l * (1.0f - lrcross) + r * lrcross;
       inr = r * (1.0f - lrcross) + l * lrcross;
 
@@ -193,8 +193,8 @@ Phaser::setstages (int Pstages)
   if (Pstages >= MAX_PHASER_STAGES)
     Pstages = MAX_PHASER_STAGES - 1;
   this->Pstages = Pstages;
-  oldl = new REALTYPE[Pstages * 2];
-  oldr = new REALTYPE[Pstages * 2];
+  oldl = new float[Pstages * 2];
+  oldr = new float[Pstages * 2];
   cleanup ();
 };
 
