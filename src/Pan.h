@@ -60,7 +60,7 @@ private:
   void setpanning (unsigned char Ppanning);
   void setextra (unsigned char Pdepth);
 
-
+  float dvalue;
   float panning, mul;
   float lfol, lfor;
   float ll, lr;

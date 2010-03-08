@@ -2896,17 +2896,17 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
           xywh {52 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
-        Fl_Check_Button pan_autopan {
-          label AutoPan
-          user_data 2
-          callback {rkr->efx_Pan->changepar(7,(unsigned char)o->value())}
-          xywh {38 256 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
         Fl_Value_Slider pan_pan {
           label Pan
           callback {rkr->efx_Pan->changepar(1,(unsigned char)(o->value()+64));}
-          xywh {52 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {52 256 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Check_Button pan_autopan {
+          label AutoPan
+          user_data 2
+          callback {rkr->efx_Pan->changepar(7,(unsigned char)o->value())} selected
+          xywh {38 268 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider pan_freq {
           label Tempo
@@ -6329,7 +6329,7 @@ GMM->redraw();}
       }
       Fl_Button {} {
         label LICENSE
-        callback {show_lic();} selected
+        callback {show_lic();}
         xywh {48 215 92 16} labelsize 10
       }
       Fl_Button {} {

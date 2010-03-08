@@ -70,12 +70,13 @@ Pan::out (float *smpsl, float *smpsr)
 
   if (PextraON)
     {
-
+   
       for (i = 0; i < PERIOD; i++)
 
 	{
-
-	  avg = (smpsl[i] + smpsr[i]) * .5f;
+  
+          
+       	  avg = (smpsl[i] + smpsr[i]) * .5f;
 	  ldiff = smpsl[i] - avg;
 	  rdiff = smpsr[i] - avg;
 
@@ -84,6 +85,11 @@ Pan::out (float *smpsl, float *smpsr)
 
 	  tmp = avg + rdiff * mul;
 	  smpsr[i] = tmp;
+
+          smpsl[i] *= cos(dvalue);
+          smpsr[i] *= sin(dvalue);
+
+
 
 	}
 
@@ -136,6 +142,9 @@ Pan::setpanning (unsigned char Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + .5f)/ 127.0f;
+  dvalue= panning*PI/2.0f;
+
+
 };
 
 

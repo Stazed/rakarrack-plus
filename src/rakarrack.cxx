@@ -2670,18 +2670,18 @@ void RKRGUI::cb_pan_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_WD_i(o,v);
 }
 
-void RKRGUI::cb_pan_autopan_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(7,(unsigned char)o->value());
-}
-void RKRGUI::cb_pan_autopan(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_autopan_i(o,v);
-}
-
 void RKRGUI::cb_pan_pan_i(SliderW* o, void*) {
   rkr->efx_Pan->changepar(1,(unsigned char)(o->value()+64));
 }
 void RKRGUI::cb_pan_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_pan_i(o,v);
+}
+
+void RKRGUI::cb_pan_autopan_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Pan->changepar(7,(unsigned char)o->value());
+}
+void RKRGUI::cb_pan_autopan(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_autopan_i(o,v);
 }
 
 void RKRGUI::cb_pan_freq_i(SliderW* o, void*) {
@@ -8379,13 +8379,7 @@ R average.");
         pan_WD->align(FL_ALIGN_LEFT);
         pan_WD->when(FL_WHEN_CHANGED);
       } // SliderW* pan_WD
-      { pan_autopan = new Fl_Check_Button(38, 256, 15, 15, "AutoPan");
-        pan_autopan->down_box(FL_BORDER_BOX);
-        pan_autopan->labelsize(10);
-        pan_autopan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
-      } // Fl_Check_Button* pan_autopan
-      { pan_pan = new SliderW(52, 273, 100, 10, "Pan");
+      { pan_pan = new SliderW(52, 256, 100, 10, "Pan");
         pan_pan->type(5);
         pan_pan->box(FL_FLAT_BOX);
         pan_pan->color((Fl_Color)178);
@@ -8402,6 +8396,12 @@ R average.");
         pan_pan->align(FL_ALIGN_LEFT);
         pan_pan->when(FL_WHEN_CHANGED);
       } // SliderW* pan_pan
+      { pan_autopan = new Fl_Check_Button(38, 268, 15, 15, "AutoPan");
+        pan_autopan->down_box(FL_BORDER_BOX);
+        pan_autopan->labelsize(10);
+        pan_autopan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
+      } // Fl_Check_Button* pan_autopan
       { pan_freq = new SliderW(52, 285, 100, 10, "Tempo");
         pan_freq->type(5);
         pan_freq->box(FL_FLAT_BOX);
