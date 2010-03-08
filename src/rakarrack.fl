@@ -886,18 +886,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open selected
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1327 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {339 135 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -1112,7 +1110,7 @@ if (nt)
 if (Analyzer_ON)
 { 
  at++;
- if(at==3)
+ if(at==2)
    { Analy->redraw();
      at=0; 
    }
@@ -6296,7 +6294,7 @@ GMM->redraw();}
     Fl_Window AboutWin {
       label {About Rakarrack}
       callback {AboutWin->hide();}
-      xywh {846 117 375 235} type Double color 45 hide
+      xywh {832 103 375 235} type Double color 36 hide
     } {
       Fl_Box AB_Title {
         label Rakarrack
@@ -6315,29 +6313,33 @@ GMM->redraw();}
       }
       Fl_Box AB_Authors {
         label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>}
-        xywh {89 96 192 32} labelfont 1 labelsize 8 labelcolor 7 align 128
+        xywh {47 96 272 27} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
       Fl_Box AB_A1 {
-        label {Code of Reverb, Chorus/Flanger, Phaser, Distortion/Overdrive & Echo taked from ZynAddSubFx by Paul Nasca Octavian}
-        xywh {63 130 251 35} labelfont 1 labelsize 8 labelcolor 7 align 128
+        label {Code of some effects and structure based on ZynAddSubFx by Paul Nasca Octavian}
+        xywh {44 125 281 26} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
       Fl_Box AB_A2 {
         label {Code of Tuner taked from tuneit by Mario Lang}
-        xywh {66 166 240 19} labelfont 1 labelsize 8 labelcolor 7
+        xywh {66 172 240 15} labelfont 1 labelsize 8 labelcolor 7
       }
       Fl_Box AB_A3 {
         label {Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfeld}
-        xywh {66 180 244 30} labelfont 1 labelsize 8 labelcolor 7 align 128
+        xywh {84 185 219 24} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
       Fl_Button {} {
         label LICENSE
-        callback {show_lic();}
+        callback {show_lic();} selected
         xywh {48 215 92 16} labelsize 10
       }
       Fl_Button {} {
         label OK
         callback {AboutWin->hide();}
         xywh {276 215 92 16} labelsize 10
+      }
+      Fl_Box AB_A4 {
+        label {Code of some effects based on swh-plugins LADSPA by Steve Harris}
+        xywh {64 151 250 20} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
     }
     code {char tmp[64];

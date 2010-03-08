@@ -28,7 +28,6 @@
 #include "global.h"
 #include "Filter_.h"
 
-#define REALTYPE float
 #define MAX_FILTER_STAGES 5
 
 class AnalogFilter:public Filter_

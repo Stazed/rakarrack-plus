@@ -1104,7 +1104,7 @@ if (nt)
 if (Analyzer_ON)
 { 
  at++;
- if(at==3)
+ if(at==2)
    { Analy->redraw();
      at=0; 
    }
@@ -12912,7 +12912,7 @@ R average.");
     MIDILearn->end();
   } // Fl_Double_Window* MIDILearn
   { AboutWin = new Fl_Double_Window(375, 235, "About Rakarrack");
-    AboutWin->color((Fl_Color)FL_DARK2);
+    AboutWin->color((Fl_Color)36);
     AboutWin->callback((Fl_Callback*)cb_AboutWin, (void*)(this));
     { AB_Title = new Fl_Box(56, 4, 259, 41, "Rakarrack");
       AB_Title->labelfont(1);
@@ -12934,25 +12934,25 @@ R average.");
       AB_url->labelsize(13);
       AB_url->labelcolor((Fl_Color)6);
     } // Fl_Box* AB_url
-    { AB_Authors = new Fl_Box(89, 96, 192, 32, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>");
+    { AB_Authors = new Fl_Box(47, 96, 272, 27, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>");
       AB_Authors->labelfont(1);
       AB_Authors->labelsize(8);
       AB_Authors->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       AB_Authors->align(FL_ALIGN_WRAP);
     } // Fl_Box* AB_Authors
-    { AB_A1 = new Fl_Box(63, 130, 251, 35, "Code of Reverb, Chorus/Flanger, Phaser, Distortion/Overdrive & Echo taked fro\
-m ZynAddSubFx by Paul Nasca Octavian");
+    { AB_A1 = new Fl_Box(44, 125, 281, 26, "Code of some effects and structure based on ZynAddSubFx by Paul Nasca Octavia\
+n");
       AB_A1->labelfont(1);
       AB_A1->labelsize(8);
       AB_A1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       AB_A1->align(FL_ALIGN_WRAP);
     } // Fl_Box* AB_A1
-    { AB_A2 = new Fl_Box(66, 166, 240, 19, "Code of Tuner taked from tuneit by Mario Lang");
+    { AB_A2 = new Fl_Box(66, 172, 240, 15, "Code of Tuner taked from tuneit by Mario Lang");
       AB_A2->labelfont(1);
       AB_A2->labelsize(8);
       AB_A2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Box* AB_A2
-    { AB_A3 = new Fl_Box(66, 180, 244, 30, "Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfe\
+    { AB_A3 = new Fl_Box(84, 185, 219, 24, "Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfe\
 ld");
       AB_A3->labelfont(1);
       AB_A3->labelsize(8);
@@ -12967,6 +12967,12 @@ ld");
       o->labelsize(10);
       o->callback((Fl_Callback*)cb_OK);
     } // Fl_Button* o
+    { AB_A4 = new Fl_Box(64, 151, 250, 20, "Code of some effects based on swh-plugins LADSPA by Steve Harris");
+      AB_A4->labelfont(1);
+      AB_A4->labelsize(8);
+      AB_A4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      AB_A4->align(FL_ALIGN_WRAP);
+    } // Fl_Box* AB_A4
     AboutWin->end();
   } // Fl_Double_Window* AboutWin
   char tmp[64];

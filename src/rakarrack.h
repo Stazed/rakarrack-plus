@@ -2753,6 +2753,7 @@ private:
   void cb_OK_i(Fl_Button*, void*);
   static void cb_OK(Fl_Button*, void*);
 public:
+  Fl_Box *AB_A4;
   RKRGUI(int argc, char**argv,RKR *rkr_);
   void Background_Color_Change(Fl_Color bcolor);
   void Label_Color_Change(Fl_Color bcolor);
