@@ -26,10 +26,6 @@
 
 #include "global.h"
 
-
-#define POLY 8
-
-
 class RecChord
 {
 

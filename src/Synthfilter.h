@@ -32,22 +32,21 @@
 #include "global.h"
 #include "EffectLFO.h"
 
-#define MAX_SFILTER_STAGES 12
 
 class Synthfilter
 {
 public:
-  Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Synthfilter (float * efxoutl_, float * efxoutr_);
   ~Synthfilter ();
-  void out (REALTYPE * smpsl, REALTYPE * smpsr);
+  void out (float * smpsl, float * smpsr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE outvolume;
+  float *efxoutl;
+  float *efxoutr;
+  float outvolume;
 
 private:
   //Phaser parameters
@@ -78,14 +77,14 @@ private:
   void setdepth (int Pdepth);
 
   //Internal Variables
-  REALTYPE distortion, fb, width, env, envdelta, sns, att, rls, fbl, fbr, depth, bandgain;
-  REALTYPE *lyn1, *ryn1, *lx1hp, *ly1hp, *rx1hp, *ry1hp;
-  REALTYPE oldlgain, oldrgain, inv_period;
+  float distortion, fb, width, env, envdelta, sns, att, rls, fbl, fbr, depth, bandgain;
+  float *lyn1, *ryn1, *lx1hp, *ly1hp, *rx1hp, *ry1hp;
+  float oldlgain, oldrgain, inv_period;
   
-  REALTYPE delta;
-  REALTYPE Rmin;	// 2N5457 typical on resistance at Vgs = 0
-  REALTYPE Rmax;	// Resistor parallel to FET
-  REALTYPE C, Clp, Chp;	        // Capacitor
+  float delta;
+  float Rmin;	// 2N5457 typical on resistance at Vgs = 0
+  float Rmax;	// Resistor parallel to FET
+  float C, Clp, Chp;	        // Capacitor
 
 
 };

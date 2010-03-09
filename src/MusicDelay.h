@@ -31,9 +31,9 @@
 class MusicDelay
 {
 public:
-  MusicDelay (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  MusicDelay (float * efxoutl_, float * efxoutr_);
   ~MusicDelay ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -42,12 +42,12 @@ public:
   void setdryonly ();
   int Ppreset;
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE volume;
+  float volume;
 
-  REALTYPE outvolume;
+  float outvolume;
 
 private:
   //Parametrii
@@ -76,12 +76,12 @@ private:
   void settempo (int Ptempo);
 
   //Parametrii reali
-  REALTYPE panning1, panning2, lrcross, fb1, fb2, hidamp;
+  float panning1, panning2, lrcross, fb1, fb2, hidamp;
   int dl1, dr1, dl2, dr2, delay1, delay2, lrdelay;
   float gain1, gain2;
   void initdelays ();
-  REALTYPE *ldelay1, *rdelay1, *ldelay2, *rdelay2;
-  REALTYPE oldl1, oldr1, oldl2, oldr2;	//pt. lpf
+  float *ldelay1, *rdelay1, *ldelay2, *rdelay2;
+  float oldl1, oldr1, oldl2, oldr2;	//pt. lpf
   int kl1, kr1, kl2, kr2;
 };
 

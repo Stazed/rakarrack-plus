@@ -40,17 +40,17 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Synthfilter::Synthfilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Synthfilter::Synthfilter (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  lyn1 = new REALTYPE[MAX_SFILTER_STAGES];
-  ryn1 = new REALTYPE[MAX_SFILTER_STAGES];
-  lx1hp = new REALTYPE[MAX_SFILTER_STAGES]; 
-  rx1hp = new REALTYPE[MAX_SFILTER_STAGES];
-  ly1hp = new REALTYPE[MAX_SFILTER_STAGES]; 
-  ry1hp = new REALTYPE[MAX_SFILTER_STAGES];
+  lyn1 = new float[MAX_SFILTER_STAGES];
+  ryn1 = new float[MAX_SFILTER_STAGES];
+  lx1hp = new float[MAX_SFILTER_STAGES]; 
+  rx1hp = new float[MAX_SFILTER_STAGES];
+  ly1hp = new float[MAX_SFILTER_STAGES]; 
+  ry1hp = new float[MAX_SFILTER_STAGES];
    
   Plpstages = 4;
   Phpstages = 2;
@@ -100,10 +100,10 @@ Synthfilter::~Synthfilter ()
  * Effect output
  */
 void
-Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Synthfilter::out (float * smpsl, float * smpsr)
 {
   int i, j;
-  REALTYPE lfol, lfor, lgain, rgain,rmod, lmod, d;
+  float lfol, lfor, lgain, rgain,rmod, lmod, d;
   lgain = 0.0;
   rgain = 0.0;
   	
@@ -125,16 +125,16 @@ Synthfilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
     lmod*=lmod;
     rmod*=rmod;
 
-      REALTYPE xl = (lmod - oldlgain) * inv_period;
-      REALTYPE xr = (rmod - oldrgain) * inv_period;
-      REALTYPE gl = oldlgain;	// Linear interpolation between LFO samples
-      REALTYPE gr = oldrgain;
+      float xl = (lmod - oldlgain) * inv_period;
+      float xr = (rmod - oldrgain) * inv_period;
+      float gl = oldlgain;	// Linear interpolation between LFO samples
+      float gr = oldrgain;
            
   for (i = 0; i < PERIOD; i++)
     {
 
-      REALTYPE lxn = bandgain*smpsl[i];
-      REALTYPE rxn = bandgain*smpsr[i]; //extra gain
+      float lxn = bandgain*smpsl[i];
+      float rxn = bandgain*smpsr[i]; //extra gain
 
       gl += xl;
       gr += xr;   //linear interpolation of LFO

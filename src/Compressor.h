@@ -30,31 +30,24 @@
 
 #include "global.h"
 
-#define REALTYPE float
-//define LN2                       (0.6931471805599453094172321214581765680755)  //Uncomment for att/rel half-life behavior
-#define LN2                       (1.0f)  //Uncomment for att/rel to behave more like a capacitor.
-//#define LN2                       (1.8378771)  //Approx. ln(2*pi) ~85% charge at attack/release times. 
-#define MUG_CORR_FACT  0.4f
-
-
 
 class Compressor
 {
 
 public:
 
-  Compressor (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Compressor (float * efxoutl_, float * efxoutr_);
   ~Compressor ();
 
-  void out (REALTYPE * smps_l, REALTYPE * smps_r);
+  void out (float * smps_l, float * smps_r);
 
   void Compressor_Change (int np, int value);
   void Compressor_Change_Preset (int npreset);
   int getpar (int npar);
   void cleanup ();
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
 
 
@@ -72,39 +65,39 @@ public:
 
 private:
 
-  REALTYPE rvolume;
-  REALTYPE lvolume;  
-  REALTYPE rvolume_db;
-  REALTYPE lvolume_db; 
-  REALTYPE thres_db;		// threshold
-  REALTYPE knee;
-  REALTYPE thres_mx;
-  REALTYPE kpct;			
-  REALTYPE ratio;			// ratio
-  REALTYPE kratio;			// ratio maximum for knee region
-  REALTYPE eratio;			// dynamic ratio
-  REALTYPE makeup;			// make-up gain
-  REALTYPE makeuplin;
+  float rvolume;
+  float lvolume;  
+  float rvolume_db;
+  float lvolume_db; 
+  float thres_db;		// threshold
+  float knee;
+  float thres_mx;
+  float kpct;			
+  float ratio;			// ratio
+  float kratio;			// ratio maximum for knee region
+  float eratio;			// dynamic ratio
+  float makeup;			// make-up gain
+  float makeuplin;
 
-  REALTYPE outlevel;
-  REALTYPE att;
-  REALTYPE rel;
+  float outlevel;
+  float att;
+  float rel;
   
-  REALTYPE rgain;
-  REALTYPE rgain_old;
+  float rgain;
+  float rgain_old;
 
-  REALTYPE lgain;
-  REALTYPE lgain_old;
+  float lgain;
+  float lgain_old;
 
-  REALTYPE lgain_t;
-  REALTYPE rgain_t;
+  float lgain_t;
+  float rgain_t;
 
-  REALTYPE coeff_kratio;
-  REALTYPE coeff_ratio;
-  REALTYPE coeff_knee;
-  REALTYPE coeff_kk;               
-  REALTYPE lpeak;
-  REALTYPE rpeak;  
+  float coeff_kratio;
+  float coeff_ratio;
+  float coeff_knee;
+  float coeff_kk;               
+  float lpeak;
+  float rpeak;  
 
 };
 

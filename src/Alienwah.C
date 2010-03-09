@@ -26,7 +26,7 @@
 #include "Alienwah.h"
 #include <stdio.h>
 
-Alienwah::Alienwah (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Alienwah::Alienwah (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -56,10 +56,10 @@ Alienwah::~Alienwah ()
  * Apply the effect
  */
 void
-Alienwah::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Alienwah::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE lfol, lfor;
+  float lfol, lfor;
   COMPLEXTYPE clfol, clfor, out, tmp;
 
   lfo.effectlfoout (&lfol, &lfor);
@@ -72,8 +72,8 @@ Alienwah::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-      REALTYPE x = ((REALTYPE) i) / (float)PERIOD;
-      REALTYPE x1 = 1.0f - x;
+      float x = ((float) i) / (float)PERIOD;
+      float x1 = 1.0f - x;
       //left  
       tmp.a = clfol.a * x + oldclfol.a * x1;
       tmp.b = clfol.b * x + oldclfol.b * x1;
@@ -83,7 +83,7 @@ Alienwah::out (REALTYPE * smpsl, REALTYPE * smpsr)
       out.b = tmp.a * oldl[oldk].b + tmp.b * oldl[oldk].a;
       oldl[oldk].a = out.a;
       oldl[oldk].b = out.b;
-      REALTYPE l = out.a * 10.0f * (fb + 0.1f);
+      float l = out.a * 10.0f * (fb + 0.1f);
 
       //right
       tmp.a = clfor.a * x + oldclfor.a * x1;
@@ -94,7 +94,7 @@ Alienwah::out (REALTYPE * smpsl, REALTYPE * smpsr)
       out.b = tmp.a * oldr[oldk].b + tmp.b * oldr[oldk].a;
       oldr[oldk].a = out.a;
       oldr[oldk].b = out.b;
-      REALTYPE r = out.a * 10.0f * (fb + 0.1f);
+      float r = out.a * 10.0f * (fb + 0.1f);
 
 
       if (++oldk >= Pdelay)

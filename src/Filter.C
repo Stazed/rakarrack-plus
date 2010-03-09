@@ -59,30 +59,30 @@ Filter::~Filter ()
 };
 
 void
-Filter::filterout (REALTYPE * smp)
+Filter::filterout (float * smp)
 {
   filter->filterout (smp);
 };
 
 void
-Filter::setfreq (REALTYPE frequency)
+Filter::setfreq (float frequency)
 {
   filter->setfreq (frequency);
 };
 
 void
-Filter::setfreq_and_q (REALTYPE frequency, REALTYPE q_)
+Filter::setfreq_and_q (float frequency, float q_)
 {
   filter->setfreq_and_q (frequency, q_);
 };
 
 void
-Filter::setq (REALTYPE q_)
+Filter::setq (float q_)
 {
   filter->setq (q_);
 };
 
-REALTYPE Filter::getrealfreq (REALTYPE freqpitch)
+float Filter::getrealfreq (float freqpitch)
 {
   if ((category == 0) || (category == 2))
     return (powf (2.0f, freqpitch + 9.96578428f));	//log2(1000)=9.95748

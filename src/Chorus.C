@@ -26,15 +26,15 @@
 #include "Chorus.h"
 #include <stdio.h>
 
-Chorus::Chorus (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Chorus::Chorus (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
   dlk = 0;
   drk = 0;
   maxdelay = lrintf (MAX_CHORUS_DELAY / 1000.0 * SAMPLE_RATE);
-  delayl = new REALTYPE[maxdelay];
-  delayr = new REALTYPE[maxdelay];
+  delayl = new float[maxdelay];
+  delayr = new float[maxdelay];
 
   Ppreset = 0;
   setpreset (Ppreset);
@@ -54,9 +54,9 @@ Chorus::~Chorus ()
 /*
  * get the delay value in samples; xlfo is the current lfo value
  */
-REALTYPE Chorus::getdelay (REALTYPE xlfo)
+float Chorus::getdelay (float xlfo)
 {
-  REALTYPE
+  float
     result;
   if (Pflangemode == 0)
     {
@@ -80,7 +80,7 @@ REALTYPE Chorus::getdelay (REALTYPE xlfo)
  * Apply the effect
  */
 void
-Chorus::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Chorus::out (float * smpsl, float * smpsr)
 {
   int i;
   dl1 = dl2;
@@ -92,11 +92,11 @@ Chorus::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-      REALTYPE inl = smpsl[i];
-      REALTYPE inr = smpsr[i];
+      float inl = smpsl[i];
+      float inr = smpsr[i];
       //LRcross
-      REALTYPE l = inl;
-      REALTYPE r = inr;
+      float l = inl;
+      float r = inr;
       inl = l * (1.0f - lrcross) + r * lrcross;
       inr = r * (1.0f - lrcross) + l * lrcross;
 
@@ -106,7 +106,7 @@ Chorus::out (REALTYPE * smpsl, REALTYPE * smpsr)
       mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / (float)PERIOD;
       if (++dlk >= maxdelay)
 	dlk = 0;
-      REALTYPE tmp = (float) dlk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
+      float tmp = (float) dlk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
 
       F2I (tmp, dlhi);
       dlhi %= maxdelay;

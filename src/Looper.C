@@ -28,7 +28,7 @@
 #include <math.h>
 #include "Looper.h"
 
-Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size)
+Looper::Looper (float * efxoutl_, float * efxoutr_, float size)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -49,10 +49,10 @@ Looper::Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size)
   maxx_delay = lrintf((float)SAMPLE_RATE * size);
   fade = (int) SAMPLE_RATE / 2;    //1/2 SR fade time available
 
-  ldelay = new REALTYPE[maxx_delay];  
-  rdelay = new REALTYPE[maxx_delay];
-  t2ldelay = new REALTYPE[maxx_delay];  
-  t2rdelay = new REALTYPE[maxx_delay];
+  ldelay = new float[maxx_delay];  
+  rdelay = new float[maxx_delay];
+  t2ldelay = new float[maxx_delay];  
+  t2rdelay = new float[maxx_delay];
     
   setpreset (Ppreset);
   cleanup ();
@@ -128,10 +128,10 @@ if(PT2)
  * Effect output
  */
 void
-Looper::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Looper::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE rswell, lswell;
+  float rswell, lswell;
 
   for (i = 0; i < PERIOD; i++)
     {

@@ -33,18 +33,12 @@
 #include "global.h"
 #include "EffectLFO.h"
 
-#define  D_FLANGE_MAX_DELAY	0.055f			// Number of Seconds  - 50ms corresponds to fdepth = 20 (Hz). Added some extra for padding
-#define  LFO_CONSTANT		9.765625e-04		// 1/(2^LOG_FMAX - 1)
-#define  LOG_FMAX		10.0f			//  -- This optimizes LFO sweep for useful range.
-#define  MINDEPTH		20.0f			// won't allow filter lower than 20Hz
-#define	 MAXDEPTH		15000.0f		// Keeps delay greater than 2 samples at 44kHz SR
-
 class Dflange
 {
 public:
-  Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Dflange (float * efxoutl_, float * efxoutr_);
   ~Dflange ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -52,8 +46,8 @@ public:
 
   int Ppreset;
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
 
 private:
@@ -73,16 +67,16 @@ private:
 			// 12 //LFO type
 			// 13 //LFO Randomness
 
-  REALTYPE wet, dry;		//Wet/Dry mix.  
-  REALTYPE lpan, rpan;		//Panning.  
-  REALTYPE flrcross, frlcross;	// L/R Mixing.  
-  REALTYPE fdepth;		//Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 15000
-  REALTYPE fwidth;		//LFO amplitude.  
-  REALTYPE foffset;		// Offset of notch 1 to notch 2.  Range 0 to 1.0 
-  REALTYPE ffb;			//Feedback parameter.  Range -0.99 to 0.99
-  REALTYPE fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
-  REALTYPE fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
-  REALTYPE fzero;		//Enable through-zero flanging
+  float wet, dry;		//Wet/Dry mix.  
+  float lpan, rpan;		//Panning.  
+  float flrcross, frlcross;	// L/R Mixing.  
+  float fdepth;		//Max delay deviation expressed as frequency of lowest frequency notch.  Min = 20, Max = 15000
+  float fwidth;		//LFO amplitude.  
+  float foffset;		// Offset of notch 1 to notch 2.  Range 0 to 1.0 
+  float ffb;			//Feedback parameter.  Range -0.99 to 0.99
+  float fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
+  float fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
+  float fzero;		//Enable through-zero flanging
   EffectLFO lfo;		//lfo Flanger
   
   //Internally used variables
@@ -90,11 +84,11 @@ private:
   int kl, kr, zl, zr;
   int zcenter;
   
-  REALTYPE l, r, ldl, rdl, zdr, zdl;
-  REALTYPE rflange0, rflange1, lflange0, lflange1, oldrflange0, oldrflange1, oldlflange0, oldlflange1;
-  REALTYPE period_const;
-  REALTYPE *ldelay, *rdelay, *zldelay, *zrdelay;
-  REALTYPE oldl, oldr;		//pt. lpf
+  float l, r, ldl, rdl, zdr, zdl;
+  float rflange0, rflange1, lflange0, lflange1, oldrflange0, oldrflange1, oldlflange0, oldlflange1;
+  float period_const;
+  float *ldelay, *rdelay, *zldelay, *zrdelay;
+  float oldl, oldr;		//pt. lpf
 
 };
 

@@ -32,8 +32,8 @@ FormantFilter::FormantFilter (FilterParams * pars)
   for (int i = 0; i < numformants; i++)
     formant[i] = new AnalogFilter (4 /*BPF*/, 1000.0f, 10.0f, pars->Pstages);
   cleanup ();
-  inbuffer = new REALTYPE[PERIOD];
-  tmpbuf = new REALTYPE[PERIOD];
+  inbuffer = new float[PERIOD];
+  tmpbuf = new float[PERIOD];
 
   for (int j = 0; j < FF_MAX_VOWELS; j++)
     for (int i = 0; i < numformants; i++)
@@ -95,7 +95,7 @@ FormantFilter::cleanup ()
 };
 
 void
-FormantFilter::setpos (REALTYPE input)
+FormantFilter::setpos (float input)
 {
   int p1, p2;
 
@@ -116,7 +116,7 @@ FormantFilter::setpos (REALTYPE input)
     oldinput = input;
 
 
-  REALTYPE pos = fmodf (input * sequencestretch, 1.0f);
+  float pos = fmodf (input * sequencestretch, 1.0f);
   if (pos < 0.0)
     pos += 1.0f;
 
@@ -182,13 +182,13 @@ FormantFilter::setpos (REALTYPE input)
 };
 
 void
-FormantFilter::setfreq (REALTYPE frequency)
+FormantFilter::setfreq (float frequency)
 {
   setpos (frequency);
 };
 
 void
-FormantFilter::setq (REALTYPE q_)
+FormantFilter::setq (float q_)
 {
   Qfactor = q_;
   for (int i = 0; i < numformants; i++)
@@ -196,7 +196,7 @@ FormantFilter::setq (REALTYPE q_)
 };
 
 void
-FormantFilter::setfreq_and_q (REALTYPE frequency, REALTYPE q_)
+FormantFilter::setfreq_and_q (float frequency, float q_)
 {
   Qfactor = q_;
   setpos (frequency);
@@ -204,7 +204,7 @@ FormantFilter::setfreq_and_q (REALTYPE frequency, REALTYPE q_)
 
 
 void
-FormantFilter::filterout (REALTYPE * smp)
+FormantFilter::filterout (float * smp)
 {
   int i, j;
   for (i = 0; i < PERIOD; i++)

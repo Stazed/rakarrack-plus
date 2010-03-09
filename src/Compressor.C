@@ -37,7 +37,7 @@
 
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
-Compressor::Compressor (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Compressor::Compressor (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;

@@ -34,30 +34,23 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
-#define REALTYPE float
-#define CLOSED  1
-#define OPENING 2
-#define OPEN    3
-#define CLOSING 4
-#define ENV_TR 0.0001f
-
 class Gate
 {
 
 public:
 
-  Gate (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Gate (float * efxoutl_, float * efxoutr_);
   ~Gate ();
 
-  void out (REALTYPE * smps_l, REALTYPE * smps_r);
+  void out (float * smps_l, float * smps_r);
 
   void Gate_Change (int np, int value);
   void Gate_Change_Preset (int npreset);
   void cleanup ();
   int getpar (int npar);
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
 
 

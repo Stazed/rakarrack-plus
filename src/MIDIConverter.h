@@ -18,13 +18,6 @@
 #include <jack/midiport.h>
 #include <alsa/asoundlib.h>
 
-#define REALTYPE float
-
-#define D_NOTE          1.059463f
-#define LOG_D_NOTE      0.057762f
-#define D_NOTE_SQRT     1.029302f
-#define MAX_PEAKS 8
-
 
 struct Midi_Event
 { 
@@ -42,8 +35,8 @@ public:
   ~MIDIConverter ();
 
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
   signed short int *schmittBuffer;
   signed short int *schmittPointer;
   const char **notes;

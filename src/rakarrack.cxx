@@ -1104,7 +1104,7 @@ if (nt)
 if (Analyzer_ON)
 { 
  at++;
- if(at==3)
+ if(at==2)
    { Analy->redraw();
      at=0; 
    }
@@ -2670,18 +2670,18 @@ void RKRGUI::cb_pan_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_WD_i(o,v);
 }
 
-void RKRGUI::cb_pan_autopan_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(7,(unsigned char)o->value());
-}
-void RKRGUI::cb_pan_autopan(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_autopan_i(o,v);
-}
-
 void RKRGUI::cb_pan_pan_i(SliderW* o, void*) {
   rkr->efx_Pan->changepar(1,(unsigned char)(o->value()+64));
 }
 void RKRGUI::cb_pan_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_pan_i(o,v);
+}
+
+void RKRGUI::cb_pan_autopan_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Pan->changepar(7,(unsigned char)o->value());
+}
+void RKRGUI::cb_pan_autopan(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_autopan_i(o,v);
 }
 
 void RKRGUI::cb_pan_freq_i(SliderW* o, void*) {
@@ -8379,13 +8379,7 @@ R average.");
         pan_WD->align(FL_ALIGN_LEFT);
         pan_WD->when(FL_WHEN_CHANGED);
       } // SliderW* pan_WD
-      { pan_autopan = new Fl_Check_Button(38, 256, 15, 15, "AutoPan");
-        pan_autopan->down_box(FL_BORDER_BOX);
-        pan_autopan->labelsize(10);
-        pan_autopan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
-      } // Fl_Check_Button* pan_autopan
-      { pan_pan = new SliderW(52, 273, 100, 10, "Pan");
+      { pan_pan = new SliderW(52, 256, 100, 10, "Pan");
         pan_pan->type(5);
         pan_pan->box(FL_FLAT_BOX);
         pan_pan->color((Fl_Color)178);
@@ -8402,6 +8396,12 @@ R average.");
         pan_pan->align(FL_ALIGN_LEFT);
         pan_pan->when(FL_WHEN_CHANGED);
       } // SliderW* pan_pan
+      { pan_autopan = new Fl_Check_Button(38, 268, 15, 15, "AutoPan");
+        pan_autopan->down_box(FL_BORDER_BOX);
+        pan_autopan->labelsize(10);
+        pan_autopan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
+      } // Fl_Check_Button* pan_autopan
       { pan_freq = new SliderW(52, 285, 100, 10, "Tempo");
         pan_freq->type(5);
         pan_freq->box(FL_FLAT_BOX);
@@ -12570,7 +12570,7 @@ R average.");
         BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BackFiname->align(FL_ALIGN_TOP_LEFT);
       } // Fl_File_Input* BackFiname
-      { BI_Browser = new Fl_Button(415, 65, 65, 20, "Browse");
+      { BI_Browser = new Fl_Button(415, 75, 65, 20, "Browse");
         BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
       } // Fl_Button* BI_Browser
       { FSLabel = new Fl_Box(538, 51, 60, 17, "Font Size");
@@ -12792,7 +12792,7 @@ R average.");
         BFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BFiname->align(FL_ALIGN_TOP_LEFT);
       } // Fl_File_Input* BFiname
-      { BF_Browser = new Fl_Button(415, 488, 65, 30, "Browse");
+      { BF_Browser = new Fl_Button(415, 498, 65, 20, "Browse");
         BF_Browser->callback((Fl_Callback*)cb_BF_Browser);
       } // Fl_Button* BF_Browser
       BANK_SET->end();
@@ -12912,7 +12912,7 @@ R average.");
     MIDILearn->end();
   } // Fl_Double_Window* MIDILearn
   { AboutWin = new Fl_Double_Window(375, 235, "About Rakarrack");
-    AboutWin->color((Fl_Color)FL_DARK2);
+    AboutWin->color((Fl_Color)36);
     AboutWin->callback((Fl_Callback*)cb_AboutWin, (void*)(this));
     { AB_Title = new Fl_Box(56, 4, 259, 41, "Rakarrack");
       AB_Title->labelfont(1);
@@ -12934,25 +12934,25 @@ R average.");
       AB_url->labelsize(13);
       AB_url->labelcolor((Fl_Color)6);
     } // Fl_Box* AB_url
-    { AB_Authors = new Fl_Box(89, 96, 192, 32, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>");
+    { AB_Authors = new Fl_Box(47, 96, 272, 27, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>");
       AB_Authors->labelfont(1);
       AB_Authors->labelsize(8);
       AB_Authors->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       AB_Authors->align(FL_ALIGN_WRAP);
     } // Fl_Box* AB_Authors
-    { AB_A1 = new Fl_Box(63, 130, 251, 35, "Code of Reverb, Chorus/Flanger, Phaser, Distortion/Overdrive & Echo taked fro\
-m ZynAddSubFx by Paul Nasca Octavian");
+    { AB_A1 = new Fl_Box(44, 125, 281, 26, "Code of some effects and structure based on ZynAddSubFx by Paul Nasca Octavia\
+n");
       AB_A1->labelfont(1);
       AB_A1->labelsize(8);
       AB_A1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       AB_A1->align(FL_ALIGN_WRAP);
     } // Fl_Box* AB_A1
-    { AB_A2 = new Fl_Box(66, 166, 240, 19, "Code of Tuner taked from tuneit by Mario Lang");
+    { AB_A2 = new Fl_Box(66, 172, 240, 15, "Code of Tuner taked from tuneit by Mario Lang");
       AB_A2->labelfont(1);
       AB_A2->labelsize(8);
       AB_A2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Box* AB_A2
-    { AB_A3 = new Fl_Box(66, 180, 244, 30, "Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfe\
+    { AB_A3 = new Fl_Box(84, 185, 219, 24, "Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfe\
 ld");
       AB_A3->labelfont(1);
       AB_A3->labelsize(8);
@@ -12967,6 +12967,12 @@ ld");
       o->labelsize(10);
       o->callback((Fl_Callback*)cb_OK);
     } // Fl_Button* o
+    { AB_A4 = new Fl_Box(64, 151, 250, 20, "Code of some effects based on swh-plugins LADSPA by Steve Harris");
+      AB_A4->labelfont(1);
+      AB_A4->labelsize(8);
+      AB_A4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      AB_A4->align(FL_ALIGN_WRAP);
+    } // Fl_Box* AB_A4
     AboutWin->end();
   } // Fl_Double_Window* AboutWin
   char tmp[64];
@@ -15754,7 +15760,14 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if(rkr->upsample) UPS_LED->color(leds_color); else UPS_LED->color(back_color);
+if(rkr->upsample)
+{
+ UPS_LED->color(leds_color); 
+ UPS_LED->labelcolor(on); 
+ UPS_LED->show();
+
+} 
+ else  UPS_LED->hide();
 }
 
 void RKRGUI::findpos(int num, int value) {

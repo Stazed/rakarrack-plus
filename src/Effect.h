@@ -45,24 +45,24 @@ public:
   {
     return (0);
   };
-  virtual void out (REALTYPE * smpsl, REALTYPE * smpsr)
+  virtual void out (float * smpsl, float * smpsr)
   {
   };
   virtual void cleanup ()
   {
   };
-  virtual REALTYPE getfreqresponse (REALTYPE freq)
+  virtual float getfreqresponse (float freq)
   {
     return (0);
   };				//this is only used for EQ (for user interface)
 
   unsigned char Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of such effects are always 1.0, so this setting tells me how is the volume to the Master Output only.
+  float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of such effects are always 1.0, so this setting tells me how is the volume to the Master Output only.
 
-  REALTYPE volume;
+  float volume;
 
   FilterParams *filterpars;
 protected:

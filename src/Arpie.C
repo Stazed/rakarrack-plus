@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Arpie.h"
 
-Arpie::Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Arpie::Arpie (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -53,8 +53,8 @@ Arpie::Arpie (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
   maxx_delay = SAMPLE_RATE * MAX_DELAY;
   fade = (int) SAMPLE_RATE / 10;    //200ms fade time available
 
-  ldelay = new REALTYPE[maxx_delay];  
-  rdelay = new REALTYPE[maxx_delay];
+  ldelay = new float[maxx_delay];  
+  rdelay = new float[maxx_delay];
   pattern = new int[MAXHARMS];
   
   setpreset (Ppreset);
@@ -119,10 +119,10 @@ Arpie::initdelays ()
  * Effect output
  */
 void
-Arpie::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Arpie::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE l, r, ldl, rdl, rswell, lswell;
+  float l, r, ldl, rdl, rswell, lswell;
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -246,7 +246,7 @@ Arpie::setdelay (int Pdelay)
 void
 Arpie::setlrdelay (int Plrdelay)
 {
-  REALTYPE tmp;
+  float tmp;
   this->Plrdelay = Plrdelay;
   tmp =
     (powf (2.0, fabsf ((float)Plrdelay - 64.0f) / 64.0f * 9.0f) -

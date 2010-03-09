@@ -40,7 +40,7 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Analog_Phaser::Analog_Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -53,7 +53,7 @@ Analog_Phaser::Analog_Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 
   ryn1 = NULL;
 
-  offset = new REALTYPE[12];	//model mismatch between JFET devices
+  offset = new float[12];	//model mismatch between JFET devices
   offset[0] = -0.2509303f;
   offset[1] = 0.9408924f;
   offset[2] = 0.998f;
@@ -108,10 +108,10 @@ Analog_Phaser::~Analog_Phaser ()
  * Effect output
  */
 void
-Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Analog_Phaser::out (float * smpsl, float * smpsr)
 {
   int i, j;
-  REALTYPE lfol, lfor, lgain, rgain, bl, br, gl, gr, rmod, lmod, d, hpfr, hpfl;
+  float lfol, lfor, lgain, rgain, bl, br, gl, gr, rmod, lmod, d, hpfr, hpfl;
   lgain = 0.0;
   rgain = 0.0;
   
@@ -156,8 +156,8 @@ Analog_Phaser::out (REALTYPE * smpsl, REALTYPE * smpsr)
       gl += ldiff;	// Linear interpolation between LFO samples
       gr += rdiff;
 
-      REALTYPE lxn = smpsl[i];
-      REALTYPE rxn = smpsr[i];
+      float lxn = smpsl[i];
+      float rxn = smpsr[i];
 
 
 	if (barber) {
@@ -303,11 +303,11 @@ Analog_Phaser::setstages (int Pstages)
   this->Pstages = Pstages;
 
 
-      lxn1 = new REALTYPE[Pstages];
-      lyn1 = new REALTYPE[Pstages];
+      lxn1 = new float[Pstages];
+      lyn1 = new float[Pstages];
  
-      rxn1 = new REALTYPE[Pstages];
-      ryn1 = new REALTYPE[Pstages];
+      rxn1 = new float[Pstages];
+      ryn1 = new float[Pstages];
  
   cleanup ();
 };

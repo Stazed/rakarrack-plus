@@ -40,7 +40,7 @@ public:
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
-  void applyfilters (REALTYPE * efxoutl);
+  void applyfilters (float * efxoutl);
 
 
   int Ppreset;

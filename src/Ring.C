@@ -29,7 +29,7 @@
 
 
 
-Ring::Ring (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Ring::Ring (float * efxoutl_, float * efxoutr_)
 {
 
   efxoutl = efxoutl_;
@@ -110,12 +110,12 @@ Ring::cleanup ()
  * Effect output
  */
 void
-Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Ring::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE l, r, lout, rout, tmpfactor;
+  float l, r, lout, rout, tmpfactor;
 
-  REALTYPE inputvol = (float) Pinput /127.0f;
+  float inputvol = (float) Pinput /127.0f;
 
   if (Pstereo != 0)
     {				//Stereo
@@ -156,7 +156,7 @@ Ring::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
   if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
 
-  REALTYPE level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+  float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
   for (i= 0;i<PERIOD;i++)
     {

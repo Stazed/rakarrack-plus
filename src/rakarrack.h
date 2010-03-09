@@ -1003,15 +1003,15 @@ private:
   void cb_pan_WD_i(SliderW*, void*);
   static void cb_pan_WD(SliderW*, void*);
 public:
-  Fl_Check_Button *pan_autopan;
-private:
-  void cb_pan_autopan_i(Fl_Check_Button*, void*);
-  static void cb_pan_autopan(Fl_Check_Button*, void*);
-public:
   SliderW *pan_pan;
 private:
   void cb_pan_pan_i(SliderW*, void*);
   static void cb_pan_pan(SliderW*, void*);
+public:
+  Fl_Check_Button *pan_autopan;
+private:
+  void cb_pan_autopan_i(Fl_Check_Button*, void*);
+  static void cb_pan_autopan(Fl_Check_Button*, void*);
 public:
   SliderW *pan_freq;
 private:
@@ -2753,6 +2753,7 @@ private:
   void cb_OK_i(Fl_Button*, void*);
   static void cb_OK(Fl_Button*, void*);
 public:
+  Fl_Box *AB_A4;
   RKRGUI(int argc, char**argv,RKR *rkr_);
   void Background_Color_Change(Fl_Color bcolor);
   void Label_Color_Change(Fl_Color bcolor);

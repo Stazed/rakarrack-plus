@@ -28,51 +28,48 @@
 #include "global.h"
 #include "Filter_.h"
 
-#define REALTYPE float
-#define MAX_FILTER_STAGES 5
-
 class AnalogFilter:public Filter_
 {
 public:
-  AnalogFilter (unsigned char Ftype, REALTYPE Ffreq, REALTYPE Fq,
+  AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,
 		unsigned char Fstages);
    ~AnalogFilter ();
-  void filterout (REALTYPE * smp);
-  void setfreq (REALTYPE frequency);
-  void setfreq_and_q (REALTYPE frequency, REALTYPE q_);
-  void setq (REALTYPE q_);
+  void filterout (float * smp);
+  void setfreq (float frequency);
+  void setfreq_and_q (float frequency, float q_);
+  void setq (float q_);
 
   void settype (int type_);
-  void setgain (REALTYPE dBgain);
+  void setgain (float dBgain);
   void setstages (int stages_);
   void cleanup ();
 
-  REALTYPE H (REALTYPE freq);	//Obtains the response for a given frequency
+  float H (float freq);	//Obtains the response for a given frequency
   
 
 private:
   struct fstage
   {
-    REALTYPE c1, c2;
+    float c1, c2;
   } x[MAX_FILTER_STAGES + 1], y[MAX_FILTER_STAGES + 1],
     oldx[MAX_FILTER_STAGES + 1], oldy[MAX_FILTER_STAGES + 1];
 
-  void singlefilterout (REALTYPE * smp, fstage & x, fstage & y, REALTYPE * c,
-			REALTYPE * d);
+  void singlefilterout (float * smp, fstage & x, fstage & y, float * c,
+			float * d);
   void computefiltercoefs ();
   int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
   int stages;			//how many times the filter is applied (0->1,1->2,etc.)
-  REALTYPE freq;		//Frequency given in Hz
-  REALTYPE q;			//Q factor (resonance or Q factor)
-  REALTYPE gain;		//the gain of the filter (if are shelf/peak) filters
+  float freq;		//Frequency given in Hz
+  float q;			//Q factor (resonance or Q factor)
+  float gain;		//the gain of the filter (if are shelf/peak) filters
 
   int order;			//the order of the filter (number of poles)
 
-  REALTYPE c[3], d[3];		//coefficients
+  float c[3], d[3];		//coefficients
 
-  REALTYPE oldc[3], oldd[3];	//old coefficients(used only if some filter paremeters changes very fast, and it needs interpolation)
+  float oldc[3], oldd[3];	//old coefficients(used only if some filter paremeters changes very fast, and it needs interpolation)
 
-  REALTYPE xd[3], yd[3];	//used if the filter is applied more times
+  float xd[3], yd[3];	//used if the filter is applied more times
 
   int needsinterpolation, firsttime;
   int abovenq;			//this is 1 if the frequency is above the nyquist

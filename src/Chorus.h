@@ -26,15 +26,14 @@
 #define CHORUS_H
 #include "global.h"
 #include "EffectLFO.h"
-#define MAX_CHORUS_DELAY 250.0f	//ms
 
 class Chorus
 {
 
 public:
-  Chorus (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Chorus (float * efxoutl_, float * efxoutr_);
   ~Chorus ();
-  void out (REALTYPE * smpsl, REALTYPE * smpsr);
+  void out (float * smpsl, float * smpsr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -42,11 +41,11 @@ public:
 
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
-  REALTYPE volume;
+  float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
+  float volume;
 
 
 
@@ -72,13 +71,13 @@ private:
   void setlrcross (int Plrcross);
 
   //Valorile interne
-  REALTYPE depth, delay, fb, lrcross, panning;
-  REALTYPE dl1, dl2, dr1, dr2, lfol, lfor;
+  float depth, delay, fb, lrcross, panning;
+  float dl1, dl2, dr1, dr2, lfol, lfor;
   int maxdelay;
-  REALTYPE *delayl, *delayr;
+  float *delayl, *delayr;
   int dlk, drk, dlhi, dlhi2;
-  REALTYPE getdelay (REALTYPE xlfo);
-  REALTYPE dllo, mdel;
+  float getdelay (float xlfo);
+  float dllo, mdel;
 };
 
 #endif

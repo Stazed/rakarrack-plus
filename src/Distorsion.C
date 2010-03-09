@@ -33,13 +33,13 @@
  */
 
 void
-waveshapesmps (int n, REALTYPE * smps, int type,
+waveshapesmps (int n, float * smps, int type,
 	       int drive, int eff)
 {
   int i;
-  REALTYPE ws = (float)drive / 127.0f + .00001f;
+  float ws = (float)drive / 127.0f + .00001f;
   ws = 1.0f - expf (-ws * 4.0f);
-  REALTYPE tmpv;
+  float tmpv;
 
   switch (type + 1 )
     {
@@ -101,7 +101,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
       ws = powf (2.0f, -ws * ws * 8.0f);	//Limiter
       for (i = 0; i < n; i++)
 	{
-	  REALTYPE tmp = smps[i];
+	  float tmp = smps[i];
 	  if (fabsf (tmp) > ws)
 	    {
 	      if (tmp >= 0.0)
@@ -117,7 +117,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
       ws = powf (2.0f, -ws * ws * 8.0f);	//Upper Limiter
       for (i = 0; i < n; i++)
 	{
-	  REALTYPE tmp = smps[i];
+	  float tmp = smps[i];
 	  if (tmp > ws)
 	    smps[i] = ws;
 	  smps[i] *= 2.0f;
@@ -127,7 +127,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
       ws = powf (2.0f, -ws * ws * 8.0f);	//Lower Limiter
       for (i = 0; i < n; i++)
 	{
-	  REALTYPE tmp = smps[i];
+	  float tmp = smps[i];
 	  if (tmp < -ws)
 	    smps[i] = -ws;
 	  smps[i] *= 2.0f;
@@ -137,7 +137,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
       ws = (powf (2.0f, ws * 6.0f) - 1.0f) / powf (2.0f, 6.0f);	//Inverse Limiter
       for (i = 0; i < n; i++)
 	{
-	  REALTYPE tmp = smps[i];
+	  float tmp = smps[i];
 	  if (fabsf (tmp) > ws)
 	    {
 	      if (tmp >= 0.0)
@@ -165,7 +165,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
 	tmpv = 1.0f;
       for (i = 0; i < n; i++)
 	{
-	  REALTYPE tmp = smps[i] * ws;
+	  float tmp = smps[i] * ws;
 	  if ((tmp > -2.0) && (tmp < 1.0))
 	    smps[i] = tmp * (1.0f - tmp) * (tmp + 2.0f) / tmpv;
 	  else
@@ -180,7 +180,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
 	tmpv = 1.0f;
       for (i = 0; i < n; i++)
 	{
-	  REALTYPE tmp = smps[i] * ws;
+	  float tmp = smps[i] * ws;
 	  if ((tmp > -1.0f) && (tmp < 1.618034f))
 	    smps[i] = tmp * (1.0f - tmp) / tmpv;
 	  else if (tmp > 0.0)
@@ -197,7 +197,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
 	tmpv = 0.5f - 1.0f / (expf (ws) + 1.0f);
       for (i = 0; i < n; i++)
 	{
-	  REALTYPE tmp = smps[i] * ws;
+	  float tmp = smps[i] * ws;
 	  if (tmp < -10.0)
 	    tmp = -10.0f;
 	  else if (tmp > 10.0)
@@ -211,7 +211,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
 
       for (i = 0; i < n; i++)
 	{
-	REALTYPE tmp = smps[i] * ws;	
+	float tmp = smps[i] * ws;	
 	if (tmp < Tlo) {  
 	smps[i] = Tlc - sqrtf(-tmp*DIV_TLC_CONST);
 
@@ -235,7 +235,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
 
       for (i = 0; i < n; i++)
 	{
-	REALTYPE tmp = smps[i] * ws;	
+	float tmp = smps[i] * ws;	
 	if (tmp < Tlo) {  
 	smps[i] = Tlc;
 
@@ -259,7 +259,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
 
       for (i = 0; i < n; i++)
 	{
-	REALTYPE tmp = fabs(smps[i])* ws;	
+	float tmp = fabs(smps[i])* ws;	
 	if (tmp > 1.0f) {  
 	tmp = 1.0f;
 	}
@@ -298,7 +298,7 @@ waveshapesmps (int n, REALTYPE * smps, int type,
 };
 
 
-Distorsion::Distorsion (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -378,7 +378,7 @@ Distorsion::cleanup ()
  */
 
 void
-Distorsion::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
+Distorsion::applyfilters (float * efxoutl, float * efxoutr)
 {
   lpfl->filterout (efxoutl);
   hpfl->filterout (efxoutl);
@@ -396,12 +396,12 @@ Distorsion::applyfilters (REALTYPE * efxoutl, REALTYPE * efxoutr)
  * Effect output
  */
 void
-Distorsion::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Distorsion::out (float * smpsl, float * smpsr)
 {
   int i;
-  REALTYPE l, r, lout, rout;
+  float l, r, lout, rout;
 
-  REALTYPE inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
+  float inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
   if (Pnegate != 0)
     inputvol *= -1.0f;
 
@@ -463,7 +463,7 @@ Distorsion::out (REALTYPE * smpsl, REALTYPE * smpsr)
 
 
 
-  REALTYPE level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+  float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -528,7 +528,7 @@ void
 Distorsion::setlpf (int value)
 {
   Plpf = value;
-  REALTYPE fr = (float)Plpf;
+  float fr = (float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
@@ -537,7 +537,7 @@ void
 Distorsion::sethpf (int value)
 {
   Phpf = value;
-  REALTYPE fr = (float)Phpf;
+  float fr = (float)Phpf;
 
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
@@ -548,7 +548,7 @@ void
 Distorsion::setoctave (int Poctave)
 {
   this->Poctave = Poctave;
-  octmix = (REALTYPE) (Poctave) / 127.0f;
+  octmix = (float) (Poctave) / 127.0f;
 };
 
 void

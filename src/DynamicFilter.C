@@ -26,7 +26,7 @@
 #include "DynamicFilter.h"
 #include <stdio.h>
 
-DynamicFilter::DynamicFilter (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+DynamicFilter::DynamicFilter (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -52,7 +52,7 @@ DynamicFilter::~DynamicFilter ()
  * Apply the effect
  */
 void
-DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
+DynamicFilter::out (float * smpsl, float * smpsr)
 {
   int i;
   if (filterpars->changed)
@@ -61,31 +61,31 @@ DynamicFilter::out (REALTYPE * smpsl, REALTYPE * smpsr)
       cleanup ();
     };
 
-  REALTYPE lfol, lfor;
+  float lfol, lfor;
   lfo.effectlfoout (&lfol, &lfor);
   lfol *= depth * 5.0f;
   lfor *= depth * 5.0f;
-  REALTYPE freq = filterpars->getfreq ();
-  REALTYPE q = filterpars->getq ();
+  float freq = filterpars->getfreq ();
+  float q = filterpars->getq ();
 
   for (i = 0; i < PERIOD; i++)
     {
       efxoutl[i] = smpsl[i];
       efxoutr[i] = smpsr[i];
 
-      REALTYPE x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
+      float x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
       ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
     };
 
 
-  REALTYPE ampsmooth2 = powf (ampsmooth, 0.2f) * 0.3f;
+  float ampsmooth2 = powf (ampsmooth, 0.2f) * 0.3f;
   ms2 = ms2 * (1.0f - ampsmooth2) + ms1 * ampsmooth2;
   ms3 = ms3 * (1.0f - ampsmooth2) + ms2 * ampsmooth2;
   ms4 = ms4 * (1.0f - ampsmooth2) + ms3 * ampsmooth2;
-  REALTYPE rms = (sqrtf (ms4)) * ampsns;
+  float rms = (sqrtf (ms4)) * ampsns;
 
-  REALTYPE frl = filterl->getrealfreq (freq + lfol + rms);
-  REALTYPE frr = filterr->getrealfreq (freq + lfor + rms);
+  float frl = filterl->getrealfreq (freq + lfol + rms);
+  float frr = filterr->getrealfreq (freq + lfor + rms);
 
   filterl->setfreq_and_q (frl, q);
   filterr->setfreq_and_q (frr, q);

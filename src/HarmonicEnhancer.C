@@ -231,6 +231,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
       itm1l = yl;
       otm1r = 0.999f * otm1r + yr - itm1r;
       itm1r = yr;
+
+      
       inputl[i] = otm1l * vol * coeff;
       inputr[i] = otm1r * vol * coeff;
 

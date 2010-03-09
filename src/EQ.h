@@ -28,26 +28,24 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
-#define MAX_EQ_BANDS 16
-
 class EQ
 {
 public:
-  EQ (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  EQ (float * efxoutl_, float * efxoutr_);
   ~EQ ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
-  REALTYPE getfreqresponse (REALTYPE freq);
+  float getfreqresponse (float freq);
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of
+  float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of
 
-  REALTYPE volume;
+  float volume;
 
   int Pvolume;	//Volumul 
 

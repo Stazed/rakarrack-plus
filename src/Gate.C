@@ -29,7 +29,7 @@
 #include "Gate.h"
 
 
-Gate::Gate (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Gate::Gate (float * efxoutl_, float * efxoutr_)
 {
 
   efxoutl = efxoutl_;
@@ -78,7 +78,7 @@ void
 Gate::setlpf (int value)
 {
   Plpf = value;
-  REALTYPE fr = (float)Plpf;
+  float fr = (float)Plpf;
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };
@@ -87,7 +87,7 @@ void
 Gate::sethpf (int value)
 {
   Phpf = value;
-  REALTYPE fr = (float)Phpf;
+  float fr = (float)Phpf;
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
 };

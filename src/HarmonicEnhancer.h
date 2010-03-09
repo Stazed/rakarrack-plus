@@ -28,7 +28,6 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
-#define HARMONICS 11
 
 
 class HarmEnhancer

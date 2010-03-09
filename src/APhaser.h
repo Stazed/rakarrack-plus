@@ -29,22 +29,21 @@
 #include "global.h"
 #include "EffectLFO.h"
 
-#define MAX_PHASER_STAGES 12
 
 class Analog_Phaser
 {
 public:
-  Analog_Phaser (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Analog_Phaser (float * efxoutl_, float * efxoutr_);
   ~Analog_Phaser ();
-  void out (REALTYPE * smpsl, REALTYPE * smpsr);
+  void out (float * smpsl, float * smpsr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE outvolume;
+  float *efxoutl;
+  float *efxoutr;
+  float outvolume;
 
 private:
   //Phaser parameters
@@ -71,17 +70,17 @@ private:
 
   //Internal Variables
   bool barber;			//Barber pole phasing flag
-  REALTYPE distortion, fb, width, offsetpct, fbl, fbr, depth;
-  REALTYPE *lxn1, *lyn1,*rxn1, *ryn1, *offset;
-  REALTYPE oldlgain, oldrgain, rdiff, ldiff, invperiod;
+  float distortion, fb, width, offsetpct, fbl, fbr, depth;
+  float *lxn1, *lyn1,*rxn1, *ryn1, *offset;
+  float oldlgain, oldrgain, rdiff, ldiff, invperiod;
   
-  REALTYPE mis;
-  REALTYPE Rmin;	// 2N5457 typical on resistance at Vgs = 0
-  REALTYPE Rmax;	// Resistor parallel to FET
-  REALTYPE Rmx;		// Rmin/Rmax to avoid division in loop
-  REALTYPE Rconst;      // Handle parallel resistor relationship
-  REALTYPE C;	        // Capacitor
-  REALTYPE CFs;		// A constant derived from capacitor and resistor relationships
+  float mis;
+  float Rmin;	// 2N5457 typical on resistance at Vgs = 0
+  float Rmax;	// Resistor parallel to FET
+  float Rmx;		// Rmin/Rmax to avoid division in loop
+  float Rconst;      // Handle parallel resistor relationship
+  float C;	        // Capacitor
+  float CFs;		// A constant derived from capacitor and resistor relationships
 
 
 };

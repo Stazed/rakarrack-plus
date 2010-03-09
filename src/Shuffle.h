@@ -33,22 +33,22 @@
 class Shuffle
 {
 public:
-  Shuffle (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Shuffle (float * efxoutl_, float * efxoutr_);
   ~Shuffle ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
-  REALTYPE *inputl;
-  REALTYPE *inputr;
+  float *efxoutl;
+  float *efxoutr;
+  float *inputl;
+  float *inputr;
   
-  REALTYPE outvolume;
-  REALTYPE volume;
+  float outvolume;
+  float volume;
 
 private:
 

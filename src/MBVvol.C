@@ -32,7 +32,7 @@
 
 
 
-MBVvol::MBVvol (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+MBVvol::MBVvol (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -112,7 +112,7 @@ MBVvol::cleanup ()
  * Effect output
  */
 void
-MBVvol::out (REALTYPE * smpsl, REALTYPE * smpsr)
+MBVvol::out (float * smpsl, float * smpsr)
 {
   int i;
 

@@ -32,7 +32,7 @@
 #include <math.h>
 #include "Dual_Flange.h"
 
-Dflange::Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
+Dflange::Dflange (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -47,10 +47,10 @@ Dflange::Dflange (REALTYPE * efxoutl_, REALTYPE * efxoutr_)
 
   
   maxx_delay = (int) SAMPLE_RATE * D_FLANGE_MAX_DELAY;
-  ldelay = new REALTYPE[maxx_delay];  
-  rdelay = new REALTYPE[maxx_delay];
-  zldelay = new REALTYPE[maxx_delay];  
-  zrdelay = new REALTYPE[maxx_delay];  
+  ldelay = new float[maxx_delay];  
+  rdelay = new float[maxx_delay];
+  zldelay = new float[maxx_delay];  
+  zrdelay = new float[maxx_delay];  
   fsubtract = 0.5f;
   fhidamp = 1.0f;
   fwidth = 800;
@@ -102,15 +102,15 @@ Dflange::cleanup ()
  * Effect output
  */
 void
-Dflange::out (REALTYPE * smpsl, REALTYPE * smpsr)
+Dflange::out (float * smpsl, float * smpsr)
 {
   int i;
 
   //deal with LFO's
-    REALTYPE lfol, lfor, lmod, rmod, lmodfreq, rmodfreq, rx0, rx1, lx0, lx1;
-    REALTYPE ldif0, ldif1, rdif0, rdif1;  //Difference between fractional delay and floor(fractional delay)
-    REALTYPE drA, drB, dlA, dlB;	//LFO inside the loop.
-    REALTYPE rsA, rsB, lsA, lsB;	//Audio sample at given delay
+    float lfol, lfor, lmod, rmod, lmodfreq, rmodfreq, rx0, rx1, lx0, lx1;
+    float ldif0, ldif1, rdif0, rdif1;  //Difference between fractional delay and floor(fractional delay)
+    float drA, drB, dlA, dlB;	//LFO inside the loop.
+    float rsA, rsB, lsA, lsB;	//Audio sample at given delay
     int tmp0, tmp1;
 
     
@@ -272,46 +272,46 @@ Dflange::changepar (int npar, int value)
     {
     case 0:
       Pwetdry = value;
-      dry = (REALTYPE) (Pwetdry+64) /128.0f;
+      dry = (float) (Pwetdry+64) /128.0f;
       wet = 1.0f - dry;
       break;
     case 1:
       Ppanning = value;
       if (value < 0)
       {
-      rpan = 1.0f + (REALTYPE) Ppanning/64.0;     
+      rpan = 1.0f + (float) Ppanning/64.0;     
       lpan = 1.0f;
       }
       else 
       {
-      lpan = 1.0f - (REALTYPE) Ppanning/64.0;   
+      lpan = 1.0f - (float) Ppanning/64.0;   
       rpan = 1.0f;
       };
       break;
     case 2:
       Plrcross = value;
-      flrcross = (REALTYPE) Plrcross/127.0;
+      flrcross = (float) Plrcross/127.0;
       frlcross = 1.0f - flrcross;	//keep this out of the DSP loop
       break;
     case 3:
       Pdepth = value;
-      fdepth =  (REALTYPE) Pdepth;
+      fdepth =  (float) Pdepth;
         zcenter = (int) floor(0.5f * (fdepth + fwidth));
 
       break;
     case 4:
       Pwidth = value;
-      fwidth = (REALTYPE) Pwidth;
+      fwidth = (float) Pwidth;
         zcenter = (int) floor(0.5f * (fdepth + fwidth));
 
       break;
     case 5:
       Poffset = value;
-      foffset = 0.5f + (REALTYPE) Poffset/255.0; 
+      foffset = 0.5f + (float) Poffset/255.0; 
       break;
     case 6:
       Pfb = value;
-      ffb = (REALTYPE) Pfb/64.5f;  
+      ffb = (float) Pfb/64.5f;  
       break;
     case 7:
       Phidamp = value;

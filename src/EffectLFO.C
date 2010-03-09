@@ -82,9 +82,9 @@ EffectLFO::updateparams ()
 /*
  * Compute the shape of the LFO
  */
-REALTYPE EffectLFO::getlfoshape (REALTYPE x)
+float EffectLFO::getlfoshape (float x)
 {
-  REALTYPE
+  float
     out,tmpv;
   switch (lfotype)
     {
@@ -129,9 +129,9 @@ REALTYPE EffectLFO::getlfoshape (REALTYPE x)
  * LFO output
  */
 void
-EffectLFO::effectlfoout (REALTYPE * outl, REALTYPE * outr)
+EffectLFO::effectlfoout (float * outl, float * outr)
 {
-  REALTYPE out;
+  float out;
 
   out = getlfoshape (xl);
  // if ((lfotype == 0) || (lfotype == 1))         //What was that for?

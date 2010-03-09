@@ -28,14 +28,13 @@
 #define LOOPER_H
 
 #include "global.h"
-#define  ATTACK  0.175f  //crossover time for reverse delay
 
 class Looper
 {
 public:
-  Looper (REALTYPE * efxoutl_, REALTYPE * efxoutr_, float size);
+  Looper (float * efxoutl_, float * efxoutr_, float size);
   ~Looper ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -47,12 +46,12 @@ public:
   int progstate[6];
   void getstate ();
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE volume;
+  float volume;
 
-  REALTYPE outvolume;
+  float outvolume;
 
 private:
   //Parameters
@@ -71,13 +70,13 @@ private:
   void initdelays ();
   void setfade ();
 
-  REALTYPE *ldelay, *rdelay;
-  REALTYPE *t2ldelay, *t2rdelay;
+  float *ldelay, *rdelay;
+  float *t2ldelay, *t2rdelay;
   
-  REALTYPE oldl, oldr;		//pt. lpf
+  float oldl, oldr;		//pt. lpf
   int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
 
-  REALTYPE  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2;
+  float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2;
 };
 
 

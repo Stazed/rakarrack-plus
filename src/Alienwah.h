@@ -29,19 +29,18 @@
 #include "EffectLFO.h"
 
 
-#define MAX_ALIENWAH_DELAY 100
 
 struct COMPLEXTYPE
 {
-  REALTYPE a, b;
+  float a, b;
 };
 
 class Alienwah
 {
 public:
-  Alienwah (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Alienwah (float * efxoutl_, float * efxoutr_);
   ~Alienwah ();
-  void out (REALTYPE * smpsl, REALTYPE * smpsr);
+  void out (float * smpsl, float * smpsr);
 
   void setpreset (int npreset);
   void changepar (int npar, int value);
@@ -49,12 +48,12 @@ public:
   void cleanup ();
 
   int Ppreset;
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE outvolume;
+  float outvolume;
 
-  REALTYPE volume;
+  float volume;
 
 
 
@@ -80,7 +79,7 @@ private:
   void setphase (int Pphase);
 
   //Valorile interne
-  REALTYPE panning, fb, depth, lrcross, phase;
+  float panning, fb, depth, lrcross, phase;
   COMPLEXTYPE *oldl, *oldr;
   COMPLEXTYPE oldclfol, oldclfor;
   int oldk;

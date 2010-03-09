@@ -31,9 +31,9 @@
 class Convolotron
 {
 public:
-  Convolotron (REALTYPE * efxoutl_, REALTYPE * efxoutr_);
+  Convolotron (float * efxoutl_, float * efxoutr_);
   ~Convolotron ();
-  void out (REALTYPE * smpsl, REALTYPE * smpr);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -43,11 +43,11 @@ public:
   void setdryonly ();
   int Ppreset;
 
-  REALTYPE *efxoutl;
-  REALTYPE *efxoutr;
+  float *efxoutl;
+  float *efxoutr;
 
-  REALTYPE volume;
-  REALTYPE outvolume;
+  float volume;
+  float outvolume;
 
   char Filename[128];
 
@@ -75,8 +75,8 @@ private:
   int offset;
 
   //Parametrii reali
-  REALTYPE lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  REALTYPE *rbuf, *buf, *lxn;
+  float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
+  float *rbuf, *buf, *lxn;
   int maxx_size,maxx_read,real_len,length;
   float level,fb, feedback;
   
