@@ -886,7 +886,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -4141,7 +4142,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
             xywh {52 52 36 21} labelsize 10
           }
           MenuItem {} {
-            label Crunch selected
+            label Crunch
             xywh {42 42 36 21} labelsize 10
           }
         }
@@ -4521,7 +4522,7 @@ shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
 shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
-shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
+shuffle_E->value(rkr->efx_Shuffle->getpar(10));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4537,7 +4538,7 @@ shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
             xywh {62 62 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Shuffle 4}
+            label Remover selected
             xywh {72 72 36 21} labelsize 10
           }
         }

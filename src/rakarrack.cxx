@@ -4251,7 +4251,7 @@ Fl_Menu_Item RKRGUI::menu_shuffle_preset[] = {
  {"Shuffle 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Shuffle 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Shuffle 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Shuffle 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Remover", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
