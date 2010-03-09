@@ -97,7 +97,6 @@ RyanWah::out (REALTYPE * smpsl, REALTYPE * smpsr)
   filterl->setfreq_and_q (frl, q);
   filterr->setfreq_and_q (frr, q);
 
-
   filterl->filterout (efxoutl);
   filterr->filterout (efxoutr);
 
