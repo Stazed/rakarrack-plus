@@ -82,6 +82,7 @@ private:
   float rpanning, lpanning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, minfreq;
   unsigned char Ftype;
   unsigned char Fstages;
+  int variq;
   class SVFilter *filterl, *filterr;
 
   float ms1, lpmix, hpmix, bpmix;	//mean squares

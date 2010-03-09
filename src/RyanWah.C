@@ -95,6 +95,9 @@ RyanWah::out (float * smpsl, float * smpsr)
 
   float rms = ms1 * ampsns + oldfbias2;
   if(rms>1.0f) rms = 1.0f;
+   rms*=rms; 
+   
+  if(variq) q = powf(2.0f,(2.0f*(1.0f-rms)+1.0f));
 
    float frl = minfreq + maxfreq*(lfol + rms);
    float frr = minfreq + maxfreq*(lfor + rms);
@@ -175,17 +178,17 @@ RyanWah::reinitfilter ()
 void
 RyanWah::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 15;
+  const int PRESET_SIZE = 17;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Wah Pedal
-    {0, 72, 138, 0, 0, 64, 0, 50, 25, 45, 16, -40, 0, 1, 2000 },
+    {16, 10, 138, 0, 0, 64, 0, 50, 25, 45, -16, 40, -3, 1, 1600, 375, 1 },
     //Mutron
-    {0, 90, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000 },
+    {0, 90, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0 },
     //Phase Wah
-    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000 },
+    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 150, 1 },
     //Phaser
-    {64, 60, 60, 0, 0, 64, 50, 10, 10, 40, 32, 32, 32, 4, 2000 },
+    {64, 60, 60, 0, 0, 64, 50, 10, 10, 40, 32, 32, 32, 4, 800, 100, 1 },
 
   };
 
@@ -195,7 +198,7 @@ RyanWah::setpreset (int npreset)
     changepar (n, presets[npreset][n]);
 
   Ppreset = npreset;
-
+  
   reinitfilter ();
 };
 
@@ -265,8 +268,13 @@ RyanWah::changepar (int npar, int value)
      case 14:
      Prange = value;
      maxfreq = ((float) Prange) + 100.0 + fbias * 800.0f;
-     minfreq = 40.0f + 800.0f * ((float) Prange)/6000.0f;
-     break;   
+     break; 
+     case 15:
+     minfreq = (float) value;
+     break;  
+     case 16:
+     variq = 1;
+     break;
       
     };
 };
