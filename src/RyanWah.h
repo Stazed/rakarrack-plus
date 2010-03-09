@@ -40,8 +40,6 @@ public:
   int getpar (int npar);
   void cleanup ();
 
-//      void setdryonly();
-
 
   int Ppreset;
   float *efxoutl;
@@ -69,14 +67,12 @@ private:
   int Plp;		//-64/64//low pass filter mix
   int Pbp;		//-64/64//Bandpass filter mix
   int Pq;		//0/127//filter resonance.
+  int Pstages;		//0-6// counter// Filter stages
   
-  
-  int Pdepth;
 
   //Control Parametrii
   void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setdepth (int Pdepth);
+  void setwidth (int Pwidth);
   void setampsns (int Pampsns);
 
   void reinitfilter ();
@@ -88,8 +84,9 @@ private:
   unsigned char Fstages;
   class SVFilter *filterl, *filterr;
 
-  float ms1;	//mean squares
-
+  float ms1, lpmix, hpmix, bpmix;	//mean squares
+  
+  float centfreq; //testing
 
 
 };

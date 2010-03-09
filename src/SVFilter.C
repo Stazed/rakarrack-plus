@@ -154,7 +154,6 @@ SVFilter::setmix (int mix, float lpmix, float bpmix, float hpmix)
   lpg = lpmix;
   bpg = bpmix;
   hpg = hpmix;
-
 };
 
 

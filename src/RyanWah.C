@@ -43,6 +43,11 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
   minfreq = 40.0f;
   frequency = 40.0f;
   q = 75.0f;
+  hpmix = 0.0f;
+  lpmix = 0.5f;
+  bpmix = 2.0f;
+  Ppreset = 0;
+  
   Fstages = 1;
   Ftype = 1;
   filterl = new SVFilter (0, 80.0f, 70.0f, 1);
@@ -93,6 +98,8 @@ RyanWah::out (float * smpsl, float * smpsr)
 
    float frl = minfreq + maxfreq*(lfol + rms);
    float frr = minfreq + maxfreq*(lfor + rms);
+   
+   centfreq = frl; //testing variable
 
   filterl->setfreq_and_q (frl, q);
   filterr->setfreq_and_q (frr, q);
@@ -100,12 +107,6 @@ RyanWah::out (float * smpsl, float * smpsr)
   filterl->filterout (efxoutl);
   filterr->filterout (efxoutr);
 
-  //panning    
-  for (i = 0; i < PERIOD; i++)
-    {
-      efxoutl[i] *= lpanning;
-      efxoutr[i] *= rpanning;
-    };
 
 };
 
@@ -127,10 +128,10 @@ RyanWah::cleanup ()
  */
 
 void
-RyanWah::setdepth (int Pdepth)
+RyanWah::setwidth (int Pwidth)
 {
-  this->Pdepth = Pdepth;
-  depth = powf (((float)Pdepth / 127.0f), 2.0f);
+  this->Pwidth = Pwidth;
+  depth = powf (((float)Pwidth / 127.0f), 2.0f);
 };
 
 
@@ -141,15 +142,6 @@ RyanWah::setvolume (int Pvolume)
   outvolume = (float)Pvolume / 127.0f;
   volume = outvolume;
 };
-
-void
-RyanWah::setpanning (int Pp)
-{
-  Ppanning = Pp;
-  lpanning = 0.5f + ((float)Ppanning) / 127.0f;
-  rpanning = 1.0f - lpanning;
-};
-
 
 void
 RyanWah::setampsns (int Pp)
@@ -174,26 +166,27 @@ RyanWah::reinitfilter ()
   filterl->cleanup();
   filterr->cleanup();
   //setmix (int mix, float lpmix, float bpmix, float hpmix)
-  filterl->setmix(1, 0.5f, 2.0f, 0.0f);
-  filterr->setmix(1, 0.5f, 2.0f, 0.0f);
+  filterl->setmix(1, lpmix, bpmix, hpmix);
+  filterr->setmix(1, lpmix, bpmix, hpmix);
+  
+  printf("lp %f bp %f hp %f q %f maxfreq %f stages %d minfreq %f fbias2 %f center %f\n", lpmix, bpmix, hpmix, q, maxfreq, Pstages, minfreq,oldfbias2,centfreq);
 };
 
 void
 RyanWah::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 10;
-  const int NUM_PRESETS = 5;
+  const int PRESET_SIZE = 15;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //WahWah
-    {0, 64, 138, 0, 0, 64, 70, 90, 0, 60},
-    //AutoWah
-    {64, 64, 80, 0, 0, 80, 70, 0, 0, 60},
-    //Sweep
-    {64, 64, 7, 0, 0, 50, 80, 0, 0, 60},
-    //VocalMorph1
-    {64, 64, 138, 0, 0, 64, 70, 64, 0, 60},
-    //VocalMorph1
-    {64, 64, 33, 0, 0, 96, 64, 0, 0, 60}
+    //Wah Pedal
+    {0, 72, 138, 0, 0, 64, 0, 50, 25, 45, 16, -40, 0, 1, 2000 },
+    //Mutron
+    {0, 90, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000 },
+    //Phase Wah
+    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000 },
+    //Phaser
+    {64, 60, 60, 0, 0, 64, 50, 10, 10, 40, 32, 32, 32, 4, 2000 },
+
   };
 
   if (npreset >= NUM_PRESETS)
@@ -216,14 +209,15 @@ RyanWah::changepar (int npar, int value)
       setvolume (value);
       break;
     case 1:
-      setpanning (value);
+      Pq = value;
+      q = (float) Pq;      
       break;
     case 2:
       lfo.Pfreq = value;
       lfo.updateparams ();
       break;
     case 3:
-      lfo.Prandomness = value;
+      lfo.Prandomness = 0;//value;
       lfo.updateparams ();
       break;
     case 4:
@@ -235,7 +229,7 @@ RyanWah::changepar (int npar, int value)
       lfo.updateparams ();
       break;
     case 6:
-      setdepth (value);
+      setwidth (value);
       break;
     case 7:
       setampsns (value);
@@ -248,6 +242,32 @@ RyanWah::changepar (int npar, int value)
       Pampsmooth = value;
       setampsns (Pampsns);
       break;
+     case 10:
+      Plp = value;
+      lpmix = ((float) Plp)/32.0f;
+      reinitfilter ();     
+      break;     
+     case 11:
+      Pbp = value;
+      bpmix = ((float) Pbp)/32.0f;
+      reinitfilter ();
+      break;     
+     case 12:
+      Php = value;
+      hpmix = ((float) Php)/32.0f;
+      reinitfilter (); 
+      break;
+     case 13:
+     Pstages = (value);
+     filterl->setstages(Pstages);
+     filterr->setstages(Pstages);
+      break;  
+     case 14:
+     Prange = value;
+     maxfreq = ((float) Prange) + 100.0 + fbias * 800.0f;
+     minfreq = 40.0f + 800.0f * ((float) Prange)/6000.0f;
+     break;   
+      
     };
 };
 
@@ -260,7 +280,7 @@ RyanWah::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return (Ppanning);
+      return (Pq);
       break;
     case 2:
       return (lfo.Pfreq);
@@ -275,7 +295,7 @@ RyanWah::getpar (int npar)
       return (lfo.Pstereo);
       break;
     case 6:
-      return (Pdepth);
+      return (Pwidth);
       break;
     case 7:
       return (Pampsns);
@@ -285,6 +305,21 @@ RyanWah::getpar (int npar)
       break;
     case 9:
       return (Pampsmooth);
+      break;
+    case 10:
+      return (Plp);
+      break;
+    case 11:
+      return (Pbp);
+      break;
+    case 12:
+      return (Php);
+      break;
+    case 13:
+      return (Pstages);
+      break;
+    case 14:
+      return (Prange);    
       break;
     default:
       return (0);
