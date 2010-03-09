@@ -74,7 +74,9 @@ Pan::out (float *smpsl, float *smpsr)
       for (i = 0; i < PERIOD; i++)
 
 	{
-  
+
+          smpsl[i] *= cos(dvalue);
+          smpsr[i] *= sin(dvalue);
           
        	  avg = (smpsl[i] + smpsr[i]) * .5f;
 	  ldiff = smpsl[i] - avg;
@@ -85,10 +87,6 @@ Pan::out (float *smpsl, float *smpsr)
 
 	  tmp = avg + rdiff * mul;
 	  smpsr[i] = tmp;
-
-          smpsl[i] *= cos(dvalue);
-          smpsr[i] *= sin(dvalue);
-
 
 
 	}
