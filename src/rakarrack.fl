@@ -894,7 +894,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open selected
+Pexitprogram=1;} open
       xywh {1413 92 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -7302,6 +7302,8 @@ looper_WD->value(rkr->lv[31][0]-64);
 looper_level1->value(rkr->lv[31][6]);
 looper_level2->value(rkr->lv[31][10]);
 looper_rv->value(rkr->lv[31][5]);
+looper_r1->value(rkr->lv[31][11]);
+looper_r2->value(rkr->lv[31][12]);
 looper_ap->value(rkr->lv[31][9]);
 looper_activar->value(rkr->Looper_Bypass);
 
@@ -7328,7 +7330,8 @@ ryanwah_activar->value(rkr->RyanWah_Bypass);
 
 
 
-reordena();} {}
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {
