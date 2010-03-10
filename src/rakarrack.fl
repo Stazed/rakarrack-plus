@@ -886,7 +886,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -4979,16 +4980,16 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           xywh {372 288 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
-        Fl_Value_Slider convo_length {
-          label Length
-          callback {rkr->efx_Convol->changepar(3,(int)o->value());}
-          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
-          class SliderW
-        }
         Fl_Value_Slider convo_fb {
           label Fb
           callback {rkr->efx_Convol->changepar(10,(int)o->value());}
           xywh {372 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider convo_length {
+          label Length
+          callback {rkr->efx_Convol->changepar(3,(int)o->value());}
+          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
           class SliderW
         }
         Fl_Check_Button convo_reverb {
@@ -5079,7 +5080,7 @@ looper_t2->value(rkr->efx_Looper->getpar(8));
 looper_r1->value(rkr->efx_Looper->getpar(11));
 looper_r2->value(rkr->efx_Looper->getpar(12));
 
-if((int)looper_activar->value())rkr->Looper_Bypass=1;} selected
+if((int)looper_activar->value())rkr->Looper_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -8181,7 +8182,7 @@ rkr->RC->cc=1;} {}
 
 int i;
 
-for (i=1; i<280; i++)
+for (i=1; i<286; i++)
 
 {
 
@@ -8961,7 +8962,25 @@ switch (i)
      looper_clear->value(rkr->efx_Looper->getpar(4));
      update_looper();
      break;
-
+     case 280:
+     convo_WD->value(rkr->efx_Convol->getpar(0)-64);
+     break;
+     case 281:
+     convo_pan->value(rkr->efx_Convol->getpar(1)-64);
+     break;
+     case 282:
+     convo_level->value(rkr->efx_Convol->getpar(7));
+     break;
+     case 283:
+     convo_damp->value(rkr->efx_Convol->getpar(6));
+     break;
+     case 284:
+     convo_fb->value(rkr->efx_Convol->getpar(10));
+     break;
+     case 285:
+     convo_length->value(rkr->efx_Convol->getpar(3));
+     break;
+         
 
 }
 
@@ -8970,7 +8989,8 @@ switch (i)
 
 
 rkr->Mvalue=0;
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {int miralo;

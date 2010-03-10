@@ -1733,6 +1733,30 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Looper->changepar(4,i);   
          break;
 
+    case 280:
+         efx_Convol->changepar(0,value);
+         break;
+         
+    case 281:
+         efx_Convol->changepar(1,value);
+         break;
+
+    case 282:
+         efx_Convol->changepar(7,value);
+         break;
+
+    case 283:
+         efx_Convol->changepar(6,value);
+         break;
+
+    case 284:
+         efx_Convol->changepar(10,value-64);
+         break;
+
+    case 285:
+         efx_Convol->changepar(3,5+(int)((float)value*1.9291339f));
+         break;
+
 
    } 
       

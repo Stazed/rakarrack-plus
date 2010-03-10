@@ -2151,15 +2151,15 @@ private:
   void cb_convo_damp_i(SliderW*, void*);
   static void cb_convo_damp(SliderW*, void*);
 public:
-  SliderW *convo_length;
-private:
-  void cb_convo_length_i(SliderW*, void*);
-  static void cb_convo_length(SliderW*, void*);
-public:
   SliderW *convo_fb;
 private:
   void cb_convo_fb_i(SliderW*, void*);
   static void cb_convo_fb(SliderW*, void*);
+public:
+  SliderW *convo_length;
+private:
+  void cb_convo_length_i(SliderW*, void*);
+  static void cb_convo_length(SliderW*, void*);
 public:
   Fl_Check_Button *convo_reverb;
 private:

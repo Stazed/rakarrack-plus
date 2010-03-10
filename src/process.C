@@ -203,7 +203,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 254;
+  NumParams= 260;
 
 {
    static const char *los_params[] = 
@@ -254,6 +254,12 @@ RKR::RKR ()
 "Compressor Ratio","144",
 "Compressor R.Time","143",
 "Compressor Threshold","146",
+"Convolotron Damp","283",
+"Convolotron Fb","284",
+"Convolotron Length","285",
+"Convolotron Level","282",
+"Convolotron Pan","281",
+"Convolotron WD","280",
 "Derelict Dist Color","6",
 "Derelict Dist Drive","2",
 "Derelict Dist HPF","5",
