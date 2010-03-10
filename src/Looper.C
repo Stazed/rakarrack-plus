@@ -139,12 +139,12 @@ Looper::out (float * smpsl, float * smpsr)
     if(Precord)
      {
      
-	     if(Prec1)
+	     if((Prec1) && (PT1))
 	     {
 	      ldelay[kl] += smpsl[i];
 	      rdelay[kl] += smpsr[i];
 	      }
-	     if(Prec2)
+	     if((Prec2) && (PT2))
 	     {
 	      t2ldelay[kl2] += smpsl[i];
 	      t2rdelay[kl2] += smpsr[i];
@@ -281,12 +281,12 @@ Looper::changepar (int npar, int value)
     case 3:		//Record at current position.  If first time (clear = true), then set end of loop, "dl"
       if(Precord)
       {
-      if(first_time1)
+      if((first_time1) && (Prec1))
         {
 	   dl = kl;
 	   first_time1 = 0;
 	}  
-      if(first_time2)
+      if((first_time2) && (Prec1))
       {
            dl2 = kl2;
 	   first_time2 = 0;
