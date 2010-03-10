@@ -323,6 +323,16 @@ if(value > 149)
    case 27: 
      if (inoff) MBVvol_Bypass=1; else MBVvol_Bypass=0;
      break;
+   case 28:
+     if(inoff) Looper_Bypass=1; else Looper_Bypass=0;
+     break;
+   case 29:
+    if(inoff) RyanWah_Bypass=1; else RyanWah_Bypass=0;
+     break;
+       
+
+
+
 }   
 }
 
@@ -419,6 +429,15 @@ RKR::checkonoff(int miraque)
    case 27: 
      if (MBVvol_Bypass) return(0);
      break;
+   case 28:
+     if (Looper_Bypass) return(0);
+     break;
+   case 29:
+     if (RyanWah_Bypass) return(0);
+     break;
+
+
+
 }   
 return(1);
 
@@ -1591,7 +1610,62 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 255:
          efx_MBVvol->changepar(9,2000+(int)((float)value*188.97638));
          break;
-         
+
+    case 256:
+         efx_RyanWah->changepar(0,value);
+         break;
+
+    case 257:
+         efx_RyanWah->changepar(10,value-64);
+         break;
+
+    case 258:
+         efx_RyanWah->changepar(11,value-64);
+         break;
+
+    case 259:
+         efx_RyanWah->changepar(12,value-64);
+         break;
+
+    case 260:
+         efx_RyanWah->changepar(6,value);
+         break;
+
+    case 261:
+         efx_RyanWah->changepar(2,ret_Tempo(value));
+         break;
+
+    case 262:
+         efx_RyanWah->changepar(1,value);
+         break;
+
+    case 263:
+         efx_RyanWah->changepar(14,10+(int)((float)value*47.165354f));
+         break;
+
+    case 264:
+         efx_RyanWah->changepar(8,value);
+         break;
+
+    case 265:
+         efx_RyanWah->changepar(7,value-64);
+         break;
+
+    case 266:
+         efx_RyanWah->changepar(9,value);
+         break;
+
+    case 267:
+         efx_Looper->changepar(0,value);
+         break;
+    
+    case 268:
+         efx_Looper->changepar(6,value);
+         break;               
+   
+    case 269:
+         efx_Looper->changepar(10,value);
+         break;               
    
    
    } 

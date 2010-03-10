@@ -203,7 +203,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 230;
+  NumParams= 244;
 
 {
    static const char *los_params[] = 
@@ -341,6 +341,9 @@ RKR::RKR ()
 "Harmonizer Pan","49",
 "Harmonizer Wet/Dry","31",
 "Input","14",
+"Looper Level 1","268",
+"Looper Level 2","269",
+"Looper WD","267",
 "Multi On/Off","116",
 "Musical Delay Fb 1","83",
 "Musical Delay Fb 2","84",
@@ -350,6 +353,17 @@ RKR::RKR ()
 "Musical Delay Pan 1","62",
 "Musical Delay Pan 2","65",
 "Musical Delay Wet/Dry","56",
+"MuTroMojo Amp.S","265",
+"MuTroMojo BP","258",
+"MuTroMojo HP","259",
+"MuTroMojo LP","257",
+"MuTroMojo Range","263",
+"MuTroMojo Res","262",
+"MuTroMojo Smooth","266",
+"MuTroMojo Tempo","261",
+"MuTroMojo Wah","264",
+"MuTroMojo WD","256",
+"MuTroMojo Width","260",
 "Overdrive Drive","68",
 "Overdrive Level","70",
 "Overdrive LPF","85",

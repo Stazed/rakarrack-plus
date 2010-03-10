@@ -2281,50 +2281,10 @@ private:
   void cb_ryanwah_WD_i(SliderW*, void*);
   static void cb_ryanwah_WD(SliderW*, void*);
 public:
-  SliderW *ryanwah_q;
-private:
-  void cb_ryanwah_q_i(SliderW*, void*);
-  static void cb_ryanwah_q(SliderW*, void*);
-public:
-  SliderW *ryanwah_freq;
-private:
-  void cb_ryanwah_freq_i(SliderW*, void*);
-  static void cb_ryanwah_freq(SliderW*, void*);
-public:
-  SliderW *ryanwah_rng;
-private:
-  void cb_ryanwah_rng_i(SliderW*, void*);
-  static void cb_ryanwah_rng(SliderW*, void*);
-public:
-  Fl_Choice *ryanwah_lfotype;
-private:
-  void cb_ryanwah_lfotype_i(Fl_Choice*, void*);
-  static void cb_ryanwah_lfotype(Fl_Choice*, void*);
-public:
   SliderW *ryanwah_lp;
 private:
   void cb_ryanwah_lp_i(SliderW*, void*);
   static void cb_ryanwah_lp(SliderW*, void*);
-public:
-  SliderW *ryanwah_dpth;
-private:
-  void cb_ryanwah_dpth_i(SliderW*, void*);
-  static void cb_ryanwah_dpth(SliderW*, void*);
-public:
-  SliderW *ryanwah_ampsns;
-private:
-  void cb_ryanwah_ampsns_i(SliderW*, void*);
-  static void cb_ryanwah_ampsns(SliderW*, void*);
-public:
-  SliderW *ryanwah_ampsnsinv;
-private:
-  void cb_ryanwah_ampsnsinv_i(SliderW*, void*);
-  static void cb_ryanwah_ampsnsinv(SliderW*, void*);
-public:
-  SliderW *ryanwah_smooth;
-private:
-  void cb_ryanwah_smooth_i(SliderW*, void*);
-  static void cb_ryanwah_smooth(SliderW*, void*);
 public:
   SliderW *ryanwah_bp;
 private:
@@ -2340,6 +2300,46 @@ public:
 private:
   void cb_svfilter_stages_i(Fl_Counter*, void*);
   static void cb_svfilter_stages(Fl_Counter*, void*);
+public:
+  Fl_Choice *ryanwah_lfotype;
+private:
+  void cb_ryanwah_lfotype_i(Fl_Choice*, void*);
+  static void cb_ryanwah_lfotype(Fl_Choice*, void*);
+public:
+  SliderW *ryanwah_dpth;
+private:
+  void cb_ryanwah_dpth_i(SliderW*, void*);
+  static void cb_ryanwah_dpth(SliderW*, void*);
+public:
+  SliderW *ryanwah_freq;
+private:
+  void cb_ryanwah_freq_i(SliderW*, void*);
+  static void cb_ryanwah_freq(SliderW*, void*);
+public:
+  SliderW *ryanwah_q;
+private:
+  void cb_ryanwah_q_i(SliderW*, void*);
+  static void cb_ryanwah_q(SliderW*, void*);
+public:
+  SliderW *ryanwah_rng;
+private:
+  void cb_ryanwah_rng_i(SliderW*, void*);
+  static void cb_ryanwah_rng(SliderW*, void*);
+public:
+  SliderW *ryanwah_ampsnsinv;
+private:
+  void cb_ryanwah_ampsnsinv_i(SliderW*, void*);
+  static void cb_ryanwah_ampsnsinv(SliderW*, void*);
+public:
+  SliderW *ryanwah_ampsns;
+private:
+  void cb_ryanwah_ampsns_i(SliderW*, void*);
+  static void cb_ryanwah_ampsns(SliderW*, void*);
+public:
+  SliderW *ryanwah_smooth;
+private:
+  void cb_ryanwah_smooth_i(SliderW*, void*);
+  static void cb_ryanwah_smooth(SliderW*, void*);
 public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
