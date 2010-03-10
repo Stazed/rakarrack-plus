@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -895,7 +894,7 @@ class RKRGUI {open
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} selected
       xywh {332 128 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -4538,7 +4537,7 @@ shuffle_E->value(rkr->efx_Shuffle->getpar(10));} open
             xywh {62 62 36 21} labelsize 10
           }
           MenuItem {} {
-            label Remover selected
+            label Remover
             xywh {72 72 36 21} labelsize 10
           }
         }
@@ -7281,6 +7280,16 @@ convo_user->value(rkr->lv[30][4]);
 convo_safe->value(rkr->lv[30][2]);
 convo_fnum->value(rkr->lv[30][8]);
 convo_activar->value(rkr->Convol_Bypass);
+
+
+//Looper
+
+looper_WD->value(rkr->lv[31][0]-64);
+looper_level1->value(rkr->lv[31][6]);
+looper_level2->value(rkr->lv[31][10]);
+looper_rv->value(rkr->lv[31][5]);
+looper_ap->value(rkr->lv[31][9]);
+
 
 
 reordena();} {}

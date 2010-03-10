@@ -13974,6 +13974,16 @@ convo_fnum->value(rkr->lv[30][8]);
 convo_activar->value(rkr->Convol_Bypass);
 
 
+//Looper
+
+looper_WD->value(rkr->lv[31][0]-64);
+looper_level1->value(rkr->lv[31][6]);
+looper_level2->value(rkr->lv[31][10]);
+looper_rv->value(rkr->lv[31][5]);
+looper_ap->value(rkr->lv[31][9]);
+
+
+
 reordena();
 }
 
