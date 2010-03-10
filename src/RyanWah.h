@@ -68,6 +68,8 @@ private:
   int Pbp;		//-64/64//Bandpass filter mix
   int Pq;		//0/127//filter resonance.
   int Pstages;		//0-6// counter// Filter stages
+  int Pminfreq;		//30/800//set lowest freq in range.
+  int variq;		//on-off//checkbox//Selects whether Q is varied w/ frequency to emulate a wahwah
   
 
   //Control Parametrii
@@ -82,7 +84,6 @@ private:
   float rpanning, lpanning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, minfreq;
   unsigned char Ftype;
   unsigned char Fstages;
-  int variq;
   class SVFilter *filterl, *filterr;
 
   float ms1, lpmix, hpmix, bpmix;	//mean squares

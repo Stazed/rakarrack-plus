@@ -139,12 +139,12 @@ Looper::out (float * smpsl, float * smpsr)
     if(Precord)
      {
      
-	     if(PT1)
+	     if(Prec1)
 	     {
 	      ldelay[kl] += smpsl[i];
 	      rdelay[kl] += smpsr[i];
 	      }
-	     if(PT2)
+	     if(Prec2)
 	     {
 	      t2ldelay[kl2] += smpsl[i];
 	      t2rdelay[kl2] += smpsr[i];
@@ -262,10 +262,12 @@ Looper::changepar (int npar, int value)
     else
     {
       Pplay = 1;
+      Pstop = 0;
     }
     if(Pstop)
     {
     Pstop = 0;
+    Pplay = 0;
     kl = 0;
     }
     Pclear=0;
@@ -339,15 +341,19 @@ Looper::changepar (int npar, int value)
      }
      track2gain = (float) PT2;
      setfade ();
-      break; 
-      
+      break;      
     case 9:
     Pautoplay = value;
-     break;
-    
+     break;    
     case 10:
     Pfade2 = value;
     setfade();
+     break;
+     case 11:
+     Prec1 = value;
+     break;
+     case 12:
+     Prec2 = value;
      break;
       
     };
