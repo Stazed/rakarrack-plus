@@ -172,7 +172,6 @@ RyanWah::reinitfilter ()
   filterl->setmix(1, lpmix, bpmix, hpmix);
   filterr->setmix(1, lpmix, bpmix, hpmix);
   
-  printf("lp %f bp %f hp %f q %f maxfreq %f stages %d minfreq %f fbias2 %f center %f\n", lpmix, bpmix, hpmix, q, maxfreq, Pstages, minfreq,oldfbias2,centfreq);
 };
 
 void
