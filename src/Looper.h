@@ -66,6 +66,8 @@ private:
   int PT1;
   int PT2;
   int Pautoplay;
+  int Prec1;
+  int Prec2;
   
   void initdelays ();
   void setfade ();
