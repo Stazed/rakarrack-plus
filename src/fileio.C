@@ -419,6 +419,19 @@ RKR::savefile (char *filename)
                    efx_Looper->getpar (10), Looper_Bypass);
 	  break;
  
+	case 31:
+	  //RyanWah
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_RyanWah->getpar (0), efx_RyanWah->getpar (1),
+		   efx_RyanWah->getpar (2), efx_RyanWah->getpar (3),
+		   efx_RyanWah->getpar (4), efx_RyanWah->getpar (5),
+		   efx_RyanWah->getpar (6), efx_RyanWah->getpar (7),
+		   efx_RyanWah->getpar (8), efx_RyanWah->getpar (9),
+                   efx_RyanWah->getpar (10), efx_RyanWah->getpar (11),
+		   efx_RyanWah->getpar (12), efx_RyanWah->getpar (13),
+                   efx_RyanWah->getpar(14),  RyanWah_Bypass);
+
+
 
 
 	}
@@ -831,6 +844,16 @@ RKR::loadfile (char *filename)
 		  &lv[31][10],&Looper_B);
 	  break;
 
+	case 31:
+	  //RyanWah
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[32][0], &lv[32][1], &lv[32][2], &lv[32][3], &lv[32][4],
+		  &lv[32][5], &lv[32][6], &lv[32][7], &lv[32][8], &lv[32][9],
+                  &lv[32][10], &lv[32][11], &lv[32][12], &lv[32][13], &lv[32][14],
+		  &RyanWah_B);
+	  break;
+
+
 
 	}
     }
@@ -905,6 +928,7 @@ RKR::Actualizar_Audio ()
   MBVvol_Bypass = 0;
   Convol_Bypass = 0;
   Looper_Bypass = 0;
+  RyanWah_Bypass = 0;
   
   cleanup_efx ();
 
@@ -965,6 +989,8 @@ for (i = 0; i <= 6; i++)
     efx_Convol->changepar (i, lv[30][i]);
  for (i = 0; i <= 10; i++)
     efx_Looper->changepar (i, lv[31][i]);
+ for (i = 0; i <= 14; i++)
+    efx_RyanWah->changepar (i, lv[32][i]);
   
 
   for (i = 0; i < 12; i++)
@@ -1025,6 +1051,7 @@ for (i = 0; i <= 6; i++)
   MBVvol_Bypass = MBVvol_B;
   Convol_Bypass = Convol_B;
   Looper_Bypass = Looper_B;
+  RyanWah_Bypass = RyanWah_B;
   Bypass = Bypass_B;
 
 }
@@ -1090,7 +1117,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[32][16] = {
+  int presets[33][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1154,12 +1181,13 @@ RKR::New ()
 //Convolotron
     {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0},
  //Looper
-    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0}
+    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0},
+//RyanWah
+    {16, 10, 138, 0, 0, 64, 0, 50, 25, 45, -16, 40, -3, 1, 1600, 375}
+    
 
     
-    
-    
-  };
+};
 
 
   for (j=0;j<10;j++) active[j]=0;
@@ -1219,6 +1247,7 @@ RKR::New ()
   MBVvol_B = 0;
   Convol_B = 0;
   Looper_B = 0;
+  RyanWah_B = 0;
   Bypass_B = 0;
 
   
@@ -1241,7 +1270,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[32][16] = {
+  int presets[33][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1305,7 +1334,10 @@ RKR::New_Bank ()
 //Convolotron 1
     {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0},
 //Looper
-    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0}
+    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0},
+//RyanWah
+    {16, 10, 138, 0, 0, 64, 0, 50, 25, 45, -16, 40, -3, 1, 1600, 375}
+    
     
     
          
@@ -1404,6 +1436,7 @@ RKR::Bank_to_Preset (int i)
   MBVvol_B = Bank[i].lv[29][19];
   Convol_B = Bank[i].lv[30][19];
   Looper_B = Bank[i].lv[31][19];
+  RyanWah_B = Bank[i].lv[32][19];
      
   
   Bypass_B = Bypass;
@@ -1501,6 +1534,8 @@ RKR::Preset_to_Bank (int i)
     lv[30][j] = efx_Convol->getpar(j);
   for (j = 0; j <= 10; j++)
     lv[31][j] = efx_Looper->getpar(j);
+  for (j = 0; j <= 14; j++)
+    lv[32][j] = efx_RyanWah->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1565,6 +1600,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[29][19] = MBVvol_Bypass;
   Bank[i].lv[30][19] = Convol_Bypass;
   Bank[i].lv[31][19] = Looper_Bypass;
+  Bank[i].lv[32][19] = RyanWah_Bypass;
   
   
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

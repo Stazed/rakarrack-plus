@@ -13981,6 +13981,28 @@ looper_level1->value(rkr->lv[31][6]);
 looper_level2->value(rkr->lv[31][10]);
 looper_rv->value(rkr->lv[31][5]);
 looper_ap->value(rkr->lv[31][9]);
+looper_activar->value(rkr->Looper_Bypass);
+
+//RyanWah
+
+
+ryanwah_WD->value(rkr->lv[32][0]-64);
+ryanwah_q->value(rkr->lv[32][1]);
+ryanwah_freq->value(rkr->lv[32][2]);
+ryanwah_rng->value(rkr->lv[32][14]);
+ryanwah_lfotype->value(rkr->lv[32][4]);
+ryanwah_lp->value(rkr->lv[32][10]);
+ryanwah_dpth->value(rkr->lv[32][6]);
+ryanwah_ampsns->value(rkr->lv[32][7]);
+ryanwah_ampsnsinv->value(rkr->lv[32][8]);
+ryanwah_smooth->value(rkr->lv[32][9]);
+ryanwah_bp->value(rkr->lv[32][11]);
+ryanwah_hp->value(rkr->lv[32][12]);
+svfilter_stages->value(rkr->lv[32][13]);
+ryanwah_activar->value(rkr->RyanWah_Bypass);
+
+
+
 
 
 
