@@ -14010,6 +14010,8 @@ looper_WD->value(rkr->lv[31][0]-64);
 looper_level1->value(rkr->lv[31][6]);
 looper_level2->value(rkr->lv[31][10]);
 looper_rv->value(rkr->lv[31][5]);
+looper_r1->value(rkr->lv[31][11]);
+looper_r2->value(rkr->lv[31][12]);
 looper_ap->value(rkr->lv[31][9]);
 looper_activar->value(rkr->Looper_Bypass);
 
