@@ -14012,6 +14012,8 @@ looper_level2->value(rkr->lv[31][10]);
 looper_rv->value(rkr->lv[31][5]);
 looper_r1->value(rkr->lv[31][11]);
 looper_r2->value(rkr->lv[31][12]);
+looper_t1->value(rkr->lv[31][7]);
+looper_t2->value(rkr->lv[31][8]);
 looper_ap->value(rkr->lv[31][9]);
 looper_activar->value(rkr->Looper_Bypass);
 
