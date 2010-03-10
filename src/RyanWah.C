@@ -270,6 +270,7 @@ RyanWah::changepar (int npar, int value)
      maxfreq = ((float) Prange) + 100.0 + fbias * 800.0f;
      break; 
      case 15:
+     Pminfreq = value;
      minfreq = (float) value;
      break;  
      case 16:
@@ -329,6 +330,12 @@ RyanWah::getpar (int npar)
     case 14:
       return (Prange);    
       break;
+    case 15:
+      
+    break;
+    case 16:
+    
+    break;
     default:
       return (0);
     };
