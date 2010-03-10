@@ -894,8 +894,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {332 128 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} open selected
+      xywh {1413 92 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -5076,6 +5076,8 @@ looper_level2->value(rkr->efx_Looper->getpar(10));
 
 looper_t1->value(rkr->efx_Looper->getpar(7));
 looper_t2->value(rkr->efx_Looper->getpar(8));
+looper_r1->value(rkr->efx_Looper->getpar(11));
+looper_r2->value(rkr->efx_Looper->getpar(12));
 
 if((int)looper_activar->value())rkr->Looper_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
@@ -5177,6 +5179,18 @@ update_looper();}
 update_looper();}
           xywh {375 377 57 14} labelsize 10
         }
+        Fl_Check_Button looper_r1 {
+          label R1
+          user_data 2
+          callback {rkr->efx_Looper->changepar(11,(int)o->value())}
+          xywh {328 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+        }
+        Fl_Check_Button looper_r2 {
+          label R2
+          user_data 2
+          callback {rkr->efx_Looper->changepar(12,(int)o->value())}
+          xywh {347 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+        }
       }
       Fl_Group RYANWAH {
         user_data 1
@@ -5209,7 +5223,7 @@ ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
 svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
 ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
 
-if((int)ryanwah_activar->value()) rkr->RyanWah_Bypass=1;} selected
+if((int)ryanwah_activar->value()) rkr->RyanWah_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
