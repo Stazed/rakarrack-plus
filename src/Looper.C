@@ -398,6 +398,12 @@ Looper::getpar (int npar)
     case 10:
       return (Pfade2);
       break;
+    case 11:
+      return (Prec1);
+      break;
+    case 12:
+      return (Prec2);
+      break;
     };
   return (0);			//in case of bogus parameter number
 };
