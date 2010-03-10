@@ -274,7 +274,7 @@ RyanWah::changepar (int npar, int value)
      minfreq = (float) value;
      break;  
      case 16:
-     variq = 1;
+     variq = value;
      break;
       
     };
@@ -331,11 +331,11 @@ RyanWah::getpar (int npar)
       return (Prange);    
       break;
     case 15:
-      
-    break;
+      return (Pminfreq);
+      break;
     case 16:
-    
-    break;
+      return (variq);
+      break;
     default:
       return (0);
     };
