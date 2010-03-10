@@ -228,15 +228,14 @@ if(value < 20)
   miraque = efx_order[numef];
   Mnumeff = numef;
 }
-
-if(value > 149)
+else
 {
-  numef = value -150;
+  numef = value-20;
   inoff = checkonoff(numef); 
   miraque = numef;
-  Mnumeff = numef;
+  Mnumeff = 1000 + numef;
 }
-
+    
   switch(miraque)
    {
    case 0:
@@ -317,23 +316,34 @@ if(value > 149)
    case 25: 
      if (inoff) Expander_Bypass=1; else Expander_Bypass=0;
      break;
-   case 26: 
-     if (inoff) Synthfilter_Bypass=1; else Synthfilter_Bypass=0;
+   case 26:
+     if (inoff) Shuffle_Bypass=1; else Shuffle_Bypass=0;
      break;
    case 27: 
+     if (inoff) Synthfilter_Bypass=1; else Synthfilter_Bypass=0;
+     break;
+   case 28: 
      if (inoff) MBVvol_Bypass=1; else MBVvol_Bypass=0;
      break;
-   case 28:
+   case 29: 
+     if (inoff) Convol_Bypass=1; else Convol_Bypass=0;
+     break;
+   case 30:
      if(inoff) Looper_Bypass=1; else Looper_Bypass=0;
      break;
-   case 29:
+   case 31:
     if(inoff) RyanWah_Bypass=1; else RyanWah_Bypass=0;
      break;
-       
+   }   
 
 
 
-}   
+
+
+
+
+
+
 }
 
 
@@ -424,15 +434,21 @@ RKR::checkonoff(int miraque)
      if (Expander_Bypass) return(0);
      break;
    case 26: 
-     if (Synthfilter_Bypass) return(0);
+     if (Shuffle_Bypass) return(0);
      break;
    case 27: 
+     if (Synthfilter_Bypass) return(0);
+     break;
+   case 28: 
      if (MBVvol_Bypass) return(0);
      break;
-   case 28:
+   case 29:
+     if (Convol_Bypass) return(0); 
+     break; 
+   case 30:
      if (Looper_Bypass) return(0);
      break;
-   case 29:
+   case 31:
      if (RyanWah_Bypass) return(0);
      break;
 

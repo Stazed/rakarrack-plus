@@ -14919,7 +14919,6 @@ switch (i)
      case 7:
      Nivel_Salida->value((int) (rkr->Master_Volume*100.0)-50);
      break;  
-     
      case 1:
      WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
      break;
@@ -15657,7 +15656,13 @@ Fl::redraw();
 }
 
 void RKRGUI::ActOnOff() {
-  switch(rkr->efx_order[rkr->Mnumeff])
+  int miralo;
+
+if(rkr->Mnumeff >=1000) miralo=rkr->Mnumeff-1000;
+else
+miralo = rkr->efx_order[rkr->Mnumeff];
+
+switch(miralo)
 {
   case 0:
   eq_activar->value(rkr->EQ1_Bypass);
@@ -15764,18 +15769,26 @@ void RKRGUI::ActOnOff() {
   expander_activar->do_callback();
   break;
   case 26:
+  shuffle_activar->value(rkr->Shuffle_Bypass);
+  shuffle_activar->do_callback();
+  break;
+  case 27:
   synthfilter_activar->value(rkr->Synthfilter_Bypass);
   synthfilter_activar->do_callback();
   break;
-  case 27:
+  case 28:
   mbvvol_activar->value(rkr->MBVvol_Bypass);
   mbvvol_activar->do_callback();
   break;
-  case 28:
+  case 29:
+  convo_activar->value(rkr->Convol_Bypass);
+  convo_activar->do_callback();
+  break;
+  case 30:
   looper_activar->value(rkr->Looper_Bypass);
   looper_activar->do_callback();
   break;
-  case 29:
+  case 31:
   ryanwah_activar->value(rkr->RyanWah_Bypass);
   ryanwah_activar->do_callback();
   break;  
