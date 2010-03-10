@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -5159,6 +5158,18 @@ update_looper();}
           label Track
           xywh {391 355 39 14} labelsize 10 labelcolor 7
         }
+        Fl_Check_Button looper_r1 {
+          label R1
+          user_data 2
+          callback {rkr->efx_Looper->changepar(11,(int)o->value())}
+          xywh {328 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+        }
+        Fl_Check_Button looper_r2 {
+          label R2
+          user_data 2
+          callback {rkr->efx_Looper->changepar(12,(int)o->value())}
+          xywh {347 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+        }
         Fl_Button looper_t1 {
           label 1
           user_data 2
@@ -5179,18 +5190,6 @@ update_looper();}
           callback {rkr->efx_Looper->changepar(4,(int)o->value());
 update_looper();}
           xywh {375 377 57 14} labelsize 10
-        }
-        Fl_Check_Button looper_r1 {
-          label R1
-          user_data 2
-          callback {rkr->efx_Looper->changepar(11,(int)o->value())}
-          xywh {328 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
-        }
-        Fl_Check_Button looper_r2 {
-          label R2
-          user_data 2
-          callback {rkr->efx_Looper->changepar(12,(int)o->value())}
-          xywh {347 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
         }
       }
       Fl_Group RYANWAH {
@@ -8180,7 +8179,7 @@ rkr->RC->cc=1;} {}
 
 int i;
 
-for (i=1; i<270; i++)
+for (i=1; i<280; i++)
 
 {
 
@@ -8924,7 +8923,42 @@ switch (i)
      case 269:
      looper_level2->value(rkr->efx_Looper->getpar(10));
      break; 
-
+     case 270:
+     looper_rv->value(rkr->efx_Looper->getpar(5));
+     break;
+     case 271:
+     looper_ap->value(rkr->efx_Looper->getpar(9));
+     break;
+     case 272:
+     looper_play->value(rkr->efx_Looper->getpar(1));
+     update_looper();
+     break;
+     case 273:
+     looper_stop->value(rkr->efx_Looper->getpar(2));
+     update_looper();
+     break;
+     case 274:
+     looper_record->value(rkr->efx_Looper->getpar(3));
+     update_looper();
+     break;
+     case 275:
+     looper_r1->value(rkr->efx_Looper->getpar(11));
+     break;
+     case 276:
+     looper_r2->value(rkr->efx_Looper->getpar(12));
+     break;
+     case 277:
+     looper_t1->value(rkr->efx_Looper->getpar(7));
+     update_looper();
+     break;
+     case 278:
+     looper_t2->value(rkr->efx_Looper->getpar(8));
+     update_looper();
+     break;
+     case 279:
+     looper_clear->value(rkr->efx_Looper->getpar(4));
+     update_looper();
+     break;
 
 
 }
@@ -8934,7 +8968,8 @@ switch (i)
 
 
 rkr->Mvalue=0;
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {int miralo;
@@ -9075,8 +9110,7 @@ switch(miralo)
   break;  
 
 
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;

@@ -2239,6 +2239,16 @@ private:
   void cb_looper_record_i(Fl_Button*, void*);
   static void cb_looper_record(Fl_Button*, void*);
 public:
+  Fl_Check_Button *looper_r1;
+private:
+  void cb_looper_r1_i(Fl_Check_Button*, void*);
+  static void cb_looper_r1(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *looper_r2;
+private:
+  void cb_looper_r2_i(Fl_Check_Button*, void*);
+  static void cb_looper_r2(Fl_Check_Button*, void*);
+public:
   Fl_Button *looper_t1;
 private:
   void cb_looper_t1_i(Fl_Button*, void*);
@@ -2253,16 +2263,6 @@ public:
 private:
   void cb_looper_clear_i(Fl_Button*, void*);
   static void cb_looper_clear(Fl_Button*, void*);
-public:
-  Fl_Check_Button *looper_r1;
-private:
-  void cb_looper_r1_i(Fl_Check_Button*, void*);
-  static void cb_looper_r1(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *looper_r2;
-private:
-  void cb_looper_r2_i(Fl_Check_Button*, void*);
-  static void cb_looper_r2(Fl_Check_Button*, void*);
 public:
   Fl_Group *RYANWAH;
   Fl_Light_Button *ryanwah_activar;

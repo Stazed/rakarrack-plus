@@ -203,7 +203,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 244;
+  NumParams= 254;
 
 {
    static const char *los_params[] = 
@@ -341,8 +341,18 @@ RKR::RKR ()
 "Harmonizer Pan","49",
 "Harmonizer Wet/Dry","31",
 "Input","14",
+"Looper Auto Play"," 271",
+"Looper Clear","279",
 "Looper Level 1","268",
 "Looper Level 2","269",
+"Looper Play","272",
+"Looper R1","275",
+"Looper R2","276",
+"Looper Record","274",
+"Looper Reverse","270",
+"Looper Stop","273",
+"Looper Track 1","277",
+"Looper Track 2","278",
 "Looper WD","267",
 "Multi On/Off","116",
 "Musical Delay Fb 1","83",

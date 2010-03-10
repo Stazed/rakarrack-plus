@@ -1683,7 +1683,57 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Looper->changepar(10,value);
          break;               
    
-   
+    case 270:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(5,i);   
+         break;
+
+    case 271:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(9,i);   
+         break;
+
+    case 272:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(1,i);   
+         break;
+
+    case 273:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(2,i);   
+         break;
+
+    case 274:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(3,i);   
+         break;
+
+    case 275:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(11,i);   
+         break;
+
+    case 276:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(12,i);   
+         break;
+
+    case 277:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(7,i);   
+         break;
+
+    case 278:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(8,i);   
+         break;
+
+    case 279:
+         if(value) i=1; else i=0;
+         efx_Looper->changepar(4,i);   
+         break;
+
+
    } 
       
     

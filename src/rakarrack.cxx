@@ -4833,6 +4833,20 @@ void RKRGUI::cb_looper_record(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_record_i(o,v);
 }
 
+void RKRGUI::cb_looper_r1_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Looper->changepar(11,(int)o->value());
+}
+void RKRGUI::cb_looper_r1(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_r1_i(o,v);
+}
+
+void RKRGUI::cb_looper_r2_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Looper->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_looper_r2(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_r2_i(o,v);
+}
+
 void RKRGUI::cb_looper_t1_i(Fl_Button* o, void*) {
   rkr->efx_Looper->changepar(7,(int)o->value());
 update_looper();
@@ -4855,20 +4869,6 @@ update_looper();
 }
 void RKRGUI::cb_looper_clear(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_clear_i(o,v);
-}
-
-void RKRGUI::cb_looper_r1_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Looper->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_looper_r1(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_r1_i(o,v);
-}
-
-void RKRGUI::cb_looper_r2_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Looper->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_looper_r2(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_r2_i(o,v);
 }
 
 void RKRGUI::cb_ryanwah_activar_i(Fl_Light_Button* o, void*) {
@@ -11951,6 +11951,20 @@ R average.");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
+      { looper_r1 = new Fl_Check_Button(328, 367, 15, 15, "R1");
+        looper_r1->down_box(FL_BORDER_BOX);
+        looper_r1->labelsize(10);
+        looper_r1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_r1->callback((Fl_Callback*)cb_looper_r1, (void*)(2));
+        looper_r1->align(FL_ALIGN_TOP);
+      } // Fl_Check_Button* looper_r1
+      { looper_r2 = new Fl_Check_Button(347, 367, 15, 15, "R2");
+        looper_r2->down_box(FL_BORDER_BOX);
+        looper_r2->labelsize(10);
+        looper_r2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        looper_r2->callback((Fl_Callback*)cb_looper_r2, (void*)(2));
+        looper_r2->align(FL_ALIGN_TOP);
+      } // Fl_Check_Button* looper_r2
       { looper_t1 = new Fl_Button(431, 351, 18, 22, "1");
         looper_t1->type(1);
         looper_t1->labelsize(10);
@@ -11967,20 +11981,6 @@ R average.");
         looper_clear->labelsize(10);
         looper_clear->callback((Fl_Callback*)cb_looper_clear, (void*)(2));
       } // Fl_Button* looper_clear
-      { looper_r1 = new Fl_Check_Button(328, 367, 15, 15, "R1");
-        looper_r1->down_box(FL_BORDER_BOX);
-        looper_r1->labelsize(10);
-        looper_r1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        looper_r1->callback((Fl_Callback*)cb_looper_r1, (void*)(2));
-        looper_r1->align(FL_ALIGN_TOP);
-      } // Fl_Check_Button* looper_r1
-      { looper_r2 = new Fl_Check_Button(347, 367, 15, 15, "R2");
-        looper_r2->down_box(FL_BORDER_BOX);
-        looper_r2->labelsize(10);
-        looper_r2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        looper_r2->callback((Fl_Callback*)cb_looper_r2, (void*)(2));
-        looper_r2->align(FL_ALIGN_TOP);
-      } // Fl_Check_Button* looper_r2
       LOOPER->end();
     } // Fl_Group* LOOPER
     { RYANWAH = new Fl_Group(320, 211, 158, 184);
@@ -14898,7 +14898,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<270; i++)
+for (i=1; i<280; i++)
 
 {
 
@@ -15642,7 +15642,42 @@ switch (i)
      case 269:
      looper_level2->value(rkr->efx_Looper->getpar(10));
      break; 
-
+     case 270:
+     looper_rv->value(rkr->efx_Looper->getpar(5));
+     break;
+     case 271:
+     looper_ap->value(rkr->efx_Looper->getpar(9));
+     break;
+     case 272:
+     looper_play->value(rkr->efx_Looper->getpar(1));
+     update_looper();
+     break;
+     case 273:
+     looper_stop->value(rkr->efx_Looper->getpar(2));
+     update_looper();
+     break;
+     case 274:
+     looper_record->value(rkr->efx_Looper->getpar(3));
+     update_looper();
+     break;
+     case 275:
+     looper_r1->value(rkr->efx_Looper->getpar(11));
+     break;
+     case 276:
+     looper_r2->value(rkr->efx_Looper->getpar(12));
+     break;
+     case 277:
+     looper_t1->value(rkr->efx_Looper->getpar(7));
+     update_looper();
+     break;
+     case 278:
+     looper_t2->value(rkr->efx_Looper->getpar(8));
+     update_looper();
+     break;
+     case 279:
+     looper_clear->value(rkr->efx_Looper->getpar(4));
+     update_looper();
+     break;
 
 
 }
