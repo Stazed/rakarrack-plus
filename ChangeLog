@@ -1,11 +1,17 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Fixed Effect On/Off by effect. (See the MIDI implementation chart) also to
+  use with MIDI Learn.
+- Update help.
+- Fixed more bugs on MIDI Learn.
+- Added Effect MuTroMojo.
+- Added Effect Looper.
 - Added Effect Convolotron.
 - Added dependencies of libsamplerate and libsndfile.
 - Added Upsampling in settings (Quality,Amount).
 - Added Effect VaryBand.
 - Added Peak in Compressor and final Limiter.
-- 255 Parameters in MIDI Learn.
+- 260 Parameters in MIDI Learn.
 - MIDI (On/Off) for effect.
 - MIDI Learn Alpha Sort.
 - Prog Change 81/82 -->Prev/Next Preset. 
