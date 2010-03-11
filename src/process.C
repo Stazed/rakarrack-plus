@@ -193,10 +193,11 @@ RKR::RKR ()
   {
     static const char *los_names[] =
       { "EQ", "Compressor", "Distortion", "Overdrive", "Echo", "Chorus",
-      "Phaser", "Flanger", "Reverb",
-      "Parametric EQ", "WahWah", "AlienWah", "Cabinet", "Pan", "Harmonizer",
-      "MusicalDelay", "NoiseGate", "Derelict", "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",
-      "DistBand", "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", "Looper", "MuTroMojo"
+      "Phaser", "Flanger", "Reverb", "Parametric EQ", "WahWah", "AlienWah", 
+      "Cabinet", "Pan", "Harmonizer", "MusicalDelay", "NoiseGate", "Derelict",
+      "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",  "DistBand", 
+      "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", 
+      "Looper", "MuTroMojo"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
