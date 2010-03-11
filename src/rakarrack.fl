@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -6303,7 +6302,10 @@ DisAssigns();}
         callback {int i;
 
 for(i=0;i<20;i++)
+
  {
+    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] == rkr->efx_params[(int)Epar->value()-1].Ato) return;
+
     if(rkr->XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
          rkr->XUserMIDI[(int)Disp_Control->value()][i]=rkr->efx_params[(int)Epar->value()-1].Ato;
@@ -6312,7 +6314,7 @@ for(i=0;i<20;i++)
  }
  
  
-DisAssigns();}
+DisAssigns();} selected
         xywh {10 20 150 30}
       }
       Fl_Button CloseML {
@@ -8989,8 +8991,7 @@ switch (i)
 
 
 rkr->Mvalue=0;
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {ActOnOff()} {} {
     code {int miralo;

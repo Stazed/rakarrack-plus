@@ -5853,7 +5853,10 @@ void RKRGUI::cb_Assign_i(Fl_Button*, void*) {
   int i;
 
 for(i=0;i<20;i++)
+
  {
+    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] == rkr->efx_params[(int)Epar->value()-1].Ato) return;
+
     if(rkr->XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
          rkr->XUserMIDI[(int)Disp_Control->value()][i]=rkr->efx_params[(int)Epar->value()-1].Ato;
