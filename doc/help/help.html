@@ -1,8 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head>
+
   
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>Rakarrack Help</title>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
+  
 
   
   
@@ -44,8 +45,7 @@
 		H3.cjk { font-family: "HG Mincho Light J" }
 		H3.ctl { font-family: "Arial Unicode MS" }
 	-->
-	</style>
-</head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+	</style></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
 <p style="margin-bottom: 0in;" align="left"><a name="top"></a><br>
 </p>
 
@@ -1593,8 +1593,95 @@ x = Disable Band.<br>
       <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/con.jpg" name="graphics29" alt="rakarrack Convolotron"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p align="justify">Convolotron<br>
+      <p align="justify">Convolotron A module optimized for physical speaker/cabinet modeling.</p>
+      <p align="justify">A lame EE joke: "If you do that once, I will convolve your face
+with a Dirac Delta. If you do it again, I will convolve your head with
+an impulse train."</p>
+      <p align="justify">Some jargon associated with this effect:</p>
+      <p align="justify"><b>IR&nbsp; Impulse Response</b>.&nbsp;
+Filters are often classified according to their impulse response. An
+impulse response is the output of the filter (or physical system)
+resulting from application of a short-duration, one-time, "impulse" of
+energy. An audio signal can be constructed mathematically as
+a series of such impulses separated by an infinitesimal period of time,
+and scaled by a certain factor representing the real-time amplitude of
+the signal.&nbsp; If one impulse is applied to a filter, the filter
+begins to react with its characteristic impulse response. Then if
+another impulse is applied a little later, the same impulse response is
+invoked and is added to the first.&nbsp; If we think of the audio&nbsp;
+signal as a rapid succession of impulses, then the result of adding up
+all the impulse responses will reconstruct what the physical system
+will do in response to the input signal. This process is called
+convolution.</p>
+      <p align="justify"><b>Convolution</b>.&nbsp;
+A process of successively adding the impulse responses for any signal
+that has been or will be applied to the system.&nbsp; In the case of
+realtime audio processing the impulse responses are causal in nature, so we can
+ignore the future and apply the effects only for what has already
+occured.</p>
+      <br>
+      <p><b>Convolotron</b>.&nbsp; A
+rakarrack module that takes an audio file as an IR, and convolves it
+with the input signal.&nbsp; This signal may be an IR recorded from an
+amplifier, a microphone,&nbsp; a cheap computer speaker system, horns,
+bells, gongs, reverb...kicking a door...<br></p>
+<p>Some caveats:&nbsp; Convolotron is very CPU hungry.&nbsp; Rakarrack
+does straight-forward time-domain convolution.&nbsp; Another Linux
+software application to compare is&nbsp; JConv, which is not as CPU hungry because there are
+some frequency domain math tricks which allow the user to sacrifice
+some quality to reduce&nbsp; processing load.&nbsp; It is also
+optimized for reverbs.&nbsp; As a result, Rakarrack requires some
+"horsepower", but is better suited to amplifier/cabinet modeling
+assuming your CPU can handle it. Most reverb (unless entire significant part of IR is less than 100ms)
+is&nbsp; impossible in realtime, unless you have a server farm doing
+guitar&nbsp; FX for you.&nbsp; Rakarrack has a 'reverb' switch to apply
+some preprocessing&nbsp; to the IR to reduce it down to something which
+can be applied in real time. JConv applies some delay as well as some
+frequency response/FFT tricks, whereas the Rakarrack Reverb switch uses
+a discrete reflection approach to reverb. This&nbsp; means the IR file
+is treated as a record of all the reflections in a room.&nbsp; Some
+simple processing is applied to break the room into large
+"squares".&nbsp; Instead of&nbsp; hearing a real room, where
+reflections from all parts continuously along the wall come to your
+ear, Rakarrack gives you a room where the wall is broken into a grid of
+square shapes.&nbsp; You hear only one reflection from each square on
+the wall, and this reflection represents the average power reflected
+from the composite surface area of that square. This method more or less captures the
+reverb characteristic as described by the IR file, but sacrifices some
+of the "cohesiveness" just to&nbsp; make it possible for the present
+day consumer CPU in real time. You can also use this mode to shorten
+amp/speaker/cabinet responses although the end result may not be
+anything like you may expect.<br></p>
+
+     <p> <b>Parameters</b></p>
+      <p align="justify"><b>Wet/Dry</b>:&nbsp; Self explanatory.&nbsp; For amp responses, most of the time you will want this all wet.<br>
+      <b>Pan</b> The effect is processed in mono (L &amp; R are mixed on the
+input).&nbsp; Pan routes the output left or right.<br>
+      <b>Level</b>:&nbsp;&nbsp;&nbsp; The actual IR file will determine the gain of the effect.&nbsp; This helps you adjust&nbsp; to a good level.<br style="font-weight: bold;">
+      <b>Damp</b>:&nbsp;&nbsp;&nbsp;&nbsp; Darkens the sound of the IR. <br>
+      <b>Fb</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Feedback.&nbsp; Pretty self explanatory.<br>
+      <b>Length</b>
+Measured in milliseconds. This tells Convolotron where to truncate the
+IR. Set this to the maximum value your CPU can afford without
+Xruns.&nbsp; A longer Length&nbsp; will result in a more true model of
+the system being convolved.<br>
+      <b>Reverb</b>:&nbsp;&nbsp; CPU optimization for reverberation IR's.&nbsp; See above for more detail.<br>
+      <b>Safe Mode</b>: Automatically
+limits Length internally based on sample rate and info from your&nbsp;
+/proc/cpuinfo to help prevent freezing your computer.<br>
+      <b>Preset</b>:&nbsp;&nbsp; Several amp IR's are available by default for your convenience.<br>
+      <b>User</b>:&nbsp;&nbsp;&nbsp;&nbsp;
+You may download or generate your own IR's.&nbsp; You can even do silly
+things like loading ring tones or segments of a song (if you like to
+experiment).&nbsp; Must be wav&nbsp; format, and keep in mind that
+convolotron only uses the first&nbsp; "Length" milliseconds&nbsp; of
+the file...so if you have a file with 100ms silence at the beginning,
+you will get nothing but silence on the output.&nbsp; With Reverb mode,
+also keep in mind you can generate IR's in Octave or Scilab that give
+you interesting echo patterns.&nbsp; <br>
+<br>
       </p>
+
       </td>
     </tr>
   </tbody>
