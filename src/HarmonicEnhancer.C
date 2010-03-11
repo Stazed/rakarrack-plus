@@ -142,6 +142,9 @@ HarmEnhancer::chebpc (float c[], float d[])
       d[j] = d[j - 1] - dd[j];
     }
   d[0] = -dd[0] + 0.5 * c[0];
+
+
+
 }
 
 
