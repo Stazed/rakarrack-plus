@@ -3,6 +3,7 @@
 
 
 
+
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   
@@ -134,9 +135,50 @@ Linux Audio, Part 3a</a></p>
 <p align="left"><a href="http://www.linuxjournal.com/node/1000295">Troubleshooting
 Linux Audio, Part 3b</a></p>
 
-<p><br>
+<h3>Warning</h3>
+<p>From 0.5.0 version we have included resampling and convolotron
+effect, the quality and amount settings of resampling must be set with
+extremely care,&nbsp; because they use&nbsp; a&nbsp; lot of CPU
+resources, in fact most computers can't afford the "Best" resampling
+quality if the amount of resampling is "x4" or greater. The resampling
+process makes each effect use more CPU resources because need to
+process more samples, if you combine wrong settings with convolotron or
+harmonizer effects that use also a lot CPU resources the results can be
+unpredictable.&nbsp; Wrong settings can hang up you computer. You have
+been warned. <br>
+</p>
+<p>Of course resampling increase the sound quality, the way to set up
+is start with the worst resampling settings, amount = "x2"&nbsp; and
+Quality "Linear", and check the CPU usage, with qjackctl, top, htop or
+other CPU monitors, then increase the values thinking that then next
+step of quality could use double CPU than the actual set, that's not
+exactly in the lower resampling quality levels,&nbsp; but is more or
+less accurate in the high levels. You need to find a good balance
+between amount and quality settings to obtain the better sound that
+your computer can afford. Don't forget that each effect use also more
+CPU with resampling, then the best to set the resampling settings is
+using a preset that has five or six effects.<br>
+</p>
+<p>Convolotron has a "Safe Mode" parameter, that "magically" limits the
+length of the Impulse Response file readed, this is safe because limit
+the CPU usage, this maximum length is calculated reading the bogomips,
+is not dynamic and don't meassure other tasks that your computer may be
+performing. We have been careful to calculate this maximum value, but
+if you use resampling this "safe" value can be ridiculous and may cause
+depending of the Impulse Response file readed that the convolotron
+effect don't has sound, that can happens if the value is less than 5 ms.</p>
+<p>Of course increasing the length parameter you will obtain a better
+convolotron sound, if you unset the "Safe Mode" you can set the length
+to a desired value without the magical limit, but do that with
+extremely care. I also recommend that you use a CPU monitor to see what
+your computer can afford. Do that with small steps and checking the CPU
+usage, or you will hang up your computer. You have been warned.<br>
+</p>
+<br>
+<p>
 <br>
 </p>
+
 
 <p><a href="#top">Contents</a> </p>
 

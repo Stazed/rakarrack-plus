@@ -3,4 +3,16 @@ News on v0.5.0
 ---------------
 New Bank File format, we include a utility "rakconvert" to convert Bank files
 to the new format.
-  
+
+New Effects:
+
+Valve, Dual Flange, Ring, Exciter, DistBand, Arpie,  Shuffle, Synthfilter,
+VaryBand, Convolotron, Looper, MuTroMojo.
+
+New Features:
+
+Upsampling using libsamplerate by Erik de Castro Lopo.
+
+
+GUI and bug fixes.
+
