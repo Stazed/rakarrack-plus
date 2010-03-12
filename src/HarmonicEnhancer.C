@@ -76,6 +76,9 @@ HarmEnhancer::set_vol(int mode, float gain)
   if(!mode) vol = gain;
   else
   vol = realvol + gain;
+
+  vol *=2.0f;
+
 }
 
 void  
@@ -233,8 +236,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
     for (i=0; i<PERIOD; i++)
     {
-      smpsl[i] +=inputl[i]*2.0f*vol;
-      smpsr[i] +=inputr[i]*2.0f*vol;
+      smpsl[i] +=inputl[i]*vol;
+      smpsr[i] +=inputr[i]*vol;
     }
     
 }
