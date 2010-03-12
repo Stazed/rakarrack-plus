@@ -116,8 +116,8 @@ if(E)
 
   for (i = 0; i < PERIOD; i++)
   {
-    efxoutl[i]=(inputl[i]+inputr[i]-smpsl[i]);
-    efxoutr[i]=(inputl[i]-inputr[i]-smpsr[i]);
+    efxoutl[i]=(inputl[i]+inputr[i]-smpsl[i])*.333333f;
+    efxoutr[i]=(inputl[i]-inputr[i]-smpsr[i])*.333333f;
 
   }      
     
