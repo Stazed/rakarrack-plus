@@ -4951,7 +4951,7 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
             xywh {67 67 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Mesa Boogie 2} selected
+            label {Mesa Boogie 2}
             xywh {77 77 36 21} labelsize 10
           }
         }
@@ -5823,7 +5823,7 @@ Settings->hide();}
       }
       Fl_Group Look {
         label {Look & Feel}
-        user_data 1 open
+        user_data 1
         xywh {10 20 615 83} box PLASTIC_DOWN_FRAME color 7 labelfont 1 labelcolor 7 align 5
       } {
         Fl_Button B_C {
@@ -6052,11 +6052,16 @@ switch(i)
        break;
      case 2:
        rkr->HarQual=16;	
-	break;	
+	break;
+     case 3:
+       rkr->HarQual=32;	
+	break;
+
+		
 }
 
 
-Show_Next_Time();}
+Show_Next_Time();} open
           xywh {546 147 43 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6069,6 +6074,10 @@ Show_Next_Time();}
           }
           MenuItem {} {
             label 16
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label 32
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -6793,7 +6802,8 @@ for(i=1; i<=JackCo->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -8107,6 +8117,12 @@ switch(rkr->HarQual)
   case 16:
   Har_Qual->value(2);
   break;
+
+  case 32:
+  Har_Qual->value(3);
+  break;
+
+
 }  
 
 if (rkr->aconnect_MI) BMidiIn->activate();

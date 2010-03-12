@@ -5682,7 +5682,12 @@ switch(i)
        break;
      case 2:
        rkr->HarQual=16;	
-	break;	
+	break;
+     case 3:
+       rkr->HarQual=32;	
+	break;
+
+		
 }
 
 
@@ -5696,6 +5701,7 @@ Fl_Menu_Item RKRGUI::menu_Har_Qual[] = {
  {"4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"8", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"16", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"32", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -14821,6 +14827,12 @@ switch(rkr->HarQual)
   case 16:
   Har_Qual->value(2);
   break;
+
+  case 32:
+  Har_Qual->value(3);
+  break;
+
+
 }  
 
 if (rkr->aconnect_MI) BMidiIn->activate();
