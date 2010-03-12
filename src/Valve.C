@@ -136,7 +136,7 @@ Valve::out (float * smpsl, float * smpsr)
   int i;
   float l, r, lout, rout, fx;
 
-  float inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
+  float inputvol = powf (4.0f, ((float)Pdrive - 32.0f) / 127.0f);
   if (Pnegate != 0)
     inputvol *= -1.0f;
 
@@ -144,8 +144,8 @@ Valve::out (float * smpsl, float * smpsr)
     {				//Stereo
       for (i = 0; i < PERIOD; i++)
 	{
-	  efxoutl[i] = smpsl[i] * inputvol * 2.0f;
-	  efxoutr[i] = smpsr[i] * inputvol * 2.0f;
+	  efxoutl[i] = smpsl[i] * inputvol;
+	  efxoutr[i] = smpsr[i] * inputvol;
 	};
     }
   else
