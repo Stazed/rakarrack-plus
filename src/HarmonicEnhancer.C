@@ -192,35 +192,21 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 {
 
   int i,j;
-  float max=0.0;
 
-  for(i=0;i<PERIOD;i++)
-   {
-     if((smpsl[i] < -max) || (smpsl[i] > max )) max = smpsl[i];
-     if((smpsr[i] < -max) || (smpsr[i] > max )) max = smpsr[i];     
-   }  
-     
-     coeff = fabsf(max)+16.0f;
-     max = 1.0f / coeff;
-             
+  memcpy(inputl,smpsl, sizeof(float)*PERIOD);
+  memcpy(inputr,smpsr, sizeof(float)*PERIOD);
+   
 
-    for(i=0;i<PERIOD;i++)
-   {
-     
-     inputl[i] =smpsl[i]*max;
-     inputr[i] =smpsr[i]*max;
-   }  
-       
 
   hpfl->filterout(inputl);
   hpfr->filterout(inputr);
 
   for (i=0; i<PERIOD; i++)
     {
-      float xl = inputl[i];
-      float xr = inputr[i];
-      float yl=0.0;
-      float yr=0.0;
+      float xl = inputl[i]*.25f;
+      float xr = inputr[i]*.25f;
+      float yl=0.0f;
+      float yr=0.0f;
 
       for(j=10;j>0;j--)
         {
@@ -231,15 +217,14 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
           yr+=p[0];
            
 
-
       otm1l = 0.999f * otm1l + yl - itm1l;
       itm1l = yl;
       otm1r = 0.999f * otm1r + yr - itm1r;
       itm1r = yr;
 
-      
-      inputl[i] = otm1l * vol * coeff;
-      inputr[i] = otm1r * vol * coeff;
+       
+      inputl[i] = otm1l;
+      inputr[i] = otm1r;
 
      }
 
@@ -248,8 +233,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
     for (i=0; i<PERIOD; i++)
     {
-      smpsl[i] +=inputl[i];
-      smpsr[i] +=inputr[i];
+      smpsl[i] +=inputl[i]*2.0f*vol;
+      smpsr[i] +=inputr[i]*2.0f*vol;
     }
     
 }

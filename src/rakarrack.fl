@@ -3718,11 +3718,11 @@ dflange_LR->value(rkr->efx_DFlange->getpar(2));
 dflange_subs->value(rkr->efx_DFlange->getpar(8));
 dflange_tz->value(rkr->efx_DFlange->getpar(9));
 dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
+dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {Flange 1}
+            label {Preset 1}
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
@@ -4262,23 +4262,23 @@ arpie_harm->value(rkr->efx_Arpie->getpar(8));
 arpie_pattern->value(rkr->efx_Arpie->getpar(9));
 arpie_subdiv->value(rkr->efx_Arpie->getpar(10));
 
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {Echo 1}
+            label {Arpie 1}
             xywh {67 67 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Echo 2}
+            label {Arpie 2}
             xywh {67 67 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Echo 3}
+            label {Arpie 3}
             xywh {67 67 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Simple Echo}
+            label {Simple Arpie}
             xywh {77 77 36 21} labelsize 10
           }
           MenuItem {} {
@@ -4286,19 +4286,19 @@ if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
             xywh {87 87 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Panning Echo 1}
+            label {Panning Arpie 1}
             xywh {107 107 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Panning Echo 2}
+            label {Panning Arpie 2}
             xywh {117 117 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Panning Echo 3}
+            label {Panning Arpie 3}
             xywh {127 127 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Feedback Echo}
+            label {Feedback Arpie}
             xywh {137 137 36 21} labelsize 10
           }
         }
@@ -4638,19 +4638,19 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {Phaser 1}
+            label {Low Pass}
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Phaser 2}
+            label {High Pass}
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Phaser 3}
+            label {Band Pass}
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
@@ -4939,19 +4939,19 @@ if((int)convo_activar->value())rkr->Convol_Bypass=1;}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {Convolotron 1}
+            label {Marshall JCM200}
             xywh {67 67 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Convolotron 2}
+            label {Fender Superchamp}
             xywh {67 67 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Convolotron 3}
+            label {Mesa Boogie}
             xywh {67 67 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Convolotron 4}
+            label {Mesa Boogie 2} selected
             xywh {77 77 36 21} labelsize 10
           }
         }
@@ -5024,7 +5024,7 @@ rkr->efx_Convol->setfile(100);}
         }
         Fl_Choice convo_fnum {
           label Preset
-          callback {rkr->efx_Convol->changepar(8,(int)o->value());}
+          callback {rkr->efx_Convol->changepar(8,(int)o->value());} open
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6314,7 +6314,7 @@ for(i=0;i<20;i++)
  }
  
  
-DisAssigns();} selected
+DisAssigns();}
         xywh {10 20 150 30}
       }
       Fl_Button CloseML {

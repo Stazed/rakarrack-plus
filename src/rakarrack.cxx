@@ -3486,7 +3486,7 @@ void RKRGUI::cb_dflange_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_dflange_preset[] = {
- {"Flange 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Preset 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Flange 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Flange 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Flange 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
@@ -4032,15 +4032,15 @@ void RKRGUI::cb_arpie_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_arpie_preset[] = {
- {"Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Simple Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Arpie 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Arpie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Arpie 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Simple Arpie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Canyon", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Feedback Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Arpie 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Arpie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Arpie 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Feedback Arpie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -4365,9 +4365,9 @@ void RKRGUI::cb_synthfilter_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_synthfilter_preset[] = {
- {"Phaser 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Low Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"High Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Band Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Phaser 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Phaser 5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Phaser 6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
@@ -4636,10 +4636,10 @@ void RKRGUI::cb_convo_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_convo_preset[] = {
- {"Convolotron 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Convolotron 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Convolotron 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Convolotron 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Marshall JCM200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Superchamp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mesa Boogie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mesa Boogie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
