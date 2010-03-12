@@ -39,7 +39,6 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
   itm1r = 0.0f;
   otm1l = 0.0f;
   otm1r = 0.0f;
-  coeff = 1.0;
 
   hpffreq = hfreq;
   lpffreq = lfreq;

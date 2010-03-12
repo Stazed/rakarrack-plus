@@ -52,7 +52,6 @@ private:
   float *inputl;
   float *inputr;
   float vol;
-  float coeff;
   float itm1l;
   float itm1r;
   float otm1l;
