@@ -489,10 +489,6 @@ RKR::RKR ()
 
   init_rkr ();
 
-
-  cleanup_efx();
-
-
 }
 
 

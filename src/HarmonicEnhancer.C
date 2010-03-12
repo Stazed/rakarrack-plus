@@ -63,6 +63,8 @@ HarmEnhancer::cleanup()
   hpfl->cleanup ();
   lpfr->cleanup ();
   hpfr->cleanup ();
+
+
 };
 
 
@@ -73,7 +75,7 @@ HarmEnhancer::set_vol(int mode, float gain)
 {
   if(!mode) vol = gain;
   else
-  vol = realvol + 2.0 * gain;
+  vol = realvol + gain;
 }
 
 void  
@@ -198,7 +200,7 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
      if((smpsr[i] < -max) || (smpsr[i] > max )) max = smpsr[i];     
    }  
      
-     coeff = fabsf(max)+16.0;
+     coeff = fabsf(max)+16.0f;
      max = 1.0f / coeff;
              
 

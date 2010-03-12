@@ -45,8 +45,9 @@ Exciter::Exciter (float * efxoutl_, float * efxoutr_)
 
   harm = new HarmEnhancer (rm, 2500.0f,8000.0,1.0f);
 
-  setpreset (Ppreset);
   cleanup ();
+
+  setpreset (Ppreset);
 };
 
 Exciter::~Exciter ()
@@ -60,9 +61,7 @@ Exciter::~Exciter ()
 void
 Exciter::cleanup ()
 {
-
  harm->cleanup ();
-
 };
 
 
@@ -73,6 +72,7 @@ void
 Exciter::out (float * smpsl, float * smpsr)
 {
 harm->harm_out(smpsl,smpsr);
+
 };
 
 
