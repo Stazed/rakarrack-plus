@@ -1104,7 +1104,7 @@ if (nt)
 if (Analyzer_ON)
 { 
  at++;
- if(at==2)
+ if(at==3)
    { Analy->redraw();
      at=0; 
    }

@@ -1110,7 +1110,7 @@ if (nt)
 if (Analyzer_ON)
 { 
  at++;
- if(at==2)
+ if(at==3)
    { Analy->redraw();
      at=0; 
    }
@@ -1187,7 +1187,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -6802,8 +6802,7 @@ for(i=1; i<=JackCo->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General
