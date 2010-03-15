@@ -5086,7 +5086,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-MIDI_LABEL->redraw();
+Fl::redraw();
 }
 void RKRGUI::cb_nidi_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_nidi_activar_i(o,v);
@@ -5249,7 +5249,7 @@ void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
 void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tap_Bypass = (int)o->value();
 ChangeActives();
-TAP_LABEL->redraw();
+Fl::redraw();
 }
 void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
@@ -5949,7 +5949,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       MT->labelsize(18);
       MT->callback((Fl_Callback*)cb_MT);
     } // Fl_Box* MT
-    { TITTLE_L = new Fl_Button(540, 5, 255, 20);
+    { TITTLE_L = new Fl_Button(520, 2, 276, 19);
       TITTLE_L->type(1);
       TITTLE_L->box(FL_NO_BOX);
       TITTLE_L->labeltype(FL_EMBOSSED_LABEL);

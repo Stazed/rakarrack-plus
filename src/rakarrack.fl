@@ -894,8 +894,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} selected
-      xywh {1335 81 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {1328 74 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -1196,7 +1196,7 @@ Tuner->hide();
 Sco->show();
 Scope_ON=1;
 }}
-        xywh {540 5 255 20} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
+        xywh {520 2 276 19} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
       }
       Fl_Box Sco {
         label Rakarrack
@@ -5449,7 +5449,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-MIDI_LABEL->redraw();}
+Fl::redraw();} selected
           xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Counter Midi_out_Counter {
@@ -5616,7 +5616,7 @@ Analyzer_ON=1;
           user_data 2
           callback {rkr->Tap_Bypass = (int)o->value();
 ChangeActives();
-TAP_LABEL->redraw();}
+Fl::redraw();}
           xywh {525 144 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Box TAP_LABEL {
