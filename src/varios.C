@@ -113,29 +113,33 @@ char *tmp;
 int RKR::TapTempo()
 {
 int i, Tempo;
-float AvTempo;
+double AvTempo;
 gettimeofday(&timeA, NULL);
-int timediff = timeA.tv_usec - Tap_timeB;
 
-if( timediff < 2e6)  
+double Aseconds = (double) timeA.tv_sec + ((double) timeA.tv_usec)* 0.000001;
+double timediff = Aseconds - Tap_timeB;
+
+if( timediff < 3.0)  
 {
-   if(timediff > 10000)
+   if(timediff > 0.01)
    {
-   tempobuf[tempocnt] = (60000000.0f)/((float) timediff); 
+   tempobuf[tempocnt] = 60.0 /((double) timediff); 
    }
    if((++tempocnt) >= 5)  tempocnt = 0;
 
 }
 
-AvTempo = 0.0f;
-for(i=0; i<5; i++)
+AvTempo = 0.0;
+for(i=0; i<4; i++)
 {
 AvTempo += tempobuf[i];
 }
 
-AvTempo *= 0.25f;
+AvTempo *= 0.25;
 Tempo = (int) AvTempo;
-Tap_timeB = timeA.tv_usec;
+Tap_timeB = Aseconds;
+
+printf("AvTempo %f Tempo %d TapTimeB %f Time %f\n", AvTempo, Tempo, Tap_timeB, timediff);
 
 return(Tempo);
 }

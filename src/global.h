@@ -481,9 +481,9 @@ public:
   
   struct timeval timeA;
   long Tap_time_Init;
-  long Tap_timeB;
+  double Tap_timeB;
   int tempocnt;
-  int tempobuf[6];  
+  double tempobuf[6];  
 
 
 
