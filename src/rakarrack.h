@@ -2464,6 +2464,10 @@ public:
   Fl_Choice *T_SEL;
   static Fl_Menu_Item menu_T_SEL[];
   Fl_Button *T_BUT;
+private:
+  void cb_T_BUT_i(Fl_Button*, void*);
+  static void cb_T_BUT(Fl_Button*, void*);
+public:
   Fl_Box *T_DIS;
   Fl_Double_Window *BankWindow;
 private:

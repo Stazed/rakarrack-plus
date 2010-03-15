@@ -27,7 +27,6 @@
 #include <FL/Fl_Widget.H>
 #include "icono_rakarrack_32x32.xpm"
 #include "global.h"
-#include <sys/time.h>
 
 int
 RKR::Message (const char *labelwin, const char *message_text)
@@ -110,26 +109,22 @@ char *tmp;
 
 }
 
-/*
-//Call TapTempo() on every event and update tempo. 
-//The function returns the average of the last 4 beats less than 2 seconds.  
+
 int RKR::TapTempo()
 {
 int i, Tempo;
 float AvTempo;
-struct timeval timeA;
 gettimeofday(&timeA, NULL);
-int timediff = timeA.tv_usec - Tap_timeB;  //Tap_timeB needs to be declared in header.
+int timediff = timeA.tv_usec - Tap_timeB;
 
-if( timediff < 2e6)        //timeout.  If greater than 2 seconds, does not get included in average
+if( timediff < 2e6)  
 {
-	//tempobuf needs to be defined in header:  float tempobuf[4]
-	//this is average of 4 taps
-   if(timediff > 10000)  //Nobody can tap faster than 10ms :)
+   if(timediff > 10000)
    {
-   tempobuf[tempocnt] = (60000000.0f)/((float) timediff);    // 60*million/microseconds gives 1/minutes
+   tempobuf[tempocnt] = (60000000.0f)/((float) timediff); 
    }
-   if((++tempocnt) >= 5) tempocnt = 0;  //Circular buffer.  This overwrites the oldest.
+   if((++tempocnt) >= 5)  tempocnt = 0;
+
 }
 
 AvTempo = 0.0f;
@@ -140,10 +135,9 @@ AvTempo += tempobuf[i];
 
 AvTempo *= 0.25f;
 Tempo = (int) AvTempo;
-
 Tap_timeB = timeA.tv_usec;
 
 return(Tempo);
 }
-*/
+
 

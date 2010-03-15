@@ -565,8 +565,12 @@ efx_FLimiter->Compressor_Change(9,1);
 
   help_displayed = 0;
   modified = 0;
-  
 
+
+  tempocnt=0;
+  for(int i=0;i<6;i++)tempobuf[i]=0;  
+  Tap_timeB = 0;
+  
 
 // Load Preset Bank File
 

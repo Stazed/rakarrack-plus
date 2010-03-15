@@ -91,6 +91,7 @@
 #include "config.h"
 #include <pthread.h>
 #include <signal.h>
+#include <sys/time.h>
 #include <alsa/asoundlib.h>
 #include <X11/xpm.h>
 #include <jack/jack.h>
@@ -207,7 +208,7 @@ public:
   int CheckOldBank(char *filename);
   int Get_Bogomips();
   int checkonoff(int value);
-
+  int TapTempo();
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;
@@ -474,6 +475,16 @@ public:
   {
     char name[128];
   } jack_po[80];
+
+
+  // Tap Tempo
+  
+  struct timeval timeA;
+  long Tap_time_Init;
+  long Tap_timeB;
+  int tempocnt;
+  int tempobuf[6];  
+
 
 
 };

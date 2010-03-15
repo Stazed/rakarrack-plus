@@ -5261,6 +5261,20 @@ Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
+  char tmp[8] ;
+
+if(rkr->Tap_Bypass)
+{
+bzero(tmp,sizeof(tmp));
+sprintf(tmp,"%d",rkr->TapTempo());
+T_DIS->copy_label(tmp);
+};
+}
+void RKRGUI::cb_T_BUT(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_BUT_i(o,v);
+}
+
 void RKRGUI::cb_BankWindow_i(Fl_Double_Window* o, void*) {
   o->hide();
 save_stat(1);
@@ -12611,6 +12625,7 @@ R average.");
       } // Fl_Choice* T_SEL
       { T_BUT = new Fl_Button(635, 165, 54, 23, "@circle");
         T_BUT->shortcut(0x67);
+        T_BUT->callback((Fl_Callback*)cb_T_BUT);
       } // Fl_Button* T_BUT
       { T_DIS = new Fl_Box(715, 165, 70, 22, "120");
         T_DIS->box(FL_DOWN_BOX);
