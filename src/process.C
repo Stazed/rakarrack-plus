@@ -810,10 +810,10 @@ RKR::Vol3_Efx ()
   for (i = 0; i < PERIOD; i++)
     {
       efxoutl[i] *= att;
-      smpl[i] = efxoutl[i];
       efxoutr[i] *= att;
-      smpr[i] = efxoutr[i];
     }
+
+Vol2_Efx();
 
 }
 
@@ -843,11 +843,10 @@ RKR::Vol_Efx (int NumEffect, float volume)
   for (i = 0; i < PERIOD; i++)
     {
       efxoutl[i] = smpl[i] * v2 + efxoutl[i] * v1;
-      smpl[i] = efxoutl[i];
       efxoutr[i] = smpr[i] * v2 + efxoutr[i] * v1;
-      smpr[i] = efxoutr[i];
     };
 
+  Vol2_Efx();
 
 }
 
