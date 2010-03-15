@@ -258,7 +258,7 @@ public:
   int Bypass;
   int MIDIConverter_Bypass;
   int Tuner_Bypass;
-
+  int Tap_Bypass;
   int Reverb_Bypass;
   int Chorus_Bypass;
   int Flanger_Bypass;

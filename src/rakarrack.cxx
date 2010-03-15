@@ -1095,10 +1095,9 @@ if (nt)
   { 
   nt = 0;
   Sco->hide();
-  TITTLE_L->show();
-  TITTLE_L->redraw();
-  DESC_L->redraw();
-  }  
+  Tuner->show();
+  Tuner->redraw();
+ }  
 
 
 if (Analyzer_ON)
@@ -1187,10 +1186,10 @@ void RKRGUI::cb_MT(Fl_Box* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_MT_i(o,v);
 }
 
-void RKRGUI::cb_TITTLE_L_i(Fl_Button* o, void*) {
+void RKRGUI::cb_TITTLE_L_i(Fl_Button*, void*) {
   if(rkr->Bypass)
 {
-o->hide();
+Tuner->hide();
 Sco->show();
 Scope_ON=1;
 };
@@ -5247,6 +5246,22 @@ void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Etit_i(o,v);
 }
 
+void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Tap_Bypass = (int)o->value();
+ChangeActives();
+TAP_LABEL->redraw();
+}
+void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
+ {"Keyboard", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mouse", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"MIDI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_BankWindow_i(Fl_Double_Window* o, void*) {
   o->hide();
 save_stat(1);
@@ -5934,7 +5949,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       MT->labelsize(18);
       MT->callback((Fl_Callback*)cb_MT);
     } // Fl_Box* MT
-    { TITTLE_L = new Fl_Button(555, 25, 226, 65, "Rakarrack");
+    { TITTLE_L = new Fl_Button(540, 5, 255, 20);
       TITTLE_L->type(1);
       TITTLE_L->box(FL_NO_BOX);
       TITTLE_L->labeltype(FL_EMBOSSED_LABEL);
@@ -5943,12 +5958,6 @@ Fl_Double_Window* RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
     } // Fl_Button* TITTLE_L
-    { DESC_L = new Fl_Box(588, 64, 142, 14, "Audio F/X");
-      DESC_L->labeltype(FL_EMBOSSED_LABEL);
-      DESC_L->labelfont(1);
-      DESC_L->labelsize(16);
-      DESC_L->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-    } // Fl_Box* DESC_L
     { Sco = new Scope(545, 19, 226, 65, "Rakarrack");
       Sco->box(FL_NO_BOX);
       Sco->color((Fl_Color)FL_BACKGROUND_COLOR);
@@ -12229,13 +12238,13 @@ R average.");
       } // SliderW* ryanwah_smooth
       RYANWAH->end();
     } // Fl_Group* RYANWAH
-    { Tuner = new Fl_Group(521, 84, 276, 58);
+    { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
       Tuner->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       Tuner->user_data((void*)(1));
       Tuner->align(96|FL_ALIGN_INSIDE);
-      { tuner_activar = new Fl_Light_Button(526, 88, 38, 18, "On");
+      { tuner_activar = new Fl_Light_Button(526, 28, 38, 18, "On");
         tuner_activar->shortcut(0x74);
         tuner_activar->color((Fl_Color)62);
         tuner_activar->selection_color((Fl_Color)1);
@@ -12243,7 +12252,7 @@ R average.");
         tuner_activar->callback((Fl_Callback*)cb_tuner_activar, (void*)(2));
         tuner_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* tuner_activar
-      { TunerLed* o = tuner_bar = new TunerLed(586, 91, 206, 14);
+      { TunerLed* o = tuner_bar = new TunerLed(586, 31, 206, 14);
         tuner_bar->box(FL_THIN_DOWN_BOX);
         tuner_bar->color((Fl_Color)FL_DARK1);
         tuner_bar->selection_color((Fl_Color)FL_RED);
@@ -12257,28 +12266,28 @@ R average.");
         o->maximum(32);
         o->value(-32);
       } // TunerLed* tuner_bar
-      { WNote = new Fl_Box(676, 117, 28, 22);
+      { WNote = new Fl_Box(676, 57, 28, 22);
         WNote->labelfont(1);
         WNote->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WNote->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* WNote
-      { WRfreq = new Fl_Box(588, 117, 76, 22);
+      { WRfreq = new Fl_Box(588, 57, 76, 22);
         WRfreq->labelfont(1);
         WRfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WRfreq->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* WRfreq
-      { WNfreq = new Fl_Box(714, 117, 76, 22);
+      { WNfreq = new Fl_Box(714, 57, 76, 22);
         WNfreq->labelfont(1);
         WNfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WNfreq->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* WNfreq
-      { PINCHO = new Fl_Box(673, 108, 32, 5, "@-4$8<");
+      { PINCHO = new Fl_Box(673, 48, 32, 5, "@-4$8<");
         PINCHO->box(FL_FLAT_BOX);
         PINCHO->color((Fl_Color)55);
         PINCHO->labelcolor((Fl_Color)4);
         PINCHO->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* PINCHO
-      { TUNER_LABEL = new Fl_Box(527, 123, 57, 14, "Tuner");
+      { TUNER_LABEL = new Fl_Box(527, 63, 57, 14, "Tuner");
         TUNER_LABEL->labelfont(1);
         TUNER_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* TUNER_LABEL
@@ -12390,13 +12399,13 @@ R average.");
       } // Fl_Box* LABEL_IO
       InOut->end();
     } // Fl_Group* InOut
-    { Midi = new Fl_Group(521, 144, 276, 50);
+    { Midi = new Fl_Group(520, 85, 276, 50);
       Midi->box(FL_UP_BOX);
       Midi->color((Fl_Color)FL_FOREGROUND_COLOR);
       Midi->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       Midi->user_data((void*)(1));
       Midi->align(96|FL_ALIGN_INSIDE);
-      { nidi_activar = new Fl_Light_Button(526, 148, 38, 18, "On");
+      { nidi_activar = new Fl_Light_Button(525, 89, 38, 18, "On");
         nidi_activar->shortcut(0x6d);
         nidi_activar->color((Fl_Color)62);
         nidi_activar->selection_color((Fl_Color)1);
@@ -12404,7 +12413,7 @@ R average.");
         nidi_activar->callback((Fl_Callback*)cb_nidi_activar, (void*)(2));
         nidi_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* nidi_activar
-      { Midi_out_Counter = new Fl_Counter(602, 154, 60, 20, "Channel");
+      { Midi_out_Counter = new Fl_Counter(601, 95, 60, 20, "Channel");
         Midi_out_Counter->type(1);
         Midi_out_Counter->color((Fl_Color)62);
         Midi_out_Counter->labelsize(10);
@@ -12416,7 +12425,7 @@ R average.");
         Midi_out_Counter->textsize(11);
         Midi_out_Counter->callback((Fl_Callback*)cb_Midi_out_Counter);
       } // Fl_Counter* Midi_out_Counter
-      { Trig_Adj = new SliderW(668, 159, 117, 11, "Trigger");
+      { Trig_Adj = new SliderW(667, 100, 117, 11, "Trigger");
         Trig_Adj->type(5);
         Trig_Adj->box(FL_FLAT_BOX);
         Trig_Adj->color((Fl_Color)178);
@@ -12433,7 +12442,7 @@ R average.");
         Trig_Adj->align(FL_ALIGN_TOP_RIGHT);
         Trig_Adj->when(FL_WHEN_CHANGED);
       } // SliderW* Trig_Adj
-      { Vel_Adj = new SliderW(668, 178, 117, 11, "Velocity");
+      { Vel_Adj = new SliderW(667, 119, 117, 11, "Velocity");
         Vel_Adj->type(5);
         Vel_Adj->box(FL_FLAT_BOX);
         Vel_Adj->color((Fl_Color)178);
@@ -12450,13 +12459,13 @@ R average.");
         Vel_Adj->align(FL_ALIGN_TOP_RIGHT);
         Vel_Adj->when(FL_WHEN_CHANGED);
       } // SliderW* Vel_Adj
-      { MIDI_LABEL = new Fl_Box(527, 174, 45, 13, "MIDI");
+      { MIDI_LABEL = new Fl_Box(526, 115, 45, 13, "MIDI");
         MIDI_LABEL->labelfont(1);
         MIDI_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL);
         MIDI_LABEL->when(FL_WHEN_NEVER);
       } // Fl_Box* MIDI_LABEL
-      { Mled = new Fl_Box(572, 149, 10, 10);
+      { Mled = new Fl_Box(571, 90, 10, 10);
         Mled->box(FL_ROUNDED_BOX);
         Mled->color((Fl_Color)FL_RED);
         Mled->labelsize(18);
@@ -12570,6 +12579,47 @@ R average.");
       } // Fl_Box* UPS_LED
       Presets->end();
     } // Fl_Group* Presets
+    { Tap = new Fl_Group(520, 140, 276, 54);
+      Tap->box(FL_UP_BOX);
+      Tap->color((Fl_Color)FL_FOREGROUND_COLOR);
+      Tap->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      Tap->user_data((void*)(1));
+      Tap->align(96|FL_ALIGN_INSIDE);
+      { Tap_activar = new Fl_Light_Button(525, 144, 38, 18, "On");
+        Tap_activar->shortcut(0x6d);
+        Tap_activar->color((Fl_Color)62);
+        Tap_activar->selection_color((Fl_Color)1);
+        Tap_activar->labelsize(10);
+        Tap_activar->callback((Fl_Callback*)cb_Tap_activar, (void*)(2));
+        Tap_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* Tap_activar
+      { TAP_LABEL = new Fl_Box(525, 164, 95, 19, "Tap Tempo");
+        TAP_LABEL->labelfont(1);
+        TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        TAP_LABEL->when(FL_WHEN_NEVER);
+      } // Fl_Box* TAP_LABEL
+      { Tled = new Fl_Box(571, 145, 10, 10);
+        Tled->box(FL_ROUNDED_BOX);
+        Tled->color((Fl_Color)FL_RED);
+        Tled->labelsize(18);
+      } // Fl_Box* Tled
+      { T_SEL = new Fl_Choice(715, 145, 72, 15, "Input");
+        T_SEL->down_box(FL_BORDER_BOX);
+        T_SEL->labelsize(10);
+        T_SEL->textsize(10);
+        T_SEL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        T_SEL->menu(menu_T_SEL);
+      } // Fl_Choice* T_SEL
+      { T_BUT = new Fl_Button(635, 165, 54, 23, "@circle");
+        T_BUT->shortcut(0x67);
+      } // Fl_Button* T_BUT
+      { T_DIS = new Fl_Box(715, 165, 70, 22, "120");
+        T_DIS->box(FL_DOWN_BOX);
+        T_DIS->labelcolor((Fl_Color)1);
+        T_DIS->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
+      } // Fl_Box* T_DIS
+      Tap->end();
+    } // Fl_Group* Tap
     Principal->size_range(640, 480, 3200, 2400);
     Principal->end();
     Principal->resizable(Principal);
@@ -15935,6 +15985,7 @@ MBVVOL->image(InOut->image());
 CONVOLOTRON->image(InOut->image());
 LOOPER->image(InOut->image());
 RYANWAH->image(InOut->image());
+Tap->image(InOut->image());
 
 
 Presets->image(InOut->image());
@@ -16032,6 +16083,7 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
 
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
 if(rkr->upsample)

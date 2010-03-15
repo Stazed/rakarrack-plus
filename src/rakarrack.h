@@ -163,7 +163,6 @@ private:
   void cb_TITTLE_L_i(Fl_Button*, void*);
   static void cb_TITTLE_L(Fl_Button*, void*);
 public:
-  Fl_Box *DESC_L;
   Scope *Sco;
   Fl_Box *E1;
   Fl_Box *E2;
@@ -2454,6 +2453,18 @@ private:
 public:
   Analyzer *Analy;
   Fl_Box *UPS_LED;
+  Fl_Group *Tap;
+  Fl_Light_Button *Tap_activar;
+private:
+  void cb_Tap_activar_i(Fl_Light_Button*, void*);
+  static void cb_Tap_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Box *TAP_LABEL;
+  Fl_Box *Tled;
+  Fl_Choice *T_SEL;
+  static Fl_Menu_Item menu_T_SEL[];
+  Fl_Button *T_BUT;
+  Fl_Box *T_DIS;
   Fl_Double_Window *BankWindow;
 private:
   void cb_BankWindow_i(Fl_Double_Window*, void*);

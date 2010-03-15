@@ -824,7 +824,6 @@ RKR::Vol_Efx (int NumEffect, float volume)
   int i;
   float v1, v2;
  
-
   if (volume < 0.5f)
     {
       v1 = 1.0f;
@@ -837,7 +836,7 @@ RKR::Vol_Efx (int NumEffect, float volume)
     };
 
 
-  if ((NumEffect == 7) || (NumEffect == 12))
+  if ((NumEffect == 8) || (NumEffect == 15))
     v2 *= v2;
 
   for (i = 0; i < PERIOD; i++)
@@ -944,6 +943,8 @@ RKR::Control_Volume (float *origl,float *origr)
 void
 RKR::cleanup_efx ()
 {
+
+
   efx_EQ1->cleanup ();
   efx_Rev->cleanup ();
   efx_Distorsion->cleanup ();
@@ -978,6 +979,7 @@ RKR::cleanup_efx ()
   efx_RyanWah->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
+
 };
 
 
@@ -1054,7 +1056,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Chorus_Bypass)
 		{
 		  efx_Chorus->out (efxoutl, efxoutr);
-		  Vol_Efx (1, efx_Chorus->outvolume);
+		  Vol_Efx (5, efx_Chorus->outvolume);
 		}
 	      break;
 
@@ -1062,7 +1064,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Flanger_Bypass)
 		{
 		  efx_Flanger->out (efxoutl, efxoutr);
-		  Vol_Efx (2, efx_Flanger->outvolume);
+		  Vol_Efx (7, efx_Flanger->outvolume);
 		}
 	      break;
 
@@ -1070,7 +1072,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Phaser_Bypass)
 	      	{
 		  efx_Phaser->out (efxoutl, efxoutr);
-		  Vol_Efx (3, efx_Phaser->outvolume);
+		  Vol_Efx (6, efx_Phaser->outvolume);
 		}
 	      break;
 
@@ -1078,7 +1080,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Distorsion_Bypass)
 		{
 		  efx_Distorsion->out (efxoutl, efxoutr);
-		  Vol_Efx (4, efx_Distorsion->outvolume);
+		  Vol_Efx (2, efx_Distorsion->outvolume);
 		}
 	      break;
 
@@ -1086,7 +1088,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Overdrive_Bypass)
 		{
 		  efx_Overdrive->out (efxoutl, efxoutr);
-		  Vol_Efx (5, efx_Overdrive->outvolume);
+		  Vol_Efx (3, efx_Overdrive->outvolume);
 		}
 	      break;
 
@@ -1094,14 +1096,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Echo_Bypass)
 		{
 		  efx_Echo->out (efxoutl, efxoutr);
-		  Vol_Efx (6, efx_Echo->outvolume);
+		  Vol_Efx (4, efx_Echo->outvolume);
 		}
 	      break;
 	    case 8:
 	      if (Reverb_Bypass)
 		{
 		  efx_Rev->out (efxoutl, efxoutr);
-		  Vol_Efx (7, efx_Rev->outvolume);
+		  Vol_Efx (8, efx_Rev->outvolume);
 		}
 	      break;
 
@@ -1117,7 +1119,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (WhaWha_Bypass)
 		{
 		  efx_WhaWha->out (efxoutl, efxoutr);
-		  Vol_Efx (8, efx_WhaWha->outvolume);
+		  Vol_Efx (10, efx_WhaWha->outvolume);
 		}
 	      break;
 
@@ -1125,7 +1127,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Alienwah_Bypass)
 	      	{
 		  efx_Alienwah->out (efxoutl, efxoutr);
-		  Vol_Efx (9, efx_Alienwah->outvolume);
+		  Vol_Efx (11, efx_Alienwah->outvolume);
 		}
 	      break;
 
@@ -1142,7 +1144,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Pan_Bypass)
 		{
 		  efx_Pan->out (efxoutl, efxoutr);
-		  Vol_Efx (10, efx_Pan->outvolume);
+		  Vol_Efx (13, efx_Pan->outvolume);
 		}
 	      break;
 
@@ -1150,7 +1152,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Harmonizer_Bypass)
 		{
 		  efx_Har->out (efxoutl, efxoutr);
-		  Vol_Efx (11, efx_Har->outvolume);
+		  Vol_Efx (14, efx_Har->outvolume);
 		}
 	      break;
 
@@ -1158,7 +1160,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (MusDelay_Bypass)
 		{
 		  efx_MusDelay->out (efxoutl, efxoutr);
-		  Vol_Efx (12, efx_MusDelay->outvolume);
+		  Vol_Efx (15, efx_MusDelay->outvolume);
 		}
 	      break;
 
@@ -1174,7 +1176,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if(NewDist_Bypass)
                 {
                   efx_NewDist->out (efxoutl, efxoutr);
-                  Vol_Efx(13,efx_NewDist->outvolume);
+                  Vol_Efx(17,efx_NewDist->outvolume);
                 }
               break;    
 	    
@@ -1182,7 +1184,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (APhaser_Bypass)
 		{
 		  efx_APhaser->out (efxoutl, efxoutr);
-		  Vol_Efx (3, efx_APhaser->outvolume);
+		  Vol_Efx (18, efx_APhaser->outvolume);
 		}
 	      break;
 
@@ -1222,7 +1224,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (MBDist_Bypass)
                 {
                   efx_MBDist->out(efxoutl, efxoutr);
-		  Vol_Efx(22,efx_MBDist->outvolume);
+		  Vol_Efx(23,efx_MBDist->outvolume);
                 }
               break; 	           
 	    
@@ -1230,7 +1232,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Arpie_Bypass)
                 {
                   efx_Arpie->out(efxoutl, efxoutr);
-		  Vol_Efx(6,efx_Arpie->outvolume);
+		  Vol_Efx(24,efx_Arpie->outvolume);
                 }
               break;  
 	    	    
@@ -1286,7 +1288,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (RyanWah_Bypass)
                 {
                   efx_RyanWah->out(efxoutl, efxoutr);
-		  Vol_Efx(30,efx_RyanWah->outvolume);
+		  Vol_Efx(31,efx_RyanWah->outvolume);
                 }
               break;  
 
