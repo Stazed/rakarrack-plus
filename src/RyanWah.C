@@ -35,6 +35,9 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
 
   filterl = NULL;
   filterr = NULL;
+  
+  base = 7.0f;		//sets curve of modulation to frequency relationship
+  ibase = 1.0f/base;
 
   Pampsns = 0;
   Pampsnsinv= 0;
@@ -94,13 +97,19 @@ RyanWah::out (float * smpsl, float * smpsr)
 
 
   float rms = ms1 * ampsns + oldfbias2;
-  if(rms>1.0f) rms = 1.0f;
-   rms*=rms; 
-   
+      
   if(variq) q = powf(2.0f,(2.0f*(1.0f-rms)+1.0f));
 
-   float frl = minfreq + maxfreq*(lfol + rms);
-   float frr = minfreq + maxfreq*(lfor + rms);
+   float lmod =(lfol + rms);
+   float rmod = (lfor + rms);
+  if(lmod>1.0f) lmod = 1.0f;
+  if(lmod<0.0f) lmod = 0.0f;
+  if(rmod>1.0f) rmod = 1.0f;
+  if(rmod<0.0f) rmod = 0.0f;  
+  
+   //rms*=rms;    
+   float frl = minfreq + maxfreq*(powf(base, lmod) - 1.0f)*ibase;
+   float frr = minfreq + maxfreq*(powf(base, rmod) - 1.0f)*ibase;
    
    centfreq = frl; //testing variable
 
@@ -266,7 +275,7 @@ RyanWah::changepar (int npar, int value)
       break;  
      case 14:
      Prange = value;
-     maxfreq = ((float) Prange) + 100.0 + fbias * 800.0f;
+     maxfreq = ((float) Prange);
      break; 
      case 15:
      Pminfreq = value;
