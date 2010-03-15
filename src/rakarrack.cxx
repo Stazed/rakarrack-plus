@@ -5256,8 +5256,7 @@ void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
- {"Keyboard", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Mouse", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"GUI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"MIDI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };

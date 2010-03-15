@@ -890,7 +890,8 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -5449,7 +5450,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-Fl::redraw();} selected
+Fl::redraw();}
           xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Counter Midi_out_Counter {
@@ -5627,15 +5628,11 @@ Fl::redraw();}
           xywh {571 145 10 10} box ROUNDED_BOX color 88 labelsize 18
         }
         Fl_Choice T_SEL {
-          label Input
+          label Input open
           xywh {715 145 72 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Keyboard
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Mouse
+            label GUI selected
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
