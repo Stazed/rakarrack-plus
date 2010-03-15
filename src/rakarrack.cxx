@@ -12286,7 +12286,7 @@ R average.");
         PINCHO->labelcolor((Fl_Color)4);
         PINCHO->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* PINCHO
-      { TUNER_LABEL = new Fl_Box(527, 63, 57, 14, "Tuner");
+      { TUNER_LABEL = new Fl_Box(524, 63, 57, 14, "Tuner");
         TUNER_LABEL->labelfont(1);
         TUNER_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* TUNER_LABEL
@@ -12398,7 +12398,7 @@ R average.");
       } // Fl_Box* LABEL_IO
       InOut->end();
     } // Fl_Group* InOut
-    { Midi = new Fl_Group(520, 85, 276, 50);
+    { Midi = new Fl_Group(520, 85, 276, 52);
       Midi->box(FL_UP_BOX);
       Midi->color((Fl_Color)FL_FOREGROUND_COLOR);
       Midi->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -12458,7 +12458,7 @@ R average.");
         Vel_Adj->align(FL_ALIGN_TOP_RIGHT);
         Vel_Adj->when(FL_WHEN_CHANGED);
       } // SliderW* Vel_Adj
-      { MIDI_LABEL = new Fl_Box(526, 115, 45, 13, "MIDI");
+      { MIDI_LABEL = new Fl_Box(524, 117, 45, 13, "MIDI");
         MIDI_LABEL->labelfont(1);
         MIDI_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL);
@@ -12592,7 +12592,7 @@ R average.");
         Tap_activar->callback((Fl_Callback*)cb_Tap_activar, (void*)(2));
         Tap_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Tap_activar
-      { TAP_LABEL = new Fl_Box(525, 164, 95, 19, "Tap Tempo");
+      { TAP_LABEL = new Fl_Box(524, 170, 95, 19, "Tap Tempo");
         TAP_LABEL->labelfont(1);
         TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         TAP_LABEL->when(FL_WHEN_NEVER);

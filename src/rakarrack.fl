@@ -890,13 +890,12 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1328 74 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {398 62 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600}
@@ -5358,7 +5357,7 @@ TUNER_LABEL->redraw();}
         }
         Fl_Box TUNER_LABEL {
           label Tuner
-          xywh {527 63 57 14} labelfont 1 labelcolor 7
+          xywh {524 63 57 14} labelfont 1 labelcolor 7
         }
       }
       Fl_Group InOut {
@@ -5434,7 +5433,7 @@ rkr->calculavol(2);}
       }
       Fl_Group Midi {
         user_data 1
-        xywh {520 85 276 50} box UP_BOX color 0 selection_color 0 align 112
+        xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button nidi_activar {
           label On
@@ -5487,7 +5486,7 @@ strcpy(rkr->Bank_Saved,filename);
 BankWin_Label(filename);
 rkr->modified=0;
 }}
-          xywh {526 115 45 13} labelfont 1 labelcolor 7 when 0
+          xywh {524 117 45 13} labelfont 1 labelcolor 7 when 0
         }
         Fl_Box Mled {
           xywh {571 90 10 10} box ROUNDED_BOX color 88 labelsize 18
@@ -5609,7 +5608,7 @@ Analyzer_ON=1;
         }
       }
       Fl_Group Tap {
-        user_data 1
+        user_data 1 selected
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -5622,7 +5621,7 @@ Fl::redraw();}
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
-          xywh {525 164 95 19} labelfont 1 labelcolor 7 when 0
+          xywh {524 170 95 19} labelfont 1 labelcolor 7 when 0
         }
         Fl_Box Tled {
           xywh {571 145 10 10} box ROUNDED_BOX color 88 labelsize 18
@@ -5632,7 +5631,7 @@ Fl::redraw();}
           xywh {715 145 72 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label GUI selected
+            label GUI
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
