@@ -886,8 +886,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -896,10 +895,10 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {398 62 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {409 67 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
-        xywh {1 1 800 600}
+        xywh {1 1 800 600} align 112
       }
       Fl_Menu_Bar MenuP {
         xywh {2 2 795 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
@@ -5403,7 +5402,7 @@ input_vu->value(-50.0);
 output_vu->value(-50.0);
 
 ChangeActives();  
-LABEL_IO->redraw();
+InOut->redraw();
 
 if (!o->value())
    {
@@ -5476,7 +5475,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-MIDI_LABEL->redraw();}
+Midi->redraw();}
           xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Counter Midi_out_Counter {
@@ -5516,7 +5515,7 @@ strcpy(rkr->Bank_Saved,filename);
 BankWin_Label(filename);
 rkr->modified=0;
 }}
-          xywh {524 117 45 14} labelfont 1 labelcolor 7 when 0
+          xywh {524 117 44 14} labelfont 1 labelcolor 7 when 0
         }
       }
       Fl_Group Presets {
@@ -5649,7 +5648,7 @@ k =rkr->TapTempo();
 }
 
 ChangeActives();
-TAP_LABEL->redraw();}
+Tap->redraw();}
           xywh {525 144 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice T_SEL {
@@ -5685,7 +5684,7 @@ UpdateTGUI();
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
-          xywh {524 170 95 14} labelfont 1 labelcolor 7 when 0
+          xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
         }
       }
     }
@@ -6616,8 +6615,7 @@ for (int t=0; t<ob->children();t++)
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
-chfsize(0);} {selected
-    }
+chfsize(0);} {}
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)
@@ -9542,6 +9540,8 @@ RYANWAH->image(InOut->image());
 Tap->image(InOut->image());
 
 
+
+
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
@@ -9666,49 +9666,56 @@ for(i=0; i<10; i++)
   
      case 0:
      if(value) L1->labelcolor(on); else L1->labelcolor(off);
+     L1->redraw();
      break;  
      
      case 1:
      if(value) L2->labelcolor(on); else L2->labelcolor(off);
+     L2->redraw();
      break;  
        
      case 2:
      if(value) L3->labelcolor(on); else L3->labelcolor(off);
+     L3->redraw();
      break;  
        
      case 3:
      if(value) L4->labelcolor(on); else L4->labelcolor(off);
+     L4->redraw();
      break;  
        
      case 4:
      if(value) L5->labelcolor(on); else L5->labelcolor(off);
+     L5->redraw();
      break;  
        
      case 5:
      if(value) L6->labelcolor(on); else L6->labelcolor(off);
+     L6->redraw();
      break;  
        
      case 6:
      if(value) L7->labelcolor(on); else L7->labelcolor(off);
+     L7->redraw();
      break;  
        
      case 7:
      if(value) L8->labelcolor(on); else L8->labelcolor(off);
+     L8->redraw();
      break;  
        
      case 8:
      if(value) L9->labelcolor(on); else L9->labelcolor(off);
+     L9->redraw();
      break;  
        
      case 9:
      if(value) L10->labelcolor(on); else L10->labelcolor(off);
+     L10->redraw();
      break;  
        
- }
- 
-
- 
- Fl::redraw();} {}
+ }} {selected
+    }
   }
   Function {Put_Skin(int last)} {} {
     code {Principal->resize(Principal->x(),Principal->y(),rkr->resolution,rkr->sh);

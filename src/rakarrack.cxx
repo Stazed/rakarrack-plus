@@ -5052,7 +5052,7 @@ input_vu->value(-50.0);
 output_vu->value(-50.0);
 
 ChangeActives();  
-LABEL_IO->redraw();
+InOut->redraw();
 
 if (!o->value())
    {
@@ -5112,7 +5112,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-MIDI_LABEL->redraw();
+Midi->redraw();
 }
 void RKRGUI::cb_nidi_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_nidi_activar_i(o,v);
@@ -5281,7 +5281,7 @@ k =rkr->TapTempo();
 }
 
 ChangeActives();
-TAP_LABEL->redraw();
+Tap->redraw();
 }
 void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
@@ -5988,6 +5988,7 @@ Fl_Double_Window* RKRGUI::make_window() {
     Principal->color((Fl_Color)FL_FOREGROUND_COLOR);
     Principal->callback((Fl_Callback*)cb_Principal, (void*)(this));
     { fondo = new Fl_Box(1, 1, 800, 600);
+      fondo->align(96|FL_ALIGN_INSIDE);
     } // Fl_Box* fondo
     { MenuP = new Fl_Menu_Bar(2, 2, 795, 18);
       MenuP->box(FL_NO_BOX);
@@ -12517,7 +12518,7 @@ R average.");
         Mled->color((Fl_Color)FL_RED);
         Mled->labelsize(18);
       } // Fl_Box* Mled
-      { MIDI_LABEL = new Fl_Box(524, 117, 45, 14, "MIDI");
+      { MIDI_LABEL = new Fl_Box(524, 117, 44, 14, "MIDI");
         MIDI_LABEL->labelfont(1);
         MIDI_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL);
@@ -12663,7 +12664,7 @@ R average.");
         T_DIS->labelcolor((Fl_Color)1);
         T_DIS->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
       } // Fl_Box* T_DIS
-      { TAP_LABEL = new Fl_Box(524, 170, 95, 14, "Tap Tempo");
+      { TAP_LABEL = new Fl_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->labelfont(1);
         TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         TAP_LABEL->when(FL_WHEN_NEVER);
@@ -16286,6 +16287,8 @@ RYANWAH->image(InOut->image());
 Tap->image(InOut->image());
 
 
+
+
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
@@ -16414,49 +16417,55 @@ for(i=0; i<10; i++)
   
      case 0:
      if(value) L1->labelcolor(on); else L1->labelcolor(off);
+     L1->redraw();
      break;  
      
      case 1:
      if(value) L2->labelcolor(on); else L2->labelcolor(off);
+     L2->redraw();
      break;  
        
      case 2:
      if(value) L3->labelcolor(on); else L3->labelcolor(off);
+     L3->redraw();
      break;  
        
      case 3:
      if(value) L4->labelcolor(on); else L4->labelcolor(off);
+     L4->redraw();
      break;  
        
      case 4:
      if(value) L5->labelcolor(on); else L5->labelcolor(off);
+     L5->redraw();
      break;  
        
      case 5:
      if(value) L6->labelcolor(on); else L6->labelcolor(off);
+     L6->redraw();
      break;  
        
      case 6:
      if(value) L7->labelcolor(on); else L7->labelcolor(off);
+     L7->redraw();
      break;  
        
      case 7:
      if(value) L8->labelcolor(on); else L8->labelcolor(off);
+     L8->redraw();
      break;  
        
      case 8:
      if(value) L9->labelcolor(on); else L9->labelcolor(off);
+     L9->redraw();
      break;  
        
      case 9:
      if(value) L10->labelcolor(on); else L10->labelcolor(off);
+     L10->redraw();
      break;  
        
  }
- 
-
- 
- Fl::redraw();
 }
 
 void RKRGUI::Put_Skin(int last) {
