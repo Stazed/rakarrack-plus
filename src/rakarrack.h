@@ -2460,9 +2460,12 @@ private:
   static void cb_Tap_activar(Fl_Light_Button*, void*);
 public:
   Fl_Box *TAP_LABEL;
-  Fl_Box *Tled;
   Fl_Choice *T_SEL;
+private:
+  void cb_T_SEL_i(Fl_Choice*, void*);
+  static void cb_T_SEL(Fl_Choice*, void*);
   static Fl_Menu_Item menu_T_SEL[];
+public:
   Fl_Button *T_BUT;
 private:
   void cb_T_BUT_i(Fl_Button*, void*);
@@ -2831,5 +2834,6 @@ public:
   void Prepare_Order();
   void Show_Next_Time();
   void update_looper();
+  void UpdateTGUI();
 };
 #endif

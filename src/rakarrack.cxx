@@ -1073,6 +1073,32 @@ if (preset!=1000)
 
 ActMIDI();
 
+
+if(rkr->Tap_Bypass)
+{
+   
+  if((rkr->Tap_Display==1) && (rkr->Tap_Selection == 1))
+   {
+     char tt[8];
+     bzero(tt,sizeof(tt));
+     sprintf(tt,"%d",rkr->Tap_TempoSet);
+     T_DIS->copy_label(tt);
+     UpdateTGUI();
+     rkr->Tap_Display=0;
+   }  
+
+  if(rkr->Tap_Display==2)
+   {
+     char tt[8];
+     bzero(tt,sizeof(tt));
+     sprintf(tt,"---");
+     rkr->Tap_Display=0;
+     Tap_activar->value(0);
+     Tap_activar->do_callback();
+   }  
+
+}
+
 if (rkr->Bypass)
 { 
   if (rkr->val_i_sum != rkr->old_i_sum)
@@ -5250,9 +5276,19 @@ void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tap_Bypass = (int)o->value();
 ChangeActives();
 Fl::redraw();
+
+if(rkr->Tap_Bypass)
+rkr->TapTempo();
 }
 void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
+}
+
+void RKRGUI::cb_T_SEL_i(Fl_Choice* o, void*) {
+  rkr->Tap_Selection=(int)o->value();
+}
+void RKRGUI::cb_T_SEL(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_SEL_i(o,v);
 }
 
 Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
@@ -5264,11 +5300,12 @@ Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
 void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
   char tmp[8] ;
 
-if(rkr->Tap_Bypass)
+if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
 bzero(tmp,sizeof(tmp));
 sprintf(tmp,"%d",rkr->TapTempo());
 T_DIS->copy_label(tmp);
+UpdateTGUI();
 };
 }
 void RKRGUI::cb_T_BUT(Fl_Button* o, void* v) {
@@ -12611,16 +12648,12 @@ R average.");
         TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         TAP_LABEL->when(FL_WHEN_NEVER);
       } // Fl_Box* TAP_LABEL
-      { Tled = new Fl_Box(571, 145, 10, 10);
-        Tled->box(FL_ROUNDED_BOX);
-        Tled->color((Fl_Color)FL_RED);
-        Tled->labelsize(18);
-      } // Fl_Box* Tled
       { T_SEL = new Fl_Choice(715, 145, 72, 15, "Input");
         T_SEL->down_box(FL_BORDER_BOX);
         T_SEL->labelsize(10);
         T_SEL->textsize(10);
         T_SEL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        T_SEL->callback((Fl_Callback*)cb_T_SEL);
         T_SEL->menu(menu_T_SEL);
       } // Fl_Choice* T_SEL
       { T_BUT = new Fl_Button(635, 165, 54, 23, "@circle");
@@ -13170,7 +13203,6 @@ fl_register_images();
 rkr=rkr_;
 
 back = NULL;
-
 make_window();
 
 Principal->icon((char *)p);
@@ -16527,4 +16559,23 @@ looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_t1->value(rkr->efx_Looper->progstate[4]);
 looper_t2->value(rkr->efx_Looper->progstate[5]);
+}
+
+void RKRGUI::UpdateTGUI() {
+  if(rkr->Chorus_Bypass) chorus_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Flanger_Bypass) flanger_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Phaser_Bypass) phaser_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Pan_Bypass) pan_freq->value(rkr->Tap_TempoSet);
+  if(rkr->WhaWha_Bypass) WhaWha_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Alienwah_Bypass) Alienwah_freq->value(rkr->Tap_TempoSet);
+  if(rkr->MusDelay_Bypass) musdelay_tempo->value(rkr->Tap_TempoSet);
+  if(rkr->APhaser_Bypass) aphaser_freq->value(rkr->Tap_TempoSet);
+  if(rkr->DFlange_Bypass) dflange_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Synthfilter_Bypass) synthfilter_freq->value(rkr->Tap_TempoSet);
+  if(rkr->RyanWah_Bypass) ryanwah_freq->value(rkr->Tap_TempoSet);
+  if(rkr->MBVvol_Bypass) mbvvol_freq1->value(rkr->Tap_TempoSet);
+  if(rkr->MBVvol_Bypass) mbvvol_freq2->value(rkr->Tap_TempoSet);
+  if(rkr->Arpie_Bypass) arpie_delay->value(rkr->Tap_TempoSet);
+  
+  Fl::redraw();
 }

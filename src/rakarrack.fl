@@ -897,7 +897,7 @@ save_stat(0);
 Pexitprogram=1;}
       xywh {398 62 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
-      Fl_Box fondo {selected
+      Fl_Box fondo {
         xywh {1 1 800 600}
       }
       Fl_Menu_Bar MenuP {
@@ -1078,6 +1078,32 @@ if (preset!=1000)
 }
 
 ActMIDI();
+
+
+if(rkr->Tap_Bypass)
+{
+   
+  if((rkr->Tap_Display==1) && (rkr->Tap_Selection == 1))
+   {
+     char tt[8];
+     bzero(tt,sizeof(tt));
+     sprintf(tt,"%d",rkr->Tap_TempoSet);
+     T_DIS->copy_label(tt);
+     UpdateTGUI();
+     rkr->Tap_Display=0;
+   }  
+
+  if(rkr->Tap_Display==2)
+   {
+     char tt[8];
+     bzero(tt,sizeof(tt));
+     sprintf(tt,"---");
+     rkr->Tap_Display=0;
+     Tap_activar->value(0);
+     Tap_activar->do_callback();
+   }  
+
+}
 
 if (rkr->Bypass)
 { 
@@ -3712,7 +3738,7 @@ dflange_LR->value(rkr->efx_DFlange->getpar(2));
 dflange_subs->value(rkr->efx_DFlange->getpar(8));
 dflange_tz->value(rkr->efx_DFlange->getpar(9));
 dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
+dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4256,7 +4282,7 @@ arpie_harm->value(rkr->efx_Arpie->getpar(8));
 arpie_pattern->value(rkr->efx_Arpie->getpar(9));
 arpie_subdiv->value(rkr->efx_Arpie->getpar(10));
 
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;} open
+if((int)arpie_activar->value())rkr->Arpie_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4632,7 +4658,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5608,7 +5634,7 @@ Analyzer_ON=1;
         }
       }
       Fl_Group Tap {
-        user_data 1
+        user_data 1 selected
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -5616,18 +5642,19 @@ Analyzer_ON=1;
           user_data 2
           callback {rkr->Tap_Bypass = (int)o->value();
 ChangeActives();
-Fl::redraw();}
+Fl::redraw();
+
+if(rkr->Tap_Bypass)
+rkr->TapTempo();}
           xywh {525 144 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
           xywh {524 170 95 19} labelfont 1 labelcolor 7 when 0
         }
-        Fl_Box Tled {
-          xywh {571 145 10 10} box ROUNDED_BOX color 88 labelsize 18
-        }
         Fl_Choice T_SEL {
-          label Input open
+          label Input
+          callback {rkr->Tap_Selection=(int)o->value();}
           xywh {715 145 72 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5643,11 +5670,12 @@ Fl::redraw();}
           label {@circle}
           callback {char tmp[8] ;
 
-if(rkr->Tap_Bypass)
+if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
 bzero(tmp,sizeof(tmp));
 sprintf(tmp,"%d",rkr->TapTempo());
 T_DIS->copy_label(tmp);
+UpdateTGUI();
 }}
           xywh {635 165 54 23} shortcut 0x67
         }
@@ -6452,7 +6480,6 @@ fl_register_images();
 rkr=rkr_;
 
 back = NULL;
-
 make_window();
 
 Principal->icon((char *)p);
@@ -9776,5 +9803,23 @@ looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_t1->value(rkr->efx_Looper->progstate[4]);
 looper_t2->value(rkr->efx_Looper->progstate[5]);} {}
+  }
+  Function {UpdateTGUI()} {} {
+    code {if(rkr->Chorus_Bypass) chorus_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Flanger_Bypass) flanger_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Phaser_Bypass) phaser_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Pan_Bypass) pan_freq->value(rkr->Tap_TempoSet);
+  if(rkr->WhaWha_Bypass) WhaWha_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Alienwah_Bypass) Alienwah_freq->value(rkr->Tap_TempoSet);
+  if(rkr->MusDelay_Bypass) musdelay_tempo->value(rkr->Tap_TempoSet);
+  if(rkr->APhaser_Bypass) aphaser_freq->value(rkr->Tap_TempoSet);
+  if(rkr->DFlange_Bypass) dflange_freq->value(rkr->Tap_TempoSet);
+  if(rkr->Synthfilter_Bypass) synthfilter_freq->value(rkr->Tap_TempoSet);
+  if(rkr->RyanWah_Bypass) ryanwah_freq->value(rkr->Tap_TempoSet);
+  if(rkr->MBVvol_Bypass) mbvvol_freq1->value(rkr->Tap_TempoSet);
+  if(rkr->MBVvol_Bypass) mbvvol_freq2->value(rkr->Tap_TempoSet);
+  if(rkr->Arpie_Bypass) arpie_delay->value(rkr->Tap_TempoSet);
+  
+  Fl::redraw();} {}
   }
 } 

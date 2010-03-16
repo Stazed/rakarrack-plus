@@ -110,9 +110,11 @@ char *tmp;
 }
 
 
-int RKR::TapTempo()
+
+int
+RKR::TapTempo()
 {
-int i, Tempo;
+int i;
 double AvTempo;
 gettimeofday(&timeA, NULL);
 
@@ -126,7 +128,6 @@ if( timediff < 3.0)
    tempobuf[tempocnt] = 60.0 /((double) timediff); 
    }
    if((++tempocnt) >= 5)  tempocnt = 0;
-
 }
 
 AvTempo = 0.0;
@@ -136,12 +137,47 @@ AvTempo += tempobuf[i];
 }
 
 AvTempo *= 0.25;
-Tempo = (int) AvTempo;
+Tap_TempoSet = lrintf(AvTempo);
 Tap_timeB = Aseconds;
+if(Tap_Selection)Tap_Display=1;
+Update_tempo();
+return(Tap_TempoSet);
 
-printf("AvTempo %f Tempo %d TapTimeB %f Time %f\n", AvTempo, Tempo, Tap_timeB, timediff);
+}
 
-return(Tempo);
+void
+RKR::TapTempo_Timeout()
+{
+int i;
+gettimeofday(&timeA, NULL);
+
+double Aseconds = (double) timeA.tv_sec + ((double) timeA.tv_usec)* 0.000001;
+double timediff = Aseconds - Tap_timeB;
+
+if( timediff > 8.0)   Tap_Display = 2; 
+
 }
 
 
+void
+RKR::Update_tempo()
+{
+  if(Chorus_Bypass) efx_Chorus->changepar(2,Tap_TempoSet);
+  if(Flanger_Bypass) efx_Flanger->changepar(2,Tap_TempoSet);
+  if(Phaser_Bypass) efx_Phaser->changepar(2,Tap_TempoSet);
+  if(Pan_Bypass) efx_Pan->changepar(2,Tap_TempoSet);
+  if(WhaWha_Bypass) efx_WhaWha->changepar(2,Tap_TempoSet);
+  if(Alienwah_Bypass) efx_Alienwah->changepar(2,Tap_TempoSet);
+  if(MusDelay_Bypass) efx_MusDelay->changepar(10,Tap_TempoSet);
+  if(APhaser_Bypass) efx_APhaser->changepar(2,Tap_TempoSet);
+  if(DFlange_Bypass) efx_DFlange->changepar(10,Tap_TempoSet);
+  if(Synthfilter_Bypass) efx_Synthfilter->changepar(2,Tap_TempoSet);
+  if(RyanWah_Bypass) efx_RyanWah->changepar(2,Tap_TempoSet);
+  if(MBVvol_Bypass) efx_MBVvol->changepar(1,Tap_TempoSet);
+  if(MBVvol_Bypass) efx_MBVvol->changepar(4,Tap_TempoSet);
+  if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSet);
+
+
+}
+
+  

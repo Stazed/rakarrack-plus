@@ -209,6 +209,8 @@ public:
   int Get_Bogomips();
   int checkonoff(int value);
   int TapTempo();
+  void TapTempo_Timeout();
+  void Update_tempo();
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;
@@ -484,8 +486,9 @@ public:
   double Tap_timeB;
   int tempocnt;
   double tempobuf[6];  
-
-
+  int Tap_Display;
+  int Tap_Selection;
+  int Tap_TempoSet;
 
 };
 

@@ -100,13 +100,17 @@ RKR::midievents()
       int cmdnote = midievent->data.note.note;
       int cmdvelo = midievent->data.note.velocity;
 
+      if((Tap_Bypass) && (Tap_Selection == 1) && (midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0))
+      Tap_TempoSet=TapTempo();                  
+	
+
       if (midievent->data.note.channel == HarCh)
 	{
 	  for (i = 0; i < POLY; i++)
 	    {
 	      if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0))
 		{
-		  if (note_active[i] == 0)
+          	  if (note_active[i] == 0)
 		    {
 		      note_active[i] = 1;
 		      rnote[i] = cmdnote;
@@ -570,6 +574,9 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
       int cmdnote = midievent->buffer[1];
       int cmdvelo = midievent->buffer[2];
       int cmdchan = midievent->buffer[0]&15;
+      
+      if((Tap_Bypass) && (Tap_Selection==1) && (type==9) && (cmdvelo != 0)) Tap_TempoSet = TapTempo();
+
       
       if (cmdchan == HarCh)
 	{

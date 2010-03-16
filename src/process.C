@@ -570,7 +570,9 @@ efx_FLimiter->Compressor_Change(9,1);
   tempocnt=0;
   for(int i=0;i<6;i++)tempobuf[i]=0;  
   Tap_timeB = 0;
-  
+  Tap_Display = 0;  
+  Tap_Selection = 0;
+  Tap_TempoSet = 90;
 
 // Load Preset Bank File
 
@@ -995,11 +997,15 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
   efxoutl = inl1;
   efxoutr = inr1;
 
+  if(Tap_Bypass) TapTempo_Timeout(); 
+
   if (Bypass)
     {
 
        Control_Gain (origl, origr);
       
+      if(Tap_Bypass) TapTempo_Timeout(); 
+
       if (Tuner_Bypass)
 	efx_Tuner->schmittFloat (PERIOD, efxoutl, efxoutr);
       if (MIDIConverter_Bypass)
