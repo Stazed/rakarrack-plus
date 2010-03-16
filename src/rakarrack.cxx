@@ -5985,7 +5985,7 @@ Fl_Double_Window* RKRGUI::make_window() {
     { fondo = new Fl_Box(1, 1, 800, 600);
       fondo->align(96|FL_ALIGN_INSIDE);
     } // Fl_Box* fondo
-    { MenuP = new Fl_Menu_Bar(2, 2, 795, 18);
+    { MenuP = new Fl_Menu_Bar(2, 2, 518, 18);
       MenuP->box(FL_NO_BOX);
       MenuP->color((Fl_Color)178);
       MenuP->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -5998,7 +5998,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       MT->labelsize(18);
       MT->callback((Fl_Callback*)cb_MT);
     } // Fl_Box* MT
-    { TITTLE_L = new Fl_Button(520, 2, 276, 19);
+    { TITTLE_L = new Fl_Button(521, 2, 276, 21);
       TITTLE_L->type(1);
       TITTLE_L->box(FL_NO_BOX);
       TITTLE_L->labeltype(FL_EMBOSSED_LABEL);
