@@ -481,7 +481,7 @@ public:
 
   // Tap Tempo
   
-  struct timeval timeA;
+  timeval timeA;
   long Tap_time_Init;
   double Tap_timeB;
   int tempocnt;

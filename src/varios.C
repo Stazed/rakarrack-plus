@@ -118,14 +118,15 @@ int i;
 double AvTempo;
 gettimeofday(&timeA, NULL);
 
-double Aseconds = (double) timeA.tv_sec + ((double) timeA.tv_usec)* 0.000001;
+double Aseconds =  (double) timeA.tv_sec + (double)timeA.tv_usec * 0.000001;
 double timediff = Aseconds - Tap_timeB;
 
-if( timediff < 3.0)  
+
+if( timediff < 3.0f)  
 {
-   if(timediff > 0.01)
+   if(timediff > 0.01f)
    {
-   tempobuf[tempocnt] = 60.0 /((double) timediff); 
+   tempobuf[tempocnt] = 60.0f /((double) timediff); 
    }
    if((++tempocnt) >= 5)  tempocnt = 0;
 }
@@ -137,7 +138,7 @@ AvTempo += tempobuf[i];
 }
 
 AvTempo *= 0.25;
-Tap_TempoSet = lrintf(AvTempo);
+Tap_TempoSet = lrint(AvTempo);
 Tap_timeB = Aseconds;
 if(Tap_Selection)Tap_Display=1;
 Update_tempo();
@@ -148,13 +149,11 @@ return(Tap_TempoSet);
 void
 RKR::TapTempo_Timeout()
 {
-int i;
+
 gettimeofday(&timeA, NULL);
-
-double Aseconds = (double) timeA.tv_sec + ((double) timeA.tv_usec)* 0.000001;
+double Aseconds = (double) timeA.tv_sec + (double) timeA.tv_usec* 0.000001;
 double timediff = Aseconds - Tap_timeB;
-
-if( timediff > 8.0)   Tap_Display = 2; 
+if( timediff > 8.0f)   Tap_Display = 2; 
 
 }
 

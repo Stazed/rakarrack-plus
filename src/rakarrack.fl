@@ -886,12 +886,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -5476,7 +5476,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-Fl::redraw();}
+MIDI_LABEL->redraw();}
           xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Counter Midi_out_Counter {
@@ -5496,6 +5496,9 @@ Fl::redraw();}
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 1 maximum 100 step 1 textcolor 7
           class SliderW
         }
+        Fl_Box Mled {
+          xywh {571 90 10 10} box ROUNDED_BOX color 88 labelsize 18
+        }
         Fl_Box MIDI_LABEL {
           label MIDI
           callback {int ok;
@@ -5513,10 +5516,7 @@ strcpy(rkr->Bank_Saved,filename);
 BankWin_Label(filename);
 rkr->modified=0;
 }}
-          xywh {524 117 45 13} labelfont 1 labelcolor 7 when 0
-        }
-        Fl_Box Mled {
-          xywh {571 90 10 10} box ROUNDED_BOX color 88 labelsize 18
+          xywh {524 117 45 14} labelfont 1 labelcolor 7 when 0
         }
       }
       Fl_Group Presets {
@@ -5643,18 +5643,14 @@ Analyzer_ON=1;
           user_data 2
           callback {int k;
 rkr->Tap_Bypass = (int)o->value();
-ChangeActives();
-Fl::redraw();
-
 if(rkr->Tap_Bypass)
 {
 k =rkr->TapTempo();
-}} selected
+}
+
+ChangeActives();
+TAP_LABEL->redraw();}
           xywh {525 144 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
-        }
-        Fl_Box TAP_LABEL {
-          label {Tap Tempo}
-          xywh {524 170 95 19} labelfont 1 labelcolor 7 when 0
         }
         Fl_Choice T_SEL {
           label Input
@@ -5686,6 +5682,10 @@ UpdateTGUI();
         Fl_Box T_DIS {
           label 120
           xywh {715 165 70 22} box DOWN_BOX labelcolor 1 align 80
+        }
+        Fl_Box TAP_LABEL {
+          label {Tap Tempo}
+          xywh {524 170 95 14} labelfont 1 labelcolor 7 when 0
         }
       }
     }
@@ -6530,9 +6530,7 @@ MenuB->color(bcolor);
 
 back_color = bcolor;
 
-Label_Color_Change(label_color);
-
-Fl::redraw();} {}
+Label_Color_Change(label_color);} {}
   }
   Function {Label_Color_Change(Fl_Color bcolor)} {} {
     code {label_color = bcolor;
@@ -6618,8 +6616,8 @@ for (int t=0; t<ob->children();t++)
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
-chfsize(0);
-Fl::redraw();} {}
+chfsize(0);} {selected
+    }
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)
@@ -10065,21 +10063,88 @@ looper_t2->value(rkr->efx_Looper->progstate[5]);
 looper_t2->redraw();} {}
   }
   Function {UpdateTGUI()} {} {
-    code {if(rkr->Chorus_Bypass) chorus_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Flanger_Bypass) flanger_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Phaser_Bypass) phaser_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Pan_Bypass) pan_freq->value(rkr->Tap_TempoSet);
-  if(rkr->WhaWha_Bypass) WhaWha_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Alienwah_Bypass) Alienwah_freq->value(rkr->Tap_TempoSet);
-  if(rkr->MusDelay_Bypass) musdelay_tempo->value(rkr->Tap_TempoSet);
-  if(rkr->APhaser_Bypass) aphaser_freq->value(rkr->Tap_TempoSet);
-  if(rkr->DFlange_Bypass) dflange_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Synthfilter_Bypass) synthfilter_freq->value(rkr->Tap_TempoSet);
-  if(rkr->RyanWah_Bypass) ryanwah_freq->value(rkr->Tap_TempoSet);
-  if(rkr->MBVvol_Bypass) mbvvol_freq1->value(rkr->Tap_TempoSet);
-  if(rkr->MBVvol_Bypass) mbvvol_freq2->value(rkr->Tap_TempoSet);
-  if(rkr->Arpie_Bypass) arpie_delay->value(rkr->Tap_TempoSet);
+    code {if(rkr->Chorus_Bypass)
+  {
+  chorus_freq->value(rkr->Tap_TempoSet);
+  chorus_freq->redraw();
+  }
   
-  Fl::redraw();} {}
+  if(rkr->Flanger_Bypass)
+  {
+  flanger_freq->value(rkr->Tap_TempoSet);
+  flanger_freq->redraw();
+  }
+  
+  if(rkr->Phaser_Bypass)
+  {
+  phaser_freq->value(rkr->Tap_TempoSet);
+  phaser_freq->redraw();
+  }
+  
+  if(rkr->Pan_Bypass)
+  {
+  pan_freq->value(rkr->Tap_TempoSet);
+  pan_freq->redraw();
+  }
+  
+  if(rkr->WhaWha_Bypass)
+  {
+  WhaWha_freq->value(rkr->Tap_TempoSet);
+  WhaWha_freq->redraw();
+  }
+  
+  if(rkr->Alienwah_Bypass)
+  {
+  Alienwah_freq->value(rkr->Tap_TempoSet);
+  Alienwah_freq->redraw();
+  }
+  
+  if(rkr->MusDelay_Bypass)
+  {
+  musdelay_tempo->value(rkr->Tap_TempoSet);
+  musdelay_tempo->redraw();
+  }
+  
+  if(rkr->APhaser_Bypass)
+  {
+  aphaser_freq->value(rkr->Tap_TempoSet);
+  aphaser_freq->redraw();
+  }
+  
+  if(rkr->DFlange_Bypass)
+  {
+  dflange_freq->value(rkr->Tap_TempoSet);
+  dflange_freq->redraw();
+  }
+  
+  if(rkr->Synthfilter_Bypass)
+  {
+  synthfilter_freq->value(rkr->Tap_TempoSet);
+  synthfilter_freq->redraw();
+  }
+  
+  if(rkr->RyanWah_Bypass)
+  {
+  ryanwah_freq->value(rkr->Tap_TempoSet);
+  ryanwah_freq->redraw();
+  }
+    
+  if(rkr->MBVvol_Bypass)
+  {
+  mbvvol_freq1->value(rkr->Tap_TempoSet);
+  mbvvol_freq1->redraw();
+  }
+  
+  if(rkr->MBVvol_Bypass)
+  {
+  mbvvol_freq2->value(rkr->Tap_TempoSet);
+  mbvvol_freq2->redraw();
+  }
+  
+  if(rkr->Arpie_Bypass)
+  {
+  arpie_delay->value(rkr->Tap_TempoSet);
+  arpie_delay->redraw();
+  }} {}
   }
 } 

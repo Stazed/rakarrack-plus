@@ -5112,7 +5112,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-Fl::redraw();
+MIDI_LABEL->redraw();
 }
 void RKRGUI::cb_nidi_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_nidi_activar_i(o,v);
@@ -5275,13 +5275,13 @@ void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
 void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
   int k;
 rkr->Tap_Bypass = (int)o->value();
-ChangeActives();
-Fl::redraw();
-
 if(rkr->Tap_Bypass)
 {
 k =rkr->TapTempo();
-};
+}
+
+ChangeActives();
+TAP_LABEL->redraw();
 }
 void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
@@ -12512,17 +12512,17 @@ R average.");
         Vel_Adj->align(FL_ALIGN_TOP_RIGHT);
         Vel_Adj->when(FL_WHEN_CHANGED);
       } // SliderW* Vel_Adj
-      { MIDI_LABEL = new Fl_Box(524, 117, 45, 13, "MIDI");
-        MIDI_LABEL->labelfont(1);
-        MIDI_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL);
-        MIDI_LABEL->when(FL_WHEN_NEVER);
-      } // Fl_Box* MIDI_LABEL
       { Mled = new Fl_Box(571, 90, 10, 10);
         Mled->box(FL_ROUNDED_BOX);
         Mled->color((Fl_Color)FL_RED);
         Mled->labelsize(18);
       } // Fl_Box* Mled
+      { MIDI_LABEL = new Fl_Box(524, 117, 45, 14, "MIDI");
+        MIDI_LABEL->labelfont(1);
+        MIDI_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL);
+        MIDI_LABEL->when(FL_WHEN_NEVER);
+      } // Fl_Box* MIDI_LABEL
       Midi->end();
     } // Fl_Group* Midi
     { Presets = new Fl_Group(168, 24, 352, 170);
@@ -12646,11 +12646,6 @@ R average.");
         Tap_activar->callback((Fl_Callback*)cb_Tap_activar, (void*)(2));
         Tap_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Tap_activar
-      { TAP_LABEL = new Fl_Box(524, 170, 95, 19, "Tap Tempo");
-        TAP_LABEL->labelfont(1);
-        TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        TAP_LABEL->when(FL_WHEN_NEVER);
-      } // Fl_Box* TAP_LABEL
       { T_SEL = new Fl_Choice(715, 145, 72, 15, "Input");
         T_SEL->down_box(FL_BORDER_BOX);
         T_SEL->labelsize(10);
@@ -12668,6 +12663,11 @@ R average.");
         T_DIS->labelcolor((Fl_Color)1);
         T_DIS->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
       } // Fl_Box* T_DIS
+      { TAP_LABEL = new Fl_Box(524, 170, 95, 14, "Tap Tempo");
+        TAP_LABEL->labelfont(1);
+        TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        TAP_LABEL->when(FL_WHEN_NEVER);
+      } // Fl_Box* TAP_LABEL
       Tap->end();
     } // Fl_Group* Tap
     Principal->size_range(640, 480, 3200, 2400);
@@ -13254,8 +13254,6 @@ MenuB->color(bcolor);
 back_color = bcolor;
 
 Label_Color_Change(label_color);
-
-Fl::redraw();
 }
 
 void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
@@ -13345,7 +13343,6 @@ for (int t=0; t<ob->children();t++)
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor) {
   leds_color=bcolor;
 chfsize(0);
-Fl::redraw();
 }
 
 void RKRGUI::put_icon(Fl_Window* window) {
@@ -16821,20 +16818,87 @@ looper_t2->redraw();
 }
 
 void RKRGUI::UpdateTGUI() {
-  if(rkr->Chorus_Bypass) chorus_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Flanger_Bypass) flanger_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Phaser_Bypass) phaser_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Pan_Bypass) pan_freq->value(rkr->Tap_TempoSet);
-  if(rkr->WhaWha_Bypass) WhaWha_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Alienwah_Bypass) Alienwah_freq->value(rkr->Tap_TempoSet);
-  if(rkr->MusDelay_Bypass) musdelay_tempo->value(rkr->Tap_TempoSet);
-  if(rkr->APhaser_Bypass) aphaser_freq->value(rkr->Tap_TempoSet);
-  if(rkr->DFlange_Bypass) dflange_freq->value(rkr->Tap_TempoSet);
-  if(rkr->Synthfilter_Bypass) synthfilter_freq->value(rkr->Tap_TempoSet);
-  if(rkr->RyanWah_Bypass) ryanwah_freq->value(rkr->Tap_TempoSet);
-  if(rkr->MBVvol_Bypass) mbvvol_freq1->value(rkr->Tap_TempoSet);
-  if(rkr->MBVvol_Bypass) mbvvol_freq2->value(rkr->Tap_TempoSet);
-  if(rkr->Arpie_Bypass) arpie_delay->value(rkr->Tap_TempoSet);
+  if(rkr->Chorus_Bypass)
+  {
+  chorus_freq->value(rkr->Tap_TempoSet);
+  chorus_freq->redraw();
+  }
   
-  Fl::redraw();
+  if(rkr->Flanger_Bypass)
+  {
+  flanger_freq->value(rkr->Tap_TempoSet);
+  flanger_freq->redraw();
+  }
+  
+  if(rkr->Phaser_Bypass)
+  {
+  phaser_freq->value(rkr->Tap_TempoSet);
+  phaser_freq->redraw();
+  }
+  
+  if(rkr->Pan_Bypass)
+  {
+  pan_freq->value(rkr->Tap_TempoSet);
+  pan_freq->redraw();
+  }
+  
+  if(rkr->WhaWha_Bypass)
+  {
+  WhaWha_freq->value(rkr->Tap_TempoSet);
+  WhaWha_freq->redraw();
+  }
+  
+  if(rkr->Alienwah_Bypass)
+  {
+  Alienwah_freq->value(rkr->Tap_TempoSet);
+  Alienwah_freq->redraw();
+  }
+  
+  if(rkr->MusDelay_Bypass)
+  {
+  musdelay_tempo->value(rkr->Tap_TempoSet);
+  musdelay_tempo->redraw();
+  }
+  
+  if(rkr->APhaser_Bypass)
+  {
+  aphaser_freq->value(rkr->Tap_TempoSet);
+  aphaser_freq->redraw();
+  }
+  
+  if(rkr->DFlange_Bypass)
+  {
+  dflange_freq->value(rkr->Tap_TempoSet);
+  dflange_freq->redraw();
+  }
+  
+  if(rkr->Synthfilter_Bypass)
+  {
+  synthfilter_freq->value(rkr->Tap_TempoSet);
+  synthfilter_freq->redraw();
+  }
+  
+  if(rkr->RyanWah_Bypass)
+  {
+  ryanwah_freq->value(rkr->Tap_TempoSet);
+  ryanwah_freq->redraw();
+  }
+    
+  if(rkr->MBVvol_Bypass)
+  {
+  mbvvol_freq1->value(rkr->Tap_TempoSet);
+  mbvvol_freq1->redraw();
+  }
+  
+  if(rkr->MBVvol_Bypass)
+  {
+  mbvvol_freq2->value(rkr->Tap_TempoSet);
+  mbvvol_freq2->redraw();
+  }
+  
+  if(rkr->Arpie_Bypass)
+  {
+  arpie_delay->value(rkr->Tap_TempoSet);
+  arpie_delay->redraw();
+  }
 }

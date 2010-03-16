@@ -2397,12 +2397,12 @@ private:
   void cb_Vel_Adj_i(SliderW*, void*);
   static void cb_Vel_Adj(SliderW*, void*);
 public:
+  Fl_Box *Mled;
   Fl_Box *MIDI_LABEL;
 private:
   void cb_MIDI_LABEL_i(Fl_Box*, void*);
   static void cb_MIDI_LABEL(Fl_Box*, void*);
 public:
-  Fl_Box *Mled;
   Fl_Group *Presets;
   Fl_Box *PRESETS_LABEL;
   Fl_Button *S_new;
@@ -2459,7 +2459,6 @@ private:
   void cb_Tap_activar_i(Fl_Light_Button*, void*);
   static void cb_Tap_activar(Fl_Light_Button*, void*);
 public:
-  Fl_Box *TAP_LABEL;
   Fl_Choice *T_SEL;
 private:
   void cb_T_SEL_i(Fl_Choice*, void*);
@@ -2472,6 +2471,7 @@ private:
   static void cb_T_BUT(Fl_Button*, void*);
 public:
   Fl_Box *T_DIS;
+  Fl_Box *TAP_LABEL;
   Fl_Double_Window *BankWindow;
 private:
   void cb_BankWindow_i(Fl_Double_Window*, void*);
