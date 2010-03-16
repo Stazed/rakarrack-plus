@@ -5273,12 +5273,15 @@ void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Tap_Bypass = (int)o->value();
+  int k;
+rkr->Tap_Bypass = (int)o->value();
 ChangeActives();
 Fl::redraw();
 
 if(rkr->Tap_Bypass)
-rkr->TapTempo();
+{
+k =rkr->TapTempo();
+};
 }
 void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
@@ -15025,741 +15028,986 @@ switch (i)
 {
      case 12:
      Balance->value(rkr->Fraction_Bypass*100);
+     Balance->redraw();
      break;
      case 14:
      Nivel_Entrada->value((int) (rkr->Input_Gain*100.0)-50);
+     Nivel_Entrada->redraw();
      break;
      case 7:
      Nivel_Salida->value((int) (rkr->Master_Volume*100.0)-50);
+     Nivel_Salida->redraw();
      break;  
      case 1:
      WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
+     WhaWha_dpth->redraw();
      break;
      case 20:
      Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
+     Alienwah_dpth->redraw();
      break;
      case 21:
      phaser_dpth->value(rkr->efx_Phaser->getpar(6));
+     phaser_dpth->redraw();
      break;
      case 22:
      flanger_dpth->value(rkr->efx_Flanger->getpar(6));
+     flanger_dpth->redraw();
      break;
      case 23:
      chorus_dpth->value(rkr->efx_Chorus->getpar(6));
+     chorus_dpth->redraw();
      break;
      case 24:
      musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
+     musdelay_gain1->redraw();
      break;
      case 25:
      musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
+     musdelay_gain2->redraw();
      break;
      case 26:
      har_freq1->value(rkr->efx_Har->getpar(4));
+     har_freq1->redraw();
      break;
      case 27:
      har_int->value(rkr->efx_Har->getpar(3)-12);
+     har_int->redraw();
      break;
      case 28:
      WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
+     WhaWha_WD->redraw();
      break;
      case 29:
      ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
+     ovrd_WD->redraw();
      break;
      case 30:
      dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
+     dist_WD->redraw();
      break;
      case 31:
      har_WD->value(rkr->efx_Har->getpar(0)-64);
+     har_WD->redraw();
      break;
      case 52:
      chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
+     chorus_WD->redraw();
      break;
      case 53:
      flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
+     flanger_WD->redraw();
      break;
      case 54:
      phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
+     phaser_WD->redraw();
      break;
      case 55:
      Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
+     Alienwah_WD->redraw();
      break;
      case 56:
      musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
+     musdelay_WD->redraw();
      break;
      case 57:
      reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
+     reverb_WD->redraw();
      break;
      case 58:
      pan_WD->value(rkr->efx_Pan->getpar(0)-64);
+     pan_WD->redraw();
      break;
      case 59:
      echo_WD->value(rkr->efx_Echo->getpar(0)-64);
+     echo_WD->redraw();
      break;
      case 46:
      echo_pan->value(rkr->efx_Echo->getpar(1)-64);
+     echo_pan->redraw();
      break;
      case 47:
      ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
+     ovrd_pan->redraw();
      break;
      case 48:
      dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
+     dist_pan->redraw();
      break;
      case 49:
      har_pan->value(rkr->efx_Har->getpar(1)-64);
+     har_pan->redraw();
      break;
      case 50:
      chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
+     chorus_pan->redraw();
      break;
      case 51:
      flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
+     flanger_pan->redraw();
      break;
      case 60:
      phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
+     phaser_pan->redraw();
      break;
      case 61:
      Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
+     Alienwah_pan->redraw();
      break;
      case 62:
      musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
+     musdelay_pan1->redraw();
      break;
      case 63:
      reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
+     reverb_pan->redraw();
      break;
      case 65:
      musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
+     musdelay_pan2->redraw();
      break;
      case 66:
      WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
+     WhaWha_pan->redraw();
      break;
      case 67:
      pan_pan->value(rkr->efx_Pan->getpar(1)-64);
+     pan_pan->redraw();
      break;
      case 68:
      ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
+     ovrd_drive->redraw();
      break;
      case 69:
      dist_drive->value(rkr->efx_Distorsion->getpar(3));
+     dist_drive->redraw();
      break;
      case 70:
      ovrd_level->value(rkr->efx_Overdrive->getpar(4));
+     ovrd_level->redraw();
      break;
      case 71:
      dist_level->value(rkr->efx_Distorsion->getpar(4));
+     dist_level->redraw();
      break;
      case 72:
      chorus_freq->value(rkr->efx_Chorus->getpar(2));
+     chorus_freq->redraw();
      break;
      case 73:
      flanger_freq->value(rkr->efx_Flanger->getpar(2));
+     flanger_freq->redraw();
      break;
      case 74:
      phaser_freq->value(rkr->efx_Phaser->getpar(2));
+     phaser_freq->redraw();
      break;
      case 75:
      WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
+     WhaWha_freq->redraw();
      break;
      case 76:
      Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+     Alienwah_freq->redraw();
      break;
      case 77:
      pan_freq->value(rkr->efx_Pan->getpar(2));
+     pan_freq->redraw();
      break;
      case 78:
      echo_fb->value(rkr->efx_Echo->getpar(5));
+     echo_fb->redraw();
      break;
      case 79:
      chorus_fb->value(rkr->efx_Chorus->getpar(8));
+     chorus_fb->redraw();
      break;
      case 80:
      flanger_fb->value(rkr->efx_Flanger->getpar(8));
+     flanger_fb->redraw();
      break;
      case 81:
      phaser_fb->value(rkr->efx_Phaser->getpar(7));
+     phaser_fb->redraw();
      break;
      case 82:
      Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
+     Alienwah_fb->redraw();
      break;
      case 83:
      musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
+     musdelay_fb1->redraw();
      break;
      case 84:
      musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
+     musdelay_fb2->redraw();
      break;
      case 85:
      ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
+     ovrd_lpf->redraw();
      break;
      case 86:
      dist_lpf->value(rkr->efx_Distorsion->getpar(7));
+     dist_lpf->redraw();
      break;
      case 87:
      reverb_LPF->value(rkr->efx_Rev->getpar(7));
+     reverb_LPF->redraw();
      break;
      case 88:
      ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
+     ovrd_hpf->redraw();
      break;
      case 89:
      dist_hpf->value(rkr->efx_Distorsion->getpar(8));
+     dist_hpf->redraw();
      break;
      case 90:
      reverb_HPF->value(rkr->efx_Rev->getpar(8));
+     reverb_HPF->redraw();
      break;
      case 91:
      chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
+     chorus_LR->redraw();
      break;
      case 92:
      flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
+     flanger_LR->redraw();
      break;
      case 93:
-      phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
+     phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
+     phaser_LR->redraw();
      break;
      case 94:
      ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
+     ovrd_LRc->redraw();
      break;
      case 95:
      dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
+     dist_LRc->redraw();
      break;
      case 96:
      Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
+     Alienwah_LR->redraw();
      break;
      case 97:
      echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
+     echo_LRc->redraw();
      break;
      case 98:
      musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
+     musdelay_LRc->redraw();
      break;
      case 99:
      chorus_stdf->value(rkr->efx_Chorus->getpar(5));
+     chorus_stdf->redraw();
      break;
      case 100:
      flanger_stdf->value(rkr->efx_Flanger->getpar(5));
+     flanger_stdf->redraw();
      break;
      case 101:
      phaser_stdf->value(rkr->efx_Phaser->getpar(5));
+     phaser_stdf->redraw();
      break;
      case 102:
      WhaWha_stdf->value(rkr->efx_WhaWha->getpar(5));
+     WhaWha_stdf->redraw();
      break;
      case 103:
      Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
+     Alienwah_stdf->redraw();
      break;
      case 104:
      pan_stdf->value(rkr->efx_Pan->getpar(5));
+     pan_stdf->redraw();
      break;
      case 105:
      chorus_rnd->value(rkr->efx_Chorus->getpar(3));
+     chorus_rnd->redraw();
      break;
      case 106:
      flanger_rnd->value(rkr->efx_Flanger->getpar(3));
+     flanger_rnd->redraw();
      break;
      case 107:
      phaser_rnd->value(rkr->efx_Phaser->getpar(3));
+     phaser_rnd->redraw();
      break;
      case 108:
      WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
+     WhaWha_rnd->redraw();
      break;
      case 109:
      Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
+     Alienwah_rnd->redraw();
      break;
      case 110:
      pan_rnd->value(rkr->efx_Pan->getpar(3));
+     pan_rnd->redraw();
      break;
      case 111:
      WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
+     WhaWha_ampsns->redraw();
      break;
      case 112:
      WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
+     WhaWha_ampsnsinv->redraw();
      break;
      case 113:
      WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
+     WhaWha_smooth->redraw();
      break;
      case 114:
      phaser_phase->value(rkr->efx_Phaser->getpar(11));
+     phaser_phase->redraw();
      break;
      case 115:
      Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
+     Alienwah_phase->redraw();
      break;
      case 116:
      ActOnOff();
      break;
      case 117:
      aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
+     aphaser_WD->redraw();
      break;
      case 118:
      aphaser_pan->value(rkr->efx_APhaser->getpar(1));
+     aphaser_pan->redraw();
      break;
      case 119:
      aphaser_freq->value(rkr->efx_APhaser->getpar(2));
+     aphaser_freq->redraw();
      break;
      case 120:
      aphaser_phase->value(rkr->efx_APhaser->getpar(11));
+     aphaser_phase->redraw();
      break;
      case 121:
      aphaser_dpth->value(rkr->efx_APhaser->getpar(6));
+     aphaser_dpth->redraw();
      break;
      case 122:
      aphaser_fb->value(rkr->efx_APhaser->getpar(7)-64);
+     aphaser_fb->redraw();
      break;
      case 123:
      aphaser_LR->value(rkr->efx_APhaser->getpar(9));
+     aphaser_LR->redraw();
      break;
      case 124:
      aphaser_stdf->value(rkr->efx_APhaser->getpar(5));
+     aphaser_stdf->redraw();
      break;
      case 125:
      newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
+     newdist_WD->redraw();
      break;
      case 126:
      newdist_pan->value(rkr->efx_NewDist->getpar(1)-64);
+     newdist_pan->redraw();
      break;
      case 127:
      newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
+     newdist_LRc->redraw();
      break;
      case 2:
      newdist_drive->value(rkr->efx_NewDist->getpar(3));
+     newdist_drive->redraw();
      break;
      case 3:
      newdist_level->value(rkr->efx_NewDist->getpar(4));
+     newdist_level->redraw();
      break;
      case 4:
      newdist_lpf->value(rkr->efx_NewDist->getpar(7));
+     newdist_lpf->redraw();
      break;
      case 5:
      newdist_hpf->value(rkr->efx_NewDist->getpar(8));
+     newdist_hpf->redraw();
      break;
      case 6:
      newdist_st->value(rkr->efx_NewDist->getpar(9));
+     newdist_st->redraw();
      break;
      case 8:
      newdist_oct->value(rkr->efx_NewDist->getpar(11));
+     newdist_oct->redraw();
      break;
      case 9:
      dist_oct->value(rkr->efx_NewDist->getpar(12));
+     dist_oct->redraw();
      break;
      case 130:
      eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
+     eq_Gain->redraw();
      break;
      case 131:
      eq_Q->value(rkr->efx_EQ1->getpar(13)-64);
+     eq_Q->redraw();
      break;
      case 132:
      eq_1->value(rkr->efx_EQ1->getpar(12)-64);
+     eq_1->redraw();
      break;
      case 133:
      eq_2->value(rkr->efx_EQ1->getpar(17)-64);
+     eq_2->redraw();
      break;
      case 134:
      eq_3->value(rkr->efx_EQ1->getpar(22)-64);
+     eq_3->redraw();
      break;
      case 135:
      eq_4->value(rkr->efx_EQ1->getpar(27)-64);
+     eq_4->redraw();
      break;
      case 136:
      eq_5->value(rkr->efx_EQ1->getpar(32)-64);
+     eq_5->redraw();
      break;
      case 137:
      eq_6->value(rkr->efx_EQ1->getpar(37)-64);
+     eq_6->redraw();
      break;
      case 138:
      eq_7->value(rkr->efx_EQ1->getpar(42)-64);
+     eq_7->redraw();
      break;
      case 139:
      eq_8->value(rkr->efx_EQ1->getpar(47)-64);
+     eq_8->redraw();
      break;
      case 140:
      eq_9->value(rkr->efx_EQ1->getpar(52)-64);
+     eq_9->redraw();
      break;
      case 141:
      eq_10->value(rkr->efx_EQ1->getpar(57)-64);
+     eq_10->redraw();
      break;
      case 142:
      compress_ATime->value(rkr->efx_Compressor->getpar(4));
+     compress_ATime->redraw();
      break;
      case 143:
      compress_RTime->value(rkr->efx_Compressor->getpar(5));
+     compress_RTime->redraw();
      break;
      case 144:
      compress_Ratio->value(rkr->efx_Compressor->getpar(2));
+     compress_Ratio->redraw();
      break;
      case 145:
      compress_Knee->value(rkr->efx_Compressor->getpar(7));
+     compress_Knee->redraw();
      break;
      case 146:
      compress_threshold->value(rkr->efx_Compressor->getpar(1));
+     compress_threshold->redraw();
      break;
      case 147:
      compress_output->value(rkr->efx_Compressor->getpar(3));
+     compress_output->redraw();
      break;
      case 148:
      eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);
+     eqp_Gain->redraw();
      break;
      case 149:
      eqp_LF->value(rkr->efx_EQ2->getpar(11));
+     eqp_LF->redraw();
      break;
      case 150:
      eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
+     eqp_LFg->redraw();
      break;
      case 151:
      eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
+     eqp_LQ->redraw();
      break;	
      case 152:
      eqp_MF->value(rkr->efx_EQ2->getpar(16));
+     eqp_MF->redraw();
      break;
-      case 153:
+     case 153:
      eqp_MFg->value(rkr->efx_EQ2->getpar(17)-64);
+     eqp_MFg->redraw();
      break;
      case 154:
      eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
+     eqp_MQ->redraw();
      break;
      case 155:
      eqp_HF->value(rkr->efx_EQ2->getpar(21));
+     eqp_HF->redraw();
      break;
      case 156:
      eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
+     eqp_HFg->redraw();
      break;
      case 157:
      eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
+     eqp_HQ->redraw();
      break;
      case 158:
      dflange_WD->value(rkr->efx_DFlange->getpar(0));
+     dflange_WD->redraw();
      break;
      case 159:
      dflange_pan->value(rkr->efx_DFlange->getpar(1));
+     dflange_pan->redraw();
      break;
      case 160:
      dflange_LR->value(rkr->efx_DFlange->getpar(2));
+     dflange_LR->redraw();
      break;
      case 161:
      dflange_depth->value(rkr->efx_DFlange->getpar(3));
+     dflange_depth->redraw();
      break;
      case 162:
      dflange_width->value(rkr->efx_DFlange->getpar(4));
+     dflange_width->redraw();
      break;
      case 163:
      dflange_offset->value(rkr->efx_DFlange->getpar(5));
+     dflange_offset->redraw();
      break;
      case 164:
      dflange_fb->value(rkr->efx_DFlange->getpar(6));
+     dflange_fb->redraw();
      break;
      case 165:
      dflange_lpf->value(rkr->efx_DFlange->getpar(7));
+     dflange_lpf->redraw();
      break;
      case 166:
      dflange_freq->value(rkr->efx_DFlange->getpar(10));
+     dflange_freq->redraw();
      break;
      case 167:
      dflange_stdf->value(rkr->efx_DFlange->getpar(11));
+     dflange_stdf->redraw();
      break;
      case 168:
      dflange_rnd->value(rkr->efx_DFlange->getpar(13));
+     dflange_rnd->redraw();
      break;
      case 169:
      valve_WD->value(rkr->efx_Valve->getpar(0)-64);
+     valve_WD->redraw();
      break;
      case 170:
      valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
+     valve_LRc->redraw();
      break;
      case 171:
      valve_pan->value(rkr->efx_Valve->getpar(1)-64);
+     valve_pan->redraw();
      break;
      case 172:
      valve_level->value(rkr->efx_Valve->getpar(4));
+     valve_level->redraw();
      break;
      case 173:
      valve_drive->value(rkr->efx_Valve->getpar(3));
+     valve_drive->redraw();
      break;
      case 174:
      valve_Q->value(rkr->efx_Valve->getpar(10));
+     valve_Q->redraw();
      break;
      case 175:
      valve_Pre->value(rkr->efx_Valve->getpar(12));
+     valve_Pre->redraw();
      break;
      case 176:
      valve_lpf->value(rkr->efx_Valve->getpar(6));
+     valve_lpf->redraw();
      break;
      case 177:
      valve_hpf->value(rkr->efx_Valve->getpar(7));
+     valve_hpf->redraw();
      break;
      case 178:
      ring_WD->value(rkr->efx_Ring->getpar(0));
+     ring_WD->redraw();
      break;  
      case 179:
      ring_LRc->value(rkr->efx_Ring->getpar(2));
+     ring_LRc->redraw();
      break;  
      case 180:
      ring_input->value(rkr->efx_Ring->getpar(11));
+     ring_input->redraw();
      break;  
      case 181:
      ring_level->value(rkr->efx_Ring->getpar(3));
+     ring_level->redraw();
      break;  
      case 182:
      ring_pan->value(rkr->efx_Ring->getpar(1));
+     ring_pan->redraw();
      break;  
      case 183:
      ring_depth->value(rkr->efx_Ring->getpar(4));
+     ring_depth->redraw();
      break;  
      case 184:
      ring_freq->value(rkr->efx_Ring->getpar(5));
+     ring_freq->redraw();
      break;  
      case 185:
      ring_sin->value(rkr->efx_Ring->getpar(7));
+     ring_sin->redraw();
      break;  
      case 186:
      ring_tri->value(rkr->efx_Ring->getpar(8));
+     ring_tri->redraw();
      break;  
      case 187:
      ring_saw->value(rkr->efx_Ring->getpar(9));
+     ring_saw->redraw();
      break;  
      case 188:
      ring_squ->value(rkr->efx_Ring->getpar(10));
+     ring_squ->redraw();
      break;  
      case 189:
      ex_Gain->value(rkr->efx_Exciter->getpar(0));
+     ex_Gain->redraw();
      break;
      case 190:
      ex_hfreq->value(rkr->efx_Exciter->getpar(11));
+     ex_hfreq->redraw();
      break;
      case 191:
      ex_lfreq->value(rkr->efx_Exciter->getpar(12));
+     ex_lfreq->redraw();
      break;
      case 192:
      ex_1->value(rkr->efx_Exciter->getpar(1));
+     ex_1->redraw();
      break;
      case 193:
      ex_2->value(rkr->efx_Exciter->getpar(2));
+     ex_2->redraw();
      break;
      case 194:
      ex_3->value(rkr->efx_Exciter->getpar(3));
+     ex_3->redraw();
      break;
      case 195:
      ex_4->value(rkr->efx_Exciter->getpar(4));
+     ex_4->redraw();
      break;
      case 196:
      ex_5->value(rkr->efx_Exciter->getpar(5));
+     ex_5->redraw();
      break;
      case 197:
      ex_6->value(rkr->efx_Exciter->getpar(6));
+     ex_6->redraw();
      break;
      case 198:
      ex_7->value(rkr->efx_Exciter->getpar(7));
+     ex_7->redraw();
      break;
      case 199:
      ex_8->value(rkr->efx_Exciter->getpar(8));
+     ex_8->redraw();
      break;
      case 200:
      ex_9->value(rkr->efx_Exciter->getpar(9));
+     ex_9->redraw();
      break;
      case 201:
      ex_10->value(rkr->efx_Exciter->getpar(10));
+     ex_10->redraw();
      break;
      case 202:
      mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
+     mbdist_WD->redraw();
      break;
      case 203:
      mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
+     mbdist_LRc->redraw();
      break;
      case 204:
      mbdist_drive->value(rkr->efx_MBDist->getpar(3));
+     mbdist_drive->redraw();
      break;
      case 205:
      mbdist_level->value(rkr->efx_MBDist->getpar(4));
+     mbdist_level->redraw();
      break;
      case 206:
      mbdist_volL->value(rkr->efx_MBDist->getpar(8));
+     mbdist_volL->redraw();
      break;
      case 207:
      mbdist_volM->value(rkr->efx_MBDist->getpar(9));
+     mbdist_volM->redraw();
      break;
      case 208:
      mbdist_volH->value(rkr->efx_MBDist->getpar(10));
+     mbdist_volH->redraw();
      break;
      case 209:
      mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
+     mbdist_cross1->redraw();
      break;
      case 210:
      mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
+     mbdist_cross2->redraw();
      break;
      case 211:
      mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
+     mbdist_pan->redraw();
      break;
      case 212:
      arpie_WD->value(rkr->efx_Arpie->getpar(0));
+     arpie_WD->redraw();
      break; 	
      case 213:
      arpie_arpe->value(rkr->efx_Arpie->getpar(7));
+     arpie_arpe->redraw();
      break; 	
      case 214:
      arpie_pan->value(rkr->efx_Arpie->getpar(1));
+     arpie_pan->redraw();
      break; 	
      case 215:
      arpie_delay->value(rkr->efx_Arpie->getpar(2));
+     arpie_delay->redraw();
      break; 	
      case 216:
      arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
+     arpie_LRdl->redraw();
      break; 	
      case 217:
      arpie_LRc->value(rkr->efx_Arpie->getpar(4));
+     arpie_LRc->redraw();
      break; 	
      case 218:
      arpie_fb->value(rkr->efx_Arpie->getpar(5));
+     arpie_fb->redraw();
      break; 	
      case 219:
      arpie_damp->value(rkr->efx_Arpie->getpar(6));
+     arpie_damp->redraw();
      break; 	
      case 220:
      expander_ATime->value(rkr->efx_Expander->getpar(3));
+     expander_ATime->redraw();
      break;
      case 221:
      expander_RTime->value(rkr->efx_Expander->getpar(4));
+     expander_RTime->redraw();
      break;
      case 222:
      expander_shape->value(rkr->efx_Expander->getpar(2));
+     expander_shape->redraw();
      break;
      case 223:
      expander_threshold->value(rkr->efx_Expander->getpar(1));
+     expander_threshold->redraw();
      break;
      case 224:
      expander_level->value(rkr->efx_Expander->getpar(7));
+     expander_level->redraw();
      break;
      case 225:
      expander_LPF->value(rkr->efx_Expander->getpar(5));
+     expander_LPF->redraw();
      break;
      case 226:
      expander_HPF->value(rkr->efx_Expander->getpar(6));
+     expander_HPF->redraw();
      break;
      case 227:
      shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
+     shuffle_WD->redraw();
      break;
      case 228:
      shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
+     shuffle_cross1->redraw();
      break; 
      case 229:
      shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
+     shuffle_volL->redraw();
      break; 
      case 230:
      shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
+     shuffle_cross2->redraw();
      break; 
      case 231:
      shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
+     shuffle_volML->redraw();
      break; 
      case 232:
      shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
+     shuffle_cross3->redraw();
      break; 
      case 233:
      shuffle_volMH->value(rkr->efx_Shuffle->getpar(3));
+     shuffle_volMH->redraw();
      break; 
      case 234:
      shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
+     shuffle_cross4->redraw();
      break; 
      case 235:
      shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
+     shuffle_volH->redraw();
      break; 
      case 236:
      shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
+     shuffle_Q->redraw();
      break; 
      case 237:
      synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
+     synthfilter_WD->redraw();
      break;
      case 238:
      synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
+     synthfilter_Distort->redraw();
      break;
      case 239:
      synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+     synthfilter_freq->redraw();
      break;
      case 240:
      synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
+     synthfilter_stdf->redraw();
      break;
      case 241:
      synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
+     synthfilter_width->redraw();
      break;
      case 242:
      synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
+     synthfilter_fb->redraw();
      break;
      case 243:
      synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
+     synthfilter_dpth->redraw();
      break;
      case 244:
      synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
+     synthfilter_EnvSens->redraw();
      break;
      case 245:
      synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
+     synthfilter_ATime->redraw();
      break;
      case 246:
      synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
+     synthfilter_RTime->redraw();
      break;
      case 247:
      synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
+     synthfilter_Offset->redraw();
      break;
      case 248:
      mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
+     mbvvol_WD->redraw();
      break;
      case 249:
      mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
+     mbvvol_freq1->redraw();
      break;
      case 250:
      mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
+     mbvvol_stdf1->redraw();
      break;
      case 251:
      mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
+     mbvvol_freq2->redraw();
      break;
      case 252:
      mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
+     mbvvol_stdf2->redraw();
      break;
      case 253:
      mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
+     mbvvol_cross1->redraw();
      break;
      case 254:
      mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
+     mbvvol_cross2->redraw();
      break;
      case 255:
      mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
+     mbvvol_cross3->redraw();
      break;
      case 256:
      ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
+     ryanwah_WD->redraw();
      break;
      case 257:
      ryanwah_lp->value(rkr->efx_RyanWah->getpar(10));
+     ryanwah_lp->redraw();
      break;
      case 258:
      ryanwah_bp->value(rkr->efx_RyanWah->getpar(11));
+     ryanwah_bp->redraw();
      break;
      case 259:
      ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
+     ryanwah_hp->redraw();
      break;
      case 260:
      ryanwah_dpth->value(rkr->efx_RyanWah->getpar(6));
+     ryanwah_dpth->redraw();
      break;
      case 261:
      ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
+     ryanwah_freq->redraw();
      break;
      case 262:
      ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
+     ryanwah_q->redraw();
      break;
      case 263:
      ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
+     ryanwah_rng->redraw();
      break;
      case 264:
      ryanwah_ampsnsinv->value(rkr->efx_RyanWah->getpar(8));
+     ryanwah_ampsnsinv->redraw();
      break;
      case 265:
      ryanwah_ampsns->value(rkr->efx_RyanWah->getpar(7));
+     ryanwah_ampsns->redraw();
      break;
      case 266:
      ryanwah_smooth->value(rkr->efx_RyanWah->getpar(9));
+     ryanwah_smooth->redraw();
      break;
      case 267:
      looper_WD->value(rkr->efx_Looper->getpar(0)-64);
+     looper_WD->redraw();
      break;
      case 268:
      looper_level1->value(rkr->efx_Looper->getpar(6));
+     looper_level1->redraw();
      break; 
      case 269:
      looper_level2->value(rkr->efx_Looper->getpar(10));
+     looper_level2->redraw();
      break; 
      case 270:
      looper_rv->value(rkr->efx_Looper->getpar(5));
+     looper_rv->redraw();
      break;
      case 271:
      looper_ap->value(rkr->efx_Looper->getpar(9));
+     looper_ap->redraw();
      break;
      case 272:
      looper_play->value(rkr->efx_Looper->getpar(1));
@@ -15775,9 +16023,11 @@ switch (i)
      break;
      case 275:
      looper_r1->value(rkr->efx_Looper->getpar(11));
+     looper_r1->redraw();
      break;
      case 276:
      looper_r2->value(rkr->efx_Looper->getpar(12));
+     looper_r2->redraw();
      break;
      case 277:
      looper_t1->value(rkr->efx_Looper->getpar(7));
@@ -15793,21 +16043,27 @@ switch (i)
      break;
      case 280:
      convo_WD->value(rkr->efx_Convol->getpar(0)-64);
+     convo_WD->redraw();
      break;
      case 281:
      convo_pan->value(rkr->efx_Convol->getpar(1)-64);
+     convo_pan->redraw();
      break;
      case 282:
      convo_level->value(rkr->efx_Convol->getpar(7));
+     convo_level->redraw();
      break;
      case 283:
      convo_damp->value(rkr->efx_Convol->getpar(6));
+     convo_damp->redraw();
      break;
      case 284:
      convo_fb->value(rkr->efx_Convol->getpar(10));
+     convo_fb->redraw();
      break;
      case 285:
      convo_length->value(rkr->efx_Convol->getpar(3));
+     convo_length->redraw();
      break;
          
 
@@ -15818,7 +16074,6 @@ switch (i)
 
 
 rkr->Mvalue=0;
-Fl::redraw();
 }
 
 void RKRGUI::ActOnOff() {
@@ -16556,9 +16811,13 @@ void RKRGUI::update_looper() {
   rkr->efx_Looper->getstate();
 
 looper_play->value(rkr->efx_Looper->progstate[0]);
+looper_play->redraw();
 looper_record->value(rkr->efx_Looper->progstate[2]);
+looper_record->redraw();
 looper_t1->value(rkr->efx_Looper->progstate[4]);
+looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
+looper_t2->redraw();
 }
 
 void RKRGUI::UpdateTGUI() {
