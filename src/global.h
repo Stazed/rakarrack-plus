@@ -209,7 +209,7 @@ public:
   int Get_Bogomips();
   int checkonoff(int value);
   int TapTempo();
-  void TapTempo_Timeout();
+  void TapTempo_Timeout(int state);
   void Update_tempo();
 
   class Reverb *efx_Rev;
@@ -484,6 +484,7 @@ public:
   timeval timeA;
   long Tap_time_Init;
   double Tap_timeB;
+  double Tap_timeC;
   int tempocnt;
   double tempobuf[6];  
   int Tap_Display;

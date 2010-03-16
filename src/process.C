@@ -997,14 +997,12 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
   efxoutl = inl1;
   efxoutr = inr1;
 
-  if(Tap_Bypass) TapTempo_Timeout(); 
+  if(Tap_Bypass) TapTempo_Timeout(1); 
 
   if (Bypass)
     {
 
        Control_Gain (origl, origr);
-      
-      if(Tap_Bypass) TapTempo_Timeout(); 
 
       if (Tuner_Bypass)
 	efx_Tuner->schmittFloat (PERIOD, efxoutl, efxoutr);

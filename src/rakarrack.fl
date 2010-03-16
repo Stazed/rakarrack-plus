@@ -5640,15 +5640,10 @@ Analyzer_ON=1;
         Fl_Light_Button Tap_activar {
           label On
           user_data 2
-          callback {int k;
-rkr->Tap_Bypass = (int)o->value();
-if(rkr->Tap_Bypass)
-{
-k =rkr->TapTempo();
-}
-
+          callback {rkr->Tap_Bypass = (int)o->value();
+if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
 ChangeActives();
-Tap->redraw();}
+Tap->redraw();} selected
           xywh {525 144 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice T_SEL {
@@ -9714,8 +9709,7 @@ for(i=0; i<10; i++)
      L10->redraw();
      break;  
        
- }} {selected
-    }
+ }} {}
   }
   Function {Put_Skin(int last)} {} {
     code {Principal->resize(Principal->x(),Principal->y(),rkr->resolution,rkr->sh);

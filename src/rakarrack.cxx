@@ -5273,13 +5273,8 @@ void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
-  int k;
-rkr->Tap_Bypass = (int)o->value();
-if(rkr->Tap_Bypass)
-{
-k =rkr->TapTempo();
-}
-
+  rkr->Tap_Bypass = (int)o->value();
+if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
 ChangeActives();
 Tap->redraw();
 }
