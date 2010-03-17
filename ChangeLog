@@ -1,5 +1,7 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Fixed CPU usage updating GUI.
+- Added Tap Tempo
 - Fixed Effect On/Off by effect. (See the MIDI implementation chart) also to
   use with MIDI Learn.
 - Update help.
