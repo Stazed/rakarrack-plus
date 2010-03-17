@@ -98,7 +98,7 @@ fi
 
 
 LIBS="`$FLTKCONFIG --use-images --ldflags` $LIBS"
-CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math -fno-rtti -pipe -ffunction-sections -fomit-frame-pointer -fsigned-char -Wno-format-y2k -fPIC -fno-exceptions -fno-strict-aliasing `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags sndfile` `pkg-config --cflags jack` $CXXFLAGS"
+CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math -pipe -fsigned-char `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags sndfile` `pkg-config --cflags jack` $CXXFLAGS"
 AC_CONFIG_FILES([Makefile src/Makefile man/Makefile data/Makefile icons/Makefile doc/Makefile doc/help/Makefile doc/help/imagenes/Makefile doc/help/css/Makefile extra/Makefile])
 AC_OUTPUT
 
