@@ -4,6 +4,8 @@
 
 
 
+
+
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   
@@ -72,7 +74,10 @@ Expander</a> <a href="#har">Harmonizer</a> <a href="#delm">Musical
 Delay</a> <a href="#gate">Noise Gate</a> <a href="#wha">WhaWha</a> <a href="#awha">AlienWha</a>&nbsp;<a href="#dere">Derelict</a>&nbsp;<a href="#Valve">Valve</a>&nbsp;<a href="#Dual_Flange">Dual Flange</a>&nbsp;<a href="#Ring">Ring</a>&nbsp;<a href="#Exciter">Exciter</a>&nbsp;<a href="#DistBand">DistBand</a>&nbsp;<a href="#Arpie">Arpie</a>&nbsp;<a href="#Expander">Expander</a>&nbsp;<a href="#Shuffle">Shuffle</a>&nbsp;<a href="#Synthfilter">Synthfilter</a>&nbsp;<a href="#VaryBand">VaryBand</a>&nbsp;<a href="#Convolotron">Convolotron</a>&nbsp;<a href="#Looper">Looper</a>&nbsp;<a href="#MuTroMojo">MuTroMojo</a> </p>
       <h3><a href="#midi">MIDI Converter</a></h3>
       <h3><a href="#tuner">Tuner</a></h3>
+      <h3><a href="#Tap">Tap Tempo</a><br>
+</h3>
       <h3><a href="#autores">Credits</a></h3>
+
       <h3><a href="#midispec">MIDI Implementation Chart</a></h3>
       <h3><a href="license.html">License</a></h3>
       </td>
@@ -1815,14 +1820,30 @@ MIDI message, of course.</p>
 <p><a href="#top">Contents</a> </p>
 
 <hr>
-<h2 class="western"><a name="tuner"></a>TUNER</h2>
+<h2 class="western"><a name="tuner"></a>Tuner</h2>
 
 <p><img style="border: 0px solid ; width: 346px; height: 129px;" src="imagenes/tuner1.png" name="graphics33" alt="rakarrack Tuner"></p>
 
 <p align="justify">When "Your frequency" is outside the acceptable
 range is shown in red.</p>
 
-<p><a href="#top">Contents</a> </p>
+<p><a href="#top">Contents</a></p>
+<hr style="width: 100%; height: 2px;">
+<h2 class="western"><a name="Tap"></a>Tap Tempo</h2>
+<p><img style="width: 346px; height: 78px;" alt="Tap Tempo" src="imagenes/tap.jpg"></p>
+
+<p>The imput widget select the incoming signal:</p>
+
+<p>GUI can be the computer keyboard key "G" or the mouse clicking on the record
+button.</p>
+<p>MIDI signal is triggered each MIDI Note On message is incomming.</p>
+
+<p>Sucesive tempo signals are displayed each time a signal is received and
+the Tempo parameter is updated on all the effects that has the "On"
+state.</p>
+
+<p><a href="help.html#top">Contents</a></p>
+
 
 <hr>
 <h2 class="western"><a name="autores"></a>Credits</h2>
