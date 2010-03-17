@@ -5067,10 +5067,8 @@ if (!o->value())
             nidi_activar->do_callback();
         }
              
-  
 rkr->cleanup_efx();
 
-  
 };
 }
 void RKRGUI::cb_ActivarGeneral(Fl_Light_Button* o, void* v) {
@@ -12619,7 +12617,7 @@ R average.");
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { UPS_LED = new Fl_Box(439, 32, 8, 8, "Upsampling");
+      { UPS_LED = new Fl_Box(439, 32, 11, 11, "Upsampling");
         UPS_LED->box(FL_ROUNDED_BOX);
         UPS_LED->labelsize(10);
         UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16410,7 +16408,7 @@ if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->label
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if(rkr->upsample)
+if((rkr->upsample) && (rkr->Bypass))
 {
  UPS_LED->color(leds_color); 
  UPS_LED->labelcolor(on); 

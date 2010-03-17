@@ -894,8 +894,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {395 53 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {1346 52 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5417,10 +5417,8 @@ if (!o->value())
             nidi_activar->do_callback();
         }
              
-  
 rkr->cleanup_efx();
 
-  
 }}
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
@@ -5629,8 +5627,8 @@ Analyzer_ON=1;
         }
         Fl_Box UPS_LED {
           label Upsampling
-          user_data 2
-          xywh {439 32 8 8} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
+          user_data 2 selected
+          xywh {439 32 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
         }
       }
       Fl_Group Tap {
@@ -6876,8 +6874,7 @@ for(i=1; i<=JackCo->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -9661,7 +9658,7 @@ if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->label
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if(rkr->upsample)
+if((rkr->upsample) && (rkr->Bypass))
 {
  UPS_LED->color(leds_color); 
  UPS_LED->labelcolor(on); 
