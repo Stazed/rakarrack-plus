@@ -233,12 +233,21 @@ if(value < 20)
   Mnumeff = numef;
 }
 else
+if(value < 121) 
 {
   numef = value-20;
   inoff = checkonoff(numef); 
   miraque = numef;
   Mnumeff = 1000 + numef;
 }
+
+else
+{
+  numef = value;
+  inoff = checkonoff(numef);
+  miraque = numef;
+  Mnumeff = 2000 + numef;
+}    
     
   switch(miraque)
    {
@@ -338,6 +347,20 @@ else
    case 31:
     if(inoff) RyanWah_Bypass=1; else RyanWah_Bypass=0;
      break;
+   case 121:
+    if(inoff) Tap_Bypass = 1; else Tap_Bypass = 0;
+     break; 
+   case 122:
+    if(inoff) MIDIConverter_Bypass = 1; else MIDIConverter_Bypass = 0;
+     break; 
+   case 123:
+    if(inoff) Tuner_Bypass = 1; else Tuner_Bypass = 0;
+     break; 
+   case 124:
+    if(inoff) Bypass = 1; else Bypass = 0;
+     break; 
+
+
    }   
 
 
@@ -455,8 +478,18 @@ RKR::checkonoff(int miraque)
    case 31:
      if (RyanWah_Bypass) return(0);
      break;
-
-
+   case 121:
+     if (Tap_Bypass) return 0;
+     break;
+   case 122:
+     if (MIDIConverter_Bypass) return 0;
+     break;
+   case 123:
+     if (Tuner_Bypass) return 0;
+     break;         
+   case 124:
+     if (Bypass) return 0;
+     break; 
 
 }   
 return(1);

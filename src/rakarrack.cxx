@@ -16072,6 +16072,8 @@ rkr->Mvalue=0;
 void RKRGUI::ActOnOff() {
   int miralo;
 
+if(rkr->Mnumeff >2000) miralo = rkr->Mnumeff-2000;
+else
 if(rkr->Mnumeff >=1000) miralo=rkr->Mnumeff-1000;
 else
 miralo = rkr->efx_order[rkr->Mnumeff];
@@ -16206,7 +16208,24 @@ switch(miralo)
   ryanwah_activar->value(rkr->RyanWah_Bypass);
   ryanwah_activar->do_callback();
   break;  
-
+  case 121:
+  Tap_activar->value(rkr->Tap_Bypass);
+  Tap_activar->do_callback();
+  break;
+  case 122:
+  nidi_activar->value(rkr->MIDIConverter_Bypass);
+  nidi_activar->do_callback();
+  break;
+  case 123:
+  tuner_activar->value(rkr->Tuner_Bypass);
+  tuner_activar->do_callback();
+  break;
+  case 124:
+  ActivarGeneral->value(rkr->Bypass);
+  ActivarGeneral->do_callback();
+  break;
+  
+   
 
 }
 }
