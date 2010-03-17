@@ -13466,6 +13466,11 @@ rkr->efx_MIDIConverter->setTriggerAdjust(k);
 rakarrack.get(rkr->PrefNom("Velocity Adjust"),k,50);
 Vel_Adj->value(k);
 rkr->efx_MIDIConverter->setVelAdjust(k);
+
+//Tap Tempo
+
+rakarrack.get(rkr->PrefNom("TapTempo Input"),rkr->Tap_Selection,0);
+T_SEL->value(rkr->Tap_Selection);
 }
 
 void RKRGUI::save_stat(int i) {
@@ -13503,6 +13508,10 @@ rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
 rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
+
+//Tap Tempo
+rakarrack.set(rkr->PrefNom("TapTempo Input"),(int)rkr->Tap_Selection); 
+
 
 }
 

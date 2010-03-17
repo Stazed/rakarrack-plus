@@ -894,7 +894,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {395 53 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6735,7 +6735,12 @@ rkr->efx_MIDIConverter->setTriggerAdjust(k);
 
 rakarrack.get(rkr->PrefNom("Velocity Adjust"),k,50);
 Vel_Adj->value(k);
-rkr->efx_MIDIConverter->setVelAdjust(k);} {}
+rkr->efx_MIDIConverter->setVelAdjust(k);
+
+//Tap Tempo
+
+rakarrack.get(rkr->PrefNom("TapTempo Input"),rkr->Tap_Selection,0);
+T_SEL->value(rkr->Tap_Selection);} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -6772,6 +6777,10 @@ rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
 rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
+
+//Tap Tempo
+rakarrack.set(rkr->PrefNom("TapTempo Input"),(int)rkr->Tap_Selection); 
+
 
 }
 
@@ -6867,7 +6876,8 @@ for(i=1; i<=JackCo->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -9483,8 +9493,7 @@ switch(miralo)
   
    
 
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;
