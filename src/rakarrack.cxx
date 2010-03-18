@@ -5161,6 +5161,8 @@ void RKRGUI::cb_MIDI_LABEL(Fl_Box* o, void* v) {
 void RKRGUI::cb_S_new_i(Fl_Button*, void*) {
   rkr->New();
 DisAssigns();
+FillML(0);
+Prepare_Order();
 Put_Loaded();
 }
 void RKRGUI::cb_S_new(Fl_Button* o, void* v) {

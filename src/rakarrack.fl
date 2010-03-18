@@ -3750,7 +3750,7 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
-            label FbFlange selected
+            label FbFlange
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
@@ -5528,6 +5528,8 @@ rkr->modified=0;
           label New
           callback {rkr->New();
 DisAssigns();
+FillML(0);
+Prepare_Order();
 Put_Loaded();}
           xywh {174 50 64 18} shortcut 0x6e color 62 labelsize 12
         }
@@ -9786,7 +9788,8 @@ TPresets->redraw();
 
 
 
-DisAssigns();} {}
+DisAssigns();} {selected
+    }
   }
   Function {DisAssigns()} {} {
     code {int i,j,k;
