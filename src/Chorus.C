@@ -60,7 +60,7 @@ float Chorus::getdelay (float xlfo)
     result;
   if (Pflangemode == 0)
     {
-      result = (delay + xlfo * depth) * (float)SAMPLE_RATE;
+      result = (delay + xlfo * depth) * fSAMPLE_RATE;
     }
   else
     result = 0;
@@ -103,7 +103,7 @@ Chorus::out (float * smpsl, float * smpsr)
       //Left channel
 
       //compute the delay in samples using linear interpolation between the lfo delays
-      mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / (float)PERIOD;
+      mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
       if (++dlk >= maxdelay)
 	dlk = 0;
       float tmp = (float) dlk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
@@ -119,7 +119,7 @@ Chorus::out (float * smpsl, float * smpsr)
       //Right channel
 
       //compute the delay in samples using linear interpolation between the lfo delays
-      mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / (float)PERIOD;
+      mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
       if (++drk >= maxdelay)
 	drk = 0;
       tmp = (float)drk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from

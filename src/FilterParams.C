@@ -223,7 +223,7 @@ FilterParams::formantfilterH (int nvowel, int nfreqs, float * freqs)
 
       if (filter_freq <= (SAMPLE_RATE / 2 - 100.0))
 	{
-	  omega = 2.0f * PI * filter_freq / (float)SAMPLE_RATE;
+	  omega = 2.0f * PI * filter_freq / fSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  alpha = sn / (2.0f * filter_q);
@@ -247,7 +247,7 @@ FilterParams::formantfilterH (int nvowel, int nfreqs, float * freqs)
 		freqs[tmp] = 0.0;
 	      break;
 	    };
-	  float fr = freq / (float)SAMPLE_RATE * PI * 2.0f;
+	  float fr = freq / fSAMPLE_RATE * PI * 2.0f;
 	  float x = c[0], y = 0.0f;
 	  for (int n = 1; n < 3; n++)
 	    {

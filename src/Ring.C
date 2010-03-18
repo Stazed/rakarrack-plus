@@ -78,7 +78,7 @@ void
 Ring::Create_Tables()
 {
 unsigned int i;
-float SR = (float) SAMPLE_RATE;  
+float SR = fSAMPLE_RATE;  
   
 
   for (i=0;i<SAMPLE_RATE;i++) sin_tbl[i]=sinf((float)i*D_PI/SR);

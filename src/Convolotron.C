@@ -44,7 +44,7 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_)
   convlength = .5f;
   fb = 0.0f;
   feedback = 0.0f;
-  maxx_size = (int) ((float) SAMPLE_RATE * convlength);  //just to get the max memory allocated
+  maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
@@ -310,7 +310,7 @@ Convolotron::changepar (int npar, int value)
       }
       else Plength = value;
       convlength = ((float) Plength)/1000.0f;                   //time in seconds
-      length = (int) ((float) SAMPLE_RATE * convlength);        //time in samples       
+      length = (int) (fSAMPLE_RATE * convlength);        //time in samples       
       process_rbuf();
       break;
     case 8:

@@ -134,9 +134,9 @@ Dflange::out (float * smpsl, float * smpsr)
   else if (rmodfreq < 10.0f)
     rmodfreq = 10.0f;
 
- rflange0 = SAMPLE_RATE * 0.5f/rmodfreq;		//Turn the notch frequency into a number for delay
+ rflange0 = fSAMPLE_RATE * 0.5f/rmodfreq;		//Turn the notch frequency into a number for delay
  rflange1 = rflange0 * foffset;				//Set relationship of second delay line
- lflange0 = SAMPLE_RATE * 0.5f/lmodfreq;
+ lflange0 = fSAMPLE_RATE * 0.5f/lmodfreq;
  lflange1 = lflange0 * foffset;
  
  //now is a delay expressed in number of samples.  Number here
@@ -315,7 +315,7 @@ Dflange::changepar (int npar, int value)
       break;
     case 7:
       Phidamp = value;
-      fhidamp = expf(-D_PI * (float) Phidamp/SAMPLE_RATE);
+      fhidamp = expf(-D_PI * (float) Phidamp/fSAMPLE_RATE);
       break;
     case 8:
       Psubtract = value;

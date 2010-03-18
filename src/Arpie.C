@@ -47,7 +47,7 @@ Arpie::Arpie (float * efxoutl_, float * efxoutr_)
   rdelay = NULL;
   lrdelay = 0;
   harmonic = 1;
-  Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
+  Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
   invattack = (int) SAMPLE_RATE/15;
   envattack = (float) 1.0f/invattack;
   maxx_delay = SAMPLE_RATE * MAX_DELAY;
@@ -238,7 +238,7 @@ Arpie::setdelay (int Pdelay)
   this->Pdelay = Pdelay;
   if (Pdelay < 2) Pdelay = 2;
   if (Pdelay > 600) Pdelay = 600;	//100ms .. 2 sec constraint
-  delay = 1 + lrintf ( (60.0f/((float)(Psubdiv *Pdelay))) * (float)SAMPLE_RATE );	//quarter notes
+  delay = 1 + lrintf ( (60.0f/((float)(Psubdiv *Pdelay))) * fSAMPLE_RATE );	//quarter notes
 
   initdelays ();
 };
@@ -250,7 +250,7 @@ Arpie::setlrdelay (int Plrdelay)
   this->Plrdelay = Plrdelay;
   tmp =
     (powf (2.0, fabsf ((float)Plrdelay - 64.0f) / 64.0f * 9.0f) -
-     1.0f) / 1000.0f * (float)SAMPLE_RATE;
+     1.0f) / 1000.0f * fSAMPLE_RATE;
   if (Plrdelay < 64.0)
     tmp = -tmp;
   lrdelay = lrintf(tmp);

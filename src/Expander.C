@@ -43,7 +43,7 @@ Expander::Expander (float * efxoutl_, float * efxoutr_)
   env = 0.0;
   oldgain = 0.0;
   efollower = 0;
-  fs = (float)SAMPLE_RATE;
+  fs = fSAMPLE_RATE;
 
   Expander_Change_Preset(0);
 

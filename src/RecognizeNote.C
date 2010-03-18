@@ -133,7 +133,7 @@ Recognize::schmittS16LE (signed short int *indata)
 	  if (endpoint > startpoint)
 	    {
 	      afreq =
-		(float)SAMPLE_RATE *((float)tc / (float) (endpoint - startpoint));
+		fSAMPLE_RATE *((float)tc / (float) (endpoint - startpoint));
 	      displayFrequency (afreq);
 
 	    }

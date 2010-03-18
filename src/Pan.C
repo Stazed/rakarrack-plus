@@ -65,7 +65,7 @@ Pan::out (float *smpsl, float *smpsr)
   int i;
   float avg, ldiff, rdiff, tmp;
   float pp;
-  float coeff_PERIOD = 1.0 / (float) PERIOD; 
+  float coeff_PERIOD = 1.0 / fPERIOD; 
   float fi,P_i;
 
   if (PextraON)

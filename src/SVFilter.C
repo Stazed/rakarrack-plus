@@ -66,7 +66,7 @@ SVFilter::cleanup ()
 void
 SVFilter::computefiltercoefs ()
 {
-  par.f = freq / (float)SAMPLE_RATE * 4.0f;
+  par.f = freq / fSAMPLE_RATE * 4.0f;
   if (par.f > 0.99999)
     par.f = 0.99999f;
   par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
@@ -85,7 +85,7 @@ SVFilter::setfreq (float frequency)
     rap = 1.0f / rap;
 
   oldabovenq = abovenq;
-  abovenq = frequency > ((float)SAMPLE_RATE / 2.0f - 500.0f);
+  abovenq = frequency > (fSAMPLE_RATE / 2.0f - 500.0f);
 
   int nyquistthresh = (abovenq ^ oldabovenq);
 
@@ -220,7 +220,7 @@ SVFilter::filterout (float * smp)
     {
       for (i = 0; i < PERIOD; i++)
 	{
-	  float x = (float) i / (float) PERIOD;
+	  float x = (float) i / fPERIOD;
 	  smp[i] = ismp[i] * (1.0f - x) + smp[i] * x;
 	};
       delete (ismp);

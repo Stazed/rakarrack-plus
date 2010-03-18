@@ -55,9 +55,9 @@ Synthfilter::Synthfilter (float * efxoutl_, float * efxoutr_)
   Plpstages = 4;
   Phpstages = 2;
   
-  inv_period = 1.0f/((float) PERIOD);
+  inv_period = 1.0f/fPERIOD;
 
-   delta = 1.0f/((float) SAMPLE_RATE);
+   delta = cSAMPLE_RATE;
    Rmin = 185.0f;		// 2N5457 typical on resistance at Vgs = 0
    Rmax = 22000.0f;		// Resistor 
    C = 0.00000005f;		// 50 nF

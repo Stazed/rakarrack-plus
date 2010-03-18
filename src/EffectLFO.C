@@ -60,7 +60,7 @@ void
 EffectLFO::updateparams ()
 {
 
-  incx = (float)Pfreq * (float) PERIOD / ((float) SAMPLE_RATE * 60.0f);
+  incx = (float)Pfreq * fPERIOD / (fSAMPLE_RATE * 60.0f);
 
   if (incx > 0.49999999)
     incx = 0.499999999f;		//Limit the Frequency

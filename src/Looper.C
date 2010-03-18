@@ -45,8 +45,8 @@ Looper::Looper (float * efxoutl_, float * efxoutr_, float size)
       first_time1 = 1;
       first_time2 = 1;
       
-  Srate_Attack_Coeff = 1.0f / ((float)SAMPLE_RATE * ATTACK);
-  maxx_delay = lrintf((float)SAMPLE_RATE * size);
+  Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
+  maxx_delay = lrintf(fSAMPLE_RATE * size);
   fade = (int) SAMPLE_RATE / 2;    //1/2 SR fade time available
 
   ldelay = new float[maxx_delay];  

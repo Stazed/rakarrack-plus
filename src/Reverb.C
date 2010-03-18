@@ -251,7 +251,7 @@ Reverb::settime (int Ptime)
   for (i = 0; i < REV_COMBS * 2; i++)
     {
       combfb[i] =
-	-expf ((float) comblen[i] / (float) SAMPLE_RATE * logf (0.001f) /
+	-expf ((float) comblen[i] / fSAMPLE_RATE * logf (0.001f) /
 	       t);
       //the feedback is negative because it removes the DC
     };
@@ -293,7 +293,7 @@ Reverb::setidelay (int Pidelay)
     delete (idelay);
   idelay = NULL;
 
-  idelaylen = lrintf ((float) SAMPLE_RATE * delay / 1000.0f);
+  idelaylen = lrintf (fSAMPLE_RATE * delay / 1000.0f);
   if (idelaylen > 1)
     {
       idelayk = 0;
@@ -359,7 +359,7 @@ Reverb::settype (int Ptype)
       tmp *= roomsize;
       if (i > REV_COMBS)
 	tmp += 23.0f;
-      tmp *= (float)SAMPLE_RATE / 44100.0f;	//adjust the combs according to the samplerate
+      tmp *= fSAMPLE_RATE / 44100.0f;	//adjust the combs according to the samplerate
       if (tmp < 10)
 	tmp = 10;
 
@@ -380,7 +380,7 @@ Reverb::settype (int Ptype)
       tmp *= roomsize;
       if (i > REV_APS)
 	tmp += 23.0f;
-      tmp *= (float) SAMPLE_RATE / 44100.0f;	//adjust the combs according to the samplerate
+      tmp *= fSAMPLE_RATE / 44100.0f;	//adjust the combs according to the samplerate
       if (tmp < 10)
 	tmp = 10;
       aplen[i] = lrintf(tmp);

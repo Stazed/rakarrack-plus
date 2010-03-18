@@ -111,12 +111,12 @@ Compressor::Compressor_Change (int np, int value)
 
     case 4:
       tatt = value;
-      att = LN2 / fmaxf ((float)value / 1000.0f * (float)SAMPLE_RATE, LN2);
+      att = LN2 / fmaxf ((float)value / 1000.0f * fSAMPLE_RATE, LN2);
       break;
 
     case 5:
       trel = value;
-      rel = LN2 / fmaxf ((float)value / 1000.0f * (float)SAMPLE_RATE, LN2);
+      rel = LN2 / fmaxf ((float)value / 1000.0f * fSAMPLE_RATE, LN2);
       break;
 
     case 6:

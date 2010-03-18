@@ -247,13 +247,13 @@ MusicDelay::setdelay (int num, int Pdelay)
       this->Plrdelay = Pdelay;
     }
 
-  delay1 = lrintf ((ntem / (float)Pdelay1) * (float)SAMPLE_RATE);
+  delay1 = lrintf ((ntem / (float)Pdelay1) * fSAMPLE_RATE);
 
   if (Plrdelay != 0)
     coef = ntem / (float)Plrdelay;
   else
     coef = 0;
-  delay2 = lrintf ((coef + (ntem / (float)Pdelay2)) * (float)SAMPLE_RATE);
+  delay2 = lrintf ((coef + (ntem / (float)Pdelay2)) * fSAMPLE_RATE);
 
 
   initdelays ();
@@ -318,12 +318,12 @@ MusicDelay::settempo (int Ptempo)
   float ntem = 60.0f / (float) Ptempo;
 
 
-  delay1 = lrintf ((ntem / (float)Pdelay1) * (float)SAMPLE_RATE);
+  delay1 = lrintf ((ntem / (float)Pdelay1) * fSAMPLE_RATE);
   if (Plrdelay != 0)
     coef = ntem / (float)Plrdelay;
   else
     coef = 0;
-  delay2 = lrintf ((coef + (ntem / (float)Pdelay2)) * (float)SAMPLE_RATE);
+  delay2 = lrintf ((coef + (ntem / (float)Pdelay2)) * fSAMPLE_RATE);
 
   initdelays ();
 

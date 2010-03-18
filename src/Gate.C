@@ -43,7 +43,7 @@ Gate::Gate (float * efxoutl_, float * efxoutr_)
 
   env = 0.0;
   gate = 0.0;
-  fs = (float)SAMPLE_RATE;
+  fs = fSAMPLE_RATE;
   state = CLOSED;
   hold_count = 0;
 

@@ -35,7 +35,10 @@ int Pexitprogram, preset;
 int commandline;
 int exitwithhelp, gui, nojack;
 int PERIOD;
+float fPERIOD;
 unsigned int SAMPLE_RATE;
+float fSAMPLE_RATE;
+float cSAMPLE_RATE;
 float val_sum;
 int note_active[POLY];
 int rnote[POLY];
@@ -609,6 +612,10 @@ RKR::Adjust_Upsample()
    PERIOD = J_PERIOD;
   }
  
+   fSAMPLE_RATE = (float) SAMPLE_RATE;
+   cSAMPLE_RATE = 1.0f / (float)SAMPLE_RATE;
+   fPERIOD= float(PERIOD);
+
 }
 
 
