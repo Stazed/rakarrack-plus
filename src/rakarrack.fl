@@ -3738,19 +3738,19 @@ dflange_LR->value(rkr->efx_DFlange->getpar(2));
 dflange_subs->value(rkr->efx_DFlange->getpar(8));
 dflange_tz->value(rkr->efx_DFlange->getpar(9));
 dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
+dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {Preset 1}
+            label {Dual Flange 1}
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Flange 2}
+            label {Flange-Wah}
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Flange 3}
+            label FbFlange selected
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
@@ -5627,7 +5627,7 @@ Analyzer_ON=1;
         }
         Fl_Box UPS_LED {
           label Upsampling
-          user_data 2 selected
+          user_data 2
           xywh {439 32 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
         }
       }

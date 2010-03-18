@@ -3511,9 +3511,9 @@ void RKRGUI::cb_dflange_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_dflange_preset[] = {
- {"Preset 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Dual Flange 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Flange-Wah", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"FbFlange", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Flange 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Flange 5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
