@@ -31,21 +31,121 @@ AC_FUNC_SELECT_ARGTYPES
 AC_CHECK_FUNCS([bzero floor memset memmove pow select sqrt strdup strstr])
 
 # Checks for libraries.
-AC_CHECK_LIB([Xft], [main])
-AC_CHECK_LIB([Xrender], [main])
-AC_CHECK_LIB([asound], [main])
-AC_CHECK_LIB([dl], [main])
-AC_CHECK_LIB([fltk], [main])
-AC_CHECK_LIB([fontconfig], [main])
-AC_CHECK_LIB([freetype], [main])
-AC_CHECK_LIB([m], [main])
-AC_CHECK_LIB([pthread], [main])
-AC_CHECK_LIB([rt], [main])
-AC_CHECK_LIB([z], [main])
-AC_CHECK_LIB([jack],main)
-AC_CHECK_LIB([sndfile],sf_open)
-AC_CHECK_LIB([Xpm],[main])
-AC_CHECK_LIB([samplerate],src_simple)
+AC_CHECK_LIB([Xft], [main], [ac_libXft="yes"], [ac_libXft="no"])
+if test "x$ac_libXft" = "xno"; then
+AC_MSG_ERROR([Xft library not found.])
+else 
+   LIBS="$LIBS -lXft"
+fi
+
+AC_CHECK_LIB([Xrender], [main], [ac_Xrender="yes"], [ac_Xrender="no"])
+if test "x$ac_Xrender" = "xno"; then
+AC_MSG_ERROR([Xrender library not found.])
+else 
+   LIBS="$LIBS -lXrender"
+
+fi
+
+
+AC_CHECK_LIB([dl], [main], [ac_dl="yes"], [ac_dl="no"])
+if test "x$ac_dl" = "xno"; then
+AC_MSG_ERROR([dl library not found.])
+else 
+   LIBS="$LIBS -ldl"
+
+fi
+
+AC_CHECK_LIB([fltk], [main], [ac_fltk="yes"], [ac_fltk="no"])
+if test "x$ac_fltk" = "xno"; then
+AC_MSG_ERROR([FLTK library not found.])
+fi
+
+AC_CHECK_LIB([Xpm],[main], [ac_Xpm="yes"], [ac_Xpm="no"])
+if test "x$ac_Xpm" = "xno"; then
+AC_MSG_ERROR([Xpm library not found.])
+else 
+   LIBS="$LIBS -lXpm"
+
+fi
+
+AC_CHECK_LIB([fontconfig], [main], [ac_fontconfig="yes"], [ac_fontconfig="no"])
+if test "x$ac_fontconfig" = "xno"; then
+AC_MSG_ERROR([fontconfig library not found.])
+else 
+   LIBS="$LIBS -lfontconfig"
+
+fi
+
+AC_CHECK_LIB([freetype], [main], [ac_freetype="yes"], [ac_freetype="no"])
+if test "x$ac_freetype" = "xno"; then
+AC_MSG_ERROR([freetype library not found.])
+else 
+   LIBS="$LIBS -lfreetype"
+
+fi
+
+AC_CHECK_LIB([m], [main], [ac_m="yes"], [ac_m="no"])
+if test "x$ac_m" = "xno"; then
+AC_MSG_ERROR([Math library not found.])
+else 
+   LIBS="$LIBS -lm"
+
+fi
+
+AC_CHECK_LIB([pthread], [main], [ac_pthread="yes"], [ac_pthread="no"] )
+if test "x$ac_pthread" = "xno"; then
+AC_MSG_ERROR([pthread library not found.])
+else 
+   LIBS="$LIBS -lpthread"
+fi
+
+AC_CHECK_LIB([rt], [main], [ac_rt="yes"], [ac_rt="no"])
+if test "x$ac_rt" = "xno"; then
+AC_MSG_ERROR([rt library not found.])
+else 
+   LIBS="$LIBS -lrt"
+
+fi
+
+AC_CHECK_LIB([z], [main], [ac_z="yes"], [ac_zm="no"])
+if test "x$ac_z" = "xno"; then
+AC_MSG_ERROR([z library not found.])
+else 
+   LIBS="$LIBS -lz"
+
+fi
+
+AC_CHECK_LIB([asound], [main], [ac_asound="yes"], [ac_asound="no"])
+if test "x$ac_asound" = "xno"; then
+AC_MSG_ERROR([ALSA libasound library not found.])
+else 
+   LIBS="$LIBS -lasound"
+
+fi
+
+AC_CHECK_LIB([jack],main, [ac_jack="yes"], [ac_jack="no"])
+if test "x$ac_jack" = "xno"; then
+AC_MSG_ERROR([JACK library not found.])
+else 
+   LIBS="$LIBS -ljack"
+
+fi
+
+AC_CHECK_LIB([sndfile],sf_open, [ac_sndfile="yes"], [ac_sndfile="no"])
+if test "x$ac_sndfile" = "xno"; then
+AC_MSG_ERROR([sndfile library not found.])
+else 
+   LIBS="$LIBS -lsndfile"
+
+fi
+
+AC_CHECK_LIB([samplerate],src_simple, [ac_samplerate="yes"], [ac_samplerate="no"])
+if test "x$ac_samplerate" = "xno"; then
+AC_MSG_ERROR([samplerate library not found.])
+else 
+   LIBS="$LIBS -lsamplerate"
+
+fi
 
 if test "x$prefix" = "xNONE"; then
 AC_DEFINE_UNQUOTED(PREFIX, "/usr/local", [Install prefix])
@@ -101,3 +201,15 @@ CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math -pipe -fsigned-char `$FLTKCONFIG --use
 AC_CONFIG_FILES([Makefile src/Makefile man/Makefile data/Makefile icons/Makefile doc/Makefile doc/help/Makefile doc/help/imagenes/Makefile doc/help/css/Makefile extra/Makefile])
 AC_OUTPUT
 
+echo
+echo  " $PACKAGE_NAME $PACKAGE_VERSION"
+echo
+echo
+echo  " Xpm support (libxpm) . . . . . . . . . . . . . . . . . .: $ac_Xpm"
+echo  " FLTK toolkit . . . . . . . . . . . . . . . . . . . . . .: $ac_fltk"
+echo  " pthread support (libpthread) . . . . . . . . . . . . . .: $ac_pthread"
+echo  " JACK Audio Connection Kit library  . . . . . . . . . . .: $ac_jack"
+echo  " ALSA MIDI Sequencer support  . . . . . . . . . . . . . .: $ac_asound"
+echo  " Samplerate conversion (libsamplerate). . . . . . . . . .: $ac_samplerate"
+echo  " General audio file (libsndfile)  . . . . . . . . . . . .: $ac_sndfile"
+echo  

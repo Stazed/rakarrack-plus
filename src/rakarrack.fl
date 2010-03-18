@@ -4674,7 +4674,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Lead Synth} selected
+            label {Lead Synth}
             xywh {92 92 36 21} labelsize 10
           }
           MenuItem {} {
@@ -6413,8 +6413,8 @@ GMM->redraw();}
     }
     Fl_Window AboutWin {
       label {About Rakarrack}
-      callback {AboutWin->hide();}
-      xywh {832 103 375 235} type Double color 36 hide
+      callback {AboutWin->hide();} selected
+      xywh {825 96 375 235} type Double color 36 hide
     } {
       Fl_Box AB_Title {
         label Rakarrack
@@ -6432,7 +6432,7 @@ GMM->redraw();}
         xywh {68 77 234 22} labelfont 1 labelsize 13 labelcolor 6
       }
       Fl_Box AB_Authors {
-        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2010>}
+        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2007 - 2010>}
         xywh {47 96 272 27} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
       Fl_Box AB_A1 {
