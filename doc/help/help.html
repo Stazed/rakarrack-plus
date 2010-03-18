@@ -1,18 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head>
-
-
-
-
-
-
-
-
-
-
   
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
-  
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Rakarrack Help</title>
 
   
   
@@ -54,7 +44,8 @@
 		H3.cjk { font-family: "HG Mincho Light J" }
 		H3.ctl { font-family: "Arial Unicode MS" }
 	-->
-	</style></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+	</style>
+</head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
 <p style="margin-bottom: 0in;" align="left"><a name="top"></a><br>
 </p>
 
@@ -79,9 +70,8 @@ Delay</a> <a href="#gate">Noise Gate</a> <a href="#wha">WhaWha</a> <a href="#awh
       <h3><a href="#midi">MIDI Converter</a></h3>
       <h3><a href="#tuner">Tuner</a></h3>
       <h3><a href="#Tap">Tap Tempo</a><br>
-</h3>
+      </h3>
       <h3><a href="#autores">Credits</a></h3>
-
       <h3><a href="#midispec">MIDI Implementation Chart</a></h3>
       <h3><a href="license.html">License</a></h3>
       </td>
@@ -145,6 +135,7 @@ Linux Audio, Part 3a</a></p>
 Linux Audio, Part 3b</a></p>
 
 <h3>Warning</h3>
+
 <p>From 0.5.0 version we have included resampling and convolotron
 effect, the quality and amount settings of resampling must be set with
 extremely care,&nbsp; because they use&nbsp; a&nbsp; lot of CPU
@@ -156,6 +147,7 @@ harmonizer effects that use also a lot CPU resources the results can be
 unpredictable.&nbsp; Wrong settings can hang up you computer. You have
 been warned. <br>
 </p>
+
 <p>Of course resampling increase the sound quality, the way to set up
 is start with the worst resampling settings, amount = "x2"&nbsp; and
 Quality "Linear", and check the CPU usage, with qjackctl, top, htop or
@@ -168,6 +160,7 @@ your computer can afford. Don't forget that each effect use also more
 CPU with resampling, then the best to set the resampling settings is
 using a preset that has five or six effects.<br>
 </p>
+
 <p>Convolotron has a "Safe Mode" parameter, that "magically" limits the
 length of the Impulse Response file readed, this is safe because limit
 the CPU usage, this maximum length is calculated reading the bogomips,
@@ -176,6 +169,7 @@ performing. We have been careful to calculate this maximum value, but
 if you use resampling this "safe" value can be ridiculous and may cause
 depending of the Impulse Response file readed that the convolotron
 effect don't has sound, that can happens if the value is less than 5 ms.</p>
+
 <p>Of course increasing the length parameter you will obtain a better
 convolotron sound, if you unset the "Safe Mode" you can set the length
 to a desired value without the magical limit, but do that with
@@ -183,11 +177,12 @@ extremely care. I also recommend that you use a CPU monitor to see what
 your computer can afford. Do that with small steps and checking the CPU
 usage, or you will hang up your computer. You have been warned.<br>
 </p>
+
 <br>
+
 <p>
 <br>
 </p>
-
 
 <p><a href="#top">Contents</a> </p>
 
@@ -262,7 +257,6 @@ usage, or you will hang up your computer. You have been warned.<br>
       <p>Dump Bank preset names</p>
       </td>
     </tr>
-
   </tbody>
 </table>
 
@@ -397,7 +391,6 @@ menu save or restore the rakarrack look. If you have made a nice look
 and you want to share please send this file and the background picture
 to any of the rakarrack team members and will include on the website.</p>
 
-
 <p align="justify"><u><b>Audio<br>
 </b></u></p>
 
@@ -530,7 +523,7 @@ manage the program.</p>
       <td> G </td>
       <td> Tap Tempo </td>
     </tr>
-     <tr>
+    <tr>
       <td>E </td>
       <td>Open the MIDI Learn Window </td>
     </tr>
@@ -1675,8 +1668,10 @@ x = Disable Band.<br>
       <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/con.jpg" name="graphics29" alt="rakarrack Convolotron"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p align="justify">Convolotron A module optimized for physical speaker/cabinet modeling.</p>
-      <p align="justify">A lame EE joke: "If you do that once, I will convolve your face
+      <p align="justify">Convolotron A module optimized for physical
+speaker/cabinet modeling.</p>
+      <p align="justify">A lame EE joke: "If you do that once, I will
+convolve your face
 with a Dirac Delta. If you do it again, I will convolve your head with
 an impulse train."</p>
       <p align="justify">Some jargon associated with this effect:</p>
@@ -1698,7 +1693,8 @@ convolution.</p>
       <p align="justify"><b>Convolution</b>.&nbsp;
 A process of successively adding the impulse responses for any signal
 that has been or will be applied to the system.&nbsp; In the case of
-realtime audio processing the impulse responses are causal in nature, so we can
+realtime audio processing the impulse responses are causal in nature,
+so we can
 ignore the future and apply the effects only for what has already
 occured.</p>
       <br>
@@ -1706,15 +1702,19 @@ occured.</p>
 rakarrack module that takes an audio file as an IR, and convolves it
 with the input signal.&nbsp; This signal may be an IR recorded from an
 amplifier, a microphone,&nbsp; a cheap computer speaker system, horns,
-bells, gongs, reverb...kicking a door...<br></p>
-<p>Some caveats:&nbsp; Convolotron is very CPU hungry.&nbsp; Rakarrack
+bells, gongs, reverb...kicking a door...<br>
+      </p>
+      <p>Some caveats:&nbsp; Convolotron is very CPU hungry.&nbsp;
+Rakarrack
 does straight-forward time-domain convolution.&nbsp; Another Linux
-software application to compare is&nbsp; JConv, which is not as CPU hungry because there are
+software application to compare is&nbsp; JConv, which is not as CPU
+hungry because there are
 some frequency domain math tricks which allow the user to sacrifice
 some quality to reduce&nbsp; processing load.&nbsp; It is also
 optimized for reverbs.&nbsp; As a result, Rakarrack requires some
 "horsepower", but is better suited to amplifier/cabinet modeling
-assuming your CPU can handle it. Most reverb (unless entire significant part of IR is less than 100ms)
+assuming your CPU can handle it. Most reverb (unless entire significant
+part of IR is less than 100ms)
 is&nbsp; impossible in realtime, unless you have a server farm doing
 guitar&nbsp; FX for you.&nbsp; Rakarrack has a 'reverb' switch to apply
 some preprocessing&nbsp; to the IR to reduce it down to something which
@@ -1728,30 +1728,39 @@ reflections from all parts continuously along the wall come to your
 ear, Rakarrack gives you a room where the wall is broken into a grid of
 square shapes.&nbsp; You hear only one reflection from each square on
 the wall, and this reflection represents the average power reflected
-from the composite surface area of that square. This method more or less captures the
+from the composite surface area of that square. This method more or
+less captures the
 reverb characteristic as described by the IR file, but sacrifices some
 of the "cohesiveness" just to&nbsp; make it possible for the present
 day consumer CPU in real time. You can also use this mode to shorten
 amp/speaker/cabinet responses although the end result may not be
-anything like you may expect.<br></p>
-
-     <p> <b>Parameters</b></p>
-      <p align="justify"><b>Wet/Dry</b>:&nbsp; Self explanatory.&nbsp; For amp responses, most of the time you will want this all wet.<br>
-      <b>Pan</b> The effect is processed in mono (L &amp; R are mixed on the
+anything like you may expect.<br>
+      </p>
+      <p> <b>Parameters</b></p>
+      <p align="justify"><b>Wet/Dry</b>:&nbsp; Self explanatory.&nbsp;
+For amp responses, most of the time you will want this all wet.<br>
+      <b>Pan</b> The effect is processed in mono (L &amp; R are mixed
+on the
 input).&nbsp; Pan routes the output left or right.<br>
-      <b>Level</b>:&nbsp;&nbsp;&nbsp; The actual IR file will determine the gain of the effect.&nbsp; This helps you adjust&nbsp; to a good level.<br style="font-weight: bold;">
-      <b>Damp</b>:&nbsp;&nbsp;&nbsp;&nbsp; Darkens the sound of the IR. <br>
-      <b>Fb</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Feedback.&nbsp; Pretty self explanatory.<br>
+      <b>Level</b>:&nbsp;&nbsp;&nbsp; The actual IR file will determine
+the gain of the effect.&nbsp; This helps you adjust&nbsp; to a good
+level.<br style="font-weight: bold;">
+      <b>Damp</b>:&nbsp;&nbsp;&nbsp;&nbsp; Darkens the sound of the IR.
+      <br>
+      <b>Fb</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Feedback.&nbsp; Pretty
+self explanatory.<br>
       <b>Length</b>
 Measured in milliseconds. This tells Convolotron where to truncate the
 IR. Set this to the maximum value your CPU can afford without
 Xruns.&nbsp; A longer Length&nbsp; will result in a more true model of
 the system being convolved.<br>
-      <b>Reverb</b>:&nbsp;&nbsp; CPU optimization for reverberation IR's.&nbsp; See above for more detail.<br>
+      <b>Reverb</b>:&nbsp;&nbsp; CPU optimization for reverberation
+IR's.&nbsp; See above for more detail.<br>
       <b>Safe Mode</b>: Automatically
 limits Length internally based on sample rate and info from your&nbsp;
 /proc/cpuinfo to help prevent freezing your computer.<br>
-      <b>Preset</b>:&nbsp;&nbsp; Several amp IR's are available by default for your convenience.<br>
+      <b>Preset</b>:&nbsp;&nbsp; Several amp IR's are available by
+default for your convenience.<br>
       <b>User</b>:&nbsp;&nbsp;&nbsp;&nbsp;
 You may download or generate your own IR's.&nbsp; You can even do silly
 things like loading ring tones or segments of a song (if you like to
@@ -1761,9 +1770,8 @@ the file...so if you have a file with 100ms silence at the beginning,
 you will get nothing but silence on the output.&nbsp; With Reverb mode,
 also keep in mind you can generate IR's in Octave or Scilab that give
 you interesting echo patterns.&nbsp; <br>
-<br>
+      <br>
       </p>
-
       </td>
     </tr>
   </tbody>
@@ -1773,12 +1781,9 @@ you interesting echo patterns.&nbsp; <br>
 
 <h3 class="western"><a name="Looper"></a>Looper</h3>
 
-
 <br>
 
-
 <table cellpadding="5" cellspacing="2">
-
 
   <tbody>
     <tr>
@@ -1786,24 +1791,77 @@ you interesting echo patterns.&nbsp; <br>
       <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/loo.jpg" name="graphics29" alt="rakarrack Looper"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p align="justify">Looper<br>
+      <p align="justify">Looper</p>
+      <p align="justify">Autism: A pervasive developmental disorder
+characterized by severe deficits in social interaction and
+communication, by an extremely limited range of activities and
+interests, and often by the <b> presence of repetitive,
+stereotyped behaviors.</b><br>
+(The American Heritage® Dictionary of the English Language, Fourth
+Edition copyright ©2000 by Houghton Mifflin Company)<br>
+      <br>
+It's a joke...<br>
+      <br>
+      <b>Wet/Dry</b> Balance the mix of the recorded loop with the
+incoming signal to the output.<br>
+      <b>Level 1</b> Volume level of track 1. '64' is unity.&nbsp;
+Higher is louder than the original signal, lower is more quiet.<br>
+      <b>Level 2</b> Volume level of track 2.<br>
+      <b>Reverse</b> Play loop in reverse.<br>
+      <b>Auto Play</b> If this is checked, the looper will begin to
+play
+automatically after recording the first time.<br>
+      <b>Play</b> This is more like enable/disable
+playback.&nbsp; The loop keeps playing silently when disabled, so Play
+starts at whatever point is current in the loop.&nbsp; It was decided
+this is better than Play/Pause, because the loop keeps tracking with
+your song (assuming you keep tempo) even when it's not audible.&nbsp;
+This operates on the active track.&nbsp; If you desire a play/pause
+function, use the FX "On" button.&nbsp; Selecting this to "off" causes
+the whole effect to pause where it is.<br>
+      <b>Stop</b> Stops playback and sets the start to
+the beginning of the loop.&nbsp; Use stop if you want to start the loop
+from the beginning next time you push play.&nbsp; This operates on the
+active track.<br>
+      <b>Record</b> First time, begins recording and
+will continue to record until you push record again.&nbsp; At this
+point you have defined the length of the loop.&nbsp; If you press
+record again, everything you play will be overdubbed onto the
+track.&nbsp; To erase the track, you need to have the track active and
+select "clear".&nbsp; This operates on the active track only if R1 or
+R2 (corresponding to the track) is selected.&nbsp; This allows you to
+record on track 2 while hearing track 1.<br>
+      <b>R1, R2</b> Enable recording on track 1
+and track 2, respectively.&nbsp; If neither are checked, then the
+record button will not do anything.<br>
+      <b>Track 1, 2</b> Enable Play, Stop, Record on the selected
+track.&nbsp;
+Again, both the track and the R button need to be selected to record on
+the specified track.<br>
+      <b>Clear</b> Erase the selected track and set
+length to zero.<br>
+      <br>
+Example sequence of operation:<br>
+Set Wet/Dry to 0, Level 1 to 64, Auto Play Active, Track 1 active, R1
+active. Press record and begin to play into the loop. When finished,
+press record again, and your loop will immediately start up from the
+beginning.&nbsp; Play along, or press record again to add more parts to
+the loop. Harmonizer with Octave down for bass simulator can be of
+assistance.&nbsp; MuTroMojo and Synthfilter with reverse envelope sweep
+can be of assistance for bongo drum sounds.<br>
       </p>
       </td>
     </tr>
   </tbody>
 </table>
 
-
 <br>
 
 <h3 class="western"><a name="MuTroMojo"></a>MutroMojo</h3>
 
-
 <br>
 
-
 <table cellpadding="5" cellspacing="2">
-
 
   <tbody>
     <tr>
@@ -1811,13 +1869,90 @@ you interesting echo patterns.&nbsp; <br>
       <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/mut.jpg" name="graphics29" alt="rakarrack MuTroMojo"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p align="justify">MutroMojo<br>
+      <p align="justify">MutroMojo</p>
+      <p align="justify">The name is derived from two well known
+effects using the same filter topology:<br>
+Mutron, Mojotron.<br>
+For those not well accustomed to classic analog pedal effects, these
+were envelope controlled filters built upon the
+state-variable-filter.&nbsp; This filter structure has three "states"
+which can be extracted: High pass, Low pass, Band pass.&nbsp; This is
+easy to implement digitally, and is much more efficient for the
+processor than to compute the three filter bands as separate filters.<br>
+      <br>
+MuTroMojo allows you to adjust the three bands at whatever levels you
+want.&nbsp; This flexibility allows anything from various wahwah
+effects to synth filter effects, and possibly even sounds of the
+moogerfooger (though Synthfilter structure is better suited to
+"moog-like" sounds).&nbsp; Like any good Rakarrack effect, it has an
+LFO synchronized to Tempo.&nbsp; This means Tap Tempo will set the rate
+of the LFO effect. <br>
+      <br>
+Additionally, you have the envelope follower applied with the Amp S
+parameter, and smoothed by Smooth.&nbsp; Here's the breakdown:<br>
+      <br>
+<b>Wet/Dry</b>&nbsp;&nbsp;&nbsp;&nbsp; It's obvious that this mixes wet and
+dry signals, but this interacts like a phaser or flanger.&nbsp; By
+mixing some Dry into higher order filters (increase Stages) you can
+create notches in the frequency response.&nbsp; With individualized
+control over HP, BP, and LP filter bands, you can create some
+interesting comb filter responses.&nbsp; This is more than simply
+"amount of effect".<br>
+      <br>
+<b>LP, BP, HP</b>&nbsp; Low Pass, Band Pass, High Pass, respectively.&nbsp;
+Greater than zero mixes the output in phase, less than zero mixes the
+output out of phase.&nbsp; This can be alternated to create different
+types of destructive interference between filter bands.&nbsp; For the
+more technically minded, you can dust off your filter cookbook and tune
+in to a wide variety of filter responses.&nbsp; This can also be used
+as a sort of parametric EQ or tone stack.<br>
+      <br>
+<b>Stg</b>.&nbsp; Stages.&nbsp; Each filter stage is a second order
+filter.&nbsp; "Stg" sets the number of filters in series.&nbsp; The
+number of stages will improve the amount of rejection above/below the
+cutoff.&nbsp; A tip:&nbsp; You can use this module as a compromise for
+up sampling quality when using up sampling.&nbsp; For example set Wah
+and Range to maximum levels with LP at 32 and BP, HP at 0.&nbsp; With
+this configuration you have a 12dB/Octave low pass filter set at about
+6kHz.&nbsp; For clean electric guitar, you won't lose much of the
+original signal because most guitar pickups form such a filter at
+5kHz.&nbsp; Then the upsampling can be set to Zero Order Hold, and this
+filter will smooth it out.&nbsp; To improve quality, increase the
+MuTroMojo Stages.&nbsp; In this mode it acts as an "Interpolating
+Filter", which is able to reconstruct the missing information between
+samples.&nbsp; The higher quality upsampling options do the same thing,
+but they use much higher order Sinc interpolation filters and try to
+maximize bandwidth.&nbsp; Unfortunately these higher order filters use
+more CPU, and they also have bad transient responses. If you can
+sacrifice the bandwidth, you can use lower order filters for nearly the
+same result.&nbsp; This is where the MuTroMojo can give you more choice
+with whether you want to trade bandwidth or CPU usage while balancing
+transient characteristics.&nbsp; If none of that made sense, then maybe
+you can ask on the rakarrack IRC channel for a better explanation...or
+look up sample rate conversion and interpolation for discussion of the
+trade-offs and benefits.&nbsp; Otherwise, just experiment with settings
+that sound good to you, and forget about the technical details of why.<br>
+      <br>
+<b>Width</b>&nbsp;&nbsp;&nbsp; Deviation of the LFO.&nbsp; This describes how
+far it sweeps.<br>
+      <br>
+<b>Tempo</b>&nbsp;&nbsp; LFO Rate expressed in beats per minute. This is
+synchronized when Tap Tempo is active.<br>
+      <br>
+<b>Res.</b>&nbsp;&nbsp;&nbsp; Resonance.&nbsp; Increasing this makes a higher
+and more narrow peak at the filter resonant frequency.<br>
+      <br>
+<b>Range</b>&nbsp;&nbsp; Upper bound on the filter sweep range.<br>
+      <br>
+<b>Wah</b>&nbsp;&nbsp;&nbsp;&nbsp; Sweeps the filter resonant frequency from
+the minimum bound (hard coded in each preset) up to the upper bound
+(set by Range).&nbsp; This is the parameter you would want to map to a
+MIDI expression pedal for a wah wah effect.<br>
       </p>
       </td>
     </tr>
   </tbody>
 </table>
-
 
 <p><a href="#top">Contents</a> </p>
 
@@ -1857,28 +1992,33 @@ MIDI message, of course.</p>
 range is shown in red.</p>
 
 <p><a href="#top">Contents</a></p>
+
 <hr style="width: 100%; height: 2px;">
 <h2 class="western"><a name="Tap"></a>Tap Tempo</h2>
+
 <p><img style="width: 346px; height: 78px;" alt="Tap Tempo" src="imagenes/tap.jpg"></p>
 
 <p>When Tap Tempo is On:<br>
 </p>
+
 <p>The imput choice widget select the incoming signal:</p>
 
-
-<p>GUI can be the computer keyboard key "G" or the mouse clicking on the record
+<p>GUI can be the computer keyboard key "G" or the mouse clicking on
+the record
 button.</p>
+
 <p>MIDI signal is triggered each MIDI Note On message is incomming.</p>
 
-<p>Sucesive tempo signals are displayed each time a signal is received and
+<p>Sucesive tempo signals are displayed each time a signal is received
+and
 the Tempo parameter is updated on all the effects that has the "On"
 state.</p>
-<p>Tap Tempo has an automatic reset timeout, 8 seconds after the last signal.<br>
+
+<p>Tap Tempo has an automatic reset timeout, 8 seconds after the last
+signal.<br>
 </p>
 
-
 <p><a href="help.html#top">Contents</a></p>
-
 
 <hr>
 <h2 class="western"><a name="autores"></a>Credits</h2>
