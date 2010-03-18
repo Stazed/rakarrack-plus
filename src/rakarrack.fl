@@ -3754,11 +3754,11 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Flange 4}
+            label SoftFlange
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Flange 5}
+            label Flanger selected
             xywh {92 92 36 21} labelsize 10
           }
         }
@@ -9788,8 +9788,7 @@ TPresets->redraw();
 
 
 
-DisAssigns();} {selected
-    }
+DisAssigns();} {}
   }
   Function {DisAssigns()} {} {
     code {int i,j,k;

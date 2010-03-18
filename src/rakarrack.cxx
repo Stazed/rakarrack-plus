@@ -3514,8 +3514,8 @@ Fl_Menu_Item RKRGUI::menu_dflange_preset[] = {
  {"Dual Flange 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Flange-Wah", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"FbFlange", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"SoftFlange", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Flanger", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
