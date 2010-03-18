@@ -4393,7 +4393,7 @@ Fl_Menu_Item RKRGUI::menu_synthfilter_preset[] = {
  {"Low Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"High Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Band Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Lead Synth", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Phaser 5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Phaser 6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}

@@ -3758,7 +3758,7 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label Flanger selected
+            label Flanger
             xywh {92 92 36 21} labelsize 10
           }
         }
@@ -4674,7 +4674,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Phaser 4}
+            label {Lead Synth} selected
             xywh {92 92 36 21} labelsize 10
           }
           MenuItem {} {
