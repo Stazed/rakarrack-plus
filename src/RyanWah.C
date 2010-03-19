@@ -131,7 +131,8 @@ RyanWah::cleanup ()
   reinitfilter ();
   ms1 = 0.0;
   oldfbias = oldfbias1 = oldfbias2 = 0.0f;
-
+  filterl->cleanup();
+  filterr->cleanup();
 };
 
 
@@ -175,8 +176,6 @@ RyanWah::setampsns (int Pp)
 void
 RyanWah::reinitfilter ()
 {
-  filterl->cleanup();
-  filterr->cleanup();
   //setmix (int mix, float lpmix, float bpmix, float hpmix)
   filterl->setmix(1, lpmix, bpmix, hpmix);
   filterr->setmix(1, lpmix, bpmix, hpmix);
@@ -187,16 +186,18 @@ void
 RyanWah::setpreset (int npreset)
 {
   const int PRESET_SIZE = 17;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Wah Pedal
-    {16, 10, 138, 0, 0, 64, 0, 50, 25, 45, -16, 40, -3, 1, 1600, 375, 1 },
+    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1 },
     //Mutron
     {0, 90, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0 },
     //Phase Wah
-    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 150, 1 },
+    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 200, 1 },
     //Phaser
-    {64, 60, 60, 0, 0, 64, 50, 10, 10, 40, 32, 32, 32, 4, 800, 100, 1 },
+    {64, 60, 60, 0, 0, 64, 50, 10, 10, 40, 32, 32, 32, 4, 800, 300, 1 },
+    //Quacky
+    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1 } 
 
   };
 
@@ -272,6 +273,7 @@ RyanWah::changepar (int npar, int value)
      Pstages = (value);
      filterl->setstages(Pstages);
      filterr->setstages(Pstages);
+     cleanup();
       break;  
      case 14:
      Prange = value;
