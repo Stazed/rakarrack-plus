@@ -1,5 +1,55 @@
 bin_PROGRAMS = rakarrack
 rakarrack_SOURCES = main.C \
+	Alienwah.h \
+	AnalogFilter.h \
+	APhaser.h \
+	Arpie.h \
+	Chorus.h \
+	Compressor.h \
+	config.h \
+	Convolotron.h \
+	Distorsion.h \
+	Dual_Flange.h \
+	DynamicFilter.h \
+	Echo.h \
+	Effect.h \
+	EffectLFO.h \
+	EQ.h \
+	Exciter.h \
+	Expander.h \
+	Filter_.h \
+	Filter.h \
+	FilterParams.h \
+	FormantFilter.h \
+	Gate.h \
+	global.h \
+	HarmonicEnhancer.h \
+	Harmonizer.h \
+	jack.h \
+	Looper.h \
+	MBDist.h \
+	MBVvol.h \
+	MIDIConverter.h \
+	MusicDelay.h \
+	NewDist.h \
+	Pan.h \
+	Phaser.h \
+	rakarrack.h \
+	RBFilter.h \
+	RecChord.h \
+	RecognizeNote.h \
+	Resample.h \
+	Reverb.h \
+	Ring.h \
+	RyanWah.h \
+	Shuffle.h \
+	smbPitchShift.h \
+	SVFilter.h \
+	Synthfilter.h \
+	Tuner.h \
+	Valve.h \
+	icono_rakarrack_128x128.xpm \
+	icono_rakarrack_32x32.xpm \
 	jack.C \
 	rakarrack.cxx \
 	process.C \
