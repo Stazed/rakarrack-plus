@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -886,15 +886,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1346 52 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -3710,7 +3712,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
         }
       }
       Fl_Group DFLANGE {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button dflange_activar {
@@ -3760,6 +3762,14 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
           MenuItem {} {
             label Flanger
             xywh {92 92 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Deep Chorus}
+            xywh {102 102 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Bright Chorus} selected
+            xywh {112 112 36 21} labelsize 10
           }
         }
         Fl_Value_Slider dflange_WD {
@@ -6413,7 +6423,7 @@ GMM->redraw();}
     }
     Fl_Window AboutWin {
       label {About Rakarrack}
-      callback {AboutWin->hide();} selected
+      callback {AboutWin->hide();}
       xywh {825 96 375 235} type Double color 36 hide
     } {
       Fl_Box AB_Title {
