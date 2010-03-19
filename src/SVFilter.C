@@ -192,7 +192,7 @@ SVFilter::filterout (float * smp)
     {
       for (i = 0; i < PERIOD; i++)
 	{
-	  float x = (float) i / (float) PERIOD;
+	  float x = (float) i / fPERIOD;
 	  smp[i] = ismp[i] * (1.0f - x) + smp[i] * x;
 	};
       delete (ismp);
