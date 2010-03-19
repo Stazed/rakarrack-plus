@@ -64,6 +64,8 @@ private:
   float q;			//Q factor (resonance or Q factor)
   float gain;		//the gain of the filter (if are shelf/peak) filters
   float hpg, lpg, bpg;
+  float oldq, oldsq, oldf;
+  float iper;			//inverse of PERIOD
 
   int abovenq;			//this is 1 if the frequency is above the nyquist
   int oldabovenq;
