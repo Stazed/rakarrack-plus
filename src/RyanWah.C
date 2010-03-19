@@ -53,8 +53,8 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
   
   Fstages = 1;
   Ftype = 1;
-  filterl = new SVFilter (0, 80.0f, 70.0f, 1);
-  filterr = new SVFilter (0, 80.0f, 70.0f, 1);
+  filterl = new RBFilter (0, 80.0f, 70.0f, 1);
+  filterr = new RBFilter (0, 80.0f, 70.0f, 1);
   setpreset (Ppreset);
 
   cleanup ();

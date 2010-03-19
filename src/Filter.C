@@ -38,7 +38,7 @@ Filter::Filter (FilterParams * pars)
       filter = new FormantFilter (pars);
       break;
     case 2:
-      filter = new SVFilter (Ftype, 1000.0f, pars->getq (), Fstages);
+      filter = new SVFilter(Ftype, 1000.0f, pars->getq (), Fstages);
       filter->outgain = dB2rap (pars->getgain ());
       if (filter->outgain > 1.0f)
 	filter->outgain = sqrtf (filter->outgain);

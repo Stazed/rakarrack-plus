@@ -22,17 +22,17 @@
 
 */
 
-#ifndef SV_FILTER_H
-#define SV_FILTER_H
+#ifndef RB_FILTER_H
+#define RB_FILTER_H
 
 #include "global.h"
 #include "Filter_.h"
-class SVFilter:public Filter_
+class RBFilter:public Filter_
 {
 public:
-  SVFilter (unsigned char Ftype, float Ffreq, float Fq,
+  RBFilter (unsigned char Ftype, float Ffreq, float Fq,
 	    unsigned char Fstages);
-   ~SVFilter ();
+   ~RBFilter ();
   void filterout (float * smp);
   void setfreq (float frequency);
   void setfreq_and_q (float frequency, float q_);
@@ -41,6 +41,7 @@ public:
   void settype (int type_);
   void setgain (float dBgain);
   void setstages (int stages_);
+  void setmix (int mix, float lpmix, float bpmix, float hpmix);
   void cleanup ();
 
 private:
@@ -62,10 +63,13 @@ private:
   float freq;		//Frequency given in Hz
   float q;			//Q factor (resonance or Q factor)
   float gain;		//the gain of the filter (if are shelf/peak) filters
+  float hpg, lpg, bpg;
+  float oldq, oldsq, oldf;
+  float iper;			//inverse of PERIOD
 
   int abovenq;			//this is 1 if the frequency is above the nyquist
   int oldabovenq;
-  int needsinterpolation, firsttime;
+  int needsinterpolation, firsttime, en_mix;
 };
 
 

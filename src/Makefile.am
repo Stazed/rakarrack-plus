@@ -19,6 +19,7 @@ rakarrack_SOURCES = main.C \
 	HarmonicEnhancer.C \
 	DynamicFilter.C \
 	SVFilter.C \
+	RBFilter.C \
 	FormantFilter.C \
 	FilterParams.C \
 	Pan.C \
