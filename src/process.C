@@ -59,6 +59,7 @@ RKR::RKR ()
   memset (Mcontrol, 0, sizeof (Mcontrol));
   Mvalue = 0;
   actuvol= 0;
+  OnCounter=0;
   sprintf (temp, "rakarrack");
   jackclient = jack_client_open (temp, options, &status, NULL);
 
@@ -615,6 +616,7 @@ RKR::Adjust_Upsample()
    fSAMPLE_RATE = (float) SAMPLE_RATE;
    cSAMPLE_RATE = 1.0f / (float)SAMPLE_RATE;
    fPERIOD= float(PERIOD);
+   t_periods = J_SAMPLE_RATE / 20 / J_PERIOD;
 
 }
 
@@ -911,7 +913,8 @@ RKR::Control_Volume (float *origl,float *origr)
   float i_sum = 1e-12f;
   float temp_sum;
   float tmp;
-
+  float Temp_M_Volume = 0.0f;
+  
   if (have_signal) efx_FLimiter->out(efxoutl, efxoutr); 
 
 
@@ -924,12 +927,20 @@ RKR::Control_Volume (float *origl,float *origr)
     D_Resample->out(anall,analr,efxoutl,efxoutr,PERIOD,u_down);
       
 
+   if (OnCounter < t_periods)
+     {
+       Temp_M_Volume = Log_M_Volume / (float) (t_periods - OnCounter); 
+       OnCounter++;
+     }  
+
+     else Temp_M_Volume = Log_M_Volume;
 
   for (i = 0; i <= PERIOD; i++)
     {
       
-      efxoutl[i] *= Log_M_Volume;
-      efxoutr[i] *= Log_M_Volume;
+      efxoutl[i] *= Temp_M_Volume;
+      efxoutr[i] *= Temp_M_Volume;
+      
       
       if (Fraction_Bypass < 1.0f)
       {

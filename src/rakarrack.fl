@@ -5406,6 +5406,7 @@ InOut->redraw();
 
 if (!o->value())
    {
+    rkr->OnCounter = 0;
     if (rkr->Tuner_Bypass)
         {
            tuner_activar->value(0);
@@ -5419,7 +5420,7 @@ if (!o->value())
              
 rkr->cleanup_efx();
 
-}}
+}} selected
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Value_Slider Balance {
@@ -6413,7 +6414,7 @@ GMM->redraw();}
     }
     Fl_Window AboutWin {
       label {About Rakarrack}
-      callback {AboutWin->hide();} selected
+      callback {AboutWin->hide();}
       xywh {825 96 375 235} type Double color 36 hide
     } {
       Fl_Box AB_Title {

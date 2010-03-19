@@ -384,7 +384,8 @@ public:
   int sleds_color;
 
   int have_signal;
-
+  int OnCounter;
+  int t_periods;
 
   double u_down;
   double u_up;

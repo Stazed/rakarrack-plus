@@ -5056,6 +5056,7 @@ InOut->redraw();
 
 if (!o->value())
    {
+    rkr->OnCounter = 0;
     if (rkr->Tuner_Bypass)
         {
            tuner_activar->value(0);
