@@ -48,6 +48,8 @@ rakarrack_SOURCES = main.C \
 	Synthfilter.h \
 	Tuner.h \
 	Valve.h \
+	icono_rakarrack_128x128.xpm \
+	icono_rakarrack_32x32.xpm \
 	jack.C \
 	rakarrack.cxx \
 	process.C \
