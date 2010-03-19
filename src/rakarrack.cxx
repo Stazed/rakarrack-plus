@@ -5241,6 +5241,7 @@ void RKRGUI::cb_Preset_Counter_i(Fl_Counter* o, void*) {
 rkr->Bank_to_Preset((int) o->value());
 light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
+rkr->OnCounter=0;
 FillML(0);
 Prepare_Order();
 Put_Loaded();

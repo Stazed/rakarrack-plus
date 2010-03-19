@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -886,17 +886,15 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1346 52 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -3712,7 +3710,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
         }
       }
       Fl_Group DFLANGE {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button dflange_activar {
@@ -3740,7 +3738,7 @@ dflange_LR->value(rkr->efx_DFlange->getpar(2));
 dflange_subs->value(rkr->efx_DFlange->getpar(8));
 dflange_tz->value(rkr->efx_DFlange->getpar(9));
 dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
+dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -3768,7 +3766,7 @@ dflange_lpf->value(rkr->efx_DFlange->getpar(7));} open
             xywh {102 102 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Bright Chorus} selected
+            label {Bright Chorus}
             xywh {112 112 36 21} labelsize 10
           }
         }
@@ -5430,7 +5428,7 @@ if (!o->value())
              
 rkr->cleanup_efx();
 
-}} selected
+}}
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Value_Slider Balance {
@@ -5605,6 +5603,7 @@ BankWindow->hide();}
 rkr->Bank_to_Preset((int) o->value());
 light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
+rkr->OnCounter=0;
 FillML(0);
 Prepare_Order();
 Put_Loaded();}
@@ -7483,7 +7482,8 @@ rkr->Selected_Preset=num;
 w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
 Preset_Counter->do_callback();
-}} {}
+}} {selected
+    }
   }
   Function {make_window_banks()} {} {
     code {int i,j,x,y,num;
