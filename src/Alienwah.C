@@ -72,7 +72,7 @@ Alienwah::out (float * smpsl, float * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-      float x = ((float) i) / (float)PERIOD;
+      float x = (float)i / fPERIOD;
       float x1 = 1.0f - x;
       //left  
       tmp.a = clfol.a * x + oldclfol.a * x1;

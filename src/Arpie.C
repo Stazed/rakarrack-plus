@@ -48,10 +48,10 @@ Arpie::Arpie (float * efxoutl_, float * efxoutr_)
   lrdelay = 0;
   harmonic = 1;
   Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
-  invattack = (int) SAMPLE_RATE/15;
-  envattack = (float) 1.0f/invattack;
+  invattack = SAMPLE_RATE/15;
+  envattack = 1.0f/(float)invattack;
   maxx_delay = SAMPLE_RATE * MAX_DELAY;
-  fade = (int) SAMPLE_RATE / 10;    //200ms fade time available
+  fade = SAMPLE_RATE / 10;    //200ms fade time available
 
   ldelay = new float[maxx_delay];  
   rdelay = new float[maxx_delay];

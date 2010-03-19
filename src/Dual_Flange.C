@@ -37,7 +37,7 @@ Dflange::Dflange (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
   
-  period_const = (float) 1.0f/PERIOD;
+  period_const = 1.0f/fPERIOD;
   
   //default values
   Ppreset = 0;

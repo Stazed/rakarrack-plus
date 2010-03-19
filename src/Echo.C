@@ -48,7 +48,7 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
   lrdelay = 0;
   Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
   maxx_delay = SAMPLE_RATE * MAX_DELAY;
-  fade = (int) SAMPLE_RATE / 5;    //1/5 SR fade time available
+  fade = SAMPLE_RATE / 5;    //1/5 SR fade time available
 
   ldelay = new float[maxx_delay];  
   rdelay = new float[maxx_delay];
@@ -216,7 +216,7 @@ void
 Echo::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
-  delay = (int) Pdelay;
+  delay=Pdelay;
   if (delay < 10) delay = 10;
   if (delay > MAX_DELAY * 1000) delay = 1000 * MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
   delay = 1 + lrintf ( ((float) delay / 1000.0f) * fSAMPLE_RATE );	

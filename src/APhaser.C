@@ -75,7 +75,7 @@ Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_)
    Rmx = Rmin/Rmax;
    Rconst = 1.0f + Rmx;  // Handle parallel resistor relationship
    C = 0.00000005f;	     // 50 nF
-   CFs = (float) 2.0f*fSAMPLE_RATE*C;
+   CFs = 2.0f*fSAMPLE_RATE*C;
    invperiod = 1.0f / fPERIOD;
 
 
