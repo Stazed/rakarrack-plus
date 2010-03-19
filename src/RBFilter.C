@@ -1,11 +1,11 @@
 /*
   ZynAddSubFX - a software synthesizer
  
-  SVFilter.C - Several state-variable filters
+  RBFilter.C - Several state-variable filters
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Ryan Billing
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -46,7 +46,7 @@ RBFilter::RBFilter (unsigned char Ftype, float Ffreq, float Fq,
     stages = MAX_FILTER_STAGES;
   cleanup ();
   setfreq_and_q (Ffreq, Fq);
-  iper = 1.0f/((float) PERIOD);
+  iper = 1.0f/fPERIOD;
 };
 
 RBFilter::~RBFilter ()
@@ -70,7 +70,7 @@ RBFilter::cleanup ()
 void
 RBFilter::computefiltercoefs ()
 {
-  par.f = freq / (float)SAMPLE_RATE * 4.0f;
+  par.f = freq / fSAMPLE_RATE * 4.0f;
   if (par.f > 0.99999)
     par.f = 0.99999f;
   par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
@@ -89,7 +89,7 @@ RBFilter::setfreq (float frequency)
     rap = 1.0f / rap;
 
   oldabovenq = abovenq;
-  abovenq = frequency > ((float)SAMPLE_RATE / 2.0f - 500.0f);
+  abovenq = frequency > (fSAMPLE_RATE / 2.0f - 500.0f);
 
   int nyquistthresh = (abovenq ^ oldabovenq);
 
