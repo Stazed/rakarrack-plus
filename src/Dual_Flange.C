@@ -56,7 +56,8 @@ Dflange::Dflange (float * efxoutl_, float * efxoutr_)
   fwidth = 800;
   fdepth = 50;
   zcenter = (int) floorf(0.5f * (fdepth + fwidth));
-
+  base = 7.0f;		//sets curve of modulation to frequency relationship
+  ibase = 1.0f/base;
   //default values
   Ppreset = 0;  
   setpreset (Ppreset);
@@ -117,12 +118,11 @@ Dflange::out (float * smpsl, float * smpsr)
   lfo.effectlfoout (&lfol, &lfor);
   lmod = lfol;
   rmod = lfor;
-  lmod = (powf (2.0f, lmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;  //2^x type sweep for musical interpretation of moving delay line.
-  rmod = (powf (2.0f, rmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;
+//  lmod = (powf (2.0f, lmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;  //2^x type sweep for musical interpretation of moving delay line.
+//  rmod = (powf (2.0f, rmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;
 
-
-  lmodfreq = fdepth + lmod * fwidth;	//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
-  rmodfreq = fdepth + rmod * fwidth;
+  lmodfreq = fdepth + fwidth*(powf(base, lmod) - 1.0f)*ibase;	//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
+  rmodfreq = fdepth + fwidth*(powf(base, rmod) - 1.0f)*ibase;
 
 
   if (lmodfreq > 10000.0f)
@@ -413,10 +413,10 @@ Dflange::setpreset (int npreset)
     {-32, 0, 64, 60, 10, 100, 20, 16000, 0, 0, 16, 90, 4, 0},
     //Flanger
     {-32, 0, 64, 170, 1200, 50, 0, 16000, 1, 0, 68, 127, 0, 0},
-    //Preset 6
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Preset 7
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+    //Chorus 1
+    {-15, 0, 0, 42, 12, 50, -10, 1500, 0, 0, 120, 0, 0, 20},
+    //Chorus 2
+    {-40, 0, 0, 35, 9, 67, 12, 4700, 1, 1, 160, 75, 0, 60},
     //Preset 8
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Preset 9

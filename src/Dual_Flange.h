@@ -86,7 +86,7 @@ private:
   
   float l, r, ldl, rdl, zdr, zdl;
   float rflange0, rflange1, lflange0, lflange1, oldrflange0, oldrflange1, oldlflange0, oldlflange1;
-  float period_const;
+  float period_const, base, ibase;
   float *ldelay, *rdelay, *zldelay, *zrdelay;
   float oldl, oldr;		//pt. lpf
 
