@@ -272,7 +272,7 @@ PitchShifter::smbFft (float *fftBuffer, long fftFrameSize, long sign)
 	  *p2 = temp;
 	}
     }
-  for (k = 0, le = 2; k < (long) (log (fftFrameSize) / log (2.) + .5); k++)
+  for (k = 0, le = 2; k < (long) (log (fftFrameSize) / LOG_2 + .5); k++)
     {
       le <<= 1;
       le2 = le >> 1;
