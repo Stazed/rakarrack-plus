@@ -663,7 +663,7 @@ controlrakarrack with MIDI messages use the MIDI Learn way.<br>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       <p>Adapted from the ZynAddSubFX Equalizer.</p>
       <p>Gain: Overall output level</p>
-      <p>Q: Resonance of individual filters. Generally helps smooth
+      <p><b>Q</b>: Resonance of individual filters. Generally helps smooth
 extreme settings...or make extreme settings yet more extreme.</p>
       </td>
     </tr>
@@ -688,20 +688,20 @@ soft-knee compression characteristic. This is mentioned to give hope to
 those who were aware of the bugs in compressor in Rakarrack 0.3.0.
 These bugs have been fixed, and this compressor has been traced using
 test signals to confirm it does what we think it does. </p>
-      <p>A. Time : Attack Time. Time in milliseconds for attack to
+      <p><b>A. Time</b>: Attack Time. Time in milliseconds for attack to
 settle to 64% of final amount of compression.</p>
-      <p>R. Time: Release Time. Time in milliseconds for gain to return
+      <p><b>R. Time</b>: Release Time. Time in milliseconds for gain to return
 to 64% of it's initial setting.</p>
       <p>Note: For the curious, the strange number, 64%, relates to the
 RC time constant (RC means Resistor-Capacitor), which follows a natural
 exponential curve. The use of this behavior will make this compressor
 feel more natural to one who is most familiar with rack-mounted analog
 compressors.</p>
-      <p>Ratio: For every Ratio (dB) that the input exceeds the
+      <p><b>Ratio</b>: For every Ratio (dB) that the input exceeds the
 Threshold, the output will be allowed to increase by 1 dB. For example,
 using compression ratio of 2, if the signal gets 2dB above the
 threshold, the output will only go 1dB above the threshold.</p>
-      <p>Knee: Percentage of the region in dB of space between
+      <p><b>Knee</b>: Percentage of the region in dB of space between
 Threshold and 0dB (basically is Knee X -Threshold). Within this region,
 the ratio increases from 1 to log2(ratio). Threshold + Knee marks the
 point of full compression onset. For example, if knee is set to 100%, a
@@ -710,10 +710,10 @@ maximum compression available is log2(ratio). A ratio of 32 will result
 in a real ratio ranging from 1 to 5. This is useful for processing
 cymbals as it does not crunch the dynamic attack quite so badly, but
 helps sustain the trailing resonance.</p>
-      <p>Thrhold: Threshold. Defines the onset of compression. </p>
-      <p>Output: How much gain to remove from the final stage of the
+      <p><b>Thrhold</b>: Threshold. Defines the onset of compression. </p>
+      <p><b>Output</b>: How much gain to remove from the final stage of the
 compressor.</p>
-      <p>Auto Output: Automatically calculate makeup gain. If this is
+      <p><b>Auto Output</b>: Automatically calculate makeup gain. If this is
 unchecked, then adjustments of Ratio, Knee, and Thrhold will make
 changes to the overall output level. Unchecking may be useful to
 interpret Thrhold as a limiting threshold, and one would likely use a
@@ -769,7 +769,7 @@ the waveshaping functions currently used. The clipping characteristic
 is most closely related to curve produced by a JFET amplifier stage.
 With proper EQ settings, a sound reminiscent of high gain British
 stacks can be obtained.</p>
-      <p>Sub Octv: Allows you to mix some sub-octave rumble into the
+      <p><b>Sub Octv</b>: Allows you to mix some sub-octave rumble into the
 output. Technically speaking, this modulates the output with a square
 wave at half the fundamental frequency (sub octave). </p>
       </td>
@@ -805,8 +805,8 @@ wave at half the fundamental frequency (sub octave). </p>
       </td>
       <td bgcolor="#fbfbfb">
       <p>Adapted from the ZynAddSubFX Echo</p>
-      <p>Wet/Dry: Mix level of echo with original.</p>
-      <p>Reverse: Mixes reverse delay with forward delay.</p>
+      <p><b>Wet/Dry</b>: Mix level of echo with original.</p>
+      <p><b>Reverse</b>: Mixes reverse delay with forward delay.</p>
       <p>More about reverse: Echo works by storing audio samples in
 memory and playing back samples that were stored a while ago. At a
 sample rate of 48kHz, the number of samples stored in memory for a 1
@@ -819,20 +819,20 @@ Then everything stored in memory comes out in reverse, and has an
 interesting reverse envelop sound. In the digital word, we can read it
 forward as easily as backwards, so why not keep track of both and let
 you mix them together?</p>
-      <p>Pan: Sends the delay more to the right or left. Zero balances
+      <p><b>Pan</b>: Sends the delay more to the right or left. Zero balances
 it in the middle.</p>
-      <p>Delay: Amount of time before you hear the echo.</p>
-      <p>Lrdl. : Left/Right delay difference. A setting of 64 means
+      <p><b>Delay</b>: Amount of time before you hear the echo.</p>
+      <p><b>Lrdl.</b>: Left/Right delay difference. A setting of 64 means
 that the delay time is the same for left and right channels. If larger
 than 64, the right channel is delayed longer than the left channel.
 Less than 64 the reverse is true. This allows you to achieve the stereo
 'Ping Pong' effect.</p>
-      <p>L/R Cr : Left/Right Crossing. This mixes left and right
+      <p><b>L/R Cr</b>: Left/Right Crossing. This mixes left and right
 channels.</p>
-      <p>Fb : Feedback. How much of the delayed output to add to the
+      <p><b>Fb</b>: Feedback. How much of the delayed output to add to the
 input. This makes the echo regenerate, like it's bouncing around in a
 canyon.</p>
-      <p>Damp: Low pass filter on the delayed signal. This rolls off
+      <p><b>Damp</b>: Low pass filter on the delayed signal. This rolls off
 the high frequencies on every regeneration. Setting to a higher level
 will make the echo sound more natural. </p>
       </td>
@@ -852,10 +852,10 @@ will make the echo sound more natural. </p>
       <td bgcolor="#fbfbfb">
       <p>Adapted from the ZynAddSubFX Chorus</p>
       <p>Tips</p>
-      <p>Freq: LFO Rate</p>
-      <p>Rnd: Add noise to LFO to make it more natural sounding.</p>
-      <p>St.df : Stereo difference of LFO.</p>
-      <p>L/R Cr. : Mix left into right, Right into left. At maximum
+      <p><b>Tempo</b>: LFO Rate</p>
+      <p><b>Rnd</b>: Add noise to LFO to make it more natural sounding.</p>
+      <p><b>St.df</b> : Stereo difference of LFO.</p>
+      <p><b>L/R Cr.</b> : Mix left into right, Right into left. At maximum
 level, left and right channels are swapped.</p>
       </td>
     </tr>
@@ -874,11 +874,11 @@ level, left and right channels are swapped.</p>
       <td bgcolor="#fbfbfb">
       <p>Adapted from the ZynAddSubFX Phaser</p>
       <p>More mild digital phaser with exponential LFO sweep.</p>
-      <p>Phase: This is the offset for the "center" of the sweep. </p>
-      <p>Depth: LFO deviation or some may like to think of it as LFO
+      <p><b>Phase</b>: This is the offset for the "center" of the sweep. </p>
+      <p><b>Depth</b>: LFO deviation or some may like to think of it as LFO
 amplitude. This is the same type of function that has been labeled
 'width' in Analog Phaser.</p>
-      <p>Fb: Feedback. Some phasers title this "Regen". Feedback is
+      <p><b>Fb</b>: Feedback. Some phasers title this "Regen". Feedback is
 negative as this moves toward zero, positive from 64+. 64, strangely,
 corresponds to zero feedback.</p>
       </td>
@@ -931,43 +931,43 @@ Circuit' is an original creation. Finally, some of the non-perfect
 physical components and distortion were modeled in a simplistic way to
 add a certain warmth to the effect without sinking your CPU into an ice
 age.</p>
-      <p>Wet/Dry: At zero, both the phase shifted signal and input
+      <p><b>Wet/Dry</b>: At zero, both the phase shifted signal and input
 signal are mixed equally. This creates the deepest notch filter. Why
 would you want to mix all Wet? Modulating the all-pass filter stages
 can create frequency shifting at faster modulation rates. This produces
 a chorus-like effect, and you may want the frequency bending without
 the notch filtering. Think UniVibe.</p>
-      <p>LFO Type: More or less self explanatory. The Barber Pole
+      <p><b>LFO Type</b>: More or less self explanatory. The Barber Pole
 setting will disappoint you if you're looking for a true barber pole
 phaser. This is simply an arrangement of multiple ramps modulating the
 phaser, so you hear the thump every time the ramp starts over. It's a
 pleasant enough effect at really slow rates, and creates something
 interesting at very high rates. In between it's annoying :) .</p>
-      <p>Freq. : LFO frequency.</p>
-      <p>Depth: How deep the phaser can sweep. It's an LFO offset. 64
+      <p><b>Tempo</b>: LFO frequency.</p>
+      <p><b>Depth</b>: How deep the phaser can sweep. It's an LFO offset. 64
 is dead center. If you want it to stay in the high range, set this
 higher than 64. If you want the phaser to spend more time carving out
 the lower frequency range, set this to some thing less than 64.</p>
-      <p>Width: This is how far the LFO travels. It's the LFO amplitude.</p>
-      <p>Fb : Feedback. Usually named 'Regen' on a phaser stompbox. For
+      <p><b>Width</b>: This is how far the LFO travels. It's the LFO amplitude.</p>
+      <p><b>Fb</b>: Feedback. Usually named 'Regen' on a phaser stompbox. For
 deeper notches keep Fb negative for even number stages and positive for
 odd number stages.</p>
-      <p>Mismatch: FET Phasers suffer from the manufacturing process of
+      <p><b>Mismatch</b>: FET Phasers suffer from the manufacturing process of
 JFET transistors. These things generally vary over a very wide range of
 properties per batch. What does this mean to a Phaser? It means that
 the frequency where 45 degrees phase shift occurs varies from stage to
 stage. This mismatch makes the notches wider, but less deep. This
 parameter best aligns with reality at a setting of 5 to 10. Large
 settings may be used to obtain a better 'Vibe sound.</p>
-      <p>Distort: FETs used as variable resistors are only linear over
+      <p><b>Distort</b>: FETs used as variable resistors are only linear over
 a certain range. This nonlinearity adds harmonics to the processed
 signal and somewhat warps the frequency response. This is a very subtle
 effect, but worthwhile to be able to zero it if you don't want it
 modeled.</p>
-      <p>St. Diff : Stereo Difference. Delay the LFO in the right or
+      <p><b>St. Diff</b>: Stereo Difference. Delay the LFO in the right or
 left channel. This combined with the panner effect can make it sound
 like something is twirling in an elliptical orbit around your head.</p>
-      <p>Stages: First order all-pass filter networks to be chained
+      <p><b>Stages</b>: First order all-pass filter networks to be chained
 together. Set to one for a high pass filter (or low pass filter with
 subtract checked). 4 stages is very typical in the average stompbox.
 Bi-mode and Tri-mode phasers include switchable 6 and 8 stage filters.
@@ -975,8 +975,8 @@ It's rare to see an analog phaser with more than 8 stages in stompbox
 form because parts get expensive, and noise becomes an expensive design
 problem to mitigate. In the digital world, adding more stages is just
 another time through the filter loop if you can spare the CPU time.</p>
-      <p>Subtract: Subtract wet from dry instead of add.</p>
-      <p>Hyper: Flattens out the lower end of the LFO. Used with a Tri
+      <p><b>Subtract</b>: Subtract wet from dry instead of add.</p>
+      <p><b>Hyper</b>: Flattens out the lower end of the LFO. Used with a Tri
 wave, this emulates the "Hyper Sine" found in some analog phaser
 pedals. It was a clever way that analog filter designers contrived to
 make the LFO behave according to the human's perception of frequency.
@@ -1228,11 +1228,11 @@ Freq, Rnd, St. Dif, and Depth thing, but what the..."</p>
 Wah-Wah), this is also an envelope filter. </p>
       <p align="justify">Currently, here are the three parameters
 related to envelope control:</p>
-      <p align="justify">Amp S.: Amplitude sensitivity. This is like
+      <p align="justify"><b>Amp S.</b>: Amplitude sensitivity. This is like
 the sweep range. If sensitivity is set low, you have to pluck really
 hard to make the filter move. If set high, then the filter will sweep
 to the limit.</p>
-      <p align="justify">Amp. S.I.: This stands for "Amplitude
+      <p align="justify"><b>Amp. S.I.</b>: This stands for "Amplitude
 Sensitivity Inverse", but is applied in a somewhat interesting way.
 This slider offsets the base frequency for the wah wah filter
 resonance. At the same time, it acts as a logical check for which
@@ -1242,7 +1242,7 @@ than 64, then the filter responds to plucking by sweeping downward in
 frequency. <b>Tip: If you want to control wah-wah with a MIDI foot
 pedal, this is the parameter you will want to map. For pure
 pedal-controlled wah-wah, set Amp. S and Depth to zero.</b></p>
-      <p align="justify">Smooth: How much to smooth the signal
+      <p align="justify"><b>Smooth</b>: How much to smooth the signal
 envelope. At a low level, the sound is like a bubble maker. At a high
 level, the filter responds very slowly to signal attack.</p>
       </td>
@@ -1317,37 +1317,35 @@ depth of the notches, but also creates a complex and interesting
 frequency response.&nbsp; The result is a unique color to the tone not
 available by a standard flanger.<br>
       </p>
-      <p align="justify"><br>
-      <span style="font-weight: bold;">Wet/Dry</span>&nbsp; Mix delayed
-signal with Dry<br>
-      <span style="font-weight: bold;">Pan</span><br>
-      <span style="font-weight: bold;">L/R.Cr</span><br>
-      <span style="font-weight: bold;">Depth</span> Frequency (Hz) of
-the lowest notch frequency on lowest end of sweep range<br>
-      <span style="font-weight: bold;">Width </span>LFO sweep width,
-deviation measured in Hz. <br>
-      <span style="font-weight: bold;">Offset </span>Percent
-difference in delay between delay A and delay B.<br>
-      <span style="font-weight: bold;">Fb</span> Feedback.&nbsp; 0 is
-none, negative and positive.<br>
-      <span style="font-weight: bold;">LPF</span> Damp the delay
+      <p><b>Wet/Dry</b>:&nbsp; Mix delayed
+signal with Dry</p>
+      <p><b>Pan</b>:</p>
+      <p><b>L/R.Cr</b>:</p>
+      <p><b>Depth</b>: Frequency (Hz) of
+the lowest notch frequency on lowest end of sweep range</p>
+      <p><b>Width</b>: LFO sweep width,
+deviation measured in Hz. </p>
+      <p><b>Offset</b>: Percent
+difference in delay between delay A and delay B.</p>
+      <p><b>Fb</b>: Feedback.&nbsp; 0 is
+none, negative and positive.</p>
+      <p><b>LPF</b>: Damp the delay
 line.&nbsp; This makes the high frequency notches more shallow, thus
 the sound approaches that of a Phaser or other mellow&nbsp;
-sweeping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; comb filter<br>
-      <span style="font-weight: bold;">Subtract</span> Subtract delayed
-signal instead of add<br>
-      <span style="font-weight: bold;">Th. zero</span> Through
+sweeping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; comb filter</p>
+      <p><b>Subtract</b>: Subtract delayed
+signal instead of add</p>
+      <p><b>Th. zero</b>: Through
 Zero.&nbsp; Delay Dry signal to 1/2 way between high and low delay
-deviations of delayed signal.<br>
-      <span style="font-weight: bold;">Tempo</span>&nbsp; Sweep speed <br>
-      <span style="font-weight: bold;">St.df</span> Stereo Difference
-between LFO's<br>
-      <span style="font-weight: bold;">LFO Type</span><br>
-      <span style="font-weight: bold;">Rnd </span>Random.&nbsp; Add
+deviations of delayed signal.</p>
+      <p><b>Tempo</b>: Sweep speed </p>
+      <p><b>St.df</b>: Stereo Difference
+between LFO's</p>
+      <p><b>LFO Type</b>:</p>
+      <p><b>Rnd</b>: Random.&nbsp; Add
 random noise to LFO to help reduce unmusical effects of linear
-interpolation between samples.<br>
+interpolation between samples.</p>
       <br>
-      </p>
       </td>
     </tr>
   </tbody>
@@ -1367,7 +1365,7 @@ interpolation between samples.<br>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       <p align="justify">New
 Effect based on Ring, Steve Harris LADSPA
-plugin. Auto Freq recognizes the frequncy of the note played (Only
+plugin. <b>Auto Freq</b> recognizes the frequncy of the note played (Only
 monophonic sorry ..) in order that you can use Ring as a simple
 monophonic synthesizer.<br>
       </p>
@@ -1449,24 +1447,21 @@ sounds.&nbsp; Of course, with slower&nbsp; tempos such that several
 phrases are repeated one can get the tempo-doubling side effect to lay
 out paint-pealing leads without hardly moving your fingers.<br>
       </p>
-      <p align="justify"><br>
-      <span style="font-weight: bold;">Wet/Dry</span>&nbsp; Amount of
-arpeggiated accompaniment in the mix<br>
-      <span style="font-weight: bold;">Arpe's</span>&nbsp; Mix pitch
-shifted delay line with normal delay<br>
-      <span style="font-weight: bold;">Pan</span><br>
-      <span style="font-weight: bold;">Tempo</span> Measured in beats
-per minute<br>
-      <span style="font-weight: bold;">Subdivision</span> Ratio to
+      <p><b>Wet/Dry</b>: Amount of
+arpeggiated accompaniment in the mix</p>
+      <p><b>Arpe's</b>: Mix pitch
+shifted delay line with normal delay</p>
+      <p><b>Pan</b>:</p>
+      <p><b>Tempo</b>: Measured in beats
+per minute</p>
+      <p><b>Subdivision</b>: Ratio to
 subdivide measure.&nbsp; A setting of 1 is equal to 1 measure at Tempo.
 For example, 1/4 means the length of the delay line is equal to a
 quarter note&nbsp; at the selected tempo.&nbsp; The sequence will jump
-4 steps per measure.&nbsp; <br>
-      <span style="font-weight: bold;">LRdl.</span>&nbsp; Same as for
-Echo<br>
-      <span style="font-weight: bold;">L/R.Cr</span> Same as for Echo<br>
+4 steps per measure.&nbsp; </p>
+      <p><b>LRdl.</b>: Same as for Echo</p>
+      <p><b>L/R.Cr</b>: Same as for Echo</p>
       <br>
-      </p>
       </td>
     </tr>
   </tbody>
@@ -1493,49 +1488,40 @@ modeled after that of a BJT transistor, thus it behaves more similarly
 to an analog noise gate.&nbsp; It is likely that Expander uses less CPU
 resources than Noise Gate, but neither are very resource intensive
 modules.<br>
-      <br>
 The basic behavior is the louder you play, the louder it gets until it
 gets pinned at the maximum "Level".&nbsp; As a noise gate, the volume
 is exponentially increased in the lower volume levels until Threshold,
 at which point the gate is entirely open.<br>
-      <br>
 To use the effect as an expander, it is best to set the threshold at
 higher levels, and shape at moderate levels (less than 10). Short
 attack/release times in this mode will cause it to work much like one
 would expect from a dynamics expander.&nbsp; In this mode it is
 essentially a compressor in reverse.<br>
-      <br>
 To take the idea of expander a little further, one can set long attack
 times and short release times to achieve a string swell effect akin to
 adjusting the volume pot on the guitar...only the effect does it
 automatically for you.<br>
-      <br>
 Finally, the filters may be used for a bit of frequency shaping before
 a distortion effect, or used in front of the Compressor to help brighten<br>
 the tone.</p>
-      <p align="justify"><br>
-      <span style="font-weight: bold;">A. Time</span> Attack Time&nbsp;
--- Time to open the gate<br>
-      <span style="font-weight: bold;">R. Time</span> Release Time --
-Time it takes the gate to return to off state<br>
-      <span style="font-weight: bold;">Shape</span> Gate transition
+
+      <p><b>A. Time</b>: Attack Time, time to open the gate</p>
+      <p><b>R. Time</b>: Release Time, time it takes the gate to return to off
+      state</p>
+      <p><b>Shape</b>: Gate transition
 shape.&nbsp; Large number means gate turns on suddenly at
 threshold.&nbsp; Small number means gate gradually turns on Noise
 suppression is best at higher numbers, but the gradual expansion above
-the threshold can be a more musical way for gate&nbsp; to turn on.<br>
-      <span style="font-weight: bold;">Thrhold </span>Threshold.&nbsp;
+the threshold can be a more musical way for gate&nbsp; to turn on.</p>
+      <p><b>Thrhold</b>: Threshold.&nbsp;
 The gate is reducing signal volume below this level.&nbsp; Moderate
 threshold setting with smaller number for shape is useful for string
-swell effects.<br>
-      <span style="font-weight: bold;">Level&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Boost the output. 1 ... 127 represents a fractional increase in volume
-from 0dB to 20dB<br>
-      <span style="font-weight: bold;">HPF</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-High Pass Filter<br>
-      <span style="font-weight: bold;">LPF</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Low Pass Filter<br>
+swell effects.</p>
+      <p><b>Level</b>: Boost the output. 1 ... 127 represents a fractional increase in volume
+from 0dB to 20dB</p>
+      <p><b>HPF</b>: High Pass Filter</p>
+      <p><b>LPF</b>: Low Pass Filter</p>
       <br>
-      </p>
       </td>
     </tr>
   </tbody>
@@ -1643,7 +1629,7 @@ Cross1-&gt;Cross2 = Mid Low<br>
 Cross2-&gt;Cross3 = High Low<br>
 Cross3-&gt;26 KHz = High<br>
       </p>
-      <p align="justify">The Combi choice select the LFO for each band,
+      <p align="justify">The <b>Combi</b> choice select the LFO for each band,
       <br>
       </p>
       <p align="justify">1 = LFO1<br>
@@ -1737,31 +1723,30 @@ amp/speaker/cabinet responses although the end result may not be
 anything like you may expect.<br>
       </p>
       <p> <b>Parameters</b></p>
-      <p align="justify"><b>Wet/Dry</b>:&nbsp; Self explanatory.&nbsp;
-For amp responses, most of the time you will want this all wet.<br>
-      <b>Pan</b> The effect is processed in mono (L &amp; R are mixed
+      <p><b>Wet/Dry</b>:&nbsp; Self explanatory.&nbsp;
+For amp responses, most of the time you will want this all wet.</p>
+      <p><b>Pan</b>: The effect is processed in mono (L &amp; R are mixed
 on the
-input).&nbsp; Pan routes the output left or right.<br>
-      <b>Level</b>:&nbsp;&nbsp;&nbsp; The actual IR file will determine
+input).&nbsp; Pan routes the output left or right.</p>
+      <p><b>Level</b>:&nbsp;&nbsp;&nbsp; The actual IR file will determine
 the gain of the effect.&nbsp; This helps you adjust&nbsp; to a good
-level.<br style="font-weight: bold;">
-      <b>Damp</b>:&nbsp;&nbsp;&nbsp;&nbsp; Darkens the sound of the IR.
-      <br>
-      <b>Fb</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Feedback.&nbsp; Pretty
-self explanatory.<br>
-      <b>Length</b>
-Measured in milliseconds. This tells Convolotron where to truncate the
+level.</p>
+      <p><b>Damp</b>:&nbsp;&nbsp;&nbsp;&nbsp; Darkens the sound of the IR.
+      </p>
+      <p><b>Fb</b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Feedback.&nbsp; Pretty
+self explanatory.</p>
+      <p><b>Length</b>: Measured in milliseconds. This tells Convolotron where to truncate the
 IR. Set this to the maximum value your CPU can afford without
 Xruns.&nbsp; A longer Length&nbsp; will result in a more true model of
-the system being convolved.<br>
-      <b>Reverb</b>:&nbsp;&nbsp; CPU optimization for reverberation
-IR's.&nbsp; See above for more detail.<br>
-      <b>Safe Mode</b>: Automatically
+the system being convolved.</p>
+      <p><b>Reverb</b>:&nbsp;&nbsp; CPU optimization for reverberation
+IR's.&nbsp; See above for more detail.</p>
+      <p><b>Safe Mode</b>: Automatically
 limits Length internally based on sample rate and info from your&nbsp;
-/proc/cpuinfo to help prevent freezing your computer.<br>
-      <b>Preset</b>:&nbsp;&nbsp; Several amp IR's are available by
-default for your convenience.<br>
-      <b>User</b>:&nbsp;&nbsp;&nbsp;&nbsp;
+/proc/cpuinfo to help prevent freezing your computer.</p>
+      <p><b>Preset</b>:&nbsp;&nbsp; Several amp IR's are available by
+default for your convenience.</p>
+      <p><b>User</b>:&nbsp;&nbsp;&nbsp;&nbsp;
 You may download or generate your own IR's.&nbsp; You can even do silly
 things like loading ring tones or segments of a song (if you like to
 experiment).&nbsp; Must be wav&nbsp; format, and keep in mind that
@@ -1769,9 +1754,8 @@ convolotron only uses the first&nbsp; "Length" milliseconds&nbsp; of
 the file...so if you have a file with 100ms silence at the beginning,
 you will get nothing but silence on the output.&nbsp; With Reverb mode,
 also keep in mind you can generate IR's in Octave or Scilab that give
-you interesting echo patterns.&nbsp; <br>
+you interesting echo patterns.&nbsp; </p>
       <br>
-      </p>
       </td>
     </tr>
   </tbody>
@@ -1801,47 +1785,47 @@ stereotyped behaviors.</b><br>
 Edition copyright ©2000 by Houghton Mifflin Company)<br>
       <br>
 It's a joke...<br>
-      <br>
-      <b>Wet/Dry</b> Balance the mix of the recorded loop with the
-incoming signal to the output.<br>
-      <b>Level 1</b> Volume level of track 1. '64' is unity.&nbsp;
-Higher is louder than the original signal, lower is more quiet.<br>
-      <b>Level 2</b> Volume level of track 2.<br>
-      <b>Reverse</b> Play loop in reverse.<br>
-      <b>Auto Play</b> If this is checked, the looper will begin to
+      </p>
+      <p><b>Wet/Dry</b>: Balance the mix of the recorded loop with the
+incoming signal to the output.</p>
+      <p><b>Level 1</b>: Volume level of track 1. '64' is unity.&nbsp;
+Higher is louder than the original signal, lower is more quiet.</p>
+      <p><b>Level 2</b>: Volume level of track 2.</p>
+      <p><b>Reverse</b>: Play loop in reverse.</p>
+      <p><b>Auto Play</b>: If this is checked, the looper will begin to
 play
-automatically after recording the first time.<br>
-      <b>Play</b> This is more like enable/disable
+automatically after recording the first time.</p>
+      <p><b>Play</b>: This is more like enable/disable
 playback.&nbsp; The loop keeps playing silently when disabled, so Play
 starts at whatever point is current in the loop.&nbsp; It was decided
 this is better than Play/Pause, because the loop keeps tracking with
 your song (assuming you keep tempo) even when it's not audible.&nbsp;
 This operates on the active track.&nbsp; If you desire a play/pause
 function, use the FX "On" button.&nbsp; Selecting this to "off" causes
-the whole effect to pause where it is.<br>
-      <b>Stop</b> Stops playback and sets the start to
+the whole effect to pause where it is.</p>
+      <p><b>Stop</b>: Stops playback and sets the start to
 the beginning of the loop.&nbsp; Use stop if you want to start the loop
 from the beginning next time you push play.&nbsp; This operates on the
-active track.<br>
-      <b>Record</b> First time, begins recording and
+active track.</p>
+      <p><b>Record</b>: First time, begins recording and
 will continue to record until you push record again.&nbsp; At this
 point you have defined the length of the loop.&nbsp; If you press
 record again, everything you play will be overdubbed onto the
 track.&nbsp; To erase the track, you need to have the track active and
 select "clear".&nbsp; This operates on the active track only if R1 or
 R2 (corresponding to the track) is selected.&nbsp; This allows you to
-record on track 2 while hearing track 1.<br>
-      <b>R1, R2</b> Enable recording on track 1
+record on track 2 while hearing track 1.</p>
+      <p><b>R1, R2</b>: Enable recording on track 1
 and track 2, respectively.&nbsp; If neither are checked, then the
-record button will not do anything.<br>
-      <b>Track 1, 2</b> Enable Play, Stop, Record on the selected
+record button will not do anything.</p>
+      <p><b>Track 1, 2</b>: Enable Play, Stop, Record on the selected
 track.&nbsp;
 Again, both the track and the R button need to be selected to record on
-the specified track.<br>
-      <b>Clear</b> Erase the selected track and set
-length to zero.<br>
+the specified track.</p>
+      <p><b>Clear</b>: Erase the selected track and set
+length to zero.</p>
       <br>
-Example sequence of operation:<br>
+<p>Example sequence of operation:<br>
 Set Wet/Dry to 0, Level 1 to 64, Auto Play Active, Track 1 active, R1
 active. Press record and begin to play into the loop. When finished,
 press record again, and your loop will immediately start up from the
@@ -1890,26 +1874,24 @@ of the LFO effect. <br>
       <br>
 Additionally, you have the envelope follower applied with the Amp S
 parameter, and smoothed by Smooth.&nbsp; Here's the breakdown:<br>
-      <br>
-      <b>Wet/Dry</b>&nbsp;&nbsp;&nbsp;&nbsp; It's obvious that this
+      </p>
+      <p><b>Wet/Dry</b>: It's obvious that this
 mixes wet and
 dry signals, but this interacts like a phaser or flanger.&nbsp; By
 mixing some Dry into higher order filters (increase Stages) you can
 create notches in the frequency response.&nbsp; With individualized
 control over HP, BP, and LP filter bands, you can create some
 interesting comb filter responses.&nbsp; This is more than simply
-"amount of effect".<br>
-      <br>
-      <b>LP, BP, HP</b>&nbsp; Low Pass, Band Pass, High Pass,
+"amount of effect".</p>
+      <p><b>LP, BP, HP</b>: Low Pass, Band Pass, High Pass,
 respectively.&nbsp;
 Greater than zero mixes the output in phase, less than zero mixes the
 output out of phase.&nbsp; This can be alternated to create different
 types of destructive interference between filter bands.&nbsp; For the
 more technically minded, you can dust off your filter cookbook and tune
 in to a wide variety of filter responses.&nbsp; This can also be used
-as a sort of parametric EQ or tone stack.<br>
-      <br>
-      <b>Stg</b>.&nbsp; Stages.&nbsp; Each filter stage is a second
+as a sort of parametric EQ or tone stack.</p>
+      <p><b>Stg</b>: Stages. Each filter stage is a second
 order
 filter.&nbsp; "Stg" sets the number of filters in series.&nbsp; The
 number of stages will improve the amount of rejection above/below the
@@ -1934,28 +1916,27 @@ transient characteristics.&nbsp; If none of that made sense, then maybe
 you can ask on the rakarrack IRC channel for a better explanation...or
 look up sample rate conversion and interpolation for discussion of the
 trade-offs and benefits.&nbsp; Otherwise, just experiment with settings
-that sound good to you, and forget about the technical details of why.<br>
-      <br>
-      <b>Width</b>&nbsp;&nbsp;&nbsp; Deviation of the LFO.&nbsp; This
+that sound good to you, and forget about the technical details of why.</p>
+      <p>
+      <b>Width</b>: Deviation of the LFO.&nbsp; This
 describes how
-far it sweeps.<br>
-      <br>
-      <b>Tempo</b>&nbsp;&nbsp; LFO Rate expressed in beats per minute.
+far it sweeps.</p>
+      <p>
+      <b>Tempo</b>: LFO Rate expressed in beats per minute.
 This is
-synchronized when Tap Tempo is active.<br>
-      <br>
-      <b>Res.</b>&nbsp;&nbsp;&nbsp; Resonance.&nbsp; Increasing this
+synchronized when Tap Tempo is active.</p>
+      <p>
+      <b>Res.</b>: Resonance.&nbsp; Increasing this
 makes a higher
-and more narrow peak at the filter resonant frequency.<br>
-      <br>
-      <b>Range</b>&nbsp;&nbsp; Upper bound on the filter sweep range.<br>
-      <br>
-      <b>Wah</b>&nbsp;&nbsp;&nbsp;&nbsp; Sweeps the filter resonant
+and more narrow peak at the filter resonant frequency.</p>
+      <p>
+      <b>Range</b>: Upper bound on the filter sweep range.</p>
+      <p>
+      <b>Wah</b>: Sweeps the filter resonant
 frequency from
 the minimum bound (hard coded in each preset) up to the upper bound
 (set by Range).&nbsp; This is the parameter you would want to map to a
-MIDI expression pedal for a wah wah effect.<br>
-      </p>
+MIDI expression pedal for a wah wah effect.</p>
       </td>
     </tr>
   </tbody>
