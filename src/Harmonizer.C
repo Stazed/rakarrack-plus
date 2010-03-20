@@ -43,7 +43,7 @@ Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality)
 
   pl = new AnalogFilter (6, 22000, 1, 0);
 
-  PS = new PitchShifter (512, hq, fSAMPLE_RATE);
+  PS = new PitchShifter (2048, hq, fSAMPLE_RATE);
   PS->ratio = 1.0f;
 
   Ppreset = 0;
@@ -114,7 +114,7 @@ Harmonizer::out (float *smpsl, float *smpsr)
 
   if (Pinterval != 12)
     {
-      PS->smbPitchShift (PS->ratio, PERIOD, 512, hq, fSAMPLE_RATE, outi, outo);
+      PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
 
       applyfilters (outo);
 
