@@ -114,7 +114,7 @@ for(i=0; i<29; i++)
       for(j=0; j<ns; j++)
       {
                    
-       t = cos(2.0 * M_PI * (double) j * coeff);
+       t = cos(D_PI * (double) j * coeff);
        image = t * spl[j];
        oldimage = acoeff*image + ( 1.0 - acoeff) * oldimage;
 
@@ -143,7 +143,8 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {}
+}} {selected
+    }
   }
   Function {handle(int event)} {return_type int
   } {
@@ -7482,8 +7483,7 @@ rkr->Selected_Preset=num;
 w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
 Preset_Counter->do_callback();
-}} {selected
-    }
+}} {}
   }
   Function {make_window_banks()} {} {
     code {int i,j,x,y,num;

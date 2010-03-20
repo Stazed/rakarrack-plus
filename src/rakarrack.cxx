@@ -72,7 +72,7 @@ for(i=0; i<29; i++)
       for(j=0; j<ns; j++)
       {
                    
-       t = cos(2.0 * M_PI * (double) j * coeff);
+       t = cos(D_PI * (double) j * coeff);
        image = t * spl[j];
        oldimage = acoeff*image + ( 1.0 - acoeff) * oldimage;
 

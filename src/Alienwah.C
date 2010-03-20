@@ -63,8 +63,8 @@ Alienwah::out (float * smpsl, float * smpsr)
   COMPLEXTYPE clfol, clfor, out, tmp;
 
   lfo.effectlfoout (&lfol, &lfor);
-  lfol *= depth * PI * 2.0f;
-  lfor *= depth * PI * 2.0f;
+  lfol *= depth * D_PI;
+  lfor *= depth * D_PI;
   clfol.a = cosf (lfol + phase) * fb;
   clfol.b = sinf (lfol + phase) * fb;
   clfor.a = cosf (lfor + phase) * fb;
