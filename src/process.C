@@ -616,7 +616,7 @@ RKR::Adjust_Upsample()
    fSAMPLE_RATE = (float) SAMPLE_RATE;
    cSAMPLE_RATE = 1.0f / (float)SAMPLE_RATE;
    fPERIOD= float(PERIOD);
-   t_periods = J_SAMPLE_RATE / 20 / J_PERIOD;
+   t_periods = J_SAMPLE_RATE / 12 / J_PERIOD;
 
 }
 
