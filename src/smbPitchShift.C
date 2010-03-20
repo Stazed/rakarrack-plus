@@ -279,8 +279,8 @@ PitchShifter::smbFft (float *fftBuffer, long fftFrameSize, long sign)
       ur = 1.0;
       ui = 0.0;
       arg = M_PI / (le2 >> 1);
-      wr = cos (arg);
-      wi = sign * sin (arg);
+      wr = cosf (arg);
+      wi = sign * sinf (arg);
       for (j = 0; j < le2; j += 2)
 	{
 	  p1r = fftBuffer + j;
