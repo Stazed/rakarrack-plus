@@ -217,11 +217,13 @@ Recognize::displayFrequency (float freq)
 
   if (!noteoff)
     {
-    reconota = 24 + (octave * 12) + note - 3;
+//    reconota = 24 + (octave * 12) + note - 3;
     offset = lrintf(nfreq / 20.0);
     if (fabsf(lafreq-freq)>offset)
     { 
     lafreq = nfreq;
+    reconota = 24 + (octave * 12) + note - 3;
+  
 //    printf("%f\n",lafreq);
     }
     }
