@@ -473,7 +473,7 @@ AnalogFilter::filterout (float * smp)
 float AnalogFilter::H (float freq)
 {
   float
-    fr = freq / fSAMPLE_RATE * PI * 2.0f;
+    fr = freq / fSAMPLE_RATE * D_PI;
   float
     x = c[0], y = 0.0;
   for (int n = 1; n < 3; n++)

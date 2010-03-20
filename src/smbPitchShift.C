@@ -63,7 +63,7 @@ PitchShifter::PitchShifter (long fftFrameSize, long osamp, float sampleRate)
   dpi_coef = coef_dfftFrameSize * D_PI;
   freqPerBin = sampleRate / (double) fftFrameSize;
   coefPB = 1.0 /freqPerBin;
-  expct = 2. * M_PI * (double) stepSize / (double) fftFrameSize;
+  expct = D_PI * (double) stepSize / (double) fftFrameSize;
   inFifoLatency = fftFrameSize - stepSize;
   gRover = inFifoLatency;
   ratio = 1.0;
@@ -338,7 +338,7 @@ PitchShifter::smbAtan2 (double x, double y)
   if (x == 0.)
     return 0.;
   if (y == 0.)
-    return signx * M_PI / 2.;
+    return signx * M_PI_2;
   return atan2 (x, y);
 }
 

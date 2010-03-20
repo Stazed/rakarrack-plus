@@ -105,7 +105,7 @@ float EffectLFO::getlfoshape (float x)
     case 4:                     //ZigZag
        x = x * 2.0f - 1.0f;
         tmpv = 0.33f * sinf(x);
-        out = sinf(sinf(x*2.0f*PI)*x/tmpv);       
+        out = sinf(sinf(x*D_PI)*x/tmpv);       
      break;  
     case 5:                     //Modulated Square ?? ;-)
        tmpv = x * D_PI;
@@ -120,7 +120,7 @@ float EffectLFO::getlfoshape (float x)
 
       //more to be added here; also ::updateparams() need to be updated (to allow more lfotypes)
     default:
-      out = cosf (x * 2.0f * PI);	//EffectLFO_SINE
+      out = cosf (x * D_PI);	//EffectLFO_SINE
     };
   return (out);
 };

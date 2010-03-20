@@ -210,7 +210,7 @@ Convolotron::process_rbuf()
  a2 = 0.5*alpha;
  N = length;
  N2 = length/2;
- Nm1p = 2.0f * PI/((float) (N - 1));
+ Nm1p = D_PI/((float) (N - 1));
  Nm1pp = 4.0f * PI/((float) (N - 1));
  
 	for(ii=0;ii<length;ii++)
