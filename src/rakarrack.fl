@@ -143,8 +143,7 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {selected
-    }
+}} {}
   }
   Function {handle(int event)} {return_type int
   } {
@@ -896,7 +895,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1346 52 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {348 78 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1262,11 +1261,11 @@ Scope_ON=1;
       }
       Fl_Box L1 {
         label label
-        xywh {2 195 158 17} labelfont 1 labelcolor 7
+        xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
       }
       Fl_Box L2 {
         label label
-        xywh {162 195 158 17} labelfont 1 labelcolor 7
+        xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
       }
       Fl_Box L3 {
         label label
@@ -5367,7 +5366,7 @@ WNote->copy_label("");
 WRfreq->copy_label("");
 WNfreq->copy_label("");
 ChangeActives();
-TUNER_LABEL->redraw();}
+TUNER_LABEL->redraw_label();}
           xywh {526 28 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Progress tuner_bar {
@@ -5411,7 +5410,7 @@ input_vu->value(-50.0);
 output_vu->value(-50.0);
 
 ChangeActives();  
-InOut->redraw();
+LABEL_IO->redraw_label();
 
 if (!o->value())
    {
@@ -5429,7 +5428,7 @@ if (!o->value())
              
 rkr->cleanup_efx();
 
-}}
+}} selected
           xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Value_Slider Balance {
@@ -5483,7 +5482,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-Midi->redraw();}
+MIDI_LABEL->redraw_label();}
           xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Counter Midi_out_Counter {
@@ -5654,7 +5653,7 @@ Analyzer_ON=1;
           callback {rkr->Tap_Bypass = (int)o->value();
 if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
 ChangeActives();
-Tap->redraw();}
+TAP_LABEL->redraw_label();}
           xywh {525 144 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice T_SEL {
@@ -9700,52 +9699,52 @@ for(i=0; i<10; i++)
   
      case 0:
      if(value) L1->labelcolor(on); else L1->labelcolor(off);
-     L1->redraw();
+     L1->redraw_label();
      break;  
      
      case 1:
      if(value) L2->labelcolor(on); else L2->labelcolor(off);
-     L2->redraw();
+     L2->redraw_label();
      break;  
        
      case 2:
      if(value) L3->labelcolor(on); else L3->labelcolor(off);
-     L3->redraw();
+     L3->redraw_label();
      break;  
        
      case 3:
      if(value) L4->labelcolor(on); else L4->labelcolor(off);
-     L4->redraw();
+     L4->redraw_label();
      break;  
        
      case 4:
      if(value) L5->labelcolor(on); else L5->labelcolor(off);
-     L5->redraw();
+     L5->redraw_label();
      break;  
        
      case 5:
      if(value) L6->labelcolor(on); else L6->labelcolor(off);
-     L6->redraw();
+     L6->redraw_label();
      break;  
        
      case 6:
      if(value) L7->labelcolor(on); else L7->labelcolor(off);
-     L7->redraw();
+     L7->redraw_label();
      break;  
        
      case 7:
      if(value) L8->labelcolor(on); else L8->labelcolor(off);
-     L8->redraw();
+     L8->redraw_label();
      break;  
        
      case 8:
      if(value) L9->labelcolor(on); else L9->labelcolor(off);
-     L9->redraw();
+     L9->redraw_label();
      break;  
        
      case 9:
      if(value) L10->labelcolor(on); else L10->labelcolor(off);
-     L10->redraw();
+     L10->redraw_label();
      break;  
        
  }} {}

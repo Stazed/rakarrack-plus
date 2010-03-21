@@ -5038,7 +5038,7 @@ WNote->copy_label("");
 WRfreq->copy_label("");
 WNfreq->copy_label("");
 ChangeActives();
-TUNER_LABEL->redraw();
+TUNER_LABEL->redraw_label();
 }
 void RKRGUI::cb_tuner_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_tuner_activar_i(o,v);
@@ -5054,7 +5054,7 @@ input_vu->value(-50.0);
 output_vu->value(-50.0);
 
 ChangeActives();  
-InOut->redraw();
+LABEL_IO->redraw_label();
 
 if (!o->value())
    {
@@ -5113,7 +5113,7 @@ rkr->efx_MIDIConverter->panic();
 rkr->MIDIConverter_Bypass=(int)o->value();
 
 ChangeActives();
-Midi->redraw();
+MIDI_LABEL->redraw_label();
 }
 void RKRGUI::cb_nidi_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_nidi_activar_i(o,v);
@@ -5280,7 +5280,7 @@ void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tap_Bypass = (int)o->value();
 if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
 ChangeActives();
-Tap->redraw();
+TAP_LABEL->redraw_label();
 }
 void RKRGUI::cb_Tap_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
@@ -6076,10 +6076,12 @@ Fl_Double_Window* RKRGUI::make_window() {
     { L1 = new Fl_Box(2, 195, 158, 17, "label");
       L1->labelfont(1);
       L1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L1->align(FL_ALIGN_CLIP);
     } // Fl_Box* L1
     { L2 = new Fl_Box(162, 195, 158, 17, "label");
       L2->labelfont(1);
       L2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L2->align(FL_ALIGN_CLIP);
     } // Fl_Box* L2
     { L3 = new Fl_Box(322, 195, 158, 17, "label");
       L3->labelfont(1);
@@ -16444,52 +16446,52 @@ for(i=0; i<10; i++)
   
      case 0:
      if(value) L1->labelcolor(on); else L1->labelcolor(off);
-     L1->redraw();
+     L1->redraw_label();
      break;  
      
      case 1:
      if(value) L2->labelcolor(on); else L2->labelcolor(off);
-     L2->redraw();
+     L2->redraw_label();
      break;  
        
      case 2:
      if(value) L3->labelcolor(on); else L3->labelcolor(off);
-     L3->redraw();
+     L3->redraw_label();
      break;  
        
      case 3:
      if(value) L4->labelcolor(on); else L4->labelcolor(off);
-     L4->redraw();
+     L4->redraw_label();
      break;  
        
      case 4:
      if(value) L5->labelcolor(on); else L5->labelcolor(off);
-     L5->redraw();
+     L5->redraw_label();
      break;  
        
      case 5:
      if(value) L6->labelcolor(on); else L6->labelcolor(off);
-     L6->redraw();
+     L6->redraw_label();
      break;  
        
      case 6:
      if(value) L7->labelcolor(on); else L7->labelcolor(off);
-     L7->redraw();
+     L7->redraw_label();
      break;  
        
      case 7:
      if(value) L8->labelcolor(on); else L8->labelcolor(off);
-     L8->redraw();
+     L8->redraw_label();
      break;  
        
      case 8:
      if(value) L9->labelcolor(on); else L9->labelcolor(off);
-     L9->redraw();
+     L9->redraw_label();
      break;  
        
      case 9:
      if(value) L10->labelcolor(on); else L10->labelcolor(off);
-     L10->redraw();
+     L10->redraw_label();
      break;  
        
  }
