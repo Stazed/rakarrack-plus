@@ -265,8 +265,7 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {selected
-    }
+}} {}
   }
   Function {handle(int event)} {return_type int
   } {
@@ -687,11 +686,6 @@ switch (event) {
   }
   Function {draw()} {} {
     code {int X,Y,W,H;
-
-
-
-
-
 int sxx = x(), syy = y(), sww = w(), shh = h();
 int bxx = x(), byy = y(), bww = w(), bhh = h();
  
@@ -725,11 +719,9 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   int xx, S;
 
     S = int(.25*ww+.5)+1;
-    // S= 1;
- 
     int T = (horizontal() ? H : W)/2+1;
-    if (type()==FL_VERT_NICE_SLIDER || type()==FL_HOR_NICE_SLIDER) T += 12;
-    // if (S < T) S = T;
+    T += 12;
+    
    
     xx = int(val*(ww-S)+.5);
   
@@ -748,18 +740,20 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 
 
   fl_push_clip(X, Y, W, H);
- 
   back->draw(X,Y);
-    
   fl_pop_clip();
 
   Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;
  
-  if (type() == FL_VERT_NICE_SLIDER) {
-   draw_box(FL_THIN_DOWN_BOX, X+W/2-2, Y, 4, H, black);
-   } else if (type() == FL_HOR_NICE_SLIDER) {
+  if (type() == FL_VERT_NICE_SLIDER)
+   {
+    draw_box(FL_THIN_DOWN_BOX, X+W/2-2, Y, 4, H, black);
+   } 
+   else 
+   if (type() == FL_HOR_NICE_SLIDER)
+    {
      draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2, W-4, 4, black);
-  }
+    }
  
  
  //Line to the knob --- I dont like 
@@ -782,85 +776,37 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   
   juan = fl_color_average(fl_darker(leds_color),fl_lighter(leds_color),vval);
   pepe = fl_color_average(fl_lighter(leds_color),fl_darker(leds_color),vval);
-  
-  
 
  Fl_Boxtype box1 = slider();
-   
 
-  if (!box1) {box1 = (Fl_Boxtype)(box()&-2); if (!box1) box1 = FL_UP_BOX;}
-  if (type() == FL_VERT_NICE_SLIDER) {
+  if (!box1) 
+  {
+  box1 = (Fl_Boxtype)(box()&-2);
+  if (!box1) box1 = FL_UP_BOX;
+  }
+  
+  if (type() == FL_VERT_NICE_SLIDER)
+   {
      
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
     int d = (hsl-6)/2;
    
     draw_box(FL_THIN_DOWN_BOX, xsl+2, ysl+d, wsl-4, hsl-2*d,juan);
-  } else if (type() == FL_HOR_NICE_SLIDER) {
+   } 
+  else 
+   if (type() == FL_HOR_NICE_SLIDER)
+    {
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
     int d = (wsl-6)/2;
     draw_box(FL_THIN_DOWN_BOX, xsl+d, ysl+2, wsl-2*d, hsl-4,pepe);
-  } else {
-    if (wsl>0 && hsl>0) draw_box(box1, xsl, ysl, wsl, hsl, juan);
-
-
-    if (type()!=FL_HOR_FILL_SLIDER && type() != FL_VERT_FILL_SLIDER &&
-        Fl::scheme_ && !strcmp(Fl::scheme_, "gtk+")) {
- 
-
- 
-      if (W>H && wsl>(hsl+8)) {
-        // Draw horizontal grippers
-        int yy, hh;
-        hh = hsl-8;
-        xx = xsl+(wsl-hsl-4)/2;
-        yy = ysl+3;
-
-        fl_color(fl_darker(pepe));
-        fl_line(xx, yy+hh, xx+hh, yy);
-        fl_line(xx+6, yy+hh, xx+hh+6, yy);
-        fl_line(xx+12, yy+hh, xx+hh+12, yy);
-
-        xx++;
-        fl_color(fl_lighter(pepe));
-        fl_line(xx, yy+hh, xx+hh, yy);
-        fl_line(xx+6, yy+hh, xx+hh+6, yy);
-        fl_line(xx+12, yy+hh, xx+hh+12, yy);
-      } else if (H>W && hsl>(wsl+8)) {
-        // Draw vertical grippers
-        int yy;
-        xx = xsl+4;
-        ww = wsl-8;
-        yy = ysl+(hsl-wsl-4)/2;
-
-        fl_color(fl_darker(juan));
-        fl_line(xx, yy+ww, xx+ww, yy);
-        fl_line(xx, yy+ww+6, xx+ww, yy+6);
-        fl_line(xx, yy+ww+12, xx+ww, yy+12);
-
-
-
-        yy++;
-        fl_color(fl_lighter(juan));
-        fl_line(xx, yy+ww, xx+ww, yy);
-        fl_line(xx, yy+ww+6, xx+ww, yy+6);
-        fl_line(xx, yy+ww+12, xx+ww, yy+12);
-      }
     }
- 
-      
-  }
-
+  
   
   labelcolor(label_color);
- 
   draw_label(xsl, ysl, wsl, hsl);
-
-
-   
-  if (Fl::focus() == this) {
-    if (type() == FL_HOR_FILL_SLIDER || type() == FL_VERT_FILL_SLIDER) draw_focus();
-    else draw_focus(box1, xsl, ysl, wsl, hsl);
-  }
+  
+  if (Fl::focus() == this) draw_focus(box1, xsl, ysl, wsl, hsl);
+  
   
 /*  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   {
@@ -884,7 +830,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   else
   fl_color(active_r() ? textcolor(): fl_inactive(textcolor()));
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
-   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {}
+  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {selected
+    }
   }
 } 
 

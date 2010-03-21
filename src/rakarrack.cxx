@@ -44,7 +44,6 @@ double image=0.0;
 double oldimage =0.0;
 double factor = (double) ns / 64.0;
 char buf[1];
-//int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1000,1200,1500,2000,2500,3200,4000,5000,6000,8000,10000,12000,16000,20000};
 double xscale[] = {22.0,31.0, 39.0, 62.0, 79.0, 125.0, 158.0, 200.0, 251.0, 317.0, 400.0, 503.0, 634.0,800.0, 1000.0,1200.0,1500.0,2000.0,2500.0,3200.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,16000.0,20000.0};
 
 sprintf(buf," ");
@@ -642,11 +641,6 @@ switch (event) {
 
 void SliderW::draw() {
   int X,Y,W,H;
-
-
-
-
-
 int sxx = x(), syy = y(), sww = w(), shh = h();
 int bxx = x(), byy = y(), bww = w(), bhh = h();
  
@@ -680,11 +674,9 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   int xx, S;
 
     S = int(.25*ww+.5)+1;
-    // S= 1;
- 
     int T = (horizontal() ? H : W)/2+1;
-    if (type()==FL_VERT_NICE_SLIDER || type()==FL_HOR_NICE_SLIDER) T += 12;
-    // if (S < T) S = T;
+    T += 12;
+    
    
     xx = int(val*(ww-S)+.5);
   
@@ -703,18 +695,20 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 
 
   fl_push_clip(X, Y, W, H);
- 
   back->draw(X,Y);
-    
   fl_pop_clip();
 
   Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;
  
-  if (type() == FL_VERT_NICE_SLIDER) {
-   draw_box(FL_THIN_DOWN_BOX, X+W/2-2, Y, 4, H, black);
-   } else if (type() == FL_HOR_NICE_SLIDER) {
+  if (type() == FL_VERT_NICE_SLIDER)
+   {
+    draw_box(FL_THIN_DOWN_BOX, X+W/2-2, Y, 4, H, black);
+   } 
+   else 
+   if (type() == FL_HOR_NICE_SLIDER)
+    {
      draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2, W-4, 4, black);
-  }
+    }
  
  
  //Line to the knob --- I dont like 
@@ -737,85 +731,37 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   
   juan = fl_color_average(fl_darker(leds_color),fl_lighter(leds_color),vval);
   pepe = fl_color_average(fl_lighter(leds_color),fl_darker(leds_color),vval);
-  
-  
 
  Fl_Boxtype box1 = slider();
-   
 
-  if (!box1) {box1 = (Fl_Boxtype)(box()&-2); if (!box1) box1 = FL_UP_BOX;}
-  if (type() == FL_VERT_NICE_SLIDER) {
+  if (!box1) 
+  {
+  box1 = (Fl_Boxtype)(box()&-2);
+  if (!box1) box1 = FL_UP_BOX;
+  }
+  
+  if (type() == FL_VERT_NICE_SLIDER)
+   {
      
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
     int d = (hsl-6)/2;
    
     draw_box(FL_THIN_DOWN_BOX, xsl+2, ysl+d, wsl-4, hsl-2*d,juan);
-  } else if (type() == FL_HOR_NICE_SLIDER) {
+   } 
+  else 
+   if (type() == FL_HOR_NICE_SLIDER)
+    {
     draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
     int d = (wsl-6)/2;
     draw_box(FL_THIN_DOWN_BOX, xsl+d, ysl+2, wsl-2*d, hsl-4,pepe);
-  } else {
-    if (wsl>0 && hsl>0) draw_box(box1, xsl, ysl, wsl, hsl, juan);
-
-
-    if (type()!=FL_HOR_FILL_SLIDER && type() != FL_VERT_FILL_SLIDER &&
-        Fl::scheme_ && !strcmp(Fl::scheme_, "gtk+")) {
- 
-
- 
-      if (W>H && wsl>(hsl+8)) {
-        // Draw horizontal grippers
-        int yy, hh;
-        hh = hsl-8;
-        xx = xsl+(wsl-hsl-4)/2;
-        yy = ysl+3;
-
-        fl_color(fl_darker(pepe));
-        fl_line(xx, yy+hh, xx+hh, yy);
-        fl_line(xx+6, yy+hh, xx+hh+6, yy);
-        fl_line(xx+12, yy+hh, xx+hh+12, yy);
-
-        xx++;
-        fl_color(fl_lighter(pepe));
-        fl_line(xx, yy+hh, xx+hh, yy);
-        fl_line(xx+6, yy+hh, xx+hh+6, yy);
-        fl_line(xx+12, yy+hh, xx+hh+12, yy);
-      } else if (H>W && hsl>(wsl+8)) {
-        // Draw vertical grippers
-        int yy;
-        xx = xsl+4;
-        ww = wsl-8;
-        yy = ysl+(hsl-wsl-4)/2;
-
-        fl_color(fl_darker(juan));
-        fl_line(xx, yy+ww, xx+ww, yy);
-        fl_line(xx, yy+ww+6, xx+ww, yy+6);
-        fl_line(xx, yy+ww+12, xx+ww, yy+12);
-
-
-
-        yy++;
-        fl_color(fl_lighter(juan));
-        fl_line(xx, yy+ww, xx+ww, yy);
-        fl_line(xx, yy+ww+6, xx+ww, yy+6);
-        fl_line(xx, yy+ww+12, xx+ww, yy+12);
-      }
     }
- 
-      
-  }
-
+  
   
   labelcolor(label_color);
- 
   draw_label(xsl, ysl, wsl, hsl);
-
-
-   
-  if (Fl::focus() == this) {
-    if (type() == FL_HOR_FILL_SLIDER || type() == FL_VERT_FILL_SLIDER) draw_focus();
-    else draw_focus(box1, xsl, ysl, wsl, hsl);
-  }
+  
+  if (Fl::focus() == this) draw_focus(box1, xsl, ysl, wsl, hsl);
+  
   
 /*  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   {
@@ -839,7 +785,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   else
   fl_color(active_r() ? textcolor(): fl_inactive(textcolor()));
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
-   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
+  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
 }
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
