@@ -38,12 +38,14 @@ double y=0.0;
 double t=0.0;
 double nsp = 1.0 / (double) ns;
 double dsr = (double) sr;
+double udsr = 1.0 / dsr;
 double acoeff= (1.0/dsr)/(0.005+(1.0/dsr));
 double image=0.0;
 double oldimage =0.0;
 double factor = (double) ns / 64.0;
 char buf[1];
-int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1000,1200,1500,2000,2500,3200,4000,5000,6000,8000,10000,12000,16000,20000};
+//int xscale[] = {22,31, 39, 62, 79, 125, 158, 200, 251, 317, 400, 503, 634,800, 1000,1200,1500,2000,2500,3200,4000,5000,6000,8000,10000,12000,16000,20000};
+double xscale[] = {22.0,31.0, 39.0, 62.0, 79.0, 125.0, 158.0, 200.0, 251.0, 317.0, 400.0, 503.0, 634.0,800.0, 1000.0,1200.0,1500.0,2000.0,2500.0,3200.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,16000.0,20000.0};
 
 sprintf(buf," ");
 
@@ -67,7 +69,7 @@ fl_color(leds_color);
 for(i=0; i<29; i++)
 {
       y = 0.0;
-      double coeff = (double)xscale[i]/dsr;
+      double coeff = xscale[i]*udsr;
 
       for(j=0; j<ns; j++)
       {
@@ -79,12 +81,12 @@ for(i=0; i<29; i++)
        y += fabs(oldimage);
       }
        
-      y=sqrtf(y*nsp*factor);   
+      y=sqrt(y*nsp*factor);   
      
       if (y<0.0) y=0.0;
       if (y>1.0) y=1.0;     
                   
-      py = lrintf(y*scale); 
+      py = lrint(y*scale); 
             
       
       fl_color(leds_color);
@@ -189,7 +191,7 @@ for(i=0; i<ns; i++)
   
 
   px = Xl + posx;
-  py = Yl + (int) (value / 2.0 * SH);
+  py = Yl + lrint(value * .5 * SH);
    
   // printf("%d %d %d\n",i,px,py);
    
@@ -205,7 +207,7 @@ if (i>0) fl_line(old_px, old_py,px,py);
 
 
   px = Xr + posx;
-  py = Yr + (int) (value / 2.0 * SH);
+  py = Yr + lrint(value * .5 * SH);
  
 if (i>0) fl_line(oldr_px, oldr_py,px,py);
 
