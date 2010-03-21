@@ -39,12 +39,12 @@ double t=0.0;
 double nsp = 1.0 / (double) ns;
 double dsr = (double) sr;
 double udsr = 1.0 / dsr;
-double acoeff= (1.0/dsr)/(0.005+(1.0/dsr));
+double acoeff= udsr/(0.005+udsr);
 double image=0.0;
 double oldimage =0.0;
 double factor = (double) ns / 64.0;
 char buf[1];
-double xscale[] = {22.0,31.0, 39.0, 62.0, 79.0, 125.0, 158.0, 200.0, 251.0, 317.0, 400.0, 503.0, 634.0,800.0, 1000.0,1200.0,1500.0,2000.0,2500.0,3200.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,16000.0,20000.0};
+double xscale[] = {22.0,31.0,39.0,62.0,79.0,125.0,158.0,200.0,251.0,317.0,400.0,503.0,634.0,800.0,1000.0,1200.0,1500.0,2000.0,2500.0,3200.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,16000.0,20000.0};
 
 sprintf(buf," ");
 
@@ -65,7 +65,7 @@ fl_draw(buf, ox, oy, lx, ly, FL_ALIGN_CLIP ,back);
     
 fl_color(leds_color);
 
-for(i=0; i<29; i++)
+for(i=0; i<28; i++)
 {
       y = 0.0;
       double coeff = xscale[i]*udsr;
