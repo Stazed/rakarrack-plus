@@ -5075,6 +5075,93 @@ void RKRGUI::cb_rbecho_damp(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_damp_i(o,v);
 }
 
+void RKRGUI::cb_coil_activar_i(Fl_Light_Button* o, void*) {
+  rkr->CoilCrafter_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_CoilCrafter->cleanup();
+findpos(33,(int)o->value());
+}
+void RKRGUI::cb_coil_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_activar_i(o,v);
+}
+
+void RKRGUI::cb_coil_preset_i(Fl_Choice* o, void*) {
+  rkr->CoilCrafter_Bypass = 0;
+rkr->efx_CoilCrafter->setpreset((int) o->value());
+coil_WD->value(rkr->efx_CoilCrafter->getpar(0)-64);
+coil_tone->value(rkr->efx_CoilCrafter->getpar(9));
+coil_freq1->value(rkr->efx_CoilCrafter->getpar(4));
+coil_q1->value(rkr->efx_CoilCrafter->getpar(5));
+coil_freq2->value(rkr->efx_CoilCrafter->getpar(6));
+coil_q2->value(rkr->efx_CoilCrafter->getpar(7));
+coil_mode->value(rkr->efx_CoilCrafter->getpar(10));
+if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;
+}
+void RKRGUI::cb_coil_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_coil_preset[] = {
+ {"Fender Strat (old)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Strat (new)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Squire Strat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Hambucker", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson P90", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson Standard", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson Mini", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson Super L6S", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_coil_WD_i(SliderW* o, void*) {
+  rkr->efx_CoilCrafter->changepar(0,(int)o->value()+64);
+}
+void RKRGUI::cb_coil_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_WD_i(o,v);
+}
+
+void RKRGUI::cb_coil_tone_i(SliderW* o, void*) {
+  rkr->efx_CoilCrafter->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_coil_tone(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_tone_i(o,v);
+}
+
+void RKRGUI::cb_coil_freq1_i(SliderW* o, void*) {
+  rkr->efx_CoilCrafter->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_coil_freq1(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq1_i(o,v);
+}
+
+void RKRGUI::cb_coil_q1_i(SliderW* o, void*) {
+  rkr->efx_CoilCrafter->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_coil_q1(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q1_i(o,v);
+}
+
+void RKRGUI::cb_coil_freq2_i(SliderW* o, void*) {
+  rkr->efx_CoilCrafter->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_coil_freq2(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq2_i(o,v);
+}
+
+void RKRGUI::cb_coil_q2_i(SliderW* o, void*) {
+  rkr->efx_CoilCrafter->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_coil_q2(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q2_i(o,v);
+}
+
+void RKRGUI::cb_coil_mode_i(Fl_Check_Button* o, void*) {
+  rkr->efx_CoilCrafter->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_coil_mode(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_mode_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -12534,6 +12621,151 @@ R average.");
       } // SliderW* rbecho_damp
       RBECHO->end();
     } // Fl_Group* RBECHO
+    { COILCRAFTER = new Fl_Group(320, 211, 158, 184);
+      COILCRAFTER->box(FL_UP_BOX);
+      COILCRAFTER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      COILCRAFTER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      COILCRAFTER->labelfont(1);
+      COILCRAFTER->user_data((void*)(1));
+      COILCRAFTER->align(96|FL_ALIGN_INSIDE);
+      COILCRAFTER->hide();
+      { coil_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        coil_activar->shortcut(0x31);
+        coil_activar->color((Fl_Color)62);
+        coil_activar->selection_color((Fl_Color)1);
+        coil_activar->labelsize(10);
+        coil_activar->callback((Fl_Callback*)cb_coil_activar, (void*)(2));
+        coil_activar->align(68|FL_ALIGN_INSIDE);
+        coil_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* coil_activar
+      { coil_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        coil_preset->down_box(FL_BORDER_BOX);
+        coil_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        coil_preset->labelsize(10);
+        coil_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_preset->textsize(10);
+        coil_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_preset->callback((Fl_Callback*)cb_coil_preset);
+        coil_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        coil_preset->menu(menu_coil_preset);
+      } // Fl_Choice* coil_preset
+      { coil_WD = new SliderW(369, 236, 100, 10, "Gain");
+        coil_WD->type(5);
+        coil_WD->box(FL_FLAT_BOX);
+        coil_WD->color((Fl_Color)178);
+        coil_WD->selection_color((Fl_Color)62);
+        coil_WD->labeltype(FL_NORMAL_LABEL);
+        coil_WD->labelfont(0);
+        coil_WD->labelsize(10);
+        coil_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_WD->minimum(-64);
+        coil_WD->maximum(64);
+        coil_WD->step(1);
+        coil_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_WD->callback((Fl_Callback*)cb_coil_WD);
+        coil_WD->align(FL_ALIGN_LEFT);
+        coil_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* coil_WD
+      { coil_tone = new SliderW(369, 260, 100, 10, "Tone");
+        coil_tone->type(5);
+        coil_tone->box(FL_FLAT_BOX);
+        coil_tone->color((Fl_Color)178);
+        coil_tone->selection_color((Fl_Color)62);
+        coil_tone->labeltype(FL_NORMAL_LABEL);
+        coil_tone->labelfont(0);
+        coil_tone->labelsize(10);
+        coil_tone->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_tone->minimum(20);
+        coil_tone->maximum(8000);
+        coil_tone->step(1);
+        coil_tone->value(20);
+        coil_tone->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_tone->callback((Fl_Callback*)cb_coil_tone);
+        coil_tone->align(FL_ALIGN_LEFT);
+        coil_tone->when(FL_WHEN_CHANGED);
+      } // SliderW* coil_tone
+      { coil_freq1 = new SliderW(369, 280, 100, 10, "Freq1");
+        coil_freq1->type(5);
+        coil_freq1->box(FL_FLAT_BOX);
+        coil_freq1->color((Fl_Color)178);
+        coil_freq1->selection_color((Fl_Color)62);
+        coil_freq1->labeltype(FL_NORMAL_LABEL);
+        coil_freq1->labelfont(0);
+        coil_freq1->labelsize(10);
+        coil_freq1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_freq1->minimum(2600);
+        coil_freq1->maximum(5000);
+        coil_freq1->step(1);
+        coil_freq1->value(20);
+        coil_freq1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_freq1->callback((Fl_Callback*)cb_coil_freq1);
+        coil_freq1->align(FL_ALIGN_LEFT);
+        coil_freq1->when(FL_WHEN_CHANGED);
+      } // SliderW* coil_freq1
+      { coil_q1 = new SliderW(369, 296, 100, 10, "Q1");
+        coil_q1->type(5);
+        coil_q1->box(FL_FLAT_BOX);
+        coil_q1->color((Fl_Color)178);
+        coil_q1->selection_color((Fl_Color)62);
+        coil_q1->labeltype(FL_NORMAL_LABEL);
+        coil_q1->labelfont(0);
+        coil_q1->labelsize(10);
+        coil_q1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_q1->minimum(13);
+        coil_q1->maximum(63);
+        coil_q1->step(1);
+        coil_q1->value(20);
+        coil_q1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_q1->callback((Fl_Callback*)cb_coil_q1);
+        coil_q1->align(FL_ALIGN_LEFT);
+        coil_q1->when(FL_WHEN_CHANGED);
+      } // SliderW* coil_q1
+      { coil_freq2 = new SliderW(369, 313, 100, 10, "Freq2");
+        coil_freq2->type(5);
+        coil_freq2->box(FL_FLAT_BOX);
+        coil_freq2->color((Fl_Color)178);
+        coil_freq2->selection_color((Fl_Color)62);
+        coil_freq2->labeltype(FL_NORMAL_LABEL);
+        coil_freq2->labelfont(0);
+        coil_freq2->labelsize(10);
+        coil_freq2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_freq2->minimum(2600);
+        coil_freq2->maximum(5000);
+        coil_freq2->step(1);
+        coil_freq2->value(20);
+        coil_freq2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_freq2->callback((Fl_Callback*)cb_coil_freq2);
+        coil_freq2->align(FL_ALIGN_LEFT);
+        coil_freq2->when(FL_WHEN_CHANGED);
+      } // SliderW* coil_freq2
+      { coil_q2 = new SliderW(370, 330, 100, 10, "Q1");
+        coil_q2->type(5);
+        coil_q2->box(FL_FLAT_BOX);
+        coil_q2->color((Fl_Color)178);
+        coil_q2->selection_color((Fl_Color)62);
+        coil_q2->labeltype(FL_NORMAL_LABEL);
+        coil_q2->labelfont(0);
+        coil_q2->labelsize(10);
+        coil_q2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_q2->minimum(13);
+        coil_q2->maximum(63);
+        coil_q2->step(1);
+        coil_q2->value(20);
+        coil_q2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_q2->callback((Fl_Callback*)cb_coil_q2);
+        coil_q2->align(FL_ALIGN_LEFT);
+        coil_q2->when(FL_WHEN_CHANGED);
+      } // SliderW* coil_q2
+      { coil_mode = new Fl_Check_Button(333, 353, 15, 15, "Mode");
+        coil_mode->down_box(FL_BORDER_BOX);
+        coil_mode->labelsize(10);
+        coil_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_mode->callback((Fl_Callback*)cb_coil_mode, (void*)(2));
+      } // Fl_Check_Button* coil_mode
+      { coil_dis = new Fl_Box(381, 353, 89, 17);
+      } // Fl_Box* coil_dis
+      COILCRAFTER->end();
+    } // Fl_Group* COILCRAFTER
     { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -14686,6 +14918,9 @@ for (i=1; i<=t; i++)
         case 32:
         RBECHO->hide();
         break;
+        case 33:
+        COILCRAFTER->hide();
+        break;
         
         
       }
@@ -14987,6 +15222,14 @@ switch (rkr->efx_order[i])
        RBECHO->show();
        if(rkr->RBEcho_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
+
+     case 33:
+       COILCRAFTER->position(x[i],y[i]);
+       coil_activar->shortcut(s[i]);
+       COILCRAFTER->show();
+       if(rkr->CoilCrafter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
 
 
  }
@@ -16571,6 +16814,7 @@ CONVOLOTRON->image(InOut->image());
 LOOPER->image(InOut->image());
 RYANWAH->image(InOut->image());
 RBECHO->image(InOut->image());
+COILCRAFTER->image(InOut->image());
 
 
 Tap->image(InOut->image());

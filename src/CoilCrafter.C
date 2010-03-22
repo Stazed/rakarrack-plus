@@ -40,9 +40,9 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
   
   for(int i=0; i<10; i++)
   {
-    Prm[i]=0; rm[i]=0.0f;
+    rm[i]=0.0f;
   }
-  Prm[0]=1.0; Prm[2]= -1.0; Prm[4]=1.0; Prm[6]=-1.0; Prm[8]=1.0;
+  rm[0]=1.0; rm[2]= -1.0; rm[4]=1.0; rm[6]=-1.0; rm[8]=1.0;
 
 
   harm = new HarmEnhancer (rm, 2500.0f,26000.0f,1.0f);
@@ -71,6 +71,9 @@ void
 CoilCrafter::cleanup ()
 {
  harm->cleanup ();
+ harm->calcula_mag(rm);
+ harm->set_vol(0,1.0f);
+
  RB1l->cleanup();
  RB1r->cleanup();
  RB2l->cleanup();
@@ -110,7 +113,6 @@ CoilCrafter::setvolume (int value)
 {
   Pvolume = value;
   outvolume = (float)Pvolume / 127.0f;
-  harm->set_vol(0,outvolume);
 };
 
 void
@@ -127,13 +129,6 @@ CoilCrafter::sethpf (int value)
   harm->set_freqh (0,(float)value);
 };
 
-void
-CoilCrafter::sethar(int num,int value)
-{
-Prm[num]=value;
-rm[num]= (rm[num] + (float)value/64.0f)*.5f;
-harm->calcula_mag(rm);
-}
 
 void
 CoilCrafter::reinitfilter ()
@@ -151,21 +146,21 @@ CoilCrafter::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fender Strat(old)
-    {64, 1, 0, 100, 4400, 63,  4400, 21, 26000, 20, 1},
+    {32, 1, 0, 100, 4400, 63,  4400, 21, 26000, 20, 1},
     //Fender Strat(new)
-    {64, 1, 0, 100, 4200, 31, 4200, 14, 26000, 20, 1},
+    {32, 1, 0, 100, 4200, 31, 4200, 14, 26000, 20, 1},
     //Squire Strat
-    {64, 1, 0, 100, 2900, 24,  2900, 13, 26000, 20, 1},
+    {32, 1, 0, 100, 2900, 24,  2900, 13, 26000, 20, 1},
     //Fender Hambucker
-    {64, 0, 0, 0, 3000, 31,  3000, 16, 26000, 20, 0},
+    {32, 0, 0, 0, 3000, 31,  3000, 16, 26000, 20, 0},
     //GibsonP90
-    {64, 0, 0, 0, 2700, 13, 2700, 13, 26000, 20, 0},
-    //Gibson Standart
-    {64, 0, 0, 0, 3300, 13,  3300, 13, 26000, 20, 0},
+    {32, 0, 0, 0, 2700, 13, 2700, 13, 26000, 20, 0},
+    //Gibson Standard
+    {32, 0, 0, 0, 3300, 13,  3300, 13, 26000, 20, 0},
     //Gibson Mini
-    {64, 0, 0, 0, 3300, 13, 3300, 13, 26000, 20, 0},
+    {32, 0, 0, 0, 3300, 13, 3300, 13, 26000, 20, 0},
     //Gibson Super L6S
-    {64, 0, 0, 0, 2800, 13, 2800, 13, 26000, 20, 0}
+    {32, 0, 0, 0, 2800, 13, 2800, 13, 26000, 20, 0}
     
 
   };
@@ -177,6 +172,7 @@ CoilCrafter::setpreset (int npreset)
     changepar (n, presets[npreset][n]);
   Ppreset = npreset;
   cleanup ();
+
 };
 
 

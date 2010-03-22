@@ -48,7 +48,6 @@ public:
 
 private:
 
-  int Prm[10];
   int Pvolume;
   int Php1;
   int Plp1;
@@ -64,7 +63,6 @@ private:
   void setvolume (int value);
   void setlpf (int value);
   void sethpf (int value);
-  void sethar(int num, int value);
   void reinitfilter();
 
 
