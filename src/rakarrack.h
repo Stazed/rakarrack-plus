@@ -2340,6 +2340,58 @@ private:
   void cb_ryanwah_smooth_i(SliderW*, void*);
   static void cb_ryanwah_smooth(SliderW*, void*);
 public:
+  Fl_Group *RBECHO;
+  Fl_Light_Button *rbecho_activar;
+private:
+  void cb_rbecho_activar_i(Fl_Light_Button*, void*);
+  static void cb_rbecho_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *rbecho_preset;
+private:
+  void cb_rbecho_preset_i(Fl_Choice*, void*);
+  static void cb_rbecho_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_rbecho_preset[];
+public:
+  SliderW *rbecho_WD;
+private:
+  void cb_rbecho_WD_i(SliderW*, void*);
+  static void cb_rbecho_WD(SliderW*, void*);
+public:
+  SliderW *rbecho_RV;
+private:
+  void cb_rbecho_RV_i(SliderW*, void*);
+  static void cb_rbecho_RV(SliderW*, void*);
+public:
+  SliderW *rbecho_pan;
+private:
+  void cb_rbecho_pan_i(SliderW*, void*);
+  static void cb_rbecho_pan(SliderW*, void*);
+public:
+  SliderW *rbecho_delay;
+private:
+  void cb_rbecho_delay_i(SliderW*, void*);
+  static void cb_rbecho_delay(SliderW*, void*);
+public:
+  SliderW *rbecho_LRdl;
+private:
+  void cb_rbecho_LRdl_i(SliderW*, void*);
+  static void cb_rbecho_LRdl(SliderW*, void*);
+public:
+  SliderW *rbecho_LRc;
+private:
+  void cb_rbecho_LRc_i(SliderW*, void*);
+  static void cb_rbecho_LRc(SliderW*, void*);
+public:
+  SliderW *rbecho_fb;
+private:
+  void cb_rbecho_fb_i(SliderW*, void*);
+  static void cb_rbecho_fb(SliderW*, void*);
+public:
+  SliderW *rbecho_damp;
+private:
+  void cb_rbecho_damp_i(SliderW*, void*);
+  static void cb_rbecho_damp(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

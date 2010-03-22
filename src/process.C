@@ -165,7 +165,7 @@ RKR::RKR ()
   efx_Convol = new Convolotron(efxoutl,efxoutr);
   efx_Looper = new Looper(efxoutl,efxoutr,looper_size);
   efx_RyanWah = new RyanWah(efxoutl,efxoutr);
-
+  efx_RBEcho = new RBEcho(efxoutl,efxoutr);
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
 
@@ -192,7 +192,7 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 32;
+  NumEffects = 33;
 
   {
     static const char *los_names[] =
@@ -201,7 +201,7 @@ RKR::RKR ()
       "Cabinet", "Pan", "Harmonizer", "MusicalDelay", "NoiseGate", "Derelict",
       "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",  "DistBand", 
       "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", 
-      "Looper", "MuTroMojo"
+      "Looper", "MuTroMojo", "RBEcho"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -1316,6 +1316,17 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                   efx_RyanWah->out(efxoutl, efxoutr);
 		  Vol_Efx(31,efx_RyanWah->outvolume);
                 }
+
+	     case 32:
+              if (RBEcho_Bypass)
+                {
+                  efx_RBEcho->out(efxoutl, efxoutr);
+		  Vol_Efx(32,efx_RBEcho->outvolume);
+                }
+
+
+
+
               break;  
 
 

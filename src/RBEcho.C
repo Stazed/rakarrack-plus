@@ -1,7 +1,7 @@
 /*
   ZynAddSubFX - a software synthesizer
  
-  Echo.C - Echo effect
+  RBEcho.C - Echo effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
@@ -26,9 +26,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "Echo.h"
+#include "RBEcho.h"
 
-Echo::Echo (float * efxoutl_, float * efxoutr_)
+RBEcho::RBEcho (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -48,7 +48,6 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
   lrdelay = 0;
   Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
   maxx_delay = SAMPLE_RATE * MAX_DELAY;
-  fade = SAMPLE_RATE / 5;    //1/5 SR fade time available
 
   ldelay = new float[maxx_delay];  
   rdelay = new float[maxx_delay];
@@ -57,7 +56,7 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
   cleanup ();
 };
 
-Echo::~Echo ()
+RBEcho::~RBEcho ()
 {
   delete[]ldelay;
   delete[]rdelay;
@@ -67,7 +66,7 @@ Echo::~Echo ()
  * Cleanup the effect
  */
 void
-Echo::cleanup ()
+RBEcho::cleanup ()
 {
   int i;
   for (i = 0; i < maxx_delay; i++)
@@ -83,7 +82,7 @@ Echo::cleanup ()
  * Initialize the delays
  */
 void
-Echo::initdelays ()
+RBEcho::initdelays ()
 {
   kl = 0;
   kr = 0;
@@ -97,7 +96,7 @@ Echo::initdelays ()
 
   rvkl = dl - 1;
   rvkr = dr - 1;
-  Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
+  Srate_Attack_Coeff = 15.0f * cSAMPLE_RATE;   // Set swell time to 66ms of average delay time 
 
 
   cleanup ();
@@ -107,10 +106,11 @@ Echo::initdelays ()
  * Effect output
  */
 void
-Echo::out (float * smpsl, float * smpsr)
+RBEcho::out (float * smpsl, float * smpsr)
 {
   int i;
   float l, r, ldl, rdl, rswell, lswell;
+  
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -121,42 +121,9 @@ Echo::out (float * smpsl, float * smpsr)
       ldl = l;
       rdl = r;
 
-
       ldl = smpsl[i] * panning - ldl * fb;
       rdl = smpsr[i] * (1.0f - panning) - rdl * fb;
-      
-      if(reverse > 0.0)
-      {
 
-      lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
-	      if (lswell <= PI) 
-	      {
-	      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
-	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell + ldelay[rvfl] * (1.0f - lswell))  + (ldl * (1-reverse));   //Volume ducking near zero crossing.     
-	      }  
-	      else
-	      {
-	      efxoutl[i] = (ldelay[rvkl] * reverse)  + (ldl * (1-reverse));        
-	      }
-       
-      rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
-	      if (rswell <= PI)
-	      {
-	       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
-	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell + rdelay[rvfr] * (1.0f - rswell))  + (rdl * (1-reverse));  //Volume ducking near zero crossing.
-	      }
-	      else
-	      {
-	      efxoutr[i] = (rdelay[rvkr] * reverse)  + (rdl * (1-reverse));
-	      }
-      
-
-      }
-      else
-      {
-      efxoutl[i]= ldl;
-      efxoutr[i]= rdl;
-      }
       
       
       //LowPass Filter
@@ -172,14 +139,43 @@ Echo::out (float * smpsl, float * smpsr)
 	kr = 0;
       rvkl = dl - 1 - kl;
       rvkr = dr - 1 - kr;
+
+          
+      if(reverse > 0.0f)
+      {
+
+      lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
+	      if (lswell <= PI) 
+	      {
+	      lswell = (1.0f - cosf(lswell));  //Clickless transition
+	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell)  + (ldelay[kl] * (1-reverse));   //Volume ducking near zero crossing.     
+	      }  
+	      else
+	      {
+	      efxoutl[i] = 2.0f * ((ldelay[rvkl] * reverse)  + (ldelay[kl] * (1-reverse)));        
+	      }
+       
+      rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
+	      if (rswell <= PI)
+	      {
+	       rswell = (1.0f - cosf(rswell));   //Clickless transition 
+	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell)  + (rdelay[kr] * (1-reverse));  //Volume ducking near zero crossing.
+	      }
+	      else
+	      {
+	      efxoutr[i] = 2.0f * ((rdelay[rvkr] * reverse)  + (rdelay[kr] * (1-reverse)));
+	      }
       
-      rvfl = dl + fade - kl;
-      rvfr = dr + fade - kr;
-      //Safety checks to avoid addressing data outside of buffer
-      if (rvfl > dl) rvfl = rvfl - dl;  
-      if (rvfl < 0) rvfl = 0;    
-      if (rvfr > dr) rvfr = rvfr - dr;
-      if (rvfr < 0) rvfr = 0;       
+
+      }
+      else
+      {
+      efxoutl[i]= 2.0f * ldelay[kl];
+      efxoutr[i]= 2.0f * rdelay[kr];
+      }      
+
+
+            
     };
 
 };
@@ -189,7 +185,7 @@ Echo::out (float * smpsl, float * smpsr)
  * Parameter control
  */
 void
-Echo::setvolume (int Pvolume)
+RBEcho::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   volume = outvolume = (float)Pvolume / 127.0f;
@@ -199,21 +195,21 @@ Echo::setvolume (int Pvolume)
 };
 
 void
-Echo::setpanning (int Ppanning)
+RBEcho::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + 0.5f) / 127.0f;
 };
 
 void
-Echo::setreverse (int Preverse)
+RBEcho::setreverse (int Preverse)
 {
   this->Preverse = Preverse;
   reverse = (float) Preverse / 127.0f;
 };
 
 void
-Echo::setdelay (int Pdelay)
+RBEcho::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
   delay=Pdelay;
@@ -225,7 +221,7 @@ Echo::setdelay (int Pdelay)
 };
 
 void
-Echo::setlrdelay (int Plrdelay)
+RBEcho::setlrdelay (int Plrdelay)
 {
   float tmp;
   this->Plrdelay = Plrdelay;
@@ -239,28 +235,28 @@ Echo::setlrdelay (int Plrdelay)
 };
 
 void
-Echo::setlrcross (int Plrcross)
+RBEcho::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
   lrcross = (float)Plrcross / 127.0f * 1.0f;
 };
 
 void
-Echo::setfb (int Pfb)
+RBEcho::setfb (int Pfb)
 {
   this->Pfb = Pfb;
   fb = (float)Pfb / 128.0f;
 };
 
 void
-Echo::sethidamp (int Phidamp)
+RBEcho::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
   hidamp = 1.0f - (float)Phidamp / 127.0f;
 };
 
 void
-Echo::setpreset (int npreset)
+RBEcho::setpreset (int npreset)
 {
   const int PRESET_SIZE = 8;
   const int NUM_PRESETS = 9;
@@ -295,7 +291,7 @@ Echo::setpreset (int npreset)
 
 
 void
-Echo::changepar (int npar, int value)
+RBEcho::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -328,7 +324,7 @@ Echo::changepar (int npar, int value)
 };
 
 int
-Echo::getpar (int npar)
+RBEcho::getpar (int npar)
 {
   switch (npar)
     {

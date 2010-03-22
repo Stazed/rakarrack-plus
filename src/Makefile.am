@@ -36,6 +36,7 @@ rakarrack_SOURCES = main.C \
 	Phaser.h \
 	rakarrack.h \
 	RBFilter.h \
+	RBEcho.h \
 	RecChord.h \
 	RecognizeNote.h \
 	Resample.h \
@@ -97,6 +98,7 @@ rakarrack_SOURCES = main.C \
 	Resample.C \
 	Looper.C \
 	RyanWah.C \
+	RBEcho.C \
 	MIDIConverter.C
 	
 	

@@ -24,16 +24,16 @@
 
 */
 
-#ifndef ECHO_H
-#define ECHO_H
+#ifndef RBECHO_H
+#define RBECHO_H
 
 #include "global.h"
 
-class Echo
+class RBEcho
 {
 public:
-  Echo (float * efxoutl_, float * efxoutr_);
-  ~Echo ();
+  RBEcho (float * efxoutl_, float * efxoutr_);
+  ~RBEcho ();
   void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
@@ -77,7 +77,7 @@ private:
   void initdelays ();
   float *ldelay, *rdelay;
   float oldl, oldr;		//pt. lpf
-  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
+  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay;
   float  Srate_Attack_Coeff;
 };
 

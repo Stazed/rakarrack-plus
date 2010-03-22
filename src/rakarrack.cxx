@@ -4979,6 +4979,102 @@ void RKRGUI::cb_ryanwah_smooth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ryanwah_smooth_i(o,v);
 }
 
+void RKRGUI::cb_rbecho_activar_i(Fl_Light_Button* o, void*) {
+  rkr->RBEcho_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_RBEcho->cleanup();
+findpos(32,(int)o->value());
+}
+void RKRGUI::cb_rbecho_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_activar_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_preset_i(Fl_Choice* o, void*) {
+  rkr->RBEcho_Bypass=0;
+rkr->efx_RBEcho->setpreset((int) o->value());
+rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
+rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
+rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
+rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
+rbecho_LRc->value(rkr->efx_RBEcho->getpar(4)-64);
+rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
+rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
+rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
+if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;
+}
+void RKRGUI::cb_rbecho_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_rbecho_preset[] = {
+ {"Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Simple Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Canyon", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Panning Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Feedback Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_rbecho_WD_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_rbecho_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_WD_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_RV_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_rbecho_RV(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_RV_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_pan_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(1,(int)(o->value()+64));
+}
+void RKRGUI::cb_rbecho_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_pan_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_delay_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_rbecho_delay(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_delay_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_LRdl_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_rbecho_LRdl(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_LRdl_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_LRc_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));
+}
+void RKRGUI::cb_rbecho_LRc(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_LRc_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_fb_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_rbecho_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_fb_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_damp_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_rbecho_damp(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_damp_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -12241,6 +12337,169 @@ R average.");
       } // SliderW* ryanwah_smooth
       RYANWAH->end();
     } // Fl_Group* RYANWAH
+    { RBECHO = new Fl_Group(320, 211, 158, 184);
+      RBECHO->box(FL_UP_BOX);
+      RBECHO->color((Fl_Color)FL_FOREGROUND_COLOR);
+      RBECHO->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      RBECHO->labelfont(1);
+      RBECHO->user_data((void*)(1));
+      RBECHO->align(96|FL_ALIGN_INSIDE);
+      RBECHO->hide();
+      { rbecho_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        rbecho_activar->shortcut(0x35);
+        rbecho_activar->color((Fl_Color)62);
+        rbecho_activar->selection_color((Fl_Color)1);
+        rbecho_activar->labelsize(10);
+        rbecho_activar->callback((Fl_Callback*)cb_rbecho_activar, (void*)(2));
+        rbecho_activar->align(68|FL_ALIGN_INSIDE);
+        rbecho_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* rbecho_activar
+      { rbecho_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        rbecho_preset->down_box(FL_BORDER_BOX);
+        rbecho_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        rbecho_preset->labelsize(10);
+        rbecho_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_preset->textsize(10);
+        rbecho_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_preset->callback((Fl_Callback*)cb_rbecho_preset);
+        rbecho_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        rbecho_preset->menu(menu_rbecho_preset);
+      } // Fl_Choice* rbecho_preset
+      { rbecho_WD = new SliderW(371, 246, 100, 10, "Wet/Dry");
+        rbecho_WD->type(5);
+        rbecho_WD->box(FL_FLAT_BOX);
+        rbecho_WD->color((Fl_Color)178);
+        rbecho_WD->selection_color((Fl_Color)62);
+        rbecho_WD->labeltype(FL_NORMAL_LABEL);
+        rbecho_WD->labelfont(0);
+        rbecho_WD->labelsize(10);
+        rbecho_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_WD->minimum(-64);
+        rbecho_WD->maximum(63);
+        rbecho_WD->step(1);
+        rbecho_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_WD->callback((Fl_Callback*)cb_rbecho_WD);
+        rbecho_WD->align(FL_ALIGN_LEFT);
+        rbecho_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* rbecho_WD
+      { rbecho_RV = new SliderW(371, 269, 100, 10, "Reverse");
+        rbecho_RV->type(5);
+        rbecho_RV->box(FL_FLAT_BOX);
+        rbecho_RV->color((Fl_Color)178);
+        rbecho_RV->selection_color((Fl_Color)62);
+        rbecho_RV->labeltype(FL_NORMAL_LABEL);
+        rbecho_RV->labelfont(0);
+        rbecho_RV->labelsize(10);
+        rbecho_RV->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_RV->maximum(127);
+        rbecho_RV->step(1);
+        rbecho_RV->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_RV->callback((Fl_Callback*)cb_rbecho_RV);
+        rbecho_RV->align(FL_ALIGN_LEFT);
+        rbecho_RV->when(FL_WHEN_CHANGED);
+      } // SliderW* rbecho_RV
+      { rbecho_pan = new SliderW(371, 284, 100, 10, "Pan");
+        rbecho_pan->type(5);
+        rbecho_pan->box(FL_FLAT_BOX);
+        rbecho_pan->color((Fl_Color)178);
+        rbecho_pan->selection_color((Fl_Color)62);
+        rbecho_pan->labeltype(FL_NORMAL_LABEL);
+        rbecho_pan->labelfont(0);
+        rbecho_pan->labelsize(10);
+        rbecho_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_pan->minimum(-64);
+        rbecho_pan->maximum(63);
+        rbecho_pan->step(1);
+        rbecho_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_pan->callback((Fl_Callback*)cb_rbecho_pan);
+        rbecho_pan->align(FL_ALIGN_LEFT);
+        rbecho_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* rbecho_pan
+      { rbecho_delay = new SliderW(371, 299, 100, 10, "Delay");
+        rbecho_delay->type(5);
+        rbecho_delay->box(FL_FLAT_BOX);
+        rbecho_delay->color((Fl_Color)178);
+        rbecho_delay->selection_color((Fl_Color)62);
+        rbecho_delay->labeltype(FL_NORMAL_LABEL);
+        rbecho_delay->labelfont(0);
+        rbecho_delay->labelsize(10);
+        rbecho_delay->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_delay->minimum(20);
+        rbecho_delay->maximum(2000);
+        rbecho_delay->step(1);
+        rbecho_delay->value(20);
+        rbecho_delay->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_delay->callback((Fl_Callback*)cb_rbecho_delay);
+        rbecho_delay->align(FL_ALIGN_LEFT);
+        rbecho_delay->when(FL_WHEN_RELEASE);
+      } // SliderW* rbecho_delay
+      { rbecho_LRdl = new SliderW(371, 314, 100, 10, "LRdl.");
+        rbecho_LRdl->type(5);
+        rbecho_LRdl->box(FL_FLAT_BOX);
+        rbecho_LRdl->color((Fl_Color)178);
+        rbecho_LRdl->selection_color((Fl_Color)62);
+        rbecho_LRdl->labeltype(FL_NORMAL_LABEL);
+        rbecho_LRdl->labelfont(0);
+        rbecho_LRdl->labelsize(10);
+        rbecho_LRdl->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_LRdl->maximum(127);
+        rbecho_LRdl->step(1);
+        rbecho_LRdl->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_LRdl->callback((Fl_Callback*)cb_rbecho_LRdl);
+        rbecho_LRdl->align(FL_ALIGN_LEFT);
+        rbecho_LRdl->when(FL_WHEN_RELEASE);
+      } // SliderW* rbecho_LRdl
+      { rbecho_LRc = new SliderW(371, 329, 100, 10, "L/R.Cr");
+        rbecho_LRc->type(5);
+        rbecho_LRc->box(FL_FLAT_BOX);
+        rbecho_LRc->color((Fl_Color)178);
+        rbecho_LRc->selection_color((Fl_Color)62);
+        rbecho_LRc->labeltype(FL_NORMAL_LABEL);
+        rbecho_LRc->labelfont(0);
+        rbecho_LRc->labelsize(10);
+        rbecho_LRc->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_LRc->minimum(-64);
+        rbecho_LRc->maximum(63);
+        rbecho_LRc->step(1);
+        rbecho_LRc->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_LRc->callback((Fl_Callback*)cb_rbecho_LRc);
+        rbecho_LRc->align(FL_ALIGN_LEFT);
+        rbecho_LRc->when(FL_WHEN_CHANGED);
+      } // SliderW* rbecho_LRc
+      { rbecho_fb = new SliderW(371, 344, 100, 10, "Fb.");
+        rbecho_fb->type(5);
+        rbecho_fb->box(FL_FLAT_BOX);
+        rbecho_fb->color((Fl_Color)178);
+        rbecho_fb->selection_color((Fl_Color)62);
+        rbecho_fb->labeltype(FL_NORMAL_LABEL);
+        rbecho_fb->labelfont(0);
+        rbecho_fb->labelsize(10);
+        rbecho_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_fb->maximum(127);
+        rbecho_fb->step(1);
+        rbecho_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_fb->callback((Fl_Callback*)cb_rbecho_fb);
+        rbecho_fb->align(FL_ALIGN_LEFT);
+        rbecho_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* rbecho_fb
+      { rbecho_damp = new SliderW(371, 378, 100, 10, "Damp");
+        rbecho_damp->type(5);
+        rbecho_damp->box(FL_FLAT_BOX);
+        rbecho_damp->color((Fl_Color)178);
+        rbecho_damp->selection_color((Fl_Color)62);
+        rbecho_damp->labeltype(FL_NORMAL_LABEL);
+        rbecho_damp->labelfont(0);
+        rbecho_damp->labelsize(10);
+        rbecho_damp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_damp->maximum(127);
+        rbecho_damp->step(1);
+        rbecho_damp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_damp->callback((Fl_Callback*)cb_rbecho_damp);
+        rbecho_damp->align(FL_ALIGN_LEFT);
+        rbecho_damp->when(FL_WHEN_CHANGED);
+      } // SliderW* rbecho_damp
+      RBECHO->end();
+    } // Fl_Group* RBECHO
     { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -14384,6 +14643,9 @@ for (i=1; i<=t; i++)
         case 31:
         RYANWAH->hide();
         break;
+        case 32:
+        RBECHO->hide();
+        break;
         
         
       }
@@ -14677,6 +14939,13 @@ switch (rkr->efx_order[i])
        ryanwah_activar->shortcut(s[i]);
        RYANWAH->show();
        if(rkr->RyanWah_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+     case 32:
+       RBECHO->position(x[i],y[i]);
+       rbecho_activar->shortcut(s[i]);
+       RBECHO->show();
+       if(rkr->RBEcho_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -16261,11 +16530,10 @@ MBVVOL->image(InOut->image());
 CONVOLOTRON->image(InOut->image());
 LOOPER->image(InOut->image());
 RYANWAH->image(InOut->image());
+RBECHO->image(InOut->image());
+
+
 Tap->image(InOut->image());
-
-
-
-
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
