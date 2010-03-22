@@ -1,5 +1,8 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- MIDI learn improved.
+- Removed unused code.
+- Added Effect RBEcho
 - Harmonizer improved.
 - Fixed CPU usage updating GUI.
 - Added Tap Tempo

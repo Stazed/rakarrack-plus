@@ -2818,6 +2818,11 @@ private:
   void cb_Assign_i(Fl_Button*, void*);
   static void cb_Assign(Fl_Button*, void*);
 public:
+  Fl_Button *AssignA;
+private:
+  void cb_AssignA_i(Fl_Button*, void*);
+  static void cb_AssignA(Fl_Button*, void*);
+public:
   Fl_Button *CancelRec;
 private:
   void cb_CancelRec_i(Fl_Button*, void*);

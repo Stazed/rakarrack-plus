@@ -5988,6 +5988,32 @@ void RKRGUI::cb_Assign(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Assign_i(o,v);
 }
 
+void RKRGUI::cb_AssignA_i(Fl_Button*, void*) {
+  int i,j;
+
+for(j=1;j<61;j++)
+
+{
+for(i=0;i<20;i++)
+
+ {
+    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == rkr->efx_params[(int)Epar->value()-1].Ato) break;
+
+    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
+       {
+         rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=rkr->efx_params[(int)Epar->value()-1].Ato;
+         break;
+        }
+ }
+ 
+} 
+
+Assign->do_callback();
+}
+void RKRGUI::cb_AssignA(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_AssignA_i(o,v);
+}
+
 void RKRGUI::cb_CancelRec_i(Fl_Button*, void*) {
   rkr->RControl = 0;
 GMM->color(fore_color);
@@ -13324,9 +13350,12 @@ R average.");
     { ClearP = new Fl_Button(245, 285, 150, 30, "Clear Preset");
       ClearP->callback((Fl_Callback*)cb_ClearP);
     } // Fl_Button* ClearP
-    { Assign = new Fl_Button(10, 20, 150, 30, "Assign");
+    { Assign = new Fl_Button(112, 20, 98, 30, "Assign");
       Assign->callback((Fl_Callback*)cb_Assign);
     } // Fl_Button* Assign
+    { AssignA = new Fl_Button(10, 20, 98, 30, "Assign to All");
+      AssignA->callback((Fl_Callback*)cb_AssignA);
+    } // Fl_Button* AssignA
     { CancelRec = new Fl_Button(10, 445, 135, 30, "Cancel");
       CancelRec->callback((Fl_Callback*)cb_CancelRec);
     } // Fl_Button* CancelRec
