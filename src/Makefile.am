@@ -5,6 +5,7 @@ rakarrack_SOURCES = main.C \
 	APhaser.h \
 	Arpie.h \
 	Chorus.h \
+	CoilCrafter.h \
 	Compressor.h \
 	config.h \
 	Convolotron.h \
@@ -99,6 +100,7 @@ rakarrack_SOURCES = main.C \
 	Looper.C \
 	RyanWah.C \
 	RBEcho.C \
+	CoilCrafter.C \
 	MIDIConverter.C
 	
 	

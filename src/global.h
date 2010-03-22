@@ -131,6 +131,7 @@
 #include "Looper.h"
 #include "RyanWah.h"
 #include "RBEcho.h"
+#include "CoilCrafter.h"
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -255,6 +256,7 @@ public:
   class Looper *efx_Looper;
   class RyanWah *efx_RyanWah;
   class RBEcho *efx_RBEcho;
+  class CoilCrafter *efx_CoilCrafter;
 
   jack_client_t *jackclient;
   jack_options_t options;
@@ -299,6 +301,7 @@ public:
   int Looper_Bypass;
   int RyanWah_Bypass;
   int RBEcho_Bypass;
+  int CoilCrafter_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -333,6 +336,7 @@ public:
   int Looper_B;
   int RyanWah_B;
   int RBEcho_B;
+  int CoilCrafter_B;
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];
