@@ -6326,7 +6326,7 @@ strcpy(rkr->BankFilename,filename);}
     Fl_Window MIDILearn {
       callback {save_stat(5);
 MIDILearn->hide();}
-      xywh {1289 277 640 480} type Double hide
+      xywh {305 260 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
@@ -6467,11 +6467,6 @@ for(i=0;i<20;i++)
 DisAssigns();}
         xywh {10 20 150 30}
       }
-      Fl_Button CloseML {
-        label Close
-        callback {MIDILearn->do_callback();}
-        xywh {480 445 150 30}
-      }
       Fl_Button CancelRec {
         label Cancel
         callback {rkr->RControl = 0;
@@ -6481,6 +6476,17 @@ GMM->redraw();}
       }
       Fl_Value_Input Disp_Control {
         xywh {155 410 45 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
+      }
+      Fl_Button CopyTAll {
+        label {Copy to All}
+        callback {int i;
+for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));} selected
+        xywh {480 412 150 30}
+      }
+      Fl_Button CloseML {
+        label Close
+        callback {MIDILearn->do_callback();}
+        xywh {480 445 150 30}
       }
     }
     Fl_Window AboutWin {
@@ -9662,8 +9668,7 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;

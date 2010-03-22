@@ -5988,13 +5988,6 @@ void RKRGUI::cb_Assign(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Assign_i(o,v);
 }
 
-void RKRGUI::cb_CloseML_i(Fl_Button*, void*) {
-  MIDILearn->do_callback();
-}
-void RKRGUI::cb_CloseML(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_CloseML_i(o,v);
-}
-
 void RKRGUI::cb_CancelRec_i(Fl_Button*, void*) {
   rkr->RControl = 0;
 GMM->color(fore_color);
@@ -6002,6 +5995,21 @@ GMM->redraw();
 }
 void RKRGUI::cb_CancelRec(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_CancelRec_i(o,v);
+}
+
+void RKRGUI::cb_CopyTAll_i(Fl_Button*, void*) {
+  int i;
+for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));
+}
+void RKRGUI::cb_CopyTAll(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_CopyTAll_i(o,v);
+}
+
+void RKRGUI::cb_CloseML_i(Fl_Button*, void*) {
+  MIDILearn->do_callback();
+}
+void RKRGUI::cb_CloseML(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_CloseML_i(o,v);
 }
 
 void RKRGUI::cb_AboutWin_i(Fl_Double_Window*, void*) {
@@ -13319,9 +13327,6 @@ R average.");
     { Assign = new Fl_Button(10, 20, 150, 30, "Assign");
       Assign->callback((Fl_Callback*)cb_Assign);
     } // Fl_Button* Assign
-    { CloseML = new Fl_Button(480, 445, 150, 30, "Close");
-      CloseML->callback((Fl_Callback*)cb_CloseML);
-    } // Fl_Button* CloseML
     { CancelRec = new Fl_Button(10, 445, 135, 30, "Cancel");
       CancelRec->callback((Fl_Callback*)cb_CancelRec);
     } // Fl_Button* CancelRec
@@ -13332,6 +13337,12 @@ R average.");
       Disp_Control->value(1);
       Disp_Control->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Value_Input* Disp_Control
+    { CopyTAll = new Fl_Button(480, 412, 150, 30, "Copy to All");
+      CopyTAll->callback((Fl_Callback*)cb_CopyTAll);
+    } // Fl_Button* CopyTAll
+    { CloseML = new Fl_Button(480, 445, 150, 30, "Close");
+      CloseML->callback((Fl_Callback*)cb_CloseML);
+    } // Fl_Button* CloseML
     MIDILearn->end();
   } // Fl_Double_Window* MIDILearn
   { AboutWin = new Fl_Double_Window(375, 235, "About Rakarrack");

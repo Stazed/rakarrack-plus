@@ -2818,17 +2818,22 @@ private:
   void cb_Assign_i(Fl_Button*, void*);
   static void cb_Assign(Fl_Button*, void*);
 public:
-  Fl_Button *CloseML;
-private:
-  void cb_CloseML_i(Fl_Button*, void*);
-  static void cb_CloseML(Fl_Button*, void*);
-public:
   Fl_Button *CancelRec;
 private:
   void cb_CancelRec_i(Fl_Button*, void*);
   static void cb_CancelRec(Fl_Button*, void*);
 public:
   Fl_Value_Input *Disp_Control;
+  Fl_Button *CopyTAll;
+private:
+  void cb_CopyTAll_i(Fl_Button*, void*);
+  static void cb_CopyTAll(Fl_Button*, void*);
+public:
+  Fl_Button *CloseML;
+private:
+  void cb_CloseML_i(Fl_Button*, void*);
+  static void cb_CloseML(Fl_Button*, void*);
+public:
   Fl_Double_Window *AboutWin;
 private:
   void cb_AboutWin_i(Fl_Double_Window*, void*);
