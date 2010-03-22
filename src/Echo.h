@@ -77,7 +77,7 @@ private:
   void initdelays ();
   float *ldelay, *rdelay;
   float oldl, oldr;		//pt. lpf
-  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
+  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay;
   float  Srate_Attack_Coeff;
 };
 
