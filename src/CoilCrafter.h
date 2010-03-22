@@ -55,9 +55,6 @@ private:
   int Pbp1;
   int Pq1;
   int Pfreq1;
-  int Php2;
-  int Plp2;
-  int Pbp2;
   int Pq2;
   int Pfreq2;
   int Pmode;
@@ -68,7 +65,7 @@ private:
   void setlpf (int value);
   void sethpf (int value);
   void sethar(int num, int value);
-  void reinitfilter(int value);
+  void reinitfilter();
 
 
   float rm[10];
@@ -76,7 +73,6 @@ private:
   class RBFilter *RB1l, *RB1r, *RB2l, *RB2r;
   float freq1,q1,freq2,q2; 
   float lpmix1,hpmix1,bpmix1;
-  float lpmix2,hpmix2,bpmix2;
 
 };
 

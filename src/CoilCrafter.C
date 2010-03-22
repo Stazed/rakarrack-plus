@@ -47,8 +47,8 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
 
   harm = new HarmEnhancer (rm, 2500.0f,26000.0f,1.0f);
 
-  RB1l =  new RBFilter(0,2000.0f,2.1f,1);
-  RB1r =  new RBFilter(0,2000.0f,2.1f,1);
+  RB1l =  new RBFilter(1,2000.0f,2.1f,1);
+  RB1r =  new RBFilter(1,2000.0f,2.1f,1);
   RB2l =  new RBFilter(0,2000.0f,2.1f,1);
   RB2r =  new RBFilter(0,2000.0f,2.1f,1);
    
@@ -136,19 +136,10 @@ harm->calcula_mag(rm);
 }
 
 void
-CoilCrafter::reinitfilter (int value)
-{
-
-if(value<2)
+CoilCrafter::reinitfilter ()
 {
   RB1l->setmix(1, lpmix1, bpmix1, hpmix1);
   RB1r->setmix(1, lpmix1, bpmix1, hpmix1);
-}
-if(value<3)
-{
-  RB2l->setmix(1, lpmix2, bpmix2, hpmix2);
-  RB2r->setmix(1, lpmix2, bpmix2, hpmix2);
-}
   
 };
 
@@ -156,25 +147,25 @@ if(value<3)
 void
 CoilCrafter::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 14;
+  const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fender Strat(old)
-    {64, 1, 0, 100, 4400, 63, 0, 0, 0, 4400, 21, 26000, 20, 1},
+    {64, 1, 0, 100, 4400, 63,  4400, 21, 26000, 20, 1},
     //Fender Strat(new)
-    {64, 1, 0, 100, 4200, 31, 0, 0, 0, 4200, 14, 26000, 20, 1},
+    {64, 1, 0, 100, 4200, 31, 4200, 14, 26000, 20, 1},
     //Squire Strat
-    {64, 1, 0, 100, 0, 0, 0, 0, 0, 2900, 13, 26000, 20, 1},
+    {64, 1, 0, 100, 2900, 24,  2900, 13, 26000, 20, 1},
     //Fender Hambucker
-    {64, 1, 0, 100, 0, 0, 0, 0, 0, 3000, 16, 26000, 20, 0},
+    {64, 0, 0, 0, 3000, 31,  3000, 16, 26000, 20, 0},
     //GibsonP90
-    {64, 0, 0, 0, 0, 0, 0, 0, 0, 2700, 13, 26000, 20, 0},
+    {64, 0, 0, 0, 2700, 13, 2700, 13, 26000, 20, 0},
     //Gibson Standart
-    {64, 0, 0, 0, 0, 0, 0, 0, 0, 3300, 13, 26000, 20, 0},
+    {64, 0, 0, 0, 3300, 13,  3300, 13, 26000, 20, 0},
     //Gibson Mini
-    {64, 0, 0, 0, 0, 0, 0, 0, 0, 3300, 13, 26000, 20, 0},
+    {64, 0, 0, 0, 3300, 13, 3300, 13, 26000, 20, 0},
     //Gibson Super L6S
-    {64, 0, 0, 0, 0, 0, 0, 0, 0, 2800, 13, 26000, 20, 0}
+    {64, 0, 0, 0, 2800, 13, 2800, 13, 26000, 20, 0}
     
 
   };
@@ -200,17 +191,17 @@ CoilCrafter::changepar (int npar, int value)
      case 1:
       Plp1 = value;
       lpmix1 = ((float) Plp1)/32.0f;
-      reinitfilter (1);     
+      reinitfilter ();     
       break;     
      case 2:
       Pbp1 = value;
       bpmix1 = ((float) Pbp1)/32.0f;
-      reinitfilter (1);
+      reinitfilter ();
       break;     
      case 3:
       Php1 = value;
       hpmix1 = ((float) Php1)/32.0f;
-      reinitfilter (1); 
+      reinitfilter (); 
       break;
      case 4: 
       Pfreq1 = value;
@@ -224,40 +215,25 @@ CoilCrafter::changepar (int npar, int value)
       RB1l->setq(q1);
       RB1r->setq(q1);
       break;
-     case 6:
-      Plp2 = value;
-      lpmix2 = ((float) Plp2)/32.0f;
-      reinitfilter (2);     
-      break;     
-     case 7:
-      Pbp2 = value;
-      bpmix2 = ((float) Pbp2)/32.0f;
-      reinitfilter (2);
-      break;     
-     case 8:
-      Php2 = value;
-      hpmix2 = ((float) Php2)/32.0f;
-      reinitfilter (2); 
-      break;
-     case 9: 
+     case 6: 
       Pfreq2 = value;
       freq2 = (float) value;
       RB2l->setfreq(freq2);
       RB2r->setfreq(freq2);
       break;
-     case 10:
+     case 7:
       Pq2 = value;
       q2 = (float)value/10.0f;
       RB2l->setq(q2);
       RB2r->setq(q2);
       break;
-    case 11:
+    case 8:
       setlpf(value);
       break;
-    case 12:
+    case 9:
       sethpf(value);
       break;
-    case 13:
+    case 10:
       Pmode = value;
       break;
 
@@ -288,27 +264,18 @@ CoilCrafter::getpar (int npar)
       return (Pq1);
       break;
     case 6:
-      return (Plp2);
-      break;
-    case 7:
-      return (Pbp2);
-      break;
-    case 8:
-      return (Php2);
-      break;
-    case 9:
       return (Pfreq2);
       break;
-    case 10:
+    case 7:
       return (Pq2);
       break;
-    case 11:
+    case 8:
       return (lpffreq);
       break;  
-    case 12:
+    case 9:
       return (hpffreq);
       break;
-    case 13:
+    case 10:
       return (Pmode);
       break;
 
