@@ -842,8 +842,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1429 78 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1708 111 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6488,7 +6488,7 @@ for(i=0;i<20;i++)
  
 } 
 
-Assign->do_callback();} selected
+Assign->do_callback();}
         xywh {10 20 98 30}
       }
       Fl_Button CancelRec {
