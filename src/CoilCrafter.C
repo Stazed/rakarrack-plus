@@ -89,7 +89,6 @@ void
 CoilCrafter::out (float * smpsl, float * smpsr)
 {
 
-harm->harm_out(smpsl,smpsr);
 
 if(Pmode)
 {
@@ -100,6 +99,9 @@ RB1r->filterout(smpsr);
 
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
+
+harm->harm_out(smpsl,smpsr);
+
 
 
 };
@@ -146,11 +148,11 @@ CoilCrafter::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fender Strat(old)
-    {32, 1, 0, 100, 4400, 63,  4400, 21, 26000, 20, 1},
+    {32, 1, 8, 50, 4400, 63,  4400, 21, 26000, 20, 1},
     //Fender Strat(new)
-    {32, 1, 0, 100, 4200, 31, 4200, 14, 26000, 20, 1},
+    {32, 1, 5, 40, 4200, 31, 4200, 14, 26000, 20, 1},
     //Squire Strat
-    {32, 1, 0, 100, 2900, 24,  2900, 13, 26000, 20, 1},
+    {32, 1, 3, 30, 2900, 24,  2900, 13, 26000, 20, 1},
     //Fender Hambucker
     {32, 0, 0, 0, 3000, 31,  3000, 16, 26000, 20, 0},
     //GibsonP90
@@ -207,7 +209,7 @@ CoilCrafter::changepar (int npar, int value)
       break;
      case 5:
       Pq1 = value;
-      q1 = (float)value/10.0f;
+      q1 = 10.0f/(float)value;
       RB1l->setq(q1);
       RB1r->setq(q1);
       break;
