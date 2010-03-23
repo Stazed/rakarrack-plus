@@ -67,6 +67,7 @@ private:
   class AnalogFilter *RB1l, *RB1r;
   class AnalogFilter *RB2l,*RB2r;
   float freq1,q1,freq2,q2; 
+  float att;
 
 };
 

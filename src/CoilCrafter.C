@@ -47,12 +47,11 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
 
   harm = new HarmEnhancer (rm, 2500.0f,26000.0f,1.0f);
 
-  RB1l =  new AnalogFilter(2,2000.0f,0.5f,0);
-  RB1r =  new AnalogFilter(2,2000.0f,0.5f,0);
+  RB1l =  new AnalogFilter(2,2000.0f,1.0f,0);
+  RB1r =  new AnalogFilter(2,2000.0f,1.0f,0);
   RB2l =  new AnalogFilter(2,2000.0f,1.0f,0);
   RB2r =  new AnalogFilter(2,2000.0f,1.0f,0);
    
-
 
   cleanup ();
 
@@ -72,7 +71,7 @@ CoilCrafter::cleanup ()
 {
  harm->cleanup ();
  harm->calcula_mag(rm);
- harm->set_vol(1,1.0f);
+ harm->set_vol(0,1.0f);
 
  RB1l->cleanup();
  RB1r->cleanup();
@@ -92,22 +91,33 @@ CoilCrafter::out (float * smpsl, float * smpsr)
  
 if(Pmode)
 {
-//harm->harm_out(smpsl,smpsr);
 RB1l->filterout(smpsl);
 RB1r->filterout(smpsr);
+
+for (i=0; i<PERIOD; i++)
+{
+  smpsl[i]*=att;
+  smpsr[i]*=att;
+}
+
 }
 
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
 
 
-float level = dB2rap (60.0f * (float)Pvolume / 127.0f - 40.0f);
 
-  for (i = 0; i < PERIOD; i++)
-    {
-        smpsl[i]*=level;
-        smpsr[i]*=level;
-    }    
+
+harm->harm_out(smpsl,smpsr);
+
+
+
+for (i=0; i<PERIOD; i++)
+{
+  smpsl[i]*=outvolume;
+  smpsr[i]*=outvolume;
+  
+}
 
 
 };
@@ -146,11 +156,11 @@ CoilCrafter::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fender Strat(old)
-    {102, 3300, 16,  4400, 42, 26000, 20, 1},
+    {64, 3300, 16,  4400, 42, 26000, 20, 1},
     //Fender Strat(new)
-    {112, 3300, 17, 4640, 23, 26000, 20, 1},
+    {64, 3300, 17, 4640, 23, 26000, 20, 1},
     //Squire Strat
-    {24, 3300, 15,  4640, 19, 26000, 20, 1},
+    {64, 3300, 15,  4640, 19, 26000, 20, 1},
     //Fender Hambucker
     {64, 3000, 71,  3000, 22, 26000, 20, 0},
     //GibsonP90
@@ -220,6 +230,7 @@ CoilCrafter::changepar (int npar, int value)
       break;
     case 7:
       Pmode = value;
+      if(Pmode) att=.125f; else att=2.0f;
       break;
  
     };
