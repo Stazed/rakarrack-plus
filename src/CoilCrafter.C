@@ -71,7 +71,7 @@ CoilCrafter::cleanup ()
 {
  harm->cleanup ();
  harm->calcula_mag(rm);
- harm->set_vol(0,1.0f);
+ harm->set_vol(1,1.0f);
 
  RB1l->cleanup();
  RB1r->cleanup();
@@ -230,7 +230,7 @@ CoilCrafter::changepar (int npar, int value)
       break;
     case 7:
       Pmode = value;
-      if(Pmode) att=.125f; else att=2.0f;
+      if(Pmode) att=.02f; else att=2.0f;
       break;
  
     };
