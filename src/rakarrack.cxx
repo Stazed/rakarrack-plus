@@ -12684,7 +12684,7 @@ R average.");
         coil_tone->labelsize(10);
         coil_tone->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_tone->minimum(20);
-        coil_tone->maximum(8000);
+        coil_tone->maximum(4400);
         coil_tone->step(1);
         coil_tone->value(20);
         coil_tone->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);

@@ -5440,7 +5440,7 @@ coil_freq2->value(rkr->efx_CoilCrafter->getpar(6));
 coil_q2->value(rkr->efx_CoilCrafter->getpar(7)-64);
 coil_mode->value(rkr->efx_CoilCrafter->getpar(10));
 coil_level->value(rkr->efx_CoilCrafter->getpar(11));
-if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;} selected
+if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5484,8 +5484,8 @@ if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;} selected
         }
         Fl_Value_Slider coil_tone {
           label Tone
-          callback {rkr->efx_CoilCrafter->changepar(9,(int)o->value());}
-          xywh {369 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 8000 step 1 value 20 textcolor 7
+          callback {rkr->efx_CoilCrafter->changepar(9,(int)o->value());} selected
+          xywh {369 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 4400 step 1 value 20 textcolor 7
           class SliderW
         }
         Fl_Value_Slider coil_freq1 {
