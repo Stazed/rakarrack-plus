@@ -47,10 +47,10 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
 
   harm = new HarmEnhancer (rm, 2500.0f,26000.0f,1.0f);
 
-  RB1l =  new RBFilter(1,2000.0f,0.5f,0);
-  RB1r =  new RBFilter(1,2000.0f,0.5f,0);
-  RB2l =  new RBFilter(0,2000.0f,1.0f,0);
-  RB2r =  new RBFilter(0,2000.0f,1.0f,0);
+  RB1l =  new AnalogFilter(6,2000.0f,0.5f,0);
+  RB1r =  new AnalogFilter(6,2000.0f,0.5f,0);
+  RB2l =  new AnalogFilter(2,2000.0f,1.0f,0);
+  RB2r =  new AnalogFilter(2,2000.0f,1.0f,0);
    
 
 
@@ -88,18 +88,34 @@ CoilCrafter::cleanup ()
 void
 CoilCrafter::out (float * smpsl, float * smpsr)
 {
-
-
+ int i;
+ 
 if(Pmode)
 {
-harm->harm_out(smpsl,smpsr);
-}
+//harm->harm_out(smpsl,smpsr);
 
 RB1l->filterout(smpsl);
 RB1r->filterout(smpsr);
+}
 
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
+
+harm->harm_out(smpsl,smpsr);
+
+
+
+float level = dB2rap (60.0f * (float)Pvolume / 127.0f - 40.0f);
+
+  for (i = 0; i < PERIOD; i++)
+    {
+
+        smpsl[i]*=level;
+        smpsr[i]*=level;
+    }    
+
+
+
 
 };
 
@@ -112,6 +128,7 @@ CoilCrafter::setvolume (int value)
 {
   Pvolume = value;
   outvolume = (float)Pvolume / 127.0f;
+
 };
 
 void
@@ -132,8 +149,8 @@ CoilCrafter::sethpf (int value)
 void
 CoilCrafter::reinitfilter ()
 {
-  RB1l->setmix(1, lpmix1, bpmix1, hpmix1);
-  RB1r->setmix(1, lpmix1, bpmix1, hpmix1);
+//  RB1l->setmix(1, lpmix1, bpmix1, hpmix1);
+//  RB1r->setmix(1, lpmix1, bpmix1, hpmix1);
   
 };
 
@@ -141,25 +158,25 @@ CoilCrafter::reinitfilter ()
 void
 CoilCrafter::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
+  const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fender Strat(old)
-    {0, 20, 6, 75, 3300, 40,  4400, 40, 26000, 20, 0},
+    {100, 20, 6, 75, 3300, 71,  4400, 92, 26000, 20, 1, 80},
     //Fender Strat(new)
-    {32, 1, 5, 40, 4200, 31, 4200, 14, 26000, 20, 1},
+    {100, 1, 5, 75, 4200, 71, 4200, 92, 26000, 20, 1, 64},
     //Squire Strat
-    {32, 1, 3, 30, 2900, 24,  2900, 13, 26000, 20, 1},
+    {64, 1, 3, 30, 2900, 71,  2900, 92, 26000, 20, 1, 64},
     //Fender Hambucker
-    {32, 0, 0, 0, 3000, 31,  3000, 16, 26000, 20, 0},
+    {64, 0, 0, 0, 3000, 71,  3000, 92, 26000, 20, 1, 64},
     //GibsonP90
-    {32, 0, 0, 0, 2700, 13, 2700, 13, 26000, 20, 0},
+    {64, 0, 0, 0, 2700, 71, 2700, 92, 26000, 20, 1, 64},
     //Gibson Standard
-    {32, 0, 0, 0, 3300, 13,  3300, 13, 26000, 20, 0},
+    {64, 0, 0, 0, 3300, 71,  3300, 92, 26000, 20, 1, 64},
     //Gibson Mini
-    {32, 0, 0, 0, 3300, 13, 3300, 13, 26000, 20, 0},
+    {64, 0, 0, 0, 3300, 71, 3300, 92, 26000, 20, 1, 64},
     //Gibson Super L6S
-    {32, 0, 0, 0, 2800, 13, 2800, 13, 26000, 20, 0}
+    {64, 0, 0, 0, 2800, 71, 2800, 92, 26000, 20, 1, 64}
     
 
   };
@@ -186,17 +203,17 @@ CoilCrafter::changepar (int npar, int value)
      case 1:
       Plp1 = value;
       lpmix1 = ((float) Plp1)/32.0f;
-      reinitfilter ();     
+      //reinitfilter ();     
       break;     
      case 2:
       Pbp1 = value;
       bpmix1 = ((float) Pbp1)/32.0f;
-      reinitfilter ();
+      //reinitfilter ();
       break;     
      case 3:
       Php1 = value;
       hpmix1 = ((float) Php1)/32.0f;
-      reinitfilter (); 
+      //reinitfilter (); 
       break;
      case 4: 
       Pfreq1 = value;
@@ -206,7 +223,9 @@ CoilCrafter::changepar (int npar, int value)
       break;
      case 5:
       Pq1 = value;
-      q1 = 10.0f/(float)value;
+      //q1 = 10.0f/(float)value;
+      q1 = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+      printf("%f\n",q1);
       RB1l->setq(q1);
       RB1r->setq(q1);
       break;
@@ -218,7 +237,9 @@ CoilCrafter::changepar (int npar, int value)
       break;
      case 7:
       Pq2 = value;
-      q2 = (float)value/10.0f;
+      q2 = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+      //      q2 = (float)value/10.0f;
+      printf("%f\n",q2);
       RB2l->setq(q2);
       RB2r->setq(q2);
       break;
@@ -231,7 +252,13 @@ CoilCrafter::changepar (int npar, int value)
     case 10:
       Pmode = value;
       break;
-
+    case 11:
+      Plevel = value;
+      float tmp = 30.0f * ((float)value - 64.0f) / 64.0f;
+      RB1l->setgain(tmp);
+      RB1r->setgain(tmp); 
+      break;
+ 
     };
 };
 
@@ -273,6 +300,9 @@ CoilCrafter::getpar (int npar)
     case 10:
       return (Pmode);
       break;
+    case 11:
+      return (Plevel);
+      break; 
 
     };
   return (0);			//in case of bogus parameter number

@@ -1331,7 +1331,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (CoilCrafter_Bypass)
                 {
                   efx_CoilCrafter->out(efxoutl, efxoutr);
-		  Vol_Efx(33,efx_CoilCrafter->outvolume);
+		  Vol2_Efx();
                 }
 
 
