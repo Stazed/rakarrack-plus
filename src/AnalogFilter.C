@@ -470,6 +470,21 @@ AnalogFilter::filterout (float * smp)
 
 };
 
+void  AnalogFilter::reversecoeffs()
+{
+	float tmpd1, tmpd2;
+	
+	  tmpd1 = d[1];
+	  tmpd2 = d[2];
+	  
+	  if(c[0] > 0.01f) c[0] = 1.0f/c[0];
+	  c[0] = 0.0;
+	  d[1] = c[1];
+	  d[2] = c[2];
+	  c[1] = tmpd1;
+	  c[2] = tmpd2;
+};
+
 float AnalogFilter::H (float freq)
 {
   float

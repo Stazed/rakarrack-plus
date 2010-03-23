@@ -43,7 +43,8 @@ public:
   void setgain (float dBgain);
   void setstages (int stages_);
   void cleanup ();
-
+  void reversecoeffs();
+  
   float H (float freq);	//Obtains the response for a given frequency
   
 
