@@ -75,9 +75,7 @@ CoilCrafter::cleanup ()
  harm->set_vol(1,1.0f);
 
  RB1l->cleanup();
- RB1l->reversecoeffs();
  RB1r->cleanup();
- RB1r->reversecoeffs();
  RB2l->cleanup();
  RB2r->cleanup();
  
