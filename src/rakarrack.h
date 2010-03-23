@@ -2429,11 +2429,6 @@ private:
   void cb_coil_freq2_i(SliderW*, void*);
   static void cb_coil_freq2(SliderW*, void*);
 public:
-  SliderW *coil_level;
-private:
-  void cb_coil_level_i(SliderW*, void*);
-  static void cb_coil_level(SliderW*, void*);
-public:
   SliderW *coil_q2;
 private:
   void cb_coil_q2_i(SliderW*, void*);

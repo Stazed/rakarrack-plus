@@ -5089,13 +5089,12 @@ void RKRGUI::cb_coil_preset_i(Fl_Choice* o, void*) {
   rkr->CoilCrafter_Bypass = 0;
 rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
-coil_tone->value(rkr->efx_CoilCrafter->getpar(9));
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(4));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(5)-64);
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(6));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(7)-64);
-coil_mode->value(rkr->efx_CoilCrafter->getpar(10));
-coil_level->value(rkr->efx_CoilCrafter->getpar(11));
+coil_tone->value(rkr->efx_CoilCrafter->getpar(6));
+coil_freq1->value(rkr->efx_CoilCrafter->getpar(1));
+coil_q1->value(rkr->efx_CoilCrafter->getpar(2));
+coil_freq2->value(rkr->efx_CoilCrafter->getpar(3));
+coil_q2->value(rkr->efx_CoilCrafter->getpar(4));
+coil_mode->value(rkr->efx_CoilCrafter->getpar(7));
 if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;
 }
 void RKRGUI::cb_coil_preset(Fl_Choice* o, void* v) {
@@ -5122,49 +5121,42 @@ void RKRGUI::cb_coil_WD(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_coil_tone_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(9,(int)o->value());
+  rkr->efx_CoilCrafter->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_coil_tone(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_tone_i(o,v);
 }
 
 void RKRGUI::cb_coil_freq1_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(4,(int)o->value());
+  rkr->efx_CoilCrafter->changepar(1,(int)o->value());
 }
 void RKRGUI::cb_coil_freq1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq1_i(o,v);
 }
 
 void RKRGUI::cb_coil_q1_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(5,(int)o->value()+64);
+  rkr->efx_CoilCrafter->changepar(2,(int)o->value()+64);
 }
 void RKRGUI::cb_coil_q1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q1_i(o,v);
 }
 
 void RKRGUI::cb_coil_freq2_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(6,(int)o->value());
+  rkr->efx_CoilCrafter->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_coil_freq2(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq2_i(o,v);
 }
 
-void RKRGUI::cb_coil_level_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_coil_level(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_level_i(o,v);
-}
-
 void RKRGUI::cb_coil_q2_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(7,(int)o->value()+64);
+  rkr->efx_CoilCrafter->changepar(4,(int)o->value()+64);
 }
 void RKRGUI::cb_coil_q2(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q2_i(o,v);
 }
 
 void RKRGUI::cb_coil_mode_i(Fl_Check_Button* o, void*) {
-  rkr->efx_CoilCrafter->changepar(10,(int)o->value());
+  rkr->efx_CoilCrafter->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_coil_mode(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_mode_i(o,v);
@@ -12692,7 +12684,7 @@ R average.");
         coil_tone->align(FL_ALIGN_LEFT);
         coil_tone->when(FL_WHEN_CHANGED);
       } // SliderW* coil_tone
-      { coil_freq1 = new SliderW(369, 280, 100, 10, "Freq1");
+      { coil_freq1 = new SliderW(369, 286, 100, 10, "Freq1");
         coil_freq1->type(5);
         coil_freq1->box(FL_FLAT_BOX);
         coil_freq1->color((Fl_Color)178);
@@ -12701,16 +12693,16 @@ R average.");
         coil_freq1->labelfont(0);
         coil_freq1->labelsize(10);
         coil_freq1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_freq1->minimum(1200);
-        coil_freq1->maximum(5000);
+        coil_freq1->minimum(2600);
+        coil_freq1->maximum(4500);
         coil_freq1->step(1);
-        coil_freq1->value(20);
+        coil_freq1->value(3200);
         coil_freq1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_freq1->callback((Fl_Callback*)cb_coil_freq1);
         coil_freq1->align(FL_ALIGN_LEFT);
         coil_freq1->when(FL_WHEN_CHANGED);
       } // SliderW* coil_freq1
-      { coil_q1 = new SliderW(369, 296, 100, 10, "Q1");
+      { coil_q1 = new SliderW(369, 305, 100, 10, "Q1");
         coil_q1->type(5);
         coil_q1->box(FL_FLAT_BOX);
         coil_q1->color((Fl_Color)178);
@@ -12719,8 +12711,8 @@ R average.");
         coil_q1->labelfont(0);
         coil_q1->labelsize(10);
         coil_q1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_q1->minimum(-64);
-        coil_q1->maximum(64);
+        coil_q1->minimum(10);
+        coil_q1->maximum(65);
         coil_q1->step(1);
         coil_q1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_q1->callback((Fl_Callback*)cb_coil_q1);
@@ -12736,32 +12728,15 @@ R average.");
         coil_freq2->labelfont(0);
         coil_freq2->labelsize(10);
         coil_freq2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_freq2->minimum(1200);
-        coil_freq2->maximum(8000);
+        coil_freq2->minimum(2600);
+        coil_freq2->maximum(4500);
         coil_freq2->step(1);
-        coil_freq2->value(20);
+        coil_freq2->value(3200);
         coil_freq2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_freq2->callback((Fl_Callback*)cb_coil_freq2);
         coil_freq2->align(FL_ALIGN_LEFT);
         coil_freq2->when(FL_WHEN_CHANGED);
       } // SliderW* coil_freq2
-      { coil_level = new SliderW(369, 315, 100, 10, "Level");
-        coil_level->type(5);
-        coil_level->box(FL_FLAT_BOX);
-        coil_level->color((Fl_Color)178);
-        coil_level->selection_color((Fl_Color)62);
-        coil_level->labeltype(FL_NORMAL_LABEL);
-        coil_level->labelfont(0);
-        coil_level->labelsize(10);
-        coil_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_level->maximum(127);
-        coil_level->step(1);
-        coil_level->value(64);
-        coil_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_level->callback((Fl_Callback*)cb_coil_level);
-        coil_level->align(FL_ALIGN_LEFT);
-        coil_level->when(FL_WHEN_CHANGED);
-      } // SliderW* coil_level
       { coil_q2 = new SliderW(370, 354, 100, 10, "Q1");
         coil_q2->type(5);
         coil_q2->box(FL_FLAT_BOX);
@@ -12771,8 +12746,8 @@ R average.");
         coil_q2->labelfont(0);
         coil_q2->labelsize(10);
         coil_q2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_q2->minimum(-64);
-        coil_q2->maximum(64);
+        coil_q2->minimum(10);
+        coil_q2->maximum(65);
         coil_q2->step(1);
         coil_q2->value(20);
         coil_q2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);

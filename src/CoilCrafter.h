@@ -25,7 +25,6 @@
 
 #include "global.h"
 #include "HarmonicEnhancer.h"
-#include "RBFilter.h"
 #include "AnalogFilter.h"
 
 class CoilCrafter
@@ -50,10 +49,6 @@ public:
 private:
 
   int Pvolume;
-  int Plevel;
-  int Php1;
-  int Plp1;
-  int Pbp1;
   int Pq1;
   int Pfreq1;
   int Pq2;
@@ -65,7 +60,6 @@ private:
   void setvolume (int value);
   void setlpf (int value);
   void sethpf (int value);
-  void reinitfilter();
 
 
   float rm[10];
@@ -73,7 +67,6 @@ private:
   class AnalogFilter *RB1l, *RB1r;
   class AnalogFilter *RB2l,*RB2r;
   float freq1,q1,freq2,q2; 
-  float lpmix1,hpmix1,bpmix1;
 
 };
 
