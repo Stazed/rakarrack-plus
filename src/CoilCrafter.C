@@ -47,10 +47,10 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
 
   harm = new HarmEnhancer (rm, 2500.0f,26000.0f,1.0f);
 
-  RB1l =  new RBFilter(1,2000.0f,2.1f,1);
-  RB1r =  new RBFilter(1,2000.0f,2.1f,1);
-  RB2l =  new RBFilter(0,2000.0f,2.1f,1);
-  RB2r =  new RBFilter(0,2000.0f,2.1f,1);
+  RB1l =  new RBFilter(1,2000.0f,0.5f,0);
+  RB1r =  new RBFilter(1,2000.0f,0.5f,0);
+  RB2l =  new RBFilter(0,2000.0f,1.0f,0);
+  RB2r =  new RBFilter(0,2000.0f,1.0f,0);
    
 
 
@@ -92,17 +92,14 @@ CoilCrafter::out (float * smpsl, float * smpsr)
 
 if(Pmode)
 {
-RB1l->filterout(smpsl);
-RB1r->filterout(smpsr);
+harm->harm_out(smpsl,smpsr);
 }
 
+RB1l->filterout(smpsl);
+RB1r->filterout(smpsr);
 
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
-
-harm->harm_out(smpsl,smpsr);
-
-
 
 };
 
@@ -148,7 +145,7 @@ CoilCrafter::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fender Strat(old)
-    {32, 1, 8, 50, 4400, 63,  4400, 21, 26000, 20, 1},
+    {0, 20, 6, 75, 3300, 40,  4400, 40, 26000, 20, 0},
     //Fender Strat(new)
     {32, 1, 5, 40, 4200, 31, 4200, 14, 26000, 20, 1},
     //Squire Strat
