@@ -47,8 +47,8 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
 
   harm = new HarmEnhancer (rm, 2500.0f,26000.0f,1.0f);
 
-  RB1l =  new AnalogFilter(6,2000.0f,0.5f,0);
-  RB1r =  new AnalogFilter(6,2000.0f,0.5f,0);
+  RB1l =  new AnalogFilter(7,2000.0f,0.5f,0);
+  RB1r =  new AnalogFilter(7,2000.0f,0.5f,0);
   RB2l =  new AnalogFilter(2,2000.0f,1.0f,0);
   RB2r =  new AnalogFilter(2,2000.0f,1.0f,0);
    
@@ -72,7 +72,7 @@ CoilCrafter::cleanup ()
 {
  harm->cleanup ();
  harm->calcula_mag(rm);
- harm->set_vol(0,1.0f);
+ harm->set_vol(1,1.0f);
 
  RB1l->cleanup();
  RB1r->cleanup();
@@ -92,7 +92,7 @@ CoilCrafter::out (float * smpsl, float * smpsr)
  
 if(Pmode)
 {
-//harm->harm_out(smpsl,smpsr);
+harm->harm_out(smpsl,smpsr);
 
 RB1l->filterout(smpsl);
 RB1r->filterout(smpsr);
@@ -101,7 +101,7 @@ RB1r->filterout(smpsr);
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
 
-harm->harm_out(smpsl,smpsr);
+//  harm->harm_out(smpsl,smpsr);
 
 
 
@@ -162,11 +162,11 @@ CoilCrafter::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fender Strat(old)
-    {100, 20, 6, 75, 3300, 71,  4400, 92, 26000, 20, 1, 80},
+    {110, 20, 6, 75, 3300, 89,  4400, 89, 26000, 20, 1, 56},
     //Fender Strat(new)
-    {100, 1, 5, 75, 4200, 71, 4200, 92, 26000, 20, 1, 64},
+    {100, 1, 5, 75, 3380, 89, 4200, 89, 26000, 80, 1, 46},
     //Squire Strat
-    {64, 1, 3, 30, 2900, 71,  2900, 92, 26000, 20, 1, 64},
+    {64, 1, 3, 30, 2900, 87,  2900, 87, 26000, 120, 1, 46},
     //Fender Hambucker
     {64, 0, 0, 0, 3000, 71,  3000, 92, 26000, 20, 1, 64},
     //GibsonP90
