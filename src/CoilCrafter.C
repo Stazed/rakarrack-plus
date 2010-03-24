@@ -108,6 +108,8 @@ CoilCrafter::out (float * smpsl, float * smpsr)
 {
  int i;
 
+/*
+
 RB1l->filterout(smpsl);
 RB1r->filterout(smpsr);
 
@@ -116,6 +118,8 @@ for (i=0; i<PERIOD; i++)
   smpsl[i]*=att;
   smpsr[i]*=att;
 }
+
+*/
 
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
