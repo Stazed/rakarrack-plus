@@ -120,7 +120,6 @@ for (i=0; i<PERIOD; i++)
 }
 
 
-
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
 

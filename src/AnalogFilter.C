@@ -472,16 +472,17 @@ AnalogFilter::filterout (float * smp)
 
 void  AnalogFilter::reversecoeffs()
 {
-	float tmpd1, tmpd2;
-	
+	float tmpd1, tmpd2, tmpc0;
+	  printf("before:\n c0 %f c1 %f c2 %f d1 %f d2 %f\n", c[0], c[1], c[2], d[1], d[2]);	
 	  tmpd1 = d[1];
 	  tmpd2 = d[2];
-	  
+	  tmpc0 = c[0];
           c[0] = 1.0f;
 	  d[1] = c[1];
 	  d[2] = c[2];
-	  c[1] = tmpd1;
-	  c[2] = tmpd2;
+	  c[1] = tmpd1/tmpc0;
+	  c[2] = tmpd2/tmpc0;
+	  printf("after:\n c0 %f c1 %f c2 %f d1 %f d2 %f\n", c[0], c[1], c[2], d[1], d[2]);
 };
 
 float AnalogFilter::H (float freq)
