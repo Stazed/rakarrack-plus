@@ -35,8 +35,27 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
   //default values
   Ppreset = 0;
   Pvolume = 50;
-  lpffreq = 26000;
-  hpffreq = 2500;
+  Ptone = 20;
+
+  tfreqs[0]=4400.0f;
+  tfreqs[1]=4200.0f;
+  tfreqs[2]=2900.0f;
+  tfreqs[3]=3000.0f;
+  tfreqs[4]=2700.0f;
+  tfreqs[5]=3300.0f;
+  tfreqs[6]=3300.0f;
+  tfreqs[7]=2800.0f;
+  
+  tqs[0]=4.2f;
+  tqs[1]=2.3f;
+  tqs[2]=1.8f;
+  tqs[3]=2.2f;
+  tqs[4]=2.1f;
+  tqs[5]=1.7f;
+  tqs[6]=1.7f;
+  tqs[7]=1.8f;
+   
+  
   
   for(int i=0; i<10; i++)
   {
@@ -127,43 +146,60 @@ CoilCrafter::setvolume (int value)
 };
 
 void
-CoilCrafter::setlpf (int value)
+CoilCrafter::setfreq1()
 {
-  lpffreq=value;
-  harm->set_freql (0, (float)value);
-};
+      RB1l->setfreq(freq1);
+      RB1l->reversecoeffs();
+      RB1r->setfreq(freq1);
+      RB1r->reversecoeffs();
+}
+
+void
+CoilCrafter::setq1()
+{
+      RB1l->setq(q1);
+      RB1l->reversecoeffs();
+      RB1r->setq(q1);
+      RB1r->reversecoeffs();
+}
+
+void
+CoilCrafter::setfreq2()
+{
+
+      RB2l->setfreq(freq2);
+      RB2r->setfreq(freq2);
+}
+
+void
+CoilCrafter::setq2()
+{
+
+     RB2l->setq(q2);
+     RB2r->setq(q2);
+ 
+
+
+}
 
 void
 CoilCrafter::sethpf (int value)
 {
-  hpffreq=value;
-  harm->set_freqh (0,(float)value);
+  harm->set_freqh (0,(float)Ptone);
 };
 
 
 void
 CoilCrafter::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 8;
-  const int NUM_PRESETS = 8;
+  const int PRESET_SIZE = 9;
+  const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Fender Strat(old)
-    {64, 3300, 16,  4400, 42, 26000, 20, 1},
-    //Fender Strat(new)
-    {64, 3300, 17, 4640, 23, 26000, 20, 1},
-    //Squire Strat
-    {64, 3300, 15,  4640, 19, 26000, 20, 1},
-    //Fender Hambucker
-    {64, 3000, 71,  3000, 22, 26000, 20, 0},
-    //GibsonP90
-    {64, 2700, 71, 2700, 21, 26000, 20, 0},
-    //Gibson Standard
-    {64, 3300, 71,  3300, 16, 26000, 20, 0},
-    //Gibson Mini
-    {64, 3300, 71, 3300, 18, 26000, 20, 0},
-    //Gibson Super L6S
-    {64, 2800, 71, 2800, 18, 26000, 20, 0}
-    
+    //H to S
+    {64, 5, 0, 3300, 16,  4400, 42, 20, 0},
+    //S to H
+    {64, 0, 5, 4400, 42, 3300, 16, 20, 0},
+   
 
   };
 
@@ -186,43 +222,51 @@ CoilCrafter::changepar (int npar, int value)
     case 0:
       setvolume (value);
       break;
-     case 1: 
+    case 1:
+      Ppo = value; 
+      freq1 = tfreqs[value];
+      Pfreq1 = (int)freq1;
+      setfreq1();
+      q1 = tqs[value];
+      Pq1 = (int)(q1*10.0f);
+      setq1();
+      break;
+    case 2:
+      Ppd = value; 
+      freq2 = tfreqs[value];
+      Pfreq2 = (int)freq2;
+      setfreq2();
+      q2 = tqs[value];
+      Pq2 =(int)(q2*10.0f);
+      setq2();
+      break;
+    case 3: 
       Pfreq1 = value;
       freq1 = (float) value;
-      RB1l->setfreq(freq1);
-      RB1l->reversecoeffs();
-      RB1r->setfreq(freq1);
-      RB1r->reversecoeffs();
+      setfreq1();
       break;
-     case 2:
+    case 4:
       Pq1 = value;
       q1 = (float)value/10.0f;
-      RB1l->setq(q1);
-      RB1l->reversecoeffs();
-      RB1r->setq(q1);
-      RB1r->reversecoeffs();
+      setq1();
       break;
-     case 3: 
+    case 5: 
       Pfreq2 = value;
       freq2 = (float) value;
-      RB2l->setfreq(freq2);
-      RB2r->setfreq(freq2);
-      break;
-     case 4:
+      setfreq2();
+      break; 
+     case 6:
       Pq2 = value;
       q2 = (float)value/10.0f;
-      RB2l->setq(q2);
-      RB2r->setq(q2);
+      setq2();
       break;
-    case 5:
-      setlpf(value);
-      break;
-    case 6:
+     case 7:
+      Ptone = value;
       sethpf(value);
       break;
-    case 7:
+     case 8:
       Pmode = value;
-      if(Pmode) att=.02f; else att=2.0f;
+      if(Pmode) att=.25f; else att=1.0f;
       break;
  
     };
@@ -237,26 +281,30 @@ CoilCrafter::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return (Pfreq1);
+      return (Ppo);
       break;
     case 2:
-      return (Pq1);
+      return (Ppd);
       break;
     case 3:
-      return (Pfreq2);
+      return (Pfreq1);
       break;
     case 4:
-      return (Pq2);
+      return (Pq1);
       break;
     case 5:
-      return (lpffreq);
+      return (Pfreq2);
       break;  
     case 6:
-      return (hpffreq);
+      return (Pq2);
       break;
     case 7:
+      return (Ptone);
+      break;
+    case 8:
       return (Pmode);
       break;
+
     };
   return (0);			//in case of bogus parameter number
 };

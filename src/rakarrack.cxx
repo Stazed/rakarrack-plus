@@ -5089,12 +5089,14 @@ void RKRGUI::cb_coil_preset_i(Fl_Choice* o, void*) {
   rkr->CoilCrafter_Bypass = 0;
 rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
-coil_tone->value(rkr->efx_CoilCrafter->getpar(6));
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(1));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(2));
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(4));
-coil_mode->value(rkr->efx_CoilCrafter->getpar(7));
+coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
+coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
+coil_destiny->value(rkr->efx_CoilCrafter->getpar(2));
+coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
+coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
+coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
+coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
+coil_mode->value(rkr->efx_CoilCrafter->getpar(8));
 if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;
 }
 void RKRGUI::cb_coil_preset(Fl_Choice* o, void* v) {
@@ -5102,14 +5104,8 @@ void RKRGUI::cb_coil_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_coil_preset[] = {
- {"Fender Strat (old)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Strat (new)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Squire Strat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Hambucker", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson P90", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson Standard", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson Mini", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson Super L6S", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"H to S", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"S to H", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5121,42 +5117,72 @@ void RKRGUI::cb_coil_WD(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_coil_tone_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(6,(int)o->value());
+  rkr->efx_CoilCrafter->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_coil_tone(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_tone_i(o,v);
 }
 
-void RKRGUI::cb_coil_freq1_i(SliderW* o, void*) {
+void RKRGUI::cb_coil_origin_i(Fl_Choice* o, void*) {
   rkr->efx_CoilCrafter->changepar(1,(int)o->value());
+coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
+coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
+}
+void RKRGUI::cb_coil_origin(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_origin_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_coil_origin[] = {
+ {"Fender Strat (old)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Strat (new)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Squire Strat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Hambucker", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson P90", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson Standard", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson Mini", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Gibson Super L6S", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_coil_freq1_i(SliderW* o, void*) {
+  rkr->efx_CoilCrafter->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_coil_freq1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq1_i(o,v);
 }
 
 void RKRGUI::cb_coil_q1_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(2,(int)o->value()+64);
+  rkr->efx_CoilCrafter->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_coil_q1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q1_i(o,v);
 }
 
+void RKRGUI::cb_coil_destiny_i(Fl_Choice* o, void*) {
+  rkr->efx_CoilCrafter->changepar(2,(int)o->value());
+coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
+coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
+}
+void RKRGUI::cb_coil_destiny(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_destiny_i(o,v);
+}
+
 void RKRGUI::cb_coil_freq2_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(3,(int)o->value());
+  rkr->efx_CoilCrafter->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_coil_freq2(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq2_i(o,v);
 }
 
 void RKRGUI::cb_coil_q2_i(SliderW* o, void*) {
-  rkr->efx_CoilCrafter->changepar(4,(int)o->value()+64);
+  rkr->efx_CoilCrafter->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_coil_q2(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q2_i(o,v);
 }
 
 void RKRGUI::cb_coil_mode_i(Fl_Check_Button* o, void*) {
-  rkr->efx_CoilCrafter->changepar(7,(int)o->value());
+  rkr->efx_CoilCrafter->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_coil_mode(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_mode_i(o,v);
@@ -12666,7 +12692,7 @@ R average.");
         coil_WD->align(FL_ALIGN_LEFT);
         coil_WD->when(FL_WHEN_CHANGED);
       } // SliderW* coil_WD
-      { coil_tone = new SliderW(369, 260, 100, 10, "Tone");
+      { coil_tone = new SliderW(369, 252, 100, 10, "Tone");
         coil_tone->type(5);
         coil_tone->box(FL_FLAT_BOX);
         coil_tone->color((Fl_Color)178);
@@ -12684,7 +12710,18 @@ R average.");
         coil_tone->align(FL_ALIGN_LEFT);
         coil_tone->when(FL_WHEN_CHANGED);
       } // SliderW* coil_tone
-      { coil_freq1 = new SliderW(369, 286, 100, 10, "Freq1");
+      { coil_origin = new Fl_Choice(368, 266, 90, 18, "Origin");
+        coil_origin->down_box(FL_BORDER_BOX);
+        coil_origin->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        coil_origin->labelsize(10);
+        coil_origin->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_origin->textsize(10);
+        coil_origin->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_origin->callback((Fl_Callback*)cb_coil_origin);
+        coil_origin->when(FL_WHEN_RELEASE_ALWAYS);
+        coil_origin->menu(menu_coil_origin);
+      } // Fl_Choice* coil_origin
+      { coil_freq1 = new SliderW(369, 290, 100, 10, "Freq1");
         coil_freq1->type(5);
         coil_freq1->box(FL_FLAT_BOX);
         coil_freq1->color((Fl_Color)178);
@@ -12719,7 +12756,18 @@ R average.");
         coil_q1->align(FL_ALIGN_LEFT);
         coil_q1->when(FL_WHEN_CHANGED);
       } // SliderW* coil_q1
-      { coil_freq2 = new SliderW(369, 336, 100, 10, "Freq2");
+      { Fl_Choice* o = coil_destiny = new Fl_Choice(368, 318, 90, 18, "Destiny");
+        coil_destiny->down_box(FL_BORDER_BOX);
+        coil_destiny->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        coil_destiny->labelsize(10);
+        coil_destiny->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_destiny->textsize(10);
+        coil_destiny->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        coil_destiny->callback((Fl_Callback*)cb_coil_destiny);
+        coil_destiny->when(FL_WHEN_RELEASE_ALWAYS);
+        o->menu(menu_coil_origin);
+      } // Fl_Choice* coil_destiny
+      { coil_freq2 = new SliderW(369, 343, 100, 10, "Freq2");
         coil_freq2->type(5);
         coil_freq2->box(FL_FLAT_BOX);
         coil_freq2->color((Fl_Color)178);
@@ -12737,7 +12785,7 @@ R average.");
         coil_freq2->align(FL_ALIGN_LEFT);
         coil_freq2->when(FL_WHEN_CHANGED);
       } // SliderW* coil_freq2
-      { coil_q2 = new SliderW(370, 354, 100, 10, "Q1");
+      { coil_q2 = new SliderW(370, 358, 100, 10, "Q2");
         coil_q2->type(5);
         coil_q2->box(FL_FLAT_BOX);
         coil_q2->color((Fl_Color)178);
@@ -12755,7 +12803,7 @@ R average.");
         coil_q2->align(FL_ALIGN_LEFT);
         coil_q2->when(FL_WHEN_CHANGED);
       } // SliderW* coil_q2
-      { coil_mode = new Fl_Check_Button(333, 372, 15, 15, "Mode");
+      { coil_mode = new Fl_Check_Button(333, 372, 15, 15, "Pos.");
         coil_mode->down_box(FL_BORDER_BOX);
         coil_mode->labelsize(10);
         coil_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

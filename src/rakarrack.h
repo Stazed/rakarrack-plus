@@ -2414,6 +2414,12 @@ private:
   void cb_coil_tone_i(SliderW*, void*);
   static void cb_coil_tone(SliderW*, void*);
 public:
+  Fl_Choice *coil_origin;
+private:
+  void cb_coil_origin_i(Fl_Choice*, void*);
+  static void cb_coil_origin(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_coil_origin[];
+public:
   SliderW *coil_freq1;
 private:
   void cb_coil_freq1_i(SliderW*, void*);
@@ -2423,6 +2429,11 @@ public:
 private:
   void cb_coil_q1_i(SliderW*, void*);
   static void cb_coil_q1(SliderW*, void*);
+public:
+  Fl_Choice *coil_destiny;
+private:
+  void cb_coil_destiny_i(Fl_Choice*, void*);
+  static void cb_coil_destiny(Fl_Choice*, void*);
 public:
   SliderW *coil_freq2;
 private:

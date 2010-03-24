@@ -49,18 +49,24 @@ public:
 private:
 
   int Pvolume;
+  int Ppo;
+  int Ppd;
+  int Ptone;
   int Pq1;
   int Pfreq1;
   int Pq2;
   int Pfreq2;
   int Pmode;
-  int lpffreq;
-  int hpffreq;
+  float tfreqs[10];
+  float tqs[10];
   
   void setvolume (int value);
-  void setlpf (int value);
   void sethpf (int value);
-
+  void setfreq1();
+  void setfreq2();
+  void setq1();
+  void setq2();
+  
 
   float rm[10];
   class HarmEnhancer *harm;
