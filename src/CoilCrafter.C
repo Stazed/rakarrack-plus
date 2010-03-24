@@ -88,9 +88,7 @@ void
 CoilCrafter::out (float * smpsl, float * smpsr)
 {
  int i;
- 
-if(Pmode)
-{
+
 RB1l->filterout(smpsl);
 RB1r->filterout(smpsr);
 
@@ -100,16 +98,10 @@ for (i=0; i<PERIOD; i++)
   smpsr[i]*=att;
 }
 
-}
-
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
 
-
-
-
-harm->harm_out(smpsl,smpsr);
-
+if(Pmode) harm->harm_out(smpsl,smpsr);
 
 
 for (i=0; i<PERIOD; i++)
@@ -130,7 +122,7 @@ void
 CoilCrafter::setvolume (int value)
 {
   Pvolume = value;
-  outvolume = (float)Pvolume / 127.0f;
+  outvolume = (1.0f + (float)Pvolume) / 127.0f;
 
 };
 
@@ -204,7 +196,7 @@ CoilCrafter::changepar (int npar, int value)
       break;
      case 2:
       Pq1 = value;
-      q1 = 10.0f/(float)value;
+      q1 = (float)value/10.0f;
       RB1l->setq(q1);
       RB1l->reversecoeffs();
       RB1r->setq(q1);

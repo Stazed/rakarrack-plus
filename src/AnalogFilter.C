@@ -477,8 +477,7 @@ void  AnalogFilter::reversecoeffs()
 	  tmpd1 = d[1];
 	  tmpd2 = d[2];
 	  
-	  if(c[0] > 0.01f) c[0] = 1.0f/c[0];
-
+          c[0] = 1.0f;
 	  d[1] = c[1];
 	  d[2] = c[2];
 	  c[1] = tmpd1;
