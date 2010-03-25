@@ -2451,6 +2451,43 @@ private:
   static void cb_coil_mode(Fl_Check_Button*, void*);
 public:
   Fl_Box *coil_dis;
+  Fl_Group *SHELFBOOST;
+  Fl_Light_Button *shelf_activar;
+private:
+  void cb_shelf_activar_i(Fl_Light_Button*, void*);
+  static void cb_shelf_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *shelf_preset;
+private:
+  void cb_shelf_preset_i(Fl_Choice*, void*);
+  static void cb_shelf_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_shelf_preset[];
+public:
+  SliderW *shelf_gain;
+private:
+  void cb_shelf_gain_i(SliderW*, void*);
+  static void cb_shelf_gain(SliderW*, void*);
+public:
+  SliderW *shelf_q1;
+private:
+  void cb_shelf_q1_i(SliderW*, void*);
+  static void cb_shelf_q1(SliderW*, void*);
+public:
+  SliderW *shelf_level;
+private:
+  void cb_shelf_level_i(SliderW*, void*);
+  static void cb_shelf_level(SliderW*, void*);
+public:
+  SliderW *shelf_freq1;
+private:
+  void cb_shelf_freq1_i(SliderW*, void*);
+  static void cb_shelf_freq1(SliderW*, void*);
+public:
+  Fl_Check_Button *shelf_mode;
+private:
+  void cb_shelf_mode_i(Fl_Check_Button*, void*);
+  static void cb_shelf_mode(Fl_Check_Button*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

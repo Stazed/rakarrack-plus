@@ -842,8 +842,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1363 84 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} open
+      xywh {1555 84 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5473,7 +5473,7 @@ coil_q1->value(rkr->efx_CoilCrafter->getpar(4));} open
           xywh {368 266 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Off selected
+            label Off
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
@@ -5549,6 +5549,75 @@ coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open
         }
         Fl_Box coil_dis {
           xywh {381 370 89 17}
+        }
+      }
+      Fl_Group SHELFBOOST {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button shelf_activar {
+          label On
+          user_data 2
+          callback {rkr->ShelfBoost_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_ShelfBoost->cleanup();
+findpos(34,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice shelf_preset {
+          label Preset
+          callback {rkr->ShelfBoost_Bypass = 0;
+rkr->efx_ShelfBoost->setpreset((int) o->value());
+shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
+shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
+shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
+shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
+shelf_level->value(rkr->efx_ShelfBoost->getpar(4));
+if((int)shelf_activar->value()) rkr->ShelfBoost_Bypass = 1;}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Trebble
+            xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Mid
+            xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Low
+            xywh {0 0 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider shelf_gain {
+          label Gain
+          callback {rkr->efx_ShelfBoost->changepar(0,(int)o->value());}
+          xywh {369 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shelf_q1 {
+          label {Pres.}
+          callback {rkr->efx_ShelfBoost->changepar(1,(int)o->value());}
+          xywh {369 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shelf_level {
+          label Level
+          callback {rkr->efx_ShelfBoost->changepar(4,(int)o->value());}
+          xywh {369 317 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shelf_freq1 {
+          label Tone
+          callback {rkr->efx_ShelfBoost->changepar(2,(int)o->value());} selected
+          xywh {369 337 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 220 maximum 16000 step 1 value 1000 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button shelf_mode {
+          label Stereo
+          user_data 2
+          callback {rkr->efx_ShelfBoost->changepar(3,(int)o->value());}
+          xywh {333 372 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tuner {
@@ -7940,7 +8009,9 @@ for (i=1; i<=t; i++)
         case 33:
         COILCRAFTER->hide();
         break;
-        
+        case 34:
+        SHELFBOOST->hide();
+        break;
         
       }
       
@@ -8249,6 +8320,12 @@ switch (rkr->efx_order[i])
        if(rkr->CoilCrafter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
+     case 34:
+       SHELFBOOST->position(x[i],y[i]);
+       shelf_activar->shortcut(s[i]);
+       SHELFBOOST->show();
+       if(rkr->ShelfBoost_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
 
 
  }
@@ -9821,6 +9898,7 @@ LOOPER->image(InOut->image());
 RYANWAH->image(InOut->image());
 RBECHO->image(InOut->image());
 COILCRAFTER->image(InOut->image());
+SHELFBOOST->image(InOut->image());
 
 
 Tap->image(InOut->image());

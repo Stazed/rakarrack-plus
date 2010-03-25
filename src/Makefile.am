@@ -44,6 +44,7 @@ rakarrack_SOURCES = main.C \
 	Reverb.h \
 	Ring.h \
 	RyanWah.h \
+	ShelfBoost.h \
 	Shuffle.h \
 	smbPitchShift.h \
 	SVFilter.h \
@@ -101,6 +102,7 @@ rakarrack_SOURCES = main.C \
 	RyanWah.C \
 	RBEcho.C \
 	CoilCrafter.C \
+	ShelfBoost.C \
 	MIDIConverter.C
 	
 	

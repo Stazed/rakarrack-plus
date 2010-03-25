@@ -132,6 +132,8 @@
 #include "RyanWah.h"
 #include "RBEcho.h"
 #include "CoilCrafter.h"
+#include "ShelfBoost.h"
+
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -257,6 +259,7 @@ public:
   class RyanWah *efx_RyanWah;
   class RBEcho *efx_RBEcho;
   class CoilCrafter *efx_CoilCrafter;
+  class ShelfBoost *efx_ShelfBoost;
 
   jack_client_t *jackclient;
   jack_options_t options;
@@ -302,6 +305,7 @@ public:
   int RyanWah_Bypass;
   int RBEcho_Bypass;
   int CoilCrafter_Bypass;
+  int ShelfBoost_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -337,6 +341,8 @@ public:
   int RyanWah_B;
   int RBEcho_B;
   int CoilCrafter_B;
+  int ShelfBoost_B;
+  
   int Cabinet_Preset;
   int Selected_Preset;
   int lv[50][20];
