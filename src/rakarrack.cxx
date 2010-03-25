@@ -5227,13 +5227,6 @@ void RKRGUI::cb_shelf_gain(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shelf_gain_i(o,v);
 }
 
-void RKRGUI::cb_shelf_q1_i(SliderW* o, void*) {
-  rkr->efx_ShelfBoost->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_shelf_q1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shelf_q1_i(o,v);
-}
-
 void RKRGUI::cb_shelf_level_i(SliderW* o, void*) {
   rkr->efx_ShelfBoost->changepar(4,(int)o->value());
 }
@@ -5246,6 +5239,13 @@ void RKRGUI::cb_shelf_freq1_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_shelf_freq1(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shelf_freq1_i(o,v);
+}
+
+void RKRGUI::cb_shelf_q1_i(SliderW* o, void*) {
+  rkr->efx_ShelfBoost->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_shelf_q1(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shelf_q1_i(o,v);
 }
 
 void RKRGUI::cb_shelf_mode_i(Fl_Check_Button* o, void*) {
@@ -12924,24 +12924,7 @@ R average.");
         shelf_gain->align(FL_ALIGN_LEFT);
         shelf_gain->when(FL_WHEN_CHANGED);
       } // SliderW* shelf_gain
-      { shelf_q1 = new SliderW(369, 297, 100, 10, "Pres.");
-        shelf_q1->type(5);
-        shelf_q1->box(FL_FLAT_BOX);
-        shelf_q1->color((Fl_Color)178);
-        shelf_q1->selection_color((Fl_Color)62);
-        shelf_q1->labeltype(FL_NORMAL_LABEL);
-        shelf_q1->labelfont(0);
-        shelf_q1->labelsize(10);
-        shelf_q1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shelf_q1->minimum(-64);
-        shelf_q1->maximum(64);
-        shelf_q1->step(1);
-        shelf_q1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shelf_q1->callback((Fl_Callback*)cb_shelf_q1);
-        shelf_q1->align(FL_ALIGN_LEFT);
-        shelf_q1->when(FL_WHEN_CHANGED);
-      } // SliderW* shelf_q1
-      { shelf_level = new SliderW(369, 317, 100, 10, "Level");
+      { shelf_level = new SliderW(369, 297, 100, 10, "Level");
         shelf_level->type(5);
         shelf_level->box(FL_FLAT_BOX);
         shelf_level->color((Fl_Color)178);
@@ -12959,7 +12942,7 @@ R average.");
         shelf_level->align(FL_ALIGN_LEFT);
         shelf_level->when(FL_WHEN_CHANGED);
       } // SliderW* shelf_level
-      { shelf_freq1 = new SliderW(369, 337, 100, 10, "Tone");
+      { shelf_freq1 = new SliderW(369, 317, 100, 10, "Tone");
         shelf_freq1->type(5);
         shelf_freq1->box(FL_FLAT_BOX);
         shelf_freq1->color((Fl_Color)178);
@@ -12977,6 +12960,23 @@ R average.");
         shelf_freq1->align(FL_ALIGN_LEFT);
         shelf_freq1->when(FL_WHEN_CHANGED);
       } // SliderW* shelf_freq1
+      { shelf_q1 = new SliderW(369, 337, 100, 10, "Pres.");
+        shelf_q1->type(5);
+        shelf_q1->box(FL_FLAT_BOX);
+        shelf_q1->color((Fl_Color)178);
+        shelf_q1->selection_color((Fl_Color)62);
+        shelf_q1->labeltype(FL_NORMAL_LABEL);
+        shelf_q1->labelfont(0);
+        shelf_q1->labelsize(10);
+        shelf_q1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shelf_q1->minimum(-64);
+        shelf_q1->maximum(64);
+        shelf_q1->step(1);
+        shelf_q1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shelf_q1->callback((Fl_Callback*)cb_shelf_q1);
+        shelf_q1->align(FL_ALIGN_LEFT);
+        shelf_q1->when(FL_WHEN_CHANGED);
+      } // SliderW* shelf_q1
       { shelf_mode = new Fl_Check_Button(333, 372, 15, 15, "Stereo");
         shelf_mode->down_box(FL_BORDER_BOX);
         shelf_mode->labelsize(10);

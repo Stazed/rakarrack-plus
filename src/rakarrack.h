@@ -2468,11 +2468,6 @@ private:
   void cb_shelf_gain_i(SliderW*, void*);
   static void cb_shelf_gain(SliderW*, void*);
 public:
-  SliderW *shelf_q1;
-private:
-  void cb_shelf_q1_i(SliderW*, void*);
-  static void cb_shelf_q1(SliderW*, void*);
-public:
   SliderW *shelf_level;
 private:
   void cb_shelf_level_i(SliderW*, void*);
@@ -2482,6 +2477,11 @@ public:
 private:
   void cb_shelf_freq1_i(SliderW*, void*);
   static void cb_shelf_freq1(SliderW*, void*);
+public:
+  SliderW *shelf_q1;
+private:
+  void cb_shelf_q1_i(SliderW*, void*);
+  static void cb_shelf_q1(SliderW*, void*);
 public:
   Fl_Check_Button *shelf_mode;
 private:
