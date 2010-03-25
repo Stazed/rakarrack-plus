@@ -149,7 +149,6 @@ AnalogFilter::computefiltercoefs ()
 	  c[2] = (1.0f - cs) * .5f / tmp;
 	  d[1] = -2.0f * cs / tmp * (-1.0f);
 	  d[2] = (1.0f - alpha) / tmp * (-1.0f);
-	  	  printf("compcoeffs:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], d[1], d[2]);
 	}
       else
 	{
@@ -474,10 +473,10 @@ AnalogFilter::filterout (float * smp)
 void  AnalogFilter::reversecoeffs()
 {
 	float tmpd1, tmpd2, tmpc0;
-	  printf("before:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], d[1], d[2]);	
+//	  printf("before:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], d[1], d[2]);	
 	  tmpd1 = -1.0f * d[1];
 	  tmpd2 = -1.0f * d[2];
-	  printf("before:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], tmpd1, tmpd2);
+//	  printf("before:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], tmpd1, tmpd2);
 	  
 	  tmpc0 = 10.0f * c[0];
 
@@ -488,7 +487,7 @@ void  AnalogFilter::reversecoeffs()
 	  c[2] = tmpd2*tmpc0;
 	  
 	  
-	  printf("after:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], d[1], d[2]);	
+//	  printf("after:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], d[1], d[2]);	
 };
 
 float AnalogFilter::H (float freq)
