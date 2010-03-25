@@ -38,23 +38,25 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
   Ptone = 20;
   att = 30;
 
-  tfreqs[0]=4400.0f;
-  tfreqs[1]=4200.0f;
-  tfreqs[2]=2900.0f;
-  tfreqs[3]=3000.0f;
-  tfreqs[4]=2700.0f;
-  tfreqs[5]=3300.0f;
+  tfreqs[0]=4000.0f;
+  tfreqs[1]=4400.0f;
+  tfreqs[2]=4200.0f;
+  tfreqs[3]=2900.0f;
+  tfreqs[4]=3000.0f;
+  tfreqs[5]=2700.0f;
   tfreqs[6]=3300.0f;
-  tfreqs[7]=2800.0f;
+  tfreqs[7]=3300.0f;
+  tfreqs[8]=2800.0f;
   
   tqs[0]=4.2f;
-  tqs[1]=2.3f;
-  tqs[2]=1.8f;
-  tqs[3]=2.2f;
-  tqs[4]=2.1f;
-  tqs[5]=1.7f;
+  tqs[1]=4.2f;
+  tqs[2]=2.3f;
+  tqs[3]=1.8f;
+  tqs[4]=2.2f;
+  tqs[5]=2.1f;
   tqs[6]=1.7f;
-  tqs[7]=1.8f;
+  tqs[7]=1.7f;
+  tqs[8]=1.8f;
    
   
   
@@ -110,7 +112,8 @@ CoilCrafter::out (float * smpsl, float * smpsr)
  int i;
 
 
-
+if(Ppo>0)
+{
 RB1l->filterout(smpsl);
 RB1r->filterout(smpsr);
 
@@ -120,9 +123,12 @@ for (i=0; i<PERIOD; i++)
   smpsr[i]*=att;
 }
 
-
+}
+if(Ppd>0)
+{
 RB2l->filterout(smpsl);
 RB2r->filterout(smpsr);
+}
 
 if(Pmode) harm->harm_out(smpsl,smpsr);
 
@@ -200,9 +206,9 @@ CoilCrafter::setpreset (int npreset)
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //H to S
-    {64, 5, 0, 3300, 16,  4400, 42, 20, 0},
+    {64, 6, 1, 3300, 16,  4400, 42, 20, 0},
     //S to H
-    {64, 0, 5, 4400, 42, 3300, 16, 20, 0},
+    {64, 1, 6, 4400, 42, 3300, 16, 20, 0},
    
 
   };
@@ -228,21 +234,27 @@ CoilCrafter::changepar (int npar, int value)
       break;
     case 1:
       Ppo = value; 
+      if (Ppo>0)
+      {
       freq1 = tfreqs[value];
       Pfreq1 = (int)freq1;
       setfreq1();
       q1 = tqs[value];
       Pq1 = (int)(q1*10.0f);
       setq1();
+      }
       break;
     case 2:
       Ppd = value; 
+      if(Ppd>0)
+      {
       freq2 = tfreqs[value];
       Pfreq2 = (int)freq2;
       setfreq2();
       q2 = tqs[value];
       Pq2 =(int)(q2*10.0f);
       setq2();
+      }
       break;
     case 3: 
       Pfreq1 = value;

@@ -5469,9 +5469,13 @@ if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;}
           label Origin
           callback {rkr->efx_CoilCrafter->changepar(1,(int)o->value());
 coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));}
+coil_q1->value(rkr->efx_CoilCrafter->getpar(4));} open
           xywh {368 266 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
+          MenuItem {} {
+            label Off selected
+            xywh {0 0 36 21} labelsize 10
+          }
           MenuItem {} {
             label {Fender Strat (old)}
             xywh {42 42 36 21} labelsize 10
@@ -5533,7 +5537,7 @@ coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open
         }
         Fl_Value_Slider coil_q2 {
           label Q2
-          callback {rkr->efx_CoilCrafter->changepar(6,(int)o->value());} selected
+          callback {rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
           xywh {370 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 value 20 textcolor 7
           class SliderW
         }

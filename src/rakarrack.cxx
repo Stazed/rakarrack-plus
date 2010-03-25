@@ -5133,6 +5133,7 @@ void RKRGUI::cb_coil_origin(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_coil_origin[] = {
+ {"Off", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Fender Strat (old)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Fender Strat (new)", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Squire Strat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
