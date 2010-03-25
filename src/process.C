@@ -1322,29 +1322,27 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                   efx_RyanWah->out(efxoutl, efxoutr);
 		  Vol_Efx(31,efx_RyanWah->outvolume);
                 }
-
+              break; 
 	     case 32:
               if (RBEcho_Bypass)
                 {
                   efx_RBEcho->out(efxoutl, efxoutr);
 		  Vol_Efx(32,efx_RBEcho->outvolume);
                 }
-
+              break; 
 	     case 33:
               if (CoilCrafter_Bypass)
                 {
                   efx_CoilCrafter->out(efxoutl, efxoutr);
 		  Vol2_Efx();
-                }
-
+                } 
+              break;
 	     case 34:
               if (ShelfBoost_Bypass)
                 {
                   efx_ShelfBoost->out(efxoutl, efxoutr);
 		  Vol2_Efx();
                 }
-
-
               break;  
 
 
