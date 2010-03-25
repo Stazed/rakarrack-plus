@@ -433,7 +433,7 @@ RKR::savefile (char *filename)
                    efx_RyanWah->getpar(14), efx_RyanWah->getpar(15), 
                    efx_RyanWah->getpar(16), RyanWah_Bypass);
 
-
+          break;
 
 
 	}
