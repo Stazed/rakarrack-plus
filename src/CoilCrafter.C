@@ -36,6 +36,7 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
   Ppreset = 0;
   Pvolume = 50;
   Ptone = 20;
+  att = 30;
 
   tfreqs[0]=4400.0f;
   tfreqs[1]=4200.0f;
@@ -269,7 +270,7 @@ CoilCrafter::changepar (int npar, int value)
       break;
      case 8:
       Pmode = value;
-      if(Pmode) att=.25f; else att=1.0f;
+
       break;
  
     };
