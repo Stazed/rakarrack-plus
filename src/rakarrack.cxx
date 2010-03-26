@@ -16033,7 +16033,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<286; i++)
+for (i=1; i<292; i++)
 
 {
 
@@ -17083,6 +17083,30 @@ switch (i)
      case 285:
      convo_length->value(rkr->efx_Convol->getpar(3));
      convo_length->redraw();
+     break;
+     case 286:
+     coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
+     coil_WD->redraw();
+     break;
+     case 287:
+     coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
+     coil_tone->redraw();
+     break;
+     case 288:
+     coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
+     coil_freq1->redraw();
+     break;
+     case 289:
+     coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
+     coil_q1->redraw();
+     break;
+     case 290:
+     coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
+     coil_freq2->redraw();
+     break;
+     case 291:
+     coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
+     coil_q2->redraw();
      break;
          
 

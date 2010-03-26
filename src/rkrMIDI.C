@@ -1796,7 +1796,30 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 285:
          efx_Convol->changepar(3,5+(int)((float)value*1.9291339f));
          break;
+    
+    case 286:
+         efx_CoilCrafter->changepar(0,value);
+         break;
 
+    case 287:
+         efx_CoilCrafter->changepar(7,20+(int)((float)value*34.488189f));
+         break;
+
+    case 288:
+         efx_CoilCrafter->changepar(3,2600+(int)((float)value*14.96063f));
+         break;
+
+    case 289:
+         efx_CoilCrafter->changepar(4,10+(int)((float)value*.43307087f));
+         break;
+
+    case 290:
+         efx_CoilCrafter->changepar(0,2600+(int)((float)value*14.96063f));
+         break;
+
+    case 291:
+         efx_CoilCrafter->changepar(6,10+(int)((float)value*.43307087f));
+         break;
 
    } 
       

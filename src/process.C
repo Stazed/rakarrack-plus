@@ -215,7 +215,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 260;
+  NumParams= 266;
 
 {
    static const char *los_params[] = 
@@ -260,6 +260,12 @@ RKR::RKR ()
 "Chorus Rnd","105",
 "Chorus St_df","99",
 "Chorus Wet/Dry","52",
+"CoilCrafter Freq1","288",
+"CoilCrafter Freq2","290",
+"CoilCrafter Gain","286",
+"CoilCrafter Q1","289",
+"CoilCrafter Q2","291",
+"CoilCrafter Tone","287",
 "Compressor A.Time","142",
 "Compressor Knee","145",
 "Compressor Output","147",
