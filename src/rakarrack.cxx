@@ -12973,8 +12973,6 @@ R average.");
         coil_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_mode->callback((Fl_Callback*)cb_coil_mode, (void*)(2));
       } // Fl_Check_Button* coil_mode
-      { coil_dis = new Fl_Box(381, 370, 89, 17);
-      } // Fl_Box* coil_dis
       COILCRAFTER->end();
     } // Fl_Group* COILCRAFTER
     { SHELFBOOST = new Fl_Group(320, 211, 158, 184);
@@ -15098,7 +15096,32 @@ ryanwah_hp->value(rkr->lv[32][12]);
 svfilter_stages->value(rkr->lv[32][13]);
 ryanwah_activar->value(rkr->RyanWah_Bypass);
 
+// RBEcho here .........
 
+
+
+// CoilCrafter
+
+coil_WD->value(rkr->lv[34][0]-64);
+coil_tone->value(rkr->lv[34][7]);
+coil_origin->value(rkr->lv[34][1]);
+coil_freq1->value(rkr->lv[34][3]);
+coil_q1->value(rkr->lv[34][4]);
+coil_destiny->value(rkr->lv[34][2]);
+coil_freq2->value(rkr->lv[34][5]);
+coil_q2->value(rkr->lv[34][6]);
+coil_mode->value(rkr->lv[34][8]);
+coil_activar->value(rkr->CoilCrafter_Bypass);
+
+
+//ShelfBoost
+
+shelf_gain->value(rkr->lv[35][0]);
+shelf_level->value(rkr->lv[35][4]);
+shelf_freq1->value(rkr->lv[35][2]);
+shelf_q1->value(rkr->lv[35][1]);
+shelf_mode->value(rkr->lv[35][3]);
+shelf_activar->value(rkr->ShelfBoost_Bypass);
 
 
 

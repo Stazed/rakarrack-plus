@@ -2450,7 +2450,6 @@ private:
   void cb_coil_mode_i(Fl_Check_Button*, void*);
   static void cb_coil_mode(Fl_Check_Button*, void*);
 public:
-  Fl_Box *coil_dis;
   Fl_Group *SHELFBOOST;
   Fl_Light_Button *shelf_activar;
 private:

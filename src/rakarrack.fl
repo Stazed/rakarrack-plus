@@ -5469,7 +5469,7 @@ if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;}
           label Origin
           callback {rkr->efx_CoilCrafter->changepar(1,(int)o->value());
 coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));} open
+coil_q1->value(rkr->efx_CoilCrafter->getpar(4));}
           xywh {368 266 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5547,9 +5547,6 @@ coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open
           callback {rkr->efx_CoilCrafter->changepar(8,(int)o->value());}
           xywh {333 372 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
-        Fl_Box coil_dis {
-          xywh {381 370 89 17}
-        }
       }
       Fl_Group SHELFBOOST {
         user_data 1
@@ -5561,7 +5558,7 @@ coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open
           callback {rkr->ShelfBoost_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_ShelfBoost->cleanup();
-findpos(34,(int)o->value());}
+findpos(34,(int)o->value());} selected
           xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice shelf_preset {
@@ -7820,7 +7817,32 @@ ryanwah_hp->value(rkr->lv[32][12]);
 svfilter_stages->value(rkr->lv[32][13]);
 ryanwah_activar->value(rkr->RyanWah_Bypass);
 
+// RBEcho here .........
 
+
+
+// CoilCrafter
+
+coil_WD->value(rkr->lv[34][0]-64);
+coil_tone->value(rkr->lv[34][7]);
+coil_origin->value(rkr->lv[34][1]);
+coil_freq1->value(rkr->lv[34][3]);
+coil_q1->value(rkr->lv[34][4]);
+coil_destiny->value(rkr->lv[34][2]);
+coil_freq2->value(rkr->lv[34][5]);
+coil_q2->value(rkr->lv[34][6]);
+coil_mode->value(rkr->lv[34][8]);
+coil_activar->value(rkr->CoilCrafter_Bypass);
+
+
+//ShelfBoost
+
+shelf_gain->value(rkr->lv[35][0]);
+shelf_level->value(rkr->lv[35][4]);
+shelf_freq1->value(rkr->lv[35][2]);
+shelf_q1->value(rkr->lv[35][1]);
+shelf_mode->value(rkr->lv[35][3]);
+shelf_activar->value(rkr->ShelfBoost_Bypass);
 
 
 
@@ -10031,8 +10053,7 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;
