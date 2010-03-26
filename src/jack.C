@@ -32,7 +32,7 @@ pthread_mutex_t jmutex;
 
 jack_client_t *jackclient;
 jack_port_t *outport_left, *outport_right;
-jack_port_t *inputport_left, *inputport_right;
+jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
 
 void *dataout;
@@ -63,6 +63,9 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
     jack_port_register (jackclient, "in_2", JACK_DEFAULT_AUDIO_TYPE,
 			JackPortIsInput, 0);
 
+  inputport_aux =
+    jack_port_register (jackclient, "aux", JACK_DEFAULT_AUDIO_TYPE,
+			JackPortIsInput, 0);
 
   outport_left =
     jack_port_register (jackclient, "out_1", JACK_DEFAULT_AUDIO_TYPE,
@@ -124,6 +127,9 @@ jackprocess (jack_nframes_t nframes, void *arg)
   jack_default_audio_sample_t *inr = (jack_default_audio_sample_t *)
     jack_port_get_buffer (inputport_right, nframes);
 
+  jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
+    jack_port_get_buffer (inputport_aux, nframes);
+
 
   pthread_mutex_lock (&jmutex);
 
@@ -157,7 +163,12 @@ jackprocess (jack_nframes_t nframes, void *arg)
 	  sizeof (jack_default_audio_sample_t) * nframes);
   memcpy (JackOUT->efxoutr, inr,
 	  sizeof (jack_default_audio_sample_t) * nframes);
+  memcpy (JackOUT->auxdata, aux,
+	  sizeof (jack_default_audio_sample_t) * nframes);
   
+
+
+
   JackOUT->Alg (JackOUT->efxoutl, JackOUT->efxoutr, inl, inr ,0);
 
   

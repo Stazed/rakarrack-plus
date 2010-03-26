@@ -131,6 +131,9 @@ RKR::RKR ()
   anall = (float *) malloc (sizeof (float) * PERIOD);
   analr = (float *) malloc (sizeof (float) * PERIOD);
 
+  auxdata = (float *) malloc (sizeof (float) * PERIOD);
+  auxresampled = (float *) malloc (sizeof (float) * PERIOD);
+
 
   efx_Chorus = new Chorus (efxoutl, efxoutr);
   efx_Flanger = new Chorus (efxoutl, efxoutr);
@@ -171,7 +174,7 @@ RKR::RKR ()
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
-
+  A_Resample = new Resample(3);
 
 
   efx_Tuner = new Tuner ();
@@ -608,6 +611,7 @@ RKR::Adjust_Upsample()
    PERIOD = J_PERIOD*(UpAmo+2);
    u_up = (double)UpAmo+2.0;
    u_down = 1.0 / u_up;
+   
 
   }
    else
@@ -879,6 +883,21 @@ RKR::calculavol (int i)
 
 }
 
+int
+RKR::checkforaux()
+{
+int i;
+
+for(i=0;i<10;i++)  
+if(efx_order[i]==35)
+{
+//if (Vocoder_Bypass) return(1);
+
+}
+
+return(0);
+    
+}
 void
 RKR::Control_Gain (float *origl, float *origr)
 {
@@ -889,7 +908,12 @@ RKR::Control_Gain (float *origl, float *origr)
   float tmp;
   
   if(upsample)
+  {
   U_Resample->out(origl,origr,efxoutl,efxoutr,J_PERIOD,u_up);
+  if(checkforaux()) A_Resample->mono_out(auxdata,auxresampled,J_PERIOD,u_up);
+  }
+  else
+  if(checkforaux()) memcpy(auxresampled,auxdata,sizeof(float)*J_PERIOD); 
 
   for (i = 0; i <= PERIOD; i++)
     {

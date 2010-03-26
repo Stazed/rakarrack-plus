@@ -217,6 +217,7 @@ public:
   int TapTempo();
   void TapTempo_Timeout(int state);
   void Update_tempo();
+  int checkforaux();
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;
@@ -255,6 +256,7 @@ public:
   class Convolotron *efx_Convol;
   class Resample *U_Resample;
   class Resample *D_Resample;
+  class Resample *A_Resample;
   class Looper *efx_Looper;
   class RyanWah *efx_RyanWah;
   class RBEcho *efx_RBEcho;
@@ -406,6 +408,8 @@ public:
 
   float *efxoutl;
   float *efxoutr;
+  float *auxdata;
+  float *auxresampled;
   float *anall;
   float *analr;
   float *smpl;
