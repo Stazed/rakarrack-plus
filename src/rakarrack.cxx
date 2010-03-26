@@ -6064,6 +6064,13 @@ void RKRGUI::cb_Username(Fl_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Username_i(o,v);
 }
 
+void RKRGUI::cb_T_TIMEOUT_i(Fl_Check_Button* o, void*) {
+  rkr->t_timeout=(int) o->value();
+}
+void RKRGUI::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_TIMEOUT_i(o,v);
+}
+
 void RKRGUI::cb_BF_Browser_i(Fl_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
@@ -13685,6 +13692,13 @@ R average.");
         Username->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Username->callback((Fl_Callback*)cb_Username);
       } // Fl_Input* Username
+      { T_TIMEOUT = new Fl_Check_Button(596, 419, 21, 20, "Tap Tempo Timeout");
+        T_TIMEOUT->down_box(FL_DOWN_BOX);
+        T_TIMEOUT->labelsize(11);
+        T_TIMEOUT->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
+        T_TIMEOUT->align(FL_ALIGN_LEFT);
+      } // Fl_Check_Button* T_TIMEOUT
       MISC_SET->end();
     } // Fl_Group* MISC_SET
     { BANK_SET = new Fl_Group(10, 468, 510, 55, "Bank");
@@ -14175,6 +14189,8 @@ rkr->efx_MIDIConverter->setVelAdjust(k);
 
 rakarrack.get(rkr->PrefNom("TapTempo Input"),rkr->Tap_Selection,0);
 T_SEL->value(rkr->Tap_Selection);
+rakarrack.get(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout,0);
+T_TIMEOUT->value(rkr->t_timeout);
 }
 
 void RKRGUI::save_stat(int i) {
@@ -14287,7 +14303,7 @@ rakarrack.set(rkr->PrefNom("MIDI IN Device"),temp);
 rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
 rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
-
+rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
 
 int k=1;
 char temp1[128];

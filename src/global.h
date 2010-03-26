@@ -507,6 +507,7 @@ public:
   int Tap_Display;
   int Tap_Selection;
   int Tap_TempoSet;
+  int t_timeout;
 
 };
 

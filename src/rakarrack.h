@@ -2844,6 +2844,11 @@ private:
   void cb_Username_i(Fl_Input*, void*);
   static void cb_Username(Fl_Input*, void*);
 public:
+  Fl_Check_Button *T_TIMEOUT;
+private:
+  void cb_T_TIMEOUT_i(Fl_Check_Button*, void*);
+  static void cb_T_TIMEOUT(Fl_Check_Button*, void*);
+public:
   Fl_Group *BANK_SET;
   Fl_File_Input *BFiname;
   Fl_Button *BF_Browser;
