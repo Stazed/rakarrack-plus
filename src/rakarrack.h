@@ -2488,6 +2488,58 @@ private:
   void cb_shelf_mode_i(Fl_Check_Button*, void*);
   static void cb_shelf_mode(Fl_Check_Button*, void*);
 public:
+  Fl_Group *VOCODER;
+  Fl_Light_Button *vo_activar;
+private:
+  void cb_vo_activar_i(Fl_Light_Button*, void*);
+  static void cb_vo_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *vo_preset;
+private:
+  void cb_vo_preset_i(Fl_Choice*, void*);
+  static void cb_vo_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_vo_preset[];
+public:
+  SliderW *vo_WD;
+private:
+  void cb_vo_WD_i(SliderW*, void*);
+  static void cb_vo_WD(SliderW*, void*);
+public:
+  SliderW *vo_pan;
+private:
+  void cb_vo_pan_i(SliderW*, void*);
+  static void cb_vo_pan(SliderW*, void*);
+public:
+  SliderW *vo_level;
+private:
+  void cb_vo_level_i(SliderW*, void*);
+  static void cb_vo_level(SliderW*, void*);
+public:
+  SliderW *vo_damp;
+private:
+  void cb_vo_damp_i(SliderW*, void*);
+  static void cb_vo_damp(SliderW*, void*);
+public:
+  SliderW *vo_fb;
+private:
+  void cb_vo_fb_i(SliderW*, void*);
+  static void cb_vo_fb(SliderW*, void*);
+public:
+  SliderW *vo_length;
+private:
+  void cb_vo_length_i(SliderW*, void*);
+  static void cb_vo_length(SliderW*, void*);
+public:
+  Fl_Check_Button *vo_reverb;
+private:
+  void cb_vo_reverb_i(Fl_Check_Button*, void*);
+  static void cb_vo_reverb(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *vo_safe;
+private:
+  void cb_vo_safe_i(Fl_Check_Button*, void*);
+  static void cb_vo_safe(Fl_Check_Button*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

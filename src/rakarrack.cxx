@@ -5255,6 +5255,96 @@ void RKRGUI::cb_shelf_mode(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shelf_mode_i(o,v);
 }
 
+void RKRGUI::cb_vo_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Vocoder_Bypass=(int)o->value();
+if((int) o->value()==0)
+findpos(35,(int)o->value());
+}
+void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_activar_i(o,v);
+}
+
+void RKRGUI::cb_vo_preset_i(Fl_Choice* o, void*) {
+  rkr->Vocoder_Bypass=0;
+rkr->efx_Vocoder->setpreset((int) o->value());
+vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
+vo_level->value(rkr->efx_Vocoder->getpar(7));
+vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
+vo_damp->value(rkr->efx_Vocoder->getpar(6));
+vo_length->value(rkr->efx_Vocoder->getpar(3));
+vo_reverb->value(rkr->efx_Vocoder->getpar(9));
+vo_safe->value(rkr->efx_Vocoder->getpar(2));
+vo_fb->value(rkr->efx_Vocoder->getpar(10));
+if((int)vo_activar->value())rkr->Vocoder_Bypass=1;
+}
+void RKRGUI::cb_vo_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_vo_preset[] = {
+ {"Vocoder 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Vocoder 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Vocoder 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Vocoder 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_vo_WD_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_vo_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_WD_i(o,v);
+}
+
+void RKRGUI::cb_vo_pan_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));
+}
+void RKRGUI::cb_vo_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_pan_i(o,v);
+}
+
+void RKRGUI::cb_vo_level_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_vo_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_level_i(o,v);
+}
+
+void RKRGUI::cb_vo_damp_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_vo_damp(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_damp_i(o,v);
+}
+
+void RKRGUI::cb_vo_fb_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_vo_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_fb_i(o,v);
+}
+
+void RKRGUI::cb_vo_length_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_vo_length(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_length_i(o,v);
+}
+
+void RKRGUI::cb_vo_reverb_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Vocoder->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_vo_reverb(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_reverb_i(o,v);
+}
+
+void RKRGUI::cb_vo_safe_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Vocoder->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_vo_safe(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_safe_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -12992,6 +13082,149 @@ R average.");
       } // Fl_Check_Button* shelf_mode
       SHELFBOOST->end();
     } // Fl_Group* SHELFBOOST
+    { VOCODER = new Fl_Group(320, 210, 158, 185);
+      VOCODER->box(FL_UP_BOX);
+      VOCODER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      VOCODER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      VOCODER->labelfont(1);
+      VOCODER->user_data((void*)(1));
+      VOCODER->align(96|FL_ALIGN_INSIDE);
+      VOCODER->hide();
+      { vo_activar = new Fl_Light_Button(326, 214, 34, 18, "On");
+        vo_activar->shortcut(0x35);
+        vo_activar->color((Fl_Color)62);
+        vo_activar->selection_color((Fl_Color)1);
+        vo_activar->labelsize(10);
+        vo_activar->callback((Fl_Callback*)cb_vo_activar, (void*)(2));
+        vo_activar->align(68|FL_ALIGN_INSIDE);
+        vo_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* vo_activar
+      { vo_preset = new Fl_Choice(399, 214, 76, 18, "Preset");
+        vo_preset->down_box(FL_BORDER_BOX);
+        vo_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        vo_preset->labelsize(10);
+        vo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_preset->textsize(10);
+        vo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_preset->callback((Fl_Callback*)cb_vo_preset);
+        vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        vo_preset->menu(menu_vo_preset);
+      } // Fl_Choice* vo_preset
+      { vo_WD = new SliderW(372, 240, 100, 10, "Wet/Dry");
+        vo_WD->type(5);
+        vo_WD->box(FL_FLAT_BOX);
+        vo_WD->color((Fl_Color)178);
+        vo_WD->selection_color((Fl_Color)62);
+        vo_WD->labeltype(FL_NORMAL_LABEL);
+        vo_WD->labelfont(0);
+        vo_WD->labelsize(10);
+        vo_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_WD->minimum(-64);
+        vo_WD->maximum(64);
+        vo_WD->step(1);
+        vo_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_WD->callback((Fl_Callback*)cb_vo_WD);
+        vo_WD->align(FL_ALIGN_LEFT);
+        vo_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_WD
+      { vo_pan = new SliderW(372, 256, 100, 10, "Pan");
+        vo_pan->type(5);
+        vo_pan->box(FL_FLAT_BOX);
+        vo_pan->color((Fl_Color)178);
+        vo_pan->selection_color((Fl_Color)62);
+        vo_pan->labeltype(FL_NORMAL_LABEL);
+        vo_pan->labelfont(0);
+        vo_pan->labelsize(10);
+        vo_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_pan->minimum(-64);
+        vo_pan->maximum(63);
+        vo_pan->step(1);
+        vo_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_pan->callback((Fl_Callback*)cb_vo_pan);
+        vo_pan->align(FL_ALIGN_LEFT);
+        vo_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_pan
+      { vo_level = new SliderW(372, 272, 100, 10, "Level");
+        vo_level->type(5);
+        vo_level->box(FL_FLAT_BOX);
+        vo_level->color((Fl_Color)178);
+        vo_level->selection_color((Fl_Color)62);
+        vo_level->labeltype(FL_NORMAL_LABEL);
+        vo_level->labelfont(0);
+        vo_level->labelsize(10);
+        vo_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_level->maximum(127);
+        vo_level->step(1);
+        vo_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_level->callback((Fl_Callback*)cb_vo_level);
+        vo_level->align(FL_ALIGN_LEFT);
+        vo_level->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_level
+      { vo_damp = new SliderW(372, 288, 100, 10, "Damp");
+        vo_damp->type(5);
+        vo_damp->box(FL_FLAT_BOX);
+        vo_damp->color((Fl_Color)178);
+        vo_damp->selection_color((Fl_Color)62);
+        vo_damp->labeltype(FL_NORMAL_LABEL);
+        vo_damp->labelfont(0);
+        vo_damp->labelsize(10);
+        vo_damp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_damp->maximum(127);
+        vo_damp->step(1);
+        vo_damp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_damp->callback((Fl_Callback*)cb_vo_damp);
+        vo_damp->align(FL_ALIGN_LEFT);
+        vo_damp->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_damp
+      { vo_fb = new SliderW(372, 304, 100, 10, "Fb");
+        vo_fb->type(5);
+        vo_fb->box(FL_FLAT_BOX);
+        vo_fb->color((Fl_Color)178);
+        vo_fb->selection_color((Fl_Color)62);
+        vo_fb->labeltype(FL_NORMAL_LABEL);
+        vo_fb->labelfont(0);
+        vo_fb->labelsize(10);
+        vo_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_fb->minimum(-64);
+        vo_fb->maximum(64);
+        vo_fb->step(1);
+        vo_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_fb->callback((Fl_Callback*)cb_vo_fb);
+        vo_fb->align(FL_ALIGN_LEFT);
+        vo_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_fb
+      { vo_length = new SliderW(372, 320, 100, 10, "Length");
+        vo_length->type(5);
+        vo_length->box(FL_FLAT_BOX);
+        vo_length->color((Fl_Color)178);
+        vo_length->selection_color((Fl_Color)62);
+        vo_length->labeltype(FL_NORMAL_LABEL);
+        vo_length->labelfont(0);
+        vo_length->labelsize(10);
+        vo_length->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_length->minimum(5);
+        vo_length->maximum(250);
+        vo_length->step(1);
+        vo_length->value(100);
+        vo_length->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_length->callback((Fl_Callback*)cb_vo_length);
+        vo_length->align(FL_ALIGN_LEFT);
+        vo_length->when(FL_WHEN_RELEASE);
+      } // SliderW* vo_length
+      { vo_reverb = new Fl_Check_Button(339, 336, 15, 15, "Reverb");
+        vo_reverb->down_box(FL_BORDER_BOX);
+        vo_reverb->labelsize(10);
+        vo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_reverb->callback((Fl_Callback*)cb_vo_reverb, (void*)(2));
+      } // Fl_Check_Button* vo_reverb
+      { vo_safe = new Fl_Check_Button(339, 351, 15, 15, "Safe Mode");
+        vo_safe->down_box(FL_BORDER_BOX);
+        vo_safe->labelsize(10);
+        vo_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_safe->callback((Fl_Callback*)cb_vo_safe, (void*)(2));
+      } // Fl_Check_Button* vo_safe
+      VOCODER->end();
+    } // Fl_Group* VOCODER
     { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -15159,7 +15392,12 @@ for (i=1; i<=t; i++)
         case 34:
         SHELFBOOST->hide();
         break;
+        case 35:
+        VOCODER->hide();
+        break;
         
+
+
       }
       
     }
@@ -15472,6 +15710,13 @@ switch (rkr->efx_order[i])
        shelf_activar->shortcut(s[i]);
        SHELFBOOST->show();
        if(rkr->ShelfBoost_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 35:
+       VOCODER->position(x[i],y[i]);
+       vo_activar->shortcut(s[i]);
+       VOCODER->show();
+       if(rkr->Vocoder_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -17059,6 +17304,7 @@ RYANWAH->image(InOut->image());
 RBECHO->image(InOut->image());
 COILCRAFTER->image(InOut->image());
 SHELFBOOST->image(InOut->image());
+VOCODER->image(InOut->image());
 
 
 Tap->image(InOut->image());
