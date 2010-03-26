@@ -171,6 +171,7 @@ RKR::RKR ()
   efx_RBEcho = new RBEcho(efxoutl,efxoutr);
   efx_CoilCrafter = new CoilCrafter(efxoutl,efxoutr);
   efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr);
+  efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -198,7 +199,7 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 35;
+  NumEffects = 36;
 
   {
     static const char *los_names[] =
@@ -207,7 +208,7 @@ RKR::RKR ()
       "Cabinet", "Pan", "Harmonizer", "MusicalDelay", "NoiseGate", "Derelict",
       "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",  "DistBand", 
       "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", 
-      "Looper", "MuTroMojo", "RBEcho", "Coil Crafter", "ShelfBoost"
+      "Looper", "MuTroMojo", "RBEcho", "Coil Crafter", "ShelfBoost", "Vocoder"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -1031,6 +1032,7 @@ RKR::cleanup_efx ()
   efx_RBEcho->cleanup();
   efx_CoilCrafter->cleanup();
   efx_ShelfBoost->cleanup();
+  efx_Vocoder->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 
@@ -1369,6 +1371,13 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 }
               break;  
 
+	     case 35:
+              if (Vocoder_Bypass)
+                {
+                  efx_Vocoder->out(efxoutl, efxoutr, auxresampled);
+		  Vol_Efx(35,efx_Vocoder->outvolume);
+                }
+              break;  
 
 	    }
 

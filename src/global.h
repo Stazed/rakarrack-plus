@@ -133,7 +133,7 @@
 #include "RBEcho.h"
 #include "CoilCrafter.h"
 #include "ShelfBoost.h"
-
+#include "Vocoder.h"
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -262,6 +262,7 @@ public:
   class RBEcho *efx_RBEcho;
   class CoilCrafter *efx_CoilCrafter;
   class ShelfBoost *efx_ShelfBoost;
+  class Vocoder *efx_Vocoder;
 
   jack_client_t *jackclient;
   jack_options_t options;
@@ -308,6 +309,7 @@ public:
   int RBEcho_Bypass;
   int CoilCrafter_Bypass;
   int ShelfBoost_Bypass;
+  int Vocoder_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -344,6 +346,7 @@ public:
   int RBEcho_B;
   int CoilCrafter_B;
   int ShelfBoost_B;
+  int Vocoder_B;
   
   int Cabinet_Preset;
   int Selected_Preset;
