@@ -31,7 +31,7 @@ class Vocoder
 public:
   Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_);
   ~Vocoder ();
-  void out (float * smpsl, float * smpr, float *auxres);
+  void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);

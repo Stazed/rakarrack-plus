@@ -15102,7 +15102,7 @@ ryanwah_activar->value(rkr->RyanWah_Bypass);
 
 // CoilCrafter
 
-coil_WD->value(rkr->lv[34][0]-64);
+coil_WD->value(rkr->lv[34][0]);
 coil_tone->value(rkr->lv[34][7]);
 coil_origin->value(rkr->lv[34][1]);
 coil_freq1->value(rkr->lv[34][3]);

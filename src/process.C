@@ -1374,7 +1374,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	     case 35:
               if (Vocoder_Bypass)
                 {
-                  efx_Vocoder->out(efxoutl, efxoutr, auxresampled);
+                  efx_Vocoder->out(efxoutl, efxoutr);
 		  Vol_Efx(35,efx_Vocoder->outvolume);
                 }
               break;  

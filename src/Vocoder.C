@@ -74,7 +74,7 @@ Vocoder::cleanup ()
  * Effect output
  */
 void
-Vocoder::out (float * smpsl, float * smpsr, float *auxresam)
+Vocoder::out (float * smpsl, float * smpsr)
 {
   int i, j, xindex, verbindex;
   float l,lyn;
