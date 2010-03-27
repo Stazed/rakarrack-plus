@@ -36,7 +36,7 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
   Ppreset = 0;
   Pvolume = 50;
   Ptone = 20;
-  att = 30.0f;
+  att = 30.0f*powf(PI,fSAMPLE_RATE/44100.0f);
 
   tfreqs[0]=4000.0f;
   tfreqs[1]=4400.0f;
