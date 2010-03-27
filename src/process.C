@@ -902,8 +902,7 @@ int i;
 for(i=0;i<10;i++)  
 if(efx_order[i]==35)
 {
-//if (Vocoder_Bypass) return(1);
-
+if (Vocoder_Bypass) return(1);
 }
 
 return(0);
