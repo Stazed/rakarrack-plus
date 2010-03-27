@@ -39,24 +39,25 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   Psafe = 1;
   Phidamp = 60;
   Filenum = 0;
-  Plength = 50;
+  Plength = 10;
   real_len = 0;
   convlength = .5f;
   fb = 0.0f;
   feedback = 0.0f;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
-  buf = (float *) malloc (sizeof (float) * maxx_size);
-  rbuf = (float *) malloc (sizeof (float) * maxx_size);
+  window = (float *) malloc (sizeof (float) * maxx_size);
+  vocbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
-  offset = 0;  
+  offset = voffset = 0;  
   setpreset (Ppreset);
+  process_window();
   cleanup ();
 };
 
 Vocoder::~Vocoder ()
 {
-  delete[]buf;
-  delete[]rbuf;
+  delete[]window;
+  delete[]vocbuf;
   delete[]lxn;
 };
 
@@ -76,51 +77,34 @@ Vocoder::cleanup ()
 void
 Vocoder::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex, verbindex;
+  int i, j, xindex, vindex;
   float l,lyn;
-  int interval = length/2;
-  int numtaps = 5;
 
   for (i = 0; i < PERIOD; i++)
     {
+      vocbuf[voffset] = auxresampled[i];
 
-      l = smpsl[i] + smpsr[i] + (float)Preverb*fb*lxn[offset] + feedback;
+      l = smpsl[i] + smpsr[i];
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
-
-      if(Preverb)
-      {
-      //Multitap feedback for reverbs
-     verbindex = offset - length;
-      for (j = 0; j<numtaps; j++)
-      {
-      verbindex-=interval;
-      if(verbindex<0) verbindex += maxx_size;
-      lxn[offset] += fb * lxn[verbindex];
-      }
-      }
-      
+     
       //Convolve left channel
       lyn = 0;
       xindex = offset;
-
+      vindex = voffset;
       for (j =0; j<length; j++)
       {
-      xindex--;		//input signal scrolls backward with each iteration
-      if (xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
-
-      lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
+      if (--xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
+      if (++vindex>length) vindex = 0;
+      lyn += window[j] * lxn[xindex] * vocbuf[vindex];		//this is all there is to convolution
 
       }
 
-
-      feedback = 0.15f * fb * lyn;
       efxoutl[i] = lyn * 2.0f * level * lpanning;
       efxoutr[i] = lyn * 2.0f * level * rpanning;  
 
-      offset++;
-      if (offset>maxx_size) offset = 0;     
-
+      if (++offset>maxx_size) offset = 0;     
+      if (++voffset>length) voffset = 0;  
       
     };
 
@@ -152,12 +136,11 @@ Vocoder::setpanning (int Ppanning)
 
 
 void
-Vocoder::process_rbuf()
+Vocoder::process_window()
 {
  int ii,j,N,N2;
  float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp, IRpowa, IRpowb, ngain, maxamp;
- memset(buf,0, sizeof(float)*real_len);
- 
+ memset(window,0, sizeof(float)*length);
  
  /*Blackman Window function
  wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
@@ -173,42 +156,10 @@ Vocoder::process_rbuf()
  Nm1pp = 4.0f * PI/((float) (N - 1));
  
 	for(ii=0;ii<length;ii++)
-	{    
-		  if (ii<N2)
-		  {
-		  tailfader = 1.0f;
-		  }
-		  else
-		  { 
-		  tailfader = a0 - a1*cosf(ii*Nm1p) + a2 * cosf(ii*Nm1pp);   //Calculate Blackman Window for right half of IR
-		  }
-    
-		  buf[ii]= rbuf[ii] * tailfader;   //Apply window function
-		  
+	{   
+	tailfader = a0 - a1*cosf(ii*Nm1p) + a2 * cosf(ii*Nm1pp);   //Calculate Blackman Window for right half of IR    
+	window[ii]=tailfader;   //Apply window function		  
 	}
-
-
- 	memcpy(buf,rbuf,real_len*sizeof(float));
-
-	IRpowa = IRpowb = maxamp = 0.0f;
-	//compute IR signal power
-	 for(j=0;j<maxx_read;j++)
-	 {
-	 IRpowa += fabsf(rbuf[j]);
-            if(maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]);   //find maximum level to normalize	
-	     
-		 if(j < length) 
-		 {
-                  IRpowb += fabsf(buf[j]);
-		 }
- 
-	 }
-	 
-	 //if(maxamp < 0.3f) maxamp = 0.3f;
-	 ngain = IRpowa/IRpowb;
-	 if (ngain > maxx_read) ngain = maxx_read;
-	 for(j=0; j<length; j++) buf[j] *= ngain; 
-
 
 }
 
@@ -259,18 +210,15 @@ Vocoder::changepar (int npar, int value)
     case 2:
       Psafe = value;
       break;
-    case 3:
-      if (Psafe)
-      {
-      if (value < maxx_len)
+    case 3: 
+      if (value < 30)
       Plength = value;
       else
-      Plength = maxx_len;
-      }
-      else Plength = value;
+      Plength = 30;
+
       convlength = ((float) Plength)/1000.0f;                   //time in seconds
-      length = (int) (fSAMPLE_RATE * convlength);        //time in samples       
-      process_rbuf();
+      length = (int) (fSAMPLE_RATE * convlength);        //time in samples  
+      process_window();     
       break;
     case 8:
       break;
@@ -281,7 +229,7 @@ Vocoder::changepar (int npar, int value)
       break;
     case 7:
       Plevel = value;
-      level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);;
+      level =  dB2rap (72.0f * (float)Plevel / 127.0f - 60.0f);;
       break;
     case 4:
       Puser = value;

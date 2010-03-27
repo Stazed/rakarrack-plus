@@ -65,13 +65,13 @@ private:
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
-  void process_rbuf();
+  void process_window();
 
-  int offset;
+  int offset, voffset;
 
   //Parametrii reali
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *rbuf, *buf, *lxn;
+  float *vocbuf, *window, *lxn;
   int maxx_size,maxx_read,real_len,length;
   float level,fb, feedback;
   
