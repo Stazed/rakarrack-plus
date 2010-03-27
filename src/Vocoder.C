@@ -211,10 +211,10 @@ Vocoder::changepar (int npar, int value)
       Psafe = value;
       break;
     case 3: 
-      if (value < 30)
+      if (value < 100)
       Plength = value;
       else
-      Plength = 30;
+      Plength = 100;  //temporarily force max just to test things
 
       convlength = ((float) Plength)/1000.0f;                   //time in seconds
       length = (int) (fSAMPLE_RATE * convlength);        //time in samples  
