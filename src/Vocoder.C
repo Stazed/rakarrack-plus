@@ -82,7 +82,7 @@ Vocoder::out (float * smpsl, float * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-      vocbuf[voffset] = auxresampled[i];
+      vocbuf[voffset] = smear * vocbuf[voffset] + auxresampled[i];
 
       l = smpsl[i] + smpsr[i];
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
@@ -211,10 +211,10 @@ Vocoder::changepar (int npar, int value)
       Psafe = value;
       break;
     case 3: 
-      if (value < 100)
+      if (value < 50)
       Plength = value;
       else
-      Plength = 100;  //temporarily force max just to test things
+      Plength = 50;  //temporarily force max just to test things
 
       convlength = ((float) Plength)/1000.0f;                   //time in seconds
       length = (int) (fSAMPLE_RATE * convlength);        //time in samples  
@@ -239,14 +239,7 @@ Vocoder::changepar (int npar, int value)
       break;
     case 10:
       Pfb = value;
-      if(Pfb<0)
-      {
-      fb = (float) .1f*value/250.0f;  
-      }
-      else
-      {
-      fb = (float) .1f*value/500.0f; 
-      }    
+      smear = ((float) value)/64.2f;   
       break;
 
    };

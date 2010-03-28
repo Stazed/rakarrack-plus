@@ -70,7 +70,7 @@ private:
   int offset, voffset;
 
   //Parametrii reali
-  float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
+  float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl, smear;
   float *vocbuf, *window, *lxn;
   int maxx_size,maxx_read,real_len,length;
   float level,fb, feedback;
