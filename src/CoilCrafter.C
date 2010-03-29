@@ -206,9 +206,9 @@ CoilCrafter::setpreset (int npreset)
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //H to S
-    {64, 6, 1, 3300, 16,  4400, 42, 20, 0},
+    {32, 6, 1, 3300, 16,  4400, 42, 20, 0},
     //S to H
-    {64, 1, 6, 4400, 42, 3300, 16, 20, 0},
+    {32, 1, 6, 4400, 42, 3300, 16, 20, 0},
    
 
   };

@@ -3709,8 +3709,7 @@ void RKRGUI::cb_exciter_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_exciter_preset_i(Fl_Choice* o, void*) {
-  rkr->Exciter_Bypass = 0;
-rkr->efx_Exciter->setpreset((int) o->value());
+  rkr->efx_Exciter->setpreset((int) o->value());
 ex_Gain->value(rkr->efx_Exciter->getpar(0));
 ex_1->value(rkr->efx_Exciter->getpar(1));
 ex_2->value(rkr->efx_Exciter->getpar(2));
@@ -3724,7 +3723,6 @@ ex_9->value(rkr->efx_Exciter->getpar(9));
 ex_10->value(rkr->efx_Exciter->getpar(10));
 ex_lfreq->value(rkr->efx_Exciter->getpar(11));
 ex_hfreq->value(rkr->efx_Exciter->getpar(12));
-if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;
 }
 void RKRGUI::cb_exciter_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_exciter_preset_i(o,v);
@@ -5086,8 +5084,7 @@ void RKRGUI::cb_coil_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_coil_preset_i(Fl_Choice* o, void*) {
-  rkr->CoilCrafter_Bypass = 0;
-rkr->efx_CoilCrafter->setpreset((int) o->value());
+  rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
 coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
 coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
@@ -5097,7 +5094,6 @@ coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
 coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
 coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
 coil_mode->value(rkr->efx_CoilCrafter->getpar(8));
-if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;
 }
 void RKRGUI::cb_coil_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_preset_i(o,v);
@@ -5200,14 +5196,12 @@ void RKRGUI::cb_shelf_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_shelf_preset_i(Fl_Choice* o, void*) {
-  rkr->ShelfBoost_Bypass = 0;
-rkr->efx_ShelfBoost->setpreset((int) o->value());
+  rkr->efx_ShelfBoost->setpreset((int) o->value());
 shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
 shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
 shelf_level->value(rkr->efx_ShelfBoost->getpar(4));
-if((int)shelf_activar->value()) rkr->ShelfBoost_Bypass = 1;
 }
 void RKRGUI::cb_shelf_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shelf_preset_i(o,v);

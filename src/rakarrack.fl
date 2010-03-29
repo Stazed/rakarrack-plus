@@ -834,8 +834,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {selected
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -3954,8 +3953,7 @@ findpos(22,(int)o->value());}
         }
         Fl_Choice exciter_preset {
           label Preset
-          callback {rkr->Exciter_Bypass = 0;
-rkr->efx_Exciter->setpreset((int) o->value());
+          callback {rkr->efx_Exciter->setpreset((int) o->value());
 ex_Gain->value(rkr->efx_Exciter->getpar(0));
 ex_1->value(rkr->efx_Exciter->getpar(1));
 ex_2->value(rkr->efx_Exciter->getpar(2));
@@ -3968,8 +3966,7 @@ ex_8->value(rkr->efx_Exciter->getpar(8));
 ex_9->value(rkr->efx_Exciter->getpar(9));
 ex_10->value(rkr->efx_Exciter->getpar(10));
 ex_lfreq->value(rkr->efx_Exciter->getpar(11));
-ex_hfreq->value(rkr->efx_Exciter->getpar(12));
-if((int)exciter_activar->value()) rkr->Exciter_Bypass = 1;} open
+ex_hfreq->value(rkr->efx_Exciter->getpar(12));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5431,8 +5428,7 @@ findpos(33,(int)o->value());}
         }
         Fl_Choice coil_preset {
           label Preset
-          callback {rkr->CoilCrafter_Bypass = 0;
-rkr->efx_CoilCrafter->setpreset((int) o->value());
+          callback {rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
 coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
 coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
@@ -5441,8 +5437,7 @@ coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
 coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
 coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
 coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
-coil_mode->value(rkr->efx_CoilCrafter->getpar(8));
-if((int)coil_activar->value()) rkr->CoilCrafter_Bypass = 1;}
+coil_mode->value(rkr->efx_CoilCrafter->getpar(8));} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5564,14 +5559,12 @@ findpos(34,(int)o->value());}
         }
         Fl_Choice shelf_preset {
           label Preset
-          callback {rkr->ShelfBoost_Bypass = 0;
-rkr->efx_ShelfBoost->setpreset((int) o->value());
+          callback {rkr->efx_ShelfBoost->setpreset((int) o->value());
 shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
 shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
-shelf_level->value(rkr->efx_ShelfBoost->getpar(4));
-if((int)shelf_activar->value()) rkr->ShelfBoost_Bypass = 1;}
+shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
