@@ -160,10 +160,17 @@ HarmEnhancer::calcula_mag (float *Rmag)
   int i;
   float mag_fix = 0.0f;
 
+//  float mag[HARMONICS] =
+//    { 0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
+//    Rmag[6], Rmag[7], Rmag[8], Rmag[9]
+//  };
+
   float mag[HARMONICS] =
-    { 0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
-    Rmag[6], Rmag[7], Rmag[8], Rmag[9]
+    { 0.0f, Rmag[0], 0.0f, Rmag[2], 0.0f, Rmag[4], 0.0f,
+    Rmag[6], 0.0f, Rmag[8], 0.0f
   };
+
+
 
   // Normalise magnitudes
 
@@ -219,14 +226,19 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
           yr+=p[0];
            
 
-      otm1l = 0.999f * otm1l + yl - itm1l;
-      itm1l = yl;
-      otm1r = 0.999f * otm1r + yr - itm1r;
-      itm1r = yr;
+//      otm1l = 0.999f * otm1l + yl - itm1l;
+//      itm1l = yl;
+//      otm1r = 0.999f * otm1r + yr - itm1r;
+//      itm1r = yr;
+
+
+      inputl[i] = yl;
+      inputr[i] = yr;
+
 
        
-      inputl[i] = otm1l;
-      inputr[i] = otm1r;
+//      inputl[i] = otm1l;
+//      inputr[i] = otm1r;
 
      }
 
