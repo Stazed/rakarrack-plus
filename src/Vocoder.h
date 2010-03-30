@@ -55,10 +55,11 @@ private:
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void init_filters();
+  float cperiod;
   float lpanning, rpanning, level;
   float *vocbuf;
   float *tmpsmpsl, *tmpsmpsr; 
-      
+  float *tmpl, *tmpr;
     struct
   {
   float sfreq, sq, gain, oldgain;

@@ -38,9 +38,12 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   Plrcross = 100;
   tmpsmpsl = (float *) malloc (sizeof (float) * PERIOD);
   tmpsmpsr = (float *) malloc (sizeof (float) * PERIOD);
+  tmpl = (float *) malloc (sizeof (float) * PERIOD);
+  tmpr = (float *) malloc (sizeof (float) * PERIOD);
+
   vocbuf = (float *) malloc (sizeof (float) * PERIOD);
   
- 
+  cperiod = 1.0f/fPERIOD; 
   float center;
   float bw;
   float qq;
@@ -54,7 +57,7 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
       filterbank[i].l = new AnalogFilter (4, center, qq, 0);
       filterbank[i].r = new AnalogFilter (4, center, qq, 0);
       filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
-      printf("%f %f\n",center,qq);
+//      printf("%f %f\n",center,qq);
 
     };
 
@@ -85,10 +88,10 @@ void
 Vocoder::out (float * smpsl, float * smpsr)
 {
   int i, j;
+
+    memset(tmpl,0,sizeof(float)*PERIOD);
+    memset(tmpr,0,sizeof(float)*PERIOD);
   
-    memset(efxoutl, 0 , sizeof(float)*PERIOD);
-    memset(efxoutr, 0 , sizeof(float)*PERIOD);
-    
 
     for (j = 0; j < VOC_BANDS; j++)
     {
@@ -103,8 +106,9 @@ Vocoder::out (float * smpsl, float * smpsr)
  
        for (i = 0; i<PERIOD; i++)
        { 
-       filterbank[j].gain += fPERIOD * fabs(vocbuf[i]);   
+       filterbank[j].gain += cperiod*fabs(vocbuf[i]);   
        };
+       
        
       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
@@ -114,13 +118,18 @@ Vocoder::out (float * smpsl, float * smpsr)
  
       for (i = 0; i<PERIOD; i++)
        { 
-       efxoutl[i] += tmpsmpsl[i]*filterbank[j].gain;  //I need to add gain interpolation here between periods.
-       efxoutr[i] += tmpsmpsr[i]*filterbank[j].gain;        
+       tmpl[i] += tmpsmpsl[i]*filterbank[j].gain;  //I need to add gain interpolation here between periods.
+       tmpr[i] += tmpsmpsr[i]*filterbank[j].gain;        
        };  
       
        filterbank[j].oldgain = filterbank[j].gain;   
     }; 
     
+
+      memcpy (efxoutl, tmpl, PERIOD * sizeof(float));  
+      memcpy (efxoutr, tmpr, PERIOD * sizeof(float));  
+ 
+
 };
 
 
@@ -210,7 +219,7 @@ Vocoder::changepar (int npar, int value)
       break;
     case 7:
       Plevel = value;
-      level = (float)Plevel / 127.0f;
+      level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
       break;
     case 4:
       break;
