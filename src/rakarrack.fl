@@ -842,7 +842,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open selected
+Pexitprogram=1;}
       xywh {1541 70 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -5679,8 +5679,8 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
         }
         Fl_Value_Slider vo_freq {
           label Freq
-          callback {rkr->efx_Vocoder->changepar(4,(int)o->value());}
-          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
+          callback {rkr->efx_Vocoder->changepar(4,(int)o->value());} selected
+          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 300 maximum 6000 step 1 value 1200 textcolor 7
           class SliderW
         }
         Fl_Check_Button vo_reverb {
