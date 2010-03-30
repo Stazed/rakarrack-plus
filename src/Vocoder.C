@@ -47,10 +47,11 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   float center;
   float bw;
   float qq;
+  float subdiv = 28.0f;  //sets range & spacing of bands
   for (int i = 0; i < VOC_BANDS; i++)
     {
-      bw = powf(10.0f, (2.5f + ((float) i + 1)/13.0f)) - powf(10.0f, (2.5f + ((float) i)/13.0f));
-      center = powf(10.0f, (2.5f + ((float) i)/13.0f)) + bw/2.0f;
+      bw = powf(10.0f, (2.5f + ((float) i + 1)/subdiv)) - powf(10.0f, (2.5f + ((float) i)/subdiv));
+      center = powf(10.0f, (2.5f + ((float) i)/subdiv)) + bw/2.0f;
       qq = center/bw;
       filterbank[i].sfreq = center;
       filterbank[i].sq = qq;
@@ -200,6 +201,7 @@ Vocoder::setpreset (int npreset)
 void
 Vocoder::changepar (int npar, int value)
 {
+float tmp;
   switch (npar)
     {
     case 0:
@@ -209,9 +211,21 @@ Vocoder::changepar (int npar, int value)
       setpanning (value);
       break;
     case 2:
+    Pband = value;
       break;
     case 3: 
+      tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+      filterbank[Pband].l->setq (tmp);
+      filterbank[Pband].r->setq (tmp);
+      filterbank[Pband].aux->setq (tmp); 
       break;
+    case 4:
+      tmp = (float) value;
+      filterbank[Pband].l->setfreq (tmp);
+      filterbank[Pband].r->setfreq (tmp);
+      filterbank[Pband].aux->setfreq (tmp);     
+      break;     
+      
     case 8:
       break;
     case 5:
@@ -222,8 +236,7 @@ Vocoder::changepar (int npar, int value)
       Plevel = value;
       level = dB2rap (80.0f * (float)Plevel / 127.0f - 40.0f);
       break;
-    case 4:
-      break;
+
     case 9:
       break;
     case 10:

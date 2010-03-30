@@ -23,7 +23,7 @@
 
 #ifndef VOCODER_H
 #define VOCODER_H
-#define VOC_BANDS  16		//filter bands to process
+#define VOC_BANDS  32		//filter bands to process
 
 #include "global.h"
 #include "AnalogFilter.h"
@@ -52,6 +52,7 @@ private:
   int Ppanning;	//Panning
   int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
+  int Pband;
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void init_filters();
