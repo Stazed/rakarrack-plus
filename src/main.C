@@ -53,7 +53,7 @@ show_help ()
   fprintf (stderr,
 	   "  -h ,     --help \t\t\t display command-line help and exit\n");
   fprintf (stderr, "  -n ,     --no-gui \t\t\t disable GUI\n");
-  fprintf (stderr, "  -l File, --load=File \t\t\t loads sound\n");
+  fprintf (stderr, "  -l File, --load=File \t\t\t loads preset\n");
   fprintf (stderr, "  -b File, --bank=File \t\t\t loads bank\n");
   fprintf (stderr, "  -p #,    --preset=# \t\t\t set preset\n");
   fprintf (stderr, "  -x, --dump-preset-names \t\t prints bank of preset names and IDs\n\n");
