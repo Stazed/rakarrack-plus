@@ -5283,7 +5283,7 @@ void RKRGUI::cb_vo_WD(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_vo_pan_i(SliderW* o, void*) {
-  rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));
+  rkr->efx_Vocoder->changepar(5,(int)(o->value()+64));
 }
 void RKRGUI::cb_vo_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_pan_i(o,v);
@@ -13111,7 +13111,7 @@ R average.");
         vo_WD->align(FL_ALIGN_LEFT);
         vo_WD->when(FL_WHEN_CHANGED);
       } // SliderW* vo_WD
-      { vo_pan = new SliderW(372, 256, 100, 10, "Pan");
+      { vo_pan = new SliderW(372, 256, 100, 10, "Att");
         vo_pan->type(5);
         vo_pan->box(FL_FLAT_BOX);
         vo_pan->color((Fl_Color)178);
@@ -13120,8 +13120,8 @@ R average.");
         vo_pan->labelfont(0);
         vo_pan->labelsize(10);
         vo_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        vo_pan->minimum(-64);
-        vo_pan->maximum(63);
+        vo_pan->minimum(1);
+        vo_pan->maximum(127);
         vo_pan->step(1);
         vo_pan->textcolor(7);
         vo_pan->callback((Fl_Callback*)cb_vo_pan);

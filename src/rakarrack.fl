@@ -5656,9 +5656,9 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;} open
           class SliderW
         }
         Fl_Value_Slider vo_pan {
-          label Pan
-          callback {rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));}
-          xywh {372 256 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          label Att
+          callback {rkr->efx_Vocoder->changepar(5,(int)(o->value()+64));} selected
+          xywh {372 256 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vo_level {
@@ -5681,7 +5681,7 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;} open
         }
         Fl_Value_Slider vo_freq {
           label Freq
-          callback {rkr->efx_Vocoder->changepar(4,(int)o->value());} selected
+          callback {rkr->efx_Vocoder->changepar(4,(int)o->value());}
           xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 300 maximum 6000 step 1 value 1200 textcolor 7
           class SliderW
         }
