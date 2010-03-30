@@ -38,15 +38,10 @@ public:
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
-
-  void setdryonly ();
   int Ppreset;
-
   float *efxoutl;
   float *efxoutr;
   float *auxresampled;
-
-  float volume;
   float outvolume;
 
 
@@ -56,31 +51,19 @@ private:
   int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
   int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
-  int Phidamp;
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
-  int Psafe;
-  int Plength;		//5...500 ms// Set maximum length of IR.
-  int Puser;		//-64...64//Feedback.
-  int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
-  int Filenum;
-  int Pfb;		//-64 ... 64// amount of feedback
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
-  void sethidamp (int Phidamp);
   void init_filters();
-
-  int offset, voffset;
-
-  //Parametrii reali
-  float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl, smear;
-  float *vocbuf, *window, *lxn;
-  int maxx_size,maxx_read,real_len,length;
-  float level,fb, feedback;
-  
+  float lpanning, rpanning, level;
+  float *vocbuf;
+  float *tmpsmpsl, *tmpsmpsr; 
+      
     struct
   {
-  float sfreq, sq, sgain, soldgain;
+  float sfreq, sq, gain, oldgain;
     AnalogFilter *l, *r, *aux;
+
   } filterbank[VOC_BANDS];
 
 

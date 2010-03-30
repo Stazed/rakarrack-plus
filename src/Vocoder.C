@@ -36,21 +36,10 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   Pvolume = 50;
   Ppanning = 64;
   Plrcross = 100;
-  Psafe = 1;
-  Phidamp = 60;
-  Filenum = 0;
-  Plength = 10;
-  real_len = 0;
-  convlength = .5f;
-  fb = 0.0f;
-  feedback = 0.0f;
-  maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
-  window = (float *) malloc (sizeof (float) * PERIOD);
+  tmpsmpsl = (float *) malloc (sizeof (float) * PERIOD);
+  tmpsmpsr = (float *) malloc (sizeof (float) * PERIOD);
   vocbuf = (float *) malloc (sizeof (float) * PERIOD);
-  lxn = (float *) malloc (sizeof (float) * PERIOD);  
-  offset = voffset = 0;  
-  setpreset (Ppreset);
-  cperiod = 1.0f/((float) PERIOD);
+  
  
   float center;
   float bw;
@@ -65,16 +54,18 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
       filterbank[i].l = new AnalogFilter (4, center, qq, 0);
       filterbank[i].r = new AnalogFilter (4, center, qq, 0);
       filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
+      printf("%f %f\n",center,qq);
+
     };
+
+  setpreset (Ppreset);
   
+
   cleanup ();
 };
 
 Vocoder::~Vocoder ()
 {
-  delete[]window;
-  delete[]vocbuf;
-  delete[]lxn;
 };
 
 /*
@@ -93,26 +84,38 @@ Vocoder::cleanup ()
 void
 Vocoder::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex, vindex;
-  float l,lyn;
+  int i, j;
+  
+    memset(efxoutl, 0 , sizeof(float)*PERIOD);
+    memset(efxoutr, 0 , sizeof(float)*PERIOD);
+    
 
     for (j = 0; j < VOC_BANDS; j++)
     {
-      memcpy (vocbuf , auxresampled, PERIOD * sizeof(float));
-      filterbank[j].aux->filterout(vocbuf);
+      filterbank[j].gain = 0;
+
+      for(i=0; i<PERIOD; i++)
+      {
+        vocbuf[i]=auxresampled[i]*level;
+      }  
+
+       filterbank[j].aux->filterout(vocbuf);
+ 
        for (i = 0; i<PERIOD; i++)
        { 
-       filterbank[j].sgain += cperiod * fabs(vocbuf[i]);   
+       filterbank[j].gain += fPERIOD * fabs(vocbuf[i]);   
        };
        
       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
+ 
       filterbank[j].l->filterout(tmpsmpsl);
       filterbank[j].r->filterout(tmpsmpsr);
+ 
       for (i = 0; i<PERIOD; i++)
        { 
-       smpsl[i] += tmpsmpsl*filterbank[j].gain;  //I need to add gain interpolation here between periods.
-       smpsr[i] += tmpsmpsr*filterbank[j].gain;        
+       efxoutl[i] += tmpsmpsl[i]*filterbank[j].gain;  //I need to add gain interpolation here between periods.
+       efxoutr[i] += tmpsmpsr[i]*filterbank[j].gain;        
        };  
       
        filterbank[j].oldgain = filterbank[j].gain;   
@@ -128,7 +131,7 @@ void
 Vocoder::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
-  volume = outvolume = (float)Pvolume / 127.0f;
+  outvolume = (float)Pvolume / 127.0f;
   if (Pvolume == 0)
     cleanup ();
 
@@ -146,7 +149,6 @@ Vocoder::setpanning (int Ppanning)
 void
 Vocoder::init_filters()
 {
- int ii;
  float ff, qq;
  
   for (int ii = 0; ii < VOC_BANDS; ii++)
@@ -159,14 +161,6 @@ Vocoder::init_filters()
     };
 
 }
-
-void
-Vocoder::sethidamp (int Phidamp)
-{
-  this->Phidamp = Phidamp;
-  hidamp = 1.0f - (float)Phidamp / 127.1f;
-  alpha_hidamp = 1.0f - hidamp;
-};
 
 void
 Vocoder::setpreset (int npreset)
@@ -205,38 +199,24 @@ Vocoder::changepar (int npar, int value)
       setpanning (value);
       break;
     case 2:
-      Psafe = value;
       break;
     case 3: 
-      if (value < 50)
-      Plength = value;
-      else
-      Plength = 50;  //temporarily force max just to test things
-
-      convlength = ((float) Plength)/1000.0f;                   //time in seconds
-      length = (int) (fSAMPLE_RATE * convlength);        //time in samples  
-      process_window();     
       break;
     case 8:
       break;
     case 5:
       break;
     case 6:
-      sethidamp (value);
       break;
     case 7:
       Plevel = value;
-      level =  dB2rap (72.0f * (float)Plevel / 127.0f - 60.0f);;
+      level = (float)Plevel / 127.0f;
       break;
     case 4:
-      Puser = value;
       break;
     case 9:
-      Preverb = value;      
       break;
     case 10:
-      Pfb = value;
-      smear = ((float) value)/64.2f;   
       break;
 
    };
@@ -254,31 +234,31 @@ Vocoder::getpar (int npar)
       return (Ppanning);
       break;
     case 2:
-      return(Psafe);
+      return(0);
       break;
     case 3:
-      return(Plength); 
+      return(0); 
       break;  
     case 8:
-      return (Filenum);
+      return (0);
       break;
     case 5:
       return (0);
       break;
     case 6:
-      return (Phidamp);
+      return (0);
       break;
     case 7:
       return(Plevel);
       break;
     case 4:
-      return(Puser);
+      return(0);
       break;
     case 9:
-      return(Preverb);
+      return(0);
       break;   
     case 10:
-      return(Pfb);
+      return(0);
       break; 
 
     };
