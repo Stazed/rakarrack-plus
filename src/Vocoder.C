@@ -224,10 +224,7 @@ float tmp;
       filterbank[Pband].l->setfreq (tmp);
       filterbank[Pband].r->setfreq (tmp);
       filterbank[Pband].aux->setfreq (tmp);     
-      break;     
-      
-    case 8:
-      break;
+      break;      
     case 5:
       break;
     case 6:
@@ -236,7 +233,8 @@ float tmp;
       Plevel = value;
       level = dB2rap (80.0f * (float)Plevel / 127.0f - 40.0f);
       break;
-
+    case 8:
+      break;
     case 9:
       break;
     case 10:

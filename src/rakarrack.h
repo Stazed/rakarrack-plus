@@ -2514,20 +2514,20 @@ private:
   void cb_vo_level_i(SliderW*, void*);
   static void cb_vo_level(SliderW*, void*);
 public:
-  SliderW *vo_damp;
+  SliderW *vo_bs;
 private:
-  void cb_vo_damp_i(SliderW*, void*);
-  static void cb_vo_damp(SliderW*, void*);
+  void cb_vo_bs_i(SliderW*, void*);
+  static void cb_vo_bs(SliderW*, void*);
 public:
-  SliderW *vo_fb;
+  SliderW *vo_q;
 private:
-  void cb_vo_fb_i(SliderW*, void*);
-  static void cb_vo_fb(SliderW*, void*);
+  void cb_vo_q_i(SliderW*, void*);
+  static void cb_vo_q(SliderW*, void*);
 public:
-  SliderW *vo_length;
+  SliderW *vo_freq;
 private:
-  void cb_vo_length_i(SliderW*, void*);
-  static void cb_vo_length(SliderW*, void*);
+  void cb_vo_freq_i(SliderW*, void*);
+  static void cb_vo_freq(SliderW*, void*);
 public:
   Fl_Check_Button *vo_reverb;
 private:

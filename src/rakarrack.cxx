@@ -5260,15 +5260,7 @@ void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_vo_preset_i(Fl_Choice* o, void*) {
   rkr->Vocoder_Bypass=0;
-rkr->efx_Vocoder->setpreset((int) o->value());
-vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
-vo_level->value(rkr->efx_Vocoder->getpar(7));
-vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
-vo_damp->value(rkr->efx_Vocoder->getpar(6));
-vo_length->value(rkr->efx_Vocoder->getpar(3));
-vo_reverb->value(rkr->efx_Vocoder->getpar(9));
-vo_safe->value(rkr->efx_Vocoder->getpar(2));
-vo_fb->value(rkr->efx_Vocoder->getpar(10));
+//rkr->efx_Vocoder->setpreset((int) o->value());
 if((int)vo_activar->value())rkr->Vocoder_Bypass=1;
 }
 void RKRGUI::cb_vo_preset(Fl_Choice* o, void* v) {
@@ -5304,25 +5296,25 @@ void RKRGUI::cb_vo_level(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_level_i(o,v);
 }
 
-void RKRGUI::cb_vo_damp_i(SliderW* o, void*) {
-  rkr->efx_Vocoder->changepar(6,(int)o->value());
+void RKRGUI::cb_vo_bs_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(2,(int)o->value());
 }
-void RKRGUI::cb_vo_damp(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_damp_i(o,v);
-}
-
-void RKRGUI::cb_vo_fb_i(SliderW* o, void*) {
-  rkr->efx_Vocoder->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_vo_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_fb_i(o,v);
+void RKRGUI::cb_vo_bs(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_bs_i(o,v);
 }
 
-void RKRGUI::cb_vo_length_i(SliderW* o, void*) {
+void RKRGUI::cb_vo_q_i(SliderW* o, void*) {
   rkr->efx_Vocoder->changepar(3,(int)o->value());
 }
-void RKRGUI::cb_vo_length(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_length_i(o,v);
+void RKRGUI::cb_vo_q(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_q_i(o,v);
+}
+
+void RKRGUI::cb_vo_freq_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_vo_freq(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_freq_i(o,v);
 }
 
 void RKRGUI::cb_vo_reverb_i(Fl_Check_Button* o, void*) {
@@ -13152,57 +13144,57 @@ R average.");
         vo_level->align(FL_ALIGN_LEFT);
         vo_level->when(FL_WHEN_CHANGED);
       } // SliderW* vo_level
-      { vo_damp = new SliderW(372, 288, 100, 10, "Damp");
-        vo_damp->type(5);
-        vo_damp->box(FL_FLAT_BOX);
-        vo_damp->color((Fl_Color)178);
-        vo_damp->selection_color((Fl_Color)62);
-        vo_damp->labeltype(FL_NORMAL_LABEL);
-        vo_damp->labelfont(0);
-        vo_damp->labelsize(10);
-        vo_damp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_damp->maximum(127);
-        vo_damp->step(1);
-        vo_damp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_damp->callback((Fl_Callback*)cb_vo_damp);
-        vo_damp->align(FL_ALIGN_LEFT);
-        vo_damp->when(FL_WHEN_CHANGED);
-      } // SliderW* vo_damp
-      { vo_fb = new SliderW(372, 304, 100, 10, "Fb");
-        vo_fb->type(5);
-        vo_fb->box(FL_FLAT_BOX);
-        vo_fb->color((Fl_Color)178);
-        vo_fb->selection_color((Fl_Color)62);
-        vo_fb->labeltype(FL_NORMAL_LABEL);
-        vo_fb->labelfont(0);
-        vo_fb->labelsize(10);
-        vo_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_fb->minimum(-64);
-        vo_fb->maximum(64);
-        vo_fb->step(1);
-        vo_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_fb->callback((Fl_Callback*)cb_vo_fb);
-        vo_fb->align(FL_ALIGN_LEFT);
-        vo_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* vo_fb
-      { vo_length = new SliderW(372, 320, 100, 10, "Length");
-        vo_length->type(5);
-        vo_length->box(FL_FLAT_BOX);
-        vo_length->color((Fl_Color)178);
-        vo_length->selection_color((Fl_Color)62);
-        vo_length->labeltype(FL_NORMAL_LABEL);
-        vo_length->labelfont(0);
-        vo_length->labelsize(10);
-        vo_length->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_length->minimum(5);
-        vo_length->maximum(250);
-        vo_length->step(1);
-        vo_length->value(100);
-        vo_length->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_length->callback((Fl_Callback*)cb_vo_length);
-        vo_length->align(FL_ALIGN_LEFT);
-        vo_length->when(FL_WHEN_RELEASE);
-      } // SliderW* vo_length
+      { vo_bs = new SliderW(372, 288, 100, 10, "B.S.");
+        vo_bs->type(5);
+        vo_bs->box(FL_FLAT_BOX);
+        vo_bs->color((Fl_Color)178);
+        vo_bs->selection_color((Fl_Color)62);
+        vo_bs->labeltype(FL_NORMAL_LABEL);
+        vo_bs->labelfont(0);
+        vo_bs->labelsize(10);
+        vo_bs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_bs->maximum(15);
+        vo_bs->step(1);
+        vo_bs->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_bs->callback((Fl_Callback*)cb_vo_bs);
+        vo_bs->align(FL_ALIGN_LEFT);
+        vo_bs->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_bs
+      { vo_q = new SliderW(372, 304, 100, 10, "Q");
+        vo_q->type(5);
+        vo_q->box(FL_FLAT_BOX);
+        vo_q->color((Fl_Color)178);
+        vo_q->selection_color((Fl_Color)62);
+        vo_q->labeltype(FL_NORMAL_LABEL);
+        vo_q->labelfont(0);
+        vo_q->labelsize(10);
+        vo_q->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_q->minimum(-64);
+        vo_q->maximum(64);
+        vo_q->step(1);
+        vo_q->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_q->callback((Fl_Callback*)cb_vo_q);
+        vo_q->align(FL_ALIGN_LEFT);
+        vo_q->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_q
+      { vo_freq = new SliderW(372, 320, 100, 10, "Freq");
+        vo_freq->type(5);
+        vo_freq->box(FL_FLAT_BOX);
+        vo_freq->color((Fl_Color)178);
+        vo_freq->selection_color((Fl_Color)62);
+        vo_freq->labeltype(FL_NORMAL_LABEL);
+        vo_freq->labelfont(0);
+        vo_freq->labelsize(10);
+        vo_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_freq->minimum(300);
+        vo_freq->maximum(6000);
+        vo_freq->step(1);
+        vo_freq->value(1200);
+        vo_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_freq->callback((Fl_Callback*)cb_vo_freq);
+        vo_freq->align(FL_ALIGN_LEFT);
+        vo_freq->when(FL_WHEN_RELEASE);
+      } // SliderW* vo_freq
       { vo_reverb = new Fl_Check_Button(339, 336, 15, 15, "Reverb");
         vo_reverb->down_box(FL_BORDER_BOX);
         vo_reverb->labelsize(10);
