@@ -23,8 +23,10 @@
 
 #ifndef VOCODER_H
 #define VOCODER_H
+#define VOC_BANDS  16		//filter bands to process
 
 #include "global.h"
+#include "AnalogFilter.h"
 
 class Vocoder
 {
@@ -65,7 +67,7 @@ private:
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
-  void process_window();
+  void init_filters();
 
   int offset, voffset;
 
@@ -75,6 +77,12 @@ private:
   int maxx_size,maxx_read,real_len,length;
   float level,fb, feedback;
   
+    struct
+  {
+  float sfreq, sq, sgain, soldgain;
+    AnalogFilter *l, *r, *aux;
+  } filterbank[VOC_BANDS];
+
 
 
 };

@@ -45,12 +45,28 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   fb = 0.0f;
   feedback = 0.0f;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
-  window = (float *) malloc (sizeof (float) * maxx_size);
-  vocbuf = (float *) malloc (sizeof (float) * maxx_size);
-  lxn = (float *) malloc (sizeof (float) * maxx_size);  
+  window = (float *) malloc (sizeof (float) * PERIOD);
+  vocbuf = (float *) malloc (sizeof (float) * PERIOD);
+  lxn = (float *) malloc (sizeof (float) * PERIOD);  
   offset = voffset = 0;  
   setpreset (Ppreset);
-  process_window();
+  cperiod = 1.0f/((float) PERIOD);
+ 
+  float center;
+  float bw;
+  float qq;
+  for (int i = 0; i < VOC_BANDS; i++)
+    {
+      bw = powf(10.0f, (2.5f + ((float) i + 1)/13.0f)) - powf(10.0f, (2.5f + ((float) i)/13.0f));
+      center = powf(10.0f, (2.5f + ((float) i)/13.0f)) + bw/2.0f;
+      qq = center/bw;
+      filterbank[i].sfreq = center;
+      filterbank[i].sq = qq;
+      filterbank[i].l = new AnalogFilter (4, center, qq, 0);
+      filterbank[i].r = new AnalogFilter (4, center, qq, 0);
+      filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
+    };
+  
   cleanup ();
 };
 
@@ -80,36 +96,28 @@ Vocoder::out (float * smpsl, float * smpsr)
   int i, j, xindex, vindex;
   float l,lyn;
 
-  for (i = 0; i < PERIOD; i++)
+    for (j = 0; j < VOC_BANDS; j++)
     {
-      vocbuf[voffset] = smear * vocbuf[voffset] + auxresampled[i];
-
-      l = smpsl[i] + smpsr[i];
-      oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
-      lxn[offset] = oldl;
-     
-      //Convolve left channel
-      lyn = 0;
-      xindex = offset;
-      vindex = voffset;
-      for (j =0; j<length; j++)
-      {
-      if (--xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
-      if (++vindex>length) vindex = 0;
-      lyn += window[j] * lxn[xindex] * vocbuf[vindex];		//this is all there is to convolution
-
-      }
-
-      efxoutl[i] = lyn * 2.0f * level * lpanning;
-      efxoutr[i] = lyn * 2.0f * level * rpanning;  
-
-      if (++offset>maxx_size) offset = 0;     
-      if (++voffset>length) voffset = 0;  
+      memcpy (vocbuf , auxresampled, PERIOD * sizeof(float));
+      filterbank[j].aux->filterout(vocbuf);
+       for (i = 0; i<PERIOD; i++)
+       { 
+       filterbank[j].sgain += cperiod * fabs(vocbuf[i]);   
+       };
+       
+      memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
+      memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
+      filterbank[j].l->filterout(tmpsmpsl);
+      filterbank[j].r->filterout(tmpsmpsr);
+      for (i = 0; i<PERIOD; i++)
+       { 
+       smpsl[i] += tmpsmpsl*filterbank[j].gain;  //I need to add gain interpolation here between periods.
+       smpsr[i] += tmpsmpsr*filterbank[j].gain;        
+       };  
       
-    };
-
-
-
+       filterbank[j].oldgain = filterbank[j].gain;   
+    }; 
+    
 };
 
 
@@ -136,30 +144,19 @@ Vocoder::setpanning (int Ppanning)
 
 
 void
-Vocoder::process_window()
+Vocoder::init_filters()
 {
- int ii,j,N,N2;
- float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp, IRpowa, IRpowb, ngain, maxamp;
- memset(window,0, sizeof(float)*length);
+ int ii;
+ float ff, qq;
  
- /*Blackman Window function
- wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
- a0 = (1 - alpha)/2; a1 = 0.5; a2 = alpha/2
- */
- alpha = 0.16f;
- a0 = 0.5f*(1.0f - alpha);
- a1 = 0.5f;
- a2 = 0.5*alpha;
- N = length;
- N2 = length/2;
- Nm1p = D_PI/((float) (N - 1));
- Nm1pp = 4.0f * PI/((float) (N - 1));
- 
-	for(ii=0;ii<length;ii++)
-	{   
-	tailfader = a0 - a1*cosf(ii*Nm1p) + a2 * cosf(ii*Nm1pp);   //Calculate Blackman Window for right half of IR    
-	window[ii]=tailfader;   //Apply window function		  
-	}
+  for (int ii = 0; ii < VOC_BANDS; ii++)
+    {
+      ff = filterbank[ii].sfreq;
+      qq = filterbank[ii].sq;
+      filterbank[ii].l->setfreq_and_q (ff, qq);
+      filterbank[ii].r->setfreq_and_q (ff, qq);
+      filterbank[ii].aux->setfreq_and_q (ff, qq);
+    };
 
 }
 
