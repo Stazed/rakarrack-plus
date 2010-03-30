@@ -106,9 +106,10 @@ Vocoder::out (float * smpsl, float * smpsr)
  
        for (i = 0; i<PERIOD; i++)
        { 
-       filterbank[j].gain += cperiod*fabs(vocbuf[i]);   
+       filterbank[j].gain += fabs(vocbuf[i]);   
        };
        
+       filterbank[j].gain *=cperiod;
        
       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
@@ -219,7 +220,7 @@ Vocoder::changepar (int npar, int value)
       break;
     case 7:
       Plevel = value;
-      level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+      level = dB2rap (80.0f * (float)Plevel / 127.0f - 40.0f);
       break;
     case 4:
       break;
