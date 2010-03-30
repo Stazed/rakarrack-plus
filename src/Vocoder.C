@@ -209,10 +209,13 @@ Vocoder::changepar (int npar, int value)
       setpanning (value);
       break;
     case 2:
+      //set band
       break;
     case 3: 
+      // set q
       break;
-    case 8:
+    case 4:
+      //set freq
       break;
     case 5:
       break;
@@ -222,7 +225,7 @@ Vocoder::changepar (int npar, int value)
       Plevel = value;
       level = dB2rap (80.0f * (float)Plevel / 127.0f - 40.0f);
       break;
-    case 4:
+    case 8:
       break;
     case 9:
       break;
