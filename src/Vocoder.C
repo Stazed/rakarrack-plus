@@ -143,11 +143,9 @@ Vocoder::out (float * smpsl, float * smpsr)
     
       for (i = 0; i<PERIOD; i++)
        { 
-       tmpl[i] *= lpanning;  //I need to add gain interpolation here between periods.
-       tmpr[i] *= rpanning;
+       efxoutl[i]=tmpl[i]*lpanning;  //I need to add gain interpolation here between periods.
+       efxoutr[i]=tmpr[i]*rpanning;
        };  
-      memcpy (efxoutl, tmpl, PERIOD * sizeof(float));  
-      memcpy (efxoutr, tmpr, PERIOD * sizeof(float));  
  
 
 };
