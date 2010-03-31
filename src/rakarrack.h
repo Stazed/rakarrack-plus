@@ -2524,21 +2524,6 @@ private:
   void cb_vo_q_i(SliderW*, void*);
   static void cb_vo_q(SliderW*, void*);
 public:
-  SliderW *vo_Attack;
-private:
-  void cb_vo_Attack_i(SliderW*, void*);
-  static void cb_vo_Attack(SliderW*, void*);
-public:
-  Fl_Check_Button *vo_reverb;
-private:
-  void cb_vo_reverb_i(Fl_Check_Button*, void*);
-  static void cb_vo_reverb(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *vo_safe;
-private:
-  void cb_vo_safe_i(Fl_Check_Button*, void*);
-  static void cb_vo_safe(Fl_Check_Button*, void*);
-public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

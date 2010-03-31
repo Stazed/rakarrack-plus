@@ -5283,7 +5283,7 @@ void RKRGUI::cb_vo_WD(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_vo_pan_i(SliderW* o, void*) {
-  rkr->efx_Vocoder->changepar(5,(int)(o->value()+64));
+  rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_vo_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_pan_i(o,v);
@@ -5308,27 +5308,6 @@ void RKRGUI::cb_vo_q_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_vo_q(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_q_i(o,v);
-}
-
-void RKRGUI::cb_vo_Attack_i(SliderW* o, void*) {
-  rkr->efx_Vocoder->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_vo_Attack(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_Attack_i(o,v);
-}
-
-void RKRGUI::cb_vo_reverb_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Vocoder->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_vo_reverb(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_reverb_i(o,v);
-}
-
-void RKRGUI::cb_vo_safe_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Vocoder->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_vo_safe(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_safe_i(o,v);
 }
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
@@ -13111,7 +13090,7 @@ R average.");
         vo_WD->align(FL_ALIGN_LEFT);
         vo_WD->when(FL_WHEN_CHANGED);
       } // SliderW* vo_WD
-      { vo_pan = new SliderW(372, 256, 100, 10, "Att");
+      { vo_pan = new SliderW(372, 256, 100, 10, "Pan");
         vo_pan->type(5);
         vo_pan->box(FL_FLAT_BOX);
         vo_pan->color((Fl_Color)178);
@@ -13120,8 +13099,8 @@ R average.");
         vo_pan->labelfont(0);
         vo_pan->labelsize(10);
         vo_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_pan->minimum(1);
-        vo_pan->maximum(127);
+        vo_pan->minimum(-64);
+        vo_pan->maximum(64);
         vo_pan->step(1);
         vo_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vo_pan->callback((Fl_Callback*)cb_vo_pan);
@@ -13180,36 +13159,6 @@ R average.");
         vo_q->align(FL_ALIGN_LEFT);
         vo_q->when(FL_WHEN_CHANGED);
       } // SliderW* vo_q
-      { vo_Attack = new SliderW(372, 320, 100, 10, "Attack");
-        vo_Attack->type(5);
-        vo_Attack->box(FL_FLAT_BOX);
-        vo_Attack->color((Fl_Color)178);
-        vo_Attack->selection_color((Fl_Color)62);
-        vo_Attack->labeltype(FL_NORMAL_LABEL);
-        vo_Attack->labelfont(0);
-        vo_Attack->labelsize(10);
-        vo_Attack->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_Attack->minimum(1);
-        vo_Attack->maximum(127);
-        vo_Attack->step(1);
-        vo_Attack->value(1);
-        vo_Attack->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_Attack->callback((Fl_Callback*)cb_vo_Attack);
-        vo_Attack->align(FL_ALIGN_LEFT);
-        vo_Attack->when(FL_WHEN_RELEASE);
-      } // SliderW* vo_Attack
-      { vo_reverb = new Fl_Check_Button(339, 336, 15, 15, "Reverb");
-        vo_reverb->down_box(FL_BORDER_BOX);
-        vo_reverb->labelsize(10);
-        vo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_reverb->callback((Fl_Callback*)cb_vo_reverb, (void*)(2));
-      } // Fl_Check_Button* vo_reverb
-      { vo_safe = new Fl_Check_Button(339, 351, 15, 15, "Safe Mode");
-        vo_safe->down_box(FL_BORDER_BOX);
-        vo_safe->labelsize(10);
-        vo_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_safe->callback((Fl_Callback*)cb_vo_safe, (void*)(2));
-      } // Fl_Check_Button* vo_safe
       VOCODER->end();
     } // Fl_Group* VOCODER
     { Tuner = new Fl_Group(521, 24, 276, 58);
