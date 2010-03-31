@@ -5262,8 +5262,8 @@ void RKRGUI::cb_vo_preset_i(Fl_Choice* o, void*) {
   rkr->Vocoder_Bypass=0;
 rkr->efx_Vocoder->setpreset((int) o->value());
 
-vo_WD->value(rkr->efx_Vocoder->getpar(0)+64);
-vo_pan->value(rkr->efx_Vocoder->getpar(1)+64);
+vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
+vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
 vo_q->value(rkr->efx_Vocoder->getpar(3));
 vo_level->value(rkr->efx_Vocoder->getpar(4));

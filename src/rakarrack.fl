@@ -842,7 +842,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} selected
+Pexitprogram=1;}
       xywh {1281 53 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -5628,13 +5628,13 @@ findpos(35,(int)o->value());}
           callback {rkr->Vocoder_Bypass=0;
 rkr->efx_Vocoder->setpreset((int) o->value());
 
-vo_WD->value(rkr->efx_Vocoder->getpar(0)+64);
-vo_pan->value(rkr->efx_Vocoder->getpar(1)+64);
+vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
+vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
 vo_q->value(rkr->efx_Vocoder->getpar(3));
 vo_level->value(rkr->efx_Vocoder->getpar(4));
 
-if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
+if((int)vo_activar->value())rkr->Vocoder_Bypass=1;} selected
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
