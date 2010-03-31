@@ -43,12 +43,12 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   tmpl = (float *) malloc (sizeof (float) * PERIOD);
   tmpr = (float *) malloc (sizeof (float) * PERIOD);
  
-       Pmuffle = 50;
+       Pmuffle = 100;
       float tmp = (float) Pmuffle/10000.0f;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       prls = beta;
-      gate = rap2dB(-68.0f);
+      gate = rap2dB(-75.0f);
 
   vocbuf = (float *) malloc (sizeof (float) * PERIOD);
   
@@ -251,7 +251,7 @@ float tmp = 0;
     case 2:
       Pmuffle = value;
       tmp = (float) Pmuffle;
-      tmp *= tmp/160000;
+      tmp *= 0.0001f + tmp/64000;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       break;
