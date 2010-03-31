@@ -53,6 +53,7 @@ private:
   int Ppanning;	//Panning
   int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
+  int Pinput;
   int Pband;
   int Pmuffle;
   int Pqq;
@@ -62,7 +63,7 @@ private:
   void init_filters();
   void adjustq(float q);
   float cperiod;
-  float lpanning, rpanning, level, alpha, beta;
+  float lpanning, rpanning, input,level, alpha, beta;
   float *vocbuf;
   float *tmpsmpsl, *tmpsmpsr; 
   float *tmpl, *tmpr;

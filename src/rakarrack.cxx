@@ -1062,6 +1062,11 @@ if (rkr->Bypass)
   }
 
 
+if(rkr->checkforaux())
+{
+ if(vu_vu->value()!=rkr->efx_Vocoder->vulevel)
+ vu_vu->value(rkr->efx_Vocoder->vulevel);
+}
 
 if (Scope_ON)Sco->redraw();
 
@@ -5266,7 +5271,8 @@ vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
 vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
 vo_q->value(rkr->efx_Vocoder->getpar(3));
-vo_level->value(rkr->efx_Vocoder->getpar(4));
+vo_input->value(rkr->efx_Vocoder->getpar(4));
+vo_level->value(rkr->efx_Vocoder->getpar(5));
 
 if((int)vo_activar->value())rkr->Vocoder_Bypass=1;
 }
@@ -5296,11 +5302,11 @@ void RKRGUI::cb_vo_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_pan_i(o,v);
 }
 
-void RKRGUI::cb_vo_level_i(SliderW* o, void*) {
+void RKRGUI::cb_vo_input_i(SliderW* o, void*) {
   rkr->efx_Vocoder->changepar(4,(int)o->value());
 }
-void RKRGUI::cb_vo_level(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_level_i(o,v);
+void RKRGUI::cb_vo_input(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_input_i(o,v);
 }
 
 void RKRGUI::cb_vo_mu_i(SliderW* o, void*) {
@@ -5315,6 +5321,13 @@ void RKRGUI::cb_vo_q_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_vo_q(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_q_i(o,v);
+}
+
+void RKRGUI::cb_vo_level_i(SliderW* o, void*) {
+  rkr->efx_Vocoder->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_vo_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_level_i(o,v);
 }
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
@@ -13097,7 +13110,7 @@ R average.");
         vo_WD->align(FL_ALIGN_LEFT);
         vo_WD->when(FL_WHEN_CHANGED);
       } // SliderW* vo_WD
-      { vo_pan = new SliderW(372, 256, 100, 10, "Pan");
+      { vo_pan = new SliderW(372, 265, 100, 10, "Pan");
         vo_pan->type(5);
         vo_pan->box(FL_FLAT_BOX);
         vo_pan->color((Fl_Color)178);
@@ -13114,23 +13127,23 @@ R average.");
         vo_pan->align(FL_ALIGN_LEFT);
         vo_pan->when(FL_WHEN_CHANGED);
       } // SliderW* vo_pan
-      { vo_level = new SliderW(372, 272, 100, 10, "Level");
-        vo_level->type(5);
-        vo_level->box(FL_FLAT_BOX);
-        vo_level->color((Fl_Color)178);
-        vo_level->selection_color((Fl_Color)62);
-        vo_level->labeltype(FL_NORMAL_LABEL);
-        vo_level->labelfont(0);
-        vo_level->labelsize(10);
-        vo_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_level->maximum(127);
-        vo_level->step(1);
-        vo_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_level->callback((Fl_Callback*)cb_vo_level);
-        vo_level->align(FL_ALIGN_LEFT);
-        vo_level->when(FL_WHEN_CHANGED);
-      } // SliderW* vo_level
-      { vo_mu = new SliderW(372, 288, 100, 10, "Muffle");
+      { vo_input = new SliderW(372, 290, 100, 10, "Input");
+        vo_input->type(5);
+        vo_input->box(FL_FLAT_BOX);
+        vo_input->color((Fl_Color)178);
+        vo_input->selection_color((Fl_Color)62);
+        vo_input->labeltype(FL_NORMAL_LABEL);
+        vo_input->labelfont(0);
+        vo_input->labelsize(10);
+        vo_input->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_input->maximum(127);
+        vo_input->step(1);
+        vo_input->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_input->callback((Fl_Callback*)cb_vo_input);
+        vo_input->align(FL_ALIGN_LEFT);
+        vo_input->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_input
+      { vo_mu = new SliderW(372, 315, 100, 10, "Muf.");
         vo_mu->type(5);
         vo_mu->box(FL_FLAT_BOX);
         vo_mu->color((Fl_Color)178);
@@ -13148,7 +13161,7 @@ R average.");
         vo_mu->align(FL_ALIGN_LEFT);
         vo_mu->when(FL_WHEN_CHANGED);
       } // SliderW* vo_mu
-      { vo_q = new SliderW(372, 304, 100, 10, "Q");
+      { vo_q = new SliderW(372, 340, 100, 10, "Q");
         vo_q->type(5);
         vo_q->box(FL_FLAT_BOX);
         vo_q->color((Fl_Color)178);
@@ -13166,6 +13179,38 @@ R average.");
         vo_q->align(FL_ALIGN_LEFT);
         vo_q->when(FL_WHEN_CHANGED);
       } // SliderW* vo_q
+      { vo_level = new SliderW(372, 365, 100, 10, "Level");
+        vo_level->type(5);
+        vo_level->box(FL_FLAT_BOX);
+        vo_level->color((Fl_Color)178);
+        vo_level->selection_color((Fl_Color)62);
+        vo_level->labeltype(FL_NORMAL_LABEL);
+        vo_level->labelfont(0);
+        vo_level->labelsize(10);
+        vo_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_level->maximum(127);
+        vo_level->step(1);
+        vo_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vo_level->callback((Fl_Callback*)cb_vo_level);
+        vo_level->align(FL_ALIGN_LEFT);
+        vo_level->when(FL_WHEN_CHANGED);
+      } // SliderW* vo_level
+      { vu_vu = new NewVum(327, 265, 11, 122);
+        vu_vu->type(2);
+        vu_vu->box(FL_NO_BOX);
+        vu_vu->color((Fl_Color)178);
+        vu_vu->selection_color((Fl_Color)90);
+        vu_vu->labeltype(FL_NORMAL_LABEL);
+        vu_vu->labelfont(0);
+        vu_vu->labelsize(14);
+        vu_vu->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
+        vu_vu->minimum(15);
+        vu_vu->maximum(-48);
+        vu_vu->step(1);
+        vu_vu->value(-48);
+        vu_vu->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
+        vu_vu->when(FL_WHEN_NEVER);
+      } // NewVum* vu_vu
       VOCODER->end();
     } // Fl_Group* VOCODER
     { Tuner = new Fl_Group(521, 24, 276, 58);

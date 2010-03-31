@@ -34,6 +34,8 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   //default values
   Ppreset = 0;
   Pvolume = 50;
+  Plevel = 0;
+  Pinput = 0;
   Ppanning = 64;
   Plrcross = 100;
   tmpsmpsl = (float *) malloc (sizeof (float) * PERIOD);
@@ -109,7 +111,8 @@ Vocoder::out (float * smpsl, float * smpsr)
 
       for(i=0; i<PERIOD; i++)
       {
-        vocbuf[i]=auxresampled[i]*level;
+       vocbuf[i]=auxresampled[i]*input;
+       if(vocbuf[i]>maxgain) maxgain = vocbuf[i]; //vu meter level.  
       }  
 
        filterbank[j].aux->filterout(vocbuf);
@@ -121,8 +124,6 @@ Vocoder::out (float * smpsl, float * smpsr)
        filterbank[j].oldgain = filterbank[j].gain; 
        };
       tempgain2 = cperiod * (sqrt(filterbank[j].gain) - tempgain1);    
-      if(tempgain1>maxgain) maxgain = tempgain1; //vu meter level.  
-       vulevel = rap2dB (maxgain) ; 
        
       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
@@ -143,10 +144,12 @@ Vocoder::out (float * smpsl, float * smpsr)
     
       for (i = 0; i<PERIOD; i++)
        { 
-       efxoutl[i]=tmpl[i]*lpanning;  //I need to add gain interpolation here between periods.
-       efxoutr[i]=tmpr[i]*rpanning;
+       efxoutl[i]=tmpl[i]*lpanning*level;  //I need to add gain interpolation here between periods.
+       efxoutr[i]=tmpr[i]*rpanning*level;
        };  
  
+      vulevel = (float)CLAMP(rap2dB(maxgain), -48.0, 15.0); 
+
 
 };
 
@@ -205,17 +208,17 @@ Vocoder::adjustq(float q)
 void
 Vocoder::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 5;
+  const int PRESET_SIZE = 6;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Vocoder 1
-    {0, 64, 10, 70, 70},
+    {0, 64, 10, 70, 70, 40},
     //Vocoder 2
-    {0, 64, 14, 80, 70},
+    {0, 64, 14, 80, 70, 40},
     //Vocoder 3
-    {0, 64, 20, 90, 70},
+    {0, 64, 20, 90, 70, 40},
     //Vocoder 4
-    {0, 64, 30, 100, 70}
+    {0, 64, 30, 100, 70, 40}
   };
 
   
@@ -251,9 +254,14 @@ float tmp = 0;
       adjustq(tmp);
       break;
     case 4:
-      Plevel = value;
-      level = dB2rap (80.0f * (float)Plevel / 70.0f - 40.0f);    
+      Pinput = value;
+      input = (float)Pinput/127.0f*2.0f;    
       break;      
+    case 5:
+      Plevel = value;
+      level = (float)Plevel/127.0f*4.0f;    
+      break;      
+
 
    };
 };
@@ -276,6 +284,9 @@ Vocoder::getpar (int npar)
       return(Pqq); 
       break;  
     case 4:
+      return (Pinput);
+      break;
+    case 5:
       return (Plevel);
       break;
   

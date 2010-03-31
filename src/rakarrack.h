@@ -2509,10 +2509,10 @@ private:
   void cb_vo_pan_i(SliderW*, void*);
   static void cb_vo_pan(SliderW*, void*);
 public:
-  SliderW *vo_level;
+  SliderW *vo_input;
 private:
-  void cb_vo_level_i(SliderW*, void*);
-  static void cb_vo_level(SliderW*, void*);
+  void cb_vo_input_i(SliderW*, void*);
+  static void cb_vo_input(SliderW*, void*);
 public:
   SliderW *vo_mu;
 private:
@@ -2524,6 +2524,12 @@ private:
   void cb_vo_q_i(SliderW*, void*);
   static void cb_vo_q(SliderW*, void*);
 public:
+  SliderW *vo_level;
+private:
+  void cb_vo_level_i(SliderW*, void*);
+  static void cb_vo_level(SliderW*, void*);
+public:
+  NewVum *vu_vu;
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
