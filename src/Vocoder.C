@@ -40,10 +40,11 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   tmpsmpsr = (float *) malloc (sizeof (float) * PERIOD);
   tmpl = (float *) malloc (sizeof (float) * PERIOD);
   tmpr = (float *) malloc (sizeof (float) * PERIOD);
-  
-        Phidamp = 30;
-      alpha = expf(-D_PI * (float) Phidamp/fSAMPLE_RATE);
-      beta = 1.0f - alpha;
+ 
+       Pmuffle = 100;
+      float tmp = (float) Pmuffle/1000.0f;
+      alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+      beta = 1.0f - alpha; 
 
   vocbuf = (float *) malloc (sizeof (float) * PERIOD);
   
@@ -62,13 +63,11 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
       filterbank[i].l = new AnalogFilter (4, center, qq, 0);
       filterbank[i].r = new AnalogFilter (4, center, qq, 0);
       filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
-     printf("Fc %f Q %f bw %f\n",center,qq,bw);
-
     };
     
     vlp = new AnalogFilter (2, 3600.0f, 0.707f, 0);
     vhp = new AnalogFilter (3, 300.0f, 0.707f, 0);
-  //setpreset (Ppreset);
+  setpreset (Ppreset);
   
 
   cleanup ();
@@ -197,7 +196,6 @@ Vocoder::adjustq(float q)
       filterbank[ii].l->setq (q);
       filterbank[ii].r->setq (q);
       filterbank[ii].aux->setq (q);
-      printf("Q %f\n",q);
     };
 
 }
