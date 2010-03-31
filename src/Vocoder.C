@@ -141,7 +141,11 @@ Vocoder::out (float * smpsl, float * smpsr)
   
     }; 
     
-
+      for (i = 0; i<PERIOD; i++)
+       { 
+       tmpl[i] *= lpanning;  //I need to add gain interpolation here between periods.
+       tmpr[i] *= rpanning;
+       };  
       memcpy (efxoutl, tmpl, PERIOD * sizeof(float));  
       memcpy (efxoutr, tmpr, PERIOD * sizeof(float));  
  
@@ -239,18 +243,18 @@ float tmp = 0;
       break;
     case 2:
       Pmuffle = value;
-      tmp = (float) Pmuffle/2000.0f;
+      tmp = (float) Pmuffle/5000.0f;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       break;
     case 3: 
       Pqq = value;
-      tmp = 40.0f + powf (10.0f, ((float)value) / 60.0f);
+      tmp = (float) value;
       adjustq(tmp);
       break;
     case 4:
       Plevel = value;
-      level = dB2rap (80.0f * (float)Plevel / 127.0f - 40.0f);    
+      level = dB2rap (80.0f * (float)Plevel / 70.0f - 40.0f);    
       break;      
 
    };
