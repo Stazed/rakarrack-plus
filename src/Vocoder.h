@@ -63,7 +63,7 @@ private:
   void init_filters();
   void adjustq(float q);
   float cperiod;
-  float lpanning, rpanning, input,level, alpha, beta;
+  float lpanning, rpanning, input,level, alpha, beta,prls, gate;
   float *vocbuf;
   float *tmpsmpsl, *tmpsmpsr; 
   float *tmpl, *tmpr;

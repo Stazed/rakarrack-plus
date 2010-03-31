@@ -43,10 +43,12 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   tmpl = (float *) malloc (sizeof (float) * PERIOD);
   tmpr = (float *) malloc (sizeof (float) * PERIOD);
  
-       Pmuffle = 100;
-      float tmp = (float) Pmuffle/1000.0f;
+       Pmuffle = 50;
+      float tmp = (float) Pmuffle/10000.0f;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
+      prls = beta;
+      gate = rap2dB(-68.0f);
 
   vocbuf = (float *) malloc (sizeof (float) * PERIOD);
   
@@ -67,8 +69,8 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
       filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
     };
     
-    vlp = new AnalogFilter (2, 3600.0f, 0.707f, 0);
-    vhp = new AnalogFilter (3, 300.0f, 0.707f, 0);
+    vlp = new AnalogFilter (2, 4000.0f, 0.707f, 1);
+    vhp = new AnalogFilter (3, 200.0f, 0.707f, 1);
   setpreset (Ppreset);
   
 
@@ -116,16 +118,18 @@ Vocoder::out (float * smpsl, float * smpsr)
       }  
 
        filterbank[j].aux->filterout(vocbuf);
- 
-       tempgain1 = sqrt(filterbank[j].gain);
+       
+       if(filterbank[j].speak < gate) filterbank[j].speak = 0.0f;
+       tempgain1 = filterbank[j].gain;
        for (i = 0; i<PERIOD; i++)
        { 
        if(fabs(vocbuf[i]) > filterbank[j].speak) filterbank[j].speak = fabs(vocbuf[i]);  //Leaky Peak detector
-       filterbank[j].speak*=beta;
+
+       filterbank[j].speak*=prls;
        filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;   
        filterbank[j].oldgain = filterbank[j].gain; 
        };
-      tempgain2 = cperiod * (sqrt(filterbank[j].gain) - tempgain1);    
+      tempgain2 = cperiod * (filterbank[j].gain - tempgain1);    
        
       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
@@ -246,7 +250,8 @@ float tmp = 0;
       break;
     case 2:
       Pmuffle = value;
-      tmp = (float) Pmuffle/7500.0f;
+      tmp = (float) Pmuffle;
+      tmp *= tmp/160000;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       break;
