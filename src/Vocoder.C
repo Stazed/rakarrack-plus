@@ -249,7 +249,7 @@ float tmp = 0;
       break;
     case 3: 
       Pqq = value;
-      tmp = 40.0f + powf (10.0f, ((float)value) / 70.0f);
+      tmp = (float) value;
       adjustq(tmp);
       break;
     case 4:
