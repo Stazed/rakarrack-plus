@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,18 +834,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {279 63 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1281 53 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5614,7 +5612,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
         }
       }
       Fl_Group VOCODER {
-        user_data 1 open
+        user_data 1
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button vo_activar {
@@ -5628,7 +5626,14 @@ findpos(35,(int)o->value());}
         Fl_Choice vo_preset {
           label Preset
           callback {rkr->Vocoder_Bypass=0;
-//rkr->efx_Vocoder->setpreset((int) o->value());
+rkr->efx_Vocoder->setpreset((int) o->value());
+
+vo_WD->value(rkr->efx_Vocoder->getpar(0)+64);
+vo_pan->value(rkr->efx_Vocoder->getpar(1)+64);
+vo_mu->value(rkr->efx_Vocoder->getpar(2));
+vo_q->value(rkr->efx_Vocoder->getpar(3));
+vo_level->value(rkr->efx_Vocoder->getpar(4));
+
 if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -5675,7 +5680,7 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
         }
         Fl_Value_Slider vo_q {
           label Q
-          callback {rkr->efx_Vocoder->changepar(3,(int)o->value());} selected
+          callback {rkr->efx_Vocoder->changepar(3,(int)o->value());}
           xywh {372 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
           class SliderW
         }
