@@ -95,7 +95,7 @@ Vocoder::out (float * smpsl, float * smpsr)
 {
   int i, j;
   float tempgain1, tempgain2;
-  float maxgain;
+  float maxgain=0.0f;
 
     memset(tmpl,0,sizeof(float)*PERIOD);
     memset(tmpr,0,sizeof(float)*PERIOD);
@@ -229,7 +229,6 @@ void
 Vocoder::changepar (int npar, int value)
 {
 float tmp = 0;
-float fq;
   switch (npar)
     {
     case 0:
