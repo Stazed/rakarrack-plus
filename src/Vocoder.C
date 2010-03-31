@@ -255,11 +255,11 @@ float tmp = 0;
       break;
     case 4:
       Pinput = value;
-      input = (float)Pinput/127.0f*2.0f;    
+      input = dB2rap (60.0f * (float)Pinput / 127.0f - 40.0f);    
       break;      
     case 5:
       Plevel = value;
-      level = (float)Plevel/127.0f*4.0f;    
+      level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);    
       break;      
 
 
