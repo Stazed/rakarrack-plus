@@ -53,8 +53,9 @@ show_help ()
   fprintf (stderr,
 	   "  -h ,     --help \t\t\t display command-line help and exit\n");
   fprintf (stderr, "  -n ,     --no-gui \t\t\t disable GUI\n");
-  fprintf (stderr, "  -l File, --load=File \t\t\t loads sound\n");
+  fprintf (stderr, "  -l File, --load=File \t\t\t loads preset\n");
   fprintf (stderr, "  -b File, --bank=File \t\t\t loads bank\n");
+  fprintf (stderr, "  -p #,    --preset=# \t\t\t set preset\n");
   fprintf (stderr, "  -x, --dump-preset-names \t\t prints bank of preset names and IDs\n\n");
   fprintf (stderr, "FLTK options are:\n\n");
   fprintf (stderr, "  -bg2 color\n");
@@ -94,6 +95,7 @@ main (int argc, char *argv[])
   struct option opts[] = {
     {"load", 1, NULL, 'l'},
     {"bank", 1, NULL, 'b'},
+    {"preset",1,NULL, 'p'},
     {"no-gui", 0, NULL, 'n'},
     {"dump-preset-names", 0, NULL, 'x'},
     {"help", 0, NULL, 'h'},
@@ -123,7 +125,7 @@ main (int argc, char *argv[])
 
   while (1)
     {
-      opt = getopt_long (argc, argv, "l:b:nxh", opts, &option_index);
+      opt = getopt_long (argc, argv, "l:b:p:nxh", opts, &option_index);
       char *optarguments = optarg;
 
       if (opt == -1)
@@ -149,19 +151,21 @@ main (int argc, char *argv[])
 	    {
 	      rkr.loadbank (optarguments);
 	      break;
+	    }  
+        case 'p':
+           if(optarguments != NULL)
+            {
+              preset=atoi(optarguments);
+              break;
+            }  
         case 'x':
               rkr.dump_preset_names ();
               exit(1);
               break;
 
+          }
 
-
-	    }
-	}
-
-    }
-
-
+     }
 
 
   if (exitwithhelp != 0)

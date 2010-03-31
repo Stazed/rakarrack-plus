@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,18 +834,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {1541 70 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {279 63 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5614,7 +5612,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
         }
       }
       Fl_Group VOCODER {
-        user_data 1 open
+        user_data 1
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button vo_activar {
@@ -5629,7 +5627,7 @@ findpos(35,(int)o->value());}
           label Preset
           callback {rkr->Vocoder_Bypass=0;
 //rkr->efx_Vocoder->setpreset((int) o->value());
-if((int)vo_activar->value())rkr->Vocoder_Bypass=1;} open
+if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5656,9 +5654,9 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;} open
           class SliderW
         }
         Fl_Value_Slider vo_pan {
-          label Att
-          callback {rkr->efx_Vocoder->changepar(5,(int)(o->value()+64));} selected
-          xywh {372 256 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
+          label Pan
+          callback {rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));} selected
+          xywh {372 256 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vo_level {
@@ -5667,35 +5665,17 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;} open
           xywh {372 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
-        Fl_Value_Slider vo_bs {
-          label {B.S.}
+        Fl_Value_Slider vo_mu {
+          label Muffle
           callback {rkr->efx_Vocoder->changepar(2,(int)o->value());}
-          xywh {372 288 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 31 step 1 textcolor 7
+          xywh {372 288 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vo_q {
           label Q
           callback {rkr->efx_Vocoder->changepar(3,(int)o->value());}
-          xywh {372 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {372 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
           class SliderW
-        }
-        Fl_Value_Slider vo_freq {
-          label Freq
-          callback {rkr->efx_Vocoder->changepar(4,(int)o->value());}
-          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 300 maximum 6000 step 1 value 1200 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button vo_reverb {
-          label Reverb
-          user_data 2
-          callback {rkr->efx_Vocoder->changepar(9,(int)o->value())}
-          xywh {339 336 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button vo_safe {
-          label {Safe Mode}
-          user_data 2
-          callback {rkr->efx_Vocoder->changepar(2,(int)o->value())}
-          xywh {339 351 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tuner {
