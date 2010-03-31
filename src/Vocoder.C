@@ -56,7 +56,7 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
     {
       bw = powf(10.0f, (2.5f + ((float) i + 1)/subdiv)) - powf(10.0f, (2.5f + ((float) i)/subdiv));
       center = powf(10.0f, (2.5f + ((float) i)/subdiv)) + bw/2.0f;
-      qq = center/bw;
+      qq = 5.0f * center/bw;
       filterbank[i].sfreq = center;
       filterbank[i].sq = qq;
       filterbank[i].l = new AnalogFilter (4, center, qq, 0);
@@ -65,7 +65,9 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
      printf("Fc %f Q %f bw %f\n",center,qq,bw);
 
     };
-
+    
+    vlp = new AnalogFilter (2, 3600.0f, 0.707f, 0);
+    vhp = new AnalogFilter (3, 300.0f, 0.707f, 0);
   //setpreset (Ppreset);
   
 
@@ -94,10 +96,14 @@ Vocoder::out (float * smpsl, float * smpsr)
 {
   int i, j;
   float tempgain1, tempgain2;
+  float maxgain;
 
     memset(tmpl,0,sizeof(float)*PERIOD);
     memset(tmpr,0,sizeof(float)*PERIOD);
-  
+    
+    
+   vlp->filterout(auxresampled);
+   vhp->filterout(auxresampled);
 
     for (j = 0; j < VOC_BANDS; j++)
     {
@@ -112,11 +118,12 @@ Vocoder::out (float * smpsl, float * smpsr)
        tempgain1 = filterbank[j].gain;
        for (i = 0; i<PERIOD; i++)
        { 
-       filterbank[j].gain = alpha * filterbank[j].oldgain + beta * fabs(vocbuf[i]);   
+       filterbank[j].gain = beta * filterbank[j].oldgain + alpha * fabs(vocbuf[i]);   
        filterbank[j].oldgain = filterbank[j].gain; 
        };
-      tempgain2 = cperiod * (filterbank[j].gain - tempgain1);      
-
+      tempgain2 = cperiod * (filterbank[j].gain - tempgain1);    
+      if(tempgain1>maxgain) maxgain = tempgain1; //vu meter level.  
+       vulevel = rap2dB (maxgain) ; 
        
       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
@@ -128,7 +135,8 @@ Vocoder::out (float * smpsl, float * smpsr)
        { 
        tmpl[i] += tmpsmpsl[i] * tempgain1;  //I need to add gain interpolation here between periods.
        tmpr[i] += tmpsmpsr[i] * tempgain1;
-       tempgain1+=tempgain2;        
+       tempgain1+=tempgain2;   
+        
        };  
       
   
@@ -181,6 +189,20 @@ Vocoder::init_filters()
 }
 
 void
+Vocoder::adjustq(float q)
+{
+ 
+  for (int ii = 0; ii < VOC_BANDS; ii++)
+    {
+      filterbank[ii].l->setq (q);
+      filterbank[ii].r->setq (q);
+      filterbank[ii].aux->setq (q);
+      printf("Q %f\n",q);
+    };
+
+}
+
+void
 Vocoder::setpreset (int npreset)
 {
   const int PRESET_SIZE = 11;
@@ -208,7 +230,8 @@ Vocoder::setpreset (int npreset)
 void
 Vocoder::changepar (int npar, int value)
 {
-float tmp;
+float tmp = 0;
+float fq;
   switch (npar)
     {
     case 0:
@@ -218,37 +241,19 @@ float tmp;
       setpanning (value);
       break;
     case 2:
-    Pband = value;
+      Pmuffle = 10 * value;
+      tmp = (float) Pmuffle/1000.0f;
+      alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+      beta = 1.0f - alpha; 
       break;
     case 3: 
-      tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
-      filterbank[Pband].l->setq (tmp);
-      filterbank[Pband].r->setq (tmp);
-      filterbank[Pband].aux->setq (tmp); 
+      tmp = 40.0f + powf (10.0f, ((float)value) / 60.0f);
+      adjustq(tmp);
       break;
     case 4:
-      tmp = (float) value;
-      filterbank[Pband].l->setfreq (tmp);
-      filterbank[Pband].r->setfreq (tmp);
-      filterbank[Pband].aux->setfreq (tmp);     
-      break;      
-    case 5:
-      Phidamp = value;
-      alpha = expf(-D_PI * (float) Phidamp/fSAMPLE_RATE);
-      beta = 1.0f - alpha;
-      break;
-    case 6:
-      break;
-    case 7:
       Plevel = value;
-      level = dB2rap (80.0f * (float)Plevel / 127.0f - 40.0f);
-      break;
-    case 8:
-      break;
-    case 9:
-      break;
-    case 10:
-      break;
+      level = dB2rap (80.0f * (float)Plevel / 127.0f - 40.0f);    
+      break;      
 
    };
 };

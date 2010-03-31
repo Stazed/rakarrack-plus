@@ -43,6 +43,7 @@ public:
   float *efxoutr;
   float *auxresampled;
   float outvolume;
+  float vulevel;
 
 
 
@@ -53,10 +54,11 @@ private:
   int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
   int Pband;
-  int Phidamp;
+  int Pmuffle;
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void init_filters();
+  void adjustq(float q);
   float cperiod;
   float lpanning, rpanning, level, alpha, beta;
   float *vocbuf;
@@ -69,7 +71,7 @@ private:
 
   } filterbank[VOC_BANDS];
 
-
+ AnalogFilter *vhp, *vlp; 
 
 };
 
