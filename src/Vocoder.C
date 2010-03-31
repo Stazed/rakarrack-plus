@@ -243,7 +243,7 @@ float tmp = 0;
       break;
     case 2:
       Pmuffle = value;
-      tmp = (float) Pmuffle/5000.0f;
+      tmp = (float) Pmuffle/10000.0f;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       break;
