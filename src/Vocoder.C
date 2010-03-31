@@ -207,17 +207,17 @@ Vocoder::adjustq(float q)
 void
 Vocoder::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
+  const int PRESET_SIZE = 5;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Vocoder 1
-    {0, 64, 0, 47, 329 , 64, 30, 20, 0, 0, 0},
+    {0, 64, 10, 70, 70},
     //Vocoder 2
-    {67, 64, 1, 100, 0, 64, 30, 20, 1, 0, 0},
+    {0, 64, 14, 80, 70},
     //Vocoder 3
-    {67, 75, 1, 100, 0, 64, 30, 20, 2, 0, 0},
+    {0, 64, 20, 90, 70},
     //Vocoder 4
-    {67, 60, 1, 100, 0, 64, 30, 20, 3, 0, 0}
+    {0, 64, 30, 100, 70}
   };
 
   
