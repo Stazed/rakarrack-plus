@@ -55,6 +55,8 @@ private:
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
   int Pband;
   int Pmuffle;
+  int Pqq;
+  
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void init_filters();

@@ -239,12 +239,13 @@ float fq;
       setpanning (value);
       break;
     case 2:
-      Pmuffle = 10 * value;
-      tmp = (float) Pmuffle/1000.0f;
+      Pmuffle = value;
+      tmp = (float) Pmuffle/2000.0f;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       break;
     case 3: 
+      Pqq = value;
       tmp = 40.0f + powf (10.0f, ((float)value) / 60.0f);
       adjustq(tmp);
       break;
@@ -268,32 +269,15 @@ Vocoder::getpar (int npar)
       return (Ppanning);
       break;
     case 2:
-      return(0);
+      return(Pmuffle);
       break;
     case 3:
-      return(0); 
+      return(Pqq); 
       break;  
-    case 8:
-      return (0);
-      break;
-    case 5:
-      return (0);
-      break;
-    case 6:
-      return (0);
-      break;
-    case 7:
-      return(Plevel);
-      break;
     case 4:
-      return(0);
+      return (Plevel);
       break;
-    case 9:
-      return(0);
-      break;   
-    case 10:
-      return(0);
-      break; 
+  
 
     };
   return (0);			//in case of bogus parameter number
