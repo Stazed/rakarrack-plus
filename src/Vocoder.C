@@ -120,7 +120,9 @@ Vocoder::out (float * smpsl, float * smpsr)
        tempgain1 = sqrt(filterbank[j].gain);
        for (i = 0; i<PERIOD; i++)
        { 
-       filterbank[j].gain = beta * filterbank[j].oldgain + alpha * fabs(vocbuf[i]);   
+       if(fabs(vocbuf[i]) > filterbank[j].speak) filterbank[j].speak = fabs(vocbuf[i]);  //Leaky Peak detector
+       filterbank[j].speak*=beta;
+       filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;   
        filterbank[j].oldgain = filterbank[j].gain; 
        };
       tempgain2 = cperiod * (sqrt(filterbank[j].gain) - tempgain1);    
@@ -146,8 +148,8 @@ Vocoder::out (float * smpsl, float * smpsr)
        { 
        efxoutl[i]=tmpl[i]*lpanning*level;  //I need to add gain interpolation here between periods.
        efxoutr[i]=tmpr[i]*rpanning*level;
-       };  
- 
+       }; 
+        
       vulevel = (float)CLAMP(rap2dB(maxgain), -48.0, 15.0); 
 
 
@@ -244,7 +246,7 @@ float tmp = 0;
       break;
     case 2:
       Pmuffle = value;
-      tmp = (float) Pmuffle/10000.0f;
+      tmp = (float) Pmuffle/7500.0f;
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       break;

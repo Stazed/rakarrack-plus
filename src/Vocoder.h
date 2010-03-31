@@ -69,7 +69,7 @@ private:
   float *tmpl, *tmpr;
     struct
   {
-  float sfreq, sq, gain, oldgain;
+  float sfreq, sq, gain, oldgain, speak;
     AnalogFilter *l, *r, *aux;
 
   } filterbank[VOC_BANDS];
