@@ -114,13 +114,13 @@ Vocoder::out (float * smpsl, float * smpsr)
 
        filterbank[j].aux->filterout(vocbuf);
  
-       tempgain1 = filterbank[j].gain;
+       tempgain1 = sqrt(filterbank[j].gain);
        for (i = 0; i<PERIOD; i++)
        { 
        filterbank[j].gain = beta * filterbank[j].oldgain + alpha * fabs(vocbuf[i]);   
        filterbank[j].oldgain = filterbank[j].gain; 
        };
-      tempgain2 = cperiod * (filterbank[j].gain - tempgain1);    
+      tempgain2 = cperiod * (sqrt(filterbank[j].gain) - tempgain1);    
       if(tempgain1>maxgain) maxgain = tempgain1; //vu meter level.  
        vulevel = rap2dB (maxgain) ; 
        

@@ -270,7 +270,7 @@ RyanWah::changepar (int npar, int value)
       reinitfilter (); 
       break;
      case 13:
-     Pstages = (value);
+     Pstages = (value - 1);
      filterl->setstages(Pstages);
      filterr->setstages(Pstages);
      cleanup();
