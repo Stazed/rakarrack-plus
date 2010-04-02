@@ -842,8 +842,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open selected
-      xywh {1287 39 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1583 122 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5638,6 +5638,7 @@ vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
 vo_q->value(rkr->efx_Vocoder->getpar(3));
 vo_input->value(rkr->efx_Vocoder->getpar(4));
+vo_ring->value(rkr->efx_Vocoder->getpar(6));
 vo_level->value(rkr->efx_Vocoder->getpar(5));
 
 if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
@@ -5669,31 +5670,37 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
         Fl_Value_Slider vo_pan {
           label Pan
           callback {rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));}
-          xywh {372 265 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {372 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vo_input {
           label Input
           callback {rkr->efx_Vocoder->changepar(4,(int)o->value());}
-          xywh {372 290 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 280 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vo_mu {
           label {Muf.}
           callback {rkr->efx_Vocoder->changepar(2,(int)o->value());}
-          xywh {372 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
+          xywh {372 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vo_q {
           label Q
           callback {rkr->efx_Vocoder->changepar(3,(int)o->value());}
-          xywh {372 340 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
+          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vo_ring {
+          label Ring
+          callback {rkr->efx_Vocoder->changepar(6,(int)o->value());}
+          xywh {372 340 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vo_level {
           label Level
           callback {rkr->efx_Vocoder->changepar(5,(int)o->value());}
-          xywh {372 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 360 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Slider vu_vu {
