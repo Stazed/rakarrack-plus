@@ -218,13 +218,13 @@ Vocoder::setpreset (int npreset)
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Vocoder 1
-    {0, 64, 10, 70, 70, 40},
+    {0, 64, 10, 70, 70, 40, 0},
     //Vocoder 2
-    {0, 64, 14, 80, 70, 40},
+    {0, 64, 14, 80, 70, 40, 32},
     //Vocoder 3
-    {0, 64, 20, 90, 70, 40},
+    {0, 64, 20, 90, 70, 40, 64},
     //Vocoder 4
-    {0, 64, 30, 100, 70, 40}
+    {0, 64, 30, 100, 70, 40, 127}
   };
 
   
