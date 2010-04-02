@@ -214,7 +214,7 @@ Vocoder::adjustq(float q)
 void
 Vocoder::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 6;
+  const int PRESET_SIZE = 7;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Vocoder 1
