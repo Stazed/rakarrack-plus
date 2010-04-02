@@ -226,19 +226,14 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
           yr+=p[0];
            
 
-//      otm1l = 0.999f * otm1l + yl - itm1l;
-//      itm1l = yl;
-//      otm1r = 0.999f * otm1r + yr - itm1r;
-//      itm1r = yr;
-
-
-      inputl[i] = yl;
-      inputr[i] = yr;
-
+      otm1l = 0.999f * otm1l + yl - itm1l;
+      itm1l = yl;
+      otm1r = 0.999f * otm1r + yr - itm1r;
+      itm1r = yr;
 
        
-//      inputl[i] = otm1l;
-//      inputr[i] = otm1r;
+      inputl[i] = otm1l;
+      inputr[i] = otm1r;
 
      }
 
