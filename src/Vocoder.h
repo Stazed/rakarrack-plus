@@ -57,11 +57,13 @@ private:
   int Pband;
   int Pmuffle;
   int Pqq;
+  int Pring;
   
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void init_filters();
   void adjustq(float q);
+  float ringworm;
   float cperiod;
   float lpanning, rpanning, input,level, alpha, beta,prls, gate;
   float *vocbuf;
