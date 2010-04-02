@@ -127,7 +127,7 @@ Vocoder::out (float * smpsl, float * smpsr)
 
        filterbank[j].speak*=prls;
        filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;   
-       filterbank[j].oldgain = filterbank[j].gain; 
+       filterbank[j].oldgain = filterbank[j].gain + ringworm*vocbuf[i]; 
        };
       tempgain2 = cperiod * (filterbank[j].gain - tempgain1);    
        
@@ -269,7 +269,10 @@ float tmp = 0;
       level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);    
       break;      
 
-
+    case 6:
+      Pring = value;
+      ringworm = (float) Pring/127.0f;    
+      break; 
    };
 };
 
@@ -296,7 +299,9 @@ Vocoder::getpar (int npar)
     case 5:
       return (Plevel);
       break;
-  
+    case 6:
+      return (Pring);
+      break; 
 
     };
   return (0);			//in case of bogus parameter number
