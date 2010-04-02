@@ -66,6 +66,7 @@ private:
   float ringworm;
   float cperiod;
   float lpanning, rpanning, input,level, alpha, beta,prls, gate;
+  float compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
   float *vocbuf;
   float *tmpsmpsl, *tmpsmpsr; 
   float *tmpl, *tmpr;

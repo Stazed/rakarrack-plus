@@ -42,13 +42,19 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   tmpsmpsr = (float *) malloc (sizeof (float) * PERIOD);
   tmpl = (float *) malloc (sizeof (float) * PERIOD);
   tmpr = (float *) malloc (sizeof (float) * PERIOD);
- 
-       Pmuffle = 100;
-      float tmp = (float) Pmuffle/10000.0f;
+  Pmuffle = 10;
+      float tmp = 0.01f;  //10 ms decay time on peak detectors
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       prls = beta;
       gate = rap2dB(-75.0f);
+
+  tmp = 0.05f; //50 ms att/rel on compressor
+  calpha =  cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+  cbeta = 1.0f - calpha;
+  cthresh = 0.25f;
+  cpthresh = cthresh; //dynamic threshold
+  cratio = 0.25f;
 
   vocbuf = (float *) malloc (sizeof (float) * PERIOD);
   
@@ -69,7 +75,7 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
       filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
     };
     
-    vlp = new AnalogFilter (2, 4000.0f, 0.707f, 1);
+    vlp = new AnalogFilter (2, 4000.0f, 1.0f, 1);
     vhp = new AnalogFilter (3, 200.0f, 0.707f, 1);
   setpreset (Ppreset);
   
@@ -100,11 +106,38 @@ Vocoder::out (float * smpsl, float * smpsr)
   int i, j;
   float tempgain1, tempgain2;
   float maxgain=0.0f;
-
-    memset(tmpl,0,sizeof(float)*PERIOD);
-    memset(tmpr,0,sizeof(float)*PERIOD);
-    
-    
+  float auxtemp, tmpgain;
+   
+   memset(tmpl,0,sizeof(float)*PERIOD);
+   memset(tmpr,0,sizeof(float)*PERIOD);    
+   
+   for (i = 0; i<PERIOD; i++)    //apply compression to auxresampled
+   {
+   auxtemp = input * auxresampled[i];
+   if(fabs(auxtemp > compeak)) compeak = fabs(auxtemp);   //First do peak detection on the signal
+   compeak *= prls;
+   compenv = cbeta * oldcompenv + calpha * compeak;       //Next average into envelope follower
+   oldcompenv = compenv;
+   
+   if(compenv > cpthresh)                                //if envelope of signal exceeds thresh, then compress
+   {
+   compg = cpthresh + cpthresh*(compenv - cpthresh)/compenv; 
+   cpthresh = cthresh + cratio*(compg - cpthresh);   //cpthresh changes dynamically
+   tmpgain = compg/compenv;
+   }
+   else
+   {
+   tmpgain = 1.0f;
+   }
+   
+   if(compenv < cpthresh) cpthresh = compenv;
+   if(cpthresh < cthresh) cpthresh = cthresh;
+   
+   auxresampled[i] = auxtemp * tmpgain;   
+   };
+      //End compression
+      
+      
    vlp->filterout(auxresampled);
    vhp->filterout(auxresampled);
 
@@ -113,7 +146,7 @@ Vocoder::out (float * smpsl, float * smpsr)
 
       for(i=0; i<PERIOD; i++)
       {
-       vocbuf[i]=auxresampled[i]*input;
+       vocbuf[i]=auxresampled[i];
        if(vocbuf[i]>maxgain) maxgain = vocbuf[i]; //vu meter level.  
       }  
 
@@ -139,7 +172,7 @@ Vocoder::out (float * smpsl, float * smpsr)
  
       for (i = 0; i<PERIOD; i++)
        { 
-       tmpl[i] += tmpsmpsl[i] * tempgain1;  //I need to add gain interpolation here between periods.
+       tmpl[i] += tmpsmpsl[i] * tempgain1;  //Includes gain interpolation here between periods.
        tmpr[i] += tmpsmpsr[i] * tempgain1;
        tempgain1+=tempgain2;   
         
@@ -150,8 +183,8 @@ Vocoder::out (float * smpsl, float * smpsr)
     
       for (i = 0; i<PERIOD; i++)
        { 
-       efxoutl[i]=tmpl[i]*lpanning*level;  //I need to add gain interpolation here between periods.
-       efxoutr[i]=tmpr[i]*rpanning*level;
+       efxoutl[i]= tmpl[i]*lpanning*level;  
+       efxoutr[i]= tmpr[i]*rpanning*level;
        }; 
         
       vulevel = (float)CLAMP(rap2dB(maxgain), -48.0, 15.0); 
@@ -262,7 +295,7 @@ float tmp = 0;
       break;
     case 4:
       Pinput = value;
-      input = dB2rap (60.0f * (float)Pinput / 127.0f - 40.0f);    
+      input = dB2rap (75.0f * (float)Pinput / 127.0f - 40.0f);    
       break;      
     case 5:
       Plevel = value;
