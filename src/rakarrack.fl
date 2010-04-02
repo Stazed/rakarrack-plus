@@ -5626,7 +5626,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
           callback {rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-findpos(35,(int)o->value());} selected
+findpos(35,(int)o->value());}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice vo_preset {
@@ -10011,6 +10011,23 @@ switch(miralo)
   ryanwah_activar->value(rkr->RyanWah_Bypass);
   ryanwah_activar->do_callback();
   break;  
+  case 32:
+  rbecho_activar->value(rkr->RBEcho_Bypass);
+  rbecho_activar->do_callback();
+  break;
+  case 33:
+  coil_activar->value(rkr->CoilCrafter_Bypass);
+  coil_activar->do_callback();
+  break;
+  case 34:
+  shelf_activar->value(rkr->ShelfBoost_Bypass);
+  shelf_activar->do_callback();
+  break;
+  case 35:
+  vo_activar->value(rkr->Vocoder_Bypass);
+  vo_activar->do_callback();
+  break;
+  
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
   Tap_activar->do_callback();
@@ -10030,7 +10047,8 @@ switch(miralo)
   
    
 
-}} {}
+}} {selected
+    }
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;

@@ -347,6 +347,19 @@ else
    case 31:
     if(inoff) RyanWah_Bypass=1; else RyanWah_Bypass=0;
      break;
+   case 32:
+    if(inoff) RBEcho_Bypass=1; else RBEcho_Bypass=0;
+     break;
+   case 33:
+    if(inoff) CoilCrafter_Bypass=1; else CoilCrafter_Bypass=0;
+     break;
+   case 34:
+    if(inoff) ShelfBoost_Bypass=1; else ShelfBoost_Bypass=0;
+     break;
+   case 35:
+    if(inoff) Vocoder_Bypass=1; else Vocoder_Bypass=0;
+     break;
+   
    case 121:
     if(inoff) Tap_Bypass = 1; else Tap_Bypass = 0;
      break; 
@@ -478,6 +491,19 @@ RKR::checkonoff(int miraque)
    case 31:
      if (RyanWah_Bypass) return(0);
      break;
+   case 32:
+     if (RBEcho_Bypass) return(0);
+     break;
+   case 33:
+     if (CoilCrafter_Bypass) return(0);
+     break;
+   case 34:
+     if (ShelfBoost_Bypass) return(0);
+     break;
+   case 35:
+     if (Vocoder_Bypass) return(0);
+     break;
+ 
    case 121:
      if (Tap_Bypass) return 0;
      break;

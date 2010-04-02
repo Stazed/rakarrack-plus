@@ -17318,6 +17318,23 @@ switch(miralo)
   ryanwah_activar->value(rkr->RyanWah_Bypass);
   ryanwah_activar->do_callback();
   break;  
+  case 32:
+  rbecho_activar->value(rkr->RBEcho_Bypass);
+  rbecho_activar->do_callback();
+  break;
+  case 33:
+  coil_activar->value(rkr->CoilCrafter_Bypass);
+  coil_activar->do_callback();
+  break;
+  case 34:
+  shelf_activar->value(rkr->ShelfBoost_Bypass);
+  shelf_activar->do_callback();
+  break;
+  case 35:
+  vo_activar->value(rkr->Vocoder_Bypass);
+  vo_activar->do_callback();
+  break;
+  
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
   Tap_activar->do_callback();
