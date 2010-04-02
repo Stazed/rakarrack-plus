@@ -1837,6 +1837,33 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_ShelfBoost->changepar(1,value-64);
          break;
 
+    case 296:
+         efx_Vocoder->changepar(0,value);
+         break;
+
+    case 297:
+         efx_Vocoder->changepar(1,value);
+         break;
+
+    case 298:
+         efx_Vocoder->changepar(4,value);
+         break;
+
+    case 299:
+         efx_Vocoder->changepar(2,1+(int)((float)value*.992125f));
+         break;
+
+    case 300:
+         efx_Vocoder->changepar(3,40+(int)((float)value*1.023622f));
+         break;
+
+    case 301:
+         efx_Vocoder->changepar(6,value);
+         break;
+
+    case 302:
+         efx_Vocoder->changepar(5,value);
+         break;
 
    } 
       

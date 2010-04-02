@@ -215,7 +215,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 270;
+  NumParams= 277;
 
 {
    static const char *los_params[] = 
@@ -481,6 +481,13 @@ RKR::RKR ()
 "VaryBand Tempo 1","249",
 "VaryBand Tempo 2","251",
 "VaryBand WD","248",
+"Vocoder Input","298",
+"Vocoder Level","302",
+"Vocoder Muf.","299",
+"Vocoder Pan","297",
+"Vocoder Q","300",
+"Vocoder Ring","301",
+"Vocoder WD","296",
 "Volume","7",
 "WahWah Amp S.","111",
 "WahWah Amp S.I.","112",
