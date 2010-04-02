@@ -454,6 +454,14 @@ RKR::savefile (char *filename)
 		   efx_ShelfBoost->getpar (4), ShelfBoost_Bypass);
 	  break;
 
+	case 35:
+	  //Vocoder
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Vocoder->getpar (0), efx_Vocoder->getpar (1),
+		   efx_Vocoder->getpar (2), efx_Vocoder->getpar (3),
+		   efx_Vocoder->getpar (4), efx_Vocoder->getpar (5),
+		   efx_Vocoder->getpar (6), Vocoder_Bypass);
+	  break;
 
 
 	}
@@ -891,6 +899,13 @@ RKR::loadfile (char *filename)
 		  &ShelfBoost_B);
 	  break;
 
+	case 35:
+	  //Vocoder
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[36][0], &lv[36][1], &lv[36][2], &lv[36][3], &lv[36][4],
+		  &lv[36][5], &lv[36][6], &Vocoder_B);
+	  break;
+
 
 
 	}
@@ -970,7 +985,8 @@ RKR::Actualizar_Audio ()
 //RBEcho Here --------  
   CoilCrafter_Bypass = 0;
   ShelfBoost_Bypass = 0;
-  
+  Vocoder_Bypass = 0;
+    
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -1037,6 +1053,8 @@ for (i = 0; i <= 6; i++)
     efx_CoilCrafter->changepar (i, lv[34][i]);
  for (i = 0; i <= 4; i++)
     efx_ShelfBoost->changepar (i, lv[35][i]);
+ for (i = 0; i <= 6; i++)
+    efx_Vocoder->changepar (i, lv[36][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1101,7 +1119,8 @@ for (i = 0; i <= 6; i++)
 //RBEcho here  ---------
   CoilCrafter_Bypass = CoilCrafter_B;
   ShelfBoost_Bypass = ShelfBoost_B;
-  
+  Vocoder_Bypass = Vocoder_B;
+    
   Bypass = Bypass_B;
 
 }
@@ -1167,7 +1186,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[36][16] = {
+  int presets[37][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1239,7 +1258,9 @@ RKR::New ()
 //CoilCrafter
     {32, 6, 1, 3300, 16, 4400, 42, 20, 0, 0, 0, 0, 0, 0, 0, 0},
 //ShelfBoost
-    {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Vocoder 
+    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 
     
@@ -1307,6 +1328,7 @@ RKR::New ()
 //RBEcho here --------
   CoilCrafter_B = 0;
   ShelfBoost_B = 0;
+  Vocoder_B = 0;
 
   Bypass_B = 0;
 
@@ -1330,7 +1352,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[36][16] = {
+  int presets[37][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1402,7 +1424,9 @@ RKR::New_Bank ()
 //CoilCrafter
     {32, 6, 1, 3300, 16, 4400, 42, 20, 0, 0, 0, 0, 0, 0, 0, 0},
 //ShelfBoost
-    {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Vocoder 
+    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
     
     
@@ -1507,6 +1531,8 @@ RKR::Bank_to_Preset (int i)
 //RBEcho here --------------------     
   CoilCrafter_B = Bank[i].lv[34][19];
   ShelfBoost_B = Bank[i].lv[35][19];
+  Vocoder_B = Bank[i].lv[36][19];
+
 
   Bypass_B = Bypass;
 
@@ -1610,6 +1636,8 @@ RKR::Preset_to_Bank (int i)
     lv[34][j] = efx_CoilCrafter->getpar(j);
   for (j = 0; j <= 4; j++)
     lv[35][j] = efx_ShelfBoost->getpar(j);
+  for (j = 0; j <= 6; j++)
+    lv[36][j] = efx_Vocoder->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1678,7 +1706,9 @@ RKR::Preset_to_Bank (int i)
 // RBEcho here ------------------------  
   Bank[i].lv[34][19] = CoilCrafter_Bypass;
   Bank[i].lv[35][19] = ShelfBoost_Bypass;
+  Bank[i].lv[36][19] = Vocoder_Bypass;
   
+
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));
   
   

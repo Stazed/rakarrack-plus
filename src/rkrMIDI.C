@@ -347,6 +347,19 @@ else
    case 31:
     if(inoff) RyanWah_Bypass=1; else RyanWah_Bypass=0;
      break;
+   case 32:
+    if(inoff) RBEcho_Bypass=1; else RBEcho_Bypass=0;
+     break;
+   case 33:
+    if(inoff) CoilCrafter_Bypass=1; else CoilCrafter_Bypass=0;
+     break;
+   case 34:
+    if(inoff) ShelfBoost_Bypass=1; else ShelfBoost_Bypass=0;
+     break;
+   case 35:
+    if(inoff) Vocoder_Bypass=1; else Vocoder_Bypass=0;
+     break;
+   
    case 121:
     if(inoff) Tap_Bypass = 1; else Tap_Bypass = 0;
      break; 
@@ -478,6 +491,19 @@ RKR::checkonoff(int miraque)
    case 31:
      if (RyanWah_Bypass) return(0);
      break;
+   case 32:
+     if (RBEcho_Bypass) return(0);
+     break;
+   case 33:
+     if (CoilCrafter_Bypass) return(0);
+     break;
+   case 34:
+     if (ShelfBoost_Bypass) return(0);
+     break;
+   case 35:
+     if (Vocoder_Bypass) return(0);
+     break;
+ 
    case 121:
      if (Tap_Bypass) return 0;
      break;
@@ -1837,6 +1863,33 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_ShelfBoost->changepar(1,value-64);
          break;
 
+    case 296:
+         efx_Vocoder->changepar(0,value);
+         break;
+
+    case 297:
+         efx_Vocoder->changepar(1,value);
+         break;
+
+    case 298:
+         efx_Vocoder->changepar(4,value);
+         break;
+
+    case 299:
+         efx_Vocoder->changepar(2,1+(int)((float)value*.992125f));
+         break;
+
+    case 300:
+         efx_Vocoder->changepar(3,40+(int)((float)value*1.023622f));
+         break;
+
+    case 301:
+         efx_Vocoder->changepar(6,value);
+         break;
+
+    case 302:
+         efx_Vocoder->changepar(5,value);
+         break;
 
    } 
       

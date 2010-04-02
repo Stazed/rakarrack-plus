@@ -5257,6 +5257,7 @@ void RKRGUI::cb_shelf_mode(Fl_Check_Button* o, void* v) {
 void RKRGUI::cb_vo_activar_i(Fl_Light_Button* o, void*) {
   rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
+vu_vu->value(-48);
 findpos(35,(int)o->value());
 }
 void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
@@ -16047,7 +16048,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<296; i++)
+for (i=1; i<303; i++)
 
 {
 
@@ -17138,8 +17139,35 @@ switch (i)
      shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
      shelf_q1->redraw();     
      break;
-     
-     
+     case 296:
+     vo_WD->value(rkr->efx_Vocoder->getpar(0)-64); 
+     vo_WD->redraw();
+     break;
+     case 297:
+     vo_pan->value(rkr->efx_Vocoder->getpar(1)-64); 
+     vo_pan->redraw();
+     break;
+     case 298:
+     vo_input->value(rkr->efx_Vocoder->getpar(4)); 
+     vo_input->redraw();
+     break;
+     case 299:
+     vo_mu->value(rkr->efx_Vocoder->getpar(2)); 
+     vo_mu->redraw();
+     break;
+     case 300:
+     vo_q->value(rkr->efx_Vocoder->getpar(3)); 
+     vo_q->redraw();
+     break;
+     case 301:
+     vo_ring->value(rkr->efx_Vocoder->getpar(6)); 
+     vo_ring->redraw();
+     break;
+     case 302:
+     vo_level->value(rkr->efx_Vocoder->getpar(5)); 
+     vo_level->redraw();
+     break;
+
      
       
 }
@@ -17290,6 +17318,23 @@ switch(miralo)
   ryanwah_activar->value(rkr->RyanWah_Bypass);
   ryanwah_activar->do_callback();
   break;  
+  case 32:
+  rbecho_activar->value(rkr->RBEcho_Bypass);
+  rbecho_activar->do_callback();
+  break;
+  case 33:
+  coil_activar->value(rkr->CoilCrafter_Bypass);
+  coil_activar->do_callback();
+  break;
+  case 34:
+  shelf_activar->value(rkr->ShelfBoost_Bypass);
+  shelf_activar->do_callback();
+  break;
+  case 35:
+  vo_activar->value(rkr->Vocoder_Bypass);
+  vo_activar->do_callback();
+  break;
+  
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
   Tap_activar->do_callback();

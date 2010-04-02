@@ -67,7 +67,7 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
   rm[0]=1.0; rm[2]= -1.0; rm[4]=1.0; rm[6]=-1.0; rm[8]=1.0;
 
 
-  harm = new HarmEnhancer (rm, 2500.0f,26000.0f,1.0f);
+  harm = new HarmEnhancer (rm, 2500.0f,4400.0f,1.0f);
 
   RB1l =  new AnalogFilter(2,2000.0f,1.0f,0);
   RB1r =  new AnalogFilter(2,2000.0f,1.0f,0);

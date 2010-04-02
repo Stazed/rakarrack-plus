@@ -92,7 +92,7 @@ Convolotron::out (float * smpsl, float * smpsr)
       if(Preverb)
       {
       //Multitap feedback for reverbs
-     verbindex = offset - length;
+      verbindex = offset - length;
       for (j = 0; j<numtaps; j++)
       {
       verbindex-=interval;
@@ -111,9 +111,8 @@ Convolotron::out (float * smpsl, float * smpsr)
       if (xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
 
       lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
-
+         
       }
-
 
       feedback = 0.15f * fb * lyn;
       efxoutl[i] = lyn * 2.0f * level * lpanning;
@@ -250,6 +249,7 @@ Convolotron::process_rbuf()
 	 if (ngain > maxx_read) ngain = maxx_read;
 	 for(j=0; j<length; j++) buf[j] *= ngain; 
 
+         
 
 }
 
