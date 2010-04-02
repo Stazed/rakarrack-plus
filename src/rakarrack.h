@@ -2524,6 +2524,11 @@ private:
   void cb_vo_q_i(SliderW*, void*);
   static void cb_vo_q(SliderW*, void*);
 public:
+  SliderW *vo_ring;
+private:
+  void cb_vo_ring_i(SliderW*, void*);
+  static void cb_vo_ring(SliderW*, void*);
+public:
   SliderW *vo_level;
 private:
   void cb_vo_level_i(SliderW*, void*);
