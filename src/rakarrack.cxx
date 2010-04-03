@@ -5608,13 +5608,9 @@ Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
 };
 
 void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
-  char tmp[8] ;
-
-if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
+  if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
-bzero(tmp,sizeof(tmp));
-sprintf(tmp,"%d",rkr->TapTempo());
-T_DIS->copy_label(tmp);
+T_DIS->value(rkr->TapTempo());
 UpdateTGUI();
 };
 }
@@ -13605,16 +13601,17 @@ R average.");
         T_BUT->shortcut(0x67);
         T_BUT->callback((Fl_Callback*)cb_T_BUT);
       } // Fl_Button* T_BUT
-      { T_DIS = new Fl_Box(715, 165, 70, 22, "120");
-        T_DIS->box(FL_DOWN_BOX);
-        T_DIS->labelcolor((Fl_Color)1);
-        T_DIS->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
-      } // Fl_Box* T_DIS
       { TAP_LABEL = new Fl_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->labelfont(1);
         TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         TAP_LABEL->when(FL_WHEN_NEVER);
       } // Fl_Box* TAP_LABEL
+      { T_DIS = new Fl_Value_Output(715, 165, 70, 22);
+        T_DIS->value(120);
+        T_DIS->textcolor((Fl_Color)1);
+        T_DIS->align(FL_ALIGN_CENTER);
+        T_DIS->when(FL_WHEN_NEVER);
+      } // Fl_Value_Output* T_DIS
       Tap->end();
     } // Fl_Group* Tap
     Principal->size_range(640, 480, 3200, 2400);

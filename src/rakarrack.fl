@@ -6028,24 +6028,19 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Button T_BUT {
           label {@circle}
-          callback {char tmp[8] ;
-
-if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
+          callback {if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
-bzero(tmp,sizeof(tmp));
-sprintf(tmp,"%d",rkr->TapTempo());
-T_DIS->copy_label(tmp);
+T_DIS->value(rkr->TapTempo());
 UpdateTGUI();
 }}
           xywh {635 165 54 23} shortcut 0x67
         }
-        Fl_Box T_DIS {
-          label 120
-          xywh {715 165 70 22} box DOWN_BOX labelcolor 1 align 80
-        }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
           xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
+        }
+        Fl_Value_Output T_DIS {selected
+          xywh {715 165 70 22} align 0 when 0 value 120 textcolor 1
         }
       }
     }
@@ -10047,8 +10042,7 @@ switch(miralo)
   
    
 
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;

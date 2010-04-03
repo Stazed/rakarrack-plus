@@ -68,6 +68,7 @@ public:
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Value_Output.H>
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Value_Input.H>
@@ -2665,8 +2666,8 @@ private:
   void cb_T_BUT_i(Fl_Button*, void*);
   static void cb_T_BUT(Fl_Button*, void*);
 public:
-  Fl_Box *T_DIS;
   Fl_Box *TAP_LABEL;
+  Fl_Value_Output *T_DIS;
   Fl_Double_Window *BankWindow;
 private:
   void cb_BankWindow_i(Fl_Double_Window*, void*);
