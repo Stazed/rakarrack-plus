@@ -15138,6 +15138,16 @@ shelf_mode->value(rkr->lv[35][3]);
 shelf_activar->value(rkr->ShelfBoost_Bypass);
 
 
+//Vocoder
+vo_WD->value(rkr->lv[36][0]-64);
+vo_pan->value(rkr->lv[36][1]-64);
+vo_input->value(rkr->lv[36][4]);
+vo_mu->value(rkr->lv[36][2]);
+vo_q->value(rkr->lv[36][3]);
+vo_ring->value(rkr->lv[36][6]);
+vo_level->value(rkr->lv[36][5]);
+
+
 
 
 reordena();
