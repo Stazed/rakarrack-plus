@@ -838,7 +838,8 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open selected
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -6028,9 +6029,13 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Button T_BUT {
           label {@circle}
-          callback {if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
+          callback {char tmp[8];
+
+if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
-T_DIS->value(rkr->TapTempo());
+bzero(tmp,sizeof(tmp));
+sprintf(tmp,"%d",rkr->TapTempo());
+T_DIS->copy_label(tmp);
 UpdateTGUI();
 }}
           xywh {635 165 54 23} shortcut 0x67
@@ -6039,8 +6044,8 @@ UpdateTGUI();
           label {Tap Tempo}
           xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
         }
-        Fl_Value_Output T_DIS {selected
-          xywh {715 165 70 22} align 0 when 0 value 120 textcolor 1
+        Fl_Box T_DIS {
+          xywh {715 165 70 22} box DOWN_BOX labelcolor 1
         }
       }
     }

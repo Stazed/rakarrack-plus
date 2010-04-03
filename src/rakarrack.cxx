@@ -5608,9 +5608,13 @@ Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
 };
 
 void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
-  if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
+  char tmp[8];
+
+if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
-T_DIS->value(rkr->TapTempo());
+bzero(tmp,sizeof(tmp));
+sprintf(tmp,"%d",rkr->TapTempo());
+T_DIS->copy_label(tmp);
 UpdateTGUI();
 };
 }
@@ -13606,12 +13610,10 @@ R average.");
         TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         TAP_LABEL->when(FL_WHEN_NEVER);
       } // Fl_Box* TAP_LABEL
-      { T_DIS = new Fl_Value_Output(715, 165, 70, 22);
-        T_DIS->value(120);
-        T_DIS->textcolor((Fl_Color)1);
-        T_DIS->align(FL_ALIGN_CENTER);
-        T_DIS->when(FL_WHEN_NEVER);
-      } // Fl_Value_Output* T_DIS
+      { T_DIS = new Fl_Box(715, 165, 70, 22);
+        T_DIS->box(FL_DOWN_BOX);
+        T_DIS->labelcolor((Fl_Color)1);
+      } // Fl_Box* T_DIS
       Tap->end();
     } // Fl_Group* Tap
     Principal->size_range(640, 480, 3200, 2400);
