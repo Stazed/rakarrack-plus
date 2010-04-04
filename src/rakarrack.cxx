@@ -1025,7 +1025,7 @@ ActMIDI();
 if(rkr->Tap_Bypass)
 {
    
-  if((rkr->Tap_Display==1) && (rkr->Tap_Selection == 1))
+  if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
    {
      char tt[8];
      bzero(tt,sizeof(tt));
@@ -1037,9 +1037,6 @@ if(rkr->Tap_Bypass)
 
   if(rkr->Tap_Display==2)
    {
-     char tt[8];
-     bzero(tt,sizeof(tt));
-     sprintf(tt,"---");
      rkr->Tap_Display=0;
      Tap_activar->value(0);
      Tap_activar->do_callback();
@@ -5604,6 +5601,7 @@ void RKRGUI::cb_T_SEL(Fl_Choice* o, void* v) {
 Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
  {"GUI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"MIDI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Jack Transport", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -13593,7 +13591,7 @@ R average.");
         Tap_activar->callback((Fl_Callback*)cb_Tap_activar, (void*)(2));
         Tap_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Tap_activar
-      { T_SEL = new Fl_Choice(715, 145, 72, 15, "Input");
+      { T_SEL = new Fl_Choice(700, 145, 87, 15, "Input");
         T_SEL->down_box(FL_BORDER_BOX);
         T_SEL->labelsize(10);
         T_SEL->textsize(10);

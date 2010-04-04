@@ -1,5 +1,6 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Added jack transport beats per minute to Tap Tempo
 - Added Effect Vocoder.
 - Added Effect ShelfBoost.
 - MIDI learn improved.

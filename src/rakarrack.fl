@@ -843,7 +843,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1583 122 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1576 115 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1031,7 +1031,7 @@ ActMIDI();
 if(rkr->Tap_Bypass)
 {
    
-  if((rkr->Tap_Display==1) && (rkr->Tap_Selection == 1))
+  if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
    {
      char tt[8];
      bzero(tt,sizeof(tt));
@@ -1043,9 +1043,6 @@ if(rkr->Tap_Bypass)
 
   if(rkr->Tap_Display==2)
    {
-     char tt[8];
-     bzero(tt,sizeof(tt));
-     sprintf(tt,"---");
      rkr->Tap_Display=0;
      Tap_activar->value(0);
      Tap_activar->do_callback();
@@ -6014,8 +6011,8 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Choice T_SEL {
           label Input
-          callback {rkr->Tap_Selection=(int)o->value();}
-          xywh {715 145 72 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
+          callback {rkr->Tap_Selection=(int)o->value();} selected
+          xywh {700 145 87 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label GUI
@@ -6023,6 +6020,10 @@ TAP_LABEL->redraw_label();}
           }
           MenuItem {} {
             label MIDI
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Jack Transport}
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -7855,8 +7856,7 @@ vo_level->value(rkr->lv[36][5]);
 
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {

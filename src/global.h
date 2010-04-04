@@ -516,6 +516,8 @@ public:
   int Tap_TempoSet;
   int t_timeout;
 
+  int jt_state;
+  double jt_tempo;
 };
 
 

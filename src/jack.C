@@ -23,6 +23,7 @@
 
 #include <jack/jack.h>
 #include <jack/midiport.h>
+#include <jack/transport.h>
 #include "jack.h"
 #include "global.h"
 
@@ -34,7 +35,6 @@ jack_client_t *jackclient;
 jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
-
 void *dataout;
 
 int jackprocess (jack_nframes_t nframes, void *arg);
@@ -51,6 +51,7 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
   JackOUT = rkr_;
   jackclient = jackclient_;
 
+  jack_set_sync_callback(jackclient, timebase, NULL);
   jack_set_process_callback (jackclient, jackprocess, 0);
   jack_on_shutdown (jackclient, jackshutdown, 0);
 
@@ -206,5 +207,24 @@ jackshutdown (void *arg)
 		      "Jack Shut Down, try to save your work");
 };
 
+
+
+int
+timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
+{
+
+JackOUT->jt_state=state;
+
+if(state == 3)
+{
+JackOUT->jt_tempo=pos->beats_per_minute;
+JackOUT->Tap_TempoSet = lrint(JackOUT->jt_tempo);
+JackOUT->Update_tempo();
+JackOUT->Tap_Display=1;
+}
+
+return(1);
+
+}
 
 
