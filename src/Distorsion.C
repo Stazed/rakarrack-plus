@@ -32,18 +32,27 @@
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
  */
 
+Waveshaper::Waveshaper()
+{
+  compg = 0.0f;  //used by compression distortion
+  cratio = 0.25f;  //used by compression for hardness
+  tmpgain = 1.0f;  // compression distortion temp variable
+  dthresh = 0.25;
+
+};
+
+Waveshaper::~Waveshaper()
+{
+};
 
 void
-Distorsion::waveshapesmps (int n, float * smps, int type,
+Waveshaper::waveshapesmps (int n, float * smps, int type,
 	       int drive, int eff)
 {
   int i;
   float ws = (float)drive / 127.0f + .00001f;
   ws = 1.0f - expf (-ws * 4.0f);
   float tmpv;
-  float compg = 0.0f;  //used by compression distortion
-  float cratio = 0.25f;  //used by compression for hardness
-  float tmpgain = 1.0f;  // compression distortion temp variable
 
   switch (type + 1 )
     {
@@ -354,6 +363,7 @@ Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
   DCl->setfreq (30.0f);
   DCr->setfreq (30.0f);
 
+  dwshape = new Waveshaper();
 
   //default values
   Ppreset = 0;
@@ -373,9 +383,7 @@ Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
   toggler = 1.0;
   octave_memoryr = -1.0;
   octmix = 0.0;
-
-  dthresh = 0.25f;
-  
+ 
   setpreset (Ppreset);
   cleanup ();
 };
@@ -390,6 +398,7 @@ Distorsion::~Distorsion ()
   delete (blockDCr);
   delete (DCl);
   delete (DCr);
+  delete (dwshape);
 };
 
 /*
@@ -465,9 +474,9 @@ Distorsion::out (float * smpsl, float * smpsr)
   //no optimised, yet (no look table)
 
 
-  waveshapesmps (PERIOD, efxoutl, Ptype, Pdrive, 1);
+  dwshape->waveshapesmps (PERIOD, efxoutl, Ptype, Pdrive, 1);
   if (Pstereo != 0)
-  waveshapesmps (PERIOD, efxoutr, Ptype, Pdrive, 1);
+  dwshape->waveshapesmps (PERIOD, efxoutr, Ptype, Pdrive, 1);
 
   if (Pprefiltering == 0)
     applyfilters (efxoutl, efxoutr);

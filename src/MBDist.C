@@ -55,9 +55,9 @@ MBDist::MBDist (float * efxoutl_, float * efxoutr_)
   hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0);
   hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0);
 
-  mbwshape1 = new Distorsion(NULL, NULL);
-  mbwshape2 = new Distorsion(NULL, NULL);  
-  mbwshape3 = new Distorsion(NULL, NULL);  
+  mbwshape1 = new Waveshaper();
+  mbwshape2 = new Waveshaper();  
+  mbwshape3 = new Waveshaper(); 
   
   //default values
   Ppreset = 0;
@@ -88,6 +88,9 @@ MBDist::~MBDist ()
   delete (lpf2r);
   delete (hpf2l);
   delete (hpf2r);
+  delete (mbwshape1);
+  delete (mbwshape2);
+  delete (mbwshape3);
 };
 
 /*

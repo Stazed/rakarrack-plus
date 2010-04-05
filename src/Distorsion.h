@@ -28,6 +28,22 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
+class Waveshaper
+{
+public:
+  Waveshaper ();
+  ~Waveshaper ();
+//Waveshaping
+  void waveshapesmps (int n, float * smps, int type,
+		    int drive, int eff);
+  
+  float dthresh;  //dynamic threshold in compression waveshaper 
+  float compg;  //used by compression distortion
+  float cratio;  //used by compression for hardness
+  float tmpgain;  // compression distortion temp variable
+};
+
+
 class Distorsion
 {
 public:
@@ -39,9 +55,6 @@ public:
   int getpar (int npar);
   void cleanup ();
   void applyfilters (float * efxoutl, float * efxoutr);
-//Waveshaping
-  void waveshapesmps (int n, float * smps, int type,
-		    int drive, int eff);
 		    
   int Ppreset;
   float *efxoutl;
@@ -52,8 +65,6 @@ public:
   float volume;
   
 private:
-
-
   //Parametrii
   int Pvolume;	//Volumul or E/R
   int Ppanning;	//Panning
@@ -75,12 +86,14 @@ private:
   void setlpf (int Plpf);
   void sethpf (int Phpf);
 
-   float dthresh;  //dynamic threshold in compression waveshaper 
   //Parametrii reali
   float panning, lrcross, octave_memoryl, togglel, octave_memoryr,toggler,octmix;
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
+  class Waveshaper *dwshape;
 
 };
+
+
 
 
 #endif

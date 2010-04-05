@@ -48,7 +48,7 @@ NewDist::NewDist (float * efxoutl_, float * efxoutr_)
   hpfr = new AnalogFilter (3, 20, 1, 0);
   blockDCl = new AnalogFilter (2, 75.0f, 1, 0);
   blockDCr = new AnalogFilter (2, 75.0f, 1, 0);
-  wshape = new Distorsion(NULL, NULL);
+  wshape = new Waveshaper();
   blockDCl->setfreq (75.0f);
   blockDCr->setfreq (75.0f);
 
