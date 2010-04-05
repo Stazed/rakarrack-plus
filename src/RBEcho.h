@@ -60,6 +60,7 @@ private:
   int Pfb;		//Feed-back-ul
   int Phidamp;
   int Preverse;
+  int Psubdiv;
 
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
@@ -73,6 +74,7 @@ private:
   //Parametrii reali
   float panning, lrcross, fb, hidamp, reverse;
   int dl, dr, delay, lrdelay;
+  float fdelay, subdiv;
 
   void initdelays ();
   float *ldelay, *rdelay;

@@ -335,7 +335,7 @@ RyanWah::getpar (int npar)
       return (Php);
       break;
     case 13:
-      return (Pstages);
+      return (Pstages + 1);
       break;
     case 14:
       return (Prange);    

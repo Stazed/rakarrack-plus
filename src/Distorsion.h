@@ -51,6 +51,8 @@ public:
   float *octoutr;
   float outvolume;
   float volume;
+  
+  float cpthresh;   //used by waveshapesmps for dynamically changing threshold
 
 private:
 

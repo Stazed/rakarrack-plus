@@ -40,6 +40,9 @@ waveshapesmps (int n, float * smps, int type,
   float ws = (float)drive / 127.0f + .00001f;
   ws = 1.0f - expf (-ws * 4.0f);
   float tmpv;
+  float compg = 0.0f;  //used by compression distortion
+  float cratio = 0.25f;  //used by compression for hardness
+  float tmpgain = 1.0f;  // compression distortion temp variable
 
   switch (type + 1 )
     {
@@ -289,6 +292,33 @@ waveshapesmps (int n, float * smps, int type,
        smps[i]=sinf(ws * smps[i] + sinf(ws * smps[i])/tmpv);  
       break;                                                               
         
+	case 20:  //Compression
+	cratio = 1.0f - ws;   //harder clipping as you increase the drive.
+	ws =  ws*ws*CRUNCH_GAIN + 1.0f;
+	   for (i = 0; i < n; i++)    //apply compression 
+	   {
+	   tmpv = ws * smps[i];
+   
+	   if(tmpv > cpthresh)                                //if envelope of signal exceeds thresh, then compress
+	   {
+	   compg = Distorsion->cpthresh + Distorsion->cpthresh*(tmpv - Distorsion->cpthresh)/tmpv; 
+	   Distorsion->cpthresh = 0.5f + cratio*(compg - Distorsion->cpthresh);   //cpthresh changes dynamically
+	   tmpgain = compg/tmpv;
+	   }
+	   else
+	   {
+	   tmpgain = 1.0f;
+	   }
+   
+	   if(tmpv < Distorsion->cpthresh) Distorsion->cpthresh = tmpv;
+	   if(Distorsion->cpthresh < 0.5f) Distorsion->cpthresh = 0.5f;
+   
+	   smps[i] = tmpv * tmpgain;   
+	   };		
+	
+	
+	
+	break;
         
 
  
@@ -602,8 +632,8 @@ Distorsion::changepar (int npar, int value)
       Plevel = value;
       break;
     case 5:
-      if (value > 18)
-	value = 18;		//this must be increased if more distorsion types are added
+      if (value > 19)
+	value = 19;		//this must be increased if more distorsion types are added
       Ptype = value;
       break;
     case 6:

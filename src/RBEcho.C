@@ -42,6 +42,8 @@ RBEcho::RBEcho (float * efxoutl_, float * efxoutr_)
   Plrcross = 100;
   Pfb = 40;
   Phidamp = 60;
+  Psubdiv = 1;
+  subdiv = 1.0f;
 
   ldelay = NULL;
   rdelay = NULL;
@@ -127,8 +129,8 @@ RBEcho::out (float * smpsl, float * smpsr)
       
       
       //LowPass Filter
-      ldelay[kl] = ldl = ldl * hidamp + oldl * (1.0f - hidamp);
-      rdelay[kr] = rdl = rdl * hidamp + oldr * (1.0f - hidamp);
+      ldelay[kl] = ldl * hidamp + oldl * (1.0f - hidamp);
+      rdelay[kr] = rdl * hidamp + oldr * (1.0f - hidamp);
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
 
@@ -148,22 +150,22 @@ RBEcho::out (float * smpsl, float * smpsr)
 	      if (lswell <= PI) 
 	      {
 	      lswell = (1.0f - cosf(lswell));  //Clickless transition
-	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell)  + (ldelay[kl] * (1-reverse));   //Volume ducking near zero crossing.     
+	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell)  + (ldelay[kl] * (1.0f - reverse));   //Volume ducking near zero crossing.     
 	      }  
 	      else
 	      {
-	      efxoutl[i] = 2.0f * ((ldelay[rvkl] * reverse)  + (ldelay[kl] * (1-reverse)));        
+	      efxoutl[i] = 2.0f * ((ldelay[rvkl] * reverse)  + (ldelay[kl] * (1.0f - reverse)));        
 	      }
        
       rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
 	      if (rswell <= PI)
 	      {
 	       rswell = (1.0f - cosf(rswell));   //Clickless transition 
-	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell)  + (rdelay[kr] * (1-reverse));  //Volume ducking near zero crossing.
+	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell)  + (rdelay[kr] * (1.0f - reverse));  //Volume ducking near zero crossing.
 	      }
 	      else
 	      {
-	      efxoutr[i] = 2.0f * ((rdelay[rvkr] * reverse)  + (rdelay[kr] * (1-reverse)));
+	      efxoutr[i] = 2.0f * ((rdelay[rvkr] * reverse)  + (rdelay[kr] * (1.0f - reverse)));
 	      }
       
 
@@ -212,10 +214,10 @@ void
 RBEcho::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
-  delay=Pdelay;
-  if (delay < 10) delay = 10;
-  if (delay > MAX_DELAY * 1000) delay = 1000 * MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
-  delay = 1 + lrintf ( ((float) delay / 1000.0f) * fSAMPLE_RATE );	
+  fdelay= 60.0f/((float) Pdelay);
+  if (fdelay < 0.01f) fdelay = 0.01f;
+  if (fdelay > (float) MAX_DELAY) fdelay = (float) MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
+  delay = 1 + lrintf ( subdiv * fdelay * fSAMPLE_RATE );	
 
   initdelays ();
 };
@@ -319,6 +321,11 @@ RBEcho::changepar (int npar, int value)
     case 7:
       setreverse (value);
       break;
+    case 8:
+      Psubdiv = value;
+      subdiv = 1.0f/((float)Psubdiv);
+      delay = 1 + lrintf ( subdiv * fdelay * fSAMPLE_RATE );
+
 
     };
 };
@@ -351,6 +358,9 @@ RBEcho::getpar (int npar)
       break;
     case 7:
       return (Preverse);
+      break;
+    case 8:
+      return (Psubdiv)
       break;
 
     };
