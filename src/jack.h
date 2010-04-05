@@ -27,6 +27,8 @@
 
 int JACKstart (RKR * rkr_, jack_client_t * jackclient);
 void JACKfinish ();
+int timebase(jack_transport_state_t state, jack_position_t *pos, void *arg);
+
 void jackshutdown (void *arg);
 
 #endif

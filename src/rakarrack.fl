@@ -843,7 +843,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1583 122 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1576 115 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1031,7 +1031,7 @@ ActMIDI();
 if(rkr->Tap_Bypass)
 {
    
-  if((rkr->Tap_Display==1) && (rkr->Tap_Selection == 1))
+  if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
    {
      char tt[8];
      bzero(tt,sizeof(tt));
@@ -1043,9 +1043,6 @@ if(rkr->Tap_Bypass)
 
   if(rkr->Tap_Display==2)
    {
-     char tt[8];
-     bzero(tt,sizeof(tt));
-     sprintf(tt,"---");
      rkr->Tap_Display=0;
      Tap_activar->value(0);
      Tap_activar->do_callback();
@@ -6014,8 +6011,8 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Choice T_SEL {
           label Input
-          callback {rkr->Tap_Selection=(int)o->value();}
-          xywh {715 145 72 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
+          callback {rkr->Tap_Selection=(int)o->value();} selected
+          xywh {700 145 87 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label GUI
@@ -6025,10 +6022,14 @@ TAP_LABEL->redraw_label();}
             label MIDI
             xywh {0 0 36 21} labelsize 10
           }
+          MenuItem {} {
+            label {Jack Transport}
+            xywh {0 0 36 21} labelsize 10
+          }
         }
         Fl_Button T_BUT {
           label {@circle}
-          callback {char tmp[8] ;
+          callback {char tmp[8];
 
 if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
@@ -6039,13 +6040,12 @@ UpdateTGUI();
 }}
           xywh {635 165 54 23} shortcut 0x67
         }
-        Fl_Box T_DIS {
-          label 120
-          xywh {715 165 70 22} box DOWN_BOX labelcolor 1 align 80
-        }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
           xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
+        }
+        Fl_Box T_DIS {
+          xywh {715 165 70 22} box DOWN_BOX labelcolor 1
         }
       }
     }
@@ -7842,6 +7842,16 @@ shelf_freq1->value(rkr->lv[35][2]);
 shelf_q1->value(rkr->lv[35][1]);
 shelf_mode->value(rkr->lv[35][3]);
 shelf_activar->value(rkr->ShelfBoost_Bypass);
+
+
+//Vocoder
+vo_WD->value(rkr->lv[36][0]-64);
+vo_pan->value(rkr->lv[36][1]-64);
+vo_input->value(rkr->lv[36][4]);
+vo_mu->value(rkr->lv[36][2]);
+vo_q->value(rkr->lv[36][3]);
+vo_ring->value(rkr->lv[36][6]);
+vo_level->value(rkr->lv[36][5]);
 
 
 
@@ -10047,8 +10057,7 @@ switch(miralo)
   
    
 
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;

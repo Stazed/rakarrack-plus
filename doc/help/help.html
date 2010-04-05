@@ -7,6 +7,8 @@
 
 
 
+
+
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   
@@ -146,8 +148,16 @@ Linux Audio, Part 3a</a></p>
 
 <p align="left"><a href="http://www.linuxjournal.com/node/1000295">Troubleshooting
 Linux Audio, Part 3b</a></p>
+<h3>INSTALL</h3>
+
+<p>Please read the INSTALL, README and PACKAGERS.README files provided
+with rakarrack. You will find there a&nbsp; list of required dependency
+packages and detailed configuration options.</p>
+
+
 
 <h3>Warning</h3>
+
 
 <p>From 0.5.0 version we have included resampling and convolotron
 effect, the quality and amount settings of resampling must be set with
@@ -2100,6 +2110,11 @@ the record
 button.</p>
 
 <p>MIDI signal is triggered each MIDI Note On message is incomming.</p>
+<p>Jack Transport read the beats per minute at the jack start
+transport. (Note for jack maniacs: we dont synchronize nothing, only we
+read this value).<br>
+</p>
+
 
 <p>Sucesive tempo signals are displayed each time a signal is received
 and
@@ -2107,8 +2122,10 @@ the Tempo parameter is updated on all the effects that has the "On"
 state.</p>
 
 <p>Tap Tempo has an automatic reset timeout, 8 seconds after the last
-signal. This need to be enabled in the window settings.<br>
+signal. This need to be enabled in the window settings.</p>
+<p>Tap Tempo set all the effect Tempo parameters that has the state in "On" to the value readed or generated.<br>
 </p>
+
 
 <p><a href="help.html#top">Contents</a></p>
 

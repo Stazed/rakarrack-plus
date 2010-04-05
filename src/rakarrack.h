@@ -2665,8 +2665,8 @@ private:
   void cb_T_BUT_i(Fl_Button*, void*);
   static void cb_T_BUT(Fl_Button*, void*);
 public:
-  Fl_Box *T_DIS;
   Fl_Box *TAP_LABEL;
+  Fl_Box *T_DIS;
   Fl_Double_Window *BankWindow;
 private:
   void cb_BankWindow_i(Fl_Double_Window*, void*);

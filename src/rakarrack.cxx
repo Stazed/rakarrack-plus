@@ -1025,7 +1025,7 @@ ActMIDI();
 if(rkr->Tap_Bypass)
 {
    
-  if((rkr->Tap_Display==1) && (rkr->Tap_Selection == 1))
+  if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
    {
      char tt[8];
      bzero(tt,sizeof(tt));
@@ -1037,9 +1037,6 @@ if(rkr->Tap_Bypass)
 
   if(rkr->Tap_Display==2)
    {
-     char tt[8];
-     bzero(tt,sizeof(tt));
-     sprintf(tt,"---");
      rkr->Tap_Display=0;
      Tap_activar->value(0);
      Tap_activar->do_callback();
@@ -5604,11 +5601,12 @@ void RKRGUI::cb_T_SEL(Fl_Choice* o, void* v) {
 Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
  {"GUI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"MIDI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Jack Transport", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
 void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
-  char tmp[8] ;
+  char tmp[8];
 
 if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
@@ -13593,7 +13591,7 @@ R average.");
         Tap_activar->callback((Fl_Callback*)cb_Tap_activar, (void*)(2));
         Tap_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Tap_activar
-      { T_SEL = new Fl_Choice(715, 145, 72, 15, "Input");
+      { T_SEL = new Fl_Choice(700, 145, 87, 15, "Input");
         T_SEL->down_box(FL_BORDER_BOX);
         T_SEL->labelsize(10);
         T_SEL->textsize(10);
@@ -13605,16 +13603,15 @@ R average.");
         T_BUT->shortcut(0x67);
         T_BUT->callback((Fl_Callback*)cb_T_BUT);
       } // Fl_Button* T_BUT
-      { T_DIS = new Fl_Box(715, 165, 70, 22, "120");
-        T_DIS->box(FL_DOWN_BOX);
-        T_DIS->labelcolor((Fl_Color)1);
-        T_DIS->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
-      } // Fl_Box* T_DIS
       { TAP_LABEL = new Fl_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->labelfont(1);
         TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         TAP_LABEL->when(FL_WHEN_NEVER);
       } // Fl_Box* TAP_LABEL
+      { T_DIS = new Fl_Box(715, 165, 70, 22);
+        T_DIS->box(FL_DOWN_BOX);
+        T_DIS->labelcolor((Fl_Color)1);
+      } // Fl_Box* T_DIS
       Tap->end();
     } // Fl_Group* Tap
     Principal->size_range(640, 480, 3200, 2400);
@@ -15137,6 +15134,16 @@ shelf_freq1->value(rkr->lv[35][2]);
 shelf_q1->value(rkr->lv[35][1]);
 shelf_mode->value(rkr->lv[35][3]);
 shelf_activar->value(rkr->ShelfBoost_Bypass);
+
+
+//Vocoder
+vo_WD->value(rkr->lv[36][0]-64);
+vo_pan->value(rkr->lv[36][1]-64);
+vo_input->value(rkr->lv[36][4]);
+vo_mu->value(rkr->lv[36][2]);
+vo_q->value(rkr->lv[36][3]);
+vo_ring->value(rkr->lv[36][6]);
+vo_level->value(rkr->lv[36][5]);
 
 
 
