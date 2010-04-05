@@ -38,9 +38,13 @@ public:
 		    int drive, int eff);
   
   float dthresh;  //dynamic threshold in compression waveshaper 
+  float dyno;
+  float dynodecay;  //dynamically control symmetry
+  
   float compg;  //used by compression distortion
   float cratio;  //used by compression for hardness
   float tmpgain;  // compression distortion temp variable
+  
 };
 
 

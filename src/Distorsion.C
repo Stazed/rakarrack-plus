@@ -28,16 +28,14 @@
 #include "Distorsion.h"
 
 
-/*
- * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
- */
-
 Waveshaper::Waveshaper()
 {
   compg = 0.0f;  //used by compression distortion
   cratio = 0.25f;  //used by compression for hardness
   tmpgain = 1.0f;  // compression distortion temp variable
   dthresh = 0.25;
+  dyno = 0.0f;
+  dynodecay = cSAMPLE_RATE * 0.0167f; //about 60Hz sub modulation from this
 
 };
 
@@ -307,7 +305,9 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	ws =  2.0f*ws*CRUNCH_GAIN + 1.0f;
 	   for (i = 0; i < n; i++)    //apply compression 
 	   {
-	   tmpv = fabs(ws * smps[i]);
+	   tmpv = fabs(dynodecay + ws * smps[i]);
+
+	   if(dyno > 0.5) dyno = 0.5 + dynodecay*(dyno - 0.5);
    
 	   if(tmpv > dthresh)                                //if envelope of signal exceeds thresh, then compress
 	   {
@@ -321,7 +321,10 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 		   else 
 		   {
 		   smps[i] = -1.0f * compg;
-		   }
+		   dyno += smps[i];
+		   dyno *= dynodecay;
+		   }  
+		   
 	   }
 	   else
 	   {
@@ -330,7 +333,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
    
 	   if(tmpv < dthresh) dthresh = tmpv;
 	   if(dthresh < 0.25f) dthresh = 0.25f;
-  
+   
 	   };	
 	break;
         
