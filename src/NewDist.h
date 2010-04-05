@@ -27,11 +27,11 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
-
+#include "Distorsion.h"
 
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
-void waveshapesmps (int n, float * smps, int type,
-		    int drive);
+// void waveshapesmps (int n, float * smps, int type,
+// 		    int drive);
 
 class NewDist
 {
@@ -81,11 +81,13 @@ private:
   //Parametrii reali
   float panning, lrcross, octave_memoryl, togglel, octave_memoryr, toggler, octmix;
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
+  class Distorsion *wshape;
 
   float *octoutl, *octoutr;
 
   class Filter *filterl, *filterr;
   class FilterParams *filterpars;  
+
 
 };
 

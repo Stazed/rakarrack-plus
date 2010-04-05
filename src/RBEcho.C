@@ -360,7 +360,7 @@ RBEcho::getpar (int npar)
       return (Preverse);
       break;
     case 8:
-      return (Psubdiv)
+      return (Psubdiv);
       break;
 
     };

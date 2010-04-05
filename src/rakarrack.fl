@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,15 +834,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1576 115 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1464,7 +1466,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
         }
       }
       Fl_Group DIST {
-        user_data 1
+        user_data 1 open
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button dist_activar {
@@ -1536,7 +1538,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
+          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -1614,6 +1616,10 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           MenuItem {} {
             label {M.Saw}
             xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Compress
+            xywh {10 10 36 21} labelsize 9
           }
         }
         Fl_Check_Button dist_neg {
@@ -1723,7 +1729,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
         Fl_Choice ovrd_tipo {
           label Type
-          callback {rkr->efx_Overdrive->changepar(5,(int)o->value());} open
+          callback {rkr->efx_Overdrive->changepar(5,(int)o->value());} open selected
           xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_dist_tipo);}
         } {}
@@ -6011,7 +6017,7 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Choice T_SEL {
           label Input
-          callback {rkr->Tap_Selection=(int)o->value();} selected
+          callback {rkr->Tap_Selection=(int)o->value();}
           xywh {700 145 87 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
         } {
           MenuItem {} {

@@ -28,10 +28,6 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
-//Waveshaping(called by Distorsion effect and waveshape from OscilGen)
-void waveshapesmps (int n, float * smps, int type,
-		    int drive, int eff);
-
 class Distorsion
 {
 public:
@@ -43,7 +39,10 @@ public:
   int getpar (int npar);
   void cleanup ();
   void applyfilters (float * efxoutl, float * efxoutr);
-
+//Waveshaping
+  void waveshapesmps (int n, float * smps, int type,
+		    int drive, int eff);
+		    
   int Ppreset;
   float *efxoutl;
   float *efxoutr;
@@ -52,8 +51,6 @@ public:
   float outvolume;
   float volume;
   
-  float cpthresh;   //used by waveshapesmps for dynamically changing threshold
-
 private:
 
 
@@ -78,6 +75,7 @@ private:
   void setlpf (int Plpf);
   void sethpf (int Phpf);
 
+   float dthresh;  //dynamic threshold in compression waveshaper 
   //Parametrii reali
   float panning, lrcross, octave_memoryl, togglel, octave_memoryr,toggler,octmix;
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;

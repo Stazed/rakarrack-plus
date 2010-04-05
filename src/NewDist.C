@@ -48,6 +48,7 @@ NewDist::NewDist (float * efxoutl_, float * efxoutr_)
   hpfr = new AnalogFilter (3, 20, 1, 0);
   blockDCl = new AnalogFilter (2, 75.0f, 1, 0);
   blockDCr = new AnalogFilter (2, 75.0f, 1, 0);
+  wshape = new Distorsion(NULL, NULL);
   blockDCl->setfreq (75.0f);
   blockDCr->setfreq (75.0f);
 
@@ -114,7 +115,7 @@ NewDist::~NewDist ()
   delete (filterr);
   delete (DCl);
   delete (DCr);
-
+  delete (wshape);
 };
 
 /*
@@ -172,8 +173,8 @@ NewDist::out (float * smpsl, float * smpsr)
   //no optimised, yet (no look table)
 
 
-  waveshapesmps (PERIOD, smpsl, Ptype, Pdrive, 2);
-  waveshapesmps (PERIOD, smpsr, Ptype, Pdrive, 2);
+  wshape->waveshapesmps (PERIOD, smpsl, Ptype, Pdrive, 2);
+  wshape->waveshapesmps (PERIOD, smpsr, Ptype, Pdrive, 2);
 
 
 

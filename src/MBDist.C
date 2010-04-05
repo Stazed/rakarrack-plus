@@ -55,7 +55,10 @@ MBDist::MBDist (float * efxoutl_, float * efxoutr_)
   hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0);
   hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0);
 
-
+  mbwshape1 = new Distorsion(NULL, NULL);
+  mbwshape2 = new Distorsion(NULL, NULL);  
+  mbwshape3 = new Distorsion(NULL, NULL);  
+  
   //default values
   Ppreset = 0;
   Pvolume = 50;
@@ -131,9 +134,9 @@ MBDist::out (float * smpsl, float * smpsr)
   lpf2l->filterout(midl);
   hpf2l->filterout(highl);
 
-  waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
-  waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
-  waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
+  mbwshape1->waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
+  mbwshape2->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
+  mbwshape3->waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
 
 
 if (Pstereo)
@@ -146,10 +149,11 @@ if (Pstereo)
   hpf1r->filterout(midr);
   lpf2r->filterout(midr);
   hpf2r->filterout(highr);
+  
+  mbwshape1->waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
+  mbwshape2->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
+  mbwshape3->waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
 
-  waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
-  waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
-  waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
 
 }
 

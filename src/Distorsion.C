@@ -32,8 +32,9 @@
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
  */
 
+
 void
-waveshapesmps (int n, float * smps, int type,
+Distorsion::waveshapesmps (int n, float * smps, int type,
 	       int drive, int eff)
 {
   int i;
@@ -293,31 +294,35 @@ waveshapesmps (int n, float * smps, int type,
       break;                                                               
         
 	case 20:  //Compression
-	cratio = 1.0f - ws;   //harder clipping as you increase the drive.
-	ws =  ws*ws*CRUNCH_GAIN + 1.0f;
+        cratio = 1.25f - ws;
+	ws =  2.0f*ws*CRUNCH_GAIN + 1.0f;
 	   for (i = 0; i < n; i++)    //apply compression 
 	   {
-	   tmpv = ws * smps[i];
+	   tmpv = fabs(ws * smps[i]);
    
-	   if(tmpv > cpthresh)                                //if envelope of signal exceeds thresh, then compress
+	   if(tmpv > dthresh)                                //if envelope of signal exceeds thresh, then compress
 	   {
-	   compg = Distorsion->cpthresh + Distorsion->cpthresh*(tmpv - Distorsion->cpthresh)/tmpv; 
-	   Distorsion->cpthresh = 0.5f + cratio*(compg - Distorsion->cpthresh);   //cpthresh changes dynamically
-	   tmpgain = compg/tmpv;
+	   compg = dthresh + dthresh*(tmpv - dthresh)/tmpv; 
+	   dthresh = 0.25f + cratio*(compg - dthresh);   //dthresh changes dynamically
+	   
+		   if (smps[i] > 0.0)
+		   {
+		    smps[i] = compg;
+		    }
+		   else 
+		   {
+		   smps[i] = -1.0f * compg;
+		   }
 	   }
 	   else
 	   {
-	   tmpgain = 1.0f;
+	   smps[i] *= ws;
 	   }
    
-	   if(tmpv < Distorsion->cpthresh) Distorsion->cpthresh = tmpv;
-	   if(Distorsion->cpthresh < 0.5f) Distorsion->cpthresh = 0.5f;
-   
-	   smps[i] = tmpv * tmpgain;   
-	   };		
-	
-	
-	
+	   if(tmpv < dthresh) dthresh = tmpv;
+	   if(dthresh < 0.25f) dthresh = 0.25f;
+  
+	   };	
 	break;
         
 
@@ -369,6 +374,8 @@ Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
   octave_memoryr = -1.0;
   octmix = 0.0;
 
+  dthresh = 0.25f;
+  
   setpreset (Ppreset);
   cleanup ();
 };
@@ -711,3 +718,6 @@ Distorsion::getpar (int npar)
   return (0);			//in case of bogus parameter number
 };
 
+
+  
+  
