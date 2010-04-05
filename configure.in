@@ -4,6 +4,37 @@ AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/main.C])
 AC_CONFIG_HEADER([src/config.h])
 
+AC_ARG_ENABLE(sse,
+AC_HELP_STRING([--enable-see],[enable sse (default=automatic check)]),
+[ac_sse="$enableval"])
+
+if test "x$ac_sse" = "xyes"; then
+SSE="-msse -mfpmath=sse"
+else
+ac_sse="no"
+fi
+
+AC_ARG_ENABLE(sse2,
+AC_HELP_STRING([--enable-see2],[enable sse2 (default=automatic check)]),
+[ac_sse2="$enableval"])
+
+if test "x$ac_sse2" = "xyes"; then
+SSE="-msse2 -mfpmath=sse"
+else 
+ac_sse2="no"
+fi
+
+AC_ARG_ENABLE(altivec,
+AC_HELP_STRING([--enable-altivec],[enable altivec (default=automatic check)]),
+[ac_altivec="$enableval"])
+
+if test "x$ac_altivec" = "xyes"; then
+ALTIVEC="-maltivec"
+else
+ac_altivec="no"
+fi
+
+
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
@@ -171,29 +202,39 @@ AC_DEFINE_UNQUOTED(DATADIR,"$DATADIR",[DATADIR])
 AC_DEFINE_UNQUOTED(HELPDIR,"$HELPDIR",[HELPDIR])
 AC_DEFINE([WEBSITE],["rakarrack.sf.net"],[WEBSITE])
 
+if test -z "$ALTIVEC";then
+if test -z "$SSE"; then
 SSE=$(cat /proc/cpuinfo | grep sse2)
 if test -z "$SSE"; then
 SSE=""
+ac_sse2="no"
 else
 SSE="-msse2 -mfpmath=sse"
+ac_sse2="yes"
 fi
 if test -z "$SSE"; then
 SSE=$(cat /proc/cpuinfo | grep sse)
 if test -z "$SSE"; then
 SSE=""
+ac_sse="no"
 else
 SSE="-msse -mfpmath=sse"
+ac_sse="yes"
+fi
+fi
 fi
 fi
 
-
+if test -z "$ALTIVEC"; then
 ALTIVEC=$(cat /proc/cpuinfo | grep altivec)
 if test -z "$ALTIVEC"; then
 ALTIVEC=""
+ac_altivec="no"
 else
 ALTIVEC="-maltivec"
+ac_altivec="yes"
 fi
-
+fi
 
 
 LIBS="`$FLTKCONFIG --use-images --ldflags` $LIBS"
@@ -205,6 +246,9 @@ echo
 echo  " $PACKAGE_NAME $PACKAGE_VERSION"
 echo
 echo
+echo  " Use altivec. . . . . . . . . . . . . . . . . . . . . . .: $ac_altivec"
+echo  " Use sse  . . . . . . . . . . . . . . . . . . . . . . . .: $ac_sse"
+echo  " Use sse2 . . . . . . . . . . . . . . . . . . . . . . . .: $ac_sse2"
 echo  " Xpm support (libxpm) . . . . . . . . . . . . . . . . . .: $ac_Xpm"
 echo  " FLTK toolkit . . . . . . . . . . . . . . . . . . . . . .: $ac_fltk"
 echo  " pthread support (libpthread) . . . . . . . . . . . . . .: $ac_pthread"
