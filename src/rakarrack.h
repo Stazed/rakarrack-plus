@@ -2665,6 +2665,11 @@ private:
   static void cb_T_SEL(Fl_Choice*, void*);
   static Fl_Menu_Item menu_T_SEL[];
 public:
+  Fl_Button *T_DIV;
+private:
+  void cb_T_DIV_i(Fl_Button*, void*);
+  static void cb_T_DIV(Fl_Button*, void*);
+public:
   Fl_Button *T_BUT;
 private:
   void cb_T_BUT_i(Fl_Button*, void*);

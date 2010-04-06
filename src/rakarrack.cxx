@@ -5615,6 +5615,24 @@ Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_T_DIV_i(Fl_Button*, void*) {
+  char tmp[8];
+
+if(rkr->Tap_Bypass)
+{
+bzero(tmp,sizeof(tmp));
+rkr->Tap_TempoSet /=4;
+if(rkr->Tap_TempoSet<1) rkr->Tap_TempoSet=1;
+sprintf(tmp,"%d",rkr->Tap_TempoSet);
+T_DIS->copy_label(tmp);
+rkr->Update_tempo();
+UpdateTGUI();
+};
+}
+void RKRGUI::cb_T_DIV(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_DIV_i(o,v);
+}
+
 void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
   char tmp[8];
 
@@ -13612,7 +13630,7 @@ R average.");
         Tap_activar->callback((Fl_Callback*)cb_Tap_activar, (void*)(2));
         Tap_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Tap_activar
-      { T_SEL = new Fl_Choice(700, 145, 87, 15, "Input");
+      { T_SEL = new Fl_Choice(620, 145, 87, 15, "Input");
         T_SEL->down_box(FL_BORDER_BOX);
         T_SEL->labelsize(10);
         T_SEL->textsize(10);
@@ -13620,8 +13638,14 @@ R average.");
         T_SEL->callback((Fl_Callback*)cb_T_SEL);
         T_SEL->menu(menu_T_SEL);
       } // Fl_Choice* T_SEL
-      { T_BUT = new Fl_Button(635, 165, 54, 23, "@circle");
+      { T_DIV = new Fl_Button(738, 146, 28, 16, "/4");
+        T_DIV->shortcut(0x67);
+        T_DIV->labelsize(10);
+        T_DIV->callback((Fl_Callback*)cb_T_DIV);
+      } // Fl_Button* T_DIV
+      { T_BUT = new Fl_Button(635, 165, 54, 23, "Tap");
         T_BUT->shortcut(0x67);
+        T_BUT->labelsize(12);
         T_BUT->callback((Fl_Callback*)cb_T_BUT);
       } // Fl_Button* T_BUT
       { TAP_LABEL = new Fl_Box(524, 170, 93, 14, "Tap Tempo");
@@ -17379,7 +17403,9 @@ switch(miralo)
   ActivarGeneral->value(rkr->Bypass);
   ActivarGeneral->do_callback();
   break;
-  
+  case 125:
+  T_DIV->do_callback();
+  break;
    
 
 }

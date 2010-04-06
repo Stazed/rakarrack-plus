@@ -842,8 +842,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1569 108 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} open
+      xywh {1562 101 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5416,7 +5416,7 @@ if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;}
         }
         Fl_Choice rbecho_subdiv {
           label SubDivision
-          callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open selected
+          callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open
           xywh {397 357 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
           code0 {o->menu(menu_arpie_subdiv);}
         } {}
@@ -6024,7 +6024,7 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SEL {
           label Input
           callback {rkr->Tap_Selection=(int)o->value();}
-          xywh {700 145 87 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
+          xywh {620 145 87 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label GUI
@@ -6039,8 +6039,24 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 10
           }
         }
+        Fl_Button T_DIV {
+          label {/4}
+          callback {char tmp[8];
+
+if(rkr->Tap_Bypass)
+{
+bzero(tmp,sizeof(tmp));
+rkr->Tap_TempoSet /=4;
+if(rkr->Tap_TempoSet<1) rkr->Tap_TempoSet=1;
+sprintf(tmp,"%d",rkr->Tap_TempoSet);
+T_DIS->copy_label(tmp);
+rkr->Update_tempo();
+UpdateTGUI();
+}}
+          xywh {738 146 28 16} shortcut 0x67 labelsize 10
+        }
         Fl_Button T_BUT {
-          label {@circle}
+          label Tap
           callback {char tmp[8];
 
 if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
@@ -6050,7 +6066,7 @@ sprintf(tmp,"%d",rkr->TapTempo());
 T_DIS->copy_label(tmp);
 UpdateTGUI();
 }}
-          xywh {635 165 54 23} shortcut 0x67
+          xywh {635 165 54 23} shortcut 0x67 labelsize 12
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
@@ -10066,10 +10082,13 @@ switch(miralo)
   ActivarGeneral->value(rkr->Bypass);
   ActivarGeneral->do_callback();
   break;
-  
+  case 125:
+  T_DIV->do_callback();
+  break;
    
 
-}} {}
+}} {selected
+    }
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;
