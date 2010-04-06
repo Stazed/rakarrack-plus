@@ -239,8 +239,8 @@ Arpie::setdelay (int Pdelay)
   if (Pdelay < 2) Pdelay = 2;
   if (Pdelay > 600) Pdelay = 600;	//100ms .. 2 sec constraint
   delay = 1 + lrintf ( (60.0f/((float)(Psubdiv *Pdelay))) * fSAMPLE_RATE );	//quarter notes
-
   initdelays ();
+
 };
 
 void

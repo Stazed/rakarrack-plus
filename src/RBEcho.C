@@ -213,7 +213,6 @@ RBEcho::setdelay (int Pdelay)
   if (fdelay < 0.01f) fdelay = 0.01f;
   if (fdelay > (float) MAX_DELAY) fdelay = (float) MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
   delay = 1 + lrintf ( subdiv * fdelay * fSAMPLE_RATE );	
-
   initdelays ();
 };
 
