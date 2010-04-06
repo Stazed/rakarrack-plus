@@ -74,11 +74,16 @@ void
 Sustainer::out (float * smpsl, float * smpsr)
 {
   int i;
+  float auxtempl = 0.0f;
+  float auxtempr = 0.0f;
+  float auxcombi = 0.0f;
   
    for (i = 0; i<PERIOD; i++)    //apply compression to auxresampled
    {
-   auxtemp = input * smpsl[i];
-   if(fabs(auxtemp > compeak)) compeak = fabs(auxtemp);   //First do peak detection on the signal
+   auxtempl = input * smpsl[i];
+   auxtempr = input * smpsr[i];
+   auxcombi = 0.5f * (auxtempl + auxtempr);
+   if(fabs(auxcombi > compeak)) compeak = fabs(auxcombi);   //First do peak detection on the signal
    compeak *= prls;
    compenv = cbeta * oldcompenv + calpha * compeak;       //Next average into envelope follower
    oldcompenv = compenv;
@@ -97,8 +102,8 @@ Sustainer::out (float * smpsl, float * smpsr)
    if(compenv < cpthresh) cpthresh = compenv;
    if(cpthresh < cthresh) cpthresh = cthresh;
    
-   smpsl[i] = auxtemp * tmpgain * level;   
-   smpsr[i] = smpsl[i];
+   smpsl[i] = auxtempl * tmpgain * level;   
+   smpsr[i] = auxtempr * tmpgain * level;
    };
       //End compression
 };
