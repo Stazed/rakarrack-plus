@@ -167,21 +167,41 @@ if( timediff > 8.0f)   Tap_Display = 2;
 void
 RKR::Update_tempo()
 {
-  if(Chorus_Bypass) efx_Chorus->changepar(2,Tap_TempoSet);
-  if(Flanger_Bypass) efx_Flanger->changepar(2,Tap_TempoSet);
-  if(Phaser_Bypass) efx_Phaser->changepar(2,Tap_TempoSet);
-  if(Pan_Bypass) efx_Pan->changepar(2,Tap_TempoSet);
-  if(WhaWha_Bypass) efx_WhaWha->changepar(2,Tap_TempoSet);
-  if(Alienwah_Bypass) efx_Alienwah->changepar(2,Tap_TempoSet);
-  if(MusDelay_Bypass) efx_MusDelay->changepar(10,Tap_TempoSet);
-  if(APhaser_Bypass) efx_APhaser->changepar(2,Tap_TempoSet);
-  if(DFlange_Bypass) efx_DFlange->changepar(10,Tap_TempoSet);
-  if(Synthfilter_Bypass) efx_Synthfilter->changepar(2,Tap_TempoSet);
-  if(RyanWah_Bypass) efx_RyanWah->changepar(2,Tap_TempoSet);
-  if(MBVvol_Bypass) efx_MBVvol->changepar(1,Tap_TempoSet);
-  if(MBVvol_Bypass) efx_MBVvol->changepar(4,Tap_TempoSet);
-  if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSet);
-  if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSet);
+
+int Tap_TempoSetD=Tap_TempoSet;
+int Tap_TempoSetL=Tap_TempoSet;
+
+
+switch(Tap_SetValue)
+  {
+      case 0:
+         Tap_TempoSetD=Tap_TempoSetL=Tap_TempoSet;
+          break;
+      case 1:
+         Tap_TempoSetD=Tap_TempoSet;
+         Tap_TempoSetL=Tap_TempoSet/4;
+          break;
+      case 2:
+         Tap_TempoSetD=Tap_TempoSet;
+         Tap_TempoSetL=Tap_TempoSet/2;
+          break;   
+   }
+
+  if(Chorus_Bypass) efx_Chorus->changepar(2,Tap_TempoSetL);
+  if(Flanger_Bypass) efx_Flanger->changepar(2,Tap_TempoSetL);
+  if(Phaser_Bypass) efx_Phaser->changepar(2,Tap_TempoSetL);
+  if(Pan_Bypass) efx_Pan->changepar(2,Tap_TempoSetL);
+  if(WhaWha_Bypass) efx_WhaWha->changepar(2,Tap_TempoSetL);
+  if(Alienwah_Bypass) efx_Alienwah->changepar(2,Tap_TempoSetL);
+  if(MusDelay_Bypass) efx_MusDelay->changepar(10,Tap_TempoSetD);
+  if(APhaser_Bypass) efx_APhaser->changepar(2,Tap_TempoSetL);
+  if(DFlange_Bypass) efx_DFlange->changepar(10,Tap_TempoSetL);
+  if(Synthfilter_Bypass) efx_Synthfilter->changepar(2,Tap_TempoSetL);
+  if(RyanWah_Bypass) efx_RyanWah->changepar(2,Tap_TempoSetL);
+  if(MBVvol_Bypass) efx_MBVvol->changepar(1,Tap_TempoSetL);
+  if(MBVvol_Bypass) efx_MBVvol->changepar(4,Tap_TempoSetL);
+  if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSetD);
+  if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSetD);
 
 }
 

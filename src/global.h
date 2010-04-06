@@ -514,6 +514,7 @@ public:
   int Tap_Display;
   int Tap_Selection;
   int Tap_TempoSet;
+  int Tap_SetValue;
   int t_timeout;
 
   int jt_state;

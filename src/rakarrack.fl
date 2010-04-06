@@ -834,7 +834,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -842,8 +843,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {1562 101 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {1555 94 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6024,7 +6025,7 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SEL {
           label Input
           callback {rkr->Tap_Selection=(int)o->value();}
-          xywh {620 145 87 15} down_box BORDER_BOX labelsize 10 textsize 10 textcolor 7
+          xywh {600 145 87 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label GUI
@@ -6039,21 +6040,23 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 10
           }
         }
-        Fl_Button T_DIV {
-          label {/4}
-          callback {char tmp[8];
-
-if(rkr->Tap_Bypass)
-{
-bzero(tmp,sizeof(tmp));
-rkr->Tap_TempoSet /=4;
-if(rkr->Tap_TempoSet<1) rkr->Tap_TempoSet=1;
-sprintf(tmp,"%d",rkr->Tap_TempoSet);
-T_DIS->copy_label(tmp);
-rkr->Update_tempo();
-UpdateTGUI();
-}}
-          xywh {738 146 28 16} shortcut 0x67 labelsize 10
+        Fl_Choice T_SET {
+          label Set
+          callback {rkr->Tap_SetValue=(int)o->value();} open
+          xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Dl. 1 LFO 1}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Dl. 1 LFO 1/4}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Dl.1 LFO 1/2}
+            xywh {10 10 36 21} labelsize 10
+          }
         }
         Fl_Button T_BUT {
           label Tap
@@ -7171,7 +7174,9 @@ rkr->efx_MIDIConverter->setVelAdjust(k);
 rakarrack.get(rkr->PrefNom("TapTempo Input"),rkr->Tap_Selection,0);
 T_SEL->value(rkr->Tap_Selection);
 rakarrack.get(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout,0);
-T_TIMEOUT->value(rkr->t_timeout);} {}
+T_TIMEOUT->value(rkr->t_timeout);
+rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
+T_SET->value(rkr->Tap_SetValue);} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -7211,6 +7216,7 @@ rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
 
 //Tap Tempo
 rakarrack.set(rkr->PrefNom("TapTempo Input"),(int)rkr->Tap_Selection); 
+rakarrack.set(rkr->PrefNom("TapTempo Set"),(int)rkr->Tap_SetValue); 
 
 
 }
@@ -10082,13 +10088,9 @@ switch(miralo)
   ActivarGeneral->value(rkr->Bypass);
   ActivarGeneral->do_callback();
   break;
-  case 125:
-  T_DIV->do_callback();
-  break;
-   
+     
 
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;
@@ -10689,95 +10691,97 @@ looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
 looper_t2->redraw();} {}
   }
-  Function {UpdateTGUI()} {} {
+  Function {UpdateTGUI()} {open
+  } {
     code {if(rkr->Chorus_Bypass)
   {
-  chorus_freq->value(rkr->Tap_TempoSet);
+  chorus_freq->value(rkr->efx_Chorus->getpar(2));
   chorus_freq->redraw();
   }
   
   if(rkr->Flanger_Bypass)
   {
-  flanger_freq->value(rkr->Tap_TempoSet);
+  flanger_freq->value(rkr->efx_Flanger->getpar(2));
   flanger_freq->redraw();
   }
   
   if(rkr->Phaser_Bypass)
   {
-  phaser_freq->value(rkr->Tap_TempoSet);
+  phaser_freq->value(rkr->efx_Phaser->getpar(2));
   phaser_freq->redraw();
   }
   
   if(rkr->Pan_Bypass)
   {
-  pan_freq->value(rkr->Tap_TempoSet);
+  pan_freq->value(rkr->efx_Pan->getpar(2));
   pan_freq->redraw();
   }
   
   if(rkr->WhaWha_Bypass)
   {
-  WhaWha_freq->value(rkr->Tap_TempoSet);
+  WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
   WhaWha_freq->redraw();
   }
   
   if(rkr->Alienwah_Bypass)
   {
-  Alienwah_freq->value(rkr->Tap_TempoSet);
+  Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
   Alienwah_freq->redraw();
   }
   
   if(rkr->MusDelay_Bypass)
   {
-  musdelay_tempo->value(rkr->Tap_TempoSet);
+  musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
   musdelay_tempo->redraw();
   }
   
   if(rkr->APhaser_Bypass)
   {
-  aphaser_freq->value(rkr->Tap_TempoSet);
+  aphaser_freq->value(rkr->efx_APhaser->getpar(2));
   aphaser_freq->redraw();
   }
   
   if(rkr->DFlange_Bypass)
   {
-  dflange_freq->value(rkr->Tap_TempoSet);
+  dflange_freq->value(rkr->efx_DFlange->getpar(10));
   dflange_freq->redraw();
   }
   
   if(rkr->Synthfilter_Bypass)
   {
-  synthfilter_freq->value(rkr->Tap_TempoSet);
+  synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
   synthfilter_freq->redraw();
   }
   
   if(rkr->RyanWah_Bypass)
   {
-  ryanwah_freq->value(rkr->Tap_TempoSet);
+  ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
   ryanwah_freq->redraw();
   }
     
   if(rkr->MBVvol_Bypass)
   {
-  mbvvol_freq1->value(rkr->Tap_TempoSet);
+  mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
   mbvvol_freq1->redraw();
   }
   
   if(rkr->MBVvol_Bypass)
   {
-  mbvvol_freq2->value(rkr->Tap_TempoSet);
+  mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
   mbvvol_freq2->redraw();
   }
   
   if(rkr->Arpie_Bypass)
   {
-  arpie_delay->value(rkr->Tap_TempoSet);
+  arpie_delay->value(rkr->efx_Arpie->getpar(2));
   arpie_delay->redraw();
   }
  
   if(rkr->RBEcho_Bypass)
   {
-   rbecho_delay->value(rkr->Tap_TempoSet);
+   rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
    rbecho_delay->redraw();
-  }} {}
+  }} {selected
+    }
   }
 } 

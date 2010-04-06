@@ -372,8 +372,6 @@ else
    case 124:
     if(inoff) Bypass = 1; else Bypass = 0;
      break; 
-   case 125:
-     break;   
 
    }   
 
@@ -517,8 +515,6 @@ RKR::checkonoff(int miraque)
    case 124:
      if (Bypass) return 0;
      break; 
-   case 125:
-     break;
 
 }   
 return(1);
