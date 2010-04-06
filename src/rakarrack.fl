@@ -842,8 +842,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1548 87 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1541 80 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5307,7 +5307,7 @@ if((int)ryanwah_activar->value()) rkr->RyanWah_Bypass=1;}
       }
       Fl_Group RBECHO {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 211 161 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button rbecho_activar {
           label On
@@ -5421,17 +5421,17 @@ if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;}
           xywh {371 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
+        Fl_Value_Slider rbecho_es {
+          label {E.S.}
+          callback {rkr->efx_RBEcho->changepar(9,(int)o->value());}
+          xywh {371 359 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
         Fl_Value_Slider rbecho_angle {
           label Angle
           callback {rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
-          xywh {371 379 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {371 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
-        }
-        Fl_Check_Button rbecho_es {
-          label {Extra Stereo}
-          user_data 2
-          callback {rkr->efx_RBEcho->changepar(9,(int)o->value())}
-          xywh {369 359 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group COILCRAFTER {
@@ -5766,7 +5766,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
         }
         Fl_Value_Slider sus_sus {
           label Sustain
-          callback {rkr->efx_Sustainer->changepar(1,(int)o->value());} selected
+          callback {rkr->efx_Sustainer->changepar(1,(int)o->value());}
           xywh {369 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
           class SliderW
         }

@@ -2392,15 +2392,15 @@ private:
   void cb_rbecho_damp_i(SliderW*, void*);
   static void cb_rbecho_damp(SliderW*, void*);
 public:
+  SliderW *rbecho_es;
+private:
+  void cb_rbecho_es_i(SliderW*, void*);
+  static void cb_rbecho_es(SliderW*, void*);
+public:
   SliderW *rbecho_angle;
 private:
   void cb_rbecho_angle_i(SliderW*, void*);
   static void cb_rbecho_angle(SliderW*, void*);
-public:
-  Fl_Check_Button *rbecho_es;
-private:
-  void cb_rbecho_es_i(Fl_Check_Button*, void*);
-  static void cb_rbecho_es(Fl_Check_Button*, void*);
 public:
   Fl_Group *COILCRAFTER;
   Fl_Light_Button *coil_activar;

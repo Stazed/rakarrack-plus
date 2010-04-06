@@ -5079,18 +5079,18 @@ void RKRGUI::cb_rbecho_damp(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_damp_i(o,v);
 }
 
+void RKRGUI::cb_rbecho_es_i(SliderW* o, void*) {
+  rkr->efx_RBEcho->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_rbecho_es(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_es_i(o,v);
+}
+
 void RKRGUI::cb_rbecho_angle_i(SliderW* o, void*) {
   rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));
 }
 void RKRGUI::cb_rbecho_angle(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_angle_i(o,v);
-}
-
-void RKRGUI::cb_rbecho_es_i(Fl_Check_Button* o, void*) {
-  rkr->efx_RBEcho->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_rbecho_es(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_es_i(o,v);
 }
 
 void RKRGUI::cb_coil_activar_i(Fl_Light_Button* o, void*) {
@@ -12715,7 +12715,7 @@ R average.");
       } // SliderW* ryanwah_smooth
       RYANWAH->end();
     } // Fl_Group* RYANWAH
-    { RBECHO = new Fl_Group(320, 211, 158, 184);
+    { RBECHO = new Fl_Group(320, 211, 161, 184);
       RBECHO->box(FL_UP_BOX);
       RBECHO->color((Fl_Color)FL_FOREGROUND_COLOR);
       RBECHO->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -12870,7 +12870,23 @@ R average.");
         rbecho_damp->align(FL_ALIGN_LEFT);
         rbecho_damp->when(FL_WHEN_CHANGED);
       } // SliderW* rbecho_damp
-      { rbecho_angle = new SliderW(371, 379, 100, 10, "Angle");
+      { rbecho_es = new SliderW(371, 359, 100, 10, "E.S.");
+        rbecho_es->type(5);
+        rbecho_es->box(FL_FLAT_BOX);
+        rbecho_es->color((Fl_Color)178);
+        rbecho_es->selection_color((Fl_Color)62);
+        rbecho_es->labeltype(FL_NORMAL_LABEL);
+        rbecho_es->labelfont(0);
+        rbecho_es->labelsize(10);
+        rbecho_es->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_es->maximum(127);
+        rbecho_es->step(1);
+        rbecho_es->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_es->callback((Fl_Callback*)cb_rbecho_es);
+        rbecho_es->align(FL_ALIGN_LEFT);
+        rbecho_es->when(FL_WHEN_CHANGED);
+      } // SliderW* rbecho_es
+      { rbecho_angle = new SliderW(371, 373, 100, 10, "Angle");
         rbecho_angle->type(5);
         rbecho_angle->box(FL_FLAT_BOX);
         rbecho_angle->color((Fl_Color)178);
@@ -12887,12 +12903,6 @@ R average.");
         rbecho_angle->align(FL_ALIGN_LEFT);
         rbecho_angle->when(FL_WHEN_CHANGED);
       } // SliderW* rbecho_angle
-      { rbecho_es = new Fl_Check_Button(369, 359, 15, 15, "Extra Stereo");
-        rbecho_es->down_box(FL_BORDER_BOX);
-        rbecho_es->labelsize(10);
-        rbecho_es->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        rbecho_es->callback((Fl_Callback*)cb_rbecho_es, (void*)(2));
-      } // Fl_Check_Button* rbecho_es
       RBECHO->end();
     } // Fl_Group* RBECHO
     { COILCRAFTER = new Fl_Group(320, 211, 158, 184);
