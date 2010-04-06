@@ -181,8 +181,8 @@ RBEcho::out (float * smpsl, float * smpsr)
       }
       else
       {
-      efxoutl[i]= 2.0f * ldelay[kl];
-      efxoutr[i]= 2.0f * rdelay[kr];
+      efxoutl[i]= ldelay[kl];
+      efxoutr[i]= rdelay[kr];
       }      
 /*      
       ldl = efxoutl[i];
