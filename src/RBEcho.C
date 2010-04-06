@@ -100,8 +100,6 @@ RBEcho::initdelays ()
   rvkr = dr - 1;
   Srate_Attack_Coeff = 15.0f * cSAMPLE_RATE;   // Set swell time to 66ms of average delay time 
 
-
-  cleanup ();
 };
 
 /*
@@ -324,7 +322,7 @@ RBEcho::changepar (int npar, int value)
       Psubdiv = value + 1;
       subdiv = 1.0f/((float)Psubdiv);
       delay = 1 + lrintf ( subdiv * fdelay * fSAMPLE_RATE );
-
+      initdelays ();
 
     };
 };
