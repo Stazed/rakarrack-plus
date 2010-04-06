@@ -839,11 +839,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1555 94 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6042,7 +6043,7 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Choice T_SET {
           label Set
-          callback {rkr->Tap_SetValue=(int)o->value();} open
+          callback {rkr->Tap_SetValue=(int)o->value();}
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6054,8 +6055,16 @@ TAP_LABEL->redraw_label();}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Dl.1 LFO 1/2}
+            label {Dl. 1 LFO 1/2}
             xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Dl. 1/2 LFO 1/4}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Dl. 1/2 LFO 1/8} selected
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Button T_BUT {
@@ -10781,7 +10790,6 @@ looper_t2->redraw();} {}
   {
    rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
    rbecho_delay->redraw();
-  }} {selected
-    }
+  }} {}
   }
 } 

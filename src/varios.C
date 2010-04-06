@@ -185,6 +185,17 @@ switch(Tap_SetValue)
          Tap_TempoSetD=Tap_TempoSet;
          Tap_TempoSetL=Tap_TempoSet/2;
           break;   
+      case 3:
+         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet/4;
+          break;   
+      case 4:
+         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet/8;
+          break;   
+
+
+
    }
 
   if(Chorus_Bypass) efx_Chorus->changepar(2,Tap_TempoSetL);
