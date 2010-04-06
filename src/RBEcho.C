@@ -321,7 +321,7 @@ RBEcho::changepar (int npar, int value)
       setreverse (value);
       break;
     case 8:
-      Psubdiv = value;
+      Psubdiv = value + 1;
       subdiv = 1.0f/((float)Psubdiv);
       delay = 1 + lrintf ( subdiv * fdelay * fSAMPLE_RATE );
 
