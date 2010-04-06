@@ -2387,6 +2387,11 @@ private:
   void cb_rbecho_fb_i(SliderW*, void*);
   static void cb_rbecho_fb(SliderW*, void*);
 public:
+  Fl_Choice *rbecho_subdiv;
+private:
+  void cb_rbecho_subdiv_i(Fl_Choice*, void*);
+  static void cb_rbecho_subdiv(Fl_Choice*, void*);
+public:
   SliderW *rbecho_damp;
 private:
   void cb_rbecho_damp_i(SliderW*, void*);

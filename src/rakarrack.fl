@@ -834,8 +834,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {selected
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -844,7 +843,7 @@ class RKRGUI {selected
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1576 115 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1569 108 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5331,6 +5330,8 @@ rbecho_LRc->value(rkr->efx_RBEcho->getpar(4)-64);
 rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
 rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
 rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
+rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
+
 if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -5413,6 +5414,12 @@ if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;}
           xywh {371 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
+        Fl_Choice rbecho_subdiv {
+          label SubDivision
+          callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open selected
+          xywh {397 357 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+          code0 {o->menu(menu_arpie_subdiv);}
+        } {}
         Fl_Value_Slider rbecho_damp {
           label Damp
           callback {rkr->efx_RBEcho->changepar(6,(int)o->value());}

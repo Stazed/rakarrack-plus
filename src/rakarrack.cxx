@@ -5001,6 +5001,8 @@ rbecho_LRc->value(rkr->efx_RBEcho->getpar(4)-64);
 rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
 rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
 rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
+rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
+
 if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;
 }
 void RKRGUI::cb_rbecho_preset(Fl_Choice* o, void* v) {
@@ -5067,6 +5069,13 @@ void RKRGUI::cb_rbecho_fb_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_rbecho_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_fb_i(o,v);
+}
+
+void RKRGUI::cb_rbecho_subdiv_i(Fl_Choice* o, void*) {
+  rkr->efx_RBEcho->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_rbecho_subdiv(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_subdiv_i(o,v);
 }
 
 void RKRGUI::cb_rbecho_damp_i(SliderW* o, void*) {
@@ -12786,6 +12795,17 @@ R average.");
         rbecho_fb->align(FL_ALIGN_LEFT);
         rbecho_fb->when(FL_WHEN_CHANGED);
       } // SliderW* rbecho_fb
+      { Fl_Choice* o = rbecho_subdiv = new Fl_Choice(397, 357, 76, 18, "SubDivision");
+        rbecho_subdiv->down_box(FL_BORDER_BOX);
+        rbecho_subdiv->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        rbecho_subdiv->labelsize(10);
+        rbecho_subdiv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_subdiv->textsize(10);
+        rbecho_subdiv->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        rbecho_subdiv->callback((Fl_Callback*)cb_rbecho_subdiv);
+        rbecho_subdiv->when(FL_WHEN_RELEASE_ALWAYS);
+        o->menu(menu_arpie_subdiv);
+      } // Fl_Choice* rbecho_subdiv
       { rbecho_damp = new SliderW(371, 378, 100, 10, "Damp");
         rbecho_damp->type(5);
         rbecho_damp->box(FL_FLAT_BOX);
