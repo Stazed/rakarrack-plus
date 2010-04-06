@@ -193,6 +193,10 @@ switch(Tap_SetValue)
          Tap_TempoSetD=Tap_TempoSet/2;
          Tap_TempoSetL=Tap_TempoSet/8;
           break;   
+      case 5:
+         Tap_TempoSetD=Tap_TempoSet;
+         Tap_TempoSetL=Tap_TempoSet/3;
+          break;   
 
 
 

@@ -834,17 +834,15 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1555 94 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6063,8 +6061,12 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Dl. 1/2 LFO 1/8} selected
+            label {Dl. 1/2 LFO 1/8}
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Dl. 1 LFO 1/3} selected
+            xywh {0 0 36 21} labelsize 11
           }
         }
         Fl_Button T_BUT {
@@ -10700,8 +10702,7 @@ looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
 looper_t2->redraw();} {}
   }
-  Function {UpdateTGUI()} {open
-  } {
+  Function {UpdateTGUI()} {} {
     code {if(rkr->Chorus_Bypass)
   {
   chorus_freq->value(rkr->efx_Chorus->getpar(2));
