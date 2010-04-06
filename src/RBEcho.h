@@ -75,7 +75,7 @@ private:
   //Parametrii reali
   float panning, lrcross, fb, hidamp, reverse;
   int dl, dr, delay, lrdelay;
-  float fdelay, subdiv;
+  float fdelay, subdiv, pes;
 
   void initdelays ();
   float *ldelay, *rdelay;

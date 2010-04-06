@@ -86,6 +86,8 @@ RBEcho::cleanup ()
 void
 RBEcho::initdelays ()
 {
+  int i;
+
   kl = 0;
   kr = 0;
 
@@ -100,6 +102,15 @@ RBEcho::initdelays ()
   rvkr = dr - 1;
   Srate_Attack_Coeff = 15.0f * cSAMPLE_RATE;   // Set swell time to 66ms of average delay time 
 
+  for (i = dl; i < maxx_delay; i++)
+    ldelay[i] = 0.0;
+  for (i = dr; i < maxx_delay; i++)
+    rdelay[i] = 0.0;
+
+  oldl = 0.0;
+  oldr = 0.0;
+
+
 };
 
 /*
@@ -109,9 +120,9 @@ void
 RBEcho::out (float * smpsl, float * smpsr)
 {
   int i;
-  float l, r, ldl, rdl, rswell, lswell;
+  float ldl, rdl, rswell, lswell;
   float avg, ldiff, rdiff, tmp;
-  float mul = 8.0f*lrcross;  
+  
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -126,17 +137,17 @@ RBEcho::out (float * smpsl, float * smpsr)
      
       if(Pes)
       {
-//          smpsl[i] *= cosf(lrcross);
-//          smpsr[i] *= sinf(lrcross);
+          smpsl[i] *= cosf(lrcross);
+          smpsr[i] *= sinf(lrcross);
           
        	  avg = (smpsl[i] + smpsr[i]) * .5f;
 	  ldiff = smpsl[i] - avg;
 	  rdiff = smpsr[i] - avg;
 
-	  tmp = avg + ldiff * mul;
+	  tmp = avg + ldiff * pes;
 	  smpsl[i] = tmp;
 
-	  tmp = avg + rdiff * mul;
+	  tmp = avg + rdiff * pes;
 	  smpsr[i] = tmp;
 
       }
@@ -184,15 +195,6 @@ RBEcho::out (float * smpsl, float * smpsr)
       efxoutl[i]= ldelay[kl];
       efxoutr[i]= rdelay[kr];
       }      
-/*      
-      ldl = efxoutl[i];
-      rdl = efxoutl[i];
-      l = ldl * (1.0f - lrcross) + rdl * lrcross;
-      r = rdl * (1.0f - lrcross) + ldl * lrcross;
-
-      efxoutl[i] = l;
-      efxoutr[i] = r;
-*/
             
     };
 
@@ -343,6 +345,7 @@ RBEcho::changepar (int npar, int value)
       break;
     case 9:
       Pes = value;
+      pes = 8.0f * (float)Pes / 127.0f;
       break;
     };
 };
