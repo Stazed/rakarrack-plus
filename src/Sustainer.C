@@ -98,6 +98,7 @@ Sustainer::out (float * smpsl, float * smpsr)
    if(cpthresh < cthresh) cpthresh = cthresh;
    
    smpsl[i] = auxtemp * tmpgain * level;   
+   smpsr[i] = smpsl[i];
    };
       //End compression
 };
