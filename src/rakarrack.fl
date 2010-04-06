@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,17 +834,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
+class RKRGUI {selected
 } {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1576 115 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1466,7 +1465,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
         }
       }
       Fl_Group DIST {
-        user_data 1 open
+        user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button dist_activar {
@@ -1729,7 +1728,7 @@ ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));}
         }
         Fl_Choice ovrd_tipo {
           label Type
-          callback {rkr->efx_Overdrive->changepar(5,(int)o->value());} open selected
+          callback {rkr->efx_Overdrive->changepar(5,(int)o->value());} open
           xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_dist_tipo);}
         } {}
@@ -5391,9 +5390,9 @@ if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;}
           class SliderW
         }
         Fl_Value_Slider rbecho_delay {
-          label Delay
+          label Tempo
           callback {rkr->efx_RBEcho->changepar(2,(int)o->value());}
-          xywh {371 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
+          xywh {371 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 20 textcolor 7
           class SliderW
         }
         Fl_Value_Slider rbecho_LRdl {
@@ -10747,6 +10746,12 @@ looper_t2->redraw();} {}
   {
   arpie_delay->value(rkr->Tap_TempoSet);
   arpie_delay->redraw();
+  }
+ 
+  if(rkr->RBEcho_Bypass)
+  {
+   rbecho_delay->value(rkr->Tap_TempoSet);
+   rbecho_delay->redraw();
   }} {}
   }
 } 
