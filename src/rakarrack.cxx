@@ -5374,7 +5374,9 @@ void RKRGUI::cb_sus_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_sus_preset[] = {
- {"Low", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Sustain 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Sustain 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Sustain 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -13370,7 +13372,7 @@ R average.");
         sus_gain->align(FL_ALIGN_LEFT);
         sus_gain->when(FL_WHEN_CHANGED);
       } // SliderW* sus_gain
-      { sus_sus = new SliderW(369, 297, 100, 10, "Level");
+      { sus_sus = new SliderW(369, 297, 100, 10, "Sustain");
         sus_sus->type(5);
         sus_sus->box(FL_FLAT_BOX);
         sus_sus->color((Fl_Color)178);

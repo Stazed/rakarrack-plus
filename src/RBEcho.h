@@ -61,6 +61,7 @@ private:
   int Phidamp;
   int Preverse;
   int Psubdiv;
+  int Pes;
 
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);

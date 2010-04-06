@@ -5742,12 +5742,20 @@ findpos(36,(int)o->value());}
           label Preset
           callback {rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
-sus_sus->value(rkr->efx_Sustainer->getpar(1));} open
+sus_sus->value(rkr->efx_Sustainer->getpar(1));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Low
+            label {Sustain 1}
             xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Sustain 2}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Sustain 3}
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider sus_gain {
@@ -5757,8 +5765,8 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));} open
           class SliderW
         }
         Fl_Value_Slider sus_sus {
-          label Level
-          callback {rkr->efx_Sustainer->changepar(1,(int)o->value());}
+          label Sustain
+          callback {rkr->efx_Sustainer->changepar(1,(int)o->value());} selected
           xywh {369 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
           class SliderW
         }
@@ -10253,8 +10261,7 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;

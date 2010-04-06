@@ -144,7 +144,6 @@ Sustainer::changepar (int npar, int value)
     case 1:
       Psustain = value;
       fsustain =  (float) Psustain/127.0f;
-      
       cratio = 1.25f - fsustain;
       input = 1.0f + fsustain * 30.0f;
       cthresh = 0.25 + fsustain;

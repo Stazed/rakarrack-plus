@@ -255,27 +255,27 @@ RBEcho::sethidamp (int Phidamp)
 void
 RBEcho::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 8;
+  const int PRESET_SIZE = 10;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Echo 1
-    {67, 64, 565, 64, 30, 59, 0, 127},
+    {67, 64, 565, 64, 30, 59, 0, 127, 0, 0},
     //Echo 2
-    {67, 64, 357, 64, 30, 59, 0, 64},
+    {67, 64, 357, 64, 30, 59, 0, 64, 0 ,0 },
     //Echo 3
-    {67, 75, 955, 64, 30, 59, 10, 0},
+    {67, 75, 955, 64, 30, 59, 10, 0, 0 ,0 },
     //Simple Echo
-    {67, 60, 705, 64, 30, 0, 0, 0},
+    {67, 60, 705, 64, 30, 0, 0, 0, 0 ,0},
     //Canyon
-    {67, 60, 1610, 50, 30, 82, 48, 0},
+    {67, 60, 1610, 50, 30, 82, 48, 0, 0 ,0},
     //Panning Echo 1
-    {67, 64, 705, 17, 0, 82, 24, 0},
+    {67, 64, 705, 17, 0, 82, 24, 0, 0 ,0},
     //Panning Echo 2
-    {81, 60, 737, 118, 100, 68, 18, 0},
+    {81, 60, 737, 118, 100, 68, 18, 0, 0 ,0},
     //Panning Echo 3
-    {81, 60, 472, 100, 127, 67, 36, 0},
+    {81, 60, 472, 100, 127, 67, 36, 0, 0 ,0},
     //Feedback Echo
-    {62, 64, 456, 64, 100, 90, 55, 0}
+    {62, 64, 456, 64, 100, 90, 55, 0, 0 ,0}
   };
 
 
@@ -321,7 +321,10 @@ RBEcho::changepar (int npar, int value)
       subdiv = 1.0f/((float)Psubdiv);
       delay = 1 + lrintf ( subdiv * fdelay * fSAMPLE_RATE );
       initdelays ();
-
+      break;
+    case 9:
+      Pes = value;
+      break;
     };
 };
 
@@ -357,6 +360,9 @@ RBEcho::getpar (int npar)
     case 8:
       return (Psubdiv);
       break;
+    case 9:
+      return (Pes);
+      break; 
 
     };
   return (0);			//in case of bogus parameter number
