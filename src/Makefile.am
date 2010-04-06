@@ -52,6 +52,7 @@ rakarrack_SOURCES = main.C \
 	Tuner.h \
 	Valve.h \
 	Vocoder.h \
+	Waveshaper.h \
 	icono_rakarrack_128x128.xpm \
 	icono_rakarrack_32x32.xpm \
 	jack.C \
@@ -105,6 +106,7 @@ rakarrack_SOURCES = main.C \
 	CoilCrafter.C \
 	ShelfBoost.C \
 	Vocoder.C \
+	Waveshaper.C \
 	MIDIConverter.C
 	
 	

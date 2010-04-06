@@ -27,7 +27,7 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
-#include "Distorsion.h"
+#include "Waveshaper.h"
 
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
 // void waveshapesmps (int n, float * smps, int type,
