@@ -181,7 +181,7 @@ RKR::Update_tempo()
   if(MBVvol_Bypass) efx_MBVvol->changepar(1,Tap_TempoSet);
   if(MBVvol_Bypass) efx_MBVvol->changepar(4,Tap_TempoSet);
   if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSet);
-
+  if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSet);
 
 }
 
