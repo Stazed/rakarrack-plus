@@ -45,3 +45,5 @@ public:
   float tmpgain;  // compression distortion temp variable
   
 };
+
+#endif

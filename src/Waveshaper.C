@@ -25,6 +25,7 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include "Waveshaper.h"
 
 Waveshaper::Waveshaper()
 {
