@@ -110,7 +110,8 @@ RBEcho::out (float * smpsl, float * smpsr)
 {
   int i;
   float l, r, ldl, rdl, rswell, lswell;
-  
+  float avg, ldiff, rdiff, tmp;
+  float mul = 8.0f*lrcross;  
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -122,6 +123,24 @@ RBEcho::out (float * smpsl, float * smpsr)
       rdelay[kr] = rdl * hidamp + oldr * (1.0f - hidamp);
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
+     
+      if(Pes)
+      {
+//          smpsl[i] *= cosf(lrcross);
+//          smpsr[i] *= sinf(lrcross);
+          
+       	  avg = (smpsl[i] + smpsr[i]) * .5f;
+	  ldiff = smpsl[i] - avg;
+	  rdiff = smpsr[i] - avg;
+
+	  tmp = avg + ldiff * mul;
+	  smpsl[i] = tmp;
+
+	  tmp = avg + rdiff * mul;
+	  smpsr[i] = tmp;
+
+      }
+
       ldelay[kl] = smpsl[i] * panning - ldl * fb;
       rdelay[kr] = smpsr[i] * (1.0f - panning) - rdl * fb;
       
@@ -165,7 +184,7 @@ RBEcho::out (float * smpsl, float * smpsr)
       efxoutl[i]= 2.0f * ldelay[kl];
       efxoutr[i]= 2.0f * rdelay[kr];
       }      
-      
+/*      
       ldl = efxoutl[i];
       rdl = efxoutl[i];
       l = ldl * (1.0f - lrcross) + rdl * lrcross;
@@ -173,7 +192,7 @@ RBEcho::out (float * smpsl, float * smpsr)
 
       efxoutl[i] = l;
       efxoutr[i] = r;
-
+*/
             
     };
 
@@ -234,7 +253,8 @@ void
 RBEcho::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
-  lrcross = (float)Plrcross / 127.0f * 1.0f;
+  lrcross = (float)Plrcross / 128.0f;
+  
 };
 
 void
