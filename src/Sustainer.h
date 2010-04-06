@@ -46,7 +46,7 @@ private:
   int Pvolume;	//Output Level
   int Psustain;	//Compression amount
 
-  float level, fsustain;
+  float level, fsustain,auxtemp,input,tmpgain;
   float prls, compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
 };
 

@@ -111,7 +111,7 @@ Sustainer::out (float * smpsl, float * smpsr)
 void
 Sustainer::setpreset (int npreset)
 {
-  const int PRESET_SIZE = ;
+  const int PRESET_SIZE = 2;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Sus1

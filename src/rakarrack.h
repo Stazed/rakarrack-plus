@@ -2377,11 +2377,6 @@ private:
   void cb_rbecho_LRdl_i(SliderW*, void*);
   static void cb_rbecho_LRdl(SliderW*, void*);
 public:
-  SliderW *rbecho_LRc;
-private:
-  void cb_rbecho_LRc_i(SliderW*, void*);
-  static void cb_rbecho_LRc(SliderW*, void*);
-public:
   SliderW *rbecho_fb;
 private:
   void cb_rbecho_fb_i(SliderW*, void*);
@@ -2396,6 +2391,16 @@ public:
 private:
   void cb_rbecho_damp_i(SliderW*, void*);
   static void cb_rbecho_damp(SliderW*, void*);
+public:
+  SliderW *rbecho_angle;
+private:
+  void cb_rbecho_angle_i(SliderW*, void*);
+  static void cb_rbecho_angle(SliderW*, void*);
+public:
+  Fl_Check_Button *rbecho_es;
+private:
+  void cb_rbecho_es_i(Fl_Check_Button*, void*);
+  static void cb_rbecho_es(Fl_Check_Button*, void*);
 public:
   Fl_Group *COILCRAFTER;
   Fl_Light_Button *coil_activar;
@@ -2540,6 +2545,28 @@ private:
   static void cb_vo_level(SliderW*, void*);
 public:
   NewVum *vu_vu;
+  Fl_Group *SUSTAINER;
+  Fl_Light_Button *sus_activar;
+private:
+  void cb_sus_activar_i(Fl_Light_Button*, void*);
+  static void cb_sus_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *sus_preset;
+private:
+  void cb_sus_preset_i(Fl_Choice*, void*);
+  static void cb_sus_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_sus_preset[];
+public:
+  SliderW *sus_gain;
+private:
+  void cb_sus_gain_i(SliderW*, void*);
+  static void cb_sus_gain(SliderW*, void*);
+public:
+  SliderW *sus_sus;
+private:
+  void cb_sus_sus_i(SliderW*, void*);
+  static void cb_sus_sus(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

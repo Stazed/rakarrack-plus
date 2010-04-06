@@ -843,7 +843,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1555 94 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1548 87 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5326,11 +5326,12 @@ rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
 rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
-rbecho_LRc->value(rkr->efx_RBEcho->getpar(4)-64);
+rbecho_angle->value(rkr->efx_RBEcho->getpar(4)-64);
 rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
 rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
 rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
 rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
+rbecho_es->value(rkr->efx_RBEcho->getpar(9));
 
 if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
@@ -5375,56 +5376,62 @@ if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;}
         Fl_Value_Slider rbecho_WD {
           label {Wet/Dry}
           callback {rkr->efx_RBEcho->changepar(0,(int)(o->value()+64));}
-          xywh {371 246 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider rbecho_RV {
           label Reverse
           callback {rkr->efx_RBEcho->changepar(7,(int)o->value());}
-          xywh {371 269 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {371 252 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider rbecho_pan {
           label Pan
           callback {rkr->efx_RBEcho->changepar(1,(int)(o->value()+64));}
-          xywh {371 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 266 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider rbecho_delay {
           label Tempo
           callback {rkr->efx_RBEcho->changepar(2,(int)o->value());}
-          xywh {371 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 20 textcolor 7
+          xywh {371 280 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 20 textcolor 7
           class SliderW
         }
         Fl_Value_Slider rbecho_LRdl {
           label {LRdl.}
           callback {rkr->efx_RBEcho->changepar(3,(int)o->value());}
-          xywh {371 314 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider rbecho_LRc {
-          label {L/R.Cr}
-          callback {rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
-          xywh {371 329 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 294 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider rbecho_fb {
           label {Fb.}
           callback {rkr->efx_RBEcho->changepar(5,(int)o->value());}
-          xywh {371 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {371 308 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice rbecho_subdiv {
           label SubDivision
           callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open
-          xywh {397 357 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+          xywh {397 322 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
           code0 {o->menu(menu_arpie_subdiv);}
         } {}
         Fl_Value_Slider rbecho_damp {
           label Damp
           callback {rkr->efx_RBEcho->changepar(6,(int)o->value());}
-          xywh {371 378 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {371 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Value_Slider rbecho_angle {
+          label Angle
+          callback {rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
+          xywh {371 379 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button rbecho_es {
+          label {Extra Stereo}
+          user_data 2
+          callback {rkr->efx_RBEcho->changepar(9,(int)o->value())}
+          xywh {369 359 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group COILCRAFTER {
@@ -5716,6 +5723,44 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
         Fl_Slider vu_vu {
           xywh {327 265 11 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
           class NewVum
+        }
+      }
+      Fl_Group SUSTAINER {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button sus_activar {
+          label On
+          user_data 2
+          callback {rkr->Sustainer_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Sustainer->cleanup();
+findpos(36,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice sus_preset {
+          label Preset
+          callback {rkr->efx_Sustainer->setpreset((int) o->value());
+sus_gain->value(rkr->efx_Sustainer->getpar(0));
+sus_sus->value(rkr->efx_Sustainer->getpar(1));} open
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Low
+            xywh {10 10 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider sus_gain {
+          label Gain
+          callback {rkr->efx_Sustainer->changepar(0,(int)o->value());}
+          xywh {369 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider sus_sus {
+          label Level
+          callback {rkr->efx_Sustainer->changepar(1,(int)o->value());}
+          xywh {369 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
+          class SliderW
         }
       }
       Fl_Group Tuner {
@@ -6065,7 +6110,7 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Dl. 1 LFO 1/3} selected
+            label {Dl. 1 LFO 1/3}
             xywh {0 0 36 21} labelsize 11
           }
         }
@@ -8191,6 +8236,9 @@ for (i=1; i<=t; i++)
         case 35:
         VOCODER->hide();
         break;
+        case 36:
+        SUSTAINER->hide();
+        break;
         
 
 
@@ -8513,6 +8561,13 @@ switch (rkr->efx_order[i])
        vo_activar->shortcut(s[i]);
        VOCODER->show();
        if(rkr->Vocoder_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 36:
+       SUSTAINER->position(x[i],y[i]);
+       sus_activar->shortcut(s[i]);
+       SUSTAINER->show();
+       if(rkr->Sustainer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -10082,6 +10137,11 @@ switch(miralo)
   vo_activar->value(rkr->Vocoder_Bypass);
   vo_activar->do_callback();
   break;
+  case 36:
+  sus_activar->value(rkr->Sustainer_Bypass);
+  sus_activar->do_callback();
+  break;
+
   
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
@@ -10173,6 +10233,7 @@ RBECHO->image(InOut->image());
 COILCRAFTER->image(InOut->image());
 SHELFBOOST->image(InOut->image());
 VOCODER->image(InOut->image());
+SUSTAINER->image(InOut->image());
 
 
 Tap->image(InOut->image());
@@ -10192,7 +10253,8 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;

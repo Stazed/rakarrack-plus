@@ -47,6 +47,7 @@ rakarrack_SOURCES = main.C \
 	ShelfBoost.h \
 	Shuffle.h \
 	smbPitchShift.h \
+	Sustainer.h \
 	SVFilter.h \
 	Synthfilter.h \
 	Tuner.h \
@@ -107,6 +108,7 @@ rakarrack_SOURCES = main.C \
 	ShelfBoost.C \
 	Vocoder.C \
 	Waveshaper.C \
+	Sustainer.C \
 	MIDIConverter.C
 	
 	

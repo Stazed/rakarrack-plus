@@ -359,6 +359,9 @@ else
    case 35:
     if(inoff) Vocoder_Bypass=1; else Vocoder_Bypass=0;
      break;
+   case 36:
+    if(inoff) Sustainer_Bypass=1; else Sustainer_Bypass=0;
+     break;
    
    case 121:
     if(inoff) Tap_Bypass = 1; else Tap_Bypass = 0;
@@ -501,6 +504,9 @@ RKR::checkonoff(int miraque)
      break;
    case 35:
      if (Vocoder_Bypass) return(0);
+     break;
+   case 36:
+     if (Sustainer_Bypass) return(0);
      break;
  
    case 121:
