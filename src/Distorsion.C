@@ -321,9 +321,9 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 		   else 
 		   {
 		   smps[i] = -1.0f * compg;
-		   dyno += smps[i];
-		   dyno *= dynodecay;
 		   }  
+		   dyno += compg;
+		   dyno *= dynodecay;
 		   
 	   }
 	   else
