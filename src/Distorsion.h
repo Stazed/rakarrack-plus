@@ -27,26 +27,7 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
-
-class Waveshaper
-{
-public:
-  Waveshaper ();
-  ~Waveshaper ();
-//Waveshaping
-  void waveshapesmps (int n, float * smps, int type,
-		    int drive, int eff);
-  
-  float dthresh;  //dynamic threshold in compression waveshaper 
-  float dyno;
-  float dynodecay;  //dynamically control symmetry
-  
-  float compg;  //used by compression distortion
-  float cratio;  //used by compression for hardness
-  float tmpgain;  // compression distortion temp variable
-  
-};
-
+#include "Waveshaper.h"
 
 class Distorsion
 {
