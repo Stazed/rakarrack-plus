@@ -118,22 +118,14 @@ RBEcho::out (float * smpsl, float * smpsr)
     {
       ldl = ldelay[kl];
       rdl = rdelay[kr];
-      l = ldl * (1.0f - lrcross) + rdl * lrcross;
-      r = rdl * (1.0f - lrcross) + ldl * lrcross;
-      ldl = l;
-      rdl = r;
-
-      ldl = smpsl[i] * panning - ldl * fb;
-      rdl = smpsr[i] * (1.0f - panning) - rdl * fb;
-
-      
-      
+        
       //LowPass Filter
       ldelay[kl] = ldl * hidamp + oldl * (1.0f - hidamp);
       rdelay[kr] = rdl * hidamp + oldr * (1.0f - hidamp);
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
-
+      ldelay[kl] = smpsl[i] * panning - ldl * fb;
+      rdelay[kr] = smpsr[i] * (1.0f - panning) - rdl * fb;
       
       if (++kl >= dl)
 	kl = 0;
@@ -175,7 +167,14 @@ RBEcho::out (float * smpsl, float * smpsr)
       efxoutl[i]= 2.0f * ldelay[kl];
       efxoutr[i]= 2.0f * rdelay[kr];
       }      
+      
+      ldl = efxoutl[i];
+      rdl = efxoutl[i];
+      l = ldl * (1.0f - lrcross) + rdl * lrcross;
+      r = rdl * (1.0f - lrcross) + ldl * lrcross;
 
+      efxoutl[i] = l;
+      efxoutr[i] = r;
 
             
     };
