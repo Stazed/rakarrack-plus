@@ -96,6 +96,8 @@ Arpie::cleanup ()
 void
 Arpie::initdelays ()
 {
+  int i;
+
   kl = 0;
   kr = 0;
 
@@ -111,8 +113,13 @@ Arpie::initdelays ()
   Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
   fade = (dl+dr)/5;
 
+  for (i = dl; i < maxx_delay; i++)
+    ldelay[i] = 0.0;
+  for (i = dr; i < maxx_delay; i++)
+    rdelay[i] = 0.0;
+  oldl = 0.0;
+  oldr = 0.0;
 
-  cleanup ();
 };
 
 /*

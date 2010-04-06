@@ -85,6 +85,8 @@ Echo::cleanup ()
 void
 Echo::initdelays ()
 {
+  int i;
+
   kl = 0;
   kr = 0;
 
@@ -99,8 +101,15 @@ Echo::initdelays ()
   rvkr = dr - 1;
   Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
 
+  for (i = dl; i < maxx_delay; i++)
+    ldelay[i] = 0.0;
+  for (i = dr; i < maxx_delay; i++)
+    rdelay[i] = 0.0;
 
-  cleanup ();
+  oldl = 0.0;
+  oldr = 0.0;
+
+
 };
 
 /*
