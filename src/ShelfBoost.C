@@ -114,7 +114,7 @@ ShelfBoost::setpreset (int npreset)
     //Bass
     {127, 64, 220, 1, 24},
     //Distortion 1
-    {12, 100, 7600, 1, 24}    
+    {6, 40, 12600, 1, 127}    
 
   };
 
