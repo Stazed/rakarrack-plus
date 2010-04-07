@@ -258,9 +258,12 @@ echo
 echo  " $PACKAGE_NAME $PACKAGE_VERSION"
 echo
 echo
+echo  " Optimizations__________________________________________________"
 echo  " Use altivec. . . . . . . . . . . . . . . . . . . . . . .: $ac_altivec"
 echo  " Use sse  . . . . . . . . . . . . . . . . . . . . . . . .: $ac_sse"
 echo  " Use sse2 . . . . . . . . . . . . . . . . . . . . . . . .: $ac_sse2"
+echo  
+echo  " Library________________________________________________________"
 echo  " Xpm support (libxpm) . . . . . . . . . . . . . . . . . .: $ac_Xpm"
 echo  " FLTK toolkit . . . . . . . . . . . . . . . . . . . . . .: $ac_fltk"
 echo  " pthread support (libpthread) . . . . . . . . . . . . . .: $ac_pthread"
@@ -269,3 +272,7 @@ echo  " ALSA MIDI Sequencer support  . . . . . . . . . . . . . .: $ac_asound"
 echo  " Samplerate conversion (libsamplerate). . . . . . . . . .: $ac_samplerate"
 echo  " General audio file (libsndfile)  . . . . . . . . . . . .: $ac_sndfile"
 echo  
+echo  " Now maybe you can run 'make' to build the sources."
+echo
+echo
+

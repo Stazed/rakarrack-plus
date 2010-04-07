@@ -1,12 +1,10 @@
 - Arrange memory allocations of delay buffers in effects.
-- Complete list of assignable effect parameters to MIDI learn.
 
 DSP TODO:
 *This is a wish-list.  Some of these may not be done for 0.5.0.
 - Reverse delay fade between old and new at wrap instead of ducking volume.  It will sound more smooth :)
 - Improve sub-octave modulator for distortion.  Perhaps this can be a new effect.
 - Dynamic echo:  Delay time changes with input signal dynamics....possible to get a "bouncing ball" effect.
-- Vocoder
 - CPU-friendly pitch shifter, flexible for Whammy effect
 - Synth filters
 - Sample/Hold modulator -- maybe just add to LFO effect using random sequence.
