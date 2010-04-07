@@ -729,8 +729,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   Fl_Color juan,pepe;
   float vval=fabsf((float)val);
   
-  juan = fl_color_average(fl_darker(leds_color),fl_lighter(leds_color),vval);
-  pepe = fl_color_average(fl_lighter(leds_color),fl_darker(leds_color),vval);
+  juan = fl_color_average(fl_darker(fl_darker(leds_color)),fl_lighter(fl_lighter(leds_color)),vval);
+  pepe = fl_color_average(fl_lighter(fl_lighter(leds_color)),fl_darker(fl_darker(leds_color)),vval);
 
  Fl_Boxtype box1 = slider();
 
@@ -17778,7 +17778,7 @@ chfsize(value);
 
 void RKRGUI::ChangeActives() {
   Fl_Color on = fl_lighter(label_color);
-Fl_Color off = fl_darker(label_color);
+Fl_Color off = fl_darker(fl_darker(label_color));
 
 
 if(rkr->active[0]) L1->labelcolor(on); else L1->labelcolor(off);
@@ -17810,7 +17810,7 @@ if((rkr->upsample) && (rkr->Bypass))
 void RKRGUI::findpos(int num, int value) {
   int i;
 Fl_Color on = fl_lighter(label_color);
-Fl_Color off= fl_darker(label_color);
+Fl_Color off= fl_darker(fl_darker(label_color));
 
 for(i=0; i<10; i++)
  {
