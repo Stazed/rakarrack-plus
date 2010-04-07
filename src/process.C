@@ -209,7 +209,7 @@ RKR::RKR ()
       "Cabinet", "Pan", "Harmonizer", "MusicalDelay", "NoiseGate", "Derelict",
       "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",  "DistBand", 
       "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", 
-      "Looper", "MuTroMojo", "RBEcho", "Coil Crafter", "ShelfBoost", "Vocoder",
+      "Looper", "MuTroMojo", "Echoverse", "Coil Crafter", "ShelfBoost", "Vocoder",
       "Sustainer"
     };
     for (i = 0; i < NumEffects; i++)
@@ -217,7 +217,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 277;
+  NumParams= 288;
 
 {
    static const char *los_params[] = 
@@ -322,6 +322,15 @@ RKR::RKR ()
 "Echo LR_Cr","97",
 "Echo Pan","46",
 "Echo Wet/Dry","59",
+"Echoverse Angle","311",
+"Echoverse Damp","309",
+"Echoverse E.S.","310",
+"Echoverse Fb","308",
+"Echoverse LRdl","307",
+"Echoverse Pan","305",
+"Echoverse Reverse","304",
+"Echoverse Tempo","306",
+"Echoverse WD","303",
 "EQ 125 Hz","134",
 "EQ 16 Khz","141",
 "EQ 1 Khz","137",
@@ -455,6 +464,8 @@ RKR::RKR ()
 "Shuffle M.L. Gain","231",
 "Shuffle Q","236",
 "Shuffle WD","227",
+"Sustainer Gain","312",
+"Sustainer Sustain","313",
 "Synthfilter A.Time","245",
 "Synthfilter Depth","243",
 "Synthfilter Distort","238",

@@ -1,12 +1,13 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
-- Added Compress whaveshape
-- Added jack transport beats per minute to Tap Tempo
+- Added Effect Sustainer.
+- Added Compress whaveshape.
+- Added jack transport beats per minute to Tap Tempo.
 - Added Effect Vocoder.
 - Added Effect ShelfBoost.
 - MIDI learn improved.
 - Removed unused code.
-- Added Effect RBEcho
+- Added Effect Echoverse.
 - Harmonizer improved.
 - Fixed CPU usage updating GUI.
 - Added Tap Tempo

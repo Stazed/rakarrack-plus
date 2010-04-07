@@ -434,7 +434,17 @@ RKR::savefile (char *filename)
                    efx_RyanWah->getpar(16), RyanWah_Bypass);
 
           break;
-// RBEcho here ------------------------------------------------------------
+	case 32:
+	  //Echoverse
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_RBEcho->getpar (0), efx_RBEcho->getpar (1),
+		   efx_RBEcho->getpar (2), efx_RBEcho->getpar (3),
+		   efx_RBEcho->getpar (4), efx_RBEcho->getpar (5),
+		   efx_RBEcho->getpar (6), efx_RBEcho->getpar (7),
+		   efx_RBEcho->getpar (8), efx_RBEcho->getpar (9),RBEcho_Bypass);
+	  break;
+
+
 
 	case 33:
 	  //CoilCrafter
@@ -462,6 +472,16 @@ RKR::savefile (char *filename)
 		   efx_Vocoder->getpar (4), efx_Vocoder->getpar (5),
 		   efx_Vocoder->getpar (6), Vocoder_Bypass);
 	  break;
+
+	case 36:
+	  //Sustainer
+	  sprintf (buf, "%d,%d,%d\n",
+		   efx_Sustainer->getpar (0), efx_Sustainer->getpar (1),
+		   Sustainer_Bypass);
+	  break;
+
+
+
 
 
 	}
@@ -883,7 +903,13 @@ RKR::loadfile (char *filename)
 		  &lv[32][15], &lv[32][16], &RyanWah_B);
 	  break;
 
-//RBEcho here -------------------------------------------------------------------------
+	case 32:
+	  //Echoverse
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[33][0], &lv[33][1], &lv[33][2], &lv[33][3], &lv[33][4],
+		  &lv[33][5], &lv[33][6], &lv[33][7], &lv[33][8], &lv[33][9], &RBEcho_B);
+	  break;
+
 
 	case 33:
 	  //CoilCrafter
@@ -904,6 +930,12 @@ RKR::loadfile (char *filename)
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[36][0], &lv[36][1], &lv[36][2], &lv[36][3], &lv[36][4],
 		  &lv[36][5], &lv[36][6], &Vocoder_B);
+	  break;
+
+	case 36:
+	  //Sustainer
+	  sscanf (buf, "%d,%d,%d\n",
+		  &lv[37][0], &lv[37][1], &Sustainer_B);
 	  break;
 
 
@@ -982,10 +1014,11 @@ RKR::Actualizar_Audio ()
   Convol_Bypass = 0;
   Looper_Bypass = 0;
   RyanWah_Bypass = 0;
-//RBEcho Here --------  
+  RBEcho_Bypass = 0;  
   CoilCrafter_Bypass = 0;
   ShelfBoost_Bypass = 0;
   Vocoder_Bypass = 0;
+  Sustainer_Bypass = 0;
     
   cleanup_efx ();
 
@@ -1048,13 +1081,16 @@ for (i = 0; i <= 6; i++)
     efx_Looper->changepar (i, lv[31][i]);
  for (i = 0; i <= 16; i++)
     efx_RyanWah->changepar (i, lv[32][i]);
-//  RBEcho here---------------------------------------------------
+ for (i = 0; i <= 9; i++)
+    efx_RBEcho->changepar (i, lv[33][i]);
  for (i = 0; i <= 8; i++)
     efx_CoilCrafter->changepar (i, lv[34][i]);
  for (i = 0; i <= 4; i++)
     efx_ShelfBoost->changepar (i, lv[35][i]);
  for (i = 0; i <= 6; i++)
     efx_Vocoder->changepar (i, lv[36][i]);
+ for (i = 0; i <= 1; i++)
+    efx_Sustainer->changepar (i, lv[37][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1116,10 +1152,11 @@ for (i = 0; i <= 6; i++)
   Convol_Bypass = Convol_B;
   Looper_Bypass = Looper_B;
   RyanWah_Bypass = RyanWah_B;
-//RBEcho here  ---------
+  RBEcho_Bypass= RBEcho_B;
   CoilCrafter_Bypass = CoilCrafter_B;
   ShelfBoost_Bypass = ShelfBoost_B;
   Vocoder_Bypass = Vocoder_B;
+  Sustainer_Bypass = Sustainer_B;
     
   Bypass = Bypass_B;
 
@@ -1186,7 +1223,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[37][16] = {
+  int presets[38][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1253,15 +1290,16 @@ RKR::New ()
     {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0},
 //RyanWah
     {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450},       
-//RBEcho --------------------------------------- Pending
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Echoverse
+    {64, 64, 90, 64, 64, 64, 64, 0, 1, 64, 0, 0, 0, 0, 0, 0},
 //CoilCrafter
     {32, 6, 1, 3300, 16, 4400, 42, 20, 0, 0, 0, 0, 0, 0, 0, 0},
 //ShelfBoost
     {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Vocoder 
-    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-
+    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Systainer
+    {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
     
 };
@@ -1325,11 +1363,12 @@ RKR::New ()
   Convol_B = 0;
   Looper_B = 0;
   RyanWah_B = 0;
-//RBEcho here --------
+  RBEcho_B = 0;
   CoilCrafter_B = 0;
   ShelfBoost_B = 0;
   Vocoder_B = 0;
-
+  Sustainer_B = 0;
+  
   Bypass_B = 0;
 
   
@@ -1352,7 +1391,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[37][16] = {
+  int presets[38][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1419,14 +1458,16 @@ RKR::New_Bank ()
     {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0},
 //RyanWah
     {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450},       
-//RBEcho --------------------------------------- Pending
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Echoverse
+    {64, 64, 90, 64, 64, 64, 64, 0, 1, 64, 0, 0, 0, 0, 0, 0},
 //CoilCrafter
     {32, 6, 1, 3300, 16, 4400, 42, 20, 0, 0, 0, 0, 0, 0, 0, 0},
 //ShelfBoost
     {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Vocoder 
-    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Systainer
+    {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
     
     
@@ -1528,10 +1569,11 @@ RKR::Bank_to_Preset (int i)
   Convol_B = Bank[i].lv[30][19];
   Looper_B = Bank[i].lv[31][19];
   RyanWah_B = Bank[i].lv[32][19];
-//RBEcho here --------------------     
+  RBEcho_B = Bank[i].lv[33][19];     
   CoilCrafter_B = Bank[i].lv[34][19];
   ShelfBoost_B = Bank[i].lv[35][19];
   Vocoder_B = Bank[i].lv[36][19];
+  Sustainer_B = Bank[i].lv[37][19];
 
 
   Bypass_B = Bypass;
@@ -1631,13 +1673,16 @@ RKR::Preset_to_Bank (int i)
     lv[31][j] = efx_Looper->getpar(j);
   for (j = 0; j <= 16; j++)
     lv[32][j] = efx_RyanWah->getpar(j);
-//RBEcho here -------------------------------
+  for (j = 0; j <= 9; j++)
+    lv[33][j] = efx_RBEcho->getpar(j);
   for (j = 0; j <= 8; j++)
     lv[34][j] = efx_CoilCrafter->getpar(j);
   for (j = 0; j <= 4; j++)
     lv[35][j] = efx_ShelfBoost->getpar(j);
   for (j = 0; j <= 6; j++)
     lv[36][j] = efx_Vocoder->getpar(j);
+  for (j = 0; j <= 1; j++)
+    lv[37][j] = efx_Sustainer->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1703,10 +1748,11 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[30][19] = Convol_Bypass;
   Bank[i].lv[31][19] = Looper_Bypass;
   Bank[i].lv[32][19] = RyanWah_Bypass;
-// RBEcho here ------------------------  
+  Bank[i].lv[33][19] = RBEcho_Bypass;
   Bank[i].lv[34][19] = CoilCrafter_Bypass;
   Bank[i].lv[35][19] = ShelfBoost_Bypass;
   Bank[i].lv[36][19] = Vocoder_Bypass;
+  Bank[i].lv[37][19] = Sustainer_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

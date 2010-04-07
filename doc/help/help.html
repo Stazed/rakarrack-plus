@@ -10,6 +10,7 @@
 
 
 
+
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   
@@ -2011,7 +2012,54 @@ MIDI expression pedal for a wah wah effect.</p>
       <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/coi.jpg" name="graphics29" alt="rakarrack CoilCrafter"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p align="justify">CoilCrafter a Pick up Emulation/Converter</p>
+      
+      <p align="justify">Coil Crafter&nbsp; -&nbsp; Pickup Emulation/Converter<br>
+      </p>
+      <p align="justify"><br>
+This unit contains two filters tuned to typical pickup frequency
+responses.&nbsp; Origin is used to match the pickup you're using.&nbsp; This
+filter "undoes", or reverses, the frequency response of your source
+pickup.&nbsp; "Destiny" is what kind of pickups you want it to sound like is
+in your guitar.&nbsp; This applies the frequency response of the pickups
+selected.<br>
+
+      <br>
+
+Two caveats:&nbsp; <br>
+
+A)&nbsp; This does not make your Gibson Les Paul sound like a strat.&nbsp; It
+makes it sound like you put single coil pickups in your Les Paul.&nbsp; The
+Tone control helps to take off some of the lows so you can somewhat
+emulate different guitar body types.<br>
+
+B)&nbsp; You have to adjust parameters for the "Origin" pickup in order to
+cancel the effects of the pickups you are actually using.&nbsp; Without good
+electronics lab test equipment, this is largely guesswork tuned into
+range by your ears.&nbsp; If it sounds good, then who cares if it's
+tecnhically right.<br>
+
+      <br>
+
+<b>Gain</b>: Volume control<br>
+
+<b>Tone</b>: Simple low cut<br>
+
+<b>Origin</b>: Pickups you are using.&nbsp; This will "undo" your pickup's response.<br>
+
+<b>Freq1</b>: Resonant frequency of origin pickup.<br>
+
+<b>Q1</b>: Resonance of origin pickup.<br>
+
+<b>Destiny</b>: This is the type of pickup you wish to emulate.<br>
+
+<b>Freq2</b>: Resonant frequency of desired pickup response.<br>
+
+<b>Q2</b>: Resonance of desired pickup.<br>
+
+<b>Pos</b>: Uses harmonic exciter to emulate switching to neck position pickup.<br>
+
+      </p>
+
       </td></tr></tbody>
 </table>
 <br>
@@ -2051,7 +2099,95 @@ MIDI expression pedal for a wah wah effect.</p>
       <p><font color="#000000"><img style="border: 1px solid ; width: 185px; height: 250px;" src="imagenes/voc.jpg" name="graphics29" alt="rakarrack Vocoder"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p align="justify">Vocoder</p></td></tr></tbody>
+      <p align="justify">Vocoder</p>
+      <p align="justify">For those not already familiar with vocoders, this is the effect responsible formany robot sounds on several popular songs.<br>
+      <br>
+The basic structure is this:<br>
+Your voice from a microphone needs to be connected to the "Aux" input
+of Rakarrack.&nbsp; Second, you will have some sound source coming
+through Rakarrack's normal processing chain.&nbsp; This is likely a
+guitar or synthesizer.&nbsp; When you speak into the mic, you will hear
+the sound of your instrument with a robot-like voice.&nbsp; The best
+types of signals are constant and rich in frequency content.&nbsp; For
+example, distorted guitar chords are a good "carrier" for the
+Vocoder.&nbsp; Various synthesizer strings sounds or brass emulations
+are also good sources for the voice.<br>
+      <br>
+This particular implementation uses the analog Vocoder model.&nbsp;
+These units were implemented with several parallel filter banks.&nbsp;
+One filter bank was used on the voice, and the other on the
+instrument.&nbsp; The bank on the voice was used to "find out" what
+frequency bands are being used by the voice, then the power from each
+of these bands was used to scale the corresponding bands on the
+instrument so it has more or less power in these bands.&nbsp; Briefly
+put, the power in the signal of each frequency band from the mic was
+used to control the volume on each corresponding frequency band for the
+incoming instrument.&nbsp; Think of two 32 band equalizers.&nbsp; The
+first 32 band EQ has a mic plugged into it.&nbsp; As you speak into the
+mic, you can se the VU meter bars bounce on each corresponding band (if
+this is the kind of EQ that displays VU bars for every band).&nbsp;
+Imagine something being linked to the VU meter bars that can push the
+sliders up and down on the Equalizer used to process the
+instrument.&nbsp; This is what a vocoder does.<br>
+      <br>
+Rakarrack uses a 32-band filter bank to implement the effect.&nbsp;
+These are all second-order band pass filters spaced evenly on a
+logarithmic scale from 300Hz to 3600Hz, thus covering most of the
+important formant frequencies.<br>
+      <br>
+Additionally there are some basic hard-coded utilities to help in processing the voice channel:<br>
+Gate:&nbsp; Anything below -75dB is gated.&nbsp; You can "cheat" the
+gate with the Input level adjustment.&nbsp; If too much noise is
+getting through to the vocoder when you're not talking, you can
+decrease the input level until the noise floor disappears.&nbsp; Of
+course, if you have a noisey preamp, mic, lots of background
+noise...etc, this gives you poor signal/noise ratio, then there is
+little we can program into the application to help improve the dynamics
+:-(.&nbsp; <br>
+Compressor:&nbsp; A simple compressor is applied to the vocals with a
+ratio of approximately 2:1.&nbsp; It is implemented using
+add/subtract/multiply/divide instructions to avoid CPU costly log and
+pow functions.&nbsp; As a result, the compression curve looks more like
+saturation on a vacuum tube or JFET, and the compression ratio
+increases steadily with the input signal level.&nbsp; Consequently, it
+is a soft-knee compressor and lends itself well to vocal processing as
+a easy soft-knee compressor.&nbsp; Because of the way this compressor
+behaves, increasing the Input level is tantamount to decreasing the
+threshold and increasing ratio simultaneously.&nbsp; It is designed
+this way so it works effectively without the user needing to know
+anything about it.&nbsp; Incidentally, this same compressor is used to
+create the Sustainer effect.<br>
+      <br>
+The take-home message with regard to the "invisible" utilities is that
+the Input level parameter gives you a lot of power over the dynamics of
+the microphone input, and can help in getting a good consistent vocal
+sound onto the instrument being processed.<br>
+      <br>
+Here is the list of parameters:<br>
+      <br>
+<b>Wet/Dry</b>: We have been over this many times.<br>
+<b>Pan</b>: Move the processed signal to the left or right<br>
+<b>Input</b>: Microphone input level.&nbsp; Explained in detail above.<br>
+<b>Muf.</b>: "Muffle".&nbsp; Maybe more like "blur" or
+"smear".&nbsp; This increases the averaging time on the power coming
+into each frequency band.&nbsp; Adjusting to a large level has an
+effect of making it sound like the voice is in a very large reverberant
+room.&nbsp; Lower levels achieve a more articulate sound.<br>
+<b>Q</b>: Resonance of the
+filters.&nbsp; Increasing this number makes the filter bands more
+narrow.&nbsp; Extremely high values make the filters so resonant it
+sounds like metallic reverberation.&nbsp; This also "smears" the
+vocals.&nbsp; Unless you are going for extreme sounds, the best range
+is 65 to 90.<br>
+<b>Ring</b>: If you are going for extreme sounds, this
+is the ticket.&nbsp; This causes the voice from each mic band to be
+multiplied with each instrument band.&nbsp; The adjustment is basically
+modulation depth.<br>
+<b>Level</b>: Final output level.&nbsp; <br>
+      <br>
+      <br>
+      </p>
+</td></tr></tbody>
 </table>
 <br>
 <br>
@@ -2122,8 +2258,11 @@ read this value).<br>
 <p>Sucesive tempo signals are displayed each time a signal is received
 and
 the Tempo parameter is updated on all the effects that has the "On"
-state. Tap Tempo has an automatic reset timeout, 8 seconds after the last
-signal. This need to be enabled in the window settings. Tap Tempo set all the effect Tempo parameters that has the state in "On" to the value readed or generated.</p>
+state. Tap Tempo has an automatic reset timeout, 8 seconds after the
+last
+signal. This need to be enabled in the window settings. Tap Tempo set
+all the effect Tempo parameters that has the state in "On" to the value
+readed or generated.</p>
 <p>The "Set" choice select how the Delay and LFO effect parameters will be
 updated, according to the preset and the Tempo.</p>
 
@@ -2938,10 +3077,11 @@ Westerfeld, ArtsCompressor Authors</p>
 49 = Convolotron On/Off<br>
 50 = Looper On/Off<br>
 51 = MuTroMojo On/Off<br>
-52 = RBEcho On/Off<br>
+52 = Echoverse On/Off<br>
 53 = Coil Crafter On/Off<br>
 54 = ShelfBoost On/Off<br>
 55 = Vocoder On/Off<br> 
+56 = Sustainer On/Off<br>
 121= Tap Tempo On/Off<br>
 122= MIDI Converter On/Off<br>
 123= Tuner On/Off<br>

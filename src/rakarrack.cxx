@@ -15288,7 +15288,19 @@ ryanwah_hp->value(rkr->lv[32][12]);
 svfilter_stages->value(rkr->lv[32][13]);
 ryanwah_activar->value(rkr->RyanWah_Bypass);
 
-// RBEcho here .........
+// RBEcho
+
+rbecho_WD->value(rkr->lv[33][0]-64);
+rbecho_pan->value(rkr->lv[33][1]-64);
+rbecho_delay->value(rkr->lv[33][2]);
+rbecho_LRdl->value(rkr->lv[33][3]);
+rbecho_angle->value(rkr->lv[33][4]-64);
+rbecho_fb->value(rkr->lv[33][5]);
+rbecho_damp->value(rkr->lv[33][6]);
+rbecho_RV->value(rkr->lv[33][7]);
+rbecho_subdiv->value(rkr->lv[33][8]);
+rbecho_es->value(rkr->lv[33][9]);
+rbecho_activar->value(rkr->RBEcho_Bypass);
 
 
 
@@ -15325,6 +15337,11 @@ vo_q->value(rkr->lv[36][3]);
 vo_ring->value(rkr->lv[36][6]);
 vo_level->value(rkr->lv[36][5]);
 
+
+//Sustainer
+sus_gain->value(rkr->lv[37][0]);
+sus_sus->value(rkr->lv[37][1]);
+sus_activar->value(rkr->Sustainer_Bypass);
 
 
 
@@ -16245,7 +16262,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<303; i++)
+for (i=1; i<314; i++)
 
 {
 
@@ -17364,8 +17381,55 @@ switch (i)
      vo_level->value(rkr->efx_Vocoder->getpar(5)); 
      vo_level->redraw();
      break;
+     case 303:
+     rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
+     rbecho_WD->redraw();
+     break;
+     case 304:
+     rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
+     rbecho_RV->redraw();
+     break;
+     case 305:
+     rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
+     rbecho_pan->redraw();
+     break;
+     case 306:
+     rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
+     rbecho_delay->redraw();
+     break;
+     case 307:
+     rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
+     rbecho_LRdl->redraw();
+     break;
+     case 308:
+     rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
+     rbecho_fb->redraw();
+     break;
+     case 309:
+     rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
+     rbecho_damp->redraw();
+     break;
+     case 310:
+     rbecho_es->value(rkr->efx_RBEcho->getpar(9));
+     rbecho_es->redraw();
+     break;
+     case 311:
+     rbecho_angle->value(rkr->efx_RBEcho->getpar(4)-64);
+     rbecho_angle->redraw();
+     break;
+     case 312:
+     sus_gain->value(rkr->efx_Sustainer->getpar(0));
+     sus_gain->redraw();
+     break;
+     case 313:
+     sus_sus->value(rkr->efx_Sustainer->getpar(1));
+     sus_sus->redraw();
+     break;
 
-     
+
+
+
+
       
 }
 

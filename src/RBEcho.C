@@ -280,9 +280,9 @@ RBEcho::setpreset (int npreset)
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Echo 1
-    {67, 64, 565, 64, 30, 59, 0, 127, 0, 0},
+    {64, 64, 90, 64, 64, 64, 64, 0, 1, 64},
     //Echo 2
-    {67, 64, 357, 64, 30, 59, 0, 64, 0 ,0 },
+    {64, 64, 90, 64, 64, 64, 64, 127, 1 ,64},
     //Echo 3
     {67, 75, 955, 64, 30, 59, 10, 0, 0 ,0 },
     //Simple Echo
@@ -338,8 +338,8 @@ RBEcho::changepar (int npar, int value)
       setreverse (value);
       break;
     case 8:
-      Psubdiv = value + 1;
-      subdiv = 1.0f/((float)Psubdiv);
+      Psubdiv = value;
+      subdiv = 1.0f/((float)(value + 1));
       delay = 1 + lrintf ( subdiv * fdelay * fSAMPLE_RATE );
       initdelays ();
       break;

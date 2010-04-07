@@ -1896,6 +1896,51 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Vocoder->changepar(5,value);
          break;
 
+    case 303:
+         efx_RBEcho->changepar(0,value);
+         break;
+    
+    case 304:     
+         efx_RBEcho->changepar(7,value);
+         break;
+
+    case 305:     
+         efx_RBEcho->changepar(1,value);
+         break;
+
+    case 306:     
+         efx_RBEcho->changepar(2,ret_Tempo(value));
+         break;
+
+    case 307:     
+         efx_RBEcho->changepar(3,value);
+         break;
+
+    case 308:     
+         efx_RBEcho->changepar(5,value);
+         break;
+
+    case 309:     
+         efx_RBEcho->changepar(6,value);
+         break;
+
+    case 310:     
+         efx_RBEcho->changepar(9,value);
+         break;
+
+    case 311:     
+         efx_RBEcho->changepar(4,value);
+         break;
+
+    case 312:
+         efx_Sustainer->changepar(0,value);
+         break;
+    
+    case 313:
+         efx_Sustainer->changepar(1,value);
+         break;     
+
+
    } 
       
     
