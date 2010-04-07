@@ -34,7 +34,7 @@ Waveshaper::Waveshaper()
   tmpgain = 1.0f;  // compression distortion temp variable
   dthresh = 0.25;
   dyno = 0.0f;
-  dynodecay = cSAMPLE_RATE * 0.0167f; //about 60Hz sub modulation from this
+  dynodecay = 0.0167f/(cSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
 
 };
 
@@ -316,13 +316,15 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 		   if (smps[i] > 0.0)
 		   {
 		    smps[i] = compg;
+		    dyno += compg;
+		    dyno *= dynodecay;
 		    }
 		   else 
 		   {
 		   smps[i] = -1.0f * compg;
-		   }  
-		   dyno += compg;
+		   dyno -= 0.5 * compg;
 		   dyno *= dynodecay;
+		   }  
 		   
 	   }
 	   else
