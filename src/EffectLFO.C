@@ -46,6 +46,7 @@ EffectLFO::EffectLFO ()
    b = 28.0f;
    c = 8.0f / 5.0f;
    scale = 1.0f/36.0f;
+   ratediv = 0.1f;
 
   updateparams ();
 
@@ -86,11 +87,13 @@ EffectLFO::updateparams ()
 
   xr = fmodf (xl + ((float)Pstereo - 64.0f) / 127.0f + 1.0f, 1.0f);
   
-  if ((h = incx) > 0.02) h = 0.02;  //keeps it stable
+  if ((h = incx*ratediv) > 0.02) h = 0.02;  //keeps it stable
   
+  a = 10.0f + (((float) RND) - 0.5f)*8.0f;
+  b = 28.0f + (((float) RND) - 0.5f)*12.0f;
   c = 1.25f + 3.0f * ((float) RND);
-           printf("incx %f x0 %f y0 %f z0 %f out %f c %f\n",incx,x0,y0,z0, (2.0f * radius - 1.0f), c);  
-   x0 = 0.1f;
+           printf("incx %f x0 %f y0 %f z0 %f out %f c %f b %f a %f\n",incx,x0,y0,z0, (2.0f * radius - 1.0f), c, b, a);  
+   x0 = 0.1f + 0.1f * ((float) RND);
    y0 = 0.0f;
    z0 = 0.2f;
    x1 = y1 = z1 = radius = 0.0f;

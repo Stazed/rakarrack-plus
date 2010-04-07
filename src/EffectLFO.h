@@ -57,6 +57,7 @@ private:
    float c;
    float scale;
    float iperiod; 
+   float ratediv;
 };
 
 
