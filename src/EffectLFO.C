@@ -40,7 +40,7 @@ EffectLFO::EffectLFO ()
   PLFOtype = 0;
   Pstereo = 96;
    
-   iperiod = ((float) PERIOD)/fSAMPLE_RATE;
+   iperiod = fPERIOD/fSAMPLE_RATE;
    h = iperiod;
    a = 10.0f;
    b = 28.0f;
