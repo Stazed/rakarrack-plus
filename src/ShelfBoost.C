@@ -105,7 +105,7 @@ void
 ShelfBoost::setpreset (int npreset)
 {
   const int PRESET_SIZE = 5;
-  const int NUM_PRESETS = 3;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Trebble
     {127, 64, 16000, 1, 24},
@@ -113,7 +113,8 @@ ShelfBoost::setpreset (int npreset)
     {127, 64, 4400, 1, 24},
     //Bass
     {127, 64, 220, 1, 24},
-    
+    //Distortion 1
+    {12, 100, 7600, 1, 24}    
 
   };
 

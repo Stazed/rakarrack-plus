@@ -5585,7 +5585,7 @@ shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
 shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
-shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
+shelf_level->value(rkr->efx_ShelfBoost->getpar(4));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5598,6 +5598,10 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
           }
           MenuItem {} {
             label Low
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Distortion 1} selected
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -5726,7 +5730,7 @@ if((int)vo_activar->value())rkr->Vocoder_Bypass=1;}
         }
       }
       Fl_Group SUSTAINER {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button sus_activar {
@@ -10052,8 +10056,7 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {selected
-    }
+rkr->Mvalue=0;} {}
   }
   Function {ActOnOff()} {} {
     code {int miralo;
