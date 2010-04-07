@@ -86,17 +86,16 @@ EffectLFO::updateparams ()
 
   xr = fmodf (xl + ((float)Pstereo - 64.0f) / 127.0f + 1.0f, 1.0f);
   
-  if ((h = incx) > 0.167) h = 0.167;  //keeps it stable
+  if ((h = incx) > 0.02) h = 0.02;  //keeps it stable
   
   c = 1.25f + 3.0f * ((float) RND);
-  
-  if( (x0 + y0 + z0) > 500.0f)
-  {
+           printf("incx %f x0 %f y0 %f z0 %f out %f c %f\n",incx,x0,y0,z0, (2.0f * radius - 1.0f), c);  
    x0 = 0.1f;
    y0 = 0.0f;
-   z0 = 0.0f;
+   z0 = 0.2f;
    x1 = y1 = z1 = radius = 0.0f;
-   }
+
+
 };
 
 
@@ -144,9 +143,10 @@ float EffectLFO::getlfoshape (float x)
       x0 = x1;
       y0 = y1;
       z0 = z1;
-      if((radius = (sqrt(x0*x0 + y0*y0 + z0*z0) * scale) - 0.25)  > 1.0) radius = 1.0;
+      if((radius = (sqrtf(x0*x0 + y0*y0 + z0*z0) * scale) - 0.25f)  > 1.0f) radius = 1.0f;
       if(radius < 0.0) radius = 0.0;    
     
+      out = 2.0f * radius - 1.0f;
     break;
         
 
