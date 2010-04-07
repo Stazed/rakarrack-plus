@@ -120,12 +120,12 @@ Sustainer::setpreset (int npreset)
   const int PRESET_SIZE = 2;
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Sus1
-    {67, 64},
-    //Sus2
-    {67, 64},
-    //Sus3
-    {67, 75},
+    //Moderate
+    {79, 54},
+    //Extreme
+    {16, 127},
+    //Mild
+    {120, 15},
 
   };
 
@@ -145,13 +145,13 @@ Sustainer::changepar (int npar, int value)
     {
     case 0:
       Pvolume = value;
-      level = (float) Pvolume/127.0f;
+      level = dB2rap(-30.0f * (1.0f - ((float) Pvolume/127.0f)));
       break;
     case 1:
       Psustain = value;
       fsustain =  (float) Psustain/127.0f;
       cratio = 1.25f - fsustain;
-      input = 1.0f + fsustain * 30.0f;
+      input = dB2rap (42.0f * fsustain - 6.0f);
       cthresh = 0.25 + fsustain;
       break;
 

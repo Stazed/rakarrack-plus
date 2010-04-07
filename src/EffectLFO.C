@@ -39,6 +39,13 @@ EffectLFO::EffectLFO ()
   Prandomness = 0;
   PLFOtype = 0;
   Pstereo = 96;
+   
+   iperiod = ((float) PERIOD)/fSAMPLE_RATE;
+   h = iperiod;
+   a = 10.0f;
+   b = 28.0f;
+   c = 8.0f / 5.0f;
+   scale = 1.0f/36.0f;
 
   updateparams ();
 
@@ -46,6 +53,8 @@ EffectLFO::EffectLFO ()
   ampl2 = (1.0f - lfornd) + lfornd * (float)RND;
   ampr1 = (1.0f - lfornd) + lfornd * (float)RND;
   ampr2 = (1.0f - lfornd) + lfornd * (float)RND;
+  
+
 };
 
 EffectLFO::~EffectLFO ()
@@ -71,11 +80,23 @@ EffectLFO::updateparams ()
   else if (lfornd > 1.0)
     lfornd = 1.0;
 
-  if (PLFOtype > 6)
+  if (PLFOtype > 7)
     PLFOtype = 0;		//this has to be updated if more lfo's are added
   lfotype = PLFOtype;
 
   xr = fmodf (xl + ((float)Pstereo - 64.0f) / 127.0f + 1.0f, 1.0f);
+  
+  if ((h = incx) > 0.167) h = 0.167;  //keeps it stable
+  
+  c = 1.25f + 3.0f * ((float) RND);
+  
+  if( (x0 + y0 + z0) > 500.0f)
+  {
+   x0 = 0.1f;
+   y0 = 0.0f;
+   z0 = 0.0f;
+   x1 = y1 = z1 = radius = 0.0f;
+   }
 };
 
 
@@ -115,6 +136,18 @@ float EffectLFO::getlfoshape (float x)
        tmpv = x * D_PI;
        out=sinf(tmpv+sinf(tmpv));  
      break; 
+    case 7:			// Lorenz Fractal
+    
+      x1 = x0 + h * a * (y0 - x0);
+      y1 = y0 + h * (x0 * (b - z0) - y0);
+      z1 = z0 + h * (x0 * y0 - c * z0);
+      x0 = x1;
+      y0 = y1;
+      z0 = z1;
+      if((radius = (sqrt(x0*x0 + y0*y0 + z0*z0) * scale) - 0.25)  > 1.0) radius = 1.0;
+      if(radius < 0.0) radius = 0.0;    
+    
+    break;
         
 
 

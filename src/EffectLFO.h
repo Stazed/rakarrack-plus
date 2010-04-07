@@ -48,6 +48,15 @@ private:
   float lfointensity;
   float lfornd;
   int lfotype;
+  
+  //Lorenz Fractal parameters
+   float x0,y0,z0,x1,y1,z1,radius;
+   float h;
+   float a;
+   float b;
+   float c;
+   float scale;
+   float iperiod; 
 };
 
 
