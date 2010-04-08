@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,18 +834,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {1541 80 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1534 73 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1885,7 +1883,7 @@ if((int)echo_activar->value())rkr->Echo_Bypass=1;}
         }
       }
       Fl_Group CHORUS {
-        user_data 1 open
+        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button chorus_activar {
@@ -1960,7 +1958,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
         Fl_Choice chorus_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open
+          callback {rkr->efx_Chorus->changepar(4,(int)o->value())}
           xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -1992,7 +1990,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label {L. Fractal} selected
+            label {L. Fractal}
             xywh {10 10 36 21} labelsize 9
           }
         }
@@ -2034,7 +2032,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
       }
       Fl_Group PHASER {
-        user_data 1 open
+        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button phaser_activar {
@@ -2162,7 +2160,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
         }
       }
       Fl_Group FLANGER {
-        user_data 1 open
+        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button flanger_activar {
@@ -2237,7 +2235,7 @@ flanger_subs->value(rkr->efx_Flanger->getpar(11));}
         }
         Fl_Choice flanger_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Flanger->changepar(4,(int)o->value());} open
+          callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
           xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}

@@ -40,7 +40,7 @@ EffectLFO::EffectLFO ()
   PLFOtype = 0;
   Pstereo = 96;
    
-   iperiod = ((float) PERIOD)/fSAMPLE_RATE;
+   iperiod = fPERIOD/fSAMPLE_RATE;
    h = iperiod;
    a = 10.0f;
    b = 28.0f;
@@ -92,7 +92,8 @@ EffectLFO::updateparams ()
   a = 10.0f + (((float) RND) - 0.5f)*8.0f;
   b = 28.0f + (((float) RND) - 0.5f)*12.0f;
   c = 1.25f + 3.0f * ((float) RND);
-           printf("incx %f x0 %f y0 %f z0 %f out %f c %f b %f a %f\n",incx,x0,y0,z0, (2.0f * radius - 1.0f), c, b, a);  
+
+// printf("incx %f x0 %f y0 %f z0 %f out %f c %f b %f a %f\n",incx,x0,y0,z0, (2.0f * radius - 1.0f), c, b, a);  
    x0 = 0.1f + 0.1f * ((float) RND);
    y0 = 0.0f;
    z0 = 0.2f;
