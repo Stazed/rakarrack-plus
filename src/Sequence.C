@@ -76,15 +76,17 @@ void
 Sequence::out (float * smpsl, float * smpsr)
 {
   int i;
-  float ldiff, rdiff, lmod, rmod, lfol, lfor;
+  float ldiff, rdiff, lfol, lfor;
+  float lmod = 0.0f;
+  float rmod = 0.0f;
   float ldbl, ldbr;
-  float oscount, lastoscount;
+  int oscount, lastoscount;
   
   ldiff = ifperiod * (fsequence[scount] - fsequence[lastscount]);  
   lfol = fsequence[lastcount];
   
-  oscount = scount + stdiff;
-  lastoscount = lastscount + stdiff;
+  oscount = scount + Pstdiff;
+  lastoscount = lastscount + Pstdiff;
   if (oscount > 7) oscount = oscount - 7;
   if (lastoscount > 7) lastoscount = lastoscount - 7;
   rdiff =  ifperiod * (fsequence[oscount] - fsequence[lastoscount]); 

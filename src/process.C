@@ -173,6 +173,7 @@ RKR::RKR ()
   efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr);
   efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled);
   efx_Sustainer = new Sustainer(efxoutl,efxoutr);
+  efx_Sequence = new Sequence(efxoutl,efxoutr);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -200,7 +201,7 @@ RKR::RKR ()
 
 // Names
 
-  NumEffects = 37;
+  NumEffects = 38;
 
   {
     static const char *los_names[] =
@@ -210,7 +211,7 @@ RKR::RKR ()
       "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",  "DistBand", 
       "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", 
       "Looper", "MuTroMojo", "Echoverse", "Coil Crafter", "ShelfBoost", "Vocoder",
-      "Sustainer"
+      "Sustainer", "Sequence"
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
@@ -1063,6 +1064,7 @@ RKR::cleanup_efx ()
   efx_ShelfBoost->cleanup();
   efx_Vocoder->cleanup();
   efx_Sustainer->cleanup();
+  efx_Sequence->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 
@@ -1416,6 +1418,15 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 		  Vol2_Efx();
                 }
               break;  
+
+	     case 37:
+              if (Sequence_Bypass)
+                {
+                  efx_Sequence->out(efxoutl, efxoutr);
+		  Vol_Efx(37,efx_Sequence->outvolume);
+                }
+              break;  
+
 
 	    }
 

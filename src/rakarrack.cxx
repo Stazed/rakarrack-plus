@@ -5396,6 +5396,137 @@ void RKRGUI::cb_sus_sus(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_sus_sus_i(o,v);
 }
 
+void RKRGUI::cb_seq_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Sequence_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Sequence->cleanup();
+findpos(37,(int)o->value());
+}
+void RKRGUI::cb_seq_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_activar_i(o,v);
+}
+
+void RKRGUI::cb_seq_preset_i(Fl_Choice* o, void*) {
+  rkr->Sequence_Bypass=0;
+rkr->efx_Sequence->setpreset((int) o->value());
+seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
+seq_q->value(rkr->efx_Sequence->getpar(10)-64);
+seq_amp->value(rkr->efx_Sequence->getpar(11));
+seq_tempo->value(rkr->efx_Sequence->getpar(9));
+seq_stdf->value(rkr->efx_Sequence->getpar(12));
+seq_1->value(rkr->efx_Sequence->getpar(0));
+seq_2->value(rkr->efx_Sequence->getpar(1));
+seq_3->value(rkr->efx_Sequence->getpar(2));
+seq_4->value(rkr->efx_Sequence->getpar(3));
+seq_5->value(rkr->efx_Sequence->getpar(4));
+seq_6->value(rkr->efx_Sequence->getpar(5));
+seq_7->value(rkr->efx_Sequence->getpar(6));
+seq_8->value(rkr->efx_Sequence->getpar(7));
+
+if((int)seq_activar->value()) rkr->Sequence_Bypass=1;
+}
+void RKRGUI::cb_seq_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_seq_preset[] = {
+ {"Jumpy", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Stair Step", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mild", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_seq_1_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(0,(int)o->value());
+}
+void RKRGUI::cb_seq_1(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_1_i(o,v);
+}
+
+void RKRGUI::cb_seq_2_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_seq_2(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_2_i(o,v);
+}
+
+void RKRGUI::cb_seq_3_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_seq_3(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_3_i(o,v);
+}
+
+void RKRGUI::cb_seq_4_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_seq_4(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_4_i(o,v);
+}
+
+void RKRGUI::cb_seq_5_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_seq_5(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_5_i(o,v);
+}
+
+void RKRGUI::cb_seq_6_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_seq_6(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_6_i(o,v);
+}
+
+void RKRGUI::cb_seq_7_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_seq_7(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_7_i(o,v);
+}
+
+void RKRGUI::cb_seq_8_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_seq_8(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_8_i(o,v);
+}
+
+void RKRGUI::cb_seq_WD_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(8,(int)(o->value()+64));
+}
+void RKRGUI::cb_seq_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_WD_i(o,v);
+}
+
+void RKRGUI::cb_seq_tempo_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_seq_tempo(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_tempo_i(o,v);
+}
+
+void RKRGUI::cb_seq_q_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(10,(int)(o->value()));
+}
+void RKRGUI::cb_seq_q(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_q_i(o,v);
+}
+
+void RKRGUI::cb_seq_amp_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(11,(int)o->value());
+}
+void RKRGUI::cb_seq_amp(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_amp_i(o,v);
+}
+
+void RKRGUI::cb_seq_stdf_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_seq_stdf(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_stdf_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -13404,6 +13535,246 @@ R average.");
       } // SliderW* sus_sus
       SUSTAINER->end();
     } // Fl_Group* SUSTAINER
+    { SEQUENCE = new Fl_Group(320, 211, 158, 184);
+      SEQUENCE->box(FL_UP_BOX);
+      SEQUENCE->color((Fl_Color)FL_FOREGROUND_COLOR);
+      SEQUENCE->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      SEQUENCE->labelfont(1);
+      SEQUENCE->user_data((void*)(1));
+      SEQUENCE->align(96|FL_ALIGN_INSIDE);
+      { seq_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        seq_activar->shortcut(0x36);
+        seq_activar->color((Fl_Color)62);
+        seq_activar->selection_color((Fl_Color)1);
+        seq_activar->labelsize(10);
+        seq_activar->callback((Fl_Callback*)cb_seq_activar, (void*)(2));
+        seq_activar->align(68|FL_ALIGN_INSIDE);
+        seq_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* seq_activar
+      { seq_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        seq_preset->down_box(FL_BORDER_BOX);
+        seq_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        seq_preset->labelsize(10);
+        seq_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_preset->textsize(10);
+        seq_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_preset->callback((Fl_Callback*)cb_seq_preset);
+        seq_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        seq_preset->menu(menu_seq_preset);
+      } // Fl_Choice* seq_preset
+      { seq_1 = new SliderW(369, 238, 100, 10, "1");
+        seq_1->type(5);
+        seq_1->box(FL_FLAT_BOX);
+        seq_1->color((Fl_Color)178);
+        seq_1->selection_color((Fl_Color)62);
+        seq_1->labeltype(FL_NORMAL_LABEL);
+        seq_1->labelfont(0);
+        seq_1->labelsize(10);
+        seq_1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_1->maximum(127);
+        seq_1->step(1);
+        seq_1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_1->callback((Fl_Callback*)cb_seq_1);
+        seq_1->align(FL_ALIGN_LEFT);
+        seq_1->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_1
+      { seq_2 = new SliderW(369, 250, 100, 10, "2");
+        seq_2->type(5);
+        seq_2->box(FL_FLAT_BOX);
+        seq_2->color((Fl_Color)178);
+        seq_2->selection_color((Fl_Color)62);
+        seq_2->labeltype(FL_NORMAL_LABEL);
+        seq_2->labelfont(0);
+        seq_2->labelsize(10);
+        seq_2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_2->maximum(127);
+        seq_2->step(1);
+        seq_2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_2->callback((Fl_Callback*)cb_seq_2);
+        seq_2->align(FL_ALIGN_LEFT);
+        seq_2->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_2
+      { seq_3 = new SliderW(369, 262, 100, 10, "3");
+        seq_3->type(5);
+        seq_3->box(FL_FLAT_BOX);
+        seq_3->color((Fl_Color)178);
+        seq_3->selection_color((Fl_Color)62);
+        seq_3->labeltype(FL_NORMAL_LABEL);
+        seq_3->labelfont(0);
+        seq_3->labelsize(10);
+        seq_3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_3->maximum(127);
+        seq_3->step(1);
+        seq_3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_3->callback((Fl_Callback*)cb_seq_3);
+        seq_3->align(FL_ALIGN_LEFT);
+        seq_3->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_3
+      { seq_4 = new SliderW(369, 274, 100, 10, "4");
+        seq_4->type(5);
+        seq_4->box(FL_FLAT_BOX);
+        seq_4->color((Fl_Color)178);
+        seq_4->selection_color((Fl_Color)62);
+        seq_4->labeltype(FL_NORMAL_LABEL);
+        seq_4->labelfont(0);
+        seq_4->labelsize(10);
+        seq_4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_4->maximum(127);
+        seq_4->step(1);
+        seq_4->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_4->callback((Fl_Callback*)cb_seq_4);
+        seq_4->align(FL_ALIGN_LEFT);
+        seq_4->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_4
+      { seq_5 = new SliderW(370, 286, 100, 10, "5");
+        seq_5->type(5);
+        seq_5->box(FL_FLAT_BOX);
+        seq_5->color((Fl_Color)178);
+        seq_5->selection_color((Fl_Color)62);
+        seq_5->labeltype(FL_NORMAL_LABEL);
+        seq_5->labelfont(0);
+        seq_5->labelsize(10);
+        seq_5->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_5->maximum(127);
+        seq_5->step(1);
+        seq_5->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_5->callback((Fl_Callback*)cb_seq_5);
+        seq_5->align(FL_ALIGN_LEFT);
+        seq_5->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_5
+      { seq_6 = new SliderW(370, 298, 100, 10, "6");
+        seq_6->type(5);
+        seq_6->box(FL_FLAT_BOX);
+        seq_6->color((Fl_Color)178);
+        seq_6->selection_color((Fl_Color)62);
+        seq_6->labeltype(FL_NORMAL_LABEL);
+        seq_6->labelfont(0);
+        seq_6->labelsize(10);
+        seq_6->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_6->maximum(127);
+        seq_6->step(1);
+        seq_6->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_6->callback((Fl_Callback*)cb_seq_6);
+        seq_6->align(FL_ALIGN_LEFT);
+        seq_6->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_6
+      { seq_7 = new SliderW(370, 310, 100, 10, "7");
+        seq_7->type(5);
+        seq_7->box(FL_FLAT_BOX);
+        seq_7->color((Fl_Color)178);
+        seq_7->selection_color((Fl_Color)62);
+        seq_7->labeltype(FL_NORMAL_LABEL);
+        seq_7->labelfont(0);
+        seq_7->labelsize(10);
+        seq_7->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_7->maximum(127);
+        seq_7->step(1);
+        seq_7->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_7->callback((Fl_Callback*)cb_seq_7);
+        seq_7->align(FL_ALIGN_LEFT);
+        seq_7->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_7
+      { seq_8 = new SliderW(370, 322, 100, 10, "8");
+        seq_8->type(5);
+        seq_8->box(FL_FLAT_BOX);
+        seq_8->color((Fl_Color)178);
+        seq_8->selection_color((Fl_Color)62);
+        seq_8->labeltype(FL_NORMAL_LABEL);
+        seq_8->labelfont(0);
+        seq_8->labelsize(10);
+        seq_8->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_8->maximum(127);
+        seq_8->step(1);
+        seq_8->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_8->callback((Fl_Callback*)cb_seq_8);
+        seq_8->align(FL_ALIGN_LEFT);
+        seq_8->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_8
+      { seq_WD = new SliderW(369, 334, 100, 10, "Wet/Dry");
+        seq_WD->type(5);
+        seq_WD->box(FL_FLAT_BOX);
+        seq_WD->color((Fl_Color)178);
+        seq_WD->selection_color((Fl_Color)62);
+        seq_WD->labeltype(FL_NORMAL_LABEL);
+        seq_WD->labelfont(0);
+        seq_WD->labelsize(10);
+        seq_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_WD->minimum(-64);
+        seq_WD->maximum(64);
+        seq_WD->step(1);
+        seq_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_WD->callback((Fl_Callback*)cb_seq_WD);
+        seq_WD->align(FL_ALIGN_LEFT);
+        seq_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_WD
+      { seq_tempo = new SliderW(369, 346, 100, 10, "Smooth");
+        seq_tempo->type(5);
+        seq_tempo->box(FL_FLAT_BOX);
+        seq_tempo->color((Fl_Color)178);
+        seq_tempo->selection_color((Fl_Color)62);
+        seq_tempo->labeltype(FL_NORMAL_LABEL);
+        seq_tempo->labelfont(0);
+        seq_tempo->labelsize(10);
+        seq_tempo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_tempo->minimum(1);
+        seq_tempo->maximum(600);
+        seq_tempo->step(1);
+        seq_tempo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_tempo->callback((Fl_Callback*)cb_seq_tempo);
+        seq_tempo->align(FL_ALIGN_LEFT);
+        seq_tempo->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_tempo
+      { seq_q = new SliderW(369, 358, 100, 10, "Q");
+        seq_q->type(5);
+        seq_q->box(FL_FLAT_BOX);
+        seq_q->color((Fl_Color)178);
+        seq_q->selection_color((Fl_Color)62);
+        seq_q->labeltype(FL_NORMAL_LABEL);
+        seq_q->labelfont(0);
+        seq_q->labelsize(10);
+        seq_q->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_q->minimum(-64);
+        seq_q->maximum(64);
+        seq_q->step(1);
+        seq_q->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_q->callback((Fl_Callback*)cb_seq_q);
+        seq_q->align(FL_ALIGN_LEFT);
+        seq_q->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_q
+      { seq_amp = new SliderW(369, 370, 100, 10, "Amp");
+        seq_amp->type(5);
+        seq_amp->box(FL_FLAT_BOX);
+        seq_amp->color((Fl_Color)178);
+        seq_amp->selection_color((Fl_Color)62);
+        seq_amp->labeltype(FL_NORMAL_LABEL);
+        seq_amp->labelfont(0);
+        seq_amp->labelsize(10);
+        seq_amp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_amp->maximum(127);
+        seq_amp->step(1);
+        seq_amp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_amp->callback((Fl_Callback*)cb_seq_amp);
+        seq_amp->align(FL_ALIGN_LEFT);
+        seq_amp->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_amp
+      { seq_stdf = new SliderW(369, 382, 100, 10, "St.df");
+        seq_stdf->type(5);
+        seq_stdf->box(FL_FLAT_BOX);
+        seq_stdf->color((Fl_Color)178);
+        seq_stdf->selection_color((Fl_Color)62);
+        seq_stdf->labeltype(FL_NORMAL_LABEL);
+        seq_stdf->labelfont(0);
+        seq_stdf->labelsize(10);
+        seq_stdf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_stdf->maximum(7);
+        seq_stdf->step(1);
+        seq_stdf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_stdf->callback((Fl_Callback*)cb_seq_stdf);
+        seq_stdf->align(FL_ALIGN_LEFT);
+        seq_stdf->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_stdf
+      SEQUENCE->end();
+    } // Fl_Group* SEQUENCE
     { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -15642,6 +16013,9 @@ for (i=1; i<=t; i++)
         case 36:
         SUSTAINER->hide();
         break;
+        case 37:
+        SEQUENCE->hide();
+        break;
         
 
 
@@ -17601,6 +17975,10 @@ switch(miralo)
   sus_activar->value(rkr->Sustainer_Bypass);
   sus_activar->do_callback();
   break;
+  case 37:
+  seq_activar->value(rkr->Sequence_Bypass);
+  seq_activar->do_callback();
+  break;
 
   
   case 121:
@@ -17697,6 +18075,7 @@ COILCRAFTER->image(InOut->image());
 SHELFBOOST->image(InOut->image());
 VOCODER->image(InOut->image());
 SUSTAINER->image(InOut->image());
+SEQUENCE->image(InOut->image());
 
 
 Tap->image(InOut->image());
