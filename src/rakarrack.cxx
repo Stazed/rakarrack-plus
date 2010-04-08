@@ -13707,7 +13707,7 @@ R average.");
         seq_WD->align(FL_ALIGN_LEFT);
         seq_WD->when(FL_WHEN_CHANGED);
       } // SliderW* seq_WD
-      { seq_tempo = new SliderW(369, 346, 100, 10, "Smooth");
+      { seq_tempo = new SliderW(369, 346, 100, 10, "Tempo");
         seq_tempo->type(5);
         seq_tempo->box(FL_FLAT_BOX);
         seq_tempo->color((Fl_Color)178);
@@ -16345,6 +16345,13 @@ switch (rkr->efx_order[i])
        sus_activar->shortcut(s[i]);
        SUSTAINER->show();
        if(rkr->Sustainer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 37:
+       SEQUENCE->position(x[i],y[i]);
+       seq_activar->shortcut(s[i]);
+       SEQUENCE->show();
+       if(rkr->Sequence_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 

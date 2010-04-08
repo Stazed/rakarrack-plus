@@ -5881,7 +5881,7 @@ if((int)seq_activar->value()) rkr->Sequence_Bypass=1;}
           class SliderW
         }
         Fl_Value_Slider seq_tempo {
-          label Smooth
+          label Tempo
           callback {rkr->efx_Sequence->changepar(9,(int)o->value());}
           xywh {369 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
           class SliderW
@@ -5900,7 +5900,7 @@ if((int)seq_activar->value()) rkr->Sequence_Bypass=1;}
         }
         Fl_Value_Slider seq_stdf {
           label {St.df}
-          callback {rkr->efx_Sequence->changepar(12,(int)o->value());}
+          callback {rkr->efx_Sequence->changepar(12,(int)o->value());} selected
           xywh {369 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
           class SliderW
         }
@@ -8732,6 +8732,13 @@ switch (rkr->efx_order[i])
        if(rkr->Sustainer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
+   case 37:
+       SEQUENCE->position(x[i],y[i]);
+       seq_activar->shortcut(s[i]);
+       SEQUENCE->show();
+       if(rkr->Sequence_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
 
  }
  
@@ -10374,8 +10381,7 @@ switch(miralo)
   break;
      
 
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;
