@@ -5810,7 +5810,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 
-if((int)seq_activar->value()) rkr->Sequence_Bypass=1;}
+if((int)seq_activar->value()) rkr->Sequence_Bypass=1;} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5888,7 +5888,7 @@ if((int)seq_activar->value()) rkr->Sequence_Bypass=1;}
         }
         Fl_Value_Slider seq_q {
           label Q
-          callback {rkr->efx_Sequence->changepar(10,(int)(o->value()));}
+          callback {rkr->efx_Sequence->changepar(10,(int)o->value()+64);}
           xywh {369 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -5900,7 +5900,7 @@ if((int)seq_activar->value()) rkr->Sequence_Bypass=1;}
         }
         Fl_Value_Slider seq_stdf {
           label {St.df}
-          callback {rkr->efx_Sequence->changepar(12,(int)o->value());} selected
+          callback {rkr->efx_Sequence->changepar(12,(int)o->value());}
           xywh {369 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
           class SliderW
         }

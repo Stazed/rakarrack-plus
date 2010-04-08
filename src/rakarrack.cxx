@@ -5507,7 +5507,7 @@ void RKRGUI::cb_seq_tempo(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_seq_q_i(SliderW* o, void*) {
-  rkr->efx_Sequence->changepar(10,(int)(o->value()));
+  rkr->efx_Sequence->changepar(10,(int)o->value()+64);
 }
 void RKRGUI::cb_seq_q(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_q_i(o,v);
