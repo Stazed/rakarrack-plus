@@ -62,8 +62,7 @@ Sequence::~Sequence ()
 void
 Sequence::cleanup ()
 {
-  delete (filterl);
-  delete (filterr);
+
 };
 
 
