@@ -300,30 +300,27 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
       break;                                                               
         
 	case 20:  //Compression
-        cratio = 1.25f - ws;
-	ws =  2.0f*ws*CRUNCH_GAIN + 1.0f;
+        cratio = 1.25f - 0.75f * ws;
+	ws =  1.5f*ws*CRUNCH_GAIN + 4.0f;
 	   for (i = 0; i < n; i++)    //apply compression 
 	   {
-	   tmpv = fabs(dynodecay + ws * smps[i]);
+	   tmpv = fabs(ws * smps[i]);
+  		    dyno += 0.01f * (1.0f - dynodecay) * tmpv;
+		    dyno *= dynodecay;	
+	   tmpv += dyno;
 
-	   if(dyno > 0.5) dyno = 0.5 + dynodecay*(dyno - 0.5);
-   
 	   if(tmpv > dthresh)                                //if envelope of signal exceeds thresh, then compress
 	   {
 	   compg = dthresh + dthresh*(tmpv - dthresh)/tmpv; 
 	   dthresh = 0.25f + cratio*(compg - dthresh);   //dthresh changes dynamically
 	   
-		   if (smps[i] > 0.0)
+		   if (smps[i] > 0.0f)
 		   {
 		    smps[i] = compg;
-		    dyno += compg;
-		    dyno *= dynodecay;
 		    }
 		   else 
 		   {
 		   smps[i] = -1.0f * compg;
-		   dyno -= 0.5 * compg;
-		   dyno *= dynodecay;
 		   }  
 		   
 	   }
@@ -334,7 +331,8 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
    
 	   if(tmpv < dthresh) dthresh = tmpv;
 	   if(dthresh < 0.25f) dthresh = 0.25f;
-   
+	   
+  
 	   };	
 	break;
         
