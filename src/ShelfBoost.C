@@ -74,14 +74,8 @@ ShelfBoost::out (float * smpsl, float * smpsr)
 int i;
 
 
-//RB1l->filterout(smpsl);
-//if(Pstereo) RB1r->filterout(smpsr);
-
-for(i=0; i<PERIOD; i++)
-{
-smpsl[i]=RB1l->filterout_s(smpsl[i]);
-smpsr[i]=RB1r->filterout_s(smpsr[i]);
-}
+RB1l->filterout(smpsl);
+if(Pstereo) RB1r->filterout(smpsr);
 
 
 for(i=0; i<PERIOD; i++)
