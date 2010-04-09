@@ -337,11 +337,11 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	break;
         
        case 21: //Overdrive
-         ws = powf (4.0f, ws * ws * 3.0f) - 1.0f + 0.001f;
+         ws = powf (10.0f, ws * ws * 3.0f) - 1.0f + 0.001f;
          for (i = 0; i < n; i++)
 	{
 
-         if(smps[i]>0.0f) smps[i] = sqrtf(smps[i])*ws; else smps[i] = -sqrtf(-smps[i])*ws;
+         if(smps[i]>0.0f) smps[i] = sqrtf(smps[i]*ws); else smps[i] = -sqrtf(-smps[i]*ws);
         } 
          
          
