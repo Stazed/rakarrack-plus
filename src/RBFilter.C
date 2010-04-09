@@ -244,3 +244,79 @@ RBFilter::filterout (float * smp)
     smp[i] *= outgain;
 
 };
+
+float
+RBFilter::filterout_s (float smp)
+{
+  int i;
+
+  if (needsinterpolation != 0)
+    {
+      for (i = 0; i < stages + 1; i++)
+	smp=singlefilterout_s (smp, st[i], ipar);
+        needsinterpolation = 0;
+    };
+
+  for (i = 0; i < stages + 1; i++)
+    smp=singlefilterout_s (smp, st[i], par);
+
+
+    return(smp *= outgain);
+
+};
+
+float
+RBFilter::singlefilterout_s (float smp, fstage & x, parameters & par)
+{
+  int i;
+  float *out = NULL;
+  switch (type)
+    {
+    case 0:
+      out = &x.low;
+      break;
+    case 1:
+      out = &x.high;
+      break;
+    case 2:
+      out = &x.band;
+      break;
+    case 3:
+      out = &x.notch;
+      break;
+    };
+
+  float tmpq, tmpsq, tmpf, qdiff, sqdiff, fdiff;
+  qdiff = (par.q - oldq)*iper;
+  sqdiff = (par.q_sqrt - oldsq)*iper;
+  fdiff = (par.f - oldf)*iper;
+  tmpq = oldq;
+  tmpsq = oldsq;
+  tmpf = oldf;
+
+      tmpq += qdiff;
+      tmpsq += sqdiff;
+      tmpf += fdiff;   //Modulation interpolation
+      
+      x.low = x.low + tmpf * x.band;
+      x.high = tmpsq * smp - x.low - tmpq * x.band;
+      x.band = tmpf * x.high + x.band;
+      
+      if(en_mix)
+      {
+      smp = lpg * x.low + hpg * x.high + bpg * x.band;
+      }
+      else
+      {
+      x.notch = x.high + x.low;
+      smp = *out;
+      }
+    
+    oldf = par.f;
+    oldq = par.q;
+    oldsq = par.q_sqrt;
+    
+    return(smp);    
+};
+
+

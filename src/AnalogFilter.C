@@ -470,13 +470,68 @@ AnalogFilter::filterout (float * smp)
 
 };
 
+
+float
+AnalogFilter::filterout_s(float smp)
+{
+  int i;
+     if (needsinterpolation != 0)
+      {
+      for (i = 0; i < stages + 1; i++)
+	smp=singlefilterout_s(smp, oldx[i], oldy[i], oldc, oldd);
+      }
+
+      for (i = 0; i < stages + 1; i++)
+        smp=singlefilterout_s(smp, x[i], y[i], c, d);
+
+     return(smp);
+
+};
+
+
+
+float
+AnalogFilter::singlefilterout_s (float smp, fstage & x, fstage & y,
+			       float * c, float * d)
+{
+  float y0;
+  if (order == 1)
+    {				//First order filter
+	  y0 = smp* c[0] + x.c1 * c[1] + y.c1 * d[1];
+	  y.c1 = y0;
+	  x.c1 = smp;
+	  //output
+	  smp = y0 + DENORMAL_GUARD;
+	
+    };
+  if (order == 2)
+    {				//Second order filter
+	  y0 =
+	    (smp* c[0]) + (x.c1 * c[1]) + (x.c2 * c[2]) + (y.c1 * d[1]) +
+	    (y.c2 * d[2]);
+	  y.c2 = y.c1;
+	  y.c1 = y0;
+	  x.c2 = x.c1;
+	  x.c1 = smp;
+	  //output
+	  smp = y0 + DENORMAL_GUARD;
+	
+    };
+
+return(smp);
+
+};
+
+
+
+
+
+
 void  AnalogFilter::reversecoeffs()
 {
 	float tmpd1, tmpd2, tmpc0;
-//	  printf("before:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], d[1], d[2]);	
 	  tmpd1 = -1.0f * d[1];
 	  tmpd2 = -1.0f * d[2];
-//	  printf("before:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], tmpd1, tmpd2);
 	  
 	  tmpc0 = 10.0f * c[0];
 
@@ -487,7 +542,6 @@ void  AnalogFilter::reversecoeffs()
 	  c[2] = tmpd2*tmpc0;
 	  
 	  
-//	  printf("after:\nc0 = %f; \nc1 = %f; \nc2 = %f; \nd1 = %f; \nd2 = %f;\n\n", c[0], c[1], c[2], d[1], d[2]);	
 };
 
 float AnalogFilter::H (float freq)

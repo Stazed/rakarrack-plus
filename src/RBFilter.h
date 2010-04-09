@@ -34,6 +34,8 @@ public:
 	    unsigned char Fstages);
    ~RBFilter ();
   void filterout (float * smp);
+  float filterout_s (float smp);
+
   void setfreq (float frequency);
   void setfreq_and_q (float frequency, float q_);
   void setq (float q_);
@@ -57,6 +59,8 @@ private:
 
 
   void singlefilterout (float * smp, fstage & x, parameters & par);
+  float singlefilterout_s (float smp, fstage & x, parameters & par);
+
   void computefiltercoefs ();
   int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
   int stages;			//how many times the filter is applied (0->1,1->2,etc.)
