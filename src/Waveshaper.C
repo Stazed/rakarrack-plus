@@ -289,7 +289,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
       break;                                                               
 
-       case 19:
+      case 19:
       ws =  ws * D_PI + 0.0001f;
        if (ws < 1.57f)
 	tmpv = sinf (ws);
@@ -299,7 +299,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
        smps[i]=sinf(ws * smps[i] + sinf(ws * smps[i])/tmpv);  
       break;                                                               
         
-	case 20:  //Compression
+      case 20:  //Compression
         cratio = 1.25f - 0.75f * ws;
 	ws =  1.5f*ws*CRUNCH_GAIN + 4.0f;
 	   for (i = 0; i < n; i++)    //apply compression 
@@ -336,9 +336,19 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	   };	
 	break;
         
+       case 21: //Overdrive
+         ws = powf (2.0f, ws * ws * 3.0f) - 1.0f + 0.001f;
+         for (i = 0; i < n; i++)
+	{
 
+         if(smps[i]>0.0f) smps[i] = sqrtf(smps[i])*ws; else smps[i] = -sqrtf(-smps[i])*ws;
+        } 
+         
+         
+         break;
  
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions
     };
+
 
 };

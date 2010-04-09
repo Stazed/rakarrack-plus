@@ -834,8 +834,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {selected
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -843,7 +842,7 @@ class RKRGUI {selected
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1514 48 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1537,7 +1536,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
+          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -1619,6 +1618,10 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           MenuItem {} {
             label Compress
             xywh {10 10 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Overdrive selected
+            xywh {0 0 36 21} labelsize 9
           }
         }
         Fl_Check_Button dist_neg {

@@ -333,8 +333,6 @@ Distorsion::changepar (int npar, int value)
       Plevel = value;
       break;
     case 5:
-      if (value > 19)
-	value = 19;		//this must be increased if more distorsion types are added
       Ptype = value;
       break;
     case 6:

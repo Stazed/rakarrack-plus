@@ -1486,6 +1486,7 @@ Fl_Menu_Item RKRGUI::menu_dist_tipo[] = {
  {"M.Square", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"M.Saw", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Compress", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Overdrive", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
