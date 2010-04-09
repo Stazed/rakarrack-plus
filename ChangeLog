@@ -1,5 +1,7 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Added Effect Sequence.
+- Added Overdrive waveshape.
 - Added Effect Sustainer.
 - Added Compress whaveshape.
 - Added jack transport beats per minute to Tap Tempo.
