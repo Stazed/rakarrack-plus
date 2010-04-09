@@ -2634,15 +2634,15 @@ private:
   void cb_seq_q_i(SliderW*, void*);
   static void cb_seq_q(SliderW*, void*);
 public:
-  SliderW *seq_amp;
-private:
-  void cb_seq_amp_i(SliderW*, void*);
-  static void cb_seq_amp(SliderW*, void*);
-public:
   SliderW *seq_stdf;
 private:
   void cb_seq_stdf_i(SliderW*, void*);
   static void cb_seq_stdf(SliderW*, void*);
+public:
+  Fl_Check_Button *seq_amp;
+private:
+  void cb_seq_amp_i(Fl_Check_Button*, void*);
+  static void cb_seq_amp(Fl_Check_Button*, void*);
 public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;

@@ -834,7 +834,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {selected
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -842,8 +843,8 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
-      xywh {1521 55 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} open
+      xywh {1514 48 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5781,7 +5782,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
       }
       Fl_Group SEQUENCE {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button seq_activar {
           label On
@@ -5810,7 +5811,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 
-if((int)seq_activar->value()) rkr->Sequence_Bypass=1;} selected
+if((int)seq_activar->value()) rkr->Sequence_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5892,17 +5893,17 @@ if((int)seq_activar->value()) rkr->Sequence_Bypass=1;} selected
           xywh {369 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
-        Fl_Value_Slider seq_amp {
-          label Amp
-          callback {rkr->efx_Sequence->changepar(11,(int)o->value());}
-          xywh {369 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
         Fl_Value_Slider seq_stdf {
           label {St.df}
           callback {rkr->efx_Sequence->changepar(12,(int)o->value());}
-          xywh {369 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
+          xywh {369 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Check_Button seq_amp {
+          label Amplitude
+          user_data 2
+          callback {rkr->efx_Sequence->changepar(11,(int)o->value())}
+          xywh {368 380 15 14} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tuner {
