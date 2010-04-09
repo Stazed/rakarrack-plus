@@ -45,8 +45,8 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
   setpreset (Ppreset);
   
-  filterl->setmix(1, -0.25f, 1.0f, 0.1f);
-  filterr->setmix(1, -0.25f, 1.0f, 0.1f);  
+  filterl->setmix(1, 1.0f, -0.5f, 0.25f);
+  filterr->setmix(1, 1.0f, -0.5f, 0.25f);  
 
   cleanup ();
 };
@@ -187,7 +187,7 @@ Sequence::changepar (int npar, int value)
       intperiod = (int) fperiod;
       break;
     case 10:
-      Pq = value;
+      Pq = 2 * value;
       fq = (float) value;
       break;
     case 11:
