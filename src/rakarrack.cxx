@@ -1406,16 +1406,16 @@ void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_dist_preset_i(Fl_Choice* o, void* v) {
   if(!v) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
 dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
+dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
 dist_drive->value(rkr->efx_Distorsion->getpar(3));
 dist_level->value(rkr->efx_Distorsion->getpar(4));
 dist_tipo->value(rkr->efx_Distorsion->getpar(5));
 dist_neg->value(rkr->efx_Distorsion->getpar(6));
-dist_st->value(rkr->efx_Distorsion->getpar(9));
-dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
-dist_pf->value(rkr->efx_Distorsion->getpar(10));
 dist_lpf->value(rkr->efx_Distorsion->getpar(7));
 dist_hpf->value(rkr->efx_Distorsion->getpar(8));
+dist_st->value(rkr->efx_Distorsion->getpar(9));
+dist_pf->value(rkr->efx_Distorsion->getpar(10));
 dist_oct->value(rkr->efx_Distorsion->getpar(12));
 }
 void RKRGUI::cb_dist_preset(Fl_Choice* o, void* v) {
@@ -1552,16 +1552,16 @@ void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_ovrd_preset_i(Fl_Choice* o, void* v) {
   if(!v)rkr->efx_Overdrive->setpreset((int) o->value());
 ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
+ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
 ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
 ovrd_level->value(rkr->efx_Overdrive->getpar(4));
 ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
 ovrd_neg->value(rkr->efx_Overdrive->getpar(6));
-ovrd_st->value(rkr->efx_Overdrive->getpar(9));
-ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
-ovrd_pf->value(rkr->efx_Overdrive->getpar(10));
 ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
 ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
+ovrd_st->value(rkr->efx_Overdrive->getpar(9));
+ovrd_pf->value(rkr->efx_Overdrive->getpar(10));
 }
 void RKRGUI::cb_ovrd_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_preset_i(o,v);
@@ -2475,8 +2475,8 @@ Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
 Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(4));
 Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
 Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
-Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
 Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
+Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
 Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
 Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
 if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;
