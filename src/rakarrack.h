@@ -511,11 +511,11 @@ private:
   void cb_chorus_activar_i(Fl_Light_Button*, void*);
   static void cb_chorus_activar(Fl_Light_Button*, void*);
 public:
-  Fl_Choice *chorux_preset;
+  Fl_Choice *chorus_preset;
 private:
-  void cb_chorux_preset_i(Fl_Choice*, void*);
-  static void cb_chorux_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_chorux_preset[];
+  void cb_chorus_preset_i(Fl_Choice*, void*);
+  static void cb_chorus_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_chorus_preset[];
 public:
   SliderW *chorus_WD;
 private:

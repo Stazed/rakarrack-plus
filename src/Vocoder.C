@@ -154,7 +154,8 @@ Vocoder::out (float * smpsl, float * smpsr)
        
        if(filterbank[j].speak < gate) filterbank[j].speak = 0.0f;
        tempgain1 = filterbank[j].gain;
-       for (i = 0; i<PERIOD; i++)
+
+      for (i = 0; i<PERIOD; i++)
        { 
        if(fabs(vocbuf[i]) > filterbank[j].speak) filterbank[j].speak = fabs(vocbuf[i]);  //Leaky Peak detector
 
