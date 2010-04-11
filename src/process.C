@@ -783,8 +783,8 @@ RKR::Cabinet_setpreset (int npreset)
 
 
 
-int
-RKR::EQ1_setpreset (int func, int num, int npreset)
+void
+RKR::EQ1_setpreset (int npreset)
 {
 
   const int PRESET_SIZE = 12;
@@ -798,9 +798,6 @@ RKR::EQ1_setpreset (int func, int num, int npreset)
     {71, 68, 64, 64, 64, 64, 64, 64, 66, 69, 64, 40}
   };
 
-  if (func)
-    return ((int) presets[npreset][num]);
-
   if (npreset >= NUM_PRESETS)
     npreset = NUM_PRESETS - 1;
   for (int n = 0; n < 10; n++)
@@ -808,14 +805,13 @@ RKR::EQ1_setpreset (int func, int num, int npreset)
   efx_EQ1->changepar (0, presets[npreset][10]);
   for (int n = 0; n < 10; n++)
     efx_EQ1->changepar (n * 5 + 13, presets[npreset][11]);
-  return (0);
 
 };
 
 
 
-int
-RKR::EQ2_setpreset (int func, int num, int npreset)
+void
+RKR::EQ2_setpreset (int npreset)
 {
 
 
@@ -831,9 +827,6 @@ RKR::EQ2_setpreset (int func, int num, int npreset)
   };
 
 
-  if (func)
-    return ((int) presets[npreset][num]);
-
   if (npreset >= NUM_PRESETS)
     npreset = NUM_PRESETS - 1;
   for (int n = 0; n < 3; n++)
@@ -843,7 +836,6 @@ RKR::EQ2_setpreset (int func, int num, int npreset)
       efx_EQ2->changepar (n * 5 + 13, presets[npreset][n * 3 + 2]);
     }
   efx_EQ2->changepar (0, presets[npreset][9]);
-  return (0);
 };
 
 

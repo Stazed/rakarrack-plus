@@ -268,7 +268,6 @@ RBFilter::filterout_s (float smp)
 float
 RBFilter::singlefilterout_s (float smp, fstage & x, parameters & par)
 {
-  int i;
   float *out = NULL;
   switch (type)
     {

@@ -192,8 +192,8 @@ public:
   int Message (const char *labelwin, const char *message_text);
   char *PrefNom (const char *dato);
 
-  int EQ1_setpreset (int func, int num, int npreset);
-  int EQ2_setpreset (int func, int num, int npreset);
+  void EQ1_setpreset (int npreset);
+  void EQ2_setpreset (int npreset);
   int Cabinet_setpreset (int npreset);
   void miramidi ();
   void InitMIDI ();

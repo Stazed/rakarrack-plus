@@ -1185,20 +1185,19 @@ void RKRGUI::cb_eq_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_eq_preset_i(Fl_Choice* o, void* v) {
-  int i=0;
-if(!v)i=rkr->EQ1_setpreset(0,0,(int)o->value());
-eq_1->value(rkr->EQ1_setpreset(1,0,(int)o->value())-64);
-eq_2->value(rkr->EQ1_setpreset(1,1,(int)o->value())-64);
-eq_3->value(rkr->EQ1_setpreset(1,2,(int)o->value())-64);
-eq_4->value(rkr->EQ1_setpreset(1,3,(int)o->value())-64);
-eq_5->value(rkr->EQ1_setpreset(1,4,(int)o->value())-64);
-eq_6->value(rkr->EQ1_setpreset(1,5,(int)o->value())-64);
-eq_7->value(rkr->EQ1_setpreset(1,6,(int)o->value())-64);
-eq_8->value(rkr->EQ1_setpreset(1,7,(int)o->value())-64);
-eq_9->value(rkr->EQ1_setpreset(1,8,(int)o->value())-64);
-eq_10->value(rkr->EQ1_setpreset(1,9,(int)o->value())-64);
-eq_Gain->value(rkr->EQ1_setpreset(1,10,(int)o->value())-64);
-eq_Q->value(rkr->EQ1_setpreset(1,11,(int)o->value())-64);
+  if(!v) rkr->EQ1_setpreset((int)o->value());
+eq_1->value(rkr->efx_EQ1->getpar(12)-64);
+eq_2->value(rkr->efx_EQ1->getpar(17)-64);
+eq_3->value(rkr->efx_EQ1->getpar(22)-64);
+eq_4->value(rkr->efx_EQ1->getpar(27)-64);
+eq_5->value(rkr->efx_EQ1->getpar(32)-64);
+eq_6->value(rkr->efx_EQ1->getpar(37)-64);
+eq_7->value(rkr->efx_EQ1->getpar(42)-64);
+eq_8->value(rkr->efx_EQ1->getpar(47)-64);
+eq_9->value(rkr->efx_EQ1->getpar(52)-64);
+eq_10->value(rkr->efx_EQ1->getpar(57)-64);
+eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
+eq_Q->value(rkr->efx_EQ1->getpar(13)-64);
 }
 void RKRGUI::cb_eq_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_preset_i(o,v);
@@ -1661,8 +1660,7 @@ void RKRGUI::cb_echo_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_echo_preset_i(Fl_Choice* o, void* v) {
-  rkr->Echo_Bypass=0;
-if(!v)rkr->efx_Echo->setpreset((int) o->value());
+  if(!v)rkr->efx_Echo->setpreset((int) o->value());
 echo_WD->value(rkr->efx_Echo->getpar(0)-64);
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
@@ -1671,7 +1669,6 @@ echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
 echo_fb->value(rkr->efx_Echo->getpar(5));
 echo_damp->value(rkr->efx_Echo->getpar(6));
 echo_RV->value(rkr->efx_Echo->getpar(7));
-if((int)echo_activar->value())rkr->Echo_Bypass=1;
 }
 void RKRGUI::cb_echo_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_preset_i(o,v);
@@ -2252,19 +2249,17 @@ void RKRGUI::cb_eqp_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_eqp_preset_i(Fl_Choice* o, void* v) {
-  int i=0;
-
-if(!v) i=rkr->EQ2_setpreset(0,0,(int)o->value());
-eqp_LF->value(rkr->EQ2_setpreset(1,0,(int)o->value()));
-eqp_LFg->value(rkr->EQ2_setpreset(1,1,(int)o->value())-64);
-eqp_LQ->value(rkr->EQ2_setpreset(1,2,(int)o->value())-64);
-eqp_MF->value(rkr->EQ2_setpreset(1,3,(int)o->value()));
-eqp_MFg->value(rkr->EQ2_setpreset(1,4,(int)o->value())-64);
-eqp_MQ->value(rkr->EQ2_setpreset(1,5,(int)o->value())-64);
-eqp_HF->value(rkr->EQ2_setpreset(1,6,(int)o->value()));
-eqp_HFg->value(rkr->EQ2_setpreset(1,7,(int)o->value())-64);
-eqp_HQ->value(rkr->EQ2_setpreset(1,8,(int)o->value())-64);
-eqp_Gain->value(rkr->EQ2_setpreset(1,9,(int)o->value())-64);
+  if(!v) rkr->EQ2_setpreset((int)o->value());
+eqp_LF->value(rkr->efx_EQ2->getpar(11));
+eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
+eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
+eqp_MF->value(rkr->efx_EQ2->getpar(16));
+eqp_MFg->value(rkr->efx_EQ2->getpar(17)-64);
+eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
+eqp_HF->value(rkr->efx_EQ2->getpar(21));
+eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
+eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
+eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);
 }
 void RKRGUI::cb_eqp_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_preset_i(o,v);
@@ -3988,8 +3983,7 @@ void RKRGUI::cb_arpie_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_arpie_preset_i(Fl_Choice* o, void* v) {
-  rkr->Echo_Bypass=0;
-if(!v)rkr->efx_Arpie->setpreset((int) o->value());
+  if(!v)rkr->efx_Arpie->setpreset((int) o->value());
 arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
@@ -4001,8 +3995,6 @@ arpie_arpe->value(rkr->efx_Arpie->getpar(7));
 arpie_harm->value(rkr->efx_Arpie->getpar(8));
 arpie_pattern->value(rkr->efx_Arpie->getpar(9));
 arpie_subdiv->value(rkr->efx_Arpie->getpar(10));
-
-if((int)arpie_activar->value())rkr->Arpie_Bypass=1;
 }
 void RKRGUI::cb_arpie_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_preset_i(o,v);
@@ -4593,8 +4585,7 @@ void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_convo_preset_i(Fl_Choice* o, void* v) {
-  rkr->Convol_Bypass=0;
-if(!v)rkr->efx_Convol->setpreset((int) o->value());
+  if(!v)rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
@@ -4606,7 +4597,6 @@ if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
 convo_fb->value(rkr->efx_Convol->getpar(10));
-if((int)convo_activar->value())rkr->Convol_Bypass=1;
 }
 void RKRGUI::cb_convo_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_preset_i(o,v);
@@ -4724,8 +4714,7 @@ void RKRGUI::cb_looper_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_looper_preset_i(Fl_Choice* o, void* v) {
-  rkr->Looper_Bypass=0;
-if(!v)rkr->efx_Looper->setpreset((int) o->value());
+  if(!v)rkr->efx_Looper->setpreset((int) o->value());
 looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
 looper_record->value(rkr->efx_Looper->getpar(3));
@@ -4738,8 +4727,6 @@ looper_t1->value(rkr->efx_Looper->getpar(7));
 looper_t2->value(rkr->efx_Looper->getpar(8));
 looper_r1->value(rkr->efx_Looper->getpar(11));
 looper_r2->value(rkr->efx_Looper->getpar(12));
-
-if((int)looper_activar->value())rkr->Looper_Bypass=1;
 }
 void RKRGUI::cb_looper_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_preset_i(o,v);
@@ -4859,8 +4846,7 @@ void RKRGUI::cb_ryanwah_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ryanwah_preset_i(Fl_Choice* o, void* v) {
-  rkr->RyanWah_Bypass=0;
-if(!v)rkr->efx_RyanWah->setpreset((int) o->value());
+  if(!v)rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
 ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
@@ -4874,8 +4860,6 @@ ryanwah_bp->value(rkr->efx_RyanWah->getpar(11));
 ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
 svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
 ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
-
-if((int)ryanwah_activar->value()) rkr->RyanWah_Bypass=1;
 }
 void RKRGUI::cb_ryanwah_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ryanwah_preset_i(o,v);
@@ -4992,8 +4976,7 @@ void RKRGUI::cb_rbecho_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_rbecho_preset_i(Fl_Choice* o, void* v) {
-  rkr->RBEcho_Bypass=0;
-if(!v)rkr->efx_RBEcho->setpreset((int) o->value());
+  if(!v)rkr->efx_RBEcho->setpreset((int) o->value());
 rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
@@ -5004,8 +4987,6 @@ rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
 rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
 rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
 rbecho_es->value(rkr->efx_RBEcho->getpar(9));
-
-if((int)rbecho_activar->value())rkr->RBEcho_Bypass=1;
 }
 void RKRGUI::cb_rbecho_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_preset_i(o,v);
@@ -5282,8 +5263,7 @@ void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_vo_preset_i(Fl_Choice* o, void* v) {
-  rkr->Vocoder_Bypass=0;
-if(!v)rkr->efx_Vocoder->setpreset((int) o->value());
+  if(!v)rkr->efx_Vocoder->setpreset((int) o->value());
 vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
 vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
@@ -5291,7 +5271,6 @@ vo_q->value(rkr->efx_Vocoder->getpar(3));
 vo_input->value(rkr->efx_Vocoder->getpar(4));
 vo_ring->value(rkr->efx_Vocoder->getpar(6));
 vo_level->value(rkr->efx_Vocoder->getpar(5));
-if((int)vo_activar->value())rkr->Vocoder_Bypass=1;
 }
 void RKRGUI::cb_vo_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_preset_i(o,v);
@@ -5405,8 +5384,7 @@ void RKRGUI::cb_seq_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_seq_preset_i(Fl_Choice* o, void* v) {
-  rkr->Sequence_Bypass=0;
-if(!v)rkr->efx_Sequence->setpreset((int) o->value());
+  if(!v)rkr->efx_Sequence->setpreset((int) o->value());
 seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
 seq_amp->value(rkr->efx_Sequence->getpar(11));
@@ -5420,8 +5398,6 @@ seq_5->value(rkr->efx_Sequence->getpar(4));
 seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
-
-if((int)seq_activar->value()) rkr->Sequence_Bypass=1;
 }
 void RKRGUI::cb_seq_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_preset_i(o,v);
