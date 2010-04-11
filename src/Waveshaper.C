@@ -345,7 +345,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
          break;
 
        case 22: //Soft
-         ws = powf(4.0f, ws*ws+1.0f);
+         ws = powf(8.0f, ws*ws+1.0f);
          for (i = 0; i < n; i++)
 	{
          if(smps[i]>0.0f) smps[i] = ws*powf(smps[i],1.4142136f); else smps[i] = ws* -powf(-smps[i],1.4142136f);
