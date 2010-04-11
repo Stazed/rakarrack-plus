@@ -340,11 +340,16 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
          ws = powf (10.0f, ws * ws * 3.0f) - 1.0f + 0.001f;
          for (i = 0; i < n; i++)
 	{
-
          if(smps[i]>0.0f) smps[i] = sqrtf(smps[i]*ws); else smps[i] = -sqrtf(-smps[i]*ws);
         } 
-         
-         
+         break;
+
+       case 22: //Soft
+         ws = powf(4.0f, ws*ws+1.0f);
+         for (i = 0; i < n; i++)
+	{
+         if(smps[i]>0.0f) smps[i] = ws*powf(smps[i],1.4142136f); else smps[i] = ws* -powf(-smps[i],1.4142136f);
+        } 
          break;
  
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions

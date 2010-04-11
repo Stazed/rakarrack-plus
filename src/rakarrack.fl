@@ -1619,7 +1619,11 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
             xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
-            label Overdrive
+            label Overdrive selected
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Soft
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -2457,7 +2461,7 @@ eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
 eqp_HF->value(rkr->efx_EQ2->getpar(21));
 eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
 eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
-eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);} selected
+eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);}
           xywh {716 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
