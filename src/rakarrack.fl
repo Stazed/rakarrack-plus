@@ -1619,7 +1619,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
             xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
-            label Overdrive selected
+            label Overdrive
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
@@ -4176,13 +4176,13 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
         Fl_Value_Slider mbdist_cross1 {
           label Cross1
           callback {rkr->efx_MBDist->changepar(12,(int)o->value());}
-          xywh {372 326 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 1000 step 1 textcolor 7
+          xywh {372 326 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider mbdist_cross2 {
           label Cross2
-          callback {rkr->efx_MBDist->changepar(13,(int)o->value());}
-          xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
+          callback {rkr->efx_MBDist->changepar(13,(int)o->value());} selected
+          xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 12000 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice mbdist_tipoL {
