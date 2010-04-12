@@ -56,13 +56,13 @@ private:
   int Pamplitude;     // 0 or 1.  Checkbox on or off...
   int Pstdiff;       // 1 2 3 4 5 6 7 8
   
-  int tcount, scount, lastcount, lastscount, intperiod; 
+  int tcount, scount, dscount, intperiod; 
  
   class RBFilter *filterl, *filterr;
 
   float fsequence[8];
   float maxfreq,minfreq,frequency;  
-  float ibase, base, fq;
+  float fq;
   float ifperiod,fperiod;
 };
 

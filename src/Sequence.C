@@ -33,14 +33,13 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   filterl = NULL;
   filterr = NULL;
   
-  base = 7.0f;		//sets curve of modulation to frequency relationship
-  ibase = 1.0f/base;
   maxfreq = 5000.0f;
   minfreq = 40.0f;
   frequency = 40.0f;
   fq = 75.0f;
   Ppreset = 0;
-
+  scount = 0;
+  tcount = 0;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
   setpreset (Ppreset);
@@ -79,31 +78,42 @@ Sequence::out (float * smpsl, float * smpsr)
   float lmod = 0.0f;
   float rmod = 0.0f;
   float ldbl, ldbr;
-  int oscount, lastoscount;
+  int nextcount,dnextcount;
   
-  ldiff = ifperiod * (fsequence[scount] - fsequence[lastscount]);  
-  lfol = fsequence[lastcount];
-  
-  oscount = scount + Pstdiff;
-  lastoscount = lastscount + Pstdiff;
-  if (oscount > 7) oscount = oscount - 7;
-  if (lastoscount > 7) lastoscount = lastoscount - 7;
-  rdiff =  ifperiod * (fsequence[oscount] - fsequence[lastoscount]); 
-  lfor = fsequence[lastoscount];
-  
+  nextcount = scount + 1;
+  if (nextcount > 7 ) nextcount = 0; 
+  ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
+  lfol = fsequence[scount];
+
+  dscount = (scount + Pstdiff) % 8;
+  dnextcount = dscount + 1;
+  if (dnextcount > 7 ) dnextcount = 0; 
+  rdiff = ifperiod * (fsequence[dnextcount] - fsequence[dscount]);  
+  lfor = fsequence[dscount];
+
   for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
   {
 
   if (++tcount >= intperiod)
   {
   tcount = 0;
-  lastscount = scount;
   scount++;
   if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+
+  nextcount = scount + 1;
+  if (nextcount > 7 ) nextcount = 0; 
+  ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
+  lfol = fsequence[scount];
+
+  dscount = (scount + Pstdiff) % 8;
+  dnextcount = dscount + 1;
+  if (dnextcount > 7 ) dnextcount = 0; 
+  rdiff = ifperiod * (fsequence[dnextcount] - fsequence[dscount]);  
+  lfor = fsequence[dscount];
   }
   
-  lmod = lfol + ((float) tcount) * ldiff;
-  rmod = lfor + ((float) tcount) * rdiff;  
+  lmod = lfol + ldiff * (float) tcount;
+  rmod = lfor + rdiff * (float) tcount;  
 
   if (Pamplitude)
   {
@@ -116,9 +126,9 @@ Sequence::out (float * smpsl, float * smpsr)
   
   };
   
-   float frl = MINFREQ + MAXFREQ*(powf(base, lmod) - 1.0f)*ibase;
-   float frr = MINFREQ + MAXFREQ*(powf(base, rmod) - 1.0f)*ibase;
    
+  float frl = MINFREQ + MAXFREQ*lmod;
+  float frr = MINFREQ + MAXFREQ*rmod;
 
   filterl->setfreq_and_q (frl, fq);
   filterr->setfreq_and_q (frr, fq);
@@ -142,11 +152,11 @@ Sequence::setpreset (int npreset)
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
-    {20, 100, 10, 50, 25, 120, 60, 127, 1, 90, 40, 0, 0},
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0},
     //Stair Step
-    {10, 20, 30, 50, 75, 90, 100, 127, 1, 90, 40, 0, 0},
+    {10, 20, 30, 50, 75, 90, 100, 127, 0, 90, 40, 0, 0},
     //Mild
-    {20, 30, 10, 40, 25, 60, 100, 50, 1, 90, 40, 0, 0},
+    {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0},
 
   };
 
@@ -194,9 +204,7 @@ Sequence::changepar (int npar, int value)
       Pamplitude = value;
       break;
     case 12:  
-      Pstdiff = value - 1;
-      if (Pstdiff > 7) Pstdiff = 7;
-      if (Pstdiff < 0) Pstdiff = 0;
+      Pstdiff = value;
       break;    
     };
 };
