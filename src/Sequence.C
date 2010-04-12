@@ -149,7 +149,7 @@ void
 Sequence::setpreset (int npreset)
 {
   const int PRESET_SIZE = 13;
-  const int NUM_PRESETS = 3;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0},
@@ -157,6 +157,9 @@ Sequence::setpreset (int npreset)
     {10, 20, 30, 50, 75, 90, 100, 127, 0, 90, 40, 0, 0},
     //Mild
     {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0},
+    //WahWah
+    {0, 127, 0, 127, 0, 127, 0, 127, 0, 220, 96, 0, 3}
+
 
   };
 
@@ -197,8 +200,8 @@ Sequence::changepar (int npar, int value)
       intperiod = (int) fperiod;
       break;
     case 10:
-      Pq = 2 * value;
-      fq = (float) value;
+      Pq = value;
+      fq = powf (60.0f, ((float)value - 64.0f) / 64.0f);
       break;
     case 11:
       Pamplitude = value;

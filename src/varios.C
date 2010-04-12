@@ -217,6 +217,7 @@ switch(Tap_SetValue)
   if(MBVvol_Bypass) efx_MBVvol->changepar(4,Tap_TempoSetL);
   if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSetD);
   if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSetD);
+  if(Sequence_Bypass) efx_Sequence->changepar(9,Tap_TempoSetD);
 
 }
 

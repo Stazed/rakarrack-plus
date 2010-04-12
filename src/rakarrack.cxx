@@ -5408,6 +5408,7 @@ Fl_Menu_Item RKRGUI::menu_seq_preset[] = {
  {"Jumpy", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Stair Step", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Mild", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Wah Wah", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -18339,5 +18340,10 @@ void RKRGUI::UpdateTGUI() {
   {
    rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
    rbecho_delay->redraw();
+  }
+  if(rkr->Sequence_Bypass)
+  {
+   seq_tempo->value(rkr->efx_Sequence->getpar(9));
+   seq_tempo->redraw();
   }
 }
