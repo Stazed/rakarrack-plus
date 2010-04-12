@@ -65,14 +65,15 @@ private:
   void adjustq(float q);
   float ringworm;
   float cperiod;
-  float lpanning, rpanning, input,level, alpha, beta,prls, gate;
+  float lpanning, rpanning, input,level;
+  float alpha,beta,prls,gate;
   float compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
   float *vocbuf;
   float *tmpsmpsl, *tmpsmpsr; 
   float *tmpl, *tmpr;
     struct
   {
-  float sfreq, sq, gain, oldgain, speak;
+  float sfreq, sq;
     AnalogFilter *l, *r, *aux;
 
   } filterbank[VOC_BANDS];
