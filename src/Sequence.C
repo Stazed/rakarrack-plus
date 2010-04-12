@@ -117,8 +117,8 @@ Sequence::out (float * smpsl, float * smpsr)
 
   if (Pamplitude)
   {
-  ldbl = lfol * (1.0f - cosf(D_PI*ifperiod*((float) tcount))); 
-  ldbr = lfor * (1.0f - cosf(D_PI*ifperiod*((float) tcount))); 
+  ldbl = lmod * (1.0f - cosf(D_PI*ifperiod*((float) tcount))); 
+  ldbr = rmod * (1.0f - cosf(D_PI*ifperiod*((float) tcount))); 
 
   efxoutl[i] = ldbl * smpsl[i];
   efxoutr[i] = ldbr * smpsr[i];
