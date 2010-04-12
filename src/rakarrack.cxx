@@ -5411,6 +5411,13 @@ Fl_Menu_Item RKRGUI::menu_seq_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_seq_WD_i(SliderW* o, void*) {
+  rkr->efx_Sequence->changepar(8,(int)(o->value()+64));
+}
+void RKRGUI::cb_seq_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_WD_i(o,v);
+}
+
 void RKRGUI::cb_seq_1_i(SliderW* o, void*) {
   rkr->efx_Sequence->changepar(0,(int)o->value());
 }
@@ -5465,13 +5472,6 @@ void RKRGUI::cb_seq_8_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_seq_8(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_8_i(o,v);
-}
-
-void RKRGUI::cb_seq_WD_i(SliderW* o, void*) {
-  rkr->efx_Sequence->changepar(8,(int)(o->value()+64));
-}
-void RKRGUI::cb_seq_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_WD_i(o,v);
 }
 
 void RKRGUI::cb_seq_tempo_i(SliderW* o, void*) {
@@ -13538,135 +13538,7 @@ R average.");
         seq_preset->when(FL_WHEN_RELEASE_ALWAYS);
         seq_preset->menu(menu_seq_preset);
       } // Fl_Choice* seq_preset
-      { seq_1 = new SliderW(369, 238, 100, 10, "1");
-        seq_1->type(5);
-        seq_1->box(FL_FLAT_BOX);
-        seq_1->color((Fl_Color)178);
-        seq_1->selection_color((Fl_Color)62);
-        seq_1->labeltype(FL_NORMAL_LABEL);
-        seq_1->labelfont(0);
-        seq_1->labelsize(10);
-        seq_1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_1->maximum(127);
-        seq_1->step(1);
-        seq_1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_1->callback((Fl_Callback*)cb_seq_1);
-        seq_1->align(FL_ALIGN_LEFT);
-        seq_1->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_1
-      { seq_2 = new SliderW(369, 250, 100, 10, "2");
-        seq_2->type(5);
-        seq_2->box(FL_FLAT_BOX);
-        seq_2->color((Fl_Color)178);
-        seq_2->selection_color((Fl_Color)62);
-        seq_2->labeltype(FL_NORMAL_LABEL);
-        seq_2->labelfont(0);
-        seq_2->labelsize(10);
-        seq_2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_2->maximum(127);
-        seq_2->step(1);
-        seq_2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_2->callback((Fl_Callback*)cb_seq_2);
-        seq_2->align(FL_ALIGN_LEFT);
-        seq_2->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_2
-      { seq_3 = new SliderW(369, 262, 100, 10, "3");
-        seq_3->type(5);
-        seq_3->box(FL_FLAT_BOX);
-        seq_3->color((Fl_Color)178);
-        seq_3->selection_color((Fl_Color)62);
-        seq_3->labeltype(FL_NORMAL_LABEL);
-        seq_3->labelfont(0);
-        seq_3->labelsize(10);
-        seq_3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_3->maximum(127);
-        seq_3->step(1);
-        seq_3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_3->callback((Fl_Callback*)cb_seq_3);
-        seq_3->align(FL_ALIGN_LEFT);
-        seq_3->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_3
-      { seq_4 = new SliderW(369, 274, 100, 10, "4");
-        seq_4->type(5);
-        seq_4->box(FL_FLAT_BOX);
-        seq_4->color((Fl_Color)178);
-        seq_4->selection_color((Fl_Color)62);
-        seq_4->labeltype(FL_NORMAL_LABEL);
-        seq_4->labelfont(0);
-        seq_4->labelsize(10);
-        seq_4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_4->maximum(127);
-        seq_4->step(1);
-        seq_4->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_4->callback((Fl_Callback*)cb_seq_4);
-        seq_4->align(FL_ALIGN_LEFT);
-        seq_4->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_4
-      { seq_5 = new SliderW(370, 286, 100, 10, "5");
-        seq_5->type(5);
-        seq_5->box(FL_FLAT_BOX);
-        seq_5->color((Fl_Color)178);
-        seq_5->selection_color((Fl_Color)62);
-        seq_5->labeltype(FL_NORMAL_LABEL);
-        seq_5->labelfont(0);
-        seq_5->labelsize(10);
-        seq_5->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_5->maximum(127);
-        seq_5->step(1);
-        seq_5->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_5->callback((Fl_Callback*)cb_seq_5);
-        seq_5->align(FL_ALIGN_LEFT);
-        seq_5->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_5
-      { seq_6 = new SliderW(370, 298, 100, 10, "6");
-        seq_6->type(5);
-        seq_6->box(FL_FLAT_BOX);
-        seq_6->color((Fl_Color)178);
-        seq_6->selection_color((Fl_Color)62);
-        seq_6->labeltype(FL_NORMAL_LABEL);
-        seq_6->labelfont(0);
-        seq_6->labelsize(10);
-        seq_6->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_6->maximum(127);
-        seq_6->step(1);
-        seq_6->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_6->callback((Fl_Callback*)cb_seq_6);
-        seq_6->align(FL_ALIGN_LEFT);
-        seq_6->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_6
-      { seq_7 = new SliderW(370, 310, 100, 10, "7");
-        seq_7->type(5);
-        seq_7->box(FL_FLAT_BOX);
-        seq_7->color((Fl_Color)178);
-        seq_7->selection_color((Fl_Color)62);
-        seq_7->labeltype(FL_NORMAL_LABEL);
-        seq_7->labelfont(0);
-        seq_7->labelsize(10);
-        seq_7->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_7->maximum(127);
-        seq_7->step(1);
-        seq_7->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_7->callback((Fl_Callback*)cb_seq_7);
-        seq_7->align(FL_ALIGN_LEFT);
-        seq_7->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_7
-      { seq_8 = new SliderW(370, 322, 100, 10, "8");
-        seq_8->type(5);
-        seq_8->box(FL_FLAT_BOX);
-        seq_8->color((Fl_Color)178);
-        seq_8->selection_color((Fl_Color)62);
-        seq_8->labeltype(FL_NORMAL_LABEL);
-        seq_8->labelfont(0);
-        seq_8->labelsize(10);
-        seq_8->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_8->maximum(127);
-        seq_8->step(1);
-        seq_8->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_8->callback((Fl_Callback*)cb_seq_8);
-        seq_8->align(FL_ALIGN_LEFT);
-        seq_8->when(FL_WHEN_CHANGED);
-      } // SliderW* seq_8
-      { seq_WD = new SliderW(369, 334, 100, 10, "Wet/Dry");
+      { seq_WD = new SliderW(369, 238, 100, 10, "Wet/Dry");
         seq_WD->type(5);
         seq_WD->box(FL_FLAT_BOX);
         seq_WD->color((Fl_Color)178);
@@ -13683,6 +13555,134 @@ R average.");
         seq_WD->align(FL_ALIGN_LEFT);
         seq_WD->when(FL_WHEN_CHANGED);
       } // SliderW* seq_WD
+      { seq_1 = new SliderW(369, 250, 100, 10, "1");
+        seq_1->type(5);
+        seq_1->box(FL_FLAT_BOX);
+        seq_1->color((Fl_Color)178);
+        seq_1->selection_color((Fl_Color)62);
+        seq_1->labeltype(FL_NORMAL_LABEL);
+        seq_1->labelfont(0);
+        seq_1->labelsize(10);
+        seq_1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_1->maximum(127);
+        seq_1->step(1);
+        seq_1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_1->callback((Fl_Callback*)cb_seq_1);
+        seq_1->align(FL_ALIGN_LEFT);
+        seq_1->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_1
+      { seq_2 = new SliderW(369, 262, 100, 10, "2");
+        seq_2->type(5);
+        seq_2->box(FL_FLAT_BOX);
+        seq_2->color((Fl_Color)178);
+        seq_2->selection_color((Fl_Color)62);
+        seq_2->labeltype(FL_NORMAL_LABEL);
+        seq_2->labelfont(0);
+        seq_2->labelsize(10);
+        seq_2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_2->maximum(127);
+        seq_2->step(1);
+        seq_2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_2->callback((Fl_Callback*)cb_seq_2);
+        seq_2->align(FL_ALIGN_LEFT);
+        seq_2->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_2
+      { seq_3 = new SliderW(369, 274, 100, 10, "3");
+        seq_3->type(5);
+        seq_3->box(FL_FLAT_BOX);
+        seq_3->color((Fl_Color)178);
+        seq_3->selection_color((Fl_Color)62);
+        seq_3->labeltype(FL_NORMAL_LABEL);
+        seq_3->labelfont(0);
+        seq_3->labelsize(10);
+        seq_3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_3->maximum(127);
+        seq_3->step(1);
+        seq_3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_3->callback((Fl_Callback*)cb_seq_3);
+        seq_3->align(FL_ALIGN_LEFT);
+        seq_3->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_3
+      { seq_4 = new SliderW(369, 286, 100, 10, "4");
+        seq_4->type(5);
+        seq_4->box(FL_FLAT_BOX);
+        seq_4->color((Fl_Color)178);
+        seq_4->selection_color((Fl_Color)62);
+        seq_4->labeltype(FL_NORMAL_LABEL);
+        seq_4->labelfont(0);
+        seq_4->labelsize(10);
+        seq_4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_4->maximum(127);
+        seq_4->step(1);
+        seq_4->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_4->callback((Fl_Callback*)cb_seq_4);
+        seq_4->align(FL_ALIGN_LEFT);
+        seq_4->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_4
+      { seq_5 = new SliderW(370, 298, 100, 10, "5");
+        seq_5->type(5);
+        seq_5->box(FL_FLAT_BOX);
+        seq_5->color((Fl_Color)178);
+        seq_5->selection_color((Fl_Color)62);
+        seq_5->labeltype(FL_NORMAL_LABEL);
+        seq_5->labelfont(0);
+        seq_5->labelsize(10);
+        seq_5->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_5->maximum(127);
+        seq_5->step(1);
+        seq_5->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_5->callback((Fl_Callback*)cb_seq_5);
+        seq_5->align(FL_ALIGN_LEFT);
+        seq_5->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_5
+      { seq_6 = new SliderW(370, 310, 100, 10, "6");
+        seq_6->type(5);
+        seq_6->box(FL_FLAT_BOX);
+        seq_6->color((Fl_Color)178);
+        seq_6->selection_color((Fl_Color)62);
+        seq_6->labeltype(FL_NORMAL_LABEL);
+        seq_6->labelfont(0);
+        seq_6->labelsize(10);
+        seq_6->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_6->maximum(127);
+        seq_6->step(1);
+        seq_6->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_6->callback((Fl_Callback*)cb_seq_6);
+        seq_6->align(FL_ALIGN_LEFT);
+        seq_6->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_6
+      { seq_7 = new SliderW(370, 322, 100, 10, "7");
+        seq_7->type(5);
+        seq_7->box(FL_FLAT_BOX);
+        seq_7->color((Fl_Color)178);
+        seq_7->selection_color((Fl_Color)62);
+        seq_7->labeltype(FL_NORMAL_LABEL);
+        seq_7->labelfont(0);
+        seq_7->labelsize(10);
+        seq_7->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_7->maximum(127);
+        seq_7->step(1);
+        seq_7->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_7->callback((Fl_Callback*)cb_seq_7);
+        seq_7->align(FL_ALIGN_LEFT);
+        seq_7->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_7
+      { seq_8 = new SliderW(370, 334, 100, 10, "8");
+        seq_8->type(5);
+        seq_8->box(FL_FLAT_BOX);
+        seq_8->color((Fl_Color)178);
+        seq_8->selection_color((Fl_Color)62);
+        seq_8->labeltype(FL_NORMAL_LABEL);
+        seq_8->labelfont(0);
+        seq_8->labelsize(10);
+        seq_8->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_8->maximum(127);
+        seq_8->step(1);
+        seq_8->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_8->callback((Fl_Callback*)cb_seq_8);
+        seq_8->align(FL_ALIGN_LEFT);
+        seq_8->when(FL_WHEN_CHANGED);
+      } // SliderW* seq_8
       { seq_tempo = new SliderW(369, 346, 100, 10, "Tempo");
         seq_tempo->type(5);
         seq_tempo->box(FL_FLAT_BOX);

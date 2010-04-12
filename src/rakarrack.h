@@ -2579,6 +2579,11 @@ private:
   static void cb_seq_preset(Fl_Choice*, void*);
   static Fl_Menu_Item menu_seq_preset[];
 public:
+  SliderW *seq_WD;
+private:
+  void cb_seq_WD_i(SliderW*, void*);
+  static void cb_seq_WD(SliderW*, void*);
+public:
   SliderW *seq_1;
 private:
   void cb_seq_1_i(SliderW*, void*);
@@ -2618,11 +2623,6 @@ public:
 private:
   void cb_seq_8_i(SliderW*, void*);
   static void cb_seq_8(SliderW*, void*);
-public:
-  SliderW *seq_WD;
-private:
-  void cb_seq_WD_i(SliderW*, void*);
-  static void cb_seq_WD(SliderW*, void*);
 public:
   SliderW *seq_tempo;
 private:
