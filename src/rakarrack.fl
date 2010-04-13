@@ -834,8 +834,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -844,7 +843,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1500 34 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1493 27 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5631,7 +5630,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
       }
       Fl_Group VOCODER {
         user_data 1
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button vo_activar {
           label On
@@ -5765,7 +5764,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
         }
       }
       Fl_Group SEQUENCE {
-        user_data 1
+        user_data 1 selected
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button seq_activar {
@@ -5793,7 +5792,8 @@ seq_5->value(rkr->efx_Sequence->getpar(4));
 seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
-seq_mode->value(rkr->efx_Sequence->getpar(13));}
+seq_mode->value(rkr->efx_Sequence->getpar(13));
+seq_range->value(rkr->efx_Sequence->getpar(14));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5817,7 +5817,7 @@ seq_mode->value(rkr->efx_Sequence->getpar(13));}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Stepper selected
+            label Stepper
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -5916,6 +5916,11 @@ seq_mode->value(rkr->efx_Sequence->getpar(13));}
             label Stepper
             xywh {0 0 36 21} labelsize 9
           }
+        }
+        Fl_Counter seq_range {
+          label Range
+          callback {rkr->efx_Sequence->changepar(14,(int)o->value())}
+          xywh {325 284 33 13} type Simple labelsize 10 labelcolor 7 minimum 1 maximum 8 step 1 value 1 textsize 9
         }
       }
       Fl_Group Tuner {

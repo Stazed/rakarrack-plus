@@ -26,8 +26,6 @@
 #include "global.h"
 #include "RBFilter.h"
 
-#define MINFREQ 100.0f
-#define MAXFREQ 10000.0f
 
 class Sequence
 {
@@ -41,6 +39,7 @@ public:
   int getpar (int npar);
   int Ppreset;
   void setpreset (int npreset);
+  void setranges(int value);
   float volume;
   float outvolume;
   
@@ -56,12 +55,15 @@ private:
   int Pamplitude;     // 0 or 1.  Checkbox on or off...
   int Pstdiff;       // 1 2 3 4 5 6 7 8
   int Pmode;  
+  int Prange;
   int tcount, scount, dscount, intperiod; 
+  
+  float MINFREQ,MAXFREQ;
+  
  
   class RBFilter *filterl, *filterr, *modfilterl, *modfilterr;
 
   float fsequence[8];
-  float maxfreq,minfreq,frequency;  
   float fq;
   float ifperiod,fperiod;
 };

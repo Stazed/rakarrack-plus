@@ -2650,6 +2650,11 @@ private:
   static void cb_seq_mode(Fl_Choice*, void*);
   static Fl_Menu_Item menu_seq_mode[];
 public:
+  Fl_Counter *seq_range;
+private:
+  void cb_seq_range_i(Fl_Counter*, void*);
+  static void cb_seq_range(Fl_Counter*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

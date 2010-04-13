@@ -33,9 +33,8 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   filterl = NULL;
   filterr = NULL;
   
-  maxfreq = 5000.0f;
-  minfreq = 40.0f;
-  frequency = 40.0f;
+  MAXFREQ = 10000.0f;
+  MINFREQ = 100.0f;
   fq = 75.0f;
   Ppreset = 0;
   scount = 0;
@@ -259,23 +258,44 @@ Sequence::out (float * smpsl, float * smpsr)
 
 
 void
+Sequence::setranges(int value)
+{
+
+
+
+  switch(value)
+  {
+  
+     case 1:
+       MINFREQ = 100.0f;
+       MAXFREQ = 10000.0f;
+       break;
+     case 2:
+       MINFREQ = 200.0f;
+       MAXFREQ = 4000.0f;
+       break;     
+   }
+}   
+
+
+void
 Sequence::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 14;
+  const int PRESET_SIZE = 15;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0},
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 1},
     //Stair Step
-    {10, 20, 30, 50, 75, 90, 100, 127, 64, 90, 96, 0, 0, 2},
+    {10, 20, 30, 50, 75, 90, 100, 127, 64, 90, 96, 0, 0, 2, 1},
     //Mild
-    {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0, 0},
+    {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0, 0, 1},
     //WahWah
-    {11, 55, 15, 95, 12, 76, 11, 36, 30, 80, 110, 0, 4, 1},
+    {11, 55, 15, 95, 12, 76, 11, 36, 30, 80, 110, 0, 4, 1, 2},
     //Filter Pan
-    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0},
+    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0, 1},
     //Stepper
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 2}
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 2, 2}
   };
 
 
@@ -327,6 +347,10 @@ Sequence::changepar (int npar, int value)
     case 13:
       Pmode = value;
       break;
+    case 14:
+      Prange = value;
+      setranges(Prange);
+      break;
 
     };
 };
@@ -363,6 +387,10 @@ Sequence::getpar (int npar)
       break;
     case 13:
       return (Pmode); 
+      break;
+    case 14:
+      return (Prange);  
+      break;
     };
   return (0);			//in case of bogus parameter number
 };
