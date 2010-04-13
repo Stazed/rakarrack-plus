@@ -104,7 +104,7 @@ void
 Vocoder::out (float * smpsl, float * smpsr)
 {
   int i, j;
-  float tempgain1, tempgain2;
+  float tempgain;
   float maxgain=0.0f;
   float auxtemp, tmpgain, lout, rout;
    
@@ -163,10 +163,11 @@ Vocoder::out (float * smpsl, float * smpsr)
  
        filterbank[j].speak*=prls;
        filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;   
-       filterbank[j].oldgain = filterbank[j].gain + ringworm*auxtemp; 
+       filterbank[j].oldgain = filterbank[j].gain; 
        
-       tmpl[i] += (filterbank[j].l->filterout_s(smpsl[i])) * filterbank[j].oldgain;
-       tmpr[i] += (filterbank[j].r->filterout_s(smpsr[i])) * filterbank[j].oldgain;   
+       tempgain = (1.0f - ringworm) * filterbank[j].oldgain  + ringworm*auxtemp; 
+       tmpl[i] += (filterbank[j].l->filterout_s(smpsl[i])) * tempgain;
+       tmpr[i] += (filterbank[j].r->filterout_s(smpsr[i])) * tempgain;   
 
        };
        
