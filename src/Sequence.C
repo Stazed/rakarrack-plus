@@ -130,9 +130,12 @@ Sequence::out (float * smpsl, float * smpsr)
   float frl = MINFREQ + MAXFREQ*lmod;
   float frr = MINFREQ + MAXFREQ*rmod;
 
+  if ( i % 8 == 0)
+  {
   filterl->setfreq_and_q (frl, fq);
   filterr->setfreq_and_q (frr, fq);
-
+  }
+  
   efxoutl[i] = filterl->filterout_s(efxoutl[i]);
   efxoutr[i] = filterr->filterout_s (efxoutr[i]);  
 
