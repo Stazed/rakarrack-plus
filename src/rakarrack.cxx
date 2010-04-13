@@ -5411,6 +5411,7 @@ Fl_Menu_Item RKRGUI::menu_seq_preset[] = {
  {"Mild", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Wah Wah", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Filter Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Stepper", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
