@@ -58,6 +58,7 @@ private:
   int Prange;
   int tcount, scount, dscount, intperiod; 
   
+  int rndflag;
   float MINFREQ,MAXFREQ;
   
  
@@ -65,7 +66,7 @@ private:
 
   float fsequence[8];
   float fq;
-  float ifperiod,fperiod;
+  float ifperiod,fperiod, seqpower;
 };
 
 

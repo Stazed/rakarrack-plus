@@ -35,7 +35,7 @@
 #define FF_MAX_FORMANTS 12
 #define FF_MAX_SEQUENCE 8
 #define MAX_FILTER_STAGES 5
-#define RND (rand()/(RAND_MAX+1.0))
+#define RND ( ((float) rand())/(((float) RAND_MAX)+1.0f))
 #define F2I(f,i) (i)=((f>0) ? ( (int)(f) ) :( (int)(f-1.0f) ))
 #define dB2rap(dB) (float)((expf((dB)*LOG_10/20.0f)))
 #define rap2dB(rap) (float)((20*log(rap)/LOG_10))

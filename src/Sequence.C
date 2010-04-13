@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Sequence.h"
+#include <time.h>
 
 Sequence::Sequence (float * efxoutl_, float * efxoutr_)
 {
@@ -39,10 +40,11 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   Ppreset = 0;
   scount = 0;
   tcount = 0;
+  rndflag = 0;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
-  modfilterl = new RBFilter (0, 25.0f, 0.25f, 3);
-  modfilterr = new RBFilter (0, 25.0f, 0.25f, 3);  
+  modfilterl = new RBFilter (0, 25.0f, 0.15f, 2);
+  modfilterr = new RBFilter (0, 25.0f, 0.15f, 2);  
   setpreset (Ppreset);
   
   filterl->setmix(1, 0.33f, -1.0f, 0.25f);
@@ -81,9 +83,14 @@ Sequence::out (float * smpsl, float * smpsr)
   float ldbl, ldbr;
   int nextcount,dnextcount;
   
-  float seqpower = 0.0f;  
-  for (i = 0; i<8; i++)  seqpower += (float) fsequence[i];
-  seqpower = seqpower/8.0f;
+  if ((rndflag) && (tcount < PERIOD + 1))//This is an Easter Egg
+  {
+   srand( time(NULL) );
+   for (i = 0; i<8; i++)  
+   {
+   fsequence[i] = RND;
+   }
+  }  
 
   switch(Pmode)
   {
@@ -224,8 +231,8 @@ Sequence::out (float * smpsl, float * smpsr)
   efxoutr[i] = ldbr * smpsr[i];
   }
   
-  float frl = MINFREQ + lmod * 4000.0f;
-  float frr = MINFREQ + rmod * 4000.0f;
+  float frl = MINFREQ + lmod * MAXFREQ;
+  float frr = MINFREQ + rmod * MAXFREQ;
 
 
   if ( i % 8 == 0)
@@ -266,12 +273,12 @@ Sequence::setranges(int value)
   switch(value)
   {
   
-     case 1:
-       MINFREQ = 240.0f;
-       MAXFREQ = 1000.0f;
+     case 1:              //typical for wahwah pedal
+       MINFREQ = 450.0f;
+       MAXFREQ = 2500.0f;
        break;
      case 2:
-       MINFREQ = 350.0f;
+       MINFREQ = 150.0f;
        MAXFREQ = 4000.0f;
        break;     
      case 3:
@@ -321,7 +328,7 @@ Sequence::setpreset (int npreset)
     //Filter Pan
     {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0, 8},
     //Stepper
-    {30, 127, 30, 50, 80, 40, 110, 80, 60, 240, 40, 0, 1, 2}
+    {30, 127, 30, 50, 80, 40, 110, 80, 0, 240, 95, 1, 1, 2, 2}
 
   };
 
@@ -337,6 +344,7 @@ Sequence::setpreset (int npreset)
 void
 Sequence::changepar (int npar, int value)
 {
+  int testegg, i;
   switch (npar)
     {
     case 0:
@@ -349,6 +357,23 @@ Sequence::changepar (int npar, int value)
     case 7:
       Psequence[npar] = value;
       fsequence[npar] = (float) value/127.0f;
+
+  seqpower = 0.0f;  
+  for (i = 0; i<8; i++)  seqpower += fsequence[i];
+  if(seqpower > 0.1f) 
+  {
+  seqpower = 10.0f/seqpower;
+  rndflag = 0;
+  } 
+  
+  testegg = 0;
+  for (i = 0; i<8; i++)  testegg += Psequence[i];
+if(testegg < 4)
+  {
+  printf("random\n");
+  seqpower = 5.0f;  //Easter egg
+  rndflag = 1;
+  }
       break;
     case 8:
       Pvolume = value;
