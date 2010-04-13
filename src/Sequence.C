@@ -42,8 +42,8 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   tcount = 0;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
-  modfilterl = new RBFilter (0, 5.0f, 1.0f, 2);
-  modfilterr = new RBFilter (0, 5.0f, 1.0f, 2);  
+  modfilterl = new RBFilter (0, 8.0f, 1.0f, 2);
+  modfilterr = new RBFilter (0, 8.0f, 1.0f, 2);  
   setpreset (Ppreset);
   
   filterl->setmix(1, 0.33f, -1.0f, 0.25f);
@@ -262,7 +262,7 @@ void
 Sequence::setpreset (int npreset)
 {
   const int PRESET_SIZE = 14;
-  const int NUM_PRESETS = 5;
+  const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0},
@@ -273,9 +273,9 @@ Sequence::setpreset (int npreset)
     //WahWah
     {11, 55, 15, 95, 12, 76, 11, 36, 30, 80, 110, 0, 4, 1},
     //Filter Pan
-    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0}
+    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0},
     //Stepper
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 2},
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 2}
   };
 
 
