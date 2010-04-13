@@ -165,9 +165,6 @@ Vocoder::out (float * smpsl, float * smpsr)
        };
       tempgain2 = cperiod * (filterbank[j].gain - tempgain1);    
       
-
-      filterbank[j].aux->filterout(vocbuf);
- 
       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
  
