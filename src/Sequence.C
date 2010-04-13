@@ -44,8 +44,8 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
   setpreset (Ppreset);
   
-  filterl->setmix(1, 1.0f, -0.5f, 0.25f);
-  filterr->setmix(1, 1.0f, -0.5f, 0.25f);  
+  filterl->setmix(1, 0.1f, -1.0f, 0.25f);
+  filterr->setmix(1, 0.1f, -1.0f, 0.25f);  
 
   cleanup ();
 };

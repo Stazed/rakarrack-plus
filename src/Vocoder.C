@@ -106,7 +106,7 @@ Vocoder::out (float * smpsl, float * smpsr)
   int i, j;
   float tempgain1, tempgain2;
   float maxgain=0.0f;
-  float auxtemp, tmpgain;
+  float auxtemp, tmpgain, lout, rout;
    
    memset(tmpl,0,sizeof(float)*PERIOD);
    memset(tmpr,0,sizeof(float)*PERIOD);    
@@ -137,30 +137,48 @@ Vocoder::out (float * smpsl, float * smpsr)
    };
       //End compression
       
-      
+   auxtemp = 0.0f;
+
    vlp->filterout(auxresampled);
    vhp->filterout(auxresampled);
+
+       for (i = 0; i<PERIOD; i++)
+       { 
+       tmpl[i] =  0.0f;  
+       tmpr[i] =  0.0f;        
+       };
 
     for (j = 0; j < VOC_BANDS; j++)
     {
 
       for (i = 0; i<PERIOD; i++)
        { 
-       if(auxresampled[i]>maxgain) maxgain = auxresampled[i]; //vu meter level.    
+       auxtemp = auxresampled[i];
+       
+       if(filterbank[j].speak < gate) filterbank[j].speak = 0.0f;  //gate 
+       if(auxtemp>maxgain) maxgain = auxtemp; //vu meter level.    
            
-       auxresampled[i] = filterbank[j].aux->filterout_s(auxresampled[i]);       
-       if(fabs(auxresampled[i]) > filterbank[j].speak) filterbank[j].speak = fabs(auxresampled[i]);  //Leaky Peak detector
-       if(filterbank[j].speak < gate) filterbank[j].speak = 0.0f;  //gate
+       auxtemp = filterbank[j].aux->filterout_s(auxtemp);       
+       if(fabs(auxtemp) > filterbank[j].speak) filterbank[j].speak = fabs(auxtemp);  //Leaky Peak detector
+ 
        filterbank[j].speak*=prls;
        filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;   
-       filterbank[j].oldgain = filterbank[j].gain + ringworm*auxresampled[i]; 
+       filterbank[j].oldgain = filterbank[j].gain + ringworm*auxtemp; 
        
-       efxoutl[i] += (filterbank[j].l->filterout_s(smpsl[i])) * filterbank[j].oldgain*lpanning*level ;
-       efxoutr[i] += (filterbank[j].r->filterout_s(smpsr[i])) * filterbank[j].oldgain*rpanning*level;   
-          
+       tmpl[i] += (filterbank[j].l->filterout_s(smpsl[i])) * filterbank[j].oldgain;
+       tmpr[i] += (filterbank[j].r->filterout_s(smpsr[i])) * filterbank[j].oldgain;   
+
        };
+       
  
-   }
+   };
+   
+       for (i = 0; i<PERIOD; i++)
+       { 
+       efxoutl[i] = lpanning*level*tmpl[i];  
+       efxoutr[i] = rpanning*level*tmpr[i];       
+       };
+       
       vulevel = (float)CLAMP(rap2dB(maxgain), -48.0, 15.0); 
 
 
