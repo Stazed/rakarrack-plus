@@ -5514,6 +5514,7 @@ void RKRGUI::cb_seq_mode(Fl_Choice* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_seq_mode[] = {
  {"Lineal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Step", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

@@ -5896,11 +5896,15 @@ seq_mode->value(rkr->efx_Sequence->getpar(13));}
         }
         Fl_Choice seq_mode {
           label Mode
-          callback {rkr->efx_Sequence->changepar(13,(int)o->value())} open selected
+          callback {rkr->efx_Sequence->changepar(13,(int)o->value())}
           xywh {353 380 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
             label Lineal
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Step selected
             xywh {0 0 36 21} labelsize 9
           }
         }

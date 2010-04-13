@@ -146,9 +146,50 @@ Sequence::out (float * smpsl, float * smpsr)
   }  
    break;
   
-   // here case 1:
-   //
-   // break;
+  case 1:
+   
+    
+  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+  {
+
+  if (++tcount >= intperiod)
+  {
+  tcount = 0;
+  scount++;
+  if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+  dscount = (scount + Pstdiff) % 8;
+  }
+  
+  ftcount = M_PI * ifperiod * (float)(tcount);
+
+  lmod = sinf(ftcount)*fsequence[scount];
+  rmod = sinf(ftcount)*fsequence[dscount];
+   
+  if (Pamplitude)
+  {
+  ldbl = lmod * (1.0f - cosf(2.0f*ftcount)); 
+  ldbr = rmod * (1.0f - cosf(2.0f*ftcount)); 
+
+  efxoutl[i] = ldbl * smpsl[i];
+  efxoutr[i] = ldbr * smpsr[i];
+  }
+  
+  float frl = MINFREQ + MAXFREQ*lmod;
+  float frr = MINFREQ + MAXFREQ*rmod;
+
+
+  if ( i % 8 == 0)
+  {
+  filterl->setfreq_and_q (frl, fq);
+  filterr->setfreq_and_q (frr, fq);
+  }
+  
+  efxoutl[i] = filterl->filterout_s(efxoutl[i]);
+  efxoutr[i] = filterr->filterout_s (efxoutr[i]);  
+   
+ } 
+ 
+  break;
    
    }  
 
@@ -163,19 +204,19 @@ Sequence::out (float * smpsl, float * smpsr)
 void
 Sequence::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 13;
+  const int PRESET_SIZE = 14;
   const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0},
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0},
     //Stair Step
-    {10, 20, 30, 50, 75, 90, 100, 127, 0, 90, 40, 0, 0},
+    {10, 20, 30, 50, 75, 90, 100, 127, 0, 90, 40, 0, 0, 0},
     //Mild
-    {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0},
+    {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0, 0},
     //WahWah
-    {0, 127, 0, 127, 0, 127, 0, 127, 0, 220, 96, 0, 3},
+    {0, 127, 0, 127, 0, 127, 0, 127, 0, 220, 96, 0, 3, 0},
     //Filter Pan
-    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3}
+    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0}
  
   };
 
