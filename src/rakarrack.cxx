@@ -5400,6 +5400,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 seq_mode->value(rkr->efx_Sequence->getpar(13));
+seq_range->value(rkr->efx_Sequence->getpar(14));
 }
 void RKRGUI::cb_seq_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_preset_i(o,v);
@@ -5519,6 +5520,13 @@ Fl_Menu_Item RKRGUI::menu_seq_mode[] = {
  {"Stepper", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
+
+void RKRGUI::cb_seq_range_i(Fl_Counter* o, void*) {
+  rkr->efx_Sequence->changepar(14,(int)o->value());
+}
+void RKRGUI::cb_seq_range(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_range_i(o,v);
+}
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
@@ -13307,7 +13315,6 @@ R average.");
       VOCODER->labelfont(1);
       VOCODER->user_data((void*)(1));
       VOCODER->align(96|FL_ALIGN_INSIDE);
-      VOCODER->hide();
       { vo_activar = new Fl_Light_Button(326, 214, 34, 18, "On");
         vo_activar->shortcut(0x35);
         vo_activar->color((Fl_Color)62);
@@ -13766,6 +13773,17 @@ R average.");
         seq_mode->callback((Fl_Callback*)cb_seq_mode);
         seq_mode->menu(menu_seq_mode);
       } // Fl_Choice* seq_mode
+      { seq_range = new Fl_Counter(325, 284, 33, 13, "Range");
+        seq_range->type(1);
+        seq_range->labelsize(10);
+        seq_range->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_range->minimum(1);
+        seq_range->maximum(8);
+        seq_range->step(1);
+        seq_range->value(1);
+        seq_range->textsize(9);
+        seq_range->callback((Fl_Callback*)cb_seq_range);
+      } // Fl_Counter* seq_range
       SEQUENCE->end();
     } // Fl_Group* SEQUENCE
     { Tuner = new Fl_Group(521, 24, 276, 58);
