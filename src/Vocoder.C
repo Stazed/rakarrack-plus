@@ -43,12 +43,12 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   tmpl = (float *) malloc (sizeof (float) * PERIOD);
   tmpr = (float *) malloc (sizeof (float) * PERIOD);
   Pmuffle = 10;
-  float tmp = 0.01f;  //10 ms decay time on peak detectors
-  alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
-  beta = 1.0f - alpha; 
-  prls = beta;
-  gate = rap2dB(-75.0f);
-  
+      float tmp = 0.01f;  //10 ms decay time on peak detectors
+      alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+      beta = 1.0f - alpha; 
+      prls = beta;
+      gate = rap2dB(-75.0f);
+
   tmp = 0.05f; //50 ms att/rel on compressor
   calpha =  cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
   cbeta = 1.0f - calpha;
@@ -104,7 +104,7 @@ void
 Vocoder::out (float * smpsl, float * smpsr)
 {
   int i, j;
-  float tempgain1;
+  float tempgain1, tempgain2;
   float maxgain=0.0f;
   float auxtemp, tmpgain;
    
@@ -148,17 +148,43 @@ Vocoder::out (float * smpsl, float * smpsr)
       {
        vocbuf[i]=auxresampled[i];
        if(vocbuf[i]>maxgain) maxgain = vocbuf[i]; //vu meter level.  
+      }  
 
-       tempgain1=filterbank[j].aux->filterout_s(vocbuf[i]) + ringworm*vocbuf[i];
+       filterbank[j].aux->filterout(vocbuf);
+       
+       if(filterbank[j].speak < gate) filterbank[j].speak = 0.0f;
+       tempgain1 = filterbank[j].gain;
+
+      for (i = 0; i<PERIOD; i++)
+       { 
+       if(fabs(vocbuf[i]) > filterbank[j].speak) filterbank[j].speak = fabs(vocbuf[i]);  //Leaky Peak detector
+
+       filterbank[j].speak*=prls;
+       filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;   
+       filterbank[j].oldgain = filterbank[j].gain + ringworm*vocbuf[i]; 
+       };
+      tempgain2 = cperiod * (filterbank[j].gain - tempgain1);    
+      
+
+      filterbank[j].aux->filterout(vocbuf);
  
-       memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
-       memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
+      memcpy (tmpsmpsl , smpsl, PERIOD * sizeof(float));  
+      memcpy (tmpsmpsr , smpsr, PERIOD * sizeof(float));  
  
-       tmpl[i] += filterbank[j].l->filterout_s(tmpsmpsl[i]) * tempgain1;
-       tmpr[i] += filterbank[j].r->filterout_s(tmpsmpsr[i]) * tempgain1;
-       } 
-   
-     } 
+      filterbank[j].l->filterout(tmpsmpsl);
+      filterbank[j].r->filterout(tmpsmpsr);
+ 
+      for (i = 0; i<PERIOD; i++)
+       { 
+       tmpl[i] += tmpsmpsl[i] * tempgain1;  //Includes gain interpolation here between periods.
+       tmpr[i] += tmpsmpsr[i] * tempgain1;
+       tempgain1+=tempgain2;   
+        
+       };  
+      
+  
+    }; 
+    
       for (i = 0; i<PERIOD; i++)
        { 
        efxoutl[i]= tmpl[i]*lpanning*level;  
@@ -279,12 +305,11 @@ float tmp = 0;
       Plevel = value;
       level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);    
       break;      
+
     case 6:
       Pring = value;
       ringworm = (float) Pring/127.0f;    
       break; 
-
-
    };
 };
 
@@ -314,7 +339,7 @@ Vocoder::getpar (int npar)
     case 6:
       return (Pring);
       break; 
-    
+
     };
   return (0);			//in case of bogus parameter number
 };

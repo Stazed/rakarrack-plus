@@ -74,7 +74,7 @@ void
 Sequence::out (float * smpsl, float * smpsr)
 {
   int i;
-  float ldiff, rdiff, lfol, lfor;
+  float ldiff, rdiff, lfol, lfor, ftcount;
   float lmod = 0.0f;
   float rmod = 0.0f;
   float ldbl, ldbr;
@@ -112,13 +112,16 @@ Sequence::out (float * smpsl, float * smpsr)
   lfor = fsequence[dscount];
   }
   
-  lmod = lfol + ldiff * (float) tcount;
-  rmod = lfor + rdiff * (float) tcount;  
+  ftcount = (float) tcount;
+
+
+  lmod = lfol + ldiff * ftcount;
+  rmod = lfor + rdiff * ftcount;  
 
   if (Pamplitude)
   {
-  ldbl = lmod * (1.0f - cosf(D_PI*ifperiod*((float) tcount))); 
-  ldbr = rmod * (1.0f - cosf(D_PI*ifperiod*((float) tcount))); 
+  ldbl = lmod * (1.0f - cosf(D_PI*ifperiod*ftcount)); 
+  ldbr = rmod * (1.0f - cosf(D_PI*ifperiod*ftcount)); 
 
   efxoutl[i] = ldbl * smpsl[i];
   efxoutr[i] = ldbr * smpsr[i];
