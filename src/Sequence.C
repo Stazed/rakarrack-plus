@@ -42,8 +42,8 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   tcount = 0;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
-  modfilterl = new RBFilter (0, 8.0f, 1.0f, 2);
-  modfilterr = new RBFilter (0, 8.0f, 1.0f, 2);  
+  modfilterl = new RBFilter (0, 25.0f, 0.25f, 3);
+  modfilterr = new RBFilter (0, 25.0f, 0.25f, 3);  
   setpreset (Ppreset);
   
   filterl->setmix(1, 0.33f, -1.0f, 0.25f);
@@ -84,7 +84,7 @@ Sequence::out (float * smpsl, float * smpsr)
   
   float seqpower = 0.0f;  
   for (i = 0; i<8; i++)  seqpower += (float) fsequence[i];
-  seqpower *= 0.125f;
+  seqpower = seqpower/8.0f;
 
   switch(Pmode)
   {
@@ -275,7 +275,7 @@ Sequence::setpreset (int npreset)
     //Filter Pan
     {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0},
     //Stepper
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 2}
+    {30, 127, 30, 50, 80, 40, 110, 80, 60, 240, 40, 0, 1, 2}
   };
 
 
