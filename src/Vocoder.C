@@ -38,8 +38,6 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   Pinput = 0;
   Ppanning = 64;
   Plrcross = 100;
-  tmpsmpsl = (float *) malloc (sizeof (float) * PERIOD);
-  tmpsmpsr = (float *) malloc (sizeof (float) * PERIOD);
   tmpl = (float *) malloc (sizeof (float) * PERIOD);
   tmpr = (float *) malloc (sizeof (float) * PERIOD);
   Pmuffle = 10;
@@ -55,8 +53,6 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
   cthresh = 0.25f;
   cpthresh = cthresh; //dynamic threshold
   cratio = 0.25f;
-
-  vocbuf = (float *) malloc (sizeof (float) * PERIOD);
   
   cperiod = 1.0f/fPERIOD; 
   float center;
@@ -104,9 +100,8 @@ void
 Vocoder::out (float * smpsl, float * smpsr)
 {
   int i, j;
-  float tempgain1, tempgain2;
   float maxgain=0.0f;
-  float auxtemp, tmpgain, lout, rout;
+  float auxtemp, tmpgain;
    
    memset(tmpl,0,sizeof(float)*PERIOD);
    memset(tmpr,0,sizeof(float)*PERIOD);    
