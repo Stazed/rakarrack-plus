@@ -26,8 +26,8 @@
 #include "global.h"
 #include "RBFilter.h"
 
-#define MINFREQ 60.0f
-#define MAXFREQ 16000.0f
+#define MINFREQ 100.0f
+#define MAXFREQ 10000.0f
 
 class Sequence
 {
