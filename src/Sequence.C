@@ -191,6 +191,13 @@ Sequence::out (float * smpsl, float * smpsr)
  
   break;
    
+  // here case 3:
+  //
+  // break;
+
+
+
+
    }  
 
 };
