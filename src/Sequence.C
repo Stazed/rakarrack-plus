@@ -85,10 +85,10 @@ Sequence::out (float * smpsl, float * smpsr)
   
   if ((rndflag) && (tcount < PERIOD + 1))//This is an Easter Egg
   {
-   srand( time(NULL) );
+   srand(time(NULL));
    for (i = 0; i<8; i++)  
    {
-   fsequence[i] = RND;
+   fsequence[i] = RND1;
    }
   }  
 
