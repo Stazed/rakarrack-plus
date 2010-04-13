@@ -42,10 +42,12 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   tcount = 0;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
+  modfilterl = new RBFilter (0, 5.0f, 1.0f, 2);
+  modfilterr = new RBFilter (0, 5.0f, 1.0f, 2);  
   setpreset (Ppreset);
   
-  filterl->setmix(1, 0.1f, -1.0f, 0.25f);
-  filterr->setmix(1, 0.1f, -1.0f, 0.25f);  
+  filterl->setmix(1, 0.33f, -1.0f, 0.25f);
+  filterr->setmix(1, 0.33f, -1.0f, 0.25f);  
 
   cleanup ();
 };
@@ -79,6 +81,10 @@ Sequence::out (float * smpsl, float * smpsr)
   float rmod = 0.0f;
   float ldbl, ldbr;
   int nextcount,dnextcount;
+  
+  float seqpower = 0.0f;  
+  for (i = 0; i<8; i++)  seqpower += (float) fsequence[i];
+  seqpower *= 0.125f;
 
   switch(Pmode)
   {
@@ -184,13 +190,57 @@ Sequence::out (float * smpsl, float * smpsr)
   filterr->setfreq_and_q (frr, fq);
   }
   
-  efxoutl[i] = filterl->filterout_s(efxoutl[i]);
+  efxoutl[i] = filterl->filterout_s (efxoutl[i]);
   efxoutr[i] = filterr->filterout_s (efxoutr[i]);  
    
  } 
  
   break;
+
+ case 2:  //Stepper
+      
+  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+  {
+
+  if (++tcount >= intperiod)
+  {
+  tcount = 0;
+  scount++;
+  if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+  dscount = (scount + Pstdiff) % 8;
+  }
+ 
+  lmod = fsequence[scount];
+  rmod = fsequence[dscount];
+  
+  lmod = modfilterl->filterout_s(lmod);
+  rmod = modfilterr->filterout_s(rmod);   
+  
+  if (Pamplitude)
+  {
+  ldbl = seqpower * lmod; 
+  ldbr = seqpower * rmod; 
+
+  efxoutl[i] = ldbl * smpsl[i];
+  efxoutr[i] = ldbr * smpsr[i];
+  }
+  
+  float frl = MINFREQ + lmod * 4000.0f;
+  float frr = MINFREQ + rmod * 4000.0f;
+
+
+  if ( i % 8 == 0)
+  {
+  filterl->setfreq_and_q (frl, fq);
+  filterr->setfreq_and_q (frr, fq);
+  }
+  
+  efxoutl[i] = filterl->filterout_s (efxoutl[i]);
+  efxoutr[i] = filterr->filterout_s (efxoutr[i]);  
    
+ } 
+ 
+  break;   
   // here case 3:
   //
   // break;
@@ -217,14 +267,15 @@ Sequence::setpreset (int npreset)
     //Jumpy
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0},
     //Stair Step
-    {10, 20, 30, 50, 75, 90, 100, 127, 64, 90, 96, 0, 0, 1},
+    {10, 20, 30, 50, 75, 90, 100, 127, 64, 90, 96, 0, 0, 2},
     //Mild
     {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0, 0},
     //WahWah
     {11, 55, 15, 95, 12, 76, 11, 36, 30, 80, 110, 0, 4, 1},
     //Filter Pan
     {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0}
- 
+    //Stepper
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 2},
   };
 
 

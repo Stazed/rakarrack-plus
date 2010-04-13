@@ -58,7 +58,7 @@ private:
   int Pmode;  
   int tcount, scount, dscount, intperiod; 
  
-  class RBFilter *filterl, *filterr;
+  class RBFilter *filterl, *filterr, *modfilterl, *modfilterr;
 
   float fsequence[8];
   float maxfreq,minfreq,frequency;  
