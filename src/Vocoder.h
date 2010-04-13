@@ -68,8 +68,6 @@ private:
   float lpanning, rpanning, input,level;
   float alpha,beta,prls,gate;
   float compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
-  float *vocbuf;
-  float *tmpsmpsl, *tmpsmpsr; 
   float *tmpl, *tmpr;
     struct { float sfreq, sq,speak,gain,oldgain;
     AnalogFilter *l, *r, *aux;
