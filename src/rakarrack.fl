@@ -842,7 +842,7 @@ class RKRGUI {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} selected
       xywh {1500 34 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -5904,7 +5904,11 @@ seq_mode->value(rkr->efx_Sequence->getpar(13));}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label Step selected
+            label UpDown
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Stepper
             xywh {0 0 36 21} labelsize 9
           }
         }
