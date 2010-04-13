@@ -267,13 +267,39 @@ Sequence::setranges(int value)
   {
   
      case 1:
-       MINFREQ = 100.0f;
-       MAXFREQ = 10000.0f;
+       MINFREQ = 240.0f;
+       MAXFREQ = 1000.0f;
        break;
      case 2:
        MINFREQ = 200.0f;
        MAXFREQ = 4000.0f;
        break;     
+     case 3:
+       MINFREQ = 120.0f;
+       MAXFREQ = 8000.0f; 
+       break;
+     case 4:
+       MINFREQ = 100.0f;
+       MAXFREQ = 12000.0f; 
+       break;
+     case 5:
+       MINFREQ = 80.0f;
+       MAXFREQ = 16000.0f; 
+       break;
+     case 6:
+       MINFREQ = 60.0f;
+       MAXFREQ = 18000.0f; 
+       break;
+     case 7:
+       MINFREQ = 40.0f;
+       MAXFREQ = 22000.0f; 
+       break;
+     case 8:
+       MINFREQ = 20.0f;
+       MAXFREQ = 26000.0f; 
+       break;
+
+
    }
 }   
 
@@ -285,15 +311,15 @@ Sequence::setpreset (int npreset)
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 1},
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3},
     //Stair Step
-    {10, 20, 30, 50, 75, 90, 100, 127, 64, 90, 96, 0, 0, 2, 1},
+    {10, 20, 30, 50, 75, 90, 100, 127, 64, 90, 96, 0, 0, 2, 5},
     //Mild
-    {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0, 0, 1},
+    {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0, 0, 4},
     //WahWah
     {11, 55, 15, 95, 12, 76, 11, 36, 30, 80, 110, 0, 4, 1, 2},
     //Filter Pan
-    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0, 1},
+    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0, 8},
     //Stepper
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 2, 2}
   };
