@@ -127,18 +127,16 @@ Sequence::out (float * smpsl, float * smpsr)
   efxoutr[i] = ldbr * smpsr[i];
   }
   
-  };
-  
-   
   float frl = MINFREQ + MAXFREQ*lmod;
   float frr = MINFREQ + MAXFREQ*rmod;
 
   filterl->setfreq_and_q (frl, fq);
   filterr->setfreq_and_q (frr, fq);
 
-  filterl->filterout (efxoutl);
-  filterr->filterout (efxoutr);  
-  
+  efxoutl[i] = filterl->filterout_s(efxoutl[i]);
+  efxoutr[i] = filterr->filterout_s (efxoutr[i]);  
+
+}  
   
 };
 
