@@ -150,7 +150,7 @@ void
 Sequence::setpreset (int npreset)
 {
   const int PRESET_SIZE = 13;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0},
@@ -159,9 +159,10 @@ Sequence::setpreset (int npreset)
     //Mild
     {20, 30, 10, 40, 25, 60, 100, 50, 0, 90, 40, 0, 0},
     //WahWah
-    {0, 127, 0, 127, 0, 127, 0, 127, 0, 220, 96, 0, 3}
-
-
+    {0, 127, 0, 127, 0, 127, 0, 127, 0, 220, 96, 0, 3},
+    //Filter Pan
+    {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3}
+ 
   };
 
 
