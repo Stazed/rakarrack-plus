@@ -139,11 +139,6 @@ Vocoder::out (float * smpsl, float * smpsr)
    vlp->filterout(auxresampled);
    vhp->filterout(auxresampled);
 
-       for (i = 0; i<PERIOD; i++)
-       { 
-       tmpl[i] =  0.0f;  
-       tmpr[i] =  0.0f;        
-       };
 
     for (j = 0; j < VOC_BANDS; j++)
     {
