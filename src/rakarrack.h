@@ -2644,6 +2644,12 @@ private:
   void cb_seq_amp_i(Fl_Check_Button*, void*);
   static void cb_seq_amp(Fl_Check_Button*, void*);
 public:
+  Fl_Choice *seq_mode;
+private:
+  void cb_seq_mode_i(Fl_Choice*, void*);
+  static void cb_seq_mode(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_seq_mode[];
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

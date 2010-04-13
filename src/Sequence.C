@@ -79,6 +79,10 @@ Sequence::out (float * smpsl, float * smpsr)
   float rmod = 0.0f;
   float ldbl, ldbr;
   int nextcount,dnextcount;
+
+  switch(Pmode)
+  {
+  case 0:
   
   nextcount = scount + 1;
   if (nextcount > 7 ) nextcount = 0; 
@@ -139,8 +143,15 @@ Sequence::out (float * smpsl, float * smpsr)
   efxoutl[i] = filterl->filterout_s(efxoutl[i]);
   efxoutr[i] = filterr->filterout_s (efxoutr[i]);  
 
-}  
+  }  
+   break;
   
+   // here case 1:
+   //
+   // break;
+   
+   }  
+
 };
 
 
@@ -214,6 +225,10 @@ Sequence::changepar (int npar, int value)
     case 12:  
       Pstdiff = value;
       break;    
+    case 13:
+      Pmode = value;
+      break;
+
     };
 };
 
@@ -247,7 +262,8 @@ Sequence::getpar (int npar)
     case 12:
       return (Pstdiff);
       break;
-
+    case 13:
+      return (Pmode); 
     };
   return (0);			//in case of bogus parameter number
 };

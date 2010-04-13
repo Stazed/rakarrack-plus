@@ -843,7 +843,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1514 48 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1500 34 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5774,7 +5774,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
 findpos(37,(int)o->value());}
-          xywh {325 215 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+          xywh {325 215 34 16} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice seq_preset {
           label Preset
@@ -5791,7 +5791,8 @@ seq_4->value(rkr->efx_Sequence->getpar(3));
 seq_5->value(rkr->efx_Sequence->getpar(4));
 seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
-seq_8->value(rkr->efx_Sequence->getpar(7));} open
+seq_8->value(rkr->efx_Sequence->getpar(7));
+seq_mode->value(rkr->efx_Sequence->getpar(13));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5811,87 +5812,97 @@ seq_8->value(rkr->efx_Sequence->getpar(7));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Filter Pan} selected
+            label {Filter Pan}
             xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider seq_WD {
           label {Wet/Dry}
           callback {rkr->efx_Sequence->changepar(8,(int)(o->value()+64));}
-          xywh {369 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {369 236 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_1 {
           label 1
           callback {rkr->efx_Sequence->changepar(0,(int)o->value());}
-          xywh {369 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {369 248 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_2 {
           label 2
           callback {rkr->efx_Sequence->changepar(1,(int)o->value());}
-          xywh {369 262 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {369 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_3 {
           label 3
           callback {rkr->efx_Sequence->changepar(2,(int)o->value());}
-          xywh {369 274 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {369 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_4 {
           label 4
           callback {rkr->efx_Sequence->changepar(3,(int)o->value());}
-          xywh {369 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {369 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_5 {
           label 5
           callback {rkr->efx_Sequence->changepar(4,(int)o->value());}
-          xywh {370 298 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {370 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_6 {
           label 6
           callback {rkr->efx_Sequence->changepar(5,(int)o->value());}
-          xywh {370 310 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {370 308 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_7 {
           label 7
           callback {rkr->efx_Sequence->changepar(6,(int)o->value());}
-          xywh {370 322 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {370 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_8 {
           label 8
           callback {rkr->efx_Sequence->changepar(7,(int)o->value());}
-          xywh {370 334 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {370 332 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_tempo {
           label Tempo
           callback {rkr->efx_Sequence->changepar(9,(int)o->value());}
-          xywh {369 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          xywh {369 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_q {
           label Q
           callback {rkr->efx_Sequence->changepar(10,(int)o->value()+64);}
-          xywh {369 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {369 356 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider seq_stdf {
           label {St.df}
           callback {rkr->efx_Sequence->changepar(12,(int)o->value());}
-          xywh {369 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
+          xywh {369 368 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
           class SliderW
         }
         Fl_Check_Button seq_amp {
-          label Amplitude
+          label {Amp.}
           user_data 2
           callback {rkr->efx_Sequence->changepar(11,(int)o->value())}
-          xywh {368 380 15 14} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {433 380 15 14} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Choice seq_mode {
+          label Mode
+          callback {rkr->efx_Sequence->changepar(13,(int)o->value())} open selected
+          xywh {353 380 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
+        } {
+          MenuItem {} {
+            label Lineal
+            xywh {0 0 36 21} labelsize 9
+          }
         }
       }
       Fl_Group Tuner {

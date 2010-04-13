@@ -5399,6 +5399,7 @@ seq_5->value(rkr->efx_Sequence->getpar(4));
 seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
+seq_mode->value(rkr->efx_Sequence->getpar(13));
 }
 void RKRGUI::cb_seq_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_preset_i(o,v);
@@ -5503,6 +5504,18 @@ void RKRGUI::cb_seq_amp_i(Fl_Check_Button* o, void*) {
 void RKRGUI::cb_seq_amp(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_amp_i(o,v);
 }
+
+void RKRGUI::cb_seq_mode_i(Fl_Choice* o, void*) {
+  rkr->efx_Sequence->changepar(13,(int)o->value());
+}
+void RKRGUI::cb_seq_mode(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_mode_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_seq_mode[] = {
+ {"Lineal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
@@ -13520,7 +13533,7 @@ R average.");
       SEQUENCE->user_data((void*)(1));
       SEQUENCE->align(96|FL_ALIGN_INSIDE);
       SEQUENCE->hide();
-      { seq_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+      { seq_activar = new Fl_Light_Button(325, 215, 34, 16, "On");
         seq_activar->shortcut(0x36);
         seq_activar->color((Fl_Color)62);
         seq_activar->selection_color((Fl_Color)1);
@@ -13540,7 +13553,7 @@ R average.");
         seq_preset->when(FL_WHEN_RELEASE_ALWAYS);
         seq_preset->menu(menu_seq_preset);
       } // Fl_Choice* seq_preset
-      { seq_WD = new SliderW(369, 238, 100, 10, "Wet/Dry");
+      { seq_WD = new SliderW(369, 236, 100, 10, "Wet/Dry");
         seq_WD->type(5);
         seq_WD->box(FL_FLAT_BOX);
         seq_WD->color((Fl_Color)178);
@@ -13557,7 +13570,7 @@ R average.");
         seq_WD->align(FL_ALIGN_LEFT);
         seq_WD->when(FL_WHEN_CHANGED);
       } // SliderW* seq_WD
-      { seq_1 = new SliderW(369, 250, 100, 10, "1");
+      { seq_1 = new SliderW(369, 248, 100, 10, "1");
         seq_1->type(5);
         seq_1->box(FL_FLAT_BOX);
         seq_1->color((Fl_Color)178);
@@ -13573,7 +13586,7 @@ R average.");
         seq_1->align(FL_ALIGN_LEFT);
         seq_1->when(FL_WHEN_CHANGED);
       } // SliderW* seq_1
-      { seq_2 = new SliderW(369, 262, 100, 10, "2");
+      { seq_2 = new SliderW(369, 260, 100, 10, "2");
         seq_2->type(5);
         seq_2->box(FL_FLAT_BOX);
         seq_2->color((Fl_Color)178);
@@ -13589,7 +13602,7 @@ R average.");
         seq_2->align(FL_ALIGN_LEFT);
         seq_2->when(FL_WHEN_CHANGED);
       } // SliderW* seq_2
-      { seq_3 = new SliderW(369, 274, 100, 10, "3");
+      { seq_3 = new SliderW(369, 272, 100, 10, "3");
         seq_3->type(5);
         seq_3->box(FL_FLAT_BOX);
         seq_3->color((Fl_Color)178);
@@ -13605,7 +13618,7 @@ R average.");
         seq_3->align(FL_ALIGN_LEFT);
         seq_3->when(FL_WHEN_CHANGED);
       } // SliderW* seq_3
-      { seq_4 = new SliderW(369, 286, 100, 10, "4");
+      { seq_4 = new SliderW(369, 284, 100, 10, "4");
         seq_4->type(5);
         seq_4->box(FL_FLAT_BOX);
         seq_4->color((Fl_Color)178);
@@ -13621,7 +13634,7 @@ R average.");
         seq_4->align(FL_ALIGN_LEFT);
         seq_4->when(FL_WHEN_CHANGED);
       } // SliderW* seq_4
-      { seq_5 = new SliderW(370, 298, 100, 10, "5");
+      { seq_5 = new SliderW(370, 296, 100, 10, "5");
         seq_5->type(5);
         seq_5->box(FL_FLAT_BOX);
         seq_5->color((Fl_Color)178);
@@ -13637,7 +13650,7 @@ R average.");
         seq_5->align(FL_ALIGN_LEFT);
         seq_5->when(FL_WHEN_CHANGED);
       } // SliderW* seq_5
-      { seq_6 = new SliderW(370, 310, 100, 10, "6");
+      { seq_6 = new SliderW(370, 308, 100, 10, "6");
         seq_6->type(5);
         seq_6->box(FL_FLAT_BOX);
         seq_6->color((Fl_Color)178);
@@ -13653,7 +13666,7 @@ R average.");
         seq_6->align(FL_ALIGN_LEFT);
         seq_6->when(FL_WHEN_CHANGED);
       } // SliderW* seq_6
-      { seq_7 = new SliderW(370, 322, 100, 10, "7");
+      { seq_7 = new SliderW(370, 320, 100, 10, "7");
         seq_7->type(5);
         seq_7->box(FL_FLAT_BOX);
         seq_7->color((Fl_Color)178);
@@ -13669,7 +13682,7 @@ R average.");
         seq_7->align(FL_ALIGN_LEFT);
         seq_7->when(FL_WHEN_CHANGED);
       } // SliderW* seq_7
-      { seq_8 = new SliderW(370, 334, 100, 10, "8");
+      { seq_8 = new SliderW(370, 332, 100, 10, "8");
         seq_8->type(5);
         seq_8->box(FL_FLAT_BOX);
         seq_8->color((Fl_Color)178);
@@ -13685,7 +13698,7 @@ R average.");
         seq_8->align(FL_ALIGN_LEFT);
         seq_8->when(FL_WHEN_CHANGED);
       } // SliderW* seq_8
-      { seq_tempo = new SliderW(369, 346, 100, 10, "Tempo");
+      { seq_tempo = new SliderW(369, 344, 100, 10, "Tempo");
         seq_tempo->type(5);
         seq_tempo->box(FL_FLAT_BOX);
         seq_tempo->color((Fl_Color)178);
@@ -13702,7 +13715,7 @@ R average.");
         seq_tempo->align(FL_ALIGN_LEFT);
         seq_tempo->when(FL_WHEN_CHANGED);
       } // SliderW* seq_tempo
-      { seq_q = new SliderW(369, 358, 100, 10, "Q");
+      { seq_q = new SliderW(369, 356, 100, 10, "Q");
         seq_q->type(5);
         seq_q->box(FL_FLAT_BOX);
         seq_q->color((Fl_Color)178);
@@ -13719,7 +13732,7 @@ R average.");
         seq_q->align(FL_ALIGN_LEFT);
         seq_q->when(FL_WHEN_CHANGED);
       } // SliderW* seq_q
-      { seq_stdf = new SliderW(369, 370, 100, 10, "St.df");
+      { seq_stdf = new SliderW(369, 368, 100, 10, "St.df");
         seq_stdf->type(5);
         seq_stdf->box(FL_FLAT_BOX);
         seq_stdf->color((Fl_Color)178);
@@ -13735,12 +13748,21 @@ R average.");
         seq_stdf->align(FL_ALIGN_LEFT);
         seq_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* seq_stdf
-      { seq_amp = new Fl_Check_Button(368, 380, 15, 14, "Amplitude");
+      { seq_amp = new Fl_Check_Button(433, 380, 15, 14, "Amp.");
         seq_amp->down_box(FL_BORDER_BOX);
         seq_amp->labelsize(10);
         seq_amp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         seq_amp->callback((Fl_Callback*)cb_seq_amp, (void*)(2));
       } // Fl_Check_Button* seq_amp
+      { seq_mode = new Fl_Choice(353, 380, 78, 13, "Mode");
+        seq_mode->down_box(FL_BORDER_BOX);
+        seq_mode->labelsize(9);
+        seq_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_mode->textsize(9);
+        seq_mode->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        seq_mode->callback((Fl_Callback*)cb_seq_mode);
+        seq_mode->menu(menu_seq_mode);
+      } // Fl_Choice* seq_mode
       SEQUENCE->end();
     } // Fl_Group* SEQUENCE
     { Tuner = new Fl_Group(521, 24, 276, 58);
