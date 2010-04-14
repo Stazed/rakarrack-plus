@@ -107,7 +107,7 @@ Sequence::out (float * smpsl, float * smpsr)
 
   switch(Pmode)
   {
-  case 0:
+  case 0:	//Lineal
   
   nextcount = scount + 1;
   if (nextcount > 7 ) nextcount = 0; 
@@ -171,7 +171,7 @@ Sequence::out (float * smpsl, float * smpsr)
   }  
    break;
   
-  case 1:
+  case 1:		//Up Down
    
     
   for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
