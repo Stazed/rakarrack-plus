@@ -173,7 +173,7 @@ RKR::RKR ()
   efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr);
   efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled);
   efx_Sustainer = new Sustainer(efxoutl,efxoutr);
-  efx_Sequence = new Sequence(efxoutl,efxoutr);
+  efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);

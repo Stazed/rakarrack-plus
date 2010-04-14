@@ -26,10 +26,13 @@
 #include "Sequence.h"
 #include <time.h>
 
-Sequence::Sequence (float * efxoutl_, float * efxoutr_)
+Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
+  hq = Quality;
+  outi = (float *) malloc (sizeof (float) * PERIOD);
+  outo = (float *) malloc (sizeof (float) * PERIOD);
 
   filterl = NULL;
   filterr = NULL;
@@ -50,11 +53,18 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_)
   filterl->setmix(1, 0.33f, -1.0f, 0.25f);
   filterr->setmix(1, 0.33f, -1.0f, 0.25f);  
 
+  PS = new PitchShifter (2048, hq, fSAMPLE_RATE);
+  PS->ratio = 1.0f;
+
+
   cleanup ();
 };
 
 Sequence::~Sequence ()
 {
+  delete[]outi;
+  delete[]outo;
+  delete PS;
  
 };
 
@@ -64,6 +74,9 @@ Sequence::~Sequence ()
 void
 Sequence::cleanup ()
 {
+
+  memset(outi, 0, sizeof(float)*PERIOD);
+  memset(outo, 0, sizeof(float)*PERIOD);
 
 };
 
@@ -247,7 +260,55 @@ Sequence::out (float * smpsl, float * smpsr)
  } 
  
   break;   
-  // here case 3:
+  
+  case 3:
+  
+  nextcount = scount + 1;
+  if (nextcount > 7 ) nextcount = 0; 
+  ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
+  lfol = fsequence[scount];
+
+  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+  {
+
+  if (++tcount >= intperiod)
+  {
+  tcount = 0;
+  scount++;
+  if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+
+  nextcount = scount + 1;
+  if (nextcount > 7 ) nextcount = 0; 
+  ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
+  lfol = fsequence[scount];
+  }
+  
+  ftcount = (float) tcount;
+
+  lmod = 1.0f + lfol + ldiff * ftcount;
+
+  if (Pamplitude) lmod = 1.0f - (lfol + ldiff * ftcount) * .5f;
+  
+  outi[i] = (smpsl[i] + smpsr[i])*.5;
+     if (outi[i] > 1.0)
+	outi[i] = 1.0f;
+      if (outi[i] < -1.0)
+	outi[i] = -1.0f;
+  }
+
+
+   PS->ratio = lmod;
+   PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
+
+
+   memcpy(efxoutl, outo, sizeof(float)*PERIOD);
+   memcpy(efxoutr, outo, sizeof(float)*PERIOD);
+
+ 
+   break;
+  
+  
+  // here case 4:
   //
   // break;
 
@@ -315,7 +376,7 @@ void
 Sequence::setpreset (int npreset)
 {
   const int PRESET_SIZE = 15;
-  const int NUM_PRESETS = 6;
+  const int NUM_PRESETS = 7;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3},
@@ -328,7 +389,9 @@ Sequence::setpreset (int npreset)
     //Filter Pan
     {28, 59, 94, 127, 120, 80, 50, 24, 64, 180, 107, 0, 3, 0, 8},
     //Stepper
-    {30, 127, 30, 50, 80, 40, 110, 80, 0, 240, 95, 1, 1, 2, 2}
+    {30, 127, 30, 50, 80, 40, 110, 80, 0, 240, 95, 1, 1, 2, 2},
+    //Shifter
+    {0, 0, 127, 127, 0, 0, 127, 127, 64, 114, 64, 1, 0, 3, 0} 
 
   };
 
@@ -368,9 +431,8 @@ Sequence::changepar (int npar, int value)
   
   testegg = 0;
   for (i = 0; i<8; i++)  testegg += Psequence[i];
-if(testegg < 4)
+  if(testegg < 4)
   {
-  printf("random\n");
   seqpower = 5.0f;  //Easter egg
   rndflag = 1;
   }

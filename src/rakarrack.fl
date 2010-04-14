@@ -5764,7 +5764,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
         }
       }
       Fl_Group SEQUENCE {
-        user_data 1 selected
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button seq_activar {
@@ -5793,7 +5793,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 seq_mode->value(rkr->efx_Sequence->getpar(13));
-seq_range->value(rkr->efx_Sequence->getpar(14));}
+seq_range->value(rkr->efx_Sequence->getpar(14));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5818,6 +5818,10 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
           }
           MenuItem {} {
             label Stepper
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Shifter selected
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -5914,6 +5918,10 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
           }
           MenuItem {} {
             label Stepper
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Shifter
             xywh {0 0 36 21} labelsize 9
           }
         }

@@ -5413,6 +5413,7 @@ Fl_Menu_Item RKRGUI::menu_seq_preset[] = {
  {"Wah Wah", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Filter Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Stepper", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Shifter", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5518,6 +5519,7 @@ Fl_Menu_Item RKRGUI::menu_seq_mode[] = {
  {"Lineal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"UpDown", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Stepper", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Shifter", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

@@ -25,12 +25,13 @@
 
 #include "global.h"
 #include "RBFilter.h"
+#include "smbPitchShift.h"
 
 
 class Sequence
 {
 public:
-  Sequence (float * efxoutl_, float * efxoutr_);
+  Sequence (float * efxoutl_, float * efxoutr_, long int Quality);
   ~Sequence ();
    void cleanup (); 
    
@@ -59,10 +60,17 @@ private:
   int tcount, scount, dscount, intperiod; 
   
   int rndflag;
+  long int hq;
+
   float MINFREQ,MAXFREQ;
+  float *outi;
+  float *outo;
   
  
   class RBFilter *filterl, *filterr, *modfilterl, *modfilterr;
+  PitchShifter *PS;
+
+  
 
   float fsequence[8];
   float fq;
