@@ -261,7 +261,7 @@ Sequence::out (float * smpsl, float * smpsr)
  
   break;   
   
-  case 3:
+  case 3:  //Shifter
   
   nextcount = scount + 1;
   if (nextcount > 7 ) nextcount = 0; 
@@ -307,8 +307,68 @@ Sequence::out (float * smpsl, float * smpsr)
  
    break;
   
+   case 4:      //Tremor
   
-  // here case 4:
+  nextcount = scount + 1;
+  if (nextcount > 7 ) nextcount = 0; 
+  ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
+  lfol = fsequence[scount];
+
+  dscount = (scount + Pstdiff) % 8;
+  dnextcount = dscount + 1;
+  if (dnextcount > 7 ) dnextcount = 0; 
+  rdiff = ifperiod * (fsequence[dnextcount] - fsequence[dscount]);  
+  lfor = fsequence[dscount];
+
+  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+  {
+
+  if (++tcount >= intperiod)
+  {
+  tcount = 0;
+  scount++;
+  if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+
+  nextcount = scount + 1;
+  if (nextcount > 7 ) nextcount = 0; 
+  ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
+  lfol = fsequence[scount];
+
+  dscount = (scount + Pstdiff) % 8;
+  dnextcount = dscount + 1;
+  if (dnextcount > 7 ) dnextcount = 0; 
+  rdiff = ifperiod * (fsequence[dnextcount] - fsequence[dscount]);  
+  lfor = fsequence[dscount];
+  }
+//Process Amplitude modulation
+   if (Pamplitude)
+  {
+  ftcount = (float) tcount;
+  lmod = lfol + ldiff * ftcount;
+  rmod = lfor + rdiff * ftcount;  
+
+  ldbl = seqpower * lmod * (1.0f - cosf(D_PI*ifperiod*ftcount)); 
+  ldbr = seqpower * rmod * (1.0f - cosf(D_PI*ifperiod*ftcount)); 
+
+  efxoutl[i] = ldbl * smpsl[i];
+  efxoutr[i] = ldbr * smpsr[i];
+  }
+  else
+  {
+  lmod = seqpower * fsequence[scount];
+  rmod = seqpower * fsequence[dscount];
+  lmod = modfilterl->filterout_s(lmod);
+  rmod = modfilterr->filterout_s(rmod);   
+
+  efxoutl[i] = lmod * smpsl[i];
+  efxoutr[i] = rmod * smpsr[i];
+  }
+ 
+ 
+  }; 
+   break;
+ 
+  // here case 5:
   //
   // break;
 
@@ -376,7 +436,7 @@ void
 Sequence::setpreset (int npreset)
 {
   const int PRESET_SIZE = 15;
-  const int NUM_PRESETS = 7;
+  const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3},
@@ -391,7 +451,10 @@ Sequence::setpreset (int npreset)
     //Stepper
     {30, 127, 30, 50, 80, 40, 110, 80, 0, 240, 95, 1, 1, 2, 2},
     //Shifter
-    {0, 0, 127, 127, 0, 0, 127, 127, 64, 114, 64, 1, 0, 3, 0} 
+    {0, 0, 127, 127, 0, 0, 127, 127, 64, 114, 64, 1, 0, 3, 0}, 
+    //Tremor
+     {30, 127, 30, 50, 80, 40, 110, 80, 0, 240, 95, 1, 1, 4, 2}
+
 
   };
 
@@ -425,7 +488,7 @@ Sequence::changepar (int npar, int value)
   for (i = 0; i<8; i++)  seqpower += fsequence[i];
   if(seqpower > 0.1f) 
   {
-  seqpower = 10.0f/seqpower;
+  seqpower = 15.0f/seqpower;
   rndflag = 0;
   } 
   

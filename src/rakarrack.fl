@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,15 +834,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1486 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -5764,7 +5766,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
         }
       }
       Fl_Group SEQUENCE {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button seq_activar {
@@ -5793,7 +5795,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 seq_mode->value(rkr->efx_Sequence->getpar(13));
-seq_range->value(rkr->efx_Sequence->getpar(14));}
+seq_range->value(rkr->efx_Sequence->getpar(14));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5823,6 +5825,10 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
           MenuItem {} {
             label Shifter
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Zeke Trem} selected
+            xywh {10 10 36 21} labelsize 10
           }
         }
         Fl_Value_Slider seq_WD {
@@ -5905,7 +5911,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
         }
         Fl_Choice seq_mode {
           label Mode
-          callback {rkr->efx_Sequence->changepar(13,(int)o->value())}
+          callback {rkr->efx_Sequence->changepar(13,(int)o->value())} open
           xywh {353 380 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
@@ -5923,6 +5929,10 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
           MenuItem {} {
             label Shifter
             xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Tremor
+            xywh {10 10 36 21} labelsize 9
           }
         }
         Fl_Counter seq_range {
@@ -5963,7 +5973,7 @@ shifter_mode->value(rkr->efx_Shifter->getpar(8));} open
             xywh {10 10 45 26} labelsize 10
           }
           MenuItem {} {
-            label {Slow Up} selected
+            label {Slow Up}
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {
