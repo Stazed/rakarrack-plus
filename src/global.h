@@ -474,7 +474,7 @@ public:
   {
     char Nom[32];
     int Ato;
-  } efx_params[384];
+  } efx_params[336];
 
 
   struct Preset_Bank_Struct
