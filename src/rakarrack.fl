@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -839,13 +839,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {1486 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {1324 47 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5766,7 +5765,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
         }
       }
       Fl_Group SEQUENCE {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button seq_activar {
@@ -5795,7 +5794,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 seq_mode->value(rkr->efx_Sequence->getpar(13));
-seq_range->value(rkr->efx_Sequence->getpar(14));} open
+seq_range->value(rkr->efx_Sequence->getpar(14));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5827,7 +5826,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Zeke Trem} selected
+            label {Zeke Trem}
             xywh {10 10 36 21} labelsize 10
           }
         }
@@ -5943,7 +5942,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));} open
       }
       Fl_Group SHIFTER {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button shifter_activar {
           label On
@@ -5965,7 +5964,9 @@ shifter_attack->value(rkr->efx_Shifter->getpar(3));
 shifter_decay->value(rkr->efx_Shifter->getpar(4));
 shifter_thre->value(rkr->efx_Shifter->getpar(5));
 shifter_ud->value(rkr->efx_Shifter->getpar(7));
-shifter_mode->value(rkr->efx_Shifter->getpar(8));} open
+shifter_whammy->value(rkr->efx_Shifter->getpar(9));
+
+shifter_mode->value(rkr->efx_Shifter->getpar(8));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6025,21 +6026,31 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
           xywh {370 325 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 value 20 textcolor 7
           class SliderW
         }
+        Fl_Check_Button shifter_ud {
+          label Down
+          user_data 2
+          callback {rkr->efx_Shifter->changepar(7,(int)o->value())}
+          xywh {371 339 15 14} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Value_Slider shifter_whammy {
+          label Whamy
+          callback {rkr->efx_Shifter->changepar(9,(int)o->value());}
+          xywh {370 356 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
         Fl_Choice shifter_mode {
           label Mode
-          callback {rkr->efx_Shifter->changepar(8,(int)o->value())}
-          xywh {363 370 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
+          callback {rkr->efx_Shifter->changepar(8,(int)o->value())} open
+          xywh {363 376 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
             label Trigger
             xywh {10 10 36 21} labelsize 9
           }
-        }
-        Fl_Check_Button shifter_ud {
-          label Down
-          user_data 2
-          callback {rkr->efx_Shifter->changepar(7,(int)o->value())}
-          xywh {364 344 15 14} down_box BORDER_BOX labelsize 10 labelcolor 7
+          MenuItem {} {
+            label Whammy selected
+            xywh {0 0 36 21} labelsize 9
+          }
         }
       }
       Fl_Group Tuner {

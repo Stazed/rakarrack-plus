@@ -73,10 +73,11 @@ private:
   int Pattack;
   int Pdecay;
   int Pthreshold;
+  int Pwhammy;
   int state;
   
   float env, t_level, td_level, tz_level;
-  float a_rate,d_rate,tune, range;
+  float a_rate,d_rate,tune, range, whammy;
   float panning;
   float gain;
   float interval;

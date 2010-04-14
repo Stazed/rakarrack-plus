@@ -79,14 +79,12 @@ Shifter::out (float *smpsl, float *smpsr)
 
   int i;
   float sum;
+  float use;
 
-
-switch(Pmode)
- {
-   case 0:
     for (i=0; i < PERIOD; i++)
     {
-
+     if(Pmode == 0)
+     {
      sum = fabsf(smpsl[i])+fabsf(smpsr[i]);
      if (sum>env) env = sum;  else env=sum*ENV_TR+env*(1.0f-ENV_TR);
      
@@ -119,7 +117,7 @@ switch(Pmode)
           state=IDLE;
           }           
         }
-
+      }
       outi[i] = (smpsl[i] + smpsr[i])*.5;
       if (outi[i] > 1.0)
 	outi[i] = 1.0f;
@@ -128,10 +126,12 @@ switch(Pmode)
     
     }
 
+  if (Pmode == 1) use = whammy; else use = tune;
+
   if(Pupdown)
-    PS->ratio = 1.0f-(1.0f-range)*tune;
+    PS->ratio = 1.0f-(1.0f-range)*use;
    else 
-   PS->ratio = 1.0f+((range-1.0f)*tune);
+   PS->ratio = 1.0f+((range-1.0f)*use);
 
 
       PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
@@ -142,14 +142,6 @@ switch(Pmode)
 	  efxoutr[i] = outo[i] * gain * (1.0f - panning);
 	}
 
-     break;
-     
-//     case 1: here
-//
-//     break;
-
-
- }
 
 
 };
@@ -197,15 +189,15 @@ Shifter::setinterval (int value)
 void
 Shifter::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 9;
+  const int PRESET_SIZE = 10;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fast
-    {0, 64, 64, 200, 200, -20, 2, 0, 0},
+    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0},
     //Slowup
-    {0, 64, 64, 900, 200, -20, 2, 0, 0},
+    {0, 64, 64, 900, 200, -20, 2, 0, 0, 0},
     //Slowdown
-    {0, 64, 64, 900, 200, -20, 3, 1, 0}
+    {0, 64, 64, 900, 200, -20, 3, 1, 0, 0}
   };
 
   if (npreset >= NUM_PRESETS)
@@ -247,7 +239,6 @@ Shifter::changepar (int npar, int value)
       t_level = dB2rap ((float)Pthreshold);
       td_level = t_level*.75f;
       tz_level = t_level*.5f;
-      printf("%f %f %f\n",t_level,td_level,tz_level);
       break;
     case 6:
       Pinterval = value;
@@ -260,7 +251,11 @@ Shifter::changepar (int npar, int value)
     case 8:
       Pmode = value;
       break; 
-
+     case 9:
+      Pwhammy = value;
+      whammy = (float) value / 127.0f;
+      break;
+  
     }
 
 
@@ -299,6 +294,8 @@ Shifter::getpar (int npar)
     case 8:
       return (Pmode);
       break;
+    case 9:
+      return (Pwhammy);  
     }
    
 return(0);
