@@ -16598,7 +16598,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<314; i++)
+for (i=1; i<326; i++)
 
 {
 
@@ -17761,8 +17761,54 @@ switch (i)
      sus_sus->value(rkr->efx_Sustainer->getpar(1));
      sus_sus->redraw();
      break;
-
-
+     case 314:
+     seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
+     seq_WD->redraw();
+     break;
+     case 315:
+     seq_1->value(rkr->efx_Sequence->getpar(0));
+     seq_1->redraw();
+     break;
+     case 316:
+     seq_2->value(rkr->efx_Sequence->getpar(1));
+     seq_2->redraw();
+     break;
+     case 317:
+     seq_3->value(rkr->efx_Sequence->getpar(2));
+     seq_3->redraw();
+     break;
+     case 318:
+     seq_4->value(rkr->efx_Sequence->getpar(3));
+     seq_4->redraw();
+     break;
+     case 319:
+     seq_5->value(rkr->efx_Sequence->getpar(4));
+     seq_5->redraw();
+     break;
+     case 320:
+     seq_6->value(rkr->efx_Sequence->getpar(5));
+     seq_6->redraw();
+     break;
+     case 321:
+     seq_7->value(rkr->efx_Sequence->getpar(6));
+     seq_7->redraw();
+     break;
+     case 322:
+     seq_8->value(rkr->efx_Sequence->getpar(7));
+     seq_8->redraw();
+     break;
+     case 323:
+     seq_tempo->value(rkr->efx_Sequence->getpar(9));
+     seq_tempo->redraw();
+     break;
+     case 324:
+     seq_q->value(rkr->efx_Sequence->getpar(10)-64);
+     seq_q->redraw();
+     break;
+     case 325:
+     seq_stdf->value(rkr->efx_Sequence->getpar(12));
+     seq_stdf->redraw();
+     break;
 
 
 

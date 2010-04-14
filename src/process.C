@@ -219,7 +219,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 288;
+  NumParams= 300;
 
 {
    static const char *los_params[] = 
@@ -452,6 +452,18 @@ RKR::RKR ()
 "Ring Squ","188",
 "Ring Tri","186",
 "Ring WD","178",
+"Sequence WD","314",
+"Sequence 1","315",
+"Sequence 2","316",
+"Sequence 3","317",
+"Sequence 4","318",
+"Sequence 5","319",
+"Sequence 6","320",
+"Sequence 7","321",
+"Sequence 8","322",
+"Sequence Tempo","323",
+"Sequence Q","324",
+"Sequence St.df","325",
 "ShelfBoost Gain","292",
 "ShelfBoost Level","293",
 "ShelfBoost Pres","295",

@@ -1954,7 +1954,55 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 313:
          efx_Sustainer->changepar(1,value);
          break;     
-
+    
+    case 314:
+         efx_Sequence->changepar(8,value);
+         break;     
+    
+    case 315:
+         efx_Sequence->changepar(0,value);
+         break;     
+    
+    case 316:
+         efx_Sequence->changepar(1,value);
+         break;     
+    
+    case 317:
+         efx_Sequence->changepar(2,value);
+         break;     
+    
+    case 318:
+         efx_Sequence->changepar(3,value);
+         break;     
+    
+    case 319:
+         efx_Sequence->changepar(4,value);
+         break;     
+    
+    case 320:
+         efx_Sequence->changepar(5,value);
+         break;     
+    
+    case 321:
+         efx_Sequence->changepar(6,value);
+         break;     
+    
+    case 322:
+         efx_Sequence->changepar(7,value);
+         break;     
+    
+    case 323:
+         efx_Sequence->changepar(9,ret_Tempo(value));
+         break;     
+    
+    case 324:
+         efx_Sequence->changepar(10,value);
+         break;     
+ 
+   case 325:
+         efx_Sequence->changepar(12,(int)((float)value*.05511811f));
+         break;     
+ 
 
    } 
       
