@@ -365,6 +365,9 @@ else
    case 37:
     if(inoff) Sequence_Bypass=1; else Sequence_Bypass=0;
      break;
+   case 38:
+    if(inoff) Shifter_Bypass=1; else Shifter_Bypass=0;
+     break;
 
    
    case 121:
@@ -515,6 +518,10 @@ RKR::checkonoff(int miraque)
    case 37:
      if (Sequence_Bypass) return(0);
      break;
+   case 38:
+     if (Shifter_Bypass) return(0);
+     break;
+
 
  
    case 121:

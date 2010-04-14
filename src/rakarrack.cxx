@@ -5530,6 +5530,109 @@ void RKRGUI::cb_seq_range(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_range_i(o,v);
 }
 
+void RKRGUI::cb_shifter_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Shifter_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Shifter->cleanup();
+findpos(38,(int)o->value());
+}
+void RKRGUI::cb_shifter_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_activar_i(o,v);
+}
+
+void RKRGUI::cb_shifter_preset_i(Fl_Choice* o, void* v) {
+  if(!v)rkr->efx_Shifter->setpreset((int)o->value());
+shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
+shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
+shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
+shifter_int->value(rkr->efx_Shifter->getpar(6));
+shifter_attack->value(rkr->efx_Shifter->getpar(3));
+shifter_decay->value(rkr->efx_Shifter->getpar(4));
+shifter_thre->value(rkr->efx_Shifter->getpar(5));
+shifter_ud->value(rkr->efx_Shifter->getpar(7));
+shifter_mode->value(rkr->efx_Shifter->getpar(8));
+}
+void RKRGUI::cb_shifter_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_shifter_preset[] = {
+ {"Plain", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Octavator", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"3m Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_shifter_WD_i(SliderW* o, void*) {
+  rkr->efx_Shifter->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_shifter_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_WD_i(o,v);
+}
+
+void RKRGUI::cb_shifter_int_i(SliderW* o, void*) {
+  rkr->Shifter_Bypass=0;
+rkr->efx_Shifter->changepar(6,(int)o->value());
+if((int)shifter_activar->value())rkr->Shifter_Bypass=1;
+}
+void RKRGUI::cb_shifter_int(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_int_i(o,v);
+}
+
+void RKRGUI::cb_shifter_gain_i(SliderW* o, void*) {
+  rkr->efx_Shifter->changepar(2,(int)(o->value()+64));
+}
+void RKRGUI::cb_shifter_gain(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_gain_i(o,v);
+}
+
+void RKRGUI::cb_shifter_pan_i(SliderW* o, void*) {
+  rkr->efx_Shifter->changepar(1,(int)(o->value()+64));
+}
+void RKRGUI::cb_shifter_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_pan_i(o,v);
+}
+
+void RKRGUI::cb_shifter_attack_i(SliderW* o, void*) {
+  rkr->efx_Shifter->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_shifter_attack(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_attack_i(o,v);
+}
+
+void RKRGUI::cb_shifter_decay_i(SliderW* o, void*) {
+  rkr->efx_Shifter->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_shifter_decay(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_decay_i(o,v);
+}
+
+void RKRGUI::cb_shifter_thre_i(SliderW* o, void*) {
+  rkr->efx_Shifter->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_shifter_thre(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_thre_i(o,v);
+}
+
+void RKRGUI::cb_shifter_mode_i(Fl_Choice* o, void*) {
+  rkr->efx_Shifter->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_shifter_mode(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_mode_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_shifter_mode[] = {
+ {"Trigger", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_shifter_ud_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Shifter->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_shifter_ud(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_ud_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -13788,6 +13891,169 @@ R average.");
       } // Fl_Counter* seq_range
       SEQUENCE->end();
     } // Fl_Group* SEQUENCE
+    { SHIFTER = new Fl_Group(320, 211, 158, 184);
+      SHIFTER->box(FL_UP_BOX);
+      SHIFTER->color((Fl_Color)FL_FOREGROUND_COLOR);
+      SHIFTER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      SHIFTER->labelfont(1);
+      SHIFTER->user_data((void*)(1));
+      SHIFTER->align(96|FL_ALIGN_INSIDE);
+      SHIFTER->hide();
+      { shifter_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        shifter_activar->shortcut(0x30);
+        shifter_activar->color((Fl_Color)62);
+        shifter_activar->selection_color((Fl_Color)1);
+        shifter_activar->labelsize(10);
+        shifter_activar->callback((Fl_Callback*)cb_shifter_activar, (void*)(2));
+        shifter_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* shifter_activar
+      { shifter_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        shifter_preset->down_box(FL_BORDER_BOX);
+        shifter_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        shifter_preset->labelsize(10);
+        shifter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_preset->textsize(10);
+        shifter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_preset->callback((Fl_Callback*)cb_shifter_preset);
+        shifter_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        shifter_preset->menu(menu_shifter_preset);
+      } // Fl_Choice* shifter_preset
+      { shifter_WD = new SliderW(370, 241, 100, 10, "Wet/Dry");
+        shifter_WD->type(5);
+        shifter_WD->box(FL_FLAT_BOX);
+        shifter_WD->color((Fl_Color)178);
+        shifter_WD->selection_color((Fl_Color)62);
+        shifter_WD->labeltype(FL_NORMAL_LABEL);
+        shifter_WD->labelfont(0);
+        shifter_WD->labelsize(10);
+        shifter_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_WD->minimum(-64);
+        shifter_WD->maximum(63);
+        shifter_WD->step(1);
+        shifter_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_WD->callback((Fl_Callback*)cb_shifter_WD);
+        shifter_WD->align(FL_ALIGN_LEFT);
+        shifter_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* shifter_WD
+      { shifter_int = new SliderW(370, 254, 100, 10, "Int.");
+        shifter_int->type(5);
+        shifter_int->box(FL_FLAT_BOX);
+        shifter_int->color((Fl_Color)178);
+        shifter_int->selection_color((Fl_Color)62);
+        shifter_int->labeltype(FL_NORMAL_LABEL);
+        shifter_int->labelfont(0);
+        shifter_int->labelsize(10);
+        shifter_int->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_int->maximum(12);
+        shifter_int->step(1);
+        shifter_int->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_int->callback((Fl_Callback*)cb_shifter_int);
+        shifter_int->align(FL_ALIGN_LEFT);
+        shifter_int->when(FL_WHEN_CHANGED);
+      } // SliderW* shifter_int
+      { shifter_gain = new SliderW(370, 269, 100, 10, "Gain");
+        shifter_gain->type(5);
+        shifter_gain->box(FL_FLAT_BOX);
+        shifter_gain->color((Fl_Color)178);
+        shifter_gain->selection_color((Fl_Color)62);
+        shifter_gain->labeltype(FL_NORMAL_LABEL);
+        shifter_gain->labelfont(0);
+        shifter_gain->labelsize(10);
+        shifter_gain->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_gain->minimum(-64);
+        shifter_gain->maximum(63);
+        shifter_gain->step(1);
+        shifter_gain->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_gain->callback((Fl_Callback*)cb_shifter_gain);
+        shifter_gain->align(FL_ALIGN_LEFT);
+        shifter_gain->when(FL_WHEN_CHANGED);
+      } // SliderW* shifter_gain
+      { shifter_pan = new SliderW(370, 282, 100, 10, "Pan");
+        shifter_pan->type(5);
+        shifter_pan->box(FL_FLAT_BOX);
+        shifter_pan->color((Fl_Color)178);
+        shifter_pan->selection_color((Fl_Color)62);
+        shifter_pan->labeltype(FL_NORMAL_LABEL);
+        shifter_pan->labelfont(0);
+        shifter_pan->labelsize(10);
+        shifter_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_pan->minimum(-64);
+        shifter_pan->maximum(63);
+        shifter_pan->step(1);
+        shifter_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_pan->callback((Fl_Callback*)cb_shifter_pan);
+        shifter_pan->align(FL_ALIGN_LEFT);
+        shifter_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* shifter_pan
+      { shifter_attack = new SliderW(371, 299, 100, 10, "Attack");
+        shifter_attack->type(5);
+        shifter_attack->box(FL_FLAT_BOX);
+        shifter_attack->color((Fl_Color)178);
+        shifter_attack->selection_color((Fl_Color)62);
+        shifter_attack->labeltype(FL_NORMAL_LABEL);
+        shifter_attack->labelfont(0);
+        shifter_attack->labelsize(10);
+        shifter_attack->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_attack->maximum(2000);
+        shifter_attack->step(1);
+        shifter_attack->value(100);
+        shifter_attack->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_attack->callback((Fl_Callback*)cb_shifter_attack);
+        shifter_attack->align(FL_ALIGN_LEFT);
+        shifter_attack->when(FL_WHEN_CHANGED);
+      } // SliderW* shifter_attack
+      { shifter_decay = new SliderW(370, 312, 100, 10, "Decay");
+        shifter_decay->type(5);
+        shifter_decay->box(FL_FLAT_BOX);
+        shifter_decay->color((Fl_Color)178);
+        shifter_decay->selection_color((Fl_Color)62);
+        shifter_decay->labeltype(FL_NORMAL_LABEL);
+        shifter_decay->labelfont(0);
+        shifter_decay->labelsize(10);
+        shifter_decay->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_decay->maximum(2000);
+        shifter_decay->step(1);
+        shifter_decay->value(100);
+        shifter_decay->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_decay->callback((Fl_Callback*)cb_shifter_decay);
+        shifter_decay->align(FL_ALIGN_LEFT);
+        shifter_decay->when(FL_WHEN_CHANGED);
+      } // SliderW* shifter_decay
+      { shifter_thre = new SliderW(370, 325, 100, 10, "Thrshold");
+        shifter_thre->type(5);
+        shifter_thre->box(FL_FLAT_BOX);
+        shifter_thre->color((Fl_Color)178);
+        shifter_thre->selection_color((Fl_Color)62);
+        shifter_thre->labeltype(FL_NORMAL_LABEL);
+        shifter_thre->labelfont(0);
+        shifter_thre->labelsize(10);
+        shifter_thre->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_thre->minimum(-70);
+        shifter_thre->maximum(20);
+        shifter_thre->step(1);
+        shifter_thre->value(20);
+        shifter_thre->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_thre->callback((Fl_Callback*)cb_shifter_thre);
+        shifter_thre->align(FL_ALIGN_LEFT);
+        shifter_thre->when(FL_WHEN_CHANGED);
+      } // SliderW* shifter_thre
+      { shifter_mode = new Fl_Choice(363, 370, 78, 13, "Mode");
+        shifter_mode->down_box(FL_BORDER_BOX);
+        shifter_mode->labelsize(9);
+        shifter_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_mode->textsize(9);
+        shifter_mode->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_mode->callback((Fl_Callback*)cb_shifter_mode);
+        shifter_mode->menu(menu_shifter_mode);
+      } // Fl_Choice* shifter_mode
+      { shifter_ud = new Fl_Check_Button(364, 344, 15, 14, "Down");
+        shifter_ud->down_box(FL_BORDER_BOX);
+        shifter_ud->labelsize(10);
+        shifter_ud->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_ud->callback((Fl_Callback*)cb_shifter_ud, (void*)(2));
+      } // Fl_Check_Button* shifter_ud
+      SHIFTER->end();
+    } // Fl_Group* SHIFTER
     { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -15389,7 +15655,10 @@ sus_activar->value(rkr->Sustainer_Bypass);
 seq_preset->do_callback(seq_preset,1);
 seq_activar->value(rkr->Sequence_Bypass);
 
+//Shifter
 
+shifter_preset->do_callback(shifter_preset,1);
+shifter_activar->value(rkr->Shifter_Bypass);
 
 
 reordena();
@@ -15689,6 +15958,9 @@ for (i=1; i<=t; i++)
         break;
         case 37:
         SEQUENCE->hide();
+        break;
+        case 38:
+        SHIFTER->hide();
         break;
         
 
@@ -16026,6 +16298,13 @@ switch (rkr->efx_order[i])
        seq_activar->shortcut(s[i]);
        SEQUENCE->show();
        if(rkr->Sequence_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 38:
+       SHIFTER->position(x[i],y[i]);
+       shifter_activar->shortcut(s[i]);
+       SHIFTER->show();
+       if(rkr->Shifter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -17660,6 +17939,10 @@ switch(miralo)
   seq_activar->value(rkr->Sequence_Bypass);
   seq_activar->do_callback();
   break;
+ case 38:
+  shifter_activar->value(rkr->Shifter_Bypass);
+  shifter_activar->do_callback();
+  break;
 
   
   case 121:
@@ -17757,6 +18040,7 @@ SHELFBOOST->image(InOut->image());
 VOCODER->image(InOut->image());
 SUSTAINER->image(InOut->image());
 SEQUENCE->image(InOut->image());
+SHIFTER->image(InOut->image());
 
 
 Tap->image(InOut->image());

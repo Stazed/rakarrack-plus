@@ -46,6 +46,7 @@ rakarrack_SOURCES = main.C \
 	RyanWah.h \
 	Sequence.h \
 	ShelfBoost.h \
+	Shifter.h \
 	Shuffle.h \
 	smbPitchShift.h \
 	Sustainer.h \
@@ -111,6 +112,7 @@ rakarrack_SOURCES = main.C \
 	Waveshaper.C \
 	Sustainer.C \
 	Sequence.C \
+	Shifter.C \
 	MIDIConverter.C
 	
 	

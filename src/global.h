@@ -137,6 +137,7 @@
 #include "Vocoder.h"
 #include "Sustainer.h"
 #include "Sequence.h"
+#include "Shifter.h"
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -268,6 +269,7 @@ public:
   class Vocoder *efx_Vocoder;
   class Sustainer *efx_Sustainer;
   class Sequence *efx_Sequence;
+  class Shifter *efx_Shifter;
 
   jack_client_t *jackclient;
   jack_options_t options;
@@ -317,6 +319,7 @@ public:
   int Vocoder_Bypass;
   int Sustainer_Bypass;
   int Sequence_Bypass;
+  int Shifter_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -356,6 +359,7 @@ public:
   int Vocoder_B;
   int Sustainer_B;
   int Sequence_B;
+  int Shifter_B;
   
   int Cabinet_Preset;
   int Selected_Preset;

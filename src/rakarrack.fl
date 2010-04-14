@@ -843,7 +843,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 Pexitprogram=1;}
-      xywh {1493 27 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1486 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5793,7 +5793,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 seq_mode->value(rkr->efx_Sequence->getpar(13));
-seq_range->value(rkr->efx_Sequence->getpar(14));} open
+seq_range->value(rkr->efx_Sequence->getpar(14));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5821,7 +5821,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Shifter selected
+            label Shifter
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -5929,6 +5929,107 @@ seq_range->value(rkr->efx_Sequence->getpar(14));} open
           label Range
           callback {rkr->efx_Sequence->changepar(14,(int)o->value())}
           xywh {325 284 33 13} type Simple labelsize 10 labelcolor 7 minimum 1 maximum 8 step 1 value 1 textsize 9
+        }
+      }
+      Fl_Group SHIFTER {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button shifter_activar {
+          label On
+          user_data 2
+          callback {rkr->Shifter_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Shifter->cleanup();
+findpos(38,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+        }
+        Fl_Choice shifter_preset {
+          label Preset
+          callback {if(!v)rkr->efx_Shifter->setpreset((int)o->value());
+shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
+shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
+shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
+shifter_int->value(rkr->efx_Shifter->getpar(6));
+shifter_attack->value(rkr->efx_Shifter->getpar(3));
+shifter_decay->value(rkr->efx_Shifter->getpar(4));
+shifter_thre->value(rkr->efx_Shifter->getpar(5));
+shifter_ud->value(rkr->efx_Shifter->getpar(7));
+shifter_mode->value(rkr->efx_Shifter->getpar(8));}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Plain
+            xywh {10 10 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label Octavator
+            xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {3m Down}
+            xywh {42 42 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider shifter_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Shifter->changepar(0,(int)(o->value()+64));}
+          xywh {370 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shifter_int {
+          label {Int.}
+          callback {rkr->Shifter_Bypass=0;
+rkr->efx_Shifter->changepar(6,(int)o->value());
+if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
+          xywh {370 254 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 12 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shifter_gain {
+          label Gain
+          callback {rkr->efx_Shifter->changepar(2,(int)(o->value()+64));}
+          xywh {370 269 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shifter_pan {
+          label Pan
+          callback {rkr->efx_Shifter->changepar(1,(int)(o->value()+64));}
+          xywh {370 282 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shifter_attack {
+          label Attack
+          callback {rkr->efx_Shifter->changepar(3,(int)o->value());}
+          xywh {371 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 2000 step 1 value 100 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shifter_decay {
+          label Decay
+          callback {rkr->efx_Shifter->changepar(4,(int)o->value());}
+          xywh {370 312 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 2000 step 1 value 100 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shifter_thre {
+          label Thrshold
+          callback {rkr->efx_Shifter->changepar(5,(int)o->value());}
+          xywh {370 325 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 value 20 textcolor 7
+          class SliderW
+        }
+        Fl_Choice shifter_mode {
+          label Mode
+          callback {rkr->efx_Shifter->changepar(8,(int)o->value())}
+          xywh {363 370 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
+        } {
+          MenuItem {} {
+            label Trigger
+            xywh {10 10 36 21} labelsize 9
+          }
+        }
+        Fl_Check_Button shifter_ud {
+          label Down
+          user_data 2
+          callback {rkr->efx_Shifter->changepar(7,(int)o->value())}
+          xywh {364 344 15 14} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tuner {
@@ -7789,7 +7890,10 @@ sus_activar->value(rkr->Sustainer_Bypass);
 seq_preset->do_callback(seq_preset,1);
 seq_activar->value(rkr->Sequence_Bypass);
 
+//Shifter
 
+shifter_preset->do_callback(shifter_preset,1);
+shifter_activar->value(rkr->Shifter_Bypass);
 
 
 reordena();} {}
@@ -8087,6 +8191,9 @@ for (i=1; i<=t; i++)
         break;
         case 37:
         SEQUENCE->hide();
+        break;
+        case 38:
+        SHIFTER->hide();
         break;
         
 
@@ -8424,6 +8531,13 @@ switch (rkr->efx_order[i])
        seq_activar->shortcut(s[i]);
        SEQUENCE->show();
        if(rkr->Sequence_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 38:
+       SHIFTER->position(x[i],y[i]);
+       shifter_activar->shortcut(s[i]);
+       SHIFTER->show();
+       if(rkr->Shifter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -10048,6 +10162,10 @@ switch(miralo)
   seq_activar->value(rkr->Sequence_Bypass);
   seq_activar->do_callback();
   break;
+ case 38:
+  shifter_activar->value(rkr->Shifter_Bypass);
+  shifter_activar->do_callback();
+  break;
 
   
   case 121:
@@ -10142,6 +10260,7 @@ SHELFBOOST->image(InOut->image());
 VOCODER->image(InOut->image());
 SUSTAINER->image(InOut->image());
 SEQUENCE->image(InOut->image());
+SHIFTER->image(InOut->image());
 
 
 Tap->image(InOut->image());
@@ -10161,7 +10280,8 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;
