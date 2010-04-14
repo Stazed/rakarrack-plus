@@ -5557,9 +5557,9 @@ void RKRGUI::cb_shifter_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_shifter_preset[] = {
- {"Plain", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Octavator", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"3m Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fast", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Slow Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Slow Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

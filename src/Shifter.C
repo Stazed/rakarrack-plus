@@ -134,18 +134,13 @@ switch(Pmode)
    PS->ratio = 1.0f+((range-1.0f)*tune);
 
 
-  if ((Pinterval != 0) && (PS->ratio != 1.0f))
-    {
       PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
-
 
       for (i = 0; i < PERIOD; i++)
 	{
 	  efxoutl[i] = outo[i] * gain * panning;
 	  efxoutr[i] = outo[i] * gain * (1.0f - panning);
 	}
-
-    }
 
      break;
      
@@ -202,15 +197,15 @@ Shifter::setinterval (int value)
 void
 Shifter::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 8;
-  const int NUM_PRESETS = 3;
+  const int PRESET_SIZE = 9;
+  const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fast
-    {64, 64, 64, 200, 200, -20, 2, 0},
+    {0, 64, 64, 200, 200, -20, 2, 0, 0},
     //Slowup
-    {64, 64, 64, 900, 500, -20, -2, 0},
+    {0, 64, 64, 900, 200, -20, 2, 0, 0},
     //Slowdown
-    {64, 64, 64, 200, 900, -20, 3, 0}
+    {0, 64, 64, 900, 200, -20, 3, 1, 0}
   };
 
   if (npreset >= NUM_PRESETS)
@@ -250,8 +245,9 @@ Shifter::changepar (int npar, int value)
     case 5:
       Pthreshold = value;
       t_level = dB2rap ((float)Pthreshold);
-      td_level = t_level*.5f;
-      tz_level = t_level*.1f;
+      td_level = t_level*.75f;
+      tz_level = t_level*.5f;
+      printf("%f %f %f\n",t_level,td_level,tz_level);
       break;
     case 6:
       Pinterval = value;

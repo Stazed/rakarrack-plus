@@ -5955,19 +5955,19 @@ shifter_attack->value(rkr->efx_Shifter->getpar(3));
 shifter_decay->value(rkr->efx_Shifter->getpar(4));
 shifter_thre->value(rkr->efx_Shifter->getpar(5));
 shifter_ud->value(rkr->efx_Shifter->getpar(7));
-shifter_mode->value(rkr->efx_Shifter->getpar(8));}
+shifter_mode->value(rkr->efx_Shifter->getpar(8));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Plain
+            label Fast
             xywh {10 10 45 26} labelsize 10
           }
           MenuItem {} {
-            label Octavator
+            label {Slow Up} selected
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {
-            label {3m Down}
+            label {Slow Down}
             xywh {42 42 36 21} labelsize 10
           }
         }
@@ -10043,8 +10043,7 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {selected
-    }
+rkr->Mvalue=0;} {}
   }
   Function {ActOnOff()} {} {
     code {int miralo;
