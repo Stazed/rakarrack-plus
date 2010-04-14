@@ -480,6 +480,18 @@ RKR::savefile (char *filename)
 		   Sustainer_Bypass);
 	  break;
 
+	case 37:
+	  //Sequence
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Sequence->getpar (0), efx_Sequence->getpar (1),
+		   efx_Sequence->getpar (2), efx_Sequence->getpar (3),
+		   efx_Sequence->getpar (4), efx_Sequence->getpar (5),
+		   efx_Sequence->getpar (6), efx_Sequence->getpar (7),
+		   efx_Sequence->getpar (8), efx_Sequence->getpar (9),
+                   efx_Sequence->getpar (10), efx_Sequence->getpar (11),
+                   efx_Sequence->getpar (12), efx_Sequence->getpar (13),
+                   efx_Sequence->getpar (14), Sequence_Bypass);
+	  break;
 
 
 
@@ -938,6 +950,14 @@ RKR::loadfile (char *filename)
 		  &lv[37][0], &lv[37][1], &Sustainer_B);
 	  break;
 
+	case 37:
+	  //Sequence
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[38][0], &lv[38][1], &lv[38][2], &lv[38][3], &lv[38][4],
+		  &lv[38][5], &lv[38][6], &lv[38][7], &lv[38][8], &lv[38][9],
+		  &lv[38][10],&lv[38][11],&lv[38][12],&lv[38][13],&lv[38][14],&Looper_B);
+	  break;
+
 
 
 	}
@@ -1019,6 +1039,7 @@ RKR::Actualizar_Audio ()
   ShelfBoost_Bypass = 0;
   Vocoder_Bypass = 0;
   Sustainer_Bypass = 0;
+  Sequence_Bypass = 0;
     
   cleanup_efx ();
 
@@ -1091,6 +1112,8 @@ for (i = 0; i <= 6; i++)
     efx_Vocoder->changepar (i, lv[36][i]);
  for (i = 0; i <= 1; i++)
     efx_Sustainer->changepar (i, lv[37][i]);
+ for (i = 0; i <= 14; i++)
+    efx_Sequence->changepar (i, lv[38][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1157,6 +1180,7 @@ for (i = 0; i <= 6; i++)
   ShelfBoost_Bypass = ShelfBoost_B;
   Vocoder_Bypass = Vocoder_B;
   Sustainer_Bypass = Sustainer_B;
+  Sequence_Bypass = Sequence_B;
     
   Bypass = Bypass_B;
 
@@ -1223,7 +1247,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[38][16] = {
+  int presets[39][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1299,7 +1323,10 @@ RKR::New ()
 //Vocoder 
     {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Systainer
-    {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Sequence
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0}
+    
 
     
 };
@@ -1368,7 +1395,7 @@ RKR::New ()
   ShelfBoost_B = 0;
   Vocoder_B = 0;
   Sustainer_B = 0;
-  
+  Sequence_B = 0;  
   Bypass_B = 0;
 
   
@@ -1391,7 +1418,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[38][16] = {
+  int presets[39][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1467,11 +1494,12 @@ RKR::New_Bank ()
 //Vocoder 
     {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Systainer
-    {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Sequence
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0}
+    
+    
 
-    
-    
-    
          
   };
 
@@ -1574,6 +1602,7 @@ RKR::Bank_to_Preset (int i)
   ShelfBoost_B = Bank[i].lv[35][19];
   Vocoder_B = Bank[i].lv[36][19];
   Sustainer_B = Bank[i].lv[37][19];
+  Sequence_B = Bank[i].lv[38][19];
 
 
   Bypass_B = Bypass;
@@ -1683,6 +1712,8 @@ RKR::Preset_to_Bank (int i)
     lv[36][j] = efx_Vocoder->getpar(j);
   for (j = 0; j <= 1; j++)
     lv[37][j] = efx_Sustainer->getpar(j);
+  for (j = 0; j <= 14; j++)
+    lv[38][j] = efx_Sequence->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1753,6 +1784,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[35][19] = ShelfBoost_Bypass;
   Bank[i].lv[36][19] = Vocoder_Bypass;
   Bank[i].lv[37][19] = Sustainer_Bypass;
+  Bank[i].lv[38][19] = Sequence_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

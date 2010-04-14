@@ -71,17 +71,9 @@ Harmonizer::~Harmonizer ()
 void
 Harmonizer::cleanup ()
 {
-  int i;
   mira = 0;
-
-  for (i = 0; i < PERIOD; i++)
-    {
-      outi[i] = 0.0;
-      outo[i] = 0.0;
-    }
-
-
-
+  memset(outi, 0, sizeof(float)*PERIOD);
+  memset(outo, 0, sizeof(float)*PERIOD);
 };
 
 
