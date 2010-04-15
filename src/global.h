@@ -139,7 +139,6 @@
 #include "Sequence.h"
 #include "Shifter.h"
 #include "StompBox.h"
-#include "Simultron.h"
 extern int Pexitprogram, preset;
 extern int commandline, gui;
 extern int exitwithhelp, nojack;
@@ -272,7 +271,6 @@ public:
   class Sequence *efx_Sequence;
   class Shifter *efx_Shifter;
   class StompBox *efx_StompBox;
-  class Simultron *efx_Simultron;
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
@@ -323,7 +321,6 @@ public:
   int Sequence_Bypass;
   int Shifter_Bypass;
   int StompBox_Bypass;
-  int Simultron_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -365,7 +362,6 @@ public:
   int Sequence_B;
   int Shifter_B;
   int StompBox_B;
-  int Simultron_B;
   
   int Cabinet_Preset;
   int Selected_Preset;

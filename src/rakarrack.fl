@@ -834,8 +834,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -6132,68 +6131,6 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
           }
         }
       }
-      Fl_Group SIMULTRON {
-        user_data 1
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button simul_activar {
-          label On
-          user_data 2
-          callback {rkr->Simultron_Bypass=(int)o->value();
-if((int) o->value()==0)
-findpos(40,(int)o->value());}
-          xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice simul_preset {
-          label Preset
-          callback {if(!v)rkr->efx_Simultron->setpreset((int) o->value());
-simul_pan->value(rkr->efx_Simultron->getpar(1)-64);
-simul_level->value(rkr->efx_Simultron->getpar(4));
-simul_WD->value(rkr->efx_Simultron->getpar(0)-64);
-simul_fnum->value(rkr->efx_Simultron->getpar(2));}
-          xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Marshall JCM200}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Fender Superchamp}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Mesa Boogie}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Mesa Boogie 2}
-            xywh {87 87 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider simul_WD {
-          label {Wet/Dry}
-          callback {rkr->efx_Simultron->changepar(0,(int)(o->value()+64));}
-          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider simul_pan {
-          label Pan
-          callback {rkr->efx_Simultron->changepar(1,(int)(o->value()+64));}
-          xywh {372 256 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider simul_level {
-          label Level
-          callback {rkr->efx_Simultron->changepar(4,(int)o->value());}
-          xywh {372 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice simul_fnum {
-          label Preset
-          callback {rkr->efx_Simultron->changepar(2,(int)o->value());} open
-          xywh {371 302 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
-        } {}
-      }
       Fl_Group Tuner {
         user_data 1
         xywh {521 24 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -8062,10 +7999,6 @@ shifter_activar->value(rkr->Shifter_Bypass);
 stomp_preset->do_callback(stomp_preset,1);
 stomp_activar->value(rkr->StompBox_Bypass);
 
-//Simultron
-
-simul_preset->do_callback(simul_preset,1);
-simul_activar->value(rkr->Simultron_Bypass);
 
 
 
@@ -8371,9 +8304,7 @@ for (i=1; i<=t; i++)
         case 39:
         STOMPBOX->hide();
         break;
-        case 40:
-        SIMULTRON->hide();
-        break;
+       
         
 
 
@@ -8726,12 +8657,7 @@ switch (rkr->efx_order[i])
        if(rkr->StompBox_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
-   case 40:
-       SIMULTRON->position(x[i],y[i]);
-       simul_activar->shortcut(s[i]);
-       SIMULTRON->show();
-       if(rkr->Simultron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       break; 
+  
 
 
  }
@@ -10409,11 +10335,7 @@ switch(miralo)
   stomp_activar->value(rkr->StompBox_Bypass);
   stomp_activar->do_callback();
   break;
- case 40:
-  simul_activar->value(rkr->Simultron_Bypass);
-  simul_activar->do_callback();
-  break;
-
+ 
   
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
@@ -10509,7 +10431,6 @@ SUSTAINER->image(InOut->image());
 SEQUENCE->image(InOut->image());
 SHIFTER->image(InOut->image());
 STOMPBOX->image(InOut->image());
-SIMULTRON->image(InOut->image());
 
 Tap->image(InOut->image());
 Presets->image(InOut->image());

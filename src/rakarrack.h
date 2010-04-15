@@ -2761,38 +2761,6 @@ private:
   static void cb_stomp_mode(Fl_Choice*, void*);
   static Fl_Menu_Item menu_stomp_mode[];
 public:
-  Fl_Group *SIMULTRON;
-  Fl_Light_Button *simul_activar;
-private:
-  void cb_simul_activar_i(Fl_Light_Button*, void*);
-  static void cb_simul_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *simul_preset;
-private:
-  void cb_simul_preset_i(Fl_Choice*, void*);
-  static void cb_simul_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_simul_preset[];
-public:
-  SliderW *simul_WD;
-private:
-  void cb_simul_WD_i(SliderW*, void*);
-  static void cb_simul_WD(SliderW*, void*);
-public:
-  SliderW *simul_pan;
-private:
-  void cb_simul_pan_i(SliderW*, void*);
-  static void cb_simul_pan(SliderW*, void*);
-public:
-  SliderW *simul_level;
-private:
-  void cb_simul_level_i(SliderW*, void*);
-  static void cb_simul_level(SliderW*, void*);
-public:
-  Fl_Choice *simul_fnum;
-private:
-  void cb_simul_fnum_i(Fl_Choice*, void*);
-  static void cb_simul_fnum(Fl_Choice*, void*);
-public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
