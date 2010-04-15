@@ -34,7 +34,25 @@ StompBox::StompBox (float * efxoutl_, float * efxoutr_)
   //default values
   Ppreset = 0;
   Pvolume = 50;
-
+  
+  //left channel filters
+  linput = new AnalogFilter (1, 80.0f, 1.0f, 0);  //  AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,unsigned char Fstages);
+  lpre1 = new AnalogFilter (1, 630.0f, 1.0f, 0);   // LPF = 0, HPF = 1
+  lpre2 = new AnalogFilter (1, 220.0f, 1.0f, 0);
+  lpost = new AnalogFilter (0, 1000.0f, 1.0f, 0);
+  ltonehg = new AnalogFilter (1, 2500.0f, 1.0f, 0);  
+  ltonemd = new AnalogFilter (1, 700.0f, 1.0f, 0);  
+  ltonelw = new AnalogFilter (0, 150.0f, 1.0, 0); 
+  
+  //Right channel filters
+  linput = new AnalogFilter (1, 80.0f, 1.0f, 0);  //  AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,unsigned char Fstages);
+  lpre1 = new AnalogFilter (1, 630.0f, 1.0f, 0);   // LPF = 0, HPF = 1
+  lpre2 = new AnalogFilter (1, 220.0f, 1.0f, 0);
+  lpost = new AnalogFilter (0, 1000.0f, 1.0f, 0);
+  ltonehg = new AnalogFilter (1, 2500.0f, 1.0f, 0);  
+  ltonemd = new AnalogFilter (1, 700.0f, 1.0f, 0);  
+  ltonelw = new AnalogFilter (0, 150.0f, 1.0, 0); 
+   
   cleanup ();
 
   setpreset (Ppreset);
