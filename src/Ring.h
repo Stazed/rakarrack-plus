@@ -44,7 +44,6 @@ public:
   float *efxoutl;
   float *efxoutr;
 
-  float volume;
   float outvolume;
   int Pafreq;
   int Pfreq;

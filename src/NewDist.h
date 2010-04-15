@@ -49,7 +49,6 @@ public:
   float *efxoutl;
   float *efxoutr;
   float outvolume;
-  float volume;
   float inpll[4096];
   float inplr[4096];
 

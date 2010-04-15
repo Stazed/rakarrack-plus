@@ -53,9 +53,6 @@ public:
 
   float outvolume;
 
-  float volume;
-
-
 
 private:
   //Parametrii Alienwah

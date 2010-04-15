@@ -37,15 +37,11 @@ public:
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
-  void setdryonly ();
   int Ppreset;
   float *efxoutl;
   float *efxoutr;
 
   float outvolume;
-  float volume;
-
-
 
 
 private:

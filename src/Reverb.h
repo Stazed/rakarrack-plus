@@ -47,11 +47,6 @@ public:
 
   float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su
 
-  float volume;
-
-
-
-
 
 private:
   //Parametrii

@@ -48,7 +48,6 @@ public:
   float *inputr;
   
   float outvolume;
-  float volume;
 
 private:
 

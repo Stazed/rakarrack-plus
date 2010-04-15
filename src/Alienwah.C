@@ -156,7 +156,6 @@ Alienwah::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
-  volume = outvolume;
 };
 
 void

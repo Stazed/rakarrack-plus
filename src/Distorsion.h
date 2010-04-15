@@ -47,7 +47,6 @@ public:
   float *octoutl;
   float *octoutr;
   float outvolume;
-  float volume;
   
 private:
   //Parametrii

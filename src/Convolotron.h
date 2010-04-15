@@ -40,13 +40,11 @@ public:
   void cleanup ();
   int setfile (int value);
 
-  void setdryonly ();
   int Ppreset;
 
   float *efxoutl;
   float *efxoutr;
 
-  float volume;
   float outvolume;
 
   char Filename[128];

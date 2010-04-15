@@ -89,8 +89,8 @@ EQ::out (float * smpsl, float * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-      efxoutl[i] = smpsl[i] * volume;
-      efxoutr[i] = smpsr[i] * volume;
+      efxoutl[i] = smpsl[i] * outvolume;
+      efxoutr[i] = smpsr[i] * outvolume;
     };
 
 };
@@ -105,7 +105,7 @@ EQ::setvolume (int Pvolume)
   this->Pvolume = Pvolume;
 
   outvolume = powf (0.005f, (1.0f - (float)Pvolume / 127.0f)) * 10.0f;
-  volume = outvolume;
+  
 
 };
 

@@ -136,7 +136,7 @@ void
 Convolotron::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
-  volume = outvolume = (float)Pvolume / 127.0f;
+  outvolume = (float)Pvolume / 127.0f;
   if (Pvolume == 0)
     cleanup ();
 

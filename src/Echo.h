@@ -40,13 +40,10 @@ public:
   int getpar (int npar);
   void cleanup ();
 
-  void setdryonly ();
   int Ppreset;
 
   float *efxoutl;
   float *efxoutr;
-
-  float volume;
 
   float outvolume;
 

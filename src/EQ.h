@@ -45,8 +45,6 @@ public:
 
   float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of
 
-  float volume;
-
   int Pvolume;	//Volumul 
 
   void setvolume (int Pvolume);

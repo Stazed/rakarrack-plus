@@ -41,15 +41,12 @@ public:
   void cleanuppt1 ();
   void cleanuppt2 ();
   void cleanup ();
-  void setdryonly ();
   int Ppreset;
   int progstate[6];
   void getstate ();
 
   float *efxoutl;
   float *efxoutr;
-
-  float volume;
 
   float outvolume;
 

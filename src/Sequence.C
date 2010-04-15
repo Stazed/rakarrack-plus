@@ -503,7 +503,6 @@ Sequence::changepar (int npar, int value)
     case 8:
       Pvolume = value;
       outvolume = (float)Pvolume / 127.0f;
-      volume = outvolume;
       break;
     case 9:
       Ptempo = value;

@@ -41,7 +41,6 @@ public:
   int Ppreset;
   void setpreset (int npreset);
   void setranges(int value);
-  float volume;
   float outvolume;
   
   float *efxoutl;

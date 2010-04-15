@@ -54,7 +54,6 @@ public:
   float *highr;
   
   float outvolume;
-  float volume;
 
 private:
 

@@ -152,7 +152,7 @@ void
 Shifter::setvolume (int value)
 {
   this->Pvolume = value;
-  volume = outvolume = (float)Pvolume / 127.0f;
+  outvolume = (float)Pvolume / 127.0f;
 };
 
 

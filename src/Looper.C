@@ -251,7 +251,7 @@ Looper::changepar (int npar, int value)
     {
     case 0:
     Pvolume = value;
-    volume = outvolume = (float)Pvolume / 127.0f;
+    outvolume = (float)Pvolume / 127.0f;
 
       break;
     case 1:	//Play at current pointer position

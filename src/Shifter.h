@@ -57,7 +57,6 @@ public:
   float *outo;
 
   float outvolume;
-  float volume;
 
   long int hq;
 
