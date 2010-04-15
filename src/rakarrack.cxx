@@ -5723,6 +5723,62 @@ Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_simul_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Simultron_Bypass=(int)o->value();
+if((int) o->value()==0)
+findpos(40,(int)o->value());
+}
+void RKRGUI::cb_simul_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_simul_activar_i(o,v);
+}
+
+void RKRGUI::cb_simul_preset_i(Fl_Choice* o, void* v) {
+  if(!v)rkr->efx_Simultron->setpreset((int) o->value());
+simul_pan->value(rkr->efx_Simultron->getpar(1)-64);
+simul_level->value(rkr->efx_Simultron->getpar(4));
+simul_WD->value(rkr->efx_Simultron->getpar(0)-64);
+simul_fnum->value(rkr->efx_Simultron->getpar(2));
+}
+void RKRGUI::cb_simul_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_simul_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_simul_preset[] = {
+ {"Marshall JCM200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Superchamp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mesa Boogie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mesa Boogie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_simul_WD_i(SliderW* o, void*) {
+  rkr->efx_Simultron->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_simul_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_simul_WD_i(o,v);
+}
+
+void RKRGUI::cb_simul_pan_i(SliderW* o, void*) {
+  rkr->efx_Simultron->changepar(1,(int)(o->value()+64));
+}
+void RKRGUI::cb_simul_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_simul_pan_i(o,v);
+}
+
+void RKRGUI::cb_simul_level_i(SliderW* o, void*) {
+  rkr->efx_Simultron->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_simul_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_simul_level_i(o,v);
+}
+
+void RKRGUI::cb_simul_fnum_i(Fl_Choice* o, void*) {
+  rkr->efx_Simultron->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_simul_fnum(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_simul_fnum_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -14277,6 +14333,96 @@ R average.");
       } // Fl_Choice* stomp_mode
       STOMPBOX->end();
     } // Fl_Group* STOMPBOX
+    { SIMULTRON = new Fl_Group(320, 210, 158, 185);
+      SIMULTRON->box(FL_UP_BOX);
+      SIMULTRON->color((Fl_Color)FL_FOREGROUND_COLOR);
+      SIMULTRON->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      SIMULTRON->labelfont(1);
+      SIMULTRON->user_data((void*)(1));
+      SIMULTRON->align(96|FL_ALIGN_INSIDE);
+      SIMULTRON->hide();
+      { simul_activar = new Fl_Light_Button(326, 214, 34, 18, "On");
+        simul_activar->shortcut(0x35);
+        simul_activar->color((Fl_Color)62);
+        simul_activar->selection_color((Fl_Color)1);
+        simul_activar->labelsize(10);
+        simul_activar->callback((Fl_Callback*)cb_simul_activar, (void*)(2));
+        simul_activar->align(68|FL_ALIGN_INSIDE);
+        simul_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* simul_activar
+      { simul_preset = new Fl_Choice(399, 214, 76, 18, "Preset");
+        simul_preset->down_box(FL_BORDER_BOX);
+        simul_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        simul_preset->labelsize(10);
+        simul_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_preset->textsize(10);
+        simul_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_preset->callback((Fl_Callback*)cb_simul_preset);
+        simul_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        simul_preset->menu(menu_simul_preset);
+      } // Fl_Choice* simul_preset
+      { simul_WD = new SliderW(372, 240, 100, 10, "Wet/Dry");
+        simul_WD->type(5);
+        simul_WD->box(FL_FLAT_BOX);
+        simul_WD->color((Fl_Color)178);
+        simul_WD->selection_color((Fl_Color)62);
+        simul_WD->labeltype(FL_NORMAL_LABEL);
+        simul_WD->labelfont(0);
+        simul_WD->labelsize(10);
+        simul_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_WD->minimum(-64);
+        simul_WD->maximum(64);
+        simul_WD->step(1);
+        simul_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_WD->callback((Fl_Callback*)cb_simul_WD);
+        simul_WD->align(FL_ALIGN_LEFT);
+        simul_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* simul_WD
+      { simul_pan = new SliderW(372, 256, 100, 10, "Pan");
+        simul_pan->type(5);
+        simul_pan->box(FL_FLAT_BOX);
+        simul_pan->color((Fl_Color)178);
+        simul_pan->selection_color((Fl_Color)62);
+        simul_pan->labeltype(FL_NORMAL_LABEL);
+        simul_pan->labelfont(0);
+        simul_pan->labelsize(10);
+        simul_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_pan->minimum(-64);
+        simul_pan->maximum(63);
+        simul_pan->step(1);
+        simul_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_pan->callback((Fl_Callback*)cb_simul_pan);
+        simul_pan->align(FL_ALIGN_LEFT);
+        simul_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* simul_pan
+      { simul_level = new SliderW(372, 272, 100, 10, "Level");
+        simul_level->type(5);
+        simul_level->box(FL_FLAT_BOX);
+        simul_level->color((Fl_Color)178);
+        simul_level->selection_color((Fl_Color)62);
+        simul_level->labeltype(FL_NORMAL_LABEL);
+        simul_level->labelfont(0);
+        simul_level->labelsize(10);
+        simul_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_level->maximum(127);
+        simul_level->step(1);
+        simul_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_level->callback((Fl_Callback*)cb_simul_level);
+        simul_level->align(FL_ALIGN_LEFT);
+        simul_level->when(FL_WHEN_CHANGED);
+      } // SliderW* simul_level
+      { simul_fnum = new Fl_Choice(371, 302, 101, 16, "Preset");
+        simul_fnum->down_box(FL_BORDER_BOX);
+        simul_fnum->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        simul_fnum->labelsize(10);
+        simul_fnum->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_fnum->textsize(10);
+        simul_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        simul_fnum->callback((Fl_Callback*)cb_simul_fnum);
+        simul_fnum->when(FL_WHEN_CHANGED);
+      } // Fl_Choice* simul_fnum
+      SIMULTRON->end();
+    } // Fl_Group* SIMULTRON
     { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -15888,6 +16034,12 @@ shifter_activar->value(rkr->Shifter_Bypass);
 stomp_preset->do_callback(stomp_preset,1);
 stomp_activar->value(rkr->StompBox_Bypass);
 
+//Simultron
+
+simul_preset->do_callback(simul_preset,1);
+simul_activar->value(rkr->Simultron_Bypass);
+
+
 
 reordena();
 }
@@ -16192,6 +16344,9 @@ for (i=1; i<=t; i++)
         break;
         case 39:
         STOMPBOX->hide();
+        break;
+        case 40:
+        SIMULTRON->hide();
         break;
         
 
@@ -16543,6 +16698,13 @@ switch (rkr->efx_order[i])
        stomp_activar->shortcut(s[i]);
        STOMPBOX->show();
        if(rkr->StompBox_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 40:
+       SIMULTRON->position(x[i],y[i]);
+       simul_activar->shortcut(s[i]);
+       SIMULTRON->show();
+       if(rkr->Simultron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -18231,6 +18393,10 @@ switch(miralo)
   stomp_activar->value(rkr->StompBox_Bypass);
   stomp_activar->do_callback();
   break;
+ case 40:
+  simul_activar->value(rkr->Simultron_Bypass);
+  simul_activar->do_callback();
+  break;
 
   
   case 121:
@@ -18330,6 +18496,7 @@ SUSTAINER->image(InOut->image());
 SEQUENCE->image(InOut->image());
 SHIFTER->image(InOut->image());
 STOMPBOX->image(InOut->image());
+SIMULTRON->image(InOut->image());
 
 Tap->image(InOut->image());
 Presets->image(InOut->image());
