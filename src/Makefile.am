@@ -49,6 +49,7 @@ rakarrack_SOURCES = main.C \
 	Shifter.h \
 	Shuffle.h \
 	smbPitchShift.h \
+	StompBox.h \
 	Sustainer.h \
 	SVFilter.h \
 	Synthfilter.h \
@@ -113,6 +114,7 @@ rakarrack_SOURCES = main.C \
 	Sustainer.C \
 	Sequence.C \
 	Shifter.C \
+	StompBox.C \
 	MIDIConverter.C
 	
 	

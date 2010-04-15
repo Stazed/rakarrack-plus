@@ -5645,6 +5645,84 @@ Fl_Menu_Item RKRGUI::menu_shifter_mode[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_stomp_activar_i(Fl_Light_Button* o, void*) {
+  rkr->StompBox_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_StompBox->cleanup();
+findpos(39,(int)o->value());
+}
+void RKRGUI::cb_stomp_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_activar_i(o,v);
+}
+
+void RKRGUI::cb_stomp_preset_i(Fl_Choice* o, void* v) {
+  if(!v)rkr->efx_StompBox->setpreset((int)o->value());
+stomp_WD->value(rkr->efx_StompBox->getpar(0)-64);
+stomp_gain->value(rkr->efx_StompBox->getpar(4));
+stomp_low->value(rkr->efx_StompBox->getpar(3));
+stomp_mid->value(rkr->efx_StompBox->getpar(2));
+stomp_high->value(rkr->efx_StompBox->getpar(1));
+
+stomp_mode->value(rkr->efx_StompBox->getpar(5));
+}
+void RKRGUI::cb_stomp_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_stomp_preset[] = {
+ {"Fast", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Slow Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Slow Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_stomp_WD_i(SliderW* o, void*) {
+  rkr->efx_StompBox->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_stomp_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_WD_i(o,v);
+}
+
+void RKRGUI::cb_stomp_gain_i(SliderW* o, void*) {
+  rkr->efx_StompBox->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_stomp_gain(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_gain_i(o,v);
+}
+
+void RKRGUI::cb_stomp_low_i(SliderW* o, void*) {
+  rkr->efx_StompBox->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_stomp_low(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_low_i(o,v);
+}
+
+void RKRGUI::cb_stomp_mid_i(SliderW* o, void*) {
+  rkr->efx_StompBox->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_stomp_mid(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_mid_i(o,v);
+}
+
+void RKRGUI::cb_stomp_high_i(SliderW* o, void*) {
+  rkr->efx_StompBox->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_stomp_high(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_high_i(o,v);
+}
+
+void RKRGUI::cb_stomp_mode_i(Fl_Choice* o, void*) {
+  rkr->efx_StompBox->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_stomp_mode(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_mode_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
+ {"Amp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -14081,6 +14159,124 @@ R average.");
       } // Fl_Choice* shifter_mode
       SHIFTER->end();
     } // Fl_Group* SHIFTER
+    { STOMPBOX = new Fl_Group(320, 211, 158, 184);
+      STOMPBOX->box(FL_UP_BOX);
+      STOMPBOX->color((Fl_Color)FL_FOREGROUND_COLOR);
+      STOMPBOX->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      STOMPBOX->labelfont(1);
+      STOMPBOX->user_data((void*)(1));
+      STOMPBOX->align(96|FL_ALIGN_INSIDE);
+      { stomp_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        stomp_activar->shortcut(0x30);
+        stomp_activar->color((Fl_Color)62);
+        stomp_activar->selection_color((Fl_Color)1);
+        stomp_activar->labelsize(10);
+        stomp_activar->callback((Fl_Callback*)cb_stomp_activar, (void*)(2));
+        stomp_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* stomp_activar
+      { stomp_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        stomp_preset->down_box(FL_BORDER_BOX);
+        stomp_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        stomp_preset->labelsize(10);
+        stomp_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_preset->textsize(10);
+        stomp_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_preset->callback((Fl_Callback*)cb_stomp_preset);
+        stomp_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        stomp_preset->menu(menu_stomp_preset);
+      } // Fl_Choice* stomp_preset
+      { stomp_WD = new SliderW(370, 241, 100, 10, "Wet/Dry");
+        stomp_WD->type(5);
+        stomp_WD->box(FL_FLAT_BOX);
+        stomp_WD->color((Fl_Color)178);
+        stomp_WD->selection_color((Fl_Color)62);
+        stomp_WD->labeltype(FL_NORMAL_LABEL);
+        stomp_WD->labelfont(0);
+        stomp_WD->labelsize(10);
+        stomp_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_WD->minimum(-64);
+        stomp_WD->maximum(63);
+        stomp_WD->step(1);
+        stomp_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_WD->callback((Fl_Callback*)cb_stomp_WD);
+        stomp_WD->align(FL_ALIGN_LEFT);
+        stomp_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* stomp_WD
+      { stomp_gain = new SliderW(370, 269, 100, 10, "Gain");
+        stomp_gain->type(5);
+        stomp_gain->box(FL_FLAT_BOX);
+        stomp_gain->color((Fl_Color)178);
+        stomp_gain->selection_color((Fl_Color)62);
+        stomp_gain->labeltype(FL_NORMAL_LABEL);
+        stomp_gain->labelfont(0);
+        stomp_gain->labelsize(10);
+        stomp_gain->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_gain->maximum(127);
+        stomp_gain->step(1);
+        stomp_gain->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_gain->callback((Fl_Callback*)cb_stomp_gain);
+        stomp_gain->align(FL_ALIGN_LEFT);
+        stomp_gain->when(FL_WHEN_CHANGED);
+      } // SliderW* stomp_gain
+      { stomp_low = new SliderW(370, 286, 100, 10, "Low");
+        stomp_low->type(5);
+        stomp_low->box(FL_FLAT_BOX);
+        stomp_low->color((Fl_Color)178);
+        stomp_low->selection_color((Fl_Color)62);
+        stomp_low->labeltype(FL_NORMAL_LABEL);
+        stomp_low->labelfont(0);
+        stomp_low->labelsize(10);
+        stomp_low->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_low->maximum(127);
+        stomp_low->step(1);
+        stomp_low->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_low->callback((Fl_Callback*)cb_stomp_low);
+        stomp_low->align(FL_ALIGN_LEFT);
+        stomp_low->when(FL_WHEN_CHANGED);
+      } // SliderW* stomp_low
+      { stomp_mid = new SliderW(370, 303, 100, 10, "Mid");
+        stomp_mid->type(5);
+        stomp_mid->box(FL_FLAT_BOX);
+        stomp_mid->color((Fl_Color)178);
+        stomp_mid->selection_color((Fl_Color)62);
+        stomp_mid->labeltype(FL_NORMAL_LABEL);
+        stomp_mid->labelfont(0);
+        stomp_mid->labelsize(10);
+        stomp_mid->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_mid->maximum(127);
+        stomp_mid->step(1);
+        stomp_mid->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_mid->callback((Fl_Callback*)cb_stomp_mid);
+        stomp_mid->align(FL_ALIGN_LEFT);
+        stomp_mid->when(FL_WHEN_CHANGED);
+      } // SliderW* stomp_mid
+      { stomp_high = new SliderW(370, 320, 100, 10, "High");
+        stomp_high->type(5);
+        stomp_high->box(FL_FLAT_BOX);
+        stomp_high->color((Fl_Color)178);
+        stomp_high->selection_color((Fl_Color)62);
+        stomp_high->labeltype(FL_NORMAL_LABEL);
+        stomp_high->labelfont(0);
+        stomp_high->labelsize(10);
+        stomp_high->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_high->maximum(127);
+        stomp_high->step(1);
+        stomp_high->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_high->callback((Fl_Callback*)cb_stomp_high);
+        stomp_high->align(FL_ALIGN_LEFT);
+        stomp_high->when(FL_WHEN_CHANGED);
+      } // SliderW* stomp_high
+      { stomp_mode = new Fl_Choice(363, 376, 78, 13, "Mode");
+        stomp_mode->down_box(FL_BORDER_BOX);
+        stomp_mode->labelsize(9);
+        stomp_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_mode->textsize(9);
+        stomp_mode->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        stomp_mode->callback((Fl_Callback*)cb_stomp_mode);
+        stomp_mode->menu(menu_stomp_mode);
+      } // Fl_Choice* stomp_mode
+      STOMPBOX->end();
+    } // Fl_Group* STOMPBOX
     { Tuner = new Fl_Group(521, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -15687,6 +15883,11 @@ seq_activar->value(rkr->Sequence_Bypass);
 shifter_preset->do_callback(shifter_preset,1);
 shifter_activar->value(rkr->Shifter_Bypass);
 
+//StompBox
+
+stomp_preset->do_callback(stomp_preset,1);
+stomp_activar->value(rkr->StompBox_Bypass);
+
 
 reordena();
 }
@@ -15988,6 +16189,9 @@ for (i=1; i<=t; i++)
         break;
         case 38:
         SHIFTER->hide();
+        break;
+        case 39:
+        STOMPBOX->hide();
         break;
         
 
@@ -16332,6 +16536,13 @@ switch (rkr->efx_order[i])
        shifter_activar->shortcut(s[i]);
        SHIFTER->show();
        if(rkr->Shifter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 39:
+       STOMPBOX->position(x[i],y[i]);
+       stomp_activar->shortcut(s[i]);
+       STOMPBOX->show();
+       if(rkr->StompBox_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -18016,6 +18227,10 @@ switch(miralo)
   shifter_activar->value(rkr->Shifter_Bypass);
   shifter_activar->do_callback();
   break;
+ case 39:
+  stomp_activar->value(rkr->StompBox_Bypass);
+  stomp_activar->do_callback();
+  break;
 
   
   case 121:
@@ -18114,7 +18329,7 @@ VOCODER->image(InOut->image());
 SUSTAINER->image(InOut->image());
 SEQUENCE->image(InOut->image());
 SHIFTER->image(InOut->image());
-
+STOMPBOX->image(InOut->image());
 
 Tap->image(InOut->image());
 Presets->image(InOut->image());

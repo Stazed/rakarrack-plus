@@ -368,6 +368,9 @@ else
    case 38:
     if(inoff) Shifter_Bypass=1; else Shifter_Bypass=0;
      break;
+   case 39:
+    if(inoff) StompBox_Bypass=1; else StompBox_Bypass=0;
+     break;
 
    
    case 121:
@@ -521,6 +524,10 @@ RKR::checkonoff(int miraque)
    case 38:
      if (Shifter_Bypass) return(0);
      break;
+   case 39:
+     if (StompBox_Bypass) return(0);
+     break;
+
 
 
  

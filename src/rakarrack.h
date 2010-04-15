@@ -2718,6 +2718,49 @@ private:
   static void cb_shifter_mode(Fl_Choice*, void*);
   static Fl_Menu_Item menu_shifter_mode[];
 public:
+  Fl_Group *STOMPBOX;
+  Fl_Light_Button *stomp_activar;
+private:
+  void cb_stomp_activar_i(Fl_Light_Button*, void*);
+  static void cb_stomp_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *stomp_preset;
+private:
+  void cb_stomp_preset_i(Fl_Choice*, void*);
+  static void cb_stomp_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_stomp_preset[];
+public:
+  SliderW *stomp_WD;
+private:
+  void cb_stomp_WD_i(SliderW*, void*);
+  static void cb_stomp_WD(SliderW*, void*);
+public:
+  SliderW *stomp_gain;
+private:
+  void cb_stomp_gain_i(SliderW*, void*);
+  static void cb_stomp_gain(SliderW*, void*);
+public:
+  SliderW *stomp_low;
+private:
+  void cb_stomp_low_i(SliderW*, void*);
+  static void cb_stomp_low(SliderW*, void*);
+public:
+  SliderW *stomp_mid;
+private:
+  void cb_stomp_mid_i(SliderW*, void*);
+  static void cb_stomp_mid(SliderW*, void*);
+public:
+  SliderW *stomp_high;
+private:
+  void cb_stomp_high_i(SliderW*, void*);
+  static void cb_stomp_high(SliderW*, void*);
+public:
+  Fl_Choice *stomp_mode;
+private:
+  void cb_stomp_mode_i(Fl_Choice*, void*);
+  static void cb_stomp_mode(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_stomp_mode[];
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

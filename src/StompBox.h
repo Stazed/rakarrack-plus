@@ -1,6 +1,7 @@
 /*
   Rakarrack   Audio FX software 
-  ShelfBoost.h - Tone Booster
+  Stompbox.h - stompbox modeler
+  Using Steve Harris LADSPA Plugin harmonic_gen
   Modified for rakarrack by Ryan Billing & Josep Andreu
   
   This program is free software; you can redistribute it and/or modify
@@ -18,17 +19,17 @@
 
 */
 
-#ifndef SHELFBOOST_H
-#define SHELFBOOST_H
+#ifndef STOMPBOX_H
+#define STOMPBOX_H
 
 #include "global.h"
 #include "AnalogFilter.h"
 
-class ShelfBoost
+class StompBox
 {
 public:
-  ShelfBoost (float * efxoutl_, float * efxoutr_);
-  ~ShelfBoost ();
+  StompBox (float * efxoutl_, float * efxoutr_);
+  ~StompBox ();
   void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
@@ -46,16 +47,15 @@ public:
 private:
 
   int Pvolume;
-  int Plevel;
-  int Pq1;
-  int Pfreq1;
-  int Pstereo;
-  
+  int Pgain;
+  int Phigh;
+  int Pmid;
+  int Plow;
+  int Pmode;
   void setvolume (int value);
 
-
-  class AnalogFilter *RB1l, *RB1r;
-  float freq1,q1,gain,u_gain; 
+ 
+  float gain; 
 
 };
 

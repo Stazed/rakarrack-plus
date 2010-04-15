@@ -1,6 +1,6 @@
 /*
   Rakarrack   Audio FX software 
-  ShelfBoost.C - Tone Booster
+  Stompbox.C - stompbox modeler
   Modified for rakarrack by Josep Andreu
   
   This program is free software; you can redistribute it and/or modify
@@ -21,11 +21,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "ShelfBoost.h"
+#include "StompBox.h"
 
 
 
-ShelfBoost::ShelfBoost (float * efxoutl_, float * efxoutr_)
+StompBox::StompBox (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -34,18 +34,13 @@ ShelfBoost::ShelfBoost (float * efxoutl_, float * efxoutr_)
   //default values
   Ppreset = 0;
   Pvolume = 50;
-  Pstereo = 0;
-
-  RB1l =  new AnalogFilter(7,3200.0f,0.5f,0);
-  RB1r =  new AnalogFilter(7,3200.0f,0.5f,0);
-
 
   cleanup ();
 
   setpreset (Ppreset);
 };
 
-ShelfBoost::~ShelfBoost ()
+StompBox::~StompBox ()
 {
 
 
@@ -55,11 +50,9 @@ ShelfBoost::~ShelfBoost ()
  * Cleanup the effect
  */
 void
-ShelfBoost::cleanup ()
+StompBox::cleanup ()
 {
 
- RB1l->cleanup();
- RB1r->cleanup();
  
 };
 
@@ -68,34 +61,41 @@ ShelfBoost::cleanup ()
  * Effect output
  */
 void
-ShelfBoost::out (float * smpsl, float * smpsr)
+StompBox::out (float * smpsl, float * smpsr)
 {
 int i;
 
+   switch (Pmode)
+   {
+    case 1:
 
-RB1l->filterout(smpsl);
-if(Pstereo) RB1r->filterout(smpsr);
+
+    for(i=0; i<PERIOD; i++)
+      {
+
+       }
+
+    break; 
 
 
-for(i=0; i<PERIOD; i++)
-{
- smpsl[i]*=outvolume*u_gain;
- if(Pstereo) smpsr[i]*=outvolume*u_gain;
-}
 
-if(!Pstereo) memcpy(smpsr,smpsl,sizeof(float)*PERIOD);
 
+
+
+   } 
 
 
 
 };
 
 
+
+
 /*
  * Parameter control
  */
 void
-ShelfBoost::setvolume (int value)
+StompBox::setvolume (int value)
 {
   Pvolume = value;
   outvolume = (float)Pvolume / 127.0f;
@@ -103,20 +103,14 @@ ShelfBoost::setvolume (int value)
 };
 
 void
-ShelfBoost::setpreset (int npreset)
+StompBox::setpreset (int npreset)
 {
   const int PRESET_SIZE = 5;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 1;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Trebble
-    {127, 64, 16000, 1, 24},
-    //Mid
-    {127, 64, 4400, 1, 24},
-    //Bass
-    {127, 64, 220, 1, 24},
-    //Distortion 1
-    {6, 40, 12600, 1, 127}    
-
+    {0, 0, 0, 0, 0}
+  
   };
 
 
@@ -131,7 +125,7 @@ ShelfBoost::setpreset (int npreset)
 
 
 void
-ShelfBoost::changepar (int npar, int value)
+StompBox::changepar (int npar, int value)
 {
   switch (npar)
     {
@@ -139,33 +133,27 @@ ShelfBoost::changepar (int npar, int value)
       setvolume (value);
       break;
      case 1:
-      Pq1 = value;
-      q1 = powf (30.0f, ((float)value - 64.0f) / 64.0f);
-      RB1l->setq(q1);
-      RB1r->setq(q1);
+      Phigh = value;
       break;
      case 2: 
-      Pfreq1 = value;
-      freq1 = (float) value;
-      RB1l->setfreq(freq1);
-      RB1r->setfreq(freq1);
+      Pmid = value;
       break;
     case 3:
-      Pstereo = value;
+      Plow = value;
       break;
     case 4:
-      Plevel = value;
+      Pgain = value;
       gain = 24.0f * (float)value/64.0f;
-      u_gain = 1.0f/ gain;
-      RB1l->setgain(gain);
-      RB1r->setgain(gain); 
+      break;
+    case 5:
+      Pmode = value;
       break;
  
     };
 };
 
 int
-ShelfBoost::getpar (int npar)
+StompBox::getpar (int npar)
 {
   switch (npar)
     {
@@ -173,16 +161,19 @@ ShelfBoost::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return (Pq1);
+      return (Pgain);
       break;
     case 2:
-      return (Pfreq1);
+      return (Phigh);
       break;
     case 3:
-      return (Pstereo);
+      return (Pmid);
       break;
     case 4:
-      return (Plevel);
+      return (Plow);
+      break; 
+    case 5:
+      return (Pmode);
       break; 
 
     };
