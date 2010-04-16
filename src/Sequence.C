@@ -367,8 +367,45 @@ Sequence::out (float * smpsl, float * smpsr)
  
   }; 
    break;
+
+  case 5:  //Arpegiator
+  
+  floorf(lfol = fsequence[scount]*12.0f);
+
+  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+  {
+
+  if (++tcount >= intperiod)
+  {
+  tcount = 0;
+  scount++;
+  if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+  lfol = floorf(fsequence[scount]*12.0f);
+  }
+  
+  lmod = powf (2.0f, lfol / 12.0f);
+
+  if (Pamplitude) lmod = powf (2.0f, -lfol / 12.0f);
+  
+  outi[i] = (smpsl[i] + smpsr[i])*.5;
+     if (outi[i] > 1.0)
+	outi[i] = 1.0f;
+      if (outi[i] < -1.0)
+	outi[i] = -1.0f;
+  }
+
+
+   PS->ratio = lmod;
+   PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
+
+
+   memcpy(efxoutl, outo, sizeof(float)*PERIOD);
+   memcpy(efxoutr, outo, sizeof(float)*PERIOD);
+
  
-  // here case 5:
+   break;
+ 
+  // here case 6:
   //
   // break;
 
@@ -436,7 +473,7 @@ void
 Sequence::setpreset (int npreset)
 {
   const int PRESET_SIZE = 15;
-  const int NUM_PRESETS = 8;
+  const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Jumpy
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3},
@@ -453,8 +490,9 @@ Sequence::setpreset (int npreset)
     //Shifter
     {0, 0, 127, 127, 0, 0, 127, 127, 64, 114, 64, 1, 0, 3, 0}, 
     //Tremor
-     {30, 127, 30, 50, 80, 40, 110, 80, 0, 240, 95, 1, 1, 4, 2}
-
+     {30, 127, 30, 50, 80, 40, 110, 80, 0, 240, 95, 1, 1, 4, 2},
+    //Boogie 
+     {0 , 40, 50, 60, 70, 60, 40, 0, 0, 220, 64, 0 , 0, 5, 0} 
 
   };
 

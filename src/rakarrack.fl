@@ -5828,6 +5828,10 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
             label {Zeke Trem}
             xywh {10 10 36 21} labelsize 10
           }
+          MenuItem {} {
+            label Boogie selected
+            xywh {0 0 36 21} labelsize 10
+          }
         }
         Fl_Value_Slider seq_WD {
           label {Wet/Dry}
@@ -5909,7 +5913,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
         }
         Fl_Choice seq_mode {
           label Mode
-          callback {rkr->efx_Sequence->changepar(13,(int)o->value())} open
+          callback {rkr->efx_Sequence->changepar(13,(int)o->value())}
           xywh {353 380 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
@@ -5931,6 +5935,10 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
           MenuItem {} {
             label Tremor
             xywh {10 10 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Arpegiator
+            xywh {0 0 36 21} labelsize 9
           }
         }
         Fl_Counter seq_range {
@@ -10449,8 +10457,7 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;
