@@ -190,7 +190,7 @@ void
 Shifter::setpreset (int npreset)
 {
   const int PRESET_SIZE = 10;
-  const int NUM_PRESETS = 9;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fast
     {0, 64, 64, 200, 200, -20, 2, 0, 0, 0},
@@ -199,7 +199,7 @@ Shifter::setpreset (int npreset)
     //Slowdown
     {0, 64, 64, 900, 200, -20, 3, 1, 0, 0},
     //Chorus
-    {64, 64, 64, 0, 0, -20, 1, 0, 1, 0}
+    {64, 64, 64, 0, 0, -20, 1, 0, 1, 22}
   };
 
   if (npreset >= NUM_PRESETS)
