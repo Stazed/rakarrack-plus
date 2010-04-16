@@ -24,6 +24,7 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
+#include "Waveshaper.h"
 
 class StompBox
 {
@@ -55,7 +56,9 @@ private:
 
   AnalogFilter *linput, *lpre1, *lpre2, *lpost, *ltonehg, *ltonemd, *ltonelw;
   AnalogFilter *rinput, *rpre1, *rpre2, *rpost, *rtonehg, *rtonemd, *rtonelw;  
-  float gain; 
+  class Waveshaper *lwshape, *rwshape;  
+
+  float gain, lowb, midb, highb, volume; 
 
 };
 

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,15 +834,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1638 36 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6069,7 +6071,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6090,11 +6092,11 @@ stomp_low->value(rkr->efx_StompBox->getpar(3));
 stomp_mid->value(rkr->efx_StompBox->getpar(2));
 stomp_high->value(rkr->efx_StompBox->getpar(1));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(5));}
+stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Fast
+            label Odie selected
             xywh {20 20 45 26} labelsize 10
           }
           MenuItem {} {
@@ -6107,38 +6109,38 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
           }
         }
         Fl_Value_Slider stomp_WD {
-          label {Wet/Dry}
-          callback {rkr->efx_StompBox->changepar(0,(int)(o->value()+64));}
-          xywh {370 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          label Level
+          callback {rkr->efx_StompBox->changepar(0,(int)(o->value()));}
+          xywh {370 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider stomp_gain {
           label Gain
-          callback {rkr->efx_StompBox->changepar(1,(int)o->value());}
+          callback {rkr->efx_StompBox->changepar(4,(int)o->value());}
           xywh {370 269 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider stomp_low {
           label Low
-          callback {rkr->efx_StompBox->changepar(4,(int)o->value());}
+          callback {rkr->efx_StompBox->changepar(3,(int)o->value());}
           xywh {370 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider stomp_mid {
           label Mid
-          callback {rkr->efx_StompBox->changepar(3,(int)o->value());}
+          callback {rkr->efx_StompBox->changepar(2,(int)o->value());}
           xywh {370 303 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider stomp_high {
           label High
-          callback {rkr->efx_StompBox->changepar(2,(int)o->value());}
+          callback {rkr->efx_StompBox->changepar(1,(int)o->value());}
           xywh {370 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice stomp_mode {
           label Mode
-          callback {rkr->efx_StompBox->changepar(5,(int)o->value())}
+          callback {rkr->efx_StompBox->changepar(5,(int)o->value())} open
           xywh {363 376 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
@@ -10209,8 +10211,7 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {selected
-    }
+rkr->Mvalue=0;} {}
   }
   Function {ActOnOff()} {} {
     code {int miralo;
