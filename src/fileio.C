@@ -493,6 +493,15 @@ RKR::savefile (char *filename)
                    efx_Sequence->getpar (14), Sequence_Bypass);
 	  break;
 
+	case 38:
+	  //Shifter
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Shifter->getpar (0), efx_Shifter->getpar (1),
+		   efx_Shifter->getpar (2), efx_Shifter->getpar (3),
+		   efx_Shifter->getpar (4), efx_Shifter->getpar (5),
+		   efx_Shifter->getpar (6), efx_Shifter->getpar (7),
+		   efx_Shifter->getpar (8), efx_Shifter->getpar (9),Shifter_Bypass);
+	  break;
 
 
 
@@ -958,6 +967,13 @@ RKR::loadfile (char *filename)
 		  &lv[38][10],&lv[38][11],&lv[38][12],&lv[38][13],&lv[38][14],&Looper_B);
 	  break;
 
+	case 38:
+	  //Shifter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[39][0], &lv[39][1], &lv[39][2], &lv[39][3], &lv[39][4],
+		  &lv[39][5], &lv[39][6], &lv[39][7], &lv[39][8], &lv[39][9], &Shifter_B);
+	  break;
+
 
 
 	}
@@ -1040,7 +1056,8 @@ RKR::Actualizar_Audio ()
   Vocoder_Bypass = 0;
   Sustainer_Bypass = 0;
   Sequence_Bypass = 0;
-    
+  Shifter_Bypass = 0;
+      
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -1088,7 +1105,7 @@ RKR::Actualizar_Audio ()
     efx_MBDist->changepar (i, lv[24][i]);
  for (i = 0; i <= 10; i++)
     efx_Arpie->changepar (i, lv[25][i]);
-for (i = 0; i <= 6; i++)
+ for (i = 0; i <= 6; i++)
     efx_Expander->Expander_Change (i + 1,lv[26][i]);
  for (i = 0; i <= 10; i++)
     efx_Shuffle->changepar (i, lv[27][i]);
@@ -1114,6 +1131,8 @@ for (i = 0; i <= 6; i++)
     efx_Sustainer->changepar (i, lv[37][i]);
  for (i = 0; i <= 14; i++)
     efx_Sequence->changepar (i, lv[38][i]);
+ for (i = 0; i <= 9; i++)
+    efx_Shifter->changepar (i, lv[39][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1181,6 +1200,7 @@ for (i = 0; i <= 6; i++)
   Vocoder_Bypass = Vocoder_B;
   Sustainer_Bypass = Sustainer_B;
   Sequence_Bypass = Sequence_B;
+  Shifter_Bypass = Shifter_B;
     
   Bypass = Bypass_B;
 
@@ -1247,7 +1267,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[39][16] = {
+  int presets[40][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1325,7 +1345,10 @@ RKR::New ()
 //Systainer
     {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Sequence
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0}
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0},
+//Shifter
+    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0}
+    
     
 
     
@@ -1396,6 +1419,7 @@ RKR::New ()
   Vocoder_B = 0;
   Sustainer_B = 0;
   Sequence_B = 0;  
+  Shifter_B = 0;
   Bypass_B = 0;
 
   
@@ -1418,7 +1442,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[39][16] = {
+  int presets[40][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1496,7 +1520,9 @@ RKR::New_Bank ()
 //Systainer
     {67, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Sequence
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0}
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0},
+//Shifter
+    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0}
     
     
 
@@ -1603,6 +1629,7 @@ RKR::Bank_to_Preset (int i)
   Vocoder_B = Bank[i].lv[36][19];
   Sustainer_B = Bank[i].lv[37][19];
   Sequence_B = Bank[i].lv[38][19];
+  Shifter_B = Bank[i].lv[39][19];
 
 
   Bypass_B = Bypass;
@@ -1714,6 +1741,8 @@ RKR::Preset_to_Bank (int i)
     lv[37][j] = efx_Sustainer->getpar(j);
   for (j = 0; j <= 14; j++)
     lv[38][j] = efx_Sequence->getpar(j);
+  for (j = 0; j <= 9; j++)
+    lv[39][j] = efx_Shifter->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1785,6 +1814,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[36][19] = Vocoder_Bypass;
   Bank[i].lv[37][19] = Sustainer_Bypass;
   Bank[i].lv[38][19] = Sequence_Bypass;
+  Bank[i].lv[39][19] = Shifter_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

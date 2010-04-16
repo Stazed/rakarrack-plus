@@ -5948,7 +5948,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
         }
       }
       Fl_Group SHIFTER {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button shifter_activar {
@@ -5973,7 +5973,7 @@ shifter_thre->value(rkr->efx_Shifter->getpar(5));
 shifter_ud->value(rkr->efx_Shifter->getpar(7));
 shifter_whammy->value(rkr->efx_Shifter->getpar(9));
 
-shifter_mode->value(rkr->efx_Shifter->getpar(8));} open
+shifter_mode->value(rkr->efx_Shifter->getpar(8));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5993,7 +5993,7 @@ shifter_mode->value(rkr->efx_Shifter->getpar(8));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Trig. Chorus} selected
+            label {Trig. Chorus}
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -6055,7 +6055,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
         Fl_Choice shifter_mode {
           label Mode
-          callback {rkr->efx_Shifter->changepar(8,(int)o->value())} open
+          callback {rkr->efx_Shifter->changepar(8,(int)o->value())}
           xywh {363 376 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
@@ -8957,7 +8957,7 @@ rkr->RC->cc=1;} {}
 
 int i;
 
-for (i=1; i<326; i++)
+for (i=1; i<334; i++)
 
 {
 
@@ -10168,7 +10168,38 @@ switch (i)
      seq_stdf->value(rkr->efx_Sequence->getpar(12));
      seq_stdf->redraw();
      break;
-
+     case 326:
+     shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
+     shifter_WD->redraw();
+     break;
+     case 327:
+     shifter_int->value(rkr->efx_Shifter->getpar(6));
+     shifter_int->redraw();
+     break;
+     case 328:
+     shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
+     shifter_gain->redraw();
+     break;
+     case 329:
+     shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
+     shifter_pan->redraw();
+     break;
+     case 330:
+     shifter_attack->value(rkr->efx_Shifter->getpar(3));
+     shifter_attack->redraw();
+     break;
+     case 331:
+     shifter_decay->value(rkr->efx_Shifter->getpar(4));
+     shifter_decay->redraw();
+     break;
+     case 332:
+     shifter_thre->value(rkr->efx_Shifter->getpar(5));
+     shifter_thre->redraw();
+     break;
+     case 333:
+     shifter_whammy->value(rkr->efx_Shifter->getpar(9));
+     shifter_whammy->redraw();
+     break;
 
 
       
@@ -10178,7 +10209,8 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {}
+rkr->Mvalue=0;} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {int miralo;

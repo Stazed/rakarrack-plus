@@ -2010,6 +2010,37 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Sequence->changepar(12,(int)((float)value*.05511811f));
          break;     
  
+   case 326:
+         efx_Shifter->changepar(0,value);
+         break;
+
+   case 327:
+         efx_Shifter->changepar(6,(int)((float)value*.094488189f));
+         break;
+         
+   case 328:
+         efx_Shifter->changepar(2,value);
+         break;
+
+   case 329:
+         efx_Shifter->changepar(1,value);
+         break;
+
+   case 330:
+         efx_Shifter->changepar(3,(int)((float)value*15.748031f));
+         break;
+
+   case 331:
+         efx_Shifter->changepar(4,(int)((float)value*15.748031f));
+         break;
+
+   case 332:
+         efx_Shifter->changepar(4,-70 + (int)((float)value*.70866142f));
+         break;
+
+   case 333:
+         efx_Shifter->changepar(9,value);
+         break;
 
    } 
       

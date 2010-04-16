@@ -219,7 +219,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 300;
+  NumParams= 308;
 
 {
    static const char *los_params[] = 
@@ -468,6 +468,14 @@ RKR::RKR ()
 "ShelfBoost Level","293",
 "ShelfBoost Pres","295",
 "ShelfBoost Tone","294",
+"Shifter WD","326",
+"Shifter Int","327",
+"Shifter Gain","328",
+"Shifter Pan","329",
+"Shifter Attack","330",
+"Shifter Decay","331",
+"Shifter Thrshold","332",
+"Shifter Whamy","333",
 "Shuffle High Freq","234",
 "Shuffle High Gain","235",
 "Shuffle Low Freq","228",
