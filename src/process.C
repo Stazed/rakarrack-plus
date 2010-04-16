@@ -1454,7 +1454,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (StompBox_Bypass)
                 {
                   efx_StompBox->out(efxoutl, efxoutr);
-		  Vol_Efx(39,efx_StompBox->outvolume);
+		  Vol2_Efx();
                 }
               break;  
 
