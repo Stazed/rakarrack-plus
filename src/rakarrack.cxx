@@ -5566,6 +5566,7 @@ Fl_Menu_Item RKRGUI::menu_shifter_preset[] = {
  {"Fast", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Slow Up", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Slow Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

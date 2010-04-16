@@ -834,15 +834,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1638 36 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -5829,7 +5831,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label Boogie selected
+            label Boogie
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -5987,6 +5989,10 @@ shifter_mode->value(rkr->efx_Shifter->getpar(8));}
           MenuItem {} {
             label {Slow Down}
             xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Chorus selected
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider shifter_WD {
