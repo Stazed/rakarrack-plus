@@ -143,7 +143,6 @@ StompBox::setvolume (int value)
 {
   Pvolume = value;
   volume = (float)Pvolume / 127.0f;
-  outvolume = 0.0f;
 };
 
 void
