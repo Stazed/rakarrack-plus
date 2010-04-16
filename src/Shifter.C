@@ -81,6 +81,8 @@ Shifter::out (float *smpsl, float *smpsr)
   float sum;
   float use;
 
+
+
     for (i=0; i < PERIOD; i++)
     {
      if(Pmode == 0)
@@ -126,7 +128,9 @@ Shifter::out (float *smpsl, float *smpsr)
     
     }
 
-  if (Pmode == 1) use = whammy; else use = tune;
+   if (Pmode == 1) use = whammy; else use = tune;
+   if ((Pmode == 0) && (Pinterval == 0)) use = tune * whammy;
+
 
   if(Pupdown)
     PS->ratio = 1.0f-(1.0f-range)*use;
@@ -179,9 +183,10 @@ void
 Shifter::setinterval (int value)
 {
   interval = (float) value;
+  if ((Pmode == 0) && ( Pinterval == 0)) interval = 1.0f;
   if(Pupdown) interval *=-1.0f;
   range = powf (2.0f, interval / 12.0f);
-
+  
 };
 
 
@@ -190,7 +195,7 @@ void
 Shifter::setpreset (int npreset)
 {
   const int PRESET_SIZE = 10;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fast
     {0, 64, 64, 200, 200, -20, 2, 0, 0, 0},
@@ -199,7 +204,9 @@ Shifter::setpreset (int npreset)
     //Slowdown
     {0, 64, 64, 900, 200, -20, 3, 1, 0, 0},
     //Chorus
-    {64, 64, 64, 0, 0, -20, 1, 0, 1, 22}
+    {64, 64, 64, 0, 0, -20, 1, 0, 1, 22},
+    //Trig Chorus
+    {64, 64, 64, 250, 100, -10, 0, 0, 0, 25}
   };
 
   if (npreset >= NUM_PRESETS)
