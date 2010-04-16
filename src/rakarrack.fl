@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -834,17 +834,15 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1638 36 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -5950,7 +5948,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
         }
       }
       Fl_Group SHIFTER {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button shifter_activar {
@@ -6071,7 +6069,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6086,31 +6084,23 @@ findpos(39,(int)o->value());}
         Fl_Choice stomp_preset {
           label Preset
           callback {if(!v)rkr->efx_StompBox->setpreset((int)o->value());
-stomp_WD->value(rkr->efx_StompBox->getpar(0)-64);
+stomp_WD->value(rkr->efx_StompBox->getpar(0));
 stomp_gain->value(rkr->efx_StompBox->getpar(4));
 stomp_low->value(rkr->efx_StompBox->getpar(3));
 stomp_mid->value(rkr->efx_StompBox->getpar(2));
 stomp_high->value(rkr->efx_StompBox->getpar(1));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
+stomp_mode->value(rkr->efx_StompBox->getpar(5));} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Odie selected
+            label Odie
             xywh {20 20 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {Slow Up}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Slow Down}
-            xywh {52 52 36 21} labelsize 10
           }
         }
         Fl_Value_Slider stomp_WD {
           label Level
-          callback {rkr->efx_StompBox->changepar(0,(int)(o->value()));}
+          callback {rkr->efx_StompBox->changepar(0,(int)o->value());}
           xywh {370 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
