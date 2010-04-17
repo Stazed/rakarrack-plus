@@ -1626,6 +1626,10 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
             label Soft
             xywh {0 0 36 21} labelsize 9
           }
+          MenuItem {} {
+            label {Super Soft} selected
+            xywh {0 0 36 21} labelsize 9
+          }
         }
         Fl_Check_Button dist_neg {
           label {Neg.}
@@ -5833,7 +5837,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Chorus selected
+            label Chorus
             xywh {0 0 36 21} labelsize 10
           }
         }

@@ -1487,6 +1487,7 @@ Fl_Menu_Item RKRGUI::menu_dist_tipo[] = {
  {"Compress", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Overdrive", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Soft", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Super Soft", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

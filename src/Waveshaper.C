@@ -351,6 +351,24 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
          if(smps[i]>0.0f) smps[i] = ws*powf(smps[i],1.4142136f); else smps[i] = ws* -powf(-smps[i],1.4142136f);
         } 
          break;
+
+       case 23: //Distortion
+      
+        ws = powf (12.0f, ws * ws) + 0.5f;
+        float factor = 1.0f / ws; 
+        for (i = 0; i < n; i++)
+	{
+        if(smps[i]<factor) smps[i]=smps[i];
+        else
+        if(smps[i]>factor) smps[i]=factor+(smps[i]-factor)/powf(1.0f+((smps[i]-factor)/(1.0f-smps[i])),2.0f);
+        else
+        if(smps[i]>1.0f) smps[i]=(factor+1.0f)*.5f;
+        smps[i]*=ws; 
+        } 
+
+
+       
+
  
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions
     };
