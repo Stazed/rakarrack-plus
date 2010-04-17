@@ -5416,6 +5416,7 @@ Fl_Menu_Item RKRGUI::menu_seq_preset[] = {
  {"Shifter", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Zeke Trem", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Boogie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5524,6 +5525,7 @@ Fl_Menu_Item RKRGUI::menu_seq_mode[] = {
  {"Shifter", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Tremor", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Arpegiator", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
