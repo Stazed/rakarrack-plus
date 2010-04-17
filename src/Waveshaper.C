@@ -354,10 +354,13 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
        case 23: //Distortion
       
-        ws = powf (12.0f, ws * ws) + 0.5f;
+        ws = powf (24.0f, ws * ws) + 0.5f;
         float factor = 1.0f / ws; 
         for (i = 0; i < n; i++)
 	{
+        if(smps[i] > 1.0) smps[i] = 1.0f;
+        if(smps[i] < -1.0) smps[i] = -1.0f;
+        
         if(smps[i]<factor) smps[i]=smps[i];
         else
         if(smps[i]>factor) smps[i]=factor+(smps[i]-factor)/powf(1.0f+((smps[i]-factor)/(1.0f-smps[i])),2.0f);
