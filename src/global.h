@@ -139,6 +139,7 @@
 #include "Sequence.h"
 #include "Shifter.h"
 #include "StompBox.h"
+
 extern int Pexitprogram, preset;
 extern int commandline, gui;
 extern int exitwithhelp, nojack;
@@ -156,6 +157,7 @@ extern int gate[POLY];
 extern int reconota;
 extern float r__ratio;
 extern int maxx_len;
+
 
 
 class RKR
@@ -271,6 +273,7 @@ public:
   class Sequence *efx_Sequence;
   class Shifter *efx_Shifter;
   class StompBox *efx_StompBox;
+
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
@@ -534,7 +537,9 @@ public:
 
   int jt_state;
   double jt_tempo;
+
 };
+
 
 
 #endif

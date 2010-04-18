@@ -558,10 +558,6 @@ RKR::RKR ()
 
 RKR::~RKR ()
 {
-
-  if (exitwithhelp == 0)
-    snd_seq_close (midi_in);
-
 };
 
 

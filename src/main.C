@@ -179,8 +179,7 @@ main (int argc, char *argv[])
   // Launch GUI
 
 
-  if (gui)
-    new RKRGUI (argc, argv, &rkr);
+   if (gui) new RKRGUI (argc, argv, &rkr);
 
 
   JACKstart (&rkr, rkr.jackclient);
@@ -227,11 +226,7 @@ main (int argc, char *argv[])
 // free memory etc.
 
   JACKfinish ();
-  free (rkr.efxoutl);
-  free (rkr.efxoutr);
-  free (rkr.smpl);
-  free (rkr.smpr);
-
   return (0);
 
 };
+
