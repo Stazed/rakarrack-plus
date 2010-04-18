@@ -40,6 +40,7 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_)
   Phidamp = 60;
   Filenum = 0;
   Plength = 50;
+  Puser = 0;
   real_len = 0;
   convlength = .5f;
   fb = 0.0f;
@@ -316,7 +317,7 @@ Convolotron::changepar (int npar, int value)
     case 8:
       if(!setfile(value))
       {
-       printf("shit\n"); // if dont find the file .... do something :-) <--Yes, spew forth profanity when something is wrong :-)
+       printf("Unable to open the IR file\n");
       }
       break;
     case 5:
