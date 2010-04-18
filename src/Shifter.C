@@ -41,6 +41,7 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality)
   PS = new PitchShifter (2048, hq, fSAMPLE_RATE);
   PS->ratio = 1.0f;
 
+  state = IDLE;
   env = 0.0f;
   tune = 0.0f;
   Pupdown = 0;
@@ -67,6 +68,7 @@ Shifter::~Shifter ()
 void
 Shifter::cleanup ()
 {
+  state = IDLE;
   memset(outi, 0, sizeof(float)*PERIOD);
   memset(outo, 0, sizeof(float)*PERIOD);
 };
