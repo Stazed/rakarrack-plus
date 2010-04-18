@@ -1213,17 +1213,28 @@ RKR::loadbank (char *filename)
 {
 
   int i;
+  int err_message=1;
   char meslabel[64];
   FILE *fn;
 
   bzero(meslabel,sizeof(meslabel));
   sprintf(meslabel, "%s %s",jackcliname,VERSION);
-
-  if(CheckOldBank(filename)) 
-  {
-  Message(meslabel, "Can not load this file because is from a old rakarrack version,\n please use 'Convert Old Bank' menu entry in the Bank window.");
   
+  
+  err_message = CheckOldBank(filename); 
+  
+  switch(err_message)
+  {
+  case 0:
+  break;
+  case 1: 
+  Message(meslabel, "Can not load this Bank file because is from a old rakarrack version,\n please use 'Convert Old Bank' menu entry in the Bank window.");
   return(0);
+  break;
+  case 2:
+  Message(meslabel, "Can not load this Bank file\n");
+  return(0);
+  break;  
   }
 
 
@@ -2041,16 +2052,16 @@ RKR::CheckOldBank(char *filename)
 long Pos,Length;
 FILE *fs;
 
-if ((fs = fopen (filename, "rb")) != NULL)
-
+if ((fs = fopen (filename, "r")) != NULL) 
+{
 Pos = ftell(fs);
-
 fseek(fs, 0L, SEEK_END);
-
 Length = ftell(fs);
-
+fclose(fs);
 if (Length != 993488) return (1); else return(0);
+}
 
+return(2);
 }
 
 
