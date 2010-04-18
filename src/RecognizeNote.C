@@ -69,9 +69,6 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_)
 Recognize::~Recognize ()
 
 {
-
-  schmittFree ();
-
 }
 
 

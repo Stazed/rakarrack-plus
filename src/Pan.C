@@ -47,7 +47,6 @@ Pan::Pan (float *efxoutl_, float *efxoutr_)
 
 Pan::~Pan ()
 {
-
 };
 
 void

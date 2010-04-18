@@ -47,16 +47,10 @@ Gate::Gate (float * efxoutl_, float * efxoutr_)
   state = CLOSED;
   hold_count = 0;
 
-
-
-
 }
 
 Gate::~Gate ()
 {
-
-
-
 }
 
 
@@ -68,7 +62,6 @@ Gate::cleanup ()
   hpfl->cleanup ();
   lpfr->cleanup ();
   hpfr->cleanup ();
-
 }
 
 

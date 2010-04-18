@@ -64,9 +64,6 @@ Arpie::Arpie (float * efxoutl_, float * efxoutr_)
 
 Arpie::~Arpie ()
 {
-  delete[]ldelay;
-  delete[]rdelay;
-  delete[]pattern;
 };
 
 /*

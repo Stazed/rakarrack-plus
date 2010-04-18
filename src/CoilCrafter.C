@@ -82,7 +82,6 @@ CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_)
 
 CoilCrafter::~CoilCrafter ()
 {
-  delete (harm);
 };
 
 /*

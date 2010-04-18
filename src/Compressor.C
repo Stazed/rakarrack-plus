@@ -71,8 +71,6 @@ Compressor::Compressor (float * efxoutl_, float * efxoutr_)
 
 Compressor::~Compressor ()
 {
-
-
 }
 
 

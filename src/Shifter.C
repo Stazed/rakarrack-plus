@@ -58,11 +58,6 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality)
 
 Shifter::~Shifter ()
 {
-
-  delete[]outi;
-  delete[]outo;
-  delete PS;
-
 };
 
 void

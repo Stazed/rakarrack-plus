@@ -73,19 +73,6 @@ MBVvol::MBVvol (float * efxoutl_, float * efxoutr_)
 
 MBVvol::~MBVvol ()
 {
-  delete (lpf1l);
-  delete (lpf1r);
-  delete (hpf1l);
-  delete (hpf1r);
-  delete (lpf2l);
-  delete (lpf2r);
-  delete (hpf2l);
-  delete (hpf2r);
-  delete (lpf3l);
-  delete (lpf3r);
-  delete (hpf3l);
-  delete (hpf3r);
-
 };
 
 /*

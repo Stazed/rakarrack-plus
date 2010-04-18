@@ -60,8 +60,6 @@ RBEcho::RBEcho (float * efxoutl_, float * efxoutr_)
 
 RBEcho::~RBEcho ()
 {
-  delete[]ldelay;
-  delete[]rdelay;
 };
 
 /*

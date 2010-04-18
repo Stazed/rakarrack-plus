@@ -45,10 +45,6 @@ Alienwah::Alienwah (float * efxoutl_, float * efxoutr_)
 
 Alienwah::~Alienwah ()
 {
-  if (oldl != NULL)
-    delete[]oldl;
-  if (oldr != NULL)
-    delete[]oldr;
 };
 
 

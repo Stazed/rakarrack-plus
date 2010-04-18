@@ -59,8 +59,6 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
 
 Echo::~Echo ()
 {
-  delete[]ldelay;
-  delete[]rdelay;
 };
 
 /*

@@ -42,10 +42,6 @@ Phaser::Phaser (float * efxoutl_, float * efxoutr_)
 
 Phaser::~Phaser ()
 {
-  if (oldl != NULL)
-    delete[]oldl;
-  if (oldr != NULL)
-    delete[]oldr;
 };
 
 

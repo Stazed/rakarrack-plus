@@ -1,7 +1,7 @@
 /*
   rakarrack - a guitar effects software
 
-  Harmonizer.h  -  Harmonizer definitions
+  RecChord.h  -  Chord Recognizer definitions
   Copyright (C) 2008 Daniel Vidal & Josep Andreu
   Author: Daniel Vidal & Josep Andreu
 

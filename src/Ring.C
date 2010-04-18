@@ -64,11 +64,6 @@ Ring::Ring (float * efxoutl_, float * efxoutr_)
 
 Ring::~Ring ()
 {
- free(sin_tbl);
- free(tri_tbl);
- free(squ_tbl);
- free(saw_tbl);
-
 };
 
 /*

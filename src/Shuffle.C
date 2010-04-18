@@ -62,12 +62,6 @@ Shuffle::Shuffle (float * efxoutl_, float * efxoutr_)
 
 Shuffle::~Shuffle ()
 {
-  delete (lr);
-  delete (hr);
-  delete (mlr);
-  delete (mhr);
-
-
 };
 
 /*

@@ -60,12 +60,6 @@ Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality)
 
 Harmonizer::~Harmonizer ()
 {
-
-  delete[]outi;
-  delete[]outo;
-  delete pl;
-  delete PS;
-
 };
 
 void

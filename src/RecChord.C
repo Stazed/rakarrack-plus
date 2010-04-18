@@ -290,6 +290,11 @@ RecChord::RecChord ()
 }
 
 
+RecChord::~RecChord()
+{
+}
+
+
 void
 RecChord::cleanup ()
 {

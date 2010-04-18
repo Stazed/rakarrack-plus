@@ -75,15 +75,6 @@ Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
 
 Distorsion::~Distorsion ()
 {
-  delete (lpfl);
-  delete (lpfr);
-  delete (hpfl);
-  delete (hpfr);
-  delete (blockDCl);
-  delete (blockDCr);
-  delete (DCl);
-  delete (DCr);
-  delete (dwshape);
 };
 
 /*

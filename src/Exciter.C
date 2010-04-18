@@ -52,7 +52,6 @@ Exciter::Exciter (float * efxoutl_, float * efxoutr_)
 
 Exciter::~Exciter ()
 {
-  delete (harm);
 };
 
 /*

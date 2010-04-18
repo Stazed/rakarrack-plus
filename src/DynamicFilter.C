@@ -42,9 +42,6 @@ DynamicFilter::DynamicFilter (float * efxoutl_, float * efxoutr_)
 
 DynamicFilter::~DynamicFilter ()
 {
-  delete (filterpars);
-  delete (filterl);
-  delete (filterr);
 };
 
 

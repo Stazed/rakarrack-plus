@@ -62,10 +62,6 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality)
 
 Sequence::~Sequence ()
 {
-  delete[]outi;
-  delete[]outo;
-  delete PS;
- 
 };
 
 /*

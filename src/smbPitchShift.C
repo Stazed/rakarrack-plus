@@ -77,18 +77,14 @@ PitchShifter::PitchShifter (long fftFrameSize, long osamp, float sampleRate)
   memset (gOutputAccum, 0, 2 * MAX_FRAME_LENGTH * sizeof (float));
   memset (gAnaFreq, 0, MAX_FRAME_LENGTH * sizeof (float));
   memset (gAnaMagn, 0, MAX_FRAME_LENGTH * sizeof (float));
-} PitchShifter::~PitchShifter ()
-{
-  delete[]gInFIFO;
-  delete[]gOutFIFO;
-  delete[]gFFTworksp;
-  delete[]gLastPhase;
-  delete[]gSumPhase;
-  delete[]gOutputAccum;
-  delete[]gAnaFreq;
-  delete[]gAnaMagn;
-} void
+} 
 
+PitchShifter::~PitchShifter ()
+{
+} 
+
+
+void
 PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 			     long fftFrameSize, long osamp, float sampleRate,
 			     float *indata, float *outdata)

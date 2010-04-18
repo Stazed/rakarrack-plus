@@ -35,7 +35,6 @@ NewDist::NewDist (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
-
   
   octoutl = (float *) malloc (sizeof (float) * PERIOD);
   octoutr = (float *) malloc (sizeof (float) * PERIOD);
@@ -105,17 +104,6 @@ NewDist::NewDist (float * efxoutl_, float * efxoutr_)
 
 NewDist::~NewDist ()
 {
-  delete (lpfl);
-  delete (lpfr);
-  delete (hpfl);
-  delete (hpfr);
-  delete (blockDCl);
-  delete (blockDCr);
-  delete (filterl);
-  delete (filterr);
-  delete (DCl);
-  delete (DCr);
-  delete (wshape);
 };
 
 /*

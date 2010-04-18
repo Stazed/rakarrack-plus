@@ -63,8 +63,6 @@ StompBox::StompBox (float * efxoutl_, float * efxoutr_)
 
 StompBox::~StompBox ()
 {
-
-
 };
 
 /*

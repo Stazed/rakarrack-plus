@@ -36,8 +36,6 @@ stater = src_new(type , 1 , &errorr);
 
 Resample::~Resample()
 {
-statel = src_delete(statel);
-stater = src_delete(stater);
 };
 
 void

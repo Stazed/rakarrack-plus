@@ -47,8 +47,6 @@ ShelfBoost::ShelfBoost (float * efxoutl_, float * efxoutr_)
 
 ShelfBoost::~ShelfBoost ()
 {
-
-
 };
 
 /*

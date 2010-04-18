@@ -55,7 +55,6 @@ Filter::Filter (FilterParams * pars)
 
 Filter::~Filter ()
 {
-  delete (filter);
 };
 
 void
