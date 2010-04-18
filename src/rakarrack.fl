@@ -1627,7 +1627,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label {Super Soft} selected
+            label {Super Soft}
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -4917,10 +4917,10 @@ convo_damp->value(rkr->efx_Convol->getpar(6));
 convo_fnum->value(rkr->efx_Convol->getpar(8));
 convo_length->value(rkr->efx_Convol->getpar(3));
 convo_user->value(rkr->efx_Convol->getpar(4));
-if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
+convo_user->do_callback();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
-convo_fb->value(rkr->efx_Convol->getpar(10));}
+convo_fb->value(rkr->efx_Convol->getpar(10));} selected
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5009,7 +5009,7 @@ rkr->efx_Convol->setfile(100);}
         }
         Fl_Choice convo_fnum {
           label Preset
-          callback {rkr->efx_Convol->changepar(8,(int)o->value());} open
+          callback {rkr->efx_Convol->changepar(8,(int)o->value());}
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {

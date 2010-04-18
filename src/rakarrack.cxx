@@ -4595,7 +4595,7 @@ convo_damp->value(rkr->efx_Convol->getpar(6));
 convo_fnum->value(rkr->efx_Convol->getpar(8));
 convo_length->value(rkr->efx_Convol->getpar(3));
 convo_user->value(rkr->efx_Convol->getpar(4));
-if(rkr->efx_Convol->getpar(8)) B_wav->activate(); else B_wav->deactivate();
+convo_user->do_callback();
 convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
 convo_fb->value(rkr->efx_Convol->getpar(10));
