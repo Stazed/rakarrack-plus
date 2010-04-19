@@ -6,7 +6,7 @@
   Author: Nasca Octavian Paul
   ZynAddSubFX - a software synthesizer
 
-  Modified for rakarrack by Josep Andreu & Hernan Ordiales
+  Modified for rakarrack by Josep Andreu
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 

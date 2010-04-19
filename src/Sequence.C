@@ -3,7 +3,7 @@
  
   Sequence.C - Simple compressor/Sequence effect with easy interface, minimal controls
   Copyright (C) 2010 Ryan Billing
-  Author: Ryan Billing
+  Author: Ryan Billing & Josep Andreu
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 3 of the GNU General Public License 

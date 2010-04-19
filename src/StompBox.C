@@ -1,7 +1,7 @@
 /*
   Rakarrack   Audio FX software 
   Stompbox.C - stompbox modeler
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Ryan Billing
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 

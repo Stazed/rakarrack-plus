@@ -5,11 +5,10 @@
   rakarrack - a guitar effects software
 
  Gate.h  -  Noise Gate Effect definitions
- Based on artscompressor.cc by Matthias Kretz <kretz@kde.org>
- Stefan Westerfeld <stefan@space.twc.de> 
+ Based on Steve Harris LADSPA gate.
  
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008 Josep Andreu
+  Author: Josep Andreu
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of version 2 of the GNU General Public License

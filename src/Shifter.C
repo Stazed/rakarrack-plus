@@ -2,8 +2,10 @@
   rakarrack - a guitar effects software
 
   Shifter.C  -  Shifter
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu
+  
+  Using Stephan M. Bernsee smbPtichShifter engine.
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of version 2 of the GNU General Public License

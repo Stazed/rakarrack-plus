@@ -2,8 +2,8 @@
   rakarrack - a guitar effects software
 
  process.C  -  mainloop functions
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of version 2 of the GNU General Public License
@@ -541,7 +541,6 @@ RKR::RKR ()
        }
  }
 
-
 // Init Preset
 
   New ();
@@ -549,7 +548,6 @@ RKR::RKR ()
 // Init Bank
 
   New_Bank ();
-
   init_rkr ();
 
 }
