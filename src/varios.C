@@ -91,7 +91,7 @@ char *tmp;
          if(upsample) 
          {
           maxx_len /= (UpAmo + 8); 
-          maxx_len /= (6 - UpQual); 
+          maxx_len /= (6 - ((UpQual+DownQual)/2)); 
           // printf("Max Len: %d\n",maxx_len);
 
          }
