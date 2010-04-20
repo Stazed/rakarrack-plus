@@ -284,7 +284,7 @@ New_Bank ()
 
       memset(NewBank[i].lv ,0, sizeof(NewBank[i].lv));
 
-      for (j = 0; j < 20; j++)
+      for (j = 0; j < 41; j++)
 	{
 	  for (k = 0; k < 16; k++)
 	    {
@@ -540,7 +540,7 @@ for (i=1; i<61; i++)
      sprintf(NewBank[i].cMaster_Volume, "%s",Bank[i].Reserva1);
      sprintf(NewBank[i].cBalance, "%s","1.000000");
       
-  for(j=0;j<24;j++)
+  for(j=0;j<20;j++)
      {
        for(k=0;k<20;k++) 
          {
@@ -620,7 +620,7 @@ for (i=61; i<81; i++)
      sprintf(NewBank[i-60].cMaster_Volume, "%s",Bank[i].Reserva1);
      sprintf(NewBank[i-60].cBalance, "%s","1.000000");
       
-  for(j=0;j<24;j++)
+  for(j=0;j<20;j++)
      {
        for(k=0;k<20;k++) 
          {
