@@ -1021,6 +1021,16 @@ if (preset!=1000)
 
 ActMIDI();
 
+rkr->cpufp++;
+if(rkr->cpufp==36)
+{
+char tmp[8];
+bzero(tmp,sizeof(tmp));
+sprintf(tmp,"%5.2f%%",rkr->cpuload);
+CPULOAD->copy_label(tmp);
+rkr->cpufp=0;
+}
+
 
 if(rkr->Tap_Bypass)
 {
@@ -14613,13 +14623,17 @@ R average.");
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { UPS_LED = new Fl_Box(439, 32, 11, 11, "Upsampling");
+      { UPS_LED = new Fl_Box(390, 32, 11, 11, "Upsampling");
         UPS_LED->box(FL_ROUNDED_BOX);
         UPS_LED->labelsize(10);
         UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         UPS_LED->user_data((void*)(2));
         UPS_LED->align(FL_ALIGN_RIGHT);
       } // Fl_Box* UPS_LED
+      { CPULOAD = new Fl_Box(468, 28, 45, 19);
+        CPULOAD->labelsize(10);
+        CPULOAD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* CPULOAD
       Presets->end();
     } // Fl_Group* Presets
     { Tap = new Fl_Group(520, 140, 276, 54);

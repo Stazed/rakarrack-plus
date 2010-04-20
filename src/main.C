@@ -219,6 +219,7 @@ main (int argc, char *argv[])
 
 	}
 
+      
       rkr.miramidi ();
 
     }

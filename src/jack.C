@@ -131,6 +131,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
   jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
     jack_port_get_buffer (inputport_aux, nframes);
 
+  JackOUT->cpuload = jack_cpu_load(jackclient);
 
   pthread_mutex_lock (&jmutex);
 

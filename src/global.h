@@ -538,6 +538,10 @@ public:
   int jt_state;
   double jt_tempo;
 
+  int cpufp;
+  float cpuload;
+  
+
 };
 
 
