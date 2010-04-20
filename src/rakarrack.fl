@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -85,10 +85,11 @@ double acoeff= udsr/(0.005+udsr);
 double image=0.0;
 double oldimage =0.0;
 double factor = (double) ns / 64.0;
-char buf[1];
+char buf[4];
 double xscale[] = {22.0,31.0,39.0,62.0,79.0,125.0,158.0,200.0,251.0,317.0,400.0,503.0,634.0,800.0,1000.0,1200.0,1500.0,2000.0,2500.0,3200.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,16000.0,20000.0};
 
-sprintf(buf," ");
+bzero(buf,sizeof(buf));
+
 
 px = (lx-22) / 29;
 hy = ly;
@@ -133,8 +134,6 @@ for(i=0; i<28; i++)
       fl_color(leds_color);
       fl_rectf(px+ox+px*i+4,oy+ly-py,px-2,py);
 
-   
-   //   printf("%d %f %d\\n",py,y,i);
 } 
  
  
@@ -144,7 +143,8 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {}
+}} {selected
+    }
   }
   Function {handle(int event)} {return_type int
   } {
@@ -834,20 +834,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
 Pexitprogram=1;}
       xywh {1371 161 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
-
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6138,7 +6135,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
         Fl_Value_Slider stomp_low {
           label Low
-          callback {rkr->efx_StompBox->changepar(3,(int)o->value());} selected
+          callback {rkr->efx_StompBox->changepar(3,(int)o->value());}
           xywh {370 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -6458,7 +6455,7 @@ Analyzer_ON=1;
           user_data 2
           xywh {390 32 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
         }
-        Fl_Box CPULOAD {selected
+        Fl_Box CPULOAD {
           xywh {468 28 45 19} labelsize 10 labelcolor 7
         }
       }

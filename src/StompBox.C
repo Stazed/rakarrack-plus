@@ -87,8 +87,6 @@ int i;
     float hfilter;  //temporary variables
     float mfilter;
     float lfilter;
-    float temp1;
-    float temp2;
     
    switch (Pmode)
    {
