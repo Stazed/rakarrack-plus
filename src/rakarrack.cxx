@@ -526,22 +526,9 @@ switch (event) {
     static int offcenter;
 
    
-    
-    if (type() == FL_HOR_FILL_SLIDER || type() == FL_VERT_FILL_SLIDER) {
-
-      S = 1;
-      if (event == FL_PUSH) {
-        int xx = int(val*ww+.5);
-        offcenter = mx-xx;
-        if (offcenter < -10 || offcenter > 10) offcenter = 0;
-        else return 1;
-      }
-
-    } else {
-
       S = int(0*ww+.5); if (S >= ww) return 0;
       int T = (horizontal() ? H : W)/2+1;
-      if (type()==FL_VERT_NICE_SLIDER || type()==FL_HOR_NICE_SLIDER) T += 4;
+      T += 4;
       if (S < T) S = T;
       if (event == FL_PUSH) {
        int xx = int(val*(ww-S)+.5);
@@ -551,7 +538,7 @@ switch (event) {
         else if (offcenter > S) offcenter = S;
         else return 1;
       }
-    }
+    
 
     int xx = mx-offcenter;
     double v;
@@ -567,6 +554,7 @@ switch (event) {
         offcenter = mx-xx; if (offcenter > S) offcenter = S;
       }
         v = round(xx*(maximum()-minimum())/(ww-S) + minimum());
+        
         
         // make sure a click outside the sliderbar moves it:
       if (event == FL_PUSH && v == value()) {
