@@ -223,7 +223,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 308;
+  NumParams= 313;
 
 {
    static const char *los_params[] = 
@@ -490,6 +490,11 @@ RKR::RKR ()
 "Shuffle M.L. Gain","231",
 "Shuffle Q","236",
 "Shuffle WD","227",
+"StompBox Level","334",
+"StompBox Gain","335",
+"StompBox Low","336",
+"StompBox Mid","337",
+"StompBox High","338",
 "Sustainer Gain","312",
 "Sustainer Sustain","313",
 "Synthfilter A.Time","245",

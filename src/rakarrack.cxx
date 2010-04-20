@@ -16910,7 +16910,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<334; i++)
+for (i=1; i<339; i++)
 
 {
 
@@ -18153,7 +18153,26 @@ switch (i)
      shifter_whammy->value(rkr->efx_Shifter->getpar(9));
      shifter_whammy->redraw();
      break;
-
+     case 334:
+     stomp_WD->value(rkr->efx_StompBox->getpar(0));
+     stomp_WD->redraw();
+     break;
+     case 335:
+     stomp_gain->value(rkr->efx_StompBox->getpar(4));
+     stomp_gain->redraw();
+     break;
+     case 336:
+     stomp_low->value(rkr->efx_StompBox->getpar(3)-64);
+     stomp_low->redraw();
+     break;
+     case 337:
+     stomp_mid->value(rkr->efx_StompBox->getpar(2)-64);
+     stomp_mid->redraw();
+     break;
+     case 338:
+     stomp_high->value(rkr->efx_StompBox->getpar(1)-64);
+     stomp_high->redraw();
+     break;
 
       
 }
