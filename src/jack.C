@@ -131,6 +131,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
     jack_port_get_buffer (inputport_aux, nframes);
 
   JackOUT->cpuload = jack_cpu_load(jackclient);
+
   int jnumpi = jack_port_connected(inputport_left) + jack_port_connected(inputport_right );
   if(jnumpi != JackOUT->numpi) 
   {
@@ -150,6 +151,23 @@ jackprocess (jack_nframes_t nframes, void *arg)
    JackOUT->numpc = 1;
   }
   
+  int jnumpmi = jack_port_connected(jack_midi_in);
+  if(jnumpmi != JackOUT->numpmi)
+  {
+   JackOUT->numpmi = jnumpmi;
+   JackOUT->numpc = 1;
+  }
+  
+  int jnumpmo = jack_port_connected(jack_midi_out);
+  if(jnumpmo != JackOUT->numpmo)
+  {
+   JackOUT->numpmo = jnumpmo;
+   JackOUT->numpc = 1;
+  }
+  
+
+
+
   pthread_mutex_lock (&jmutex);
 
   float *data = (float *)jack_port_get_buffer(jack_midi_in, nframes); 

@@ -59,6 +59,8 @@ RKR::RKR ()
   numpi = 0;
   numpo = 0;
   numpa = 0;
+  numpmi = 0;
+  numpmo = 0;
   nojack = 0;
   memset (Mcontrol, 0, sizeof (Mcontrol));
   Mvalue = 0;
@@ -191,8 +193,6 @@ RKR::RKR ()
   RC = new RecChord ();
 
   
-
-
   Data_Version = (char *) malloc (sizeof (char) * 16);
   memset (Data_Version, 0, sizeof (char) * 16);
   Preset_Name = (char *) malloc (sizeof (char) * 64);

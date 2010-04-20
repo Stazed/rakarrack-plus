@@ -164,6 +164,8 @@ private:
   static void cb_TITTLE_L(Fl_Button*, void*);
 public:
   Fl_Box *UPS_LED;
+  Fl_Box *P_MIN_ST;
+  Fl_Box *P_MOUT_ST;
   Fl_Box *P_AUX_ST;
   Fl_Box *P_IN_ST;
   Fl_Box *P_OUT_ST;

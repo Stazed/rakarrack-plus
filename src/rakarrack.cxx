@@ -1036,6 +1036,8 @@ if(rkr->numpc)
   if (rkr->numpi) P_IN_ST->show(); else P_IN_ST->hide();
   if (rkr->numpo) P_OUT_ST->show(); else P_OUT_ST->hide();
   if (rkr->numpa) P_AUX_ST->show(); else P_AUX_ST->hide();
+  if (rkr->numpmi) P_MIN_ST->show(); else P_MIN_ST->hide();
+  if (rkr->numpmo) P_MOUT_ST->show(); else P_MOUT_ST->hide();
   rkr->numpc = 0;
 }    
 
@@ -6785,30 +6787,49 @@ Fl_Double_Window* RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
     } // Fl_Button* TITTLE_L
-    { UPS_LED = new Fl_Box(601, 8, 11, 11, "Upsampling");
+    { UPS_LED = new Fl_Box(541, 8, 11, 11, "Upsampling");
       UPS_LED->box(FL_ROUNDED_BOX);
       UPS_LED->labelsize(10);
       UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       UPS_LED->user_data((void*)(2));
       UPS_LED->align(FL_ALIGN_RIGHT);
     } // Fl_Box* UPS_LED
+    { P_MIN_ST = new Fl_Box(620, 3, 29, 20, "Midi In");
+      P_MIN_ST->labelfont(1);
+      P_MIN_ST->labelsize(8);
+      P_MIN_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      P_MIN_ST->user_data((void*)(5));
+      P_MIN_ST->align(FL_ALIGN_WRAP);
+      P_MIN_ST->hide();
+    } // Fl_Box* P_MIN_ST
+    { P_MOUT_ST = new Fl_Box(648, 3, 29, 20, "Midi Out");
+      P_MOUT_ST->labelfont(1);
+      P_MOUT_ST->labelsize(8);
+      P_MOUT_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      P_MOUT_ST->user_data((void*)(5));
+      P_MOUT_ST->align(FL_ALIGN_WRAP);
+      P_MOUT_ST->hide();
+    } // Fl_Box* P_MOUT_ST
     { P_AUX_ST = new Fl_Box(676, 5, 32, 17, "Aux");
       P_AUX_ST->labelfont(1);
       P_AUX_ST->labelsize(10);
       P_AUX_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       P_AUX_ST->user_data((void*)(5));
+      P_AUX_ST->hide();
     } // Fl_Box* P_AUX_ST
     { P_IN_ST = new Fl_Box(698, 5, 32, 17, "In");
       P_IN_ST->labelfont(1);
       P_IN_ST->labelsize(10);
       P_IN_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       P_IN_ST->user_data((void*)(5));
+      P_IN_ST->hide();
     } // Fl_Box* P_IN_ST
     { P_OUT_ST = new Fl_Box(719, 5, 32, 17, "Out");
       P_OUT_ST->labelfont(1);
       P_OUT_ST->labelsize(10);
       P_OUT_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       P_OUT_ST->user_data((void*)(5));
+      P_OUT_ST->hide();
     } // Fl_Box* P_OUT_ST
     { CPULOAD = new Fl_Box(750, 5, 45, 17);
       CPULOAD->labelsize(10);
