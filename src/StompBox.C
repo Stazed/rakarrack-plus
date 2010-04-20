@@ -373,8 +373,8 @@ StompBox::setpreset (int npreset)
   const int PRESET_SIZE = 6;
   const int NUM_PRESETS = 1;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Trebble
-    {64, 127, 0, 127, 65, 0}
+    //Odie
+    {48, 32, 0, 32, 65, 0}
   
   };
 
