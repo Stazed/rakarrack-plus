@@ -52,7 +52,7 @@ private:
   int Plow;
   int Pmode;
   void setvolume (int value);
-
+  void init_mode (int value);
   AnalogFilter *linput, *lpre1, *lpre2, *lpost, *ltonehg, *ltonemd, *ltonelw;
   AnalogFilter *rinput, *rpre1, *rpre2, *rpost, *rtonehg, *rtonemd, *rtonelw;  
   class Waveshaper *lwshape, *rwshape;  
