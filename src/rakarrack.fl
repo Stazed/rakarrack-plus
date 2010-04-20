@@ -833,8 +833,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {selected
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -6198,8 +6197,8 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
       }
       Fl_Group Tuner {
-        user_data 1
-        xywh {521 24 276 58} box UP_BOX color 0 selection_color 0 align 112
+        user_data 1 selected
+        xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
           label On
@@ -6370,7 +6369,7 @@ rkr->modified=0;
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {

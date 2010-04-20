@@ -14332,7 +14332,7 @@ R average.");
       } // Fl_Choice* stomp_mode
       STOMPBOX->end();
     } // Fl_Group* STOMPBOX
-    { Tuner = new Fl_Group(521, 24, 276, 58);
+    { Tuner = new Fl_Group(520, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
       Tuner->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
