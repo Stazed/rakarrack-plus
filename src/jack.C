@@ -114,7 +114,6 @@ jackprocess (jack_nframes_t nframes, void *arg)
 {
 
   int i,count;
-
   jack_midi_event_t midievent;
 
   jack_default_audio_sample_t *outl = (jack_default_audio_sample_t *)
@@ -132,7 +131,25 @@ jackprocess (jack_nframes_t nframes, void *arg)
     jack_port_get_buffer (inputport_aux, nframes);
 
   JackOUT->cpuload = jack_cpu_load(jackclient);
-
+  int jnumpi = jack_port_connected(inputport_left) + jack_port_connected(inputport_right );
+  if(jnumpi != JackOUT->numpi) 
+  {
+  JackOUT->numpi=jnumpi;
+  JackOUT->numpc = 1;
+  }
+  int jnumpo = jack_port_connected(outport_left) + jack_port_connected(outport_right );
+  if(jnumpo != JackOUT->numpo)
+  { 
+  JackOUT->numpo = jnumpo;
+  JackOUT->numpc = 1;
+  }
+  int jnumpa = jack_port_connected(inputport_aux);
+  if(jnumpa != JackOUT->numpa)
+  {
+   JackOUT->numpa = jnumpa;
+   JackOUT->numpc = 1;
+  }
+  
   pthread_mutex_lock (&jmutex);
 
   float *data = (float *)jack_port_get_buffer(jack_midi_in, nframes); 

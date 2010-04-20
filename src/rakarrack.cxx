@@ -1031,6 +1031,13 @@ CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
 }
 
+if(rkr->numpc)
+{
+  if (rkr->numpi) P_IN_ST->show(); else P_IN_ST->hide();
+  if (rkr->numpo) P_OUT_ST->show(); else P_OUT_ST->hide();
+  if (rkr->numpa) P_AUX_ST->show(); else P_AUX_ST->hide();
+  rkr->numpc = 0;
+}    
 
 if(rkr->Tap_Bypass)
 {
@@ -6778,6 +6785,36 @@ Fl_Double_Window* RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
     } // Fl_Button* TITTLE_L
+    { UPS_LED = new Fl_Box(601, 8, 11, 11, "Upsampling");
+      UPS_LED->box(FL_ROUNDED_BOX);
+      UPS_LED->labelsize(10);
+      UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      UPS_LED->user_data((void*)(2));
+      UPS_LED->align(FL_ALIGN_RIGHT);
+    } // Fl_Box* UPS_LED
+    { P_AUX_ST = new Fl_Box(676, 5, 32, 17, "Aux");
+      P_AUX_ST->labelfont(1);
+      P_AUX_ST->labelsize(10);
+      P_AUX_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      P_AUX_ST->user_data((void*)(5));
+    } // Fl_Box* P_AUX_ST
+    { P_IN_ST = new Fl_Box(698, 5, 32, 17, "In");
+      P_IN_ST->labelfont(1);
+      P_IN_ST->labelsize(10);
+      P_IN_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      P_IN_ST->user_data((void*)(5));
+    } // Fl_Box* P_IN_ST
+    { P_OUT_ST = new Fl_Box(719, 5, 32, 17, "Out");
+      P_OUT_ST->labelfont(1);
+      P_OUT_ST->labelsize(10);
+      P_OUT_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      P_OUT_ST->user_data((void*)(5));
+    } // Fl_Box* P_OUT_ST
+    { CPULOAD = new Fl_Box(750, 5, 45, 17);
+      CPULOAD->labelsize(10);
+      CPULOAD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      CPULOAD->user_data((void*)(5));
+    } // Fl_Box* CPULOAD
     { Sco = new Scope(545, 19, 226, 65, "Rakarrack");
       Sco->box(FL_NO_BOX);
       Sco->color((Fl_Color)FL_BACKGROUND_COLOR);
@@ -14627,17 +14664,6 @@ R average.");
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { UPS_LED = new Fl_Box(390, 32, 11, 11, "Upsampling");
-        UPS_LED->box(FL_ROUNDED_BOX);
-        UPS_LED->labelsize(10);
-        UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        UPS_LED->user_data((void*)(2));
-        UPS_LED->align(FL_ALIGN_RIGHT);
-      } // Fl_Box* UPS_LED
-      { CPULOAD = new Fl_Box(468, 28, 45, 19);
-        CPULOAD->labelsize(10);
-        CPULOAD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      } // Fl_Box* CPULOAD
       Presets->end();
     } // Fl_Group* Presets
     { Tap = new Fl_Group(520, 140, 276, 54);
@@ -18422,7 +18448,7 @@ for (int t=0; t<Principal->children();t++)
      k= w->labelsize();
      k+=value;
      w->labelsize(k);
-     w->labelcolor(label_color);  
+     if(ud != 5) w->labelcolor(label_color); else w->labelcolor(leds_color); 
      if (ud !=2) w->selection_color(back_color); else w->selection_color(leds_color);
      
    
@@ -18442,7 +18468,7 @@ for (int t=0; t<Principal->children();t++)
           k= c->labelsize();
           k+=value;
           c->labelsize(k);
-          c->labelcolor(label_color);
+          if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
           c->color(fore_color);
           

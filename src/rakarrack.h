@@ -163,6 +163,11 @@ private:
   void cb_TITTLE_L_i(Fl_Button*, void*);
   static void cb_TITTLE_L(Fl_Button*, void*);
 public:
+  Fl_Box *UPS_LED;
+  Fl_Box *P_AUX_ST;
+  Fl_Box *P_IN_ST;
+  Fl_Box *P_OUT_ST;
+  Fl_Box *CPULOAD;
   Scope *Sco;
   Fl_Box *E1;
   Fl_Box *E2;
@@ -2873,8 +2878,6 @@ private:
   static void cb_Etit(Fl_Button*, void*);
 public:
   Analyzer *Analy;
-  Fl_Box *UPS_LED;
-  Fl_Box *CPULOAD;
   Fl_Group *Tap;
   Fl_Light_Button *Tap_activar;
 private:

@@ -541,6 +541,8 @@ public:
   int cpufp;
   float cpuload;
   
+  int numpi, numpo, numpa;
+  int numpc;
 
 };
 

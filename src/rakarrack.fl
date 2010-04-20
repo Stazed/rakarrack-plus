@@ -143,8 +143,7 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {selected
-    }
+}} {}
   }
   Function {handle(int event)} {return_type int
   } {
@@ -834,7 +833,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {selected
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -844,7 +844,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1371 161 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1525 335 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1038,6 +1038,13 @@ CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
 }
 
+if(rkr->numpc)
+{
+  if (rkr->numpi) P_IN_ST->show(); else P_IN_ST->hide();
+  if (rkr->numpo) P_OUT_ST->show(); else P_OUT_ST->hide();
+  if (rkr->numpa) P_AUX_ST->show(); else P_AUX_ST->hide();
+  rkr->numpc = 0;
+}    
 
 if(rkr->Tap_Bypass)
 {
@@ -1184,6 +1191,30 @@ Sco->show();
 Scope_ON=1;
 }}
         xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
+      }
+      Fl_Box UPS_LED {
+        label Upsampling
+        user_data 2
+        xywh {601 8 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
+      }
+      Fl_Box P_AUX_ST {
+        label Aux
+        user_data 5
+        xywh {676 5 32 17} labelfont 1 labelsize 10 labelcolor 7
+      }
+      Fl_Box P_IN_ST {
+        label In
+        user_data 5
+        xywh {698 5 32 17} labelfont 1 labelsize 10 labelcolor 7
+      }
+      Fl_Box P_OUT_ST {
+        label Out
+        user_data 5
+        xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7
+      }
+      Fl_Box CPULOAD {
+        user_data 5
+        xywh {750 5 45 17} labelsize 10 labelcolor 7
       }
       Fl_Box Sco {
         label Rakarrack
@@ -6092,7 +6123,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6153,7 +6184,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
         Fl_Choice stomp_mode {
           label Mode
-          callback {rkr->efx_StompBox->changepar(5,(int)o->value())} open
+          callback {rkr->efx_StompBox->changepar(5,(int)o->value())}
           xywh {363 376 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
@@ -6339,7 +6370,7 @@ rkr->modified=0;
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -6449,14 +6480,6 @@ Analyzer_ON=1;
         Fl_Box Analy {
           xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
           class Analyzer
-        }
-        Fl_Box UPS_LED {
-          label Upsampling
-          user_data 2
-          xywh {390 32 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
-        }
-        Fl_Box CPULOAD {
-          xywh {468 28 45 19} labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tap {
@@ -10533,7 +10556,7 @@ for (int t=0; t<Principal->children();t++)
      k= w->labelsize();
      k+=value;
      w->labelsize(k);
-     w->labelcolor(label_color);  
+     if(ud != 5) w->labelcolor(label_color); else w->labelcolor(leds_color); 
      if (ud !=2) w->selection_color(back_color); else w->selection_color(leds_color);
      
    
@@ -10553,7 +10576,7 @@ for (int t=0; t<Principal->children();t++)
           k= c->labelsize();
           k+=value;
           c->labelsize(k);
-          c->labelcolor(label_color);
+          if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
           c->color(fore_color);
           

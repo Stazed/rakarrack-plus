@@ -55,6 +55,10 @@ RKR::RKR ()
 
   char temp[128];
   cpufp = 0;
+  numpc = 0;
+  numpi = 0;
+  numpo = 0;
+  numpa = 0;
   nojack = 0;
   memset (Mcontrol, 0, sizeof (Mcontrol));
   Mvalue = 0;
