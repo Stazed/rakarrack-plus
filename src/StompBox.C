@@ -402,17 +402,17 @@ StompBox::changepar (int npar, int value)
      case 1:
       Phigh = value;
       if( value < 0) highb = ((float) value)/64.0f;
-      if( value > 0) highb = ((float) value)/6.4f;      
+      if( value > 0) highb = ((float) value)/32.0f;      
       break;
      case 2: 
       Pmid = value;
       if( value < 0) midb = ((float) value)/64.0f;
-       if( value > 0) midb = ((float) value)/6.4f;     
+       if( value > 0) midb = ((float) value)/32.0f;     
       break;
     case 3:
       Plow = value;
       if( value < 0) lowb = ((float) value)/64.0f;
-      if( value > 0) lowb = ((float) value)/6.4f;
+      if( value > 0) lowb = ((float) value)/32.0f;
       break;
     case 4:
       Pgain = value;
