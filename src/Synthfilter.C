@@ -74,25 +74,6 @@ Synthfilter::Synthfilter (float * efxoutl_, float * efxoutr_)
 
 Synthfilter::~Synthfilter ()
 {
-
-  if (lyn1 != NULL)
-    delete[]lyn1;
-
-  if (ryn1 != NULL)
-    delete[]ryn1;
-
-  if (lx1hp != NULL)
-    delete[]lx1hp;
-
-  if (rx1hp != NULL)
-    delete[]rx1hp;
-    
-  if (ly1hp != NULL)
-    delete[]ly1hp;
-
-  if (ry1hp != NULL)
-    delete[]ry1hp;    
-
 };
 
 

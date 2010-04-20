@@ -1,11 +1,11 @@
 /*
   ZynAddSubFX - a software synthesizer
  
-  Phaser.h - Phaser effect
+  APhaser.h - Phaser effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Josep Andreu and Ryan Billing
 
   Further modified for rakarrack by Ryan Billing (Transmogrifox) to model Analog Phaser behavior 2009
   

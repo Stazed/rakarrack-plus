@@ -1,7 +1,7 @@
 /* tuneit.c -- Detect fundamental frequency of a sound
 * Copyright (C) 2004, 2005  Mario Lang <mlang@delysid.org>
 *
-* Modified for rakarrack by Daniel Vidal & Josep Andreu
+* Modified for rakarrack by Josep Andreu
 * Recognizer.h  Recognizer Audio Note definitions
 *
 * This is free software, placed under the terms of the
@@ -12,8 +12,8 @@
   rakarrack - a guitar effects software
 
   RecognizeNote.C  -  Recognize Audio Notess
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of version 2 of the GNU General Public License
@@ -69,9 +69,6 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_)
 Recognize::~Recognize ()
 
 {
-
-  schmittFree ();
-
 }
 
 

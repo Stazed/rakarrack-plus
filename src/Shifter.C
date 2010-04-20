@@ -2,8 +2,10 @@
   rakarrack - a guitar effects software
 
   Shifter.C  -  Shifter
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu
+  
+  Using Stephan M. Bernsee smbPtichShifter engine.
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of version 2 of the GNU General Public License
@@ -41,6 +43,7 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality)
   PS = new PitchShifter (2048, hq, fSAMPLE_RATE);
   PS->ratio = 1.0f;
 
+  state = IDLE;
   env = 0.0f;
   tune = 0.0f;
   Pupdown = 0;
@@ -57,16 +60,12 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality)
 
 Shifter::~Shifter ()
 {
-
-  delete[]outi;
-  delete[]outo;
-  delete PS;
-
 };
 
 void
 Shifter::cleanup ()
 {
+  state = IDLE;
   memset(outi, 0, sizeof(float)*PERIOD);
   memset(outo, 0, sizeof(float)*PERIOD);
 };

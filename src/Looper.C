@@ -60,10 +60,6 @@ Looper::Looper (float * efxoutl_, float * efxoutr_, float size)
 
 Looper::~Looper ()
 {
-  delete[]ldelay;
-  delete[]rdelay;
-  delete[]t2ldelay;
-  delete[]t2rdelay;
 };
 
 /*

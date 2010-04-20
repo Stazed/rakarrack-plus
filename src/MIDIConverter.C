@@ -1,7 +1,7 @@
 /* tuneit.c -- Detect fundamental frequency of a sound
  * Copyright (C) 2004, 2005  Mario Lang <mlang@delysid.org>
  *
- * Modified for rakarrack by Daniel Vidal & Josep Andreu 
+ * Modified for rakarrack by Josep Andreu 
  * MIDIConverter.C  MIDI Converter class
  * This is free software, placed under the terms of the
  * GNU General Public License, as published by the Free Software Foundation.

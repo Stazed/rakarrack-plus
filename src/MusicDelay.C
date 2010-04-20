@@ -62,12 +62,6 @@ MusicDelay::MusicDelay (float * efxoutl_, float * efxoutr_)
 
 MusicDelay::~MusicDelay ()
 {
-  delete[]ldelay1;
-  delete[]rdelay1;
-  delete[]ldelay2;
-  delete[]rdelay2;
-
-
 };
 
 /*

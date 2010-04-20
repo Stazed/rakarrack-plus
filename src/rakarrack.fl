@@ -844,8 +844,10 @@ class RKRGUI {open
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
-Pexitprogram=1;} open
-      xywh {1638 36 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+
+Pexitprogram=1;}
+      xywh {1371 161 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1028,6 +1030,16 @@ if (preset!=1000)
 }
 
 ActMIDI();
+
+rkr->cpufp++;
+if(rkr->cpufp==36)
+{
+char tmp[8];
+bzero(tmp,sizeof(tmp));
+sprintf(tmp,"%5.2f%%",rkr->cpuload);
+CPULOAD->copy_label(tmp);
+rkr->cpufp=0;
+}
 
 
 if(rkr->Tap_Bypass)
@@ -6444,7 +6456,10 @@ Analyzer_ON=1;
         Fl_Box UPS_LED {
           label Upsampling
           user_data 2
-          xywh {439 32 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
+          xywh {390 32 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
+        }
+        Fl_Box CPULOAD {selected
+          xywh {468 28 45 19} labelsize 10 labelcolor 7
         }
       }
       Fl_Group Tap {

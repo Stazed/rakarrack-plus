@@ -66,8 +66,6 @@ Dflange::Dflange (float * efxoutl_, float * efxoutr_)
 
 Dflange::~Dflange ()
 {
-  delete[]ldelay;
-  delete[]rdelay;
 };
 
 /*

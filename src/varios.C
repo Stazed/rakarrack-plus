@@ -2,8 +2,8 @@
   rakarrack - a guitar effects software
 
  varios.C  -  some extra functions
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of version 2 of the GNU General Public License
@@ -91,7 +91,7 @@ char *tmp;
          if(upsample) 
          {
           maxx_len /= (UpAmo + 8); 
-          maxx_len /= (6 - UpQual); 
+          maxx_len /= (6 - ((UpQual+DownQual)/2)); 
           // printf("Max Len: %d\n",maxx_len);
 
          }

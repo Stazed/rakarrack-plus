@@ -19,6 +19,7 @@
 
 
 
+
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   
@@ -185,7 +186,9 @@ been warned. <br>
 
 <p>Of course resampling increase the sound quality, the way to set up
 is start with the worst resampling settings, amount = "x2"&nbsp; and
-Quality "Linear", and check the CPU usage, with qjackctl, top, htop or
+Quality "Linear", the the jack load cpu value is displayed in the
+status bar in the preset block, if you want more accurate CPU usage
+values use top, htop or
 other CPU monitors, then increase the values thinking that then next
 step of quality could use double CPU than the actual set, that's not
 exactly in the lower resampling quality levels,&nbsp; but is more or
@@ -208,7 +211,7 @@ effect don't has sound, that can happens if the value is less than 5 ms.</p>
 <p>Of course increasing the length parameter you will obtain a better
 convolotron sound, if you unset the "Safe Mode" you can set the length
 to a desired value without the magical limit, but do that with
-extremely care. I also recommend that you use a CPU monitor to see what
+extremely care. Check the jack load CPU in the status bar or use a CPU monitor to see what
 your computer can afford. Do that with small steps and checking the CPU
 usage, or you will hang up your computer. You have been warned.<br>
 </p>
@@ -491,9 +494,10 @@ libsamplerate quality for the downsampling procedure.</p>
 <p align="justify"><b>Harmonizer Quality</b></p>
 
 <p align="justify">Selects the quality of the harmonizer audio
-engine,&nbsp;
-the available values are "4,8,16", the default value is "4".
-Incrementing the quality increments the CPU usage by this effect.
+engine, used by Harmonizer, Shifter and Sequence effects, the available
+values are "4,8,16,32", the default value is "4". Incrementing the quality
+increments the CPU usage by this effect. Take specially care if you are
+using resampling too.
 This parameter will take effect the next time you run rakarrack.</p>
 
 <p align="justify"><u><b>MIDI</b></u></p>

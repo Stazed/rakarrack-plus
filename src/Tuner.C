@@ -44,9 +44,6 @@ Tuner::Tuner ()
 
 Tuner::~Tuner ()
 {
-
-
-
 }
 
 

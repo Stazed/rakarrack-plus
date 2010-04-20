@@ -57,9 +57,6 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_)
 
 Convolotron::~Convolotron ()
 {
-  delete[]buf;
-  delete[]rbuf;
-  delete[]lxn;
 };
 
 /*

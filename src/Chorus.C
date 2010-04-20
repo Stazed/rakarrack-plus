@@ -47,8 +47,6 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_)
 
 Chorus::~Chorus ()
 {
-  delete[]delayl;
-  delete[]delayr;
 };
 
 /*

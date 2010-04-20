@@ -5,7 +5,7 @@
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Josep Andreu & Ryan Billing
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -75,15 +75,6 @@ Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
 
 Distorsion::~Distorsion ()
 {
-  delete (lpfl);
-  delete (lpfr);
-  delete (hpfl);
-  delete (hpfr);
-  delete (blockDCl);
-  delete (blockDCr);
-  delete (DCl);
-  delete (DCr);
-  delete (dwshape);
 };
 
 /*

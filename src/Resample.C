@@ -1,7 +1,7 @@
 /*
 
   Resample.C  -  Class
-  This file is based in the harmonic_gen_1220.c by Steve Harris
+  Using Erik de Castro Lopo libsamplerate
   Copyright (C) 2008-2009 Josep Andreu (Holborn)
   Author: Josep Andreu
 
@@ -36,8 +36,6 @@ stater = src_new(type , 1 , &errorr);
 
 Resample::~Resample()
 {
-statel = src_delete(statel);
-stater = src_delete(stater);
 };
 
 void

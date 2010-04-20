@@ -1,12 +1,11 @@
 /*
   ZynAddSubFX - a software synthesizer
  
-  Echo.h - Echo Effect
+  Looper.h - Looper Effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
-  
+  Modified for rakarrack by Ryan Billing & Josep Andreu
   Reverse Echo by Transmogrifox
     
   This program is free software; you can redistribute it and/or modify

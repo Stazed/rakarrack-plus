@@ -2,8 +2,8 @@
   rakarrack - a guitar efects software
 
   jack.C  -   jack I/O
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -131,6 +131,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
   jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
     jack_port_get_buffer (inputport_aux, nframes);
 
+  JackOUT->cpuload = jack_cpu_load(jackclient);
 
   pthread_mutex_lock (&jmutex);
 

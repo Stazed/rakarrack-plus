@@ -79,17 +79,6 @@ MBDist::MBDist (float * efxoutl_, float * efxoutr_)
 
 MBDist::~MBDist ()
 {
-  delete (lpf1l);
-  delete (lpf1r);
-  delete (hpf1l);
-  delete (hpf1r);
-  delete (lpf2l);
-  delete (lpf2r);
-  delete (hpf2l);
-  delete (hpf2r);
-  delete (mbwshape1);
-  delete (mbwshape2);
-  delete (mbwshape3);
 };
 
 /*

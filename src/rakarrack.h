@@ -2874,6 +2874,7 @@ private:
 public:
   Analyzer *Analy;
   Fl_Box *UPS_LED;
+  Fl_Box *CPULOAD;
   Fl_Group *Tap;
   Fl_Light_Button *Tap_activar;
 private:

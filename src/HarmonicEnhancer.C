@@ -4,6 +4,7 @@
   This file is based in the harmonic_gen_1220.c by Steve Harris
   Copyright (C) 2008-2009 Josep Andreu (Holborn)
   Author: Josep Andreu
+  Based on Steve Harris LADSPA harmonic.
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License

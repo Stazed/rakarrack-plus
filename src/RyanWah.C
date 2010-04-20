@@ -62,9 +62,6 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
 
 RyanWah::~RyanWah ()
 {
-
-  delete (filterl);
-  delete (filterr);
 };
 
 

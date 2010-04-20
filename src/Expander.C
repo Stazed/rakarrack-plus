@@ -52,9 +52,6 @@ Expander::Expander (float * efxoutl_, float * efxoutr_)
 
 Expander::~Expander ()
 {
-
-
-
 }
 
 

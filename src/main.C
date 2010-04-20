@@ -2,8 +2,8 @@
   rakarrack - a guitar efects software
 
   main.C  -  Main file of the organ
-  Copyright (C) 2008 Daniel Vidal & Josep Andreu
-  Author: Daniel Vidal & Josep Andreu
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu & Douglas McClendon
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -179,8 +179,7 @@ main (int argc, char *argv[])
   // Launch GUI
 
 
-  if (gui)
-    new RKRGUI (argc, argv, &rkr);
+   if (gui) new RKRGUI (argc, argv, &rkr);
 
 
   JACKstart (&rkr, rkr.jackclient);
@@ -220,6 +219,7 @@ main (int argc, char *argv[])
 
 	}
 
+      
       rkr.miramidi ();
 
     }
@@ -227,11 +227,7 @@ main (int argc, char *argv[])
 // free memory etc.
 
   JACKfinish ();
-  free (rkr.efxoutl);
-  free (rkr.efxoutr);
-  free (rkr.smpl);
-  free (rkr.smpr);
-
   return (0);
 
 };
+

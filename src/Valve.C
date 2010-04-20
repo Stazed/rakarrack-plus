@@ -69,10 +69,6 @@ Valve::Valve (float * efxoutl_, float * efxoutr_)
 
 Valve::~Valve ()
 {
-  delete (lpfl);
-  delete (lpfr);
-  delete (hpfl);
-  delete (hpfr);
 };
 
 /*

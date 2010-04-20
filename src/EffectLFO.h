@@ -5,7 +5,7 @@
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Josep Andreu & Ryan Billing
 
 
   This program is free software; you can redistribute it and/or modify
