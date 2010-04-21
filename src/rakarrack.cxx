@@ -1495,6 +1495,7 @@ Fl_Menu_Item RKRGUI::menu_dist_tipo[] = {
  {"Overdrive", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Soft", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Super Soft", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Hard Compress", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5685,6 +5686,8 @@ void RKRGUI::cb_stomp_preset(Fl_Choice* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_stomp_preset[] = {
  {"Odie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Grunger", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hard Dist.", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

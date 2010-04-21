@@ -669,8 +669,7 @@ switch (event) {
     return 1;
   default:
     return 0;
-  }} {selected
-    }
+  }} {}
   }
   Function {draw()} {} {
     code {int X,Y,W,H;
@@ -1670,6 +1669,10 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           }
           MenuItem {} {
             label {Super Soft}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Hard Compress}
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -6144,12 +6147,20 @@ stomp_low->value(rkr->efx_StompBox->getpar(3));
 stomp_mid->value(rkr->efx_StompBox->getpar(2));
 stomp_high->value(rkr->efx_StompBox->getpar(1));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(5));}
+stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Odie
             xywh {20 20 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label Grunger
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Hard Dist.} selected
+            xywh {0 0 36 21}
           }
         }
         Fl_Value_Slider stomp_WD {
