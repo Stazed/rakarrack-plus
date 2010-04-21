@@ -420,7 +420,7 @@ void
 StompBox::setpreset (int npreset)
 {
   const int PRESET_SIZE = 6;
-  const int NUM_PRESETS = 1;
+  const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
     {48, 32, 0, 32, 65, 0}
