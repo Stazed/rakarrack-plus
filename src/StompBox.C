@@ -423,9 +423,9 @@ StompBox::setpreset (int npreset)
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
-    {48, 32, 0, 32, 65, 0}
+    {48, 32, 0, 32, 65, 0},
     //Grunger
-    {48, 10, -6, 55, 70, 1}  
+    {48, 10, -6, 55, 70, 1},  
     //Hard Dist.
     {48, -42, -6, 38, 5, 1}      
     
