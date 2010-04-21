@@ -53,6 +53,7 @@ doc_DATA= icono_rakarrack_128x128.png \
 	sus.jpg \
 	seq.jpg \
 	shi.jpg \
+	sto.jpg \
 	pan.jpg
 	
 EXTRA_DIST = $(doc_DATA)

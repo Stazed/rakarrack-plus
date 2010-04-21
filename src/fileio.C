@@ -504,6 +504,15 @@ RKR::savefile (char *filename)
 	  break;
 
 
+	case 39:
+	  //StompBox
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_StompBox->getpar (0), efx_StompBox->getpar (1),
+		   efx_StompBox->getpar (2), efx_StompBox->getpar (3),
+		   efx_StompBox->getpar (4), efx_StompBox->getpar (5),
+		   StompBox_Bypass);
+	  break;
+
 
 	}
       fputs (buf, fn);
@@ -974,6 +983,12 @@ RKR::loadfile (char *filename)
 		  &lv[39][5], &lv[39][6], &lv[39][7], &lv[39][8], &lv[39][9], &Shifter_B);
 	  break;
 
+	case 39:
+	  //StompBox
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[40][0], &lv[40][1], &lv[40][2], &lv[40][3], &lv[40][4],
+		  &lv[40][5], &StompBox_B);
+	  break;
 
 
 	}
@@ -1057,7 +1072,7 @@ RKR::Actualizar_Audio ()
   Sustainer_Bypass = 0;
   Sequence_Bypass = 0;
   Shifter_Bypass = 0;
-      
+  StompBox_Bypass = 0;      
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -1133,6 +1148,8 @@ RKR::Actualizar_Audio ()
     efx_Sequence->changepar (i, lv[38][i]);
  for (i = 0; i <= 9; i++)
     efx_Shifter->changepar (i, lv[39][i]);
+ for (i = 0; i <= 5; i++)
+    efx_StompBox->changepar (i, lv[40][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1201,6 +1218,7 @@ RKR::Actualizar_Audio ()
   Sustainer_Bypass = Sustainer_B;
   Sequence_Bypass = Sequence_B;
   Shifter_Bypass = Shifter_B;
+  StompBox_Bypass = StompBox_B;
     
   Bypass = Bypass_B;
 
@@ -1278,7 +1296,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[40][16] = {
+  int presets[41][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1358,7 +1376,10 @@ RKR::New ()
 //Sequence
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0},
 //Shifter
-    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0}
+    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0},
+//StompBox
+    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
+
     
     
 
@@ -1431,6 +1452,7 @@ RKR::New ()
   Sustainer_B = 0;
   Sequence_B = 0;  
   Shifter_B = 0;
+  StompBox_B = 0;
   Bypass_B = 0;
 
   
@@ -1453,7 +1475,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[40][16] = {
+  int presets[41][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1533,7 +1555,10 @@ RKR::New_Bank ()
 //Sequence
     {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0},
 //Shifter
-    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0}
+    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0},
+//StompBox
+    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
+    
     
     
 
@@ -1641,6 +1666,7 @@ RKR::Bank_to_Preset (int i)
   Sustainer_B = Bank[i].lv[37][19];
   Sequence_B = Bank[i].lv[38][19];
   Shifter_B = Bank[i].lv[39][19];
+  StompBox_B = Bank[i].lv[40][19];
 
 
   Bypass_B = Bypass;
@@ -1754,6 +1780,8 @@ RKR::Preset_to_Bank (int i)
     lv[38][j] = efx_Sequence->getpar(j);
   for (j = 0; j <= 9; j++)
     lv[39][j] = efx_Shifter->getpar(j);
+  for (j = 0; j <= 5; j++)
+    lv[40][j] = efx_StompBox->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1826,6 +1854,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[37][19] = Sustainer_Bypass;
   Bank[i].lv[38][19] = Sequence_Bypass;
   Bank[i].lv[39][19] = Shifter_Bypass;
+  Bank[i].lv[40][19] = StompBox_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

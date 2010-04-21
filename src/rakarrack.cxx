@@ -526,22 +526,9 @@ switch (event) {
     static int offcenter;
 
    
-    
-    if (type() == FL_HOR_FILL_SLIDER || type() == FL_VERT_FILL_SLIDER) {
-
-      S = 1;
-      if (event == FL_PUSH) {
-        int xx = int(val*ww+.5);
-        offcenter = mx-xx;
-        if (offcenter < -10 || offcenter > 10) offcenter = 0;
-        else return 1;
-      }
-
-    } else {
-
       S = int(0*ww+.5); if (S >= ww) return 0;
       int T = (horizontal() ? H : W)/2+1;
-      if (type()==FL_VERT_NICE_SLIDER || type()==FL_HOR_NICE_SLIDER) T += 4;
+      T += 4;
       if (S < T) S = T;
       if (event == FL_PUSH) {
        int xx = int(val*(ww-S)+.5);
@@ -551,7 +538,7 @@ switch (event) {
         else if (offcenter > S) offcenter = S;
         else return 1;
       }
-    }
+    
 
     int xx = mx-offcenter;
     double v;
@@ -567,6 +554,7 @@ switch (event) {
         offcenter = mx-xx; if (offcenter > S) offcenter = S;
       }
         v = round(xx*(maximum()-minimum())/(ww-S) + minimum());
+        
         
         // make sure a click outside the sliderbar moves it:
       if (event == FL_PUSH && v == value()) {
@@ -16910,7 +16898,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<334; i++)
+for (i=1; i<339; i++)
 
 {
 
@@ -18153,7 +18141,26 @@ switch (i)
      shifter_whammy->value(rkr->efx_Shifter->getpar(9));
      shifter_whammy->redraw();
      break;
-
+     case 334:
+     stomp_WD->value(rkr->efx_StompBox->getpar(0));
+     stomp_WD->redraw();
+     break;
+     case 335:
+     stomp_gain->value(rkr->efx_StompBox->getpar(4));
+     stomp_gain->redraw();
+     break;
+     case 336:
+     stomp_low->value(rkr->efx_StompBox->getpar(3)-64);
+     stomp_low->redraw();
+     break;
+     case 337:
+     stomp_mid->value(rkr->efx_StompBox->getpar(2)-64);
+     stomp_mid->redraw();
+     break;
+     case 338:
+     stomp_high->value(rkr->efx_StompBox->getpar(1)-64);
+     stomp_high->redraw();
+     break;
 
       
 }

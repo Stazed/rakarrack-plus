@@ -2042,6 +2042,28 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Shifter->changepar(9,value);
          break;
 
+   case 334:
+         efx_StompBox->changepar(0,value);
+         break;
+
+   case 335:
+         efx_StompBox->changepar(4,value);
+         break;
+
+   case 336:
+         efx_StompBox->changepar(3,value);
+         break;
+
+   case 337:
+         efx_StompBox->changepar(2,value);
+         break;
+
+   case 338:
+         efx_StompBox->changepar(1,value);
+         break;
+
+
+
    } 
       
     
