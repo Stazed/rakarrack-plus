@@ -52,7 +52,11 @@ StompBox::StompBox (float * efxoutl_, float * efxoutr_)
   rtonehg = new AnalogFilter (1, 1500.0f, 1.0f, 0);  
   rtonemd = new AnalogFilter (4, 1000.0f, 1.0f, 0);  
   rtonelw = new AnalogFilter (0, 500.0f, 1.0f, 0); 
- 
+
+  //Anti-aliasing for between stages
+  ranti = new AnalogFilter (0, 8000.0f, 0.707f, 2); 
+  lanti = new AnalogFilter (0, 8000.0f, 0.707f, 2);  
+  
   rwshape = new Waveshaper();
   lwshape = new Waveshaper();
     
@@ -87,6 +91,8 @@ int i;
     float hfilter;  //temporary variables
     float mfilter;
     float lfilter;
+    float tempr;
+    float templ;
     
    switch (Pmode)
    {
@@ -121,16 +127,31 @@ int i;
 
     case 1:  //Grunge
     
-    lpre1->filterout(smpsl);
-    rpre1->filterout(smpsr);
+    linput->filterout(smpsl);
+    rinput->filterout(smpsr);    
+  
     for (i = 0; i<PERIOD; i++)
     {   
-    smpsl[i]*=21.3f;
-    smpsr[i]*=21.3f;     
+    templ = smpsl[i] * gain * 37.0f;
+    tempr = smpsr[i] * gain * 37.0f;  
+    smpsl[i] += lpre1->filterout_s(templ);
+    smpsr[i] += rpre1->filterout_s(tempr);       
     }     
-    rwshape->waveshapesmps (PERIOD, smpsl, 15, Pgain, 1);  // hard crunch
-    lwshape->waveshapesmps (PERIOD, smpsr, 15, Pgain, 1); 
-  
+    rwshape->waveshapesmps (PERIOD, smpsl, 15, 1, 1);  // Op amp limiting
+    lwshape->waveshapesmps (PERIOD, smpsr, 15, 1, 1); 
+    
+    ranti->filterout(smpsr);
+    lanti->filterout(smpsl);  
+    
+     for (i = 0; i<PERIOD; i++)
+    {   
+    smpsl[i]*=1.5f;
+    smpsr[i]*=1.5f;     
+    }  
+       
+    rwshape->waveshapesmps (PERIOD, smpsl, 23, Pgain, 1);  // hard crunch
+    lwshape->waveshapesmps (PERIOD, smpsr, 23, Pgain, 1);   
+       
     
     for (i = 0; i<PERIOD; i++)
     {
@@ -144,14 +165,14 @@ int i;
     mfilter =  ltonemd->filterout_s(smpsl[i]); 
     hfilter =  ltonehg->filterout_s(smpsl[i]);  
     
-    efxoutl[i] = 0.5f * volume * (smpsl[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
+    efxoutl[i] = 0.05f * volume * (smpsl[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
     
     //Right channel
     lfilter =  rtonelw->filterout_s(smpsr[i]);
     mfilter =  rtonemd->filterout_s(smpsr[i]); 
     hfilter =  rtonehg->filterout_s(smpsr[i]);  
     
-    efxoutr[i] = 0.5f * volume * (smpsr[i] + lowb*lfilter + midb*mfilter + highb*hfilter);      
+    efxoutr[i] = 0.05f * volume * (smpsr[i] + lowb*lfilter + midb*mfilter + highb*hfilter);      
        
     } 
     
@@ -266,8 +287,8 @@ switch (value)
   
   tpre1 = 0;         //Gain stage reduce aliasing
   fpre1 = 6000.0f;
-  qpre1 = 1.0f;
-  spre1 = 0;
+  qpre1 = 0.707f;
+  spre1 = 1;
   
   tpre2 = 4;        //being used as a recovery filter, gain = 10
   fpre2 = 324.5f;
@@ -360,6 +381,34 @@ switch (value)
    
 };
 
+void StompBox::init_tone ()
+{
+   float varf;
+  switch (Pmode)
+    {
+    case 0:
+    varf = 2533.0f + highb*1733.0f;  //High tone ranges from 800 to 6000Hz
+    rtonehg->setfreq(varf); 
+    ltonehg->setfreq(varf); 
+   if (highb > 0.0f) highb = ((float) Phigh)/8.0f;   
+    break;
+    
+    case 1:
+    varf = 3333.0f + highb*2500.0f;  //High tone ranges from 833 to 8333Hz
+    rtonehg->setfreq(varf);
+    ltonehg->setfreq(varf); 
+    
+    if (highb > 0.0f) highb = ((float) Phigh)/16.0f;    
+    if (lowb > 0.0f) lowb = ((float) Plow)/18.0f;          
+    break;
+    
+    
+    
+    }
+
+};
+
+
 void
 StompBox::setvolume (int value)
 {
@@ -375,7 +424,11 @@ StompBox::setpreset (int npreset)
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
     {48, 32, 0, 32, 65, 0}
-  
+    //Grunger
+    {48, 10, -6, 55, 70, 1}  
+    //Hard Dist.
+    {48, -42, -6, 38, 5, 1}      
+    
   };
 
 
@@ -400,7 +453,7 @@ StompBox::changepar (int npar, int value)
      case 1:
       Phigh = value;
       if( value < 0) highb = ((float) value)/64.0f;
-      if( value > 0) highb = ((float) value)/32.0f;      
+      if( value > 0) highb = ((float) value)/32.0f;  
       break;
      case 2: 
       Pmid = value;
@@ -414,7 +467,7 @@ StompBox::changepar (int npar, int value)
       break;
     case 4:
       Pgain = value;
-      gain = 24.0f * ((float)value)/64.0f;
+      gain = dB2rap(44.0f * ((float)value)/127.0f  - 44.0f);
       break;
     case 5:
       Pmode = value;
@@ -422,6 +475,7 @@ StompBox::changepar (int npar, int value)
       break;
  
     };
+      init_tone ();     
 };
 
 int

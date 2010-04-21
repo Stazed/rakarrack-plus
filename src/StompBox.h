@@ -53,8 +53,10 @@ private:
   int Pmode;
   void setvolume (int value);
   void init_mode (int value);
+  void init_tone ();  
   AnalogFilter *linput, *lpre1, *lpre2, *lpost, *ltonehg, *ltonemd, *ltonelw;
   AnalogFilter *rinput, *rpre1, *rpre2, *rpost, *rtonehg, *rtonemd, *rtonelw;  
+  AnalogFilter *ranti, *lanti;
   class Waveshaper *lwshape, *rwshape;  
 
   float gain, lowb, midb, highb, volume; 

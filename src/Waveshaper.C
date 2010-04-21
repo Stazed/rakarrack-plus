@@ -50,7 +50,8 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
   float ws = (float)drive / 127.0f + .00001f;
   ws = 1.0f - expf (-ws * 4.0f);
   float tmpv;
-
+  float factor;
+  
   switch (type + 1 )
     {
     case 1:
@@ -355,7 +356,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
        case 23: //Distortion
       
         ws = powf (24.0f, ws * ws) + 0.5f;
-        float factor = 1.0f / ws; 
+        factor = 1.0f / ws; 
         for (i = 0; i < n; i++)
 	{
         if(smps[i] > 1.0) smps[i] = 1.0f;
@@ -368,10 +369,42 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
         if(smps[i]>1.0f) smps[i]=(factor+1.0f)*.5f;
         smps[i]*=ws; 
         } 
+        break;
+	
+       case 24:  // Hard Compression (used by stompboxes)
+        cratio = 0.05;
+	ws =  1.5f*ws*CRUNCH_GAIN + 1.0f;
+	   for (i = 0; i < n; i++)    //apply compression 
+	   {
+	   tmpv = fabs(ws * smps[i]);
 
-
+	   if(tmpv > dthresh)                                //if envelope of signal exceeds thresh, then compress
+	   {
+	   compg = dthresh + dthresh*(tmpv - dthresh)/tmpv; 
+	   dthresh = 0.5f + cratio*(compg - dthresh);   //dthresh changes dynamically
+	   
+		   if (smps[i] > 0.0f)
+		   {
+		    smps[i] = compg;
+		    }
+		   else 
+		   {
+		   smps[i] = -1.0f * compg;
+		   }  
+		   
+	   }
+	   else
+	   {
+	   smps[i] *= ws;
+	   }
+   
+	   if(tmpv < dthresh) dthresh = tmpv;
+	   if(dthresh < 0.5f) dthresh = 0.5f;
+	     
+	   };	
+	  break;
        
-
+         
  
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions
     };
