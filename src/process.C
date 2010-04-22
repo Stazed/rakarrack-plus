@@ -193,8 +193,6 @@ RKR::RKR ()
   RC = new RecChord ();
 
   
-  Data_Version = (char *) malloc (sizeof (char) * 16);
-  memset (Data_Version, 0, sizeof (char) * 16);
   Preset_Name = (char *) malloc (sizeof (char) * 64);
   memset (Preset_Name, 0, sizeof (char) * 64);
   Author = (char *) malloc (sizeof (char) * 64);
@@ -220,6 +218,7 @@ RKR::RKR ()
     };
     for (i = 0; i < NumEffects; i++)
       strcpy (efx_names[i].Nom, los_names[i]);
+
   }
 
 
@@ -583,16 +582,16 @@ RKR::init_rkr ()
       efx_EQ1->changepar (i + 14, 0);
     }
 
-  efx_EQ1->changepar (0 + 11, 31);
-  efx_EQ1->changepar (5 + 11, 63);
-  efx_EQ1->changepar (10 + 11, 125);
-  efx_EQ1->changepar (15 + 11, 250);
-  efx_EQ1->changepar (20 + 11, 500);
-  efx_EQ1->changepar (25 + 11, 1000);
-  efx_EQ1->changepar (30 + 11, 2000);
-  efx_EQ1->changepar (35 + 11, 4000);
-  efx_EQ1->changepar (40 + 11, 8000);
-  efx_EQ1->changepar (45 + 11, 16000);
+  efx_EQ1->changepar (11, 31);
+  efx_EQ1->changepar (16, 63);
+  efx_EQ1->changepar (21, 125);
+  efx_EQ1->changepar (26, 250);
+  efx_EQ1->changepar (31, 500);
+  efx_EQ1->changepar (36, 1000);
+  efx_EQ1->changepar (41, 2000);
+  efx_EQ1->changepar (46, 4000);
+  efx_EQ1->changepar (51, 8000);
+  efx_EQ1->changepar (56, 16000);
 
   for (int i = 0; i <= 10; i += 5)
     {

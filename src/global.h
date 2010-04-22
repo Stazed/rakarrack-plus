@@ -171,7 +171,19 @@ public:
   ~RKR ();
 
   void Alg (float *inl, float *inr,float *origl, float *origr ,void *);
+  void Control_Gain (float *origl, float *origr);
+  void Control_Volume (float *origl, float *origr);
+
+  void Vol_Efx (int NumEffect, float volume);
+  void Vol2_Efx ();
+  void Vol3_Efx ();
+  void cleanup_efx ();
   void midievents();
+  void miramidi ();
+  void calculavol (int i);
+  void Bank_to_Preset (int Num);
+  void Preset_to_Bank (int i);
+  void Actualizar_Audio ();
   void loadfile (char *filename);
   void savefile (char *filename);
   void loadskin (char *filename);
@@ -182,24 +194,13 @@ public:
   void dump_preset_names ();
   void New ();
   void New_Bank ();
-  void Bank_to_Preset (int Num);
-  void Preset_to_Bank (int i);
-  void Actualizar_Audio ();
   void Adjust_Upsample();
   void init_rkr ();
-  void Vol_Efx (int NumEffect, float volume);
-  void Vol2_Efx ();
-  void Vol3_Efx ();
-  void cleanup_efx ();
-  void Control_Gain (float *origl, float *origr);
-  void Control_Volume (float *origl, float *origr);
   int Message (const char *labelwin, const char *message_text);
   char *PrefNom (const char *dato);
-
   void EQ1_setpreset (int npreset);
   void EQ2_setpreset (int npreset);
   int Cabinet_setpreset (int npreset);
-  void miramidi ();
   void InitMIDI ();
   void ConnectMIDI ();
   void ActiveUn(int value);
@@ -208,11 +209,9 @@ public:
   int ret_Tempo(int value);
   int ret_LPF(int value);
   int ret_HPF(int value);
-  void calculavol (int i);
   void Conecta ();
   void disconectaaconnect ();
   void conectaaconnect ();
-  int Conv_Data_Version(char* D_Version);
   int BigEndian();
   void fix_endianess();
   void copy_IO();
@@ -461,7 +460,6 @@ public:
   char tmpprefname[128];
 
   char *Preset_Name;
-  char *Data_Version;
   char *Author;
   char *Bank_Saved;
   char *UserRealName;

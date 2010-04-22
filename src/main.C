@@ -31,21 +31,6 @@
 #include "jack.h"
 
 
-
-
- 
-void
-pon_realtime ()
-{
-  sched_param scprior;
-
-  scprior.sched_priority = 9;
-  int prior = sched_setscheduler (0, SCHED_FIFO, &scprior);
-  if (prior == 0)
-    printf ("SCHED_FIFO -> Realtime\n");
-};
-
-
 void
 show_help ()
 {

@@ -1,5 +1,4 @@
-/*
-  rakarrack - a organ software
+/*  rakarrack - Audio effects software
 
   fileio.C  -  File Input/Output functions
   Copyright (C) 2008-2010 Josep Andreu
@@ -561,7 +560,8 @@ RKR::loadfile (char *filename)
 
   int i, j;
   int Num_Version=0;
-  float in_vol, out_vol, balance;
+  float in_vol, out_vol; 
+  float balance=1.0f;
   FILE *fn;
   char *cfilename;
   char buf[256];
@@ -593,29 +593,6 @@ RKR::loadfile (char *filename)
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;
-
-  //Version
-
-  bzero (buf, sizeof (buf));
-  fgets (buf, sizeof buf, fn);
-  sscanf (buf, "%s\n", Data_Version);
-  
-  Num_Version=Conv_Data_Version(Data_Version);
-
-
-  if (strcmp (Data_Version, "0.1.2") == 0)
-    {
-      l[0] = 8;
-      l[1] = 4;
-      l[2] = 5;
-      l[3] = 7;
-      l[4] = 6;
-      l[5] = 3;
-      l[6] = 2;
-      l[7] = 0;
-      l[8] = 9;
-      l[9] = 1;
-    }
 
 
   //Author
@@ -1862,23 +1839,6 @@ RKR::Preset_to_Bank (int i)
   
 };
 
-
-
-
-int
-RKR::Conv_Data_Version(char* D_Version)
-
-{
-
-char tmp[8];
-int NumVersion=0;
-
-tmp[0]=D_Version[0];
-tmp[1]=D_Version[2];
-tmp[2]=D_Version[4];
-sscanf(tmp , "%d", &NumVersion);
-return(NumVersion);
-}
 
 
 int
