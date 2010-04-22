@@ -829,3 +829,4 @@ RecChord::Vamos (int interval)
   r__ratio = powf (2, ((float)ninterval / 12.0f));
 
 }
+
