@@ -6172,6 +6172,10 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
             label Ratula
             xywh {10 10 36 21}
           }
+          MenuItem {} {
+            label {Classic Dist} selected
+            xywh {20 20 36 21}
+          }
         }
         Fl_Value_Slider stomp_WD {
           label Level
@@ -6213,12 +6217,20 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
             xywh {20 20 36 21} labelsize 9
           }
           MenuItem {} {
-            label Grunge selected
+            label Grunge
             xywh {30 30 36 21} labelsize 9
           }
           MenuItem {} {
             label Rat
             xywh {40 40 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Fat Cat}
+            xywh {50 50 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dist+}
+            xywh {60 60 36 21} labelsize 9
           }
         }
       }

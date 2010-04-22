@@ -5690,6 +5690,7 @@ Fl_Menu_Item RKRGUI::menu_stomp_preset[] = {
  {"Grunger", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Hard Dist.", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"Ratula", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Classic Dist", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5739,6 +5740,8 @@ Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
  {"Amp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Grunge", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Rat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Fat Cat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dist+", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

@@ -35,6 +35,7 @@ public:
 //Waveshaping
   void waveshapesmps (int n, float * smps, int type,
 		    int drive, int eff);
+  void cleanup();
   
   float dthresh;  //dynamic threshold in compression waveshaper 
   float dyno;

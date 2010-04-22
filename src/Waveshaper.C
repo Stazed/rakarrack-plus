@@ -41,6 +41,16 @@ Waveshaper::Waveshaper()
 Waveshaper::~Waveshaper()
 {
 };
+void Waveshaper::cleanup()
+{
+  compg = 0.0f;  //used by compression distortion
+  cratio = 0.25f;  //used by compression for hardness
+  tmpgain = 1.0f;  // compression distortion temp variable
+  dthresh = 0.25;
+  dyno = 0.0f;
+  dynodecay = 0.0167f/(cSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
+}
+
 
 void
 Waveshaper::waveshapesmps (int n, float * smps, int type,

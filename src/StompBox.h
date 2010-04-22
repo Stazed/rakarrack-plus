@@ -59,7 +59,7 @@ private:
   AnalogFilter *ranti, *lanti;
   class Waveshaper *lwshape, *rwshape, *lwshape2, *rwshape2;  
 
-  float gain, lowb, midb, highb, volume; 
+  float gain, pre1gain, pre2gain, lowb, midb, highb, volume; 
 
 };
 

@@ -77,7 +77,30 @@ StompBox::~StompBox ()
 void
 StompBox::cleanup ()
 {
-
+  linput->cleanup();
+  lpre1->cleanup();
+  lpre2->cleanup();
+  lpost->cleanup(); 
+  ltonehg->cleanup();
+  ltonemd->cleanup();  
+  ltonelw->cleanup(); 
+  
+  //right channel filters  
+  rinput->cleanup();
+  rpre1->cleanup();  
+  rpre2->cleanup(); 
+  rpost->cleanup(); 
+  rtonehg->cleanup();
+  rtonemd->cleanup();
+  rtonelw->cleanup(); 
+  
+  ranti->cleanup();
+  lanti->cleanup();
+    
+  rwshape->cleanup();
+  lwshape->cleanup();
+  rwshape2->cleanup();
+  lwshape2->cleanup();
  
 };
 
@@ -177,20 +200,23 @@ int i;
     
     break;
     case 2:  //Rat
+    case 3:  //Fat Cat  //Pre gain & filter freqs the only difference
     
     linput->filterout(smpsl);
     rinput->filterout(smpsr);    
-  
+
     for (i = 0; i<PERIOD; i++)
     {   
     templ = smpsl[i];
     tempr = smpsr[i];  
-    smpsl[i] += lpre1->filterout_s(268.0f*gain*templ);
-    smpsr[i] += rpre1->filterout_s(268.0f*gain*tempr);  //Low freq gain stage
-    smpsl[i] += lpre2->filterout_s(3000.0f*gain*templ);
-    smpsr[i] += rpre2->filterout_s(3000.0f*gain*tempr); //High freq gain stage
+    smpsl[i] += lpre1->filterout_s(pre1gain*gain*templ);
+    smpsr[i] += rpre1->filterout_s(pre1gain*gain*tempr);  //Low freq gain stage
+    smpsl[i] += lpre2->filterout_s(pre2gain*gain*templ);
+    smpsr[i] += rpre2->filterout_s(pre2gain*gain*tempr); //High freq gain stage
     
-    }     
+    }  
+
+       
     rwshape->waveshapesmps (PERIOD, smpsl, 24, 1, 1);  // Op amp limiting
     lwshape->waveshapesmps (PERIOD, smpsr, 24, 1, 1); 
     
@@ -207,18 +233,57 @@ int i;
     lfilter =  ltonelw->filterout_s(smpsl[i]);
     mfilter =  ltonemd->filterout_s(smpsl[i]);  
     
-    efxoutl[i] = ltonehg->filterout_s(volume * (smpsl[i] + lowb*lfilter + midb*mfilter));
+    efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (smpsl[i] + lowb*lfilter + midb*mfilter));
     
     //Right channel
     lfilter =  rtonelw->filterout_s(smpsr[i]);
     mfilter =  rtonemd->filterout_s(smpsr[i]);
     
-    efxoutr[i] = rtonehg->filterout_s(volume * (smpsr[i] + lowb*lfilter + midb*mfilter));      
+    efxoutr[i] = 0.5f * rtonehg->filterout_s(volume * (smpsr[i] + lowb*lfilter + midb*mfilter));      
        
     } 
+
+    break;
+    case 4:  //Dist+
     
+    linput->filterout(smpsl);
+    rinput->filterout(smpsr);    
+
+    for (i = 0; i<PERIOD; i++)
+    {   
+    templ = smpsl[i];
+    tempr = smpsr[i];  
+    smpsl[i] += lpre1->filterout_s(pre1gain*gain*templ);
+    smpsr[i] += rpre1->filterout_s(pre1gain*gain*tempr);  //Low freq gain stage    
+    }  
+
+       
+    rwshape->waveshapesmps (PERIOD, smpsl, 24, 1, 1);  // Op amp limiting
+    lwshape->waveshapesmps (PERIOD, smpsr, 24, 1, 1); 
     
+    ranti->filterout(smpsr);
+    lanti->filterout(smpsl);  
+       
+    rwshape2->waveshapesmps (PERIOD, smpsl, 23, 1, 0);  // hard comp
+    lwshape2->waveshapesmps (PERIOD, smpsr, 23, 1, 0);   
+       
     
+    for (i = 0; i<PERIOD; i++)
+    {    
+    //left channel
+    lfilter =  ltonelw->filterout_s(smpsl[i]);
+    mfilter =  ltonemd->filterout_s(smpsl[i]);  
+    
+    efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (smpsl[i] + lowb*lfilter + midb*mfilter));
+    
+    //Right channel
+    lfilter =  rtonelw->filterout_s(smpsr[i]);
+    mfilter =  rtonemd->filterout_s(smpsr[i]);
+    
+    efxoutr[i] = 0.5f * rtonehg->filterout_s(volume * (smpsr[i] + lowb*lfilter + midb*mfilter));      
+       
+    } 
+
     break;
 
    } 
@@ -368,11 +433,13 @@ switch (value)
   fpre1 = 60.0f;
   qpre1 = 1.0f;
   spre1 = 0;
+  pre1gain = 268.0f;
   
   tpre2 = 1;        //being used as a recovery filter, gain = 1 ... 3000
   fpre2 = 1539.0f;
   qpre2 = 1.0f;
   spre2 = 0;
+  pre2gain = 3000.0f;  
   
   tpost = 0;       //Not used...initialized to "something"
   fpost = 6000.0f;
@@ -394,7 +461,48 @@ switch (value)
   qtonelw = 0.50f;
   stonelw = 1;  
   break;
+ 
+  case 3: //Fat Cat Distortion emulation
+  case 4: //MXR Dist+ emulation (many below filters unuse)
+// Some key filter stages based upon a schematic for a grunge pedal 
+
+  tinput = 0;         //Reduce some noise aliasing
+  finput = 5000.0f;
+  qinput = 1.0f;
+  sinput = 3;
   
+  tpre1 = 1;         //Gain stage high boost, gain = 1 ... 100 (max)
+  fpre1 = 33.0f;
+  qpre1 = 1.0f;
+  spre1 = 0;
+  pre1gain = 100.0f;
+    
+  tpre2 = 1;        //being used as a recovery filter, gain = 1 ... 1700
+  fpre2 = 861.0f;
+  qpre2 = 1.0f;
+  spre2 = 0;
+  pre2gain = 1700.0f;
+    
+  tpost = 0;       //Not used...initialized to "something"
+  fpost = 6000.0f;
+  qpost = 1.77f;
+  spost = 0;
+  
+  ttonehg = 0;       //frequency sweeping LPF
+  ftonehg = 1000.0f;
+  qtonehg = 1.0f;
+  stonehg = 0;
+  
+  ttonemd = 4;       // Pedal has no mid filter so I'll make up my own
+  ftonemd = 700.0f;
+  qtonemd = 2.0f;
+  stonemd = 0;
+  
+  ttonelw = 0;       //Pedal has no Low filter, so make up my own...Low Eq band, peaking type
+  ftonelw = 328.0f;  //Mild low boost
+  qtonelw = 0.50f;
+  stonelw = 1;  
+  break; 
   }
    
   //left channel filters
@@ -482,10 +590,19 @@ void StompBox::init_tone ()
     break;
     
     case 2:
+    case 3:
     varf = 3653.0f + highb*3173.0f;  //High tone ranges from ~480 to 10k
     rtonehg->setfreq(varf);
     ltonehg->setfreq(varf); 
-
+    break;
+    case 4:
+    varf = gain*700.0f + 20.0f;
+    rpre1->setfreq(varf);
+    lpre1->setfreq(varf);
+    pre1gain = 212.0f;
+    varf = 3653.0f + highb*3173.0f;  //High tone ranges from ~480 to 10k
+    rtonehg->setfreq(varf);
+    ltonehg->setfreq(varf);
     break;    
 
     
@@ -505,17 +622,18 @@ void
 StompBox::setpreset (int npreset)
 {
   const int PRESET_SIZE = 6;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
     {48, 32, 0, 32, 65, 0},
     //Grunger
     {48, 10, -6, 55, 85, 1},  
     //Hard Dist.
-    {48, -42, -6, 38, 12, 1},
+    {48, -22, -6, 38, 12, 1},
     //Ratty
-    {48, -20, 0, 0, 70, 2}          
-    
+    {48, -20, 0, 0, 70, 2},
+    //Classic Dist
+    {48, 64, 0, 0, 110, 4}    
   };
 
 
