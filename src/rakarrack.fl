@@ -821,18 +821,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1518 328 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1506,7 +1504,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
         }
       }
       Fl_Group DIST {
-        user_data 1 open
+        user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button dist_activar {
@@ -1578,7 +1576,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
+          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6132,7 +6130,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6166,15 +6164,15 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
           }
           MenuItem {} {
             label {Hard Dist.}
-            xywh {0 0 36 21}
+            xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
             label Ratula
-            xywh {10 10 36 21}
+            xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Classic Dist} selected
-            xywh {20 20 36 21}
+            label {Classic Dist}
+            xywh {20 20 36 21} labelsize 10
           }
         }
         Fl_Value_Slider stomp_WD {
@@ -7420,7 +7418,7 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
   } {
     code {fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
@@ -7470,7 +7468,8 @@ Principal->show(argc,argv);
 put_icon(Principal);
 
 void * v=MT;
-Fl::add_timeout(.04,tick,v);} {}
+Fl::add_timeout(.04,tick,v);} {selected
+    }
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);

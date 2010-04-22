@@ -5688,9 +5688,9 @@ void RKRGUI::cb_stomp_preset(Fl_Choice* o, void* v) {
 Fl_Menu_Item RKRGUI::menu_stomp_preset[] = {
  {"Odie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Grunger", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Hard Dist.", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {"Ratula", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {"Classic Dist", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Hard Dist.", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Ratula", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Classic Dist", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -14154,6 +14154,7 @@ R average.");
         shifter_attack->labelfont(0);
         shifter_attack->labelsize(10);
         shifter_attack->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_attack->minimum(1);
         shifter_attack->maximum(2000);
         shifter_attack->step(1);
         shifter_attack->value(100);
@@ -14171,6 +14172,7 @@ R average.");
         shifter_decay->labelfont(0);
         shifter_decay->labelsize(10);
         shifter_decay->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shifter_decay->minimum(1);
         shifter_decay->maximum(2000);
         shifter_decay->step(1);
         shifter_decay->value(100);

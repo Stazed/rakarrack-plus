@@ -2027,11 +2027,11 @@ RKR::process_midi_controller_events(int parameter, int value)
          break;
 
    case 330:
-         efx_Shifter->changepar(3,(int)((float)value*15.748031f));
+         efx_Shifter->changepar(3,1 + (int)((float)value*15.748031f));
          break;
 
    case 331:
-         efx_Shifter->changepar(4,(int)((float)value*15.748031f));
+         efx_Shifter->changepar(4,1 + (int)((float)value*15.748031f));
          break;
 
    case 332:
