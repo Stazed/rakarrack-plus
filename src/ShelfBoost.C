@@ -153,8 +153,8 @@ ShelfBoost::changepar (int npar, int value)
       break;
     case 4:
       Plevel = value;
-      gain = 24.0f * (float)value/64.0f;
-      u_gain = 1.0f/ gain;
+      gain = .375f * (float)value;
+      u_gain = 1.0f / gain;
       RB1l->setgain(gain);
       RB1r->setgain(gain); 
       break;
