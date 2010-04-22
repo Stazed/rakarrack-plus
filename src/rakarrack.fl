@@ -821,16 +821,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1518 328 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1504,7 +1506,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
         }
       }
       Fl_Group DIST {
-        user_data 1
+        user_data 1 open
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button dist_activar {
@@ -1576,7 +1578,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
+          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -1674,6 +1676,10 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           MenuItem {} {
             label {Hard Compress}
             xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Lmt-NoGain}
+            xywh {10 10 36 21} labelsize 9
           }
         }
         Fl_Check_Button dist_neg {
@@ -6126,7 +6132,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6159,8 +6165,12 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Hard Dist.} selected
+            label {Hard Dist.}
             xywh {0 0 36 21}
+          }
+          MenuItem {} {
+            label Ratula
+            xywh {10 10 36 21}
           }
         }
         Fl_Value_Slider stomp_WD {
@@ -6195,7 +6205,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
         }
         Fl_Choice stomp_mode {
           label Mode
-          callback {rkr->efx_StompBox->changepar(5,(int)o->value())}
+          callback {rkr->efx_StompBox->changepar(5,(int)o->value())} open
           xywh {363 376 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
@@ -6203,8 +6213,12 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
             xywh {20 20 36 21} labelsize 9
           }
           MenuItem {} {
-            label Grunge
+            label Grunge selected
             xywh {30 30 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Rat
+            xywh {40 40 36 21} labelsize 9
           }
         }
       }
@@ -7394,7 +7408,7 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
   } {
     code {fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);

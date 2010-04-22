@@ -57,7 +57,7 @@ private:
   AnalogFilter *linput, *lpre1, *lpre2, *lpost, *ltonehg, *ltonemd, *ltonelw;
   AnalogFilter *rinput, *rpre1, *rpre2, *rpost, *rtonehg, *rtonemd, *rtonelw;  
   AnalogFilter *ranti, *lanti;
-  class Waveshaper *lwshape, *rwshape;  
+  class Waveshaper *lwshape, *rwshape, *lwshape2, *rwshape2;  
 
   float gain, lowb, midb, highb, volume; 
 

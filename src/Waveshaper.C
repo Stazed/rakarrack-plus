@@ -373,7 +373,13 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	
        case 24:  // Hard Compression (used by stompboxes)
         cratio = 0.05;
+	if (eff) {
 	ws =  1.5f*ws*CRUNCH_GAIN + 1.0f;
+	}
+	else {
+	ws = 1.0f;
+	}           //allows functions applying gain before waveshaper
+	
 	   for (i = 0; i < n; i++)    //apply compression 
 	   {
 	   tmpv = fabs(ws * smps[i]);
@@ -403,7 +409,38 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	     
 	   };	
 	  break;
-       
+
+       case 25:  // Op Amp limiting (used by stompboxes), needs to get a large signal to do something
+        cratio = 0.05;
+	   for (i = 0; i < n; i++)    //apply compression 
+	   {
+	   tmpv = fabs(smps[i]);
+
+	   if(tmpv > dthresh)                                //if envelope of signal exceeds thresh, then compress
+	   {
+	   compg = dthresh + dthresh*(tmpv - dthresh)/tmpv; 
+	   dthresh = 3.5f + cratio*(compg - dthresh);   //dthresh changes dynamically
+	   
+		   if (smps[i] > 0.0f)
+		   {
+		    smps[i] = compg;
+		    }
+		   else 
+		   {
+		   smps[i] = -1.0f * compg;
+		   }  
+		   
+	   }
+	   else
+	   {
+	   smps[i] *= 1.0f;
+	   }
+   
+	   if(tmpv < dthresh) dthresh = tmpv;
+	   if(dthresh < 3.5f) dthresh = 3.5f;
+	     
+	   };	
+	  break;       
          
  
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions

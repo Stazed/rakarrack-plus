@@ -54,12 +54,14 @@ StompBox::StompBox (float * efxoutl_, float * efxoutr_)
   rtonelw = new AnalogFilter (0, 500.0f, 1.0f, 0); 
 
   //Anti-aliasing for between stages
-  ranti = new AnalogFilter (0, 8000.0f, 0.707f, 2); 
-  lanti = new AnalogFilter (0, 8000.0f, 0.707f, 2);  
+  ranti = new AnalogFilter (0, 6000.0f, 0.707f, 6); 
+  lanti = new AnalogFilter (0, 6000.0f, 0.707f, 6);  
   
   rwshape = new Waveshaper();
   lwshape = new Waveshaper();
-    
+  rwshape2 = new Waveshaper();
+  lwshape2 = new Waveshaper(); 
+  
   cleanup ();
 
   setpreset (Ppreset);
@@ -97,7 +99,8 @@ int i;
    switch (Pmode)
    {
     case 0:          //Odie
-         
+    ranti->filterout(smpsr);
+    lanti->filterout(smpsl);           
     lpre1->filterout(smpsl);
     rpre1->filterout(smpsr);
     rwshape->waveshapesmps (PERIOD, smpsl, 19, Pgain, 1);  //compression
@@ -132,25 +135,19 @@ int i;
   
     for (i = 0; i<PERIOD; i++)
     {   
-    templ = smpsl[i] * gain * 37.0f;
-    tempr = smpsr[i] * gain * 37.0f;  
+    templ = smpsl[i] * (gain * 110.0f + 0.01f);
+    tempr = smpsr[i] * (gain * 110.0f + 0.01f);  
     smpsl[i] += lpre1->filterout_s(templ);
     smpsr[i] += rpre1->filterout_s(tempr);       
     }     
-    rwshape->waveshapesmps (PERIOD, smpsl, 15, 1, 1);  // Op amp limiting
-    lwshape->waveshapesmps (PERIOD, smpsr, 15, 1, 1); 
+    rwshape->waveshapesmps (PERIOD, smpsl, 24, 1, 1);  // Op amp limiting
+    lwshape->waveshapesmps (PERIOD, smpsr, 24, 1, 1); 
     
     ranti->filterout(smpsr);
     lanti->filterout(smpsl);  
-    
-     for (i = 0; i<PERIOD; i++)
-    {   
-    smpsl[i]*=1.5f;
-    smpsr[i]*=1.5f;     
-    }  
        
-    rwshape->waveshapesmps (PERIOD, smpsl, 23, Pgain, 1);  // hard crunch
-    lwshape->waveshapesmps (PERIOD, smpsr, 23, Pgain, 1);   
+    rwshape2->waveshapesmps (PERIOD, smpsl, 23, Pgain, 1);  // hard comp
+    lwshape2->waveshapesmps (PERIOD, smpsr, 23, Pgain, 1);   
        
     
     for (i = 0; i<PERIOD; i++)
@@ -179,7 +176,50 @@ int i;
     
     
     break;
-
+    case 2:  //Rat
+    
+    linput->filterout(smpsl);
+    rinput->filterout(smpsr);    
+  
+    for (i = 0; i<PERIOD; i++)
+    {   
+    templ = smpsl[i];
+    tempr = smpsr[i];  
+    smpsl[i] += lpre1->filterout_s(268.0f*gain*templ);
+    smpsr[i] += rpre1->filterout_s(268.0f*gain*tempr);  //Low freq gain stage
+    smpsl[i] += lpre2->filterout_s(3000.0f*gain*templ);
+    smpsr[i] += rpre2->filterout_s(3000.0f*gain*tempr); //High freq gain stage
+    
+    }     
+    rwshape->waveshapesmps (PERIOD, smpsl, 24, 1, 1);  // Op amp limiting
+    lwshape->waveshapesmps (PERIOD, smpsr, 24, 1, 1); 
+    
+    ranti->filterout(smpsr);
+    lanti->filterout(smpsl);  
+       
+    rwshape2->waveshapesmps (PERIOD, smpsl, 23, 1, 0);  // hard comp
+    lwshape2->waveshapesmps (PERIOD, smpsr, 23, 1, 0);   
+       
+    
+    for (i = 0; i<PERIOD; i++)
+    {    
+    //left channel
+    lfilter =  ltonelw->filterout_s(smpsl[i]);
+    mfilter =  ltonemd->filterout_s(smpsl[i]);  
+    
+    efxoutl[i] = ltonehg->filterout_s(volume * (smpsl[i] + lowb*lfilter + midb*mfilter));
+    
+    //Right channel
+    lfilter =  rtonelw->filterout_s(smpsr[i]);
+    mfilter =  rtonemd->filterout_s(smpsr[i]);
+    
+    efxoutr[i] = rtonehg->filterout_s(volume * (smpsr[i] + lowb*lfilter + midb*mfilter));      
+       
+    } 
+    
+    
+    
+    break;
 
    } 
 
@@ -288,7 +328,7 @@ switch (value)
   tpre1 = 0;         //Gain stage reduce aliasing
   fpre1 = 6000.0f;
   qpre1 = 0.707f;
-  spre1 = 1;
+  spre1 = 2;
   
   tpre2 = 4;        //being used as a recovery filter, gain = 10
   fpre2 = 324.5f;
@@ -316,6 +356,45 @@ switch (value)
   stonelw = 0;  
   break;
  
+  case 2: //ProCo Rat Distortion emulation
+// Some key filter stages based upon a schematic for a grunge pedal 
+
+  tinput = 0;         //Reduce some noise aliasing
+  finput = 5000.0f;
+  qinput = 1.0f;
+  sinput = 3;
+  
+  tpre1 = 1;         //Gain stage high boost, gain = 1 ... 268 (max)
+  fpre1 = 60.0f;
+  qpre1 = 1.0f;
+  spre1 = 0;
+  
+  tpre2 = 1;        //being used as a recovery filter, gain = 1 ... 3000
+  fpre2 = 1539.0f;
+  qpre2 = 1.0f;
+  spre2 = 0;
+  
+  tpost = 0;       //Not used...initialized to "something"
+  fpost = 6000.0f;
+  qpost = 1.77f;
+  spost = 0;
+  
+  ttonehg = 0;       //frequency sweeping LPF
+  ftonehg = 1000.0f;
+  qtonehg = 1.0f;
+  stonehg = 0;
+  
+  ttonemd = 4;       // Pedal has no mid filter so I'll make up my own
+  ftonemd = 700.0f;
+  qtonemd = 2.0f;
+  stonemd = 0;
+  
+  ttonelw = 0;       //Pedal has no Low filter, so make up my own...Low Eq band, peaking type
+  ftonelw = 328.0f;  //Mild low boost
+  qtonelw = 0.50f;
+  stonelw = 1;  
+  break;
+  
   }
    
   //left channel filters
@@ -402,7 +481,13 @@ void StompBox::init_tone ()
     if (lowb > 0.0f) lowb = ((float) Plow)/18.0f;          
     break;
     
-    
+    case 2:
+    varf = 3653.0f + highb*3173.0f;  //High tone ranges from ~480 to 10k
+    rtonehg->setfreq(varf);
+    ltonehg->setfreq(varf); 
+
+    break;    
+
     
     }
 
@@ -420,14 +505,16 @@ void
 StompBox::setpreset (int npreset)
 {
   const int PRESET_SIZE = 6;
-  const int NUM_PRESETS = 3;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
     {48, 32, 0, 32, 65, 0},
     //Grunger
-    {48, 10, -6, 55, 70, 1},  
+    {48, 10, -6, 55, 85, 1},  
     //Hard Dist.
-    {48, -42, -6, 38, 5, 1}      
+    {48, -42, -6, 38, 12, 1},
+    //Ratty
+    {48, -20, 0, 0, 70, 2}          
     
   };
 
@@ -467,7 +554,7 @@ StompBox::changepar (int npar, int value)
       break;
     case 4:
       Pgain = value;
-      gain = dB2rap(44.0f * ((float)value)/127.0f  - 44.0f);
+      gain = dB2rap(50.0f * ((float)value)/127.0f  - 50.0f);
       break;
     case 5:
       Pmode = value;
