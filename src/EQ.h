@@ -39,24 +39,16 @@ public:
   int getpar (int npar);
   void cleanup ();
   float getfreqresponse (float freq);
+  void setvolume (int Pvolume);
+
   int Ppreset;
-  float *efxoutl;
-  float *efxoutr;
+  int Pvolume;	//Volumul 
 
   float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of
 
-  int Pvolume;	//Volumul 
+  float *efxoutl;
+  float *efxoutr;
 
-  void setvolume (int Pvolume);
-
-
-
-
-private:
-  //Parametrii
-//      int Pvolume;//Volumul 
-
-//      void setvolume(int Pvolume);
 
   struct
   {

@@ -48,6 +48,7 @@ public:
   void cleanup ();
 
   int Ppreset;
+
   float *efxoutl;
   float *efxoutr;
 
@@ -65,6 +66,7 @@ private:
   int Pdelay;
   int Pphase;
 
+  int oldk;
 
   //Control Parametrii
   void setvolume (int Pvolume);
@@ -79,7 +81,6 @@ private:
   float panning, fb, depth, lrcross, phase;
   COMPLEXTYPE *oldl, *oldr;
   COMPLEXTYPE oldclfol, oldclfor;
-  int oldk;
 };
 
 #endif

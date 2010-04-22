@@ -43,7 +43,6 @@ public:
   int Ppreset;
   float *efxoutl;
   float *efxoutr;
-
   float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
 
 
@@ -70,11 +69,12 @@ private:
   void setlrcross (int Plrcross);
 
   //Valorile interne
+  int maxdelay;
+  int dlk, drk, dlhi, dlhi2;
+
   float depth, delay, fb, lrcross, panning;
   float dl1, dl2, dr1, dr2, lfol, lfor;
-  int maxdelay;
   float *delayl, *delayr;
-  int dlk, drk, dlhi, dlhi2;
   float getdelay (float xlfo);
   float dllo, mdel;
 };

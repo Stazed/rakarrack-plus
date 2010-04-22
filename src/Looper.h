@@ -44,12 +44,17 @@ public:
   int progstate[6];
   void getstate ();
 
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
 
-  float outvolume;
 
 private:
+
+  void initdelays ();
+  void setfade ();
+
   //Parameters
   int Pvolume;	//Mix
   int Precord;	//set to 1
@@ -64,15 +69,13 @@ private:
   int Pautoplay;
   int Prec1;
   int Prec2;
+  int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
   
-  void initdelays ();
-  void setfade ();
 
   float *ldelay, *rdelay;
   float *t2ldelay, *t2rdelay;
   
   float oldl, oldr;		//pt. lpf
-  int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
 
   float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2;
 };

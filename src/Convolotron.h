@@ -44,7 +44,6 @@ public:
 
   float *efxoutl;
   float *efxoutr;
-
   float outvolume;
 
   char Filename[128];
@@ -68,15 +67,18 @@ private:
   void sethidamp (int Phidamp);
   void process_rbuf();
 
-  SNDFILE *infile;
-  SF_INFO sfinfo;
   int offset;
+  int maxx_size,maxx_read,real_len,length;
 
-  //Parametrii reali
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *rbuf, *buf, *lxn;
-  int maxx_size,maxx_read,real_len,length;
   float level,fb, feedback;
+
+
+  SNDFILE *infile;
+  SF_INFO sfinfo;
+
+  //Parametrii reali
   
   class Resample *M_Resample;
 

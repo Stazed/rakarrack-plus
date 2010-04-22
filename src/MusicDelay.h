@@ -40,13 +40,27 @@ public:
   void cleanup ();
 
   int Ppreset;
+  float outvolume;
 
   float *efxoutl;
   float *efxoutr;
 
-  float outvolume;
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int num, int Ppanning);
+  void setdelay (int num, int Pdelay);
+  void setgain (int num, int Pgain);
+  void setlrdelay (int Plrdelay);
+  void setlrcross (int Plrcross);
+  void setfb (int num, int Pfb);
+  void sethidamp (int Phidamp);
+  void settempo (int Ptempo);
+  void initdelays ();
+
+
+
   //Parametrii
   int Pvolume;			//Volumul or E/R
   int Ppanning1;		//Panning
@@ -62,24 +76,14 @@ private:
   int Phidamp;
   int Ptempo;
 
-  void setvolume (int Pvolume);
-  void setpanning (int num, int Ppanning);
-  void setdelay (int num, int Pdelay);
-  void setgain (int num, int Pgain);
-  void setlrdelay (int Plrdelay);
-  void setlrcross (int Plrcross);
-  void setfb (int num, int Pfb);
-  void sethidamp (int Phidamp);
-  void settempo (int Ptempo);
-
   //Parametrii reali
-  float panning1, panning2, lrcross, fb1, fb2, hidamp;
   int dl1, dr1, dl2, dr2, delay1, delay2, lrdelay;
+  int kl1, kr1, kl2, kr2;
+
+  float panning1, panning2, lrcross, fb1, fb2, hidamp;
   float gain1, gain2;
-  void initdelays ();
   float *ldelay1, *rdelay1, *ldelay2, *rdelay2;
   float oldl1, oldr1, oldl2, oldr2;	//pt. lpf
-  int kl1, kr1, kl2, kr2;
 };
 
 

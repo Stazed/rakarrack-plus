@@ -40,29 +40,35 @@ public:
   void cleanup ();
 
 
-  unsigned char Ppreset;
+  int Ppreset;
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
 
-  float outvolume;
 
 
 private:
-    EffectLFO lfo;
-  unsigned char Pvolume;
-  unsigned char Ppanning;
-  unsigned char Pextra;
-  unsigned char PAutoPan;
-  unsigned char PextraON;
 
   void setvolume (unsigned char Pvolume);
   void setpanning (unsigned char Ppanning);
   void setextra (unsigned char Pdepth);
 
+  int Pvolume;
+  int Ppanning;
+  int Pextra;
+  int PAutoPan;
+  int PextraON;
+
+
   float dvalue;
   float panning, mul;
   float lfol, lfor;
   float ll, lr;
+
+  EffectLFO lfo;
+
+
 };
 
 #endif

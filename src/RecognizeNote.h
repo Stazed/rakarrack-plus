@@ -23,29 +23,32 @@ public:
   Recognize (float * efxoutl_, float * efxoutr_);
   ~Recognize ();
 
+  void schmittFloat (float *indatal, float *indatar);
 
-  float *efxoutl;
-  float *efxoutr;
+  int note;
+
   signed short int *schmittBuffer;
   signed short int *schmittPointer;
   const char **notes;
-  int note;
   float lafreq;
   float nfreq, afreq, freq;
-  void schmittFloat (float *indatal, float *indatar);
+  float *efxoutl;
+  float *efxoutr;
   
 
 
 private:
 
-  int ultima;
-  float freqs[12];
-  float lfreqs[12];
-  int blockSize;
   void displayFrequency (float freq);
   void schmittInit (int size);
   void schmittS16LE (signed short int *indata);
   void schmittFree ();
+
+  int ultima;
+  int blockSize;
+
+  float freqs[12];
+  float lfreqs[12];
 
 
 };

@@ -45,17 +45,21 @@ public:
 
 private:
 
-  int Prm[10];
-  int Pvolume;
-  int lpffreq;
-  int hpffreq;
-  
   void setvolume (int value);
   void setlpf (int value);
   void sethpf (int value);
   void sethar(int num, int value);
 
+
+  int Prm[10];
+  int Pvolume;
+  int lpffreq;
+  int hpffreq;
+
   float rm[10];
+
+  
+
   class HarmEnhancer *harm;
 
 };

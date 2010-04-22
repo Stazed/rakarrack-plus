@@ -75,18 +75,21 @@ public:
     unsigned char nvowel;	//the vowel from the position
   } Psequence[FF_MAX_SEQUENCE];
 
+ 
+  void formantfilterH (int nvowel, int nfreqs, float * freqs);	//used by UI
+
+
+  bool changed;
+
+
   float getcenterfreq ();
   float getoctavesfreq ();
   float getfreqpos (float freq);
   float getfreqx (float x);
-
-  void formantfilterH (int nvowel, int nfreqs, float * freqs);	//used by UI
-
   float getformantfreq (unsigned char freq);
   float getformantamp (unsigned char amp);
   float getformantq (unsigned char q);
 
-  bool changed;
 
 private:
   void defaults (int n);

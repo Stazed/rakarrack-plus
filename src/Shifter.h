@@ -50,18 +50,23 @@ public:
 
 
   int Ppreset;
+  long int hq;
+  float outvolume;
 
   float *efxoutl;
   float *efxoutr;
   float *outi;
   float *outo;
 
-  float outvolume;
 
-  long int hq;
 
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int Ppan);
+  void setinterval (int Pinterval);
+  void setgain (int Pgain);
 
   int Pvolume;
   int Pgain;
@@ -80,12 +85,6 @@ private:
   float panning;
   float gain;
   float interval;
-
-  void setvolume (int Pvolume);
-  void setpanning (int Ppan);
-  void setinterval (int Pinterval);
-  void setgain (int Pgain);
-
 
   PitchShifter *PS;
 

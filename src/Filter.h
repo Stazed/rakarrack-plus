@@ -42,11 +42,12 @@ public:
   void setfreq (float frequency);
   void setfreq_and_q (float frequency, float q_);
   void setq (float q_);
-
   float getrealfreq (float freqpitch);
+
 private:
+   unsigned char category;
+
     Filter_ * filter;
-  unsigned char category;
 };
 
 

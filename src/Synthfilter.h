@@ -43,14 +43,23 @@ public:
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
+
   int Ppreset;
-  float *efxoutl;
-  float *efxoutr;
   float outvolume;
 
+  float *efxoutl;
+  float *efxoutr;
+
 private:
+
+  //Control parameters
+  void setvolume (int Pvolume);
+  void setdistortion (int Pdistortion);
+  void setwidth (int Pwidth);
+  void setfb (int Pfb);
+  void setdepth (int Pdepth);
+
   //Phaser parameters
-    EffectLFO lfo;	         //Filter modulator
   int Pvolume;			 //0//Used in Process.C to set wet/dry mix
   int Pdistortion;		 //1//0...127//Model distortion
 				 //2//Tempo//LFO frequency
@@ -69,12 +78,6 @@ private:
   int Pbandwidth;		 //15//0...127//Separate high pass & low pass
   
    
-  //Control parameters
-  void setvolume (int Pvolume);
-  void setdistortion (int Pdistortion);
-  void setwidth (int Pwidth);
-  void setfb (int Pfb);
-  void setdepth (int Pdepth);
 
   //Internal Variables
   float distortion, fb, width, env, envdelta, sns, att, rls, fbl, fbr, depth, bandgain;
@@ -85,6 +88,7 @@ private:
   float Rmin;	// 2N5457 typical on resistance at Vgs = 0
   float Rmax;	// Resistor parallel to FET
   float C, Clp, Chp;	        // Capacitor
+  EffectLFO lfo;	         //Filter modulator
 
 
 };

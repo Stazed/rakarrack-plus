@@ -42,6 +42,8 @@ public:
   void cleanup ();
 
   int Ppreset;
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
   float *lowl;
@@ -53,9 +55,15 @@ public:
   float *highl;
   float *highr;
   
-  float outvolume;
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setCross1 (int value);
+  void setCross2 (int value);
+  void setCross3 (int value);
+  void setCombi (int value);
 
 
   //Parametrii
@@ -65,12 +73,6 @@ private:
   int Cross2;
   int Cross3;
   
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setCross1 (int value);
-  void setCross2 (int value);
-  void setCross3 (int value);
-  void setCombi (int value);
   //Parametrii reali
   
   float coeff;

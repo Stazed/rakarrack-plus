@@ -58,8 +58,7 @@ private:
   float otm1l;
   float otm1r;
   
-  
-  float p[HARMONICS];
+    float p[HARMONICS];
   
   AnalogFilter *hpfl, *hpfr;
   AnalogFilter *lpfl, *lpfr;

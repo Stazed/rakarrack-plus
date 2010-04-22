@@ -50,6 +50,8 @@ public:
   int PMIDI;
   int PSELECT;
   int mira;
+  long int hq;
+
 
   float *efxoutl;
   float *efxoutr;
@@ -58,7 +60,6 @@ public:
 
   float outvolume;
 
-  long int hq;
 
 
 private:

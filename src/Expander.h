@@ -71,6 +71,10 @@ public:
 
 private:
 
+  void setlpf (int Plpf);
+  void sethpf (int Phpf);
+
+
   float sgain;
   float sfactor;
   float tfactor;
@@ -83,8 +87,6 @@ private:
   float fs;
   float level;
 
-  void setlpf (int Plpf);
-  void sethpf (int Phpf);
 
 
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;

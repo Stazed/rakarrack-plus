@@ -38,9 +38,11 @@ public:
   void cleanup ();
 
   int cc;
+  int fundi;
+  int bass;
+  int ctipo;
+
   char NombreAcorde[20];
-
-
 
   struct TipoCh
   {
@@ -61,14 +63,18 @@ public:
   } NCE[25];
 
 
-  int fundi;
-  int bass;
-  int ctipo;
 
 
 private:
 
   int plus (int nota);
+
+  int NumChord3;
+  int NumChord4;
+  int NumChord5;
+
+  int Ch[34][13];
+
 
   struct Ch3
   {
@@ -100,11 +106,6 @@ private:
     char Nom[16];
   } Chord5[67];
 
-  int Ch[34][13];
-
-  int NumChord3;
-  int NumChord4;
-  int NumChord5;
 
 
 };

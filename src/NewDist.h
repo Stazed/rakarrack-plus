@@ -46,13 +46,23 @@ public:
   void applyfilters (float * efxoutl, float * efxoutr);
 
   int Ppreset;
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
-  float outvolume;
   float inpll[4096];
   float inplr[4096];
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setlrcross (int Plrcross);
+  void setoctave (int Poctave);
+  void setlpf (int Plpf);
+  void sethpf (int Phpf);
+
+
   //Parametrii
   int Pvolume;	//Volumul or E/R
   int Ppanning;	//Panning
@@ -69,20 +79,14 @@ private:
 
 
   float rfreq;
+  float panning, lrcross, octave_memoryl, togglel, octave_memoryr, toggler, octmix;
+  float *octoutl, *octoutr;
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
-  void setoctave (int Poctave);
-  void setlpf (int Plpf);
-  void sethpf (int Phpf);
 
   //Parametrii reali
-  float panning, lrcross, octave_memoryl, togglel, octave_memoryr, toggler, octmix;
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
   class Waveshaper *wshape;
 
-  float *octoutl, *octoutr;
 
   class Filter *filterl, *filterr;
   class FilterParams *filterpars;  

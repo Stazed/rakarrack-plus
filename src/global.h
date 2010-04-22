@@ -276,7 +276,6 @@ public:
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
-
   char jackcliname[64];
 
   int Bypass;
@@ -422,8 +421,45 @@ public:
   int OnCounter;
   int t_periods;
 
+  //   Recognize
+
+  int last;
+
+  // Harmonizer
+  int HarQual;
+
+  // Tap Tempo
+  
+  int tempocnt;
+  int Tap_Display;
+  int Tap_Selection;
+  int Tap_TempoSet;
+  int Tap_SetValue;
+  int t_timeout;
+  int jt_state;
+
+  int note_old;
+  int cents_old;
+
+  int cpufp;
+  
+  int numpi, numpo, numpa, numpmi, numpmo;
+  int numpc;
+  long Tap_time_Init;
+
+  double Tap_timeB;
+  double Tap_timeC;
+  double jt_tempo;
+
+  double tempobuf[6];  
+
+
   double u_down;
   double u_up;
+
+  timeval timeA;
+
+  float cpuload;
 
 
   float *efxoutl;
@@ -452,10 +488,8 @@ public:
 
 // Tunner
 
-  int note_old;
   float nfreq_old;
   float afreq_old;
-  int cents_old;
 
   char tmpprefname[128];
 
@@ -506,12 +540,6 @@ public:
 
   snd_seq_t *midi_in, *midi_out;
 
-  //   Recognize
-
-  int last;
-
-  // Harmonizer
-  int HarQual;
 
   struct JackPorts
   {
@@ -519,28 +547,6 @@ public:
   } jack_po[80];
 
 
-  // Tap Tempo
-  
-  timeval timeA;
-  long Tap_time_Init;
-  double Tap_timeB;
-  double Tap_timeC;
-  int tempocnt;
-  double tempobuf[6];  
-  int Tap_Display;
-  int Tap_Selection;
-  int Tap_TempoSet;
-  int Tap_SetValue;
-  int t_timeout;
-
-  int jt_state;
-  double jt_tempo;
-
-  int cpufp;
-  float cpuload;
-  
-  int numpi, numpo, numpa, numpmi, numpmo;
-  int numpc;
 
 };
 

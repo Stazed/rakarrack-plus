@@ -57,6 +57,7 @@ private:
   int Pharms;
   int Psubdiv;
 
+
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void setdelay (int Pdelay);
@@ -67,15 +68,17 @@ private:
   void setreverse (int Preverse);
   void setpattern (int Ppattern);
 
-  //Parametrii reali
-  float panning, lrcross, fb, hidamp, reverse;
-  int dl, dr, delay, lrdelay;
 
+  //Parametrii reali
   void initdelays ();
-  float *ldelay, *rdelay;
-  int *pattern;
-  float oldl, oldr;		//pt. lpf
+
+  int dl, dr, delay, lrdelay;
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade, harmonic, envcnt, invattack;
+  int *pattern;
+
+  float panning, lrcross, fb, hidamp, reverse;
+  float *ldelay, *rdelay;
+  float oldl, oldr;		//pt. lpf
   float  Srate_Attack_Coeff, envattack, envswell;
 };
 

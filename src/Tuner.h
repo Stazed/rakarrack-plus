@@ -22,28 +22,30 @@ class Tuner
 public:
   Tuner ();
   ~Tuner ();
+  void schmittFloat (int nframes, float *indatal, float *indatar);
 
-  float *efxoutl;
-  float *efxoutr;
-  signed short int *schmittBuffer;
-  signed short int *schmittPointer;
-  const char **notes;
   int note;
   int preparada;
   int note_actual;
-  float nfreq, afreq, freq;
   int cents;
-  void schmittFloat (int nframes, float *indatal, float *indatar);
+  signed short int *schmittBuffer;
+  signed short int *schmittPointer;
+  const char **notes;
+  float nfreq, afreq, freq;
+  float *efxoutl;
+  float *efxoutr;
+
 private:
 
-
-  float freqs[12];
-  float lfreqs[12];
-  int blockSize;
   void displayFrequency (float freq);
   void schmittInit (int size);
   void schmittS16LE (int nframes, signed short int *indata);
   void schmittFree ();
+
+  int blockSize;
+
+  float freqs[12];
+  float lfreqs[12];
 };
 
 #endif /*TUNER_H_ */

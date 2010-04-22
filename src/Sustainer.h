@@ -35,8 +35,9 @@ public:
   void out (float * smpsl, float * smpr);
   void changepar (int npar, int value);
   int getpar (int npar);
-  int Ppreset;
   void setpreset (int npreset);
+
+  int Ppreset;
   
   float *efxoutl;
   float *efxoutr;

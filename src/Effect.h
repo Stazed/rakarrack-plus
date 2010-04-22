@@ -57,6 +57,7 @@ public:
   };				//this is only used for EQ (for user interface)
 
   unsigned char Ppreset;
+
   float *efxoutl;
   float *efxoutr;
 
@@ -64,9 +65,6 @@ public:
 
 
   FilterParams *filterpars;
-protected:
-
-  int insertion;		//1 for insertion effect
 };
 
 #endif

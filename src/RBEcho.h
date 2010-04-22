@@ -41,13 +41,24 @@ public:
   void cleanup ();
 
   int Ppreset;
+  float outvolume;
 
   float *efxoutl;
   float *efxoutr;
 
-  float outvolume;
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setdelay (int Pdelay);
+  void setlrdelay (int Plrdelay);
+  void setlrcross (int Plrcross);
+  void setfb (int Pfb);
+  void sethidamp (int Phidamp);
+  void setreverse (int Preverse);
+  void initdelays ();
+
   //Parametrii
   int Pvolume;	//Volumul or E/R
   int Ppanning;	//Panning
@@ -60,24 +71,15 @@ private:
   int Psubdiv;
   int Pes;
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setdelay (int Pdelay);
-  void setlrdelay (int Plrdelay);
-  void setlrcross (int Plrcross);
-  void setfb (int Pfb);
-  void sethidamp (int Phidamp);
-  void setreverse (int Preverse);
 
   //Parametrii reali
-  float panning, lrcross, fb, hidamp, reverse;
   int dl, dr, delay, lrdelay;
-  float fdelay, subdiv, pes;
+  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay;
 
-  void initdelays ();
+  float fdelay, subdiv, pes;
+  float panning, lrcross, fb, hidamp, reverse;
   float *ldelay, *rdelay;
   float oldl, oldr;		//pt. lpf
-  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay;
   float  Srate_Attack_Coeff;
 };
 

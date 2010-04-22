@@ -38,16 +38,24 @@ public:
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
+
   int Ppreset;
+  float outvolume;
+  float vulevel;
+
   float *efxoutl;
   float *efxoutr;
   float *auxresampled;
-  float outvolume;
-  float vulevel;
 
 
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void init_filters();
+  void adjustq(float q);
+
   //Parametrii
   int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
@@ -59,10 +67,6 @@ private:
   int Pqq;
   int Pring;
   
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void init_filters();
-  void adjustq(float q);
   float ringworm;
   float cperiod;
   float lpanning, rpanning, input,level;

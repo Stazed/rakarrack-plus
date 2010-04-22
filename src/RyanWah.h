@@ -42,18 +42,18 @@ public:
 
 
   int Ppreset;
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
-  float outvolume;
 
 
 private:
-  //Parametrii RyanWah
-    EffectLFO lfo;		//lfo-ul RyanWah
-    //GUI include:
-    //Tempo
-    //Type
-          //if space is needed, remove st. diff and randomness.
+
+  void setvolume (int Pvolume);
+  void setwidth (int Pwidth);
+  void setampsns (int Pampsns);
+  void reinitfilter ();
 	  
   int Pvolume;		//For wet/dry mix
   int Ppanning;        //delete.  
@@ -72,22 +72,17 @@ private:
   
 
   //Control Parametrii
-  void setvolume (int Pvolume);
-  void setwidth (int Pwidth);
-  void setampsns (int Pampsns);
 
-  void reinitfilter ();
+  int Ftype;
+  int Fstages;
 
   //Valorile interne
 
   float rpanning, lpanning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, base, ibase, minfreq;
-  unsigned char Ftype;
-  unsigned char Fstages;
-  class RBFilter *filterl, *filterr;
-
   float ms1, lpmix, hpmix, bpmix;	//mean squares
-  
   float centfreq; //testing
+  EffectLFO lfo;		//lfo-ul RyanWah
+  class RBFilter *filterl, *filterr;
 
 
 };

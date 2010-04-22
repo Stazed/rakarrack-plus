@@ -47,6 +47,7 @@ public:
   void cleanup ();
 
 private:
+
   struct fstage
   {
     float low, high, band, notch;
@@ -57,13 +58,16 @@ private:
     float f, q, q_sqrt;
   } par, ipar;
 
-
   void singlefilterout (float * smp, fstage & x, parameters & par);
   float singlefilterout_s (float smp, fstage & x, parameters & par);
-
   void computefiltercoefs ();
+
   int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
   int stages;			//how many times the filter is applied (0->1,1->2,etc.)
+  int abovenq;			//this is 1 if the frequency is above the nyquist
+  int oldabovenq;
+  int needsinterpolation, firsttime, en_mix;
+
   float freq;		//Frequency given in Hz
   float q;			//Q factor (resonance or Q factor)
   float gain;		//the gain of the filter (if are shelf/peak) filters
@@ -71,9 +75,10 @@ private:
   float oldq, oldsq, oldf;
   float iper;			//inverse of PERIOD
 
-  int abovenq;			//this is 1 if the frequency is above the nyquist
-  int oldabovenq;
-  int needsinterpolation, firsttime, en_mix;
+
+
+
+
 };
 
 

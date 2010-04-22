@@ -48,8 +48,6 @@ public:
   void cleanup ();
   int getpar (int npar);
 
-  float *efxoutl;
-  float *efxoutr;
 
 
 
@@ -64,7 +62,15 @@ public:
   int Phpf;
   int Phold;
 
+  float *efxoutl;
+  float *efxoutr;
+
+
 private:
+
+  void setlpf (int Plpf);
+  void sethpf (int Phpf);
+
 
   int hold_count;
   int state;
@@ -78,8 +84,6 @@ private:
   float fs;
   float hold;
 
-  void setlpf (int Plpf);
-  void sethpf (int Phpf);
 
 
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;

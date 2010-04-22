@@ -47,6 +47,13 @@ public:
 
 private:
 
+  void setvolume (int value);
+  void sethpf (int value);
+  void setfreq1();
+  void setfreq2();
+  void setq1();
+  void setq2();
+
   int Pvolume;
   int Ppo;
   int Ppd;
@@ -56,23 +63,16 @@ private:
   int Pq2;
   int Pfreq2;
   int Pmode;
+
   float tfreqs[10];
   float tqs[10];
-  
-  void setvolume (int value);
-  void sethpf (int value);
-  void setfreq1();
-  void setfreq2();
-  void setq1();
-  void setq2();
-  
-
   float rm[10];
+  float freq1,q1,freq2,q2; 
+  float att;
+
   class HarmEnhancer *harm;
   class AnalogFilter *RB1l, *RB1r;
   class AnalogFilter *RB2l,*RB2r;
-  float freq1,q1,freq2,q2; 
-  float att;
 
 };
 

@@ -42,11 +42,18 @@ public:
   void applyfilters (float * efxoutl, float * efxoutr);
 
   int Ppreset;
-  float *efxoutl;
-  float *efxoutr;
   float outvolume;
 
+  float *efxoutl;
+  float *efxoutr;
+
 private:
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setlrcross (int Plrcross);
+  void setlpf (int Plpf);
+  void sethpf (int Phpf);
+  void setpresence(int value);
 
 
   //Parametrii
@@ -64,12 +71,6 @@ private:
   int Ped;
   int Presence;
   
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
-  void setlpf (int Plpf);
-  void sethpf (int Phpf);
-  void setpresence(int value);
   //Parametrii reali
   float panning, lrcross, q, dist, otml,otmr, itml, itmr, factor;
   float rm[10];

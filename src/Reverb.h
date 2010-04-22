@@ -42,13 +42,29 @@ public:
   int getpar (int npar);
 
   int Ppreset;
+  float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su
+
   float *efxoutl;
   float *efxoutr;
 
-  float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su
 
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpan (int Ppan);
+  void settime (int Ptime);
+  void setlohidamp (int Plohidamp);
+  void setidelay (int Pidelay);
+  void setidelayfb (int Pidelayfb);
+  void sethpf (int Phpf);
+  void setlpf (int Plpf);
+  void settype (int Ptype);
+  void setroomsize (int Proomsize);
+  void processmono (int ch, float * output);
+
+
+
   //Parametrii
   //Amount of the reverb,
   int Pvolume;
@@ -86,45 +102,36 @@ private:
   //Room Size
   int Proomsize;
 
-  //parameter control
-  void setvolume (int Pvolume);
-  void setpan (int Ppan);
-  void settime (int Ptime);
-  void setlohidamp (int Plohidamp);
-  void setidelay (int Pidelay);
-  void setidelayfb (int Pidelayfb);
-  void sethpf (int Phpf);
-  void setlpf (int Plpf);
-  void settype (int Ptype);
-  void setroomsize (int Proomsize);
-
-  float pan, erbalance;
   //Parametrii 2  
   int lohidamptype;		//0=disable,1=highdamp(lowpass),2=lowdamp(highpass)
   int idelaylen, rdelaylen;
   int idelayk;
-  float lohifb, idelayfb, roomsize, rs;	//rs is used to "normalise" the volume according to the roomsize
-  float rs_coeff;
   int comblen[REV_COMBS * 2];
   int aplen[REV_APS * 2];
+
+
+  int combk[REV_COMBS * 2];
+  int apk[REV_APS * 2];
+
+  float lohifb, idelayfb, roomsize, rs;	//rs is used to "normalise" the volume according to the roomsize
+  float rs_coeff;
+  //parameter control
+  float pan, erbalance;
+
 
   //Valorile interne
 
   float *comb[REV_COMBS * 2];
 
-  int combk[REV_COMBS * 2];
   float combfb[REV_COMBS * 2];	//feedback-ul fiecarui filtru "comb"
   float lpcomb[REV_COMBS * 2];	//pentru Filtrul LowPass
 
   float *ap[REV_APS * 2];
-
-  int apk[REV_APS * 2];
-
-  float *idelay;
-  class AnalogFilter *lpf, *hpf;	//filters
   float *inputbuf;
+  float *idelay;
 
-  void processmono (int ch, float * output);
+  class AnalogFilter *lpf, *hpf;	//filters
+
 };
 
 

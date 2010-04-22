@@ -43,8 +43,9 @@ public:
 
   void cleanup ();
 private:
-    AnalogFilter * formant[FF_MAX_FORMANTS];
-  float *inbuffer, *tmpbuf;
+
+  void setpos (float input);
+
 
   struct
   {
@@ -57,14 +58,16 @@ private:
     unsigned char nvowel;
   } sequence[FF_MAX_SEQUENCE];
 
-  float oldformantamp[FF_MAX_FORMANTS];
-
   int sequencesize, numformants, firsttime;
+
+  float oldformantamp[FF_MAX_FORMANTS];
   float oldinput, slowinput;
   float Qfactor, formantslowness, oldQfactor;
   float vowelclearness, sequencestretch;
 
-  void setpos (float input);
+  float *inbuffer, *tmpbuf;
+
+    AnalogFilter * formant[FF_MAX_FORMANTS];
 
 
 

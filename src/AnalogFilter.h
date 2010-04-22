@@ -65,11 +65,15 @@ private:
   void computefiltercoefs ();
   int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
   int stages;			//how many times the filter is applied (0->1,1->2,etc.)
+  int order;			//the order of the filter (number of poles)
+  int needsinterpolation, firsttime;
+  int abovenq;			//this is 1 if the frequency is above the nyquist
+  int oldabovenq;		//if the last time was above nyquist (used to see if it needs interpolation)
+
   float freq;		//Frequency given in Hz
   float q;			//Q factor (resonance or Q factor)
   float gain;		//the gain of the filter (if are shelf/peak) filters
 
-  int order;			//the order of the filter (number of poles)
 
   float c[3], d[3];		//coefficients
 
@@ -77,9 +81,6 @@ private:
 
   float xd[3], yd[3];	//used if the filter is applied more times
 
-  int needsinterpolation, firsttime;
-  int abovenq;			//this is 1 if the frequency is above the nyquist
-  int oldabovenq;		//if the last time was above nyquist (used to see if it needs interpolation)
 };
 
 

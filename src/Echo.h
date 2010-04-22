@@ -68,13 +68,14 @@ private:
   void setreverse (int Preverse);
 
   //Parametrii reali
-  float panning, lrcross, fb, hidamp, reverse;
-  int dl, dr, delay, lrdelay;
-
   void initdelays ();
+
+  int dl, dr, delay, lrdelay;
+  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
+
   float *ldelay, *rdelay;
   float oldl, oldr;		//pt. lpf
-  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
+  float panning, lrcross, fb, hidamp, reverse;
   float  Srate_Attack_Coeff;
 };
 

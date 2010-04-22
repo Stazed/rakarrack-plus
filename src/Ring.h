@@ -41,13 +41,19 @@ public:
   void Create_Tables();
   
   int Ppreset;
+  int Pafreq;
+  int Pfreq;
+
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
 
-  float outvolume;
-  int Pafreq;
-  int Pfreq;
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setlrcross (int Plrcross);
 
 
   //Parametrii
@@ -63,9 +69,6 @@ private:
   int Psqu;
   int Pstereo;	//0=mono,1=stereo
   
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
 
   //Parametrii reali
   unsigned int offset;

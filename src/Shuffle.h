@@ -42,15 +42,25 @@ public:
   void cleanup ();
 
   int Ppreset;
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
   float *inputl;
   float *inputr;
   
-  float outvolume;
 
 private:
 
+  void setvolume (int Pvolume);
+  void setCross1 (int value);
+  void setCross2 (int value);
+  void setCross3 (int value);
+  void setCross4 (int value);
+  void setGainL (int value);
+  void setGainML (int value);
+  void setGainMH (int value);
+  void setGainH (int value);
 
   //Parametrii
   int Pvolume;	//Volumul or E/R
@@ -66,15 +76,6 @@ private:
   int Cross3;
   int Cross4;
   
-  void setvolume (int Pvolume);
-  void setCross1 (int value);
-  void setCross2 (int value);
-  void setCross3 (int value);
-  void setCross4 (int value);
-  void setGainL (int value);
-  void setGainML (int value);
-  void setGainMH (int value);
-  void setGainH (int value);
 
   //Parametrii reali
   float tmp;

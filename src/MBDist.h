@@ -42,6 +42,8 @@ public:
   void cleanup ();
 
   int Ppreset;
+  float outvolume;
+
   float *efxoutl;
   float *efxoutr;
   float *lowl;
@@ -51,10 +53,14 @@ public:
   float *highl;
   float *highr;
   
-  float outvolume;
 
 private:
 
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setlrcross (int Plrcross);
+  void setCross1 (int value);
+  void setCross2 (int value);
 
   //Parametrii
   int Pvolume;	//Volumul or E/R
@@ -77,11 +83,6 @@ private:
   int Cross2;		//highpass filter
   int Pstereo;	//0=mono,1=stereo
   
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
-  void setCross1 (int value);
-  void setCross2 (int value);
 
   //Parametrii reali
   float panning, lrcross;

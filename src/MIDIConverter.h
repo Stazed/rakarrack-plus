@@ -50,33 +50,35 @@ public:
   void setTriggerAdjust (int val);
   void setVelAdjust (int val);
 
-  float VelVal;
   int channel;
-  snd_seq_t *port;
   int lanota;
   int nota_actual;
   int hay;
   int preparada;
   int ponla;
   int velocity;
-
   int moutdatasize;
+  int ev_count; 
+
+  float VelVal;
   jack_midi_data_t  moutdata[2048];  
   Midi_Event Midi_event[2048];
-  int ev_count; 
+  snd_seq_t *port;
+
 
 private:
 
-
-  float freqs[12];
-  float lfreqs[12];
-  int blockSize;
   void displayFrequency (float freq);
   void schmittInit (int size);
   void schmittS16LE (int nframes, signed short int *indata);
   void schmittFree ();
   void MIDI_Send_Note_On (int note);
   void MIDI_Send_Note_Off (int note);
+
+  int blockSize;
+
+  float freqs[12];
+  float lfreqs[12];
 
 
 };

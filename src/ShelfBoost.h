@@ -38,11 +38,14 @@ public:
 
   int Ppreset;
 
-  float *efxoutl;
-  float *efxoutr;
   float outvolume;
 
+  float *efxoutl;
+  float *efxoutr;
+
 private:
+
+  void setvolume (int value);
 
   int Pvolume;
   int Plevel;
@@ -50,11 +53,9 @@ private:
   int Pfreq1;
   int Pstereo;
   
-  void setvolume (int value);
-
+  float freq1,q1,gain,u_gain; 
 
   class AnalogFilter *RB1l, *RB1r;
-  float freq1,q1,gain,u_gain; 
 
 };
 

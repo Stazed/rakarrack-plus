@@ -70,11 +70,9 @@ private:
   //Valorile interne
 
   float panning, depth, ampsns, ampsmooth;
-
-  class Filter *filterl, *filterr;
-
   float ms1, ms2, ms3, ms4;	//mean squares
 
+  class Filter *filterl, *filterr;
   class FilterParams *filterpars;
 
 };

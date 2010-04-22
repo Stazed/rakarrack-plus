@@ -34,13 +34,14 @@ public:
   Sequence (float * efxoutl_, float * efxoutr_, long int Quality);
   ~Sequence ();
    void cleanup (); 
-   
   void out (float * smpsl, float * smpr);
   void changepar (int npar, int value);
   int getpar (int npar);
-  int Ppreset;
   void setpreset (int npreset);
   void setranges(int value);
+
+  int Ppreset;
+
   float outvolume;
   
   float *efxoutl;
@@ -62,6 +63,10 @@ private:
   long int hq;
 
   float MINFREQ,MAXFREQ;
+  float fsequence[8];
+  float fq;
+  float ifperiod,fperiod, seqpower;
+
   float *outi;
   float *outo;
   
@@ -71,9 +76,6 @@ private:
 
   
 
-  float fsequence[8];
-  float fq;
-  float ifperiod,fperiod, seqpower;
 };
 
 

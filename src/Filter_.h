@@ -38,8 +38,8 @@ public:
   virtual void setfreq_and_q (float frequency, float q_) { };
   virtual void setq (float q_) { };
   virtual void setgain (float dBgain) {};
+
   float outgain;
-private:
 };
 
 
