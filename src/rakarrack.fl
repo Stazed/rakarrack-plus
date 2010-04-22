@@ -6087,13 +6087,13 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         Fl_Value_Slider shifter_attack {
           label Attack
           callback {rkr->efx_Shifter->changepar(3,(int)o->value());}
-          xywh {371 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 2000 step 1 value 100 textcolor 7
+          xywh {371 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shifter_decay {
           label Decay
-          callback {rkr->efx_Shifter->changepar(4,(int)o->value());}
-          xywh {370 312 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 2000 step 1 value 100 textcolor 7
+          callback {rkr->efx_Shifter->changepar(4,(int)o->value());} selected
+          xywh {370 312 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
           class SliderW
         }
         Fl_Value_Slider shifter_thre {
@@ -7468,8 +7468,7 @@ Principal->show(argc,argv);
 put_icon(Principal);
 
 void * v=MT;
-Fl::add_timeout(.04,tick,v);} {selected
-    }
+Fl::add_timeout(.04,tick,v);} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
