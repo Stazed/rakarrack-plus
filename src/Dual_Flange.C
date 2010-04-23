@@ -104,13 +104,13 @@ void
 Dflange::out (float * smpsl, float * smpsr)
 {
   int i;
-
   //deal with LFO's
+    int tmp0, tmp1;
+
     float lfol, lfor, lmod, rmod, lmodfreq, rmodfreq, rx0, rx1, lx0, lx1;
     float ldif0, ldif1, rdif0, rdif1;  //Difference between fractional delay and floor(fractional delay)
     float drA, drB, dlA, dlB;	//LFO inside the loop.
     float rsA, rsB, lsA, lsB;	//Audio sample at given delay
-    int tmp0, tmp1;
 
     
   lfo.effectlfoout (&lfol, &lfor);

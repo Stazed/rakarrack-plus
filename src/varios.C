@@ -64,9 +64,9 @@ int
 RKR::Get_Bogomips()
 {
 
-FILE *fp;
 char temp[256];
 char *tmp;
+FILE *fp;
 
   if ((fp = fopen ("/proc/cpuinfo", "r")) != NULL)
     {

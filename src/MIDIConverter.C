@@ -88,11 +88,12 @@ MIDIConverter::~MIDIConverter ()
 void
 MIDIConverter::displayFrequency (float ffreq)
 {
-  float ldf, mldf;
-  float lfreq;
   int i;
   int noteoff = 0;
   int octave = 4;
+
+  float ldf, mldf;
+  float lfreq;
 
   if (ffreq < 1E-15)
     ffreq = 1E-15f;
@@ -244,8 +245,9 @@ MIDIConverter::schmittFree ()
 void
 MIDIConverter::schmittFloat (int nframes, float *indatal, float *indatar)
 {
-  signed short int buf[nframes];
   int i;
+
+  signed short int buf[nframes];
   for (i = 0; i < nframes; i++)
     {
       buf[i] =

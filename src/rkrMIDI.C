@@ -92,8 +92,6 @@ RKR::midievents()
   if (midievent->type == 42)
     return;
 
-
-
   if ((midievent->type == SND_SEQ_EVENT_NOTEON)
       || (midievent->type == SND_SEQ_EVENT_NOTEOFF))
     {

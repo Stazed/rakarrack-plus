@@ -21,6 +21,7 @@
 
 
 
+
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   
@@ -2456,6 +2457,126 @@ software.<br>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       <p align="justify">StompBox</p>
+      <p align="justify">A stand-alone stompbox emulator.<br>
+      <br>
+Between the various equalization tools and distortion modules,
+Rakarrack offers great flexibility to get a wide range of distortion
+sounds, but this method requires much experimentation, while some
+things are simply not possible.&nbsp; What if you are a person who
+wants to dial in a good sound quickly, and don't enjoy tweaking
+seemingly endless possibilities?<br>
+      <br>
+StompBox aims to simplify the process by giving the user a familiar
+"StompBox" interface with only "Level", "Gain", and a 3-band EQ, which
+generally covers all the features presented by a typical stompbox.<br>
+      <br>
+Additionally, most of these "Stomp Box" modes are physically informed
+models of actual stompboxes, with the most notable features derived
+from the circuit's schematic.&nbsp; Please enjoy these models as a
+unique creation of their own, and not as something expected to be a
+part-for-part replacement.&nbsp; It is my belief (as the developer)
+that these models have some convincing characteristics, but I am aware
+of many subtle things that are not taken into account.&nbsp; Further,
+there are many variants of a specific type of pedal on the market; for
+expample, an Overdrive pedal is basically the same circuit for almost
+all models marketed as "overdrive".&nbsp; The differences are minor
+variations that the specific designer determined produced a better
+sound.&nbsp; Even though the names of the modes indicate one model or
+the other, the internal signal processing in Rakarrack includes
+variations of its own: some to counteract unfortunate digital artifacts
+and some applied as common "mods" that tweakers apply to their physical
+stompboxes.<br>
+      <br>
+Perhaps a good analogy would be that of an artistic painting versus a
+photograph.&nbsp; The Rakarrack stompbox models are more like an
+artistic painting, where the artist (programmer) looks at the object
+(schematic), "paint" (write code) the prominent features, then add
+details that make it become an identifiable image of the original
+object.&nbsp; In contrast, a photograph captures things exactly how
+they appear, with artifacts such as resolution and lighting/color
+distortions.&nbsp; Many commercial products attempt more of a
+"photographic" approach to stompbox modeling, where each part and
+component is modeled in detail.&nbsp; This of course, makes the CPU
+usage increase dramatically while IMHO little value is added in terms
+of making a *GOOD* sound (however they do make it much more true to the
+original).&nbsp; I think there would also be risk of legal issues if we
+attempted to model commercial stompboxes exactly and (especially)
+present them to our users in that form.&nbsp; For the most part you
+will be able to tell what stompboxes were used as a standard for a
+specific type of sound, as the names are relatively tell-tale.&nbsp;
+Hopefully we have kept things generic enough to avoid aggravating the
+industry.&nbsp; If any person of such authority takes issue, let it be
+known we are happy to make changes &amp; remove things you feel are
+infringing on your patent or trademark rights.&nbsp; However, being
+free software, this is probably greater benefit in the form of free
+marketing for these industries.<br>
+      <br>
+Last, not all of the stompboxes modeled actually have a 3-band
+EQ.&nbsp; For these cases, one or two of the EQ bands is configured to
+emulate the EQ control on the pedal while the others have a
+configuration that matches the "theme" of the pedal, and they have no
+effect at "0" setting.&nbsp; Thus, any pedal model will have EQ
+controls that behave similarly to the original.<br>
+      <br>
+Now with all the explanation and disclaimers set aside, let's give some
+insight to what this thing is able to do.&nbsp; The first important
+parameter to understand is the "Mode" selector.&nbsp; This is where you
+get to select the flavor of stompbox distortion you wish to model:<br>
+      <br>
+<b>Amp</b>: This is a model twice derived from a tube preamp.&nbsp;
+The general circuit flow follows that of a typical overdrive pedal
+(Tubescreamer type), however the waveshaper uses dynamically modulated
+symmetry with a soft clipping function somewhat emulating the behavior
+of a vacuum tube.&nbsp; The reason it is considered twice derived is
+because the overdrive pedal originally used the frequency contouring of
+a tube preamp along with a soft diode clipper to (poorly) emulate the
+characteristics of an overdriven tube.&nbsp; Rakarrack "Amp" model
+therefore is a model of a model, but the clipping routine is much more
+dynamic and "alive" than the average diode clipper.&nbsp; The
+pre-emphasis filter was modified somewhat to pick up more of the lower
+end to make it better suited to fat blues lead tones.&nbsp; The 3-band
+EQ is constructed based on criteria derived partially from a typical
+tube amp tone stack blended with some of the character of the overdrive
+pedal tone control.&nbsp; If Low and Mid bands are left flat (zero),
+then the high band behaves like the OD pedal Tone control.<br>
+      <br>
+<b>Grunge</b>: This will explain itself to those who are familiar
+with the source model.&nbsp; The original has only high and low EQ
+bands.&nbsp; The Rakarrack model implements the mid band to allow for
+some mid scooping, or a mid boost if desired.&nbsp; Set mid at "zero"
+to get the most true behavior of the original.<br>
+      <br>
+<b>Rat</b><br>
+<b>Fat Cat</b>: Rat and Fat Cat are minor variations on the same
+thing.&nbsp; In truth, the difference between the two is subtle.&nbsp;
+The EQ behaves like the original if low and mid bands are left flat
+(zero).&nbsp; The high band behaves as the original tone control.&nbsp;
+The mid band EQ is designed to work on frequencies associated with the
+nasal sound.&nbsp; The low band is very broad and can be adjusted to
+make the pedal sound very "beefy".<br>
+      <br>
+<b>Dist+</b>: The name says it all for any who know the
+original.&nbsp; The original has no tone control, so all three bands
+are fabricated.&nbsp; The EQ on this is of the same type as for the Rat
+model.&nbsp; To get the sound of the original pedal, leave mid and low
+flat, then push high to its maximum.<br>
+      <br>
+<b>Death</b>: A good mode for a raw-edged chainsaw guitar sound and death
+metal enthusiasts.&nbsp; One may easily guess the original model if it
+is stated that the internal circuit is identical to "Grunge", only some
+contouring modifications and 3 bands of EQ.&nbsp; This model, unlike
+the original, has a gain control.<br>
+      <br>
+<b>Mid Elves Own</b>: Say it out loud and it will will sound
+similar to how the original stompbox name sounds.&nbsp; This model
+excludes the sweepable mid-band EQ.&nbsp; Instead, the mid-band picks a
+good place and leaves it fixed there.&nbsp; It is an intentional design
+decision not to include the extra slider for mid sweep.&nbsp; This is
+to maintain the simplicity of a generic interface for all models. The
+Rakarrack Parametric EQ as well as MuTroMojo modules are capable of
+providing a sweepable mid scoop or boost if desired.<br>
+      </p>
+
       <p align="justify"><br>
 </p></td></tr></tbody>
 </table>

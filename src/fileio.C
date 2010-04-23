@@ -560,12 +560,12 @@ RKR::loadfile (char *filename)
 
   int i, j;
   int Num_Version=0;
+  int l[10];
+  FILE *fn;
   float in_vol, out_vol; 
   float balance=1.0f;
-  FILE *fn;
-  char *cfilename;
   char buf[256];
-  int l[10];
+  char *cfilename;
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;
@@ -587,12 +587,15 @@ RKR::loadfile (char *filename)
 	  &l[0], &l[1], &l[2], &l[3], &l[4], &l[5], &l[6], &l[7], &l[8],
 	  &l[9]);
 
-
   fclose (fn);
 
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;
+
+  //Version
+  bzero (buf, sizeof (buf));
+  fgets (buf, sizeof buf, fn);
 
 
   //Author
@@ -1986,8 +1989,8 @@ void
 RKR::loadskin (char *filename)
 {
   unsigned int i;
-  FILE *fn;
   char buf[256];
+  FILE *fn;
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;

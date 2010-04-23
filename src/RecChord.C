@@ -479,11 +479,11 @@ RecChord::MiraChord ()
   int i, j;
   int anote[POLY];
   int nnotes = 0;
-  char AName[20];
   int temp;
   int di1, di2, di3, di4;
   int tienebass = 0;
   int labaja;
+  char AName[20];
 
 
   for (i = 0; i < POLY; i++)

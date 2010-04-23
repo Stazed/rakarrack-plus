@@ -76,9 +76,9 @@ void
 Convolotron::out (float * smpsl, float * smpsr)
 {
   int i, j, xindex, verbindex;
-  float l,lyn;
   int interval = length/2;
   int numtaps = 5;
+  float l,lyn;
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -154,6 +154,7 @@ Convolotron::setfile(int value)
 
 int readcount;
 double sr_ratio;
+
 offset = 0;
 maxx_read = maxx_size / 2;
 memset(buf,0,sizeof(float) * maxx_size);
