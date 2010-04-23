@@ -380,7 +380,10 @@ public:
   int modified;
   int aconnect_MI;
   int aconnect_JA;
+  int aconnect_JIA;
+
   int cuan_jack;
+  int cuan_ijack;
   int IsCoIn;
   int Cyoin;
   int Pyoin;
@@ -544,7 +547,8 @@ public:
   struct JackPorts
   {
     char name[128];
-  } jack_po[80];
+  } jack_po[16],jack_poi[16];
+
 
 
 

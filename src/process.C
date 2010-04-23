@@ -101,7 +101,10 @@ RKR::RKR ()
 
   rakarrack.get (PrefNom ("Harmonizer Quality"), HarQual, 4);
   rakarrack.get (PrefNom ("Auto Connect Jack"), aconnect_JA, 1);
+  rakarrack.get (PrefNom ("Auto Connect Jack In"), aconnect_JIA, 1);
+
   rakarrack.get (PrefNom ("Auto Connect Num"), cuan_jack, 2);
+  rakarrack.get (PrefNom ("Auto Connect In Num"), cuan_ijack, 1);
 
   int i;
   bzero (temp, sizeof (temp));
@@ -120,6 +123,22 @@ RKR::RKR ()
 	strcpy (j_names, "");
       rakarrack.get (PrefNom (temp), jack_po[i].name, j_names, 128);
 
+    }
+
+  bzero(j_names,sizeof(j_names));
+
+  static const char *jack_inames[] =
+    { "system:capture_1", "system:capture_2" };
+
+  for (i = 0; i < cuan_ijack; i++)
+    {
+      bzero (temp, sizeof (temp));
+      sprintf (temp, "Jack Port In %d", i + 1);
+      if (i < 1)
+ 	strcpy (j_names, jack_inames[i]);
+      else
+	strcpy (j_names, "");
+      rakarrack.get (PrefNom (temp), jack_poi[i].name, j_names, 128);
     }
 
 

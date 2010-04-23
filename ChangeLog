@@ -1,5 +1,7 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Fixed crash bug in Order window.
+- Added Autoconnect for jack input ports.
 - Removing warning on gcc-4.5
 - Added Effect Stompbox.
 - Code cleaned.
