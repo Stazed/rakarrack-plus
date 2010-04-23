@@ -152,14 +152,15 @@ int i;
     break; 
 
     case 1:  //Grunge
-    
+    case 5:  //Death Metal
+    case 6:  //Metal Zone
     linput->filterout(smpsl);
     rinput->filterout(smpsr);    
   
     for (i = 0; i<PERIOD; i++)
     {   
-    templ = smpsl[i] * (gain * 110.0f + 0.01f);
-    tempr = smpsr[i] * (gain * 110.0f + 0.01f);  
+    templ = smpsl[i] * (gain * pgain + 0.01f);
+    tempr = smpsr[i] * (gain * pgain + 0.01f);  
     smpsl[i] += lpre1->filterout_s(templ);
     smpsr[i] += rpre1->filterout_s(tempr);       
     }     
@@ -175,10 +176,10 @@ int i;
     
     for (i = 0; i<PERIOD; i++)
     {
-    smpsl[i] = smpsl[i] + 10.0f * lpre2->filterout_s(smpsl[i]);
-    smpsr[i] = smpsr[i] + 10.0f * rpre2->filterout_s(smpsr[i]);    
-    smpsl[i] = smpsl[i] + 3.0f * lpost->filterout_s(smpsl[i]);
-    smpsr[i] = smpsr[i] + 3.0f * rpost->filterout_s(smpsr[i]); 
+    smpsl[i] = smpsl[i] + RGP2 * lpre2->filterout_s(smpsl[i]);
+    smpsr[i] = smpsr[i] + RGP2 * rpre2->filterout_s(smpsr[i]);    
+    smpsl[i] = smpsl[i] + RGPST * lpost->filterout_s(smpsl[i]);
+    smpsr[i] = smpsr[i] + RGPST * rpost->filterout_s(smpsr[i]); 
     
     //left channel
     lfilter =  ltonelw->filterout_s(smpsl[i]);
@@ -389,6 +390,7 @@ switch (value)
   finput = 1000.0f;
   qinput = 2.95f;
   sinput = 0;
+  pgain = 110.0f;
   
   tpre1 = 0;         //Gain stage reduce aliasing
   fpre1 = 6000.0f;
@@ -399,11 +401,13 @@ switch (value)
   fpre2 = 324.5f;
   qpre2 = 4.5f;
   spre2 = 0;
+  RGP2 = 10.0f;
   
   tpost = 4;       //The other recovery filter, gain = 3
   fpost = 6000.0f;
   qpost = 1.77f;
   spost = 0;
+  RGPST = 3.0f;
   
   ttonehg = 1;       //high shelf ranging 880 to 9700 Hz, gain 10
   ftonehg = 4000.0f;
@@ -503,6 +507,98 @@ switch (value)
   qtonelw = 0.50f;
   stonelw = 1;  
   break; 
+  
+  case 5: //Death Metal
+// Some key filter stages based upon a schematic for a grunge pedal 
+
+  tinput = 4;         //Pre-Emphasis filter
+  finput = 6735.4f;
+  qinput = 0.43f;
+  sinput = 0;
+  pgain = 110.0f;
+  
+  tpre1 = 0;         //Gain stage reduce aliasing
+  fpre1 = 6000.0f;
+  qpre1 = 0.707f;
+  spre1 = 2;
+  
+  tpre2 = 4;        //being used as a recovery filter, gain = 10
+  fpre2 = 517.0f;
+  qpre2 = 71.8f;
+  spre2 = 0;
+  RGP2 = 10.0f;
+  
+  tpost = 4;       //The other recovery filter, gain = 10
+  fpost = 48.0f;
+  qpost = 6.68f;
+  spost = 0;
+  RGPST = 10.0f;
+  
+  ttonehg = 1;       //high shelf ranging 880 to 9700 Hz, gain 11
+  ftonehg = 4000.0f;
+  qtonehg = 1.0f;
+  stonehg = 0;
+  HG = 11.0f;
+  
+  ttonemd = 4;       // Mid band EQ gain 11
+  ftonemd = 1017.0f;
+  qtonemd = 1.15f;
+  stonemd = 0;
+  MG = 11.0f;
+  
+  ttonelw = 4;       //Low Eq band, peaking type, gain = up to 22.
+  ftonelw = 107.0f;
+  qtonelw = 3.16f;
+  stonelw = 0;
+  LG = 22.0f;
+    
+  break;
+   case 6: //Metal Zone
+// Some key filter stages based upon a schematic for a grunge pedal 
+
+  tinput = 4;         //Pre-Emphasis filter
+  finput = 952.53f;
+  qinput = 2.8f;
+  sinput = 0;
+  pgain = 100.0f;
+  
+  tpre1 = 0;         //Gain stage reduce aliasing
+  fpre1 = 6000.0f;
+  qpre1 = 0.707f;
+  spre1 = 2;
+  
+  tpre2 = 4;        //being used as a recovery filter, gain = 10
+  fpre2 = 4894.0f;
+  qpre2 = 2.16f;
+  spre2 = 0;
+  RGP2 = 3.3f;
+  
+  tpost = 4;       //The other recovery filter, gain = 10
+  fpost = 105.0f;
+  qpost = 14.62f;
+  spost = 0;
+  RGPST = 7.0f;
+  
+  ttonehg = 1;       //high shelf ranging 880 to 9700 Hz, gain 11
+  ftonehg = 4000.0f;
+  qtonehg = 1.0f;
+  stonehg = 0;
+  HG = 10.0f;
+  
+  ttonemd = 4;       // Mid band EQ gain 11
+  ftonemd = 1017.0f;
+  qtonemd = 1.15f;
+  stonemd = 0;
+  MG = 11.0f;
+  
+  ttonelw = 4;       //Low Eq band, peaking type, gain = up to 22.
+  ftonelw = 105.50f;
+  qtonelw = 3.11f;
+  stonelw = 0;
+  LG = 10.0f;
+    
+  break; 
+
   }
    
   //left channel filters
@@ -604,6 +700,16 @@ void StompBox::init_tone ()
     rtonehg->setfreq(varf);
     ltonehg->setfreq(varf);
     break;    
+    case 5: //Death Metal
+    case 6: //Mid Elves Own
+    varf = 3653.0f + highb*3173.0f;  //High tone ranges from ~480 to 10k
+    rtonehg->setfreq(varf);
+    ltonehg->setfreq(varf); 
+    
+    if (highb > 0.0f) highb = HG * ((float) Phigh);    
+    if (lowb > 0.0f) lowb = LG * ((float) Plow);
+    if (midb > 0.0f) midb = MG * ((float) Plow);
+    break;
 
     
     }
@@ -633,7 +739,12 @@ StompBox::setpreset (int npreset)
     //Ratty
     {48, -20, 0, 0, 70, 2},
     //Classic Dist
-    {48, 64, 0, 0, 110, 4}    
+    {48, 64, 0, 0, 110, 4},
+    //Morbid Impalement
+    {38, 6, 6, 6, 105, 5},    
+    //Mid Elve
+    {48, 0, -12, 0, 127, 6},    
+    
   };
 
 
