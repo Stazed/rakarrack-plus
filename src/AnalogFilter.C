@@ -80,9 +80,9 @@ AnalogFilter::cleanup ()
 void
 AnalogFilter::computefiltercoefs ()
 {
+  int zerocoefs = 0;		//this is used if the freq is too high
   float tmp;
   float omega, sn, cs, alpha, beta;
-  int zerocoefs = 0;		//this is used if the freq is too high
 
   //do not allow frequencies bigger than samplerate/2
   float freq = this->freq;
@@ -445,8 +445,8 @@ AnalogFilter::singlefilterout (float * smp, fstage & x, fstage & y,
 void
 AnalogFilter::filterout (float * smp)
 {
-  float *ismp = NULL;	//used if it needs interpolation
   int i;
+  float *ismp = NULL;	//used if it needs interpolation
   if (needsinterpolation != 0)
     {
       ismp = new float[PERIOD];

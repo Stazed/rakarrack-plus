@@ -560,12 +560,12 @@ RKR::loadfile (char *filename)
 
   int i, j;
   int Num_Version=0;
+  int l[10];
+  FILE *fn;
   float in_vol, out_vol; 
   float balance=1.0f;
-  FILE *fn;
-  char *cfilename;
   char buf[256];
-  int l[10];
+  char *cfilename;
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;
@@ -1986,8 +1986,8 @@ void
 RKR::loadskin (char *filename)
 {
   unsigned int i;
-  FILE *fn;
   char buf[256];
+  FILE *fn;
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;

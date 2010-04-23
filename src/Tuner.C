@@ -52,9 +52,10 @@ Tuner::~Tuner ()
 void
 Tuner::displayFrequency (float ffreq)
 {
+  int i;
+
   float ldf, mldf;
   float lfreq;
-  int i;
 
   if (ffreq < 1E-15)
     ffreq = 1E-15f;
@@ -164,8 +165,9 @@ Tuner::schmittFree ()
 void
 Tuner::schmittFloat (int nframes, float *indatal, float *indatar)
 {
-  signed short int buf[nframes];
   int i;
+
+  signed short int buf[nframes];
   for (i = 0; i < nframes; i++)
     {
       buf[i] = (short) ((indatal[i] + indatar[i]) * 32768);

@@ -86,11 +86,12 @@ void
 Sequence::out (float * smpsl, float * smpsr)
 {
   int i;
+  int nextcount,dnextcount;
+
   float ldiff, rdiff, lfol, lfor, ftcount;
   float lmod = 0.0f;
   float rmod = 0.0f;
   float ldbl, ldbr;
-  int nextcount,dnextcount;
   
   if ((rndflag) && (tcount < PERIOD + 1))//This is an Easter Egg
   {

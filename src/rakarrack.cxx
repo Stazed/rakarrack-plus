@@ -258,37 +258,35 @@ back->draw(X,Y);
 }
 
 void NewVum::draw_rest(int X, int Y, int W, int H) {
-  double val;
-int x = X;
+  int x = X;
 int y = Y;
 int h = H;
 int w = W;
-
-float fred,fyel,fora;
-
-fred=.239f;
-fora=.35f;
-fyel=.508f;
+int S,S1,S2,S3;
+int ko;
+double val;
 
 
-    val = 1.0-((value() + 48.0) / 63.0);
+double fred=.239f;
+double fora=.35f;
+double fyel=.508f;
+
+
+    val = 1.0-((value() + 48.0) *.015873016);
     if (val > 1.0) val = 1.0;
     else if (val < 0.0) val = 0.0;
   
   
-  int S,S1,S2,S3;
+   S = h - lrint(val*h+.5); 
   
-   
-   S = h - int(val*h+.5); 
-  
-   S1 = h - int(fred*(float)h+.5f);
-   S2 = h - int(fora*(float)h+.5f); 
-   S3 = h - int(fyel*(float)h+.5f);
+   S1 = h - lrint(fred*(double)h+.5f);
+   S2 = h - lrint(fora*(double)h+.5f); 
+   S3 = h - lrint(fyel*(double)h+.5f);
  
 
     draw_bg(X, Y, W, H);
  
-  int ko=H+Y-S;
+ ko=H+Y-S;
 
  if (val < fred)  
   {
@@ -411,11 +409,11 @@ void TunerLed::draw_bg(int X, int Y, int W, int H) {
 }
 
 void TunerLed::draw_rest(int X, int Y, int W, int H) {
-  double val;
-int x = X;
+  int x = X;
 int y = Y;
 int h = H;
 int w = W;
+double val;
 
    val = (float)(value()-minimum())/(maximum()-minimum());
    if (val > 1.0) val = 1.0;
@@ -15974,11 +15972,14 @@ void RKRGUI::preset_click(Fl_Button* o, void* v) {
 
 inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
   int ok;
-
-char temp2[128];
-long long kk = (long long) o->user_data();
-int num = (int) kk;
+int num; 
 int tecla = Fl::event_key();
+long long kk = (long long) o->user_data();
+char temp2[128];
+
+
+num = (int) kk;
+
 
 
 if (Fl::event_button()==3)
@@ -16633,9 +16634,10 @@ switch (rkr->efx_order[i])
 }
 
 void RKRGUI::show_help() {
-  char temp[128];
+  int x,y,w,h,k;
 
-int x,y,w,h,k;
+char temp[128];
+
 
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
@@ -16667,9 +16669,9 @@ sprintf(temp,"%s/html/help.html",HELPDIR);
 }
 
 void RKRGUI::show_lic() {
-  char temp[128];
+  int x,y,w,h,k;
+char temp[128];
 
-int x,y,w,h,k;
 
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
@@ -16700,11 +16702,11 @@ visor->show();
 }
 
 void RKRGUI::MiraClientes() {
-  FILE *fp;
-char temp[128];
+  char temp[128];
 char temp1[128];
 char *masque;
 char *name;
+FILE *fp;
 
 BMidiIn->clear();
 

@@ -148,8 +148,8 @@ Recognize::schmittFree ()
 void
 Recognize::schmittFloat (float *indatal, float *indatar)
 {
-  signed short int buf[PERIOD];
   int i;
+  signed short int buf[PERIOD];
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -163,11 +163,12 @@ Recognize::schmittFloat (float *indatal, float *indatar)
 void
 Recognize::displayFrequency (float freq)
 {
-  float ldf, mldf;
-  float lfreq;
   int i; int offset=4;
   int noteoff = 0;
   int octave = 4;
+
+  float ldf, mldf;
+  float lfreq;
 
   if (freq < 1E-15)
     freq = 1E-15f;

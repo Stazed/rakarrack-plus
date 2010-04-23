@@ -52,13 +52,14 @@ void
 DynamicFilter::out (float * smpsl, float * smpsr)
 {
   int i;
+  float lfol, lfor;
+
   if (filterpars->changed)
     {
       filterpars->changed = false;
       cleanup ();
     };
 
-  float lfol, lfor;
   lfo.effectlfoout (&lfol, &lfor);
   lfol *= depth * 5.0f;
   lfor *= depth * 5.0f;
