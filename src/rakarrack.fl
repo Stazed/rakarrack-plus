@@ -62,9 +62,7 @@ decl {int Analyzer_ON;} {}
 class Analyzer {: {public Fl_Box}
 } {
   Function {Analyzer(int x,int y, int w, int h, const char *label=0):Fl_Box(x,y,w,h,label)} {} {
-    code {spl=NULL;
-spr=NULL;
-ns=NULL;} {}
+    code {} {}
   }
   Function {init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE)} {} {
     code {spl = smpsl;
@@ -171,17 +169,15 @@ return(0);} {}
 class Scope {: {public Fl_Box}
 } {
   Function {Scope(int x,int y, int w, int h, const char *label=0):Fl_Box(x,y,w,h,label)} {} {
-    code {spl=NULL;
-spr=NULL;
-ns=NULL;} {}
+    code {} {selected
+    }
   }
   Function {init(float *smpsl, float *smpsr, int PERIOD)} {} {
     code {spl = smpsl;
 spr = smpsr;
 ns = PERIOD;} {}
   }
-  Function {draw()} {open
-  } {
+  Function {draw()} {} {
     code {int ox=x(),oy=y(),lx=w(),ly=h();
 int i;
 int Xl,Xr,Yl,Yr;
@@ -1210,7 +1206,7 @@ Scope_ON=1;
         xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
       }
       Fl_Box CPULOAD {
-        user_data 5 selected
+        user_data 5
         xywh {750 5 45 17} labelsize 10 labelcolor 7
       }
       Fl_Box Sco {

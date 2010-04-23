@@ -18,9 +18,6 @@ static int Scope_ON;
 static int Analyzer_ON; 
 
 Analyzer::Analyzer(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
-  spl=NULL;
-spr=NULL;
-ns=NULL;
 }
 
 void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE) {
@@ -125,9 +122,6 @@ return(0);
 }
 
 Scope::Scope(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
-  spl=NULL;
-spr=NULL;
-ns=NULL;
 }
 
 void Scope::init(float *smpsl, float *smpsr, int PERIOD) {
