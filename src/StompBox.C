@@ -524,9 +524,9 @@ switch (value)
   
   tpre2 = 4;        //being used as a recovery filter, gain = 10
   fpre2 = 517.0f;
-  qpre2 = 71.8f;
+  qpre2 = 7.17f;
   spre2 = 0;
-  RGP2 = 10.0f;
+  RGP2 = 1.0f;
   
   tpost = 4;       //The other recovery filter, gain = 10
   fpost = 48.0f;
@@ -706,9 +706,9 @@ void StompBox::init_tone ()
     rtonehg->setfreq(varf);
     ltonehg->setfreq(varf); 
     
-    if (highb > 0.0f) highb = HG * ((float) Phigh);    
-    if (lowb > 0.0f) lowb = LG * ((float) Plow);
-    if (midb > 0.0f) midb = MG * ((float) Plow);
+    if (highb > 0.0f) highb = HG * ((float) Phigh)/64.0f;    
+    if (lowb > 0.0f) lowb = LG * ((float) Plow)/64.0f;
+    if (midb > 0.0f) midb = MG * ((float) Plow)/64.0f;
     break;
 
     
@@ -728,7 +728,7 @@ void
 StompBox::setpreset (int npreset)
 {
   const int PRESET_SIZE = 6;
-  const int NUM_PRESETS = 5;
+  const int NUM_PRESETS = 7;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
     {48, 32, 0, 32, 65, 0},
