@@ -828,8 +828,8 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {1518 328 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {337 219 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1014,7 +1014,7 @@ if (preset!=1000)
 ActMIDI();
 
 rkr->cpufp++;
-if(rkr->cpufp==36)
+if(rkr->cpufp==40)
 {
 char tmp[8];
 bzero(tmp,sizeof(tmp));
@@ -1167,7 +1167,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -1210,7 +1210,7 @@ Scope_ON=1;
         xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
       }
       Fl_Box CPULOAD {
-        user_data 5
+        user_data 5 selected
         xywh {750 5 45 17} labelsize 10 labelcolor 7
       }
       Fl_Box Sco {

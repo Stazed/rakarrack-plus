@@ -1008,7 +1008,7 @@ if (preset!=1000)
 ActMIDI();
 
 rkr->cpufp++;
-if(rkr->cpufp==36)
+if(rkr->cpufp==40)
 {
 char tmp[8];
 bzero(tmp,sizeof(tmp));
