@@ -5683,6 +5683,8 @@ Fl_Menu_Item RKRGUI::menu_stomp_preset[] = {
  {"Hard Dist.", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Ratula", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Classic Dist", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Morbid Impalement", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Sharp Metal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5734,6 +5736,8 @@ Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
  {"Rat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Fat Cat", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Dist+", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Death", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Mid Elves Own", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

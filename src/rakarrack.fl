@@ -169,8 +169,7 @@ return(0);} {}
 class Scope {: {public Fl_Box}
 } {
   Function {Scope(int x,int y, int w, int h, const char *label=0):Fl_Box(x,y,w,h,label)} {} {
-    code {} {selected
-    }
+    code {} {}
   }
   Function {init(float *smpsl, float *smpsr, int PERIOD)} {} {
     code {spl = smpsl;
@@ -815,16 +814,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {337 219 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6124,7 +6125,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6167,6 +6168,14 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
           MenuItem {} {
             label {Classic Dist}
             xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Morbid Impalement}
+            xywh {30 30 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Sharp Metal}
+            xywh {40 40 36 21} labelsize 10
           }
         }
         Fl_Value_Slider stomp_WD {
@@ -6223,6 +6232,14 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
           MenuItem {} {
             label {Dist+}
             xywh {60 60 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Death
+            xywh {70 70 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Mid Elves Own} selected
+            xywh {80 80 36 21} labelsize 9
           }
         }
       }
