@@ -587,12 +587,15 @@ RKR::loadfile (char *filename)
 	  &l[0], &l[1], &l[2], &l[3], &l[4], &l[5], &l[6], &l[7], &l[8],
 	  &l[9]);
 
-
   fclose (fn);
 
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;
+
+  //Version
+  bzero (buf, sizeof (buf));
+  fgets (buf, sizeof buf, fn);
 
 
   //Author
