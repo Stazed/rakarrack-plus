@@ -63,7 +63,7 @@ fi
 
 GCC_VERSION=`$CC -dumpversion | cut -f 2 -d "."`
 if test "$GCC_VERSION" = "5"; then
-ADDS="-fvar-tracking-assignments-toggle "
+ADDS="-fvar-tracking-assignments-toggle -fexcess-precision=fast"
 else
 ADDS=""
 fi
