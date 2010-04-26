@@ -3122,7 +3122,13 @@ private:
   void cb_D_J_Connect_i(Fl_Check_Button*, void*);
   static void cb_D_J_Connect(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *D_IJ_Connect;
+private:
+  void cb_D_IJ_Connect_i(Fl_Check_Button*, void*);
+  static void cb_D_IJ_Connect(Fl_Check_Button*, void*);
+public:
   Fl_Browser *JackCo;
+  Fl_Browser *JackIn;
   Fl_Group *MISC_SET;
   Fl_Input *Username;
 private:

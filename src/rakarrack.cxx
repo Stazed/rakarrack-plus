@@ -6170,6 +6170,7 @@ void RKRGUI::cb_Pon_i(Fl_Button*, void*) {
 int i = Order_Bro->value();
 int j = Avail_Bro->value();
 
+if(!i) return;
 
 Avail_Bro->insert(j,Order_Bro->text(i));
 Order_Bro->insert(i,Avail_Bro->text(j+1));
@@ -6549,12 +6550,20 @@ void RKRGUI::cb_Mw1(Fl_Check_Button* o, void* v) {
 
 void RKRGUI::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
   rkr->aconnect_JA=(int) o->value();
-
 if (rkr->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();
 }
 void RKRGUI::cb_D_J_Connect(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_D_J_Connect_i(o,v);
+}
+
+void RKRGUI::cb_D_IJ_Connect_i(Fl_Check_Button* o, void*) {
+  rkr->aconnect_JIA=(int) o->value();
+if (rkr->aconnect_JIA) JackIn->activate();
+else JackIn->deactivate();
+}
+void RKRGUI::cb_D_IJ_Connect(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_D_IJ_Connect_i(o,v);
 }
 
 void RKRGUI::cb_Username_i(Fl_Input* o, void*) {
@@ -14935,7 +14944,7 @@ R average.");
       } // Fl_Choice* Har_Qual
       AUDIO_SET->end();
     } // Fl_Group* AUDIO_SET
-    { MIDI_SET = new Fl_Group(10, 194, 313, 195, "MIDI");
+    { MIDI_SET = new Fl_Group(10, 194, 290, 196, "MIDI");
       MIDI_SET->box(FL_PLASTIC_DOWN_FRAME);
       MIDI_SET->color((Fl_Color)FL_BACKGROUND2_COLOR);
       MIDI_SET->labelfont(1);
@@ -14959,7 +14968,7 @@ R average.");
         BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
         BMidiIn->align(FL_ALIGN_TOP_LEFT);
       } // Fl_Browser* BMidiIn
-      { Midi_In_Counter = new Fl_Counter(236, 226, 60, 24, "Channel");
+      { Midi_In_Counter = new Fl_Counter(220, 231, 60, 24, "Channel");
         Midi_In_Counter->type(1);
         Midi_In_Counter->color((Fl_Color)62);
         Midi_In_Counter->labelsize(10);
@@ -14972,7 +14981,7 @@ R average.");
         Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
         Midi_In_Counter->align(FL_ALIGN_TOP);
       } // Fl_Counter* Midi_In_Counter
-      { Har_In_Counter = new Fl_Counter(235, 271, 60, 24, "Harmonizer Channel");
+      { Har_In_Counter = new Fl_Counter(220, 276, 60, 24, "Harm. Channel");
         Har_In_Counter->type(1);
         Har_In_Counter->color((Fl_Color)62);
         Har_In_Counter->labelsize(10);
@@ -14985,12 +14994,12 @@ R average.");
         Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
         Har_In_Counter->align(FL_ALIGN_TOP);
       } // Fl_Counter* Har_In_Counter
-      { wMIDI = new Fl_Group(20, 360, 295, 25, "MIDI implementation");
+      { wMIDI = new Fl_Group(20, 362, 273, 23, "MIDI implementation");
         wMIDI->box(FL_PLASTIC_DOWN_FRAME);
         wMIDI->labelsize(10);
         wMIDI->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         wMIDI->align(FL_ALIGN_TOP_LEFT);
-        { Mw0 = new Fl_Check_Button(77, 363, 105, 20, "Default");
+        { Mw0 = new Fl_Check_Button(77, 365, 18, 18, "Default");
           Mw0->type(102);
           Mw0->down_box(FL_DOWN_BOX);
           Mw0->labelsize(11);
@@ -14998,7 +15007,7 @@ R average.");
           Mw0->callback((Fl_Callback*)cb_Mw0);
           Mw0->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Mw0
-        { Mw1 = new Fl_Check_Button(188, 363, 105, 20, "MIDI Learn");
+        { Mw1 = new Fl_Check_Button(188, 365, 18, 18, "MIDI Learn");
           Mw1->type(102);
           Mw1->down_box(FL_DOWN_BOX);
           Mw1->labelsize(11);
@@ -15010,20 +15019,27 @@ R average.");
       } // Fl_Group* wMIDI
       MIDI_SET->end();
     } // Fl_Group* MIDI_SET
-    { JACK_SET = new Fl_Group(333, 194, 293, 195, "Jack");
+    { JACK_SET = new Fl_Group(305, 194, 321, 196, "Jack");
       JACK_SET->box(FL_PLASTIC_DOWN_FRAME);
       JACK_SET->labelfont(1);
       JACK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       JACK_SET->user_data((void*)(1));
       JACK_SET->align(FL_ALIGN_TOP_LEFT);
-      { D_J_Connect = new Fl_Check_Button(455, 210, 105, 20, "Auto Connect Jack");
+      { D_J_Connect = new Fl_Check_Button(445, 205, 25, 20, "Auto Connect Out");
         D_J_Connect->down_box(FL_DOWN_BOX);
         D_J_Connect->labelsize(11);
         D_J_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         D_J_Connect->callback((Fl_Callback*)cb_D_J_Connect);
         D_J_Connect->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* D_J_Connect
-      { JackCo = new Fl_Browser(350, 245, 191, 142, "Jack Ports");
+      { D_IJ_Connect = new Fl_Check_Button(580, 205, 25, 20, "Auto Connect In");
+        D_IJ_Connect->down_box(FL_DOWN_BOX);
+        D_IJ_Connect->labelsize(11);
+        D_IJ_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        D_IJ_Connect->callback((Fl_Callback*)cb_D_IJ_Connect);
+        D_IJ_Connect->align(FL_ALIGN_LEFT);
+      } // Fl_Check_Button* D_IJ_Connect
+      { JackCo = new Fl_Browser(310, 241, 150, 138, "Output Ports");
         JackCo->type(3);
         JackCo->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         JackCo->labelsize(11);
@@ -15032,6 +15048,15 @@ R average.");
         JackCo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         JackCo->align(FL_ALIGN_TOP_LEFT);
       } // Fl_Browser* JackCo
+      { JackIn = new Fl_Browser(470, 241, 150, 138, "Input Ports");
+        JackIn->type(3);
+        JackIn->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        JackIn->labelsize(11);
+        JackIn->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        JackIn->textsize(12);
+        JackIn->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        JackIn->align(FL_ALIGN_TOP_LEFT);
+      } // Fl_Browser* JackIn
       JACK_SET->end();
     } // Fl_Group* JACK_SET
     { MISC_SET = new Fl_Group(10, 410, 615, 35, "Misc");
@@ -15648,6 +15673,8 @@ rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
 rakarrack.set(rkr->PrefNom("Background Image"),rkr->BackgroundImage);
 rakarrack.set(rkr->PrefNom("Auto Connect MIDI IN"),rkr->aconnect_MI);
 rakarrack.set(rkr->PrefNom("Auto Connect Jack"),rkr->aconnect_JA);
+rakarrack.set(rkr->PrefNom("Auto Connect Jack In"),rkr->aconnect_JIA);
+
 
 rakarrack.set(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway);
 
@@ -15672,6 +15699,7 @@ for(i=1; i<=JackCo->size();i++)
  
   if (JackCo->selected(i))
     {
+      bzero(temp1,sizeof(temp1));
       sprintf(temp1,"Jack Port %d",k);
       rakarrack.set(rkr->PrefNom(temp1),JackCo->text(i));
       k++;
@@ -15681,6 +15709,21 @@ for(i=1; i<=JackCo->size();i++)
       
  rakarrack.set(rkr->PrefNom("Auto Connect Num"),k-1); 
   
+k=1;
+for(i=1; i<=JackIn->size();i++)
+{ 
+ 
+  if (JackIn->selected(i))
+    {
+      bzero(temp1,sizeof(temp1));
+      sprintf(temp1,"Jack Port In %d",k);
+      rakarrack.set(rkr->PrefNom(temp1),JackIn->text(i));
+      k++;
+    }
+      
+}   
+      
+ rakarrack.set(rkr->PrefNom("Auto Connect In Num"),k-1); 
     
 
 
@@ -16696,7 +16739,8 @@ visor->show();
 }
 
 void RKRGUI::MiraClientes() {
-  char temp[128];
+  int i;
+char temp[128];
 char temp1[128];
 char *masque;
 char *name;
@@ -16738,14 +16782,14 @@ if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
   
    if ((ports = jack_get_ports (rkr->jackclient, NULL, JACK_DEFAULT_AUDIO_TYPE, 
                                JackPortIsInput)) == NULL) {
-                fprintf(stderr, "Cannot find any capture ports\n");
+                fprintf(stderr, "Cannot find any Input port\n");
     
                 
         }
   
   else
   {
-  int i=0;
+  i=0;
   
   while (ports[i] != NULL)
      {
@@ -16759,6 +16803,34 @@ if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
    }  
    
    free(ports);
+   
+JackIn->clear();
+ 
+ const char **iports;  
+  
+   if ((iports = jack_get_ports (rkr->jackclient, NULL, JACK_DEFAULT_AUDIO_TYPE, 
+                               JackPortIsOutput)) == NULL) {
+                fprintf(stderr, "Cannot find any Output port\n");
+    
+                
+        }
+  
+  else
+  {
+  i=0;
+  
+  while (iports[i] != NULL)
+     {
+      if((strstr(iports[i],"rakarrack:out_1")==0) && (strstr(iports[i],"rakarrack:out_2")==0))
+      JackIn->add(iports[i]);
+      i++; 
+     }
+     
+    
+         
+   }  
+   
+   free(iports);
 }
 
 void RKRGUI::MiraConfig() {
@@ -16777,6 +16849,18 @@ while (JackCo->text(i) != NULL)
 
 for (k=0; k < rkr->cuan_jack; k++)
 if (strcmp(JackCo->text(i),rkr->jack_po[k].name)==0 ) JackCo->select(i,1);
+
+i++; 
+}
+
+
+i=1;
+
+while (JackIn->text(i) != NULL)
+{
+
+for (k=0; k < rkr->cuan_ijack; k++)
+if (strcmp(JackIn->text(i),rkr->jack_poi[k].name)==0 ) JackIn->select(i,1);
 
 i++; 
 }
@@ -16801,6 +16885,8 @@ Upr_Amo->value(rkr->UpAmo);
 L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
 D_J_Connect->value(rkr->aconnect_JA);
+D_IJ_Connect->value(rkr->aconnect_JIA);
+
 Midi_In_Counter->value(rkr->MidiCh+1);
 Har_In_Counter->value(rkr->HarCh+1);
 
@@ -16830,6 +16916,9 @@ else BMidiIn->deactivate();
 
 if (rkr->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();
+
+if (rkr->aconnect_JIA) JackIn->activate();
+else JackIn->deactivate();
 }
 
 void RKRGUI::BankWin_Label(char *filename) {

@@ -100,6 +100,30 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
 	}
     }
 
+  if (JackOUT->aconnect_JIA)
+    {
+
+       if(JackOUT->cuan_ijack == 1)
+        {
+          jack_connect (jackclient,JackOUT->jack_poi[0].name,jack_port_name(inputport_left));
+	  jack_connect (jackclient,JackOUT->jack_poi[0].name, jack_port_name(inputport_right));
+	 }	
+	
+      else
+       { 
+      for (int i = 0; i < JackOUT->cuan_ijack; i += 2)
+	 {
+	  jack_connect (jackclient,JackOUT->jack_poi[i].name, jack_port_name (inputport_left));
+	  jack_connect (jackclient,JackOUT->jack_poi[i + 1].name,jack_port_name (inputport_right));
+	  }
+       }
+
+    }
+
+
+
+
+
   pthread_mutex_init (&jmutex, NULL);
 
 
