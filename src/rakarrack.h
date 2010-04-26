@@ -3140,6 +3140,11 @@ private:
   void cb_T_TIMEOUT_i(Fl_Check_Button*, void*);
   static void cb_T_TIMEOUT(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *MES_DIS;
+private:
+  void cb_MES_DIS_i(Fl_Check_Button*, void*);
+  static void cb_MES_DIS(Fl_Check_Button*, void*);
+public:
   Fl_Group *BANK_SET;
   Fl_File_Input *BFiname;
   Fl_Button *BF_Browser;

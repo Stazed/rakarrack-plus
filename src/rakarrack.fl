@@ -6628,7 +6628,7 @@ save_stat(1);}
             label New
             callback {rkr->New_Bank();
 Put_Loaded_Bank();
-BankWindow->redraw();} selected
+BankWindow->redraw();}
             xywh {0 0 45 26} divider
           }
           MenuItem Load_Bank {
@@ -6808,7 +6808,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1334 147 640 528} type Double color 4 hide
+      xywh {1327 140 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -7131,7 +7131,7 @@ ML_Menu->activate();}
       }
       Fl_Group JACK_SET {
         label Jack
-        user_data 1 open
+        user_data 1
         xywh {305 194 321 196} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button D_J_Connect {
@@ -7171,6 +7171,11 @@ else JackIn->deactivate();}
           label {Tap Tempo Timeout}
           callback {rkr->t_timeout=(int) o->value();}
           xywh {596 419 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        }
+        Fl_Check_Button MES_DIS {
+          label {Disable Warnings}
+          callback {rkr->mess_dis=(int) o->value();}
+          xywh {453 418 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
         }
       }
       Fl_Group BANK_SET {
@@ -7717,7 +7722,9 @@ T_SEL->value(rkr->Tap_Selection);
 rakarrack.get(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout,0);
 T_TIMEOUT->value(rkr->t_timeout);
 rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
-T_SET->value(rkr->Tap_SetValue);} {}
+T_SET->value(rkr->Tap_SetValue);
+
+rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -7833,6 +7840,7 @@ rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
 rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
+rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
 
 int k=1;
 char temp1[128];
@@ -9017,7 +9025,7 @@ INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
 Downr_Qual->value(rkr->DownQual);
-
+MES_DIS->value(rkr->mess_dis);
 Upr_Amo->value(rkr->UpAmo);
 L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
@@ -11178,9 +11186,11 @@ Order_Bro->select(1);
 Avail_Bro->select(1);} {}
   }
   Function {Show_Next_Time()} {} {
-    code {Fl_Widget *w = fl_message_icon();
+    code {if(rkr->mess_dis) return;
+Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
-fl_message("This setting will be changed the next time you run rakarrack");} {}
+fl_message("This setting will be changed the next time you run rakarrack");} {selected
+    }
   }
   Function {update_looper()} {} {
     code {rkr->efx_Looper->getstate();

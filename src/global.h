@@ -445,7 +445,7 @@ public:
   int cents_old;
 
   int cpufp;
-  
+  int mess_dis;  
   int numpi, numpo, numpa, numpmi, numpmo;
   int numpc;
   long Tap_time_Init;

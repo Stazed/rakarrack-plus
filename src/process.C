@@ -61,6 +61,7 @@ RKR::RKR ()
   numpa = 0;
   numpmi = 0;
   numpmo = 0;
+  mess_dis = 0;
   nojack = 0;
   memset (Mcontrol, 0, sizeof (Mcontrol));
   Mvalue = 0;
@@ -83,7 +84,8 @@ RKR::RKR ()
   strcpy (jackcliname, jack_get_client_name (jackclient));
   J_SAMPLE_RATE = jack_get_sample_rate (jackclient);
   J_PERIOD = jack_get_buffer_size (jackclient);
-
+  
+  rakarrack.get(PrefNom("Disable Warnings"),mess_dis,0);
   rakarrack.get (PrefNom ("UpSampling"), upsample, 0); 
   rakarrack.get (PrefNom ("UpQuality"), UpQual, 4); 
   rakarrack.get (PrefNom ("DownQuality"), DownQual, 4); 

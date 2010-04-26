@@ -6585,6 +6585,13 @@ void RKRGUI::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_TIMEOUT_i(o,v);
 }
 
+void RKRGUI::cb_MES_DIS_i(Fl_Check_Button* o, void*) {
+  rkr->mess_dis=(int) o->value();
+}
+void RKRGUI::cb_MES_DIS(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MES_DIS_i(o,v);
+}
+
 void RKRGUI::cb_BF_Browser_i(Fl_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
@@ -15084,6 +15091,13 @@ R average.");
         T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
         T_TIMEOUT->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* T_TIMEOUT
+      { MES_DIS = new Fl_Check_Button(453, 418, 21, 20, "Disable Warnings");
+        MES_DIS->down_box(FL_DOWN_BOX);
+        MES_DIS->labelsize(11);
+        MES_DIS->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
+        MES_DIS->align(FL_ALIGN_LEFT);
+      } // Fl_Check_Button* MES_DIS
       MISC_SET->end();
     } // Fl_Group* MISC_SET
     { BANK_SET = new Fl_Group(10, 468, 510, 55, "Bank");
@@ -15578,6 +15592,8 @@ rakarrack.get(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout,0);
 T_TIMEOUT->value(rkr->t_timeout);
 rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
 T_SET->value(rkr->Tap_SetValue);
+
+rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
 }
 
 void RKRGUI::save_stat(int i) {
@@ -15694,6 +15710,7 @@ rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
 rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
+rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
 
 int k=1;
 char temp1[128];
@@ -16885,7 +16902,7 @@ INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
 Downr_Qual->value(rkr->DownQual);
-
+MES_DIS->value(rkr->mess_dis);
 Upr_Amo->value(rkr->UpAmo);
 L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
@@ -19064,7 +19081,8 @@ Avail_Bro->select(1);
 }
 
 void RKRGUI::Show_Next_Time() {
-  Fl_Widget *w = fl_message_icon();
+  if(rkr->mess_dis) return;
+Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
 fl_message("This setting will be changed the next time you run rakarrack");
 }
