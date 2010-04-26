@@ -829,7 +829,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -2919,55 +2919,55 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         }
         Fl_Value_Slider pan_WD {
           label {Wet/Dry}
-          callback {rkr->efx_Pan->changepar(0,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Pan->changepar(0,(int)(o->value()+64));}
           xywh {52 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider pan_pan {
           label Pan
-          callback {rkr->efx_Pan->changepar(1,(unsigned char)(o->value()+64));}
+          callback {rkr->efx_Pan->changepar(1,(int)(o->value()+64));}
           xywh {52 256 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Check_Button pan_autopan {
           label AutoPan
           user_data 2
-          callback {rkr->efx_Pan->changepar(7,(unsigned char)o->value())}
+          callback {rkr->efx_Pan->changepar(7,(int)o->value())}
           xywh {38 268 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider pan_freq {
           label Tempo
-          callback {rkr->efx_Pan->changepar(2,(unsigned char)o->value());}
+          callback {rkr->efx_Pan->changepar(2,(int)o->value());}
           xywh {52 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider pan_rnd {
           label Rnd
-          callback {rkr->efx_Pan->changepar(3,(unsigned char)o->value());}
+          callback {rkr->efx_Pan->changepar(3,(int)o->value());}
           xywh {52 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice pan_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Pan->changepar(4,(unsigned char)o->value())} open
+          callback {rkr->efx_Pan->changepar(4,(int)o->value())} open
           xywh {64 315 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
         Fl_Value_Slider pan_stdf {
           label {St.df}
-          callback {rkr->efx_Pan->changepar(5,(unsigned char)o->value());}
+          callback {rkr->efx_Pan->changepar(5,(int)o->value());}
           xywh {52 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Check_Button pan_extraon {
           label {Extra Stereo}
           user_data 2
-          callback {rkr->efx_Pan->changepar(8,(unsigned char)o->value())}
+          callback {rkr->efx_Pan->changepar(8,(int)o->value())}
           xywh {38 352 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider pan_extra {
           label {E.S.}
-          callback {rkr->efx_Pan->changepar(6,(unsigned char)o->value());}
+          callback {rkr->efx_Pan->changepar(6,(int)o->value());} selected
           xywh {52 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -11189,8 +11189,7 @@ Avail_Bro->select(1);} {}
     code {if(rkr->mess_dis) return;
 Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
-fl_message("This setting will be changed the next time you run rakarrack");} {selected
-    }
+fl_message("This setting will be changed the next time you run rakarrack");} {}
   }
   Function {update_looper()} {} {
     code {rkr->efx_Looper->getstate();

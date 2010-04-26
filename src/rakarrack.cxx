@@ -2640,63 +2640,63 @@ Fl_Menu_Item RKRGUI::menu_pan_preset[] = {
 };
 
 void RKRGUI::cb_pan_WD_i(SliderW* o, void*) {
-  rkr->efx_Pan->changepar(0,(unsigned char)(o->value()+64));
+  rkr->efx_Pan->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_pan_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_WD_i(o,v);
 }
 
 void RKRGUI::cb_pan_pan_i(SliderW* o, void*) {
-  rkr->efx_Pan->changepar(1,(unsigned char)(o->value()+64));
+  rkr->efx_Pan->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_pan_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_pan_i(o,v);
 }
 
 void RKRGUI::cb_pan_autopan_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(7,(unsigned char)o->value());
+  rkr->efx_Pan->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_pan_autopan(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_autopan_i(o,v);
 }
 
 void RKRGUI::cb_pan_freq_i(SliderW* o, void*) {
-  rkr->efx_Pan->changepar(2,(unsigned char)o->value());
+  rkr->efx_Pan->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_pan_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_freq_i(o,v);
 }
 
 void RKRGUI::cb_pan_rnd_i(SliderW* o, void*) {
-  rkr->efx_Pan->changepar(3,(unsigned char)o->value());
+  rkr->efx_Pan->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_pan_rnd(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_rnd_i(o,v);
 }
 
 void RKRGUI::cb_pan_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Pan->changepar(4,(unsigned char)o->value());
+  rkr->efx_Pan->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_pan_lfotype(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_lfotype_i(o,v);
 }
 
 void RKRGUI::cb_pan_stdf_i(SliderW* o, void*) {
-  rkr->efx_Pan->changepar(5,(unsigned char)o->value());
+  rkr->efx_Pan->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_pan_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_stdf_i(o,v);
 }
 
 void RKRGUI::cb_pan_extraon_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(8,(unsigned char)o->value());
+  rkr->efx_Pan->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_pan_extraon(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_extraon_i(o,v);
 }
 
 void RKRGUI::cb_pan_extra_i(SliderW* o, void*) {
-  rkr->efx_Pan->changepar(6,(unsigned char)o->value());
+  rkr->efx_Pan->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_pan_extra(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_extra_i(o,v);
