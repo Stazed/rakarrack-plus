@@ -34,9 +34,9 @@ public:
   Pan (float *efxoutl_, float *efxoutr_);
    ~Pan ();
   void out (float *smpsl, float *smpsr);
-  void setpreset (unsigned char npreset);
-  void changepar (int npar, unsigned char value);
-  unsigned char getpar (int npar);
+  void setpreset (int npreset);
+  void changepar (int npar, int value);
+  int getpar (int npar);
   void cleanup ();
 
 
@@ -50,9 +50,9 @@ public:
 
 private:
 
-  void setvolume (unsigned char Pvolume);
-  void setpanning (unsigned char Ppanning);
-  void setextra (unsigned char Pdepth);
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void setextra (int Pdepth);
 
   int Pvolume;
   int Ppanning;

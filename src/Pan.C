@@ -126,7 +126,7 @@ Pan::out (float *smpsl, float *smpsr)
 
 
 void
-Pan::setvolume (unsigned char Pvolume)
+Pan::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
@@ -135,7 +135,7 @@ Pan::setvolume (unsigned char Pvolume)
 
 
 void
-Pan::setpanning (unsigned char Ppanning)
+Pan::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning + .5f)/ 127.0f;
@@ -147,7 +147,7 @@ Pan::setpanning (unsigned char Ppanning)
 
 
 void
-Pan::setextra (unsigned char Pextra)
+Pan::setextra (int Pextra)
 {
   this->Pextra = Pextra;
   mul = 8.0f * (float)Pextra / 127.0f;
@@ -155,11 +155,11 @@ Pan::setextra (unsigned char Pextra)
 
 
 void
-Pan::setpreset (unsigned char npreset)
+Pan::setpreset (int npreset)
 {
   const int PRESET_SIZE = 9;
   const int NUM_PRESETS = 2;
-  unsigned char presets[NUM_PRESETS][PRESET_SIZE] = {
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
     //AutoPan
     {64, 64, 26, 0, 0, 0, 0, 1, 0},
     //Extra Stereo
@@ -178,7 +178,7 @@ Pan::setpreset (unsigned char npreset)
 
 
 void
-Pan::changepar (int npar, unsigned char value)
+Pan::changepar (int npar, int value)
 {
 
   switch (npar)
@@ -221,7 +221,7 @@ Pan::changepar (int npar, unsigned char value)
 };
 
 
-unsigned char
+int
 Pan::getpar (int npar)
 {
   switch (npar)
