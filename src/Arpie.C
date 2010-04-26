@@ -427,7 +427,7 @@ Arpie::getpar (int npar)
       return(Ppattern); 
       break;
     case 10:
-      return (Psubdiv);
+      return (Psubdiv - 1);
       break;
     };
   return (0);			//in case of bogus parameter number

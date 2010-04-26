@@ -1381,10 +1381,14 @@ RKR::New ()
 
   for (j = 0; j < NumEffects; j++)
     {
-      for (k = 0; k < 20; k++)
+      for (k = 0; k < 16; k++)
 	{
 	  lv[j][k] = presets[j][k];
+          
 	}
+    
+    	  lv[j][19] = 0;
+    
     }
 
 
@@ -1563,10 +1567,12 @@ RKR::New_Bank ()
 
       for (j = 0; j < NumEffects; j++)
 	{
-	  for (k = 0; k < 20; k++)
+	  for (k = 0; k < 16; k++)
 	    {
 	      Bank[i].lv[j][k] = presets[j][k];
 	    }
+	  Bank[i].lv[j][19] =0;
+	       
 	}
     
       memset(Bank[i].XUserMIDI, 0, sizeof(Bank[i].XUserMIDI));     

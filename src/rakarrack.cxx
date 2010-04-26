@@ -6052,6 +6052,7 @@ void RKRGUI::cb_BankWindow(Fl_Double_Window* o, void* v) {
 
 void RKRGUI::cb_NewB_i(Fl_Menu_*, void*) {
   rkr->New_Bank();
+Put_Loaded_Bank();
 BankWindow->redraw();
 }
 void RKRGUI::cb_NewB(Fl_Menu_* o, void* v) {

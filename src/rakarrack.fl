@@ -814,18 +814,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {337 219 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6125,7 +6123,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6146,7 +6144,7 @@ stomp_low->value(rkr->efx_StompBox->getpar(3));
 stomp_mid->value(rkr->efx_StompBox->getpar(2));
 stomp_high->value(rkr->efx_StompBox->getpar(1));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
+stomp_mode->value(rkr->efx_StompBox->getpar(5));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6238,7 +6236,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
             xywh {70 70 36 21} labelsize 9
           }
           MenuItem {} {
-            label {Mid Elves Own} selected
+            label {Mid Elves Own}
             xywh {80 80 36 21} labelsize 9
           }
         }
@@ -6614,7 +6612,7 @@ UpdateTGUI();
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1349 172 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {1342 165 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -6629,7 +6627,8 @@ save_stat(1);}
           MenuItem NewB {
             label New
             callback {rkr->New_Bank();
-BankWindow->redraw();}
+Put_Loaded_Bank();
+BankWindow->redraw();} selected
             xywh {0 0 45 26} divider
           }
           MenuItem Load_Bank {
@@ -8969,8 +8968,7 @@ JackIn->clear();
          
    }  
    
-   free(iports);} {selected
-    }
+   free(iports);} {}
   }
   Function {MiraConfig()} {} {
     code {int i = 1;
