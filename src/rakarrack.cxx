@@ -6812,6 +6812,13 @@ void RKRGUI::cb_aux_thres(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_aux_thres_i(o,v);
 }
 
+void RKRGUI::cb_aux_midi_i(Fl_Value_Input* o, void*) {
+  rkr->Aux_MIDI = (int)o->value();
+}
+void RKRGUI::cb_aux_midi(Fl_Value_Input* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_midi_i(o,v);
+}
+
 void RKRGUI::cb_aux_min_i(SliderW* o, void*) {
   rkr->Aux_Minimum = (int) o->value();
 }
@@ -15423,6 +15430,7 @@ ld");
       aux_midi->step(1);
       aux_midi->value(1);
       aux_midi->textsize(10);
+      aux_midi->callback((Fl_Callback*)cb_aux_midi);
     } // Fl_Value_Input* aux_midi
     { aux_min = new SliderW(100, 106, 100, 10, "Minimum");
       aux_min->type(5);
@@ -19421,13 +19429,20 @@ value = rkr->Aux_Minimum + lrintf((float)(rkr->Aux_Maximum - rkr->Aux_Minimum)* 
 
 if(value != rkr->last_auxvalue)
 {
+
+if(rkr->MIDIway)
+{
+
 for(i=0; i<20;i++)
     {
       if (rkr->XUserMIDI[rkr->Aux_MIDI][i])
           rkr->process_midi_controller_events(rkr->XUserMIDI[rkr->Aux_MIDI][i],value);
           else break;
    }        
-   
+
+}
+else rkr->process_midi_controller_events(rkr->Aux_MIDI,value);   
+
 rkr->last_auxvalue = value;
 
 }

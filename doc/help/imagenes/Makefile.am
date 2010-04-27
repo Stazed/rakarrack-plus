@@ -54,6 +54,7 @@ doc_DATA= icono_rakarrack_128x128.png \
 	seq.jpg \
 	shi.jpg \
 	sto.jpg \
+	aci.png \
 	pan.jpg
 	
 EXTRA_DIST = $(doc_DATA)

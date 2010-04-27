@@ -23,6 +23,7 @@
 
 
 
+
   
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   
@@ -100,8 +101,10 @@ Main Screen</a> <a href="#conn">Connecting</a> <a href="#pyb">Presets
 </p>
       <h3><a href="#midi">MIDI Converter</a></h3>
       <h3><a href="#tuner">Tuner</a></h3>
-      <h3><a href="#Tap">Tap Tempo</a><br>
+      <h3><a href="#Tap">Tap Tempo</a></h3>
+      <h3><a href="#ACI">Analog Control Interface</a><br>
       </h3>
+
       <h3><a href="#autores">Credits</a></h3>
       <h3><a href="#midispec">MIDI Implementation Chart</a></h3>
       <h3><a href="license.html">License</a></h3>
@@ -525,7 +528,8 @@ Jack ports Input and Output, you can select any of the available ports for each 
 </p>
 <p align="justify">If you select a single Input port, will be connected to the both rakarrack Input Ports.</p>
 <p align="justify">IMPORTANT: The number of
-selected Output ports needs to be an odd number, also the number of selected Input ports need to be a odd number if it's greater than 1.<br>
+selected Output ports needs to be an odd number, also the number of
+selected Input ports need to be a odd number if it's greater than 1.<br>
  </p>
 
 
@@ -2671,7 +2675,25 @@ updated, according to the preset and the Tempo.</p>
 <p><a href="help.html#top">Contents</a></p>
 
 <hr>
+<h2 class="western"><a name="ACI"></a>Analog Control Interface</h2><img style="width: 219px; height: 175px;" alt="rakarrack Analog Control Interface" src="imagenes/aci.png"><br>
+<br>
+<p>Analog Control Interface (ACI) is a way to control the value effect
+parameters with an analog signal, rakarrack use their audio jack port
+called Aux to meassure the signal and send this values like a MIDI
+value.That means that you can use your MIC as a WahWah pedal, or use a
+analog volume pedal like a WahWah,&nbsp; or to control whatever
+parameter you imagine. If you use MIDI Learn up to 20 parameters can be
+controloed by ACI.</p>
+<p>Gain and Threshold is for control the incoming signal.<br>
+</p>
+<p>Midi Control select the MIDI Control message to send.</p>
+<p>Maximum and Minimum control the minimum and maximum value you send.<br>
+</p>
+<a href="help.html#top">Contents</a><br>
+<hr style="width: 100%; height: 2px;"><br>
+<br>
 <h2 class="western"><a name="autores"></a>Credits</h2>
+
 
 <br>
 
