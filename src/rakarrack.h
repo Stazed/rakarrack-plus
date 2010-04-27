@@ -3278,11 +3278,7 @@ private:
   void cb_aux_thres_i(SliderW*, void*);
   static void cb_aux_thres(SliderW*, void*);
 public:
-  SliderW *aux_midi;
-private:
-  void cb_aux_midi_i(SliderW*, void*);
-  static void cb_aux_midi(SliderW*, void*);
-public:
+  Fl_Value_Input *aux_midi;
   SliderW *aux_min;
 private:
   void cb_aux_min_i(SliderW*, void*);

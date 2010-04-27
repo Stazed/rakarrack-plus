@@ -6812,13 +6812,6 @@ void RKRGUI::cb_aux_thres(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_aux_thres_i(o,v);
 }
 
-void RKRGUI::cb_aux_midi_i(SliderW* o, void*) {
-  rkr->Aux_MIDI = (int) o->value();
-}
-void RKRGUI::cb_aux_midi(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_midi_i(o,v);
-}
-
 void RKRGUI::cb_aux_min_i(SliderW* o, void*) {
   rkr->Aux_Minimum = (int) o->value();
 }
@@ -15388,7 +15381,7 @@ ld");
       aux_vu->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
       aux_vu->when(FL_WHEN_NEVER);
     } // NewVum* aux_vu
-    { aux_gain = new SliderW(99, 46, 100, 10, "Gain");
+    { aux_gain = new SliderW(99, 35, 100, 10, "Gain");
       aux_gain->type(5);
       aux_gain->box(FL_FLAT_BOX);
       aux_gain->color((Fl_Color)178);
@@ -15405,7 +15398,7 @@ ld");
       aux_gain->align(FL_ALIGN_LEFT);
       aux_gain->when(FL_WHEN_CHANGED);
     } // SliderW* aux_gain
-    { aux_thres = new SliderW(100, 66, 100, 10, "Threshold");
+    { aux_thres = new SliderW(100, 51, 100, 10, "Threshold");
       aux_thres->type(5);
       aux_thres->box(FL_FLAT_BOX);
       aux_thres->color((Fl_Color)178);
@@ -15422,22 +15415,15 @@ ld");
       aux_thres->align(FL_ALIGN_LEFT);
       aux_thres->when(FL_WHEN_CHANGED);
     } // SliderW* aux_thres
-    { aux_midi = new SliderW(100, 86, 100, 10, "MIDI Control");
-      aux_midi->type(5);
-      aux_midi->box(FL_FLAT_BOX);
-      aux_midi->color((Fl_Color)178);
-      aux_midi->selection_color((Fl_Color)62);
-      aux_midi->labeltype(FL_NORMAL_LABEL);
-      aux_midi->labelfont(0);
+    { aux_midi = new Fl_Value_Input(98, 72, 39, 22, "Midi Control");
       aux_midi->labelsize(10);
       aux_midi->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_midi->minimum(1);
       aux_midi->maximum(127);
       aux_midi->step(1);
-      aux_midi->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      aux_midi->callback((Fl_Callback*)cb_aux_midi);
-      aux_midi->align(FL_ALIGN_LEFT);
-      aux_midi->when(FL_WHEN_CHANGED);
-    } // SliderW* aux_midi
+      aux_midi->value(1);
+      aux_midi->textsize(10);
+    } // Fl_Value_Input* aux_midi
     { aux_min = new SliderW(100, 106, 100, 10, "Minimum");
       aux_min->type(5);
       aux_min->box(FL_FLAT_BOX);
