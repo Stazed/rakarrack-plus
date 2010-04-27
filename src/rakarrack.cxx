@@ -15785,10 +15785,15 @@ rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
 //Trigger
 
 rakarrack.get(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain,0);
+aux_gain->value(rkr->Aux_Gain);
 rakarrack.get(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold,0);
+aux_thres->value(rkr->Aux_Threshold);
 rakarrack.get(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI,1);
+aux_midi->value(rkr->Aux_MIDI);
 rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
+aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
+aux_max->value(rkr->Aux_Maximum);
 }
 
 void RKRGUI::save_stat(int i) {
@@ -15860,6 +15865,13 @@ rakarrack.set(rkr->PrefNom("Trigger X"),Trigger->x());
 rakarrack.set(rkr->PrefNom("Trigger Y"),Trigger->y());
 rakarrack.set(rkr->PrefNom("Trigger W"),Trigger->w());
 rakarrack.set(rkr->PrefNom("Trigger H"),Trigger->h());
+
+rakarrack.set(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain);
+rakarrack.set(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold);
+rakarrack.set(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI);
+rakarrack.set(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum);
+rakarrack.set(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum);
+
 }
 
 
@@ -15913,17 +15925,6 @@ rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
 rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
-
-
-rakarrack.set(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain);
-rakarrack.set(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold);
-rakarrack.set(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI);
-rakarrack.set(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum);
-rakarrack.set(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum);
-
-
-
-
 
 
 
@@ -19419,13 +19420,13 @@ void RKRGUI::UpdateTGUI() {
 void RKRGUI::ActACI() {
   int value;
 int i;
-float gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f - 40.0f); 
+float gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f); 
 float tmp = rkr->val_a_sum * gain;
 float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
 float threshold = (float) rkr->Aux_Threshold;
 aux_vu->value(aux_vulevel);
 
-if (aux_vulevel < threshold) return;
+if (aux_vulevel < threshold) tmp=0.0;
 
 if(tmp>1.0) tmp= 1.0f;
 
