@@ -3293,6 +3293,7 @@ private:
   void cb_aux_max_i(SliderW*, void*);
   static void cb_aux_max(SliderW*, void*);
 public:
+  Fl_Box *ACI_LABEL;
   RKRGUI(int argc, char**argv,RKR *rkr_);
   void Background_Color_Change(Fl_Color bcolor);
   void Label_Color_Change(Fl_Color bcolor);

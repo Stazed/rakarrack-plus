@@ -15471,10 +15471,10 @@ ld");
       aux_max->align(FL_ALIGN_LEFT);
       aux_max->when(FL_WHEN_CHANGED);
     } // SliderW* aux_max
-    { Fl_Box* o = new Fl_Box(50, 8, 135, 24, "Analog Control");
-      o->labelfont(1);
-      o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-    } // Fl_Box* o
+    { ACI_LABEL = new Fl_Box(50, 8, 135, 24, "Analog Control");
+      ACI_LABEL->labelfont(1);
+      ACI_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+    } // Fl_Box* ACI_LABEL
     Trigger->end();
   } // Fl_Double_Window* Trigger
   char tmp[64];
@@ -15609,6 +15609,7 @@ for (int t=0; t<MIDILearn->children();t++)
      w->color(fore_color);
   }  
 
+ACI_LABEL->labelcolor(fl_lighter(label_color));
 
 Fl::redraw();
 }
@@ -18873,6 +18874,7 @@ if(rkr->active[8]) L9->labelcolor(on); else L9->labelcolor(off);
 if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
 
+
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
@@ -19425,6 +19427,7 @@ aux_vu->value(aux_vulevel);
 
 if (aux_vulevel < threshold) return;
 
+if(tmp>1.0) tmp= 1.0f;
 
 value = rkr->Aux_Minimum + lrintf((float)(rkr->Aux_Maximum - rkr->Aux_Minimum)* tmp);
 
