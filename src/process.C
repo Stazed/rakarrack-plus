@@ -636,9 +636,12 @@ efx_FLimiter->Compressor_Change(9,1);
 
   old_i_sum = -0.0f;
   old_v_sum = -0.0f;
+  old_a_sum = -0.0f;
+  val_a_sum = -0.0f;
   val_i_sum = -0.0f;
   val_v_sum = -0.0f;
 
+  last_auxvalue = 0;
   note_old = 0;
   nfreq_old = 0;
   afreq_old = 0;
@@ -971,16 +974,18 @@ RKR::Control_Gain (float *origl, float *origr)
 
   int i;
   float i_sum = 1e-12f;
+  float a_sum = 1e-12f;
+
   float temp_sum;
   float tmp;
   
   if(upsample)
   {
   U_Resample->out(origl,origr,efxoutl,efxoutr,J_PERIOD,u_up);
-  if(checkforaux()) A_Resample->mono_out(auxdata,auxresampled,J_PERIOD,u_up);
+  if(checkforaux() || ACI_Bypass) A_Resample->mono_out(auxdata,auxresampled,J_PERIOD,u_up);
   }
   else
-  if(checkforaux()) memcpy(auxresampled,auxdata,sizeof(float)*J_PERIOD); 
+  if(checkforaux() || ACI_Bypass) memcpy(auxresampled,auxdata,sizeof(float)*J_PERIOD); 
 
   for (i = 0; i <= PERIOD; i++)
     {
@@ -997,6 +1002,25 @@ RKR::Control_Gain (float *origl, float *origr)
   val_sum = val_i_sum;
 
   
+  if(ACI_Bypass)
+  {
+      temp_sum = 0.0;
+      tmp = 0.0;
+      for (i = 0; i <= PERIOD; i++)
+      {
+        tmp = fabsf(auxresampled[i]);
+        if (tmp > a_sum) a_sum = tmp;
+      }
+
+      val_a_sum = .6f * old_a_sum + .4f * a_sum;
+      old_a_sum = val_a_sum;      
+   }
+
+
+
+
+
+
 }
 
 

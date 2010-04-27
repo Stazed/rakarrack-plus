@@ -824,12 +824,12 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {337 219 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1635 387 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -930,7 +930,24 @@ put_icon(MIDILearn);
 }
 else
 MIDILearn->hide();}
-            xywh {0 0 36 21} shortcut 0x65 labelcolor 7
+            xywh {0 0 36 21} shortcut 0x65 labelcolor 7 divider
+          }
+          MenuItem ACI_Menu {
+            label ACI
+            callback {if(!Trigger->visible())
+{
+Trigger->show();
+rkr->ACI_Bypass = 1;
+put_icon(Trigger);
+rkr->old_a_sum = 0.0;
+rkr->val_a_sum = 0.0;
+}
+else
+{
+Trigger->hide();
+rkr->ACI_Bypass = 0;
+}}
+            xywh {0 0 36 21} shortcut 0x61
           }
         }
         Submenu Ayuda {
@@ -1007,6 +1024,7 @@ if (preset!=1000)
 }
 
 ActMIDI();
+if(rkr->ACI_Bypass) ActACI();
 
 rkr->cpufp++;
 if(rkr->cpufp==40)
@@ -2967,7 +2985,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
         }
         Fl_Value_Slider pan_extra {
           label {E.S.}
-          callback {rkr->efx_Pan->changepar(6,(int)o->value());} selected
+          callback {rkr->efx_Pan->changepar(6,(int)o->value());}
           xywh {52 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -6709,7 +6727,7 @@ put_icon(AboutWin);}
     Fl_Window Order {
       callback {save_stat(2);
 Order->hide();}
-      xywh {1580 329 600 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
+      xywh {1566 315 600 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
         xywh {1 1 600 400}
@@ -6808,7 +6826,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1327 140 640 528} type Double color 4 hide
+      xywh {1320 133 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -7392,7 +7410,7 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
     Fl_Window AboutWin {
       label {About Rakarrack}
       callback {AboutWin->hide();}
-      xywh {825 96 375 235} type Double color 36 hide
+      xywh {818 89 375 235} type Double color 36 hide
     } {
       Fl_Box AB_Title {
         label Rakarrack
@@ -7440,6 +7458,54 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
         xywh {64 151 250 20} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
     }
+    Fl_Window Trigger {
+      callback {rkr->ACI_Bypass=0;
+Trigger->hide();
+save_stat(6);}
+      xywh {1634 157 205 145} type Double hide
+    } {
+      Fl_Box Fondo5 {
+        xywh {1 1 205 145}
+      }
+      Fl_Slider aux_vu {
+        xywh {5 18 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
+        class NewVum
+      }
+      Fl_Value_Slider aux_gain {
+        label Gain
+        callback {rkr->Aux_Gain = (int)o->value();}
+        xywh {99 46 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
+        class SliderW
+      }
+      Fl_Value_Slider aux_thres {
+        label Threshold
+        callback {rkr->Aux_Threshold = (int) o->value();}
+        xywh {100 66 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
+        class SliderW
+      }
+      Fl_Value_Slider aux_midi {
+        label {MIDI Control}
+        callback {rkr->Aux_MIDI = (int) o->value();}
+        xywh {100 86 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+        class SliderW
+      }
+      Fl_Value_Slider aux_min {
+        label Minimum
+        callback {rkr->Aux_Minimum = (int) o->value();}
+        xywh {100 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+        class SliderW
+      }
+      Fl_Value_Slider aux_max {
+        label Maximum
+        callback {rkr->Aux_Maximum = (int) o->value();}
+        xywh {100 126 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
+        class SliderW
+      }
+      Fl_Box {} {
+        label {Analog Control} selected
+        xywh {50 8 135 24} labelfont 1 labelcolor 7
+      }
+    }
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
@@ -7464,6 +7530,7 @@ Order->icon((char *)p);
 Settings->icon((char *)p);
 AboutWin->icon((char *)p);
 MIDILearn->icon((char *)p);
+Trigger->icon((char *)p);
 
 made=0;
 char tmp[256];
@@ -7488,6 +7555,9 @@ sprintf(tmp,"%s   v%s - Settings",rkr->jackcliname,VERSION);
 Settings->copy_label(tmp);
 sprintf(tmp,"%s   v%s - MIDI Learn",rkr->jackcliname,VERSION);
 MIDILearn->copy_label(tmp);
+sprintf(tmp,"%s   v%s - ACI",rkr->jackcliname,VERSION);
+Trigger->copy_label(tmp);
+
 load_stat();
 Put_Loaded();
 Principal->show(argc,argv);
@@ -7650,6 +7720,13 @@ rakarrack.get(rkr->PrefNom("MIDI Learn H"),h,480);
 
 MIDILearn->resize(x,y,w,h);
 
+rakarrack.get(rkr->PrefNom("Trigger X"),x,1);
+rakarrack.get(rkr->PrefNom("Trigger Y"),y,1);
+rakarrack.get(rkr->PrefNom("Trigger W"),w,205);
+rakarrack.get(rkr->PrefNom("Trigger H"),h,145);
+
+Trigger->resize(x,y,w,h);
+
 
 
 rakarrack.get(rkr->PrefNom("Settings X"),x,1);
@@ -7724,7 +7801,15 @@ T_TIMEOUT->value(rkr->t_timeout);
 rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
 T_SET->value(rkr->Tap_SetValue);
 
-rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);} {}
+rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
+
+//Trigger
+
+rakarrack.get(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain,0);
+rakarrack.get(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold,0);
+rakarrack.get(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI,1);
+rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
+rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -7789,6 +7874,13 @@ rakarrack.set(rkr->PrefNom("MIDI Learn H"),MIDILearn->h());
 }
 
 
+if (i==6)
+{
+rakarrack.set(rkr->PrefNom("Trigger X"),Trigger->x());
+rakarrack.set(rkr->PrefNom("Trigger Y"),Trigger->y());
+rakarrack.set(rkr->PrefNom("Trigger W"),Trigger->w());
+rakarrack.set(rkr->PrefNom("Trigger H"),Trigger->h());
+}
 
 
 
@@ -7841,6 +7933,20 @@ rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
 rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
+
+
+rakarrack.set(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain);
+rakarrack.set(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold);
+rakarrack.set(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI);
+rakarrack.set(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum);
+rakarrack.set(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum);
+
+
+
+
+
+
+
 
 int k=1;
 char temp1[128];
@@ -10685,6 +10791,8 @@ Fondo1->image(InOut->image());
 Fondo2->image(InOut->image());
 Fondo3->image(InOut->image());
 Fondo4->image(InOut->image());
+Fondo5->image(InOut->image());
+
 Etit->image(InOut->image());
 Ares->image(InOut->image());
 
@@ -11298,5 +11406,33 @@ looper_t2->redraw();} {}
    seq_tempo->value(rkr->efx_Sequence->getpar(9));
    seq_tempo->redraw();
   }} {}
+  }
+  Function {ActACI()} {} {
+    code {int value;
+int i;
+float gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f - 40.0f); 
+float tmp = rkr->val_a_sum * gain;
+float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
+float threshold = (float) rkr->Aux_Threshold;
+aux_vu->value(aux_vulevel);
+
+if (aux_vulevel < threshold) return;
+
+
+value = rkr->Aux_Minimum + lrintf((float)(rkr->Aux_Maximum - rkr->Aux_Minimum)* tmp);
+
+
+if(value != rkr->last_auxvalue)
+{
+for(i=0; i<20;i++)
+    {
+      if (rkr->XUserMIDI[rkr->Aux_MIDI][i])
+          rkr->process_midi_controller_events(rkr->XUserMIDI[rkr->Aux_MIDI][i],value);
+          else break;
+   }        
+   
+rkr->last_auxvalue = value;
+
+}} {}
   }
 } 

@@ -282,6 +282,7 @@ public:
   int MIDIConverter_Bypass;
   int Tuner_Bypass;
   int Tap_Bypass;
+  int ACI_Bypass;
   int Reverb_Bypass;
   int Chorus_Bypass;
   int Flanger_Bypass;
@@ -448,6 +449,14 @@ public:
   int mess_dis;  
   int numpi, numpo, numpa, numpmi, numpmo;
   int numpc;
+
+  int Aux_Gain;
+  int Aux_Threshold;
+  int Aux_MIDI;
+  int Aux_Minimum;
+  int Aux_Maximum;
+  int last_auxvalue;
+
   long Tap_time_Init;
 
   double Tap_timeB;
@@ -485,6 +494,9 @@ public:
   float old_v_sum;
   float val_v_sum;
   float val_i_sum;
+  float old_a_sum;
+  float val_a_sum;
+
 
   float bogomips;
   float looper_size;

@@ -890,6 +890,25 @@ void RKRGUI::cb_ML_Menu(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ML_Menu_i(o,v);
 }
 
+void RKRGUI::cb_ACI_Menu_i(Fl_Menu_*, void*) {
+  if(!Trigger->visible())
+{
+Trigger->show();
+rkr->ACI_Bypass = 1;
+put_icon(Trigger);
+rkr->old_a_sum = 0.0;
+rkr->val_a_sum = 0.0;
+}
+else
+{
+Trigger->hide();
+rkr->ACI_Bypass = 0;
+};
+}
+void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_ACI_Menu_i(o,v);
+}
+
 void RKRGUI::cb_Contenido_i(Fl_Menu_*, void*) {
   show_help();
 }
@@ -925,7 +944,8 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"&Bank", 0x62,  (Fl_Callback*)RKRGUI::cb_Bank_Menu, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"&Settings", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {"Preferences", 0x69,  (Fl_Callback*)RKRGUI::cb_Ajustes, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
- {"MIDI Learn", 0x65,  (Fl_Callback*)RKRGUI::cb_ML_Menu, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
+ {"MIDI Learn", 0x65,  (Fl_Callback*)RKRGUI::cb_ML_Menu, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
+ {"ACI", 0x61,  (Fl_Callback*)RKRGUI::cb_ACI_Menu, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"&Help", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
  {"Help Contents", 0xffbe,  (Fl_Callback*)RKRGUI::cb_Contenido, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
@@ -945,9 +965,10 @@ Fl_Menu_Item* RKRGUI::salir = RKRGUI::menu_MenuP + 8;
 Fl_Menu_Item* RKRGUI::Bank_Menu = RKRGUI::menu_MenuP + 10;
 Fl_Menu_Item* RKRGUI::Ajustes = RKRGUI::menu_MenuP + 12;
 Fl_Menu_Item* RKRGUI::ML_Menu = RKRGUI::menu_MenuP + 13;
-Fl_Menu_Item* RKRGUI::Ayuda = RKRGUI::menu_MenuP + 15;
-Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 16;
-Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 17;
+Fl_Menu_Item* RKRGUI::ACI_Menu = RKRGUI::menu_MenuP + 14;
+Fl_Menu_Item* RKRGUI::Ayuda = RKRGUI::menu_MenuP + 16;
+Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 17;
+Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 18;
 
 void RKRGUI::cb_MT_i(Fl_Box*, void*) {
   if (rkr->Tuner_Bypass)
@@ -1000,6 +1021,7 @@ if (preset!=1000)
 }
 
 ActMIDI();
+if(rkr->ACI_Bypass) ActACI();
 
 rkr->cpufp++;
 if(rkr->cpufp==40)
@@ -6765,6 +6787,50 @@ void RKRGUI::cb_OK_i(Fl_Button*, void*) {
 }
 void RKRGUI::cb_OK(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_OK_i(o,v);
+}
+
+void RKRGUI::cb_Trigger_i(Fl_Double_Window*, void*) {
+  rkr->ACI_Bypass=0;
+Trigger->hide();
+save_stat(6);
+}
+void RKRGUI::cb_Trigger(Fl_Double_Window* o, void* v) {
+  ((RKRGUI*)(o->user_data()))->cb_Trigger_i(o,v);
+}
+
+void RKRGUI::cb_aux_gain_i(SliderW* o, void*) {
+  rkr->Aux_Gain = (int)o->value();
+}
+void RKRGUI::cb_aux_gain(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_gain_i(o,v);
+}
+
+void RKRGUI::cb_aux_thres_i(SliderW* o, void*) {
+  rkr->Aux_Threshold = (int) o->value();
+}
+void RKRGUI::cb_aux_thres(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_thres_i(o,v);
+}
+
+void RKRGUI::cb_aux_midi_i(SliderW* o, void*) {
+  rkr->Aux_MIDI = (int) o->value();
+}
+void RKRGUI::cb_aux_midi(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_midi_i(o,v);
+}
+
+void RKRGUI::cb_aux_min_i(SliderW* o, void*) {
+  rkr->Aux_Minimum = (int) o->value();
+}
+void RKRGUI::cb_aux_min(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_min_i(o,v);
+}
+
+void RKRGUI::cb_aux_max_i(SliderW* o, void*) {
+  rkr->Aux_Maximum = (int) o->value();
+}
+void RKRGUI::cb_aux_max(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_max_i(o,v);
 }
 
 Fl_Double_Window* RKRGUI::make_window() {
@@ -15302,10 +15368,119 @@ ld");
     } // Fl_Box* AB_A4
     AboutWin->end();
   } // Fl_Double_Window* AboutWin
+  { Trigger = new Fl_Double_Window(205, 145);
+    Trigger->callback((Fl_Callback*)cb_Trigger, (void*)(this));
+    { Fondo5 = new Fl_Box(1, 1, 205, 145);
+    } // Fl_Box* Fondo5
+    { aux_vu = new NewVum(5, 18, 15, 122);
+      aux_vu->type(2);
+      aux_vu->box(FL_NO_BOX);
+      aux_vu->color((Fl_Color)178);
+      aux_vu->selection_color((Fl_Color)90);
+      aux_vu->labeltype(FL_NORMAL_LABEL);
+      aux_vu->labelfont(0);
+      aux_vu->labelsize(14);
+      aux_vu->labelcolor((Fl_Color)FL_FOREGROUND_COLOR);
+      aux_vu->minimum(15);
+      aux_vu->maximum(-48);
+      aux_vu->step(1);
+      aux_vu->value(-48);
+      aux_vu->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
+      aux_vu->when(FL_WHEN_NEVER);
+    } // NewVum* aux_vu
+    { aux_gain = new SliderW(99, 46, 100, 10, "Gain");
+      aux_gain->type(5);
+      aux_gain->box(FL_FLAT_BOX);
+      aux_gain->color((Fl_Color)178);
+      aux_gain->selection_color((Fl_Color)62);
+      aux_gain->labeltype(FL_NORMAL_LABEL);
+      aux_gain->labelfont(0);
+      aux_gain->labelsize(10);
+      aux_gain->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_gain->minimum(1);
+      aux_gain->maximum(127);
+      aux_gain->step(1);
+      aux_gain->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_gain->callback((Fl_Callback*)cb_aux_gain);
+      aux_gain->align(FL_ALIGN_LEFT);
+      aux_gain->when(FL_WHEN_CHANGED);
+    } // SliderW* aux_gain
+    { aux_thres = new SliderW(100, 66, 100, 10, "Threshold");
+      aux_thres->type(5);
+      aux_thres->box(FL_FLAT_BOX);
+      aux_thres->color((Fl_Color)178);
+      aux_thres->selection_color((Fl_Color)62);
+      aux_thres->labeltype(FL_NORMAL_LABEL);
+      aux_thres->labelfont(0);
+      aux_thres->labelsize(10);
+      aux_thres->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_thres->minimum(-70);
+      aux_thres->maximum(20);
+      aux_thres->step(1);
+      aux_thres->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_thres->callback((Fl_Callback*)cb_aux_thres);
+      aux_thres->align(FL_ALIGN_LEFT);
+      aux_thres->when(FL_WHEN_CHANGED);
+    } // SliderW* aux_thres
+    { aux_midi = new SliderW(100, 86, 100, 10, "MIDI Control");
+      aux_midi->type(5);
+      aux_midi->box(FL_FLAT_BOX);
+      aux_midi->color((Fl_Color)178);
+      aux_midi->selection_color((Fl_Color)62);
+      aux_midi->labeltype(FL_NORMAL_LABEL);
+      aux_midi->labelfont(0);
+      aux_midi->labelsize(10);
+      aux_midi->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_midi->maximum(127);
+      aux_midi->step(1);
+      aux_midi->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_midi->callback((Fl_Callback*)cb_aux_midi);
+      aux_midi->align(FL_ALIGN_LEFT);
+      aux_midi->when(FL_WHEN_CHANGED);
+    } // SliderW* aux_midi
+    { aux_min = new SliderW(100, 106, 100, 10, "Minimum");
+      aux_min->type(5);
+      aux_min->box(FL_FLAT_BOX);
+      aux_min->color((Fl_Color)178);
+      aux_min->selection_color((Fl_Color)62);
+      aux_min->labeltype(FL_NORMAL_LABEL);
+      aux_min->labelfont(0);
+      aux_min->labelsize(10);
+      aux_min->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_min->maximum(127);
+      aux_min->step(1);
+      aux_min->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_min->callback((Fl_Callback*)cb_aux_min);
+      aux_min->align(FL_ALIGN_LEFT);
+      aux_min->when(FL_WHEN_CHANGED);
+    } // SliderW* aux_min
+    { aux_max = new SliderW(100, 126, 100, 10, "Maximum");
+      aux_max->type(5);
+      aux_max->box(FL_FLAT_BOX);
+      aux_max->color((Fl_Color)178);
+      aux_max->selection_color((Fl_Color)62);
+      aux_max->labeltype(FL_NORMAL_LABEL);
+      aux_max->labelfont(0);
+      aux_max->labelsize(10);
+      aux_max->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_max->maximum(127);
+      aux_max->step(1);
+      aux_max->value(127);
+      aux_max->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      aux_max->callback((Fl_Callback*)cb_aux_max);
+      aux_max->align(FL_ALIGN_LEFT);
+      aux_max->when(FL_WHEN_CHANGED);
+    } // SliderW* aux_max
+    { Fl_Box* o = new Fl_Box(50, 8, 135, 24, "Analog Control");
+      o->labelfont(1);
+      o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+    } // Fl_Box* o
+    Trigger->end();
+  } // Fl_Double_Window* Trigger
   char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);
-  return AboutWin;
+  return Trigger;
 }
 
 RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
@@ -15327,6 +15502,7 @@ Order->icon((char *)p);
 Settings->icon((char *)p);
 AboutWin->icon((char *)p);
 MIDILearn->icon((char *)p);
+Trigger->icon((char *)p);
 
 made=0;
 char tmp[256];
@@ -15351,6 +15527,9 @@ sprintf(tmp,"%s   v%s - Settings",rkr->jackcliname,VERSION);
 Settings->copy_label(tmp);
 sprintf(tmp,"%s   v%s - MIDI Learn",rkr->jackcliname,VERSION);
 MIDILearn->copy_label(tmp);
+sprintf(tmp,"%s   v%s - ACI",rkr->jackcliname,VERSION);
+Trigger->copy_label(tmp);
+
 load_stat();
 Put_Loaded();
 Principal->show(argc,argv);
@@ -15519,6 +15698,13 @@ rakarrack.get(rkr->PrefNom("MIDI Learn H"),h,480);
 
 MIDILearn->resize(x,y,w,h);
 
+rakarrack.get(rkr->PrefNom("Trigger X"),x,1);
+rakarrack.get(rkr->PrefNom("Trigger Y"),y,1);
+rakarrack.get(rkr->PrefNom("Trigger W"),w,205);
+rakarrack.get(rkr->PrefNom("Trigger H"),h,145);
+
+Trigger->resize(x,y,w,h);
+
 
 
 rakarrack.get(rkr->PrefNom("Settings X"),x,1);
@@ -15594,6 +15780,14 @@ rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
 T_SET->value(rkr->Tap_SetValue);
 
 rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
+
+//Trigger
+
+rakarrack.get(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain,0);
+rakarrack.get(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold,0);
+rakarrack.get(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI,1);
+rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
+rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
 }
 
 void RKRGUI::save_stat(int i) {
@@ -15659,6 +15853,13 @@ rakarrack.set(rkr->PrefNom("MIDI Learn H"),MIDILearn->h());
 }
 
 
+if (i==6)
+{
+rakarrack.set(rkr->PrefNom("Trigger X"),Trigger->x());
+rakarrack.set(rkr->PrefNom("Trigger Y"),Trigger->y());
+rakarrack.set(rkr->PrefNom("Trigger W"),Trigger->w());
+rakarrack.set(rkr->PrefNom("Trigger H"),Trigger->h());
+}
 
 
 
@@ -15711,6 +15912,20 @@ rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
 rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
+
+
+rakarrack.set(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain);
+rakarrack.set(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold);
+rakarrack.set(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI);
+rakarrack.set(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum);
+rakarrack.set(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum);
+
+
+
+
+
+
+
 
 int k=1;
 char temp1[128];
@@ -18571,6 +18786,8 @@ Fondo1->image(InOut->image());
 Fondo2->image(InOut->image());
 Fondo3->image(InOut->image());
 Fondo4->image(InOut->image());
+Fondo5->image(InOut->image());
+
 Etit->image(InOut->image());
 Ares->image(InOut->image());
 
@@ -19195,4 +19412,33 @@ void RKRGUI::UpdateTGUI() {
    seq_tempo->value(rkr->efx_Sequence->getpar(9));
    seq_tempo->redraw();
   }
+}
+
+void RKRGUI::ActACI() {
+  int value;
+int i;
+float gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f - 40.0f); 
+float tmp = rkr->val_a_sum * gain;
+float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
+float threshold = (float) rkr->Aux_Threshold;
+aux_vu->value(aux_vulevel);
+
+if (aux_vulevel < threshold) return;
+
+
+value = rkr->Aux_Minimum + lrintf((float)(rkr->Aux_Maximum - rkr->Aux_Minimum)* tmp);
+
+
+if(value != rkr->last_auxvalue)
+{
+for(i=0; i<20;i++)
+    {
+      if (rkr->XUserMIDI[rkr->Aux_MIDI][i])
+          rkr->process_midi_controller_events(rkr->XUserMIDI[rkr->Aux_MIDI][i],value);
+          else break;
+   }        
+   
+rkr->last_auxvalue = value;
+
+}
 }

@@ -142,6 +142,11 @@ private:
   void cb_ML_Menu_i(Fl_Menu_*, void*);
   static void cb_ML_Menu(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *ACI_Menu;
+private:
+  void cb_ACI_Menu_i(Fl_Menu_*, void*);
+  static void cb_ACI_Menu(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *Ayuda;
   static Fl_Menu_Item *Contenido;
 private:
@@ -3256,6 +3261,38 @@ private:
   static void cb_OK(Fl_Button*, void*);
 public:
   Fl_Box *AB_A4;
+  Fl_Double_Window *Trigger;
+private:
+  void cb_Trigger_i(Fl_Double_Window*, void*);
+  static void cb_Trigger(Fl_Double_Window*, void*);
+public:
+  Fl_Box *Fondo5;
+  NewVum *aux_vu;
+  SliderW *aux_gain;
+private:
+  void cb_aux_gain_i(SliderW*, void*);
+  static void cb_aux_gain(SliderW*, void*);
+public:
+  SliderW *aux_thres;
+private:
+  void cb_aux_thres_i(SliderW*, void*);
+  static void cb_aux_thres(SliderW*, void*);
+public:
+  SliderW *aux_midi;
+private:
+  void cb_aux_midi_i(SliderW*, void*);
+  static void cb_aux_midi(SliderW*, void*);
+public:
+  SliderW *aux_min;
+private:
+  void cb_aux_min_i(SliderW*, void*);
+  static void cb_aux_min(SliderW*, void*);
+public:
+  SliderW *aux_max;
+private:
+  void cb_aux_max_i(SliderW*, void*);
+  static void cb_aux_max(SliderW*, void*);
+public:
   RKRGUI(int argc, char**argv,RKR *rkr_);
   void Background_Color_Change(Fl_Color bcolor);
   void Label_Color_Change(Fl_Color bcolor);
@@ -3294,5 +3331,6 @@ public:
   void Show_Next_Time();
   void update_looper();
   void UpdateTGUI();
+  void ActACI();
 };
 #endif
