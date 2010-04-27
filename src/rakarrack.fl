@@ -7816,8 +7816,7 @@ aux_midi->value(rkr->Aux_MIDI);
 rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
 aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
-aux_max->value(rkr->Aux_Maximum);} {selected
-    }
+aux_max->value(rkr->Aux_Maximum);} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -11414,7 +11413,7 @@ looper_t2->redraw();} {}
   }
   Function {ActACI()} {} {
     code {int value;
-int i;
+int i,amax,amin;
 float gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f); 
 float tmp = rkr->val_a_sum * gain;
 float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
@@ -11425,7 +11424,20 @@ if (aux_vulevel < threshold) tmp=0.0;
 
 if(tmp>1.0) tmp= 1.0f;
 
-value = rkr->Aux_Minimum + lrintf((float)(rkr->Aux_Maximum - rkr->Aux_Minimum)* tmp);
+if(rkr->Aux_Maximum >= rkr->Aux_Minimum)
+{
+ amax = rkr->Aux_Maximum;
+ amin = rkr->Aux_Minimum;
+}
+else
+{
+ amax = rkr->Aux_Minimum;
+ amin = rkr->Aux_Maximum;
+}
+
+
+
+value = amin + lrintf((float)(amax - amin)* tmp);
 
 
 if(value != rkr->last_auxvalue)
@@ -11446,6 +11458,7 @@ else rkr->process_midi_controller_events(rkr->Aux_MIDI,value);
 
 rkr->last_auxvalue = value;
 
-}} {}
+}} {selected
+    }
   }
 } 

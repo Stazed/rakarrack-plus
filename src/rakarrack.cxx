@@ -19415,7 +19415,7 @@ void RKRGUI::UpdateTGUI() {
 
 void RKRGUI::ActACI() {
   int value;
-int i;
+int i,amax,amin;
 float gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f); 
 float tmp = rkr->val_a_sum * gain;
 float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
@@ -19426,7 +19426,20 @@ if (aux_vulevel < threshold) tmp=0.0;
 
 if(tmp>1.0) tmp= 1.0f;
 
-value = rkr->Aux_Minimum + lrintf((float)(rkr->Aux_Maximum - rkr->Aux_Minimum)* tmp);
+if(rkr->Aux_Maximum >= rkr->Aux_Minimum)
+{
+ amax = rkr->Aux_Maximum;
+ amin = rkr->Aux_Minimum;
+}
+else
+{
+ amax = rkr->Aux_Minimum;
+ amin = rkr->Aux_Maximum;
+}
+
+
+
+value = amin + lrintf((float)(amax - amin)* tmp);
 
 
 if(value != rkr->last_auxvalue)
