@@ -7781,6 +7781,8 @@ if(rkr->init_state)
 
 rakarrack.get(rkr->PrefNom("Midi Out Channel"),k,1);
 Midi_out_Counter->value(k);
+Midi_out_Counter->do_callback();
+
 rkr->efx_MIDIConverter->setmidichannel(k);
  
 rakarrack.get(rkr->PrefNom("Trigger Adjust"),k,4);
@@ -7814,7 +7816,8 @@ aux_midi->value(rkr->Aux_MIDI);
 rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
 aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
-aux_max->value(rkr->Aux_Maximum);} {}
+aux_max->value(rkr->Aux_Maximum);} {selected
+    }
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -11443,7 +11446,6 @@ else rkr->process_midi_controller_events(rkr->Aux_MIDI,value);
 
 rkr->last_auxvalue = value;
 
-}} {selected
-    }
+}} {}
   }
 } 

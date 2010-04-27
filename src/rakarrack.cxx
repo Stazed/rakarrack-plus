@@ -15754,6 +15754,8 @@ if(rkr->init_state)
 
 rakarrack.get(rkr->PrefNom("Midi Out Channel"),k,1);
 Midi_out_Counter->value(k);
+Midi_out_Counter->do_callback();
+
 rkr->efx_MIDIConverter->setmidichannel(k);
  
 rakarrack.get(rkr->PrefNom("Trigger Adjust"),k,4);

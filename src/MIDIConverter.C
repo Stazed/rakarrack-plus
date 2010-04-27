@@ -338,7 +338,7 @@ MIDIConverter::panic ()
 void
 MIDIConverter::setmidichannel (int chan)
 {
-  channel = chan - 1;
+  channel = chan;
 
 };
 
