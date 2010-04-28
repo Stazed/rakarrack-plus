@@ -314,10 +314,10 @@ int i;
 
     ranti->filterout(smpsr);
     lanti->filterout(smpsl);
+    rwshape2->waveshapesmps (PERIOD, smpsr, 25, Pgain, 1);  //JFET
+    lwshape2->waveshapesmps (PERIOD, smpsl, 25, Pgain, 1);   
     lpre2->filterout(smpsl);
     rpre2->filterout(smpsr);    
-    rwshape2->waveshapesmps (PERIOD, smpsr, 25, Pgain, 1);  //JFET
-    lwshape2->waveshapesmps (PERIOD, smpsl, 25, Pgain, 1);      
    
      for (i = 0; i<PERIOD; i++)
     {
