@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -814,16 +814,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1635 387 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6141,7 +6143,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6162,7 +6164,7 @@ stomp_low->value(rkr->efx_StompBox->getpar(3));
 stomp_mid->value(rkr->efx_StompBox->getpar(2));
 stomp_high->value(rkr->efx_StompBox->getpar(1));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(5));}
+stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6192,6 +6194,10 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
           MenuItem {} {
             label {Sharp Metal}
             xywh {40 40 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Classic Fuzz} selected
+            xywh {50 50 36 21} labelsize 10
           }
         }
         Fl_Value_Slider stomp_WD {
@@ -6256,6 +6262,10 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
           MenuItem {} {
             label {Mid Elves Own}
             xywh {80 80 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label Fuzz
+            xywh {90 90 36 21} labelsize 9
           }
         }
       }
@@ -6432,7 +6442,7 @@ rkr->modified=0;
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -7509,7 +7519,7 @@ save_stat(6);}
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
   } {
     code {fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
@@ -11458,7 +11468,6 @@ else rkr->process_midi_controller_events(rkr->Aux_MIDI,value);
 
 rkr->last_auxvalue = value;
 
-}} {selected
-    }
+}} {}
   }
 } 

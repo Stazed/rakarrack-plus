@@ -291,30 +291,31 @@ int i;
           
     lpre1->filterout(smpsl);
     rpre1->filterout(smpsr);
-    rwshape->waveshapesmps (PERIOD, smpsl, 19, 25, 1);  //compression
-    lwshape->waveshapesmps (PERIOD, smpsr, 19, 25, 1);   
+    
+    rwshape->waveshapesmps (PERIOD, smpsr, 19, 25, 1);  //compression
+    lwshape->waveshapesmps (PERIOD, smpsl, 19, 25, 1);   
     
     for (i = 0; i<PERIOD; i++)
     {
+
     //left channel
     mfilter =  ltonemd->filterout_s(smpsl[i]); 
-  
+
     templ = lpost->filterout_s(fabs(smpsl[i]));
     tempr = rpost->filterout_s(fabs(smpsr[i]));   //dynamic symmetry   
     
     smpsl[i] += lowb*templ + midb*mfilter;      //In this case, lowb control tweaks symmetry
     
     //Right channel
-    mfilter =  rtonemd->filterout_s(smpsr[i]); 
-     
+    mfilter =  rtonemd->filterout_s(smpsr[i]);   
     smpsr[i] += lowb*tempr + midb*mfilter;      
        
     }
 
     ranti->filterout(smpsr);
     lanti->filterout(smpsl);
-    rwshape->waveshapesmps (PERIOD, smpsl, 25, Pgain, 1);  //JFET
-    lwshape->waveshapesmps (PERIOD, smpsr, 25, Pgain, 1);      
+    rwshape2->waveshapesmps (PERIOD, smpsr, 25, Pgain, 1);  //JFET
+    lwshape2->waveshapesmps (PERIOD, smpsl, 25, Pgain, 1);      
     lpre2->filterout(smpsl);
     rpre2->filterout(smpsr);    
      for (i = 0; i<PERIOD; i++)
@@ -652,7 +653,7 @@ switch (value)
   sinput = 0;
   
   tpre1 = 0;
-  fpre1 = 2500.0f;
+  fpre1 = 4500.0f;
   qpre1 = 1.0f;
   spre1 = 1;
   
@@ -662,9 +663,9 @@ switch (value)
   spre2 = 0;
   
   tpost = 0;
-  fpost = 15.0f;
+  fpost = 2.0f;
   qpost = 1.0f;
-  spost = 1;
+  spost = 0;
   
   ttonehg = 1;
   ftonehg = 397.0f;
@@ -672,8 +673,8 @@ switch (value)
   stonehg = 0;
   
   ttonemd = 4;
-  ftonemd = 475.0f;  //sort of like a stuck wahwah
-  qtonemd = 6.0f;
+  ftonemd = 515.0f;  //sort of like a stuck wahwah
+  qtonemd = 4.0f;
   stonemd = 0;
   
   ttonelw = 0;
@@ -790,14 +791,16 @@ void StompBox::init_tone ()
     
     if (highb > 0.0f) highb = HG * ((float) Phigh)/64.0f;    
     if (lowb > 0.0f) lowb = LG * ((float) Plow)/64.0f;
-    if (midb > 0.0f) midb = MG * ((float) Plow)/64.0f;
+    if (midb > 0.0f) midb = MG * ((float) Pmid)/64.0f;
     break;
     
     case 7:
-    highb = ((float) Phigh + 64)/127.0f
-    varf = 15.0f + gain * 150.0f;
-    lpre1->setfreq(spre1);    
-    lpre2->setfreq(tpre2);
+    highb = ((float) Phigh + 64)/127.0f;
+    varf = 125.0f + gain * 125.0f;
+    lpre1->setfreq(varf);    
+    rpre1->setfreq(varf);
+     if (midb > 0.0f) midb = ((float) Pmid)/8.0f;   
+    lowb = ((float) Plow)/64.0f;
     break;
 
     
