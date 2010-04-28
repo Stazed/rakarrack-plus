@@ -451,7 +451,43 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	     
 	   };	
 	  break;       
-         
+
+       case 26: //JFET
+      
+        ws = powf (35.0f, ws * ws) + 4.0f;
+	factor = sqrt(1.0f / ws);
+        smps[i] = smps[i] + sqrt(1.0f / ws); 
+        for (i = 0; i < n; i++)
+	{
+        smps[i] = smps[i] + factor; 
+        if(smps[i] < 0.0) smps[i] = 0.0f;
+	
+	smps[i] = 1.0f - 2.0f/(ws*smps[i]*smps[i] + 1.0f);
+  
+        } 
+        break;  
+	
+       case 27: //dyno JFET
+      
+        ws = powf (35.0f, ws * ws) + 4.0f;
+        smps[i] = smps[i] + sqrt((1.0f + dyno) / ws); 
+        for (i = 0; i < n; i++)
+	{
+  
+        smps[i] = smps[i] + sqrt(1.0f / ws); 
+        if(smps[i] < 0.0) smps[i] = 0.0f;
+	
+	smps[i] = 1.0f - 2.0f/(ws*smps[i]*smps[i] + 1.0f);
+	 
+		   tmpv = fabs(smps[i]);
+		   if(tmpv > 0.15f)  // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
+		   {
+  		    dyno += (1.0f - dynodecay) * tmpv;
+		    dyno *= dynodecay;	
+		     }
+        } 
+        break; 	
+	      
  
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions
     };

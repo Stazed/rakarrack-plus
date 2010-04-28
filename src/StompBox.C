@@ -286,7 +286,53 @@ int i;
     } 
 
     break;
+    
+    case 7:          //Classic Fuzz
+          
+    lpre1->filterout(smpsl);
+    rpre1->filterout(smpsr);
+    rwshape->waveshapesmps (PERIOD, smpsl, 19, 25, 1);  //compression
+    lwshape->waveshapesmps (PERIOD, smpsr, 19, 25, 1);   
+    
+    for (i = 0; i<PERIOD; i++)
+    {
+    //left channel
+    mfilter =  ltonemd->filterout_s(smpsl[i]); 
+  
+    templ = lpost->filterout_s(fabs(smpsl[i]));
+    tempr = rpost->filterout_s(fabs(smpsr[i]));   //dynamic symmetry   
+    
+    smpsl[i] += lowb*templ + midb*mfilter;      //In this case, lowb control tweaks symmetry
+    
+    //Right channel
+    mfilter =  rtonemd->filterout_s(smpsr[i]); 
+     
+    smpsr[i] += lowb*tempr + midb*mfilter;      
+       
+    }
 
+    ranti->filterout(smpsr);
+    lanti->filterout(smpsl);
+    rwshape->waveshapesmps (PERIOD, smpsl, 25, Pgain, 1);  //JFET
+    lwshape->waveshapesmps (PERIOD, smpsr, 25, Pgain, 1);      
+    lpre2->filterout(smpsl);
+    rpre2->filterout(smpsr);    
+     for (i = 0; i<PERIOD; i++)
+    {
+    //left channel
+    lfilter =  ltonelw->filterout_s(smpsl[i]);
+    hfilter =  ltonehg->filterout_s(smpsl[i]);  
+    
+    efxoutl[i] = volume * ((1.0f - highb)*lfilter + highb*hfilter);  //classic BMP tone stack
+    
+    //Right channel
+    lfilter =  rtonelw->filterout_s(smpsr[i]);
+    hfilter =  rtonehg->filterout_s(smpsr[i]);  
+    
+    efxoutr[i] = volume * ((1.0f - highb)*lfilter + highb*hfilter);      
+       
+    }   
+    break;
    } 
 
 
@@ -310,7 +356,7 @@ void StompBox::init_mode (int value)
   int spre1 = 0;
   
   int tpre2 = 1;
-  float fpre2 = 220.0f;
+  float fpre2 = 30.0f;
   float qpre2 = 1.0f;
   int spre2 = 0;
   
@@ -599,6 +645,42 @@ switch (value)
     
   break; 
 
+  case 7:  //Classic Fuzz
+  tinput = 1;
+  finput = 80.0f;
+  qinput = 1.0f;
+  sinput = 0;
+  
+  tpre1 = 0;
+  fpre1 = 2500.0f;
+  qpre1 = 1.0f;
+  spre1 = 1;
+  
+  tpre2 = 1;
+  fpre2 = 40.0f;
+  qpre2 = 1.0f;
+  spre2 = 0;
+  
+  tpost = 0;
+  fpost = 15.0f;
+  qpost = 1.0f;
+  spost = 1;
+  
+  ttonehg = 1;
+  ftonehg = 397.0f;
+  qtonehg = 1.0f;
+  stonehg = 0;
+  
+  ttonemd = 4;
+  ftonemd = 475.0f;  //sort of like a stuck wahwah
+  qtonemd = 6.0f;
+  stonemd = 0;
+  
+  ttonelw = 0;
+  ftonelw = 295.0f;
+  qtonelw = 1.0f;
+  stonelw = 0;    
+  break;
   }
    
   //left channel filters
@@ -710,6 +792,13 @@ void StompBox::init_tone ()
     if (lowb > 0.0f) lowb = LG * ((float) Plow)/64.0f;
     if (midb > 0.0f) midb = MG * ((float) Plow)/64.0f;
     break;
+    
+    case 7:
+    highb = ((float) Phigh + 64)/127.0f
+    varf = 15.0f + gain * 150.0f;
+    lpre1->setfreq(spre1);    
+    lpre2->setfreq(tpre2);
+    break;
 
     
     }
@@ -728,7 +817,7 @@ void
 StompBox::setpreset (int npreset)
 {
   const int PRESET_SIZE = 6;
-  const int NUM_PRESETS = 7;
+  const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
     {48, 32, 0, 32, 65, 0},
@@ -744,7 +833,8 @@ StompBox::setpreset (int npreset)
     {38, 6, 6, 6, 105, 5},    
     //Mid Elve
     {48, 0, -12, 0, 127, 6},    
-    
+    //Fuzz
+    {48, 0, 0, 0, 127, 7}    
   };
 
 
