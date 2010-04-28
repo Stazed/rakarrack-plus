@@ -456,14 +456,11 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
       
         ws = powf (35.0f, ws * ws) + 4.0f;
 	factor = sqrt(1.0f / ws);
-        smps[i] = smps[i] + sqrt(1.0f / ws); 
         for (i = 0; i < n; i++)
 	{
         smps[i] = smps[i] + factor; 
         if(smps[i] < 0.0) smps[i] = 0.0f;
-	
 	smps[i] = 1.0f - 2.0f/(ws*smps[i]*smps[i] + 1.0f);
-  
         } 
         break;  
 	
@@ -473,17 +470,18 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
         for (i = 0; i < n; i++)
 	{
-	smps[i] = smps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
-        if(smps[i] < 0.0) smps[i] = 0.0f;
-	
-	smps[i] = 1.0f - 2.0f/(ws*smps[i]*smps[i] + 1.0f);
-	 
 		   tmpv = fabs(smps[i]);
 		   if(tmpv > 0.15f)  // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
 		   {
   		    dyno += (1.0f - dynodecay) * tmpv;
 		     }
-		     dyno *= dynodecay;  //always decays	
+		     dyno *= dynodecay;  //always decays
+	smps[i] = smps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
+        if(smps[i] < 0.0) smps[i] = 0.0f;
+	
+	smps[i] = 1.0f - 2.0f/(ws*smps[i]*smps[i] + 1.0f);
+	 
+	
         } 
         break; 	
 	      

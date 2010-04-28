@@ -292,7 +292,7 @@ int i;
     lpre1->filterout(smpsl);
     rpre1->filterout(smpsr);
     
-    rwshape->waveshapesmps (PERIOD, smpsr, 19, 25, 1);  //compression
+    rwshape->waveshapesmps (PERIOD, smpsr, 19, 25, 1);  //JFET
     lwshape->waveshapesmps (PERIOD, smpsl, 19, 25, 1);   
     
     for (i = 0; i<PERIOD; i++)
@@ -314,10 +314,11 @@ int i;
 
     ranti->filterout(smpsr);
     lanti->filterout(smpsl);
-    rwshape2->waveshapesmps (PERIOD, smpsr, 25, Pgain, 1);  //JFET
-    lwshape2->waveshapesmps (PERIOD, smpsl, 25, Pgain, 1);      
     lpre2->filterout(smpsl);
     rpre2->filterout(smpsr);    
+    rwshape2->waveshapesmps (PERIOD, smpsr, 25, Pgain, 1);  //JFET
+    lwshape2->waveshapesmps (PERIOD, smpsl, 25, Pgain, 1);      
+   
      for (i = 0; i<PERIOD; i++)
     {
     //left channel
