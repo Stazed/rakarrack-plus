@@ -1,13 +1,10 @@
-bin_PROGRAMS = rakconvert
+bin_PROGRAMS = rakconvert \
+	rakverb
 
 rakconvert_SOURCES = rakconvert.C
 
-rakconvert_LDADD =
+rakverb_SOURCES = rakverb.C
 
-rakconvert_CXXFLAGS =  
-
-rakconvert_CFLAGS =  
-  
 
 	
 	
