@@ -138,7 +138,7 @@ RBEcho::out (float * smpsl, float * smpsr)
           smpsl[i] *= cosf(lrcross);
           smpsr[i] *= sinf(lrcross);
           
-       	  avg = (smpsl[i] + smpsr[i]) * .5f;
+       	  avg = (smpsl[i] + smpsr[i]) * 0.5f;
 	  ldiff = smpsl[i] - avg;
 	  rdiff = smpsr[i] - avg;
 
@@ -164,7 +164,7 @@ RBEcho::out (float * smpsl, float * smpsr)
       if(reverse > 0.0f)
       {
 
-      lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
+      lswell =	((float) abs(kl - rvkl)) * Srate_Attack_Coeff;
 	      if (lswell <= PI) 
 	      {
 	      lswell = (1.0f - cosf(lswell));  //Clickless transition
@@ -175,7 +175,7 @@ RBEcho::out (float * smpsl, float * smpsr)
 	      efxoutl[i] = 2.0f * ((ldelay[rvkl] * reverse)  + (ldelay[kl] * (1.0f - reverse)));        
 	      }
        
-      rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
+      rswell = 	((float) abs(kr - rvkr)) * Srate_Attack_Coeff;  
 	      if (rswell <= PI)
 	      {
 	       rswell = (1.0f - cosf(rswell));   //Clickless transition 
