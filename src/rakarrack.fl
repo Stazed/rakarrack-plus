@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -814,19 +814,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {1635 387 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;}
+      xywh {1628 380 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1072,17 +1070,33 @@ if(rkr->Tap_Bypass)
 
 if (rkr->Bypass)
 { 
-  if (rkr->val_i_sum != rkr->old_i_sum)
+  if (rkr->val_il_sum != rkr->old_il_sum)
   {
-  input_vu->value(rkr->val_i_sum);
-  rkr->old_i_sum=rkr->val_i_sum;
+  input_vul->value(rkr->val_il_sum);
+  rkr->old_il_sum=rkr->val_il_sum;
   }
   
-  if (rkr->val_v_sum != rkr->old_v_sum)
+  if (rkr->val_ir_sum != rkr->old_ir_sum)
   {
-  output_vu->value(rkr->val_v_sum);
-  rkr->old_v_sum=rkr->val_v_sum;
+  input_vur->value(rkr->val_ir_sum);
+  rkr->old_ir_sum=rkr->val_ir_sum;
   }
+
+  if (rkr->val_vl_sum != rkr->old_vl_sum)
+  {
+  output_vul->value(rkr->val_vl_sum);
+  rkr->old_vl_sum=rkr->val_vl_sum;
+  }
+
+  if (rkr->val_vr_sum != rkr->old_vr_sum)
+  {
+  output_vur->value(rkr->val_vr_sum);
+  rkr->old_vr_sum=rkr->val_vr_sum;
+  }
+
+
+
+
 
 
 if(rkr->checkforaux())
@@ -6143,7 +6157,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
       }
       Fl_Group STOMPBOX {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button stomp_activar {
@@ -6196,7 +6210,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
             xywh {40 40 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Classic Fuzz} selected
+            label {Classic Fuzz}
             xywh {50 50 36 21} labelsize 10
           }
         }
@@ -6318,12 +6332,24 @@ TUNER_LABEL->redraw_label();}
           label {FX On}
           user_data 2
           callback {rkr->Bypass=o->value();
-rkr->val_i_sum=-50.0;
-rkr->val_v_sum=-50.0;
-rkr->old_v_sum=-50.0;
-rkr->old_i_sum=-50.0;
-input_vu->value(-50.0);
-output_vu->value(-50.0);
+rkr->val_il_sum=-50.0;
+rkr->val_ir_sum=-50.0;
+
+rkr->val_vl_sum=-50.0;
+rkr->val_vr_sum=-50.0;
+
+rkr->old_vl_sum=-50.0;
+rkr->old_vr_sum=-50.0;
+
+rkr->old_il_sum=-50.0;
+rkr->old_ir_sum=-50.0;
+
+input_vul->value(-50.0);
+input_vur->value(-50.0);
+
+output_vul->value(-50.0);
+output_vur->value(-50.0);
+
 
 ChangeActives();  
 LABEL_IO->redraw_label();
@@ -6367,12 +6393,20 @@ rkr->calculavol(2);}
           xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class SliderW
         }
-        Fl_Slider input_vu {
-          xywh {84 50 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
+        Fl_Slider input_vul {
+          xywh {84 50 8 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
           class NewVum
         }
-        Fl_Slider output_vu {
-          xywh {142 50 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
+        Fl_Slider input_vur {
+          xywh {93 50 8 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
+          class NewVum
+        }
+        Fl_Slider output_vul {
+          xywh {142 50 8 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
+          class NewVum
+        }
+        Fl_Slider output_vur {
+          xywh {151 50 8 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
           class NewVum
         }
         Fl_Box LABEL_IO {
@@ -6442,7 +6476,7 @@ rkr->modified=0;
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -6972,7 +7006,7 @@ chfsize(-1);}
       }
       Fl_Group AUDIO_SET {
         label Audio
-        user_data 1
+        user_data 1 open
         xywh {10 122 615 54} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 5
       } {
         Fl_Check_Button INSTATE {
@@ -7472,54 +7506,72 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
       callback {rkr->ACI_Bypass=0;
 Trigger->hide();
 save_stat(6);}
-      xywh {2100 170 205 145} type Double hide
+      xywh {1991 171 205 165} type Double hide
     } {
       Fl_Box Fondo5 {
-        xywh {1 1 205 145}
+        xywh {0 1 210 164}
+      }
+      Fl_Box ACI_LABEL {
+        label {Analog Control}
+        xywh {25 8 135 24} labelfont 1 labelcolor 7
       }
       Fl_Slider aux_vu {
-        xywh {5 18 15 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
+        xywh {5 18 16 144} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
         class NewVum
+      }
+      Fl_Choice aux_source {
+        label Source
+        callback {rkr->Aux_Source = (int) o->value();}
+        xywh {100 37 50 17} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label Aux
+          xywh {40 40 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label L
+          xywh {40 40 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label R
+          xywh {30 30 36 21} labelsize 10
+        }
       }
       Fl_Value_Slider aux_gain {
         label Gain
         callback {rkr->Aux_Gain = (int)o->value();}
-        xywh {99 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
+        xywh {99 59 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
         class SliderW
       }
       Fl_Value_Slider aux_thres {
         label Threshold
         callback {rkr->Aux_Threshold = (int) o->value();}
-        xywh {100 51 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
+        xywh {100 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
         class SliderW
       }
       Fl_Value_Input aux_midi {
         label {Midi Control}
         callback {rkr->Aux_MIDI = (int)o->value();}
-        xywh {98 72 39 22} labelsize 10 labelcolor 7 minimum 1 maximum 127 step 1 value 1 textsize 10
+        xywh {98 96 39 22} labelsize 10 labelcolor 7 minimum 1 maximum 127 step 1 value 1 textsize 10
       }
       Fl_Value_Slider aux_min {
         label Minimum
         callback {rkr->Aux_Minimum = (int) o->value();}
-        xywh {100 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+        xywh {100 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
         class SliderW
       }
       Fl_Value_Slider aux_max {
         label Maximum
         callback {rkr->Aux_Maximum = (int) o->value();}
-        xywh {100 126 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
+        xywh {100 150 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
         class SliderW
-      }
-      Fl_Box ACI_LABEL {
-        label {Analog Control}
-        xywh {50 8 135 24} labelfont 1 labelcolor 7
       }
     }
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
   } {
     code {fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
@@ -7645,6 +7697,8 @@ for (int t=0; t<MIDILearn->children();t++)
   }  
 
 ACI_LABEL->labelcolor(fl_lighter(label_color));
+aux_source->labelcolor(label_color);
+aux_midi->labelcolor(label_color);
 
 Fl::redraw();} {}
   }
@@ -7664,7 +7718,9 @@ for (int t=0; t<ob->children();t++)
 
 
  fore_color= bcolor;
- Label_Color_Change(label_color);} {}
+ aux_source->color(bcolor);
+ Label_Color_Change(label_color);} {selected
+    }
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
@@ -7733,7 +7789,9 @@ MIDILearn->resize(x,y,w,h);
 rakarrack.get(rkr->PrefNom("Trigger X"),x,1);
 rakarrack.get(rkr->PrefNom("Trigger Y"),y,1);
 rakarrack.get(rkr->PrefNom("Trigger W"),w,205);
-rakarrack.get(rkr->PrefNom("Trigger H"),h,145);
+rakarrack.get(rkr->PrefNom("Trigger H"),h,165);
+
+if(h<165) h= 165;
 
 Trigger->resize(x,y,w,h);
 
@@ -7817,6 +7875,8 @@ rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
 
 //Trigger
 
+rakarrack.get(rkr->PrefNom("Aux Source"),rkr->Aux_Source,0);
+aux_source->value(rkr->Aux_Source);
 rakarrack.get(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain,0);
 aux_gain->value(rkr->Aux_Gain);
 rakarrack.get(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold,0);
@@ -7898,6 +7958,7 @@ rakarrack.set(rkr->PrefNom("Trigger Y"),Trigger->y());
 rakarrack.set(rkr->PrefNom("Trigger W"),Trigger->w());
 rakarrack.set(rkr->PrefNom("Trigger H"),Trigger->h());
 
+rakarrack.set(rkr->PrefNom("Aux Source"),rkr->Aux_Source);
 rakarrack.set(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain);
 rakarrack.set(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold);
 rakarrack.set(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI);
@@ -8021,10 +8082,18 @@ ActivarGeneral->value(rkr->Bypass);
 if (rkr->Bypass==0)
 {
 
-rkr->val_i_sum=-50;
-rkr->val_v_sum=-50;
-input_vu->value(-50);
-output_vu->value(-50);
+rkr->val_il_sum=-50;
+rkr->val_ir_sum=-50;
+
+rkr->val_vl_sum=-50;
+rkr->val_vr_sum=-50;
+
+input_vul->value(-50);
+input_vur->value(-50);
+
+output_vul->value(-50);
+output_vur->value(-50);
+
 
 }
 //Reverb
@@ -11424,9 +11493,27 @@ looper_t2->redraw();} {}
   Function {ActACI()} {} {
     code {int value;
 int i,amax,amin;
-float gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f); 
-float tmp = rkr->val_a_sum * gain;
+float gain =  0.0;
+float tmp = 0.0;
+
+switch(rkr->Aux_Source)
+{
+   case 0:
+      gain =  dB2rap (75.0f * (float)rkr->Aux_Gain / 127.0f);
+      tmp = rkr->val_a_sum * gain;
+      break;
+   case 1:
+      gain =  (float)rkr->Aux_Gain / 127.0f;
+      tmp = dB2rap(rkr->val_il_sum) * 12.0f * gain ;
+      break;
+   case 2:
+      gain =  (float)rkr->Aux_Gain / 127.0f;
+      tmp = dB2rap(rkr->val_ir_sum) * 12.0f * gain;
+      break;
+}
+
 float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
+
 float threshold = (float) rkr->Aux_Threshold;
 aux_vu->value(aux_vulevel);
 

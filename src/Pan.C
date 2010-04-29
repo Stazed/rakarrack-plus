@@ -138,7 +138,7 @@ void
 Pan::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
-  panning = ((float)Ppanning + .5f)/ 127.0f;
+  panning = ((float)Ppanning)/ 127.0f;
   dvalue= panning*M_PI_2;
 
 
