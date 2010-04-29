@@ -634,12 +634,20 @@ efx_FLimiter->Compressor_Change(8,1);
 efx_FLimiter->Compressor_Change(9,1);
 
 
-  old_i_sum = -0.0f;
-  old_v_sum = -0.0f;
+  old_il_sum = -0.0f;
+  old_ir_sum = -0.0f;
+
+  old_vl_sum = -0.0f;
+  old_vr_sum = -0.0f;
+
   old_a_sum = -0.0f;
   val_a_sum = -0.0f;
-  val_i_sum = -0.0f;
-  val_v_sum = -0.0f;
+
+  val_il_sum = -0.0f;
+  val_ir_sum = -0.0f;
+
+  val_vl_sum = -0.0f;
+  val_vr_sum = -0.0f;
 
   last_auxvalue = 0;
   note_old = 0;
@@ -973,10 +981,13 @@ RKR::Control_Gain (float *origl, float *origr)
 {
 
   int i;
-  float i_sum = 1e-12f;
+  float il_sum = 1e-12f;
+  float ir_sum = 1e-12f;
+  
   float a_sum = 1e-12f;
 
   float temp_sum;
+
   float tmp;
   
   if(upsample)
@@ -991,18 +1002,26 @@ RKR::Control_Gain (float *origl, float *origr)
     {
       efxoutl[i] *= Log_I_Gain;
       efxoutr[i] *= Log_I_Gain;
-      tmp = fabsf(efxoutr[i] + efxoutl[i]);
-      if (tmp > i_sum) i_sum = tmp;
+      tmp = fabsf(efxoutr[i]);
+      if (tmp > ir_sum) ir_sum = tmp;
+      tmp = fabsf(efxoutl[i]);
+      if (tmp > il_sum) il_sum = tmp;
+ 
+ 
     }
       memcpy(smpl,efxoutl,sizeof(float)*PERIOD);
       memcpy(smpr,efxoutr,sizeof(float)*PERIOD);
 
-  temp_sum = (float)CLAMP (rap2dB (i_sum), -48.0, 15.0);
-  val_i_sum = .6f * old_i_sum + .4f * temp_sum;
-  val_sum = val_i_sum;
+  temp_sum = (float)CLAMP (rap2dB (il_sum), -48.0, 15.0);
+  val_il_sum = .6f * old_il_sum + .4f * temp_sum;
+
+  temp_sum = (float)CLAMP (rap2dB (ir_sum), -48.0, 15.0);
+  val_ir_sum = .6f * old_ir_sum + .4f * temp_sum;
+
+  val_sum = val_il_sum + val_ir_sum;
 
   
-  if(ACI_Bypass)
+  if((ACI_Bypass) && (Aux_Source==0))
   {
       temp_sum = 0.0;
       tmp = 0.0;
@@ -1028,7 +1047,9 @@ void
 RKR::Control_Volume (float *origl,float *origr)
 {
   int i;
-  float i_sum = 1e-12f;
+  float il_sum = 1e-12f;
+  float ir_sum = 1e-12f;
+
   float temp_sum;
   float tmp;
   float Temp_M_Volume = 0.0f;
@@ -1066,16 +1087,23 @@ RKR::Control_Volume (float *origl,float *origr)
       efxoutr[i]= (origr[i] * (1.0f - Fraction_Bypass) + efxoutr[i] * Fraction_Bypass);
       }
       
-      tmp = fabsf (efxoutr[i] + efxoutl[i]);
-      if (tmp > i_sum) i_sum = tmp;
+      tmp = fabsf (efxoutl[i]);
+      if (tmp > il_sum) il_sum = tmp;
+      tmp = fabsf (efxoutr[i]);
+      if (tmp > ir_sum) ir_sum = tmp;
+
+
 
     }
 
      
-  temp_sum = (float) CLAMP(rap2dB (i_sum), -48, 15);
-  if (i_sum > 0.0004999f)  have_signal = 1;
+  temp_sum = (float) CLAMP(rap2dB (il_sum), -48, 15);
+  val_vl_sum = .6f * old_vl_sum + .4f * temp_sum;
+  temp_sum = (float) CLAMP(rap2dB (ir_sum), -48, 15);
+  val_vr_sum = .6f * old_vr_sum + .4f * temp_sum;
+
+  if ((il_sum+ir_sum) > 0.0004999f)  have_signal = 1;
   else  have_signal = 0;
-  val_v_sum = .6f * old_v_sum + .4f * temp_sum;
   
 
 }
