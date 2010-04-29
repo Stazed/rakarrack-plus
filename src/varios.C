@@ -219,7 +219,12 @@ switch(Tap_SetValue)
   if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSetD);
   if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSetD);
   if(Sequence_Bypass) efx_Sequence->changepar(9,Tap_TempoSetD);
-
+  if(Echo_Bypass) 
+   {
+    int delay = 60.0f / (float) Tap_TempoSetD  * fSAMPLE_RATE;
+    efx_Echo->Tempo2Delay(delay);
+   }
+   
 }
 
   

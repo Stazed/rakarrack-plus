@@ -7719,8 +7719,7 @@ for (int t=0; t<ob->children();t++)
 
  fore_color= bcolor;
  aux_source->color(bcolor);
- Label_Color_Change(label_color);} {selected
-    }
+ Label_Color_Change(label_color);} {}
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
@@ -11488,7 +11487,13 @@ looper_t2->redraw();} {}
   {
    seq_tempo->value(rkr->efx_Sequence->getpar(9));
    seq_tempo->redraw();
-  }} {}
+  }
+  if(rkr->Echo_Bypass)
+  { 
+   echo_delay->value(rkr->efx_Echo->getpar(2));
+   echo_delay->redraw();
+  }} {selected
+    }
   }
   Function {ActACI()} {} {
     code {int value;

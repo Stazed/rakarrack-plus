@@ -19512,6 +19512,11 @@ void RKRGUI::UpdateTGUI() {
    seq_tempo->value(rkr->efx_Sequence->getpar(9));
    seq_tempo->redraw();
   }
+  if(rkr->Echo_Bypass)
+  { 
+   echo_delay->value(rkr->efx_Echo->getpar(2));
+   echo_delay->redraw();
+  }
 }
 
 void RKRGUI::ActACI() {
