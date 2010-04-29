@@ -467,7 +467,7 @@ main (int argc, char *argv[])
 // Read command Line
 
   fprintf (stderr,
-   "\nrackconvert convert old data bank files to the new file format and store the new ones in the home user directory.\nrackconvert - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon - Hernan Ordiales - Jose Luis Di Biase\n\n");
+   "\nrackconvert convert old data bank files to the new file format and store the new ones in the home user directory.\nrackconvert - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon\n\n");
 
   if (argc < 3)
 {
@@ -483,7 +483,7 @@ main (int argc, char *argv[])
 
   while (1)
     {
-      opt = getopt_long (argc, argv, "c:h", opts, &option_index);
+      opt = getopt_long (argc, argv, "io:h", opts, &option_index);
       char *optarguments = optarg;
 
       if (opt == -1)
@@ -511,6 +511,13 @@ main (int argc, char *argv[])
       show_help ();
       return (0);
     };
+
+
+  if (argc < 3)
+{
+    fprintf (stderr, "Try 'rakconvert --help' for usage options.\n");
+    return(0);
+}    
 
 
 printf("converting: %s\n\n",OldBankFile);
