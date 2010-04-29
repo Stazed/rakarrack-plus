@@ -77,7 +77,7 @@ private:
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay;
 
   float fdelay, subdiv, pes;
-  float panning, lrcross, fb, hidamp, reverse;
+  float rpanning, lpanning, lrcross, fb, hidamp, reverse, lfeedback, rfeedback;
   float *ldelay, *rdelay;
   float oldl, oldr;		//pt. lpf
   float  Srate_Attack_Coeff;
