@@ -150,8 +150,9 @@ RBEcho::out (float * smpsl, float * smpsr)
 	kl = 0;
       if (++kr > delay)
 	kr = 0;
-      rvkl = dl - kl;
-      rvkr = dr - kr;
+      rvkl = delay - kl;
+      rvkr = delay - kr;
+      
       if (++rkl > delay)
 	rkl = 0;
       if (++rkr > delay)
