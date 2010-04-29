@@ -82,10 +82,10 @@ Pan::out (float *smpsl, float *smpsr)
 	  rdiff = smpsr[i] - avg;
 
 	  tmp = avg + ldiff * mul;
-	  smpsl[i] = tmp;
+	  smpsl[i] = tmp*panning;
 
 	  tmp = avg + rdiff * mul;
-	  smpsr[i] = tmp;
+	  smpsr[i] = tmp*(1.0f-panning);
 
 
 	}
