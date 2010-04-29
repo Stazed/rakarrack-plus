@@ -43,11 +43,13 @@ main(int argc, char *argv[])
  int readcount;
  int index_length=0;
  int data_length=0;
+ int have_output=0;
  FILE *fn;
  SNDFILE *infile = NULL;
  SF_INFO sfinfo;
  char Outputfile[128];
  char Inputfile[128];
+ char tempfile[128];
  float *buf;
  float *index, *data;
 
@@ -86,6 +88,7 @@ main(int argc, char *argv[])
         case 'o':
            if (optarguments != NULL)
 	    {
+	    have_output = 1;
             strcpy(Outputfile,optarguments);
             }
             break;
@@ -111,10 +114,10 @@ main(int argc, char *argv[])
  data  = (float *) malloc (sizeof (float) * 1000000); // put the max size
 
 
-if(Outputfile == NULL)
+if(!have_output)
 {
- strncpy(Outputfile, Inputfile, strlen(Inputfile)-4);
- sprintf(Outputfile, "%s.rvb",Inputfile);
+ strncpy(tempfile, Inputfile, strlen(Inputfile)-4);
+ sprintf(Outputfile, "%s.rvb",tempfile);
 }
 
 // open output and save headers
