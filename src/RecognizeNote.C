@@ -39,11 +39,8 @@
 Recognize::Recognize (float *efxoutl_, float *efxoutr_)
 {
 
-
-
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
-
 
   float aFreq = 440.0f;
   static const char *englishNotes[12] =
@@ -62,7 +59,6 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_)
     } 
     
   schmittInit (32);
-
 
 }
 
