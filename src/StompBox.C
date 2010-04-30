@@ -803,6 +803,10 @@ void StompBox::init_tone ()
     rinput->setfreq(varf);
      if (midb > 0.0f) midb = ((float) Pmid)/8.0f;   
     lowb = ((float) Plow)/64.0f;
+    
+    varf = 1085.0f - lowb * 1000.0f;
+    lpre1->setfreq(varf);    
+    rpre1->setfreq(varf);   
     break;
 
     
