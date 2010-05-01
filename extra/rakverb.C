@@ -41,8 +41,6 @@ main(int argc, char *argv[])
  char wbuf[2048];
  int i;
  int readcount;
- int index_length=0;
- int data_length=0;
  int have_output=0;
  FILE *fn;
  SNDFILE *infile = NULL;
@@ -53,9 +51,11 @@ main(int argc, char *argv[])
  float *buf;
  float *index, *data;
 
-
+ float testzero, time, tmp, iSR, lastbuf;
+ int skip = 0;
+ int x = 0;
   fprintf (stderr,
-   "\nrackverb convert Reverb IR wav files to the rakarrack file format.\nrackverb - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon\n\n");
+   "\nrackverb convert Reverb IR wav files to the rakarrack file format.\nrackverb - Copyright (c) Josep Andreu - Ryan Billing \n\n");
 
 
   struct option opts[] = {
@@ -110,8 +110,8 @@ main(int argc, char *argv[])
 
 
  buf = (float *) malloc (sizeof (float) * PERIOD);
- index = (float *) malloc (sizeof (float) * 1024); // put the max size
- data  = (float *) malloc (sizeof (float) * 1024); // put the max size
+ index = (float *) malloc (sizeof (float) * sfinfo.frames); // put the max size
+ data  = (float *) malloc (sizeof (float) * sfinfo.frames); // put the max size
 
 
 if(!have_output)
@@ -126,14 +126,14 @@ if(!have_output)
   bzero (wbuf, sizeof (wbuf));
   sprintf(wbuf,"%s\n",Inputfile);    
   fputs (wbuf, fn);
-  bzero (wbuf, sizeof (wbuf));
-  sprintf(wbuf,"%d\n",sfinfo.samplerate);    
-  fputs (wbuf, fn);
-  
 
 // read file
 readcount = sf_seek (infile,0, SEEK_SET);
 readcount = 1;
+time = 0.0f;
+tmp = 0.0f;
+lastbuf = 0.0f;
+iSR = 1.0f/((float) sfinfo.samplerate);
 
 while( readcount > 0)
 { 
@@ -143,52 +143,39 @@ readcount = sf_readf_float(infile,buf,PERIOD);  //PERIOD is defined UP ... chang
 //
 //process the data here 
 //
-     tmp = 0.0f;
-     lastbuf = 0.0f;
+
 for (i = 0; i<PERIOD; i++) {
      tmp += buf[i];
-     testzero = buf[i] * lastbuf; 
+     testzero = buf[i] * lastbuf;       //one-liner zero crossing detection 
      if(testzero < 0.0f) {
      data[x] = tmp;
      index[x] = time;
      x++;
+     tmp = 0.0f;
      }	
+     time+=iSR;
+     lastbuf = buf[i];
 }
 //index data in index[x]
 //data data in data[x]
-//index length in indexlength
-//data length in datalength
 
-
-
-
-
-//close input file when finish
 }
+
+if(x>1024) skip = x/1024;   //Often will be longer than 1024.  Change to make final file longer or shorter.
+float compress = 100.0f * ((float) x)/((float) sfinfo.frames);
+float quality = (compress/((float) skip));
+printf("Subsampling: %d \nCompression (%): %f\nQuality (%): %f\n", skip, compress, quality);
 sf_close(infile);
 
-// save data and close
 
-  bzero (wbuf, sizeof (wbuf));
-  sprintf(wbuf,"%d\n",index_length);    
-  fputs (wbuf, fn);
-
-  bzero (wbuf, sizeof (wbuf));
-  sprintf(wbuf,"%d\n",data_length);    
-  fputs (wbuf, fn);
-
-
-for(i=0;i<index_length;i++)
-{
+for(i=0;i<(x-skip);i+=skip)
+{ 
   bzero(wbuf,sizeof(wbuf));
-  sprintf(wbuf, "%f,",index[i]);
+  sprintf(wbuf, "%f\t",index[i]);
   fputs(wbuf,fn);
-}
 
-for(i=0;i<data_length;i++)
-{
   bzero(wbuf,sizeof(wbuf));
-  sprintf(wbuf, "%f,",data[i]);
+  sprintf(wbuf, "%f\n",data[i]);
   fputs(wbuf,fn);
 }
 
