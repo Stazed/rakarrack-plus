@@ -665,6 +665,20 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
   int i;
   int type = midievent->buffer[0]>>4;
 
+  
+ if((Tap_Bypass) && (Tap_Selection == 3) && (midievent->buffer[0) == 0xf8))
+   {
+    mtc_counter++;
+    if (mtc_counter >= 24)
+    {
+      Tap_TempoSet=TapTempo();
+      mtc_counter= 0;
+    }
+
+   } 
+
+
+
   if ((type == 8) || (type == 9))
     {
       int cmdnote = midievent->buffer[1];
