@@ -53,13 +53,6 @@ MBDist::MBDist (float * efxoutl_, float * efxoutr_)
   lpf2r = new AnalogFilter (2, 2500.0f, .7071f, 0);
   hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0);
   hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0);
-  hsf1l = new AnalogFilter(8, 20.0f, .7071f, 0);
-  hsf1r = new AnalogFilter(8, 20.0f, .7071f, 0);
-  hsf2l = new AnalogFilter(8, 1200.0f, .7071f, 0);
-  hsf2r = new AnalogFilter(8, 1200.0f, .7071f, 0);
-  hsf3l = new AnalogFilter(8, 2500.0f, .7071f, 0);
-  hsf3r = new AnalogFilter(8, 2500.0f, .7071f, 0);
-
 
   mbwshape1 = new Waveshaper();
   mbwshape2 = new Waveshaper();  
@@ -128,14 +121,9 @@ MBDist::out (float * smpsl, float * smpsr)
   memcpy(highl,efxoutl,sizeof(float) * PERIOD);
 
   lpf1l->filterout(lowl);
-  hsf1l->filterout(lowl);
-
   hpf1l->filterout(midl);
   lpf2l->filterout(midl);
-  hsf2l->filterout(midl);
-
   hpf2l->filterout(highl);
-  hsf3l->filterout(highl);
 
   mbwshape1->waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
   mbwshape2->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
@@ -149,12 +137,9 @@ if (Pstereo)
   memcpy(highr,efxoutr,sizeof(float) * PERIOD);
 
   lpf1r->filterout(lowr);
-  hsf1r->filterout(lowr);
   hpf1r->filterout(midr);
   lpf2r->filterout(midr);
-  hsf2r->filterout(midr);
   hpf2r->filterout(highr);
-  hsf3r->filterout(highr);
   
   mbwshape1->waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
   mbwshape2->waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
@@ -225,8 +210,6 @@ MBDist::setCross1 (int value)
   lpf1r->setfreq ((float)value);
   hpf1l->setfreq ((float)value);
   hpf1r->setfreq ((float)value);
-  hsf2l->setfreq((float)Cross1);
-  hsf2r->setfreq((float)Cross1);
 
 
 };
@@ -239,10 +222,6 @@ MBDist::setCross2 (int value)
   hpf2r->setfreq ((float)value);
   lpf2l->setfreq ((float)value);
   lpf2r->setfreq ((float)value);
-  hsf2l->setfreq((float)Cross1);
-  hsf2r->setfreq((float)Cross1);
-  hsf3l->setfreq((float)Cross2);
-  hsf3r->setfreq((float)Cross2);
 
   
 };
@@ -312,22 +291,16 @@ MBDist::changepar (int npar, int value)
       PvolL = value;
       volL = (float) value /100.0;
       PdriveL = (int)((float)Pdrive*volL);
-      hsf1l->setgain(volL);
-      hsf1r->setgain(volL);
       break;
     case 9:
       PvolM = value;
       volM = (float) value /100.0;
       PdriveM = (int)((float)Pdrive*volM);
-      hsf2l->setgain(volM);
-      hsf2r->setgain(volM);
       break;
     case 10:
       PvolH = value;
       volH = (float) value /100.0;
       PdriveH = (int)((float)Pdrive*volH);
-      hsf3l->setgain(volH);
-      hsf3r->setgain(volH);
       break;
     case 11:
       Pnegate = value;
