@@ -220,6 +220,16 @@ Echo::setreverse (int Preverse)
 };
 
 void
+Echo::Tempo2Delay(int value)
+{
+
+delay = value;
+Pdelay = 1000 * value / SAMPLE_RATE;
+if (delay > (SAMPLE_RATE * MAX_DELAY)) delay = SAMPLE_RATE*MAX_DELAY;
+initdelays();
+}
+
+void
 Echo::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;

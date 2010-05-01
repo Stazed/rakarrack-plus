@@ -98,6 +98,7 @@ FILE *fp;
          }
          if(maxx_len < 5 ) 
          {
+         if(maxx_len < 2 ) maxx_len = 2;
          Message("!! Rakarrack CPU Usage Warning !!","It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
          }
        
@@ -219,7 +220,12 @@ switch(Tap_SetValue)
   if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSetD);
   if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSetD);
   if(Sequence_Bypass) efx_Sequence->changepar(9,Tap_TempoSetD);
-
+  if(Echo_Bypass) 
+   {
+    int delay = 60.0f / (float) Tap_TempoSetD  * fSAMPLE_RATE;
+    efx_Echo->Tempo2Delay(delay);
+   }
+   
 }
 
   

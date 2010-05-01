@@ -49,7 +49,7 @@ RBEcho::RBEcho (float * efxoutl_, float * efxoutr_)
   rdelay = NULL;
   lrdelay = 0;
   Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
-  maxx_delay = SAMPLE_RATE * MAX_DELAY;
+  maxx_delay = 1 + SAMPLE_RATE * MAX_DELAY;
 
   ldelay = new float[maxx_delay];  
   rdelay = new float[maxx_delay];
@@ -88,22 +88,34 @@ RBEcho::initdelays ()
 
   kl = 0;
   kr = 0;
+  
+  if(Plrdelay>0)
+  {
+  rkl = lrdelay;
+  rkr = delay - lrdelay;
+  }
+  else
+  {
+  rkr = lrdelay;
+  rkl = delay - lrdelay;  
+  }
+  if (rkl > delay)
+    rkl = delay;
+  if (rkr < 1)
+    rkr = 1;
+  if (rkr > delay)
+    rkr = delay;
+  if (rkl < 1)
+    rkl = 1;
+    
+  rvkl = delay;
+  rvkr = delay;
+  Srate_Attack_Coeff = 15.0f * cSAMPLE_RATE;   // Set swell time to 66ms 
 
-  dl = delay - lrdelay;
-  if (dl < 1)
-    dl = 1;
-  dr = delay + lrdelay;
-  if (dr < 1)
-    dr = 1;
-
-  rvkl = dl - 1;
-  rvkr = dr - 1;
-  Srate_Attack_Coeff = 15.0f * cSAMPLE_RATE;   // Set swell time to 66ms of average delay time 
-
-  for (i = dl; i < maxx_delay; i++)
+  for (i = delay; i < maxx_delay; i++){
     ldelay[i] = 0.0;
-  for (i = dr; i < maxx_delay; i++)
     rdelay[i] = 0.0;
+    }
 
   oldl = 0.0;
   oldr = 0.0;
@@ -124,75 +136,69 @@ RBEcho::out (float * smpsl, float * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-      ldl = ldelay[kl];
-      rdl = rdelay[kr];
         
       //LowPass Filter
-      ldelay[kl] = ldl * hidamp + oldl * (1.0f - hidamp);
-      rdelay[kr] = rdl * hidamp + oldr * (1.0f - hidamp);
+      ldl = lfeedback * hidamp + oldl * (1.0f - hidamp);
+      rdl = rfeedback * hidamp + oldr * (1.0f - hidamp);
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
      
-      if(Pes)
-      {
-          smpsl[i] *= cosf(lrcross);
-          smpsr[i] *= sinf(lrcross);
-          
-       	  avg = (smpsl[i] + smpsr[i]) * .5f;
-	  ldiff = smpsl[i] - avg;
-	  rdiff = smpsr[i] - avg;
-
-	  tmp = avg + ldiff * pes;
-	  smpsl[i] = tmp;
-
-	  tmp = avg + rdiff * pes;
-	  smpsr[i] = tmp;
-
-      }
-
-      ldelay[kl] = smpsl[i] * panning - ldl * fb;
-      rdelay[kr] = smpsr[i] * (1.0f - panning) - rdl * fb;
+      ldelay[kl] = ldl + smpsl[i];
+      rdelay[kr] = ldl + smpsr[i];
       
-      if (++kl >= dl)
+      if (++kl > delay)
 	kl = 0;
-      if (++kr >= dr)
+      if (++kr > delay)
 	kr = 0;
-      rvkl = dl - 1 - kl;
-      rvkr = dr - 1 - kr;
-
+      rvkl = delay - kl;
+      rvkr = delay - kr;
+      
+      if (++rkl > delay)
+	rkl = 0;
+      if (++rkr > delay)
+	rkr = 0;
           
       if(reverse > 0.0f)
       {
 
-      lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
-	      if (lswell <= PI) 
-	      {
-	      lswell = (1.0f - cosf(lswell));  //Clickless transition
-	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell)  + (ldelay[kl] * (1.0f - reverse));   //Volume ducking near zero crossing.     
-	      }  
-	      else
-	      {
-	      efxoutl[i] = 2.0f * ((ldelay[rvkl] * reverse)  + (ldelay[kl] * (1.0f - reverse)));        
-	      }
-       
-      rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
-	      if (rswell <= PI)
-	      {
-	       rswell = (1.0f - cosf(rswell));   //Clickless transition 
-	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell)  + (rdelay[kr] * (1.0f - reverse));  //Volume ducking near zero crossing.
-	      }
-	      else
-	      {
-	      efxoutr[i] = 2.0f * ((rdelay[rvkr] * reverse)  + (rdelay[kr] * (1.0f - reverse)));
-	      }
+      lswell =	((float) (kl - rvkl)) * Srate_Attack_Coeff;
+      lswell = 1.0f - 1.0f/(lswell*lswell + 1.0f);
+      efxoutl[i] = reverse * (ldelay[rvkl] * lswell)  + (ldelay[kl] * (1.0f - reverse));
       
+      rswell = 	((float) (kr - rvkr)) * Srate_Attack_Coeff;  
+      rswell = 1.0f - 1.0f/(rswell*rswell + 1.0f);
+      efxoutr[i] = reverse * (rdelay[rvkr] * rswell)  + (rdelay[kr] * (1.0f - reverse));  //Volume ducking near zero crossing.
 
       }
       else
       {
       efxoutl[i]= ldelay[kl];
       efxoutr[i]= rdelay[kr];
-      }      
+      }   
+                  
+
+      lfeedback = lpanning * fb * efxoutl[i];
+      rfeedback = rpanning * fb * efxoutr[i];      
+      
+      if(Pes)
+      {
+          efxoutl[i] *= cosf(lrcross);
+          efxoutr[i] *= sinf(lrcross);
+          
+       	  avg = (efxoutl[i] + efxoutr[i]) * 0.5f;
+	  ldiff = efxoutl[i] - avg;
+	  rdiff = efxoutr[i] - avg;
+
+	  tmp = avg + ldiff * pes;
+	  efxoutl[i] = 0.5 * tmp;
+
+	  tmp = avg + rdiff * pes;
+	  efxoutr[i] = 0.5f * tmp;
+
+
+      }   
+       efxoutl[i] = (efxoutl[i] + pingpong * rdelay[rkl]) * lpanning;
+       efxoutr[i] = (efxoutr[i] + pingpong * ldelay[rkr]) * rpanning;      
             
     };
 
@@ -214,7 +220,14 @@ void
 RBEcho::setpanning (int Ppanning)
 {
   this->Ppanning = Ppanning;
-  panning = ((float)Ppanning + 0.5f) / 127.0f;
+  rpanning = ((float)Ppanning) / 64.0f;
+  lpanning = 2.0f - rpanning;
+  lpanning = 10.0f * powf(lpanning, 4);
+  rpanning = 10.0f * powf(rpanning, 4);
+  lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
+  rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
+  lpanning *= 1.1f;
+  rpanning *= 1.1f; 
 };
 
 void
@@ -241,11 +254,12 @@ RBEcho::setlrdelay (int Plrdelay)
   float tmp;
   this->Plrdelay = Plrdelay;
   tmp =
-    (powf (2.0, fabsf ((float)Plrdelay - 64.0f) / 64.0f * 9.0f) -
-     1.0f) / 1000.0f * fSAMPLE_RATE;
-  if (Plrdelay < 64.0)
-    tmp = -tmp;
+    ((float) delay) * fabs(((float)Plrdelay - 64.0f) / 64.0f);
   lrdelay = lrintf(tmp);
+  
+  tmp = fabs( ((float) Plrdelay - 64.0f)/32.0f);
+  pingpong = 1.0f - 1.0f/(10.0f*tmp*tmp + 1.0f);
+  pingpong *= 1.2f;
   initdelays ();
 };
 
@@ -268,7 +282,7 @@ void
 RBEcho::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
-  hidamp = 1.0f - (float)Phidamp / 127.0f;
+  hidamp = expf(-D_PI * 500.0f * ((float) Phidamp)/fSAMPLE_RATE);
 };
 
 void

@@ -110,8 +110,8 @@ main(int argc, char *argv[])
 
 
  buf = (float *) malloc (sizeof (float) * PERIOD);
- index = (float *) malloc (sizeof (float) * 100000); // put the max size
- data  = (float *) malloc (sizeof (float) * 1000000); // put the max size
+ index = (float *) malloc (sizeof (float) * 1024); // put the max size
+ data  = (float *) malloc (sizeof (float) * 1024); // put the max size
 
 
 if(!have_output)

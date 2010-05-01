@@ -74,10 +74,10 @@ private:
 
   //Parametrii reali
   int dl, dr, delay, lrdelay;
-  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay;
+  int kl, kr, rkr, rkl, rvkl, rvkr, rvfl, rvfr, maxx_delay;
 
-  float fdelay, subdiv, pes;
-  float panning, lrcross, fb, hidamp, reverse;
+  float fdelay, subdiv, pes, pingpong;
+  float rpanning, lpanning, lrcross, fb, hidamp, reverse, lfeedback, rfeedback;
   float *ldelay, *rdelay;
   float oldl, oldr;		//pt. lpf
   float  Srate_Attack_Coeff;

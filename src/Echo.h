@@ -47,6 +47,8 @@ public:
 
   float outvolume;
 
+  void Tempo2Delay(int delay);
+
 private:
   //Parametrii
   int Pvolume;	//Volumul or E/R

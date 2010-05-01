@@ -455,8 +455,10 @@ public:
   int Aux_MIDI;
   int Aux_Minimum;
   int Aux_Maximum;
+  int Aux_Source;
   int last_auxvalue;
-
+ 
+  int mtc_counter;
   long Tap_time_Init;
 
   double Tap_timeB;
@@ -490,10 +492,14 @@ public:
   float Log_I_Gain;
   float Log_M_Volume;
 
-  float old_i_sum;
-  float old_v_sum;
-  float val_v_sum;
-  float val_i_sum;
+  float old_il_sum;
+  float old_ir_sum;
+  float old_vl_sum;
+  float old_vr_sum;
+  float val_vl_sum;
+  float val_vr_sum;
+  float val_il_sum;
+  float val_ir_sum;
   float old_a_sum;
   float val_a_sum;
 

@@ -211,6 +211,7 @@ MBDist::setCross1 (int value)
   hpf1l->setfreq ((float)value);
   hpf1r->setfreq ((float)value);
 
+
 };
 
 void
@@ -222,6 +223,7 @@ MBDist::setCross2 (int value)
   lpf2l->setfreq ((float)value);
   lpf2r->setfreq ((float)value);
 
+  
 };
 
 
