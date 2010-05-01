@@ -143,7 +143,17 @@ readcount = sf_readf_float(infile,buf,PERIOD);  //PERIOD is defined UP ... chang
 //
 //process the data here 
 //
-
+     tmp = 0.0f;
+     lastbuf = 0.0f;
+for (i = 0; i<PERIOD; i++) {
+     tmp += buf[i];
+     testzero = buf[i] * lastbuf; 
+     if(testzero < 0.0f) {
+     data[x] = tmp;
+     index[x] = time;
+     x++;
+     }	
+}
 //index data in index[x]
 //data data in data[x]
 //index length in indexlength
