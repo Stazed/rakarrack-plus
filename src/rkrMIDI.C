@@ -666,7 +666,7 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
   int type = midievent->buffer[0]>>4;
 
   
- if((Tap_Bypass) && (Tap_Selection == 3) && (midievent->buffer[0) == 0xf8))
+ if((Tap_Bypass) && (Tap_Selection == 3) && (midievent->buffer[0] == 0xf8))
    {
     mtc_counter++;
     if (mtc_counter >= 24)

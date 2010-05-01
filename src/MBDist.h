@@ -89,6 +89,7 @@ private:
   float volL,volM,volH;
   AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
   AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
+  AnalogFilter *hsf1l, *hsf1r,*hsf2l, *hsf2r,*hsf3l, *hsf3r;
   
   class Waveshaper *mbwshape1, *mbwshape2, *mbwshape3;
 
