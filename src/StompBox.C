@@ -291,8 +291,9 @@ int i;
           
     lpre1->filterout(smpsl);
     rpre1->filterout(smpsr);
-    
-    rwshape->waveshapesmps (PERIOD, smpsr, 19, 25, 1);  //JFET
+    linput->filterout(smpsl);
+    rinput->filterout(smpsr);
+    rwshape->waveshapesmps (PERIOD, smpsr, 19, 25, 1);  //compress
     lwshape->waveshapesmps (PERIOD, smpsl, 19, 25, 1);   
     
     for (i = 0; i<PERIOD; i++)
@@ -797,11 +798,15 @@ void StompBox::init_tone ()
     
     case 7:
     highb = ((float) Phigh + 64)/127.0f;
-    varf = 125.0f + gain * 125.0f;
-    lpre1->setfreq(varf);    
-    rpre1->setfreq(varf);
+    varf = 40.0f + gain * 200.0f;
+    linput->setfreq(varf);    
+    rinput->setfreq(varf);
      if (midb > 0.0f) midb = ((float) Pmid)/8.0f;   
     lowb = ((float) Plow)/64.0f;
+    
+    varf = 1085.0f - lowb * 1000.0f;
+    lpre1->setfreq(varf);    
+    rpre1->setfreq(varf);   
     break;
 
     
