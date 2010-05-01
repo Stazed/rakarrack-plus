@@ -98,6 +98,7 @@ FILE *fp;
          }
          if(maxx_len < 5 ) 
          {
+         if(maxx_len < 2 ) maxx_len = 2;
          Message("!! Rakarrack CPU Usage Warning !!","It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
          }
        

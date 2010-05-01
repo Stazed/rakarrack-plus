@@ -1196,7 +1196,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -6611,11 +6611,15 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label MIDI
+            label {MIDI Note On}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
             label {Jack Transport}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label MTC
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -11492,8 +11496,7 @@ looper_t2->redraw();} {}
   { 
    echo_delay->value(rkr->efx_Echo->getpar(2));
    echo_delay->redraw();
-  }} {selected
-    }
+  }} {}
   }
   Function {ActACI()} {} {
     code {int value;

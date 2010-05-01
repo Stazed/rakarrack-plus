@@ -62,6 +62,7 @@ RKR::RKR ()
   numpmi = 0;
   numpmo = 0;
   mess_dis = 0;
+  mtc_counter = 0;
   nojack = 0;
   memset (Mcontrol, 0, sizeof (Mcontrol));
   Mvalue = 0;

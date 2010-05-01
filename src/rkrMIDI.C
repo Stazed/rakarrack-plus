@@ -92,6 +92,18 @@ RKR::midievents()
   if (midievent->type == 42)
     return;
 
+  
+   if((Tap_Bypass) && (Tap_Selection == 3) && (midievent->type == SND_SEQ_EVENT_CLOCK))
+   {
+    mtc_counter++;
+    if (mtc_counter >= 24)
+    {
+      Tap_TempoSet=TapTempo();
+      mtc_counter= 0;
+    }
+
+   } 
+
   if ((midievent->type == SND_SEQ_EVENT_NOTEON)
       || (midievent->type == SND_SEQ_EVENT_NOTEOFF))
     {

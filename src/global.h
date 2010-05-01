@@ -457,7 +457,8 @@ public:
   int Aux_Maximum;
   int Aux_Source;
   int last_auxvalue;
-
+ 
+  int mtc_counter;
   long Tap_time_Init;
 
   double Tap_timeB;
