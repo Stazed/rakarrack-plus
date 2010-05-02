@@ -117,7 +117,7 @@ void
 Echo::out (float * smpsl, float * smpsr)
 {
   int i;
-  float l, r, ldl, rdl, rswell, lswell;
+  float l, r, ldl, rdl, ldlout, rdlout, rswell, lswell;
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -128,9 +128,18 @@ Echo::out (float * smpsl, float * smpsr)
       ldl = l;
       rdl = r;
 
-
-      ldl = smpsl[i] * panning - ldl * fb;
-      rdl = smpsr[i] * (1.0f - panning) - rdl * fb;
+      ldlout = 0.0 - ldl * fb;
+      rdlout = 0.0 - rdl * fb;
+      if (Pdirect)
+      {
+        ldlout = ldl = smpsl[i] * panning + ldlout;
+        rdlout = rdl = smpsr[i] * (1.0f - panning) + rdlout;
+      }
+      else
+      {
+        ldl = smpsl[i] * panning + ldlout;
+        rdl = smpsr[i] * (1.0f - panning) + rdlout;
+      }
       
       if(reverse > 0.0)
       {
@@ -139,30 +148,30 @@ Echo::out (float * smpsl, float * smpsr)
 	      if (lswell <= PI) 
 	      {
 	      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
-	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell + ldelay[rvfl] * (1.0f - lswell))  + (ldl * (1-reverse));   //Volume ducking near zero crossing.     
+	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell + ldelay[rvfl] * (1.0f - lswell))  + (ldlout * (1-reverse));   //Volume ducking near zero crossing.     
 	      }  
 	      else
 	      {
-	      efxoutl[i] = (ldelay[rvkl] * reverse)  + (ldl * (1-reverse));        
+	      efxoutl[i] = (ldelay[rvkl] * reverse)  + (ldlout * (1-reverse));        
 	      }
        
       rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
 	      if (rswell <= PI)
 	      {
 	       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
-	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell + rdelay[rvfr] * (1.0f - rswell))  + (rdl * (1-reverse));  //Volume ducking near zero crossing.
+	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell + rdelay[rvfr] * (1.0f - rswell))  + (rdlout * (1-reverse));  //Volume ducking near zero crossing.
 	      }
 	      else
 	      {
-	      efxoutr[i] = (rdelay[rvkr] * reverse)  + (rdl * (1-reverse));
+	      efxoutr[i] = (rdelay[rvkr] * reverse)  + (rdlout * (1-reverse));
 	      }
       
 
       }
       else
       {
-      efxoutl[i]= ldl;
-      efxoutr[i]= rdl;
+      efxoutl[i]= ldlout;
+      efxoutr[i]= rdlout;
       }
       
       
@@ -277,29 +286,37 @@ Echo::sethidamp (int Phidamp)
 };
 
 void
+Echo::setdirect (int Pdirect)
+{
+  if (Pdirect > 0)
+    Pdirect = 1;
+  this->Pdirect = Pdirect;
+};
+
+void
 Echo::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 8;
+  const int PRESET_SIZE = 9;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Echo 1
-    {67, 64, 565, 64, 30, 59, 0, 127},
+    {67, 64, 565, 64, 30, 59, 0, 127, 0},
     //Echo 2
-    {67, 64, 357, 64, 30, 59, 0, 64},
+    {67, 64, 357, 64, 30, 59, 0, 64, 0},
     //Echo 3
-    {67, 75, 955, 64, 30, 59, 10, 0},
+    {67, 75, 955, 64, 30, 59, 10, 0, 0},
     //Simple Echo
-    {67, 60, 705, 64, 30, 0, 0, 0},
+    {67, 60, 705, 64, 30, 0, 0, 0, 0},
     //Canyon
-    {67, 60, 1610, 50, 30, 82, 48, 0},
+    {67, 60, 1610, 50, 30, 82, 48, 0, 0},
     //Panning Echo 1
-    {67, 64, 705, 17, 0, 82, 24, 0},
+    {67, 64, 705, 17, 0, 82, 24, 0, 0},
     //Panning Echo 2
-    {81, 60, 737, 118, 100, 68, 18, 0},
+    {81, 60, 737, 118, 100, 68, 18, 0, 0},
     //Panning Echo 3
-    {81, 60, 472, 100, 127, 67, 36, 0},
+    {81, 60, 472, 100, 127, 67, 36, 0, 0},
     //Feedback Echo
-    {62, 64, 456, 64, 100, 90, 55, 0}
+    {62, 64, 456, 64, 100, 90, 55, 0, 0}
   };
 
 
@@ -340,7 +357,9 @@ Echo::changepar (int npar, int value)
     case 7:
       setreverse (value);
       break;
-
+    case 8:
+      setdirect (value);
+      break;
     };
 };
 
@@ -372,6 +391,9 @@ Echo::getpar (int npar)
       break;
     case 7:
       return (Preverse);
+      break;
+    case 8:
+      return (Pdirect);
       break;
 
     };

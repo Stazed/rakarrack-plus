@@ -1878,7 +1878,8 @@ echo_LRdl->value(rkr->efx_Echo->getpar(3));
 echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
 echo_fb->value(rkr->efx_Echo->getpar(5));
 echo_damp->value(rkr->efx_Echo->getpar(6));
-echo_RV->value(rkr->efx_Echo->getpar(7));}
+echo_RV->value(rkr->efx_Echo->getpar(7));
+echo_direct->value(rkr->efx_Echo->getpar(8));}
           xywh {716 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -1959,6 +1960,12 @@ echo_RV->value(rkr->efx_Echo->getpar(7));}
           callback {rkr->efx_Echo->changepar(5,(int)o->value());}
           xywh {690 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Check_Button echo_direct {
+          label Direct
+          user_data 2
+          callback {rkr->efx_Echo->changepar(8,(int)o->value());}
+          xywh {690 360 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider echo_damp {
           label Damp

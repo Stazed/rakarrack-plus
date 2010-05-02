@@ -1710,6 +1710,7 @@ echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
 echo_fb->value(rkr->efx_Echo->getpar(5));
 echo_damp->value(rkr->efx_Echo->getpar(6));
 echo_RV->value(rkr->efx_Echo->getpar(7));
+echo_direct->value(rkr->efx_Echo->getpar(8));
 }
 void RKRGUI::cb_echo_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_preset_i(o,v);
@@ -1775,6 +1776,13 @@ void RKRGUI::cb_echo_fb_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_echo_fb(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_fb_i(o,v);
+}
+
+void RKRGUI::cb_echo_direct_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Echo->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_echo_direct(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_direct_i(o,v);
 }
 
 void RKRGUI::cb_echo_damp_i(SliderW* o, void*) {
@@ -8081,6 +8089,12 @@ R average.");
         echo_fb->align(FL_ALIGN_LEFT);
         echo_fb->when(FL_WHEN_CHANGED);
       } // SliderW* echo_fb
+      { echo_direct = new Fl_Check_Button(690, 360, 15, 15, "Direct");
+        echo_direct->down_box(FL_BORDER_BOX);
+        echo_direct->labelsize(10);
+        echo_direct->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echo_direct->callback((Fl_Callback*)cb_echo_direct, (void*)(2));
+      } // Fl_Check_Button* echo_direct
       { echo_damp = new SliderW(690, 379, 100, 10, "Damp");
         echo_damp->type(5);
         echo_damp->box(FL_FLAT_BOX);

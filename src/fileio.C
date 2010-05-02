@@ -83,12 +83,12 @@ RKR::savefile (char *filename)
 
 	case 4:
 	  //Echo
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Echo->getpar (0), efx_Echo->getpar (1),
 		   efx_Echo->getpar (2), efx_Echo->getpar (3),
 		   efx_Echo->getpar (4), efx_Echo->getpar (5),
 		   efx_Echo->getpar (6), efx_Echo->getpar(7),
-		   Echo_Bypass);
+		   efx_Echo->getpar (8), Echo_Bypass);
 	  break;
 
 	case 5:
@@ -658,18 +658,9 @@ RKR::loadfile (char *filename)
 
 	case 4:
 	  //Echo  
-          if( Num_Version < 30)
-          {
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[1][0], &lv[1][1], &lv[1][2], &lv[1][3], &lv[1][4],
-		  &lv[1][5], &lv[1][6], &Echo_B, &lv[1][8]);
-	  }
-	  else
-	 { 
-	   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[1][0], &lv[1][1], &lv[1][2], &lv[1][3], &lv[1][4],
-		  &lv[1][5], &lv[1][6], &lv[1][7], &Echo_B);
-	 }
+		  &lv[1][5], &lv[1][6], &lv[1][7], &lv[1][8],&Echo_B);
 	  break;
 
 	case 5:
@@ -1057,7 +1048,7 @@ RKR::Actualizar_Audio ()
 
   for (i = 0; i <= 11; i++)
     efx_Rev->changepar (i, lv[0][i]);
-  for (i = 0; i <= 7; i++)
+  for (i = 0; i <= 8; i++)
     efx_Echo->changepar (i, lv[1][i]);
   for (i = 0; i <= 11; i++)
     efx_Chorus->changepar (i, lv[2][i]);
@@ -1696,7 +1687,7 @@ RKR::Preset_to_Bank (int i)
 
   for (j = 0; j <= 11; j++)
     lv[0][j] = efx_Rev->getpar (j);
-  for (j = 0; j <= 7; j++)
+  for (j = 0; j <= 8; j++)
     lv[1][j] = efx_Echo->getpar (j);
   for (j = 0; j <= 11; j++)
     lv[2][j] = efx_Chorus->getpar (j);

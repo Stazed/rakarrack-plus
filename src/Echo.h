@@ -59,6 +59,7 @@ private:
   int Pfb;		//Feed-back-ul
   int Phidamp;
   int Preverse;
+  int Pdirect;
 
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
@@ -68,6 +69,7 @@ private:
   void setfb (int Pfb);
   void sethidamp (int Phidamp);
   void setreverse (int Preverse);
+  void setdirect (int Pdirect);
 
   //Parametrii reali
   void initdelays ();
