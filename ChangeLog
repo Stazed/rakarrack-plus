@@ -1,6 +1,9 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
 - Added Echo Direct patch from Arnout Engelen <arnouten@bzzt.net>
+- Added Effect Reverbtron
+- Added stereo vumeters
+- Added ACI (Analog Control Interface)
 - Fixed crash bug in Order window.
 - Added Autoconnect for jack input ports.
 - Removing warning on gcc-4.5
