@@ -24,7 +24,6 @@
 #ifndef REVERBTRON_H
 #define REVERBTRON_H
 
-#include <sndfile.h>
 #include "global.h"
 #include "Resample.h"
 
@@ -74,8 +73,6 @@ private:
   float level,fb, feedback;
 
 
-  SNDFILE *infile;
-  SF_INFO sfinfo;
 
   //Parametrii reali
   
