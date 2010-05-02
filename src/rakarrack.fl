@@ -6307,7 +6307,7 @@ revtron_length->value(rkr->efx_Reverbtron->getpar(3));
 revtron_user->value(rkr->efx_Reverbtron->getpar(4));
 revtron_user->do_callback();
 revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
-revtron_fb->value(rkr->efx_Reverbtron->getpar(10));} open
+revtron_fb->value(rkr->efx_Reverbtron->getpar(10));}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6351,8 +6351,8 @@ revtron_fb->value(rkr->efx_Reverbtron->getpar(10));} open
         }
         Fl_Value_Slider revtron_length {
           label Length
-          callback {rkr->efx_Reverbtron->changepar(3,(int)o->value());}
-          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
+          callback {rkr->efx_Reverbtron->changepar(3,(int)o->value());} selected
+          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 1500 step 1 value 100 textcolor 7
           class SliderW
         }
         Fl_Check_Button revtron_user {
@@ -6382,7 +6382,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
         Fl_Choice revtron_fnum {
           label Preset
-          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());} open
+          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6390,7 +6390,7 @@ rkr->efx_Reverbtron->setfile(100);}
             xywh {54 54 36 21} labelsize 10
           }
           MenuItem {} {
-            label {St.Andrews Church Stereo} selected
+            label {St.Andrews Church Stereo}
             xywh {0 0 36 21} labelsize 10
           }
         }
