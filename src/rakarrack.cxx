@@ -5808,10 +5808,7 @@ void RKRGUI::cb_revtron_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_revtron_preset[] = {
- {"Marshall JCM200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Superchamp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Mesa Boogie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Mesa Boogie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"St. Andrew\'s Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
