@@ -6311,8 +6311,12 @@ revtron_fb->value(rkr->efx_Reverbtron->getpar(10));} open
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {St. Andrew's Church} selected
+            label {St. Andrew's Church}
             xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {St.Andews Church Stereo}
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider revtron_WD {
@@ -6378,12 +6382,16 @@ rkr->efx_Reverbtron->setfile(100);}
         }
         Fl_Choice revtron_fnum {
           label Preset
-          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
+          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());} open
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {St. Andrew's Church}
             xywh {54 54 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {St.Andrews Church Stereo} selected
+            xywh {0 0 36 21} labelsize 10
           }
         }
       }

@@ -5809,6 +5809,7 @@ void RKRGUI::cb_revtron_preset(Fl_Choice* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_revtron_preset[] = {
  {"St. Andrew\'s Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"St.Andews Church Stereo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5891,6 +5892,7 @@ void RKRGUI::cb_revtron_fnum(Fl_Choice* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
  {"St. Andrew\'s Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"St.Andrews Church Stereo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
