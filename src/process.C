@@ -1540,7 +1540,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Reverbtron_Bypass)
                 {
                   efx_Reverbtron->out(efxoutl, efxoutr);
-		  Vol_Efx(41,efx_Reverbtron->outvolume);
+		  Vol_Efx(40,efx_Reverbtron->outvolume);
                 }
               break;  
 

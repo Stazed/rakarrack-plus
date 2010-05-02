@@ -4987,6 +4987,7 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
           user_data 2
           callback {rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
+rkr->efx_Convol->cleanup();
 findpos(29,(int)o->value());}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
@@ -6298,8 +6299,8 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
           label On
           user_data 2
           callback {rkr->Reverbtron_Bypass=(int)o->value();
-if((int) o->value()==0)
-findpos(40,(int)o->value());}
+if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
+findpos(40,(int)o->value());} selected
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice revtron_preset {
@@ -6413,7 +6414,7 @@ rkr->efx_Reverbtron->setfile(100);}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Santa Lucia} selected
+            label {Santa Lucia}
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -11133,6 +11134,9 @@ for(i=0; i<10; i++)
         break;
        }
   }
+  
+  
+  
   
   switch(i)
   

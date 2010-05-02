@@ -519,7 +519,8 @@ private:
 public:
   SliderW *echo_damp;
 private:
-  void cb_echo_damp_i(SliderW*, void*);  static void cb_echo_damp(SliderW*, void*);
+  void cb_echo_damp_i(SliderW*, void*);
+  static void cb_echo_damp(SliderW*, void*);
 public:
   Fl_Group *CHORUS;
   Fl_Light_Button *chorus_activar;

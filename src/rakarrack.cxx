@@ -4627,6 +4627,7 @@ Fl_Menu_Item RKRGUI::menu_mbvvol_combi[] = {
 void RKRGUI::cb_convo_activar_i(Fl_Light_Button* o, void*) {
   rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
+rkr->efx_Convol->cleanup();
 findpos(29,(int)o->value());
 }
 void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {
@@ -5791,7 +5792,7 @@ Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
 
 void RKRGUI::cb_revtron_activar_i(Fl_Light_Button* o, void*) {
   rkr->Reverbtron_Bypass=(int)o->value();
-if((int) o->value()==0)
+if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
 findpos(40,(int)o->value());
 }
 void RKRGUI::cb_revtron_activar(Fl_Light_Button* o, void* v) {
@@ -19304,6 +19305,9 @@ for(i=0; i<10; i++)
         break;
        }
   }
+  
+  
+  
   
   switch(i)
   
