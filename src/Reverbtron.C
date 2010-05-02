@@ -46,7 +46,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   fb = 0.0f;
   feedback = 0.0f;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
-  time = (float *) malloc (sizeof (float) * 2000);
+  time = (int *) malloc (sizeof (int) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
@@ -74,9 +74,9 @@ Reverbtron::cleanup ()
 void
 Reverbtron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex, verbindex;
+  int i, j, xindex, fbindex;
   int interval = length/2;
-  int numtaps = 5;
+  int fbctr = 5;
   float l,lyn;
 
   for (i = 0; i < PERIOD; i++)
@@ -85,7 +85,6 @@ Reverbtron::out (float * smpsl, float * smpsr)
       l = smpsl[i] + smpsr[i] +  feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
-
       
       //Convolve left channel
       lyn = 0;
@@ -93,7 +92,8 @@ Reverbtron::out (float * smpsl, float * smpsr)
 
       for (j =0; j<Plength; j++)
       {
-      if((xindex = offset + time[j])>=maxx_size) xindex -= maxx_size;
+      xindex = offset + time[j];
+      if(xindex>=maxx_size) xindex -= maxx_size;
       lyn += data[j] * lxn[xindex];		//this is all there is to convolution
          
       }
@@ -142,7 +142,11 @@ int data_length=0;
 int subsample = 0;
 float compresion = 0.0;
 float skip = 0.0;
+float tmp = 0.0f;
 char wbuf[256];
+
+float ftime[2000];
+
 FILE *fs;
 
 if(!Puser)
@@ -168,16 +172,29 @@ bzero(wbuf,sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
 sscanf(wbuf, "%d\n", &data_length);
 
-
+if(data_length>2000) data_length = 2000;
 //Time Data
 for(i=0;i<data_length;i++)
 {
 bzero(wbuf,sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
-sscanf(wbuf,"%f,%f\n",&time[i],&data[i]);
+sscanf(wbuf,"%f,%f\n",&ftime[i],&data[i]);
 }
 
 fclose(fs);
+
+for (i=0; i<data_length;i++) time[i]=lrintf(ftime[i]*fSAMPLE_RATE);
+ for (i=1; i<(data_length/4);i++) //head fader 
+ {
+  tmp = ((float) i)/(0.25f * (float) data_length);
+  //fade the head here
+  }
+
+
+if(Plength>data_length) Plength = data_length;
+ 
+//printf("ftime %f time %d SR %f data %f length %d avtime %d\n", ftime[1000], time[1000], fSAMPLE_RATE, data[1000], data_length, avgtime);
+
 return(1);
 };
 
@@ -233,13 +250,14 @@ Reverbtron::changepar (int npar, int value)
     case 3:
       if (Psafe)
       {
-      if (value < maxx_len)
+      if (value < 500)
       Plength = value;
       else
-      Plength = maxx_len;
+      Plength = 500;
       }
-      else Plength = value;
+     else Plength = value;
       length = (int) (fSAMPLE_RATE * convlength);        //time in samples       
+      //printf("offset %d Plength %d\n", offset, Plength);
       break;
     case 8:
       if(!setfile(value))
@@ -266,11 +284,11 @@ Reverbtron::changepar (int npar, int value)
       Pfb = value;
       if(Pfb<0)
       {
-      fb = (float) .1f*value/250.0f;  
+      fb = (float) value/250.0f;  
       }
       else
       {
-      fb = (float) .1f*value/500.0f; 
+      fb = (float) value/128.0f; 
       }    
       break;
 

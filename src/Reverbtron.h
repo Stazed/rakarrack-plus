@@ -68,8 +68,10 @@ private:
   int maxx_size,maxx_read,real_len,length;
 
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *time, *lxn;
+  float *data, *lxn;
+  int *time;
   float level,fb, feedback;
+  int avgtime;
 
 
 
