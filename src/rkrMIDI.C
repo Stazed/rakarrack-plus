@@ -381,6 +381,9 @@ else
    case 39:
     if(inoff) StompBox_Bypass=1; else StompBox_Bypass=0;
      break;
+   case 40:
+    if(inoff) Reverbtron_Bypass=1; else Reverbtron_Bypass=0;
+     break;
 
    
    case 121:
@@ -536,6 +539,9 @@ RKR::checkonoff(int miraque)
      break;
    case 39:
      if (StompBox_Bypass) return(0);
+     break;
+   case 40:
+     if (Reverbtron_Bypass) return(0);
      break;
 
 

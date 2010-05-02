@@ -138,9 +138,47 @@ Reverbtron::setpanning (int Ppanning)
 int
 Reverbtron::setfile(int value)
 {
+int i;
+int data_length=0;
+int subsample = 0;
+float compresion = 0.0;
+float skip = 0.0;
+char wbuf[256];
+FILE *fs;
+
+if(!Puser)
+{
+Filenum = value;
+bzero(Filename,sizeof(Filename));
+sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
+}
+
+if ((fs = fopen (Filename, "r")) == NULL) return(0);
+
+//Name
+bzero(wbuf,sizeof(wbuf));
+fgets(wbuf,sizeof wbuf,fs);
+
+// Subsample Compresion Skip 
+bzero(wbuf,sizeof(wbuf));
+fgets(wbuf,sizeof wbuf,fs);
+sscanf(wbuf,"%d,%f,%f\n",&subsample,&compresion,&skip);
+
+//Length
+bzero(wbuf,sizeof(wbuf));
+fgets(wbuf,sizeof wbuf,fs);
+sscanf(wbuf, "%d\n", &data_length);
 
 
+//Time Data
+for(i=0;i<data_length;i++)
+{
+bzero(wbuf,sizeof(wbuf));
+fgets(wbuf,sizeof wbuf,fs);
+sscanf(wbuf,"%f,%f\n",&time[i],&data[i]);
+}
 
+fclose(fs);
 return(1);
 };
 
@@ -163,11 +201,11 @@ Reverbtron::setpreset (int npreset)
     //Reverbtron 1
     {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0},
     //Reverbtron 2
-    {67, 64, 1, 100, 0, 64, 30, 20, 1, 0, 0},
+    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0},
     //Reverbtron 3
-    {67, 75, 1, 100, 0, 64, 30, 20, 2, 0, 0},
+    {67, 75, 1, 100, 0, 64, 30, 20, 0, 0, 0},
     //Reverbtron 4
-    {67, 60, 1, 100, 0, 64, 30, 20, 3, 0, 0}
+    {67, 60, 1, 100, 0, 64, 30, 20, 0, 0, 0}
   };
 
   

@@ -5781,6 +5781,122 @@ Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_revtron_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Reverbtron_Bypass=(int)o->value();
+if((int) o->value()==0)
+findpos(40,(int)o->value());
+}
+void RKRGUI::cb_revtron_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_activar_i(o,v);
+}
+
+void RKRGUI::cb_revtron_preset_i(Fl_Choice* o, void* v) {
+  if(!v)rkr->efx_Reverbtron->setpreset((int) o->value());
+revtron_pan->value(rkr->efx_Reverbtron->getpar(1)-64);
+revtron_level->value(rkr->efx_Reverbtron->getpar(7));
+revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
+revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
+revtron_fnum->value(rkr->efx_Reverbtron->getpar(8));
+revtron_length->value(rkr->efx_Reverbtron->getpar(3));
+revtron_user->value(rkr->efx_Reverbtron->getpar(4));
+revtron_user->do_callback();
+revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
+revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
+}
+void RKRGUI::cb_revtron_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_revtron_preset[] = {
+ {"Marshall JCM200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fender Superchamp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mesa Boogie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mesa Boogie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_revtron_WD_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_revtron_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_WD_i(o,v);
+}
+
+void RKRGUI::cb_revtron_pan_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(1,(int)(o->value()+64));
+}
+void RKRGUI::cb_revtron_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_pan_i(o,v);
+}
+
+void RKRGUI::cb_revtron_level_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_revtron_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_level_i(o,v);
+}
+
+void RKRGUI::cb_revtron_damp_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_revtron_damp(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_damp_i(o,v);
+}
+
+void RKRGUI::cb_revtron_fb_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_revtron_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_fb_i(o,v);
+}
+
+void RKRGUI::cb_revtron_length_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_revtron_length(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_length_i(o,v);
+}
+
+void RKRGUI::cb_revtron_user_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Reverbtron->changepar(4,(int)o->value());
+
+if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();
+}
+void RKRGUI::cb_revtron_user(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_user_i(o,v);
+}
+
+void RKRGUI::cb_revtron_safe_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Reverbtron->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_revtron_safe(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_safe_i(o,v);
+}
+
+void RKRGUI::cb_B_rvb_i(Fl_Button*, void*) {
+  char *filename;
+filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rvb");
+strcpy(rkr->efx_Reverbtron->Filename,filename);
+rkr->efx_Reverbtron->setfile(100);
+}
+void RKRGUI::cb_B_rvb(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_rvb_i(o,v);
+}
+
+void RKRGUI::cb_revtron_fnum_i(Fl_Choice* o, void*) {
+  rkr->efx_Reverbtron->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_revtron_fnum(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_fnum_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
+ {"St. Andrew\'s Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -14476,6 +14592,165 @@ R average.");
       } // Fl_Choice* stomp_mode
       STOMPBOX->end();
     } // Fl_Group* STOMPBOX
+    { REVERBTRON = new Fl_Group(320, 210, 158, 185);
+      REVERBTRON->box(FL_UP_BOX);
+      REVERBTRON->color((Fl_Color)FL_FOREGROUND_COLOR);
+      REVERBTRON->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      REVERBTRON->labelfont(1);
+      REVERBTRON->user_data((void*)(1));
+      REVERBTRON->align(96|FL_ALIGN_INSIDE);
+      REVERBTRON->hide();
+      { revtron_activar = new Fl_Light_Button(326, 214, 34, 18, "On");
+        revtron_activar->shortcut(0x35);
+        revtron_activar->color((Fl_Color)62);
+        revtron_activar->selection_color((Fl_Color)1);
+        revtron_activar->labelsize(10);
+        revtron_activar->callback((Fl_Callback*)cb_revtron_activar, (void*)(2));
+        revtron_activar->align(68|FL_ALIGN_INSIDE);
+        revtron_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* revtron_activar
+      { revtron_preset = new Fl_Choice(399, 214, 76, 18, "Preset");
+        revtron_preset->down_box(FL_BORDER_BOX);
+        revtron_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        revtron_preset->labelsize(10);
+        revtron_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_preset->textsize(10);
+        revtron_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_preset->callback((Fl_Callback*)cb_revtron_preset);
+        revtron_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        revtron_preset->menu(menu_revtron_preset);
+      } // Fl_Choice* revtron_preset
+      { revtron_WD = new SliderW(372, 240, 100, 10, "Wet/Dry");
+        revtron_WD->type(5);
+        revtron_WD->box(FL_FLAT_BOX);
+        revtron_WD->color((Fl_Color)178);
+        revtron_WD->selection_color((Fl_Color)62);
+        revtron_WD->labeltype(FL_NORMAL_LABEL);
+        revtron_WD->labelfont(0);
+        revtron_WD->labelsize(10);
+        revtron_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_WD->minimum(-64);
+        revtron_WD->maximum(64);
+        revtron_WD->step(1);
+        revtron_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_WD->callback((Fl_Callback*)cb_revtron_WD);
+        revtron_WD->align(FL_ALIGN_LEFT);
+        revtron_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* revtron_WD
+      { revtron_pan = new SliderW(372, 256, 100, 10, "Pan");
+        revtron_pan->type(5);
+        revtron_pan->box(FL_FLAT_BOX);
+        revtron_pan->color((Fl_Color)178);
+        revtron_pan->selection_color((Fl_Color)62);
+        revtron_pan->labeltype(FL_NORMAL_LABEL);
+        revtron_pan->labelfont(0);
+        revtron_pan->labelsize(10);
+        revtron_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_pan->minimum(-64);
+        revtron_pan->maximum(63);
+        revtron_pan->step(1);
+        revtron_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_pan->callback((Fl_Callback*)cb_revtron_pan);
+        revtron_pan->align(FL_ALIGN_LEFT);
+        revtron_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* revtron_pan
+      { revtron_level = new SliderW(372, 272, 100, 10, "Level");
+        revtron_level->type(5);
+        revtron_level->box(FL_FLAT_BOX);
+        revtron_level->color((Fl_Color)178);
+        revtron_level->selection_color((Fl_Color)62);
+        revtron_level->labeltype(FL_NORMAL_LABEL);
+        revtron_level->labelfont(0);
+        revtron_level->labelsize(10);
+        revtron_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_level->maximum(127);
+        revtron_level->step(1);
+        revtron_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_level->callback((Fl_Callback*)cb_revtron_level);
+        revtron_level->align(FL_ALIGN_LEFT);
+        revtron_level->when(FL_WHEN_CHANGED);
+      } // SliderW* revtron_level
+      { revtron_damp = new SliderW(372, 288, 100, 10, "Damp");
+        revtron_damp->type(5);
+        revtron_damp->box(FL_FLAT_BOX);
+        revtron_damp->color((Fl_Color)178);
+        revtron_damp->selection_color((Fl_Color)62);
+        revtron_damp->labeltype(FL_NORMAL_LABEL);
+        revtron_damp->labelfont(0);
+        revtron_damp->labelsize(10);
+        revtron_damp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_damp->maximum(127);
+        revtron_damp->step(1);
+        revtron_damp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_damp->callback((Fl_Callback*)cb_revtron_damp);
+        revtron_damp->align(FL_ALIGN_LEFT);
+        revtron_damp->when(FL_WHEN_CHANGED);
+      } // SliderW* revtron_damp
+      { revtron_fb = new SliderW(372, 304, 100, 10, "Fb");
+        revtron_fb->type(5);
+        revtron_fb->box(FL_FLAT_BOX);
+        revtron_fb->color((Fl_Color)178);
+        revtron_fb->selection_color((Fl_Color)62);
+        revtron_fb->labeltype(FL_NORMAL_LABEL);
+        revtron_fb->labelfont(0);
+        revtron_fb->labelsize(10);
+        revtron_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_fb->minimum(-64);
+        revtron_fb->maximum(64);
+        revtron_fb->step(1);
+        revtron_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_fb->callback((Fl_Callback*)cb_revtron_fb);
+        revtron_fb->align(FL_ALIGN_LEFT);
+        revtron_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* revtron_fb
+      { revtron_length = new SliderW(372, 320, 100, 10, "Length");
+        revtron_length->type(5);
+        revtron_length->box(FL_FLAT_BOX);
+        revtron_length->color((Fl_Color)178);
+        revtron_length->selection_color((Fl_Color)62);
+        revtron_length->labeltype(FL_NORMAL_LABEL);
+        revtron_length->labelfont(0);
+        revtron_length->labelsize(10);
+        revtron_length->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_length->minimum(5);
+        revtron_length->maximum(250);
+        revtron_length->step(1);
+        revtron_length->value(100);
+        revtron_length->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_length->callback((Fl_Callback*)cb_revtron_length);
+        revtron_length->align(FL_ALIGN_LEFT);
+        revtron_length->when(FL_WHEN_RELEASE);
+      } // SliderW* revtron_length
+      { revtron_user = new Fl_Check_Button(430, 336, 15, 15, "User");
+        revtron_user->down_box(FL_BORDER_BOX);
+        revtron_user->labelsize(10);
+        revtron_user->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_user->callback((Fl_Callback*)cb_revtron_user, (void*)(2));
+      } // Fl_Check_Button* revtron_user
+      { revtron_safe = new Fl_Check_Button(339, 351, 15, 15, "Safe Mode");
+        revtron_safe->down_box(FL_BORDER_BOX);
+        revtron_safe->labelsize(10);
+        revtron_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_safe->callback((Fl_Callback*)cb_revtron_safe, (void*)(2));
+      } // Fl_Check_Button* revtron_safe
+      { B_rvb = new Fl_Button(426, 353, 46, 12, "Browse");
+        B_rvb->labelsize(10);
+        B_rvb->callback((Fl_Callback*)cb_B_rvb, (void*)(2));
+        B_rvb->deactivate();
+      } // Fl_Button* B_rvb
+      { revtron_fnum = new Fl_Choice(371, 369, 101, 16, "Preset");
+        revtron_fnum->down_box(FL_BORDER_BOX);
+        revtron_fnum->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        revtron_fnum->labelsize(10);
+        revtron_fnum->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_fnum->textsize(10);
+        revtron_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_fnum->callback((Fl_Callback*)cb_revtron_fnum);
+        revtron_fnum->when(FL_WHEN_CHANGED);
+        revtron_fnum->menu(menu_revtron_fnum);
+      } // Fl_Choice* revtron_fnum
+      REVERBTRON->end();
+    } // Fl_Group* REVERBTRON
     { Tuner = new Fl_Group(520, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -16638,6 +16913,9 @@ for (i=1; i<=t; i++)
         case 39:
         STOMPBOX->hide();
         break;
+        case 40:
+        REVERBTRON->hide();
+        break;
        
         
 
@@ -16991,7 +17269,12 @@ switch (rkr->efx_order[i])
        if(rkr->StompBox_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
-  
+   case 40:
+       REVERBTRON->position(x[i],y[i]);
+       revtron_activar->shortcut(s[i]);
+       REVERBTRON->show();
+       if(rkr->Reverbtron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
 
 
  }
@@ -18776,7 +19059,10 @@ switch(miralo)
   stomp_activar->value(rkr->StompBox_Bypass);
   stomp_activar->do_callback();
   break;
- 
+ case 40:
+  revtron_activar->value(rkr->Reverbtron_Bypass);
+  revtron_activar->do_callback();
+  break;
   
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
@@ -18875,7 +19161,7 @@ SUSTAINER->image(InOut->image());
 SEQUENCE->image(InOut->image());
 SHIFTER->image(InOut->image());
 STOMPBOX->image(InOut->image());
-
+REVERBTRON->image(InOut->image());
 Tap->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());

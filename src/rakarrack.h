@@ -2773,6 +2773,69 @@ private:
   static void cb_stomp_mode(Fl_Choice*, void*);
   static Fl_Menu_Item menu_stomp_mode[];
 public:
+  Fl_Group *REVERBTRON;
+  Fl_Light_Button *revtron_activar;
+private:
+  void cb_revtron_activar_i(Fl_Light_Button*, void*);
+  static void cb_revtron_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *revtron_preset;
+private:
+  void cb_revtron_preset_i(Fl_Choice*, void*);
+  static void cb_revtron_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_revtron_preset[];
+public:
+  SliderW *revtron_WD;
+private:
+  void cb_revtron_WD_i(SliderW*, void*);
+  static void cb_revtron_WD(SliderW*, void*);
+public:
+  SliderW *revtron_pan;
+private:
+  void cb_revtron_pan_i(SliderW*, void*);
+  static void cb_revtron_pan(SliderW*, void*);
+public:
+  SliderW *revtron_level;
+private:
+  void cb_revtron_level_i(SliderW*, void*);
+  static void cb_revtron_level(SliderW*, void*);
+public:
+  SliderW *revtron_damp;
+private:
+  void cb_revtron_damp_i(SliderW*, void*);
+  static void cb_revtron_damp(SliderW*, void*);
+public:
+  SliderW *revtron_fb;
+private:
+  void cb_revtron_fb_i(SliderW*, void*);
+  static void cb_revtron_fb(SliderW*, void*);
+public:
+  SliderW *revtron_length;
+private:
+  void cb_revtron_length_i(SliderW*, void*);
+  static void cb_revtron_length(SliderW*, void*);
+public:
+  Fl_Check_Button *revtron_user;
+private:
+  void cb_revtron_user_i(Fl_Check_Button*, void*);
+  static void cb_revtron_user(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *revtron_safe;
+private:
+  void cb_revtron_safe_i(Fl_Check_Button*, void*);
+  static void cb_revtron_safe(Fl_Check_Button*, void*);
+public:
+  Fl_Button *B_rvb;
+private:
+  void cb_B_rvb_i(Fl_Button*, void*);
+  static void cb_B_rvb(Fl_Button*, void*);
+public:
+  Fl_Choice *revtron_fnum;
+private:
+  void cb_revtron_fnum_i(Fl_Choice*, void*);
+  static void cb_revtron_fnum(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_revtron_fnum[];
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

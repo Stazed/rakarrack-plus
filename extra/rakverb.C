@@ -39,7 +39,7 @@ main(int argc, char *argv[])
  int option_index = 0, opt;
  int exitwithhelp = 0;
  char wbuf[2048];
- int i;
+ int i,k;
  int readcount;
  int have_output=0;
  FILE *fn;
@@ -164,18 +164,26 @@ for (i = 0; i<PERIOD; i++) {
 if(x>1024) skip = x/1024;   //Often will be longer than 1024.  Change to make final file longer or shorter.
 float compress = 100.0f * ((float) x)/((float) sfinfo.frames);
 float quality = (compress/((float) skip));
-printf("Subsampling: %d \nCompression (%): %f\nQuality (%): %f\n", skip, compress, quality);
+printf("Subsampling: %d \nCompression : %3.2f%%\nQuality : %3.2f%%\n", skip, compress, quality);
 sf_close(infile);
 
+bzero(wbuf,sizeof(wbuf));
+sprintf(wbuf,"%d,%f,%f\n", skip, compress, quality);
+fputs(wbuf,fn);
+
+k=0;
+for(i=0;i<(x-skip);i+=skip)
+{ 
+k++;
+}
+bzero(wbuf,sizeof(wbuf));
+sprintf(wbuf,"%d\n", k);
+fputs(wbuf,fn);
 
 for(i=0;i<(x-skip);i+=skip)
 { 
   bzero(wbuf,sizeof(wbuf));
-  sprintf(wbuf, "%f\t",index[i]);
-  fputs(wbuf,fn);
-
-  bzero(wbuf,sizeof(wbuf));
-  sprintf(wbuf, "%f\n",data[i]);
+  sprintf(wbuf, "%f,%f\n",index[i],data[i]);
   fputs(wbuf,fn);
 }
 

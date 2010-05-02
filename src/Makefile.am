@@ -42,6 +42,7 @@ rakarrack_SOURCES = main.C \
 	RecognizeNote.h \
 	Resample.h \
 	Reverb.h \
+	Reverbtron.h \
 	Ring.h \
 	RyanWah.h \
 	Sequence.h \
@@ -115,6 +116,7 @@ rakarrack_SOURCES = main.C \
 	Sequence.C \
 	Shifter.C \
 	StompBox.C \
+	Reverbtron.C \
 	MIDIConverter.C
 	
 	

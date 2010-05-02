@@ -21,8 +21,8 @@
 
 */
 
-#ifndef CONVOLOTRON_H
-#define CONVOLOTRON_H
+#ifndef REVERBTRON_H
+#define REVERBTRON_H
 
 #include <sndfile.h>
 #include "global.h"
