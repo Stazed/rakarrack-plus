@@ -131,7 +131,7 @@ Echo::out (float * smpsl, float * smpsr)
 
       ldlout = 0.0 - ldl * fb;
       rdlout = 0.0 - rdl * fb;
-      if (Pdirect)
+      if (!Pdirect)
       {
         ldlout = ldl = smpsl[i] * panning + ldlout;
         rdlout = rdl = smpsr[i] * (1.0f - panning) + rdlout;
