@@ -25,7 +25,6 @@
 #define REVERBTRON_H
 
 #include "global.h"
-#include "Resample.h"
 
 class Reverbtron
 {
@@ -76,7 +75,6 @@ private:
 
   //Parametrii reali
   
-  class Resample *M_Resample;
 
 
 };

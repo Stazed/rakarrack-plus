@@ -40,6 +40,7 @@ main(int argc, char *argv[])
  int exitwithhelp = 0;
  char wbuf[2048];
  int i,k;
+ int step;
  int readcount;
  int have_output=0;
  FILE *fn;
@@ -50,7 +51,7 @@ main(int argc, char *argv[])
  char tempfile[128];
  float *buf;
  float *index, *data;
-
+ float sample;
  float testzero, time, tmp, iSR, lastbuf;
  int skip = 0;
  int x = 0;
@@ -109,9 +110,9 @@ main(int argc, char *argv[])
 }    
 
 
- buf = (float *) malloc (sizeof (float) * PERIOD);
- index = (float *) malloc (sizeof (float) * sfinfo.frames); // put the max size
- data  = (float *) malloc (sizeof (float) * sfinfo.frames); // put the max size
+ buf = (float *) malloc (sizeof (float) * PERIOD*sfinfo.channels);
+ index = (float *) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
+ data  = (float *) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
 
 
 if(!have_output)
@@ -134,6 +135,8 @@ time = 0.0f;
 tmp = 0.0f;
 lastbuf = 0.0f;
 iSR = 1.0f/((float) sfinfo.samplerate);
+if (sfinfo.channels==1) step = 1;
+if (sfinfo.channels==2) step = 2;
 
 while( readcount > 0)
 { 
@@ -144,9 +147,13 @@ readcount = sf_readf_float(infile,buf,PERIOD);  //PERIOD is defined UP ... chang
 //process the data here 
 //
 
-for (i = 0; i<PERIOD; i++) {
-     tmp += buf[i];
-     testzero = buf[i] * lastbuf;       //one-liner zero crossing detection 
+for (i = 0; i<(PERIOD*sfinfo.channels); i+=step) {
+
+     if(step==1) sample= buf[i];
+     if(step==2) sample= (buf[i]+buf[i+1])*.5;
+
+     tmp += sample;
+     testzero = sample * lastbuf;       //one-liner zero crossing detection 
      if(testzero < 0.0f) {
      data[x] = tmp;
      index[x] = time;
@@ -154,7 +161,7 @@ for (i = 0; i<PERIOD; i++) {
      tmp = 0.0f;
      }	
      time+=iSR;
-     lastbuf = buf[i];
+     lastbuf = sample;
 }
 //index data in index[x]
 //data data in data[x]

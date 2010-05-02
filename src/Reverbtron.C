@@ -50,7 +50,6 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   data = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
-  M_Resample = new Resample(0);
   setpreset (Ppreset);
   cleanup ();
 };
