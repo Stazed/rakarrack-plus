@@ -5893,6 +5893,10 @@ void RKRGUI::cb_revtron_fnum(Fl_Choice* o, void* v) {
 Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
  {"St. Andrew\'s Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"St.Andrews Church Stereo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Chapel", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Great Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Springverb", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
