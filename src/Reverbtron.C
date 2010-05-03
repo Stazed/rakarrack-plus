@@ -199,7 +199,9 @@ memset(data, 0, sizeof(float)*2000);
 memset(time, 0, sizeof(int)*2000);
 
 if(Plength>=data_length) Plength = data_length;
+if(Plength==0) Plength=400;
 skip = data_length/Plength;
+if(skip==0) skip=1;
 for (i=0; i<data_length;i+=skip)
 {
   index++;
@@ -273,6 +275,7 @@ Reverbtron::changepar (int npar, int value)
     case 3:
      Plength = value;
      if((Psafe) && (Plength>400)) Plength = 400;
+     convert_time(); 
      break;
     case 8:
       if(!setfile(value))
