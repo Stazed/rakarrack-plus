@@ -122,6 +122,11 @@ private:
   void cb_Save_Skin_i(Fl_Menu_*, void*);
   static void cb_Save_Skin(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *ConvertReverb;
+private:
+  void cb_ConvertReverb_i(Fl_Menu_*, void*);
+  static void cb_ConvertReverb(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *salir;
 private:
   void cb_salir_i(Fl_Menu_*, void*);

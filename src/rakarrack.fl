@@ -824,7 +824,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1383 102 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1376 95 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -891,6 +891,20 @@ rkr->sschema = scheme_ch->value();
 
 rkr->saveskin(filename);}
             xywh {0 0 36 21} labelcolor 7 divider
+          }
+          MenuItem ConvertReverb {
+            label {Convert Reverb IR File}
+            callback {char *filename;
+char name[64];
+bzero(name,sizeof(name));
+sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+
+filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".wav");
+rkr->ConvertReverbFile(filename);
+rkr->Message(name, "Please, now use Reverbtron to load the new '.rvb' file");} selected
+            xywh {0 0 36 21} divider
           }
           MenuItem salir {
             label Exit
@@ -6300,7 +6314,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
           user_data 2
           callback {rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-findpos(40,(int)o->value());} selected
+findpos(40,(int)o->value());}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice revtron_preset {
@@ -6819,11 +6833,11 @@ save_stat(1);}
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuB {
+      Fl_Menu_Bar MenuB {open
         xywh {0 0 800 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
-          label {&File}
+          label {&File} open
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem NewB {

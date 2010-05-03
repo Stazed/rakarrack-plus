@@ -2060,9 +2060,19 @@ RKR::ConvertOldFile(char * filename)
 
 char buff[255];
 bzero(buff,sizeof(buff));
-sprintf(buff,"rakconvert -c %s",filename);
+sprintf(buff,"rakconvert -c '%s'",filename);
 system(buff);
 
+}
+
+void
+RKR::ConvertReverbFile(char * filename)
+{
+char buff[255];
+bzero(buff,sizeof(buff));
+sprintf(buff,"rakverb -i '%s'",filename);
+printf("%s\n",buff);
+system(buff);
 }
 
 

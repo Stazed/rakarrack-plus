@@ -192,6 +192,7 @@ public:
   int loadbank (char *filename);
   int savebank (char *filename);
   void ConvertOldFile(char *filename);
+  void ConvertReverbFile(char * filename);
   void dump_preset_names ();
   void New ();
   void New_Bank ();
