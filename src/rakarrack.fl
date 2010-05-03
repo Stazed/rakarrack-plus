@@ -824,7 +824,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1376 95 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1352 39 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -903,7 +903,7 @@ filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
 rkr->ConvertReverbFile(filename);
-rkr->Message(name, "Please, now use Reverbtron to load the new '.rvb' file");} selected
+rkr->Message(name, "Please, now use Reverbtron to load the new '.rvb' file");}
             xywh {0 0 36 21} divider
           }
           MenuItem salir {
@@ -5108,7 +5108,7 @@ rkr->efx_Convol->setfile(100);}
         Fl_Choice convo_fnum {
           label Preset
           callback {rkr->efx_Convol->changepar(8,(int)o->value());}
-          xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
+          xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Marshall JCM200}
@@ -6326,18 +6326,27 @@ revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
 revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
 revtron_fnum->value(rkr->efx_Reverbtron->getpar(8));
 revtron_length->value(rkr->efx_Reverbtron->getpar(3));
+revtron_strech->value(rkr->efx_Reverbtron->getpar(9));
+revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
 revtron_user->value(rkr->efx_Reverbtron->getpar(4));
 revtron_user->do_callback();
-revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {St. Andrew's Church}
+            label Spring
             xywh {77 77 36 21} labelsize 10
           }
           MenuItem {} {
-            label {St.Andews Church Stereo}
+            label {St.Andews Church} selected
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Hall
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {EMT Large}
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -6377,19 +6386,25 @@ revtron_fb->value(rkr->efx_Reverbtron->getpar(10));}
           xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 1500 step 1 value 100 textcolor 7
           class SliderW
         }
+        Fl_Value_Slider revtron_strech {
+          label Strech
+          callback {rkr->efx_Reverbtron->changepar(9,(int)o->value());}
+          xywh {372 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button revtron_safe {
+          label Safe
+          user_data 2
+          callback {rkr->efx_Reverbtron->changepar(2,(int)o->value());}
+          xywh {336 350 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
         Fl_Check_Button revtron_user {
           label User
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(4,(int)o->value());
 
 if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
-          xywh {430 336 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button revtron_safe {
-          label {Safe Mode}
-          user_data 2
-          callback {rkr->efx_Reverbtron->changepar(2,(int)o->value())}
-          xywh {339 351 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {387 350 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Button B_rvb {
           label Browse
@@ -6405,7 +6420,7 @@ rkr->efx_Reverbtron->setfile(100);}
         Fl_Choice revtron_fnum {
           label Preset
           callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
-          xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 1 textsize 10 textcolor 7
+          xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {St. Andrew's Church}
@@ -6429,6 +6444,10 @@ rkr->efx_Reverbtron->setfile(100);}
           }
           MenuItem {} {
             label {Santa Lucia}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label EMT
             xywh {0 0 36 21} labelsize 10
           }
         }

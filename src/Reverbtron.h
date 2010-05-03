@@ -48,32 +48,36 @@ public:
 
 
 private:
+
+  void setvolume (int Pvolume);
+  void setpanning (int Ppanning);
+  void sethidamp (int Phidamp);
+  void convert_time();
+
+
+
   //Parametrii
   int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
   int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
   int Phidamp;
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
-  int Psafe;
   int Plength;		//5...500 ms// Set maximum length of IR.
   int Puser;		//-64...64//Feedback.
   int Pstretch;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
   int Filenum;
+  int Psafe;
   int Pfb;		//-64 ... 64// amount of feedback
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void sethidamp (int Phidamp);
-  void convert_time();
   int offset;
-  int maxx_size,maxx_read,real_len,length;
+  int maxx_size;
   int data_length;
+  int avgtime;
 
+  int *time;
   float fstretch;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn, *ftime;
-  int *time;
+  float *data, *lxn, *ftime, *tdata;
   float level,fb, feedback;
-  int avgtime;
 
 
 

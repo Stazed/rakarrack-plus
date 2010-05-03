@@ -36,12 +36,11 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   Pvolume = 50;
   Ppanning = 64;
   Plrcross = 100;
-  Psafe = 1;
   Phidamp = 60;
   Filenum = 0;
   Plength = 50;
   Puser = 0;
-  real_len = 0;
+  Psafe = 0;
   convlength = 6.0f;  //max 6s verb time
   fb = 0.0f;
   feedback = 0.0f;
@@ -49,6 +48,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   time = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
+  tdata = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;
   data_length=0;
@@ -67,8 +67,6 @@ Reverbtron::~Reverbtron ()
 void
 Reverbtron::cleanup ()
 {
-
-
 };
 
 /*
@@ -77,10 +75,12 @@ Reverbtron::cleanup ()
 void
 Reverbtron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex, fbindex;
-  int interval = length/2;
-  int fbctr = 5;
+  int i, j, xindex;
+//  int fbindex;
+//  int interval = length/2;
+//  int fbctr = 5;
   float l,lyn;
+  int length = Plength;
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -93,7 +93,7 @@ Reverbtron::out (float * smpsl, float * smpsr)
       lyn = 0;
       xindex = offset;
 
-      for (j =0; j<Plength; j++)
+      for (j =0; j<length; j++)
       {
       xindex = offset + time[j];
       if(xindex>=maxx_size) xindex -= maxx_size;
@@ -144,7 +144,6 @@ int i;
 int subsample = 0;
 float compresion = 0.0;
 float skip = 0.0;
-float tmp = 0.0f;
 char wbuf[256];
 
 FILE *fs;
@@ -157,6 +156,10 @@ sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
 }
 
 if ((fs = fopen (Filename, "r")) == NULL) return(0);
+
+memset(tdata, 0, sizeof(float)*2000);
+memset(ftime, 0, sizeof(float)*2000);
+
 
 //Name
 bzero(wbuf,sizeof(wbuf));
@@ -171,21 +174,17 @@ sscanf(wbuf,"%d,%f,%f\n",&subsample,&compresion,&skip);
 bzero(wbuf,sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
 sscanf(wbuf, "%d\n", &data_length);
-
 if(data_length>2000) data_length = 2000;
 //Time Data
 for(i=0;i<data_length;i++)
 {
 bzero(wbuf,sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
-sscanf(wbuf,"%f,%f\n",&ftime[i],&data[i]);
+sscanf(wbuf,"%f,%f\n",&ftime[i],&tdata[i]);
 }
 
 fclose(fs);
-
-//printf("ftime %f time %d SR %f data %f length %d avtime %d\n", ftime[1000], time[1000], fSAMPLE_RATE, data[1000], data_length, avgtime);
 convert_time();
-
 return(1);
 };
 
@@ -193,13 +192,16 @@ void Reverbtron::convert_time()
 {
 int i;
 int skip = 0;
-int skval = 1;
+int skval = 0;
 int index = 0;
-float tmp;
+//float tmp;
 
-if(Plength>=data_length) Plength = data_length - 1;
-skval = data_length/(data_length - Plength);
+memset(data, 0, sizeof(float)*2000);
+memset(time, 0, sizeof(int)*2000);
 
+
+if(Plength>=data_length) Plength = data_length;
+skval = 1 + data_length/(data_length - Plength);
 for (i=0; i<data_length;i++)
 {
 
@@ -212,10 +214,11 @@ else
   index++;
   if( ftime[i] > 5.9f ) ftime[i] = 5.9f; 
   time[index]=lrintf(fstretch*ftime[i]*fSAMPLE_RATE);
-  data[index]=data[i]; //possible bug here if file doesn't load each time
+  data[index]=tdata[i];
   }
 }
 
+/*
  for (i=1; i<(data_length);i++) //head fader 
  {
 
@@ -223,7 +226,7 @@ else
   //fade the head here
   }
 
-
+*/
  
 
 };
@@ -242,14 +245,14 @@ Reverbtron::setpreset (int npreset)
   const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Reverbtron 1
-    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0},
-    //Reverbtron 2
-    {67, 64, 1, 100, 0, 64, 30, 20, 1, 0, 0},
-    //Reverbtron 3
-    {67, 75, 1, 100, 0, 64, 30, 20, 0, 0, 0},
-    //Reverbtron 4
-    {67, 60, 1, 100, 0, 64, 30, 20, 1, 0, 0}
+    //Spring
+    {64, 64, 1, 1500, 0, 0, 60, 18, 4, 0, 0},
+    //St Andrew
+    {64, 64, 1, 1500, 0, 0, 12, 54, 1, 0, 0},
+    //Great Hall
+    {64, 64, 1, 1500, 0, 0, 0, 50, 3, 0, 0},
+    //EMT
+    {64, 64, 1, 1500, 0, 0, 30, 24, 6, 0, 0}
   };
 
   
@@ -273,20 +276,12 @@ Reverbtron::changepar (int npar, int value)
       setpanning (value);
       break;
     case 2:
-      Psafe = value;
+      Psafe=value;
       break;
     case 3:
-      if (Psafe)
-      {
-      if (value < 500)
-      Plength = value;
-      else
-      Plength = 500;
-      }
-     else Plength = value;
-      length = (int) (fSAMPLE_RATE * convlength);        //time in samples       
-      //printf("offset %d Plength %d\n", offset, Plength);
-      break;
+     Plength = value;
+     if((Psafe) && (Plength>400)) Plength = 400;
+     break;
     case 8:
       if(!setfile(value))
       {

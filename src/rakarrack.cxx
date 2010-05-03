@@ -5825,9 +5825,10 @@ revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
 revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
 revtron_fnum->value(rkr->efx_Reverbtron->getpar(8));
 revtron_length->value(rkr->efx_Reverbtron->getpar(3));
+revtron_strech->value(rkr->efx_Reverbtron->getpar(9));
+revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
 revtron_user->value(rkr->efx_Reverbtron->getpar(4));
 revtron_user->do_callback();
-revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 }
 void RKRGUI::cb_revtron_preset(Fl_Choice* o, void* v) {
@@ -5835,8 +5836,10 @@ void RKRGUI::cb_revtron_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_revtron_preset[] = {
- {"St. Andrew\'s Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"St.Andews Church Stereo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Spring", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"St.Andews Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"EMT Large", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5882,13 +5885,11 @@ void RKRGUI::cb_revtron_length(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_length_i(o,v);
 }
 
-void RKRGUI::cb_revtron_user_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Reverbtron->changepar(4,(int)o->value());
-
-if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();
+void RKRGUI::cb_revtron_strech_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(9,(int)o->value());
 }
-void RKRGUI::cb_revtron_user(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_user_i(o,v);
+void RKRGUI::cb_revtron_strech(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_strech_i(o,v);
 }
 
 void RKRGUI::cb_revtron_safe_i(Fl_Check_Button* o, void*) {
@@ -5896,6 +5897,15 @@ void RKRGUI::cb_revtron_safe_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_revtron_safe(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_safe_i(o,v);
+}
+
+void RKRGUI::cb_revtron_user_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Reverbtron->changepar(4,(int)o->value());
+
+if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();
+}
+void RKRGUI::cb_revtron_user(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_user_i(o,v);
 }
 
 void RKRGUI::cb_B_rvb_i(Fl_Button*, void*) {
@@ -5924,6 +5934,7 @@ Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
  {"Great Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Springverb", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"EMT", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -13000,7 +13011,6 @@ R average.");
         convo_fnum->textsize(10);
         convo_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_fnum->callback((Fl_Callback*)cb_convo_fnum);
-        convo_fnum->when(FL_WHEN_CHANGED);
         convo_fnum->menu(menu_convo_fnum);
       } // Fl_Choice* convo_fnum
       CONVOLOTRON->end();
@@ -14757,18 +14767,35 @@ R average.");
         revtron_length->align(FL_ALIGN_LEFT);
         revtron_length->when(FL_WHEN_RELEASE);
       } // SliderW* revtron_length
-      { revtron_user = new Fl_Check_Button(430, 336, 15, 15, "User");
-        revtron_user->down_box(FL_BORDER_BOX);
-        revtron_user->labelsize(10);
-        revtron_user->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        revtron_user->callback((Fl_Callback*)cb_revtron_user, (void*)(2));
-      } // Fl_Check_Button* revtron_user
-      { revtron_safe = new Fl_Check_Button(339, 351, 15, 15, "Safe Mode");
+      { revtron_strech = new SliderW(372, 336, 100, 10, "Strech");
+        revtron_strech->type(5);
+        revtron_strech->box(FL_FLAT_BOX);
+        revtron_strech->color((Fl_Color)178);
+        revtron_strech->selection_color((Fl_Color)62);
+        revtron_strech->labeltype(FL_NORMAL_LABEL);
+        revtron_strech->labelfont(0);
+        revtron_strech->labelsize(10);
+        revtron_strech->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_strech->minimum(-64);
+        revtron_strech->maximum(64);
+        revtron_strech->step(1);
+        revtron_strech->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_strech->callback((Fl_Callback*)cb_revtron_strech);
+        revtron_strech->align(FL_ALIGN_LEFT);
+        revtron_strech->when(FL_WHEN_RELEASE);
+      } // SliderW* revtron_strech
+      { revtron_safe = new Fl_Check_Button(336, 350, 15, 15, "Safe");
         revtron_safe->down_box(FL_BORDER_BOX);
         revtron_safe->labelsize(10);
         revtron_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_safe->callback((Fl_Callback*)cb_revtron_safe, (void*)(2));
       } // Fl_Check_Button* revtron_safe
+      { revtron_user = new Fl_Check_Button(387, 350, 15, 15, "User");
+        revtron_user->down_box(FL_BORDER_BOX);
+        revtron_user->labelsize(10);
+        revtron_user->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_user->callback((Fl_Callback*)cb_revtron_user, (void*)(2));
+      } // Fl_Check_Button* revtron_user
       { B_rvb = new Fl_Button(426, 353, 46, 12, "Browse");
         B_rvb->labelsize(10);
         B_rvb->callback((Fl_Callback*)cb_B_rvb, (void*)(2));
@@ -14782,7 +14809,6 @@ R average.");
         revtron_fnum->textsize(10);
         revtron_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_fnum->callback((Fl_Callback*)cb_revtron_fnum);
-        revtron_fnum->when(FL_WHEN_CHANGED);
         revtron_fnum->menu(menu_revtron_fnum);
       } // Fl_Choice* revtron_fnum
       REVERBTRON->end();

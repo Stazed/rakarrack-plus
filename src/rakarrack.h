@@ -2825,15 +2825,20 @@ private:
   void cb_revtron_length_i(SliderW*, void*);
   static void cb_revtron_length(SliderW*, void*);
 public:
-  Fl_Check_Button *revtron_user;
+  SliderW *revtron_strech;
 private:
-  void cb_revtron_user_i(Fl_Check_Button*, void*);
-  static void cb_revtron_user(Fl_Check_Button*, void*);
+  void cb_revtron_strech_i(SliderW*, void*);
+  static void cb_revtron_strech(SliderW*, void*);
 public:
   Fl_Check_Button *revtron_safe;
 private:
   void cb_revtron_safe_i(Fl_Check_Button*, void*);
   static void cb_revtron_safe(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *revtron_user;
+private:
+  void cb_revtron_user_i(Fl_Check_Button*, void*);
+  static void cb_revtron_user(Fl_Check_Button*, void*);
 public:
   Fl_Button *B_rvb;
 private:
