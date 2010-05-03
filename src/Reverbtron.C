@@ -237,17 +237,17 @@ Reverbtron::sethidamp (int Phidamp)
 void
 Reverbtron::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
+  const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Spring
-    {64, 64, 1, 1500, 0, 0, 60, 18, 4, 0, 0},
+    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64},
     //St Andrew
-    {64, 64, 1, 1500, 0, 0, 12, 54, 1, 0, 0},
+    {64, 0, 1, 1500, 0, 0, 12, 54, 1, 0, 0, 64},
     //Great Hall
-    {64, 64, 1, 1500, 0, 0, 0, 50, 3, 0, 0},
+    {64, 0, 1, 1500, 0, 0, 0, 50, 3, 0, 0, 64},
     //EMT
-    {64, 64, 1, 1500, 0, 0, 30, 24, 6, 0, 0}
+    {64, 0, 1, 1500, 0, 0, 30, 24, 6, 0, 0, 64}
   };
 
   
@@ -268,7 +268,7 @@ Reverbtron::changepar (int npar, int value)
       setvolume (value);
       break;
     case 1:
-      setpanning (value);
+      Pfade=value;
       break;
     case 2:
       Psafe=value;
@@ -278,13 +278,13 @@ Reverbtron::changepar (int npar, int value)
      if((Psafe) && (Plength>400)) Plength = 400;
      convert_time(); 
      break;
-    case 8:
-      if(!setfile(value))
-      {
-       printf("Unable to open the IR file\n");
-      }
+    case 4:
+      Puser = value;
       break;
     case 5:
+      Pidelay = value;
+      idelay = ((float) value)/1000.0f;
+      convert_time();
       break;
     case 6:
       sethidamp (value);
@@ -293,8 +293,11 @@ Reverbtron::changepar (int npar, int value)
       Plevel = value;
       level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
       break;
-    case 4:
-      Puser = value;
+    case 8:
+      if(!setfile(value))
+      {
+       printf("Unable to open the IR file\n");
+      }
       break;
     case 9:
       Pstretch = value;
@@ -318,8 +321,9 @@ Reverbtron::changepar (int npar, int value)
       }    
       break;
     case 11:
-      Pidelay = value;
-      idelay = ((float) value)/1000.0f;
+      setpanning (value);
+      break;
+     
 
    };
 };
@@ -333,7 +337,7 @@ Reverbtron::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return (Ppanning);
+      return (Pfade);
       break;
     case 2:
       return(Psafe);
@@ -345,7 +349,7 @@ Reverbtron::getpar (int npar)
       return (Filenum);
       break;
     case 5:
-      return (0);
+      return (Pidelay);
       break;
     case 6:
       return (Phidamp);
@@ -362,7 +366,8 @@ Reverbtron::getpar (int npar)
     case 10:
       return(Pfb);
       break; 
-
+    case 11:
+      return(Ppanning);
     };
   return (0);			//in case of bogus parameter number
 };

@@ -2830,6 +2830,16 @@ private:
   void cb_revtron_strech_i(SliderW*, void*);
   static void cb_revtron_strech(SliderW*, void*);
 public:
+  SliderW *revtron_idelay;
+private:
+  void cb_revtron_idelay_i(SliderW*, void*);
+  static void cb_revtron_idelay(SliderW*, void*);
+public:
+  SliderW *revtron_fade;
+private:
+  void cb_revtron_fade_i(SliderW*, void*);
+  static void cb_revtron_fade(SliderW*, void*);
+public:
   Fl_Check_Button *revtron_safe;
 private:
   void cb_revtron_safe_i(Fl_Check_Button*, void*);
