@@ -554,7 +554,8 @@ public:
     float Master_Volume;
     float Balance;
     int Bypass;
-    int Res[64];
+    char RevFiname[128];
+    char ReservedFiname[128];
     int lv[50][20];
     int XUserMIDI[128][20];
     int XMIDIrangeMin[128];
