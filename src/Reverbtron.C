@@ -68,6 +68,14 @@ Reverbtron::~Reverbtron ()
 void
 Reverbtron::cleanup ()
 {
+for ( int i = 0; i < maxx_size; i++)
+{
+lxn[i] = 0.0f;
+}
+
+feedback = 0.0f;
+oldl = 0.0f;
+
 };
 
 /*
@@ -90,15 +98,15 @@ Reverbtron::out (float * smpsl, float * smpsr)
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
       
-      //Convolve left channel
-      lyn = 0;
+      //Convolve 
+      lyn = 0.0f;
       xindex = offset;
 
       for (j =0; j<length; j++)
       {
       xindex = offset + time[j];
       if(xindex>=maxx_size) xindex -= maxx_size;
-      lyn += data[j] * lxn[xindex];		//this is all there is to convolution
+      lyn += data[j] * lxn[xindex];		//this is all of the magic
          
       }
 
@@ -185,6 +193,7 @@ sscanf(wbuf,"%f,%f\n",&ftime[i],&tdata[i]);
 }
 
 fclose(fs);
+cleanup();
 convert_time();
 return(1);
 };
@@ -194,7 +203,8 @@ void Reverbtron::convert_time()
 int i;
 int skip = 0;
 int index = 0;
-//float tmp;
+int count;
+float tmp;
 
 memset(data, 0, sizeof(float)*2000);
 memset(time, 0, sizeof(int)*2000);
@@ -206,22 +216,25 @@ if(skip==0) skip=1;
 for (i=0; i<data_length;i+=skip)
 {
   index++;
-  if( ftime[i] > 5.9f ) ftime[i] = 5.9f; 
+  if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f; 
   time[index]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
   data[index]=tdata[i];
 }
 
  Plength = index;
-
-/*
- for (i=1; i<(data_length);i++) //head fader 
+ if(Pfade > 0)
+ {
+ count = lrintf(ffade * ((float) index));
+ tmp = 0.0f;
+ for (i=0; i<count;i++) //head fader 
  {
 
-  tmp = ((float) i)/(0.25f * (float) data_length);
+  tmp = ((float) i)/((float) count);
+  data[i] *= tmp;
   //fade the head here
   }
+  }
 
-*/
  
 
 };
@@ -269,6 +282,8 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 1:
       Pfade=value;
+      ffade = ((float) value)/127.0f;
+      convert_time();
       break;
     case 2:
       Psafe=value;
