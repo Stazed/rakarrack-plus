@@ -192,31 +192,23 @@ void Reverbtron::convert_time()
 {
 int i;
 int skip = 0;
-int skval = 0;
 int index = 0;
 //float tmp;
 
 memset(data, 0, sizeof(float)*2000);
 memset(time, 0, sizeof(int)*2000);
 
-
 if(Plength>=data_length) Plength = data_length;
-skval = 1 + data_length/(data_length - Plength);
-for (i=0; i<data_length;i++)
+skip = data_length/Plength;
+for (i=0; i<data_length;i+=skip)
 {
-
-  if(++skip==skval)
-  {
-  skip = 0;
-  }
-else
-  {
   index++;
   if( ftime[i] > 5.9f ) ftime[i] = 5.9f; 
   time[index]=lrintf(fstretch*ftime[i]*fSAMPLE_RATE);
   data[index]=tdata[i];
-  }
 }
+
+ Plength = index;
 
 /*
  for (i=1; i<(data_length);i++) //head fader 
