@@ -57,18 +57,20 @@ private:
   int Psafe;
   int Plength;		//5...500 ms// Set maximum length of IR.
   int Puser;		//-64...64//Feedback.
-  int Preverb;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
+  int Pstretch;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
   int Filenum;
   int Pfb;		//-64 ... 64// amount of feedback
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
-
+  void convert_time();
   int offset;
   int maxx_size,maxx_read,real_len,length;
+  int data_length;
 
+  float fstretch;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn;
+  float *data, *lxn, *ftime;
   int *time;
   float level,fb, feedback;
   int avgtime;

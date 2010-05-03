@@ -58,7 +58,7 @@ private:
   int Pmode;  
   int Prange;
   int tcount, scount, dscount, intperiod; 
-  
+  int subdiv; 
   int rndflag;
   long int hq;
 

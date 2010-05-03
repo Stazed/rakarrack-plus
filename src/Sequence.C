@@ -44,6 +44,7 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality)
   scount = 0;
   tcount = 0;
   rndflag = 0;
+  subdiv = 4;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
   modfilterl = new RBFilter (0, 25.0f, 0.15f, 2);
@@ -482,12 +483,12 @@ Sequence::setranges(int value)
        MAXFREQ = 4000.0f;
        break;     
      case 3:
-       MINFREQ = 120.0f;
-       MAXFREQ = 8000.0f; 
+       MINFREQ = 40.0f;
+       MAXFREQ = 800.0f; 
        break;
      case 4:
        MINFREQ = 100.0f;
-       MAXFREQ = 12000.0f; 
+       MAXFREQ = 1600.0f; 
        break;
      case 5:
        MINFREQ = 80.0f;
@@ -499,11 +500,11 @@ Sequence::setranges(int value)
        break;
      case 7:
        MINFREQ = 40.0f;
-       MAXFREQ = 22000.0f; 
+       MAXFREQ = 2200.0f; 
        break;
      case 8:
        MINFREQ = 20.0f;
-       MAXFREQ = 26000.0f; 
+       MAXFREQ = 6000.0f; 
        break;
 
 
@@ -588,7 +589,7 @@ Sequence::changepar (int npar, int value)
       break;
     case 9:
       Ptempo = value;
-      fperiod = fSAMPLE_RATE * 60.0f/((float) Ptempo);  //number of samples before next value
+      fperiod = fSAMPLE_RATE * 60.0f/(subdiv * (float) Ptempo);  //number of samples before next value
       ifperiod = 1.0f/fperiod;
       intperiod = (int) fperiod;
       break;

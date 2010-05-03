@@ -47,9 +47,12 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   feedback = 0.0f;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
   time = (int *) malloc (sizeof (int) * 2000);
+  ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
-  offset = 0;  
+  offset = 0;
+  data_length=0;
+  fstretch = 1.0f;
   setpreset (Ppreset);
   cleanup ();
 };
@@ -138,14 +141,11 @@ int
 Reverbtron::setfile(int value)
 {
 int i;
-int data_length=0;
 int subsample = 0;
 float compresion = 0.0;
 float skip = 0.0;
 float tmp = 0.0f;
 char wbuf[256];
-
-float ftime[2000];
 
 FILE *fs;
 
@@ -183,22 +183,50 @@ sscanf(wbuf,"%f,%f\n",&ftime[i],&data[i]);
 
 fclose(fs);
 
-for (i=0; i<data_length;i++) time[i]=lrintf(ftime[i]*fSAMPLE_RATE);
- for (i=1; i<(data_length/4);i++) //head fader 
+//printf("ftime %f time %d SR %f data %f length %d avtime %d\n", ftime[1000], time[1000], fSAMPLE_RATE, data[1000], data_length, avgtime);
+convert_time();
+
+return(1);
+};
+
+void Reverbtron::convert_time()
+{
+int i;
+int skip = 0;
+int skval = 1;
+int index = 0;
+float tmp;
+
+if(Plength>=data_length) Plength = data_length - 1;
+skval = data_length/(data_length - Plength);
+
+for (i=0; i<data_length;i++)
+{
+
+  if(++skip==skval)
+  {
+  skip = 0;
+  }
+else
+  {
+  index++;
+  if( ftime[i] > 5.9f ) ftime[i] = 5.9f; 
+  time[index]=lrintf(fstretch*ftime[i]*fSAMPLE_RATE);
+  data[index]=data[i]; //possible bug here if file doesn't load each time
+  }
+}
+
+ for (i=1; i<(data_length);i++) //head fader 
  {
+
   tmp = ((float) i)/(0.25f * (float) data_length);
   //fade the head here
   }
 
 
-if(Plength>data_length) Plength = data_length;
  
-//printf("ftime %f time %d SR %f data %f length %d avtime %d\n", ftime[1000], time[1000], fSAMPLE_RATE, data[1000], data_length, avgtime);
 
-return(1);
 };
-
-
 
 void
 Reverbtron::sethidamp (int Phidamp)
@@ -272,13 +300,20 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 7:
       Plevel = value;
-      level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);;
+      level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
       break;
     case 4:
       Puser = value;
       break;
     case 9:
-      Preverb = value;      
+      Pstretch = value;
+      if(Pstretch > 0) {
+      fstretch = 1.0f + ((float) value)/20.0f;
+      }
+      else {
+      fstretch = 1.0f + ((float) value)/69.0f;
+      }      
+      convert_time();
       break;
     case 10:
       Pfb = value;
@@ -328,7 +363,7 @@ Reverbtron::getpar (int npar)
       return(Puser);
       break;
     case 9:
-      return(Preverb);
+      return(Pstretch);
       break;   
     case 10:
       return(Pfb);
