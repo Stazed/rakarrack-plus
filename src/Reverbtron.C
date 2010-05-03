@@ -53,6 +53,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   offset = 0;
   data_length=0;
   fstretch = 1.0f;
+  idelay = 0.0f;
   setpreset (Ppreset);
   cleanup ();
 };
@@ -206,7 +207,7 @@ for (i=0; i<data_length;i+=skip)
 {
   index++;
   if( ftime[i] > 5.9f ) ftime[i] = 5.9f; 
-  time[index]=lrintf(fstretch*ftime[i]*fSAMPLE_RATE);
+  time[index]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
   data[index]=tdata[i];
 }
 
@@ -316,6 +317,9 @@ Reverbtron::changepar (int npar, int value)
       fb = (float) value/128.0f; 
       }    
       break;
+    case 11:
+      Pidelay = value;
+      idelay = ((float) value)/1000.0f;
 
    };
 };

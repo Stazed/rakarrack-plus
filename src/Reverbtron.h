@@ -62,9 +62,10 @@ private:
   int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
   int Phidamp;
   int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
-  int Plength;		//5...500 ms// Set maximum length of IR.
+  int Plength;		//20... 1500// Set maximum number of IR points to calculate.
   int Puser;		//-64...64//Feedback.
-  int Pstretch;		//0 or 1//For processing long reverb responses using some tricks to make CPU ok.
+  int Pstretch;		//-64 ... 64//For stretching reverb responses
+  int Pidelay;         //0 ... 500ms// initial delay time
   int Filenum;
   int Psafe;
   int Pfb;		//-64 ... 64// amount of feedback
@@ -74,15 +75,11 @@ private:
   int avgtime;
 
   int *time;
-  float fstretch;
+  float fstretch, idelay;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *data, *lxn, *ftime, *tdata;
   float level,fb, feedback;
-
-
-
-  //Parametrii reali
-  
+ 
 
 
 };
