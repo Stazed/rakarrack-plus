@@ -106,9 +106,9 @@ Reverbtron::out (float * smpsl, float * smpsr)
          
       }
 
-      feedback = 0.15f * fb * lyn;
-      efxoutl[i] = lyn * 2.0f * level * lpanning;
-      efxoutr[i] = lyn * 2.0f * level * rpanning;  
+      feedback = fb * lyn;
+      efxoutl[i] = lyn * level * lpanning;
+      efxoutr[i] = lyn * level * rpanning;  
 
       offset--;
       if (offset<0) offset = maxx_size;     
@@ -149,7 +149,7 @@ int i;
 int subsample = 0;
 float compresion = 0.0;
 float skip = 0.0;
-char wbuf[256];
+char wbuf[128];
 
 FILE *fs;
 
@@ -302,7 +302,7 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 7:
       Plevel = value;
-      level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+      level =  2.0f * dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
       break;
     case 8:
       if(!setfile(value))
@@ -324,11 +324,11 @@ Reverbtron::changepar (int npar, int value)
       Pfb = value;
       if(Pfb<0)
       {
-      fb = (float) value/250.0f;  
+      fb = (float) value/250.0f*.15f;  
       }
       else
       {
-      fb = (float) value/128.0f; 
+      fb = (float) value/128.0f*.15f; 
       }    
       break;
     case 11:
