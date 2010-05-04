@@ -147,8 +147,9 @@ Reverbtron::setfile(int value)
 {
 int i;
 int subsample = 0;
-float compresion = 0.0;
-float skip = 0.0;
+float skip;
+float compresion = 0.0f;
+
 char wbuf[128];
 
 FILE *fs;
@@ -196,26 +197,44 @@ return(1);
 
 void Reverbtron::convert_time()
 {
-int i;
-int skip = 0;
+int i,j;
 int index = 0;
 int count;
 float tmp;
+int chunk;
+float skip = 0.0f;
+float incr = 0.0f;
+float findex;
 
 memset(data, 0, sizeof(float)*2000);
 memset(time, 0, sizeof(int)*2000);
 
 if(Plength>=data_length) Plength = data_length;
 if(Plength==0) Plength=400;
-skip = data_length/Plength;
-if(skip==0) skip=1;
-for (i=0; i<data_length;i+=skip)
-{
-  index++;
-  if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f; 
-  time[index]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
-  data[index]=tdata[i];
-}
+
+incr = ((float) Plength)/((float) data_length);
+skip = 0.0f;
+index = 0;
+chunk = 10;
+for(i=0;i<data_length;i++)
+{ 
+  skip += incr;
+  findex = (float)index;
+  if( findex<skip)
+  {
+    for(j = 0; j<=chunk; j++)
+    {
+    if(index<Plength)   
+      { 
+    if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
+    time[index]=lrintf(fstretch*(idelay + ftime[i+j])*fSAMPLE_RATE);  //Add initial delay to all the samples
+    data[index]=tdata[i+j];  
+    index++;
+      }
+    }  
+  }
+};
+
 
  Plength = index;
  if(Pfade > 0)
