@@ -68,11 +68,7 @@ Reverbtron::~Reverbtron ()
 void
 Reverbtron::cleanup ()
 {
-for ( int i = 0; i < maxx_size; i++)
-{
-lxn[i] = 0.0f;
-}
-
+memset(lxn,0,sizeof(float)*maxx_size);
 feedback = 0.0f;
 oldl = 0.0f;
 
