@@ -2182,11 +2182,6 @@ private:
   void cb_convo_length_i(SliderW*, void*);
   static void cb_convo_length(SliderW*, void*);
 public:
-  Fl_Check_Button *convo_reverb;
-private:
-  void cb_convo_reverb_i(Fl_Check_Button*, void*);
-  static void cb_convo_reverb(Fl_Check_Button*, void*);
-public:
   Fl_Check_Button *convo_user;
 private:
   void cb_convo_user_i(Fl_Check_Button*, void*);

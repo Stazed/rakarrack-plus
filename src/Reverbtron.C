@@ -195,7 +195,7 @@ return(1);
 
 void Reverbtron::convert_time()
 {
-int i,j;
+int i;
 int index = 0;
 int count;
 float tmp;
