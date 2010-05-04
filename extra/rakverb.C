@@ -9,7 +9,7 @@
 
 
 #define PERIOD 128
-
+#define RND ( rand()/((RAND_MAX)+1.0f))
  
  
 
@@ -188,15 +188,8 @@ sprintf(wbuf,"%f,%f\n", compress, quality);
 fputs(wbuf,fn);
 
 skip = 0.0f;
-indexx = 0;
+indexx = 1500;
 chunk = 11;
-for(i=0;i<x;i++)
-{ 
-  skip += incr;
-  findex = (float)indexx;
-  if( findex<skip) 
-    indexx+=chunk;
-}
 
 bzero(wbuf,sizeof(wbuf));
 sprintf(wbuf,"%d\n", indexx);
@@ -204,7 +197,8 @@ fputs(wbuf,fn);
 
 skip = 0.0f;
 indexx = 0;
-chunk = 10;
+double dchunk = 10.0;
+chunk = 25;
 for(i=0;i<x;i++)
 { 
   skip += incr;
@@ -213,16 +207,24 @@ for(i=0;i<x;i++)
   {
     for(j = 0; j<=chunk; j++)
     {
+    if(indexx<1500)
+    {
   bzero(wbuf,sizeof(wbuf));
   sprintf(wbuf, "%f,%f\n",index[i+j],data[i+j]);
   fputs(wbuf,fn);
   indexx++;
+  
+  }
     }
+    printf("Chunk: %f\n", chunk);   
+    chunk = (int) (dchunk*RND);
+    dchunk *= 0.99;
+
   
   }
 };
-
-
+    printf("Chunk: %f\n", chunk);
+    printf("Index: %d\n", indexx);
 fclose(fn);
 return(0);
 }

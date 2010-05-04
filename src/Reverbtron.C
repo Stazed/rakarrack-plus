@@ -221,16 +221,15 @@ for(i=0;i<data_length;i++)
   findex = (float)index;
   if( findex<skip)
   {
-    for(j = 0; j<=chunk; j++)
-    {
+
     if(index<Plength)   
       { 
     if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
-    time[index]=lrintf(fstretch*(idelay + ftime[i+j])*fSAMPLE_RATE);  //Add initial delay to all the samples
-    data[index]=tdata[i+j];  
+    time[index]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
+    data[index]=tdata[i];  
     index++;
       }
-    }  
+      
   }
 };
 
