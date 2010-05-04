@@ -39,7 +39,7 @@ main(int argc, char *argv[])
  int option_index = 0, opt;
  int exitwithhelp = 0;
  char wbuf[2048];
- int i,k;
+ int i,k,j;
  int step;
  int readcount;
  int have_output=0;
@@ -53,7 +53,10 @@ main(int argc, char *argv[])
  float *index, *data;
  float sample;
  float testzero, time, tmp, iSR, lastbuf;
- int skip = 0;
+ float skip = 0.0f;
+ int indexx;
+ float chunk, incr, findex;
+ float compress, quality;
  int x = 0;
   fprintf (stderr,
    "\nrackverb convert Reverb IR wav files to the rakarrack file format.\nrackverb - Copyright (c) Josep Andreu - Ryan Billing \n\n");
@@ -168,18 +171,24 @@ for (i = 0; i<(PERIOD*sfinfo.channels); i+=step) {
 
 }
 
-if(x>1024) skip = x/1024;   //Often will be longer than 1024.  Change to make final file longer or shorter.
-float compress = 100.0f * ((float) x)/((float) sfinfo.frames);
-float quality = (compress/((float) skip));
-printf("Subsampling: %d \nCompression : %3.2f%%\nQuality : %3.2f%%\n", skip, compress, quality);
+incr = 1500.0f/((float) x);
+printf("incr: %f\n", incr);
+if(x<1500.0f) incr = 1.0f;   //Often will be longer than 1024.  Change to make final file longer or shorter.
+
+compress = 100.0f * ((float) x)/((float) sfinfo.frames);
+printf("Compression: %f\n", compress);
+quality = incr*compress;
+printf("Quality : %f\n", quality);
 sf_close(infile);
+
+
 
 bzero(wbuf,sizeof(wbuf));
 sprintf(wbuf,"%d,%f,%f\n", skip, compress, quality);
 fputs(wbuf,fn);
 
 k=0;
-for(i=0;i<(x-skip);i+=skip)
+for(i=0;i<x;i++)
 { 
 k++;
 }
@@ -187,12 +196,29 @@ bzero(wbuf,sizeof(wbuf));
 sprintf(wbuf,"%d\n", k);
 fputs(wbuf,fn);
 
-for(i=0;i<(x-skip);i+=skip)
+printf("X : %d\n", x);
+skip = 0.0f;
+indexx = 0;
+chunk = 10;
+for(i=0;i<x;i++)
 { 
+  skip += incr;
+  findex = (float)indexx;
+  if( findex<skip)
+  {
+    for(j = 0; j<=chunk; j++)
+    {
   bzero(wbuf,sizeof(wbuf));
-  sprintf(wbuf, "%f,%f\n",index[i],data[i]);
+  sprintf(wbuf, "%f,%f\n",index[i+j],data[i+j]);
   fputs(wbuf,fn);
-}
+  indexx++;
+  //i++;
+    }
+  
+  }
+};
+
+printf("indexx: %d\n", indexx);
 
 fclose(fn);
 return(0);
