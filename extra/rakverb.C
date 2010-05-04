@@ -184,20 +184,18 @@ sf_close(infile);
 
 
 bzero(wbuf,sizeof(wbuf));
-sprintf(wbuf,"%f,%f,%f\n", skip, compress, quality);
+sprintf(wbuf,"%f,%f\n", compress, quality);
 fputs(wbuf,fn);
 
-
-printf("X : %d\n", x);
 skip = 0.0f;
 indexx = 0;
-chunk = 10;
+chunk = 11;
 for(i=0;i<x;i++)
 { 
   skip += incr;
   findex = (float)indexx;
   if( findex<skip) 
-    indexx+=chunk+1;
+    indexx+=chunk;
 }
 
 bzero(wbuf,sizeof(wbuf));
@@ -219,13 +217,11 @@ for(i=0;i<x;i++)
   sprintf(wbuf, "%f,%f\n",index[i+j],data[i+j]);
   fputs(wbuf,fn);
   indexx++;
-  //i++;
     }
   
   }
 };
 
-printf("indexx: %d\n", indexx);
 
 fclose(fn);
 return(0);
