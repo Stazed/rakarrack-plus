@@ -146,10 +146,8 @@ int
 Reverbtron::setfile(int value)
 {
 int i;
-int subsample = 0;
-float skip;
 float compresion = 0.0f;
-
+float quality = 0.0f;
 char wbuf[128];
 
 FILE *fs;
@@ -174,7 +172,7 @@ fgets(wbuf,sizeof wbuf,fs);
 // Subsample Compresion Skip 
 bzero(wbuf,sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
-sscanf(wbuf,"%d,%f,%f\n",&subsample,&compresion,&skip);
+sscanf(wbuf,"%f,%f\n",&compresion,&quality);
 
 //Length
 bzero(wbuf,sizeof(wbuf));
@@ -216,6 +214,7 @@ incr = ((float) Plength)/((float) data_length);
 skip = 0.0f;
 index = 0;
 chunk = 10;
+
 for(i=0;i<data_length;i++)
 { 
   skip += incr;
@@ -235,8 +234,8 @@ for(i=0;i<data_length;i++)
   }
 };
 
-
  Plength = index;
+
  if(Pfade > 0)
  {
  count = lrintf(ffade * ((float) index));
