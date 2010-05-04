@@ -39,7 +39,7 @@ main(int argc, char *argv[])
  int option_index = 0, opt;
  int exitwithhelp = 0;
  char wbuf[2048];
- int i,k,j;
+ int i,j;
  int step;
  int readcount;
  int have_output=0;
@@ -173,30 +173,37 @@ for (i = 0; i<(PERIOD*sfinfo.channels); i+=step) {
 
 incr = 1500.0f/((float) x);
 printf("incr: %f\n", incr);
-if(x<1500.0f) incr = 1.0f;   //Often will be longer than 1024.  Change to make final file longer or shorter.
+if(x<1500) incr = 1.0f;   //Often will be longer than 1024.  Change to make final file longer or shorter.
 
 compress = 100.0f * ((float) x)/((float) sfinfo.frames);
-printf("Compression: %f\n", compress);
+printf("Compression: %3.2f%%\n", compress);
 quality = incr*compress;
-printf("Quality : %f\n", quality);
+printf("Quality : %3.2f%%\n", quality);
 sf_close(infile);
 
 
 
 bzero(wbuf,sizeof(wbuf));
-sprintf(wbuf,"%d,%f,%f\n", skip, compress, quality);
+sprintf(wbuf,"%f,%f,%f\n", skip, compress, quality);
 fputs(wbuf,fn);
 
-k=0;
-for(i=0;i<x;i++)
-{ 
-k++;
-}
-bzero(wbuf,sizeof(wbuf));
-sprintf(wbuf,"%d\n", k);
-fputs(wbuf,fn);
 
 printf("X : %d\n", x);
+skip = 0.0f;
+indexx = 0;
+chunk = 10;
+for(i=0;i<x;i++)
+{ 
+  skip += incr;
+  findex = (float)indexx;
+  if( findex<skip) 
+    indexx+=chunk+1;
+}
+
+bzero(wbuf,sizeof(wbuf));
+sprintf(wbuf,"%d\n", indexx);
+fputs(wbuf,fn);
+
 skip = 0.0f;
 indexx = 0;
 chunk = 10;
