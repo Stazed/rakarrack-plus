@@ -311,7 +311,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
       break;                                                               
         
       case 20:  //Compression
-        cratio = 1.25f - 0.75f * ws;
+        cratio = 1.0f - 0.25f * ws;
 	ws =  1.5f*ws*CRUNCH_GAIN + 4.0f;
 	   for (i = 0; i < n; i++)    //apply compression 
 	   {

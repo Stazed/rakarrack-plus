@@ -199,6 +199,7 @@ skip = 0.0f;
 indexx = 0;
 double dchunk = 10.0;
 chunk = 25;
+if(x<1500) x = 1500;
 for(i=0;i<x;i++)
 { 
   skip += incr;
