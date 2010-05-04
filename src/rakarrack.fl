@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -814,18 +814,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1572 80 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1547,7 +1545,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
         }
       }
       Fl_Group DIST {
-        user_data 1 open
+        user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button dist_activar {
@@ -1619,7 +1617,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
+          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -1727,7 +1725,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
             xywh {20 20 36 21} labelsize 9
           }
           MenuItem {} {
-            label DynoFET selected
+            label DynoFET
             xywh {30 30 36 21} labelsize 9
           }
         }
@@ -6399,8 +6397,8 @@ revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));}
           class SliderW
         }
         Fl_Value_Slider revtron_strech {
-          label Strech
-          callback {rkr->efx_Reverbtron->changepar(9,(int)o->value());}
+          label Stretch
+          callback {rkr->efx_Reverbtron->changepar(9,(int)o->value());} selected
           xywh {372 318 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
