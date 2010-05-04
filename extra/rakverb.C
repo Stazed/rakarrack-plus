@@ -217,15 +217,14 @@ for(i=0;i<x;i++)
   
   }
     }
-    printf("Chunk: %f\n", chunk);   
+  
     chunk = (int) (dchunk*RND);
     dchunk *= 0.99;
 
   
   }
 };
-    printf("Chunk: %f\n", chunk);
-    printf("Index: %d\n", indexx);
+ 
 fclose(fn);
 return(0);
 }
