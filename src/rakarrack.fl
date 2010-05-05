@@ -6365,7 +6365,7 @@ revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Studio selected
+            label Studio
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -8537,10 +8537,14 @@ shifter_activar->value(rkr->Shifter_Bypass);
 stomp_preset->do_callback(stomp_preset,1);
 stomp_activar->value(rkr->StompBox_Bypass);
 
+//Reverbtron
+
+revtron_preset->do_callback(revtron_preset,1);
+revtron_activar->value(rkr->Reverbtron_Bypass);
 
 
-
-reordena();} {}
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {

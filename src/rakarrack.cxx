@@ -16706,7 +16706,10 @@ shifter_activar->value(rkr->Shifter_Bypass);
 stomp_preset->do_callback(stomp_preset,1);
 stomp_activar->value(rkr->StompBox_Bypass);
 
+//Reverbtron
 
+revtron_preset->do_callback(revtron_preset,1);
+revtron_activar->value(rkr->Reverbtron_Bypass);
 
 
 reordena();
