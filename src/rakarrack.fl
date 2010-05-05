@@ -5025,7 +5025,7 @@ convo_length->value(rkr->efx_Convol->getpar(3));
 convo_user->value(rkr->efx_Convol->getpar(4));
 convo_user->do_callback();
 convo_safe->value(rkr->efx_Convol->getpar(2));
-convo_fb->value(rkr->efx_Convol->getpar(10));} selected
+convo_fb->value(rkr->efx_Convol->getpar(10));}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6352,6 +6352,22 @@ revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));}
             label {EMT Large}
             xywh {0 0 36 21} labelsize 10
           }
+          MenuItem {} {
+            label Room
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Hall
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Guitar
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Studio selected
+            xywh {0 0 36 21} labelsize 10
+          }
         }
         Fl_Value_Slider revtron_WD {
           label {Wet/Dry}
@@ -6454,15 +6470,19 @@ rkr->efx_Reverbtron->setfile(100);}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Springverb
+            label {Large Room}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Santa Lucia}
+            label {Large Hall}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label EMT
+            label {Guitar Ambience}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Studio
             xywh {0 0 36 21} labelsize 10
           }
         }

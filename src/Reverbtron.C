@@ -264,7 +264,7 @@ void
 Reverbtron::setpreset (int npreset)
 {
   const int PRESET_SIZE = 12;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Spring
     {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64},
@@ -273,7 +273,16 @@ Reverbtron::setpreset (int npreset)
     //Great Hall
     {64, 0, 1, 1500, 0, 0, 0, 50, 3, 0, 0, 64},
     //EMT
-    {64, 0, 1, 1500, 0, 0, 30, 24, 6, 0, 0, 64}
+    {64, 0, 1, 1500, 0, 0, 30, 24, 6, 0, 0, 64},
+    //Room
+    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64},
+    //Hall
+    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64},
+    //Guitar
+    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64},
+    //Studio
+    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64}
+
   };
 
   

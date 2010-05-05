@@ -5836,6 +5836,10 @@ Fl_Menu_Item RKRGUI::menu_revtron_preset[] = {
  {"St.Andews Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"EMT Large", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5942,9 +5946,10 @@ Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
  {"St.Andrews Church Stereo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Chapel", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Great Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Springverb", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"EMT", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Large Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Large Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar Ambience", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
