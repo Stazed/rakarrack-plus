@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -814,16 +814,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1572 80 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6307,7 +6309,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
       }
       Fl_Group REVERBTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button revtron_activar {
@@ -6333,15 +6335,15 @@ revtron_user->value(rkr->efx_Reverbtron->getpar(4));
 revtron_user->do_callback();
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
-revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));}
+revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));} open
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Spring
+            label Chamber
             xywh {77 77 36 21} labelsize 10
           }
           MenuItem {} {
-            label {St.Andews Church}
+            label {Concrete Stairwell}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
@@ -6349,7 +6351,7 @@ revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {EMT Large}
+            label {Med Hall}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
@@ -6450,23 +6452,23 @@ rkr->efx_Reverbtron->setfile(100);}
         }
         Fl_Choice revtron_fnum {
           label Preset
-          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
+          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());} open
           xywh {371 374 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label {St. Andrew's Church}
+            label Chamber
             xywh {54 54 36 21} labelsize 10
           }
           MenuItem {} {
-            label {St.Andrews Church Stereo}
+            label {Conc. Stair}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Chapel
+            label Hall
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Great Hall}
+            label {Med Hall} selected
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
@@ -8543,8 +8545,7 @@ revtron_preset->do_callback(revtron_preset,1);
 revtron_activar->value(rkr->Reverbtron_Bypass);
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {
