@@ -6468,7 +6468,7 @@ rkr->efx_Reverbtron->setfile(100);}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Med Hall} selected
+            label {Med Hall}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
@@ -6486,6 +6486,10 @@ rkr->efx_Reverbtron->setfile(100);}
           MenuItem {} {
             label Studio
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Twilight selected
+            xywh {10 10 36 21} labelsize 10
           }
         }
       }

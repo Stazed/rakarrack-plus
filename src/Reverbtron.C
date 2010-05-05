@@ -209,12 +209,14 @@ memset(time, 0, sizeof(int)*2000);
 
 if(Plength>=data_length) Plength = data_length;
 if(Plength==0) Plength=400;
-
 incr = ((float) Plength)/((float) data_length);
+
 skip = 0.0f;
 index = 0;
 chunk = 10;
 
+if(data_length>100)
+{
 for(i=0;i<data_length;i++)
 { 
   skip += incr;
@@ -231,9 +233,22 @@ for(i=0;i<data_length;i++)
       }
       
   }
-};
+}; 
+    Plength = index;
+} //endif
+else
+{
+for(i=0;i<data_length;i++)
+{ 
 
- Plength = index;
+    if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
+    time[i]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
+    data[i]=tdata[i];  
+ 
+};
+  Plength = i;
+}
+
 
  if(Pfade > 0)
  {
