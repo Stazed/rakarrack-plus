@@ -2092,7 +2092,41 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_StompBox->changepar(1,value);
          break;
 
+   case 339:
+         efx_Reverbtron->changepar(0,value);
+         break;
 
+   case 340:
+         efx_Reverbtron->changepar(11,value);
+         break;
+
+   case 341:
+         efx_Reverbtron->changepar(7,value);
+         break;
+
+   case 342:
+         efx_Reverbtron->changepar(6,value);
+         break;
+
+   case 343:
+         efx_Reverbtron->changepar(10,value);
+         break;
+
+   case 344:
+         efx_Reverbtron->changepar(3,20 + (int)((float)value*11.653543f));
+         break;
+
+   case 345:
+         efx_Reverbtron->changepar(9,value);
+         break;
+
+   case 346:
+         efx_Reverbtron->changepar(5,(int)((float)value*3.9370079f));
+         break;
+
+   case 347:
+         efx_Reverbtron->changepar(1,value);
+         break;
 
    } 
       

@@ -75,29 +75,16 @@ Convolotron::cleanup ()
 void
 Convolotron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex, verbindex;
-  int interval = length/2;
-  int numtaps = 5;
+  int i, j, xindex;
   float l,lyn;
 
   for (i = 0; i < PERIOD; i++)
     {
 
-      l = smpsl[i] + smpsr[i] + (float)Preverb*fb*lxn[offset] + feedback;
+      l = smpsl[i] + smpsr[i] +  feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
 
-      if(Preverb)
-      {
-      //Multitap feedback for reverbs
-      verbindex = offset - length;
-      for (j = 0; j<numtaps; j++)
-      {
-      verbindex-=interval;
-      if(verbindex<0) verbindex += maxx_size;
-      lxn[offset] += fb * lxn[verbindex];
-      }
-      }
       
       //Convolve left channel
       lyn = 0;
@@ -331,7 +318,6 @@ Convolotron::changepar (int npar, int value)
       Puser = value;
       break;
     case 9:
-      Preverb = value;      
       break;
     case 10:
       Pfb = value;
@@ -381,7 +367,7 @@ Convolotron::getpar (int npar)
       return(Puser);
       break;
     case 9:
-      return(Preverb);
+      return(0);
       break;   
     case 10:
       return(Pfb);

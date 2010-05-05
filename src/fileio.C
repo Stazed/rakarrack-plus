@@ -512,6 +512,17 @@ RKR::savefile (char *filename)
 		   StompBox_Bypass);
 	  break;
 
+	case 40:
+	  //Reverbtron
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		   efx_Reverbtron->getpar (0), efx_Reverbtron->getpar (1),
+		   efx_Reverbtron->getpar (2), efx_Reverbtron->getpar (3),
+		   efx_Reverbtron->getpar (4), efx_Reverbtron->getpar (5),
+		   efx_Reverbtron->getpar (6), efx_Reverbtron->getpar (7),
+		   efx_Reverbtron->getpar (8), efx_Reverbtron->getpar (9),
+                   efx_Reverbtron->getpar (10), efx_Reverbtron->getpar (11),
+                   Reverbtron_Bypass, efx_Reverbtron->Filename);
+	  break;
 
 	}
       fputs (buf, fn);
@@ -961,6 +972,16 @@ RKR::loadfile (char *filename)
 		  &lv[40][5], &StompBox_B);
 	  break;
 
+	case 40:
+	  //Reverbtron
+	  bzero(efx_Reverbtron->Filename,sizeof(efx_Reverbtron->Filename));
+	  bzero(cfilename,sizeof(cfilename));
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		  &lv[41][0], &lv[41][1], &lv[41][2], &lv[41][3], &lv[41][4],
+		  &lv[41][5], &lv[41][6], &lv[41][7], &lv[41][8], &lv[41][9],
+		  &lv[41][10],&lv[41][11],&Reverbtron_B,cfilename);
+          strcpy(efx_Reverbtron->Filename,cfilename);		  
+	  break;
 
 	}
     }
@@ -1043,7 +1064,8 @@ RKR::Actualizar_Audio ()
   Sustainer_Bypass = 0;
   Sequence_Bypass = 0;
   Shifter_Bypass = 0;
-  StompBox_Bypass = 0;      
+  StompBox_Bypass = 0;
+  Reverbtron_Bypass = 0;      
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -1121,6 +1143,8 @@ RKR::Actualizar_Audio ()
     efx_Shifter->changepar (i, lv[39][i]);
  for (i = 0; i <= 5; i++)
     efx_StompBox->changepar (i, lv[40][i]);
+ for (i = 0; i <= 11; i++)
+    efx_Reverbtron->changepar (i, lv[41][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1190,6 +1214,7 @@ RKR::Actualizar_Audio ()
   Sequence_Bypass = Sequence_B;
   Shifter_Bypass = Shifter_B;
   StompBox_Bypass = StompBox_B;
+  Reverbtron_Bypass = Reverbtron_B;
     
   Bypass = Bypass_B;
 
@@ -1267,7 +1292,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[41][16] = {
+  int presets[42][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1349,7 +1374,10 @@ RKR::New ()
 //Shifter
     {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0},
 //StompBox
-    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
+    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
+//Reverbtron
+    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0}
+    
 
     
     
@@ -1362,6 +1390,7 @@ RKR::New ()
 
   bzero (Preset_Name, sizeof (Preset_Name));
   bzero (efx_Convol->Filename,sizeof(efx_Convol->Filename));
+  bzero (efx_Reverbtron->Filename,sizeof(efx_Reverbtron->Filename));
   bzero (Author, sizeof (Author));
   strcpy(Author,UserRealName);
   Input_Gain = .5f;
@@ -1428,6 +1457,7 @@ RKR::New ()
   Sequence_B = 0;  
   Shifter_B = 0;
   StompBox_B = 0;
+  Reverbtron_B = 0;
   Bypass_B = 0;
 
   
@@ -1450,7 +1480,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[41][16] = {
+  int presets[42][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1532,7 +1562,10 @@ RKR::New_Bank ()
 //Shifter
     {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0},
 //StompBox
-    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
+    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
+//Reverbtron
+    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0}
+    
     
     
     
@@ -1549,6 +1582,7 @@ RKR::New_Bank ()
       bzero (Bank[i].Author, sizeof (Bank[i].Author));
       strcpy(Bank[i].Author,UserRealName);
       bzero (Bank[i].ConvoFiname,sizeof(Bank[i].ConvoFiname));
+      bzero (Bank[i].RevFiname,sizeof(Bank[i].RevFiname));
        
       Bank[i].Input_Gain = .5f;
       Bank[i].Master_Volume = .5f;
@@ -1589,6 +1623,8 @@ RKR::Bank_to_Preset (int i)
   strcpy (Author, Bank[i].Author);
   bzero (efx_Convol->Filename, sizeof (efx_Convol->Filename));
   strcpy (efx_Convol->Filename,Bank[i].ConvoFiname);
+  bzero (efx_Reverbtron->Filename, sizeof (efx_Reverbtron->Filename));
+  strcpy (efx_Reverbtron->Filename,Bank[i].RevFiname);
 
 
   for (j = 0; j < 50; j++)
@@ -1644,6 +1680,7 @@ RKR::Bank_to_Preset (int i)
   Sequence_B = Bank[i].lv[38][19];
   Shifter_B = Bank[i].lv[39][19];
   StompBox_B = Bank[i].lv[40][19];
+  Reverbtron_B = Bank[i].lv[41][19];
 
 
   Bypass_B = Bypass;
@@ -1678,6 +1715,8 @@ RKR::Preset_to_Bank (int i)
   strcpy (Bank[i].Author, Author);
   bzero (Bank[i].ConvoFiname,sizeof(Bank[i].ConvoFiname));
   strcpy(Bank[i].ConvoFiname, efx_Convol->Filename);
+  bzero (Bank[i].RevFiname,sizeof(Bank[i].RevFiname));
+  strcpy(Bank[i].RevFiname, efx_Reverbtron->Filename);
 
 
   Bank[i].Input_Gain = Input_Gain;
@@ -1759,6 +1798,8 @@ RKR::Preset_to_Bank (int i)
     lv[39][j] = efx_Shifter->getpar(j);
   for (j = 0; j <= 5; j++)
     lv[40][j] = efx_StompBox->getpar(j);
+  for (j = 0; j <= 11; j++)
+    lv[41][j] = efx_Reverbtron->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1832,6 +1873,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[38][19] = Sequence_Bypass;
   Bank[i].lv[39][19] = Shifter_Bypass;
   Bank[i].lv[40][19] = StompBox_Bypass;
+  Bank[i].lv[41][19] = Reverbtron_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

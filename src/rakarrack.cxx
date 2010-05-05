@@ -4664,7 +4664,6 @@ convo_fnum->value(rkr->efx_Convol->getpar(8));
 convo_length->value(rkr->efx_Convol->getpar(3));
 convo_user->value(rkr->efx_Convol->getpar(4));
 convo_user->do_callback();
-convo_reverb->value(rkr->efx_Convol->getpar(9));
 convo_safe->value(rkr->efx_Convol->getpar(2));
 convo_fb->value(rkr->efx_Convol->getpar(10));
 }
@@ -4720,13 +4719,6 @@ void RKRGUI::cb_convo_length_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_convo_length(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_length_i(o,v);
-}
-
-void RKRGUI::cb_convo_reverb_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Convol->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_convo_reverb(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_reverb_i(o,v);
 }
 
 void RKRGUI::cb_convo_user_i(Fl_Check_Button* o, void*) {
@@ -5844,6 +5836,10 @@ Fl_Menu_Item RKRGUI::menu_revtron_preset[] = {
  {"St.Andews Church", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"EMT Large", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -5950,9 +5946,10 @@ Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
  {"St.Andrews Church Stereo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Chapel", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Great Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Springverb", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"EMT", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Large Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Large Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar Ambience", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -12998,12 +12995,6 @@ R average.");
         convo_length->align(FL_ALIGN_LEFT);
         convo_length->when(FL_WHEN_RELEASE);
       } // SliderW* convo_length
-      { convo_reverb = new Fl_Check_Button(339, 336, 15, 15, "Reverb");
-        convo_reverb->down_box(FL_BORDER_BOX);
-        convo_reverb->labelsize(10);
-        convo_reverb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_reverb->callback((Fl_Callback*)cb_convo_reverb, (void*)(2));
-      } // Fl_Check_Button* convo_reverb
       { convo_user = new Fl_Check_Button(430, 336, 15, 15, "User");
         convo_user->down_box(FL_BORDER_BOX);
         convo_user->labelsize(10);
@@ -17726,7 +17717,7 @@ void RKRGUI::ActMIDI() {
 
 int i;
 
-for (i=1; i<339; i++)
+for (i=1; i<348; i++)
 
 {
 
@@ -18988,6 +18979,42 @@ switch (i)
      case 338:
      stomp_high->value(rkr->efx_StompBox->getpar(1)-64);
      stomp_high->redraw();
+     break;
+     case 339:
+     revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
+     revtron_WD->redraw();
+     break;
+     case 340:
+     revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
+     revtron_pan->redraw();
+     break;
+     case 341:
+     revtron_level->value(rkr->efx_Reverbtron->getpar(7));
+     revtron_level->redraw();
+     break;
+     case 342:
+     revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
+     revtron_damp->redraw();
+     break;
+     case 343:
+     revtron_fb->value(rkr->efx_Reverbtron->getpar(10)-64);
+     revtron_fb->redraw();
+     break;
+     case 344:
+     revtron_length->value(rkr->efx_Reverbtron->getpar(3));
+     revtron_length->redraw();
+     break;
+     case 345:
+     revtron_strech->value(rkr->efx_Reverbtron->getpar(9)-64);
+     revtron_strech->redraw();
+     break;
+     case 346:
+     revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
+     revtron_idelay->redraw();
+     break;
+     case 347:
+     revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
+     revtron_fade->redraw();
      break;
 
       

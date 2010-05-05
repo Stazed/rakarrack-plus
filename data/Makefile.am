@@ -13,6 +13,7 @@ data_DATA= Default.rkrb \
 	5.rvb \
 	6.rvb \
 	7.rvb \
+	8.rvb \
 	bg1.png \
 	bg2.png \
 	bg3.png \

@@ -1,5 +1,10 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Added rakverb2 utility
+- Added rakverb utility
+- Added DynoFET waveshape
+- Added FET waveshape
+- Added Lmt-NoGain waveshape
 - Added Echo Direct patch from Arnout Engelen <arnouten@bzzt.net>
 - Added Effect Reverbtron
 - Added stereo vumeters
