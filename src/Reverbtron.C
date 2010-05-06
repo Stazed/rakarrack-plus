@@ -225,13 +225,10 @@ for(i=0;i<data_length;i++)
   {
     if(index<Plength)   
       { 
-     if ((i==0) || ((data[index-1]>0) && (tdata[i]<0)) || ((data[index-1]<0) && (tdata[i]>0)))    
-      {
        if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
        time[index]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
        data[index]=tdata[i];  
        index++;
-      }
       }
   }
 }; 
