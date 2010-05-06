@@ -948,15 +948,15 @@ void RKRGUI::cb_Acerca_de(Fl_Menu_* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"&File", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
- {"New", 0,  (Fl_Callback*)RKRGUI::cb_Menu_New, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
- {"Load Preset", 0,  (Fl_Callback*)RKRGUI::cb_Load_Preset, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {"Save Preset", 0,  (Fl_Callback*)RKRGUI::cb_Save_Preset, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
- {"Load Bank", 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank_M, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {"Save Bank", 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank_M, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
- {"Load Skin", 0,  (Fl_Callback*)RKRGUI::cb_Load_Skin, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {"Save Skin", 0,  (Fl_Callback*)RKRGUI::cb_Save_Skin, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
- {"Convert Reverb IR File", 0,  (Fl_Callback*)RKRGUI::cb_ConvertReverb, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
- {"Exit", 0,  (Fl_Callback*)RKRGUI::cb_salir, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
+ {"New", 0x6e,  (Fl_Callback*)RKRGUI::cb_Menu_New, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Load Preset", 0x6c,  (Fl_Callback*)RKRGUI::cb_Load_Preset, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Save Preset", 0x73,  (Fl_Callback*)RKRGUI::cb_Save_Preset, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Load &Bank", 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank_M, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Save B&ank", 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank_M, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Load S&kin", 0,  (Fl_Callback*)RKRGUI::cb_Load_Skin, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Save Sk&in", 0,  (Fl_Callback*)RKRGUI::cb_Save_Skin, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
+ {"&Convert Reverb IR File", 0,  (Fl_Callback*)RKRGUI::cb_ConvertReverb, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Exit", 0x78,  (Fl_Callback*)RKRGUI::cb_salir, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {"&Bank", 0x62,  (Fl_Callback*)RKRGUI::cb_Bank_Menu, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"&Settings", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
@@ -6363,15 +6363,15 @@ void RKRGUI::cb_Acerca_deB(Fl_Menu_* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_MenuB[] = {
  {"&File", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
- {"New", 0,  (Fl_Callback*)RKRGUI::cb_NewB, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
- {"Load Bank", 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {"Save Bank", 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
- {"Convert Old Bank", 0,  (Fl_Callback*)RKRGUI::cb_Convert_Old_Bank, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
- {"Close", 0,  (Fl_Callback*)RKRGUI::cb_salirB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
+ {"&New", 0,  (Fl_Callback*)RKRGUI::cb_NewB, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"&Load Bank", 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"&Save Bank", 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Convert &Old Bank", 0,  (Fl_Callback*)RKRGUI::cb_Convert_Old_Bank, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"&Close", 0,  (Fl_Callback*)RKRGUI::cb_salirB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {"&Help", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
- {"Help Contents", 0,  (Fl_Callback*)RKRGUI::cb_ContenidoB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
- {"About...", 0,  (Fl_Callback*)RKRGUI::cb_Acerca_deB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
+ {"Help &Contents", 0,  (Fl_Callback*)RKRGUI::cb_ContenidoB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
+ {"&About...", 0,  (Fl_Callback*)RKRGUI::cb_Acerca_deB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {0,0,0,0,0,0,0,0,0}
 };
@@ -16599,7 +16599,7 @@ convo_preset->do_callback(convo_preset,1);
 //Looper
 looper_activar->value(rkr->Looper_Bypass);
 looper_preset->do_callback(looper_preset,1);
-
+update_looper();
 //RyanWah
 ryanwah_activar->value(rkr->RyanWah_Bypass);
 ryanwah_preset->do_callback(ryanwah_preset,1);

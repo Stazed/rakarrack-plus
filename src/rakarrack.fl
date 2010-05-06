@@ -829,7 +829,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -839,30 +839,30 @@ Pexitprogram=1;}
           MenuItem Menu_New {
             label New
             callback {S_new->do_callback();}
-            xywh {0 0 45 26} divider
+            xywh {0 0 45 26} shortcut 0x6e divider
           }
           MenuItem Load_Preset {
             label {Load Preset}
             callback {L_preset->do_callback();}
-            xywh {0 0 45 26}
+            xywh {0 0 45 26} shortcut 0x6c
           }
           MenuItem Save_Preset {
             label {Save Preset}
             callback {S_preset->do_callback();}
-            xywh {0 0 45 26} divider
+            xywh {0 0 45 26} shortcut 0x73 divider
           }
           MenuItem Load_Bank_M {
-            label {Load Bank}
+            label {Load &Bank}
             callback {Load_Bank->do_callback(o);}
             xywh {0 0 45 26}
           }
           MenuItem Save_Bank_M {
-            label {Save Bank}
+            label {Save B&ank}
             callback {Save_Bank->do_callback(o);}
             xywh {0 0 45 26} divider
           }
           MenuItem Load_Skin {
-            label {Load Skin}
+            label {Load S&kin}
             callback {char *filename;
 filename=fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
 if (filename==NULL) return;
@@ -873,7 +873,7 @@ Put_Skin(last);}
             xywh {0 0 36 21}
           }
           MenuItem Save_Skin {
-            label {Save Skin}
+            label {Save Sk&in}
             callback {char *filename;
 \#define EXT ".rkrs"
 filename=fl_file_chooser("Save Skin:","(*"EXT")","",0);
@@ -893,7 +893,7 @@ rkr->saveskin(filename);}
             xywh {0 0 36 21} labelcolor 7 divider
           }
           MenuItem ConvertReverb {
-            label {Convert Reverb IR File}
+            label {&Convert Reverb IR File}
             callback {char *filename;
 char name[64];
 bzero(name,sizeof(name));
@@ -909,7 +909,7 @@ rkr->Message(name, "Please, now use Reverbtron to load the new '.rvb' file");}
           MenuItem salir {
             label Exit
             callback {Principal->do_callback();}
-            xywh {2 2 36 21} labelcolor 7
+            xywh {2 2 36 21} shortcut 0x78 labelcolor 7
           }
         }
         MenuItem Bank_Menu {
@@ -6899,14 +6899,14 @@ save_stat(1);}
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem NewB {
-            label New
+            label {&New}
             callback {rkr->New_Bank();
 Put_Loaded_Bank();
 BankWindow->redraw();}
             xywh {0 0 45 26} divider
           }
           MenuItem Load_Bank {
-            label {Load Bank}
+            label {&Load Bank}
             callback {int ok;
 char *filename;
 is_modified();
@@ -6923,12 +6923,12 @@ Put_Loaded_Bank();
             xywh {10 10 45 26}
           }
           MenuItem Save_Bank {
-            label {Save Bank}
+            label {&Save Bank}
             callback {MIDI_LABEL->do_callback();}
             xywh {10 10 45 26} divider
           }
           MenuItem Convert_Old_Bank {
-            label {Convert Old Bank}
+            label {Convert &Old Bank}
             callback {char *filename;
 char name[64];
 bzero(name,sizeof(name));
@@ -6948,7 +6948,7 @@ rkr->Message(name, "This file has already the new format");}
             xywh {0 0 36 21} divider
           }
           MenuItem salirB {
-            label Close
+            label {&Close}
             callback {BankWindow->do_callback();}
             xywh {12 12 36 21} labelcolor 7
           }
@@ -6958,12 +6958,12 @@ rkr->Message(name, "This file has already the new format");}
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem ContenidoB {
-            label {Help Contents}
+            label {Help &Contents}
             callback {show_help();}
             xywh {10 10 100 20} labelcolor 7
           }
           MenuItem Acerca_deB {
-            label {About...}
+            label {&About...}
             callback {int x,y;
 
 x = BankWindow->x()+((BankWindow->w()-420)/2);
@@ -8433,7 +8433,7 @@ convo_preset->do_callback(convo_preset,1);
 //Looper
 looper_activar->value(rkr->Looper_Bypass);
 looper_preset->do_callback(looper_preset,1);
-
+update_looper();
 //RyanWah
 ryanwah_activar->value(rkr->RyanWah_Bypass);
 ryanwah_preset->do_callback(ryanwah_preset,1);
