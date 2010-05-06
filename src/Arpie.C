@@ -242,7 +242,7 @@ Arpie::setdelay (int Pdelay)
   this->Pdelay = Pdelay;
   if (Pdelay < 2) Pdelay = 2;
   if (Pdelay > 600) Pdelay = 600;	//100ms .. 2 sec constraint
-  delay = 1 + lrintf ( (60.0f/((float)(Psubdiv *Pdelay))) * fSAMPLE_RATE );	//quarter notes
+  delay = 1 + lrintf ( (60.0f/((float)(subdiv*Pdelay))) * fSAMPLE_RATE );	//quarter notes
   initdelays ();
 
 };
@@ -384,7 +384,8 @@ Arpie::changepar (int npar, int value)
       setpattern(value);
       break;
     case 10:
-      Psubdiv = 1 + value;
+      Psubdiv = value;
+      subdiv = Psubdiv+1;
       setdelay (Pdelay);
       break;
 
@@ -427,7 +428,7 @@ Arpie::getpar (int npar)
       return(Ppattern); 
       break;
     case 10:
-      return (Psubdiv - 1);
+      return (Psubdiv);
       break;
     };
   return (0);			//in case of bogus parameter number

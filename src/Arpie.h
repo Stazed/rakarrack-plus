@@ -74,6 +74,7 @@ private:
 
   int dl, dr, delay, lrdelay;
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade, harmonic, envcnt, invattack;
+  int subdiv;
   int *pattern;
 
   float panning, lrcross, fb, hidamp, reverse;

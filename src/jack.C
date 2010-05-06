@@ -275,7 +275,7 @@ timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
 
 JackOUT->jt_state=state;
 
-if(state > 0)
+if((state > 0) && (pos->beats_per_minute > 0))
 {
 JackOUT->jt_tempo=pos->beats_per_minute;
 JackOUT->Tap_TempoSet = lrint(JackOUT->jt_tempo);
