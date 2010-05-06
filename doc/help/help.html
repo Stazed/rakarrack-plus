@@ -92,12 +92,12 @@
 Main Screen</a> <a href="#conn">Connecting</a> <a href="#pyb">Presets
 &amp; banks</a> <a href="#settings">Preferences</a> <a href="#scuts">Shortcuts</a>&nbsp;<a href="#MLearn">MIDI Learn</a> </p>
       <h3><a href="#Effx">Effects</a></h3>
-<p><a href="#eql">Lineal EQ</a> <a href="#comp">Compressor</a> <a href="#dist">Distorsion</a> 
+<p><a href="#eql">Lineal EQ</a> <a href="#comp">Compressor</a> <a href="#dist">Distortion</a> 
 <a href="#ovrd">Overdrive</a> <a href="#eco">Echo</a> <a href="#chor">Chorus</a> <a href="#phas">Phaser</a>
  <a href="#aphas">Analog Phaser</a> <a href="#flan">Flanger</a> <a href="#reve">Reverb</a>
  <a href="#eqp">Parametric EQ</a> <a href="#cabe">Cabinet Emulation</a> <a href="#pan">AutoPan/Stereo Expander</a>
  <a href="#har">Harmonizer</a> <a href="#delm">Musical Delay</a> <a href="#gate">Noise Gate</a>
- <a href="#wha">WhaWha</a> <a href="#awha">AlienWha</a> <a href="#dere">Derelict</a>
+ <a href="#wha">WahWah</a> <a href="#awha">AlienWah</a> <a href="#dere">Derelict</a>
  <a href="#Valve">Valve</a>&nbsp;<a href="#Dual_Flange">Dual Flange</a>
  <a href="#Ring">Ring</a> <a href="#Exciter">Exciter</a>&nbsp;<a href="#DistBand">DistBand</a>
  <a href="#Arpie">Arpie</a> <a href="#Expander">Expander</a> <a href="#Shuffle">Shuffle</a>
@@ -128,8 +128,8 @@ Thirty-two
 effects are included in this version: Lineal EQ, Parametric EQ,
 Shuffle, Exciter, Compressor,
 Expander, Distortion, Overdrive, Derelict, DistBand, Echo,
-MusicalDelay, Arpie, Chorus, Phaser, Analogic
-Phaser, Flanger, Dual Flange, Reverb, WahWah, Alienwah,
+MusicalDelay, Arpie, Chorus, Phaser, Analog
+Phaser, Flanger, Dual Flange, Reverb, WahWah, AlienWah,
 MuTroMojo, Convolotron, Cabinet, Valve, AutoPan/Extra Stereo,
 Harmonizer, Noise Gate, Ring, Synthfilter, VaryBand and Looper. Ten can
 be used simultaneously on a
@@ -158,7 +158,7 @@ high-ratio hard-knee compression. This is better than hard clipping
 distortion, but the audio effect can be undesirable.</p>
 
 <p align="left">Rakarrack is a JACK application, Dave Phillips wrote
-some good articles in their blog of how to use linux audio with jack,
+some good articles in their blog of how to use Linux audio with jack,
 if you don't know about jack, or you have problems running rakarrack,
 please read this series of articles:</p>
 
@@ -198,7 +198,7 @@ been warned. <br>
 
 <p>Of course resampling increase the sound quality, the way to set up
 is start with the worst resampling settings, amount = "x2"&nbsp; and
-Quality "Linear", the the jack load cpu value is displayed in the
+Quality "Linear", the the jack load CPU value is displayed in the
 status bar in the preset block, if you want more accurate CPU usage
 values use top, htop or
 other CPU monitors, then increase the values thinking that then next
@@ -212,12 +212,12 @@ using a preset that has five or six effects.<br>
 </p>
 
 <p>Convolotron has a "Safe Mode" parameter, that "magically" limits the
-length of the Impulse Response file readed, this is safe because limit
+length of the Impulse Response file read, this is safe because limit
 the CPU usage, this maximum length is calculated reading the bogomips,
-is not dynamic and don't meassure other tasks that your computer may be
+is not dynamic and don't measure other tasks that your computer may be
 performing. We have been careful to calculate this maximum value, but
 if you use resampling this "safe" value can be ridiculous and may cause
-depending of the Impulse Response file readed that the convolotron
+depending of the Impulse Response file read that the convolotron
 effect don't has sound, that can happens if the value is less than 5 ms.</p>
 
 <p>Of course increasing the length parameter you will obtain a better
@@ -475,14 +475,14 @@ not modified when preset changes</p>
 </b></p>
 
 <p align="justify">Enable upsampling using libsamplerate process the
-effects with higher samplerate then the sound quality is imporved, all
+effects with higher sample rate then the sound quality is improved, all
 the resample parameters will take effect the next time you launch
 rakarrack.&nbsp; Enabling upsampling rakarrack will use a lot more CPU
 resources of your computer, then take care to adjust all the upsampling
 settings, you can hang your computer if your main processor can not
 handle the resampling parameters. Each level of libsamplerate quality
-use more nd more resources, and of course each effect use more CPU
-resources because need to process a higher amount of data. I higly
+use more and more resources, and of course each effect use more CPU
+resources because need to process a higher amount of data. I highly
 recommend start with Linear quality and amount "x2" and check your CPU
 usage with "top", and then increase the amount/quality as desired.</p>
 
@@ -521,7 +521,7 @@ connect here o use other utilities to do that.<br>
 </p>
 
 <p align="justify">The MIDI Implementation radio buttons selects how
-rakarrack interpret the incoming MIDI Control mesages, by default we
+rakarrack interpret the incoming MIDI Control messages, by default we
 use our MIDI implementation table, but you can also use MIDI learn to
 create your own tables.<br>
 </p>
@@ -646,7 +646,7 @@ until 0 (the latter effect to the right in the second line).</p>
 
 <h2 class="western"><img style="width: 600px; height: 468px;" alt="MIDI Learn window" src="imagenes/midilearn.jpg"></h2>
 
-<p>This is the MIDI Learn window, that brings the posibility to create
+<p>This is the MIDI Learn window, that brings the possibility to create
 a MIDI implementation table for each preset in the bank. You can see
 two browsers, one at the left with all the available effect&nbsp;
 parameters,
@@ -655,28 +655,28 @@ and another at the right with all the presets in the Bank.<br>
 
 <p>The most important thing here is the input box located below the
 parameter browser, here you can select the number of the MIDI Control
-Message, you can edit by hand, or selecting and draging, or capturing
+Message, you can edit by hand, or selecting and dragging, or capturing
 an incoming MIDI message clicking on the Get MIDI Message button. When
 you have the desired control number you need to assign to the effect
-parameters, clicking on the button assing, this message will be engaged
+parameters, clicking on the button assign, this message will be engaged
 to the selected effect parameter on the browser.<br>
 </p>
 
 <p>You can "Assign" up to 20 effects parameter&nbsp; for a single
 control number message, also you can use different&nbsp; control
 messages to&nbsp; manage&nbsp; only one effect parameter.</p>
-<p>The "Assing to All" <b>add</b> this
-single assignement to all the presets in the bank, preserving
+<p>The "Assign to All" <b>add</b> this
+single assignment to all the presets in the bank, preserving
 everything that you have previously assigned in all the presets,
-contrary to what is doing in the "Copy to All" button that overwirte
-all the assignements.<br>
+contrary to what is doing in the "Copy to All" button that overwrite
+all the assignments.<br>
 </p>
 
 
 <p>The grid boxes in the middle display the engaged MIDI
 control messages to the selected effect parameter on the browser, the
-Assignement for a single effect parameter can be cleared with the
-button "Clear Assignements", also you can clear all the assignements
+Assignment for a single effect parameter can be cleared with the
+button "Clear Assignments", also you can clear all the assignments
 for this preset with the button Clear Preset".<br>
 </p>
 
@@ -687,7 +687,7 @@ all the preset table of a single preset.</p>
 </p>
 
 
-<p>The midi learn implementatition tables is saved on the preset file
+<p>The midi learn implementation tables is saved on the preset file
 for a single preset, and in a separate file in the case of the Banks,
 the program read this bank preset file when read the normal bank file. <br>
 </p>
@@ -702,8 +702,8 @@ the program read this bank preset file when read the normal bank file. <br>
 <p align="justify">The chain has nineteen effects, you can select any
 of the available effects: Linear EQ, Compressor, Distortion,
 Overdrive, Derelict, Echo, Chorus, Phaser, Analog Phaser, Flanger,
-Reverb, EQ parametric, WahWah, Alienwah, Cabient, Pan, Harmonizer,
-MusicDelay and NoiseGate. Ten can be used simultaneously. It
+Reverb, EQ parametric, WahWah, AlienWah, Cabinet, Pan, Harmonizer,
+MusicalDelay and NoiseGate. Ten can be used simultaneously. It
 cascading process, following the order that appears on the screen,
 from left to right and top to bottom. The order is configurable by
 the user via the button "Put in your order Rack" giving
@@ -720,7 +720,7 @@ Octavian Paul Nasca defined for the purposes of ZynAddSubFX. The
 value of preset individual is not stored in presets general and can
 not relate to the parameters in effect.</p>
 
-<h3 class="western">Parameter Adjustement</h3>
+<h3 class="western">Parameter Adjustment</h3>
 
 <p>&nbsp;&nbsp;&nbsp; All the parameters managed with a slider widget
 can be adjusted fine with the mouse wheel or the Up/Down - Left/Right
@@ -735,7 +735,7 @@ space bar keys.</p>
 <p>&nbsp;&nbsp;&nbsp; For control the parameter values via MIDI see
 the <a href="#MIDI_Implementation_Chart">MIDI Implementation Chart</a>&nbsp;
 for the complete list of MIDI message commands recognized, to easy
-controlrakarrack with MIDI messages use the MIDI Learn way.<br>
+control rakarrack with MIDI messages use the MIDI Learn way.<br>
 </p>
 
 <h3 class="western"><a name="eql"></a>EQ Lineal</h3>
@@ -821,10 +821,10 @@ high ratio in this case.</p>
   <tbody>
     <tr>
       <td style="vertical-align: top;">
-      <p><font color="#000000"><img src="imagenes/dist.jpg" name="graphics15" alt="rakarrack Distorsion" align="bottom" border="1" height="250" width="184"></font></p>
+      <p><font color="#000000"><img src="imagenes/dist.jpg" name="graphics15" alt="rakarrack Distortion" align="bottom" border="1" height="250" width="184"></font></p>
       </td>
       <td bgcolor="#fbfbfb">
-      <p>Adapted from the ZynAddSubFX 'Distorsion'</p>
+      <p>Adapted from the ZynAddSubFX 'Distortion'</p>
       <p>This is a waveshaper, and not particularly an amp or stompbox
 modeling effect. This must be used judiciously with EQ's as well as the
 LPF and HPF settings (Low Pass Filter, High Pass Filter).</p>
@@ -843,7 +843,7 @@ magnitude, then there will be a "grainy" non-musical sound. This is
 what most guitarists are talking about when making reference to
 "digital distortion". Functions like Sine, Pow and Atan generate a lot
 of harmonics, and even at lower signal levels. Lmt, Clip and Zigzag are
-among the worst, but these are generally used for nasty noisey sounds,
+among the worst, but these are generally used for nasty noisy sounds,
 so a little digital aliasing may not be a bad thing.</p>
       <p>Fortunately, for instruments such as guitars, you can
 significantly limit the bandwidth of the input signal without
@@ -880,7 +880,7 @@ wave at half the fundamental frequency (sub octave). </p>
       <p><font color="#000000"><img src="imagenes/ovrd.jpg" name="graphics16" alt="rakarrack Overdrive" align="bottom" border="1" height="250" width="185"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Adapted from the ZynAddSubFX Distorsion</p>
+      <p>Adapted from the ZynAddSubFX Distortion</p>
       <p>Same as Distortion, but without sub-octave.</p>
       </td>
     </tr>
@@ -1163,7 +1163,7 @@ engine</p>
       <p align="justify">This applies an approximation of certain
 speakers, cabinets,speaker/cabinet combinations according to publicly
 available frequency plots. For those wanting convolution-based cabinet
-modeling you can use Convolotron, but this cost a lilttle bit of CPU resources.</p>
+modeling you can use Convolotron, but this cost a little bit of CPU resources.</p>
       </td>
     </tr>
   </tbody>
@@ -1372,7 +1372,7 @@ level, the filter responds very slowly to signal attack.</p>
 </table>
 
 <h3 class="western"><a href="help.html#top">Contents</a></h3>
-<h3 class="western"><a name="awha"></a>Alienwah</h3>
+<h3 class="western"><a name="awha"></a>AlienWah</h3>
 
 
 <table cellpadding="5" cellspacing="2">
@@ -1380,10 +1380,10 @@ level, the filter responds very slowly to signal attack.</p>
   <tbody>
     <tr>
       <td>
-      <p><font color="#000000"><img src="imagenes/aw.jpg" name="graphics31" alt="rakarrack Alienwah" align="bottom" border="1" height="250" width="185"></font></p>
+      <p><font color="#000000"><img src="imagenes/aw.jpg" name="graphics31" alt="rakarrack AlienWah" align="bottom" border="1" height="250" width="185"></font></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p align="justify">Adapted from the ZynAddSubFX Alienwah</p>
+      <p align="justify">Adapted from the ZynAddSubFX AlienWah</p>
       <p align="justify">A cross between a Flanger, Phaser and a
 Wah-Wah...</p>
       </td>
@@ -1494,7 +1494,7 @@ interpolation between samples.</p>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       <p align="justify">New
 Effect based on Ring, Steve Harris LADSPA
-plugin. <b>Auto Freq</b> recognizes the frequncy of the note played (Only
+plugin. <b>Auto Freq</b> recognizes the frequency of the note played (Only
 monophonic sorry ..) in order that you can use Ring as a simple
 monophonic synthesizer.<br>
       </p>
@@ -1683,7 +1683,7 @@ paper&nbsp; by Michael Gerzon. That convert L/R signals to M/S, Mid and
 Side. You can equalize one of this bands with a parametric four band,
 the Rev selector select the M/S band to equalize, ON = S, OFF = M. That
 produce interesting spatial sound, also can be used to remove certain
-frequencys on the M/S channels.<br>
+frequencies on the M/S channels.<br>
       </p>
       </td>
     </tr>
@@ -1719,11 +1719,11 @@ diystompboxes.com/smfforum.&nbsp; This modification allowed two phase
 stages to be converted to low-pass stages with a switch in an analog
 phaser.&nbsp; This is the type of effect marketed as a
 "phase-wah".&nbsp; Of course, converting all of these phase stages to
-low pass stages makes this circuit look an aweful lot like what is
+low pass stages makes this circuit look an awful lot like what is
 found inside the old Korg Delta DL-50 synthesizer.&nbsp; <br>
 Converting a
 normal OTA phaser into a synth filter would be a relatively ugly hack
-in the circuit bending world, but a simple excercise in software
+in the circuit bending world, but a simple exercise in software
 bending, and with a more elegant final product. With a little bit of
 experimentation, I had a filter sounding much like something found in
 an analog synthesizer.&nbsp; Thinking back to an analog envelope filter
@@ -1825,7 +1825,7 @@ that has been or will be applied to the system.&nbsp; In the case of
 realtime audio processing the impulse responses are causal in nature,
 so we can
 ignore the future and apply the effects only for what has already
-occured.</p>
+occurred.</p>
       <br>
       <p><b>Convolotron</b>.&nbsp; A
 rakarrack module that takes an audio file as an IR, and convolves it
@@ -2161,7 +2161,7 @@ B)&nbsp; You have to adjust parameters for the "Origin" pickup in order to
 cancel the effects of the pickups you are actually using.&nbsp; Without good
 electronics lab test equipment, this is largely guesswork tuned into
 range by your ears.&nbsp; If it sounds good, then who cares if it's
-tecnhically right.<br>
+technically right.<br>
 
       <br>
 
@@ -2209,8 +2209,8 @@ tecnhically right.<br>
       <p align="justify">This is a simple Low Shelf Filter that can be
 used as Tone Booster, is good to put after Distortion effects in order
 to adjust the distortion tone or cut undesired freqs. Also with a
-really hard gain you can obtain a nice distortion in combiantion with
-the "invisible" Compressor/LImiter that rakarrack has on the end of the
+really hard gain you can obtain a nice distortion in combination with
+the "invisible" Compressor/Limiter that rakarrack has on the end of the
 chain, if you try that be sure to low the main Output volume.<br>
       </p>
 
@@ -2236,7 +2236,7 @@ chain, if you try that be sure to low the main Output volume.<br>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       <p align="justify">Vocoder</p>
-      <p align="justify">For those not already familiar with vocoders, this is the effect responsible formany robot sounds on several popular songs.<br>
+      <p align="justify">For those not already familiar with vocoders, this is the effect responsible for many robot sounds on several popular songs.<br>
       <br>
 The basic structure is this:<br>
 Your voice from a microphone needs to be connected to the "Aux" input
@@ -2260,7 +2260,7 @@ put, the power in the signal of each frequency band from the mic was
 used to control the volume on each corresponding frequency band for the
 incoming instrument.&nbsp; Think of two 32 band equalizers.&nbsp; The
 first 32 band EQ has a mic plugged into it.&nbsp; As you speak into the
-mic, you can se the VU meter bars bounce on each corresponding band (if
+mic, you can see the VU meter bars bounce on each corresponding band (if
 this is the kind of EQ that displays VU bars for every band).&nbsp;
 Imagine something being linked to the VU meter bars that can push the
 sliders up and down on the Equalizer used to process the
@@ -2276,7 +2276,7 @@ Gate:&nbsp; Anything below -75dB is gated.&nbsp; You can "cheat" the
 gate with the Input level adjustment.&nbsp; If too much noise is
 getting through to the vocoder when you're not talking, you can
 decrease the input level until the noise floor disappears.&nbsp; Of
-course, if you have a noisey preamp, mic, lots of background
+course, if you have a noisy preamp, mic, lots of background
 noise...etc, this gives you poor signal/noise ratio, then there is
 little we can program into the application to help improve the dynamics
 :-(.&nbsp; <br>
@@ -2427,7 +2427,7 @@ modulated filter.<br>
 to the next<br>
 <i>Tremor</i>: Amplitude.&nbsp; This is a sequenced Tremolo that can be
 switched between two different stepping modes by the "Amp" switch.<br>
-<i>Arpegiator</i>: Frequency shifter. Pass directly from one frequency to
+<i>Arpeggiator</i>: Frequency shifter. Pass directly from one frequency to
       the next one, the semitone is adjusted by the sequence sliders,
       semitone = "slider value / 10".<br>
 <i>Chorus</i>: Frequency Shifter, this mode use small amount of pitch
@@ -2545,7 +2545,7 @@ part-for-part replacement.&nbsp; It is my belief (as the developer)
 that these models have some convincing characteristics, but I am aware
 of many subtle things that are not taken into account.&nbsp; Further,
 there are many variants of a specific type of pedal on the market; for
-expample, an Overdrive pedal is basically the same circuit for almost
+example, an Overdrive pedal is basically the same circuit for almost
 all models marketed as "overdrive".&nbsp; The differences are minor
 variations that the specific designer determined produced a better
 sound.&nbsp; Even though the names of the modes indicate one model or
@@ -2668,7 +2668,7 @@ the ACI to change dynamically.<br>
 <b>Mid</b>: A mid-band EQ, but not like a normal mid-band EQ.&nbsp; This
 one operates on the input before the distortion, and is tuned to act
 like a stuck wah wah pedal.&nbsp; Settings less than zero cut mids from
-the input mix, making the fuzz sound a little more "wooly".<br>
+the input mix, making the fuzz sound a little more "woolly".<br>
 <b>High</b> This is a tone knob modeled according to the Big Muff tone
 control.&nbsp; Positive numbers cut lows while boosting highs.&nbsp;
 Negative numbers cut highs while boosting lows.<br>
@@ -2711,7 +2711,7 @@ edit this file or generate your own custom files.&nbsp; In fact you
 could use plain utilities such as bash scripting, perl, octave, scilab,
 etc.&nbsp; Internally Reverbtron convolves this directly with the
 signal using the time index to determine at what delay amount to
-perform the multiplication.&nbsp; When Length is reduce, Reverbrton
+perform the multiplication.&nbsp; When Length is reduce, Reverbtron
 simply subsamples the file at even intervals.&nbsp; As one can see, the
 quality of the resultant reverb relies 100% on the construction of the
 .rvb file.&nbsp; This has the side effect for enabling future
@@ -2819,14 +2819,14 @@ range is shown in red.</p>
 <p>When Tap Tempo is On:<br>
 </p>
 
-<p>The imput choice widget select the incoming signal:</p>
+<p>The input choice widget select the incoming signal:</p>
 
 <p>GUI can be the computer keyboard key "G" or the mouse clicking on
 the "Tap" button.</p>
 
-<p>MIDI signal is triggered each MIDI Note On message is incomming.</p>
+<p>MIDI signal is triggered each MIDI Note On message is incoming.</p>
 <p>Jack Transport read the beats per minute at the jack start
-transport. (Note for jack maniacs: we dont synchronize nothing, only we
+transport. (Note for jack maniacs: we don't synchronize nothing, we only
 read this value).<br>
 </p>
 
@@ -2834,14 +2834,14 @@ read this value).<br>
 
 
 
-<p>Sucesive tempo signals are displayed each time a signal is received
+<p>Successive tempo signals are displayed each time a signal is received
 and
 the Tempo parameter is updated on all the effects that has the "On"
 state. Tap Tempo has an automatic reset timeout, 8 seconds after the
 last
 signal. This need to be enabled in the window settings. Tap Tempo set
 all the effect Tempo parameters that has the state in "On" to the value
-readed or generated.</p>
+read or generated.</p>
 <p>The "Set" choice select how the Delay and LFO effect parameters will be
 updated, according to the preset and the Tempo.</p>
 
@@ -2853,11 +2853,11 @@ updated, according to the preset and the Tempo.</p>
 <h2 class="western"><a name="ACI"></a>Analog Control Interface</h2><img style="width: 219px; height: 175px;" alt="rakarrack Analog Control Interface" src="imagenes/aci.png"><br>
 <br>
 <p>Analog Control Interface (ACI) is a way to control the value effect
-parameters with an analog signal, rakarrack use their audio jack ports to meassure the signal and send this values like a MIDI
+parameters with an analog signal, rakarrack use their audio jack ports to measure the signal and send this values like a MIDI
 value.That means that you can use your MIC as a WahWah pedal, or use a
 analog volume pedal like a WahWah,&nbsp; or to control whatever
 parameter you imagine. If you use MIDI Learn up to 20 parameters can be
-controloed by ACI.</p>
+controlled by ACI.</p>
 <p>Source is used to select the jack audio input port audio signal.<br>
 </p>
 
