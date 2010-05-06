@@ -35,6 +35,7 @@ public:
   ~Looper ();
   void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
+  void loadpreset (int npar, int value);  // to set one from a preset
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanuppt1 ();

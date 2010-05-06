@@ -235,7 +235,7 @@ Looper::setpreset (int npreset)
   if (npreset >= NUM_PRESETS)
     npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
-    changepar (n, presets[npreset][n]);
+    loadpreset (n, presets[npreset][n]);
   Ppreset = npreset;
 };
 
@@ -413,3 +413,72 @@ void Looper::getstate ()
       progstate[4] = PT1;
       progstate[5] = PT2;
 };
+
+void
+Looper::loadpreset (int npar, int value)
+{
+  switch (npar)
+    {
+    case 0:
+    Pvolume = value;
+    outvolume = (float)Pvolume / 127.0f;
+
+      break;
+    case 1:	//Play at current pointer position
+    Pplay = value;
+      break;
+    case 2:	//stop and reset pointer to 0
+      Pstop = value;
+      break;
+    case 3:		//Record at current position.  If first time (clear = true), then set end of loop, "dl"
+      Precord = value;
+      break;
+    case 4:
+      Pclear = 1;    //Clear everything and erase the loop
+      if(PT1) first_time1 = 1;
+      if(PT2) first_time2 = 1;
+      if((PT1) && (PT2)) Pplay = 0;
+      Precord = 0;
+      initdelays ();
+      break;
+    case 5:
+      Preverse = value;		//Playback in reverse
+      break;
+    case 6:
+      Pfade1 = value;
+      setfade ();
+      break;
+    case 7:
+    if(PT1) {
+     PT1 = 0;
+     }
+     else 
+     {
+     PT1 = 1;
+     }
+     track1gain = (float) PT1;
+     setfade ();
+      break;
+    case 8:
+     PT2 = value;
+     track2gain = (float) PT2;
+     setfade ();
+      break;      
+    case 9:
+    Pautoplay = value;
+     break;    
+    case 10:
+    Pfade2 = value;
+    setfade();
+     break;
+     case 11:
+     Prec1 = value;
+     break;
+     case 12:
+     Prec2 = value;
+     break;
+      
+    };
+    
+};
+
