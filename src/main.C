@@ -70,7 +70,7 @@ main (int argc, char *argv[])
 // Read command Line
 
   fprintf (stderr,
-	   "\n%s %s - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon\n",
+	   "\n%s %s - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon - Arnout Engelen\n",
 	   PACKAGE, VERSION);
 
   if (argc == 1)

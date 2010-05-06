@@ -15783,7 +15783,8 @@ R average.");
       AB_url->labelsize(13);
       AB_url->labelcolor((Fl_Color)6);
     } // Fl_Box* AB_url
-    { AB_Authors = new Fl_Box(47, 96, 272, 27, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2007 - 2010>");
+    { AB_Authors = new Fl_Box(20, 96, 345, 26, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon Arnout Engelen <2007 - \
+2010>");
       AB_Authors->labelfont(1);
       AB_Authors->labelsize(8);
       AB_Authors->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

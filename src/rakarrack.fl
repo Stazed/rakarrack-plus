@@ -7666,7 +7666,7 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
     Fl_Window AboutWin {
       label {About Rakarrack}
       callback {AboutWin->hide();}
-      xywh {818 89 375 235} type Double color 36 hide
+      xywh {811 82 375 235} type Double color 36 hide
     } {
       Fl_Box AB_Title {
         label Rakarrack
@@ -7684,8 +7684,8 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
         xywh {68 77 234 22} labelfont 1 labelsize 13 labelcolor 6
       }
       Fl_Box AB_Authors {
-        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon  <2007 - 2010>}
-        xywh {47 96 272 27} labelfont 1 labelsize 8 labelcolor 7 align 128
+        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon Arnout Engelen <2007 - 2010>} selected
+        xywh {20 96 345 26} labelfont 1 labelsize 8 labelcolor 7 align 128
       }
       Fl_Box AB_A1 {
         label {Code of some effects and structure based on ZynAddSubFx by Paul Nasca Octavian}
@@ -8475,8 +8475,7 @@ revtron_activar->value(rkr->Reverbtron_Bypass);
 revtron_preset->do_callback(revtron_preset,1);
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {
