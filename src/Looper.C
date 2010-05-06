@@ -223,12 +223,12 @@ void Looper::setfade ()
 void
 Looper::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
+  const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64},
-    {64, 0, 1, 0, 1, 1, 64, 1, 0, 0, 64} 
+    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 1, 0},
+    {64, 0, 1, 0, 1, 1, 64, 1, 1, 0, 64, 1, 0} 
   };
 
 
@@ -435,11 +435,7 @@ Looper::loadpreset (int npar, int value)
       break;
     case 4:
       Pclear = 1;    //Clear everything and erase the loop
-      if(PT1) first_time1 = 1;
-      if(PT2) first_time2 = 1;
-      if((PT1) && (PT2)) Pplay = 0;
-      Precord = 0;
-      initdelays ();
+       initdelays ();
       break;
     case 5:
       Preverse = value;		//Playback in reverse
@@ -449,13 +445,7 @@ Looper::loadpreset (int npar, int value)
       setfade ();
       break;
     case 7:
-    if(PT1) {
-     PT1 = 0;
-     }
-     else 
-     {
-     PT1 = 1;
-     }
+     PT1 = value;
      track1gain = (float) PT1;
      setfade ();
       break;
@@ -479,6 +469,6 @@ Looper::loadpreset (int npar, int value)
      break;
       
     };
-    
+    getstate();
 };
 
