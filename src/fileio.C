@@ -1124,7 +1124,7 @@ RKR::Actualizar_Audio ()
  for (i = 0; i <= 10; i++)
     efx_Convol->changepar (i, lv[30][i]);
  for (i = 0; i <= 12; i++)
-    efx_Looper->changepar (i, lv[31][i]);
+    efx_Looper->loadpreset(i, lv[31][i]);
  for (i = 0; i <= 16; i++)
     efx_RyanWah->changepar (i, lv[32][i]);
  for (i = 0; i <= 9; i++)
