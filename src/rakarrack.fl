@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -814,18 +814,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1572 80 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -6309,7 +6307,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
       }
       Fl_Group REVERBTRON {
-        user_data 1 open
+        user_data 1
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button revtron_activar {
@@ -6488,7 +6486,7 @@ rkr->efx_Reverbtron->setfile(100);}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Twilight selected
+            label Twilight
             xywh {10 10 36 21} labelsize 10
           }
         }
@@ -8311,72 +8309,52 @@ output_vur->value(-50);
 }
 //Reverb
 
-reverb_preset->do_callback(reverb_preset,1);
 reverb_activar->value(rkr->Reverb_Bypass);
+reverb_preset->do_callback(reverb_preset,1);
 
 //Echo
-
-echo_preset->do_callback(echo_preset,1);
 echo_activar->value(rkr->Echo_Bypass);
+echo_preset->do_callback(echo_preset,1);
 
 //Chorus
-
-chorus_preset->do_callback(chorus_preset,1);
 chorus_activar->value(rkr->Chorus_Bypass);
-
+chorus_preset->do_callback(chorus_preset,1);
 
 //Flanger
-
-flanger_preset->do_callback(flanger_preset,1);
 flanger_activar->value(rkr->Flanger_Bypass);
-
+flanger_preset->do_callback(flanger_preset,1);
 
 //Phaser
-
-phaser_preset->do_callback(phaser_preset,1);
 phaser_activar->value(rkr->Phaser_Bypass);
+phaser_preset->do_callback(phaser_preset,1);
 
 //Overdrive
-
-ovrd_preset->do_callback(ovrd_preset,1);
 ovrd_activar->value(rkr->Overdrive_Bypass);
-
+ovrd_preset->do_callback(ovrd_preset,1);
 
 //Distorsion
-
 dist_activar->value(rkr->Distorsion_Bypass);
 dist_preset->do_callback(dist_preset, 1);
 
-
 //EQ1
-
-eq_preset->do_callback(eq_preset,1);
 eq_activar->value(rkr->EQ1_Bypass);
-
+eq_preset->do_callback(eq_preset,1);
 
 //EQ2
-
-eqp_preset->do_callback(eqp_preset,1);
 eqp_activar->value(rkr->EQ2_Bypass);
-
+eqp_preset->do_callback(eqp_preset,1);
 
 //Compressor
-
-compress_preset->do_callback(compress_preset,1);
 compress_activar->value(rkr->Compressor_Bypass);
-
+compress_preset->do_callback(compress_preset,1);
 
 //WahWah
-
-WhaWha_preset->do_callback(WhaWha_preset,1);
 WhaWha_activar->value(rkr->WhaWha_Bypass);
-
+WhaWha_preset->do_callback(WhaWha_preset,1);
 
 //AlienWah
-
-Alienwah_preset->do_callback(Alienwah_preset,1);
 Alienwah_activar->value(rkr->Alienwah_Bypass);
-
+Alienwah_preset->do_callback(Alienwah_preset,1);
 
 //Cabinet
 
@@ -8384,172 +8362,121 @@ Cabinet_output->value(rkr->lv[13][1]-64);
 Cabinet_preset->value(rkr->lv[13][0]);
 Cabinet_activar->value(rkr->Cabinet_Bypass);
 
-
-
 //Pan
-
-pan_preset->do_callback(pan_preset,1);
 pan_activar->value(rkr->Pan_Bypass);
-
-
+pan_preset->do_callback(pan_preset,1);
 
 //Har
-
-har_preset->do_callback(har_preset,1);
 har_activar->value(rkr->Harmonizer_Bypass);
-
+har_preset->do_callback(har_preset,1);
 
 //MusicalDelay
-musdelay_preset->do_callback(musdelay_preset,1);
 musdelay_activar->value(rkr->MusDelay_Bypass);
-
+musdelay_preset->do_callback(musdelay_preset,1);
 
 //NoiseGate
-
-gate_preset->do_callback(gate_preset,1);
 gate_activar->value(rkr->Gate_Bypass);
-
-
+gate_preset->do_callback(gate_preset,1);
 
 //NewDist
-
-
-newdist_preset->do_callback(newdist_preset,1);
 newdist_activar->value(rkr->NewDist_Bypass);
-
-
-
+newdist_preset->do_callback(newdist_preset,1);
 
 //APhaser
-
-aphaser_preset->do_callback(aphaser_preset,1);
 aphaser_activar->value(rkr->APhaser_Bypass);
-
+aphaser_preset->do_callback(aphaser_preset,1);
 
 //Valve
-
-
-valve_preset->do_callback(valve_preset,1);
 valve_activar->value(rkr->Valve_Bypass);
+valve_preset->do_callback(valve_preset,1);
 
 //Dual_Flange
-
-dflange_preset->do_callback(dflange_preset,1);
 dflange_activar->value(rkr->DFlange_Bypass);
-
+dflange_preset->do_callback(dflange_preset,1);
 
 // Ring
-
-ring_preset->do_callback(ring_preset,1);
 ring_activar->value(rkr->Ring_Bypass);
-
+ring_preset->do_callback(ring_preset,1);
 
 // Exciter
-
-exciter_preset->do_callback(exciter_preset,1);
 exciter_activar->value(rkr->Exciter_Bypass);
-
+exciter_preset->do_callback(exciter_preset,1);
 
 //MBDist
-
-mbdist_preset->do_callback(mbdist_preset,1);
 mbdist_activar->value(rkr->MBDist_Bypass);
-
+mbdist_preset->do_callback(mbdist_preset,1);
 
 //Arpie
-
-arpie_preset->do_callback(arpie_preset,1);
 arpie_activar->value(rkr->Arpie_Bypass);
+arpie_preset->do_callback(arpie_preset,1);
 
 //Expander
-expander_preset->do_callback(expander_preset,1);
 expander_activar->value(rkr->Expander_Bypass);
+expander_preset->do_callback(expander_preset,1);
 
 //Shuffle
-
-shuffle_preset->do_callback(shuffle_preset,1);
 shuffle_activar->value(rkr->Shuffle_Bypass);
+shuffle_preset->do_callback(shuffle_preset,1);
 
 //Synthfilter
-
-synthfilter_preset->do_callback(synthfilter_preset,1);
 synthfilter_activar->value(rkr->Synthfilter_Bypass);
-
-
+synthfilter_preset->do_callback(synthfilter_preset,1);
 
 //VaryBand
-
-mbvvol_preset->do_callback(mbvvol_preset,1);
 mbvvol_activar->value(rkr->MBVvol_Bypass);
-
-
+mbvvol_preset->do_callback(mbvvol_preset,1);
 
 //Convolotron
-
-convo_preset->do_callback(convo_preset,1);
 convo_activar->value(rkr->Convol_Bypass);
-
+convo_preset->do_callback(convo_preset,1);
 
 //Looper
-
-looper_preset->do_callback(looper_preset,1);
 looper_activar->value(rkr->Looper_Bypass);
+looper_preset->do_callback(looper_preset,1);
 
 //RyanWah
-
-ryanwah_preset->do_callback(ryanwah_preset,1);
 ryanwah_activar->value(rkr->RyanWah_Bypass);
+ryanwah_preset->do_callback(ryanwah_preset,1);
 
 // RBEcho
-
-rbecho_preset->do_callback(rbecho_preset,1);
 rbecho_activar->value(rkr->RBEcho_Bypass);
-
-
+rbecho_preset->do_callback(rbecho_preset,1);
 
 // CoilCrafter
-coil_preset->do_callback(coil_preset,1);
 coil_activar->value(rkr->CoilCrafter_Bypass);
-
+coil_preset->do_callback(coil_preset,1);
 
 //ShelfBoost
-
-shelf_preset->do_callback(shelf_preset,1);
 shelf_activar->value(rkr->ShelfBoost_Bypass);
-
+shelf_preset->do_callback(shelf_preset,1);
 
 //Vocoder
-vo_preset->do_callback(vo_preset,1);
 vo_activar->value(rkr->Vocoder_Bypass);
-
+vo_preset->do_callback(vo_preset,1);
 
 //Sustainer
-sus_preset->do_callback(sus_preset,1);
 sus_activar->value(rkr->Sustainer_Bypass);
-
+sus_preset->do_callback(sus_preset,1);
 
 //Sequence
-
-seq_preset->do_callback(seq_preset,1);
 seq_activar->value(rkr->Sequence_Bypass);
+seq_preset->do_callback(seq_preset,1);
 
 //Shifter
-
-shifter_preset->do_callback(shifter_preset,1);
 shifter_activar->value(rkr->Shifter_Bypass);
+shifter_preset->do_callback(shifter_preset,1);
 
 //StompBox
-
-stomp_preset->do_callback(stomp_preset,1);
 stomp_activar->value(rkr->StompBox_Bypass);
+stomp_preset->do_callback(stomp_preset,1);
 
 //Reverbtron
-
-revtron_preset->do_callback(revtron_preset,1);
 revtron_activar->value(rkr->Reverbtron_Bypass);
+revtron_preset->do_callback(revtron_preset,1);
 
 
-reordena();} {}
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {

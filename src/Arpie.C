@@ -72,16 +72,13 @@ Arpie::~Arpie ()
 void
 Arpie::cleanup ()
 {
-  int i;
-  for (i = 0; i < maxx_delay; i++)
-    ldelay[i] = 0.0;
-  for (i = 0; i < maxx_delay; i++)
-    rdelay[i] = 0.0;
+  memset(ldelay, 0 ,sizeof(float)* maxx_delay);
+  memset(rdelay, 0 ,sizeof(float)* maxx_delay);
   oldl = 0.0;
   oldr = 0.0;
-    rvkl = 0;
+  rvkl = 0;
   rvkr = 0;
-    kl = 0;
+  kl = 0;
   kr = 0;
   harmonic = 1;
 };
