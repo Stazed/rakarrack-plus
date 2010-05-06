@@ -469,6 +469,12 @@ Looper::loadpreset (int npar, int value)
      break;
       
     };
+
+      Pclear = 1;    //Clear everything and erase the loop
+      if(PT1) first_time1 = 1;
+      if(PT2) first_time2 = 1;
+      if((PT1) && (PT2)) Pplay = 0;
+      Precord = 0;
     getstate();
 };
 
