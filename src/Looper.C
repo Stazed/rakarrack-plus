@@ -223,7 +223,7 @@ void Looper::setfade ()
 void
 Looper::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 12;
+  const int PRESET_SIZE = 13;
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
