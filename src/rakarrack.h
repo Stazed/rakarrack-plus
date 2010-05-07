@@ -69,6 +69,7 @@ public:
 #include <FL/Fl_Counter.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Browser.H>
+#include <FL/Fl_Tabs.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Value_Input.H>
 
@@ -3081,12 +3082,9 @@ private:
   static void cb_Settings(Fl_Double_Window*, void*);
 public:
   Fl_Box *Fondo2;
-  Fl_Button *Prefs_OK;
-private:
-  void cb_Prefs_OK_i(Fl_Button*, void*);
-  static void cb_Prefs_OK(Fl_Button*, void*);
-public:
+  Fl_Tabs *STabs;
   Fl_Group *Look;
+  Fl_Box *Fondo6;
   Fl_Button *B_C;
 private:
   void cb_B_C_i(Fl_Button*, void*);
@@ -3130,7 +3128,9 @@ private:
   void cb_FSless_i(Fl_Button*, void*);
   static void cb_FSless(Fl_Button*, void*);
 public:
+  Fl_Box *CLLabel;
   Fl_Group *AUDIO_SET;
+  Fl_Box *Fondo7;
   Fl_Check_Button *INSTATE;
 private:
   void cb_INSTATE_i(Fl_Check_Button*, void*);
@@ -3175,6 +3175,7 @@ private:
   static Fl_Menu_Item menu_Har_Qual[];
 public:
   Fl_Group *MIDI_SET;
+  Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;
 private:
   void cb_D_A_Connect_i(Fl_Check_Button*, void*);
@@ -3207,35 +3208,38 @@ private:
   static void cb_Mw1(Fl_Check_Button*, void*);
 public:
   Fl_Group *JACK_SET;
+  Fl_Box *Fondo9;
   Fl_Check_Button *D_J_Connect;
 private:
   void cb_D_J_Connect_i(Fl_Check_Button*, void*);
   static void cb_D_J_Connect(Fl_Check_Button*, void*);
 public:
+  Fl_Browser *JackCo;
   Fl_Check_Button *D_IJ_Connect;
 private:
   void cb_D_IJ_Connect_i(Fl_Check_Button*, void*);
   static void cb_D_IJ_Connect(Fl_Check_Button*, void*);
 public:
-  Fl_Browser *JackCo;
   Fl_Browser *JackIn;
   Fl_Group *MISC_SET;
+  Fl_Box *Fondo10;
   Fl_Input *Username;
 private:
   void cb_Username_i(Fl_Input*, void*);
   static void cb_Username(Fl_Input*, void*);
-public:
-  Fl_Check_Button *T_TIMEOUT;
-private:
-  void cb_T_TIMEOUT_i(Fl_Check_Button*, void*);
-  static void cb_T_TIMEOUT(Fl_Check_Button*, void*);
 public:
   Fl_Check_Button *MES_DIS;
 private:
   void cb_MES_DIS_i(Fl_Check_Button*, void*);
   static void cb_MES_DIS(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *T_TIMEOUT;
+private:
+  void cb_T_TIMEOUT_i(Fl_Check_Button*, void*);
+  static void cb_T_TIMEOUT(Fl_Check_Button*, void*);
+public:
   Fl_Group *BANK_SET;
+  Fl_Box *Fondo11;
   Fl_File_Input *BFiname;
   Fl_Button *BF_Browser;
 private:

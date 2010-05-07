@@ -6491,13 +6491,6 @@ void RKRGUI::cb_Settings(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Settings_i(o,v);
 }
 
-void RKRGUI::cb_Prefs_OK_i(Fl_Button*, void*) {
-  Settings->do_callback();
-}
-void RKRGUI::cb_Prefs_OK(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Prefs_OK_i(o,v);
-}
-
 void RKRGUI::cb_B_C_i(Fl_Button*, void*) {
   uchar r,g,b;
 
@@ -6507,7 +6500,7 @@ fore_color=fl_rgb_color(r,g,b);
 Buttons_Color_Change(fore_color);
 }
 void RKRGUI::cb_B_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_C_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_B_C_i(o,v);
 }
 
 void RKRGUI::cb_L_C_i(Fl_Button*, void*) {
@@ -6518,7 +6511,7 @@ leds_color=fl_rgb_color(r,g,b);
 Leds_Color_Change(leds_color);
 }
 void RKRGUI::cb_L_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_C_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_C_i(o,v);
 }
 
 void RKRGUI::cb_K_C_i(Fl_Button*, void*) {
@@ -6529,7 +6522,7 @@ back_color=fl_rgb_color(r,g,b);
 Background_Color_Change(back_color);
 }
 void RKRGUI::cb_K_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_K_C_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_K_C_i(o,v);
 }
 
 void RKRGUI::cb_A_C_i(Fl_Button*, void*) {
@@ -6540,7 +6533,7 @@ label_color=fl_rgb_color(r,g,b);
 Label_Color_Change(label_color);
 }
 void RKRGUI::cb_A_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_A_C_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_A_C_i(o,v);
 }
 
 void RKRGUI::cb_scheme_ch_i(Fl_Choice* o, void*) {
@@ -6575,7 +6568,7 @@ break;
 };
 }
 void RKRGUI::cb_scheme_ch(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_scheme_ch_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_scheme_ch_i(o,v);
 }
 
 Fl_Menu_Item RKRGUI::menu_scheme_ch[] = {
@@ -6596,7 +6589,7 @@ strcpy(rkr->BackgroundImage,filename);
 PutBackground();
 }
 void RKRGUI::cb_BI_Browser(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
 }
 
 void RKRGUI::cb_FSplus_i(Fl_Button*, void*) {
@@ -6604,7 +6597,7 @@ void RKRGUI::cb_FSplus_i(Fl_Button*, void*) {
 chfsize(1);
 }
 void RKRGUI::cb_FSplus(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_FSplus_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSplus_i(o,v);
 }
 
 void RKRGUI::cb_FSless_i(Fl_Button*, void*) {
@@ -6612,28 +6605,28 @@ void RKRGUI::cb_FSless_i(Fl_Button*, void*) {
 chfsize(-1);
 }
 void RKRGUI::cb_FSless(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_FSless_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSless_i(o,v);
 }
 
 void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
   rkr->init_state=(int) o->value();
 }
 void RKRGUI::cb_INSTATE(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_INSTATE_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_INSTATE_i(o,v);
 }
 
 void RKRGUI::cb_Pre_Serve_i(Fl_Check_Button* o, void*) {
   rkr->actuvol=(int) o->value();
 }
 void RKRGUI::cb_Pre_Serve(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Pre_Serve_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Pre_Serve_i(o,v);
 }
 
 void RKRGUI::cb_UPSAMPLE_C_i(Fl_Check_Button*, void*) {
   Show_Next_Time();
 }
 void RKRGUI::cb_UPSAMPLE_C(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_UPSAMPLE_C_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_UPSAMPLE_C_i(o,v);
 }
 
 void RKRGUI::cb_Upr_Amo_i(Fl_Choice* o, void*) {
@@ -6642,7 +6635,7 @@ void RKRGUI::cb_Upr_Amo_i(Fl_Choice* o, void*) {
 Show_Next_Time();
 }
 void RKRGUI::cb_Upr_Amo(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Upr_Amo_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Upr_Amo_i(o,v);
 }
 
 Fl_Menu_Item RKRGUI::menu_Upr_Amo[] = {
@@ -6660,7 +6653,7 @@ void RKRGUI::cb_Upr_Qual_i(Fl_Choice* o, void*) {
 Show_Next_Time();
 }
 void RKRGUI::cb_Upr_Qual(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Upr_Qual_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Upr_Qual_i(o,v);
 }
 
 Fl_Menu_Item RKRGUI::menu_Upr_Qual[] = {
@@ -6678,7 +6671,7 @@ void RKRGUI::cb_Downr_Qual_i(Fl_Choice* o, void*) {
 Show_Next_Time();
 }
 void RKRGUI::cb_Downr_Qual(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Downr_Qual_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Downr_Qual_i(o,v);
 }
 
 void RKRGUI::cb_L_SIZE_i(Fl_Counter*, void*) {
@@ -6689,7 +6682,7 @@ rkr->m_displayed=1;
 };
 }
 void RKRGUI::cb_L_SIZE(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
 }
 
 void RKRGUI::cb_Har_Qual_i(Fl_Choice* o, void*) {
@@ -6717,7 +6710,7 @@ switch(i)
 Show_Next_Time();
 }
 void RKRGUI::cb_Har_Qual(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Har_Qual_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_Qual_i(o,v);
 }
 
 Fl_Menu_Item RKRGUI::menu_Har_Qual[] = {
@@ -6735,7 +6728,7 @@ if (rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 }
 void RKRGUI::cb_D_A_Connect(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_D_A_Connect_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_D_A_Connect_i(o,v);
 }
 
 void RKRGUI::cb_BMidiIn_i(Fl_Browser* o, void*) {
@@ -6746,21 +6739,21 @@ o->select(valor,1);
 rkr->Conecta();
 }
 void RKRGUI::cb_BMidiIn(Fl_Browser* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BMidiIn_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BMidiIn_i(o,v);
 }
 
 void RKRGUI::cb_Midi_In_Counter_i(Fl_Counter* o, void*) {
   rkr->MidiCh=(int)o->value()-1;
 }
 void RKRGUI::cb_Midi_In_Counter(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Midi_In_Counter_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Midi_In_Counter_i(o,v);
 }
 
 void RKRGUI::cb_Har_In_Counter_i(Fl_Counter* o, void*) {
   rkr->HarCh=(int)o->value()-1;
 }
 void RKRGUI::cb_Har_In_Counter(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Har_In_Counter_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_In_Counter_i(o,v);
 }
 
 void RKRGUI::cb_Mw0_i(Fl_Check_Button*, void*) {
@@ -6768,7 +6761,7 @@ void RKRGUI::cb_Mw0_i(Fl_Check_Button*, void*) {
 ML_Menu->deactivate();
 }
 void RKRGUI::cb_Mw0(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Mw0_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Mw0_i(o,v);
 }
 
 void RKRGUI::cb_Mw1_i(Fl_Check_Button*, void*) {
@@ -6776,7 +6769,7 @@ void RKRGUI::cb_Mw1_i(Fl_Check_Button*, void*) {
 ML_Menu->activate();
 }
 void RKRGUI::cb_Mw1(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Mw1_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Mw1_i(o,v);
 }
 
 void RKRGUI::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
@@ -6785,7 +6778,7 @@ if (rkr->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();
 }
 void RKRGUI::cb_D_J_Connect(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_D_J_Connect_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_D_J_Connect_i(o,v);
 }
 
 void RKRGUI::cb_D_IJ_Connect_i(Fl_Check_Button* o, void*) {
@@ -6794,28 +6787,28 @@ if (rkr->aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();
 }
 void RKRGUI::cb_D_IJ_Connect(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_D_IJ_Connect_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_D_IJ_Connect_i(o,v);
 }
 
 void RKRGUI::cb_Username_i(Fl_Input* o, void*) {
   rkr->UserRealName=(char*) o->value();
 }
 void RKRGUI::cb_Username(Fl_Input* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Username_i(o,v);
-}
-
-void RKRGUI::cb_T_TIMEOUT_i(Fl_Check_Button* o, void*) {
-  rkr->t_timeout=(int) o->value();
-}
-void RKRGUI::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_TIMEOUT_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Username_i(o,v);
 }
 
 void RKRGUI::cb_MES_DIS_i(Fl_Check_Button* o, void*) {
   rkr->mess_dis=(int) o->value();
 }
 void RKRGUI::cb_MES_DIS(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MES_DIS_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_MES_DIS_i(o,v);
+}
+
+void RKRGUI::cb_T_TIMEOUT_i(Fl_Check_Button* o, void*) {
+  rkr->t_timeout=(int) o->value();
+}
+void RKRGUI::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_T_TIMEOUT_i(o,v);
 }
 
 void RKRGUI::cb_BF_Browser_i(Fl_Button*, void*) {
@@ -6827,7 +6820,7 @@ BFiname->value(filename);
 strcpy(rkr->BankFilename,filename);
 }
 void RKRGUI::cb_BF_Browser(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BF_Browser_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BF_Browser_i(o,v);
 }
 
 void RKRGUI::cb_MIDILearn_i(Fl_Double_Window*, void*) {
@@ -15345,301 +15338,320 @@ R average.");
     Settings->callback((Fl_Callback*)cb_Settings, (void*)(this));
     { Fondo2 = new Fl_Box(1, 1, 640, 528);
     } // Fl_Box* Fondo2
-    { Prefs_OK = new Fl_Button(535, 496, 90, 25, "Ok");
-      Prefs_OK->callback((Fl_Callback*)cb_Prefs_OK);
-    } // Fl_Button* Prefs_OK
-    { Look = new Fl_Group(10, 20, 615, 83, "Look & Feel");
-      Look->box(FL_PLASTIC_DOWN_FRAME);
-      Look->color((Fl_Color)FL_BACKGROUND2_COLOR);
-      Look->labelfont(1);
-      Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      Look->user_data((void*)(1));
-      Look->align(FL_ALIGN_TOP_LEFT);
-      { B_C = new Fl_Button(20, 25, 90, 25, "Buttons");
-        B_C->callback((Fl_Callback*)cb_B_C);
-      } // Fl_Button* B_C
-      { L_C = new Fl_Button(120, 25, 90, 25, "Leds");
-        L_C->callback((Fl_Callback*)cb_L_C);
-      } // Fl_Button* L_C
-      { K_C = new Fl_Button(220, 25, 90, 25, "Background");
-        K_C->callback((Fl_Callback*)cb_K_C);
-      } // Fl_Button* K_C
-      { A_C = new Fl_Button(320, 25, 90, 25, "Labels");
-        A_C->callback((Fl_Callback*)cb_A_C);
-      } // Fl_Button* A_C
-      { scheme_ch = new Fl_Choice(520, 26, 88, 20, "schema");
-        scheme_ch->down_box(FL_BORDER_BOX);
-        scheme_ch->labelsize(11);
-        scheme_ch->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        scheme_ch->textsize(12);
-        scheme_ch->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        scheme_ch->callback((Fl_Callback*)cb_scheme_ch);
-        scheme_ch->menu(menu_scheme_ch);
-      } // Fl_Choice* scheme_ch
-      { BackFiname = new Fl_File_Input(20, 65, 390, 30, "Background Image");
-        BackFiname->labelsize(11);
-        BackFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        BackFiname->textsize(12);
-        BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        BackFiname->align(FL_ALIGN_TOP_LEFT);
-      } // Fl_File_Input* BackFiname
-      { BI_Browser = new Fl_Button(415, 75, 65, 20, "Browse");
-        BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
-      } // Fl_Button* BI_Browser
-      { FSLabel = new Fl_Box(538, 51, 60, 17, "Font Size");
-        FSLabel->labelsize(11);
-        FSLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      } // Fl_Box* FSLabel
-      { FSplus = new Fl_Button(535, 70, 30, 20, "+");
-        FSplus->callback((Fl_Callback*)cb_FSplus);
-      } // Fl_Button* FSplus
-      { FSless = new Fl_Button(570, 70, 30, 20, "-");
-        FSless->callback((Fl_Callback*)cb_FSless);
-      } // Fl_Button* FSless
-      Look->end();
-    } // Fl_Group* Look
-    { AUDIO_SET = new Fl_Group(10, 122, 615, 54, "Audio");
-      AUDIO_SET->box(FL_PLASTIC_DOWN_FRAME);
-      AUDIO_SET->labelfont(1);
-      AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      AUDIO_SET->user_data((void*)(1));
-      AUDIO_SET->align(FL_ALIGN_TOP_LEFT);
-      { INSTATE = new Fl_Check_Button(101, 129, 23, 20, "FX On at start");
-        INSTATE->down_box(FL_DOWN_BOX);
-        INSTATE->labelsize(11);
-        INSTATE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        INSTATE->callback((Fl_Callback*)cb_INSTATE);
-        INSTATE->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* INSTATE
-      { Pre_Serve = new Fl_Check_Button(144, 149, 21, 20, "Preserve Gain/Master");
-        Pre_Serve->down_box(FL_DOWN_BOX);
-        Pre_Serve->labelsize(11);
-        Pre_Serve->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
-        Pre_Serve->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* Pre_Serve
-      { UPSAMPLE_C = new Fl_Check_Button(243, 129, 23, 20, "Upsampling");
-        UPSAMPLE_C->down_box(FL_DOWN_BOX);
-        UPSAMPLE_C->labelsize(11);
-        UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        UPSAMPLE_C->callback((Fl_Callback*)cb_UPSAMPLE_C);
-        UPSAMPLE_C->align(FL_ALIGN_LEFT);
-        UPSAMPLE_C->when(FL_WHEN_CHANGED);
-      } // Fl_Check_Button* UPSAMPLE_C
-      { Upr_Amo = new Fl_Choice(277, 129, 47, 18, "#");
-        Upr_Amo->down_box(FL_BORDER_BOX);
-        Upr_Amo->labelsize(10);
-        Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Upr_Amo->textsize(10);
-        Upr_Amo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
-        Upr_Amo->menu(menu_Upr_Amo);
-      } // Fl_Choice* Upr_Amo
-      { Upr_Qual = new Fl_Choice(201, 152, 75, 18, "Up Q");
-        Upr_Qual->down_box(FL_BORDER_BOX);
-        Upr_Qual->labelsize(10);
-        Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Upr_Qual->textsize(10);
-        Upr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
-        Upr_Qual->menu(menu_Upr_Qual);
-      } // Fl_Choice* Upr_Qual
-      { Fl_Choice* o = Downr_Qual = new Fl_Choice(328, 152, 75, 18, "Down Q.");
-        Downr_Qual->down_box(FL_BORDER_BOX);
-        Downr_Qual->labelsize(10);
-        Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Downr_Qual->textsize(10);
-        Downr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
-        o->menu(menu_Upr_Qual);
-      } // Fl_Choice* Downr_Qual
-      { L_SIZE = new Fl_Counter(438, 148, 47, 18, "Looper Size Sec.");
-        L_SIZE->type(1);
-        L_SIZE->labelsize(10);
-        L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        L_SIZE->minimum(0.5);
-        L_SIZE->maximum(30);
-        L_SIZE->step(0.5);
-        L_SIZE->value(0.5);
-        L_SIZE->textsize(10);
-        L_SIZE->callback((Fl_Callback*)cb_L_SIZE);
-        L_SIZE->align(FL_ALIGN_TOP);
-        L_SIZE->when(FL_WHEN_RELEASE);
-      } // Fl_Counter* L_SIZE
-      { Har_Qual = new Fl_Choice(546, 147, 43, 18, "Harmonizer Quality");
-        Har_Qual->down_box(FL_BORDER_BOX);
-        Har_Qual->labelsize(10);
-        Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Har_Qual->textsize(10);
-        Har_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
-        Har_Qual->align(FL_ALIGN_TOP);
-        Har_Qual->menu(menu_Har_Qual);
-      } // Fl_Choice* Har_Qual
-      AUDIO_SET->end();
-    } // Fl_Group* AUDIO_SET
-    { MIDI_SET = new Fl_Group(10, 194, 290, 196, "MIDI");
-      MIDI_SET->box(FL_PLASTIC_DOWN_FRAME);
-      MIDI_SET->color((Fl_Color)FL_BACKGROUND2_COLOR);
-      MIDI_SET->labelfont(1);
-      MIDI_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      MIDI_SET->user_data((void*)(1));
-      MIDI_SET->align(FL_ALIGN_TOP_LEFT);
-      { D_A_Connect = new Fl_Check_Button(140, 198, 105, 20, "Auto Connect MIDI In");
-        D_A_Connect->down_box(FL_DOWN_BOX);
-        D_A_Connect->labelsize(11);
-        D_A_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        D_A_Connect->callback((Fl_Callback*)cb_D_A_Connect);
-        D_A_Connect->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* D_A_Connect
-      { BMidiIn = new Fl_Browser(20, 232, 190, 111, "ALSA Sequencer Ports");
-        BMidiIn->type(2);
-        BMidiIn->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
-        BMidiIn->labelsize(11);
-        BMidiIn->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        BMidiIn->textsize(12);
-        BMidiIn->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
-        BMidiIn->align(FL_ALIGN_TOP_LEFT);
-      } // Fl_Browser* BMidiIn
-      { Midi_In_Counter = new Fl_Counter(220, 231, 60, 24, "Channel");
-        Midi_In_Counter->type(1);
-        Midi_In_Counter->color((Fl_Color)62);
-        Midi_In_Counter->labelsize(10);
-        Midi_In_Counter->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Midi_In_Counter->minimum(1);
-        Midi_In_Counter->maximum(16);
-        Midi_In_Counter->step(1);
-        Midi_In_Counter->value(1);
-        Midi_In_Counter->textsize(11);
-        Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
-        Midi_In_Counter->align(FL_ALIGN_TOP);
-      } // Fl_Counter* Midi_In_Counter
-      { Har_In_Counter = new Fl_Counter(220, 276, 60, 24, "Harm. Channel");
-        Har_In_Counter->type(1);
-        Har_In_Counter->color((Fl_Color)62);
-        Har_In_Counter->labelsize(10);
-        Har_In_Counter->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Har_In_Counter->minimum(1);
-        Har_In_Counter->maximum(16);
-        Har_In_Counter->step(1);
-        Har_In_Counter->value(1);
-        Har_In_Counter->textsize(11);
-        Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
-        Har_In_Counter->align(FL_ALIGN_TOP);
-      } // Fl_Counter* Har_In_Counter
-      { wMIDI = new Fl_Group(20, 362, 273, 23, "MIDI implementation");
-        wMIDI->box(FL_PLASTIC_DOWN_FRAME);
-        wMIDI->labelsize(10);
-        wMIDI->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        wMIDI->align(FL_ALIGN_TOP_LEFT);
-        { Mw0 = new Fl_Check_Button(77, 365, 18, 18, "Default");
-          Mw0->type(102);
-          Mw0->down_box(FL_DOWN_BOX);
-          Mw0->labelsize(11);
-          Mw0->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-          Mw0->callback((Fl_Callback*)cb_Mw0);
-          Mw0->align(FL_ALIGN_LEFT);
-        } // Fl_Check_Button* Mw0
-        { Mw1 = new Fl_Check_Button(188, 365, 18, 18, "MIDI Learn");
-          Mw1->type(102);
-          Mw1->down_box(FL_DOWN_BOX);
-          Mw1->labelsize(11);
-          Mw1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-          Mw1->callback((Fl_Callback*)cb_Mw1);
-          Mw1->align(FL_ALIGN_LEFT);
-        } // Fl_Check_Button* Mw1
-        wMIDI->end();
-      } // Fl_Group* wMIDI
-      MIDI_SET->end();
-    } // Fl_Group* MIDI_SET
-    { JACK_SET = new Fl_Group(305, 194, 321, 196, "Jack");
-      JACK_SET->box(FL_PLASTIC_DOWN_FRAME);
-      JACK_SET->labelfont(1);
-      JACK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      JACK_SET->user_data((void*)(1));
-      JACK_SET->align(FL_ALIGN_TOP_LEFT);
-      { D_J_Connect = new Fl_Check_Button(445, 205, 25, 20, "Auto Connect Out");
-        D_J_Connect->down_box(FL_DOWN_BOX);
-        D_J_Connect->labelsize(11);
-        D_J_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        D_J_Connect->callback((Fl_Callback*)cb_D_J_Connect);
-        D_J_Connect->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* D_J_Connect
-      { D_IJ_Connect = new Fl_Check_Button(580, 205, 25, 20, "Auto Connect In");
-        D_IJ_Connect->down_box(FL_DOWN_BOX);
-        D_IJ_Connect->labelsize(11);
-        D_IJ_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        D_IJ_Connect->callback((Fl_Callback*)cb_D_IJ_Connect);
-        D_IJ_Connect->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* D_IJ_Connect
-      { JackCo = new Fl_Browser(310, 241, 150, 138, "Output Ports");
-        JackCo->type(3);
-        JackCo->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
-        JackCo->labelsize(11);
-        JackCo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        JackCo->textsize(12);
-        JackCo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        JackCo->align(FL_ALIGN_TOP_LEFT);
-      } // Fl_Browser* JackCo
-      { JackIn = new Fl_Browser(470, 241, 150, 138, "Input Ports");
-        JackIn->type(3);
-        JackIn->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
-        JackIn->labelsize(11);
-        JackIn->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        JackIn->textsize(12);
-        JackIn->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        JackIn->align(FL_ALIGN_TOP_LEFT);
-      } // Fl_Browser* JackIn
-      JACK_SET->end();
-    } // Fl_Group* JACK_SET
-    { MISC_SET = new Fl_Group(10, 410, 615, 35, "Misc");
-      MISC_SET->box(FL_PLASTIC_DOWN_FRAME);
-      MISC_SET->labelfont(1);
-      MISC_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      MISC_SET->user_data((void*)(1));
-      MISC_SET->align(FL_ALIGN_TOP_LEFT);
-      { Username = new Fl_Input(85, 417, 240, 21, "Username:");
-        Username->labelsize(11);
-        Username->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Username->textsize(11);
-        Username->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Username->callback((Fl_Callback*)cb_Username);
-      } // Fl_Input* Username
-      { T_TIMEOUT = new Fl_Check_Button(596, 419, 21, 20, "Tap Tempo Timeout");
-        T_TIMEOUT->down_box(FL_DOWN_BOX);
-        T_TIMEOUT->labelsize(11);
-        T_TIMEOUT->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
-        T_TIMEOUT->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* T_TIMEOUT
-      { MES_DIS = new Fl_Check_Button(453, 418, 21, 20, "Disable Warnings");
-        MES_DIS->down_box(FL_DOWN_BOX);
-        MES_DIS->labelsize(11);
-        MES_DIS->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
-        MES_DIS->align(FL_ALIGN_LEFT);
-      } // Fl_Check_Button* MES_DIS
-      MISC_SET->end();
-    } // Fl_Group* MISC_SET
-    { BANK_SET = new Fl_Group(10, 468, 510, 55, "Bank");
-      BANK_SET->box(FL_PLASTIC_DOWN_FRAME);
-      BANK_SET->labelfont(1);
-      BANK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      BANK_SET->user_data((void*)(1));
-      BANK_SET->align(FL_ALIGN_TOP_LEFT);
-      { BFiname = new Fl_File_Input(20, 488, 390, 30, "Bank Filename");
-        BFiname->labelsize(11);
-        BFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        BFiname->textsize(12);
-        BFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        BFiname->align(FL_ALIGN_TOP_LEFT);
-      } // Fl_File_Input* BFiname
-      { BF_Browser = new Fl_Button(415, 498, 65, 20, "Browse");
-        BF_Browser->callback((Fl_Callback*)cb_BF_Browser);
-      } // Fl_Button* BF_Browser
-      BANK_SET->end();
-    } // Fl_Group* BANK_SET
+    { STabs = new Fl_Tabs(5, 0, 631, 535);
+      STabs->user_data((void*)(1));
+      { Look = new Fl_Group(5, 26, 630, 502, "Look");
+        Look->box(FL_PLASTIC_DOWN_FRAME);
+        Look->labelfont(1);
+        Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Look->user_data((void*)(1));
+        Look->align(FL_ALIGN_LEFT);
+        Look->hide();
+        { Fondo6 = new Fl_Box(5, 26, 630, 502);
+        } // Fl_Box* Fondo6
+        { B_C = new Fl_Button(15, 140, 90, 25, "Buttons");
+          B_C->callback((Fl_Callback*)cb_B_C);
+        } // Fl_Button* B_C
+        { L_C = new Fl_Button(225, 140, 90, 25, "Leds");
+          L_C->callback((Fl_Callback*)cb_L_C);
+        } // Fl_Button* L_C
+        { K_C = new Fl_Button(330, 140, 90, 25, "Background");
+          K_C->callback((Fl_Callback*)cb_K_C);
+        } // Fl_Button* K_C
+        { A_C = new Fl_Button(120, 140, 90, 25, "Labels");
+          A_C->callback((Fl_Callback*)cb_A_C);
+        } // Fl_Button* A_C
+        { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
+          scheme_ch->down_box(FL_BORDER_BOX);
+          scheme_ch->labelsize(11);
+          scheme_ch->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          scheme_ch->textsize(12);
+          scheme_ch->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          scheme_ch->callback((Fl_Callback*)cb_scheme_ch);
+          scheme_ch->menu(menu_scheme_ch);
+        } // Fl_Choice* scheme_ch
+        { BackFiname = new Fl_File_Input(10, 200, 390, 30, "Background Image");
+          BackFiname->labelsize(11);
+          BackFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          BackFiname->textsize(12);
+          BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          BackFiname->align(FL_ALIGN_TOP_LEFT);
+        } // Fl_File_Input* BackFiname
+        { BI_Browser = new Fl_Button(410, 210, 65, 20, "Browse");
+          BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
+        } // Fl_Button* BI_Browser
+        { FSLabel = new Fl_Box(10, 83, 60, 17, "Font Size");
+          FSLabel->labelsize(11);
+          FSLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        } // Fl_Box* FSLabel
+        { FSplus = new Fl_Button(80, 80, 30, 20, "+");
+          FSplus->callback((Fl_Callback*)cb_FSplus);
+        } // Fl_Button* FSplus
+        { FSless = new Fl_Button(115, 80, 30, 20, "-");
+          FSless->callback((Fl_Callback*)cb_FSless);
+        } // Fl_Button* FSless
+        { CLLabel = new Fl_Box(10, 108, 40, 19, "Color");
+          CLLabel->labelsize(11);
+          CLLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        } // Fl_Box* CLLabel
+        Look->end();
+      } // Fl_Group* Look
+      { AUDIO_SET = new Fl_Group(5, 26, 630, 502, "Audio");
+        AUDIO_SET->box(FL_PLASTIC_DOWN_FRAME);
+        AUDIO_SET->labelfont(1);
+        AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        AUDIO_SET->user_data((void*)(1));
+        AUDIO_SET->align(FL_ALIGN_LEFT);
+        AUDIO_SET->hide();
+        { Fondo7 = new Fl_Box(5, 26, 630, 502);
+        } // Fl_Box* Fondo7
+        { INSTATE = new Fl_Check_Button(96, 58, 23, 20, "FX On at start");
+          INSTATE->down_box(FL_DOWN_BOX);
+          INSTATE->labelsize(11);
+          INSTATE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          INSTATE->callback((Fl_Callback*)cb_INSTATE);
+          INSTATE->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* INSTATE
+        { Pre_Serve = new Fl_Check_Button(139, 82, 21, 20, "Preserve Gain/Master");
+          Pre_Serve->down_box(FL_DOWN_BOX);
+          Pre_Serve->labelsize(11);
+          Pre_Serve->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
+          Pre_Serve->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* Pre_Serve
+        { UPSAMPLE_C = new Fl_Check_Button(83, 106, 23, 20, "Upsampling");
+          UPSAMPLE_C->down_box(FL_DOWN_BOX);
+          UPSAMPLE_C->labelsize(11);
+          UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          UPSAMPLE_C->callback((Fl_Callback*)cb_UPSAMPLE_C);
+          UPSAMPLE_C->align(FL_ALIGN_LEFT);
+          UPSAMPLE_C->when(FL_WHEN_CHANGED);
+        } // Fl_Check_Button* UPSAMPLE_C
+        { Upr_Amo = new Fl_Choice(56, 130, 47, 18, "Amount");
+          Upr_Amo->down_box(FL_BORDER_BOX);
+          Upr_Amo->labelsize(10);
+          Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Upr_Amo->textsize(10);
+          Upr_Amo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
+          Upr_Amo->menu(menu_Upr_Amo);
+        } // Fl_Choice* Upr_Amo
+        { Upr_Qual = new Fl_Choice(119, 154, 98, 18, "Up Sampling Quality");
+          Upr_Qual->down_box(FL_BORDER_BOX);
+          Upr_Qual->labelsize(10);
+          Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Upr_Qual->textsize(10);
+          Upr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
+          Upr_Qual->menu(menu_Upr_Qual);
+        } // Fl_Choice* Upr_Qual
+        { Fl_Choice* o = Downr_Qual = new Fl_Choice(133, 181, 98, 18, "Down Sampling Quality");
+          Downr_Qual->down_box(FL_BORDER_BOX);
+          Downr_Qual->labelsize(10);
+          Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Downr_Qual->textsize(10);
+          Downr_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Downr_Qual
+        { L_SIZE = new Fl_Counter(118, 208, 47, 18, "Looper Size Seconds");
+          L_SIZE->type(1);
+          L_SIZE->labelsize(10);
+          L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          L_SIZE->minimum(0.5);
+          L_SIZE->maximum(30);
+          L_SIZE->step(0.5);
+          L_SIZE->value(0.5);
+          L_SIZE->textsize(10);
+          L_SIZE->callback((Fl_Callback*)cb_L_SIZE);
+          L_SIZE->align(FL_ALIGN_LEFT);
+          L_SIZE->when(FL_WHEN_RELEASE);
+        } // Fl_Counter* L_SIZE
+        { Har_Qual = new Fl_Choice(113, 234, 43, 18, "Harmonizer Quality");
+          Har_Qual->down_box(FL_BORDER_BOX);
+          Har_Qual->labelsize(10);
+          Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Har_Qual->textsize(10);
+          Har_Qual->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
+          Har_Qual->menu(menu_Har_Qual);
+        } // Fl_Choice* Har_Qual
+        AUDIO_SET->end();
+      } // Fl_Group* AUDIO_SET
+      { MIDI_SET = new Fl_Group(5, 26, 630, 502, "MIDI");
+        MIDI_SET->box(FL_PLASTIC_DOWN_FRAME);
+        MIDI_SET->labelfont(1);
+        MIDI_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MIDI_SET->user_data((void*)(1));
+        MIDI_SET->align(FL_ALIGN_LEFT);
+        { Fondo8 = new Fl_Box(5, 26, 630, 502);
+        } // Fl_Box* Fondo8
+        { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
+          D_A_Connect->down_box(FL_DOWN_BOX);
+          D_A_Connect->labelsize(11);
+          D_A_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          D_A_Connect->callback((Fl_Callback*)cb_D_A_Connect);
+          D_A_Connect->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* D_A_Connect
+        { BMidiIn = new Fl_Browser(15, 72, 190, 111, "ALSA Sequencer Ports");
+          BMidiIn->type(2);
+          BMidiIn->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+          BMidiIn->labelsize(11);
+          BMidiIn->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          BMidiIn->textsize(12);
+          BMidiIn->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
+          BMidiIn->align(FL_ALIGN_TOP_LEFT);
+        } // Fl_Browser* BMidiIn
+        { Midi_In_Counter = new Fl_Counter(103, 198, 60, 24, "Receive Channel");
+          Midi_In_Counter->type(1);
+          Midi_In_Counter->color((Fl_Color)25);
+          Midi_In_Counter->labelsize(10);
+          Midi_In_Counter->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Midi_In_Counter->minimum(1);
+          Midi_In_Counter->maximum(16);
+          Midi_In_Counter->step(1);
+          Midi_In_Counter->value(1);
+          Midi_In_Counter->textsize(11);
+          Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
+          Midi_In_Counter->align(FL_ALIGN_LEFT);
+        } // Fl_Counter* Midi_In_Counter
+        { Har_In_Counter = new Fl_Counter(162, 235, 60, 24, "Harmonizer Receive Channel");
+          Har_In_Counter->type(1);
+          Har_In_Counter->color((Fl_Color)25);
+          Har_In_Counter->labelsize(10);
+          Har_In_Counter->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Har_In_Counter->minimum(1);
+          Har_In_Counter->maximum(16);
+          Har_In_Counter->step(1);
+          Har_In_Counter->value(1);
+          Har_In_Counter->textsize(11);
+          Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
+          Har_In_Counter->align(FL_ALIGN_LEFT);
+        } // Fl_Counter* Har_In_Counter
+        { wMIDI = new Fl_Group(15, 285, 273, 23, "MIDI implementation");
+          wMIDI->box(FL_PLASTIC_DOWN_FRAME);
+          wMIDI->labelsize(10);
+          wMIDI->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          wMIDI->align(FL_ALIGN_TOP_LEFT);
+          { Mw0 = new Fl_Check_Button(72, 287, 18, 18, "Default");
+            Mw0->type(102);
+            Mw0->down_box(FL_DOWN_BOX);
+            Mw0->labelsize(11);
+            Mw0->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+            Mw0->callback((Fl_Callback*)cb_Mw0);
+            Mw0->align(FL_ALIGN_LEFT);
+          } // Fl_Check_Button* Mw0
+          { Mw1 = new Fl_Check_Button(183, 287, 18, 18, "MIDI Learn");
+            Mw1->type(102);
+            Mw1->down_box(FL_DOWN_BOX);
+            Mw1->labelsize(11);
+            Mw1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+            Mw1->callback((Fl_Callback*)cb_Mw1);
+            Mw1->align(FL_ALIGN_LEFT);
+          } // Fl_Check_Button* Mw1
+          wMIDI->end();
+        } // Fl_Group* wMIDI
+        MIDI_SET->end();
+      } // Fl_Group* MIDI_SET
+      { JACK_SET = new Fl_Group(5, 26, 630, 502, "Jack");
+        JACK_SET->box(FL_PLASTIC_DOWN_FRAME);
+        JACK_SET->labelfont(1);
+        JACK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        JACK_SET->user_data((void*)(1));
+        JACK_SET->align(FL_ALIGN_LEFT);
+        JACK_SET->hide();
+        { Fondo9 = new Fl_Box(5, 26, 630, 502);
+        } // Fl_Box* Fondo9
+        { D_J_Connect = new Fl_Check_Button(114, 40, 25, 20, "Auto Connect Out");
+          D_J_Connect->down_box(FL_DOWN_BOX);
+          D_J_Connect->labelsize(11);
+          D_J_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          D_J_Connect->callback((Fl_Callback*)cb_D_J_Connect);
+          D_J_Connect->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* D_J_Connect
+        { JackCo = new Fl_Browser(10, 72, 235, 138, "Output Ports");
+          JackCo->type(3);
+          JackCo->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+          JackCo->labelsize(11);
+          JackCo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          JackCo->textsize(12);
+          JackCo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          JackCo->align(FL_ALIGN_TOP_LEFT);
+        } // Fl_Browser* JackCo
+        { D_IJ_Connect = new Fl_Check_Button(104, 228, 25, 20, "Auto Connect In");
+          D_IJ_Connect->down_box(FL_DOWN_BOX);
+          D_IJ_Connect->labelsize(11);
+          D_IJ_Connect->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          D_IJ_Connect->callback((Fl_Callback*)cb_D_IJ_Connect);
+          D_IJ_Connect->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* D_IJ_Connect
+        { JackIn = new Fl_Browser(10, 259, 235, 131, "Input Ports");
+          JackIn->type(3);
+          JackIn->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+          JackIn->labelsize(11);
+          JackIn->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          JackIn->textsize(12);
+          JackIn->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          JackIn->align(FL_ALIGN_TOP_LEFT);
+        } // Fl_Browser* JackIn
+        JACK_SET->end();
+      } // Fl_Group* JACK_SET
+      { MISC_SET = new Fl_Group(5, 26, 630, 502, "Misc");
+        MISC_SET->box(FL_PLASTIC_DOWN_FRAME);
+        MISC_SET->labelfont(1);
+        MISC_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MISC_SET->user_data((void*)(1));
+        MISC_SET->align(FL_ALIGN_LEFT);
+        MISC_SET->hide();
+        { Fondo10 = new Fl_Box(5, 26, 630, 502);
+        } // Fl_Box* Fondo10
+        { Username = new Fl_Input(80, 32, 240, 21, "Username:");
+          Username->labelsize(11);
+          Username->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Username->textsize(11);
+          Username->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Username->callback((Fl_Callback*)cb_Username);
+        } // Fl_Input* Username
+        { MES_DIS = new Fl_Check_Button(117, 68, 21, 20, "Disable Warnings");
+          MES_DIS->down_box(FL_DOWN_BOX);
+          MES_DIS->labelsize(11);
+          MES_DIS->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
+          MES_DIS->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* MES_DIS
+        { T_TIMEOUT = new Fl_Check_Button(132, 97, 21, 20, "Tap Tempo Timeout");
+          T_TIMEOUT->down_box(FL_DOWN_BOX);
+          T_TIMEOUT->labelsize(11);
+          T_TIMEOUT->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
+          T_TIMEOUT->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* T_TIMEOUT
+        MISC_SET->end();
+      } // Fl_Group* MISC_SET
+      { BANK_SET = new Fl_Group(5, 26, 630, 502, "Bank");
+        BANK_SET->box(FL_PLASTIC_DOWN_FRAME);
+        BANK_SET->labelfont(1);
+        BANK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        BANK_SET->user_data((void*)(1));
+        BANK_SET->align(FL_ALIGN_LEFT);
+        BANK_SET->hide();
+        { Fondo11 = new Fl_Box(5, 26, 630, 502);
+        } // Fl_Box* Fondo11
+        { BFiname = new Fl_File_Input(20, 50, 390, 30, "Bank Filename");
+          BFiname->labelsize(11);
+          BFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          BFiname->textsize(12);
+          BFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          BFiname->align(FL_ALIGN_TOP_LEFT);
+        } // Fl_File_Input* BFiname
+        { BF_Browser = new Fl_Button(415, 60, 65, 20, "Browse");
+          BF_Browser->callback((Fl_Callback*)cb_BF_Browser);
+        } // Fl_Button* BF_Browser
+        BANK_SET->end();
+      } // Fl_Group* BANK_SET
+      STabs->end();
+    } // Fl_Tabs* STabs
     Settings->end();
   } // Fl_Double_Window* Settings
   { MIDILearn = new Fl_Double_Window(640, 480);
@@ -16013,34 +16025,31 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
 chfsize(0);
 
 
-for (int t=0; t<Settings->children();t++)
+for (int t=0; t<STabs->children();t++)
   {
-    Fl_Widget *w = Settings->child(t);
+   Fl_Widget *tabg = STabs->child(t);
+        tabg->labelcolor(label_color);  
+        tabg->selection_color(back_color);
+        tabg->color(fore_color);   
 
-     w->labelcolor(label_color);  
-     w->selection_color(back_color);
-     w->color(fore_color);   
-    long long ud = (long long) w->user_data();
-    
-    if (ud==1)
-    {
-          
-     Fl_Group *g = (Fl_Group *)w;     
+   long long ud = (long long) tabg->user_data();
+
+  if(ud==1)
+  {
+  
+  Fl_Group *g = (Fl_Group *)tabg;     
       
      for(int i=0;i<g->children();i++)
        {
-
-         Fl_Widget *c = g->child(i);
-
-          c->labelcolor(label_color);
-          c->selection_color(back_color);
-          c->color(fore_color);
-       } 
-    } 
  
+       Fl_Widget *w = g->child(i);
+
+        w->labelcolor(label_color);  
+        w->selection_color(back_color);
+        w->color(fore_color);   
+       }
+   }
   }
-
-
 
 for (int t=0; t<ob->children();t++)
   {
@@ -19245,6 +19254,19 @@ Fondo2->image(InOut->image());
 Fondo3->image(InOut->image());
 Fondo4->image(InOut->image());
 Fondo5->image(InOut->image());
+Fondo6->image(InOut->image());
+Fondo7->image(InOut->image());
+Fondo8->image(InOut->image());
+Fondo9->image(InOut->image());
+Fondo10->image(InOut->image());
+Fondo11->image(InOut->image());
+
+
+
+
+
+
+
 
 Etit->image(InOut->image());
 Ares->image(InOut->image());
