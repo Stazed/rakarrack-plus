@@ -6734,7 +6734,9 @@ void RKRGUI::cb_D_A_Connect(Fl_Check_Button* o, void* v) {
 void RKRGUI::cb_BMidiIn_i(Fl_Browser* o, void*) {
   int valor;
 valor = (int) o->value();
+if(o->text(valor) != NULL)
 strcpy(rkr->MID,o->text(valor));
+else return;
 o->select(valor,1);
 rkr->Conecta();
 }

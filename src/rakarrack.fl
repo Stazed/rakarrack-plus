@@ -814,8 +814,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -7082,14 +7081,14 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();} selected
+Settings->hide();}
       xywh {1287 52 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {5 0 631 535}
       } {
         Fl_Group Look {
@@ -7365,7 +7364,7 @@ Show_Next_Time();} open
         }
         Fl_Group MIDI_SET {
           label MIDI
-          user_data 1
+          user_data 1 open
           xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo8 {
@@ -7383,9 +7382,11 @@ else BMidiIn->deactivate();}
             label {ALSA Sequencer Ports}
             callback {int valor;
 valor = (int) o->value();
+if(o->text(valor) != NULL)
 strcpy(rkr->MID,o->text(valor));
+else return;
 o->select(valor,1);
-rkr->Conecta();}
+rkr->Conecta();} selected
             xywh {15 72 190 111} type Hold selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
           }
           Fl_Counter Midi_In_Counter {
