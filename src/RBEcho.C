@@ -92,12 +92,12 @@ RBEcho::initdelays ()
   if(Plrdelay>0)
   {
   rkl = lrdelay;
-  rkr = delay - lrdelay;
+  rkr = lrdelay/2;
   }
   else
   {
   rkr = lrdelay;
-  rkl = delay - lrdelay;  
+  rkl = lrdelay/2;  
   }
   if (rkl > delay)
     rkl = delay;
@@ -254,11 +254,11 @@ RBEcho::setlrdelay (int Plrdelay)
   float tmp;
   this->Plrdelay = Plrdelay;
   tmp =
-    ((float) delay) * fabs(((float)Plrdelay - 64.0f) / 64.0f);
+    ((float) delay) * fabs(((float)Plrdelay - 64.0f) / 65.0f);
   lrdelay = lrintf(tmp);
   
   tmp = fabs( ((float) Plrdelay - 64.0f)/32.0f);
-  pingpong = 1.0f - 1.0f/(10.0f*tmp*tmp + 1.0f);
+  pingpong = 1.0f - 1.0f/(5.0f*tmp*tmp + 1.0f);
   pingpong *= 1.2f;
   initdelays ();
 };
