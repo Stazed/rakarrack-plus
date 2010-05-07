@@ -40,6 +40,7 @@ int rnote[POLY];
 int gate[POLY];
 int reconota;
 int maxx_len;
+int error_num;
 unsigned int SAMPLE_RATE;
 float fPERIOD;
 float fSAMPLE_RATE;
@@ -54,6 +55,7 @@ RKR::RKR ()
 {
 
   char temp[128];
+  error_num = 0;
   cpufp = 0;
   numpc = 0;
   numpi = 0;

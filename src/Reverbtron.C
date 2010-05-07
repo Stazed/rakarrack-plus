@@ -368,10 +368,7 @@ Reverbtron::changepar (int npar, int value)
       level =  2.0f * dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
       break;
     case 8:
-      if(!setfile(value))
-      {
-       printf("Unable to open the IR file\n");
-      }
+      if(!setfile(value)) error_num=2;
       break;
     case 9:
       Pstretch = value;

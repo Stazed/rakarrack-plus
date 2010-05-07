@@ -300,10 +300,7 @@ Convolotron::changepar (int npar, int value)
       process_rbuf();
       break;
     case 8:
-      if(!setfile(value))
-      {
-       printf("Unable to open the IR file\n");
-      }
+      if(!setfile(value)) error_num=1;
       break;
     case 5:
       break;

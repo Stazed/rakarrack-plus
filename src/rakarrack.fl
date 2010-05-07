@@ -814,13 +814,11 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -1062,6 +1060,8 @@ if(rkr->numpc)
   rkr->numpc = 0;
 }    
 
+if(error_num) rkr->Error_Handle(error_num);
+
 if(rkr->Tap_Bypass)
 {
    
@@ -1212,7 +1212,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -7793,7 +7793,7 @@ save_stat(6);}
         label {Midi Control}
         callback {if(o->value()> 127) o->value(127);
 if(o->value()< 1) o->value(1);
-rkr->Aux_MIDI = (int)o->value();} selected
+rkr->Aux_MIDI = (int)o->value();}
         xywh {98 96 39 22} labelsize 10 labelcolor 7 minimum 1 maximum 127 step 1 value 1 textsize 10
       }
       Fl_Value_Slider aux_min {

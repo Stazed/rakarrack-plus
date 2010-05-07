@@ -158,7 +158,7 @@ extern int gate[POLY];
 extern int reconota;
 extern float r__ratio;
 extern int maxx_len;
-
+extern int error_num;
 
 
 class RKR
@@ -225,6 +225,7 @@ public:
   void TapTempo_Timeout(int state);
   void Update_tempo();
   int checkforaux();
+  void Error_Handle(int num);
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;

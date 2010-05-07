@@ -32,7 +32,6 @@ int
 RKR::Message (const char *labelwin, const char *message_text)
 {
   if(mess_dis) return(0);
-  printf("mesdis %d\n",mess_dis);
 
   Fl_Widget *w = fl_message_icon ();
 
@@ -48,6 +47,33 @@ RKR::Message (const char *labelwin, const char *message_text)
 };
 
 
+void
+RKR::Error_Handle(int num)
+{
+  char meslabel[64];
+  char error_msg[256];
+  bzero(meslabel,sizeof(meslabel));
+  sprintf(meslabel, "%s %s",jackcliname,VERSION);
+  
+  error_num = 0;
+  bzero(error_msg,sizeof(error_msg));
+  
+  switch(num) 
+  {
+    case 1:
+     sprintf(error_msg,"%s","Convolotron is unable to open the audio .wav file");
+     break;
+    case 2:
+     sprintf(error_msg,"%s","Reverbtron is unable to open the IR .rvb file");
+     break;
+
+
+
+  }
+  
+  Message(meslabel,error_msg);
+
+}
 
 char *
 RKR::PrefNom (const char *dato)

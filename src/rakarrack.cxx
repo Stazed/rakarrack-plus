@@ -1061,6 +1061,8 @@ if(rkr->numpc)
   rkr->numpc = 0;
 }    
 
+if(error_num) rkr->Error_Handle(error_num);
+
 if(rkr->Tap_Bypass)
 {
    
