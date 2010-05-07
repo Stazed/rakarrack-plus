@@ -76,7 +76,7 @@ private:
   int avgtime;
 
   int *time;
-  float fstretch, idelay, ffade;
+  float fstretch, idelay, ffade, maxtime;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *data, *lxn, *ftime, *tdata;
   float level,fb, feedback;

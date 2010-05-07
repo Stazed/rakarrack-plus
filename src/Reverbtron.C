@@ -41,9 +41,10 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   Plength = 50;
   Puser = 0;
   Psafe = 0;
-  convlength = 6.0f;  //max 6s verb time
+  convlength = 10.0f;  //max reverb time
   fb = 0.0f;
   feedback = 0.0f;
+  maxtime = 0.0f;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
   time = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
@@ -188,6 +189,14 @@ sscanf(wbuf,"%f,%f\n",&ftime[i],&tdata[i]);
 }
 
 fclose(fs);
+
+maxtime = 0.0f;
+for(i=0;i<data_length;i++)
+{
+  if(ftime[i] > maxtime) maxtime = ftime[i];
+}
+
+
 cleanup();
 convert_time();
 return(1);
@@ -203,6 +212,7 @@ int chunk;
 float skip = 0.0f;
 float incr = 0.0f;
 float findex;
+float tmpstretch = 1.0f;
 
 memset(data, 0, sizeof(float)*2000);
 memset(time, 0, sizeof(int)*2000);
@@ -210,6 +220,16 @@ memset(time, 0, sizeof(int)*2000);
 if(Plength>=data_length) Plength = data_length;
 if(Plength==0) Plength=400;
 incr = ((float) Plength)/((float) data_length);
+
+
+if(fstretch>0.0) 
+{
+tmpstretch = 1.0f + fstretch * (convlength/maxtime);
+}
+else
+{
+tmpstretch = 1.0f + 0.95f*fstretch;
+}
 
 skip = 0.0f;
 index = 0;
@@ -225,8 +245,12 @@ for(i=0;i<data_length;i++)
   {
     if(index<Plength)   
       { 
-       if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
-       time[index]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
+       if( (tmpstretch*(idelay + ftime[i] )) > 9.9f ) 
+       {
+       ftime[i] = 0.0f;
+       data[i] = 0.0f;
+       }   
+       time[index]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
        data[index]=tdata[i];  
        index++;
       }
@@ -240,7 +264,7 @@ for(i=0;i<data_length;i++)
 { 
 
     if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
-    time[i]=lrintf(fstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
+    time[i]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
     data[i]=tdata[i];  
  
 };
@@ -351,12 +375,7 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 9:
       Pstretch = value;
-      if(Pstretch > 0) {
-      fstretch = 1.0f + ((float) value)/20.0f;
-      }
-      else {
-      fstretch = 1.0f + ((float) value)/69.0f;
-      }      
+      fstretch = ((float) value)/64.0f;   
       convert_time();
       break;
     case 10:
