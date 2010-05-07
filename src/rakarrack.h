@@ -3320,6 +3320,10 @@ private:
   static void cb_CancelRec(Fl_Button*, void*);
 public:
   Fl_Value_Input *Disp_Control;
+private:
+  void cb_Disp_Control_i(Fl_Value_Input*, void*);
+  static void cb_Disp_Control(Fl_Value_Input*, void*);
+public:
   Fl_Button *CopyTAll;
 private:
   void cb_CopyTAll_i(Fl_Button*, void*);

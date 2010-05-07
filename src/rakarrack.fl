@@ -814,11 +814,13 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -7386,7 +7388,7 @@ if(o->text(valor) != NULL)
 strcpy(rkr->MID,o->text(valor));
 else return;
 o->select(valor,1);
-rkr->Conecta();} selected
+rkr->Conecta();}
             xywh {15 72 190 111} type Hold selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
           }
           Fl_Counter Midi_In_Counter {
@@ -7673,6 +7675,8 @@ GMM->redraw();}
         xywh {10 445 135 30}
       }
       Fl_Value_Input Disp_Control {
+        callback {if(o->value()> 127) o->value(127);
+if(o->value()< 1) o->value(1);}
         xywh {155 410 45 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
       }
       Fl_Button CopyTAll {
@@ -7787,7 +7791,9 @@ save_stat(6);}
       }
       Fl_Value_Input aux_midi {
         label {Midi Control}
-        callback {rkr->Aux_MIDI = (int)o->value();}
+        callback {if(o->value()> 127) o->value(127);
+if(o->value()< 1) o->value(1);
+rkr->Aux_MIDI = (int)o->value();} selected
         xywh {98 96 39 22} labelsize 10 labelcolor 7 minimum 1 maximum 127 step 1 value 1 textsize 10
       }
       Fl_Value_Slider aux_min {

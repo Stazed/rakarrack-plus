@@ -6952,6 +6952,14 @@ void RKRGUI::cb_CancelRec(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_CancelRec_i(o,v);
 }
 
+void RKRGUI::cb_Disp_Control_i(Fl_Value_Input* o, void*) {
+  if(o->value()> 127) o->value(127);
+if(o->value()< 1) o->value(1);
+}
+void RKRGUI::cb_Disp_Control(Fl_Value_Input* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_Disp_Control_i(o,v);
+}
+
 void RKRGUI::cb_CopyTAll_i(Fl_Button*, void*) {
   int i;
 for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));
@@ -7026,7 +7034,9 @@ void RKRGUI::cb_aux_thres(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_aux_midi_i(Fl_Value_Input* o, void*) {
-  rkr->Aux_MIDI = (int)o->value();
+  if(o->value()> 127) o->value(127);
+if(o->value()< 1) o->value(1);
+rkr->Aux_MIDI = (int)o->value();
 }
 void RKRGUI::cb_aux_midi(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_aux_midi_i(o,v);
@@ -15765,6 +15775,7 @@ R average.");
       Disp_Control->step(1);
       Disp_Control->value(1);
       Disp_Control->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      Disp_Control->callback((Fl_Callback*)cb_Disp_Control);
     } // Fl_Value_Input* Disp_Control
     { CopyTAll = new Fl_Button(480, 412, 150, 30, "Copy to All");
       CopyTAll->callback((Fl_Callback*)cb_CopyTAll);
