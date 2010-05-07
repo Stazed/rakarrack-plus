@@ -823,7 +823,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1572 80 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
@@ -1060,7 +1060,7 @@ if(rkr->numpc)
   rkr->numpc = 0;
 }    
 
-if(error_num) rkr->Error_Handle(error_num);
+if(error_num>0) rkr->Error_Handle(error_num);
 
 if(rkr->Tap_Bypass)
 {

@@ -66,9 +66,6 @@ RKR::Error_Handle(int num)
     case 2:
      sprintf(error_msg,"%s","Reverbtron is unable to open the IR .rvb file");
      break;
-
-
-
   }
   
   Message(meslabel,error_msg);

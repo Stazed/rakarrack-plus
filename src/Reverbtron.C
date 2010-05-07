@@ -196,7 +196,6 @@ for(i=0;i<data_length;i++)
   if(ftime[i] > maxtime) maxtime = ftime[i];
 }
 
-
 cleanup();
 convert_time();
 return(1);
