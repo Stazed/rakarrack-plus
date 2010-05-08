@@ -108,8 +108,8 @@ Reverbtron::out (float * smpsl, float * smpsr)
 //
 //       }  
 
-      if(Prv) l = smpsl[i]-smpsr[i]+feedback; else
-      l = smpsl[i] + smpsr[i] +  feedback;
+      if(!Prv) l = smpsl[i]+smpsr[i]+feedback; else
+      l = smpsl[i] - smpsr[i] +  feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
       
