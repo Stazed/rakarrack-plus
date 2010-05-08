@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -5408,7 +5408,7 @@ ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));}
         }
       }
       Fl_Group RBECHO {
-        user_data 1
+        user_data 1 open
         xywh {320 211 161 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button rbecho_activar {
@@ -6311,7 +6311,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
       }
       Fl_Group REVERBTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button revtron_activar {
@@ -6338,7 +6338,7 @@ revtron_user->do_callback();
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
 revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
-revtron_es->value(rkr->efx_Reverbtron->getpar(12));} selected
+revtron_es->value(rkr->efx_Reverbtron->getpar(12));}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6382,7 +6382,7 @@ revtron_es->value(rkr->efx_Reverbtron->getpar(12));} selected
         }
         Fl_Value_Slider revtron_pan {
           label Pan
-          callback {rkr->efx_Reverbtron->changepar(11,(int)(o->value()+64));}
+          callback {rkr->efx_Reverbtron->changepar(11,(int)(o->value() + 64));} selected
           xywh {372 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }

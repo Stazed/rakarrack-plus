@@ -90,6 +90,23 @@ Reverbtron::out (float * smpsl, float * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
+//       if(Pes) // just so I have the code to get started
+//       {
+//           efxoutl[i] *= cosf(lrcross);
+//           efxoutr[i] *= sinf(lrcross);
+//           
+//        	  avg = (efxoutl[i] + efxoutr[i]) * 0.5f;
+// 	  ldiff = efxoutl[i] - avg;
+// 	  rdiff = efxoutr[i] - avg;
+//
+// 	  tmp = avg + ldiff * pes;
+// 	  efxoutl[i] = 0.5 * tmp;
+//
+// 	  tmp = avg + rdiff * pes;
+// 	  efxoutr[i] = 0.5f * tmp;
+//
+//
+//       }  
 
       l = smpsl[i] + smpsr[i] +  feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
@@ -138,9 +155,15 @@ Reverbtron::setvolume (int Pvolume)
 void
 Reverbtron::setpanning (int Ppanning)
 {
-  this->Ppanning = Ppanning;
-  lpanning = ((float)Ppanning + 0.5f) / 127.0f;
-  rpanning = 1.0f - lpanning;
+  this->Ppanning = Ppanning - 64;
+  lpanning = ((float)Ppanning) / 64.0f;
+  rpanning = 2.0f - lpanning;
+  lpanning = 10.0f * powf(lpanning, 4);
+  rpanning = 10.0f * powf(rpanning, 4);
+  lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
+  rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
+  lpanning *= 1.1f;
+  rpanning *= 1.1f; 
 };
 
 int
@@ -234,7 +257,7 @@ skip = 0.0f;
 index = 0;
 chunk = 10;
 
-if(data_length>100)
+if(data_length>Plength)
 {
 for(i=0;i<data_length;i++)
 { 
@@ -388,6 +411,9 @@ Reverbtron::changepar (int npar, int value)
     case 11:
       setpanning (value);
       break;
+    case 12:
+      Pes = value;
+      break;
      
 
    };
@@ -433,6 +459,10 @@ Reverbtron::getpar (int npar)
       break; 
     case 11:
       return(Ppanning);
+      break;
+    case 12:
+      return(Pes);
+      break;
     };
   return (0);			//in case of bogus parameter number
 };

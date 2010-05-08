@@ -219,9 +219,9 @@ RBEcho::setvolume (int Pvolume)
 void
 RBEcho::setpanning (int Ppanning)
 {
-  this->Ppanning = Ppanning;
-  rpanning = ((float)Ppanning) / 64.0f;
-  lpanning = 2.0f - rpanning;
+  this->Ppanning = Ppanning - 64;
+  lpanning = ((float)Ppanning) / 64.0f;
+  rpanning = 2.0f - lpanning;
   lpanning = 10.0f * powf(lpanning, 4);
   rpanning = 10.0f * powf(rpanning, 4);
   lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
@@ -267,7 +267,7 @@ void
 RBEcho::setlrcross (int Plrcross)
 {
   this->Plrcross = Plrcross;
-  lrcross = (float)Plrcross / 128.0f;
+  lrcross = D_PI * (float)Plrcross / 128.0f;
   
 };
 

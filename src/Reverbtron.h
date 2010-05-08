@@ -70,6 +70,7 @@ private:
   int Psafe;
   int Pfb;		//-64 ... 64// amount of feedback
   int Pfade;
+  int Pes;		//0 or 1// Add stereo spatialization
   int offset;
   int maxx_size;
   int data_length;
