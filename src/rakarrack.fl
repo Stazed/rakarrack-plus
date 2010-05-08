@@ -824,7 +824,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;} selected
-      xywh {1551 59 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1544 52 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6877,6 +6877,15 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 11
           }
         }
+        Fl_Button T_Apply {
+          label Apply
+          callback {if(rkr->Tap_TempoSet>0)
+{
+rkr->Update_tempo();
+UpdateTGUI();
+}}
+          xywh {628 172 38 15} shortcut 0x67 labelsize 10
+        }
         Fl_Button T_BUT {
           label Tap
           callback {char tmp[8];
@@ -6888,7 +6897,7 @@ sprintf(tmp,"%d",rkr->TapTempo());
 T_DIS->copy_label(tmp);
 UpdateTGUI();
 }}
-          xywh {635 165 54 23} shortcut 0x67 labelsize 12
+          xywh {671 165 38 23} shortcut 0x67 labelsize 12
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}

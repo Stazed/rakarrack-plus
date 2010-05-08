@@ -6271,6 +6271,17 @@ Fl_Menu_Item RKRGUI::menu_T_SET[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_T_Apply_i(Fl_Button*, void*) {
+  if(rkr->Tap_TempoSet>0)
+{
+rkr->Update_tempo();
+UpdateTGUI();
+};
+}
+void RKRGUI::cb_T_Apply(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_Apply_i(o,v);
+}
+
 void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
   char tmp[8];
 
@@ -15288,7 +15299,12 @@ R average.");
         T_SET->callback((Fl_Callback*)cb_T_SET);
         T_SET->menu(menu_T_SET);
       } // Fl_Choice* T_SET
-      { T_BUT = new Fl_Button(635, 165, 54, 23, "Tap");
+      { T_Apply = new Fl_Button(628, 172, 38, 15, "Apply");
+        T_Apply->shortcut(0x67);
+        T_Apply->labelsize(10);
+        T_Apply->callback((Fl_Callback*)cb_T_Apply);
+      } // Fl_Button* T_Apply
+      { T_BUT = new Fl_Button(671, 165, 38, 23, "Tap");
         T_BUT->shortcut(0x67);
         T_BUT->labelsize(12);
         T_BUT->callback((Fl_Callback*)cb_T_BUT);

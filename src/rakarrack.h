@@ -2999,6 +2999,11 @@ private:
   static void cb_T_SET(Fl_Choice*, void*);
   static Fl_Menu_Item menu_T_SET[];
 public:
+  Fl_Button *T_Apply;
+private:
+  void cb_T_Apply_i(Fl_Button*, void*);
+  static void cb_T_Apply(Fl_Button*, void*);
+public:
   Fl_Button *T_BUT;
 private:
   void cb_T_BUT_i(Fl_Button*, void*);
