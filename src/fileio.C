@@ -514,14 +514,14 @@ RKR::savefile (char *filename)
 
 	case 40:
 	  //Reverbtron
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
 		   efx_Reverbtron->getpar (0), efx_Reverbtron->getpar (1),
 		   efx_Reverbtron->getpar (2), efx_Reverbtron->getpar (3),
 		   efx_Reverbtron->getpar (4), efx_Reverbtron->getpar (5),
 		   efx_Reverbtron->getpar (6), efx_Reverbtron->getpar (7),
 		   efx_Reverbtron->getpar (8), efx_Reverbtron->getpar (9),
                    efx_Reverbtron->getpar (10), efx_Reverbtron->getpar (11),
-                   Reverbtron_Bypass, efx_Reverbtron->Filename);
+                   efx_Reverbtron->getpar (11), Reverbtron_Bypass, efx_Reverbtron->Filename);
 	  break;
 
 	}
@@ -976,10 +976,10 @@ RKR::loadfile (char *filename)
 	  //Reverbtron
 	  bzero(efx_Reverbtron->Filename,sizeof(efx_Reverbtron->Filename));
 	  bzero(cfilename,sizeof(cfilename));
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
 		  &lv[41][0], &lv[41][1], &lv[41][2], &lv[41][3], &lv[41][4],
 		  &lv[41][5], &lv[41][6], &lv[41][7], &lv[41][8], &lv[41][9],
-		  &lv[41][10],&lv[41][11],&Reverbtron_B,cfilename);
+		  &lv[41][10],&lv[41][11],&lv[41][12], &Reverbtron_B,cfilename);
           strcpy(efx_Reverbtron->Filename,cfilename);		  
 	  break;
 
@@ -1143,7 +1143,7 @@ RKR::Actualizar_Audio ()
     efx_Shifter->changepar (i, lv[39][i]);
  for (i = 0; i <= 5; i++)
     efx_StompBox->changepar (i, lv[40][i]);
- for (i = 0; i <= 11; i++)
+ for (i = 0; i <= 12; i++)
     efx_Reverbtron->changepar (i, lv[41][i]);
 
 
@@ -1798,7 +1798,7 @@ RKR::Preset_to_Bank (int i)
     lv[39][j] = efx_Shifter->getpar(j);
   for (j = 0; j <= 5; j++)
     lv[40][j] = efx_StompBox->getpar(j);
-  for (j = 0; j <= 11; j++)
+  for (j = 0; j <= 12; j++)
     lv[41][j] = efx_Reverbtron->getpar(j);
 
 
