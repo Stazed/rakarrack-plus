@@ -5828,6 +5828,7 @@ revtron_user->do_callback();
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
 revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
+revtron_es->value(rkr->efx_Reverbtron->getpar(12));
 }
 void RKRGUI::cb_revtron_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_preset_i(o,v);
@@ -5906,6 +5907,13 @@ void RKRGUI::cb_revtron_fade_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_revtron_fade(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_fade_i(o,v);
+}
+
+void RKRGUI::cb_revtron_es_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Reverbtron->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_revtron_es(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_es_i(o,v);
 }
 
 void RKRGUI::cb_revtron_safe_i(Fl_Check_Button* o, void*) {
@@ -14662,7 +14670,6 @@ R average.");
       REVERBTRON->labelfont(1);
       REVERBTRON->user_data((void*)(1));
       REVERBTRON->align(96|FL_ALIGN_INSIDE);
-      REVERBTRON->hide();
       { revtron_activar = new Fl_Light_Button(326, 214, 34, 18, "On");
         revtron_activar->shortcut(0x35);
         revtron_activar->color((Fl_Color)62);
@@ -14833,7 +14840,13 @@ R average.");
         revtron_fade->align(FL_ALIGN_LEFT);
         revtron_fade->when(FL_WHEN_RELEASE);
       } // SliderW* revtron_fade
-      { revtron_safe = new Fl_Check_Button(336, 358, 15, 15, "Safe");
+      { revtron_es = new Fl_Check_Button(322, 358, 15, 15, "ES");
+        revtron_es->down_box(FL_BORDER_BOX);
+        revtron_es->labelsize(10);
+        revtron_es->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_es->callback((Fl_Callback*)cb_revtron_es, (void*)(2));
+      } // Fl_Check_Button* revtron_es
+      { revtron_safe = new Fl_Check_Button(350, 358, 15, 15, "Safe");
         revtron_safe->down_box(FL_BORDER_BOX);
         revtron_safe->labelsize(10);
         revtron_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

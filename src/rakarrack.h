@@ -2836,6 +2836,11 @@ private:
   void cb_revtron_fade_i(SliderW*, void*);
   static void cb_revtron_fade(SliderW*, void*);
 public:
+  Fl_Check_Button *revtron_es;
+private:
+  void cb_revtron_es_i(Fl_Check_Button*, void*);
+  static void cb_revtron_es(Fl_Check_Button*, void*);
+public:
   Fl_Check_Button *revtron_safe;
 private:
   void cb_revtron_safe_i(Fl_Check_Button*, void*);

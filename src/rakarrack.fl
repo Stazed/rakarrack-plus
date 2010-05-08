@@ -814,22 +814,24 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {1572 80 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1565 73 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -1212,7 +1214,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -6310,7 +6312,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
       }
       Fl_Group REVERBTRON {
         user_data 1
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button revtron_activar {
           label On
@@ -6335,7 +6337,8 @@ revtron_user->value(rkr->efx_Reverbtron->getpar(4));
 revtron_user->do_callback();
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
-revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));} open
+revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
+revtron_es->value(rkr->efx_Reverbtron->getpar(12));} selected
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6425,11 +6428,17 @@ revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));} open
           xywh {372 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
+        Fl_Check_Button revtron_es {
+          label ES
+          user_data 2
+          callback {rkr->efx_Reverbtron->changepar(12,(int)o->value());}
+          xywh {322 358 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
         Fl_Check_Button revtron_safe {
           label Safe
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(2,(int)o->value());}
-          xywh {336 358 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {350 358 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button revtron_user {
           label User
@@ -6452,7 +6461,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
         Fl_Choice revtron_fnum {
           label Preset
-          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());} open
+          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
           xywh {371 374 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
