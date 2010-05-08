@@ -108,6 +108,7 @@ Reverbtron::out (float * smpsl, float * smpsr)
 //
 //       }  
 
+      if(Prv) l = smpsl[i]-smpsr[i]+feedback; else
       l = smpsl[i] + smpsr[i] +  feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
@@ -153,10 +154,10 @@ Reverbtron::setvolume (int Pvolume)
 };
 
 void
-Reverbtron::setpanning (int Ppanning)
+Reverbtron::setpanning (int value)
 {
-  this->Ppanning = Ppanning - 64;
-  lpanning = ((float)Ppanning) / 64.0f;
+  Ppanning = value;
+  lpanning = ((float)value-64.0f) / 64.0f;
   rpanning = 2.0f - lpanning;
   lpanning = 10.0f * powf(lpanning, 4);
   rpanning = 10.0f * powf(rpanning, 4);
@@ -322,25 +323,25 @@ Reverbtron::sethidamp (int Phidamp)
 void
 Reverbtron::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 12;
+  const int PRESET_SIZE = 14;
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Spring
-    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64},
+    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0},
     //Concrete Stair
-    {64, 0, 1, 500, 0, 0, 0, 40, 1, 0, 0, 64},
+    {64, 0, 1, 500, 0, 0, 0, 40, 1, 0, 0, 64, 0, 0},
     //Nice Hall
-    {64, 0, 1, 500, 0, 0, 60, 15, 2, 0, 0, 64},
+    {64, 0, 1, 500, 0, 0, 60, 15, 2, 0, 0, 64, 0, 0},
     //Hall
-    {64, 16, 1, 500, 0, 0, 0, 22, 3, -17, 0, 64},
+    {64, 16, 1, 500, 0, 0, 0, 22, 3, -17, 0, 64, 0, 0},
     //Room
-    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64},
+    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64, 0, 0},
     //Hall
-    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64},
+    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64, 0, 0},
     //Guitar
-    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64},
+    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64, 0, 0},
     //Studio
-    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64}
+    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64, 0, 0}
 
   };
 
@@ -414,7 +415,9 @@ Reverbtron::changepar (int npar, int value)
     case 12:
       Pes = value;
       break;
-     
+    case 13:
+      Prv = value;
+      break;     
 
    };
 };
@@ -463,6 +466,9 @@ Reverbtron::getpar (int npar)
     case 12:
       return(Pes);
       break;
+    case 13:
+      return(Prv);
+      break;  
     };
   return (0);			//in case of bogus parameter number
 };

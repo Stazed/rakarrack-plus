@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -814,19 +814,17 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {1565 73 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1551 59 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5408,7 +5406,7 @@ ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));}
         }
       }
       Fl_Group RBECHO {
-        user_data 1 open
+        user_data 1
         xywh {320 211 161 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button rbecho_activar {
@@ -6311,8 +6309,8 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
       }
       Fl_Group REVERBTRON {
-        user_data 1 open
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        user_data 1
+        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button revtron_activar {
           label On
@@ -6338,7 +6336,8 @@ revtron_user->do_callback();
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
 revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
-revtron_es->value(rkr->efx_Reverbtron->getpar(12));}
+revtron_es->value(rkr->efx_Reverbtron->getpar(12));
+revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6382,7 +6381,7 @@ revtron_es->value(rkr->efx_Reverbtron->getpar(12));}
         }
         Fl_Value_Slider revtron_pan {
           label Pan
-          callback {rkr->efx_Reverbtron->changepar(11,(int)(o->value() + 64));} selected
+          callback {rkr->efx_Reverbtron->changepar(11,(int)(o->value()+64));}
           xywh {372 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
@@ -6428,11 +6427,17 @@ revtron_es->value(rkr->efx_Reverbtron->getpar(12));}
           xywh {372 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
+        Fl_Check_Button revtron_rv {
+          label Sh
+          user_data 2
+          callback {rkr->efx_Reverbtron->changepar(13,(int)o->value());}
+          xywh {322 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
         Fl_Check_Button revtron_es {
           label ES
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(12,(int)o->value());}
-          xywh {322 358 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {322 366 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button revtron_safe {
           label Safe
@@ -6460,7 +6465,7 @@ rkr->efx_Reverbtron->setfile(100);}
           xywh {426 359 46 12} labelsize 10 deactivate
         }
         Fl_Choice revtron_fnum {
-          label Preset
+          label File
           callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
           xywh {371 374 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
