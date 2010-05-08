@@ -31,7 +31,7 @@
 int
 RKR::Message (const char *labelwin, const char *message_text)
 {
-  if(mess_dis) return(0);
+  if(mess_dis)return(0);
 
   Fl_Widget *w = fl_message_icon ();
 
