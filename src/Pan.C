@@ -74,9 +74,6 @@ Pan::out (float *smpsl, float *smpsr)
 
 	{
 
-          smpsl[i] *= cosf(dvalue);
-          smpsr[i] *= sinf(dvalue);
-          
        	  avg = (smpsl[i] + smpsr[i]) * .5f;
 	  ldiff = smpsl[i] - avg;
 	  rdiff = smpsr[i] - avg;
