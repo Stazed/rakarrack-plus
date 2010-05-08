@@ -144,21 +144,22 @@
 extern int Pexitprogram, preset;
 extern int commandline, gui;
 extern int exitwithhelp, nojack;
-extern Pixmap p, mask;
-extern XWMHints *hints;
+extern int maxx_len;
+extern int error_num;
 extern int PERIOD;
+extern int reconota;
+extern unsigned int SAMPLE_RATE;
+extern int note_active[POLY];
+extern int rnote[POLY];
+extern int gate[POLY];
+extern float val_sum;
 extern float fPERIOD;
 extern unsigned int SAMPLE_RATE;
 extern float fSAMPLE_RATE;
 extern float cSAMPLE_RATE;
-extern float val_sum;
-extern int note_active[POLY];
-extern int rnote[POLY];
-extern int gate[POLY];
-extern int reconota;
 extern float r__ratio;
-extern int maxx_len;
-extern int error_num;
+extern Pixmap p, mask;
+extern XWMHints *hints;
 
 
 class RKR
