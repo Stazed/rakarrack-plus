@@ -9,6 +9,11 @@ doc_DATA= icono_rakarrack_128x128.png \
 	schema1b.jpg \
 	schema2b.jpg \
 	settings.jpg \
+	settings1.jpg \
+	settings2.jpg \
+	settings3.jpg \
+	settings4.jpg \
+	settings5.jpg \
 	midilearn.jpg \
 	order.jpg \
 	preset_name1.png \
