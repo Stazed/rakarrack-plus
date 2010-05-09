@@ -15382,7 +15382,7 @@ R average.");
       } // Fl_Box* T_DIS
       Tap->end();
     } // Fl_Group* Tap
-    Principal->size_range(494, 390, 3200, 2400);
+    Principal->size_range(320, 240, 3200, 2400);
     Principal->end();
     Principal->resizable(Principal);
   } // Fl_Double_Window* Principal
