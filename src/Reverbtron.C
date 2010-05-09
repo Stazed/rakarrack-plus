@@ -55,6 +55,12 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   data_length=0;
   fstretch = 1.0f;
   idelay = 0.0f;
+
+  lpfl =  new AnalogFilter (2, 22000, 1, 0);;
+  lpfr =  new AnalogFilter (2, 22000, 1, 0);;
+  hpfl =  new AnalogFilter (3, 20, 1, 0);			
+  hpfr =  new AnalogFilter (3, 20, 1, 0);			
+
   setpreset (Ppreset);
   cleanup ();
 };
@@ -72,6 +78,10 @@ Reverbtron::cleanup ()
 memset(lxn,0,sizeof(float)*maxx_size);
 feedback = 0.0f;
 oldl = 0.0f;
+hpfl->cleanup ();
+hpfr->cleanup ();
+lpfl->cleanup ();
+lpfr->cleanup ();
 
 };
 
@@ -86,27 +96,36 @@ Reverbtron::out (float * smpsl, float * smpsr)
 //  int interval = length/2;
 //  int fbctr = 5;
   float l,lyn;
+  float tmp,avg,ldiff,rdiff;
   int length = Plength;
+
+  lpfl->filterout(efxoutl);
+  lpfr->filterout(efxoutr);
+  hpfl->filterout(efxoutl);
+  hpfr->filterout(efxoutr);
+   
+
 
   for (i = 0; i < PERIOD; i++)
     {
-//       if(Pes) // just so I have the code to get started
-//       {
+       if(Pes) // just so I have the code to get started
+       {
 //           efxoutl[i] *= cosf(lrcross);
 //           efxoutr[i] *= sinf(lrcross);
-//           
-//        	  avg = (efxoutl[i] + efxoutr[i]) * 0.5f;
-// 	  ldiff = efxoutl[i] - avg;
-// 	  rdiff = efxoutr[i] - avg;
-//
-// 	  tmp = avg + ldiff * pes;
-// 	  efxoutl[i] = 0.5 * tmp;
-//
-// 	  tmp = avg + rdiff * pes;
-// 	  efxoutr[i] = 0.5f * tmp;
-//
-//
-//       }  
+           
+       	  avg = (efxoutl[i] + efxoutr[i]) * 0.5f;
+ 	  ldiff = efxoutl[i] - avg;
+ 	  rdiff = efxoutr[i] - avg;
+
+ 	  tmp = avg + ldiff * level;
+ 	  efxoutl[i] = 0.5 * tmp;
+
+ 	  tmp = avg + rdiff * level;
+ 	  efxoutr[i] = 0.5f * tmp;
+
+
+       }  
+
 
       if(!Prv) l = smpsl[i]+smpsr[i]+feedback; else
       l = smpsl[i] - smpsr[i] +  feedback;
@@ -157,7 +176,10 @@ void
 Reverbtron::setpanning (int value)
 {
   Ppanning = value;
-  lpanning = ((float)value-64.0f) / 64.0f;
+  lpanning= (float)value / 128.0f;
+  rpanning= 1.0f-lpanning;
+  
+/*  lpanning = ((float)value-64.0f) / 64.0f;
   rpanning = 2.0f - lpanning;
   lpanning = 10.0f * powf(lpanning, 4);
   rpanning = 10.0f * powf(rpanning, 4);
@@ -165,6 +187,7 @@ Reverbtron::setpanning (int value)
   rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
   lpanning *= 1.1f;
   rpanning *= 1.1f; 
+*/
 };
 
 int
@@ -308,9 +331,30 @@ for(i=0;i<data_length;i++)
   }
   }
 
- 
-
 };
+
+
+void
+Reverbtron::sethpf (int value)
+{
+  Phpf = value;
+  float fr = (float)Phpf;
+  hpfl->setfreq (fr);
+  hpfr->setfreq (fr);
+    
+};
+
+void
+Reverbtron::setlpf (int value)
+{
+  Plpf = value;
+  float fr = (float)Plpf;
+  lpfl->setfreq (fr);
+  lpfr->setfreq (fr);
+    
+};
+
+
 
 void
 Reverbtron::sethidamp (int Phidamp)
@@ -323,25 +367,25 @@ Reverbtron::sethidamp (int Phidamp)
 void
 Reverbtron::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 14;
+  const int PRESET_SIZE = 16;
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Spring
-    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0},
+    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 20},
     //Concrete Stair
-    {64, 0, 1, 500, 0, 0, 0, 40, 1, 0, 0, 64, 0, 0},
+    {64, 0, 1, 500, 0, 0, 0, 40, 1, 0, 0, 64, 0, 0, 20000, 20},
     //Nice Hall
-    {64, 0, 1, 500, 0, 0, 60, 15, 2, 0, 0, 64, 0, 0},
+    {64, 0, 1, 500, 0, 0, 60, 15, 2, 0, 0, 64, 0, 0, 20000, 20},
     //Hall
-    {64, 16, 1, 500, 0, 0, 0, 22, 3, -17, 0, 64, 0, 0},
+    {64, 16, 1, 500, 0, 0, 0, 22, 3, -17, 0, 64, 0, 0, 20000, 20},
     //Room
-    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64, 0, 0},
+    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64, 0, 0, 20000, 20},
     //Hall
-    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64, 0, 0},
+    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64, 0, 0, 20000, 20},
     //Guitar
-    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64, 0, 0},
+    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64, 0, 0, 20000, 20},
     //Studio
-    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64, 0, 0}
+    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64, 0, 0, 20000, 20}
 
   };
 
@@ -418,6 +462,12 @@ Reverbtron::changepar (int npar, int value)
     case 13:
       Prv = value;
       break;     
+    case 14:
+      setlpf (value);
+      break;
+    case 15:
+      sethpf (value);
+      break;
 
    };
 };
@@ -469,6 +519,14 @@ Reverbtron::getpar (int npar)
     case 13:
       return(Prv);
       break;  
+    case 14:
+      return(Plpf);
+      break;  
+    case 15:
+      return(Phpf);
+      break;  
+
+
     };
   return (0);			//in case of bogus parameter number
 };

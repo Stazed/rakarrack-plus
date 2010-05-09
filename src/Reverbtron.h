@@ -25,6 +25,8 @@
 #define REVERBTRON_H
 
 #include "global.h"
+#include "AnalogFilter.h"
+
 
 class Reverbtron
 {
@@ -52,6 +54,9 @@ private:
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
+  void sethpf (int Phpf);
+  void setlpf (int Plpf);
+
   void convert_time();
 
 
@@ -72,6 +77,8 @@ private:
   int Pfade;
   int Pes;		//0 or 1// Add stereo spatialization
   int Prv;              //Shuffle
+  int Plpf;
+  int Phpf;
   int offset;
   int maxx_size;
   int data_length;
@@ -83,6 +90,7 @@ private:
   float *data, *lxn, *ftime, *tdata;
   float level,fb, feedback;
  
+  class AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;	//filters
 
 
 };

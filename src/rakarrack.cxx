@@ -5828,6 +5828,9 @@ revtron_user->do_callback();
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
 revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
+revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
+revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
+
 revtron_es->value(rkr->efx_Reverbtron->getpar(12));
 revtron_rv->value(rkr->efx_Reverbtron->getpar(13));
 }
@@ -5908,6 +5911,20 @@ void RKRGUI::cb_revtron_fade_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_revtron_fade(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_fade_i(o,v);
+}
+
+void RKRGUI::cb_revtron_LPF_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(14,(int)o->value());
+}
+void RKRGUI::cb_revtron_LPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_LPF_i(o,v);
+}
+
+void RKRGUI::cb_revtron_HPF_i(SliderW* o, void*) {
+  rkr->efx_Reverbtron->changepar(15,(int)o->value());
+}
+void RKRGUI::cb_revtron_HPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_HPF_i(o,v);
 }
 
 void RKRGUI::cb_revtron_rv_i(Fl_Check_Button* o, void*) {
@@ -14718,7 +14735,7 @@ R average.");
         revtron_preset->when(FL_WHEN_RELEASE_ALWAYS);
         revtron_preset->menu(menu_revtron_preset);
       } // Fl_Choice* revtron_preset
-      { revtron_WD = new SliderW(372, 240, 100, 10, "Wet/Dry");
+      { revtron_WD = new SliderW(372, 235, 100, 10, "Wet/Dry");
         revtron_WD->type(5);
         revtron_WD->box(FL_FLAT_BOX);
         revtron_WD->color((Fl_Color)178);
@@ -14735,7 +14752,7 @@ R average.");
         revtron_WD->align(FL_ALIGN_LEFT);
         revtron_WD->when(FL_WHEN_CHANGED);
       } // SliderW* revtron_WD
-      { revtron_pan = new SliderW(372, 253, 100, 10, "Pan");
+      { revtron_pan = new SliderW(372, 247, 100, 10, "Pan");
         revtron_pan->type(5);
         revtron_pan->box(FL_FLAT_BOX);
         revtron_pan->color((Fl_Color)178);
@@ -14752,7 +14769,7 @@ R average.");
         revtron_pan->align(FL_ALIGN_LEFT);
         revtron_pan->when(FL_WHEN_CHANGED);
       } // SliderW* revtron_pan
-      { revtron_level = new SliderW(372, 266, 100, 10, "Level");
+      { revtron_level = new SliderW(372, 259, 100, 10, "Level");
         revtron_level->type(5);
         revtron_level->box(FL_FLAT_BOX);
         revtron_level->color((Fl_Color)178);
@@ -14768,7 +14785,7 @@ R average.");
         revtron_level->align(FL_ALIGN_LEFT);
         revtron_level->when(FL_WHEN_CHANGED);
       } // SliderW* revtron_level
-      { revtron_damp = new SliderW(372, 279, 100, 10, "Damp");
+      { revtron_damp = new SliderW(372, 271, 100, 10, "Damp");
         revtron_damp->type(5);
         revtron_damp->box(FL_FLAT_BOX);
         revtron_damp->color((Fl_Color)178);
@@ -14784,7 +14801,7 @@ R average.");
         revtron_damp->align(FL_ALIGN_LEFT);
         revtron_damp->when(FL_WHEN_CHANGED);
       } // SliderW* revtron_damp
-      { revtron_fb = new SliderW(372, 292, 100, 10, "Fb");
+      { revtron_fb = new SliderW(372, 283, 100, 10, "Fb");
         revtron_fb->type(5);
         revtron_fb->box(FL_FLAT_BOX);
         revtron_fb->color((Fl_Color)178);
@@ -14801,7 +14818,7 @@ R average.");
         revtron_fb->align(FL_ALIGN_LEFT);
         revtron_fb->when(FL_WHEN_CHANGED);
       } // SliderW* revtron_fb
-      { revtron_length = new SliderW(372, 305, 100, 10, "Length");
+      { revtron_length = new SliderW(372, 295, 100, 10, "Length");
         revtron_length->type(5);
         revtron_length->box(FL_FLAT_BOX);
         revtron_length->color((Fl_Color)178);
@@ -14819,7 +14836,7 @@ R average.");
         revtron_length->align(FL_ALIGN_LEFT);
         revtron_length->when(FL_WHEN_RELEASE);
       } // SliderW* revtron_length
-      { revtron_strech = new SliderW(372, 318, 100, 10, "Stretch");
+      { revtron_strech = new SliderW(372, 307, 100, 10, "Stretch");
         revtron_strech->type(5);
         revtron_strech->box(FL_FLAT_BOX);
         revtron_strech->color((Fl_Color)178);
@@ -14836,7 +14853,7 @@ R average.");
         revtron_strech->align(FL_ALIGN_LEFT);
         revtron_strech->when(FL_WHEN_RELEASE);
       } // SliderW* revtron_strech
-      { revtron_idelay = new SliderW(372, 331, 100, 10, "I.Del");
+      { revtron_idelay = new SliderW(372, 319, 100, 10, "I.Del");
         revtron_idelay->type(5);
         revtron_idelay->box(FL_FLAT_BOX);
         revtron_idelay->color((Fl_Color)178);
@@ -14852,7 +14869,7 @@ R average.");
         revtron_idelay->align(FL_ALIGN_LEFT);
         revtron_idelay->when(FL_WHEN_RELEASE);
       } // SliderW* revtron_idelay
-      { revtron_fade = new SliderW(372, 344, 100, 10, "Fade");
+      { revtron_fade = new SliderW(372, 331, 100, 10, "Fade");
         revtron_fade->type(5);
         revtron_fade->box(FL_FLAT_BOX);
         revtron_fade->color((Fl_Color)178);
@@ -14868,36 +14885,72 @@ R average.");
         revtron_fade->align(FL_ALIGN_LEFT);
         revtron_fade->when(FL_WHEN_RELEASE);
       } // SliderW* revtron_fade
-      { revtron_rv = new Fl_Check_Button(322, 353, 15, 15, "Sh");
+      { revtron_LPF = new SliderW(372, 343, 100, 10, "LPF");
+        revtron_LPF->type(5);
+        revtron_LPF->box(FL_FLAT_BOX);
+        revtron_LPF->color((Fl_Color)178);
+        revtron_LPF->selection_color((Fl_Color)62);
+        revtron_LPF->labeltype(FL_NORMAL_LABEL);
+        revtron_LPF->labelfont(0);
+        revtron_LPF->labelsize(10);
+        revtron_LPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_LPF->minimum(20);
+        revtron_LPF->maximum(26000);
+        revtron_LPF->step(1);
+        revtron_LPF->value(20);
+        revtron_LPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_LPF->callback((Fl_Callback*)cb_revtron_LPF);
+        revtron_LPF->align(FL_ALIGN_LEFT);
+        revtron_LPF->when(FL_WHEN_RELEASE);
+      } // SliderW* revtron_LPF
+      { revtron_HPF = new SliderW(373, 354, 100, 10, "HPF");
+        revtron_HPF->type(5);
+        revtron_HPF->box(FL_FLAT_BOX);
+        revtron_HPF->color((Fl_Color)178);
+        revtron_HPF->selection_color((Fl_Color)62);
+        revtron_HPF->labeltype(FL_NORMAL_LABEL);
+        revtron_HPF->labelfont(0);
+        revtron_HPF->labelsize(10);
+        revtron_HPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_HPF->minimum(20);
+        revtron_HPF->maximum(26000);
+        revtron_HPF->step(1);
+        revtron_HPF->value(26000);
+        revtron_HPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        revtron_HPF->callback((Fl_Callback*)cb_revtron_HPF);
+        revtron_HPF->align(FL_ALIGN_LEFT);
+        revtron_HPF->when(FL_WHEN_RELEASE);
+      } // SliderW* revtron_HPF
+      { revtron_rv = new Fl_Check_Button(322, 359, 15, 15, "Sh");
         revtron_rv->down_box(FL_BORDER_BOX);
         revtron_rv->labelsize(10);
         revtron_rv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_rv->callback((Fl_Callback*)cb_revtron_rv, (void*)(2));
       } // Fl_Check_Button* revtron_rv
-      { revtron_es = new Fl_Check_Button(322, 366, 15, 15, "ES");
+      { revtron_es = new Fl_Check_Button(322, 372, 15, 15, "ES");
         revtron_es->down_box(FL_BORDER_BOX);
         revtron_es->labelsize(10);
         revtron_es->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_es->callback((Fl_Callback*)cb_revtron_es, (void*)(2));
       } // Fl_Check_Button* revtron_es
-      { revtron_safe = new Fl_Check_Button(350, 358, 15, 15, "Safe");
+      { revtron_safe = new Fl_Check_Button(350, 364, 15, 15, "Safe");
         revtron_safe->down_box(FL_BORDER_BOX);
         revtron_safe->labelsize(10);
         revtron_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_safe->callback((Fl_Callback*)cb_revtron_safe, (void*)(2));
       } // Fl_Check_Button* revtron_safe
-      { revtron_user = new Fl_Check_Button(387, 358, 15, 15, "User");
+      { revtron_user = new Fl_Check_Button(387, 364, 15, 15, "User");
         revtron_user->down_box(FL_BORDER_BOX);
         revtron_user->labelsize(10);
         revtron_user->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_user->callback((Fl_Callback*)cb_revtron_user, (void*)(2));
       } // Fl_Check_Button* revtron_user
-      { B_rvb = new Fl_Button(426, 359, 46, 12, "Browse");
+      { B_rvb = new Fl_Button(426, 366, 46, 10, "Browse");
         B_rvb->labelsize(10);
         B_rvb->callback((Fl_Callback*)cb_B_rvb, (void*)(2));
         B_rvb->deactivate();
       } // Fl_Button* B_rvb
-      { revtron_fnum = new Fl_Choice(371, 374, 101, 16, "File");
+      { revtron_fnum = new Fl_Choice(371, 378, 101, 14, "File");
         revtron_fnum->down_box(FL_BORDER_BOX);
         revtron_fnum->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         revtron_fnum->labelsize(10);

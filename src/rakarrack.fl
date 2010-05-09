@@ -824,7 +824,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1544 52 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1537 45 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6336,6 +6336,9 @@ revtron_user->do_callback();
 revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
 revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
+revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
+revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
+
 revtron_es->value(rkr->efx_Reverbtron->getpar(12));
 revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
@@ -6376,74 +6379,86 @@ revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
         Fl_Value_Slider revtron_WD {
           label {Wet/Dry}
           callback {rkr->efx_Reverbtron->changepar(0,(int)(o->value()+64));}
-          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {372 235 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_pan {
           label Pan
           callback {rkr->efx_Reverbtron->changepar(11,(int)(o->value()+64));}
-          xywh {372 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {372 247 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_level {
           label Level
           callback {rkr->efx_Reverbtron->changepar(7,(int)o->value());}
-          xywh {372 266 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 259 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_damp {
           label Damp
           callback {rkr->efx_Reverbtron->changepar(6,(int)o->value());}
-          xywh {372 279 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 271 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_fb {
           label Fb
           callback {rkr->efx_Reverbtron->changepar(10,(int)o->value());}
-          xywh {372 292 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {372 283 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_length {
           label Length
           callback {rkr->efx_Reverbtron->changepar(3,(int)o->value());}
-          xywh {372 305 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 1500 step 1 value 100 textcolor 7
+          xywh {372 295 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 1500 step 1 value 100 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_strech {
           label Stretch
           callback {rkr->efx_Reverbtron->changepar(9,(int)o->value());}
-          xywh {372 318 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {372 307 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_idelay {
           label {I.Del}
           callback {rkr->efx_Reverbtron->changepar(5,(int)o->value());}
-          xywh {372 331 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 500 step 1 textcolor 7
+          xywh {372 319 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 500 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider revtron_fade {
           label Fade
           callback {rkr->efx_Reverbtron->changepar(1,(int)o->value());}
-          xywh {372 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          xywh {372 331 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider revtron_LPF {
+          label LPF
+          callback {rkr->efx_Reverbtron->changepar(14,(int)o->value());} selected
+          xywh {372 343 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 20 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider revtron_HPF {
+          label HPF
+          callback {rkr->efx_Reverbtron->changepar(15,(int)o->value());}
+          xywh {373 354 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 26000 textcolor 7
           class SliderW
         }
         Fl_Check_Button revtron_rv {
           label Sh
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(13,(int)o->value());}
-          xywh {322 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {322 359 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button revtron_es {
           label ES
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(12,(int)o->value());}
-          xywh {322 366 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {322 372 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button revtron_safe {
           label Safe
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(2,(int)o->value());}
-          xywh {350 358 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {350 364 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button revtron_user {
           label User
@@ -6451,7 +6466,7 @@ revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
           callback {rkr->efx_Reverbtron->changepar(4,(int)o->value());
 
 if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
-          xywh {387 358 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {387 364 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Button B_rvb {
           label Browse
@@ -6462,12 +6477,12 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rvb");
 strcpy(rkr->efx_Reverbtron->Filename,filename);
 rkr->efx_Reverbtron->setfile(100);}
-          xywh {426 359 46 12} labelsize 10 deactivate
+          xywh {426 366 46 10} labelsize 10 deactivate
         }
         Fl_Choice revtron_fnum {
           label File
           callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
-          xywh {371 374 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {371 378 101 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label Chamber
@@ -8330,8 +8345,7 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General
