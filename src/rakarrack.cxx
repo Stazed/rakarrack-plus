@@ -6198,6 +6198,7 @@ rkr->OnCounter=0;
 FillML(0);
 Prepare_Order();
 Put_Loaded();
+if(rkr->Tap_Updated) UpdateTGUI();
 }
 void RKRGUI::cb_Preset_Counter(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Preset_Counter_i(o,v);
@@ -6649,6 +6650,13 @@ void RKRGUI::cb_Pre_Serve_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_Pre_Serve(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Pre_Serve_i(o,v);
+}
+
+void RKRGUI::cb_Update_TAP_i(Fl_Check_Button* o, void*) {
+  rkr->Tap_Updated = (int) o->value();
+}
+void RKRGUI::cb_Update_TAP(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Update_TAP_i(o,v);
 }
 
 void RKRGUI::cb_UPSAMPLE_C_i(Fl_Check_Button*, void*) {
@@ -15460,7 +15468,6 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
-        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 58, 23, 20, "FX On at start");
@@ -15470,14 +15477,21 @@ R average.");
           INSTATE->callback((Fl_Callback*)cb_INSTATE);
           INSTATE->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* INSTATE
-        { Pre_Serve = new Fl_Check_Button(139, 82, 21, 20, "Preserve Gain/Master");
+        { Pre_Serve = new Fl_Check_Button(259, 82, 21, 20, "Preserve Gain/Master when Preset change");
           Pre_Serve->down_box(FL_DOWN_BOX);
           Pre_Serve->labelsize(11);
           Pre_Serve->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
           Pre_Serve->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Pre_Serve
-        { UPSAMPLE_C = new Fl_Check_Button(83, 106, 23, 20, "Upsampling");
+        { Update_TAP = new Fl_Check_Button(239, 105, 21, 20, "Update TapTempo when Preset change");
+          Update_TAP->down_box(FL_DOWN_BOX);
+          Update_TAP->labelsize(11);
+          Update_TAP->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Update_TAP->callback((Fl_Callback*)cb_Update_TAP);
+          Update_TAP->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* Update_TAP
+        { UPSAMPLE_C = new Fl_Check_Button(83, 129, 23, 20, "Upsampling");
           UPSAMPLE_C->down_box(FL_DOWN_BOX);
           UPSAMPLE_C->labelsize(11);
           UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15485,7 +15499,7 @@ R average.");
           UPSAMPLE_C->align(FL_ALIGN_LEFT);
           UPSAMPLE_C->when(FL_WHEN_CHANGED);
         } // Fl_Check_Button* UPSAMPLE_C
-        { Upr_Amo = new Fl_Choice(56, 130, 47, 18, "Amount");
+        { Upr_Amo = new Fl_Choice(56, 153, 47, 18, "Amount");
           Upr_Amo->down_box(FL_BORDER_BOX);
           Upr_Amo->labelsize(10);
           Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15494,7 +15508,7 @@ R average.");
           Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
           Upr_Amo->menu(menu_Upr_Amo);
         } // Fl_Choice* Upr_Amo
-        { Upr_Qual = new Fl_Choice(119, 154, 98, 18, "Up Sampling Quality");
+        { Upr_Qual = new Fl_Choice(119, 177, 98, 18, "Up Sampling Quality");
           Upr_Qual->down_box(FL_BORDER_BOX);
           Upr_Qual->labelsize(10);
           Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15503,7 +15517,7 @@ R average.");
           Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
           Upr_Qual->menu(menu_Upr_Qual);
         } // Fl_Choice* Upr_Qual
-        { Fl_Choice* o = Downr_Qual = new Fl_Choice(133, 181, 98, 18, "Down Sampling Quality");
+        { Fl_Choice* o = Downr_Qual = new Fl_Choice(133, 204, 98, 18, "Down Sampling Quality");
           Downr_Qual->down_box(FL_BORDER_BOX);
           Downr_Qual->labelsize(10);
           Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15512,7 +15526,7 @@ R average.");
           Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Downr_Qual
-        { L_SIZE = new Fl_Counter(118, 208, 47, 18, "Looper Size Seconds");
+        { L_SIZE = new Fl_Counter(118, 231, 47, 18, "Looper Size Seconds");
           L_SIZE->type(1);
           L_SIZE->labelsize(10);
           L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15525,7 +15539,7 @@ R average.");
           L_SIZE->align(FL_ALIGN_LEFT);
           L_SIZE->when(FL_WHEN_RELEASE);
         } // Fl_Counter* L_SIZE
-        { Har_Qual = new Fl_Choice(113, 234, 43, 18, "Harmonizer Quality");
+        { Har_Qual = new Fl_Choice(113, 257, 43, 18, "Harmonizer Quality");
           Har_Qual->down_box(FL_BORDER_BOX);
           Har_Qual->labelsize(10);
           Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15542,6 +15556,7 @@ R average.");
         MIDI_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MIDI_SET->user_data((void*)(1));
         MIDI_SET->align(FL_ALIGN_LEFT);
+        MIDI_SET->hide();
         { Fondo8 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo8
         { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
@@ -16275,6 +16290,7 @@ if(!rkr->MIDIway) ML_Menu->deactivate();
 
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
+rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
 rkr->MidiCh--;
 rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh,1);
@@ -16431,6 +16447,8 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
+rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
+
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
@@ -17600,6 +17618,7 @@ BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
+Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);

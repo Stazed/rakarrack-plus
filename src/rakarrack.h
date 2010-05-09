@@ -3156,6 +3156,11 @@ private:
   void cb_Pre_Serve_i(Fl_Check_Button*, void*);
   static void cb_Pre_Serve(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *Update_TAP;
+private:
+  void cb_Update_TAP_i(Fl_Check_Button*, void*);
+  static void cb_Update_TAP(Fl_Check_Button*, void*);
+public:
   Fl_Check_Button *UPSAMPLE_C;
 private:
   void cb_UPSAMPLE_C_i(Fl_Check_Button*, void*);

@@ -448,7 +448,7 @@ public:
   int Tap_SetValue;
   int t_timeout;
   int jt_state;
-
+  int Tap_Updated;
   int note_old;
   int cents_old;
 
