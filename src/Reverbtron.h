@@ -89,6 +89,7 @@ private:
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *data, *lxn, *ftime, *tdata;
   float level,fb, feedback;
+  float roomsize;
  
   class AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;	//filters
 

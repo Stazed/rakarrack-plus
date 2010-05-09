@@ -219,7 +219,7 @@ RBEcho::setvolume (int Pvolume)
 void
 RBEcho::setpanning (int Ppanning)
 {
-  this->Ppanning = Ppanning - 64;
+  this->Ppanning = Ppanning;
   lpanning = ((float)Ppanning) / 64.0f;
   rpanning = 2.0f - lpanning;
   lpanning = 10.0f * powf(lpanning, 4);

@@ -176,10 +176,9 @@ void
 Reverbtron::setpanning (int value)
 {
   Ppanning = value;
-  lpanning= (float)value / 128.0f;
-  rpanning= 1.0f-lpanning;
-  
-/*  lpanning = ((float)value-64.0f) / 64.0f;
+/*  lpanning= (float)value / 128.0f;
+  rpanning= 1.0f-lpanning;*/
+  lpanning = ((float)Ppanning) / 64.0f;
   rpanning = 2.0f - lpanning;
   lpanning = 10.0f * powf(lpanning, 4);
   rpanning = 10.0f * powf(rpanning, 4);
@@ -187,7 +186,6 @@ Reverbtron::setpanning (int value)
   rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
   lpanning *= 1.1f;
   rpanning *= 1.1f; 
-*/
 };
 
 int
@@ -277,6 +275,9 @@ else
 tmpstretch = 1.0f + 0.95f*fstretch;
 }
 
+//guess at room size
+roomsize = ftime[0];  //usually represents initial delay, but more accurately distance between excitation
+                      //(direct source) and microphone.  Need to do more elaborate processing to get this right.
 skip = 0.0f;
 index = 0;
 chunk = 10;
