@@ -3143,15 +3143,15 @@ private:
   static void cb_BI_Browser(Fl_Button*, void*);
 public:
   Fl_Box *FSLabel;
-  Fl_Button *FSplus;
-private:
-  void cb_FSplus_i(Fl_Button*, void*);
-  static void cb_FSplus(Fl_Button*, void*);
-public:
   Fl_Button *FSless;
 private:
   void cb_FSless_i(Fl_Button*, void*);
   static void cb_FSless(Fl_Button*, void*);
+public:
+  Fl_Button *FSplus;
+private:
+  void cb_FSplus_i(Fl_Button*, void*);
+  static void cb_FSplus(Fl_Button*, void*);
 public:
   Fl_Box *CLLabel;
   Fl_Group *AUDIO_SET;

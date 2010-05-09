@@ -758,7 +758,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 */    
   char buf[128];
   format(buf);
-  fl_font(textfont(), textsize());
+  fl_font(textfont(), labelsize()-2);
   if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   fl_color(active_r() ? label_color: fl_inactive(textcolor()));
   else
@@ -6265,10 +6265,10 @@ void RKRGUI::cb_T_SEL(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
- {"GUI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"MIDI Note On", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Jack Transport", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"MTC", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"GUI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"MIDI Note On", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Jack Transport", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"MTC", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -6280,12 +6280,12 @@ void RKRGUI::cb_T_SET(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_T_SET[] = {
- {"Dl. 1 LFO 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Dl. 1 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Dl. 1 LFO 1/2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Dl. 1/2 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Dl. 1/2 LFO 1/8", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Dl. 1 LFO 1/3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"Dl. 1 LFO 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1 LFO 1/2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/2 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/2 LFO 1/8", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1 LFO 1/3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -6639,20 +6639,20 @@ void RKRGUI::cb_BI_Browser(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
 }
 
-void RKRGUI::cb_FSplus_i(Fl_Button*, void*) {
-  rkr->relfontsize++;
-chfsize(1);
-}
-void RKRGUI::cb_FSplus(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSplus_i(o,v);
-}
-
 void RKRGUI::cb_FSless_i(Fl_Button*, void*) {
   rkr->relfontsize--;
 chfsize(-1);
 }
 void RKRGUI::cb_FSless(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSless_i(o,v);
+}
+
+void RKRGUI::cb_FSplus_i(Fl_Button*, void*) {
+  rkr->relfontsize++;
+chfsize(1);
+}
+void RKRGUI::cb_FSplus(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSplus_i(o,v);
 }
 
 void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
@@ -7316,7 +7316,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         eq_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eq_preset->textsize(10);
         eq_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        eq_preset->callback((Fl_Callback*)cb_eq_preset);
+        eq_preset->callback((Fl_Callback*)cb_eq_preset, (void*)(12));
         eq_preset->when(FL_WHEN_RELEASE_ALWAYS);
         eq_preset->menu(menu_eq_preset);
       } // Fl_Choice* eq_preset
@@ -7549,7 +7549,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         compress_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         compress_preset->textsize(10);
         compress_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        compress_preset->callback((Fl_Callback*)cb_compress_preset);
+        compress_preset->callback((Fl_Callback*)cb_compress_preset, (void*)(12));
         compress_preset->when(FL_WHEN_RELEASE_ALWAYS);
         compress_preset->menu(menu_compress_preset);
       } // Fl_Choice* compress_preset
@@ -7705,7 +7705,7 @@ R average.");
         dist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_preset->textsize(10);
         dist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_preset->callback((Fl_Callback*)cb_dist_preset);
+        dist_preset->callback((Fl_Callback*)cb_dist_preset, (void*)(12));
         dist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         dist_preset->menu(menu_dist_preset);
       } // Fl_Choice* dist_preset
@@ -7782,7 +7782,7 @@ R average.");
         dist_tipo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_tipo->textsize(10);
         dist_tipo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_tipo->callback((Fl_Callback*)cb_dist_tipo);
+        dist_tipo->callback((Fl_Callback*)cb_dist_tipo, (void*)(12));
         dist_tipo->menu(menu_dist_tipo);
       } // Fl_Choice* dist_tipo
       { dist_neg = new Fl_Check_Button(431, 304, 15, 15, "Neg.");
@@ -7897,7 +7897,7 @@ R average.");
         ovrd_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_preset->textsize(10);
         ovrd_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset);
+        ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset, (void*)(12));
         ovrd_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ovrd_preset->menu(menu_ovrd_preset);
       } // Fl_Choice* ovrd_preset
@@ -8073,7 +8073,7 @@ R average.");
         echo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echo_preset->textsize(10);
         echo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        echo_preset->callback((Fl_Callback*)cb_echo_preset);
+        echo_preset->callback((Fl_Callback*)cb_echo_preset, (void*)(12));
         echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
         echo_preset->menu(menu_echo_preset);
       } // Fl_Choice* echo_preset
@@ -8241,7 +8241,7 @@ R average.");
         chorus_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorus_preset->textsize(10);
         chorus_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        chorus_preset->callback((Fl_Callback*)cb_chorus_preset);
+        chorus_preset->callback((Fl_Callback*)cb_chorus_preset, (void*)(12));
         chorus_preset->when(FL_WHEN_RELEASE_ALWAYS);
         chorus_preset->menu(menu_chorus_preset);
       } // Fl_Choice* chorus_preset
@@ -8319,7 +8319,7 @@ R average.");
         chorus_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorus_lfotype->textsize(10);
         chorus_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype);
+        chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype, (void*)(12));
         chorus_lfotype->menu(menu_chorus_lfotype);
       } // Fl_Choice* chorus_lfotype
       { chorus_subs = new Fl_Check_Button(37, 507, 15, 15, "Subtract");
@@ -8434,7 +8434,7 @@ R average.");
         phaser_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_preset->textsize(10);
         phaser_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        phaser_preset->callback((Fl_Callback*)cb_phaser_preset);
+        phaser_preset->callback((Fl_Callback*)cb_phaser_preset, (void*)(12));
         phaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
         phaser_preset->menu(menu_phaser_preset);
       } // Fl_Choice* phaser_preset
@@ -8641,7 +8641,7 @@ R average.");
         flanger_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_preset->textsize(10);
         flanger_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        flanger_preset->callback((Fl_Callback*)cb_flanger_preset);
+        flanger_preset->callback((Fl_Callback*)cb_flanger_preset, (void*)(12));
         flanger_preset->when(FL_WHEN_RELEASE_ALWAYS);
         flanger_preset->menu(menu_flanger_preset);
       } // Fl_Choice* flanger_preset
@@ -8834,7 +8834,7 @@ R average.");
         reverb_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_preset->textsize(10);
         reverb_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        reverb_preset->callback((Fl_Callback*)cb_reverb_preset);
+        reverb_preset->callback((Fl_Callback*)cb_reverb_preset, (void*)(12));
         reverb_preset->when(FL_WHEN_RELEASE_ALWAYS);
         reverb_preset->menu(menu_reverb_preset);
       } // Fl_Choice* reverb_preset
@@ -8927,7 +8927,7 @@ R average.");
         reverb_type->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_type->textsize(10);
         reverb_type->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        reverb_type->callback((Fl_Callback*)cb_reverb_type);
+        reverb_type->callback((Fl_Callback*)cb_reverb_type, (void*)(12));
         reverb_type->menu(menu_reverb_type);
       } // Fl_Choice* reverb_type
       { reverb_RS = new SliderW(531, 529, 100, 10, "R.Size");
@@ -9026,7 +9026,7 @@ R average.");
         eqp_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eqp_preset->textsize(10);
         eqp_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        eqp_preset->callback((Fl_Callback*)cb_eqp_preset);
+        eqp_preset->callback((Fl_Callback*)cb_eqp_preset, (void*)(12));
         eqp_preset->when(FL_WHEN_RELEASE_ALWAYS);
         eqp_preset->menu(menu_eqp_preset);
       } // Fl_Choice* eqp_preset
@@ -9229,7 +9229,7 @@ R average.");
         WhaWha_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_preset->textsize(10);
         WhaWha_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        WhaWha_preset->callback((Fl_Callback*)cb_WhaWha_preset);
+        WhaWha_preset->callback((Fl_Callback*)cb_WhaWha_preset, (void*)(12));
         WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
         WhaWha_preset->menu(menu_WhaWha_preset);
       } // Fl_Choice* WhaWha_preset
@@ -9406,7 +9406,7 @@ R average.");
         Alienwah_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_preset->textsize(10);
         Alienwah_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset);
+        Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset, (void*)(12));
         Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
         Alienwah_preset->menu(menu_Alienwah_preset);
       } // Fl_Choice* Alienwah_preset
@@ -9610,7 +9610,7 @@ R average.");
         Cabinet_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Cabinet_preset->textsize(10);
         Cabinet_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset);
+        Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset, (void*)(12));
         Cabinet_preset->when(FL_WHEN_RELEASE_ALWAYS);
         Cabinet_preset->menu(menu_Cabinet_preset);
       } // Fl_Choice* Cabinet_preset
@@ -9657,7 +9657,7 @@ R average.");
         pan_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_preset->textsize(10);
         pan_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        pan_preset->callback((Fl_Callback*)cb_pan_preset);
+        pan_preset->callback((Fl_Callback*)cb_pan_preset, (void*)(12));
         pan_preset->when(FL_WHEN_RELEASE_ALWAYS);
         pan_preset->menu(menu_pan_preset);
       } // Fl_Choice* pan_preset
@@ -9807,7 +9807,7 @@ R average.");
         har_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_preset->textsize(10);
         har_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        har_preset->callback((Fl_Callback*)cb_har_preset);
+        har_preset->callback((Fl_Callback*)cb_har_preset, (void*)(12));
         har_preset->when(FL_WHEN_RELEASE_ALWAYS);
         har_preset->menu(menu_har_preset);
       } // Fl_Choice* har_preset
@@ -10007,7 +10007,7 @@ R average.");
         musdelay_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_preset->textsize(10);
         musdelay_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset);
+        musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset, (void*)(12));
         musdelay_preset->when(FL_WHEN_RELEASE_ALWAYS);
         musdelay_preset->menu(menu_musdelay_preset);
       } // Fl_Choice* musdelay_preset
@@ -10085,7 +10085,7 @@ R average.");
         musdelay_delay1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay1->textsize(10);
         musdelay_delay1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        musdelay_delay1->callback((Fl_Callback*)cb_musdelay_delay1);
+        musdelay_delay1->callback((Fl_Callback*)cb_musdelay_delay1, (void*)(12));
         musdelay_delay1->menu(menu_musdelay_delay1);
       } // Fl_Choice* musdelay_delay1
       { musdelay_delay3 = new Fl_Choice(541, 293, 38, 14);
@@ -10094,7 +10094,7 @@ R average.");
         musdelay_delay3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_delay3->textsize(10);
         musdelay_delay3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        musdelay_delay3->callback((Fl_Callback*)cb_musdelay_delay3);
+        musdelay_delay3->callback((Fl_Callback*)cb_musdelay_delay3, (void*)(12));
         musdelay_delay3->menu(menu_musdelay_delay3);
       } // Fl_Choice* musdelay_delay3
       { Fl_Choice* o = musdelay_delay2 = new Fl_Choice(593, 293, 38, 14);
@@ -10231,7 +10231,7 @@ R average.");
         gate_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         gate_preset->textsize(10);
         gate_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        gate_preset->callback((Fl_Callback*)cb_gate_preset);
+        gate_preset->callback((Fl_Callback*)cb_gate_preset, (void*)(12));
         gate_preset->when(FL_WHEN_RELEASE_ALWAYS);
         gate_preset->menu(menu_gate_preset);
       } // Fl_Choice* gate_preset
@@ -10384,7 +10384,7 @@ R average.");
         newdist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_preset->textsize(10);
         newdist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        newdist_preset->callback((Fl_Callback*)cb_newdist_preset);
+        newdist_preset->callback((Fl_Callback*)cb_newdist_preset, (void*)(12));
         newdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         newdist_preset->menu(menu_newdist_preset);
       } // Fl_Choice* newdist_preset
@@ -10589,7 +10589,7 @@ R average.");
         aphaser_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_preset->textsize(10);
         aphaser_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset);
+        aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset, (void*)(12));
         aphaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
         aphaser_preset->menu(menu_aphaser_preset);
       } // Fl_Choice* aphaser_preset
@@ -10785,7 +10785,7 @@ R average.");
         valve_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_preset->textsize(10);
         valve_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_preset->callback((Fl_Callback*)cb_valve_preset);
+        valve_preset->callback((Fl_Callback*)cb_valve_preset, (void*)(12));
         valve_preset->when(FL_WHEN_RELEASE_ALWAYS);
         valve_preset->menu(menu_valve_preset);
       } // Fl_Choice* valve_preset
@@ -10990,7 +10990,7 @@ R average.");
         dflange_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_preset->textsize(10);
         dflange_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_preset->callback((Fl_Callback*)cb_dflange_preset);
+        dflange_preset->callback((Fl_Callback*)cb_dflange_preset, (void*)(12));
         dflange_preset->when(FL_WHEN_RELEASE_ALWAYS);
         dflange_preset->menu(menu_dflange_preset);
       } // Fl_Choice* dflange_preset
@@ -11227,7 +11227,7 @@ R average.");
         ring_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_preset->textsize(10);
         ring_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ring_preset->callback((Fl_Callback*)cb_ring_preset);
+        ring_preset->callback((Fl_Callback*)cb_ring_preset, (void*)(12));
         ring_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ring_preset->menu(menu_ring_preset);
       } // Fl_Choice* ring_preset
@@ -11451,7 +11451,7 @@ R average.");
         exciter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         exciter_preset->textsize(10);
         exciter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        exciter_preset->callback((Fl_Callback*)cb_exciter_preset);
+        exciter_preset->callback((Fl_Callback*)cb_exciter_preset, (void*)(12));
         exciter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         exciter_preset->menu(menu_exciter_preset);
       } // Fl_Choice* exciter_preset
@@ -11703,7 +11703,7 @@ R average.");
         mbdist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_preset->textsize(10);
         mbdist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbdist_preset->callback((Fl_Callback*)cb_mbdist_preset);
+        mbdist_preset->callback((Fl_Callback*)cb_mbdist_preset, (void*)(12));
         mbdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         mbdist_preset->menu(menu_mbdist_preset);
       } // Fl_Choice* mbdist_preset
@@ -11940,7 +11940,7 @@ R average.");
         arpie_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         arpie_preset->textsize(10);
         arpie_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        arpie_preset->callback((Fl_Callback*)cb_arpie_preset);
+        arpie_preset->callback((Fl_Callback*)cb_arpie_preset, (void*)(12));
         arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
         arpie_preset->menu(menu_arpie_preset);
       } // Fl_Choice* arpie_preset
@@ -12019,7 +12019,7 @@ R average.");
         arpie_subdiv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         arpie_subdiv->textsize(10);
         arpie_subdiv->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        arpie_subdiv->callback((Fl_Callback*)cb_arpie_subdiv);
+        arpie_subdiv->callback((Fl_Callback*)cb_arpie_subdiv, (void*)(12));
         arpie_subdiv->when(FL_WHEN_RELEASE_ALWAYS);
         arpie_subdiv->menu(menu_arpie_subdiv);
       } // Fl_Choice* arpie_subdiv
@@ -12109,7 +12109,7 @@ R average.");
         arpie_pattern->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         arpie_pattern->textsize(10);
         arpie_pattern->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        arpie_pattern->callback((Fl_Callback*)cb_arpie_pattern);
+        arpie_pattern->callback((Fl_Callback*)cb_arpie_pattern, (void*)(12));
         arpie_pattern->when(FL_WHEN_RELEASE_ALWAYS);
         arpie_pattern->menu(menu_arpie_pattern);
       } // Fl_Choice* arpie_pattern
@@ -12139,7 +12139,7 @@ R average.");
         expander_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         expander_preset->textsize(10);
         expander_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        expander_preset->callback((Fl_Callback*)cb_expander_preset);
+        expander_preset->callback((Fl_Callback*)cb_expander_preset, (void*)(12));
         expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
         expander_preset->menu(menu_expander_preset);
       } // Fl_Choice* expander_preset
@@ -12294,7 +12294,7 @@ R average.");
         shuffle_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shuffle_preset->textsize(10);
         shuffle_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_preset->callback((Fl_Callback*)cb_shuffle_preset);
+        shuffle_preset->callback((Fl_Callback*)cb_shuffle_preset, (void*)(12));
         shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shuffle_preset->menu(menu_shuffle_preset);
       } // Fl_Choice* shuffle_preset
@@ -12500,7 +12500,7 @@ R average.");
         synthfilter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         synthfilter_preset->textsize(10);
         synthfilter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset);
+        synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset, (void*)(12));
         synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         synthfilter_preset->menu(menu_synthfilter_preset);
       } // Fl_Choice* synthfilter_preset
@@ -12756,7 +12756,7 @@ R average.");
         mbvvol_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbvvol_preset->textsize(10);
         mbvvol_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbvvol_preset->callback((Fl_Callback*)cb_mbvvol_preset);
+        mbvvol_preset->callback((Fl_Callback*)cb_mbvvol_preset, (void*)(12));
         mbvvol_preset->when(FL_WHEN_RELEASE_ALWAYS);
         mbvvol_preset->menu(menu_mbvvol_preset);
       } // Fl_Choice* mbvvol_preset
@@ -12921,7 +12921,7 @@ R average.");
         mbvvol_combi->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbvvol_combi->textsize(10);
         mbvvol_combi->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbvvol_combi->callback((Fl_Callback*)cb_mbvvol_combi);
+        mbvvol_combi->callback((Fl_Callback*)cb_mbvvol_combi, (void*)(12));
         mbvvol_combi->menu(menu_mbvvol_combi);
       } // Fl_Choice* mbvvol_combi
       MBVVOL->end();
@@ -12950,7 +12950,7 @@ R average.");
         convo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_preset->textsize(10);
         convo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_preset->callback((Fl_Callback*)cb_convo_preset);
+        convo_preset->callback((Fl_Callback*)cb_convo_preset, (void*)(12));
         convo_preset->when(FL_WHEN_RELEASE_ALWAYS);
         convo_preset->menu(menu_convo_preset);
       } // Fl_Choice* convo_preset
@@ -13079,7 +13079,7 @@ R average.");
         convo_fnum->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_fnum->textsize(10);
         convo_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_fnum->callback((Fl_Callback*)cb_convo_fnum);
+        convo_fnum->callback((Fl_Callback*)cb_convo_fnum, (void*)(12));
         convo_fnum->menu(menu_convo_fnum);
       } // Fl_Choice* convo_fnum
       CONVOLOTRON->end();
@@ -13108,7 +13108,7 @@ R average.");
         looper_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_preset->textsize(10);
         looper_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        looper_preset->callback((Fl_Callback*)cb_looper_preset);
+        looper_preset->callback((Fl_Callback*)cb_looper_preset, (void*)(12));
         looper_preset->when(FL_WHEN_RELEASE_ALWAYS);
         looper_preset->menu(menu_looper_preset);
       } // Fl_Choice* looper_preset
@@ -13257,7 +13257,7 @@ R average.");
         ryanwah_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ryanwah_preset->textsize(10);
         ryanwah_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ryanwah_preset->callback((Fl_Callback*)cb_ryanwah_preset);
+        ryanwah_preset->callback((Fl_Callback*)cb_ryanwah_preset, (void*)(12));
         ryanwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ryanwah_preset->menu(menu_ryanwah_preset);
       } // Fl_Choice* ryanwah_preset
@@ -13494,7 +13494,7 @@ R average.");
         rbecho_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         rbecho_preset->textsize(10);
         rbecho_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        rbecho_preset->callback((Fl_Callback*)cb_rbecho_preset);
+        rbecho_preset->callback((Fl_Callback*)cb_rbecho_preset, (void*)(12));
         rbecho_preset->when(FL_WHEN_RELEASE_ALWAYS);
         rbecho_preset->menu(menu_rbecho_preset);
       } // Fl_Choice* rbecho_preset
@@ -13684,7 +13684,7 @@ R average.");
         coil_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_preset->textsize(10);
         coil_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_preset->callback((Fl_Callback*)cb_coil_preset);
+        coil_preset->callback((Fl_Callback*)cb_coil_preset, (void*)(12));
         coil_preset->when(FL_WHEN_RELEASE_ALWAYS);
         coil_preset->menu(menu_coil_preset);
       } // Fl_Choice* coil_preset
@@ -13730,7 +13730,7 @@ R average.");
         coil_origin->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_origin->textsize(10);
         coil_origin->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_origin->callback((Fl_Callback*)cb_coil_origin);
+        coil_origin->callback((Fl_Callback*)cb_coil_origin, (void*)(12));
         coil_origin->when(FL_WHEN_RELEASE_ALWAYS);
         coil_origin->menu(menu_coil_origin);
       } // Fl_Choice* coil_origin
@@ -13848,7 +13848,7 @@ R average.");
         shelf_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shelf_preset->textsize(10);
         shelf_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shelf_preset->callback((Fl_Callback*)cb_shelf_preset);
+        shelf_preset->callback((Fl_Callback*)cb_shelf_preset, (void*)(12));
         shelf_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shelf_preset->menu(menu_shelf_preset);
       } // Fl_Choice* shelf_preset
@@ -13952,7 +13952,7 @@ R average.");
         vo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vo_preset->textsize(10);
         vo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_preset->callback((Fl_Callback*)cb_vo_preset);
+        vo_preset->callback((Fl_Callback*)cb_vo_preset, (void*)(12));
         vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
         vo_preset->menu(menu_vo_preset);
       } // Fl_Choice* vo_preset
@@ -14116,7 +14116,7 @@ R average.");
         sus_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         sus_preset->textsize(10);
         sus_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        sus_preset->callback((Fl_Callback*)cb_sus_preset);
+        sus_preset->callback((Fl_Callback*)cb_sus_preset, (void*)(12));
         sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
         sus_preset->menu(menu_sus_preset);
       } // Fl_Choice* sus_preset
@@ -14180,7 +14180,7 @@ R average.");
         seq_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         seq_preset->textsize(10);
         seq_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_preset->callback((Fl_Callback*)cb_seq_preset);
+        seq_preset->callback((Fl_Callback*)cb_seq_preset, (void*)(12));
         seq_preset->when(FL_WHEN_RELEASE_ALWAYS);
         seq_preset->menu(menu_seq_preset);
       } // Fl_Choice* seq_preset
@@ -14391,7 +14391,7 @@ R average.");
         seq_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         seq_mode->textsize(9);
         seq_mode->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_mode->callback((Fl_Callback*)cb_seq_mode);
+        seq_mode->callback((Fl_Callback*)cb_seq_mode, (void*)(12));
         seq_mode->menu(menu_seq_mode);
       } // Fl_Choice* seq_mode
       { seq_range = new Fl_Counter(325, 284, 33, 13, "Range");
@@ -14429,7 +14429,7 @@ R average.");
         shifter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shifter_preset->textsize(10);
         shifter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shifter_preset->callback((Fl_Callback*)cb_shifter_preset);
+        shifter_preset->callback((Fl_Callback*)cb_shifter_preset, (void*)(12));
         shifter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shifter_preset->menu(menu_shifter_preset);
       } // Fl_Choice* shifter_preset
@@ -14582,7 +14582,7 @@ R average.");
         shifter_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shifter_mode->textsize(9);
         shifter_mode->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shifter_mode->callback((Fl_Callback*)cb_shifter_mode);
+        shifter_mode->callback((Fl_Callback*)cb_shifter_mode, (void*)(12));
         shifter_mode->menu(menu_shifter_mode);
       } // Fl_Choice* shifter_mode
       SHIFTER->end();
@@ -14609,7 +14609,7 @@ R average.");
         stomp_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         stomp_preset->textsize(10);
         stomp_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        stomp_preset->callback((Fl_Callback*)cb_stomp_preset);
+        stomp_preset->callback((Fl_Callback*)cb_stomp_preset, (void*)(12));
         stomp_preset->when(FL_WHEN_RELEASE_ALWAYS);
         stomp_preset->menu(menu_stomp_preset);
       } // Fl_Choice* stomp_preset
@@ -14702,7 +14702,7 @@ R average.");
         stomp_mode->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         stomp_mode->textsize(9);
         stomp_mode->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        stomp_mode->callback((Fl_Callback*)cb_stomp_mode);
+        stomp_mode->callback((Fl_Callback*)cb_stomp_mode, (void*)(12));
         stomp_mode->menu(menu_stomp_mode);
       } // Fl_Choice* stomp_mode
       STOMPBOX->end();
@@ -14731,7 +14731,7 @@ R average.");
         revtron_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_preset->textsize(10);
         revtron_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        revtron_preset->callback((Fl_Callback*)cb_revtron_preset);
+        revtron_preset->callback((Fl_Callback*)cb_revtron_preset, (void*)(12));
         revtron_preset->when(FL_WHEN_RELEASE_ALWAYS);
         revtron_preset->menu(menu_revtron_preset);
       } // Fl_Choice* revtron_preset
@@ -14957,7 +14957,7 @@ R average.");
         revtron_fnum->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_fnum->textsize(10);
         revtron_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        revtron_fnum->callback((Fl_Callback*)cb_revtron_fnum);
+        revtron_fnum->callback((Fl_Callback*)cb_revtron_fnum, (void*)(12));
         revtron_fnum->menu(menu_revtron_fnum);
       } // Fl_Choice* revtron_fnum
       REVERBTRON->end();
@@ -15024,6 +15024,7 @@ R average.");
       InOut->user_data((void*)(1));
       InOut->align(96|FL_ALIGN_INSIDE);
       { ActivarGeneral = new Fl_Light_Button(6, 30, 52, 18, "FX On");
+        ActivarGeneral->down_box(FL_BORDER_BOX);
         ActivarGeneral->shortcut(0x72);
         ActivarGeneral->color((Fl_Color)62);
         ActivarGeneral->selection_color((Fl_Color)1);
@@ -15348,7 +15349,7 @@ R average.");
         T_SEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         T_SEL->textsize(10);
         T_SEL->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        T_SEL->callback((Fl_Callback*)cb_T_SEL);
+        T_SEL->callback((Fl_Callback*)cb_T_SEL, (void*)(12));
         T_SEL->menu(menu_T_SEL);
       } // Fl_Choice* T_SEL
       { T_SET = new Fl_Choice(714, 145, 76, 15, "Set");
@@ -15357,7 +15358,7 @@ R average.");
         T_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         T_SET->textsize(10);
         T_SET->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        T_SET->callback((Fl_Callback*)cb_T_SET);
+        T_SET->callback((Fl_Callback*)cb_T_SET, (void*)(12));
         T_SET->menu(menu_T_SET);
       } // Fl_Choice* T_SET
       { T_Apply = new Fl_Button(628, 172, 38, 15, "Apply");
@@ -15381,7 +15382,7 @@ R average.");
       } // Fl_Box* T_DIS
       Tap->end();
     } // Fl_Group* Tap
-    Principal->size_range(640, 480, 3200, 2400);
+    Principal->size_range(494, 390, 3200, 2400);
     Principal->end();
     Principal->resizable(Principal);
   } // Fl_Double_Window* Principal
@@ -15465,7 +15466,6 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
-        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { B_C = new Fl_Button(15, 140, 90, 25, "Buttons");
@@ -15503,12 +15503,12 @@ R average.");
           FSLabel->labelsize(11);
           FSLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         } // Fl_Box* FSLabel
-        { FSplus = new Fl_Button(80, 80, 30, 20, "+");
-          FSplus->callback((Fl_Callback*)cb_FSplus);
-        } // Fl_Button* FSplus
-        { FSless = new Fl_Button(115, 80, 30, 20, "-");
+        { FSless = new Fl_Button(78, 80, 30, 20, "-");
           FSless->callback((Fl_Callback*)cb_FSless);
         } // Fl_Button* FSless
+        { FSplus = new Fl_Button(113, 80, 30, 20, "+");
+          FSplus->callback((Fl_Callback*)cb_FSplus);
+        } // Fl_Button* FSplus
         { CLLabel = new Fl_Box(10, 108, 40, 19, "Color");
           CLLabel->labelsize(11);
           CLLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15521,6 +15521,7 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
+        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 58, 23, 20, "FX On at start");
@@ -19445,11 +19446,43 @@ for (int t=0; t<Principal->children();t++)
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
           c->color(fore_color);
+          if(uh == 12)
+           {
+  
+             Fl_Menu_*n = (Fl_Menu_*)c;
+             
+             Fl_Menu_Item *m = (Fl_Menu_Item*) n->menu(); 
+             Fl_Menu_Item *p;  
+             for(int s=0; s<m->size(); s++)
+                  {
+                    p=m->next(s);
+                    k=p->labelsize();
+                    k+=value;
+                    p->labelsize(k);
+                   }
+  
+            } 
+       
+  
+  
           
        } 
     } 
  
   }
+
+
+
+          k= WPreset_Name->textsize();
+          k+=value;
+          WPreset_Name->textsize(k);
+
+
+
+
+
+
+
 
 ChangeActives();
 

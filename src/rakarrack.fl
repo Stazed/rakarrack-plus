@@ -804,7 +804,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 */    
   char buf[128];
   format(buf);
-  fl_font(textfont(), textsize());
+  fl_font(textfont(), labelsize()-2);
   if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   fl_color(active_r() ? label_color: fl_inactive(textcolor()));
   else
@@ -814,7 +814,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -824,7 +825,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1537 45 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {640 480 3200 2400}
+      xywh {1509 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {494 390 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1348,6 +1349,7 @@ findpos(0,(int)o->value());}
         }
         Fl_Choice eq_preset {
           label Preset
+          user_data 12
           callback {if(!v) rkr->EQ1_setpreset((int)o->value());
 eq_1->value(rkr->efx_EQ1->getpar(12)-64);
 eq_2->value(rkr->efx_EQ1->getpar(17)-64);
@@ -1464,6 +1466,7 @@ findpos(1,(int)o->value());}
         }
         Fl_Choice compress_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
 compress_threshold->value(rkr->efx_Compressor->getpar(1));
 compress_Ratio->value(rkr->efx_Compressor->getpar(2));
@@ -1561,6 +1564,7 @@ findpos(2,(int)o->value());}
         }
         Fl_Choice dist_preset {
           label Preset
+          user_data 12
           callback {if(!v) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
 dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
 dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
@@ -1619,6 +1623,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         }
         Fl_Choice dist_tipo {
           label Type
+          user_data 12
           callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
@@ -1789,6 +1794,7 @@ findpos(3,(int)o->value());}
         }
         Fl_Choice ovrd_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Overdrive->setpreset((int) o->value());
 ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
@@ -1894,6 +1900,7 @@ findpos(4,(int)o->value());}
         }
         Fl_Choice echo_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Echo->setpreset((int) o->value());
 echo_WD->value(rkr->efx_Echo->getpar(0)-64);
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
@@ -2013,6 +2020,7 @@ findpos(5,(int)o->value());}
         }
         Fl_Choice chorus_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
@@ -2074,6 +2082,7 @@ chorus_subs->value(rkr->efx_Chorus->getpar(11));}
         }
         Fl_Choice chorus_lfotype {
           label {LFO Type}
+          user_data 12
           callback {rkr->efx_Chorus->changepar(4,(int)o->value())}
           xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
@@ -2162,6 +2171,7 @@ findpos(6,(int)o->value());}
         }
         Fl_Choice phaser_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Phaser->setpreset((int) o->value());
 phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
@@ -2290,6 +2300,7 @@ findpos(7,(int)o->value());}
         }
         Fl_Choice flanger_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Flanger->setpreset((int)(o->value()+5));
 flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
@@ -2407,6 +2418,7 @@ findpos(8,(int)o->value());}
         }
         Fl_Choice reverb_preset {
           label Preset
+          user_data 12
           callback {rkr->Reverb_Bypass=0;
 if(!v)rkr->efx_Rev->setpreset((int) o->value());
 reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
@@ -2507,6 +2519,7 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
         }
         Fl_Choice reverb_type {
           label Type
+          user_data 12
           callback {rkr->efx_Rev->changepar(10,(int)o->value());}
           xywh {542 505 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
@@ -2562,6 +2575,7 @@ findpos(9,(int)o->value());}
         }
         Fl_Choice eqp_preset {
           label Preset
+          user_data 12
           callback {if(!v) rkr->EQ2_setpreset((int)o->value());
 eqp_LF->value(rkr->efx_EQ2->getpar(11));
 eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
@@ -2664,6 +2678,7 @@ findpos(10,(int)o->value());}
         }
         Fl_Choice WhaWha_preset {
           label Preset
+          user_data 12
           callback {rkr->WhaWha_Bypass=0;
 if(!v)rkr->efx_WhaWha->setpreset((int) o->value());
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
@@ -2776,6 +2791,7 @@ findpos(11,(int)o->value());}
         }
         Fl_Choice Alienwah_preset {
           label Preset
+          user_data 12
           callback {rkr->Alienwah_Bypass=0;
 if(!v)rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
@@ -2891,6 +2907,7 @@ findpos(12,(int)o->value());}
         }
         Fl_Choice Cabinet_preset {
           label Preset
+          user_data 12
           callback {rkr->Cabinet_setpreset((int) o->value());}
           xywh {80 89 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -2961,6 +2978,7 @@ findpos(13,(int)o->value());}
         }
         Fl_Choice pan_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Pan->setpreset((int) o->value());
 pan_WD->value(rkr->efx_Pan->getpar(0)-64);
 pan_pan->value(rkr->efx_Pan->getpar(1)-64);
@@ -3052,6 +3070,7 @@ findpos(14,(int)o->value());}
         }
         Fl_Choice har_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Har->setpreset((int)o->value());
 har_WD->value(rkr->efx_Har->getpar(0)-64);
 har_pan->value(rkr->efx_Har->getpar(1)-64);
@@ -3172,6 +3191,7 @@ findpos(15,(int)o->value());}
         }
         Fl_Choice musdelay_preset {
           label Preset
+          user_data 12
           callback {rkr->MusDelay_Bypass=0;
 if(!v)rkr->efx_MusDelay->setpreset(o->value());
 musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
@@ -3224,6 +3244,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
           class SliderW
         }
         Fl_Choice musdelay_delay1 {
+          user_data 12
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(2,o->value()+1);
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
@@ -3255,6 +3276,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
           }
         }
         Fl_Choice musdelay_delay3 {
+          user_data 12
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(3,o->value()+1);
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
@@ -3292,7 +3314,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
         Fl_Choice musdelay_delay2 {
           callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(8,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} open
+if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
           xywh {593 293 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_musdelay_delay1);}
         } {}
@@ -3348,6 +3370,7 @@ findpos(16,(int)o->value());}
         }
         Fl_Choice gate_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Gate->Gate_Change_Preset((int) o->value());
 gate_ATime->value(rkr->efx_Gate->getpar(3));
 gate_RTime->value(rkr->efx_Gate->getpar(4));
@@ -3429,6 +3452,7 @@ findpos(17,(int)o->value());}
         }
         Fl_Choice newdist_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_NewDist->setpreset((int) o->value());
 newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
 newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
@@ -3483,7 +3507,7 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
         }
         Fl_Choice newdist_tipo {
           label Type
-          callback {rkr->efx_NewDist->changepar(5,(int)o->value());} open
+          callback {rkr->efx_NewDist->changepar(5,(int)o->value());}
           xywh {354 295 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_dist_tipo);}
         } {}
@@ -3545,6 +3569,7 @@ findpos(18,(int)o->value());}
         }
         Fl_Choice aphaser_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
 aphaser_pan->value(rkr->efx_APhaser->getpar(1));
@@ -3672,6 +3697,7 @@ findpos(19,(int)o->value());}
         }
         Fl_Choice valve_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Valve->setpreset((int)o->value());
 valve_WD->value(rkr->efx_Valve->getpar(0)-64);
 valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
@@ -3795,6 +3821,7 @@ findpos(20,(int)o->value());}
         }
         Fl_Choice dflange_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_DFlange->setpreset((int)o->value());
 dflange_WD->value(rkr->efx_DFlange->getpar(0));
 dflange_pan->value(rkr->efx_DFlange->getpar(1));
@@ -3941,6 +3968,7 @@ findpos(21,(int)o->value());}
         }
         Fl_Choice ring_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Ring->setpreset((int) o->value());
 ring_WD->value(rkr->efx_Ring->getpar(0));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
@@ -4076,6 +4104,7 @@ findpos(22,(int)o->value());}
         }
         Fl_Choice exciter_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Exciter->setpreset((int) o->value());
 ex_Gain->value(rkr->efx_Exciter->getpar(0));
 ex_1->value(rkr->efx_Exciter->getpar(1));
@@ -4207,6 +4236,7 @@ findpos(23,(int)o->value());}
         }
         Fl_Choice mbdist_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_MBDist->setpreset((int)o->value());
 mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
 mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
@@ -4345,6 +4375,7 @@ findpos(24,(int)o->value());}
         }
         Fl_Choice arpie_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Arpie->setpreset((int) o->value());
 arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
@@ -4422,6 +4453,7 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
         }
         Fl_Choice arpie_subdiv {
           label SubDivision
+          user_data 12
           callback {rkr->efx_Arpie->changepar(10,(int)o->value());}
           xywh {398 293 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -4480,6 +4512,7 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
           tooltip {Number of steps in the pattern} xywh {340 361 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
         }
         Fl_Choice arpie_pattern {
+          user_data 12
           callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
           xywh {397 358 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -4522,6 +4555,7 @@ findpos(25,(int)o->value());}
         }
         Fl_Choice expander_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Expander->Expander_Change_Preset((int) o->value());
 expander_ATime->value(rkr->efx_Expander->getpar(3));
 expander_RTime->value(rkr->efx_Expander->getpar(4));
@@ -4604,6 +4638,7 @@ findpos(26,(int)o->value());}
         }
         Fl_Choice shuffle_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Shuffle->setpreset((int)o->value());
 shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
 shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
@@ -4717,6 +4752,7 @@ findpos(27,(int)o->value());}
         }
         Fl_Choice synthfilter_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
@@ -4864,6 +4900,7 @@ findpos(28,(int)o->value());}
         }
         Fl_Choice mbvvol_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_MBVvol->setpreset((int)o->value());
 mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
 mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
@@ -4953,6 +4990,7 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
         }
         Fl_Choice mbvvol_combi {
           label Combi
+          user_data 12
           callback {rkr->efx_MBVvol->changepar(10,(int)o->value());}
           xywh {383 374 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
@@ -5017,6 +5055,7 @@ findpos(29,(int)o->value());}
         }
         Fl_Choice convo_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
@@ -5110,6 +5149,7 @@ rkr->efx_Convol->setfile(100);}
         }
         Fl_Choice convo_fnum {
           label Preset
+          user_data 12
           callback {rkr->efx_Convol->changepar(8,(int)o->value());}
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
@@ -5150,6 +5190,7 @@ findpos(30,(int)o->value());}
         }
         Fl_Choice looper_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Looper->setpreset((int) o->value());
 looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
@@ -5290,6 +5331,7 @@ findpos(31,(int)o->value());}
         }
         Fl_Choice ryanwah_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
@@ -5420,6 +5462,7 @@ findpos(32,(int)o->value());}
         }
         Fl_Choice rbecho_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_RBEcho->setpreset((int) o->value());
 rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
@@ -5546,6 +5589,7 @@ findpos(33,(int)o->value());}
         }
         Fl_Choice coil_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
 coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
@@ -5581,6 +5625,7 @@ coil_mode->value(rkr->efx_CoilCrafter->getpar(8));}
         }
         Fl_Choice coil_origin {
           label Origin
+          user_data 12
           callback {rkr->efx_CoilCrafter->changepar(1,(int)o->value());
 coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
 coil_q1->value(rkr->efx_CoilCrafter->getpar(4));}
@@ -5677,6 +5722,7 @@ findpos(34,(int)o->value());}
         }
         Fl_Choice shelf_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_ShelfBoost->setpreset((int) o->value());
 shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
@@ -5748,6 +5794,7 @@ findpos(35,(int)o->value());}
         }
         Fl_Choice vo_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Vocoder->setpreset((int) o->value());
 vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
 vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
@@ -5837,6 +5884,7 @@ findpos(36,(int)o->value());}
         }
         Fl_Choice sus_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
 sus_sus->value(rkr->efx_Sustainer->getpar(1));}
@@ -5883,6 +5931,7 @@ findpos(37,(int)o->value());}
         }
         Fl_Choice seq_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Sequence->setpreset((int) o->value());
 seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
@@ -5898,7 +5947,7 @@ seq_6->value(rkr->efx_Sequence->getpar(5));
 seq_7->value(rkr->efx_Sequence->getpar(6));
 seq_8->value(rkr->efx_Sequence->getpar(7));
 seq_mode->value(rkr->efx_Sequence->getpar(13));
-seq_range->value(rkr->efx_Sequence->getpar(14));} open
+seq_range->value(rkr->efx_Sequence->getpar(14));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6022,6 +6071,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));} open
         }
         Fl_Choice seq_mode {
           label Mode
+          user_data 12
           callback {rkr->efx_Sequence->changepar(13,(int)o->value())}
           xywh {353 380 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
@@ -6075,6 +6125,7 @@ findpos(38,(int)o->value());}
         }
         Fl_Choice shifter_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Shifter->setpreset((int)o->value());
 shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
 shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
@@ -6168,6 +6219,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
         }
         Fl_Choice shifter_mode {
           label Mode
+          user_data 12
           callback {rkr->efx_Shifter->changepar(8,(int)o->value())}
           xywh {363 376 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
@@ -6196,6 +6248,7 @@ findpos(39,(int)o->value());}
         }
         Fl_Choice stomp_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_StompBox->setpreset((int)o->value());
 stomp_WD->value(rkr->efx_StompBox->getpar(0));
 stomp_gain->value(rkr->efx_StompBox->getpar(4));
@@ -6271,6 +6324,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
         Fl_Choice stomp_mode {
           label Mode
+          user_data 12
           callback {rkr->efx_StompBox->changepar(5,(int)o->value())}
           xywh {363 376 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
@@ -6322,6 +6376,7 @@ findpos(40,(int)o->value());}
         }
         Fl_Choice revtron_preset {
           label Preset
+          user_data 12
           callback {if(!v)rkr->efx_Reverbtron->setpreset((int) o->value());
 revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
 revtron_level->value(rkr->efx_Reverbtron->getpar(7));
@@ -6432,7 +6487,7 @@ revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
         }
         Fl_Value_Slider revtron_LPF {
           label LPF
-          callback {rkr->efx_Reverbtron->changepar(14,(int)o->value());} selected
+          callback {rkr->efx_Reverbtron->changepar(14,(int)o->value());}
           xywh {372 343 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 20 textcolor 7
           class SliderW
         }
@@ -6481,6 +6536,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
         Fl_Choice revtron_fnum {
           label File
+          user_data 12
           callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
           xywh {371 378 101 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
@@ -6610,7 +6666,7 @@ if (!o->value())
 rkr->cleanup_efx();
 
 }}
-          xywh {6 30 52 18} shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
+          xywh {6 30 52 18} down_box BORDER_BOX shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Value_Slider Balance {
           label {FX%}
@@ -6715,7 +6771,7 @@ rkr->modified=0;
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -6843,54 +6899,56 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Choice T_SEL {
           label Input
+          user_data 12
           callback {rkr->Tap_Selection=(int)o->value();}
           xywh {600 145 87 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label GUI
-            xywh {0 0 36 21} labelsize 10
+            xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
             label {MIDI Note On}
-            xywh {0 0 36 21} labelsize 10
+            xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
             label {Jack Transport}
-            xywh {0 0 36 21} labelsize 10
+            xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
             label MTC
-            xywh {0 0 36 21} labelsize 10
+            xywh {0 0 36 21} labelsize 9
           }
         }
         Fl_Choice T_SET {
           label Set
+          user_data 12
           callback {rkr->Tap_SetValue=(int)o->value();}
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {Dl. 1 LFO 1}
-            xywh {10 10 36 21} labelsize 10
+            xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
             label {Dl. 1 LFO 1/4}
-            xywh {10 10 36 21} labelsize 10
+            xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
             label {Dl. 1 LFO 1/2}
-            xywh {10 10 36 21} labelsize 10
+            xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
             label {Dl. 1/2 LFO 1/4}
-            xywh {0 0 36 21} labelsize 10
+            xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
             label {Dl. 1/2 LFO 1/8}
-            xywh {0 0 36 21} labelsize 10
+            xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
             label {Dl. 1 LFO 1/3}
-            xywh {0 0 36 21} labelsize 11
+            xywh {0 0 36 21} labelsize 9
           }
         }
         Fl_Button T_Apply {
@@ -7123,19 +7181,19 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1287 45 640 528} type Double color 4 hide
+      xywh {1287 38 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {5 0 631 535}
       } {
         Fl_Group Look {
           label Look
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -7246,17 +7304,17 @@ PutBackground();}
             label {Font Size}
             xywh {10 83 60 17} labelsize 11 labelcolor 7
           }
-          Fl_Button FSplus {
-            label {+}
-            callback {rkr->relfontsize++;
-chfsize(1);}
-            xywh {80 80 30 20}
-          }
           Fl_Button FSless {
             label {-}
             callback {rkr->relfontsize--;
 chfsize(-1);}
-            xywh {115 80 30 20}
+            xywh {78 80 30 20}
+          }
+          Fl_Button FSplus {
+            label {+}
+            callback {rkr->relfontsize++;
+chfsize(1);}
+            xywh {113 80 30 20}
           }
           Fl_Box CLLabel {
             label Color
@@ -7265,8 +7323,8 @@ chfsize(-1);}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -11197,16 +11255,49 @@ for (int t=0; t<Principal->children();t++)
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
           c->color(fore_color);
+          if(uh == 12)
+           {
+  
+             Fl_Menu_*n = (Fl_Menu_*)c;
+             
+             Fl_Menu_Item *m = (Fl_Menu_Item*) n->menu(); 
+             Fl_Menu_Item *p;  
+             for(int s=0; s<m->size(); s++)
+                  {
+                    p=m->next(s);
+                    k=p->labelsize();
+                    k+=value;
+                    p->labelsize(k);
+                   }
+  
+            } 
+       
+  
+  
           
        } 
     } 
  
   }
 
+
+
+          k= WPreset_Name->textsize();
+          k+=value;
+          WPreset_Name->textsize(k);
+
+
+
+
+
+
+
+
 ChangeActives();
 
  
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {adjustfont()} {} {
     code {int change,value;
