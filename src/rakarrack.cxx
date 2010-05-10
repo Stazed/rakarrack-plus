@@ -15061,16 +15061,19 @@ R average.");
       { WNote = new Fl_Box(676, 57, 28, 22);
         WNote->labelfont(1);
         WNote->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        WNote->user_data((void*)(7));
         WNote->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* WNote
       { WRfreq = new Fl_Box(588, 57, 76, 22);
         WRfreq->labelfont(1);
         WRfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        WRfreq->user_data((void*)(7));
         WRfreq->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* WRfreq
       { WNfreq = new Fl_Box(714, 57, 76, 22);
         WNfreq->labelfont(1);
         WNfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        WNfreq->user_data((void*)(7));
         WNfreq->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* WNfreq
       { PINCHO = new Fl_Box(673, 48, 32, 5, "@-4$8<");

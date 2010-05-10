@@ -6662,12 +6662,15 @@ TUNER_LABEL->redraw_label();}
           class TunerLed
         }
         Fl_Box WNote {
+          user_data 7
           xywh {676 57 28 22} labelfont 1 labelcolor 7 align 16
         }
         Fl_Box WRfreq {
+          user_data 7
           xywh {588 57 76 22} labelfont 1 labelcolor 7 align 16
         }
         Fl_Box WNfreq {
+          user_data 7 selected
           xywh {714 57 76 22} labelfont 1 labelcolor 7 align 16
         }
         Fl_Box PINCHO {
@@ -11389,8 +11392,7 @@ for (int t=0; t<Principal->children();t++)
 ChangeActives();
 
  
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {adjustfont()} {} {
     code {int change,value;
