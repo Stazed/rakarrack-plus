@@ -705,7 +705,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 */  
   
   
-  Fl_Color juan,pepe;
+  Fl_Color juan,pepe,luis;
   float vval=fabsf((float)val);
   
   juan = fl_color_average(fl_darker(fl_darker(leds_color)),fl_lighter(fl_lighter(leds_color)),vval);
@@ -739,8 +739,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   labelcolor(label_color);
   draw_label(xsl, ysl, wsl, hsl);
   
-  if (Fl::focus() == this) draw_focus(box1, xsl, ysl, wsl, hsl);
-  
+  if (Fl::focus() == this) 
+  {
+  draw_focus(box1, xsl, ysl, wsl, hsl);
+  luis = leds_color;
+  }
+  else luis = textcolor();
   
 /*  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   {
@@ -756,13 +760,19 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
    else
     back->draw(bxx,byy);
 */    
+
+  int datasize;
+  
+  if(labelsize()< 11) datasize = labelsize();
+  else datasize = 11;
+
   char buf[128];
   format(buf);
-  fl_font(textfont(), labelsize()-3);
+  fl_font(textfont(), datasize);
   if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
-  fl_color(active_r() ? label_color: fl_inactive(textcolor()));
+  fl_color(active_r() ? leds_color: fl_inactive(textcolor()));
   else
-  fl_color(active_r() ? textcolor(): fl_inactive(textcolor()));
+  fl_color(active_r() ? luis: fl_inactive(textcolor()));
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
 }
