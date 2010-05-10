@@ -758,7 +758,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
 */    
   char buf[128];
   format(buf);
-  fl_font(textfont(), labelsize()-2);
+  fl_font(textfont(), labelsize()-3);
   if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
   fl_color(active_r() ? label_color: fl_inactive(textcolor()));
   else
@@ -1242,7 +1242,8 @@ void RKRGUI::cb_eq_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_eq_preset_i(Fl_Choice* o, void* v) {
-  if(!v) rkr->EQ1_setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->EQ1_setpreset((int)o->value());
 eq_1->value(rkr->efx_EQ1->getpar(12)-64);
 eq_2->value(rkr->efx_EQ1->getpar(17)-64);
 eq_3->value(rkr->efx_EQ1->getpar(22)-64);
@@ -1362,7 +1363,8 @@ void RKRGUI::cb_compress_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_compress_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
 compress_threshold->value(rkr->efx_Compressor->getpar(1));
 compress_Ratio->value(rkr->efx_Compressor->getpar(2));
 compress_output->value(rkr->efx_Compressor->getpar(3));
@@ -1460,7 +1462,8 @@ void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_dist_preset_i(Fl_Choice* o, void* v) {
-  if(!v) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
+  long long ud= (long long) v;
+if((ud==0)||(ud==12)) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
 dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
 dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
@@ -1612,7 +1615,8 @@ void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ovrd_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Overdrive->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Overdrive->setpreset((int) o->value());
 ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
@@ -1723,7 +1727,8 @@ void RKRGUI::cb_echo_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_echo_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Echo->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Echo->setpreset((int) o->value());
 echo_WD->value(rkr->efx_Echo->getpar(0)-64);
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
@@ -1825,7 +1830,8 @@ void RKRGUI::cb_chorus_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_chorus_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Chorus->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -1951,7 +1957,8 @@ void RKRGUI::cb_phaser_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_phaser_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Phaser->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Phaser->setpreset((int) o->value());
 phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
@@ -2075,7 +2082,8 @@ void RKRGUI::cb_flanger_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_flanger_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Flanger->setpreset((int)(o->value()+5));
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Flanger->setpreset((int)(o->value()+5));
 flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));
@@ -2190,7 +2198,8 @@ void RKRGUI::cb_reverb_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_reverb_preset_i(Fl_Choice* o, void* v) {
   rkr->Reverb_Bypass=0;
-if(!v)rkr->efx_Rev->setpreset((int) o->value());
+long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Rev->setpreset((int) o->value());
 reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
 reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
 reverb_time->value(rkr->efx_Rev->getpar(2));
@@ -2320,7 +2329,8 @@ void RKRGUI::cb_eqp_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_eqp_preset_i(Fl_Choice* o, void* v) {
-  if(!v) rkr->EQ2_setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12)) rkr->EQ2_setpreset((int)o->value());
 eqp_LF->value(rkr->efx_EQ2->getpar(11));
 eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
 eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
@@ -2425,7 +2435,8 @@ void RKRGUI::cb_WhaWha_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_WhaWha_preset_i(Fl_Choice* o, void* v) {
   rkr->WhaWha_Bypass=0;
-if(!v)rkr->efx_WhaWha->setpreset((int) o->value());
+long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_WhaWha->setpreset((int) o->value());
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
@@ -2533,7 +2544,8 @@ void RKRGUI::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_Alienwah_preset_i(Fl_Choice* o, void* v) {
   rkr->Alienwah_Bypass=0;
-if(!v)rkr->efx_Alienwah->setpreset((int) o->value());
+long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
@@ -2686,7 +2698,8 @@ void RKRGUI::cb_pan_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_pan_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Pan->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Pan->setpreset((int) o->value());
 pan_WD->value(rkr->efx_Pan->getpar(0)-64);
 pan_pan->value(rkr->efx_Pan->getpar(1)-64);
 pan_freq->value(rkr->efx_Pan->getpar(2));
@@ -2781,7 +2794,8 @@ void RKRGUI::cb_har_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_har_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Har->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Har->setpreset((int)o->value());
 har_WD->value(rkr->efx_Har->getpar(0)-64);
 har_pan->value(rkr->efx_Har->getpar(1)-64);
 har_gan->value(rkr->efx_Har->getpar(2)-64);
@@ -2902,7 +2916,8 @@ void RKRGUI::cb_musdelay_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_musdelay_preset_i(Fl_Choice* o, void* v) {
   rkr->MusDelay_Bypass=0;
-if(!v)rkr->efx_MusDelay->setpreset(o->value());
+long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_MusDelay->setpreset(o->value());
 musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
 musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
 musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
@@ -3057,7 +3072,8 @@ void RKRGUI::cb_gate_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_gate_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Gate->Gate_Change_Preset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Gate->Gate_Change_Preset((int) o->value());
 gate_ATime->value(rkr->efx_Gate->getpar(3));
 gate_RTime->value(rkr->efx_Gate->getpar(4));
 gate_range->value(rkr->efx_Gate->getpar(2));
@@ -3137,7 +3153,8 @@ void RKRGUI::cb_newdist_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_newdist_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_NewDist->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_NewDist->setpreset((int) o->value());
 newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
 newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
 newdist_drive->value(rkr->efx_NewDist->getpar(3));
@@ -3257,7 +3274,8 @@ void RKRGUI::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_aphaser_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_APhaser->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
 aphaser_pan->value(rkr->efx_APhaser->getpar(1));
 aphaser_freq->value(rkr->efx_APhaser->getpar(2));
@@ -3380,7 +3398,8 @@ void RKRGUI::cb_valve_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_valve_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Valve->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Valve->setpreset((int)o->value());
 valve_WD->value(rkr->efx_Valve->getpar(0)-64);
 valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
 valve_drive->value(rkr->efx_Valve->getpar(3));
@@ -3508,7 +3527,8 @@ void RKRGUI::cb_dflange_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_dflange_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_DFlange->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_DFlange->setpreset((int)o->value());
 dflange_WD->value(rkr->efx_DFlange->getpar(0));
 dflange_pan->value(rkr->efx_DFlange->getpar(1));
 dflange_freq->value(rkr->efx_DFlange->getpar(10));
@@ -3648,7 +3668,8 @@ void RKRGUI::cb_ring_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ring_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Ring->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Ring->setpreset((int) o->value());
 ring_WD->value(rkr->efx_Ring->getpar(0));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
 ring_input->value(rkr->efx_Ring->getpar(11));
@@ -3779,7 +3800,8 @@ void RKRGUI::cb_exciter_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_exciter_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Exciter->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Exciter->setpreset((int) o->value());
 ex_Gain->value(rkr->efx_Exciter->getpar(0));
 ex_1->value(rkr->efx_Exciter->getpar(1));
 ex_2->value(rkr->efx_Exciter->getpar(2));
@@ -3909,7 +3931,8 @@ void RKRGUI::cb_mbdist_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_mbdist_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_MBDist->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_MBDist->setpreset((int)o->value());
 mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
 mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
 mbdist_drive->value(rkr->efx_MBDist->getpar(3));
@@ -4054,7 +4077,8 @@ void RKRGUI::cb_arpie_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_arpie_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Arpie->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Arpie->setpreset((int) o->value());
 arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
@@ -4190,7 +4214,8 @@ void RKRGUI::cb_expander_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_expander_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Expander->Expander_Change_Preset((int) o->value());
 expander_ATime->value(rkr->efx_Expander->getpar(3));
 expander_RTime->value(rkr->efx_Expander->getpar(4));
 expander_shape->value(rkr->efx_Expander->getpar(2));
@@ -4270,7 +4295,8 @@ void RKRGUI::cb_shuffle_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_shuffle_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Shuffle->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Shuffle->setpreset((int)o->value());
 shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
 shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
 shuffle_volMH->value(rkr->efx_Shuffle->getpar(2));
@@ -4383,7 +4409,8 @@ void RKRGUI::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_synthfilter_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Synthfilter->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
@@ -4530,7 +4557,8 @@ void RKRGUI::cb_mbvvol_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_mbvvol_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_MBVvol->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_MBVvol->setpreset((int)o->value());
 mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
 mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
 mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
@@ -4657,7 +4685,8 @@ void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_convo_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Convol->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
@@ -4778,7 +4807,8 @@ void RKRGUI::cb_looper_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_looper_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Looper->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Looper->setpreset((int) o->value());
 looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
 looper_record->value(rkr->efx_Looper->getpar(3));
@@ -4910,7 +4940,8 @@ void RKRGUI::cb_ryanwah_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ryanwah_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_RyanWah->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
 ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
@@ -5040,7 +5071,8 @@ void RKRGUI::cb_rbecho_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_rbecho_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_RBEcho->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_RBEcho->setpreset((int) o->value());
 rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
@@ -5150,7 +5182,8 @@ void RKRGUI::cb_coil_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_coil_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_CoilCrafter->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
 coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
 coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
@@ -5262,7 +5295,8 @@ void RKRGUI::cb_shelf_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_shelf_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_ShelfBoost->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_ShelfBoost->setpreset((int) o->value());
 shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
@@ -5327,7 +5361,8 @@ void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_vo_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Vocoder->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Vocoder->setpreset((int) o->value());
 vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
 vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
@@ -5408,7 +5443,8 @@ void RKRGUI::cb_sus_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_sus_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Sustainer->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
 sus_sus->value(rkr->efx_Sustainer->getpar(1));
 }
@@ -5448,7 +5484,8 @@ void RKRGUI::cb_seq_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_seq_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Sequence->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Sequence->setpreset((int) o->value());
 seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
 seq_amp->value(rkr->efx_Sequence->getpar(11));
@@ -5610,7 +5647,8 @@ void RKRGUI::cb_shifter_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_shifter_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Shifter->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Shifter->setpreset((int)o->value());
 shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
 shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
 shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
@@ -5725,7 +5763,8 @@ void RKRGUI::cb_stomp_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_stomp_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_StompBox->setpreset((int)o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_StompBox->setpreset((int)o->value());
 stomp_WD->value(rkr->efx_StompBox->getpar(0));
 stomp_gain->value(rkr->efx_StompBox->getpar(4));
 stomp_low->value(rkr->efx_StompBox->getpar(3));
@@ -5814,7 +5853,8 @@ void RKRGUI::cb_revtron_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_revtron_preset_i(Fl_Choice* o, void* v) {
-  if(!v)rkr->efx_Reverbtron->setpreset((int) o->value());
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Reverbtron->setpreset((int) o->value());
 revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
 revtron_level->value(rkr->efx_Reverbtron->getpar(7));
 revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
@@ -19446,6 +19486,7 @@ for (int t=0; t<Principal->children();t++)
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
           c->color(fore_color);
+       
           if(uh == 12)
            {
   
@@ -19459,7 +19500,10 @@ for (int t=0; t<Principal->children();t++)
                     k=p->labelsize();
                     k+=value;
                     p->labelsize(k);
+                    
                    }
+             
+       
   
             } 
        

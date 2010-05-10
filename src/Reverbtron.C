@@ -176,8 +176,6 @@ void
 Reverbtron::setpanning (int value)
 {
   Ppanning = value;
-/*  lpanning= (float)value / 128.0f;
-  rpanning= 1.0f-lpanning;*/
   lpanning = ((float)Ppanning) / 64.0f;
   rpanning = 2.0f - lpanning;
   lpanning = 10.0f * powf(lpanning, 4);
