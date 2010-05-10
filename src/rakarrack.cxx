@@ -6705,6 +6705,14 @@ void RKRGUI::cb_FSplus(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSplus_i(o,v);
 }
 
+void RKRGUI::cb_FSReset_i(Fl_Button*, void*) {
+  rkr->relfontsize=0;
+chfsize(0);
+}
+void RKRGUI::cb_FSReset(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSReset_i(o,v);
+}
+
 void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
   rkr->init_state=(int) o->value();
 }
@@ -7304,44 +7312,54 @@ Fl_Double_Window* RKRGUI::make_window() {
     { L1 = new Fl_Box(2, 195, 158, 17, "label");
       L1->labelfont(1);
       L1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L1->user_data((void*)(7));
       L1->align(FL_ALIGN_CLIP);
     } // Fl_Box* L1
     { L2 = new Fl_Box(162, 195, 158, 17, "label");
       L2->labelfont(1);
       L2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L2->user_data((void*)(7));
       L2->align(FL_ALIGN_CLIP);
     } // Fl_Box* L2
     { L3 = new Fl_Box(322, 195, 158, 17, "label");
       L3->labelfont(1);
       L3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L3->user_data((void*)(7));
     } // Fl_Box* L3
     { L4 = new Fl_Box(482, 195, 158, 17, "label");
       L4->labelfont(1);
       L4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L4->user_data((void*)(7));
     } // Fl_Box* L4
     { L5 = new Fl_Box(642, 195, 157, 17, "label");
       L5->labelfont(1);
       L5->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L5->user_data((void*)(7));
     } // Fl_Box* L5
     { L6 = new Fl_Box(1, 396, 158, 17, "label");
       L6->labelfont(1);
       L6->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L6->user_data((void*)(7));
     } // Fl_Box* L6
     { L7 = new Fl_Box(162, 396, 158, 17, "label");
       L7->labelfont(1);
       L7->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L7->user_data((void*)(7));
     } // Fl_Box* L7
     { L8 = new Fl_Box(322, 396, 158, 17, "label");
       L8->labelfont(1);
       L8->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L8->user_data((void*)(7));
     } // Fl_Box* L8
     { L9 = new Fl_Box(482, 396, 158, 17, "label");
       L9->labelfont(1);
       L9->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L9->user_data((void*)(7));
     } // Fl_Box* L9
     { L10 = new Fl_Box(642, 396, 154, 17, "label");
       L10->labelfont(1);
       L10->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      L10->user_data((void*)(7));
     } // Fl_Box* L10
     { EQ = new Fl_Group(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);
@@ -15064,6 +15082,7 @@ R average.");
       { TUNER_LABEL = new Fl_Box(524, 63, 57, 14, "Tuner");
         TUNER_LABEL->labelfont(1);
         TUNER_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        TUNER_LABEL->user_data((void*)(7));
       } // Fl_Box* TUNER_LABEL
       Tuner->end();
     } // Fl_Group* Tuner
@@ -15202,6 +15221,7 @@ R average.");
       { LABEL_IO = new Fl_Box(68, 30, 62, 14, "In/Out");
         LABEL_IO->labelfont(1);
         LABEL_IO->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        LABEL_IO->user_data((void*)(7));
         LABEL_IO->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* LABEL_IO
       InOut->end();
@@ -15274,7 +15294,7 @@ R average.");
       { MIDI_LABEL = new Fl_Box(524, 117, 44, 14, "MIDI");
         MIDI_LABEL->labelfont(1);
         MIDI_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL);
+        MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL, (void*)(7));
         MIDI_LABEL->when(FL_WHEN_NEVER);
       } // Fl_Box* MIDI_LABEL
       Midi->end();
@@ -15288,6 +15308,7 @@ R average.");
       { PRESETS_LABEL = new Fl_Box(174, 28, 62, 14, "Presets");
         PRESETS_LABEL->labelfont(1);
         PRESETS_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        PRESETS_LABEL->user_data((void*)(7));
       } // Fl_Box* PRESETS_LABEL
       { S_new = new Fl_Button(174, 50, 64, 18, "New");
         S_new->shortcut(0x6e);
@@ -15424,6 +15445,7 @@ R average.");
       { TAP_LABEL = new Fl_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->labelfont(1);
         TAP_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        TAP_LABEL->user_data((void*)(7));
         TAP_LABEL->when(FL_WHEN_NEVER);
       } // Fl_Box* TAP_LABEL
       { T_DIS = new Fl_Box(715, 165, 70, 22);
@@ -15559,6 +15581,9 @@ R average.");
         { FSplus = new Fl_Button(113, 80, 30, 20, "+");
           FSplus->callback((Fl_Callback*)cb_FSplus);
         } // Fl_Button* FSplus
+        { FSReset = new Fl_Button(148, 80, 57, 20, "Reset");
+          FSReset->callback((Fl_Callback*)cb_FSReset);
+        } // Fl_Button* FSReset
         { CLLabel = new Fl_Box(10, 108, 40, 19, "Color");
           CLLabel->labelsize(11);
           CLLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -19472,7 +19497,13 @@ for (int t=0; t<Principal->children();t++)
   
      k= w->labelsize();
      k+=value;
-     w->labelsize(k);
+     if(ud!=7) 
+     {
+     if((k>2)&&(k<16)) w->labelsize(k);
+     }
+     else
+     if((k>6)&&(k<20)) w->labelsize(k);
+     
      if(ud != 5) w->labelcolor(label_color); else w->labelcolor(leds_color); 
      if (ud !=2) w->selection_color(back_color); else w->selection_color(leds_color);
      
@@ -19492,7 +19523,12 @@ for (int t=0; t<Principal->children();t++)
 
           k= c->labelsize();
           k+=value;
-          c->labelsize(k);
+          if(uh==7)
+          {
+          if((k>6)&&(k<20))c->labelsize(k);
+          }
+          else
+          if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
           c->color(fore_color);
@@ -19509,7 +19545,7 @@ for (int t=0; t<Principal->children();t++)
                     p=m->next(s);
                     k=p->labelsize();
                     k+=value;
-                    p->labelsize(k);
+                    if((k>2) &&(k<16))p->labelsize(k);
                     
                    }
              
@@ -19529,7 +19565,7 @@ for (int t=0; t<Principal->children();t++)
 
           k= WPreset_Name->textsize();
           k+=value;
-          WPreset_Name->textsize(k);
+          if((k>10)&&(k<32))WPreset_Name->textsize(k);
 
 
 

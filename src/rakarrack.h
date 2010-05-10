@@ -3153,6 +3153,11 @@ private:
   void cb_FSplus_i(Fl_Button*, void*);
   static void cb_FSplus(Fl_Button*, void*);
 public:
+  Fl_Button *FSReset;
+private:
+  void cb_FSReset_i(Fl_Button*, void*);
+  static void cb_FSReset(Fl_Button*, void*);
+public:
   Fl_Box *CLLabel;
   Fl_Group *AUDIO_SET;
   Fl_Box *Fondo7;

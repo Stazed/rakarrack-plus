@@ -821,12 +821,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   else
   fl_color(active_r() ? luis: fl_inactive(textcolor()));
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
-  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {selected
-    }
+  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {}
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1307,42 +1307,52 @@ Scope_ON=1;
       }
       Fl_Box L1 {
         label label
+        user_data 7
         xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
       }
       Fl_Box L2 {
         label label
+        user_data 7
         xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
       }
       Fl_Box L3 {
         label label
+        user_data 7
         xywh {322 195 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L4 {
         label label
+        user_data 7
         xywh {482 195 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L5 {
         label label
+        user_data 7
         xywh {642 195 157 17} labelfont 1 labelcolor 7
       }
       Fl_Box L6 {
         label label
+        user_data 7
         xywh {1 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L7 {
         label label
+        user_data 7
         xywh {162 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L8 {
         label label
+        user_data 7
         xywh {322 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L9 {
         label label
+        user_data 7
         xywh {482 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L10 {
         label label
+        user_data 7
         xywh {642 396 154 17} labelfont 1 labelcolor 7
       }
       Fl_Group EQ {
@@ -6667,6 +6677,7 @@ TUNER_LABEL->redraw_label();}
         }
         Fl_Box TUNER_LABEL {
           label Tuner
+          user_data 7
           xywh {524 63 57 14} labelfont 1 labelcolor 7
         }
       }
@@ -6757,6 +6768,7 @@ rkr->calculavol(2);}
         }
         Fl_Box LABEL_IO {
           label {In/Out}
+          user_data 7
           xywh {68 30 62 14} labelfont 1 labelcolor 7 align 16
         }
       }
@@ -6803,6 +6815,7 @@ MIDI_LABEL->redraw_label();}
         }
         Fl_Box MIDI_LABEL {
           label MIDI
+          user_data 7
           callback {int ok;
 char *filename;
 
@@ -6827,6 +6840,7 @@ rkr->modified=0;
       } {
         Fl_Box PRESETS_LABEL {
           label Presets
+          user_data 7
           xywh {174 28 62 14} labelfont 1 labelcolor 7
         }
         Fl_Button S_new {
@@ -7026,6 +7040,7 @@ UpdateTGUI();
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
+          user_data 7
           xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
         }
         Fl_Box T_DIS {
@@ -7232,7 +7247,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1287 38 640 528} type Double color 4 hide
+      xywh {1287 31 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -7366,6 +7381,12 @@ chfsize(-1);}
             callback {rkr->relfontsize++;
 chfsize(1);}
             xywh {113 80 30 20}
+          }
+          Fl_Button FSReset {
+            label Reset
+            callback {rkr->relfontsize=0;
+chfsize(0);}
+            xywh {148 80 57 20}
           }
           Fl_Box CLLabel {
             label Color
@@ -11282,7 +11303,13 @@ for (int t=0; t<Principal->children();t++)
   
      k= w->labelsize();
      k+=value;
-     w->labelsize(k);
+     if(ud!=7) 
+     {
+     if((k>2)&&(k<16)) w->labelsize(k);
+     }
+     else
+     if((k>6)&&(k<20)) w->labelsize(k);
+     
      if(ud != 5) w->labelcolor(label_color); else w->labelcolor(leds_color); 
      if (ud !=2) w->selection_color(back_color); else w->selection_color(leds_color);
      
@@ -11302,7 +11329,12 @@ for (int t=0; t<Principal->children();t++)
 
           k= c->labelsize();
           k+=value;
-          c->labelsize(k);
+          if(uh==7)
+          {
+          if((k>6)&&(k<20))c->labelsize(k);
+          }
+          else
+          if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
           c->color(fore_color);
@@ -11319,7 +11351,7 @@ for (int t=0; t<Principal->children();t++)
                     p=m->next(s);
                     k=p->labelsize();
                     k+=value;
-                    p->labelsize(k);
+                    if((k>2) &&(k<16))p->labelsize(k);
                     
                    }
              
@@ -11339,7 +11371,7 @@ for (int t=0; t<Principal->children();t++)
 
           k= WPreset_Name->textsize();
           k+=value;
-          WPreset_Name->textsize(k);
+          if((k>10)&&(k<32))WPreset_Name->textsize(k);
 
 
 
@@ -11351,7 +11383,8 @@ for (int t=0; t<Principal->children();t++)
 ChangeActives();
 
  
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {adjustfont()} {} {
     code {int change,value;
