@@ -825,8 +825,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -6845,6 +6844,7 @@ rkr->modified=0;
         }
         Fl_Button S_new {
           label New
+          user_data 7
           callback {rkr->New();
 DisAssigns();
 FillML(0);
@@ -6854,6 +6854,7 @@ Put_Loaded();}
         }
         Fl_Button L_preset {
           label Load
+          user_data 7
           callback {char *filename;
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
@@ -6864,6 +6865,7 @@ Put_Loaded();}
         }
         Fl_Button S_preset {
           label Save
+          user_data 7
           callback {char *filename;
 \#define EXT ".rkr"
 filename=fl_file_chooser("Save Preset:","(*"EXT")",rkr->Preset_Name,0);
@@ -6875,7 +6877,7 @@ rkr->savefile(filename);}
         }
         Fl_Light_Button Compare {
           label Compare
-          user_data 2
+          user_data 7
           callback {if ((int) o->value())
 {
 rkr->Preset_to_Bank(0);
@@ -6892,6 +6894,7 @@ else
         }
         Fl_Button B_preset {
           label Bank
+          user_data 7
           callback {if(!BankWindow->visible())
 {
 if(!made) make_window_banks();
@@ -6921,10 +6924,12 @@ if(rkr->Tap_Updated) UpdateTGUI();}
           xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
         Fl_Box DAuthor {
+          user_data 7
           xywh {246 107 266 18} box DOWN_BOX color 62 align 116
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
+          user_data 7
           callback {if (!Order->visible())
 {
 Prepare_Order();
@@ -11336,7 +11341,8 @@ for (int t=0; t<Principal->children();t++)
           else
           if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
-          if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
+          if (uh !=7) c->selection_color(back_color); 
+          if ((uh==2)||(uh==7)) c->selection_color(leds_color);
           c->color(fore_color);
        
           if(uh == 12)

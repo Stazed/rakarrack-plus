@@ -15314,26 +15314,26 @@ R average.");
         S_new->shortcut(0x6e);
         S_new->color((Fl_Color)62);
         S_new->labelsize(12);
-        S_new->callback((Fl_Callback*)cb_S_new);
+        S_new->callback((Fl_Callback*)cb_S_new, (void*)(7));
       } // Fl_Button* S_new
       { L_preset = new Fl_Button(240, 50, 64, 18, "Load");
         L_preset->shortcut(0x6c);
         L_preset->color((Fl_Color)62);
         L_preset->labelsize(12);
-        L_preset->callback((Fl_Callback*)cb_L_preset);
+        L_preset->callback((Fl_Callback*)cb_L_preset, (void*)(7));
       } // Fl_Button* L_preset
       { S_preset = new Fl_Button(306, 50, 64, 18, "Save");
         S_preset->shortcut(0x73);
         S_preset->color((Fl_Color)62);
         S_preset->labelsize(12);
-        S_preset->callback((Fl_Callback*)cb_S_preset);
+        S_preset->callback((Fl_Callback*)cb_S_preset, (void*)(7));
       } // Fl_Button* S_preset
       { Compare = new Fl_Light_Button(373, 50, 72, 18, "Compare");
         Compare->shortcut(0x70);
         Compare->color((Fl_Color)62);
         Compare->selection_color((Fl_Color)1);
         Compare->labelsize(12);
-        Compare->callback((Fl_Callback*)cb_Compare, (void*)(2));
+        Compare->callback((Fl_Callback*)cb_Compare, (void*)(7));
         Compare->align(68|FL_ALIGN_INSIDE);
         Compare->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Compare
@@ -15341,7 +15341,7 @@ R average.");
         B_preset->shortcut(0x62);
         B_preset->color((Fl_Color)62);
         B_preset->labelsize(12);
-        B_preset->callback((Fl_Callback*)cb_B_preset);
+        B_preset->callback((Fl_Callback*)cb_B_preset, (void*)(7));
       } // Fl_Button* B_preset
       { Fl_Input* o = WPreset_Name = new Fl_Input(174, 72, 338, 30);
         WPreset_Name->color((Fl_Color)62);
@@ -15368,12 +15368,13 @@ R average.");
       { DAuthor = new Fl_Box(246, 107, 266, 18);
         DAuthor->box(FL_DOWN_BOX);
         DAuthor->color((Fl_Color)62);
+        DAuthor->user_data((void*)(7));
         DAuthor->align(100|FL_ALIGN_INSIDE);
       } // Fl_Box* DAuthor
       { Open_Order = new Fl_Button(255, 132, 195, 25, "Put Order in your Rack");
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
-        Open_Order->callback((Fl_Callback*)cb_Open_Order);
+        Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(7));
         Open_Order->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
@@ -19530,7 +19531,8 @@ for (int t=0; t<Principal->children();t++)
           else
           if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
-          if (uh !=2) c->selection_color(back_color); else c->selection_color(leds_color);
+          if (uh !=7) c->selection_color(back_color); 
+          if ((uh==2)||(uh==7)) c->selection_color(leds_color);
           c->color(fore_color);
        
           if(uh == 12)
