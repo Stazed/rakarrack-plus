@@ -227,6 +227,12 @@ switch(Tap_SetValue)
 
    }
 
+
+  if((Tap_TempoSetL < 1 ) && (Tap_TempoSetL > 600))  Tap_TempoSetL = Tap_TempoSet;
+  if((Tap_TempoSetD < 1 ) && (Tap_TempoSetD > 600))  Tap_TempoSetD = Tap_TempoSet;
+  
+
+
   if(Chorus_Bypass) efx_Chorus->changepar(2,Tap_TempoSetL);
   if(Flanger_Bypass) efx_Flanger->changepar(2,Tap_TempoSetL);
   if(Phaser_Bypass) efx_Phaser->changepar(2,Tap_TempoSetL);
