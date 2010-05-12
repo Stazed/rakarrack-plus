@@ -204,32 +204,60 @@ switch(Tap_SetValue)
           break;
       case 1:
          Tap_TempoSetD=Tap_TempoSet;
-         Tap_TempoSetL=Tap_TempoSet/4;
+         Tap_TempoSetL=Tap_TempoSet/2;
           break;
       case 2:
          Tap_TempoSetD=Tap_TempoSet;
-         Tap_TempoSetL=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet/3;
           break;   
       case 3:
-         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetD=Tap_TempoSet;
          Tap_TempoSetL=Tap_TempoSet/4;
           break;   
       case 4:
-         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetD=Tap_TempoSet;
          Tap_TempoSetL=Tap_TempoSet/8;
           break;   
       case 5:
-         Tap_TempoSetD=Tap_TempoSet;
-         Tap_TempoSetL=Tap_TempoSet/3;
+         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet;
           break;   
-
+      case 6:
+         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet/2;
+          break;   
+      case 7:
+         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet/4;
+          break;   
+      case 8:
+         Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet/8;
+         break;   
+      case 9:
+         Tap_TempoSetD=Tap_TempoSet/4;
+         Tap_TempoSetL=Tap_TempoSet;
+          break;   
+      case 10:
+         Tap_TempoSetD=Tap_TempoSet/4;
+         Tap_TempoSetL=Tap_TempoSet/2;
+          break;   
+      case 11:
+         Tap_TempoSetD=Tap_TempoSet/4;
+         Tap_TempoSetL=Tap_TempoSet/4;
+          break;   
+      case 12:
+         Tap_TempoSetD=Tap_TempoSet/4;
+         Tap_TempoSetL=Tap_TempoSet/8;
+         break;   
+       
 
 
    }
 
 
-  if((Tap_TempoSetL < 1 ) && (Tap_TempoSetL > 600))  Tap_TempoSetL = Tap_TempoSet;
-  if((Tap_TempoSetD < 1 ) && (Tap_TempoSetD > 600))  Tap_TempoSetD = Tap_TempoSet;
+  if((Tap_TempoSetL < 1 ) || (Tap_TempoSetL > 600))  Tap_TempoSetL = Tap_TempoSet;
+  if((Tap_TempoSetD < 1 ) || (Tap_TempoSetD > 600))  Tap_TempoSetD = Tap_TempoSet;
   
 
 

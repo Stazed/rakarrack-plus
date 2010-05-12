@@ -6331,11 +6331,18 @@ void RKRGUI::cb_T_SET(Fl_Choice* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_T_SET[] = {
  {"Dl. 1 LFO 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Dl. 1 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Dl. 1 LFO 1/2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1 LFO 1/3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1 LFO 1/8", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/2 LFO 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/2 LFO 1/2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Dl. 1/2 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Dl. 1/2 LFO 1/8", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
- {"Dl. 1 LFO 1/3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/4 LFO 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/4 LFO 1/2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/4 LFO 1/4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Dl. 1/4 LFO 1/8", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
