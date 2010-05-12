@@ -6340,7 +6340,7 @@ Fl_Menu_Item RKRGUI::menu_T_SET[] = {
 };
 
 void RKRGUI::cb_T_Apply_i(Fl_Button*, void*) {
-  if(rkr->Tap_TempoSet>0)
+  if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
 {
 rkr->Update_tempo();
 UpdateTGUI();

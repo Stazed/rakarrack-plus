@@ -825,16 +825,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1502 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6670,7 +6672,7 @@ TUNER_LABEL->redraw_label();}
           xywh {588 57 76 22} labelfont 1 labelcolor 7 align 16
         }
         Fl_Box WNfreq {
-          user_data 7 selected
+          user_data 7
           xywh {714 57 76 22} labelfont 1 labelcolor 7 align 16
         }
         Fl_Box PINCHO {
@@ -7026,11 +7028,11 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Button T_Apply {
           label Apply
-          callback {if(rkr->Tap_TempoSet>0)
+          callback {if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
 {
 rkr->Update_tempo();
 UpdateTGUI();
-}}
+}} selected
           xywh {628 172 38 15} shortcut 0x67 labelsize 10
         }
         Fl_Button T_BUT {
