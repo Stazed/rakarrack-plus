@@ -51,6 +51,8 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   data = (float *) malloc (sizeof (float) * 2000);
   tdata = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
+  imax = SAMPLE_RATE/2;  // 1/2 second available
+  imdelay = (float *) malloc (sizeof (float) * imtemp);
   offset = 0;
   data_length=0;
   fstretch = 1.0f;
@@ -91,40 +93,20 @@ lpfr->cleanup ();
 void
 Reverbtron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex;
+  int i, j, xindex, imindex;
 //  int fbindex;
 //  int interval = length/2;
 //  int fbctr = 5;
   float l,lyn;
   float tmp,avg,ldiff,rdiff;
   int length = Plength;
+  int imtmp;
 
-  lpfl->filterout(efxoutl);
-  lpfr->filterout(efxoutr);
-  hpfl->filterout(efxoutl);
-  hpfr->filterout(efxoutr);
-   
+ 
 
 
   for (i = 0; i < PERIOD; i++)
     {
-       if(Pes) // just so I have the code to get started
-       {
-//           efxoutl[i] *= cosf(lrcross);
-//           efxoutr[i] *= sinf(lrcross);
-           
-       	  avg = (efxoutl[i] + efxoutr[i]) * 0.5f;
- 	  ldiff = efxoutl[i] - avg;
- 	  rdiff = efxoutr[i] - avg;
-
- 	  tmp = avg + ldiff * level;
- 	  efxoutl[i] = 0.5 * tmp;
-
- 	  tmp = avg + rdiff * level;
- 	  efxoutr[i] = 0.5f * tmp;
-
-
-       }  
 
 
       if(!Prv) l = smpsl[i]+smpsr[i]+feedback; else
@@ -143,14 +125,34 @@ Reverbtron::out (float * smpsl, float * smpsr)
       lyn += data[j] * lxn[xindex];		//this is all of the magic
          
       }
-
+      
       feedback = fb * lyn;
       efxoutl[i] = lyn * level * lpanning;
       efxoutr[i] = lyn * level * rpanning;  
 
+       if(Pes) // just so I have the code to get started
+       {
+
+ 	  ldiff = lyn;
+ 	  rdiff = imdelay[imctr];
+	  
+          ldiff = lpfl->filterout_s(ldiff);
+          rdiff = lpfr->filterout_s(rdiff);
+          imdelay[imctr] = decay*ldiff;	  
+	  imtmp = imctr + 1;
+	  if(imtmp > roomsize) imtmp = 0;
+	  imdelay[imtmp] = decay * ldiff;
+	        imctr--;
+      if (imctr<0) imctr = roomsize;
+
+       }  
+
+
+      
+
       offset--;
       if (offset<0) offset = maxx_size;     
-
+  
       
     };
 
@@ -273,9 +275,7 @@ else
 tmpstretch = 1.0f + 0.95f*fstretch;
 }
 
-//guess at room size
-roomsize = ftime[0];  //usually represents initial delay, but more accurately distance between excitation
-                      //(direct source) and microphone.  Need to do more elaborate processing to get this right.
+
 skip = 0.0f;
 index = 0;
 chunk = 10;
@@ -329,6 +329,10 @@ for(i=0;i<data_length;i++)
   //fade the head here
   }
   }
+  
+//guess at room size
+roomsize = time[0] + (time[1] - time[0])/2;  //to help stagger left/right reflection times
+if(roomsize>imax) roomsize = imax;
 
 };
 

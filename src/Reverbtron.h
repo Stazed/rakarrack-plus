@@ -79,15 +79,19 @@ private:
   int Prv;              //Shuffle
   int Plpf;
   int Phpf;
+
+  int imctr; 
+  int imax;
   int offset;
   int maxx_size;
   int data_length;
   int avgtime;
 
+
   int *time;
-  float fstretch, idelay, ffade, maxtime;
+  float fstretch, idelay, ffade, maxtime, decay;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn, *ftime, *tdata;
+  float *data, *lxn, *imdelay, *ftime, *tdata;
   float level,fb, feedback;
   float roomsize;
  
