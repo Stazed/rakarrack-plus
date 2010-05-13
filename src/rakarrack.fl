@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -837,7 +837,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {1502 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {875 23 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5227,8 +5227,8 @@ rkr->efx_Convol->setfile(100);}
         }
       }
       Fl_Group LOOPER {
-        user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 open selected
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button looper_activar {
           label On
@@ -5338,13 +5338,13 @@ update_looper();}
           label R1
           user_data 2
           callback {rkr->efx_Looper->changepar(11,(int)o->value())}
-          xywh {328 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+          xywh {328 362 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
         }
         Fl_Check_Button looper_r2 {
           label R2
           user_data 2
           callback {rkr->efx_Looper->changepar(12,(int)o->value())}
-          xywh {347 367 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+          xywh {347 362 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
         }
         Fl_Button looper_t1 {
           label 1
@@ -5366,6 +5366,12 @@ update_looper();}
           callback {rkr->efx_Looper->changepar(4,(int)o->value());
 update_looper();}
           xywh {375 377 57 14} labelsize 10
+        }
+        Fl_Check_Button looper_lnk {
+          label Lnk
+          user_data 2
+          callback {rkr->efx_Looper->changepar(13,(int)o->value())}
+          xywh {348 376 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
         }
       }
       Fl_Group RYANWAH {
@@ -5837,7 +5843,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
       }
       Fl_Group VOCODER {
         user_data 1
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button vo_activar {
           label On
@@ -6171,7 +6177,7 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
       }
       Fl_Group SHIFTER {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button shifter_activar {
           label On
@@ -6295,7 +6301,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
       }
       Fl_Group STOMPBOX {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button stomp_activar {
           label On
@@ -7050,7 +7056,7 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label {Dl. 1/4 LFO 1/8} selected
+            label {Dl. 1/4 LFO 1/8}
             xywh {0 0 36 21} labelsize 9
           }
         }

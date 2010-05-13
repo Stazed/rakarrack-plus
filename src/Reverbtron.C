@@ -248,12 +248,20 @@ fclose(fs);
 
 maxtime = 0.0f;
 maxdata = 0.0f;
+float averaget = 0.0f;
+float tempor = 0.0f;
 for(i=0;i<data_length;i++)
 {
   if(ftime[i] > maxtime) maxtime = ftime[i];
   if(tdata[i] > maxdata) maxdata = tdata[i];  //used to normalize so feedback is more predictable
+  if(i>0){
+   tempor = ftime[i] - ftime[i-1];
+   if(tempor>averaget) averaget = tempor;
+   }
 }
+//averaget/=(float) i - 1.0f;
 
+printf("Av Time: %f\n", averaget);
 cleanup();
 convert_time();
 return(1);

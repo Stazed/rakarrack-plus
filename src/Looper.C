@@ -137,13 +137,13 @@ Looper::out (float * smpsl, float * smpsr)
      
 	     if((Prec1) && (PT1))
 	     {
-	      ldelay[kl] += smpsl[i];
-	      rdelay[kl] += smpsr[i];
+	      ldelay[kl] += pregain1*smpsl[i];
+	      rdelay[kl] += pregain1*smpsr[i];
 	      }
 	     if((Prec2) && (PT2))
 	     {
-	      t2ldelay[kl2] += smpsl[i];
-	      t2rdelay[kl2] += smpsr[i];
+	      t2ldelay[kl2] += pregain2*smpsl[i];
+	      t2rdelay[kl2] += pregain2*smpsr[i];
 	      }      
       
       }
@@ -217,6 +217,8 @@ void Looper::setfade ()
 {
       fade1 = (float) Pfade1/64.0f;
       fade2 = (float) Pfade2/64.0f;
+      pregain1 = 1.0f/fade1;
+      pregain2 = 1.0f/fade2;      //this is so material being recorded mixes at the same level as what you hear
       fade1 *= track1gain;
       fade2 *= track2gain;
 };
@@ -281,11 +283,19 @@ Looper::changepar (int npar, int value)
         {
 	   dl = kl;
 	   first_time1 = 0;
+	   if(Plink)
+	   {
+	   dl2 = dl;
+	   }
 	}  
       if((first_time2) && (Prec1))
       {
            dl2 = kl2;
 	   first_time2 = 0;
+	   if(Plink)
+	   {
+	   dl = dl2;
+	   }
       }
       Precord = 0;
       Pplay = rplaystate;
@@ -350,6 +360,10 @@ Looper::changepar (int npar, int value)
      break;
      case 12:
      Prec2 = value;
+     break;
+     case 13:
+     Plink = value;
+     dl2 = dl;    
      break;
       
     };

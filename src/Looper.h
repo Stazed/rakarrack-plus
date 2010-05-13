@@ -70,6 +70,7 @@ private:
   int Pautoplay;
   int Prec1;
   int Prec2;
+  int Plink;
   int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
   
 
@@ -78,7 +79,7 @@ private:
   
   float oldl, oldr;		//pt. lpf
 
-  float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2;
+  float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2, pregain1, pregain2;
 };
 
 
