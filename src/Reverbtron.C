@@ -50,16 +50,17 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
   tdata = (float *) malloc (sizeof (float) * 2000);
-  lxn = (float *) malloc (sizeof (float) * maxx_size);  
+  lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));  
   imax = SAMPLE_RATE/2;  // 1/2 second available
-  imdelay = (float *) malloc (sizeof (float) * imtemp);
+  imdelay = (float *) malloc (sizeof (float) * imax);
   offset = 0;
   data_length=0;
   fstretch = 1.0f;
   idelay = 0.0f;
+  decay = expf(-1.0f/(0.2f*fSAMPLE_RATE));  //0.2 seconds
 
-  lpfl =  new AnalogFilter (2, 22000, 1, 0);;
-  lpfr =  new AnalogFilter (2, 22000, 1, 0);;
+  lpfl =  new AnalogFilter (0, 800, 1, 0);;
+  lpfr =  new AnalogFilter (0, 800, 1, 0);;
   hpfl =  new AnalogFilter (3, 20, 1, 0);			
   hpfr =  new AnalogFilter (3, 20, 1, 0);			
 
@@ -100,18 +101,18 @@ Reverbtron::out (float * smpsl, float * smpsr)
   float l,lyn;
   float tmp,avg,ldiff,rdiff;
   int length = Plength;
-  int imtmp;
-
- 
+  int doffset;
 
 
   for (i = 0; i < PERIOD; i++)
     {
 
-
-      if(!Prv) l = smpsl[i]+smpsr[i]+feedback; else
-      l = smpsl[i] - smpsr[i] +  feedback;
-      oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
+      l = 0.5f*(smpsr[i] + smpsl[i]); 
+      oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop      
+      if(Prv)
+      {
+       oldl = 0.5f*oldl - smpsl[i];     
+      }
       lxn[offset] = oldl;
       
       //Convolve 
@@ -121,14 +122,11 @@ Reverbtron::out (float * smpsl, float * smpsr)
       for (j =0; j<length; j++)
       {
       xindex = offset + time[j];
-      if(xindex>=maxx_size) xindex -= maxx_size;
+      if(xindex>maxx_size) xindex -= maxx_size;
       lyn += data[j] * lxn[xindex];		//this is all of the magic
          
       }
       
-      feedback = fb * lyn;
-      efxoutl[i] = lyn * level * lpanning;
-      efxoutr[i] = lyn * level * rpanning;  
 
        if(Pes) // just so I have the code to get started
        {
@@ -138,21 +136,34 @@ Reverbtron::out (float * smpsl, float * smpsr)
 	  
           ldiff = lpfl->filterout_s(ldiff);
           rdiff = lpfr->filterout_s(rdiff);
-          imdelay[imctr] = decay*ldiff;	  
-	  imtmp = imctr + 1;
-	  if(imtmp > roomsize) imtmp = 0;
-	  imdelay[imtmp] = decay * ldiff;
-	        imctr--;
+	  
+      imdelay[imctr] = decay*ldiff;	
+      imctr--;
       if (imctr<0) imctr = roomsize;
-
-       }  
-
-
       
+      efxoutl[i] = (lyn + ldiff )* level * lpanning;
+      efxoutr[i] = (lyn + rdiff ) * level * rpanning;  
+       
+      feedback = fb*rdiff*decay;          
+
+       }
+       else
+       {
+      feedback = fb * lyn;
+      efxoutl[i] = lyn * level * lpanning;
+      efxoutr[i] = lyn * level * rpanning;         
+       
+       }        
 
       offset--;
-      if (offset<0) offset = maxx_size;     
-  
+      if (offset<0) offset = maxx_size - 1;   
+      
+      doffset = (offset + roomsize);  
+      if (doffset>maxx_size) doffset -= maxx_size;
+
+      lxn[doffset] += feedback; 
+      
+      xindex = offset + roomsize;      
       
     };
 
@@ -178,8 +189,8 @@ void
 Reverbtron::setpanning (int value)
 {
   Ppanning = value;
-  lpanning = ((float)Ppanning) / 64.0f;
-  rpanning = 2.0f - lpanning;
+  rpanning = ((float)Ppanning) / 64.0f;
+  lpanning = 2.0f - rpanning;
   lpanning = 10.0f * powf(lpanning, 4);
   rpanning = 10.0f * powf(rpanning, 4);
   lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
@@ -236,9 +247,11 @@ sscanf(wbuf,"%f,%f\n",&ftime[i],&tdata[i]);
 fclose(fs);
 
 maxtime = 0.0f;
+maxdata = 0.0f;
 for(i=0;i<data_length;i++)
 {
   if(ftime[i] > maxtime) maxtime = ftime[i];
+  if(tdata[i] > maxdata) maxdata = tdata[i];  //used to normalize so feedback is more predictable
 }
 
 cleanup();
@@ -257,6 +270,7 @@ float skip = 0.0f;
 float incr = 0.0f;
 float findex;
 float tmpstretch = 1.0f;
+float normal = 0.9999f/maxdata;
 
 memset(data, 0, sizeof(float)*2000);
 memset(time, 0, sizeof(int)*2000);
@@ -296,7 +310,7 @@ for(i=0;i<data_length;i++)
        data[i] = 0.0f;
        }   
        time[index]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
-       data[index]=tdata[i];  
+       data[index]=normal*tdata[i];  
        index++;
       }
   }
@@ -310,7 +324,7 @@ for(i=0;i<data_length;i++)
 
     if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
     time[i]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
-    data[i]=tdata[i];  
+    data[i]=normal*tdata[i];  
  
 };
   Plength = i;
@@ -449,12 +463,14 @@ Reverbtron::changepar (int npar, int value)
       Pfb = value;
       if(Pfb<0)
       {
-      fb = (float) value/250.0f*.15f;  
+      fb = (float) value/64.0f * 0.3;  
       }
       else
       {
-      fb = (float) value/128.0f*.15f; 
-      }    
+      fb = (float) value/64.0f * 0.15; 
+      }  
+      
+        
       break;
     case 11:
       setpanning (value);
@@ -470,6 +486,7 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 15:
       sethpf (value);
+      diffusion = ((float) value)/44000.0f;
       break;
 
    };
