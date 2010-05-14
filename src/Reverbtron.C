@@ -502,8 +502,8 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 15:
       Pdiff=value;
-      diffusion = ((float) value)/127.0f;
-      diff_time = (int)(fSAMPLE_RATE *.25f * diffusion); 
+      diffusion = ((float) value)/256.0f;
+      diff_time = (int)(fSAMPLE_RATE * diffusion); 
       break;
 
    };
