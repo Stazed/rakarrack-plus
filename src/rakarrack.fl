@@ -836,8 +836,8 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {472 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} open selected
+      xywh {1481 64 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5256,7 +5256,7 @@ looper_t1->value(rkr->efx_Looper->getpar(7));
 looper_t2->value(rkr->efx_Looper->getpar(8));
 looper_r1->value(rkr->efx_Looper->getpar(11));
 looper_r2->value(rkr->efx_Looper->getpar(12));
-looper_lnk->value(rkr->efx_Looper->getpar(13));} selected
+looper_lnk->value(rkr->efx_Looper->getpar(13));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6431,7 +6431,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
       }
       Fl_Group REVERBTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button revtron_activar {
@@ -6554,29 +6554,29 @@ revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
           xywh {372 331 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
+        Fl_Value_Slider revtron_HPF {
+          label Diffusion
+          callback {rkr->efx_Reverbtron->changepar(15,(int)o->value());}
+          xywh {373 343 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 value 26000 textcolor 7
+          class SliderW
+        }
         Fl_Value_Slider revtron_LPF {
           label LPF
           callback {rkr->efx_Reverbtron->changepar(14,(int)o->value());}
-          xywh {372 343 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_HPF {
-          label HPF
-          callback {rkr->efx_Reverbtron->changepar(15,(int)o->value());}
-          xywh {373 354 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 26000 textcolor 7
+          xywh {372 355 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 20 textcolor 7
           class SliderW
         }
         Fl_Check_Button revtron_rv {
           label Sh
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(13,(int)o->value());}
-          xywh {322 359 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {322 361 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button revtron_es {
           label ES
           user_data 2
           callback {rkr->efx_Reverbtron->changepar(12,(int)o->value());}
-          xywh {322 372 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {322 374 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button revtron_safe {
           label Safe

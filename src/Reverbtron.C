@@ -50,6 +50,8 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
   tdata = (float *) malloc (sizeof (float) * 2000);
+  rndtime = (int *) malloc (sizeof (int) * 2000);
+  rnddata = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));  
   imax = SAMPLE_RATE/2;  // 1/2 second available
   imdelay = (float *) malloc (sizeof (float) * imax);
@@ -64,7 +66,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   hpfl =  new AnalogFilter (3, 20, 1, 0);			
   hpfr =  new AnalogFilter (3, 20, 1, 0);			
 
-  setpreset (Ppreset);
+   setpreset (Ppreset);
   cleanup ();
 };
 
@@ -94,15 +96,30 @@ lpfr->cleanup ();
 void
 Reverbtron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex, imindex;
+  int i, j, xindex;
 //  int fbindex;
 //  int interval = length/2;
 //  int fbctr = 5;
   float l,lyn;
-  float tmp,avg,ldiff,rdiff;
+  float ldiff,rdiff;
   int length = Plength;
   int doffset;
 
+  
+for(i=0; i<length;i++)
+{
+  if(Pdiff>0)
+  {
+  rnddata[i]= data[i]+data[i]*(-diffusion+(float)(diffusion*2.0*rand()/(RAND_MAX+1.0)));
+  rndtime[i]= time[i]+(-diff_time+(int)(diff_time*2*rand()/(RAND_MAX+1.0)));
+  if(rndtime[i]<0) rndtime[i]=0;
+  }
+  else
+  {
+  rnddata[i]= data[i];
+  rndtime[i]= time[i];
+  }
+}   
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -121,11 +138,13 @@ Reverbtron::out (float * smpsl, float * smpsr)
 
       for (j =0; j<length; j++)
       {
-      xindex = offset + time[j];
+      xindex = offset + rndtime[j];
       if(xindex>maxx_size) xindex -= maxx_size;
-      lyn += data[j] * lxn[xindex];		//this is all of the magic
-         
+      lyn += lxn[xindex] * rnddata[j];		//this is all of the magic
       }
+
+       
+
       
 
        if(Pes) // just so I have the code to get started
@@ -259,9 +278,7 @@ for(i=0;i<data_length;i++)
    if(tempor>averaget) averaget = tempor;
    }
 }
-//averaget/=(float) i - 1.0f;
 
-printf("Av Time: %f\n", averaget);
 cleanup();
 convert_time();
 return(1);
@@ -358,16 +375,6 @@ if(roomsize>imax) roomsize = imax;
 
 };
 
-
-void
-Reverbtron::sethpf (int value)
-{
-  Phpf = value;
-  float fr = (float)Phpf;
-  hpfl->setfreq (fr);
-  hpfr->setfreq (fr);
-    
-};
 
 void
 Reverbtron::setlpf (int value)
@@ -493,8 +500,9 @@ Reverbtron::changepar (int npar, int value)
       setlpf (value);
       break;
     case 15:
-      sethpf (value);
-      diffusion = ((float) value)/44000.0f;
+      Pdiff=value;
+      diffusion = ((float) value)/127.0f;
+      diff_time = (int)(fSAMPLE_RATE *.5f * diffusion); 
       break;
 
    };
@@ -551,7 +559,7 @@ Reverbtron::getpar (int npar)
       return(Plpf);
       break;  
     case 15:
-      return(Phpf);
+      return(Pdiff);
       break;  
 
 

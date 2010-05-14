@@ -2841,15 +2841,15 @@ private:
   void cb_revtron_fade_i(SliderW*, void*);
   static void cb_revtron_fade(SliderW*, void*);
 public:
-  SliderW *revtron_LPF;
-private:
-  void cb_revtron_LPF_i(SliderW*, void*);
-  static void cb_revtron_LPF(SliderW*, void*);
-public:
   SliderW *revtron_HPF;
 private:
   void cb_revtron_HPF_i(SliderW*, void*);
   static void cb_revtron_HPF(SliderW*, void*);
+public:
+  SliderW *revtron_LPF;
+private:
+  void cb_revtron_LPF_i(SliderW*, void*);
+  static void cb_revtron_LPF(SliderW*, void*);
 public:
   Fl_Check_Button *revtron_rv;
 private:

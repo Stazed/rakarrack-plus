@@ -54,7 +54,6 @@ private:
   void setvolume (int Pvolume);
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
-  void sethpf (int Phpf);
   void setlpf (int Plpf);
 
   void convert_time();
@@ -78,7 +77,7 @@ private:
   int Pes;		//0 or 1// Add stereo spatialization
   int Prv;              //Shuffle
   int Plpf;
-  int Phpf;
+  int Pdiff;
 
   int imctr; 
   int imax;
@@ -87,11 +86,11 @@ private:
   int data_length;
   int avgtime;
 
-
-  int *time;
+  int diff_time; 
+  int *time, *rndtime;
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn, *imdelay, *ftime, *tdata;
+  float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata;
   float level,fb, feedback;
   float roomsize;
  
