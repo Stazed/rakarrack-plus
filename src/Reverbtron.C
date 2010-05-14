@@ -110,9 +110,9 @@ for(i=0; i<length;i++)
 {
   if(Pdiff>0)
   {
-  rnddata[i]= data[i]+data[i]*(-diffusion+(float)(diffusion*2.0*rand()/(RAND_MAX+1.0)));
+  rnddata[i]= data[i]+data[i]*(-diffusion+(float)(diffusion*2.0f*rand()/(RAND_MAX+1.0)));
   if(data[i]>1.0) data[i]=1.0f;
-  rndtime[i]= time[i]+(-diff_time+(int)(diff_time*2*rand()/(RAND_MAX+1.0)));
+  rndtime[i]= time[i]+(-diff_time+(int)(diff_time*2.0f*rand()/(RAND_MAX+1.0)));
   if(rndtime[i]<0) rndtime[i]=0;
   }
   else
@@ -503,7 +503,7 @@ Reverbtron::changepar (int npar, int value)
     case 15:
       Pdiff=value;
       diffusion = ((float) value)/256.0f;
-      diff_time = (int)(fSAMPLE_RATE * diffusion); 
+      diff_time = (int)(48.0*diffusion); 
       break;
 
    };
