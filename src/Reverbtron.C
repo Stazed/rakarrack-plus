@@ -50,8 +50,6 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
   tdata = (float *) malloc (sizeof (float) * 2000);
-  rndtime = (int *) malloc (sizeof (int) * 2000);
-  rnddata = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));  
   imax = SAMPLE_RATE/2;  // 1/2 second available
   imdelay = (float *) malloc (sizeof (float) * imax);
@@ -106,21 +104,6 @@ Reverbtron::out (float * smpsl, float * smpsr)
   int doffset;
 
   
-for(i=0; i<length;i++)
-{
-  if(Pdiff>0)
-  {
-  rnddata[i]= data[i]+data[i]*(-diffusion+(float)(diffusion*2.0f*rand()/(RAND_MAX+1.0)));
-  if(data[i]>1.0) data[i]=1.0f;
-  rndtime[i]= time[i]+(-diff_time+(int)(diff_time*2.0f*rand()/(RAND_MAX+1.0)));
-  if(rndtime[i]<0) rndtime[i]=0;
-  }
-  else
-  {
-  rnddata[i]= data[i];
-  rndtime[i]= time[i];
-  }
-}   
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -139,9 +122,9 @@ for(i=0; i<length;i++)
 
       for (j =0; j<length; j++)
       {
-      xindex = offset + rndtime[j];
+      xindex = offset + time[j];
       if(xindex>maxx_size) xindex -= maxx_size;
-      lyn += lxn[xindex] * rnddata[j];		//this is all of the magic
+      lyn += lxn[xindex] * data[j];		//this is all of the magic
       }
 
        
@@ -502,8 +485,7 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 15:
       Pdiff=value;
-      diffusion = ((float) value)/256.0f;
-      diff_time = (int)(48.0*diffusion); 
+      diffusion = ((float) value)/127.0f;
       break;
 
    };
