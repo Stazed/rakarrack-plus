@@ -93,7 +93,7 @@ private:
   float level,fb, feedback;
   float roomsize;
  
-  class AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;	//filters
+  class AnalogFilter *lpfl, *lpfr;	//filters
 
 
 };

@@ -61,8 +61,6 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
-  hpfl =  new AnalogFilter (3, 20, 1, 0);			
-  hpfr =  new AnalogFilter (3, 20, 1, 0);			
 
    setpreset (Ppreset);
   cleanup ();
@@ -81,8 +79,6 @@ Reverbtron::cleanup ()
 memset(lxn,0,sizeof(float)*maxx_size);
 feedback = 0.0f;
 oldl = 0.0f;
-hpfl->cleanup ();
-hpfr->cleanup ();
 lpfl->cleanup ();
 lpfr->cleanup ();
 
