@@ -48,10 +48,11 @@ MusicDelay::MusicDelay (float * efxoutl_, float * efxoutr_)
   Ptempo = 100;
   Phidamp = 60;
 
-  ldelay1 = NULL;
-  rdelay1 = NULL;
-  ldelay2 = NULL;
-  rdelay2 = NULL;
+  maxx_delay = SAMPLE_RATE * MAX_DELAY;
+  ldelay1 = new float[maxx_delay];
+  rdelay1 = new float[maxx_delay];
+  ldelay2 = new float[maxx_delay];
+  rdelay2 = new float[maxx_delay];
 
 
   lrdelay = 0;
@@ -93,6 +94,7 @@ MusicDelay::cleanup ()
 void
 MusicDelay::initdelays ()
 {
+  int i;
   kl1 = 0;
   kr1 = 0;
   dl1 = delay1;
@@ -110,19 +112,15 @@ MusicDelay::initdelays ()
   if (dr2 < 1)
     dr2 = 1;
 
+  for (i = dl1; i < maxx_delay; i++)
+    ldelay1[i] = 0.0;
+  for (i = dl2; i < maxx_delay; i++)
+    ldelay2[i] = 0.0;
 
-  if (ldelay1 != NULL)
-    delete[]ldelay1;
-  if (rdelay1 != NULL)
-    delete[]rdelay1;
-  ldelay1 = new float[dl1];
-  rdelay1 = new float[dr1];
-  if (ldelay2 != NULL)
-    delete[]ldelay2;
-  if (rdelay2 != NULL)
-    delete[]rdelay2;
-  ldelay2 = new float[dl2];
-  rdelay2 = new float[dr2];
+  for (i = dr1; i < maxx_delay; i++)
+    rdelay1[i] = 0.0;
+  for (i = dr2; i < maxx_delay; i++)
+    rdelay2[i] = 0.0;
 
 
 
