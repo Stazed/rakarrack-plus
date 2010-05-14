@@ -225,12 +225,12 @@ void Looper::setfade ()
 void
 Looper::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 13;
+  const int PRESET_SIZE = 14;
   const int NUM_PRESETS = 2;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Looper 2 seconds
-    {64, 0, 1, 0, 1, 0, 64, 1, 0, 1, 64, 1, 0},
-    {64, 0, 1, 0, 1, 1, 64, 1, 0, 1, 64, 1, 0} 
+    {64, 0, 1, 0, 1, 0, 64, 1, 0, 1, 64, 1, 0, 0},
+    {64, 0, 1, 0, 1, 1, 64, 1, 0, 1, 64, 1, 0, 0} 
   };
 
 
@@ -414,6 +414,9 @@ Looper::getpar (int npar)
     case 12:
       return (Prec2);
       break;
+    case 13:
+      return(Plink);
+      break;  
     };
   return (0);			//in case of bogus parameter number
 };
@@ -481,7 +484,12 @@ Looper::loadpreset (int npar, int value)
      case 12:
      Prec2 = value;
      break;
+     case 13:
+     Plink = value;
+     break;
       
+
+
     };
 
       Pclear = 1;    //Clear everything and erase the loop

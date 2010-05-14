@@ -409,14 +409,14 @@ RKR::savefile (char *filename)
 
 	case 30:
 	  //Looper
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Looper->getpar (0), efx_Looper->getpar (1),
 		   efx_Looper->getpar (2), efx_Looper->getpar (3),
 		   efx_Looper->getpar (4), efx_Looper->getpar (5),
 		   efx_Looper->getpar (6), efx_Looper->getpar (7),
 		   efx_Looper->getpar (8), efx_Looper->getpar (9),
-                   efx_Looper->getpar (10),  efx_Looper->getpar (11),
-                   efx_Looper->getpar (12),Looper_Bypass);
+                   efx_Looper->getpar (10), efx_Looper->getpar (11),
+                   efx_Looper->getpar (12), efx_Looper->getpar (13),Looper_Bypass);
 	  break;
  
 	case 31:
@@ -901,10 +901,10 @@ RKR::loadfile (char *filename)
 
 	case 30:
 	  //Looper
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[31][0], &lv[31][1], &lv[31][2], &lv[31][3], &lv[31][4],
 		  &lv[31][5], &lv[31][6], &lv[31][7], &lv[31][8], &lv[31][9],
-		  &lv[31][10],&lv[31][11],&lv[31][12],&Looper_B);
+		  &lv[31][10],&lv[31][11],&lv[31][12],&lv[31][13],&Looper_B);
 	  break;
 
 	case 31:
@@ -1125,7 +1125,7 @@ RKR::Actualizar_Audio ()
     efx_MBVvol->changepar (i, lv[29][i]);
  for (i = 0; i <= 10; i++)
     efx_Convol->changepar (i, lv[30][i]);
- for (i = 0; i <= 12; i++)
+ for (i = 0; i <= 13; i++)
     efx_Looper->loadpreset(i, lv[31][i]);
  for (i = 0; i <= 16; i++)
     efx_RyanWah->changepar (i, lv[32][i]);
@@ -1781,7 +1781,7 @@ RKR::Preset_to_Bank (int i)
     lv[29][j] = efx_MBVvol->getpar(j);
   for (j = 0; j <= 10; j++)
     lv[30][j] = efx_Convol->getpar(j);
-  for (j = 0; j <= 12; j++)
+  for (j = 0; j <= 13; j++)
     lv[31][j] = efx_Looper->getpar(j);
   for (j = 0; j <= 16; j++)
     lv[32][j] = efx_RyanWah->getpar(j);

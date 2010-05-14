@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -837,7 +837,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {875 23 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {472 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -5227,8 +5227,8 @@ rkr->efx_Convol->setfile(100);}
         }
       }
       Fl_Group LOOPER {
-        user_data 1 open selected
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button looper_activar {
           label On
@@ -5255,7 +5255,8 @@ looper_level2->value(rkr->efx_Looper->getpar(10));
 looper_t1->value(rkr->efx_Looper->getpar(7));
 looper_t2->value(rkr->efx_Looper->getpar(8));
 looper_r1->value(rkr->efx_Looper->getpar(11));
-looper_r2->value(rkr->efx_Looper->getpar(12));}
+looper_r2->value(rkr->efx_Looper->getpar(12));
+looper_lnk->value(rkr->efx_Looper->getpar(13));} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5360,18 +5361,18 @@ update_looper();}
 update_looper();}
           xywh {454 351 18 22} type Toggle labelsize 10 align 16
         }
+        Fl_Check_Button looper_lnk {
+          label Lnk
+          user_data 2
+          callback {rkr->efx_Looper->changepar(13,(int)o->value())}
+          xywh {348 376 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+        }
         Fl_Button looper_clear {
           label Clear
           user_data 2
           callback {rkr->efx_Looper->changepar(4,(int)o->value());
 update_looper();}
           xywh {375 377 57 14} labelsize 10
-        }
-        Fl_Check_Button looper_lnk {
-          label Lnk
-          user_data 2
-          callback {rkr->efx_Looper->changepar(13,(int)o->value())}
-          xywh {348 376 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
         }
       }
       Fl_Group RYANWAH {
