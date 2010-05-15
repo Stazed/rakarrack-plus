@@ -72,7 +72,7 @@ private:
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *rbuf, *buf, *lxn;
   float level,fb, feedback;
-
+  float levpanl,levpanr;
 
   SNDFILE *infile;
   SF_INFO sfinfo;

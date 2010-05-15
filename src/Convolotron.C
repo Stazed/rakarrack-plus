@@ -81,7 +81,7 @@ Convolotron::out (float * smpsl, float * smpsr)
   for (i = 0; i < PERIOD; i++)
     {
 
-      l = smpsl[i] + smpsr[i] +  feedback;
+      l = smpsl[i] + smpsr[i] + feedback;
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
       lxn[offset] = oldl;
 
@@ -92,19 +92,15 @@ Convolotron::out (float * smpsl, float * smpsr)
 
       for (j =0; j<length; j++)
       {
-      xindex--;		//input signal scrolls backward with each iteration
-      if (xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
-
+      if (--xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.  
       lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
-         
       }
 
-      feedback = 0.15f * fb * lyn;
-      efxoutl[i] = lyn * 2.0f * level * lpanning;
-      efxoutr[i] = lyn * 2.0f * level * rpanning;  
+      feedback = fb * lyn;
+      efxoutl[i] = lyn * levpanl;
+      efxoutr[i] = lyn * levpanr;  
 
-      offset++;
-      if (offset>maxx_size) offset = 0;     
+      if (++offset>maxx_size) offset = 0;     
 
       
     };
@@ -133,6 +129,9 @@ Convolotron::setpanning (int Ppanning)
   this->Ppanning = Ppanning;
   lpanning = ((float)Ppanning + 0.5f) / 127.0f;
   rpanning = 1.0f - lpanning;
+  levpanl=lpanning*level*2.0f;
+  levpanr=rpanning*level*2.0f;
+
 };
 
 int
@@ -309,7 +308,9 @@ Convolotron::changepar (int npar, int value)
       break;
     case 7:
       Plevel = value;
-      level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);;
+      level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+      levpanl=lpanning*level*2.0f;
+      levpanr=rpanning*level*2.0f;
       break;
     case 4:
       Puser = value;
@@ -320,11 +321,11 @@ Convolotron::changepar (int npar, int value)
       Pfb = value;
       if(Pfb<0)
       {
-      fb = (float) .1f*value/250.0f;  
+      fb = (float) .1f*value/250.0f*.15f;  
       }
       else
       {
-      fb = (float) .1f*value/500.0f; 
+      fb = (float) .1f*value/500.0f*.15f; 
       }    
       break;
 
