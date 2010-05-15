@@ -140,8 +140,8 @@ Reverbtron::out (float * smpsl, float * smpsr)
       imctr--;
       if (imctr<0) imctr = roomsize;
       
-      efxoutl[i] = (lyn + ldiff )* level * lpanning;
-      efxoutr[i] = (lyn + rdiff ) * level * rpanning;  
+      efxoutl[i] = (lyn + ldiff )* levpanl;
+      efxoutr[i] = (lyn + rdiff ) * levpanr;  
        
       feedback = fb*rdiff*decay;          
 
@@ -149,8 +149,8 @@ Reverbtron::out (float * smpsl, float * smpsr)
        else
        {
       feedback = fb * lyn;
-      efxoutl[i] = lyn * level * lpanning;
-      efxoutr[i] = lyn * level * rpanning;         
+      efxoutl[i] = lyn * levpanl;
+      efxoutr[i] = lyn * levpanr;         
        
        }        
 
@@ -196,6 +196,8 @@ Reverbtron::setpanning (int value)
   rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
   lpanning *= 1.1f;
   rpanning *= 1.1f; 
+  levpanl=level*lpanning;
+  levpanr=level*rpanning;
 };
 
 int
@@ -383,21 +385,21 @@ Reverbtron::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Spring
-    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 20},
+    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 0},
     //Concrete Stair
-    {64, 0, 1, 500, 0, 0, 0, 40, 1, 0, 0, 64, 0, 0, 20000, 20},
+    {64, 0, 1, 500, 0, 0, 0, 40, 1, 0, 0, 64, 0, 0, 20000, 0},
     //Nice Hall
-    {64, 0, 1, 500, 0, 0, 60, 15, 2, 0, 0, 64, 0, 0, 20000, 20},
+    {64, 0, 1, 500, 0, 0, 60, 15, 2, 0, 0, 64, 0, 0, 20000, 0},
     //Hall
-    {64, 16, 1, 500, 0, 0, 0, 22, 3, -17, 0, 64, 0, 0, 20000, 20},
+    {64, 16, 1, 500, 0, 0, 0, 22, 3, -17, 0, 64, 0, 0, 20000, 0},
     //Room
-    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64, 0, 0, 20000, 20},
+    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64, 0, 0, 20000, 0},
     //Hall
-    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64, 0, 0, 20000, 20},
+    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64, 0, 0, 20000, 0},
     //Guitar
-    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64, 0, 0, 20000, 20},
+    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64, 0, 0, 20000, 0},
     //Studio
-    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64, 0, 0, 20000, 20}
+    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64, 0, 0, 20000, 0}
 
   };
 
@@ -445,6 +447,8 @@ Reverbtron::changepar (int npar, int value)
     case 7:
       Plevel = value;
       level =  2.0f * dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+      levpanl=level*lpanning;
+      levpanr=level*rpanning;
       break;
     case 8:
       if(!setfile(value)) error_num=2;

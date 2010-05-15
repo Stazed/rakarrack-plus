@@ -90,7 +90,7 @@ private:
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *data, *lxn, *imdelay, *ftime, *tdata;
-  float level,fb, feedback;
+  float level,fb, feedback,levpanl,levpanr;
   float roomsize;
  
   class AnalogFilter *lpfl, *lpfr;	//filters
