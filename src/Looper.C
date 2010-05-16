@@ -272,6 +272,27 @@ Looper::changepar (int npar, int value)
       break;
     case 2:	//stop and reset pointer to 0
       Pstop = 1;
+      if(Precord)
+      {
+      if((first_time1) && (Prec1))
+        {
+	   dl = kl;
+	   first_time1 = 0;
+	   if(Plink)
+	   {
+	   dl2 = dl;
+	   }
+	}  
+      if((first_time2) && (Prec1))
+      {
+           dl2 = kl2;
+	   first_time2 = 0;
+	   if(Plink)
+	   {
+	   dl = dl2;
+	   }
+      }
+      }
       Precord = 0;
       Pplay = 0;
       kl = 0;
