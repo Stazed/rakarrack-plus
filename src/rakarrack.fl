@@ -825,12 +825,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -6463,7 +6463,7 @@ revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
 revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
 
 revtron_es->value(rkr->efx_Reverbtron->getpar(12));
-revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
+revtron_rv->value(rkr->efx_Reverbtron->getpar(13));} open
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6497,6 +6497,10 @@ revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
           MenuItem {} {
             label Studio
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Cathedral selected
+            xywh {0 0 36 21} labelsize 9
           }
         }
         Fl_Value_Slider revtron_WD {
@@ -6643,6 +6647,10 @@ rkr->efx_Reverbtron->setfile(100);}
           MenuItem {} {
             label Twilight
             xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Santa Lucia}
+            xywh {0 0 36 21} labelsize 9
           }
         }
       }
@@ -7012,7 +7020,7 @@ TAP_LABEL->redraw_label();}
             xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
-            label {Dl. 1 LFO 1/2} selected
+            label {Dl. 1 LFO 1/2}
             xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
