@@ -184,7 +184,7 @@ for (i = 0; i<(PERIOD*sfinfo.channels); i+=step) {
      }
      else
      { 
-       if(time - index[x-1] <time_dif) data[x-1]+=tmp;
+       if(time - index[x-1] <time_dif) data[x-1]+=tmp*(1.0f -(time-index[x-1]));
        else
        if (((data[x-1]>0) && (tmp<0)) || ((data[x-1]<0) && (tmp>0)))
        {
