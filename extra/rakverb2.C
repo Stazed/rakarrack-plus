@@ -23,6 +23,10 @@ show_help ()
 	   "  -i ,     --input \t\t\t Input File\n");
   fprintf (stderr,
 	   "  -o ,     --output \t\t\t Output File\n");
+  fprintf (stderr,
+	   "  -l ,     --length \t\t\t Reflections\n");
+  fprintf (stderr,
+	   "  -t ,     --time \t\t\t Time Difference\n");
 	   
   fprintf (stderr, "\n");
 
@@ -43,6 +47,7 @@ main(int argc, char *argv[])
  int step=1;
  int readcount;
  int have_output=0;
+ int des_len=1500;
  FILE *fn;
  SNDFILE *infile = NULL;
  SF_INFO sfinfo;
@@ -55,13 +60,17 @@ main(int argc, char *argv[])
  float testzero, time, tmp, iSR, lastbuf;
  float compress;
  float incr;
+ float time_dif=0.0;
  int x = 0;
  int ok = 0;
+ int all_ok=0;
   fprintf (stderr,
    "\nrackverb2 convert Reverb IR wav files to the rakarrack file format.\nrackverb - Copyright (c) Josep Andreu - Ryan Billing \n\n");
 
 
   struct option opts[] = {
+    {"length", 1, NULL, 'l'},
+    {"time", 1, NULL, 't'},
     {"input", 1, NULL, 'i'},
     {"output", 1, NULL, 'o'},
     {"help", 0, NULL, 'h'},
@@ -70,7 +79,7 @@ main(int argc, char *argv[])
 
   while (1)
     {
-      opt = getopt_long (argc, argv, "i:o:h", opts, &option_index);
+      opt = getopt_long (argc, argv, "l:t:i:o:h", opts, &option_index);
       char *optarguments = optarg;
 
       if (opt == -1)
@@ -80,12 +89,18 @@ main(int argc, char *argv[])
 	case 'h':
 	  exitwithhelp = 1;
 	  break;
+        case 't':
+          if (optarguments != NULL) time_dif=atof(optarguments); else time_dif=0.0;
+          break;
+	case 'l':
+          if (optarguments != NULL) des_len=atoi(optarguments); else des_len=1500;
+          break;
        	case 'i':
         if (optarguments != NULL)
 	    {
 	    strcpy(Inputfile,optarguments); 
             if(!(infile = sf_open(Inputfile, SFM_READ, &sfinfo))) return(0);
-
+            all_ok=1;
             }
           break;  
         case 'o':
@@ -105,7 +120,7 @@ main(int argc, char *argv[])
       return (0);
     };
 
-  if (argc < 3)
+  if ((argc < 3) || (!all_ok))
 {
     fprintf (stderr, "Try 'rakverb2 --help' for usage options.\n");
     return(0);
@@ -171,7 +186,7 @@ for (i = 0; i<(PERIOD*sfinfo.channels); i+=step) {
      { 
        if (((data[x-1]>0) && (tmp<0)) || ((data[x-1]<0) && (tmp>0)))
       {
-       if (fabsf(tmp-data[x-1]) > incr)
+       if ((fabsf(tmp-data[x-1]) > incr) && (time - index[x-1] >time_dif))
         {
          data[x] = tmp;
          index[x] = time;
@@ -190,7 +205,7 @@ for (i = 0; i<(PERIOD*sfinfo.channels); i+=step) {
 }
 
 printf("%d ",x);
-if(x < 1500) ok=1; else x = 0;
+if(x < des_len) ok=1; else x = 0;
 incr +=0.0001f;
  
 

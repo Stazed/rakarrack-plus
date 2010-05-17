@@ -825,8 +825,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -836,7 +835,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
+Pexitprogram=1;}
       xywh {1481 64 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6431,7 +6430,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
         }
       }
       Fl_Group REVERBTRON {
-        user_data 1 open
+        user_data 1
         xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button revtron_activar {
@@ -7005,7 +7004,7 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SET {
           label Set
           user_data 12
-          callback {rkr->Tap_SetValue=(int)o->value();}
+          callback {rkr->Tap_SetValue=(int)o->value();} open
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7013,7 +7012,7 @@ TAP_LABEL->redraw_label();}
             xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
-            label {Dl. 1 LFO 1/2}
+            label {Dl. 1 LFO 1/2} selected
             xywh {10 10 36 21} labelsize 9
           }
           MenuItem {} {
@@ -7037,11 +7036,35 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
+            label {Dl. 1/2 LFO 1/3}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
             label {Dl. 1/2 LFO 1/4}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
             label {Dl. 1/2 LFO 1/8}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/3 LFO 1}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/3 LFO 1/2}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/3 LFO 1/3}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/3 LFO 1/4}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/3 LFO 1/8}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
@@ -7053,11 +7076,35 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
+            label {Dl. 1/4 LFO 1/3}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
             label {Dl. 1/4 LFO 1/4}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
             label {Dl. 1/4 LFO 1/8}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/8 LFO 1}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/8 LFO 1/2}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/8 LFO 1/3}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/8 LFO 1/4}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Dl. 1/8 LFO 1/8}
             xywh {0 0 36 21} labelsize 9
           }
         }

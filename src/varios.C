@@ -228,28 +228,77 @@ switch(Tap_SetValue)
           break;   
       case 7:
          Tap_TempoSetD=Tap_TempoSet/2;
-         Tap_TempoSetL=Tap_TempoSet/4;
+         Tap_TempoSetL=Tap_TempoSet/3;
           break;   
       case 8:
          Tap_TempoSetD=Tap_TempoSet/2;
+         Tap_TempoSetL=Tap_TempoSet/4;
+          break;   
+      case 9:
+         Tap_TempoSetD=Tap_TempoSet/2;
          Tap_TempoSetL=Tap_TempoSet/8;
          break;   
-      case 9:
+      case 10:
+         Tap_TempoSetD=Tap_TempoSet/3;
+         Tap_TempoSetL=Tap_TempoSet;
+          break;   
+      case 11:
+         Tap_TempoSetD=Tap_TempoSet/3;
+         Tap_TempoSetL=Tap_TempoSet/2;
+          break;   
+      case 12:
+         Tap_TempoSetD=Tap_TempoSet/3;
+         Tap_TempoSetL=Tap_TempoSet/3;
+          break;   
+      case 13:
+         Tap_TempoSetD=Tap_TempoSet/3;
+         Tap_TempoSetL=Tap_TempoSet/4;
+          break;   
+      case 14:
+         Tap_TempoSetD=Tap_TempoSet/3;
+         Tap_TempoSetL=Tap_TempoSet/8;
+         break;   
+      case 15:
          Tap_TempoSetD=Tap_TempoSet/4;
          Tap_TempoSetL=Tap_TempoSet;
           break;   
-      case 10:
+      case 16:
          Tap_TempoSetD=Tap_TempoSet/4;
          Tap_TempoSetL=Tap_TempoSet/2;
           break;   
-      case 11:
+      case 17:
+         Tap_TempoSetD=Tap_TempoSet/4;
+         Tap_TempoSetL=Tap_TempoSet/3;
+          break;   
+      case 18:
          Tap_TempoSetD=Tap_TempoSet/4;
          Tap_TempoSetL=Tap_TempoSet/4;
           break;   
-      case 12:
+      case 19:
          Tap_TempoSetD=Tap_TempoSet/4;
          Tap_TempoSetL=Tap_TempoSet/8;
          break;   
+      case 20:
+         Tap_TempoSetD=Tap_TempoSet/8;
+         Tap_TempoSetL=Tap_TempoSet;
+          break;   
+      case 21:
+         Tap_TempoSetD=Tap_TempoSet/8;
+         Tap_TempoSetL=Tap_TempoSet/2;
+          break;   
+      case 22:
+         Tap_TempoSetD=Tap_TempoSet/8;
+         Tap_TempoSetL=Tap_TempoSet/3;
+          break;   
+      case 23:
+         Tap_TempoSetD=Tap_TempoSet/8;
+         Tap_TempoSetL=Tap_TempoSet/4;
+          break;   
+      case 24:
+         Tap_TempoSetD=Tap_TempoSet/8;
+         Tap_TempoSetL=Tap_TempoSet/8;
+         break;   
+       
        
 
 
