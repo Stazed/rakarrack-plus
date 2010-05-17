@@ -6045,7 +6045,7 @@ Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
  {"Guitar Ambience", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Twilight", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

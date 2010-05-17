@@ -830,12 +830,13 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1481 64 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6463,7 +6464,7 @@ revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
 revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
 
 revtron_es->value(rkr->efx_Reverbtron->getpar(12));
-revtron_rv->value(rkr->efx_Reverbtron->getpar(13));} open
+revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
           xywh {399 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6499,7 +6500,7 @@ revtron_rv->value(rkr->efx_Reverbtron->getpar(13));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Cathedral selected
+            label Cathedral
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -6649,8 +6650,8 @@ rkr->efx_Reverbtron->setfile(100);}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Santa Lucia}
-            xywh {0 0 36 21} labelsize 9
+            label {Santa Lucia} selected
+            xywh {0 0 36 21} labelsize 10
           }
         }
       }

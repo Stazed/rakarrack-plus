@@ -1201,12 +1201,15 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	    {
 	      if ((efx_Har->PMIDI) || (efx_Har->PSELECT))
 		{
-		  if (val_sum > -40.0f)
-		    RecNote->schmittFloat (efxoutl, efxoutr);
+         	    RecNote->schmittFloat (efxoutl, efxoutr);
 		  if ((reconota != -1) && (reconota != last))
 		    {
-		      RC->Vamos (efx_Har->Pinterval - 12);
-		      last = reconota;
+	                if(RecNote->afreq > 0.0) 
+                         {
+         
+		          RC->Vamos (efx_Har->Pinterval - 12);
+		          last = reconota;
+		          }
 		    }
 		}
 
