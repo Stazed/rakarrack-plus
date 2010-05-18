@@ -202,21 +202,22 @@ void
 Compressor::Compressor_Change_Preset (int npreset)
 {
 
-  const int PRESET_SIZE = 8;
-  const int NUM_PRESETS = 3;
+  const int PRESET_SIZE = 9;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //2:1
-    {-30, 2, -6, 20, 120, 1, 0, 0},
+    {-30, 2, -6, 20, 120, 1, 0, 0, 0},
     //4:1
-    {-26, 4, -8, 20, 120, 1, 10, 0},
+    {-26, 4, -8, 20, 120, 1, 10, 0, 0},
     //8:1
-    {-24, 8, -12, 20, 35, 1, 30, 0}
+    {-24, 8, -12, 20, 35, 1, 30, 0, 0},
+    //Final Limiter
+    {-1, 15, 0, 10, 50, 0 ,0 ,1 ,1}
+
   };
-	
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
-  for (int n = 0; n < PRESET_SIZE; n++)
-    Compressor_Change (n + 1, presets[npreset][n]);
+
+  for (int n = 1; n < PRESET_SIZE; n++)
+    Compressor_Change (n , presets[npreset][n-1]);
 
 
 }

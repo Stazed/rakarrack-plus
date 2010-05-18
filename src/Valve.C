@@ -333,9 +333,6 @@ Valve::setpreset (int npreset)
 
   };
 
-
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
   Ppreset = npreset;

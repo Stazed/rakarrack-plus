@@ -302,8 +302,6 @@ Synthfilter::setpreset (int npreset)
     //Phaser6
     {0, 20, 14, 0, 1, 64, 110, -40, 4, 4, 0, 32, 32, 500, 100, 0},
   };
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
   Ppreset = npreset;

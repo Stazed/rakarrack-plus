@@ -175,12 +175,12 @@ RKR::savefile (char *filename)
 
 	case 1:
 	  // Compressor
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Compressor->getpar (1), efx_Compressor->getpar (2),
 		   efx_Compressor->getpar (3), efx_Compressor->getpar (4),
 		   efx_Compressor->getpar (5), efx_Compressor->getpar (6),
 		   efx_Compressor->getpar (7), efx_Compressor->getpar (8),
-		   Compressor_Bypass);
+                   efx_Compressor->getpar (9), Compressor_Bypass);
 	  break;
 
 
@@ -733,9 +733,9 @@ RKR::loadfile (char *filename)
 
 	case 1:
 	  //Compressor
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[9][0], &lv[9][1], &lv[9][2], &lv[9][3], &lv[9][4],
-		  &lv[9][5], &lv[9][6], &lv[9][7], &Compressor_B);
+		  &lv[9][5], &lv[9][6], &lv[9][7], &lv[9][8], &lv[9][9],&Compressor_B);
 	  break;
 
 	case 10:
@@ -1084,7 +1084,7 @@ RKR::Actualizar_Audio ()
     efx_Overdrive->changepar (i, lv[5][i]);
   for (i = 0; i <= 12; i++)
     efx_Distorsion->changepar (i, lv[6][i]);
-  for (i = 0; i <= 7; i++)
+  for (i = 0; i <= 9; i++)
     efx_Compressor->Compressor_Change (i + 1, lv[9][i]);
   efx_WhaWha->setpreset (lv[11][10]);
   for (i = 0; i <= 9; i++)
@@ -1741,7 +1741,7 @@ RKR::Preset_to_Bank (int i)
     lv[5][j] = efx_Overdrive->getpar (j);
   for (j = 0; j <= 12; j++)
     lv[6][j] = efx_Distorsion->getpar (j);
-  for (j = 0; j <= 7; j++)
+  for (j = 0; j <= 8; j++)
     lv[9][j] = efx_Compressor->getpar (j + 1);
   for (j = 0; j <= 9; j++)
     lv[11][j] = efx_WhaWha->getpar (j);

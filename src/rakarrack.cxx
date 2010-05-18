@@ -1383,6 +1383,7 @@ compress_RTime->value(rkr->efx_Compressor->getpar(5));
 Auto_Output->value(rkr->efx_Compressor->getpar(6));
 compress_Knee->value(rkr->efx_Compressor->getpar(7));
 Stereo->value(rkr->efx_Compressor->getpar(8));
+Peak->value(rkr->efx_Compressor->getpar(9));
 }
 void RKRGUI::cb_compress_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_preset_i(o,v);

@@ -182,8 +182,6 @@ DynamicFilter::setpreset (int npreset)
     {64, 64, 50, 0, 0, 96, 64, 0, 0, 60}
   };
 
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
 

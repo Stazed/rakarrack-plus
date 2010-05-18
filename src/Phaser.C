@@ -221,8 +221,6 @@ Phaser::setpreset (int npreset)
     //Phaser6
     {64, 64, 31, 100, 0, 58, 37, 78, 3, 0, 0, 20}
   };
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
   Ppreset = npreset;

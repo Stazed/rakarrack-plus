@@ -181,8 +181,6 @@ Expander::Expander_Change_Preset (int npreset)
     {-30, 9, 950, 25, 6703, 526, 90}
   };
 
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     Expander_Change (n + 1, presets[npreset][n]);
 

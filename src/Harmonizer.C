@@ -215,8 +215,6 @@ Harmonizer::setpreset (int npreset)
     {64, 64, 64, 9, 6000, 0, 0, 0, 64, 64, 0}
   };
 
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
   Ppreset = npreset;

@@ -1499,7 +1499,8 @@ compress_ATime->value(rkr->efx_Compressor->getpar(4));
 compress_RTime->value(rkr->efx_Compressor->getpar(5));
 Auto_Output->value(rkr->efx_Compressor->getpar(6));
 compress_Knee->value(rkr->efx_Compressor->getpar(7));
-Stereo->value(rkr->efx_Compressor->getpar(8));}
+Stereo->value(rkr->efx_Compressor->getpar(8));
+Peak->value(rkr->efx_Compressor->getpar(9));} selected
           xywh {238 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6650,7 +6651,7 @@ rkr->efx_Reverbtron->setfile(100);}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Santa Lucia} selected
+            label {Santa Lucia}
             xywh {0 0 36 21} labelsize 10
           }
         }
