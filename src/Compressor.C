@@ -214,7 +214,7 @@ Compressor::Compressor_Change_Preset (int npreset)
     //Final Limiter
     {-1, 15, 0, 10, 50, 0 ,0 ,1 ,1},
     //HarmonicEnhancer
-    {-30, 2, -3, 10, 50, 0 ,0 ,1 ,1},
+    {-20, 15, -3, 10, 50, 0 ,0 ,1 ,1},
 
   };
 
