@@ -49,6 +49,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   time = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
+  rnddata = (float *) malloc (sizeof (float) * 2000);
   tdata = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));  
   imax = SAMPLE_RATE/2;  // 1/2 second available
@@ -98,8 +99,10 @@ Reverbtron::out (float * smpsl, float * smpsr)
   float ldiff,rdiff;
   int length = Plength;
   int doffset;
-
   
+  
+  for(i=0;i<length;i++) rnddata[i]=data[i]+data[i]*((-.25f+(float)(RND*.5f))*diffusion);
+
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -120,12 +123,9 @@ Reverbtron::out (float * smpsl, float * smpsr)
       {
       xindex = offset + time[j];
       if(xindex>maxx_size) xindex -= maxx_size;
-      lyn += lxn[xindex] * data[j];		//this is all of the magic
+      lyn += lxn[xindex] * rnddata[j];		//this is all of the magic
       }
 
-       
-
-      
 
        if(Pes) // just so I have the code to get started
        {

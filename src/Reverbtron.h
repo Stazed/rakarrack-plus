@@ -89,7 +89,7 @@ private:
   int *time;
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn, *imdelay, *ftime, *tdata;
+  float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata;
   float level,fb, feedback,levpanl,levpanr;
   float roomsize;
  
