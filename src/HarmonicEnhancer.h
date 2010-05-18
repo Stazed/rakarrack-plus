@@ -62,7 +62,8 @@ private:
   
   AnalogFilter *hpfl, *hpfr;
   AnalogFilter *lpfl, *lpfr;
-  
+
+  class Compressor *limiter;  
     
 };
 

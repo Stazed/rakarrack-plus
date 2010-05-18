@@ -203,7 +203,7 @@ Compressor::Compressor_Change_Preset (int npreset)
 {
 
   const int PRESET_SIZE = 9;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //2:1
     {-30, 2, -6, 20, 120, 1, 0, 0, 0},
@@ -212,7 +212,9 @@ Compressor::Compressor_Change_Preset (int npreset)
     //8:1
     {-24, 8, -12, 20, 35, 1, 30, 0, 0},
     //Final Limiter
-    {-1, 15, 0, 10, 50, 0 ,0 ,1 ,1}
+    {-1, 15, 0, 10, 50, 0 ,0 ,1 ,1},
+    //HarmonicEnhancer
+    {-30, 2, -3, 10, 50, 0 ,0 ,1 ,1},
 
   };
 

@@ -47,7 +47,9 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
   hpfr = new AnalogFilter(3, hfreq, 1, 0);
   lpfl = new AnalogFilter(2, lfreq, 1, 0);
   lpfr = new AnalogFilter(2, lfreq, 1, 0);
-
+ 
+  limiter = new Compressor (inputl, inputr);
+  limiter->Compressor_Change_Preset(4);
   calcula_mag(Rmag);
 }
 
@@ -63,7 +65,7 @@ HarmEnhancer::cleanup()
   hpfl->cleanup ();
   lpfr->cleanup ();
   hpfr->cleanup ();
-
+  limiter->cleanup();
 
 };
 
@@ -77,8 +79,7 @@ HarmEnhancer::set_vol(int mode, float gain)
   else
   vol = realvol + gain;
 
-  vol *=8.0f;
-
+  vol*=2.0f;
 }
 
 void  
@@ -210,11 +211,13 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
   hpfl->filterout(inputl);
   hpfr->filterout(inputr);
+  
+  limiter->out(inputl,inputr);
 
   for (i=0; i<PERIOD; i++)
     {
-      float xl = inputl[i]*.065f;
-      float xr = inputr[i]*.065f;
+      float xl = inputl[i];
+      float xr = inputr[i];
       float yl=0.0f;
       float yr=0.0f;
 
@@ -243,8 +246,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
     for (i=0; i<PERIOD; i++)
     {
-      smpsl[i] +=inputl[i]*vol;
-      smpsr[i] +=inputr[i]*vol;
+      smpsl[i] =(smpsl[i]+inputl[i]*vol)*.5f;
+      smpsr[i] =(smpsr[i]+inputr[i]*vol)*.5f;
     }
     
 }
