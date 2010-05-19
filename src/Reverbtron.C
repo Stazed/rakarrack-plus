@@ -102,6 +102,10 @@ Reverbtron::out (float * smpsl, float * smpsr)
   int doffset;
   float randlevel=0.05f;
   
+
+if(Pdiff>0)
+{
+
   if(length<400)randlevel = randlevel+.06f*(400.0f -(float)length)/380.0f;
   
   for(i=0;i<length;i++) 
@@ -109,23 +113,41 @@ Reverbtron::out (float * smpsl, float * smpsr)
   if(fabs(rnddata[i])<randlevel)
  {  
 
-  rnddata[i]=data[i]+data[i]*((-.2f+(float)(RND*.4f))*diffusion);
+  rnddata[i]=data[i]+data[i]*((-.4f+(float)(RND*.8f))*diffusion);
   if((data[i]>0.0) && (rnddata[i]<0.0)) rnddata[i]=data[i];
   if((data[i]<0.0) && (rnddata[i]>0.0)) rnddata[i]=data[i];
   if (rnddata[i]>1.0f) rnddata[i]=data[i];
   if (rnddata[i]<0.0f) rnddata[i]=data[i];
   
   
-  rndtime[i]=time[i]+lrintf((float)time[i]*((-.0005f+(float)(RND*.001f))*diffusion));
+  rndtime[i]=time[i]+lrintf((float)time[i]*((-.02f+(float)(RND*.04f))*diffusion));
   if(rndtime[i]<0)rndtime[i]=time[i];
   if(rndtime[i]>=maxx_size)rndtime[i]=maxx_size-1;
  }
-  else rndtime[i]=time[i]; 
-
+  else 
+  {
+  rnddata[i]=data[i];
+  rndtime[i]=time[i]; 
   }
+  }
+
+}
+
+else 
+{
+  for(i=0;i<length;i++) 
+  {
+  rnddata[i]=data[i];
+  rndtime[i]=time[i]; 
+  }
+}  
+
+
   
   for (i = 0; i < PERIOD; i++)
     {
+
+
 
       l = 0.5f*(smpsr[i] + smpsl[i]); 
       oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop      
