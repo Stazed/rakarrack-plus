@@ -45,6 +45,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   fb = 0.0f;
   feedback = 0.0f;
   maxtime = 0.0f;
+  hrtf_size = SAMPLE_RATE/2;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
   time = (int *) malloc (sizeof (int) * 2000);
   rndtime = (int *) malloc (sizeof (int) * 2000);
@@ -53,10 +54,13 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   rnddata = (float *) malloc (sizeof (float) * 2000);
   tdata = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));  
+  hrtf =  (float *) malloc (sizeof (float) * (1 + hrtf_size)); 
   imax = SAMPLE_RATE/2;  // 1/2 second available
   imdelay = (float *) malloc (sizeof (float) * imax);
   offset = 0;
+  hoffset = 0;
   data_length=0;
+  hlength = 0;
   fstretch = 1.0f;
   idelay = 0.0f;
   decay = expf(-1.0f/(0.2f*fSAMPLE_RATE));  //0.2 seconds
@@ -92,34 +96,16 @@ lpfr->cleanup ();
 void
 Reverbtron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex;
+  int i, j, xindex, hindex;
 //  int fbindex;
 //  int interval = length/2;
 //  int fbctr = 5;
-  float l,lyn;
+  float l,lyn, hyn;
   float ldiff,rdiff;
   int length = Plength;
+  hlength = Pdiff;
   int doffset;
   
-  for(i=0;i<length;i++) 
-  {
-  if(fabs(rnddata[i])<0.05f)
- {  
-
-  rnddata[i]=data[i]+data[i]*((-.2f+(float)(RND*.4f))*diffusion);
-  if((data[i]>0.0) && (rnddata[i]<0.0)) rnddata[i]=data[i];
-  if((data[i]<0.0) && (rnddata[i]>0.0)) rnddata[i]=data[i];
-  if (rnddata[i]>1.0f) rnddata[i]=data[i];
-  if (rnddata[i]<0.0f) rnddata[i]=data[i];
-  
-  
-  rndtime[i]=time[i]+lrintf((float)time[i]*((-.0005f+(float)(RND*.001f))*diffusion));
-  if(rndtime[i]<0)rndtime[i]=time[i];
-  if(rndtime[i]>=maxx_size)rndtime[i]=maxx_size-1;
- }
-  else rndtime[i]=time[i]; 
-
-  }
   
   for (i = 0; i < PERIOD; i++)
     {
@@ -139,12 +125,28 @@ Reverbtron::out (float * smpsl, float * smpsr)
 
       for (j =0; j<length; j++)
       {
-      xindex = offset + rndtime[j];
-      if(xindex>maxx_size) xindex -= maxx_size;
-      lyn += lxn[xindex] * rnddata[j];		//this is all of the magic
+      xindex = offset + time[j];
+      if(xindex>=maxx_size) xindex -= maxx_size;
+      lyn += lxn[xindex] * data[j];		//this is all of the magic
       }
 
-    
+      hrtf[hoffset] = lyn;
+      
+      if(Pdiff > 0)
+      {
+      //Convolve again with approximated hrtf
+      hyn = 0.0f;
+      hindex = hoffset;
+
+      for (j =0; j<hlength; j++)
+      {
+      hindex = hoffset + rndtime[j];
+      if(hindex>=hrtf_size) hindex -= hrtf_size;
+      hyn += hrtf[hindex] * rnddata[j];		//more magic
+      }   
+      lyn = hyn;
+      } 
+      
        if(Pes) // just so I have the code to get started
        {
 
@@ -173,11 +175,14 @@ Reverbtron::out (float * smpsl, float * smpsr)
        }        
 
       offset--;
-      if (offset<0) offset = maxx_size - 1;   
+      if (offset<0) offset = maxx_size;   
       
       doffset = (offset + roomsize);  
       if (doffset>maxx_size) doffset -= maxx_size;
-
+      
+      hoffset--;
+      if (hoffset<0) hoffset = hrtf_size; 
+      
       lxn[doffset] += feedback; 
       
       xindex = offset + roomsize;      
@@ -356,6 +361,19 @@ for(i=0;i<data_length;i++)
   Plength = i;
 }
 
+//generate an approximated randomized hrtf for diffusing reflections:
+      int tx = 0;
+      int tmptime = 0;
+      int hrtf_tmp = 127;
+      if(hrtf_tmp>data_length) hrtf_tmp = data_length -1;
+      if(hlength>data_length) hlength =  data_length -1;
+      for (i =0; i<hrtf_tmp; i++)
+      {
+      tx++;
+      tmptime = (int) RND * hrtf_size;
+      rndtime[i] = tmptime;  //randomly jumble the head of the transfer function      
+      rnddata[i] = 3.0f*(0.5f - RND)*data[tmptime];		
+      }  
 
  if(Pfade > 0)
  {
@@ -373,6 +391,8 @@ for(i=0;i<data_length;i++)
 //guess at room size
 roomsize = time[0] + (time[1] - time[0])/2;  //to help stagger left/right reflection times
 if(roomsize>imax) roomsize = imax;
+
+  
 
 };
 
@@ -502,6 +522,7 @@ Reverbtron::changepar (int npar, int value)
     case 15:
       Pdiff=value;
       diffusion = ((float) value)/127.0f;
+      convert_time();      
       break;
 
    };

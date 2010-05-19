@@ -82,14 +82,17 @@ private:
   int imctr; 
   int imax;
   int offset;
+  int hoffset;
   int maxx_size;
   int data_length;
   int avgtime;
+  int hrtf_size;
+  int hlength;
 
   int *time, *rndtime;
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata;
+  float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
   float level,fb, feedback,levpanl,levpanr;
   float roomsize;
  
