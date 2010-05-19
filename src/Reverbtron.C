@@ -100,10 +100,13 @@ Reverbtron::out (float * smpsl, float * smpsr)
   float ldiff,rdiff;
   int length = Plength;
   int doffset;
+  float randlevel=0.05f;
+  
+  if(length<400)randlevel = randlevel+.06f*(400.0f -(float)length)/380.0f;
   
   for(i=0;i<length;i++) 
   {
-  if(fabs(rnddata[i])<0.05f)
+  if(fabs(rnddata[i])<randlevel)
  {  
 
   rnddata[i]=data[i]+data[i]*((-.2f+(float)(RND*.4f))*diffusion);
