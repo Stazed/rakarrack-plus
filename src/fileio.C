@@ -1701,7 +1701,7 @@ RKR::Bank_to_Preset (int i)
       Fraction_Bypass = Bank[i].Balance;
     }
 
-  if(Tap_Updated) Update_tempo();
+  if((Tap_Updated) && (Tap_Bypass) && (Tap_TempoSet>0) && (Tap_TempoSet<601)) Update_tempo();
 
 };
 

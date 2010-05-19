@@ -114,7 +114,7 @@ Reverbtron::out (float * smpsl, float * smpsr)
        oldl = 0.5f*oldl - smpsl[i];     
       }
 
-//      lxn[offset] = oldl;
+      lxn[offset] = oldl;
       
       //Convolve 
       lyn = 0.0f;
@@ -127,7 +127,6 @@ Reverbtron::out (float * smpsl, float * smpsr)
       lyn += lxn[xindex] * rnddata[j];		//this is all of the magic
       }
 
-      lxn[offset]=oldl+lyn*diffusion*.05f;  // I Added that also !!!!!! 
     
        if(Pes) // just so I have the code to get started
        {
