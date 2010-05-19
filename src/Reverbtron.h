@@ -86,7 +86,7 @@ private:
   int data_length;
   int avgtime;
 
-  int *time;
+  int *time, *rndtime;
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata;

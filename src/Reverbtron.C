@@ -47,6 +47,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   maxtime = 0.0f;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
   time = (int *) malloc (sizeof (int) * 2000);
+  rndtime = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
   rnddata = (float *) malloc (sizeof (float) * 2000);
@@ -100,10 +101,26 @@ Reverbtron::out (float * smpsl, float * smpsr)
   int length = Plength;
   int doffset;
   
+  for(i=0;i<length;i++) 
+  {
+  if(fabs(rnddata[i])<0.05f)
+ {  
+
+  rnddata[i]=data[i]+data[i]*((-.2f+(float)(RND*.4f))*diffusion);
+  if((data[i]>0.0) && (rnddata[i]<0.0)) rnddata[i]=data[i];
+  if((data[i]<0.0) && (rnddata[i]>0.0)) rnddata[i]=data[i];
+  if (rnddata[i]>1.0f) rnddata[i]=data[i];
+  if (rnddata[i]<0.0f) rnddata[i]=data[i];
   
-  for(i=0;i<length;i++) rnddata[i]=data[i]+data[i]*((-.1f+(float)(RND*.2f))*diffusion);
+  
+  rndtime[i]=time[i]+lrintf((float)time[i]*((-.0005f+(float)(RND*.001f))*diffusion));
+  if(rndtime[i]<0)rndtime[i]=time[i];
+  if(rndtime[i]>=maxx_size)rndtime[i]=maxx_size-1;
+ }
+  else rndtime[i]=time[i]; 
 
-
+  }
+  
   for (i = 0; i < PERIOD; i++)
     {
 
@@ -122,7 +139,7 @@ Reverbtron::out (float * smpsl, float * smpsr)
 
       for (j =0; j<length; j++)
       {
-      xindex = offset + time[j];
+      xindex = offset + rndtime[j];
       if(xindex>maxx_size) xindex -= maxx_size;
       lyn += lxn[xindex] * rnddata[j];		//this is all of the magic
       }
@@ -220,6 +237,7 @@ sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
 
 if ((fs = fopen (Filename, "r")) == NULL) return(0);
 
+cleanup();
 memset(tdata, 0, sizeof(float)*2000);
 memset(ftime, 0, sizeof(float)*2000);
 
@@ -460,7 +478,7 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 10:
       Pfb = value;
-      if(Pfb<0)
+      if(Pfb<=0)
       {
       fb = (float) value/64.0f * 0.3;  
       }
@@ -468,8 +486,6 @@ Reverbtron::changepar (int npar, int value)
       {
       fb = (float) value/64.0f * 0.15; 
       }  
-      
-        
       break;
     case 11:
       setpanning (value);
