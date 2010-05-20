@@ -1059,7 +1059,7 @@ RKR::Control_Volume (float *origl,float *origr)
   float tmp;
   float Temp_M_Volume = 0.0f;
   
-  if (have_signal) efx_FLimiter->out(efxoutl, efxoutr); 
+  //if (have_signal) efx_FLimiter->out(efxoutl, efxoutr); 
 
 
    memcpy(anall, efxoutl, sizeof(float)* PERIOD);
@@ -1079,7 +1079,7 @@ RKR::Control_Volume (float *origl,float *origr)
 
      else Temp_M_Volume = Log_M_Volume;
 
-  for (i = 0; i <= PERIOD; i++)
+  for (i = 0; i <= PERIOD; i++)  //control volume
     {
       
       efxoutl[i] *= Temp_M_Volume;
@@ -1097,11 +1097,19 @@ RKR::Control_Volume (float *origl,float *origr)
       tmp = fabsf (efxoutr[i]);
       if (tmp > ir_sum) ir_sum = tmp;
 
-
-
     }
 
-     
+  if (have_signal) efx_FLimiter->out(efxoutl, efxoutr);  //then limit final output
+  
+  for (i = 0; i <= PERIOD; i++)
+    {
+      
+      tmp = fabsf (efxoutl[i]);
+      if (tmp > il_sum) il_sum = tmp;
+      tmp = fabsf (efxoutr[i]);
+      if (tmp > ir_sum) ir_sum = tmp;
+    }
+       
   temp_sum = (float) CLAMP(rap2dB (il_sum), -48, 15);
   val_vl_sum = .6f * old_vl_sum + .4f * temp_sum;
   temp_sum = (float) CLAMP(rap2dB (ir_sum), -48, 15);
