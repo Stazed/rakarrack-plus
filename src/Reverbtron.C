@@ -97,9 +97,6 @@ void
 Reverbtron::out (float * smpsl, float * smpsr)
 {
   int i, j, xindex, hindex;
-//  int fbindex;
-//  int interval = length/2;
-//  int fbctr = 5;
   float l,lyn, hyn;
   float ldiff,rdiff;
   int length = Plength;

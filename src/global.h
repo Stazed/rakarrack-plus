@@ -199,7 +199,7 @@ public:
   void New_Bank ();
   void Adjust_Upsample();
   void init_rkr ();
-  int Message (const char *labelwin, const char *message_text);
+  int Message (int prio, const char *labelwin, const char *message_text);
   char *PrefNom (const char *dato);
   void EQ1_setpreset (int npreset);
   void EQ2_setpreset (int npreset);

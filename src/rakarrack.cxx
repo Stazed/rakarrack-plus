@@ -867,7 +867,7 @@ filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
 rkr->ConvertReverbFile(filename);
-rkr->Message(name, "Please, now use Reverbtron to load the new '.rvb' file");
+rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");
 }
 void RKRGUI::cb_ConvertReverb(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ConvertReverb_i(o,v);
@@ -6451,10 +6451,10 @@ filename=fl_filename_setext(filename,".rkrb");
 if(rkr->CheckOldBank(filename))
 {
 rkr->ConvertOldFile(filename);
-rkr->Message(name, "Please, now try to load the new files");
+rkr->Message(1,name, "Please, now try to load the new files");
 }
 else
-rkr->Message(name, "This file has already the new format");
+rkr->Message(1, name, "This file has already the new format");
 }
 void RKRGUI::cb_Convert_Old_Bank(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Convert_Old_Bank_i(o,v);
