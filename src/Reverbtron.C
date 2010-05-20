@@ -362,23 +362,25 @@ for(i=0;i<data_length;i++)
 }
 
 //generate an approximated randomized hrtf for diffusing reflections:
-//      int tx = 0;
+
       int tmptime = 0;
       int hrtf_tmp = 127;
       float rndmax = 0.0f;
+      float tmpfreq = 3.0/hrtf_size;
       if(hrtf_tmp>data_length) hrtf_tmp = data_length -1;
       if(hlength>data_length) hlength =  data_length -1;
       for (i =0; i<hrtf_tmp; i++)
       {
       tmptime = lrintf(RND * hrtf_size);
       rndtime[i] = tmptime;  //randomly jumble the head of the transfer function      
-      rnddata[i] = (1.0f + 0.25*(0.5f - RND))*data[tmptime];	
-      if (rnddata[i] > rndmax) rndmax = rnddata[i];	
+      rnddata[i] = (1.0f  - 0.25f * RND)*data[tmptime];	//(1.0f - cos(D_PI*tmptime*tmpfreq)) * (1.0f + (0.1 + diffusion)*(0.5f - RND));//
+      if(rnddata[i]>rndmax) rndmax= rnddata[i];	
       }  
-      
+
+      rndmax = 1.0f/rndmax;
       for (i =0; i<hrtf_tmp; i++)
       {
-      rnddata[i] /= rndmax;	//normalize
+      rnddata[i] *= (1.0f - 0.75*diffusion)*rndmax;	//normalize 
       }       
 
  if(Pfade > 0)
