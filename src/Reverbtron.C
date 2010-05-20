@@ -141,7 +141,7 @@ Reverbtron::out (float * smpsl, float * smpsr)
       if(hindex>=hrtf_size) hindex -= hrtf_size;
       hyn += hrtf[hindex] * rnddata[j];		//more magic
       }   
-      lyn += hyn;
+      lyn = hyn + (1.0f - diffusion)*lyn;
       } 
       
        if(Pes) // just so I have the code to get started
