@@ -370,7 +370,7 @@ for(i=0;i<data_length;i++)
       if(hlength>data_length) hlength =  data_length -1;
       for (i =0; i<hrtf_tmp; i++)
       {
-      tmptime = (int) (RND * hrtf_size);
+      tmptime = lrintf(RND * hrtf_size);
       rndtime[i] = tmptime;  //randomly jumble the head of the transfer function      
       rnddata[i] = (1.0f + 0.25*(0.5f - RND))*data[tmptime];	
       if (rnddata[i] > rndmax) rndmax = rnddata[i];	
