@@ -263,7 +263,7 @@ jackshutdown (void *arg)
   if (gui == 0)
     printf ("Jack Shut Down, sorry.\n");
   else
-    JackOUT->Message (JackOUT->jackcliname,
+    JackOUT->Message (1,JackOUT->jackcliname,
 		      "Jack Shut Down, try to save your work");
 };
 

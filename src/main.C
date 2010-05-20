@@ -100,7 +100,7 @@ main (int argc, char *argv[])
     {
       show_help ();
       if (gui)
-	rkr.Message ("rakarrack error",
+	rkr.Message (1,"rakarrack error",
 		     "Cannot make a jack client, is jackd running?");
       return (0);
     }

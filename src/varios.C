@@ -29,9 +29,9 @@
 #include "global.h"
 
 int
-RKR::Message (const char *labelwin, const char *message_text)
+RKR::Message (int prio, const char *labelwin, const char *message_text)
 {
-  if(mess_dis)return(0);
+  if((mess_dis) && (prio==0)) return(0);
 
   Fl_Widget *w = fl_message_icon ();
 
@@ -66,9 +66,13 @@ RKR::Error_Handle(int num)
     case 2:
      sprintf(error_msg,"%s","Reverbtron is unable to open the IR .rvb file");
      break;
+     case 3:
+     sprintf(error_msg,"%s","Error writing the file probably you dont have permission to write in this directory");
+     break;
+
   }
   
-  Message(meslabel,error_msg);
+  Message(1, meslabel,error_msg);
 
 }
 
@@ -122,7 +126,7 @@ FILE *fp;
          if(maxx_len < 5 ) 
          {
          if(maxx_len < 2 ) maxx_len = 2;
-         Message("!! Rakarrack CPU Usage Warning !!","It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
+         Message(0,"!! Rakarrack CPU Usage Warning !!","It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
          }
        
               

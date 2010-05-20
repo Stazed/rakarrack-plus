@@ -830,13 +830,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1481 64 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -846,7 +845,7 @@ Pexitprogram=1;} open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File}
+          label {&File} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -916,7 +915,7 @@ filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
 rkr->ConvertReverbFile(filename);
-rkr->Message(name, "Please, now use Reverbtron to load the new '.rvb' file");}
+rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
             xywh {0 0 36 21} divider
           }
           MenuItem salir {
@@ -1500,7 +1499,7 @@ compress_RTime->value(rkr->efx_Compressor->getpar(5));
 Auto_Output->value(rkr->efx_Compressor->getpar(6));
 compress_Knee->value(rkr->efx_Compressor->getpar(7));
 Stereo->value(rkr->efx_Compressor->getpar(8));
-Peak->value(rkr->efx_Compressor->getpar(9));} selected
+Peak->value(rkr->efx_Compressor->getpar(9));}
           xywh {238 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7162,7 +7161,7 @@ save_stat(1);}
         xywh {0 0 800 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
-          label {&File} open
+          label {&File}
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem NewB {
@@ -7208,10 +7207,10 @@ filename=fl_filename_setext(filename,".rkrb");
 if(rkr->CheckOldBank(filename))
 {
 rkr->ConvertOldFile(filename);
-rkr->Message(name, "Please, now try to load the new files");
+rkr->Message(1,name, "Please, now try to load the new files");
 }
 else
-rkr->Message(name, "This file has already the new format");}
+rkr->Message(1, name, "This file has already the new format");} selected
             xywh {0 0 36 21} divider
           }
           MenuItem salirB {

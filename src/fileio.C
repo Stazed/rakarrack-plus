@@ -20,8 +20,8 @@
 
 */
 
+#include <errno.h>
 #include "global.h"
-
 
 void
 RKR::savefile (char *filename)
@@ -31,7 +31,11 @@ RKR::savefile (char *filename)
   FILE *fn;
   char buf[256];
   fn = fopen (filename, "w");
-
+  if(errno>0)
+  {
+   Error_Handle(3);
+   return;  
+  }
   bzero (buf, sizeof (buf));
   sprintf (buf, "%s\n", VERSION);
   fputs (buf, fn);
@@ -1244,11 +1248,11 @@ RKR::loadbank (char *filename)
   case 0:
   break;
   case 1: 
-  Message(meslabel, "Can not load this Bank file because is from a old rakarrack version,\n please use 'Convert Old Bank' menu entry in the Bank window.");
+  Message(1, meslabel, "Can not load this Bank file because is from a old rakarrack version,\n please use 'Convert Old Bank' menu entry in the Bank window.");
   return(0);
   break;
   case 2:
-  Message(meslabel, "Can not load this Bank file\n");
+  Message(1, meslabel, "Can not load this Bank file\n");
   return(0);
   break;  
   }
@@ -1285,6 +1289,8 @@ RKR::savebank (char *filename)
       fclose (fn);
       return(1);     
   }
+
+ if(errno>0) Error_Handle(3);
  return (0);
 };
 
@@ -1998,6 +2004,11 @@ RKR::saveskin (char *filename)
   FILE *fn;
   char buf[256];
        fn = fopen (filename, "w");
+       if(errno>0)
+       {
+         Error_Handle(3);
+         return;  
+       }
         
        bzero (buf, sizeof (buf));
        sprintf (buf, "%d,%d\n", resolution,sh);
