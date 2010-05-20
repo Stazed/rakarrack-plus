@@ -44,7 +44,7 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality)
   scount = 0;
   tcount = 0;
   rndflag = 0;
-  subdiv = 4;
+  subdiv = 2;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
   modfilterl = new RBFilter (0, 25.0f, 0.15f, 2);
