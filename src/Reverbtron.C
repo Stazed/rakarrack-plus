@@ -45,7 +45,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   fb = 0.0f;
   feedback = 0.0f;
   maxtime = 0.0f;
-  hrtf_size = SAMPLE_RATE/2;
+  hrtf_size = SAMPLE_RATE/30;
   maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
   time = (int *) malloc (sizeof (int) * 2000);
   rndtime = (int *) malloc (sizeof (int) * 2000);
@@ -362,18 +362,24 @@ for(i=0;i<data_length;i++)
 }
 
 //generate an approximated randomized hrtf for diffusing reflections:
-      int tx = 0;
+//      int tx = 0;
       int tmptime = 0;
       int hrtf_tmp = 127;
+      float rndmax = 0.0f;
       if(hrtf_tmp>data_length) hrtf_tmp = data_length -1;
       if(hlength>data_length) hlength =  data_length -1;
       for (i =0; i<hrtf_tmp; i++)
       {
-      tx++;
       tmptime = (int) RND * hrtf_size;
       rndtime[i] = tmptime;  //randomly jumble the head of the transfer function      
-      rnddata[i] = 3.0f*(0.5f - RND)*data[tmptime];		
+      rnddata[i] = (0.5f - RND)*data[tmptime];	
+      if (rnddata[i] > rndmax) rndmax = rnddata[i];	
       }  
+      
+      for (i =0; i<hrtf_tmp; i++)
+      {
+      rnddata[i] /= rndmax;	//normalize
+      }       
 
  if(Pfade > 0)
  {
