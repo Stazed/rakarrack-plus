@@ -141,7 +141,7 @@ Reverbtron::out (float * smpsl, float * smpsr)
       if(hindex>=hrtf_size) hindex -= hrtf_size;
       hyn += hrtf[hindex] * rnddata[j];		//more magic
       }   
-      lyn = hyn;
+      lyn += hyn;
       } 
       
        if(Pes) // just so I have the code to get started
@@ -359,15 +359,13 @@ for(i=0;i<data_length;i++)
 }
 
 //generate an approximated randomized hrtf for diffusing reflections:
-      int tx = 0;
       int tmptime = 0;
-      int hrtf_tmp = 127;
+      int hrtf_tmp = lrintf(127.0*diffusion);
       if(hrtf_tmp>data_length) hrtf_tmp = data_length -1;
       if(hlength>data_length) hlength =  data_length -1;
       for (i =0; i<hrtf_tmp; i++)
       {
-      tx++;
-      tmptime = (int) RND * hrtf_size;
+      tmptime = (int) (RND * hrtf_size);
       rndtime[i] = tmptime;  //randomly jumble the head of the transfer function      
       rnddata[i] = 3.0f*(0.5f - RND)*data[tmptime];		
       }  
@@ -388,7 +386,7 @@ for(i=0;i<data_length;i++)
 //guess at room size
 roomsize = time[0] + (time[1] - time[0])/2;  //to help stagger left/right reflection times
 if(roomsize>imax) roomsize = imax;
-
+setfb(Pfb);
   
 
 };
@@ -413,6 +411,21 @@ Reverbtron::sethidamp (int Phidamp)
   hidamp = 1.0f - (float)Phidamp / 127.1f;
   alpha_hidamp = 1.0f - hidamp;
 };
+
+void
+Reverbtron::setfb(int value)
+{
+
+   if(Pfb<=0) 
+   fb = (float)value/64.0f * 0.3f;
+   else
+   fb = (float)value/64.0f * 0.15f; 
+   
+   fb*=((1627.0f-(float)Pdiff-(float)Plength)/1627.0f);
+   fb*=(1.0f-((float)Plevel/127.0f));  
+   fb*=(1.0f-diffusion)*.5f;
+
+}
 
 void
 Reverbtron::setpreset (int npreset)
@@ -495,14 +508,7 @@ Reverbtron::changepar (int npar, int value)
       break;
     case 10:
       Pfb = value;
-      if(Pfb<=0)
-      {
-      fb = (float) value/64.0f * 0.3;  
-      }
-      else
-      {
-      fb = (float) value/64.0f * 0.15; 
-      }  
+      setfb(value);
       break;
     case 11:
       setpanning (value);

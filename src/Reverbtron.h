@@ -55,7 +55,7 @@ private:
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
   void setlpf (int Plpf);
-
+  void setfb(int value);
   void convert_time();
 
 
