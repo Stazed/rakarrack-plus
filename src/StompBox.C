@@ -186,14 +186,14 @@ int i;
     mfilter =  ltonemd->filterout_s(smpsl[i]); 
     hfilter =  ltonehg->filterout_s(smpsl[i]);  
     
-    efxoutl[i] = 0.05f * volume * (smpsl[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
+    efxoutl[i] = 0.1f * volume * (smpsl[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
     
     //Right channel
     lfilter =  rtonelw->filterout_s(smpsr[i]);
     mfilter =  rtonemd->filterout_s(smpsr[i]); 
     hfilter =  rtonehg->filterout_s(smpsr[i]);  
     
-    efxoutr[i] = 0.05f * volume * (smpsr[i] + lowb*lfilter + midb*mfilter + highb*hfilter);      
+    efxoutr[i] = 0.1f * volume * (smpsr[i] + lowb*lfilter + midb*mfilter + highb*hfilter);      
        
     } 
     
@@ -644,7 +644,7 @@ switch (value)
   ftonelw = 105.50f;
   qtonelw = 3.11f;
   stonelw = 0;
-  LG = 10.0f;
+  LG = 3.33f;
     
   break; 
 
