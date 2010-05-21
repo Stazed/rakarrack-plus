@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Convolotron.h"
 
-Convolotron::Convolotron (float * efxoutl_, float * efxoutr_)
+Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -45,12 +45,20 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_)
   convlength = .5f;
   fb = 0.0f;
   feedback = 0.0f;
-  maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
+  adjust(DS);
+
+  templ = (float *) malloc (sizeof (float) * PERIOD);
+  tempr = (float *) malloc (sizeof (float) * PERIOD);
+
+  maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
   M_Resample = new Resample(0);
+  U_Resample = new Resample(4);
+  D_Resample = new Resample(4);
+
   setpreset (Ppreset);
   cleanup ();
 };
@@ -69,6 +77,85 @@ Convolotron::cleanup ()
 
 };
 
+void
+Convolotron::adjust(int DS)
+{
+
+     DS_state=DS;
+
+
+switch(DS)
+{
+   
+     case 0:
+      nPERIOD = PERIOD;
+      nSAMPLE_RATE = SAMPLE_RATE;
+      nfSAMPLE_RATE = fSAMPLE_RATE;
+      break;
+
+     case 1:
+      nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 96000;
+      nfSAMPLE_RATE = 96000.0f;
+      break;
+
+
+     case 2:
+      nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 48000;
+      nfSAMPLE_RATE = 48000.0f;
+      break;
+
+     case 3:
+      nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 44100;
+      nfSAMPLE_RATE = 44100.0f;
+      break;
+
+     case 4:
+      nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 32000;
+      nfSAMPLE_RATE = 32000.0f;
+      break;
+
+     case 5:
+      nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 22050;
+      nfSAMPLE_RATE = 22050.0f;
+      break;
+
+     case 6:
+      nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 16000;
+      nfSAMPLE_RATE = 16000.0f;
+      break;
+
+     case 7:
+      nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 12000;
+      nfSAMPLE_RATE = 12000.0f;
+      break;
+
+     case 8:
+      nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 8000;
+      nfSAMPLE_RATE = 8000.0f;
+      break;
+
+     case 9:
+      nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 4000;
+      nfSAMPLE_RATE = 4000.0f;
+      break;
+}
+      u_up= (double)nPERIOD / (double)PERIOD;
+      u_down= (double)PERIOD / (double)nPERIOD;
+}
+
+
+
+
+
 /*
  * Effect output
  */
@@ -77,8 +164,16 @@ Convolotron::out (float * smpsl, float * smpsr)
 {
   int i, j, xindex;
   float l,lyn;
+  
+     if(DS_state != 0)
+   {
+     memcpy(templ, smpsl,sizeof(float)*PERIOD);
+     memcpy(tempr, smpsr,sizeof(float)*PERIOD);
+     U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+   }
 
-  for (i = 0; i < PERIOD; i++)
+
+  for (i = 0; i < nPERIOD; i++)
     {
 
       l = smpsl[i] + smpsr[i] + feedback;
@@ -97,13 +192,26 @@ Convolotron::out (float * smpsl, float * smpsr)
       }
 
       feedback = fb * lyn;
-      efxoutl[i] = lyn * levpanl;
-      efxoutr[i] = lyn * levpanr;  
+      templ[i] = lyn * levpanl;
+      tempr[i] = lyn * levpanr;  
 
       if (++offset>maxx_size) offset = 0;     
 
       
     };
+
+   if(DS_state != 0)
+   {
+     D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
+     
+   }
+    else
+    {
+     memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+     memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
+    }
+
+
 
 
 
@@ -161,9 +269,9 @@ sf_close(infile);
 
 
 
-if (sfinfo.samplerate != (int)SAMPLE_RATE)
+if (sfinfo.samplerate != (int)nSAMPLE_RATE)
 {
-  sr_ratio = (double)SAMPLE_RATE/((double) sfinfo.samplerate);
+  sr_ratio = (double)nSAMPLE_RATE/((double) sfinfo.samplerate);
   M_Resample->mono_out(buf,rbuf,real_len,sr_ratio);
   real_len =lrintf((float)real_len*(float)sr_ratio);
 }
@@ -293,7 +401,7 @@ Convolotron::changepar (int npar, int value)
       }
       else Plength = value;
       convlength = ((float) Plength)/1000.0f;                   //time in seconds
-      length = (int) (fSAMPLE_RATE * convlength);        //time in samples       
+      length = (int) (nfSAMPLE_RATE * convlength);        //time in samples       
       process_rbuf();
       break;
     case 8:

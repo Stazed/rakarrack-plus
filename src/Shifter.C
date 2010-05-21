@@ -28,7 +28,7 @@
 
 
 
-Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality)
+Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS)
 {
 
 
@@ -36,11 +36,18 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
   hq = Quality;
+  adjust(DS);
 
-  outi = (float *) malloc (sizeof (float) * PERIOD);
-  outo = (float *) malloc (sizeof (float) * PERIOD);
+  templ = (float *) malloc (sizeof (float) * PERIOD);
+  tempr = (float *) malloc (sizeof (float) * PERIOD);
 
-  PS = new PitchShifter (2048, hq, fSAMPLE_RATE);
+  outi = (float *) malloc (sizeof (float) * nPERIOD);
+  outo = (float *) malloc (sizeof (float) * nPERIOD);
+ 
+  U_Resample = new Resample(4);
+  D_Resample = new Resample(4);
+
+  PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
   PS->ratio = 1.0f;
 
   state = IDLE;
@@ -50,8 +57,6 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality)
   Pinterval = 0;
   Ppreset = 0;
   setpreset (Ppreset);
-
-
   cleanup ();
 
 };
@@ -66,9 +71,97 @@ void
 Shifter::cleanup ()
 {
   state = IDLE;
-  memset(outi, 0, sizeof(float)*PERIOD);
-  memset(outo, 0, sizeof(float)*PERIOD);
+  memset(outi, 0, sizeof(float)*nPERIOD);
+  memset(outo, 0, sizeof(float)*nPERIOD);
 };
+
+
+void
+Shifter::adjust(int DS)
+{
+
+     DS_state=DS;
+
+
+switch(DS)
+{
+   
+     case 0:
+      nPERIOD = PERIOD;
+      nSAMPLE_RATE = SAMPLE_RATE;
+      nfSAMPLE_RATE = fSAMPLE_RATE;
+      window = 2048;
+      break;
+
+     case 1:
+      nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 96000;
+      nfSAMPLE_RATE = 96000.0f;
+      window = 2048;
+      break;
+
+
+     case 2:
+      nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 48000;
+      nfSAMPLE_RATE = 48000.0f;
+      window = 2048;
+      break;
+
+     case 3:
+      nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 44100;
+      nfSAMPLE_RATE = 44100.0f;
+      window = 2048;
+      break;
+
+     case 4:
+      nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 32000;
+      nfSAMPLE_RATE = 32000.0f;
+      window = 2048;
+      break;
+
+     case 5:
+      nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 22050;
+      nfSAMPLE_RATE = 22050.0f;
+      window = 1024;
+      break;
+
+     case 6:
+      nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 16000;
+      nfSAMPLE_RATE = 16000.0f;
+      window = 1024;
+      break;
+
+     case 7:
+      nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 12000;
+      nfSAMPLE_RATE = 12000.0f;
+      window = 512;
+      break;
+
+     case 8:
+      nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 8000;
+      nfSAMPLE_RATE = 8000.0f;
+      window = 512;
+      break;
+
+     case 9:
+      nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 4000;
+      nfSAMPLE_RATE = 4000.0f;
+      window = 256;
+      break;
+}
+      u_up= (double)nPERIOD / (double)PERIOD;
+      u_down= (double)PERIOD / (double)nPERIOD;
+}
+
+
 
 
 
@@ -81,8 +174,14 @@ Shifter::out (float *smpsl, float *smpsr)
   float use;
 
 
+   if(DS_state != 0)
+   {
+     memcpy(templ, smpsl,sizeof(float)*PERIOD);
+     memcpy(tempr, smpsr,sizeof(float)*PERIOD);
+     U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+   }
 
-    for (i=0; i < PERIOD; i++)
+    for (i=0; i < nPERIOD; i++)
     {
      if(Pmode == 0)
      {
@@ -137,13 +236,27 @@ Shifter::out (float *smpsl, float *smpsr)
    PS->ratio = 1.0f+((range-1.0f)*use);
 
 
-      PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
+      PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
 
-      for (i = 0; i < PERIOD; i++)
+      for (i = 0; i < nPERIOD; i++)
 	{
-	  efxoutl[i] = outo[i] * gain * panning;
-	  efxoutr[i] = outo[i] * gain * (1.0f - panning);
+	  templ[i] = outo[i] * gain * panning;
+	  tempr[i] = outo[i] * gain * (1.0f - panning);
 	}
+
+
+   if(DS_state != 0)
+   {
+     D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
+     
+   }
+    else
+    {
+     memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+     memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
+    }
+
+
 
 
 
@@ -234,11 +347,11 @@ Shifter::changepar (int npar, int value)
       break;
     case 3:
       Pattack = value;
-      a_rate = 1000.0f / ((float)Pattack * fSAMPLE_RATE);
+      a_rate = 1000.0f / ((float)Pattack * nfSAMPLE_RATE);
       break;
     case 4:
       Pdecay = value;
-      d_rate = 1000.0f / ((float)Pdecay * fSAMPLE_RATE);
+      d_rate = 1000.0f / ((float)Pdecay * nfSAMPLE_RATE);
       break;
     case 5:
       Pthreshold = value;

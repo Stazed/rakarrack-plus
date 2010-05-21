@@ -31,7 +31,7 @@
 class Sequence
 {
 public:
-  Sequence (float * efxoutl_, float * efxoutr_, long int Quality);
+  Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS);
   ~Sequence ();
    void cleanup (); 
   void out (float * smpsl, float * smpr);
@@ -39,7 +39,9 @@ public:
   int getpar (int npar);
   void setpreset (int npreset);
   void setranges(int value);
-
+  void settempo(int value);
+  void adjust(int DS);
+    
   int Ppreset;
 
   float outvolume;
@@ -60,8 +62,17 @@ private:
   int tcount, scount, dscount, intperiod; 
   int subdiv; 
   int rndflag;
-  long int hq;
+  int DS_state;
+  int nPERIOD;
+  int nSAMPLE_RATE;
+  
+  double u_up;
+  double u_down;
 
+  long int hq;
+  long window;
+
+  float nfSAMPLE_RATE;
   float MINFREQ,MAXFREQ;
   float fsequence[8];
   float fq;
@@ -69,9 +80,14 @@ private:
 
   float *outi;
   float *outo;
+  float *templ, *tempr;
   
  
   class RBFilter *filterl, *filterr, *modfilterl, *modfilterr;
+
+  Resample *U_Resample;
+  Resample *D_Resample;
+
   PitchShifter *PS;
 
   

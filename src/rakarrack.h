@@ -3214,6 +3214,37 @@ private:
   static void cb_Har_Qual(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Har_Qual[];
 public:
+  Fl_Check_Button *FLPosition;
+private:
+  void cb_FLPosition_i(Fl_Check_Button*, void*);
+  static void cb_FLPosition(Fl_Check_Button*, void*);
+public:
+  Fl_Choice *Har_Downsample;
+private:
+  void cb_Har_Downsample_i(Fl_Choice*, void*);
+  static void cb_Har_Downsample(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Har_Downsample[];
+public:
+  Fl_Choice *Rev_Downsample;
+private:
+  void cb_Rev_Downsample_i(Fl_Choice*, void*);
+  static void cb_Rev_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Con_Downsample;
+private:
+  void cb_Con_Downsample_i(Fl_Choice*, void*);
+  static void cb_Con_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Seq_Downsample;
+private:
+  void cb_Seq_Downsample_i(Fl_Choice*, void*);
+  static void cb_Seq_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Shi_Downsample;
+private:
+  void cb_Shi_Downsample_i(Fl_Choice*, void*);
+  static void cb_Shi_Downsample(Fl_Choice*, void*);
+public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;

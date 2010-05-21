@@ -35,7 +35,7 @@ class Harmonizer
 {
 
 public:
-  Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality);
+  Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS);
    ~Harmonizer ();
   void out (float *smpsl, float *smpsr);
   void setpreset (int npreset);
@@ -43,6 +43,7 @@ public:
   int getpar (int npar);
   void cleanup ();
   void applyfilters (float * efxoutl);
+  void adjust(int DS);
 
 
   int Ppreset;
@@ -50,13 +51,23 @@ public:
   int PMIDI;
   int PSELECT;
   int mira;
+  int DS_state;
+  int nPERIOD;
+  int nSAMPLE_RATE;
+  long window;
+
   long int hq;
+
+  double u_up;
+  double u_down;
+  float nfSAMPLE_RATE;
 
 
   float *efxoutl;
   float *efxoutr;
   float *outi;
   float *outo;
+  float *templ, *tempr;
 
   float outvolume;
 
@@ -89,7 +100,12 @@ private:
 
 
   AnalogFilter *pl;
+
+  class Resample *U_Resample;
+  class Resample *D_Resample;
+
   PitchShifter *PS;
+
 
 };
 

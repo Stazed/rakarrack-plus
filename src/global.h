@@ -406,6 +406,12 @@ public:
   int CountWait;
   int XUserMIDI[128][20];
 
+  int Har_Down;
+  int Rev_Down;
+  int Con_Down;
+  int Shi_Down;
+  int Seq_Down;
+  int flpos;
   int upsample;
   int UpQual;
   int DownQual;

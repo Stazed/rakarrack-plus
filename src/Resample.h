@@ -51,6 +51,11 @@ Types:
 
   // ratio Equal to output_sample_rate / input_sample_rate.
 
+
+SRC_DATA srcinfor;
+SRC_DATA srcinfol;
+
+
 private:
 
 int errorl,errorr;
@@ -58,8 +63,6 @@ int errorl,errorr;
 
 SRC_STATE *statel;
 SRC_STATE *stater;
-SRC_DATA srcinfol;
-SRC_DATA srcinfor;
 
     
 };

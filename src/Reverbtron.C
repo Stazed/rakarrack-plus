@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Reverbtron.h"
 
-Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
+Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -45,8 +45,12 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   fb = 0.0f;
   feedback = 0.0f;
   maxtime = 0.0f;
-  hrtf_size = SAMPLE_RATE/2;
-  maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
+  adjust(DS);
+  templ = (float *) malloc (sizeof (float) * PERIOD);
+  tempr = (float *) malloc (sizeof (float) * PERIOD);
+
+  hrtf_size = nSAMPLE_RATE/2;
+  maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
   time = (int *) malloc (sizeof (int) * 2000);
   rndtime = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
@@ -63,10 +67,13 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_)
   hlength = 0;
   fstretch = 1.0f;
   idelay = 0.0f;
-  decay = expf(-1.0f/(0.2f*fSAMPLE_RATE));  //0.2 seconds
+  decay = expf(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
+
+  U_Resample = new Resample(4);
+  D_Resample = new Resample(4);
 
    setpreset (Ppreset);
   cleanup ();
@@ -102,9 +109,16 @@ Reverbtron::out (float * smpsl, float * smpsr)
   int length = Plength;
   hlength = Pdiff;
   int doffset;
+
+     if(DS_state != 0)
+   {
+     memcpy(templ, smpsl,sizeof(float)*PERIOD);
+     memcpy(tempr, smpsr,sizeof(float)*PERIOD);
+     U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+   }
   
   
-  for (i = 0; i < PERIOD; i++)
+  for (i = 0; i < nPERIOD; i++)
     {
 
       l = 0.5f*(smpsr[i] + smpsl[i]); 
@@ -157,8 +171,8 @@ Reverbtron::out (float * smpsl, float * smpsr)
       imctr--;
       if (imctr<0) imctr = roomsize;
       
-      efxoutl[i] = (lyn + ldiff )* levpanl;
-      efxoutr[i] = (lyn + rdiff ) * levpanr;  
+      templ[i] = (lyn + ldiff )* levpanl;
+      tempr[i] = (lyn + rdiff ) * levpanr;  
        
       feedback = fb*rdiff*decay;          
 
@@ -166,8 +180,8 @@ Reverbtron::out (float * smpsl, float * smpsr)
        else
        {
       feedback = fb * lyn;
-      efxoutl[i] = lyn * levpanl;
-      efxoutr[i] = lyn * levpanr;         
+      templ[i] = lyn * levpanl;
+      tempr[i] = lyn * levpanr;         
        
        }        
 
@@ -185,6 +199,18 @@ Reverbtron::out (float * smpsl, float * smpsr)
       xindex = offset + roomsize;      
       
     };
+
+   if(DS_state != 0)
+   {
+     D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
+     
+   }
+    else
+    {
+     memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+     memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
+    }
+
 
 
 
@@ -337,7 +363,7 @@ for(i=0;i<data_length;i++)
        ftime[i] = 0.0f;
        data[i] = 0.0f;
        }   
-       time[index]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
+       time[index]=lrintf(tmpstretch*(idelay + ftime[i])*nfSAMPLE_RATE);  //Add initial delay to all the samples
        data[index]=normal*tdata[i];  
        index++;
       }
@@ -351,7 +377,7 @@ for(i=0;i<data_length;i++)
 { 
 
     if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
-    time[i]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
+    time[i]=lrintf(tmpstretch*(idelay + ftime[i])*nfSAMPLE_RATE);  //Add initial delay to all the samples
     data[i]=normal*tdata[i];  
  
 };
@@ -426,6 +452,85 @@ Reverbtron::setfb(int value)
    fb*=(1.0f-diffusion)*.5f;
 
 }
+
+
+void
+Reverbtron::adjust(int DS)
+{
+
+     DS_state=DS;
+
+
+switch(DS)
+{
+   
+     case 0:
+      nPERIOD = PERIOD;
+      nSAMPLE_RATE = SAMPLE_RATE;
+      nfSAMPLE_RATE = fSAMPLE_RATE;
+      break;
+
+     case 1:
+      nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 96000;
+      nfSAMPLE_RATE = 96000.0f;
+      break;
+
+
+     case 2:
+      nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 48000;
+      nfSAMPLE_RATE = 48000.0f;
+      break;
+
+     case 3:
+      nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 44100;
+      nfSAMPLE_RATE = 44100.0f;
+      break;
+
+     case 4:
+      nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 32000;
+      nfSAMPLE_RATE = 32000.0f;
+      break;
+
+     case 5:
+      nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 22050;
+      nfSAMPLE_RATE = 22050.0f;
+      break;
+
+     case 6:
+      nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 16000;
+      nfSAMPLE_RATE = 16000.0f;
+      break;
+
+     case 7:
+      nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 12000;
+      nfSAMPLE_RATE = 12000.0f;
+      break;
+
+     case 8:
+      nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 8000;
+      nfSAMPLE_RATE = 8000.0f;
+      break;
+
+     case 9:
+      nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 4000;
+      nfSAMPLE_RATE = 4000.0f;
+      break;
+}
+      u_up= (double)nPERIOD / (double)PERIOD;
+      u_down= (double)PERIOD / (double)nPERIOD;
+}
+
+
+
 
 void
 Reverbtron::setpreset (int npreset)

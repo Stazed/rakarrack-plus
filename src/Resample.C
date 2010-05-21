@@ -53,7 +53,7 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
 {
 
 
-int o_frames = lrintf((float)frames*ratio);
+long int o_frames = lrintf((float)frames*ratio);
 srcinfol.data_in = inl;
 srcinfol.input_frames = frames;
 srcinfol.data_out = outl;
@@ -68,20 +68,19 @@ srcinfor.output_frames = o_frames;
 srcinfor.src_ratio = ratio;
 srcinfor.end_of_input = 0;
 
-
-
 errorl = src_process(statel, &srcinfol);
 errorr = src_process(stater, &srcinfor);
 
 
 }
 
+
 void
 Resample::mono_out(float *inl, float *outl, int frames, double ratio)
 {
 
-int i_frames = frames;
-int o_frames = (int) ((float)frames*ratio);
+long int i_frames = frames;
+long int o_frames = (int) ((float)frames*ratio);
 
 srcinfol.data_in = inl;
 srcinfol.input_frames = i_frames;

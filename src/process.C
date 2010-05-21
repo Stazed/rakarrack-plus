@@ -56,6 +56,12 @@ RKR::RKR ()
 
   char temp[128];
   error_num = 0;
+  flpos = 0;
+  Har_Down = 0;
+  Rev_Down = 0;
+  Con_Down = 0;
+  Shi_Down = 0;
+  Seq_Down = 0;
   cpufp = 0;
   numpc = 0;
   numpi = 0;
@@ -103,6 +109,12 @@ RKR::RKR ()
   Master_Volume = 0.50f;
   Input_Gain = 0.50f;
   Cabinet_Preset = 0;
+
+  rakarrack.get (PrefNom("Harmonizer Downsample"),Har_Down,0);
+  rakarrack.get (PrefNom("Reverbtron Downsample"),Rev_Down,0);
+  rakarrack.get (PrefNom("Convolotron Downsample"),Con_Down,0);
+  rakarrack.get (PrefNom("Sequence Downsample"),Seq_Down,0);
+  rakarrack.get (PrefNom("Shifter Downsample"),Shi_Down,0);
 
   rakarrack.get (PrefNom ("Harmonizer Quality"), HarQual, 4);
   rakarrack.get (PrefNom ("Auto Connect Jack"), aconnect_JA, 1);
@@ -180,7 +192,7 @@ RKR::RKR ()
   efx_Alienwah = new Alienwah (efxoutl, efxoutr);
   efx_Cabinet = new EQ (efxoutl, efxoutr);
   efx_Pan = new Pan (efxoutl, efxoutr);
-  efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual);
+  efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down);
   efx_MusDelay = new MusicDelay (efxoutl, efxoutr);
   efx_Gate = new Gate (efxoutl, efxoutr);
   efx_NewDist = new NewDist(efxoutl, efxoutr);
@@ -195,7 +207,7 @@ RKR::RKR ()
   efx_Shuffle = new Shuffle(efxoutl,efxoutr);
   efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
-  efx_Convol = new Convolotron(efxoutl,efxoutr);
+  efx_Convol = new Convolotron(efxoutl,efxoutr,Con_Down);
   efx_Looper = new Looper(efxoutl,efxoutr,looper_size);
   efx_RyanWah = new RyanWah(efxoutl,efxoutr);
   efx_RBEcho = new RBEcho(efxoutl,efxoutr);
@@ -203,10 +215,10 @@ RKR::RKR ()
   efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr);
   efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled);
   efx_Sustainer = new Sustainer(efxoutl,efxoutr);
-  efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual);
-  efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual);
+  efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual, Seq_Down);
+  efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down);
   efx_StompBox = new StompBox(efxoutl,efxoutr);
-  efx_Reverbtron = new Reverbtron(efxoutl,efxoutr);
+  efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down);
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
   A_Resample = new Resample(3);
@@ -1059,7 +1071,7 @@ RKR::Control_Volume (float *origl,float *origr)
   float tmp;
   float Temp_M_Volume = 0.0f;
   
-  //if (have_signal) efx_FLimiter->out(efxoutl, efxoutr); 
+  if((flpos)&&(have_signal)) efx_FLimiter->out(efxoutl, efxoutr); 
 
 
    memcpy(anall, efxoutl, sizeof(float)* PERIOD);
@@ -1099,7 +1111,7 @@ RKR::Control_Volume (float *origl,float *origr)
 
     }
 
-  if (have_signal) efx_FLimiter->out(efxoutl, efxoutr);  //then limit final output
+  if ((!flpos) && (have_signal)) efx_FLimiter->out(efxoutl, efxoutr);  //then limit final output
   
   for (i = 0; i <= PERIOD; i++)
     {

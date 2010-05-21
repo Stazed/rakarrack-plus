@@ -31,7 +31,7 @@
 class Reverbtron
 {
 public:
-  Reverbtron (float * efxoutl_, float * efxoutr_);
+  Reverbtron (float * efxoutl_, float * efxoutr_,int DS);
   ~Reverbtron ();
   void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
@@ -39,6 +39,7 @@ public:
   int getpar (int npar);
   void cleanup ();
   int setfile (int value);
+  void adjust(int DS);
 
   int Ppreset;
 
@@ -88,13 +89,26 @@ private:
   int avgtime;
   int hrtf_size;
   int hlength;
+  int DS_state;
+  int nPERIOD;
+  int nSAMPLE_RATE;
+
 
   int *time, *rndtime;
+  double u_up;
+  double u_down;
+  float nfSAMPLE_RATE;
+
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
+  float *templ, *tempr;
   float level,fb, feedback,levpanl,levpanr;
   float roomsize;
+
+  class Resample *U_Resample;
+  class Resample *D_Resample;
+
  
   class AnalogFilter *lpfl, *lpfr;	//filters
 

@@ -31,7 +31,7 @@
 class Convolotron
 {
 public:
-  Convolotron (float * efxoutl_, float * efxoutr_);
+  Convolotron (float * efxoutl_, float * efxoutr_,int DS);
   ~Convolotron ();
   void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
@@ -39,6 +39,7 @@ public:
   int getpar (int npar);
   void cleanup ();
   int setfile (int value);
+  void adjust(int DS);
 
   int Ppreset;
 
@@ -68,9 +69,19 @@ private:
 
   int offset;
   int maxx_size,maxx_read,real_len,length;
+  int DS_state;
+  int nPERIOD;
+  int nSAMPLE_RATE;
+
+  double u_up;
+  double u_down;
+  float nfSAMPLE_RATE;
+
 
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *rbuf, *buf, *lxn;
+  float *templ, *tempr;
+
   float level,fb, feedback;
   float levpanl,levpanr;
 
@@ -80,6 +91,8 @@ private:
   //Parametrii reali
   
   class Resample *M_Resample;
+  class Resample *U_Resample;
+  class Resample *D_Resample;
 
 
 };

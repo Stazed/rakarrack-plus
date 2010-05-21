@@ -26,13 +26,23 @@
 #include "Sequence.h"
 #include <time.h>
 
-Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality)
+Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
   hq = Quality;
-  outi = (float *) malloc (sizeof (float) * PERIOD);
-  outo = (float *) malloc (sizeof (float) * PERIOD);
+  adjust(DS);
+
+  templ = (float *) malloc (sizeof (float) * PERIOD);
+  tempr = (float *) malloc (sizeof (float) * PERIOD);
+
+  outi = (float *) malloc (sizeof (float) * nPERIOD);
+  outo = (float *) malloc (sizeof (float) * nPERIOD);
+
+  U_Resample = new Resample(4);
+  D_Resample = new Resample(4);
+
+
 
   filterl = NULL;
   filterr = NULL;
@@ -54,7 +64,7 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality)
   filterl->setmix(1, 0.33f, -1.0f, 0.25f);
   filterr->setmix(1, 0.33f, -1.0f, 0.25f);  
 
-  PS = new PitchShifter (2048, hq, fSAMPLE_RATE);
+  PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
   PS->ratio = 1.0f;
 
 
@@ -72,8 +82,8 @@ void
 Sequence::cleanup ()
 {
 
-  memset(outi, 0, sizeof(float)*PERIOD);
-  memset(outo, 0, sizeof(float)*PERIOD);
+  memset(outi, 0, sizeof(float)*nPERIOD);
+  memset(outo, 0, sizeof(float)*nPERIOD);
 
 };
 
@@ -88,13 +98,17 @@ Sequence::out (float * smpsl, float * smpsr)
 {
   int i;
   int nextcount,dnextcount;
+  int hPERIOD;
 
   float ldiff, rdiff, lfol, lfor, ftcount;
   float lmod = 0.0f;
   float rmod = 0.0f;
   float ldbl, ldbr;
   
-  if ((rndflag) && (tcount < PERIOD + 1))//This is an Easter Egg
+  if((Pmode==3)||(Pmode ==5) || (Pmode==6)) hPERIOD=nPERIOD; else hPERIOD=PERIOD;
+
+  
+  if ((rndflag) && (tcount < hPERIOD + 1))//This is an Easter Egg
   {
    srand(time(NULL));
    for (i = 0; i<8; i++)  
@@ -266,7 +280,15 @@ Sequence::out (float * smpsl, float * smpsr)
   ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
   lfol = fsequence[scount];
 
-  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+   if(DS_state != 0)
+   {
+     memcpy(templ, smpsl,sizeof(float)*PERIOD);
+     memcpy(tempr, smpsr,sizeof(float)*PERIOD);
+     U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+   }
+
+
+  for ( i = 0; i < nPERIOD; i++)  //Maintain sequenced modulator
   {
 
   if (++tcount >= intperiod)
@@ -295,12 +317,27 @@ Sequence::out (float * smpsl, float * smpsr)
   }
 
 
+
    PS->ratio = lmod;
-   PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
+   PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
 
 
-   memcpy(efxoutl, outo, sizeof(float)*PERIOD);
-   memcpy(efxoutr, outo, sizeof(float)*PERIOD);
+   memcpy(templ, outo, sizeof(float)*nPERIOD);
+   memcpy(tempr, outo, sizeof(float)*nPERIOD);
+
+   if(DS_state != 0)
+   {
+     D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
+   }
+    else
+    {
+     memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+     memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
+    }
+
+
+
+
 
  
    break;
@@ -370,7 +407,16 @@ Sequence::out (float * smpsl, float * smpsr)
   
   lfol = floorf(fsequence[scount]*12.0f);
 
-  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+     if(DS_state != 0)
+   {
+     memcpy(templ, smpsl,sizeof(float)*PERIOD);
+     memcpy(tempr, smpsr,sizeof(float)*PERIOD);
+     U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+   }
+
+ 
+
+  for ( i = 0; i < nPERIOD; i++)  //Maintain sequenced modulator
   {
 
   if (++tcount >= intperiod)
@@ -394,11 +440,22 @@ Sequence::out (float * smpsl, float * smpsr)
 
 
    PS->ratio = lmod;
-   PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
+   PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
 
 
-   memcpy(efxoutl, outo, sizeof(float)*PERIOD);
-   memcpy(efxoutr, outo, sizeof(float)*PERIOD);
+
+   memcpy(templ, outo, sizeof(float)*nPERIOD);
+   memcpy(tempr, outo, sizeof(float)*nPERIOD);
+
+ if(DS_state != 0)
+   {
+     D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
+   }
+    else
+    {
+     memcpy(efxoutl, templ,sizeof(float)*nPERIOD);
+     memcpy(efxoutr, tempr,sizeof(float)*nPERIOD);
+    }
 
  
    break;
@@ -410,7 +467,16 @@ Sequence::out (float * smpsl, float * smpsr)
   ldiff = ifperiod * (fsequence[nextcount] - fsequence[scount]);  
   lfol = fsequence[scount];
 
-  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+     if(DS_state != 0)
+   {
+     memcpy(templ, smpsl,sizeof(float)*PERIOD);
+     memcpy(tempr, smpsr,sizeof(float)*PERIOD);
+     U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+   }
+
+
+
+  for ( i = 0; i < nPERIOD; i++)  //Maintain sequenced modulator
   {
 
   if (++tcount >= intperiod)
@@ -439,11 +505,22 @@ Sequence::out (float * smpsl, float * smpsr)
 
 
    PS->ratio = lmod;
-   PS->smbPitchShift (PS->ratio, PERIOD, 2048, hq, fSAMPLE_RATE, outi, outo);
+   PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
+
+   memcpy(templ, outo, sizeof(float)*PERIOD);
+   memcpy(tempr, outo, sizeof(float)*PERIOD);
 
 
-   memcpy(efxoutl, outo, sizeof(float)*PERIOD);
-   memcpy(efxoutr, outo, sizeof(float)*PERIOD);
+ if(DS_state != 0)
+   {
+     D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
+   }
+    else
+    {
+     memcpy(efxoutl, templ,sizeof(float)*nPERIOD);
+     memcpy(efxoutr, tempr,sizeof(float)*nPERIOD);
+    }
+
 
  
    break;
@@ -510,6 +587,108 @@ Sequence::setranges(int value)
 
    }
 }   
+
+
+void
+Sequence::adjust(int DS)
+{
+
+     DS_state=DS;
+
+
+switch(DS)
+{
+   
+     case 0:
+      nPERIOD = PERIOD;
+      nSAMPLE_RATE = SAMPLE_RATE;
+      nfSAMPLE_RATE = fSAMPLE_RATE;
+      window = 2048;
+      break;
+
+     case 1:
+      nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 96000;
+      nfSAMPLE_RATE = 96000.0f;
+      window = 2048;
+      break;
+
+
+     case 2:
+      nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 48000;
+      nfSAMPLE_RATE = 48000.0f;
+      window = 2048;
+      break;
+
+     case 3:
+      nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 44100;
+      nfSAMPLE_RATE = 44100.0f;
+      window = 2048;
+      break;
+
+     case 4:
+      nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 32000;
+      nfSAMPLE_RATE = 32000.0f;
+      window = 2048;
+      break;
+
+     case 5:
+      nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 22050;
+      nfSAMPLE_RATE = 22050.0f;
+      window = 1024;
+      break;
+
+     case 6:
+      nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 16000;
+      nfSAMPLE_RATE = 16000.0f;
+      window = 1024;
+      break;
+
+     case 7:
+      nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 12000;
+      nfSAMPLE_RATE = 12000.0f;
+      window = 512;
+      break;
+
+     case 8:
+      nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 8000;
+      nfSAMPLE_RATE = 8000.0f;
+      window = 512;
+      break;
+
+     case 9:
+      nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 4000;
+      nfSAMPLE_RATE = 4000.0f;
+      window = 256;
+      break;
+}
+      u_up= (double)nPERIOD / (double)PERIOD;
+      u_down= (double)PERIOD / (double)nPERIOD;
+}
+
+
+
+
+
+void
+Sequence::settempo(int value)
+{
+ if ((Pmode==3) || (Pmode==5) || (Pmode==6))  fperiod = nfSAMPLE_RATE * 60.0f/(subdiv * (float) value); 
+ else  fperiod = fSAMPLE_RATE * 60.0f/(subdiv * (float) value);  //number of samples before next value
+
+ ifperiod = 1.0f/fperiod;
+ intperiod = (int) fperiod;
+}
+
+
 
 
 void
@@ -587,9 +766,7 @@ Sequence::changepar (int npar, int value)
       break;
     case 9:
       Ptempo = value;
-      fperiod = fSAMPLE_RATE * 60.0f/(subdiv * (float) Ptempo);  //number of samples before next value
-      ifperiod = 1.0f/fperiod;
-      intperiod = (int) fperiod;
+      settempo(value);
       break;
     case 10:
       Pq = value;
@@ -603,6 +780,7 @@ Sequence::changepar (int npar, int value)
       break;    
     case 13:
       Pmode = value;
+      settempo(Ptempo);
       break;
     case 14:
       Prange = value;
