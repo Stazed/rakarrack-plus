@@ -56,7 +56,7 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS)
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
   M_Resample = new Resample(0);
-  U_Resample = new Resample(2);
+  U_Resample = new Resample(2);//Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
   D_Resample = new Resample(4);
 
   setpreset (Ppreset);

@@ -72,7 +72,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS)
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
 
-  U_Resample = new Resample(4);
+  U_Resample = new Resample(2);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
   D_Resample = new Resample(4);
 
    setpreset (Ppreset);
