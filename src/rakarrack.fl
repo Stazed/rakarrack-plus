@@ -836,7 +836,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1481 64 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -1357,7 +1357,7 @@ Scope_ON=1;
         xywh {642 396 154 17} labelfont 1 labelcolor 7
       }
       Fl_Group EQ {
-        user_data 1
+        user_data 1 selected
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button eq_activar {
@@ -5845,7 +5845,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
       }
       Fl_Group VOCODER {
         user_data 1
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button vo_activar {
           label On
@@ -6433,7 +6433,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));}
       }
       Fl_Group REVERBTRON {
         user_data 1
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button revtron_activar {
           label On
@@ -7249,7 +7249,7 @@ put_icon(AboutWin);}
     }
     Fl_Window Order {
       callback {save_stat(2);
-Order->hide();} open
+Order->hide();}
       xywh {1552 301 600 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
@@ -7284,7 +7284,7 @@ Avail_Bro->select(1);
 
 x=rkr->new_order[i-1];
 rkr->new_order[i-1]=rkr->availables[j];
-rkr->availables[j]=x;} selected
+rkr->availables[j]=x;}
         xywh {217 168 72 25} labelsize 18
       }
       Fl_Browser Order_Bro {

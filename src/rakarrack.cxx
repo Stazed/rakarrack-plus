@@ -14095,7 +14095,7 @@ R average.");
       } // Fl_Check_Button* shelf_mode
       SHELFBOOST->end();
     } // Fl_Group* SHELFBOOST
-    { VOCODER = new Fl_Group(320, 210, 158, 185);
+    { VOCODER = new Fl_Group(320, 210, 158, 184);
       VOCODER->box(FL_UP_BOX);
       VOCODER->color((Fl_Color)FL_FOREGROUND_COLOR);
       VOCODER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -14876,7 +14876,7 @@ R average.");
       } // Fl_Choice* stomp_mode
       STOMPBOX->end();
     } // Fl_Group* STOMPBOX
-    { REVERBTRON = new Fl_Group(320, 210, 158, 185);
+    { REVERBTRON = new Fl_Group(320, 210, 158, 184);
       REVERBTRON->box(FL_UP_BOX);
       REVERBTRON->color((Fl_Color)FL_FOREGROUND_COLOR);
       REVERBTRON->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
