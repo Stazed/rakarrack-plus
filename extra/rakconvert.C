@@ -47,7 +47,7 @@
     int Bypass;
     char RevFiname[128];
     char ReservedFiname[128];
-    int lv[50][20];
+    int lv[70][20];
     int XUserMIDI[128][20];
     int XMIDIrangeMin[128];
     int XMIDIrangeMax[128];
@@ -152,7 +152,7 @@ for(i=0; i<62; i++)
    data = SwapFourBytes(data);
    NewBank[i].Bypass=data;
    
-   for(j=0; j<50; j++)
+   for(j=0; j<70; j++)
      {
        for(k=0;k<20;k++)
            {
@@ -184,7 +184,7 @@ New_Bank ()
 
   int i, j, k;
 
-  int presets[41][16] = {
+  int presets[42][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -266,7 +266,10 @@ New_Bank ()
 //Shifter
     {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0},
 //StompBox
-    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0}
+    {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
+//Reverbtron
+    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0}
+    
 
   };
 
@@ -285,7 +288,7 @@ New_Bank ()
 
       memset(NewBank[i].lv ,0, sizeof(NewBank[i].lv));
 
-      for (j = 0; j < 41; j++)
+      for (j = 0; j < 42; j++)
 	{
 	  for (k = 0; k < 16; k++)
 	    {
