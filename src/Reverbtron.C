@@ -59,7 +59,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS)
   tdata = (float *) malloc (sizeof (float) * 2000);
   lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));  
   hrtf =  (float *) malloc (sizeof (float) * (1 + hrtf_size)); 
-  imax = SAMPLE_RATE/2;  // 1/2 second available
+  imax = nSAMPLE_RATE/2;  // 1/2 second available
   imdelay = (float *) malloc (sizeof (float) * imax);
   offset = 0;
   hoffset = 0;
@@ -71,6 +71,10 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS)
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
+  
+  lpfl->setSR(nSAMPLE_RATE);
+  lpfr->setSR(nSAMPLE_RATE);
+  
 
   U_Resample = new Resample(2);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
   D_Resample = new Resample(4);

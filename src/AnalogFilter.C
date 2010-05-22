@@ -52,6 +52,8 @@ AnalogFilter::AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,
   firsttime = 1;
   d[0] = 0;			//this is not used
   outgain = 1.0;
+  iSAMPLE_RATE=SAMPLE_RATE;
+  ifSAMPLE_RATE=fSAMPLE_RATE;
 
 
 };
@@ -86,9 +88,9 @@ AnalogFilter::computefiltercoefs ()
 
   //do not allow frequencies bigger than samplerate/2
   float freq = this->freq;
-  if (freq > (SAMPLE_RATE / 2 - 500.0))
+  if (freq > (iSAMPLE_RATE / 2 - 500.0))
     {
-      freq = fSAMPLE_RATE * .5f - 500.0f;
+      freq = ifSAMPLE_RATE * .5f - 500.0f;
       zerocoefs = 1;
     };
   if (freq < 0.1)
@@ -116,7 +118,7 @@ AnalogFilter::computefiltercoefs ()
     {
     case 0:			//LPF 1 pole         
       if (zerocoefs == 0)
-	tmp = expf (-D_PI * freq / fSAMPLE_RATE);
+	tmp = expf (-D_PI * freq / ifSAMPLE_RATE);
       else
 	tmp = 0.0f;
       c[0] = 1.0f - tmp;
@@ -128,7 +130,7 @@ AnalogFilter::computefiltercoefs ()
       break;
     case 1:			//HPF 1 pole
       if (zerocoefs == 0)
-	tmp = expf (-D_PI * freq / fSAMPLE_RATE);
+	tmp = expf (-D_PI * freq / ifSAMPLE_RATE);
       else
 	tmp = 0.0f;
       c[0] = (1.0f + tmp) * .5f;
@@ -141,7 +143,7 @@ AnalogFilter::computefiltercoefs ()
     case 2:			//LPF 2 poles 
       if (zerocoefs == 0)
 	{
-	  omega = D_PI * freq / fSAMPLE_RATE;
+	  omega = D_PI * freq / ifSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  alpha = sn / (2.0f * tmpq);
@@ -165,7 +167,7 @@ AnalogFilter::computefiltercoefs ()
     case 3:			//HPF 2 poles 
       if (zerocoefs == 0)
 	{
-	  omega =  D_PI * freq / fSAMPLE_RATE;
+	  omega =  D_PI * freq / ifSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  alpha = sn / (2.0f * tmpq);
@@ -189,7 +191,7 @@ AnalogFilter::computefiltercoefs ()
     case 4:			//BPF 2 poles 
       if (zerocoefs == 0)
 	{
-	  omega = D_PI * freq / fSAMPLE_RATE;
+	  omega = D_PI * freq / ifSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  alpha = sn / (2.0f * tmpq);
@@ -213,7 +215,7 @@ AnalogFilter::computefiltercoefs ()
     case 5:			//NOTCH 2 poles 
       if (zerocoefs == 0)
 	{
-	  omega = D_PI * freq / fSAMPLE_RATE;
+	  omega = D_PI * freq / ifSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  alpha = sn / (2.0f * sqrtf (tmpq));
@@ -237,7 +239,7 @@ AnalogFilter::computefiltercoefs ()
     case 6:			//PEAK (2 poles)
       if (zerocoefs == 0)
 	{
-	  omega = D_PI * freq / fSAMPLE_RATE;
+	  omega = D_PI * freq / ifSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  tmpq *= 3.0f;
@@ -262,7 +264,7 @@ AnalogFilter::computefiltercoefs ()
     case 7:			//Low Shelf - 2 poles
       if (zerocoefs == 0)
 	{
-	  omega = D_PI * freq / fSAMPLE_RATE;
+	  omega = D_PI * freq / ifSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  tmpq = sqrtf (tmpq);
@@ -295,7 +297,7 @@ AnalogFilter::computefiltercoefs ()
     case 8:			//High Shelf - 2 poles
       if (zerocoefs == 0)
 	{
-	  omega = D_PI * freq / fSAMPLE_RATE;
+	  omega = D_PI * freq / ifSAMPLE_RATE;
 	  sn = sinf (omega);
 	  cs = cosf (omega);
 	  tmpq = sqrtf (tmpq);
@@ -343,7 +345,7 @@ AnalogFilter::setfreq (float frequency)
     rap = 1.0f / rap;
 
   oldabovenq = abovenq;
-  abovenq = frequency > (SAMPLE_RATE / 2 - 500.0);
+  abovenq = frequency > (iSAMPLE_RATE / 2 - 500.0);
 
   int nyquistthresh = (abovenq ^ oldabovenq);
 
@@ -368,6 +370,18 @@ AnalogFilter::setfreq (float frequency)
   firsttime = 0;
 
 };
+
+
+void 
+AnalogFilter::setSR(unsigned int value)
+{
+
+  iSAMPLE_RATE = value;
+  ifSAMPLE_RATE=(float) iSAMPLE_RATE;
+  computefiltercoefs ();
+
+}  
+
 
 void
 AnalogFilter::setfreq_and_q (float frequency, float q_)
@@ -549,7 +563,7 @@ void  AnalogFilter::reversecoeffs()
 float AnalogFilter::H (float freq)
 {
   float
-    fr = freq / fSAMPLE_RATE * D_PI;
+    fr = freq / ifSAMPLE_RATE * D_PI;
   float
     x = c[0], y = 0.0;
   for (int n = 1; n < 3; n++)

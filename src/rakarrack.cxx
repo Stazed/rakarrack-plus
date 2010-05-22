@@ -13085,7 +13085,7 @@ R average.");
       } // Fl_Choice* mbvvol_combi
       MBVVOL->end();
     } // Fl_Group* MBVVOL
-    { CONVOLOTRON = new Fl_Group(320, 210, 158, 185);
+    { CONVOLOTRON = new Fl_Group(320, 210, 158, 184);
       CONVOLOTRON->box(FL_UP_BOX);
       CONVOLOTRON->color((Fl_Color)FL_FOREGROUND_COLOR);
       CONVOLOTRON->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -17179,12 +17179,12 @@ t=1;
 for (i=0; i<rkr->NumEffects;i++)
 {
  k=0;
- for (j=0;j<10;j++) if (rkr->efx_order[j]==i) k=1;
+ for (j=0;j<10;j++) if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
        
  if(!k)
  
  { 
-  rkr->availables[t]=i;
+  rkr->availables[t]=rkr->efx_names[i].Pos;
   t++;
  }
 
@@ -17354,34 +17354,34 @@ for (i=0; i<10; i++)
 switch(i)
  {
     case 0:
-       L1->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L1->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 1:
-       L2->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L2->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 2:
-       L3->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L3->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 3:
-       L4->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L4->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 4:
-       L5->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L5->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 5:
-       L6->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L6->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 6:
-       L7->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L7->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 7:
-       L8->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L8->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 8:
-       L9->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L9->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 9:
-       L10->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L10->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
 }
 
@@ -20224,7 +20224,7 @@ for (i=0; i<10;i++)
 {
 rkr->new_order[i]=rkr->efx_order[i];
 rkr->saved_order[i]=rkr->efx_order[i];
-Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
+Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
 }
 
 t=1;
@@ -20235,7 +20235,7 @@ for (i=0; i<rkr->NumEffects;i++)
     k=0;
  for (j=0;j<10;j++)
    { 
-     if (rkr->efx_order[j]==i) k=1;
+     if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
    }     
  
  if(!k)
@@ -20243,7 +20243,7 @@ for (i=0; i<rkr->NumEffects;i++)
  { 
   Avail_Bro->add(rkr->efx_names[i].Nom);
    
-  rkr->availables[t]=i;
+  rkr->availables[t]=rkr->efx_names[i].Pos;
   t++;
  }
 
@@ -20442,4 +20442,14 @@ else rkr->process_midi_controller_events(rkr->Aux_MIDI,value);
 rkr->last_auxvalue = value;
 
 }
+}
+
+int RKRGUI::Busca_Eff(int num) {
+  int i;
+for(i=0; i<rkr->NumEffects;i++)
+ {
+   if(rkr->efx_names[i].Pos==num) 
+   break;
+ }  
+ return(i);
 }

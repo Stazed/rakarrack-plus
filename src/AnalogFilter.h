@@ -40,6 +40,7 @@ public:
   void setfreq (float frequency);
   void setfreq_and_q (float frequency, float q_);
   void setq (float q_);
+  void setSR(unsigned int SR);
 
   void settype (int type_);
   void setgain (float dBgain);
@@ -70,6 +71,9 @@ private:
   int abovenq;			//this is 1 if the frequency is above the nyquist
   int oldabovenq;		//if the last time was above nyquist (used to see if it needs interpolation)
 
+  unsigned int iSAMPLE_RATE;
+
+
   float freq;		//Frequency given in Hz
   float q;			//Q factor (resonance or Q factor)
   float gain;		//the gain of the filter (if are shelf/peak) filters
@@ -80,6 +84,8 @@ private:
   float oldc[3], oldd[3];	//old coefficients(used only if some filter paremeters changes very fast, and it needs interpolation)
 
   float xd[3], yd[3];	//used if the filter is applied more times
+
+  float ifSAMPLE_RATE;
 
 };
 

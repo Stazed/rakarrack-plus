@@ -39,7 +39,7 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
   outi = (float *) malloc (sizeof (float) * nPERIOD);
   outo = (float *) malloc (sizeof (float) * nPERIOD);
 
-  U_Resample = new Resample(4);
+  U_Resample = new Resample(2);
   D_Resample = new Resample(4);
 
 

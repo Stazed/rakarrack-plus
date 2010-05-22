@@ -539,6 +539,7 @@ public:
   struct Effects_Names
   {
     char Nom[24];
+    int Pos;
   } efx_names[50];
 
   struct Effects_Params

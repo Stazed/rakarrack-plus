@@ -3503,5 +3503,6 @@ public:
   void update_looper();
   void UpdateTGUI();
   void ActACI();
+  int Busca_Eff(int num);
 };
 #endif

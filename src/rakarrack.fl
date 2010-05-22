@@ -825,11 +825,13 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -5091,7 +5093,7 @@ mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
       }
       Fl_Group CONVOLOTRON {
         user_data 1
-        xywh {320 210 158 185} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button convo_activar {
           label On
@@ -7247,8 +7249,8 @@ put_icon(AboutWin);}
     }
     Fl_Window Order {
       callback {save_stat(2);
-Order->hide();}
-      xywh {1566 315 600 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
+Order->hide();} open
+      xywh {1552 301 600 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
         xywh {1 1 600 400}
@@ -7282,7 +7284,7 @@ Avail_Bro->select(1);
 
 x=rkr->new_order[i-1];
 rkr->new_order[i-1]=rkr->availables[j];
-rkr->availables[j]=x;}
+rkr->availables[j]=x;} selected
         xywh {217 168 72 25} labelsize 18
       }
       Fl_Browser Order_Bro {
@@ -7617,7 +7619,7 @@ switch(i)
 }
 
 
-Show_Next_Time();} selected
+Show_Next_Time();}
             xywh {132 257 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
@@ -9023,12 +9025,12 @@ t=1;
 for (i=0; i<rkr->NumEffects;i++)
 {
  k=0;
- for (j=0;j<10;j++) if (rkr->efx_order[j]==i) k=1;
+ for (j=0;j<10;j++) if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
        
  if(!k)
  
  { 
-  rkr->availables[t]=i;
+  rkr->availables[t]=rkr->efx_names[i].Pos;
   t++;
  }
 
@@ -9198,34 +9200,34 @@ for (i=0; i<10; i++)
 switch(i)
  {
     case 0:
-       L1->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L1->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 1:
-       L2->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L2->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 2:
-       L3->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L3->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 3:
-       L4->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L4->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 4:
-       L5->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L5->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 5:
-       L6->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L6->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 6:
-       L7->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L7->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 7:
-       L8->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L8->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 8:
-       L9->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L9->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
     case 9:
-       L10->copy_label(rkr->efx_names[rkr->efx_order[i]].Nom);
+       L10->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
        break;
 }
 
@@ -12047,7 +12049,7 @@ for (i=0; i<10;i++)
 {
 rkr->new_order[i]=rkr->efx_order[i];
 rkr->saved_order[i]=rkr->efx_order[i];
-Order_Bro->add(rkr->efx_names[rkr->efx_order[i]].Nom);
+Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
 }
 
 t=1;
@@ -12058,7 +12060,7 @@ for (i=0; i<rkr->NumEffects;i++)
     k=0;
  for (j=0;j<10;j++)
    { 
-     if (rkr->efx_order[j]==i) k=1;
+     if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
    }     
  
  if(!k)
@@ -12066,7 +12068,7 @@ for (i=0; i<rkr->NumEffects;i++)
  { 
   Avail_Bro->add(rkr->efx_names[i].Nom);
    
-  rkr->availables[t]=i;
+  rkr->availables[t]=rkr->efx_names[i].Pos;
   t++;
  }
 
@@ -12261,5 +12263,15 @@ else rkr->process_midi_controller_events(rkr->Aux_MIDI,value);
 rkr->last_auxvalue = value;
 
 }} {}
+  }
+  Function {Busca_Eff(int num)} {return_type int
+  } {
+    code {int i;
+for(i=0; i<rkr->NumEffects;i++)
+ {
+   if(rkr->efx_names[i].Pos==num) 
+   break;
+ }  
+ return(i);} {}
   }
 } 

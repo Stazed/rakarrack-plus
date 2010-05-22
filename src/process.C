@@ -245,17 +245,58 @@ RKR::RKR ()
 
   {
     static const char *los_names[] =
-      { "EQ", "Compressor", "Distortion", "Overdrive", "Echo", "Chorus",
-      "Phaser", "Flanger", "Reverb", "Parametric EQ", "WahWah", "AlienWah", 
-      "Cabinet", "Pan", "Harmonizer", "MusicalDelay", "NoiseGate", "Derelict",
-      "Analog Phaser", "Valve", "Dual Flange", "Ring", "Exciter",  "DistBand", 
-      "Arpie", "Expander", "Shuffle", "Synthfilter", "VaryBand", "Convolotron", 
-      "Looper", "MuTroMojo", "Echoverse", "Coil Crafter", "ShelfBoost", "Vocoder",
-      "Sustainer", "Sequence", "Shifter", "StompBox", "Reverbtron"
-    };
-    for (i = 0; i < NumEffects; i++)
-      strcpy (efx_names[i].Nom, los_names[i]);
+{
+"AlienWah","11",
+"Analog Phaser","18",
+"Arpie","24",
+"Cabinet","12",
+"Chorus","5",
+"Coil Crafter","33",
+"Compressor","1",
+"Convolotron","29",
+"Derelict","17",
+"DistBand","23",
+"Distortion","2",
+"Dual Flange","20",
+"Echo","4",
+"Echoverse","32",
+"EQ","0",
+"Exciter","22",
+"Expander","25",
+"Flanger","7",
+"Harmonizer","14",
+"Looper","30",
+"MusicalDelay","15",
+"MuTroMojo","31",
+"NoiseGate","16",
+"Overdrive","3",
+"Pan","13",
+"Parametric EQ","9",
+"Phaser","6",
+"Reverb","8",
+"Reverbtron","40",
+"Ring","21",
+"Sequence","37",
+"ShelfBoost","34",
+"Shifter","38",
+"Shuffle","26",
+"StompBox","39",
+"Sustainer","36",
+"Synthfilter","27",
+"Valve","19",
+"VaryBand","28",
+"Vocoder","35",
+"WahWah","10"
 
+    };
+
+    for (i = 0; i < NumEffects*2; i+=2)
+   {
+      strcpy (efx_names[i/2].Nom, los_names[i]);
+      sscanf(los_names[i+1],"%d",&efx_names[i/2].Pos);
+ 
+
+   }
   }
 
 
