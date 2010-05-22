@@ -518,7 +518,7 @@ RKR::savefile (char *filename)
 
 	case 40:
 	  //Reverbtron
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
 		   efx_Reverbtron->getpar (0), efx_Reverbtron->getpar (1),
 		   efx_Reverbtron->getpar (2), efx_Reverbtron->getpar (3),
 		   efx_Reverbtron->getpar (4), efx_Reverbtron->getpar (5),
@@ -526,6 +526,7 @@ RKR::savefile (char *filename)
 		   efx_Reverbtron->getpar (8), efx_Reverbtron->getpar (9),
                    efx_Reverbtron->getpar (10), efx_Reverbtron->getpar (11),
                    efx_Reverbtron->getpar (12), efx_Reverbtron->getpar (13), 
+                   efx_Reverbtron->getpar (14), efx_Reverbtron->getpar (15), 
                    Reverbtron_Bypass, efx_Reverbtron->Filename);
 	  break;
 
@@ -981,10 +982,11 @@ RKR::loadfile (char *filename)
 	  //Reverbtron
 	  bzero(efx_Reverbtron->Filename,sizeof(efx_Reverbtron->Filename));
 	  bzero(cfilename,sizeof(cfilename));
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
 		  &lv[41][0], &lv[41][1], &lv[41][2], &lv[41][3], &lv[41][4],
 		  &lv[41][5], &lv[41][6], &lv[41][7], &lv[41][8], &lv[41][9],
-		  &lv[41][10],&lv[41][11],&lv[41][12], &lv[41][13], &Reverbtron_B,
+		  &lv[41][10],&lv[41][11],&lv[41][12], &lv[41][13], &lv[41][14],&lv[41][15], 
+		  &Reverbtron_B,
 		  cfilename);
           strcpy(efx_Reverbtron->Filename,cfilename);		  
 	  break;
@@ -1149,7 +1151,7 @@ RKR::Actualizar_Audio ()
     efx_Shifter->changepar (i, lv[39][i]);
  for (i = 0; i <= 5; i++)
     efx_StompBox->changepar (i, lv[40][i]);
- for (i = 0; i <= 13; i++)
+ for (i = 0; i <= 15; i++)
     efx_Reverbtron->changepar (i, lv[41][i]);
 
 
@@ -1812,7 +1814,7 @@ RKR::Preset_to_Bank (int i)
     lv[39][j] = efx_Shifter->getpar(j);
   for (j = 0; j <= 5; j++)
     lv[40][j] = efx_StompBox->getpar(j);
-  for (j = 0; j <= 13; j++)
+  for (j = 0; j <= 15; j++)
     lv[41][j] = efx_Reverbtron->getpar(j);
 
 
