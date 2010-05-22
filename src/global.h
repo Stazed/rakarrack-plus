@@ -540,6 +540,8 @@ public:
   {
     char Nom[24];
     int Pos;
+    int Type;
+
   } efx_names[70];
 
   struct Effects_Params

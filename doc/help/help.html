@@ -349,8 +349,8 @@ Harmonizer effect, that means you need to play a monophonic melody in
 the Key/Chord selected. The harmonizer recognizes what note you play
 and creates a second voice in the Key/Chord selected.</p>
 
-<h3><a name="settings"></a>Preferences (Settings)</h3><img src="imagenes/settings.jpg" alt="rakarrack Settings Window" align="bottom" border="1"
-height="549" width="468">
+<h3><a name="settings"></a>Preferences (Settings)</h3>
+<p><img src="imagenes/settings.jpg" alt="rakarrack Settings Window"></p>
 <p><b>Color</b></p>
 <p>Through the Settings Look tab window you can configure
 different aspects of the application. The colors of he four elements
@@ -387,27 +387,21 @@ and you want to share please send this file and the background picture
 to any of the rakarrack team members and will include on the website.</p>
 <p><img alt="Settings Audio" src="imagenes/settings1.jpg"></p>
 
-
 <p><b>Fx On at start</b></p>
-
 <p>This option put the FX On at the start, by default
 is Off.</p>
 
 <p><b>Preserve Gain/Master</b></p>
-
 <p>The Input Gain and Master Volume are stored in the
 preset, activating this option the Input Level and Master Volume was
 not modified when preset changes</p>
 
 <p><b>Update Tap Tempo</b></p>
-
 <p>If enabled each time you change the preset the Tempo
 parameter on the effects that has the "On" state will be updated with the
 Tap Tempo value/settings</p>
 
-
 <p><b>Upsampling</b></p>
-
 <p>Enable upsampling using libsamplerate process the
 effects with higher sample rate then the sound quality is improved, all
 the resample parameters will take effect the next time you launch
@@ -421,35 +415,40 @@ recommend start with Linear quality and amount "x2" and check your CPU
 usage with "top", and then increase the amount/quality as desired.</p>
 
 <p><b>Amount</b></p>
-
 <p>Amount of resampling (x2, x3, x4, x5, x6)</p>
 
 <p><b>Up Sampling Quality</b></p>
-
 <p>Upsampling quality, select the libsamplerate quality
-for the upsampling
-procedure.</p>
+for the upsampling procedure.</p>
 
 <p><b>Down Sampling Quality</b></p>
-
-<p>Downsampling quality, select the
-libsamplerate quality for the downsampling procedure.</p>
+<p>Downsampling quality, select the libsamplerate quality for the downsampling procedure.</p>
 
 <p><b>Looper Size Seconds</b></p>
 <p>Is the size in seconds of the buffer for the Looper effect.</p>
 
-
-
-
 <p><b>Harmonizer Quality</b></p>
-
-
 <p>Selects the quality of the harmonizer audio
 engine, used by Harmonizer, Shifter and Sequence effects, the available
 values are "4,8,16,32", the default value is "4". Incrementing the quality
 increments the CPU usage by this effect. Take specially care if you are
 using resampling too.
 This parameter will take effect the next time you run rakarrack.</p>
+
+<p><b>Limiter before Output Volume</b></p>
+<p> Rakarrack use a invisible end chain Limiter to limit the output signal
+level, this option put the limiter before the Output Volume slider, use that
+iff you need to generate a saturated signal level.</p>
+
+<p><b> Harmonizer, Reverbtron, Convolotron, Sequence and Shifter
+Downsample</b></p>
+<p> Here you can select the sample rate that use each effect, if you have
+problems of CPU usage, use this options to reduce the amount of CPU that
+each effect use. Probably if you have active resampling you will need to
+limit the sample rate of some effects in order to be able to use some
+presets. Of course that reduce the sound quality, but sure you can find a good
+balance settings.</p>
+
 <p><img alt="Settings MIDI" src="imagenes/settings2.jpg"></p>
 
 <p><b>Auto Connect ALSA Sequencer Ports</b></p>
@@ -2447,6 +2446,20 @@ quality of the resultant reverb relies 100% on the construction of the
 improvements to Reverbtron for users who install Rakarrack from their
 distribution repository.  Then they only need to download .rvb
 files as the Rakarrack team improves the IR file processing.</p>
+<p>A tip to reduce CPU usage to an amount that even some slower processors 
+can easily manage is open the Rakarrack Preferences and set the internal 
+sampling rate to a low rate, down to 8kHz.  It may seem a low quality 
+sound will result from using a samplerate of 8kHz, but with some magical 
+mathematics in the downsampling and upsampling process it is possible to 
+replicate the input signal perfectly in the upsampling routine, only 
+band-limited to 1/2 the sample rate.  In other words, the loss in 
+quality is no worse than applying a steep low-pass filter at slightly 
+below 1/2 the sample rate, assuming you are using one of the sinc 
+interpolation up/down sampling selections.  There will be non-musical 
+artifacts resulting from zero-order hold or linear interpolation, 
+although this may be acceptable to you if your CPU is too slow to handle 
+the higher quality selections. Almost all selections of resampling will 
+be faster than processing at a higher samplerate.</p>
 <p>Here are the parameters:</p>
 <p><b>Wet/Dry</b>: Amount of dry signal to mix with the convolved
 signal.  Notice that the IR file defines the maximum
@@ -2459,7 +2472,7 @@ time.</p>
 <p><b>Level</b>: Helps to compensate for louder and softer IR volume
 levels.</p>
 <p><b>Damp</b>: Reduces high frequency content in the signal.  This can help to tame poorly behaved IR
-files.</p>
+files, or simply to impose a different character on the IR.</p>
 <p><b>Fb</b>: Feedback.  Feed output to input.  Be careful as this
 has the same sensitivity and character as microphone feedback. 
 Setting initial delay or fade to a modest level helps to create more of
@@ -2485,6 +2498,29 @@ real physical world.</p>
 <p><b>Fade</b>: Reduce the level of the initial response of the IR. 
 This can be used to increase the wet level on an IR that contains much
 of the direct response.</p>
+<p><b>Diffusion</b>: Diffuse the percussive echoes. Synthesizes an
+artificial Head Related Transfer Function (HRTF) and performs a second convolution 
+on the output.  Increasing the slider value increases the number of 
+reflections in the HRTF, and will better diffuse the discrete echo 
+sounds.  For instruments with fast or percussive attacks this can be a 
+very necessary control to help make the reverb more smooth and natural 
+sounding.</p>
+<p><b>ES</b>: Extra Stereo. Emulate a spatial effect in stereo. This works 
+approximately like this:  
+Signal->LPF->Right->LPF->Delay->Left->FeedbackToSignal....and it just 
+keeps feeding back on itself in a loop until it decays.  The delay time 
+is set internally by a guess at the room size based on properties of the 
+IR file.  The method assumes in a real room your ears will be most 
+sensitive to reflections from the walls on the left and right side.  Each 
+time a sound reflects off a wall, generally it loses more high frequency 
+content than low frequency content, and a reflection will be delayed and 
+filtered by the time it passes your left ear, bounces off the right wall 
+and returns to your right ear.  Anybody with technical understanding 
+will know this is a very general approximation, but the result is 
+pleasant, and certainly creates an illusion of space when listening in 
+stereo (particularly with headphones).</p>
+<p><b>LPF</b>: Low Pass Filter.  Sets the cutoff point where high
+frequencies are damped in the ES option.</p>
 <p><b>Safe</b>: Limits Length regardless of the setting.</p>
 <p><b>User</b>: Browse for your own .rbv file.  These files are
 generated by invoking the rakverb command on a .wav format IR file.
