@@ -1254,7 +1254,12 @@ RKR::loadbank (char *filename)
   case 2:
   Message(1, meslabel, "Can not load this Bank file\n");
   return(0);
-  break;  
+  break;
+  case 3:
+  Message(1, meslabel, "Can not load this Bank file because is from a old rakarrack git version,\n please use rakgit2new utility to convert.");
+  return(0);
+  break;
+    
   }
 
 
@@ -1635,7 +1640,7 @@ RKR::Bank_to_Preset (int i)
   strcpy (efx_Reverbtron->Filename,Bank[i].RevFiname);
 
 
-  for (j = 0; j < 50; j++)
+  for (j = 0; j < 70; j++)
     {
       for (k = 0; k < 20; k++)
 	{
@@ -1831,7 +1836,7 @@ RKR::Preset_to_Bank (int i)
   lv[13][1] = efx_Cabinet->getpar (0);
 
 
-  for (j = 0; j < 50; j++)
+  for (j = 0; j < 70; j++)
     {
       for (k = 0; k < 19; k++)
 	{
@@ -1962,7 +1967,7 @@ for(i=0; i<62; i++)
    data = SwapFourBytes(data);
    Bank[i].Bypass=data;
    
-   for(j=0; j<50; j++)
+   for(j=0; j<70; j++)
      {
        for(k=0;k<20;k++)
            {
@@ -2103,7 +2108,8 @@ Pos = ftell(fs);
 fseek(fs, 0L, SEEK_END);
 Length = ftell(fs);
 fclose(fs);
-if (Length != 993488) return (1); else return(0);
+if (Length == 993488) return(3);
+if (Length != 1092688) return (1); else return(0);
 }
 
 return(2);

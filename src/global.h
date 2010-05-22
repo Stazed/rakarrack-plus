@@ -374,11 +374,11 @@ public:
   
   int Cabinet_Preset;
   int Selected_Preset;
-  int lv[50][20];
+  int lv[70][20];
   int saved_order[16];
   int efx_order[16];
   int new_order[16];
-  int availables[40];
+  int availables[60];
   int active[12];
   int MidiCh;
   int HarCh;
@@ -540,13 +540,13 @@ public:
   {
     char Nom[24];
     int Pos;
-  } efx_names[50];
+  } efx_names[70];
 
   struct Effects_Params
   {
     char Nom[32];
     int Ato;
-  } efx_params[336];
+  } efx_params[600];
 
 
   struct Preset_Bank_Struct
@@ -565,7 +565,7 @@ public:
     int Bypass;
     char RevFiname[128];
     char ReservedFiname[128];
-    int lv[50][20];
+    int lv[70][20];
     int XUserMIDI[128][20];
     int XMIDIrangeMin[128];
     int XMIDIrangeMax[128];

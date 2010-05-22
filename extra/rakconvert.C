@@ -468,7 +468,7 @@ main (int argc, char *argv[])
 // Read command Line
 
   fprintf (stderr,
-   "\nrackconvert convert old data bank files to the new file format and store the new ones in the home user directory.\nrackconvert - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon\n\n");
+   "\nrakconvert convert old data bank files to the new file format and store the new ones in the home user directory.\nrackconvert - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon\n\n");
 
 
   struct option opts[] = {
