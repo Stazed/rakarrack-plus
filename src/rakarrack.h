@@ -3504,5 +3504,6 @@ public:
   void UpdateTGUI();
   void ActACI();
   int Busca_Eff(int num);
+  void Fill_Avail(int filter);
 };
 #endif

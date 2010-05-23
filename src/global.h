@@ -406,6 +406,7 @@ public:
   int CountWait;
   int XUserMIDI[128][20];
 
+  int eff_filter;
   int Har_Down;
   int Rev_Down;
   int Con_Down;

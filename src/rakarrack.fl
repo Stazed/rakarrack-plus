@@ -830,13 +830,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1481 64 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -1357,7 +1356,7 @@ Scope_ON=1;
         xywh {642 396 154 17} labelfont 1 labelcolor 7
       }
       Fl_Group EQ {
-        user_data 1 selected
+        user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button eq_activar {
@@ -7264,27 +7263,18 @@ Order->hide();}
       }
       Fl_Button Pon {
         label {@<->}
-        callback {int x;
-
-
-
-int i = Order_Bro->value();
+        callback {int i = Order_Bro->value();
 int j = Avail_Bro->value();
 
 if(!i) return;
 
-Avail_Bro->insert(j,Order_Bro->text(i));
-Order_Bro->insert(i,Avail_Bro->text(j+1));
+Order_Bro->insert(i,Avail_Bro->text(j));
 
-Avail_Bro->remove(j+1);
+Avail_Bro->remove(j);
 Order_Bro->remove(i+1);
-
 Order_Bro->select(1);
-Avail_Bro->select(1);
-
-x=rkr->new_order[i-1];
 rkr->new_order[i-1]=rkr->availables[j];
-rkr->availables[j]=x;}
+Fill_Avail(rkr->eff_filter);}
         xywh {217 168 72 25} labelsize 18
       }
       Fl_Browser Order_Bro {
@@ -12041,9 +12031,9 @@ for(i=0;i<128;i++)
 }} {}
   }
   Function {Prepare_Order()} {} {
-    code {int i,j,k,t;
+    code {int i;
 Order_Bro->clear();
-Avail_Bro->clear();
+
 
 for (i=0; i<10;i++) 
 {
@@ -12052,31 +12042,9 @@ rkr->saved_order[i]=rkr->efx_order[i];
 Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
 }
 
-t=1;
+Fill_Avail(rkr->eff_filter);
 
-for (i=0; i<rkr->NumEffects;i++)
-{
-    
-    k=0;
- for (j=0;j<10;j++)
-   { 
-     if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
-   }     
- 
- if(!k)
- 
- { 
-  Avail_Bro->add(rkr->efx_names[i].Nom);
-   
-  rkr->availables[t]=rkr->efx_names[i].Pos;
-  t++;
- }
-
-}
-
-
-Order_Bro->select(1);
-Avail_Bro->select(1);} {}
+Order_Bro->select(1);} {}
   }
   Function {Show_Next_Time()} {} {
     code {if(rkr->mess_dis) return;
@@ -12273,5 +12241,37 @@ for(i=0; i<rkr->NumEffects;i++)
    break;
  }  
  return(i);} {}
+  }
+  Function {Fill_Avail(int filter)} {open
+  } {
+    code {int i,j,t,k;
+
+Avail_Bro->clear();
+
+t=1;
+for (i=0; i<rkr->NumEffects;i++)
+{
+  
+    k=0;
+ for (j=0;j<10;j++)
+   { 
+     if (rkr->new_order[j]==rkr->efx_names[i].Pos) k=1;
+   }     
+ 
+ if(!k)
+ 
+ { 
+ 
+ 
+  Avail_Bro->add(rkr->efx_names[i].Nom);
+  rkr->availables[t]=rkr->efx_names[i].Pos;
+  t++;
+ 
+ }
+
+}
+
+Avail_Bro->select(1);} {selected
+    }
   }
 } 

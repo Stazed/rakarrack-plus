@@ -6521,27 +6521,18 @@ void RKRGUI::cb_Order(Fl_Double_Window* o, void* v) {
 }
 
 void RKRGUI::cb_Pon_i(Fl_Button*, void*) {
-  int x;
-
-
-
-int i = Order_Bro->value();
+  int i = Order_Bro->value();
 int j = Avail_Bro->value();
 
 if(!i) return;
 
-Avail_Bro->insert(j,Order_Bro->text(i));
-Order_Bro->insert(i,Avail_Bro->text(j+1));
+Order_Bro->insert(i,Avail_Bro->text(j));
 
-Avail_Bro->remove(j+1);
+Avail_Bro->remove(j);
 Order_Bro->remove(i+1);
-
 Order_Bro->select(1);
-Avail_Bro->select(1);
-
-x=rkr->new_order[i-1];
 rkr->new_order[i-1]=rkr->availables[j];
-rkr->availables[j]=x;
+Fill_Avail(rkr->eff_filter);
 }
 void RKRGUI::cb_Pon(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Pon_i(o,v);
@@ -20216,9 +20207,9 @@ for(i=0;i<128;i++)
 }
 
 void RKRGUI::Prepare_Order() {
-  int i,j,k,t;
+  int i;
 Order_Bro->clear();
-Avail_Bro->clear();
+
 
 for (i=0; i<10;i++) 
 {
@@ -20227,31 +20218,9 @@ rkr->saved_order[i]=rkr->efx_order[i];
 Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
 }
 
-t=1;
-
-for (i=0; i<rkr->NumEffects;i++)
-{
-    
-    k=0;
- for (j=0;j<10;j++)
-   { 
-     if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
-   }     
- 
- if(!k)
- 
- { 
-  Avail_Bro->add(rkr->efx_names[i].Nom);
-   
-  rkr->availables[t]=rkr->efx_names[i].Pos;
-  t++;
- }
-
-}
-
+Fill_Avail(rkr->eff_filter);
 
 Order_Bro->select(1);
-Avail_Bro->select(1);
 }
 
 void RKRGUI::Show_Next_Time() {
@@ -20452,4 +20421,35 @@ for(i=0; i<rkr->NumEffects;i++)
    break;
  }  
  return(i);
+}
+
+void RKRGUI::Fill_Avail(int filter) {
+  int i,j,t,k;
+
+Avail_Bro->clear();
+
+t=1;
+for (i=0; i<rkr->NumEffects;i++)
+{
+  
+    k=0;
+ for (j=0;j<10;j++)
+   { 
+     if (rkr->new_order[j]==rkr->efx_names[i].Pos) k=1;
+   }     
+ 
+ if(!k)
+ 
+ { 
+ 
+ 
+  Avail_Bro->add(rkr->efx_names[i].Nom);
+  rkr->availables[t]=rkr->efx_names[i].Pos;
+  t++;
+ 
+ }
+
+}
+
+Avail_Bro->select(1);
 }

@@ -56,6 +56,7 @@ RKR::RKR ()
 
   char temp[128];
   error_num = 0;
+  eff_filter = 0;
   flpos = 0;
   Har_Down = 0;
   Rev_Down = 0;
