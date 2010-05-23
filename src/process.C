@@ -296,11 +296,11 @@ RKR::RKR ()
 "Shuffle","26","64",
 "StompBox","39","9",
 "Sustainer","36","32",
-"Synthfilter","27","32",
+"Synthfilter","27","16",
 "Valve","19","9",
 "VaryBand","28","2",
 "Vocoder","35","128",
-"WahWah","10","32"
+"WahWah","10","16"
 
     };
 
