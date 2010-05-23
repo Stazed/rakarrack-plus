@@ -6525,6 +6525,7 @@ void RKRGUI::cb_Pon_i(Fl_Button*, void*) {
 int j = Avail_Bro->value();
 
 if(!i) return;
+if(!j) return;
 
 Order_Bro->insert(i,Avail_Bro->text(j));
 
@@ -6580,6 +6581,78 @@ rkr->new_order[i+1]=x;
 }
 void RKRGUI::cb_Baja(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Baja_i(o,v);
+}
+
+void RKRGUI::cb_Fil0_i(Fl_Button*, void*) {
+  rkr->eff_filter=0;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil0(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil0_i(o,v);
+}
+
+void RKRGUI::cb_Fil1_i(Fl_Button*, void*) {
+  rkr->eff_filter=1;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil1(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil1_i(o,v);
+}
+
+void RKRGUI::cb_Fil2_i(Fl_Button*, void*) {
+  rkr->eff_filter=2;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil2(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil2_i(o,v);
+}
+
+void RKRGUI::cb_Fil4_i(Fl_Button*, void*) {
+  rkr->eff_filter=4;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil4(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil4_i(o,v);
+}
+
+void RKRGUI::cb_Fil8_i(Fl_Button*, void*) {
+  rkr->eff_filter=8;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil8(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil8_i(o,v);
+}
+
+void RKRGUI::cb_Fil16_i(Fl_Button*, void*) {
+  rkr->eff_filter=16;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil16(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil16_i(o,v);
+}
+
+void RKRGUI::cb_Fil32_i(Fl_Button*, void*) {
+  rkr->eff_filter=32;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil32(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil32_i(o,v);
+}
+
+void RKRGUI::cb_Fil64_i(Fl_Button*, void*) {
+  rkr->eff_filter=64;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil64(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil64_i(o,v);
+}
+
+void RKRGUI::cb_Fil128_i(Fl_Button*, void*) {
+  rkr->eff_filter=128;
+Fill_Avail(rkr->eff_filter);
+}
+void RKRGUI::cb_Fil128(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil128_i(o,v);
 }
 
 void RKRGUI::cb_ok_order_i(Fl_Button*, void*) {
@@ -15581,35 +15654,92 @@ R average.");
     Order->callback((Fl_Callback*)cb_Order, (void*)(this));
     { Fondo1 = new Fl_Box(1, 1, 600, 400);
     } // Fl_Box* Fondo1
-    { O_TITLE = new Fl_Box(88, 21, 438, 37, "Put Order in your Rack");
+    { O_TITLE = new Fl_Box(85, 8, 438, 37, "Put Order in your Rack");
       O_TITLE->labelfont(1);
       O_TITLE->labelsize(33);
       O_TITLE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Box* O_TITLE
-    { Avail_Bro = new Fl_Browser(12, 77, 185, 225);
+    { Avail_Bro = new Fl_Browser(12, 50, 185, 225);
       Avail_Bro->type(2);
       Avail_Bro->labelsize(18);
       Avail_Bro->textsize(18);
       Avail_Bro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Browser* Avail_Bro
-    { Pon = new Fl_Button(217, 168, 72, 25, "@<->");
+    { Pon = new Fl_Button(217, 140, 72, 25, "@<->");
       Pon->labelsize(18);
       Pon->callback((Fl_Callback*)cb_Pon);
     } // Fl_Button* Pon
-    { Order_Bro = new Fl_Browser(305, 77, 185, 225);
+    { Order_Bro = new Fl_Browser(305, 50, 185, 225);
       Order_Bro->type(2);
       Order_Bro->labelsize(18);
       Order_Bro->textsize(18);
       Order_Bro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
     } // Fl_Browser* Order_Bro
-    { Sube = new Fl_Button(508, 141, 72, 25, "@$2->");
+    { Sube = new Fl_Button(505, 120, 72, 25, "@$2->");
       Sube->labelsize(18);
       Sube->callback((Fl_Callback*)cb_Sube);
     } // Fl_Button* Sube
-    { Baja = new Fl_Button(510, 188, 72, 25, "@$8->");
+    { Baja = new Fl_Button(505, 160, 72, 25, "@$8->");
       Baja->labelsize(18);
       Baja->callback((Fl_Callback*)cb_Baja);
     } // Fl_Button* Baja
+    { Filters = new Fl_Group(10, 290, 240, 105);
+      { Fil0 = new Fl_Button(15, 294, 110, 15, "All");
+        Fil0->type(102);
+        Fil0->labelsize(10);
+        Fil0->callback((Fl_Callback*)cb_Fil0);
+        Fil0->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil0
+      { Fil1 = new Fl_Button(130, 294, 110, 15, "Distortion");
+        Fil1->type(102);
+        Fil1->labelsize(10);
+        Fil1->callback((Fl_Callback*)cb_Fil1);
+        Fil1->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil1
+      { Fil2 = new Fl_Button(15, 314, 110, 15, "Modulation");
+        Fil2->type(102);
+        Fil2->labelsize(10);
+        Fil2->callback((Fl_Callback*)cb_Fil2);
+        Fil2->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil2
+      { Fil4 = new Fl_Button(130, 314, 110, 15, "Time");
+        Fil4->type(102);
+        Fil4->labelsize(10);
+        Fil4->callback((Fl_Callback*)cb_Fil4);
+        Fil4->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil4
+      { Fil8 = new Fl_Button(15, 334, 110, 15, "Emulation");
+        Fil8->type(102);
+        Fil8->labelsize(10);
+        Fil8->callback((Fl_Callback*)cb_Fil8);
+        Fil8->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil8
+      { Fil16 = new Fl_Button(130, 334, 110, 15, "Filters");
+        Fil16->type(102);
+        Fil16->labelsize(10);
+        Fil16->callback((Fl_Callback*)cb_Fil16);
+        Fil16->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil16
+      { Fil32 = new Fl_Button(15, 354, 110, 15, "Dynamics");
+        Fil32->type(102);
+        Fil32->labelsize(10);
+        Fil32->callback((Fl_Callback*)cb_Fil32);
+        Fil32->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil32
+      { Fil64 = new Fl_Button(130, 354, 110, 15, "Processing && EQ");
+        Fil64->type(102);
+        Fil64->labelsize(10);
+        Fil64->callback((Fl_Callback*)cb_Fil64);
+        Fil64->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil64
+      { Fil128 = new Fl_Button(15, 375, 110, 15, "Synthesis");
+        Fil128->type(102);
+        Fil128->labelsize(10);
+        Fil128->callback((Fl_Callback*)cb_Fil128);
+        Fil128->when(FL_WHEN_CHANGED);
+      } // Fl_Button* Fil128
+      Filters->end();
+    } // Fl_Group* Filters
     { ok_order = new Fl_Button(436, 354, 72, 26, "Ok");
       ok_order->callback((Fl_Callback*)cb_ok_order);
     } // Fl_Button* ok_order
@@ -16417,7 +16547,16 @@ for (int t=0; t<Order->children();t++)
      w->selection_color(back_color);
      w->color(fore_color);
   }  
-  
+
+for (int t=0; t<Filters->children();t++)
+  {
+    Fl_Widget *w = Filters->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);
+  }  
+    
 
 for (int t=0; t<MIDILearn->children();t++)
   {
@@ -20442,10 +20581,12 @@ for (i=0; i<rkr->NumEffects;i++)
  
  { 
  
- 
+  if((rkr->efx_names[i].Type&rkr->eff_filter)==rkr->eff_filter) 
+ { 
   Avail_Bro->add(rkr->efx_names[i].Nom);
   rkr->availables[t]=rkr->efx_names[i].Pos;
   t++;
+ }
  
  }
 

@@ -825,8 +825,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -7249,17 +7248,17 @@ put_icon(AboutWin);}
     Fl_Window Order {
       callback {save_stat(2);
 Order->hide();}
-      xywh {1552 301 600 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
+      xywh {1890 178 600 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
         xywh {1 1 600 400}
       }
       Fl_Box O_TITLE {
         label {Put Order in your Rack}
-        xywh {88 21 438 37} labelfont 1 labelsize 33 labelcolor 7
+        xywh {85 8 438 37} labelfont 1 labelsize 33 labelcolor 7
       }
       Fl_Browser Avail_Bro {
-        xywh {12 77 185 225} type Hold labelsize 18 textsize 18 textcolor 7
+        xywh {12 50 185 225} type Hold labelsize 18 textsize 18 textcolor 7
       }
       Fl_Button Pon {
         label {@<->}
@@ -7267,6 +7266,7 @@ Order->hide();}
 int j = Avail_Bro->value();
 
 if(!i) return;
+if(!j) return;
 
 Order_Bro->insert(i,Avail_Bro->text(j));
 
@@ -7274,11 +7274,11 @@ Avail_Bro->remove(j);
 Order_Bro->remove(i+1);
 Order_Bro->select(1);
 rkr->new_order[i-1]=rkr->availables[j];
-Fill_Avail(rkr->eff_filter);}
-        xywh {217 168 72 25} labelsize 18
+Fill_Avail(rkr->eff_filter);} selected
+        xywh {217 140 72 25} labelsize 18
       }
       Fl_Browser Order_Bro {
-        xywh {305 77 185 225} type Hold labelsize 18 textsize 18 textcolor 7
+        xywh {305 50 185 225} type Hold labelsize 18 textsize 18 textcolor 7
       }
       Fl_Button Sube {
         label {@$2->}
@@ -7298,7 +7298,7 @@ x1=rkr->new_order[i-1];
 rkr->new_order[i]=x1;
 rkr->new_order[i-1]=x;
 }}
-        xywh {508 141 72 25} labelsize 18
+        xywh {505 120 72 25} labelsize 18
       }
       Fl_Button Baja {
         label {@$8->}
@@ -7318,7 +7318,65 @@ x1=rkr->new_order[i+1];
 rkr->new_order[i]=x1;
 rkr->new_order[i+1]=x;
 }}
-        xywh {510 188 72 25} labelsize 18
+        xywh {505 160 72 25} labelsize 18
+      }
+      Fl_Group Filters {
+        xywh {10 290 240 105}
+      } {
+        Fl_Button Fil0 {
+          label All
+          callback {rkr->eff_filter=0;
+Fill_Avail(rkr->eff_filter);}
+          xywh {15 294 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil1 {
+          label Distortion
+          callback {rkr->eff_filter=1;
+Fill_Avail(rkr->eff_filter);}
+          xywh {130 294 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil2 {
+          label Modulation
+          callback {rkr->eff_filter=2;
+Fill_Avail(rkr->eff_filter);}
+          xywh {15 314 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil4 {
+          label Time
+          callback {rkr->eff_filter=4;
+Fill_Avail(rkr->eff_filter);}
+          xywh {130 314 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil8 {
+          label Emulation
+          callback {rkr->eff_filter=8;
+Fill_Avail(rkr->eff_filter);}
+          xywh {15 334 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil16 {
+          label Filters
+          callback {rkr->eff_filter=16;
+Fill_Avail(rkr->eff_filter);}
+          xywh {130 334 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil32 {
+          label Dynamics
+          callback {rkr->eff_filter=32;
+Fill_Avail(rkr->eff_filter);}
+          xywh {15 354 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil64 {
+          label {Processing && EQ}
+          callback {rkr->eff_filter=64;
+Fill_Avail(rkr->eff_filter);}
+          xywh {130 354 110 15} type Radio labelsize 10 when 1
+        }
+        Fl_Button Fil128 {
+          label Synthesis
+          callback {rkr->eff_filter=128;
+Fill_Avail(rkr->eff_filter);}
+          xywh {15 375 110 15} type Radio labelsize 10 when 1
+        }
       }
       Fl_Button ok_order {
         label Ok
@@ -8270,7 +8328,16 @@ for (int t=0; t<Order->children();t++)
      w->selection_color(back_color);
      w->color(fore_color);
   }  
-  
+
+for (int t=0; t<Filters->children();t++)
+  {
+    Fl_Widget *w = Filters->child(t);
+
+     w->labelcolor(label_color);  
+     w->selection_color(back_color);
+     w->color(fore_color);
+  }  
+    
 
 for (int t=0; t<MIDILearn->children();t++)
   {
@@ -12242,8 +12309,7 @@ for(i=0; i<rkr->NumEffects;i++)
  }  
  return(i);} {}
   }
-  Function {Fill_Avail(int filter)} {open
-  } {
+  Function {Fill_Avail(int filter)} {} {
     code {int i,j,t,k;
 
 Avail_Bro->clear();
@@ -12262,16 +12328,17 @@ for (i=0; i<rkr->NumEffects;i++)
  
  { 
  
- 
+  if((rkr->efx_names[i].Type&rkr->eff_filter)==rkr->eff_filter) 
+ { 
   Avail_Bro->add(rkr->efx_names[i].Nom);
   rkr->availables[t]=rkr->efx_names[i].Pos;
   t++;
+ }
  
  }
 
 }
 
-Avail_Bro->select(1);} {selected
-    }
+Avail_Bro->select(1);} {}
   }
 } 

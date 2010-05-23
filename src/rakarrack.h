@@ -3096,6 +3096,52 @@ private:
   void cb_Baja_i(Fl_Button*, void*);
   static void cb_Baja(Fl_Button*, void*);
 public:
+  Fl_Group *Filters;
+  Fl_Button *Fil0;
+private:
+  void cb_Fil0_i(Fl_Button*, void*);
+  static void cb_Fil0(Fl_Button*, void*);
+public:
+  Fl_Button *Fil1;
+private:
+  void cb_Fil1_i(Fl_Button*, void*);
+  static void cb_Fil1(Fl_Button*, void*);
+public:
+  Fl_Button *Fil2;
+private:
+  void cb_Fil2_i(Fl_Button*, void*);
+  static void cb_Fil2(Fl_Button*, void*);
+public:
+  Fl_Button *Fil4;
+private:
+  void cb_Fil4_i(Fl_Button*, void*);
+  static void cb_Fil4(Fl_Button*, void*);
+public:
+  Fl_Button *Fil8;
+private:
+  void cb_Fil8_i(Fl_Button*, void*);
+  static void cb_Fil8(Fl_Button*, void*);
+public:
+  Fl_Button *Fil16;
+private:
+  void cb_Fil16_i(Fl_Button*, void*);
+  static void cb_Fil16(Fl_Button*, void*);
+public:
+  Fl_Button *Fil32;
+private:
+  void cb_Fil32_i(Fl_Button*, void*);
+  static void cb_Fil32(Fl_Button*, void*);
+public:
+  Fl_Button *Fil64;
+private:
+  void cb_Fil64_i(Fl_Button*, void*);
+  static void cb_Fil64(Fl_Button*, void*);
+public:
+  Fl_Button *Fil128;
+private:
+  void cb_Fil128_i(Fl_Button*, void*);
+  static void cb_Fil128(Fl_Button*, void*);
+public:
   Fl_Button *ok_order;
 private:
   void cb_ok_order_i(Fl_Button*, void*);

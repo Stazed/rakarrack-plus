@@ -242,59 +242,73 @@ RKR::RKR ()
 
 // Names
 
+/*
+//Filter 
+
+1   - Distortion
+2   - Modulation
+4   - Time
+8   - Emulation
+16  - Filters
+32  - Dynamics
+64  - Processing & EQ
+128 - Synthesis
+*/
+
   NumEffects = 41;
 
   {
     static const char *los_names[] =
 {
-"AlienWah","11",
-"Analog Phaser","18",
-"Arpie","24",
-"Cabinet","12",
-"Chorus","5",
-"Coil Crafter","33",
-"Compressor","1",
-"Convolotron","29",
-"Derelict","17",
-"DistBand","23",
-"Distortion","2",
-"Dual Flange","20",
-"Echo","4",
-"Echoverse","32",
-"EQ","0",
-"Exciter","22",
-"Expander","25",
-"Flanger","7",
-"Harmonizer","14",
-"Looper","30",
-"MusicalDelay","15",
-"MuTroMojo","31",
-"NoiseGate","16",
-"Overdrive","3",
-"Pan","13",
-"Parametric EQ","9",
-"Phaser","6",
-"Reverb","8",
-"Reverbtron","40",
-"Ring","21",
-"Sequence","37",
-"ShelfBoost","34",
-"Shifter","38",
-"Shuffle","26",
-"StompBox","39",
-"Sustainer","36",
-"Synthfilter","27",
-"Valve","19",
-"VaryBand","28",
-"Vocoder","35",
-"WahWah","10"
+"AlienWah","11","16",
+"Analog Phaser","18","2",
+"Arpie","24","4",
+"Cabinet","12","8",
+"Chorus","5","2",
+"Coil Crafter","33","8",
+"Compressor","1","32",
+"Convolotron","29","8",
+"Derelict","17","1",
+"DistBand","23","1",
+"Distortion","2","1",
+"Dual Flange","20","2",
+"Echo","4","4",
+"Echoverse","32","4",
+"EQ","0","64",
+"Exciter","22","64",
+"Expander","25","32",
+"Flanger","7","2",
+"Harmonizer","14","128",
+"Looper","30","128",
+"MusicalDelay","15","4",
+"MuTroMojo","31","16",
+"NoiseGate","16","32",
+"Overdrive","3","1",
+"Pan","13","64",
+"Parametric EQ","9","64",
+"Phaser","6","2",
+"Reverb","8","4",
+"Reverbtron","40","4",
+"Ring","21","128",
+"Sequence","37","128",
+"ShelfBoost","34","64",
+"Shifter","38","128",
+"Shuffle","26","64",
+"StompBox","39","9",
+"Sustainer","36","32",
+"Synthfilter","27","32",
+"Valve","19","9",
+"VaryBand","28","2",
+"Vocoder","35","128",
+"WahWah","10","32"
 
     };
 
-    for (i = 0; i < NumEffects*2; i+=2)
+    for (i = 0; i < NumEffects*3; i+=3)
    {
-      strcpy (efx_names[i/2].Nom, los_names[i]);
-      sscanf(los_names[i+1],"%d",&efx_names[i/2].Pos);
+      strcpy (efx_names[i/3].Nom, los_names[i]);
+      sscanf(los_names[i+1],"%d",&efx_names[i/3].Pos);
+      sscanf(los_names[i+2],"%d",&efx_names[i/3].Type);
  
 
    }
