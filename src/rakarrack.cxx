@@ -18351,8 +18351,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
  }
  
  
+ Font_Bro->clear(); 
  k=0;
-
  k = Fl::set_fonts(0);
   for (i = 0; i < k; i++) {
     int t; const char *name = Fl::get_font_name((Fl_Font)i,&t);
@@ -18372,6 +18372,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
     Font_Bro->add(name);
 
 }
+
+Font_Bro->value(rkr->font+1);
 }
 
 void RKRGUI::BankWin_Label(char *filename) {
