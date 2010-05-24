@@ -46,11 +46,7 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   maxtime = 0.0f;
 
   hrtf_size = SAMPLE_RATE/2;
-<<<<<<< HEAD:src/Echotron.C
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
-=======
-  maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
->>>>>>> dfce22126c9d51c19d8ed06ff53fa0ecaf35ef22:src/Echotron.C
   time = (int *) malloc (sizeof (int) * 2000);
   rndtime = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
