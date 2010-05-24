@@ -834,7 +834,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1474 57 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -7621,14 +7621,14 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();}
+Settings->hide();} open
       xywh {1755 149 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {5 0 631 535}
       } {
         Fl_Group Look {
@@ -7776,7 +7776,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
+          user_data 1
           xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -8070,8 +8070,7 @@ Show_Next_Time();} open
           } {}
           Fl_Choice Wave_Amo {
             label {Waveshape Resampling}
-            callback {Wave_res_amount =(int) o->value();
-Show_Next_Time();}
+            callback {Show_Next_Time();}
             xywh {133 428 82 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
@@ -9002,7 +9001,7 @@ rakarrack.set(rkr->PrefNom("Sequence Down Quality"),rkr->Seq_D_Q);
 rakarrack.set(rkr->PrefNom("Shifter Downsample"),rkr->Shi_Down);
 rakarrack.set(rkr->PrefNom("Shifter Up Quality"),rkr->Shi_U_Q);
 rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
-rakarrack.set(rkr->PrefNom("Waveshape Resampling"),Wave_res_amount);
+rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
 
@@ -9081,7 +9080,8 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -9289,8 +9289,7 @@ echotron_activar->value(rkr->Echotron_Bypass);
 echotron_preset->do_callback(echotron_preset,1);
 
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {
