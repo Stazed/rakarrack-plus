@@ -7397,7 +7397,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1435 129 640 528} type Double color 4 hide
+      xywh {1755 149 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -7408,8 +7408,8 @@ Settings->hide();}
       } {
         Fl_Group Look {
           label Look
-          user_data 1 open
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -7551,8 +7551,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -7841,6 +7841,47 @@ Show_Next_Time();} open
             callback {rkr->Shi_U_Q=(int)o->value();
 Show_Next_Time();} open
             xywh {343 399 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Wave_Amo {
+            label {Waveshape Resampling}
+            callback {Wave_res_amount =(int) o->value();
+Show_Next_Time();}
+            xywh {133 428 82 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          } {
+            MenuItem {} {
+              label Normal
+              xywh {50 50 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label x2
+              xywh {50 50 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label x4
+              xywh {40 40 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x8
+              xywh {30 30 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x12
+              xywh {30 30 36 21} labelsize 10
+            }
+          }
+          Fl_Choice Wave_Down_Qua {
+            label Down
+            callback {Wave_down_q=(int)o->value();
+Show_Next_Time();}
+            xywh {250 428 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Wave_Up_Qua {
+            label Up
+            callback {Wave_up_q=(int)o->value();
+Show_Next_Time();}
+            xywh {343 428 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
         }
@@ -8736,6 +8777,10 @@ rakarrack.set(rkr->PrefNom("Sequence Down Quality"),rkr->Seq_D_Q);
 rakarrack.set(rkr->PrefNom("Shifter Downsample"),rkr->Shi_Down);
 rakarrack.set(rkr->PrefNom("Shifter Up Quality"),rkr->Shi_U_Q);
 rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
+rakarrack.set(rkr->PrefNom("Waveshape Resampling"),Wave_res_amount);
+rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
+rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
+
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
@@ -9915,6 +9960,9 @@ Seq_Up_Qua->value(rkr->Seq_U_Q);
 Shi_Downsample->value(rkr->Shi_Down);
 Shi_Down_Qua->value(rkr->Shi_D_Q);
 Shi_Up_Qua->value(rkr->Shi_U_Q);
+Wave_Amo->value(Wave_res_amount);
+Wave_Up_Qua->value(Wave_up_q);
+Wave_Down_Qua->value(Wave_down_q);
 
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);

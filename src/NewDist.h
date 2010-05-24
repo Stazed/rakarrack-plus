@@ -85,7 +85,7 @@ private:
 
   //Parametrii reali
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
-  class Waveshaper *wshape;
+  class Waveshaper *wshapel, *wshaper;
 
 
   class Filter *filterl, *filterr;

@@ -45,6 +45,9 @@ unsigned int SAMPLE_RATE;
 float fPERIOD;
 float fSAMPLE_RATE;
 float cSAMPLE_RATE;
+int Wave_res_amount;
+int Wave_up_q;
+int Wave_down_q;
 float val_sum;
 float r__ratio;
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -130,6 +133,13 @@ RKR::RKR ()
   rakarrack.get (PrefNom("Shifter Downsample"),Shi_Down,0);
   rakarrack.get (PrefNom("Shifter Up Quality"),Shi_U_Q,4);
   rakarrack.get (PrefNom("Shifter Down Quality"),Shi_D_Q,4);
+
+  rakarrack.get (PrefNom("Waveshape Resampling"),Wave_res_amount,0);
+  rakarrack.get (PrefNom("Waveshape Up Quality"),Wave_up_q,4);
+  rakarrack.get (PrefNom("Waveshape Down Quality"),Wave_down_q,4);
+
+
+
 
   rakarrack.get (PrefNom ("Harmonizer Quality"), HarQual, 4);
   rakarrack.get (PrefNom ("Auto Connect Jack"), aconnect_JA, 1);

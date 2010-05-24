@@ -54,9 +54,13 @@ MBDist::MBDist (float * efxoutl_, float * efxoutr_)
   hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0);
   hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0);
 
-  mbwshape1 = new Waveshaper();
-  mbwshape2 = new Waveshaper();  
-  mbwshape3 = new Waveshaper(); 
+  mbwshape1l = new Waveshaper();
+  mbwshape2l = new Waveshaper();  
+  mbwshape3l = new Waveshaper(); 
+
+  mbwshape1r = new Waveshaper();
+  mbwshape2r = new Waveshaper();  
+  mbwshape3r = new Waveshaper(); 
   
   //default values
   Ppreset = 0;
@@ -125,9 +129,9 @@ MBDist::out (float * smpsl, float * smpsr)
   lpf2l->filterout(midl);
   hpf2l->filterout(highl);
 
-  mbwshape1->waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
-  mbwshape2->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
-  mbwshape3->waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
+  mbwshape1l->waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
+  mbwshape2l->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
+  mbwshape3l->waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
 
 
 if (Pstereo)
@@ -141,9 +145,9 @@ if (Pstereo)
   lpf2r->filterout(midr);
   hpf2r->filterout(highr);
   
-  mbwshape1->waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
-  mbwshape2->waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
-  mbwshape3->waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
+  mbwshape1r->waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
+  mbwshape2r->waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
+  mbwshape3r->waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
 
 
 }

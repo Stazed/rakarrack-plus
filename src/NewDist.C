@@ -47,7 +47,9 @@ NewDist::NewDist (float * efxoutl_, float * efxoutr_)
   hpfr = new AnalogFilter (3, 20, 1, 0);
   blockDCl = new AnalogFilter (2, 75.0f, 1, 0);
   blockDCr = new AnalogFilter (2, 75.0f, 1, 0);
-  wshape = new Waveshaper();
+  wshapel = new Waveshaper();
+  wshaper = new Waveshaper();
+  
   blockDCl->setfreq (75.0f);
   blockDCr->setfreq (75.0f);
 
@@ -161,8 +163,8 @@ NewDist::out (float * smpsl, float * smpsr)
   //no optimised, yet (no look table)
 
 
-  wshape->waveshapesmps (PERIOD, smpsl, Ptype, Pdrive, 2);
-  wshape->waveshapesmps (PERIOD, smpsr, Ptype, Pdrive, 2);
+  wshapel->waveshapesmps (PERIOD, smpsl, Ptype, Pdrive, 2);
+  wshaper->waveshapesmps (PERIOD, smpsr, Ptype, Pdrive, 2);
 
 
 

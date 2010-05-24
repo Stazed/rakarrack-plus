@@ -29,12 +29,52 @@
 
 Waveshaper::Waveshaper()
 {
+  
+  
+  switch(Wave_res_amount)
+  {
+    case 0:
+    period_coeff = 1;
+    ncSAMPLE_RATE=cSAMPLE_RATE;
+    break;
+    case 1:
+    period_coeff = 2;
+    ncSAMPLE_RATE=cSAMPLE_RATE/2;
+    break;
+    case 2:
+    period_coeff = 4;
+    ncSAMPLE_RATE=cSAMPLE_RATE/4;
+    break;
+    case 3:
+    period_coeff = 8;
+    ncSAMPLE_RATE=cSAMPLE_RATE/8;
+    break;
+    case 4:
+    period_coeff = 12;
+    ncSAMPLE_RATE=cSAMPLE_RATE/12;
+    break;
+    
+ }
+
+
+
+
+  temps = (float *) malloc (sizeof (float) * PERIOD * period_coeff);
+  u_up=(double)period_coeff;
+  u_down = 1.0 / u_up; 
+  
   compg = 0.0f;  //used by compression distortion
   cratio = 0.25f;  //used by compression for hardness
   tmpgain = 1.0f;  // compression distortion temp variable
   dthresh = 0.25;
   dyno = 0.0f;
-  dynodecay = 0.0167f/(cSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
+  dynodecay = 0.0167f/(ncSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
+
+  U_Resample = new Resample(Wave_up_q);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
+  D_Resample = new Resample(Wave_down_q);
+  
+
+
 
 };
 
@@ -48,7 +88,7 @@ void Waveshaper::cleanup()
   tmpgain = 1.0f;  // compression distortion temp variable
   dthresh = 0.25;
   dyno = 0.0f;
-  dynodecay = 0.0167f/(cSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
+  dynodecay = 0.0167f/(ncSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
 }
 
 
@@ -56,6 +96,17 @@ void
 Waveshaper::waveshapesmps (int n, float * smps, int type,
 	       int drive, int eff)
 {
+
+  int nn=n;
+  
+  if(Wave_res_amount > 0)
+   {
+     nn=n*period_coeff;
+     U_Resample->mono_out(smps,temps,n,u_up);
+   }
+ 
+  else memcpy(temps,smps,sizeof(float)*n);
+
   int i;
   float ws = (float)drive / 127.0f + .00001f;
   ws = 1.0f - expf (-ws * 4.0f);
@@ -66,8 +117,8 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
     {
     case 1:
       ws = powf (10.0f, ws * ws * 3.0f) - 1.0f + 0.001f;	//Arctangent
-      for (i = 0; i < n; i++)
-	smps[i] = atanf (smps[i] * ws) / atanf (ws);
+      for (i = 0; i < nn; i++)
+	temps[i] = atanf (temps[i] * ws) / atanf (ws);
       break;
     case 2:
       ws = ws * ws * 32.0f + 0.0001f;	//Asymmetric
@@ -75,24 +126,24 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = sinf (ws) + 0.1f;
       else
 	tmpv = 1.1f;
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  smps[i] = sinf (smps[i] * (0.1f + ws - ws * smps[i])) / tmpv;
+	  temps[i] = sinf (temps[i] * (0.1f + ws - ws * temps[i])) / tmpv;
 	};
       break;
     case 3:
       ws = ws * ws * ws * 20.0f + 0.0001f;	//Pow
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  smps[i] *= ws;
-	  if (fabsf (smps[i]) < 1.0)
+	  temps[i] *= ws;
+	  if (fabsf (temps[i]) < 1.0)
 	    {
-	      smps[i] = (smps[i] - powf (smps[i], 3.0f)) * 3.0f;
+	      temps[i] = (temps[i] - powf (temps[i], 3.0f)) * 3.0f;
 	      if (ws < 1.0)
-		smps[i] /= ws;
+		temps[i] /= ws;
 	    }
 	  else
-	    smps[i] = 0.0;
+	    temps[i] = 0.0;
 	};
       break;
     case 4:
@@ -101,13 +152,13 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = sinf (ws);
       else
 	tmpv = 1.0f;
-      for (i = 0; i < n; i++)
-	smps[i] = sinf (smps[i] * ws) / tmpv;
+      for (i = 0; i < nn; i++)
+	temps[i] = sinf (temps[i] * ws) / tmpv;
       break;
     case 5:
       ws = ws * ws + 0.000001f;	//Quantisize
-      for (i = 0; i < n; i++)
-	smps[i] = floorf (smps[i] / ws + 0.15f) * ws;
+      for (i = 0; i < nn; i++)
+	temps[i] = floorf (temps[i] / ws + 0.15f) * ws;
       break;
     case 6:
       ws = ws * ws * ws * 32.0f + 0.0001f;	//Zigzag
@@ -115,67 +166,67 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = sinf (ws);
       else
 	tmpv = 1.0f;
-      for (i = 0; i < n; i++)
-	smps[i] = asinf (sinf (smps[i] * ws)) / tmpv;
+      for (i = 0; i < nn; i++)
+	temps[i] = asinf (sinf (temps[i] * ws)) / tmpv;
       break;
     case 7:
       ws = powf (2.0f, -ws * ws * 8.0f);	//Limiter
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  float tmp = smps[i];
+	  float tmp = temps[i];
 	  if (fabsf (tmp) > ws)
 	    {
 	      if (tmp >= 0.0)
-		smps[i] = 1.0f;
+		temps[i] = 1.0f;
 	      else
-		smps[i] = -1.0f;
+		temps[i] = -1.0f;
 	    }
 	  else
-	    smps[i] /= ws;
+	    temps[i] /= ws;
 	};
       break;
     case 8:
       ws = powf (2.0f, -ws * ws * 8.0f);	//Upper Limiter
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  float tmp = smps[i];
+	  float tmp = temps[i];
 	  if (tmp > ws)
-	    smps[i] = ws;
-	  smps[i] *= 2.0f;
+	    temps[i] = ws;
+	  temps[i] *= 2.0f;
 	};
       break;
     case 9:
       ws = powf (2.0f, -ws * ws * 8.0f);	//Lower Limiter
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  float tmp = smps[i];
+	  float tmp = temps[i];
 	  if (tmp < -ws)
-	    smps[i] = -ws;
-	  smps[i] *= 2.0f;
+	    temps[i] = -ws;
+	  temps[i] *= 2.0f;
 	};
       break;
     case 10:
       ws = (powf (2.0f, ws * 6.0f) - 1.0f) / powf (2.0f, 6.0f);	//Inverse Limiter
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  float tmp = smps[i];
+	  float tmp = temps[i];
 	  if (fabsf (tmp) > ws)
 	    {
 	      if (tmp >= 0.0)
-		smps[i] = tmp - ws;
+		temps[i] = tmp - ws;
 	      else
-		smps[i] = tmp + ws;
+		temps[i] = tmp + ws;
 	    }
 	  else
-	    smps[i] = 0;
+	    temps[i] = 0;
 	};
       break;
     case 11:
       ws = powf (5.0f, ws * ws * 1.0f) - 1.0f;	//Clip
-      for (i = 0; i < n; i++)
-	smps[i] =
-	  smps[i] * (ws + 0.5f) * 0.9999f - floorf (0.5f +
-						  smps[i] * (ws +
+      for (i = 0; i < nn; i++)
+	temps[i] =
+	  temps[i] * (ws + 0.5f) * 0.9999f - floorf (0.5f +
+						  temps[i] * (ws +
 							     0.5f) * 0.9999f);
       break;
     case 12:
@@ -184,13 +235,13 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = ws;
       else
 	tmpv = 1.0f;
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  float tmp = smps[i] * ws;
+	  float tmp = temps[i] * ws;
 	  if ((tmp > -2.0) && (tmp < 1.0))
-	    smps[i] = tmp * (1.0f - tmp) * (tmp + 2.0f) / tmpv;
+	    temps[i] = tmp * (1.0f - tmp) * (tmp + 2.0f) / tmpv;
 	  else
-	    smps[i] = 0.0f;
+	    temps[i] = 0.0f;
 	};
       break;
     case 13:
@@ -199,15 +250,15 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = ws * (1.0f + ws) / 2.0f;
       else
 	tmpv = 1.0f;
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  float tmp = smps[i] * ws;
+	  float tmp = temps[i] * ws;
 	  if ((tmp > -1.0f) && (tmp < 1.618034f))
-	    smps[i] = tmp * (1.0f - tmp) / tmpv;
+	    temps[i] = tmp * (1.0f - tmp) / tmpv;
 	  else if (tmp > 0.0)
-	    smps[i] = -1.0f;
+	    temps[i] = -1.0f;
 	  else
-	    smps[i] = -2.0f;
+	    temps[i] = -2.0f;
 	};
       break;
     case 14:
@@ -216,76 +267,76 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = 0.5f;
       else
 	tmpv = 0.5f - 1.0f / (expf (ws) + 1.0f);
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	  float tmp = smps[i] * ws;
+	  float tmp = temps[i] * ws;
 	  if (tmp < -10.0)
 	    tmp = -10.0f;
 	  else if (tmp > 10.0)
 	    tmp = 10.0f;
 	  tmp = 0.5f - 1.0f / (expf (tmp) + 1.0f);
-	  smps[i] = tmp / tmpv;
+	  temps[i] = tmp / tmpv;
 	};
       break;
       case 15:		//Sqrt "Crunch" -- Asymmetric square root distortion.
       ws = ws*ws*CRUNCH_GAIN + 1.0f;
 
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	float tmp = smps[i] * ws;	
+	float tmp = temps[i] * ws;	
 	if (tmp < Tlo) {  
-	smps[i] = Tlc - sqrtf(-tmp*DIV_TLC_CONST);
+	temps[i] = Tlc - sqrtf(-tmp*DIV_TLC_CONST);
 
 	}
 	else if (tmp > Thi) {
-	smps[i] = Thc + sqrtf(tmp*DIV_THC_CONST);	
+	temps[i] = Thc + sqrtf(tmp*DIV_THC_CONST);	
 	}
 	else { 
- 	smps[i] = tmp;
+ 	temps[i] = tmp;
 	};
 	  
-	  if (smps[i] < -1.0)
-	    smps[i] = -1.0f;
-	  else if (smps[i] > 1.0)
-	    smps[i] = 1.0f;
+	  if (temps[i] < -1.0)
+	    temps[i] = -1.0f;
+	  else if (temps[i] > 1.0)
+	    temps[i] = 1.0f;
 
 	};
       break;
       case 16:		//Sqrt "Crunch2" -- Asymmetric square root distortion.
       ws = ws*ws*CRUNCH_GAIN + 1.0f;
 
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	float tmp = smps[i] * ws;	
+	float tmp = temps[i] * ws;	
 	if (tmp < Tlo) {  
-	smps[i] = Tlc;
+	temps[i] = Tlc;
 
 	}
 	else if (tmp > Thi) {
-	smps[i] = Thc + sqrtf(tmp*DIV_THC_CONST);	
+	temps[i] = Thc + sqrtf(tmp*DIV_THC_CONST);	
 	}
 	else { 
- 	smps[i] = tmp;
+ 	temps[i] = tmp;
 	};
 	  
-	  if (smps[i] < -1.0)
-	    smps[i] = -1.0f;
-	  else if (smps[i] > 1.0)
-	    smps[i] = 1.0f;
+	  if (temps[i] < -1.0)
+	    temps[i] = -1.0f;
+	  else if (temps[i] > 1.0)
+	    temps[i] = 1.0f;
 	};
       break;
       
       case 17:		//Octave Up
       ws = ws*ws*30.0f + 1.0f;
 
-      for (i = 0; i < n; i++)
+      for (i = 0; i < nn; i++)
 	{
-	float tmp = fabs(smps[i])* ws;	
+	float tmp = fabs(temps[i])* ws;	
 	if (tmp > 1.0f) {  
 	tmp = 1.0f;
 	}
 
-	smps[i] = tmp;		//a little bit of DC correction
+	temps[i] = tmp;		//a little bit of DC correction
 
 	};
       break;
@@ -295,8 +346,8 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = sinf (ws);
       else
 	tmpv = 1.0f;
-      for (i = 0; i < n; i++)
-        smps[i]=sinf(ws * smps[i] + sinf( ws * 2.0f*smps[i]))/ tmpv;  
+      for (i = 0; i < nn; i++)
+        temps[i]=sinf(ws * temps[i] + sinf( ws * 2.0f*temps[i]))/ tmpv;  
 
       break;                                                               
 
@@ -306,16 +357,16 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = sinf (ws);
       else
 	tmpv = 1.0f;
-       for (i = 0; i < n; i++)
-       smps[i]=sinf(ws * smps[i] + sinf(ws * smps[i])/tmpv);  
+       for (i = 0; i < nn; i++)
+       temps[i]=sinf(ws * temps[i] + sinf(ws * temps[i])/tmpv);  
       break;                                                               
         
       case 20:  //Compression
         cratio = 1.0f - 0.25f * ws;
 	ws =  1.5f*ws*CRUNCH_GAIN + 4.0f;
-	   for (i = 0; i < n; i++)    //apply compression 
+	   for (i = 0; i < nn; i++)    //apply compression 
 	   {
-	   tmpv = fabs(ws * smps[i]);
+	   tmpv = fabs(ws * temps[i]);
   		    dyno += 0.01f * (1.0f - dynodecay) * tmpv;
 		    dyno *= dynodecay;	
 	   tmpv += dyno;
@@ -325,19 +376,19 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	   compg = dthresh + dthresh*(tmpv - dthresh)/tmpv; 
 	   dthresh = 0.25f + cratio*(compg - dthresh);   //dthresh changes dynamically
 	   
-		   if (smps[i] > 0.0f)
+		   if (temps[i] > 0.0f)
 		   {
-		    smps[i] = compg;
+		    temps[i] = compg;
 		    }
 		   else 
 		   {
-		   smps[i] = -1.0f * compg;
+		   temps[i] = -1.0f * compg;
 		   }  
 		   
 	   }
 	   else
 	   {
-	   smps[i] *= ws;
+	   temps[i] *= ws;
 	   }
    
 	   if(tmpv < dthresh) dthresh = tmpv;
@@ -349,17 +400,17 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
         
        case 21: //Overdrive
          ws = powf (10.0f, ws * ws * 3.0f) - 1.0f + 0.001f;
-         for (i = 0; i < n; i++)
+         for (i = 0; i < nn; i++)
 	{
-         if(smps[i]>0.0f) smps[i] = sqrtf(smps[i]*ws); else smps[i] = -sqrtf(-smps[i]*ws);
+         if(temps[i]>0.0f) temps[i] = sqrtf(temps[i]*ws); else temps[i] = -sqrtf(-temps[i]*ws);
         } 
          break;
 
        case 22: //Soft
          ws = powf(8.0f, ws*ws+1.0f);
-         for (i = 0; i < n; i++)
+         for (i = 0; i < nn; i++)
 	{
-         if(smps[i]>0.0f) smps[i] = ws*powf(smps[i],1.4142136f); else smps[i] = ws* -powf(-smps[i],1.4142136f);
+         if(temps[i]>0.0f) temps[i] = ws*powf(temps[i],1.4142136f); else temps[i] = ws* -powf(-temps[i],1.4142136f);
         } 
          break;
 
@@ -367,17 +418,17 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
       
         ws = powf (24.0f, ws * ws) + 0.5f;
         factor = 1.0f / ws; 
-        for (i = 0; i < n; i++)
+        for (i = 0; i < nn; i++)
 	{
-        if(smps[i] > 1.0) smps[i] = 1.0f;
-        if(smps[i] < -1.0) smps[i] = -1.0f;
+        if(temps[i] > 1.0) temps[i] = 1.0f;
+        if(temps[i] < -1.0) temps[i] = -1.0f;
         
-        if(smps[i]<factor) smps[i]=smps[i];
+        if(temps[i]<factor) temps[i]=temps[i];
         else
-        if(smps[i]>factor) smps[i]=factor+(smps[i]-factor)/powf(1.0f+((smps[i]-factor)/(1.0f-smps[i])),2.0f);
+        if(temps[i]>factor) temps[i]=factor+(temps[i]-factor)/powf(1.0f+((temps[i]-factor)/(1.0f-temps[i])),2.0f);
         else
-        if(smps[i]>1.0f) smps[i]=(factor+1.0f)*.5f;
-        smps[i]*=ws; 
+        if(temps[i]>1.0f) temps[i]=(factor+1.0f)*.5f;
+        temps[i]*=ws; 
         } 
         break;
 	
@@ -390,28 +441,28 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	ws = 1.0f;
 	}           //allows functions applying gain before waveshaper
 	
-	   for (i = 0; i < n; i++)    //apply compression 
+	   for (i = 0; i < nn; i++)    //apply compression 
 	   {
-	   tmpv = fabs(ws * smps[i]);
+	   tmpv = fabs(ws * temps[i]);
 
 	   if(tmpv > dthresh)                                //if envelope of signal exceeds thresh, then compress
 	   {
 	   compg = dthresh + dthresh*(tmpv - dthresh)/tmpv; 
 	   dthresh = 0.5f + cratio*(compg - dthresh);   //dthresh changes dynamically
 	   
-		   if (smps[i] > 0.0f)
+		   if (temps[i] > 0.0f)
 		   {
-		    smps[i] = compg;
+		    temps[i] = compg;
 		    }
 		   else 
 		   {
-		   smps[i] = -1.0f * compg;
+		   temps[i] = -1.0f * compg;
 		   }  
 		   
 	   }
 	   else
 	   {
-	   smps[i] *= ws;
+	   temps[i] *= ws;
 	   }
    
 	   if(tmpv < dthresh) dthresh = tmpv;
@@ -422,28 +473,28 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
        case 25:  // Op Amp limiting (used by stompboxes), needs to get a large signal to do something
         cratio = 0.05;
-	   for (i = 0; i < n; i++)    //apply compression 
+	   for (i = 0; i < nn; i++)    //apply compression 
 	   {
-	   tmpv = fabs(smps[i]);
+	   tmpv = fabs(temps[i]);
 
 	   if(tmpv > dthresh)                                //if envelope of signal exceeds thresh, then compress
 	   {
 	   compg = dthresh + dthresh*(tmpv - dthresh)/tmpv; 
 	   dthresh = 3.5f + cratio*(compg - dthresh);   //dthresh changes dynamically
 	   
-		   if (smps[i] > 0.0f)
+		   if (temps[i] > 0.0f)
 		   {
-		    smps[i] = compg;
+		    temps[i] = compg;
 		    }
 		   else 
 		   {
-		   smps[i] = -1.0f * compg;
+		   temps[i] = -1.0f * compg;
 		   }  
 		   
 	   }
 	   else
 	   {
-	   smps[i] *= 1.0f;
+	   temps[i] *= 1.0f;
 	   }
    
 	   if(tmpv < dthresh) dthresh = tmpv;
@@ -456,11 +507,11 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
       
         ws = powf (35.0f, ws * ws) + 4.0f;
 	factor = sqrt(1.0f / ws);
-        for (i = 0; i < n; i++)
+        for (i = 0; i < nn; i++)
 	{
-        smps[i] = smps[i] + factor; 
-        if(smps[i] < 0.0) smps[i] = 0.0f;
-	smps[i] = 1.0f - 2.0f/(ws*smps[i]*smps[i] + 1.0f);
+        temps[i] = temps[i] + factor; 
+        if(temps[i] < 0.0) temps[i] = 0.0f;
+	temps[i] = 1.0f - 2.0f/(ws*temps[i]*temps[i] + 1.0f);
         } 
         break;  
 	
@@ -468,18 +519,18 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
       
         ws = powf (85.0f, ws * ws) + 10.0f;
 
-        for (i = 0; i < n; i++)
+        for (i = 0; i < nn; i++)
 	{
-		   tmpv = fabs(smps[i]);
+		   tmpv = fabs(temps[i]);
 		   if(tmpv > 0.15f)  // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
 		   {
   		    dyno += (1.0f - dynodecay) * tmpv;
 		     }
 		     dyno *= dynodecay;  //always decays
-	smps[i] = smps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
-        if(smps[i] < 0.0) smps[i] = 0.0f;
+	temps[i] = temps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
+        if(temps[i] < 0.0) temps[i] = 0.0f;
 	
-	smps[i] = 1.0f - 2.0f/(ws*smps[i]*smps[i] + 1.0f);
+	temps[i] = 1.0f - 2.0f/(ws*temps[i]*temps[i] + 1.0f);
 	 
 	
         } 
@@ -489,5 +540,13 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions
     };
 
+   if(Wave_res_amount>= 0)
+   {
+     D_Resample->mono_out(temps,smps,nn,u_down);
+   }
+    else
+    memcpy(smps,temps,sizeof(float)*n);
+ 
 
 };
+

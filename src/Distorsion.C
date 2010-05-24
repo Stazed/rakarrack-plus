@@ -48,7 +48,8 @@ Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
   DCl->setfreq (30.0f);
   DCr->setfreq (30.0f);
 
-  dwshape = new Waveshaper();
+  dwshapel = new Waveshaper();
+  dwshaper = new Waveshaper();
 
   //default values
   Ppreset = 0;
@@ -150,9 +151,9 @@ Distorsion::out (float * smpsl, float * smpsr)
   //no optimised, yet (no look table)
 
 
-  dwshape->waveshapesmps (PERIOD, efxoutl, Ptype, Pdrive, 1);
+  dwshapel->waveshapesmps (PERIOD, efxoutl, Ptype, Pdrive, 1);
   if (Pstereo != 0)
-  dwshape->waveshapesmps (PERIOD, efxoutr, Ptype, Pdrive, 1);
+  dwshaper->waveshapesmps (PERIOD, efxoutr, Ptype, Pdrive, 1);
 
   if (Pprefiltering == 0)
     applyfilters (efxoutl, efxoutr);

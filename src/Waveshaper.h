@@ -37,6 +37,11 @@ public:
 		    int drive, int eff);
   void cleanup();
   
+  int period_coeff;  
+
+  double u_up;
+  double u_down;
+
   float dthresh;  //dynamic threshold in compression waveshaper 
   float dyno;
   float dynodecay;  //dynamically control symmetry
@@ -44,6 +49,13 @@ public:
   float compg;  //used by compression distortion
   float cratio;  //used by compression for hardness
   float tmpgain;  // compression distortion temp variable
+  float ncSAMPLE_RATE;
+  float *temps;
+    
+ 
+  class Resample *U_Resample;
+  class Resample *D_Resample;
+
   
 };
 

@@ -158,6 +158,9 @@ extern unsigned int SAMPLE_RATE;
 extern float fSAMPLE_RATE;
 extern float cSAMPLE_RATE;
 extern float r__ratio;
+extern int Wave_res_amount;
+extern int Wave_up_q;
+extern int Wave_down_q;
 extern Pixmap p, mask;
 extern XWMHints *hints;
 

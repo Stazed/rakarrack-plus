@@ -30,7 +30,6 @@
 #include "rakarrack.h"
 #include "jack.h"
 
-
 void
 show_help ()
 {
