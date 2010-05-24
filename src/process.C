@@ -112,10 +112,24 @@ RKR::RKR ()
   Cabinet_Preset = 0;
 
   rakarrack.get (PrefNom("Harmonizer Downsample"),Har_Down,0);
+  rakarrack.get (PrefNom("Harmonizer Up Quality"),Har_U_Q,4);
+  rakarrack.get (PrefNom("Harmonizer Down Quality"),Har_D_Q,4);
+
   rakarrack.get (PrefNom("Reverbtron Downsample"),Rev_Down,0);
+  rakarrack.get (PrefNom("Reverbtron Up Quality"),Rev_U_Q,4);
+  rakarrack.get (PrefNom("Reverbtron Down Quality"),Rev_D_Q,4);
+
   rakarrack.get (PrefNom("Convolotron Downsample"),Con_Down,0);
+  rakarrack.get (PrefNom("Convolotron Up Quality"),Con_U_Q,4);
+  rakarrack.get (PrefNom("Convolotron Down Quality"),Con_D_Q,4);
+
   rakarrack.get (PrefNom("Sequence Downsample"),Seq_Down,0);
+  rakarrack.get (PrefNom("Sequence Up Quality"),Seq_U_Q,4);
+  rakarrack.get (PrefNom("Sequence Down Quality"),Seq_D_Q,4);
+
   rakarrack.get (PrefNom("Shifter Downsample"),Shi_Down,0);
+  rakarrack.get (PrefNom("Shifter Up Quality"),Shi_U_Q,4);
+  rakarrack.get (PrefNom("Shifter Down Quality"),Shi_D_Q,4);
 
   rakarrack.get (PrefNom ("Harmonizer Quality"), HarQual, 4);
   rakarrack.get (PrefNom ("Auto Connect Jack"), aconnect_JA, 1);
@@ -193,7 +207,7 @@ RKR::RKR ()
   efx_Alienwah = new Alienwah (efxoutl, efxoutr);
   efx_Cabinet = new EQ (efxoutl, efxoutr);
   efx_Pan = new Pan (efxoutl, efxoutr);
-  efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down);
+  efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q);
   efx_MusDelay = new MusicDelay (efxoutl, efxoutr);
   efx_Gate = new Gate (efxoutl, efxoutr);
   efx_NewDist = new NewDist(efxoutl, efxoutr);
@@ -208,7 +222,7 @@ RKR::RKR ()
   efx_Shuffle = new Shuffle(efxoutl,efxoutr);
   efx_Synthfilter = new Synthfilter(efxoutl,efxoutr);
   efx_MBVvol = new MBVvol(efxoutl,efxoutr);
-  efx_Convol = new Convolotron(efxoutl,efxoutr,Con_Down);
+  efx_Convol = new Convolotron(efxoutl,efxoutr,Con_Down,Con_U_Q,Con_D_Q);
   efx_Looper = new Looper(efxoutl,efxoutr,looper_size);
   efx_RyanWah = new RyanWah(efxoutl,efxoutr);
   efx_RBEcho = new RBEcho(efxoutl,efxoutr);
@@ -216,10 +230,10 @@ RKR::RKR ()
   efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr);
   efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled);
   efx_Sustainer = new Sustainer(efxoutl,efxoutr);
-  efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual, Seq_Down);
-  efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down);
+  efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q);
+  efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q);
   efx_StompBox = new StompBox(efxoutl,efxoutr);
-  efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down);
+  efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down, Rev_U_Q, Rev_D_Q);
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
   A_Resample = new Resample(3);

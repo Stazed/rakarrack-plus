@@ -3271,25 +3271,75 @@ private:
   static void cb_Har_Downsample(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Har_Downsample[];
 public:
+  Fl_Choice *Har_Down_Qua;
+private:
+  void cb_Har_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Har_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Har_Up_Qua;
+private:
+  void cb_Har_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Har_Up_Qua(Fl_Choice*, void*);
+public:
   Fl_Choice *Rev_Downsample;
 private:
   void cb_Rev_Downsample_i(Fl_Choice*, void*);
   static void cb_Rev_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Rev_Down_Qua;
+private:
+  void cb_Rev_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Rev_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Rev_Up_Qua;
+private:
+  void cb_Rev_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Rev_Up_Qua(Fl_Choice*, void*);
 public:
   Fl_Choice *Con_Downsample;
 private:
   void cb_Con_Downsample_i(Fl_Choice*, void*);
   static void cb_Con_Downsample(Fl_Choice*, void*);
 public:
+  Fl_Choice *Con_Down_Qua;
+private:
+  void cb_Con_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Con_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Con_Up_Qua;
+private:
+  void cb_Con_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Con_Up_Qua(Fl_Choice*, void*);
+public:
   Fl_Choice *Seq_Downsample;
 private:
   void cb_Seq_Downsample_i(Fl_Choice*, void*);
   static void cb_Seq_Downsample(Fl_Choice*, void*);
 public:
+  Fl_Choice *Seq_Down_Qua;
+private:
+  void cb_Seq_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Seq_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Seq_Up_Qua;
+private:
+  void cb_Seq_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Seq_Up_Qua(Fl_Choice*, void*);
+public:
   Fl_Choice *Shi_Downsample;
 private:
   void cb_Shi_Downsample_i(Fl_Choice*, void*);
   static void cb_Shi_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Shi_Down_Qua;
+private:
+  void cb_Shi_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Shi_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Shi_Up_Qua;
+private:
+  void cb_Shi_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Shi_Up_Qua(Fl_Choice*, void*);
 public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;

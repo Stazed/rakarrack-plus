@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Reverbtron.h"
 
-Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS)
+Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -76,8 +76,8 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS)
   lpfr->setSR(nSAMPLE_RATE);
   
 
-  U_Resample = new Resample(2);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
-  D_Resample = new Resample(4);
+  U_Resample = new Resample(dq);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
+  D_Resample = new Resample(uq);
 
    setpreset (Ppreset);
   cleanup ();

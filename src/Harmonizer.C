@@ -28,7 +28,7 @@
 
 
 
-Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS)
+Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq)
 {
 
 
@@ -48,8 +48,8 @@ Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int 
   memset (outi, 0, sizeof (float) * nPERIOD);
   memset (outo, 0, sizeof (float) * nPERIOD);
   
-  U_Resample = new Resample(2);
-  D_Resample = new Resample(4);
+  U_Resample = new Resample(dq);
+  D_Resample = new Resample(uq);
 
 
   pl = new AnalogFilter (6, 22000, 1, 0);

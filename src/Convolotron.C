@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Convolotron.h"
 
-Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS)
+Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -56,8 +56,8 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS)
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
   offset = 0;  
   M_Resample = new Resample(0);
-  U_Resample = new Resample(2);//Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
-  D_Resample = new Resample(4);
+  U_Resample = new Resample(dq);//Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
+  D_Resample = new Resample(uq);
 
   setpreset (Ppreset);
   cleanup ();

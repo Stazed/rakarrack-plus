@@ -6956,12 +6956,44 @@ Fl_Menu_Item RKRGUI::menu_Har_Downsample[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_Har_Down_Qua_i(Fl_Choice* o, void*) {
+  rkr->Har_D_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Har_Down_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_Down_Qua_i(o,v);
+}
+
+void RKRGUI::cb_Har_Up_Qua_i(Fl_Choice* o, void*) {
+  rkr->Har_U_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Har_Up_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_Up_Qua_i(o,v);
+}
+
 void RKRGUI::cb_Rev_Downsample_i(Fl_Choice* o, void*) {
   rkr->Rev_Down=(int)o->value();
 Show_Next_Time();
 }
 void RKRGUI::cb_Rev_Downsample(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Rev_Downsample_i(o,v);
+}
+
+void RKRGUI::cb_Rev_Down_Qua_i(Fl_Choice* o, void*) {
+  rkr->Rev_D_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Rev_Down_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Rev_Down_Qua_i(o,v);
+}
+
+void RKRGUI::cb_Rev_Up_Qua_i(Fl_Choice* o, void*) {
+  rkr->Rev_U_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Rev_Up_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Rev_Up_Qua_i(o,v);
 }
 
 void RKRGUI::cb_Con_Downsample_i(Fl_Choice* o, void*) {
@@ -6972,6 +7004,22 @@ void RKRGUI::cb_Con_Downsample(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Con_Downsample_i(o,v);
 }
 
+void RKRGUI::cb_Con_Down_Qua_i(Fl_Choice* o, void*) {
+  rkr->Con_D_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Con_Down_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Con_Down_Qua_i(o,v);
+}
+
+void RKRGUI::cb_Con_Up_Qua_i(Fl_Choice* o, void*) {
+  rkr->Con_U_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Con_Up_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Con_Up_Qua_i(o,v);
+}
+
 void RKRGUI::cb_Seq_Downsample_i(Fl_Choice* o, void*) {
   rkr->Seq_Down=(int)o->value();
 Show_Next_Time();
@@ -6980,12 +7028,44 @@ void RKRGUI::cb_Seq_Downsample(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Seq_Downsample_i(o,v);
 }
 
+void RKRGUI::cb_Seq_Down_Qua_i(Fl_Choice* o, void*) {
+  rkr->Seq_D_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Seq_Down_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Seq_Down_Qua_i(o,v);
+}
+
+void RKRGUI::cb_Seq_Up_Qua_i(Fl_Choice* o, void*) {
+  rkr->Seq_U_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Seq_Up_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Seq_Up_Qua_i(o,v);
+}
+
 void RKRGUI::cb_Shi_Downsample_i(Fl_Choice* o, void*) {
   rkr->Shi_Down=(int)o->value();
 Show_Next_Time();
 }
 void RKRGUI::cb_Shi_Downsample(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Shi_Downsample_i(o,v);
+}
+
+void RKRGUI::cb_Shi_Down_Qua_i(Fl_Choice* o, void*) {
+  rkr->Shi_D_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Shi_Down_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Shi_Down_Qua_i(o,v);
+}
+
+void RKRGUI::cb_Shi_Up_Qua_i(Fl_Choice* o, void*) {
+  rkr->Shi_U_Q=(int)o->value();
+Show_Next_Time();
+}
+void RKRGUI::cb_Shi_Up_Qua(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Shi_Up_Qua_i(o,v);
 }
 
 void RKRGUI::cb_D_A_Connect_i(Fl_Check_Button* o, void*) {
@@ -15862,7 +15942,7 @@ R average.");
           Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
           Upr_Amo->menu(menu_Upr_Amo);
         } // Fl_Choice* Upr_Amo
-        { Upr_Qual = new Fl_Choice(133, 180, 98, 18, "Up Sampling Quality     ");
+        { Upr_Qual = new Fl_Choice(133, 180, 72, 18, "Up Sampling Quality     ");
           Upr_Qual->down_box(FL_BORDER_BOX);
           Upr_Qual->labelsize(10);
           Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15871,7 +15951,7 @@ R average.");
           Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
           Upr_Qual->menu(menu_Upr_Qual);
         } // Fl_Choice* Upr_Qual
-        { Fl_Choice* o = Downr_Qual = new Fl_Choice(132, 204, 98, 18, "Down Sampling Quality");
+        { Fl_Choice* o = Downr_Qual = new Fl_Choice(132, 204, 73, 18, "Down Sampling Quality");
           Downr_Qual->down_box(FL_BORDER_BOX);
           Downr_Qual->labelsize(10);
           Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15918,6 +15998,24 @@ R average.");
           Har_Downsample->callback((Fl_Callback*)cb_Har_Downsample);
           Har_Downsample->menu(menu_Har_Downsample);
         } // Fl_Choice* Har_Downsample
+        { Fl_Choice* o = Har_Down_Qua = new Fl_Choice(250, 307, 72, 18, "Down");
+          Har_Down_Qua->down_box(FL_BORDER_BOX);
+          Har_Down_Qua->labelsize(10);
+          Har_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Har_Down_Qua->textsize(10);
+          Har_Down_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Har_Down_Qua->callback((Fl_Callback*)cb_Har_Down_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Har_Down_Qua
+        { Fl_Choice* o = Har_Up_Qua = new Fl_Choice(343, 307, 72, 18, "Up");
+          Har_Up_Qua->down_box(FL_BORDER_BOX);
+          Har_Up_Qua->labelsize(10);
+          Har_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Har_Up_Qua->textsize(10);
+          Har_Up_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Har_Up_Qua->callback((Fl_Callback*)cb_Har_Up_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Har_Up_Qua
         { Fl_Choice* o = Rev_Downsample = new Fl_Choice(145, 330, 70, 18, "Reverbtron Downsample  ");
           Rev_Downsample->down_box(FL_BORDER_BOX);
           Rev_Downsample->labelsize(10);
@@ -15927,6 +16025,24 @@ R average.");
           Rev_Downsample->callback((Fl_Callback*)cb_Rev_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Rev_Downsample
+        { Fl_Choice* o = Rev_Down_Qua = new Fl_Choice(250, 330, 72, 18, "Down");
+          Rev_Down_Qua->down_box(FL_BORDER_BOX);
+          Rev_Down_Qua->labelsize(10);
+          Rev_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Rev_Down_Qua->textsize(10);
+          Rev_Down_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Rev_Down_Qua->callback((Fl_Callback*)cb_Rev_Down_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Rev_Down_Qua
+        { Fl_Choice* o = Rev_Up_Qua = new Fl_Choice(343, 330, 72, 18, "Up");
+          Rev_Up_Qua->down_box(FL_BORDER_BOX);
+          Rev_Up_Qua->labelsize(10);
+          Rev_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Rev_Up_Qua->textsize(10);
+          Rev_Up_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Rev_Up_Qua->callback((Fl_Callback*)cb_Rev_Up_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Rev_Up_Qua
         { Fl_Choice* o = Con_Downsample = new Fl_Choice(145, 353, 70, 18, "Convolotron Downsample");
           Con_Downsample->down_box(FL_BORDER_BOX);
           Con_Downsample->labelsize(10);
@@ -15936,6 +16052,24 @@ R average.");
           Con_Downsample->callback((Fl_Callback*)cb_Con_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Con_Downsample
+        { Fl_Choice* o = Con_Down_Qua = new Fl_Choice(250, 353, 72, 18, "Down");
+          Con_Down_Qua->down_box(FL_BORDER_BOX);
+          Con_Down_Qua->labelsize(10);
+          Con_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Con_Down_Qua->textsize(10);
+          Con_Down_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Con_Down_Qua->callback((Fl_Callback*)cb_Con_Down_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Con_Down_Qua
+        { Fl_Choice* o = Con_Up_Qua = new Fl_Choice(343, 353, 72, 18, "Up");
+          Con_Up_Qua->down_box(FL_BORDER_BOX);
+          Con_Up_Qua->labelsize(10);
+          Con_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Con_Up_Qua->textsize(10);
+          Con_Up_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Con_Up_Qua->callback((Fl_Callback*)cb_Con_Up_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Con_Up_Qua
         { Fl_Choice* o = Seq_Downsample = new Fl_Choice(145, 376, 70, 18, "Sequence Downsample    ");
           Seq_Downsample->down_box(FL_BORDER_BOX);
           Seq_Downsample->labelsize(10);
@@ -15945,6 +16079,24 @@ R average.");
           Seq_Downsample->callback((Fl_Callback*)cb_Seq_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Seq_Downsample
+        { Fl_Choice* o = Seq_Down_Qua = new Fl_Choice(250, 376, 72, 18, "Down");
+          Seq_Down_Qua->down_box(FL_BORDER_BOX);
+          Seq_Down_Qua->labelsize(10);
+          Seq_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Seq_Down_Qua->textsize(10);
+          Seq_Down_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Seq_Down_Qua->callback((Fl_Callback*)cb_Seq_Down_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Seq_Down_Qua
+        { Fl_Choice* o = Seq_Up_Qua = new Fl_Choice(343, 376, 72, 18, "Up");
+          Seq_Up_Qua->down_box(FL_BORDER_BOX);
+          Seq_Up_Qua->labelsize(10);
+          Seq_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Seq_Up_Qua->textsize(10);
+          Seq_Up_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Seq_Up_Qua->callback((Fl_Callback*)cb_Seq_Up_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Seq_Up_Qua
         { Fl_Choice* o = Shi_Downsample = new Fl_Choice(145, 399, 70, 18, "Shifter Downsample         ");
           Shi_Downsample->down_box(FL_BORDER_BOX);
           Shi_Downsample->labelsize(10);
@@ -15954,6 +16106,24 @@ R average.");
           Shi_Downsample->callback((Fl_Callback*)cb_Shi_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Shi_Downsample
+        { Fl_Choice* o = Shi_Down_Qua = new Fl_Choice(250, 399, 72, 18, "Down");
+          Shi_Down_Qua->down_box(FL_BORDER_BOX);
+          Shi_Down_Qua->labelsize(10);
+          Shi_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Shi_Down_Qua->textsize(10);
+          Shi_Down_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Shi_Down_Qua->callback((Fl_Callback*)cb_Shi_Down_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Shi_Down_Qua
+        { Fl_Choice* o = Shi_Up_Qua = new Fl_Choice(343, 399, 72, 18, "Up");
+          Shi_Up_Qua->down_box(FL_BORDER_BOX);
+          Shi_Up_Qua->labelsize(10);
+          Shi_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Shi_Up_Qua->textsize(10);
+          Shi_Up_Qua->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Shi_Up_Qua->callback((Fl_Callback*)cb_Shi_Up_Qua);
+          o->menu(menu_Upr_Qual);
+        } // Fl_Choice* Shi_Up_Qua
         AUDIO_SET->end();
       } // Fl_Group* AUDIO_SET
       { MIDI_SET = new Fl_Group(5, 26, 630, 502, "MIDI");
@@ -16867,10 +17037,20 @@ rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
 rakarrack.set(rkr->PrefNom("Limiter Position"),rkr->flpos);
 rakarrack.set(rkr->PrefNom("Harmonizer Downsample"),rkr->Har_Down);
+rakarrack.set(rkr->PrefNom("Harmonizer Up Quality"),rkr->Har_U_Q);
+rakarrack.set(rkr->PrefNom("Harmonizer Down Quality"),rkr->Har_D_Q);
 rakarrack.set(rkr->PrefNom("Reverbtron Downsample"),rkr->Rev_Down);
+rakarrack.set(rkr->PrefNom("Reverbtron Up Quality"),rkr->Rev_U_Q);
+rakarrack.set(rkr->PrefNom("Reverbtron Down Quality"),rkr->Rev_D_Q);
 rakarrack.set(rkr->PrefNom("Convolotron Downsample"),rkr->Con_Down);
+rakarrack.set(rkr->PrefNom("Convolotron Up Quality"),rkr->Con_U_Q);
+rakarrack.set(rkr->PrefNom("Convolotron Down Quality"),rkr->Con_D_Q);
 rakarrack.set(rkr->PrefNom("Sequence Downsample"),rkr->Seq_Down);
+rakarrack.set(rkr->PrefNom("Sequence Up Quality"),rkr->Seq_U_Q);
+rakarrack.set(rkr->PrefNom("Sequence Down Quality"),rkr->Seq_D_Q);
 rakarrack.set(rkr->PrefNom("Shifter Downsample"),rkr->Shi_Down);
+rakarrack.set(rkr->PrefNom("Shifter Up Quality"),rkr->Shi_U_Q);
+rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
@@ -18043,10 +18223,21 @@ Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
 FLPosition->value(rkr->flpos);
 Har_Downsample->value(rkr->Har_Down);
+Har_Down_Qua->value(rkr->Har_D_Q);
+Har_Up_Qua->value(rkr->Har_U_Q);
 Rev_Downsample->value(rkr->Rev_Down);
+Rev_Down_Qua->value(rkr->Rev_D_Q);
+Rev_Up_Qua->value(rkr->Rev_U_Q);
 Con_Downsample->value(rkr->Con_Down);
+Con_Down_Qua->value(rkr->Con_D_Q);
+Con_Up_Qua->value(rkr->Con_U_Q);
 Seq_Downsample->value(rkr->Seq_Down);
+Seq_Down_Qua->value(rkr->Seq_D_Q);
+Seq_Up_Qua->value(rkr->Seq_U_Q);
 Shi_Downsample->value(rkr->Shi_Down);
+Shi_Down_Qua->value(rkr->Shi_D_Q);
+Shi_Up_Qua->value(rkr->Shi_U_Q);
+
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);

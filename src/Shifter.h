@@ -39,7 +39,7 @@ class Shifter
 {
 
 public:
-  Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS);
+  Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
    ~Shifter ();
   void out (float *smpsl, float *smpsr);
   void setpreset (int npreset);

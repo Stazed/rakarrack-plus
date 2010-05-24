@@ -26,7 +26,7 @@
 #include "Sequence.h"
 #include <time.h>
 
-Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS)
+Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS, int uq, int dq)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -39,8 +39,8 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
   outi = (float *) malloc (sizeof (float) * nPERIOD);
   outo = (float *) malloc (sizeof (float) * nPERIOD);
 
-  U_Resample = new Resample(2);
-  D_Resample = new Resample(4);
+  U_Resample = new Resample(dq);
+  D_Resample = new Resample(uq);
 
 
 

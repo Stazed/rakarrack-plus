@@ -830,7 +830,8 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -7251,7 +7252,7 @@ put_icon(AboutWin);}
 Order->hide();}
       xywh {1337 113 500 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
-      Fl_Box Fondo1 {selected
+      Fl_Box Fondo1 {
         xywh {1 1 600 400}
       }
       Fl_Box O_TITLE {
@@ -7398,13 +7399,13 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1287 23 640 528} type Double color 4 hide
+      xywh {1463 157 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {5 0 631 535}
       } {
         Fl_Group Look {
@@ -7604,8 +7605,8 @@ Show_Next_Time();}
             label {Up Sampling Quality     }
             callback {rkr->UpQual =(int) o->value();
 
-Show_Next_Time();}
-            xywh {133 180 98 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+Show_Next_Time();} open
+            xywh {133 180 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
               label Best
@@ -7633,7 +7634,7 @@ Show_Next_Time();}
             callback {rkr->DownQual =(int) o->value();
 
 Show_Next_Time();}
-            xywh {132 204 98 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {132 204 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
           Fl_Counter L_SIZE {
@@ -7740,12 +7741,40 @@ Show_Next_Time();}
               xywh {0 0 36 21} labelsize 10
             }
           }
+          Fl_Choice Har_Down_Qua {
+            label Down
+            callback {rkr->Har_D_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {250 307 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Har_Up_Qua {
+            label Up
+            callback {rkr->Har_U_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {343 307 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
           Fl_Choice Rev_Downsample {
             label {Reverbtron Downsample  }
             callback {rkr->Rev_Down=(int)o->value();
 Show_Next_Time();} open
             xywh {145 330 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Har_Downsample);}
+          } {}
+          Fl_Choice Rev_Down_Qua {
+            label Down
+            callback {rkr->Rev_D_Q=(int)o->value();
+Show_Next_Time();}
+            xywh {250 330 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Rev_Up_Qua {
+            label Up
+            callback {rkr->Rev_U_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {343 330 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
           } {}
           Fl_Choice Con_Downsample {
             label {Convolotron Downsample}
@@ -7754,6 +7783,20 @@ Show_Next_Time();} open
             xywh {145 353 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Har_Downsample);}
           } {}
+          Fl_Choice Con_Down_Qua {
+            label Down
+            callback {rkr->Con_D_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {250 353 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Con_Up_Qua {
+            label Up
+            callback {rkr->Con_U_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {343 353 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
           Fl_Choice Seq_Downsample {
             label {Sequence Downsample    }
             callback {rkr->Seq_Down=(int)o->value();
@@ -7761,12 +7804,40 @@ Show_Next_Time();} open
             xywh {145 376 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Har_Downsample);}
           } {}
+          Fl_Choice Seq_Down_Qua {
+            label Down
+            callback {rkr->Seq_D_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {250 376 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Seq_Up_Qua {
+            label Up
+            callback {rkr->Seq_U_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {343 376 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
           Fl_Choice Shi_Downsample {
             label {Shifter Downsample         }
             callback {rkr->Shi_Down=(int)o->value();
 Show_Next_Time();} open
             xywh {145 399 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Har_Downsample);}
+          } {}
+          Fl_Choice Shi_Down_Qua {
+            label Down
+            callback {rkr->Shi_D_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {250 399 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Shi_Up_Qua {
+            label Up
+            callback {rkr->Shi_U_Q=(int)o->value();
+Show_Next_Time();} open selected
+            xywh {343 399 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
           } {}
         }
         Fl_Group MIDI_SET {
@@ -8644,10 +8715,20 @@ rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
 rakarrack.set(rkr->PrefNom("Limiter Position"),rkr->flpos);
 rakarrack.set(rkr->PrefNom("Harmonizer Downsample"),rkr->Har_Down);
+rakarrack.set(rkr->PrefNom("Harmonizer Up Quality"),rkr->Har_U_Q);
+rakarrack.set(rkr->PrefNom("Harmonizer Down Quality"),rkr->Har_D_Q);
 rakarrack.set(rkr->PrefNom("Reverbtron Downsample"),rkr->Rev_Down);
+rakarrack.set(rkr->PrefNom("Reverbtron Up Quality"),rkr->Rev_U_Q);
+rakarrack.set(rkr->PrefNom("Reverbtron Down Quality"),rkr->Rev_D_Q);
 rakarrack.set(rkr->PrefNom("Convolotron Downsample"),rkr->Con_Down);
+rakarrack.set(rkr->PrefNom("Convolotron Up Quality"),rkr->Con_U_Q);
+rakarrack.set(rkr->PrefNom("Convolotron Down Quality"),rkr->Con_D_Q);
 rakarrack.set(rkr->PrefNom("Sequence Downsample"),rkr->Seq_Down);
+rakarrack.set(rkr->PrefNom("Sequence Up Quality"),rkr->Seq_U_Q);
+rakarrack.set(rkr->PrefNom("Sequence Down Quality"),rkr->Seq_D_Q);
 rakarrack.set(rkr->PrefNom("Shifter Downsample"),rkr->Shi_Down);
+rakarrack.set(rkr->PrefNom("Shifter Up Quality"),rkr->Shi_U_Q);
+rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
@@ -9813,10 +9894,21 @@ Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
 FLPosition->value(rkr->flpos);
 Har_Downsample->value(rkr->Har_Down);
+Har_Down_Qua->value(rkr->Har_D_Q);
+Har_Up_Qua->value(rkr->Har_U_Q);
 Rev_Downsample->value(rkr->Rev_Down);
+Rev_Down_Qua->value(rkr->Rev_D_Q);
+Rev_Up_Qua->value(rkr->Rev_U_Q);
 Con_Downsample->value(rkr->Con_Down);
+Con_Down_Qua->value(rkr->Con_D_Q);
+Con_Up_Qua->value(rkr->Con_U_Q);
 Seq_Downsample->value(rkr->Seq_Down);
+Seq_Down_Qua->value(rkr->Seq_D_Q);
+Seq_Up_Qua->value(rkr->Seq_U_Q);
 Shi_Downsample->value(rkr->Shi_Down);
+Shi_Down_Qua->value(rkr->Shi_D_Q);
+Shi_Up_Qua->value(rkr->Shi_U_Q);
+
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);

@@ -408,10 +408,21 @@ public:
 
   int eff_filter;
   int Har_Down;
+  int Har_U_Q;
+  int Har_D_Q;
   int Rev_Down;
+  int Rev_U_Q;
+  int Rev_D_Q;
   int Con_Down;
+  int Con_U_Q;
+  int Con_D_Q;
   int Shi_Down;
+  int Shi_U_Q;
+  int Shi_D_Q;
   int Seq_Down;
+  int Seq_U_Q;
+  int Seq_D_Q;
+
   int flpos;
   int upsample;
   int UpQual;

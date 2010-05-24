@@ -28,7 +28,7 @@
 
 
 
-Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS)
+Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq)
 {
 
 
@@ -44,8 +44,8 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS)
   outi = (float *) malloc (sizeof (float) * nPERIOD);
   outo = (float *) malloc (sizeof (float) * nPERIOD);
  
-  U_Resample = new Resample(2);
-  D_Resample = new Resample(4);
+  U_Resample = new Resample(dq);
+  D_Resample = new Resample(uq);
 
   PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
   PS->ratio = 1.0f;
