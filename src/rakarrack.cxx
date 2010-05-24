@@ -6682,51 +6682,6 @@ void RKRGUI::cb_Settings(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Settings_i(o,v);
 }
 
-void RKRGUI::cb_B_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-
-Fl::get_color(fore_color,r,g,b);
-if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
-fore_color=fl_rgb_color(r,g,b);
-Buttons_Color_Change(fore_color);
-}
-void RKRGUI::cb_B_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_B_C_i(o,v);
-}
-
-void RKRGUI::cb_L_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-Fl::get_color(leds_color,r,g,b);
-if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
-leds_color=fl_rgb_color(r,g,b);
-Leds_Color_Change(leds_color);
-}
-void RKRGUI::cb_L_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_C_i(o,v);
-}
-
-void RKRGUI::cb_K_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-Fl::get_color(back_color,r,g,b);
-if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
-back_color=fl_rgb_color(r,g,b);
-Background_Color_Change(back_color);
-}
-void RKRGUI::cb_K_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_K_C_i(o,v);
-}
-
-void RKRGUI::cb_A_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-Fl::get_color(label_color,r,g,b);
-if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
-label_color=fl_rgb_color(r,g,b);
-Label_Color_Change(label_color);
-}
-void RKRGUI::cb_A_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_A_C_i(o,v);
-}
-
 void RKRGUI::cb_scheme_ch_i(Fl_Choice* o, void*) {
   switch ((int)o->value())
 
@@ -6770,17 +6725,12 @@ Fl_Menu_Item RKRGUI::menu_scheme_ch[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RKRGUI::cb_BI_Browser_i(Fl_Button*, void*) {
-  char *filename;
-filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".png");
-BackFiname->value(filename);
-strcpy(rkr->BackgroundImage,filename);
-PutBackground();
+void RKRGUI::cb_Font_Bro_i(Fl_Browser* o, void*) {
+  rkr->font = (int)o->value()-1;
+chfsize(0);
 }
-void RKRGUI::cb_BI_Browser(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
+void RKRGUI::cb_Font_Bro(Fl_Browser* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Font_Bro_i(o,v);
 }
 
 void RKRGUI::cb_FSless_i(Fl_Button*, void*) {
@@ -6805,6 +6755,64 @@ chfsize(0);
 }
 void RKRGUI::cb_FSReset(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSReset_i(o,v);
+}
+
+void RKRGUI::cb_B_C_i(Fl_Button*, void*) {
+  uchar r,g,b;
+
+Fl::get_color(fore_color,r,g,b);
+if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
+fore_color=fl_rgb_color(r,g,b);
+Buttons_Color_Change(fore_color);
+}
+void RKRGUI::cb_B_C(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_B_C_i(o,v);
+}
+
+void RKRGUI::cb_A_C_i(Fl_Button*, void*) {
+  uchar r,g,b;
+Fl::get_color(label_color,r,g,b);
+if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
+label_color=fl_rgb_color(r,g,b);
+Label_Color_Change(label_color);
+}
+void RKRGUI::cb_A_C(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_A_C_i(o,v);
+}
+
+void RKRGUI::cb_L_C_i(Fl_Button*, void*) {
+  uchar r,g,b;
+Fl::get_color(leds_color,r,g,b);
+if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
+leds_color=fl_rgb_color(r,g,b);
+Leds_Color_Change(leds_color);
+}
+void RKRGUI::cb_L_C(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_C_i(o,v);
+}
+
+void RKRGUI::cb_K_C_i(Fl_Button*, void*) {
+  uchar r,g,b;
+Fl::get_color(back_color,r,g,b);
+if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
+back_color=fl_rgb_color(r,g,b);
+Background_Color_Change(back_color);
+}
+void RKRGUI::cb_K_C(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_K_C_i(o,v);
+}
+
+void RKRGUI::cb_BI_Browser_i(Fl_Button*, void*) {
+  char *filename;
+filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".png");
+BackFiname->value(filename);
+strcpy(rkr->BackgroundImage,filename);
+PutBackground();
+}
+void RKRGUI::cb_BI_Browser(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
 }
 
 void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
@@ -15843,21 +15851,8 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
-        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
-        { B_C = new Fl_Button(15, 140, 90, 25, "Buttons");
-          B_C->callback((Fl_Callback*)cb_B_C);
-        } // Fl_Button* B_C
-        { L_C = new Fl_Button(225, 140, 90, 25, "Leds");
-          L_C->callback((Fl_Callback*)cb_L_C);
-        } // Fl_Button* L_C
-        { K_C = new Fl_Button(330, 140, 90, 25, "Background");
-          K_C->callback((Fl_Callback*)cb_K_C);
-        } // Fl_Button* K_C
-        { A_C = new Fl_Button(120, 140, 90, 25, "Labels");
-          A_C->callback((Fl_Callback*)cb_A_C);
-        } // Fl_Button* A_C
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
           scheme_ch->down_box(FL_BORDER_BOX);
           scheme_ch->labelsize(11);
@@ -15867,33 +15862,53 @@ R average.");
           scheme_ch->callback((Fl_Callback*)cb_scheme_ch);
           scheme_ch->menu(menu_scheme_ch);
         } // Fl_Choice* scheme_ch
-        { BackFiname = new Fl_File_Input(10, 200, 390, 30, "Background Image");
+        { Font_Bro = new Fl_Browser(20, 100, 400, 225, "Font");
+          Font_Bro->type(1);
+          Font_Bro->labelsize(11);
+          Font_Bro->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Font_Bro->callback((Fl_Callback*)cb_Font_Bro);
+          Font_Bro->align(FL_ALIGN_TOP);
+          Font_Bro->when(FL_WHEN_CHANGED);
+        } // Fl_Browser* Font_Bro
+        { FSLabel = new Fl_Box(10, 333, 60, 17, "Font Size");
+          FSLabel->labelsize(11);
+          FSLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        } // Fl_Box* FSLabel
+        { FSless = new Fl_Button(78, 330, 30, 20, "-");
+          FSless->callback((Fl_Callback*)cb_FSless);
+        } // Fl_Button* FSless
+        { FSplus = new Fl_Button(113, 330, 30, 20, "+");
+          FSplus->callback((Fl_Callback*)cb_FSplus);
+        } // Fl_Button* FSplus
+        { FSReset = new Fl_Button(148, 330, 57, 20, "Reset");
+          FSReset->callback((Fl_Callback*)cb_FSReset);
+        } // Fl_Button* FSReset
+        { CLLabel = new Fl_Box(10, 358, 40, 19, "Colors");
+          CLLabel->labelsize(11);
+          CLLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        } // Fl_Box* CLLabel
+        { B_C = new Fl_Button(15, 390, 90, 25, "Buttons");
+          B_C->callback((Fl_Callback*)cb_B_C);
+        } // Fl_Button* B_C
+        { A_C = new Fl_Button(120, 390, 90, 25, "Labels");
+          A_C->callback((Fl_Callback*)cb_A_C);
+        } // Fl_Button* A_C
+        { L_C = new Fl_Button(225, 390, 90, 25, "Leds");
+          L_C->callback((Fl_Callback*)cb_L_C);
+        } // Fl_Button* L_C
+        { K_C = new Fl_Button(330, 390, 90, 25, "Background");
+          K_C->callback((Fl_Callback*)cb_K_C);
+        } // Fl_Button* K_C
+        { BackFiname = new Fl_File_Input(10, 450, 390, 30, "Background Image");
           BackFiname->labelsize(11);
           BackFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           BackFiname->textsize(12);
           BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           BackFiname->align(FL_ALIGN_TOP_LEFT);
         } // Fl_File_Input* BackFiname
-        { BI_Browser = new Fl_Button(410, 210, 65, 20, "Browse");
+        { BI_Browser = new Fl_Button(410, 460, 65, 20, "Browse");
           BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
         } // Fl_Button* BI_Browser
-        { FSLabel = new Fl_Box(10, 83, 60, 17, "Font Size");
-          FSLabel->labelsize(11);
-          FSLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        } // Fl_Box* FSLabel
-        { FSless = new Fl_Button(78, 80, 30, 20, "-");
-          FSless->callback((Fl_Callback*)cb_FSless);
-        } // Fl_Button* FSless
-        { FSplus = new Fl_Button(113, 80, 30, 20, "+");
-          FSplus->callback((Fl_Callback*)cb_FSplus);
-        } // Fl_Button* FSplus
-        { FSReset = new Fl_Button(148, 80, 57, 20, "Reset");
-          FSReset->callback((Fl_Callback*)cb_FSReset);
-        } // Fl_Button* FSReset
-        { CLLabel = new Fl_Box(10, 108, 40, 19, "Color");
-          CLLabel->labelsize(11);
-          CLLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        } // Fl_Box* CLLabel
         Look->end();
       } // Fl_Group* Look
       { AUDIO_SET = new Fl_Group(5, 26, 630, 502, "Audio");
@@ -15902,6 +15917,7 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
+        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 58, 23, 20, "FX On at start");
@@ -16613,6 +16629,7 @@ Fl::visual(FL_RGB);
 Fl::visual(FL_DOUBLE|FL_INDEX);
 Fl::get_system_colors();
 fl_register_images();
+Fl::set_fonts(0);
 rkr=rkr_;
 
 back = NULL;
@@ -16797,7 +16814,7 @@ rakarrack.get(rkr->PrefNom("Background Image"),rkr->BackgroundImage,tmp,256);
 PutBackground();
 rakarrack.get(rkr->PrefNom("FontSize"),rkr->relfontsize,0);
 if( rkr->relfontsize!=0) chfsize(rkr->relfontsize);
-
+rakarrack.get(rkr->PrefNom("Font"),rkr->font,0);
 
 rakarrack.get(rkr->PrefNom("Background Color"),b, 774778368);
 rakarrack.get(rkr->PrefNom("Foreground Color"),f,1602392832);
@@ -16946,6 +16963,8 @@ rakarrack.set(rkr->PrefNom("Principal Y"),Principal->y());
 rakarrack.set(rkr->PrefNom("Principal W"),Principal->w());
 rakarrack.set(rkr->PrefNom("Principal H"),Principal->h());
 rakarrack.set(rkr->PrefNom("FontSize"), rkr->relfontsize);
+rakarrack.set(rkr->PrefNom("Font"), rkr->font);
+
 rakarrack.set(rkr->PrefNom("Background Color"), (int)back_color);
 rakarrack.set(rkr->PrefNom("Foreground Color"), (int)fore_color);
 rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
@@ -18330,6 +18349,29 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 
  }
+ 
+ 
+ k=0;
+
+ k = Fl::set_fonts(0);
+  for (i = 0; i < k; i++) {
+    int t; const char *name = Fl::get_font_name((Fl_Font)i,&t);
+    char buffer[128];
+#if 1
+    if (t) {
+      char *p = buffer;
+      if (t & FL_BOLD) {*p++ = '@'; *p++ = 'b';}
+      if (t & FL_ITALIC) {*p++ = '@'; *p++ = 'i';}
+      strcpy(p,name);
+      name = buffer;
+    }
+#else // this is neat, but really slow on some X servers:
+    sprintf(buffer, "@F%d@.%s", i, name);
+    name = buffer;
+#endif
+    Font_Bro->add(name);
+
+}
 }
 
 void RKRGUI::BankWin_Label(char *filename) {
@@ -20072,6 +20114,7 @@ for (int t=0; t<Principal->children();t++)
           if (uh !=7) c->selection_color(back_color); 
           if ((uh==2)||(uh==7)) c->selection_color(leds_color);
           c->color(fore_color);
+          c->labelfont(rkr->font);
        
           if(uh == 12)
            {

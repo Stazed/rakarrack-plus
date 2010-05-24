@@ -825,13 +825,11 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -7399,59 +7397,22 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1463 157 640 528} type Double color 4 hide
+      xywh {1435 129 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {5 0 631 535}
       } {
         Fl_Group Look {
           label Look
-          user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
-          }
-          Fl_Button B_C {
-            label Buttons
-            callback {uchar r,g,b;
-
-Fl::get_color(fore_color,r,g,b);
-if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
-fore_color=fl_rgb_color(r,g,b);
-Buttons_Color_Change(fore_color);}
-            xywh {15 140 90 25}
-          }
-          Fl_Button L_C {
-            label Leds
-            callback {uchar r,g,b;
-Fl::get_color(leds_color,r,g,b);
-if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
-leds_color=fl_rgb_color(r,g,b);
-Leds_Color_Change(leds_color);}
-            xywh {225 140 90 25}
-          }
-          Fl_Button K_C {
-            label Background
-            callback {uchar r,g,b;
-Fl::get_color(back_color,r,g,b);
-if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
-back_color=fl_rgb_color(r,g,b);
-Background_Color_Change(back_color);}
-            xywh {330 140 90 25}
-          }
-          Fl_Button A_C {
-            label Labels
-            callback {uchar r,g,b;
-Fl::get_color(label_color,r,g,b);
-if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
-label_color=fl_rgb_color(r,g,b);
-Label_Color_Change(label_color);}
-            xywh {120 140 90 25}
           }
           Fl_Choice scheme_ch {
             label Schema
@@ -7503,9 +7464,78 @@ break;
               xywh {30 30 45 26} labelsize 12
             }
           }
+          Fl_Browser Font_Bro {
+            label Font
+            callback {rkr->font = (int)o->value()-1;
+chfsize(0);}
+            xywh {20 100 400 225} type Select labelsize 11 labelcolor 7 align 1 when 1
+          }
+          Fl_Box FSLabel {
+            label {Font Size}
+            xywh {10 333 60 17} labelsize 11 labelcolor 7
+          }
+          Fl_Button FSless {
+            label {-}
+            callback {rkr->relfontsize--;
+chfsize(-1);}
+            xywh {78 330 30 20}
+          }
+          Fl_Button FSplus {
+            label {+}
+            callback {rkr->relfontsize++;
+chfsize(1);}
+            xywh {113 330 30 20}
+          }
+          Fl_Button FSReset {
+            label Reset
+            callback {rkr->relfontsize=0;
+chfsize(0);}
+            xywh {148 330 57 20}
+          }
+          Fl_Box CLLabel {
+            label Colors
+            xywh {10 358 40 19} labelsize 11 labelcolor 7
+          }
+          Fl_Button B_C {
+            label Buttons
+            callback {uchar r,g,b;
+
+Fl::get_color(fore_color,r,g,b);
+if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
+fore_color=fl_rgb_color(r,g,b);
+Buttons_Color_Change(fore_color);}
+            xywh {15 390 90 25}
+          }
+          Fl_Button A_C {
+            label Labels
+            callback {uchar r,g,b;
+Fl::get_color(label_color,r,g,b);
+if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
+label_color=fl_rgb_color(r,g,b);
+Label_Color_Change(label_color);}
+            xywh {120 390 90 25}
+          }
+          Fl_Button L_C {
+            label Leds
+            callback {uchar r,g,b;
+Fl::get_color(leds_color,r,g,b);
+if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
+leds_color=fl_rgb_color(r,g,b);
+Leds_Color_Change(leds_color);}
+            xywh {225 390 90 25}
+          }
+          Fl_Button K_C {
+            label Background
+            callback {uchar r,g,b;
+Fl::get_color(back_color,r,g,b);
+if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
+back_color=fl_rgb_color(r,g,b);
+Background_Color_Change(back_color);}
+            xywh {330 390 90 25}
+          }
           Fl_File_Input BackFiname {
             label {Background Image}
-            xywh {10 200 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+            xywh {10 450 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
           }
           Fl_Button BI_Browser {
             label Browse
@@ -7516,39 +7546,13 @@ filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
 strcpy(rkr->BackgroundImage,filename);
 PutBackground();}
-            xywh {410 210 65 20}
-          }
-          Fl_Box FSLabel {
-            label {Font Size}
-            xywh {10 83 60 17} labelsize 11 labelcolor 7
-          }
-          Fl_Button FSless {
-            label {-}
-            callback {rkr->relfontsize--;
-chfsize(-1);}
-            xywh {78 80 30 20}
-          }
-          Fl_Button FSplus {
-            label {+}
-            callback {rkr->relfontsize++;
-chfsize(1);}
-            xywh {113 80 30 20}
-          }
-          Fl_Button FSReset {
-            label Reset
-            callback {rkr->relfontsize=0;
-chfsize(0);}
-            xywh {148 80 57 20}
-          }
-          Fl_Box CLLabel {
-            label Color
-            xywh {10 108 40 19} labelsize 11 labelcolor 7
+            xywh {410 460 65 20}
           }
         }
         Fl_Group AUDIO_SET {
           label Audio
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -7835,7 +7839,7 @@ Show_Next_Time();} open
           Fl_Choice Shi_Up_Qua {
             label Up
             callback {rkr->Shi_U_Q=(int)o->value();
-Show_Next_Time();} open selected
+Show_Next_Time();} open
             xywh {343 399 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
@@ -8298,6 +8302,7 @@ Fl::visual(FL_RGB);
 Fl::visual(FL_DOUBLE|FL_INDEX);
 Fl::get_system_colors();
 fl_register_images();
+Fl::set_fonts(0);
 rkr=rkr_;
 
 back = NULL;
@@ -8476,7 +8481,7 @@ rakarrack.get(rkr->PrefNom("Background Image"),rkr->BackgroundImage,tmp,256);
 PutBackground();
 rakarrack.get(rkr->PrefNom("FontSize"),rkr->relfontsize,0);
 if( rkr->relfontsize!=0) chfsize(rkr->relfontsize);
-
+rakarrack.get(rkr->PrefNom("Font"),rkr->font,0);
 
 rakarrack.get(rkr->PrefNom("Background Color"),b, 774778368);
 rakarrack.get(rkr->PrefNom("Foreground Color"),f,1602392832);
@@ -8624,6 +8629,8 @@ rakarrack.set(rkr->PrefNom("Principal Y"),Principal->y());
 rakarrack.set(rkr->PrefNom("Principal W"),Principal->w());
 rakarrack.set(rkr->PrefNom("Principal H"),Principal->h());
 rakarrack.set(rkr->PrefNom("FontSize"), rkr->relfontsize);
+rakarrack.set(rkr->PrefNom("Font"), rkr->font);
+
 rakarrack.set(rkr->PrefNom("Background Color"), (int)back_color);
 rakarrack.set(rkr->PrefNom("Foreground Color"), (int)fore_color);
 rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
@@ -8804,7 +8811,8 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -10000,7 +10008,30 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
         if((j>0) && (SAMPLE_RATE<=SR_value)) p->deactivate(); else p->activate();
 
 
- }} {}
+ }
+ 
+ 
+ k=0;
+
+ k = Fl::set_fonts(0);
+  for (i = 0; i < k; i++) {
+    int t; const char *name = Fl::get_font_name((Fl_Font)i,&t);
+    char buffer[128];
+\#if 1
+    if (t) {
+      char *p = buffer;
+      if (t & FL_BOLD) {*p++ = '@'; *p++ = 'b';}
+      if (t & FL_ITALIC) {*p++ = '@'; *p++ = 'i';}
+      strcpy(p,name);
+      name = buffer;
+    }
+\#else // this is neat, but really slow on some X servers:
+    sprintf(buffer, "@F%d@.%s", i, name);
+    name = buffer;
+\#endif
+    Font_Bro->add(name);
+
+}} {}
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
@@ -11733,6 +11764,7 @@ for (int t=0; t<Principal->children();t++)
           if (uh !=7) c->selection_color(back_color); 
           if ((uh==2)||(uh==7)) c->selection_color(leds_color);
           c->color(fore_color);
+          c->labelfont(rkr->font);
        
           if(uh == 12)
            {

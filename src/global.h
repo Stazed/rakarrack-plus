@@ -422,7 +422,7 @@ public:
   int Seq_Down;
   int Seq_U_Q;
   int Seq_D_Q;
-
+  int font;
   int flpos;
   int upsample;
   int UpQual;

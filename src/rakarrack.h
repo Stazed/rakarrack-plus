@@ -3161,37 +3161,16 @@ public:
   Fl_Tabs *STabs;
   Fl_Group *Look;
   Fl_Box *Fondo6;
-  Fl_Button *B_C;
-private:
-  void cb_B_C_i(Fl_Button*, void*);
-  static void cb_B_C(Fl_Button*, void*);
-public:
-  Fl_Button *L_C;
-private:
-  void cb_L_C_i(Fl_Button*, void*);
-  static void cb_L_C(Fl_Button*, void*);
-public:
-  Fl_Button *K_C;
-private:
-  void cb_K_C_i(Fl_Button*, void*);
-  static void cb_K_C(Fl_Button*, void*);
-public:
-  Fl_Button *A_C;
-private:
-  void cb_A_C_i(Fl_Button*, void*);
-  static void cb_A_C(Fl_Button*, void*);
-public:
   Fl_Choice *scheme_ch;
 private:
   void cb_scheme_ch_i(Fl_Choice*, void*);
   static void cb_scheme_ch(Fl_Choice*, void*);
   static Fl_Menu_Item menu_scheme_ch[];
 public:
-  Fl_File_Input *BackFiname;
-  Fl_Button *BI_Browser;
+  Fl_Browser *Font_Bro;
 private:
-  void cb_BI_Browser_i(Fl_Button*, void*);
-  static void cb_BI_Browser(Fl_Button*, void*);
+  void cb_Font_Bro_i(Fl_Browser*, void*);
+  static void cb_Font_Bro(Fl_Browser*, void*);
 public:
   Fl_Box *FSLabel;
   Fl_Button *FSless;
@@ -3210,6 +3189,32 @@ private:
   static void cb_FSReset(Fl_Button*, void*);
 public:
   Fl_Box *CLLabel;
+  Fl_Button *B_C;
+private:
+  void cb_B_C_i(Fl_Button*, void*);
+  static void cb_B_C(Fl_Button*, void*);
+public:
+  Fl_Button *A_C;
+private:
+  void cb_A_C_i(Fl_Button*, void*);
+  static void cb_A_C(Fl_Button*, void*);
+public:
+  Fl_Button *L_C;
+private:
+  void cb_L_C_i(Fl_Button*, void*);
+  static void cb_L_C(Fl_Button*, void*);
+public:
+  Fl_Button *K_C;
+private:
+  void cb_K_C_i(Fl_Button*, void*);
+  static void cb_K_C(Fl_Button*, void*);
+public:
+  Fl_File_Input *BackFiname;
+  Fl_Button *BI_Browser;
+private:
+  void cb_BI_Browser_i(Fl_Button*, void*);
+  static void cb_BI_Browser(Fl_Button*, void*);
+public:
   Fl_Group *AUDIO_SET;
   Fl_Box *Fondo7;
   Fl_Check_Button *INSTATE;

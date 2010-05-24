@@ -31,11 +31,12 @@ RKR::savefile (char *filename)
   FILE *fn;
   char buf[256];
   fn = fopen (filename, "w");
-  if(errno>0)
-  {
+  if(errno == EACCES)
+   {
    Error_Handle(3);
-   return;  
-  }
+   return;
+   }  
+
   bzero (buf, sizeof (buf));
   sprintf (buf, "%s\n", VERSION);
   fputs (buf, fn);
@@ -1297,7 +1298,7 @@ RKR::savebank (char *filename)
       return(1);     
   }
 
- if(errno>0) Error_Handle(3);
+ if(errno==EACCES) Error_Handle(3);
  return (0);
 };
 
@@ -2011,12 +2012,13 @@ RKR::saveskin (char *filename)
   FILE *fn;
   char buf[256];
        fn = fopen (filename, "w");
-       if(errno>0)
+       if(errno == EACCES)
        {
-         Error_Handle(3);
-         return;  
-       }
-        
+        Error_Handle(3);
+        return;
+       }  
+
+ 
        bzero (buf, sizeof (buf));
        sprintf (buf, "%d,%d\n", resolution,sh);
        fputs (buf, fn);
@@ -2032,7 +2034,7 @@ RKR::saveskin (char *filename)
        fputs ("\n",fn);
 
        bzero (buf, sizeof (buf));
-       sprintf (buf, "%d\n", relfontsize);
+       sprintf (buf, "%d,%d\n", relfontsize,font);
        fputs (buf, fn);
 
        bzero (buf, sizeof (buf));
@@ -2071,7 +2073,7 @@ RKR::loadskin (char *filename)
 
   bzero (buf, sizeof (buf));
   fgets (buf, sizeof buf, fn);
-  sscanf (buf, "%d\n", &relfontsize);
+  sscanf (buf, "%d,%d\n", &relfontsize,&font);
 
   bzero (buf, sizeof (buf));
   fgets (buf, sizeof buf, fn);
