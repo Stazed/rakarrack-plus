@@ -69,6 +69,7 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
 
+   float center, qq;
   for (int i = 0; i < 8; i++)
     {
       center = 500;
@@ -78,8 +79,11 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
       filterbank[i].sLP = 1.0f;  
       filterbank[i].sBP = 1.0f;
       filterbank[i].sHP = 1.0f;            
-      filterbank[i].l = new RBFilter (4, center, qq, 0);
-      filterbank[i].r = new RBFilter (4, center, qq, 0);
+      filterbank[i].l = new RBFilter (0, center, qq, 0);
+      filterbank[i].r = new RBFilter (0, center, qq, 0);
+      
+      filterbank[i].l->setmix (1, 1.0f, -0.5f, 0.5f);
+      filterbank[i].r->setmix (1, 1.0f, -0.5f, 0.5f);      
     };
     
    setpreset (Ppreset);
