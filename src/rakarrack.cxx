@@ -6062,24 +6062,24 @@ void RKRGUI::cb_echotron_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_echotron_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12))rkr->efx_Echotron->setpreset((int) o->value());
-revtron_pan->value(rkr->efx_Echotron->getpar(11)-64);
-revtron_level->value(rkr->efx_Echotron->getpar(7));
-revtron_WD->value(rkr->efx_Echotron->getpar(0)-64);
-revtron_damp->value(rkr->efx_Echotron->getpar(6));
-revtron_fnum->value(rkr->efx_Echotron->getpar(8));
-revtron_length->value(rkr->efx_Echotron->getpar(3));
-revtron_strech->value(rkr->efx_Echotron->getpar(9));
-revtron_safe->value(rkr->efx_Echotron->getpar(2));
-revtron_user->value(rkr->efx_Echotron->getpar(4));
-revtron_user->do_callback();
-revtron_fb->value(rkr->efx_Echotron->getpar(10));
-revtron_fade->value(rkr->efx_Echotron->getpar(1));
-revtron_idelay->value(rkr->efx_Echotron->getpar(5));
-revtron_LPF->value(rkr->efx_Echotron->getpar(14));
-revtron_HPF->value(rkr->efx_Echotron->getpar(15));
+echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
+echotron_level->value(rkr->efx_Echotron->getpar(7));
+echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
+echotron_damp->value(rkr->efx_Echotron->getpar(6));
+echotron_fnum->value(rkr->efx_Echotron->getpar(8));
+echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_strech->value(rkr->efx_Echotron->getpar(9));
+echotron_safe->value(rkr->efx_Echotron->getpar(2));
+echotron_user->value(rkr->efx_Echotron->getpar(4));
+echotron_user->do_callback();
+echotron_fb->value(rkr->efx_Echotron->getpar(10));
+echotron_fade->value(rkr->efx_Echotron->getpar(1));
+echotron_idelay->value(rkr->efx_Echotron->getpar(5));
+echotron_LPF->value(rkr->efx_Echotron->getpar(14));
+echotron_HPF->value(rkr->efx_Echotron->getpar(15));
 
-revtron_es->value(rkr->efx_Echotron->getpar(12));
-revtron_rv->value(rkr->efx_Echotron->getpar(13));
+echotron_es->value(rkr->efx_Echotron->getpar(12));
+echotron_rv->value(rkr->efx_Echotron->getpar(13));
 }
 void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_preset_i(o,v);
@@ -17854,6 +17854,10 @@ stomp_preset->do_callback(stomp_preset,1);
 //Reverbtron
 revtron_activar->value(rkr->Reverbtron_Bypass);
 revtron_preset->do_callback(revtron_preset,1);
+
+//Reverbtron
+echotron_activar->value(rkr->Echotron_Bypass);
+echotron_preset->do_callback(echotron_preset,1);
 
 
 reordena();
