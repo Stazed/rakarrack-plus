@@ -7264,9 +7264,8 @@ void RKRGUI::cb_Shi_Up_Qua(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Shi_Up_Qua_i(o,v);
 }
 
-void RKRGUI::cb_Wave_Amo_i(Fl_Choice* o, void*) {
-  Wave_res_amount =(int) o->value();
-Show_Next_Time();
+void RKRGUI::cb_Wave_Amo_i(Fl_Choice*, void*) {
+  Show_Next_Time();
 }
 void RKRGUI::cb_Wave_Amo(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Wave_Amo_i(o,v);
@@ -17572,7 +17571,7 @@ rakarrack.set(rkr->PrefNom("Sequence Down Quality"),rkr->Seq_D_Q);
 rakarrack.set(rkr->PrefNom("Shifter Downsample"),rkr->Shi_Down);
 rakarrack.set(rkr->PrefNom("Shifter Up Quality"),rkr->Shi_U_Q);
 rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
-rakarrack.set(rkr->PrefNom("Waveshape Resampling"),Wave_res_amount);
+rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
 
