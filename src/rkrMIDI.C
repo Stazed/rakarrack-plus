@@ -384,6 +384,9 @@ else
    case 40:
     if(inoff) Reverbtron_Bypass=1; else Reverbtron_Bypass=0;
      break;
+   case 41:
+    if(inoff) Echotron_Bypass=1; else Echotron_Bypass=0;
+     break;
 
    
    case 121:
@@ -542,6 +545,9 @@ RKR::checkonoff(int miraque)
      break;
    case 40:
      if (Reverbtron_Bypass) return(0);
+     break;
+   case 41:
+     if (Echotron_Bypass) return(0);
      break;
 
 

@@ -31,7 +31,7 @@
 class Echotron
 {
 public:
-  Echotron (float * efxoutl_, float * efxoutr_,int DS);
+  Echotron (float * efxoutl_, float * efxoutr_);
   ~Echotron ();
   void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
@@ -87,19 +87,13 @@ private:
   int avgtime;
   int hrtf_size;
   int hlength;
-  int nPERIOD;
-  int nSAMPLE_RATE;
 
 
   int *time, *rndtime;
-  double u_up;
-  double u_down;
-  float nfSAMPLE_RATE;
 
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
-  float *templ, *tempr;
   float level,fb, feedback,levpanl,levpanr;
   float roomsize;
  

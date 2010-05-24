@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Echotron.h"
 
-Echotron::Echotron (float * efxoutl_, float * efxoutr_,int DS)
+Echotron::Echotron (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -44,12 +44,13 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_,int DS)
   fb = 0.0f;
   feedback = 0.0f;
   maxtime = 0.0f;
-  adjust(DS);
-  templ = (float *) malloc (sizeof (float) * PERIOD);
-  tempr = (float *) malloc (sizeof (float) * PERIOD);
 
   hrtf_size = SAMPLE_RATE/2;
+<<<<<<< HEAD:src/Echotron.C
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
+=======
+  maxx_size = (int) (fSAMPLE_RATE * convlength);  //just to get the max memory allocated
+>>>>>>> dfce22126c9d51c19d8ed06ff53fa0ecaf35ef22:src/Echotron.C
   time = (int *) malloc (sizeof (int) * 2000);
   rndtime = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
@@ -121,7 +122,7 @@ Echotron::out (float * smpsl, float * smpsr)
   int doffset;
 
   
-  for (i = 0; i < nPERIOD; i++)
+  for (i = 0; i < PERIOD; i++)
     {
 
       l = 0.5f*(smpsr[i] + smpsl[i]); 
@@ -174,8 +175,8 @@ Echotron::out (float * smpsl, float * smpsr)
       imctr--;
       if (imctr<0) imctr = roomsize;
       
-      templ[i] = (lyn + ldiff )* levpanl;
-      tempr[i] = (lyn + rdiff ) * levpanr;  
+      efxoutl[i] = (lyn + ldiff )* levpanl;
+      efxoutr[i] = (lyn + rdiff ) * levpanr;  
        
       feedback = fb*rdiff*decay;          
 
@@ -183,8 +184,8 @@ Echotron::out (float * smpsl, float * smpsr)
        else
        {
       feedback = fb * lyn;
-      templ[i] = lyn * levpanl;
-      tempr[i] = lyn * levpanr;         
+      efxoutl[i] = lyn * levpanl;
+      efxoutr[i] = lyn * levpanr;         
        
        }        
 
@@ -354,7 +355,7 @@ for(i=0;i<data_length;i++)
        ftime[i] = 0.0f;
        data[i] = 0.0f;
        }   
-       time[index]=lrintf(tmpstretch*(idelay + ftime[i])*nfSAMPLE_RATE);  //Add initial delay to all the samples
+       time[index]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
        data[index]=normal*tdata[i];  
        index++;
       }
@@ -368,7 +369,7 @@ for(i=0;i<data_length;i++)
 { 
 
     if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
-    time[i]=lrintf(tmpstretch*(idelay + ftime[i])*nfSAMPLE_RATE);  //Add initial delay to all the samples
+    time[i]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
     data[i]=normal*tdata[i];  
  
 };

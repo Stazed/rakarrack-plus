@@ -2882,6 +2882,104 @@ private:
   static void cb_revtron_fnum(Fl_Choice*, void*);
   static Fl_Menu_Item menu_revtron_fnum[];
 public:
+  Fl_Group *ECHOTRON;
+  Fl_Light_Button *echotron_activar;
+private:
+  void cb_echotron_activar_i(Fl_Light_Button*, void*);
+  static void cb_echotron_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *echotron_preset;
+private:
+  void cb_echotron_preset_i(Fl_Choice*, void*);
+  static void cb_echotron_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_echotron_preset[];
+public:
+  SliderW *echotron_WD;
+private:
+  void cb_echotron_WD_i(SliderW*, void*);
+  static void cb_echotron_WD(SliderW*, void*);
+public:
+  SliderW *echotron_pan;
+private:
+  void cb_echotron_pan_i(SliderW*, void*);
+  static void cb_echotron_pan(SliderW*, void*);
+public:
+  SliderW *echotron_level;
+private:
+  void cb_echotron_level_i(SliderW*, void*);
+  static void cb_echotron_level(SliderW*, void*);
+public:
+  SliderW *echotron_damp;
+private:
+  void cb_echotron_damp_i(SliderW*, void*);
+  static void cb_echotron_damp(SliderW*, void*);
+public:
+  SliderW *echotron_fb;
+private:
+  void cb_echotron_fb_i(SliderW*, void*);
+  static void cb_echotron_fb(SliderW*, void*);
+public:
+  SliderW *echotron_length;
+private:
+  void cb_echotron_length_i(SliderW*, void*);
+  static void cb_echotron_length(SliderW*, void*);
+public:
+  SliderW *echotron_strech;
+private:
+  void cb_echotron_strech_i(SliderW*, void*);
+  static void cb_echotron_strech(SliderW*, void*);
+public:
+  SliderW *echotron_idelay;
+private:
+  void cb_echotron_idelay_i(SliderW*, void*);
+  static void cb_echotron_idelay(SliderW*, void*);
+public:
+  SliderW *echotron_fade;
+private:
+  void cb_echotron_fade_i(SliderW*, void*);
+  static void cb_echotron_fade(SliderW*, void*);
+public:
+  SliderW *echotron_HPF;
+private:
+  void cb_echotron_HPF_i(SliderW*, void*);
+  static void cb_echotron_HPF(SliderW*, void*);
+public:
+  SliderW *echotron_LPF;
+private:
+  void cb_echotron_LPF_i(SliderW*, void*);
+  static void cb_echotron_LPF(SliderW*, void*);
+public:
+  Fl_Check_Button *echotron_rv;
+private:
+  void cb_echotron_rv_i(Fl_Check_Button*, void*);
+  static void cb_echotron_rv(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *echotron_es;
+private:
+  void cb_echotron_es_i(Fl_Check_Button*, void*);
+  static void cb_echotron_es(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *echotron_safe;
+private:
+  void cb_echotron_safe_i(Fl_Check_Button*, void*);
+  static void cb_echotron_safe(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *echotron_user;
+private:
+  void cb_echotron_user_i(Fl_Check_Button*, void*);
+  static void cb_echotron_user(Fl_Check_Button*, void*);
+public:
+  Fl_Button *B_ech;
+private:
+  void cb_B_ech_i(Fl_Button*, void*);
+  static void cb_B_ech(Fl_Button*, void*);
+public:
+  Fl_Choice *echotron_fnum;
+private:
+  void cb_echotron_fnum_i(Fl_Choice*, void*);
+  static void cb_echotron_fnum(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_echotron_fnum[];
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

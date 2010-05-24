@@ -13,6 +13,7 @@ rakarrack_SOURCES = main.C \
 	Dual_Flange.h \
 	DynamicFilter.h \
 	Echo.h \
+	Echotron.h \
 	Effect.h \
 	EffectLFO.h \
 	EQ.h \
@@ -117,6 +118,7 @@ rakarrack_SOURCES = main.C \
 	Shifter.C \
 	StompBox.C \
 	Reverbtron.C \
+	Echotron.C \
 	MIDIConverter.C
 	
 	
