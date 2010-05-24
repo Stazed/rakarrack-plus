@@ -104,7 +104,11 @@ private:
   float roomsize;
  
   class AnalogFilter *lpfl, *lpfr;	//filters
+  
+    struct { float sfreq, sq,sLP,sBP,sHP;
+    class RBFilter *l, *r;
 
+  } filterbank[8];
 
 };
 

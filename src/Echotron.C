@@ -41,7 +41,6 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_,int DS)
   Plength = 50;
   Puser = 0;
   Psafe = 0;
-  convlength = 10.0f;  //max reverb time
   fb = 0.0f;
   feedback = 0.0f;
   maxtime = 0.0f;
@@ -49,16 +48,17 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_,int DS)
   templ = (float *) malloc (sizeof (float) * PERIOD);
   tempr = (float *) malloc (sizeof (float) * PERIOD);
 
-  hrtf_size = nSAMPLE_RATE/2;
-  maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
+  hrtf_size = SAMPLE_RATE/2;
+  maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
   time = (int *) malloc (sizeof (int) * 2000);
   rndtime = (int *) malloc (sizeof (int) * 2000);
   ftime = (float *) malloc (sizeof (float) * 2000);
   data = (float *) malloc (sizeof (float) * 2000);
   rnddata = (float *) malloc (sizeof (float) * 2000);
   tdata = (float *) malloc (sizeof (float) * 2000);
-  lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));  
-  hrtf =  (float *) malloc (sizeof (float) * (1 + hrtf_size)); 
+  lxn = (float *) malloc (sizeof (float) * (1 + maxx_size)); 
+  rxn = (float *) malloc (sizeof (float) * (1 + maxx_size));    
+
   imax = SAMPLE_RATE/2;  // 1/2 second available
   imdelay = (float *) malloc (sizeof (float) * imax);
   offset = 0;
@@ -67,11 +67,24 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_,int DS)
   hlength = 0;
   fstretch = 1.0f;
   idelay = 0.0f;
-  decay = expf(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
+  decay = expf(-1.0f/(0.2f*fSAMPLE_RATE));  //0.2 seconds
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
 
+  for (int i = 0; i < 8; i++)
+    {
+      center = 500;
+      qq = 1.0f;
+      filterbank[i].sfreq = center;
+      filterbank[i].sq = qq;
+      filterbank[i].sLP = 1.0f;  
+      filterbank[i].sBP = 1.0f;
+      filterbank[i].sHP = 1.0f;            
+      filterbank[i].l = new RBFilter (4, center, qq, 0);
+      filterbank[i].r = new RBFilter (4, center, qq, 0);
+    };
+    
    setpreset (Ppreset);
   cleanup ();
 };
