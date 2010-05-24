@@ -6050,6 +6050,194 @@ Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+void RKRGUI::cb_echotron_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Echotron_Bypass=(int)o->value();
+if((int) o->value()==0) rkr->efx_Echotron->cleanup();
+findpos(41,(int)o->value());
+}
+void RKRGUI::cb_echotron_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_activar_i(o,v);
+}
+
+void RKRGUI::cb_echotron_preset_i(Fl_Choice* o, void* v) {
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Echotron->setpreset((int) o->value());
+revtron_pan->value(rkr->efx_Echotron->getpar(11)-64);
+revtron_level->value(rkr->efx_Echotron->getpar(7));
+revtron_WD->value(rkr->efx_Echotron->getpar(0)-64);
+revtron_damp->value(rkr->efx_Echotron->getpar(6));
+revtron_fnum->value(rkr->efx_Echotron->getpar(8));
+revtron_length->value(rkr->efx_Echotron->getpar(3));
+revtron_strech->value(rkr->efx_Echotron->getpar(9));
+revtron_safe->value(rkr->efx_Echotron->getpar(2));
+revtron_user->value(rkr->efx_Echotron->getpar(4));
+revtron_user->do_callback();
+revtron_fb->value(rkr->efx_Echotron->getpar(10));
+revtron_fade->value(rkr->efx_Echotron->getpar(1));
+revtron_idelay->value(rkr->efx_Echotron->getpar(5));
+revtron_LPF->value(rkr->efx_Echotron->getpar(14));
+revtron_HPF->value(rkr->efx_Echotron->getpar(15));
+
+revtron_es->value(rkr->efx_Echotron->getpar(12));
+revtron_rv->value(rkr->efx_Echotron->getpar(13));
+}
+void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_echotron_preset[] = {
+ {"Chamber", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Concrete Stairwell", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Med Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Cathedral", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_echotron_WD_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(0,(int)(o->value()+64));
+}
+void RKRGUI::cb_echotron_WD(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_WD_i(o,v);
+}
+
+void RKRGUI::cb_echotron_pan_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(11,(int)(o->value()+64));
+}
+void RKRGUI::cb_echotron_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_pan_i(o,v);
+}
+
+void RKRGUI::cb_echotron_level_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(7,(int)o->value());
+}
+void RKRGUI::cb_echotron_level(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_level_i(o,v);
+}
+
+void RKRGUI::cb_echotron_damp_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(6,(int)o->value());
+}
+void RKRGUI::cb_echotron_damp(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_damp_i(o,v);
+}
+
+void RKRGUI::cb_echotron_fb_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_echotron_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_fb_i(o,v);
+}
+
+void RKRGUI::cb_echotron_length_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_echotron_length(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_length_i(o,v);
+}
+
+void RKRGUI::cb_echotron_strech_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(9,(int)o->value());
+}
+void RKRGUI::cb_echotron_strech(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_strech_i(o,v);
+}
+
+void RKRGUI::cb_echotron_idelay_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(5,(int)o->value());
+}
+void RKRGUI::cb_echotron_idelay(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_idelay_i(o,v);
+}
+
+void RKRGUI::cb_echotron_fade_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_echotron_fade(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_fade_i(o,v);
+}
+
+void RKRGUI::cb_echotron_HPF_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(15,(int)o->value());
+}
+void RKRGUI::cb_echotron_HPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_HPF_i(o,v);
+}
+
+void RKRGUI::cb_echotron_LPF_i(SliderW* o, void*) {
+  rkr->efx_Echotron->changepar(14,(int)o->value());
+}
+void RKRGUI::cb_echotron_LPF(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_LPF_i(o,v);
+}
+
+void RKRGUI::cb_echotron_rv_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Echotron->changepar(13,(int)o->value());
+}
+void RKRGUI::cb_echotron_rv(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_rv_i(o,v);
+}
+
+void RKRGUI::cb_echotron_es_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Echotron->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_echotron_es(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_es_i(o,v);
+}
+
+void RKRGUI::cb_echotron_safe_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Echotron->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_echotron_safe(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_safe_i(o,v);
+}
+
+void RKRGUI::cb_echotron_user_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Echotron->changepar(4,(int)o->value());
+
+if((int)o->value())B_ech->activate(); else B_ech->deactivate();
+}
+void RKRGUI::cb_echotron_user(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_user_i(o,v);
+}
+
+void RKRGUI::cb_B_ech_i(Fl_Button*, void*) {
+  char *filename;
+filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rvb");
+strcpy(rkr->efx_Reverbtron->Filename,filename);
+rkr->efx_Echotron->setfile(100);
+}
+void RKRGUI::cb_B_ech(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_ech_i(o,v);
+}
+
+void RKRGUI::cb_echotron_fnum_i(Fl_Choice* o, void*) {
+  rkr->efx_Echotron->changepar(8,(int)o->value());
+}
+void RKRGUI::cb_echotron_fnum(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_fnum_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_echotron_fnum[] = {
+ {"Chamber", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Conc. Stair", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Med Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Large Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Large Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar Ambience", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Twilight", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -15315,6 +15503,260 @@ R average.");
       } // Fl_Choice* revtron_fnum
       REVERBTRON->end();
     } // Fl_Group* REVERBTRON
+    { ECHOTRON = new Fl_Group(320, 211, 158, 184);
+      ECHOTRON->box(FL_UP_BOX);
+      ECHOTRON->color((Fl_Color)FL_FOREGROUND_COLOR);
+      ECHOTRON->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      ECHOTRON->labelfont(1);
+      ECHOTRON->user_data((void*)(1));
+      ECHOTRON->align(96|FL_ALIGN_INSIDE);
+      ECHOTRON->hide();
+      { echotron_activar = new Fl_Light_Button(326, 215, 34, 18, "On");
+        echotron_activar->shortcut(0x35);
+        echotron_activar->color((Fl_Color)62);
+        echotron_activar->selection_color((Fl_Color)1);
+        echotron_activar->labelsize(10);
+        echotron_activar->callback((Fl_Callback*)cb_echotron_activar, (void*)(2));
+        echotron_activar->align(68|FL_ALIGN_INSIDE);
+        echotron_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* echotron_activar
+      { echotron_preset = new Fl_Choice(399, 215, 76, 18, "Preset");
+        echotron_preset->down_box(FL_BORDER_BOX);
+        echotron_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        echotron_preset->labelsize(10);
+        echotron_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_preset->textsize(10);
+        echotron_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_preset->callback((Fl_Callback*)cb_echotron_preset, (void*)(12));
+        echotron_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        echotron_preset->menu(menu_echotron_preset);
+      } // Fl_Choice* echotron_preset
+      { echotron_WD = new SliderW(372, 236, 100, 10, "Wet/Dry");
+        echotron_WD->type(5);
+        echotron_WD->box(FL_FLAT_BOX);
+        echotron_WD->color((Fl_Color)178);
+        echotron_WD->selection_color((Fl_Color)62);
+        echotron_WD->labeltype(FL_NORMAL_LABEL);
+        echotron_WD->labelfont(0);
+        echotron_WD->labelsize(10);
+        echotron_WD->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_WD->minimum(-64);
+        echotron_WD->maximum(64);
+        echotron_WD->step(1);
+        echotron_WD->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_WD->callback((Fl_Callback*)cb_echotron_WD);
+        echotron_WD->align(FL_ALIGN_LEFT);
+        echotron_WD->when(FL_WHEN_CHANGED);
+      } // SliderW* echotron_WD
+      { echotron_pan = new SliderW(372, 248, 100, 10, "Pan");
+        echotron_pan->type(5);
+        echotron_pan->box(FL_FLAT_BOX);
+        echotron_pan->color((Fl_Color)178);
+        echotron_pan->selection_color((Fl_Color)62);
+        echotron_pan->labeltype(FL_NORMAL_LABEL);
+        echotron_pan->labelfont(0);
+        echotron_pan->labelsize(10);
+        echotron_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_pan->minimum(-64);
+        echotron_pan->maximum(63);
+        echotron_pan->step(1);
+        echotron_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_pan->callback((Fl_Callback*)cb_echotron_pan);
+        echotron_pan->align(FL_ALIGN_LEFT);
+        echotron_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* echotron_pan
+      { echotron_level = new SliderW(372, 260, 100, 10, "Level");
+        echotron_level->type(5);
+        echotron_level->box(FL_FLAT_BOX);
+        echotron_level->color((Fl_Color)178);
+        echotron_level->selection_color((Fl_Color)62);
+        echotron_level->labeltype(FL_NORMAL_LABEL);
+        echotron_level->labelfont(0);
+        echotron_level->labelsize(10);
+        echotron_level->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_level->maximum(127);
+        echotron_level->step(1);
+        echotron_level->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_level->callback((Fl_Callback*)cb_echotron_level);
+        echotron_level->align(FL_ALIGN_LEFT);
+        echotron_level->when(FL_WHEN_CHANGED);
+      } // SliderW* echotron_level
+      { echotron_damp = new SliderW(372, 272, 100, 10, "Damp");
+        echotron_damp->type(5);
+        echotron_damp->box(FL_FLAT_BOX);
+        echotron_damp->color((Fl_Color)178);
+        echotron_damp->selection_color((Fl_Color)62);
+        echotron_damp->labeltype(FL_NORMAL_LABEL);
+        echotron_damp->labelfont(0);
+        echotron_damp->labelsize(10);
+        echotron_damp->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_damp->maximum(127);
+        echotron_damp->step(1);
+        echotron_damp->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_damp->callback((Fl_Callback*)cb_echotron_damp);
+        echotron_damp->align(FL_ALIGN_LEFT);
+        echotron_damp->when(FL_WHEN_CHANGED);
+      } // SliderW* echotron_damp
+      { echotron_fb = new SliderW(372, 284, 100, 10, "Fb");
+        echotron_fb->type(5);
+        echotron_fb->box(FL_FLAT_BOX);
+        echotron_fb->color((Fl_Color)178);
+        echotron_fb->selection_color((Fl_Color)62);
+        echotron_fb->labeltype(FL_NORMAL_LABEL);
+        echotron_fb->labelfont(0);
+        echotron_fb->labelsize(10);
+        echotron_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_fb->minimum(-64);
+        echotron_fb->maximum(64);
+        echotron_fb->step(1);
+        echotron_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_fb->callback((Fl_Callback*)cb_echotron_fb);
+        echotron_fb->align(FL_ALIGN_LEFT);
+        echotron_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* echotron_fb
+      { echotron_length = new SliderW(372, 296, 100, 10, "Length");
+        echotron_length->type(5);
+        echotron_length->box(FL_FLAT_BOX);
+        echotron_length->color((Fl_Color)178);
+        echotron_length->selection_color((Fl_Color)62);
+        echotron_length->labeltype(FL_NORMAL_LABEL);
+        echotron_length->labelfont(0);
+        echotron_length->labelsize(10);
+        echotron_length->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_length->minimum(20);
+        echotron_length->maximum(1500);
+        echotron_length->step(1);
+        echotron_length->value(100);
+        echotron_length->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_length->callback((Fl_Callback*)cb_echotron_length);
+        echotron_length->align(FL_ALIGN_LEFT);
+        echotron_length->when(FL_WHEN_RELEASE);
+      } // SliderW* echotron_length
+      { echotron_strech = new SliderW(372, 308, 100, 10, "Stretch");
+        echotron_strech->type(5);
+        echotron_strech->box(FL_FLAT_BOX);
+        echotron_strech->color((Fl_Color)178);
+        echotron_strech->selection_color((Fl_Color)62);
+        echotron_strech->labeltype(FL_NORMAL_LABEL);
+        echotron_strech->labelfont(0);
+        echotron_strech->labelsize(10);
+        echotron_strech->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_strech->minimum(-64);
+        echotron_strech->maximum(64);
+        echotron_strech->step(1);
+        echotron_strech->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_strech->callback((Fl_Callback*)cb_echotron_strech);
+        echotron_strech->align(FL_ALIGN_LEFT);
+        echotron_strech->when(FL_WHEN_RELEASE);
+      } // SliderW* echotron_strech
+      { echotron_idelay = new SliderW(372, 320, 100, 10, "I.Del");
+        echotron_idelay->type(5);
+        echotron_idelay->box(FL_FLAT_BOX);
+        echotron_idelay->color((Fl_Color)178);
+        echotron_idelay->selection_color((Fl_Color)62);
+        echotron_idelay->labeltype(FL_NORMAL_LABEL);
+        echotron_idelay->labelfont(0);
+        echotron_idelay->labelsize(10);
+        echotron_idelay->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_idelay->maximum(500);
+        echotron_idelay->step(1);
+        echotron_idelay->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_idelay->callback((Fl_Callback*)cb_echotron_idelay);
+        echotron_idelay->align(FL_ALIGN_LEFT);
+        echotron_idelay->when(FL_WHEN_RELEASE);
+      } // SliderW* echotron_idelay
+      { echotron_fade = new SliderW(372, 332, 100, 10, "Fade");
+        echotron_fade->type(5);
+        echotron_fade->box(FL_FLAT_BOX);
+        echotron_fade->color((Fl_Color)178);
+        echotron_fade->selection_color((Fl_Color)62);
+        echotron_fade->labeltype(FL_NORMAL_LABEL);
+        echotron_fade->labelfont(0);
+        echotron_fade->labelsize(10);
+        echotron_fade->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_fade->maximum(127);
+        echotron_fade->step(1);
+        echotron_fade->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_fade->callback((Fl_Callback*)cb_echotron_fade);
+        echotron_fade->align(FL_ALIGN_LEFT);
+        echotron_fade->when(FL_WHEN_RELEASE);
+      } // SliderW* echotron_fade
+      { echotron_HPF = new SliderW(373, 344, 100, 10, "Diffusion");
+        echotron_HPF->type(5);
+        echotron_HPF->box(FL_FLAT_BOX);
+        echotron_HPF->color((Fl_Color)178);
+        echotron_HPF->selection_color((Fl_Color)62);
+        echotron_HPF->labeltype(FL_NORMAL_LABEL);
+        echotron_HPF->labelfont(0);
+        echotron_HPF->labelsize(10);
+        echotron_HPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_HPF->maximum(127);
+        echotron_HPF->step(1);
+        echotron_HPF->value(26000);
+        echotron_HPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_HPF->callback((Fl_Callback*)cb_echotron_HPF);
+        echotron_HPF->align(FL_ALIGN_LEFT);
+        echotron_HPF->when(FL_WHEN_RELEASE);
+      } // SliderW* echotron_HPF
+      { echotron_LPF = new SliderW(372, 356, 100, 10, "LPF");
+        echotron_LPF->type(5);
+        echotron_LPF->box(FL_FLAT_BOX);
+        echotron_LPF->color((Fl_Color)178);
+        echotron_LPF->selection_color((Fl_Color)62);
+        echotron_LPF->labeltype(FL_NORMAL_LABEL);
+        echotron_LPF->labelfont(0);
+        echotron_LPF->labelsize(10);
+        echotron_LPF->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_LPF->minimum(20);
+        echotron_LPF->maximum(26000);
+        echotron_LPF->step(1);
+        echotron_LPF->value(20);
+        echotron_LPF->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_LPF->callback((Fl_Callback*)cb_echotron_LPF);
+        echotron_LPF->align(FL_ALIGN_LEFT);
+        echotron_LPF->when(FL_WHEN_RELEASE);
+      } // SliderW* echotron_LPF
+      { echotron_rv = new Fl_Check_Button(322, 362, 15, 15, "Sh");
+        echotron_rv->down_box(FL_BORDER_BOX);
+        echotron_rv->labelsize(10);
+        echotron_rv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_rv->callback((Fl_Callback*)cb_echotron_rv, (void*)(2));
+      } // Fl_Check_Button* echotron_rv
+      { echotron_es = new Fl_Check_Button(322, 375, 15, 15, "ES");
+        echotron_es->down_box(FL_BORDER_BOX);
+        echotron_es->labelsize(10);
+        echotron_es->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_es->callback((Fl_Callback*)cb_echotron_es, (void*)(2));
+      } // Fl_Check_Button* echotron_es
+      { echotron_safe = new Fl_Check_Button(350, 365, 15, 15, "Safe");
+        echotron_safe->down_box(FL_BORDER_BOX);
+        echotron_safe->labelsize(10);
+        echotron_safe->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_safe->callback((Fl_Callback*)cb_echotron_safe, (void*)(2));
+      } // Fl_Check_Button* echotron_safe
+      { echotron_user = new Fl_Check_Button(387, 365, 15, 15, "User");
+        echotron_user->down_box(FL_BORDER_BOX);
+        echotron_user->labelsize(10);
+        echotron_user->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_user->callback((Fl_Callback*)cb_echotron_user, (void*)(2));
+      } // Fl_Check_Button* echotron_user
+      { B_ech = new Fl_Button(426, 367, 46, 10, "Browse");
+        B_ech->labelsize(10);
+        B_ech->callback((Fl_Callback*)cb_B_ech, (void*)(2));
+        B_ech->deactivate();
+      } // Fl_Button* B_ech
+      { echotron_fnum = new Fl_Choice(371, 379, 101, 14, "File");
+        echotron_fnum->down_box(FL_BORDER_BOX);
+        echotron_fnum->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        echotron_fnum->labelsize(10);
+        echotron_fnum->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_fnum->textsize(10);
+        echotron_fnum->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_fnum->callback((Fl_Callback*)cb_echotron_fnum, (void*)(12));
+        echotron_fnum->menu(menu_echotron_fnum);
+      } // Fl_Choice* echotron_fnum
+      ECHOTRON->end();
+    } // Fl_Group* ECHOTRON
     { Tuner = new Fl_Group(520, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -17724,6 +18166,9 @@ for (i=1; i<=t; i++)
         case 40:
         REVERBTRON->hide();
         break;
+        case 41:
+        ECHOTRON->hide();
+        break;
        
         
 
@@ -18082,6 +18527,13 @@ switch (rkr->efx_order[i])
        revtron_activar->shortcut(s[i]);
        REVERBTRON->show();
        if(rkr->Reverbtron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 41:
+       ECHOTRON->position(x[i],y[i]);
+       echotron_activar->shortcut(s[i]);
+       ECHOTRON->show();
+       if(rkr->Echotron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -20100,6 +20552,8 @@ SEQUENCE->image(InOut->image());
 SHIFTER->image(InOut->image());
 STOMPBOX->image(InOut->image());
 REVERBTRON->image(InOut->image());
+ECHOTRON->image(InOut->image());
+
 Tap->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());

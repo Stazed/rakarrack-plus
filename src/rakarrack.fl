@@ -825,7 +825,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -835,7 +836,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1481 64 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1474 57 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6654,6 +6655,231 @@ rkr->efx_Reverbtron->setfile(100);}
           }
         }
       }
+      Fl_Group ECHOTRON {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button echotron_activar {
+          label On
+          user_data 2
+          callback {rkr->Echotron_Bypass=(int)o->value();
+if((int) o->value()==0) rkr->efx_Echotron->cleanup();
+findpos(41,(int)o->value());}
+          xywh {326 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice echotron_preset {
+          label Preset
+          user_data 12
+          callback {long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Echotron->setpreset((int) o->value());
+revtron_pan->value(rkr->efx_Echotron->getpar(11)-64);
+revtron_level->value(rkr->efx_Echotron->getpar(7));
+revtron_WD->value(rkr->efx_Echotron->getpar(0)-64);
+revtron_damp->value(rkr->efx_Echotron->getpar(6));
+revtron_fnum->value(rkr->efx_Echotron->getpar(8));
+revtron_length->value(rkr->efx_Echotron->getpar(3));
+revtron_strech->value(rkr->efx_Echotron->getpar(9));
+revtron_safe->value(rkr->efx_Echotron->getpar(2));
+revtron_user->value(rkr->efx_Echotron->getpar(4));
+revtron_user->do_callback();
+revtron_fb->value(rkr->efx_Echotron->getpar(10));
+revtron_fade->value(rkr->efx_Echotron->getpar(1));
+revtron_idelay->value(rkr->efx_Echotron->getpar(5));
+revtron_LPF->value(rkr->efx_Echotron->getpar(14));
+revtron_HPF->value(rkr->efx_Echotron->getpar(15));
+
+revtron_es->value(rkr->efx_Echotron->getpar(12));
+revtron_rv->value(rkr->efx_Echotron->getpar(13));}
+          xywh {399 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Chamber
+            xywh {87 87 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Concrete Stairwell}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Hall
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Med Hall}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Room
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Hall
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Guitar
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Studio
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Cathedral
+            xywh {10 10 36 21} labelsize 9
+          }
+        }
+        Fl_Value_Slider echotron_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_Echotron->changepar(0,(int)(o->value()+64));}
+          xywh {372 236 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_pan {
+          label Pan
+          callback {rkr->efx_Echotron->changepar(11,(int)(o->value()+64));}
+          xywh {372 248 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_level {
+          label Level
+          callback {rkr->efx_Echotron->changepar(7,(int)o->value());}
+          xywh {372 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_damp {
+          label Damp
+          callback {rkr->efx_Echotron->changepar(6,(int)o->value());}
+          xywh {372 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_fb {
+          label Fb
+          callback {rkr->efx_Echotron->changepar(10,(int)o->value());}
+          xywh {372 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_length {
+          label Length
+          callback {rkr->efx_Echotron->changepar(3,(int)o->value());}
+          xywh {372 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 1500 step 1 value 100 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_strech {
+          label Stretch
+          callback {rkr->efx_Echotron->changepar(9,(int)o->value());}
+          xywh {372 308 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_idelay {
+          label {I.Del}
+          callback {rkr->efx_Echotron->changepar(5,(int)o->value());}
+          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 500 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_fade {
+          label Fade
+          callback {rkr->efx_Echotron->changepar(1,(int)o->value());}
+          xywh {372 332 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_HPF {
+          label Diffusion
+          callback {rkr->efx_Echotron->changepar(15,(int)o->value());}
+          xywh {373 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 value 26000 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider echotron_LPF {
+          label LPF
+          callback {rkr->efx_Echotron->changepar(14,(int)o->value());}
+          xywh {372 356 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 20 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button echotron_rv {
+          label Sh
+          user_data 2
+          callback {rkr->efx_Echotron->changepar(13,(int)o->value());}
+          xywh {322 362 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button echotron_es {
+          label ES
+          user_data 2
+          callback {rkr->efx_Echotron->changepar(12,(int)o->value());}
+          xywh {322 375 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button echotron_safe {
+          label Safe
+          user_data 2
+          callback {rkr->efx_Echotron->changepar(2,(int)o->value());}
+          xywh {350 365 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Check_Button echotron_user {
+          label User
+          user_data 2
+          callback {rkr->efx_Echotron->changepar(4,(int)o->value());
+
+if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
+          xywh {387 365 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Button B_ech {
+          label Browse
+          user_data 2
+          callback {char *filename;
+filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rvb");
+strcpy(rkr->efx_Reverbtron->Filename,filename);
+rkr->efx_Echotron->setfile(100);}
+          xywh {426 367 46 10} labelsize 10 deactivate
+        }
+        Fl_Choice echotron_fnum {
+          label File
+          user_data 12
+          callback {rkr->efx_Echotron->changepar(8,(int)o->value());}
+          xywh {371 379 101 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Chamber
+            xywh {64 64 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Conc. Stair}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Hall
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Med Hall}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Large Room}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Large Hall}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Guitar Ambience}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Studio
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Twilight
+            xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Santa Lucia}
+            xywh {10 10 36 21} labelsize 10
+          }
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -9168,7 +9394,8 @@ made=1;
 
 light_preset(rkr->Selected_Preset);} {}
   }
-  Function {reordena()} {} {
+  Function {reordena()} {selected
+  } {
     code {int i,j,k,t;
 unsigned int x[10],y[10];
 ulong s[10];
@@ -9367,6 +9594,9 @@ for (i=1; i<=t; i++)
         break;
         case 40:
         REVERBTRON->hide();
+        break;
+        case 41:
+        ECHOTRON->hide();
         break;
        
         
@@ -9728,6 +9958,13 @@ switch (rkr->efx_order[i])
        if(rkr->Reverbtron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
+   case 41:
+       ECHOTRON->position(x[i],y[i]);
+       echotron_activar->shortcut(s[i]);
+       ECHOTRON->show();
+       if(rkr->Echotron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
 
  }
  
@@ -10080,8 +10317,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {selected
-    }
+Font_Bro->value(rkr->font+1);} {}
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
@@ -11732,6 +11968,8 @@ SEQUENCE->image(InOut->image());
 SHIFTER->image(InOut->image());
 STOMPBOX->image(InOut->image());
 REVERBTRON->image(InOut->image());
+ECHOTRON->image(InOut->image());
+
 Tap->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());

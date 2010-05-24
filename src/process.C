@@ -244,6 +244,7 @@ RKR::RKR ()
   efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q);
   efx_StompBox = new StompBox(efxoutl,efxoutr);
   efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down, Rev_U_Q, Rev_D_Q);
+  efx_Echotron = new Echotron(efxoutl,efxoutr);
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
   A_Resample = new Resample(3);
@@ -279,7 +280,7 @@ RKR::RKR ()
 128 - Synthesis
 */
 
-  NumEffects = 41;
+  NumEffects = 42;
 
   {
     static const char *los_names[] =
@@ -297,6 +298,7 @@ RKR::RKR ()
 "Distortion","2","1",
 "Dual Flange","20","2",
 "Echo","4","4",
+"Echotron","41","4",
 "Echoverse","32","4",
 "EQ","0","64",
 "Exciter","22","64",
@@ -1261,6 +1263,7 @@ RKR::cleanup_efx ()
   efx_Shifter->cleanup();
   efx_StompBox->cleanup();
   efx_Reverbtron->cleanup();
+  efx_Echotron->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 
@@ -1647,6 +1650,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 {
                   efx_Reverbtron->out(efxoutl, efxoutr);
 		  Vol_Efx(40,efx_Reverbtron->outvolume);
+                }
+              break;  
+
+              case 41:
+              if (Echotron_Bypass)
+                {
+                  efx_Echotron->out(efxoutl, efxoutr);
+		  Vol_Efx(41,efx_Echotron->outvolume);
                 }
               break;  
 
