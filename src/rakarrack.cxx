@@ -16614,7 +16614,7 @@ R average.");
           Shi_Up_Qua->callback((Fl_Callback*)cb_Shi_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Shi_Up_Qua
-        { Wave_Amo = new Fl_Choice(133, 428, 82, 18, "Waveshape Resampling");
+        { Wave_Amo = new Fl_Choice(143, 428, 70, 18, "Waveshape Resampling   ");
           Wave_Amo->down_box(FL_BORDER_BOX);
           Wave_Amo->labelsize(10);
           Wave_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
