@@ -272,7 +272,7 @@ sf_close(infile);
 if (sfinfo.samplerate != (int)nSAMPLE_RATE)
 {
   sr_ratio = (double)nSAMPLE_RATE/((double) sfinfo.samplerate);
-  M_Resample->mono_out(buf,rbuf,real_len,sr_ratio);
+  M_Resample->mono_out(buf,rbuf,real_len,sr_ratio,lrint((double)real_len*sr_ratio));
   real_len =lrintf((float)real_len*(float)sr_ratio);
 }
 

@@ -31,6 +31,7 @@ Resample::Resample(int type)
 {
 statel = src_new(type , 1 , &errorl);
 stater = src_new(type , 1 , &errorr);
+
 }
 
 
@@ -76,10 +77,8 @@ errorr = src_process(stater, &srcinfor);
 
 
 void
-Resample::mono_out(float *inl, float *outl, int frames, double ratio)
+Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_frames)
 {
-
-long int o_frames = lrint((double)frames*ratio);
 
 srcinfol.data_in = inl;
 srcinfol.input_frames = frames;

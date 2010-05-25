@@ -123,7 +123,7 @@ Harmonizer::out (float *smpsl, float *smpsr)
 
      if((DS_state != 0) && (Pinterval != 12))
    {
-     D_Resample->mono_out(outo,templ,nPERIOD,u_down);
+     D_Resample->mono_out(outo,templ,nPERIOD,u_down,PERIOD);
    }
     else
     {
