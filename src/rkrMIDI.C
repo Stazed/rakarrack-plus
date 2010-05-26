@@ -238,7 +238,7 @@ RKR::ActiveUn(int value)
 if(value < 20)
 {
   numef = value / 2;
-  inoff = value % 2; 
+  inoff = checkonoff(efx_order[numef]); // value % 2; 
   miraque = efx_order[numef];
   Mnumeff = numef;
 }
