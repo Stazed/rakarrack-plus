@@ -2939,6 +2939,11 @@ private:
   void cb_echotron_stdf_i(SliderW*, void*);
   static void cb_echotron_stdf(SliderW*, void*);
 public:
+  Fl_Check_Button *echotron_af;
+private:
+  void cb_echotron_af_i(Fl_Check_Button*, void*);
+  static void cb_echotron_af(Fl_Check_Button*, void*);
+public:
   Fl_Choice *echotron_lfotype;
 private:
   void cb_echotron_lfotype_i(Fl_Choice*, void*);
@@ -2963,6 +2968,11 @@ public:
 private:
   void cb_B_ech_i(Fl_Button*, void*);
   static void cb_B_ech(Fl_Button*, void*);
+public:
+  Fl_Counter *echotron_length;
+private:
+  void cb_echotron_length_i(Fl_Counter*, void*);
+  static void cb_echotron_length(Fl_Counter*, void*);
 public:
   Fl_Choice *echotron_fnum;
 private:

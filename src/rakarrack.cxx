@@ -6075,9 +6075,10 @@ echotron_width->value(rkr->efx_Echotron->getpar(1));
 echotron_deep->value(rkr->efx_Echotron->getpar(2));
 echotron_lrcross->value(rkr->efx_Echotron->getpar(7));
 echotron_stdf->value(rkr->efx_Echotron->getpar(9));
-
+echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
+echotron_length->value(rkr->efx_Echotron->getpar(3));
 }
 void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_preset_i(o,v);
@@ -6151,6 +6152,13 @@ void RKRGUI::cb_echotron_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_stdf_i(o,v);
 }
 
+void RKRGUI::cb_echotron_af_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Echotron->changepar(15,(int)o->value());
+}
+void RKRGUI::cb_echotron_af(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_af_i(o,v);
+}
+
 void RKRGUI::cb_echotron_lfotype_i(Fl_Choice* o, void*) {
   rkr->efx_Echotron->changepar(14,(int)o->value());
 }
@@ -6191,6 +6199,13 @@ rkr->efx_Echotron->setfile(100);
 }
 void RKRGUI::cb_B_ech(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_ech_i(o,v);
+}
+
+void RKRGUI::cb_echotron_length_i(Fl_Counter* o, void*) {
+  rkr->efx_Echotron->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_echotron_length(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_length_i(o,v);
 }
 
 void RKRGUI::cb_echotron_fnum_i(Fl_Choice* o, void*) {
@@ -15647,7 +15662,13 @@ R average.");
         echotron_stdf->align(FL_ALIGN_LEFT);
         echotron_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* echotron_stdf
-      { Fl_Choice* o = echotron_lfotype = new Fl_Choice(400, 346, 72, 16, "LFO Type");
+      { echotron_af = new Fl_Check_Button(322, 347, 15, 15, "AF");
+        echotron_af->down_box(FL_BORDER_BOX);
+        echotron_af->labelsize(10);
+        echotron_af->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_af->callback((Fl_Callback*)cb_echotron_af, (void*)(2));
+      } // Fl_Check_Button* echotron_af
+      { Fl_Choice* o = echotron_lfotype = new Fl_Choice(408, 346, 64, 16, "LFO Type");
         echotron_lfotype->down_box(FL_BORDER_BOX);
         echotron_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         echotron_lfotype->labelsize(10);
@@ -15657,13 +15678,13 @@ R average.");
         echotron_lfotype->callback((Fl_Callback*)cb_echotron_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* echotron_lfotype
-      { echotron_mf = new Fl_Check_Button(322, 364, 15, 15, "MF");
+      { echotron_mf = new Fl_Check_Button(322, 362, 15, 15, "MF");
         echotron_mf->down_box(FL_BORDER_BOX);
         echotron_mf->labelsize(10);
         echotron_mf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echotron_mf->callback((Fl_Callback*)cb_echotron_mf, (void*)(2));
       } // Fl_Check_Button* echotron_mf
-      { echotron_md = new Fl_Check_Button(353, 364, 15, 15, "MD");
+      { echotron_md = new Fl_Check_Button(353, 362, 15, 15, "MD");
         echotron_md->down_box(FL_BORDER_BOX);
         echotron_md->labelsize(10);
         echotron_md->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -15680,7 +15701,20 @@ R average.");
         B_ech->callback((Fl_Callback*)cb_B_ech, (void*)(2));
         B_ech->deactivate();
       } // Fl_Button* B_ech
-      { echotron_fnum = new Fl_Choice(369, 379, 104, 14, "File");
+      { echotron_length = new Fl_Counter(336, 378, 48, 12, "#");
+        echotron_length->type(1);
+        echotron_length->labelsize(10);
+        echotron_length->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        echotron_length->minimum(1);
+        echotron_length->maximum(127);
+        echotron_length->step(1);
+        echotron_length->value(1);
+        echotron_length->textsize(9);
+        echotron_length->callback((Fl_Callback*)cb_echotron_length);
+        echotron_length->align(FL_ALIGN_LEFT);
+        echotron_length->when(FL_WHEN_RELEASE);
+      } // Fl_Counter* echotron_length
+      { echotron_fnum = new Fl_Choice(408, 379, 64, 14, "File");
         echotron_fnum->down_box(FL_BORDER_BOX);
         echotron_fnum->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         echotron_fnum->labelsize(10);
