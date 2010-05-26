@@ -39,11 +39,11 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   Plrcross = 100;
   Phidamp = 60;
   Filenum = 0;
-  Plength = 50;
+  Plength = 10;
   Puser = 0;
-  Psafe = 0;
   fb = 0.0f;
-  feedback = 0.0f;
+  lfeedback = 0.0f;
+  rfeedback = 0.0f;
   maxtime = 0.0f;
 
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
@@ -53,8 +53,6 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
 
   offset = 0;
   data_length=0;
-  fstretch = 1.0f;
-  decay = expf(-1.0f/(0.2f*fSAMPLE_RATE));  //0.2 seconds
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
@@ -105,11 +103,12 @@ lpfr->cleanup ();
 void
 Echotron::out (float * smpsl, float * smpsr)
 {
-  int i, j, k, xindex;
+  int i, j, k, rxindex, lxindex;
   float l,r,lyn, ryn;
   int length = Plength;
 
-  
+if( Pmoddly || Pmodfilts) modulate_delay();  
+
   for (i = 0; i < PERIOD; i++)
     {
 
@@ -122,34 +121,40 @@ Echotron::out (float * smpsl, float * smpsr)
       //Convolve 
       lyn = 0.0f;
       ryn = 0.0f;
-      xindex = offset;
 
+      if(Pfilters)
+      {
       j=0;
       for (k=0; k<length; k++)
       {      
-      xindex = offset + time[k];
-      if(xindex>=maxx_size) xindex -= maxx_size;
-      lyn += filterbank[j].l->filterout_s(lxn[xindex]) * ldata[k];		//filter each tap
-      ryn += filterbank[j].r->filterout_s(rxn[xindex]) * rdata[k];
+      lxindex = offset + ltime[k];
+      rxindex = offset + rtime[k];
+      if(lxindex>=maxx_size) lxindex -= maxx_size;
+      if(rxindex>=maxx_size) rxindex -= maxx_size;
+      lyn += filterbank[j].l->filterout_s(lxn[lxindex]) * ldata[k];		//filter each tap
+      ryn += filterbank[j].r->filterout_s(rxn[rxindex]) * rdata[k];
       if (++j>ECHOTRON_MAXFILTERS) j=0;
       }
-      
-/*
-      for (j =0; j<length; j++)
-      {
-      xindex = offset + time[j];
-      if(xindex>=maxx_size) xindex -= maxx_size;
-      lyn += lxn[xindex] * ldata[j];		//this is all of the magic
-      ryn += rxn[xindex] * rdata[j];
       }
-*/
+      else
+      {      
+      for (k=0; k<length; k++)
+      {      
+      lxindex = offset + ltime[k];
+      rxindex = offset + rtime[k];
+      if(lxindex>=maxx_size) lxindex -= maxx_size;
+      if(rxindex>=maxx_size) rxindex -= maxx_size;
+      lyn += lxn[lxindex] * ldata[k];		
+      ryn += rxn[rxindex] * rdata[k];
+      }      
+      }
 
-      efxoutl[i] = (lrcross*ryn + ilrcross*lyn) * levpanl;
-      efxoutr[i] = (lrcross*lyn + ilrcross*ryn) * levpanr;       
-      lfeedback = fb * lyn;
-      rfeedback = fb * ryn;      
-      efxoutl[i] = lyn * levpanl;
-      efxoutr[i] = ryn * levpanr;         
+      lfeedback =  (lrcross*ryn + ilrcross*lyn) * lpanning;
+      rfeedback = (lrcross*lyn + ilrcross*ryn) * rpanning;
+      efxoutl[i] = lfeedback;
+      efxoutr[i] = rfeedback;       
+      lfeedback *= fb;
+      rfeedback *= fb;      
 
       offset--;
       if (offset<0) offset = maxx_size;   
@@ -186,8 +191,6 @@ Echotron::setpanning (int value)
   rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
   lpanning *= 1.1f;
   rpanning *= 1.1f; 
-  levpanl=level*lpanning;
-  levpanr=level*rpanning;
 };
 
 int
@@ -223,34 +226,34 @@ int count = 0;
     fclose(fs);  
 
 Plength=count+1;
-convert_time();
+init_params();
 return(1);
 };
 
-void Echotron::convert_time()
+void Echotron::init_params()
 {
-float temp_time;
-float tempo_coeff = 60.0f / ((float)PTempo);
+
+float hSR = fSAMPLE_RATE*0.5f;
+float tmp_time;
 
 cleanup();
 
-
 for(int i=0; i<Plength; i++)
 {
-   
-temp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
-if(temp_time<maxx_size) time[i]=temp_time; else time[i]=maxx_size;
+tmp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
+if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
-ldata[i]=fLevel[i]*sinf(fPan[i]);
-rdata[i]=fLevel[i]*cosf(fPan[i]);
-
+ltime[i] = rtime[i];  
+ 
+ldata[i]=fLevel[i]*sinf(D_PI*fPan[i]);
+rdata[i]=fLevel[i]*cosf(D_PI*fPan[i]);
 
 if(i<ECHOTRON_MAXFILTERS)
 {
 
- int Freq=fFreq[i]*(1.0f+(ffade*4.0f));
+ int Freq=fFreq[i]*powf(2.0f,(depth)*4.0f);
  if (Freq<20.0) Freq=20.0f;
- if (Freq>26000.0) Freq=26000.0f;
+ if (Freq>hSR) Freq=hSR;
  filterbank[i].l->setfreq_and_q(Freq,fQ[i]);
  filterbank[i].r->setfreq_and_q(Freq,fQ[i]);
  filterbank[i].l->setstages(iStages[i]);
@@ -259,24 +262,50 @@ if(i<ECHOTRON_MAXFILTERS)
  filterbank[i].r->setmix (1, fLP[i] , fBP[i], fHP[i]);      
 }
 
-
 }
 
 
 
 };
 
-
-void
-Echotron::setlpf (int value)
+void Echotron::modulate_delay()
 {
-  Plpf = value;
-  float fr = (float)Plpf;
-  lpfl->setfreq (fr);
-  lpfr->setfreq (fr);
-    
-};
 
+float tmp_rtime, tmp_ltime, lmod, rmod, lfol, lfor;
+
+  lfo.effectlfoout (&lfol, &lfor);
+  
+  lmod = powf(2.0f,(lfol*width + depth)*4.0f);
+  rmod = powf(2.0f,(lfor*width + depth)*4.0f); 
+
+  lmod = 1.0f - 1.0f/(lmod + 1.0f);
+  rmod = 1.0f - 1.0f/(rmod + 1.0f); 
+
+if(Pmodfilts)
+{  
+for(int i=0; i<ECHOTRON_MAXFILTERS; i++)
+{
+ 
+ filterbank[i].l->setfreq(lmod*fFreq[i]);
+ filterbank[i].r->setfreq(rmod*fFreq[i]);
+     
+}
+
+}
+
+if(Pmoddly)
+{
+for(int i=0; i<Plength; i++)
+{
+tmp_rtime=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE*lmod);
+tmp_ltime=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE*rmod);
+if(tmp_rtime<maxx_size) rtime[i]=tmp_rtime; else rtime[i]=maxx_size;
+if(tmp_ltime<maxx_size) ltime[i]=tmp_ltime; else ltime[i]=maxx_size;
+
+}
+}
+
+};
 
 
 void
@@ -284,22 +313,16 @@ Echotron::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
   hidamp = 1.0f - (float)Phidamp / 127.1f;
-  alpha_hidamp = 1.0f - hidamp;
+  float fr = 20.0f*powf(2.0, hidamp*10.0f);
+  lpfl->setfreq (fr);
+  lpfr->setfreq (fr);
 };
 
 void
 Echotron::setfb(int value)
 {
 
-   if(Pfb<=0) 
-   fb = (float)value/64.0f * 0.3f;
-   else
-   fb = (float)value/64.0f * 0.15f; 
-   
-   fb*=((1627.0f-(float)Pdiff-(float)Plength)/1627.0f);
-   fb*=(1.0f-((float)Plevel/127.0f));  
-   fb*=(1.0f-diffusion)*.5f;
-
+   fb = (float)value/64.0f;
 }
 
 
@@ -329,41 +352,44 @@ Echotron::changepar (int npar, int value)
       setvolume (value);
       break;
     case 1:
-      Pfade=value;
-      ffade = ((float) value)/127.0f;
-      convert_time();
+      Pdepth=value;
+      depth = ((float) value)/127.0f;
+      init_params();
       break;
     case 2:
-      Psafe=value;
+      Pwidth=value;
+      width = ((float) value)/127.0f - 0.5f;
+      init_params();
       break;
     case 3:
      Plength = value;
-     if((Psafe) && (Plength>400)) Plength = 400;
-     convert_time(); 
+     if(Plength>127) Plength = 127;
+     init_params(); 
      break;
     case 4:
       Puser = value;
       break;
     case 5:
-      PTempo = value;
-      convert_time();
+      Ptempo = value;
+      tempo_coeff = 60.0f / ((float)Ptempo);
+      lfo.Pfreq = Ptempo;
+      lfo.updateparams ();      
+      init_params();
       break;
     case 6:
       sethidamp (value);
       break;
     case 7:
-      Plevel = value;
-      level =  2.0f * dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
-      levpanl=level*lpanning;
-      levpanr=level*rpanning;
+      Plrcross = value - 64;
+      lrcross = ((float) Plrcross)/64.0;
+      ilrcross = 1.0f - abs(lrcross);      
       break;
     case 8:
       if(!setfile(value)) error_num=4;
       break;
     case 9:
-      Pstretch = value;
-      fstretch = ((float) value)/64.0f;   
-      convert_time();
+      lfo.Pstereo = value;
+      lfo.updateparams ();
       break;
     case 10:
       Pfb = value;
@@ -373,20 +399,19 @@ Echotron::changepar (int npar, int value)
       setpanning (value);
       break;
     case 12:
-      Pes = value;
+      Pmoddly = value;//delay modulation on/off
       break;
     case 13:
-      Prv = value;
+      Pmodfilts = value;//filter modulation on/off
       break;     
     case 14:
-      setlpf (value);
+      //LFO Type      
+      lfo.PLFOtype = value;
+      lfo.updateparams ();
       break;
     case 15:
-      Pdiff=value;
-      diffusion = ((float) value)/127.0f;
-      convert_time();      
+      Pfilters = value;//Pfilters
       break;
-
    };
 };
 
@@ -399,10 +424,10 @@ Echotron::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return (Pfade);
+      return (Pdepth);
       break;
     case 2:
-      return(Psafe);
+      return(Pwidth);
       break;
     case 3:
       return(Plength); 
@@ -411,19 +436,19 @@ Echotron::getpar (int npar)
       return (Filenum);
       break;
     case 5:
-      return (PTempo);
+      return (Ptempo);
       break;
     case 6:
       return (Phidamp);
       break;
     case 7:
-      return(Plevel);
+      return(Plrcross);
       break;
     case 4:
       return(Puser);
       break;
     case 9:
-      return(Pstretch);
+      return(lfo.Pstereo);
       break;   
     case 10:
       return(Pfb);
@@ -432,16 +457,16 @@ Echotron::getpar (int npar)
       return(Ppanning);
       break;
     case 12:
-      return(Pes);
+      return(Pmoddly);  //modulate delays
       break;
     case 13:
-      return(Prv);
+      return(Pmodfilts); //modulate filters
       break;  
     case 14:
-      return(Plpf);
+      return(lfo.PLFOtype);
       break;  
     case 15:
-      return(Pdiff);
+      return(Pfilters);  //Filter delay line on/off
       break;  
 
 

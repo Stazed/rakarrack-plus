@@ -26,6 +26,7 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
+#include "EffectLFO.h"
 
 //some of the C++ std libs
 #include <iostream>
@@ -66,32 +67,30 @@ private:
   void sethidamp (int Phidamp);
   void setlpf (int Plpf);
   void setfb(int value);
-  void convert_time();
+  void init_params();
+  void modulate_delay();
+  void modulate_filters();
 
 
 
-  //Parametrii
+  //User input parameters
+  EffectLFO lfo;  
   int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
   int Plrcross;	// L/R Mixing  // 
   int Phidamp;
   int Puser;		//0,1//
-  int Ptempo;		//-64 ... 64//For stretching reverb responses
+  int Ptempo;		//Tempo, BPM//For stretching reverb responses
   int Filenum;
   int Pfb;		//-64 ... 64// amount of feedback
-  int Pfade;
-  int Pes;		//0 ... 127// Add stereo spatialization
-  int Prv;              //Shuffle
-  int Plpf;
-  int Pdiff;
+  int Pdepth;
+  int Pwidth;
+  int Pfilters;         //0 or 1// use or don't use filters in delay line
+  int Pmodfilts;	//0 or 1// apply LFO to filter freqs
+  int Pmoddly;		//0 or 1// apply LFO to delay time
+  int Pstdiff;
+  int Plength;  
   
-  //variables to keep the compiler happy during development:
-  int Plevel;
-  int Plength;
-  int Psafe;
-  int PTempo;
-  int Pstretch;
-  float lrcross, feedback;
 
   int offset;
   int maxx_size;
@@ -109,18 +108,19 @@ float fFreq[ECHOTRON_MAXFILTERS];
 float fQ[ECHOTRON_MAXFILTERS];
 int iStages[ECHOTRON_MAXFILTERS];
 
-int time[ECHOTRON_F_SIZE];
+int rtime[ECHOTRON_F_SIZE];
+int ltime[ECHOTRON_F_SIZE];
 float i_fPan[ECHOTRON_F_SIZE];  //1-fPan
 float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
 
-  float fstretch, ffade, maxtime, maxdata, decay, diffusion;
+  float ffmid, maxtime, maxdata, width, depth;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   
   float *lxn, *rxn;
   
-  float level,fb, rfeedback, lfeedback,levpanl,levpanr, ilrcross;
-  float roomsize;
+  float level,fb, rfeedback, lfeedback,levpanl,levpanr, lrcross, ilrcross;
+  float tempo_coeff;
  
   class AnalogFilter *lpfl, *lpfr;	//filters
   
