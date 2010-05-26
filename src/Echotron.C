@@ -46,18 +46,13 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   feedback = 0.0f;
   maxtime = 0.0f;
 
-  hrtf_size = SAMPLE_RATE/2;
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
 
   lxn = (float *) malloc (sizeof (float) * (1 + maxx_size)); 
   rxn = (float *) malloc (sizeof (float) * (1 + maxx_size));    
 
-  imax = SAMPLE_RATE/2;  // 1/2 second available
-  imdelay = (float *) malloc (sizeof (float) * imax);
   offset = 0;
-  hoffset = 0;
   data_length=0;
-  hlength = 0;
   fstretch = 1.0f;
   idelay = 0.0f;
   decay = expf(-1.0f/(0.2f*fSAMPLE_RATE));  //0.2 seconds
@@ -111,11 +106,10 @@ lpfr->cleanup ();
 void
 Echotron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex;
+  int i, j, k, xindex;
   float l,r,lyn, ryn;
   int length = Plength;
 
-  int numfilters = 2; //just keep the compiler happy for now.
   
   for (i = 0; i < PERIOD; i++)
     {
@@ -130,16 +124,18 @@ Echotron::out (float * smpsl, float * smpsr)
       lyn = 0.0f;
       ryn = 0.0f;
       xindex = offset;
-      
-      for (j =0; j<numfilters; j++)
-      {
-      xindex = offset + time[j];
+
+      j=0;
+      for (k=0; k<length; k++)
+      {      
+      xindex = offset + time[k];
       if(xindex>=maxx_size) xindex -= maxx_size;
-      lyn += filterbank[i].l->filterout_s(lxn[xindex]) * ldata[j];		//filter each tap
-      ryn += filterbank[i].r->filterout_s(rxn[xindex]) * rdata[j];
+      lyn += filterbank[j].l->filterout_s(lxn[xindex]) * ldata[k];		//filter each tap
+      ryn += filterbank[j].r->filterout_s(rxn[xindex]) * rdata[k];
+      if (++j>ECHOTRON_MAXFILTERS) j=0;
       }
       
-      for (j =numfilters; j<length; j++)
+      for (j =0; j<length; j++)
       {
       xindex = offset + time[j];
       if(xindex>=maxx_size) xindex -= maxx_size;
@@ -226,7 +222,7 @@ int count = 0;
     }
     fclose(fs);  
 
-Plength=count;
+Plength=count+1;
 convert_time();
 return(1);
 };
@@ -234,8 +230,28 @@ return(1);
 void Echotron::convert_time()
 {
 
-//  Plength = count; //just so something happens for now.
- 
+for(int i=0; i<Plength; i++)
+{
+   
+time[i]= lrintf(fTime[i]*fSAMPLE_RATE);
+ldata[i]=fLevel[i]*sinf(fPan[i]);
+rdata[i]=fLevel[i]*cosf(fPan[i]);
+
+
+if(i<ECHOTRON_MAXFILTERS)
+{
+ filterbank[i].l->setfreq_and_q(fFreq[i],fQ[i]);
+ filterbank[i].r->setfreq_and_q(fFreq[i],fQ[i]);
+ filterbank[i].l->setstages(iStages[i]);
+ filterbank[i].r->setstages(iStages[i]);
+ filterbank[i].l->setmix (1, fLP[i] , fBP[i], fHP[i]);
+ filterbank[i].r->setmix (1, fLP[i] , fBP[i], fHP[i]);      
+}
+
+
+}
+
+
 
 };
 
@@ -280,10 +296,10 @@ void
 Echotron::setpreset (int npreset)
 {
   const int PRESET_SIZE = 16;
-  const int NUM_PRESETS = 9;
+  const int NUM_PRESETS = 1;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Test
-    {64, 0, 1, 8, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 0},
+    {64, 0, 1, 8, 0, 0, 0, 24, 0, 0, 0, 64, 0, 0, 20000, 0}
 
   };
 

@@ -6688,7 +6688,7 @@ echotron_LPF->value(rkr->efx_Echotron->getpar(14));
 echotron_HPF->value(rkr->efx_Echotron->getpar(15));
 
 echotron_es->value(rkr->efx_Echotron->getpar(12));
-echotron_rv->value(rkr->efx_Echotron->getpar(13));} open selected
+echotron_rv->value(rkr->efx_Echotron->getpar(13));} open
           xywh {399 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6728,8 +6728,8 @@ echotron_rv->value(rkr->efx_Echotron->getpar(13));} open selected
         }
         Fl_Value_Slider echotron_length {
           label Length
-          callback {rkr->efx_Echotron->changepar(3,(int)o->value());}
-          xywh {372 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 1500 step 1 value 100 textcolor 7
+          callback {rkr->efx_Echotron->changepar(3,(int)o->value());} selected
+          xywh {372 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 500 step 1 value 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echotron_strech {

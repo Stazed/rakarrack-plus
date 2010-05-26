@@ -91,18 +91,11 @@ private:
   int Psafe;
   int Pidelay;
   int Pstretch;
-  float *data;
   float lrcross, feedback;
 
-  int imctr; 
-  int imax;
   int offset;
-  int hoffset;
   int maxx_size;
   int data_length;
-  int avgtime;
-  int hrtf_size;
-  int hlength;
 
   
   //arrays of parameters:
@@ -124,7 +117,7 @@ float rdata[ECHOTRON_F_SIZE];
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   
-  float *lxn, *rxn, *imdelay;
+  float *lxn, *rxn;
   
   float level,fb, rfeedback, lfeedback,levpanl,levpanr, ilrcross;
   float roomsize;
@@ -138,14 +131,6 @@ float rdata[ECHOTRON_F_SIZE];
 
   } filterbank[ECHOTRON_MAXFILTERS];
 
-template <class T>
-bool from_string(T& t, 
-                 const std::string& s, 
-                 std::ios_base& (*f)(std::ios_base&))
-{
-  std::istringstream iss(s);
-  return !(iss >> f >> t).fail();
-}
 };
 
 
