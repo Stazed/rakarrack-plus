@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
 #include "Echotron.h"
 
 Echotron::Echotron (float * efxoutl_, float * efxoutr_)
@@ -78,7 +79,8 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
       filterbank[i].sq = qq;
       filterbank[i].sLP = 1.0f;  
       filterbank[i].sBP = 1.0f;
-      filterbank[i].sHP = 1.0f;            
+      filterbank[i].sHP = 1.0f;   
+      filterbank[i].sStg = 1.0f;               
       filterbank[i].l = new RBFilter (0, center, qq, 0);
       filterbank[i].r = new RBFilter (0, center, qq, 0);
       
@@ -115,10 +117,10 @@ void
 Echotron::out (float * smpsl, float * smpsr)
 {
   int i, j, xindex, hindex;
-  float l,lyn, hyn;
+  float l,lyn, ryn, hyn;
   float ldiff,rdiff;
   int length = Plength;
-  hlength = Pdiff;
+
   int doffset;
 
   
@@ -142,52 +144,18 @@ Echotron::out (float * smpsl, float * smpsr)
       {
       xindex = offset + time[j];
       if(xindex>=maxx_size) xindex -= maxx_size;
-      lyn += lxn[xindex] * data[j];		//this is all of the magic
+      lyn += lxn[xindex] * ldata[j];		//this is all of the magic
+      ryn += rxn[xindex] * rdata[j];
       }
 
-      hrtf[hoffset] = lyn;
-      
-      if(Pdiff > 0)
-      {
-      //Convolve again with approximated hrtf
-      hyn = 0.0f;
-      hindex = hoffset;
 
-      for (j =0; j<hlength; j++)
-      {
-      hindex = hoffset + rndtime[j];
-      if(hindex>=hrtf_size) hindex -= hrtf_size;
-      hyn += hrtf[hindex] * rnddata[j];		//more magic
-      }   
-      lyn = hyn + (1.0f - diffusion)*lyn;
-      } 
-      
-       if(Pes) 
-       {
-
- 	  ldiff = lyn;
- 	  rdiff = imdelay[imctr];
-	  
-          ldiff = lpfl->filterout_s(ldiff);
-          rdiff = lpfr->filterout_s(rdiff);
-	  
-      imdelay[imctr] = decay*ldiff;	
-      imctr--;
-      if (imctr<0) imctr = roomsize;
-      
-      efxoutl[i] = (lyn + ldiff )* levpanl;
-      efxoutr[i] = (lyn + rdiff ) * levpanr;  
-       
-      feedback = fb*rdiff*decay;          
-
-       }
-       else
-       {
-      feedback = fb * lyn;
+      efxoutl[i] = (lrcross*ryn + ilrcross*lyn) * levpanl;
+      efxoutr[i] = (lrcross*lyn + ilrcross*ryn) * levpanr;       
+      lfeedback = fb * lyn;
+      rfeedback = fb * lyn;      
       efxoutl[i] = lyn * levpanl;
-      efxoutr[i] = lyn * levpanr;         
-       
-       }        
+      efxoutr[i] = ryn * levpanr;         
+
 
       offset--;
       if (offset<0) offset = maxx_size;   
@@ -241,64 +209,86 @@ Echotron::setpanning (int value)
 int
 Echotron::setfile(int value)
 {
-int i;
-float compresion = 0.0f;
-float quality = 0.0f;
-char wbuf[128];
 
-FILE *fs;
+char wbuf[128];
 
 if(!Puser)
 {
 Filenum = value;
-bzero(Filename,sizeof(Filename));
+memset(Filename,NULL,sizeof(Filename));
 sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
 }
 
-if ((fs = fopen (Filename, "r")) == NULL) return(0);
+string header;
+string Time[ECHOTRON_F_SIZE];
+string Level[ECHOTRON_F_SIZE];
+string LP[ECHOTRON_MAXFILTERS];
+string BP[ECHOTRON_MAXFILTERS];
+string HP[ECHOTRON_MAXFILTERS];
+string Freq[ECHOTRON_MAXFILTERS];
+string Q[ECHOTRON_MAXFILTERS];
+string Stages[ECHOTRON_MAXFILTERS];
+string trash;
+
+int count = 0;
+
+  ifstream myfile (Filename);
+  if (myfile.is_open())
+  {
+      getline (myfile,header); 
+      cout << header << endl;
+    while ( (! myfile.eof()) && (count<ECHOTRON_F_SIZE) )
+    {  
+      getline (myfile,Time[count], '\t');
+      getline (myfile,Level[count], '\t');  
+      if(count<ECHOTRON_MAXFILTERS)
+      {    
+      getline (myfile,LP[count], '\t');     
+      getline (myfile,BP[count], '\t'); 
+      getline (myfile,HP[count], '\t');           
+      getline (myfile,Freq[count], '\t');  
+      getline (myfile,Q[count], '\t');
+      getline (myfile,Stages[count]);  
+      }
+      else
+      {
+      getline(myfile,trash);  //something we can ignore, but will set pointer to next line for proper reading of next Time & Level
+      }
+    count++;
+  
+    }
+    
+    myfile.close();  
+      
+    for(int i =0; i<count; i++) 
+    {
+    from_string<float>(fTime[i],Time[i],dec);
+    from_string<float>(fLevel[i],Level[i],dec);
+      if(i<ECHOTRON_MAXFILTERS)
+      {     
+    from_string<float>(fLP[i],LP[i],dec);
+    from_string<float>(fBP[i],BP[i],dec);
+    from_string<float>(fHP[i],HP[i],dec);
+    from_string<float>(fFreq[i],Freq[i],dec);
+    from_string<float>(fQ[i],Q[i],dec);
+    from_string<float>(fStages[i],Stages[i],dec);
+      }
+    
+   /* //Print results to confirm
+    cout<<fTime[i] <<"\t" <<fLevel[i] <<"\t";
+    if(i<ECHOTRON_MAXFILTERS) cout<<fLP[i] <<"\t" <<fBP[i]<<"\t"<<fHP[i] <<"\t" <<fFreq[i] <<"\t" <<fQ[i] <<"\t" <<fStages[i] << endl;
+    else cout<<endl;*/
+    
+    }
+
+
+  }
+
+  else return(0);
+
 
 cleanup();
-memset(tdata, 0, sizeof(float)*2000);
-memset(ftime, 0, sizeof(float)*2000);
 
-
-//Name
-bzero(wbuf,sizeof(wbuf));
-fgets(wbuf,sizeof wbuf,fs);
-
-// Subsample Compresion Skip 
-bzero(wbuf,sizeof(wbuf));
-fgets(wbuf,sizeof wbuf,fs);
-sscanf(wbuf,"%f,%f\n",&compresion,&quality);
-
-//Length
-bzero(wbuf,sizeof(wbuf));
-fgets(wbuf,sizeof wbuf,fs);
-sscanf(wbuf, "%d\n", &data_length);
-if(data_length>2000) data_length = 2000;
-//Time Data
-for(i=0;i<data_length;i++)
-{
-bzero(wbuf,sizeof(wbuf));
-fgets(wbuf,sizeof wbuf,fs);
-sscanf(wbuf,"%f,%f\n",&ftime[i],&tdata[i]);
-}
-
-fclose(fs);
-
-maxtime = 0.0f;
-maxdata = 0.0f;
-float averaget = 0.0f;
-float tempor = 0.0f;
-for(i=0;i<data_length;i++)
-{
-  if(ftime[i] > maxtime) maxtime = ftime[i];
-  if(tdata[i] > maxdata) maxdata = tdata[i];  //used to normalize so feedback is more predictable
-  if(i>0){
-   tempor = ftime[i] - ftime[i-1];
-   if(tempor>averaget) averaget = tempor;
-   }
-}
 
 cleanup();
 convert_time();
@@ -328,84 +318,23 @@ incr = ((float) Plength)/((float) data_length);
 
 if(fstretch>0.0) 
 {
-tmpstretch = 1.0f + fstretch * (convlength/maxtime);
+tmpstretch = 1.0f + fstretch * (6.0f/maxtime);  //6 seconds max
 }
 else
 {
-tmpstretch = 1.0f + 0.95f*fstretch;
+tmpstretch = 1.0f + 0.99f*fstretch;
 }
 
-
-skip = 0.0f;
-index = 0;
-chunk = 10;
-
-if(data_length>Plength)
-{
-for(i=0;i<data_length;i++)
-{ 
-  skip += incr;
-  findex = (float)index;
-  if( findex<skip)
-  {
-    if(index<Plength)   
-      { 
-       if( (tmpstretch*(idelay + ftime[i] )) > 9.9f ) 
-       {
-       ftime[i] = 0.0f;
-       data[i] = 0.0f;
-       }   
-       time[index]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
-       data[index]=normal*tdata[i];  
-       index++;
-      }
-  }
-}; 
-    Plength = index;
-} //endif
-else
-{
 for(i=0;i<data_length;i++)
 { 
 
     if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
-    time[i]=lrintf(tmpstretch*(idelay + ftime[i])*fSAMPLE_RATE);  //Add initial delay to all the samples
+    time[i]=lrintf(tmpstretch*ftime[i]*fSAMPLE_RATE);  //Add initial delay to all the samples
     data[i]=normal*tdata[i];  
  
 };
   Plength = i;
-}
-
-//generate an approximated randomized hrtf for diffusing reflections:
-      int tmptime = 0;
-      int hrtf_tmp = Pdiff;
-      if(hrtf_tmp>data_length) hrtf_tmp = data_length -1;
-      if(hlength>data_length) hlength =  data_length -1;
-      for (i =0; i<hrtf_tmp; i++)
-      {
-      tmptime = (int) (RND * hrtf_size);
-      rndtime[i] = tmptime;  //randomly jumble the head of the transfer function      
-      rnddata[i] = 3.0f*(0.5f - RND)*data[tmptime];		
-      }  
-
- if(Pfade > 0)
- {
- count = lrintf(ffade * ((float) index));
- tmp = 0.0f;
- for (i=0; i<count;i++) //head fader 
- {
-
-  tmp = ((float) i)/((float) count);
-  data[i] *= tmp;
-  //fade the head here
-  }
-  }
-  
-//guess at room size
-roomsize = time[0] + (time[1] - time[0])/2;  //to help stagger left/right reflection times
-if(roomsize>imax) roomsize = imax;
-setfb(Pfb);
-  
+ 
 
 };
 

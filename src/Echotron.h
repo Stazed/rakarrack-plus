@@ -27,6 +27,17 @@
 #include "global.h"
 #include "AnalogFilter.h"
 
+//some of the C++ std libs
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+#define  ECHOTRON_F_SIZE   500       //Allow up to 500 points in the file
+#define  ECHOTRON_MAXFILTERS  8      //filters available
+
+//and for some of the std libs functions
+using namespace std;
 
 class Echotron
 {
@@ -62,21 +73,26 @@ private:
   //Parametrii
   int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
-  int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
+  int Plrcross;	// L/R Mixing  // 
   int Phidamp;
-  int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
-  int Plength;		//20... 1500// Set maximum number of IR points to calculate.
-  int Puser;		//-64...64//Feedback.
-  int Pstretch;		//-64 ... 64//For stretching reverb responses
-  int Pidelay;         //0 ... 500ms// initial delay time
+  int Puser;		//0,1//
+  int Ptempo;		//-64 ... 64//For stretching reverb responses
   int Filenum;
-  int Psafe;
   int Pfb;		//-64 ... 64// amount of feedback
   int Pfade;
-  int Pes;		//0 or 1// Add stereo spatialization
+  int Pes;		//0 ... 127// Add stereo spatialization
   int Prv;              //Shuffle
   int Plpf;
   int Pdiff;
+  
+  //variables to keep the compiler happy during development:
+  int Plevel;
+  int Plength;
+  int Psafe;
+  int Pidelay;
+  int Pstretch;
+  float *data;
+  float lrcross, feedback;
 
   int imctr; 
   int imax;
@@ -90,20 +106,42 @@ private:
 
 
   int *time, *rndtime;
+  
+  //arrays of parameters:
+float fTime[ECHOTRON_F_SIZE];
+float fLevel[ECHOTRON_F_SIZE];
+float fLP[ECHOTRON_MAXFILTERS];
+float fBP[ECHOTRON_MAXFILTERS];
+float fHP[ECHOTRON_MAXFILTERS];
+float fFreq[ECHOTRON_MAXFILTERS];
+float fQ[ECHOTRON_MAXFILTERS];
+float fStages[ECHOTRON_MAXFILTERS];
 
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn, *rxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
-  float level,fb, feedback,levpanl,levpanr;
+  
+  float *ldata, *rdata, *lxn, *rxn, *imdelay, *ftime, *tdata, *rnddata;
+  
+  float level,fb, rfeedback, lfeedback,levpanl,levpanr, ilrcross;
   float roomsize;
  
   class AnalogFilter *lpfl, *lpfr;	//filters
   
-    struct { float sfreq, sq,sLP,sBP,sHP;
+    struct 
+  { 
+    float sfreq, sq,sLP,sBP,sHP, sStg;
     class RBFilter *l, *r;
 
-  } filterbank[8];
+  } filterbank[ECHOTRON_MAXFILTERS];
 
+template <class T>
+bool from_string(T& t, 
+                 const std::string& s, 
+                 std::ios_base& (*f)(std::ios_base&))
+{
+  std::istringstream iss(s);
+  return !(iss >> f >> t).fail();
+}
 };
 
 
