@@ -2904,10 +2904,10 @@ private:
   void cb_echotron_pan_i(SliderW*, void*);
   static void cb_echotron_pan(SliderW*, void*);
 public:
-  SliderW *echotron_level;
+  SliderW *echotron_tempo;
 private:
-  void cb_echotron_level_i(SliderW*, void*);
-  static void cb_echotron_level(SliderW*, void*);
+  void cb_echotron_tempo_i(SliderW*, void*);
+  static void cb_echotron_tempo(SliderW*, void*);
 public:
   SliderW *echotron_damp;
 private:
@@ -2919,50 +2919,40 @@ private:
   void cb_echotron_fb_i(SliderW*, void*);
   static void cb_echotron_fb(SliderW*, void*);
 public:
-  SliderW *echotron_length;
+  SliderW *echotron_lrcross;
 private:
-  void cb_echotron_length_i(SliderW*, void*);
-  static void cb_echotron_length(SliderW*, void*);
+  void cb_echotron_lrcross_i(SliderW*, void*);
+  static void cb_echotron_lrcross(SliderW*, void*);
 public:
-  SliderW *echotron_strech;
+  SliderW *echotron_width;
 private:
-  void cb_echotron_strech_i(SliderW*, void*);
-  static void cb_echotron_strech(SliderW*, void*);
+  void cb_echotron_width_i(SliderW*, void*);
+  static void cb_echotron_width(SliderW*, void*);
 public:
-  SliderW *echotron_tempo;
+  SliderW *echotron_deep;
 private:
-  void cb_echotron_tempo_i(SliderW*, void*);
-  static void cb_echotron_tempo(SliderW*, void*);
+  void cb_echotron_deep_i(SliderW*, void*);
+  static void cb_echotron_deep(SliderW*, void*);
 public:
-  SliderW *echotron_freq;
+  SliderW *echotron_stdf;
 private:
-  void cb_echotron_freq_i(SliderW*, void*);
-  static void cb_echotron_freq(SliderW*, void*);
+  void cb_echotron_stdf_i(SliderW*, void*);
+  static void cb_echotron_stdf(SliderW*, void*);
 public:
-  SliderW *echotron_HPF;
+  Fl_Choice *echotron_lfotype;
 private:
-  void cb_echotron_HPF_i(SliderW*, void*);
-  static void cb_echotron_HPF(SliderW*, void*);
+  void cb_echotron_lfotype_i(Fl_Choice*, void*);
+  static void cb_echotron_lfotype(Fl_Choice*, void*);
 public:
-  SliderW *echotron_LPF;
+  Fl_Check_Button *echotron_mf;
 private:
-  void cb_echotron_LPF_i(SliderW*, void*);
-  static void cb_echotron_LPF(SliderW*, void*);
+  void cb_echotron_mf_i(Fl_Check_Button*, void*);
+  static void cb_echotron_mf(Fl_Check_Button*, void*);
 public:
-  Fl_Check_Button *echotron_rv;
+  Fl_Check_Button *echotron_md;
 private:
-  void cb_echotron_rv_i(Fl_Check_Button*, void*);
-  static void cb_echotron_rv(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *echotron_es;
-private:
-  void cb_echotron_es_i(Fl_Check_Button*, void*);
-  static void cb_echotron_es(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *echotron_safe;
-private:
-  void cb_echotron_safe_i(Fl_Check_Button*, void*);
-  static void cb_echotron_safe(Fl_Check_Button*, void*);
+  void cb_echotron_md_i(Fl_Check_Button*, void*);
+  static void cb_echotron_md(Fl_Check_Button*, void*);
 public:
   Fl_Check_Button *echotron_user;
 private:

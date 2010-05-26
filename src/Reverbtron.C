@@ -265,6 +265,7 @@ if(!Puser)
 Filenum = value;
 bzero(Filename,sizeof(Filename));
 sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
+printf("%s\n",Filename);
 }
 
 if ((fs = fopen (Filename, "r")) == NULL) return(0);
