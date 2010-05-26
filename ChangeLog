@@ -1,5 +1,15 @@
 ==v0.5.0 (  /  /2010) ==
 -------------------------------------------------------------------------------
+- Added Echotron Effect.
+- Added rakgit2new utility to convert old git banks to the new format.
+- Bank struct extended to a maximu of 70 effects.
+- Invisible Final Limiter is now after the Output Volume, you can put before
+  like was in older version in settings.
+- Added selection font for the main window in Settings.
+- Added Upsampling to Waveshape class used in Distortion effects to
+  eliminate aliasing.
+- Added Downsampling in settings for Convolotron,Reverbtron,Shifter,
+  Harmonizer and Sequence in order to save CPU.
 - Added rakverb2 utility
 - Added rakverb utility
 - Added DynoFET waveshape

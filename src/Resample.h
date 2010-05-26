@@ -47,7 +47,7 @@ Types:
   ~Resample(); 
   void cleanup();
   void out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio);
-  void mono_out(float *inl, float *outl, int frames, double ratio);
+  void mono_out(float *inl, float *outl, int frames, double ratio, int o_frames);
 
   // ratio Equal to output_sample_rate / input_sample_rate.
 

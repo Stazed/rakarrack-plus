@@ -127,9 +127,9 @@ main(int argc, char *argv[])
 }    
 
 
- buf = (float *) malloc (sizeof (float) * PERIOD*sfinfo.channels);
- index = (float *) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
- data  = (float *) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
+ buf   =  (float*) malloc (sizeof (float) * PERIOD*sfinfo.channels);
+ index =  (float*) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
+ data  =  (float*) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
 
 
 if(!have_output)
@@ -238,6 +238,9 @@ for(i=0;i<x;i++)
 
 
 fclose(fn);
+free(buf);
+free(index);
+free(data);
 return(0);
 }
 

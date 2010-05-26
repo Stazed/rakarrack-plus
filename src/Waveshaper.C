@@ -53,16 +53,14 @@ Waveshaper::Waveshaper()
     period_coeff = 12;
     ncSAMPLE_RATE=cSAMPLE_RATE/12;
     break;
-    
+
  }
-
-
 
 
   temps = (float *) malloc (sizeof (float) * PERIOD * period_coeff);
   u_up=(double)period_coeff;
   u_down = 1.0 / u_up; 
-  
+
   compg = 0.0f;  //used by compression distortion
   cratio = 0.25f;  //used by compression for hardness
   tmpgain = 1.0f;  // compression distortion temp variable
@@ -102,7 +100,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
   if(Wave_res_amount > 0)
    {
      nn=n*period_coeff;
-     U_Resample->mono_out(smps,temps,n,u_up);
+     U_Resample->mono_out(smps,temps,n,u_up,nn);
    }
  
   else memcpy(temps,smps,sizeof(float)*n);
@@ -542,7 +540,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
    if(Wave_res_amount>= 0)
    {
-     D_Resample->mono_out(temps,smps,nn,u_down);
+     D_Resample->mono_out(temps,smps,nn,u_down,n);
    }
     else
     memcpy(smps,temps,sizeof(float)*n);

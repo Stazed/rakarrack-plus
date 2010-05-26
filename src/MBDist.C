@@ -129,9 +129,9 @@ MBDist::out (float * smpsl, float * smpsr)
   lpf2l->filterout(midl);
   hpf2l->filterout(highl);
 
-  mbwshape1l->waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
-  mbwshape2l->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
-  mbwshape3l->waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
+if(volL> 0)  mbwshape1l->waveshapesmps (PERIOD, lowl, PtypeL, PdriveL, 1);
+if(volM> 0)  mbwshape2l->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
+if(volH> 0)  mbwshape3l->waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
 
 
 if (Pstereo)
@@ -145,9 +145,9 @@ if (Pstereo)
   lpf2r->filterout(midr);
   hpf2r->filterout(highr);
   
-  mbwshape1r->waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
-  mbwshape2r->waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
-  mbwshape3r->waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
+if(volL> 0)  mbwshape1r->waveshapesmps (PERIOD, lowr, PtypeL, PdriveL, 1);
+if(volM> 0)  mbwshape2r->waveshapesmps (PERIOD, midr, PtypeM, PdriveM, 1);
+if(volH> 0)  mbwshape3r->waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
 
 
 }
