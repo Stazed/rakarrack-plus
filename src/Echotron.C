@@ -135,6 +135,7 @@ Echotron::out (float * smpsl, float * smpsr)
       if (++j>ECHOTRON_MAXFILTERS) j=0;
       }
       
+/*
       for (j =0; j<length; j++)
       {
       xindex = offset + time[j];
@@ -142,7 +143,7 @@ Echotron::out (float * smpsl, float * smpsr)
       lyn += lxn[xindex] * ldata[j];		//this is all of the magic
       ryn += rxn[xindex] * rdata[j];
       }
-
+*/
 
       efxoutl[i] = (lrcross*ryn + ilrcross*lyn) * levpanl;
       efxoutr[i] = (lrcross*lyn + ilrcross*ryn) * levpanr;       
