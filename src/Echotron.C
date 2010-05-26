@@ -54,7 +54,6 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   offset = 0;
   data_length=0;
   fstretch = 1.0f;
-  idelay = 0.0f;
   decay = expf(-1.0f/(0.2f*fSAMPLE_RATE));  //0.2 seconds
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
@@ -230,19 +229,27 @@ return(1);
 
 void Echotron::convert_time()
 {
+float temp_time;
+float tempo_coeff = 60.0f / ((float)PTempo);
 
 for(int i=0; i<Plength; i++)
 {
    
-time[i]= lrintf(fTime[i]*fSAMPLE_RATE);
+temp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
+if(temp_time<maxx_size) time[i]=temp_time; else time[i]=maxx_size;
+
 ldata[i]=fLevel[i]*sinf(fPan[i]);
 rdata[i]=fLevel[i]*cosf(fPan[i]);
 
 
 if(i<ECHOTRON_MAXFILTERS)
 {
- filterbank[i].l->setfreq_and_q(fFreq[i],fQ[i]);
- filterbank[i].r->setfreq_and_q(fFreq[i],fQ[i]);
+
+ int Freq=fFreq[i]*(1.0f+(ffade*4.0f));
+ if (Freq=20.0) Freq=20.0f;
+ if (Freq>26000.0) Freq=26000.0f;
+ filterbank[i].l->setfreq_and_q(Freq,fQ[i]);
+ filterbank[i].r->setfreq_and_q(Freq,fQ[i]);
  filterbank[i].l->setstages(iStages[i]);
  filterbank[i].r->setstages(iStages[i]);
  filterbank[i].l->setmix (1, fLP[i] , fBP[i], fHP[i]);
@@ -300,7 +307,7 @@ Echotron::setpreset (int npreset)
   const int NUM_PRESETS = 1;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Test
-    {64, 0, 1, 8, 0, 0, 0, 24, 0, 0, 0, 64, 0, 0, 20000, 0}
+    {64, 0, 1, 8, 0, 60, 0, 24, 0, 0, 0, 64, 0, 0, 20000, 0}
 
   };
 
@@ -335,8 +342,7 @@ Echotron::changepar (int npar, int value)
       Puser = value;
       break;
     case 5:
-      Pidelay = value;
-      idelay = ((float) value)/1000.0f;
+      PTempo = value;
       convert_time();
       break;
     case 6:
@@ -402,7 +408,7 @@ Echotron::getpar (int npar)
       return (Filenum);
       break;
     case 5:
-      return (Pidelay);
+      return (PTempo);
       break;
     case 6:
       return (Phidamp);

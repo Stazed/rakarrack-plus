@@ -2929,15 +2929,15 @@ private:
   void cb_echotron_strech_i(SliderW*, void*);
   static void cb_echotron_strech(SliderW*, void*);
 public:
-  SliderW *echotron_idelay;
+  SliderW *echotron_tempo;
 private:
-  void cb_echotron_idelay_i(SliderW*, void*);
-  static void cb_echotron_idelay(SliderW*, void*);
+  void cb_echotron_tempo_i(SliderW*, void*);
+  static void cb_echotron_tempo(SliderW*, void*);
 public:
-  SliderW *echotron_fade;
+  SliderW *echotron_freq;
 private:
-  void cb_echotron_fade_i(SliderW*, void*);
-  static void cb_echotron_fade(SliderW*, void*);
+  void cb_echotron_freq_i(SliderW*, void*);
+  static void cb_echotron_freq(SliderW*, void*);
 public:
   SliderW *echotron_HPF;
 private:

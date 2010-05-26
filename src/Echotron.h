@@ -89,7 +89,7 @@ private:
   int Plevel;
   int Plength;
   int Psafe;
-  int Pidelay;
+  int PTempo;
   int Pstretch;
   float lrcross, feedback;
 
@@ -114,7 +114,7 @@ float i_fPan[ECHOTRON_F_SIZE];  //1-fPan
 float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
 
-  float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
+  float fstretch, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   
   float *lxn, *rxn;

@@ -6682,8 +6682,8 @@ echotron_safe->value(rkr->efx_Echotron->getpar(2));
 echotron_user->value(rkr->efx_Echotron->getpar(4));
 echotron_user->do_callback();
 echotron_fb->value(rkr->efx_Echotron->getpar(10));
-echotron_fade->value(rkr->efx_Echotron->getpar(1));
-echotron_idelay->value(rkr->efx_Echotron->getpar(5));
+echotron_freq->value(rkr->efx_Echotron->getpar(1));
+echotron_tempo->value(rkr->efx_Echotron->getpar(5));
 echotron_LPF->value(rkr->efx_Echotron->getpar(14));
 echotron_HPF->value(rkr->efx_Echotron->getpar(15));
 
@@ -6728,7 +6728,7 @@ echotron_rv->value(rkr->efx_Echotron->getpar(13));} open
         }
         Fl_Value_Slider echotron_length {
           label Length
-          callback {rkr->efx_Echotron->changepar(3,(int)o->value());} selected
+          callback {rkr->efx_Echotron->changepar(3,(int)o->value());}
           xywh {372 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 500 step 1 value 1 textcolor 7
           class SliderW
         }
@@ -6738,14 +6738,14 @@ echotron_rv->value(rkr->efx_Echotron->getpar(13));} open
           xywh {372 308 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
-        Fl_Value_Slider echotron_idelay {
-          label {I.Del}
+        Fl_Value_Slider echotron_tempo {
+          label Tempo
           callback {rkr->efx_Echotron->changepar(5,(int)o->value());}
-          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 500 step 1 textcolor 7
+          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 60 textcolor 7
           class SliderW
         }
-        Fl_Value_Slider echotron_fade {
-          label Fade
+        Fl_Value_Slider echotron_freq {
+          label {Freq M.}
           callback {rkr->efx_Echotron->changepar(1,(int)o->value());}
           xywh {372 332 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
@@ -12576,7 +12576,13 @@ looper_t2->redraw();} {}
   { 
    echo_delay->value(rkr->efx_Echo->getpar(2));
    echo_delay->redraw();
-  }} {}
+  }
+    if(rkr->Echotron_Bypass)
+  { 
+   echotron_tempo->value(rkr->efx_Echo->getpar(5));
+   echotron_tempo->redraw();
+  }} {selected
+    }
   }
   Function {ActACI()} {} {
     code {int value;
