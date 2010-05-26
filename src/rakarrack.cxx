@@ -6071,9 +6071,9 @@ echotron_user->do_callback();
 echotron_fb->value(rkr->efx_Echotron->getpar(10));
 echotron_tempo->value(rkr->efx_Echotron->getpar(5));
 echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
-echotron_width->value(rkr->efx_Echotron->getpar(1));
-echotron_deep->value(rkr->efx_Echotron->getpar(2));
-echotron_lrcross->value(rkr->efx_Echotron->getpar(7));
+echotron_width->value(rkr->efx_Echotron->getpar(2));
+echotron_deep->value(rkr->efx_Echotron->getpar(1));
+echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
 echotron_stdf->value(rkr->efx_Echotron->getpar(9));
 echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
@@ -6132,14 +6132,14 @@ void RKRGUI::cb_echotron_lrcross(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_echotron_width_i(SliderW* o, void*) {
-  rkr->efx_Echotron->changepar(1,(int)o->value());
+  rkr->efx_Echotron->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_echotron_width(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_width_i(o,v);
 }
 
 void RKRGUI::cb_echotron_deep_i(SliderW* o, void*) {
-  rkr->efx_Echotron->changepar(6,(int)o->value());
+  rkr->efx_Echotron->changepar(1,(int)o->value());
 }
 void RKRGUI::cb_echotron_deep(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_deep_i(o,v);

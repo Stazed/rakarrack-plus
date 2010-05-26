@@ -830,12 +830,13 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} selected
+Pexitprogram=1;} open
       xywh {1367 30 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6681,14 +6682,14 @@ echotron_user->do_callback();
 echotron_fb->value(rkr->efx_Echotron->getpar(10));
 echotron_tempo->value(rkr->efx_Echotron->getpar(5));
 echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
-echotron_width->value(rkr->efx_Echotron->getpar(1));
-echotron_deep->value(rkr->efx_Echotron->getpar(2));
-echotron_lrcross->value(rkr->efx_Echotron->getpar(7));
+echotron_width->value(rkr->efx_Echotron->getpar(2));
+echotron_deep->value(rkr->efx_Echotron->getpar(1));
+echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
 echotron_stdf->value(rkr->efx_Echotron->getpar(9));
 echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
-echotron_length->value(rkr->efx_Echotron->getpar(3));} open
+echotron_length->value(rkr->efx_Echotron->getpar(3));} open selected
           xywh {399 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6734,13 +6735,13 @@ echotron_length->value(rkr->efx_Echotron->getpar(3));} open
         }
         Fl_Value_Slider echotron_width {
           label Width
-          callback {rkr->efx_Echotron->changepar(1,(int)o->value());}
+          callback {rkr->efx_Echotron->changepar(2,(int)o->value());}
           xywh {372 308 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echotron_deep {
           label Deep
-          callback {rkr->efx_Echotron->changepar(6,(int)o->value());}
+          callback {rkr->efx_Echotron->changepar(1,(int)o->value());}
           xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }

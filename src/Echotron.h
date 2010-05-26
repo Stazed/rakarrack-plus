@@ -34,7 +34,7 @@
 #include <string>
 #include <sstream>
 
-#define  ECHOTRON_F_SIZE   500       //Allow up to 500 points in the file
+#define  ECHOTRON_F_SIZE   150       //Allow up to 500 points in the file
 #define  ECHOTRON_MAXFILTERS  8      //filters available
 
 //and for some of the std libs functions
@@ -94,7 +94,6 @@ private:
 
   int offset;
   int maxx_size;
-  int data_length;
 
   
   //arrays of parameters:
@@ -110,12 +109,11 @@ int iStages[ECHOTRON_MAXFILTERS];
 
 int rtime[ECHOTRON_F_SIZE];
 int ltime[ECHOTRON_F_SIZE];
-float i_fPan[ECHOTRON_F_SIZE];  //1-fPan
 float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
 
-  float ffmid, maxtime, maxdata, width, depth;
-  float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
+  float width, depth;
+  float lpanning, rpanning, hidamp, alpha_hidamp, convlength;
   
   float *lxn, *rxn;
   

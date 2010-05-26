@@ -44,7 +44,6 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   fb = 0.0f;
   lfeedback = 0.0f;
   rfeedback = 0.0f;
-  maxtime = 0.0f;
 
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
 
@@ -52,7 +51,6 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   rxn = (float *) malloc (sizeof (float) * (1 + maxx_size));    
 
   offset = 0;
-  data_length=0;
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
@@ -107,7 +105,7 @@ Echotron::out (float * smpsl, float * smpsr)
   float l,r,lyn, ryn;
   int length = Plength;
 
-if( Pmoddly || Pmodfilts) modulate_delay();  
+if((Pmoddly)||(Pmodfilts)) modulate_delay();  
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -271,7 +269,8 @@ if(i<ECHOTRON_MAXFILTERS)
 void Echotron::modulate_delay()
 {
 
-float tmp_rtime, tmp_ltime, lmod, rmod, lfol, lfor;
+int tmp_rtime, tmp_ltime;
+float lmod, rmod, lfol, lfor;
 
   lfo.effectlfoout (&lfol, &lfor);
   
@@ -280,6 +279,7 @@ float tmp_rtime, tmp_ltime, lmod, rmod, lfol, lfor;
 
   lmod = 1.0f - 1.0f/(lmod + 1.0f);
   rmod = 1.0f - 1.0f/(rmod + 1.0f); 
+  
 
 if(Pmodfilts)
 {  
@@ -333,7 +333,7 @@ Echotron::setpreset (int npreset)
   const int NUM_PRESETS = 1;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Test
-    {64, 0, 1, 8, 0, 60, 0, 24, 0, 0, 0, 64, 0, 0, 20000, 0}
+    {64, 0, 1, 8, 0, 60, 0, 64, 0, 0, 0, 64, 0, 0, 0, 0}
 
   };
 
@@ -380,8 +380,8 @@ Echotron::changepar (int npar, int value)
       sethidamp (value);
       break;
     case 7:
-      Plrcross = value - 64;
-      lrcross = ((float) Plrcross)/64.0;
+      Plrcross = value;
+      lrcross = ((float)(Plrcross)-64)/64.0;
       ilrcross = 1.0f - abs(lrcross);      
       break;
     case 8:
