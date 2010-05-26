@@ -21229,7 +21229,7 @@ void RKRGUI::UpdateTGUI() {
   }
     if(rkr->Echotron_Bypass)
   { 
-   echotron_tempo->value(rkr->efx_Echo->getpar(5));
+   echotron_tempo->value(rkr->efx_Echotron->getpar(5));
    echotron_tempo->redraw();
   }
 }

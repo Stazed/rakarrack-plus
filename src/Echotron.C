@@ -92,8 +92,8 @@ void
 Echotron::cleanup ()
 {
 memset(lxn,0,sizeof(float)*maxx_size);
-feedback = 0.0f;
-oldl = 0.0f;
+memset(rxn,0,sizeof(float)*maxx_size);
+
 lpfl->cleanup ();
 lpfr->cleanup ();
 
@@ -232,6 +232,9 @@ void Echotron::convert_time()
 float temp_time;
 float tempo_coeff = 60.0f / ((float)PTempo);
 
+cleanup();
+
+
 for(int i=0; i<Plength; i++)
 {
    
@@ -246,7 +249,7 @@ if(i<ECHOTRON_MAXFILTERS)
 {
 
  int Freq=fFreq[i]*(1.0f+(ffade*4.0f));
- if (Freq=20.0) Freq=20.0f;
+ if (Freq<20.0) Freq=20.0f;
  if (Freq>26000.0) Freq=26000.0f;
  filterbank[i].l->setfreq_and_q(Freq,fQ[i]);
  filterbank[i].r->setfreq_and_q(Freq,fQ[i]);
