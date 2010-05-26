@@ -104,10 +104,9 @@ private:
   int hrtf_size;
   int hlength;
 
-
-  int *time, *rndtime;
   
   //arrays of parameters:
+float fPan[ECHOTRON_F_SIZE];  //1+Pan from text file
 float fTime[ECHOTRON_F_SIZE];
 float fLevel[ECHOTRON_F_SIZE];
 float fLP[ECHOTRON_MAXFILTERS];
@@ -117,10 +116,15 @@ float fFreq[ECHOTRON_MAXFILTERS];
 float fQ[ECHOTRON_MAXFILTERS];
 float fStages[ECHOTRON_MAXFILTERS];
 
+int time[ECHOTRON_F_SIZE];
+float i_fPan[ECHOTRON_F_SIZE];  //1-fPan
+float ldata[ECHOTRON_F_SIZE];
+float rdata[ECHOTRON_F_SIZE];
+
   float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
   
-  float *ldata, *rdata, *lxn, *rxn, *imdelay, *ftime, *tdata, *rnddata;
+  float *lxn, *rxn, *imdelay;
   
   float level,fb, rfeedback, lfeedback,levpanl,levpanr, ilrcross;
   float roomsize;

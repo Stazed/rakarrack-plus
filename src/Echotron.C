@@ -48,12 +48,7 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
 
   hrtf_size = SAMPLE_RATE/2;
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
-  time = (int *) malloc (sizeof (int) * 2000);
-  rndtime = (int *) malloc (sizeof (int) * 2000);
-  ftime = (float *) malloc (sizeof (float) * 2000);
-  data = (float *) malloc (sizeof (float) * 2000);
-  rnddata = (float *) malloc (sizeof (float) * 2000);
-  tdata = (float *) malloc (sizeof (float) * 2000);
+
   lxn = (float *) malloc (sizeof (float) * (1 + maxx_size)); 
   rxn = (float *) malloc (sizeof (float) * (1 + maxx_size));    
 
@@ -77,15 +72,15 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
       qq = 1.0f;
       filterbank[i].sfreq = center;
       filterbank[i].sq = qq;
-      filterbank[i].sLP = 1.0f;  
-      filterbank[i].sBP = 1.0f;
-      filterbank[i].sHP = 1.0f;   
+      filterbank[i].sLP = 0.25f;  
+      filterbank[i].sBP = -1.0f;
+      filterbank[i].sHP = 0.5f;   
       filterbank[i].sStg = 1.0f;               
       filterbank[i].l = new RBFilter (0, center, qq, 0);
       filterbank[i].r = new RBFilter (0, center, qq, 0);
       
-      filterbank[i].l->setmix (1, 1.0f, -0.5f, 0.5f);
-      filterbank[i].r->setmix (1, 1.0f, -0.5f, 0.5f);      
+      filterbank[i].l->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);
+      filterbank[i].r->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);      
     };
     
    setpreset (Ppreset);
@@ -116,31 +111,35 @@ lpfr->cleanup ();
 void
 Echotron::out (float * smpsl, float * smpsr)
 {
-  int i, j, xindex, hindex;
-  float l,lyn, ryn, hyn;
-  float ldiff,rdiff;
+  int i, j, xindex;
+  float l,r,lyn, ryn, hyn;
   int length = Plength;
 
-  int doffset;
-
+  int numfilters = 2; //just keep the compiler happy for now.
   
   for (i = 0; i < PERIOD; i++)
     {
 
-      l = 0.5f*(smpsr[i] + smpsl[i]); 
-      oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop      
-      if(Prv)
-      {
-       oldl = 0.5f*oldl - smpsl[i];     
-      }
+      l = lpfl->filterout_s(smpsl[i] + lfeedback);  //High Freq damping 
+      r = lpfr->filterout_s(smpsr[i] + rfeedback);
 
-      lxn[offset] = oldl;
+      lxn[offset] = l;
+      rxn[offset] = r;
       
       //Convolve 
       lyn = 0.0f;
+      ryn = 0.0f;
       xindex = offset;
-
-      for (j =0; j<length; j++)
+      
+      for (j =0; j<numfilters; j++)
+      {
+      xindex = offset + time[j];
+      if(xindex>=maxx_size) xindex -= maxx_size;
+      lyn += filterbank[i].l->filterout_s(lxn[xindex]) * ldata[j];		//filter each tap
+      ryn += filterbank[i].r->filterout_s(rxn[xindex]) * rdata[j];
+      }
+      
+      for (j =numfilters; j<length; j++)
       {
       xindex = offset + time[j];
       if(xindex>=maxx_size) xindex -= maxx_size;
@@ -152,24 +151,13 @@ Echotron::out (float * smpsl, float * smpsr)
       efxoutl[i] = (lrcross*ryn + ilrcross*lyn) * levpanl;
       efxoutr[i] = (lrcross*lyn + ilrcross*ryn) * levpanr;       
       lfeedback = fb * lyn;
-      rfeedback = fb * lyn;      
+      rfeedback = fb * ryn;      
       efxoutl[i] = lyn * levpanl;
       efxoutr[i] = ryn * levpanr;         
 
-
       offset--;
       if (offset<0) offset = maxx_size;   
-      
-      doffset = (offset + roomsize);  
-      if (doffset>maxx_size) doffset -= maxx_size;
-      
-      hoffset--;
-      if (hoffset<0) hoffset = hrtf_size; 
-      
-      lxn[doffset] += feedback; 
-      
-      xindex = offset + roomsize;      
-      
+     
     };
 
 
@@ -297,43 +285,8 @@ return(1);
 
 void Echotron::convert_time()
 {
-int i;
-int index = 0;
-int count;
-float tmp;
-int chunk;
-float skip = 0.0f;
-float incr = 0.0f;
-float findex;
-float tmpstretch = 1.0f;
-float normal = 0.9999f/maxdata;
 
-memset(data, 0, sizeof(float)*2000);
-memset(time, 0, sizeof(int)*2000);
-
-if(Plength>=data_length) Plength = data_length;
-if(Plength==0) Plength=400;
-incr = ((float) Plength)/((float) data_length);
-
-
-if(fstretch>0.0) 
-{
-tmpstretch = 1.0f + fstretch * (6.0f/maxtime);  //6 seconds max
-}
-else
-{
-tmpstretch = 1.0f + 0.99f*fstretch;
-}
-
-for(i=0;i<data_length;i++)
-{ 
-
-    if( (idelay + ftime[i] ) > 5.9f ) ftime[i] = 5.9f;   
-    time[i]=lrintf(tmpstretch*ftime[i]*fSAMPLE_RATE);  //Add initial delay to all the samples
-    data[i]=normal*tdata[i];  
- 
-};
-  Plength = i;
+  Plength = 2; //just so something happens for now.
  
 
 };
