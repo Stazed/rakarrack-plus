@@ -6086,15 +6086,7 @@ void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_echotron_preset[] = {
- {"Chamber", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Concrete Stairwell", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Med Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Cathedral", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Test", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -6207,10 +6199,10 @@ void RKRGUI::cb_echotron_user(Fl_Check_Button* o, void* v) {
 
 void RKRGUI::cb_B_ech_i(Fl_Button*, void*) {
   char *filename;
-filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
+filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
 if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rvb");
-strcpy(rkr->efx_Reverbtron->Filename,filename);
+filename=fl_filename_setext(filename,".dly");
+strcpy(rkr->efx_Echotron->Filename,filename);
 rkr->efx_Echotron->setfile(100);
 }
 void RKRGUI::cb_B_ech(Fl_Button* o, void* v) {
@@ -6225,16 +6217,7 @@ void RKRGUI::cb_echotron_fnum(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_echotron_fnum[] = {
- {"Chamber", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Conc. Stair", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Med Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Large Room", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Large Hall", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar Ambience", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Studio", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Twilight", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Santa Lucia", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Test", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

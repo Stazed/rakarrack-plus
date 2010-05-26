@@ -30,8 +30,8 @@
 class RBFilter:public Filter_
 {
 public:
-  RBFilter (unsigned char Ftype, float Ffreq, float Fq,
-	    unsigned char Fstages);
+  RBFilter (int Ftype, float Ffreq, float Fq,
+	    int Fstages);
    ~RBFilter ();
   void filterout (float * smp);
   float filterout_s (float smp);

@@ -26,8 +26,8 @@
 #include <stdio.h>
 #include "RBFilter.h"
 
-RBFilter::RBFilter (unsigned char Ftype, float Ffreq, float Fq,
-		    unsigned char Fstages)
+RBFilter::RBFilter (int Ftype, float Ffreq, float Fq,
+		    int Fstages)
 {
   stages = Fstages;
   type = Ftype;

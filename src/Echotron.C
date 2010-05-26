@@ -112,7 +112,7 @@ void
 Echotron::out (float * smpsl, float * smpsr)
 {
   int i, j, xindex;
-  float l,r,lyn, ryn, hyn;
+  float l,r,lyn, ryn;
   int length = Plength;
 
   int numfilters = 2; //just keep the compiler happy for now.
@@ -198,87 +198,35 @@ int
 Echotron::setfile(int value)
 {
 
+FILE *fs;
+
 char wbuf[128];
 
 if(!Puser)
 {
 Filenum = value;
-memset(Filename,NULL,sizeof(Filename));
-sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
+memset(Filename,0,sizeof(Filename));
+sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
 }
 
-string header;
-string Time[ECHOTRON_F_SIZE];
-string Level[ECHOTRON_F_SIZE];
-string LP[ECHOTRON_MAXFILTERS];
-string BP[ECHOTRON_MAXFILTERS];
-string HP[ECHOTRON_MAXFILTERS];
-string Freq[ECHOTRON_MAXFILTERS];
-string Q[ECHOTRON_MAXFILTERS];
-string Stages[ECHOTRON_MAXFILTERS];
-string trash;
+if ((fs = fopen (Filename, "r")) == NULL) return(0);
+
+memset(wbuf,0,sizeof(wbuf));
+fgets(wbuf,sizeof wbuf,fs); //Read Header
+memset(wbuf,0,sizeof(wbuf));
 
 int count = 0;
 
-  ifstream myfile (Filename);
-  if (myfile.is_open())
-  {
-      getline (myfile,header); 
-      cout << header << endl;
-    while ( (! myfile.eof()) && (count<ECHOTRON_F_SIZE) )
+    while ((fgets(wbuf,sizeof wbuf,fs) != NULL) && (count<ECHOTRON_F_SIZE))
     {  
-      getline (myfile,Time[count], '\t');
-      getline (myfile,Level[count], '\t');  
-      if(count<ECHOTRON_MAXFILTERS)
-      {    
-      getline (myfile,LP[count], '\t');     
-      getline (myfile,BP[count], '\t'); 
-      getline (myfile,HP[count], '\t');           
-      getline (myfile,Freq[count], '\t');  
-      getline (myfile,Q[count], '\t');
-      getline (myfile,Stages[count]);  
-      }
-      else
-      {
-      getline(myfile,trash);  //something we can ignore, but will set pointer to next line for proper reading of next Time & Level
-      }
+     sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",&fPan[count], &fTime[count], &fLevel[count],
+      &fLP[count],  &fBP[count],  &fHP[count],  &fFreq[count],  &fQ[count],  &iStages[count]);
+     memset(wbuf,0,sizeof(wbuf));
     count++;
-  
     }
-    
-    myfile.close();  
-      
-    for(int i =0; i<count; i++) 
-    {
-    from_string<float>(fTime[i],Time[i],dec);
-    from_string<float>(fLevel[i],Level[i],dec);
-      if(i<ECHOTRON_MAXFILTERS)
-      {     
-    from_string<float>(fLP[i],LP[i],dec);
-    from_string<float>(fBP[i],BP[i],dec);
-    from_string<float>(fHP[i],HP[i],dec);
-    from_string<float>(fFreq[i],Freq[i],dec);
-    from_string<float>(fQ[i],Q[i],dec);
-    from_string<float>(fStages[i],Stages[i],dec);
-      }
-    
-   /* //Print results to confirm
-    cout<<fTime[i] <<"\t" <<fLevel[i] <<"\t";
-    if(i<ECHOTRON_MAXFILTERS) cout<<fLP[i] <<"\t" <<fBP[i]<<"\t"<<fHP[i] <<"\t" <<fFreq[i] <<"\t" <<fQ[i] <<"\t" <<fStages[i] << endl;
-    else cout<<endl;*/
-    
-    }
+    fclose(fs);  
 
-
-  }
-
-  else return(0);
-
-
-cleanup();
-
-
-cleanup();
+Plength=count;
 convert_time();
 return(1);
 };
@@ -286,7 +234,7 @@ return(1);
 void Echotron::convert_time()
 {
 
-  Plength = 2; //just so something happens for now.
+//  Plength = count; //just so something happens for now.
  
 
 };
@@ -334,24 +282,8 @@ Echotron::setpreset (int npreset)
   const int PRESET_SIZE = 16;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Spring
-    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 0},
-    //Concrete Stair
-    {64, 0, 1, 500, 0, 0, 0, 40, 1, 0, 0, 64, 0, 0, 20000, 0},
-    //Nice Hall
-    {64, 0, 1, 500, 0, 0, 60, 15, 2, 0, 0, 64, 0, 0, 20000, 0},
-    //Hall
-    {64, 16, 1, 500, 0, 0, 0, 22, 3, -17, 0, 64, 0, 0, 20000, 0},
-    //Room
-    {64, 0, 1, 1500, 0, 0, 48, 20, 4, 0, 0, 64, 0, 0, 20000, 0},
-    //Hall
-    {88, 0, 1, 1500, 0, 0, 88, 14, 5, 0, 0, 64, 0, 0, 20000, 0},
-    //Guitar
-    {64, 0, 1, 1500, 0, 0, 30, 34, 6, 0, 0, 64, 0, 0, 20000, 0},
-    //Studio
-    {64, 0, 1, 1500, 0, 0, 30, 20, 7, 0, 0, 64, 0, 0, 20000, 0},
-    //Cathedral
-    {64, 0, 1, 1500, 0, 30, 0, 40, 9, 0, 0, 64, 0, 0, 20000, 0}
+    //Test
+    {64, 0, 1, 8, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 0},
 
   };
 
@@ -400,7 +332,7 @@ Echotron::changepar (int npar, int value)
       levpanr=level*rpanning;
       break;
     case 8:
-      if(!setfile(value)) error_num=2;
+      if(!setfile(value)) error_num=4;
       break;
     case 9:
       Pstretch = value;

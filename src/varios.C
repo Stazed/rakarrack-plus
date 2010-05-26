@@ -66,8 +66,11 @@ RKR::Error_Handle(int num)
     case 2:
      sprintf(error_msg,"%s","Reverbtron is unable to open the IR .rvb file");
      break;
-     case 3:
+    case 3:
      sprintf(error_msg,"%s","Error writing the file probably you dont have permission to write in this directory");
+     break;
+    case 4:
+     sprintf(error_msg,"%s","Echotron is unable to open the .dly file");
      break;
 
   }
