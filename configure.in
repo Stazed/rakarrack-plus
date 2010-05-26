@@ -228,11 +228,8 @@ if test "x$prefix" == "xNONE"; then
 prefix=/usr/local
 fi
 
-DATADIR="$prefix/share/${PACKAGE}"
-HELPDIR="$prefix/share/doc/${PACKAGE}"
-
-AC_DEFINE_UNQUOTED(DATADIR,"$DATADIR",[DATADIR])
-AC_DEFINE_UNQUOTED(HELPDIR,"$HELPDIR",[HELPDIR])
+AC_DEFINE_UNQUOTED(DATADIR,"$datadir/${PACKAGE}",[DATADIR])
+AC_DEFINE_UNQUOTED(HELPDIR,"$docdir",[HELPDIR])
 AC_DEFINE([WEBSITE],["rakarrack.sf.net"],[WEBSITE])
 
 if test -z "$OPTS";then

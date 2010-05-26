@@ -1,6 +1,6 @@
 SUBDIRS = imagenes css
-docdir = $(prefix)/share/doc/${PACKAGE}/html
-doc_DATA= help.html \
+htmldir = $(docdir)/html
+html_DATA= help.html \
 	license.html
 	
-EXTRA_DIST = $(doc_DATA)
+EXTRA_DIST = $(html_DATA)

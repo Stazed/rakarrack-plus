@@ -1,5 +1,5 @@
-docdir = $(prefix)/share/doc/${PACKAGE}/html/imagenes
-doc_DATA= icono_rakarrack_128x128.png \
+htmldir = $(docdir)/html/imagenes
+html_DATA= icono_rakarrack_128x128.png \
 	screen.png \
 	jack_conections.jpg \
 	bank_mgmt.jpg \
@@ -63,4 +63,4 @@ doc_DATA= icono_rakarrack_128x128.png \
 	rvt.jpg \
 	pan.jpg
 	
-EXTRA_DIST = $(doc_DATA)
+EXTRA_DIST = $(html_DATA)
