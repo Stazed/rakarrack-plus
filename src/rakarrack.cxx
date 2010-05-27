@@ -6197,6 +6197,8 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".dly");
 strcpy(rkr->efx_Echotron->Filename,filename);
 rkr->efx_Echotron->setfile(100);
+echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));
 }
 void RKRGUI::cb_B_ech(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_ech_i(o,v);
