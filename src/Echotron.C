@@ -377,7 +377,7 @@ Echotron::changepar (int npar, int value)
       break;
     case 1:
       Pdepth=value;
-      depth = ((float) value)/127.0f;
+      depth = ((float) (value - 64))/64.0f;
       init_params();
       break;
     case 2:
