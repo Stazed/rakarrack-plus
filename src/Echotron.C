@@ -143,7 +143,7 @@ Echotron::out (float * smpsl, float * smpsr)
       {
       xindex = offset + time[j];
       if(xindex>=maxx_size) xindex -= maxx_size;
-      lyn += lxn[xindex] * ldata[j];		//this is all of the magic
+      lyn += lxn[xindex] * ldata[j];		//unfiltered reflections
       ryn += rxn[xindex] * rdata[j];
       }
 
@@ -204,7 +204,7 @@ if(!Puser)
 {
 Filenum = value;
 memset(Filename,NULL,sizeof(Filename));
-sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
+sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
 }
 
 string header;
