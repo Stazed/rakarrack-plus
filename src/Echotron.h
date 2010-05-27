@@ -34,7 +34,7 @@
 #include <string>
 #include <sstream>
 
-#define  ECHOTRON_F_SIZE   150       //Allow up to 500 points in the file
+#define  ECHOTRON_F_SIZE   150       //Allow up to 150 points in the file
 #define  ECHOTRON_MAXFILTERS  8      //filters available
 
 //and for some of the std libs functions
@@ -111,8 +111,8 @@ int rtime[ECHOTRON_F_SIZE];
 int ltime[ECHOTRON_F_SIZE];
 float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
-int interpl[ECHOTRON_F_SIZE];
-int interpr[ECHOTRON_F_SIZE];
+
+float ldmod, rdmod, oldldmod, oldrdmod, interpl, interpr;
 
   float width, depth;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength;

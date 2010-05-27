@@ -107,8 +107,16 @@ Echotron::out (float * smpsl, float * smpsr)
 
 if((Pmoddly)||(Pmodfilts)) modulate_delay();  
 
+  float tmpmodl = oldldmod;
+  float tmpmodr = oldrdmod;
+  int intmodl, intmodr;
+  
   for (i = 0; i < PERIOD; i++)
     {
+      tmpmodl+=interpl;
+      tmpmodr+=interpr;
+      intmodl = lrintf(tmpmodl);
+      intmodr = lrintf(tmpmodr);
 
       l = lpfl->filterout_s(smpsl[i] + lfeedback);  //High Freq damping 
       r = lpfr->filterout_s(smpsr[i] + rfeedback);
@@ -125,10 +133,9 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
       j=0;
       for (k=0; k<length; k++)
       {    
-      rtime[k]+=interpr[k];  //linearly interpolate delay modulation
-      ltime[k]+=interpl[k];   
-      lxindex = offset + ltime[k];
-      rxindex = offset + rtime[k];
+  
+      lxindex = offset + ltime[k] + intmodl;
+      rxindex = offset + rtime[k] + intmodr;
       if(lxindex>=maxx_size) lxindex -= maxx_size;
       if(rxindex>=maxx_size) rxindex -= maxx_size;
       lyn += filterbank[j].l->filterout_s(lxn[lxindex]) * ldata[k];		//filter each tap
@@ -141,10 +148,9 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
       {      
       for (k=0; k<length; k++)
       {   
-      rtime[k]+=interpr[k];
-      ltime[k]+=interpl[k];   
-      lxindex = offset + ltime[k];
-      rxindex = offset + rtime[k];
+  
+      lxindex = offset + ltime[k] + intmodl;
+      rxindex = offset + rtime[k] + intmodr;
       if(lxindex>=maxx_size) lxindex -= maxx_size;
       if(rxindex>=maxx_size) rxindex -= maxx_size;
       lyn += lxn[lxindex] * ldata[k];		
@@ -249,8 +255,6 @@ tmp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
 if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
 ltime[i] = rtime[i];  
-interpl[i] = 0.0f;
-interpr[i] = 0.0f;
  
 tpanl = 1.0f + fPan[i];
 tpanr = 2.0f-tpanl;
@@ -288,13 +292,10 @@ void Echotron::modulate_delay()
 {
 
 int tmp_rtime, tmp_ltime, tmp_interpr, tmp_interpl;
-float lfmod, rfmod,ldmod,rdmod, lfol, lfor;
+float lfmod, rfmod, lfol, lfor;
 float fperiod = 1.0f/((float) PERIOD);
 
   lfo.effectlfoout (&lfol, &lfor);
-  
-
- 
 
 if(Pmodfilts)
 {  
@@ -312,20 +313,16 @@ for(int i=0; i<ECHOTRON_MAXFILTERS; i++)
 
 if(Pmoddly)
 {
-ldmod = width*lfol + depth + 0.5;
-rdmod = width*lfor + depth + 0.5;
-for(int i=0; i<Plength; i++)
-{
-tmp_rtime=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE*ldmod);
-tmp_ltime=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE*rdmod);
+oldldmod = ldmod;
+oldrdmod = rdmod;
+ldmod = width*lfol;
+rdmod = width*lfor;
 
-tmp_interpl = lrintf(((float)(tmp_ltime - ltime[i])*fperiod));
-tmp_interpr = lrintf(((float)(tmp_rtime - rtime[i]))*fperiod);
+ldmod=lrintf(0.05f*tempo_coeff*fSAMPLE_RATE*ldmod);
+rdmod=lrintf(0.05f*tempo_coeff*fSAMPLE_RATE*rdmod);
 
-if(tmp_rtime<maxx_size) interpr[i]=tmp_interpr; else interpr[i]=0.0f;
-if(tmp_ltime<maxx_size) interpl[i]=tmp_interpl; else interpl[i]=0.0f;
-
-}
+interpl = (ldmod - oldldmod)*fperiod;
+interpr = (rdmod - oldrdmod)*fperiod;
 }
 
 };
