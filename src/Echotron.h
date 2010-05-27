@@ -28,17 +28,9 @@
 #include "AnalogFilter.h"
 #include "EffectLFO.h"
 
-//some of the C++ std libs
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-
 #define  ECHOTRON_F_SIZE   128       //Allow up to 150 points in the file
 #define  ECHOTRON_MAXFILTERS  8      //filters available
 
-//and for some of the std libs functions
-using namespace std;
 
 class Echotron
 {

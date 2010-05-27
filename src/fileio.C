@@ -531,6 +531,20 @@ RKR::savefile (char *filename)
                    Reverbtron_Bypass, efx_Reverbtron->Filename);
 	  break;
 
+	case 41:
+	  //Echotron
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		   efx_Echotron->getpar (0), efx_Echotron->getpar (1),
+		   efx_Echotron->getpar (2), efx_Echotron->getpar (3),
+		   efx_Echotron->getpar (4), efx_Echotron->getpar (5),
+		   efx_Echotron->getpar (6), efx_Echotron->getpar (7),
+		   efx_Echotron->getpar (8), efx_Echotron->getpar (9),
+                   efx_Echotron->getpar (10), efx_Echotron->getpar (11),
+                   efx_Echotron->getpar (12), efx_Echotron->getpar (13), 
+                   efx_Echotron->getpar (14), efx_Echotron->getpar (15), 
+                   Echotron_Bypass, efx_Echotron->Filename);
+	  break;
+
 	}
       fputs (buf, fn);
 
@@ -992,6 +1006,19 @@ RKR::loadfile (char *filename)
           strcpy(efx_Reverbtron->Filename,cfilename);		  
 	  break;
 
+	case 41:
+	  //Echotron
+	  bzero(efx_Echotron->Filename,sizeof(efx_Echotron->Filename));
+	  bzero(cfilename,sizeof(cfilename));
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		  &lv[42][0], &lv[42][1], &lv[42][2], &lv[42][3], &lv[42][4],
+		  &lv[42][5], &lv[42][6], &lv[42][7], &lv[42][8], &lv[42][9],
+		  &lv[42][10],&lv[42][11],&lv[42][12], &lv[42][13], &lv[42][14],&lv[42][15], 
+		  &Echotron_B,
+		  cfilename);
+          strcpy(efx_Echotron->Filename,cfilename);		  
+	  break;
+
 	}
     }
 
@@ -1075,6 +1102,7 @@ RKR::Actualizar_Audio ()
   Shifter_Bypass = 0;
   StompBox_Bypass = 0;
   Reverbtron_Bypass = 0;      
+  Echotron_Bypass = 0;
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -1154,6 +1182,8 @@ RKR::Actualizar_Audio ()
     efx_StompBox->changepar (i, lv[40][i]);
  for (i = 0; i <= 15; i++)
     efx_Reverbtron->changepar (i, lv[41][i]);
+ for (i = 0; i <= 15; i++)
+    efx_Echotron->changepar (i, lv[42][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1224,6 +1254,7 @@ RKR::Actualizar_Audio ()
   Shifter_Bypass = Shifter_B;
   StompBox_Bypass = StompBox_B;
   Reverbtron_Bypass = Reverbtron_B;
+  Echotron_Bypass = Echotron_B;
     
   Bypass = Bypass_B;
 
@@ -1308,7 +1339,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[42][16] = {
+  int presets[43][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1392,7 +1423,10 @@ RKR::New ()
 //StompBox
     {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
 //Reverbtron
-    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0}
+    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0},
+//Echotron
+    {64, 0, 1, 8, 0, 60, 0, 64, 0, 0, 0, 64, 0, 0, 0, 0}
+    
     
 
     
@@ -1404,10 +1438,11 @@ RKR::New ()
 
   for (j=0;j<10;j++) active[j]=0;
 
-  bzero (Preset_Name, sizeof (Preset_Name));
-  bzero (efx_Convol->Filename,sizeof(efx_Convol->Filename));
-  bzero (efx_Reverbtron->Filename,sizeof(efx_Reverbtron->Filename));
-  bzero (Author, sizeof (Author));
+  memset(Preset_Name, 0,sizeof (Preset_Name));
+  memset(efx_Convol->Filename,0,sizeof(efx_Convol->Filename));
+  memset(efx_Reverbtron->Filename,0,sizeof(efx_Reverbtron->Filename));
+  memset(efx_Echotron->Filename,0,sizeof(efx_Echotron->Filename));
+  memset (Author,0, sizeof (Author));
   strcpy(Author,UserRealName);
   Input_Gain = .5f;
   Master_Volume = .5f;
@@ -1474,6 +1509,8 @@ RKR::New ()
   Shifter_B = 0;
   StompBox_B = 0;
   Reverbtron_B = 0;
+  Echotron_B = 0;
+
   Bypass_B = 0;
 
   
@@ -1496,7 +1533,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[42][16] = {
+  int presets[43][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1580,7 +1617,9 @@ RKR::New_Bank ()
 //StompBox
     {48, 32, 0, 32, 65, 0, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
 //Reverbtron
-    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0}
+    {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0},
+//Echotron
+    {64, 0, 1, 8, 0, 60, 0, 64, 0, 0, 0, 64, 0, 0, 0, 0}
     
     
     
@@ -1594,12 +1633,13 @@ RKR::New_Bank ()
 
   for (i = 0; i < 62; i++)
     {
-      bzero (Bank[i].Preset_Name, sizeof (Bank[i].Preset_Name));
-      bzero (Bank[i].Author, sizeof (Bank[i].Author));
+      memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
+      memset(Bank[i].Author, 0, sizeof (Bank[i].Author));
       strcpy(Bank[i].Author,UserRealName);
-      bzero (Bank[i].ConvoFiname,sizeof(Bank[i].ConvoFiname));
-      bzero (Bank[i].RevFiname,sizeof(Bank[i].RevFiname));
-       
+      memset(Bank[i].ConvoFiname,0, sizeof(Bank[i].ConvoFiname));
+      memset(Bank[i].RevFiname,0,sizeof(Bank[i].RevFiname));
+      memset(Bank[i].EchoFiname,0,sizeof(Bank[i].EchoFiname));
+              
       Bank[i].Input_Gain = .5f;
       Bank[i].Master_Volume = .5f;
       Bank[i].Balance = 1.0f;
@@ -1633,14 +1673,16 @@ RKR::Bank_to_Preset (int i)
   int j, k;
 
 
-  bzero (Preset_Name, sizeof (Preset_Name));
+  memset(Preset_Name, 0,sizeof (Preset_Name));
   strcpy (Preset_Name, Bank[i].Preset_Name);
-  bzero (Author, sizeof (Author));
+  memset(Author, 0,sizeof (Author));
   strcpy (Author, Bank[i].Author);
-  bzero (efx_Convol->Filename, sizeof (efx_Convol->Filename));
+  memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
   strcpy (efx_Convol->Filename,Bank[i].ConvoFiname);
-  bzero (efx_Reverbtron->Filename, sizeof (efx_Reverbtron->Filename));
+  memset(efx_Reverbtron->Filename, 0, sizeof (efx_Reverbtron->Filename));
   strcpy (efx_Reverbtron->Filename,Bank[i].RevFiname);
+  memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
+  strcpy (efx_Echotron->Filename,Bank[i].EchoFiname);
 
 
   for (j = 0; j < 70; j++)
@@ -1697,6 +1739,7 @@ RKR::Bank_to_Preset (int i)
   Shifter_B = Bank[i].lv[39][19];
   StompBox_B = Bank[i].lv[40][19];
   Reverbtron_B = Bank[i].lv[41][19];
+  Echotron_B = Bank[i].lv[42][19];
 
 
   Bypass_B = Bypass;
@@ -1726,14 +1769,16 @@ RKR::Preset_to_Bank (int i)
 
 
   int j, k;
-  bzero (Bank[i].Preset_Name, sizeof (Bank[i].Preset_Name));
+  memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
   strcpy (Bank[i].Preset_Name, Preset_Name);
-  bzero (Bank[i].Author, sizeof (Bank[i].Author));
+  memset(Bank[i].Author, 0, sizeof (Bank[i].Author));
   strcpy (Bank[i].Author, Author);
-  bzero (Bank[i].ConvoFiname,sizeof(Bank[i].ConvoFiname));
+  memset(Bank[i].ConvoFiname,0, sizeof(Bank[i].ConvoFiname));
   strcpy(Bank[i].ConvoFiname, efx_Convol->Filename);
-  bzero (Bank[i].RevFiname,sizeof(Bank[i].RevFiname));
+  memset(Bank[i].RevFiname, 0, sizeof(Bank[i].RevFiname));
   strcpy(Bank[i].RevFiname, efx_Reverbtron->Filename);
+  memset(Bank[i].EchoFiname, 0, sizeof(Bank[i].EchoFiname));
+  strcpy(Bank[i].EchoFiname, efx_Echotron->Filename);
 
 
   Bank[i].Input_Gain = Input_Gain;
@@ -1817,6 +1862,8 @@ RKR::Preset_to_Bank (int i)
     lv[40][j] = efx_StompBox->getpar(j);
   for (j = 0; j <= 15; j++)
     lv[41][j] = efx_Reverbtron->getpar(j);
+  for (j = 0; j <= 15; j++)
+    lv[42][j] = efx_Echotron->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1891,6 +1938,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[39][19] = Shifter_Bypass;
   Bank[i].lv[40][19] = StompBox_Bypass;
   Bank[i].lv[41][19] = Reverbtron_Bypass;
+  Bank[i].lv[42][19] = Echotron_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

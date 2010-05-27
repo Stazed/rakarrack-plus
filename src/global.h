@@ -585,7 +585,7 @@ public:
     float Balance;
     int Bypass;
     char RevFiname[128];
-    char ReservedFiname[128];
+    char EchoFiname[128];
     int lv[70][20];
     int XUserMIDI[128][20];
     int XMIDIrangeMin[128];
