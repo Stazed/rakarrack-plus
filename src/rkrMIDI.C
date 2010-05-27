@@ -2134,6 +2134,49 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Reverbtron->changepar(1,value);
          break;
 
+   case 348:
+         efx_Echotron->changepar(0,value);
+         break;
+
+   case 349:
+         efx_Echotron->changepar(11,value);
+         break;
+
+   case 350:
+         efx_Echotron->changepar(5,ret_Tempo(value));
+         break;
+
+   case 351:
+         efx_Echotron->changepar(6,value);
+         break;
+
+   case 352:
+         efx_Echotron->changepar(10,value);
+         break;
+
+   case 353:
+         efx_Echotron->changepar(7,value);
+         break;
+
+   case 354:
+         efx_Echotron->changepar(2,value);
+         break;
+
+   case 355:
+         efx_Echotron->changepar(1,value);
+         break;
+
+   case 356:
+         efx_Echotron->changepar(9,value);
+         break;
+
+   case 357:
+         efx_Echotron->changepar(3,1+ (int)((float)value*.99212598f));
+         break;
+
+
+
+
    } 
       
     

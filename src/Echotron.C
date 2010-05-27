@@ -376,7 +376,7 @@ Echotron::changepar (int npar, int value)
       setvolume (value);
       break;
     case 1:
-      Pdepth=value - 64;
+      Pdepth=value;
       depth = ((float) value)/127.0f;
       init_params();
       break;
@@ -448,7 +448,7 @@ Echotron::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return (Pdepth + 64);
+      return (Pdepth);
       break;
     case 2:
       return(Pwidth);

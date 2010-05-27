@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -830,13 +830,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1367 30 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6657,7 +6656,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -6683,7 +6682,7 @@ echotron_fb->value(rkr->efx_Echotron->getpar(10));
 echotron_tempo->value(rkr->efx_Echotron->getpar(5));
 echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
 echotron_width->value(rkr->efx_Echotron->getpar(2));
-echotron_deep->value(rkr->efx_Echotron->getpar(1));
+echotron_deep->value(rkr->efx_Echotron->getpar(1)-64);
 echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
 echotron_stdf->value(rkr->efx_Echotron->getpar(9));
 echotron_af->value(rkr->efx_Echotron->getpar(15));
@@ -6740,8 +6739,8 @@ echotron_length->value(rkr->efx_Echotron->getpar(3));} open
           class SliderW
         }
         Fl_Value_Slider echotron_deep {
-          label Deep
-          callback {rkr->efx_Echotron->changepar(1,((int)o->value() + 64));} selected
+          label Depth
+          callback {rkr->efx_Echotron->changepar(1,((int)o->value()+64));}
           xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -10321,7 +10320,7 @@ rkr->RC->cc=1;} {}
 
 int i;
 
-for (i=1; i<348; i++)
+for (i=1; i<358; i++)
 
 {
 
@@ -11620,6 +11619,46 @@ switch (i)
      revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
      revtron_fade->redraw();
      break;
+     case 348:
+     echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
+     echotron_WD->redraw();
+     break;
+     case 349:
+     echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
+     echotron_pan->redraw();
+     break;
+     case 350:
+     echotron_tempo->value(rkr->efx_Echotron->getpar(5));
+     echotron_tempo->redraw();
+     break;
+     case 351:
+     echotron_damp->value(rkr->efx_Echotron->getpar(6));
+     echotron_damp->redraw();
+     break;
+     case 352:
+     echotron_fb->value(rkr->efx_Echotron->getpar(10)-64);
+     echotron_fb->redraw();
+     break;
+     case 353:
+     echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
+     echotron_lrcross->redraw();
+     break;
+     case 354:
+     echotron_width->value(rkr->efx_Echotron->getpar(2));
+     echotron_width->redraw();
+     break;
+     case 355:
+     echotron_deep->value(rkr->efx_Echotron->getpar(1)-64);
+     echotron_deep->redraw();
+     break;
+     case 356:
+     echotron_stdf->value(rkr->efx_Echotron->getpar(9));
+     echotron_stdf->redraw();
+     break;
+     case 357:
+     echotron_length->value(rkr->efx_Echotron->getpar(3));
+     echotron_length->redraw();
+     break;
 
       
 }
@@ -11628,7 +11667,8 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {}
+rkr->Mvalue=0;} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {int miralo;
