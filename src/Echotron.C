@@ -248,6 +248,7 @@ void Echotron::init_params()
 float hSR = fSAMPLE_RATE*0.5f;
 float tmp_time;
 float tpanl, tpanr;
+float len = 1.0f / (float)Plength;
 
 for(int i=0; i<Plength; i++)
 {
@@ -281,9 +282,13 @@ if(i<ECHOTRON_MAXFILTERS)
  filterbank[i].l->setmix (1, fLP[i] , fBP[i], fHP[i]);
  filterbank[i].r->setmix (1, fLP[i] , fBP[i], fHP[i]);      
 }
-
 }
 
+for(int i=0; i<Plength; i++)
+{
+ldata[i] *=len;
+rdata[i] *=len;
+}
 
 
 };
@@ -291,7 +296,6 @@ if(i<ECHOTRON_MAXFILTERS)
 void Echotron::modulate_delay()
 {
 
-int tmp_rtime, tmp_ltime, tmp_interpr, tmp_interpl;
 float lfmod, rfmod, lfol, lfor;
 float fperiod = 1.0f/((float) PERIOD);
 
