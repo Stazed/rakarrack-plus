@@ -111,6 +111,8 @@ int rtime[ECHOTRON_F_SIZE];
 int ltime[ECHOTRON_F_SIZE];
 float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
+int interpl[ECHOTRON_F_SIZE];
+int interpr[ECHOTRON_F_SIZE];
 
   float width, depth;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength;

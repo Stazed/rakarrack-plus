@@ -6139,7 +6139,7 @@ void RKRGUI::cb_echotron_width(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_echotron_deep_i(SliderW* o, void*) {
-  rkr->efx_Echotron->changepar(1,(int)o->value() + 64);
+  rkr->efx_Echotron->changepar(1,((int)o->value() + 64));
 }
 void RKRGUI::cb_echotron_deep(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_deep_i(o,v);
@@ -15639,7 +15639,7 @@ R average.");
         echotron_deep->labelfont(0);
         echotron_deep->labelsize(10);
         echotron_deep->labelcolor(FL_BACKGROUND2_COLOR);
-        echotron_deep->minimum(64);
+        echotron_deep->minimum(-64);
         echotron_deep->maximum(64);
         echotron_deep->step(1);
         echotron_deep->textcolor(7);

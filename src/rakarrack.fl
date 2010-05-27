@@ -6741,8 +6741,8 @@ echotron_length->value(rkr->efx_Echotron->getpar(3));} open
         }
         Fl_Value_Slider echotron_deep {
           label Deep
-          callback {rkr->efx_Echotron->changepar(1,(int)o->value() + 64);} selected
-          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 64 step 1 textcolor 7
+          callback {rkr->efx_Echotron->changepar(1,((int)o->value() + 64));} selected
+          xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider echotron_stdf {
