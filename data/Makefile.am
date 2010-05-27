@@ -29,4 +29,4 @@ desktopdir = $(datadir)/applications
 desktop_DATA= rakarrack.desktop
 
 
-EXTRA_DIST = $(data_DATA) $(desktop_DATA)
+EXTRA_DIST = $(pkgdata_DATA) $(desktop_DATA)

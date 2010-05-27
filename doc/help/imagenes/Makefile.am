@@ -61,6 +61,7 @@ html_DATA= icono_rakarrack_128x128.png \
 	sto.jpg \
 	aci.png \
 	rvt.jpg \
+	ect.jpg \
 	pan.jpg
 	
 EXTRA_DIST = $(html_DATA)
