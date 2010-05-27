@@ -830,12 +830,13 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1367 30 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6688,7 +6689,8 @@ echotron_stdf->value(rkr->efx_Echotron->getpar(9));
 echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
-echotron_length->value(rkr->efx_Echotron->getpar(3));} open
+echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open selected
           xywh {399 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -11667,8 +11669,7 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {selected
-    }
+rkr->Mvalue=0;} {}
   }
   Function {ActOnOff()} {} {
     code {int miralo;

@@ -6079,6 +6079,7 @@ echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));
 }
 void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_preset_i(o,v);
