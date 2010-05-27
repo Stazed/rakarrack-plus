@@ -105,6 +105,7 @@ float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
 
 float ldmod, rdmod, oldldmod, oldrdmod, interpl, interpr;
+float dlyrange;
 
   float width, depth;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength;

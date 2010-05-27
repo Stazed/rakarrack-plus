@@ -322,8 +322,8 @@ oldrdmod = rdmod;
 ldmod = width*lfol;
 rdmod = width*lfor;
 
-ldmod=lrintf(0.05f*tempo_coeff*fSAMPLE_RATE*ldmod);
-rdmod=lrintf(0.05f*tempo_coeff*fSAMPLE_RATE*rdmod);
+ldmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*ldmod);
+rdmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*rdmod);
 
 interpl = (ldmod - oldldmod)*fperiod;
 interpr = (rdmod - oldrdmod)*fperiod;
@@ -378,6 +378,7 @@ Echotron::changepar (int npar, int value)
     case 1:
       Pdepth=value;
       depth = ((float) (value - 64))/64.0f;
+      dlyrange = 0.008*powf(2.0f, 4.5f*depth);
       init_params();
       break;
     case 2:
