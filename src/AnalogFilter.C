@@ -30,6 +30,11 @@
 AnalogFilter::AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,
 			    unsigned char Fstages)
 {
+
+  iSAMPLE_RATE=SAMPLE_RATE;
+  ifSAMPLE_RATE=fSAMPLE_RATE;
+
+
   stages = Fstages;
   for (int i = 0; i < 3; i++)
     {
@@ -52,8 +57,6 @@ AnalogFilter::AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,
   firsttime = 1;
   d[0] = 0;			//this is not used
   outgain = 1.0;
-  iSAMPLE_RATE=SAMPLE_RATE;
-  ifSAMPLE_RATE=fSAMPLE_RATE;
 
 
 };

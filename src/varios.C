@@ -66,8 +66,11 @@ RKR::Error_Handle(int num)
     case 2:
      sprintf(error_msg,"%s","Reverbtron is unable to open the IR .rvb file");
      break;
-     case 3:
+    case 3:
      sprintf(error_msg,"%s","Error writing the file probably you dont have permission to write in this directory");
+     break;
+    case 4:
+     sprintf(error_msg,"%s","Echotron is unable to open the .dly file");
      break;
 
   }
@@ -330,6 +333,8 @@ switch(Tap_SetValue)
   if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSetD);
   if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSetD);
   if(Sequence_Bypass) efx_Sequence->changepar(9,Tap_TempoSetD);
+  if(Echotron_Bypass) efx_Echotron->changepar(5,Tap_TempoSetD);
+
   if(Echo_Bypass) 
    {
     efx_Echo->Tempo2Delay(Tap_TempoSetD);

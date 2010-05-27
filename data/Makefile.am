@@ -1,5 +1,4 @@
-datadir = $(prefix)/share/${PACKAGE}
-data_DATA= Default.rkrb \
+pkgdata_DATA = Default.rkrb \
 	Extra.rkrb \
 	1.wav \
 	2.wav \
@@ -16,6 +15,7 @@ data_DATA= Default.rkrb \
 	8.rvb \
 	9.rvb \
 	10.rvb \
+	1.dly \
 	bg1.png \
 	bg2.png \
 	bg3.png \
@@ -25,7 +25,7 @@ data_DATA= Default.rkrb \
 	bg_gray_furr.png \
 	bg.png
 
-desktopdir = $(prefix)/share/applications
+desktopdir = $(datadir)/applications
 desktop_DATA= rakarrack.desktop
 
 

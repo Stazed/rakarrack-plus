@@ -1092,10 +1092,10 @@ RKR::Control_Gain (float *origl, float *origr)
   if(upsample)
   {
   U_Resample->out(origl,origr,efxoutl,efxoutr,J_PERIOD,u_up);
-  if(checkforaux() || ACI_Bypass) A_Resample->mono_out(auxdata,auxresampled,J_PERIOD,u_up,PERIOD);
+  if((checkforaux()) || (ACI_Bypass)) A_Resample->mono_out(auxdata,auxresampled,J_PERIOD,u_up,PERIOD);
   }
   else
-  if(checkforaux() || ACI_Bypass) memcpy(auxresampled,auxdata,sizeof(float)*J_PERIOD); 
+  if((checkforaux()) || (ACI_Bypass)) memcpy(auxresampled,auxdata,sizeof(float)*J_PERIOD); 
 
   for (i = 0; i <= PERIOD; i++)
     {

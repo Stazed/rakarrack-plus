@@ -30,6 +30,22 @@ final package with a bash script that select the proper one for the user.
 
 
  
+INSTALLATION PATHS
+
+Sorry, I dont have enough time to read, learn and follow the GNU rules, and 
+also I really dont like their way.
+
+Then ... to override the default Debian installation paths for docs and data:
+
+./configure --enable-datadir=yes --datadir=/usr/local/share/packages --enable-docdir=yes 
+--docdir=/usr/local/share/packages/doc/rakarrack
+
+
+That will install
+
+data in : /usr/local/share/packages/rakarrack/  
+docs in : /usr/local/share/packages/doc/rakarrack/
+
 
 
 

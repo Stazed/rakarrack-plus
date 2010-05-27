@@ -45,7 +45,7 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
       alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       prls = beta;
-      gate = rap2dB(-75.0f);
+      gate = dB2rap(-75.0f);
 
   tmp = 0.05f; //50 ms att/rel on compressor
   calpha =  cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
@@ -108,6 +108,7 @@ Vocoder::out (float * smpsl, float * smpsr)
    memset(tmpl,0,sizeof(float)*PERIOD);
    memset(tmpr,0,sizeof(float)*PERIOD);    
    
+
    for (i = 0; i<PERIOD; i++)    //apply compression to auxresampled
    {
    auxtemp = input * auxresampled[i];
