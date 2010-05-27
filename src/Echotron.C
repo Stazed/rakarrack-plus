@@ -224,6 +224,7 @@ int count = 0;
     fclose(fs);  
 
 Plength=count+1;
+cleanup();
 init_params();
 return(1);
 };
@@ -233,8 +234,7 @@ void Echotron::init_params()
 
 float hSR = fSAMPLE_RATE*0.5f;
 float tmp_time;
-
-cleanup();
+float tpanl, tpanr;
 
 for(int i=0; i<Plength; i++)
 {
@@ -243,13 +243,22 @@ if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
 ltime[i] = rtime[i];  
  
-ldata[i]=fLevel[i]*sinf(D_PI*fPan[i]);
-rdata[i]=fLevel[i]*cosf(D_PI*fPan[i]);
+tpanl = 1.0f + fPan[i];
+tpanr = 2.0f-tpanl;
+tpanl = 10*powf(tpanl,4.0f);
+tpanr = 10.0f*powf(tpanr,4.0f);
+tpanr = 1.0f-1.0f/(tpanr + 1.0f);
+tpanl = 1.0f -1.0f/(tpanl + 1.0f);
+tpanr = 1.1f*tpanr;
+tpanl = 1.1f*tpanl;
+
+ldata[i]=fLevel[i]*tpanl;
+rdata[i]=fLevel[i]*tpanr;
 
 if(i<ECHOTRON_MAXFILTERS)
 {
 
- int Freq=fFreq[i]*powf(2.0f,(depth)*4.0f);
+ int Freq=fFreq[i]*powf(2.0f,depth*4.5f);
  if (Freq<20.0) Freq=20.0f;
  if (Freq>hSR) Freq=hSR;
  filterbank[i].l->setfreq_and_q(Freq,fQ[i]);
@@ -274,12 +283,9 @@ float lmod, rmod, lfol, lfor;
 
   lfo.effectlfoout (&lfol, &lfor);
   
-  lmod = powf(2.0f,(lfol*width + depth)*4.0f);
-  rmod = powf(2.0f,(lfor*width + depth)*4.0f); 
-
-  lmod = 1.0f - 1.0f/(lmod + 1.0f);
-  rmod = 1.0f - 1.0f/(rmod + 1.0f); 
-  
+  lmod = powf(2.0f,(lfol*width + 0.25f + depth)*4.5f);
+  rmod = powf(2.0f,(lfor*width + 0.25f + depth)*4.5f); 
+ 
 
 if(Pmodfilts)
 {  
@@ -352,13 +358,13 @@ Echotron::changepar (int npar, int value)
       setvolume (value);
       break;
     case 1:
-      Pdepth=value;
+      Pdepth=value - 64;
       depth = ((float) value)/127.0f;
       init_params();
       break;
     case 2:
       Pwidth=value;
-      width = ((float) value)/127.0f - 0.5f;
+      width = ((float) value)/127.0f;
       init_params();
       break;
     case 3:
