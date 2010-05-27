@@ -13,6 +13,8 @@
 
 
 
+
+
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help</title>
   <meta name="AUTHOR" content="Josep Andreu">
   <meta name="CREATED" content="0;0">
@@ -2547,8 +2549,126 @@ responses.</p>
 <tbody><tr><td style="vertical-align: top;">
       <p><img style="width: 175px; height: 250px;" src="imagenes/ect.jpg" alt="rakarrack Echotron"></p>
       </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Echotron<br>
-</p></td></tr></tbody>
+      <p>Echotron</p>
+      <p>Multi-tap delay with virtually unlimited taps (limited to 127,
+but if more than that is desired, use Reverbtron).&nbsp; In the most
+simple case, assign the timing and spacing of delay taps in a simple
+text file, then load as a custom "user" file.&nbsp; Tempo is normalized
+to 1 measure = 1 Second at 60 beats per minute.&nbsp; Simply think of a
+"1.0" in the time column of the text file as "one measure".&nbsp; For
+example, if you want 8th note echoes at Tempo, assign delays in
+multiples of 0.125.&nbsp; Potential musical subdivisions are limited
+only by your creativity and ability to do fractional mathematics as
+pertains to musical rhythm and timing.&nbsp; If you don't like math,
+but you like to experiment, then simply try a bunch of numbers less
+than 6 and see what happens.&nbsp; Maybe someday we will make a GUI
+editor to generate the text files</p>
+<p>A more advanced feature of Echotron is the assignment of filters in
+each delay line tap.&nbsp; In the text file, you can configure a
+state-variable filter with center frequency, resonance, and
+individually mix the 3 bands, as with MuTroMojo.&nbsp; Up to 8 filters
+may be configured in the first 8 lines of the file.</p>
+<p>You can assign left/right panning in the text file to create interesting rotational
+patterns.</p>
+<p>There is a maximum delay time of 6 seconds, but there is no minimum
+delay time; for example, a delay time of zero is perfectly acceptable
+if using the filters to create a phaser or wah wah (be careful with the
+feedback parameter).&nbsp; Other small delay times are possible for
+creating chorus and flanger effects.&nbsp; You may also set the delay
+times the same for multiple taps if you wish to create a comb filter
+with the state variable filter, or even an 8-band equalizer is possible.</p>
+<p>From the GUI, you can enable/disable the filters, enable/disable filter
+modulation, enable/disable delay line modulation, and all is
+synchronized to Tempo.&nbsp; You may also limit the number of Taps
+processed from the file.</p>
+<p>This effect is the swiss army tool for stereo ping-pong and rotational
+delays, flangers, phasers (thanks to state variable filter) and even
+stereo spatialization techniques.&nbsp; Hopefully we have done a good
+job demonstrating the most noteworthy possibilities in the default
+files installed with Rakarrack.</p>
+<p>Here is a description of the parameters:</p>
+<p><b>Wet/Dry</b>: Mix unprocessed signal with processed output.</p>
+<p><b>Pan</b>: Pan processed output to left or right channel.</p>
+<p><b>Tempo</b>: Beats per minute. Synchronizes with master TapTempo.</p>
+<p><b>Damp</b>: High frequency damping in the feedback loop.</p>
+<p><b>Fb</b>: Amount of Feedback (regeneration)</p>
+<p><b>L/R Cr.</b>: Amount of blending left
+&amp; right channels. Less than zero means subtract left from right
+&amp; right from left.&nbsp; Greater than zero means adding left to
+right, right to left.&nbsp; At +/-32 left &amp; right are mixed
+50/50.&nbsp; At +/-64, left/right are completely swapped.</p>
+<p><b>Width</b>: Width of the LFO.&nbsp; This adjusts the LFO amplitude.</p>
+<p><b>Depth</b>: Filter center
+frequency.&nbsp; "0" means it is centered on the frequency designated
+in the text file.&nbsp; &gt;0 Shifts the filter up in frequency, &lt;0
+shifts them down.&nbsp; This is a good parameter to assign to a MIDI
+expression pedal.</p>
+<p><b>St. df</b>: Sets stereo time difference between LFO right and left
+channels.</p>
+<p><b>LFO Type</b>: Select the modulation shape.</p>
+<p><b>AF</b>: Activate Filters.&nbsp; If the box is checked, filters defined in the
+text file will be applied to the delay taps.</p>
+<p><b>MF</b>: Modulate Filters.&nbsp; If the box is checked, modulation will be
+applied to the filters' cut-off frequencies.</p>
+<p><b>MD</b>: Modulate Delays.&nbsp; If the box is checked, the delay line will be
+modulated (like a chorus or flanger).</p>
+<p><b>#</b>: Sets the number of taps to process sequentially from the text
+file.&nbsp; For example, if you have a text file that defines 20
+echoes, you can limit it to use the first 2 or 3 or....whatever you
+want up to 127.</p>
+<p><b>File</b>: Select from several files supplied by the Rakarrack team.&nbsp; This
+will include a broad spectrum of uses so you can get started using
+Echotron without ever touching a text file.</p>
+<p><b>User</b>: So you want to do
+something you can't do with one of the default files.&nbsp; You edit
+your own text file with the desired delay times, levels, and filter
+pattern, browse to this file, select, and voila! Your Echotron has
+morphed into a completely unique effect.</p>
+<p><b>Text Files</b></p><p>
+</p><p>Below is an example text file with explanation of each field and any caveats you may need to
+know:</p><img style="width: 844px; height: 271px;" alt="rakarrack file .dly" src="imagenes/dlyfile.png"><br>
+      <br>
+<p><b>Pan</b>:&nbsp; Ranges from -1.0 to 1.0.&nbsp; less than 0.0 is pan left,
+greater is pan right.&nbsp; 0.0 puts the delay equally to left and
+right.&nbsp; Anything magnitude of +/-1.0 or greater will be treated as
+extreme left or right.</p>
+<p><b>Time</b>: This is the real time at 60 beats per minute. An
+easier way to think of this as a musician is increments of
+measures. "1.0" means 1 measure at the tempo selected in the
+effect GUI. The above indicates a quarter note in the first line,
+and a 1/2 note in the second line.</p>
+<p><b>Level</b>: how loud you want the echo to return.&nbsp; 1.0 returns it
+exactly as loud as it came it.&nbsp; More makes it come back louder,
+less makes it softer.&nbsp; You can use both positive and negative
+numbers.</p>
+<p><b>LP</b>: Mix State variable Low Pass Filter amount.</p>
+<p><b>BP</b>: Band pass filter amount.</p>
+<p><b>HP</b>: High Pass Filter amount.</p>
+<p>*For LP, BP, and HP when filters are activated, these also adjust the
+level.&nbsp; If you don't want the filter to have an effect at a
+certain time, then set LP, BP, and HP all to 1.0.</p>
+<p><b>Freq</b>: Filter center frequency.</p>
+<p><b>Q</b>: Filter resonance.</p>
+<p><b>Stages</b>: Number of filter stages.&nbsp; This is virtually
+unlimited, but you can crash your CPU with the processing requirement
+if you aren't careful.</p>
+<p>Caveats:</p>
+<p>Always separate the fields with a &lt;TAB&gt;, and not spaces.&nbsp; Echotron looks specifically for TAB
+separation.</p>
+<p>You can enter as many lines as you want, but only the first 127 will be used by the program.
+</p>
+<p>There are only 8 filters available.&nbsp; After the 8th line, filter parameters are ignored by the
+program.</p>
+<p>It is not wise to set Q values greater than 300, but there is no
+arbitrary limit.&nbsp; At some high range the filter is likely to go
+unstable.</p>
+<p>It is not wise to set Level greater in magnitude to +/-1.0.&nbsp; There
+is some normalization internal to Echotron, but it is best to think of
+1.0 as the volume knob's maximum range.</p>
+<p>It is best to copy one of the default files distributed with Rakarrack
+and edit it as desired.&nbsp; Always save with an extension .dly so you
+don't confuse it with other kinds of text files. </p>
+</td></tr></tbody>
 </table>
 <p><a href="#top">Contents</a></p>
 
