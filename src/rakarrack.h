@@ -3320,6 +3320,11 @@ private:
   void cb_INSTATE_i(Fl_Check_Button*, void*);
   static void cb_INSTATE(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *Filter_DC;
+private:
+  void cb_Filter_DC_i(Fl_Check_Button*, void*);
+  static void cb_Filter_DC(Fl_Check_Button*, void*);
+public:
   Fl_Check_Button *Pre_Serve;
 private:
   void cb_Pre_Serve_i(Fl_Check_Button*, void*);

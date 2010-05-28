@@ -6995,6 +6995,13 @@ void RKRGUI::cb_INSTATE(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_INSTATE_i(o,v);
 }
 
+void RKRGUI::cb_Filter_DC_i(Fl_Check_Button* o, void*) {
+  rkr->DC_Offset=(int) o->value();
+}
+void RKRGUI::cb_Filter_DC(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Filter_DC_i(o,v);
+}
+
 void RKRGUI::cb_Pre_Serve_i(Fl_Check_Button* o, void*) {
   rkr->actuvol=(int) o->value();
 }
@@ -16375,21 +16382,28 @@ R average.");
           INSTATE->callback((Fl_Callback*)cb_INSTATE);
           INSTATE->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* INSTATE
-        { Pre_Serve = new Fl_Check_Button(259, 82, 21, 20, "Preserve Gain/Master when Preset change");
+        { Filter_DC = new Fl_Check_Button(135, 82, 23, 20, "Filter Input DC Offset");
+          Filter_DC->down_box(FL_DOWN_BOX);
+          Filter_DC->labelsize(11);
+          Filter_DC->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Filter_DC->callback((Fl_Callback*)cb_Filter_DC);
+          Filter_DC->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* Filter_DC
+        { Pre_Serve = new Fl_Check_Button(259, 106, 21, 20, "Preserve Gain/Master when Preset change");
           Pre_Serve->down_box(FL_DOWN_BOX);
           Pre_Serve->labelsize(11);
           Pre_Serve->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
           Pre_Serve->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Pre_Serve
-        { Update_TAP = new Fl_Check_Button(239, 105, 21, 20, "Update TapTempo when Preset change");
+        { Update_TAP = new Fl_Check_Button(239, 129, 21, 20, "Update TapTempo when Preset change");
           Update_TAP->down_box(FL_DOWN_BOX);
           Update_TAP->labelsize(11);
           Update_TAP->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Update_TAP->callback((Fl_Callback*)cb_Update_TAP);
           Update_TAP->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Update_TAP
-        { UPSAMPLE_C = new Fl_Check_Button(83, 129, 23, 20, "Upsampling");
+        { UPSAMPLE_C = new Fl_Check_Button(83, 153, 23, 20, "Upsampling");
           UPSAMPLE_C->down_box(FL_DOWN_BOX);
           UPSAMPLE_C->labelsize(11);
           UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16397,7 +16411,7 @@ R average.");
           UPSAMPLE_C->align(FL_ALIGN_LEFT);
           UPSAMPLE_C->when(FL_WHEN_CHANGED);
         } // Fl_Check_Button* UPSAMPLE_C
-        { Upr_Amo = new Fl_Choice(56, 153, 47, 18, "Amount");
+        { Upr_Amo = new Fl_Choice(56, 177, 47, 18, "Amount");
           Upr_Amo->down_box(FL_BORDER_BOX);
           Upr_Amo->labelsize(10);
           Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16406,7 +16420,7 @@ R average.");
           Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
           Upr_Amo->menu(menu_Upr_Amo);
         } // Fl_Choice* Upr_Amo
-        { Upr_Qual = new Fl_Choice(133, 180, 72, 18, "Up Sampling Quality     ");
+        { Upr_Qual = new Fl_Choice(133, 204, 72, 18, "Up Sampling Quality     ");
           Upr_Qual->down_box(FL_BORDER_BOX);
           Upr_Qual->labelsize(10);
           Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16415,7 +16429,7 @@ R average.");
           Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
           Upr_Qual->menu(menu_Upr_Qual);
         } // Fl_Choice* Upr_Qual
-        { Fl_Choice* o = Downr_Qual = new Fl_Choice(132, 204, 73, 18, "Down Sampling Quality");
+        { Fl_Choice* o = Downr_Qual = new Fl_Choice(132, 228, 73, 18, "Down Sampling Quality");
           Downr_Qual->down_box(FL_BORDER_BOX);
           Downr_Qual->labelsize(10);
           Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16424,7 +16438,7 @@ R average.");
           Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Downr_Qual
-        { L_SIZE = new Fl_Counter(133, 231, 47, 18, "Looper Size Seconds     ");
+        { L_SIZE = new Fl_Counter(133, 255, 47, 18, "Looper Size Seconds     ");
           L_SIZE->type(1);
           L_SIZE->labelsize(10);
           L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16437,7 +16451,7 @@ R average.");
           L_SIZE->align(FL_ALIGN_LEFT);
           L_SIZE->when(FL_WHEN_RELEASE);
         } // Fl_Counter* L_SIZE
-        { Har_Qual = new Fl_Choice(132, 257, 47, 18, "Harmonizer Quality      ");
+        { Har_Qual = new Fl_Choice(132, 281, 47, 18, "Harmonizer Quality      ");
           Har_Qual->down_box(FL_BORDER_BOX);
           Har_Qual->labelsize(10);
           Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16446,14 +16460,14 @@ R average.");
           Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
           Har_Qual->menu(menu_Har_Qual);
         } // Fl_Choice* Har_Qual
-        { FLPosition = new Fl_Check_Button(186, 281, 23, 20, "Limiter before Output Volume");
+        { FLPosition = new Fl_Check_Button(186, 305, 23, 20, "Limiter before Output Volume");
           FLPosition->down_box(FL_DOWN_BOX);
           FLPosition->labelsize(11);
           FLPosition->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           FLPosition->callback((Fl_Callback*)cb_FLPosition);
           FLPosition->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* FLPosition
-        { Har_Downsample = new Fl_Choice(145, 307, 70, 18, "Harmonizer Downsample ");
+        { Har_Downsample = new Fl_Choice(145, 331, 70, 18, "Harmonizer Downsample ");
           Har_Downsample->down_box(FL_BORDER_BOX);
           Har_Downsample->labelsize(10);
           Har_Downsample->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16462,7 +16476,7 @@ R average.");
           Har_Downsample->callback((Fl_Callback*)cb_Har_Downsample);
           Har_Downsample->menu(menu_Har_Downsample);
         } // Fl_Choice* Har_Downsample
-        { Fl_Choice* o = Har_Down_Qua = new Fl_Choice(250, 307, 72, 18, "Down");
+        { Fl_Choice* o = Har_Down_Qua = new Fl_Choice(250, 331, 72, 18, "Down");
           Har_Down_Qua->down_box(FL_BORDER_BOX);
           Har_Down_Qua->labelsize(10);
           Har_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16471,7 +16485,7 @@ R average.");
           Har_Down_Qua->callback((Fl_Callback*)cb_Har_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Har_Down_Qua
-        { Fl_Choice* o = Har_Up_Qua = new Fl_Choice(343, 307, 72, 18, "Up");
+        { Fl_Choice* o = Har_Up_Qua = new Fl_Choice(343, 331, 72, 18, "Up");
           Har_Up_Qua->down_box(FL_BORDER_BOX);
           Har_Up_Qua->labelsize(10);
           Har_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16480,7 +16494,7 @@ R average.");
           Har_Up_Qua->callback((Fl_Callback*)cb_Har_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Har_Up_Qua
-        { Fl_Choice* o = Rev_Downsample = new Fl_Choice(145, 330, 70, 18, "Reverbtron Downsample  ");
+        { Fl_Choice* o = Rev_Downsample = new Fl_Choice(145, 354, 70, 18, "Reverbtron Downsample  ");
           Rev_Downsample->down_box(FL_BORDER_BOX);
           Rev_Downsample->labelsize(10);
           Rev_Downsample->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16489,7 +16503,7 @@ R average.");
           Rev_Downsample->callback((Fl_Callback*)cb_Rev_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Rev_Downsample
-        { Fl_Choice* o = Rev_Down_Qua = new Fl_Choice(250, 330, 72, 18, "Down");
+        { Fl_Choice* o = Rev_Down_Qua = new Fl_Choice(250, 354, 72, 18, "Down");
           Rev_Down_Qua->down_box(FL_BORDER_BOX);
           Rev_Down_Qua->labelsize(10);
           Rev_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16498,7 +16512,7 @@ R average.");
           Rev_Down_Qua->callback((Fl_Callback*)cb_Rev_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Rev_Down_Qua
-        { Fl_Choice* o = Rev_Up_Qua = new Fl_Choice(343, 330, 72, 18, "Up");
+        { Fl_Choice* o = Rev_Up_Qua = new Fl_Choice(343, 354, 72, 18, "Up");
           Rev_Up_Qua->down_box(FL_BORDER_BOX);
           Rev_Up_Qua->labelsize(10);
           Rev_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16507,7 +16521,7 @@ R average.");
           Rev_Up_Qua->callback((Fl_Callback*)cb_Rev_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Rev_Up_Qua
-        { Fl_Choice* o = Con_Downsample = new Fl_Choice(145, 353, 70, 18, "Convolotron Downsample");
+        { Fl_Choice* o = Con_Downsample = new Fl_Choice(145, 377, 70, 18, "Convolotron Downsample");
           Con_Downsample->down_box(FL_BORDER_BOX);
           Con_Downsample->labelsize(10);
           Con_Downsample->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16516,7 +16530,7 @@ R average.");
           Con_Downsample->callback((Fl_Callback*)cb_Con_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Con_Downsample
-        { Fl_Choice* o = Con_Down_Qua = new Fl_Choice(250, 353, 72, 18, "Down");
+        { Fl_Choice* o = Con_Down_Qua = new Fl_Choice(250, 377, 72, 18, "Down");
           Con_Down_Qua->down_box(FL_BORDER_BOX);
           Con_Down_Qua->labelsize(10);
           Con_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16525,7 +16539,7 @@ R average.");
           Con_Down_Qua->callback((Fl_Callback*)cb_Con_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Con_Down_Qua
-        { Fl_Choice* o = Con_Up_Qua = new Fl_Choice(343, 353, 72, 18, "Up");
+        { Fl_Choice* o = Con_Up_Qua = new Fl_Choice(343, 377, 72, 18, "Up");
           Con_Up_Qua->down_box(FL_BORDER_BOX);
           Con_Up_Qua->labelsize(10);
           Con_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16534,7 +16548,7 @@ R average.");
           Con_Up_Qua->callback((Fl_Callback*)cb_Con_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Con_Up_Qua
-        { Fl_Choice* o = Seq_Downsample = new Fl_Choice(145, 376, 70, 18, "Sequence Downsample    ");
+        { Fl_Choice* o = Seq_Downsample = new Fl_Choice(145, 400, 70, 18, "Sequence Downsample    ");
           Seq_Downsample->down_box(FL_BORDER_BOX);
           Seq_Downsample->labelsize(10);
           Seq_Downsample->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16543,7 +16557,7 @@ R average.");
           Seq_Downsample->callback((Fl_Callback*)cb_Seq_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Seq_Downsample
-        { Fl_Choice* o = Seq_Down_Qua = new Fl_Choice(250, 376, 72, 18, "Down");
+        { Fl_Choice* o = Seq_Down_Qua = new Fl_Choice(250, 400, 72, 18, "Down");
           Seq_Down_Qua->down_box(FL_BORDER_BOX);
           Seq_Down_Qua->labelsize(10);
           Seq_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16552,7 +16566,7 @@ R average.");
           Seq_Down_Qua->callback((Fl_Callback*)cb_Seq_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Seq_Down_Qua
-        { Fl_Choice* o = Seq_Up_Qua = new Fl_Choice(343, 376, 72, 18, "Up");
+        { Fl_Choice* o = Seq_Up_Qua = new Fl_Choice(343, 400, 72, 18, "Up");
           Seq_Up_Qua->down_box(FL_BORDER_BOX);
           Seq_Up_Qua->labelsize(10);
           Seq_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16561,7 +16575,7 @@ R average.");
           Seq_Up_Qua->callback((Fl_Callback*)cb_Seq_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Seq_Up_Qua
-        { Fl_Choice* o = Shi_Downsample = new Fl_Choice(145, 399, 70, 18, "Shifter Downsample         ");
+        { Fl_Choice* o = Shi_Downsample = new Fl_Choice(145, 423, 70, 18, "Shifter Downsample         ");
           Shi_Downsample->down_box(FL_BORDER_BOX);
           Shi_Downsample->labelsize(10);
           Shi_Downsample->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16570,7 +16584,7 @@ R average.");
           Shi_Downsample->callback((Fl_Callback*)cb_Shi_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Shi_Downsample
-        { Fl_Choice* o = Shi_Down_Qua = new Fl_Choice(250, 399, 72, 18, "Down");
+        { Fl_Choice* o = Shi_Down_Qua = new Fl_Choice(250, 423, 72, 18, "Down");
           Shi_Down_Qua->down_box(FL_BORDER_BOX);
           Shi_Down_Qua->labelsize(10);
           Shi_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16579,7 +16593,7 @@ R average.");
           Shi_Down_Qua->callback((Fl_Callback*)cb_Shi_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Shi_Down_Qua
-        { Fl_Choice* o = Shi_Up_Qua = new Fl_Choice(343, 399, 72, 18, "Up");
+        { Fl_Choice* o = Shi_Up_Qua = new Fl_Choice(343, 423, 72, 18, "Up");
           Shi_Up_Qua->down_box(FL_BORDER_BOX);
           Shi_Up_Qua->labelsize(10);
           Shi_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16588,7 +16602,7 @@ R average.");
           Shi_Up_Qua->callback((Fl_Callback*)cb_Shi_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Shi_Up_Qua
-        { Wave_Amo = new Fl_Choice(143, 428, 70, 18, "Waveshape Resampling   ");
+        { Wave_Amo = new Fl_Choice(143, 452, 70, 18, "Waveshape Resampling   ");
           Wave_Amo->down_box(FL_BORDER_BOX);
           Wave_Amo->labelsize(10);
           Wave_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16597,7 +16611,7 @@ R average.");
           Wave_Amo->callback((Fl_Callback*)cb_Wave_Amo);
           Wave_Amo->menu(menu_Wave_Amo);
         } // Fl_Choice* Wave_Amo
-        { Fl_Choice* o = Wave_Down_Qua = new Fl_Choice(250, 428, 72, 18, "Down");
+        { Fl_Choice* o = Wave_Down_Qua = new Fl_Choice(250, 452, 72, 18, "Down");
           Wave_Down_Qua->down_box(FL_BORDER_BOX);
           Wave_Down_Qua->labelsize(10);
           Wave_Down_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16606,7 +16620,7 @@ R average.");
           Wave_Down_Qua->callback((Fl_Callback*)cb_Wave_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Wave_Down_Qua
-        { Fl_Choice* o = Wave_Up_Qua = new Fl_Choice(343, 428, 72, 18, "Up");
+        { Fl_Choice* o = Wave_Up_Qua = new Fl_Choice(343, 452, 72, 18, "Up");
           Wave_Up_Qua->down_box(FL_BORDER_BOX);
           Wave_Up_Qua->labelsize(10);
           Wave_Up_Qua->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17528,6 +17542,8 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
+rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
+
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
 rakarrack.set(rkr->PrefNom("Limiter Position"),rkr->flpos);
 rakarrack.set(rkr->PrefNom("Harmonizer Downsample"),rkr->Har_Down);
@@ -18733,6 +18749,7 @@ BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
+Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
 Har_Downsample->value(rkr->Har_Down);
 Har_Down_Qua->value(rkr->Har_D_Q);

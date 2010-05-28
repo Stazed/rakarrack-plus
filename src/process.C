@@ -99,6 +99,7 @@ RKR::RKR ()
   J_PERIOD = jack_get_buffer_size (jackclient);
   
   rakarrack.get(PrefNom("Disable Warnings"),mess_dis,0);
+  rakarrack.get (PrefNom ("Filter DC Offset"), DC_Offset, 0); 
   rakarrack.get (PrefNom ("UpSampling"), upsample, 0); 
   rakarrack.get (PrefNom ("UpQuality"), UpQual, 4); 
   rakarrack.get (PrefNom ("DownQuality"), DownQual, 4); 
@@ -201,7 +202,9 @@ RKR::RKR ()
   auxdata = (float *) malloc (sizeof (float) * PERIOD);
   auxresampled = (float *) malloc (sizeof (float) * PERIOD);
 
-
+ 
+  DC_Offsetl = new AnalogFilter (1, 20, 1, 0);
+  DC_Offsetr = new AnalogFilter (1, 20, 1, 0);
   efx_Chorus = new Chorus (efxoutl, efxoutr);
   efx_Flanger = new Chorus (efxoutl, efxoutr);
   efx_Rev = new Reverb (efxoutl, efxoutr);
@@ -1098,6 +1101,12 @@ RKR::Control_Gain (float *origl, float *origr)
   float temp_sum;
 
   float tmp;
+
+
+
+
+
+  
   
   if(upsample)
   {
@@ -1106,6 +1115,14 @@ RKR::Control_Gain (float *origl, float *origr)
   }
   else
   if((checkforaux()) || (ACI_Bypass)) memcpy(auxresampled,auxdata,sizeof(float)*J_PERIOD); 
+
+  if(DC_Offset)
+  {
+   DC_Offsetl->filterout(efxoutl);
+   DC_Offsetr->filterout(efxoutr);
+  }
+
+
 
   for (i = 0; i <= PERIOD; i++)
     {

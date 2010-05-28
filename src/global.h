@@ -270,6 +270,8 @@ public:
   class Resample *U_Resample;
   class Resample *D_Resample;
   class Resample *A_Resample;
+  class AnalogFilter *DC_Offsetl;
+  class AnalogFilter *DC_Offsetr;
   class Looper *efx_Looper;
   class RyanWah *efx_RyanWah;
   class RBEcho *efx_RBEcho;
@@ -282,12 +284,15 @@ public:
   class StompBox *efx_StompBox;
   class Reverbtron *efx_Reverbtron;
   class Echotron *efx_Echotron;
+  
+
 
   jack_client_t *jackclient;
   jack_options_t options;
   jack_status_t status;
   char jackcliname[64];
 
+  int DC_Offset;
   int Bypass;
   int MIDIConverter_Bypass;
   int Tuner_Bypass;
