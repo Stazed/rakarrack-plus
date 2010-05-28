@@ -248,7 +248,7 @@ void Echotron::init_params()
 float hSR = fSAMPLE_RATE*0.5f;
 float tmp_time;
 float tpanl, tpanr;
-float len = 1.0f / (float)Plength;
+float len = 1.0f;
 
 for(int i=0; i<Plength; i++)
 {
