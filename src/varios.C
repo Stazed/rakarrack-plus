@@ -200,6 +200,8 @@ void
 RKR::Update_tempo()
 {
 
+if((Tap_TempoSet<1) || (Tap_TempoSet>600)) return;
+
 int Tap_TempoSetD=Tap_TempoSet;
 int Tap_TempoSetL=Tap_TempoSet;
 
