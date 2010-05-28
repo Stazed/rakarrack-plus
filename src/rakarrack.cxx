@@ -6087,6 +6087,7 @@ void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_echotron_preset[] = {
  {"Test", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Ambience", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

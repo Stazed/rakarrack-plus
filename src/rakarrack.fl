@@ -825,8 +825,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -6696,6 +6695,10 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
             label Test
             xywh {87 87 36 21} labelsize 10
           }
+          MenuItem {} {
+            label Ambience selected
+            xywh {0 0 36 21} labelsize 10
+          }
         }
         Fl_Value_Slider echotron_WD {
           label {Wet/Dry}
@@ -10260,8 +10263,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {selected
-    }
+Font_Bro->value(rkr->font+1);} {}
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
