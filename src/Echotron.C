@@ -161,8 +161,8 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
 
       lfeedback =  (lrcross*ryn + ilrcross*lyn) * lpanning;
       rfeedback = (lrcross*lyn + ilrcross*ryn) * rpanning;
-      efxoutl[i] = lfeedback *.5f;
-      efxoutr[i] = rfeedback *.5f;       
+      efxoutl[i] = lfeedback;
+      efxoutr[i] = rfeedback;       
       lfeedback *= fb;
       rfeedback *= fb;      
 
@@ -359,7 +359,7 @@ Echotron::setpreset (int npreset)
     //Test
     {64, 0, 1, 4, 0, 60, 0, 64, 0, 0, 0, 64, 0, 0, 0, 0},
     //Ambience
-    {96, 64, 64, 4, 0, 180, 64, 64, 0, 127, -24, 64, 1, 0, 0, 0}
+    {96, 64, 16, 4, 0, 180, 50, 64, 0, 96, -4, 64, 1, 0, 0, 0}
   };
 
   for (int n = 0; n < PRESET_SIZE; n++)

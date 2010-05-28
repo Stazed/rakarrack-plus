@@ -168,8 +168,8 @@ HarmEnhancer::calcula_mag (float *Rmag)
 //  };
 
   float mag[HARMONICS] =
-    { 0.0f, Rmag[0], 0.0f, Rmag[2], 0.0f, Rmag[4], 0.0f,
-    Rmag[6], 0.0f, Rmag[8], 0.0f
+    { 0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
+    Rmag[6], Rmag[7], Rmag[8], Rmag[9]
   };
 
 
@@ -246,8 +246,8 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
     for (i=0; i<PERIOD; i++)
     {
-      smpsl[i] =(smpsl[i]+inputl[i]*vol)*.5f;
-      smpsr[i] =(smpsr[i]+inputr[i]*vol)*.5f;
+      smpsl[i] =(smpsl[i]+inputl[i]*vol);
+      smpsr[i] =(smpsr[i]+inputr[i]*vol);
     }
     
 }
