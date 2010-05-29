@@ -289,7 +289,7 @@ int count = 0;
       }
       else fFreq[count]=tFreq;       
       
-      if((tQ <0.0) || (tQ>60.0f)) 
+      if((tQ <0.0) || (tQ>300.0f)) 
       {
       error_num=12;
       break;
