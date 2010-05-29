@@ -206,6 +206,15 @@ Echotron::setpanning (int value)
 int
 Echotron::setfile(int value)
 {
+float tPan=0.0f;
+float tTime=0.0f;
+float tLevel=0.0f;
+float tLP=0.0f;
+float tBP=0.0f;
+float tHP=0.0f;
+float tFreq=20.0f;
+float tQ=1.0f;
+int tiStages;
 
 FILE *fs;
 
@@ -229,8 +238,72 @@ int count = 0;
 
     while ((fgets(wbuf,sizeof wbuf,fs) != NULL) && (count<ECHOTRON_F_SIZE))
     {  
-     sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",&fPan[count], &fTime[count], &fLevel[count],
-      &fLP[count],  &fBP[count],  &fHP[count],  &fFreq[count],  &fQ[count],  &iStages[count]);
+     if(wbuf[0] != 10) continue;  // Check Carriage Return
+     sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",&tPan, &tTime, &tLevel,
+      &tLP,  &tBP,  &tHP,  &tFreq,  &tQ,  &tiStages);
+
+      if((tPan<-1.0f) || (tPan>1.0f)) 
+      {
+      error_num=5;
+      continue;
+      }
+       else fPan[count]=tPan;
+      if((tTime <0.0) || (tTime>6.0f)) 
+      {
+      error_num=6;
+      continue;
+      }
+      else fTime[count]=tTime;       
+     
+      if((tLevel <0.0) || (tLevel>1.0f)) 
+      {
+      error_num=7;
+      continue;
+      }
+      else fLevel[count]=tLevel;       
+     
+      if((tLP <0.0) || (tLP>1.0f)) 
+      {
+      error_num=8;
+      continue;
+      }
+      else fLP[count]=tLP;       
+     
+      if((tBP<0.0) || (tBP>1.0f)) 
+      {
+      error_num=9;
+      continue;
+      }
+      else fBP[count]=tBP;       
+     
+      if((tHP <0.0) || (tHP>1.0f)) 
+      {
+      error_num=10;
+      continue;
+      }
+      else fHP[count]=tHP;       
+     
+      if((tFreq <20.0) || (tFreq>26000.0f)) 
+      {
+      error_num=11;
+      continue;
+      }
+      else fFreq[count]=tFreq;       
+      
+      if((tQ <0.0) || (tQ>60.0f)) 
+      {
+      error_num=12;
+      continue;
+      }
+      else fQ[count]=tQ;       
+      
+      if((tiStages<1) || (tiStages>MAX_FILTER_STAGES)) 
+      {
+      error_num=13;
+      continue;
+      }
+      else iStages[count]=tiStages;       
+           
      memset(wbuf,0,sizeof(wbuf));
     count++;
     }

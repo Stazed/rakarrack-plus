@@ -72,6 +72,34 @@ RKR::Error_Handle(int num)
     case 4:
      sprintf(error_msg,"%s","Echotron is unable to open the .dly file");
      break;
+    case 5:
+     sprintf(error_msg,"%s","Some Pan parameter is bad in the dly file");
+     break;
+    case 6:
+     sprintf(error_msg,"%s","Some Time parameter is bad in the dly file");
+     break;
+    case 7:
+     sprintf(error_msg,"%s","Some Level parameter is bad in the dly file");
+     break;
+    case 8:
+     sprintf(error_msg,"%s","Some LP parameter is bad in the dly file");
+     break;
+    case 9:
+     sprintf(error_msg,"%s","Some BP parameter is bad in the dly file");
+     break;
+    case 10:
+     sprintf(error_msg,"%s","Some HP parameter is bad in the dly file");
+     break;
+    case 11:
+     sprintf(error_msg,"%s","Some Freq parameter is bad in the dly file");
+     break;
+    case 12:
+     sprintf(error_msg,"%s","Some Q parameter bad in the dly file");
+     break;
+    case 13:
+     sprintf(error_msg,"%s","Some Stages parameter bad in the dly file");
+     break;
+    
 
   }
   
