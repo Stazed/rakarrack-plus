@@ -12691,21 +12691,10 @@ if (aux_vulevel < threshold) tmp=0.0;
 
 if(tmp>1.0) tmp= 1.0f;
 
-if(rkr->Aux_Maximum >= rkr->Aux_Minimum)
-{
  amax = rkr->Aux_Maximum;
  amin = rkr->Aux_Minimum;
-}
-else
-{
- amax = rkr->Aux_Minimum;
- amin = rkr->Aux_Maximum;
-}
-
-
 
 value = amin + lrintf((float)(amax - amin)* tmp);
-
 
 if(value != rkr->last_auxvalue)
 {
