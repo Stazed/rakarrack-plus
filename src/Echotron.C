@@ -223,13 +223,11 @@ char wbuf[128];
 if(!Puser)
 {
 Filenum = value;
-
 memset(Filename,0,sizeof(Filename));
 sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
 }
 
 if ((fs = fopen (Filename, "r")) == NULL) return(0);
-
 memset(wbuf,0,sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs); //Read Header
 memset(wbuf,0,sizeof(wbuf));
@@ -238,73 +236,75 @@ int count = 0;
 
     while ((fgets(wbuf,sizeof wbuf,fs) != NULL) && (count<ECHOTRON_F_SIZE))
     {  
-     if(wbuf[0] != 10) continue;  // Check Carriage Return
-     sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",&tPan, &tTime, &tLevel,
+     if(wbuf[0]==10) break;  // Check Carriage Return
+     sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d",&tPan, &tTime, &tLevel,
       &tLP,  &tBP,  &tHP,  &tFreq,  &tQ,  &tiStages);
-
+      
       if((tPan<-1.0f) || (tPan>1.0f)) 
       {
       error_num=5;
-      continue;
+      break;
       }
-       else fPan[count]=tPan;
+      else fPan[count]=tPan;
+      
       if((tTime <0.0) || (tTime>6.0f)) 
       {
       error_num=6;
-      continue;
+      break;
       }
       else fTime[count]=tTime;       
      
       if((tLevel <0.0) || (tLevel>1.0f)) 
       {
       error_num=7;
-      continue;
+      break;
       }
       else fLevel[count]=tLevel;       
      
-      if((tLP <0.0) || (tLP>1.0f)) 
+      if((tLP <-2.0f) || (tLP>2.0f)) 
       {
       error_num=8;
-      continue;
+      break;
       }
       else fLP[count]=tLP;       
      
-      if((tBP<0.0) || (tBP>1.0f)) 
+      if((tBP<-2.0f) || (tBP>2.0f)) 
       {
       error_num=9;
-      continue;
+      break;
       }
       else fBP[count]=tBP;       
      
-      if((tHP <0.0) || (tHP>1.0f)) 
+      if((tHP<-2.0f) || (tHP>2.0f)) 
       {
       error_num=10;
-      continue;
+      break;
       }
       else fHP[count]=tHP;       
-     
-      if((tFreq <20.0) || (tFreq>26000.0f)) 
+
+      if((tFreq <20.0f) || (tFreq>26000.0f)) 
       {
       error_num=11;
-      continue;
+      break;
       }
       else fFreq[count]=tFreq;       
       
       if((tQ <0.0) || (tQ>60.0f)) 
       {
       error_num=12;
-      continue;
+      break;
       }
       else fQ[count]=tQ;       
       
       if((tiStages<1) || (tiStages>MAX_FILTER_STAGES)) 
       {
       error_num=13;
-      continue;
+      break;
       }
       else iStages[count]=tiStages;       
-           
-     memset(wbuf,0,sizeof(wbuf));
+
+
+    memset(wbuf,0,sizeof(wbuf));
     count++;
     }
     fclose(fs);  
