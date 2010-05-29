@@ -254,7 +254,7 @@ int count = 0;
       }
       else fTime[count]=tTime;       
      
-      if((tLevel <0.0) || (tLevel>1.0f)) 
+      if((tLevel <-2.0) || (tLevel>2.0f)) 
       {
       error_num=7;
       break;
