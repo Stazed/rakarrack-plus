@@ -180,7 +180,7 @@ double latency= 0.04;
 gettimeofday(&timeA, NULL);
 
 double Aseconds =  ((double) timeA.tv_sec + (double)timeA.tv_usec * 0.000001);
-if(Tap_Selection==0) Aseconds -= latency;
+if(Tap_Selection==0) Aseconds += latency;
 double timediff = Aseconds - Tap_timeB;
 
 
