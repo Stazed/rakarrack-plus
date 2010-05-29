@@ -67,6 +67,7 @@ private:
 
   //User input parameters
   EffectLFO lfo;  
+  EffectLFO dlfo;  
   int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
   int Plrcross;	// L/R Mixing  // 
@@ -88,7 +89,7 @@ private:
   int maxx_size;
 
   
-  //arrays of parameters:
+  //arrays of parameters from text file:
 float fPan[ECHOTRON_F_SIZE];  //1+Pan from text file
 float fTime[ECHOTRON_F_SIZE];
 float fLevel[ECHOTRON_F_SIZE];
@@ -98,11 +99,15 @@ float fHP[ECHOTRON_MAXFILTERS];
 float fFreq[ECHOTRON_MAXFILTERS];
 float fQ[ECHOTRON_MAXFILTERS];
 int iStages[ECHOTRON_MAXFILTERS];
+float subdiv_dmod;
+float subdiv_fmod;
 
 int rtime[ECHOTRON_F_SIZE];
 int ltime[ECHOTRON_F_SIZE];
 float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
+
+//end text configurable parameters
 
 float ldmod, rdmod, oldldmod, oldrdmod, interpl, interpr;
 float dlyrange;

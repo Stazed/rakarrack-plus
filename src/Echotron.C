@@ -44,6 +44,8 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   fb = 0.0f;
   lfeedback = 0.0f;
   rfeedback = 0.0f;
+  subdiv_dmod = 1.0f;
+  subdiv_fmod = 1.0f;
 
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
 
@@ -138,9 +140,18 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
       rxindex = offset + rtime[k] + intmodr;
       if(lxindex>=maxx_size) lxindex -= maxx_size;
       if(rxindex>=maxx_size) rxindex -= maxx_size;
-      lyn += filterbank[j].l->filterout_s(lxn[lxindex]) * ldata[k];		//filter each tap
+      if((iStages[j]>=0)&&(j<ECHOTRON_MAXFILTERS)) 
+      {
+      lyn += filterbank[j].l->filterout_s(lxn[lxindex]) * ldata[k];		//filter each tap specified
       ryn += filterbank[j].r->filterout_s(rxn[rxindex]) * rdata[k];
-      if (++j>ECHOTRON_MAXFILTERS) j=0;
+      j++;
+      }
+      else
+      {
+      lyn += lxn[lxindex] * ldata[k];		
+      ryn += rxn[rxindex] * rdata[k];      
+      }
+
       }
 
       }
@@ -229,7 +240,13 @@ sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
 
 if ((fs = fopen (Filename, "r")) == NULL) return(0);
 memset(wbuf,0,sizeof(wbuf));
-fgets(wbuf,sizeof wbuf,fs); //Read Header
+fgets(wbuf,sizeof wbuf,fs); //Eat Header 1
+
+memset(wbuf,0,sizeof(wbuf)); //get rid of garbage from header
+fgets(wbuf,sizeof wbuf,fs);
+sscanf(wbuf,"%f\t%f",&subdiv_fmod,&subdiv_dmod); //Second line has tempo subdivision
+
+fgets(wbuf,sizeof wbuf,fs); //Eat Main Parameter Header...no memset because I don't care about wbuf
 memset(wbuf,0,sizeof(wbuf));
 
 int count = 0;
@@ -247,14 +264,14 @@ int count = 0;
       }
       else fPan[count]=tPan;
       
-      if((tTime <0.0) || (tTime>6.0f)) 
+      if((tTime <-6.0) || (tTime>6.0f)) 
       {
       error_num=6;
       break;
       }
-      else fTime[count]=tTime;       
+      else fTime[count]=fabs(tTime);       
      
-      if((tLevel <-2.0) || (tLevel>2.0f)) 
+      if((tLevel <-2.0f) || (tLevel>2.0f)) 
       {
       error_num=7;
       break;
@@ -296,12 +313,12 @@ int count = 0;
       }
       else fQ[count]=tQ;       
       
-      if((tiStages<1) || (tiStages>MAX_FILTER_STAGES)) 
+      if((tiStages<0) || (tiStages>MAX_FILTER_STAGES)) 
       {
       error_num=13;
       break;
       }
-      else iStages[count]=tiStages-1;       
+      else iStages[count]=tiStages-1;     //check in main loop if <0, then skip filter  
 
 
     memset(wbuf,0,sizeof(wbuf));
@@ -322,7 +339,11 @@ float hSR = fSAMPLE_RATE*0.5f;
 float tmp_time;
 float tpanl, tpanr;
 float len = 1.0f;
+int tfcnt = 0;
 
+      lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
+      dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
+      
 for(int i=0; i<Plength; i++)
 {
 tmp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
@@ -342,9 +363,8 @@ tpanl = 1.1f*tpanl;
 ldata[i]=fLevel[i]*tpanl;
 rdata[i]=fLevel[i]*tpanr;
 
-if(i<ECHOTRON_MAXFILTERS)
+if((tfcnt<ECHOTRON_MAXFILTERS)&&(iStages[i]>=0))
 {
-
  int Freq=fFreq[i]*powf(2.0f,depth*4.5f);
  if (Freq<20.0) Freq=20.0f;
  if (Freq>hSR) Freq=hSR;
@@ -353,7 +373,8 @@ if(i<ECHOTRON_MAXFILTERS)
  filterbank[i].l->setstages(iStages[i]);
  filterbank[i].r->setstages(iStages[i]);
  filterbank[i].l->setmix (1, fLP[i] , fBP[i], fHP[i]);
- filterbank[i].r->setmix (1, fLP[i] , fBP[i], fHP[i]);      
+ filterbank[i].r->setmix (1, fLP[i] , fBP[i], fHP[i]); 
+ tfcnt++;     
 }
 }
 
@@ -369,11 +390,11 @@ rdata[i] *=len;
 void Echotron::modulate_delay()
 {
 
-float lfmod, rfmod, lfol, lfor;
+float lfmod, rfmod, lfol, lfor, dlfol, dlfor;
 float fperiod = 1.0f/((float) PERIOD);
 
   lfo.effectlfoout (&lfol, &lfor);
-
+  dlfo.effectlfoout (&dlfol, &dlfor);
 if(Pmodfilts)
 {  
   lfmod = powf(2.0f,(lfol*width + 0.25f + depth)*4.5f);
@@ -392,8 +413,8 @@ if(Pmoddly)
 {
 oldldmod = ldmod;
 oldrdmod = rdmod;
-ldmod = width*lfol;
-rdmod = width*lfor;
+ldmod = width*dlfol;
+rdmod = width*dlfor;
 
 ldmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*ldmod);
 rdmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*rdmod);
@@ -474,7 +495,8 @@ Echotron::changepar (int npar, int value)
     case 5:
       Ptempo = value;
       tempo_coeff = 60.0f / ((float)Ptempo);
-      lfo.Pfreq = Ptempo;
+      lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
+      dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
       lfo.updateparams ();      
       init_params();
       break;
@@ -491,7 +513,9 @@ Echotron::changepar (int npar, int value)
       break;
     case 9:
       lfo.Pstereo = value;
+      dlfo.Pstereo = value;
       lfo.updateparams ();
+      dlfo.updateparams ();
       break;
     case 10:
       Pfb = value;
@@ -510,6 +534,8 @@ Echotron::changepar (int npar, int value)
       //LFO Type      
       lfo.PLFOtype = value;
       lfo.updateparams ();
+      dlfo.PLFOtype = value;
+      dlfo.updateparams ();
       break;
     case 15:
       Pfilters = value;//Pfilters
