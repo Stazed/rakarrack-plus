@@ -2,7 +2,7 @@
 version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {\#include "global.h"} {public
+decl {\#include "global.h"} {selected public
 } 
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public
@@ -6688,7 +6688,7 @@ echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           xywh {399 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6718,7 +6718,7 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
         }
         Fl_Value_Slider echotron_tempo {
           label Tempo
-          callback {rkr->efx_Echotron->changepar(5,(int)o->value());} selected
+          callback {rkr->efx_Echotron->changepar(5,(int)o->value());}
           xywh {372 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 60 textcolor 7
           class SliderW
         }
@@ -6820,6 +6820,22 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           }
           MenuItem {} {
             label {Short Delays}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Flange + Echo}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Comb
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label EchoFlange
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Filtered Echo}
             xywh {0 0 36 21} labelsize 10
           }
         }
