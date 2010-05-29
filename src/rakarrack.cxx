@@ -6088,6 +6088,7 @@ void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
 Fl_Menu_Item RKRGUI::menu_echotron_preset[] = {
  {"Test", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Ambience", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Arranjer", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -6221,6 +6222,7 @@ void RKRGUI::cb_echotron_fnum(Fl_Choice* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_echotron_fnum[] = {
  {"Test", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Short Delays", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
