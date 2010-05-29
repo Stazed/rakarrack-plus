@@ -301,7 +301,7 @@ int count = 0;
       error_num=13;
       break;
       }
-      else iStages[count]=tiStages;       
+      else iStages[count]=tiStages-1;       
 
 
     memset(wbuf,0,sizeof(wbuf));
