@@ -224,7 +224,7 @@ AC_SUBST(SAMPLERATE_CFLAG)
 AC_SUBST(SAMPLERATE_LIBS)
 
 
-if test "x$prefix" == "xNONE"; then
+if test "x$prefix" = "xNONE"; then
 prefix=/usr/local
 fi
 
