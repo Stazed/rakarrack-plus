@@ -73,11 +73,11 @@ int i;
 
 for(i=0; i<62; i++)
 {
-  bzero(NewBank[i].cInput_Gain, sizeof(NewBank[i].cInput_Gain));
+  memset(NewBank[i].cInput_Gain, 0, sizeof(NewBank[i].cInput_Gain));
   sprintf(NewBank[i].cInput_Gain, "%f", NewBank[i].Input_Gain);
-  bzero(NewBank[i].cMaster_Volume, sizeof(NewBank[i].cMaster_Volume));
+  memset(NewBank[i].cMaster_Volume, 0, sizeof(NewBank[i].cMaster_Volume));
   sprintf(NewBank[i].cMaster_Volume, "%f", NewBank[i].Master_Volume);
-  bzero(NewBank[i].cBalance, sizeof(NewBank[i].cBalance));
+  memset(NewBank[i].cBalance, 0, sizeof(NewBank[i].cBalance));
   sprintf(NewBank[i].cBalance, "%f", NewBank[i].Balance);
 }  
 }
@@ -278,8 +278,8 @@ New_Bank ()
 
   for (i = 0; i < 62; i++)
     {
-      bzero (NewBank[i].Preset_Name, sizeof (NewBank[i].Preset_Name));
-      bzero (NewBank[i].Author, sizeof (NewBank[i].Author));
+      memset (NewBank[i].Preset_Name, 0, sizeof (NewBank[i].Preset_Name));
+      memset (NewBank[i].Author, 0, sizeof (NewBank[i].Author));
 
       NewBank[i].Input_Gain = .5f;
       NewBank[i].Master_Volume = .5f;
@@ -333,19 +333,19 @@ loadbank (char *filename)
 
 for(j=0;j<80;j++)
    {
-    bzero(buf,sizeof(buf));
+    memset(buf,0, sizeof(buf));
     fgets (buf, sizeof buf, fn);
     sscanf(buf,"%d\n",&k);
       if(k)
           { 
            for(i=0;i<128;i++)
              {
-              bzero(buf,sizeof(buf));
+              memset(buf,0, sizeof(buf));
               fgets (buf, sizeof buf, fn);
               sscanf(buf,"%d\n",&t);
               if(t)
                  { 
-                  bzero(buf,sizeof(buf));
+                  memset(buf,0, sizeof(buf));
                   fgets (buf, sizeof buf, fn);
                   sscanf(buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &PML[j].XUserMIDI[i][0], &PML[j].XUserMIDI[i][1], &PML[j].XUserMIDI[i][2], &PML[j].XUserMIDI[i][3], &PML[j].XUserMIDI[i][4],
@@ -521,8 +521,8 @@ main (int argc, char *argv[])
 
 printf("converting: %s\n\n",OldBankFile);
 
-bzero(NewFile1,sizeof(NewFile1));
-bzero(NewFile2,sizeof(NewFile2));
+memset(NewFile1,0, sizeof(NewFile1));
+memset(NewFile2,0, sizeof(NewFile2));
 
 strncpy(NewFile1, OldBankFile, strlen(OldBankFile)-5);
 strncpy(NewFile2, OldBankFile, strlen(OldBankFile)-5);

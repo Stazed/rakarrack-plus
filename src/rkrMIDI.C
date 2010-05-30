@@ -592,7 +592,7 @@ RKR::Conecta ()
 
   if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
     {
-      bzero (temp, sizeof (temp));
+      memset (temp, 0, sizeof (temp));
 
       while (fgets (temp, sizeof temp, fp) != NULL)
 	{
@@ -643,7 +643,7 @@ RKR::conectaaconnect ()
 
   if (MID != NULL)
     {
-      bzero (tempi, sizeof (tempi));
+      memset (tempi, 0, sizeof (tempi));
       sprintf (tempi, "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
       system (tempi);
       IsCoIn = 1;
@@ -659,7 +659,7 @@ RKR::disconectaaconnect ()
 
   if (MID != NULL)
     {
-      bzero (tempi, sizeof (tempi));
+      memset (tempi, 0, sizeof (tempi));
       sprintf (tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
       system (tempi);
       IsCoIn = 0;

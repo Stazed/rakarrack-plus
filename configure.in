@@ -79,7 +79,7 @@ AC_PROG_GCC_TRADITIONAL
 AC_FUNC_CLOSEDIR_VOID
 AC_FUNC_MALLOC
 AC_FUNC_SELECT_ARGTYPES
-AC_CHECK_FUNCS([bzero floor memset memmove pow select sqrt strdup strstr])
+AC_CHECK_FUNCS([floor memset memmove pow select sqrt strdup strstr])
 
 
 

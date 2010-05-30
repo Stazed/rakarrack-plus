@@ -52,11 +52,11 @@ RKR::Error_Handle(int num)
 {
   char meslabel[64];
   char error_msg[256];
-  bzero(meslabel,sizeof(meslabel));
+  memset(meslabel,0, sizeof(meslabel));
   sprintf(meslabel, "%s %s",jackcliname,VERSION);
   
   error_num = 0;
-  bzero(error_msg,sizeof(error_msg));
+  memset(error_msg,0,sizeof(error_msg));
   
   switch(num) 
   {
@@ -111,7 +111,7 @@ char *
 RKR::PrefNom (const char *dato)
 {
 
-  bzero (tmpprefname, sizeof (tmpprefname));
+  memset (tmpprefname, 0, sizeof (tmpprefname));
   sprintf (tmpprefname, "%s %s", jackcliname, dato);
   return (tmpprefname);
 
@@ -129,7 +129,7 @@ FILE *fp;
 
   if ((fp = fopen ("/proc/cpuinfo", "r")) != NULL)
     {
-      bzero (temp, sizeof (temp));
+      memset (temp, 0, sizeof (temp));
 
       while (fgets (temp, sizeof temp, fp) != NULL)
 	{

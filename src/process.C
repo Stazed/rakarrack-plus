@@ -150,7 +150,7 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("Auto Connect In Num"), cuan_ijack, 1);
 
   int i;
-  bzero (temp, sizeof (temp));
+  memset (temp, 0, sizeof (temp));
   char j_names[128];
 
   static const char *jack_names[] =
@@ -158,7 +158,7 @@ RKR::RKR ()
 
   for (i = 0; i < cuan_jack; i++)
     {
-      bzero (temp, sizeof (temp));
+      memset (temp, 0, sizeof (temp));
       sprintf (temp, "Jack Port %d", i + 1);
       if (i < 2)
  	strcpy (j_names, jack_names[i]);
@@ -168,14 +168,14 @@ RKR::RKR ()
 
     }
 
-  bzero(j_names,sizeof(j_names));
+  memset(j_names,0, sizeof(j_names));
 
   static const char *jack_inames[] =
     { "system:capture_1", "system:capture_2" };
 
   for (i = 0; i < cuan_ijack; i++)
     {
-      bzero (temp, sizeof (temp));
+      memset (temp, 0, sizeof (temp));
       sprintf (temp, "Jack Port In %d", i + 1);
       if (i < 1)
  	strcpy (j_names, jack_inames[i]);
@@ -786,7 +786,7 @@ efx_FLimiter->Compressor_Change_Preset(3);
 // Load Preset Bank File
 
   char temp[128];
-  bzero (temp, sizeof (temp));
+  memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
   rakarrack.get (PrefNom ("Bank Filename"), BankFilename, temp, 127);
 

@@ -141,7 +141,7 @@ if(!have_output)
 // open output and save headers
 
   if ((fn = fopen (Outputfile, "w")) == NULL)  return(0);
-  bzero (wbuf, sizeof (wbuf));
+  memset (wbuf, 0, sizeof (wbuf));
   sprintf(wbuf,"%s\n",Inputfile);    
   fputs (wbuf, fn);
 
@@ -221,17 +221,17 @@ sf_close(infile);
 
 
 
-bzero(wbuf,sizeof(wbuf));
+memset(wbuf,0,sizeof(wbuf));
 sprintf(wbuf,"%f,%f\n", compress, incr);
 fputs(wbuf,fn);
 
-bzero(wbuf,sizeof(wbuf));
+memset(wbuf,0,sizeof(wbuf));
 sprintf(wbuf,"%d\n", x);
 fputs(wbuf,fn);
 
 for(i=0;i<x;i++)
 { 
-  bzero(wbuf,sizeof(wbuf));
+  memset(wbuf,0,sizeof(wbuf));
   sprintf(wbuf, "%f,%f\n",index[i],data[i]);
   fputs(wbuf,fn);
 };

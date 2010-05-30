@@ -37,14 +37,14 @@ RKR::savefile (char *filename)
    return;
    }  
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   sprintf (buf, "%s\n", VERSION);
   fputs (buf, fn);
 
 
   //Autor
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   if (strlen (Author) != 0)
     sprintf (buf, "%s\n", Author);
   else
@@ -58,13 +58,13 @@ RKR::savefile (char *filename)
 
   //Preset Name
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fputs (Preset_Name, fn);
   fputs ("\n", fn);
 
 
   //General
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   sprintf (buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass_B);
   fputs (buf, fn);
 
@@ -72,7 +72,7 @@ RKR::savefile (char *filename)
   for (i = 0; i < 10; i++)
     {
       j = efx_order[i];
-      bzero (buf, sizeof (buf));
+      memset (buf, 0, sizeof (buf));
       switch (j)
 	{
 	case 8:
@@ -553,7 +553,7 @@ RKR::savefile (char *filename)
 
 
   // Order
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 	   efx_order[0], efx_order[1], efx_order[2], efx_order[3],
 	   efx_order[4], efx_order[5], efx_order[6], efx_order[7],
@@ -564,7 +564,7 @@ RKR::savefile (char *filename)
 
 for(i=0;i<128;i++)
        {
-         bzero(buf,sizeof(buf));
+         memset(buf,0, sizeof(buf));
          sprintf(buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            XUserMIDI[i][0], XUserMIDI[i][1], XUserMIDI[i][2], XUserMIDI[i][3], XUserMIDI[i][4],
            XUserMIDI[i][5], XUserMIDI[i][6], XUserMIDI[i][7], XUserMIDI[i][8], XUserMIDI[i][9],
@@ -608,12 +608,12 @@ RKR::loadfile (char *filename)
 
   for (i = 0; i < 14; i++)
     {
-      bzero (buf, sizeof (buf));
+      memset (buf, 0, sizeof (buf));
       fgets (buf, sizeof buf, fn);
     }
 
   //Order
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 	  &l[0], &l[1], &l[2], &l[3], &l[4], &l[5], &l[6], &l[7], &l[8],
@@ -626,14 +626,14 @@ RKR::loadfile (char *filename)
     return;
 
   //Version
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
 
 
   //Author
 
-  bzero (Author, 64);
-  bzero (buf, sizeof (buf));
+  memset (Author,0, 64);
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
 
   for (i = 0; i < 64; i++)
@@ -643,8 +643,8 @@ RKR::loadfile (char *filename)
 
   // Preset Name
 
-  bzero (Preset_Name, 64);
-  bzero (buf, sizeof (buf));
+  memset (Preset_Name, 0,64);
+  memset(buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
 
   for (i = 0; i < 64; i++)
@@ -653,7 +653,7 @@ RKR::loadfile (char *filename)
 
   //General
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
   if(Num_Version < 50)
   sscanf (buf, "%f,%f,%d\n", &in_vol, &out_vol, &Bypass_B);
@@ -672,7 +672,7 @@ RKR::loadfile (char *filename)
     {
       j = l[i];
 
-      bzero (buf, sizeof (buf));
+      memset (buf, 0, sizeof (buf));
       fgets (buf, sizeof buf, fn);
 
 
@@ -910,8 +910,8 @@ RKR::loadfile (char *filename)
 
 	case 29:
 	  //Convolotron
-	  bzero(efx_Convol->Filename,sizeof(efx_Convol->Filename));
-	  bzero(cfilename,sizeof(cfilename));
+	  memset(efx_Convol->Filename,0, sizeof(efx_Convol->Filename));
+	  memset(cfilename,0, sizeof(cfilename));
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
 		  &lv[30][0], &lv[30][1], &lv[30][2], &lv[30][3], &lv[30][4],
 		  &lv[30][5], &lv[30][6], &lv[30][7], &lv[30][8], &lv[30][9],
@@ -995,8 +995,8 @@ RKR::loadfile (char *filename)
 
 	case 40:
 	  //Reverbtron
-	  bzero(efx_Reverbtron->Filename,sizeof(efx_Reverbtron->Filename));
-	  bzero(cfilename,sizeof(cfilename));
+	  memset(efx_Reverbtron->Filename,0, sizeof(efx_Reverbtron->Filename));
+	  memset(cfilename,0, sizeof(cfilename));
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
 		  &lv[41][0], &lv[41][1], &lv[41][2], &lv[41][3], &lv[41][4],
 		  &lv[41][5], &lv[41][6], &lv[41][7], &lv[41][8], &lv[41][9],
@@ -1008,8 +1008,8 @@ RKR::loadfile (char *filename)
 
 	case 41:
 	  //Echotron
-	  bzero(efx_Echotron->Filename,sizeof(efx_Echotron->Filename));
-	  bzero(cfilename,sizeof(cfilename));
+	  memset(efx_Echotron->Filename,0, sizeof(efx_Echotron->Filename));
+	  memset(cfilename,0, sizeof(cfilename));
 	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
 		  &lv[42][0], &lv[42][1], &lv[42][2], &lv[42][3], &lv[42][4],
 		  &lv[42][5], &lv[42][6], &lv[42][7], &lv[42][8], &lv[42][9],
@@ -1023,7 +1023,7 @@ RKR::loadfile (char *filename)
     }
 
   //Order
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 	  &lv[10][0], &lv[10][1], &lv[10][2], &lv[10][3], &lv[10][4],
@@ -1033,7 +1033,7 @@ RKR::loadfile (char *filename)
 
 for(i=0;i<128;i++)
        {
-         bzero(buf,sizeof(buf));
+         memset(buf,0, sizeof(buf));
          fgets (buf, sizeof buf, fn);
 
          sscanf(buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
@@ -1271,7 +1271,7 @@ RKR::loadbank (char *filename)
   char meslabel[64];
   FILE *fn;
 
-  bzero(meslabel,sizeof(meslabel));
+  memset(meslabel,0, sizeof(meslabel));
   sprintf(meslabel, "%s %s",jackcliname,VERSION);
   
   
@@ -1963,11 +1963,11 @@ int i;
 
 for(i=0; i<62; i++)
 {
-  bzero(Bank[i].cInput_Gain, sizeof(Bank[i].cInput_Gain));
+  memset(Bank[i].cInput_Gain, 0, sizeof(Bank[i].cInput_Gain));
   sprintf(Bank[i].cInput_Gain, "%f", Bank[i].Input_Gain);
-  bzero(Bank[i].cMaster_Volume, sizeof(Bank[i].cMaster_Volume));
+  memset(Bank[i].cMaster_Volume, 0,sizeof(Bank[i].cMaster_Volume));
   sprintf(Bank[i].cMaster_Volume, "%f", Bank[i].Master_Volume);
-  bzero(Bank[i].cBalance, sizeof(Bank[i].cBalance));
+  memset(Bank[i].cBalance, 0, sizeof(Bank[i].cBalance));
   sprintf(Bank[i].cBalance, "%f", Bank[i].Balance);
 
 
@@ -2067,25 +2067,25 @@ RKR::saveskin (char *filename)
        }  
 
  
-       bzero (buf, sizeof (buf));
+       memset (buf, 0, sizeof (buf));
        sprintf (buf, "%d,%d\n", resolution,sh);
        fputs (buf, fn);
               
-       bzero (buf, sizeof (buf));
+       memset (buf, 0, sizeof (buf));
        sprintf (buf, "%d,%d,%d,%d\n", sback_color,sfore_color,slabel_color,sleds_color);
        fputs (buf, fn);
               
        
-       bzero (buf, sizeof (buf));
+       memset (buf, 0, sizeof (buf));
        sprintf (buf, "%s", BackgroundImage);
        fputs (buf, fn);
        fputs ("\n",fn);
 
-       bzero (buf, sizeof (buf));
+       memset(buf, 0, sizeof (buf));
        sprintf (buf, "%d,%d\n", relfontsize,font);
        fputs (buf, fn);
 
-       bzero (buf, sizeof (buf));
+       memset(buf, 0, sizeof (buf));
        sprintf (buf, "%d\n", sschema);
        fputs (buf, fn);
 
@@ -2105,25 +2105,25 @@ RKR::loadskin (char *filename)
   if ((fn = fopen (filename, "r")) == NULL)
     return;
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
   sscanf (buf, "%d,%d\n", &resolution, &sh);
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
   sscanf (buf, "%d,%d,%d,%d\n", &sback_color,&sfore_color,&slabel_color,&sleds_color);
 
-  bzero (BackgroundImage, sizeof(BackgroundImage));
-  bzero (buf, sizeof (buf));
+  memset (BackgroundImage, 0, sizeof(BackgroundImage));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
 
   for(i=0;i<256;i++) if(buf[i]>20) BackgroundImage[i]=buf[i]; 
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
   sscanf (buf, "%d,%d\n", &relfontsize,&font);
 
-  bzero (buf, sizeof (buf));
+  memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
   sscanf (buf, "%d\n", &sschema);
 
@@ -2173,7 +2173,7 @@ RKR::ConvertOldFile(char * filename)
 {
 
 char buff[255];
-bzero(buff,sizeof(buff));
+memset(buff,0,sizeof(buff));
 sprintf(buff,"rakconvert -c '%s'",filename);
 system(buff);
 
@@ -2183,7 +2183,7 @@ void
 RKR::ConvertReverbFile(char * filename)
 {
 char buff[255];
-bzero(buff,sizeof(buff));
+memset(buff,0, sizeof(buff));
 sprintf(buff,"rakverb -i '%s'",filename);
 printf("%s\n",buff);
 system(buff);

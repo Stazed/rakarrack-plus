@@ -256,7 +256,7 @@ memset(rbuf,0,sizeof(float) * maxx_size);
 if(!Puser)
 {
 Filenum = value;
-bzero(Filename,sizeof(Filename));
+memset(Filename,0, sizeof(Filename));
 sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
 }
 sfinfo.format = 0;

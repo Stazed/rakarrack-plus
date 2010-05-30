@@ -263,7 +263,7 @@ FILE *fs;
 if(!Puser)
 {
 Filenum = value;
-bzero(Filename,sizeof(Filename));
+memset(Filename,0, sizeof(Filename));
 sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
 }
 
@@ -275,23 +275,23 @@ memset(ftime, 0, sizeof(float)*2000);
 
 
 //Name
-bzero(wbuf,sizeof(wbuf));
+memset(wbuf,0, sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
 
 // Subsample Compresion Skip 
-bzero(wbuf,sizeof(wbuf));
+memset(wbuf,0, sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
 sscanf(wbuf,"%f,%f\n",&compresion,&quality);
 
 //Length
-bzero(wbuf,sizeof(wbuf));
+memset(wbuf,0,sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
 sscanf(wbuf, "%d\n", &data_length);
 if(data_length>2000) data_length = 2000;
 //Time Data
 for(i=0;i<data_length;i++)
 {
-bzero(wbuf,sizeof(wbuf));
+memset(wbuf,0, sizeof(wbuf));
 fgets(wbuf,sizeof wbuf,fs);
 sscanf(wbuf,"%f,%f\n",&ftime[i],&tdata[i]);
 }

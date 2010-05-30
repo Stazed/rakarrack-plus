@@ -28,7 +28,7 @@
 RecChord::RecChord ()
 {
 
-  bzero (Ch, sizeof (Ch));
+  memset (Ch, 0, sizeof (Ch));
 
 
   Ch[0][0] = 1;
@@ -225,7 +225,7 @@ RecChord::RecChord ()
 
 
 
-  bzero (ChN, sizeof (ChN));
+  memset (ChN, 0, sizeof (ChN));
 
   {
     static const char *stnom[] =
@@ -286,7 +286,7 @@ RecChord::RecChord ()
 
 
   IniciaChords ();
-  bzero (NombreAcorde, sizeof (NombreAcorde));
+  memset (NombreAcorde, 0, sizeof (NombreAcorde));
 }
 
 
@@ -299,7 +299,7 @@ void
 RecChord::cleanup ()
 {
   int i;
-  bzero (NombreAcorde, sizeof (NombreAcorde));
+  memset (NombreAcorde, 0, sizeof (NombreAcorde));
   for (i = 0; i < POLY; i++)
     {
       note_active[i] = 0;
@@ -322,14 +322,14 @@ RecChord::IniciaChords ()
   NumChord4 = 0;
   NumChord5 = 0;
 
-  bzero (Chord3, sizeof (Chord3));
-  bzero (Chord4, sizeof (Chord4));
-  bzero (Chord5, sizeof (Chord5));
+  memset (Chord3, 0, sizeof (Chord3));
+  memset (Chord4, 0, sizeof (Chord4));
+  memset (Chord5, 0, sizeof (Chord5));
 
   for (i = 0; i <= 33; i++)
     {
       notas = 1;
-      bzero (numno, sizeof (numno));
+      memset (numno, 0, sizeof (numno));
 
       for (j = 1; j <= 11; j++)
 	{
@@ -549,7 +549,7 @@ sigue:
 	      if (bass != fundi)
 		{
 
-		  bzero (AName, sizeof (AName));
+		  memset (AName, 0, sizeof (AName));
 		  sprintf (AName, "%s%s/%s", NC[fundi].Nom, Chord3[j].Nom,
 			   NCE[bass + plus (fundi)].Nom);
 		}
@@ -586,7 +586,7 @@ sigue:
 	      sprintf (AName, "%s%s", NC[fundi].Nom, Chord4[j].Nom);
 	      if (bass != fundi)
 		{
-		  bzero (AName, sizeof (AName));
+		  memset (AName, 0, sizeof (AName));
 		  sprintf (AName, "%s%s/%s", NC[fundi].Nom, Chord4[j].Nom,
 			   NCE[bass + plus (fundi)].Nom);
 		}
@@ -627,7 +627,7 @@ sigue:
 	      sprintf (AName, "%s%s", NC[fundi].Nom, Chord5[j].Nom);
 	      if (bass != fundi)
 		{
-		  bzero (AName, sizeof (AName));
+		  memset (AName, 0, sizeof (AName));
 		  sprintf (AName, "%s%s/%s", NC[fundi].Nom, Chord5[j].Nom,
 			   NCE[bass + plus (fundi)].Nom);
 		}

@@ -153,8 +153,8 @@ New_Bank ()
 
   for (i = 0; i < 62; i++)
     {
-      bzero (NewBank[i].Preset_Name, sizeof (NewBank[i].Preset_Name));
-      bzero (NewBank[i].Author, sizeof (NewBank[i].Author));
+      memset (NewBank[i].Preset_Name, 0, sizeof (NewBank[i].Preset_Name));
+      memset (NewBank[i].Author, 0, sizeof (NewBank[i].Author));
 
       NewBank[i].Input_Gain = .5f;
       NewBank[i].Master_Volume = .5f;
@@ -301,7 +301,7 @@ main (int argc, char *argv[])
 
 printf("converting: %s\n\n",OldBankFile);
 
-bzero(NewFile1,sizeof(NewFile1));
+memset(NewFile1,0,sizeof(NewFile1));
 
 strncpy(NewFile1, OldBankFile, strlen(OldBankFile)-5);
 sprintf(NewFile1, "%s_new.rkrb",NewFile1);
