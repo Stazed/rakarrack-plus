@@ -341,10 +341,14 @@ float tmp_time;
 float tpanl, tpanr;
 float len = 1.0f;
 int tfcnt = 0;
-initparams=0;
 
-      lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
-      dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
+initparams=0;
+depth = ((float) (Pdepth - 64))/64.0f;
+dlyrange = 0.008*powf(2.0f, 4.5f*depth);
+width = ((float) Pwidth)/127.0f;
+
+lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
+dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
       
 for(int i=0; i<Plength; i++)
 {
@@ -393,7 +397,7 @@ void Echotron::modulate_delay()
 {
 
 float lfmod, rfmod, lfol, lfor, dlfol, dlfor;
-float fperiod = 1.0f/((float) PERIOD);
+float fperiod = 1.0f/fPERIOD;
 
   lfo.effectlfoout (&lfol, &lfor);
   dlfo.effectlfoout (&dlfol, &dlfor);
@@ -477,13 +481,10 @@ Echotron::changepar (int npar, int value)
       break;
     case 1:
       Pdepth=value;
-      depth = ((float) (value - 64))/64.0f;
-      dlyrange = 0.008*powf(2.0f, 4.5f*depth);
       initparams=1;
       break;
     case 2:
       Pwidth=value;
-      width = ((float) value)/127.0f;
       initparams=1;
       break;
     case 3:

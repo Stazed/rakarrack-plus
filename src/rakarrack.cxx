@@ -15645,7 +15645,7 @@ R average.");
         echotron_width->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echotron_width->callback((Fl_Callback*)cb_echotron_width);
         echotron_width->align(FL_ALIGN_LEFT);
-        echotron_width->when(FL_WHEN_CHANGED);
+        echotron_width->when(FL_WHEN_RELEASE);
       } // SliderW* echotron_width
       { echotron_deep = new SliderW(372, 320, 100, 10, "Depth");
         echotron_deep->type(5);
@@ -15662,7 +15662,7 @@ R average.");
         echotron_deep->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echotron_deep->callback((Fl_Callback*)cb_echotron_deep);
         echotron_deep->align(FL_ALIGN_LEFT);
-        echotron_deep->when(FL_WHEN_CHANGED);
+        echotron_deep->when(FL_WHEN_RELEASE);
       } // SliderW* echotron_deep
       { echotron_stdf = new SliderW(372, 332, 100, 10, "St.df");
         echotron_stdf->type(5);
