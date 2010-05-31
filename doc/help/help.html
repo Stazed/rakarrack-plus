@@ -2568,11 +2568,14 @@ pertains to musical rhythm and timing.&nbsp; If you don't like math,
 but you like to experiment, then simply try a bunch of numbers less
 than 6 and see what happens.&nbsp; Maybe someday we will make a GUI
 editor to generate the text files</p>
-<p>A more advanced feature of Echotron is the assignment of filters in
-each delay line tap.&nbsp; In the text file, you can configure a
-state-variable filter with center frequency, resonance, and
-individually mix the 3 bands, as with MuTroMojo.&nbsp; Up to 8 filters
-may be configured in the first 8 lines of the file.</p>
+<p>A more advanced feature of Echotron is the assignment of filters in each 
+delay line tap.  In the text file, you can configure a state-variable 
+filter with center frequency, resonance, and individually mix the 3 
+bands, as with MuTroMojo.  Up to 8 filters may be configured in the text 
+file.  If you wish to bypass a filter in any line of the file, set 
+Stages to 0 (zero).  The first 8 occurrences of filters with stages 
+greater than 0 will be processed.  Any filter parameters defined after 
+the first 8 are ignored.</p>
 <p>You can assign left/right panning in the text file to create interesting rotational
 patterns.</p>
 <p>There is a maximum delay time of 6 seconds, but there is no minimum
@@ -2633,8 +2636,8 @@ morphed into a completely unique effect.</p>
 </p><p>Below is an example text file with explanation of each field and any caveats you may need to
 know:</p><img style="width: 844px; height: 271px;" alt="rakarrack file .dly" src="imagenes/dlyfile.png"><br>
       <br>
-<p><b>Filter</b>:&nbsp; </p>
-<p><b>Delay</b>:&nbsp; </p>
+<p><b>Filter</b>:&nbsp; This field multiplies the tempo for the filter LFO modulation. For example, if you are playing a song at 80 beats per minute, but you wish to make the LFO half as fast as the echoes, you enter a 0.5 in this field to adjust the filter LFO speed to 40 beats per minute.</p>
+<p><b>Delay</b>:&nbsp; This field multiplies tempo for the delay line modulation. Same concept as for filter, but this is the LFO applied to the delay line. Note       there is not a field for delay time subdivision.  This is because you define this by the times you put into the Time column, so such a field would be redundant.</p>
 <p><b>Pan</b>:&nbsp; Ranges from -1.0 to 1.0.&nbsp; less than 0.0 is pan left,
 greater is pan right.&nbsp; 0.0 puts the delay equally to left and
 right.&nbsp; Anything magnitude of +/-1.0 or greater will be treated as

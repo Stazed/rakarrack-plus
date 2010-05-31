@@ -31,7 +31,8 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
-
+ 
+  initparams=0;
   //default values
   Ppreset = 0;
   Pvolume = 50;
@@ -182,7 +183,7 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
      
     };
 
-
+     if(initparams) init_params();
 
 };
 
@@ -340,6 +341,7 @@ float tmp_time;
 float tpanl, tpanr;
 float len = 1.0f;
 int tfcnt = 0;
+initparams=0;
 
       lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
       dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
@@ -477,17 +479,17 @@ Echotron::changepar (int npar, int value)
       Pdepth=value;
       depth = ((float) (value - 64))/64.0f;
       dlyrange = 0.008*powf(2.0f, 4.5f*depth);
-      init_params();
+      initparams=1;
       break;
     case 2:
       Pwidth=value;
       width = ((float) value)/127.0f;
-      init_params();
+      initparams=1;
       break;
     case 3:
      Plength = value;
      if(Plength>127) Plength = 127;
-     init_params(); 
+     initparams=1;
      break;
     case 4:
       Puser = value;
@@ -498,7 +500,7 @@ Echotron::changepar (int npar, int value)
       lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
       dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
       lfo.updateparams ();      
-      init_params();
+      initparams=1;
       break;
     case 6:
       sethidamp (value);

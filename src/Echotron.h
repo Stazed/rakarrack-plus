@@ -109,6 +109,8 @@ float rdata[ECHOTRON_F_SIZE];
 
 //end text configurable parameters
 
+int initparams;
+
 float ldmod, rdmod, oldldmod, oldrdmod, interpl, interpr;
 float dlyrange;
 
