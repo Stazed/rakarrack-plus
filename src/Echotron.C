@@ -433,6 +433,13 @@ interpr = (rdmod - oldrdmod)*fperiod;
 
 
 void
+Echotron::setsubdiv(float value)
+{
+subdiv_fmod=value;
+initparams=1;
+}
+
+void
 Echotron::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
