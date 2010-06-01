@@ -29,7 +29,7 @@
 #include "EffectLFO.h"
 
 #define  ECHOTRON_F_SIZE   128       //Allow up to 150 points in the file
-#define  ECHOTRON_MAXFILTERS  8      //filters available
+#define  ECHOTRON_MAXFILTERS  32      //filters available
 
 
 class Echotron

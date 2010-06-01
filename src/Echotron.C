@@ -339,7 +339,6 @@ void Echotron::init_params()
 float hSR = fSAMPLE_RATE*0.5f;
 float tmp_time;
 float tpanl, tpanr;
-float len = 1.0f;
 int tfcnt = 0;
 
 initparams=0;
@@ -383,13 +382,6 @@ if((tfcnt<ECHOTRON_MAXFILTERS)&&(iStages[i]>=0))
  tfcnt++;     
 }
 }
-
-for(int i=0; i<Plength; i++)
-{
-ldata[i] *=len;
-rdata[i] *=len;
-}
-
 
 };
 
@@ -435,8 +427,8 @@ interpr = (rdmod - oldrdmod)*fperiod;
 void
 Echotron::setsubdiv(float value)
 {
-subdiv_fmod=value;
-initparams=1;
+//subdiv_fmod=value;
+//remove this function when you remove the function call from TapTempo
 }
 
 void
@@ -461,14 +453,18 @@ void
 Echotron::setpreset (int npreset)
 {
   const int PRESET_SIZE = 16;
-  const int NUM_PRESETS = 3;
+  const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Test
-    {64, 0, 1, 4, 0, 60, 0, 64, 0, 0, 0, 64, 0, 0, 0, 0},
+    //Summer
+    {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1},
     //Ambience
     {96, 64, 16, 4, 0, 180, 50, 64, 1, 96, -4, 64, 1, 0, 0, 0},
     //Arranjer
-    {64, 64, 10, 4, 0, 400, 32, 64, 1, 96, -8, 64, 1, 0, 0, 0}
+    {64, 64, 10, 4, 0, 400, 32, 64, 1, 96, -8, 64, 1, 0, 0, 0},
+    //Suction
+    {0, 47, 28, 8, 0, 92, 0, 64, 3, 32, 0, 64, 1, 1, 1, 1},
+    //SucFlange
+    {64, 36, 93, 8, 0, 81, 0, 64, 3, 32, 0, 64, 1, 0, 1, 1}
 
   };
 

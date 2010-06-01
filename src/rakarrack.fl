@@ -825,16 +825,18 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1367 30 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6655,7 +6657,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -6692,7 +6694,7 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           xywh {399 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Test
+            label Summer
             xywh {87 87 36 21} labelsize 10
           }
           MenuItem {} {
@@ -6702,6 +6704,14 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           MenuItem {} {
             label Arranjer
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Suction
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label SuctionFlange
+            xywh {20 20 36 21} labelsize 10
           }
         }
         Fl_Value_Slider echotron_WD {
@@ -6748,7 +6758,7 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
         }
         Fl_Value_Slider echotron_deep {
           label Depth
-          callback {rkr->efx_Echotron->changepar(1,((int)o->value()+64));} selected
+          callback {rkr->efx_Echotron->changepar(1,((int)o->value()+64));}
           xywh {372 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -6766,7 +6776,7 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
         }
         Fl_Choice echotron_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
+          callback {rkr->efx_Echotron->changepar(14,(int)o->value());}
           xywh {408 346 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
@@ -6811,11 +6821,11 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
         Fl_Choice echotron_fnum {
           label File
           user_data 12
-          callback {rkr->efx_Echotron->changepar(8,(int)o->value());}
+          callback {rkr->efx_Echotron->changepar(8,(int)o->value());} open
           xywh {408 379 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Test
+            label SwingPong selected
             xywh {64 64 36 21} labelsize 10
           }
           MenuItem {} {
