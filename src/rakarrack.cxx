@@ -6217,6 +6217,8 @@ void RKRGUI::cb_echotron_length(Fl_Counter* o, void* v) {
 
 void RKRGUI::cb_echotron_fnum_i(Fl_Choice* o, void*) {
   rkr->efx_Echotron->changepar(8,(int)o->value());
+echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));
 }
 void RKRGUI::cb_echotron_fnum(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_fnum_i(o,v);

@@ -365,11 +365,7 @@ switch(Tap_SetValue)
   if(Arpie_Bypass) efx_Arpie->changepar(2,Tap_TempoSetD);
   if(RBEcho_Bypass) efx_RBEcho->changepar(2,Tap_TempoSetD);
   if(Sequence_Bypass) efx_Sequence->changepar(9,Tap_TempoSetD);
-  if(Echotron_Bypass) 
-  {
-  efx_Echotron->changepar(5,Tap_TempoSetD);
-  efx_Echotron->setsubdiv(float((float)Tap_TempoSetL/(float)Tap_TempoSetD));
-  }
+  if(Echotron_Bypass)  efx_Echotron->changepar(5,Tap_TempoSetD);
   if(Echo_Bypass) 
    {
     efx_Echo->Tempo2Delay(Tap_TempoSetD);

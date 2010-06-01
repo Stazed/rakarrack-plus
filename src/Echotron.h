@@ -43,7 +43,6 @@ public:
   int getpar (int npar);
   void cleanup ();
   int setfile (int value);
-  void setsubdiv(float value);
   int Ppreset;
 
   float *efxoutl;

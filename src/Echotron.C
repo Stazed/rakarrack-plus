@@ -59,7 +59,7 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
 
    float center, qq;
-  for (int i = 0; i < 8; i++)
+  for (int i = 0; i < ECHOTRON_MAXFILTERS; i++)
     {
       center = 500;
       qq = 1.0f;
@@ -251,6 +251,9 @@ fgets(wbuf,sizeof wbuf,fs); //Eat Main Parameter Header...no memset because I do
 memset(wbuf,0,sizeof(wbuf));
 
 int count = 0;
+memset(iStages,0,sizeof(iStages));
+
+
 
     while ((fgets(wbuf,sizeof wbuf,fs) != NULL) && (count<ECHOTRON_F_SIZE))
     {  
@@ -423,13 +426,6 @@ interpr = (rdmod - oldrdmod)*fperiod;
 
 };
 
-
-void
-Echotron::setsubdiv(float value)
-{
-//subdiv_fmod=value;
-//remove this function when you remove the function call from TapTempo
-}
 
 void
 Echotron::sethidamp (int Phidamp)
