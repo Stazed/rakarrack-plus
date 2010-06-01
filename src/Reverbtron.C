@@ -79,7 +79,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS, int uq, int d
   U_Resample = new Resample(dq);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
   D_Resample = new Resample(uq);
 
-   setpreset (Ppreset);
+  setpreset (Ppreset);
   cleanup ();
 };
 
@@ -93,7 +93,9 @@ Reverbtron::~Reverbtron ()
 void
 Reverbtron::cleanup ()
 {
-memset(lxn,0,sizeof(float)*maxx_size);
+memset(lxn,0,sizeof(float)*(maxx_size+1));
+memset(hrtf,0,sizeof(float)*(hrtf_size+1));
+
 feedback = 0.0f;
 oldl = 0.0f;
 lpfl->cleanup ();
