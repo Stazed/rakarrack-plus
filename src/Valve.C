@@ -172,7 +172,8 @@ Valve::out (float * smpsl, float * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutl[i] == q) fx = 1.0f / dist;
-              else fx = efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
+              else fx = 0.5f + efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
+	      fx = 1.0f - 2.0f/(fx*fx + 1);
               otml = 0.999f * otml + fx - itml;
               itml = fx;
               efxoutl[i]= otml;
@@ -183,7 +184,8 @@ Valve::out (float * smpsl, float * smpsr)
            for (i = 0; i < PERIOD; i++) 
              {
                if (efxoutl[i] == q) fx = 1.0f / dist + q / (1.0f - powf(2,dist * q * LN2R));
-               else fx = (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
+               else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
+	       fx = 1.0f - 2.0f/(fx*fx + 1);
                otml = 0.999f * otml + fx - itml;
                itml = fx;
                efxoutl[i]= otml;
@@ -199,7 +201,8 @@ Valve::out (float * smpsl, float * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutr[i] == q) fx = 1.0f / dist;
-              else fx = efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
+              else fx = 0.5f + efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
+	      fx = 1.0f - 2.0f/(fx*fx + 1);
               otmr = 0.999f * otmr + fx - itmr;
               itmr = fx;
               efxoutr[i]= otmr;
@@ -210,7 +213,8 @@ Valve::out (float * smpsl, float * smpsr)
            for (i = 0; i < PERIOD; i++) 
              {
                if (efxoutr[i] == q) fx = 1.0f / dist + q / (1.0f - powf(2,dist * q * LN2R));
-               else fx = (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
+               else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
+	       fx = 1.0f - 2.0f/(fx*fx + 1);
                otmr = 0.999f * otmr + fx - itmr;
                itmr = fx;
                efxoutr[i]= otmr;
@@ -382,7 +386,7 @@ Valve::changepar (int npar, int value)
       break;
     case 10:
       Q_q = value;
-      q = (float)Q_q /127.0f - .999;
+      q = (float)Q_q /127.0f - 1.0001;
       factor = 1.0f - ((float)Q_q / 128.0f); 
       break;       
     case 11:
