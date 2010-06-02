@@ -2447,7 +2447,7 @@ void RKRGUI::cb_WhaWha_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_WhaWha_preset_i(Fl_Choice* o, void* v) {
   rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_WhaWha->setpreset((int) o->value());
+if((ud==0)||(ud==12))rkr->efx_WhaWha->setpreset((int) o->value()); 
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));

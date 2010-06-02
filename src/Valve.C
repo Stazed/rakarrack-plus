@@ -34,10 +34,10 @@ Valve::Valve (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  lpfl = new AnalogFilter (2, 22000, 1, 0);
-  lpfr = new AnalogFilter (2, 22000, 1, 0);
-  hpfl = new AnalogFilter (3, 20, 1, 0);
-  hpfr = new AnalogFilter (3, 20, 1, 0);
+  lpfl = new AnalogFilter (2, 22000.0f, 1.0f, 0);
+  lpfr = new AnalogFilter (2, 22000.0f, 1.0f, 0);
+  hpfl = new AnalogFilter (3, 20.0f, 1.0f, 0);
+  hpfr = new AnalogFilter (3, 20.0f, 1.0f, 0);
   harm = new HarmEnhancer (rm, 20.0f,20000.0f,1.0f);
 
 
@@ -61,7 +61,7 @@ Valve::Valve (float * efxoutl_, float * efxoutr_)
   atk = 1.0f - 40.0f/fSAMPLE_RATE;
 
   for(int i=0;i<10;i++) rm[i]=0.0;
-  rm[0]=1.0; rm[2]= -1.0; rm[4]=1.0; rm[6]=-1.0; rm[8]=1.0;
+  rm[0]=1.0f; rm[2]= -1.0f; rm[4]=1.0f; rm[6]=-1.0f; rm[8]=1.0f;
   harm->calcula_mag(rm);
 
   setpreset (Ppreset);
@@ -117,8 +117,8 @@ Valve::Wshape(float x)
 {
 
 if(x<factor) return(x);
-if(x>factor) return(factor+(x-factor)/powf(1.0+((x-factor)/(1.0-factor)),2.0));
-if(x>1.0) return((factor+1.0)*.5);
+if(x>factor) return(factor+(x-factor)/powf(1.0f+((x-factor)/(1.0f-factor)),2.0f));
+if(x>1.0f) return((factor+1.0f)*.5f);
 return(0.0);
 }
 
@@ -132,6 +132,7 @@ Valve::out (float * smpsl, float * smpsr)
 {
   int i;
   float l, r, lout, rout, fx;
+  float coef = 1.0 / (1.0f - powf(2.0f,dist * q * LN2R));
 
   float inputvol = powf (4.0f, ((float)Pdrive - 32.0f) / 127.0f);
   if (Pnegate != 0)
@@ -173,8 +174,8 @@ Valve::out (float * smpsl, float * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutl[i] == q) fx = 1.0f / dist;
-              else fx = 0.5f + efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
-	      fx = 1.6f - 2.0f/(fx*fx + 1);
+              else fx = 0.5f + efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] * LN2R));
+	      fx = 1.6f - 2.0f/(fx*fx + 1.0f);
               otml = atk * otml + fx - itml;
 	      if (otml>0.25f) otml = 0.25f;
               itml = fx;
@@ -185,9 +186,9 @@ Valve::out (float * smpsl, float * smpsr)
         {
            for (i = 0; i < PERIOD; i++) 
              {
-               if (efxoutl[i] == q) fx = 1.0f / dist + q / (1.0f - powf(2,dist * q * LN2R));
-               else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
-	       fx = 1.6f - 2.0f/(fx*fx + 1);
+               if (efxoutl[i] == q) fx = 1.0f / dist + q * coef;
+               else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q)* LN2R)) + q * coef;
+	       fx = 1.6f - 2.0f/(fx*fx + 1.0f);
                otml = atk * otml + fx - itml;
 	       if (otml>0.25f) otml = 0.25f;
                itml = fx;
@@ -204,8 +205,8 @@ Valve::out (float * smpsl, float * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutr[i] == q) fx = 1.0f / dist;
-              else fx = 0.5f + efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
-	      fx = 1.6f - 2.0f/(fx*fx + 1);
+              else fx = 0.5f + efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] * LN2R));
+	      fx = 1.6f - 2.0f/(fx*fx + 1.0f);
               otmr = atk * otmr + fx - itmr;
 	      if (otmr>0.25f) otmr = 0.25f;
               itmr = fx;
@@ -216,9 +217,9 @@ Valve::out (float * smpsl, float * smpsr)
         {
            for (i = 0; i < PERIOD; i++) 
              {
-               if (efxoutr[i] == q) fx = 1.0f / dist + q / (1.0f - powf(2,dist * q * LN2R));
-               else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
-	       fx = 1.6f - 2.0f/(fx*fx + 1);
+               if (efxoutr[i] == q) fx = 1.0f / dist + q * coef;
+               else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q)* LN2R)) + q * coef;
+	       fx = 1.6f - 2.0f/(fx*fx + 1.0f);
                otmr = atk * otmr + fx - itmr;
 	       if (otmr>0.25f) otmr = 0.25f;
                itmr = fx;
@@ -315,8 +316,8 @@ void
 Valve::setpresence(int value)
 {
 
-float freq=5.0f*(100.0-(float)value);
-float nvol=(float)(value*.01);
+float freq=5.0f*(100.0f-(float)value);
+float nvol=(float)(value*.01f);
 
 harm->set_freqh(1, freq);
 harm->set_vol(1,  nvol);
@@ -391,7 +392,7 @@ Valve::changepar (int npar, int value)
       break;
     case 10:
       Q_q = value;
-      q = (float)Q_q /127.0f - 1.0001;
+      q = (float)Q_q /127.0f - 1.0001f;
       factor = 1.0f - ((float)Q_q / 128.0f); 
       break;       
     case 11:

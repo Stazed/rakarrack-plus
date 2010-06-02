@@ -321,6 +321,8 @@ DynamicFilter::changepar (int npar, int value)
       Pampsmooth = value;
       setampsns (Pampsns);
       break;
+
+
     };
 };
 
