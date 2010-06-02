@@ -1886,6 +1886,7 @@ RKR::Preset_to_Bank (int i)
   lv[13][1] = efx_Cabinet->getpar (0);
 
 
+
   for (j = 0; j < 70; j++)
     {
       for (k = 0; k < 19; k++)
@@ -1894,6 +1895,7 @@ RKR::Preset_to_Bank (int i)
 	}
     }
 
+  Bank[i].lv[11][10] = efx_WhaWha->Ppreset;
 
 
   Bank[i].lv[0][19] = Reverb_Bypass;
@@ -1906,7 +1908,6 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[7][19] = EQ1_Bypass;
   Bank[i].lv[8][19] = EQ2_Bypass;
   Bank[i].lv[9][19] = Compressor_Bypass;
-  Bank[i].lv[11][19] = efx_WhaWha->Ppreset;
   Bank[i].lv[11][19] = WhaWha_Bypass;
   Bank[i].lv[12][19] = Alienwah_Bypass;
   Bank[i].lv[13][19] = Cabinet_Bypass;
@@ -2143,7 +2144,7 @@ RKR::dump_preset_names (void)
            i,
            Bank[i].Preset_Name);
    }
- 
+
 }
 
 

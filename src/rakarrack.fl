@@ -2712,7 +2712,7 @@ findpos(10,(int)o->value());}
           user_data 12
           callback {rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_WhaWha->setpreset((int) o->value());
+if((ud==0)||(ud==12))rkr->efx_WhaWha->setpreset((int) o->value()); 
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
@@ -2723,7 +2723,7 @@ WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
 WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
 WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
 WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
-if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
+if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6821,7 +6821,7 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           user_data 12
           callback {rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));} selected
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           xywh {408 379 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
