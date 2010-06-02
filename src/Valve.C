@@ -58,6 +58,7 @@ Valve::Valve (float * efxoutl_, float * efxoutr_)
   dist = 0.0f;
   setlpf(127);
   sethpf(1);
+  atk = 1.0f - 40.0f/fSAMPLE_RATE;
 
   for(int i=0;i<10;i++) rm[i]=0.0;
   rm[0]=1.0; rm[2]= -1.0; rm[4]=1.0; rm[6]=-1.0; rm[8]=1.0;
@@ -173,8 +174,8 @@ Valve::out (float * smpsl, float * smpsr)
              {
               if (efxoutl[i] == q) fx = 1.0f / dist;
               else fx = 0.5f + efxoutl[i] / (1.0f - powf(2,-dist * efxoutl[i] * LN2R));
-	      fx = 1.0f - 2.0f/(fx*fx + 1);
-              otml = 0.999f * otml + fx - itml;
+	      fx = 1.6f - 2.0f/(fx*fx + 1);
+              otml = atk * otml + fx - itml;
               itml = fx;
               efxoutl[i]= otml;
              }
@@ -185,8 +186,8 @@ Valve::out (float * smpsl, float * smpsr)
              {
                if (efxoutl[i] == q) fx = 1.0f / dist + q / (1.0f - powf(2,dist * q * LN2R));
                else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2,-dist * (efxoutl[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
-	       fx = 1.0f - 2.0f/(fx*fx + 1);
-               otml = 0.999f * otml + fx - itml;
+	       fx = 1.6f - 2.0f/(fx*fx + 1);
+               otml = atk * otml + fx - itml;
                itml = fx;
                efxoutl[i]= otml;
               }
@@ -202,8 +203,8 @@ Valve::out (float * smpsl, float * smpsr)
              {
               if (efxoutr[i] == q) fx = 1.0f / dist;
               else fx = 0.5f + efxoutr[i] / (1.0f - powf(2,-dist * efxoutr[i] * LN2R));
-	      fx = 1.0f - 2.0f/(fx*fx + 1);
-              otmr = 0.999f * otmr + fx - itmr;
+	      fx = 1.6f - 2.0f/(fx*fx + 1);
+              otmr = atk * otmr + fx - itmr;
               itmr = fx;
               efxoutr[i]= otmr;
              }
@@ -214,8 +215,8 @@ Valve::out (float * smpsl, float * smpsr)
              {
                if (efxoutr[i] == q) fx = 1.0f / dist + q / (1.0f - powf(2,dist * q * LN2R));
                else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2,-dist * (efxoutr[i] - q)* LN2R)) + q / (1.0f - powf(2,dist * q * LN2R));
-	       fx = 1.0f - 2.0f/(fx*fx + 1);
-               otmr = 0.999f * otmr + fx - itmr;
+	       fx = 1.6f - 2.0f/(fx*fx + 1);
+               otmr = atk * otmr + fx - itmr;
                itmr = fx;
                efxoutr[i]= otmr;
               }

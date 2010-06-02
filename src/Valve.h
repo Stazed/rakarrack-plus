@@ -72,7 +72,7 @@ private:
   int Presence;
   
   //Parametrii reali
-  float panning, lrcross, q, dist, otml,otmr, itml, itmr, factor;
+  float panning, lrcross, q, dist, otml,otmr, itml, itmr, factor, atk;
   float rm[10];
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
   class HarmEnhancer *harm;
