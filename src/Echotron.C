@@ -113,11 +113,13 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
   float tmpmodl = oldldmod;
   float tmpmodr = oldrdmod;
   int intmodl, intmodr;
-  
+if(!(Pmoddly)||(Pmodfilts)) tmpmodl=tmpmodr=interpl=interpr=0.0f;   
+
   for (i = 0; i < PERIOD; i++)
     {
       tmpmodl+=interpl;
       tmpmodr+=interpr;
+      
       intmodl = lrintf(tmpmodl);
       intmodr = lrintf(tmpmodr);
 
@@ -135,13 +137,12 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
       {
       j=0;
       for (k=0; k<length; k++)
-      {    
-  
+      {   
       lxindex = offset + ltime[k] + intmodl;
       rxindex = offset + rtime[k] + intmodr;
       if(lxindex>=maxx_size) lxindex -= maxx_size;
       if(rxindex>=maxx_size) rxindex -= maxx_size;
-      if((iStages[j]>=0)&&(j<ECHOTRON_MAXFILTERS)) 
+      if((iStages[k]>=0)&&(j<ECHOTRON_MAXFILTERS)) 
       {
       lyn += filterbank[j].l->filterout_s(lxn[lxindex]) * ldata[k];		//filter each tap specified
       ryn += filterbank[j].r->filterout_s(rxn[rxindex]) * rdata[k];
@@ -359,14 +360,25 @@ if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
 ltime[i] = rtime[i];  
  
-tpanl = 1.0f + fPan[i];
-tpanr = 2.0f-tpanl;
-tpanl = 10*powf(tpanl,4.0f);
-tpanr = 10.0f*powf(tpanr,4.0f);
-tpanr = 1.0f-1.0f/(tpanr + 1.0f);
-tpanl = 1.0f -1.0f/(tpanl + 1.0f);
-tpanr = 1.1f*tpanr;
-tpanl = 1.1f*tpanl;
+// tpanl = 1.0f + fPan[i];
+// tpanr = 2.0f-tpanl;
+// tpanl = 10*powf(tpanl,4.0f);
+// tpanr = 10.0f*powf(tpanr,4.0f);
+// tpanr = 1.0f-1.0f/(tpanr + 1.0f);
+// tpanl = 1.0f -1.0f/(tpanl + 1.0f);
+// tpanr = 1.1f*tpanr;
+// tpanl = 1.1f*tpanl;
+
+if(fPan[i]>=0.0f)
+{
+ tpanr = 1.0;
+ tpanl = 1.0f - fPan[i];
+}
+else
+{
+ tpanl = 1.0;
+ tpanr = 1.0f - fPan[i];
+}
 
 ldata[i]=fLevel[i]*tpanl;
 rdata[i]=fLevel[i]*tpanr;
@@ -376,12 +388,12 @@ if((tfcnt<ECHOTRON_MAXFILTERS)&&(iStages[i]>=0))
  int Freq=fFreq[i]*powf(2.0f,depth*4.5f);
  if (Freq<20.0) Freq=20.0f;
  if (Freq>hSR) Freq=hSR;
- filterbank[i].l->setfreq_and_q(Freq,fQ[i]);
- filterbank[i].r->setfreq_and_q(Freq,fQ[i]);
- filterbank[i].l->setstages(iStages[i]);
- filterbank[i].r->setstages(iStages[i]);
- filterbank[i].l->setmix (1, fLP[i] , fBP[i], fHP[i]);
- filterbank[i].r->setmix (1, fLP[i] , fBP[i], fHP[i]); 
+ filterbank[tfcnt].l->setfreq_and_q(Freq,fQ[i]);
+ filterbank[tfcnt].r->setfreq_and_q(Freq,fQ[i]);
+ filterbank[tfcnt].l->setstages(iStages[i]);
+ filterbank[tfcnt].r->setstages(iStages[i]);
+ filterbank[tfcnt].l->setmix (1, fLP[i] , fBP[i], fHP[i]);
+ filterbank[tfcnt].r->setmix (1, fLP[i] , fBP[i], fHP[i]); 
  tfcnt++;     
 }
 }

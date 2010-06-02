@@ -93,12 +93,12 @@ private:
 float fPan[ECHOTRON_F_SIZE];  //1+Pan from text file
 float fTime[ECHOTRON_F_SIZE];
 float fLevel[ECHOTRON_F_SIZE];
-float fLP[ECHOTRON_MAXFILTERS];
-float fBP[ECHOTRON_MAXFILTERS];
-float fHP[ECHOTRON_MAXFILTERS];
-float fFreq[ECHOTRON_MAXFILTERS];
-float fQ[ECHOTRON_MAXFILTERS];
-int iStages[ECHOTRON_MAXFILTERS];
+float fLP[ECHOTRON_F_SIZE];
+float fBP[ECHOTRON_F_SIZE];
+float fHP[ECHOTRON_F_SIZE];
+float fFreq[ECHOTRON_F_SIZE];
+float fQ[ECHOTRON_F_SIZE];
+int iStages[ECHOTRON_F_SIZE];
 float subdiv_dmod;
 float subdiv_fmod;
 
