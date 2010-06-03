@@ -134,14 +134,14 @@ RKR::savefile (char *filename)
 
 	case 3:
 	  //Overdrive
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Overdrive->getpar (0), efx_Overdrive->getpar (1),
 		   efx_Overdrive->getpar (2), efx_Overdrive->getpar (3),
 		   efx_Overdrive->getpar (4), efx_Overdrive->getpar (5),
 		   efx_Overdrive->getpar (6), efx_Overdrive->getpar (7),
 		   efx_Overdrive->getpar (8), efx_Overdrive->getpar (9),
 		   efx_Overdrive->getpar (10), efx_Overdrive->getpar (11),
-		   Overdrive_Bypass);
+		   efx_Overdrive->getpar (12),Overdrive_Bypass);
 	  break;
 
 	case 2:
@@ -721,10 +721,10 @@ RKR::loadfile (char *filename)
 
 	case 3:
 	  //Overdrive
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[5][0], &lv[5][1], &lv[5][2], &lv[5][3], &lv[5][4],
 		  &lv[5][5], &lv[5][6], &lv[5][7], &lv[5][8], &lv[5][9],
-		  &lv[5][10], &lv[5][11], &Overdrive_B);
+		  &lv[5][10], &lv[5][11], &lv[5][12],&Overdrive_B);
 	  break;
 
 	case 2:
@@ -1115,7 +1115,7 @@ RKR::Actualizar_Audio ()
     efx_Flanger->changepar (i, lv[3][i]);
   for (i = 0; i <= 11; i++)
     efx_Phaser->changepar (i,lv[4][i]);
-  for (i = 0; i <= 10; i++)
+  for (i = 0; i <= 12; i++)
     efx_Overdrive->changepar (i, lv[5][i]);
   for (i = 0; i <= 12; i++)
     efx_Distorsion->changepar (i, lv[6][i]);
@@ -1796,7 +1796,7 @@ RKR::Preset_to_Bank (int i)
     lv[3][j] = efx_Flanger->getpar (j);
   for (j = 0; j <= 11; j++)
     lv[4][j] = efx_Phaser->getpar (j);
-  for (j = 0; j <= 10; j++)
+  for (j = 0; j <= 12; j++)
     lv[5][j] = efx_Overdrive->getpar (j);
   for (j = 0; j <= 12; j++)
     lv[6][j] = efx_Distorsion->getpar (j);
