@@ -545,6 +545,7 @@ Echotron::changepar (int npar, int value)
       break;
     case 13:
       Pmodfilts = value;//filter modulation on/off
+      if(!Pmodfilts) initparams=1;
       break;     
     case 14:
       //LFO Type      

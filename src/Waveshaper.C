@@ -58,7 +58,7 @@ Waveshaper::Waveshaper()
 
 
   temps = (float *) malloc (sizeof (float) * PERIOD * period_coeff);
-  u_up=(double)period_coeff;
+  u_up= (double)period_coeff;
   u_down = 1.0 / u_up; 
 
   compg = 0.0f;  //used by compression distortion
