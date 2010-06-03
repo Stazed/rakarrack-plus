@@ -70,7 +70,7 @@ RBFilter::cleanup ()
 void
 RBFilter::computefiltercoefs ()
 {
-  par.f = freq / fSAMPLE_RATE * 4.0f;
+  par.f = 2.0f * sinf(PI*freq / fSAMPLE_RATE);
   if (par.f > 0.99999)
     par.f = 0.99999f;
   par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;

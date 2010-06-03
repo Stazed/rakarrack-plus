@@ -113,7 +113,6 @@ if((Pmoddly)||(Pmodfilts)) modulate_delay();
   float tmpmodl = oldldmod;
   float tmpmodr = oldrdmod;
   int intmodl, intmodr;
-if(!(Pmoddly)||(Pmodfilts)) tmpmodl=tmpmodr=interpl=interpr=0.0f;   
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -214,6 +213,8 @@ Echotron::setpanning (int value)
   rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
   lpanning *= 1.1f;
   rpanning *= 1.1f; 
+  if(lpanning>1.0f) lpanning = 1.0f;
+  if(rpanning>1.0f) rpanning = 1.0f;
 };
 
 int
@@ -360,14 +361,6 @@ if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
 ltime[i] = rtime[i];  
  
-// tpanl = 1.0f + fPan[i];
-// tpanr = 2.0f-tpanl;
-// tpanl = 10*powf(tpanl,4.0f);
-// tpanr = 10.0f*powf(tpanr,4.0f);
-// tpanr = 1.0f-1.0f/(tpanr + 1.0f);
-// tpanl = 1.0f -1.0f/(tpanl + 1.0f);
-// tpanr = 1.1f*tpanr;
-// tpanl = 1.1f*tpanl;
 
 if(fPan[i]>=0.0f)
 {
@@ -377,7 +370,7 @@ if(fPan[i]>=0.0f)
 else
 {
  tpanl = 1.0;
- tpanr = 1.0f - fPan[i];
+ tpanr = 1.0f + fPan[i];
 }
 
 ldata[i]=fLevel[i]*tpanl;
@@ -434,6 +427,15 @@ rdmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*rdmod);
 
 interpl = (ldmod - oldldmod)*fperiod;
 interpr = (rdmod - oldrdmod)*fperiod;
+}
+else
+{
+oldldmod = 0.0f;
+oldrdmod = 0.0f;
+ldmod = 0.0f;
+rdmod = 0.0f;
+interpl = 0.0f;
+interpr = 0.0f;
 }
 
 };
