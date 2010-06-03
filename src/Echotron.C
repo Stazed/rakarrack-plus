@@ -377,7 +377,7 @@ if(fPan[i]>=0.0f)
 else
 {
  tpanl = 1.0;
- tpanr = 1.0f - fPan[i];
+ tpanr = 1.0f + fPan[i];
 }
 
 ldata[i]=fLevel[i]*tpanl;
