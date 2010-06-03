@@ -753,9 +753,9 @@ RKR::loadfile (char *filename)
 
 	case 1:
 	  //Compressor
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[9][0], &lv[9][1], &lv[9][2], &lv[9][3], &lv[9][4],
-		  &lv[9][5], &lv[9][6], &lv[9][7], &lv[9][8], &lv[9][9],&Compressor_B);
+		  &lv[9][5], &lv[9][6], &lv[9][7], &lv[9][8], &Compressor_B);
 	  break;
 
 	case 10:

@@ -133,7 +133,8 @@ Valve::out (float * smpsl, float * smpsr)
   int i;
   float l, r, lout, rout, fx;
   float coef = 1.0 / (1.0f - powf(2.0f,dist * q * LN2R));
-
+  float qcoef = q * coef;
+  float fdist = 1.0f / dist;
   float inputvol = powf (4.0f, ((float)Pdrive - 32.0f) / 127.0f);
   if (Pnegate != 0)
     inputvol *= -1.0f;
@@ -173,7 +174,7 @@ Valve::out (float * smpsl, float * smpsr)
        {
            for (i =0; i<PERIOD; i++) 
              {
-              if (efxoutl[i] == q) fx = 1.0f / dist;
+              if (efxoutl[i] == q) fx = fdist;
               else fx = 0.5f + efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] * LN2R));
 	      fx = 1.6f - 2.0f/(fx*fx + 1.0f);
               otml = atk * otml + fx - itml;
@@ -186,8 +187,8 @@ Valve::out (float * smpsl, float * smpsr)
         {
            for (i = 0; i < PERIOD; i++) 
              {
-               if (efxoutl[i] == q) fx = 1.0f / dist + q * coef;
-               else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q)* LN2R)) + q * coef;
+               if (efxoutl[i] == q) fx = fdist + qcoef;
+               else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q)* LN2R)) + qcoef;
 	       fx = 1.6f - 2.0f/(fx*fx + 1.0f);
                otml = atk * otml + fx - itml;
 	       if (otml>0.25f) otml = 0.25f;
@@ -204,7 +205,7 @@ Valve::out (float * smpsl, float * smpsr)
        {
            for (i =0; i<PERIOD; i++) 
              {
-              if (efxoutr[i] == q) fx = 1.0f / dist;
+              if (efxoutr[i] == q) fx = fdist;
               else fx = 0.5f + efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] * LN2R));
 	      fx = 1.6f - 2.0f/(fx*fx + 1.0f);
               otmr = atk * otmr + fx - itmr;
@@ -217,8 +218,8 @@ Valve::out (float * smpsl, float * smpsr)
         {
            for (i = 0; i < PERIOD; i++) 
              {
-               if (efxoutr[i] == q) fx = 1.0f / dist + q * coef;
-               else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q)* LN2R)) + q * coef;
+               if (efxoutr[i] == q) fx = fdist + qcoef;
+               else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q)* LN2R)) + qcoef;
 	       fx = 1.6f - 2.0f/(fx*fx + 1.0f);
                otmr = atk * otmr + fx - itmr;
 	       if (otmr>0.25f) otmr = 0.25f;
