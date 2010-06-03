@@ -393,7 +393,7 @@ Valve::changepar (int npar, int value)
       break;
     case 10:
       Q_q = value;
-      q = (float)Q_q /127.0f - 1.1f;
+      q = (float)Q_q /127.0f - 1.0f;
       factor = 1.0f - ((float)Q_q / 128.0f); 
       break;       
     case 11:
