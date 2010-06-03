@@ -6231,6 +6231,7 @@ Fl_Menu_Item RKRGUI::menu_echotron_fnum[] = {
  {"Comb", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"EchoFlange", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Filtered Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Notch-Wah", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
