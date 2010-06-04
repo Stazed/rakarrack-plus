@@ -82,6 +82,7 @@ RBFilter::computefiltercoefs ()
 void
 RBFilter::setfreq (float frequency)
 {
+  if (frequency > (fSAMPLE_RATE / 2.0f - 500.0f)) frequency = fSAMPLE_RATE / 2.0f - 500.0f;
   if (frequency < 0.1)
     frequency = 0.1f;
   float rap = freq / frequency;
