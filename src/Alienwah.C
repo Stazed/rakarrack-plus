@@ -75,7 +75,7 @@ Alienwah::out (float * smpsl, float * smpsr)
       tmp.b = clfol.b * x + oldclfol.b * x1;
 
       out.a = tmp.a * oldl[oldk].a - tmp.b * oldl[oldk].b
-	+ (1 - fabsf (fb)) * smpsl[i] * panning;
+	+ (1.0f - fabsf (fb)) * smpsl[i] * panning;
       out.b = tmp.a * oldl[oldk].b + tmp.b * oldl[oldk].a;
       oldl[oldk].a = out.a;
       oldl[oldk].b = out.b;
