@@ -21,6 +21,7 @@ pkgdata_DATA = Default.rkrb \
 	4.dly \
 	5.dly \
 	6.dly \
+	7.dly \
 	bg1.png \
 	bg2.png \
 	bg3.png \

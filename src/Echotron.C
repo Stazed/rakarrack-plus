@@ -242,24 +242,25 @@ sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
 }
 
 if ((fs = fopen (Filename, "r")) == NULL) return(0);
-memset(wbuf,0,sizeof(wbuf));
-fgets(wbuf,sizeof wbuf,fs); //Eat Header 1
 
-memset(wbuf,0,sizeof(wbuf)); //get rid of garbage from header
-fgets(wbuf,sizeof wbuf,fs);
-sscanf(wbuf,"%f\t%f",&subdiv_fmod,&subdiv_dmod); //Second line has tempo subdivision
+ while (fgets(wbuf,sizeof wbuf,fs) != NULL)
+ {
+  memset(wbuf,0,sizeof(wbuf));
+  fgets(wbuf,sizeof wbuf,fs);
+  if(wbuf[0]=='#') continue; else break;
+ }
 
-fgets(wbuf,sizeof wbuf,fs); //Eat Main Parameter Header...no memset because I don't care about wbuf
-memset(wbuf,0,sizeof(wbuf));
+ sscanf(wbuf,"%f\t%f",&subdiv_fmod,&subdiv_dmod); //Second line has tempo subdivision
 
-int count = 0;
-memset(iStages,0,sizeof(iStages));
+ int count = 0;
+ memset(iStages,0,sizeof(iStages));
 
 
 
     while ((fgets(wbuf,sizeof wbuf,fs) != NULL) && (count<ECHOTRON_F_SIZE))
     {  
      if(wbuf[0]==10) break;  // Check Carriage Return
+     if(wbuf[0]=='#') continue;
      sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d",&tPan, &tTime, &tLevel,
       &tLP,  &tBP,  &tHP,  &tFreq,  &tQ,  &tiStages);
       

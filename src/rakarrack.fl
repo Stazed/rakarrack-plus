@@ -2723,7 +2723,7 @@ WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
 WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
 WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
 WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
-if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;} selected
+if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6846,6 +6846,10 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           }
           MenuItem {} {
             label {Filtered Echo}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Notch-Wah} selected
             xywh {0 0 36 21} labelsize 10
           }
         }
