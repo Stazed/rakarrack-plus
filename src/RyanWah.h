@@ -78,7 +78,7 @@ private:
 
   //Valorile interne
 
-  float rpanning, lpanning, depth, ampsns, ampsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, base, ibase, minfreq;
+  float rpanning, lpanning, depth, ampsns, ampsmooth, wahsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, base, ibase, minfreq;
   float ms1, lpmix, hpmix, bpmix;	//mean squares
   float centfreq; //testing
   EffectLFO lfo;		//lfo-ul RyanWah

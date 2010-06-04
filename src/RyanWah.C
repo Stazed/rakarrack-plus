@@ -50,6 +50,7 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
   lpmix = 0.5f;
   bpmix = 2.0f;
   Ppreset = 0;
+  wahsmooth = expf(-1.0f/(0.02f*fSAMPLE_RATE));  //0.02 seconds
   
   Fstages = 1;
   Ftype = 1;
@@ -87,13 +88,22 @@ RyanWah::out (float * smpsl, float * smpsr)
       ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
       
       //oldfbias -= 0.001 * oldfbias2;
-      oldfbias = oldfbias * (1.0f - ampsmooth) + fbias * ampsmooth + 1e-10f;  //smooth MIDI control
-      oldfbias1 = oldfbias1 * (1.0f - ampsmooth) + oldfbias * ampsmooth + 1e-10f;
-      oldfbias2 = oldfbias2 * (1.0f - ampsmooth) + oldfbias1 * ampsmooth + 1e-10f;
+      oldfbias = oldfbias * (1.0f - wahsmooth) + fbias * wahsmooth + 1e-10f;  //smooth MIDI control
+      oldfbias1 = oldfbias1 * (1.0f - wahsmooth) + oldfbias * wahsmooth + 1e-10f;
+      oldfbias2 = oldfbias2 * (1.0f - wahsmooth) + oldfbias1 * wahsmooth + 1e-10f;
     };
 
 
   float rms = ms1 * ampsns + oldfbias2;
+  
+  if(rms>0.0f) //apply some smooth limiting
+  {
+  rms = 1.0f - 1.0f/(rms*rms + 1.0f);
+  }
+  else
+  {
+  rms = -1.0f + 1.0f/(rms*rms + 1.0f);  
+  }
       
   if(variq) q = powf(2.0f,(2.0f*(1.0f-rms)+1.0f));
 
@@ -165,7 +175,7 @@ RyanWah::setampsns (int Pp)
   ampsns = - powf (( -((float) Pampsns)) / 64.0f, 2.5f) * 100.0f;
   }  
   fbias  =  powf ((float)Pampsnsinv / 127.0f, 2.5f);
-  ampsmooth = expf (-(70.0f + (float) Pampsmooth) / 127.0f * 10.0f) * 0.99f;
+  ampsmooth = expf (-(70.0f + (float) Pampsmooth) / 127.0f * 10.0f*44100/fSAMPLE_RATE) * 0.99f;
 
 };
 
