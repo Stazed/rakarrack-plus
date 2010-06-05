@@ -67,6 +67,7 @@ private:
   int Pphase;
 
   int oldk;
+  int oldpdelay;
 
   //Control Parametrii
   void setvolume (int Pvolume);
@@ -79,7 +80,7 @@ private:
 
   //Valorile interne
   float panning, fb, depth, lrcross, phase;
-  COMPLEXTYPE *oldl, *oldr;
+  struct COMPLEXTYPE oldl[MAX_ALIENWAH_DELAY], oldr[MAX_ALIENWAH_DELAY];
   COMPLEXTYPE oldclfol, oldclfor;
 };
 

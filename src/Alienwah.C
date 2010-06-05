@@ -31,9 +31,6 @@ Alienwah::Alienwah (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  oldl = NULL;
-  oldr = NULL;
-
   Ppreset = 0;
   setpreset (Ppreset);
   cleanup ();
@@ -41,6 +38,7 @@ Alienwah::Alienwah (float * efxoutl_, float * efxoutr_)
   oldclfol.b = 0.0;
   oldclfor.a = fb;
   oldclfor.b = 0.0;
+
 };
 
 Alienwah::~Alienwah ()
@@ -113,12 +111,13 @@ Alienwah::out (float * smpsl, float * smpsr)
 void
 Alienwah::cleanup ()
 {
-  for (int i = 0; i < Pdelay; i++)
+  for (int i = oldpdelay; i < MAX_ALIENWAH_DELAY; i++)
     {
       oldl[i].a = 0.0f;
       oldl[i].b = 0.0f;
       oldr[i].a = 0.0f;
       oldr[i].b = 0.0f;
+            
     };
   oldk = 0;
 };
@@ -178,16 +177,11 @@ Alienwah::setphase (int Pphase)
 void
 Alienwah::setdelay (int Pdelay)
 {
-  if (oldl != NULL)
-    delete[]oldl;
-  if (oldr != NULL)
-    delete[]oldr;
-  if (Pdelay >= MAX_ALIENWAH_DELAY)
+  if (Pdelay > MAX_ALIENWAH_DELAY)
     Pdelay = MAX_ALIENWAH_DELAY;
   this->Pdelay = Pdelay;
-  oldl = new COMPLEXTYPE[Pdelay];
-  oldr = new COMPLEXTYPE[Pdelay];
-  cleanup ();
+  if(Pdelay>oldpdelay)  cleanup ();
+  oldpdelay = Pdelay;
 };
 
 void
