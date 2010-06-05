@@ -2554,8 +2554,7 @@ void RKRGUI::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Alienwah_preset_i(Fl_Choice* o, void* v) {
-  rkr->Alienwah_Bypass=0;
-long long ud= (long long) v;
+  long long ud= (long long) v;
 if((ud==0)||(ud==12))rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
@@ -2568,7 +2567,6 @@ Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
 Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
 Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
 Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
-if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;
 }
 void RKRGUI::cb_Alienwah_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_preset_i(o,v);

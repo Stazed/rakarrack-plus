@@ -2824,8 +2824,7 @@ findpos(11,(int)o->value());}
         Fl_Choice Alienwah_preset {
           label Preset
           user_data 12
-          callback {rkr->Alienwah_Bypass=0;
-long long ud= (long long) v;
+          callback {long long ud= (long long) v;
 if((ud==0)||(ud==12))rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
@@ -2837,8 +2836,7 @@ Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
 Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
 Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
 Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
-Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
-if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
+Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));} selected
           xywh {432 27 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4324,7 +4322,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Distortion 4} selected
+            label {Distortion 4}
             xywh {0 0 36 21} labelsize 10
           }
         }
