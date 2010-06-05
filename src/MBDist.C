@@ -235,7 +235,7 @@ void
 MBDist::setpreset (int npreset)
 {
   const int PRESET_SIZE = 15;
-  const int NUM_PRESETS = 4;
+  const int NUM_PRESETS = 7;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Dist 1
     {14, 64, 64, 20, 90, 0, 14, 13, 38, 49, 40, 0, 288, 1315, 1},
@@ -244,9 +244,14 @@ MBDist::setpreset (int npreset)
     //Modulated
     {0, 64, 64, 36, 77, 18, 17, 18, 66, 69, 54, 0, 504, 2730, 1},
     //Crunch
-    {0, 64, 64, 30, 66, 15, 14, 15, 44, 60, 42, 0, 385, 2730, 1}
-
-
+    {0, 64, 64, 30, 66, 15, 14, 15, 44, 60, 42, 0, 385, 2730, 1},
+    //Dist 2
+    {64, 64, 62, 48, 64, 21, 21, 22, 20, 40, 60, 0, 647, 1506, 0},
+    //Dist 3
+    {64, 64, 0, 55, 61, 19, 21, 20, 12, 34, 12, 0, 735, 4735, 0},
+    //Dist 4
+    {64, 64, 0, 30, 74, 19, 25, 26, 20, 51, 83, 0, 329, 800, 0}
+     
   };
 
   for (int n = 0; n < PRESET_SIZE; n++)

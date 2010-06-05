@@ -4315,6 +4315,18 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
             label Crunch
             xywh {42 42 36 21} labelsize 10
           }
+          MenuItem {} {
+            label {Distortion 2}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Distortion 3}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Distortion 4} selected
+            xywh {0 0 36 21} labelsize 10
+          }
         }
         Fl_Value_Slider mbdist_WD {
           label {Wet/Dry}
@@ -6849,7 +6861,7 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Notch-Wah} selected
+            label {Notch-Wah}
             xywh {0 0 36 21} labelsize 10
           }
         }

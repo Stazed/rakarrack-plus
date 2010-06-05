@@ -3969,6 +3969,9 @@ Fl_Menu_Item RKRGUI::menu_mbdist_preset[] = {
  {"Soft", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Modulated", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Crunch", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Distortion 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Distortion 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Distortion 4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
