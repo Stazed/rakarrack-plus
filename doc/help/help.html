@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><!-- This file was originally generated from OpenOffice, but is now maintained 
+<html><head>
+<!-- This file was originally generated from OpenOffice, but is now maintained 
   by hand. It is used for both the in-application help and the online help.
 
   When making updates to this file, make sure you also update the online 
@@ -686,7 +687,7 @@ generate any noise, or not should :-), what rakarrack does is amplify the
 external noises, then for better control parameters to reduce this noises is a good
 rule put the Noise Gate or the Expander at the first position on the chain.
 
-<p><img src="imagenes/order.jpg" alt="rakarrack Order Window" align="middle" border="1" height="284" width="400"></p>
+</p><p><img src="imagenes/order.jpg" alt="rakarrack Order Window" align="middle" border="1" height="284" width="400"></p>
 
 <p>The effects have two common elements. The "On"
 button and "Preset" input choice. These individual effect
@@ -720,7 +721,7 @@ program save the paths of this "User" files, if you want to share please be
 sure that this paths can also be shared and of course you will need to bring 
 this user files too.
 
-<h3><a name="eql"></a>EQ Lineal</h3>
+</p><h3><a name="eql"></a>EQ Lineal</h3>
 <table border="0" cellpadding="5" cellspacing="2">
 
   <tbody>
@@ -1354,9 +1355,59 @@ level, the filter responds very slowly to signal attack.</p>
       <p><img src="imagenes/aw.jpg" alt="rakarrack AlienWah" align="bottom" border="1" height="250" width="185"></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Adapted from the ZynAddSubFX AlienWah</p>
-      <p>A cross between a Flanger, Phaser and a
-Wah-Wah...</p>
+      <p>AlienWah - Created by our hero, Paul Nasca Octavian originally for the ZynAddSubFX synthesizer.<br>
+AlienWah fits into the comb filter category, similar to phasers and
+flangers.&nbsp; AlienWah amplitude modulates two delay lines each with
+a phase separation of "Phase", then feeds them into each other in a
+somewhat circular fashion making each delay line a cascade of low order
+digital filters. In this manner it is similar to a Phaser.&nbsp; It's
+sort of like a digital low-pass filter that spirals down a pair of
+delay lines causing an interesting interference pattern.&nbsp; Some
+people may think of this effect as a "Flaser".</p>
+<p>For the less technically minded, the AlienWah configuration produces
+mostly vocal sounds with a strange timbre sounding much like sci-fi
+depictions of a language spoken by invading space aliens, or some
+strange creature found near the center of the earth. </p>
+<p>Even though some of the more extreme settings create weird alien
+sounds, it can also be configured for interesting subtle comb filtering
+sounds for shaping a rather beautiful timbre onto an instrument.&nbsp;
+It is a truly amazing effect.</p>
+<p>Here is a description of the parameters:</p>
+<p><b>Wet/Dry</b>: Being a delay-based effect, Wet/Dry does more than
+simply mix Wet/Dry sounds.&nbsp; Destructive interference occurs
+between the effected signal and clean so a proper blend can be used
+also to voice the effect.</p>
+<p><b>Pan</b>: Put effect more to the left or right channel.&nbsp; Used in
+conjunction with Wet/Dry mix, one can voice the effect differently
+between left right.</p>
+<p><b>Tempo</b>: LFO rate</p>
+<p><b>Rnd</b>: Add random noise to LFO to make it sound somewhat more
+"analog".</p>
+<p><b>LFO Type</b>: Self explanatory</p>
+<p><b>Phase</b>: This is a very interesting parameter.&nbsp; It sets the
+modulation offset between the two delay lines.&nbsp; On either extreme
+it has a lower "closed mouth" sound, while in the middle it creates
+more of an "open mouth" sound.&nbsp; This parameter "centers" the LFO
+around the point it is set.</p>
+<p><b>St. df</b>: Stereo Difference between left &amp; right LFO.&nbsp; A setting
+of 64 has both LFOs in phase between left/right.&nbsp; This parameter
+used with L/R Cr. is like having a second "Phase" parameter, so more
+interesting interaction can be achieved by using this control.&nbsp;
+It's more than what meets the eye.</p>
+<p><b>Depth</b>: This would be better termed "width" as this parameter adjusts the amplitude of the
+LFO.</p>
+<p><b>Delay</b>: Length of the delay line in samples.&nbsp; In a sense, this
+also is the filter order.&nbsp; The longer the delay time, the deeper
+the sound of the filter.</p>
+<p><b>Fb</b>: Feedback.&nbsp; Less than 64 is negative feedback, more than
+64 is positive feedback.&nbsp; 64 corresponds to zero feedback. Without
+feedback, the effect is rather dull.&nbsp; It's the perpetual
+regeneration along the delay line that creates&nbsp; the interesting
+phase cancellations and resonances that sound alien.</p>
+<p><b>L/R Cr.</b>: Left/Right Crossing.&nbsp; Amount of left to mix into
+right and right into left.&nbsp; Less than zero subtracts left from
+right, right from left, while greater than zero adds them.
+</p>
       </td>
     </tr>
   </tbody>
@@ -2651,8 +2702,16 @@ morphed into a completely unique effect.</p>
 </p><p>Below is an example text file with explanation of each field and any caveats you may need to
 know:</p><img style="width: 844px; height: 271px;" alt="rakarrack file .dly" src="imagenes/dlyfile.png"><br>
       <br>
-<p><b>Filter</b>:&nbsp; This field multiplies the tempo for the filter LFO modulation. For example, if you are playing a song at 80 beats per minute, but you wish to make the LFO half as fast as the echoes, you enter a 0.5 in this field to adjust the filter LFO speed to 40 beats per minute.</p>
-<p><b>Delay</b>:&nbsp; This field multiplies tempo for the delay line modulation. Same concept as for filter, but this is the LFO applied to the delay line. Note       there is not a field for delay time subdivision.  This is because you define this by the times you put into the Time column, so such a field would be redundant.</p>
+<p><b>Filter</b>:&nbsp; This field multiplies the tempo for the filter
+LFO modulation. For example, if you are playing a song at 80 beats per
+minute, but you wish to make the LFO half as fast as the echoes, you
+enter a 0.5 in this field to adjust the filter LFO speed to 40 beats
+per minute.</p>
+<p><b>Delay</b>:&nbsp; This field multiplies tempo for the delay line
+modulation. Same concept as for filter, but this is the LFO applied to
+the delay line. Note there is not a field for delay time subdivision.
+This is because you define this by the times you put into the Time
+column, so such a field would be redundant.</p>
 <p><b>Pan</b>:&nbsp; Ranges from -1.0 to 1.0.&nbsp; less than 0.0 is pan left,
 greater is pan right.&nbsp; 0.0 puts the delay equally to left and
 right.&nbsp; Anything magnitude of +/-1.0 or greater will be treated as
