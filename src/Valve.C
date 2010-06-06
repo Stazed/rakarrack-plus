@@ -176,9 +176,8 @@ Valve::out (float * smpsl, float * smpsr)
              {
               if (efxoutl[i] == q) fx = fdist;
               else fx = 0.5f + efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] * LN2R));
-	      fx = 1.6f - 2.0f/(fx*fx + 1.0f);
+              if(fx>2.0)fx=itml;
               otml = atk * otml + fx - itml;
-	      if (otml>0.25f) otml = 0.25f;
               itml = fx;
               efxoutl[i]= otml;
              }
@@ -189,11 +188,11 @@ Valve::out (float * smpsl, float * smpsr)
              {
                if (efxoutl[i] == q) fx = fdist + qcoef;
                else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q)* LN2R)) + qcoef;
-	       fx = 1.6f - 2.0f/(fx*fx + 1.0f);
+               if(fx>2.0)fx=itml;
                otml = atk * otml + fx - itml;
-	       if (otml>0.25f) otml = 0.25f;
                itml = fx;
                efxoutl[i]= otml;
+
               }
         }
 
@@ -207,11 +206,11 @@ Valve::out (float * smpsl, float * smpsr)
              {
               if (efxoutr[i] == q) fx = fdist;
               else fx = 0.5f + efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] * LN2R));
-	      fx = 1.6f - 2.0f/(fx*fx + 1.0f);
+              if(fx>2.0)fx=itmr;
               otmr = atk * otmr + fx - itmr;
-	      if (otmr>0.25f) otmr = 0.25f;
               itmr = fx;
               efxoutr[i]= otmr;
+              
              }
         } 
         else 
@@ -220,11 +219,11 @@ Valve::out (float * smpsl, float * smpsr)
              {
                if (efxoutr[i] == q) fx = fdist + qcoef;
                else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q)* LN2R)) + qcoef;
-	       fx = 1.6f - 2.0f/(fx*fx + 1.0f);
+               if(fx>2.0)fx=itmr;
                otmr = atk * otmr + fx - itmr;
-	       if (otmr>0.25f) otmr = 0.25f;
                itmr = fx;
                efxoutr[i]= otmr;
+               
               }
         }
 
