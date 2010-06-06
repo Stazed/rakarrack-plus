@@ -5,6 +5,8 @@ pkgdata_DATA = Default.rkrb \
 	3.wav \
 	4.wav \
 	5.wav \
+	6.wav \
+	7.wav \
 	1.rvb \
 	2.rvb \
 	3.rvb \
