@@ -533,6 +533,49 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	
         } 
         break; 	
+	
+       case 28: //Valve 1
+      
+        ws = powf (85.0f, ws * ws) + 10.0f;
+
+        for (i = 0; i < nn; i++)
+	{
+		   tmpv = fabs(temps[i]);
+		   if(tmpv > 0.15f)  // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
+		   {
+  		    dyno += (1.0f - dynodecay) * tmpv;
+		     }
+		     dyno *= dynodecay;  //always decays
+	temps[i] = temps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
+        if(temps[i] < 0.0) temps[i] = 0.0f;
+	
+	temps[i] = 1.0f - 2.0f/(ws*temps[i]*temps[i] + 1.0f);
+	 
+	
+        } 
+        break; 	
+
+       case 28: //Valve 2
+      
+        ws = powf (85.0f, ws * ws) + 10.0f;
+
+        for (i = 0; i < nn; i++)
+	{
+		   tmpv = fabs(temps[i]);
+		   if(tmpv > 0.15f)  // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
+		   {
+  		    dyno += (1.0f - dynodecay) * tmpv;
+		     }
+		     dyno *= dynodecay;  //always decays
+	temps[i] = temps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
+        if(temps[i] < 0.0) temps[i] = 0.0f;
+	
+	temps[i] = 1.0f - 2.0f/(ws*temps[i]*temps[i] + 1.0f);
+	 
+	
+        } 
+        break;	
+		
 	      
  
       //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions
