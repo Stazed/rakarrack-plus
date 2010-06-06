@@ -4805,6 +4805,9 @@ Fl_Menu_Item RKRGUI::menu_convo_fnum[] = {
  {"Mesa Boogie", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Mesa Boogie 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Marshall Plexi", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Bassman", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"JCM2000", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Ampeg", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
