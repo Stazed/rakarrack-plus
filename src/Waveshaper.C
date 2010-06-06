@@ -555,7 +555,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
         } 
         break; 	
 
-       case 28: //Valve 2
+       case 29: //Valve 2
       
         ws = powf (85.0f, ws * ws) + 10.0f;
 
