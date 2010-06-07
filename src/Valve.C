@@ -135,7 +135,7 @@ Valve::out (float * smpsl, float * smpsr)
   float coef = 1.0 / (1.0f - powf(2.0f,dist * q * LN2R));
   float qcoef = q * coef;
   float fdist = 1.0f / dist;
-  float inputvol = powf (4.0f, ((float)Pdrive - 32.0f) / 127.0f);
+  float inputvol = powf (2.0f, ((float)Pdrive - 32.0f) / 127.0f);
   if (Pnegate != 0)
     inputvol *= -1.0f;
 
@@ -167,7 +167,7 @@ Valve::out (float * smpsl, float * smpsr)
       for (i =0; i<PERIOD; i++) 
              {
                efxoutl[i]=Wshape(efxoutl[i]);   
-               efxoutr[i]=Wshape(efxoutr[i]);
+               if (Pstereo != 0) efxoutr[i]=Wshape(efxoutr[i]);
              }
     } 
      if (q == 0.0f) 
@@ -176,7 +176,7 @@ Valve::out (float * smpsl, float * smpsr)
              {
               if (efxoutl[i] == q) fx = fdist;
               else fx = 0.5f + efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] * LN2R));
-              if(fx>2.0)fx=itml;
+              if(fx>12.0)fx=itml;
               otml = atk * otml + fx - itml;
               itml = fx;
               efxoutl[i]= otml;
@@ -188,7 +188,7 @@ Valve::out (float * smpsl, float * smpsr)
              {
                if (efxoutl[i] == q) fx = fdist + qcoef;
                else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q)* LN2R)) + qcoef;
-               if(fx>2.0)fx=itml;
+               if(fx>12.0)fx=itml;
                otml = atk * otml + fx - itml;
                itml = fx;
                efxoutl[i]= otml;
@@ -206,7 +206,7 @@ Valve::out (float * smpsl, float * smpsr)
              {
               if (efxoutr[i] == q) fx = fdist;
               else fx = 0.5f + efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] * LN2R));
-              if(fx>2.0)fx=itmr;
+              if(fx>12.0)fx=itmr;
               otmr = atk * otmr + fx - itmr;
               itmr = fx;
               efxoutr[i]= otmr;
@@ -219,7 +219,7 @@ Valve::out (float * smpsl, float * smpsr)
              {
                if (efxoutr[i] == q) fx = fdist + qcoef;
                else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q)* LN2R)) + qcoef;
-               if(fx>2.0)fx=itmr;
+               if(fx>12.0)fx=itmr;
                otmr = atk * otmr + fx - itmr;
                itmr = fx;
                efxoutr[i]= otmr;
