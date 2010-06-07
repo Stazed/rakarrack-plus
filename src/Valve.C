@@ -65,6 +65,7 @@ Valve::Valve (float * efxoutl_, float * efxoutr_)
   harm->calcula_mag(rm);
 
   setpreset (Ppreset);
+  init_coefs();
   cleanup ();
 };
 
@@ -131,11 +132,7 @@ void
 Valve::out (float * smpsl, float * smpsr)
 {
   int i;
-  float l, r, lout, rout, fx;
-  float coef = 1.0 / (1.0f - powf(2.0f,dist * q * LN2R));
-  float qcoef = q * coef;
-  float fdist = 1.0f / dist;
-  float inputvol = powf (4.0f, ((float)Pdrive - 32.0f) / 127.0f);
+  float l, r, lout, rout, fx, tmpatk;
   if (Pnegate != 0)
     inputvol *= -1.0f;
 
@@ -169,14 +166,23 @@ Valve::out (float * smpsl, float * smpsr)
                efxoutl[i]=Wshape(efxoutl[i]);   
                efxoutr[i]=Wshape(efxoutr[i]);
              }
-    } 
+    }	
+      for (i =0; i<PERIOD; i++) //soft limiting to 3.0 (max)
+             {
+               fx = efxoutl[i];   
+	       if (fx>1.0f) fx = 3.0f - 2.0f/sqrtf(fx);
+	       efxoutl[i] = fx;
+               fx = efxoutr[i];
+	       if (fx>1.0f) fx = 3.0f - 2.0f/sqrtf(fx);
+	       efxoutr[i] = fx;	       
+             }    
+     
      if (q == 0.0f) 
        {
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutl[i] == q) fx = fdist;
-              else fx = 0.5f + efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] * LN2R));
-              if(fx>2.0)fx=itml;
+              else fx =efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] * LN2R));
               otml = atk * otml + fx - itml;
               itml = fx;
               efxoutl[i]= otml;
@@ -187,9 +193,8 @@ Valve::out (float * smpsl, float * smpsr)
            for (i = 0; i < PERIOD; i++) 
              {
                if (efxoutl[i] == q) fx = fdist + qcoef;
-               else fx = 0.5f + (efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q)* LN2R)) + qcoef;
-               if(fx>2.0)fx=itml;
-               otml = atk * otml + fx - itml;
+               else fx =(efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q)* LN2R)) + qcoef;
+	       otml = atk * otml + fx - itml;
                itml = fx;
                efxoutl[i]= otml;
 
@@ -205,8 +210,7 @@ Valve::out (float * smpsl, float * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutr[i] == q) fx = fdist;
-              else fx = 0.5f + efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] * LN2R));
-              if(fx>2.0)fx=itmr;
+              else fx = efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] * LN2R));
               otmr = atk * otmr + fx - itmr;
               itmr = fx;
               efxoutr[i]= otmr;
@@ -218,8 +222,7 @@ Valve::out (float * smpsl, float * smpsr)
            for (i = 0; i < PERIOD; i++) 
              {
                if (efxoutr[i] == q) fx = fdist + qcoef;
-               else fx = 0.5f + (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q)* LN2R)) + qcoef;
-               if(fx>2.0)fx=itmr;
+               else fx = (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q)* LN2R)) + qcoef;
                otmr = atk * otmr + fx - itmr;
                itmr = fx;
                efxoutr[i]= otmr;
@@ -264,6 +267,17 @@ Valve::out (float * smpsl, float * smpsr)
 /*
  * Parameter control
  */
+ void
+Valve::init_coefs()
+{
+  coef = 1.0 / (1.0f - powf(2.0f,dist * q * LN2R));
+  qcoef = q * coef;
+  fdist = 1.0f / dist;
+  inputvol = powf (4.0f, ((float)Pdrive - 32.0f) / 127.0f);
+  if (Pnegate != 0)
+    inputvol *= -1.0f;
+};
+
 void
 Valve::setvolume (int Pvolume)
 {
@@ -403,6 +417,7 @@ Valve::changepar (int npar, int value)
       setpresence(value);
       break;  
       
+      init_coefs();
       
     };
 };

@@ -54,6 +54,7 @@ private:
   void setlpf (int Plpf);
   void sethpf (int Phpf);
   void setpresence(int value);
+  void init_coefs();
 
 
   //Parametrii
@@ -74,6 +75,12 @@ private:
   //Parametrii reali
   float panning, lrcross, q, dist, otml,otmr, itml, itmr, factor, atk;
   float rm[10];
+  
+  float coef;
+  float qcoef;
+  float fdist;
+  float inputvol;
+  
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
   class HarmEnhancer *harm;
 
