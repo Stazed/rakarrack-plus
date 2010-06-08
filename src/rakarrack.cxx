@@ -3847,18 +3847,18 @@ void RKRGUI::cb_ex_Gain(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_Gain_i(o,v);
 }
 
-void RKRGUI::cb_ex_hfreq_i(SliderW* o, void*) {
-  rkr->efx_Exciter->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_ex_hfreq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_hfreq_i(o,v);
-}
-
 void RKRGUI::cb_ex_lfreq_i(SliderW* o, void*) {
   rkr->efx_Exciter->changepar(11,(int)o->value());
 }
 void RKRGUI::cb_ex_lfreq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_lfreq_i(o,v);
+}
+
+void RKRGUI::cb_ex_hfreq_i(SliderW* o, void*) {
+  rkr->efx_Exciter->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_ex_hfreq(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ex_hfreq_i(o,v);
 }
 
 void RKRGUI::cb_ex_1_i(SliderW* o, void*) {
@@ -12012,24 +12012,6 @@ R average.");
         ex_Gain->align(FL_ALIGN_LEFT);
         ex_Gain->when(FL_WHEN_CHANGED);
       } // SliderW* ex_Gain
-      { ex_hfreq = new SliderW(369, 260, 100, 10, "HPF");
-        ex_hfreq->type(5);
-        ex_hfreq->box(FL_FLAT_BOX);
-        ex_hfreq->color((Fl_Color)178);
-        ex_hfreq->selection_color((Fl_Color)62);
-        ex_hfreq->labeltype(FL_NORMAL_LABEL);
-        ex_hfreq->labelfont(0);
-        ex_hfreq->labelsize(10);
-        ex_hfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ex_hfreq->minimum(20);
-        ex_hfreq->maximum(20000);
-        ex_hfreq->step(1);
-        ex_hfreq->value(20);
-        ex_hfreq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ex_hfreq->callback((Fl_Callback*)cb_ex_hfreq);
-        ex_hfreq->align(FL_ALIGN_LEFT);
-        ex_hfreq->when(FL_WHEN_CHANGED);
-      } // SliderW* ex_hfreq
       { ex_lfreq = new SliderW(369, 248, 100, 10, "LPF");
         ex_lfreq->type(5);
         ex_lfreq->box(FL_FLAT_BOX);
@@ -12048,6 +12030,24 @@ R average.");
         ex_lfreq->align(FL_ALIGN_LEFT);
         ex_lfreq->when(FL_WHEN_CHANGED);
       } // SliderW* ex_lfreq
+      { ex_hfreq = new SliderW(369, 260, 100, 10, "HPF");
+        ex_hfreq->type(5);
+        ex_hfreq->box(FL_FLAT_BOX);
+        ex_hfreq->color((Fl_Color)178);
+        ex_hfreq->selection_color((Fl_Color)62);
+        ex_hfreq->labeltype(FL_NORMAL_LABEL);
+        ex_hfreq->labelfont(0);
+        ex_hfreq->labelsize(10);
+        ex_hfreq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_hfreq->minimum(20);
+        ex_hfreq->maximum(20000);
+        ex_hfreq->step(1);
+        ex_hfreq->value(20);
+        ex_hfreq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        ex_hfreq->callback((Fl_Callback*)cb_ex_hfreq);
+        ex_hfreq->align(FL_ALIGN_LEFT);
+        ex_hfreq->when(FL_WHEN_CHANGED);
+      } // SliderW* ex_hfreq
       { ex_1 = new SliderW(369, 272, 100, 10, "Har 1");
         ex_1->type(5);
         ex_1->box(FL_FLAT_BOX);

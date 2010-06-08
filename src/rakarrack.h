@@ -1656,15 +1656,15 @@ private:
   void cb_ex_Gain_i(SliderW*, void*);
   static void cb_ex_Gain(SliderW*, void*);
 public:
-  SliderW *ex_hfreq;
-private:
-  void cb_ex_hfreq_i(SliderW*, void*);
-  static void cb_ex_hfreq(SliderW*, void*);
-public:
   SliderW *ex_lfreq;
 private:
   void cb_ex_lfreq_i(SliderW*, void*);
   static void cb_ex_lfreq(SliderW*, void*);
+public:
+  SliderW *ex_hfreq;
+private:
+  void cb_ex_hfreq_i(SliderW*, void*);
+  static void cb_ex_hfreq(SliderW*, void*);
 public:
   SliderW *ex_1;
 private:
