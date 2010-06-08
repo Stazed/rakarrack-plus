@@ -164,7 +164,9 @@ extern int Wave_up_q;
 extern int Wave_down_q;
 extern Pixmap p, mask;
 extern XWMHints *hints;
-
+extern float freqs[12];
+extern float lfreqs[12];
+extern float aFreq;
 
 class RKR
 {
@@ -231,6 +233,8 @@ public:
   void Update_tempo();
   int checkforaux();
   void Error_Handle(int num);
+  void update_freqs(float val);
+
 
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;

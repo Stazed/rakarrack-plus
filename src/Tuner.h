@@ -44,8 +44,6 @@ private:
 
   int blockSize;
 
-  float freqs[12];
-  float lfreqs[12];
 };
 
 #endif /*TUNER_H_ */

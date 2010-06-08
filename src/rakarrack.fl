@@ -825,12 +825,12 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -4200,7 +4200,7 @@ ex_hfreq->value(rkr->efx_Exciter->getpar(12));}
         }
         Fl_Value_Slider ex_lfreq {
           label LPF
-          callback {rkr->efx_Exciter->changepar(11,(int)o->value());} selected
+          callback {rkr->efx_Exciter->changepar(11,(int)o->value());}
           xywh {369 248 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
           class SliderW
         }
@@ -7628,14 +7628,14 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1846 375 640 528} type Double color 4 hide
+      xywh {1443 131 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
-        xywh {5 0 631 535}
+        user_data 1 open
+        xywh {0 0 636 535}
       } {
         Fl_Group Look {
           label Look
@@ -7782,8 +7782,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1 open
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -8119,6 +8119,12 @@ Show_Next_Time();}
             xywh {343 452 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
+          Fl_Counter Calibration {
+            label {Tuner Calibration A4}
+            callback {aFreq=o->value();
+rkr->update_freqs(aFreq);}
+            xywh {120 479 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
+          }
         }
         Fl_Group MIDI_SET {
           label MIDI
@@ -9017,6 +9023,7 @@ rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
 rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
+rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
 
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
@@ -9093,7 +9100,8 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -10215,6 +10223,8 @@ Shi_Up_Qua->value(rkr->Shi_U_Q);
 Wave_Amo->value(Wave_res_amount);
 Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
+Calibration->value(aFreq);
+
 
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);

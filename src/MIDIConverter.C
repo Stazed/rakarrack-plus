@@ -17,7 +17,6 @@
 MIDIConverter::MIDIConverter ()
 {
 
-  float aFreq = 440.0f;
   int i;
   velocity = 100;
   channel = 0;
@@ -38,13 +37,6 @@ MIDIConverter::MIDIConverter ()
   note = 0;
   nfreq = 0;
   afreq = 0;
-  freqs[0] = aFreq;
-  lfreqs[0] = logf (freqs[0]);
-  for (i = 1; i < 12; i++)
-    {
-      freqs[i] = freqs[i - 1] * D_NOTE;
-      lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
-    }
   schmittInit (32);
 
 

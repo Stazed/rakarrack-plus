@@ -7306,6 +7306,14 @@ void RKRGUI::cb_Wave_Up_Qua(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Wave_Up_Qua_i(o,v);
 }
 
+void RKRGUI::cb_Calibration_i(Fl_Counter* o, void*) {
+  aFreq=o->value();
+rkr->update_freqs(aFreq);
+}
+void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Calibration_i(o,v);
+}
+
 void RKRGUI::cb_D_A_Connect_i(Fl_Check_Button* o, void*) {
   rkr->aconnect_MI=(int) o->value();
 
@@ -16316,7 +16324,7 @@ R average.");
     Settings->callback((Fl_Callback*)cb_Settings, (void*)(this));
     { Fondo2 = new Fl_Box(1, 1, 640, 528);
     } // Fl_Box* Fondo2
-    { STabs = new Fl_Tabs(5, 0, 631, 535);
+    { STabs = new Fl_Tabs(0, 0, 636, 535);
       STabs->user_data((void*)(1));
       { Look = new Fl_Group(5, 26, 630, 502, "Look");
         Look->box(FL_PLASTIC_DOWN_FRAME);
@@ -16385,7 +16393,7 @@ R average.");
         } // Fl_Button* BI_Browser
         Look->end();
       } // Fl_Group* Look
-      { AUDIO_SET = new Fl_Group(5, 26, 630, 502, "Audio");
+      { AUDIO_SET = new Fl_Group(0, 26, 635, 502, "Audio");
         AUDIO_SET->box(FL_PLASTIC_DOWN_FRAME);
         AUDIO_SET->labelfont(1);
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16647,6 +16655,16 @@ R average.");
           Wave_Up_Qua->callback((Fl_Callback*)cb_Wave_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Wave_Up_Qua
+        { Calibration = new Fl_Counter(120, 479, 116, 21, "Tuner Calibration A4");
+          Calibration->labelsize(10);
+          Calibration->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Calibration->minimum(420);
+          Calibration->maximum(460);
+          Calibration->value(440);
+          Calibration->textsize(10);
+          Calibration->callback((Fl_Callback*)cb_Calibration);
+          Calibration->align(FL_ALIGN_LEFT);
+        } // Fl_Counter* Calibration
         AUDIO_SET->end();
       } // Fl_Group* AUDIO_SET
       { MIDI_SET = new Fl_Group(5, 26, 630, 502, "MIDI");
@@ -17582,6 +17600,7 @@ rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
 rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
+rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
 
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
@@ -18787,6 +18806,8 @@ Shi_Up_Qua->value(rkr->Shi_U_Q);
 Wave_Amo->value(Wave_res_amount);
 Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
+Calibration->value(aFreq);
+
 
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);

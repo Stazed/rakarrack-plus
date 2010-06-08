@@ -373,4 +373,23 @@ switch(Tap_SetValue)
    
 }
 
+void
+RKR::update_freqs(float val)
+{
+  int i;
+
+  aFreq=val;
+  freqs[0] = aFreq;
+  lfreqs[0] = logf (freqs[0]);
+  for (i = 1; i < 12; i++)
+    {
+      freqs[i] = freqs[i - 1] * D_NOTE;
+      lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
+    }
+
+}
+
+
+
+
   

@@ -50,6 +50,10 @@ int Wave_up_q;
 int Wave_down_q;
 float val_sum;
 float r__ratio;
+float freqs[12];
+float lfreqs[12];
+float aFreq;
+
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 Pixmap p, mask;
 XWMHints *hints;
@@ -105,10 +109,12 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("DownQuality"), DownQual, 4); 
   rakarrack.get (PrefNom ("UpAmount"), UpAmo, 0); 
 
+
   Adjust_Upsample();
 
   rakarrack.get (PrefNom ("Looper Size"), looper_size, 1);
-
+  rakarrack.get (PrefNom ("Calibration"), aFreq, 440.0f);
+  update_freqs(aFreq);
   
   Fraction_Bypass = 1.0f;
   Master_Volume = 0.50f;

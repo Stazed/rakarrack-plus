@@ -77,8 +77,6 @@ private:
 
   int blockSize;
 
-  float freqs[12];
-  float lfreqs[12];
 
 
 };

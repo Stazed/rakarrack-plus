@@ -3465,6 +3465,11 @@ private:
   void cb_Wave_Up_Qua_i(Fl_Choice*, void*);
   static void cb_Wave_Up_Qua(Fl_Choice*, void*);
 public:
+  Fl_Counter *Calibration;
+private:
+  void cb_Calibration_i(Fl_Counter*, void*);
+  static void cb_Calibration(Fl_Counter*, void*);
+public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;
