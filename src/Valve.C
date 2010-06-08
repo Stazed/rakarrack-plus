@@ -133,10 +133,8 @@ Valve::out (float * smpsl, float * smpsr)
 {
   int i;
 
-  float l, r, lout, rout, fx, tmpatk;
+  float l, r, lout, rout, fx;
 
-  if (Pnegate != 0)
-    inputvol *= -1.0f;
 
   if (Pstereo != 0)
     {				//Stereo
@@ -169,6 +167,7 @@ Valve::out (float * smpsl, float * smpsr)
                if (Pstereo != 0) efxoutr[i]=Wshape(efxoutr[i]);
              }
     }	
+
       for (i =0; i<PERIOD; i++) //soft limiting to 3.0 (max)
              {
                fx = efxoutl[i];   
