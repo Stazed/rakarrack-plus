@@ -162,11 +162,6 @@ HarmEnhancer::calcula_mag (float *Rmag)
   int i;
   float mag_fix = 0.0f;
 
-//  float mag[HARMONICS] =
-//    { 0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
-//    Rmag[6], Rmag[7], Rmag[8], Rmag[9]
-//  };
-
   float mag[HARMONICS] =
     { 0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
     Rmag[6], Rmag[7], Rmag[8], Rmag[9]
