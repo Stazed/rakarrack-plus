@@ -367,6 +367,7 @@ the Key/Chord selected. The harmonizer recognizes what note you play
 and creates a second voice in the Key/Chord selected.</p>
 
 <h3><a name="settings"></a>Preferences (Settings)</h3>
+<h2>Look Preferences</h2>
 <p><img src="imagenes/settings.jpg" alt="rakarrack Settings Window"></p>
 <p><b>Colors</b></p>
 <p>Through the Settings Look tab window you can configure
@@ -404,6 +405,9 @@ normally in "/usr/share/rakarrack" or "/usr/local/share/rakarrack".</p>
 menu save or restore the rakarrack look. If you have made a nice look
 and you want to share please send this file and the background picture
 to any of the rakarrack team members and will include on the website.</p>
+
+<h2>Audio Preferences</h2>
+
 <p><img alt="Settings Audio" src="imagenes/settings1.jpg"></p>
 
 <p><b>Fx On at start</b></p>
@@ -474,9 +478,14 @@ process.</p>
 <p> Distortion, Overdrive, Derelict, MBDist and StompBox effects use the
 waveshape internal class to saturate the signal, this kind of process
 produce sound aliasing, here you can resample in order to eliminate this
-aliasing, of course that will cost CPU.</p><p>
+aliasing, of course that will cost CPU.</p>
 
-</p><p><img alt="Settings MIDI" src="imagenes/settings2.jpg"></p>
+<p><b>Tuner Calibration A440</b></p>
+<p> Here you can calibrate the Tuner, this also calibrates the MIDI
+Converter, Ring and Harmonizer recognize note functions.</p>
+
+<h2>MIDI Preferences</h2>
+<p><img alt="Settings MIDI" src="imagenes/settings2.jpg"></p>
 
 <p><b>Auto Connect ALSA Sequencer Ports</b></p>
 <p>Here you can select if you want to auto connect the
@@ -494,6 +503,8 @@ Harmonizer.</p>
 rakarrack interpret the incoming MIDI Control messages, by default we
 use our MIDI implementation table, but you can also use MIDI learn to
 create your own tables.</p>
+
+<h2>Jack Preferences</h2>
 <p><img alt="Settings Jack" src="imagenes/settings3.jpg"></p>
 
 <p><b>Jack auto conection ports</b></p>
@@ -503,6 +514,8 @@ Jack ports Input and Output, you can select any of the available ports for each 
 <p>IMPORTANT: The number of
 selected Output ports needs to be an odd number, also the number of
 selected Input ports need to be a odd number if it's greater than 1.</p>
+
+<h2>Misc Preferences</h2>
 <p><img alt="Settings Misc" src="imagenes/settings4.jpg"></p>
 
 <p><b>Author</b></p>
@@ -526,9 +539,10 @@ message.</p>
 <p>Enable/Disable
 the Tap Tempo timeout, if it's enabled, 8 seconds after the
 last signal, Tap Tempo is put to Off</p>
+
+
+<h2>Bank Preferences</h2>
 <p><img alt="Settings Bank" src="imagenes/settings5.jpg"></p>
-
-
 <p><b>Bank</b></p>
 <p>Here you can specify which file bank is loaded when
 program starts.</p>
@@ -2799,6 +2813,8 @@ MIDI message, of course.</p>
 
 <p>When "Your frequency" is outside the acceptable
 range is shown in red.</p>
+<p> You can callibrate the tuner in the Audio Settings in the
+preferences.</p>
 
 <p><a href="#top">Contents</a></p>
 
