@@ -7471,12 +7471,19 @@ void RKRGUI::cb_CopyT(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_ClearA_i(Fl_Button*, void*) {
   int i, j,k;
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
+
 
 for(i=0; i<128; i++)
   {
     for(j=0;j<20;j++)
       {
-         if (rkr->XUserMIDI[i][j] == rkr->efx_params[(int)Epar->value()-1].Ato)
+         if (rkr->XUserMIDI[i][j] == the_one)
            {
              for(k=j+1;k<20;k++) rkr->XUserMIDI[i][k-1]=rkr->XUserMIDI[i][k];
              rkr->XUserMIDI[i][19]=0;             
@@ -7502,14 +7509,22 @@ void RKRGUI::cb_ClearP(Fl_Button* o, void* v) {
 void RKRGUI::cb_Assign_i(Fl_Button*, void*) {
   int i;
 
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
+
+
 for(i=0;i<20;i++)
 
  {
-    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] == rkr->efx_params[(int)Epar->value()-1].Ato) return;
+    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
 
     if(rkr->XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         rkr->XUserMIDI[(int)Disp_Control->value()][i]=rkr->efx_params[(int)Epar->value()-1].Ato;
+         rkr->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
@@ -7523,6 +7538,13 @@ void RKRGUI::cb_Assign(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_AssignA_i(Fl_Button*, void*) {
   int i,j;
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
+
 
 for(j=1;j<61;j++)
 
@@ -7530,11 +7552,11 @@ for(j=1;j<61;j++)
 for(i=0;i<20;i++)
 
  {
-    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == rkr->efx_params[(int)Epar->value()-1].Ato) break;
+    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == the_one) break;
 
     if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=rkr->efx_params[(int)Epar->value()-1].Ato;
+         rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
@@ -7577,6 +7599,22 @@ void RKRGUI::cb_CloseML_i(Fl_Button*, void*) {
 }
 void RKRGUI::cb_CloseML(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_CloseML_i(o,v);
+}
+
+void RKRGUI::cb_M_fil_all_i(Fl_Button*, void*) {
+  rkr->ML_filter=0;
+FillML(0);
+}
+void RKRGUI::cb_M_fil_all(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_M_fil_all_i(o,v);
+}
+
+void RKRGUI::cb_M_fil_current_i(Fl_Button*, void*) {
+  rkr->ML_filter=1;
+FillML(0);
+}
+void RKRGUI::cb_M_fil_current(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_M_fil_current_i(o,v);
 }
 
 void RKRGUI::cb_AboutWin_i(Fl_Double_Window*, void*) {
@@ -16871,7 +16909,7 @@ R average.");
       Epar->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       Epar->callback((Fl_Callback*)cb_Epar);
     } // Fl_Browser* Epar
-    { GMM = new Fl_Button(10, 410, 135, 30, "Get MIDI Message");
+    { GMM = new Fl_Button(10, 445, 135, 30, "Get MIDI Message");
       GMM->callback((Fl_Callback*)cb_GMM);
     } // Fl_Button* GMM
     { TPresets = new Fl_Browser(430, 61, 201, 348);
@@ -16962,10 +17000,10 @@ R average.");
     { AssignA = new Fl_Button(10, 20, 98, 30, "Assign to All");
       AssignA->callback((Fl_Callback*)cb_AssignA);
     } // Fl_Button* AssignA
-    { CancelRec = new Fl_Button(10, 445, 135, 30, "Cancel");
+    { CancelRec = new Fl_Button(200, 450, 60, 20, "Cancel");
       CancelRec->callback((Fl_Callback*)cb_CancelRec);
     } // Fl_Button* CancelRec
-    { Disp_Control = new Fl_Value_Input(155, 410, 45, 30);
+    { Disp_Control = new Fl_Value_Input(155, 445, 40, 30);
       Disp_Control->minimum(1);
       Disp_Control->maximum(127);
       Disp_Control->step(1);
@@ -16979,6 +17017,18 @@ R average.");
     { CloseML = new Fl_Button(480, 445, 150, 30, "Close");
       CloseML->callback((Fl_Callback*)cb_CloseML);
     } // Fl_Button* CloseML
+    { Filters_ML = new Fl_Group(10, 410, 200, 31);
+      Filters_ML->box(FL_DOWN_BOX);
+      { M_fil_all = new Fl_Button(16, 415, 89, 20, "All");
+        M_fil_all->type(102);
+        M_fil_all->callback((Fl_Callback*)cb_M_fil_all);
+      } // Fl_Button* M_fil_all
+      { M_fil_current = new Fl_Button(113, 415, 89, 20, "Current");
+        M_fil_current->type(102);
+        M_fil_current->callback((Fl_Callback*)cb_M_fil_current);
+      } // Fl_Button* M_fil_current
+      Filters_ML->end();
+    } // Fl_Group* Filters_ML
     MIDILearn->end();
   } // Fl_Double_Window* MIDILearn
   { AboutWin = new Fl_Double_Window(375, 235, "About Rakarrack");
@@ -20920,34 +20970,64 @@ Fl::redraw();
 }
 
 void RKRGUI::FillML(int type) {
-  int i;
+  int i,j,k;
 char tmp[256];
 memset(tmp,0, sizeof(tmp));
 
 
-if(type<1)
-{
 sprintf(tmp,"%s   v%s - MIDI Learn - Preset : %s",rkr->jackcliname,VERSION,rkr->Bank[rkr->Selected_Preset].Preset_Name);
 MIDILearn->copy_label(tmp);
-}
 
-
-if (type<2)
-{
+memset(rkr->ML_clist,0,sizeof(rkr->ML_clist));
 Epar->clear();
-for(i=0; i<rkr->NumParams; i++) Epar->add(rkr->efx_params[i].Nom);
-Epar->select(1,1);
-}
+k=0;
 
-if (type<3)
+switch(rkr->ML_filter) 
 {
+  
+ case 0:
+ for(i=0; i<rkr->NumParams; i++) Epar->add(rkr->efx_params[i].Nom);  
+ break;
+
+ case 1:
+ for(i=0;i<rkr->NumParams;i++)
+      {
+        if(rkr->efx_params[i].Effect==50)
+         { 
+         Epar->add(rkr->efx_params[i].Nom); 
+         rkr->ML_clist[k]=rkr->efx_params[i].Ato;
+         k++;
+         }
+      
+      } 
+ for(j=0;j<10;j++)
+  {
+    for(i=0;i<rkr->NumParams;i++)
+      {
+        if(rkr->efx_params[i].Effect==rkr->efx_order[j])
+         { 
+         Epar->add(rkr->efx_params[i].Nom); 
+         rkr->ML_clist[k]=rkr->efx_params[i].Ato;
+         k++;
+         }
+      
+      } 
+      
+  }
+  
+  
+  break;
+}
+Epar->select(1,1);
+Epar->redraw();
+
+
+
+
 TPresets->clear();
 for(i=1; i<=60; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
 TPresets->select(rkr->Selected_Preset,1);
 TPresets->redraw();
-}
-
-
 
 DisAssigns();
 }
@@ -20955,6 +21035,13 @@ DisAssigns();
 void RKRGUI::DisAssigns() {
   int i,j,k;
 char tmp[8];
+
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
 
 
 k=0;
@@ -20964,7 +21051,7 @@ for(i=0;i<128;i++)
     for(j=0;j<20;j++)
       { 
         
-       if(rkr->XUserMIDI[i][j] == rkr->efx_params[Epar->value()-1].Ato)
+       if(rkr->XUserMIDI[i][j] == the_one)
          {
            k++;     
            memset(tmp,0, sizeof(tmp));

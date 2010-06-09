@@ -664,8 +664,7 @@ switch (event) {
     return 1;
   default:
     return 0;
-  }} {selected
-    }
+  }} {}
   }
   Function {draw()} {} {
     code {int X,Y,W,H;
@@ -827,7 +826,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -8275,7 +8275,7 @@ strcpy(rkr->BankFilename,filename);}
     Fl_Window MIDILearn {
       callback {save_stat(5);
 MIDILearn->hide();}
-      xywh {298 253 640 480} type Double hide
+      xywh {1471 23 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
@@ -8289,7 +8289,7 @@ MIDILearn->hide();}
         callback {rkr->ControlGet=0;
 rkr->CountWait=0;
 rkr->RControl=1;}
-        xywh {10 410 135 30}
+        xywh {10 445 135 30}
       }
       Fl_Browser TPresets {
         xywh {430 61 201 348} type Hold when 3 textcolor 7
@@ -8373,12 +8373,19 @@ DisAssigns();}
       Fl_Button ClearA {
         label {Clear Assignements}
         callback {int i, j,k;
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
+
 
 for(i=0; i<128; i++)
   {
     for(j=0;j<20;j++)
       {
-         if (rkr->XUserMIDI[i][j] == rkr->efx_params[(int)Epar->value()-1].Ato)
+         if (rkr->XUserMIDI[i][j] == the_one)
            {
              for(k=j+1;k<20;k++) rkr->XUserMIDI[i][k-1]=rkr->XUserMIDI[i][k];
              rkr->XUserMIDI[i][19]=0;             
@@ -8400,14 +8407,22 @@ DisAssigns();}
         label Assign
         callback {int i;
 
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
+
+
 for(i=0;i<20;i++)
 
  {
-    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] == rkr->efx_params[(int)Epar->value()-1].Ato) return;
+    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
 
     if(rkr->XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         rkr->XUserMIDI[(int)Disp_Control->value()][i]=rkr->efx_params[(int)Epar->value()-1].Ato;
+         rkr->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
@@ -8419,6 +8434,13 @@ DisAssigns();}
       Fl_Button AssignA {
         label {Assign to All}
         callback {int i,j;
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
+
 
 for(j=1;j<61;j++)
 
@@ -8426,11 +8448,11 @@ for(j=1;j<61;j++)
 for(i=0;i<20;i++)
 
  {
-    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == rkr->efx_params[(int)Epar->value()-1].Ato) break;
+    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == the_one) break;
 
     if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=rkr->efx_params[(int)Epar->value()-1].Ato;
+         rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
@@ -8445,12 +8467,12 @@ Assign->do_callback();}
         callback {rkr->RControl = 0;
 GMM->color(fore_color);
 GMM->redraw();}
-        xywh {10 445 135 30}
+        xywh {200 450 60 20}
       }
       Fl_Value_Input Disp_Control {
         callback {if(o->value()> 127) o->value(127);
 if(o->value()< 1) o->value(1);}
-        xywh {155 410 45 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
+        xywh {155 445 40 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
       }
       Fl_Button CopyTAll {
         label {Copy to All}
@@ -8462,6 +8484,22 @@ for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUse
         label Close
         callback {MIDILearn->do_callback();}
         xywh {480 445 150 30}
+      }
+      Fl_Group Filters_ML {
+        xywh {10 410 200 31} box DOWN_BOX
+      } {
+        Fl_Button M_fil_all {
+          label All
+          callback {rkr->ML_filter=0;
+FillML(0);}
+          xywh {16 415 89 20} type Radio
+        }
+        Fl_Button M_fil_current {
+          label Current
+          callback {rkr->ML_filter=1;
+FillML(0);}
+          xywh {113 415 89 20} type Radio
+        }
       }
     }
     Fl_Window AboutWin {
@@ -12314,40 +12352,78 @@ save_stat(3);
 Fl::redraw();} {}
   }
   Function {FillML(int type)} {} {
-    code {int i;
+    code {int i,j,k;
 char tmp[256];
 memset(tmp,0, sizeof(tmp));
 
 
-if(type<1)
-{
 sprintf(tmp,"%s   v%s - MIDI Learn - Preset : %s",rkr->jackcliname,VERSION,rkr->Bank[rkr->Selected_Preset].Preset_Name);
 MIDILearn->copy_label(tmp);
-}
 
-
-if (type<2)
-{
+memset(rkr->ML_clist,0,sizeof(rkr->ML_clist));
 Epar->clear();
-for(i=0; i<rkr->NumParams; i++) Epar->add(rkr->efx_params[i].Nom);
-Epar->select(1,1);
-}
+k=0;
 
-if (type<3)
+switch(rkr->ML_filter) 
 {
+  
+ case 0:
+ for(i=0; i<rkr->NumParams; i++) Epar->add(rkr->efx_params[i].Nom);  
+ break;
+
+ case 1:
+ for(i=0;i<rkr->NumParams;i++)
+      {
+        if(rkr->efx_params[i].Effect==50)
+         { 
+         Epar->add(rkr->efx_params[i].Nom); 
+         rkr->ML_clist[k]=rkr->efx_params[i].Ato;
+         k++;
+         }
+      
+      } 
+ for(j=0;j<10;j++)
+  {
+    for(i=0;i<rkr->NumParams;i++)
+      {
+        if(rkr->efx_params[i].Effect==rkr->efx_order[j])
+         { 
+         Epar->add(rkr->efx_params[i].Nom); 
+         rkr->ML_clist[k]=rkr->efx_params[i].Ato;
+         k++;
+         }
+      
+      } 
+      
+  }
+  
+  
+  break;
+}
+Epar->select(1,1);
+Epar->redraw();
+
+
+
+
 TPresets->clear();
 for(i=1; i<=60; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
 TPresets->select(rkr->Selected_Preset,1);
 TPresets->redraw();
-}
 
-
-
-DisAssigns();} {}
+DisAssigns();} {selected
+    }
   }
   Function {DisAssigns()} {} {
     code {int i,j,k;
 char tmp[8];
+
+int the_one;
+
+if (rkr->ML_filter==0)
+ the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+ else
+ the_one = rkr->ML_clist[(int)Epar->value()-1];
 
 
 k=0;
@@ -12357,7 +12433,7 @@ for(i=0;i<128;i++)
     for(j=0;j<20;j++)
       { 
         
-       if(rkr->XUserMIDI[i][j] == rkr->efx_params[Epar->value()-1].Ato)
+       if(rkr->XUserMIDI[i][j] == the_one)
          {
            k++;     
            memset(tmp,0, sizeof(tmp));

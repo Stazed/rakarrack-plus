@@ -3635,6 +3635,17 @@ private:
   void cb_CloseML_i(Fl_Button*, void*);
   static void cb_CloseML(Fl_Button*, void*);
 public:
+  Fl_Group *Filters_ML;
+  Fl_Button *M_fil_all;
+private:
+  void cb_M_fil_all_i(Fl_Button*, void*);
+  static void cb_M_fil_all(Fl_Button*, void*);
+public:
+  Fl_Button *M_fil_current;
+private:
+  void cb_M_fil_current_i(Fl_Button*, void*);
+  static void cb_M_fil_current(Fl_Button*, void*);
+public:
   Fl_Double_Window *AboutWin;
 private:
   void cb_AboutWin_i(Fl_Double_Window*, void*);

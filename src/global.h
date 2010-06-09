@@ -501,7 +501,8 @@ public:
  
   int mtc_counter;
   int EnableBackgroundImage;
-
+  int ML_filter;
+  int ML_clist[150];
 
   long Tap_time_Init;
 
@@ -563,6 +564,8 @@ public:
   char *Bank_Saved;
   char *UserRealName;
 
+
+
   char MID[128];
   char BankFilename[128];
   char BackgroundImage[256];
@@ -579,6 +582,7 @@ public:
   {
     char Nom[32];
     int Ato;
+    int Effect;
   } efx_params[500];
 
 
