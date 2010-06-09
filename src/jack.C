@@ -139,6 +139,8 @@ jackprocess (jack_nframes_t nframes, void *arg)
 
   int i,count;
   jack_midi_event_t midievent;
+  jack_position_t pos;
+  jack_transport_state_t astate;
 
   jack_default_audio_sample_t *outl = (jack_default_audio_sample_t *)
     jack_port_get_buffer (outport_left, nframes);
@@ -156,6 +158,23 @@ jackprocess (jack_nframes_t nframes, void *arg)
 
   JackOUT->cpuload = jack_cpu_load(jackclient);
 
+  
+  if(JackOUT->Tap_Bypass) 
+  {
+
+   astate = jack_transport_query(jackclient, &pos);
+   if(astate >0)
+   {
+   if (JackOUT->jt_tempo != pos.beats_per_minute) 
+   {
+   actualiza_tap(pos.beats_per_minute);
+   }
+   }
+
+  }
+  
+  
+  
   int jnumpi = jack_port_connected(inputport_left) + jack_port_connected(inputport_right );
   if(jnumpi != JackOUT->numpi) 
   {
@@ -287,4 +306,11 @@ return(1);
 
 }
 
-
+void
+actualiza_tap(double val)
+{
+JackOUT->jt_tempo=val;
+JackOUT->Tap_TempoSet = lrint(JackOUT->jt_tempo);
+JackOUT->Update_tempo();
+JackOUT->Tap_Display=1;
+}
