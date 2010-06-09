@@ -620,7 +620,9 @@ switch (event) {
     handle_release();
     return 1;
   case FL_KEYBOARD :
-       if (Fl::event_state(FL_SHIFT)) mul=10; else mul = 1;
+       if (Fl::event_state(FL_SHIFT)) mul=10; else 
+       if (Fl::event_state(FL_CTRL)) mul=100; else
+       mul = 1;
         
       switch (Fl::event_key()) {
       case FL_Up:
@@ -662,10 +664,10 @@ switch (event) {
     return 1;
   default:
     return 0;
-  }} {}
+  }} {selected
+    }
   }
-  Function {draw()} {open
-  } {
+  Function {draw()} {} {
     code {int X,Y,W,H;
 int sxx = x(), syy = y(), sww = w(), shh = h();
 int bxx = x(), byy = y(), bww = w(), bhh = h();
@@ -4862,7 +4864,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Multi selected
+            label Multi
             xywh {0 0 36 21} labelsize 10
           }
         }

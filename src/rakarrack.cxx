@@ -573,7 +573,9 @@ switch (event) {
     handle_release();
     return 1;
   case FL_KEYBOARD :
-       if (Fl::event_state(FL_SHIFT)) mul=10; else mul = 1;
+       if (Fl::event_state(FL_SHIFT)) mul=10; else 
+       if (Fl::event_state(FL_CTRL)) mul=100; else
+       mul = 1;
         
       switch (Fl::event_key()) {
       case FL_Up:
