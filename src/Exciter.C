@@ -104,7 +104,7 @@ void
 Exciter::sethar(int num,int value)
 {
 float har=32.0f*((float)num+1.0f);
-if (num%2==1) har=11200.0f;
+if (num%2==1) har=11200.0f-64.0f*((float)num+1.0f);
 Prm[num]=value;
 rm[num]= (float)value/har;
 harm->calcula_mag(rm);
