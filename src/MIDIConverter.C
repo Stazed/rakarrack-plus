@@ -17,7 +17,6 @@
 MIDIConverter::MIDIConverter ()
 {
 
-  int i;
   velocity = 100;
   channel = 0;
   lanota = -1;

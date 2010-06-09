@@ -17496,7 +17496,7 @@ rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
 rakarrack.set(rkr->PrefNom("Labels Color"),(int) label_color);
 rakarrack.set(rkr->PrefNom("Schema"), (int) scheme_ch->value());
 
-if ((Preset_Counter->value() >0) && (Preset_Counter->value() < 81))
+if ((Preset_Counter->value() >0) && (Preset_Counter->value() < 61))
 
 rakarrack.set(rkr->PrefNom("Preset Num"),(int) Preset_Counter->value());
 
