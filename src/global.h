@@ -500,6 +500,9 @@ public:
   int last_auxvalue;
  
   int mtc_counter;
+  int EnableBackgroundImage;
+
+
   long Tap_time_Init;
 
   double Tap_timeB;

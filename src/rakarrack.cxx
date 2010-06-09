@@ -4450,8 +4450,9 @@ Fl_Menu_Item RKRGUI::menu_synthfilter_preset[] = {
  {"High Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Band Pass", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Lead Synth", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Water", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Pan Filter", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Multi", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -6991,6 +6992,14 @@ Background_Color_Change(back_color);
 }
 void RKRGUI::cb_K_C(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_K_C_i(o,v);
+}
+
+void RKRGUI::cb_Enable_Back_i(Fl_Check_Button* o, void*) {
+  rkr->EnableBackgroundImage=(int) o->value();
+PutBackground();
+}
+void RKRGUI::cb_Enable_Back(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Enable_Back_i(o,v);
 }
 
 void RKRGUI::cb_BI_Browser_i(Fl_Button*, void*) {
@@ -16332,7 +16341,6 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
-        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -16381,14 +16389,21 @@ R average.");
         { K_C = new Fl_Button(330, 390, 90, 25, "Background");
           K_C->callback((Fl_Callback*)cb_K_C);
         } // Fl_Button* K_C
-        { BackFiname = new Fl_File_Input(10, 450, 390, 30, "Background Image");
+        { Enable_Back = new Fl_Check_Button(162, 432, 23, 20, "Enable Background Image");
+          Enable_Back->down_box(FL_DOWN_BOX);
+          Enable_Back->labelsize(11);
+          Enable_Back->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Enable_Back->callback((Fl_Callback*)cb_Enable_Back);
+          Enable_Back->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* Enable_Back
+        { BackFiname = new Fl_File_Input(10, 470, 390, 30, "Background Image");
           BackFiname->labelsize(11);
           BackFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           BackFiname->textsize(12);
           BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           BackFiname->align(FL_ALIGN_TOP_LEFT);
         } // Fl_File_Input* BackFiname
-        { BI_Browser = new Fl_Button(410, 460, 65, 20, "Browse");
+        { BI_Browser = new Fl_Button(410, 480, 65, 20, "Browse");
           BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
         } // Fl_Button* BI_Browser
         Look->end();
@@ -16399,6 +16414,7 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
+        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 58, 23, 20, "FX On at start");
@@ -17210,6 +17226,7 @@ MenuB->color(bcolor);
 back_color = bcolor;
 
 Label_Color_Change(label_color);
+if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);
 }
 
 void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
@@ -17335,6 +17352,7 @@ rakarrack.get(rkr->PrefNom("Principal H"),h,600);
 char tmp[256];
 sprintf (tmp, "%s/bg.png", DATADIR);
 
+rakarrack.get(rkr->PrefNom("Enable Background Image"),rkr->EnableBackgroundImage,1);
 rakarrack.get(rkr->PrefNom("Background Image"),rkr->BackgroundImage,tmp,256);
 PutBackground();
 rakarrack.get(rkr->PrefNom("FontSize"),rkr->relfontsize,0);
@@ -17615,6 +17633,7 @@ rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
 rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
+rakarrack.set(rkr->PrefNom("Enable Background Image"),rkr->EnableBackgroundImage);
 rakarrack.set(rkr->PrefNom("Background Image"),rkr->BackgroundImage);
 rakarrack.set(rkr->PrefNom("Auto Connect MIDI IN"),rkr->aconnect_MI);
 rakarrack.set(rkr->PrefNom("Auto Connect Jack"),rkr->aconnect_JA);
@@ -18781,7 +18800,7 @@ i++;
 if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
 
 rkr->m_displayed = 0;
-
+Enable_Back->value(rkr->EnableBackgroundImage);
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
 Username->value(rkr->UserRealName);
@@ -20583,6 +20602,9 @@ for (int t=0; t<ob->children();t++)
 void RKRGUI::PutBackground() {
   delete back;
 back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
+if(!rkr->EnableBackgroundImage)
+back->color_average(back_color,0.0);
+
 InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());

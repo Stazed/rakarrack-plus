@@ -76,6 +76,7 @@ private:
   float MINFREQ,MAXFREQ;
   float fsequence[8];
   float fq;
+  float panning;
   float ifperiod,fperiod, seqpower;
 
   float *outi;

@@ -286,9 +286,8 @@ void
 Synthfilter::setpreset (int npreset)
 {
   const int PRESET_SIZE = 16;
-  const int NUM_PRESETS = 6;
+  const int NUM_PRESETS = 7;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-  //{0,  1,  2, 3, 4,  5,   6, 7,  8, 9, 10, 11, 12, 13, 14, 15}
     //Low Pass
     {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0},
     //High Pass
@@ -297,10 +296,14 @@ Synthfilter::setpreset (int npreset)
     {0, 20, 14, 0, 1, 64, 110, -40, 4, 4, 0, 32, -32, 500, 100, 0},
     //Lead Synth
     {0, 89, 31, 0, 1, 95, 38, -16, 1, 2, 1, 114, -32, 92, 215, 29},
-    //Phaser5
-    {0, 20, 14, 0, 1, 64, 110, -40, 0, 6, 0, 32, 32, 500, 100, 0},
-    //Phaser6
-    {0, 20, 14, 0, 1, 64, 110, -40, 4, 4, 0, 32, 32, 500, 100, 0},
+    //Water
+    {20, 69, 88, 0, 6, 0, 76, -50, 6, 2, 1, 0, 19, 114, 221, 127},
+    //Pan Filter
+    {0, 20, 100, 0, 5, 127, 127, -64, 2, 0, 0, 57, 0, 340, 288, 110},
+    //Multi
+    {64, 45, 88, 0, 1, 127, 81, 0, 4, 2, 0, 67, 0, 394, 252, 61}
+
+
   };
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);

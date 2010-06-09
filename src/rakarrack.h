@@ -3307,6 +3307,11 @@ private:
   void cb_K_C_i(Fl_Button*, void*);
   static void cb_K_C(Fl_Button*, void*);
 public:
+  Fl_Check_Button *Enable_Back;
+private:
+  void cb_Enable_Back_i(Fl_Check_Button*, void*);
+  static void cb_Enable_Back(Fl_Check_Button*, void*);
+public:
   Fl_File_Input *BackFiname;
   Fl_Button *BI_Browser;
 private:

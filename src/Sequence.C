@@ -507,9 +507,28 @@ Sequence::out (float * smpsl, float * smpsr)
    PS->ratio = lmod;
    PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
 
-   memcpy(templ, outo, sizeof(float)*PERIOD);
-   memcpy(tempr, outo, sizeof(float)*PERIOD);
-
+   if(Pstdiff==1)
+   {
+     for ( i = 0; i < nPERIOD; i++)
+     {
+     templ[i]=smpsl[i]-smpsr[i]+outo[i]; 
+     tempr[i]=smpsl[i]-smpsr[i]+outo[i]; 
+     }  
+   }
+   else
+   if(Pstdiff==2)
+   {
+      for ( i = 0; i < nPERIOD; i++)
+      {
+      templ[i]=outo[i]*(1.0f-panning); 
+      tempr[i]=outo[i]*panning; 
+      }  
+   }
+   else
+   {
+   memcpy(templ, outo, sizeof(float)*nPERIOD);
+   memcpy(tempr, outo, sizeof(float)*nPERIOD);
+   }
 
  if(DS_state != 0)
    {
@@ -770,6 +789,7 @@ Sequence::changepar (int npar, int value)
       break;
     case 10:
       Pq = value;
+      panning = ((float)value+64.0f) /128.0;
       fq = powf (60.0f, ((float)value - 64.0f) / 64.0f);
       break;
     case 11:

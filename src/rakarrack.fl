@@ -4834,7 +4834,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4854,12 +4854,16 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
             xywh {92 92 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Phaser 5}
-            xywh {102 102 36 21} labelsize 10
+            label Water
+            xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Phaser 6}
-            xywh {112 112 36 21} labelsize 10
+            label {Pan Filter}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Multi selected
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider synthfilter_WD {
@@ -7627,7 +7631,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1443 131 640 528} type Double color 4 hide
+      xywh {1436 124 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -7639,7 +7643,7 @@ Settings->hide();}
         Fl_Group Look {
           label Look
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -7763,9 +7767,15 @@ back_color=fl_rgb_color(r,g,b);
 Background_Color_Change(back_color);}
             xywh {330 390 90 25}
           }
+          Fl_Check_Button Enable_Back {
+            label {Enable Background Image}
+            callback {rkr->EnableBackgroundImage=(int) o->value();
+PutBackground();}
+            xywh {162 432 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          }
           Fl_File_Input BackFiname {
             label {Background Image}
-            xywh {10 450 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+            xywh {10 470 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
           }
           Fl_Button BI_Browser {
             label Browse
@@ -7776,13 +7786,13 @@ filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
 strcpy(rkr->BackgroundImage,filename);
 PutBackground();}
-            xywh {410 460 65 20}
+            xywh {410 480 65 20}
           }
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -8637,7 +8647,8 @@ MenuB->color(bcolor);
 
 back_color = bcolor;
 
-Label_Color_Change(label_color);} {}
+Label_Color_Change(label_color);
+if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);} {}
   }
   Function {Label_Color_Change(Fl_Color bcolor)} {} {
     code {label_color = bcolor;
@@ -8758,6 +8769,7 @@ rakarrack.get(rkr->PrefNom("Principal H"),h,600);
 char tmp[256];
 sprintf (tmp, "%s/bg.png", DATADIR);
 
+rakarrack.get(rkr->PrefNom("Enable Background Image"),rkr->EnableBackgroundImage,1);
 rakarrack.get(rkr->PrefNom("Background Image"),rkr->BackgroundImage,tmp,256);
 PutBackground();
 rakarrack.get(rkr->PrefNom("FontSize"),rkr->relfontsize,0);
@@ -9037,6 +9049,7 @@ rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
 rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
+rakarrack.set(rkr->PrefNom("Enable Background Image"),rkr->EnableBackgroundImage);
 rakarrack.set(rkr->PrefNom("Background Image"),rkr->BackgroundImage);
 rakarrack.set(rkr->PrefNom("Auto Connect MIDI IN"),rkr->aconnect_MI);
 rakarrack.set(rkr->PrefNom("Auto Connect Jack"),rkr->aconnect_JA);
@@ -9099,8 +9112,7 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -10197,7 +10209,7 @@ i++;
 if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
 
 rkr->m_displayed = 0;
-
+Enable_Back->value(rkr->EnableBackgroundImage);
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
 Username->value(rkr->UserRealName);
@@ -11990,6 +12002,9 @@ for (int t=0; t<ob->children();t++)
   Function {PutBackground()} {} {
     code {delete back;
 back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
+if(!rkr->EnableBackgroundImage)
+back->color_average(back_color,0.0);
+
 InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());

@@ -17,7 +17,6 @@
 Tuner::Tuner ()
 {
 
-  int i;
   schmittBuffer = NULL;
   schmittPointer = NULL;
   static const char *englishNotes[12] =
