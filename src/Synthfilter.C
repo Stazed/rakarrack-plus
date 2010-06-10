@@ -381,11 +381,15 @@ Synthfilter::changepar (int npar, int value)
       break;      
     case 15:
       Pbandwidth = value;
-      bandgain = 1.0f + 10.0f * (1.0f - (float) value/127.0f);
       Chp = C * (1.0f + ((float) value)/64.0f);  // C*3
       Clp = C * (1.0f - ((float) value)/190.0f); // C/3
       break;        
     };
+
+      if(Phpstages && Plpstages)
+      bandgain = powf(((float)(Phpstages*Plpstages + 3)), (1.0f - (float) Pbandwidth/127.0f));
+      else bandgain = 1.0f;    
+
 };
 
 int
