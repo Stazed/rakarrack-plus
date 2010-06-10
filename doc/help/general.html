@@ -1,0 +1,624 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<!-- This file was originally generated from OpenOffice, but is now maintained 
+  by hand. It is used for both the in-application help and the online help.
+
+  When making updates to this file, make sure you also update the online 
+  version with:
+  
+   scp help.html raboofje,rakarrack@web.sourceforge.net:htdocs
+-->
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help
+  General</title>
+  <meta name="AUTHOR" content="Josep Andreu">
+  <meta name="CREATED" content="0;0">
+  <meta name="CHANGED" content="20100112;22402500">
+  <meta name="DESCRIPTION" content="rakarrack help in html file"></head>
+  <body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+      <h3>General</h3>
+      <p><a href="#cmd">Command line options</a> <a href="#screen">The Main Screen</a> 
+      <a href="#conn">Connecting</a> <a href="#pyb">Presets &amp; banks</a> 
+      <a href="#settings">Preferences</a> <a href="#scuts">Shortcuts</a> 
+
+<p>RAKARRACK is a multi-effect processor for guitar players but the
+signal processing engine allows a full range of parameter adjustment
+making it suitable for almost any audio processing task.
+Thirty-two effects are included in this version: Lineal EQ, Parametric EQ,
+Shuffle, Exciter, Compressor,Expander, Distortion, Overdrive, Derelict, DistBand, Echo,
+MusicalDelay, Arpie, Chorus, Phaser, Analog Phaser, Flanger, Dual Flange, Reverb, WahWah, AlienWah,
+MuTroMojo, Convolotron, Cabinet, Valve, AutoPan/Extra Stereo, Harmonizer, Noise Gate, Ring, Synthfilter, 
+VaryBand and Looper. Ten can be used simultaneously on a chain. Also has a Tuner and a monophonic MIDI Converter. 
+Rakarrack can be managed externally by MIDI, the program receive Program Change and the parameters 
+can be controlled via Control Change MIDI messages.</p>
+
+<p>One of the most important things of RAKARRACK is that everything
+is on a single mouse click. All the effect parameters are on the
+screen.</p>
+
+<p>The effects are processed on a chain, the chain order processing
+is fully configurable by the user for each preset. The preset saves
+all the effects parameters. These presets can be grouped into banks
+to manage more efficiently. Saving a preset is as easy as typing a
+name.</p>
+
+<p>Rakarrack is capable of generating high volume output. It has Gain
+controls in general and some of the effects allow high gain
+adjustments. Use these gains with caution because they can produce
+unwanted effects. However, a limiter is applied to the final output
+which prevents signal level from increasing beyond 0dB. Bear this in
+mind, for high gains triggering limiting in the output will initiate
+high-ratio hard-knee compression. This is better than hard clipping
+distortion, but the audio effect can be undesirable.</p>
+
+<p align="left">Rakarrack is a JACK application, Dave Phillips wrote
+some good articles in their blog of how to use Linux audio with jack,
+if you don't know about jack, or you have problems running rakarrack,
+please read this series of articles:</p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000244">Troubleshooting
+Linux Audio, Part 1</a></p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000254">Troubleshooting
+Linux Audio, Part 2</a></p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000262">Troubleshooting
+Linux Audio, Part 3a</a></p>
+
+<p align="left"><a href="http://www.linuxjournal.com/node/1000295">Troubleshooting
+Linux Audio, Part 3b</a></p>
+<h3>INSTALL</h3>
+
+<p>Please read the INSTALL, README and PACKAGERS.README files provided
+with rakarrack. You will find there a  list of required dependency
+packages and detailed configuration options.</p>
+
+
+
+<h3>Warning</h3>
+
+
+<p>From 0.5.0 version we have included resampling and convolotron
+effect, the quality and amount settings of resampling must be set with
+extremely care, because they use a lot of CPUresources, in fact most
+computers can't afford the "Best" resampling quality if the amount of
+resampling is "x4" or greater. The resampling process makes each effect use
+more CPU resources because need to process more samples, if you combine
+wrong settings with convolotron or harmonizer effects that use also a lot CPU resources the results can be
+unpredictable. Wrong settings can hang up you computer. You have been warned.
+</p>
+
+<p>Of course resampling increase the sound quality, the way to set up
+is start with the worst resampling settings, amount = "x2" and
+Quality "Linear", the the jack load CPU value is displayed in the
+status bar in the preset block, if you want more accurate CPU usage
+values use top, htop or
+other CPU monitors, then increase the values thinking that then next
+step of quality could use double CPU than the actual set, that's not
+exactly in the lower resampling quality levels, but is more or
+less accurate in the high levels. You need to find a good balance
+between amount and quality settings to obtain the better sound that
+your computer can afford. Don't forget that each effect use also more
+CPU with resampling, then the best to set the resampling settings is
+using a preset that has five or six effects.
+</p>
+
+<p>Convolotron has a "Safe Mode" parameter, that "magically" limits the
+length of the Impulse Response file read, this is safe because limit
+the CPU usage, this maximum length is calculated reading the bogomips,
+is not dynamic and don't measure other tasks that your computer may be
+performing. We have been careful to calculate this maximum value, but
+if you use resampling this "safe" value can be ridiculous and may cause
+depending of the Impulse Response file read that the convolotron
+effect don't has sound, that can happens if the value is less than 5 ms.</p>
+
+<p>Of course increasing the length parameter you will obtain a better
+convolotron sound, if you unset the "Safe Mode" you can set the length
+to a desired value without the magical limit, but do that with
+extremely care. Check the jack load CPU in the status bar or use a CPU monitor to see what
+your computer can afford. Do that with small steps and checking the CPU
+usage, or you will hang up your computer. You have been warned.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+
+<h3><a name="cmd"></a>Command Line Options</h3>
+
+<table style="background-color: rgb(251, 251, 251);" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <th style="width: 150px;">
+      <p align="left">Short Format</p>
+      </th>
+      <th style="width: 150px;">
+      <p align="left">Long Format</p>
+      </th>
+      <th>
+      <p> </p>
+      <br>
+</th>
+    </tr>
+    <tr>
+      <td>
+      <p>-h</p>
+      </td>
+      <td>
+      <p>--help</p>
+      </td>
+      <td>
+      <p>Shows the command line options and exits.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-n</p>
+      </td>
+      <td>
+      <p>--no-gui</p>
+      </td>
+      <td>
+      <p>Start the application without GUI</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-l file</p>
+      </td>
+      <td>
+      <p>--load=file</p>
+      </td>
+      <td>
+      <p>Load file single Preset</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-p #</p>
+      </td>
+      <td>
+      <p>--preset=#</p>
+      </td>
+      <td>
+      <p>Set Preset number #</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-b file</p>
+      </td>
+      <td>
+      <p>--bank=file</p>
+      </td>
+      <td>
+      <p>Load a file Bank</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-x </p>
+      </td>
+      <td>
+      <p>--dump-preset-names</p>
+      </td>
+      <td>
+      <p>Dump Bank preset names</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Examples:</h4>
+
+<p>rakarrack -l mypreset.rkr     Starts Rakarrack and
+load the preset file mypreset.rkr</p>
+
+<p>rakarrack -n -b mybank.rkrb    Starts Rakarrack
+without GUI and load the bank file mybank.rkrb</p>
+
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+
+<h3><a name="screen"></a>The Main Screen</h3>
+
+<p><img src="imagenes/screen.png" alt="rakarrack Main Screen" align="bottom" border="1" height="420" width="640"></p>
+
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+
+<h3><a name="conn"></a>Connecting</h3>
+
+<p>The connections shown in the screenshot correspond to a
+motherboard sound card. The guitar is connected to the input line.
+Obviously this configuration can vary depending of your sound card.
+RAKARRACK has two inputs to allow use of stereo devices. The
+screenshot shows the connection of a guitar, usually mono aural.</p>
+
+<p><img src="imagenes/jack_conections.jpg" alt="rakarrack Qjackctl Connect" align="bottom" border="1" height="313" vspace="10" width="562"></p>
+
+<h3><a name="pyb"></a>Presets &amp; Banks</h3>
+
+<p>The state of the rack can be saved to a file at any
+time, either pressing the "Save" buttons or via the menu
+File-&gt;Save Preset. Rakarrack suggest the preset name for the
+filename.rkr in the save operation, but you can put what you want.
+You can assign the preset name here:</p>
+
+<p><img src="imagenes/preset_name1.png" alt="rakarrack Preset Box"></p>
+
+<p>If the user modifies any preset bank, The "compare"
+button allows you to compare the sound of the current state of
+rakarrack with the original bank preset from which it departed.</p>
+
+<p>You can use banks to store groups of presets. 80 preset can be
+saved on a bank. To include a preset in a bank must first indicate
+the name of preset on the main screen, open the bank window and click
+on a empty slot with the right mouse button. To retrieve a preset
+stored in a bank must open the window of banks and clicking the left
+button on the preset desired, also you can use the Preset selector of
+the main window.</p>
+
+<p>To save a preset in a bank:</p>
+
+<ul>
+
+  <li>
+    <p>Put descriptive name to the preset</p>
+  </li>
+  <li>
+    <p>Open the bank window (B)</p>
+  </li>
+  <li>
+    <p>Press the <b>right mouse button</b> in a empty place OR</p>
+  </li>
+  <li>
+    <p>Press the <b>right mouse button</b> on an existing preset if
+you wish to overwrite it.</p>
+  </li>
+</ul>
+
+<p>To retrieve a preset from a bank:</p>
+
+<ul>
+
+  <li>
+    <p>Open the bank window (B)</p>
+  </li>
+  <li>
+    <p>Click the <b>left mouse button</b> on the preset</p>
+  </li>
+</ul>
+
+<p>When rakarrack starts always load the bank selected in <a href="#settings">preferences</a>
+unless you specify another bank in the <a href="#cmd">command line</a>.
+Of course you can load/save any bank via menu File. By default, is
+allocated in preferences the installation included bank. This bank
+("Default.rkrb") is installed with root properties, then
+you can't overwrite as user. But is easy to save in any place to work
+with it. The bank contains default presets developed by <a href="#autores">the
+development team and some friends</a> who have contributed in this
+facet.</p>
+<p>Two banks are released with rakarrack, Default.rkrb and Extra.rkrb, they are
+installed in the data directory selected in the configure process
+normally in "/usr/share/rakarrack" or "/usr/local/share/rakarrack".</p>
+
+
+<p><img src="imagenes/bank_mgmt.jpg" alt="rakarrack Bank Window" align="bottom" border="1" height="500" width="640"></p>
+
+<p>Up the Bank windows screenshot, the tittle bar show
+the loaded bank. Click on preset or use preset counter in the Preset
+section to change the preset.</p>
+
+<p>Presets marked with (*) use the Select mode in the
+Harmonizer effect, that means you need to play a monophonic melody in
+the Key/Chord selected. The harmonizer recognizes what note you play
+and creates a second voice in the Key/Chord selected.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+<h3><a name="settings"></a>Preferences (Settings)</h3>
+<h2>Look Preferences</h2>
+<p><img src="imagenes/settings.jpg" alt="rakarrack Settings Window"></p>
+<p><b>Colors</b></p>
+<p>Through the Settings Look tab window you can configure
+different aspects of the application. The colors of he four elements
+on the screen, <b>background, buttons, labels and leds.</b></p>
+
+<p><img src="imagenes/thema1b.jpg" alt="rakarrack buttons color" align="bottom" border="1" height="213" width="219">    
+<img src="imagenes/thema2b.jpg" alt="rakarrack background color" align="bottom" border="1" height="214" width="219">   
+<img src="imagenes/thema3b.jpg" alt="rakarrack leds color" align="bottom" border="1" height="215" width="218"></p>
+<p><b>Scheme</b></p>
+
+<p>Also you can select the following schemes of widget
+decoration, X11, fltk, gtk+ y plastic. Some small example of fltk and
+plastic.</p>
+
+<p>
+<img src="imagenes/schema1b.jpg" alt="rakarrack schema fltk" align="bottom" border="1" height="216" width="214">
+<img src="imagenes/schema2b.jpg" alt="rakarrack schema gtk+" align="bottom" border="1" height="216" width="214">
+</p>
+
+<p><b>Font</b></p>
+<p>Select the label font for the main window.</p>
+<p><b>Font Size</b></p>
+<p>Increase/Decrease the font size of some windows.The Reset
+button set the relative value to "0"</p>
+
+<p><b>Enable Background Image</b></p>
+<p>Enable background image or use background color</p>
+
+<p><b>Background Image</b></p>
+<p>You can also select a PNG background image clicking
+on the 'Browse' button and also adjust the font sizes. Some background
+pictures are distributed in the rakarrack tarball package, they are
+installed in the data directory selected in the configure process
+normally in "/usr/share/rakarrack" or "/usr/local/share/rakarrack".</p>
+
+<p>The Skin save/load menu options located in the main
+menu save or restore the rakarrack look. If you have made a nice look
+and you want to share please send this file and the background picture
+to any of the rakarrack team members and will include on the website.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+
+<h2>Audio Preferences</h2>
+
+<p><img alt="Settings Audio" src="imagenes/settings1.jpg"></p>
+
+<p><b>Fx On at start</b></p>
+<p>This option put the FX On at the start, by default
+is Off.</p>
+<p><b>Filter Input DC Offset</b></p>
+<p>DC Input Removal, if you have a "cheapo" soundcard enable it</p> 
+<p><b>Preserve Gain/Master</b></p>
+<p>The Input Gain and Master Volume are stored in the
+preset, activating this option the Input Level and Master Volume was
+not modified when preset changes</p>
+
+<p><b>Update Tap Tempo</b></p>
+<p>If enabled each time you change the preset the Tempo
+parameter on the effects that has the "On" state will be updated with the
+Tap Tempo value/settings</p>
+
+<p><b>Upsampling</b></p>
+<p>Enable upsampling using libsamplerate process the
+effects with higher sample rate then the sound quality is improved, all
+the resample parameters will take effect the next time you launch
+rakarrack. Enabling upsampling rakarrack will use a lot more CPU
+resources of your computer, then take care to adjust all the upsampling
+settings, you can hang your computer if your main processor can not
+handle the resampling parameters. Each level of libsamplerate quality
+use more and more resources, and of course each effect use more CPU
+resources because need to process a higher amount of data. I highly
+recommend start with Linear quality and amount "x2" and check your CPU
+usage with "top", and then increase the amount/quality as desired.</p>
+
+<p><b>Amount</b></p>
+<p>Amount of resampling (x2, x3, x4, x5, x6)</p>
+
+<p><b>Up Sampling Quality</b></p>
+<p>Upsampling quality, select the libsamplerate quality
+for the upsampling procedure.</p>
+
+<p><b>Down Sampling Quality</b></p>
+<p>Downsampling quality, select the libsamplerate quality for the downsampling procedure.</p>
+
+<p><b>Looper Size Seconds</b></p>
+<p>Is the size in seconds of the buffer for the Looper effect.</p>
+
+<p><b>Harmonizer Quality</b></p>
+<p>Selects the quality of the harmonizer audio
+engine, used by Harmonizer, Shifter and Sequence effects, the available
+values are "4,8,16,32", the default value is "4". Incrementing the quality
+increments the CPU usage by this effect. Take specially care if you are
+using resampling too.
+This parameter will take effect the next time you run rakarrack.</p>
+
+<p><b>Limiter before Output Volume</b></p>
+<p> Rakarrack use a invisible end chain Limiter to limit the output signal
+level, this option put the limiter before the Output Volume slider, use that
+iff you need to generate a saturated signal level.</p>
+
+<p><b> Harmonizer, Reverbtron, Convolotron, Sequence and Shifter
+Downsample</b></p>
+<p> Here you can select the sample rate that use each effect, if you have
+problems of CPU usage, use this options to reduce the amount of CPU that
+each effect use. Probably if you have active resampling you will need to
+limit the sample rate of some effects in order to be able to use some
+presets. Of course that reduce the sound quality, but sure you can find a good
+balance settings. You can select the libsample rate quality for the Up/Down
+process.</p>
+
+<p><b>Whaveshape Resampling</b></p>
+<p> Distortion, Overdrive, Derelict, MBDist and StompBox effects use the
+waveshape internal class to saturate the signal, this kind of process
+produce sound aliasing, here you can resample in order to eliminate this
+aliasing, of course that will cost CPU.</p>
+
+<p><b>Tuner Calibration A440</b></p>
+<p> Here you can calibrate the Tuner, this also calibrates the MIDI
+Converter, Ring and Harmonizer recognize note functions.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+<h2>MIDI Preferences</h2>
+<p><img alt="Settings MIDI" src="imagenes/settings2.jpg"></p>
+
+<p><b>Auto Connect ALSA Sequencer Ports</b></p>
+<p>Here you can select if you want to auto connect the
+rakarrack MIDI IN to another device when the program starts, and you
+can select the device, also when the program is running you can
+connect here o use other utilities to do that.</p>
+
+<p><b>Midi Channels</b></p>
+<p>You can specify the MIDI Receive Channel for rakarrack
+also there are a special channel to receive the MIDI Chords for the
+Harmonizer.</p>
+
+<p><b>Midi Implementation</b></p>
+<p>The MIDI Implementation radio buttons selects how
+rakarrack interpret the incoming MIDI Control messages, by default we
+use our MIDI implementation table, but you can also use MIDI learn to
+create your own tables.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+<h2>Jack Preferences</h2>
+<p><img alt="Settings Jack" src="imagenes/settings3.jpg"></p>
+
+<p><b>Jack auto conection ports</b></p>
+<p>Here you can select if you want to auto connect the
+Jack ports Input and Output, you can select any of the available ports for each type of port.</p>
+<p>If you select a single Input port, will be connected to the both rakarrack Input Ports.</p>
+<p>IMPORTANT: The number of
+selected Output ports needs to be an odd number, also the number of
+selected Input ports need to be a odd number if it's greater than 1.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+
+<h2>Misc Preferences</h2>
+<p><img alt="Settings Misc" src="imagenes/settings4.jpg"></p>
+
+<p><b>Author</b></p>
+<p>Here you can define a nickname that was recorded in
+the presets that are created. The development team intends to create
+banks of effects created by users. These presets should assume the
+same license with which this program is released (GPL version 2 or
+higher) and suggest carrying an identification in the form First Name
+Last Name (nick). Of course you have to give a descriptive name to
+your preset. If you have a good preset and want to share or want to
+be included in future versions, send it to this address
+<a href="mailto:holborn@users.sourceforge.net">holborn@users.sourceforge.net</a></p>
+
+<p><b>Disable Warning</b></p>
+<p>Enabling this option will disable Warning and Error
+message.</p>
+
+<p><b>Tap Tempo Timeout</b></p>
+
+
+<p>Enable/Disable
+the Tap Tempo timeout, if it's enabled, 8 seconds after the
+last signal, Tap Tempo is put to Off</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+<h2>Bank Preferences</h2>
+<p><img alt="Settings Bank" src="imagenes/settings5.jpg"></p>
+<p><b>Bank</b></p>
+<p>Here you can specify which file bank is loaded when
+program starts.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+
+<h3><a name="scuts"></a>Shortcuts</h3>
+
+<p>We created a few shortcuts to make it easier to
+manage the program.</p>
+
+<table bgcolor="#fbfbfb" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <th>Key</th>
+      <th>Function</th>
+    </tr>
+    <tr>
+      <td>R</td>
+      <td>Enable rakarrack</td>
+    </tr>
+    <tr>
+      <td>T</td>
+      <td>Enable Tuner</td>
+    </tr>
+    <tr>
+      <td> M </td>
+      <td> Enable MIDI Converter </td>
+    </tr>
+    <tr>
+      <td> L </td>
+      <td> Open the load preset window </td>
+    </tr>
+    <tr>
+      <td> S </td>
+      <td> Open the save preset window </td>
+    </tr>
+    <tr>
+      <td> B </td>
+      <td> Open the bank window </td>
+    </tr>
+    <tr>
+      <td> G </td>
+      <td> Tap Tempo </td>
+    </tr>
+    <tr>
+      <td>E </td>
+      <td>Open the MIDI Learn Window </td>
+    </tr>
+    <tr>
+      <td> I </td>
+      <td> Open the Settings window </td>
+    </tr>
+    <tr>
+      <td> O </td>
+      <td> Open the Order window </td>
+    </tr>
+    <tr>
+      <td> N </td>
+      <td> New preset </td>
+    </tr>
+    <tr>
+      <td> P </td>
+      <td> Compare </td>
+    </tr>
+    <tr>
+      <td> F1 </td>
+      <td> Open the Help window </td>
+    </tr>
+    <tr>
+      <td> A </td>
+      <td> Open the Analog Interface Window </td>
+    </tr>
+    <tr>
+      <td> X </td>
+      <td> Exit </td>
+    </tr>
+    <tr>
+      <td> Esc </td>
+      <td> Exit </td>
+    </tr>
+
+
+
+
+  </tbody>
+</table>
+
+<p>The effects are enabled pressing the keys
+(1,2,3,4,5,6,7,8,9,0) . These keys are unrelated to the effects but
+with his position. So the key 1 trigger the effect that in the first
+position (the first effect of the left in the first line) and so on
+until 0 (the latter effect to the right in the second line).</p>
+<p>The Keyboard Up/Down - Left/Right arrows decrease/increase value by "1",
+Shift+(Left/Right Arrow) decrease/increase value by "10", Ctrl+(Left/Right
+Arrow) decrease/increase value by "100" also you can navigate and adjust trough the
+parameters with you computer keyboard with the Tab, Up/Down arrow and
+space bar keys.</p>
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+</body></html>
