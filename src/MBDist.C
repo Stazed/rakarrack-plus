@@ -235,8 +235,10 @@ void
 MBDist::setpreset (int npreset)
 {
   const int PRESET_SIZE = 15;
-  const int NUM_PRESETS = 7;
+  const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
+    //Saturation
+    {0, 64, 0, 41, 78, 26, 19, 26, 41, 20, 35, 0, 400, 1200, 0}, 
     //Dist 1
     {14, 64, 64, 20, 90, 0, 14, 13, 38, 49, 40, 0, 288, 1315, 1},
     //Soft

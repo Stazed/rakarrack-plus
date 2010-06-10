@@ -826,8 +826,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -4304,9 +4303,13 @@ mbdist_neg->value(rkr->efx_MBDist->getpar(11));
 mbdist_st->value(rkr->efx_MBDist->getpar(14));
 mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
 mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
-mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
+mbdist_cross2->value(rkr->efx_MBDist->getpar(13));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
+          MenuItem {} {
+            label Saturation selected
+            xywh {0 0 36 21} labelsize 10
+          }
           MenuItem {} {
             label {Distorsion 1}
             xywh {42 42 36 21} labelsize 10
@@ -12411,8 +12414,7 @@ for(i=1; i<=60; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
 TPresets->select(rkr->Selected_Preset,1);
 TPresets->redraw();
 
-DisAssigns();} {selected
-    }
+DisAssigns();} {}
   }
   Function {DisAssigns()} {} {
     code {int i,j,k;

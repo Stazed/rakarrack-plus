@@ -3967,6 +3967,7 @@ void RKRGUI::cb_mbdist_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_mbdist_preset[] = {
+ {"Saturation", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Distorsion 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Soft", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Modulated", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},

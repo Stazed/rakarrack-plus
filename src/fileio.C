@@ -864,7 +864,7 @@ RKR::loadfile (char *filename)
 		  &lv[24][0], &lv[24][1], &lv[24][2], &lv[24][3], &lv[24][4],
 		  &lv[24][5], &lv[24][6], &lv[24][7], &lv[24][8], &lv[24][9],
 		  &lv[24][10], &lv[24][11], &lv[24][12], &lv[24][13], &lv[24][14],
-		  &Exciter_B);
+		  &MBDist_B);
 	  break;
 
 	case 24:
