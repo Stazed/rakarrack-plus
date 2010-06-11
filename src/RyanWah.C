@@ -168,13 +168,13 @@ RyanWah::setampsns (int Pp)
   Pampsns = Pp;
   if(Pampsns>0)
   {
-  ampsns = powf (((float)Pampsns) / 64.0f, 2.5f) * 100.0f;
+  ampsns = exp(0.083f*(float)Pampsns);
   }  
   else
   {
-  ampsns = - powf (( -((float) Pampsns)) / 64.0f, 2.5f) * 100.0f;
+  ampsns = - exp(-0.083f*(float)Pampsns);
   }  
-  fbias  =  powf ((float)Pampsnsinv / 127.0f, 2.5f);
+  fbias  =  ((float)Pampsnsinv )/ 127.0f;
   ampsmooth = expf (-(70.0f + (float) Pampsmooth) / 127.0f * 10.0f*44100/fSAMPLE_RATE) * 0.99f;
 
 };
