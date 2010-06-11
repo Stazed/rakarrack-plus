@@ -4307,7 +4307,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));} open
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Saturation selected
+            label Saturation
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
@@ -8764,7 +8764,8 @@ ACI_LABEL->labelcolor(fl_lighter(label_color));
 aux_source->labelcolor(label_color);
 aux_midi->labelcolor(label_color);
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
     code {if (made)
@@ -10375,6 +10376,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
  
  
  Font_Bro->clear(); 
+ Font_Bro->textcolor(label_color);
  k=0;
  k = Fl::set_fonts(0);
   for (i = 0; i < k; i++) {

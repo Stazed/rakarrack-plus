@@ -18976,6 +18976,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
  
  
  Font_Bro->clear(); 
+ Font_Bro->textcolor(label_color);
  k=0;
  k = Fl::set_fonts(0);
   for (i = 0; i < k; i++) {
