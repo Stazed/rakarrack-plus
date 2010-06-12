@@ -53,6 +53,11 @@ MBDist::MBDist (float * efxoutl_, float * efxoutr_)
   lpf2r = new AnalogFilter (2, 2500.0f, .7071f, 0);
   hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0);
   hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0);
+  DCl = new AnalogFilter (3, 30, 1, 0);
+  DCr = new AnalogFilter (3, 30, 1, 0);
+  DCl->setfreq (30.0f);
+  DCr->setfreq (30.0f);
+
 
   mbwshape1l = new Waveshaper();
   mbwshape2l = new Waveshaper();  
@@ -99,6 +104,8 @@ MBDist::cleanup ()
   hpf2l->cleanup ();
   lpf2r->cleanup ();
   hpf2r->cleanup ();
+  DCl->cleanup();
+  DCr->cleanup();
 
 };
 /*
@@ -114,12 +121,25 @@ MBDist::out (float * smpsl, float * smpsr)
   if (Pnegate != 0)
     inputvol *= -1.0f;
 
+
+  if (Pstereo)
+    {				
       for (i = 0; i < PERIOD; i++)
 	{
 	  efxoutl[i] = smpsl[i] * inputvol * 2.0f;
 	  efxoutr[i] = smpsr[i] * inputvol * 2.0f;        
 	};
- 
+    }
+ else
+     {
+      for (i = 0; i < PERIOD; i++)
+	{
+	  efxoutl[i] =
+	    (smpsl[i]  +  smpsr[i] ) * inputvol;
+	};
+    };
+
+
   memcpy(lowl,efxoutl,sizeof(float) * PERIOD);
   memcpy(midl,efxoutl,sizeof(float) * PERIOD);
   memcpy(highl,efxoutl,sizeof(float) * PERIOD);
@@ -134,7 +154,7 @@ if(volM> 0)  mbwshape2l->waveshapesmps (PERIOD, midl, PtypeM, PdriveM, 1);
 if(volH> 0)  mbwshape3l->waveshapesmps (PERIOD, highl, PtypeH, PdriveH, 1);
 
 
-if (Pstereo)
+if(Pstereo)
 {
   memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
   memcpy(midr,efxoutr,sizeof(float) * PERIOD);
@@ -170,14 +190,17 @@ if(volH> 0)  mbwshape3r->waveshapesmps (PERIOD, highr, PtypeH, PdriveH, 1);
       
       l = lout * (1.0f - lrcross) + rout * lrcross;
       r = rout * (1.0f - lrcross) + lout * lrcross;
-      lout = l;
-      rout = r;  
        
-      efxoutl[i] = lout * 2.0f * level * panning;
-      efxoutr[i] = rout * 2.0f * level * (1.0f -panning);  
+      efxoutl[i] = l * 2.0f * level * panning;
+      efxoutr[i] = r * 2.0f * level * (1.0f -panning);  
 
     };
     
+    DCr->filterout (efxoutr);
+    DCl->filterout (efxoutl);
+
+
+
 };
 
 
@@ -238,21 +261,21 @@ MBDist::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Saturation
-    {0, 64, 0, 41, 78, 26, 19, 26, 41, 20, 35, 0, 400, 1200, 0}, 
+    {0, 64, 0, 41, 64, 26, 19, 26, 41, 20, 35, 0, 400, 1200, 0}, 
     //Dist 1
-    {14, 64, 64, 20, 90, 0, 14, 13, 38, 49, 40, 0, 288, 1315, 1},
+    {0, 64, 64, 20, 64, 0, 14, 13, 38, 49, 40, 0, 288, 1315, 0},
     //Soft
-    {0, 64, 64, 32, 81, 6, 13, 6, 58, 63, 61, 0, 364, 1708, 1},
+    {0, 64, 0, 32, 64, 6, 13, 6, 50, 70, 50, 0, 400, 1800, 0},
     //Modulated
-    {0, 64, 64, 36, 77, 18, 17, 18, 66, 69, 54, 0, 504, 2730, 1},
+    {0, 64, 0, 36, 64, 18, 17, 18, 40, 70, 30, 0, 500, 2200, 0},
     //Crunch
-    {0, 64, 64, 30, 66, 15, 14, 15, 44, 60, 42, 0, 385, 2730, 1},
+    {0, 64, 0, 24, 64, 19, 14, 19, 30, 80, 30, 0, 800, 1800, 0},
     //Dist 2
-    {64, 64, 62, 48, 64, 21, 21, 22, 20, 40, 60, 0, 647, 1506, 0},
+    {0, 64, 0, 64, 64, 22, 27, 22, 25, 50, 25, 0, 440, 1500, 0},
     //Dist 3
-    {64, 64, 0, 55, 61, 19, 21, 20, 12, 34, 12, 0, 735, 4735, 0},
+    {0, 64, 0, 64, 64, 27, 22, 27, 50, 69, 50, 0, 800, 1200, 0},
     //Dist 4
-    {64, 64, 0, 30, 74, 19, 25, 26, 20, 51, 83, 0, 329, 800, 0}
+    {0, 64, 0, 30, 64, 19, 25, 26, 20, 51, 83, 0, 329, 800, 0}
      
   };
 

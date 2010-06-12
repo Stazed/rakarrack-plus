@@ -414,16 +414,16 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
          break;
 
        case 22: //Soft
-         ws = powf(8.0f, ws*ws+1.0f);
+         ws = powf(4.0f, ws*ws+1.0f);
          for (i = 0; i < nn; i++)
 	{
          if(temps[i]>0.0f) temps[i] = ws*powf(temps[i],1.4142136f); else temps[i] = ws* -powf(-temps[i],1.4142136f);
         } 
          break;
 
-       case 23: //Distortion
+       case 23: //Super Soft
       
-        ws = powf (24.0f, ws * ws) + 0.5f;
+        ws = powf (20.0f, ws * ws) + 0.5f;
         factor = 1.0f / ws; 
         for (i = 0; i < nn; i++)
 	{
