@@ -34,6 +34,7 @@ RKR::savefile (char *filename)
   if(errno == EACCES)
    {
    Error_Handle(3);
+   fclose(fn);
    return;
    }  
 
@@ -619,12 +620,15 @@ RKR::loadfile (char *filename)
 	  &l[0], &l[1], &l[2], &l[3], &l[4], &l[5], &l[6], &l[7], &l[8],
 	  &l[9]);
 
+  
   fclose (fn);
 
 
   if ((fn = fopen (filename, "r")) == NULL)
+{
+    free(cfilename);   
     return;
-
+}
   //Version
   memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
@@ -1047,7 +1051,7 @@ for(i=0;i<128;i++)
 
 
   fclose (fn);
-
+  free(cfilename);
   Actualizar_Audio ();
 
 }
@@ -2064,6 +2068,7 @@ RKR::saveskin (char *filename)
        if(errno == EACCES)
        {
         Error_Handle(3);
+        fclose(fn);
         return;
        }  
 
