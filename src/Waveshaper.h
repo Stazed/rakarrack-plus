@@ -51,7 +51,8 @@ public:
   float tmpgain;  // compression distortion temp variable
   float ncSAMPLE_RATE;
   float *temps;
-    
+ 
+ float R, P, Vgbias, Vsupp, Ip, Vmin, Vg, Vfactor, Vdyno;
  
   class Resample *U_Resample;
   class Resample *D_Resample;

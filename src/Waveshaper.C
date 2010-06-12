@@ -67,6 +67,15 @@ Waveshaper::Waveshaper()
   dthresh = 0.25;
   dyno = 0.0f;
   dynodecay = 0.0167f/(ncSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
+  
+  Ip = 0.0f;
+  Vsupp = 200.0f;
+  Vgbias = 0.075f;  //bias point for Valve1 model
+  R = 220000.0f; //Plate resistor, 220k
+  P = 0.0002;  //constant tuning bias current
+  Vmin = Vsupp - 2.5;  //Approximate cathode voltage when tube is saturated. 
+  Vfactor = 1.5f;
+  Vdyno = 0.0f;
 
   U_Resample = new Resample(Wave_up_q);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
   D_Resample = new Resample(Wave_down_q);
@@ -525,7 +534,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
   		    dyno += (1.0f - dynodecay) * tmpv;
 		     }
 		     dyno *= dynodecay;  //always decays
-	temps[i] = temps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
+	temps[i] = temps[i] + sqrtf((1.0f + 0.05f*dyno) / ws);  
         if(temps[i] < 0.0) temps[i] = 0.0f;
 	
 	temps[i] = 1.0f - 2.0f/(ws*temps[i]*temps[i] + 1.0f);
@@ -536,21 +545,20 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	
        case 28: //Valve 1
       
-        ws = powf (85.0f, ws * ws) + 10.0f;
+        ws = powf (4.0f, ws * ws) - 0.98f;
 
         for (i = 0; i < nn; i++)
 	{
-		   tmpv = fabs(temps[i]);
-		   if(tmpv > 0.15f)  // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
-		   {
-  		    dyno += (1.0f - dynodecay) * tmpv;
-		     }
-		     dyno *= dynodecay;  //always decays
-	temps[i] = temps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
-        if(temps[i] < 0.0) temps[i] = 0.0f;
+	Vg = Vgbias + ws*temps[i] - 0.1f*Vdyno;
 	
-	temps[i] = 1.0f - 2.0f/(ws*temps[i]*temps[i] + 1.0f);
-	 
+	if(Vg<=0.05f) Vg = 0.05f/((-20.0f*Vg) + 2.0f);
+	
+	Ip = P*powf(Vg,Vfactor);	
+	tmpv = Vsupp - (Vmin - (Vmin/(R*Ip + 1.0f)));  //Here is the plate voltage
+	tmpv = (tmpv - 105.0f)/100.0f;
+	Vdyno += (1.0f - dynodecay) * tmpv;
+	Vdyno *= dynodecay;	 
+	temps[i] = tmpv;
 	
         } 
         break; 	
