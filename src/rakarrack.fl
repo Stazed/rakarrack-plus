@@ -8636,7 +8636,8 @@ Fl::visual(FL_RGB);
 Fl::visual(FL_DOUBLE|FL_INDEX);
 Fl::get_system_colors();
 fl_register_images();
-Fl::set_fonts(0);
+int num_fonts=0;
+num_fonts = Fl::set_fonts(0);
 rkr=rkr_;
 
 back = NULL;
@@ -8682,7 +8683,8 @@ Principal->show(argc,argv);
 put_icon(Principal);
 
 void * v=MT;
-Fl::add_timeout(.04,tick,v);} {}
+Fl::add_timeout(.04,tick,v);} {selected
+    }
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
@@ -8764,8 +8766,7 @@ ACI_LABEL->labelcolor(fl_lighter(label_color));
 aux_source->labelcolor(label_color);
 aux_midi->labelcolor(label_color);
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
     code {if (made)

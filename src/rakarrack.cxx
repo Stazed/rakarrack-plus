@@ -17223,7 +17223,8 @@ Fl::visual(FL_RGB);
 Fl::visual(FL_DOUBLE|FL_INDEX);
 Fl::get_system_colors();
 fl_register_images();
-Fl::set_fonts(0);
+int num_fonts=0;
+num_fonts = Fl::set_fonts(0);
 rkr=rkr_;
 
 back = NULL;
