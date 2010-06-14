@@ -4,7 +4,7 @@ years. Josep Andreu say on the IRC chat "I can made an app based on the effects 
 hiden on code of ZynAddSubFX (by Paul Nasca Octavian). Some time after here is the
 result of our work... 
 
-This app has 38 effects: EQ Lineal, Compressor, Distortion, Overdrive, Echo, Chorus,
+This app has 42 effects: EQ Lineal, Compressor, Distortion, Overdrive, Echo, Chorus,
 Phaser, Flanger, Reverb , Parametric EQ, Wah Wah, Alienwha, Harmonizer etc. 
 The effects are procesed in cascade... The order of effects are configurable by the user. 
 The state of rack can be saved as 'presets'. Sets of presets can be stored as 'banks'. 
