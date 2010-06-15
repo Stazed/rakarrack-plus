@@ -575,20 +575,21 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
        case 29: //Valve 2
       
-        ws = powf (400.0f, ws * ws);
+        ws = powf (110.0f, ws);
 
         for (i = 0; i < nn; i++)
 	{
 
-	Vg2 = mu*(V2bias + V2dyno + temps[i]);
+	Vg2 = mu*(V2bias + V2dyno + ws*temps[i]);
 
 	if(Vg2 <= vfact) Vg2 = vfact/((-Vg2/vfact) + 2.0f);	 //Toward cut-off, behavior is a little different than 2/3 power law
 	Vlv2out = Vsupp - R*Is*powf(Vg2,1.5f);   //2/3 power law relationship
 	if(Vlv2out <= ffact) Vlv2out = ffact/((-Vlv2out/ffact) + 2.0f);  //Then as Vplate decreases, gain decreases until saturation
 
-	temps[i] = (Vlv2out - 105.0f)/100.0f;
-	V2dyno += (1.0f - dynodecay) * temps[i];
+	temps[i] = (Vlv2out - 105.0f)*0.01f;
+	V2dyno += (1.0f - dynodecay)*temps[i];
 	V2dyno *= dynodecay;  //always decays	
+
         } 
         break;	
 		
