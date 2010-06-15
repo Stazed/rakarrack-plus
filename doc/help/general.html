@@ -376,34 +376,139 @@ to any of the rakarrack team members and will include on the website.</p>
 <p>This option put the FX On at the start, by default
 is Off.</p>
 <p><b>Filter Input DC Offset</b></p>
-<p>DC Input Removal, if you have a "cheapo" soundcard enable it</p> 
+<p>Input DC Removal. Removes constant offset from input signal.  If you
+experience strange behavior with compressor or distortion, or if you see
+output signal even when no sound is going in, enable it.  A "cheapo"
+soundcard or microphone inputs can be sources of this problem.</p>
 <p><b>Preserve Gain/Master</b></p>
-<p>The Input Gain and Master Volume are stored in the
-preset, activating this option the Input Level and Master Volume was
-not modified when preset changes</p>
+<p>The Input Gain and Master Volume are stored in the preset and applied
+with the preset is loaded.  If this option is enabled, the Input Level and
+Master Volume will not be modified when preset changes.</p>
 
 <p><b>Update Tap Tempo</b></p>
 <p>If enabled each time you change the preset the Tempo
-parameter on the effects that has the "On" state will be updated with the
-Tap Tempo value/settings</p>
+parameter on the active will be updated with the
+Tap Tempo value/settings. By default, the Tempo settings from the preset are
+used.</p>
 
 <p><b>Upsampling</b></p>
-<p>Enable upsampling using libsamplerate process the
-effects with higher sample rate then the sound quality is improved, all
-the resample parameters will take effect the next time you launch
-rakarrack. Enabling upsampling rakarrack will use a lot more CPU
-resources of your computer, then take care to adjust all the upsampling
-settings, you can hang your computer if your main processor can not
-handle the resampling parameters. Each level of libsamplerate quality
-use more and more resources, and of course each effect use more CPU
-resources because need to process a higher amount of data. I highly
-recommend start with Linear quality and amount "x2" and check your CPU
-usage with "top", and then increase the amount/quality as desired.</p>
+<p>Enable upsampling using libsamplerate.  With this enabled, Rakarrack will
+process the effects with higher sample rate than what is coming from the
+sound card.  All the resample parameters will take effect the next time you
+launch rakarrack. Enabling upsampling in Rakarrack will use a lot more of
+your computer CPU resources but will result in very professional sounding
+effects.  Take care to adjust all the upsampling settings in small
+increments because you can hang your computer if your main processor can not
+handle the resampling parameters.  Each level of libsamplerate quality uses
+more and more resources, and of course each effect uses more CPU resources
+because it needs to process a higher amount of data in the same amount of
+time.  We highly recommend start with Linear quality and amount "x2" and
+check your CPU usage with "top", and then increase the amount/quality as
+desired.</p>
 
 <p><b>Amount</b></p>
-<p>Amount of resampling (x2, x3, x4, x5, x6)</p>
+<p>Amount of resampling (x2, x3, x4, x5, x6). This is a multiple of your Jack
+samplerate.</p>
+
+<p><b>About Resampling Quality</b></p>
+<p>Here is the summary:<(p>
+<p><b>Best</b>  Best sinc interpolation.<(p>
+<p><b>Medium</b>  Reduced Bandwidth sinc interpolation.</p>
+<p><b>Fastest</b>  Fastest sinc interpolation.</p>
+<p><b>Linear</b>  Linear interpolation, not band-limited.</p>
+<p><b>Zero Order</b>  Blazingly fast, but does not interpolate.</p>
+
+<p>The only difference between Best, Medium, and Fastest is the bandwidth. 
+"Fastest" limits to 80% of the maximum bandwidth, but the interpolation
+quality is equal to Best sinc interpolation.  As a general rule, you can
+often save some processing requirement by using a lower quality upsampling
+setting (Linear, or Zero Order), but it is important to use high quality
+downsampling if any of the effects you use add higher harmonics not present
+at the input (distortion, Arpie, Harmonizer).</p>
+
+<p>If using Linear or Zero Order resampling it is advisable to use a low-pass
+filter on the input (like CoilCrafter or MuTroMojo), then again as the last
+in line.  The filter will perform interpolation before the signal is
+processed.</p>
+
+<p>Resampling has two uses: </p>
+<p>1)  Improve the "richness" of filters & Equalizers.  This will by nature
+improve the accuracy of the EQ's while making filter effects such as Chorus,
+Flanger or Phaser sound more natural.</p>
+<p>2)  Reduce the amount of aliasing effect produced by nonlinear distortion. 
+      Aliasing:  A digital signal cannot represent any frequency higher than
+      1/2 the sampling rate.  Any frequencies introduced to the digital
+      system higher than 1/2 sample rate are folded back (aliased) into the
+      0 to 1/2 sample rate range.  Generally aliased frequencies are not
+      musically related to the original tone, and are often the cause of the
+      harsh "digital distortion" sound.</p>
+      
+<p>When you use a Distortion effect (StompBox, Valve, Overdrive, etc.)
+      the nonlinear function used in waveshaping produces harmonics that are
+      not found in the original signal.  Many of these harmonics are
+      significantly higher than 20kHz, and even go to several hundred kHz. 
+      The solution is upsampling.  If you increase the samplerate to several
+      times the original, then the "headroom" you have available to
+      represent these high frequency harmonic components increases.  Since
+      the harmonics decrease in amplitude as frequency increases, then there
+      comes a point where the aliasing of these frequencies is
+      inaudible.</p> 
+      
+      <p>The caveat is downsampling.  If you upsample then create these higher
+      harmonics, you have to filter this out of the signal before you
+      downsample.  The sinc interpolation settings are band-limiting by
+      nature, and this is what you want if you regularly use distortion. 
+      The process of sinc interpolation removes any frequencies higher than
+      1/2 the target samplerate before resampling. It is better to use 2x
+      upsampling with linear up and fastest sinc down than to use 4x linear or
+      zero order up/down with distortion.  A downsampling process that is
+      not band limited to 1/2 target sample rate will defeat the purpose of
+      upsampling.  If your CPU can handle it, the best is 6x upsampling with
+      fastest sinc for up and down.</p> 
+      
+      <p>Unless you really need the 16kHz to 20kHz range in your instrument,
+      don't use Medium or Best.  Indeed these improve bandwidth, but the
+      transient filter response is worse with increasing interpolation
+      quality.  Particularly for dynamic or percussive instruments,
+      "Fastest" sinc interpolation is the highest quality you can use.</p>
+      
+      <p>If your CPU can't handle the high quality interpolation, you can put
+      MuTroMojo on the end of the FX chain and balance between filter
+      cut-off frequency and stages to get good rejection at 16-20kHz.</p> 
+      
+      <p>Finally, it is mathematically proven that sinc interpolation with
+      infinite length will PERFECTLY reconstruct the original analog input
+      signal in the case of infinite upsampling.  This will also perfectly
+      reproduce what the signal would be if sampled at the higher samplerate
+      (since infinite upsampling is impossible).  Another impossible thing
+      is an infinitely long sinc function.  Sinc interpolation uses a
+      Windowed Sinc function of a length where the imperfections introduced
+      by truncation create errors of magnitude less than the anticipated
+      noise floor.  Based on this theory, many high end CD players use up to
+      128x oversampling in the digital-to-analog conversion process.</p>
+      
+      <p>For somebody who doesn't understand mathematics, this means that you
+      don't get ugly distortions by downsampling, say to 16kHz, then back to
+      48000.  You only lose bandwidth.  Downsampling to 16kHz then back to
+      48kHz is no worse than applying a low-pass filter at 6.4kHz (80% of
+      16kHz/2) for fastest sinc, while you will gain some bandwidth nearing
+      8kHz for Best quality sinc.  Most amp cabinet responses tend to roll
+      off near 5kHz or 6 kHz.  For reverb, this is not much different than
+      increasing the "damp" parameter.  Limiting bandwidth near 6.4kHz means
+      you don't lose as much quality as you would think from what seems such
+      an abysmally low samplerate while it is amazing how little CPU usage
+      is required to use Reverbtron and Convolotron with internal samplerate
+      set this low.  If you use linear or zero order, all bets are off --
+      unless you apply band limiting filtering elsewhere, or know for a fact
+      that the input signal does not have any harmonics above 8kHz. 
+      Incidentally, you can probably get some amazingly high quality bass +
+      bass cabinet sounds with Convolotron set to 16kHz internal
+      samplerate.</p>
+      
+
 
 <p><b>Up Sampling Quality</b></p>
+
 <p>Upsampling quality, select the libsamplerate quality
 for the upsampling procedure.</p>
 
@@ -411,7 +516,10 @@ for the upsampling procedure.</p>
 <p>Downsampling quality, select the libsamplerate quality for the downsampling procedure.</p>
 
 <p><b>Looper Size Seconds</b></p>
-<p>Is the size in seconds of the buffer for the Looper effect.</p>
+<p>Is the size in seconds of the buffer for the Looper effect. The memory is
+allocated when Rakarrack starts, so you will need to restart Rakarrack for
+this to take effect.  If you don't plan to use the Looper, then make this a
+small number so Rakarrack doesn't hog memory you aren't going to use.</p>
 
 <p><b>Harmonizer Quality</b></p>
 <p>Selects the quality of the harmonizer audio
@@ -422,26 +530,44 @@ using resampling too.
 This parameter will take effect the next time you run rakarrack.</p>
 
 <p><b>Limiter before Output Volume</b></p>
-<p> Rakarrack use a invisible end chain Limiter to limit the output signal
-level, this option put the limiter before the Output Volume slider, use that
-iff you need to generate a saturated signal level.</p>
+<p> Rakarrack uses an invisible end chain Limiter to limit the output signal
+level. This option put the limiter before the Output Volume slider</p>
+<p>The Limiter is a hard-knee compressor with a fast attack time followed by
+peak clipping.  It is best to leave this as default since it will have no
+effect unless the final output signal is high enough to clip on the input or
+Ardour (or other recording program).  Reasons you may wish to put this in
+front of the volume control are as follows:</p>
+<p>1) It produces a nice overdrive when driven by something "hot" like
+ShelfBoost.  Then you can overdrive it and use output volume to bring signal
+level down to a reasonable recording level.</p>
+</p>2) If you need a hard limiter to set the maximum to a certain level, this
+may prove to be a useful tool.</p>
 
 <p><b> Harmonizer, Reverbtron, Convolotron, Sequence and Shifter
 Downsample</b></p>
-<p> Here you can select the sample rate that use each effect, if you have
-problems of CPU usage, use this options to reduce the amount of CPU that
-each effect use. Probably if you have active resampling you will need to
-limit the sample rate of some effects in order to be able to use some
-presets. Of course that reduce the sound quality, but sure you can find a good
-balance settings. You can select the libsample rate quality for the Up/Down
-process.</p>
+<p> Here you can select the sample rate that each effect uses internally,
+This can make it possible to use effects with higher CPU demand simply by
+trading bandwidth.  For example, if you are  resampling at 2x or 3x (master
+resample setting), you will need to limit the sample rate of some effects in
+order to be able to use certain presets. Of course that may reduce the sound
+quality, but certainly you can find a good balance between CPU power and
+quality.   Keep the "About Resampling Quality" information in mind when
+deciding what to select. </p> 
 
 <p><b>Whaveshape Resampling</b></p>
 <p> Distortion, Overdrive, Derelict, MBDist and StompBox effects use the
 waveshape internal class to saturate the signal, this kind of process
-produce sound aliasing, here you can resample in order to eliminate this
+produce aliasing. Here you can resample in order to eliminate this
 aliasing, of course that will cost CPU. Notice that this resample is multipied
-but the normal resampling.</p>
+but the normal resampling. For example, if master resampling is 2x, and you
+select 2x for Waveshape, then Waveshape internal resampling will be 4x jack
+sample rate.  The balance you need to find is between number of resampling
+operations, quality of resampling, and resampling amount.  For example, if
+you are only using Stompbox and maybe reverb in a preset, then it may be
+better to set 4x fast sinc interpolation for master resample than to use
+Waveshape resampling.  If you are using other effects, and some higher CPU
+effects, then it may be better to use 2x master resample with linear
+up/down, then 2x Waveshaper resample with linear up, fastest sinc down.</p>
 
 <p><b>Tuner Calibration A440</b></p>
 <p> Here you can calibrate the Tuner, this also calibrates the MIDI
