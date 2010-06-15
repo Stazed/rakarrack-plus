@@ -1649,7 +1649,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         Fl_Choice dist_tipo {
           label Type
           user_data 12
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
+          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5533,8 +5533,8 @@ ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));}
           class SliderW
         }
         Fl_Value_Slider ryanwah_ampsns {
-          label {Amp.S.}
-          callback {rkr->efx_RyanWah->changepar(7,(int)o->value());}
+          label {E. Sens}
+          callback {rkr->efx_RyanWah->changepar(7,(int)o->value());} selected
           xywh {369 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -8683,8 +8683,7 @@ Principal->show(argc,argv);
 put_icon(Principal);
 
 void * v=MT;
-Fl::add_timeout(.04,tick,v);} {selected
-    }
+Fl::add_timeout(.04,tick,v);} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);

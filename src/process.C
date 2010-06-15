@@ -542,7 +542,7 @@ RKR::RKR ()
 "Musical Delay Pan 1","62","15",
 "Musical Delay Pan 2","65","15",
 "Musical Delay Wet/Dry","56","15",
-"MuTroMojo Amp.S","265","31",
+"MuTroMojo E. Sens","265","31",
 "MuTroMojo BP","258","31",
 "MuTroMojo HP","259","31",
 "MuTroMojo LP","257","31",

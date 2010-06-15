@@ -14041,7 +14041,7 @@ R average.");
         ryanwah_ampsnsinv->align(FL_ALIGN_LEFT);
         ryanwah_ampsnsinv->when(FL_WHEN_CHANGED);
       } // SliderW* ryanwah_ampsnsinv
-      { ryanwah_ampsns = new SliderW(369, 369, 100, 10, "Amp.S.");
+      { ryanwah_ampsns = new SliderW(369, 369, 100, 10, "E. Sens");
         ryanwah_ampsns->type(5);
         ryanwah_ampsns->box(FL_FLAT_BOX);
         ryanwah_ampsns->color((Fl_Color)178);
