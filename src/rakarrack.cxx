@@ -6387,6 +6387,36 @@ void RKRGUI::cb_MIDI_LABEL(Fl_Box* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MIDI_LABEL_i(o,v);
 }
 
+void RKRGUI::cb_L_B1_i(Fl_Button*, void*) {
+  char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s/Default.rkrb", DATADIR);
+int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+};
+}
+void RKRGUI::cb_L_B1(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B1_i(o,v);
+}
+
+void RKRGUI::cb_L_B2_i(Fl_Button*, void*) {
+  char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s/Extra.rkrb", DATADIR);
+ int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+};
+}
+void RKRGUI::cb_L_B2(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B2_i(o,v);
+}
+
 void RKRGUI::cb_S_new_i(Fl_Button*, void*) {
   rkr->New();
 DisAssigns();
@@ -16096,6 +16126,16 @@ R average.");
         PRESETS_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         PRESETS_LABEL->user_data((void*)(7));
       } // Fl_Box* PRESETS_LABEL
+      { L_B1 = new Fl_Button(448, 30, 26, 16, "1");
+        L_B1->color((Fl_Color)62);
+        L_B1->labelsize(12);
+        L_B1->callback((Fl_Callback*)cb_L_B1, (void*)(7));
+      } // Fl_Button* L_B1
+      { L_B2 = new Fl_Button(485, 30, 26, 16, "2");
+        L_B2->color((Fl_Color)62);
+        L_B2->labelsize(12);
+        L_B2->callback((Fl_Callback*)cb_L_B2, (void*)(7));
+      } // Fl_Button* L_B2
       { S_new = new Fl_Button(174, 50, 64, 18, "New");
         S_new->shortcut(0x6e);
         S_new->color((Fl_Color)62);
@@ -16157,7 +16197,7 @@ R average.");
         DAuthor->user_data((void*)(7));
         DAuthor->align(100|FL_ALIGN_INSIDE);
       } // Fl_Box* DAuthor
-      { Open_Order = new Fl_Button(255, 132, 195, 25, "Put Order in your Rack");
+      { Open_Order = new Fl_Button(255, 132, 195, 24, "Put Order in your Rack");
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
         Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(7));

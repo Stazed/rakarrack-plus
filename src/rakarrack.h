@@ -3047,6 +3047,16 @@ private:
 public:
   Fl_Group *Presets;
   Fl_Box *PRESETS_LABEL;
+  Fl_Button *L_B1;
+private:
+  void cb_L_B1_i(Fl_Button*, void*);
+  static void cb_L_B1(Fl_Button*, void*);
+public:
+  Fl_Button *L_B2;
+private:
+  void cb_L_B2_i(Fl_Button*, void*);
+  static void cb_L_B2(Fl_Button*, void*);
+public:
   Fl_Button *S_new;
 private:
   void cb_S_new_i(Fl_Button*, void*);

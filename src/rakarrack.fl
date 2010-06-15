@@ -826,17 +826,19 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {1367 30 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} open
+      xywh {1709 182 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -845,7 +847,7 @@ Pexitprogram=1;}
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -5534,7 +5536,7 @@ ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));}
         }
         Fl_Value_Slider ryanwah_ampsns {
           label {E. Sens}
-          callback {rkr->efx_RyanWah->changepar(7,(int)o->value());} selected
+          callback {rkr->efx_RyanWah->changepar(7,(int)o->value());}
           xywh {369 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -7100,6 +7102,34 @@ rkr->modified=0;
           user_data 7
           xywh {174 28 62 14} labelfont 1 labelcolor 7
         }
+        Fl_Button L_B1 {
+          label 1
+          user_data 7
+          callback {char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s/Default.rkrb", DATADIR);
+int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+}} selected
+          xywh {448 30 26 16} color 62 labelsize 12
+        }
+        Fl_Button L_B2 {
+          label 2
+          user_data 7
+          callback {char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s/Extra.rkrb", DATADIR);
+ int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+}}
+          xywh {485 30 26 16} color 62 labelsize 12
+        }
         Fl_Button S_new {
           label New
           user_data 7
@@ -7196,7 +7226,7 @@ put_icon(Order);
 }
 else
 Order->hide();}
-          xywh {255 132 195 25} shortcut 0x6f color 62 align 80 when 6
+          xywh {255 132 195 24} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)
@@ -7395,11 +7425,11 @@ save_stat(1);}
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuB {open
+      Fl_Menu_Bar MenuB {
         xywh {0 0 800 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
-          label {&File}
+          label {&File} open
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem NewB {
