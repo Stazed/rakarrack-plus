@@ -72,7 +72,17 @@ Waveshaper::Waveshaper()
   Vsupp = 200.0f;
   Vgbias = 0.075f;  //bias point for Valve1 model
   R = 220000.0f; //Plate resistor, 220k
-  P = 0.0002;  //constant tuning bias current
+  P = 0.0002f;  //constant tuning bias current for Valve1
+
+  mu = 100.0f;  //Valve2 gain
+  V2bias = 1.5f;  //Valve2 bias voltage
+  Is = 105/(R*powf(V2bias*mu, 1.5f));  //bias point for Valve2
+  Vg2 = mu*V2bias;
+  vfact = 12;   //adjustment of valve shut-off.  Small is hard clipping, large is softer clipping
+  ffact = 40;  //Valve2 ffact and vfact set onset of significant limiting.   Small is hard clip, large is soft clip
+  Vlv2out = 0.0f;
+  V2dyno = 0.0f;
+  
   Vmin = Vsupp - 2.5;  //Approximate cathode voltage when tube is saturated. 
   Vfactor = 1.5f;
   Vdyno = 0.0f;
@@ -565,28 +575,24 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
        case 29: //Valve 2
       
-        ws = powf (85.0f, ws * ws) + 10.0f;
+        ws = powf (400.0f, ws * ws);
 
         for (i = 0; i < nn; i++)
 	{
-		   tmpv = fabs(temps[i]);
-		   if(tmpv > 0.15f)  // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
-		   {
-  		    dyno += (1.0f - dynodecay) * tmpv;
-		     }
-		     dyno *= dynodecay;  //always decays
-	temps[i] = temps[i] + sqrt((1.0f + 0.05f*dyno) / ws);  
-        if(temps[i] < 0.0) temps[i] = 0.0f;
-	
-	temps[i] = 1.0f - 2.0f/(ws*temps[i]*temps[i] + 1.0f);
-	 
-	
+
+	Vg2 = mu*(V2bias + V2dyno + temps[i]);
+
+	if(Vg2 <= vfact) Vg2 = vfact/((-Vg2/vfact) + 2.0f);	 //Toward cut-off, behavior is a little different than 2/3 power law
+	Vlv2out = Vsupp - R*Is*powf(Vg2,1.5f);   //2/3 power law relationship
+	if(Vlv2out <= ffact) Vlv2out = ffact/((-Vlv2out/ffact) + 2.0f);  //Then as Vplate decreases, gain decreases until saturation
+
+	temps[i] = (Vlv2out - 105.0f)/100.0f;
+	V2dyno += (1.0f - dynodecay) * temps[i];
+	V2dyno *= dynodecay;  //always decays	
         } 
         break;	
 		
 	      
- 
-      //update to Distorsion::changepar (Ptype max) if there is added more waveshapings functions
     };
 
    if(Wave_res_amount>= 0)

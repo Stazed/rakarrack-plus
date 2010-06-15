@@ -52,7 +52,8 @@ public:
   float ncSAMPLE_RATE;
   float *temps;
  
- float R, P, Vgbias, Vsupp, Ip, Vmin, Vg, Vfactor, Vdyno;
+ float R, P, Vgbias, Vsupp, Ip, Vmin, Vg, Vfactor, Vdyno;  //Valve1 Modeling variables.
+ float mu, V2bias, Is, Vg2, vfact, ffact, Vlv2out, V2dyno; //Valve2 variables
  
   class Resample *U_Resample;
   class Resample *D_Resample;
