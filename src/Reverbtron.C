@@ -177,7 +177,7 @@ Reverbtron::out (float * smpsl, float * smpsr)
       imctr--;
       if (imctr<0) imctr = roomsize;
       
-      templ[i] = (lyn + ldiff )* levpanl;
+      templ[i] = (lyn + ldiff ) * levpanl;
       tempr[i] = (lyn + rdiff ) * levpanr;  
        
       feedback = fb*rdiff*decay;          
