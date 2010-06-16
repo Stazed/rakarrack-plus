@@ -1567,6 +1567,7 @@ Fl_Menu_Item RKRGUI::menu_dist_tipo[] = {
  {"DynoFET", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Valve 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Valve 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Diode clipper", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
