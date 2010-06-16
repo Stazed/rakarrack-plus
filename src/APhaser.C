@@ -45,15 +45,15 @@ Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  lxn1 = NULL;
+  lxn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
 
-  lyn1 = NULL;
+  lyn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
 
-  rxn1 = NULL;
+  rxn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
 
-  ryn1 = NULL;
+  ryn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
 
-  offset = new float[12];	//model mismatch between JFET devices
+  offset = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);	//model mismatch between JFET devices
   offset[0] = -0.2509303f;
   offset[1] = 0.9408924f;
   offset[2] = 0.998f;
@@ -86,21 +86,6 @@ Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_)
 
 Analog_Phaser::~Analog_Phaser ()
 {
-
-  if (lxn1 != NULL)
-    delete[]lxn1;
-
-  if (lyn1 != NULL)
-    delete[]lyn1;
-
-  if (rxn1 != NULL)
-    delete[]rxn1;
-
-  if (ryn1 != NULL)
-    delete[]ryn1;
-
-  if (offset != NULL)
-    delete[]offset;
 };
 
 
@@ -285,30 +270,10 @@ void
 Analog_Phaser::setstages (int Pstages)
 {
 
-  if (lxn1 != NULL)
-    delete[]lxn1;
-
-  if (lyn1 != NULL)
-    delete[]lyn1;
-
-  if (rxn1 != NULL)
-    delete[]rxn1;
-
-  if (ryn1 != NULL)
-    delete[]ryn1;
-
-
   if (Pstages >= MAX_PHASER_STAGES)
     Pstages = MAX_PHASER_STAGES ;
   this->Pstages = Pstages;
 
-
-      lxn1 = new float[Pstages];
-      lyn1 = new float[Pstages];
- 
-      rxn1 = new float[Pstages];
-      ryn1 = new float[Pstages];
- 
   cleanup ();
 };
 
