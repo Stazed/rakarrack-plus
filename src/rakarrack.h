@@ -3057,6 +3057,11 @@ private:
   void cb_L_B2_i(Fl_Button*, void*);
   static void cb_L_B2(Fl_Button*, void*);
 public:
+  Fl_Button *L_B3;
+private:
+  void cb_L_B3_i(Fl_Button*, void*);
+  static void cb_L_B3(Fl_Button*, void*);
+public:
   Fl_Button *S_new;
 private:
   void cb_S_new_i(Fl_Button*, void*);
