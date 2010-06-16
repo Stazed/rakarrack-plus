@@ -281,11 +281,11 @@ MusicDelay::setfb (int num, int Pfb)
     {
     case 1:
       this->Pfb1 = Pfb;
-      fb1 = (float) Pfb1 / 128.0f;
+      fb1 = (float) Pfb1 / 127.0f;
       break;
     case 2:
       this->Pfb2 = Pfb;
-      fb2 = (float) Pfb2 / 128.0f;
+      fb2 = (float) Pfb2 / 127.0f;
       break;
     }
 };
