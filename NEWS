@@ -23,7 +23,7 @@ ACI Analog Control Interface.
 Waveshappers:
 
 M.Saw, Compress, Overdrive, Soft, Super Soft, Gard Compress, Lmt-NoGain,
-Hard Compress, FET, DynoFET, Valve1, Valve2.
+Hard Compress, FET, DynoFET, Valve1, Valve2, Diode clipper.
 
 LFO Modulation:
 
