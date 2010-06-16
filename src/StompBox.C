@@ -271,8 +271,8 @@ int i;
     ranti->filterout(smpsr);
     lanti->filterout(smpsl);  
        
-    rwshape2->waveshapesmps (PERIOD, smpsl, 23, 1, 0);  // hard comp
-    lwshape2->waveshapesmps (PERIOD, smpsr, 23, 1, 0);   
+    rwshape2->waveshapesmps (PERIOD, smpsl, 29, 1, 0);  // diode limit
+    lwshape2->waveshapesmps (PERIOD, smpsr, 29, 1, 0);   
        
     
     for (i = 0; i<PERIOD; i++)
@@ -843,7 +843,7 @@ StompBox::setpreset (int npreset)
     //Ratty
     {48, -20, 0, 0, 70, 2},
     //Classic Dist
-    {48, 64, 0, 0, 110, 4},
+    {18, 64, 0, 0, 110, 4},
     //Morbid Impalement
     {38, 6, 6, 6, 105, 5},    
     //Mid Elve
