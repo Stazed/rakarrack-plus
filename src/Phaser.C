@@ -32,8 +32,8 @@ Phaser::Phaser (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  oldl = NULL;
-  oldr = NULL;
+  oldl = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES * 2);
+  oldr = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES * 2);
 
   Ppreset = 0;
   setpreset (Ppreset);
@@ -182,15 +182,9 @@ Phaser::setlrcross (int Plrcross)
 void
 Phaser::setstages (int Pstages)
 {
-  if (oldl != NULL)
-    delete[]oldl;
-  if (oldr != NULL)
-    delete[]oldr;
   if (Pstages >= MAX_PHASER_STAGES)
     Pstages = MAX_PHASER_STAGES - 1;
   this->Pstages = Pstages;
-  oldl = new float[Pstages * 2];
-  oldr = new float[Pstages * 2];
   cleanup ();
 };
 
