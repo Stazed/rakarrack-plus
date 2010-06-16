@@ -1649,7 +1649,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
         Fl_Choice dist_tipo {
           label Type
           user_data 12
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
+          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
           xywh {355 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -1766,6 +1766,10 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           }
           MenuItem {} {
             label {Valve 2}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Diode clipper} selected
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -7086,7 +7090,7 @@ if (ok)
 {
 strcpy(rkr->Bank_Saved,filename);
 BankWin_Label(filename);
-}} selected
+}}
           xywh {524 117 44 14} labelfont 1 labelcolor 7 when 0
         }
       }
