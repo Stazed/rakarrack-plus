@@ -843,7 +843,7 @@ StompBox::setpreset (int npreset)
     //Ratty
     {48, -20, 0, 0, 70, 2},
     //Classic Dist
-    {18, 64, 0, 0, 110, 4},
+    {50, 64, 0, 0, 110, 4},
     //Morbid Impalement
     {38, 6, 6, 6, 105, 5},    
     //Mid Elve
