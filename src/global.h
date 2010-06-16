@@ -498,6 +498,7 @@ public:
   int Aux_Maximum;
   int Aux_Source;
   int last_auxvalue;
+  int ena_tool;
  
   int mtc_counter;
   int EnableBackgroundImage;

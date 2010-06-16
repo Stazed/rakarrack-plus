@@ -7463,6 +7463,14 @@ void RKRGUI::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_T_TIMEOUT_i(o,v);
 }
 
+void RKRGUI::cb_ENA_TOOL_i(Fl_Check_Button* o, void*) {
+  rkr->ena_tool=(int) o->value();
+Fl_Tooltip::enable(rkr->ena_tool);
+}
+void RKRGUI::cb_ENA_TOOL(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_ENA_TOOL_i(o,v);
+}
+
 void RKRGUI::cb_BF_Browser_i(Fl_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
@@ -16442,6 +16450,7 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
+        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -16910,7 +16919,6 @@ R average.");
         MISC_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MISC_SET->user_data((void*)(1));
         MISC_SET->align(FL_ALIGN_LEFT);
-        MISC_SET->hide();
         { Fondo10 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo10
         { Username = new Fl_Input(80, 32, 240, 21, "Username:");
@@ -16920,20 +16928,27 @@ R average.");
           Username->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Username->callback((Fl_Callback*)cb_Username);
         } // Fl_Input* Username
-        { MES_DIS = new Fl_Check_Button(117, 68, 21, 20, "Disable Warnings");
+        { MES_DIS = new Fl_Check_Button(132, 68, 21, 20, "Disable Warnings    ");
           MES_DIS->down_box(FL_DOWN_BOX);
           MES_DIS->labelsize(11);
           MES_DIS->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
           MES_DIS->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* MES_DIS
-        { T_TIMEOUT = new Fl_Check_Button(132, 97, 21, 20, "Tap Tempo Timeout");
+        { T_TIMEOUT = new Fl_Check_Button(132, 88, 21, 20, "Tap Tempo Timeout");
           T_TIMEOUT->down_box(FL_DOWN_BOX);
           T_TIMEOUT->labelsize(11);
           T_TIMEOUT->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
           T_TIMEOUT->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* T_TIMEOUT
+        { ENA_TOOL = new Fl_Check_Button(132, 108, 21, 20, "Enable Tooltips       ");
+          ENA_TOOL->down_box(FL_DOWN_BOX);
+          ENA_TOOL->labelsize(11);
+          ENA_TOOL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          ENA_TOOL->callback((Fl_Callback*)cb_ENA_TOOL);
+          ENA_TOOL->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* ENA_TOOL
         MISC_SET->end();
       } // Fl_Group* MISC_SET
       { BANK_SET = new Fl_Group(5, 26, 630, 502, "Bank");
@@ -17593,7 +17608,8 @@ rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
 T_SET->value(rkr->Tap_SetValue);
 
 rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
-
+rakarrack.get(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool,1);
+Fl_Tooltip::enable(rkr->ena_tool);
 //Trigger
 
 rakarrack.get(rkr->PrefNom("Aux Source"),rkr->Aux_Source,0);
@@ -17768,7 +17784,7 @@ rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
 rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
-
+rakarrack.set(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool);
 
 
 
@@ -18948,6 +18964,9 @@ UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
 Downr_Qual->value(rkr->DownQual);
 MES_DIS->value(rkr->mess_dis);
+ENA_TOOL->value(rkr->ena_tool);
+T_TIMEOUT->value(rkr->t_timeout);
+
 Upr_Amo->value(rkr->UpAmo);
 L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);

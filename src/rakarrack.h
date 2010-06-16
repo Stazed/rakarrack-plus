@@ -6,6 +6,7 @@
 #include "global.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Progress.H>
+#include <FL/Fl_Tooltip.H>
 #include <FL/x.H>
 #include <FL/Fl_PNG_Image.H>
 #include <FL/Fl_Tiled_Image.H>
@@ -3553,6 +3554,11 @@ public:
 private:
   void cb_T_TIMEOUT_i(Fl_Check_Button*, void*);
   static void cb_T_TIMEOUT(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *ENA_TOOL;
+private:
+  void cb_ENA_TOOL_i(Fl_Check_Button*, void*);
+  static void cb_ENA_TOOL(Fl_Check_Button*, void*);
 public:
   Fl_Group *BANK_SET;
   Fl_Box *Fondo11;

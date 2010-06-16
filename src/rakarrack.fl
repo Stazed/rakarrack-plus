@@ -11,6 +11,9 @@ decl {\#include <FL/Fl_Value_Slider.H>} {public
 decl {\#include <FL/Fl_Progress.H>} {public
 } 
 
+decl {\#include <FL/Fl_Tooltip.H>} {selected public
+} 
+
 decl {\#include <FL/x.H>} {public
 } 
 
@@ -1769,7 +1772,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label {Diode clipper} selected
+            label {Diode clipper}
             xywh {0 0 36 21} labelsize 9
           }
         }
@@ -7681,19 +7684,19 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1436 124 640 528} type Double color 4 hide
+      xywh {1827 215 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
           label Look
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -8274,7 +8277,7 @@ else JackIn->deactivate();}
         Fl_Group MISC_SET {
           label Misc
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo10 {
             xywh {5 26 630 502}
@@ -8285,14 +8288,20 @@ else JackIn->deactivate();}
             xywh {80 32 240 21} labelsize 11 labelcolor 7 textsize 11 textcolor 7
           }
           Fl_Check_Button MES_DIS {
-            label {Disable Warnings}
+            label {Disable Warnings    }
             callback {rkr->mess_dis=(int) o->value();}
-            xywh {117 68 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {132 68 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
           Fl_Check_Button T_TIMEOUT {
             label {Tap Tempo Timeout}
             callback {rkr->t_timeout=(int) o->value();}
-            xywh {132 97 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {132 88 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          }
+          Fl_Check_Button ENA_TOOL {
+            label {Enable Tooltips       }
+            callback {rkr->ena_tool=(int) o->value();
+Fl_Tooltip->enable(rkr->ena_tool);}
+            xywh {132 108 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
         }
         Fl_Group BANK_SET {
@@ -8985,7 +8994,8 @@ rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
 T_SET->value(rkr->Tap_SetValue);
 
 rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
-
+rakarrack.get(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool,1);
+Fl_Tooltip->enable(rkr->ena_tool);
 //Trigger
 
 rakarrack.get(rkr->PrefNom("Aux Source"),rkr->Aux_Source,0);
@@ -9159,7 +9169,7 @@ rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
 rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
-
+rakarrack.set(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool);
 
 
 
@@ -10332,6 +10342,9 @@ UPSAMPLE_C->value(rkr->upsample);
 Upr_Qual->value(rkr->UpQual);
 Downr_Qual->value(rkr->DownQual);
 MES_DIS->value(rkr->mess_dis);
+ENA_TOOL->value(rkr->ena_tool);
+T_TIMEOUT->value(rkr->t_timeout);
+
 Upr_Amo->value(rkr->UpAmo);
 L_SIZE->value(rkr->looper_size);
 D_A_Connect->value(rkr->aconnect_MI);
