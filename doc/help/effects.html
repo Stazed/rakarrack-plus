@@ -1094,39 +1094,98 @@ frequencies on the M/S channels.</p>
       <p><img src="imagenes/syn.jpg" alt="rakarrack Synthfilter"></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>A different type of view of
-the Analog Phaser effect revealed a basic structure supporting
-high-order filters with adjustable number of filter stages ...most of
-the
-work was already done, so thanks again to Paul Nasca for this piece of
-code from the original ZynAddSubFX Phaser. <br>
-Starting with a phaser
-(as opposed to wah-wah or EQ) was inspired by a phaser circuit
-modification suggested by Mark Hammer, a frequent forum poster at
-diystompboxes.com/smfforum.  This modification allowed two phase
-stages to be converted to low-pass stages with a switch in an analog
-phaser.  This is the type of effect marketed as a
-"phase-wah".  Of course, converting all of these phase stages to
-low pass stages makes this circuit look an awful lot like what is
-found inside the old Korg Delta DL-50 synthesizer. <br>
-Converting a
-normal OTA phaser into a synth filter would be a relatively ugly hack
-in the circuit bending world, but a simple exercise in software
-bending, and with a more elegant final product. With a little bit of
-experimentation, I had a filter sounding much like something found in
-an analog synthesizer.  Thinking back to an analog envelope filter
-I once built, I determined high pass filter stages would also be of
-great utility.  The final result:  A very flexible filter
-module able to accomplish many flavors of low pass, band pass and high
-pass filter shapes.  Possibilities range anywhere from simple
-wah-wah sounds to definite mushy filters from synthland.  You can
-operate up to 12 high-pass and 12 low pass stages simultaneously. At
-present, the user is protected from resonance near instability. 
-If you are a synth filter lover and want to be able to make your filter
-unstable, then it is a very minor adjustment to the source code if you
-wish to internally amp up the feedback range to allow this. Finally,
-the SynthFilter comes with wet/dry mix so you can accomplish
-interesting phase-wah sounds.</p>
+<p>A different type of view of the Analog Phaser effect revealed a basic
+      structure supporting high-order filters with adjustable number of
+      filter stages ...most of the work was already done, so thanks again to
+      Paul Nasca for this piece of code from the original ZynAddSubFX
+      Phaser.</p>
+    <p>Starting with a phaser (as opposed to wah-wah or EQ) was inspired by a
+      phaser circuit modification suggested by Mark Hammer, a frequent forum
+      poster at diystompboxes.com/smfforum. This modification allowed two
+      phase stages to be converted to low-pass stages with a switch in an
+      analog phaser. This is the type of effect marketed as a "phase-wah".
+      Of course, converting all of these phase stages to low pass stages
+      makes this circuit look an awful lot like what is found inside the old
+      Korg Delta DL-50 synthesizer.</p>
+      <p>Converting a normal OTA phaser into a synth filter would be a
+      relatively ugly hack in the circuit bending world, but a simple
+      exercise in software bending, and with a more elegant final product.
+      With a little bit of experimentation, I had a filter sounding much
+      like something found in an analog synthesizer. Thinking back to an
+      analog envelope filter I once built, I determined high pass filter
+      stages would also be of great utility. The final result: A very
+      flexible filter module able to accomplish many flavors of low pass,
+      band pass and high pass filter shapes. Possibilities range anywhere
+      from simple wah-wah sounds to definite mushy filters from
+      synthland.</p>
+      <p>You can operate up to 12 high-pass and 12 low pass stages
+      simultaneously. At present, the user is protected from resonance near
+      instability. If you are a synth filter lover and want to be able to
+      make your filter unstable, then it is a very minor adjustment to the
+      source code if you wish to internally amp up the feedback range to
+      allow this. Finally, the SynthFilter comes with wet/dry mix so you can
+      accomplish interesting phase-wah sounds.</p>
+      
+      <p><b>Wet/Dry</b>:  Like many other filtering effects, it is not as simple as
+      Wet/Dry.  Destructive interference happens between the wet and dry
+      signals to varying degrees as this slider is adjusted, so new &
+      interesting notch and comb filtering effects evolve as you move this
+      from wet to dry.</p>
+      
+      <p><b>Distort</b>:  This adds some nonlinear response to the filter.  In addition
+      to adding audible distortion, this parameter has the effect of making
+      the filter less resonant.  Set to zero for a "clean" filter sound.</p>
+      
+      <p><b>Tempo</b>: The filter can be modulated by an LFO.  This sets the
+       rate.</p>
+      
+      <p><b>LFO Type</b>:  The shape of LFO you wish to use.</p>
+      
+      <p><b>Subtr.</b>: Subtract.  Make output of filter negative, thus changing which
+      parts of the signal will cancel when using Wet/Dry mix.</p>
+      
+      <p><b>St. df</b>: Stereo Difference.  Delay between LFO's for left and right
+      channels.</p>
+      
+      <p><b>Width</b>: Width of the LFO, also think of this parameter as LFO
+      Amplitude.</p>
+      
+      <p><b>Fb</b>: Feedback amount.  Positive or negative values make the
+      feedback positive or negative.  This parameter makes the filter more
+      resonant.</p>
+      
+      <p><b>LPF Stg</b>: Number of first order low pass filter stages.</p>
+       <p><b>HPF Stg</b>: Number of first order high pass filter stages.  HPF and LPF
+      are series processed, so combining the two creates a band pass
+       filter.</p>
+      
+      <p><b>Depth</b>: Filter "start frequency".  Set Width and E. Sens to zero then
+      use this to manually sweep the filter with a MIDI message.  More
+      simply, use this parameter with a MIDI expression pedal to make
+      Synthfilter behave as an interesting type of wahwah.</p>
+      
+      <p><b>E. Sens</b>: Envelope Sensitivity.  This adjusts how much the filter
+      sweep responds to the dynamics of the input signal.  Numbers greater
+      than zero cause the filter to sweep upward as your playing gets
+      louder.  Numbers less than zero cause the filter to sweep downward as
+      your playing gets louder.  Set to zero for no effect.  Use "Depth" to
+      adjust the filter start frequency.  For example, if filter is to sweep
+      downward, set Depth to a large number and E. Sens to a negative
+      number.</p>
+      
+      <p><b>A. Time</b>: Attack Time.  Sets how quickly the envelope detector responds
+      to input dynamics.</p>
+      <p><b>R. Time</b>: Release Time.  Sets amount of time for envelope detector to
+      release the build-up from loud dynamics.</p>
+      <p>*Attack and Release are measured in milliseconds.</p>
+      <p>*Attack and Release times have no effect if E. Sens is set to
+      zero.</p>
+      
+       <p><b>Offset</b>: Separation between High Pass and Low Pass filters.  If both HP
+      and LP filters have stages 1 or more, this adjusts the bandwidth of the
+      resulting bandpass filter.  Set to zero, a bandpass filter with a
+      narrow peak will result, or set large, the bandpass filter will be
+      wider.</p>
       </td>
     </tr>
   </tbody>
@@ -1356,7 +1415,7 @@ moogerfooger (though Synthfilter structure is better suited to
 "moog-like" sounds).  Like any good Rakarrack effect, it has an
 LFO synchronized to Tempo.  This means Tap Tempo will set the rate
 of the LFO effect. </p>
-<p>Additionally, you have the envelope follower applied with the Amp S
+<p>Additionally, you have the envelope follower applied with the E. Sens
 parameter, and smoothed by Smooth.  Here's the breakdown:</p>
 <p><b>Wet/Dry</b>: It's obvious that this
 mixes wet and dry signals, but this interacts like a phaser or flanger. By
@@ -1402,6 +1461,17 @@ that sound good to you, and forget about the technical details of why.</p>
 <p><b>Range</b>: Upper bound on the filter sweep range.</p>
 <p><b>Wah</b>: Sweeps the filter resonant frequency from the minimum bound (hard coded in each preset) up to the upper bound
 (set by Range).  This is the parameter you would want to map to a MIDI expression pedal for a wah wah effect.</p>
+<p><b>E. Sens</b>: Amount that filter sweep responds to input signal dynamics. 
+Positive number means the filter center frequency sweeps upwared, negative
+means it sweeps downward.  Zero means the filter does not respond to
+dynamics of the input.</p>
+
+<p><b>Smooth</b>:  Smooth the envelope detector shape.  This has no effect unless you
+have E. Sens set to something other than zero.  If E. Sens is set to a
+useful level, then the Smooth parameter adjusts how quickly the filter
+center frequency responds to changes in signal dynamics.</p>
+
+
 </td>
 </tr>
 </tbody>
