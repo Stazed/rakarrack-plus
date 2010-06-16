@@ -11,7 +11,7 @@ decl {\#include <FL/Fl_Value_Slider.H>} {public
 decl {\#include <FL/Fl_Progress.H>} {public
 } 
 
-decl {\#include <FL/Fl_Tooltip.H>} {selected public
+decl {\#include <FL/Fl_Tooltip.H>} {public
 } 
 
 decl {\#include <FL/x.H>} {public
@@ -829,7 +829,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -8300,7 +8301,7 @@ else JackIn->deactivate();}
           Fl_Check_Button ENA_TOOL {
             label {Enable Tooltips       }
             callback {rkr->ena_tool=(int) o->value();
-Fl_Tooltip->enable(rkr->ena_tool);}
+Fl_Tooltip::enable(rkr->ena_tool);}
             xywh {132 108 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
         }
@@ -8995,7 +8996,7 @@ T_SET->value(rkr->Tap_SetValue);
 
 rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
 rakarrack.get(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool,1);
-Fl_Tooltip->enable(rkr->ena_tool);
+Fl_Tooltip::enable(rkr->ena_tool);
 //Trigger
 
 rakarrack.get(rkr->PrefNom("Aux Source"),rkr->Aux_Source,0);
@@ -9009,7 +9010,8 @@ aux_midi->value(rkr->Aux_MIDI);
 rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
 aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
-aux_max->value(rkr->Aux_Maximum);} {}
+aux_max->value(rkr->Aux_Maximum);} {selected
+    }
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
