@@ -6380,7 +6380,6 @@ if (ok)
 {
 strcpy(rkr->Bank_Saved,filename);
 BankWin_Label(filename);
-rkr->modified=0;
 };
 }
 void RKRGUI::cb_MIDI_LABEL(Fl_Box* o, void* v) {
@@ -6388,7 +6387,8 @@ void RKRGUI::cb_MIDI_LABEL(Fl_Box* o, void* v) {
 }
 
 void RKRGUI::cb_L_B1_i(Fl_Button*, void*) {
-  char temp[128];           
+  is_modified();
+char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
 int ok=rkr->loadbank(temp);
@@ -6403,7 +6403,8 @@ void RKRGUI::cb_L_B1(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_L_B2_i(Fl_Button*, void*) {
-  char temp[128];           
+  is_modified();
+char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra.rkrb", DATADIR);
  int ok=rkr->loadbank(temp);
@@ -6418,7 +6419,8 @@ void RKRGUI::cb_L_B2(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_L_B3_i(Fl_Button*, void*) {
-  int ok=rkr->loadbank(rkr->BankFilename);
+  is_modified();
+int ok=rkr->loadbank(rkr->BankFilename);
 if(ok) 
 {
 BankWin_Label(rkr->BankFilename);
