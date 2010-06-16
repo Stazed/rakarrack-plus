@@ -65,6 +65,7 @@ Compressor::Compressor (float * efxoutl_, float * efxoutr_)
   peak = 0;
   lpeak = 0.0f;
   rpeak = 0.0f;
+  clipping = 0;
 
 
 }
@@ -282,6 +283,7 @@ Compressor::out (float *efxoutl, float *efxoutr)
       else
 	{
 	  rgain = outlevel*dB2rap(thres_db + coeff_kk + (rvolume_db-thres_mx)*coeff_ratio - rvolume_db);
+	  clipping = 1;
 	}
 	
       if ( rgain < MIN_GAIN) rgain = MIN_GAIN;
@@ -315,6 +317,7 @@ Compressor::out (float *efxoutl, float *efxoutr)
       else
 	{
 	  lgain = outlevel*dB2rap(thres_db + coeff_kk + (lvolume_db-thres_mx)*coeff_ratio - lvolume_db);
+	  clipping = 1;
 	}
 
 
@@ -335,10 +338,23 @@ Compressor::out (float *efxoutl, float *efxoutr)
 
       if(peak)
       {
-      if(efxoutl[i]>0.999f) efxoutl[i] = 0.999f;	//output hard limiting
-      if(efxoutl[i]<-0.999f) efxoutl[i] = -0.999f;
-      if(efxoutr[i]>0.999f) efxoutr[i] = 0.999f;	
-      if(efxoutr[i]<-0.999f) efxoutr[i] = -0.999f;      
+      if(efxoutl[i]>0.99f) {            //output hard limiting
+      efxoutl[i] = 0.99f;
+      clipping = 1;
+      }	
+      if(efxoutl[i]<-0.99f){
+      efxoutl[i] = -0.99f;
+      clipping = 1;
+      }
+      if(efxoutr[i]>0.99f) {
+      efxoutr[i] = 0.99f;
+      clipping = 1;
+      }	
+      if(efxoutr[i]<-0.99f) {
+      efxoutr[i] = -0.99f;  
+      clipping = 1;
+      }
+      //highly probably there is a more elegant way to do that, but what the hey...    
       }
     }
 

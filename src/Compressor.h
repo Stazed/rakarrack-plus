@@ -62,6 +62,7 @@ public:
   int stereo;
   int tknee;
   int peak;
+  int clipping;
 
 private:
 
