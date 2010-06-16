@@ -565,7 +565,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	
 	Ip = P*powf(Vg,Vfactor);	
 	tmpv = Vsupp - (Vmin - (Vmin/(R*Ip + 1.0f)));  //Here is the plate voltage
-	tmpv = (tmpv - 105.0f)/100.0f;
+	tmpv = (tmpv - 106.243f)/100.0f;
 	Vdyno += (1.0f - dynodecay) * tmpv;
 	Vdyno *= dynodecay;	 
 	temps[i] = tmpv;
@@ -586,7 +586,26 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	Vlv2out = Vsupp - R*Is*powf(Vg2,1.5f);   //2/3 power law relationship
 	if(Vlv2out <= ffact) Vlv2out = ffact/((-Vlv2out/ffact) + 2.0f);  //Then as Vplate decreases, gain decreases until saturation
 
-	temps[i] = (Vlv2out - 105.0f)*0.01f;
+	temps[i] = (Vlv2out - 95.0f)*0.01f;
+	V2dyno += (1.0f - dynodecay)*temps[i];
+	V2dyno *= dynodecay;  //always decays	
+
+        } 
+        break;	
+       case 30: //Diode clipper
+      
+        ws = powf (110.0f, ws);
+
+        for (i = 0; i < nn; i++)
+	{
+
+	Vg2 = mu*(V2bias + V2dyno + ws*temps[i]);
+
+	if(Vg2 <= vfact) Vg2 = vfact/((-Vg2/vfact) + 2.0f);	 //Toward cut-off, behavior is a little different than 2/3 power law
+	Vlv2out = Vsupp - R*Is*powf(Vg2,1.5f);   //2/3 power law relationship
+	if(Vlv2out <= ffact) Vlv2out = ffact/((-Vlv2out/ffact) + 2.0f);  //Then as Vplate decreases, gain decreases until saturation
+
+	temps[i] = (Vlv2out - 95.0f)*0.01f;
 	V2dyno += (1.0f - dynodecay)*temps[i];
 	V2dyno *= dynodecay;  //always decays	
 
