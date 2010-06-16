@@ -7086,8 +7086,7 @@ if (ok)
 {
 strcpy(rkr->Bank_Saved,filename);
 BankWin_Label(filename);
-rkr->modified=0;
-}}
+}} selected
           xywh {524 117 44 14} labelfont 1 labelcolor 7 when 0
         }
       }
@@ -7103,7 +7102,8 @@ rkr->modified=0;
         Fl_Button L_B1 {
           label 1
           user_data 7
-          callback {char temp[128];           
+          callback {is_modified();
+char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
 int ok=rkr->loadbank(temp);
@@ -7117,7 +7117,8 @@ Put_Loaded_Bank();
         Fl_Button L_B2 {
           label 2
           user_data 7
-          callback {char temp[128];           
+          callback {is_modified();
+char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra.rkrb", DATADIR);
  int ok=rkr->loadbank(temp);
@@ -7131,12 +7132,13 @@ Put_Loaded_Bank();
         Fl_Button L_B3 {
           label 3
           user_data 7
-          callback {int ok=rkr->loadbank(rkr->BankFilename);
+          callback {is_modified();
+int ok=rkr->loadbank(rkr->BankFilename);
 if(ok) 
 {
 BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
-}} selected
+}}
           xywh {490 30 22 16} color 62 labelsize 10
         }
         Fl_Button S_new {
@@ -7434,7 +7436,7 @@ save_stat(1);}
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuB {
+      Fl_Menu_Bar MenuB {open
         xywh {0 0 800 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {

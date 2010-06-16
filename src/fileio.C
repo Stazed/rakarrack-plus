@@ -1311,6 +1311,7 @@ RKR::loadbank (char *filename)
       fclose (fn);
       if(BigEndian()) fix_endianess();
       convert_IO();
+      modified=0;
       return (1);
     }
   return (0);
@@ -1330,6 +1331,7 @@ RKR::savebank (char *filename)
       fwrite (&Bank, sizeof (Bank), 1, fn);
       if(BigEndian()) fix_endianess();
       fclose (fn);
+      modified=0;
       return(1);     
   }
 

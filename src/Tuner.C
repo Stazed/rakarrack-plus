@@ -27,7 +27,7 @@ Tuner::Tuner ()
   note = 0;
   nfreq = 0;
   afreq = 0;
-  schmittInit (4);
+  schmittInit (32);
 
 };
 
@@ -96,7 +96,7 @@ void
 Tuner::schmittS16LE (int nframes, signed short int *indata)
 {
   int i, j;
-  float trigfact = 0.6f;
+  float trigfact = 0.5f;
 
   for (i = 0; i < nframes; i++)
     {
