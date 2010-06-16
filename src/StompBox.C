@@ -54,8 +54,8 @@ StompBox::StompBox (float * efxoutl_, float * efxoutr_)
   rtonelw = new AnalogFilter (0, 500.0f, 1.0f, 0); 
 
   //Anti-aliasing for between stages
-  ranti = new AnalogFilter (0, 6000.0f, 0.707f, 6); 
-  lanti = new AnalogFilter (0, 6000.0f, 0.707f, 6);  
+  ranti = new AnalogFilter (0, 6000.0f, 0.707f, 4); 
+  lanti = new AnalogFilter (0, 6000.0f, 0.707f, 4);  
   
   rwshape = new Waveshaper();
   lwshape = new Waveshaper();
@@ -122,12 +122,18 @@ int i;
    switch (Pmode)
    {
     case 0:          //Odie
+         
+    lpre2->filterout(smpsl);
+    rpre2->filterout(smpsr);
+    rwshape->waveshapesmps (PERIOD, smpsl, 28, 20, 1);  //Valve2
+    lwshape->waveshapesmps (PERIOD, smpsr, 28, 20, 1);  
     ranti->filterout(smpsr);
-    lanti->filterout(smpsl);           
+    lanti->filterout(smpsl);  
     lpre1->filterout(smpsl);
-    rpre1->filterout(smpsr);
-    rwshape->waveshapesmps (PERIOD, smpsl, 19, Pgain, 1);  //compression
-    lwshape->waveshapesmps (PERIOD, smpsr, 19, Pgain, 1);   
+    rpre1->filterout(smpsr);   
+    rwshape2->waveshapesmps (PERIOD, smpsl, 28, Pgain, 1);  //Valve2
+    lwshape2->waveshapesmps (PERIOD, smpsr, 28, Pgain, 1);     
+      
     lpost->filterout(smpsl);
     rpost->filterout(smpsr);   
     
@@ -354,7 +360,7 @@ void StompBox::init_mode (int value)
   int sinput = 0;
   
   int tpre1 = 1;
-  float fpre1 = 630.0f;
+  float fpre1 = 708.0f;
   float qpre1 = 1.0f;
   int spre1 = 0;
   
@@ -829,7 +835,7 @@ StompBox::setpreset (int npreset)
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Odie
-    {48, 32, 0, 32, 65, 0},
+    {80, 32, 0, 32, 10, 0},
     //Grunger
     {48, 10, -6, 55, 85, 1},  
     //Hard Dist.
