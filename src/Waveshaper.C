@@ -594,7 +594,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
         break;	
        case 30: //Diode clipper
       
-        ws = 20.0f + powf (110.0f, ws);
+        ws = 50.0f + powf (110.0f, ws);
 
         for (i = 0; i < nn; i++)
 	{
@@ -602,6 +602,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 	tmpv = ws*temps[i];
 	if (tmpv>0.0f) tmpv = 1.0f - 1.0f/powf(4.0f, tmpv);
 	else tmpv = -(1.0f - 1.0f/powf(4.0f, -tmpv));
+	temps[i] = tmpv;
 
         } 
         break;	
