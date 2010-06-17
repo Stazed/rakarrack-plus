@@ -16504,29 +16504,29 @@ R average.");
           FSLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         } // Fl_Box* FSLabel
         { FSless = new Fl_Button(78, 330, 30, 20, "-");
-          FSless->callback((Fl_Callback*)cb_FSless);
+          FSless->callback((Fl_Callback*)cb_FSless, (void*)(77));
         } // Fl_Button* FSless
         { FSplus = new Fl_Button(113, 330, 30, 20, "+");
-          FSplus->callback((Fl_Callback*)cb_FSplus);
+          FSplus->callback((Fl_Callback*)cb_FSplus, (void*)(77));
         } // Fl_Button* FSplus
         { FSReset = new Fl_Button(148, 330, 57, 20, "Reset");
-          FSReset->callback((Fl_Callback*)cb_FSReset);
+          FSReset->callback((Fl_Callback*)cb_FSReset, (void*)(77));
         } // Fl_Button* FSReset
         { CLLabel = new Fl_Box(10, 358, 40, 19, "Colors");
           CLLabel->labelsize(11);
           CLLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         } // Fl_Box* CLLabel
         { B_C = new Fl_Button(15, 390, 90, 25, "Buttons");
-          B_C->callback((Fl_Callback*)cb_B_C);
+          B_C->callback((Fl_Callback*)cb_B_C, (void*)(77));
         } // Fl_Button* B_C
         { A_C = new Fl_Button(120, 390, 90, 25, "Labels");
-          A_C->callback((Fl_Callback*)cb_A_C);
+          A_C->callback((Fl_Callback*)cb_A_C, (void*)(77));
         } // Fl_Button* A_C
         { L_C = new Fl_Button(225, 390, 90, 25, "Leds");
-          L_C->callback((Fl_Callback*)cb_L_C);
+          L_C->callback((Fl_Callback*)cb_L_C, (void*)(77));
         } // Fl_Button* L_C
         { K_C = new Fl_Button(330, 390, 90, 25, "Background");
-          K_C->callback((Fl_Callback*)cb_K_C);
+          K_C->callback((Fl_Callback*)cb_K_C, (void*)(77));
         } // Fl_Button* K_C
         { Enable_Back = new Fl_Check_Button(162, 432, 23, 20, "Enable Background Image");
           Enable_Back->down_box(FL_DOWN_BOX);
@@ -16543,7 +16543,7 @@ R average.");
           BackFiname->align(FL_ALIGN_TOP_LEFT);
         } // Fl_File_Input* BackFiname
         { BI_Browser = new Fl_Button(410, 480, 65, 20, "Browse");
-          BI_Browser->callback((Fl_Callback*)cb_BI_Browser);
+          BI_Browser->callback((Fl_Callback*)cb_BI_Browser, (void*)(77));
         } // Fl_Button* BI_Browser
         Look->end();
       } // Fl_Group* Look
@@ -16998,7 +16998,7 @@ R average.");
           BFiname->align(FL_ALIGN_TOP_LEFT);
         } // Fl_File_Input* BFiname
         { BF_Browser = new Fl_Button(415, 60, 65, 20, "Browse");
-          BF_Browser->callback((Fl_Callback*)cb_BF_Browser);
+          BF_Browser->callback((Fl_Callback*)cb_BF_Browser, (void*)(77));
         } // Fl_Button* BF_Browser
         BANK_SET->end();
       } // Fl_Group* BANK_SET
@@ -17016,7 +17016,7 @@ R average.");
       Epar->callback((Fl_Callback*)cb_Epar);
     } // Fl_Browser* Epar
     { GMM = new Fl_Button(10, 445, 135, 30, "Get MIDI Message");
-      GMM->callback((Fl_Callback*)cb_GMM);
+      GMM->callback((Fl_Callback*)cb_GMM, (void*)(77));
     } // Fl_Button* GMM
     { TPresets = new Fl_Browser(430, 61, 201, 348);
       TPresets->type(2);
@@ -17024,10 +17024,10 @@ R average.");
       TPresets->when(3);
     } // Fl_Browser* TPresets
     { CopyF = new Fl_Button(430, 20, 95, 30, "Copy from: ");
-      CopyF->callback((Fl_Callback*)cb_CopyF);
+      CopyF->callback((Fl_Callback*)cb_CopyF, (void*)(77));
     } // Fl_Button* CopyF
     { CopyT = new Fl_Button(535, 20, 95, 30, "Copy to: ");
-      CopyT->callback((Fl_Callback*)cb_CopyT);
+      CopyT->callback((Fl_Callback*)cb_CopyT, (void*)(77));
     } // Fl_Button* CopyT
     { Ares = new Fl_Group(215, 60, 205, 180);
       Ares->box(FL_THIN_DOWN_BOX);
@@ -17095,19 +17095,19 @@ R average.");
       Ares->end();
     } // Fl_Group* Ares
     { ClearA = new Fl_Button(245, 250, 150, 30, "Clear Assignements");
-      ClearA->callback((Fl_Callback*)cb_ClearA);
+      ClearA->callback((Fl_Callback*)cb_ClearA, (void*)(77));
     } // Fl_Button* ClearA
     { ClearP = new Fl_Button(245, 285, 150, 30, "Clear Preset");
-      ClearP->callback((Fl_Callback*)cb_ClearP);
+      ClearP->callback((Fl_Callback*)cb_ClearP, (void*)(77));
     } // Fl_Button* ClearP
     { Assign = new Fl_Button(112, 20, 98, 30, "Assign");
-      Assign->callback((Fl_Callback*)cb_Assign);
+      Assign->callback((Fl_Callback*)cb_Assign, (void*)(77));
     } // Fl_Button* Assign
     { AssignA = new Fl_Button(10, 20, 98, 30, "Assign to All");
-      AssignA->callback((Fl_Callback*)cb_AssignA);
+      AssignA->callback((Fl_Callback*)cb_AssignA, (void*)(77));
     } // Fl_Button* AssignA
     { CancelRec = new Fl_Button(200, 450, 60, 20, "Cancel");
-      CancelRec->callback((Fl_Callback*)cb_CancelRec);
+      CancelRec->callback((Fl_Callback*)cb_CancelRec, (void*)(77));
     } // Fl_Button* CancelRec
     { Disp_Control = new Fl_Value_Input(155, 445, 40, 30);
       Disp_Control->minimum(1);
@@ -17118,10 +17118,10 @@ R average.");
       Disp_Control->callback((Fl_Callback*)cb_Disp_Control);
     } // Fl_Value_Input* Disp_Control
     { CopyTAll = new Fl_Button(480, 412, 150, 30, "Copy to All");
-      CopyTAll->callback((Fl_Callback*)cb_CopyTAll);
+      CopyTAll->callback((Fl_Callback*)cb_CopyTAll, (void*)(77));
     } // Fl_Button* CopyTAll
     { CloseML = new Fl_Button(480, 445, 150, 30, "Close");
-      CloseML->callback((Fl_Callback*)cb_CloseML);
+      CloseML->callback((Fl_Callback*)cb_CloseML, (void*)(77));
     } // Fl_Button* CloseML
     { Filters_ML = new Fl_Group(10, 410, 200, 31);
       Filters_ML->box(FL_DOWN_BOX);
