@@ -66,6 +66,7 @@ Compressor::Compressor (float * efxoutl_, float * efxoutr_)
   lpeak = 0.0f;
   rpeak = 0.0f;
   clipping = 0;
+  limit = 0;
 
 
 }
@@ -203,7 +204,7 @@ void
 Compressor::Compressor_Change_Preset (int npreset)
 {
 
-  const int PRESET_SIZE = 9;
+  const int PRESET_SIZE = 10;
   const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //2:1
@@ -213,7 +214,7 @@ Compressor::Compressor_Change_Preset (int npreset)
     //8:1
     {-24, 8, -12, 20, 35, 1, 30, 0, 0},
     //Final Limiter
-    {-1, 15, 0, 10, 50, 0 ,0 ,1 ,1},
+    {-1, 25, 0, 5, 50, 0 ,0 ,1 ,1},
     //HarmonicEnhancer
     {-20, 15, -3, 10, 50, 0 ,0 ,1 ,1},
 
@@ -335,23 +336,23 @@ Compressor::out (float *efxoutl, float *efxoutr)
       efxoutr[i] *= lgain_t;  
       lgain_old = lgain;
       }
-
+  
       if(peak)
       {
-      if(efxoutl[i]>0.99f) {            //output hard limiting
-      efxoutl[i] = 0.99f;
+      if(efxoutl[i]>0.999f) {            //output hard limiting
+      efxoutl[i] = 0.999f;
       clipping = 1;
       }	
-      if(efxoutl[i]<-0.99f){
-      efxoutl[i] = -0.99f;
+      if(efxoutl[i]<-0.999f){
+      efxoutl[i] = -0.999f;
       clipping = 1;
       }
-      if(efxoutr[i]>0.99f) {
-      efxoutr[i] = 0.99f;
+      if(efxoutr[i]>0.999f) {
+      efxoutr[i] = 0.999f;
       clipping = 1;
       }	
-      if(efxoutr[i]<-0.99f) {
-      efxoutr[i] = -0.99f;  
+      if(efxoutr[i]<-0.999f) {
+      efxoutr[i] = -0.999f;  
       clipping = 1;
       }
       //highly probably there is a more elegant way to do that, but what the hey...    
