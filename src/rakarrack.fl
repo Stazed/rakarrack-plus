@@ -831,8 +831,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1244,7 +1243,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -7713,14 +7712,14 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();}
-      xywh {1820 208 640 528} type Double color 4 hide
+Settings->hide();} selected
+      xywh {1813 201 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
@@ -7793,18 +7792,21 @@ chfsize(0);}
           }
           Fl_Button FSless {
             label {-}
+            user_data 77
             callback {rkr->relfontsize--;
 chfsize(-1);}
             xywh {78 330 30 20}
           }
           Fl_Button FSplus {
             label {+}
+            user_data 77
             callback {rkr->relfontsize++;
 chfsize(1);}
             xywh {113 330 30 20}
           }
           Fl_Button FSReset {
             label Reset
+            user_data 77
             callback {rkr->relfontsize=0;
 chfsize(0);}
             xywh {148 330 57 20}
@@ -7815,6 +7817,7 @@ chfsize(0);}
           }
           Fl_Button B_C {
             label Buttons
+            user_data 77
             callback {uchar r,g,b;
 
 Fl::get_color(fore_color,r,g,b);
@@ -7825,6 +7828,7 @@ Buttons_Color_Change(fore_color);}
           }
           Fl_Button A_C {
             label Labels
+            user_data 77
             callback {uchar r,g,b;
 Fl::get_color(label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
@@ -7834,6 +7838,7 @@ Label_Color_Change(label_color);}
           }
           Fl_Button L_C {
             label Leds
+            user_data 77
             callback {uchar r,g,b;
 Fl::get_color(leds_color,r,g,b);
 if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
@@ -7843,6 +7848,7 @@ Leds_Color_Change(leds_color);}
           }
           Fl_Button K_C {
             label Background
+            user_data 77
             callback {uchar r,g,b;
 Fl::get_color(back_color,r,g,b);
 if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
@@ -7862,6 +7868,7 @@ PutBackground();}
           }
           Fl_Button BI_Browser {
             label Browse
+            user_data 77
             callback {char *filename;
 filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
 if (filename==NULL) return;
@@ -8336,7 +8343,7 @@ Fl_Tooltip::enable(rkr->ena_tool);}
         }
         Fl_Group BANK_SET {
           label Bank
-          user_data 1
+          user_data 1 open
           xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo11 {
@@ -8348,6 +8355,7 @@ Fl_Tooltip::enable(rkr->ena_tool);}
           }
           Fl_Button BF_Browser {
             label Browse
+            user_data 77
             callback {char *filename;
 filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
@@ -8362,7 +8370,7 @@ strcpy(rkr->BankFilename,filename);}
     Fl_Window MIDILearn {
       callback {save_stat(5);
 MIDILearn->hide();}
-      xywh {1471 23 640 480} type Double hide
+      xywh {1464 23 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
@@ -8373,6 +8381,7 @@ MIDILearn->hide();}
       }
       Fl_Button GMM {
         label {Get MIDI Message}
+        user_data 77
         callback {rkr->ControlGet=0;
 rkr->CountWait=0;
 rkr->RControl=1;}
@@ -8383,6 +8392,7 @@ rkr->RControl=1;}
       }
       Fl_Button CopyF {
         label {Copy from: }
+        user_data 77
         callback {memcpy(rkr->XUserMIDI,rkr->Bank[TPresets->value()].XUserMIDI,sizeof(rkr->XUserMIDI));
 
 DisAssigns();}
@@ -8390,6 +8400,7 @@ DisAssigns();}
       }
       Fl_Button CopyT {
         label {Copy to: }
+        user_data 77
         callback {memcpy(rkr->Bank[TPresets->value()].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));}
         xywh {535 20 95 30}
       }
@@ -8459,6 +8470,7 @@ DisAssigns();}
       }
       Fl_Button ClearA {
         label {Clear Assignements}
+        user_data 77
         callback {int i, j,k;
 int the_one;
 
@@ -8486,12 +8498,14 @@ DisAssigns();}
       }
       Fl_Button ClearP {
         label {Clear Preset}
+        user_data 77
         callback {memset(rkr->XUserMIDI, 0, sizeof(rkr->XUserMIDI));
 DisAssigns();}
         xywh {245 285 150 30}
       }
       Fl_Button Assign {
         label Assign
+        user_data 77
         callback {int i;
 
 int the_one;
@@ -8520,6 +8534,7 @@ DisAssigns();}
       }
       Fl_Button AssignA {
         label {Assign to All}
+        user_data 77
         callback {int i,j;
 int the_one;
 
@@ -8551,6 +8566,7 @@ Assign->do_callback();}
       }
       Fl_Button CancelRec {
         label Cancel
+        user_data 77
         callback {rkr->RControl = 0;
 GMM->color(fore_color);
 GMM->redraw();}
@@ -8563,12 +8579,14 @@ if(o->value()< 1) o->value(1);}
       }
       Fl_Button CopyTAll {
         label {Copy to All}
+        user_data 77
         callback {int i;
 for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));}
         xywh {480 412 150 30}
       }
       Fl_Button CloseML {
         label Close
+        user_data 77
         callback {MIDILearn->do_callback();}
         xywh {480 445 150 30}
       }
