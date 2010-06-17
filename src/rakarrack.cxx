@@ -10,6 +10,7 @@ static Fl_Color label_color;
 static Fl_Widget *old; 
 static float *spl; 
 static float *spr; 
+static int last_tecla; 
 static int sr; 
 static int ns; 
 static int at; 
@@ -16391,6 +16392,7 @@ R average.");
       Avail_Bro->labelsize(18);
       Avail_Bro->textsize(18);
       Avail_Bro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      Avail_Bro->user_data((void*)(99));
     } // Fl_Browser* Avail_Bro
     { Pon = new Fl_Button(200, 145, 50, 25, "@<->");
       Pon->labelsize(18);
@@ -17023,7 +17025,7 @@ R average.");
     { Epar = new Fl_Browser(10, 58, 201, 348);
       Epar->type(2);
       Epar->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      Epar->callback((Fl_Callback*)cb_Epar);
+      Epar->callback((Fl_Callback*)cb_Epar, (void*)(99));
     } // Fl_Browser* Epar
     { GMM = new Fl_Button(10, 445, 135, 30, "Get MIDI Message");
       GMM->callback((Fl_Callback*)cb_GMM, (void*)(77));
@@ -17353,7 +17355,7 @@ Settings->icon((char *)p);
 AboutWin->icon((char *)p);
 MIDILearn->icon((char *)p);
 Trigger->icon((char *)p);
-
+last_tecla=0;
 made=0;
 char tmp[256];
 nt=0;
@@ -21699,5 +21701,31 @@ if(old != NULL)
 old->color(fore_color);
 old->redraw();
 }
+}
+
+if(k==99)
+{
+Fl_Browser *b;
+b = (Fl_Browser *) w;
+int tecla=Fl::event_key();
+if(tecla != last_tecla)
+{
+ last_tecla = tecla; 
+ for(int i=1; i<=b->size(); i++)
+  {
+    if (b->text(i)[0]==tecla-32) 
+     {
+       b->select(i,1);
+       break;
+     }  
+
+  }
+
+}
+
+
+
+
+
 }
 }

@@ -50,6 +50,8 @@ decl {float *spl;} {}
 
 decl {float *spr;} {} 
 
+decl {int last_tecla;} {} 
+
 decl {int sr;} {} 
 
 decl {int ns;} {} 
@@ -831,18 +833,16 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1653 126 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -7584,6 +7584,7 @@ Order->hide();}
         xywh {25 3 438 37} labelfont 1 labelsize 33 labelcolor 7
       }
       Fl_Browser Avail_Bro {
+        user_data 99 selected
         xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
       }
       Fl_Button Pon {
@@ -8379,13 +8380,14 @@ strcpy(rkr->BankFilename,filename);}
     }
     Fl_Window MIDILearn {
       callback {save_stat(5);
-MIDILearn->hide();}
+MIDILearn->hide();} open
       xywh {1464 23 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
       }
       Fl_Browser Epar {
+        user_data 99
         callback {DisAssigns();}
         xywh {10 58 201 348} type Hold textcolor 7
       }
@@ -8763,7 +8765,7 @@ Settings->icon((char *)p);
 AboutWin->icon((char *)p);
 MIDILearn->icon((char *)p);
 Trigger->icon((char *)p);
-
+last_tecla=0;
 made=0;
 char tmp[256];
 nt=0;
@@ -12383,8 +12385,7 @@ UPS_LED->redraw();
  UPS_LED->redraw();
 }
 CLIP_LED->color(fl_darker(FL_RED));
-LMT_LED->color(fl_darker(leds_color));} {selected
-    }
+LMT_LED->color(fl_darker(leds_color));} {}
   }
   Function {findpos(int num, int value)} {} {
     code {int i;
@@ -13073,6 +13074,32 @@ if(old != NULL)
 old->color(fore_color);
 old->redraw();
 }
+}
+
+if(k==99)
+{
+Fl_Browser *b;
+b = (Fl_Browser *) w;
+int tecla=Fl::event_key();
+if(tecla != last_tecla)
+{
+ last_tecla = tecla; 
+ for(int i=1; i<=b->size(); i++)
+  {
+    if (b->text(i)[0]==tecla-32) 
+     {
+       b->select(i,1);
+       break;
+     }  
+
+  }
+
+}
+
+
+
+
+
 }} {}
   }
 } 
