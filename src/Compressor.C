@@ -283,7 +283,7 @@ Compressor::out (float *efxoutl, float *efxoutr)
       else
 	{
 	  rgain = outlevel*dB2rap(thres_db + coeff_kk + (rvolume_db-thres_mx)*coeff_ratio - rvolume_db);
-	  clipping = 1;
+	  limit = 1;
 	}
 	
       if ( rgain < MIN_GAIN) rgain = MIN_GAIN;
@@ -317,7 +317,7 @@ Compressor::out (float *efxoutl, float *efxoutr)
       else
 	{
 	  lgain = outlevel*dB2rap(thres_db + coeff_kk + (lvolume_db-thres_mx)*coeff_ratio - lvolume_db);
-	  clipping = 1;
+	  limit = 1;
 	}
 
 

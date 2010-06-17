@@ -63,6 +63,7 @@ public:
   int tknee;
   int peak;
   int clipping;
+  int limit;
 
 private:
 
