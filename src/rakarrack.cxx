@@ -1065,9 +1065,20 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%5.2f%%",rkr->cpuload);
 CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
+
+if(rkr->efx_FLimiter->clipping)
+{
+ CLIP_LED->color(fl_darker(FL_RED));
+ CLIP_LED->redraw();
+} 
+if(rkr->efx_FLimiter->limit)
+{
+ LMT_LED->color(fl_darker(leds_color));
+ LMT_LED->redraw();
+} 
+
 rkr->efx_FLimiter->clipping=0;
 rkr->efx_FLimiter->limit=0;
-
 }
 
 if(rkr->numpc)
@@ -1131,15 +1142,15 @@ if (rkr->Bypass)
   }
 
 
-if(CLIP_LED->value()!= rkr->efx_FLimiter->clipping)
+if(rkr->efx_FLimiter->clipping)
 {
-CLIP_LED->value(rkr->efx_FLimiter->clipping);
+CLIP_LED->color(FL_RED);
 CLIP_LED->redraw();
 }
 
-if(LMT_LED->value()!= rkr->efx_FLimiter->limit)
+if(rkr->efx_FLimiter->limit)
 {
-LMT_LED->value(rkr->efx_FLimiter->limit);
+LMT_LED->color(leds_color);
 LMT_LED->redraw();
 }
 
@@ -7798,34 +7809,33 @@ Fl_Double_Window* RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
     } // Fl_Button* TITTLE_L
-    { LMT_LED = new Fl_Check_Button(492, 6, 15, 15, "Lmt");
-      LMT_LED->down_box(FL_BORDER_BOX);
+    { LMT_LED = new Fl_Box(504, 8, 8, 8, "Lmt");
+      LMT_LED->box(FL_DOWN_BOX);
+      LMT_LED->color((Fl_Color)2);
       LMT_LED->labelsize(10);
       LMT_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      LMT_LED->user_data((void*)(2));
       LMT_LED->align(FL_ALIGN_LEFT);
-    } // Fl_Check_Button* LMT_LED
-    { CLIP_LED = new Fl_Check_Button(532, 6, 15, 15, "Clip");
-      CLIP_LED->down_box(FL_BORDER_BOX);
+    } // Fl_Box* LMT_LED
+    { CLIP_LED = new Fl_Box(541, 8, 8, 8, "Clip");
+      CLIP_LED->box(FL_DOWN_BOX);
+      CLIP_LED->color((Fl_Color)1);
       CLIP_LED->labelsize(10);
       CLIP_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      CLIP_LED->user_data((void*)(2));
       CLIP_LED->align(FL_ALIGN_LEFT);
-    } // Fl_Check_Button* CLIP_LED
-    { UPS_LED = new Fl_Check_Button(600, 6, 15, 15, "Upsample");
-      UPS_LED->down_box(FL_BORDER_BOX);
+    } // Fl_Box* CLIP_LED
+    { UPS_LED = new Fl_Box(608, 8, 8, 8, "Resample");
+      UPS_LED->box(FL_DOWN_BOX);
+      UPS_LED->color((Fl_Color)2);
       UPS_LED->labelsize(10);
       UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      UPS_LED->user_data((void*)(2));
       UPS_LED->align(FL_ALIGN_LEFT);
-    } // Fl_Check_Button* UPS_LED
+    } // Fl_Box* UPS_LED
     { P_MIN_ST = new Fl_Box(620, 3, 29, 20, "Midi In");
       P_MIN_ST->labelfont(1);
       P_MIN_ST->labelsize(8);
       P_MIN_ST->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       P_MIN_ST->user_data((void*)(5));
       P_MIN_ST->align(FL_ALIGN_WRAP);
-      P_MIN_ST->hide();
     } // Fl_Box* P_MIN_ST
     { P_MOUT_ST = new Fl_Box(648, 3, 29, 20, "Midi Out");
       P_MOUT_ST->labelfont(1);
@@ -20978,7 +20988,18 @@ if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->label
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if((rkr->upsample) && (rkr->Bypass)) UPS_LED->value(rkr->upsample); else UPS_LED->value(0);
+if((rkr->upsample) && (rkr->Bypass)) 
+{
+UPS_LED->color(leds_color);
+UPS_LED->redraw();
+}
+ else
+{ 
+ UPS_LED->color(fl_darker(leds_color));
+ UPS_LED->redraw();
+}
+CLIP_LED->color(fl_darker(FL_RED));
+LMT_LED->color(fl_darker(leds_color));
 }
 
 void RKRGUI::findpos(int num, int value) {

@@ -84,7 +84,8 @@ Compressor::cleanup ()
   lgain_old = rgain_old = 1.0f;
   rpeak = 0.0f;
   lpeak = 0.0f;
-
+  limit = 0;
+  clipping = 0;
 }
 
 
