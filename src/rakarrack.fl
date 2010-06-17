@@ -831,7 +831,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -841,7 +842,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1674 147 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1660 133 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1069,6 +1070,8 @@ sprintf(tmp,"%5.2f%%",rkr->cpuload);
 CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
 rkr->efx_FLimiter->clipping=0;
+rkr->efx_FLimiter->limit=0;
+
 }
 
 if(rkr->numpc)
@@ -1138,6 +1141,11 @@ CLIP_LED->value(rkr->efx_FLimiter->clipping);
 CLIP_LED->redraw();
 }
 
+if(LMT_LED->value()!= rkr->efx_FLimiter->limit)
+{
+LMT_LED->value(rkr->efx_FLimiter->limit);
+LMT_LED->redraw();
+}
 
 if(rkr->checkforaux())
 {
@@ -1236,7 +1244,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -1246,18 +1254,23 @@ Tuner->hide();
 Sco->show();
 Scope_ON=1;
 Fl::focus(Open_Order);
-}} selected
+}}
         xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
+      }
+      Fl_Check_Button LMT_LED {
+        label Lmt
+        user_data 2
+        xywh {492 6 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
       }
       Fl_Check_Button CLIP_LED {
         label Clip
         user_data 2
-        xywh {518 6 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+        xywh {532 6 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
       }
-      Fl_Box UPS_LED {
-        label Upsampling
+      Fl_Check_Button UPS_LED {
+        label Upsample
         user_data 2
-        xywh {598 8 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 4 when 0
+        xywh {600 6 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
       }
       Fl_Box P_MIN_ST {
         label {Midi In}
@@ -12331,14 +12344,7 @@ if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->label
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if((rkr->upsample) && (rkr->Bypass))
-{
- UPS_LED->color(leds_color); 
- UPS_LED->labelcolor(on); 
- UPS_LED->show();
-
-} 
- else  UPS_LED->hide();} {}
+if((rkr->upsample) && (rkr->Bypass)) UPS_LED->value(rkr->upsample); else UPS_LED->value(0);} {}
   }
   Function {findpos(int num, int value)} {} {
     code {int i;

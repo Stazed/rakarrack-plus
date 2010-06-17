@@ -1066,6 +1066,8 @@ sprintf(tmp,"%5.2f%%",rkr->cpuload);
 CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
 rkr->efx_FLimiter->clipping=0;
+rkr->efx_FLimiter->limit=0;
+
 }
 
 if(rkr->numpc)
@@ -1135,6 +1137,11 @@ CLIP_LED->value(rkr->efx_FLimiter->clipping);
 CLIP_LED->redraw();
 }
 
+if(LMT_LED->value()!= rkr->efx_FLimiter->limit)
+{
+LMT_LED->value(rkr->efx_FLimiter->limit);
+LMT_LED->redraw();
+}
 
 if(rkr->checkforaux())
 {
@@ -7791,21 +7798,27 @@ Fl_Double_Window* RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
     } // Fl_Button* TITTLE_L
-    { CLIP_LED = new Fl_Check_Button(518, 6, 15, 15, "Clip");
+    { LMT_LED = new Fl_Check_Button(492, 6, 15, 15, "Lmt");
+      LMT_LED->down_box(FL_BORDER_BOX);
+      LMT_LED->labelsize(10);
+      LMT_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      LMT_LED->user_data((void*)(2));
+      LMT_LED->align(FL_ALIGN_LEFT);
+    } // Fl_Check_Button* LMT_LED
+    { CLIP_LED = new Fl_Check_Button(532, 6, 15, 15, "Clip");
       CLIP_LED->down_box(FL_BORDER_BOX);
       CLIP_LED->labelsize(10);
       CLIP_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       CLIP_LED->user_data((void*)(2));
       CLIP_LED->align(FL_ALIGN_LEFT);
     } // Fl_Check_Button* CLIP_LED
-    { UPS_LED = new Fl_Box(598, 8, 11, 11, "Upsampling");
-      UPS_LED->box(FL_ROUNDED_BOX);
+    { UPS_LED = new Fl_Check_Button(600, 6, 15, 15, "Upsample");
+      UPS_LED->down_box(FL_BORDER_BOX);
       UPS_LED->labelsize(10);
       UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       UPS_LED->user_data((void*)(2));
       UPS_LED->align(FL_ALIGN_LEFT);
-      UPS_LED->when(FL_WHEN_NEVER);
-    } // Fl_Box* UPS_LED
+    } // Fl_Check_Button* UPS_LED
     { P_MIN_ST = new Fl_Box(620, 3, 29, 20, "Midi In");
       P_MIN_ST->labelfont(1);
       P_MIN_ST->labelsize(8);
@@ -20965,14 +20978,7 @@ if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->label
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
-if((rkr->upsample) && (rkr->Bypass))
-{
- UPS_LED->color(leds_color); 
- UPS_LED->labelcolor(on); 
- UPS_LED->show();
-
-} 
- else  UPS_LED->hide();
+if((rkr->upsample) && (rkr->Bypass)) UPS_LED->value(rkr->upsample); else UPS_LED->value(0);
 }
 
 void RKRGUI::findpos(int num, int value) {
