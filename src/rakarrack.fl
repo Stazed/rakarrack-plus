@@ -841,7 +841,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1702 175 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1674 147 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1007,6 +1007,7 @@ put_icon(AboutWin);}
       Fl_Box MT {
         callback {highlight();
 
+
 if (rkr->Tuner_Bypass)
 {
 
@@ -1067,6 +1068,7 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%5.2f%%",rkr->cpuload);
 CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
+rkr->efx_FLimiter->clipping=0;
 }
 
 if(rkr->numpc)
@@ -1130,8 +1132,11 @@ if (rkr->Bypass)
   }
 
 
-
-
+if(CLIP_LED->value()!= rkr->efx_FLimiter->clipping)
+{
+CLIP_LED->value(rkr->efx_FLimiter->clipping);
+CLIP_LED->redraw();
+}
 
 
 if(rkr->checkforaux())
@@ -1240,13 +1245,19 @@ if (rkr->RControl)
 Tuner->hide();
 Sco->show();
 Scope_ON=1;
-}}
+Fl::focus(Open_Order);
+}} selected
         xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
+      }
+      Fl_Check_Button CLIP_LED {
+        label Clip
+        user_data 2
+        xywh {518 6 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
       }
       Fl_Box UPS_LED {
         label Upsampling
         user_data 2
-        xywh {541 8 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 8
+        xywh {598 8 11 11} box ROUNDED_BOX labelsize 10 labelcolor 7 align 4 when 0
       }
       Fl_Box P_MIN_ST {
         label {Midi In}
@@ -7805,7 +7816,7 @@ Buttons_Color_Change(fore_color);}
 Fl::get_color(label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
-Label_Color_Change(label_color);} selected
+Label_Color_Change(label_color);}
             xywh {120 390 90 25}
           }
           Fl_Button L_C {
@@ -12278,7 +12289,7 @@ for (int t=0; t<Principal->children();t++)
           if((k>10)&&(k<32))WPreset_Name->textsize(k);
 
 
-
+          CLIP_LED->selection_color(FL_RED);
 
 
 

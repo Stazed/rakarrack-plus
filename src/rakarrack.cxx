@@ -1004,6 +1004,7 @@ Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 19;
 void RKRGUI::cb_MT_i(Fl_Box*, void*) {
   highlight();
 
+
 if (rkr->Tuner_Bypass)
 {
 
@@ -1064,6 +1065,7 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%5.2f%%",rkr->cpuload);
 CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
+rkr->efx_FLimiter->clipping=0;
 }
 
 if(rkr->numpc)
@@ -1127,8 +1129,11 @@ if (rkr->Bypass)
   }
 
 
-
-
+if(CLIP_LED->value()!= rkr->efx_FLimiter->clipping)
+{
+CLIP_LED->value(rkr->efx_FLimiter->clipping);
+CLIP_LED->redraw();
+}
 
 
 if(rkr->checkforaux())
@@ -1240,6 +1245,7 @@ void RKRGUI::cb_TITTLE_L_i(Fl_Button*, void*) {
 Tuner->hide();
 Sco->show();
 Scope_ON=1;
+Fl::focus(Open_Order);
 };
 }
 void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
@@ -7785,12 +7791,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
     } // Fl_Button* TITTLE_L
-    { UPS_LED = new Fl_Box(541, 8, 11, 11, "Upsampling");
+    { CLIP_LED = new Fl_Check_Button(518, 6, 15, 15, "Clip");
+      CLIP_LED->down_box(FL_BORDER_BOX);
+      CLIP_LED->labelsize(10);
+      CLIP_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      CLIP_LED->user_data((void*)(2));
+      CLIP_LED->align(FL_ALIGN_LEFT);
+    } // Fl_Check_Button* CLIP_LED
+    { UPS_LED = new Fl_Box(598, 8, 11, 11, "Upsampling");
       UPS_LED->box(FL_ROUNDED_BOX);
       UPS_LED->labelsize(10);
       UPS_LED->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       UPS_LED->user_data((void*)(2));
-      UPS_LED->align(FL_ALIGN_RIGHT);
+      UPS_LED->align(FL_ALIGN_LEFT);
+      UPS_LED->when(FL_WHEN_NEVER);
     } // Fl_Box* UPS_LED
     { P_MIN_ST = new Fl_Box(620, 3, 29, 20, "Midi In");
       P_MIN_ST->labelfont(1);
@@ -16453,7 +16467,6 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
-        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -16922,6 +16935,7 @@ R average.");
         MISC_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MISC_SET->user_data((void*)(1));
         MISC_SET->align(FL_ALIGN_LEFT);
+        MISC_SET->hide();
         { Fondo10 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo10
         { Username = new Fl_Input(80, 32, 240, 21, "Username:");
@@ -20907,7 +20921,7 @@ for (int t=0; t<Principal->children();t++)
           if((k>10)&&(k<32))WPreset_Name->textsize(k);
 
 
-
+          CLIP_LED->selection_color(FL_RED);
 
 
 
