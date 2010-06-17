@@ -7,6 +7,7 @@ static Fl_Color leds_color;
 static Fl_Color back_color; 
 static Fl_Color fore_color; 
 static Fl_Color label_color; 
+static Fl_Widget *old; 
 static float *spl; 
 static float *spr; 
 static int sr; 
@@ -1001,7 +1002,9 @@ Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 18;
 Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 19;
 
 void RKRGUI::cb_MT_i(Fl_Box*, void*) {
-  if (rkr->Tuner_Bypass)
+  highlight();
+
+if (rkr->Tuner_Bypass)
 {
 
 if(rkr->efx_Tuner->note_actual != rkr->note_old)
@@ -16152,35 +16155,35 @@ R average.");
       { L_B1 = new Fl_Button(442, 30, 22, 16, "1");
         L_B1->color((Fl_Color)62);
         L_B1->labelsize(10);
-        L_B1->callback((Fl_Callback*)cb_L_B1, (void*)(7));
+        L_B1->callback((Fl_Callback*)cb_L_B1, (void*)(77));
       } // Fl_Button* L_B1
       { L_B2 = new Fl_Button(466, 30, 22, 16, "2");
         L_B2->color((Fl_Color)62);
         L_B2->labelsize(10);
-        L_B2->callback((Fl_Callback*)cb_L_B2, (void*)(7));
+        L_B2->callback((Fl_Callback*)cb_L_B2, (void*)(77));
       } // Fl_Button* L_B2
       { L_B3 = new Fl_Button(490, 30, 22, 16, "3");
         L_B3->color((Fl_Color)62);
         L_B3->labelsize(10);
-        L_B3->callback((Fl_Callback*)cb_L_B3, (void*)(7));
+        L_B3->callback((Fl_Callback*)cb_L_B3, (void*)(77));
       } // Fl_Button* L_B3
       { S_new = new Fl_Button(174, 50, 64, 18, "New");
         S_new->shortcut(0x6e);
         S_new->color((Fl_Color)62);
         S_new->labelsize(12);
-        S_new->callback((Fl_Callback*)cb_S_new, (void*)(7));
+        S_new->callback((Fl_Callback*)cb_S_new, (void*)(77));
       } // Fl_Button* S_new
       { L_preset = new Fl_Button(240, 50, 64, 18, "Load");
         L_preset->shortcut(0x6c);
         L_preset->color((Fl_Color)62);
         L_preset->labelsize(12);
-        L_preset->callback((Fl_Callback*)cb_L_preset, (void*)(7));
+        L_preset->callback((Fl_Callback*)cb_L_preset, (void*)(77));
       } // Fl_Button* L_preset
       { S_preset = new Fl_Button(306, 50, 64, 18, "Save");
         S_preset->shortcut(0x73);
         S_preset->color((Fl_Color)62);
         S_preset->labelsize(12);
-        S_preset->callback((Fl_Callback*)cb_S_preset, (void*)(7));
+        S_preset->callback((Fl_Callback*)cb_S_preset, (void*)(77));
       } // Fl_Button* S_preset
       { Compare = new Fl_Light_Button(373, 50, 72, 18, "Compare");
         Compare->shortcut(0x70);
@@ -16195,7 +16198,7 @@ R average.");
         B_preset->shortcut(0x62);
         B_preset->color((Fl_Color)62);
         B_preset->labelsize(12);
-        B_preset->callback((Fl_Callback*)cb_B_preset, (void*)(7));
+        B_preset->callback((Fl_Callback*)cb_B_preset, (void*)(77));
       } // Fl_Button* B_preset
       { Fl_Input* o = WPreset_Name = new Fl_Input(174, 72, 338, 30);
         WPreset_Name->color((Fl_Color)62);
@@ -16228,7 +16231,7 @@ R average.");
       { Open_Order = new Fl_Button(255, 132, 195, 24, "Put Order in your Rack");
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
-        Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(7));
+        Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(77));
         Open_Order->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
@@ -16290,12 +16293,12 @@ R average.");
       { T_Apply = new Fl_Button(628, 172, 38, 15, "Apply");
         T_Apply->shortcut(0x67);
         T_Apply->labelsize(10);
-        T_Apply->callback((Fl_Callback*)cb_T_Apply);
+        T_Apply->callback((Fl_Callback*)cb_T_Apply, (void*)(77));
       } // Fl_Button* T_Apply
       { T_BUT = new Fl_Button(671, 165, 38, 23, "Tap");
         T_BUT->shortcut(0x67);
         T_BUT->labelsize(12);
-        T_BUT->callback((Fl_Callback*)cb_T_BUT);
+        T_BUT->callback((Fl_Callback*)cb_T_BUT, (void*)(77));
       } // Fl_Button* T_BUT
       { TAP_LABEL = new Fl_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->labelfont(1);
@@ -17303,6 +17306,7 @@ num_fonts = Fl::set_fonts(0);
 rkr=rkr_;
 
 back = NULL;
+old = NULL;
 make_window();
 
 Principal->icon((char *)p);
@@ -20856,7 +20860,7 @@ for (int t=0; t<Principal->children();t++)
 
           k= c->labelsize();
           k+=value;
-          if(uh==7)
+          if((uh==7)||(uh==77))
           {
           if((k>6)&&(k<20))c->labelsize(k);
           }
@@ -20864,7 +20868,7 @@ for (int t=0; t<Principal->children();t++)
           if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=7) c->selection_color(back_color); 
-          if ((uh==2)||(uh==7)) c->selection_color(leds_color);
+          if ((uh==2)||(uh==7)||(uh==77)) c->selection_color(leds_color);
           c->color(fore_color);
           c->labelfont(rkr->font);
        
@@ -21610,4 +21614,49 @@ for (i=0; i<rkr->NumEffects;i++)
 }
 
 Avail_Bro->select(1);
+}
+
+void RKRGUI::highlight() {
+  int tipo=0;
+long long k=0;
+
+Fl_Widget *w;
+
+w = Fl::belowmouse();
+
+if(w != NULL)
+{
+tipo=(int)w->type();
+k = (long long) w->user_data();
+}
+else
+{
+if(old != NULL)
+{
+old->color(fore_color);
+old->redraw();
+}
+}
+
+
+if((tipo==1) || (k == 77)) 
+{
+if(old != NULL)
+{
+old->color(fore_color);
+old->redraw();
+}
+   w->color(fl_color_average(fore_color,fl_lighter(fore_color),.8));
+   w->redraw();
+   old = w;
+}
+
+else
+{
+if(old != NULL)
+{
+old->color(fore_color);
+old->redraw();
+}
+}
 }

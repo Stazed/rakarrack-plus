@@ -44,6 +44,8 @@ decl {Fl_Color fore_color;} {}
 
 decl {Fl_Color label_color;} {} 
 
+decl {Fl_Widget *old;} {} 
+
 decl {float *spl;} {} 
 
 decl {float *spr;} {} 
@@ -829,8 +831,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1004,7 +1005,9 @@ put_icon(AboutWin);}
         }
       }
       Fl_Box MT {
-        callback {if (rkr->Tuner_Bypass)
+        callback {highlight();
+
+if (rkr->Tuner_Bypass)
 {
 
 if(rkr->efx_Tuner->note_actual != rkr->note_old)
@@ -7109,7 +7112,7 @@ BankWin_Label(filename);
         }
         Fl_Button L_B1 {
           label 1
-          user_data 7
+          user_data 77
           callback {is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -7124,7 +7127,7 @@ Put_Loaded_Bank();
         }
         Fl_Button L_B2 {
           label 2
-          user_data 7
+          user_data 77
           callback {is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -7139,7 +7142,7 @@ Put_Loaded_Bank();
         }
         Fl_Button L_B3 {
           label 3
-          user_data 7
+          user_data 77
           callback {is_modified();
 int ok=rkr->loadbank(rkr->BankFilename);
 if(ok) 
@@ -7151,7 +7154,7 @@ Put_Loaded_Bank();
         }
         Fl_Button S_new {
           label New
-          user_data 7
+          user_data 77
           callback {rkr->New();
 DisAssigns();
 FillML(0);
@@ -7161,7 +7164,7 @@ Put_Loaded();}
         }
         Fl_Button L_preset {
           label Load
-          user_data 7
+          user_data 77
           callback {char *filename;
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
@@ -7172,7 +7175,7 @@ Put_Loaded();}
         }
         Fl_Button S_preset {
           label Save
-          user_data 7
+          user_data 77
           callback {char *filename;
 \#define EXT ".rkr"
 filename=fl_file_chooser("Save Preset:","(*"EXT")",rkr->Preset_Name,0);
@@ -7201,7 +7204,7 @@ else
         }
         Fl_Button B_preset {
           label Bank
-          user_data 7
+          user_data 77
           callback {if(!BankWindow->visible())
 {
 if(!made) make_window_banks();
@@ -7236,7 +7239,7 @@ if(rkr->Tap_Updated) UpdateTGUI();}
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
-          user_data 7
+          user_data 77
           callback {if (!Order->visible())
 {
 Prepare_Order();
@@ -7300,7 +7303,7 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SET {
           label Set
           user_data 12
-          callback {rkr->Tap_SetValue=(int)o->value();} open
+          callback {rkr->Tap_SetValue=(int)o->value();}
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7406,6 +7409,7 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Button T_Apply {
           label Apply
+          user_data 77
           callback {if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
 {
 rkr->Update_tempo();
@@ -7415,6 +7419,7 @@ UpdateTGUI();
         }
         Fl_Button T_BUT {
           label Tap
+          user_data 77
           callback {char tmp[8];
 
 if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
@@ -7685,19 +7690,19 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1827 215 640 528} type Double color 4 hide
+      xywh {1820 208 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
           label Look
-          user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -7800,7 +7805,7 @@ Buttons_Color_Change(fore_color);}
 Fl::get_color(label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
-Label_Color_Change(label_color);}
+Label_Color_Change(label_color);} selected
             xywh {120 390 90 25}
           }
           Fl_Button L_C {
@@ -8278,7 +8283,7 @@ else JackIn->deactivate();}
         Fl_Group MISC_SET {
           label Misc
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo10 {
             xywh {5 26 630 502}
@@ -8696,6 +8701,7 @@ num_fonts = Fl::set_fonts(0);
 rkr=rkr_;
 
 back = NULL;
+old = NULL;
 make_window();
 
 Principal->icon((char *)p);
@@ -9010,8 +9016,7 @@ aux_midi->value(rkr->Aux_MIDI);
 rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
 aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
-aux_max->value(rkr->Aux_Maximum);} {selected
-    }
+aux_max->value(rkr->Aux_Maximum);} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -12226,7 +12231,7 @@ for (int t=0; t<Principal->children();t++)
 
           k= c->labelsize();
           k+=value;
-          if(uh==7)
+          if((uh==7)||(uh==77))
           {
           if((k>6)&&(k<20))c->labelsize(k);
           }
@@ -12234,7 +12239,7 @@ for (int t=0; t<Principal->children();t++)
           if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=7) c->selection_color(back_color); 
-          if ((uh==2)||(uh==7)) c->selection_color(leds_color);
+          if ((uh==2)||(uh==7)||(uh==77)) c->selection_color(leds_color);
           c->color(fore_color);
           c->labelfont(rkr->font);
        
@@ -12968,5 +12973,49 @@ for (i=0; i<rkr->NumEffects;i++)
 }
 
 Avail_Bro->select(1);} {}
+  }
+  Function {highlight()} {} {
+    code {int tipo=0;
+long long k=0;
+
+Fl_Widget *w;
+
+w = Fl::belowmouse();
+
+if(w != NULL)
+{
+tipo=(int)w->type();
+k = (long long) w->user_data();
+}
+else
+{
+if(old != NULL)
+{
+old->color(fore_color);
+old->redraw();
+}
+}
+
+
+if((tipo==1) || (k == 77)) 
+{
+if(old != NULL)
+{
+old->color(fore_color);
+old->redraw();
+}
+   w->color(fl_color_average(fore_color,fl_lighter(fore_color),.8));
+   w->redraw();
+   old = w;
+}
+
+else
+{
+if(old != NULL)
+{
+old->color(fore_color);
+old->redraw();
+}
+}} {}
   }
 } 
