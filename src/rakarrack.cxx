@@ -1066,21 +1066,10 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%5.2f%%",rkr->cpuload);
 CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
-
-if(rkr->efx_FLimiter->clipping)
-{
- CLIP_LED->color(fl_darker(FL_RED));
- CLIP_LED->redraw();
-} 
-if(rkr->efx_FLimiter->limit)
-{
- LMT_LED->color(fl_darker(leds_color));
- LMT_LED->redraw();
-} 
-
-rkr->efx_FLimiter->clipping=0;
-rkr->efx_FLimiter->limit=0;
 }
+
+
+
 
 if(rkr->numpc)
 {
@@ -1148,12 +1137,26 @@ if(rkr->efx_FLimiter->clipping)
 CLIP_LED->color(FL_RED);
 CLIP_LED->redraw();
 }
+else
+{
+CLIP_LED->color(fl_darker(FL_RED));
+CLIP_LED->redraw();
+}
 
 if(rkr->efx_FLimiter->limit)
 {
 LMT_LED->color(leds_color);
 LMT_LED->redraw();
 }
+else
+{
+LMT_LED->color(fl_darker(leds_color));
+LMT_LED->redraw();
+}
+
+rkr->efx_FLimiter->clipping=0;
+rkr->efx_FLimiter->limit=0;
+
 
 if(rkr->checkforaux())
 {

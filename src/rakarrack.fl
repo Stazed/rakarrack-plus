@@ -833,8 +833,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1071,21 +1070,10 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%5.2f%%",rkr->cpuload);
 CPULOAD->copy_label(tmp);
 rkr->cpufp=0;
-
-if(rkr->efx_FLimiter->clipping)
-{
- CLIP_LED->color(fl_darker(FL_RED));
- CLIP_LED->redraw();
-} 
-if(rkr->efx_FLimiter->limit)
-{
- LMT_LED->color(fl_darker(leds_color));
- LMT_LED->redraw();
-} 
-
-rkr->efx_FLimiter->clipping=0;
-rkr->efx_FLimiter->limit=0;
 }
+
+
+
 
 if(rkr->numpc)
 {
@@ -1153,12 +1141,26 @@ if(rkr->efx_FLimiter->clipping)
 CLIP_LED->color(FL_RED);
 CLIP_LED->redraw();
 }
+else
+{
+CLIP_LED->color(fl_darker(FL_RED));
+CLIP_LED->redraw();
+}
 
 if(rkr->efx_FLimiter->limit)
 {
 LMT_LED->color(leds_color);
 LMT_LED->redraw();
 }
+else
+{
+LMT_LED->color(fl_darker(leds_color));
+LMT_LED->redraw();
+}
+
+rkr->efx_FLimiter->clipping=0;
+rkr->efx_FLimiter->limit=0;
+
 
 if(rkr->checkforaux())
 {
@@ -1257,7 +1259,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -8381,7 +8383,7 @@ strcpy(rkr->BankFilename,filename);}
     }
     Fl_Window MIDILearn {
       callback {save_stat(5);
-MIDILearn->hide();} open
+MIDILearn->hide();}
       xywh {1464 23 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
@@ -13101,7 +13103,6 @@ if(tecla != last_tecla)
 
 
 
-}} {selected
-    }
+}} {}
   }
 } 
