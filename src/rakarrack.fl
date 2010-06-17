@@ -833,7 +833,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -7584,7 +7585,7 @@ Order->hide();}
         xywh {25 3 438 37} labelfont 1 labelsize 33 labelcolor 7
       }
       Fl_Browser Avail_Bro {
-        user_data 99 selected
+        user_data 99
         xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
       }
       Fl_Button Pon {
@@ -13086,7 +13087,7 @@ if(tecla != last_tecla)
  last_tecla = tecla; 
  for(int i=1; i<=b->size(); i++)
   {
-    if (b->text(i)[0]==tecla-32) 
+    if (b->text(i)[0]>=tecla-32) 
      {
        b->select(i,1);
        break;
@@ -13100,6 +13101,7 @@ if(tecla != last_tecla)
 
 
 
-}} {}
+}} {selected
+    }
   }
 } 

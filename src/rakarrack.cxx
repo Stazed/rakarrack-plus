@@ -21713,7 +21713,7 @@ if(tecla != last_tecla)
  last_tecla = tecla; 
  for(int i=1; i<=b->size(); i++)
   {
-    if (b->text(i)[0]==tecla-32) 
+    if (b->text(i)[0]>=tecla-32) 
      {
        b->select(i,1);
        break;
