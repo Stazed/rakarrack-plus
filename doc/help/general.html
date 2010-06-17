@@ -118,6 +118,42 @@ extremely care. Check the jack load CPU in the status bar or use a CPU monitor t
 your computer can afford. Do that with small steps and checking the CPU
 usage, or you will hang up your computer. You have been warned.</p>
 
+<p><b>About Clipping and limiting.</b></p>
+
+<p>Rakarrack includes an output limiter to help you keep the signal at or below
+maximum recording levels.  There are two indicator lights along the top of
+the display to indicate when limiting and clipping is active.</p>
+
+<p><b>Lmt</b>   Limit.  This is the compressor part of the limiting function.  This
+lets you know when Rakarrack output limiter is automatically reducing volume
+when the signal level is too high.</p>
+
+<p><b>Clip</b>  The output limiter is clipping the peaks of the signal.  Usually the
+attack of dynamics are clipped for short periods of time before the
+compressor catches up with the high signal level.  When the signal level is
+extremely high, the peaks will always be clipped.  This is indicated with a
+red flashing light.</p>
+
+<p>Both clip and Lmt mean the same thing to you as the user:  Turn down the
+output until the lights don't blink, or if they blink, very very
+infrequently.  Any time the lights blink, there is some distortion on the
+output, and it is probably unwanted distortion.  It will be noticeably
+audible distortion if the lights blink frequently, or for long periods of
+time.</p>
+
+<p>This is not an arbitrary limit.  This is at the limit where the input to a
+recording program such as Ardour or Qtractor will be too hot.  If it was not
+clipping in Rakarrack, it would be clipping in Ardour, and would be worse
+sounding.  Most sound cards will physically clip on the hardware output at
+these levels.  The full range in Rakarrack will produce a full range signal
+swing.</p>
+
+
+
+
+
+
+
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
 
