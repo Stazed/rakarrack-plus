@@ -147,7 +147,7 @@ void
 Pan::setextra (int Pextra)
 {
   this->Pextra = Pextra;
-  mul = 8.0f * (float)Pextra / 127.0f;
+  mul = 4.0f * (float)Pextra / 127.0f;
 };
 
 
