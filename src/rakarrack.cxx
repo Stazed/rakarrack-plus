@@ -5153,12 +5153,6 @@ Fl_Menu_Item RKRGUI::menu_rbecho_preset[] = {
  {"Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Simple Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Canyon", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Feedback Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -21668,6 +21662,8 @@ long long k=0;
 
 Fl_Widget *w;
 
+if (Fl::focus() == TITTLE_L) Fl::focus(Open_Order);
+if (Fl::focus() == Etit) Fl::focus(Open_Order);
 w = Fl::belowmouse();
 
 if(w != NULL)

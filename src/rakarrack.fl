@@ -833,7 +833,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1259,7 +1260,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -5633,30 +5634,6 @@ rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
           MenuItem {} {
             label {Echo 3}
             xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Simple Echo}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Canyon
-            xywh {87 87 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Panning Echo 1}
-            xywh {107 107 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Panning Echo 2}
-            xywh {117 117 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Panning Echo 3}
-            xywh {127 127 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Feedback Echo}
-            xywh {137 137 36 21} labelsize 10
           }
         }
         Fl_Value_Slider rbecho_WD {
@@ -13041,6 +13018,8 @@ long long k=0;
 
 Fl_Widget *w;
 
+if (Fl::focus() == TITTLE_L) Fl::focus(Open_Order);
+if (Fl::focus() == Etit) Fl::focus(Open_Order);
 w = Fl::belowmouse();
 
 if(w != NULL)
@@ -13103,6 +13082,7 @@ if(tecla != last_tecla)
 
 
 
-}} {}
+}} {selected
+    }
   }
 } 
