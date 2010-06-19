@@ -21662,6 +21662,8 @@ long long k=0;
 
 Fl_Widget *w;
 
+if (Fl::focus() == TITTLE_L) Fl::focus(Open_Order);
+if (Fl::focus() == Etit) Fl::focus(Open_Order);
 w = Fl::belowmouse();
 
 if(w != NULL)

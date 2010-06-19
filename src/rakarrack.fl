@@ -833,7 +833,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -5619,7 +5620,7 @@ rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
 rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
 rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
 rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
-rbecho_es->value(rkr->efx_RBEcho->getpar(9));} selected
+rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -13017,6 +13018,8 @@ long long k=0;
 
 Fl_Widget *w;
 
+if (Fl::focus() == TITTLE_L) Fl::focus(Open_Order);
+if (Fl::focus() == Etit) Fl::focus(Open_Order);
 w = Fl::belowmouse();
 
 if(w != NULL)
@@ -13079,6 +13082,7 @@ if(tecla != last_tecla)
 
 
 
-}} {}
+}} {selected
+    }
   }
 } 
