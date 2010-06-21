@@ -1,5 +1,10 @@
-==v0.5.0 (  /  /2010) ==
+==v0.5.8 (21/06/2010) ==
 -------------------------------------------------------------------------------
+- Added Waveshaper Diode clipper
+- Added Waveshapper Valve1 and Valve2
+- Fast load bank buttons
+- Browser index selection
+- Added Lmt/Clip leds
 - Added Echotron Effect.
 - Added rakgit2new utility to convert old git banks to the new format.
 - Bank struct extended to a maximu of 70 effects.
@@ -21,6 +26,7 @@
 - Added ACI (Analog Control Interface)
 - Fixed crash bug in Order window.
 - Added Autoconnect for jack input ports.
+- Added MTC to Tap Tempo
 - Removing warning on gcc-4.5
 - Added Effect Stompbox.
 - Code cleaned.
