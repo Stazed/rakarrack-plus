@@ -102,6 +102,7 @@ StereoHarm::out (float *smpsl, float *smpsr)
 {
 
   int i;
+  
 
   if(DS_state != 0)
    {
@@ -113,19 +114,20 @@ StereoHarm::out (float *smpsl, float *smpsr)
 
   for (i = 0; i < nPERIOD; i++)
     {
-      outil[i] = smpsl[i];
+      
+  
+      outil[i] = smpsl[i] * (1.0f - lrcross) + smpsr[i] * lrcross;
       if (outil[i] > 1.0)
 	outil[i] = 1.0f;
       if (outil[i] < -1.0)
 	outil[i] = -1.0f;
 
-      outir[i] = smpsr[i];
+      outir[i] = smpsr[i] * (1.0f - lrcross) + smpsl[i] * lrcross;
       if (outir[i] > 1.0)
 	outir[i] = 1.0f;
       if (outir[i] < -1.0)
 	outir[i] = -1.0f;
-
-
+ 
     }
 
   if ((PMIDI) || (PSELECT))
@@ -368,21 +370,31 @@ switch(DS)
 }
 
 
+void
+StereoHarm::setlrcross (int value)
+{
+  Plrcross = value;
+  lrcross = (float)Plrcross / 127.0f;
+
+};
 
 
 
 void
 StereoHarm::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 11;
-  const int NUM_PRESETS = 3;
+  const int PRESET_SIZE = 12;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Plain
-    {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0},
+    {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64},
     //Octavador
-    {64, 64, 0, 0, 64, 0, 0, 0, 0, 0, 0},
+    {64, 64, 0, 0, 64, 0, 0, 0, 0, 0, 0, 64},
     //Chorus
-    {64, 64, 12, 80, 64, 12, -80, 0, 0, 0, 0}
+    {64, 64, 12, 80, 64, 12, -80, 0, 0, 0, 0, 64},
+    //Chorus
+    {64, 64, 12, 280, 64, 12, -280, 0, 0, 0, 0, 64}
+
   };
 
   cleanup();
@@ -440,7 +452,9 @@ StereoHarm::changepar (int npar, int value)
     case 10:
       setMIDI (value);
       break;
-
+    case 11:
+      setlrcross(value);
+      break;
 
 
     }
@@ -486,6 +500,9 @@ StereoHarm::getpar (int npar)
       break;
     case 10:
       return (PMIDI);
+      break;
+    case 11:
+      return(Plrcross);
       break;
     default:
       return (0);

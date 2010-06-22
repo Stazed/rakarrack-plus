@@ -842,8 +842,8 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {1646 119 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} selected
+      xywh {1639 112 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6960,6 +6960,7 @@ shar_chl->value(rkr->efx_StereoHarm->getpar(3));
 shar_ganr->value(rkr->efx_StereoHarm->getpar(4)-64);
 shar_intr->value(rkr->efx_StereoHarm->getpar(5)-12);
 shar_chr->value(rkr->efx_StereoHarm->getpar(6));
+shar_lrc->value(rkr->efx_StereoHarm->getpar(11)-64);
 shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
@@ -6976,8 +6977,12 @@ Chord(1);} open
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {
-            label Chorus selected
+            label Chorus
             xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Hard Chorus}
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider shar_WD {
@@ -7026,12 +7031,18 @@ if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
           xywh {370 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
+        Fl_Value_Slider shar_lrc {
+          label {L/R.Cr}
+          callback {rkr->efx_StereoHarm->changepar(11,(int)(o->value()+64));}
+          xywh {370 328 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
         Fl_Check_Button shar_MIDI {
           label MIDI
           user_data 2
           callback {rkr->efx_StereoHarm->changepar(10,(int)o->value());
 rkr->RC->cleanup();}
-          xywh {329 335 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
+          xywh {329 340 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Check_Button shar_SELECT {
           label SEL
@@ -7042,7 +7053,7 @@ Chord(1);}
           xywh {329 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Box shar_chordname {
-          xywh {376 337 98 27} labelsize 12 labelcolor 7
+          xywh {376 343 98 21} labelsize 12 labelcolor 7
         }
         Fl_Value_Slider shar_note {
           label Note

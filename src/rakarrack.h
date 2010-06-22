@@ -3030,6 +3030,11 @@ private:
   void cb_shar_ganr_i(SliderW*, void*);
   static void cb_shar_ganr(SliderW*, void*);
 public:
+  SliderW *shar_lrc;
+private:
+  void cb_shar_lrc_i(SliderW*, void*);
+  static void cb_shar_lrc(SliderW*, void*);
+public:
   Fl_Check_Button *shar_MIDI;
 private:
   void cb_shar_MIDI_i(Fl_Check_Button*, void*);
