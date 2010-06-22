@@ -715,7 +715,7 @@ RecChord::Vamos (int voz, int interval)
   int hm2, hp2;
   int hm3, hp3;
   int ninterval = interval;
-  int tengo;
+  int tengo=0;
   int nota;
   int harmo;
   int typo;
