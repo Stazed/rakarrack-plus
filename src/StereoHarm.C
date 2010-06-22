@@ -431,6 +431,11 @@ StereoHarm::changepar (int npar, int value)
       break;
     case 9:
       Ptype = value;
+      if (Ptype==0) 
+      {
+      setchrome(0, Pchromel);
+      setchrome(1, Pchromer);
+      }
       break;
     case 10:
       setMIDI (value);

@@ -1315,6 +1315,8 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 {
 
   int i;
+  int reco=0;
+  int ponlast=0;
   efxoutl = inl1;
   efxoutr = inr1;
 
@@ -1327,8 +1329,10 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
       if (Tuner_Bypass)
 	efx_Tuner->schmittFloat (PERIOD, efxoutl, efxoutr);
+
       if (MIDIConverter_Bypass)
 	efx_MIDIConverter->schmittFloat (PERIOD, efxoutl, efxoutr);
+
 
       if ((Harmonizer_Bypass) && (have_signal))
 	{
@@ -1336,14 +1340,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	    {
 	      if ((efx_Har->PMIDI) || (efx_Har->PSELECT))
 		{
-         	    RecNote->schmittFloat (efxoutl, efxoutr);
+        	    RecNote->schmittFloat (efxoutl, efxoutr);
+        	    reco=1;
 		  if ((reconota != -1) && (reconota != last))
 		    {
 	                if(RecNote->afreq > 0.0) 
                          {
-         
 		          RC->Vamos (0,efx_Har->Pinterval - 12);
-		          last = reconota;
+		          ponlast = 1;
 		          }
 		    }
 		}
@@ -1357,14 +1361,15 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	    {
 	      if ((efx_StereoHarm->PMIDI) || (efx_StereoHarm->PSELECT))
 		{
-         	    RecNote->schmittFloat (efxoutl, efxoutr);
+         	    if(!reco) RecNote->schmittFloat (efxoutl, efxoutr);
+         	    reco=1;
 		  if ((reconota != -1) && (reconota != last))
 		    {
 	                if(RecNote->afreq > 0.0) 
                          {
 		          RC->Vamos (1,efx_StereoHarm->Pintervall - 12);
 		          RC->Vamos (2,efx_StereoHarm->Pintervalr - 12);
-		          last = reconota;
+		          ponlast = 1;
 		          }
 		    }
 		}
@@ -1374,16 +1379,21 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
       if((Ring_Bypass) && (efx_Ring->Pafreq))
         {
-       	    RecNote->schmittFloat (efxoutl, efxoutr);
+       	    if(!reco) RecNote->schmittFloat (efxoutl, efxoutr);
+       	    reco=1;
             if ((reconota != -1) && (reconota != last))
             {
              if(RecNote->afreq > 0.0) 
              {
              efx_Ring->Pfreq=lrintf(RecNote->lafreq);
-             last = reconota; 
+             ponlast = 1; 
              }
             }
         }    
+
+         if(ponlast) last=reconota;
+
+
             
       for (i = 0; i < 10; i++)
 	{
