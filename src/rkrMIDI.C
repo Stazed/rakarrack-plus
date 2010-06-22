@@ -387,6 +387,9 @@ else
    case 41:
     if(inoff) Echotron_Bypass=1; else Echotron_Bypass=0;
      break;
+   case 42:
+    if(inoff) StereoHarm_Bypass=1; else StereoHarm_Bypass=0;
+     break;
 
    
    case 121:
@@ -548,6 +551,9 @@ RKR::checkonoff(int miraque)
      break;
    case 41:
      if (Echotron_Bypass) return(0);
+     break;
+   case 42:
+     if (StereoHarm_Bypass) return(0);
      break;
 
 

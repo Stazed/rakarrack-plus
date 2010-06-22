@@ -115,7 +115,7 @@ Harmonizer::out (float *smpsl, float *smpsr)
     }
 
   if ((PMIDI) || (PSELECT))
-    PS->ratio = r__ratio;
+    PS->ratio = r__ratio[0];
 
   if (Pinterval != 12)
     {

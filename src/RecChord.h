@@ -34,7 +34,7 @@ public:
   ~RecChord ();
   void MiraChord ();
   void IniciaChords ();
-  void Vamos (int interval);
+  void Vamos (int voz, int interval);
   void cleanup ();
 
   int cc;

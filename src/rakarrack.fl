@@ -833,8 +833,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -844,7 +843,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1653 126 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1646 119 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1228,7 +1227,26 @@ if (rkr->Harmonizer_Bypass)
     har_chordname->copy_label(rkr->RC->NombreAcorde);
     rkr->RC->cc=0;  
     har_chordname->redraw(); 
-    rkr->RC->Vamos(rkr->efx_Har->Pinterval-12);      
+    rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12);      
+    }
+     }
+
+}
+
+if (rkr->StereoHarm_Bypass)
+{
+
+    if((rkr->efx_StereoHarm->PSELECT)|| (rkr->efx_StereoHarm->PMIDI))
+     {
+
+    if (rkr->RC->cc) 
+    {
+    shar_chordname->copy_label(rkr->RC->NombreAcorde);
+    rkr->RC->cc=0;  
+    shar_chordname->redraw(); 
+    rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12);      
+    rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12);      
+    
     }
      }
 
@@ -3173,7 +3191,7 @@ har_freq1->value(rkr->efx_Har->getpar(4));
 har_gan1->value(rkr->efx_Har->getpar(8)-64);
 har_q1->value(rkr->efx_Har->getpar(9)-64);
 har_MIDI->value(rkr->efx_Har->getpar(10));
-Chord();}
+Chord(0);}
           xywh {398 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -3245,7 +3263,7 @@ rkr->RC->cleanup();}
           user_data 2
           callback {rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC->cleanup();
-Chord();}
+Chord(0);}
           xywh {330 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Box har_chordname {
@@ -3254,14 +3272,14 @@ Chord();}
         Fl_Value_Slider har_note {
           label Note
           callback {rkr->efx_Har->changepar(6,(unsigned char)o->value());
-Chord();}
+Chord(0);}
           xywh {371 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider har_type {
           label Chord
           callback {rkr->efx_Har->changepar(7,(unsigned char)o->value());
-Chord();}
+Chord(0);}
           xywh {371 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
           class SliderW
         }
@@ -6917,6 +6935,130 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           }
         }
       }
+      Fl_Group SHAR {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button shar_activar {
+          label On
+          user_data 2
+          callback {rkr->StereoHarm_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_StereoHarm->cleanup();
+findpos(42,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+        }
+        Fl_Choice shar_preset {
+          label Preset
+          user_data 12
+          callback {long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_StereoHarm->setpreset((int)o->value());
+shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
+shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
+shar_intl->value(rkr->efx_StereoHarm->getpar(2)-12);
+shar_chl->value(rkr->efx_StereoHarm->getpar(3));
+shar_ganr->value(rkr->efx_StereoHarm->getpar(4)-64);
+shar_intr->value(rkr->efx_StereoHarm->getpar(5)-12);
+shar_chr->value(rkr->efx_StereoHarm->getpar(6));
+shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
+shar_note->value(rkr->efx_StereoHarm->getpar(8));
+shar_type->value(rkr->efx_StereoHarm->getpar(9));
+shar_MIDI->value(rkr->efx_StereoHarm->getpar(10));
+Chord(1);} open
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Plain
+            xywh {10 10 45 26} labelsize 10
+          }
+          MenuItem {} {
+            label Octavator
+            xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Chorus selected
+            xywh {42 42 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider shar_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_StereoHarm->changepar(0,(int)(o->value()+64));}
+          xywh {370 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shar_intl {
+          label {Int L}
+          callback {rkr->StereoHarm_Bypass=0;
+rkr->efx_StereoHarm->changepar(2,(int)(o->value()+12));
+if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
+          xywh {370 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shar_chl {
+          label {Chrm L}
+          callback {rkr->efx_StereoHarm->changepar(3,(int)o->value());}
+          xywh {370 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shar_ganl {
+          label {Gain L}
+          callback {rkr->efx_StereoHarm->changepar(1,(int)(o->value()+64));}
+          xywh {370 276 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shar_intr {
+          label {Int R}
+          callback {rkr->StereoHarm_Bypass=0;
+rkr->efx_StereoHarm->changepar(5,(int)(o->value()+12));
+if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
+          xywh {370 289 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shar_chr {
+          label {Chrm R}
+          callback {rkr->efx_StereoHarm->changepar(6,(int)o->value());}
+          xywh {370 302 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shar_ganr {
+          label {Gain R}
+          callback {rkr->efx_StereoHarm->changepar(4,(int)(o->value()+64));}
+          xywh {370 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button shar_MIDI {
+          label MIDI
+          user_data 2
+          callback {rkr->efx_StereoHarm->changepar(10,(int)o->value());
+rkr->RC->cleanup();}
+          xywh {329 335 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
+        }
+        Fl_Check_Button shar_SELECT {
+          label SEL
+          user_data 2
+          callback {rkr->efx_StereoHarm->changepar(7,(int)o->value());
+rkr->RC->cleanup();
+Chord(1);}
+          xywh {329 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
+        }
+        Fl_Box shar_chordname {
+          xywh {376 337 98 27} labelsize 12 labelcolor 7
+        }
+        Fl_Value_Slider shar_note {
+          label Note
+          callback {rkr->efx_StereoHarm->changepar(8,(int)o->value());
+Chord(1);}
+          xywh {370 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider shar_type {
+          label Chord
+          callback {rkr->efx_StereoHarm->changepar(9,(int)o->value());
+Chord(1);}
+          xywh {370 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
+          class SliderW
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -9455,9 +9597,14 @@ stomp_preset->do_callback(stomp_preset,1);
 revtron_activar->value(rkr->Reverbtron_Bypass);
 revtron_preset->do_callback(revtron_preset,1);
 
-//Reverbtron
+//Echotron
 echotron_activar->value(rkr->Echotron_Bypass);
 echotron_preset->do_callback(echotron_preset,1);
+
+//StereoHarm
+shar_activar->value(rkr->StereoHarm_Bypass);
+shar_preset->do_callback(shar_preset,1);
+
 
 
 reordena();} {}
@@ -9771,7 +9918,9 @@ for (i=1; i<=t; i++)
         case 41:
         ECHOTRON->hide();
         break;
-       
+        case 42:
+        SHAR->hide();
+        break;
         
 
 
@@ -10136,6 +10285,13 @@ switch (rkr->efx_order[i])
        echotron_activar->shortcut(s[i]);
        ECHOTRON->show();
        if(rkr->Echotron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 42:
+       SHAR->position(x[i],y[i]);
+       shar_activar->shortcut(s[i]);
+       SHAR->show();
+       if(rkr->StereoHarm_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -10553,9 +10709,24 @@ for (int t=0; t<ob->children();t++)
   
 FillML(2);} {}
   }
-  Function {Chord()} {} {
-    code {int tipo=rkr->efx_Har->getpar(7);
-int undi=rkr->efx_Har->getpar(6);
+  Function {Chord(int eff)} {} {
+    code {int tipo,undi;
+tipo=0;
+undi=0;
+
+switch(eff)
+{
+case 0:
+tipo=rkr->efx_Har->getpar(7);
+undi=rkr->efx_Har->getpar(6);
+break;
+case 1:
+tipo=rkr->efx_StereoHarm->getpar(9);
+undi=rkr->efx_StereoHarm->getpar(8);
+break;
+}
+
+
 
 sprintf(rkr->RC->NombreAcorde,"%s%s", rkr->RC->NCE[undi].Nom,rkr->RC->ChN[tipo].Nom);
 
@@ -12092,6 +12263,14 @@ switch(miralo)
   revtron_activar->value(rkr->Reverbtron_Bypass);
   revtron_activar->do_callback();
   break;
+ case 41:
+  echotron_activar->value(rkr->Echotron_Bypass);
+  echotron_activar->do_callback();
+  break;
+ case 42:
+  shar_activar->value(rkr->StereoHarm_Bypass);
+  shar_activar->do_callback();
+  break;
   
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
@@ -12192,6 +12371,8 @@ SHIFTER->image(InOut->image());
 STOMPBOX->image(InOut->image());
 REVERBTRON->image(InOut->image());
 ECHOTRON->image(InOut->image());
+SHAR->image(InOut->image());
+
 
 Tap->image(InOut->image());
 Presets->image(InOut->image());
@@ -13082,7 +13263,6 @@ if(tecla != last_tecla)
 
 
 
-}} {selected
-    }
+}} {}
   }
 } 

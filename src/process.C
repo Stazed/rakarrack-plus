@@ -49,7 +49,7 @@ int Wave_res_amount;
 int Wave_up_q;
 int Wave_down_q;
 float val_sum;
-float r__ratio;
+float r__ratio[12];
 float freqs[12];
 float lfreqs[12];
 float aFreq;
@@ -255,6 +255,8 @@ RKR::RKR ()
   efx_StompBox = new StompBox(efxoutl,efxoutr);
   efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down, Rev_U_Q, Rev_D_Q);
   efx_Echotron = new Echotron(efxoutl,efxoutr);
+  efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q);
+
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
   A_Resample = new Resample(3);
@@ -290,7 +292,7 @@ RKR::RKR ()
 128 - Synthesis
 */
 
-  NumEffects = 42;
+  NumEffects = 43;
 
   {
     static const char *los_names[] =
@@ -330,6 +332,7 @@ RKR::RKR ()
 "ShelfBoost","34","64",
 "Shifter","38","128",
 "Shuffle","26","64",
+"StereoHarm","42","128",
 "StompBox","39","9",
 "Sustainer","36","32",
 "Synthfilter","27","16",
@@ -1300,6 +1303,7 @@ RKR::cleanup_efx ()
   efx_StompBox->cleanup();
   efx_Reverbtron->cleanup();
   efx_Echotron->cleanup();
+  efx_StereoHarm->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 
@@ -1338,14 +1342,35 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	                if(RecNote->afreq > 0.0) 
                          {
          
-		          RC->Vamos (efx_Har->Pinterval - 12);
+		          RC->Vamos (0,efx_Har->Pinterval - 12);
 		          last = reconota;
 		          }
 		    }
 		}
-
 	    }
 	}
+
+
+      if ((StereoHarm_Bypass) && (have_signal))
+	{
+	  if (efx_StereoHarm->mira)
+	    {
+	      if ((efx_StereoHarm->PMIDI) || (efx_StereoHarm->PSELECT))
+		{
+         	    RecNote->schmittFloat (efxoutl, efxoutr);
+		  if ((reconota != -1) && (reconota != last))
+		    {
+	                if(RecNote->afreq > 0.0) 
+                         {
+		          RC->Vamos (1,efx_StereoHarm->Pintervall - 12);
+		          RC->Vamos (2,efx_StereoHarm->Pintervalr - 12);
+		          last = reconota;
+		          }
+		    }
+		}
+	    }
+	}
+
 
       if((Ring_Bypass) && (efx_Ring->Pafreq))
         {
@@ -1619,6 +1644,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 		  Vol_Efx(31,efx_RyanWah->outvolume);
                 }
               break; 
+
 	     case 32:
               if (RBEcho_Bypass)
                 {
@@ -1626,6 +1652,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 		  Vol_Efx(32,efx_RBEcho->outvolume);
                 }
               break; 
+
 	     case 33:
               if (CoilCrafter_Bypass)
                 {
@@ -1633,6 +1660,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 		  Vol2_Efx();
                 } 
               break;
+
 	     case 34:
               if (ShelfBoost_Bypass)
                 {
@@ -1681,7 +1709,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 }
               break;  
             
-              case 40:
+             case 40:
               if (Reverbtron_Bypass)
                 {
                   efx_Reverbtron->out(efxoutl, efxoutr);
@@ -1689,11 +1717,19 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 }
               break;  
 
-              case 41:
+             case 41:
               if (Echotron_Bypass)
                 {
                   efx_Echotron->out(efxoutl, efxoutr);
 		  Vol_Efx(41,efx_Echotron->outvolume);
+                }
+              break;  
+
+             case 42:
+              if (StereoHarm_Bypass)
+                {
+                  efx_StereoHarm->out(efxoutl, efxoutr);
+		  Vol_Efx(42,efx_StereoHarm->outvolume);
                 }
               break;  
 

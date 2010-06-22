@@ -2983,6 +2983,74 @@ private:
   static void cb_echotron_fnum(Fl_Choice*, void*);
   static Fl_Menu_Item menu_echotron_fnum[];
 public:
+  Fl_Group *SHAR;
+  Fl_Light_Button *shar_activar;
+private:
+  void cb_shar_activar_i(Fl_Light_Button*, void*);
+  static void cb_shar_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *shar_preset;
+private:
+  void cb_shar_preset_i(Fl_Choice*, void*);
+  static void cb_shar_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_shar_preset[];
+public:
+  SliderW *shar_WD;
+private:
+  void cb_shar_WD_i(SliderW*, void*);
+  static void cb_shar_WD(SliderW*, void*);
+public:
+  SliderW *shar_intl;
+private:
+  void cb_shar_intl_i(SliderW*, void*);
+  static void cb_shar_intl(SliderW*, void*);
+public:
+  SliderW *shar_chl;
+private:
+  void cb_shar_chl_i(SliderW*, void*);
+  static void cb_shar_chl(SliderW*, void*);
+public:
+  SliderW *shar_ganl;
+private:
+  void cb_shar_ganl_i(SliderW*, void*);
+  static void cb_shar_ganl(SliderW*, void*);
+public:
+  SliderW *shar_intr;
+private:
+  void cb_shar_intr_i(SliderW*, void*);
+  static void cb_shar_intr(SliderW*, void*);
+public:
+  SliderW *shar_chr;
+private:
+  void cb_shar_chr_i(SliderW*, void*);
+  static void cb_shar_chr(SliderW*, void*);
+public:
+  SliderW *shar_ganr;
+private:
+  void cb_shar_ganr_i(SliderW*, void*);
+  static void cb_shar_ganr(SliderW*, void*);
+public:
+  Fl_Check_Button *shar_MIDI;
+private:
+  void cb_shar_MIDI_i(Fl_Check_Button*, void*);
+  static void cb_shar_MIDI(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *shar_SELECT;
+private:
+  void cb_shar_SELECT_i(Fl_Check_Button*, void*);
+  static void cb_shar_SELECT(Fl_Check_Button*, void*);
+public:
+  Fl_Box *shar_chordname;
+  SliderW *shar_note;
+private:
+  void cb_shar_note_i(SliderW*, void*);
+  static void cb_shar_note(SliderW*, void*);
+public:
+  SliderW *shar_type;
+private:
+  void cb_shar_type_i(SliderW*, void*);
+  static void cb_shar_type(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:
@@ -3749,7 +3817,7 @@ public:
   void BankWin_Label(char *filename);
   void is_modified();
   void Put_Loaded_Bank();
-  void Chord();
+  void Chord(int eff);
   void ActMIDI();
   void ActOnOff();
   void light_preset(int npreset);

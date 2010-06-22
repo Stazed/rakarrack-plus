@@ -141,6 +141,7 @@
 #include "StompBox.h"
 #include "Reverbtron.h"
 #include "Echotron.h"
+#include "StereoHarm.h"
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -158,7 +159,7 @@ extern float fPERIOD;
 extern unsigned int SAMPLE_RATE;
 extern float fSAMPLE_RATE;
 extern float cSAMPLE_RATE;
-extern float r__ratio;
+extern float r__ratio[12];
 extern int Wave_res_amount;
 extern int Wave_up_q;
 extern int Wave_down_q;
@@ -288,7 +289,7 @@ public:
   class StompBox *efx_StompBox;
   class Reverbtron *efx_Reverbtron;
   class Echotron *efx_Echotron;
-  
+  class StereoHarm *efx_StereoHarm;
 
 
   jack_client_t *jackclient;
@@ -344,6 +345,7 @@ public:
   int StompBox_Bypass;
   int Reverbtron_Bypass;
   int Echotron_Bypass;
+  int StereoHarm_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -387,6 +389,7 @@ public:
   int StompBox_B;
   int Reverbtron_B;
   int Echotron_B;
+  int StereoHarm_B;
   
   int Cabinet_Preset;
   int Selected_Preset;

@@ -51,6 +51,7 @@ rakarrack_SOURCES = main.C \
 	Shifter.h \
 	Shuffle.h \
 	smbPitchShift.h \
+	StereoHarm.h \
 	StompBox.h \
 	Sustainer.h \
 	SVFilter.h \
@@ -119,6 +120,7 @@ rakarrack_SOURCES = main.C \
 	StompBox.C \
 	Reverbtron.C \
 	Echotron.C \
+	StereoHarm.C \
 	MIDIConverter.C
 	
 	
