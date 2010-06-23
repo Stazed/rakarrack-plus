@@ -46,6 +46,8 @@ public:
   float *efxoutl;
   float *efxoutr;
   float *auxresampled;
+  
+  void   setbands(int bands, float startfreq, float endfreq);
 
 
 

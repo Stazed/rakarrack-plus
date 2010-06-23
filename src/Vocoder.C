@@ -178,6 +178,12 @@ Vocoder::out (float * smpsl, float * smpsr)
 
 };
 
+void
+Vocoder::setbands (int bands, float startfreq, float endfreq)
+{
+
+
+}
 
 /*
  * Parameter control
