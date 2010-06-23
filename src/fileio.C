@@ -545,6 +545,18 @@ RKR::savefile (char *filename)
                    efx_Echotron->getpar (14), efx_Echotron->getpar (15), 
                    Echotron_Bypass, efx_Echotron->Filename);
 	  break;
+	case 42:
+	  //StereoHarm
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_StereoHarm->getpar (0), efx_StereoHarm->getpar (1),
+		   efx_StereoHarm->getpar (2), efx_StereoHarm->getpar (3),
+		   efx_StereoHarm->getpar (4), efx_StereoHarm->getpar (5),
+		   efx_StereoHarm->getpar (6), efx_StereoHarm->getpar (7),
+		   efx_StereoHarm->getpar (8), efx_StereoHarm->getpar (9),
+                   efx_StereoHarm->getpar (10), efx_StereoHarm->getpar (11),
+                   StereoHarm_Bypass);
+	  break;
+
 
 	}
       fputs (buf, fn);
@@ -1023,6 +1035,15 @@ RKR::loadfile (char *filename)
           strcpy(efx_Echotron->Filename,cfilename);		  
 	  break;
 
+	case 42:
+	  //StereoHarm
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[43][0], &lv[43][1], &lv[43][2], &lv[43][3], &lv[43][4],
+		  &lv[43][5], &lv[43][6], &lv[43][7], &lv[43][8], &lv[43][9],
+		  &lv[43][10], &lv[43][11], &StereoHarm_B);
+	  break;
+
+
 	}
     }
 
@@ -1107,6 +1128,7 @@ RKR::Actualizar_Audio ()
   StompBox_Bypass = 0;
   Reverbtron_Bypass = 0;      
   Echotron_Bypass = 0;
+  StereoHarm_Bypass = 0;
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -1188,6 +1210,8 @@ RKR::Actualizar_Audio ()
     efx_Reverbtron->changepar (i, lv[41][i]);
  for (i = 0; i <= 15; i++)
     efx_Echotron->changepar (i, lv[42][i]);
+ for (i = 0; i <= 11; i++)
+    efx_StereoHarm->changepar (i, lv[43][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1259,6 +1283,7 @@ RKR::Actualizar_Audio ()
   StompBox_Bypass = StompBox_B;
   Reverbtron_Bypass = Reverbtron_B;
   Echotron_Bypass = Echotron_B;
+  StereoHarm_Bypass = StereoHarm_B;
     
   Bypass = Bypass_B;
 
@@ -1345,7 +1370,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[43][16] = {
+  int presets[44][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1431,7 +1456,10 @@ RKR::New ()
 //Reverbtron
     {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0},
 //Echotron
-    {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1}
+    {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1},
+//StereoHarm
+    {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0}
+    
     
     
 
@@ -1516,7 +1544,8 @@ RKR::New ()
   StompBox_B = 0;
   Reverbtron_B = 0;
   Echotron_B = 0;
-
+  StereoHarm_B = 0;
+  
   Bypass_B = 0;
 
   
@@ -1539,7 +1568,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[43][16] = {
+  int presets[44][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1625,7 +1654,10 @@ RKR::New_Bank ()
 //Reverbtron
     {64, 0, 1, 1500, 0, 0, 60, 18, 4, 0, 0, 64, 0 ,0 ,0 ,0},
 //Echotron
-    {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1}
+    {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1},
+//StereoHarm
+    {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0}
+    
     
     
     
@@ -1746,6 +1778,7 @@ RKR::Bank_to_Preset (int i)
   StompBox_B = Bank[i].lv[40][19];
   Reverbtron_B = Bank[i].lv[41][19];
   Echotron_B = Bank[i].lv[42][19];
+  StereoHarm_B = Bank[i].lv[43][19];
 
 
   Bypass_B = Bypass;
@@ -1870,6 +1903,8 @@ RKR::Preset_to_Bank (int i)
     lv[41][j] = efx_Reverbtron->getpar(j);
   for (j = 0; j <= 15; j++)
     lv[42][j] = efx_Echotron->getpar(j);
+  for (j = 0; j <= 11; j++)
+    lv[43][j] = efx_StereoHarm->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -1946,6 +1981,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[40][19] = StompBox_Bypass;
   Bank[i].lv[41][19] = Reverbtron_Bypass;
   Bank[i].lv[42][19] = Echotron_Bypass;
+  Bank[i].lv[43][19] = StereoHarm_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

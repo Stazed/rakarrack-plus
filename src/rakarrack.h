@@ -3464,10 +3464,21 @@ private:
   static void cb_Har_Qual(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Har_Qual[];
 public:
+  Fl_Choice *Voc_Bands;
+private:
+  void cb_Voc_Bands_i(Fl_Choice*, void*);
+  static void cb_Voc_Bands(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Voc_Bands[];
+public:
   Fl_Check_Button *FLPosition;
 private:
   void cb_FLPosition_i(Fl_Check_Button*, void*);
   static void cb_FLPosition(Fl_Check_Button*, void*);
+public:
+  Fl_Counter *Calibration;
+private:
+  void cb_Calibration_i(Fl_Counter*, void*);
+  static void cb_Calibration(Fl_Counter*, void*);
 public:
   Fl_Choice *Har_Downsample;
 private:
@@ -3560,17 +3571,6 @@ public:
 private:
   void cb_Wave_Up_Qua_i(Fl_Choice*, void*);
   static void cb_Wave_Up_Qua(Fl_Choice*, void*);
-public:
-  Fl_Counter *Calibration;
-private:
-  void cb_Calibration_i(Fl_Counter*, void*);
-  static void cb_Calibration(Fl_Counter*, void*);
-public:
-  Fl_Choice *Voc_Bands;
-private:
-  void cb_Voc_Bands_i(Fl_Choice*, void*);
-  static void cb_Voc_Bands(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_Voc_Bands[];
 public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;

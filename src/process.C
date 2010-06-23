@@ -357,7 +357,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 332;
+  NumParams= 342;
 
 {
    static const char *los_params[] = 
@@ -643,6 +643,16 @@ RKR::RKR ()
 "Shuffle M.L. Gain","231","26",
 "Shuffle Q","236","26",
 "Shuffle WD","227","26",
+"StereoHarm Chord","367","42",
+"StereoHarm Chrm L","360","42",
+"StereoHarm Chrm R","363","42",
+"StereoHarm Gain L","361","42",
+"StereoHarm Gain R","364","42",
+"StereoHarm Int L","359","42",
+"StereoHarm Int R","362","42",
+"StereoHarm LR_Cr","365","42",
+"StereoHarm Note","366","42",
+"StereoHarm WD","358","42",
 "StompBox Level","334","39",
 "StompBox Gain","335","39",
 "StompBox Low","336","39",

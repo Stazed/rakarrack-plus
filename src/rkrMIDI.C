@@ -2180,8 +2180,45 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Echotron->changepar(3,1+ (int)((float)value*.99212598f));
          break;
 
+   case 358:
+         efx_StereoHarm->changepar(0,value);
+         break;
 
+   case 359:
+         efx_StereoHarm->changepar(2,-12+(int)((float)value*.18897638f));
+         break;
 
+   case 360:
+         efx_StereoHarm->changepar(3,-2000+(int)((float)value*31.496063f));
+         break;
+
+   case 361:
+         efx_StereoHarm->changepar(1,value);
+         break;
+
+   case 362:
+         efx_StereoHarm->changepar(5,-12+(int)((float)value*.18897638f));
+         break;
+
+   case 363:
+         efx_StereoHarm->changepar(6,-2000+(int)((float)value*31.496063f));
+         break;
+
+   case 364:
+         efx_StereoHarm->changepar(4,value);
+         break;
+
+   case 365:
+         efx_StereoHarm->changepar(11,value);
+         break;
+
+   case 366:
+         efx_StereoHarm->changepar(8,(int)((float)value*.18110236f));
+         break;
+
+   case 367:
+         efx_StereoHarm->changepar(9,(int)((float)value*.25984252f));
+         break;
 
    } 
       
