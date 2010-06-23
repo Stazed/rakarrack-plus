@@ -23,7 +23,6 @@
 
 #ifndef VOCODER_H
 #define VOCODER_H
-#define VOC_BANDS  32		//filter bands to process
 
 #include "global.h"
 #include "AnalogFilter.h"
@@ -46,10 +45,6 @@ public:
   float *efxoutl;
   float *efxoutr;
   float *auxresampled;
-  
-  void   setbands(int bands, float startfreq, float endfreq);
-
-
 
 private:
 
@@ -57,7 +52,8 @@ private:
   void setpanning (int Ppanning);
   void init_filters();
   void adjustq(float q);
-
+  void   setbands(int numbands, float startfreq, float endfreq);
+  int VOC_BANDS;
   //Parametrii
   int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
   int Ppanning;	//Panning
@@ -75,10 +71,10 @@ private:
   float alpha,beta,prls,gate;
   float compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
   float *tmpl, *tmpr;
-    struct { float sfreq, sq,speak,gain,oldgain;
+    struct fbank { float sfreq, sq,speak,gain,oldgain;
     AnalogFilter *l, *r, *aux;
 
-  } filterbank[VOC_BANDS];
+  } *filterbank;
 
  AnalogFilter *vhp, *vlp; 
 

@@ -28,6 +28,7 @@
 
 Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands)
 {
+  VOC_BANDS = bands;
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
   auxresampled = auxresampled_;
@@ -38,6 +39,8 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
   Pinput = 0;
   Ppanning = 64;
   Plrcross = 100;
+  
+  filterbank = (fbank *) malloc(sizeof(fbank) * VOC_BANDS);
   tmpl = (float *) malloc (sizeof (float) * PERIOD);
   tmpr = (float *) malloc (sizeof (float) * PERIOD);
   Pmuffle = 10;
@@ -55,22 +58,21 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
   cratio = 0.25f;
   
   cperiod = 1.0f/fPERIOD; 
+
   float center;
-  float bw;
   float qq;
   float subdiv = 28.0f;  //sets range & spacing of bands
   for (int i = 0; i < VOC_BANDS; i++)
     {
-      bw = powf(10.0f, (2.5f + ((float) i + 1)/subdiv)) - powf(10.0f, (2.5f + ((float) i)/subdiv));
-      center = powf(10.0f, (2.5f + ((float) i)/subdiv)) + bw/2.0f;
-      qq = 5.0f * center/bw;
-      filterbank[i].sfreq = center;
-      filterbank[i].sq = qq;
+      center = (float) i * 20000.0f/((float) VOC_BANDS);
+      qq = 60.0f;
+
       filterbank[i].l = new AnalogFilter (4, center, qq, 0);
       filterbank[i].r = new AnalogFilter (4, center, qq, 0);
       filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
     };
     
+    setbands(VOC_BANDS, 200.0f, 4000.0f);
     vlp = new AnalogFilter (2, 4000.0f, 1.0f, 1);
     vhp = new AnalogFilter (3, 200.0f, 0.707f, 1);
   setpreset (Ppreset);
@@ -179,9 +181,27 @@ Vocoder::out (float * smpsl, float * smpsr)
 };
 
 void
-Vocoder::setbands (int bands, float startfreq, float endfreq)
+Vocoder::setbands (int numbands, float startfreq, float endfreq)
 {
-
+  float start = startfreq;   //useful variables
+  float endband = endfreq;
+  float fnumbands = (float) numbands;
+  float output[VOC_BANDS + 1];
+  int k;
+  
+  //calculate intermediate values
+  float pwer = logf(endband/start)/log(2.0f);
+  
+  for(k=0;k<=VOC_BANDS; k++) output[k] = start*powf(2.0f, ((float) k)*pwer/fnumbands); 
+  for(k=0;k<VOC_BANDS; k++)
+  {
+        filterbank[k].sfreq = output[k] + (output[k+1] - output[k])*0.5f;
+        filterbank[k].sq = filterbank[k].sfreq/(output[k+1] - output[k]);
+	
+      filterbank[k].l->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);
+      filterbank[k].r->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);
+      filterbank[k].aux->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);	
+  }
 
 }
 
