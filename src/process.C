@@ -116,6 +116,9 @@ RKR::RKR ()
   rakarrack.get (PrefNom ("Looper Size"), looper_size, 1);
   rakarrack.get (PrefNom ("Calibration"), aFreq, 440.0f);
   update_freqs(aFreq);
+
+  rakarrack.get (PrefNom ("Vocoder Bands"), VocBands, 32);
+  
   
   Fraction_Bypass = 1.0f;
   Master_Volume = 0.50f;
@@ -248,7 +251,7 @@ RKR::RKR ()
   efx_RBEcho = new RBEcho(efxoutl,efxoutr);
   efx_CoilCrafter = new CoilCrafter(efxoutl,efxoutr);
   efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr);
-  efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled);
+  efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled,VocBands);
   efx_Sustainer = new Sustainer(efxoutl,efxoutr);
   efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q);
   efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q);

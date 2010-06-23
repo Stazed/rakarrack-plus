@@ -365,6 +365,9 @@ switch(DS)
       window = 256;
       break;
 }
+
+
+
       u_up= (double)nPERIOD / (double)PERIOD;
       u_down= (double)PERIOD / (double)nPERIOD;
 }

@@ -3566,6 +3566,12 @@ private:
   void cb_Calibration_i(Fl_Counter*, void*);
   static void cb_Calibration(Fl_Counter*, void*);
 public:
+  Fl_Choice *Voc_Bands;
+private:
+  void cb_Voc_Bands_i(Fl_Choice*, void*);
+  static void cb_Voc_Bands(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Voc_Bands[];
+public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;

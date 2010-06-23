@@ -26,7 +26,7 @@
 #include <math.h>
 #include "Vocoder.h"
 
-Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_)
+Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
