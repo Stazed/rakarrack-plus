@@ -3030,6 +3030,11 @@ private:
   void cb_shar_ganr_i(SliderW*, void*);
   static void cb_shar_ganr(SliderW*, void*);
 public:
+  SliderW *shar_lrc;
+private:
+  void cb_shar_lrc_i(SliderW*, void*);
+  static void cb_shar_lrc(SliderW*, void*);
+public:
   Fl_Check_Button *shar_MIDI;
 private:
   void cb_shar_MIDI_i(Fl_Check_Button*, void*);
@@ -3560,6 +3565,12 @@ public:
 private:
   void cb_Calibration_i(Fl_Counter*, void*);
   static void cb_Calibration(Fl_Counter*, void*);
+public:
+  Fl_Choice *Voc_Bands;
+private:
+  void cb_Voc_Bands_i(Fl_Choice*, void*);
+  static void cb_Voc_Bands(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Voc_Bands[];
 public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;

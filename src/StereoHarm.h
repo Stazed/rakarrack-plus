@@ -76,6 +76,7 @@ public:
 private:
 
   int Pvolume;
+  int Plrcross;
   int Pgainl;
   int Pgainr;
   int Pchromel;
@@ -89,12 +90,13 @@ private:
   float intervalr;
   float chromel;
   float chromer;
+  float lrcross;
   void setvolume (int Pvolume);
   void setinterval (int chan, int value);
   void setchrome(int chan, int value);
   void setgain (int chan, int value);
   void setMIDI (int PMIDI);
-
+  void setlrcross(int value);
 
   class Resample *U_Resample;
   class Resample *D_Resample;

@@ -843,7 +843,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1646 119 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1639 112 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6960,6 +6960,7 @@ shar_chl->value(rkr->efx_StereoHarm->getpar(3));
 shar_ganr->value(rkr->efx_StereoHarm->getpar(4)-64);
 shar_intr->value(rkr->efx_StereoHarm->getpar(5)-12);
 shar_chr->value(rkr->efx_StereoHarm->getpar(6));
+shar_lrc->value(rkr->efx_StereoHarm->getpar(11)-64);
 shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
@@ -6976,8 +6977,12 @@ Chord(1);} open
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {
-            label Chorus selected
+            label Chorus
             xywh {42 42 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Hard Chorus}
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider shar_WD {
@@ -7026,12 +7031,18 @@ if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
           xywh {370 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
+        Fl_Value_Slider shar_lrc {
+          label {L/R.Cr}
+          callback {rkr->efx_StereoHarm->changepar(11,(int)(o->value()+64));}
+          xywh {370 328 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
         Fl_Check_Button shar_MIDI {
           label MIDI
           user_data 2
           callback {rkr->efx_StereoHarm->changepar(10,(int)o->value());
 rkr->RC->cleanup();}
-          xywh {329 335 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
+          xywh {329 340 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Check_Button shar_SELECT {
           label SEL
@@ -7042,7 +7053,7 @@ Chord(1);}
           xywh {329 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Box shar_chordname {
-          xywh {376 337 98 27} labelsize 12 labelcolor 7
+          xywh {376 343 98 21} labelsize 12 labelcolor 7
         }
         Fl_Value_Slider shar_note {
           label Note
@@ -7846,19 +7857,19 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1813 201 640 528} type Double color 4 hide
+      xywh {633 23 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
           label Look
-          user_data 1 open
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -8014,8 +8025,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -8077,7 +8088,7 @@ Show_Next_Time();}
             label {Up Sampling Quality     }
             callback {rkr->UpQual =(int) o->value();
 
-Show_Next_Time();} open
+Show_Next_Time();}
             xywh {133 204 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
@@ -8357,6 +8368,56 @@ Show_Next_Time();}
 rkr->update_freqs(aFreq);}
             xywh {120 479 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
           }
+          Fl_Choice Voc_Bands {
+            label {Vocoder Bnads       }
+            callback {switch((int)o->value())
+{
+  case 0:
+  rkr->VocBands = 16;
+  break;
+
+  case 1:
+  rkr->VocBands = 32;
+  break;
+
+  case 2:
+  rkr->VocBands = 64;
+  break;
+
+  case 3:
+  rkr->VocBands = 128;
+  break;
+
+  case 4:
+  rkr->VocBands = 256;
+  break;
+
+}
+
+Show_Next_Time();}
+            xywh {115 507 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          } {
+            MenuItem {} {
+              label 16
+              xywh {50 50 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label 32
+              xywh {50 50 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label 64
+              xywh {40 40 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label 128
+              xywh {30 30 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label 256
+              xywh {30 30 36 21} labelsize 10
+            }
+          }
         }
         Fl_Group MIDI_SET {
           label MIDI
@@ -8476,7 +8537,7 @@ Fl_Tooltip::enable(rkr->ena_tool);}
         }
         Fl_Group BANK_SET {
           label Bank
-          user_data 1 open
+          user_data 1
           xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo11 {
@@ -9317,6 +9378,8 @@ rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
 rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
+rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
+
 
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
@@ -10532,6 +10595,28 @@ Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
 Calibration->value(aFreq);
 
+switch(rkr->VocBands)
+{
+  case 16:
+  Voc_Bands->value(0);
+  break;
+  case 32:
+  Voc_Bands->value(1);
+  break;
+  case 64:
+  Voc_Bands->value(2);
+  break;
+  case 128:
+  Voc_Bands->value(3);
+  break;
+  case 256:
+  Voc_Bands->value(4);
+  break;
+  
+}
+  
+
+
 
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);
@@ -10653,7 +10738,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {}
+Font_Bro->value(rkr->font+1);} {selected
+    }
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];

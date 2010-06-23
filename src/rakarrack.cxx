@@ -6310,6 +6310,7 @@ shar_chl->value(rkr->efx_StereoHarm->getpar(3));
 shar_ganr->value(rkr->efx_StereoHarm->getpar(4)-64);
 shar_intr->value(rkr->efx_StereoHarm->getpar(5)-12);
 shar_chr->value(rkr->efx_StereoHarm->getpar(6));
+shar_lrc->value(rkr->efx_StereoHarm->getpar(11)-64);
 shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
@@ -6324,6 +6325,7 @@ Fl_Menu_Item RKRGUI::menu_shar_preset[] = {
  {"Plain", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Octavator", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hard Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -6378,6 +6380,13 @@ void RKRGUI::cb_shar_ganr_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_shar_ganr(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_ganr_i(o,v);
+}
+
+void RKRGUI::cb_shar_lrc_i(SliderW* o, void*) {
+  rkr->efx_StereoHarm->changepar(11,(int)(o->value()+64));
+}
+void RKRGUI::cb_shar_lrc(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_lrc_i(o,v);
 }
 
 void RKRGUI::cb_shar_MIDI_i(Fl_Check_Button* o, void*) {
@@ -7537,6 +7546,46 @@ rkr->update_freqs(aFreq);
 void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Calibration_i(o,v);
 }
+
+void RKRGUI::cb_Voc_Bands_i(Fl_Choice* o, void*) {
+  switch((int)o->value())
+{
+  case 0:
+  rkr->VocBands = 16;
+  break;
+
+  case 1:
+  rkr->VocBands = 32;
+  break;
+
+  case 2:
+  rkr->VocBands = 64;
+  break;
+
+  case 3:
+  rkr->VocBands = 128;
+  break;
+
+  case 4:
+  rkr->VocBands = 256;
+  break;
+
+}
+
+Show_Next_Time();
+}
+void RKRGUI::cb_Voc_Bands(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Voc_Bands_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_Voc_Bands[] = {
+ {"16", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"32", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"64", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"128", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"256", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_D_A_Connect_i(Fl_Check_Button* o, void*) {
   rkr->aconnect_MI=(int) o->value();
@@ -16192,7 +16241,24 @@ R average.");
         shar_ganr->align(FL_ALIGN_LEFT);
         shar_ganr->when(FL_WHEN_CHANGED);
       } // SliderW* shar_ganr
-      { shar_MIDI = new Fl_Check_Button(329, 335, 15, 15, "MIDI");
+      { shar_lrc = new SliderW(370, 328, 100, 10, "L/R.Cr");
+        shar_lrc->type(5);
+        shar_lrc->box(FL_FLAT_BOX);
+        shar_lrc->color((Fl_Color)178);
+        shar_lrc->selection_color((Fl_Color)62);
+        shar_lrc->labeltype(FL_NORMAL_LABEL);
+        shar_lrc->labelfont(0);
+        shar_lrc->labelsize(10);
+        shar_lrc->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shar_lrc->minimum(-64);
+        shar_lrc->maximum(64);
+        shar_lrc->step(1);
+        shar_lrc->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        shar_lrc->callback((Fl_Callback*)cb_shar_lrc);
+        shar_lrc->align(FL_ALIGN_LEFT);
+        shar_lrc->when(FL_WHEN_CHANGED);
+      } // SliderW* shar_lrc
+      { shar_MIDI = new Fl_Check_Button(329, 340, 15, 15, "MIDI");
         shar_MIDI->down_box(FL_BORDER_BOX);
         shar_MIDI->labelsize(10);
         shar_MIDI->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -16206,7 +16272,7 @@ R average.");
         shar_SELECT->callback((Fl_Callback*)cb_shar_SELECT, (void*)(2));
         shar_SELECT->align(FL_ALIGN_RIGHT);
       } // Fl_Check_Button* shar_SELECT
-      { shar_chordname = new Fl_Box(376, 337, 98, 27);
+      { shar_chordname = new Fl_Box(376, 343, 98, 21);
         shar_chordname->labelsize(12);
         shar_chordname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* shar_chordname
@@ -16829,6 +16895,7 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
+        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -16902,7 +16969,6 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
-        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 58, 23, 20, "FX On at start");
@@ -17169,6 +17235,15 @@ R average.");
           Calibration->callback((Fl_Callback*)cb_Calibration);
           Calibration->align(FL_ALIGN_LEFT);
         } // Fl_Counter* Calibration
+        { Voc_Bands = new Fl_Choice(115, 507, 47, 18, "Vocoder Bnads       ");
+          Voc_Bands->down_box(FL_BORDER_BOX);
+          Voc_Bands->labelsize(10);
+          Voc_Bands->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Voc_Bands->textsize(10);
+          Voc_Bands->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Voc_Bands->callback((Fl_Callback*)cb_Voc_Bands);
+          Voc_Bands->menu(menu_Voc_Bands);
+        } // Fl_Choice* Voc_Bands
         AUDIO_SET->end();
       } // Fl_Group* AUDIO_SET
       { MIDI_SET = new Fl_Group(5, 26, 630, 502, "MIDI");
@@ -18129,6 +18204,8 @@ rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
 rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
+rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
+
 
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
@@ -19350,6 +19427,28 @@ Wave_Amo->value(Wave_res_amount);
 Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
 Calibration->value(aFreq);
+
+switch(rkr->VocBands)
+{
+  case 16:
+  Voc_Bands->value(0);
+  break;
+  case 32:
+  Voc_Bands->value(1);
+  break;
+  case 64:
+  Voc_Bands->value(2);
+  break;
+  case 128:
+  Voc_Bands->value(3);
+  break;
+  case 256:
+  Voc_Bands->value(4);
+  break;
+  
+}
+  
+
 
 
 Update_TAP->value(rkr->Tap_Updated);
