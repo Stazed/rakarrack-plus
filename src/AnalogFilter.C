@@ -436,10 +436,10 @@ AnalogFilter::singlefilterout (float * smp, fstage & x, fstage & y,
 	{
 
 	  y0 = smp[i] * c[0] + x.c1 * c[1] + y.c1 * d[1];
-	  y.c1 = y0;
+	  y.c1 = y0 + DENORMAL_GUARD;
 	  x.c1 = smp[i];
 	  //output
-	  smp[i] = y0 + DENORMAL_GUARD;
+	  smp[i] = y0;
 	};
     };
   if (order == 2)
@@ -450,11 +450,11 @@ AnalogFilter::singlefilterout (float * smp, fstage & x, fstage & y,
 	    (smp[i] * c[0]) + (x.c1 * c[1]) + (x.c2 * c[2]) + (y.c1 * d[1]) +
 	    (y.c2 * d[2]);
 	  y.c2 = y.c1;
-	  y.c1 = y0;
+	  y.c1 = y0 + DENORMAL_GUARD;
 	  x.c2 = x.c1;
 	  x.c1 = smp[i];
 	  //output
-	  smp[i] = y0 + DENORMAL_GUARD;
+	  smp[i] = y0;
 	};
     };
 };
@@ -518,9 +518,9 @@ AnalogFilter::singlefilterout_s (float smp, fstage & x, fstage & y,
     {				//First order filter
 	  y0 = smp* c[0] + x.c1 * c[1] + y.c1 * d[1];
 	  y.c1 = y0;
-	  x.c1 = smp;
+	  x.c1 = smp + DENORMAL_GUARD;
 	  //output
-	  smp = y0 + DENORMAL_GUARD;
+	  smp = y0;
 	
     };
   if (order == 2)
@@ -529,11 +529,11 @@ AnalogFilter::singlefilterout_s (float smp, fstage & x, fstage & y,
 	    (smp* c[0]) + (x.c1 * c[1]) + (x.c2 * c[2]) + (y.c1 * d[1]) +
 	    (y.c2 * d[2]);
 	  y.c2 = y.c1;
-	  y.c1 = y0;
+	  y.c1 = y0 + DENORMAL_GUARD;
 	  x.c2 = x.c1;
 	  x.c1 = smp;
 	  //output
-	  smp = y0 + DENORMAL_GUARD;
+	  smp = y0;
 	
     };
 

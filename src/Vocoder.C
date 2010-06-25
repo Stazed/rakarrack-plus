@@ -57,7 +57,7 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
       alpha = ncSAMPLE_RATE/(ncSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       prls = beta;
-      gate = dB2rap(-75.0f);
+      gate = 0.005f;
 
 
   tmp = 0.05f; //50 ms att/rel on compressor
@@ -89,19 +89,15 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
       filterbank[i].aux->setSR(nSAMPLE_RATE);
     };
     
-    setbands(VOC_BANDS, 200.0f, 4000.0f);
     vlp = new AnalogFilter (2, 4000.0f, 1.0f, 1);
     vhp = new AnalogFilter (3, 200.0f, 0.707f, 1);
 
   vlp->setSR(nSAMPLE_RATE);
   vhp->setSR(nSAMPLE_RATE);
  
+   setbands(VOC_BANDS, 200.0f, 4000.0f);
+   setpreset (Ppreset);
 
-
-    setpreset (Ppreset);
-  
-
-  cleanup ();
 };
 
 Vocoder::~Vocoder ()
@@ -114,7 +110,20 @@ Vocoder::~Vocoder ()
 void
 Vocoder::cleanup ()
 {
+  for(int k=0;k<VOC_BANDS; k++)
+  {
+      filterbank[k].l->cleanup();
+      filterbank[k].r->cleanup();
+      filterbank[k].aux->cleanup();
+      filterbank[k].speak = 0.0f;
+      filterbank[k].gain = 0.0f;
+      filterbank[k].oldgain = 0.0f;
+	
+  }
+ vhp->cleanup();
+ vlp->cleanup();
 
+ compeak = compg = compenv = oldcompenv = 0.0f;
 
 };
 
@@ -351,6 +360,7 @@ Vocoder::setbands (int numbands, float startfreq, float endfreq)
       filterbank[k].r->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);
       filterbank[k].aux->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);	
   }
+  cleanup();
 
 }
 
