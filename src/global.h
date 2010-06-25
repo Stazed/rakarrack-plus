@@ -441,6 +441,10 @@ public:
   int Seq_Down;
   int Seq_U_Q;
   int Seq_D_Q;
+  int Voc_Down;
+  int Voc_U_Q;
+  int Voc_D_Q;
+
   int font;
   int flpos;
   int upsample;

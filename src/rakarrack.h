@@ -3572,6 +3572,21 @@ private:
   void cb_Wave_Up_Qua_i(Fl_Choice*, void*);
   static void cb_Wave_Up_Qua(Fl_Choice*, void*);
 public:
+  Fl_Choice *Voc_Downsample;
+private:
+  void cb_Voc_Downsample_i(Fl_Choice*, void*);
+  static void cb_Voc_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Voc_Down_Qua;
+private:
+  void cb_Voc_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Voc_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Voc_Up_Qua;
+private:
+  void cb_Voc_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Voc_Up_Qua(Fl_Choice*, void*);
+public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;

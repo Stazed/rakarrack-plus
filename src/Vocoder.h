@@ -30,13 +30,14 @@
 class Vocoder
 {
 public:
-  Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands);
+  Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands, int DS, int uq, int dq);
   ~Vocoder ();
   void out (float * smpsl, float * smpr);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
+  void adjust(int DS);
 
   int Ppreset;
   float outvolume;
@@ -64,19 +65,35 @@ private:
   int Pmuffle;
   int Pqq;
   int Pring;
+
+  int DS_state;
+  int nPERIOD;
+  int nSAMPLE_RATE;
+  
+  float ncSAMPLE_RATE;
+  float nfSAMPLE_RATE;
+  
+  double u_up;
+  double u_down;
+
   
   float ringworm;
-  float cperiod;
   float lpanning, rpanning, input,level;
   float alpha,beta,prls,gate;
   float compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
   float *tmpl, *tmpr;
+  float *tsmpsl, *tsmpsr;
+  float *tmpaux;
     struct fbank { float sfreq, sq,speak,gain,oldgain;
     AnalogFilter *l, *r, *aux;
 
   } *filterbank;
 
  AnalogFilter *vhp, *vlp; 
+
+  Resample *U_Resample;
+  Resample *D_Resample;
+  Resample *A_Resample; 
 
 };
 

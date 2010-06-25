@@ -26,8 +26,11 @@
 #include <math.h>
 #include "Vocoder.h"
 
-Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands)
+Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands, int DS, int uq, int dq)
 {
+
+  adjust(DS);
+
   VOC_BANDS = bands;
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
@@ -41,41 +44,61 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
   Plrcross = 100;
   
   filterbank = (fbank *) malloc(sizeof(fbank) * VOC_BANDS);
-  tmpl = (float *) malloc (sizeof (float) * PERIOD);
-  tmpr = (float *) malloc (sizeof (float) * PERIOD);
+  tmpl = (float *) malloc (sizeof (float) * nPERIOD);
+  tmpr = (float *) malloc (sizeof (float) * nPERIOD);
+  tsmpsl = (float *) malloc (sizeof (float) * nPERIOD);
+  tsmpsr = (float *) malloc (sizeof (float) * nPERIOD);
+  tmpaux = (float *) malloc (sizeof (float) * nPERIOD);
+
+
+
   Pmuffle = 10;
       float tmp = 0.01f;  //10 ms decay time on peak detectors
-      alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+      alpha = ncSAMPLE_RATE/(ncSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       prls = beta;
       gate = dB2rap(-75.0f);
 
+
   tmp = 0.05f; //50 ms att/rel on compressor
-  calpha =  cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+  calpha =  ncSAMPLE_RATE/(ncSAMPLE_RATE + tmp);
   cbeta = 1.0f - calpha;
   cthresh = 0.25f;
   cpthresh = cthresh; //dynamic threshold
   cratio = 0.25f;
   
-  cperiod = 1.0f/fPERIOD; 
 
   float center;
   float qq;
-  float subdiv = 28.0f;  //sets range & spacing of bands
+  
+  A_Resample = new Resample(dq);
+  U_Resample = new Resample(dq);
+  D_Resample = new Resample(uq);
+
+  
   for (int i = 0; i < VOC_BANDS; i++)
     {
       center = (float) i * 20000.0f/((float) VOC_BANDS);
       qq = 60.0f;
 
       filterbank[i].l = new AnalogFilter (4, center, qq, 0);
+      filterbank[i].l->setSR(nSAMPLE_RATE);
       filterbank[i].r = new AnalogFilter (4, center, qq, 0);
+      filterbank[i].r->setSR(nSAMPLE_RATE);
       filterbank[i].aux = new AnalogFilter (4, center, qq, 0);
+      filterbank[i].aux->setSR(nSAMPLE_RATE);
     };
     
     setbands(VOC_BANDS, 200.0f, 4000.0f);
     vlp = new AnalogFilter (2, 4000.0f, 1.0f, 1);
     vhp = new AnalogFilter (3, 200.0f, 0.707f, 1);
-  setpreset (Ppreset);
+
+  vlp->setSR(nSAMPLE_RATE);
+  vhp->setSR(nSAMPLE_RATE);
+ 
+
+
+    setpreset (Ppreset);
   
 
   cleanup ();
@@ -95,6 +118,91 @@ Vocoder::cleanup ()
 
 };
 
+
+void
+Vocoder::adjust(int DS)
+{
+
+     DS_state=DS;
+
+
+switch(DS)
+{
+   
+     case 0:
+      nPERIOD = PERIOD;
+      nSAMPLE_RATE = SAMPLE_RATE;
+      nfSAMPLE_RATE = fSAMPLE_RATE;
+      break;
+
+     case 1:
+      nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 96000;
+      nfSAMPLE_RATE = 96000.0f;
+      break;
+
+
+     case 2:
+      nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 48000;
+      nfSAMPLE_RATE = 48000.0f;
+      break;
+
+     case 3:
+      nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 44100;
+      nfSAMPLE_RATE = 44100.0f;
+      break;
+
+     case 4:
+      nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 32000;
+      nfSAMPLE_RATE = 32000.0f;
+      break;
+
+     case 5:
+      nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 22050;
+      nfSAMPLE_RATE = 22050.0f;
+      break;
+
+     case 6:
+      nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 16000;
+      nfSAMPLE_RATE = 16000.0f;
+      break;
+
+     case 7:
+      nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 12000;
+      nfSAMPLE_RATE = 12000.0f;
+      break;
+
+     case 8:
+      nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 8000;
+      nfSAMPLE_RATE = 8000.0f;
+      break;
+
+     case 9:
+      nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+      nSAMPLE_RATE = 4000;
+      nfSAMPLE_RATE = 4000.0f;
+      break;
+
+}
+
+      ncSAMPLE_RATE = 1.0f / nfSAMPLE_RATE;
+
+      u_up= (double)nPERIOD / (double)PERIOD;
+      u_down= (double)PERIOD / (double)nPERIOD;
+
+
+}
+
+
+
+
 /*
  * Effect output
  */
@@ -107,13 +215,18 @@ Vocoder::out (float * smpsl, float * smpsr)
   float maxgain=0.0f;
   float auxtemp, tmpgain;
    
-   memset(tmpl,0,sizeof(float)*PERIOD);
-   memset(tmpr,0,sizeof(float)*PERIOD);    
    
-
-   for (i = 0; i<PERIOD; i++)    //apply compression to auxresampled
+   if(DS_state != 0)
    {
-   auxtemp = input * auxresampled[i];
+     A_Resample->mono_out(auxresampled,tmpaux,PERIOD,u_up,nPERIOD);
+   }
+   else
+   memcpy(tmpaux,auxresampled,sizeof(float)*nPERIOD);
+
+
+   for (i = 0; i<nPERIOD; i++)    //apply compression to auxresampled
+   {
+   auxtemp = input * tmpaux[i];
    if(fabs(auxtemp > compeak)) compeak = fabs(auxtemp);   //First do peak detection on the signal
    compeak *= prls;
    compenv = cbeta * oldcompenv + calpha * compeak;       //Next average into envelope follower
@@ -129,26 +242,46 @@ Vocoder::out (float * smpsl, float * smpsr)
    {
    tmpgain = 1.0f;
    }
+
+
    
    if(compenv < cpthresh) cpthresh = compenv;
    if(cpthresh < cthresh) cpthresh = cthresh;
    
-   auxresampled[i] = auxtemp * tmpgain;   
+   tmpaux[i] = auxtemp * tmpgain;   
+
+   tmpaux[i]=vlp->filterout_s(tmpaux[i]);
+   tmpaux[i]=vhp->filterout_s(tmpaux[i]);
+
    };
+
+
       //End compression
       
    auxtemp = 0.0f;
 
-   vlp->filterout(auxresampled);
-   vhp->filterout(auxresampled);
+   if(DS_state != 0)
+   {
+     U_Resample->out(smpsl,smpsr,tsmpsl,tsmpsr,PERIOD,u_up);
+   }
+  else
+  {
+   memcpy(tsmpsl,smpsl,sizeof(float)*nPERIOD);
+   memcpy(tsmpsr,smpsr,sizeof(float)*nPERIOD);
+  } 
+
+
+   memset(tmpl,0,sizeof(float)*nPERIOD);
+   memset(tmpr,0,sizeof(float)*nPERIOD);    
+
 
 
     for (j = 0; j < VOC_BANDS; j++)
     {
 
-      for (i = 0; i<PERIOD; i++)
+      for (i = 0; i<nPERIOD; i++)
        { 
-       auxtemp = auxresampled[i];
+       auxtemp = tmpaux[i];
        
        if(filterbank[j].speak < gate) filterbank[j].speak = 0.0f;  //gate 
        if(auxtemp>maxgain) maxgain = auxtemp; //vu meter level.    
@@ -157,25 +290,41 @@ Vocoder::out (float * smpsl, float * smpsr)
        if(fabs(auxtemp) > filterbank[j].speak) filterbank[j].speak = fabs(auxtemp);  //Leaky Peak detector
  
        filterbank[j].speak*=prls;
+
        filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;   
        filterbank[j].oldgain = filterbank[j].gain; 
+
        
-       tempgain = (1.0f - ringworm) * filterbank[j].oldgain  + ringworm*auxtemp; 
-       tmpl[i] += (filterbank[j].l->filterout_s(smpsl[i])) * tempgain;
-       tmpr[i] += (filterbank[j].r->filterout_s(smpsr[i])) * tempgain;   
+       tempgain = (1.0f-ringworm)*filterbank[j].oldgain+ringworm*auxtemp; 
+
+       tmpl[i] +=filterbank[j].l->filterout_s(tsmpsl[i])*tempgain;
+       tmpr[i] +=filterbank[j].r->filterout_s(tsmpsr[i])*tempgain;   
 
        };
        
  
    };
+
    
-       for (i = 0; i<PERIOD; i++)
+       for (i = 0; i<nPERIOD; i++)
        { 
-       efxoutl[i] = lpanning*level*tmpl[i];  
-       efxoutr[i] = rpanning*level*tmpr[i];       
+       tmpl[i]*=lpanning*level;
+       tmpr[i]*=rpanning*level;       
        };
-       
+
+
+    if(DS_state != 0)
+   {
+     D_Resample->out(tmpl,tmpr,efxoutl,efxoutr,nPERIOD,u_down);
+   }
+   else
+   {   
+     memcpy(efxoutl,tmpl,sizeof(float)*nPERIOD);
+     memcpy(efxoutr,tmpr,sizeof(float)*nPERIOD);
+   }
+
       vulevel = (float)CLAMP(rap2dB(maxgain), -48.0, 15.0); 
+
 
 
 };
@@ -295,7 +444,7 @@ float tmp = 0;
       Pmuffle = value;
       tmp = (float) Pmuffle;
       tmp *= 0.0001f + tmp/64000;
-      alpha = cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+      alpha = ncSAMPLE_RATE/(ncSAMPLE_RATE + tmp);
       beta = 1.0f - alpha; 
       break;
     case 3: 

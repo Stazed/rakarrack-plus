@@ -145,6 +145,11 @@ RKR::RKR ()
   rakarrack.get (PrefNom("Shifter Up Quality"),Shi_U_Q,4);
   rakarrack.get (PrefNom("Shifter Down Quality"),Shi_D_Q,4);
 
+  rakarrack.get (PrefNom("Vocoder Downsample"),Voc_Down,0);
+  rakarrack.get (PrefNom("Vocoder Up Quality"),Voc_U_Q,4);
+  rakarrack.get (PrefNom("Vocoder Down Quality"),Voc_D_Q,4);
+
+
   rakarrack.get (PrefNom("Waveshape Resampling"),Wave_res_amount,0);
   rakarrack.get (PrefNom("Waveshape Up Quality"),Wave_up_q,4);
   rakarrack.get (PrefNom("Waveshape Down Quality"),Wave_down_q,4);
@@ -251,7 +256,7 @@ RKR::RKR ()
   efx_RBEcho = new RBEcho(efxoutl,efxoutr);
   efx_CoilCrafter = new CoilCrafter(efxoutl,efxoutr);
   efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr);
-  efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled,VocBands);
+  efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled,VocBands,Voc_Down, Voc_U_Q, Voc_D_Q);
   efx_Sustainer = new Sustainer(efxoutl,efxoutr);
   efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q);
   efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q);
