@@ -6,6 +6,7 @@ rakarrack_SOURCES = main.C \
 	Arpie.h \
 	Chorus.h \
 	CoilCrafter.h \
+	CompBand.h \
 	Compressor.h \
 	config.h \
 	Convolotron.h \
@@ -121,6 +122,7 @@ rakarrack_SOURCES = main.C \
 	Reverbtron.C \
 	Echotron.C \
 	StereoHarm.C \
+	CompBand.C \
 	MIDIConverter.C
 	
 	

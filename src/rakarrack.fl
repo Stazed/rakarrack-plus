@@ -843,7 +843,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1639 112 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1520 97 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7070,6 +7070,132 @@ Chord(1);}
           class SliderW
         }
       }
+      Fl_Group COMPBAND {
+        user_data 1
+        xywh {320 211 162 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+      } {
+        Fl_Light_Button cband_activar {
+          label On
+          user_data 2
+          callback {rkr->CompBand_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_CompBand->cleanup();
+findpos(43,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice cband_preset {
+          label Preset
+          user_data 12
+          callback {long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_CompBand->setpreset((int)o->value());
+cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
+cband_Lratio->value(rkr->efx_CompBand->getpar(1));
+cband_MLratio->value(rkr->efx_CompBand->getpar(2));
+cband_MHratio->value(rkr->efx_CompBand->getpar(3));
+cband_Hratio->value(rkr->efx_CompBand->getpar(4));
+cband_Lthres->value(rkr->efx_CompBand->getpar(5));
+cband_MLthres->value(rkr->efx_CompBand->getpar(6));
+cband_MHthres->value(rkr->efx_CompBand->getpar(7));
+cband_Hthres->value(rkr->efx_CompBand->getpar(8));
+cband_cross1->value(rkr->efx_CompBand->getpar(9));
+cband_cross2->value(rkr->efx_CompBand->getpar(10));
+cband_cross3->value(rkr->efx_CompBand->getpar(11));
+cband_cross3->value(rkr->efx_CompBand->getpar(11));
+cband_gain->value(rkr->efx_CompBand->getpar(12));}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Good Start}
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Loudness
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Loudness 2} selected
+            xywh {82 82 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider cband_WD {
+          label {Wet/Dry}
+          callback {rkr->efx_CompBand->changepar(0,(int)(o->value()+64));}
+          xywh {372 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_gain {
+          label Gain
+          callback {rkr->efx_CompBand->changepar(12,(int)o->value());}
+          xywh {372 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_Lratio {
+          label {L Ratio}
+          callback {rkr->efx_CompBand->changepar(1, (int) o->value());}
+          xywh {372 262 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_MLratio {
+          label {ML Ratio}
+          callback {rkr->efx_CompBand->changepar(2, (int) o->value());}
+          xywh {372 274 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_MHratio {
+          label {MH Ratio}
+          callback {rkr->efx_CompBand->changepar(3, (int) o->value());}
+          xywh {372 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_Hratio {
+          label {H Ratio}
+          callback {rkr->efx_CompBand->changepar(4, (int) o->value());}
+          xywh {372 298 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_Lthres {
+          label {L Thres}
+          callback {rkr->efx_CompBand->changepar(5, (int)o->value());}
+          xywh {372 310 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_MLthres {
+          label {ML Thres}
+          callback {rkr->efx_CompBand->changepar(6, (int)o->value());}
+          xywh {372 322 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_MHthres {
+          label {MH Thres}
+          callback {rkr->efx_CompBand->changepar(7, (int)o->value());}
+          xywh {372 334 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_Hthres {
+          label {H Thres}
+          callback {rkr->efx_CompBand->changepar(8, (int)o->value());}
+          xywh {372 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_cross1 {
+          label Cross1
+          callback {rkr->efx_CompBand->changepar(9,(int)o->value());}
+          xywh {372 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_cross2 {
+          label Cross2
+          callback {rkr->efx_CompBand->changepar(10,(int)o->value());}
+          xywh {372 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider cband_cross3 {
+          label Cross3
+          callback {rkr->efx_CompBand->changepar(11,(int)o->value());}
+          xywh {372 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
+          class SliderW
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -9693,6 +9819,9 @@ echotron_preset->do_callback(echotron_preset,1);
 shar_activar->value(rkr->StereoHarm_Bypass);
 shar_preset->do_callback(shar_preset,1);
 
+//CompBand
+cband_activar->value(rkr->CompBand_Bypass);
+cband_preset->do_callback(cband_preset,1);
 
 
 reordena();} {}
@@ -10008,6 +10137,11 @@ for (i=1; i<=t; i++)
         break;
         case 42:
         SHAR->hide();
+        shar_activar->value(0);
+        rkr->StereoHarm_Bypass = 0;
+        break;
+        case 43:
+        COMPBAND->hide();
         break;
         
 
@@ -10380,6 +10514,13 @@ switch (rkr->efx_order[i])
        shar_activar->shortcut(s[i]);
        SHAR->show();
        if(rkr->StereoHarm_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 43:
+       COMPBAND->position(x[i],y[i]);
+       cband_activar->shortcut(s[i]);
+       COMPBAND->show();
+       if(rkr->CompBand_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -10767,8 +10908,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {selected
-    }
+Font_Bro->value(rkr->font+1);} {}
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
@@ -12428,6 +12568,11 @@ switch(miralo)
   shar_activar->value(rkr->StereoHarm_Bypass);
   shar_activar->do_callback();
   break;
+ case 43:
+  cband_activar->value(rkr->CompBand_Bypass);
+  cband_activar->do_callback();
+  break;
+
   
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
@@ -12529,6 +12674,7 @@ STOMPBOX->image(InOut->image());
 REVERBTRON->image(InOut->image());
 ECHOTRON->image(InOut->image());
 SHAR->image(InOut->image());
+COMPBAND->image(InOut->image());
 
 
 Tap->image(InOut->image());

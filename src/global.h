@@ -142,6 +142,7 @@
 #include "Reverbtron.h"
 #include "Echotron.h"
 #include "StereoHarm.h"
+#include "CompBand.h"
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -290,6 +291,7 @@ public:
   class Reverbtron *efx_Reverbtron;
   class Echotron *efx_Echotron;
   class StereoHarm *efx_StereoHarm;
+  class CompBand *efx_CompBand;
 
 
   jack_client_t *jackclient;
@@ -346,6 +348,7 @@ public:
   int Reverbtron_Bypass;
   int Echotron_Bypass;
   int StereoHarm_Bypass;
+  int CompBand_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -390,6 +393,7 @@ public:
   int Reverbtron_B;
   int Echotron_B;
   int StereoHarm_B;
+  int CompBand_B;
   
   int Cabinet_Preset;
   int Selected_Preset;

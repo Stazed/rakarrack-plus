@@ -264,6 +264,7 @@ RKR::RKR ()
   efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down, Rev_U_Q, Rev_D_Q);
   efx_Echotron = new Echotron(efxoutl,efxoutr);
   efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q);
+  efx_CompBand = new CompBand(efxoutl,efxoutr);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -300,7 +301,7 @@ RKR::RKR ()
 128 - Synthesis
 */
 
-  NumEffects = 43;
+  NumEffects = 44;
 
   {
     static const char *los_names[] =
@@ -311,6 +312,7 @@ RKR::RKR ()
 "Cabinet","12","8",
 "Chorus","5","2",
 "Coil Crafter","33","8",
+"CompBand","43","8",
 "Compressor","1","32",
 "Convolotron","29","8",
 "Derelict","17","1",
@@ -1322,6 +1324,7 @@ RKR::cleanup_efx ()
   efx_Reverbtron->cleanup();
   efx_Echotron->cleanup();
   efx_StereoHarm->cleanup();
+  efx_CompBand->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 
@@ -1758,6 +1761,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 {
                   efx_StereoHarm->out(efxoutl, efxoutr);
 		  Vol_Efx(42,efx_StereoHarm->outvolume);
+                }
+              break;  
+
+             case 43:
+              if (CompBand_Bypass)
+                {
+                  efx_CompBand->out(efxoutl, efxoutr);
+		  Vol_Efx(43,efx_CompBand->outvolume);
                 }
               break;  
 

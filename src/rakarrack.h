@@ -3056,6 +3056,83 @@ private:
   void cb_shar_type_i(SliderW*, void*);
   static void cb_shar_type(SliderW*, void*);
 public:
+  Fl_Group *COMPBAND;
+  Fl_Light_Button *cband_activar;
+private:
+  void cb_cband_activar_i(Fl_Light_Button*, void*);
+  static void cb_cband_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *cband_preset;
+private:
+  void cb_cband_preset_i(Fl_Choice*, void*);
+  static void cb_cband_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_cband_preset[];
+public:
+  SliderW *cband_WD;
+private:
+  void cb_cband_WD_i(SliderW*, void*);
+  static void cb_cband_WD(SliderW*, void*);
+public:
+  SliderW *cband_gain;
+private:
+  void cb_cband_gain_i(SliderW*, void*);
+  static void cb_cband_gain(SliderW*, void*);
+public:
+  SliderW *cband_Lratio;
+private:
+  void cb_cband_Lratio_i(SliderW*, void*);
+  static void cb_cband_Lratio(SliderW*, void*);
+public:
+  SliderW *cband_MLratio;
+private:
+  void cb_cband_MLratio_i(SliderW*, void*);
+  static void cb_cband_MLratio(SliderW*, void*);
+public:
+  SliderW *cband_MHratio;
+private:
+  void cb_cband_MHratio_i(SliderW*, void*);
+  static void cb_cband_MHratio(SliderW*, void*);
+public:
+  SliderW *cband_Hratio;
+private:
+  void cb_cband_Hratio_i(SliderW*, void*);
+  static void cb_cband_Hratio(SliderW*, void*);
+public:
+  SliderW *cband_Lthres;
+private:
+  void cb_cband_Lthres_i(SliderW*, void*);
+  static void cb_cband_Lthres(SliderW*, void*);
+public:
+  SliderW *cband_MLthres;
+private:
+  void cb_cband_MLthres_i(SliderW*, void*);
+  static void cb_cband_MLthres(SliderW*, void*);
+public:
+  SliderW *cband_MHthres;
+private:
+  void cb_cband_MHthres_i(SliderW*, void*);
+  static void cb_cband_MHthres(SliderW*, void*);
+public:
+  SliderW *cband_Hthres;
+private:
+  void cb_cband_Hthres_i(SliderW*, void*);
+  static void cb_cband_Hthres(SliderW*, void*);
+public:
+  SliderW *cband_cross1;
+private:
+  void cb_cband_cross1_i(SliderW*, void*);
+  static void cb_cband_cross1(SliderW*, void*);
+public:
+  SliderW *cband_cross2;
+private:
+  void cb_cband_cross2_i(SliderW*, void*);
+  static void cb_cband_cross2(SliderW*, void*);
+public:
+  SliderW *cband_cross3;
+private:
+  void cb_cband_cross3_i(SliderW*, void*);
+  static void cb_cband_cross3(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

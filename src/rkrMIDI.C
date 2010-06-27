@@ -390,6 +390,9 @@ else
    case 42:
     if(inoff) StereoHarm_Bypass=1; else StereoHarm_Bypass=0;
      break;
+   case 43:
+    if(inoff) CompBand_Bypass=1; else CompBand_Bypass=0;
+     break;
 
    
    case 121:
@@ -554,6 +557,9 @@ RKR::checkonoff(int miraque)
      break;
    case 42:
      if (StereoHarm_Bypass) return(0);
+     break;
+   case 43:
+     if (CompBand_Bypass) return(0);
      break;
 
 

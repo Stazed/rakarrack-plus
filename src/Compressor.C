@@ -206,7 +206,7 @@ Compressor::Compressor_Change_Preset (int npreset)
 {
 
   const int PRESET_SIZE = 10;
-  const int NUM_PRESETS = 5;
+  const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //2:1
     {-30, 2, -6, 20, 120, 1, 0, 0, 0},
@@ -218,6 +218,9 @@ Compressor::Compressor_Change_Preset (int npreset)
     {-1, 25, 0, 5, 50, 0 ,0 ,1 ,1},
     //HarmonicEnhancer
     {-20, 15, -3, 10, 50, 0 ,0 ,1 ,1},
+    //CompBand
+    {-30, 2, 0, 20, 120, 1, 0, 1, 0},
+
 
   };
 

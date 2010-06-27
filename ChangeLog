@@ -1,3 +1,15 @@
+==v0.6.x (  /  /2010) ==
+
+- Added Downsample Vocoder
+- Added Vocoder bands selectable.
+- Added StereoHarm effect
+
+
+
+
+
+
+
 ==v0.5.8 (21/06/2010) ==
 -------------------------------------------------------------------------------
 - Added Waveshaper Diode clipper
