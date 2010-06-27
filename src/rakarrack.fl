@@ -7113,7 +7113,7 @@ cband_gain->value(rkr->efx_CompBand->getpar(12));}
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Loudness 2} selected
+            label {Loudness 2}
             xywh {82 82 36 21} labelsize 10
           }
         }
@@ -7156,25 +7156,25 @@ cband_gain->value(rkr->efx_CompBand->getpar(12));}
         Fl_Value_Slider cband_Lthres {
           label {L Thres}
           callback {rkr->efx_CompBand->changepar(5, (int)o->value());}
-          xywh {372 310 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          xywh {372 310 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider cband_MLthres {
           label {ML Thres}
           callback {rkr->efx_CompBand->changepar(6, (int)o->value());}
-          xywh {372 322 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          xywh {372 322 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider cband_MHthres {
           label {MH Thres}
           callback {rkr->efx_CompBand->changepar(7, (int)o->value());}
-          xywh {372 334 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          xywh {372 334 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider cband_Hthres {
           label {H Thres}
-          callback {rkr->efx_CompBand->changepar(8, (int)o->value());}
-          xywh {372 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
+          callback {rkr->efx_CompBand->changepar(8, (int)o->value());} selected
+          xywh {372 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider cband_cross1 {

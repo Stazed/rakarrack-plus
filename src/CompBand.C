@@ -47,29 +47,31 @@ CompBand::CompBand (float * efxoutl_, float * efxoutr_)
   highr = (float *) malloc (sizeof (float) * PERIOD);
 
 
-  lpf1l = new AnalogFilter (2, 500.0f, .7071f, 0);
-  lpf1r = new AnalogFilter (2, 500.0f, .7071f, 0);
-  hpf1l = new AnalogFilter (3, 500.0f, .7071f, 0);
-  hpf1r = new AnalogFilter (3, 500.0f, .7071f, 0);
-  lpf2l = new AnalogFilter (2, 2500.0f, .7071f, 0);
-  lpf2r = new AnalogFilter (2, 2500.0f, .7071f, 0);
-  hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0);
-  hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0);
-  lpf3l = new AnalogFilter (2, 5000.0f, .7071f, 0);
-  lpf3r = new AnalogFilter (2, 5000.0f, .7071f, 0);
-  hpf3l = new AnalogFilter (3, 5000.0f, .7071f, 0);
-  hpf3r = new AnalogFilter (3, 5000.0f, .7071f, 0);
+  lpf1l = new AnalogFilter (2, 500.0f,.7071f, 0);
+  lpf1r = new AnalogFilter (2, 500.0f,.7071f, 0);
+  hpf1l = new AnalogFilter (3, 500.0f,.7071f, 0);
+  hpf1r = new AnalogFilter (3, 500.0f,.7071f, 0);
+  lpf2l = new AnalogFilter (2, 2500.0f,.7071f, 0);
+  lpf2r = new AnalogFilter (2, 2500.0f,.7071f, 0);
+  hpf2l = new AnalogFilter (3, 2500.0f,.7071f, 0);
+  hpf2r = new AnalogFilter (3, 2500.0f,.7071f, 0);
+  lpf3l = new AnalogFilter (2, 5000.0f,.7071f, 0);
+  lpf3r = new AnalogFilter (2, 5000.0f,.7071f, 0);
+  hpf3l = new AnalogFilter (3, 5000.0f,.7071f, 0);
+  hpf3r = new AnalogFilter (3, 5000.0f,.7071f, 0);
 
   
   CL = new Compressor(efxoutl,efxoutr);
   CML = new Compressor(efxoutl,efxoutr);
   CMH = new Compressor(efxoutl,efxoutr);
   CH = new Compressor(efxoutl,efxoutr);
+  End = new Compressor(efxoutl,efxoutr);
 
   CL->Compressor_Change_Preset(5);  
   CML->Compressor_Change_Preset(5);  
   CMH->Compressor_Change_Preset(5);  
   CH->Compressor_Change_Preset(5);  
+  End->Compressor_Change_Preset(6);  
 
 
   //default values
@@ -155,6 +157,9 @@ CompBand::out (float * smpsl, float * smpsr)
     efxoutr[i]=(lowr[i]+midlr[i]+midhr[i]+highr[i])*level;
   }      
     
+  End->out(efxoutl,efxoutr);
+
+
 };
 
 
@@ -165,7 +170,7 @@ void
 CompBand::setvolume (int value)
 {
   Pvolume = value;
-  outvolume = (float)Pvolume / 127.0f;
+  outvolume = (float)Pvolume / 128.0f;
   
 };
 
@@ -174,7 +179,9 @@ void
 CompBand::setlevel (int value)
 {
   Plevel = value;
-  level = dB2rap (60.0f * (float)value / 127.0f - 40.0f);
+//  level = dB2rap (60.0f * (float)value / 127.0f - 40.0f);
+  
+  level = (float)value / 127.0f;
   
 };
 
@@ -267,13 +274,13 @@ CompBand::setpreset (int npreset)
   const int NUM_PRESETS = 3;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Good Start
-    {0, 16, 16, 16, 16, -24, -24, -24, -24, 1000, 5000, 10000, 48},
+    {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48},
 
     //Loudness
-    {0, 24, 16, 16, 16, -32, -24, -24, -24, 140, 1000, 5000, 48},
+    {0, 16, 2, 2, 4, -16, 24, 24, -8, 140, 1000, 5000, 48},
 
     //Loudness 2
-    {64, 16, 2, 2, 2, -32, -3, -3, -3, 100, 1000, 5000, 48}
+    {64, 16, 2, 2, 2, -32, 24, 24, 24, 100, 1000, 5000, 48}
 
   };
 

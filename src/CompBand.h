@@ -91,7 +91,7 @@ private:
   AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
   AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
 
-  Compressor *CL,*CML,*CMH,*CH;  
+  Compressor *CL,*CML,*CMH,*CH, *End;  
 
 };
 
