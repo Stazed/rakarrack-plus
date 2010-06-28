@@ -65,13 +65,11 @@ CompBand::CompBand (float * efxoutl_, float * efxoutr_)
   CML = new Compressor(efxoutl,efxoutr);
   CMH = new Compressor(efxoutl,efxoutr);
   CH = new Compressor(efxoutl,efxoutr);
-  End = new Compressor(efxoutl,efxoutr);
 
   CL->Compressor_Change_Preset(5);  
   CML->Compressor_Change_Preset(5);  
   CMH->Compressor_Change_Preset(5);  
   CH->Compressor_Change_Preset(5);  
-  End->Compressor_Change_Preset(6);  
 
 
   //default values
@@ -108,7 +106,6 @@ CompBand::cleanup ()
   CML->cleanup(); 
   CMH->cleanup(); 
   CH->cleanup(); 
-
 
 };
 /*
@@ -157,7 +154,6 @@ CompBand::out (float * smpsl, float * smpsr)
     efxoutr[i]=(lowr[i]+midlr[i]+midhr[i]+highr[i])*level;
   }      
     
-  End->out(efxoutl,efxoutr);
 
 
 };
