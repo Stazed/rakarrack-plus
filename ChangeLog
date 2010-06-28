@@ -1,5 +1,6 @@
 ==v0.6.x (  /  /2010) ==
 
+- Added CompBand effect
 - Added Downsample Vocoder
 - Added Vocoder bands selectable.
 - Added StereoHarm effect

@@ -181,7 +181,7 @@ void
 CompBand::setlevel (int value)
 {
   Plevel = value;
-  level = dB2rap (60.0f * (float)value / 127.0f - 40.0f);
+  level = dB2rap (60.0f * (float)value / 127.0f - 36.0f);
   
   
 };

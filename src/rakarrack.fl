@@ -842,7 +842,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} selected
+Pexitprogram=1;}
       xywh {1520 97 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -1197,6 +1197,11 @@ if(tta)
 }  
 
 
+
+//
+
+
+
 }
 
 if (rkr->MIDIConverter_Bypass)
@@ -1278,7 +1283,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
