@@ -2226,6 +2226,59 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_StereoHarm->changepar(9,(int)((float)value*.25984252f));
          break;
 
+   case 368:
+         efx_CompBand->changepar(0,value);
+         break;
+
+   case 369:
+         efx_CompBand->changepar(12,value);
+         break;
+
+   case 370:
+         efx_CompBand->changepar(1,2+(int)((float)value*.31496063f));
+         break;
+
+   case 371:
+         efx_CompBand->changepar(2,2+(int)((float)value*.31496063f));
+         break;
+
+   case 372:
+         efx_CompBand->changepar(3,2+(int)((float)value*.31496063f));
+         break;
+
+   case 373:
+         efx_CompBand->changepar(4,2+(int)((float)value*.31496063f));
+         break;
+
+   case 374:
+         efx_CompBand->changepar(5,-70+(int)((float)value*.74015748f));
+         break;
+
+   case 375:
+         efx_CompBand->changepar(6,-70+(int)((float)value*.74015748f));
+         break;
+
+   case 376:
+         efx_CompBand->changepar(7,-70+(int)((float)value*.74015748f));
+         break;
+
+   case 377:
+         efx_CompBand->changepar(8,-70+(int)((float)value*.74015748f));
+         break;
+
+    case 378:
+         efx_CompBand->changepar(9,20+(int)((float)value*7.71653));
+         break;
+         
+    case 379:
+         efx_CompBand->changepar(10,1000+(int)((float)value*55.11811));
+         break;
+         
+    case 380:
+         efx_CompBand->changepar(11,2000+(int)((float)value*188.97638));
+         break;
+
+
    } 
       
     

@@ -1,6 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<!-- This file was originally generated from OpenOffice, but is now maintained 
+<html><head><!-- This file was originally generated from OpenOffice, but is now maintained 
   by hand. It is used for both the in-application help and the online help.
 
   When making updates to this file, make sure you also update the online 
@@ -9,13 +8,13 @@
    scp help.html raboofje,rakarrack@web.sourceforge.net:htdocs
 -->
 
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help
-  Effects</title>
+
+
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help Effects</title>
   <meta name="AUTHOR" content="Josep Andreu">
   <meta name="CREATED" content="0;0">
   <meta name="CHANGED" content="20100112;22402500">
-  <meta name="DESCRIPTION" content="rakarrack help in html file"></head>
-  <body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+  <meta name="DESCRIPTION" content="rakarrack help in html file"></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
 
   <h2>EFFECTS</h2>
       <p><a href="#eql">Lineal EQ</a> <a href="#comp">Compressor</a> <a href="#dist">Distortion</a> 
@@ -31,7 +30,7 @@
       <a href="#Looper">Looper</a> <a href="#MuTroMojo">MuTroMojo</a> <a href="#Echoverse">Echoverse</a> 
       <a href="#CoilCrafter">CoilCrafter</a> <a href="#ShelfBoost">ShelfBoost</a> <a href="#Vocoder">Vocoder</a> 
       <a href="#Sustainer">Sustainer</a> <a href="#Sequence">Sequence</a> <a href="#Shifter">Shifter</a> 
-      <a href="#StompBox">StompBox</a> <a href="#Reverbtron">Reverbtron</a> <a href="#Echotron">Echotron</a><br></p>
+      <a href="#StompBox">StompBox</a> <a href="#Reverbtron">Reverbtron</a> <a href="#Echotron">Echotron</a> <a href="#StereoHarm">StereoHarm</a> <a href="#CompBand">CompBand</a><br></p>
 
 <p>The program has many effects, you can select any
 of the available effects. Ten can be used simultaneously. It
@@ -50,8 +49,7 @@ generate any noise, or not should :-), what rakarrack does is amplify the
 external noises, then for better control parameters to reduce this noises is a good
 rule put the Noise Gate or the Expander at the first position on the chain.
 
-<p> More info about effects is available in our <a
-href="http://sourceforge.net/apps/mediawiki/rakarrack/index.php?title=Main_Page">wiki</a><p>
+</p><p> More info about effects is available in our <a href="http://sourceforge.net/apps/mediawiki/rakarrack/index.php?title=Main_Page">wiki</a></p><p>
 
 
 </p><p><img src="imagenes/order.jpg" alt="rakarrack Order Window" align="middle" border="1" height="284" width="400"></p>
@@ -1130,7 +1128,7 @@ frequencies on the M/S channels.</p>
       
       <p><b>Wet/Dry</b>:  Like many other filtering effects, it is not as simple as
       Wet/Dry.  Destructive interference happens between the wet and dry
-      signals to varying degrees as this slider is adjusted, so new &
+      signals to varying degrees as this slider is adjusted, so new &amp;
       interesting notch and comb filtering effects evolve as you move this
       from wet to dry.</p>
       
@@ -2245,4 +2243,55 @@ don't confuse it with other kinds of text files. </p>
 
 <p><a href="effects.html">Effects</a></p>
 <p><a href="help.html">Table of Contents</a></p>
+<h3><a name="StereoHarm"></a>StereoHarm</h3>
+<br>
+<table cellpadding="5" cellspacing="2">
+<tbody><tr><td style="vertical-align: top;">
+      <p><img style="width: 185px; height: 250px;" src="imagenes/sth.jpg" alt="rakarrack StereoHarm"></p>
+      </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Stereo Harm</p>
+      
+<p>This is a Stereo Harmonizer, two voices in stereo, the SEL and MIDI
+functions are same as Harmonizer, please read the Harmonizer
+help,&nbsp; in this effect Chrm L and Chrm R where added, that is
+Chroma, you can use Interval L/R set to "0" and modify this Chromas to
+reach a "Open" stereo chorus effect. This Chorma parameters can be used
+also in normal Mode. </p>
+<p>In SEL and MIDI modes Chroma parameter doesent has effect, because the frequency is selected internally by the
+program.</p>
+</td></tr></tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+<h3><a name="CompBand"></a>CompBand</h3>
+<br>
+
+<table cellpadding="5" cellspacing="2">
+
+<tbody><tr><td style="vertical-align: top;">
+      <p><img style="width: 185px; height: 250px;" src="imagenes/cpb.jpg" alt="rakarrack CompBand"></p>
+      </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>CompBand</p>
+<p>Is Four band Compressor, using the Compressor effect, the Wet/Dry
+parameter is included&nbsp; for&nbsp; mastering purposes,&nbsp;
+probably if you use with a single instrument you will want to hear the
+Wet. </p>
+
+<p>Four bands are availables&nbsp; L(Low), ML (Mid Low), MH (Mid High), H
+(High). You can control the ratio and threshold for each one of this
+bands.</p>
+<p>The Cross Sliders is to determine the frequency range of&nbsp; each band in the
+form:</p>
+
+<p>0-&gt; Cross1 = Low</p>
+<p>Cross1-&gt;Cross2 = Mid Low</p>
+<p>Cross2-&gt;Cross3 = High Low</p>
+<p>Cross3-&gt;26 KHz = High</p>
+</td></tr></tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+
 </body></html>

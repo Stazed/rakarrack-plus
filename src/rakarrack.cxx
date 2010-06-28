@@ -21500,6 +21500,59 @@ switch (i)
      shar_type->redraw();
      Chord(1);
      break;
+     case 368:
+     cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
+     cband_WD->redraw();
+     break;
+     case 369:
+     cband_gain->value(rkr->efx_CompBand->getpar(12));
+     cband_gain->redraw();
+     break;
+     case 370:
+     cband_Lratio->value(rkr->efx_CompBand->getpar(1));
+     cband_Lratio->redraw();
+     break;
+     case 371:
+     cband_MLratio->value(rkr->efx_CompBand->getpar(2));
+     cband_MLratio->redraw();
+     break;
+     case 372:
+     cband_MHratio->value(rkr->efx_CompBand->getpar(3));
+     cband_MHratio->redraw();
+     break;
+     case 373:
+     cband_Hratio->value(rkr->efx_CompBand->getpar(4));
+     cband_Hratio->redraw();
+     break;
+     case 374:
+     cband_Lthres->value(rkr->efx_CompBand->getpar(5));
+     cband_Lthres->redraw();
+     break;
+     case 375:
+     cband_MLthres->value(rkr->efx_CompBand->getpar(6));
+     cband_MLthres->redraw();
+     break;
+     case 376:
+     cband_MHthres->value(rkr->efx_CompBand->getpar(7));
+     cband_MHthres->redraw();
+     break;
+     case 377:
+     cband_Hthres->value(rkr->efx_CompBand->getpar(8));
+     cband_Hthres->redraw();
+     break;
+     case 378:
+     cband_cross1->value(rkr->efx_CompBand->getpar(9));
+     cband_cross1->redraw();
+     break;
+     case 379:
+     cband_cross2->value(rkr->efx_CompBand->getpar(10));
+     cband_cross2->redraw();
+     break;
+     case 380:
+     cband_cross3->value(rkr->efx_CompBand->getpar(11));
+     cband_cross3->redraw();
+     break;
+
      
       
 }

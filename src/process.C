@@ -364,7 +364,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 342;
+  NumParams= 355;
 
 {
    static const char *los_params[] = 
@@ -415,6 +415,19 @@ RKR::RKR ()
 "CoilCrafter Q1","289","33",
 "CoilCrafter Q2","291","33",
 "CoilCrafter Tone","287","33",
+"CompBand Cross 1","378","43",
+"CompBand Cross 2","379","43",
+"CompBand Cross 3","380","43",
+"CompBand Gain","369","43",
+"CompBand H Ratio","373","43",
+"CompBand H Thres","377","43",
+"CompBand L Ratio","370","43",
+"CompBand L Thres","374","43",
+"CompBand MH Ratio","372","43",
+"CompBand MH Thres","376","43",
+"CompBand ML Ratio","371","43",
+"CompBand ML Thres","375","43",
+"CompBand WD ","368","43",
 "Compressor A.Time","142","1",
 "Compressor Knee","145","1",
 "Compressor Output","147","1",

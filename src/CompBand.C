@@ -1,11 +1,17 @@
 /*
-  MBVvol.C - Vary Band Volumen effect
+
+  CompBand.C - 4 Bands Compressor
+
+  Using Compressor and AnalogFilters by other authors.
+
+  Based on artscompressor.cc by Matthias Kretz <kretz@kde.org>
+  Stefan Westerfeld <stefan@space.twc.de> 
+
+  Modified by Ryan Billing & Josep Andreu
   
   ZynAddSubFX - a software synthesizer
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
-
-  Modified for rakarrack by Josep Andreu
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
