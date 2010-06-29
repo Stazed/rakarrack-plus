@@ -11,6 +11,7 @@ static Fl_Widget *old;
 static float *spl; 
 static float *spr; 
 static int last_tecla; 
+static int drag; 
 static int sr; 
 static int ns; 
 static int at; 
@@ -18245,6 +18246,7 @@ Trigger->icon((char *)p);
 last_tecla=0;
 made=0;
 char tmp[256];
+drag=1000;
 nt=0;
 at=0;
 tta=0;
@@ -19014,7 +19016,29 @@ char temp2[128];
 num = (int) kk;
 
 
+if(drag!=1000)
+{
+ int en = search_but(Fl::event_x(),Fl::event_y());
+ if(en != 1000)
+ { 
+ rkr->Bank[0]=rkr->Bank[en];
+ rkr->Bank[en]=rkr->Bank[num];
+ rkr->Bank[num]=rkr->Bank[0];
+ Put_Loaded_Bank();
+ rkr->modified=1;
+ drag = 1000;
+}
+}
 
+
+if((Fl::event_is_click()==0)&&(Fl::event()==5)) 
+{
+drag = num; 
+return;
+}
+else drag = 1000;
+
+  
 if (Fl::event_button()==3)
 {
 
@@ -19081,6 +19105,7 @@ for (j=1; j<5; j++)
       butX->align(68|FL_ALIGN_INSIDE);
       butX->user_data((void*) (num));
       butX->value(0);
+      butX->when(FL_WHEN_CHANGED|FL_WHEN_RELEASE_ALWAYS);
       butX->callback((Fl_Callback *)preset_click);
       ob->add(butX);
 
@@ -22819,4 +22844,24 @@ if(tecla != last_tecla)
 
 
 }
+}
+
+int RKRGUI::search_but(int x, int y) {
+  for (int t=0; t<ob->children();t++)
+  {
+    Fl_Widget *w = ob->child(t);
+
+    if( (x>=w->x() ) && (x<=(w->x()+w->w())) && (y>=w->y() ) && (y<=(w->y()+w->h())))   
+    
+    { 
+      long long kn = (long long) w->user_data();
+      return((int)kn);
+    }
+
+
+
+  }
+  
+  
+return(1000);
 }

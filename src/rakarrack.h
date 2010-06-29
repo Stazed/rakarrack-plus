@@ -3956,5 +3956,6 @@ public:
   int Busca_Eff(int num);
   void Fill_Avail(int filter);
   void highlight();
+  int search_but(int x, int y);
 };
 #endif
