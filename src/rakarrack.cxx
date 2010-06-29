@@ -16491,7 +16491,7 @@ R average.");
       } // SliderW* shar_type
       SHAR->end();
     } // Fl_Group* SHAR
-    { COMPBAND = new Fl_Group(320, 211, 162, 184);
+    { COMPBAND = new Fl_Group(320, 211, 158, 184);
       COMPBAND->box(FL_UP_BOX);
       COMPBAND->color((Fl_Color)FL_FOREGROUND_COLOR);
       COMPBAND->selection_color((Fl_Color)FL_FOREGROUND_COLOR);

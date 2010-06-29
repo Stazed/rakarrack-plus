@@ -7078,8 +7078,8 @@ Chord(1);}
         }
       }
       Fl_Group COMPBAND {
-        user_data 1
-        xywh {320 211 162 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        user_data 1 selected
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button cband_activar {
           label On
@@ -9940,8 +9940,7 @@ rkr->Selected_Preset=num;
 w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
 Preset_Counter->do_callback();
-}} {selected
-    }
+}} {}
   }
   Function {make_window_banks()} {} {
     code {int i,j,x,y,num;
