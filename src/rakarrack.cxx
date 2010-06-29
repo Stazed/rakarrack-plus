@@ -6955,27 +6955,6 @@ void RKRGUI::cb_BankWindow(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_BankWindow_i(o,v);
 }
 
-void RKRGUI::cb_B_B1_i(Fl_Button*, void*) {
-  L_B1->do_callback();
-}
-void RKRGUI::cb_B_B1(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B1_i(o,v);
-}
-
-void RKRGUI::cb_B_B2_i(Fl_Button*, void*) {
-  L_B2->do_callback();
-}
-void RKRGUI::cb_B_B2(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B2_i(o,v);
-}
-
-void RKRGUI::cb_B_B3_i(Fl_Button*, void*) {
-  L_B3->do_callback();
-}
-void RKRGUI::cb_B_B3(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B3_i(o,v);
-}
-
 void RKRGUI::cb_NewB_i(Fl_Menu_*, void*) {
   rkr->New_Bank();
 Put_Loaded_Bank();
@@ -7084,6 +7063,27 @@ Fl_Menu_Item* RKRGUI::salirB = RKRGUI::menu_MenuB + 5;
 Fl_Menu_Item* RKRGUI::AyudaB = RKRGUI::menu_MenuB + 7;
 Fl_Menu_Item* RKRGUI::ContenidoB = RKRGUI::menu_MenuB + 8;
 Fl_Menu_Item* RKRGUI::Acerca_deB = RKRGUI::menu_MenuB + 9;
+
+void RKRGUI::cb_B_B1_i(Fl_Button*, void*) {
+  L_B1->do_callback();
+}
+void RKRGUI::cb_B_B1(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B1_i(o,v);
+}
+
+void RKRGUI::cb_B_B2_i(Fl_Button*, void*) {
+  L_B2->do_callback();
+}
+void RKRGUI::cb_B_B2(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B2_i(o,v);
+}
+
+void RKRGUI::cb_B_B3_i(Fl_Button*, void*) {
+  L_B3->do_callback();
+}
+void RKRGUI::cb_B_B3(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B3_i(o,v);
+}
 
 void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
   save_stat(2);
@@ -17197,6 +17197,15 @@ R average.");
     BankWindow->callback((Fl_Callback*)cb_BankWindow, (void*)(this));
     { Fondo3 = new Fl_Box(1, 1, 800, 600);
     } // Fl_Box* Fondo3
+    { MenuB = new Fl_Menu_Bar(0, 0, 253, 20);
+      MenuB->box(FL_NO_BOX);
+      MenuB->color((Fl_Color)55);
+      MenuB->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
+      MenuB->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      MenuB->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      MenuB->align(96|FL_ALIGN_INSIDE);
+      MenuB->menu(menu_MenuB);
+    } // Fl_Menu_Bar* MenuB
     { B_B1 = new Fl_Button(348, 14, 32, 24, "1");
       B_B1->color((Fl_Color)62);
       B_B1->labelsize(10);
@@ -17212,16 +17221,7 @@ R average.");
       B_B3->labelsize(10);
       B_B3->callback((Fl_Callback*)cb_B_B3, (void*)(77));
     } // Fl_Button* B_B3
-    { MenuB = new Fl_Menu_Bar(0, 0, 253, 20);
-      MenuB->box(FL_NO_BOX);
-      MenuB->color((Fl_Color)55);
-      MenuB->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
-      MenuB->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      MenuB->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      MenuB->align(96|FL_ALIGN_INSIDE);
-      MenuB->menu(menu_MenuB);
-    } // Fl_Menu_Bar* MenuB
-    { ob = new Fl_Group(0, 20, 800, 580);
+    { ob = new Fl_Group(0, 60, 800, 540);
       ob->labelsize(18);
       ob->end();
     } // Fl_Group* ob
@@ -19085,7 +19085,7 @@ elh=32*BankWindow->h()/600;
 
 ob->begin();
 
-x=40;y=10;
+x=40;y=40;
 num=1;
 
 for (i=1;i<16;i++)

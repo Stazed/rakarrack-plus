@@ -835,7 +835,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -7078,7 +7079,7 @@ Chord(1);}
         }
       }
       Fl_Group COMPBAND {
-        user_data 1 selected
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button cband_activar {
@@ -7743,28 +7744,10 @@ UpdateTGUI();
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1478 64 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {1543 307 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
-      }
-      Fl_Button B_B1 {
-        label 1
-        user_data 77
-        callback {L_B1->do_callback();}
-        xywh {348 14 32 24} color 62 labelsize 10
-      }
-      Fl_Button B_B2 {
-        label 2
-        user_data 77
-        callback {L_B2->do_callback();}
-        xywh {388 14 32 24} color 62 labelsize 10
-      }
-      Fl_Button B_B3 {
-        label 3
-        user_data 77
-        callback {L_B3->do_callback();}
-        xywh {428 14 32 24} color 62 labelsize 10
       }
       Fl_Menu_Bar MenuB {
         xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
@@ -7851,8 +7834,26 @@ put_icon(AboutWin);}
           }
         }
       }
+      Fl_Button B_B1 {
+        label 1
+        user_data 77
+        callback {L_B1->do_callback();}
+        xywh {348 14 32 24} color 62 labelsize 10
+      }
+      Fl_Button B_B2 {
+        label 2
+        user_data 77
+        callback {L_B2->do_callback();}
+        xywh {388 14 32 24} color 62 labelsize 10
+      }
+      Fl_Button B_B3 {
+        label 3
+        user_data 77
+        callback {L_B3->do_callback();}
+        xywh {428 14 32 24} color 62 labelsize 10
+      }
       Fl_Group ob {
-        xywh {0 20 800 580} labelsize 18
+        xywh {0 60 800 540} labelsize 18
       } {}
     }
     Fl_Window Order {
@@ -9942,7 +9943,8 @@ Preset_Counter->value(num);
 Preset_Counter->do_callback();
 }} {}
   }
-  Function {make_window_banks()} {} {
+  Function {make_window_banks()} {open
+  } {
     code {int i,j,x,y,num;
 int elw,elh;
 
@@ -9953,7 +9955,7 @@ elh=32*BankWindow->h()/600;
 
 ob->begin();
 
-x=40;y=10;
+x=40;y=40;
 num=1;
 
 for (i=1;i<16;i++)
@@ -9994,7 +9996,8 @@ B_B2->color(fore_color);
 B_B3->color(fore_color);
 
 
-light_preset(rkr->Selected_Preset);} {}
+light_preset(rkr->Selected_Preset);} {selected
+    }
   }
   Function {reordena()} {} {
     code {int i,j,k,t;
