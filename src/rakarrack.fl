@@ -1283,7 +1283,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -7741,13 +7741,31 @@ UpdateTGUI();
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1342 165 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {1478 64 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuB {open
-        xywh {0 0 800 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
+      Fl_Button B_B1 {
+        label 1
+        user_data 77
+        callback {L_B1->do_callback();}
+        xywh {348 14 32 24} color 62 labelsize 10
+      }
+      Fl_Button B_B2 {
+        label 2
+        user_data 77
+        callback {L_B2->do_callback();}
+        xywh {388 14 32 24} color 62 labelsize 10
+      }
+      Fl_Button B_B3 {
+        label 3
+        user_data 77
+        callback {L_B3->do_callback();}
+        xywh {428 14 32 24} color 62 labelsize 10
+      }
+      Fl_Menu_Bar MenuB {
+        xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
           label {&File} open
@@ -9175,6 +9193,14 @@ for (int t=0; t<STabs->children();t++)
    }
   }
 
+for (int t=0; t<BankWindow->children();t++)
+  {
+    Fl_Widget *w = BankWindow->child(t);
+
+     w->labelcolor(label_color);  
+  }  
+
+
 for (int t=0; t<ob->children();t++)
   {
     Fl_Widget *w = ob->child(t);
@@ -9227,6 +9253,9 @@ for (int t=0; t<ob->children();t++)
     if (temp > 0) w->color(bcolor); 
   }
 
+B_B1->color(bcolor);
+B_B2->color(bcolor);
+B_B3->color(bcolor);
 
 
 }
@@ -9841,7 +9870,7 @@ Fl::repeat_timeout(.04,tick,v);} {}
   } {
     code {((RKRGUI*)(o->parent()->parent()->user_data()))->preset_click_i(o,v);} {}
   }
-  Function {preset_click_i(Fl_Button* o, void*)} {C return_type {inline void}
+  Function {preset_click_i(Fl_Button* o, void*)} {selected C return_type {inline void}
   } {
     code {int ok;
 int num; 
@@ -9932,8 +9961,12 @@ num++;
 
 
 ob->end();
-
 made=1;
+
+B_B1->color(fore_color);
+B_B2->color(fore_color);
+B_B3->color(fore_color);
+
 
 light_preset(rkr->Selected_Preset);} {}
   }

@@ -3298,6 +3298,21 @@ private:
   static void cb_BankWindow(Fl_Double_Window*, void*);
 public:
   Fl_Box *Fondo3;
+  Fl_Button *B_B1;
+private:
+  void cb_B_B1_i(Fl_Button*, void*);
+  static void cb_B_B1(Fl_Button*, void*);
+public:
+  Fl_Button *B_B2;
+private:
+  void cb_B_B2_i(Fl_Button*, void*);
+  static void cb_B_B2(Fl_Button*, void*);
+public:
+  Fl_Button *B_B3;
+private:
+  void cb_B_B3_i(Fl_Button*, void*);
+  static void cb_B_B3(Fl_Button*, void*);
+public:
   Fl_Menu_Bar *MenuB;
   static Fl_Menu_Item menu_MenuB[];
   static Fl_Menu_Item *ArchivoB;

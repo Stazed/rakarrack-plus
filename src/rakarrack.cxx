@@ -6954,6 +6954,27 @@ void RKRGUI::cb_BankWindow(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_BankWindow_i(o,v);
 }
 
+void RKRGUI::cb_B_B1_i(Fl_Button*, void*) {
+  L_B1->do_callback();
+}
+void RKRGUI::cb_B_B1(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B1_i(o,v);
+}
+
+void RKRGUI::cb_B_B2_i(Fl_Button*, void*) {
+  L_B2->do_callback();
+}
+void RKRGUI::cb_B_B2(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B2_i(o,v);
+}
+
+void RKRGUI::cb_B_B3_i(Fl_Button*, void*) {
+  L_B3->do_callback();
+}
+void RKRGUI::cb_B_B3(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B3_i(o,v);
+}
+
 void RKRGUI::cb_NewB_i(Fl_Menu_*, void*) {
   rkr->New_Bank();
 Put_Loaded_Bank();
@@ -17175,7 +17196,22 @@ R average.");
     BankWindow->callback((Fl_Callback*)cb_BankWindow, (void*)(this));
     { Fondo3 = new Fl_Box(1, 1, 800, 600);
     } // Fl_Box* Fondo3
-    { MenuB = new Fl_Menu_Bar(0, 0, 800, 20);
+    { B_B1 = new Fl_Button(348, 14, 32, 24, "1");
+      B_B1->color((Fl_Color)62);
+      B_B1->labelsize(10);
+      B_B1->callback((Fl_Callback*)cb_B_B1, (void*)(77));
+    } // Fl_Button* B_B1
+    { B_B2 = new Fl_Button(388, 14, 32, 24, "2");
+      B_B2->color((Fl_Color)62);
+      B_B2->labelsize(10);
+      B_B2->callback((Fl_Callback*)cb_B_B2, (void*)(77));
+    } // Fl_Button* B_B2
+    { B_B3 = new Fl_Button(428, 14, 32, 24, "3");
+      B_B3->color((Fl_Color)62);
+      B_B3->labelsize(10);
+      B_B3->callback((Fl_Callback*)cb_B_B3, (void*)(77));
+    } // Fl_Button* B_B3
+    { MenuB = new Fl_Menu_Bar(0, 0, 253, 20);
       MenuB->box(FL_NO_BOX);
       MenuB->color((Fl_Color)55);
       MenuB->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -18283,6 +18319,14 @@ for (int t=0; t<STabs->children();t++)
    }
   }
 
+for (int t=0; t<BankWindow->children();t++)
+  {
+    Fl_Widget *w = BankWindow->child(t);
+
+     w->labelcolor(label_color);  
+  }  
+
+
 for (int t=0; t<ob->children();t++)
   {
     Fl_Widget *w = ob->child(t);
@@ -18336,6 +18380,9 @@ for (int t=0; t<ob->children();t++)
     if (temp > 0) w->color(bcolor); 
   }
 
+B_B1->color(bcolor);
+B_B2->color(bcolor);
+B_B3->color(bcolor);
 
 
 }
@@ -19047,8 +19094,12 @@ num++;
 
 
 ob->end();
-
 made=1;
+
+B_B1->color(fore_color);
+B_B2->color(fore_color);
+B_B3->color(fore_color);
+
 
 light_preset(rkr->Selected_Preset);
 }
