@@ -6583,8 +6583,12 @@ void RKRGUI::cb_otrem_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_otrem_preset[] = {
- {"Tremolo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tremolo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fast", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Trem 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hard Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Soft Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hard Ramp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
