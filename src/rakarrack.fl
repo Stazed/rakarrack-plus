@@ -7596,6 +7596,7 @@ else
 if(!made) make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
+ScanDir();
 }
 else
 BankWindow->hide();}
@@ -7945,9 +7946,31 @@ put_icon(AboutWin);}
         xywh {378 14 32 24} color 62 labelsize 10
       }
       Fl_Choice CH_UB {
-        label {User Banks} open
-        xywh {549 14 117 24} down_box BORDER_BOX
-      } {}
+        label {User Banks       }
+        callback {const char *chname;
+
+const Fl_Menu_Item *p, *m;  
+m = o->menu();
+p=m->next((int)o->value());
+chname=p->label();
+
+is_modified();
+char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s%s%s", rkr->UDirFilename,chname,".rkrb");
+
+int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+}} selected
+        xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
+      } {
+        MenuItem {} {
+          xywh {0 0 36 21}
+        }
+      }
       Fl_Group ob {
         xywh {0 60 800 540} labelsize 18
       } {}
@@ -8105,19 +8128,19 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1422 23 640 528} type Double color 4 hide
+      xywh {1415 23 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
           label Look
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -8807,7 +8830,7 @@ Fl_Tooltip::enable(rkr->ena_tool);}
         Fl_Group BANK_SET {
           label Bank
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo11 {
             xywh {5 26 630 502}
@@ -8826,6 +8849,21 @@ filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
 strcpy(rkr->BankFilename,filename);}
             xywh {415 60 65 20}
+          }
+          Fl_File_Input Udir {
+            label {User Directory}
+            xywh {20 102 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+          }
+          Fl_Button UD_Browser {
+            label Browse
+            user_data 77
+            callback {char *dir;
+dir=fl_dir_chooser("Browse:",NULL,0);
+if (dir==NULL) return;
+Udir->value(dir);
+strcpy(rkr->UDirFilename,dir);
+ScanDir();}
+            xywh {415 112 65 20}
           }
         }
       }
@@ -9364,8 +9402,7 @@ CH_UB->color(bcolor);
 
  fore_color= bcolor;
  aux_source->color(bcolor);
- Label_Color_Change(label_color);} {selected
-    }
+ Label_Color_Change(label_color);} {}
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
@@ -9476,6 +9513,7 @@ rakarrack.get(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway,0);
 if(!rkr->MIDIway) ML_Menu->deactivate();
 
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
+rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
 rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
@@ -9681,6 +9719,8 @@ rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
 rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
+rakarrack.set(rkr->PrefNom("User Directory"),rkr->UDirFilename);
+
 rakarrack.set(rkr->PrefNom("Enable Background Image"),rkr->EnableBackgroundImage);
 rakarrack.set(rkr->PrefNom("Background Image"),rkr->BackgroundImage);
 rakarrack.set(rkr->PrefNom("Auto Connect MIDI IN"),rkr->aconnect_MI);
@@ -10914,6 +10954,7 @@ rkr->m_displayed = 0;
 Enable_Back->value(rkr->EnableBackgroundImage);
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
+Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
 Filter_DC->value(rkr->DC_Offset);
@@ -13818,5 +13859,47 @@ if(tecla != last_tecla)
   
   
 return(1000);} {}
+  }
+  Function {ScanDir()} {} {
+    code {char nombank[256];
+char nombre[64];
+
+DIR *dir=opendir(rkr->UDirFilename);
+
+if (dir==NULL) return;
+
+Fl_Menu_Item *m = menu_CH_UB;
+Fl_Menu_ *n = (Fl_Menu_ *) m;
+
+n->copy(menu_CH_UB,0);
+
+for(int i=0; i<n->size(); i++) n->remove(i);
+
+struct dirent *fs;
+
+while ((fs=readdir(dir)))
+{
+
+if (strstr(fs->d_name,".rkrb")!=NULL)              
+  { 
+    memset(nombank,0,sizeof(nombank));
+    sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
+    if(rkr->CheckOldBank(nombank)==0)
+    {
+      memset(nombre,0,sizeof(nombre));
+      strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
+      n->add(nombre,"", CH_UB->callback(),0,0);
+   
+    }
+  
+   }
+
+   
+}
+ 
+ 
+closedir(dir);
+
+CH_UB->menu(n->menu());} {}
   }
 } 

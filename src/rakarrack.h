@@ -3405,6 +3405,11 @@ private:
   static void cb_B_B4(Fl_Button*, void*);
 public:
   Fl_Choice *CH_UB;
+private:
+  void cb_CH_UB_i(Fl_Choice*, void*);
+  static void cb_CH_UB(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_CH_UB[];
+public:
   Fl_Group *ob;
   Fl_Double_Window *Order;
 private:
@@ -3809,6 +3814,12 @@ private:
   void cb_BF_Browser_i(Fl_Button*, void*);
   static void cb_BF_Browser(Fl_Button*, void*);
 public:
+  Fl_File_Input *Udir;
+  Fl_Button *UD_Browser;
+private:
+  void cb_UD_Browser_i(Fl_Button*, void*);
+  static void cb_UD_Browser(Fl_Button*, void*);
+public:
   Fl_Double_Window *MIDILearn;
 private:
   void cb_MIDILearn_i(Fl_Double_Window*, void*);
@@ -4010,5 +4021,6 @@ public:
   void Fill_Avail(int filter);
   void highlight();
   int search_but(int x, int y);
+  void ScanDir();
 };
 #endif

@@ -93,6 +93,7 @@
 #include "config.h"
 #include <pthread.h>
 #include <signal.h>
+#include <dirent.h>
 #include <sys/time.h>
 #include <alsa/asoundlib.h>
 #include <X11/xpm.h>
@@ -585,6 +586,7 @@ public:
 
   char MID[128];
   char BankFilename[128];
+  char UDirFilename[128];
   char BackgroundImage[256];
 
   struct Effects_Names
