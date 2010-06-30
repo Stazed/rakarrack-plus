@@ -835,7 +835,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -7250,7 +7251,7 @@ otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Hard Ramp} selected
+            label {Hard Ramp}
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -8144,7 +8145,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1415 23 640 528} type Double color 4 hide
+      xywh {1401 23 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -8312,8 +8313,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -8457,6 +8458,49 @@ Show_Next_Time();}
             MenuItem {} {
               label 32
               xywh {10 10 36 21} labelsize 10
+            }
+          }
+          Fl_Choice Ste_Qual {
+            label {StereoHarm Quality}
+            callback {int i = (int) o->value();
+
+switch(i)
+{
+     case 0:
+       rkr->SteQual=4;
+       break;
+     case 1:
+       rkr->SteQual=8;
+       break;
+     case 2:
+       rkr->SteQual=16;	
+	break;
+     case 3:
+       rkr->SteQual=32;	
+	break;
+
+		
+}
+
+
+Show_Next_Time();}
+            xywh {296 202 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          } {
+            MenuItem {} {
+              label 4
+              xywh {30 30 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label 8
+              xywh {30 30 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label 16
+              xywh {20 20 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label 32
+              xywh {20 20 36 21} labelsize 10
             }
           }
           Fl_Choice Voc_Bands {
@@ -8665,10 +8709,52 @@ Show_Next_Time();} open
             xywh {343 398 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
+          Fl_Choice Voc_Downsample {
+            label {Vocoder Downsample      }
+            callback {rkr->Voc_Down=(int)o->value();
+Show_Next_Time();} open
+            xywh {145 422 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Har_Downsample);}
+          } {}
+          Fl_Choice Voc_Down_Qua {
+            label Down
+            callback {rkr->Voc_D_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {250 422 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Voc_Up_Qua {
+            label Up
+            callback {rkr->Voc_U_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {343 422 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Ste_Downsample {
+            label {StereoHarm Downsample}
+            callback {rkr->Ste_Down=(int)o->value();
+Show_Next_Time();} open
+            xywh {145 447 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Har_Downsample);}
+          } {}
+          Fl_Choice Ste_Down_Qua {
+            label Down
+            callback {rkr->Ste_D_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {250 447 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
+          Fl_Choice Ste_Up_Qua {
+            label Up
+            callback {rkr->Ste_U_Q=(int)o->value();
+Show_Next_Time();} open
+            xywh {343 447 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            code0 {o->menu(menu_Upr_Qual);}
+          } {}
           Fl_Choice Wave_Amo {
             label {Waveshape Resampling   }
             callback {Show_Next_Time();}
-            xywh {145 457 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {145 497 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
               label Normal
@@ -8695,35 +8781,14 @@ Show_Next_Time();} open
             label Down
             callback {Wave_down_q=(int)o->value();
 Show_Next_Time();}
-            xywh {252 457 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {252 497 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
           Fl_Choice Wave_Up_Qua {
             label Up
             callback {Wave_up_q=(int)o->value();
 Show_Next_Time();}
-            xywh {345 457 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Voc_Downsample {
-            label {Vocoder Downsample      }
-            callback {rkr->Voc_Down=(int)o->value();
-Show_Next_Time();} open
-            xywh {145 422 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Har_Downsample);}
-          } {}
-          Fl_Choice Voc_Down_Qua {
-            label Down
-            callback {rkr->Voc_D_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {250 422 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Voc_Up_Qua {
-            label Up
-            callback {rkr->Voc_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 422 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {345 497 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
         }
@@ -8846,7 +8911,7 @@ Fl_Tooltip::enable(rkr->ena_tool);}
         Fl_Group BANK_SET {
           label Bank
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo11 {
             xywh {5 26 630 502}
@@ -9714,6 +9779,9 @@ rakarrack.set(rkr->PrefNom("Shifter Down Quality"),rkr->Shi_D_Q);
 rakarrack.set(rkr->PrefNom("Vocoder Downsample"),rkr->Voc_Down);
 rakarrack.set(rkr->PrefNom("Vocoder Up Quality"),rkr->Voc_U_Q);
 rakarrack.set(rkr->PrefNom("Vocoder Down Quality"),rkr->Voc_D_Q);
+rakarrack.set(rkr->PrefNom("StereoHarm Downsample"),rkr->Ste_Down);
+rakarrack.set(rkr->PrefNom("StereoHarm Up Quality"),rkr->Ste_U_Q);
+rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"),rkr->Ste_D_Q);
 
 rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
@@ -9756,6 +9824,7 @@ rakarrack.set(rkr->PrefNom("MIDI IN Device"),temp);
 rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
 rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
+rakarrack.set(rkr->PrefNom("StereoHarm Quality"),rkr->SteQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
 rakarrack.set(rkr->PrefNom("Disable Warnings"),rkr->mess_dis);
 rakarrack.set(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool);
@@ -9800,7 +9869,8 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -10993,7 +11063,9 @@ Shi_Up_Qua->value(rkr->Shi_U_Q);
 Voc_Downsample->value(rkr->Voc_Down);
 Voc_Down_Qua->value(rkr->Voc_D_Q);
 Voc_Up_Qua->value(rkr->Voc_U_Q);
-
+Ste_Downsample->value(rkr->Ste_Down);
+Ste_Down_Qua->value(rkr->Ste_D_Q);
+Ste_Up_Qua->value(rkr->Ste_U_Q);
 Wave_Amo->value(Wave_res_amount);
 Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
@@ -11060,6 +11132,29 @@ switch(rkr->HarQual)
 
 
 }  
+
+switch(rkr->SteQual)
+{
+  case 4:
+  Ste_Qual->value(0);
+  break;
+  
+  case 8:
+  Ste_Qual->value(1);
+  break;
+  
+  case 16:
+  Ste_Qual->value(2);
+  break;
+
+  case 32:
+  Ste_Qual->value(3);
+  break;
+
+
+}  
+
+
 
 if (rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
