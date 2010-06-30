@@ -44,6 +44,10 @@ alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
 alphar = alphal;
 lstep = 0.0f;
 rstep = 0.0f;
+Pdepth = 127;
+Ppanning = 64;
+lpanning = 1.0f;
+rpanning = 1.0f;
 fdepth = 1.0f;  
 oldgl = 0.0f;
 oldgr = 0.0f;
@@ -118,8 +122,8 @@ Opticaltrem::out (float *smpsl, float *smpsr)
     fxr = R1/(fxr + R1);  
     
     //Modulate input signal
-    efxoutl[i] = 1.2f*fxl*smpsl[i];
-    efxoutr[i] = 1.2f*fxr*smpsr[i];     
+    efxoutl[i] = lpanning*fxl*smpsl[i];
+    efxoutr[i] = rpanning*fxr*smpsr[i];     
     
     gl += ldiff;
     gr += rdiff;  //linear interpolation of LFO 
@@ -128,26 +132,38 @@ Opticaltrem::out (float *smpsl, float *smpsr)
 
 };
 
-
+void
+Opticaltrem::setpanning (int value)
+{
+  Ppanning = value;
+  rpanning = ((float)Ppanning) / 64.0f;
+  lpanning = 2.0f - rpanning;
+  lpanning = 10.0f * powf(lpanning, 4);
+  rpanning = 10.0f * powf(rpanning, 4);
+  lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
+  rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
+  lpanning *= 1.3f;
+  rpanning *= 1.3f; 
+};
 
 void
 Opticaltrem::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 5;
+  const int PRESET_SIZE = 6;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Fast
-    {127, 260, 10, 0, 64},
+    {127, 260, 10, 0, 64, 64},
     //trem2
-    {45, 140, 10, 0, 64},
+    {45, 140, 10, 0, 64, 64},
     //hard pan
-    {127, 120, 10, 5, 0},
+    {127, 120, 10, 5, 0, 64},
     //soft pan
-    {45, 240, 10, 1, 16},    
+    {45, 240, 10, 1, 16, 64},    
     //ramp down
-    {65, 200, 0, 3, 32},
+    {65, 200, 0, 3, 32, 64},
     //hard ramp
-    {127, 480, 0, 3, 32}  
+    {127, 480, 0, 3, 32, 64}  
     
   };
   for (int n = 0; n < PRESET_SIZE; n++)
@@ -163,8 +179,8 @@ Opticaltrem::changepar (int npar, int value)
     {
 
     case 0:
-      depth = value;
-      fdepth = 0.5f + ((float) depth)/254.0f;    
+      Pdepth = value;
+      fdepth = 0.5f + ((float) Pdepth)/254.0f;    
       break;
     case 1:
       lfo.Pfreq = value;
@@ -183,6 +199,7 @@ Opticaltrem::changepar (int npar, int value)
       lfo.updateparams ();
       break;
     case 5: // pan
+    setpanning(value);
       break;  
     }
    

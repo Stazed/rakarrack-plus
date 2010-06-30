@@ -48,7 +48,8 @@ public:
 
 
 private:
-  int depth;
+  int Pdepth;
+  int Ppanning
   
   float Ra, Rb, R1, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
   float lstep,rstep;
