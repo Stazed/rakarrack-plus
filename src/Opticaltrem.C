@@ -34,9 +34,9 @@ Opticaltrem::Opticaltrem (float * efxoutl_, float * efxoutr_)
 R1 = 2700.0f;	   //tremolo circuit series resistance 
 Ra = 1000000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
-Rb = 300;         //Cds cell full illumination
-b = exp(logf(Ra)/logf(Rb)) - CNST_E;
-dTC = 0.06f;
+Rb = 300.0f;         //Cds cell full illumination
+b = exp(Ra/logf(Rb)) - CNST_E;
+dTC = 0.03f;
 dRCl = dTC;
 dRCr = dTC;   //Right & left channel dynamic time contsants
 minTC = logf(0.005f/dTC);
@@ -134,12 +134,21 @@ void
 Opticaltrem::setpreset (int npreset)
 {
   const int PRESET_SIZE = 5;
-  const int NUM_PRESETS = 2;
+  const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //trem1
-    {127, 60, 14, 0, 64},
+    //Fast
+    {127, 260, 10, 0, 64},
     //trem2
-    {64, 60, 14, 0, 64}
+    {45, 140, 10, 0, 64},
+    //hard pan
+    {127, 120, 10, 5, 0},
+    //soft pan
+    {45, 240, 10, 1, 16},    
+    //ramp down
+    {65, 200, 0, 3, 32},
+    //hard ramp
+    {127, 480, 0, 3, 32}  
+    
   };
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
@@ -155,7 +164,7 @@ Opticaltrem::changepar (int npar, int value)
 
     case 0:
       depth = value;
-      fdepth = ((float) depth)/127.0f;    
+      fdepth = 0.5f + ((float) depth)/254.0f;    
       break;
     case 1:
       lfo.Pfreq = value;
