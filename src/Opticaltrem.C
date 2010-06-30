@@ -40,7 +40,7 @@ dTC = 0.06f;
 dRCl = dTC;
 dRCr = dTC;   //Right & left channel dynamic time contsants
 minTC = logf(0.005f/dTC);
-alphal = 1.0f - cSAMPLE_RATE/(dRC + cSAMPLE_RATE);
+alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
 alphar = alphal;
 lstep = 0.0f;
 rstep = 0.0f;
@@ -49,8 +49,8 @@ oldgl = 0.0f;
 oldgr = 0.0f;
 gl = 0.0f;
 gr = 0.0f;
-
 cperiod = 1.0f/fPERIOD;
+
 }
 
 Opticaltrem::~Opticaltrem ()
@@ -73,11 +73,12 @@ Opticaltrem::out (float *smpsl, float *smpsr)
   float lfol, lfor, xl, xr, fxl, fxr;
   float rdiff, ldiff;
   lfo.effectlfoout (&lfol, &lfor);
+
   lfol = 1.0f - lfol*fdepth;
   lfor = 1.0f - lfor*fdepth;   
   
    if (lfol > 1.0f)
-    lfol = 1.0f_;
+    lfol = 1.0f;
   else if (lfol < 0.0f)
     lfol = 0.0f;
   if (lfor > 1.0f)
@@ -138,7 +139,7 @@ Opticaltrem::setpreset (int npreset)
     //trem1
     {127, 60, 14, 0, 64},
     //trem2
-    {64, 60, 14, 0, 64},
+    {64, 60, 14, 0, 64}
   };
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
@@ -149,12 +150,12 @@ void
 Opticaltrem::changepar (int npar, int value)
 {
 
-  switch (np)
+  switch (npar)
     {
 
     case 0:
-     	depth = value;
-	fdepth = ((float) depth)/127.0f;;    
+      depth = value;
+      fdepth = ((float) depth)/127.0f;    
       break;
     case 1:
       lfo.Pfreq = value;
@@ -172,7 +173,8 @@ Opticaltrem::changepar (int npar, int value)
       lfo.Pstereo = value;
       lfo.updateparams ();
       break;
-      
+    case 5: // pan
+      break;  
     }
    
 };
@@ -184,7 +186,6 @@ Opticaltrem::getpar (int npar)
   switch (npar)
 
     {
-
     case 0:
       return (depth);
       break;
@@ -200,33 +201,12 @@ Opticaltrem::getpar (int npar)
     case 4:
       return (lfo.Pstereo);
       break;
+    case 5:
+      return (0); //pan
 
     }
 
   return (0);
-
-};
-
-
-void
-Opticaltrem::Opticaltrem_Change_Preset (int npreset)
-{
-
-  const int PRESET_SIZE = 10;
-  const int NUM_PRESETS = 2;
-  int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //2:1
-    {-30, 2, -6, 20, 120, 1, 0, 0, 0},
-    //4:1
-    {-26, 4, -8, 20, 120, 1, 10, 0, 0},
-
-
-
-  };
-
-  for (int n = 1; n < PRESET_SIZE; n++)
-    changepar (n , presets[npreset][n-1]);
-
 
 };
 

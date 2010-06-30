@@ -6558,6 +6558,78 @@ void RKRGUI::cb_cband_cross3(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_cross3_i(o,v);
 }
 
+void RKRGUI::cb_otrem_activar_i(Fl_Light_Button* o, void*) {
+  rkr->Opticaltrem_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Opticaltrem->cleanup();
+findpos(44,(int)o->value());
+}
+void RKRGUI::cb_otrem_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_activar_i(o,v);
+}
+
+void RKRGUI::cb_otrem_preset_i(Fl_Choice* o, void* v) {
+  long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Opticaltrem->setpreset((int)o->value());
+otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
+otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
+otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
+otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
+otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
+}
+void RKRGUI::cb_otrem_preset(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_preset_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_otrem_preset[] = {
+ {"Tremolo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Tremolo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_otrem_dpth_i(SliderW* o, void*) {
+  rkr->efx_Opticaltrem->changepar(0,(int)o->value());
+}
+void RKRGUI::cb_otrem_dpth(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_dpth_i(o,v);
+}
+
+void RKRGUI::cb_otrem_freq_i(SliderW* o, void*) {
+  rkr->efx_Opticaltrem->changepar(1,(int)o->value());
+}
+void RKRGUI::cb_otrem_freq(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_freq_i(o,v);
+}
+
+void RKRGUI::cb_otrem_rnd_i(SliderW* o, void*) {
+  rkr->efx_Opticaltrem->changepar(2,(int)o->value());
+}
+void RKRGUI::cb_otrem_rnd(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_rnd_i(o,v);
+}
+
+void RKRGUI::cb_otrem_lfotype_i(Fl_Choice* o, void*) {
+  rkr->efx_Opticaltrem->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_otrem_lfotype(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_lfotype_i(o,v);
+}
+
+void RKRGUI::cb_otrem_stdf_i(SliderW* o, void*) {
+  rkr->efx_Opticaltrem->changepar(4,(int)o->value());
+}
+void RKRGUI::cb_otrem_stdf(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_stdf_i(o,v);
+}
+
+void RKRGUI::cb_otrem_pan_i(SliderW* o, void*) {
+  rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));
+}
+void RKRGUI::cb_otrem_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_pan_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -16744,6 +16816,128 @@ R average.");
       } // SliderW* cband_cross3
       COMPBAND->end();
     } // Fl_Group* COMPBAND
+    { OTREM = new Fl_Group(320, 211, 158, 184);
+      OTREM->box(FL_UP_BOX);
+      OTREM->color((Fl_Color)FL_FOREGROUND_COLOR);
+      OTREM->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      OTREM->labelfont(1);
+      OTREM->user_data((void*)(1));
+      OTREM->align(96|FL_ALIGN_INSIDE);
+      OTREM->hide();
+      { otrem_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+        otrem_activar->shortcut(0x38);
+        otrem_activar->color((Fl_Color)62);
+        otrem_activar->selection_color((Fl_Color)1);
+        otrem_activar->labelsize(10);
+        otrem_activar->callback((Fl_Callback*)cb_otrem_activar, (void*)(2));
+        otrem_activar->align(68|FL_ALIGN_INSIDE);
+        otrem_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* otrem_activar
+      { otrem_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+        otrem_preset->down_box(FL_BORDER_BOX);
+        otrem_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        otrem_preset->labelsize(10);
+        otrem_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_preset->textsize(10);
+        otrem_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_preset->callback((Fl_Callback*)cb_otrem_preset, (void*)(12));
+        otrem_preset->when(FL_WHEN_RELEASE_ALWAYS);
+        otrem_preset->menu(menu_otrem_preset);
+      } // Fl_Choice* otrem_preset
+      { otrem_dpth = new SliderW(372, 244, 100, 10, "Depth");
+        otrem_dpth->type(5);
+        otrem_dpth->box(FL_FLAT_BOX);
+        otrem_dpth->color((Fl_Color)178);
+        otrem_dpth->selection_color((Fl_Color)62);
+        otrem_dpth->labeltype(FL_NORMAL_LABEL);
+        otrem_dpth->labelfont(0);
+        otrem_dpth->labelsize(10);
+        otrem_dpth->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_dpth->maximum(127);
+        otrem_dpth->step(1);
+        otrem_dpth->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_dpth->callback((Fl_Callback*)cb_otrem_dpth);
+        otrem_dpth->align(FL_ALIGN_LEFT);
+        otrem_dpth->when(FL_WHEN_CHANGED);
+      } // SliderW* otrem_dpth
+      { otrem_freq = new SliderW(372, 264, 100, 10, "Tempo");
+        otrem_freq->type(5);
+        otrem_freq->box(FL_FLAT_BOX);
+        otrem_freq->color((Fl_Color)178);
+        otrem_freq->selection_color((Fl_Color)62);
+        otrem_freq->labeltype(FL_NORMAL_LABEL);
+        otrem_freq->labelfont(0);
+        otrem_freq->labelsize(10);
+        otrem_freq->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_freq->minimum(1);
+        otrem_freq->maximum(600);
+        otrem_freq->step(1);
+        otrem_freq->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_freq->callback((Fl_Callback*)cb_otrem_freq);
+        otrem_freq->align(FL_ALIGN_LEFT);
+        otrem_freq->when(FL_WHEN_CHANGED);
+      } // SliderW* otrem_freq
+      { otrem_rnd = new SliderW(372, 284, 100, 10, "Rnd");
+        otrem_rnd->type(5);
+        otrem_rnd->box(FL_FLAT_BOX);
+        otrem_rnd->color((Fl_Color)178);
+        otrem_rnd->selection_color((Fl_Color)62);
+        otrem_rnd->labeltype(FL_NORMAL_LABEL);
+        otrem_rnd->labelfont(0);
+        otrem_rnd->labelsize(10);
+        otrem_rnd->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_rnd->maximum(127);
+        otrem_rnd->step(1);
+        otrem_rnd->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_rnd->callback((Fl_Callback*)cb_otrem_rnd);
+        otrem_rnd->align(FL_ALIGN_LEFT);
+        otrem_rnd->when(FL_WHEN_CHANGED);
+      } // SliderW* otrem_rnd
+      { Fl_Choice* o = otrem_lfotype = new Fl_Choice(383, 311, 72, 16, "LFO Type");
+        otrem_lfotype->down_box(FL_BORDER_BOX);
+        otrem_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        otrem_lfotype->labelsize(10);
+        otrem_lfotype->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_lfotype->textsize(10);
+        otrem_lfotype->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_lfotype->callback((Fl_Callback*)cb_otrem_lfotype);
+        o->menu(menu_chorus_lfotype);
+      } // Fl_Choice* otrem_lfotype
+      { otrem_stdf = new SliderW(372, 338, 100, 10, "St.df");
+        otrem_stdf->type(5);
+        otrem_stdf->box(FL_FLAT_BOX);
+        otrem_stdf->color((Fl_Color)178);
+        otrem_stdf->selection_color((Fl_Color)62);
+        otrem_stdf->labeltype(FL_NORMAL_LABEL);
+        otrem_stdf->labelfont(0);
+        otrem_stdf->labelsize(10);
+        otrem_stdf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_stdf->maximum(127);
+        otrem_stdf->step(1);
+        otrem_stdf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_stdf->callback((Fl_Callback*)cb_otrem_stdf);
+        otrem_stdf->align(FL_ALIGN_LEFT);
+        otrem_stdf->when(FL_WHEN_CHANGED);
+      } // SliderW* otrem_stdf
+      { otrem_pan = new SliderW(372, 358, 100, 10, "Pan");
+        otrem_pan->type(5);
+        otrem_pan->box(FL_FLAT_BOX);
+        otrem_pan->color((Fl_Color)178);
+        otrem_pan->selection_color((Fl_Color)62);
+        otrem_pan->labeltype(FL_NORMAL_LABEL);
+        otrem_pan->labelfont(0);
+        otrem_pan->labelsize(10);
+        otrem_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_pan->minimum(-64);
+        otrem_pan->maximum(63);
+        otrem_pan->step(1);
+        otrem_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        otrem_pan->callback((Fl_Callback*)cb_otrem_pan);
+        otrem_pan->align(FL_ALIGN_LEFT);
+        otrem_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* otrem_pan
+      OTREM->end();
+    } // Fl_Group* OTREM
     { Tuner = new Fl_Group(520, 24, 276, 58);
       Tuner->box(FL_UP_BOX);
       Tuner->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -18991,6 +19185,9 @@ shar_preset->do_callback(shar_preset,1);
 cband_activar->value(rkr->CompBand_Bypass);
 cband_preset->do_callback(cband_preset,1);
 
+//Opticaltrem
+otrem_activar->value(rkr->Opticaltrem_Bypass);
+otrem_preset->do_callback(otrem_preset,1);
 
 reordena();
 }
@@ -19339,6 +19536,9 @@ for (i=1; i<=t; i++)
         break;
         case 43:
         COMPBAND->hide();
+        break;
+        case 44:
+        OTREM->hide();
         break;
         
 
@@ -19718,6 +19918,13 @@ switch (rkr->efx_order[i])
        cband_activar->shortcut(s[i]);
        COMPBAND->show();
        if(rkr->CompBand_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 44:
+       OTREM->position(x[i],y[i]);
+       otrem_activar->shortcut(s[i]);
+       OTREM->show();
+       if(rkr->Opticaltrem_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -21938,6 +22145,7 @@ REVERBTRON->image(InOut->image());
 ECHOTRON->image(InOut->image());
 SHAR->image(InOut->image());
 COMPBAND->image(InOut->image());
+OTREM->image(InOut->image());
 
 
 Tap->image(InOut->image());

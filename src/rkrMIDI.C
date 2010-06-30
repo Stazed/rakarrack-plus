@@ -393,6 +393,9 @@ else
    case 43:
     if(inoff) CompBand_Bypass=1; else CompBand_Bypass=0;
      break;
+   case 44:
+    if(inoff) Opticaltrem_Bypass=1; else Opticaltrem_Bypass=0;
+     break;
 
    
    case 121:
@@ -560,6 +563,9 @@ RKR::checkonoff(int miraque)
      break;
    case 43:
      if (CompBand_Bypass) return(0);
+     break;
+   case 44:
+     if (Opticaltrem_Bypass) return(0);
      break;
 
 

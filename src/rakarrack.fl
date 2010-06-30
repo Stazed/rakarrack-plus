@@ -835,8 +835,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -846,7 +845,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1520 97 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1513 90 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7204,6 +7203,78 @@ cband_gain->value(rkr->efx_CompBand->getpar(12));}
           class SliderW
         }
       }
+      Fl_Group OTREM {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button otrem_activar {
+          label On
+          user_data 2
+          callback {rkr->Opticaltrem_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Opticaltrem->cleanup();
+findpos(44,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice otrem_preset {
+          label Preset
+          user_data 12
+          callback {long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Opticaltrem->setpreset((int)o->value());
+otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
+otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
+otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
+otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
+otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Tremolo 1}
+            xywh {72 72 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Tremolo 2} selected
+            xywh {72 72 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider otrem_dpth {
+          label Depth
+          callback {rkr->efx_Opticaltrem->changepar(0,(int)o->value());}
+          xywh {372 244 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider otrem_freq {
+          label Tempo
+          callback {rkr->efx_Opticaltrem->changepar(1,(int)o->value());}
+          xywh {372 264 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider otrem_rnd {
+          label Rnd
+          callback {rkr->efx_Opticaltrem->changepar(2,(int)o->value());}
+          xywh {372 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Choice otrem_lfotype {
+          label {LFO Type}
+          callback {rkr->efx_Opticaltrem->changepar(3,(int)o->value());}
+          xywh {383 311 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
+        Fl_Value_Slider otrem_stdf {
+          label {St.df}
+          callback {rkr->efx_Opticaltrem->changepar(4,(int)o->value());}
+          xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider otrem_pan {
+          label Pan
+          callback {rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));}
+          xywh {372 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+      }
       Fl_Group Tuner {
         user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -9861,6 +9932,9 @@ shar_preset->do_callback(shar_preset,1);
 cband_activar->value(rkr->CompBand_Bypass);
 cband_preset->do_callback(cband_preset,1);
 
+//Opticaltrem
+otrem_activar->value(rkr->Opticaltrem_Bypass);
+otrem_preset->do_callback(otrem_preset,1);
 
 reordena();} {}
   }
@@ -9943,8 +10017,7 @@ Preset_Counter->value(num);
 Preset_Counter->do_callback();
 }} {}
   }
-  Function {make_window_banks()} {open
-  } {
+  Function {make_window_banks()} {} {
     code {int i,j,x,y,num;
 int elw,elh;
 
@@ -9996,8 +10069,7 @@ B_B2->color(fore_color);
 B_B3->color(fore_color);
 
 
-light_preset(rkr->Selected_Preset);} {selected
-    }
+light_preset(rkr->Selected_Preset);} {}
   }
   Function {reordena()} {} {
     code {int i,j,k,t;
@@ -10209,6 +10281,9 @@ for (i=1; i<=t; i++)
         break;
         case 43:
         COMPBAND->hide();
+        break;
+        case 44:
+        OTREM->hide();
         break;
         
 
@@ -10588,6 +10663,13 @@ switch (rkr->efx_order[i])
        cband_activar->shortcut(s[i]);
        COMPBAND->show();
        if(rkr->CompBand_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 44:
+       OTREM->position(x[i],y[i]);
+       otrem_activar->shortcut(s[i]);
+       OTREM->show();
+       if(rkr->Opticaltrem_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -12795,6 +12877,7 @@ REVERBTRON->image(InOut->image());
 ECHOTRON->image(InOut->image());
 SHAR->image(InOut->image());
 COMPBAND->image(InOut->image());
+OTREM->image(InOut->image());
 
 
 Tap->image(InOut->image());

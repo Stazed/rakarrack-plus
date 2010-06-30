@@ -265,6 +265,7 @@ RKR::RKR ()
   efx_Echotron = new Echotron(efxoutl,efxoutr);
   efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q);
   efx_CompBand = new CompBand(efxoutl,efxoutr);
+  efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -301,7 +302,7 @@ RKR::RKR ()
 128 - Synthesis
 */
 
-  NumEffects = 44;
+  NumEffects = 45;
 
   {
     static const char *los_names[] =
@@ -331,6 +332,7 @@ RKR::RKR ()
 "MusicalDelay","15","4",
 "MuTroMojo","31","16",
 "NoiseGate","16","32",
+"Opticaltrem","44","2",
 "Overdrive","3","1",
 "Pan","13","64",
 "Parametric EQ","9","64",
@@ -1338,6 +1340,7 @@ RKR::cleanup_efx ()
   efx_Echotron->cleanup();
   efx_StereoHarm->cleanup();
   efx_CompBand->cleanup();
+  efx_Opticaltrem->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 
@@ -1782,6 +1785,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 {
                   efx_CompBand->out(efxoutl, efxoutr);
 		  Vol_Efx(43,efx_CompBand->outvolume);
+                }
+              break;  
+
+             case 44:
+              if (Opticaltrem_Bypass)
+                {
+                  efx_Opticaltrem->out(efxoutl, efxoutr);
+		  Vol2_Efx();
                 }
               break;  
 

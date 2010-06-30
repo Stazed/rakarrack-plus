@@ -3133,6 +3133,48 @@ private:
   void cb_cband_cross3_i(SliderW*, void*);
   static void cb_cband_cross3(SliderW*, void*);
 public:
+  Fl_Group *OTREM;
+  Fl_Light_Button *otrem_activar;
+private:
+  void cb_otrem_activar_i(Fl_Light_Button*, void*);
+  static void cb_otrem_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *otrem_preset;
+private:
+  void cb_otrem_preset_i(Fl_Choice*, void*);
+  static void cb_otrem_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_otrem_preset[];
+public:
+  SliderW *otrem_dpth;
+private:
+  void cb_otrem_dpth_i(SliderW*, void*);
+  static void cb_otrem_dpth(SliderW*, void*);
+public:
+  SliderW *otrem_freq;
+private:
+  void cb_otrem_freq_i(SliderW*, void*);
+  static void cb_otrem_freq(SliderW*, void*);
+public:
+  SliderW *otrem_rnd;
+private:
+  void cb_otrem_rnd_i(SliderW*, void*);
+  static void cb_otrem_rnd(SliderW*, void*);
+public:
+  Fl_Choice *otrem_lfotype;
+private:
+  void cb_otrem_lfotype_i(Fl_Choice*, void*);
+  static void cb_otrem_lfotype(Fl_Choice*, void*);
+public:
+  SliderW *otrem_stdf;
+private:
+  void cb_otrem_stdf_i(SliderW*, void*);
+  static void cb_otrem_stdf(SliderW*, void*);
+public:
+  SliderW *otrem_pan;
+private:
+  void cb_otrem_pan_i(SliderW*, void*);
+  static void cb_otrem_pan(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

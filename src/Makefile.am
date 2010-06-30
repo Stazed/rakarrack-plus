@@ -35,6 +35,7 @@ rakarrack_SOURCES = main.C \
 	MIDIConverter.h \
 	MusicDelay.h \
 	NewDist.h \
+	Opticaltrem.h \
 	Pan.h \
 	Phaser.h \
 	rakarrack.h \
@@ -123,6 +124,7 @@ rakarrack_SOURCES = main.C \
 	Echotron.C \
 	StereoHarm.C \
 	CompBand.C \
+	Opticaltrem.C \
 	MIDIConverter.C
 	
 	
