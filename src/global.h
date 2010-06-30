@@ -453,6 +453,9 @@ public:
   int Voc_Down;
   int Voc_U_Q;
   int Voc_D_Q;
+  int Ste_Down;
+  int Ste_U_Q;
+  int Ste_D_Q;
 
   int font;
   int flpos;
@@ -488,6 +491,7 @@ public:
 
   // Harmonizer
   int HarQual;
+  int SteQual;
 
   // Tap Tempo
   

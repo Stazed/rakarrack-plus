@@ -3614,6 +3614,12 @@ private:
   static void cb_Har_Qual(Fl_Choice*, void*);
   static Fl_Menu_Item menu_Har_Qual[];
 public:
+  Fl_Choice *Ste_Qual;
+private:
+  void cb_Ste_Qual_i(Fl_Choice*, void*);
+  static void cb_Ste_Qual(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Ste_Qual[];
+public:
   Fl_Choice *Voc_Bands;
 private:
   void cb_Voc_Bands_i(Fl_Choice*, void*);
@@ -3706,6 +3712,36 @@ private:
   void cb_Shi_Up_Qua_i(Fl_Choice*, void*);
   static void cb_Shi_Up_Qua(Fl_Choice*, void*);
 public:
+  Fl_Choice *Voc_Downsample;
+private:
+  void cb_Voc_Downsample_i(Fl_Choice*, void*);
+  static void cb_Voc_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Voc_Down_Qua;
+private:
+  void cb_Voc_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Voc_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Voc_Up_Qua;
+private:
+  void cb_Voc_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Voc_Up_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Ste_Downsample;
+private:
+  void cb_Ste_Downsample_i(Fl_Choice*, void*);
+  static void cb_Ste_Downsample(Fl_Choice*, void*);
+public:
+  Fl_Choice *Ste_Down_Qua;
+private:
+  void cb_Ste_Down_Qua_i(Fl_Choice*, void*);
+  static void cb_Ste_Down_Qua(Fl_Choice*, void*);
+public:
+  Fl_Choice *Ste_Up_Qua;
+private:
+  void cb_Ste_Up_Qua_i(Fl_Choice*, void*);
+  static void cb_Ste_Up_Qua(Fl_Choice*, void*);
+public:
   Fl_Choice *Wave_Amo;
 private:
   void cb_Wave_Amo_i(Fl_Choice*, void*);
@@ -3721,21 +3757,6 @@ public:
 private:
   void cb_Wave_Up_Qua_i(Fl_Choice*, void*);
   static void cb_Wave_Up_Qua(Fl_Choice*, void*);
-public:
-  Fl_Choice *Voc_Downsample;
-private:
-  void cb_Voc_Downsample_i(Fl_Choice*, void*);
-  static void cb_Voc_Downsample(Fl_Choice*, void*);
-public:
-  Fl_Choice *Voc_Down_Qua;
-private:
-  void cb_Voc_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Voc_Down_Qua(Fl_Choice*, void*);
-public:
-  Fl_Choice *Voc_Up_Qua;
-private:
-  void cb_Voc_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Voc_Up_Qua(Fl_Choice*, void*);
 public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;

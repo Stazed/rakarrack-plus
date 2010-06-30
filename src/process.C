@@ -129,6 +129,10 @@ RKR::RKR ()
   rakarrack.get (PrefNom("Harmonizer Up Quality"),Har_U_Q,4);
   rakarrack.get (PrefNom("Harmonizer Down Quality"),Har_D_Q,4);
 
+  rakarrack.get (PrefNom("StereoHarm Downsample"),Ste_Down,0);
+  rakarrack.get (PrefNom("StereoHarm Up Quality"),Ste_U_Q,4);
+  rakarrack.get (PrefNom("StereoHarm Down Quality"),Ste_D_Q,4);
+
   rakarrack.get (PrefNom("Reverbtron Downsample"),Rev_Down,0);
   rakarrack.get (PrefNom("Reverbtron Up Quality"),Rev_U_Q,4);
   rakarrack.get (PrefNom("Reverbtron Down Quality"),Rev_D_Q,4);
@@ -158,6 +162,8 @@ RKR::RKR ()
 
 
   rakarrack.get (PrefNom ("Harmonizer Quality"), HarQual, 4);
+  rakarrack.get (PrefNom ("StereoHarm Quality"), SteQual, 4);
+
   rakarrack.get (PrefNom ("Auto Connect Jack"), aconnect_JA, 1);
   rakarrack.get (PrefNom ("Auto Connect Jack In"), aconnect_JIA, 1);
 
@@ -263,7 +269,7 @@ RKR::RKR ()
   efx_StompBox = new StompBox(efxoutl,efxoutr);
   efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down, Rev_U_Q, Rev_D_Q);
   efx_Echotron = new Echotron(efxoutl,efxoutr);
-  efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q);
+  efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q);
   efx_CompBand = new CompBand(efxoutl,efxoutr);
   efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr);
 
