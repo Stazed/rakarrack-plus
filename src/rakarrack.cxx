@@ -6583,8 +6583,12 @@ void RKRGUI::cb_otrem_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_otrem_preset[] = {
- {"Tremolo 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Tremolo 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Fast", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Trem 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hard Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Soft Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Hard Ramp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -6892,6 +6896,7 @@ void RKRGUI::cb_B_preset_i(Fl_Button*, void*) {
 if(!made) make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
+ScanDir();
 }
 else
 BankWindow->hide();
@@ -7179,6 +7184,35 @@ void RKRGUI::cb_B_B4_i(Fl_Button*, void*) {
 void RKRGUI::cb_B_B4(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_B_B4_i(o,v);
 }
+
+void RKRGUI::cb_CH_UB_i(Fl_Choice* o, void*) {
+  const char *chname;
+
+const Fl_Menu_Item *p, *m;  
+m = o->menu();
+p=m->next((int)o->value());
+chname=p->label();
+
+is_modified();
+char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s%s%s", rkr->UDirFilename,chname,".rkrb");
+
+int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+};
+}
+void RKRGUI::cb_CH_UB(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_CH_UB_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_CH_UB[] = {
+ {"", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
   save_stat(2);
@@ -7973,6 +8007,18 @@ strcpy(rkr->BankFilename,filename);
 }
 void RKRGUI::cb_BF_Browser(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BF_Browser_i(o,v);
+}
+
+void RKRGUI::cb_UD_Browser_i(Fl_Button*, void*) {
+  char *dir;
+dir=fl_dir_chooser("Browse:",NULL,0);
+if (dir==NULL) return;
+Udir->value(dir);
+strcpy(rkr->UDirFilename,dir);
+ScanDir();
+}
+void RKRGUI::cb_UD_Browser(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_UD_Browser_i(o,v);
 }
 
 void RKRGUI::cb_MIDILearn_i(Fl_Double_Window*, void*) {
@@ -17448,8 +17494,14 @@ R average.");
       B_B4->labelsize(10);
       B_B4->callback((Fl_Callback*)cb_B_B4, (void*)(77));
     } // Fl_Button* B_B4
-    { CH_UB = new Fl_Choice(549, 14, 117, 24, "User Banks");
+    { CH_UB = new Fl_Choice(549, 14, 117, 24, "User Banks       ");
       CH_UB->down_box(FL_BORDER_BOX);
+      CH_UB->selection_color((Fl_Color)FL_BACKGROUND2_COLOR);
+      CH_UB->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      CH_UB->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      CH_UB->callback((Fl_Callback*)cb_CH_UB);
+      CH_UB->when(FL_WHEN_RELEASE_ALWAYS);
+      CH_UB->menu(menu_CH_UB);
     } // Fl_Choice* CH_UB
     { ob = new Fl_Group(0, 60, 800, 540);
       ob->labelsize(18);
@@ -17574,6 +17626,7 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
+        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -18117,7 +18170,6 @@ R average.");
         BANK_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         BANK_SET->user_data((void*)(1));
         BANK_SET->align(FL_ALIGN_LEFT);
-        BANK_SET->hide();
         { Fondo11 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo11
         { BFiname = new Fl_File_Input(20, 50, 390, 30, "Bank Filename");
@@ -18130,6 +18182,16 @@ R average.");
         { BF_Browser = new Fl_Button(415, 60, 65, 20, "Browse");
           BF_Browser->callback((Fl_Callback*)cb_BF_Browser, (void*)(77));
         } // Fl_Button* BF_Browser
+        { Udir = new Fl_File_Input(20, 102, 390, 30, "User Directory");
+          Udir->labelsize(11);
+          Udir->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Udir->textsize(12);
+          Udir->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Udir->align(FL_ALIGN_TOP_LEFT);
+        } // Fl_File_Input* Udir
+        { UD_Browser = new Fl_Button(415, 112, 65, 20, "Browse");
+          UD_Browser->callback((Fl_Callback*)cb_UD_Browser, (void*)(77));
+        } // Fl_Button* UD_Browser
         BANK_SET->end();
       } // Fl_Group* BANK_SET
       STabs->end();
@@ -18737,6 +18799,7 @@ rakarrack.get(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway,0);
 if(!rkr->MIDIway) ML_Menu->deactivate();
 
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
+rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
 rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
@@ -18943,6 +19006,8 @@ rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
 
 rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
 rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
+rakarrack.set(rkr->PrefNom("User Directory"),rkr->UDirFilename);
+
 rakarrack.set(rkr->PrefNom("Enable Background Image"),rkr->EnableBackgroundImage);
 rakarrack.set(rkr->PrefNom("Background Image"),rkr->BackgroundImage);
 rakarrack.set(rkr->PrefNom("Auto Connect MIDI IN"),rkr->aconnect_MI);
@@ -20183,6 +20248,7 @@ rkr->m_displayed = 0;
 Enable_Back->value(rkr->EnableBackgroundImage);
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
+Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
 Filter_DC->value(rkr->DC_Offset);
@@ -23110,4 +23176,47 @@ int RKRGUI::search_but(int x, int y) {
   
   
 return(1000);
+}
+
+void RKRGUI::ScanDir() {
+  char nombank[256];
+char nombre[64];
+
+DIR *dir=opendir(rkr->UDirFilename);
+
+if (dir==NULL) return;
+
+Fl_Menu_Item *m = menu_CH_UB;
+Fl_Menu_ *n = (Fl_Menu_ *) m;
+
+n->copy(menu_CH_UB,0);
+
+for(int i=0; i<n->size(); i++) n->remove(i);
+
+struct dirent *fs;
+
+while ((fs=readdir(dir)))
+{
+
+if (strstr(fs->d_name,".rkrb")!=NULL)              
+  { 
+    memset(nombank,0,sizeof(nombank));
+    sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
+    if(rkr->CheckOldBank(nombank)==0)
+    {
+      memset(nombre,0,sizeof(nombre));
+      strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
+      n->add(nombre,"", CH_UB->callback(),0,0);
+   
+    }
+  
+   }
+
+   
+}
+ 
+ 
+closedir(dir);
+
+CH_UB->menu(n->menu());
 }
