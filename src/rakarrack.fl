@@ -7234,7 +7234,7 @@ otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);}
             xywh {72 72 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Tremolo 2} selected
+            label {Tremolo 2}
             xywh {72 72 36 21} labelsize 10
           }
         }
@@ -7494,7 +7494,7 @@ if(ok)
 BankWin_Label(temp);
 Put_Loaded_Bank();
 }}
-          xywh {442 30 22 16} color 62 labelsize 10
+          xywh {418 30 22 16} color 62 labelsize 10
         }
         Fl_Button L_B2 {
           label 2
@@ -7509,10 +7509,25 @@ if(ok)
 BankWin_Label(temp);
 Put_Loaded_Bank();
 }}
-          xywh {466 30 22 16} color 62 labelsize 10
+          xywh {442 30 22 16} color 62 labelsize 10
         }
         Fl_Button L_B3 {
           label 3
+          user_data 77
+          callback {is_modified();
+char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s/Extra1.rkrb", DATADIR);
+ int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+}}
+          xywh {466 30 22 16} color 62 labelsize 10
+        }
+        Fl_Button L_B4 {
+          label U
           user_data 77
           callback {is_modified();
 int ok=rkr->loadbank(rkr->BankFilename);
@@ -7815,7 +7830,7 @@ UpdateTGUI();
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1543 307 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {1536 300 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -7909,20 +7924,30 @@ put_icon(AboutWin);}
         label 1
         user_data 77
         callback {L_B1->do_callback();}
-        xywh {348 14 32 24} color 62 labelsize 10
+        xywh {258 14 32 24} color 62 labelsize 10
       }
       Fl_Button B_B2 {
         label 2
         user_data 77
         callback {L_B2->do_callback();}
-        xywh {388 14 32 24} color 62 labelsize 10
+        xywh {298 14 32 24} color 62 labelsize 10
       }
       Fl_Button B_B3 {
         label 3
         user_data 77
         callback {L_B3->do_callback();}
-        xywh {428 14 32 24} color 62 labelsize 10
+        xywh {338 14 32 24} color 62 labelsize 10
       }
+      Fl_Button B_B4 {
+        label U
+        user_data 77
+        callback {L_B4->do_callback();}
+        xywh {378 14 32 24} color 62 labelsize 10
+      }
+      Fl_Choice CH_UB {
+        label {User Banks} open
+        xywh {549 14 117 24} down_box BORDER_BOX
+      } {}
       Fl_Group ob {
         xywh {0 60 800 540} labelsize 18
       } {}
@@ -9331,14 +9356,16 @@ for (int t=0; t<ob->children();t++)
 B_B1->color(bcolor);
 B_B2->color(bcolor);
 B_B3->color(bcolor);
-
+B_B4->color(bcolor);
+CH_UB->color(bcolor);
 
 }
 
 
  fore_color= bcolor;
  aux_source->color(bcolor);
- Label_Color_Change(label_color);} {}
+ Label_Color_Change(label_color);} {selected
+    }
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
@@ -10067,7 +10094,8 @@ made=1;
 B_B1->color(fore_color);
 B_B2->color(fore_color);
 B_B3->color(fore_color);
-
+B_B4->color(fore_color);
+CH_UB->color(fore_color);
 
 light_preset(rkr->Selected_Preset);} {}
   }

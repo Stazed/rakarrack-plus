@@ -1,5 +1,6 @@
 pkgdata_DATA = Default.rkrb \
 	Extra.rkrb \
+	Extra1.rkrb \
 	1.wav \
 	2.wav \
 	3.wav \

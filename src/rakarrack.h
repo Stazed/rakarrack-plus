@@ -3257,6 +3257,11 @@ private:
   void cb_L_B3_i(Fl_Button*, void*);
   static void cb_L_B3(Fl_Button*, void*);
 public:
+  Fl_Button *L_B4;
+private:
+  void cb_L_B4_i(Fl_Button*, void*);
+  static void cb_L_B4(Fl_Button*, void*);
+public:
   Fl_Button *S_new;
 private:
   void cb_S_new_i(Fl_Button*, void*);
@@ -3394,6 +3399,12 @@ private:
   void cb_B_B3_i(Fl_Button*, void*);
   static void cb_B_B3(Fl_Button*, void*);
 public:
+  Fl_Button *B_B4;
+private:
+  void cb_B_B4_i(Fl_Button*, void*);
+  static void cb_B_B4(Fl_Button*, void*);
+public:
+  Fl_Choice *CH_UB;
   Fl_Group *ob;
   Fl_Double_Window *Order;
 private:

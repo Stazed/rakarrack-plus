@@ -6805,6 +6805,22 @@ void RKRGUI::cb_L_B2(Fl_Button* o, void* v) {
 
 void RKRGUI::cb_L_B3_i(Fl_Button*, void*) {
   is_modified();
+char temp[128];           
+  memset (temp, 0, sizeof (temp));
+  sprintf (temp, "%s/Extra1.rkrb", DATADIR);
+ int ok=rkr->loadbank(temp);
+if(ok) 
+{
+BankWin_Label(temp);
+Put_Loaded_Bank();
+};
+}
+void RKRGUI::cb_L_B3(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B3_i(o,v);
+}
+
+void RKRGUI::cb_L_B4_i(Fl_Button*, void*) {
+  is_modified();
 int ok=rkr->loadbank(rkr->BankFilename);
 if(ok) 
 {
@@ -6812,8 +6828,8 @@ BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
 };
 }
-void RKRGUI::cb_L_B3(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B3_i(o,v);
+void RKRGUI::cb_L_B4(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B4_i(o,v);
 }
 
 void RKRGUI::cb_S_new_i(Fl_Button*, void*) {
@@ -7155,6 +7171,13 @@ void RKRGUI::cb_B_B3_i(Fl_Button*, void*) {
 }
 void RKRGUI::cb_B_B3(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_B_B3_i(o,v);
+}
+
+void RKRGUI::cb_B_B4_i(Fl_Button*, void*) {
+  L_B4->do_callback();
+}
+void RKRGUI::cb_B_B4(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B4_i(o,v);
 }
 
 void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
@@ -17221,21 +17244,26 @@ R average.");
         PRESETS_LABEL->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         PRESETS_LABEL->user_data((void*)(7));
       } // Fl_Box* PRESETS_LABEL
-      { L_B1 = new Fl_Button(442, 30, 22, 16, "1");
+      { L_B1 = new Fl_Button(418, 30, 22, 16, "1");
         L_B1->color((Fl_Color)62);
         L_B1->labelsize(10);
         L_B1->callback((Fl_Callback*)cb_L_B1, (void*)(77));
       } // Fl_Button* L_B1
-      { L_B2 = new Fl_Button(466, 30, 22, 16, "2");
+      { L_B2 = new Fl_Button(442, 30, 22, 16, "2");
         L_B2->color((Fl_Color)62);
         L_B2->labelsize(10);
         L_B2->callback((Fl_Callback*)cb_L_B2, (void*)(77));
       } // Fl_Button* L_B2
-      { L_B3 = new Fl_Button(490, 30, 22, 16, "3");
+      { L_B3 = new Fl_Button(466, 30, 22, 16, "3");
         L_B3->color((Fl_Color)62);
         L_B3->labelsize(10);
         L_B3->callback((Fl_Callback*)cb_L_B3, (void*)(77));
       } // Fl_Button* L_B3
+      { L_B4 = new Fl_Button(490, 30, 22, 16, "U");
+        L_B4->color((Fl_Color)62);
+        L_B4->labelsize(10);
+        L_B4->callback((Fl_Callback*)cb_L_B4, (void*)(77));
+      } // Fl_Button* L_B4
       { S_new = new Fl_Button(174, 50, 64, 18, "New");
         S_new->shortcut(0x6e);
         S_new->color((Fl_Color)62);
@@ -17400,21 +17428,29 @@ R average.");
       MenuB->align(96|FL_ALIGN_INSIDE);
       MenuB->menu(menu_MenuB);
     } // Fl_Menu_Bar* MenuB
-    { B_B1 = new Fl_Button(348, 14, 32, 24, "1");
+    { B_B1 = new Fl_Button(258, 14, 32, 24, "1");
       B_B1->color((Fl_Color)62);
       B_B1->labelsize(10);
       B_B1->callback((Fl_Callback*)cb_B_B1, (void*)(77));
     } // Fl_Button* B_B1
-    { B_B2 = new Fl_Button(388, 14, 32, 24, "2");
+    { B_B2 = new Fl_Button(298, 14, 32, 24, "2");
       B_B2->color((Fl_Color)62);
       B_B2->labelsize(10);
       B_B2->callback((Fl_Callback*)cb_B_B2, (void*)(77));
     } // Fl_Button* B_B2
-    { B_B3 = new Fl_Button(428, 14, 32, 24, "3");
+    { B_B3 = new Fl_Button(338, 14, 32, 24, "3");
       B_B3->color((Fl_Color)62);
       B_B3->labelsize(10);
       B_B3->callback((Fl_Callback*)cb_B_B3, (void*)(77));
     } // Fl_Button* B_B3
+    { B_B4 = new Fl_Button(378, 14, 32, 24, "U");
+      B_B4->color((Fl_Color)62);
+      B_B4->labelsize(10);
+      B_B4->callback((Fl_Callback*)cb_B_B4, (void*)(77));
+    } // Fl_Button* B_B4
+    { CH_UB = new Fl_Choice(549, 14, 117, 24, "User Banks");
+      CH_UB->down_box(FL_BORDER_BOX);
+    } // Fl_Choice* CH_UB
     { ob = new Fl_Group(0, 60, 800, 540);
       ob->labelsize(18);
       ob->end();
@@ -18579,7 +18615,8 @@ for (int t=0; t<ob->children();t++)
 B_B1->color(bcolor);
 B_B2->color(bcolor);
 B_B3->color(bcolor);
-
+B_B4->color(bcolor);
+CH_UB->color(bcolor);
 
 }
 
@@ -19321,7 +19358,8 @@ made=1;
 B_B1->color(fore_color);
 B_B2->color(fore_color);
 B_B3->color(fore_color);
-
+B_B4->color(fore_color);
+CH_UB->color(fore_color);
 
 light_preset(rkr->Selected_Preset);
 }
