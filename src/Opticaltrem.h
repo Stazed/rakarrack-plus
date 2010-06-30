@@ -38,6 +38,7 @@ public:
   ~Opticaltrem ();
 
   void out (float * smpsl, float * smpsr);
+  void setpanning(int value);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
@@ -49,13 +50,14 @@ public:
 
 private:
   int Pdepth;
-  int Ppanning
+  int Ppanning;
   
   float Ra, Rb, R1, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
   float lstep,rstep;
   float cperiod;
   float gl, oldgl;
-  float gr, oldgr;  
+  float gr, oldgr; 
+  float rpanning, lpanning; 
   EffectLFO lfo;
 
 };

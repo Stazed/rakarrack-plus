@@ -213,7 +213,7 @@ Opticaltrem::getpar (int npar)
 
     {
     case 0:
-      return (depth);
+      return (Pdepth);
       break;
     case 1:
       return (lfo.Pfreq);
@@ -228,7 +228,7 @@ Opticaltrem::getpar (int npar)
       return (lfo.Pstereo);
       break;
     case 5:
-      return (0); //pan
+      return (Ppanning); //pan
 
     }
 
