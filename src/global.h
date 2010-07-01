@@ -541,7 +541,7 @@ public:
   timeval timeA;
 
   float cpuload;
-
+  float rtrig;
 
   float *efxoutl;
   float *efxoutr;

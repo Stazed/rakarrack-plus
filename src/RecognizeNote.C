@@ -36,7 +36,7 @@
 
 
 
-Recognize::Recognize (float *efxoutl_, float *efxoutr_)
+Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
 {
 
   efxoutl = efxoutl_;
@@ -49,6 +49,7 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_)
   note = 0;
   nfreq = 0;
   afreq = 0;
+  trigfact = trig;
     
   schmittInit (32);
 
@@ -74,8 +75,6 @@ void
 Recognize::schmittS16LE (signed short int *indata)
 {
   int i, j;
-  float trigfact = 0.6f;
-
 
   for (i = 0; i < PERIOD; i++)
     {

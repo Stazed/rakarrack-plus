@@ -3636,6 +3636,11 @@ private:
   void cb_Calibration_i(Fl_Counter*, void*);
   static void cb_Calibration(Fl_Counter*, void*);
 public:
+  Fl_Counter *RTrigger;
+private:
+  void cb_RTrigger_i(Fl_Counter*, void*);
+  static void cb_RTrigger(Fl_Counter*, void*);
+public:
   Fl_Choice *Har_Downsample;
 private:
   void cb_Har_Downsample_i(Fl_Choice*, void*);

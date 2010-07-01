@@ -118,6 +118,7 @@ RKR::RKR ()
   update_freqs(aFreq);
 
   rakarrack.get (PrefNom ("Vocoder Bands"), VocBands, 32);
+  rakarrack.get (PrefNom ("Recognize Trigger"), rtrig, .6f);
   
   
   Fraction_Bypass = 1.0f;
@@ -280,7 +281,7 @@ RKR::RKR ()
 
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
-  RecNote = new Recognize (efxoutl, efxoutr);
+  RecNote = new Recognize (efxoutl, efxoutr, rtrig);
   RC = new RecChord ();
 
   

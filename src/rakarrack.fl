@@ -8144,13 +8144,13 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1401 23 640 528} type Double color 4 hide
+      xywh {1394 23 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
@@ -8312,7 +8312,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
+          user_data 1
           xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -8562,6 +8562,12 @@ Show_Next_Time();}
             callback {aFreq=o->value();
 rkr->update_freqs(aFreq);}
             xywh {120 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
+          }
+          Fl_Counter RTrigger {
+            label {Recognize Note Trigger}
+            callback {rkr->rtrig = o->value();
+rkr->RecNote->trigfact = o->value();} selected
+            xywh {367 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 1 step 0.01 value 0.6 textsize 10
           }
           Fl_Choice Har_Downsample {
             label {Harmonizer Downsample }
@@ -9786,6 +9792,8 @@ rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
 rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
+rakarrack.set(rkr->PrefNom("Recognize Trigger"),rkr->rtrig);
+
 rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
 
 
@@ -11068,6 +11076,7 @@ Wave_Amo->value(Wave_res_amount);
 Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
 Calibration->value(aFreq);
+RTrigger->value(rkr->RecNote->trigfact);
 
 switch(rkr->VocBands)
 {
@@ -13806,8 +13815,7 @@ looper_t2->redraw();} {}
   {
     otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
     otrem_freq->redraw();  
-  }} {selected
-    }
+  }} {}
   }
   Function {ActACI()} {} {
     code {int value;

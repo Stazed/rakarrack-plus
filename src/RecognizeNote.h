@@ -20,7 +20,7 @@
 class Recognize
 {
 public:
-  Recognize (float * efxoutl_, float * efxoutr_);
+  Recognize (float * efxoutl_, float * efxoutr_, float trig);
   ~Recognize ();
 
   void schmittFloat (float *indatal, float *indatar);
@@ -30,6 +30,7 @@ public:
   signed short int *schmittBuffer;
   signed short int *schmittPointer;
   const char **notes;
+  float trigfact;
   float lafreq;
   float nfreq, afreq, freq;
   float *efxoutl;

@@ -7743,6 +7743,14 @@ void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Calibration_i(o,v);
 }
 
+void RKRGUI::cb_RTrigger_i(Fl_Counter* o, void*) {
+  rkr->rtrig = o->value();
+rkr->RecNote->trigfact = o->value();
+}
+void RKRGUI::cb_RTrigger(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RTrigger_i(o,v);
+}
+
 void RKRGUI::cb_Har_Downsample_i(Fl_Choice* o, void*) {
   rkr->Har_Down=(int)o->value();
 Show_Next_Time();
@@ -17882,6 +17890,17 @@ R average.");
           Calibration->callback((Fl_Callback*)cb_Calibration);
           Calibration->align(FL_ALIGN_LEFT);
         } // Fl_Counter* Calibration
+        { RTrigger = new Fl_Counter(367, 278, 116, 21, "Recognize Note Trigger");
+          RTrigger->labelsize(10);
+          RTrigger->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          RTrigger->minimum(0.01);
+          RTrigger->maximum(1);
+          RTrigger->step(0.01);
+          RTrigger->value(0.6);
+          RTrigger->textsize(10);
+          RTrigger->callback((Fl_Callback*)cb_RTrigger);
+          RTrigger->align(FL_ALIGN_LEFT);
+        } // Fl_Counter* RTrigger
         { Har_Downsample = new Fl_Choice(145, 306, 70, 18, "Harmonizer Downsample ");
           Har_Downsample->down_box(FL_BORDER_BOX);
           Har_Downsample->labelsize(10);
@@ -19089,6 +19108,8 @@ rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
 rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
+rakarrack.set(rkr->PrefNom("Recognize Trigger"),rkr->rtrig);
+
 rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
 
 
@@ -20378,6 +20399,7 @@ Wave_Amo->value(Wave_res_amount);
 Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
 Calibration->value(aFreq);
+RTrigger->value(rkr->RecNote->trigfact);
 
 switch(rkr->VocBands)
 {
