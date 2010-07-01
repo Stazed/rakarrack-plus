@@ -17890,7 +17890,7 @@ R average.");
           Calibration->callback((Fl_Callback*)cb_Calibration);
           Calibration->align(FL_ALIGN_LEFT);
         } // Fl_Counter* Calibration
-        { RTrigger = new Fl_Counter(367, 278, 116, 21, "Recognize Note Trigger");
+        { Fl_Counter* o = RTrigger = new Fl_Counter(367, 278, 116, 21, "Recognize Note Trigger");
           RTrigger->labelsize(10);
           RTrigger->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           RTrigger->minimum(0.01);
@@ -17900,6 +17900,7 @@ R average.");
           RTrigger->textsize(10);
           RTrigger->callback((Fl_Callback*)cb_RTrigger);
           RTrigger->align(FL_ALIGN_LEFT);
+          o->lstep(0.1);
         } // Fl_Counter* RTrigger
         { Har_Downsample = new Fl_Choice(145, 306, 70, 18, "Harmonizer Downsample ");
           Har_Downsample->down_box(FL_BORDER_BOX);

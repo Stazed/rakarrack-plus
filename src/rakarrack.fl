@@ -835,7 +835,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -8568,6 +8569,7 @@ rkr->update_freqs(aFreq);}
             callback {rkr->rtrig = o->value();
 rkr->RecNote->trigfact = o->value();} selected
             xywh {367 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 1 step 0.01 value 0.6 textsize 10
+            code0 {o->lstep(0.1);}
           }
           Fl_Choice Har_Downsample {
             label {Harmonizer Downsample }

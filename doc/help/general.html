@@ -374,6 +374,14 @@ Harmonizer effect, that means you need to play a monophonic melody in
 the Key/Chord selected. The harmonizer recognizes what note you play
 and creates a second voice in the Key/Chord selected.</p>
 
+<p>Buttons 1,2,3,U are for fast load banks, the 1,2,3 loads the Default,
+Extra and Extra1 banks released with rakarrack, the "U" button, that means
+user, load the Bank filename defined as default to load in settings.<p>
+
+<p> The choice display the available user banks that you have in the
+directory specified in the User Directory settings, is also a fast way to
+load "user" banks</p>
+
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
 
@@ -577,7 +585,7 @@ allocated when Rakarrack starts, so you will need to restart Rakarrack for
 this to take effect.  If you don't plan to use the Looper, then make this a
 small number so Rakarrack doesn't hog memory you aren't going to use.</p>
 
-<p><b>Harmonizer Quality</b></p>
+<p><b>Harmonizer Quality and StereoHarm Quality</b></p>
 <p>Selects the quality of the harmonizer audio
 engine, used by Harmonizer, Shifter and Sequence effects, the available
 values are "4,8,16,32", the default value is "4". Incrementing the quality
@@ -599,8 +607,8 @@ level down to a reasonable recording level.</p>
 </p>2) If you need a hard limiter to set the maximum to a certain level, this
 may prove to be a useful tool.</p>
 
-<p><b> Harmonizer, Reverbtron, Convolotron, Sequence and Shifter
-Downsample</b></p>
+<p><b> Harmonizer, Reverbtron, Convolotron, Sequence, Shifter, Vocoder and
+StereoHarm Downsample</b></p>
 <p> Here you can select the sample rate that each effect uses internally,
 This can make it possible to use effects with higher CPU demand simply by
 trading bandwidth.  For example, if you are  resampling at 2x or 3x (master
@@ -628,6 +636,12 @@ up/down, then 2x Waveshaper resample with linear up, fastest sinc down.</p>
 <p><b>Tuner Calibration A440</b></p>
 <p> Here you can calibrate the Tuner, this also calibrates the MIDI
 Converter, Ring and Harmonizer recognize note functions.</p>
+<p><b>Recognize Note Trigger</b></p>
+<p>This is the trigger for the Recognize Note function used in Harmonizer,
+StereoHarm and Ring, default value is ".6" but maybe you can get better
+results if you down dis value. The note recognition dependes also of the
+input level signal, you need to find a good balance between this value and
+the input signal level.</p>
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
@@ -706,6 +720,10 @@ last signal, Tap Tempo is put to Off</p>
 <p><b>Bank</b></p>
 <p>Here you can specify which file bank is loaded when
 program starts.</p>
+<p><b>User Directory<b><p>
+<p>You can define here the driectory where rakarrack will look to find user
+banks that will be displayed in the Bank Window "User Banks" choice, in
+order to have a fast way to load user banks</p>
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
