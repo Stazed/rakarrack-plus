@@ -835,8 +835,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1233,7 +1232,7 @@ if (rkr->Harmonizer_Bypass)
     if (rkr->RC->cc) 
     {
     har_chordname->copy_label(rkr->RC->NombreAcorde);
-    rkr->RC->cc=0;  
+    if(!rkr->StereoHarm_Bypass) rkr->RC->cc=0;  
     har_chordname->redraw(); 
     rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12);      
     }
@@ -1286,7 +1285,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -8567,7 +8566,7 @@ rkr->update_freqs(aFreq);}
           Fl_Counter RTrigger {
             label {Recognize Note Trigger}
             callback {rkr->rtrig = o->value();
-rkr->RecNote->trigfact = o->value();} selected
+rkr->RecNote->trigfact = o->value();}
             xywh {367 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 1 step 0.01 value 0.6 textsize 10
             code0 {o->lstep(0.1);}
           }

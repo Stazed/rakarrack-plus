@@ -48,6 +48,7 @@ private:
   int ultima;
   int blockSize;
 
+  class Sustainer *Sus;
 
 };
 

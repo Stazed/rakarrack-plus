@@ -50,7 +50,11 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
   nfreq = 0;
   afreq = 0;
   trigfact = trig;
-    
+  
+  Sus = new Sustainer(efxoutl,efxoutr);  
+  Sus->changepar(1,48);
+  Sus->changepar(2,127);
+
   schmittInit (32);
 
 }
@@ -138,6 +142,8 @@ Recognize::schmittFloat (float *indatal, float *indatar)
   int i;
   signed short int buf[PERIOD];
 
+  Sus->out(indatal,indatar);
+  
   for (i = 0; i < PERIOD; i++)
     {
       buf[i] = (short) ((indatal[i]+indatar[i]) * 32768);

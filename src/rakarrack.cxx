@@ -1227,7 +1227,7 @@ if (rkr->Harmonizer_Bypass)
     if (rkr->RC->cc) 
     {
     har_chordname->copy_label(rkr->RC->NombreAcorde);
-    rkr->RC->cc=0;  
+    if(!rkr->StereoHarm_Bypass) rkr->RC->cc=0;  
     har_chordname->redraw(); 
     rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12);      
     }
