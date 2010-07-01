@@ -466,8 +466,6 @@ RecChord::IniciaChords ()
 
 
 
-
-
 };
 
 
@@ -730,6 +728,7 @@ RecChord::Vamos (int voz, int interval)
   harmo = (12 + nota + interval) % 12;
   if (harmo > 12)
     harmo %= 12;
+
 
 
   hm1 = harmo - 1;

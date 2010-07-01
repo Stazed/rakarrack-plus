@@ -569,6 +569,15 @@ RKR::savefile (char *filename)
                    efx_CompBand->getpar (12),CompBand_Bypass);
 	  break;
 
+	case 44:
+	  //Opticaltrem
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Opticaltrem->getpar (0), efx_Opticaltrem->getpar (1),
+		   efx_Opticaltrem->getpar (2), efx_Opticaltrem->getpar (3),
+		   efx_Opticaltrem->getpar (4), efx_Opticaltrem->getpar (5),
+		   Opticaltrem_Bypass);
+	  break;
+
 
 
 	}
@@ -1064,6 +1073,13 @@ RKR::loadfile (char *filename)
 		  &lv[44][10], &lv[44][11], &lv[44][12], &CompBand_B);
 	  break;
 
+	case 44:
+	  //Opticaltrem
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[45][0], &lv[45][1], &lv[45][2], &lv[45][3], &lv[45][4],
+		  &lv[45][5], &Opticaltrem_B);
+	  break;
+
 
 	}
     }
@@ -1151,6 +1167,7 @@ RKR::Actualizar_Audio ()
   Echotron_Bypass = 0;
   StereoHarm_Bypass = 0;
   CompBand_Bypass = 0;
+  Opticaltrem_Bypass = 0;
 
   cleanup_efx ();
 
@@ -1237,6 +1254,8 @@ RKR::Actualizar_Audio ()
     efx_StereoHarm->changepar (i, lv[43][i]);
  for (i = 0; i <= 12; i++)
     efx_CompBand->changepar (i, lv[44][i]);
+ for (i = 0; i <= 5; i++)
+    efx_Opticaltrem->changepar (i, lv[45][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1310,6 +1329,7 @@ RKR::Actualizar_Audio ()
   Echotron_Bypass = Echotron_B;
   StereoHarm_Bypass = StereoHarm_B;
   CompBand_Bypass = CompBand_B;
+  Opticaltrem_Bypass = Opticaltrem_B;
     
   Bypass = Bypass_B;
 
@@ -1396,7 +1416,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[45][16] = {
+  int presets[46][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1486,7 +1506,9 @@ RKR::New ()
 //StereoHarm
     {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0},
 //CompBand
-    {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48, 0, 0, 0}
+    {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48, 0, 0, 0},
+//Opticaltrem
+    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     
     
     
@@ -1574,6 +1596,7 @@ RKR::New ()
   Echotron_B = 0;
   StereoHarm_B = 0;
   CompBand_B = 0;
+  Opticaltrem_B = 0;
     
   Bypass_B = 0;
 
@@ -1597,7 +1620,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[45][16] = {
+  int presets[46][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1687,7 +1710,9 @@ RKR::New_Bank ()
 //StereoHarm
     {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0},
 //CompBand
-    {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48, 0, 0, 0}
+    {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48, 0, 0, 0},
+//Opticaltrem
+    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     
     
     
@@ -1811,6 +1836,7 @@ RKR::Bank_to_Preset (int i)
   Echotron_B = Bank[i].lv[42][19];
   StereoHarm_B = Bank[i].lv[43][19];
   CompBand_B = Bank[i].lv[44][19];
+  Opticaltrem_B = Bank[i].lv[45][19];
 
 
   Bypass_B = Bypass;
@@ -1939,6 +1965,8 @@ RKR::Preset_to_Bank (int i)
     lv[43][j] = efx_StereoHarm->getpar(j);
   for (j = 0; j <= 12; j++)
     lv[44][j] = efx_CompBand->getpar(j);
+  for (j = 0; j <= 5; j++)
+    lv[45][j] = efx_Opticaltrem->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -2017,6 +2045,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[42][19] = Echotron_Bypass;
   Bank[i].lv[43][19] = StereoHarm_Bypass;
   Bank[i].lv[44][19] = CompBand_Bypass;
+  Bank[i].lv[45][19] = Opticaltrem_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

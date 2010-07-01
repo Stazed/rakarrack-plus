@@ -2283,6 +2283,26 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 380:
          efx_CompBand->changepar(11,2000+(int)((float)value*188.97638));
          break;
+ 
+    case 381:
+         efx_Opticaltrem->changepar(0,value);
+         break; 
+
+    case 382:
+         efx_Opticaltrem->changepar(1,ret_Tempo(value));
+         break; 
+
+    case 383:
+         efx_Opticaltrem->changepar(2,value);
+         break; 
+
+    case 384:
+         efx_Opticaltrem->changepar(4,value);
+         break; 
+
+    case 385:
+         efx_Opticaltrem->changepar(5,value);
+         break; 
 
 
    } 

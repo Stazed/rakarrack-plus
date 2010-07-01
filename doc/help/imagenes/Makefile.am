@@ -64,6 +64,7 @@ html_DATA= icono_rakarrack_128x128.png \
 	ect.jpg \
 	sth.jpg \
 	cpb.jpg \
+	opt.jpg \
 	dlyfile.png \
 	pan.jpg
 	

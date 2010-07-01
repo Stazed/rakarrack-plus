@@ -1,9 +1,12 @@
 ==v0.6.x (  /  /2010) ==
 
-- Added CompBand effect
-- Added Downsample Vocoder
+- Added Extra1 bank to release.
+- Added Opticaltrem effect.
+- DnD swap presets on Bank Window
+- Added CompBand effect.
+- Added Downsample Vocoder.
 - Added Vocoder bands selectable.
-- Added StereoHarm effect
+- Added StereoHarm effect.
 
 
 

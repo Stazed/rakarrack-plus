@@ -22069,7 +22069,27 @@ switch (i)
      cband_cross3->value(rkr->efx_CompBand->getpar(11));
      cband_cross3->redraw();
      break;
-
+     case 381:
+     otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
+     otrem_dpth->redraw();
+     break;
+     case 382:
+     otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+     otrem_freq->redraw();
+     break;
+     case 383:
+     otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
+     otrem_rnd->redraw();
+     break;
+     case 384:
+     otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
+     otrem_stdf->redraw();
+     break;
+     case 385:
+     otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
+     otrem_pan->redraw();
+     break;
+     	
      
       
 }
@@ -22267,6 +22287,10 @@ switch(miralo)
  case 43:
   cband_activar->value(rkr->CompBand_Bypass);
   cband_activar->do_callback();
+  break;
+ case 44:
+  otrem_activar->value(rkr->Opticaltrem_Bypass);
+  otrem_activar->do_callback();
   break;
 
   
@@ -23107,6 +23131,11 @@ void RKRGUI::UpdateTGUI() {
   { 
    echotron_tempo->value(rkr->efx_Echotron->getpar(5));
    echotron_tempo->redraw();
+  }
+    if(rkr->Opticaltrem_Bypass)
+  {
+    otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+    otrem_freq->redraw();  
   }
 }
 

@@ -372,7 +372,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 355;
+  NumParams= 360;
 
 {
    static const char *los_params[] = 
@@ -587,6 +587,11 @@ RKR::RKR ()
 "MuTroMojo Wah","264","31",
 "MuTroMojo WD","256","31",
 "MuTroMojo Width","260","31",
+"Opticaltrem Depth","381","44",
+"Opticaltrem Pan","385","44",
+"Opticaltrem Rnd","383","44",
+"Opticaltrem St.df","384","44",
+"Opticaltrem Tempo","382","44",
 "Overdrive Drive","68","3",
 "Overdrive Level","70","3",
 "Overdrive LPF","85","3",

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><!-- This file was originally generated from OpenOffice, but is now maintained 
+<html><head>
+<!-- This file was originally generated from OpenOffice, but is now maintained 
   by hand. It is used for both the in-application help and the online help.
 
   When making updates to this file, make sure you also update the online 
@@ -30,7 +31,7 @@
       <a href="#Looper">Looper</a> <a href="#MuTroMojo">MuTroMojo</a> <a href="#Echoverse">Echoverse</a> 
       <a href="#CoilCrafter">CoilCrafter</a> <a href="#ShelfBoost">ShelfBoost</a> <a href="#Vocoder">Vocoder</a> 
       <a href="#Sustainer">Sustainer</a> <a href="#Sequence">Sequence</a> <a href="#Shifter">Shifter</a> 
-      <a href="#StompBox">StompBox</a> <a href="#Reverbtron">Reverbtron</a> <a href="#Echotron">Echotron</a> <a href="#StereoHarm">StereoHarm</a> <a href="#CompBand">CompBand</a><br></p>
+      <a href="#StompBox">StompBox</a> <a href="#Reverbtron">Reverbtron</a> <a href="#Echotron">Echotron</a> <a href="#StereoHarm">StereoHarm</a> <a href="#CompBand">CompBand</a> <a href="#Otrem">Opticaltrem</a><br></p>
 
 <p>The program has many effects, you can select any
 of the available effects. Ten can be used simultaneously. It
@@ -2288,6 +2289,68 @@ form:</p>
 <p>Cross1-&gt;Cross2 = Mid Low</p>
 <p>Cross2-&gt;Cross3 = High Low</p>
 <p>Cross3-&gt;26 KHz = High</p>
+</td></tr></tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+<h3><a name="Otrem"></a>Opticaltrem</h3>
+<br>
+<table cellpadding="5" cellspacing="2">
+<tbody><tr><td style="vertical-align: top;">
+      <p><img style="width: 185px; height: 250px;" src="imagenes/opt.jpg" alt="rakarrack Optocaltrem"></p>
+      </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Opticaltrem</p>
+<p>Short explanation of Tremolo, for those who are "newbies" to guitar
+effects:&nbsp; A tremolo is like an automatic volume knob.&nbsp; You
+set the rate and depth, and it's like having somebody change the volume
+knob up and down at the set rate and amount set by depth.&nbsp; No
+effects processor would be complete without a tremolo.&nbsp; In prior
+versions of Rakarrack, there is the AutoPan function in the stereo Pan
+effect.&nbsp; In Auto mode, the Pan is a tremolo, but is not a
+"classic" sounding tremolo.</p>
+<p>This module emulates the tremolo found in classic guitar amplifiers
+(which also can be found in several stompbox tremolo units).&nbsp; The
+reason for the name "Opticaltrem" is because of the photo-electric
+device that was used to change the electrical resistance of the signal
+path in the amplifier circuit.&nbsp; The device in that configuration
+makes a tremolo effect when exposed to a pulsing light source.&nbsp;
+Incidentally, this is the same type of component used in "Optical
+Compressors".&nbsp; If&nbsp; you have ever heard that term, now you
+know what it means.</p>
+
+<p>Here is a more technical explanation:</p>
+<p>The volume knob is nothing more than a variable resistor.&nbsp; The
+volume knob varies the amount of signal current going into the next
+stage of the circuit.&nbsp; In many old guitar amplifiers this effect
+is emulated by a variable resistance that can be changed by exposing it
+to light.&nbsp; Usually the variable resistance element consisted of a
+light-proof container (opaque box) containing a Cds (Cadmium Sulfide)
+cell and a lamp, or LED for more modern units.&nbsp; When Cds is
+exposed to light, its electrical resistance decreases, and thus its
+terminals behave like the resistance between the wiper and outer lug on
+a potentiometer (volume control). </p>
+<p>If the response of the pulsing lamp was perfectly linear with the
+voltage from the LFO, and if the Cds cell response was perfectly linear
+with the light, then the effect would sound exactly the same as
+Pan.&nbsp;&nbsp; As it is with most physical electrical devices, most
+things have interesting nonlinear properties.&nbsp; Even more, there is
+a time dependency in the system.&nbsp; It takes time for a lamp to heat
+up and turn on.&nbsp; When current is removed, there is still some heat
+in the filament, and light fades out in a time-dependent way.&nbsp;
+Then, the Cds cell itself has some "memory".&nbsp; The resistance does
+not change instantly when light is applied and removed, nor does it
+work the same for charging and discharging.</p>
+<p>Perhaps that explains why there is a need for a special "Opticaltrem"
+module in Rakarrack to emulate this behavior.&nbsp; We hope this will
+bring to mind the sound of the tremolo in an old tube amp.</p>
+
+<p><b>Depth</b>: Amount of effect.&nbsp; At full depth it is almost turning off entirely between
+pulses.</p>
+<p><b>Tempo</b>: Speed of pulsating sound.</p>
+<p><b>Rnd</b>: Adds some random noise to the LFO to emulate the imperfections of an analog LFO.</p>
+<p><b>LFO Type</b>: The shape you want it to use.</p>
+<p><b>St.df</b>: Stereo difference between left and right LFO's.</p>
+<p><b>Pan</b>: The effect can be panned to the left or to the right.</p>
 </td></tr></tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
