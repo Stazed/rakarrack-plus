@@ -2879,7 +2879,7 @@ har_freq1->value(rkr->efx_Har->getpar(4));
 har_gan1->value(rkr->efx_Har->getpar(8)-64);
 har_q1->value(rkr->efx_Har->getpar(9)-64);
 har_MIDI->value(rkr->efx_Har->getpar(10));
-Chord(0);
+if ((rkr->efx_Har->PMIDI) || (rkr->efx_Har->PSELECT)) Chord(0);
 }
 void RKRGUI::cb_har_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_preset_i(o,v);
@@ -6328,7 +6328,7 @@ shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
 shar_MIDI->value(rkr->efx_StereoHarm->getpar(10));
-Chord(1);
+if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) Chord(1);
 }
 void RKRGUI::cb_shar_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_preset_i(o,v);

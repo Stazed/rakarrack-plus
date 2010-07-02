@@ -835,7 +835,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -3200,7 +3201,7 @@ har_freq1->value(rkr->efx_Har->getpar(4));
 har_gan1->value(rkr->efx_Har->getpar(8)-64);
 har_q1->value(rkr->efx_Har->getpar(9)-64);
 har_MIDI->value(rkr->efx_Har->getpar(10));
-Chord(0);}
+if ((rkr->efx_Har->PMIDI) || (rkr->efx_Har->PSELECT)) Chord(0);} selected
           xywh {398 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6979,7 +6980,7 @@ shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
 shar_MIDI->value(rkr->efx_StereoHarm->getpar(10));
-Chord(1);}
+if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) Chord(1);}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7075,7 +7076,7 @@ if(!(int)o->value())
 {
 rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
 rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
-}} selected
+}}
           xywh {329 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Box shar_chordname {
