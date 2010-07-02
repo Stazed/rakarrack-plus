@@ -3641,6 +3641,12 @@ private:
   void cb_RTrigger_i(Fl_Counter*, void*);
   static void cb_RTrigger(Fl_Counter*, void*);
 public:
+  Fl_Choice *RC_Opti;
+private:
+  void cb_RC_Opti_i(Fl_Choice*, void*);
+  static void cb_RC_Opti(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_RC_Opti[];
+public:
   Fl_Choice *Har_Downsample;
 private:
   void cb_Har_Downsample_i(Fl_Choice*, void*);

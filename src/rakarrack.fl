@@ -835,8 +835,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -3201,7 +3200,7 @@ har_freq1->value(rkr->efx_Har->getpar(4));
 har_gan1->value(rkr->efx_Har->getpar(8)-64);
 har_q1->value(rkr->efx_Har->getpar(9)-64);
 har_MIDI->value(rkr->efx_Har->getpar(10));
-if ((rkr->efx_Har->PMIDI) || (rkr->efx_Har->PSELECT)) Chord(0);} selected
+if ((rkr->efx_Har->PMIDI) || (rkr->efx_Har->PSELECT)) Chord(0);}
           xywh {398 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -8164,7 +8163,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1394 23 640 528} type Double color 4 hide
+      xywh {1507 222 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -8341,34 +8340,34 @@ PutBackground();}
           Fl_Check_Button INSTATE {
             label {FX On at start}
             callback {rkr->init_state=(int) o->value();}
-            xywh {96 58 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {96 29 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
           Fl_Check_Button Filter_DC {
             label {Filter Input DC Offset}
             callback {rkr->DC_Offset=(int) o->value();}
-            xywh {135 82 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {135 53 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
           Fl_Check_Button Pre_Serve {
             label {Preserve Gain/Master when Preset change}
             callback {rkr->actuvol=(int) o->value();}
-            xywh {259 106 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {259 77 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
           Fl_Check_Button Update_TAP {
             label {Update TapTempo when Preset change}
             callback {rkr->Tap_Updated = (int) o->value();}
-            xywh {239 129 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {239 100 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
           Fl_Check_Button UPSAMPLE_C {
             label Upsampling
             callback {Show_Next_Time();}
-            xywh {83 153 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
+            xywh {83 124 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
           }
           Fl_Choice Upr_Amo {
             label Amount
             callback {rkr->UpAmo =(int) o->value();
 
 Show_Next_Time();}
-            xywh {145 155 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {145 126 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
               label x2
@@ -8396,7 +8395,7 @@ Show_Next_Time();}
             callback {rkr->UpQual =(int) o->value();
 
 Show_Next_Time();}
-            xywh {217 155 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {217 126 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
               label Best
@@ -8424,7 +8423,7 @@ Show_Next_Time();}
             callback {rkr->DownQual =(int) o->value();
 
 Show_Next_Time();}
-            xywh {329 155 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {329 126 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
           Fl_Counter L_SIZE {
@@ -8434,7 +8433,7 @@ Show_Next_Time();}
 Show_Next_Time();
 rkr->m_displayed=1;
 }}
-            xywh {133 178 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
+            xywh {133 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
           }
           Fl_Choice Har_Qual {
             label {Harmonizer Quality      }
@@ -8460,7 +8459,7 @@ switch(i)
 
 
 Show_Next_Time();}
-            xywh {132 202 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {132 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
               label 4
@@ -8503,7 +8502,7 @@ switch(i)
 
 
 Show_Next_Time();}
-            xywh {296 202 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {296 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
               label 4
@@ -8549,7 +8548,7 @@ Show_Next_Time();}
 }
 
 Show_Next_Time();}
-            xywh {132 225 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+            xywh {132 196 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
               label 16
@@ -8575,20 +8574,60 @@ Show_Next_Time();}
           Fl_Check_Button FLPosition {
             label {Limiter before Output Volume}
             callback {rkr->flpos=(int)o->value();}
-            xywh {186 251 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {186 222 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
           Fl_Counter Calibration {
             label {Tuner Calibration A4 }
             callback {aFreq=o->value();
 rkr->update_freqs(aFreq);}
-            xywh {120 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
+            xywh {120 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
           }
           Fl_Counter RTrigger {
             label {Recognize Note Trigger}
             callback {rkr->rtrig = o->value();
 rkr->RecNote->trigfact = o->value();}
-            xywh {367 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 0.99 step 0.01 value 0.6 textsize 10
+            xywh {367 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 0.99 step 0.01 value 0.6 textsize 10
             code0 {o->lstep(0.1);}
+          }
+          Fl_Choice RC_Opti {
+            label {Recognize Note Optimization}
+            callback {rkr->RCOpti =(int) o->value();
+
+switch(rkr->RCOpti)
+  {
+  
+  
+    case 0:
+    	rkr->RecNote->setlpf(14000);
+    	rkr->RecNote->sethpf(40);
+    	break;
+    	
+
+    case 1:
+    	rkr->RecNote->setlpf(8000);
+    	rkr->RecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	rkr->RecNote->setlpf(3500);
+    	rkr->RecNote->sethpf(300);
+    	break;
+
+}} selected
+            xywh {160 277 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          } {
+            MenuItem {} {
+              label Normal
+              xywh {40 40 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label Guitar
+              xywh {40 40 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label Voice
+              xywh {30 30 36 21} labelsize 10
+            }
           }
           Fl_Choice Har_Downsample {
             label {Harmonizer Downsample }
@@ -9639,6 +9678,11 @@ if(rkr->init_state)
   rkr->calculavol(2);
 }  
 
+
+rakarrack.get(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti,0);
+RC_Opti->do_callback();
+
+
 //MIDIConverter
 
 rakarrack.get(rkr->PrefNom("Midi Out Channel"),k,1);
@@ -9714,6 +9758,8 @@ rakarrack.set(rkr->PrefNom("Help W"),visor->w());
 rakarrack.set(rkr->PrefNom("Help H"),visor->h());
 rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 }
+
+rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti); 
 
 //MIDIConverter
 
@@ -11098,6 +11144,7 @@ Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
 Calibration->value(aFreq);
 RTrigger->value(rkr->RecNote->trigfact);
+RC_Opti->value(rkr->RCOpti);
 
 switch(rkr->VocBands)
 {

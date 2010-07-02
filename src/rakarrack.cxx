@@ -7770,6 +7770,42 @@ void RKRGUI::cb_RTrigger(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RTrigger_i(o,v);
 }
 
+void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) {
+  rkr->RCOpti =(int) o->value();
+
+switch(rkr->RCOpti)
+  {
+  
+  
+    case 0:
+    	rkr->RecNote->setlpf(14000);
+    	rkr->RecNote->sethpf(40);
+    	break;
+    	
+
+    case 1:
+    	rkr->RecNote->setlpf(8000);
+    	rkr->RecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	rkr->RecNote->setlpf(3500);
+    	rkr->RecNote->sethpf(300);
+    	break;
+
+};
+}
+void RKRGUI::cb_RC_Opti(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_Opti_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_RC_Opti[] = {
+ {"Normal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Voice", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void RKRGUI::cb_Har_Downsample_i(Fl_Choice* o, void*) {
   rkr->Har_Down=(int)o->value();
 Show_Next_Time();
@@ -17789,35 +17825,35 @@ R average.");
         AUDIO_SET->align(FL_ALIGN_LEFT);
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
-        { INSTATE = new Fl_Check_Button(96, 58, 23, 20, "FX On at start");
+        { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
           INSTATE->down_box(FL_DOWN_BOX);
           INSTATE->labelsize(11);
           INSTATE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           INSTATE->callback((Fl_Callback*)cb_INSTATE);
           INSTATE->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* INSTATE
-        { Filter_DC = new Fl_Check_Button(135, 82, 23, 20, "Filter Input DC Offset");
+        { Filter_DC = new Fl_Check_Button(135, 53, 23, 20, "Filter Input DC Offset");
           Filter_DC->down_box(FL_DOWN_BOX);
           Filter_DC->labelsize(11);
           Filter_DC->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Filter_DC->callback((Fl_Callback*)cb_Filter_DC);
           Filter_DC->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Filter_DC
-        { Pre_Serve = new Fl_Check_Button(259, 106, 21, 20, "Preserve Gain/Master when Preset change");
+        { Pre_Serve = new Fl_Check_Button(259, 77, 21, 20, "Preserve Gain/Master when Preset change");
           Pre_Serve->down_box(FL_DOWN_BOX);
           Pre_Serve->labelsize(11);
           Pre_Serve->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
           Pre_Serve->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Pre_Serve
-        { Update_TAP = new Fl_Check_Button(239, 129, 21, 20, "Update TapTempo when Preset change");
+        { Update_TAP = new Fl_Check_Button(239, 100, 21, 20, "Update TapTempo when Preset change");
           Update_TAP->down_box(FL_DOWN_BOX);
           Update_TAP->labelsize(11);
           Update_TAP->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Update_TAP->callback((Fl_Callback*)cb_Update_TAP);
           Update_TAP->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Update_TAP
-        { UPSAMPLE_C = new Fl_Check_Button(83, 153, 23, 20, "Upsampling");
+        { UPSAMPLE_C = new Fl_Check_Button(83, 124, 23, 20, "Upsampling");
           UPSAMPLE_C->down_box(FL_DOWN_BOX);
           UPSAMPLE_C->labelsize(11);
           UPSAMPLE_C->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17825,7 +17861,7 @@ R average.");
           UPSAMPLE_C->align(FL_ALIGN_LEFT);
           UPSAMPLE_C->when(FL_WHEN_CHANGED);
         } // Fl_Check_Button* UPSAMPLE_C
-        { Upr_Amo = new Fl_Choice(145, 155, 47, 18, "Amount");
+        { Upr_Amo = new Fl_Choice(145, 126, 47, 18, "Amount");
           Upr_Amo->down_box(FL_BORDER_BOX);
           Upr_Amo->labelsize(10);
           Upr_Amo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17834,7 +17870,7 @@ R average.");
           Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
           Upr_Amo->menu(menu_Upr_Amo);
         } // Fl_Choice* Upr_Amo
-        { Upr_Qual = new Fl_Choice(217, 155, 72, 18, "Up");
+        { Upr_Qual = new Fl_Choice(217, 126, 72, 18, "Up");
           Upr_Qual->down_box(FL_BORDER_BOX);
           Upr_Qual->labelsize(10);
           Upr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17843,7 +17879,7 @@ R average.");
           Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
           Upr_Qual->menu(menu_Upr_Qual);
         } // Fl_Choice* Upr_Qual
-        { Fl_Choice* o = Downr_Qual = new Fl_Choice(329, 155, 73, 18, "Down");
+        { Fl_Choice* o = Downr_Qual = new Fl_Choice(329, 126, 73, 18, "Down");
           Downr_Qual->down_box(FL_BORDER_BOX);
           Downr_Qual->labelsize(10);
           Downr_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17852,7 +17888,7 @@ R average.");
           Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Downr_Qual
-        { L_SIZE = new Fl_Counter(133, 178, 47, 18, "Looper Size Seconds     ");
+        { L_SIZE = new Fl_Counter(133, 149, 47, 18, "Looper Size Seconds     ");
           L_SIZE->type(1);
           L_SIZE->labelsize(10);
           L_SIZE->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17865,7 +17901,7 @@ R average.");
           L_SIZE->align(FL_ALIGN_LEFT);
           L_SIZE->when(FL_WHEN_RELEASE);
         } // Fl_Counter* L_SIZE
-        { Har_Qual = new Fl_Choice(132, 202, 47, 18, "Harmonizer Quality      ");
+        { Har_Qual = new Fl_Choice(132, 173, 47, 18, "Harmonizer Quality      ");
           Har_Qual->down_box(FL_BORDER_BOX);
           Har_Qual->labelsize(10);
           Har_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17874,7 +17910,7 @@ R average.");
           Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
           Har_Qual->menu(menu_Har_Qual);
         } // Fl_Choice* Har_Qual
-        { Ste_Qual = new Fl_Choice(296, 202, 47, 18, "StereoHarm Quality");
+        { Ste_Qual = new Fl_Choice(296, 173, 47, 18, "StereoHarm Quality");
           Ste_Qual->down_box(FL_BORDER_BOX);
           Ste_Qual->labelsize(10);
           Ste_Qual->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17883,7 +17919,7 @@ R average.");
           Ste_Qual->callback((Fl_Callback*)cb_Ste_Qual);
           Ste_Qual->menu(menu_Ste_Qual);
         } // Fl_Choice* Ste_Qual
-        { Voc_Bands = new Fl_Choice(132, 225, 47, 18, "Vocoder Bands              ");
+        { Voc_Bands = new Fl_Choice(132, 196, 47, 18, "Vocoder Bands              ");
           Voc_Bands->down_box(FL_BORDER_BOX);
           Voc_Bands->labelsize(10);
           Voc_Bands->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17892,14 +17928,14 @@ R average.");
           Voc_Bands->callback((Fl_Callback*)cb_Voc_Bands);
           Voc_Bands->menu(menu_Voc_Bands);
         } // Fl_Choice* Voc_Bands
-        { FLPosition = new Fl_Check_Button(186, 251, 23, 20, "Limiter before Output Volume");
+        { FLPosition = new Fl_Check_Button(186, 222, 23, 20, "Limiter before Output Volume");
           FLPosition->down_box(FL_DOWN_BOX);
           FLPosition->labelsize(11);
           FLPosition->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           FLPosition->callback((Fl_Callback*)cb_FLPosition);
           FLPosition->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* FLPosition
-        { Calibration = new Fl_Counter(120, 278, 116, 21, "Tuner Calibration A4 ");
+        { Calibration = new Fl_Counter(120, 249, 116, 21, "Tuner Calibration A4 ");
           Calibration->labelsize(10);
           Calibration->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Calibration->minimum(420);
@@ -17909,7 +17945,7 @@ R average.");
           Calibration->callback((Fl_Callback*)cb_Calibration);
           Calibration->align(FL_ALIGN_LEFT);
         } // Fl_Counter* Calibration
-        { Fl_Counter* o = RTrigger = new Fl_Counter(367, 278, 116, 21, "Recognize Note Trigger");
+        { Fl_Counter* o = RTrigger = new Fl_Counter(367, 249, 116, 21, "Recognize Note Trigger");
           RTrigger->labelsize(10);
           RTrigger->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           RTrigger->minimum(0.01);
@@ -17921,6 +17957,15 @@ R average.");
           RTrigger->align(FL_ALIGN_LEFT);
           o->lstep(0.1);
         } // Fl_Counter* RTrigger
+        { RC_Opti = new Fl_Choice(160, 277, 72, 18, "Recognize Note Optimization");
+          RC_Opti->down_box(FL_BORDER_BOX);
+          RC_Opti->labelsize(10);
+          RC_Opti->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          RC_Opti->textsize(10);
+          RC_Opti->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          RC_Opti->callback((Fl_Callback*)cb_RC_Opti);
+          RC_Opti->menu(menu_RC_Opti);
+        } // Fl_Choice* RC_Opti
         { Har_Downsample = new Fl_Choice(145, 306, 70, 18, "Harmonizer Downsample ");
           Har_Downsample->down_box(FL_BORDER_BOX);
           Har_Downsample->labelsize(10);
@@ -18953,6 +18998,11 @@ if(rkr->init_state)
   rkr->calculavol(2);
 }  
 
+
+rakarrack.get(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti,0);
+RC_Opti->do_callback();
+
+
 //MIDIConverter
 
 rakarrack.get(rkr->PrefNom("Midi Out Channel"),k,1);
@@ -19029,6 +19079,8 @@ rakarrack.set(rkr->PrefNom("Help W"),visor->w());
 rakarrack.set(rkr->PrefNom("Help H"),visor->h());
 rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 }
+
+rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti); 
 
 //MIDIConverter
 
@@ -20420,6 +20472,7 @@ Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
 Calibration->value(aFreq);
 RTrigger->value(rkr->RecNote->trigfact);
+RC_Opti->value(rkr->RCOpti);
 
 switch(rkr->VocBands)
 {

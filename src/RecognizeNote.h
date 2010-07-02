@@ -24,7 +24,8 @@ public:
   ~Recognize ();
 
   void schmittFloat (float *indatal, float *indatar);
-
+  void sethpf(int value);
+  void setlpf(int value);
   int note;
 
   signed short int *schmittBuffer;
@@ -47,6 +48,8 @@ private:
 
   int ultima;
   int blockSize;
+
+  AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
 
   class Sustainer *Sus;
 

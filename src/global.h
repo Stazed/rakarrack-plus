@@ -520,6 +520,7 @@ public:
   int last_auxvalue;
   int ena_tool;
   int VocBands;
+  int RCOpti;
  
   int mtc_counter;
   int EnableBackgroundImage;

@@ -55,6 +55,15 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
   Sus->changepar(1,48);
   Sus->changepar(2,127);
 
+
+  lpfl = new AnalogFilter (2, 3000, 1, 0);
+  lpfr = new AnalogFilter (2, 3000, 1, 0);
+  hpfl = new AnalogFilter (3, 300, 1, 0);
+  hpfr = new AnalogFilter (3, 300, 1, 0);
+
+
+
+
   schmittInit (24);
 
 }
@@ -136,11 +145,36 @@ Recognize::schmittFree ()
   free (schmittBuffer);
 };
 
+
+void
+Recognize::setlpf (int value)
+{
+  float fr = (float)value;
+  lpfl->setfreq (fr);
+  lpfr->setfreq (fr);
+};
+
+void
+Recognize::sethpf (int value)
+{
+  float fr = (float)value;
+
+  hpfl->setfreq (fr);
+  hpfr->setfreq (fr);
+}
+
+
+
 void
 Recognize::schmittFloat (float *indatal, float *indatar)
 {
   int i;
   signed short int buf[PERIOD];
+
+  lpfl->filterout (indatal);
+  hpfl->filterout (indatal);
+  lpfr->filterout (indatar);
+  hpfr->filterout (indatar);
 
   Sus->out(indatal,indatar);
   
