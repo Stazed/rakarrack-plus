@@ -55,7 +55,7 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
   Sus->changepar(1,48);
   Sus->changepar(2,127);
 
-  schmittInit (32);
+  schmittInit (24);
 
 }
 

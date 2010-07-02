@@ -2857,6 +2857,8 @@ void RKRGUI::cb_har_activar_i(Fl_Light_Button* o, void*) {
   rkr->Harmonizer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
+rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
+Chord(0);
 findpos(14,(int)o->value());
 }
 void RKRGUI::cb_har_activar(Fl_Light_Button* o, void* v) {
@@ -2944,6 +2946,7 @@ void RKRGUI::cb_har_q1(SliderW* o, void* v) {
 void RKRGUI::cb_har_MIDI_i(Fl_Check_Button* o, void*) {
   rkr->efx_Har->changepar(10,(int)o->value());
 rkr->RC->cleanup();
+if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 }
 void RKRGUI::cb_har_MIDI(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_MIDI_i(o,v);
@@ -2952,6 +2955,7 @@ void RKRGUI::cb_har_MIDI(Fl_Check_Button* o, void* v) {
 void RKRGUI::cb_har_SELECT_i(Fl_Check_Button* o, void*) {
   rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC->cleanup();
+if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);
 }
 void RKRGUI::cb_har_SELECT(Fl_Check_Button* o, void* v) {
@@ -6300,6 +6304,9 @@ void RKRGUI::cb_shar_activar_i(Fl_Light_Button* o, void*) {
   rkr->StereoHarm_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StereoHarm->cleanup();
+rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
+rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+Chord(1);
 findpos(42,(int)o->value());
 }
 void RKRGUI::cb_shar_activar(Fl_Light_Button* o, void* v) {
@@ -6398,6 +6405,12 @@ void RKRGUI::cb_shar_lrc(SliderW* o, void* v) {
 void RKRGUI::cb_shar_MIDI_i(Fl_Check_Button* o, void*) {
   rkr->efx_StereoHarm->changepar(10,(int)o->value());
 rkr->RC->cleanup();
+
+if(!(int)o->value())
+{
+rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
+rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+};
 }
 void RKRGUI::cb_shar_MIDI(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_MIDI_i(o,v);
@@ -6407,6 +6420,12 @@ void RKRGUI::cb_shar_SELECT_i(Fl_Check_Button* o, void*) {
   rkr->efx_StereoHarm->changepar(7,(int)o->value());
 rkr->RC->cleanup();
 Chord(1);
+
+if(!(int)o->value())
+{
+rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
+rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+};
 }
 void RKRGUI::cb_shar_SELECT(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_SELECT_i(o,v);
@@ -17894,7 +17913,7 @@ R average.");
           RTrigger->labelsize(10);
           RTrigger->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           RTrigger->minimum(0.01);
-          RTrigger->maximum(1);
+          RTrigger->maximum(0.99);
           RTrigger->step(0.01);
           RTrigger->value(0.6);
           RTrigger->textsize(10);

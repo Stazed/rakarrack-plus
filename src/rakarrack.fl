@@ -1285,7 +1285,7 @@ if (rkr->RControl)
       GMM->color(fore_color);
       GMM->redraw();
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -3179,6 +3179,8 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
           callback {rkr->Harmonizer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
+rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
+Chord(0);
 findpos(14,(int)o->value());}
           xywh {326 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
@@ -3262,7 +3264,8 @@ if((int)har_activar->value())rkr->Harmonizer_Bypass=1;}
           label MIDI
           user_data 2
           callback {rkr->efx_Har->changepar(10,(int)o->value());
-rkr->RC->cleanup();}
+rkr->RC->cleanup();
+if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));}
           xywh {330 335 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Check_Button har_SELECT {
@@ -3270,6 +3273,7 @@ rkr->RC->cleanup();}
           user_data 2
           callback {rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC->cleanup();
+if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);}
           xywh {330 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
@@ -6952,6 +6956,9 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           callback {rkr->StereoHarm_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StereoHarm->cleanup();
+rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
+rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+Chord(1);
 findpos(42,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
@@ -7048,7 +7055,13 @@ if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
           label MIDI
           user_data 2
           callback {rkr->efx_StereoHarm->changepar(10,(int)o->value());
-rkr->RC->cleanup();}
+rkr->RC->cleanup();
+
+if(!(int)o->value())
+{
+rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
+rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+}}
           xywh {329 340 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Check_Button shar_SELECT {
@@ -7056,7 +7069,13 @@ rkr->RC->cleanup();}
           user_data 2
           callback {rkr->efx_StereoHarm->changepar(7,(int)o->value());
 rkr->RC->cleanup();
-Chord(1);}
+Chord(1);
+
+if(!(int)o->value())
+{
+rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
+rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+}} selected
           xywh {329 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Box shar_chordname {
@@ -8567,7 +8586,7 @@ rkr->update_freqs(aFreq);}
             label {Recognize Note Trigger}
             callback {rkr->rtrig = o->value();
 rkr->RecNote->trigfact = o->value();}
-            xywh {367 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 1 step 0.01 value 0.6 textsize 10
+            xywh {367 278 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 0.99 step 0.01 value 0.6 textsize 10
             code0 {o->lstep(0.1);}
           }
           Fl_Choice Har_Downsample {
