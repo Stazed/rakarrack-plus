@@ -7778,18 +7778,18 @@ switch(rkr->RCOpti)
   
   
     case 0:
-    	rkr->RecNote->setlpf(14000);
-    	rkr->RecNote->sethpf(40);
+    	rkr->RecNote->setlpf(5500);
+    	rkr->RecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	rkr->RecNote->setlpf(8000);
+    	rkr->RecNote->setlpf(4500);
     	rkr->RecNote->sethpf(80);
     	break;
     	
     case 2:
-    	rkr->RecNote->setlpf(3500);
+    	rkr->RecNote->setlpf(3000);
     	rkr->RecNote->sethpf(300);
     	break;
 
