@@ -19000,6 +19000,7 @@ if(rkr->init_state)
 
 
 rakarrack.get(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti,0);
+RC_Opti->value(rkr->RCOpti);
 RC_Opti->do_callback();
 
 
@@ -19080,7 +19081,7 @@ rakarrack.set(rkr->PrefNom("Help H"),visor->h());
 rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 }
 
-rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti); 
+
 
 //MIDIConverter
 
@@ -19154,6 +19155,7 @@ rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
 
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
 rakarrack.set(rkr->PrefNom("Limiter Position"),rkr->flpos);
+rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti);
 rakarrack.set(rkr->PrefNom("Harmonizer Downsample"),rkr->Har_Down);
 rakarrack.set(rkr->PrefNom("Harmonizer Up Quality"),rkr->Har_U_Q);
 rakarrack.set(rkr->PrefNom("Harmonizer Down Quality"),rkr->Har_D_Q);

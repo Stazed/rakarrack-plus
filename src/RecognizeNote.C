@@ -52,7 +52,7 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
   trigfact = trig;
   
   Sus = new Sustainer(efxoutl,efxoutr);  
-  Sus->changepar(1,48);
+  Sus->changepar(1,64);
   Sus->changepar(2,127);
 
 
@@ -161,6 +161,8 @@ Recognize::sethpf (int value)
 
   hpfl->setfreq (fr);
   hpfr->setfreq (fr);
+
+
 }
 
 

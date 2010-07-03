@@ -8331,7 +8331,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
+          user_data 1 selected
           xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -8613,7 +8613,7 @@ switch(rkr->RCOpti)
     	rkr->RecNote->sethpf(300);
     	break;
 
-}} selected
+}}
             xywh {160 277 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
@@ -9680,6 +9680,7 @@ if(rkr->init_state)
 
 
 rakarrack.get(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti,0);
+RC_Opti->value(rkr->RCOpti);
 RC_Opti->do_callback();
 
 
@@ -9759,7 +9760,7 @@ rakarrack.set(rkr->PrefNom("Help H"),visor->h());
 rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 }
 
-rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti); 
+
 
 //MIDIConverter
 
@@ -9833,6 +9834,7 @@ rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
 
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
 rakarrack.set(rkr->PrefNom("Limiter Position"),rkr->flpos);
+rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti);
 rakarrack.set(rkr->PrefNom("Harmonizer Downsample"),rkr->Har_Down);
 rakarrack.set(rkr->PrefNom("Harmonizer Up Quality"),rkr->Har_U_Q);
 rakarrack.set(rkr->PrefNom("Harmonizer Down Quality"),rkr->Har_D_Q);
