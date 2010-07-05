@@ -1,5 +1,6 @@
 ==v0.6.x (  /  /2010) ==
 
+- Added Optimization Filters for instruments on Recognize Note.
 - Added Trigger to Recognize Note input signal value.
 - Added Extra1 bank to release.
 - Added Opticaltrem effect.
