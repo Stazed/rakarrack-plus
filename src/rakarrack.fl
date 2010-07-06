@@ -6956,10 +6956,10 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           callback {rkr->StereoHarm_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StereoHarm->cleanup();
-rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
-rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
+rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 Chord(1);
-findpos(42,(int)o->value());}
+findpos(42,(int)o->value());} selected
           xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice shar_preset {
@@ -7059,8 +7059,8 @@ rkr->RC->cleanup();
 
 if(!(int)o->value())
 {
-rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
-rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
+rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 }}
           xywh {329 340 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
@@ -7073,8 +7073,8 @@ Chord(1);
 
 if(!(int)o->value())
 {
-rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
-rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
+rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 }}
           xywh {329 353 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
@@ -8613,7 +8613,7 @@ switch(rkr->RCOpti)
     	rkr->RecNote->sethpf(300);
     	break;
 
-}} selected
+}}
             xywh {160 277 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {

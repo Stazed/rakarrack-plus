@@ -6304,8 +6304,8 @@ void RKRGUI::cb_shar_activar_i(Fl_Light_Button* o, void*) {
   rkr->StereoHarm_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StereoHarm->cleanup();
-rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
-rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
+rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 Chord(1);
 findpos(42,(int)o->value());
 }
@@ -6408,8 +6408,8 @@ rkr->RC->cleanup();
 
 if(!(int)o->value())
 {
-rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
-rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
+rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 };
 }
 void RKRGUI::cb_shar_MIDI(Fl_Check_Button* o, void* v) {
@@ -6423,8 +6423,8 @@ Chord(1);
 
 if(!(int)o->value())
 {
-rkr->efx_StereoHarm->changepar(2,rkr->efx_StereoHarm->getpar(2));
-rkr->efx_StereoHarm->changepar(5,rkr->efx_StereoHarm->getpar(5));
+rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
+rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 };
 }
 void RKRGUI::cb_shar_SELECT(Fl_Check_Button* o, void* v) {
