@@ -23379,6 +23379,7 @@ if(old != NULL)
 {
 old->color(fore_color);
 old->redraw();
+old->redraw_label();
 }
 }
 

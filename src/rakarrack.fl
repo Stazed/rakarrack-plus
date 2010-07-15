@@ -6959,7 +6959,7 @@ rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 Chord(1);
-findpos(42,(int)o->value());} selected
+findpos(42,(int)o->value());}
           xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice shar_preset {
@@ -13985,7 +13985,8 @@ for (i=0; i<rkr->NumEffects;i++)
 
 Avail_Bro->select(1);} {}
   }
-  Function {highlight()} {} {
+  Function {highlight()} {selected
+  } {
     code {int tipo=0;
 long long k=0;
 
@@ -14028,6 +14029,7 @@ if(old != NULL)
 {
 old->color(fore_color);
 old->redraw();
+old->redraw_label();
 }
 }
 
