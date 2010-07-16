@@ -23495,13 +23495,13 @@ int RKRGUI::prevnext(int e) {
 else
 {
 
-if(Fl::event_key(43)) 
+if((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43))) 
 {
 stecla=1;
 return 1;
 }
 
-if(Fl::event_key(45)) 
+if((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45)))
 {
 stecla=2;
 return 1;
