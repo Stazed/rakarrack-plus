@@ -1049,12 +1049,30 @@ rkr->cents_old=rkr->efx_Tuner->cents;
 if (Principal->w() != rkr->resolution) adjustfont();
 
 
+if(stecla==1)
+{
+ if(rkr->Selected_Preset<60) preset=rkr->Selected_Preset+1;
+ stecla=0;
+}
+
+
+if(stecla==2)
+{
+ if(rkr->Selected_Preset>1) preset=rkr->Selected_Preset-1;
+ stecla=0;
+}
+
+
+
 if (preset!=1000)
 {
  Preset_Counter->value(preset);
  Preset_Counter->do_callback();
  preset=1000;
 }
+
+
+
 
 ActMIDI();
 if(rkr->ACI_Bypass) ActACI();
@@ -18750,6 +18768,7 @@ put_icon(Principal);
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
+Fl::add_handler(prevnext);
 }
 
 void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
@@ -23405,8 +23424,6 @@ if(tecla != last_tecla)
 
 
 
-
-
 }
 }
 
@@ -23471,4 +23488,26 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
 closedir(dir);
 
 CH_UB->menu(n->menu());
+}
+
+int RKRGUI::prevnext(int e) {
+  if(e != 12) return 0;
+else
+{
+
+if(Fl::event_key(43)) 
+{
+stecla=1;
+return 1;
+}
+
+if(Fl::event_key(45)) 
+{
+stecla=2;
+return 1;
+}
+
+}
+
+return 0;
 }

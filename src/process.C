@@ -41,6 +41,7 @@ int gate[POLY];
 int reconota;
 int maxx_len;
 int error_num;
+int stecla;
 unsigned int SAMPLE_RATE;
 float fPERIOD;
 float fSAMPLE_RATE;

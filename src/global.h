@@ -154,6 +154,7 @@ extern int maxx_len;
 extern int error_num;
 extern int PERIOD;
 extern int reconota;
+extern int stecla;
 extern unsigned int SAMPLE_RATE;
 extern int note_active[POLY];
 extern int rnote[POLY];
