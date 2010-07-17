@@ -845,7 +845,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1513 90 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1506 83 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7880,6 +7880,94 @@ UpdateTGUI();
           xywh {715 165 70 22} box DOWN_BOX labelcolor 1
         }
       }
+      Fl_Group VIBE {
+        user_data 1
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button vibe_activar {
+          label On
+          user_data 2
+          callback {rkr->Vibe_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Vibe->cleanup();
+findpos(45,(int)o->value());}
+          xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice vibe_preset {
+          label Preset
+          user_data 12
+          callback {long long ud= (long long) v;
+if((ud==0)||(ud==12))rkr->efx_Vibe->setpreset((int)o->value());
+vibe_dpth->value(rkr->efx_Vibe->getpar(0));
+vibe_freq->value(rkr->efx_Vibe->getpar(1));
+vibe_rnd->value(rkr->efx_Vibe->getpar(2));
+vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
+vibe_stdf->value(rkr->efx_Vibe->getpar(4));
+vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);}
+          xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Fast
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Trem 2}
+            xywh {82 82 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Hard Pan}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Soft Pan}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Ramp Down}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Hard Ramp}
+            xywh {10 10 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider vibe_dpth {
+          label Depth
+          callback {rkr->efx_Vibe->changepar(0,(int)o->value());}
+          xywh {372 244 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vibe_freq {
+          label Tempo
+          callback {rkr->efx_Vibe->changepar(1,(int)o->value());}
+          xywh {372 264 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vibe_rnd {
+          label Rnd
+          callback {rkr->efx_Vibe->changepar(2,(int)o->value());}
+          xywh {372 284 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Choice vibe_lfotype {
+          label {LFO Type}
+          callback {rkr->efx_Vibe->changepar(3,(int)o->value());}
+          xywh {383 311 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_chorus_lfotype);}
+        } {}
+        Fl_Value_Slider vibe_stdf {
+          label {St.df}
+          callback {rkr->efx_Vibe->changepar(4,(int)o->value());}
+          xywh {372 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vibe_pan {
+          label Pan
+          callback {rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
+          xywh {372 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+      }
     }
     Fl_Window BankWindow {
       callback {o->hide();
@@ -10183,7 +10271,14 @@ cband_preset->do_callback(cband_preset,1);
 otrem_activar->value(rkr->Opticaltrem_Bypass);
 otrem_preset->do_callback(otrem_preset,1);
 
-reordena();} {}
+//Vibe
+vibe_activar->value(rkr->Vibe_Bypass);
+vibe_preset->do_callback(vibe_preset,1);
+
+
+
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {
@@ -10532,6 +10627,9 @@ for (i=1; i<=t; i++)
         break;
         case 44:
         OTREM->hide();
+        break;
+        case 45:
+        VIBE->hide();
         break;
         
 
@@ -10918,6 +11016,13 @@ switch (rkr->efx_order[i])
        otrem_activar->shortcut(s[i]);
        OTREM->show();
        if(rkr->Opticaltrem_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       break; 
+
+   case 45:
+       VIBE->position(x[i],y[i]);
+       vibe_activar->shortcut(s[i]);
+       VIBE->show();
+       if(rkr->Vibe_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
        break; 
 
 
@@ -13074,6 +13179,10 @@ switch(miralo)
   otrem_activar->value(rkr->Opticaltrem_Bypass);
   otrem_activar->do_callback();
   break;
+case 45:
+  vibe_activar->value(rkr->Vibe_Bypass);
+  vibe_activar->do_callback();
+  break;
 
   
   case 121:
@@ -13178,6 +13287,7 @@ ECHOTRON->image(InOut->image());
 SHAR->image(InOut->image());
 COMPBAND->image(InOut->image());
 OTREM->image(InOut->image());
+VIBE->image(InOut->image());
 
 
 Tap->image(InOut->image());
@@ -13895,15 +14005,20 @@ looper_t2->redraw();} {}
    echo_delay->value(rkr->efx_Echo->getpar(2));
    echo_delay->redraw();
   }
-    if(rkr->Echotron_Bypass)
+  if(rkr->Echotron_Bypass)
   { 
    echotron_tempo->value(rkr->efx_Echotron->getpar(5));
    echotron_tempo->redraw();
   }
-    if(rkr->Opticaltrem_Bypass)
+  if(rkr->Opticaltrem_Bypass)
   {
     otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
     otrem_freq->redraw();  
+  }
+  if(rkr->Vibe_Bypass)
+  {
+    vibe_freq->value(rkr->efx_Vibe->getpar(1));
+    vibe_freq->redraw();  
   }} {}
   }
   Function {ActACI()} {} {
@@ -14157,7 +14272,6 @@ return 1;
 
 }
 
-return 0;} {selected
-    }
+return 0;} {}
   }
 } 

@@ -274,6 +274,7 @@ RKR::RKR ()
   efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q);
   efx_CompBand = new CompBand(efxoutl,efxoutr);
   efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr);
+  efx_Vibe = new Vibe(efxoutl,efxoutr);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -310,7 +311,7 @@ RKR::RKR ()
 128 - Synthesis
 */
 
-  NumEffects = 45;
+  NumEffects = 46;
 
   {
     static const char *los_names[] =
@@ -358,6 +359,7 @@ RKR::RKR ()
 "Synthfilter","27","16",
 "Valve","19","9",
 "VaryBand","28","2",
+"Vibe","45","2",
 "Vocoder","35","128",
 "WahWah","10","16"
 
@@ -1354,6 +1356,7 @@ RKR::cleanup_efx ()
   efx_StereoHarm->cleanup();
   efx_CompBand->cleanup();
   efx_Opticaltrem->cleanup();
+  efx_Vibe->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
 
@@ -1805,6 +1808,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Opticaltrem_Bypass)
                 {
                   efx_Opticaltrem->out(efxoutl, efxoutr);
+		  Vol2_Efx();
+                }
+              break;  
+
+             case 45:
+              if (Vibe_Bypass)
+                {
+                  efx_Vibe->out(efxoutl, efxoutr);
 		  Vol2_Efx();
                 }
               break;  

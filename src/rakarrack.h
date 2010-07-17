@@ -3339,6 +3339,48 @@ private:
 public:
   Fl_Box *TAP_LABEL;
   Fl_Box *T_DIS;
+  Fl_Group *VIBE;
+  Fl_Light_Button *vibe_activar;
+private:
+  void cb_vibe_activar_i(Fl_Light_Button*, void*);
+  static void cb_vibe_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *vibe_preset;
+private:
+  void cb_vibe_preset_i(Fl_Choice*, void*);
+  static void cb_vibe_preset(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_vibe_preset[];
+public:
+  SliderW *vibe_dpth;
+private:
+  void cb_vibe_dpth_i(SliderW*, void*);
+  static void cb_vibe_dpth(SliderW*, void*);
+public:
+  SliderW *vibe_freq;
+private:
+  void cb_vibe_freq_i(SliderW*, void*);
+  static void cb_vibe_freq(SliderW*, void*);
+public:
+  SliderW *vibe_rnd;
+private:
+  void cb_vibe_rnd_i(SliderW*, void*);
+  static void cb_vibe_rnd(SliderW*, void*);
+public:
+  Fl_Choice *vibe_lfotype;
+private:
+  void cb_vibe_lfotype_i(Fl_Choice*, void*);
+  static void cb_vibe_lfotype(Fl_Choice*, void*);
+public:
+  SliderW *vibe_stdf;
+private:
+  void cb_vibe_stdf_i(SliderW*, void*);
+  static void cb_vibe_stdf(SliderW*, void*);
+public:
+  SliderW *vibe_pan;
+private:
+  void cb_vibe_pan_i(SliderW*, void*);
+  static void cb_vibe_pan(SliderW*, void*);
+public:
   Fl_Double_Window *BankWindow;
 private:
   void cb_BankWindow_i(Fl_Double_Window*, void*);

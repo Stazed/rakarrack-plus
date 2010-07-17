@@ -60,6 +60,7 @@ rakarrack_SOURCES = main.C \
 	Synthfilter.h \
 	Tuner.h \
 	Valve.h \
+	Vibe.h \
 	Vocoder.h \
 	Waveshaper.h \
 	icono_rakarrack_128x128.xpm \
@@ -125,6 +126,7 @@ rakarrack_SOURCES = main.C \
 	StereoHarm.C \
 	CompBand.C \
 	Opticaltrem.C \
+	Vibe.C \
 	MIDIConverter.C
 	
 	

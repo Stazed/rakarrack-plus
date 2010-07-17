@@ -146,6 +146,7 @@
 #include "StereoHarm.h"
 #include "CompBand.h"
 #include "Opticaltrem.h"
+#include "Vibe.h"
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -297,6 +298,7 @@ public:
   class StereoHarm *efx_StereoHarm;
   class CompBand *efx_CompBand;
   class Opticaltrem *efx_Opticaltrem;
+  class Vibe *efx_Vibe;
 
   jack_client_t *jackclient;
   jack_options_t options;
@@ -354,6 +356,7 @@ public:
   int StereoHarm_Bypass;
   int CompBand_Bypass;
   int Opticaltrem_Bypass;
+  int Vibe_Bypass;
   int Bypass_B;
   int Reverb_B;
   int Chorus_B;
@@ -400,6 +403,7 @@ public:
   int StereoHarm_B;
   int CompBand_B;
   int Opticaltrem_B;
+  int Vibe_B;
   
   int Cabinet_Preset;
   int Selected_Preset;
