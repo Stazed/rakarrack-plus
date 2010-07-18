@@ -6684,7 +6684,7 @@ void RKRGUI::cb_vibe_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_vibe_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12))rkr->efx_Vibe->setpreset((int)o->value());
-vibe_WD->value(rkr->efx_Vibe->getpar(0)-64);
+vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
 vibe_dpth->value(rkr->efx_Vibe->getpar(0));
 vibe_freq->value(rkr->efx_Vibe->getpar(1));
 vibe_rnd->value(rkr->efx_Vibe->getpar(2));
