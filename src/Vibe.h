@@ -52,22 +52,13 @@ private:
   int Pdepth;
   int Ppanning;
   
-  float Ra, Rb, R1, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
+  float Ra, Rb, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
   float lstep,rstep;
   float cperiod;
   float gl, oldgl;
   float gr, oldgr; 
   float rpanning, lpanning; 
   EffectLFO lfo;
-
-  
-  struct circuit {
-  float R1;  //Collector and emitter resistor == 4.7k
-  float Rv;  //LDR
-  float C1;  //dominant pole
-  float C2;  //DC blocking
-  float alpha; //Transistor gain term
-  } vibeck[4]; //4 stages
   
   struct fparams {
   float x1;
@@ -80,7 +71,18 @@ private:
   } vc[4], vcvo[4], vevo[4];
 
   float vibefilter(float data, fparams *ftype, int stage); 
+  void init_vibes();
+  void modulate(float ldr);
 
+float R1;
+float Rv;
+float C2;
+float C1[4];
+float beta;  //transistor forward gain.
+float gain, k;
+float en1[4], en0[4], ed1[4], ed0[4];
+float cn1[4], cn0[4], cd1[4], cd0[4];
+float on1[4], on0[4], od1[4], od0[4];
 };
 
 #endif
