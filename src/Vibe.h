@@ -38,12 +38,14 @@ public:
   ~Vibe ();
 
   void out (float * smpsl, float * smpsr);
+  void setvolume(int value);
   void setpanning(int value);
   void setpreset (int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
 
+  float outvolume;
   float *efxoutl;
   float *efxoutr;
 
@@ -51,6 +53,7 @@ public:
 private:
   int Pdepth;
   int Ppanning;
+  int Pvolume;
   
   float Ra, Rb, R1, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
   float lstep,rstep;

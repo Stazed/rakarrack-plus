@@ -157,6 +157,16 @@ Vibe::setpanning (int value)
   rpanning *= 1.3f; 
 };
 
+
+void
+Vibe::setvolume (int value)
+{
+  Pvolume = value;
+  outvolume = (float)Pvolume / 127.0f;
+};
+
+
+
 void
 Vibe::setpreset (int npreset)
 {
@@ -212,6 +222,11 @@ Vibe::changepar (int npar, int value)
     case 5: // pan
     setpanning(value);
       break;  
+    case 6:
+    setvolume(value);
+      break;
+    
+
     }
    
 };
@@ -240,6 +255,8 @@ Vibe::getpar (int npar)
       break;
     case 5:
       return (Ppanning); //pan
+    case 6:
+      return(Pvolume);
 
     }
 

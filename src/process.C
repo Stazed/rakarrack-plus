@@ -1816,7 +1816,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
               if (Vibe_Bypass)
                 {
                   efx_Vibe->out(efxoutl, efxoutr);
-		  Vol2_Efx();
+		  Vol_Efx(45,efx_Vibe->outvolume);
                 }
               break;  
 
