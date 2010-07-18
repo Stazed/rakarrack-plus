@@ -31,7 +31,6 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-R1 = 2700.0f;	   //tremolo circuit series resistance 
 Ra = 1000000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
 Rb = 300.0f;         //Cds cell full illumination
@@ -55,6 +54,9 @@ gl = 0.0f;
 gr = 0.0f;
 cperiod = 1.0f/fPERIOD;
 
+init_vibes();
+cleanup();
+
 }
 
 Vibe::~Vibe ()
@@ -73,9 +75,12 @@ void
 Vibe::out (float *smpsl, float *smpsr)
 {
 
-  int i;
+  int i,j;
   float lfol, lfor, xl, xr, fxl, fxr;
   float rdiff, ldiff;
+  float cvolt, ocvolt, evolt, input;
+  input = cvolt = ocvolt = evolt = 0.0f;
+  
   lfo.effectlfoout (&lfol, &lfor);
 
   lfol = 1.0f - lfol*fdepth;
@@ -110,7 +115,7 @@ Vibe::out (float *smpsl, float *smpsr)
     alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
     xl = CNST_E + stepl*b;
     fxl = expf(Ra/logf(xl));     
-    fxl = R1/(fxl + R1);
+    modulate(fxl);
     
     //Right Cds   
     stepr = gr*(1.0f - alphar) + alphar*oldstepr;
@@ -119,11 +124,22 @@ Vibe::out (float *smpsl, float *smpsr)
     alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);        
     xr = CNST_E + stepr*b;
     fxr = expf(Ra/logf(xr));
-    fxr = R1/(fxr + R1);  
     
-    //Modulate input signal
-    efxoutl[i] = lpanning*fxl*smpsl[i];
-    efxoutr[i] = rpanning*fxr*smpsr[i];     
+    input = 0.5f*(smpsr[i] + smpsl[i]);  //mono processing for testing...stereo later when it works in mono
+    
+    for(j=0;j<4;j++) //4 stages phasing
+    {
+    cvolt = vibefilter(input,vc,j);
+    ocvolt = vibefilter(cvolt,vcvo,j);
+    evolt = vibefilter(input, vevo,j);
+    
+    input = ocvolt + evolt;
+     //input = evolt;   
+    }
+    
+
+    efxoutl[i] = 0.25f*smpsl[i] + 0.75f*lpanning*input;
+    efxoutr[i] = 0.25f*smpsr[i] + 0.75f*rpanning*input;     
     
     gl += ldiff;
     gr += rdiff;  //linear interpolation of LFO 
@@ -136,12 +152,114 @@ float
 Vibe::vibefilter(float data, fparams *ftype, int stage)
 {
 float y0 = 0.0f;
-y0 = data*ftype[stage].n0 + ftype[stage].x1*ftype[stage].n1 + ftype[stage].y1*ftype[stage].n1;
+y0 = data*ftype[stage].n0 + ftype[stage].x1*ftype[stage].n1 - ftype[stage].y1*ftype[stage].d1;
 ftype[stage].y1 = y0;
 ftype[stage].x1 = data;
 return y0;
 };
 
+void
+Vibe::init_vibes()
+{
+k = 2.0f*fSAMPLE_RATE;
+float tmpgain = 1.0f;
+ R1 = 4700.0f;
+ Rv = 4700.0f;
+ C2 = 1e-6f;
+ beta = 150.0f;  //transistor forward gain.
+ gain = -beta/(beta+1.0f);
+
+//Univibe cap values 0.015uF, 0.22uF, 470pF, and 0.0047uF
+C1[0] = 0.015e-6f;
+C1[1] = 0.22e-6f;
+C1[2] = 470e-12f;
+C1[3] = 0.0047e-6f;
+
+for(int i =0; i<4; i++)
+{
+//Vo/Ve driven from emitter
+en1[i] = R1*C1[i];
+en0[i] = 1.0f;
+ed1[i] = (R1 + Rv)*C1[i];
+ed0[i] = 1.0f + C1[i]/C2;
+
+// Vc~=Ve/(Ic*Re*alpha^2) collector voltage from current input.  
+//Output here represents voltage at the collector
+
+cn1[i] = gain*Rv*C1[i];
+cn0[i] = gain*(1.0f + C1[i]/C2);
+cd1[i] = (R1 + Rv)*C1[i];
+cd0[i] = 1.0f + C1[i]/C2;
+
+// %Represents Vo/Vc.  Output over collector voltage
+on1[i] = Rv*C2;
+on0[i] = 1.0f;
+od1[i] = Rv*C2;
+od0[i] = 1.0f + C2/C1[i];
+
+//%Bilinear xform stuff
+tmpgain =  1.0f/(k*cd1[i] + cd0[i]);
+vc[i].n1 = tmpgain*(cn0[i] - k*cn1[i]);
+vc[i].n0 = tmpgain*(k*cn1[i] + cn0[i]);
+vc[i].d1 = tmpgain*(cd0[i] - k*cd1[i]);
+vc[i].d0 = 1.0f;
+
+tmpgain =  1.0f/(k*od1[i] + od0[i]);
+vcvo[i].n1 = tmpgain*(on0[i] - on1[i]*k);
+vcvo[i].n0 = tmpgain*(k*on1[i] + on0[i]);
+vcvo[i].d1 = tmpgain*(od0[i] - k*od1[i]);
+vcvo[i].d0 = 1.0f;
+
+tmpgain =  1.0f/(k*ed1[i] + ed0[i]);
+vevo[i].n1 = tmpgain*(en0[i] - en1[i]*k);
+vevo[i].n0 = tmpgain*(k*en1[i] + en0[i]);
+vevo[i].d1 = tmpgain*(ed0[i] - k*ed1[i]);
+vevo[i].d0 = 1.0f;
+}
+
+
+};
+
+void
+Vibe::modulate(float ldr)
+{
+float tmpgain;
+ Rv = 4700.0f + ldr;
+
+for(int i =0; i<4; i++)
+{
+//Vo/Ve driven from emitter
+ed1[i] = (R1 + Rv)*C1[i];
+
+// Vc~=Ve/(Ic*Re*alpha^2) collector voltage from current input.  
+//Output here represents voltage at the collector
+cn1[i] = gain*Rv*C1[i];
+cd1[i] = (R1 + Rv)*C1[i];
+
+// %Represents Vo/Vc.  Output over collector voltage
+on1[i] = Rv*C2;
+od1[i] = on1[i];
+
+//%Bilinear xform stuff
+tmpgain =  1.0f/(k*cd1[i] + cd0[i]);
+vc[i].n1 = tmpgain*(cn0[i] - k*cn1[i]);
+vc[i].n0 = tmpgain*(k*cn1[i] + cn0[i]);
+vc[i].d1 = tmpgain*(cd0[i] - k*cd1[i]);
+
+tmpgain =  1.0f/(k*od1[i] + od0[i]);
+vcvo[i].n1 = tmpgain*(on0[i] - on1[i]*k);
+vcvo[i].n0 = tmpgain*(k*on1[i] + on0[i]);
+vcvo[i].d1 = tmpgain*(od0[i] - k*od1[i]);
+
+tmpgain =  1.0f/(k*ed1[i] + ed0[i]);
+vevo[i].n1 = tmpgain*(en0[i] - en1[i]*k);
+vevo[i].n0 = tmpgain*(k*en1[i] + en0[i]);
+vevo[i].d1 = tmpgain*(ed0[i] - k*ed1[i]);
+
+}
+
+
+};
 
 void
 Vibe::setpanning (int value)
