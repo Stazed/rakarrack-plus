@@ -56,6 +56,7 @@ private:
   int Pvolume;
   
   float Ra, Rb, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
+  float dalphal, dalphar;
   float lstep,rstep;
   float cperiod;
   float gl, oldgl;
