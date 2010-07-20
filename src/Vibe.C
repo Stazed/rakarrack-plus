@@ -36,7 +36,7 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_)
 //Because of time response, Rb needs to be driven further.
 //End resistance will max out to around 10k for most LFO freqs.
 //pushing low end a little lower for kicks and giggles
-Ra = 400000.0f;  //Cds cell dark resistance.
+Ra = 450000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
 Rb = 400.0f;         //Cds cell full illumination
 b = exp(Ra/logf(Rb)) - CNST_E;
