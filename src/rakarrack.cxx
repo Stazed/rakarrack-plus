@@ -7062,11 +7062,11 @@ void RKRGUI::cb_Open_Order(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Open_Order_i(o,v);
 }
 
-void RKRGUI::cb_BostBut_i(Fl_Light_Button* o, void*) {
+void RKRGUI::cb_BostBut_i(Fl_Button* o, void*) {
   if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;
 }
-void RKRGUI::cb_BostBut(Fl_Light_Button* o, void* v) {
+void RKRGUI::cb_BostBut(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
 }
 
@@ -17749,12 +17749,12 @@ R average.");
         Open_Order->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
-      { BostBut = new Fl_Light_Button(457, 132, 53, 24, "+10dB");
+      { BostBut = new Fl_Button(457, 132, 56, 24, "+10dB");
+        BostBut->type(1);
         BostBut->shortcut(0xffc7);
-        BostBut->color((Fl_Color)FL_GREEN);
         BostBut->labelsize(10);
         BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(7));
-      } // Fl_Light_Button* BostBut
+      } // Fl_Button* BostBut
       { Etit = new Fl_Button(174, 160, 340, 28);
         Etit->type(1);
         Etit->box(FL_NO_BOX);

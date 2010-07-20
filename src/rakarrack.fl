@@ -845,7 +845,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1729 212 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1722 205 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7785,12 +7785,12 @@ else
 Order->hide();}
           xywh {255 132 195 24} shortcut 0x6f color 62 align 80 when 6
         }
-        Fl_Light_Button BostBut {
+        Fl_Button BostBut {
           label {+10dB}
           user_data 7
           callback {if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;} selected
-          xywh {457 132 53 24} shortcut 0xffc7 color 63 labelsize 10
+          xywh {457 132 56 24} type Toggle shortcut 0xffc7 labelsize 10
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)
