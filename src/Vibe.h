@@ -71,11 +71,12 @@ private:
   float n1;
   float d0;
   float d1; 
-  } vc[4], vcvo[4], vevo[4];
+  } vc[8], vcvo[8], vevo[8], bootstrap[8];
 
   float vibefilter(float data, fparams *ftype, int stage); 
   void init_vibes();
   void modulate(float ldr);
+  float bjt_shape(float data);
 
 float R1;
 float Rv;
@@ -86,6 +87,8 @@ float gain, k;
 float en1[4], en0[4], ed1[4], ed0[4];
 float cn1[4], cn0[4], cd1[4], cd0[4];
 float on1[4], on0[4], od1[4], od0[4];
+
+
 };
 
 #endif
