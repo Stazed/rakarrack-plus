@@ -176,7 +176,7 @@ if(vin<0.0f) vin = 0.0f;
 if(vin>15.0f) vin = 15.0f;
 vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
 vout = vin - vbe;
-vout = vout*0.1333333333f - 1.0f;
+vout = vout*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
 return vout;
 
 }
