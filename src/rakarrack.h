@@ -3350,6 +3350,11 @@ private:
   void cb_Open_Order_i(Fl_Button*, void*);
   static void cb_Open_Order(Fl_Button*, void*);
 public:
+  Fl_Light_Button *BostBut;
+private:
+  void cb_BostBut_i(Fl_Light_Button*, void*);
+  static void cb_BostBut(Fl_Light_Button*, void*);
+public:
   Fl_Button *Etit;
 private:
   void cb_Etit_i(Fl_Button*, void*);
