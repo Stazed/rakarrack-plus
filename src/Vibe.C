@@ -31,16 +31,22 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-Ra = 1000000.0f;  //Cds cell dark resistance.
+//Swing was measured on operating device of: 10K to 250k.  
+//400K is reported to sound better for the "low end" (high resistance) 
+//Because of time response, Rb needs to be driven further.
+//End resistance will max out to around 10k for most LFO freqs.
+//pushing low end a little lower for kicks and giggles
+Ra = 450000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
-Rb = 300.0f;         //Cds cell full illumination
+Rb = 400.0f;         //Cds cell full illumination
 b = exp(Ra/logf(Rb)) - CNST_E;
-dTC = 0.03f;
+dTC = 0.06f;
 dRCl = dTC;
 dRCr = dTC;   //Right & left channel dynamic time contsants
 minTC = logf(0.005f/dTC);
 alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
 alphar = alphal;
+dalphal = dalphar = alphal;
 lstep = 0.0f;
 rstep = 0.0f;
 Pdepth = 127;
@@ -79,6 +85,7 @@ Vibe::out (float *smpsl, float *smpsr)
   float lfol, lfor, xl, xr, fxl, fxr;
   float rdiff, ldiff;
   float cvolt, ocvolt, evolt, input;
+
   input = cvolt = ocvolt = evolt = 0.0f;
   
   lfo.effectlfoout (&lfol, &lfor);
@@ -109,19 +116,21 @@ Vibe::out (float *smpsl, float *smpsr)
   for (i = 0; i < PERIOD; i++)
     {
     //Left Cds   
-    stepl = gl*(1.0f - alphal) + alphal*oldstepl;
+    stepl = gl*(1.0f - alphal) + dalphal*oldstepl;
     oldstepl = stepl;
     dRCl = dTC*expf(stepl*minTC);
     alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
+    dalphal = 1.0f - cSAMPLE_RATE/(0.5f*dRCl + cSAMPLE_RATE);     //different attack & release character
     xl = CNST_E + stepl*b;
     fxl = expf(Ra/logf(xl));     
     modulate(fxl);
     
     //Right Cds   
-    stepr = gr*(1.0f - alphar) + alphar*oldstepr;
+    stepr = gr*(1.0f - alphar) + dalphar*oldstepr;
     oldstepr = stepr;
     dRCr = dTC*expf(stepr*minTC);
-    alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);        
+    alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);  
+    dalphar = 1.0f - cSAMPLE_RATE/(0.5f*dRCr + cSAMPLE_RATE);      //different attack & release character
     xr = CNST_E + stepr*b;
     fxr = expf(Ra/logf(xr));
     
