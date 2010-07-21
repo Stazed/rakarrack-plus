@@ -176,7 +176,7 @@ float tmpgain = 1.0f;
  Rv = 4700.0f;
  C2 = 1e-6f;
  beta = 150.0f;  //transistor forward gain.
- gain = -beta/(beta+1.0f);
+ gain = -1.2f*beta/(beta + 1.0f); //emperical data
 
 //Univibe cap values 0.015uF, 0.22uF, 470pF, and 0.0047uF
 C1[0] = 0.015e-6f;
