@@ -7062,6 +7062,14 @@ void RKRGUI::cb_Open_Order(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Open_Order_i(o,v);
 }
 
+void RKRGUI::cb_BostBut_i(Fl_Button* o, void*) {
+  if(o->value()) rkr->booster = dB2rap(10);
+else rkr->booster=1.0f;
+}
+void RKRGUI::cb_BostBut(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
+}
+
 void RKRGUI::cb_Etit_i(Fl_Button* o, void*) {
   if(rkr->Bypass)
 {
@@ -17741,6 +17749,12 @@ R average.");
         Open_Order->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
+      { BostBut = new Fl_Button(457, 132, 56, 24, "+10dB");
+        BostBut->type(1);
+        BostBut->shortcut(0xffc7);
+        BostBut->labelsize(10);
+        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(7));
+      } // Fl_Button* BostBut
       { Etit = new Fl_Button(174, 160, 340, 28);
         Etit->type(1);
         Etit->box(FL_NO_BOX);
@@ -19228,9 +19242,14 @@ rkr->MidiCh--;
 rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh,1);
 rkr->HarCh--;
 rakarrack.get(rkr->PrefNom("Limiter Position"),rkr->flpos,0);
+rakarrack.get(rkr->PrefNom("Booster"),rkr->booster,1.0f);
+if (rkr->booster==1.0) BostBut->value(0); else BostBut->value(1);
 
 
 rakarrack.get(rkr->PrefNom("FX_init_state"),rkr->init_state,0);
+
+
+
 
 if(rkr->init_state)
 {
@@ -19329,6 +19348,10 @@ rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
 rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
+
+//Booster
+rakarrack.set(rkr->PrefNom("Booster"),rkr->booster);
+
 
 //Tap Tempo
 rakarrack.set(rkr->PrefNom("TapTempo Input"),(int)rkr->Tap_Selection); 

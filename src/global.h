@@ -546,6 +546,7 @@ public:
 
   timeval timeA;
 
+  float booster;
   float cpuload;
   float rtrig;
 

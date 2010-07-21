@@ -134,7 +134,7 @@ Vibe::out (float *smpsl, float *smpsr)
     xr = CNST_E + stepr*b;
     fxr = expf(Ra/logf(xr));
     
-    input = 0.5f*(smpsr[i] + smpsl[i]);  //mono processing for testing...stereo later when it works in mono
+    input = bjt_shape(0.5f*(smpsr[i] + smpsl[i]));  //mono processing for testing...stereo later when it works in mono
     
     for(j=0;j<4;j++) //4 stages phasing
     {
@@ -142,7 +142,7 @@ Vibe::out (float *smpsl, float *smpsr)
     ocvolt = vibefilter(cvolt,vcvo,j);
     evolt = vibefilter(input, vevo,j);
     
-    input = ocvolt + evolt;
+    input = bjt_shape(ocvolt + evolt);
      //input = evolt;   
     }
     
@@ -166,6 +166,20 @@ ftype[stage].y1 = y0;
 ftype[stage].x1 = data;
 return y0;
 };
+
+float 
+Vibe::bjt_shape(float data)
+{
+float vbe, vout;
+float vin = 7.5f*(1.0f + data);
+if(vin<0.0f) vin = 0.0f;
+if(vin>15.0f) vin = 15.0f;
+vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+vout = vin - vbe;
+vout = vout*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+return vout;
+
+}
 
 void
 Vibe::init_vibes()
@@ -224,6 +238,10 @@ vevo[i].n1 = tmpgain*(en0[i] - en1[i]*k);
 vevo[i].n0 = tmpgain*(k*en1[i] + en0[i]);
 vevo[i].d1 = tmpgain*(ed0[i] - k*ed1[i]);
 vevo[i].d0 = 1.0f;
+
+// bootstrap[i].n1
+// bootstrap[i].n0
+// bootstrap[i].d1
 }
 
 

@@ -845,7 +845,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1499 76 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1722 205 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7352,7 +7352,7 @@ vibe_freq->value(rkr->efx_Vibe->getpar(1));
 vibe_rnd->value(rkr->efx_Vibe->getpar(2));
 vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
 vibe_stdf->value(rkr->efx_Vibe->getpar(4));
-vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);} selected
+vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7784,6 +7784,13 @@ put_icon(Order);
 else
 Order->hide();}
           xywh {255 132 195 24} shortcut 0x6f color 62 align 80 when 6
+        }
+        Fl_Button BostBut {
+          label {+10dB}
+          user_data 7
+          callback {if(o->value()) rkr->booster = dB2rap(10);
+else rkr->booster=1.0f;} selected
+          xywh {457 132 56 24} type Toggle shortcut 0xffc7 labelsize 10
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)
@@ -9781,9 +9788,14 @@ rkr->MidiCh--;
 rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh,1);
 rkr->HarCh--;
 rakarrack.get(rkr->PrefNom("Limiter Position"),rkr->flpos,0);
+rakarrack.get(rkr->PrefNom("Booster"),rkr->booster,1.0f);
+if (rkr->booster==1.0) BostBut->value(0); else BostBut->value(1);
 
 
 rakarrack.get(rkr->PrefNom("FX_init_state"),rkr->init_state,0);
+
+
+
 
 if(rkr->init_state)
 {
@@ -9881,6 +9893,10 @@ rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
 rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
+
+//Booster
+rakarrack.set(rkr->PrefNom("Booster"),rkr->booster);
+
 
 //Tap Tempo
 rakarrack.set(rkr->PrefNom("TapTempo Input"),(int)rkr->Tap_Selection); 

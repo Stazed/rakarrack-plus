@@ -1265,8 +1265,8 @@ RKR::Control_Volume (float *origl,float *origr)
   for (i = 0; i <= PERIOD; i++)  //control volume
     {
       
-      efxoutl[i] *= Temp_M_Volume;
-      efxoutr[i] *= Temp_M_Volume;
+      efxoutl[i] *= Temp_M_Volume*booster;
+      efxoutr[i] *= Temp_M_Volume*booster;
       
       
       if (Fraction_Bypass < 1.0f)
