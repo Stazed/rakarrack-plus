@@ -58,6 +58,7 @@ oldgl = 0.0f;
 oldgr = 0.0f;
 gl = 0.0f;
 gr = 0.0f;
+for(int jj = 0; jj<4; jj++) oldcvolt[jj] = 0.0f;
 cperiod = 1.0f/fPERIOD;
 
 init_vibes();
@@ -85,7 +86,8 @@ Vibe::out (float *smpsl, float *smpsr)
   float lfol, lfor, xl, xr, fxl, fxr;
   float rdiff, ldiff;
   float cvolt, ocvolt, evolt, input;
-
+  float emitterfb = 0.0f;
+  
   input = cvolt = ocvolt = evolt = 0.0f;
   
   lfo.effectlfoout (&lfol, &lfor);
@@ -122,7 +124,8 @@ Vibe::out (float *smpsl, float *smpsr)
     alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
     dalphal = 1.0f - cSAMPLE_RATE/(0.5f*dRCl + cSAMPLE_RATE);     //different attack & release character
     xl = CNST_E + stepl*b;
-    fxl = expf(Ra/logf(xl));     
+    fxl = expf(Ra/logf(xl));   
+    emitterfb = 1.0f/fxl;  
     modulate(fxl);
     
     //Right Cds   
@@ -138,12 +141,13 @@ Vibe::out (float *smpsl, float *smpsr)
     
     for(j=0;j<4;j++) //4 stages phasing
     {
-    cvolt = vibefilter(input,vc,j);
+    cvolt = vibefilter(input + emitterfb*oldcvolt[j],vc,j);
     ocvolt = vibefilter(cvolt,vcvo,j);
+    oldcvolt[j] = ocvolt;
     evolt = vibefilter(input, vevo,j);
     
     input = bjt_shape(ocvolt + evolt);
-     //input = evolt;   
+
     }
     
 
@@ -163,7 +167,7 @@ Vibe::vibefilter(float data, fparams *ftype, int stage)
 float y0 = 0.0f;
 y0 = data*ftype[stage].n0 + ftype[stage].x1*ftype[stage].n1 - ftype[stage].y1*ftype[stage].d1;
 ftype[stage].y1 = y0;
-ftype[stage].x1 = data;
+ftype[stage].x1 = data; 
 return y0;
 };
 
@@ -190,7 +194,7 @@ float tmpgain = 1.0f;
  Rv = 4700.0f;
  C2 = 1e-6f;
  beta = 150.0f;  //transistor forward gain.
- gain = -1.2f*beta/(beta + 1.0f); //emperical data
+ gain = -beta/(beta + 1.0f); 
 
 //Univibe cap values 0.015uF, 0.22uF, 470pF, and 0.0047uF
 C1[0] = 0.015e-6f;

@@ -85,6 +85,7 @@ float C2;
 float C1[4];
 float beta;  //transistor forward gain.
 float gain, k;
+float oldcvolt[4];
 float en1[4], en0[4], ed1[4], ed0[4];
 float cn1[4], cn0[4], cd1[4], cd0[4];
 float on1[4], on0[4], od1[4], od0[4];
