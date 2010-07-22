@@ -72,7 +72,7 @@ private:
   float n1;
   float d0;
   float d1; 
-  } vc[8], vcvo[8], vevo[8], bootstrap[8];
+  } vc[8], vcvo[8], ecvc[8], vevo[8], bootstrap[8];
 
   float vibefilter(float data, fparams *ftype, int stage); 
   void init_vibes();
@@ -88,7 +88,9 @@ float gain, k;
 float oldcvolt[4];
 float en1[4], en0[4], ed1[4], ed0[4];
 float cn1[4], cn0[4], cd1[4], cd0[4];
+float ecn1[4], ecn0[4], ecd1[4], ecd0[4];
 float on1[4], on0[4], od1[4], od0[4];
+
 
 
 };

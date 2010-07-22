@@ -141,7 +141,7 @@ Vibe::out (float *smpsl, float *smpsr)
     
     for(j=0;j<4;j++) //4 stages phasing
     {
-    cvolt = vibefilter(input + emitterfb*oldcvolt[j],vc,j);
+    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
     ocvolt = vibefilter(cvolt,vcvo,j);
     oldcvolt[j] = ocvolt;
     evolt = vibefilter(input, vevo,j);
@@ -218,6 +218,12 @@ cn0[i] = gain*(1.0f + C1[i]/C2);
 cd1[i] = (R1 + Rv)*C1[i];
 cd0[i] = 1.0f + C1[i]/C2;
 
+//Contribution from emitter load through passive filter network
+ecn1[i] = gain*R1*(R1 + Rv)*C1[i]*C2/(Rv*(C2 + C1[i]));
+ecn0[i] = 0.0f;
+ecd1[i] = (R1 + Rv)*C1[i]*C2/(C2 + C1[i]);
+ecd0[i] = 1.0f;
+
 // %Represents Vo/Vc.  Output over collector voltage
 on1[i] = Rv*C2;
 on0[i] = 1.0f;
@@ -230,6 +236,12 @@ vc[i].n1 = tmpgain*(cn0[i] - k*cn1[i]);
 vc[i].n0 = tmpgain*(k*cn1[i] + cn0[i]);
 vc[i].d1 = tmpgain*(cd0[i] - k*cd1[i]);
 vc[i].d0 = 1.0f;
+
+tmpgain =  1.0f/(k*ecd1[i] + ecd0[i]);
+ecvc[i].n1 = tmpgain*(ecn0[i] - k*ecn1[i]);
+ecvc[i].n0 = tmpgain*(k*ecn1[i] + ecn0[i]);
+ecvc[i].d1 = tmpgain*(ecd0[i] - k*ecd1[i]);
+ecvc[i].d0 = 1.0f;
 
 tmpgain =  1.0f/(k*od1[i] + od0[i]);
 vcvo[i].n1 = tmpgain*(on0[i] - on1[i]*k);
@@ -267,6 +279,10 @@ ed1[i] = (R1 + Rv)*C1[i];
 cn1[i] = gain*Rv*C1[i];
 cd1[i] = (R1 + Rv)*C1[i];
 
+//Contribution from emitter load through passive filter network
+ecn1[i] = gain*R1*(R1 + Rv)*C1[i]*C2/(Rv*(C2 + C1[i]));
+ecd1[i] = (R1 + Rv)*C1[i]*C2/(C2 + C1[i]);
+
 // %Represents Vo/Vc.  Output over collector voltage
 on1[i] = Rv*C2;
 od1[i] = on1[i];
@@ -276,6 +292,12 @@ tmpgain =  1.0f/(k*cd1[i] + cd0[i]);
 vc[i].n1 = tmpgain*(cn0[i] - k*cn1[i]);
 vc[i].n0 = tmpgain*(k*cn1[i] + cn0[i]);
 vc[i].d1 = tmpgain*(cd0[i] - k*cd1[i]);
+
+tmpgain =  1.0f/(k*ecd1[i] + ecd0[i]);
+ecvc[i].n1 = tmpgain*(ecn0[i] - k*ecn1[i]);
+ecvc[i].n0 = tmpgain*(k*ecn1[i] + ecn0[i]);
+ecvc[i].d1 = tmpgain*(ecd0[i] - k*ecd1[i]);
+ecvc[i].d0 = 1.0f;
 
 tmpgain =  1.0f/(k*od1[i] + od0[i]);
 vcvo[i].n1 = tmpgain*(on0[i] - on1[i]*k);
