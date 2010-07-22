@@ -76,20 +76,20 @@ private:
 
   float vibefilter(float data, fparams *ftype, int stage); 
   void init_vibes();
-  void modulate(float ldr);
+  void modulate(float ldrl, float ldrr);
   float bjt_shape(float data);
 
 float R1;
 float Rv;
 float C2;
-float C1[4];
+float C1[8];
 float beta;  //transistor forward gain.
 float gain, k;
-float oldcvolt[4];
-float en1[4], en0[4], ed1[4], ed0[4];
-float cn1[4], cn0[4], cd1[4], cd0[4];
-float ecn1[4], ecn0[4], ecd1[4], ecd0[4];
-float on1[4], on0[4], od1[4], od0[4];
+float oldcvolt[8] ;
+float en1[8], en0[8], ed1[8], ed0[8];
+float cn1[8], cn0[8], cd1[8], cd0[8];
+float ecn1[8], ecn0[8], ecd1[8], ecd0[8];
+float on1[8], on0[8], od1[8], od0[8];
 
 
 

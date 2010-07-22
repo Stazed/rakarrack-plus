@@ -38,9 +38,9 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_)
 //pushing low end a little lower for kicks and giggles
 Ra = 450000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
-Rb = 400.0f;         //Cds cell full illumination
+Rb = 1000.0f;         //Cds cell full illumination
 b = exp(Ra/logf(Rb)) - CNST_E;
-dTC = 0.06f;
+dTC = 0.08f;
 dRCl = dTC;
 dRCr = dTC;   //Right & left channel dynamic time contsants
 minTC = logf(0.005f/dTC);
@@ -58,7 +58,7 @@ oldgl = 0.0f;
 oldgr = 0.0f;
 gl = 0.0f;
 gr = 0.0f;
-for(int jj = 0; jj<4; jj++) oldcvolt[jj] = 0.0f;
+for(int jj = 0; jj<8; jj++) oldcvolt[jj] = 0.0f;
 cperiod = 1.0f/fPERIOD;
 
 init_vibes();
@@ -125,8 +125,6 @@ Vibe::out (float *smpsl, float *smpsr)
     dalphal = 1.0f - cSAMPLE_RATE/(0.5f*dRCl + cSAMPLE_RATE);     //different attack & release character
     xl = CNST_E + stepl*b;
     fxl = expf(Ra/logf(xl));   
-    emitterfb = 1.0f/fxl;  
-    modulate(fxl);
     
     //Right Cds   
     stepr = gr*(1.0f - alphar) + dalphar*oldstepr;
@@ -137,8 +135,12 @@ Vibe::out (float *smpsl, float *smpsr)
     xr = CNST_E + stepr*b;
     fxr = expf(Ra/logf(xr));
     
-    input = bjt_shape(0.5f*(smpsr[i] + smpsl[i]));  //mono processing for testing...stereo later when it works in mono
+    modulate(fxl, fxr);   
+     
+    //Left Channel  
+    input = bjt_shape(smpsl[i]);  
     
+    emitterfb = 1.0f/fxl;     
     for(j=0;j<4;j++) //4 stages phasing
     {
     cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
@@ -149,10 +151,24 @@ Vibe::out (float *smpsl, float *smpsr)
     input = bjt_shape(ocvolt + evolt);
 
     }
+    efxoutl[i] = lpanning*input;    
     
+    //Right channel
+    input = bjt_shape(smpsr[i]);  
+    
+    emitterfb = 25.0f/fxr;     
+    for(j=4;j<8;j++) //4 stages phasing
+    {
+    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
+    ocvolt = vibefilter(cvolt,vcvo,j);
+    oldcvolt[j] = ocvolt;
+    evolt = vibefilter(input, vevo,j);
+    
+    input = bjt_shape(ocvolt + evolt);
 
-    efxoutl[i] = lpanning*input;
+    }
     efxoutr[i] = rpanning*input;     
+    
     
     gl += ldiff;
     gr += rdiff;  //linear interpolation of LFO 
@@ -201,8 +217,12 @@ C1[0] = 0.015e-6f;
 C1[1] = 0.22e-6f;
 C1[2] = 470e-12f;
 C1[3] = 0.0047e-6f;
+C1[4] = 0.015e-6f;
+C1[5] = 0.22e-6f;
+C1[6] = 470e-12f;
+C1[7] = 0.0047e-6f;
 
-for(int i =0; i<4; i++)
+for(int i =0; i<8; i++)
 {
 //Vo/Ve driven from emitter
 en1[i] = R1*C1[i];
@@ -264,13 +284,15 @@ vevo[i].d0 = 1.0f;
 };
 
 void
-Vibe::modulate(float ldr)
+Vibe::modulate(float ldrl, float ldrr)
 {
 float tmpgain;
- Rv = 4700.0f + ldr;
+ Rv = 4700.0f + ldrl;
 
-for(int i =0; i<4; i++)
+for(int i =0; i<8; i++)
 {
+if(i==4) Rv = 4700.0f + ldrr;
+
 //Vo/Ve driven from emitter
 ed1[i] = (R1 + Rv)*C1[i];
 
