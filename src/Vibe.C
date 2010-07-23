@@ -88,6 +88,7 @@ Vibe::out (float *smpsl, float *smpsr)
   float lfol, lfor, xl, xr, fxl, fxr;
   float cvolt, ocvolt, evolt, input;
   float emitterfb = 0.0f;
+  float outl, outr;
   
   input = cvolt = ocvolt = evolt = 0.0f;
   
@@ -105,11 +106,9 @@ Vibe::out (float *smpsl, float *smpsr)
   else if (lfor < 0.0f)
     lfor = 0.0f;  
     
-    //lfor = powf(lfor, 0.526f);   // 0.526 = 1/1.9
-    //lfol = powf(lfol, 0.526f);  //emulate lamp turn on/off characteristic
-    lfor = powf(lfor, 1.5f);   // 
-    lfol = powf(lfol, 1.5f);  //emulate lamp turn on/off characteristic by experimentation
-    
+    lfor = powf(lfor, 1.8f);   // 
+    lfol = powf(lfol, 1.8f);  //emulate lamp turn on/off characteristic by experimentation
+   
   for (i = 0; i < PERIOD; i++)
     {
     //Left Lamp
@@ -137,12 +136,12 @@ Vibe::out (float *smpsl, float *smpsr)
     xr = CNST_E + stepr*b;
     fxr = expf(Ra/logf(xr));
     
-    modulate(fxl, fxr);   
+    if(i%16 == 0)  modulate(fxl, fxr);   
      
     //Left Channel  
-    input = bjt_shape(smpsl[i]);  
+    input = bjt_shape(fbl + smpsl[i]);  
     
-    emitterfb = 1.0f/fxl;     
+    emitterfb = 25.0f/fxl;     
     for(j=0;j<4;j++) //4 stages phasing
     {
     cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
@@ -151,12 +150,12 @@ Vibe::out (float *smpsl, float *smpsr)
     evolt = vibefilter(input, vevo,j);
     
     input = bjt_shape(ocvolt + evolt);
-
     }
-    efxoutl[i] = lpanning*input;    
+    fbl = fb*ocvolt;
+    outl = lpanning*input;    
     
     //Right channel
-    input = bjt_shape(smpsr[i]);  
+    input = bjt_shape(fbr + smpsr[i]);  
     
     emitterfb = 25.0f/fxr;     
     for(j=4;j<8;j++) //4 stages phasing
@@ -167,12 +166,16 @@ Vibe::out (float *smpsl, float *smpsr)
     evolt = vibefilter(input, vevo,j);
     
     input = bjt_shape(ocvolt + evolt);
-
     }
-    efxoutr[i] = rpanning*input;     
+    
+    fbr = fb*ocvolt;
+    outr = rpanning*input;  
+    
+    efxoutl[i] = outl*fcross + outr*flrcross;
+    efxoutr[i] = outr*fcross + outl*flrcross;
     
     };
-
+ 
 };
 
 float 
@@ -180,7 +183,7 @@ Vibe::vibefilter(float data, fparams *ftype, int stage)
 {
 float y0 = 0.0f;
 y0 = data*ftype[stage].n0 + ftype[stage].x1*ftype[stage].n1 - ftype[stage].y1*ftype[stage].d1;
-ftype[stage].y1 = y0;
+ftype[stage].y1 = y0 + DENORMAL_GUARD;
 ftype[stage].x1 = data; 
 return y0;
 };
@@ -285,23 +288,29 @@ void
 Vibe::modulate(float ldrl, float ldrr)
 {
 float tmpgain;
- Rv = 4700.0f + ldrl;
-
+float R1pRv;
+float C2pC1;
+Rv = 4700.0f + ldrl;
+R1pRv = R1 + Rv;
 for(int i =0; i<8; i++)
 {
-if(i==4) Rv = 4700.0f + ldrr;
+if(i==4) {
+Rv = 4700.0f + ldrr;
+R1pRv = R1 + Rv;
+}
 
+C2pC1 = C2 + C1[i];
 //Vo/Ve driven from emitter
-ed1[i] = (R1 + Rv)*C1[i];
+ed1[i] = (R1pRv)*C1[i];
 
 // Vc~=Ve/(Ic*Re*alpha^2) collector voltage from current input.  
 //Output here represents voltage at the collector
 cn1[i] = gain*Rv*C1[i];
-cd1[i] = (R1 + Rv)*C1[i];
+cd1[i] = (R1pRv)*C1[i];
 
 //Contribution from emitter load through passive filter network
-ecn1[i] = gain*R1*(R1 + Rv)*C1[i]*C2/(Rv*(C2 + C1[i]));
-ecd1[i] = (R1 + Rv)*C1[i]*C2/(C2 + C1[i]);
+ecn1[i] = gain*R1*cd1[i]*C2/(Rv*(C2pC1));
+ecd1[i] = cd1[i]*C2/(C2pC1);
 
 // %Represents Vo/Vc.  Output over collector voltage
 on1[i] = Rv*C2;
@@ -361,21 +370,25 @@ Vibe::setvolume (int value)
 void
 Vibe::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 6;
-  const int NUM_PRESETS = 6;
+  const int PRESET_SIZE = 10;
+  const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Fast
-    {127, 260, 10, 0, 64, 64},
-    //trem2
-    {45, 140, 10, 0, 64, 64},
-    //hard pan
-    {127, 120, 10, 5, 0, 64},
-    //soft pan
-    {45, 240, 10, 1, 16, 64},    
-    //ramp down
-    {65, 200, 0, 3, 32, 64},
-    //hard ramp
-    {127, 480, 0, 3, 32, 64}  
+    //Classic
+    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64},
+    //Stereo Classic
+    {35, 120, 10, 0, 48, 64, 64, 64, 3, 64},
+    //Wide Vibe
+    {127, 80, 10, 0, 0, 64, 64, 64, 0, 64},
+    //Classic Chorus
+    {35, 360, 10, 0, 48, 64, 0, 64, 3, 64},   
+    //Vibe Chorus
+    {75, 330, 10, 0, 50, 64, 0, 64, 17, 64},
+    //Lush Chorus
+    {55, 260, 10, 0, 64, 70, 0, 49, 20, 48},  
+    //Sick Phaser
+    {110, 75, 10, 0, 32, 64, 64, 14, 0, 30},
+    //Warble
+    {127, 360, 10, 0, 0, 64, 0, 0, 0, 37}
     
   };
   for (int n = 0; n < PRESET_SIZE; n++)

@@ -62,9 +62,11 @@ private:
   float fdepth;
   float rpanning, lpanning; 
   float flrcross, fcross;
+  float fb;
   EffectLFO lfo;
   
   float Ra, Rb, b, dTC, dRCl, dRCr, lampTC, ilampTC, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr;
+  float fbr, fbl;
   float dalphal, dalphar;
   float lstep,rstep;
   float cperiod;
