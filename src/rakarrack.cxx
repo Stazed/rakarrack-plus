@@ -17427,7 +17427,7 @@ R average.");
         vibe_LR->labelsize(10);
         vibe_LR->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vibe_LR->minimum(-64);
-        vibe_LR->maximum(63);
+        vibe_LR->maximum(64);
         vibe_LR->step(1);
         vibe_LR->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vibe_LR->callback((Fl_Callback*)cb_vibe_LR);
