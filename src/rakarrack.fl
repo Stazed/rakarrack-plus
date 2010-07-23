@@ -835,7 +835,8 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -845,7 +846,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1495 51 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1481 37 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7543,7 +7544,7 @@ rkr->cleanup_efx();
           user_data 7
           callback {if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;} selected
-          xywh {126 30 37 18} type Toggle shortcut 0xffc7 color 62 labelsize 8
+          xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
         }
         Fl_Value_Slider Balance {
           label {FX%}

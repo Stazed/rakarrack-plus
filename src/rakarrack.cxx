@@ -17528,11 +17528,11 @@ R average.");
         ActivarGeneral->align(68|FL_ALIGN_INSIDE);
         ActivarGeneral->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* ActivarGeneral
-      { BostBut = new Fl_Button(126, 30, 37, 18, "+10dB");
+      { BostBut = new Fl_Button(132, 30, 30, 14, "+10dB");
         BostBut->type(1);
         BostBut->shortcut(0xffc7);
         BostBut->color((Fl_Color)62);
-        BostBut->labelsize(8);
+        BostBut->labelsize(6);
         BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(7));
       } // Fl_Button* BostBut
       { Balance = new SliderW(15, 48, 19, 126, "FX%");
