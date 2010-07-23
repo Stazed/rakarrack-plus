@@ -92,8 +92,8 @@ Vibe::out (float *smpsl, float *smpsr)
   
   lfo.effectlfoout (&lfol, &lfor);
 
-  lfol = 1.0f - lfol*fdepth;
-  lfor = 1.0f - lfor*fdepth;   
+  lfol = lfol*fdepth;
+  lfor = lfor*fdepth;   
   
    if (lfol > 1.0f)
     lfol = 1.0f;
