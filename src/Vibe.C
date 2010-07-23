@@ -40,14 +40,14 @@ Ra = 500000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
 Rb = 400.0f;         //Cds cell full illumination
 b = exp(Ra/logf(Rb)) - CNST_E;
-dTC = 0.08f;
+dTC = 0.1f;
 dRCl = dTC;
 dRCr = dTC;   //Right & left channel dynamic time contsants
 minTC = logf(0.005f/dTC);
 alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
 alphar = alphal;
 dalphal = dalphar = alphal;
-lampTC = cSAMPLE_RATE/(0.01 + cSAMPLE_RATE);  //guessing 10ms
+lampTC = cSAMPLE_RATE/(0.02 + cSAMPLE_RATE);  //guessing 10ms
 ilampTC = 1.0f - lampTC;
 lstep = 0.0f;
 rstep = 0.0f;
@@ -106,8 +106,8 @@ Vibe::out (float *smpsl, float *smpsr)
   else if (lfor < 0.0f)
     lfor = 0.0f;  
     
-    lfor = powf(lfor, 1.8f);   // 
-    lfol = powf(lfol, 1.8f);  //emulate lamp turn on/off characteristic by experimentation
+    lfor = powf(lfor, 1.4f);   // 
+    lfol = powf(lfol, 1.4f);  //emulate lamp turn on/off characteristic by experimentation
    
   for (i = 0; i < PERIOD; i++)
     {
@@ -405,7 +405,7 @@ Vibe::changepar (int npar, int value)
 
     case 0:
       Pwidth = value;
-      fwidth = ((float) Pwidth)/127.0f;    
+      fwidth = ((float) Pwidth)/90.0f;    
       break;
     case 1:
       lfo.Pfreq = value;
