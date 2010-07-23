@@ -6685,12 +6685,15 @@ void RKRGUI::cb_vibe_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12))rkr->efx_Vibe->setpreset((int)o->value());
 vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
-vibe_dpth->value(rkr->efx_Vibe->getpar(0));
+vibe_width->value(rkr->efx_Vibe->getpar(0));
+vibe_dpth->value(rkr->efx_Vibe->getpar(8));
 vibe_freq->value(rkr->efx_Vibe->getpar(1));
 vibe_rnd->value(rkr->efx_Vibe->getpar(2));
 vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
 vibe_stdf->value(rkr->efx_Vibe->getpar(4));
 vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
+vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
+vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
 }
 void RKRGUI::cb_vibe_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_preset_i(o,v);
@@ -6713,8 +6716,15 @@ void RKRGUI::cb_vibe_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_WD_i(o,v);
 }
 
-void RKRGUI::cb_vibe_dpth_i(SliderW* o, void*) {
+void RKRGUI::cb_vibe_width_i(SliderW* o, void*) {
   rkr->efx_Vibe->changepar(0,(int)o->value());
+}
+void RKRGUI::cb_vibe_width(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_width_i(o,v);
+}
+
+void RKRGUI::cb_vibe_dpth_i(SliderW* o, void*) {
+  rkr->efx_Vibe->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_vibe_dpth(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_dpth_i(o,v);
@@ -6746,6 +6756,20 @@ void RKRGUI::cb_vibe_stdf_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_vibe_stdf(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_stdf_i(o,v);
+}
+
+void RKRGUI::cb_vibe_fb_i(SliderW* o, void*) {
+  rkr->efx_Vibe->changepar(7,(int)(o->value()+64));
+}
+void RKRGUI::cb_vibe_fb(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_fb_i(o,v);
+}
+
+void RKRGUI::cb_vibe_LR_i(SliderW* o, void*) {
+  rkr->efx_Vibe->changepar(9,(int)(o->value()+64));
+}
+void RKRGUI::cb_vibe_LR(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_LR_i(o,v);
 }
 
 void RKRGUI::cb_vibe_pan_i(SliderW* o, void*) {
@@ -6812,6 +6836,14 @@ rkr->cleanup_efx();
 }
 void RKRGUI::cb_ActivarGeneral(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ActivarGeneral_i(o,v);
+}
+
+void RKRGUI::cb_BostBut_i(Fl_Button* o, void*) {
+  if(o->value()) rkr->booster = dB2rap(10);
+else rkr->booster=1.0f;
+}
+void RKRGUI::cb_BostBut(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
 }
 
 void RKRGUI::cb_Balance_i(SliderW* o, void*) {
@@ -7060,14 +7092,6 @@ Order->hide();
 }
 void RKRGUI::cb_Open_Order(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Open_Order_i(o,v);
-}
-
-void RKRGUI::cb_BostBut_i(Fl_Button* o, void*) {
-  if(o->value()) rkr->booster = dB2rap(10);
-else rkr->booster=1.0f;
-}
-void RKRGUI::cb_BostBut(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
 }
 
 void RKRGUI::cb_Etit_i(Fl_Button* o, void*) {
@@ -17247,6 +17271,7 @@ R average.");
       VIBE->labelfont(1);
       VIBE->user_data((void*)(1));
       VIBE->align(96|FL_ALIGN_INSIDE);
+      VIBE->hide();
       { vibe_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
         vibe_activar->shortcut(0x38);
         vibe_activar->color((Fl_Color)62);
@@ -17267,7 +17292,7 @@ R average.");
         vibe_preset->when(FL_WHEN_RELEASE_ALWAYS);
         vibe_preset->menu(menu_vibe_preset);
       } // Fl_Choice* vibe_preset
-      { vibe_WD = new SliderW(372, 250, 100, 10, "Wet/Dry");
+      { vibe_WD = new SliderW(372, 240, 100, 10, "Wet/Dry");
         vibe_WD->type(5);
         vibe_WD->box(FL_FLAT_BOX);
         vibe_WD->color((Fl_Color)178);
@@ -17284,7 +17309,23 @@ R average.");
         vibe_WD->align(FL_ALIGN_LEFT);
         vibe_WD->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_WD
-      { vibe_dpth = new SliderW(372, 267, 100, 10, "Depth");
+      { vibe_width = new SliderW(372, 254, 100, 10, "Width");
+        vibe_width->type(5);
+        vibe_width->box(FL_FLAT_BOX);
+        vibe_width->color((Fl_Color)178);
+        vibe_width->selection_color((Fl_Color)62);
+        vibe_width->labeltype(FL_NORMAL_LABEL);
+        vibe_width->labelfont(0);
+        vibe_width->labelsize(10);
+        vibe_width->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vibe_width->maximum(127);
+        vibe_width->step(1);
+        vibe_width->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vibe_width->callback((Fl_Callback*)cb_vibe_width);
+        vibe_width->align(FL_ALIGN_LEFT);
+        vibe_width->when(FL_WHEN_CHANGED);
+      } // SliderW* vibe_width
+      { vibe_dpth = new SliderW(372, 268, 100, 10, "Depth");
         vibe_dpth->type(5);
         vibe_dpth->box(FL_FLAT_BOX);
         vibe_dpth->color((Fl_Color)178);
@@ -17300,7 +17341,7 @@ R average.");
         vibe_dpth->align(FL_ALIGN_LEFT);
         vibe_dpth->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_dpth
-      { vibe_freq = new SliderW(372, 285, 100, 10, "Tempo");
+      { vibe_freq = new SliderW(372, 282, 100, 10, "Tempo");
         vibe_freq->type(5);
         vibe_freq->box(FL_FLAT_BOX);
         vibe_freq->color((Fl_Color)178);
@@ -17317,7 +17358,7 @@ R average.");
         vibe_freq->align(FL_ALIGN_LEFT);
         vibe_freq->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_freq
-      { vibe_rnd = new SliderW(372, 301, 100, 10, "Rnd");
+      { vibe_rnd = new SliderW(372, 296, 100, 10, "Rnd");
         vibe_rnd->type(5);
         vibe_rnd->box(FL_FLAT_BOX);
         vibe_rnd->color((Fl_Color)178);
@@ -17333,7 +17374,7 @@ R average.");
         vibe_rnd->align(FL_ALIGN_LEFT);
         vibe_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_rnd
-      { Fl_Choice* o = vibe_lfotype = new Fl_Choice(383, 324, 72, 16, "LFO Type");
+      { Fl_Choice* o = vibe_lfotype = new Fl_Choice(383, 310, 72, 16, "LFO Type");
         vibe_lfotype->down_box(FL_BORDER_BOX);
         vibe_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         vibe_lfotype->labelsize(10);
@@ -17343,7 +17384,7 @@ R average.");
         vibe_lfotype->callback((Fl_Callback*)cb_vibe_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* vibe_lfotype
-      { vibe_stdf = new SliderW(372, 350, 100, 10, "St.df");
+      { vibe_stdf = new SliderW(372, 330, 100, 10, "St.df");
         vibe_stdf->type(5);
         vibe_stdf->box(FL_FLAT_BOX);
         vibe_stdf->color((Fl_Color)178);
@@ -17359,7 +17400,41 @@ R average.");
         vibe_stdf->align(FL_ALIGN_LEFT);
         vibe_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_stdf
-      { vibe_pan = new SliderW(372, 370, 100, 10, "Pan");
+      { vibe_fb = new SliderW(372, 344, 100, 10, "Fb");
+        vibe_fb->type(5);
+        vibe_fb->box(FL_FLAT_BOX);
+        vibe_fb->color((Fl_Color)178);
+        vibe_fb->selection_color((Fl_Color)62);
+        vibe_fb->labeltype(FL_NORMAL_LABEL);
+        vibe_fb->labelfont(0);
+        vibe_fb->labelsize(10);
+        vibe_fb->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vibe_fb->minimum(-64);
+        vibe_fb->maximum(64);
+        vibe_fb->step(1);
+        vibe_fb->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vibe_fb->callback((Fl_Callback*)cb_vibe_fb);
+        vibe_fb->align(FL_ALIGN_LEFT);
+        vibe_fb->when(FL_WHEN_CHANGED);
+      } // SliderW* vibe_fb
+      { vibe_LR = new SliderW(372, 358, 100, 10, "L/R.Cr");
+        vibe_LR->type(5);
+        vibe_LR->box(FL_FLAT_BOX);
+        vibe_LR->color((Fl_Color)178);
+        vibe_LR->selection_color((Fl_Color)62);
+        vibe_LR->labeltype(FL_NORMAL_LABEL);
+        vibe_LR->labelfont(0);
+        vibe_LR->labelsize(10);
+        vibe_LR->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vibe_LR->minimum(-64);
+        vibe_LR->maximum(63);
+        vibe_LR->step(1);
+        vibe_LR->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vibe_LR->callback((Fl_Callback*)cb_vibe_LR);
+        vibe_LR->align(FL_ALIGN_LEFT);
+        vibe_LR->when(FL_WHEN_CHANGED);
+      } // SliderW* vibe_LR
+      { vibe_pan = new SliderW(372, 372, 100, 10, "Pan");
         vibe_pan->type(5);
         vibe_pan->box(FL_FLAT_BOX);
         vibe_pan->color((Fl_Color)178);
@@ -17369,7 +17444,7 @@ R average.");
         vibe_pan->labelsize(10);
         vibe_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vibe_pan->minimum(-64);
-        vibe_pan->maximum(63);
+        vibe_pan->maximum(64);
         vibe_pan->step(1);
         vibe_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vibe_pan->callback((Fl_Callback*)cb_vibe_pan);
@@ -17453,6 +17528,13 @@ R average.");
         ActivarGeneral->align(68|FL_ALIGN_INSIDE);
         ActivarGeneral->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* ActivarGeneral
+      { BostBut = new Fl_Button(126, 30, 37, 18, "+10dB");
+        BostBut->type(1);
+        BostBut->shortcut(0xffc7);
+        BostBut->color((Fl_Color)62);
+        BostBut->labelsize(8);
+        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(7));
+      } // Fl_Button* BostBut
       { Balance = new SliderW(15, 48, 19, 126, "FX%");
         Balance->type(4);
         Balance->box(FL_FLAT_BOX);
@@ -17569,7 +17651,7 @@ R average.");
         output_vur->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         output_vur->when(FL_WHEN_NEVER);
       } // NewVum* output_vur
-      { LABEL_IO = new Fl_Box(68, 30, 62, 14, "In/Out");
+      { LABEL_IO = new Fl_Box(60, 30, 62, 14, "In/Out");
         LABEL_IO->labelfont(1);
         LABEL_IO->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         LABEL_IO->user_data((void*)(7));
@@ -17749,12 +17831,6 @@ R average.");
         Open_Order->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
-      { BostBut = new Fl_Button(457, 132, 56, 24, "+10dB");
-        BostBut->type(1);
-        BostBut->shortcut(0xffc7);
-        BostBut->labelsize(10);
-        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(7));
-      } // Fl_Button* BostBut
       { Etit = new Fl_Button(174, 160, 340, 28);
         Etit->type(1);
         Etit->box(FL_NO_BOX);

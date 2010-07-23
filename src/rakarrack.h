@@ -3192,6 +3192,11 @@ private:
   void cb_vibe_WD_i(SliderW*, void*);
   static void cb_vibe_WD(SliderW*, void*);
 public:
+  SliderW *vibe_width;
+private:
+  void cb_vibe_width_i(SliderW*, void*);
+  static void cb_vibe_width(SliderW*, void*);
+public:
   SliderW *vibe_dpth;
 private:
   void cb_vibe_dpth_i(SliderW*, void*);
@@ -3217,6 +3222,16 @@ private:
   void cb_vibe_stdf_i(SliderW*, void*);
   static void cb_vibe_stdf(SliderW*, void*);
 public:
+  SliderW *vibe_fb;
+private:
+  void cb_vibe_fb_i(SliderW*, void*);
+  static void cb_vibe_fb(SliderW*, void*);
+public:
+  SliderW *vibe_LR;
+private:
+  void cb_vibe_LR_i(SliderW*, void*);
+  static void cb_vibe_LR(SliderW*, void*);
+public:
   SliderW *vibe_pan;
 private:
   void cb_vibe_pan_i(SliderW*, void*);
@@ -3239,6 +3254,11 @@ public:
 private:
   void cb_ActivarGeneral_i(Fl_Light_Button*, void*);
   static void cb_ActivarGeneral(Fl_Light_Button*, void*);
+public:
+  Fl_Button *BostBut;
+private:
+  void cb_BostBut_i(Fl_Button*, void*);
+  static void cb_BostBut(Fl_Button*, void*);
 public:
   SliderW *Balance;
 private:
@@ -3349,11 +3369,6 @@ public:
 private:
   void cb_Open_Order_i(Fl_Button*, void*);
   static void cb_Open_Order(Fl_Button*, void*);
-public:
-  Fl_Button *BostBut;
-private:
-  void cb_BostBut_i(Fl_Button*, void*);
-  static void cb_BostBut(Fl_Button*, void*);
 public:
   Fl_Button *Etit;
 private:

@@ -845,7 +845,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1722 205 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1495 51 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -4934,7 +4934,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7330,7 +7330,7 @@ otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);}
       }
       Fl_Group VIBE {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button vibe_activar {
           label On
@@ -7347,12 +7347,15 @@ findpos(45,(int)o->value());}
           callback {long long ud= (long long) v;
 if((ud==0)||(ud==12))rkr->efx_Vibe->setpreset((int)o->value());
 vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
-vibe_dpth->value(rkr->efx_Vibe->getpar(0));
+vibe_width->value(rkr->efx_Vibe->getpar(0));
+vibe_dpth->value(rkr->efx_Vibe->getpar(8));
 vibe_freq->value(rkr->efx_Vibe->getpar(1));
 vibe_rnd->value(rkr->efx_Vibe->getpar(2));
 vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
 vibe_stdf->value(rkr->efx_Vibe->getpar(4));
-vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);}
+vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
+vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
+vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7383,43 +7386,61 @@ vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);}
         Fl_Value_Slider vibe_WD {
           label {Wet/Dry}
           callback {rkr->efx_Vibe->changepar(6,(int)(o->value())+64);}
-          xywh {372 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {372 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vibe_width {
+          label Width
+          callback {rkr->efx_Vibe->changepar(0,(int)o->value());}
+          xywh {372 254 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_dpth {
           label Depth
-          callback {rkr->efx_Vibe->changepar(0,(int)o->value());}
-          xywh {372 267 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          callback {rkr->efx_Vibe->changepar(8,(int)o->value());}
+          xywh {372 268 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_freq {
           label Tempo
           callback {rkr->efx_Vibe->changepar(1,(int)o->value());}
-          xywh {372 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          xywh {372 282 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_rnd {
           label Rnd
           callback {rkr->efx_Vibe->changepar(2,(int)o->value());}
-          xywh {372 301 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice vibe_lfotype {
           label {LFO Type}
           callback {rkr->efx_Vibe->changepar(3,(int)o->value());}
-          xywh {383 324 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {383 310 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
         Fl_Value_Slider vibe_stdf {
           label {St.df}
           callback {rkr->efx_Vibe->changepar(4,(int)o->value());}
-          xywh {372 350 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {372 330 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vibe_fb {
+          label Fb
+          callback {rkr->efx_Vibe->changepar(7,(int)(o->value()+64));}
+          xywh {372 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vibe_LR {
+          label {L/R.Cr}
+          callback {rkr->efx_Vibe->changepar(9,(int)(o->value()+64));}
+          xywh {372 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_pan {
           label Pan
           callback {rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
-          xywh {372 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {372 372 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
       }
@@ -7517,6 +7538,13 @@ rkr->cleanup_efx();
 }}
           xywh {6 30 52 18} down_box BORDER_BOX shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
+        Fl_Button BostBut {
+          label {+10dB}
+          user_data 7
+          callback {if(o->value()) rkr->booster = dB2rap(10);
+else rkr->booster=1.0f;} selected
+          xywh {126 30 37 18} type Toggle shortcut 0xffc7 color 62 labelsize 8
+        }
         Fl_Value_Slider Balance {
           label {FX%}
           callback {rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
@@ -7556,7 +7584,7 @@ rkr->calculavol(2);}
         Fl_Box LABEL_IO {
           label {In/Out}
           user_data 7
-          xywh {68 30 62 14} labelfont 1 labelcolor 7 align 16
+          xywh {60 30 62 14} labelfont 1 labelcolor 7 align 16
         }
       }
       Fl_Group Midi {
@@ -7784,13 +7812,6 @@ put_icon(Order);
 else
 Order->hide();}
           xywh {255 132 195 24} shortcut 0x6f color 62 align 80 when 6
-        }
-        Fl_Button BostBut {
-          label {+10dB}
-          user_data 7
-          callback {if(o->value()) rkr->booster = dB2rap(10);
-else rkr->booster=1.0f;} selected
-          xywh {457 132 56 24} type Toggle shortcut 0xffc7 labelsize 10
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)

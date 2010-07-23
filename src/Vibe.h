@@ -51,6 +51,9 @@ public:
 
 
 private:
+  int Pwidth;
+  int Pfb;
+  int Plrcross;
   int Pdepth;
   int Ppanning;
   int Pvolume;

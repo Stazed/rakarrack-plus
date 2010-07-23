@@ -393,8 +393,8 @@ Vibe::changepar (int npar, int value)
     {
 
     case 0:
-      Pdepth = value;
-      fdepth = 0.5f + ((float) Pdepth)/254.0f;    
+      Pwidth = value;
+      fdepth = 0.5f + ((float) Pwidth)/254.0f;    
       break;
     case 1:
       lfo.Pfreq = value;
@@ -418,6 +418,12 @@ Vibe::changepar (int npar, int value)
     case 6:
     setvolume(value);
       break;
+    case 7: //fb
+      break;
+    case 8: //depth
+      break;
+    case 9: //lrcross
+      break; 
     
 
     }
@@ -432,7 +438,7 @@ Vibe::getpar (int npar)
 
     {
     case 0:
-      return (Pdepth);
+      return (Pwidth);
       break;
     case 1:
       return (lfo.Pfreq);
@@ -448,8 +454,19 @@ Vibe::getpar (int npar)
       break;
     case 5:
       return (Ppanning); //pan
+      break;
     case 6:
       return(Pvolume);
+      break;
+    case 7:
+      return(Pfb);
+      break;
+    case 8:
+      return(Pdepth);
+      break;
+    case 9:
+      return(Plrcross);
+      break;   
 
     }
 
