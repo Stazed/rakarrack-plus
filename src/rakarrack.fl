@@ -835,8 +835,7 @@ int bxx = x(), byy = y(), bww = w(), bhh = h();
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -7434,8 +7433,8 @@ vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);}
         }
         Fl_Value_Slider vibe_LR {
           label {L/R.Cr}
-          callback {rkr->efx_Vibe->changepar(9,(int)(o->value()+64));}
-          xywh {372 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          callback {rkr->efx_Vibe->changepar(9,(int)(o->value()+64));} selected
+          xywh {372 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_pan {
@@ -7543,7 +7542,7 @@ rkr->cleanup_efx();
           label {+10dB}
           user_data 7
           callback {if(o->value()) rkr->booster = dB2rap(10);
-else rkr->booster=1.0f;} selected
+else rkr->booster=1.0f;}
           xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
         }
         Fl_Value_Slider Balance {
