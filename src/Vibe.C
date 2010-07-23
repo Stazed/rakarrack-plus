@@ -36,9 +36,9 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_)
 //Because of time response, Rb needs to be driven further.
 //End resistance will max out to around 10k for most LFO freqs.
 //pushing low end a little lower for kicks and giggles
-Ra = 450000.0f;  //Cds cell dark resistance.
+Ra = 500000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
-Rb = 1000.0f;         //Cds cell full illumination
+Rb = 400.0f;         //Cds cell full illumination
 b = exp(Ra/logf(Rb)) - CNST_E;
 dTC = 0.08f;
 dRCl = dTC;
@@ -47,6 +47,8 @@ minTC = logf(0.005f/dTC);
 alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
 alphar = alphal;
 dalphal = dalphar = alphal;
+lampTC = cSAMPLE_RATE/(0.01 + cSAMPLE_RATE);  //guessing 10ms
+ilampTC = 1.0f - lampTC;
 lstep = 0.0f;
 rstep = 0.0f;
 Pdepth = 127;
@@ -84,7 +86,6 @@ Vibe::out (float *smpsl, float *smpsr)
 
   int i,j;
   float lfol, lfor, xl, xr, fxl, fxr;
-  float rdiff, ldiff;
   float cvolt, ocvolt, evolt, input;
   float emitterfb = 0.0f;
   
@@ -92,8 +93,8 @@ Vibe::out (float *smpsl, float *smpsr)
   
   lfo.effectlfoout (&lfol, &lfor);
 
-  lfol = lfol*fdepth;
-  lfor = lfor*fdepth;   
+  lfol = fdepth + lfol*fwidth;
+  lfor = fdepth + lfor*fwidth;   
   
    if (lfol > 1.0f)
     lfol = 1.0f;
@@ -104,33 +105,34 @@ Vibe::out (float *smpsl, float *smpsr)
   else if (lfor < 0.0f)
     lfor = 0.0f;  
     
-    lfor = powf(lfor, 1.9f);
-    lfol = powf(lfol, 1.9f);  //emulate lamp turn on/off characteristic
-    
-    //lfo interpolation
-    rdiff = (lfor - oldgr)*cperiod;
-    ldiff = (lfol - oldgl)*cperiod; 
-    gr = lfor;
-    gl = lfol;
-    oldgr = lfor;
-    oldgl = lfol;
+    //lfor = powf(lfor, 0.526f);   // 0.526 = 1/1.9
+    //lfol = powf(lfol, 0.526f);  //emulate lamp turn on/off characteristic
+    lfor = powf(lfor, 1.5f);   // 
+    lfol = powf(lfol, 1.5f);  //emulate lamp turn on/off characteristic by experimentation
     
   for (i = 0; i < PERIOD; i++)
     {
+    //Left Lamp
+     gl = lfol*lampTC + oldgl*ilampTC; 
+     oldgl = gl;  
+    //Right Lamp
+     gr = lfor*lampTC + oldgr*ilampTC; 
+     oldgr = gr;   
+       
     //Left Cds   
-    stepl = gl*(1.0f - alphal) + dalphal*oldstepl;
+    stepl = gl*alphal + dalphal*oldstepl;
     oldstepl = stepl;
     dRCl = dTC*expf(stepl*minTC);
-    alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
+    alphal = cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
     dalphal = 1.0f - cSAMPLE_RATE/(0.5f*dRCl + cSAMPLE_RATE);     //different attack & release character
     xl = CNST_E + stepl*b;
     fxl = expf(Ra/logf(xl));   
     
     //Right Cds   
-    stepr = gr*(1.0f - alphar) + dalphar*oldstepr;
+    stepr = gr*alphar + dalphar*oldstepr;
     oldstepr = stepr;
     dRCr = dTC*expf(stepr*minTC);
-    alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);  
+    alphar = cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);  
     dalphar = 1.0f - cSAMPLE_RATE/(0.5f*dRCr + cSAMPLE_RATE);      //different attack & release character
     xr = CNST_E + stepr*b;
     fxr = expf(Ra/logf(xr));
@@ -168,10 +170,6 @@ Vibe::out (float *smpsl, float *smpsr)
 
     }
     efxoutr[i] = rpanning*input;     
-    
-    
-    gl += ldiff;
-    gr += rdiff;  //linear interpolation of LFO 
     
     };
 
@@ -394,7 +392,7 @@ Vibe::changepar (int npar, int value)
 
     case 0:
       Pwidth = value;
-      fdepth = 0.5f + ((float) Pwidth)/254.0f;    
+      fwidth = ((float) Pwidth)/127.0f;    
       break;
     case 1:
       lfo.Pfreq = value;
@@ -419,10 +417,17 @@ Vibe::changepar (int npar, int value)
     setvolume(value);
       break;
     case 7: //fb
+    Pfb = value;
+    fb = ((float) (Pfb - 64))/65.0f;
       break;
     case 8: //depth
+    Pdepth = value;
+    fdepth = ((float) Pdepth)/127.0f;
       break;
     case 9: //lrcross
+    Plrcross = value;
+    flrcross = ((float) (Plrcross - 64))/64.0f;
+    fcross = 1.0f - abs(flrcross);
       break; 
     
 

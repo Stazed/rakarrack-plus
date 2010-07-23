@@ -58,14 +58,18 @@ private:
   int Ppanning;
   int Pvolume;
   
-  float Ra, Rb, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
+  float fwidth;
+  float fdepth;
+  float rpanning, lpanning; 
+  float flrcross, fcross;
+  EffectLFO lfo;
+  
+  float Ra, Rb, b, dTC, dRCl, dRCr, lampTC, ilampTC, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr;
   float dalphal, dalphar;
   float lstep,rstep;
   float cperiod;
   float gl, oldgl;
   float gr, oldgr; 
-  float rpanning, lpanning; 
-  EffectLFO lfo;
   
   struct fparams {
   float x1;
