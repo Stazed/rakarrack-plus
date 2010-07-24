@@ -106,9 +106,12 @@ Vibe::out (float *smpsl, float *smpsr)
   else if (lfor < 0.0f)
     lfor = 0.0f;  
     
-    lfor = powf(lfor, 1.4f);   // 
-    lfol = powf(lfol, 1.4f);  //emulate lamp turn on/off characteristic by experimentation
-   
+    //lfor = powf(lfor, 1.9f);   // 
+    //lfol = powf(lfol, 1.9f);  //emulate lamp turn on/off characteristic by experimentation
+
+    lfor = 2.0f - 2.0f/(lfor + 1.0f);   // 
+    lfol = 2.0f - 2.0f/(lfol + 1.0f); //emulate lamp turn on/off characteristic by experimentation 
+      
   for (i = 0; i < PERIOD; i++)
     {
     //Left Lamp
