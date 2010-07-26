@@ -19023,7 +19023,8 @@ About_Version->copy_label(tmp);
 }
 
 RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
-  fl_open_display();
+  Fl::args(argc,argv);
+fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
 
 Fl::visual(FL_RGB);
