@@ -38,9 +38,9 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_)
 //pushing low end a little lower for kicks and giggles
 Ra = 500000.0f;  //Cds cell dark resistance.
 Ra = logf(Ra);		//this is done for clarity 
-Rb = 400.0f;         //Cds cell full illumination
+Rb = 600.0f;         //Cds cell full illumination
 b = exp(Ra/logf(Rb)) - CNST_E;
-dTC = 0.1f;
+dTC = 0.085f;
 dRCl = dTC;
 dRCr = dTC;   //Right & left channel dynamic time contsants
 minTC = logf(0.005f/dTC);
