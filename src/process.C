@@ -376,7 +376,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 360;
+  NumParams= 369;
 
 {
    static const char *los_params[] = 
@@ -725,6 +725,15 @@ RKR::RKR ()
 "VaryBand Tempo 1","249","28",
 "VaryBand Tempo 2","251","28",
 "VaryBand WD","248","28",
+"Vibe Depth","388","45",
+"Vibe Fb","392","45",
+"Vibe LR_Cr","393","45",
+"Vibe Pan","394","45",
+"Vibe Rnd","390","45",
+"Vibe St_df","391","45",
+"Vibe Tempo","389","45",
+"Vibe WD","386","45",
+"Vibe Width","387","45",
 "Vocoder Input","298","35",
 "Vocoder Level","302","35",
 "Vocoder Muf.","299","35",

@@ -7359,28 +7359,36 @@ vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Fast
+            label Classic
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Trem 2}
+            label {Stereo Classic}
             xywh {82 82 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Hard Pan}
+            label {Wide Vibe}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Soft Pan}
+            label {Classic Chorus}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Ramp Down}
+            label {Vibe Chorus}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Hard Ramp}
+            label {Lush Chorus}
             xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Sick Phaser}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Warble selected
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider vibe_WD {
@@ -9518,7 +9526,7 @@ rkr->Aux_MIDI = (int)o->value();}
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {selected C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
   } {
     code {Fl::args(argc,argv);
 fl_open_display();
@@ -13021,7 +13029,43 @@ switch (i)
      otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
      otrem_pan->redraw();
      break;
-     	
+     case 386:
+     vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
+     vibe_WD->redraw();
+     break;
+     case 387:
+     vibe_width->value(rkr->efx_Vibe->getpar(0));
+     vibe_width->redraw();
+     break;
+     case 388:
+     vibe_dpth->value(rkr->efx_Vibe->getpar(8));
+     vibe_dpth->redraw();
+     break;
+     case 389:
+     vibe_freq->value(rkr->efx_Vibe->getpar(1));
+     vibe_freq->redraw();
+     break;
+     case 390:
+     vibe_rnd->value(rkr->efx_Vibe->getpar(2));
+     vibe_rnd->redraw();
+     break;
+     case 391:
+     vibe_stdf->value(rkr->efx_Vibe->getpar(4));
+     vibe_stdf->redraw();
+     break;
+     case 392:
+     vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
+     vibe_fb->redraw();
+     break;
+     case 393:
+     vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
+     vibe_LR->redraw();
+     break;
+     case 394:
+     vibe_pan->value(rkr->efx_Vibe->getpar(6)-64);
+     vibe_pan->redraw();
+     break;
+       	
      
       
 }

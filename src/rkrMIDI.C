@@ -2310,6 +2310,43 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Opticaltrem->changepar(5,value);
          break; 
 
+    case 386:
+         efx_Vibe->changepar(6,value);
+         break;
+
+    case 387:
+         efx_Vibe->changepar(0,value);
+         break;
+                      
+    case 388:
+         efx_Vibe->changepar(8,value);
+         break;
+
+    case 389:
+         efx_Vibe->changepar(1,ret_Tempo(value));
+         break;
+
+    case 390:
+         efx_Vibe->changepar(2,value);
+         break;
+
+    case 391:
+         efx_Vibe->changepar(4,value);
+         break;
+
+    case 392:
+         efx_Vibe->changepar(7,value);
+         break;
+
+    case 393:
+         efx_Vibe->changepar(9,value);
+         break;
+
+    case 394:
+         efx_Vibe->changepar(5,value);
+         break;
+
+
 
    } 
       

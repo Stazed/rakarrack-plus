@@ -579,6 +579,17 @@ RKR::savefile (char *filename)
 	  break;
 
 
+	case 45:
+	  //Vibe
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Vibe->getpar (0), efx_Vibe->getpar (1),
+		   efx_Vibe->getpar (2), efx_Vibe->getpar (3),
+		   efx_Vibe->getpar (4), efx_Vibe->getpar (5),
+		   efx_Vibe->getpar (6), efx_Vibe->getpar (7),
+		   efx_Vibe->getpar (8), efx_Vibe->getpar (9),
+                   Vibe_Bypass);
+	  break;
+
 
 	}
       fputs (buf, fn);
@@ -1080,6 +1091,15 @@ RKR::loadfile (char *filename)
 		  &lv[45][5], &Opticaltrem_B);
 	  break;
 
+	case 45:
+	  //Vibe
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[46][0], &lv[46][1], &lv[46][2], &lv[46][3], &lv[46][4],
+		  &lv[46][5], &lv[46][6], &lv[46][7], &lv[46][8], &lv[46][9],
+		  &Vibe_B);
+	  break;
+
+
 
 	}
     }
@@ -1168,7 +1188,8 @@ RKR::Actualizar_Audio ()
   StereoHarm_Bypass = 0;
   CompBand_Bypass = 0;
   Opticaltrem_Bypass = 0;
-
+  Vibe_Bypass = 0;
+  
   cleanup_efx ();
 
   for (i = 0; i <= 11; i++)
@@ -1256,6 +1277,8 @@ RKR::Actualizar_Audio ()
     efx_CompBand->changepar (i, lv[44][i]);
  for (i = 0; i <= 5; i++)
     efx_Opticaltrem->changepar (i, lv[45][i]);
+ for (i = 0; i <= 9; i++)
+    efx_Vibe->changepar (i, lv[46][i]);
 
 
   for (i = 0; i < 12; i++)
@@ -1330,7 +1353,8 @@ RKR::Actualizar_Audio ()
   StereoHarm_Bypass = StereoHarm_B;
   CompBand_Bypass = CompBand_B;
   Opticaltrem_Bypass = Opticaltrem_B;
-    
+  Vibe_Bypass = Vibe_B;
+      
   Bypass = Bypass_B;
 
 }
@@ -1416,7 +1440,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[46][16] = {
+  int presets[47][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1508,7 +1532,9 @@ RKR::New ()
 //CompBand
     {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48, 0, 0, 0},
 //Opticaltrem
-    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Vibe
+    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0}
     
     
     
@@ -1597,7 +1623,8 @@ RKR::New ()
   StereoHarm_B = 0;
   CompBand_B = 0;
   Opticaltrem_B = 0;
-    
+  Vibe_B = 0;    
+ 
   Bypass_B = 0;
 
   
@@ -1620,7 +1647,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[46][16] = {
+  int presets[47][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1712,7 +1739,10 @@ RKR::New_Bank ()
 //CompBand
     {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48, 0, 0, 0},
 //Opticaltrem
-    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+//Vibe
+    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0}
+    
     
     
     
@@ -1837,6 +1867,7 @@ RKR::Bank_to_Preset (int i)
   StereoHarm_B = Bank[i].lv[43][19];
   CompBand_B = Bank[i].lv[44][19];
   Opticaltrem_B = Bank[i].lv[45][19];
+  Vibe_B = Bank[i].lv[46][19];
 
 
   Bypass_B = Bypass;
@@ -1967,6 +1998,8 @@ RKR::Preset_to_Bank (int i)
     lv[44][j] = efx_CompBand->getpar(j);
   for (j = 0; j <= 5; j++)
     lv[45][j] = efx_Opticaltrem->getpar(j);
+  for (j = 0; j <= 9; j++)
+    lv[46][j] = efx_Vibe->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -2046,6 +2079,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[43][19] = StereoHarm_Bypass;
   Bank[i].lv[44][19] = CompBand_Bypass;
   Bank[i].lv[45][19] = Opticaltrem_Bypass;
+  Bank[i].lv[46][19] = Vibe_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

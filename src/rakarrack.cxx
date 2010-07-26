@@ -6700,12 +6700,14 @@ void RKRGUI::cb_vibe_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_vibe_preset[] = {
- {"Fast", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Trem 2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Hard Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Soft Pan", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Down", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Hard Ramp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Classic", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Stereo Classic", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Wide Vibe", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Classic Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Vibe Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Lush Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Sick Phaser", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Warble", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -22543,7 +22545,43 @@ switch (i)
      otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
      otrem_pan->redraw();
      break;
-     	
+     case 386:
+     vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
+     vibe_WD->redraw();
+     break;
+     case 387:
+     vibe_width->value(rkr->efx_Vibe->getpar(0));
+     vibe_width->redraw();
+     break;
+     case 388:
+     vibe_dpth->value(rkr->efx_Vibe->getpar(8));
+     vibe_dpth->redraw();
+     break;
+     case 389:
+     vibe_freq->value(rkr->efx_Vibe->getpar(1));
+     vibe_freq->redraw();
+     break;
+     case 390:
+     vibe_rnd->value(rkr->efx_Vibe->getpar(2));
+     vibe_rnd->redraw();
+     break;
+     case 391:
+     vibe_stdf->value(rkr->efx_Vibe->getpar(4));
+     vibe_stdf->redraw();
+     break;
+     case 392:
+     vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
+     vibe_fb->redraw();
+     break;
+     case 393:
+     vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
+     vibe_LR->redraw();
+     break;
+     case 394:
+     vibe_pan->value(rkr->efx_Vibe->getpar(6)-64);
+     vibe_pan->redraw();
+     break;
+       	
      
       
 }
