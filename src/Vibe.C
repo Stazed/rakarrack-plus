@@ -307,7 +307,6 @@ ed1[i] = (R1pRv)*C1[i];
 //Output here represents voltage at the collector
 cn1[i] = gain*Rv*C1[i];
 cd1[i] = (R1pRv)*C1[i];
-
 //Contribution from emitter load through passive filter network
 ecn1[i] = gain*R1*cd1[i]*C2/(Rv*(C2pC1));
 ecd1[i] = cd1[i]*C2/(C2pC1);

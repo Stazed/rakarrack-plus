@@ -2354,6 +2354,8 @@ pulses.</p>
 <p><b>Pan</b>: The effect can be panned to the left or to the right.</p>
 </td></tr></tbody>
 </table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a></p>
 <h3><a name="Vibe"></a>Vibe</h3>
 <br>
 <table cellpadding="5" cellspacing="2">
@@ -2361,12 +2363,79 @@ pulses.</p>
       <p><img style="width: 180px; height: 250px;" src="imagenes/vib.jpg" alt="rakarrack Vibe"></p>
       </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       
-<p>Vibe<br>
-</p></td></tr></tbody>
+<p>Vibe</p>
+<p> Chorus/Phaser effect emulating a rotating speaker.</p>
+<p>This effect was added at the request of a Rakarrack user wishing to have a
+software UniVibe.  This effect is based on the original UniVibe circuit and
+mathematically models components most likely to contribute to the overall
+effect.  Of course, the originals varied widely from one unit to the next
+due to some components being manufactured under less advanced process
+control.  On these components we made our best guess and tuned by ear.  This
+is the same situation for those attempting the same kind of thing with
+modern analog clones.</p>
+
+<p>The sound of the original type of unit can be easily found by searching the
+internet for "Vibe effect demo".  Its popularity among guitar players makes
+for the proliferation of clones and audio clip demonstrations, and
+ultimately an attempt by the Rakarrack team to emulate this.  We hope you
+will find our version satisfactory and useful.</p>
+
+<p>Things not available in the original units are the inclusion of stereo
+processing paths and feedback, not to mention the variety of LFO's standard
+to all Rakarrack modulation effects.  Consequently, this effect can be taken
+to sonic destinations the original was never able to achieve.  The feedback
+scheme applied in software, for example, would require a messy modification
+using several extra electronics components to properly apply to a real
+analog unit.  In software this is more elegant and produces a lovely phasing
+effect.</p>
+
+<p><b>Wet/Dry</b>: The original 'Vibe had a switch allowing you to select "Chorus" or
+"Vibrato".  Internal to the circuit, this switch only selected between
+different amounts of wet/dry in the final mix.  The "Chorus" setting is a
+bit of a misnomer because it is actually more of a Phaser.  A Wet/Dry of 0
+(50/50) corresponds to the "Chorus" setting.  A wet/dry setting of -64 (all
+wet) corresponds to the "Vibrato" setting of the original analog unit. 
+Later clones of the circuit added the wet/dry mix as a pot so you could mix
+anything in between.  Rakarrack applies this philosophy.</p>
+
+<p><b>Width</b>: Width of modulation (LFO) sweep.</p>
+
+<p><b>Depth</b>: How deep the modulation can go on the lowest end of the sweep.  A
+small number will introduce more "thump" in the response.</p>
+
+<p><b>Tempo</b>: Speed of the LFO sweep</p>
+
+<p><b>Rnd</b>: Adds some randomized "noise" to the LFO to help make it sound less
+mechanical.</p>
+
+<p><b>LFO</b>: Type  Modulation Shape</p>
+
+<p><b>St. df</b>: Amount of delay between left and right channel LFO's.  At 0 or 127
+the LFO's are 180 degrees out of phase.  At 32 or 96 means there is a
+quadrature relationship between the two.  If you don't know what that means,
+then you only need to know this setting to makes left and right channels
+sound different by adding stereo width to the effect.  Anything near 64 will
+have minimal stereo spreading.</p>
+
+<p><b>Fb</b>: Feedback.  0 is no feedback. The original Vibe does not use feedback.  A
+setting of -64 is extreme negative feedback and causes a more intense phaser
+sound.   +64 makes the whole effect sound more "full".</p>
+
+<p><b>L/R.Cr</b>: Left/Right channel crossing.  Mix left channel into right channel
+and right channel into left channel.  Less than zero mixes the channels out
+of phase from each other, greater than zero mixes left and right like a
+normal mixer.  This parameter can have an interesting outcome depending on
+the setting on St.df.  In some cases the interference between left and right
+can be used to make a tremolo effect, particularly when St.df is set to 32
+(quadrature).</p>
+
+<p><b>Pan</b>: Pan the effect to the left or right.  This can be used to change the
+color of the effect between left and right channels if Wet/Dry mix is set to
+a certain amount dry.</p>
+</td></tr></tbody>
 </table>
 <br>
 <p><a href="effects.html">Effects</a></p>
-
 <p><a href="help.html">Table of Contents</a></p>
 
 
