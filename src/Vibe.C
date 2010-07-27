@@ -226,54 +226,54 @@ C1[7] = 0.0047e-6f;
 for(int i =0; i<8; i++)
 {
 //Vo/Ve driven from emitter
-en1[i] = R1*C1[i];
+en1[i] = k*R1*C1[i];
 en0[i] = 1.0f;
-ed1[i] = (R1 + Rv)*C1[i];
+ed1[i] = k*(R1 + Rv)*C1[i];
 ed0[i] = 1.0f + C1[i]/C2;
 
 // Vc~=Ve/(Ic*Re*alpha^2) collector voltage from current input.  
 //Output here represents voltage at the collector
 
-cn1[i] = gain*Rv*C1[i];
+cn1[i] = k*gain*Rv*C1[i];
 cn0[i] = gain*(1.0f + C1[i]/C2);
-cd1[i] = (R1 + Rv)*C1[i];
+cd1[i] = k*(R1 + Rv)*C1[i];
 cd0[i] = 1.0f + C1[i]/C2;
 
 //Contribution from emitter load through passive filter network
-ecn1[i] = gain*R1*(R1 + Rv)*C1[i]*C2/(Rv*(C2 + C1[i]));
+ecn1[i] = k*gain*R1*(R1 + Rv)*C1[i]*C2/(Rv*(C2 + C1[i]));
 ecn0[i] = 0.0f;
-ecd1[i] = (R1 + Rv)*C1[i]*C2/(C2 + C1[i]);
+ecd1[i] = k*(R1 + Rv)*C1[i]*C2/(C2 + C1[i]);
 ecd0[i] = 1.0f;
 
 // %Represents Vo/Vc.  Output over collector voltage
-on1[i] = Rv*C2;
+on1[i] = k*Rv*C2;
 on0[i] = 1.0f;
-od1[i] = Rv*C2;
+od1[i] = k*Rv*C2;
 od0[i] = 1.0f + C2/C1[i];
 
 //%Bilinear xform stuff
-tmpgain =  1.0f/(k*cd1[i] + cd0[i]);
-vc[i].n1 = tmpgain*(cn0[i] - k*cn1[i]);
-vc[i].n0 = tmpgain*(k*cn1[i] + cn0[i]);
-vc[i].d1 = tmpgain*(cd0[i] - k*cd1[i]);
+tmpgain =  1.0f/(cd1[i] + cd0[i]);
+vc[i].n1 = tmpgain*(cn0[i] - cn1[i]);
+vc[i].n0 = tmpgain*(cn1[i] + cn0[i]);
+vc[i].d1 = tmpgain*(cd0[i] - cd1[i]);
 vc[i].d0 = 1.0f;
 
-tmpgain =  1.0f/(k*ecd1[i] + ecd0[i]);
-ecvc[i].n1 = tmpgain*(ecn0[i] - k*ecn1[i]);
-ecvc[i].n0 = tmpgain*(k*ecn1[i] + ecn0[i]);
-ecvc[i].d1 = tmpgain*(ecd0[i] - k*ecd1[i]);
+tmpgain =  1.0f/(ecd1[i] + ecd0[i]);
+ecvc[i].n1 = tmpgain*(ecn0[i] - ecn1[i]);
+ecvc[i].n0 = tmpgain*(ecn1[i] + ecn0[i]);
+ecvc[i].d1 = tmpgain*(ecd0[i] - ecd1[i]);
 ecvc[i].d0 = 1.0f;
 
-tmpgain =  1.0f/(k*od1[i] + od0[i]);
-vcvo[i].n1 = tmpgain*(on0[i] - on1[i]*k);
-vcvo[i].n0 = tmpgain*(k*on1[i] + on0[i]);
-vcvo[i].d1 = tmpgain*(od0[i] - k*od1[i]);
+tmpgain =  1.0f/(od1[i] + od0[i]);
+vcvo[i].n1 = tmpgain*(on0[i] - on1[i]);
+vcvo[i].n0 = tmpgain*(on1[i] + on0[i]);
+vcvo[i].d1 = tmpgain*(od0[i] - od1[i]);
 vcvo[i].d0 = 1.0f;
 
-tmpgain =  1.0f/(k*ed1[i] + ed0[i]);
-vevo[i].n1 = tmpgain*(en0[i] - en1[i]*k);
-vevo[i].n0 = tmpgain*(k*en1[i] + en0[i]);
-vevo[i].d1 = tmpgain*(ed0[i] - k*ed1[i]);
+tmpgain =  1.0f/(ed1[i] + ed0[i]);
+vevo[i].n1 = tmpgain*(en0[i] - en1[i]);
+vevo[i].n0 = tmpgain*(en1[i] + en0[i]);
+vevo[i].d1 = tmpgain*(ed0[i] - ed1[i]);
 vevo[i].d0 = 1.0f;
 
 // bootstrap[i].n1
@@ -301,41 +301,43 @@ R1pRv = R1 + Rv;
 
 C2pC1 = C2 + C1[i];
 //Vo/Ve driven from emitter
-ed1[i] = (R1pRv)*C1[i];
+ed1[i] = k*(R1pRv)*C1[i];
 
 // Vc~=Ve/(Ic*Re*alpha^2) collector voltage from current input.  
 //Output here represents voltage at the collector
-cn1[i] = gain*Rv*C1[i];
-cd1[i] = (R1pRv)*C1[i];
+cn1[i] = k*gain*Rv*C1[i];
+//cd1[i] = (R1pRv)*C1[i];
+cd1[i]=ed1[i];
+
 //Contribution from emitter load through passive filter network
-ecn1[i] = gain*R1*cd1[i]*C2/(Rv*(C2pC1));
-ecd1[i] = cd1[i]*C2/(C2pC1);
+ecn1[i] = k*gain*R1*cd1[i]*C2/(Rv*(C2pC1));
+ecd1[i] = k*cd1[i]*C2/(C2pC1);
 
 // %Represents Vo/Vc.  Output over collector voltage
-on1[i] = Rv*C2;
+on1[i] = k*Rv*C2;
 od1[i] = on1[i];
 
 //%Bilinear xform stuff
-tmpgain =  1.0f/(k*cd1[i] + cd0[i]);
-vc[i].n1 = tmpgain*(cn0[i] - k*cn1[i]);
-vc[i].n0 = tmpgain*(k*cn1[i] + cn0[i]);
-vc[i].d1 = tmpgain*(cd0[i] - k*cd1[i]);
+tmpgain =  1.0f/(cd1[i] + cd0[i]);
+vc[i].n1 = tmpgain*(cn0[i] - cn1[i]);
+vc[i].n0 = tmpgain*(cn1[i] + cn0[i]);
+vc[i].d1 = tmpgain*(cd0[i] - cd1[i]);
 
-tmpgain =  1.0f/(k*ecd1[i] + ecd0[i]);
-ecvc[i].n1 = tmpgain*(ecn0[i] - k*ecn1[i]);
-ecvc[i].n0 = tmpgain*(k*ecn1[i] + ecn0[i]);
-ecvc[i].d1 = tmpgain*(ecd0[i] - k*ecd1[i]);
+tmpgain =  1.0f/(ecd1[i] + ecd0[i]);
+ecvc[i].n1 = tmpgain*(ecn0[i] - ecn1[i]);
+ecvc[i].n0 = tmpgain*(ecn1[i] + ecn0[i]);
+ecvc[i].d1 = tmpgain*(ecd0[i] - ecd1[i]);
 ecvc[i].d0 = 1.0f;
 
-tmpgain =  1.0f/(k*od1[i] + od0[i]);
-vcvo[i].n1 = tmpgain*(on0[i] - on1[i]*k);
-vcvo[i].n0 = tmpgain*(k*on1[i] + on0[i]);
-vcvo[i].d1 = tmpgain*(od0[i] - k*od1[i]);
+tmpgain =  1.0f/(od1[i] + od0[i]);
+vcvo[i].n1 = tmpgain*(on0[i] - on1[i]);
+vcvo[i].n0 = tmpgain*(on1[i] + on0[i]);
+vcvo[i].d1 = tmpgain*(od0[i] - od1[i]);
 
-tmpgain =  1.0f/(k*ed1[i] + ed0[i]);
-vevo[i].n1 = tmpgain*(en0[i] - en1[i]*k);
-vevo[i].n0 = tmpgain*(k*en1[i] + en0[i]);
-vevo[i].d1 = tmpgain*(ed0[i] - k*ed1[i]);
+tmpgain =  1.0f/(ed1[i] + ed0[i]);
+vevo[i].n1 = tmpgain*(en0[i] - en1[i]);
+vevo[i].n0 = tmpgain*(en1[i] + en0[i]);
+vevo[i].d1 = tmpgain*(ed0[i] - ed1[i]);
 
 }
 
