@@ -176,7 +176,7 @@ main (int argc, char *argv[])
       rkr.Bypass = 1;
       rkr.calculavol (1);
       rkr.calculavol (2);
-
+      rkr.booster = 1.0f;
 
     }
 
