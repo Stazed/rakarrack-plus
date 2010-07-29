@@ -57,7 +57,19 @@ public:
  
   class Resample *U_Resample;
   class Resample *D_Resample;
-
+  
+  private:
+  float resample(float sample);
+  void calc_coeffs();
+  
+  float freq;
+  float q;
+  float yc2[6];
+  float yc1[6];
+  float xc2[6];
+  float xc1[6];
+  float c[3];
+  float d[2];
   
 };
 

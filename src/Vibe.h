@@ -73,7 +73,8 @@ private:
   float gl, oldgl;
   float gr, oldgr; 
   
-  struct fparams {
+  class fparams {
+  public:
   float x1;
   float y1;
   //filter coefficients

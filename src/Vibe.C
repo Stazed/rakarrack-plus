@@ -135,7 +135,7 @@ Vibe::out (float *smpsl, float *smpsr)
     dalphar = 1.0f - cSAMPLE_RATE/(0.5f*dRCr + cSAMPLE_RATE);      //different attack & release character
     xr = CNST_E + stepr*b;
     fxr = expf(Ra/logf(xr));
-    
+
     if(i%16 == 0)  modulate(fxl, fxr);   
      
     //Left Channel  
@@ -199,7 +199,6 @@ vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
 vout = vin - vbe;
 vout = vout*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
 return vout;
-
 }
 
 void
@@ -292,6 +291,8 @@ float R1pRv;
 float C2pC1;
 Rv = 4700.0f + ldrl;
 R1pRv = R1 + Rv;
+
+
 for(int i =0; i<8; i++)
 {
 if(i==4) {
@@ -302,16 +303,20 @@ R1pRv = R1 + Rv;
 C2pC1 = C2 + C1[i];
 //Vo/Ve driven from emitter
 ed1[i] = k*(R1pRv)*C1[i];
+//ed1[i] = R1pRv*kC1[i];
 
 // Vc~=Ve/(Ic*Re*alpha^2) collector voltage from current input.  
 //Output here represents voltage at the collector
 cn1[i] = k*gain*Rv*C1[i];
+//cn1[i] = kgainCl[i]*Rv;
 //cd1[i] = (R1pRv)*C1[i];
 cd1[i]=ed1[i];
 
 //Contribution from emitter load through passive filter network
 ecn1[i] = k*gain*R1*cd1[i]*C2/(Rv*(C2pC1));
+//ecn1[i] = iC2pC1[i]*kgainR1C2*cd1[i]/Rv;
 ecd1[i] = k*cd1[i]*C2/(C2pC1);
+//ecd1[i] = iC2pC1[i]*k*cd1[i]*C2/(C2pC1);
 
 // %Represents Vo/Vc.  Output over collector voltage
 on1[i] = k*Rv*C2;

@@ -54,8 +54,8 @@ StompBox::StompBox (float * efxoutl_, float * efxoutr_)
   rtonelw = new AnalogFilter (0, 500.0f, 1.0f, 0); 
 
   //Anti-aliasing for between stages
-  ranti = new AnalogFilter (0, 6000.0f, 0.707f, 4); 
-  lanti = new AnalogFilter (0, 6000.0f, 0.707f, 4);  
+  ranti = new AnalogFilter (0, 6000.0f, 0.707f, 1); 
+  lanti = new AnalogFilter (0, 6000.0f, 0.707f, 1);  
   
   rwshape = new Waveshaper();
   lwshape = new Waveshaper();
