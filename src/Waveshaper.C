@@ -39,19 +39,19 @@ Waveshaper::Waveshaper()
     break;
     case 1:
     period_coeff = 2;
-    ncSAMPLE_RATE=cSAMPLE_RATE/2;
+    ncSAMPLE_RATE=cSAMPLE_RATE/2.0f;
     break;
     case 2:
     period_coeff = 4;
-    ncSAMPLE_RATE=cSAMPLE_RATE/4;
+    ncSAMPLE_RATE=cSAMPLE_RATE/4.0f;
     break;
     case 3:
     period_coeff = 8;
-    ncSAMPLE_RATE=cSAMPLE_RATE/8;
+    ncSAMPLE_RATE=cSAMPLE_RATE/8.0f;
     break;
     case 4:
     period_coeff = 12;
-    ncSAMPLE_RATE=cSAMPLE_RATE/12;
+    ncSAMPLE_RATE=cSAMPLE_RATE/12.0f;
     break;
 
  }
