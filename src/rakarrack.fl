@@ -7387,7 +7387,7 @@ vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label Warble selected
+            label Warble
             xywh {0 0 36 21} labelsize 10
           }
         }
@@ -8537,6 +8537,30 @@ Show_Next_Time();}
             MenuItem {} {
               label x6
               xywh {20 20 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x7
+              xywh {0 0 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x8
+              xywh {0 0 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x9 selected
+              xywh {0 0 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x10
+              xywh {0 0 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x11
+              xywh {0 0 36 21} labelsize 10
+            }
+            MenuItem {} {
+              label x12
+              xywh {0 0 36 21} labelsize 10
             }
           }
           Fl_Choice Upr_Qual {

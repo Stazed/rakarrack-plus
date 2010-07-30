@@ -7730,6 +7730,12 @@ Fl_Menu_Item RKRGUI::menu_Upr_Amo[] = {
  {"x4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"x5", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"x6", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x7", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x8", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x9", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x10", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x11", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"x12", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
