@@ -220,6 +220,7 @@ public:
   void InitMIDI ();
   void ConnectMIDI ();
   void ActiveUn(int value);
+  void ActOnOff();
   void jack_process_midievents (jack_midi_event_t *midievent);
   void process_midi_controller_events(int parameter, int value);
   int ret_Tempo(int value);
@@ -472,7 +473,8 @@ public:
   int J_PERIOD;  
   int m_displayed;
   int Mvalue;
-  int Mnumeff;
+  int Mnumeff[32];
+  int OnOffC;
 
   int MIDIway;
   int NumParams;

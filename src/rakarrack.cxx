@@ -22602,11 +22602,16 @@ rkr->Mvalue=0;
 void RKRGUI::ActOnOff() {
   int miralo;
 
-if(rkr->Mnumeff >2000) miralo = rkr->Mnumeff-2000;
+
+while(rkr->OnOffC>0)
+{
+
+
+if(rkr->Mnumeff[rkr->OnOffC] >2000) miralo = rkr->Mnumeff[rkr->OnOffC]-2000;
 else
-if(rkr->Mnumeff >=1000) miralo=rkr->Mnumeff-1000;
+if(rkr->Mnumeff[rkr->OnOffC] >=1000) miralo=rkr->Mnumeff[rkr->OnOffC]-1000;
 else
-miralo = rkr->efx_order[rkr->Mnumeff];
+miralo = rkr->efx_order[rkr->Mnumeff[rkr->OnOffC]];
 
 switch(miralo)
 {
@@ -22813,6 +22818,11 @@ case 45:
   ActivarGeneral->do_callback();
   break;
      
+
+}
+
+rkr->OnOffC--;
+
 
 }
 }
