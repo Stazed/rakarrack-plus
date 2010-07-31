@@ -231,7 +231,6 @@ RKR::ActOnOff()
 {
 
 if(OnOffC<63) OnOffC++;
-printf("%d\n",OnOffC);
 
 } 
 
