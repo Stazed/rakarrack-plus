@@ -556,9 +556,9 @@ return handle2(event,
 switch (event) {
   case FL_PUSH:
     if (!Fl::event_inside(X, Y, W, H)) return 0;
-    handle_push();
+    if (Fl::event_button()==3) return 1; else handle_push();
   case FL_DRAG: {
-
+     if (Fl::event_button()==3) return 1;
     double val;
     if (minimum() == maximum())
       val = 0.5;
@@ -626,6 +626,7 @@ switch (event) {
     
  
   case FL_RELEASE:
+    if (Fl::event_button()==3) return 1; else
     handle_release();
     return 1;
   case FL_KEYBOARD :
@@ -9190,7 +9191,7 @@ ScanDir();}
     Fl_Window MIDILearn {
       callback {save_stat(5);
 MIDILearn->hide();}
-      xywh {1464 23 640 480} type Double hide
+      xywh {1457 23 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
@@ -9544,6 +9545,18 @@ rkr->Aux_MIDI = (int)o->value();}
         callback {rkr->Aux_Maximum = (int) o->value();}
         xywh {100 150 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
         class SliderW
+      }
+    }
+    Fl_Window MGC {
+      xywh {1489 307 135 100} type Double hide
+    } {
+      Fl_Box fondo_MGC {
+        xywh {0 0 135 99} align 112
+      }
+      Fl_Value_Input Disp_Control2 {
+        callback {if(o->value()> 127) o->value(127);
+if(o->value()< 1) o->value(1);}
+        xywh {52 53 40 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
       }
     }
     code {char tmp[64];
@@ -13325,8 +13338,7 @@ case 45:
 rkr->OnOffC--;
 
 
-}} {selected
-    }
+}} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;
@@ -13430,6 +13442,7 @@ Fondo8->image(InOut->image());
 Fondo9->image(InOut->image());
 Fondo10->image(InOut->image());
 Fondo11->image(InOut->image());
+fondo_MGC->image(InOut->image());
 
 
 
@@ -13445,7 +13458,8 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;

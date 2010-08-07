@@ -503,9 +503,9 @@ int SliderW::handle2(int event, int X, int Y, int W, int H) {
 switch (event) {
   case FL_PUSH:
     if (!Fl::event_inside(X, Y, W, H)) return 0;
-    handle_push();
+    if (Fl::event_button()==3) return 1; else handle_push();
   case FL_DRAG: {
-
+     if (Fl::event_button()==3) return 1;
     double val;
     if (minimum() == maximum())
       val = 0.5;
@@ -573,6 +573,7 @@ switch (event) {
     
  
   case FL_RELEASE:
+    if (Fl::event_button()==3) return 1; else
     handle_release();
     return 1;
   case FL_KEYBOARD :
@@ -8553,6 +8554,14 @@ void RKRGUI::cb_aux_max_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_aux_max(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_aux_max_i(o,v);
+}
+
+void RKRGUI::cb_Disp_Control2_i(Fl_Value_Input* o, void*) {
+  if(o->value()> 127) o->value(127);
+if(o->value()< 1) o->value(1);
+}
+void RKRGUI::cb_Disp_Control2(Fl_Value_Input* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_Disp_Control2_i(o,v);
 }
 
 Fl_Double_Window* RKRGUI::make_window() {
@@ -19024,10 +19033,25 @@ ld");
     } // SliderW* aux_max
     Trigger->end();
   } // Fl_Double_Window* Trigger
+  { MGC = new Fl_Double_Window(135, 100);
+    MGC->user_data((void*)(this));
+    { fondo_MGC = new Fl_Box(0, 0, 135, 99);
+      fondo_MGC->align(96|FL_ALIGN_INSIDE);
+    } // Fl_Box* fondo_MGC
+    { Disp_Control2 = new Fl_Value_Input(52, 53, 40, 30);
+      Disp_Control2->minimum(1);
+      Disp_Control2->maximum(127);
+      Disp_Control2->step(1);
+      Disp_Control2->value(1);
+      Disp_Control2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      Disp_Control2->callback((Fl_Callback*)cb_Disp_Control2);
+    } // Fl_Value_Input* Disp_Control2
+    MGC->end();
+  } // Fl_Double_Window* MGC
   char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);
-  return Trigger;
+  return MGC;
 }
 
 RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
@@ -22931,6 +22955,7 @@ Fondo8->image(InOut->image());
 Fondo9->image(InOut->image());
 Fondo10->image(InOut->image());
 Fondo11->image(InOut->image());
+fondo_MGC->image(InOut->image());
 
 
 
