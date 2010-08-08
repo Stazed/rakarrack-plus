@@ -491,7 +491,9 @@ int SliderW::handle(int event) {
     syy += 25; shh -= 25;
  }
   
-return handle2(event,
+ 
+  
+ return handle2(event,
                   sxx+Fl::box_dx(box()),
                   syy+Fl::box_dy(box()),
                   sww-Fl::box_dw(box()),
@@ -503,9 +505,9 @@ int SliderW::handle2(int event, int X, int Y, int W, int H) {
 switch (event) {
   case FL_PUSH:
     if (!Fl::event_inside(X, Y, W, H)) return 0;
-    if (Fl::event_button()==3) return 1; else handle_push();
+     handle_push();
   case FL_DRAG: {
-     if (Fl::event_button()==3) return 1;
+    if(Fl::event_button()==3) return 1;
     double val;
     if (minimum() == maximum())
       val = 0.5;
@@ -573,7 +575,7 @@ switch (event) {
     
  
   case FL_RELEASE:
-    if (Fl::event_button()==3) return 1; else
+    
     handle_release();
     return 1;
   case FL_KEYBOARD :
@@ -628,6 +630,7 @@ void SliderW::draw() {
   int X,Y,W,H;
 int sxx = x(), syy = y(), sww = w(), shh = h();
 int bxx = x(), byy = y(), bww = w(), bhh = h();
+when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
  
   if (horizontal()) {
     bww = 35; sxx += 35; sww -= 35;
@@ -911,9 +914,7 @@ void RKRGUI::cb_Ajustes(Fl_Menu_* o, void* v) {
 void RKRGUI::cb_ML_Menu_i(Fl_Menu_*, void*) {
   if(!MIDILearn->visible())
 {
-FillML(0);
-MIDILearn->show();
-put_icon(MIDILearn);
+PrepareML();
 }
 else
 MIDILearn->hide();
@@ -6850,14 +6851,24 @@ void RKRGUI::cb_BostBut(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Balance_i(SliderW* o, void*) {
-  rkr->Fraction_Bypass=(float)(o->value()/100.0f);
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(12);
+ return;
+} 
+rkr->Fraction_Bypass=(float)(o->value()/100.0f);
 }
 void RKRGUI::cb_Balance(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Balance_i(o,v);
 }
 
 void RKRGUI::cb_Nivel_Entrada_i(SliderW* o, void*) {
-  rkr->Input_Gain=(float)((o->value()+50)/100.0);
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(14);
+ return;
+} 
+rkr->Input_Gain=(float)((o->value()+50)/100.0);
 rkr->calculavol(1);
 }
 void RKRGUI::cb_Nivel_Entrada(SliderW* o, void* v) {
@@ -6865,7 +6876,13 @@ void RKRGUI::cb_Nivel_Entrada(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_Nivel_Salida_i(SliderW* o, void*) {
-  rkr->Master_Volume=(float)((o->value()+50)/100.0);
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(7);
+ return;
+} 
+
+rkr->Master_Volume=(float)((o->value()+50)/100.0);
 rkr->calculavol(2);
 }
 void RKRGUI::cb_Nivel_Salida(SliderW* o, void* v) {
@@ -8288,7 +8305,8 @@ void RKRGUI::cb_UD_Browser(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_MIDILearn_i(Fl_Double_Window*, void*) {
-  save_stat(5);
+  CancelRec->do_callback();
+save_stat(5);
 MIDILearn->hide();
 }
 void RKRGUI::cb_MIDILearn(Fl_Double_Window* o, void* v) {
@@ -8554,14 +8572,6 @@ void RKRGUI::cb_aux_max_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_aux_max(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_aux_max_i(o,v);
-}
-
-void RKRGUI::cb_Disp_Control2_i(Fl_Value_Input* o, void*) {
-  if(o->value()> 127) o->value(127);
-if(o->value()< 1) o->value(1);
-}
-void RKRGUI::cb_Disp_Control2(Fl_Value_Input* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Disp_Control2_i(o,v);
 }
 
 Fl_Double_Window* RKRGUI::make_window() {
@@ -19033,25 +19043,10 @@ ld");
     } // SliderW* aux_max
     Trigger->end();
   } // Fl_Double_Window* Trigger
-  { MGC = new Fl_Double_Window(135, 100);
-    MGC->user_data((void*)(this));
-    { fondo_MGC = new Fl_Box(0, 0, 135, 99);
-      fondo_MGC->align(96|FL_ALIGN_INSIDE);
-    } // Fl_Box* fondo_MGC
-    { Disp_Control2 = new Fl_Value_Input(52, 53, 40, 30);
-      Disp_Control2->minimum(1);
-      Disp_Control2->maximum(127);
-      Disp_Control2->step(1);
-      Disp_Control2->value(1);
-      Disp_Control2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      Disp_Control2->callback((Fl_Callback*)cb_Disp_Control2);
-    } // Fl_Value_Input* Disp_Control2
-    MGC->end();
-  } // Fl_Double_Window* MGC
   char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);
-  return MGC;
+  return Trigger;
 }
 
 RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
@@ -22955,7 +22950,7 @@ Fondo8->image(InOut->image());
 Fondo9->image(InOut->image());
 Fondo10->image(InOut->image());
 Fondo11->image(InOut->image());
-fondo_MGC->image(InOut->image());
+
 
 
 
@@ -23260,7 +23255,7 @@ switch(rkr->ML_filter)
   
   break;
 }
-Epar->select(1,1);
+
 Epar->redraw();
 
 
@@ -23937,4 +23932,38 @@ return 1;
 }
 
 return 0;
+}
+
+void RKRGUI::getMIDIControl(int num) {
+  int i = 0;
+PrepareML();
+while (i<Epar->size())
+{
+
+ if ((rkr->ML_filter==0) && (rkr->efx_params[i].Ato == num))
+ 
+  {
+    Epar->select(i+1);
+    break;
+   }
+
+ if ((rkr->ML_filter==1) && (rkr->ML_clist[i] == num))
+  {
+    Epar->select(i+1);
+    break;
+   }
+
+
+i++;
+
+}
+
+DisAssigns();
+GMM->do_callback();
+}
+
+void RKRGUI::PrepareML() {
+  FillML(0);
+MIDILearn->show();
+put_icon(MIDILearn);
 }

@@ -528,7 +528,9 @@ return 1;} {}
 
 class SliderW {: {public Fl_Value_Slider}
 } {
-  Function {SliderW(int x,int y, int w, int h, const char *label=0):Fl_Value_Slider(x,y,w,h,label)} {} {}
+  Function {SliderW(int x,int y, int w, int h, const char *label=0):Fl_Value_Slider(x,y,w,h,label)} {} {
+    code {} {}
+  }
   Function {handle(int event)} {return_type int
   } {
     code {if (event == FL_PUSH && Fl::visible_focus()) {
@@ -544,11 +546,14 @@ class SliderW {: {public Fl_Value_Slider}
     syy += 25; shh -= 25;
  }
   
-return handle2(event,
+ 
+  
+ return handle2(event,
                   sxx+Fl::box_dx(box()),
                   syy+Fl::box_dy(box()),
                   sww-Fl::box_dw(box()),
-                  shh-Fl::box_dh(box()));} {}
+                  shh-Fl::box_dh(box()));} {selected
+    }
   }
   Function {handle2(int event, int X, int Y, int W, int H)} {return_type int
   } {
@@ -556,9 +561,9 @@ return handle2(event,
 switch (event) {
   case FL_PUSH:
     if (!Fl::event_inside(X, Y, W, H)) return 0;
-    if (Fl::event_button()==3) return 1; else handle_push();
+     handle_push();
   case FL_DRAG: {
-     if (Fl::event_button()==3) return 1;
+    if(Fl::event_button()==3) return 1;
     double val;
     if (minimum() == maximum())
       val = 0.5;
@@ -626,7 +631,7 @@ switch (event) {
     
  
   case FL_RELEASE:
-    if (Fl::event_button()==3) return 1; else
+    
     handle_release();
     return 1;
   case FL_KEYBOARD :
@@ -680,6 +685,7 @@ switch (event) {
     code {int X,Y,W,H;
 int sxx = x(), syy = y(), sww = w(), shh = h();
 int bxx = x(), byy = y(), bww = w(), bhh = h();
+when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
  
   if (horizontal()) {
     bww = 35; sxx += 35; sww -= 35;
@@ -960,9 +966,7 @@ Settings->hide();}
             label {MIDI Learn}
             callback {if(!MIDILearn->visible())
 {
-FillML(0);
-MIDILearn->show();
-put_icon(MIDILearn);
+PrepareML();
 }
 else
 MIDILearn->hide();}
@@ -7556,20 +7560,36 @@ else rkr->booster=1.0f;}
         }
         Fl_Value_Slider Balance {
           label {FX%}
-          callback {rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(12);
+ return;
+} 
+rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
           xywh {15 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 100 maximum 0 step 1 value 100 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Nivel_Entrada {
           label Input
-          callback {rkr->Input_Gain=(float)((o->value()+50)/100.0);
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(14);
+ return;
+} 
+rkr->Input_Gain=(float)((o->value()+50)/100.0);
 rkr->calculavol(1);}
           xywh {57 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Nivel_Salida {
           label Output
-          callback {rkr->Master_Volume=(float)((o->value()+50)/100.0);
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(7);
+ return;
+} 
+
+rkr->Master_Volume=(float)((o->value()+50)/100.0);
 rkr->calculavol(2);}
           xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class SliderW
@@ -9189,9 +9209,10 @@ ScanDir();}
       }
     }
     Fl_Window MIDILearn {
-      callback {save_stat(5);
+      callback {CancelRec->do_callback();
+save_stat(5);
 MIDILearn->hide();}
-      xywh {1457 23 640 480} type Double hide
+      xywh {1436 23 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}
@@ -9545,18 +9566,6 @@ rkr->Aux_MIDI = (int)o->value();}
         callback {rkr->Aux_Maximum = (int) o->value();}
         xywh {100 150 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
         class SliderW
-      }
-    }
-    Fl_Window MGC {
-      xywh {1489 307 135 100} type Double hide
-    } {
-      Fl_Box fondo_MGC {
-        xywh {0 0 135 99} align 112
-      }
-      Fl_Value_Input Disp_Control2 {
-        callback {if(o->value()> 127) o->value(127);
-if(o->value()< 1) o->value(1);}
-        xywh {52 53 40 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
       }
     }
     code {char tmp[64];
@@ -13442,7 +13451,7 @@ Fondo8->image(InOut->image());
 Fondo9->image(InOut->image());
 Fondo10->image(InOut->image());
 Fondo11->image(InOut->image());
-fondo_MGC->image(InOut->image());
+
 
 
 
@@ -13458,8 +13467,7 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;
@@ -13742,7 +13750,7 @@ switch(rkr->ML_filter)
   
   break;
 }
-Epar->select(1,1);
+
 Epar->redraw();
 
 
@@ -14410,5 +14418,37 @@ return 1;
 }
 
 return 0;} {}
+  }
+  Function {getMIDIControl(int num)} {} {
+    code {int i = 0;
+PrepareML();
+while (i<Epar->size())
+{
+
+ if ((rkr->ML_filter==0) && (rkr->efx_params[i].Ato == num))
+ 
+  {
+    Epar->select(i+1);
+    break;
+   }
+
+ if ((rkr->ML_filter==1) && (rkr->ML_clist[i] == num))
+  {
+    Epar->select(i+1);
+    break;
+   }
+
+
+i++;
+
+}
+
+DisAssigns();
+GMM->do_callback();} {}
+  }
+  Function {PrepareML()} {} {
+    code {FillML(0);
+MIDILearn->show();
+put_icon(MIDILearn);} {}
   }
 } 

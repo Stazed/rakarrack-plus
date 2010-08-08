@@ -4077,13 +4077,6 @@ private:
   void cb_aux_max_i(SliderW*, void*);
   static void cb_aux_max(SliderW*, void*);
 public:
-  Fl_Double_Window *MGC;
-  Fl_Box *fondo_MGC;
-  Fl_Value_Input *Disp_Control2;
-private:
-  void cb_Disp_Control2_i(Fl_Value_Input*, void*);
-  static void cb_Disp_Control2(Fl_Value_Input*, void*);
-public:
   RKRGUI(int argc, char**argv,RKR *rkr_);
   void Background_Color_Change(Fl_Color bcolor);
   void Label_Color_Change(Fl_Color bcolor);
@@ -4129,5 +4122,7 @@ public:
   int search_but(int x, int y);
   void ScanDir();
   static int prevnext(int e);
+  void getMIDIControl(int num);
+  void PrepareML();
 };
 #endif
