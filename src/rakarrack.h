@@ -4122,5 +4122,7 @@ public:
   int search_but(int x, int y);
   void ScanDir();
   static int prevnext(int e);
+  void getMIDIControl(int num);
+  void PrepareML();
 };
 #endif
