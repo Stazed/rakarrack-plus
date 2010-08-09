@@ -86,6 +86,7 @@ Vibe::out (float *smpsl, float *smpsr)
 
   int i,j;
   float lfol, lfor, xl, xr, fxl, fxr;
+  float vbe,vin;
   float cvolt, ocvolt, evolt, input;
   float emitterfb = 0.0f;
   float outl, outr;
@@ -139,33 +140,127 @@ Vibe::out (float *smpsl, float *smpsr)
     if(i%16 == 0)  modulate(fxl, fxr);   
      
     //Left Channel  
-    input = bjt_shape(fbl + smpsl[i]);  
+
+//    input = bjt_shape(fbl + smpsl[i]);  
+
+
+
+    vin = 7.5f*(1.0f + fbl+smpsl[i]);
+    if(vin<0.0f) vin = 0.0f;
+    if(vin>15.0f) vin = 15.0f;
+    vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+    input = vin - vbe;
+    input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+
+
     
     emitterfb = 25.0f/fxl;     
     for(j=0;j<4;j++) //4 stages phasing
     {
-    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
-    ocvolt = vibefilter(cvolt,vcvo,j);
-    oldcvolt[j] = ocvolt;
-    evolt = vibefilter(input, vevo,j);
+
+    float y0 = 0.0f;
+    y0 = input*ecvc[j].n0 + ecvc[j].x1*ecvc[j].n1 - ecvc[j].y1*ecvc[j].d1;
+    ecvc[j].y1 = y0 + DENORMAL_GUARD;
+    ecvc[j].x1 = input; 
+
+
+    float x0 = 0.0f;
+    float data = input + emitterfb*oldcvolt[j];
+    x0 = data*vc[j].n0 + vc[j].x1*vc[j].n1 - vc[j].y1*vc[j].d1;
+    vc[j].y1 = x0 + DENORMAL_GUARD;
+    vc[j].x1 = data; 
+
+    cvolt=y0+x0;
     
-    input = bjt_shape(ocvolt + evolt);
+        
+    ocvolt= cvolt*vcvo[j].n0 + vcvo[j].x1*vcvo[j].n1 - vcvo[j].y1*vcvo[j].d1;
+    vcvo[j].y1 = ocvolt + DENORMAL_GUARD;
+    vcvo[j].x1 = cvolt; 
+
+    oldcvolt[j] = ocvolt;
+
+    evolt = input*vevo[j].n0 + vevo[j].x1*vevo[j].n1 - vevo[j].y1*vevo[j].d1;
+    vevo[j].y1 = evolt + DENORMAL_GUARD;
+    vevo[j].x1 = input; 
+
+    vin = 7.5f*(1.0f + ocvolt+evolt);
+    if(vin<0.0f) vin = 0.0f;
+    if(vin>15.0f) vin = 15.0f;
+    vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+    input = vin - vbe;
+    input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+
+
+
+//    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
+//    ocvolt = vibefilter(cvolt,vcvo,j);
+//    oldcvolt[j] = ocvolt;
+//    evolt = vibefilter(input, vevo,j);
+    
+//    input = bjt_shape(ocvolt + evolt);
     }
     fbl = fb*ocvolt;
     outl = lpanning*input;    
     
     //Right channel
-    input = bjt_shape(fbr + smpsr[i]);  
+
+    
+    vin = 7.5f*(1.0f + fbr+smpsr[i]);
+    if(vin<0.0f) vin = 0.0f;
+    if(vin>15.0f) vin = 15.0f;
+    vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+    input = vin - vbe;
+    input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+
+
+
+//    input = bjt_shape(fbr + smpsr[i]);  
     
     emitterfb = 25.0f/fxr;     
     for(j=4;j<8;j++) //4 stages phasing
     {
-    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
-    ocvolt = vibefilter(cvolt,vcvo,j);
-    oldcvolt[j] = ocvolt;
-    evolt = vibefilter(input, vevo,j);
+
+    float y0 = 0.0f;
+    y0 = input*ecvc[j].n0 + ecvc[j].x1*ecvc[j].n1 - ecvc[j].y1*ecvc[j].d1;
+    ecvc[j].y1 = y0 + DENORMAL_GUARD;
+    ecvc[j].x1 = input; 
+
+
+    float x0 = 0.0f;
+    float data = input + emitterfb*oldcvolt[j];
+    x0 = data*vc[j].n0 + vc[j].x1*vc[j].n1 - vc[j].y1*vc[j].d1;
+    vc[j].y1 = x0 + DENORMAL_GUARD;
+    vc[j].x1 = data; 
+
+    cvolt=y0+x0;
     
-    input = bjt_shape(ocvolt + evolt);
+        
+    ocvolt= cvolt*vcvo[j].n0 + vcvo[j].x1*vcvo[j].n1 - vcvo[j].y1*vcvo[j].d1;
+    vcvo[j].y1 = ocvolt + DENORMAL_GUARD;
+    vcvo[j].x1 = cvolt; 
+
+    oldcvolt[j] = ocvolt;
+
+    evolt = input*vevo[j].n0 + vevo[j].x1*vevo[j].n1 - vevo[j].y1*vevo[j].d1;
+    vevo[j].y1 = evolt + DENORMAL_GUARD;
+    vevo[j].x1 = input; 
+
+    
+    vin = 7.5f*(1.0f + ocvolt+evolt);
+    if(vin<0.0f) vin = 0.0f;
+    if(vin>15.0f) vin = 15.0f;
+    vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+    input = vin - vbe;
+    input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+
+
+
+//    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
+//    ocvolt = vibefilter(cvolt,vcvo,j);
+//    oldcvolt[j] = ocvolt;
+//    evolt = vibefilter(input, vevo,j);
+    
+//    input = bjt_shape(ocvolt + evolt);
     }
     
     fbr = fb*ocvolt;

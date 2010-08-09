@@ -200,6 +200,8 @@ public:
   void Preset_to_Bank (int i);
   void Actualizar_Audio ();
   void loadfile (char *filename);
+  void getbuf (char *buf, int j);
+  void SaveIntPreset(int num, char *PresetName);
   void savefile (char *filename);
   void loadskin (char *filename);
   void saveskin (char *filename);
@@ -220,6 +222,7 @@ public:
   void InitMIDI ();
   void ConnectMIDI ();
   void ActiveUn(int value);
+  void ActOnOff();
   void jack_process_midievents (jack_midi_event_t *midievent);
   void process_midi_controller_events(int parameter, int value);
   int ret_Tempo(int value);
@@ -472,7 +475,8 @@ public:
   int J_PERIOD;  
   int m_displayed;
   int Mvalue;
-  int Mnumeff;
+  int Mnumeff[32];
+  int OnOffC;
 
   int MIDIway;
   int NumParams;

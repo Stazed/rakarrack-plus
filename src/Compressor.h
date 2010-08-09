@@ -82,8 +82,9 @@ private:
   float makeuplin;
 
   float outlevel;
-  float att;
-  float rel;
+  float att, attr, attl;
+  float rel, relr, rell;
+  int ltimer, rtimer, hold;
   
   float rgain;
   float rgain_old;

@@ -227,6 +227,14 @@ RKR::midievents()
 
 
 void
+RKR::ActOnOff()
+{
+
+if(OnOffC<63) OnOffC++;
+
+} 
+
+void
 RKR::ActiveUn(int value)
 {
 
@@ -240,7 +248,8 @@ if(value < 20)
   numef = value / 2;
   inoff = checkonoff(efx_order[numef]); // value % 2; 
   miraque = efx_order[numef];
-  Mnumeff = numef;
+  ActOnOff(); 
+  Mnumeff[OnOffC] = numef;
 }
 else
 if(value < 121) 
@@ -248,7 +257,8 @@ if(value < 121)
   numef = value-20;
   inoff = checkonoff(numef); 
   miraque = numef;
-  Mnumeff = 1000 + numef;
+  ActOnOff();
+  Mnumeff[OnOffC] = 1000 + numef;
 }
 
 else
@@ -256,7 +266,8 @@ else
   numef = value;
   inoff = checkonoff(numef);
   miraque = numef;
-  Mnumeff = 2000 + numef;
+  ActOnOff();
+  Mnumeff[OnOffC] = 2000 + numef;
 }    
     
   switch(miraque)

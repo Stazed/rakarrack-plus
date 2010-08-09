@@ -65,6 +65,9 @@ Compressor::Compressor (float * efxoutl_, float * efxoutr_)
   peak = 0;
   lpeak = 0.0f;
   rpeak = 0.0f;
+  rell = relr = attr = attl = 1.0f;
+  ltimer = rtimer = 0;
+  hold = (int) (SAMPLE_RATE*0.0125);  //12.5ms
   clipping = 0;
   limit = 0;
 
@@ -112,12 +115,16 @@ Compressor::Compressor_Change (int np, int value)
 
     case 4:
       tatt = value;
-      att = LN2 / fmaxf ((float)value / 1000.0f * fSAMPLE_RATE, LN2);
+      att = cSAMPLE_RATE /(((float)value / 1000.0f) + cSAMPLE_RATE);
+      attr = att;
+      attl = att;
       break;
 
     case 5:
       trel = value;
-      rel = LN2 / fmaxf ((float)value / 1000.0f * fSAMPLE_RATE, LN2);
+      rel = 1.0f - cSAMPLE_RATE /(((float)value / 1000.0f) + cSAMPLE_RATE);
+      rell = rel;
+      relr = rel;
       break;
 
     case 6:
@@ -215,7 +222,7 @@ Compressor::Compressor_Change_Preset (int npreset)
     //8:1
     {-24, 8, -12, 20, 35, 1, 30, 0, 0},
     //Final Limiter
-    {-1, 25, 0, 5, 50, 0 ,0 ,1 ,1},
+    {-1, 25, 0, 5, 1500, 0 ,0 ,1 ,1},
     //HarmonicEnhancer
     {-20, 15, -3, 5, 50, 0 ,0 ,1 ,1},
     //Band CompBand
@@ -249,13 +256,31 @@ Compressor::out (float *efxoutl, float *efxoutr)
 
      if(peak)
      {
-     if(rpeak<efxoutr[i]) rpeak = fabs(efxoutr[i]);
-     if(lpeak<efxoutl[i]) lpeak = fabs(efxoutl[i]);
-     rpeak -= rpeak*rel;
-     lpeak -= lpeak*rel;	//leaky peak detector.
+     if (rtimer > hold)  
+     {
+     rpeak *= 0.9998f;   //The magic number corresponds to ~0.1s based on T/(RC + T), 
+     rtimer--;
+     }
+     if (ltimer > hold) 
+     {
+     lpeak *= 0.9998f;	//leaky peak detector.
+     ltimer --;  //keeps the timer from eventually exceeding max int & rolling over
+     }
+     ltimer++;
+     rtimer++;
+     if(rpeak<fabs(efxoutr[i])) 
+     {
+     rpeak = fabs(efxoutr[i]);
+     rtimer = 0;
+     }
+     if(lpeak<fabs(efxoutl[i]))
+     { 
+     lpeak = fabs(efxoutl[i]);
+     ltimer = 0;
+     }
      
-     if(lpeak>5.0f) lpeak = 5.0f;
-     if(rpeak>5.0f) rpeak = 5.0f; //keeps limiter from getting locked up when signal levels go way out of bounds (like hundreds)
+     if(lpeak>20.0f) lpeak = 20.0f;
+     if(rpeak>20.0f) rpeak = 20.0f; //keeps limiter from getting locked up when signal levels go way out of bounds (like hundreds)
      
      }
      else
@@ -266,14 +291,27 @@ Compressor::out (float *efxoutl, float *efxoutr)
      
 	if(stereo) 
 	{
-      rdelta = fabsf (rpeak) - rvolume;
+      rdelta = fabsf (rpeak);
+	if(rvolume > 0.9f)
+	{
+	attr = att + ((1.0f - att)*(rvolume - 0.9f)*10.0f);	//dynamically change attack time for limiting mode
+	}
+	else if (rvolume > 1.0f)
+	{
+	attr = 1.0f;
+	}
+	else
+	{
+	attr = att;
+	}
 
-      if (rdelta > 0.0)
-	rvolume += att * rdelta;
+      if (rdelta > rvolume)
+	rvolume = attr * rdelta + (1.0f - attr)*rvolume;
       else
-	rvolume += rel * rdelta;	
-	rvolume_db = rap2dB (rvolume);	
-
+	rvolume *= relr;	
+	
+		
+  	rvolume_db = rap2dB (rvolume);
       if (rvolume_db < thres_db)
 	{
 	  rgain = outlevel;
@@ -284,7 +322,7 @@ Compressor::out (float *efxoutl, float *efxoutr)
 	//at something negligibly larger than 1 once volume exceeds thres, and increases toward selected
 	// ratio by the time it has reached thres_mx.  --Transmogrifox
 
-	eratio = 1 + (kratio-1.0f)*(rvolume_db-thres_db)* coeff_knee;  
+	eratio = 1.0f + (kratio-1.0f)*(rvolume_db-thres_db)* coeff_knee;  
 	rgain =   outlevel*dB2rap(thres_db + (rvolume_db-thres_db)/eratio - rvolume_db);
 	}
       else
@@ -299,16 +337,29 @@ Compressor::out (float *efxoutl, float *efxoutr)
 
 //Left Channel
 	if(stereo)  {
-	  ldelta = fabsf (lpeak) - lvolume;
+	  ldelta = fabsf (lpeak);
 	}	
 	else  {
-	  ldelta = 0.5f*(fabsf (lpeak) + fabsf (rpeak)) - lvolume;
+	  ldelta = 0.5f*(fabsf (lpeak) + fabsf (rpeak));
 	    };  //It's not as efficient to check twice, but it's small expense worth code clarity
+
+	if(lvolume > 0.9f)
+	{
+	attl = att + ((1.0f - att)*(lvolume - 0.9f)*10.0f);	//dynamically change attack time for limiting mode
+	}
+	else if (lvolume > 1.0f)
+	{
+	attl = 1.0f;
+	}
+	else
+	{
+	attl = att;
+	}	
 		
-      if (ldelta > 0.0)
-	lvolume += att * ldelta;
+      if (ldelta > lvolume)
+	lvolume = attl * ldelta + (1.0f - attl)*lvolume;
       else
-	lvolume += rel * ldelta;	
+	lvolume *= rell;	
 	
   	lvolume_db = rap2dB (lvolume);
 
@@ -318,7 +369,7 @@ Compressor::out (float *efxoutl, float *efxoutr)
 	}
       else if (lvolume_db < thres_mx)  //knee region
 	{
-	eratio = 1 + (kratio-1.0f)*(lvolume_db-thres_db)* coeff_knee;  
+	eratio = 1.0f + (kratio-1.0f)*(lvolume_db-thres_db)* coeff_knee;  
 	lgain =   outlevel*dB2rap(thres_db + (lvolume_db-thres_db)/eratio - lvolume_db);
 	}
       else

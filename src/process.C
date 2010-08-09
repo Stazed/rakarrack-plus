@@ -66,6 +66,7 @@ RKR::RKR ()
   ML_filter=0;
   error_num = 0;
   eff_filter = 0;
+  OnOffC = 0;
   flpos = 0;
   Har_Down = 0;
   Rev_Down = 0;
@@ -384,7 +385,7 @@ RKR::RKR ()
 
 "Alienwah Depth","20","11",
 "Alienwah Fb","82","11",
-"Alienwah Freq.","76","11",
+"Alienwah Tempo","76","11",
 "Alienwah LR_Cr","96","11",
 "Alienwah Pan","61","11",
 "Alienwah Phase","115","11",
@@ -394,7 +395,7 @@ RKR::RKR ()
 "Analog Phaser Depth","120","18",
 "Analog Phaser Distortion","118","18",
 "Analog Phaser Feedback","122","18",
-"Analog Phaser Freq","119","18",
+"Analog Phaser Tempo","119","18",
 "Analog Phaser Mismatch","123","18",
 "Analog Phaser St.df","124","18",
 "Analog Phaser Wet-Dry","117","18",
@@ -407,7 +408,7 @@ RKR::RKR ()
 "Arpie Pan","214","24",
 "Arpie Tempo","215","24",
 "Arpie WD","212","24",
-"AutoPan/Extra Stereo Freq.","77","13",
+"AutoPan/Extra Stereo Tempo","77","13",
 "AutoPan/Extra Stereo Pan","67","13",
 "AutoPan/Extra Stereo Rnd","110","13",
 "AutoPan/Extra Stereo St_df.","104","13",
@@ -415,7 +416,7 @@ RKR::RKR ()
 "Balance","12","50",
 "Chorus Depth","23","5",
 "Chorus Fb","79","5",
-"Chorus Freq.","72","5",
+"Chorus Tempo","72","5",
 "Chorus LR_Cr","91","5",
 "Chorus Pan","50","5",
 "Chorus Rnd","105","5",
@@ -479,7 +480,7 @@ RKR::RKR ()
 "Distortion Pan","48","2",
 "Distortion Sub Octave","9","2",
 "Distortion Wet/Dry","30","2",
-"Dual Flange Dpeth","161","20",
+"Dual Flange Depth","161","20",
 "Dual Flange FB","164","20",
 "Dual Flange LPF","165","20",
 "Dual Flange LR_Cr","160","20",
@@ -487,7 +488,7 @@ RKR::RKR ()
 "Dual Flange Pan","159","20",
 "Dual Flange Rnd","168","20",
 "Dual Flange St_df.","167","20",
-"Dual Flange Tenpo","166","20",
+"Dual Flange Tempo","166","20",
 "Dual Flange WD","158","20",
 "Dual Flange Width","162","20",
 "Echo Fb","78","4",
@@ -547,7 +548,7 @@ RKR::RKR ()
 "Expander Threshold","223","25",
 "Flanger Depth","22","7",
 "Flanger Fb","80","7",
-"Flanger Freq.","73","7",
+"Flanger Tempo","73","7",
 "Flanger LR_Cr","92","7",
 "Flanger Pan","51","7",
 "Flanger Rnd","106","7",
@@ -599,7 +600,7 @@ RKR::RKR ()
 "Overdrive Drive","68","3",
 "Overdrive Level","70","3",
 "Overdrive LPF","85","3",
-"Overdrive LPF","88","3",
+"Overdrive HPF","88","3",
 "Overdrive LR_Cr","94","3",
 "Overdrive Pan","47","3",
 "Overdrive Wet/Dry","29","3",
@@ -615,7 +616,7 @@ RKR::RKR ()
 "P.EQ Mid Q","154","9",
 "Phaser Depth","21","6",
 "Phaser Fb","81","6",
-"Phaser Freq.","74","6",
+"Phaser Tempo","74","6",
 "Phaser LR_Cr","93","6",
 "Phaser Pan","60","6",
 "Phaser Phase","114","6",
@@ -745,7 +746,7 @@ RKR::RKR ()
 "WahWah Amp S.","111","10",
 "WahWah Amp S.I.","112","10",
 "WahWah Depth","1","10",
-"WahWah Freq.","75","10",
+"WahWah Tempo","75","10",
 "WahWah Pan","66","10",
 "WahWah Rnd.","108","10",
 "WahWah Smooth","113","10",

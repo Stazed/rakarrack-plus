@@ -1,7 +1,12 @@
 ==v0.6.x (  /  /2010) ==
 
+- Fix GUI, now all the On/Off MIDI events are updated.
+- Added +10dB booster button.
+- Added upsample x7,x8,x9,x10,x11,x12.
+- Added Vibe Effect.
 - Added Optimization Filters for instruments on Recognize Note.
 - Added Trigger to Recognize Note input signal value.
+- Added User Directory banks.
 - Added Extra1 bank to release.
 - Added Opticaltrem effect.
 - DnD swap presets on Bank Window
