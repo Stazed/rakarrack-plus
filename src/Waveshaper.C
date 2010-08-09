@@ -56,10 +56,11 @@ Waveshaper::Waveshaper()
 
  }
 
+
   temps = (float *) malloc (sizeof (float) * PERIOD * period_coeff);
   u_up= (double)period_coeff;
   u_down = 1.0 / u_up; 
-  ires = 1.0f/((float) period_coeff);
+
   compg = 0.0f;  //used by compression distortion
   cratio = 0.25f;  //used by compression for hardness
   tmpgain = 1.0f;  // compression distortion temp variable
@@ -89,7 +90,7 @@ Waveshaper::Waveshaper()
   U_Resample = new Resample(Wave_up_q);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
   D_Resample = new Resample(Wave_down_q);
   
- calc_coeffs();
+
 
 
 };
@@ -105,7 +106,6 @@ void Waveshaper::cleanup()
   dthresh = 0.25;
   dyno = 0.0f;
   dynodecay = 0.0167f/(ncSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
-  calc_coeffs();
 }
 
 
@@ -116,13 +116,13 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
   int nn=n;
   
-//   if(Wave_res_amount > 0)
-//    {
-//      nn=n*period_coeff;
-//      U_Resample->mono_out(smps,temps,n,u_up,nn);
-//    }
+  if(Wave_res_amount > 0)
+   {
+     nn=n*period_coeff;
+     U_Resample->mono_out(smps,temps,n,u_up,nn);
+   }
  
-memcpy(temps,smps,sizeof(float)*n);
+  else memcpy(temps,smps,sizeof(float)*n);
 
   int i;
   float ws = (float)drive / 127.0f + .00001f;
@@ -606,95 +606,17 @@ memcpy(temps,smps,sizeof(float)*n);
 
         } 
         break;	
-  
+		
+	      
     };
 
-   //if(Wave_res_amount>= 0)
-   if(Wave_res_amount> 0)  
+   if(Wave_res_amount>= 0)
    {
-     //D_Resample->mono_out(temps,smps,nn,u_down,n);
-     resample(temps, nn);
+     D_Resample->mono_out(temps,smps,nn,u_down,n);
    }
-    //else
+    else
     memcpy(smps,temps,sizeof(float)*n);
  
-
-};
-
-float
-Waveshaper::resample(float *sample, int size)
-{
-float y0 = 0.0f;
-float input[24];  //more than enough space for increasing resample amount
-int i, j, k;
-int index = 0;
-float diff = 0.0f;
-float temp = 0.0f;
-
-for(k = 0; k < size; k++)
-{
-temp = 0.0f;	
-diff = (sample[k] - oldsmp)*ires;
-
-// 	for(j = 0; j<period_coeff; j++) 
-// 	{
-// 	input[j] = temp + oldsmp;  //linear upsampling with randomization to spread 
-// 	temp+= diff;
-// 	}
- oldsmp = sample[k];
-for(i = 0; i<8; i++)  //8-order lowpass
-{
-
-	for(j = 0; j<period_coeff; j++)  //run the filter on itself for oversample
-	{
-	  y0 =
-	    (input[j] * c[0]) + (xc1[i] * c[1]) + (xc2[i] * c[2]) + (yc1[i] * d[1]) +
-	    (yc2[i] * d[2]);
-	  yc2[i] = yc1[i];
-	  yc1[i] = y0 + DENORMAL_GUARD;
-	  xc2[i] = xc1[i];
-	  xc1[i] = input[j];
-          input[j+1] = y0;
-	 }
-	 input[0] = y0;
-
-}	 
-         index++;
-	 if(index>=period_coeff) index = 0;; //cycle point to offset resampling
-	 sample[k] = input[index];  //recover gain
-
-}
-
-
-};
-
-void
-Waveshaper::calc_coeffs()
-{
-      float omega, sn, cs, alpha, tmp, freq, tmpq, isr;
-      
-      isr = ncSAMPLE_RATE;
-      freq = 16000.0f;
-      tmpq = 0.707f;
-      
-	  omega = D_PI * freq * isr;
-	  sn = sinf (omega);
-	  cs = cosf (omega);
-	  alpha = sn / (2.0f * tmpq);
-	  tmp = 1 + alpha;
-	  c[0] = (1.0f - cs) * .5f / tmp;
-	  c[1] = (1.0f - cs) / tmp;
-	  c[2] = (1.0f - cs) * .5f / tmp;
-	  d[1] = -2.0f * cs / tmp * (-1.0f);
-	  d[2] = (1.0f - alpha) / tmp * (-1.0f);
-	  
-	  for(int i = 0; i<6; i++)
-	  {
-	  yc2[i] = 0.0f;
-	  yc1[i] = 0.0f;
-	  xc2[i] = 0.0f;
-	  xc1[i] = 0.0f;
-	  }
 
 };
 
