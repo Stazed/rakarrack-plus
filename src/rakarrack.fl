@@ -16298,9 +16298,8 @@ rkr->SaveIntPreset(num,PresetName);
 add_menu(w,PresetName);
 }} {}
   }
-  Function {add_menu(Fl_Widget *w, char *name)} {open
-  } {
-    code {int i,k;
+  Function {add_menu(Fl_Widget *w, char *name)} {} {
+    code {int i,k=10;
 Fl_Choice *s = (Fl_Choice*) w;
 Fl_Menu_Item *m = (Fl_Menu_Item*) s->menu();
 Fl_Menu_Item *p;

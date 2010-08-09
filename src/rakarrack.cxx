@@ -25817,7 +25817,7 @@ add_menu(w,PresetName);
 }
 
 void RKRGUI::add_menu(Fl_Widget *w, char *name) {
-  int i,k;
+  int i,k=10;
 Fl_Choice *s = (Fl_Choice*) w;
 Fl_Menu_Item *m = (Fl_Menu_Item*) s->menu();
 Fl_Menu_Item *p;
