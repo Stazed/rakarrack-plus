@@ -23,57 +23,9 @@
 #include <errno.h>
 #include "global.h"
 
-void
-RKR::savefile (char *filename)
+void RKR::getbuf(char *buf, int j)
 {
 
-  int i, j;
-  FILE *fn;
-  char buf[256];
-  fn = fopen (filename, "w");
-  if(errno == EACCES)
-   {
-   Error_Handle(3);
-   fclose(fn);
-   return;
-   }  
-
-  memset (buf, 0, sizeof (buf));
-  sprintf (buf, "%s\n", VERSION);
-  fputs (buf, fn);
-
-
-  //Autor
-
-  memset (buf, 0, sizeof (buf));
-  if (strlen (Author) != 0)
-    sprintf (buf, "%s\n", Author);
-  else
-    {
-      if (UserRealName != NULL)
-	sprintf (buf, "%s\n", UserRealName);
-      else
-	sprintf (buf, "%s\n", getenv ("USER"));
-    }
-  fputs (buf, fn);
-
-  //Preset Name
-
-  memset (buf, 0, sizeof (buf));
-  fputs (Preset_Name, fn);
-  fputs ("\n", fn);
-
-
-  //General
-  memset (buf, 0, sizeof (buf));
-  sprintf (buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass_B);
-  fputs (buf, fn);
-
-
-  for (i = 0; i < 10; i++)
-    {
-      j = efx_order[i];
-      memset (buf, 0, sizeof (buf));
       switch (j)
 	{
 	case 8:
@@ -592,6 +544,62 @@ RKR::savefile (char *filename)
 
 
 	}
+
+
+}
+
+void
+RKR::savefile (char *filename)
+{
+
+  int i, j;
+  FILE *fn;
+  char buf[256];
+  fn = fopen (filename, "w");
+  if(errno == EACCES)
+   {
+   Error_Handle(3);
+   fclose(fn);
+   return;
+   }  
+
+  memset (buf, 0, sizeof (buf));
+  sprintf (buf, "%s\n", VERSION);
+  fputs (buf, fn);
+
+
+  //Autor
+
+  memset (buf, 0, sizeof (buf));
+  if (strlen (Author) != 0)
+    sprintf (buf, "%s\n", Author);
+  else
+    {
+      if (UserRealName != NULL)
+	sprintf (buf, "%s\n", UserRealName);
+      else
+	sprintf (buf, "%s\n", getenv ("USER"));
+    }
+  fputs (buf, fn);
+
+  //Preset Name
+
+  memset (buf, 0, sizeof (buf));
+  fputs (Preset_Name, fn);
+  fputs ("\n", fn);
+
+
+  //General
+  memset (buf, 0, sizeof (buf));
+  sprintf (buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass_B);
+  fputs (buf, fn);
+
+
+  for (i = 0; i < 10; i++)
+    {
+      j = efx_order[i];
+      memset (buf, 0, sizeof (buf));
+      getbuf(buf,j);
       fputs (buf, fn);
 
     }
@@ -2331,4 +2339,29 @@ printf("%s\n",buff);
 system(buff);
 }
 
+void
+RKR::SaveIntPreset(int num, char *PresetName)
+{
+int effect=num-12000;
+FILE *fn;
+char tempfile[256];
+char buf[256];
+char sbuf[512];
+memset(tempfile,0,sizeof(tempfile));
+memset(buf,0,sizeof(buf));
+memset(sbuf,0,sizeof(sbuf));
+sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
+ 
+
+
+if ((fn = fopen (tempfile, "a")) != NULL)
+{
+getbuf(buf,effect);
+sprintf(sbuf,"%d,%s,%s",effect,PresetName,buf);
+fputs(sbuf,fn);
+fclose(fn);
+
+}
+
+}
 

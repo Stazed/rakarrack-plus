@@ -200,6 +200,8 @@ public:
   void Preset_to_Bank (int i);
   void Actualizar_Audio ();
   void loadfile (char *filename);
+  void getbuf (char *buf, int j);
+  void SaveIntPreset(int num, char *PresetName);
   void savefile (char *filename);
   void loadskin (char *filename);
   void saveskin (char *filename);

@@ -1331,7 +1331,7 @@ void RKRGUI::cb_eq_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_eq_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->EQ1_setpreset((int)o->value());
+if((ud==0)||(ud==12000))rkr->EQ1_setpreset((int)o->value());
 eq_1->value(rkr->efx_EQ1->getpar(12)-64);
 eq_2->value(rkr->efx_EQ1->getpar(17)-64);
 eq_3->value(rkr->efx_EQ1->getpar(22)-64);
@@ -1512,7 +1512,7 @@ void RKRGUI::cb_compress_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_compress_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
+if((ud==0)||(ud==12001))rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
 compress_threshold->value(rkr->efx_Compressor->getpar(1));
 compress_Ratio->value(rkr->efx_Compressor->getpar(2));
 compress_output->value(rkr->efx_Compressor->getpar(3));
@@ -1642,7 +1642,7 @@ void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_dist_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12)) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
+if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
 dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
 dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
@@ -1838,7 +1838,7 @@ void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_ovrd_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Overdrive->setpreset((int) o->value());
+if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset((int) o->value());
 ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
@@ -1985,7 +1985,7 @@ void RKRGUI::cb_echo_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_echo_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Echo->setpreset((int) o->value());
+if((ud==0)||(ud==12004))rkr->efx_Echo->setpreset((int) o->value());
 echo_WD->value(rkr->efx_Echo->getpar(0)-64);
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
@@ -2108,7 +2108,7 @@ void RKRGUI::cb_chorus_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_chorus_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Chorus->setpreset((int) o->value());
+if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -2275,7 +2275,7 @@ void RKRGUI::cb_phaser_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_phaser_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Phaser->setpreset((int) o->value());
+if((ud==0)||(ud==12006))rkr->efx_Phaser->setpreset((int) o->value());
 phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
@@ -2445,7 +2445,7 @@ void RKRGUI::cb_flanger_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_flanger_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Flanger->setpreset((int)(o->value()+5));
+if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset((int)(o->value()+5));
 flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));
@@ -2601,7 +2601,7 @@ void RKRGUI::cb_reverb_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_reverb_preset_i(Fl_Choice* o, void* v) {
   rkr->Reverb_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Rev->setpreset((int) o->value());
+if((ud==0)||(ud==12008))rkr->efx_Rev->setpreset((int) o->value());
 reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
 reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
 reverb_time->value(rkr->efx_Rev->getpar(2));
@@ -2752,7 +2752,7 @@ void RKRGUI::cb_eqp_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_eqp_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12)) rkr->EQ2_setpreset((int)o->value());
+if((ud==0)||(ud==12009)) rkr->EQ2_setpreset((int)o->value());
 eqp_LF->value(rkr->efx_EQ2->getpar(11));
 eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
 eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
@@ -2908,7 +2908,7 @@ void RKRGUI::cb_WhaWha_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_WhaWha_preset_i(Fl_Choice* o, void* v) {
   rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_WhaWha->setpreset((int) o->value()); 
+if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
@@ -3061,7 +3061,7 @@ void RKRGUI::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_Alienwah_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Alienwah->setpreset((int) o->value());
+if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
@@ -3259,7 +3259,7 @@ void RKRGUI::cb_pan_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_pan_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Pan->setpreset((int) o->value());
+if((ud==0)||(ud==12013))rkr->efx_Pan->setpreset((int) o->value());
 pan_WD->value(rkr->efx_Pan->getpar(0)-64);
 pan_pan->value(rkr->efx_Pan->getpar(1)-64);
 pan_freq->value(rkr->efx_Pan->getpar(2));
@@ -3382,7 +3382,7 @@ void RKRGUI::cb_har_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_har_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Har->setpreset((int)o->value());
+if((ud==0)||(ud==12014))rkr->efx_Har->setpreset((int)o->value());
 har_WD->value(rkr->efx_Har->getpar(0)-64);
 har_pan->value(rkr->efx_Har->getpar(1)-64);
 har_gan->value(rkr->efx_Har->getpar(2)-64);
@@ -3526,7 +3526,7 @@ void RKRGUI::cb_musdelay_activar(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_musdelay_preset_i(Fl_Choice* o, void* v) {
   rkr->MusDelay_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_MusDelay->setpreset(o->value());
+if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
 musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
 musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
 musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
@@ -3722,7 +3722,7 @@ void RKRGUI::cb_gate_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_gate_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Gate->Gate_Change_Preset((int) o->value());
+if((ud==0)||(ud==12016))rkr->efx_Gate->Gate_Change_Preset((int) o->value());
 gate_ATime->value(rkr->efx_Gate->getpar(3));
 gate_RTime->value(rkr->efx_Gate->getpar(4));
 gate_range->value(rkr->efx_Gate->getpar(2));
@@ -3803,7 +3803,7 @@ void RKRGUI::cb_newdist_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_newdist_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_NewDist->setpreset((int) o->value());
+if((ud==0)||(ud==12017))rkr->efx_NewDist->setpreset((int) o->value());
 newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
 newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
 newdist_drive->value(rkr->efx_NewDist->getpar(3));
@@ -3969,7 +3969,7 @@ void RKRGUI::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_aphaser_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_APhaser->setpreset((int) o->value());
+if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
 aphaser_pan->value(rkr->efx_APhaser->getpar(1));
 aphaser_freq->value(rkr->efx_APhaser->getpar(2));
@@ -4133,7 +4133,7 @@ void RKRGUI::cb_valve_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_valve_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Valve->setpreset((int)o->value());
+if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
 valve_WD->value(rkr->efx_Valve->getpar(0)-64);
 valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
 valve_drive->value(rkr->efx_Valve->getpar(3));
@@ -4307,7 +4307,7 @@ void RKRGUI::cb_dflange_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_dflange_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_DFlange->setpreset((int)o->value());
+if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
 dflange_WD->value(rkr->efx_DFlange->getpar(0));
 dflange_pan->value(rkr->efx_DFlange->getpar(1));
 dflange_freq->value(rkr->efx_DFlange->getpar(10));
@@ -4503,7 +4503,7 @@ void RKRGUI::cb_ring_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_ring_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Ring->setpreset((int) o->value());
+if((ud==0)||(ud==12021))rkr->efx_Ring->setpreset((int) o->value());
 ring_WD->value(rkr->efx_Ring->getpar(0));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
 ring_input->value(rkr->efx_Ring->getpar(11));
@@ -4690,7 +4690,7 @@ void RKRGUI::cb_exciter_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_exciter_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Exciter->setpreset((int) o->value());
+if((ud==0)||(ud==12022))rkr->efx_Exciter->setpreset((int) o->value());
 ex_Gain->value(rkr->efx_Exciter->getpar(0));
 ex_1->value(rkr->efx_Exciter->getpar(1));
 ex_2->value(rkr->efx_Exciter->getpar(2));
@@ -4886,7 +4886,7 @@ void RKRGUI::cb_mbdist_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_mbdist_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_MBDist->setpreset((int)o->value());
+if((ud==0)||(ud==12023))rkr->efx_MBDist->setpreset((int)o->value());
 mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
 mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
 mbdist_drive->value(rkr->efx_MBDist->getpar(3));
@@ -5086,7 +5086,7 @@ void RKRGUI::cb_arpie_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_arpie_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Arpie->setpreset((int) o->value());
+if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
 arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
@@ -5263,7 +5263,7 @@ void RKRGUI::cb_expander_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_expander_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+if((ud==0)||(ud==12025))rkr->efx_Expander->Expander_Change_Preset((int) o->value());
 expander_ATime->value(rkr->efx_Expander->getpar(3));
 expander_RTime->value(rkr->efx_Expander->getpar(4));
 expander_shape->value(rkr->efx_Expander->getpar(2));
@@ -5379,7 +5379,7 @@ void RKRGUI::cb_shuffle_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_shuffle_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Shuffle->setpreset((int)o->value());
+if((ud==0)||(ud==12026))rkr->efx_Shuffle->setpreset((int)o->value());
 shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
 shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
 shuffle_volMH->value(rkr->efx_Shuffle->getpar(2));
@@ -5543,7 +5543,7 @@ void RKRGUI::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_synthfilter_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Synthfilter->setpreset((int) o->value());
+if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
@@ -5747,7 +5747,7 @@ void RKRGUI::cb_mbvvol_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_mbvvol_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_MBVvol->setpreset((int)o->value());
+if((ud==0)||(ud==12028))rkr->efx_MBVvol->setpreset((int)o->value());
 mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
 mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
 mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
@@ -5915,7 +5915,7 @@ void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_convo_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Convol->setpreset((int) o->value());
+if((ud==0)||(ud==12029))rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
@@ -6070,7 +6070,7 @@ void RKRGUI::cb_looper_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_looper_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Looper->setpreset((int) o->value());
+if((ud==0)||(ud==12030))rkr->efx_Looper->setpreset((int) o->value());
 looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
 looper_record->value(rkr->efx_Looper->getpar(3));
@@ -6276,7 +6276,7 @@ void RKRGUI::cb_ryanwah_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_ryanwah_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_RyanWah->setpreset((int) o->value());
+if((ud==0)||(ud==12031))rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
 ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
@@ -6462,7 +6462,7 @@ void RKRGUI::cb_rbecho_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_rbecho_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_RBEcho->setpreset((int) o->value());
+if((ud==0)||(ud==12032))rkr->efx_RBEcho->setpreset((int) o->value());
 rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
@@ -6612,7 +6612,7 @@ void RKRGUI::cb_coil_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_coil_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_CoilCrafter->setpreset((int) o->value());
+if((ud==0)||(ud==12033))rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
 coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
 coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
@@ -6755,7 +6755,7 @@ void RKRGUI::cb_shelf_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_shelf_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_ShelfBoost->setpreset((int) o->value());
+if((ud==0)||(ud==12034))rkr->efx_ShelfBoost->setpreset((int) o->value());
 shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
@@ -6841,7 +6841,7 @@ void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_vo_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Vocoder->setpreset((int) o->value());
+if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
 vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
 vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
@@ -6958,7 +6958,7 @@ void RKRGUI::cb_sus_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_sus_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Sustainer->setpreset((int) o->value());
+if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
 sus_sus->value(rkr->efx_Sustainer->getpar(1));
 }
@@ -7009,7 +7009,7 @@ void RKRGUI::cb_seq_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_seq_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Sequence->setpreset((int) o->value());
+if((ud==0)||(ud==12037))rkr->efx_Sequence->setpreset((int) o->value());
 seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
 seq_amp->value(rkr->efx_Sequence->getpar(11));
@@ -7232,7 +7232,7 @@ void RKRGUI::cb_shifter_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_shifter_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Shifter->setpreset((int)o->value());
+if((ud==0)||(ud==12038))rkr->efx_Shifter->setpreset((int)o->value());
 shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
 shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
 shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
@@ -7388,7 +7388,7 @@ void RKRGUI::cb_stomp_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_stomp_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_StompBox->setpreset((int)o->value());
+if((ud==0)||(ud==12039))rkr->efx_StompBox->setpreset((int)o->value());
 stomp_WD->value(rkr->efx_StompBox->getpar(0));
 stomp_gain->value(rkr->efx_StompBox->getpar(4));
 stomp_low->value(rkr->efx_StompBox->getpar(3));
@@ -7503,7 +7503,7 @@ void RKRGUI::cb_revtron_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_revtron_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Reverbtron->setpreset((int) o->value());
+if((ud==0)||(ud==12040))rkr->efx_Reverbtron->setpreset((int) o->value());
 revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
 revtron_level->value(rkr->efx_Reverbtron->getpar(7));
 revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
@@ -7736,7 +7736,7 @@ void RKRGUI::cb_echotron_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_echotron_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Echotron->setpreset((int) o->value());
+if((ud==0)||(ud==12041))rkr->efx_Echotron->setpreset((int) o->value());
 echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
 echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
 echotron_damp->value(rkr->efx_Echotron->getpar(6));
@@ -7975,7 +7975,7 @@ void RKRGUI::cb_shar_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_shar_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_StereoHarm->setpreset((int)o->value());
+if((ud==0)||(ud==12042))rkr->efx_StereoHarm->setpreset((int)o->value());
 shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
 shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
 shar_intl->value(rkr->efx_StereoHarm->getpar(2)-12);
@@ -8169,7 +8169,7 @@ void RKRGUI::cb_cband_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_cband_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_CompBand->setpreset((int)o->value());
+if((ud==0)||(ud==12043))rkr->efx_CompBand->setpreset((int)o->value());
 cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
 cband_Lratio->value(rkr->efx_CompBand->getpar(1));
 cband_MLratio->value(rkr->efx_CompBand->getpar(2));
@@ -8364,7 +8364,7 @@ void RKRGUI::cb_otrem_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_otrem_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Opticaltrem->setpreset((int)o->value());
+if((ud==0)||(ud==12044))rkr->efx_Opticaltrem->setpreset((int)o->value());
 otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
 otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
 otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
@@ -8465,7 +8465,7 @@ void RKRGUI::cb_vibe_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_vibe_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Vibe->setpreset((int)o->value());
+if((ud==0)||(ud==12045))rkr->efx_Vibe->setpreset((int)o->value());
 vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
 vibe_width->value(rkr->efx_Vibe->getpar(0));
 vibe_dpth->value(rkr->efx_Vibe->getpar(8));
@@ -10628,7 +10628,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         eq_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eq_preset->textsize(10);
         eq_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        eq_preset->callback((Fl_Callback*)cb_eq_preset, (void*)(12));
+        eq_preset->callback((Fl_Callback*)cb_eq_preset, (void*)(12000));
         eq_preset->when(FL_WHEN_RELEASE_ALWAYS);
         eq_preset->menu(menu_eq_preset);
       } // Fl_Choice* eq_preset
@@ -10861,7 +10861,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         compress_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         compress_preset->textsize(10);
         compress_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        compress_preset->callback((Fl_Callback*)cb_compress_preset, (void*)(12));
+        compress_preset->callback((Fl_Callback*)cb_compress_preset, (void*)(12001));
         compress_preset->when(FL_WHEN_RELEASE_ALWAYS);
         compress_preset->menu(menu_compress_preset);
       } // Fl_Choice* compress_preset
@@ -11017,7 +11017,7 @@ R average.");
         dist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dist_preset->textsize(10);
         dist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dist_preset->callback((Fl_Callback*)cb_dist_preset, (void*)(12));
+        dist_preset->callback((Fl_Callback*)cb_dist_preset, (void*)(12002));
         dist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         dist_preset->menu(menu_dist_preset);
       } // Fl_Choice* dist_preset
@@ -11209,7 +11209,7 @@ R average.");
         ovrd_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ovrd_preset->textsize(10);
         ovrd_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset, (void*)(12));
+        ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset, (void*)(12003));
         ovrd_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ovrd_preset->menu(menu_ovrd_preset);
       } // Fl_Choice* ovrd_preset
@@ -11385,7 +11385,7 @@ R average.");
         echo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echo_preset->textsize(10);
         echo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        echo_preset->callback((Fl_Callback*)cb_echo_preset, (void*)(12));
+        echo_preset->callback((Fl_Callback*)cb_echo_preset, (void*)(12004));
         echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
         echo_preset->menu(menu_echo_preset);
       } // Fl_Choice* echo_preset
@@ -11553,7 +11553,7 @@ R average.");
         chorus_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorus_preset->textsize(10);
         chorus_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        chorus_preset->callback((Fl_Callback*)cb_chorus_preset, (void*)(12));
+        chorus_preset->callback((Fl_Callback*)cb_chorus_preset, (void*)(12005));
         chorus_preset->when(FL_WHEN_RELEASE_ALWAYS);
         chorus_preset->menu(menu_chorus_preset);
       } // Fl_Choice* chorus_preset
@@ -11746,7 +11746,7 @@ R average.");
         phaser_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         phaser_preset->textsize(10);
         phaser_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        phaser_preset->callback((Fl_Callback*)cb_phaser_preset, (void*)(12));
+        phaser_preset->callback((Fl_Callback*)cb_phaser_preset, (void*)(12006));
         phaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
         phaser_preset->menu(menu_phaser_preset);
       } // Fl_Choice* phaser_preset
@@ -11953,7 +11953,7 @@ R average.");
         flanger_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_preset->textsize(10);
         flanger_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        flanger_preset->callback((Fl_Callback*)cb_flanger_preset, (void*)(12));
+        flanger_preset->callback((Fl_Callback*)cb_flanger_preset, (void*)(12007));
         flanger_preset->when(FL_WHEN_RELEASE_ALWAYS);
         flanger_preset->menu(menu_flanger_preset);
       } // Fl_Choice* flanger_preset
@@ -12146,7 +12146,7 @@ R average.");
         reverb_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         reverb_preset->textsize(10);
         reverb_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        reverb_preset->callback((Fl_Callback*)cb_reverb_preset, (void*)(12));
+        reverb_preset->callback((Fl_Callback*)cb_reverb_preset, (void*)(12008));
         reverb_preset->when(FL_WHEN_RELEASE_ALWAYS);
         reverb_preset->menu(menu_reverb_preset);
       } // Fl_Choice* reverb_preset
@@ -12338,7 +12338,7 @@ R average.");
         eqp_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         eqp_preset->textsize(10);
         eqp_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        eqp_preset->callback((Fl_Callback*)cb_eqp_preset, (void*)(12));
+        eqp_preset->callback((Fl_Callback*)cb_eqp_preset, (void*)(12009));
         eqp_preset->when(FL_WHEN_RELEASE_ALWAYS);
         eqp_preset->menu(menu_eqp_preset);
       } // Fl_Choice* eqp_preset
@@ -12541,7 +12541,7 @@ R average.");
         WhaWha_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         WhaWha_preset->textsize(10);
         WhaWha_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        WhaWha_preset->callback((Fl_Callback*)cb_WhaWha_preset, (void*)(12));
+        WhaWha_preset->callback((Fl_Callback*)cb_WhaWha_preset, (void*)(12010));
         WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
         WhaWha_preset->menu(menu_WhaWha_preset);
       } // Fl_Choice* WhaWha_preset
@@ -12718,7 +12718,7 @@ R average.");
         Alienwah_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Alienwah_preset->textsize(10);
         Alienwah_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset, (void*)(12));
+        Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset, (void*)(12011));
         Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
         Alienwah_preset->menu(menu_Alienwah_preset);
       } // Fl_Choice* Alienwah_preset
@@ -12922,7 +12922,7 @@ R average.");
         Cabinet_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Cabinet_preset->textsize(10);
         Cabinet_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset, (void*)(12));
+        Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset, (void*)(12012));
         Cabinet_preset->when(FL_WHEN_RELEASE_ALWAYS);
         Cabinet_preset->menu(menu_Cabinet_preset);
       } // Fl_Choice* Cabinet_preset
@@ -12969,7 +12969,7 @@ R average.");
         pan_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         pan_preset->textsize(10);
         pan_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        pan_preset->callback((Fl_Callback*)cb_pan_preset, (void*)(12));
+        pan_preset->callback((Fl_Callback*)cb_pan_preset, (void*)(12013));
         pan_preset->when(FL_WHEN_RELEASE_ALWAYS);
         pan_preset->menu(menu_pan_preset);
       } // Fl_Choice* pan_preset
@@ -13119,7 +13119,7 @@ R average.");
         har_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         har_preset->textsize(10);
         har_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        har_preset->callback((Fl_Callback*)cb_har_preset, (void*)(12));
+        har_preset->callback((Fl_Callback*)cb_har_preset, (void*)(12014));
         har_preset->when(FL_WHEN_RELEASE_ALWAYS);
         har_preset->menu(menu_har_preset);
       } // Fl_Choice* har_preset
@@ -13319,7 +13319,7 @@ R average.");
         musdelay_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         musdelay_preset->textsize(10);
         musdelay_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset, (void*)(12));
+        musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset, (void*)(12015));
         musdelay_preset->when(FL_WHEN_RELEASE_ALWAYS);
         musdelay_preset->menu(menu_musdelay_preset);
       } // Fl_Choice* musdelay_preset
@@ -13543,7 +13543,7 @@ R average.");
         gate_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         gate_preset->textsize(10);
         gate_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        gate_preset->callback((Fl_Callback*)cb_gate_preset, (void*)(12));
+        gate_preset->callback((Fl_Callback*)cb_gate_preset, (void*)(12016));
         gate_preset->when(FL_WHEN_RELEASE_ALWAYS);
         gate_preset->menu(menu_gate_preset);
       } // Fl_Choice* gate_preset
@@ -13696,7 +13696,7 @@ R average.");
         newdist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         newdist_preset->textsize(10);
         newdist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        newdist_preset->callback((Fl_Callback*)cb_newdist_preset, (void*)(12));
+        newdist_preset->callback((Fl_Callback*)cb_newdist_preset, (void*)(12017));
         newdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         newdist_preset->menu(menu_newdist_preset);
       } // Fl_Choice* newdist_preset
@@ -13901,7 +13901,7 @@ R average.");
         aphaser_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         aphaser_preset->textsize(10);
         aphaser_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset, (void*)(12));
+        aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset, (void*)(12018));
         aphaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
         aphaser_preset->menu(menu_aphaser_preset);
       } // Fl_Choice* aphaser_preset
@@ -14097,7 +14097,7 @@ R average.");
         valve_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         valve_preset->textsize(10);
         valve_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        valve_preset->callback((Fl_Callback*)cb_valve_preset, (void*)(12));
+        valve_preset->callback((Fl_Callback*)cb_valve_preset, (void*)(12019));
         valve_preset->when(FL_WHEN_RELEASE_ALWAYS);
         valve_preset->menu(menu_valve_preset);
       } // Fl_Choice* valve_preset
@@ -14302,7 +14302,7 @@ R average.");
         dflange_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         dflange_preset->textsize(10);
         dflange_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        dflange_preset->callback((Fl_Callback*)cb_dflange_preset, (void*)(12));
+        dflange_preset->callback((Fl_Callback*)cb_dflange_preset, (void*)(12020));
         dflange_preset->when(FL_WHEN_RELEASE_ALWAYS);
         dflange_preset->menu(menu_dflange_preset);
       } // Fl_Choice* dflange_preset
@@ -14539,7 +14539,7 @@ R average.");
         ring_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ring_preset->textsize(10);
         ring_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ring_preset->callback((Fl_Callback*)cb_ring_preset, (void*)(12));
+        ring_preset->callback((Fl_Callback*)cb_ring_preset, (void*)(12021));
         ring_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ring_preset->menu(menu_ring_preset);
       } // Fl_Choice* ring_preset
@@ -14763,7 +14763,7 @@ R average.");
         exciter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         exciter_preset->textsize(10);
         exciter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        exciter_preset->callback((Fl_Callback*)cb_exciter_preset, (void*)(12));
+        exciter_preset->callback((Fl_Callback*)cb_exciter_preset, (void*)(12022));
         exciter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         exciter_preset->menu(menu_exciter_preset);
       } // Fl_Choice* exciter_preset
@@ -15015,7 +15015,7 @@ R average.");
         mbdist_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbdist_preset->textsize(10);
         mbdist_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbdist_preset->callback((Fl_Callback*)cb_mbdist_preset, (void*)(12));
+        mbdist_preset->callback((Fl_Callback*)cb_mbdist_preset, (void*)(12023));
         mbdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
         mbdist_preset->menu(menu_mbdist_preset);
       } // Fl_Choice* mbdist_preset
@@ -15252,7 +15252,7 @@ R average.");
         arpie_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         arpie_preset->textsize(10);
         arpie_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        arpie_preset->callback((Fl_Callback*)cb_arpie_preset, (void*)(12));
+        arpie_preset->callback((Fl_Callback*)cb_arpie_preset, (void*)(12024));
         arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
         arpie_preset->menu(menu_arpie_preset);
       } // Fl_Choice* arpie_preset
@@ -15451,7 +15451,7 @@ R average.");
         expander_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         expander_preset->textsize(10);
         expander_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        expander_preset->callback((Fl_Callback*)cb_expander_preset, (void*)(12));
+        expander_preset->callback((Fl_Callback*)cb_expander_preset, (void*)(12025));
         expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
         expander_preset->menu(menu_expander_preset);
       } // Fl_Choice* expander_preset
@@ -15606,7 +15606,7 @@ R average.");
         shuffle_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shuffle_preset->textsize(10);
         shuffle_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shuffle_preset->callback((Fl_Callback*)cb_shuffle_preset, (void*)(12));
+        shuffle_preset->callback((Fl_Callback*)cb_shuffle_preset, (void*)(12026));
         shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shuffle_preset->menu(menu_shuffle_preset);
       } // Fl_Choice* shuffle_preset
@@ -15812,7 +15812,7 @@ R average.");
         synthfilter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         synthfilter_preset->textsize(10);
         synthfilter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset, (void*)(12));
+        synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset, (void*)(12027));
         synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         synthfilter_preset->menu(menu_synthfilter_preset);
       } // Fl_Choice* synthfilter_preset
@@ -16068,7 +16068,7 @@ R average.");
         mbvvol_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         mbvvol_preset->textsize(10);
         mbvvol_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        mbvvol_preset->callback((Fl_Callback*)cb_mbvvol_preset, (void*)(12));
+        mbvvol_preset->callback((Fl_Callback*)cb_mbvvol_preset, (void*)(12028));
         mbvvol_preset->when(FL_WHEN_RELEASE_ALWAYS);
         mbvvol_preset->menu(menu_mbvvol_preset);
       } // Fl_Choice* mbvvol_preset
@@ -16262,7 +16262,7 @@ R average.");
         convo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         convo_preset->textsize(10);
         convo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        convo_preset->callback((Fl_Callback*)cb_convo_preset, (void*)(12));
+        convo_preset->callback((Fl_Callback*)cb_convo_preset, (void*)(12029));
         convo_preset->when(FL_WHEN_RELEASE_ALWAYS);
         convo_preset->menu(menu_convo_preset);
       } // Fl_Choice* convo_preset
@@ -16420,7 +16420,7 @@ R average.");
         looper_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_preset->textsize(10);
         looper_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        looper_preset->callback((Fl_Callback*)cb_looper_preset, (void*)(12));
+        looper_preset->callback((Fl_Callback*)cb_looper_preset, (void*)(12030));
         looper_preset->when(FL_WHEN_RELEASE_ALWAYS);
         looper_preset->menu(menu_looper_preset);
       } // Fl_Choice* looper_preset
@@ -16576,7 +16576,7 @@ R average.");
         ryanwah_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         ryanwah_preset->textsize(10);
         ryanwah_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        ryanwah_preset->callback((Fl_Callback*)cb_ryanwah_preset, (void*)(12));
+        ryanwah_preset->callback((Fl_Callback*)cb_ryanwah_preset, (void*)(12031));
         ryanwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
         ryanwah_preset->menu(menu_ryanwah_preset);
       } // Fl_Choice* ryanwah_preset
@@ -16813,7 +16813,7 @@ R average.");
         rbecho_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         rbecho_preset->textsize(10);
         rbecho_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        rbecho_preset->callback((Fl_Callback*)cb_rbecho_preset, (void*)(12));
+        rbecho_preset->callback((Fl_Callback*)cb_rbecho_preset, (void*)(12032));
         rbecho_preset->when(FL_WHEN_RELEASE_ALWAYS);
         rbecho_preset->menu(menu_rbecho_preset);
       } // Fl_Choice* rbecho_preset
@@ -17003,7 +17003,7 @@ R average.");
         coil_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         coil_preset->textsize(10);
         coil_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        coil_preset->callback((Fl_Callback*)cb_coil_preset, (void*)(12));
+        coil_preset->callback((Fl_Callback*)cb_coil_preset, (void*)(12033));
         coil_preset->when(FL_WHEN_RELEASE_ALWAYS);
         coil_preset->menu(menu_coil_preset);
       } // Fl_Choice* coil_preset
@@ -17167,7 +17167,7 @@ R average.");
         shelf_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shelf_preset->textsize(10);
         shelf_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shelf_preset->callback((Fl_Callback*)cb_shelf_preset, (void*)(12));
+        shelf_preset->callback((Fl_Callback*)cb_shelf_preset, (void*)(12034));
         shelf_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shelf_preset->menu(menu_shelf_preset);
       } // Fl_Choice* shelf_preset
@@ -17272,7 +17272,7 @@ R average.");
         vo_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vo_preset->textsize(10);
         vo_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vo_preset->callback((Fl_Callback*)cb_vo_preset, (void*)(12));
+        vo_preset->callback((Fl_Callback*)cb_vo_preset, (void*)(12035));
         vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
         vo_preset->menu(menu_vo_preset);
       } // Fl_Choice* vo_preset
@@ -17436,7 +17436,7 @@ R average.");
         sus_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         sus_preset->textsize(10);
         sus_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        sus_preset->callback((Fl_Callback*)cb_sus_preset, (void*)(12));
+        sus_preset->callback((Fl_Callback*)cb_sus_preset, (void*)(12036));
         sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
         sus_preset->menu(menu_sus_preset);
       } // Fl_Choice* sus_preset
@@ -17500,7 +17500,7 @@ R average.");
         seq_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         seq_preset->textsize(10);
         seq_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        seq_preset->callback((Fl_Callback*)cb_seq_preset, (void*)(12));
+        seq_preset->callback((Fl_Callback*)cb_seq_preset, (void*)(12037));
         seq_preset->when(FL_WHEN_RELEASE_ALWAYS);
         seq_preset->menu(menu_seq_preset);
       } // Fl_Choice* seq_preset
@@ -17750,7 +17750,7 @@ R average.");
         shifter_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shifter_preset->textsize(10);
         shifter_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shifter_preset->callback((Fl_Callback*)cb_shifter_preset, (void*)(12));
+        shifter_preset->callback((Fl_Callback*)cb_shifter_preset, (void*)(12038));
         shifter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shifter_preset->menu(menu_shifter_preset);
       } // Fl_Choice* shifter_preset
@@ -17931,7 +17931,7 @@ R average.");
         stomp_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         stomp_preset->textsize(10);
         stomp_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        stomp_preset->callback((Fl_Callback*)cb_stomp_preset, (void*)(12));
+        stomp_preset->callback((Fl_Callback*)cb_stomp_preset, (void*)(12039));
         stomp_preset->when(FL_WHEN_RELEASE_ALWAYS);
         stomp_preset->menu(menu_stomp_preset);
       } // Fl_Choice* stomp_preset
@@ -18053,7 +18053,7 @@ R average.");
         revtron_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         revtron_preset->textsize(10);
         revtron_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        revtron_preset->callback((Fl_Callback*)cb_revtron_preset, (void*)(12));
+        revtron_preset->callback((Fl_Callback*)cb_revtron_preset, (void*)(12040));
         revtron_preset->when(FL_WHEN_RELEASE_ALWAYS);
         revtron_preset->menu(menu_revtron_preset);
       } // Fl_Choice* revtron_preset
@@ -18307,7 +18307,7 @@ R average.");
         echotron_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         echotron_preset->textsize(10);
         echotron_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        echotron_preset->callback((Fl_Callback*)cb_echotron_preset, (void*)(12));
+        echotron_preset->callback((Fl_Callback*)cb_echotron_preset, (void*)(12041));
         echotron_preset->when(FL_WHEN_RELEASE_ALWAYS);
         echotron_preset->menu(menu_echotron_preset);
       } // Fl_Choice* echotron_preset
@@ -18549,7 +18549,7 @@ R average.");
         shar_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         shar_preset->textsize(10);
         shar_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        shar_preset->callback((Fl_Callback*)cb_shar_preset, (void*)(12));
+        shar_preset->callback((Fl_Callback*)cb_shar_preset, (void*)(12042));
         shar_preset->when(FL_WHEN_RELEASE_ALWAYS);
         shar_preset->menu(menu_shar_preset);
       } // Fl_Choice* shar_preset
@@ -18764,7 +18764,7 @@ R average.");
         cband_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         cband_preset->textsize(10);
         cband_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        cband_preset->callback((Fl_Callback*)cb_cband_preset, (void*)(12));
+        cband_preset->callback((Fl_Callback*)cb_cband_preset, (void*)(12043));
         cband_preset->when(FL_WHEN_RELEASE_ALWAYS);
         cband_preset->menu(menu_cband_preset);
       } // Fl_Choice* cband_preset
@@ -19018,7 +19018,7 @@ R average.");
         otrem_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         otrem_preset->textsize(10);
         otrem_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        otrem_preset->callback((Fl_Callback*)cb_otrem_preset, (void*)(12));
+        otrem_preset->callback((Fl_Callback*)cb_otrem_preset, (void*)(12044));
         otrem_preset->when(FL_WHEN_RELEASE_ALWAYS);
         otrem_preset->menu(menu_otrem_preset);
       } // Fl_Choice* otrem_preset
@@ -19140,7 +19140,7 @@ R average.");
         vibe_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         vibe_preset->textsize(10);
         vibe_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        vibe_preset->callback((Fl_Callback*)cb_vibe_preset, (void*)(12));
+        vibe_preset->callback((Fl_Callback*)cb_vibe_preset, (void*)(12045));
         vibe_preset->when(FL_WHEN_RELEASE_ALWAYS);
         vibe_preset->menu(menu_vibe_preset);
       } // Fl_Choice* vibe_preset
@@ -24844,7 +24844,7 @@ for (int t=0; t<Principal->children();t++)
           c->color(fore_color);
           c->labelfont(rkr->font);
        
-          if(uh == 12)
+          if((uh >=12000) && (uh <=12100))
            {
   
              Fl_Menu_*n = (Fl_Menu_*)c;
@@ -25754,6 +25754,15 @@ stecla=2;
 return 1;
 }
 
+if(Fl::event_key(65379))
+{
+Fl_Widget *w;
+w = Fl::belowmouse();
+long long k = (long long) w->user_data();
+if(k<12000) return 0; else
+((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset((int) k, w);
+return 1;
+}  
 }
 
 return 0;
@@ -25791,4 +25800,36 @@ void RKRGUI::PrepareML() {
   FillML(0);
 MIDILearn->show();
 put_icon(MIDILearn);
+}
+
+void RKRGUI::addpreset(int num, Fl_Widget *w) {
+  const char *Name;
+char PresetName[128];
+
+
+Name=fl_input("Preset Name?","");
+if(Name != NULL)
+{
+sprintf(PresetName,"*%s",(char *)Name);
+rkr->SaveIntPreset(num,PresetName);
+add_menu(w,PresetName);
+}
+}
+
+void RKRGUI::add_menu(Fl_Widget *w, char *name) {
+  //int i;
+Fl_Choice *s = (Fl_Choice*) w;
+Fl_Menu_Item *m = (Fl_Menu_Item*) s->menu();
+//Fl_Menu_ *n = (Fl_Menu_ *) m;
+
+//n->copy(m,0);
+
+//for(i=0;i<=m->size()-1;i++)
+//{
+// n->add(n->text(i),"", w->callback(),0,0);
+//}
+
+m->add(name,"", w->callback(),0,0);
+//s->menu((Fl_Menu_Item *)n);
+w->redraw();
 }

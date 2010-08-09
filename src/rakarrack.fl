@@ -841,7 +841,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1461,9 +1462,9 @@ findpos(0,(int)o->value());}
         }
         Fl_Choice eq_preset {
           label Preset
-          user_data 12
+          user_data 12000
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->EQ1_setpreset((int)o->value());
+if((ud==0)||(ud==12000))rkr->EQ1_setpreset((int)o->value());
 eq_1->value(rkr->efx_EQ1->getpar(12)-64);
 eq_2->value(rkr->efx_EQ1->getpar(17)-64);
 eq_3->value(rkr->efx_EQ1->getpar(22)-64);
@@ -1639,9 +1640,9 @@ findpos(1,(int)o->value());}
         }
         Fl_Choice compress_preset {
           label Preset
-          user_data 12
+          user_data 12001
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
+if((ud==0)||(ud==12001))rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
 compress_threshold->value(rkr->efx_Compressor->getpar(1));
 compress_Ratio->value(rkr->efx_Compressor->getpar(2));
 compress_output->value(rkr->efx_Compressor->getpar(3));
@@ -1769,9 +1770,9 @@ findpos(2,(int)o->value());}
         }
         Fl_Choice dist_preset {
           label Preset
-          user_data 12
+          user_data 12002
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12)) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
+if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
 dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
 dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
@@ -2052,9 +2053,9 @@ findpos(3,(int)o->value());}
         }
         Fl_Choice ovrd_preset {
           label Preset
-          user_data 12
+          user_data 12003
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Overdrive->setpreset((int) o->value());
+if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset((int) o->value());
 ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
@@ -2194,9 +2195,9 @@ findpos(4,(int)o->value());}
         }
         Fl_Choice echo_preset {
           label Preset
-          user_data 12
+          user_data 12004
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Echo->setpreset((int) o->value());
+if((ud==0)||(ud==12004))rkr->efx_Echo->setpreset((int) o->value());
 echo_WD->value(rkr->efx_Echo->getpar(0)-64);
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
@@ -2335,9 +2336,9 @@ findpos(5,(int)o->value());}
         }
         Fl_Choice chorus_preset {
           label Preset
-          user_data 12
+          user_data 12005
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Chorus->setpreset((int) o->value());
+if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -2527,9 +2528,9 @@ findpos(6,(int)o->value());}
         }
         Fl_Choice phaser_preset {
           label Preset
-          user_data 12
+          user_data 12006
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Phaser->setpreset((int) o->value());
+if((ud==0)||(ud==12006))rkr->efx_Phaser->setpreset((int) o->value());
 phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
@@ -2702,9 +2703,9 @@ findpos(7,(int)o->value());}
         }
         Fl_Choice flanger_preset {
           label Preset
-          user_data 12
+          user_data 12007
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Flanger->setpreset((int)(o->value()+5));
+if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset((int)(o->value()+5));
 flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));
@@ -2861,10 +2862,10 @@ findpos(8,(int)o->value());}
         }
         Fl_Choice reverb_preset {
           label Preset
-          user_data 12
+          user_data 12008
           callback {rkr->Reverb_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Rev->setpreset((int) o->value());
+if((ud==0)||(ud==12008))rkr->efx_Rev->setpreset((int) o->value());
 reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
 reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
 reverb_time->value(rkr->efx_Rev->getpar(2));
@@ -3039,9 +3040,9 @@ findpos(9,(int)o->value());}
         }
         Fl_Choice eqp_preset {
           label Preset
-          user_data 12
+          user_data 12009
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12)) rkr->EQ2_setpreset((int)o->value());
+if((ud==0)||(ud==12009)) rkr->EQ2_setpreset((int)o->value());
 eqp_LF->value(rkr->efx_EQ2->getpar(11));
 eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
 eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
@@ -3193,10 +3194,10 @@ findpos(10,(int)o->value());}
         }
         Fl_Choice WhaWha_preset {
           label Preset
-          user_data 12
+          user_data 12010
           callback {rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_WhaWha->setpreset((int) o->value()); 
+if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
 WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
@@ -3352,9 +3353,9 @@ findpos(11,(int)o->value());}
         }
         Fl_Choice Alienwah_preset {
           label Preset
-          user_data 12
+          user_data 12011
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Alienwah->setpreset((int) o->value());
+if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
@@ -3512,7 +3513,7 @@ findpos(12,(int)o->value());}
         }
         Fl_Choice Cabinet_preset {
           label Preset
-          user_data 12
+          user_data 12012
           callback {rkr->Cabinet_setpreset((int) o->value());}
           xywh {80 89 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
@@ -3583,9 +3584,9 @@ findpos(13,(int)o->value());}
         }
         Fl_Choice pan_preset {
           label Preset
-          user_data 12
+          user_data 12013
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Pan->setpreset((int) o->value());
+if((ud==0)||(ud==12013))rkr->efx_Pan->setpreset((int) o->value());
 pan_WD->value(rkr->efx_Pan->getpar(0)-64);
 pan_pan->value(rkr->efx_Pan->getpar(1)-64);
 pan_freq->value(rkr->efx_Pan->getpar(2));
@@ -3703,9 +3704,9 @@ findpos(14,(int)o->value());}
         }
         Fl_Choice har_preset {
           label Preset
-          user_data 12
+          user_data 12014
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Har->setpreset((int)o->value());
+if((ud==0)||(ud==12014))rkr->efx_Har->setpreset((int)o->value());
 har_WD->value(rkr->efx_Har->getpar(0)-64);
 har_pan->value(rkr->efx_Har->getpar(1)-64);
 har_gan->value(rkr->efx_Har->getpar(2)-64);
@@ -3847,10 +3848,10 @@ findpos(15,(int)o->value());}
         }
         Fl_Choice musdelay_preset {
           label Preset
-          user_data 12
+          user_data 12015
           callback {rkr->MusDelay_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_MusDelay->setpreset(o->value());
+if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
 musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
 musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
 musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
@@ -4067,9 +4068,9 @@ findpos(16,(int)o->value());}
         }
         Fl_Choice gate_preset {
           label Preset
-          user_data 12
+          user_data 12016
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Gate->Gate_Change_Preset((int) o->value());
+if((ud==0)||(ud==12016))rkr->efx_Gate->Gate_Change_Preset((int) o->value());
 gate_ATime->value(rkr->efx_Gate->getpar(3));
 gate_RTime->value(rkr->efx_Gate->getpar(4));
 gate_range->value(rkr->efx_Gate->getpar(2));
@@ -4150,9 +4151,9 @@ findpos(17,(int)o->value());}
         }
         Fl_Choice newdist_preset {
           label Preset
-          user_data 12
+          user_data 12017
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_NewDist->setpreset((int) o->value());
+if((ud==0)||(ud==12017))rkr->efx_NewDist->setpreset((int) o->value());
 newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
 newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
 newdist_drive->value(rkr->efx_NewDist->getpar(3));
@@ -4313,9 +4314,9 @@ findpos(18,(int)o->value());}
         }
         Fl_Choice aphaser_preset {
           label Preset
-          user_data 12
+          user_data 12018
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_APhaser->setpreset((int) o->value());
+if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
 aphaser_pan->value(rkr->efx_APhaser->getpar(1));
 aphaser_freq->value(rkr->efx_APhaser->getpar(2));
@@ -4482,9 +4483,9 @@ findpos(19,(int)o->value());}
         }
         Fl_Choice valve_preset {
           label Preset
-          user_data 12
+          user_data 12019
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Valve->setpreset((int)o->value());
+if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
 valve_WD->value(rkr->efx_Valve->getpar(0)-64);
 valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
 valve_drive->value(rkr->efx_Valve->getpar(3));
@@ -4652,9 +4653,9 @@ findpos(20,(int)o->value());}
         }
         Fl_Choice dflange_preset {
           label Preset
-          user_data 12
+          user_data 12020
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_DFlange->setpreset((int)o->value());
+if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
 dflange_WD->value(rkr->efx_DFlange->getpar(0));
 dflange_pan->value(rkr->efx_DFlange->getpar(1));
 dflange_freq->value(rkr->efx_DFlange->getpar(10));
@@ -4855,9 +4856,9 @@ findpos(21,(int)o->value());}
         }
         Fl_Choice ring_preset {
           label Preset
-          user_data 12
+          user_data 12021
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Ring->setpreset((int) o->value());
+if((ud==0)||(ud==12021))rkr->efx_Ring->setpreset((int) o->value());
 ring_WD->value(rkr->efx_Ring->getpar(0));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
 ring_input->value(rkr->efx_Ring->getpar(11));
@@ -5047,9 +5048,9 @@ findpos(22,(int)o->value());}
         }
         Fl_Choice exciter_preset {
           label Preset
-          user_data 12
+          user_data 12022
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Exciter->setpreset((int) o->value());
+if((ud==0)||(ud==12022))rkr->efx_Exciter->setpreset((int) o->value());
 ex_Gain->value(rkr->efx_Exciter->getpar(0));
 ex_1->value(rkr->efx_Exciter->getpar(1));
 ex_2->value(rkr->efx_Exciter->getpar(2));
@@ -5245,9 +5246,9 @@ findpos(23,(int)o->value());}
         }
         Fl_Choice mbdist_preset {
           label Preset
-          user_data 12
+          user_data 12023
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_MBDist->setpreset((int)o->value());
+if((ud==0)||(ud==12023))rkr->efx_MBDist->setpreset((int)o->value());
 mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
 mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
 mbdist_drive->value(rkr->efx_MBDist->getpar(3));
@@ -5451,9 +5452,9 @@ findpos(24,(int)o->value());}
         }
         Fl_Choice arpie_preset {
           label Preset
-          user_data 12
+          user_data 12024
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Arpie->setpreset((int) o->value());
+if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
 arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
@@ -5672,9 +5673,9 @@ findpos(25,(int)o->value());}
         }
         Fl_Choice expander_preset {
           label Preset
-          user_data 12
+          user_data 12025
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+if((ud==0)||(ud==12025))rkr->efx_Expander->Expander_Change_Preset((int) o->value());
 expander_ATime->value(rkr->efx_Expander->getpar(3));
 expander_RTime->value(rkr->efx_Expander->getpar(4));
 expander_shape->value(rkr->efx_Expander->getpar(2));
@@ -5791,9 +5792,9 @@ findpos(26,(int)o->value());}
         }
         Fl_Choice shuffle_preset {
           label Preset
-          user_data 12
+          user_data 12026
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Shuffle->setpreset((int)o->value());
+if((ud==0)||(ud==12026))rkr->efx_Shuffle->setpreset((int)o->value());
 shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
 shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
 shuffle_volMH->value(rkr->efx_Shuffle->getpar(2));
@@ -5956,9 +5957,9 @@ findpos(27,(int)o->value());}
         }
         Fl_Choice synthfilter_preset {
           label Preset
-          user_data 12
+          user_data 12027
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Synthfilter->setpreset((int) o->value());
+if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
@@ -6164,9 +6165,9 @@ findpos(28,(int)o->value());}
         }
         Fl_Choice mbvvol_preset {
           label Preset
-          user_data 12
+          user_data 12028
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_MBVvol->setpreset((int)o->value());
+if((ud==0)||(ud==12028))rkr->efx_MBVvol->setpreset((int)o->value());
 mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
 mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
 mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
@@ -6360,9 +6361,9 @@ findpos(29,(int)o->value());}
         }
         Fl_Choice convo_preset {
           label Preset
-          user_data 12
+          user_data 12029
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Convol->setpreset((int) o->value());
+if((ud==0)||(ud==12029))rkr->efx_Convol->setpreset((int) o->value());
 convo_pan->value(rkr->efx_Convol->getpar(1)-64);
 convo_level->value(rkr->efx_Convol->getpar(7));
 convo_WD->value(rkr->efx_Convol->getpar(0)-64);
@@ -6538,9 +6539,9 @@ findpos(30,(int)o->value());}
         }
         Fl_Choice looper_preset {
           label Preset
-          user_data 12
+          user_data 12030
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Looper->setpreset((int) o->value());
+if((ud==0)||(ud==12030))rkr->efx_Looper->setpreset((int) o->value());
 looper_WD->value(rkr->efx_Looper->getpar(0)-64);
 looper_play->value(rkr->efx_Looper->getpar(1));
 looper_record->value(rkr->efx_Looper->getpar(3));
@@ -6752,9 +6753,9 @@ findpos(31,(int)o->value());}
         }
         Fl_Choice ryanwah_preset {
           label Preset
-          user_data 12
+          user_data 12031
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_RyanWah->setpreset((int) o->value());
+if((ud==0)||(ud==12031))rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
 ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
@@ -6939,9 +6940,9 @@ findpos(32,(int)o->value());}
         }
         Fl_Choice rbecho_preset {
           label Preset
-          user_data 12
+          user_data 12032
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_RBEcho->setpreset((int) o->value());
+if((ud==0)||(ud==12032))rkr->efx_RBEcho->setpreset((int) o->value());
 rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
@@ -7088,9 +7089,9 @@ findpos(33,(int)o->value());}
         }
         Fl_Choice coil_preset {
           label Preset
-          user_data 12
+          user_data 12033
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_CoilCrafter->setpreset((int) o->value());
+if((ud==0)||(ud==12033))rkr->efx_CoilCrafter->setpreset((int) o->value());
 coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
 coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
 coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
@@ -7252,9 +7253,9 @@ findpos(34,(int)o->value());}
         }
         Fl_Choice shelf_preset {
           label Preset
-          user_data 12
+          user_data 12034
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_ShelfBoost->setpreset((int) o->value());
+if((ud==0)||(ud==12034))rkr->efx_ShelfBoost->setpreset((int) o->value());
 shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
@@ -7345,9 +7346,9 @@ findpos(35,(int)o->value());}
         }
         Fl_Choice vo_preset {
           label Preset
-          user_data 12
+          user_data 12035
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Vocoder->setpreset((int) o->value());
+if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
 vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
 vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
 vo_mu->value(rkr->efx_Vocoder->getpar(2));
@@ -7471,9 +7472,9 @@ findpos(36,(int)o->value());}
         }
         Fl_Choice sus_preset {
           label Preset
-          user_data 12
+          user_data 12036
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Sustainer->setpreset((int) o->value());
+if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
 sus_sus->value(rkr->efx_Sustainer->getpar(1));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
@@ -7529,9 +7530,9 @@ findpos(37,(int)o->value());}
         }
         Fl_Choice seq_preset {
           label Preset
-          user_data 12
+          user_data 12037
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Sequence->setpreset((int) o->value());
+if((ud==0)||(ud==12037))rkr->efx_Sequence->setpreset((int) o->value());
 seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
 seq_amp->value(rkr->efx_Sequence->getpar(11));
@@ -7784,9 +7785,9 @@ findpos(38,(int)o->value());}
         }
         Fl_Choice shifter_preset {
           label Preset
-          user_data 12
+          user_data 12038
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Shifter->setpreset((int)o->value());
+if((ud==0)||(ud==12038))rkr->efx_Shifter->setpreset((int)o->value());
 shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
 shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
 shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
@@ -7948,9 +7949,9 @@ findpos(39,(int)o->value());}
         }
         Fl_Choice stomp_preset {
           label Preset
-          user_data 12
+          user_data 12039
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_StompBox->setpreset((int)o->value());
+if((ud==0)||(ud==12039))rkr->efx_StompBox->setpreset((int)o->value());
 stomp_WD->value(rkr->efx_StompBox->getpar(0));
 stomp_gain->value(rkr->efx_StompBox->getpar(4));
 stomp_low->value(rkr->efx_StompBox->getpar(3));
@@ -8102,9 +8103,9 @@ findpos(40,(int)o->value());}
         }
         Fl_Choice revtron_preset {
           label Preset
-          user_data 12
+          user_data 12040
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Reverbtron->setpreset((int) o->value());
+if((ud==0)||(ud==12040))rkr->efx_Reverbtron->setpreset((int) o->value());
 revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
 revtron_level->value(rkr->efx_Reverbtron->getpar(7));
 revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
@@ -8372,9 +8373,9 @@ findpos(41,(int)o->value());}
         }
         Fl_Choice echotron_preset {
           label Preset
-          user_data 12
+          user_data 12041
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Echotron->setpreset((int) o->value());
+if((ud==0)||(ud==12041))rkr->efx_Echotron->setpreset((int) o->value());
 echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
 echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
 echotron_damp->value(rkr->efx_Echotron->getpar(6));
@@ -8626,9 +8627,9 @@ findpos(42,(int)o->value());}
         }
         Fl_Choice shar_preset {
           label Preset
-          user_data 12
+          user_data 12042
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_StereoHarm->setpreset((int)o->value());
+if((ud==0)||(ud==12042))rkr->efx_StereoHarm->setpreset((int)o->value());
 shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
 shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
 shar_intl->value(rkr->efx_StereoHarm->getpar(2)-12);
@@ -8823,9 +8824,9 @@ findpos(43,(int)o->value());}
         }
         Fl_Choice cband_preset {
           label Preset
-          user_data 12
+          user_data 12043
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_CompBand->setpreset((int)o->value());
+if((ud==0)||(ud==12043))rkr->efx_CompBand->setpreset((int)o->value());
 cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
 cband_Lratio->value(rkr->efx_CompBand->getpar(1));
 cband_MLratio->value(rkr->efx_CompBand->getpar(2));
@@ -9014,9 +9015,9 @@ findpos(44,(int)o->value());}
         }
         Fl_Choice otrem_preset {
           label Preset
-          user_data 12
+          user_data 12044
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Opticaltrem->setpreset((int)o->value());
+if((ud==0)||(ud==12044))rkr->efx_Opticaltrem->setpreset((int)o->value());
 otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
 otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
 otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
@@ -9127,9 +9128,9 @@ findpos(45,(int)o->value());}
         }
         Fl_Choice vibe_preset {
           label Preset
-          user_data 12
+          user_data 12045
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12))rkr->efx_Vibe->setpreset((int)o->value());
+if((ud==0)||(ud==12045))rkr->efx_Vibe->setpreset((int)o->value());
 vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
 vibe_width->value(rkr->efx_Vibe->getpar(0));
 vibe_dpth->value(rkr->efx_Vibe->getpar(8));
@@ -9276,7 +9277,7 @@ rkr->efx_Vibe->changepar(9,(int)(o->value()+64));}
  getMIDIControl(394);
  return;
 }
-rkr->efx_Vibe->changepar(5,(int)(o->value()+64));} selected
+rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
           xywh {372 372 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
@@ -15343,7 +15344,7 @@ for (int t=0; t<Principal->children();t++)
           c->color(fore_color);
           c->labelfont(rkr->font);
        
-          if(uh == 12)
+          if((uh >=12000) && (uh <=12100))
            {
   
              Fl_Menu_*n = (Fl_Menu_*)c;
@@ -16239,6 +16240,15 @@ stecla=2;
 return 1;
 }
 
+if(Fl::event_key(65379))
+{
+Fl_Widget *w;
+w = Fl::belowmouse();
+long long k = (long long) w->user_data();
+if(k<12000) return 0; else
+((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset((int) k, w);
+return 1;
+}  
 }
 
 return 0;} {}
@@ -16274,5 +16284,37 @@ GMM->do_callback();} {}
     code {FillML(0);
 MIDILearn->show();
 put_icon(MIDILearn);} {}
+  }
+  Function {addpreset(int num, Fl_Widget *w)} {} {
+    code {const char *Name;
+char PresetName[128];
+
+
+Name=fl_input("Preset Name?","");
+if(Name != NULL)
+{
+sprintf(PresetName,"*%s",(char *)Name);
+rkr->SaveIntPreset(num,PresetName);
+add_menu(w,PresetName);
+}} {}
+  }
+  Function {add_menu(Fl_Widget *w, char *name)} {open
+  } {
+    code {//int i;
+Fl_Choice *s = (Fl_Choice*) w;
+Fl_Menu_Item *m = (Fl_Menu_Item*) s->menu();
+//Fl_Menu_ *n = (Fl_Menu_ *) m;
+
+//n->copy(m,0);
+
+//for(i=0;i<=m->size()-1;i++)
+//{
+// n->add(n->text(i),"", w->callback(),0,0);
+//}
+
+m->add(name,"", w->callback(),0,0);
+//s->menu((Fl_Menu_Item *)n);
+w->redraw();} {selected
+    }
   }
 } 
