@@ -43,7 +43,9 @@ Sustainer::Sustainer (float * efxoutl_, float * efxoutr_)
   cbeta = 1.0f - calpha;
   cthresh = 0.25f;
   cratio = 0.25f;
-    
+
+  timer = 0;
+  hold = (int) (SAMPLE_RATE*0.0125);  //12.5ms
   cleanup ();
 };
 
@@ -83,8 +85,17 @@ Sustainer::out (float * smpsl, float * smpsr)
    auxtempl = input * smpsl[i];
    auxtempr = input * smpsr[i];
    auxcombi = 0.5f * (auxtempl + auxtempr);
-   if(fabs(auxcombi > compeak)) compeak = fabs(auxcombi);   //First do peak detection on the signal
+   if(fabs(auxcombi) > compeak) 
+   {
+   compeak = fabs(auxcombi);   //First do peak detection on the signal
+   timer = 0;
+   }
+   if(timer>hold)
+   {
    compeak *= prls;
+   timer--;
+   }
+   timer++;
    compenv = cbeta * oldcompenv + calpha * compeak;       //Next average into envelope follower
    oldcompenv = compenv;
    
