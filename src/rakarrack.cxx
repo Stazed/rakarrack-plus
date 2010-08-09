@@ -25817,19 +25817,21 @@ add_menu(w,PresetName);
 }
 
 void RKRGUI::add_menu(Fl_Widget *w, char *name) {
-  //int i;
+  int i,k;
 Fl_Choice *s = (Fl_Choice*) w;
 Fl_Menu_Item *m = (Fl_Menu_Item*) s->menu();
-//Fl_Menu_ *n = (Fl_Menu_ *) m;
-
-//n->copy(m,0);
-
-//for(i=0;i<=m->size()-1;i++)
-//{
-// n->add(n->text(i),"", w->callback(),0,0);
-//}
-
+Fl_Menu_Item *p;
 m->add(name,"", w->callback(),0,0);
-//s->menu((Fl_Menu_Item *)n);
+
+for(i=0;i<m->size();i++)
+{
+  p=m->next(i);
+  if(i==0) k=p->labelsize();
+  if(p->labelsize() != k) p->labelsize(k);
+}
+
+
+
+
 w->redraw();
 }
