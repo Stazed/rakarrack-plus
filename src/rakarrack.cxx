@@ -24844,7 +24844,7 @@ for (int t=0; t<Principal->children();t++)
           c->color(fore_color);
           c->labelfont(rkr->font);
        
-          if((uh >=12000) && (uh <=12100))
+          if(((uh >=12000) && (uh <=12100)) || (uh ==12))
            {
   
              Fl_Menu_*n = (Fl_Menu_*)c;

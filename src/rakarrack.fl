@@ -841,8 +841,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -2420,7 +2419,7 @@ rkr->efx_Chorus->changepar(3,(int)o->value());}
         Fl_Choice chorus_lfotype {
           label {LFO Type}
           user_data 12
-          callback {rkr->efx_Chorus->changepar(4,(int)o->value())}
+          callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open
           xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -15344,7 +15343,7 @@ for (int t=0; t<Principal->children();t++)
           c->color(fore_color);
           c->labelfont(rkr->font);
        
-          if((uh >=12000) && (uh <=12100))
+          if(((uh >=12000) && (uh <=12100)) || (uh ==12))
            {
   
              Fl_Menu_*n = (Fl_Menu_*)c;
@@ -15388,7 +15387,8 @@ for (int t=0; t<Principal->children();t++)
 ChangeActives();
 
  
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {adjustfont()} {} {
     code {int change,value;
@@ -16315,7 +16315,6 @@ for(i=0;i<m->size();i++)
 
 
 
-w->redraw();} {selected
-    }
+w->redraw();} {}
   }
 } 
