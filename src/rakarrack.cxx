@@ -9249,11 +9249,6 @@ void RKRGUI::cb_CH_UB(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_CH_UB_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_CH_UB[] = {
- {"", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
   save_stat(2);
 Order->hide();
@@ -19855,7 +19850,6 @@ R average.");
       CH_UB->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       CH_UB->callback((Fl_Callback*)cb_CH_UB);
       CH_UB->when(FL_WHEN_RELEASE_ALWAYS);
-      CH_UB->menu(menu_CH_UB);
     } // Fl_Choice* CH_UB
     { ob = new Fl_Group(0, 60, 800, 540);
       ob->labelsize(18);
@@ -25764,12 +25758,7 @@ DIR *dir=opendir(rkr->UDirFilename);
 
 if (dir==NULL) return;
 
-Fl_Menu_Item *m = menu_CH_UB;
-Fl_Menu_ *n = (Fl_Menu_ *) m;
-
-n->copy(menu_CH_UB,0);
-
-for(int i=0; i<n->size(); i++) n->remove(i);
+CH_UB->clear();
 
 struct dirent *fs;
 
@@ -25782,10 +25771,9 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
     sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
     if(rkr->CheckOldBank(nombank)==0)
     {
-      memset(nombre,0,sizeof(nombre));
-      strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
-      n->add(nombre,"", CH_UB->callback(),0,0);
-   
+     memset(nombre,0,sizeof(nombre));
+     strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
+     if(nombre != NULL) CH_UB->add(nombre);  
     }
   
    }
@@ -25793,10 +25781,8 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
    
 }
  
- 
+CH_UB->value(0);
 closedir(dir);
-
-CH_UB->menu(n->menu());
 }
 
 int RKRGUI::prevnext(int e) {

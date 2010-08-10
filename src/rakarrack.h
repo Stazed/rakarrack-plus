@@ -3475,7 +3475,6 @@ public:
 private:
   void cb_CH_UB_i(Fl_Choice*, void*);
   static void cb_CH_UB(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_CH_UB[];
 public:
   Fl_Group *ob;
   Fl_Double_Window *Order;

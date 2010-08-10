@@ -841,8 +841,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1350,7 +1349,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -9903,7 +9902,7 @@ UpdateTGUI();
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1536 300 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {1529 293 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -10036,13 +10035,9 @@ if(ok)
 {
 BankWin_Label(temp);
 Put_Loaded_Bank();
-}}
+}} open
         xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
-      } {
-        MenuItem {} {
-          xywh {0 0 36 21}
-        }
-      }
+      } {}
       Fl_Group ob {
         xywh {0 60 800 540} labelsize 18
       } {}
@@ -16241,12 +16236,7 @@ DIR *dir=opendir(rkr->UDirFilename);
 
 if (dir==NULL) return;
 
-Fl_Menu_Item *m = menu_CH_UB;
-Fl_Menu_ *n = (Fl_Menu_ *) m;
-
-n->copy(menu_CH_UB,0);
-
-for(int i=0; i<n->size(); i++) n->remove(i);
+CH_UB->clear();
 
 struct dirent *fs;
 
@@ -16259,10 +16249,9 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
     sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
     if(rkr->CheckOldBank(nombank)==0)
     {
-      memset(nombre,0,sizeof(nombre));
-      strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
-      n->add(nombre,"", CH_UB->callback(),0,0);
-   
+     memset(nombre,0,sizeof(nombre));
+     strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
+     if(nombre != NULL) CH_UB->add(nombre);  
     }
   
    }
@@ -16270,10 +16259,9 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
    
 }
  
- 
-closedir(dir);
-
-CH_UB->menu(n->menu());} {}
+CH_UB->value(0);
+closedir(dir);} {selected
+    }
   }
   Function {prevnext(int e)} {return_type {static int}
   } {
