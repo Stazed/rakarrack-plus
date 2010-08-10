@@ -1065,6 +1065,39 @@ if(stecla==2)
  stecla=0;
 }
 
+if(stecla==3)
+{ 
+ 
+ if(Nivel_Salida->value()>-50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()-1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+  
+  
+  
+ stecla=0;
+}   
+
+
+if(stecla==4)
+{ 
+ 
+ if(Nivel_Salida->value()<50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()+1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+  
+  
+  
+ stecla=0;
+}   
+
+
+
 
 
 if (preset!=1000)
@@ -25780,6 +25813,18 @@ return 1;
 if((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45)))
 {
 stecla=2;
+return 1;
+}
+
+if(Fl::event_key(65471))
+{
+stecla=3;
+return 1;
+}
+
+if(Fl::event_key(65472))
+{
+stecla=4;
 return 1;
 }
 

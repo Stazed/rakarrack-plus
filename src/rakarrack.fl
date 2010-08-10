@@ -841,12 +841,12 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {selected
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -946,7 +946,7 @@ rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings} open
+          label {&Settings}
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -1072,6 +1072,39 @@ if(stecla==2)
  if(rkr->Selected_Preset>1) preset=rkr->Selected_Preset-1;
  stecla=0;
 }
+
+if(stecla==3)
+{ 
+ 
+ if(Nivel_Salida->value()>-50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()-1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+  
+  
+  
+ stecla=0;
+}   
+
+
+if(stecla==4)
+{ 
+ 
+ if(Nivel_Salida->value()<50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()+1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+  
+  
+  
+ stecla=0;
+}   
+
+
 
 
 
@@ -1317,7 +1350,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -16257,6 +16290,18 @@ return 1;
 if((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45)))
 {
 stecla=2;
+return 1;
+}
+
+if(Fl::event_key(65471))
+{
+stecla=3;
+return 1;
+}
+
+if(Fl::event_key(65472))
+{
+stecla=4;
 return 1;
 }
 
