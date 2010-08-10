@@ -423,6 +423,8 @@ public:
   int actuvol;
   int help_displayed;
   int modified;
+  int autoassign;
+  int comemouse;
   int aconnect_MI;
   int aconnect_JA;
   int aconnect_JIA;

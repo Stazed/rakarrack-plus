@@ -841,12 +841,12 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {selected
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -857,7 +857,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -966,6 +966,7 @@ Settings->hide();}
             label {MIDI Learn}
             callback {if(!MIDILearn->visible())
 {
+rkr->comemouse=0;
 PrepareML();
 }
 else
@@ -1307,6 +1308,14 @@ if (rkr->RControl)
       Disp_Control->redraw();
       GMM->color(fore_color);
       GMM->redraw();
+      if((rkr->comemouse) && (rkr->autoassign))
+       {
+        rkr->comemouse=0;
+        Assign->do_callback();   
+          
+       }
+      
+      
     }   
 }}
         xywh {579 128 20 22} labelsize 18
@@ -10158,7 +10167,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1507 222 640 528} type Double color 4 hide
+      xywh {1500 215 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -10327,7 +10336,7 @@ PutBackground();}
         Fl_Group AUDIO_SET {
           label Audio
           user_data 1
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -10879,7 +10888,7 @@ Show_Next_Time();}
         Fl_Group MIDI_SET {
           label MIDI
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo8 {
             xywh {5 26 630 502}
@@ -10929,6 +10938,11 @@ ML_Menu->deactivate();}
 ML_Menu->activate();}
               xywh {183 287 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
             }
+          }
+          Fl_Check_Button AAssign {
+            label {Auto Assign MIDI Learn}
+            callback {rkr->autoassign=o->value();}
+            xywh {134 319 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
           }
         }
         Fl_Group JACK_SET {
@@ -11695,6 +11709,8 @@ if (rkr->booster==1.0) BostBut->value(0); else BostBut->value(1);
 
 
 rakarrack.get(rkr->PrefNom("FX_init_state"),rkr->init_state,0);
+rakarrack.get(rkr->PrefNom("Auto Assign"),rkr->autoassign,0);
+
 
 
 
@@ -11900,6 +11916,8 @@ rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
 
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
+rakarrack.set(rkr->PrefNom("Auto Assign"),rkr->autoassign);
+
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
 rakarrack.set(rkr->PrefNom("DownQuality"),(int)Downr_Qual->value());
@@ -13219,6 +13237,7 @@ switch(rkr->VocBands)
 
 
 
+AAssign->value(rkr->autoassign);
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
@@ -16244,11 +16263,11 @@ return 1;
 
 }
 
-return 0;} {selected
-    }
+return 0;} {}
   }
   Function {getMIDIControl(int num)} {} {
     code {int i = 0;
+rkr->comemouse=1;
 PrepareML();
 while (i<Epar->size())
 {
@@ -16276,7 +16295,21 @@ GMM->do_callback();} {}
   }
   Function {PrepareML()} {} {
     code {FillML(0);
-MIDILearn->show();
-put_icon(MIDILearn);} {}
+if(rkr->comemouse==0)
+{
+ MIDILearn->show();
+ put_icon(MIDILearn);
+ return;
+} 
+
+if(rkr->comemouse) 
+{
+ if(rkr->autoassign==0)
+   {
+       MIDILearn->show();
+       put_icon(MIDILearn);
+       return;
+   } 
+}} {}
   }
 } 

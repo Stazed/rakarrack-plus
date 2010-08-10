@@ -914,6 +914,7 @@ void RKRGUI::cb_Ajustes(Fl_Menu_* o, void* v) {
 void RKRGUI::cb_ML_Menu_i(Fl_Menu_*, void*) {
   if(!MIDILearn->visible())
 {
+rkr->comemouse=0;
 PrepareML();
 }
 else
@@ -1299,6 +1300,14 @@ if (rkr->RControl)
       Disp_Control->redraw();
       GMM->color(fore_color);
       GMM->redraw();
+      if((rkr->comemouse) && (rkr->autoassign))
+       {
+        rkr->comemouse=0;
+        Assign->do_callback();   
+          
+       }
+      
+      
     }   
 };
 }
@@ -10056,6 +10065,13 @@ ML_Menu->activate();
 }
 void RKRGUI::cb_Mw1(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Mw1_i(o,v);
+}
+
+void RKRGUI::cb_AAssign_i(Fl_Check_Button* o, void*) {
+  rkr->autoassign=o->value();
+}
+void RKRGUI::cb_AAssign(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_AAssign_i(o,v);
 }
 
 void RKRGUI::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
@@ -20005,6 +20021,7 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
+        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
@@ -20372,7 +20389,6 @@ R average.");
         MIDI_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MIDI_SET->user_data((void*)(1));
         MIDI_SET->align(FL_ALIGN_LEFT);
-        MIDI_SET->hide();
         { Fondo8 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo8
         { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
@@ -20441,6 +20457,13 @@ R average.");
           } // Fl_Check_Button* Mw1
           wMIDI->end();
         } // Fl_Group* wMIDI
+        { AAssign = new Fl_Check_Button(134, 319, 16, 15, "Auto Assign MIDI Learn");
+          AAssign->down_box(FL_DOWN_BOX);
+          AAssign->labelsize(10);
+          AAssign->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          AAssign->callback((Fl_Callback*)cb_AAssign);
+          AAssign->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* AAssign
         MIDI_SET->end();
       } // Fl_Group* MIDI_SET
       { JACK_SET = new Fl_Group(5, 26, 630, 502, "Jack");
@@ -21177,6 +21200,8 @@ if (rkr->booster==1.0) BostBut->value(0); else BostBut->value(1);
 
 
 rakarrack.get(rkr->PrefNom("FX_init_state"),rkr->init_state,0);
+rakarrack.get(rkr->PrefNom("Auto Assign"),rkr->autoassign,0);
+
 
 
 
@@ -21383,6 +21408,8 @@ rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
 
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
+rakarrack.set(rkr->PrefNom("Auto Assign"),rkr->autoassign);
+
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
 rakarrack.set(rkr->PrefNom("DownQuality"),(int)Downr_Qual->value());
@@ -22709,6 +22736,7 @@ switch(rkr->VocBands)
 
 
 
+AAssign->value(rkr->autoassign);
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
@@ -25763,6 +25791,7 @@ return 0;
 
 void RKRGUI::getMIDIControl(int num) {
   int i = 0;
+rkr->comemouse=1;
 PrepareML();
 while (i<Epar->size())
 {
@@ -25791,6 +25820,20 @@ GMM->do_callback();
 
 void RKRGUI::PrepareML() {
   FillML(0);
-MIDILearn->show();
-put_icon(MIDILearn);
+if(rkr->comemouse==0)
+{
+ MIDILearn->show();
+ put_icon(MIDILearn);
+ return;
+} 
+
+if(rkr->comemouse) 
+{
+ if(rkr->autoassign==0)
+   {
+       MIDILearn->show();
+       put_icon(MIDILearn);
+       return;
+   } 
+}
 }

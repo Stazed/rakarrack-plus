@@ -3869,6 +3869,11 @@ private:
   void cb_Mw1_i(Fl_Check_Button*, void*);
   static void cb_Mw1(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *AAssign;
+private:
+  void cb_AAssign_i(Fl_Check_Button*, void*);
+  static void cb_AAssign(Fl_Check_Button*, void*);
+public:
   Fl_Group *JACK_SET;
   Fl_Box *Fondo9;
   Fl_Check_Button *D_J_Connect;
