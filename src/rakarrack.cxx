@@ -20931,6 +20931,7 @@ Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
 
+
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
 Fl::add_handler(prevnext);
@@ -25754,15 +25755,7 @@ stecla=2;
 return 1;
 }
 
-if(Fl::event_key(65379))
-{
-Fl_Widget *w;
-w = Fl::belowmouse();
-long long k = (long long) w->user_data();
-if(k<12000) return 0; else
-((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset((int) k, w);
-return 1;
-}  
+
 }
 
 return 0;
@@ -25800,38 +25793,4 @@ void RKRGUI::PrepareML() {
   FillML(0);
 MIDILearn->show();
 put_icon(MIDILearn);
-}
-
-void RKRGUI::addpreset(int num, Fl_Widget *w) {
-  const char *Name;
-char PresetName[128];
-
-
-Name=fl_input("Preset Name?","");
-if(Name != NULL)
-{
-sprintf(PresetName,"*%s",(char *)Name);
-rkr->SaveIntPreset(num,PresetName);
-add_menu(w,PresetName);
-}
-}
-
-void RKRGUI::add_menu(Fl_Widget *w, char *name) {
-  int i,k=10;
-Fl_Choice *s = (Fl_Choice*) w;
-Fl_Menu_Item *m = (Fl_Menu_Item*) s->menu();
-Fl_Menu_Item *p;
-m->add(name,"", w->callback(),0,0);
-
-for(i=0;i<m->size();i++)
-{
-  p=m->next(i);
-  if(i==0) k=p->labelsize();
-  if(p->labelsize() != k) p->labelsize(k);
-}
-
-
-
-
-w->redraw();
 }

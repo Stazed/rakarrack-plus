@@ -2350,29 +2350,3 @@ printf("%s\n",buff);
 system(buff);
 }
 
-void
-RKR::SaveIntPreset(int num, char *PresetName)
-{
-int effect=num-12000;
-FILE *fn;
-char tempfile[256];
-char buf[256];
-char sbuf[512];
-memset(tempfile,0,sizeof(tempfile));
-memset(buf,0,sizeof(buf));
-memset(sbuf,0,sizeof(sbuf));
-sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
- 
-
-
-if ((fn = fopen (tempfile, "a")) != NULL)
-{
-getbuf(buf,effect);
-sprintf(sbuf,"%d,%s,%s",effect,PresetName,buf);
-fputs(sbuf,fn);
-fclose(fn);
-
-}
-
-}
-

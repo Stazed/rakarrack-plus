@@ -34,7 +34,6 @@
 
 #include <math.h>
 #include "Compressor.h"
-
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
 Compressor::Compressor (float * efxoutl_, float * efxoutr_)
@@ -233,7 +232,8 @@ Compressor::Compressor_Change_Preset (int npreset)
 
   };
 
-  for (int n = 1; n < PRESET_SIZE; n++)
+
+    for (int n = 1; n < PRESET_SIZE; n++)
     Compressor_Change (n , presets[npreset][n-1]);
 
 

@@ -1037,14 +1037,15 @@ RKR::EQ1_setpreset (int npreset)
     {71, 68, 64, 64, 64, 64, 64, 64, 66, 69, 64, 40}
   };
 
-  if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
+  if (npreset >= NUM_PRESETS) return;
+  else
+  {
   for (int n = 0; n < 10; n++)
     efx_EQ1->changepar (n * 5 + 12, presets[npreset][n]);
   efx_EQ1->changepar (0, presets[npreset][10]);
   for (int n = 0; n < 10; n++)
     efx_EQ1->changepar (n * 5 + 13, presets[npreset][11]);
-
+  }
 };
 
 

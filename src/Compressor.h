@@ -30,7 +30,6 @@
 
 #include "global.h"
 
-
 class Compressor
 {
 
@@ -101,6 +100,7 @@ private:
   float coeff_kk;               
   float lpeak;
   float rpeak;  
+
 
 };
 
