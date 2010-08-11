@@ -222,7 +222,7 @@ Compressor::Compressor_Change_Preset (int npreset)
     //8:1
     {-24, 8, -12, 20, 35, 1, 30, 0, 0},
     //Final Limiter
-    {-1, 25, 0, 5, 80, 0 ,0 ,1 ,1},
+    {-1, 15, 0, 5, 250, 0 ,0 ,1 ,1},
     //HarmonicEnhancer
     {-20, 15, -3, 5, 50, 0 ,0 ,1 ,1},
     //Band CompBand
