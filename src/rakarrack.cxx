@@ -914,6 +914,7 @@ void RKRGUI::cb_Ajustes(Fl_Menu_* o, void* v) {
 void RKRGUI::cb_ML_Menu_i(Fl_Menu_*, void*) {
   if(!MIDILearn->visible())
 {
+rkr->comemouse=0;
 PrepareML();
 }
 else
@@ -1063,6 +1064,39 @@ if(stecla==2)
  if(rkr->Selected_Preset>1) preset=rkr->Selected_Preset-1;
  stecla=0;
 }
+
+if(stecla==3)
+{ 
+ 
+ if(Nivel_Salida->value()>-50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()-1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+  
+  
+  
+ stecla=0;
+}   
+
+
+if(stecla==4)
+{ 
+ 
+ if(Nivel_Salida->value()<50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()+1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+  
+  
+  
+ stecla=0;
+}   
+
+
 
 
 
@@ -1299,6 +1333,14 @@ if (rkr->RControl)
       Disp_Control->redraw();
       GMM->color(fore_color);
       GMM->redraw();
+      if((rkr->comemouse) && (rkr->autoassign))
+       {
+        rkr->comemouse=0;
+        Assign->do_callback();   
+          
+       }
+      
+      
     }   
 };
 }
@@ -9207,11 +9249,6 @@ void RKRGUI::cb_CH_UB(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_CH_UB_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_CH_UB[] = {
- {"", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
   save_stat(2);
 Order->hide();
@@ -10056,6 +10093,13 @@ ML_Menu->activate();
 }
 void RKRGUI::cb_Mw1(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Mw1_i(o,v);
+}
+
+void RKRGUI::cb_AAssign_i(Fl_Check_Button* o, void*) {
+  rkr->autoassign=o->value();
+}
+void RKRGUI::cb_AAssign(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_AAssign_i(o,v);
 }
 
 void RKRGUI::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
@@ -19806,7 +19850,6 @@ R average.");
       CH_UB->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       CH_UB->callback((Fl_Callback*)cb_CH_UB);
       CH_UB->when(FL_WHEN_RELEASE_ALWAYS);
-      CH_UB->menu(menu_CH_UB);
     } // Fl_Choice* CH_UB
     { ob = new Fl_Group(0, 60, 800, 540);
       ob->labelsize(18);
@@ -20005,6 +20048,7 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
+        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
@@ -20372,7 +20416,6 @@ R average.");
         MIDI_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MIDI_SET->user_data((void*)(1));
         MIDI_SET->align(FL_ALIGN_LEFT);
-        MIDI_SET->hide();
         { Fondo8 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo8
         { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
@@ -20441,6 +20484,13 @@ R average.");
           } // Fl_Check_Button* Mw1
           wMIDI->end();
         } // Fl_Group* wMIDI
+        { AAssign = new Fl_Check_Button(134, 319, 16, 15, "Auto Assign MIDI Learn");
+          AAssign->down_box(FL_DOWN_BOX);
+          AAssign->labelsize(10);
+          AAssign->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          AAssign->callback((Fl_Callback*)cb_AAssign);
+          AAssign->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* AAssign
         MIDI_SET->end();
       } // Fl_Group* MIDI_SET
       { JACK_SET = new Fl_Group(5, 26, 630, 502, "Jack");
@@ -20931,6 +20981,7 @@ Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
 
+
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
 Fl::add_handler(prevnext);
@@ -21176,6 +21227,8 @@ if (rkr->booster==1.0) BostBut->value(0); else BostBut->value(1);
 
 
 rakarrack.get(rkr->PrefNom("FX_init_state"),rkr->init_state,0);
+rakarrack.get(rkr->PrefNom("Auto Assign"),rkr->autoassign,0);
+
 
 
 
@@ -21382,6 +21435,8 @@ rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
 
 
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
+rakarrack.set(rkr->PrefNom("Auto Assign"),rkr->autoassign);
+
 rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
 rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
 rakarrack.set(rkr->PrefNom("DownQuality"),(int)Downr_Qual->value());
@@ -22708,6 +22763,7 @@ switch(rkr->VocBands)
 
 
 
+AAssign->value(rkr->autoassign);
 Update_TAP->value(rkr->Tap_Updated);
 INSTATE->value(rkr->init_state);
 UPSAMPLE_C->value(rkr->upsample);
@@ -25702,12 +25758,7 @@ DIR *dir=opendir(rkr->UDirFilename);
 
 if (dir==NULL) return;
 
-Fl_Menu_Item *m = menu_CH_UB;
-Fl_Menu_ *n = (Fl_Menu_ *) m;
-
-n->copy(menu_CH_UB,0);
-
-for(int i=0; i<n->size(); i++) n->remove(i);
+CH_UB->clear();
 
 struct dirent *fs;
 
@@ -25720,10 +25771,9 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
     sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
     if(rkr->CheckOldBank(nombank)==0)
     {
-      memset(nombre,0,sizeof(nombre));
-      strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
-      n->add(nombre,"", CH_UB->callback(),0,0);
-   
+     memset(nombre,0,sizeof(nombre));
+     strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
+     if(nombre != NULL) CH_UB->add(nombre);  
     }
   
    }
@@ -25731,10 +25781,8 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
    
 }
  
- 
+CH_UB->value(0);
 closedir(dir);
-
-CH_UB->menu(n->menu());
 }
 
 int RKRGUI::prevnext(int e) {
@@ -25754,15 +25802,19 @@ stecla=2;
 return 1;
 }
 
-if(Fl::event_key(65379))
+if(Fl::event_key(65471))
 {
-Fl_Widget *w;
-w = Fl::belowmouse();
-long long k = (long long) w->user_data();
-if(k<12000) return 0; else
-((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset((int) k, w);
+stecla=3;
 return 1;
-}  
+}
+
+if(Fl::event_key(65472))
+{
+stecla=4;
+return 1;
+}
+
+
 }
 
 return 0;
@@ -25770,6 +25822,7 @@ return 0;
 
 void RKRGUI::getMIDIControl(int num) {
   int i = 0;
+rkr->comemouse=1;
 PrepareML();
 while (i<Epar->size())
 {
@@ -25798,40 +25851,20 @@ GMM->do_callback();
 
 void RKRGUI::PrepareML() {
   FillML(0);
-MIDILearn->show();
-put_icon(MIDILearn);
-}
-
-void RKRGUI::addpreset(int num, Fl_Widget *w) {
-  const char *Name;
-char PresetName[128];
-
-
-Name=fl_input("Preset Name?","");
-if(Name != NULL)
+if(rkr->comemouse==0)
 {
-sprintf(PresetName,"*%s",(char *)Name);
-rkr->SaveIntPreset(num,PresetName);
-add_menu(w,PresetName);
-}
-}
+ MIDILearn->show();
+ put_icon(MIDILearn);
+ return;
+} 
 
-void RKRGUI::add_menu(Fl_Widget *w, char *name) {
-  int i,k=10;
-Fl_Choice *s = (Fl_Choice*) w;
-Fl_Menu_Item *m = (Fl_Menu_Item*) s->menu();
-Fl_Menu_Item *p;
-m->add(name,"", w->callback(),0,0);
-
-for(i=0;i<m->size();i++)
+if(rkr->comemouse) 
 {
-  p=m->next(i);
-  if(i==0) k=p->labelsize();
-  if(p->labelsize() != k) p->labelsize(k);
+ if(rkr->autoassign==0)
+   {
+       MIDILearn->show();
+       put_icon(MIDILearn);
+       return;
+   } 
 }
-
-
-
-
-w->redraw();
 }

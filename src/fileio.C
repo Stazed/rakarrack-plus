@@ -23,6 +23,395 @@
 #include <errno.h>
 #include "global.h"
 
+void RKR::putbuf(char *buf, int j)
+{
+  char *cfilename;
+  cfilename = (char *) malloc (sizeof (char) * 128);
+
+     switch (j)
+	{
+
+	case 8:
+	  //Reverb
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[0][0], &lv[0][1], &lv[0][2], &lv[0][3], &lv[0][4],
+		  &lv[0][5], &lv[0][6], &lv[0][7], &lv[0][8], &lv[0][9],
+		  &lv[0][10], &lv[0][11], &Reverb_B);
+	  break;
+
+	case 4:
+	  //Echo  
+	   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[1][0], &lv[1][1], &lv[1][2], &lv[1][3], &lv[1][4],
+		  &lv[1][5], &lv[1][6], &lv[1][7], &lv[1][8],&Echo_B);
+	  break;
+
+	case 5:
+	  //Chorus
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[2][0], &lv[2][1], &lv[2][2], &lv[2][3], &lv[2][4],
+		  &lv[2][5], &lv[2][6], &lv[2][7], &lv[2][8], &lv[2][9],
+		  &lv[2][10], &lv[2][11], &Chorus_B);
+	  break;
+
+	case 7:
+	  //Flanger
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[3][0], &lv[3][1], &lv[3][2], &lv[3][3], &lv[3][4],
+		  &lv[3][5], &lv[3][6], &lv[3][7], &lv[3][8], &lv[3][9],
+		  &lv[3][10], &lv[3][11], &Flanger_B);
+	  break;
+
+	case 6:
+	  //Phaser
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[4][0], &lv[4][1], &lv[4][2], &lv[4][3], &lv[4][4],
+		  &lv[4][5], &lv[4][6], &lv[4][7], &lv[4][8], &lv[4][9],
+		  &lv[4][10], &lv[4][11], &Phaser_B);
+	  break;
+
+	case 3:
+	  //Overdrive
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[5][0], &lv[5][1], &lv[5][2], &lv[5][3], &lv[5][4],
+		  &lv[5][5], &lv[5][6], &lv[5][7], &lv[5][8], &lv[5][9],
+		  &lv[5][10], &lv[5][11], &lv[5][12],&Overdrive_B);
+	  break;
+
+	case 2:
+	  //Distorsion
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[6][0], &lv[6][1], &lv[6][2], &lv[6][3], &lv[6][4],
+		  &lv[6][5], &lv[6][6], &lv[6][7], &lv[6][8], &lv[6][9],
+		  &lv[6][10], &lv[6][11], &lv[6][12], &Distorsion_B);
+	  break;
+
+	case 0:
+	  //EQ1  
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[7][0], &lv[7][1], &lv[7][2], &lv[7][3], &lv[7][4],
+		  &lv[7][5], &lv[7][6], &lv[7][7], &lv[7][8], &lv[7][9],
+		  &lv[7][10], &lv[7][11], &EQ1_B);
+	  break;
+
+	case 9:
+	  //EQ2  
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[8][0], &lv[8][1], &lv[8][2], &lv[8][3], &lv[8][4],
+		  &lv[8][5], &lv[8][6], &lv[8][7], &lv[8][8], &lv[8][9],
+		  &EQ2_B);
+	  break;
+
+	case 1:
+	  //Compressor
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[9][0], &lv[9][1], &lv[9][2], &lv[9][3], &lv[9][4],
+		  &lv[9][5], &lv[9][6], &lv[9][7], &lv[9][8], &Compressor_B);
+	  break;
+
+	case 10:
+	  //WhaWha
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[11][0], &lv[11][1], &lv[11][2], &lv[11][3], &lv[11][4],
+		  &lv[11][5], &lv[11][6], &lv[11][7], &lv[11][8], &lv[11][9],
+		  &lv[11][10], &WhaWha_B);
+	  break;
+
+	case 11:
+	  //Alienwah
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[12][0], &lv[12][1], &lv[12][2], &lv[12][3], &lv[12][4],
+		  &lv[12][5], &lv[12][6], &lv[12][7], &lv[12][8], &lv[12][9],
+		  &lv[12][10], &Alienwah_B);
+	  break;
+
+	case 12:
+	  //Cabinet
+	  sscanf (buf, "%d,%d,%d\n", &lv[13][0], &lv[13][1], &Cabinet_B);
+	  break;
+
+	case 13:
+	  //Pan
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[14][0], &lv[14][1], &lv[14][2], &lv[14][3], &lv[14][4],
+		  &lv[14][5], &lv[14][6], &lv[14][7], &lv[14][8],&Pan_B);
+	  break;
+
+	case 14:
+	  //Harmonizer
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[15][0], &lv[15][1], &lv[15][2], &lv[15][3], &lv[15][4],
+		  &lv[15][5], &lv[15][6], &lv[15][7], &lv[15][8], &lv[15][9],
+		  &lv[15][10], &Harmonizer_B);
+	  break;
+
+	case 15:
+	  //Musical Delay
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[16][0], &lv[16][1], &lv[16][2], &lv[16][3], &lv[16][4],
+		  &lv[16][5], &lv[16][6], &lv[16][7], &lv[16][8], &lv[16][9],
+		  &lv[16][10], &lv[16][11], &lv[16][12], &MusDelay_B);
+	  break;
+
+	case 16:
+	  //NoiseGate
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[17][0], &lv[17][1], &lv[17][2], &lv[17][3], &lv[17][4],
+		  &lv[17][5], &lv[17][6], &Gate_B);
+
+	  break;
+
+	case 17:
+	  //NewDist
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[18][0], &lv[18][1], &lv[18][2], &lv[18][3], &lv[18][4],
+		  &lv[18][5], &lv[18][6], &lv[18][7], &lv[18][8], &lv[18][9],
+		  &lv[18][10], &lv[18][11], &NewDist_B);
+	  break;
+
+	case 18:
+	  //Analog Phaser
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[19][0], &lv[19][1], &lv[19][2], &lv[19][3], &lv[19][4],
+		  &lv[19][5], &lv[19][6], &lv[19][7], &lv[19][8], &lv[19][9],
+		  &lv[19][10], &lv[19][11], &APhaser_B);
+	  break;
+
+	case 19:
+	  //Valve
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[20][0], &lv[20][1], &lv[20][2], &lv[20][3], &lv[20][4],
+		  &lv[20][5], &lv[20][6], &lv[20][7], &lv[20][8], &lv[20][9],
+		  &lv[20][10],&lv[20][11],&lv[20][12], &Valve_B);
+	  break;
+
+	case 20:
+	  //Dual Flnage
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[21][0], &lv[21][1], &lv[21][2], &lv[21][3], &lv[21][4],
+		  &lv[21][5], &lv[21][6], &lv[21][7], &lv[21][8], &lv[21][9],
+		  &lv[21][10], &lv[21][11], &lv[21][12], &lv[21][13],&DFlange_B);
+	  break;
+
+	case 21:
+	  //Ring
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[22][0], &lv[22][1], &lv[22][2], &lv[22][3], &lv[22][4],
+		  &lv[22][5], &lv[22][6], &lv[22][7], &lv[22][8], &lv[22][9],
+		  &lv[22][10], &lv[22][11], &lv[22][12],&Ring_B);
+	  break;
+
+	case 22:
+	  //Exciter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[23][0], &lv[23][1], &lv[23][2], &lv[23][3], &lv[23][4],
+		  &lv[23][5], &lv[23][6], &lv[23][7], &lv[23][8], &lv[23][9],
+		  &lv[23][10], &lv[23][11], &lv[23][12],&Exciter_B);
+	  break;
+
+	case 23:
+	  //MBDist
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[24][0], &lv[24][1], &lv[24][2], &lv[24][3], &lv[24][4],
+		  &lv[24][5], &lv[24][6], &lv[24][7], &lv[24][8], &lv[24][9],
+		  &lv[24][10], &lv[24][11], &lv[24][12], &lv[24][13], &lv[24][14],
+		  &MBDist_B);
+	  break;
+
+	case 24:
+	  //Arpie
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[25][0], &lv[25][1], &lv[25][2], &lv[25][3], &lv[25][4],
+		  &lv[25][5], &lv[25][6], &lv[25][7], &lv[25][8], &lv[25][9],
+		  &lv[25][10],&Arpie_B);
+	  break;
+
+	case 25:
+	  //Expander
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[26][0], &lv[26][1], &lv[26][2], &lv[26][3], &lv[26][4],
+		  &lv[26][5], &lv[26][6], &Expander_B);
+
+	  break;
+
+	case 26:
+	  //Shuffle
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[27][0], &lv[27][1], &lv[27][2], &lv[27][3], &lv[27][4],
+		  &lv[27][5], &lv[27][6], &lv[27][7], &lv[27][8], &lv[27][9],
+		  &lv[27][10],&Shuffle_B);
+	  break;
+
+	case 27:
+	  //Synthfilter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[28][0], &lv[28][1], &lv[28][2], &lv[28][3], &lv[28][4],
+		  &lv[28][5], &lv[28][6], &lv[28][7], &lv[28][8], &lv[28][9],
+                  &lv[28][10], &lv[28][11], &lv[28][12], &lv[28][13], &lv[28][14],
+		  &lv[28][15],&Synthfilter_B);
+	  break;
+
+	case 28:
+	  //MBVvol
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[29][0], &lv[29][1], &lv[29][2], &lv[29][3], &lv[29][4],
+		  &lv[29][5], &lv[29][6], &lv[29][7], &lv[29][8], &lv[29][9],
+		  &lv[29][10],&MBVvol_B);
+	  break;
+
+	case 29:
+	  //Convolotron
+	  memset(efx_Convol->Filename,0, sizeof(efx_Convol->Filename));
+	  memset(cfilename,0, sizeof(cfilename));
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		  &lv[30][0], &lv[30][1], &lv[30][2], &lv[30][3], &lv[30][4],
+		  &lv[30][5], &lv[30][6], &lv[30][7], &lv[30][8], &lv[30][9],
+		  &lv[30][10],&Convol_B,cfilename);
+          strcpy(efx_Convol->Filename,cfilename);		  
+	  break;
+
+	case 30:
+	  //Looper
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[31][0], &lv[31][1], &lv[31][2], &lv[31][3], &lv[31][4],
+		  &lv[31][5], &lv[31][6], &lv[31][7], &lv[31][8], &lv[31][9],
+		  &lv[31][10],&lv[31][11],&lv[31][12],&lv[31][13],&Looper_B);
+	  break;
+
+	case 31:
+	  //RyanWah
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[32][0], &lv[32][1], &lv[32][2], &lv[32][3], &lv[32][4],
+		  &lv[32][5], &lv[32][6], &lv[32][7], &lv[32][8], &lv[32][9],
+                  &lv[32][10], &lv[32][11], &lv[32][12], &lv[32][13], &lv[32][14],
+		  &lv[32][15], &lv[32][16], &RyanWah_B);
+	  break;
+
+	case 32:
+	  //Echoverse
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[33][0], &lv[33][1], &lv[33][2], &lv[33][3], &lv[33][4],
+		  &lv[33][5], &lv[33][6], &lv[33][7], &lv[33][8], &lv[33][9], &RBEcho_B);
+	  break;
+
+
+	case 33:
+	  //CoilCrafter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[34][0], &lv[34][1], &lv[34][2], &lv[34][3], &lv[34][4],
+		  &lv[34][5], &lv[34][6], &lv[34][7], &lv[34][8],&CoilCrafter_B);
+	  break;
+
+	case 34:
+	  //CoilCrafter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d\n",
+		  &lv[35][0], &lv[35][1], &lv[35][2], &lv[35][3], &lv[35][4],
+		  &ShelfBoost_B);
+	  break;
+
+	case 35:
+	  //Vocoder
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[36][0], &lv[36][1], &lv[36][2], &lv[36][3], &lv[36][4],
+		  &lv[36][5], &lv[36][6], &Vocoder_B);
+	  break;
+
+	case 36:
+	  //Sustainer
+	  sscanf (buf, "%d,%d,%d\n",
+		  &lv[37][0], &lv[37][1], &Sustainer_B);
+	  break;
+
+	case 37:
+	  //Sequence
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[38][0], &lv[38][1], &lv[38][2], &lv[38][3], &lv[38][4],
+		  &lv[38][5], &lv[38][6], &lv[38][7], &lv[38][8], &lv[38][9],
+		  &lv[38][10],&lv[38][11],&lv[38][12],&lv[38][13],&lv[38][14],&Looper_B);
+	  break;
+
+	case 38:
+	  //Shifter
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[39][0], &lv[39][1], &lv[39][2], &lv[39][3], &lv[39][4],
+		  &lv[39][5], &lv[39][6], &lv[39][7], &lv[39][8], &lv[39][9], &Shifter_B);
+	  break;
+
+	case 39:
+	  //StompBox
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[40][0], &lv[40][1], &lv[40][2], &lv[40][3], &lv[40][4],
+		  &lv[40][5], &StompBox_B);
+	  break;
+
+	case 40:
+	  //Reverbtron
+	  memset(efx_Reverbtron->Filename,0, sizeof(efx_Reverbtron->Filename));
+	  memset(cfilename,0, sizeof(cfilename));
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		  &lv[41][0], &lv[41][1], &lv[41][2], &lv[41][3], &lv[41][4],
+		  &lv[41][5], &lv[41][6], &lv[41][7], &lv[41][8], &lv[41][9],
+		  &lv[41][10],&lv[41][11],&lv[41][12], &lv[41][13], &lv[41][14],&lv[41][15], 
+		  &Reverbtron_B,
+		  cfilename);
+          strcpy(efx_Reverbtron->Filename,cfilename);		  
+	  break;
+
+	case 41:
+	  //Echotron
+	  memset(efx_Echotron->Filename,0, sizeof(efx_Echotron->Filename));
+	  memset(cfilename,0, sizeof(cfilename));
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+		  &lv[42][0], &lv[42][1], &lv[42][2], &lv[42][3], &lv[42][4],
+		  &lv[42][5], &lv[42][6], &lv[42][7], &lv[42][8], &lv[42][9],
+		  &lv[42][10],&lv[42][11],&lv[42][12], &lv[42][13], &lv[42][14],&lv[42][15], 
+		  &Echotron_B,
+		  cfilename);
+          strcpy(efx_Echotron->Filename,cfilename);		  
+	  break;
+
+	case 42:
+	  //StereoHarm
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[43][0], &lv[43][1], &lv[43][2], &lv[43][3], &lv[43][4],
+		  &lv[43][5], &lv[43][6], &lv[43][7], &lv[43][8], &lv[43][9],
+		  &lv[43][10], &lv[43][11], &StereoHarm_B);
+	  break;
+
+	case 43:
+	  //CompBand
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[44][0], &lv[44][1], &lv[44][2], &lv[44][3], &lv[44][4],
+		  &lv[44][5], &lv[44][6], &lv[44][7], &lv[44][8], &lv[44][9],
+		  &lv[44][10], &lv[44][11], &lv[44][12], &CompBand_B);
+	  break;
+
+	case 44:
+	  //Opticaltrem
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[45][0], &lv[45][1], &lv[45][2], &lv[45][3], &lv[45][4],
+		  &lv[45][5], &Opticaltrem_B);
+	  break;
+
+	case 45:
+	  //Vibe
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[46][0], &lv[46][1], &lv[46][2], &lv[46][3], &lv[46][4],
+		  &lv[46][5], &lv[46][6], &lv[46][7], &lv[46][8], &lv[46][9],
+		  &Vibe_B);
+	  break;
+
+
+
+	}
+ 
+
+    free(cfilename);   
+
+
+}
+
+
 void RKR::getbuf(char *buf, int j)
 {
 
@@ -651,12 +1040,10 @@ RKR::loadfile (char *filename)
   float in_vol, out_vol; 
   float balance=1.0f;
   char buf[256];
-  char *cfilename;
 
   if ((fn = fopen (filename, "r")) == NULL)
     return;
 
-  cfilename = (char *) malloc (sizeof (char) * 128);
 
   New();
 
@@ -664,6 +1051,7 @@ RKR::loadfile (char *filename)
     {
       memset (buf, 0, sizeof (buf));
       fgets (buf, sizeof buf, fn);
+      
     }
 
   //Order
@@ -679,7 +1067,6 @@ RKR::loadfile (char *filename)
 
   if ((fn = fopen (filename, "r")) == NULL)
 {
-    free(cfilename);   
     return;
 }
   //Version
@@ -731,385 +1118,10 @@ RKR::loadfile (char *filename)
 
       memset (buf, 0, sizeof (buf));
       fgets (buf, sizeof buf, fn);
+      putbuf(buf,j);
+      
 
 
-
-      switch (j)
-	{
-
-	case 8:
-	  //Reverb
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[0][0], &lv[0][1], &lv[0][2], &lv[0][3], &lv[0][4],
-		  &lv[0][5], &lv[0][6], &lv[0][7], &lv[0][8], &lv[0][9],
-		  &lv[0][10], &lv[0][11], &Reverb_B);
-	  break;
-
-	case 4:
-	  //Echo  
-	   sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[1][0], &lv[1][1], &lv[1][2], &lv[1][3], &lv[1][4],
-		  &lv[1][5], &lv[1][6], &lv[1][7], &lv[1][8],&Echo_B);
-	  break;
-
-	case 5:
-	  //Chorus
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[2][0], &lv[2][1], &lv[2][2], &lv[2][3], &lv[2][4],
-		  &lv[2][5], &lv[2][6], &lv[2][7], &lv[2][8], &lv[2][9],
-		  &lv[2][10], &lv[2][11], &Chorus_B);
-	  break;
-
-	case 7:
-	  //Flanger
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[3][0], &lv[3][1], &lv[3][2], &lv[3][3], &lv[3][4],
-		  &lv[3][5], &lv[3][6], &lv[3][7], &lv[3][8], &lv[3][9],
-		  &lv[3][10], &lv[3][11], &Flanger_B);
-	  break;
-
-	case 6:
-	  //Phaser
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[4][0], &lv[4][1], &lv[4][2], &lv[4][3], &lv[4][4],
-		  &lv[4][5], &lv[4][6], &lv[4][7], &lv[4][8], &lv[4][9],
-		  &lv[4][10], &lv[4][11], &Phaser_B);
-	  break;
-
-	case 3:
-	  //Overdrive
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[5][0], &lv[5][1], &lv[5][2], &lv[5][3], &lv[5][4],
-		  &lv[5][5], &lv[5][6], &lv[5][7], &lv[5][8], &lv[5][9],
-		  &lv[5][10], &lv[5][11], &lv[5][12],&Overdrive_B);
-	  break;
-
-	case 2:
-	  //Distorsion
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[6][0], &lv[6][1], &lv[6][2], &lv[6][3], &lv[6][4],
-		  &lv[6][5], &lv[6][6], &lv[6][7], &lv[6][8], &lv[6][9],
-		  &lv[6][10], &lv[6][11], &lv[6][12], &Distorsion_B);
-	  break;
-
-	case 0:
-	  //EQ1  
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[7][0], &lv[7][1], &lv[7][2], &lv[7][3], &lv[7][4],
-		  &lv[7][5], &lv[7][6], &lv[7][7], &lv[7][8], &lv[7][9],
-		  &lv[7][10], &lv[7][11], &EQ1_B);
-	  break;
-
-	case 9:
-	  //EQ2  
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[8][0], &lv[8][1], &lv[8][2], &lv[8][3], &lv[8][4],
-		  &lv[8][5], &lv[8][6], &lv[8][7], &lv[8][8], &lv[8][9],
-		  &EQ2_B);
-	  break;
-
-	case 1:
-	  //Compressor
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[9][0], &lv[9][1], &lv[9][2], &lv[9][3], &lv[9][4],
-		  &lv[9][5], &lv[9][6], &lv[9][7], &lv[9][8], &Compressor_B);
-	  break;
-
-	case 10:
-	  //WhaWha
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[11][0], &lv[11][1], &lv[11][2], &lv[11][3], &lv[11][4],
-		  &lv[11][5], &lv[11][6], &lv[11][7], &lv[11][8], &lv[11][9],
-		  &lv[11][10], &WhaWha_B);
-	  break;
-
-	case 11:
-	  //Alienwah
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[12][0], &lv[12][1], &lv[12][2], &lv[12][3], &lv[12][4],
-		  &lv[12][5], &lv[12][6], &lv[12][7], &lv[12][8], &lv[12][9],
-		  &lv[12][10], &Alienwah_B);
-	  break;
-
-	case 12:
-	  //Cabinet
-	  sscanf (buf, "%d,%d,%d\n", &lv[13][0], &lv[13][1], &Cabinet_B);
-	  break;
-
-	case 13:
-	  //Pan
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[14][0], &lv[14][1], &lv[14][2], &lv[14][3], &lv[14][4],
-		  &lv[14][5], &lv[14][6], &lv[14][7], &lv[14][8],&Pan_B);
-	  break;
-
-	case 14:
-	  //Harmonizer
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[15][0], &lv[15][1], &lv[15][2], &lv[15][3], &lv[15][4],
-		  &lv[15][5], &lv[15][6], &lv[15][7], &lv[15][8], &lv[15][9],
-		  &lv[15][10], &Harmonizer_B);
-	  break;
-
-	case 15:
-	  //Musical Delay
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[16][0], &lv[16][1], &lv[16][2], &lv[16][3], &lv[16][4],
-		  &lv[16][5], &lv[16][6], &lv[16][7], &lv[16][8], &lv[16][9],
-		  &lv[16][10], &lv[16][11], &lv[16][12], &MusDelay_B);
-	  break;
-
-	case 16:
-	  //NoiseGate
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[17][0], &lv[17][1], &lv[17][2], &lv[17][3], &lv[17][4],
-		  &lv[17][5], &lv[17][6], &Gate_B);
-
-	  break;
-
-	case 17:
-	  //NewDist
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[18][0], &lv[18][1], &lv[18][2], &lv[18][3], &lv[18][4],
-		  &lv[18][5], &lv[18][6], &lv[18][7], &lv[18][8], &lv[18][9],
-		  &lv[18][10], &lv[18][11], &NewDist_B);
-	  break;
-
-	case 18:
-	  //Analog Phaser
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[19][0], &lv[19][1], &lv[19][2], &lv[19][3], &lv[19][4],
-		  &lv[19][5], &lv[19][6], &lv[19][7], &lv[19][8], &lv[19][9],
-		  &lv[19][10], &lv[19][11], &APhaser_B);
-	  break;
-
-	case 19:
-	  //Valve
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[20][0], &lv[20][1], &lv[20][2], &lv[20][3], &lv[20][4],
-		  &lv[20][5], &lv[20][6], &lv[20][7], &lv[20][8], &lv[20][9],
-		  &lv[20][10],&lv[20][11],&lv[20][12], &Valve_B);
-	  break;
-
-	case 20:
-	  //Dual Flnage
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[21][0], &lv[21][1], &lv[21][2], &lv[21][3], &lv[21][4],
-		  &lv[21][5], &lv[21][6], &lv[21][7], &lv[21][8], &lv[21][9],
-		  &lv[21][10], &lv[21][11], &lv[21][12], &lv[21][13],&DFlange_B);
-	  break;
-
-	case 21:
-	  //Ring
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[22][0], &lv[22][1], &lv[22][2], &lv[22][3], &lv[22][4],
-		  &lv[22][5], &lv[22][6], &lv[22][7], &lv[22][8], &lv[22][9],
-		  &lv[22][10], &lv[22][11], &lv[22][12],&Ring_B);
-	  break;
-
-	case 22:
-	  //Exciter
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[23][0], &lv[23][1], &lv[23][2], &lv[23][3], &lv[23][4],
-		  &lv[23][5], &lv[23][6], &lv[23][7], &lv[23][8], &lv[23][9],
-		  &lv[23][10], &lv[23][11], &lv[23][12],&Exciter_B);
-	  break;
-
-	case 23:
-	  //MBDist
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[24][0], &lv[24][1], &lv[24][2], &lv[24][3], &lv[24][4],
-		  &lv[24][5], &lv[24][6], &lv[24][7], &lv[24][8], &lv[24][9],
-		  &lv[24][10], &lv[24][11], &lv[24][12], &lv[24][13], &lv[24][14],
-		  &MBDist_B);
-	  break;
-
-	case 24:
-	  //Arpie
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[25][0], &lv[25][1], &lv[25][2], &lv[25][3], &lv[25][4],
-		  &lv[25][5], &lv[25][6], &lv[25][7], &lv[25][8], &lv[25][9],
-		  &lv[25][10],&Arpie_B);
-	  break;
-
-	case 25:
-	  //Expander
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[26][0], &lv[26][1], &lv[26][2], &lv[26][3], &lv[26][4],
-		  &lv[26][5], &lv[26][6], &Expander_B);
-
-	  break;
-
-	case 26:
-	  //Shuffle
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[27][0], &lv[27][1], &lv[27][2], &lv[27][3], &lv[27][4],
-		  &lv[27][5], &lv[27][6], &lv[27][7], &lv[27][8], &lv[27][9],
-		  &lv[27][10],&Shuffle_B);
-	  break;
-
-	case 27:
-	  //Synthfilter
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[28][0], &lv[28][1], &lv[28][2], &lv[28][3], &lv[28][4],
-		  &lv[28][5], &lv[28][6], &lv[28][7], &lv[28][8], &lv[28][9],
-                  &lv[28][10], &lv[28][11], &lv[28][12], &lv[28][13], &lv[28][14],
-		  &lv[28][15],&Synthfilter_B);
-	  break;
-
-	case 28:
-	  //MBVvol
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[29][0], &lv[29][1], &lv[29][2], &lv[29][3], &lv[29][4],
-		  &lv[29][5], &lv[29][6], &lv[29][7], &lv[29][8], &lv[29][9],
-		  &lv[29][10],&MBVvol_B);
-	  break;
-
-	case 29:
-	  //Convolotron
-	  memset(efx_Convol->Filename,0, sizeof(efx_Convol->Filename));
-	  memset(cfilename,0, sizeof(cfilename));
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-		  &lv[30][0], &lv[30][1], &lv[30][2], &lv[30][3], &lv[30][4],
-		  &lv[30][5], &lv[30][6], &lv[30][7], &lv[30][8], &lv[30][9],
-		  &lv[30][10],&Convol_B,cfilename);
-          strcpy(efx_Convol->Filename,cfilename);		  
-	  break;
-
-	case 30:
-	  //Looper
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[31][0], &lv[31][1], &lv[31][2], &lv[31][3], &lv[31][4],
-		  &lv[31][5], &lv[31][6], &lv[31][7], &lv[31][8], &lv[31][9],
-		  &lv[31][10],&lv[31][11],&lv[31][12],&lv[31][13],&Looper_B);
-	  break;
-
-	case 31:
-	  //RyanWah
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[32][0], &lv[32][1], &lv[32][2], &lv[32][3], &lv[32][4],
-		  &lv[32][5], &lv[32][6], &lv[32][7], &lv[32][8], &lv[32][9],
-                  &lv[32][10], &lv[32][11], &lv[32][12], &lv[32][13], &lv[32][14],
-		  &lv[32][15], &lv[32][16], &RyanWah_B);
-	  break;
-
-	case 32:
-	  //Echoverse
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[33][0], &lv[33][1], &lv[33][2], &lv[33][3], &lv[33][4],
-		  &lv[33][5], &lv[33][6], &lv[33][7], &lv[33][8], &lv[33][9], &RBEcho_B);
-	  break;
-
-
-	case 33:
-	  //CoilCrafter
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[34][0], &lv[34][1], &lv[34][2], &lv[34][3], &lv[34][4],
-		  &lv[34][5], &lv[34][6], &lv[34][7], &lv[34][8],&CoilCrafter_B);
-	  break;
-
-	case 34:
-	  //CoilCrafter
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d\n",
-		  &lv[35][0], &lv[35][1], &lv[35][2], &lv[35][3], &lv[35][4],
-		  &ShelfBoost_B);
-	  break;
-
-	case 35:
-	  //Vocoder
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[36][0], &lv[36][1], &lv[36][2], &lv[36][3], &lv[36][4],
-		  &lv[36][5], &lv[36][6], &Vocoder_B);
-	  break;
-
-	case 36:
-	  //Sustainer
-	  sscanf (buf, "%d,%d,%d\n",
-		  &lv[37][0], &lv[37][1], &Sustainer_B);
-	  break;
-
-	case 37:
-	  //Sequence
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[38][0], &lv[38][1], &lv[38][2], &lv[38][3], &lv[38][4],
-		  &lv[38][5], &lv[38][6], &lv[38][7], &lv[38][8], &lv[38][9],
-		  &lv[38][10],&lv[38][11],&lv[38][12],&lv[38][13],&lv[38][14],&Looper_B);
-	  break;
-
-	case 38:
-	  //Shifter
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[39][0], &lv[39][1], &lv[39][2], &lv[39][3], &lv[39][4],
-		  &lv[39][5], &lv[39][6], &lv[39][7], &lv[39][8], &lv[39][9], &Shifter_B);
-	  break;
-
-	case 39:
-	  //StompBox
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[40][0], &lv[40][1], &lv[40][2], &lv[40][3], &lv[40][4],
-		  &lv[40][5], &StompBox_B);
-	  break;
-
-	case 40:
-	  //Reverbtron
-	  memset(efx_Reverbtron->Filename,0, sizeof(efx_Reverbtron->Filename));
-	  memset(cfilename,0, sizeof(cfilename));
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-		  &lv[41][0], &lv[41][1], &lv[41][2], &lv[41][3], &lv[41][4],
-		  &lv[41][5], &lv[41][6], &lv[41][7], &lv[41][8], &lv[41][9],
-		  &lv[41][10],&lv[41][11],&lv[41][12], &lv[41][13], &lv[41][14],&lv[41][15], 
-		  &Reverbtron_B,
-		  cfilename);
-          strcpy(efx_Reverbtron->Filename,cfilename);		  
-	  break;
-
-	case 41:
-	  //Echotron
-	  memset(efx_Echotron->Filename,0, sizeof(efx_Echotron->Filename));
-	  memset(cfilename,0, sizeof(cfilename));
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-		  &lv[42][0], &lv[42][1], &lv[42][2], &lv[42][3], &lv[42][4],
-		  &lv[42][5], &lv[42][6], &lv[42][7], &lv[42][8], &lv[42][9],
-		  &lv[42][10],&lv[42][11],&lv[42][12], &lv[42][13], &lv[42][14],&lv[42][15], 
-		  &Echotron_B,
-		  cfilename);
-          strcpy(efx_Echotron->Filename,cfilename);		  
-	  break;
-
-	case 42:
-	  //StereoHarm
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[43][0], &lv[43][1], &lv[43][2], &lv[43][3], &lv[43][4],
-		  &lv[43][5], &lv[43][6], &lv[43][7], &lv[43][8], &lv[43][9],
-		  &lv[43][10], &lv[43][11], &StereoHarm_B);
-	  break;
-
-	case 43:
-	  //CompBand
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[44][0], &lv[44][1], &lv[44][2], &lv[44][3], &lv[44][4],
-		  &lv[44][5], &lv[44][6], &lv[44][7], &lv[44][8], &lv[44][9],
-		  &lv[44][10], &lv[44][11], &lv[44][12], &CompBand_B);
-	  break;
-
-	case 44:
-	  //Opticaltrem
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[45][0], &lv[45][1], &lv[45][2], &lv[45][3], &lv[45][4],
-		  &lv[45][5], &Opticaltrem_B);
-	  break;
-
-	case 45:
-	  //Vibe
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-		  &lv[46][0], &lv[46][1], &lv[46][2], &lv[46][3], &lv[46][4],
-		  &lv[46][5], &lv[46][6], &lv[46][7], &lv[46][8], &lv[46][9],
-		  &Vibe_B);
-	  break;
-
-
-
-	}
     }
 
   //Order
@@ -1137,7 +1149,6 @@ for(i=0;i<128;i++)
 
 
   fclose (fn);
-  free(cfilename);
   Actualizar_Audio ();
 
 }
@@ -2337,31 +2348,5 @@ memset(buff,0, sizeof(buff));
 sprintf(buff,"rakverb -i '%s'",filename);
 printf("%s\n",buff);
 system(buff);
-}
-
-void
-RKR::SaveIntPreset(int num, char *PresetName)
-{
-int effect=num-12000;
-FILE *fn;
-char tempfile[256];
-char buf[256];
-char sbuf[512];
-memset(tempfile,0,sizeof(tempfile));
-memset(buf,0,sizeof(buf));
-memset(sbuf,0,sizeof(sbuf));
-sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
- 
-
-
-if ((fn = fopen (tempfile, "a")) != NULL)
-{
-getbuf(buf,effect);
-sprintf(sbuf,"%d,%s,%s",effect,PresetName,buf);
-fputs(sbuf,fn);
-fclose(fn);
-
-}
-
 }
 

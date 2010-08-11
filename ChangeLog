@@ -1,5 +1,9 @@
 ==v0.6.x (  /  /2010) ==
 
+- F2/F3 Down/Up Output Volume
+- Auto Assign option in settings, MIDI Control is assigned when rigth mouse
+- a parameter and MIDI Control message comes.
+- Rigth mouse on parameter open MIDI Learn with the parameter selected.
 - Fix GUI, now all the On/Off MIDI events are updated.
 - Added +10dB booster button.
 - Added upsample x7,x8,x9,x10,x11,x12.
