@@ -83,6 +83,7 @@ private:
   float outlevel;
   float att, attr, attl;
   float rel, relr, rell;
+  float relcnst, attconst;
   int ltimer, rtimer, hold;
   
   float rgain;

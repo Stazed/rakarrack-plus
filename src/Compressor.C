@@ -65,6 +65,7 @@ Compressor::Compressor (float * efxoutl_, float * efxoutr_)
   lpeak = 0.0f;
   rpeak = 0.0f;
   rell = relr = attr = attl = 1.0f;
+  
   ltimer = rtimer = 0;
   hold = (int) (SAMPLE_RATE*0.0125);  //12.5ms
   clipping = 0;
@@ -121,7 +122,7 @@ Compressor::Compressor_Change (int np, int value)
 
     case 5:
       trel = value;
-      rel = 1.0f - cSAMPLE_RATE /(((float)value / 1000.0f) + cSAMPLE_RATE);
+      rel = cSAMPLE_RATE /(((float)value / 1000.0f) + cSAMPLE_RATE);
       rell = rel;
       relr = rel;
       break;
@@ -292,23 +293,26 @@ Compressor::out (float *efxoutl, float *efxoutr)
 	if(stereo) 
 	{
       rdelta = fabsf (rpeak);
-	if(rvolume > 0.9f)
+	if(rvolume < 0.9f)
+	{
+	attr = att;
+	relr = rel;	
+	}
+	else if (rvolume < 1.0f)
 	{
 	attr = att + ((1.0f - att)*(rvolume - 0.9f)*10.0f);	//dynamically change attack time for limiting mode
-	}
-	else if (rvolume > 1.0f)
-	{
-	attr = 1.0f;
+	relr = rel/(1.0f + (rvolume - 0.9f)*9.0f);  //release time gets longer when signal is above limiting
 	}
 	else
 	{
-	attr = att;
+	attr = 1.0f;
+	relr = rel*0.1f;
 	}
 
       if (rdelta > rvolume)
 	rvolume = attr * rdelta + (1.0f - attr)*rvolume;
       else
-	rvolume *= relr;	
+	rvolume = relr * rdelta + (1.0f - relr)*rvolume;	
 	
 		
   	rvolume_db = rap2dB (rvolume);
@@ -343,23 +347,26 @@ Compressor::out (float *efxoutl, float *efxoutr)
 	  ldelta = 0.5f*(fabsf (lpeak) + fabsf (rpeak));
 	    };  //It's not as efficient to check twice, but it's small expense worth code clarity
 
-	if(lvolume > 0.9f)
+	if(lvolume < 0.9f)
+	{
+	attl = att;
+	rell = rel;	
+	}
+	else if (lvolume < 1.0f)
 	{
 	attl = att + ((1.0f - att)*(lvolume - 0.9f)*10.0f);	//dynamically change attack time for limiting mode
-	}
-	else if (lvolume > 1.0f)
-	{
-	attl = 1.0f;
+	rell = rel/(1.0f + (lvolume - 0.9f)*9.0f);  //release time gets longer when signal is above limiting
 	}
 	else
 	{
-	attl = att;
+	attl = 1.0f;
+	rell = rel*0.1f;
 	}	
 		
       if (ldelta > lvolume)
 	lvolume = attl * ldelta + (1.0f - attl)*lvolume;
       else
-	lvolume *= rell;	
+	lvolume = rell*ldelta + (1.0f - rell)*lvolume;	
 	
   	lvolume_db = rap2dB (lvolume);
 
