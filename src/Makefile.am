@@ -24,6 +24,7 @@ rakarrack_SOURCES = main.C \
 	Filter.h \
 	FilterParams.h \
 	FormantFilter.h \
+	FPreset.h \
 	Gate.h \
 	global.h \
 	HarmonicEnhancer.h \
@@ -70,6 +71,7 @@ rakarrack_SOURCES = main.C \
 	process.C \
 	fileio.C \
 	varios.C \
+	FPreset.C \
 	Reverb.C \
 	Chorus.C \
 	EffectLFO.C \

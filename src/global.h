@@ -100,6 +100,7 @@
 #include <jack/jack.h>
 #include <jack/midiport.h>
 #include <Fl/Fl_Preferences.H>
+#include "FPreset.h"
 #include "Reverb.h"
 #include "Chorus.h"
 #include "Echo.h"
@@ -160,6 +161,7 @@ extern unsigned int SAMPLE_RATE;
 extern int note_active[POLY];
 extern int rnote[POLY];
 extern int gate[POLY];
+extern int pdata[50];
 extern float val_sum;
 extern float fPERIOD;
 extern unsigned int SAMPLE_RATE;
@@ -247,7 +249,7 @@ public:
   void Error_Handle(int num);
   void update_freqs(float val);
 
-
+  class FPreset *Fpre;
   class Reverb *efx_Rev;
   class Chorus *efx_Chorus;
   class Chorus *efx_Flanger;
@@ -304,6 +306,7 @@ public:
   class CompBand *efx_CompBand;
   class Opticaltrem *efx_Opticaltrem;
   class Vibe *efx_Vibe;
+ 
 
   jack_client_t *jackclient;
   jack_options_t options;

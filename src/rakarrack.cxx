@@ -20980,7 +20980,7 @@ load_stat();
 Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
-
+ReadIntPresets();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
@@ -25879,13 +25879,19 @@ if(rkr->comemouse)
 }
 
 inline void RKRGUI::addpreset(Fl_Widget *w, int num) {
-  const char *name = fl_input("Preset Name?","");
+  if(num==12) return;
+const char *name = fl_input("Preset Name?","");
 if(name==NULL) return;
 char NewName[64];
 memset(NewName,0,sizeof(NewName));
 sprintf(NewName,"*%s",name);
-Fl_Choice *s = (Fl_Choice * ) w;
-s->add(NewName);
+add_name(w,NewName);
+rkr->SaveIntPreset(num,NewName);
+}
+
+void RKRGUI::add_name(Fl_Widget *w, char *name) {
+  Fl_Choice *s = (Fl_Choice * ) w;
+s->add(name);
 
 
 Fl_Menu_*n = (Fl_Menu_*)s->menu();
@@ -25899,6 +25905,55 @@ for(int i=0; i<m->size(); i++)
      if(i==0)k=p->labelsize();
      p->labelsize(k);
      }
+}
 
-rkr->SaveIntPreset(num,NewName);
+Fl_Widget * RKRGUI::FindWidget(int num) {
+  for (int t=0; t<Principal->children();t++)
+  {
+    Fl_Widget *w = Principal->child(t);
+    long long ud = (long long) w->user_data();
+     
+    if (ud==1)
+    {
+          
+     Fl_Group *g = (Fl_Group *)w;     
+      
+     for(int i=0;i<g->children();i++)
+       {
+
+         Fl_Widget *c = g->child(i);
+         long long uh = (long long) c->user_data();
+         if(uh==(num+12000)) return c;
+        }
+     }          
+   }
+   
+return NULL;
+}
+
+void RKRGUI::ReadIntPresets() {
+  FILE *fn;
+char tempfile[256];
+char buf[256];
+char *name;
+char *sbuf;
+int num=0;
+memset(tempfile,0,sizeof(tempfile));
+
+sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
+
+if (( fn = fopen (tempfile, "r")) != NULL)
+{
+   while (fgets (buf, sizeof buf, fn) != NULL)
+    
+     {
+        
+       sbuf = buf;
+       sscanf(buf,"%d",&num);
+       name = strsep(&sbuf,",");
+       name = strsep(&sbuf,",");
+       add_name(FindWidget(num), name);
+     }
+ fclose(fn);
+}
 }

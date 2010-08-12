@@ -841,8 +841,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -11497,7 +11496,7 @@ load_stat();
 Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
-
+ReadIntPresets();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
@@ -16354,15 +16353,21 @@ if(rkr->comemouse)
    } 
 }} {}
   }
-  Function {addpreset(Fl_Widget *w, int num)} {open return_type {inline void}
+  Function {addpreset(Fl_Widget *w, int num)} {return_type {inline void}
   } {
-    code {const char *name = fl_input("Preset Name?","");
+    code {if(num==12) return;
+const char *name = fl_input("Preset Name?","");
 if(name==NULL) return;
 char NewName[64];
 memset(NewName,0,sizeof(NewName));
 sprintf(NewName,"*%s",name);
-Fl_Choice *s = (Fl_Choice * ) w;
-s->add(NewName);
+add_name(w,NewName);
+rkr->SaveIntPreset(num,NewName);} {selected
+    }
+  }
+  Function {add_name(Fl_Widget *w, char *name)} {} {
+    code {Fl_Choice *s = (Fl_Choice * ) w;
+s->add(name);
 
 
 Fl_Menu_*n = (Fl_Menu_*)s->menu();
@@ -16375,9 +16380,56 @@ for(int i=0; i<m->size(); i++)
      p=m->next(i);
      if(i==0)k=p->labelsize();
      p->labelsize(k);
-     }
+     }} {}
+  }
+  Function {FindWidget(int num)} {return_type {Fl_Widget *}
+  } {
+    code {for (int t=0; t<Principal->children();t++)
+  {
+    Fl_Widget *w = Principal->child(t);
+    long long ud = (long long) w->user_data();
+     
+    if (ud==1)
+    {
+          
+     Fl_Group *g = (Fl_Group *)w;     
+      
+     for(int i=0;i<g->children();i++)
+       {
 
-rkr->SaveIntPreset(num,NewName);} {selected
-    }
+         Fl_Widget *c = g->child(i);
+         long long uh = (long long) c->user_data();
+         if(uh==(num+12000)) return c;
+        }
+     }          
+   }
+   
+return NULL;} {}
+  }
+  Function {ReadIntPresets()} {} {
+    code {FILE *fn;
+char tempfile[256];
+char buf[256];
+char *name;
+char *sbuf;
+int num=0;
+memset(tempfile,0,sizeof(tempfile));
+
+sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
+
+if (( fn = fopen (tempfile, "r")) != NULL)
+{
+   while (fgets (buf, sizeof buf, fn) != NULL)
+    
+     {
+        
+       sbuf = buf;
+       sscanf(buf,"%d",&num);
+       name = strsep(&sbuf,",");
+       name = strsep(&sbuf,",");
+       add_name(FindWidget(num), name);
+     }
+ fclose(fn);
+}} {}
   }
 } 

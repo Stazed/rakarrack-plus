@@ -49,6 +49,7 @@ float cSAMPLE_RATE;
 int Wave_res_amount;
 int Wave_up_q;
 int Wave_down_q;
+int pdata[50];
 float val_sum;
 float r__ratio[12];
 float freqs[12];
@@ -226,7 +227,7 @@ RKR::RKR ()
   auxdata = (float *) malloc (sizeof (float) * PERIOD);
   auxresampled = (float *) malloc (sizeof (float) * PERIOD);
 
- 
+  Fpre = new FPreset(); 
   DC_Offsetl = new AnalogFilter (1, 20, 1, 0);
   DC_Offsetr = new AnalogFilter (1, 20, 1, 0);
   efx_Chorus = new Chorus (efxoutl, efxoutr);
@@ -276,6 +277,7 @@ RKR::RKR ()
   efx_CompBand = new CompBand(efxoutl,efxoutr);
   efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr);
   efx_Vibe = new Vibe(efxoutl,efxoutr);
+
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -1037,7 +1039,15 @@ RKR::EQ1_setpreset (int npreset)
     {71, 68, 64, 64, 64, 64, 64, 64, 66, 69, 64, 40}
   };
 
-  if (npreset >= NUM_PRESETS) return;
+  if (npreset >= NUM_PRESETS)
+  {
+    Fpre->ReadPreset(0,npreset-NUM_PRESETS+1);
+    for (int n = 0; n < 10; n++)
+    efx_EQ1->changepar (n * 5 + 12, pdata[n]);
+    efx_EQ1->changepar (0, pdata[10]);
+    for (int n = 0; n < 10; n++)
+    efx_EQ1->changepar (n * 5 + 13, pdata[11]);
+   }  
   else
   {
   for (int n = 0; n < 10; n++)
@@ -1068,7 +1078,20 @@ RKR::EQ2_setpreset (int npreset)
 
 
   if (npreset >= NUM_PRESETS)
-    npreset = NUM_PRESETS - 1;
+{
+
+   Fpre->ReadPreset(9,npreset-NUM_PRESETS+1);
+    for (int n = 0; n < 3; n++)
+    {
+      efx_EQ2->changepar (n * 5 + 11, pdata[n * 3]);
+      efx_EQ2->changepar (n * 5 + 12, pdata[n * 3 + 1]);
+      efx_EQ2->changepar (n * 5 + 13, pdata[n * 3 + 2]);
+    }
+  efx_EQ2->changepar (0, pdata[9]);
+}
+
+else
+{
   for (int n = 0; n < 3; n++)
     {
       efx_EQ2->changepar (n * 5 + 11, presets[npreset][n * 3]);
@@ -1076,6 +1099,7 @@ RKR::EQ2_setpreset (int npreset)
       efx_EQ2->changepar (n * 5 + 13, presets[npreset][n * 3 + 2]);
     }
   efx_EQ2->changepar (0, presets[npreset][9]);
+}
 };
 
 
