@@ -841,7 +841,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -856,7 +857,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -9970,13 +9971,13 @@ rkr->Message(1, name, "This file has already the new format");}
           }
         }
         Submenu AyudaB {
-          label {&Help}
+          label {&Help} open
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem ContenidoB {
             label {Help &Contents}
             callback {show_help();}
-            xywh {10 10 100 20} labelcolor 7
+            xywh {10 10 100 20} shortcut 0xffbe labelcolor 7
           }
           MenuItem Acerca_deB {
             label {&About...}
@@ -16260,8 +16261,7 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
 }
  
 CH_UB->value(0);
-closedir(dir);} {selected
-    }
+closedir(dir);} {}
   }
   Function {prevnext(int e)} {return_type {static int}
   } {
@@ -16293,6 +16293,15 @@ stecla=4;
 return 1;
 }
 
+if(Fl::event_key(65379))
+{
+ Fl_Widget *w = Fl::belowmouse();
+ long long k = (long long) w->user_data();
+ if((k>11999) && (k<12100)) 
+ ((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset(w,k-12000);
+return 1;
+
+}
 
 }
 
@@ -16344,5 +16353,31 @@ if(rkr->comemouse)
        return;
    } 
 }} {}
+  }
+  Function {addpreset(Fl_Widget *w, int num)} {open return_type {inline void}
+  } {
+    code {const char *name = fl_input("Preset Name?","");
+if(name==NULL) return;
+char NewName[64];
+memset(NewName,0,sizeof(NewName));
+sprintf(NewName,"*%s",name);
+Fl_Choice *s = (Fl_Choice * ) w;
+s->add(NewName);
+
+
+Fl_Menu_*n = (Fl_Menu_*)s->menu();
+Fl_Menu_Item *m = (Fl_Menu_Item*) n; 
+Fl_Menu_Item *p;  
+int k=10;
+
+for(int i=0; i<m->size(); i++)
+    {
+     p=m->next(i);
+     if(i==0)k=p->labelsize();
+     p->labelsize(k);
+     }
+
+rkr->SaveIntPreset(num,NewName);} {selected
+    }
   }
 } 

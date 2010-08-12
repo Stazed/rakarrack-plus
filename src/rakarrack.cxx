@@ -9182,7 +9182,7 @@ Fl_Menu_Item RKRGUI::menu_MenuB[] = {
  {"&Close", 0,  (Fl_Callback*)RKRGUI::cb_salirB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {"&Help", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
- {"Help &Contents", 0,  (Fl_Callback*)RKRGUI::cb_ContenidoB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
+ {"Help &Contents", 0xffbe,  (Fl_Callback*)RKRGUI::cb_ContenidoB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {"&About...", 0,  (Fl_Callback*)RKRGUI::cb_Acerca_deB, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {0,0,0,0,0,0,0,0,0}
@@ -25814,6 +25814,15 @@ stecla=4;
 return 1;
 }
 
+if(Fl::event_key(65379))
+{
+ Fl_Widget *w = Fl::belowmouse();
+ long long k = (long long) w->user_data();
+ if((k>11999) && (k<12100)) 
+ ((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset(w,k-12000);
+return 1;
+
+}
 
 }
 
@@ -25867,4 +25876,29 @@ if(rkr->comemouse)
        return;
    } 
 }
+}
+
+inline void RKRGUI::addpreset(Fl_Widget *w, int num) {
+  const char *name = fl_input("Preset Name?","");
+if(name==NULL) return;
+char NewName[64];
+memset(NewName,0,sizeof(NewName));
+sprintf(NewName,"*%s",name);
+Fl_Choice *s = (Fl_Choice * ) w;
+s->add(NewName);
+
+
+Fl_Menu_*n = (Fl_Menu_*)s->menu();
+Fl_Menu_Item *m = (Fl_Menu_Item*) n; 
+Fl_Menu_Item *p;  
+int k=10;
+
+for(int i=0; i<m->size(); i++)
+    {
+     p=m->next(i);
+     if(i==0)k=p->labelsize();
+     p->labelsize(k);
+     }
+
+rkr->SaveIntPreset(num,NewName);
 }

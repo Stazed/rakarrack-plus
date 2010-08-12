@@ -4128,5 +4128,6 @@ public:
   static int prevnext(int e);
   void getMIDIControl(int num);
   void PrepareML();
+  inline void addpreset(Fl_Widget *w, int num);
 };
 #endif

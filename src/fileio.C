@@ -2350,3 +2350,40 @@ printf("%s\n",buff);
 system(buff);
 }
 
+
+void
+RKR::SaveIntPreset(int num,char *name)
+{
+FILE *fn;
+char tempfile[256];
+char buf[256];
+char sbuf[256];
+memset(tempfile,0,sizeof(tempfile));
+sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
+
+if (( fn = fopen (tempfile, "a")) != NULL)
+{
+memset(buf,0,sizeof(buf));
+getbuf(buf,num);
+memset(sbuf,0,sizeof(sbuf));
+sprintf(sbuf,"%d,%s,%s",num,name,buf);
+fputs(sbuf,fn);
+fclose(fn);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
