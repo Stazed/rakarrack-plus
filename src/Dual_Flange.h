@@ -89,6 +89,8 @@ private:
   float period_const, base, ibase;
   float *ldelay, *rdelay, *zldelay, *zrdelay;
   float oldl, oldr;		//pt. lpf
+  class FPreset *Fpre;
+
 
 };
 

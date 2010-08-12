@@ -94,6 +94,8 @@ private:
   class Resample *U_Resample;
   class Resample *D_Resample;
 
+   class FPreset *Fpre;
+
 
 };
 

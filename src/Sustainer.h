@@ -50,6 +50,8 @@ private:
   int timer, hold;
   float level, fsustain, input,tmpgain;
   float prls, compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
+
+  class FPreset *Fpre; 
 };
 
 

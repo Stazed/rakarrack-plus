@@ -94,6 +94,8 @@ private:
   class Waveshaper *mbwshape1l, *mbwshape2l, *mbwshape3l;
   class Waveshaper *mbwshape1r, *mbwshape2r, *mbwshape3r;
 
+  class FPreset *Fpre;
+
 };
 
 

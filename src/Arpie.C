@@ -332,9 +332,18 @@ Arpie::setpreset (int npreset)
     {62, 64, 28, 64, 100, 90, 55, 0, 4}
   };
 
+  if(npreset>NUM_PRESETS-1)  
+    {   
+     Fpre->ReadPreset(24,npreset-NUM_PRESETS+1);    
+     for (int n = 0; n < PRESET_SIZE; n++)    
+     changepar (n, pdata[n]);    
+    }    
+  else                                      
+  {     
 
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
+  }
   Ppreset = npreset;
 };
 

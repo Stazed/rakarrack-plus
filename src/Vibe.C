@@ -492,8 +492,18 @@ Vibe::setpreset (int npreset)
     {127, 360, 10, 0, 0, 64, 0, 0, 0, 37}
     
   };
-  for (int n = 0; n < PRESET_SIZE; n++)
-    changepar (n, presets[npreset][n]);
+
+  if(npreset>NUM_PRESETS-1)  
+  {   
+   Fpre->ReadPreset(45,npreset-NUM_PRESETS+1);    
+   for (int n = 0; n < PRESET_SIZE; n++)    
+   changepar (n, pdata[n]);    
+  }    
+  else                                      
+  {     
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, presets[npreset][n]);
+  }
 
 };
 

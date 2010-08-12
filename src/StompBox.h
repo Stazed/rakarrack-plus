@@ -64,6 +64,7 @@ private:
   AnalogFilter *ranti, *lanti;
   class Waveshaper *lwshape, *rwshape, *lwshape2, *rwshape2;  
 
+  class FPreset *Fpre;
 
 };
 

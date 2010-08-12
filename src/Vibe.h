@@ -101,6 +101,7 @@ float cn1[8], cn0[8], cd1[8], cd0[8];
 float ecn1[8], ecn0[8], ecd1[8], ecd0[8];
 float on1[8], on0[8], od1[8], od0[8];
 
+   class FPreset *Fpre;
 
 
 };

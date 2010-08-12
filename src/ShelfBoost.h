@@ -57,6 +57,8 @@ private:
 
   class AnalogFilter *RB1l, *RB1r;
 
+   class FPreset *Fpre;
+
 };
 
 

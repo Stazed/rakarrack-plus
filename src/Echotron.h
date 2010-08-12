@@ -131,6 +131,8 @@ float dlyrange;
 
   } filterbank[ECHOTRON_MAXFILTERS];
 
+   class FPreset *Fpre;
+
 };
 
 

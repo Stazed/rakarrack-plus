@@ -112,6 +112,7 @@ private:
  
   class AnalogFilter *lpfl, *lpfr;	//filters
 
+  class FPreset *Fpre;
 
 };
 

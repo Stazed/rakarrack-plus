@@ -177,9 +177,18 @@ Gate::Gate_Change_Preset (int npreset)
     {0, -20, 1, 2, 6703, 76, 2}
   };
 
-  for (int n = 0; n < PRESET_SIZE; n++)
+  if(npreset>NUM_PRESETS-1)
+   {
+ 
+   Fpre->ReadPreset(16,npreset-NUM_PRESETS+1);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   Gate_Change(n + 1, pdata[n]);
+  }
+   else
+   {
+    for (int n = 0; n < PRESET_SIZE; n++)
     Gate_Change (n + 1, presets[npreset][n]);
-
+   }
 
 }
 

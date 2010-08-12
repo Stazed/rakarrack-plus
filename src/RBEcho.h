@@ -81,6 +81,8 @@ private:
   float *ldelay, *rdelay;
   float oldl, oldr;		//pt. lpf
   float  Srate_Attack_Coeff;
+
+  class FPreset *Fpre;
 };
 
 

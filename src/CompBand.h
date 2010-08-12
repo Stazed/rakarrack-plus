@@ -97,6 +97,8 @@ private:
 
   Compressor *CL,*CML,*CMH,*CH;  
 
+  class FPreset *Fpre;
+
 };
 
 #endif

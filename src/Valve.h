@@ -83,6 +83,7 @@ private:
   
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
   class HarmEnhancer *harm;
+  class FPreset *Fpre;
 
 };
 

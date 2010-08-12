@@ -278,9 +278,18 @@ MBDist::setpreset (int npreset)
     {0, 64, 0, 30, 64, 19, 25, 26, 20, 51, 83, 0, 329, 800, 0}
      
   };
+  if(npreset>NUM_PRESETS-1)  
+    {   
+     Fpre->ReadPreset(23,npreset-NUM_PRESETS+1);    
+     for (int n = 0; n < PRESET_SIZE; n++)    
+     changepar (n, pdata[n]);    
+    }    
+  else                                      
+  {     
 
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
+  }
   Ppreset = npreset;
   cleanup ();
 };

@@ -83,6 +83,7 @@ private:
   AnalogFilter  *lr, *hr;
   AnalogFilter  *mlr,*mhr;
   
+  class FPreset *Fpre;
 
 };
 

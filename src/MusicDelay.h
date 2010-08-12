@@ -84,6 +84,9 @@ private:
   float gain1, gain2;
   float *ldelay1, *rdelay1, *ldelay2, *rdelay2;
   float oldl1, oldr1, oldl2, oldr2;	//pt. lpf
+
+  class FPreset *Fpre;
+
 };
 
 

@@ -332,8 +332,19 @@ MusicDelay::setpreset (int npreset)
     {67, 0, 3, 7, 0, 59, 0, 127, 6, 69, 60, 127, 127}
   };
 
-  for (int n = 0; n < PRESET_SIZE; n++)
+  if(npreset>NUM_PRESETS-1)
+   {
+ 
+   Fpre->ReadPreset(15,npreset-NUM_PRESETS+1);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, pdata[n]);
+  }
+   else
+   {
+    for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
+   }  
+    
   Ppreset = (int) npreset;
 };
 

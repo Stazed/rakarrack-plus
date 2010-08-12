@@ -90,6 +90,7 @@ private:
   float C, Clp, Chp;	        // Capacitor
   EffectLFO lfo;	         //Filter modulator
 
+  class FPreset *Fpre;
 
 };
 

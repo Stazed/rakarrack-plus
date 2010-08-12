@@ -84,6 +84,8 @@ private:
   EffectLFO lfo;		//lfo-ul RyanWah
   class RBFilter *filterl, *filterr;
 
+   class FPreset *Fpre;
+
 
 };
 

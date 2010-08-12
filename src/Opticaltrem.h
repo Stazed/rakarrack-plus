@@ -60,6 +60,8 @@ private:
   float rpanning, lpanning; 
   EffectLFO lfo;
 
+  class FPreset *Fpre;
+
 };
 
 #endif

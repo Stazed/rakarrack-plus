@@ -100,6 +100,7 @@ private:
 
   PitchShifter *PS;
 
+  class FPreset *Fpre;
 };
 
 #endif

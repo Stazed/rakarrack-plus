@@ -87,6 +87,8 @@ private:
 
   EffectLFO lfo1,lfo2;  
 
+  class FPreset *Fpre;
+
 };
 
 

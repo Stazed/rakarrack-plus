@@ -314,9 +314,19 @@ NewDist::setpreset (int npreset)
     {0, 64, 64, 43, 77, 16, 0, 2983, 118, 83, 0}
   };
 
-
-  for (int n = 0; n < PRESET_SIZE; n++)
+  if(npreset>NUM_PRESETS-1)
+   {
+ 
+   Fpre->ReadPreset(17,npreset-NUM_PRESETS+1);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, pdata[n]);
+  }
+   else
+   {
+    for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
+   }
+  
   Ppreset = npreset;
   cleanup ();
 };

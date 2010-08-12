@@ -166,8 +166,18 @@ Opticaltrem::setpreset (int npreset)
     {127, 480, 0, 3, 32, 64}  
     
   };
+
+  if(npreset>NUM_PRESETS-1)  
+    {   
+     Fpre->ReadPreset(44,npreset-NUM_PRESETS+1);    
+     for (int n = 0; n < PRESET_SIZE; n++)    
+     changepar (n, pdata[n]);    
+    }    
+  else                                      
+  {     
   for (int n = 0; n < PRESET_SIZE; n++)
-    changepar (n, presets[npreset][n]);
+  changepar (n, presets[npreset][n]);
+  }
 
 };
 

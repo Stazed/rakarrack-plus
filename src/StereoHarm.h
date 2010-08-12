@@ -103,7 +103,7 @@ private:
 
   PitchShifter *PSl, *PSr;
 
-
+  class FPreset *Fpre;
 };
 
 #endif

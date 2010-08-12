@@ -91,6 +91,7 @@ private:
   class Filter *filterl, *filterr;
   class FilterParams *filterpars;  
 
+  class FPreset *Fpre;
 
 };
 

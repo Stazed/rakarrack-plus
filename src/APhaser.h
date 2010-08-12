@@ -83,6 +83,8 @@ private:
   float CFs;		// A constant derived from capacitor and resistor relationships
 
 
+  class FPreset *Fpre;
+
 };
 
 #endif

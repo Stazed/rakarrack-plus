@@ -335,8 +335,18 @@ MBVvol::setpreset (int npreset)
     {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2}
   };
 
+  if(npreset>NUM_PRESETS-1)  
+    {   
+     Fpre->ReadPreset(28,npreset-NUM_PRESETS+1);    
+     for (int n = 0; n < PRESET_SIZE; n++)    
+     changepar (n, pdata[n]);    
+    }    
+  else                                      
+  {     
+
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
+  }
   Ppreset = npreset;
   cleanup ();
 };

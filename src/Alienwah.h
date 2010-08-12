@@ -82,6 +82,8 @@ private:
   float panning, fb, depth, lrcross, phase;
   struct COMPLEXTYPE oldl[MAX_ALIENWAH_DELAY], oldr[MAX_ALIENWAH_DELAY];
   COMPLEXTYPE oldclfol, oldclfor;
+  class FPreset *Fpre;
+
 };
 
 #endif

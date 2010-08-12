@@ -80,6 +80,9 @@ private:
   float oldl, oldr;		//pt. lpf
 
   float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2, pregain1, pregain2;
+ 
+  class FPreset *Fpre;
+
 };
 
 

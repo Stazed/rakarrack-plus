@@ -62,6 +62,8 @@ private:
 
   class HarmEnhancer *harm;
 
+  class FPreset *Fpre;
+
 };
 
 

@@ -105,7 +105,7 @@ private:
   class Resample *D_Resample;
 
   PitchShifter *PS;
-
+  class FPreset *Fpre;
 
 };
 

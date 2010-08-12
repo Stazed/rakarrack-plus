@@ -90,7 +90,8 @@ private:
 
 
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
-
+  
+  class FPreset *Fpre;
 
 };
 

@@ -163,8 +163,20 @@ Pan::setpreset (int npreset)
     {64, 64, 80, 0, 0, 0, 10, 0, 1}
   };
 
+  if(npreset>NUM_PRESETS-1)
+   {
+ 
+   Fpre->ReadPreset(13,npreset-NUM_PRESETS+1);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, pdata[n]);
+  }
+   else
+   {
+
   for (int n = 0; n < PRESET_SIZE; n++)
     changepar (n, presets[npreset][n]);
+   }
+
   Ppreset = npreset;
 
 
