@@ -131,6 +131,7 @@ private:
   float *idelay;
 
   class AnalogFilter *lpf, *hpf;	//filters
+  class FPreset *Fpre;
 
 };
 

@@ -74,7 +74,7 @@ private:
   float oldlgain, oldrgain;
 
   EffectLFO lfo;		//lfo-ul Phaser
-
+  class FPreset *Fpre;
 
 };
 

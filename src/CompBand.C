@@ -72,10 +72,10 @@ CompBand::CompBand (float * efxoutl_, float * efxoutr_)
   CMH = new Compressor(efxoutl,efxoutr);
   CH = new Compressor(efxoutl,efxoutr);
 
-  CL->Compressor_Change_Preset(5);  
-  CML->Compressor_Change_Preset(5);  
-  CMH->Compressor_Change_Preset(5);  
-  CH->Compressor_Change_Preset(5);  
+  CL->Compressor_Change_Preset(0,5);  
+  CML->Compressor_Change_Preset(0,5);  
+  CMH->Compressor_Change_Preset(0,5);  
+  CH->Compressor_Change_Preset(0,5);  
 
 
   //default values

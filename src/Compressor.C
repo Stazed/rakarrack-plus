@@ -209,7 +209,7 @@ Compressor::getpar (int np)
 
 
 void
-Compressor::Compressor_Change_Preset (int npreset)
+Compressor::Compressor_Change_Preset (int dgui, int npreset)
 {
 
   const int PRESET_SIZE = 10;
@@ -233,10 +233,18 @@ Compressor::Compressor_Change_Preset (int npreset)
 
   };
 
-
+    if((dgui)&&(npreset>2))
+    { 
+    Fpre->ReadPreset(1,npreset-2); 
+    for (int n = 1; n < PRESET_SIZE; n++)
+    Compressor_Change (n , pdata[n-1]);
+     
+    }   
+    else
+    {
     for (int n = 1; n < PRESET_SIZE; n++)
     Compressor_Change (n , presets[npreset][n-1]);
-
+    }
 
 }
 

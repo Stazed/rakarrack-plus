@@ -35,7 +35,7 @@ public:
   Distorsion (float * efxoutl_, float * efxoutr_);
   ~Distorsion ();
   void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
+  void setpreset (int dgui, int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
@@ -74,6 +74,7 @@ private:
   float panning, lrcross, octave_memoryl, togglel, octave_memoryr,toggler,octmix;
   AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
   class Waveshaper *dwshapel, *dwshaper;
+  class FPreset *Fpre;
 
 };
 

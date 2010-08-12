@@ -70,7 +70,7 @@ Distorsion::Distorsion (float * efxoutl_, float * efxoutr_)
   octave_memoryr = -1.0;
   octmix = 0.0;
  
-  setpreset (Ppreset);
+  setpreset (1,Ppreset);
   cleanup ();
 };
 
@@ -275,7 +275,7 @@ Distorsion::setoctave (int Poctave)
 };
 
 void
-Distorsion::setpreset (int npreset)
+Distorsion::setpreset (int dgui, int npreset)
 {
   const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 6;
@@ -295,10 +295,31 @@ Distorsion::setpreset (int npreset)
   };
 
 
+ if((dgui==0) && (npreset>5))
+  {
+   Fpre->ReadPreset(2,npreset-5);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, pdata[n]);
+   }
+  else
+  if((dgui==1) && (npreset>1))
+  {   
+   Fpre->ReadPreset(3,npreset-1);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, pdata[n]);
+  }
+  else
+  {
   for (int n = 0; n < PRESET_SIZE; n++)
-    changepar (n, presets[npreset][n]);
+  changepar (n, presets[npreset][n]);
+  }
   Ppreset = npreset;
   cleanup ();
+
+
+
+
+
 };
 
 

@@ -1554,7 +1554,7 @@ void RKRGUI::cb_compress_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_compress_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12001))rkr->efx_Compressor->Compressor_Change_Preset((int) o->value());
+if((ud==0)||(ud==12001))rkr->efx_Compressor->Compressor_Change_Preset(1,(int) o->value());
 compress_threshold->value(rkr->efx_Compressor->getpar(1));
 compress_Ratio->value(rkr->efx_Compressor->getpar(2));
 compress_output->value(rkr->efx_Compressor->getpar(3));
@@ -1684,7 +1684,7 @@ void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_dist_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset((int)(o->value()+2));
+if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset(0,(int)(o->value()+2));
 dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
 dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
@@ -1880,7 +1880,7 @@ void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_ovrd_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset((int) o->value());
+if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
 ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
@@ -2150,7 +2150,7 @@ void RKRGUI::cb_chorus_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_chorus_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset((int) o->value());
+if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
 chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -2487,7 +2487,7 @@ void RKRGUI::cb_flanger_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_flanger_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset((int)(o->value()+5));
+if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
 flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));

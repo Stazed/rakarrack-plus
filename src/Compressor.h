@@ -29,6 +29,7 @@
 #define COMPRESSOR_H
 
 #include "global.h"
+#include "FPreset.h"
 
 class Compressor
 {
@@ -41,7 +42,7 @@ public:
   void out (float * smps_l, float * smps_r);
 
   void Compressor_Change (int np, int value);
-  void Compressor_Change_Preset (int npreset);
+  void Compressor_Change_Preset (int dgui,int npreset);
   int getpar (int npar);
   void cleanup ();
 
@@ -101,7 +102,8 @@ private:
   float coeff_kk;               
   float lpeak;
   float rpeak;  
-
+  
+  class FPreset *Fpre;
 
 };
 

@@ -49,7 +49,7 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
   lpfr = new AnalogFilter(2, lfreq, 1, 0);
  
   limiter = new Compressor (inputl, inputr);
-  limiter->Compressor_Change_Preset(4);
+  limiter->Compressor_Change_Preset(0,4);
   calcula_mag(Rmag);
 }
 

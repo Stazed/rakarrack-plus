@@ -34,7 +34,7 @@ public:
   Chorus (float * efxoutl_, float * efxoutr_);
   ~Chorus ();
   void out (float * smpsl, float * smpsr);
-  void setpreset (int npreset);
+  void setpreset (int dgui, int npreset);
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
@@ -77,6 +77,9 @@ private:
   float *delayl, *delayr;
   float getdelay (float xlfo);
   float dllo, mdel;
+  
+  class FPreset *Fpre;
+  
 };
 
 #endif

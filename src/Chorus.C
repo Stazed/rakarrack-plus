@@ -37,7 +37,7 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_)
   delayr = new float[maxdelay];
 
   Ppreset = 0;
-  setpreset (Ppreset);
+  setpreset (0,Ppreset);
 
   lfo.effectlfoout (&lfol, &lfor);
   dl2 = getdelay (lfol);
@@ -207,7 +207,7 @@ Chorus::setlrcross (int Plrcross)
 };
 
 void
-Chorus::setpreset (int npreset)
+Chorus::setpreset (int dgui, int npreset)
 {
   const int PRESET_SIZE = 12;
   const int NUM_PRESETS = 10;
@@ -234,9 +234,29 @@ Chorus::setpreset (int npreset)
     {64, 64, 34, 105, 0, 24, 39, 19, 17, 0, 0, 1}
   };
 
+
+ if((dgui==0) && (npreset>4))
+  {
+   Fpre->ReadPreset(5,npreset-4);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, pdata[n]);
+
+   }
+  else
+  if((dgui==1) && (npreset>9))
+  {   
+   Fpre->ReadPreset(7,npreset-9);
+   for (int n = 0; n < PRESET_SIZE; n++)
+   changepar (n, pdata[n]);
+  }
+  else
+  {
   for (int n = 0; n < PRESET_SIZE; n++)
-    changepar (n, presets[npreset][n]);
+  changepar (n, presets[npreset][n]);
+  }
   Ppreset = npreset;
+
+
 };
 
 
