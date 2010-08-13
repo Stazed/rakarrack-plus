@@ -4132,5 +4132,6 @@ public:
   void add_name(Fl_Widget *w, char *name);
   Fl_Widget * FindWidget(int num);
   void ReadIntPresets();
+  inline void delpreset(Fl_Widget *w, int num);
 };
 #endif

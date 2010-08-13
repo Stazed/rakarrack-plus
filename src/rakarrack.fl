@@ -846,13 +846,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1481 37 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -2759,7 +2758,7 @@ flanger_dpth->value(rkr->efx_Flanger->getpar(6));
 flanger_delay->value(rkr->efx_Flanger->getpar(7));
 flanger_fb->value(rkr->efx_Flanger->getpar(8));
 flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
-flanger_subs->value(rkr->efx_Flanger->getpar(11));} selected
+flanger_subs->value(rkr->efx_Flanger->getpar(11));}
           xywh {398 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -16304,6 +16303,25 @@ return 1;
 
 }
 
+
+if(Fl::event_key(65535))
+{
+ Fl_Widget *w = Fl::belowmouse();
+ long long k = (long long) w->user_data();
+ if((k>11999) && (k<12100)) 
+ ((RKRGUI*)(w->parent()->parent()->user_data()))->delpreset(w,k-12000);
+return 1;
+
+}
+
+
+
+
+
+
+
+
+
 }
 
 return 0;} {}
@@ -16432,5 +16450,29 @@ if (( fn = fopen (tempfile, "r")) != NULL)
      }
  fclose(fn);
 }} {}
+  }
+  Function {delpreset(Fl_Widget *w, int num)} {open return_type {inline void}
+  } {
+    code {if(num==12) return;
+int ok;
+char temp2[128];
+char Rname[128];
+Fl_Choice *s = (Fl_Choice * ) w;
+if(strncmp(s->text(),"*",1)!=0) 
+{
+ fl_message("Released Internal Presets can not be deleted ");
+ return;
+} 
+
+sprintf(temp2,"Delete? \\"%s\\"",s->text());
+ok=fl_choice(temp2,"No","Yes",NULL);
+if (!ok) return;
+memset(Rname,0,sizeof(Rname));
+sprintf(Rname,"%s",s->text());
+s->remove(s->value());
+s->value(0);
+s->redraw();
+rkr->DelIntPreset(num,Rname);} {selected
+    }
   }
 } 

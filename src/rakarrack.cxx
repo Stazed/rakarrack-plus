@@ -25824,6 +25824,25 @@ return 1;
 
 }
 
+
+if(Fl::event_key(65535))
+{
+ Fl_Widget *w = Fl::belowmouse();
+ long long k = (long long) w->user_data();
+ if((k>11999) && (k<12100)) 
+ ((RKRGUI*)(w->parent()->parent()->user_data()))->delpreset(w,k-12000);
+return 1;
+
+}
+
+
+
+
+
+
+
+
+
 }
 
 return 0;
@@ -25956,4 +25975,27 @@ if (( fn = fopen (tempfile, "r")) != NULL)
      }
  fclose(fn);
 }
+}
+
+inline void RKRGUI::delpreset(Fl_Widget *w, int num) {
+  if(num==12) return;
+int ok;
+char temp2[128];
+char Rname[128];
+Fl_Choice *s = (Fl_Choice * ) w;
+if(strncmp(s->text(),"*",1)!=0) 
+{
+ fl_message("Released Internal Presets can not be deleted ");
+ return;
+} 
+
+sprintf(temp2,"Delete? \"%s\"",s->text());
+ok=fl_choice(temp2,"No","Yes",NULL);
+if (!ok) return;
+memset(Rname,0,sizeof(Rname));
+sprintf(Rname,"%s",s->text());
+s->remove(s->value());
+s->value(0);
+s->redraw();
+rkr->DelIntPreset(num,Rname);
 }

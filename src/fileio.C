@@ -2376,14 +2376,54 @@ fclose(fn);
 
 
 
+void
+RKR::DelIntPreset(int num, char *name)
+{
+FILE *fn;
+FILE *fs;
+char *rname;
+int eff=0;
+char orden[1024];
+char tempfile[256];
+char tempfile2[256];
+char buf[256];
+char rbuf[256];
+
+char *sbuf;
+memset(tempfile,0,sizeof(tempfile));
+memset(tempfile2,0,sizeof(tempfile));
+memset(orden,0,sizeof(tempfile));
 
 
+sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
+if (( fs = fopen (tempfile, "r")) == NULL) return;
 
+sprintf (tempfile2, "%s%s", getenv ("HOME"), "/.rkrtemp");
+if (( fn = fopen (tempfile2, "w")) != NULL)
+{
+  memset(buf,0,sizeof(buf));
+  while (fgets (buf, sizeof buf, fs) != NULL)
+  {
+    sbuf = buf;
+    memset(rbuf,0,sizeof(rbuf));
+    sprintf(rbuf,"%s",buf);
+    sscanf(buf,"%d",&eff);
+    rname = strsep(&sbuf,",");
+    rname = strsep(&sbuf,",");
+    if((eff==num)&&(strcmp(rname,name)==0))
+    {
+    continue;
+    }
+    else fputs(rbuf,fn);
+    memset(buf,0,sizeof(buf));
 
+   }      
+}
+fclose(fs);
+fclose(fn);
 
+sprintf(orden,"mv %s %s\n",tempfile2,tempfile);
+system(orden);
 
-
-
-
-
+}
 

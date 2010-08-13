@@ -207,6 +207,7 @@ public:
   void putbuf (char *buf, int j);
   void savefile (char *filename);
   void SaveIntPreset(int num, char *name);
+  void DelIntPreset(int num, char *name);
   void loadskin (char *filename);
   void saveskin (char *filename);
   int loadbank (char *filename);
