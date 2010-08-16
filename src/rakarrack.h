@@ -3286,6 +3286,12 @@ private:
   void cb_nidi_activar_i(Fl_Light_Button*, void*);
   static void cb_nidi_activar(Fl_Light_Button*, void*);
 public:
+  Fl_Choice *MIDIOctave;
+private:
+  void cb_MIDIOctave_i(Fl_Choice*, void*);
+  static void cb_MIDIOctave(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_MIDIOctave[];
+public:
   Fl_Counter *Midi_out_Counter;
 private:
   void cb_Midi_out_Counter_i(Fl_Counter*, void*);

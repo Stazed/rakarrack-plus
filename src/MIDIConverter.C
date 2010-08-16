@@ -128,7 +128,7 @@ MIDIConverter::displayFrequency (float ffreq)
 
 
   cents = lrintf (1200.0f * (logf (ffreq / nfreq) / LOG_2));
-  lanota = 24 + (octave * 12) + note - 3;
+  lanota = 24 + (Moctave * 12) + (octave * 12) + note - 3;
 
 
   if ((noteoff) & (hay))

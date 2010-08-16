@@ -8766,6 +8766,7 @@ rkr->efx_MIDIConverter->panic();
 
 
 rkr->MIDIConverter_Bypass=(int)o->value();
+Midi_out_Counter->do_callback();
 
 ChangeActives();
 MIDI_LABEL->redraw_label();
@@ -8773,6 +8774,44 @@ MIDI_LABEL->redraw_label();
 void RKRGUI::cb_nidi_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_nidi_activar_i(o,v);
 }
+
+void RKRGUI::cb_MIDIOctave_i(Fl_Choice* o, void*) {
+  switch((int)o->value())
+{
+  case 0:
+  rkr->efx_MIDIConverter->Moctave=-2;
+  break;
+  
+  case 1:
+  rkr->efx_MIDIConverter->Moctave=-1;
+  break;
+
+  case 2:
+  rkr->efx_MIDIConverter->Moctave=0;
+  break;
+
+  case 3:
+  rkr->efx_MIDIConverter->Moctave=1;
+  break;
+
+  case 4:
+  rkr->efx_MIDIConverter->Moctave=2;
+  break;
+
+};
+}
+void RKRGUI::cb_MIDIOctave(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MIDIOctave_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_MIDIOctave[] = {
+ {"-2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"-1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"0", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_Midi_out_Counter_i(Fl_Counter* o, void*) {
   rkr->efx_MIDIConverter->setmidichannel((int)o->value()-1);
@@ -19569,10 +19608,20 @@ R average.");
         nidi_activar->callback((Fl_Callback*)cb_nidi_activar, (void*)(2));
         nidi_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* nidi_activar
-      { Midi_out_Counter = new Fl_Counter(601, 95, 60, 20, "Channel");
+      { MIDIOctave = new Fl_Choice(624, 118, 37, 16, "Octave");
+        MIDIOctave->down_box(FL_BORDER_BOX);
+        MIDIOctave->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        MIDIOctave->labelsize(8);
+        MIDIOctave->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MIDIOctave->textsize(10);
+        MIDIOctave->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MIDIOctave->callback((Fl_Callback*)cb_MIDIOctave, (void*)(12));
+        MIDIOctave->menu(menu_MIDIOctave);
+      } // Fl_Choice* MIDIOctave
+      { Midi_out_Counter = new Fl_Counter(601, 89, 60, 17, "Channel");
         Midi_out_Counter->type(1);
         Midi_out_Counter->color((Fl_Color)62);
-        Midi_out_Counter->labelsize(10);
+        Midi_out_Counter->labelsize(9);
         Midi_out_Counter->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Midi_out_Counter->minimum(1);
         Midi_out_Counter->maximum(16);
@@ -21219,6 +21268,7 @@ rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
 rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
 rkr->MidiCh--;
+
 rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh,1);
 rkr->HarCh--;
 rakarrack.get(rkr->PrefNom("Limiter Position"),rkr->flpos,0);
@@ -21262,6 +21312,11 @@ rkr->efx_MIDIConverter->setTriggerAdjust(k);
 rakarrack.get(rkr->PrefNom("Velocity Adjust"),k,50);
 Vel_Adj->value(k);
 rkr->efx_MIDIConverter->setVelAdjust(k);
+
+rakarrack.get(rkr->PrefNom("Converter Octave"),k,2);
+MIDIOctave->value(k);
+MIDIOctave->do_callback();
+
 
 //Tap Tempo
 
@@ -21330,6 +21385,8 @@ rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
 rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
 rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
+rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDIOctave->value());
+
 
 //Booster
 rakarrack.set(rkr->PrefNom("Booster"),rkr->booster);

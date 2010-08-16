@@ -59,6 +59,7 @@ public:
   int velocity;
   int moutdatasize;
   int ev_count; 
+  int Moctave;
 
   float VelVal;
   jack_midi_data_t  moutdata[2048];  

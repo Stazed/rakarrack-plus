@@ -1,5 +1,8 @@
 ==v0.6.x (  /  /2010) ==
 
+- Added MIDI Converter Octave +/- 24
+- User Internal Effect Presets can be added and Removed with Insert/Delete
+  keys
 - F2/F3 Down/Up Output Volume
 - Auto Assign option in settings, MIDI Control is assigned when rigth mouse
 - a parameter and MIDI Control message comes.
