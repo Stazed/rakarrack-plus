@@ -2391,8 +2391,8 @@ char rbuf[256];
 
 char *sbuf;
 memset(tempfile,0,sizeof(tempfile));
-memset(tempfile2,0,sizeof(tempfile));
-memset(orden,0,sizeof(tempfile));
+memset(tempfile2,0,sizeof(tempfile2));
+memset(orden,0,sizeof(orden));
 
 
 sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
@@ -2427,3 +2427,30 @@ system(orden);
 
 }
 
+void
+RKR::MergeIntPreset(char *filename)
+{
+
+char orden[1024];
+char tempfile[256];
+char tempfile2[256];
+
+memset(tempfile,0,sizeof(tempfile));
+memset(tempfile2,0,sizeof(tempfile2));
+memset(orden,0,sizeof(orden));
+
+
+sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
+sprintf (tempfile2, "%s%s", getenv ("HOME"), "/.rkrtemp");
+
+
+sprintf(orden,"cat %s %s > %s\n",tempfile,filename,tempfile2);
+system(orden);
+
+memset(orden,0,sizeof(orden));
+
+sprintf(orden,"mv %s %s\n",tempfile2,tempfile);
+system(orden);
+
+
+}

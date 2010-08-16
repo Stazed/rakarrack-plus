@@ -856,11 +856,11 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File}
+          label {&File} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -917,7 +917,7 @@ rkr->sschema = scheme_ch->value();
 
 
 rkr->saveskin(filename);}
-            xywh {0 0 36 21} labelcolor 7 divider
+            xywh {0 0 36 21} divider
           }
           MenuItem ConvertReverb {
             label {&Convert Reverb IR File}
@@ -931,6 +931,15 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
 rkr->ConvertReverbFile(filename);
 rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
+            xywh {0 0 36 21} divider
+          }
+          MenuItem ImportPresets {
+            label {Import Internal Presets}
+            callback {char *filename;
+filename=fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
+if (filename==NULL) return;
+rkr->MergeIntPreset(filename);
+Show_Next_Time();} selected
             xywh {0 0 36 21} divider
           }
           MenuItem salir {
@@ -12081,8 +12090,7 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -16509,7 +16517,7 @@ if (( fn = fopen (tempfile, "r")) != NULL)
  fclose(fn);
 }} {}
   }
-  Function {delpreset(Fl_Widget *w, int num)} {open return_type {inline void}
+  Function {delpreset(Fl_Widget *w, int num)} {return_type {inline void}
   } {
     code {if(num==12) return;
 int ok;

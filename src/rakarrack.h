@@ -129,6 +129,11 @@ private:
   void cb_ConvertReverb_i(Fl_Menu_*, void*);
   static void cb_ConvertReverb(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *ImportPresets;
+private:
+  void cb_ImportPresets_i(Fl_Menu_*, void*);
+  static void cb_ImportPresets(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *salir;
 private:
   void cb_salir_i(Fl_Menu_*, void*);

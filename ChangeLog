@@ -1,5 +1,6 @@
 ==v0.6.x (  /  /2010) ==
 
+- Added Menu entry to import Internal Preset Archives
 - Added MIDI Converter Octave +/- 24
 - User Internal Effect Presets can be added and Removed with Insert/Delete
   keys

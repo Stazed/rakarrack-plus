@@ -882,6 +882,17 @@ void RKRGUI::cb_ConvertReverb(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ConvertReverb_i(o,v);
 }
 
+void RKRGUI::cb_ImportPresets_i(Fl_Menu_*, void*) {
+  char *filename;
+filename=fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
+if (filename==NULL) return;
+rkr->MergeIntPreset(filename);
+Show_Next_Time();
+}
+void RKRGUI::cb_ImportPresets(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_ImportPresets_i(o,v);
+}
+
 void RKRGUI::cb_salir_i(Fl_Menu_*, void*) {
   Principal->do_callback();
 }
@@ -972,8 +983,9 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"Load &Bank", 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank_M, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"Save B&ank", 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank_M, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
  {"Load S&kin", 0,  (Fl_Callback*)RKRGUI::cb_Load_Skin, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {"Save Sk&in", 0,  (Fl_Callback*)RKRGUI::cb_Save_Skin, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
+ {"Save Sk&in", 0,  (Fl_Callback*)RKRGUI::cb_Save_Skin, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
  {"&Convert Reverb IR File", 0,  (Fl_Callback*)RKRGUI::cb_ConvertReverb, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Import Internal Presets", 0,  (Fl_Callback*)RKRGUI::cb_ImportPresets, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
  {"Exit", 0x78,  (Fl_Callback*)RKRGUI::cb_salir, 0, 0, FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {"&Bank", 0x62,  (Fl_Callback*)RKRGUI::cb_Bank_Menu, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -997,14 +1009,15 @@ Fl_Menu_Item* RKRGUI::Save_Bank_M = RKRGUI::menu_MenuP + 5;
 Fl_Menu_Item* RKRGUI::Load_Skin = RKRGUI::menu_MenuP + 6;
 Fl_Menu_Item* RKRGUI::Save_Skin = RKRGUI::menu_MenuP + 7;
 Fl_Menu_Item* RKRGUI::ConvertReverb = RKRGUI::menu_MenuP + 8;
-Fl_Menu_Item* RKRGUI::salir = RKRGUI::menu_MenuP + 9;
-Fl_Menu_Item* RKRGUI::Bank_Menu = RKRGUI::menu_MenuP + 11;
-Fl_Menu_Item* RKRGUI::Ajustes = RKRGUI::menu_MenuP + 13;
-Fl_Menu_Item* RKRGUI::ML_Menu = RKRGUI::menu_MenuP + 14;
-Fl_Menu_Item* RKRGUI::ACI_Menu = RKRGUI::menu_MenuP + 15;
-Fl_Menu_Item* RKRGUI::Ayuda = RKRGUI::menu_MenuP + 17;
-Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 18;
-Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 19;
+Fl_Menu_Item* RKRGUI::ImportPresets = RKRGUI::menu_MenuP + 9;
+Fl_Menu_Item* RKRGUI::salir = RKRGUI::menu_MenuP + 10;
+Fl_Menu_Item* RKRGUI::Bank_Menu = RKRGUI::menu_MenuP + 12;
+Fl_Menu_Item* RKRGUI::Ajustes = RKRGUI::menu_MenuP + 14;
+Fl_Menu_Item* RKRGUI::ML_Menu = RKRGUI::menu_MenuP + 15;
+Fl_Menu_Item* RKRGUI::ACI_Menu = RKRGUI::menu_MenuP + 16;
+Fl_Menu_Item* RKRGUI::Ayuda = RKRGUI::menu_MenuP + 18;
+Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 19;
+Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 20;
 
 void RKRGUI::cb_MT_i(Fl_Box*, void*) {
   highlight();
