@@ -1378,7 +1378,7 @@ void RKRGUI::cb_eq_activar_i(Fl_Light_Button* o, void*) {
   rkr->EQ1_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
-findpos(0,(int)o->value());
+findpos(0,(int)o->value(),o);
 }
 void RKRGUI::cb_eq_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eq_activar_i(o,v);
@@ -1559,7 +1559,7 @@ void RKRGUI::cb_eq_10(SliderW* o, void* v) {
 void RKRGUI::cb_compress_activar_i(Fl_Light_Button* o, void*) {
   rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
-findpos(1,(int)o->value());
+findpos(1,(int)o->value(),o);
 }
 void RKRGUI::cb_compress_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_activar_i(o,v);
@@ -1689,7 +1689,7 @@ void RKRGUI::cb_dist_activar_i(Fl_Light_Button* o, void*) {
   rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
-findpos(2,(int)o->value());
+findpos(2,(int)o->value(),o);
 }
 void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_activar_i(o,v);
@@ -1885,7 +1885,7 @@ void RKRGUI::cb_ovrd_activar_i(Fl_Light_Button* o, void*) {
   rkr->Overdrive_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
-findpos(3,(int)o->value());
+findpos(3,(int)o->value(),o);
 }
 void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_activar_i(o,v);
@@ -2032,7 +2032,7 @@ void RKRGUI::cb_echo_activar_i(Fl_Light_Button* o, void*) {
   rkr->Echo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
-findpos(4,(int)o->value());
+findpos(4,(int)o->value(),o);
 }
 void RKRGUI::cb_echo_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_activar_i(o,v);
@@ -2155,7 +2155,7 @@ void RKRGUI::cb_chorus_activar_i(Fl_Light_Button* o, void*) {
   rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
-findpos(5,(int)o->value());
+findpos(5,(int)o->value(),o);
 }
 void RKRGUI::cb_chorus_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_activar_i(o,v);
@@ -2322,7 +2322,7 @@ void RKRGUI::cb_phaser_activar_i(Fl_Light_Button* o, void*) {
   rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
-findpos(6,(int)o->value());
+findpos(6,(int)o->value(),o);
 }
 void RKRGUI::cb_phaser_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_phaser_activar_i(o,v);
@@ -2492,7 +2492,7 @@ void RKRGUI::cb_flanger_activar_i(Fl_Light_Button* o, void*) {
   rkr->Flanger_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
-findpos(7,(int)o->value());
+findpos(7,(int)o->value(),o);
 }
 void RKRGUI::cb_flanger_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_activar_i(o,v);
@@ -2647,7 +2647,7 @@ void RKRGUI::cb_reverb_activar_i(Fl_Light_Button* o, void*) {
   rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
-findpos(8,(int)o->value());
+findpos(8,(int)o->value(),o);
 }
 void RKRGUI::cb_reverb_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_reverb_activar_i(o,v);
@@ -2799,7 +2799,7 @@ void RKRGUI::cb_eqp_activar_i(Fl_Light_Button* o, void*) {
   rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
-findpos(9,(int)o->value());
+findpos(9,(int)o->value(),o);
 }
 void RKRGUI::cb_eqp_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_eqp_activar_i(o,v);
@@ -2954,7 +2954,7 @@ void RKRGUI::cb_WhaWha_activar_i(Fl_Light_Button* o, void*) {
   rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
-findpos(10,(int)o->value());
+findpos(10,(int)o->value(),o);
 }
 void RKRGUI::cb_WhaWha_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WhaWha_activar_i(o,v);
@@ -3108,7 +3108,7 @@ void RKRGUI::cb_Alienwah_activar_i(Fl_Light_Button* o, void*) {
   rkr->Alienwah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
-findpos(11,(int)o->value());
+findpos(11,(int)o->value(),o);
 }
 void RKRGUI::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_activar_i(o,v);
@@ -3267,7 +3267,7 @@ void RKRGUI::cb_Alienwah_LR(SliderW* o, void* v) {
 
 void RKRGUI::cb_Cabinet_activar_i(Fl_Light_Button* o, void*) {
   rkr->Cabinet_Bypass=(int)o->value();
-findpos(12,(int)o->value());
+findpos(12,(int)o->value(),o);
 }
 void RKRGUI::cb_Cabinet_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_activar_i(o,v);
@@ -3306,7 +3306,7 @@ void RKRGUI::cb_pan_activar_i(Fl_Light_Button* o, void*) {
   rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
-findpos(13,(int)o->value());
+findpos(13,(int)o->value(),o);
 }
 void RKRGUI::cb_pan_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_activar_i(o,v);
@@ -3429,7 +3429,7 @@ if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);
-findpos(14,(int)o->value());
+findpos(14,(int)o->value(),o);
 }
 void RKRGUI::cb_har_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_har_activar_i(o,v);
@@ -3572,7 +3572,7 @@ void RKRGUI::cb_musdelay_activar_i(Fl_Light_Button* o, void*) {
   rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
-findpos(15,(int)o->value());
+findpos(15,(int)o->value(),o);
 }
 void RKRGUI::cb_musdelay_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_activar_i(o,v);
@@ -3769,7 +3769,7 @@ void RKRGUI::cb_musdelay_damp(SliderW* o, void* v) {
 
 void RKRGUI::cb_gate_activar_i(Fl_Light_Button* o, void*) {
   rkr->Gate_Bypass=(int)o->value();
-findpos(16,(int)o->value());
+findpos(16,(int)o->value(),o);
 }
 void RKRGUI::cb_gate_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_activar_i(o,v);
@@ -3850,7 +3850,7 @@ void RKRGUI::cb_newdist_activar_i(Fl_Light_Button* o, void*) {
   rkr->NewDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
-findpos(17,(int)o->value());
+findpos(17,(int)o->value(),o);
 }
 void RKRGUI::cb_newdist_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_newdist_activar_i(o,v);
@@ -4016,7 +4016,7 @@ void RKRGUI::cb_aphaser_activar_i(Fl_Light_Button* o, void*) {
   rkr->APhaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
-findpos(18,(int)o->value());
+findpos(18,(int)o->value(),o);
 }
 void RKRGUI::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_activar_i(o,v);
@@ -4180,7 +4180,7 @@ void RKRGUI::cb_valve_activar_i(Fl_Light_Button* o, void*) {
   rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
-findpos(19,(int)o->value());
+findpos(19,(int)o->value(),o);
 }
 void RKRGUI::cb_valve_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_activar_i(o,v);
@@ -4354,7 +4354,7 @@ void RKRGUI::cb_dflange_activar_i(Fl_Light_Button* o, void*) {
   rkr->DFlange_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
-findpos(20,(int)o->value());
+findpos(20,(int)o->value(),o);
 }
 void RKRGUI::cb_dflange_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_activar_i(o,v);
@@ -4550,7 +4550,7 @@ void RKRGUI::cb_ring_activar_i(Fl_Light_Button* o, void*) {
   rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
-findpos(21,(int)o->value());
+findpos(21,(int)o->value(),o);
 }
 void RKRGUI::cb_ring_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ring_activar_i(o,v);
@@ -4737,7 +4737,7 @@ void RKRGUI::cb_exciter_activar_i(Fl_Light_Button* o, void*) {
   rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
-findpos(22,(int)o->value());
+findpos(22,(int)o->value(),o);
 }
 void RKRGUI::cb_exciter_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_exciter_activar_i(o,v);
@@ -4933,7 +4933,7 @@ void RKRGUI::cb_mbdist_activar_i(Fl_Light_Button* o, void*) {
   rkr->MBDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
-findpos(23,(int)o->value());
+findpos(23,(int)o->value(),o);
 }
 void RKRGUI::cb_mbdist_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_activar_i(o,v);
@@ -5133,7 +5133,7 @@ void RKRGUI::cb_arpie_activar_i(Fl_Light_Button* o, void*) {
   rkr->Arpie_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
-findpos(24,(int)o->value());
+findpos(24,(int)o->value(),o);
 }
 void RKRGUI::cb_arpie_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_arpie_activar_i(o,v);
@@ -5310,7 +5310,7 @@ Fl_Menu_Item RKRGUI::menu_arpie_pattern[] = {
 
 void RKRGUI::cb_expander_activar_i(Fl_Light_Button* o, void*) {
   rkr->Expander_Bypass=(int)o->value();
-findpos(25,(int)o->value());
+findpos(25,(int)o->value(),o);
 }
 void RKRGUI::cb_expander_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_activar_i(o,v);
@@ -5426,7 +5426,7 @@ void RKRGUI::cb_shuffle_activar_i(Fl_Light_Button* o, void*) {
   rkr->Shuffle_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shuffle->cleanup();
-findpos(26,(int)o->value());
+findpos(26,(int)o->value(),o);
 }
 void RKRGUI::cb_shuffle_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shuffle_activar_i(o,v);
@@ -5590,7 +5590,7 @@ void RKRGUI::cb_synthfilter_activar_i(Fl_Light_Button* o, void*) {
   rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
-findpos(27,(int)o->value());
+findpos(27,(int)o->value(),o);
 }
 void RKRGUI::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_activar_i(o,v);
@@ -5794,7 +5794,7 @@ void RKRGUI::cb_mbvvol_activar_i(Fl_Light_Button* o, void*) {
   rkr->MBVvol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBVvol->cleanup();
-findpos(28,(int)o->value());
+findpos(28,(int)o->value(),o);
 }
 void RKRGUI::cb_mbvvol_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_activar_i(o,v);
@@ -5962,7 +5962,7 @@ void RKRGUI::cb_convo_activar_i(Fl_Light_Button* o, void*) {
   rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
-findpos(29,(int)o->value());
+findpos(29,(int)o->value(),o);
 }
 void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_activar_i(o,v);
@@ -6117,7 +6117,7 @@ void RKRGUI::cb_looper_activar_i(Fl_Light_Button* o, void*) {
   rkr->Looper_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
-findpos(30,(int)o->value());
+findpos(30,(int)o->value(),o);
 }
 void RKRGUI::cb_looper_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_looper_activar_i(o,v);
@@ -6323,7 +6323,7 @@ void RKRGUI::cb_ryanwah_activar_i(Fl_Light_Button* o, void*) {
   rkr->RyanWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RyanWah->cleanup();
-findpos(31,(int)o->value());
+findpos(31,(int)o->value(),o);
 }
 void RKRGUI::cb_ryanwah_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ryanwah_activar_i(o,v);
@@ -6509,7 +6509,7 @@ void RKRGUI::cb_rbecho_activar_i(Fl_Light_Button* o, void*) {
   rkr->RBEcho_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RBEcho->cleanup();
-findpos(32,(int)o->value());
+findpos(32,(int)o->value(),o);
 }
 void RKRGUI::cb_rbecho_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_rbecho_activar_i(o,v);
@@ -6659,7 +6659,7 @@ void RKRGUI::cb_coil_activar_i(Fl_Light_Button* o, void*) {
   rkr->CoilCrafter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
-findpos(33,(int)o->value());
+findpos(33,(int)o->value(),o);
 }
 void RKRGUI::cb_coil_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_activar_i(o,v);
@@ -6802,7 +6802,7 @@ void RKRGUI::cb_shelf_activar_i(Fl_Light_Button* o, void*) {
   rkr->ShelfBoost_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_ShelfBoost->cleanup();
-findpos(34,(int)o->value());
+findpos(34,(int)o->value(),o);
 }
 void RKRGUI::cb_shelf_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shelf_activar_i(o,v);
@@ -6888,7 +6888,7 @@ void RKRGUI::cb_vo_activar_i(Fl_Light_Button* o, void*) {
   rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-findpos(35,(int)o->value());
+findpos(35,(int)o->value(),o);
 }
 void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_activar_i(o,v);
@@ -7005,7 +7005,7 @@ void RKRGUI::cb_sus_activar_i(Fl_Light_Button* o, void*) {
   rkr->Sustainer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sustainer->cleanup();
-findpos(36,(int)o->value());
+findpos(36,(int)o->value(),o);
 }
 void RKRGUI::cb_sus_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_sus_activar_i(o,v);
@@ -7056,7 +7056,7 @@ void RKRGUI::cb_seq_activar_i(Fl_Light_Button* o, void*) {
   rkr->Sequence_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
-findpos(37,(int)o->value());
+findpos(37,(int)o->value(),o);
 }
 void RKRGUI::cb_seq_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_seq_activar_i(o,v);
@@ -7279,7 +7279,7 @@ void RKRGUI::cb_shifter_activar_i(Fl_Light_Button* o, void*) {
   rkr->Shifter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
-findpos(38,(int)o->value());
+findpos(38,(int)o->value(),o);
 }
 void RKRGUI::cb_shifter_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shifter_activar_i(o,v);
@@ -7435,7 +7435,7 @@ void RKRGUI::cb_stomp_activar_i(Fl_Light_Button* o, void*) {
   rkr->StompBox_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
-findpos(39,(int)o->value());
+findpos(39,(int)o->value(),o);
 }
 void RKRGUI::cb_stomp_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_activar_i(o,v);
@@ -7550,7 +7550,7 @@ Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
 void RKRGUI::cb_revtron_activar_i(Fl_Light_Button* o, void*) {
   rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-findpos(40,(int)o->value());
+findpos(40,(int)o->value(),o);
 }
 void RKRGUI::cb_revtron_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_revtron_activar_i(o,v);
@@ -7783,7 +7783,7 @@ Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
 void RKRGUI::cb_echotron_activar_i(Fl_Light_Button* o, void*) {
   rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
-findpos(41,(int)o->value());
+findpos(41,(int)o->value(),o);
 }
 void RKRGUI::cb_echotron_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_activar_i(o,v);
@@ -8022,7 +8022,7 @@ rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 Chord(1);
-findpos(42,(int)o->value());
+findpos(42,(int)o->value(),o);
 }
 void RKRGUI::cb_shar_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_activar_i(o,v);
@@ -8216,7 +8216,7 @@ void RKRGUI::cb_cband_activar_i(Fl_Light_Button* o, void*) {
   rkr->CompBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
-findpos(43,(int)o->value());
+findpos(43,(int)o->value(),o);
 }
 void RKRGUI::cb_cband_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_activar_i(o,v);
@@ -8411,7 +8411,7 @@ void RKRGUI::cb_otrem_activar_i(Fl_Light_Button* o, void*) {
   rkr->Opticaltrem_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
-findpos(44,(int)o->value());
+findpos(44,(int)o->value(),o);
 }
 void RKRGUI::cb_otrem_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_otrem_activar_i(o,v);
@@ -8512,7 +8512,7 @@ void RKRGUI::cb_vibe_activar_i(Fl_Light_Button* o, void*) {
   rkr->Vibe_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Vibe->cleanup();
-findpos(45,(int)o->value());
+findpos(45,(int)o->value(),o);
 }
 void RKRGUI::cb_vibe_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_activar_i(o,v);
@@ -9610,6 +9610,22 @@ PutBackground();
 }
 void RKRGUI::cb_BI_Browser(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
+}
+
+void RKRGUI::cb_Enable_Deactivation_i(Fl_Check_Button* o, void*) {
+  rkr->deactivate=(int) o->value();
+if(!rkr->deactivate) Show_Next_Time();
+}
+void RKRGUI::cb_Enable_Deactivation(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Enable_Deactivation_i(o,v);
+}
+
+void RKRGUI::cb_Enable_DeacHide_i(Fl_Check_Button* o, void*) {
+  rkr->deachide=(int) o->value();
+if(!rkr->deachide) Show_Next_Time();
+}
+void RKRGUI::cb_Enable_DeacHide(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Enable_DeacHide_i(o,v);
 }
 
 void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
@@ -20036,7 +20052,6 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
-        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -20073,35 +20088,49 @@ R average.");
           CLLabel->labelsize(11);
           CLLabel->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         } // Fl_Box* CLLabel
-        { B_C = new Fl_Button(15, 390, 90, 25, "Buttons");
+        { B_C = new Fl_Button(15, 380, 90, 25, "Buttons");
           B_C->callback((Fl_Callback*)cb_B_C, (void*)(77));
         } // Fl_Button* B_C
-        { A_C = new Fl_Button(120, 390, 90, 25, "Labels");
+        { A_C = new Fl_Button(120, 380, 90, 25, "Labels");
           A_C->callback((Fl_Callback*)cb_A_C, (void*)(77));
         } // Fl_Button* A_C
-        { L_C = new Fl_Button(225, 390, 90, 25, "Leds");
+        { L_C = new Fl_Button(225, 380, 90, 25, "Leds");
           L_C->callback((Fl_Callback*)cb_L_C, (void*)(77));
         } // Fl_Button* L_C
-        { K_C = new Fl_Button(330, 390, 90, 25, "Background");
+        { K_C = new Fl_Button(330, 380, 90, 25, "Background");
           K_C->callback((Fl_Callback*)cb_K_C, (void*)(77));
         } // Fl_Button* K_C
-        { Enable_Back = new Fl_Check_Button(162, 432, 23, 20, "Enable Background Image");
+        { Enable_Back = new Fl_Check_Button(162, 409, 23, 20, "Enable Background Image");
           Enable_Back->down_box(FL_DOWN_BOX);
           Enable_Back->labelsize(11);
           Enable_Back->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           Enable_Back->callback((Fl_Callback*)cb_Enable_Back);
           Enable_Back->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* Enable_Back
-        { BackFiname = new Fl_File_Input(10, 470, 390, 30, "Background Image");
+        { BackFiname = new Fl_File_Input(10, 445, 390, 30, "Background Image");
           BackFiname->labelsize(11);
           BackFiname->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           BackFiname->textsize(12);
           BackFiname->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
           BackFiname->align(FL_ALIGN_TOP_LEFT);
         } // Fl_File_Input* BackFiname
-        { BI_Browser = new Fl_Button(410, 480, 65, 20, "Browse");
+        { BI_Browser = new Fl_Button(410, 455, 65, 20, "Browse");
           BI_Browser->callback((Fl_Callback*)cb_BI_Browser, (void*)(77));
         } // Fl_Button* BI_Browser
+        { Enable_Deactivation = new Fl_Check_Button(165, 482, 23, 20, "Activate/Deactivate Effects");
+          Enable_Deactivation->down_box(FL_DOWN_BOX);
+          Enable_Deactivation->labelsize(11);
+          Enable_Deactivation->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Enable_Deactivation->callback((Fl_Callback*)cb_Enable_Deactivation);
+          Enable_Deactivation->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* Enable_Deactivation
+        { Enable_DeacHide = new Fl_Check_Button(169, 500, 23, 20, "Hide Unused Effect Widgets");
+          Enable_DeacHide->down_box(FL_DOWN_BOX);
+          Enable_DeacHide->labelsize(11);
+          Enable_DeacHide->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Enable_DeacHide->callback((Fl_Callback*)cb_Enable_DeacHide);
+          Enable_DeacHide->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* Enable_DeacHide
         Look->end();
       } // Fl_Group* Look
       { AUDIO_SET = new Fl_Group(0, 26, 635, 502, "Audio");
@@ -20478,6 +20507,7 @@ R average.");
         MIDI_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         MIDI_SET->user_data((void*)(1));
         MIDI_SET->align(FL_ALIGN_LEFT);
+        MIDI_SET->hide();
         { Fondo8 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo8
         { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
@@ -21208,6 +21238,11 @@ rakarrack.get(rkr->PrefNom("Labels Color"),a, -1075849984);
 rakarrack.get(rkr->PrefNom("Schema"), k,0);
 scheme_ch->value(k);
 scheme_ch->do_callback();
+rakarrack.get(rkr->PrefNom("Activate/Deactivate Effects"), rkr->deactivate,0);
+rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide,0);
+
+
+
 
 Principal->resize(x,y,w,h);
 
@@ -21376,6 +21411,9 @@ rakarrack.set(rkr->PrefNom("Foreground Color"), (int)fore_color);
 rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
 rakarrack.set(rkr->PrefNom("Labels Color"),(int) label_color);
 rakarrack.set(rkr->PrefNom("Schema"), (int) scheme_ch->value());
+rakarrack.set(rkr->PrefNom("Activate/Deactivate Effects"), (int) rkr->deactivate);
+rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
+
 
 if ((Preset_Counter->value() >0) && (Preset_Counter->value() < 61))
 
@@ -22227,6 +22265,7 @@ switch (rkr->efx_order[i])
        eq_activar->shortcut(s[i]);
        EQ->show();
        if(rkr->EQ1_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->EQ1_Bypass,eq_activar);
        break;   
        
        
@@ -22236,6 +22275,8 @@ switch (rkr->efx_order[i])
        compress_activar->shortcut(s[i]);
        COMPRESS->show();
        if(rkr->Compressor_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Compressor_Bypass,compress_activar);
+
        break;   
        
      case 2:
@@ -22244,6 +22285,7 @@ switch (rkr->efx_order[i])
        dist_activar->shortcut(s[i]);
        DIST->show();
        if(rkr->Distorsion_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Distorsion_Bypass,dist_activar);
        break;   
        
      case 3:
@@ -22252,6 +22294,7 @@ switch (rkr->efx_order[i])
        ovrd_activar->shortcut(s[i]);
        OVRD->show();
        if(rkr->Overdrive_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Overdrive_Bypass,ovrd_activar);
        break;   
        
      case 4:
@@ -22260,6 +22303,7 @@ switch (rkr->efx_order[i])
        echo_activar->shortcut(s[i]);
        ECHO->show();
        if(rkr->Echo_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Echo_Bypass,echo_activar);
        break;   
        
      case 5:
@@ -22268,6 +22312,7 @@ switch (rkr->efx_order[i])
        chorus_activar->shortcut(s[i]);
        CHORUS->show();
        if(rkr->Chorus_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Chorus_Bypass,chorus_activar);
        break;   
        
      case 6:
@@ -22276,6 +22321,7 @@ switch (rkr->efx_order[i])
        phaser_activar->shortcut(s[i]);
        PHASER->show();
        if(rkr->Phaser_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Phaser_Bypass,phaser_activar);
        break;   
        
      case 7:
@@ -22284,6 +22330,7 @@ switch (rkr->efx_order[i])
        flanger_activar->shortcut(s[i]);
        FLANGER->show();
        if(rkr->Flanger_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Flanger_Bypass,flanger_activar);
        break;    
                     
      case 8:
@@ -22292,6 +22339,7 @@ switch (rkr->efx_order[i])
        reverb_activar->shortcut(s[i]);
        REVERB->show();
        if(rkr->Reverb_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Reverb_Bypass,reverb_activar);
        break;     
        
        
@@ -22301,6 +22349,7 @@ switch (rkr->efx_order[i])
        eqp_activar->shortcut(s[i]);
        PEQ->show();
        if(rkr->EQ2_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->EQ2_Bypass,eqp_activar);
        break;     
      
      case 10:
@@ -22309,6 +22358,7 @@ switch (rkr->efx_order[i])
        WhaWha_activar->shortcut(s[i]);
        WHAWHA->show();
        if(rkr->WhaWha_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->WhaWha_Bypass,WhaWha_activar);
        break;  
        
      case 11:
@@ -22317,6 +22367,7 @@ switch (rkr->efx_order[i])
        Alienwah_activar->shortcut(s[i]);
        ALIENWAH->show();
        if(rkr->Alienwah_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Alienwah_Bypass,Alienwah_activar);
        break;      
      
      case 12:
@@ -22325,6 +22376,7 @@ switch (rkr->efx_order[i])
        Cabinet_activar->shortcut(s[i]);
        CABINET->show();
        if(rkr->Cabinet_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Cabinet_Bypass,Cabinet_activar);
        break;
     
      case 13:
@@ -22333,6 +22385,7 @@ switch (rkr->efx_order[i])
        pan_activar->shortcut(s[i]);
        PAN->show();
        if(rkr->Pan_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Pan_Bypass,pan_activar);
        break;
      
      case 14:
@@ -22340,6 +22393,7 @@ switch (rkr->efx_order[i])
        har_activar->shortcut(s[i]);
        HAR->show();
        if(rkr->Harmonizer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Harmonizer_Bypass,har_activar);
        break;
      
      case 15:
@@ -22347,6 +22401,7 @@ switch (rkr->efx_order[i])
        musdelay_activar->shortcut(s[i]);
        MUSDELAY->show();
        if(rkr->MusDelay_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->MusDelay_Bypass,musdelay_activar);
        break; 
        
      case 16:
@@ -22354,6 +22409,7 @@ switch (rkr->efx_order[i])
        gate_activar->shortcut(s[i]);
        GATE->show();
        if(rkr->Gate_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Gate_Bypass,gate_activar);
        break;  
      
      case 17:
@@ -22361,6 +22417,7 @@ switch (rkr->efx_order[i])
        newdist_activar->shortcut(s[i]);
        NEWDIST->show();
        if(rkr->NewDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->NewDist_Bypass,newdist_activar);
        break;
       
      case 18:
@@ -22368,6 +22425,7 @@ switch (rkr->efx_order[i])
        aphaser_activar->shortcut(s[i]);
        APHASER->show();
        if(rkr->APhaser_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->APhaser_Bypass,aphaser_activar);
        break;
  
      case 19:
@@ -22375,6 +22433,7 @@ switch (rkr->efx_order[i])
        valve_activar->shortcut(s[i]);
        VALVE->show();
        if(rkr->Valve_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Valve_Bypass,valve_activar);
        break;
 
      case 20:
@@ -22382,6 +22441,7 @@ switch (rkr->efx_order[i])
        dflange_activar->shortcut(s[i]);
        DFLANGE->show();
        if(rkr->DFlange_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->DFlange_Bypass,dflange_activar);
        break;
 
      case 21:
@@ -22389,6 +22449,7 @@ switch (rkr->efx_order[i])
        ring_activar->shortcut(s[i]);
        RING->show();
        if(rkr->Ring_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Ring_Bypass,ring_activar);
        break;
 
      case 22:
@@ -22396,6 +22457,7 @@ switch (rkr->efx_order[i])
        exciter_activar->shortcut(s[i]);
        EXCITER->show();
        if(rkr->Exciter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Exciter_Bypass,exciter_activar);
        break;
 
      case 23:
@@ -22403,6 +22465,7 @@ switch (rkr->efx_order[i])
        mbdist_activar->shortcut(s[i]);
        MBDIST->show();
        if(rkr->MBDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->MBDist_Bypass,mbdist_activar);
        break;
      
      case 24:
@@ -22410,6 +22473,7 @@ switch (rkr->efx_order[i])
        arpie_activar->shortcut(s[i]);
        ARPIE->show();
        if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Arpie_Bypass,arpie_activar);
        break;   
 
      case 25:
@@ -22417,6 +22481,7 @@ switch (rkr->efx_order[i])
        expander_activar->shortcut(s[i]);
        EXPANDER->show();
        if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Expander_Bypass,expander_activar);
        break;   
 
      case 26:
@@ -22424,6 +22489,7 @@ switch (rkr->efx_order[i])
        shuffle_activar->shortcut(s[i]);
        SHUFFLE->show();
        if(rkr->Shuffle_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Shuffle_Bypass,shuffle_activar);
        break;   
 
      case 27:
@@ -22431,6 +22497,7 @@ switch (rkr->efx_order[i])
        synthfilter_activar->shortcut(s[i]);
        SYNTHFILTER->show();
        if(rkr->Synthfilter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Synthfilter_Bypass,synthfilter_activar);
        break;   
 
      case 28:
@@ -22438,6 +22505,7 @@ switch (rkr->efx_order[i])
        mbvvol_activar->shortcut(s[i]);
        MBVVOL->show();
        if(rkr->MBVvol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->MBVvol_Bypass,mbvvol_activar);
        break;   
 
      case 29:
@@ -22445,6 +22513,7 @@ switch (rkr->efx_order[i])
        convo_activar->shortcut(s[i]);
        CONVOLOTRON->show();
        if(rkr->Convol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Convol_Bypass,convo_activar);
        break; 
 
      case 30:
@@ -22452,6 +22521,7 @@ switch (rkr->efx_order[i])
        looper_activar->shortcut(s[i]);
        LOOPER->show();
        if(rkr->Looper_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Looper_Bypass,looper_activar);
        break; 
 
      case 31:
@@ -22459,6 +22529,7 @@ switch (rkr->efx_order[i])
        ryanwah_activar->shortcut(s[i]);
        RYANWAH->show();
        if(rkr->RyanWah_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->RyanWah_Bypass,ryanwah_activar);
        break; 
 
      case 32:
@@ -22466,6 +22537,7 @@ switch (rkr->efx_order[i])
        rbecho_activar->shortcut(s[i]);
        RBECHO->show();
        if(rkr->RBEcho_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->RBEcho_Bypass,rbecho_activar);
        break; 
 
      case 33:
@@ -22473,6 +22545,7 @@ switch (rkr->efx_order[i])
        coil_activar->shortcut(s[i]);
        COILCRAFTER->show();
        if(rkr->CoilCrafter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->CoilCrafter_Bypass,coil_activar);
        break; 
 
      case 34:
@@ -22480,6 +22553,7 @@ switch (rkr->efx_order[i])
        shelf_activar->shortcut(s[i]);
        SHELFBOOST->show();
        if(rkr->ShelfBoost_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->ShelfBoost_Bypass,shelf_activar);
        break; 
 
    case 35:
@@ -22487,6 +22561,7 @@ switch (rkr->efx_order[i])
        vo_activar->shortcut(s[i]);
        VOCODER->show();
        if(rkr->Vocoder_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Vocoder_Bypass,vo_activar);
        break; 
 
    case 36:
@@ -22494,6 +22569,7 @@ switch (rkr->efx_order[i])
        sus_activar->shortcut(s[i]);
        SUSTAINER->show();
        if(rkr->Sustainer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Sustainer_Bypass,sus_activar);
        break; 
 
    case 37:
@@ -22501,6 +22577,7 @@ switch (rkr->efx_order[i])
        seq_activar->shortcut(s[i]);
        SEQUENCE->show();
        if(rkr->Sequence_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Sequence_Bypass,seq_activar);
        break; 
 
    case 38:
@@ -22508,6 +22585,7 @@ switch (rkr->efx_order[i])
        shifter_activar->shortcut(s[i]);
        SHIFTER->show();
        if(rkr->Shifter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Shifter_Bypass,shifter_activar);
        break; 
 
    case 39:
@@ -22515,6 +22593,7 @@ switch (rkr->efx_order[i])
        stomp_activar->shortcut(s[i]);
        STOMPBOX->show();
        if(rkr->StompBox_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->StompBox_Bypass,stomp_activar);
        break; 
 
    case 40:
@@ -22522,6 +22601,7 @@ switch (rkr->efx_order[i])
        revtron_activar->shortcut(s[i]);
        REVERBTRON->show();
        if(rkr->Reverbtron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Reverbtron_Bypass,revtron_activar);
        break; 
 
    case 41:
@@ -22529,6 +22609,7 @@ switch (rkr->efx_order[i])
        echotron_activar->shortcut(s[i]);
        ECHOTRON->show();
        if(rkr->Echotron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Echotron_Bypass,echotron_activar);
        break; 
 
    case 42:
@@ -22536,6 +22617,7 @@ switch (rkr->efx_order[i])
        shar_activar->shortcut(s[i]);
        SHAR->show();
        if(rkr->StereoHarm_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->StereoHarm_Bypass,shar_activar);
        break; 
 
    case 43:
@@ -22543,6 +22625,7 @@ switch (rkr->efx_order[i])
        cband_activar->shortcut(s[i]);
        COMPBAND->show();
        if(rkr->CompBand_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->CompBand_Bypass,cband_activar);
        break; 
 
    case 44:
@@ -22550,6 +22633,7 @@ switch (rkr->efx_order[i])
        otrem_activar->shortcut(s[i]);
        OTREM->show();
        if(rkr->Opticaltrem_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Opticaltrem_Bypass,otrem_activar);
        break; 
 
    case 45:
@@ -22557,6 +22641,7 @@ switch (rkr->efx_order[i])
        vibe_activar->shortcut(s[i]);
        VIBE->show();
        if(rkr->Vibe_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Vibe_Bypass,vibe_activar);
        break; 
 
 
@@ -22775,6 +22860,9 @@ if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
 
 rkr->m_displayed = 0;
 Enable_Back->value(rkr->EnableBackgroundImage);
+Enable_Deactivation->value(rkr->deactivate);
+Enable_DeacHide->value(rkr->deachide);
+
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
@@ -25063,7 +25151,7 @@ CLIP_LED->color(fl_darker(FL_RED));
 LMT_LED->color(fl_darker(leds_color));
 }
 
-void RKRGUI::findpos(int num, int value) {
+void RKRGUI::findpos(int num, int value, Fl_Widget *w) {
   int i;
 Fl_Color on = fl_lighter(label_color);
 Fl_Color off= fl_darker(label_color);
@@ -25085,52 +25173,142 @@ for(i=0; i<10; i++)
   {
   
      case 0:
-     if(value) L1->labelcolor(on); else L1->labelcolor(off);
+     if(value) 
+     {
+     L1->labelcolor(on); 
+     act_deact(1,w);
+     }
+     else 
+     {
+     L1->labelcolor(off);
+     act_deact(0,w);
+     }
      L1->redraw_label();
      break;  
      
      case 1:
-     if(value) L2->labelcolor(on); else L2->labelcolor(off);
+     if(value)
+     {
+     L2->labelcolor(on); 
+     act_deact(1,w);
+     }
+     else 
+     {
+     L2->labelcolor(off);
+     act_deact(0,w);
+     }
      L2->redraw_label();
      break;  
        
      case 2:
-     if(value) L3->labelcolor(on); else L3->labelcolor(off);
+     if(value)
+     {
+     L3->labelcolor(on); 
+     act_deact(1,w);
+     }
+     else
+     {
+     L3->labelcolor(off);
+     act_deact(0,w);
+     }
      L3->redraw_label();
      break;  
        
      case 3:
-     if(value) L4->labelcolor(on); else L4->labelcolor(off);
+     if(value)
+     {
+     L4->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L4->labelcolor(off);
+     act_deact(0,w);
+     }
      L4->redraw_label();
      break;  
        
      case 4:
-     if(value) L5->labelcolor(on); else L5->labelcolor(off);
+     if(value)
+     {
+      L5->labelcolor(on);
+      act_deact(1,w);
+     } 
+     else
+     {
+     L5->labelcolor(off);
+     act_deact(0,w);
+     } 
      L5->redraw_label();
      break;  
        
      case 5:
-     if(value) L6->labelcolor(on); else L6->labelcolor(off);
+     if(value)
+     {
+     L6->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L6->labelcolor(off);
+     act_deact(0,w);
+     }
      L6->redraw_label();
      break;  
        
      case 6:
-     if(value) L7->labelcolor(on); else L7->labelcolor(off);
+     if(value)
+     {
+     L7->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L7->labelcolor(off);
+     act_deact(0,w);
+     }
      L7->redraw_label();
      break;  
        
      case 7:
-     if(value) L8->labelcolor(on); else L8->labelcolor(off);
+     if(value)
+     {
+     L8->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L8->labelcolor(off);
+     act_deact(0,w);
+     } 
      L8->redraw_label();
      break;  
        
      case 8:
-     if(value) L9->labelcolor(on); else L9->labelcolor(off);
+     if(value)
+     {
+     L9->labelcolor(on);
+     act_deact(1,w);
+     }
+     else 
+     {
+     L9->labelcolor(off);
+     act_deact(0,w);
+     }
      L9->redraw_label();
      break;  
        
      case 9:
-     if(value) L10->labelcolor(on); else L10->labelcolor(off);
+     if(value)
+     {
+     L10->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L10->labelcolor(off);
+     act_deact(0,w);
+     }
      L10->redraw_label();
      break;  
        
@@ -26068,4 +26246,31 @@ s->remove(s->value());
 s->value(0);
 s->redraw();
 rkr->DelIntPreset(num,Rname);
+}
+
+void RKRGUI::act_deact(int mode,Fl_Widget *w) {
+  if (rkr->deactivate==0) return;
+
+for(int i=0;i<w->parent()->children();i++)
+    {
+        
+       Fl_Widget *k = w->parent()->child(i);   
+       if(k!=w)
+        {
+          if (mode==0) 
+          {
+          k->deactivate(); 
+          if(rkr->deachide) k->hide();
+          }
+          else
+          {
+          k->activate();
+          k->show();
+          k->redraw();
+          }  
+        }   
+         
+         
+         
+    }
 }

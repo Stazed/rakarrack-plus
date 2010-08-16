@@ -856,11 +856,11 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -939,7 +939,7 @@ rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
 filename=fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
 if (filename==NULL) return;
 rkr->MergeIntPreset(filename);
-Show_Next_Time();} selected
+Show_Next_Time();}
             xywh {0 0 36 21} divider
           }
           MenuItem salir {
@@ -1507,7 +1507,7 @@ Fl::focus(Open_Order);
           callback {rkr->EQ1_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
-findpos(0,(int)o->value());}
+findpos(0,(int)o->value(),o);}
           xywh {7 216 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice eq_preset {
@@ -1685,7 +1685,7 @@ rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));}
           user_data 2
           callback {rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
-findpos(1,(int)o->value());}
+findpos(1,(int)o->value(),o);}
           xywh {166 216 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice compress_preset {
@@ -1815,7 +1815,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
           callback {rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
-findpos(2,(int)o->value());}
+findpos(2,(int)o->value(),o);}
           xywh {326 216 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice dist_preset {
@@ -1834,7 +1834,7 @@ dist_lpf->value(rkr->efx_Distorsion->getpar(7));
 dist_hpf->value(rkr->efx_Distorsion->getpar(8));
 dist_st->value(rkr->efx_Distorsion->getpar(9));
 dist_pf->value(rkr->efx_Distorsion->getpar(10));
-dist_oct->value(rkr->efx_Distorsion->getpar(12));} open
+dist_oct->value(rkr->efx_Distorsion->getpar(12));}
           xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -2098,7 +2098,7 @@ rkr->efx_Distorsion->changepar(8,(int)o->value());}
           callback {rkr->Overdrive_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
-findpos(3,(int)o->value());}
+findpos(3,(int)o->value(),o);}
           xywh {485 216 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice ovrd_preset {
@@ -2116,7 +2116,7 @@ ovrd_neg->value(rkr->efx_Overdrive->getpar(6));
 ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
 ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
 ovrd_st->value(rkr->efx_Overdrive->getpar(9));
-ovrd_pf->value(rkr->efx_Overdrive->getpar(10));} open
+ovrd_pf->value(rkr->efx_Overdrive->getpar(10));}
           xywh {557 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -2240,7 +2240,7 @@ rkr->efx_Overdrive->changepar(8,(int)o->value());}
           callback {rkr->Echo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
-findpos(4,(int)o->value());}
+findpos(4,(int)o->value(),o);}
           xywh {644 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice echo_preset {
@@ -2381,7 +2381,7 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
           callback {rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
-findpos(5,(int)o->value());}
+findpos(5,(int)o->value(),o);}
           xywh {7 417 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice chorus_preset {
@@ -2399,7 +2399,7 @@ chorus_dpth->value(rkr->efx_Chorus->getpar(6));
 chorus_delay->value(rkr->efx_Chorus->getpar(7));
 chorus_fb->value(rkr->efx_Chorus->getpar(8));
 chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
-chorus_subs->value(rkr->efx_Chorus->getpar(11));} open
+chorus_subs->value(rkr->efx_Chorus->getpar(11));}
           xywh {79 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -2573,7 +2573,7 @@ rkr->efx_Chorus->changepar(9,(int)(o->value()+64));}
           callback {rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
-findpos(6,(int)o->value());}
+findpos(6,(int)o->value(),o);}
           xywh {166 417 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice phaser_preset {
@@ -2748,7 +2748,7 @@ rkr->efx_Phaser->changepar(9,(int)(o->value()+64));}
           callback {rkr->Flanger_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
-findpos(7,(int)o->value());}
+findpos(7,(int)o->value(),o);}
           xywh {326 417 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice flanger_preset {
@@ -2907,7 +2907,7 @@ rkr->efx_Flanger->changepar(9,(int)(o->value()+64));}
           callback {rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
-findpos(8,(int)o->value());}
+findpos(8,(int)o->value(),o);}
           xywh {485 417 34 18} shortcut 0x39 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice reverb_preset {
@@ -3085,7 +3085,7 @@ rkr->efx_Rev->changepar(8,(int)o->value());}
           callback {rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
-findpos(9,(int)o->value());}
+findpos(9,(int)o->value(),o);}
           xywh {644 417 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice eqp_preset {
@@ -3239,7 +3239,7 @@ rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));}
           callback {rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
-findpos(10,(int)o->value());}
+findpos(10,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice WhaWha_preset {
@@ -3398,7 +3398,7 @@ rkr->efx_WhaWha->changepar(9,(int)o->value());}
           callback {rkr->Alienwah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
-findpos(11,(int)o->value());}
+findpos(11,(int)o->value(),o);}
           xywh {360 27 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice Alienwah_preset {
@@ -3558,7 +3558,7 @@ rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
           label On
           user_data 2
           callback {rkr->Cabinet_Bypass=(int)o->value();
-findpos(12,(int)o->value());}
+findpos(12,(int)o->value(),o);}
           xywh {40 48 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice Cabinet_preset {
@@ -3629,7 +3629,7 @@ findpos(12,(int)o->value());}
           callback {rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
-findpos(13,(int)o->value());}
+findpos(13,(int)o->value(),o);}
           xywh {8 216 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice pan_preset {
@@ -3749,7 +3749,7 @@ if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);
-findpos(14,(int)o->value());}
+findpos(14,(int)o->value(),o);}
           xywh {326 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice har_preset {
@@ -3893,7 +3893,7 @@ Chord(0);}
           callback {rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
-findpos(15,(int)o->value());}
+findpos(15,(int)o->value(),o);}
           xywh {484 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice musdelay_preset {
@@ -4113,7 +4113,7 @@ rkr->efx_MusDelay->changepar(9,(int)o->value());}
           label On
           user_data 2
           callback {rkr->Gate_Bypass=(int)o->value();
-findpos(16,(int)o->value());}
+findpos(16,(int)o->value(),o);}
           xywh {326 417 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice gate_preset {
@@ -4196,7 +4196,7 @@ gate_LPF->value(rkr->efx_Gate->getpar(5));}
           callback {rkr->NewDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
-findpos(17,(int)o->value());}
+findpos(17,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice newdist_preset {
@@ -4359,7 +4359,7 @@ rkr->efx_NewDist->changepar(8,(int)o->value());}
           callback {rkr->APhaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
-findpos(18,(int)o->value());}
+findpos(18,(int)o->value(),o);}
           xywh {325 220 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice aphaser_preset {
@@ -4528,7 +4528,7 @@ rkr->efx_APhaser->changepar(5,(int)o->value());}
           callback {rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
-findpos(19,(int)o->value());}
+findpos(19,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice valve_preset {
@@ -4698,7 +4698,7 @@ rkr->efx_Valve->changepar(7,(int)o->value());}
           callback {rkr->DFlange_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
-findpos(20,(int)o->value());}
+findpos(20,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice dflange_preset {
@@ -4901,7 +4901,7 @@ rkr->efx_DFlange->changepar(13,(int)o->value());}
           callback {rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
-findpos(21,(int)o->value());}
+findpos(21,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice ring_preset {
@@ -5093,7 +5093,7 @@ rkr->efx_Ring->changepar(10,(int)o->value());}
           callback {rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
-findpos(22,(int)o->value());}
+findpos(22,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice exciter_preset {
@@ -5291,7 +5291,7 @@ rkr->efx_Exciter->changepar(10,(int)o->value());}
           callback {rkr->MBDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
-findpos(23,(int)o->value());}
+findpos(23,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice mbdist_preset {
@@ -5497,7 +5497,7 @@ rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
           callback {rkr->Arpie_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
-findpos(24,(int)o->value());}
+findpos(24,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice arpie_preset {
@@ -5718,7 +5718,7 @@ rkr->efx_Arpie->changepar(6,(int)o->value());}
           label On
           user_data 2
           callback {rkr->Expander_Bypass=(int)o->value();
-findpos(25,(int)o->value());}
+findpos(25,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice expander_preset {
@@ -5837,7 +5837,7 @@ rkr->efx_Expander->Expander_Change(6, (int)o->value());}
           callback {rkr->Shuffle_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shuffle->cleanup();
-findpos(26,(int)o->value());}
+findpos(26,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice shuffle_preset {
@@ -6002,7 +6002,7 @@ rkr->efx_Shuffle->changepar(9,(int)o->value());}
           callback {rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
-findpos(27,(int)o->value());}
+findpos(27,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice synthfilter_preset {
@@ -6210,7 +6210,7 @@ rkr->efx_Synthfilter->changepar(15,(int)o->value());}
           callback {rkr->MBVvol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBVvol->cleanup();
-findpos(28,(int)o->value());}
+findpos(28,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice mbvvol_preset {
@@ -6406,7 +6406,7 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
           callback {rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
-findpos(29,(int)o->value());}
+findpos(29,(int)o->value(),o);}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice convo_preset {
@@ -6584,7 +6584,7 @@ rkr->efx_Convol->setfile(100);}
           callback {rkr->Looper_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
-findpos(30,(int)o->value());}
+findpos(30,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice looper_preset {
@@ -6798,7 +6798,7 @@ update_looper();}
           callback {rkr->RyanWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RyanWah->cleanup();
-findpos(31,(int)o->value());}
+findpos(31,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice ryanwah_preset {
@@ -6985,7 +6985,7 @@ rkr->efx_RyanWah->changepar(9,(int)o->value());}
           callback {rkr->RBEcho_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RBEcho->cleanup();
-findpos(32,(int)o->value());}
+findpos(32,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice rbecho_preset {
@@ -7134,7 +7134,7 @@ rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
           callback {rkr->CoilCrafter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
-findpos(33,(int)o->value());}
+findpos(33,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice coil_preset {
@@ -7298,7 +7298,7 @@ rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
           callback {rkr->ShelfBoost_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_ShelfBoost->cleanup();
-findpos(34,(int)o->value());}
+findpos(34,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice shelf_preset {
@@ -7391,7 +7391,7 @@ rkr->efx_ShelfBoost->changepar(1,(int)o->value());}
           callback {rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-findpos(35,(int)o->value());}
+findpos(35,(int)o->value(),o);}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice vo_preset {
@@ -7517,7 +7517,7 @@ rkr->efx_Vocoder->changepar(5,(int)o->value());}
           callback {rkr->Sustainer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sustainer->cleanup();
-findpos(36,(int)o->value());}
+findpos(36,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice sus_preset {
@@ -7575,7 +7575,7 @@ rkr->efx_Sustainer->changepar(1,(int)o->value());}
           callback {rkr->Sequence_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
-findpos(37,(int)o->value());}
+findpos(37,(int)o->value(),o);}
           xywh {325 215 34 16} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice seq_preset {
@@ -7830,7 +7830,7 @@ rkr->efx_Sequence->changepar(12,(int)o->value());}
           callback {rkr->Shifter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
-findpos(38,(int)o->value());}
+findpos(38,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice shifter_preset {
@@ -7994,7 +7994,7 @@ rkr->efx_Shifter->changepar(9,(int)o->value());}
           callback {rkr->StompBox_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
-findpos(39,(int)o->value());}
+findpos(39,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice stomp_preset {
@@ -8148,7 +8148,7 @@ rkr->efx_StompBox->changepar(1,(int)o->value());}
           user_data 2
           callback {rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-findpos(40,(int)o->value());}
+findpos(40,(int)o->value(),o);}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice revtron_preset {
@@ -8418,7 +8418,7 @@ rkr->efx_Reverbtron->setfile(100);}
           user_data 2
           callback {rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
-findpos(41,(int)o->value());}
+findpos(41,(int)o->value(),o);}
           xywh {326 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice echotron_preset {
@@ -8672,7 +8672,7 @@ rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 Chord(1);
-findpos(42,(int)o->value());}
+findpos(42,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice shar_preset {
@@ -8869,7 +8869,7 @@ Chord(1);}
           callback {rkr->CompBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
-findpos(43,(int)o->value());}
+findpos(43,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice cband_preset {
@@ -9060,7 +9060,7 @@ rkr->efx_CompBand->changepar(11,(int)o->value());}
           callback {rkr->Opticaltrem_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
-findpos(44,(int)o->value());}
+findpos(44,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice otrem_preset {
@@ -9173,7 +9173,7 @@ rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));}
           callback {rkr->Vibe_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Vibe->cleanup();
-findpos(45,(int)o->value());}
+findpos(45,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Choice vibe_preset {
@@ -10254,7 +10254,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1500 215 640 528} type Double color 4 hide
+      xywh {1486 201 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -10266,7 +10266,7 @@ Settings->hide();}
         Fl_Group Look {
           label Look
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -10365,7 +10365,7 @@ Fl::get_color(fore_color,r,g,b);
 if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
 fore_color=fl_rgb_color(r,g,b);
 Buttons_Color_Change(fore_color);}
-            xywh {15 390 90 25}
+            xywh {15 380 90 25}
           }
           Fl_Button A_C {
             label Labels
@@ -10375,7 +10375,7 @@ Fl::get_color(label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
 Label_Color_Change(label_color);}
-            xywh {120 390 90 25}
+            xywh {120 380 90 25}
           }
           Fl_Button L_C {
             label Leds
@@ -10385,7 +10385,7 @@ Fl::get_color(leds_color,r,g,b);
 if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
 leds_color=fl_rgb_color(r,g,b);
 Leds_Color_Change(leds_color);}
-            xywh {225 390 90 25}
+            xywh {225 380 90 25}
           }
           Fl_Button K_C {
             label Background
@@ -10395,17 +10395,17 @@ Fl::get_color(back_color,r,g,b);
 if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
 back_color=fl_rgb_color(r,g,b);
 Background_Color_Change(back_color);}
-            xywh {330 390 90 25}
+            xywh {330 380 90 25}
           }
           Fl_Check_Button Enable_Back {
             label {Enable Background Image}
             callback {rkr->EnableBackgroundImage=(int) o->value();
 PutBackground();}
-            xywh {162 432 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+            xywh {162 409 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
           Fl_File_Input BackFiname {
             label {Background Image}
-            xywh {10 470 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+            xywh {10 445 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
           }
           Fl_Button BI_Browser {
             label Browse
@@ -10417,7 +10417,19 @@ filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
 strcpy(rkr->BackgroundImage,filename);
 PutBackground();}
-            xywh {410 480 65 20}
+            xywh {410 455 65 20}
+          }
+          Fl_Check_Button Enable_Deactivation {
+            label {Activate/Deactivate Effects}
+            callback {rkr->deactivate=(int) o->value();
+if(!rkr->deactivate) Show_Next_Time();} selected
+            xywh {165 482 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          }
+          Fl_Check_Button Enable_DeacHide {
+            label {Hide Unused Effect Widgets}
+            callback {rkr->deachide=(int) o->value();
+if(!rkr->deachide) Show_Next_Time();}
+            xywh {169 500 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
           }
         }
         Fl_Group AUDIO_SET {
@@ -10975,7 +10987,7 @@ Show_Next_Time();}
         Fl_Group MIDI_SET {
           label MIDI
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo8 {
             xywh {5 26 630 502}
@@ -11715,6 +11727,11 @@ rakarrack.get(rkr->PrefNom("Labels Color"),a, -1075849984);
 rakarrack.get(rkr->PrefNom("Schema"), k,0);
 scheme_ch->value(k);
 scheme_ch->do_callback();
+rakarrack.get(rkr->PrefNom("Activate/Deactivate Effects"), rkr->deactivate,0);
+rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide,0);
+
+
+
 
 Principal->resize(x,y,w,h);
 
@@ -11882,6 +11899,9 @@ rakarrack.set(rkr->PrefNom("Foreground Color"), (int)fore_color);
 rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
 rakarrack.set(rkr->PrefNom("Labels Color"),(int) label_color);
 rakarrack.set(rkr->PrefNom("Schema"), (int) scheme_ch->value());
+rakarrack.set(rkr->PrefNom("Activate/Deactivate Effects"), (int) rkr->deactivate);
+rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
+
 
 if ((Preset_Counter->value() >0) && (Preset_Counter->value() < 61))
 
@@ -12730,6 +12750,7 @@ switch (rkr->efx_order[i])
        eq_activar->shortcut(s[i]);
        EQ->show();
        if(rkr->EQ1_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->EQ1_Bypass,eq_activar);
        break;   
        
        
@@ -12739,6 +12760,8 @@ switch (rkr->efx_order[i])
        compress_activar->shortcut(s[i]);
        COMPRESS->show();
        if(rkr->Compressor_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Compressor_Bypass,compress_activar);
+
        break;   
        
      case 2:
@@ -12747,6 +12770,7 @@ switch (rkr->efx_order[i])
        dist_activar->shortcut(s[i]);
        DIST->show();
        if(rkr->Distorsion_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Distorsion_Bypass,dist_activar);
        break;   
        
      case 3:
@@ -12755,6 +12779,7 @@ switch (rkr->efx_order[i])
        ovrd_activar->shortcut(s[i]);
        OVRD->show();
        if(rkr->Overdrive_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Overdrive_Bypass,ovrd_activar);
        break;   
        
      case 4:
@@ -12763,6 +12788,7 @@ switch (rkr->efx_order[i])
        echo_activar->shortcut(s[i]);
        ECHO->show();
        if(rkr->Echo_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Echo_Bypass,echo_activar);
        break;   
        
      case 5:
@@ -12771,6 +12797,7 @@ switch (rkr->efx_order[i])
        chorus_activar->shortcut(s[i]);
        CHORUS->show();
        if(rkr->Chorus_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Chorus_Bypass,chorus_activar);
        break;   
        
      case 6:
@@ -12779,6 +12806,7 @@ switch (rkr->efx_order[i])
        phaser_activar->shortcut(s[i]);
        PHASER->show();
        if(rkr->Phaser_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Phaser_Bypass,phaser_activar);
        break;   
        
      case 7:
@@ -12787,6 +12815,7 @@ switch (rkr->efx_order[i])
        flanger_activar->shortcut(s[i]);
        FLANGER->show();
        if(rkr->Flanger_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Flanger_Bypass,flanger_activar);
        break;    
                     
      case 8:
@@ -12795,6 +12824,7 @@ switch (rkr->efx_order[i])
        reverb_activar->shortcut(s[i]);
        REVERB->show();
        if(rkr->Reverb_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Reverb_Bypass,reverb_activar);
        break;     
        
        
@@ -12804,6 +12834,7 @@ switch (rkr->efx_order[i])
        eqp_activar->shortcut(s[i]);
        PEQ->show();
        if(rkr->EQ2_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->EQ2_Bypass,eqp_activar);
        break;     
      
      case 10:
@@ -12812,6 +12843,7 @@ switch (rkr->efx_order[i])
        WhaWha_activar->shortcut(s[i]);
        WHAWHA->show();
        if(rkr->WhaWha_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->WhaWha_Bypass,WhaWha_activar);
        break;  
        
      case 11:
@@ -12820,6 +12852,7 @@ switch (rkr->efx_order[i])
        Alienwah_activar->shortcut(s[i]);
        ALIENWAH->show();
        if(rkr->Alienwah_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Alienwah_Bypass,Alienwah_activar);
        break;      
      
      case 12:
@@ -12828,6 +12861,7 @@ switch (rkr->efx_order[i])
        Cabinet_activar->shortcut(s[i]);
        CABINET->show();
        if(rkr->Cabinet_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Cabinet_Bypass,Cabinet_activar);
        break;
     
      case 13:
@@ -12836,6 +12870,7 @@ switch (rkr->efx_order[i])
        pan_activar->shortcut(s[i]);
        PAN->show();
        if(rkr->Pan_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Pan_Bypass,pan_activar);
        break;
      
      case 14:
@@ -12843,6 +12878,7 @@ switch (rkr->efx_order[i])
        har_activar->shortcut(s[i]);
        HAR->show();
        if(rkr->Harmonizer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Harmonizer_Bypass,har_activar);
        break;
      
      case 15:
@@ -12850,6 +12886,7 @@ switch (rkr->efx_order[i])
        musdelay_activar->shortcut(s[i]);
        MUSDELAY->show();
        if(rkr->MusDelay_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->MusDelay_Bypass,musdelay_activar);
        break; 
        
      case 16:
@@ -12857,6 +12894,7 @@ switch (rkr->efx_order[i])
        gate_activar->shortcut(s[i]);
        GATE->show();
        if(rkr->Gate_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Gate_Bypass,gate_activar);
        break;  
      
      case 17:
@@ -12864,6 +12902,7 @@ switch (rkr->efx_order[i])
        newdist_activar->shortcut(s[i]);
        NEWDIST->show();
        if(rkr->NewDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->NewDist_Bypass,newdist_activar);
        break;
       
      case 18:
@@ -12871,6 +12910,7 @@ switch (rkr->efx_order[i])
        aphaser_activar->shortcut(s[i]);
        APHASER->show();
        if(rkr->APhaser_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->APhaser_Bypass,aphaser_activar);
        break;
  
      case 19:
@@ -12878,6 +12918,7 @@ switch (rkr->efx_order[i])
        valve_activar->shortcut(s[i]);
        VALVE->show();
        if(rkr->Valve_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Valve_Bypass,valve_activar);
        break;
 
      case 20:
@@ -12885,6 +12926,7 @@ switch (rkr->efx_order[i])
        dflange_activar->shortcut(s[i]);
        DFLANGE->show();
        if(rkr->DFlange_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->DFlange_Bypass,dflange_activar);
        break;
 
      case 21:
@@ -12892,6 +12934,7 @@ switch (rkr->efx_order[i])
        ring_activar->shortcut(s[i]);
        RING->show();
        if(rkr->Ring_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Ring_Bypass,ring_activar);
        break;
 
      case 22:
@@ -12899,6 +12942,7 @@ switch (rkr->efx_order[i])
        exciter_activar->shortcut(s[i]);
        EXCITER->show();
        if(rkr->Exciter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Exciter_Bypass,exciter_activar);
        break;
 
      case 23:
@@ -12906,6 +12950,7 @@ switch (rkr->efx_order[i])
        mbdist_activar->shortcut(s[i]);
        MBDIST->show();
        if(rkr->MBDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->MBDist_Bypass,mbdist_activar);
        break;
      
      case 24:
@@ -12913,6 +12958,7 @@ switch (rkr->efx_order[i])
        arpie_activar->shortcut(s[i]);
        ARPIE->show();
        if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Arpie_Bypass,arpie_activar);
        break;   
 
      case 25:
@@ -12920,6 +12966,7 @@ switch (rkr->efx_order[i])
        expander_activar->shortcut(s[i]);
        EXPANDER->show();
        if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Expander_Bypass,expander_activar);
        break;   
 
      case 26:
@@ -12927,6 +12974,7 @@ switch (rkr->efx_order[i])
        shuffle_activar->shortcut(s[i]);
        SHUFFLE->show();
        if(rkr->Shuffle_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Shuffle_Bypass,shuffle_activar);
        break;   
 
      case 27:
@@ -12934,6 +12982,7 @@ switch (rkr->efx_order[i])
        synthfilter_activar->shortcut(s[i]);
        SYNTHFILTER->show();
        if(rkr->Synthfilter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Synthfilter_Bypass,synthfilter_activar);
        break;   
 
      case 28:
@@ -12941,6 +12990,7 @@ switch (rkr->efx_order[i])
        mbvvol_activar->shortcut(s[i]);
        MBVVOL->show();
        if(rkr->MBVvol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->MBVvol_Bypass,mbvvol_activar);
        break;   
 
      case 29:
@@ -12948,6 +12998,7 @@ switch (rkr->efx_order[i])
        convo_activar->shortcut(s[i]);
        CONVOLOTRON->show();
        if(rkr->Convol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Convol_Bypass,convo_activar);
        break; 
 
      case 30:
@@ -12955,6 +13006,7 @@ switch (rkr->efx_order[i])
        looper_activar->shortcut(s[i]);
        LOOPER->show();
        if(rkr->Looper_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Looper_Bypass,looper_activar);
        break; 
 
      case 31:
@@ -12962,6 +13014,7 @@ switch (rkr->efx_order[i])
        ryanwah_activar->shortcut(s[i]);
        RYANWAH->show();
        if(rkr->RyanWah_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->RyanWah_Bypass,ryanwah_activar);
        break; 
 
      case 32:
@@ -12969,6 +13022,7 @@ switch (rkr->efx_order[i])
        rbecho_activar->shortcut(s[i]);
        RBECHO->show();
        if(rkr->RBEcho_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->RBEcho_Bypass,rbecho_activar);
        break; 
 
      case 33:
@@ -12976,6 +13030,7 @@ switch (rkr->efx_order[i])
        coil_activar->shortcut(s[i]);
        COILCRAFTER->show();
        if(rkr->CoilCrafter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->CoilCrafter_Bypass,coil_activar);
        break; 
 
      case 34:
@@ -12983,6 +13038,7 @@ switch (rkr->efx_order[i])
        shelf_activar->shortcut(s[i]);
        SHELFBOOST->show();
        if(rkr->ShelfBoost_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->ShelfBoost_Bypass,shelf_activar);
        break; 
 
    case 35:
@@ -12990,6 +13046,7 @@ switch (rkr->efx_order[i])
        vo_activar->shortcut(s[i]);
        VOCODER->show();
        if(rkr->Vocoder_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Vocoder_Bypass,vo_activar);
        break; 
 
    case 36:
@@ -12997,6 +13054,7 @@ switch (rkr->efx_order[i])
        sus_activar->shortcut(s[i]);
        SUSTAINER->show();
        if(rkr->Sustainer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Sustainer_Bypass,sus_activar);
        break; 
 
    case 37:
@@ -13004,6 +13062,7 @@ switch (rkr->efx_order[i])
        seq_activar->shortcut(s[i]);
        SEQUENCE->show();
        if(rkr->Sequence_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Sequence_Bypass,seq_activar);
        break; 
 
    case 38:
@@ -13011,6 +13070,7 @@ switch (rkr->efx_order[i])
        shifter_activar->shortcut(s[i]);
        SHIFTER->show();
        if(rkr->Shifter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Shifter_Bypass,shifter_activar);
        break; 
 
    case 39:
@@ -13018,6 +13078,7 @@ switch (rkr->efx_order[i])
        stomp_activar->shortcut(s[i]);
        STOMPBOX->show();
        if(rkr->StompBox_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->StompBox_Bypass,stomp_activar);
        break; 
 
    case 40:
@@ -13025,6 +13086,7 @@ switch (rkr->efx_order[i])
        revtron_activar->shortcut(s[i]);
        REVERBTRON->show();
        if(rkr->Reverbtron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Reverbtron_Bypass,revtron_activar);
        break; 
 
    case 41:
@@ -13032,6 +13094,7 @@ switch (rkr->efx_order[i])
        echotron_activar->shortcut(s[i]);
        ECHOTRON->show();
        if(rkr->Echotron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Echotron_Bypass,echotron_activar);
        break; 
 
    case 42:
@@ -13039,6 +13102,7 @@ switch (rkr->efx_order[i])
        shar_activar->shortcut(s[i]);
        SHAR->show();
        if(rkr->StereoHarm_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->StereoHarm_Bypass,shar_activar);
        break; 
 
    case 43:
@@ -13046,6 +13110,7 @@ switch (rkr->efx_order[i])
        cband_activar->shortcut(s[i]);
        COMPBAND->show();
        if(rkr->CompBand_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->CompBand_Bypass,cband_activar);
        break; 
 
    case 44:
@@ -13053,6 +13118,7 @@ switch (rkr->efx_order[i])
        otrem_activar->shortcut(s[i]);
        OTREM->show();
        if(rkr->Opticaltrem_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Opticaltrem_Bypass,otrem_activar);
        break; 
 
    case 45:
@@ -13060,6 +13126,7 @@ switch (rkr->efx_order[i])
        vibe_activar->shortcut(s[i]);
        VIBE->show();
        if(rkr->Vibe_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
+       if(rkr->deactivate) act_deact(rkr->Vibe_Bypass,vibe_activar);
        break; 
 
 
@@ -13274,6 +13341,9 @@ if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
 
 rkr->m_displayed = 0;
 Enable_Back->value(rkr->EnableBackgroundImage);
+Enable_Deactivation->value(rkr->deactivate);
+Enable_DeacHide->value(rkr->deachide);
+
 BFiname->value(rkr->BankFilename);
 BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
@@ -15549,7 +15619,7 @@ UPS_LED->redraw();
 CLIP_LED->color(fl_darker(FL_RED));
 LMT_LED->color(fl_darker(leds_color));} {}
   }
-  Function {findpos(int num, int value)} {} {
+  Function {findpos(int num, int value, Fl_Widget *w)} {} {
     code {int i;
 Fl_Color on = fl_lighter(label_color);
 Fl_Color off= fl_darker(label_color);
@@ -15571,52 +15641,142 @@ for(i=0; i<10; i++)
   {
   
      case 0:
-     if(value) L1->labelcolor(on); else L1->labelcolor(off);
+     if(value) 
+     {
+     L1->labelcolor(on); 
+     act_deact(1,w);
+     }
+     else 
+     {
+     L1->labelcolor(off);
+     act_deact(0,w);
+     }
      L1->redraw_label();
      break;  
      
      case 1:
-     if(value) L2->labelcolor(on); else L2->labelcolor(off);
+     if(value)
+     {
+     L2->labelcolor(on); 
+     act_deact(1,w);
+     }
+     else 
+     {
+     L2->labelcolor(off);
+     act_deact(0,w);
+     }
      L2->redraw_label();
      break;  
        
      case 2:
-     if(value) L3->labelcolor(on); else L3->labelcolor(off);
+     if(value)
+     {
+     L3->labelcolor(on); 
+     act_deact(1,w);
+     }
+     else
+     {
+     L3->labelcolor(off);
+     act_deact(0,w);
+     }
      L3->redraw_label();
      break;  
        
      case 3:
-     if(value) L4->labelcolor(on); else L4->labelcolor(off);
+     if(value)
+     {
+     L4->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L4->labelcolor(off);
+     act_deact(0,w);
+     }
      L4->redraw_label();
      break;  
        
      case 4:
-     if(value) L5->labelcolor(on); else L5->labelcolor(off);
+     if(value)
+     {
+      L5->labelcolor(on);
+      act_deact(1,w);
+     } 
+     else
+     {
+     L5->labelcolor(off);
+     act_deact(0,w);
+     } 
      L5->redraw_label();
      break;  
        
      case 5:
-     if(value) L6->labelcolor(on); else L6->labelcolor(off);
+     if(value)
+     {
+     L6->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L6->labelcolor(off);
+     act_deact(0,w);
+     }
      L6->redraw_label();
      break;  
        
      case 6:
-     if(value) L7->labelcolor(on); else L7->labelcolor(off);
+     if(value)
+     {
+     L7->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L7->labelcolor(off);
+     act_deact(0,w);
+     }
      L7->redraw_label();
      break;  
        
      case 7:
-     if(value) L8->labelcolor(on); else L8->labelcolor(off);
+     if(value)
+     {
+     L8->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L8->labelcolor(off);
+     act_deact(0,w);
+     } 
      L8->redraw_label();
      break;  
        
      case 8:
-     if(value) L9->labelcolor(on); else L9->labelcolor(off);
+     if(value)
+     {
+     L9->labelcolor(on);
+     act_deact(1,w);
+     }
+     else 
+     {
+     L9->labelcolor(off);
+     act_deact(0,w);
+     }
      L9->redraw_label();
      break;  
        
      case 9:
-     if(value) L10->labelcolor(on); else L10->labelcolor(off);
+     if(value)
+     {
+     L10->labelcolor(on);
+     act_deact(1,w);
+     }
+     else
+     {
+     L10->labelcolor(off);
+     act_deact(0,w);
+     }
      L10->redraw_label();
      break;  
        
@@ -16539,5 +16699,31 @@ s->remove(s->value());
 s->value(0);
 s->redraw();
 rkr->DelIntPreset(num,Rname);} {}
+  }
+  Function {act_deact(int mode,Fl_Widget *w)} {} {
+    code {if (rkr->deactivate==0) return;
+
+for(int i=0;i<w->parent()->children();i++)
+    {
+        
+       Fl_Widget *k = w->parent()->child(i);   
+       if(k!=w)
+        {
+          if (mode==0) 
+          {
+          k->deactivate(); 
+          if(rkr->deachide) k->hide();
+          }
+          else
+          {
+          k->activate();
+          k->show();
+          k->redraw();
+          }  
+        }   
+         
+         
+         
+    }} {}
   }
 } 

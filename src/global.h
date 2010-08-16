@@ -474,6 +474,8 @@ public:
   int Ste_U_Q;
   int Ste_D_Q;
 
+  int deachide;
+  int deactivate;
   int font;
   int flpos;
   int upsample;

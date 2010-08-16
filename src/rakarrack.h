@@ -3636,6 +3636,16 @@ private:
   void cb_BI_Browser_i(Fl_Button*, void*);
   static void cb_BI_Browser(Fl_Button*, void*);
 public:
+  Fl_Check_Button *Enable_Deactivation;
+private:
+  void cb_Enable_Deactivation_i(Fl_Check_Button*, void*);
+  static void cb_Enable_Deactivation(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *Enable_DeacHide;
+private:
+  void cb_Enable_DeacHide_i(Fl_Check_Button*, void*);
+  static void cb_Enable_DeacHide(Fl_Check_Button*, void*);
+public:
   Fl_Group *AUDIO_SET;
   Fl_Box *Fondo7;
   Fl_Check_Button *INSTATE;
@@ -4122,7 +4132,7 @@ public:
   void chfsize(int value);
   void adjustfont();
   void ChangeActives();
-  void findpos(int num, int value);
+  void findpos(int num, int value, Fl_Widget *w);
   void Put_Skin(int last);
   void FillML(int type);
   void DisAssigns();
@@ -4144,5 +4154,6 @@ public:
   Fl_Widget * FindWidget(int num);
   void ReadIntPresets();
   inline void delpreset(Fl_Widget *w, int num);
+  void act_deact(int mode,Fl_Widget *w);
 };
 #endif
