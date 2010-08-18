@@ -21627,7 +21627,7 @@ for(i=1; i<=JackIn->size();i++)
 
 void RKRGUI::Put_Loaded() {
   //General
-
+int i;
 
 
 WPreset_Name->value(rkr->Preset_Name);
@@ -21659,194 +21659,248 @@ output_vur->value(-50);
 
 
 }
-//Reverb
-
-reverb_activar->value(rkr->Reverb_Bypass);
-reverb_preset->do_callback(reverb_preset,1);
-
-//Echo
-echo_activar->value(rkr->Echo_Bypass);
-echo_preset->do_callback(echo_preset,1);
-
-//Chorus
-chorus_activar->value(rkr->Chorus_Bypass);
-chorus_preset->do_callback(chorus_preset,1);
-
-//Flanger
-flanger_activar->value(rkr->Flanger_Bypass);
-flanger_preset->do_callback(flanger_preset,1);
-
-//Phaser
-phaser_activar->value(rkr->Phaser_Bypass);
-phaser_preset->do_callback(phaser_preset,1);
-
-//Overdrive
-ovrd_activar->value(rkr->Overdrive_Bypass);
-ovrd_preset->do_callback(ovrd_preset,1);
-
-//Distorsion
-dist_activar->value(rkr->Distorsion_Bypass);
-dist_preset->do_callback(dist_preset, 1);
-
-//EQ1
-eq_activar->value(rkr->EQ1_Bypass);
-eq_preset->do_callback(eq_preset,1);
-
-//EQ2
-eqp_activar->value(rkr->EQ2_Bypass);
-eqp_preset->do_callback(eqp_preset,1);
-
-//Compressor
-compress_activar->value(rkr->Compressor_Bypass);
-compress_preset->do_callback(compress_preset,1);
-
-//WahWah
-WhaWha_activar->value(rkr->WhaWha_Bypass);
-WhaWha_preset->do_callback(WhaWha_preset,1);
-
-//AlienWah
-Alienwah_activar->value(rkr->Alienwah_Bypass);
-Alienwah_preset->do_callback(Alienwah_preset,1);
-
-//Cabinet
-
-Cabinet_output->value(rkr->lv[13][1]-64);
-Cabinet_preset->value(rkr->lv[13][0]);
-Cabinet_activar->value(rkr->Cabinet_Bypass);
-
-//Pan
-pan_activar->value(rkr->Pan_Bypass);
-pan_preset->do_callback(pan_preset,1);
-
-//Har
-har_activar->value(rkr->Harmonizer_Bypass);
-har_preset->do_callback(har_preset,1);
-
-//MusicalDelay
-musdelay_activar->value(rkr->MusDelay_Bypass);
-musdelay_preset->do_callback(musdelay_preset,1);
-
-//NoiseGate
-gate_activar->value(rkr->Gate_Bypass);
-gate_preset->do_callback(gate_preset,1);
-
-//NewDist
-newdist_activar->value(rkr->NewDist_Bypass);
-newdist_preset->do_callback(newdist_preset,1);
-
-//APhaser
-aphaser_activar->value(rkr->APhaser_Bypass);
-aphaser_preset->do_callback(aphaser_preset,1);
-
-//Valve
-valve_activar->value(rkr->Valve_Bypass);
-valve_preset->do_callback(valve_preset,1);
-
-//Dual_Flange
-dflange_activar->value(rkr->DFlange_Bypass);
-dflange_preset->do_callback(dflange_preset,1);
-
-// Ring
-ring_activar->value(rkr->Ring_Bypass);
-ring_preset->do_callback(ring_preset,1);
-
-// Exciter
-exciter_activar->value(rkr->Exciter_Bypass);
-exciter_preset->do_callback(exciter_preset,1);
-
-//MBDist
-mbdist_activar->value(rkr->MBDist_Bypass);
-mbdist_preset->do_callback(mbdist_preset,1);
-
-//Arpie
-arpie_activar->value(rkr->Arpie_Bypass);
-arpie_preset->do_callback(arpie_preset,1);
-
-//Expander
-expander_activar->value(rkr->Expander_Bypass);
-expander_preset->do_callback(expander_preset,1);
-
-//Shuffle
-shuffle_activar->value(rkr->Shuffle_Bypass);
-shuffle_preset->do_callback(shuffle_preset,1);
-
-//Synthfilter
-synthfilter_activar->value(rkr->Synthfilter_Bypass);
-synthfilter_preset->do_callback(synthfilter_preset,1);
-
-//VaryBand
-mbvvol_activar->value(rkr->MBVvol_Bypass);
-mbvvol_preset->do_callback(mbvvol_preset,1);
-
-//Convolotron
-convo_activar->value(rkr->Convol_Bypass);
-convo_preset->do_callback(convo_preset,1);
-
-//Looper
-looper_activar->value(rkr->Looper_Bypass);
-looper_preset->do_callback(looper_preset,1);
-update_looper();
-//RyanWah
-ryanwah_activar->value(rkr->RyanWah_Bypass);
-ryanwah_preset->do_callback(ryanwah_preset,1);
-
-// RBEcho
-rbecho_activar->value(rkr->RBEcho_Bypass);
-rbecho_preset->do_callback(rbecho_preset,1);
-
-// CoilCrafter
-coil_activar->value(rkr->CoilCrafter_Bypass);
-coil_preset->do_callback(coil_preset,1);
-
-//ShelfBoost
-shelf_activar->value(rkr->ShelfBoost_Bypass);
-shelf_preset->do_callback(shelf_preset,1);
-
-//Vocoder
-vo_activar->value(rkr->Vocoder_Bypass);
-vo_preset->do_callback(vo_preset,1);
-
-//Sustainer
-sus_activar->value(rkr->Sustainer_Bypass);
-sus_preset->do_callback(sus_preset,1);
-
-//Sequence
-seq_activar->value(rkr->Sequence_Bypass);
-seq_preset->do_callback(seq_preset,1);
-
-//Shifter
-shifter_activar->value(rkr->Shifter_Bypass);
-shifter_preset->do_callback(shifter_preset,1);
-
-//StompBox
-stomp_activar->value(rkr->StompBox_Bypass);
-stomp_preset->do_callback(stomp_preset,1);
-
-//Reverbtron
-revtron_activar->value(rkr->Reverbtron_Bypass);
-revtron_preset->do_callback(revtron_preset,1);
-
-//Echotron
-echotron_activar->value(rkr->Echotron_Bypass);
-echotron_preset->do_callback(echotron_preset,1);
-
-//StereoHarm
-shar_activar->value(rkr->StereoHarm_Bypass);
-shar_preset->do_callback(shar_preset,1);
-
-//CompBand
-cband_activar->value(rkr->CompBand_Bypass);
-cband_preset->do_callback(cband_preset,1);
-
-//Opticaltrem
-otrem_activar->value(rkr->Opticaltrem_Bypass);
-otrem_preset->do_callback(otrem_preset,1);
-
-//Vibe
-vibe_activar->value(rkr->Vibe_Bypass);
-vibe_preset->do_callback(vibe_preset,1);
 
 
+for(i=0;i<10;i++)
+ {
+   switch(rkr->efx_order[i])
+    {
+      
+
+     case 0: //EQ1
+     eq_activar->value(rkr->EQ1_Bypass);
+     eq_preset->do_callback(eq_preset,1);
+     break;
+
+     case 1://Compressor
+     compress_activar->value(rkr->Compressor_Bypass);
+     compress_preset->do_callback(compress_preset,1);
+     break;
+
+     case 2://Distorsion
+     dist_activar->value(rkr->Distorsion_Bypass);
+     dist_preset->do_callback(dist_preset, 1);
+     break;
+
+     case 3://Overdrive
+     ovrd_activar->value(rkr->Overdrive_Bypass);
+     ovrd_preset->do_callback(ovrd_preset,1);
+     break; 
+
+     case 4://Echo
+     echo_activar->value(rkr->Echo_Bypass);
+     echo_preset->do_callback(echo_preset,1);
+     break;
+     
+     case 5://Chorus
+     chorus_activar->value(rkr->Chorus_Bypass);
+     chorus_preset->do_callback(chorus_preset,1); 
+     break;
+     
+     case 6://Phaser
+     phaser_activar->value(rkr->Phaser_Bypass);
+     phaser_preset->do_callback(phaser_preset,1);
+     break;  
+
+     case 7://Flanger
+     flanger_activar->value(rkr->Flanger_Bypass);
+     flanger_preset->do_callback(flanger_preset,1); 
+     break;
+ 
+     case 8://Reverb
+     reverb_activar->value(rkr->Reverb_Bypass);
+     reverb_preset->do_callback(reverb_preset,1);
+     break;  
+
+     case 9://EQ2
+     eqp_activar->value(rkr->EQ2_Bypass);
+     eqp_preset->do_callback(eqp_preset,1);
+     break; 
+     
+     case 10://WahWah
+     WhaWha_activar->value(rkr->WhaWha_Bypass);
+     WhaWha_preset->do_callback(WhaWha_preset,1);
+     break;
+
+     case 11://AlienWah
+     Alienwah_activar->value(rkr->Alienwah_Bypass);
+     Alienwah_preset->do_callback(Alienwah_preset,1); 
+     break;
+     
+     case 12://Cabinet
+     Cabinet_output->value(rkr->lv[13][1]-64);
+     Cabinet_preset->value(rkr->lv[13][0]);
+     Cabinet_activar->value(rkr->Cabinet_Bypass);
+     break;
+ 
+     case 13://Pan
+     pan_activar->value(rkr->Pan_Bypass);
+     pan_preset->do_callback(pan_preset,1);
+     break;
+     
+     case 14://Har
+     har_activar->value(rkr->Harmonizer_Bypass);
+     har_preset->do_callback(har_preset,1);
+     break;
+
+     case 15://MsicalDelay
+     musdelay_activar->value(rkr->MusDelay_Bypass);
+     musdelay_preset->do_callback(musdelay_preset,1);
+     break; 
+
+     case 16://NoiseGate
+     gate_activar->value(rkr->Gate_Bypass);
+     gate_preset->do_callback(gate_preset,1);
+     break; 
+
+     case 17://NewDist
+     newdist_activar->value(rkr->NewDist_Bypass);
+     newdist_preset->do_callback(newdist_preset,1);
+     break;
+     
+     case 18://APhaser
+     aphaser_activar->value(rkr->APhaser_Bypass);
+     aphaser_preset->do_callback(aphaser_preset,1);
+     break;
+
+     case 19://Valve
+     valve_activar->value(rkr->Valve_Bypass);
+     valve_preset->do_callback(valve_preset,1);
+     break;
+
+     case 20://Dual_Flange
+     dflange_activar->value(rkr->DFlange_Bypass);
+     dflange_preset->do_callback(dflange_preset,1);
+     break;
+
+     case 21:// Ring
+     ring_activar->value(rkr->Ring_Bypass);
+     ring_preset->do_callback(ring_preset,1);
+     break;  
+
+     case 22:// Exciter
+     exciter_activar->value(rkr->Exciter_Bypass);
+     exciter_preset->do_callback(exciter_preset,1);
+     break; 
+
+     case 23://MBDist
+     mbdist_activar->value(rkr->MBDist_Bypass);
+     mbdist_preset->do_callback(mbdist_preset,1);
+     break;
+
+     case 24://Arpie
+     arpie_activar->value(rkr->Arpie_Bypass);
+     arpie_preset->do_callback(arpie_preset,1);
+     break;
+
+     case 25://Expander
+     expander_activar->value(rkr->Expander_Bypass);
+     expander_preset->do_callback(expander_preset,1);
+     break;
+
+     case 26://Shuffle
+     shuffle_activar->value(rkr->Shuffle_Bypass);
+     shuffle_preset->do_callback(shuffle_preset,1);
+     break;
+
+     case 27://Synthfilter
+     synthfilter_activar->value(rkr->Synthfilter_Bypass);
+     synthfilter_preset->do_callback(synthfilter_preset,1);
+     break; 
+
+     case 28://VaryBand
+     mbvvol_activar->value(rkr->MBVvol_Bypass);
+     mbvvol_preset->do_callback(mbvvol_preset,1);
+     break;
+
+     case 29://Convolotron
+     convo_activar->value(rkr->Convol_Bypass);
+     convo_preset->do_callback(convo_preset,1);
+     break; 
+
+     case 30://Looper
+     looper_activar->value(rkr->Looper_Bypass);
+     looper_preset->do_callback(looper_preset,1);
+     update_looper();
+     break;
+
+     case 31://RyanWah
+     ryanwah_activar->value(rkr->RyanWah_Bypass);
+     ryanwah_preset->do_callback(ryanwah_preset,1);
+     break;  
+     
+     case 32:// RBEcho
+     rbecho_activar->value(rkr->RBEcho_Bypass);
+     rbecho_preset->do_callback(rbecho_preset,1);
+     break;
+     
+     case 33:// CoilCrafter
+     coil_activar->value(rkr->CoilCrafter_Bypass);
+     coil_preset->do_callback(coil_preset,1);
+     break;
+
+     case 34://ShelfBoost
+     shelf_activar->value(rkr->ShelfBoost_Bypass);
+     shelf_preset->do_callback(shelf_preset,1);
+     break;
+     
+     case 35://Vocoder
+     vo_activar->value(rkr->Vocoder_Bypass);
+     vo_preset->do_callback(vo_preset,1);
+     break;
+
+     case 36://Sustainer
+     sus_activar->value(rkr->Sustainer_Bypass);
+     sus_preset->do_callback(sus_preset,1);
+     break;
+     
+    case 37://Sequence
+    seq_activar->value(rkr->Sequence_Bypass);
+    seq_preset->do_callback(seq_preset,1);
+    break;
+
+    case 38://Shifter
+    shifter_activar->value(rkr->Shifter_Bypass);
+    shifter_preset->do_callback(shifter_preset,1);
+    break;
+
+    case 39://StompBox
+    stomp_activar->value(rkr->StompBox_Bypass);
+    stomp_preset->do_callback(stomp_preset,1);
+    break;
+
+    case 40://Reverbtron
+    revtron_activar->value(rkr->Reverbtron_Bypass);
+    revtron_preset->do_callback(revtron_preset,1);
+    break;
+
+    case 41://Echotron
+    echotron_activar->value(rkr->Echotron_Bypass);
+    echotron_preset->do_callback(echotron_preset,1);
+    break;
+
+    case 42://StereoHarm
+    shar_activar->value(rkr->StereoHarm_Bypass);
+    shar_preset->do_callback(shar_preset,1);
+    break; 
+
+    case 43://CompBand
+    cband_activar->value(rkr->CompBand_Bypass);
+    cband_preset->do_callback(cband_preset,1);
+    break;
+
+    case 44://Opticaltrem
+    otrem_activar->value(rkr->Opticaltrem_Bypass);
+    otrem_preset->do_callback(otrem_preset,1);
+    break;
+
+    case 45://Vibe
+    vibe_activar->value(rkr->Vibe_Bypass);
+    vibe_preset->do_callback(vibe_preset,1);
+    break;
+  }
+
+}
 
 reordena();
 }
