@@ -3387,6 +3387,11 @@ private:
   static void cb_Etit(Fl_Button*, void*);
 public:
   Analyzer *Analy;
+  Fl_Button *HideUE;
+private:
+  void cb_HideUE_i(Fl_Button*, void*);
+  static void cb_HideUE(Fl_Button*, void*);
+public:
   Fl_Group *Tap;
   Fl_Light_Button *Tap_activar;
 private:

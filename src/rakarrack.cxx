@@ -9047,6 +9047,24 @@ void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Etit_i(o,v);
 }
 
+void RKRGUI::cb_HideUE_i(Fl_Button* o, void*) {
+  if(rkr->deachide)
+{
+ rkr->deachide=0;
+ o->label("Hide");
+}
+else
+{
+rkr->deachide=1;
+ o->label("Show");
+}
+ 
+reordena();
+}
+void RKRGUI::cb_HideUE(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_HideUE_i(o,v);
+}
+
 void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tap_Bypass = (int)o->value();
 if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
@@ -19826,6 +19844,14 @@ R average.");
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
+      { HideUE = new Fl_Button(457, 137, 32, 18, "Hide");
+        HideUE->shortcut(0x6f);
+        HideUE->color((Fl_Color)62);
+        HideUE->labelsize(10);
+        HideUE->callback((Fl_Callback*)cb_HideUE, (void*)(77));
+        HideUE->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
+        HideUE->when(FL_WHEN_RELEASE_ALWAYS);
+      } // Fl_Button* HideUE
       Presets->end();
     } // Fl_Group* Presets
     { Tap = new Fl_Group(520, 140, 276, 54);
@@ -21068,11 +21094,16 @@ MIDILearn->copy_label(tmp);
 sprintf(tmp,"%s   v%s - ACI",rkr->jackcliname,VERSION);
 Trigger->copy_label(tmp);
 
+
+
 load_stat();
 Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
 ReadIntPresets();
+if(rkr->deachide) HideUE->label("Show");else HideUE->label("Hide");
+HideUE->redraw();
+
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);

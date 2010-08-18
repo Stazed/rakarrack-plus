@@ -851,7 +851,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1474 30 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1467 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -9766,7 +9766,7 @@ Order->show();
 put_icon(Order);
 }
 else
-Order->hide();} selected
+Order->hide();}
           xywh {255 132 195 24} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
@@ -9781,6 +9781,23 @@ Analyzer_ON=1;
         Fl_Box Analy {
           xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
           class Analyzer
+        }
+        Fl_Button HideUE {
+          label Hide
+          user_data 77
+          callback {if(rkr->deachide)
+{
+ rkr->deachide=0;
+ o->label("Hide");
+}
+else
+{
+rkr->deachide=1;
+ o->label("Show");
+}
+ 
+reordena();}
+          xywh {457 137 32 18} shortcut 0x6f color 62 labelsize 10 align 80 when 6
         }
       }
       Fl_Group Tap {
@@ -11563,15 +11580,21 @@ MIDILearn->copy_label(tmp);
 sprintf(tmp,"%s   v%s - ACI",rkr->jackcliname,VERSION);
 Trigger->copy_label(tmp);
 
+
+
 load_stat();
 Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
 ReadIntPresets();
+if(rkr->deachide) HideUE->label("Show");else HideUE->label("Hide");
+HideUE->redraw();
+
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
-Fl::add_handler(prevnext);} {}
+Fl::add_handler(prevnext);} {selected
+    }
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
