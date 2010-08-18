@@ -9023,6 +9023,8 @@ void RKRGUI::cb_Open_Order_i(Fl_Button*, void*) {
   if (!Order->visible())
 {
 Prepare_Order();
+rkr->deachide=0;
+Order_DeacHide->value(rkr->deachide);
 Order->show();
 put_icon(Order);
 }
@@ -9444,6 +9446,13 @@ void RKRGUI::cb_Fil128(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil128_i(o,v);
 }
 
+void RKRGUI::cb_Order_DeacHide_i(Fl_Check_Button* o, void*) {
+  rkr->deachide=(int) o->value();
+}
+void RKRGUI::cb_Order_DeacHide(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_Order_DeacHide_i(o,v);
+}
+
 void RKRGUI::cb_ok_order_i(Fl_Button*, void*) {
   int i;
 for (i=0;i<10;i++) rkr->efx_order[i]=rkr->new_order[i];
@@ -9612,17 +9621,8 @@ void RKRGUI::cb_BI_Browser(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
 }
 
-void RKRGUI::cb_Enable_Deactivation_i(Fl_Check_Button* o, void*) {
-  rkr->deactivate=(int) o->value();
-if(!rkr->deactivate) Show_Next_Time();
-}
-void RKRGUI::cb_Enable_Deactivation(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Enable_Deactivation_i(o,v);
-}
-
 void RKRGUI::cb_Enable_DeacHide_i(Fl_Check_Button* o, void*) {
   rkr->deachide=(int) o->value();
-if(!rkr->deachide) Show_Next_Time();
 }
 void RKRGUI::cb_Enable_DeacHide(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Enable_DeacHide_i(o,v);
@@ -20029,6 +20029,13 @@ R average.");
       } // Fl_Button* Fil128
       Filters->end();
     } // Fl_Group* Filters
+    { Order_DeacHide = new Fl_Check_Button(420, 286, 23, 20, "Hide Unused Effect Widgets");
+      Order_DeacHide->down_box(FL_DOWN_BOX);
+      Order_DeacHide->labelsize(11);
+      Order_DeacHide->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      Order_DeacHide->callback((Fl_Callback*)cb_Order_DeacHide);
+      Order_DeacHide->align(FL_ALIGN_LEFT);
+    } // Fl_Check_Button* Order_DeacHide
     { ok_order = new Fl_Button(333, 349, 72, 26, "Ok");
       ok_order->callback((Fl_Callback*)cb_ok_order);
     } // Fl_Button* ok_order
@@ -20117,13 +20124,6 @@ R average.");
         { BI_Browser = new Fl_Button(410, 455, 65, 20, "Browse");
           BI_Browser->callback((Fl_Callback*)cb_BI_Browser, (void*)(77));
         } // Fl_Button* BI_Browser
-        { Enable_Deactivation = new Fl_Check_Button(165, 482, 23, 20, "Activate/Deactivate Effects");
-          Enable_Deactivation->down_box(FL_DOWN_BOX);
-          Enable_Deactivation->labelsize(11);
-          Enable_Deactivation->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-          Enable_Deactivation->callback((Fl_Callback*)cb_Enable_Deactivation);
-          Enable_Deactivation->align(FL_ALIGN_LEFT);
-        } // Fl_Check_Button* Enable_Deactivation
         { Enable_DeacHide = new Fl_Check_Button(169, 500, 23, 20, "Hide Unused Effect Widgets");
           Enable_DeacHide->down_box(FL_DOWN_BOX);
           Enable_DeacHide->labelsize(11);
@@ -21238,7 +21238,6 @@ rakarrack.get(rkr->PrefNom("Labels Color"),a, -1075849984);
 rakarrack.get(rkr->PrefNom("Schema"), k,0);
 scheme_ch->value(k);
 scheme_ch->do_callback();
-rakarrack.get(rkr->PrefNom("Activate/Deactivate Effects"), rkr->deactivate,0);
 rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide,0);
 
 
@@ -21411,7 +21410,6 @@ rakarrack.set(rkr->PrefNom("Foreground Color"), (int)fore_color);
 rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
 rakarrack.set(rkr->PrefNom("Labels Color"),(int) label_color);
 rakarrack.set(rkr->PrefNom("Schema"), (int) scheme_ch->value());
-rakarrack.set(rkr->PrefNom("Activate/Deactivate Effects"), (int) rkr->deactivate);
 rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
 
 
@@ -22101,9 +22099,56 @@ for (i=0; i<rkr->NumEffects;i++)
 
 
 
-//Hide
-
-
+//Hide All
+	EQ->hide();
+	COMPRESS->hide();
+	DIST->hide();
+        OVRD->hide(); 
+	ECHO->hide();
+        CHORUS->hide();
+        PHASER->hide();
+        FLANGER->hide();        
+	REVERB->hide();
+	PEQ->hide();
+	WHAWHA->hide();
+	ALIENWAH->hide();
+	CABINET->hide();
+	PAN->hide();
+	HAR->hide();
+	MUSDELAY->hide();
+	GATE->hide();
+	NEWDIST->hide();
+	APHASER->hide();
+	VALVE->hide();
+	DFLANGE->hide();
+	RING->hide();
+	EXCITER->hide();
+	MBDIST->hide();
+	ARPIE->hide();
+	EXPANDER->hide();
+	SHUFFLE->hide();
+	SYNTHFILTER->hide();
+	MBVVOL->hide();
+	CONVOLOTRON->hide();
+	LOOPER->hide();
+	RYANWAH->hide();
+	RBECHO->hide();
+	COILCRAFTER->hide();
+	SHELFBOOST->hide();
+	VOCODER->hide();
+	SUSTAINER->hide();
+	SEQUENCE->hide();
+	SHIFTER->hide();
+	STOMPBOX->hide();
+	REVERBTRON->hide();
+	ECHOTRON->hide();
+	SHAR->hide();
+	COMPBAND->hide();
+	OTREM->hide();
+	VIBE->hide();
+	
+	
+	
 for (i=1; i<=t; i++)
 
  {
@@ -22111,155 +22156,18 @@ for (i=1; i<=t; i++)
 
     switch ( rkr->availables[i])
       {
-
-
-        case 0: 
-        EQ->hide();
-        break; 
-        case 1: 
-        COMPRESS->hide();
-        break;
-        case 2:
-        DIST->hide();
-        break;
-        case 3:
-        OVRD->hide(); 
-        break;
-        case 4:
-        ECHO->hide();
-        break;
-        case 5:
-        CHORUS->hide();
-        break;
-        case 6:
-        PHASER->hide();
-        break;
-        case 7:
-        FLANGER->hide();
-        break;
-        case 8:
-        REVERB->hide();
-        break;
-        case 9:
-        PEQ->hide();
-        break;
-        case 10:
-        WHAWHA->hide();
-        break;
-        case 11:
-        ALIENWAH->hide(); 
-        break;
-        case 12:
-        CABINET->hide();
-        break;
-        case 13:
-        PAN->hide();
-        break;
+        
         case 14:
-        HAR->hide();
         har_activar->value(0);
         rkr->Harmonizer_Bypass = 0;
         break;
-        case 15:
-        MUSDELAY->hide();
-        break;
-        case 16:
-        GATE->hide();
-        break;
-        case 17:
-        NEWDIST->hide();
-        break;
-        case 18:
-        APHASER->hide();
-        break;
-        case 19:
-        VALVE->hide();
-        break;
-        case 20:
-        DFLANGE->hide();
-        break;
         case 21:
-        RING->hide();
         ring_activar->value(0);
         rkr->Ring_Bypass = 0;
-        break;
-        case 22:
-        EXCITER->hide();
-        break;
-        case 23:
-        MBDIST->hide();
-        break;
-        case 24:
-        ARPIE->hide();
-        break;
-        case 25:
-        EXPANDER->hide();
-        break;
-        case 26:
-        SHUFFLE->hide();
-        break;
-        case 27:
-        SYNTHFILTER->hide();
-        break;
-        case 28:
-        MBVVOL->hide();
-        break;
-        case 29:
-        CONVOLOTRON->hide();
-        break;
-        case 30:
-        LOOPER->hide();
-        break;
-        case 31:
-        RYANWAH->hide();
-        break;
-        case 32:
-        RBECHO->hide();
-        break;
-        case 33:
-        COILCRAFTER->hide();
-        break;
-        case 34:
-        SHELFBOOST->hide();
-        break;
-        case 35:
-        VOCODER->hide();
-        break;
-        case 36:
-        SUSTAINER->hide();
-        break;
-        case 37:
-        SEQUENCE->hide();
-        break;
-        case 38:
-        SHIFTER->hide();
-        break;
-        case 39:
-        STOMPBOX->hide();
-        break;
-        case 40:
-        REVERBTRON->hide();
-        break;
-        case 41:
-        ECHOTRON->hide();
-        break;
         case 42:
-        SHAR->hide();
         shar_activar->value(0);
         rkr->StereoHarm_Bypass = 0;
-        break;
-        case 43:
-        COMPBAND->hide();
-        break;
-        case 44:
-        OTREM->hide();
-        break;
-        case 45:
-        VIBE->hide();
-        break;
-        
-
-
+        break;      
       }
       
     }
@@ -22276,40 +22184,6 @@ for (i=1; i<=t; i++)
 for (i=0; i<10; i++)
 {
 
-switch(i)
- {
-    case 0:
-       L1->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 1:
-       L2->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 2:
-       L3->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 3:
-       L4->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 4:
-       L5->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 5:
-       L6->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 6:
-       L7->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 7:
-       L8->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 8:
-       L9->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-    case 9:
-       L10->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-       break;
-}
-
 switch (rkr->efx_order[i])
   {
   
@@ -22317,9 +22191,13 @@ switch (rkr->efx_order[i])
        
        EQ->position(x[i],y[i]);
        eq_activar->shortcut(s[i]);
-       EQ->show();
-       if(rkr->EQ1_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->EQ1_Bypass,eq_activar);
+       if(!rkr->deachide) EQ->show();
+       if(rkr->EQ1_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide) EQ->show();
+       }
+       else rkr->active[i]=0;
        break;   
        
        
@@ -22327,379 +22205,604 @@ switch (rkr->efx_order[i])
        
        COMPRESS->position(x[i],y[i]);
        compress_activar->shortcut(s[i]);
-       COMPRESS->show();
-       if(rkr->Compressor_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Compressor_Bypass,compress_activar);
-
+       if(!rkr->deachide)COMPRESS->show();
+       if(rkr->Compressor_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)COMPRESS->show();
+       }
+       else rkr->active[i]=0;
        break;   
        
      case 2:
     
        DIST->position(x[i],y[i]);
        dist_activar->shortcut(s[i]);
-       DIST->show();
-       if(rkr->Distorsion_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Distorsion_Bypass,dist_activar);
+       if(!rkr->deachide)DIST->show();
+       if(rkr->Distorsion_Bypass)
+       {
+       rkr->active[i]=1;
+       if(rkr->deachide)DIST->show();
+       }
+       else rkr->active[i]=0;
        break;   
        
      case 3:
     
        OVRD->position(x[i],y[i]);
        ovrd_activar->shortcut(s[i]);
-       OVRD->show();
-       if(rkr->Overdrive_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Overdrive_Bypass,ovrd_activar);
+       if(!rkr->deachide)OVRD->show();
+       if(rkr->Overdrive_Bypass)
+       {
+       rkr->active[i]=1;
+       if(rkr->deachide)OVRD->show();
+       }
+       else rkr->active[i]=0;
        break;   
        
      case 4:
     
        ECHO->position(x[i],y[i]);
        echo_activar->shortcut(s[i]);
-       ECHO->show();
-       if(rkr->Echo_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Echo_Bypass,echo_activar);
+       if(!rkr->deachide)ECHO->show();
+       if(rkr->Echo_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)ECHO->show();
+       }
+       else rkr->active[i]=0;
        break;   
        
      case 5:
     
        CHORUS->position(x[i],y[i]);
        chorus_activar->shortcut(s[i]);
-       CHORUS->show();
-       if(rkr->Chorus_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Chorus_Bypass,chorus_activar);
+       if(!rkr->deachide)CHORUS->show();
+       if(rkr->Chorus_Bypass)
+       {
+       rkr->active[i]=1;
+       if(rkr->deachide)CHORUS->show();
+       }
+       else rkr->active[i]=0;
        break;   
        
      case 6:
     
        PHASER->position(x[i],y[i]);
        phaser_activar->shortcut(s[i]);
-       PHASER->show();
-       if(rkr->Phaser_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Phaser_Bypass,phaser_activar);
+       if(!rkr->deachide)PHASER->show();
+       if(rkr->Phaser_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)PHASER->show();
+       }
+       else rkr->active[i]=0;
        break;   
        
      case 7:
     
        FLANGER->position(x[i],y[i]);
        flanger_activar->shortcut(s[i]);
-       FLANGER->show();
-       if(rkr->Flanger_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Flanger_Bypass,flanger_activar);
+       if(!rkr->deachide)FLANGER->show();
+       if(rkr->Flanger_Bypass)
+       {
+       rkr->active[i]=1;
+       if(rkr->deachide)FLANGER->show();
+       }
+       else rkr->active[i]=0;
        break;    
                     
      case 8:
     
        REVERB->position(x[i],y[i]);
        reverb_activar->shortcut(s[i]);
-       REVERB->show();
-       if(rkr->Reverb_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Reverb_Bypass,reverb_activar);
+       if(!rkr->deachide)REVERB->show();
+       if(rkr->Reverb_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)REVERB->show();
+       }
+       else rkr->active[i]=0;
        break;     
-       
        
      case 9:
     
        PEQ->position(x[i],y[i]);
        eqp_activar->shortcut(s[i]);
-       PEQ->show();
-       if(rkr->EQ2_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->EQ2_Bypass,eqp_activar);
+       if(!rkr->deachide)PEQ->show();
+       if(rkr->EQ2_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)PEQ->show();
+       }
+       else rkr->active[i]=0;
        break;     
      
      case 10:
     
        WHAWHA->position(x[i],y[i]);
        WhaWha_activar->shortcut(s[i]);
-       WHAWHA->show();
-       if(rkr->WhaWha_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->WhaWha_Bypass,WhaWha_activar);
+       if(!rkr->deachide)WHAWHA->show();
+       if(rkr->WhaWha_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)WHAWHA->show();
+       }
+       else rkr->active[i]=0;
        break;  
        
      case 11:
     
        ALIENWAH->position(x[i],y[i]);
        Alienwah_activar->shortcut(s[i]);
-       ALIENWAH->show();
-       if(rkr->Alienwah_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Alienwah_Bypass,Alienwah_activar);
+       if(!rkr->deachide)ALIENWAH->show();
+       if(rkr->Alienwah_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)ALIENWAH->show();
+       }
+       else rkr->active[i]=0;
        break;      
      
      case 12:
      
        CABINET->position(x[i],y[i]);   
        Cabinet_activar->shortcut(s[i]);
-       CABINET->show();
-       if(rkr->Cabinet_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Cabinet_Bypass,Cabinet_activar);
+       if(!rkr->deachide)CABINET->show();
+       if(rkr->Cabinet_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)CABINET->show();
+       }
+       else rkr->active[i]=0;
        break;
     
      case 13:
      
        PAN->position(x[i],y[i]);   
        pan_activar->shortcut(s[i]);
-       PAN->show();
-       if(rkr->Pan_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Pan_Bypass,pan_activar);
+       if(!rkr->deachide)PAN->show();
+       if(rkr->Pan_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)PAN->show();
+       }
+       else rkr->active[i]=0;
        break;
      
      case 14:
        HAR->position(x[i],y[i]);
        har_activar->shortcut(s[i]);
-       HAR->show();
-       if(rkr->Harmonizer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Harmonizer_Bypass,har_activar);
+       if(!rkr->deachide)HAR->show();
+       if(rkr->Harmonizer_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)HAR->show();
+       }
+       else rkr->active[i]=0;
        break;
      
      case 15:
        MUSDELAY->position(x[i],y[i]);
        musdelay_activar->shortcut(s[i]);
-       MUSDELAY->show();
-       if(rkr->MusDelay_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->MusDelay_Bypass,musdelay_activar);
+       if(!rkr->deachide)MUSDELAY->show();
+       if(rkr->MusDelay_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)MUSDELAY->show();
+       }
+       else rkr->active[i]=0;
        break; 
        
      case 16:
        GATE->position(x[i],y[i]);
        gate_activar->shortcut(s[i]);
-       GATE->show();
-       if(rkr->Gate_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Gate_Bypass,gate_activar);
+       if(!rkr->deachide)GATE->show();
+       if(rkr->Gate_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)GATE->show();
+       }
+       else rkr->active[i]=0;
        break;  
      
      case 17:
        NEWDIST->position(x[i],y[i]);
        newdist_activar->shortcut(s[i]);
-       NEWDIST->show();
-       if(rkr->NewDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->NewDist_Bypass,newdist_activar);
+       if(!rkr->deachide)NEWDIST->show();
+       if(rkr->NewDist_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)NEWDIST->show();
+       }
+       else rkr->active[i]=0;
        break;
       
      case 18:
        APHASER->position(x[i],y[i]);
        aphaser_activar->shortcut(s[i]);
-       APHASER->show();
-       if(rkr->APhaser_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->APhaser_Bypass,aphaser_activar);
+       if(!rkr->deachide)APHASER->show();
+       if(rkr->APhaser_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)APHASER->show();
+       }
+       else rkr->active[i]=0;
        break;
  
      case 19:
        VALVE->position(x[i],y[i]);
        valve_activar->shortcut(s[i]);
-       VALVE->show();
-       if(rkr->Valve_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Valve_Bypass,valve_activar);
+       if(!rkr->deachide)VALVE->show();
+       if(rkr->Valve_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)VALVE->show();
+       }       
+       else rkr->active[i]=0;
        break;
 
      case 20:
        DFLANGE->position(x[i],y[i]);
        dflange_activar->shortcut(s[i]);
-       DFLANGE->show();
-       if(rkr->DFlange_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->DFlange_Bypass,dflange_activar);
+       if(!rkr->deachide)DFLANGE->show();
+       if(rkr->DFlange_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)DFLANGE->show();
+       }       
+       else rkr->active[i]=0;
        break;
 
      case 21:
        RING->position(x[i],y[i]);
        ring_activar->shortcut(s[i]);
-       RING->show();
-       if(rkr->Ring_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Ring_Bypass,ring_activar);
+       if(!rkr->deachide)RING->show();
+       if(rkr->Ring_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)RING->show();
+       }
+       else rkr->active[i]=0;
        break;
 
      case 22:
        EXCITER->position(x[i],y[i]);
        exciter_activar->shortcut(s[i]);
-       EXCITER->show();
-       if(rkr->Exciter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Exciter_Bypass,exciter_activar);
+       if(!rkr->deachide)EXCITER->show();
+       if(rkr->Exciter_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)EXCITER->show();
+       }
+       else rkr->active[i]=0;
        break;
 
      case 23:
        MBDIST->position(x[i],y[i]);
        mbdist_activar->shortcut(s[i]);
-       MBDIST->show();
-       if(rkr->MBDist_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->MBDist_Bypass,mbdist_activar);
+       if(!rkr->deachide)MBDIST->show();
+       if(rkr->MBDist_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)MBDIST->show();
+       }
+       else rkr->active[i]=0;
        break;
      
      case 24:
        ARPIE->position(x[i],y[i]);
        arpie_activar->shortcut(s[i]);
-       ARPIE->show();
-       if(rkr->Arpie_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Arpie_Bypass,arpie_activar);
+       if(!rkr->deachide)ARPIE->show();
+       if(rkr->Arpie_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)ARPIE->show();
+       }
+       else rkr->active[i]=0;
        break;   
 
      case 25:
        EXPANDER->position(x[i],y[i]);
        expander_activar->shortcut(s[i]);
-       EXPANDER->show();
-       if(rkr->Expander_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Expander_Bypass,expander_activar);
+       if(!rkr->deachide)EXPANDER->show();
+       if(rkr->Expander_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)EXPANDER->show();
+       }
+       else rkr->active[i]=0;
        break;   
 
      case 26:
        SHUFFLE->position(x[i],y[i]);
        shuffle_activar->shortcut(s[i]);
-       SHUFFLE->show();
-       if(rkr->Shuffle_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Shuffle_Bypass,shuffle_activar);
+       if(!rkr->deachide)SHUFFLE->show();
+       if(rkr->Shuffle_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)SHUFFLE->show();
+       }
+       else rkr->active[i]=0;
        break;   
 
      case 27:
        SYNTHFILTER->position(x[i],y[i]);
        synthfilter_activar->shortcut(s[i]);
-       SYNTHFILTER->show();
-       if(rkr->Synthfilter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Synthfilter_Bypass,synthfilter_activar);
+       if(!rkr->deachide)SYNTHFILTER->show();
+       if(rkr->Synthfilter_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)SYNTHFILTER->show();
+       }       
+       else rkr->active[i]=0;
+       
        break;   
 
      case 28:
        MBVVOL->position(x[i],y[i]);
        mbvvol_activar->shortcut(s[i]);
-       MBVVOL->show();
-       if(rkr->MBVvol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->MBVvol_Bypass,mbvvol_activar);
+       if(!rkr->deachide)MBVVOL->show();
+       if(rkr->MBVvol_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)MBVVOL->show();
+       }
+       else rkr->active[i]=0;
        break;   
 
      case 29:
        CONVOLOTRON->position(x[i],y[i]);
        convo_activar->shortcut(s[i]);
-       CONVOLOTRON->show();
-       if(rkr->Convol_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Convol_Bypass,convo_activar);
+       if(!rkr->deachide)CONVOLOTRON->show();
+       if(rkr->Convol_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)CONVOLOTRON->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
      case 30:
        LOOPER->position(x[i],y[i]);
        looper_activar->shortcut(s[i]);
-       LOOPER->show();
-       if(rkr->Looper_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Looper_Bypass,looper_activar);
+       if(!rkr->deachide)LOOPER->show();
+       if(rkr->Looper_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)LOOPER->show();
+       }       
+       else rkr->active[i]=0;
        break; 
 
      case 31:
        RYANWAH->position(x[i],y[i]);
        ryanwah_activar->shortcut(s[i]);
-       RYANWAH->show();
-       if(rkr->RyanWah_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->RyanWah_Bypass,ryanwah_activar);
+       if(!rkr->deachide)RYANWAH->show();
+       if(rkr->RyanWah_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)RYANWAH->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
      case 32:
        RBECHO->position(x[i],y[i]);
        rbecho_activar->shortcut(s[i]);
-       RBECHO->show();
-       if(rkr->RBEcho_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->RBEcho_Bypass,rbecho_activar);
+       if(!rkr->deachide)RBECHO->show();
+       if(rkr->RBEcho_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)RBECHO->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
      case 33:
        COILCRAFTER->position(x[i],y[i]);
        coil_activar->shortcut(s[i]);
-       COILCRAFTER->show();
-       if(rkr->CoilCrafter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->CoilCrafter_Bypass,coil_activar);
+       if(!rkr->deachide)COILCRAFTER->show();
+       if(rkr->CoilCrafter_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)COILCRAFTER->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
      case 34:
        SHELFBOOST->position(x[i],y[i]);
        shelf_activar->shortcut(s[i]);
-       SHELFBOOST->show();
-       if(rkr->ShelfBoost_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->ShelfBoost_Bypass,shelf_activar);
+       if(!rkr->deachide)SHELFBOOST->show();
+       if(rkr->ShelfBoost_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)SHELFBOOST->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 35:
        VOCODER->position(x[i],y[i]);
        vo_activar->shortcut(s[i]);
-       VOCODER->show();
-       if(rkr->Vocoder_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Vocoder_Bypass,vo_activar);
+       if(!rkr->deachide)VOCODER->show();
+       if(rkr->Vocoder_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)VOCODER->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 36:
        SUSTAINER->position(x[i],y[i]);
        sus_activar->shortcut(s[i]);
-       SUSTAINER->show();
-       if(rkr->Sustainer_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Sustainer_Bypass,sus_activar);
+       if(!rkr->deachide)SUSTAINER->show();
+       if(rkr->Sustainer_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)SUSTAINER->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 37:
        SEQUENCE->position(x[i],y[i]);
        seq_activar->shortcut(s[i]);
-       SEQUENCE->show();
-       if(rkr->Sequence_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Sequence_Bypass,seq_activar);
+       if(!rkr->deachide)SEQUENCE->show();
+       if(rkr->Sequence_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)SEQUENCE->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 38:
        SHIFTER->position(x[i],y[i]);
        shifter_activar->shortcut(s[i]);
-       SHIFTER->show();
-       if(rkr->Shifter_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Shifter_Bypass,shifter_activar);
+       if(!rkr->deachide)SHIFTER->show();
+       if(rkr->Shifter_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)SHIFTER->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 39:
        STOMPBOX->position(x[i],y[i]);
        stomp_activar->shortcut(s[i]);
-       STOMPBOX->show();
-       if(rkr->StompBox_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->StompBox_Bypass,stomp_activar);
+       if(!rkr->deachide)STOMPBOX->show();
+       if(rkr->StompBox_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)STOMPBOX->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 40:
        REVERBTRON->position(x[i],y[i]);
        revtron_activar->shortcut(s[i]);
-       REVERBTRON->show();
-       if(rkr->Reverbtron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Reverbtron_Bypass,revtron_activar);
+       if(!rkr->deachide)REVERBTRON->show();
+       if(rkr->Reverbtron_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)REVERBTRON->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 41:
        ECHOTRON->position(x[i],y[i]);
        echotron_activar->shortcut(s[i]);
-       ECHOTRON->show();
-       if(rkr->Echotron_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Echotron_Bypass,echotron_activar);
+       if(!rkr->deachide)ECHOTRON->show();
+       if(rkr->Echotron_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)ECHOTRON->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 42:
        SHAR->position(x[i],y[i]);
        shar_activar->shortcut(s[i]);
-       SHAR->show();
-       if(rkr->StereoHarm_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->StereoHarm_Bypass,shar_activar);
+       if(!rkr->deachide)SHAR->show();
+       if(rkr->StereoHarm_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)SHAR->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 43:
        COMPBAND->position(x[i],y[i]);
        cband_activar->shortcut(s[i]);
-       COMPBAND->show();
-       if(rkr->CompBand_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->CompBand_Bypass,cband_activar);
+       if(!rkr->deachide)COMPBAND->show();
+       if(rkr->CompBand_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)COMPBAND->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 44:
        OTREM->position(x[i],y[i]);
        otrem_activar->shortcut(s[i]);
-       OTREM->show();
-       if(rkr->Opticaltrem_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Opticaltrem_Bypass,otrem_activar);
+       if(!rkr->deachide)OTREM->show();
+       if(rkr->Opticaltrem_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)OTREM->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
    case 45:
        VIBE->position(x[i],y[i]);
        vibe_activar->shortcut(s[i]);
-       VIBE->show();
-       if(rkr->Vibe_Bypass)rkr->active[i]=1; else rkr->active[i]=0;
-       if(rkr->deactivate) act_deact(rkr->Vibe_Bypass,vibe_activar);
+       if(!rkr->deachide)VIBE->show();
+       if(rkr->Vibe_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)VIBE->show();
+       }
+       else rkr->active[i]=0;
        break; 
 
 
  }
+ 
+ 
+ switch(i)
+ {
+    case 0:
+       L1->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L1->hide(); else L1->show();
+       break;
+    case 1:
+       L2->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L2->hide(); else L2->show();
+       break;
+    case 2:
+       L3->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L3->hide(); else L3->show();
+       break;
+    case 3:
+       L4->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L4->hide(); else L4->show();
+       break;
+    case 4:
+       L5->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L5->hide(); else L5->show();
+       break;
+    case 5:
+       L6->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L6->hide(); else L6->show();
+       break;
+    case 6:
+       L7->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L7->hide(); else L7->show();
+       break;
+    case 7:
+       L8->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L8->hide(); else L8->show();
+       break;
+    case 8:
+       L9->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L9->hide(); else L9->show();
+       break;
+    case 9:
+       L10->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+       if((rkr->deachide) && (!rkr->active[i])) L10->hide(); else L10->show();
+       break;
+}
+ 
  
  }
  
@@ -22914,7 +23017,6 @@ if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
 
 rkr->m_displayed = 0;
 Enable_Back->value(rkr->EnableBackgroundImage);
-Enable_Deactivation->value(rkr->deactivate);
 Enable_DeacHide->value(rkr->deachide);
 
 BFiname->value(rkr->BankFilename);
@@ -25227,142 +25329,52 @@ for(i=0; i<10; i++)
   {
   
      case 0:
-     if(value) 
-     {
-     L1->labelcolor(on); 
-     act_deact(1,w);
-     }
-     else 
-     {
-     L1->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L1->labelcolor(on); else L1->labelcolor(off);
      L1->redraw_label();
      break;  
      
      case 1:
-     if(value)
-     {
-     L2->labelcolor(on); 
-     act_deact(1,w);
-     }
-     else 
-     {
-     L2->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L2->labelcolor(on); else L2->labelcolor(off);
      L2->redraw_label();
      break;  
        
      case 2:
-     if(value)
-     {
-     L3->labelcolor(on); 
-     act_deact(1,w);
-     }
-     else
-     {
-     L3->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L3->labelcolor(on); else L3->labelcolor(off);
      L3->redraw_label();
      break;  
        
      case 3:
-     if(value)
-     {
-     L4->labelcolor(on);
-     act_deact(1,w);
-     }
-     else
-     {
-     L4->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L4->labelcolor(on); else L4->labelcolor(off);
      L4->redraw_label();
      break;  
        
      case 4:
-     if(value)
-     {
-      L5->labelcolor(on);
-      act_deact(1,w);
-     } 
-     else
-     {
-     L5->labelcolor(off);
-     act_deact(0,w);
-     } 
+     if(value) L5->labelcolor(on); else L5->labelcolor(off);
      L5->redraw_label();
      break;  
        
      case 5:
-     if(value)
-     {
-     L6->labelcolor(on);
-     act_deact(1,w);
-     }
-     else
-     {
-     L6->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L6->labelcolor(on); else L6->labelcolor(off);
      L6->redraw_label();
      break;  
        
      case 6:
-     if(value)
-     {
-     L7->labelcolor(on);
-     act_deact(1,w);
-     }
-     else
-     {
-     L7->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L7->labelcolor(on); else L7->labelcolor(off);
      L7->redraw_label();
      break;  
        
      case 7:
-     if(value)
-     {
-     L8->labelcolor(on);
-     act_deact(1,w);
-     }
-     else
-     {
-     L8->labelcolor(off);
-     act_deact(0,w);
-     } 
+     if(value) L8->labelcolor(on); else L8->labelcolor(off);
      L8->redraw_label();
      break;  
        
      case 8:
-     if(value)
-     {
-     L9->labelcolor(on);
-     act_deact(1,w);
-     }
-     else 
-     {
-     L9->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L9->labelcolor(on); else L9->labelcolor(off);
      L9->redraw_label();
      break;  
        
      case 9:
-     if(value)
-     {
-     L10->labelcolor(on);
-     act_deact(1,w);
-     }
-     else
-     {
-     L10->labelcolor(off);
-     act_deact(0,w);
-     }
+     if(value) L10->labelcolor(on); else L10->labelcolor(off);
      L10->redraw_label();
      break;  
        
@@ -26300,31 +26312,4 @@ s->remove(s->value());
 s->value(0);
 s->redraw();
 rkr->DelIntPreset(num,Rname);
-}
-
-void RKRGUI::act_deact(int mode,Fl_Widget *w) {
-  if (rkr->deactivate==0) return;
-
-for(int i=0;i<w->parent()->children();i++)
-    {
-        
-       Fl_Widget *k = w->parent()->child(i);   
-       if(k!=w)
-        {
-          if (mode==0) 
-          {
-          k->deactivate(); 
-          if(rkr->deachide) k->hide();
-          }
-          else
-          {
-          k->activate();
-          k->show();
-          k->redraw();
-          }  
-        }   
-         
-         
-         
-    }
 }

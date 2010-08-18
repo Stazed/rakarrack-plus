@@ -3558,6 +3558,11 @@ private:
   void cb_Fil128_i(Fl_Button*, void*);
   static void cb_Fil128(Fl_Button*, void*);
 public:
+  Fl_Check_Button *Order_DeacHide;
+private:
+  void cb_Order_DeacHide_i(Fl_Check_Button*, void*);
+  static void cb_Order_DeacHide(Fl_Check_Button*, void*);
+public:
   Fl_Button *ok_order;
 private:
   void cb_ok_order_i(Fl_Button*, void*);
@@ -3635,11 +3640,6 @@ public:
 private:
   void cb_BI_Browser_i(Fl_Button*, void*);
   static void cb_BI_Browser(Fl_Button*, void*);
-public:
-  Fl_Check_Button *Enable_Deactivation;
-private:
-  void cb_Enable_Deactivation_i(Fl_Check_Button*, void*);
-  static void cb_Enable_Deactivation(Fl_Check_Button*, void*);
 public:
   Fl_Check_Button *Enable_DeacHide;
 private:
@@ -4154,6 +4154,5 @@ public:
   Fl_Widget * FindWidget(int num);
   void ReadIntPresets();
   inline void delpreset(Fl_Widget *w, int num);
-  void act_deact(int mode,Fl_Widget *w);
 };
 #endif
