@@ -19841,7 +19841,7 @@ R average.");
         Analy->hide();
       } // Analyzer* Analy
       { HideUE = new Fl_Button(457, 137, 32, 18, "Hide");
-        HideUE->shortcut(0x6f);
+        HideUE->shortcut(0xffc6);
         HideUE->color((Fl_Color)62);
         HideUE->labelsize(10);
         HideUE->callback((Fl_Callback*)cb_HideUE, (void*)(77));
