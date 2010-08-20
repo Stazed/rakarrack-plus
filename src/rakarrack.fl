@@ -841,7 +841,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1111,10 +1112,6 @@ if(stecla==4)
   
  stecla=0;
 }   
-
-
-
-
 
 if (preset!=1000)
 {
@@ -1449,52 +1446,52 @@ Fl::focus(Open_Order);
       }
       Fl_Box L1 {
         label label
-        user_data 7
+        user_data 770
         xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
       }
       Fl_Box L2 {
         label label
-        user_data 7
+        user_data 771
         xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
       }
       Fl_Box L3 {
         label label
-        user_data 7
+        user_data 772
         xywh {322 195 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L4 {
         label label
-        user_data 7
+        user_data 773
         xywh {482 195 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L5 {
         label label
-        user_data 7
+        user_data 774
         xywh {642 195 157 17} labelfont 1 labelcolor 7
       }
       Fl_Box L6 {
         label label
-        user_data 7
+        user_data 775
         xywh {1 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L7 {
         label label
-        user_data 7
+        user_data 776
         xywh {162 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L8 {
         label label
-        user_data 7
+        user_data 777
         xywh {322 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L9 {
         label label
-        user_data 7
+        user_data 778
         xywh {482 396 158 17} labelfont 1 labelcolor 7
       }
       Fl_Box L10 {
         label label
-        user_data 7
+        user_data 779
         xywh {642 396 154 17} labelfont 1 labelcolor 7
       }
       Fl_Group EQ {
@@ -11593,8 +11590,7 @@ HideUE->redraw();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
-Fl::add_handler(prevnext);} {selected
-    }
+Fl::add_handler(prevnext);} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
@@ -15670,7 +15666,7 @@ for (int t=0; t<Principal->children();t++)
   
      k= w->labelsize();
      k+=value;
-     if(ud!=7) 
+     if((ud<770) || (ud>779))
      {
      if((k>2)&&(k<16)) w->labelsize(k);
      }
@@ -16580,7 +16576,26 @@ closedir(dir);} {}
   }
   Function {prevnext(int e)} {return_type {static int}
   } {
-    code {if(e != 12) return 0;
+    code {if(e==5)
+{
+ Fl_Widget *w = Fl::belowmouse();
+ long long k = (long long) w->user_data();
+ if((k<770)||( k>779)) return 0;
+ drag=k-770;
+ return 1;
+}
+ 
+if((drag!=1000) && (Fl::event_button1()==0))
+{
+Fl_Widget *w = Fl::belowmouse();
+long long k = (long long) w->user_data();
+if((k<770)||( k>779)) return 0;
+if(drag != (int)k-770) ((RKRGUI*)(w->parent()->user_data()))->Prep_Reorden(drag,(int)k-770);
+drag=1000;
+return 1;
+}
+
+if(e != 12) return 0;
 else
 {
 
@@ -16788,5 +16803,15 @@ s->remove(s->value());
 s->value(0);
 s->redraw();
 rkr->DelIntPreset(num,Rname);} {}
+  }
+  Function {Prep_Reorden(int source, int dest)} {} {
+    code {int x = rkr->efx_order[source];
+int y = rkr->efx_order[dest];
+
+rkr->efx_order[source]=y;
+rkr->efx_order[dest]=x;
+
+reordena();} {selected
+    }
   }
 } 

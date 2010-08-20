@@ -1109,10 +1109,6 @@ if(stecla==4)
  stecla=0;
 }   
 
-
-
-
-
 if (preset!=1000)
 {
  Preset_Counter->value(preset);
@@ -10686,54 +10682,54 @@ Fl_Double_Window* RKRGUI::make_window() {
     { L1 = new Fl_Box(2, 195, 158, 17, "label");
       L1->labelfont(1);
       L1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L1->user_data((void*)(7));
+      L1->user_data((void*)(770));
       L1->align(FL_ALIGN_CLIP);
     } // Fl_Box* L1
     { L2 = new Fl_Box(162, 195, 158, 17, "label");
       L2->labelfont(1);
       L2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L2->user_data((void*)(7));
+      L2->user_data((void*)(771));
       L2->align(FL_ALIGN_CLIP);
     } // Fl_Box* L2
     { L3 = new Fl_Box(322, 195, 158, 17, "label");
       L3->labelfont(1);
       L3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L3->user_data((void*)(7));
+      L3->user_data((void*)(772));
     } // Fl_Box* L3
     { L4 = new Fl_Box(482, 195, 158, 17, "label");
       L4->labelfont(1);
       L4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L4->user_data((void*)(7));
+      L4->user_data((void*)(773));
     } // Fl_Box* L4
     { L5 = new Fl_Box(642, 195, 157, 17, "label");
       L5->labelfont(1);
       L5->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L5->user_data((void*)(7));
+      L5->user_data((void*)(774));
     } // Fl_Box* L5
     { L6 = new Fl_Box(1, 396, 158, 17, "label");
       L6->labelfont(1);
       L6->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L6->user_data((void*)(7));
+      L6->user_data((void*)(775));
     } // Fl_Box* L6
     { L7 = new Fl_Box(162, 396, 158, 17, "label");
       L7->labelfont(1);
       L7->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L7->user_data((void*)(7));
+      L7->user_data((void*)(776));
     } // Fl_Box* L7
     { L8 = new Fl_Box(322, 396, 158, 17, "label");
       L8->labelfont(1);
       L8->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L8->user_data((void*)(7));
+      L8->user_data((void*)(777));
     } // Fl_Box* L8
     { L9 = new Fl_Box(482, 396, 158, 17, "label");
       L9->labelfont(1);
       L9->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L9->user_data((void*)(7));
+      L9->user_data((void*)(778));
     } // Fl_Box* L9
     { L10 = new Fl_Box(642, 396, 154, 17, "label");
       L10->labelfont(1);
       L10->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      L10->user_data((void*)(7));
+      L10->user_data((void*)(779));
     } // Fl_Box* L10
     { EQ = new Fl_Group(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);
@@ -25207,7 +25203,7 @@ for (int t=0; t<Principal->children();t++)
   
      k= w->labelsize();
      k+=value;
-     if(ud!=7) 
+     if((ud<770) || (ud>779))
      {
      if((k>2)&&(k<16)) w->labelsize(k);
      }
@@ -26131,7 +26127,26 @@ closedir(dir);
 }
 
 int RKRGUI::prevnext(int e) {
-  if(e != 12) return 0;
+  if(e==5)
+{
+ Fl_Widget *w = Fl::belowmouse();
+ long long k = (long long) w->user_data();
+ if((k<770)||( k>779)) return 0;
+ drag=k-770;
+ return 1;
+}
+ 
+if((drag!=1000) && (Fl::event_button1()==0))
+{
+Fl_Widget *w = Fl::belowmouse();
+long long k = (long long) w->user_data();
+if((k<770)||( k>779)) return 0;
+if(drag != (int)k-770) ((RKRGUI*)(w->parent()->user_data()))->Prep_Reorden(drag,(int)k-770);
+drag=1000;
+return 1;
+}
+
+if(e != 12) return 0;
 else
 {
 
@@ -26343,4 +26358,14 @@ s->remove(s->value());
 s->value(0);
 s->redraw();
 rkr->DelIntPreset(num,Rname);
+}
+
+void RKRGUI::Prep_Reorden(int source, int dest) {
+  int x = rkr->efx_order[source];
+int y = rkr->efx_order[dest];
+
+rkr->efx_order[source]=y;
+rkr->efx_order[dest]=x;
+
+reordena();
 }
