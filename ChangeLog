@@ -2,10 +2,11 @@
 
 - Drag & Drop to switch effects on the main window to change the order,
  (Label to Label)
-- Add Hide function for unused presets
+- Add Hide function for unused presets (F9)
 - Speed up the preset change process
 - Added Menu entry to import Internal Preset Archives
 - Added MIDI Converter Octave +/- 24
+- Improved Final Limiter
 - User Internal Effect Presets can be added and Removed with Insert/Delete
   keys
 - F2/F3 Down/Up Output Volume
