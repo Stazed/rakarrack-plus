@@ -1371,7 +1371,13 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_eq_activar_i(Fl_Light_Button* o, void*) {
-  rkr->EQ1_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->EQ1_Bypass);
+ return;
+} 
+rkr->EQ1_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
 findpos(0,(int)o->value(),o);
@@ -1553,7 +1559,13 @@ void RKRGUI::cb_eq_10(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_compress_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Compressor_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Compressor_Bypass);
+ return;
+}
+rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
 findpos(1,(int)o->value(),o);
 }
@@ -1682,7 +1694,13 @@ void RKRGUI::cb_Peak(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_dist_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Distorsion_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Distorsion_Bypass);
+ return;
+}
+rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
 findpos(2,(int)o->value(),o);
@@ -1878,7 +1896,13 @@ void RKRGUI::cb_dist_hpf(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_ovrd_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Overdrive_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Overdrive_Bypass);
+ return;
+}
+rkr->Overdrive_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
 findpos(3,(int)o->value(),o);
@@ -2025,7 +2049,13 @@ void RKRGUI::cb_ovrd_hpf(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_echo_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Echo_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Echo_Bypass);
+ return;
+}
+rkr->Echo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
 findpos(4,(int)o->value(),o);
@@ -2148,7 +2178,13 @@ void RKRGUI::cb_echo_damp(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_chorus_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Chorus_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Chorus_Bypass);
+ return;
+}
+rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
 findpos(5,(int)o->value(),o);
@@ -2315,7 +2351,13 @@ void RKRGUI::cb_chorus_LR(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_phaser_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Phaser_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Phaser_Bypass);
+ return;
+}
+rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
 findpos(6,(int)o->value(),o);
@@ -2485,7 +2527,13 @@ void RKRGUI::cb_phaser_LR(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_flanger_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Flanger_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Flanger_Bypass);
+ return;
+}
+rkr->Flanger_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
 findpos(7,(int)o->value(),o);
@@ -2640,7 +2688,13 @@ void RKRGUI::cb_flanger_LR(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_reverb_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Reverb_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Reverb_Bypass);
+ return;
+}
+rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
 findpos(8,(int)o->value(),o);
@@ -2792,7 +2846,13 @@ void RKRGUI::cb_reverb_damp(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_eqp_activar_i(Fl_Light_Button* o, void*) {
-  rkr->EQ2_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->EQ2_Bypass);
+ return;
+}
+rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
 findpos(9,(int)o->value(),o);
@@ -2947,7 +3007,13 @@ void RKRGUI::cb_eqp_HQ(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_WhaWha_activar_i(Fl_Light_Button* o, void*) {
-  rkr->WhaWha_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->WhaWha_Bypass);
+ return;
+}
+rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
 findpos(10,(int)o->value(),o);
@@ -3101,7 +3167,13 @@ void RKRGUI::cb_WhaWha_smooth(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_Alienwah_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Alienwah_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Alienwah_Bypass);
+ return;
+}
+rkr->Alienwah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
 findpos(11,(int)o->value(),o);
@@ -3262,7 +3334,13 @@ void RKRGUI::cb_Alienwah_LR(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_Cabinet_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Cabinet_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Cabinet_Bypass);
+ return;
+}
+rkr->Cabinet_Bypass=(int)o->value();
 findpos(12,(int)o->value(),o);
 }
 void RKRGUI::cb_Cabinet_activar(Fl_Light_Button* o, void* v) {
@@ -3299,7 +3377,13 @@ void RKRGUI::cb_Cabinet_output(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_pan_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Pan_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Pan_Bypass);
+ return;
+}
+rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
 findpos(13,(int)o->value(),o);
@@ -3420,7 +3504,13 @@ void RKRGUI::cb_pan_extra(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_har_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Harmonizer_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Harmonizer_Bypass);
+ return;
+}
+rkr->Harmonizer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
@@ -3565,7 +3655,13 @@ void RKRGUI::cb_har_type(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_musdelay_activar_i(Fl_Light_Button* o, void*) {
-  rkr->MusDelay_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->MusDelay_Bypass);
+ return;
+}
+rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
 findpos(15,(int)o->value(),o);
@@ -3764,7 +3860,13 @@ void RKRGUI::cb_musdelay_damp(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_gate_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Gate_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Gate_Bypass);
+ return;
+}
+rkr->Gate_Bypass=(int)o->value();
 findpos(16,(int)o->value(),o);
 }
 void RKRGUI::cb_gate_activar(Fl_Light_Button* o, void* v) {
@@ -3843,7 +3945,13 @@ void RKRGUI::cb_gate_HPF(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_newdist_activar_i(Fl_Light_Button* o, void*) {
-  rkr->NewDist_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->NewDist_Bypass);
+ return;
+}
+rkr->NewDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
 findpos(17,(int)o->value(),o);
@@ -4009,7 +4117,13 @@ void RKRGUI::cb_newdist_hpf(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_aphaser_activar_i(Fl_Light_Button* o, void*) {
-  rkr->APhaser_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->APhaser_Bypass);
+ return;
+}
+rkr->APhaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
 findpos(18,(int)o->value(),o);
@@ -4173,7 +4287,13 @@ void RKRGUI::cb_aphaser_subs(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_valve_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Valve_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Valve_Bypass);
+ return;
+}
+rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
 findpos(19,(int)o->value(),o);
@@ -4347,7 +4467,13 @@ void RKRGUI::cb_valve_hpf(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_dflange_activar_i(Fl_Light_Button* o, void*) {
-  rkr->DFlange_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->DFlange_Bypass);
+ return;
+}
+rkr->DFlange_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
 findpos(20,(int)o->value(),o);
@@ -4543,7 +4669,13 @@ void RKRGUI::cb_dflange_rnd(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_ring_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Ring_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Ring_Bypass);
+ return;
+}
+rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
 findpos(21,(int)o->value(),o);
@@ -4730,7 +4862,13 @@ void RKRGUI::cb_ring_squ(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_exciter_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Exciter_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Exciter_Bypass);
+ return;
+}
+rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
 findpos(22,(int)o->value(),o);
@@ -4926,7 +5064,13 @@ void RKRGUI::cb_ex_10(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_mbdist_activar_i(Fl_Light_Button* o, void*) {
-  rkr->MBDist_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->MBDist_Bypass);
+ return;
+}
+rkr->MBDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
 findpos(23,(int)o->value(),o);
@@ -5126,7 +5270,13 @@ void RKRGUI::cb_mbdist_neg(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_arpie_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Arpie_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Arpie_Bypass);
+ return;
+}
+rkr->Arpie_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
 findpos(24,(int)o->value(),o);
@@ -5305,7 +5455,13 @@ Fl_Menu_Item RKRGUI::menu_arpie_pattern[] = {
 };
 
 void RKRGUI::cb_expander_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Expander_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Expander_Bypass);
+ return;
+}
+rkr->Expander_Bypass=(int)o->value();
 findpos(25,(int)o->value(),o);
 }
 void RKRGUI::cb_expander_activar(Fl_Light_Button* o, void* v) {
@@ -5419,7 +5575,13 @@ void RKRGUI::cb_expander_HPF(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_shuffle_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Shuffle_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Shuffle_Bypass);
+ return;
+}
+rkr->Shuffle_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shuffle->cleanup();
 findpos(26,(int)o->value(),o);
@@ -5583,7 +5745,13 @@ void RKRGUI::cb_shuffle_E(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_synthfilter_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Synthfilter_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Synthfilter_Bypass);
+ return;
+}
+rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
 findpos(27,(int)o->value(),o);
@@ -5787,7 +5955,13 @@ void RKRGUI::cb_synthfilter_Offset(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_mbvvol_activar_i(Fl_Light_Button* o, void*) {
-  rkr->MBVvol_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->MBVvol_Bypass);
+ return;
+}
+rkr->MBVvol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBVvol->cleanup();
 findpos(28,(int)o->value(),o);
@@ -5955,7 +6129,13 @@ Fl_Menu_Item RKRGUI::menu_mbvvol_combi[] = {
 };
 
 void RKRGUI::cb_convo_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Convol_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Convol_Bypass);
+ return;
+}
+rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
 findpos(29,(int)o->value(),o);
@@ -6110,7 +6290,13 @@ Fl_Menu_Item RKRGUI::menu_convo_fnum[] = {
 };
 
 void RKRGUI::cb_looper_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Looper_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Looper_Bypass);
+ return;
+}
+rkr->Looper_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
 findpos(30,(int)o->value(),o);
@@ -6316,7 +6502,13 @@ void RKRGUI::cb_looper_clear(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ryanwah_activar_i(Fl_Light_Button* o, void*) {
-  rkr->RyanWah_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->RyanWah_Bypass);
+ return;
+}
+rkr->RyanWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RyanWah->cleanup();
 findpos(31,(int)o->value(),o);
@@ -6502,7 +6694,13 @@ void RKRGUI::cb_ryanwah_smooth(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_rbecho_activar_i(Fl_Light_Button* o, void*) {
-  rkr->RBEcho_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->RBEcho_Bypass);
+ return;
+}
+rkr->RBEcho_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RBEcho->cleanup();
 findpos(32,(int)o->value(),o);
@@ -6652,7 +6850,13 @@ void RKRGUI::cb_rbecho_angle(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_coil_activar_i(Fl_Light_Button* o, void*) {
-  rkr->CoilCrafter_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->CoilCrafter_Bypass);
+ return;
+}
+rkr->CoilCrafter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
 findpos(33,(int)o->value(),o);
@@ -6795,7 +6999,13 @@ void RKRGUI::cb_coil_mode(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_shelf_activar_i(Fl_Light_Button* o, void*) {
-  rkr->ShelfBoost_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->ShelfBoost_Bypass);
+ return;
+}
+rkr->ShelfBoost_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_ShelfBoost->cleanup();
 findpos(34,(int)o->value(),o);
@@ -6881,7 +7091,13 @@ void RKRGUI::cb_shelf_mode(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_vo_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Vocoder_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Vocoder_Bypass);
+ return;
+}
+rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
 findpos(35,(int)o->value(),o);
@@ -6998,7 +7214,13 @@ void RKRGUI::cb_vo_level(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_sus_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Sustainer_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Sustainer_Bypass);
+ return;
+}
+rkr->Sustainer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sustainer->cleanup();
 findpos(36,(int)o->value(),o);
@@ -7049,7 +7271,13 @@ void RKRGUI::cb_sus_sus(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_seq_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Sequence_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Sequence_Bypass);
+ return;
+}
+rkr->Sequence_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
 findpos(37,(int)o->value(),o);
@@ -7272,7 +7500,13 @@ void RKRGUI::cb_seq_range(Fl_Counter* o, void* v) {
 }
 
 void RKRGUI::cb_shifter_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Shifter_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Shifter_Bypass);
+ return;
+}
+rkr->Shifter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
 findpos(38,(int)o->value(),o);
@@ -7428,7 +7662,13 @@ Fl_Menu_Item RKRGUI::menu_shifter_mode[] = {
 };
 
 void RKRGUI::cb_stomp_activar_i(Fl_Light_Button* o, void*) {
-  rkr->StompBox_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->StompBox_Bypass);
+ return;
+}
+rkr->StompBox_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
 findpos(39,(int)o->value(),o);
@@ -7544,7 +7784,13 @@ Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
 };
 
 void RKRGUI::cb_revtron_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Reverbtron_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Reverbtron_Bypass);
+ return;
+}
+rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
 findpos(40,(int)o->value(),o);
 }
@@ -7777,7 +8023,13 @@ Fl_Menu_Item RKRGUI::menu_revtron_fnum[] = {
 };
 
 void RKRGUI::cb_echotron_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Echotron_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Echotron_Bypass);
+ return;
+}
+rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
 findpos(41,(int)o->value(),o);
 }
@@ -8012,7 +8264,13 @@ Fl_Menu_Item RKRGUI::menu_echotron_fnum[] = {
 };
 
 void RKRGUI::cb_shar_activar_i(Fl_Light_Button* o, void*) {
-  rkr->StereoHarm_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->StereoHarm_Bypass);
+ return;
+}
+rkr->StereoHarm_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
@@ -8209,7 +8467,13 @@ void RKRGUI::cb_shar_type(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_cband_activar_i(Fl_Light_Button* o, void*) {
-  rkr->CompBand_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->CompBand_Bypass);
+ return;
+}
+rkr->CompBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
 findpos(43,(int)o->value(),o);
@@ -8404,7 +8668,13 @@ void RKRGUI::cb_cband_cross3(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_otrem_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Opticaltrem_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Opticaltrem_Bypass);
+ return;
+}
+rkr->Opticaltrem_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
 findpos(44,(int)o->value(),o);
@@ -8505,7 +8775,13 @@ void RKRGUI::cb_otrem_pan(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_vibe_activar_i(Fl_Light_Button* o, void*) {
-  rkr->Vibe_Bypass=(int)o->value();
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Vibe_Bypass);
+ return;
+}
+rkr->Vibe_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Vibe->cleanup();
 findpos(45,(int)o->value(),o);

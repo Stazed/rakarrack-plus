@@ -1500,7 +1500,13 @@ Fl::focus(Open_Order);
         Fl_Light_Button eq_activar {
           label On
           user_data 2
-          callback {rkr->EQ1_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->EQ1_Bypass);
+ return;
+} 
+rkr->EQ1_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
 findpos(0,(int)o->value(),o);}
@@ -1679,7 +1685,13 @@ rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));}
         Fl_Light_Button compress_activar {
           label On
           user_data 2
-          callback {rkr->Compressor_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Compressor_Bypass);
+ return;
+}
+rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
 findpos(1,(int)o->value(),o);}
           xywh {166 216 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
@@ -1808,7 +1820,13 @@ if ((int) o->value() == 0) compress_output->do_callback();}
         Fl_Light_Button dist_activar {
           label On
           user_data 2
-          callback {rkr->Distorsion_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Distorsion_Bypass);
+ return;
+}
+rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
 findpos(2,(int)o->value(),o);}
@@ -2091,7 +2109,13 @@ rkr->efx_Distorsion->changepar(8,(int)o->value());}
         Fl_Light_Button ovrd_activar {
           label On
           user_data 2
-          callback {rkr->Overdrive_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Overdrive_Bypass);
+ return;
+}
+rkr->Overdrive_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
 findpos(3,(int)o->value(),o);}
@@ -2233,7 +2257,13 @@ rkr->efx_Overdrive->changepar(8,(int)o->value());}
         Fl_Light_Button echo_activar {
           label On
           user_data 2
-          callback {rkr->Echo_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Echo_Bypass);
+ return;
+}
+rkr->Echo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
 findpos(4,(int)o->value(),o);}
@@ -2374,7 +2404,13 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
         Fl_Light_Button chorus_activar {
           label On
           user_data 2
-          callback {rkr->Chorus_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Chorus_Bypass);
+ return;
+}
+rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
 findpos(5,(int)o->value(),o);}
@@ -2566,7 +2602,13 @@ rkr->efx_Chorus->changepar(9,(int)(o->value()+64));}
         Fl_Light_Button phaser_activar {
           label On
           user_data 2
-          callback {rkr->Phaser_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Phaser_Bypass);
+ return;
+}
+rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
 findpos(6,(int)o->value(),o);}
@@ -2741,7 +2783,13 @@ rkr->efx_Phaser->changepar(9,(int)(o->value()+64));}
         Fl_Light_Button flanger_activar {
           label On
           user_data 2
-          callback {rkr->Flanger_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Flanger_Bypass);
+ return;
+}
+rkr->Flanger_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
 findpos(7,(int)o->value(),o);}
@@ -2900,7 +2948,13 @@ rkr->efx_Flanger->changepar(9,(int)(o->value()+64));}
         Fl_Light_Button reverb_activar {
           label On
           user_data 2
-          callback {rkr->Reverb_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Reverb_Bypass);
+ return;
+}
+rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
 findpos(8,(int)o->value(),o);}
@@ -3078,7 +3132,13 @@ rkr->efx_Rev->changepar(8,(int)o->value());}
         Fl_Light_Button eqp_activar {
           label On
           user_data 2
-          callback {rkr->EQ2_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->EQ2_Bypass);
+ return;
+}
+rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
 findpos(9,(int)o->value(),o);}
@@ -3232,7 +3292,13 @@ rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));}
         Fl_Light_Button WhaWha_activar {
           label On
           user_data 2
-          callback {rkr->WhaWha_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->WhaWha_Bypass);
+ return;
+}
+rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
 findpos(10,(int)o->value(),o);}
@@ -3391,7 +3457,13 @@ rkr->efx_WhaWha->changepar(9,(int)o->value());}
         Fl_Light_Button Alienwah_activar {
           label On
           user_data 2
-          callback {rkr->Alienwah_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Alienwah_Bypass);
+ return;
+}
+rkr->Alienwah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
 findpos(11,(int)o->value(),o);}
@@ -3553,7 +3625,13 @@ rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
         Fl_Light_Button Cabinet_activar {
           label On
           user_data 2
-          callback {rkr->Cabinet_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Cabinet_Bypass);
+ return;
+}
+rkr->Cabinet_Bypass=(int)o->value();
 findpos(12,(int)o->value(),o);}
           xywh {40 48 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
@@ -3622,7 +3700,13 @@ findpos(12,(int)o->value(),o);}
         Fl_Light_Button pan_activar {
           label On
           user_data 2
-          callback {rkr->Pan_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Pan_Bypass);
+ return;
+}
+rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
 findpos(13,(int)o->value(),o);}
@@ -3740,12 +3824,18 @@ rkr->efx_Pan->changepar(5,(int)o->value());}
         Fl_Light_Button har_activar {
           label On
           user_data 2
-          callback {rkr->Harmonizer_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Harmonizer_Bypass);
+ return;
+}
+rkr->Harmonizer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);
-findpos(14,(int)o->value(),o);}
+findpos(14,(int)o->value(),o);} selected
           xywh {326 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice har_preset {
@@ -3886,7 +3976,13 @@ Chord(0);}
         Fl_Light_Button musdelay_activar {
           label On
           user_data 2
-          callback {rkr->MusDelay_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->MusDelay_Bypass);
+ return;
+}
+rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
 findpos(15,(int)o->value(),o);}
@@ -4108,7 +4204,13 @@ rkr->efx_MusDelay->changepar(9,(int)o->value());}
         Fl_Light_Button gate_activar {
           label On
           user_data 2
-          callback {rkr->Gate_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Gate_Bypass);
+ return;
+}
+rkr->Gate_Bypass=(int)o->value();
 findpos(16,(int)o->value(),o);}
           xywh {326 417 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
@@ -4189,7 +4291,13 @@ gate_LPF->value(rkr->efx_Gate->getpar(5));}
         Fl_Light_Button newdist_activar {
           label On
           user_data 2
-          callback {rkr->NewDist_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->NewDist_Bypass);
+ return;
+}
+rkr->NewDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
 findpos(17,(int)o->value(),o);}
@@ -4352,7 +4460,13 @@ rkr->efx_NewDist->changepar(8,(int)o->value());}
         Fl_Light_Button aphaser_activar {
           label On
           user_data 2
-          callback {rkr->APhaser_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->APhaser_Bypass);
+ return;
+}
+rkr->APhaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
 findpos(18,(int)o->value(),o);}
@@ -4521,7 +4635,13 @@ rkr->efx_APhaser->changepar(5,(int)o->value());}
         Fl_Light_Button valve_activar {
           label On
           user_data 2
-          callback {rkr->Valve_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Valve_Bypass);
+ return;
+}
+rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
 findpos(19,(int)o->value(),o);}
@@ -4691,7 +4811,13 @@ rkr->efx_Valve->changepar(7,(int)o->value());}
         Fl_Light_Button dflange_activar {
           label On
           user_data 2
-          callback {rkr->DFlange_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->DFlange_Bypass);
+ return;
+}
+rkr->DFlange_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
 findpos(20,(int)o->value(),o);}
@@ -4894,7 +5020,13 @@ rkr->efx_DFlange->changepar(13,(int)o->value());}
         Fl_Light_Button ring_activar {
           label On
           user_data 2
-          callback {rkr->Ring_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Ring_Bypass);
+ return;
+}
+rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
 findpos(21,(int)o->value(),o);}
@@ -5086,7 +5218,13 @@ rkr->efx_Ring->changepar(10,(int)o->value());}
         Fl_Light_Button exciter_activar {
           label On
           user_data 2
-          callback {rkr->Exciter_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Exciter_Bypass);
+ return;
+}
+rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
 findpos(22,(int)o->value(),o);}
@@ -5284,7 +5422,13 @@ rkr->efx_Exciter->changepar(10,(int)o->value());}
         Fl_Light_Button mbdist_activar {
           label On
           user_data 2
-          callback {rkr->MBDist_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->MBDist_Bypass);
+ return;
+}
+rkr->MBDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
 findpos(23,(int)o->value(),o);}
@@ -5490,7 +5634,13 @@ rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
         Fl_Light_Button arpie_activar {
           label On
           user_data 2
-          callback {rkr->Arpie_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Arpie_Bypass);
+ return;
+}
+rkr->Arpie_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
 findpos(24,(int)o->value(),o);}
@@ -5713,7 +5863,13 @@ rkr->efx_Arpie->changepar(6,(int)o->value());}
         Fl_Light_Button expander_activar {
           label On
           user_data 2
-          callback {rkr->Expander_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Expander_Bypass);
+ return;
+}
+rkr->Expander_Bypass=(int)o->value();
 findpos(25,(int)o->value(),o);}
           xywh {325 215 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
@@ -5830,7 +5986,13 @@ rkr->efx_Expander->Expander_Change(6, (int)o->value());}
         Fl_Light_Button shuffle_activar {
           label On
           user_data 2
-          callback {rkr->Shuffle_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Shuffle_Bypass);
+ return;
+}
+rkr->Shuffle_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shuffle->cleanup();
 findpos(26,(int)o->value(),o);}
@@ -5995,7 +6157,13 @@ rkr->efx_Shuffle->changepar(9,(int)o->value());}
         Fl_Light_Button synthfilter_activar {
           label On
           user_data 2
-          callback {rkr->Synthfilter_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Synthfilter_Bypass);
+ return;
+}
+rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
 findpos(27,(int)o->value(),o);}
@@ -6203,7 +6371,13 @@ rkr->efx_Synthfilter->changepar(15,(int)o->value());}
         Fl_Light_Button mbvvol_activar {
           label On
           user_data 2
-          callback {rkr->MBVvol_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->MBVvol_Bypass);
+ return;
+}
+rkr->MBVvol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBVvol->cleanup();
 findpos(28,(int)o->value(),o);}
@@ -6399,7 +6573,13 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
         Fl_Light_Button convo_activar {
           label On
           user_data 2
-          callback {rkr->Convol_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Convol_Bypass);
+ return;
+}
+rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
 findpos(29,(int)o->value(),o);}
@@ -6577,7 +6757,13 @@ rkr->efx_Convol->setfile(100);}
         Fl_Light_Button looper_activar {
           label On
           user_data 2
-          callback {rkr->Looper_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Looper_Bypass);
+ return;
+}
+rkr->Looper_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
 findpos(30,(int)o->value(),o);}
@@ -6791,7 +6977,13 @@ update_looper();}
         Fl_Light_Button ryanwah_activar {
           label On
           user_data 2
-          callback {rkr->RyanWah_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->RyanWah_Bypass);
+ return;
+}
+rkr->RyanWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RyanWah->cleanup();
 findpos(31,(int)o->value(),o);}
@@ -6978,7 +7170,13 @@ rkr->efx_RyanWah->changepar(9,(int)o->value());}
         Fl_Light_Button rbecho_activar {
           label On
           user_data 2
-          callback {rkr->RBEcho_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->RBEcho_Bypass);
+ return;
+}
+rkr->RBEcho_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RBEcho->cleanup();
 findpos(32,(int)o->value(),o);}
@@ -7127,7 +7325,13 @@ rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
         Fl_Light_Button coil_activar {
           label On
           user_data 2
-          callback {rkr->CoilCrafter_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->CoilCrafter_Bypass);
+ return;
+}
+rkr->CoilCrafter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
 findpos(33,(int)o->value(),o);}
@@ -7291,7 +7495,13 @@ rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
         Fl_Light_Button shelf_activar {
           label On
           user_data 2
-          callback {rkr->ShelfBoost_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->ShelfBoost_Bypass);
+ return;
+}
+rkr->ShelfBoost_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_ShelfBoost->cleanup();
 findpos(34,(int)o->value(),o);}
@@ -7384,7 +7594,13 @@ rkr->efx_ShelfBoost->changepar(1,(int)o->value());}
         Fl_Light_Button vo_activar {
           label On
           user_data 2
-          callback {rkr->Vocoder_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Vocoder_Bypass);
+ return;
+}
+rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
 findpos(35,(int)o->value(),o);}
@@ -7510,7 +7726,13 @@ rkr->efx_Vocoder->changepar(5,(int)o->value());}
         Fl_Light_Button sus_activar {
           label On
           user_data 2
-          callback {rkr->Sustainer_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Sustainer_Bypass);
+ return;
+}
+rkr->Sustainer_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sustainer->cleanup();
 findpos(36,(int)o->value(),o);}
@@ -7568,7 +7790,13 @@ rkr->efx_Sustainer->changepar(1,(int)o->value());}
         Fl_Light_Button seq_activar {
           label On
           user_data 2
-          callback {rkr->Sequence_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Sequence_Bypass);
+ return;
+}
+rkr->Sequence_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
 findpos(37,(int)o->value(),o);}
@@ -7823,7 +8051,13 @@ rkr->efx_Sequence->changepar(12,(int)o->value());}
         Fl_Light_Button shifter_activar {
           label On
           user_data 2
-          callback {rkr->Shifter_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Shifter_Bypass);
+ return;
+}
+rkr->Shifter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
 findpos(38,(int)o->value(),o);}
@@ -7987,7 +8221,13 @@ rkr->efx_Shifter->changepar(9,(int)o->value());}
         Fl_Light_Button stomp_activar {
           label On
           user_data 2
-          callback {rkr->StompBox_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->StompBox_Bypass);
+ return;
+}
+rkr->StompBox_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
 findpos(39,(int)o->value(),o);}
@@ -8142,7 +8382,13 @@ rkr->efx_StompBox->changepar(1,(int)o->value());}
         Fl_Light_Button revtron_activar {
           label On
           user_data 2
-          callback {rkr->Reverbtron_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Reverbtron_Bypass);
+ return;
+}
+rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
 findpos(40,(int)o->value(),o);}
           xywh {326 214 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
@@ -8412,7 +8658,13 @@ rkr->efx_Reverbtron->setfile(100);}
         Fl_Light_Button echotron_activar {
           label On
           user_data 2
-          callback {rkr->Echotron_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Echotron_Bypass);
+ return;
+}
+rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
 findpos(41,(int)o->value(),o);}
           xywh {326 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
@@ -8662,7 +8914,13 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
         Fl_Light_Button shar_activar {
           label On
           user_data 2
-          callback {rkr->StereoHarm_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->StereoHarm_Bypass);
+ return;
+}
+rkr->StereoHarm_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
@@ -8862,7 +9120,13 @@ Chord(1);}
         Fl_Light_Button cband_activar {
           label On
           user_data 2
-          callback {rkr->CompBand_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->CompBand_Bypass);
+ return;
+}
+rkr->CompBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
 findpos(43,(int)o->value(),o);}
@@ -9053,7 +9317,13 @@ rkr->efx_CompBand->changepar(11,(int)o->value());}
         Fl_Light_Button otrem_activar {
           label On
           user_data 2
-          callback {rkr->Opticaltrem_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Opticaltrem_Bypass);
+ return;
+}
+rkr->Opticaltrem_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
 findpos(44,(int)o->value(),o);}
@@ -9166,7 +9436,13 @@ rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));}
         Fl_Light_Button vibe_activar {
           label On
           user_data 2
-          callback {rkr->Vibe_Bypass=(int)o->value();
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116);
+ o->value(rkr->Vibe_Bypass);
+ return;
+}
+rkr->Vibe_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Vibe->cleanup();
 findpos(45,(int)o->value(),o);}
@@ -9792,7 +10068,7 @@ rkr->deachide=1;
  o->label("Show");
 }
  
-reordena();} selected
+reordena();}
           xywh {457 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
         }
       }
