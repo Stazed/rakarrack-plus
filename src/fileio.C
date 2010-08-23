@@ -1450,7 +1450,7 @@ RKR::Actualizar_Audio ()
         case 30://Looper 
 
         Looper_Bypass = 0;
-        efx_Looper->cleanup();
+        // efx_Looper->cleanup();
         for (i = 0; i <= 13; i++)
         efx_Looper->loadpreset(i, lv[31][i]);
         Looper_Bypass = Looper_B;
