@@ -60,6 +60,10 @@ Dflange::Dflange (float * efxoutl_, float * efxoutr_)
   ibase = 1.0f/base;
   //default values
   Ppreset = 0;  
+  rsA = 0.0f;
+  rsB = 0.0f; 
+  lsA  = 0.0f;
+  lsB = 0.0f;
   setpreset (Ppreset);
   cleanup ();
 };
@@ -110,8 +114,6 @@ Dflange::out (float * smpsl, float * smpsr)
     float lfol, lfor, lmod, rmod, lmodfreq, rmodfreq, rx0, rx1, lx0, lx1;
     float ldif0, ldif1, rdif0, rdif1;  //Difference between fractional delay and floor(fractional delay)
     float drA, drB, dlA, dlB;	//LFO inside the loop.
-    float rsA, rsB, lsA, lsB;	//Audio sample at given delay
-
     
   lfo.effectlfoout (&lfol, &lfor);
   lmod = lfol;
@@ -200,29 +202,32 @@ Dflange::out (float * smpsl, float * smpsr)
 	tmp0 = (kr + (int) floor(drA)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
 	if (tmp1 >= maxx_delay) tmp1 =  0;	
-	rsA = rdelay[tmp0] + rdif0 * (rdelay[tmp1] - rdelay[tmp0] );	//here is the first right channel delay
+	//rsA = rdelay[tmp0] + rdif0 * (rdelay[tmp1] - rdelay[tmp0] );	//here is the first right channel delay
+	rsA = rdelay[tmp1] + rdif0 * (rdelay[tmp0] - rsA );	//All-pass interpolator
 	
 	//Right Channel, delay B	
 	rdif1 = drB - floor(drB);
 	tmp0 = (kr + (int) floor(drB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
 	if (tmp1 >= maxx_delay) tmp1 =  0;
-	rsB = rdelay[tmp0] + rdif1 * (rdelay[tmp1] - rdelay[tmp0]);	//here is the second right channel delay	
-	
-	//Left Channel, delay A
+	//rsB = rdelay[tmp0] + rdif1 * (rdelay[tmp1] - rdelay[tmp0]);	//here is the second right channel delay	
+	rsB = rdelay[tmp1] + rdif1 * (rdelay[tmp0] - rsB );
+		
+		//Left Channel, delay A
 	ldif0 = dlA - floor(dlA);
 	tmp0 = (kl + (int) floor(dlA)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
 	if (tmp1 >= maxx_delay) tmp1 =  0;
-	lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the first left channel delay
+	//lsA = ldelay[tmp0] + ldif0 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the first left channel delay
+	lsA = ldelay[tmp1] + ldif0 * (ldelay[tmp0] - lsA );	
 	
 	//Left Channel, delay B	
 	ldif1 = dlB - floor(dlB);
 	tmp0 = (kl + (int) floor(dlB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
 	if (tmp1 >= maxx_delay) tmp1 =  0;
-	lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the second leftt channel delay
-		
+	//lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the second leftt channel delay
+	lsB = ldelay[tmp1] + ldif1 * (ldelay[tmp0] - lsB );		
 	//End flanging, next process outputs
 
 	if(Pzero)

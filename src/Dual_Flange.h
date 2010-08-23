@@ -89,6 +89,7 @@ private:
   float period_const, base, ibase;
   float *ldelay, *rdelay, *zldelay, *zrdelay;
   float oldl, oldr;		//pt. lpf
+    float rsA, rsB, lsA, lsB;	//Audio sample at given delay
   class FPreset *Fpre;
 
 
