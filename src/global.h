@@ -474,6 +474,7 @@ public:
   int Ste_U_Q;
   int Ste_D_Q;
 
+  int Looper_Sync;
   int deachide;
   int font;
   int flpos;

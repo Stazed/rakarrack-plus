@@ -159,19 +159,36 @@ jackprocess (jack_nframes_t nframes, void *arg)
   JackOUT->cpuload = jack_cpu_load(jackclient);
 
   
-  if(JackOUT->Tap_Bypass) 
+  if((JackOUT->Tap_Bypass) && (JackOUT->Tap_Selection == 2))
   {
-
    astate = jack_transport_query(jackclient, &pos);
    if(astate >0)
    {
    if (JackOUT->jt_tempo != pos.beats_per_minute) 
-   {
    actualiza_tap(pos.beats_per_minute);
-   }
    }
 
   }
+  
+   if((JackOUT->Looper_Bypass) && (JackOUT->Looper_Sync==1))
+   {
+   astate = jack_transport_query(jackclient, &pos);
+   if((astate != JackOUT->jt_state) && (astate==0))
+    {
+    JackOUT->jt_state=astate;
+    JackOUT->efx_Looper->changepar(2,1);
+    stecla=5;
+    }
+
+    if((astate != JackOUT->jt_state) && (astate == 3))
+    {
+    JackOUT->jt_state=astate;
+    JackOUT->efx_Looper->changepar(1,1);
+    stecla=5;
+    }
+
+   }
+  
   
   
   
@@ -294,13 +311,23 @@ timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
 
 JackOUT->jt_state=state;
 
-if((state > 0) && (pos->beats_per_minute > 0))
-{
-JackOUT->jt_tempo=pos->beats_per_minute;
-JackOUT->Tap_TempoSet = lrint(JackOUT->jt_tempo);
-JackOUT->Update_tempo();
-JackOUT->Tap_Display=1;
-}
+
+ if((JackOUT->Looper_Bypass) && (JackOUT->Looper_Sync==1) && (state==3))
+   {
+    JackOUT->efx_Looper->changepar(1,1);
+    stecla=5;
+   }
+
+if((JackOUT->Tap_Bypass) && (JackOUT->Tap_Selection == 2))
+ { 
+  if((state > 0) && (pos->beats_per_minute > 0))
+    {
+      JackOUT->jt_tempo=pos->beats_per_minute;
+      JackOUT->Tap_TempoSet = lrint(JackOUT->jt_tempo);
+      JackOUT->Update_tempo();
+      JackOUT->Tap_Display=1;
+    }
+ }
 
 return(1);
 

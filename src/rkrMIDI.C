@@ -104,6 +104,22 @@ RKR::midievents()
 
    } 
 
+   if((Looper_Bypass) && (Looper_Sync==2))
+     {
+       if (midievent->type == SND_SEQ_EVENT_START)
+          {
+           efx_Looper->changepar(1,1);
+           stecla=5;
+          }
+            
+       if (midievent->type == SND_SEQ_EVENT_STOP)
+          {
+           efx_Looper->changepar(2,1);
+           stecla=5;
+          }
+            
+     }
+
   if ((midievent->type == SND_SEQ_EVENT_NOTEON)
       || (midievent->type == SND_SEQ_EVENT_NOTEOFF))
     {
