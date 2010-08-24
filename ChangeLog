@@ -1,5 +1,6 @@
 ==v0.6.x (  /  /2010) ==
 
+- Looper Start/Stop can be synced now with JAck Transport and MIDI. 
 - Drag & Drop to switch effects on the main window to change the order,
  (Label to Label)
 - Add Hide function for unused presets (F9)

@@ -1103,11 +1103,17 @@ if(stecla==4)
   Nivel_Salida->do_callback();
   Nivel_Salida->redraw();
  } 
-  
-  
-  
  stecla=0;
 }   
+
+
+if(stecla==5)
+{
+ update_looper();
+ stecla=0;
+} 
+
+
 
 if (preset!=1000)
 {
@@ -10014,6 +10020,20 @@ rkr->m_displayed=1;
 void RKRGUI::cb_L_SIZE(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
 }
+
+void RKRGUI::cb_Looper_Syncro_i(Fl_Choice* o, void*) {
+  rkr->Looper_Sync =(int) o->value();
+}
+void RKRGUI::cb_Looper_Syncro(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Looper_Syncro_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_Looper_Syncro[] = {
+ {"Internal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Jack Transport", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"MIDI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_Har_Qual_i(Fl_Choice* o, void*) {
   int i = (int) o->value();
@@ -20357,6 +20377,7 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
+        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -20437,7 +20458,6 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
-        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
@@ -20516,6 +20536,15 @@ R average.");
           L_SIZE->align(FL_ALIGN_LEFT);
           L_SIZE->when(FL_WHEN_RELEASE);
         } // Fl_Counter* L_SIZE
+        { Looper_Syncro = new Fl_Choice(292, 149, 72, 18, "Looper Start Stop");
+          Looper_Syncro->down_box(FL_BORDER_BOX);
+          Looper_Syncro->labelsize(10);
+          Looper_Syncro->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Looper_Syncro->textsize(10);
+          Looper_Syncro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          Looper_Syncro->callback((Fl_Callback*)cb_Looper_Syncro);
+          Looper_Syncro->menu(menu_Looper_Syncro);
+        } // Fl_Choice* Looper_Syncro
         { Har_Qual = new Fl_Choice(132, 173, 47, 18, "Harmonizer Quality      ");
           Har_Qual->down_box(FL_BORDER_BOX);
           Har_Qual->labelsize(10);
@@ -21615,6 +21644,8 @@ if(!rkr->MIDIway) ML_Menu->deactivate();
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
+rakarrack.get(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync,0);
+
 rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
 rkr->MidiCh--;
@@ -21806,6 +21837,8 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
+rakarrack.set(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync);
+
 rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
 
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
@@ -23327,6 +23360,7 @@ BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
+Looper_Syncro->value(rkr->Looper_Sync);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
 Har_Downsample->value(rkr->Har_Down);

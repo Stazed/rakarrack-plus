@@ -3700,6 +3700,12 @@ private:
   void cb_L_SIZE_i(Fl_Counter*, void*);
   static void cb_L_SIZE(Fl_Counter*, void*);
 public:
+  Fl_Choice *Looper_Syncro;
+private:
+  void cb_Looper_Syncro_i(Fl_Choice*, void*);
+  static void cb_Looper_Syncro(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_Looper_Syncro[];
+public:
   Fl_Choice *Har_Qual;
 private:
   void cb_Har_Qual_i(Fl_Choice*, void*);

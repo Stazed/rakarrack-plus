@@ -1106,11 +1106,17 @@ if(stecla==4)
   Nivel_Salida->do_callback();
   Nivel_Salida->redraw();
  } 
-  
-  
-  
  stecla=0;
 }   
+
+
+if(stecla==5)
+{
+ update_looper();
+ stecla=0;
+} 
+
+
 
 if (preset!=1000)
 {
@@ -1354,7 +1360,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -3835,7 +3841,7 @@ if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);
-findpos(14,(int)o->value(),o);} selected
+findpos(14,(int)o->value(),o);}
           xywh {326 215 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice har_preset {
@@ -10550,19 +10556,19 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1479 194 640 528} type Double color 4 hide
+      xywh {1472 187 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
           label Look
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -10724,7 +10730,7 @@ PutBackground();}
         Fl_Group AUDIO_SET {
           label Audio
           user_data 1
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -10850,6 +10856,24 @@ Show_Next_Time();
 rkr->m_displayed=1;
 }}
             xywh {133 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
+          }
+          Fl_Choice Looper_Syncro {
+            label {Looper Start Stop}
+            callback {rkr->Looper_Sync =(int) o->value();}
+            xywh {292 149 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          } {
+            MenuItem {} {
+              label Internal
+              xywh {50 50 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label {Jack Transport}
+              xywh {50 50 45 26} labelsize 10
+            }
+            MenuItem {} {
+              label MIDI
+              xywh {40 40 36 21} labelsize 10
+            }
           }
           Fl_Choice Har_Qual {
             label {Harmonizer Quality      }
@@ -12095,6 +12119,8 @@ if(!rkr->MIDIway) ML_Menu->deactivate();
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
+rakarrack.get(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync,0);
+
 rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
 rkr->MidiCh--;
@@ -12285,6 +12311,8 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
+rakarrack.set(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync);
+
 rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
 
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
@@ -13799,6 +13827,7 @@ BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
+Looper_Syncro->value(rkr->Looper_Sync);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
 Har_Downsample->value(rkr->Har_Down);
