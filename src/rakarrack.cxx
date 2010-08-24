@@ -19807,7 +19807,7 @@ R average.");
         BostBut->shortcut(0xffc7);
         BostBut->color((Fl_Color)62);
         BostBut->labelsize(6);
-        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(7));
+        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(77));
       } // Fl_Button* BostBut
       { Balance = new SliderW(15, 48, 19, 126, "FX%");
         Balance->type(4);
