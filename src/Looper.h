@@ -43,7 +43,7 @@ public:
   void cleanuppt2 ();
   void cleanup ();
   void settempo(int value);
-
+  void setmvol(int value);
   int Ppreset;
   int progstate[6];
   void getstate ();
@@ -92,6 +92,7 @@ private:
   float oldl, oldr;		//pt. lpf
 
   float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2, pregain1, pregain2;
+  float mvol;
  
   class FPreset *Fpre;
   class metronome ticker;

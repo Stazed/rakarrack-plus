@@ -212,10 +212,11 @@ Looper::out (float * smpsl, float * smpsr)
           
  	   if((Pmetro) & (Pplay))
  	     {
- 	      efxoutl[i] += ticktock[i];  //if you want to hear the metronome in Looper
-	      efxoutr[i] += ticktock[i];  //Holborn, maybe we want to play it through from some other place...you can decide :)   
+ 	      efxoutl[i] += ticktock[i]*mvol;  //if you want to hear the metronome in Looper
+	      efxoutr[i] += ticktock[i]*mvol;  //Holborn, maybe we want to play it through from some other place...you can decide :)   
              } 
     };
+
 
 };
 
@@ -223,6 +224,12 @@ Looper::out (float * smpsl, float * smpsr)
 /*
  * Parameter control
  */
+
+void Looper::setmvol(int value)
+{
+mvol = 2.0f*(float)value/100.0f;
+}
+
 
 void Looper::settempo(int value)
 {

@@ -845,8 +845,7 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -6966,7 +6965,7 @@ update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(2,(int)o->value());
-update_looper();} selected
+update_looper();}
           xywh {379 328 44 22} shortcut 0xffc3
         }
         Fl_Button looper_record {
@@ -10636,7 +10635,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1472 187 640 528} type Double color 4 hide
+      xywh {1465 180 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -10954,6 +10953,12 @@ rkr->m_displayed=1;
               label MIDI
               xywh {40 40 36 21} labelsize 10
             }
+          }
+          Fl_Counter LM_Volume {
+            label {Metronome Volume  }
+            callback {rkr->Metro_Vol=(int)o->value();
+rkr->efx_Looper->setmvol(rkr->Metro_Vol);} selected
+            xywh {494 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
           }
           Fl_Choice Har_Qual {
             label {Harmonizer Quality      }
@@ -12200,6 +12205,8 @@ rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
 rakarrack.get(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync,0);
+rakarrack.get(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol,50);
+rkr->efx_Looper->setmvol(rkr->Metro_Vol);
 
 rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
@@ -12392,6 +12399,8 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
 rakarrack.set(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync);
+rakarrack.set(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol);
+
 
 rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
 
@@ -13908,6 +13917,7 @@ Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
 Looper_Syncro->value(rkr->Looper_Sync);
+LM_Volume->value(rkr->Metro_Vol);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
 Har_Downsample->value(rkr->Har_Down);
