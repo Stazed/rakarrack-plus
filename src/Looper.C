@@ -128,6 +128,8 @@ Looper::out (float * smpsl, float * smpsr)
 {
   int i;
   float rswell, lswell;
+  float ticktock[PERIOD];
+  ticker.metronomeout(ticktock);
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -202,7 +204,8 @@ Looper::out (float * smpsl, float * smpsr)
 	      efxoutr[i]= 0.0f;      
       }
           
- 
+ 	      //efxoutl[i] += ticktock[i];  //if you want to hear the metronome in Looper
+	      //efxoutr[i] += ticktock[i];  //Holborn, maybe we want to play it through from some other place...you can decide :)   
       
     };
 

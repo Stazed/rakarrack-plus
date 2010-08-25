@@ -33,6 +33,7 @@ rakarrack_SOURCES = main.C \
 	Looper.h \
 	MBDist.h \
 	MBVvol.h \
+	metronome.h\
 	MIDIConverter.h \
 	MusicDelay.h \
 	NewDist.h \
@@ -109,6 +110,7 @@ rakarrack_SOURCES = main.C \
 	Ring.C \
 	Shuffle.C \
 	MBVvol.C \
+	metronome.C\
 	Convolotron.C \
 	Synthfilter.C \
 	Resample.C \

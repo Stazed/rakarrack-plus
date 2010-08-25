@@ -27,6 +27,7 @@
 #define LOOPER_H
 
 #include "global.h"
+#include "metronome.h"
 
 class Looper
 {
@@ -82,6 +83,7 @@ private:
   float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2, pregain1, pregain2;
  
   class FPreset *Fpre;
+  class metronome ticker;
 
 };
 
