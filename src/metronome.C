@@ -46,7 +46,15 @@ metronome::~metronome ()
 {
 };
 
-
+void
+metronome::cleanup()
+{
+  tickctr = 0;
+  markctr = 0;
+  dulltick->cleanup();
+  sharptick->cleanup();
+  hpf->cleanup();
+}
 /*
  * Update the changed parameters
  */
@@ -62,7 +70,7 @@ metronome::set_tempo (int bpm)
 void
 metronome::set_meter (int counts)  //how many counts to hear the "mark"
 {
-
+  ticktype = counts; //always dull if 0, always sharp if 1, mark on interval if more
   if(counts<1) counts = 1;
   meter = counts - 1;
 
@@ -97,6 +105,15 @@ metronome::metronomeout (float * tickout)
   outdull = dulltick->filterout_s(hipass);
   outsharp = sharptick-> filterout_s(hipass);
   
+  switch(ticktype)
+  {
+  case 0:
+  tickout[i] = 1.25f*outdull;
+  break;
+  case 1:
+  tickout[i] = 0.65f*outsharp;   
+  break;
+  default:
   if(markctr==0)
   {
   tickout[i] = 0.65f*outsharp;
@@ -104,6 +121,9 @@ metronome::metronomeout (float * tickout)
   else
   {
   tickout[i] = 1.25f*outdull;
+  }
+  break;
+  
   }
   
   }
