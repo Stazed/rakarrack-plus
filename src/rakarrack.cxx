@@ -17019,9 +17019,11 @@ R average.");
       } // Fl_Box* o
       { looper_play = new Fl_Button(328, 328, 44, 22, "@>");
         looper_play->type(1);
+        looper_play->shortcut(0xffc2);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
       { looper_stop = new Fl_Button(379, 328, 44, 22, "@square");
+        looper_stop->shortcut(0xffc3);
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
       { looper_record = new Fl_Button(429, 328, 44, 22, "@circle");

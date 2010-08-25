@@ -845,12 +845,13 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
+Pexitprogram=1;}
       xywh {1453 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -6954,7 +6955,7 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
 }
 rkr->efx_Looper->changepar(1,(int)o->value());
 update_looper();}
-          xywh {328 328 44 22} type Toggle
+          xywh {328 328 44 22} type Toggle shortcut 0xffc2
         }
         Fl_Button looper_stop {
           label {@square}
@@ -6965,8 +6966,8 @@ update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(2,(int)o->value());
-update_looper();}
-          xywh {379 328 44 22}
+update_looper();} selected
+          xywh {379 328 44 22} shortcut 0xffc3
         }
         Fl_Button looper_record {
           label {@circle}

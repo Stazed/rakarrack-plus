@@ -360,8 +360,11 @@ JackOUT->Tap_Display=1;
 void
 actualiza_lop(double val)
 {
+if (val != 0)
+{
 JackOUT->jt_tempo=val;
 JackOUT->efx_Looper->settempo(lrint(JackOUT->jt_tempo));
 JackOUT->Tap_Display=1;
+}
 }
 
