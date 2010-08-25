@@ -845,7 +845,8 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {selected
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -1360,7 +1361,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -9706,7 +9707,7 @@ rkr->cleanup_efx();
         }
         Fl_Button BostBut {
           label {+10dB}
-          user_data 7
+          user_data 77
           callback {if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;}
           xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6

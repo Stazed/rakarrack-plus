@@ -336,8 +336,8 @@ Looper::changepar (int npar, int value)
       else
       {
       Precord = 1;
-      rplaystate = Pplay;
-      Pplay = 1;
+      rplaystate = 0;
+      Pplay = 0;
       }
       Pstop = 0;
       Pclear = 0;
