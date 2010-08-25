@@ -37,6 +37,7 @@ metronome::metronome ()
   tick_interval = SAMPLE_RATE;
   tickctr = 0;
   markctr = 0;
+  ticktype = 4;
   meter = 3;
   tickper = lrintf(0.012f*fSAMPLE_RATE);
 
