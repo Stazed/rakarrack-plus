@@ -241,9 +241,9 @@ int a2=0;
 a1 = abs(value-(x*barlen));
 a2 = abs(value-((x+1)*barlen));
 
-if(a2<a1) return((x+1)*barlen);
+if(a2<a1) return(((x+1)*barlen)+1);
 
-return(x*barlen);
+return(x*barlen+1);
 
 
 }
