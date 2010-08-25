@@ -42,6 +42,8 @@ public:
   void cleanuppt1 ();
   void cleanuppt2 ();
   void cleanup ();
+  void settempo(int value);
+
   int Ppreset;
   int progstate[6];
   void getstate ();
@@ -56,6 +58,10 @@ private:
 
   void initdelays ();
   void setfade ();
+  void setbar(int value);
+  int set_len(int value);
+  int cal_len(int value);
+
 
   //Parameters
   int Pvolume;	//Mix
@@ -72,8 +78,13 @@ private:
   int Prec1;
   int Prec2;
   int Plink;
-  int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
+  int Ptempo;
+  int Pbar;
+  int Pmetro;
+  int Pms;
   
+  int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
+  int barlen;
 
   float *ldelay, *rdelay;
   float *t2ldelay, *t2rdelay;

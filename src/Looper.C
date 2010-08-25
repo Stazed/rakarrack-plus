@@ -44,7 +44,13 @@ Looper::Looper (float * efxoutl_, float * efxoutr_, float size)
       rplaystate = 0;
       first_time1 = 1;
       first_time2 = 1;
-      
+      Pms = 0;
+      Ptempo = 120;
+      settempo(120);
+      Pbar = 2;      
+      setbar(2);
+
+
   Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
   maxx_delay = lrintf(fSAMPLE_RATE * size);
   fade = (int) SAMPLE_RATE / 2;    //1/2 SR fade time available
@@ -204,9 +210,11 @@ Looper::out (float * smpsl, float * smpsr)
 	      efxoutr[i]= 0.0f;      
       }
           
- 	      //efxoutl[i] += ticktock[i];  //if you want to hear the metronome in Looper
-	      //efxoutr[i] += ticktock[i];  //Holborn, maybe we want to play it through from some other place...you can decide :)   
-      
+ 	   if((Pmetro) & (Pplay))
+ 	     {
+ 	      efxoutl[i] += ticktock[i];  //if you want to hear the metronome in Looper
+	      efxoutr[i] += ticktock[i];  //Holborn, maybe we want to play it through from some other place...you can decide :)   
+             } 
     };
 
 };
@@ -215,6 +223,85 @@ Looper::out (float * smpsl, float * smpsr)
 /*
  * Parameter control
  */
+
+void Looper::settempo(int value)
+{
+Ptempo=value;
+setbar(Pbar);
+ticker.set_tempo(value);
+}
+
+int Looper::set_len(int value)
+{
+
+int x = value/barlen;
+int a1=0;
+int a2=0;
+
+a1 = abs(value-(x*barlen));
+a2 = abs(value-((x+1)*barlen));
+
+if(a2<a1) return((x+1)*barlen);
+
+return(x*barlen);
+
+
+}
+
+
+int Looper::cal_len(int value)
+{
+
+return(lrintf((float)value*60.0/(float)Ptempo*fSAMPLE_RATE));
+
+}
+
+
+void Looper::setbar(int value)
+{
+
+Pbar=value;
+switch(value)
+{
+
+      case 0:
+      barlen=cal_len(2);     
+      if(!Pms)ticker.set_meter(2);
+      break;
+      case 1:
+      barlen=cal_len(3);     
+      if(!Pms)ticker.set_meter(3);
+      break;
+      case 2:
+      barlen=cal_len(4);
+      if(!Pms)ticker.set_meter(4);
+      break;
+      case 3:
+      barlen=cal_len(5);
+      if(!Pms)ticker.set_meter(5);
+      break;
+      case 4:
+      barlen=cal_len(6);
+      if(!Pms)ticker.set_meter(6);
+      break;
+      case 5:
+      barlen=cal_len(7);
+      if(!Pms)ticker.set_meter(7);
+      break;
+      case 6:
+      barlen=cal_len(9);
+      if(!Pms)ticker.set_meter(9);
+      break;
+      case 7:
+      barlen=cal_len(11);
+      if(!Pms)ticker.set_meter(11);
+      break;
+  }
+
+
+}
+
+
 
 void Looper::setfade ()
 {
@@ -271,6 +358,8 @@ Looper::changepar (int npar, int value)
     {
       Pplay = 1;
       Pstop = 0;
+      kl =0;
+      ticker.cleanup();
     }
     if(Pstop)
     {
@@ -286,16 +375,17 @@ Looper::changepar (int npar, int value)
       {
       if((first_time1) && (Prec1))
         {
-	   dl = kl;
+	   dl = set_len(kl);
+	   printf("dl %d\n",dl); 
 	   first_time1 = 0;
 	   if(Plink)
 	   {
 	   dl2 = dl;
 	   }
 	}  
-      if((first_time2) && (Prec1))
+      if((first_time2) && (Prec2))
       {
-           dl2 = kl2;
+           dl2 = set_len(kl2);
 	   first_time2 = 0;
 	   if(Plink)
 	   {
@@ -312,16 +402,16 @@ Looper::changepar (int npar, int value)
       {
       if((first_time1) && (Prec1))
         {
-	   dl = kl;
+	   dl = set_len(kl);
 	   first_time1 = 0;
 	   if(Plink)
 	   {
 	   dl2 = dl;
 	   }
 	}  
-      if((first_time2) && (Prec1))
+      if((first_time2) && (Prec2))
       {
-           dl2 = kl2;
+           dl2 = set_len(kl2);
 	   first_time2 = 0;
 	   if(Plink)
 	   {
@@ -336,7 +426,7 @@ Looper::changepar (int npar, int value)
       else
       {
       Precord = 1;
-      rplaystate = 0;
+      rplaystate = Pplay;
       Pplay = 0;
       }
       Pstop = 0;
@@ -396,6 +486,22 @@ Looper::changepar (int npar, int value)
      Plink = value;
      dl2 = dl;    
      break;
+     case 14:
+     settempo(value);
+     break;
+     case 15:
+     setbar(value);
+     break;
+     case 16:
+     Pmetro=value;
+     break;
+     case 17:
+     Pms=value;
+     if(Pms==0) setbar(Pbar);
+     if(Pms==1) ticker.set_meter(1);
+     if(Pms==2) ticker.set_meter(0);
+     
+     break;
       
     };
     
@@ -448,6 +554,20 @@ Looper::getpar (int npar)
     case 13:
       return(Plink);
       break;  
+    case 14:
+      return(Ptempo);
+      break;
+    case 15:
+      return(Pbar);
+      break;
+    case 16:
+      return(Pmetro);
+      break;    
+    case 17:
+      return(Pms);
+      break; 
+
+
     };
   return (0);			//in case of bogus parameter number
 };

@@ -2239,6 +2239,23 @@ private:
   void cb_looper_level2_i(SliderW*, void*);
   static void cb_looper_level2(SliderW*, void*);
 public:
+  SliderW *looper_Tempo;
+private:
+  void cb_looper_Tempo_i(SliderW*, void*);
+  static void cb_looper_Tempo(SliderW*, void*);
+public:
+  Fl_Choice *looper_bar;
+private:
+  void cb_looper_bar_i(Fl_Choice*, void*);
+  static void cb_looper_bar(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_looper_bar[];
+public:
+  Fl_Choice *looper_ms;
+private:
+  void cb_looper_ms_i(Fl_Choice*, void*);
+  static void cb_looper_ms(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_looper_ms[];
+public:
   Fl_Check_Button *looper_rv;
 private:
   void cb_looper_rv_i(Fl_Check_Button*, void*);
@@ -2293,6 +2310,11 @@ public:
 private:
   void cb_looper_clear_i(Fl_Button*, void*);
   static void cb_looper_clear(Fl_Button*, void*);
+public:
+  Fl_Check_Button *looper_mt;
+private:
+  void cb_looper_mt_i(Fl_Check_Button*, void*);
+  static void cb_looper_mt(Fl_Check_Button*, void*);
 public:
   Fl_Group *RYANWAH;
   Fl_Light_Button *ryanwah_activar;

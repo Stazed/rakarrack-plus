@@ -170,6 +170,20 @@ jackprocess (jack_nframes_t nframes, void *arg)
 
   }
   
+  if((JackOUT->Looper_Bypass) && (JackOUT->Looper_Sync==1))
+  {
+   astate = jack_transport_query(jackclient, &pos);
+   if(astate >0)
+   {
+   if (JackOUT->jt_tempo != pos.beats_per_minute) 
+   actualiza_lop(pos.beats_per_minute);
+   }
+
+  }
+  
+   
+
+
    if((JackOUT->Looper_Bypass) && (JackOUT->Looper_Sync==1))
    {
    astate = jack_transport_query(jackclient, &pos);
@@ -341,3 +355,13 @@ JackOUT->Tap_TempoSet = lrint(JackOUT->jt_tempo);
 JackOUT->Update_tempo();
 JackOUT->Tap_Display=1;
 }
+
+
+void
+actualiza_lop(double val)
+{
+JackOUT->jt_tempo=val;
+JackOUT->efx_Looper->settempo(lrint(JackOUT->jt_tempo));
+JackOUT->Tap_Display=1;
+}
+

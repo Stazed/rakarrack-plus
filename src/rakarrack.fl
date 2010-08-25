@@ -845,14 +845,13 @@ class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {selected
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {1467 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} open selected
+      xywh {1453 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1178,6 +1177,14 @@ if(rkr->Tap_Bypass)
    }  
 
 }
+
+if((rkr->Looper_Bypass) && (rkr->Looper_Sync==1) && rkr->Tap_Display==1)
+   {
+     looper_Tempo->value(lrint(rkr->jt_tempo));
+     looper_Tempo->redraw();
+     rkr->Tap_Display=0;
+   }  
+ 
 
 if (rkr->Bypass)
 { 
@@ -6793,7 +6800,10 @@ looper_t1->value(rkr->efx_Looper->getpar(7));
 looper_t2->value(rkr->efx_Looper->getpar(8));
 looper_r1->value(rkr->efx_Looper->getpar(11));
 looper_r2->value(rkr->efx_Looper->getpar(12));
-looper_lnk->value(rkr->efx_Looper->getpar(13));}
+looper_lnk->value(rkr->efx_Looper->getpar(13));
+looper_Tempo->value(rkr->efx_Looper->getpar(14));
+looper_bar->value(rkr->efx_Looper->getpar(15));
+looper_ms->value(rkr->efx_Looper->getpar(17));}
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6813,7 +6823,7 @@ looper_lnk->value(rkr->efx_Looper->getpar(13));}
  return;
 }
 rkr->efx_Looper->changepar(0,(int)(o->value()+64));}
-          xywh {371 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {371 236 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider looper_level1 {
@@ -6824,7 +6834,7 @@ rkr->efx_Looper->changepar(0,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Looper->changepar(6,(int)o->value());}
-          xywh {371 257 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          xywh {371 248 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider looper_level2 {
@@ -6835,8 +6845,70 @@ rkr->efx_Looper->changepar(6,(int)o->value());}
  return;
 }
 rkr->efx_Looper->changepar(10,(int)o->value());}
-          xywh {371 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+          xywh {371 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Value_Slider looper_Tempo {
+          label Tempo
+          callback {rkr->efx_Looper->changepar(14,(int)o->value());}
+          xywh {371 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 380 step 1 value 100 textcolor 7
+          class SliderW
+        }
+        Fl_Choice looper_bar {
+          label {Time Sig.}
+          callback {rkr->efx_Looper->changepar(15,(int)o->value());}
+          xywh {377 284 40 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {2/4}
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {3/4}
+            xywh {10 10 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {4/4}
+            xywh {20 20 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {5/4}
+            xywh {30 30 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {6/8}
+            xywh {40 40 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {7/8}
+            xywh {50 50 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {9/8}
+            xywh {60 60 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {11/8}
+            xywh {70 70 36 21} labelsize 9
+          }
+        }
+        Fl_Choice looper_ms {
+          label MS
+          callback {rkr->efx_Looper->changepar(17,(int)o->value());}
+          xywh {441 284 29 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label N
+            xywh {10 10 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label H
+            xywh {20 20 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label L
+            xywh {20 20 36 21} labelsize 9
+          }
         }
         Fl_Check_Button looper_rv {
           label Reverse
@@ -6847,7 +6919,7 @@ rkr->efx_Looper->changepar(10,(int)o->value());}
  return;
 }
 rkr->efx_Looper->changepar(5,(int)o->value())}
-          xywh {328 291 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {328 300 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Check_Button looper_ap {
           label {Auto Play}
@@ -6858,19 +6930,19 @@ rkr->efx_Looper->changepar(5,(int)o->value())}
  return;
 }
 rkr->efx_Looper->changepar(9,(int)o->value())}
-          xywh {398 291 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {398 300 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Box {} {
           label Play
-          xywh {328 309 44 14} labelsize 10 labelcolor 7
+          xywh {328 314 44 14} labelsize 10 labelcolor 7
         }
         Fl_Box {} {
           label Stop
-          xywh {378 309 44 14} labelsize 10 labelcolor 7
+          xywh {378 314 44 14} labelsize 10 labelcolor 7
         }
         Fl_Box {} {
           label Record
-          xywh {429 309 44 14} labelsize 10 labelcolor 7
+          xywh {429 314 44 14} labelsize 10 labelcolor 7
         }
         Fl_Button looper_play {
           label {@>}
@@ -6882,7 +6954,7 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
 }
 rkr->efx_Looper->changepar(1,(int)o->value());
 update_looper();}
-          xywh {328 323 44 22} type Toggle
+          xywh {328 328 44 22} type Toggle
         }
         Fl_Button looper_stop {
           label {@square}
@@ -6894,7 +6966,7 @@ update_looper();}
 }
 rkr->efx_Looper->changepar(2,(int)o->value());
 update_looper();}
-          xywh {379 323 44 22}
+          xywh {379 328 44 22}
         }
         Fl_Button looper_record {
           label {@circle}
@@ -6906,11 +6978,11 @@ update_looper();}
 }
 rkr->efx_Looper->changepar(3,(int)o->value());
 update_looper();}
-          xywh {429 323 44 22} type Toggle labelcolor 1
+          xywh {429 328 44 22} type Toggle labelcolor 1
         }
         Fl_Box {} {
           label Track
-          xywh {391 355 39 14} labelsize 10 labelcolor 7
+          xywh {391 360 39 14} labelsize 10 labelcolor 7
         }
         Fl_Check_Button looper_r1 {
           label R1
@@ -6921,7 +6993,7 @@ update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(11,(int)o->value())}
-          xywh {328 362 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+          xywh {328 364 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
         }
         Fl_Check_Button looper_r2 {
           label R2
@@ -6932,7 +7004,7 @@ rkr->efx_Looper->changepar(11,(int)o->value())}
  return;
 }
 rkr->efx_Looper->changepar(12,(int)o->value())}
-          xywh {347 362 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+          xywh {347 364 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
         }
         Fl_Button looper_t1 {
           label 1
@@ -6944,7 +7016,7 @@ rkr->efx_Looper->changepar(12,(int)o->value())}
 }
 rkr->efx_Looper->changepar(7,(int)o->value());
 update_looper();}
-          xywh {431 351 18 22} type Toggle labelsize 10 align 16
+          xywh {431 358 18 18} type Toggle labelsize 10 align 16
         }
         Fl_Button looper_t2 {
           label 2
@@ -6956,13 +7028,13 @@ update_looper();}
 }
 rkr->efx_Looper->changepar(8,(int)o->value());
 update_looper();}
-          xywh {454 351 18 22} type Toggle labelsize 10 align 16
+          xywh {454 358 18 18} type Toggle labelsize 10 align 16
         }
         Fl_Check_Button looper_lnk {
           label Lnk
           user_data 2
           callback {rkr->efx_Looper->changepar(13,(int)o->value())}
-          xywh {348 376 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+          xywh {348 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
         }
         Fl_Button looper_clear {
           label Clear
@@ -6974,7 +7046,13 @@ update_looper();}
 }
 rkr->efx_Looper->changepar(4,(int)o->value());
 update_looper();}
-          xywh {375 377 57 14} labelsize 10
+          xywh {366 376 43 14} labelsize 10
+        }
+        Fl_Check_Button looper_mt {
+          label {Metrono.}
+          user_data 2
+          callback {rkr->efx_Looper->changepar(16,(int)o->value())}
+          xywh {413 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group RYANWAH {
