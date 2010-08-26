@@ -8,6 +8,7 @@ html_DATA= help.html \
 	tuner.html \
 	midilearn.html \
 	taptempo.html \
+	metronome.html \
 	hardware.html \
 	extra.html \
 	credits.html \

@@ -18,24 +18,27 @@
 
 
 
-<h2><a name="midi"></a>Metronome</h2>
+<h2><a name="midi"></a>MIDI Converter</h2>
 
-<p>This is a simple metronome.
+<p>This is a experimental monophonic MIDI converter.
 The parameters are not stored on presets but are saved as preferences
 and is remembered each time you start the program.</p>
 
-<p>The Tempo of this metronome is internal, if you want to sync to Jack
-Transport use the Looper metronome.</p>
+<p>The most important thing for a better results is
+<b>tune your guitar.</b> You need to connect with qjackctl or
+whatever Alsa-Seq connect utility the rakarrack MC OUT port to a
+synthesizer or sequencer device in order to produce sound or record
+something.</p>
 
-<p>The <b>Volumer</b>parameter control the Metronome volume and can be
-really high</p>
+<p>The <b>Trigger</b>parameter controls the volume
+passed to the note recognition algorithm.</p>
 
-<p>The <b>Tempo</b> adjust the Tempo bpm.</p>
+<p>The <b>Velocity</b> is for adjust the MIDI velocity
+sensitivity message send.</p>
 
-<p>The <b>Time Sig.</b> Time Signature is where you can choose the type of
-meassure.</p>
+<p>The <b>Channel</b> is the channel selected for the
+MIDI message, of course.</p>
 
-<p><img src="imagenes/midi.jpg" alt="rakarrack MIDI Converter" align="bottom" border="0" height="61" width="351"></p>
-<p><a href="help.html">Table of Contents</a> -  <a
-href="metronome.html">Metronome</a></p>
+<p><img src="imagenes/metro.jpg" alt="rakarrack Metronome" align="bottom" border="0" height="61" width="351"></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="tuner.html">Tuner</a></p>
 </body></html>
