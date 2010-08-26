@@ -1273,10 +1273,25 @@ if(tta)
 
 
 //
-
-
-
 }
+
+
+if (rkr->Metro_Bypass)
+{
+  if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
+  
+     {
+       Metro_Led->color(fl_lighter(FL_RED));
+       Metro_Led->redraw();
+     }  
+  
+  if ((rkr->M_Metronome->markctr) && ( (int) Metro_Led->color() != (int) fl_darker(FL_RED)))   
+     {  
+     Metro_Led->color(fl_darker(FL_RED));
+     Metro_Led->redraw();
+     } 
+}
+
 
 if (rkr->MIDIConverter_Bypass)
 {
@@ -9203,6 +9218,76 @@ void RKRGUI::cb_MIDI_LABEL(Fl_Box* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MIDI_LABEL_i(o,v);
 }
 
+void RKRGUI::cb_metro_activar_i(Fl_Light_Button* o, void*) {
+  if ((int)o->value()==0)
+{ 
+  Metro_Led->color(fl_darker(FL_RED));
+  Metro_Led->redraw();
+}
+
+rkr->M_Metronome->cleanup();
+rkr->Metro_Bypass=(int)o->value();
+
+
+ChangeActives();
+Metro_Label->redraw_label();
+}
+void RKRGUI::cb_metro_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_metro_activar_i(o,v);
+}
+
+void RKRGUI::cb_MetroBar_i(Fl_Choice* o, void*) {
+  rkr->M_Metro_Bar=(int)o->value();
+
+switch(rkr->M_Metro_Bar)
+
+   {
+      case 0:
+      rkr->M_Metronome->set_meter(2);
+      break;                    
+      case 1:
+      rkr->M_Metronome->set_meter(3);
+      break;                    
+      case 2:
+      rkr->M_Metronome->set_meter(4);
+      break;                    
+      case 3:
+      rkr->M_Metronome->set_meter(5);
+      break;                    
+      case 4:
+      rkr->M_Metronome->set_meter(6);
+      break;                    
+      case 5:
+      rkr->M_Metronome->set_meter(7);
+      break;                    
+      case 6:
+      rkr->M_Metronome->set_meter(9);
+      break;                    
+      case 7:
+      rkr->M_Metronome->set_meter(11);
+      break;                    
+
+ };
+}
+void RKRGUI::cb_MetroBar(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroBar_i(o,v);
+}
+
+void RKRGUI::cb_Metro_Volume_i(SliderW* o, void*) {
+  rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;
+}
+void RKRGUI::cb_Metro_Volume(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Volume_i(o,v);
+}
+
+void RKRGUI::cb_Metro_Tempo_i(SliderW* o, void*) {
+  rkr->M_Metro_Tempo=(int)o->value();
+rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);
+}
+void RKRGUI::cb_Metro_Tempo(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Tempo_i(o,v);
+}
+
 void RKRGUI::cb_L_B1_i(Fl_Button*, void*) {
   is_modified();
 char temp[128];           
@@ -9399,6 +9484,24 @@ reordena();
 }
 void RKRGUI::cb_HideUE(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_HideUE_i(o,v);
+}
+
+void RKRGUI::cb_SwitchMod_i(Fl_Button*, void*) {
+  if(rkr->sw_stat==0) 
+{ 
+  rkr->sw_stat = 1;
+  Midi->hide();
+  Metro->show();
+}
+else
+ {
+  rkr->sw_stat= 0;
+  Metro->hide();
+  Midi->show();
+ };
+}
+void RKRGUI::cb_SwitchMod(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_SwitchMod_i(o,v);
 }
 
 void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
@@ -20130,6 +20233,79 @@ R average.");
       } // Fl_Box* MIDI_LABEL
       Midi->end();
     } // Fl_Group* Midi
+    { Metro = new Fl_Group(520, 85, 276, 52);
+      Metro->box(FL_UP_BOX);
+      Metro->color((Fl_Color)FL_FOREGROUND_COLOR);
+      Metro->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      Metro->user_data((void*)(1));
+      Metro->align(96|FL_ALIGN_INSIDE);
+      Metro->hide();
+      { metro_activar = new Fl_Light_Button(525, 89, 38, 18, "On");
+        metro_activar->shortcut(0x6d);
+        metro_activar->color((Fl_Color)62);
+        metro_activar->selection_color((Fl_Color)1);
+        metro_activar->labelsize(10);
+        metro_activar->callback((Fl_Callback*)cb_metro_activar, (void*)(2));
+        metro_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* metro_activar
+      { Fl_Choice* o = MetroBar = new Fl_Choice(624, 100, 37, 16, "Time Sig.");
+        MetroBar->down_box(FL_BORDER_BOX);
+        MetroBar->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        MetroBar->labelsize(8);
+        MetroBar->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroBar->textsize(10);
+        MetroBar->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroBar->callback((Fl_Callback*)cb_MetroBar, (void*)(12));
+        o->menu(menu_looper_bar);
+      } // Fl_Choice* MetroBar
+      { Metro_Volume = new SliderW(667, 100, 117, 11, "Volume");
+        Metro_Volume->type(5);
+        Metro_Volume->box(FL_FLAT_BOX);
+        Metro_Volume->color((Fl_Color)178);
+        Metro_Volume->selection_color((Fl_Color)62);
+        Metro_Volume->labeltype(FL_NORMAL_LABEL);
+        Metro_Volume->labelfont(0);
+        Metro_Volume->labelsize(8);
+        Metro_Volume->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Volume->maximum(100);
+        Metro_Volume->step(1);
+        Metro_Volume->value(50);
+        Metro_Volume->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Volume->callback((Fl_Callback*)cb_Metro_Volume);
+        Metro_Volume->align(FL_ALIGN_TOP_RIGHT);
+        Metro_Volume->when(FL_WHEN_CHANGED);
+      } // SliderW* Metro_Volume
+      { Metro_Tempo = new SliderW(667, 119, 117, 11, "Tempo");
+        Metro_Tempo->type(5);
+        Metro_Tempo->box(FL_FLAT_BOX);
+        Metro_Tempo->color((Fl_Color)178);
+        Metro_Tempo->selection_color((Fl_Color)62);
+        Metro_Tempo->labeltype(FL_NORMAL_LABEL);
+        Metro_Tempo->labelfont(0);
+        Metro_Tempo->labelsize(8);
+        Metro_Tempo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Tempo->minimum(20);
+        Metro_Tempo->maximum(340);
+        Metro_Tempo->step(1);
+        Metro_Tempo->value(100);
+        Metro_Tempo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Tempo->callback((Fl_Callback*)cb_Metro_Tempo);
+        Metro_Tempo->align(FL_ALIGN_TOP_RIGHT);
+        Metro_Tempo->when(FL_WHEN_CHANGED);
+      } // SliderW* Metro_Tempo
+      { Metro_Led = new Fl_Box(571, 90, 10, 10);
+        Metro_Led->box(FL_ROUNDED_BOX);
+        Metro_Led->color((Fl_Color)FL_RED);
+        Metro_Led->labelsize(18);
+      } // Fl_Box* Metro_Led
+      { Metro_Label = new Fl_Box(522, 117, 106, 14, "Metronome");
+        Metro_Label->labelfont(1);
+        Metro_Label->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Label->user_data((void*)(7));
+        Metro_Label->when(FL_WHEN_NEVER);
+      } // Fl_Box* Metro_Label
+      Metro->end();
+    } // Fl_Group* Metro
     { Presets = new Fl_Group(168, 24, 352, 170);
       Presets->box(FL_UP_BOX);
       Presets->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -20222,7 +20398,7 @@ R average.");
         DAuthor->user_data((void*)(7));
         DAuthor->align(100|FL_ALIGN_INSIDE);
       } // Fl_Box* DAuthor
-      { Open_Order = new Fl_Button(255, 132, 195, 24, "Put Order in your Rack");
+      { Open_Order = new Fl_Button(247, 132, 195, 24, "Put Order in your Rack");
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
         Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(77));
@@ -20250,7 +20426,7 @@ R average.");
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { HideUE = new Fl_Button(457, 137, 32, 18, "Hide");
+      { HideUE = new Fl_Button(445, 137, 32, 18, "Hide");
         HideUE->shortcut(0xffc6);
         HideUE->color((Fl_Color)62);
         HideUE->labelsize(10);
@@ -20258,6 +20434,14 @@ R average.");
         HideUE->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         HideUE->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* HideUE
+      { SwitchMod = new Fl_Button(480, 137, 32, 18, "Sw");
+        SwitchMod->shortcut(0xffc6);
+        SwitchMod->color((Fl_Color)62);
+        SwitchMod->labelsize(10);
+        SwitchMod->callback((Fl_Callback*)cb_SwitchMod, (void*)(77));
+        SwitchMod->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
+        SwitchMod->when(FL_WHEN_RELEASE_ALWAYS);
+      } // Fl_Button* SwitchMod
       Presets->end();
     } // Fl_Group* Presets
     { Tap = new Fl_Group(520, 140, 276, 54);
@@ -21826,6 +22010,33 @@ rakarrack.get(rkr->PrefNom("Converter Octave"),k,2);
 MIDIOctave->value(k);
 MIDIOctave->do_callback();
 
+//Metronome
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Time"),k,2);
+MetroBar->value(k);
+MetroBar->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Volume"),k,50);
+Metro_Volume->value(k);
+Metro_Volume->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Tempo"),k,100);
+Metro_Tempo->value(k);
+Metro_Tempo->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Show"),rkr->sw_stat,0);
+
+if(rkr->sw_stat==1) 
+{ 
+  Midi->hide();
+  Metro->show();
+}
+else
+ {
+  Metro->hide();
+  Midi->show();
+ }
+
 
 //Tap Tempo
 
@@ -21897,6 +22108,13 @@ rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value());
 rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
 rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDIOctave->value());
+
+//Metronome
+
+rakarrack.set(rkr->PrefNom("Internal Metronome Time"),(int)MetroBar->value()); 
+rakarrack.set(rkr->PrefNom("Internal Metronome Volume"),(int)Metro_Volume->value());
+rakarrack.set(rkr->PrefNom("Internal Metronome Tempo"),(int)Metro_Tempo->value());
+rakarrack.set(rkr->PrefNom("Internal Metronome Show"),(int)rkr->sw_stat);
 
 
 //Booster
@@ -25600,6 +25818,7 @@ Tap->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
+Metro->image(InOut->image());
 fondo->image(InOut->image());
 TITTLE_L->image(InOut->image());
 Fondo1->image(InOut->image());
@@ -25758,6 +25977,7 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
 
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+if(rkr->Metro_Bypass) Metro_Label->labelcolor(on); else Metro_Label->labelcolor(off);
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);

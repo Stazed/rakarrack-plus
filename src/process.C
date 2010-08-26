@@ -227,9 +227,14 @@ RKR::RKR ()
   auxdata = (float *) malloc (sizeof (float) * PERIOD);
   auxresampled = (float *) malloc (sizeof (float) * PERIOD);
 
+  m_ticks = (float *) malloc (sizeof (float) * PERIOD);
+
+
+
   Fpre = new FPreset(); 
   DC_Offsetl = new AnalogFilter (1, 20, 1, 0);
   DC_Offsetr = new AnalogFilter (1, 20, 1, 0);
+  M_Metronome = new metronome();
   efx_Chorus = new Chorus (efxoutl, efxoutr);
   efx_Flanger = new Chorus (efxoutl, efxoutr);
   efx_Rev = new Reverb (efxoutl, efxoutr);
@@ -790,6 +795,7 @@ RKR::init_rkr ()
 
   Tuner_Bypass = 0;
   MIDIConverter_Bypass = 0;
+  Metro_Bypass = 0;
 
   for (int i = 0; i <= 45; i += 5)
     {
@@ -1104,6 +1110,19 @@ else
 
 
 void
+RKR::add_metro()
+{
+  for(int i=0; i<PERIOD; i++)
+    {
+    
+      efxoutl[i] +=m_ticks[i]*M_Metro_Vol;
+      efxoutr[i] +=m_ticks[i]*M_Metro_Vol;
+      
+    }  
+
+}
+
+void
 RKR::Vol2_Efx ()
 {
   memcpy(smpl,efxoutl, PERIOD * sizeof(float));
@@ -1414,6 +1433,9 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
     {
 
        Control_Gain (origl, origr);
+
+      if(Metro_Bypass) M_Metronome->metronomeout(m_ticks);
+
 
       if (Tuner_Bypass)
 	efx_Tuner->schmittFloat (PERIOD, efxoutl, efxoutr);
@@ -1861,6 +1883,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
 	}
 
+       if(Metro_Bypass) add_metro();
 
        Control_Volume (origl,origr);
 

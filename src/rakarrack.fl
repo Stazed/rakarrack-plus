@@ -851,7 +851,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1453 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1439 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1276,10 +1276,25 @@ if(tta)
 
 
 //
-
-
-
 }
+
+
+if (rkr->Metro_Bypass)
+{
+  if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
+  
+     {
+       Metro_Led->color(fl_lighter(FL_RED));
+       Metro_Led->redraw();
+     }  
+  
+  if ((rkr->M_Metronome->markctr) && ( (int) Metro_Led->color() != (int) fl_darker(FL_RED)))   
+     {  
+     Metro_Led->color(fl_darker(FL_RED));
+     Metro_Led->redraw();
+     } 
+}
+
 
 if (rkr->MIDIConverter_Bypass)
 {
@@ -9959,6 +9974,86 @@ BankWin_Label(filename);
           xywh {524 117 44 14} labelfont 1 labelcolor 7 when 0
         }
       }
+      Fl_Group Metro {
+        user_data 1
+        xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112 hide
+      } {
+        Fl_Light_Button metro_activar {
+          label On
+          user_data 2
+          callback {if ((int)o->value()==0)
+{ 
+  Metro_Led->color(fl_darker(FL_RED));
+  Metro_Led->redraw();
+}
+
+rkr->M_Metronome->cleanup();
+rkr->Metro_Bypass=(int)o->value();
+
+
+ChangeActives();
+Metro_Label->redraw_label();}
+          xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
+        }
+        Fl_Choice MetroBar {
+          label {Time Sig.}
+          user_data 12
+          callback {rkr->M_Metro_Bar=(int)o->value();
+
+switch(rkr->M_Metro_Bar)
+
+   {
+      case 0:
+      rkr->M_Metronome->set_meter(2);
+      break;                    
+      case 1:
+      rkr->M_Metronome->set_meter(3);
+      break;                    
+      case 2:
+      rkr->M_Metronome->set_meter(4);
+      break;                    
+      case 3:
+      rkr->M_Metronome->set_meter(5);
+      break;                    
+      case 4:
+      rkr->M_Metronome->set_meter(6);
+      break;                    
+      case 5:
+      rkr->M_Metronome->set_meter(7);
+      break;                    
+      case 6:
+      rkr->M_Metronome->set_meter(9);
+      break;                    
+      case 7:
+      rkr->M_Metronome->set_meter(11);
+      break;                    
+
+ }} open
+          xywh {624 100 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_looper_bar);}
+        } {}
+        Fl_Value_Slider Metro_Volume {
+          label Volume
+          callback {rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;}
+          xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 maximum 100 step 1 value 50 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider Metro_Tempo {
+          label Tempo
+          callback {rkr->M_Metro_Tempo=(int)o->value();
+rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
+          xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 20 maximum 340 step 1 value 100 textcolor 7
+          class SliderW
+        }
+        Fl_Box Metro_Led {
+          xywh {571 90 10 10} box ROUNDED_BOX color 88 labelsize 18
+        }
+        Fl_Box Metro_Label {
+          label Metronome
+          user_data 7
+          xywh {522 117 106 14} labelfont 1 labelcolor 7 when 0
+        }
+      }
       Fl_Group Presets {
         user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
@@ -10124,7 +10219,7 @@ put_icon(Order);
 }
 else
 Order->hide();}
-          xywh {255 132 195 24} shortcut 0x6f color 62 align 80 when 6
+          xywh {247 132 195 24} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)
@@ -10154,7 +10249,24 @@ rkr->deachide=1;
 }
  
 reordena();}
-          xywh {457 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
+          xywh {445 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
+        }
+        Fl_Button SwitchMod {
+          label Sw
+          user_data 77
+          callback {if(rkr->sw_stat==0) 
+{ 
+  rkr->sw_stat = 1;
+  Midi->hide();
+  Metro->show();
+}
+else
+ {
+  rkr->sw_stat= 0;
+  Metro->hide();
+  Midi->show();
+ }}
+          xywh {480 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
         }
       }
       Fl_Group Tap {
@@ -11973,8 +12085,7 @@ HideUE->redraw();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
-Fl::add_handler(prevnext);} {selected
-    }
+Fl::add_handler(prevnext);} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
@@ -12260,6 +12371,33 @@ rakarrack.get(rkr->PrefNom("Converter Octave"),k,2);
 MIDIOctave->value(k);
 MIDIOctave->do_callback();
 
+//Metronome
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Time"),k,2);
+MetroBar->value(k);
+MetroBar->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Volume"),k,50);
+Metro_Volume->value(k);
+Metro_Volume->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Tempo"),k,100);
+Metro_Tempo->value(k);
+Metro_Tempo->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Show"),rkr->sw_stat,0);
+
+if(rkr->sw_stat==1) 
+{ 
+  Midi->hide();
+  Metro->show();
+}
+else
+ {
+  Metro->hide();
+  Midi->show();
+ }
+
 
 //Tap Tempo
 
@@ -12330,6 +12468,13 @@ rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value());
 rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
 rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDIOctave->value());
+
+//Metronome
+
+rakarrack.set(rkr->PrefNom("Internal Metronome Time"),(int)MetroBar->value()); 
+rakarrack.set(rkr->PrefNom("Internal Metronome Volume"),(int)Metro_Volume->value());
+rakarrack.set(rkr->PrefNom("Internal Metronome Tempo"),(int)Metro_Tempo->value());
+rakarrack.set(rkr->PrefNom("Internal Metronome Show"),(int)rkr->sw_stat);
 
 
 //Booster
@@ -12519,7 +12664,8 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -16017,6 +16163,7 @@ Tap->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
+Metro->image(InOut->image());
 fondo->image(InOut->image());
 TITTLE_L->image(InOut->image());
 Fondo1->image(InOut->image());
@@ -16172,6 +16319,7 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
 
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+if(rkr->Metro_Bypass) Metro_Label->labelcolor(on); else Metro_Label->labelcolor(off);
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);

@@ -37,13 +37,15 @@ public:
   void metronomeout (float * tickout);
   void set_tempo (int bpm);
   void set_meter (int counts);
+  int markctr;
+
 private:
   int tick_interval;
   int tickctr;
-  int markctr;
   int meter;
   int tickper;
   int ticktype;
+
   class AnalogFilter *dulltick,*sharptick, *hpf;  
 
 };
