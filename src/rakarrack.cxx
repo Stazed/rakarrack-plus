@@ -21475,9 +21475,8 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
 fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
 
-Fl::visual(FL_RGB);
-Fl::visual(FL_DOUBLE|FL_INDEX);
-Fl::get_system_colors();
+Fl::visual(FL_DOUBLE|FL_RGB);
+//Fl::get_system_colors();
 fl_register_images();
 int num_fonts=0;
 num_fonts = Fl::set_fonts(0);

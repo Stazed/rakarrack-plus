@@ -10957,7 +10957,7 @@ rkr->m_displayed=1;
           Fl_Counter LM_Volume {
             label {Metronome Volume  }
             callback {rkr->Metro_Vol=(int)o->value();
-rkr->efx_Looper->setmvol(rkr->Metro_Vol);} selected
+rkr->efx_Looper->setmvol(rkr->Metro_Vol);}
             xywh {494 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
           }
           Fl_Choice Har_Qual {
@@ -11914,9 +11914,8 @@ About_Version->copy_label(tmp);} {}
 fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
 
-Fl::visual(FL_RGB);
-Fl::visual(FL_DOUBLE|FL_INDEX);
-Fl::get_system_colors();
+Fl::visual(FL_DOUBLE|FL_RGB);
+//Fl::get_system_colors();
 fl_register_images();
 int num_fonts=0;
 num_fonts = Fl::set_fonts(0);
@@ -11974,7 +11973,8 @@ HideUE->redraw();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
-Fl::add_handler(prevnext);} {}
+Fl::add_handler(prevnext);} {selected
+    }
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
