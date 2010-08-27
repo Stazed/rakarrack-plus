@@ -9800,7 +9800,7 @@ rkr->cleanup_efx();
         }
         Fl_Button BostBut {
           label {+10dB}
-          user_data 77
+          user_data 78
           callback {if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;}
           xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
@@ -12664,8 +12664,7 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -16233,7 +16232,7 @@ for (int t=0; t<Principal->children();t++)
 
           k= c->labelsize();
           k+=value;
-          if((uh==7)||(uh==77))
+          if((uh==7) || (uh == 77))
           {
           if((k>6)&&(k<20))c->labelsize(k);
           }
@@ -16241,7 +16240,7 @@ for (int t=0; t<Principal->children();t++)
           if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=7) c->selection_color(back_color); 
-          if ((uh==2)||(uh==7)||(uh==77)) c->selection_color(leds_color);
+          if ((uh==2)||(uh==7)||(uh==77) || (uh == 78)) c->selection_color(leds_color);
           c->color(fore_color);
           c->labelfont(rkr->font);
        
@@ -16289,7 +16288,8 @@ for (int t=0; t<Principal->children();t++)
 ChangeActives();
 
  
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {adjustfont()} {} {
     code {int change,value;

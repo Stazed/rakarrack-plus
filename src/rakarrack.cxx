@@ -20024,7 +20024,7 @@ R average.");
         BostBut->shortcut(0xffc7);
         BostBut->color((Fl_Color)62);
         BostBut->labelsize(6);
-        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(77));
+        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(78));
       } // Fl_Button* BostBut
       { Balance = new SliderW(15, 48, 19, 126, "FX%");
         Balance->type(4);
@@ -25889,7 +25889,7 @@ for (int t=0; t<Principal->children();t++)
 
           k= c->labelsize();
           k+=value;
-          if((uh==7)||(uh==77))
+          if((uh==7) || (uh == 77))
           {
           if((k>6)&&(k<20))c->labelsize(k);
           }
@@ -25897,7 +25897,7 @@ for (int t=0; t<Principal->children();t++)
           if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=7) c->selection_color(back_color); 
-          if ((uh==2)||(uh==7)||(uh==77)) c->selection_color(leds_color);
+          if ((uh==2)||(uh==7)||(uh==77) || (uh == 78)) c->selection_color(leds_color);
           c->color(fore_color);
           c->labelfont(rkr->font);
        
