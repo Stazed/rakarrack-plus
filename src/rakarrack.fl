@@ -841,7 +841,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -851,7 +852,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1439 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1432 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1279,7 +1280,7 @@ if(tta)
 }
 
 
-if (rkr->Metro_Bypass)
+if ((rkr->Metro_Bypass) && (MetroSound->value()==0))
 {
   if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
   
@@ -1383,7 +1384,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -9976,7 +9977,7 @@ BankWin_Label(filename);
       }
       Fl_Group Metro {
         user_data 1
-        xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112 hide
+        xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
           label On
@@ -10029,7 +10030,7 @@ switch(rkr->M_Metro_Bar)
       break;                    
 
  }} open
-          xywh {624 100 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
+          xywh {624 98 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_looper_bar);}
         } {}
         Fl_Value_Slider Metro_Volume {
@@ -10038,6 +10039,29 @@ switch(rkr->M_Metro_Bar)
           xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 maximum 100 step 1 value 50 textcolor 7
           class SliderW
         }
+        Fl_Choice MetroSound {
+          label S
+          user_data 12
+          callback {rkr->M_Metro_Sound=(int)o->value();
+
+switch(rkr->M_Metro_Sound)
+
+   {
+      case 0:
+      MetroBar->do_callback();
+      break;                    
+      case 1:
+      rkr->M_Metronome->set_meter(1);
+      break;                    
+      case 2:
+      rkr->M_Metronome->set_meter(0);
+      break;                    
+       
+
+ }} open
+          xywh {634 118 28 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_looper_ms);}
+        } {}
         Fl_Value_Slider Metro_Tempo {
           label Tempo
           callback {rkr->M_Metro_Tempo=(int)o->value();
@@ -10046,12 +10070,12 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           class SliderW
         }
         Fl_Box Metro_Led {
-          xywh {571 90 10 10} box ROUNDED_BOX color 88 labelsize 18
+          xywh {568 90 10 10} box ROUNDED_BOX color 88 labelsize 18
         }
         Fl_Box Metro_Label {
           label Metronome
           user_data 7
-          xywh {522 117 106 14} labelfont 1 labelcolor 7 when 0
+          xywh {522 117 92 14} labelfont 1 labelcolor 7 when 0
         }
       }
       Fl_Group Presets {
@@ -12377,6 +12401,10 @@ rakarrack.get(rkr->PrefNom("Internal Metronome Time"),k,2);
 MetroBar->value(k);
 MetroBar->do_callback();
 
+rakarrack.get(rkr->PrefNom("Internal Metronome Sound"),k,0);
+MetroSound->value(k);
+MetroSound->do_callback();
+
 rakarrack.get(rkr->PrefNom("Internal Metronome Volume"),k,50);
 Metro_Volume->value(k);
 Metro_Volume->do_callback();
@@ -12475,7 +12503,7 @@ rakarrack.set(rkr->PrefNom("Internal Metronome Time"),(int)MetroBar->value());
 rakarrack.set(rkr->PrefNom("Internal Metronome Volume"),(int)Metro_Volume->value());
 rakarrack.set(rkr->PrefNom("Internal Metronome Tempo"),(int)Metro_Tempo->value());
 rakarrack.set(rkr->PrefNom("Internal Metronome Show"),(int)rkr->sw_stat);
-
+rakarrack.set(rkr->PrefNom("Internal Metronome Sound"),(int)MetroSound->value());
 
 //Booster
 rakarrack.set(rkr->PrefNom("Booster"),rkr->booster);
@@ -16288,8 +16316,7 @@ for (int t=0; t<Principal->children();t++)
 ChangeActives();
 
  
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {adjustfont()} {} {
     code {int change,value;

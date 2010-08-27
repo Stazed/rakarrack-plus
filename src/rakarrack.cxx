@@ -1276,7 +1276,7 @@ if(tta)
 }
 
 
-if (rkr->Metro_Bypass)
+if ((rkr->Metro_Bypass) && (MetroSound->value()==0))
 {
   if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
   
@@ -9278,6 +9278,29 @@ void RKRGUI::cb_Metro_Volume_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_Metro_Volume(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Volume_i(o,v);
+}
+
+void RKRGUI::cb_MetroSound_i(Fl_Choice* o, void*) {
+  rkr->M_Metro_Sound=(int)o->value();
+
+switch(rkr->M_Metro_Sound)
+
+   {
+      case 0:
+      MetroBar->do_callback();
+      break;                    
+      case 1:
+      rkr->M_Metronome->set_meter(1);
+      break;                    
+      case 2:
+      rkr->M_Metronome->set_meter(0);
+      break;                    
+       
+
+ };
+}
+void RKRGUI::cb_MetroSound(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroSound_i(o,v);
 }
 
 void RKRGUI::cb_Metro_Tempo_i(SliderW* o, void*) {
@@ -20239,7 +20262,6 @@ R average.");
       Metro->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
       Metro->user_data((void*)(1));
       Metro->align(96|FL_ALIGN_INSIDE);
-      Metro->hide();
       { metro_activar = new Fl_Light_Button(525, 89, 38, 18, "On");
         metro_activar->shortcut(0x6d);
         metro_activar->color((Fl_Color)62);
@@ -20248,7 +20270,7 @@ R average.");
         metro_activar->callback((Fl_Callback*)cb_metro_activar, (void*)(2));
         metro_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* metro_activar
-      { Fl_Choice* o = MetroBar = new Fl_Choice(624, 100, 37, 16, "Time Sig.");
+      { Fl_Choice* o = MetroBar = new Fl_Choice(624, 98, 37, 16, "Time Sig.");
         MetroBar->down_box(FL_BORDER_BOX);
         MetroBar->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         MetroBar->labelsize(8);
@@ -20275,6 +20297,16 @@ R average.");
         Metro_Volume->align(FL_ALIGN_TOP_RIGHT);
         Metro_Volume->when(FL_WHEN_CHANGED);
       } // SliderW* Metro_Volume
+      { Fl_Choice* o = MetroSound = new Fl_Choice(634, 118, 28, 16, "S");
+        MetroSound->down_box(FL_BORDER_BOX);
+        MetroSound->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        MetroSound->labelsize(8);
+        MetroSound->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroSound->textsize(10);
+        MetroSound->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroSound->callback((Fl_Callback*)cb_MetroSound, (void*)(12));
+        o->menu(menu_looper_ms);
+      } // Fl_Choice* MetroSound
       { Metro_Tempo = new SliderW(667, 119, 117, 11, "Tempo");
         Metro_Tempo->type(5);
         Metro_Tempo->box(FL_FLAT_BOX);
@@ -20293,12 +20325,12 @@ R average.");
         Metro_Tempo->align(FL_ALIGN_TOP_RIGHT);
         Metro_Tempo->when(FL_WHEN_CHANGED);
       } // SliderW* Metro_Tempo
-      { Metro_Led = new Fl_Box(571, 90, 10, 10);
+      { Metro_Led = new Fl_Box(568, 90, 10, 10);
         Metro_Led->box(FL_ROUNDED_BOX);
         Metro_Led->color((Fl_Color)FL_RED);
         Metro_Led->labelsize(18);
       } // Fl_Box* Metro_Led
-      { Metro_Label = new Fl_Box(522, 117, 106, 14, "Metronome");
+      { Metro_Label = new Fl_Box(522, 117, 92, 14, "Metronome");
         Metro_Label->labelfont(1);
         Metro_Label->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Metro_Label->user_data((void*)(7));
@@ -22016,6 +22048,10 @@ rakarrack.get(rkr->PrefNom("Internal Metronome Time"),k,2);
 MetroBar->value(k);
 MetroBar->do_callback();
 
+rakarrack.get(rkr->PrefNom("Internal Metronome Sound"),k,0);
+MetroSound->value(k);
+MetroSound->do_callback();
+
 rakarrack.get(rkr->PrefNom("Internal Metronome Volume"),k,50);
 Metro_Volume->value(k);
 Metro_Volume->do_callback();
@@ -22115,7 +22151,7 @@ rakarrack.set(rkr->PrefNom("Internal Metronome Time"),(int)MetroBar->value());
 rakarrack.set(rkr->PrefNom("Internal Metronome Volume"),(int)Metro_Volume->value());
 rakarrack.set(rkr->PrefNom("Internal Metronome Tempo"),(int)Metro_Tempo->value());
 rakarrack.set(rkr->PrefNom("Internal Metronome Show"),(int)rkr->sw_stat);
-
+rakarrack.set(rkr->PrefNom("Internal Metronome Sound"),(int)MetroSound->value());
 
 //Booster
 rakarrack.set(rkr->PrefNom("Booster"),rkr->booster);

@@ -3356,6 +3356,11 @@ private:
   void cb_Metro_Volume_i(SliderW*, void*);
   static void cb_Metro_Volume(SliderW*, void*);
 public:
+  Fl_Choice *MetroSound;
+private:
+  void cb_MetroSound_i(Fl_Choice*, void*);
+  static void cb_MetroSound(Fl_Choice*, void*);
+public:
   SliderW *Metro_Tempo;
 private:
   void cb_Metro_Tempo_i(SliderW*, void*);
