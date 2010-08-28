@@ -2266,6 +2266,8 @@ private:
   void cb_looper_ap_i(Fl_Check_Button*, void*);
   static void cb_looper_ap(Fl_Check_Button*, void*);
 public:
+  Fl_Box *Box_Play;
+  Fl_Box *Box_P;
   Fl_Button *looper_play;
 private:
   void cb_looper_play_i(Fl_Button*, void*);
