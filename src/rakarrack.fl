@@ -841,8 +841,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -1179,13 +1178,7 @@ if(rkr->Tap_Bypass)
 
 }
 
-if((rkr->Looper_Bypass) && (rkr->Looper_Sync==1) && rkr->Tap_Display==1)
-   {
-     looper_Tempo->value(lrint(rkr->jt_tempo));
-     looper_Tempo->redraw();
-     rkr->Tap_Display=0;
-   }  
- 
+
 
 if (rkr->Bypass)
 { 
@@ -1384,7 +1377,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -10771,7 +10764,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1465 180 640 528} type Double color 4 hide
+      xywh {1451 166 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -10944,7 +10937,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
+          user_data 1 open
           xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -11072,29 +11065,11 @@ rkr->m_displayed=1;
 }}
             xywh {133 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
           }
-          Fl_Choice Looper_Syncro {
-            label {Looper Start Stop}
-            callback {rkr->Looper_Sync =(int) o->value();}
-            xywh {292 149 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Internal
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label {Jack Transport}
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label MIDI
-              xywh {40 40 36 21} labelsize 10
-            }
-          }
           Fl_Counter LM_Volume {
-            label {Metronome Volume  }
+            label {Looper Metronome Volume  }
             callback {rkr->Metro_Vol=(int)o->value();
 rkr->efx_Looper->setmvol(rkr->Metro_Vol);}
-            xywh {494 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
+            xywh {338 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
           }
           Fl_Choice Har_Qual {
             label {Harmonizer Quality      }
@@ -12339,7 +12314,6 @@ if(!rkr->MIDIway) ML_Menu->deactivate();
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
-rakarrack.get(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync,0);
 rakarrack.get(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol,50);
 rkr->efx_Looper->setmvol(rkr->Metro_Vol);
 
@@ -12571,7 +12545,6 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
-rakarrack.set(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync);
 rakarrack.set(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol);
 
 
@@ -14089,7 +14062,6 @@ BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
-Looper_Syncro->value(rkr->Looper_Sync);
 LM_Volume->value(rkr->Metro_Vol);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
@@ -16805,7 +16777,13 @@ looper_t2->value(rkr->efx_Looper->progstate[5]);
 looper_t2->redraw();} {}
   }
   Function {UpdateTGUI()} {} {
-    code {if(rkr->Chorus_Bypass)
+    code {if(rkr->Looper_Bypass)
+   {
+   looper_Tempo->value(rkr->efx_Looper->getpar(14));
+   looper_Tempo->redraw();
+   }  
+
+if(rkr->Chorus_Bypass)
   {
   chorus_freq->value(rkr->efx_Chorus->getpar(2));
   chorus_freq->redraw();
@@ -16918,7 +16896,8 @@ looper_t2->redraw();} {}
   {
     vibe_freq->value(rkr->efx_Vibe->getpar(1));
     vibe_freq->redraw();  
-  }} {}
+  }} {selected
+    }
   }
   Function {ActACI()} {} {
     code {int value;

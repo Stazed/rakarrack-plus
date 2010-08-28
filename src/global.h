@@ -479,7 +479,6 @@ public:
 
   int Metro_Vol;
   int M_Metro_Sound;
-  int Looper_Sync;
   int deachide;
   int font;
   int flpos;

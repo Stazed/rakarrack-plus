@@ -236,6 +236,7 @@ int Tap_TempoSetD=Tap_TempoSet;
 int Tap_TempoSetL=Tap_TempoSet;
 
 
+
 switch(Tap_SetValue)
   {
       case 0:
@@ -344,9 +345,12 @@ switch(Tap_SetValue)
    }
 
 
+
+
   if((Tap_TempoSetL < 1 ) || (Tap_TempoSetL > 600))  Tap_TempoSetL = Tap_TempoSet;
   if((Tap_TempoSetD < 1 ) || (Tap_TempoSetD > 600))  Tap_TempoSetD = Tap_TempoSet;
   
+  if(Looper_Bypass) efx_Looper->settempo(Tap_TempoSet);
 
 
   if(Chorus_Bypass) efx_Chorus->changepar(2,Tap_TempoSetL);
