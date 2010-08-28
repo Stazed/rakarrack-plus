@@ -363,9 +363,11 @@ Looper::changepar (int npar, int value)
     else
     {
       Pplay = (PT1 || PT2);  //prevents accidental record state when niether track is active
-      Pstop = 0;
+      if(!Pstop) {  //if stop was pushed last time, then resume where it left off
       if(PT1)kl = 0;
       if(PT2)kl2 = 0;
+      }
+      Pstop = 0;
       ticker.cleanup();
     }
     if(Pstop)
