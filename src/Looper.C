@@ -139,10 +139,11 @@ Looper::out (float * smpsl, float * smpsr)
 
   for (i = 0; i < PERIOD; i++)
     {
-    
+          
+  if(Pplay)
+  {
     if(Precord)
-     {
-     
+     {     
 	     if((Prec1) && (PT1))
 	     {
 	      ldelay[kl] += pregain1*smpsl[i];
@@ -154,8 +155,9 @@ Looper::out (float * smpsl, float * smpsr)
 	      t2rdelay[kl2] += pregain2*smpsr[i];
 	      }      
       
-      }
-    
+      }      
+      
+      
     if(!Pclear)
     {
     if (++kl >= dl)
@@ -165,10 +167,7 @@ Looper::out (float * smpsl, float * smpsr)
     kl2 = 0;
     rvkl2 = dl2 - 1 - kl2;     
     } 
-     
-      
-      if(Pplay)
-      {
+    
 	      if(Preverse)
 	      {
 
@@ -213,7 +212,7 @@ Looper::out (float * smpsl, float * smpsr)
  	   if((Pmetro) & (Pplay))
  	     {
  	      efxoutl[i] += ticktock[i]*mvol;  //if you want to hear the metronome in Looper
-	      efxoutr[i] += ticktock[i]*mvol;  //Holborn, maybe we want to play it through from some other place...you can decide :)   
+	      efxoutr[i] += ticktock[i]*mvol;   
              } 
     };
 
@@ -312,10 +311,10 @@ switch(value)
 
 void Looper::setfade ()
 {
-      fade1 = (float) Pfade1/64.0f;
-      fade2 = (float) Pfade2/64.0f;
-      pregain1 = 1.0f/fade1;
-      pregain2 = 1.0f/fade2;      //this is so material being recorded mixes at the same level as what you hear
+      fade1 = (float) (Pfade1)/64.0f;
+      fade2 = (float) (Pfade2)/64.0f;
+      pregain1 = 1.015f/(fade1 + 0.015f);      //this is so material being recorded mixes at the same level as what you hear
+      pregain2 = 1.015f/(fade2 + 0.015f) ;      //magic number is ~1/66, keeps record gain from getting too high
       fade1 *= track1gain;
       fade2 *= track2gain;
 };
@@ -363,16 +362,16 @@ Looper::changepar (int npar, int value)
     }
     else
     {
-      Pplay = 1;
+      Pplay = (PT1 || PT2);  //prevents accidental record state when niether track is active
       Pstop = 0;
-      kl =0;
+      if(PT1)kl = 0;
+      if(PT2)kl2 = 0;
       ticker.cleanup();
     }
     if(Pstop)
     {
     Pstop = 0;
     Pplay = 0;
-    kl = 0;
     }
     Pclear=0;
       break;
@@ -380,17 +379,18 @@ Looper::changepar (int npar, int value)
       Pstop = 1;
       if(Precord)
       {
-      if((first_time1) && (Prec1))
+      if((first_time1 && Prec1) && PT1)
         {
 	   dl = set_len(kl);
-	   printf("dl %d\n",dl); 
+	   //printf("dl %d\n",dl); 
 	   first_time1 = 0;
 	   if(Plink)
 	   {
 	   dl2 = dl;
 	   }
+	   kl = 0;	   
 	}  
-      if((first_time2) && (Prec2))
+      if((first_time2 && Prec2) && PT2)
       {
            dl2 = set_len(kl2);
 	   first_time2 = 0;
@@ -398,16 +398,17 @@ Looper::changepar (int npar, int value)
 	   {
 	   dl = dl2;
 	   }
+	   kl2 = 0;	   
       }
       }
       Precord = 0;
       Pplay = 0;
-      kl = 0;
+
       break;
     case 3:		//Record at current position.  If first time (clear = true), then set end of loop, "dl"
       if(Precord)
       {
-      if((first_time1) && (Prec1))
+      if((first_time1 && Prec1) && PT1)
         {
 	   dl = set_len(kl);
 	   first_time1 = 0;
@@ -415,8 +416,9 @@ Looper::changepar (int npar, int value)
 	   {
 	   dl2 = dl;
 	   }
+	   kl = 0;
 	}  
-      if((first_time2) && (Prec2))
+      if((first_time2 && Prec2) && PT2)
       {
            dl2 = set_len(kl2);
 	   first_time2 = 0;
@@ -424,6 +426,7 @@ Looper::changepar (int npar, int value)
 	   {
 	   dl = dl2;
 	   }
+	   kl2 = 0;
       }
       Precord = 0;
       Pplay = rplaystate;
@@ -434,7 +437,8 @@ Looper::changepar (int npar, int value)
       {
       Precord = 1;
       rplaystate = Pplay;
-      Pplay = 0;
+      if(Pautoplay) Pplay = 1;
+      else Pplay = 0;
       }
       Pstop = 0;
       Pclear = 0;
@@ -445,6 +449,8 @@ Looper::changepar (int npar, int value)
       if(PT2) first_time2 = 1;
       if((PT1) && (PT2)) Pplay = 0;
       Precord = 0;
+      if(PT1)kl = 0;
+      if(PT2)kl2 = 0;
       initdelays ();
       break;
     case 5:
@@ -461,6 +467,13 @@ Looper::changepar (int npar, int value)
      else 
      {
      PT1 = 1;
+     if(!Plink) {
+     PT2 = 0;       //if they aren't linked in time, then you want to toggle 1&2
+     track2gain = 0.0f;
+     kl = 0;
+     setfade();
+     }
+     
      }
      track1gain = (float) PT1;
      setfade ();
@@ -472,6 +485,12 @@ Looper::changepar (int npar, int value)
      else 
      {
      PT2 = 1;
+     if(!Plink){
+     PT1 = 0;
+     kl2 = 0;
+     track1gain = 0.0f;
+     }
+     
      }
      track2gain = (float) PT2;
      setfade ();
@@ -491,7 +510,11 @@ Looper::changepar (int npar, int value)
      break;
      case 13:
      Plink = value;
-     dl2 = dl;    
+     if(Plink)
+     {
+       if(Prec1) dl2 = dl;   
+       if(Prec2) dl = dl2;  //if both are true, then it is only a redundant assignment
+       } 
      break;
      case 14:
      settempo(value);
