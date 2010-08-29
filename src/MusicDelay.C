@@ -54,6 +54,12 @@ MusicDelay::MusicDelay (float * efxoutl_, float * efxoutr_)
   ldelay2 = new float[maxx_delay];
   rdelay2 = new float[maxx_delay];
 
+  dl1 = maxx_delay-1;
+  dl2 = maxx_delay-1;
+  dr1 = maxx_delay-1;
+  dr2 = maxx_delay-1;
+  
+
 
   lrdelay = 0;
 
@@ -97,6 +103,10 @@ MusicDelay::initdelays ()
   int i;
   kl1 = 0;
   kr1 = 0;
+
+ if (delay1 >= maxx_delay) delay1=maxx_delay-1;
+ if (delay2 >= maxx_delay) delay2=maxx_delay-1;
+
   dl1 = delay1;
   if (dl1 < 1)
     dl1 = 1;
@@ -242,6 +252,7 @@ MusicDelay::setdelay (int num, int Pdelay)
     coef = ntem / (float)Plrdelay;
   else
     coef = 0;
+
   delay2 = lrintf ((coef + (ntem / (float)Pdelay2)) * fSAMPLE_RATE);
 
 

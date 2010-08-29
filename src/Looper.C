@@ -453,7 +453,7 @@ Looper::changepar (int npar, int value)
       if(Pautoplay) 
       {
       Pplay = 1;
-      ticker.cleanup();
+      if((first_time1 && Prec1) || (first_time2 && Prec2)) ticker.cleanup();
       }
       else Pplay = 0;
       }
