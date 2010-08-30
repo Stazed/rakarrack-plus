@@ -110,6 +110,7 @@ Looper::initdelays ()
 if(PT1)
 {
   kl = 0;
+  ticker.cleanup();
   dl = maxx_delay;
   rvkl = dl - 1;
   cleanuppt1 ();
@@ -118,6 +119,7 @@ if(PT1)
 if(PT2)
 {
   kl2 = 0;
+  ticker.cleanup();
   dl2 = maxx_delay;
   rvkl2 = dl2 - 1;
   cleanuppt2 ();
@@ -135,12 +137,12 @@ Looper::out (float * smpsl, float * smpsr)
   int i;
   float rswell, lswell;
   float ticktock[PERIOD];
-  if((Pmetro) && (Pplay)) ticker.metronomeout(ticktock);
+  if((Pmetro) && (Pplay) && (!Pstop)) ticker.metronomeout(ticktock);
 
   for (i = 0; i < PERIOD; i++)
     {
           
-  if(Pplay)
+  if((Pplay) && (!Pstop))
   {
     if(Precord)
      {     
@@ -209,7 +211,7 @@ Looper::out (float * smpsl, float * smpsr)
 	      efxoutr[i]= 0.0f;      
       }
           
- 	   if((Pmetro) & (Pplay))
+ 	   if((Pmetro) && (Pplay) && (!Pstop))
  	     {
  	      efxoutl[i] += ticktock[i]*mvol;  //if you want to hear the metronome in Looper
 	      efxoutr[i] += ticktock[i]*mvol;   
@@ -383,7 +385,7 @@ Looper::changepar (int npar, int value)
     break;
 
     case 2:	//stop and reset pointer to 0
-      Pstop = 1;
+      if(Pstop) Pstop=0; else Pstop = 1;
       if(Precord)
       {
       Pstop=0;
@@ -411,10 +413,10 @@ Looper::changepar (int npar, int value)
 	   kl2 = 0;	   
            ticker.cleanup();
       }
-      }
+ 
       Precord = 0;
       Pplay = 0;
-
+      }
       break;
     case 3:		//Record at current position.  If first time (clear = true), then set end of loop, "dl"
       if(Precord)
@@ -468,6 +470,7 @@ Looper::changepar (int npar, int value)
       Precord = 0;
       if(PT1)kl = 0;
       if(PT2)kl2 = 0;
+      ticker.cleanup();
       initdelays ();
       break;
     case 5:
@@ -485,9 +488,11 @@ Looper::changepar (int npar, int value)
      {
      PT1 = 1;
      if(!Plink) {
+     if(first_time1)initdelays();
      PT2 = 0;       //if they aren't linked in time, then you want to toggle 1&2
      track2gain = 0.0f;
      kl = 0;
+     ticker.cleanup();
      setfade();
      }
      
@@ -504,7 +509,9 @@ Looper::changepar (int npar, int value)
      PT2 = 1;
      if(!Plink){
      PT1 = 0;
+     if(first_time2)initdelays();
      kl2 = 0;
+     ticker.cleanup();
      track1gain = 0.0f;
      }
      
@@ -695,6 +702,6 @@ Looper::loadpreset (int npar, int value)
       if(PT2) first_time2 = 1;
       if((PT1) && (PT2)) Pplay = 0;
       Precord = 0;
-    getstate();
+      getstate();
 };
 

@@ -841,8 +841,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -6976,7 +6975,7 @@ update_looper();}
 }
 rkr->efx_Looper->changepar(2,(int)o->value());
 update_looper();}
-          xywh {379 328 44 22} shortcut 0xffc3
+          xywh {379 328 44 22} type Toggle shortcut 0xffc3
         }
         Fl_Button looper_record {
           label {@circle}
@@ -16772,6 +16771,8 @@ looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_play->redraw();
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_record->redraw();
+looper_stop->value(rkr->efx_Looper->progstate[1]);
+looper_stop->redraw();
 if(rkr->efx_Looper->progstate[2])
 {
   Box_P->copy_label("Stop");

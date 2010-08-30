@@ -17137,6 +17137,7 @@ R average.");
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
       { looper_stop = new Fl_Button(379, 328, 44, 22, "@||");
+        looper_stop->type(1);
         looper_stop->shortcut(0xffc3);
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
@@ -26441,6 +26442,8 @@ looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_play->redraw();
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_record->redraw();
+looper_stop->value(rkr->efx_Looper->progstate[1]);
+looper_stop->redraw();
 if(rkr->efx_Looper->progstate[2])
 {
   Box_P->copy_label("Stop");
