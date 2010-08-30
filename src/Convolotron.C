@@ -195,7 +195,7 @@ Convolotron::out (float * smpsl, float * smpsr)
       templ[i] = lyn * levpanl;
       tempr[i] = lyn * levpanr;  
 
-      if (++offset>maxx_size) offset = 0;     
+      if (++offset>=maxx_size) offset = 0;     
 
       
     };
