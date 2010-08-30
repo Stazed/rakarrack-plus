@@ -104,7 +104,7 @@ RKR::midievents()
 
    } 
 
-   if((Looper_Bypass) && (Looper_Sync==2))
+   if((Looper_Bypass) && (Tap_Selection==3))
      {
        if (midievent->type == SND_SEQ_EVENT_START)
           {

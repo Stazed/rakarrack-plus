@@ -49,7 +49,7 @@ Looper::Looper (float * efxoutl_, float * efxoutr_, float size)
       settempo(120);
       Pbar = 2;      
       setbar(2);
-
+      ticker.cleanup();
 
   Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
   maxx_delay = lrintf(fSAMPLE_RATE * size);
@@ -135,7 +135,7 @@ Looper::out (float * smpsl, float * smpsr)
   int i;
   float rswell, lswell;
   float ticktock[PERIOD];
-  ticker.metronomeout(ticktock);
+  if((Pmetro) && (Pplay)) ticker.metronomeout(ticktock);
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -355,7 +355,9 @@ Looper::changepar (int npar, int value)
     outvolume = (float)Pvolume / 127.0f;
 
       break;
+
     case 1:	//Play at current pointer position
+
     if(Pplay)
     {
     Pplay = 0;
@@ -363,12 +365,13 @@ Looper::changepar (int npar, int value)
     else
     {
       Pplay = (PT1 || PT2);  //prevents accidental record state when niether track is active
-      if(!Pstop) {  //if stop was pushed last time, then resume where it left off
+      if(!Pstop) 
+      {  //if stop was pushed last time, then resume where it left off
       if(PT1)kl = 0;
       if(PT2)kl2 = 0;
-      }
-      Pstop = 0;
       ticker.cleanup();
+      }
+    Pstop = 0;
     }
     if(Pstop)
     {
@@ -376,11 +379,14 @@ Looper::changepar (int npar, int value)
     Pplay = 0;
     }
     Pclear=0;
-      break;
+
+    break;
+
     case 2:	//stop and reset pointer to 0
       Pstop = 1;
       if(Precord)
       {
+      Pstop=0;
       if((first_time1 && Prec1) && PT1)
         {
 	   dl = set_len(kl);
@@ -390,7 +396,9 @@ Looper::changepar (int npar, int value)
 	   {
 	   dl2 = dl;
 	   }
-	   kl = 0;	   
+	   kl = 0;
+	   ticker.cleanup(); 	   
+
 	}  
       if((first_time2 && Prec2) && PT2)
       {
@@ -401,6 +409,7 @@ Looper::changepar (int npar, int value)
 	   dl = dl2;
 	   }
 	   kl2 = 0;	   
+           ticker.cleanup();
       }
       }
       Precord = 0;
@@ -419,6 +428,7 @@ Looper::changepar (int npar, int value)
 	   dl2 = dl;
 	   }
 	   kl = 0;
+           ticker.cleanup();
 	}  
       if((first_time2 && Prec2) && PT2)
       {
@@ -429,17 +439,22 @@ Looper::changepar (int npar, int value)
 	   dl = dl2;
 	   }
 	   kl2 = 0;
+           ticker.cleanup();
       }
       Precord = 0;
       Pplay = rplaystate;
-      if(Pautoplay) Pplay = 1;
+      if(Pautoplay)  Pplay = 1;
       Pstop = 0;
       }
       else
       {
       Precord = 1;
       rplaystate = Pplay;
-      if(Pautoplay) Pplay = 1;
+      if(Pautoplay) 
+      {
+      Pplay = 1;
+      if((first_time1 && Prec1) || (first_time2 && Prec2)) ticker.cleanup();
+      }
       else Pplay = 0;
       }
       Pstop = 0;

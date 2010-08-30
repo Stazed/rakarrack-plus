@@ -852,7 +852,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1432 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {445 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1179,13 +1179,7 @@ if(rkr->Tap_Bypass)
 
 }
 
-if((rkr->Looper_Bypass) && (rkr->Looper_Sync==1) && rkr->Tap_Display==1)
-   {
-     looper_Tempo->value(lrint(rkr->jt_tempo));
-     looper_Tempo->redraw();
-     rkr->Tap_Display=0;
-   }  
- 
+
 
 if (rkr->Bypass)
 { 
@@ -1384,7 +1378,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -6948,12 +6942,12 @@ rkr->efx_Looper->changepar(5,(int)o->value())}
 rkr->efx_Looper->changepar(9,(int)o->value())}
           xywh {398 300 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
-        Fl_Box {} {
-          label Play
-          xywh {328 314 44 14} labelsize 10 labelcolor 7
+        Fl_Box Box_Play {
+          label {Play/Stop}
+          xywh {324 314 52 14} labelsize 10 labelcolor 7
         }
-        Fl_Box {} {
-          label Stop
+        Fl_Box Box_P {
+          label Pause
           xywh {378 314 44 14} labelsize 10 labelcolor 7
         }
         Fl_Box {} {
@@ -6961,7 +6955,7 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
           xywh {429 314 44 14} labelsize 10 labelcolor 7
         }
         Fl_Button looper_play {
-          label {@>}
+          label {@|>}
           user_data 2
           callback {if(Fl::event_button()==3)
 {
@@ -6973,7 +6967,7 @@ update_looper();}
           xywh {328 328 44 22} type Toggle shortcut 0xffc2
         }
         Fl_Button looper_stop {
-          label {@square}
+          label {@||}
           user_data 2
           callback {if(Fl::event_button()==3)
 {
@@ -10771,7 +10765,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1465 180 640 528} type Double color 4 hide
+      xywh {1451 166 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -10944,7 +10938,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
+          user_data 1 open
           xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -11072,29 +11066,11 @@ rkr->m_displayed=1;
 }}
             xywh {133 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
           }
-          Fl_Choice Looper_Syncro {
-            label {Looper Start Stop}
-            callback {rkr->Looper_Sync =(int) o->value();}
-            xywh {292 149 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Internal
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label {Jack Transport}
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label MIDI
-              xywh {40 40 36 21} labelsize 10
-            }
-          }
           Fl_Counter LM_Volume {
-            label {Metronome Volume  }
+            label {Looper Metronome Volume  }
             callback {rkr->Metro_Vol=(int)o->value();
 rkr->efx_Looper->setmvol(rkr->Metro_Vol);}
-            xywh {494 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
+            xywh {338 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
           }
           Fl_Choice Har_Qual {
             label {Harmonizer Quality      }
@@ -12339,7 +12315,6 @@ if(!rkr->MIDIway) ML_Menu->deactivate();
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
-rakarrack.get(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync,0);
 rakarrack.get(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol,50);
 rkr->efx_Looper->setmvol(rkr->Metro_Vol);
 
@@ -12571,7 +12546,6 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
-rakarrack.set(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync);
 rakarrack.set(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol);
 
 
@@ -14089,7 +14063,6 @@ BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
-Looper_Syncro->value(rkr->Looper_Sync);
 LM_Volume->value(rkr->Metro_Vol);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
@@ -16799,13 +16772,31 @@ looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_play->redraw();
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_record->redraw();
+if(rkr->efx_Looper->progstate[2])
+{
+  Box_P->copy_label("Stop");
+  looper_stop->copy_label("@square");  
+}
+else
+{
+  Box_P->copy_label("Pause");
+  looper_stop->copy_label("@||");
+}
+  
 looper_t1->value(rkr->efx_Looper->progstate[4]);
 looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
-looper_t2->redraw();} {}
+looper_t2->redraw();} {selected
+    }
   }
   Function {UpdateTGUI()} {} {
-    code {if(rkr->Chorus_Bypass)
+    code {if(rkr->Looper_Bypass)
+   {
+   looper_Tempo->value(rkr->efx_Looper->getpar(14));
+   looper_Tempo->redraw();
+   }  
+
+if(rkr->Chorus_Bypass)
   {
   chorus_freq->value(rkr->efx_Chorus->getpar(2));
   chorus_freq->redraw();

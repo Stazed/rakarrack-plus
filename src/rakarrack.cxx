@@ -1175,13 +1175,7 @@ if(rkr->Tap_Bypass)
 
 }
 
-if((rkr->Looper_Bypass) && (rkr->Looper_Sync==1) && rkr->Tap_Display==1)
-   {
-     looper_Tempo->value(lrint(rkr->jt_tempo));
-     looper_Tempo->redraw();
-     rkr->Tap_Display=0;
-   }  
- 
+
 
 if (rkr->Bypass)
 { 
@@ -10205,20 +10199,6 @@ void RKRGUI::cb_L_SIZE(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
 }
 
-void RKRGUI::cb_Looper_Syncro_i(Fl_Choice* o, void*) {
-  rkr->Looper_Sync =(int) o->value();
-}
-void RKRGUI::cb_Looper_Syncro(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Looper_Syncro_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Looper_Syncro[] = {
- {"Internal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Jack Transport", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"MIDI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_LM_Volume_i(Fl_Counter* o, void*) {
   rkr->Metro_Vol=(int)o->value();
 rkr->efx_Looper->setmvol(rkr->Metro_Vol);
@@ -17139,24 +17119,24 @@ R average.");
         looper_ap->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_ap->callback((Fl_Callback*)cb_looper_ap, (void*)(2));
       } // Fl_Check_Button* looper_ap
-      { Fl_Box* o = new Fl_Box(328, 314, 44, 14, "Play");
-        o->labelsize(10);
-        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      } // Fl_Box* o
-      { Fl_Box* o = new Fl_Box(378, 314, 44, 14, "Stop");
-        o->labelsize(10);
-        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      } // Fl_Box* o
+      { Box_Play = new Fl_Box(324, 314, 52, 14, "Play/Stop");
+        Box_Play->labelsize(10);
+        Box_Play->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* Box_Play
+      { Box_P = new Fl_Box(378, 314, 44, 14, "Pause");
+        Box_P->labelsize(10);
+        Box_P->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* Box_P
       { Fl_Box* o = new Fl_Box(429, 314, 44, 14, "Record");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
-      { looper_play = new Fl_Button(328, 328, 44, 22, "@>");
+      { looper_play = new Fl_Button(328, 328, 44, 22, "@|>");
         looper_play->type(1);
         looper_play->shortcut(0xffc2);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
-      { looper_stop = new Fl_Button(379, 328, 44, 22, "@square");
+      { looper_stop = new Fl_Button(379, 328, 44, 22, "@||");
         looper_stop->shortcut(0xffc3);
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
@@ -20866,16 +20846,7 @@ R average.");
           L_SIZE->align(FL_ALIGN_LEFT);
           L_SIZE->when(FL_WHEN_RELEASE);
         } // Fl_Counter* L_SIZE
-        { Looper_Syncro = new Fl_Choice(292, 149, 72, 18, "Looper Start Stop");
-          Looper_Syncro->down_box(FL_BORDER_BOX);
-          Looper_Syncro->labelsize(10);
-          Looper_Syncro->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-          Looper_Syncro->textsize(10);
-          Looper_Syncro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-          Looper_Syncro->callback((Fl_Callback*)cb_Looper_Syncro);
-          Looper_Syncro->menu(menu_Looper_Syncro);
-        } // Fl_Choice* Looper_Syncro
-        { LM_Volume = new Fl_Counter(494, 149, 47, 18, "Metronome Volume  ");
+        { LM_Volume = new Fl_Counter(338, 149, 47, 18, "Looper Metronome Volume  ");
           LM_Volume->type(1);
           LM_Volume->labelsize(10);
           LM_Volume->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -21986,7 +21957,6 @@ if(!rkr->MIDIway) ML_Menu->deactivate();
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
-rakarrack.get(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync,0);
 rakarrack.get(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol,50);
 rkr->efx_Looper->setmvol(rkr->Metro_Vol);
 
@@ -22219,7 +22189,6 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
-rakarrack.set(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync);
 rakarrack.set(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol);
 
 
@@ -23744,7 +23713,6 @@ BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
-Looper_Syncro->value(rkr->Looper_Sync);
 LM_Volume->value(rkr->Metro_Vol);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
@@ -26473,6 +26441,17 @@ looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_play->redraw();
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_record->redraw();
+if(rkr->efx_Looper->progstate[2])
+{
+  Box_P->copy_label("Stop");
+  looper_stop->copy_label("@square");  
+}
+else
+{
+  Box_P->copy_label("Pause");
+  looper_stop->copy_label("@||");
+}
+  
 looper_t1->value(rkr->efx_Looper->progstate[4]);
 looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
@@ -26480,7 +26459,13 @@ looper_t2->redraw();
 }
 
 void RKRGUI::UpdateTGUI() {
-  if(rkr->Chorus_Bypass)
+  if(rkr->Looper_Bypass)
+   {
+   looper_Tempo->value(rkr->efx_Looper->getpar(14));
+   looper_Tempo->redraw();
+   }  
+
+if(rkr->Chorus_Bypass)
   {
   chorus_freq->value(rkr->efx_Chorus->getpar(2));
   chorus_freq->redraw();
