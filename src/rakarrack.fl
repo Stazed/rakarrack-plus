@@ -841,16 +841,18 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {445 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -1045,7 +1047,8 @@ WRfreq->copy_label(refreq);
 rkr->nfreq_old=rkr->efx_Tuner->nfreq;
 }
 
-if(rkr->efx_Tuner->afreq != rkr->afreq_old)
+//if(rkr->efx_Tuner->afreq != rkr->afreq_old)
+if(fabsf(rkr->efx_Tuner->afreq-rkr->afreq_old)>.2f)
 {
 char nofreq[60];
 sprintf(nofreq,"%8.3f",rkr->efx_Tuner->afreq);
@@ -1377,7 +1380,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -16787,8 +16790,7 @@ else
 looper_t1->value(rkr->efx_Looper->progstate[4]);
 looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
-looper_t2->redraw();} {selected
-    }
+looper_t2->redraw();} {}
   }
   Function {UpdateTGUI()} {} {
     code {if(rkr->Looper_Bypass)

@@ -1042,7 +1042,8 @@ WRfreq->copy_label(refreq);
 rkr->nfreq_old=rkr->efx_Tuner->nfreq;
 }
 
-if(rkr->efx_Tuner->afreq != rkr->afreq_old)
+//if(rkr->efx_Tuner->afreq != rkr->afreq_old)
+if(fabsf(rkr->efx_Tuner->afreq-rkr->afreq_old)>.2f)
 {
 char nofreq[60];
 sprintf(nofreq,"%8.3f",rkr->efx_Tuner->afreq);
