@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -1380,7 +1380,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -8749,7 +8749,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -8971,7 +8971,7 @@ rkr->efx_Echotron->changepar(3,(int)o->value());}
           user_data 12
           callback {rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
           xywh {408 379 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -9001,6 +9001,10 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
           MenuItem {} {
             label {Notch-Wah}
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Multi-Chorus} selected
+            xywh {10 10 36 21} labelsize 10
           }
         }
       }
