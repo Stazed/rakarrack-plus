@@ -15,6 +15,7 @@ html_DATA= icono_rakarrack_128x128.png \
 	settings4.jpg \
 	settings5.jpg \
 	midilearn.jpg \
+	metro.jpg \
 	order.jpg \
 	preset_name1.png \
 	eq.jpg \

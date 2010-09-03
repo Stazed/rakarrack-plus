@@ -1042,7 +1042,8 @@ WRfreq->copy_label(refreq);
 rkr->nfreq_old=rkr->efx_Tuner->nfreq;
 }
 
-if(rkr->efx_Tuner->afreq != rkr->afreq_old)
+//if(rkr->efx_Tuner->afreq != rkr->afreq_old)
+if(fabsf(rkr->efx_Tuner->afreq-rkr->afreq_old)>.2f)
 {
 char nofreq[60];
 sprintf(nofreq,"%8.3f",rkr->efx_Tuner->afreq);
@@ -1175,13 +1176,7 @@ if(rkr->Tap_Bypass)
 
 }
 
-if((rkr->Looper_Bypass) && (rkr->Looper_Sync==1) && rkr->Tap_Display==1)
-   {
-     looper_Tempo->value(lrint(rkr->jt_tempo));
-     looper_Tempo->redraw();
-     rkr->Tap_Display=0;
-   }  
- 
+
 
 if (rkr->Bypass)
 { 
@@ -1273,10 +1268,25 @@ if(tta)
 
 
 //
-
-
-
 }
+
+
+if ((rkr->Metro_Bypass) && (MetroSound->value()==0))
+{
+  if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
+  
+     {
+       Metro_Led->color(fl_lighter(FL_RED));
+       Metro_Led->redraw();
+     }  
+  
+  if ((rkr->M_Metronome->markctr) && ( (int) Metro_Led->color() != (int) fl_darker(FL_RED)))   
+     {  
+     Metro_Led->color(fl_darker(FL_RED));
+     Metro_Led->redraw();
+     } 
+}
+
 
 if (rkr->MIDIConverter_Bypass)
 {
@@ -9203,6 +9213,99 @@ void RKRGUI::cb_MIDI_LABEL(Fl_Box* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MIDI_LABEL_i(o,v);
 }
 
+void RKRGUI::cb_metro_activar_i(Fl_Light_Button* o, void*) {
+  if ((int)o->value()==0)
+{ 
+  Metro_Led->color(fl_darker(FL_RED));
+  Metro_Led->redraw();
+}
+
+rkr->M_Metronome->cleanup();
+rkr->Metro_Bypass=(int)o->value();
+
+
+ChangeActives();
+Metro_Label->redraw_label();
+}
+void RKRGUI::cb_metro_activar(Fl_Light_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_metro_activar_i(o,v);
+}
+
+void RKRGUI::cb_MetroBar_i(Fl_Choice* o, void*) {
+  rkr->M_Metro_Bar=(int)o->value();
+
+switch(rkr->M_Metro_Bar)
+
+   {
+      case 0:
+      rkr->M_Metronome->set_meter(2);
+      break;                    
+      case 1:
+      rkr->M_Metronome->set_meter(3);
+      break;                    
+      case 2:
+      rkr->M_Metronome->set_meter(4);
+      break;                    
+      case 3:
+      rkr->M_Metronome->set_meter(5);
+      break;                    
+      case 4:
+      rkr->M_Metronome->set_meter(6);
+      break;                    
+      case 5:
+      rkr->M_Metronome->set_meter(7);
+      break;                    
+      case 6:
+      rkr->M_Metronome->set_meter(9);
+      break;                    
+      case 7:
+      rkr->M_Metronome->set_meter(11);
+      break;                    
+
+ };
+}
+void RKRGUI::cb_MetroBar(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroBar_i(o,v);
+}
+
+void RKRGUI::cb_Metro_Volume_i(SliderW* o, void*) {
+  rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;
+}
+void RKRGUI::cb_Metro_Volume(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Volume_i(o,v);
+}
+
+void RKRGUI::cb_MetroSound_i(Fl_Choice* o, void*) {
+  rkr->M_Metro_Sound=(int)o->value();
+
+switch(rkr->M_Metro_Sound)
+
+   {
+      case 0:
+      MetroBar->do_callback();
+      break;                    
+      case 1:
+      rkr->M_Metronome->set_meter(1);
+      break;                    
+      case 2:
+      rkr->M_Metronome->set_meter(0);
+      break;                    
+       
+
+ };
+}
+void RKRGUI::cb_MetroSound(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroSound_i(o,v);
+}
+
+void RKRGUI::cb_Metro_Tempo_i(SliderW* o, void*) {
+  rkr->M_Metro_Tempo=(int)o->value();
+rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);
+}
+void RKRGUI::cb_Metro_Tempo(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Tempo_i(o,v);
+}
+
 void RKRGUI::cb_L_B1_i(Fl_Button*, void*) {
   is_modified();
 char temp[128];           
@@ -9399,6 +9502,24 @@ reordena();
 }
 void RKRGUI::cb_HideUE(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_HideUE_i(o,v);
+}
+
+void RKRGUI::cb_SwitchMod_i(Fl_Button*, void*) {
+  if(rkr->sw_stat==0) 
+{ 
+  rkr->sw_stat = 1;
+  Midi->hide();
+  Metro->show();
+}
+else
+ {
+  rkr->sw_stat= 0;
+  Metro->hide();
+  Midi->show();
+ };
+}
+void RKRGUI::cb_SwitchMod(Fl_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_SwitchMod_i(o,v);
 }
 
 void RKRGUI::cb_Tap_activar_i(Fl_Light_Button* o, void*) {
@@ -10079,19 +10200,13 @@ void RKRGUI::cb_L_SIZE(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
 }
 
-void RKRGUI::cb_Looper_Syncro_i(Fl_Choice* o, void*) {
-  rkr->Looper_Sync =(int) o->value();
+void RKRGUI::cb_LM_Volume_i(Fl_Counter* o, void*) {
+  rkr->Metro_Vol=(int)o->value();
+rkr->efx_Looper->setmvol(rkr->Metro_Vol);
 }
-void RKRGUI::cb_Looper_Syncro(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Looper_Syncro_i(o,v);
+void RKRGUI::cb_LM_Volume(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_LM_Volume_i(o,v);
 }
-
-Fl_Menu_Item RKRGUI::menu_Looper_Syncro[] = {
- {"Internal", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"Jack Transport", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {"MIDI", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void RKRGUI::cb_Har_Qual_i(Fl_Choice* o, void*) {
   int i = (int) o->value();
@@ -17005,24 +17120,25 @@ R average.");
         looper_ap->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_ap->callback((Fl_Callback*)cb_looper_ap, (void*)(2));
       } // Fl_Check_Button* looper_ap
-      { Fl_Box* o = new Fl_Box(328, 314, 44, 14, "Play");
-        o->labelsize(10);
-        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      } // Fl_Box* o
-      { Fl_Box* o = new Fl_Box(378, 314, 44, 14, "Stop");
-        o->labelsize(10);
-        o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-      } // Fl_Box* o
+      { Box_Play = new Fl_Box(324, 314, 52, 14, "Play/Stop");
+        Box_Play->labelsize(10);
+        Box_Play->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* Box_Play
+      { Box_P = new Fl_Box(378, 314, 44, 14, "Pause");
+        Box_P->labelsize(10);
+        Box_P->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+      } // Fl_Box* Box_P
       { Fl_Box* o = new Fl_Box(429, 314, 44, 14, "Record");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
-      { looper_play = new Fl_Button(328, 328, 44, 22, "@>");
+      { looper_play = new Fl_Button(328, 328, 44, 22, "@|>");
         looper_play->type(1);
         looper_play->shortcut(0xffc2);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
-      { looper_stop = new Fl_Button(379, 328, 44, 22, "@square");
+      { looper_stop = new Fl_Button(379, 328, 44, 22, "@||");
+        looper_stop->type(1);
         looper_stop->shortcut(0xffc3);
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
@@ -19913,7 +20029,7 @@ R average.");
         BostBut->shortcut(0xffc7);
         BostBut->color((Fl_Color)62);
         BostBut->labelsize(6);
-        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(77));
+        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(78));
       } // Fl_Button* BostBut
       { Balance = new SliderW(15, 48, 19, 126, "FX%");
         Balance->type(4);
@@ -20122,6 +20238,88 @@ R average.");
       } // Fl_Box* MIDI_LABEL
       Midi->end();
     } // Fl_Group* Midi
+    { Metro = new Fl_Group(520, 85, 276, 52);
+      Metro->box(FL_UP_BOX);
+      Metro->color((Fl_Color)FL_FOREGROUND_COLOR);
+      Metro->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+      Metro->user_data((void*)(1));
+      Metro->align(96|FL_ALIGN_INSIDE);
+      { metro_activar = new Fl_Light_Button(525, 89, 38, 18, "On");
+        metro_activar->shortcut(0x6d);
+        metro_activar->color((Fl_Color)62);
+        metro_activar->selection_color((Fl_Color)1);
+        metro_activar->labelsize(10);
+        metro_activar->callback((Fl_Callback*)cb_metro_activar, (void*)(2));
+        metro_activar->when(FL_WHEN_CHANGED);
+      } // Fl_Light_Button* metro_activar
+      { Fl_Choice* o = MetroBar = new Fl_Choice(624, 98, 37, 16, "Time Sig.");
+        MetroBar->down_box(FL_BORDER_BOX);
+        MetroBar->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        MetroBar->labelsize(8);
+        MetroBar->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroBar->textsize(10);
+        MetroBar->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroBar->callback((Fl_Callback*)cb_MetroBar, (void*)(12));
+        o->menu(menu_looper_bar);
+      } // Fl_Choice* MetroBar
+      { Metro_Volume = new SliderW(667, 100, 117, 11, "Volume");
+        Metro_Volume->type(5);
+        Metro_Volume->box(FL_FLAT_BOX);
+        Metro_Volume->color((Fl_Color)178);
+        Metro_Volume->selection_color((Fl_Color)62);
+        Metro_Volume->labeltype(FL_NORMAL_LABEL);
+        Metro_Volume->labelfont(0);
+        Metro_Volume->labelsize(8);
+        Metro_Volume->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Volume->maximum(100);
+        Metro_Volume->step(1);
+        Metro_Volume->value(50);
+        Metro_Volume->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Volume->callback((Fl_Callback*)cb_Metro_Volume);
+        Metro_Volume->align(FL_ALIGN_TOP_RIGHT);
+        Metro_Volume->when(FL_WHEN_CHANGED);
+      } // SliderW* Metro_Volume
+      { Fl_Choice* o = MetroSound = new Fl_Choice(634, 118, 28, 16, "S");
+        MetroSound->down_box(FL_BORDER_BOX);
+        MetroSound->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
+        MetroSound->labelsize(8);
+        MetroSound->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroSound->textsize(10);
+        MetroSound->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        MetroSound->callback((Fl_Callback*)cb_MetroSound, (void*)(12));
+        o->menu(menu_looper_ms);
+      } // Fl_Choice* MetroSound
+      { Metro_Tempo = new SliderW(667, 119, 117, 11, "Tempo");
+        Metro_Tempo->type(5);
+        Metro_Tempo->box(FL_FLAT_BOX);
+        Metro_Tempo->color((Fl_Color)178);
+        Metro_Tempo->selection_color((Fl_Color)62);
+        Metro_Tempo->labeltype(FL_NORMAL_LABEL);
+        Metro_Tempo->labelfont(0);
+        Metro_Tempo->labelsize(8);
+        Metro_Tempo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Tempo->minimum(20);
+        Metro_Tempo->maximum(340);
+        Metro_Tempo->step(1);
+        Metro_Tempo->value(100);
+        Metro_Tempo->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Tempo->callback((Fl_Callback*)cb_Metro_Tempo);
+        Metro_Tempo->align(FL_ALIGN_TOP_RIGHT);
+        Metro_Tempo->when(FL_WHEN_CHANGED);
+      } // SliderW* Metro_Tempo
+      { Metro_Led = new Fl_Box(568, 90, 10, 10);
+        Metro_Led->box(FL_ROUNDED_BOX);
+        Metro_Led->color((Fl_Color)FL_RED);
+        Metro_Led->labelsize(18);
+      } // Fl_Box* Metro_Led
+      { Metro_Label = new Fl_Box(522, 117, 92, 14, "Metronome");
+        Metro_Label->labelfont(1);
+        Metro_Label->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        Metro_Label->user_data((void*)(7));
+        Metro_Label->when(FL_WHEN_NEVER);
+      } // Fl_Box* Metro_Label
+      Metro->end();
+    } // Fl_Group* Metro
     { Presets = new Fl_Group(168, 24, 352, 170);
       Presets->box(FL_UP_BOX);
       Presets->color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -20214,7 +20412,7 @@ R average.");
         DAuthor->user_data((void*)(7));
         DAuthor->align(100|FL_ALIGN_INSIDE);
       } // Fl_Box* DAuthor
-      { Open_Order = new Fl_Button(255, 132, 195, 24, "Put Order in your Rack");
+      { Open_Order = new Fl_Button(247, 132, 195, 24, "Put Order in your Rack");
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
         Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(77));
@@ -20242,7 +20440,7 @@ R average.");
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { HideUE = new Fl_Button(457, 137, 32, 18, "Hide");
+      { HideUE = new Fl_Button(445, 137, 32, 18, "Hide");
         HideUE->shortcut(0xffc6);
         HideUE->color((Fl_Color)62);
         HideUE->labelsize(10);
@@ -20250,6 +20448,14 @@ R average.");
         HideUE->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
         HideUE->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* HideUE
+      { SwitchMod = new Fl_Button(480, 137, 32, 18, "Sw");
+        SwitchMod->shortcut(0xffc6);
+        SwitchMod->color((Fl_Color)62);
+        SwitchMod->labelsize(10);
+        SwitchMod->callback((Fl_Callback*)cb_SwitchMod, (void*)(77));
+        SwitchMod->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
+        SwitchMod->when(FL_WHEN_RELEASE_ALWAYS);
+      } // Fl_Button* SwitchMod
       Presets->end();
     } // Fl_Group* Presets
     { Tap = new Fl_Group(520, 140, 276, 54);
@@ -20642,15 +20848,19 @@ R average.");
           L_SIZE->align(FL_ALIGN_LEFT);
           L_SIZE->when(FL_WHEN_RELEASE);
         } // Fl_Counter* L_SIZE
-        { Looper_Syncro = new Fl_Choice(292, 149, 72, 18, "Looper Start Stop");
-          Looper_Syncro->down_box(FL_BORDER_BOX);
-          Looper_Syncro->labelsize(10);
-          Looper_Syncro->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-          Looper_Syncro->textsize(10);
-          Looper_Syncro->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-          Looper_Syncro->callback((Fl_Callback*)cb_Looper_Syncro);
-          Looper_Syncro->menu(menu_Looper_Syncro);
-        } // Fl_Choice* Looper_Syncro
+        { LM_Volume = new Fl_Counter(338, 149, 47, 18, "Looper Metronome Volume  ");
+          LM_Volume->type(1);
+          LM_Volume->labelsize(10);
+          LM_Volume->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          LM_Volume->minimum(0);
+          LM_Volume->maximum(100);
+          LM_Volume->step(1);
+          LM_Volume->value(50);
+          LM_Volume->textsize(10);
+          LM_Volume->callback((Fl_Callback*)cb_LM_Volume);
+          LM_Volume->align(FL_ALIGN_LEFT);
+          LM_Volume->when(FL_WHEN_RELEASE);
+        } // Fl_Counter* LM_Volume
         { Har_Qual = new Fl_Choice(132, 173, 47, 18, "Harmonizer Quality      ");
           Har_Qual->down_box(FL_BORDER_BOX);
           Har_Qual->labelsize(10);
@@ -21454,9 +21664,8 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
 fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
 
-Fl::visual(FL_RGB);
-Fl::visual(FL_DOUBLE|FL_INDEX);
-Fl::get_system_colors();
+Fl::visual(FL_DOUBLE|FL_RGB);
+//Fl::get_system_colors();
 fl_register_images();
 int num_fonts=0;
 num_fonts = Fl::set_fonts(0);
@@ -21750,7 +21959,8 @@ if(!rkr->MIDIway) ML_Menu->deactivate();
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
-rakarrack.get(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync,0);
+rakarrack.get(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol,50);
+rkr->efx_Looper->setmvol(rkr->Metro_Vol);
 
 rakarrack.get(rkr->PrefNom("Update Tap"),rkr->Tap_Updated,0);
 rakarrack.get(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh,1);
@@ -21803,6 +22013,37 @@ rkr->efx_MIDIConverter->setVelAdjust(k);
 rakarrack.get(rkr->PrefNom("Converter Octave"),k,2);
 MIDIOctave->value(k);
 MIDIOctave->do_callback();
+
+//Metronome
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Time"),k,2);
+MetroBar->value(k);
+MetroBar->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Sound"),k,0);
+MetroSound->value(k);
+MetroSound->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Volume"),k,50);
+Metro_Volume->value(k);
+Metro_Volume->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Tempo"),k,100);
+Metro_Tempo->value(k);
+Metro_Tempo->do_callback();
+
+rakarrack.get(rkr->PrefNom("Internal Metronome Show"),rkr->sw_stat,0);
+
+if(rkr->sw_stat==1) 
+{ 
+  Midi->hide();
+  Metro->show();
+}
+else
+ {
+  Metro->hide();
+  Midi->show();
+ }
 
 
 //Tap Tempo
@@ -21876,6 +22117,13 @@ rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
 rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
 rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDIOctave->value());
 
+//Metronome
+
+rakarrack.set(rkr->PrefNom("Internal Metronome Time"),(int)MetroBar->value()); 
+rakarrack.set(rkr->PrefNom("Internal Metronome Volume"),(int)Metro_Volume->value());
+rakarrack.set(rkr->PrefNom("Internal Metronome Tempo"),(int)Metro_Tempo->value());
+rakarrack.set(rkr->PrefNom("Internal Metronome Show"),(int)rkr->sw_stat);
+rakarrack.set(rkr->PrefNom("Internal Metronome Sound"),(int)MetroSound->value());
 
 //Booster
 rakarrack.set(rkr->PrefNom("Booster"),rkr->booster);
@@ -21943,7 +22191,8 @@ rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
-rakarrack.set(rkr->PrefNom("Looper Sync"),rkr->Looper_Sync);
+rakarrack.set(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol);
+
 
 rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
 
@@ -23466,7 +23715,7 @@ BackFiname->value(rkr->BackgroundImage);
 Udir->value(rkr->UDirFilename);
 Username->value(rkr->UserRealName);
 Pre_Serve->value(rkr->actuvol);
-Looper_Syncro->value(rkr->Looper_Sync);
+LM_Volume->value(rkr->Metro_Vol);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
 Har_Downsample->value(rkr->Har_Down);
@@ -25575,6 +25824,7 @@ Tap->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
 Midi->image(InOut->image());
+Metro->image(InOut->image());
 fondo->image(InOut->image());
 TITTLE_L->image(InOut->image());
 Fondo1->image(InOut->image());
@@ -25645,7 +25895,7 @@ for (int t=0; t<Principal->children();t++)
 
           k= c->labelsize();
           k+=value;
-          if((uh==7)||(uh==77))
+          if((uh==7) || (uh == 77))
           {
           if((k>6)&&(k<20))c->labelsize(k);
           }
@@ -25653,7 +25903,7 @@ for (int t=0; t<Principal->children();t++)
           if((k>2)&&(k<16))c->labelsize(k);
           if(uh != 5) c->labelcolor(label_color); else c->labelcolor(leds_color);
           if (uh !=7) c->selection_color(back_color); 
-          if ((uh==2)||(uh==7)||(uh==77)) c->selection_color(leds_color);
+          if ((uh==2)||(uh==7)||(uh==77) || (uh == 78)) c->selection_color(leds_color);
           c->color(fore_color);
           c->labelfont(rkr->font);
        
@@ -25733,6 +25983,7 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
 
 if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+if(rkr->Metro_Bypass) Metro_Label->labelcolor(on); else Metro_Label->labelcolor(off);
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
 if(rkr->Bypass) LABEL_IO->labelcolor(on); else LABEL_IO->labelcolor(off);
@@ -26192,6 +26443,19 @@ looper_play->value(rkr->efx_Looper->progstate[0]);
 looper_play->redraw();
 looper_record->value(rkr->efx_Looper->progstate[2]);
 looper_record->redraw();
+looper_stop->value(rkr->efx_Looper->progstate[1]);
+looper_stop->redraw();
+if(rkr->efx_Looper->progstate[2])
+{
+  Box_P->copy_label("Stop");
+  looper_stop->copy_label("@square");  
+}
+else
+{
+  Box_P->copy_label("Pause");
+  looper_stop->copy_label("@||");
+}
+  
 looper_t1->value(rkr->efx_Looper->progstate[4]);
 looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
@@ -26199,7 +26463,13 @@ looper_t2->redraw();
 }
 
 void RKRGUI::UpdateTGUI() {
-  if(rkr->Chorus_Bypass)
+  if(rkr->Looper_Bypass)
+   {
+   looper_Tempo->value(rkr->efx_Looper->getpar(14));
+   looper_Tempo->redraw();
+   }  
+
+if(rkr->Chorus_Bypass)
   {
   chorus_freq->value(rkr->efx_Chorus->getpar(2));
   chorus_freq->redraw();

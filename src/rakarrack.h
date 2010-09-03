@@ -2266,6 +2266,8 @@ private:
   void cb_looper_ap_i(Fl_Check_Button*, void*);
   static void cb_looper_ap(Fl_Check_Button*, void*);
 public:
+  Fl_Box *Box_Play;
+  Fl_Box *Box_P;
   Fl_Button *looper_play;
 private:
   void cb_looper_play_i(Fl_Button*, void*);
@@ -3340,6 +3342,34 @@ private:
   void cb_MIDI_LABEL_i(Fl_Box*, void*);
   static void cb_MIDI_LABEL(Fl_Box*, void*);
 public:
+  Fl_Group *Metro;
+  Fl_Light_Button *metro_activar;
+private:
+  void cb_metro_activar_i(Fl_Light_Button*, void*);
+  static void cb_metro_activar(Fl_Light_Button*, void*);
+public:
+  Fl_Choice *MetroBar;
+private:
+  void cb_MetroBar_i(Fl_Choice*, void*);
+  static void cb_MetroBar(Fl_Choice*, void*);
+public:
+  SliderW *Metro_Volume;
+private:
+  void cb_Metro_Volume_i(SliderW*, void*);
+  static void cb_Metro_Volume(SliderW*, void*);
+public:
+  Fl_Choice *MetroSound;
+private:
+  void cb_MetroSound_i(Fl_Choice*, void*);
+  static void cb_MetroSound(Fl_Choice*, void*);
+public:
+  SliderW *Metro_Tempo;
+private:
+  void cb_Metro_Tempo_i(SliderW*, void*);
+  static void cb_Metro_Tempo(SliderW*, void*);
+public:
+  Fl_Box *Metro_Led;
+  Fl_Box *Metro_Label;
   Fl_Group *Presets;
   Fl_Box *PRESETS_LABEL;
   Fl_Button *L_B1;
@@ -3413,6 +3443,11 @@ public:
 private:
   void cb_HideUE_i(Fl_Button*, void*);
   static void cb_HideUE(Fl_Button*, void*);
+public:
+  Fl_Button *SwitchMod;
+private:
+  void cb_SwitchMod_i(Fl_Button*, void*);
+  static void cb_SwitchMod(Fl_Button*, void*);
 public:
   Fl_Group *Tap;
   Fl_Light_Button *Tap_activar;
@@ -3722,11 +3757,10 @@ private:
   void cb_L_SIZE_i(Fl_Counter*, void*);
   static void cb_L_SIZE(Fl_Counter*, void*);
 public:
-  Fl_Choice *Looper_Syncro;
+  Fl_Counter *LM_Volume;
 private:
-  void cb_Looper_Syncro_i(Fl_Choice*, void*);
-  static void cb_Looper_Syncro(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_Looper_Syncro[];
+  void cb_LM_Volume_i(Fl_Counter*, void*);
+  static void cb_LM_Volume(Fl_Counter*, void*);
 public:
   Fl_Choice *Har_Qual;
 private:

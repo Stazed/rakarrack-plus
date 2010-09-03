@@ -219,6 +219,7 @@ public:
   void New ();
   void New_Bank ();
   void Adjust_Upsample();
+  void add_metro();
   void init_rkr ();
   int Message (int prio, const char *labelwin, const char *message_text);
   char *PrefNom (const char *dato);
@@ -273,6 +274,8 @@ public:
   class NewDist *efx_NewDist;
   class Tuner *efx_Tuner;
   class MIDIConverter *efx_MIDIConverter;
+  class metronome *M_Metronome; 
+
   class Recognize *RecNote;
   class RecChord *RC;
   class Compressor *efx_FLimiter;
@@ -308,7 +311,6 @@ public:
   class CompBand *efx_CompBand;
   class Opticaltrem *efx_Opticaltrem;
   class Vibe *efx_Vibe;
- 
 
   jack_client_t *jackclient;
   jack_options_t options;
@@ -318,6 +320,7 @@ public:
   int DC_Offset;
   int Bypass;
   int MIDIConverter_Bypass;
+  int Metro_Bypass;
   int Tuner_Bypass;
   int Tap_Bypass;
   int ACI_Bypass;
@@ -474,7 +477,8 @@ public:
   int Ste_U_Q;
   int Ste_D_Q;
 
-  int Looper_Sync;
+  int Metro_Vol;
+  int M_Metro_Sound;
   int deachide;
   int font;
   int flpos;
@@ -489,6 +493,7 @@ public:
   int Mnumeff[32];
   int OnOffC;
 
+  int sw_stat;
   int MIDIway;
   int NumParams;
   int NumEffects;
@@ -542,6 +547,8 @@ public:
   int VocBands;
   int RCOpti;
  
+  int M_Metro_Tempo;
+  int M_Metro_Bar;
   int mtc_counter;
   int EnableBackgroundImage;
   int ML_filter;
@@ -574,12 +581,15 @@ public:
   float *smpl;
   float *smpr;
   float *denormal;
+  float *m_ticks;
 
   float Master_Volume;
   float Input_Gain;
   float Fraction_Bypass;
   float Log_I_Gain;
   float Log_M_Volume;
+  float M_Metro_Vol;
+
 
   float old_il_sum;
   float old_ir_sum;

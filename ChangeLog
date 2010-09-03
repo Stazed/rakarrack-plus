@@ -1,6 +1,9 @@
 ==v0.6.x (  /  /2010) ==
 
-- Looper Start/Stop can be synced now with JAck Transport and MIDI. 
+- Added Metronome as internal module switchable with MIDI Converter, both
+  can be active, but for GUI space reasons need to be in that way.
+- Looper Tempo,Start & Stop can be synced now with Jack Transport in slave
+- mode, MIDI only accepts Start/Stop commands. 
 - Drag & Drop to switch effects on the main window to change the order,
  (Label to Label)
 - Add Hide function for unused presets (F9)
