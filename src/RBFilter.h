@@ -73,6 +73,7 @@ private:
   float gain;		//the gain of the filter (if are shelf/peak) filters
   float hpg, lpg, bpg;
   float oldq, oldsq, oldf;
+  float a_smooth_tc, b_smooth_tc;
   float iper;			//inverse of PERIOD
 
 

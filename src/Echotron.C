@@ -108,7 +108,8 @@ Echotron::out (float * smpsl, float * smpsr)
   float l,r,lyn, ryn;
   int length = Plength;
 
-if((Pmoddly)||(Pmodfilts)) modulate_delay();  
+if((Pmoddly)||(Pmodfilts)) modulate_delay(); 
+else interpl = interpr = 0; 
 
   float tmpmodl = oldldmod;
   float tmpmodr = oldrdmod;

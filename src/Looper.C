@@ -376,7 +376,7 @@ Looper::changepar (int npar, int value)
       if((first_time1) && (Prec1))
         {
 	   dl = set_len(kl);
-	   printf("dl %d\n",dl); 
+	   //printf("dl %d\n",dl); 
 	   first_time1 = 0;
 	   if(Plink)
 	   {
@@ -454,8 +454,11 @@ Looper::changepar (int npar, int value)
      else 
      {
      PT1 = 1;
+     if(!Plink) PT2 = 0;   
+     kl = 0;
      }
      track1gain = (float) PT1;
+     track2gain = (float) PT2;    
      setfade ();
       break;
     case 8:
@@ -465,8 +468,12 @@ Looper::changepar (int npar, int value)
      else 
      {
      PT2 = 1;
+     if(!Plink) PT1 = 0;
+     kl2 = 0;
      }
+
      track2gain = (float) PT2;
+     track1gain = (float) PT1;     
      setfade ();
       break;      
     case 9:

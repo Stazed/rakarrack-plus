@@ -47,6 +47,8 @@ RBFilter::RBFilter (int Ftype, float Ffreq, float Fq,
   cleanup ();
   setfreq_and_q (Ffreq, Fq);
   iper = 1.0f/fPERIOD;
+  a_smooth_tc = cSAMPLE_RATE/(cSAMPLE_RATE + 0.01f);  //10ms time constant for averaging coefficients
+  b_smooth_tc = 1.0f - a_smooth_tc;
 };
 
 RBFilter::~RBFilter ()
@@ -73,9 +75,12 @@ RBFilter::computefiltercoefs ()
   par.f = 2.0f * sinf(PI*freq / fSAMPLE_RATE);
   if (par.f > 0.99999)
     par.f = 0.99999f;
-  par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
-  par.q = powf (par.q, 1.0f / (float)(stages + 1));
-  par.q_sqrt = sqrtf (par.q);
+//   par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
+    par.q = 1.0f/q;
+    par.q = powf (par.q, 1.0f / (float)(stages + 1));
+     par.q_sqrt = par.q;
+//   par.q_sqrt = sqrtf (par.q);
+
 };
 
 
@@ -286,21 +291,14 @@ RBFilter::singlefilterout_s (float smp, fstage & x, parameters & par)
       break;
     };
 
-  float tmpq, tmpsq, tmpf, qdiff, sqdiff, fdiff;
-  qdiff = (par.q - oldq)*iper;
-  sqdiff = (par.q_sqrt - oldsq)*iper;
-  fdiff = (par.f - oldf)*iper;
-  tmpq = oldq;
-  tmpsq = oldsq;
-  tmpf = oldf;
 
-      tmpq += qdiff;
-      tmpsq += sqdiff;
-      tmpf += fdiff;   //Modulation interpolation
+  oldq = b_smooth_tc*oldq + a_smooth_tc*par.q;
+  oldsq = b_smooth_tc*oldsq + a_smooth_tc*par.q_sqrt;
+  oldf = b_smooth_tc*oldf + a_smooth_tc*par.f;   //modulation interpolation
       
-      x.low = x.low + tmpf * x.band;
-      x.high = tmpsq * smp - x.low - tmpq * x.band;
-      x.band = tmpf * x.high + x.band;
+      x.low = x.low + oldf * x.band;
+      x.high = oldsq * smp - x.low - oldq * x.band;
+      x.band = oldf * x.high + x.band;
       
       if(en_mix)
       {
