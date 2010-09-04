@@ -346,6 +346,7 @@ void Echotron::init_params()
 float hSR = fSAMPLE_RATE*0.5f;
 float tmp_time;
 float tpanl, tpanr;
+float tmptempo;
 int tfcnt = 0;
 
 initparams=0;
@@ -353,8 +354,9 @@ depth = ((float) (Pdepth - 64))/64.0f;
 dlyrange = 0.008*powf(2.0f, 4.5f*depth);
 width = ((float) Pwidth)/127.0f;
 
-lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
-dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
+tmptempo = (float) Ptempo;
+lfo.Pfreq = lrintf(subdiv_fmod*tmptempo);
+dlfo.Pfreq = lrintf(subdiv_dmod*tmptempo);
       
 for(int i=0; i<Plength; i++)
 {
@@ -522,8 +524,9 @@ float tmptempo;
       break;
     case 5:
       Ptempo = value;
-      tempo_coeff = 60.0f / ((float)Ptempo);
+
       tmptempo = (float) Ptempo; 
+      tempo_coeff = 60.0f / tmptempo;
       lfo.Pfreq = lrintf(subdiv_fmod*tmptempo);
       dlfo.Pfreq = lrintf(subdiv_dmod*tmptempo);
       lfo.updateparams ();      
