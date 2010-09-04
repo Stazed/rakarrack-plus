@@ -76,6 +76,7 @@ RBFilter::computefiltercoefs ()
   if (par.f > 0.99999)
     par.f = 0.99999f;
 //   par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
+  if(q<0.5f) q = 0.5f;
     par.q = 1.0f/q;
     par.q = powf (par.q, 1.0f / (float)(stages + 1));
      par.q_sqrt = par.q;
@@ -203,7 +204,8 @@ RBFilter::singlefilterout (float * smp, fstage & x, parameters & par)
       tmpf += fdiff;   //Modulation interpolation
       
       x.low = x.low + tmpf * x.band;
-      x.high = tmpsq * smp[i] - x.low - tmpq * x.band;
+      //x.high = tmpsq * smp[i] - x.low - tmpq * x.band;
+      x.high = smp[i] - x.low - tmpq * x.band;     
       x.band = tmpf * x.high + x.band;
       
       if(en_mix)
@@ -293,11 +295,12 @@ RBFilter::singlefilterout_s (float smp, fstage & x, parameters & par)
 
 
   oldq = b_smooth_tc*oldq + a_smooth_tc*par.q;
-  oldsq = b_smooth_tc*oldsq + a_smooth_tc*par.q_sqrt;
+  //oldsq = b_smooth_tc*oldsq + a_smooth_tc*par.q_sqrt;
   oldf = b_smooth_tc*oldf + a_smooth_tc*par.f;   //modulation interpolation
       
       x.low = x.low + oldf * x.band;
-      x.high = oldsq * smp - x.low - oldq * x.band;
+      //x.high = oldsq * smp[i] - x.low - oldq * x.band;
+      x.high = smp - x.low - oldq * x.band;
       x.band = oldf * x.high + x.band;
       
       if(en_mix)
