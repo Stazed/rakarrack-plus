@@ -8335,6 +8335,7 @@ Fl_Menu_Item RKRGUI::menu_echotron_fnum[] = {
  {"Filtered Echo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Notch-Wah", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Multi-Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"PingPong", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

@@ -9003,8 +9003,12 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Multi-Chorus} selected
+            label {Multi-Chorus}
             xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label PingPong selected
+            xywh {20 20 36 21} labelsize 10
           }
         }
       }

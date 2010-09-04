@@ -498,6 +498,7 @@ Echotron::setpreset (int npreset)
 void
 Echotron::changepar (int npar, int value)
 {
+float tmptempo;
   switch (npar)
     {
     case 0:
@@ -522,8 +523,9 @@ Echotron::changepar (int npar, int value)
     case 5:
       Ptempo = value;
       tempo_coeff = 60.0f / ((float)Ptempo);
-      lfo.Pfreq = lrintf(subdiv_fmod*Ptempo);
-      dlfo.Pfreq = lrintf(subdiv_dmod*Ptempo);
+      tmptempo = (float) Ptempo; 
+      lfo.Pfreq = lrintf(subdiv_fmod*tmptempo);
+      dlfo.Pfreq = lrintf(subdiv_dmod*tmptempo);
       lfo.updateparams ();      
       initparams=1;
       break;
