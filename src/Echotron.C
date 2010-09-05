@@ -279,7 +279,7 @@ if ((fs = fopen (Filename, "r")) == NULL) return(0);
       }
       else fTime[count]=fabs(tTime);       
      
-      if((tLevel <-2.0f) || (tLevel>2.0f)) 
+      if((tLevel <-10.0f) || (tLevel>10.0f)) 
       {
       error_num=7;
       break;

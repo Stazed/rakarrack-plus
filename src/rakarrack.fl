@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -841,16 +841,18 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1405 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -8744,7 +8746,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -8966,7 +8968,7 @@ rkr->efx_Echotron->changepar(3,(int)o->value());}
           user_data 12
           callback {rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
           xywh {408 379 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -9002,8 +9004,12 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label PingPong selected
+            label PingPong
             xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {90-Shifter} selected
+            xywh {30 30 36 21} labelsize 10
           }
         }
       }
@@ -10468,7 +10474,7 @@ if(rkr->Tap_Bypass)
 rkr->Tap_TempoSet=(int)o->value();
 rkr->Update_tempo();
 UpdateTGUI();
-}} selected
+}}
           xywh {719 165 70 22} align 0 minimum 20 maximum 360 step 1 value 100 textcolor 7
         }
       }
