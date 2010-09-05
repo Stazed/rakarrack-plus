@@ -1,3 +1,4 @@
+#Analytical signal approximation, 90 degree delay at each center frequency
 #Filter	Delay	#LFO Tempo rate adjustment
 1.0	2.0
 #Pan	Time	Level	LP	BP	HP	Freq	Q	Stages

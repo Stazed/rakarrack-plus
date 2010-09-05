@@ -246,12 +246,13 @@ if ((fs = fopen (Filename, "r")) == NULL) return(0);
 
  while (fgets(wbuf,sizeof wbuf,fs) != NULL)
  {
-  memset(wbuf,0,sizeof(wbuf));
-  fgets(wbuf,sizeof wbuf,fs);
-  if(wbuf[0]=='#') continue; else break;
+  //fgets(wbuf,sizeof wbuf,fs);
+  if(wbuf[0]!='#') break;
+  memset(wbuf,0,sizeof(wbuf)); 
  }
 
  sscanf(wbuf,"%f\t%f",&subdiv_fmod,&subdiv_dmod); //Second line has tempo subdivision
+ //printf("subdivs:\t%f\t%f\n",subdiv_fmod,subdiv_dmod);
 
  int count = 0;
  memset(iStages,0,sizeof(iStages));
@@ -264,7 +265,8 @@ if ((fs = fopen (Filename, "r")) == NULL) return(0);
      if(wbuf[0]=='#') continue;
      sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d",&tPan, &tTime, &tLevel,
       &tLP,  &tBP,  &tHP,  &tFreq,  &tQ,  &tiStages);
-      
+  //printf("params:\n%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",tPan, tTime, tLevel,
+      //tLP,  tBP,  tHP,  tFreq,  tQ,  tiStages);     
       if((tPan<-1.0f) || (tPan>1.0f)) 
       {
       error_num=5;
