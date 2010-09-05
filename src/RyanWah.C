@@ -45,7 +45,8 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
   maxfreq = 5000.0f;
   minfreq = 40.0f;
   frequency = 40.0f;
-  q = 75.0f;
+  q = 1.0f/(1.0f - atanf(sqrtf(75.0))*2.0/M_PI);
+//  q = 75.0f;
   hpmix = 0.0f;
   lpmix = 0.5f;
   bpmix = 2.0f;
