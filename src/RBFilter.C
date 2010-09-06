@@ -143,21 +143,24 @@ void
 RBFilter::setq (float q_)
 {
   q = q_;
-  computefiltercoefs ();
+  if(qmode) computefiltercoefs ();
+  else computefiltercoefs_hiQ ();
 };
 
 void
 RBFilter::settype (int type_)
 {
   type = type_;
-  computefiltercoefs ();
+  if(qmode) computefiltercoefs ();
+  else computefiltercoefs_hiQ ();
 };
 
 void
 RBFilter::setgain (float dBgain)
 {
   gain = dB2rap (dBgain);
-  computefiltercoefs ();
+  if(qmode) computefiltercoefs ();
+  else computefiltercoefs_hiQ ();
 };
 
 void
@@ -167,7 +170,8 @@ RBFilter::setstages (int stages_)
     stages_ = MAX_FILTER_STAGES - 1;
   stages = stages_;
   cleanup ();
-  computefiltercoefs ();
+  if(qmode) computefiltercoefs ();
+  else computefiltercoefs_hiQ ();
 };
 void
 RBFilter::setmix (int mix, float lpmix, float bpmix, float hpmix)
