@@ -44,6 +44,7 @@ public:
   void setgain (float dBgain);
   void setstages (int stages_);
   void setmix (int mix, float lpmix, float bpmix, float hpmix);
+  void setmode(int mode);
   void cleanup ();
 
 private:
@@ -61,12 +62,14 @@ private:
   void singlefilterout (float * smp, fstage & x, parameters & par);
   float singlefilterout_s (float smp, fstage & x, parameters & par);
   void computefiltercoefs ();
+  void computefiltercoefs_hiQ ();
 
   int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
   int stages;			//how many times the filter is applied (0->1,1->2,etc.)
   int abovenq;			//this is 1 if the frequency is above the nyquist
   int oldabovenq;
   int needsinterpolation, firsttime, en_mix;
+  int qmode;                   //set to true for compatibility to old presets.  0 means Q = 1/q
 
   float freq;		//Frequency given in Hz
   float q;			//Q factor (resonance or Q factor)

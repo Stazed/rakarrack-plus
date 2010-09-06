@@ -45,8 +45,8 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
   maxfreq = 5000.0f;
   minfreq = 40.0f;
   frequency = 40.0f;
-  q = 1.0f/(1.0f - atanf(sqrtf(75.0))*2.0/M_PI);
-//  q = 75.0f;
+  q = 10.0f;
+  Pqm = 1;  //Set backward compatibility mode by default.
   hpmix = 0.0f;
   lpmix = 0.5f;
   bpmix = 2.0f;
@@ -192,19 +192,19 @@ RyanWah::reinitfilter ()
 void
 RyanWah::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 17;
+  const int PRESET_SIZE = 18;
   const int NUM_PRESETS = 5;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Wah Pedal
-    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1 },
+    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 0 },
     //Mutron
-    {0, 90, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0 },
+    {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 0 },
     //Phase Wah
-    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1 },
+    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 0 },
     //Succulent Phaser
-    {-25, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1 },
+    {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 0 },
     //Quacky
-    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1 } 
+    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 0 } 
 
   };
 
@@ -303,7 +303,8 @@ RyanWah::changepar (int npar, int value)
      break;
      case 17:
      Pqm = value;
-     //if(Pqm) ->calculateq
+     filterl->setmode(Pqm);
+     filterr->setmode(Pqm);     
      break;
       
     };

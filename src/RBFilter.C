@@ -33,6 +33,7 @@ RBFilter::RBFilter (int Ftype, float Ffreq, float Fq,
   type = Ftype;
   freq = Ffreq;
   q = Fq;
+  qmode = 0;
   gain = 1.0f;
   outgain = 1.0f;
   needsinterpolation = 0;
@@ -75,15 +76,31 @@ RBFilter::computefiltercoefs ()
   par.f = 2.0f * sinf(PI*freq / fSAMPLE_RATE);
   if (par.f > 0.99999)
     par.f = 0.99999f;
-//   par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
-  if(q<0.5f) q = 0.5f;
-    par.q = 1.0f/q;
+   par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
     par.q = powf (par.q, 1.0f / (float)(stages + 1));
-     par.q_sqrt = par.q;
-//   par.q_sqrt = sqrtf (par.q);
+   par.q_sqrt = sqrtf (par.q);
 
 };
 
+void
+RBFilter::computefiltercoefs_hiQ ()
+{
+  par.f = 2.0f * sinf(PI*freq / fSAMPLE_RATE);
+  if (par.f > 0.99999)
+    par.f = 0.99999f;
+  if(q<0.5f) q = 0.5f;
+    par.q = 1.0f/q;
+    par.q = powf (par.q, 1.0f / (float)(stages + 1));
+     par.q_sqrt = 1.0f;
+
+};
+
+void
+RBFilter::setmode (int mode)
+{
+   if (mode) qmode = 1;
+   else qmode = 0;
+}
 
 void
 RBFilter::setfreq (float frequency)
@@ -108,7 +125,9 @@ RBFilter::setfreq (float frequency)
       ipar = par;
     };
   freq = frequency;
-  computefiltercoefs ();
+  
+  if(qmode) computefiltercoefs ();
+  else computefiltercoefs_hiQ ();
   firsttime = 0;
 
 };
@@ -204,8 +223,8 @@ RBFilter::singlefilterout (float * smp, fstage & x, parameters & par)
       tmpf += fdiff;   //Modulation interpolation
       
       x.low = x.low + tmpf * x.band;
-      //x.high = tmpsq * smp[i] - x.low - tmpq * x.band;
-      x.high = smp[i] - x.low - tmpq * x.band;     
+      x.high = tmpsq * smp[i] - x.low - tmpq * x.band;
+      //x.high = smp[i] - x.low - tmpq * x.band;     
       x.band = tmpf * x.high + x.band;
       
       if(en_mix)
@@ -295,12 +314,12 @@ RBFilter::singlefilterout_s (float smp, fstage & x, parameters & par)
 
 
   oldq = b_smooth_tc*oldq + a_smooth_tc*par.q;
-  //oldsq = b_smooth_tc*oldsq + a_smooth_tc*par.q_sqrt;
+  oldsq = b_smooth_tc*oldsq + a_smooth_tc*par.q_sqrt;
   oldf = b_smooth_tc*oldf + a_smooth_tc*par.f;   //modulation interpolation
       
       x.low = x.low + oldf * x.band;
-      //x.high = oldsq * smp[i] - x.low - oldq * x.band;
-      x.high = smp - x.low - oldq * x.band;
+      x.high = oldsq * smp - x.low - oldq * x.band;
+      //x.high = smp - x.low - oldq * x.band;
       x.band = oldf * x.high + x.band;
       
       if(en_mix)
