@@ -33,7 +33,7 @@ RBFilter::RBFilter (int Ftype, float Ffreq, float Fq,
   type = Ftype;
   freq = Ffreq;
   q = Fq;
-  qmode = 0;
+  qmode = 1;
   gain = 1.0f;
   outgain = 1.0f;
   needsinterpolation = 0;
@@ -83,7 +83,7 @@ RBFilter::computefiltercoefs ()
 };
 
 void
-RBFilter::computefiltercoefs_hiQ ()
+RBFilter::computefiltercoefs_hiQ ()  //potentially unstable at some settings, but better sound
 {
   par.f = 2.0f * sinf(PI*freq / fSAMPLE_RATE);
   if (par.f > 0.99999)
@@ -126,7 +126,7 @@ RBFilter::setfreq (float frequency)
     };
   freq = frequency;
   
-  if(qmode) computefiltercoefs ();
+  if(!qmode) computefiltercoefs ();
   else computefiltercoefs_hiQ ();
   firsttime = 0;
 
@@ -143,7 +143,7 @@ void
 RBFilter::setq (float q_)
 {
   q = q_;
-  if(qmode) computefiltercoefs ();
+  if(!qmode) computefiltercoefs ();
   else computefiltercoefs_hiQ ();
 };
 
@@ -151,7 +151,7 @@ void
 RBFilter::settype (int type_)
 {
   type = type_;
-  if(qmode) computefiltercoefs ();
+  if(!qmode) computefiltercoefs ();
   else computefiltercoefs_hiQ ();
 };
 
@@ -159,7 +159,7 @@ void
 RBFilter::setgain (float dBgain)
 {
   gain = dB2rap (dBgain);
-  if(qmode) computefiltercoefs ();
+  if(!qmode) computefiltercoefs ();
   else computefiltercoefs_hiQ ();
 };
 
@@ -170,7 +170,7 @@ RBFilter::setstages (int stages_)
     stages_ = MAX_FILTER_STAGES - 1;
   stages = stages_;
   cleanup ();
-  if(qmode) computefiltercoefs ();
+  if(!qmode) computefiltercoefs ();
   else computefiltercoefs_hiQ ();
 };
 void
