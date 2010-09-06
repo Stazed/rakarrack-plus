@@ -280,11 +280,11 @@ void RKR::putbuf(char *buf, int j)
 
 	case 31:
 	  //RyanWah
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[32][0], &lv[32][1], &lv[32][2], &lv[32][3], &lv[32][4],
 		  &lv[32][5], &lv[32][6], &lv[32][7], &lv[32][8], &lv[32][9],
                   &lv[32][10], &lv[32][11], &lv[32][12], &lv[32][13], &lv[32][14],
-		  &lv[32][15], &lv[32][16], &RyanWah_B);
+		  &lv[32][15], &lv[32][16], &lv[32][17],&RyanWah_B);
 	  break;
 
 	case 32:
@@ -768,7 +768,7 @@ void RKR::getbuf(char *buf, int j)
  
 	case 31:
 	  //RyanWah
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_RyanWah->getpar (0), efx_RyanWah->getpar (1),
 		   efx_RyanWah->getpar (2), efx_RyanWah->getpar (3),
 		   efx_RyanWah->getpar (4), efx_RyanWah->getpar (5),
@@ -777,7 +777,7 @@ void RKR::getbuf(char *buf, int j)
                    efx_RyanWah->getpar (10), efx_RyanWah->getpar (11),
 		   efx_RyanWah->getpar (12), efx_RyanWah->getpar (13),
                    efx_RyanWah->getpar(14), efx_RyanWah->getpar(15), 
-                   efx_RyanWah->getpar(16), RyanWah_Bypass);
+                   efx_RyanWah->getpar(16), efx_RyanWah->getpar(17),RyanWah_Bypass);
 
           break;
 	case 32:
@@ -1460,7 +1460,7 @@ RKR::Actualizar_Audio ()
 
         RyanWah_Bypass = 0;
         efx_RyanWah->cleanup();
-        for (i = 0; i <= 16; i++)
+        for (i = 0; i <= 17; i++)
         efx_RyanWah->changepar (i, lv[32][i]);
         RyanWah_Bypass = RyanWah_B;
         break;
@@ -2212,7 +2212,7 @@ RKR::Preset_to_Bank (int i)
     lv[30][j] = efx_Convol->getpar(j);
   for (j = 0; j <= 13; j++)
     lv[31][j] = efx_Looper->getpar(j);
-  for (j = 0; j <= 16; j++)
+  for (j = 0; j <= 17; j++)
     lv[32][j] = efx_RyanWah->getpar(j);
   for (j = 0; j <= 9; j++)
     lv[33][j] = efx_RBEcho->getpar(j);

@@ -66,6 +66,7 @@ private:
   int Plp;		//-64/64//low pass filter mix
   int Pbp;		//-64/64//Bandpass filter mix
   int Pq;		//0/127//filter resonance.
+  int Pqm;	        //Qmode
   int Pstages;		//0-6// counter// Filter stages
   int Pminfreq;		//30/800//set lowest freq in range.
   int variq;		//on-off//checkbox//Selects whether Q is varied w/ frequency to emulate a wahwah

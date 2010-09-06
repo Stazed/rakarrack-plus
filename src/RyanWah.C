@@ -301,6 +301,10 @@ RyanWah::changepar (int npar, int value)
      case 16:
      variq = value;
      break;
+     case 17:
+     Pqm = value;
+     //if(Pqm) ->calculateq
+     break;
       
     };
 };
@@ -360,6 +364,9 @@ RyanWah::getpar (int npar)
       break;
     case 16:
       return (variq);
+      break;
+    case 17:
+      return (Pqm);  
       break;
     default:
       return (0);
