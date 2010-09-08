@@ -128,7 +128,7 @@ MIDIConverter::displayFrequency (float ffreq)
 
 
   cents = lrintf (1200.0f * (logf (ffreq / nfreq) / LOG_2));
-  lanota = 24 + (Moctave * 12) + (octave * 12) + note - 3;
+  lanota = 24 + (octave * 12) + note - 3;
 
 
   if ((noteoff) & (hay))
@@ -254,6 +254,8 @@ MIDIConverter::MIDI_Send_Note_On (int nota)
 
 
   int k;
+  int anota = nota + (Moctave * 12);
+  if((anota<0) || (anota>127)) return;
 
 
   k = lrintf ((val_sum + 48) * 2);
@@ -268,7 +270,7 @@ MIDIConverter::MIDI_Send_Note_On (int nota)
 
   snd_seq_event_t ev;
   snd_seq_ev_clear (&ev);
-  snd_seq_ev_set_noteon (&ev,channel,nota,velocity);
+  snd_seq_ev_set_noteon (&ev,channel,anota,velocity);
   snd_seq_ev_set_subs (&ev);
   snd_seq_ev_set_direct (&ev);
   snd_seq_event_output_direct (port, &ev);
@@ -280,7 +282,7 @@ MIDIConverter::MIDI_Send_Note_On (int nota)
 
   moutdata[moutdatasize]=144+channel;
   moutdatasize++;
-  moutdata[moutdatasize]=nota;
+  moutdata[moutdatasize]=anota;
   moutdatasize++;
   moutdata[moutdatasize]=velocity;
   moutdatasize++;
@@ -294,12 +296,18 @@ void
 MIDIConverter::MIDI_Send_Note_Off (int nota)
 {
 
+  int anota = nota + ( Moctave * 12) ;
+  if((anota<0) || (anota>127)) return;
+
+
+ 
   snd_seq_event_t ev;
   snd_seq_ev_clear (&ev);
-  snd_seq_ev_set_noteoff (&ev, channel, nota, 0);
+  snd_seq_ev_set_noteoff (&ev, channel, anota, 0);
   snd_seq_ev_set_subs (&ev);
   snd_seq_ev_set_direct (&ev);
   snd_seq_event_output_direct (port, &ev);
+  
 
   ev_count++;
   Midi_event[ev_count].dataloc=&moutdata[moutdatasize];
@@ -308,7 +316,7 @@ MIDIConverter::MIDI_Send_Note_Off (int nota)
 
   moutdata[moutdatasize]=128+channel;
   moutdatasize++;
-  moutdata[moutdatasize]=nota;
+  moutdata[moutdatasize]=anota;
   moutdatasize++;
 
 };
