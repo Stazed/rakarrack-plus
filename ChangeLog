@@ -1,6 +1,9 @@
 ==v0.6.x (  /  /2010) ==
 
-- Improved RVBFilter.
+- Fix MIDI Converter octave change.
+- Fix MuTroMojo now display the internal preset "Mode"
+- Fix Echotron Length save/restore
+- Improved RVBFilter. Mode to maintain sound version compatibility.
 - Tap Tempo can be set in the main screen.
 - Added Metronome as internal module switchable with MIDI Converter, both
   can be active, but for GUI space reasons need to be in that way.
