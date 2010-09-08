@@ -45,6 +45,8 @@ public:
   int setfile (int value);
   int Ppreset;
 
+  int Pchange;
+
   float *efxoutl;
   float *efxoutr;
   float outvolume;

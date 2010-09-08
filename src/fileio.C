@@ -1551,8 +1551,10 @@ RKR::Actualizar_Audio ()
 
         Echotron_Bypass = 0;
         efx_Echotron->cleanup();
+        efx_Echotron->Pchange=1;
         for (i = 0; i <= 15; i++)
         efx_Echotron->changepar (i, lv[42][i]);
+        efx_Echotron->Pchange=0;
         Echotron_Bypass = Echotron_B; 
         break;  
  

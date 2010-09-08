@@ -22682,12 +22682,20 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
   m->parent()->copy_label(rkr->jackcliname);
   sprintf(temp2,"Overwrite? \"%s\"",w->label());
   ok=fl_choice(temp2,"No","Yes",NULL);
- if (!ok) return;
+ if (!ok)
+ { 
+ o->value(0);
+ o->redraw();
+  return;
+ }
+
+
 }
-   
-  rkr->Preset_to_Bank(num);
-  w->copy_label(rkr->Preset_Name);
-  rkr->modified=1;
+ o->value(0);
+ o->redraw();
+ rkr->Preset_to_Bank(num);
+ w->copy_label(rkr->Preset_Name);
+ rkr->modified=1;
 
 }
 

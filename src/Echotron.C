@@ -336,7 +336,7 @@ if ((fs = fopen (Filename, "r")) == NULL) return(0);
     }
     fclose(fs);  
 
-Plength=count;
+if(!Pchange) Plength=count;
 cleanup();
 init_params();
 return(1);
