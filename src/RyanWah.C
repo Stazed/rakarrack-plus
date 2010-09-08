@@ -306,7 +306,10 @@ RyanWah::changepar (int npar, int value)
      filterl->setmode(Pqm);
      filterr->setmode(Pqm);     
      break;
-      
+     case 18:
+     Ppreset = value;
+     break;
+           
     };
 };
 
@@ -368,6 +371,9 @@ RyanWah::getpar (int npar)
       break;
     case 17:
       return (Pqm);  
+      break;
+    case 18:
+      return (Ppreset);
       break;
     default:
       return (0);

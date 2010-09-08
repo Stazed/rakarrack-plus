@@ -6605,6 +6605,8 @@ ryanwah_bp->value(rkr->efx_RyanWah->getpar(11));
 ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
 svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
 ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
+o->value(rkr->efx_RyanWah->getpar(18));
+o->redraw();
 }
 void RKRGUI::cb_ryanwah_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ryanwah_preset_i(o,v);

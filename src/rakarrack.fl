@@ -841,16 +841,18 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {349 84 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -7063,7 +7065,7 @@ update_looper();}
         }
       }
       Fl_Group RYANWAH {
-        user_data 1 selected
+        user_data 1
         xywh {318 209 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button ryanwah_activar {
@@ -7099,7 +7101,9 @@ ryanwah_lp->value(rkr->efx_RyanWah->getpar(10));
 ryanwah_bp->value(rkr->efx_RyanWah->getpar(11));
 ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
 svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
-ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));}
+ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
+o->value(rkr->efx_RyanWah->getpar(18));
+o->redraw();} selected
           xywh {395 213 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
