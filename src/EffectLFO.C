@@ -47,7 +47,10 @@ EffectLFO::EffectLFO ()
    c = 8.0f / 5.0f;
    scale = 1.0f/36.0f;
    ratediv = 0.1f;
-
+   holdflag = 0;
+   tca = iperiod/(iperiod + 0.02);  //20ms default
+   tcb = 1.0f - tca;
+   rreg = lreg = oldrreg = oldlreg = 0.0f;
   updateparams ();
 
   ampl1 = (1.0f - lfornd) + lfornd * (float)RND;
@@ -81,7 +84,7 @@ EffectLFO::updateparams ()
   else if (lfornd > 1.0)
     lfornd = 1.0;
 
-  if (PLFOtype > 7)
+  if (PLFOtype > 9)
     PLFOtype = 0;		//this has to be updated if more lfo's are added
   lfotype = PLFOtype;
 
@@ -98,8 +101,11 @@ EffectLFO::updateparams ()
    y0 = 0.0f;
    z0 = 0.2f;
    x1 = y1 = z1 = radius = 0.0f;
-
-
+   
+   float tmp = 6.0f/((float) Pfreq);  //S/H time attack  0.2*60=12.0
+   tca = iperiod/(iperiod + tmp);  //
+   tcb = 1.0f - tca;
+   maxrate = 4.0f*iperiod;
 };
 
 
@@ -110,6 +116,7 @@ float EffectLFO::getlfoshape (float x)
 {
   float
     out,tmpv;
+    int iterations = 1;  //make fractal go faster
   switch (lfotype)
     {
     case 1:			//EffectLFO_TRIANGLE
@@ -139,20 +146,48 @@ float EffectLFO::getlfoshape (float x)
        tmpv = x * D_PI;
        out=sinf(tmpv+sinf(tmpv));  
      break; 
+    case 8:                       //Lorenz Fractal, faster, using X,Y outputs
+    iterations = 4;
     case 7:			// Lorenz Fractal
-    
+     for(int j=0; j<iterations;j++) {
       x1 = x0 + h * a * (y0 - x0);
       y1 = y0 + h * (x0 * (b - z0) - y0);
       z1 = z0 + h * (x0 * y0 - c * z0);
       x0 = x1;
       y0 = y1;
       z0 = z1;
+      }
+      if(lfotype==7) {
       if((radius = (sqrtf(x0*x0 + y0*y0 + z0*z0) * scale) - 0.25f)  > 1.0f) radius = 1.0f;
-      if(radius < 0.0) radius = 0.0;    
-    
+      if(radius < 0.0) radius = 0.0; 
       out = 2.0f * radius - 1.0f;
+      }
+      
     break;
-        
+    case 9:                  //Sample/Hold Random
+    if(fmod(x,0.5f)<=(2.0f*incx)){           //this function is called by left, then right...so must toggle each time called
+      rreg = lreg;
+      lreg = RND1;
+
+    }
+    
+    if(xlreg<lreg) xlreg += maxrate;
+    else xlreg -= maxrate;
+    if(xrreg<rreg) xrreg += maxrate;
+    else xrreg -= maxrate;    
+    oldlreg = xlreg*tca + oldlreg*tcb;
+    oldrreg = xrreg*tca + oldrreg*tcb;
+    
+     if(holdflag) {
+      out = 2.0f*oldlreg -1.0f;
+      holdflag = (1 + holdflag)%2;
+      }
+     else {
+      out = 2.0f*oldrreg - 1.0f;        
+      }          
+           
+    
+    break; 
 
 
       //more to be added here; also ::updateparams() need to be updated (to allow more lfotypes)
@@ -171,7 +206,7 @@ EffectLFO::effectlfoout (float * outl, float * outr)
   float out;
 
   out = getlfoshape (xl);
- // if ((lfotype == 0) || (lfotype == 1))         //What was that for?
+  //if ((lfotype == 0) || (lfotype == 1))         //What was that for?
     out *= (ampl1 + xl * (ampl2 - ampl1));
   xl += incx;
   if (xl > 1.0)
@@ -180,10 +215,14 @@ EffectLFO::effectlfoout (float * outl, float * outr)
       ampl1 = ampl2;
       ampl2 = (1.0f - lfornd) + lfornd * (float)RND;
     };
+  if(lfotype==8) out = scale*x0;  //fractal parameter
   *outl = (out + 1.0f) * 0.5f;
 
-  out = getlfoshape (xr);
- // if ((lfotype == 0) || (lfotype == 1))
+
+  if(lfotype==8) out = scale*y0;  //fractal parameter
+  else out = getlfoshape (xr);
+  
+  //if ((lfotype == 0) || (lfotype == 1))
     out *= (ampr1 + xr * (ampr2 - ampr1));
   xr += incx;
   if (xr > 1.0)

@@ -58,6 +58,11 @@ private:
    float scale;
    float iperiod; 
    float ratediv;
+   
+   //Sample/Hold
+   int holdflag;  //toggle left/right channel changes
+   float tca, tcb, maxrate;
+   float rreg, lreg, xlreg,xrreg, oldrreg, oldlreg;
 };
 
 
