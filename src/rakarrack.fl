@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
 } 
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public
+} 
+
+decl {\#include <FL/Fl_Scroll.H>} {public
 } 
 
 decl {\#include <FL/Fl_Progress.H>} {public
@@ -846,13 +849,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {349 84 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -2565,7 +2567,7 @@ rkr->efx_Chorus->changepar(3,(int)o->value());}
             xywh {20 20 36 21} labelsize 9
           }
           MenuItem {} {
-            label {S/H Random} selected
+            label {S/H Random}
             xywh {30 30 36 21} labelsize 9
           }
         }
@@ -10642,7 +10644,7 @@ Put_Loaded_Bank();
     Fl_Window Order {
       callback {save_stat(2);
 Order->hide();}
-      xywh {766 23 500 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
+      xywh {759 23 500 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
         xywh {1 1 600 400}
@@ -10797,13 +10799,13 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1451 166 640 528} type Double color 4 hide
+      xywh {1430 145 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
@@ -10970,8 +10972,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -11528,8 +11530,8 @@ Show_Next_Time();}
         }
         Fl_Group MIDI_SET {
           label MIDI
-          user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo8 {
             xywh {5 26 630 502}
@@ -11585,6 +11587,16 @@ ML_Menu->activate();}
             callback {rkr->autoassign=o->value();}
             xywh {134 319 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
           }
+          Fl_Check_Button MTable {
+            label {MIDI Program Change Table}
+            callback {rkr->midi_table=o->value();
+if(rkr->midi_table) scroll->activate(); else 
+scroll->deactivate();}
+            xywh {157 337 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+          }
+          Fl_Scroll scroll {open
+            xywh {15 360 469 162} type VERTICAL_ALWAYS
+          } {}
         }
         Fl_Group JACK_SET {
           label Jack
@@ -12076,6 +12088,7 @@ Settings->icon((char *)p);
 AboutWin->icon((char *)p);
 MIDILearn->icon((char *)p);
 Trigger->icon((char *)p);
+
 last_tecla=0;
 made=0;
 char tmp[256];
@@ -12105,8 +12118,8 @@ sprintf(tmp,"%s   v%s - ACI",rkr->jackcliname,VERSION);
 Trigger->copy_label(tmp);
 
 
-
 load_stat();
+make_table_window();
 Put_Loaded();
 Principal->show(argc,argv);
 put_icon(Principal);
@@ -12344,6 +12357,10 @@ Preset_Counter->do_callback();
 rakarrack.get(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway,0); 
 if(!rkr->MIDIway) ML_Menu->deactivate();
 
+rakarrack.get(rkr->PrefNom("MIDI Table"),rkr->midi_table,0); 
+if(!rkr->midi_table) scroll->deactivate();
+
+
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
 rakarrack.get(rkr->PrefNom("User Directory"),rkr->UDirFilename,DATADIR,127);
 rakarrack.get(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol,0);
@@ -12561,6 +12578,7 @@ rakarrack.set(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum);
 
 
 
+
 if (i==2)
 {
 rakarrack.set(rkr->PrefNom("Order X"),Order->x());
@@ -12642,6 +12660,7 @@ rakarrack.set(rkr->PrefNom("Auto Connect Jack In"),rkr->aconnect_JIA);
 
 
 rakarrack.set(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway);
+rakarrack.set(rkr->PrefNom("MIDI Table"),rkr->midi_table);
 
 
 
@@ -14156,6 +14175,7 @@ switch(rkr->VocBands)
   
 
 
+MTable->value(rkr->midi_table);
 
 AAssign->value(rkr->autoassign);
 Update_TAP->value(rkr->Tap_Updated);
@@ -16226,6 +16246,7 @@ Fondo11->image(InOut->image());
 
 
 
+
 Etit->image(InOut->image());
 Ares->image(InOut->image());
 
@@ -17413,5 +17434,49 @@ rkr->efx_order[source]=y;
 rkr->efx_order[dest]=x;
 
 reordena();} {}
+  }
+  Function {make_table_window()} {} {
+    code {scroll->begin();
+
+int n = 0;
+  for (int y=0; y<128; y++)
+   {
+    char buf[20]; sprintf(buf,"%d",n++);
+  
+    Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+    b->box(FL_DOWN_BOX);
+    b->copy_label(buf);
+    b->labelcolor(FL_WHITE);
+    
+    Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
+    cb->copy_label("Bank");
+    cb->labelcolor(FL_WHITE);
+    cb->add("1");
+    cb->add("2");
+    cb->add("3");
+    cb->add("U");
+    cb->user_data((void *) y);
+    cb->callback((Fl_Callback *)bank_click); 
+    
+    Fl_Choice* cp = new Fl_Choice(260,y*25+25,120,20);
+    cp->copy_label("Preset");
+    cp->labelcolor(FL_WHITE);
+    
+  
+  
+  
+  }
+  scroll->end();} {}
+  }
+  Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
+  } {
+    code {((RKRGUI*)(o->parent()->parent()->user_data()))->bank_click_i(o,v);} {}
+  }
+  Function {bank_click_i(Fl_Choice* o, void*)} {C return_type {inline void}
+  } {
+    code {long long kk = (long long) o->user_data();
+int num = (int) kk;
+printf("%d %d \\n",num, o->value());} {selected
+    }
   }
 } 

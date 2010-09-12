@@ -1605,6 +1605,60 @@ RKR::Actualizar_Audio ()
 }
 
 
+void
+RKR::loadnames()
+{
+ int i,j,k;
+ FILE *fn;
+  char temp[128];
+
+ memset(B_Names,0,sizeof(B_Names));
+
+
+  for(k=0;k<4;k++)
+  {
+
+   switch(k)
+   {
+   
+   case 0:
+    memset (temp, 0, sizeof (temp));
+    sprintf (temp, "%s/Default.rkrb", DATADIR);
+    break;
+   
+   case 1:
+    memset (temp, 0, sizeof (temp));
+    sprintf (temp, "%s/Extra.rkrb", DATADIR);
+    break;
+
+   case 2:
+    memset (temp, 0, sizeof (temp));
+    sprintf (temp, "%s/Extra1.rkrb", DATADIR);
+    break;
+
+   case 3:
+    memset (temp, 0, sizeof (temp));
+    sprintf (temp, BankFilename);
+    break;
+   
+   }
+
+
+
+  if ((fn = fopen (temp, "rb")) != NULL)
+    {
+      New_Bank();
+      while (!feof (fn))
+	{
+	  i = fread (&Bank, sizeof (Bank), 1, fn);
+          for(j=1;j<=60;j++) strcpy(B_Names[k][j].Preset_Name,Bank[j].Preset_Name);                    
+	}
+      fclose (fn);
+     }
+
+   }
+
+}
 
 int
 RKR::loadbank (char *filename)

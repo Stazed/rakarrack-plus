@@ -869,6 +869,7 @@ efx_FLimiter->Compressor_Change_Preset(0,3);
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
   rakarrack.get (PrefNom ("Bank Filename"), BankFilename, temp, 127);
+  loadnames();
 
   if (commandline == 0)
     loadbank (BankFilename);

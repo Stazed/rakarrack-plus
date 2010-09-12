@@ -212,6 +212,7 @@ public:
   void loadskin (char *filename);
   void saveskin (char *filename);
   int loadbank (char *filename);
+  void loadnames();
   int savebank (char *filename);
   void ConvertOldFile(char *filename);
   void ConvertReverbFile(char * filename);
@@ -535,6 +536,7 @@ public:
   int mess_dis;  
   int numpi, numpo, numpa, numpmi, numpmo;
   int numpc;
+  int midi_table;
 
   int Aux_Gain;
   int Aux_Threshold;
@@ -625,6 +627,9 @@ public:
   char UDirFilename[128];
   char BackgroundImage[256];
 
+  
+  
+
   struct Effects_Names
   {
     char Nom[24];
@@ -662,6 +667,18 @@ public:
     int XMIDIrangeMin[128];
     int XMIDIrangeMax[128];
   } Bank[62];
+
+
+  struct MIDI_table
+  {
+    int bank;
+    int preset;
+  } M_table[128];
+  
+  struct Bank_Names
+  {
+    char Preset_Name[64];
+  } B_Names[4][62];     
 
 
   // Alsa MIDI
