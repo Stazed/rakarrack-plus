@@ -114,8 +114,8 @@ EffectLFO::updateparams ()
  */
 float EffectLFO::getlfoshape (float x)
 {
-  float
-    out,tmpv;
+  float tmpv;
+  float out=0.0;
     int iterations = 1;  //make fractal go faster
   switch (lfotype)
     {

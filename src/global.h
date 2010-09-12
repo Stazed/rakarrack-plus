@@ -537,6 +537,7 @@ public:
   int numpi, numpo, numpa, numpmi, numpmo;
   int numpc;
   int midi_table;
+  int a_bank;
 
   int Aux_Gain;
   int Aux_Threshold;

@@ -844,8 +844,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -860,7 +859,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -1125,8 +1124,43 @@ if(stecla==5)
 
 if (preset!=1000)
 {
+
+if(!rkr->midi_table)
+{
  Preset_Counter->value(preset);
  Preset_Counter->do_callback();
+}
+else
+{
+ if(rkr->a_bank != rkr->M_table[preset].bank)
+  {
+    switch(rkr->M_table[preset].bank)
+    
+     {
+       case 0:
+       L_B1->do_callback();
+       break;
+
+       case 1:
+       L_B2->do_callback();
+       break;
+     
+       case 2:
+       L_B3->do_callback();
+       break;
+
+       case 3:
+       L_B4->do_callback();
+       break;
+     
+     
+     }   
+   }
+ Preset_Counter->value(rkr->M_table[preset].preset+1);
+ Preset_Counter->do_callback();
+
+}
+
  preset=1000;
 }
 
@@ -1379,7 +1413,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -2423,7 +2457,7 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
         }
       }
       Fl_Group CHORUS {
-        user_data 1 open
+        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button chorus_activar {
@@ -10103,7 +10137,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -10121,6 +10155,7 @@ char temp[128];
 int ok=rkr->loadbank(temp);
 if(ok) 
 {
+rkr->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
 }}
@@ -10136,6 +10171,7 @@ char temp[128];
  int ok=rkr->loadbank(temp);
 if(ok) 
 {
+rkr->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
 }}
@@ -10151,6 +10187,7 @@ char temp[128];
  int ok=rkr->loadbank(temp);
 if(ok) 
 {
+rkr->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
 }}
@@ -10163,6 +10200,7 @@ Put_Loaded_Bank();
 int ok=rkr->loadbank(rkr->BankFilename);
 if(ok) 
 {
+rkr->a_bank=3;
 BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
 }}
@@ -17554,8 +17592,7 @@ fill_mptable(num+1000,rkr->M_table[num-1000].bank);} {}
     code {long long kk = (long long) o->user_data();
 int num = (int) kk;
 
-rkr->M_table[num-2000].preset=o->value();} {selected
-    }
+rkr->M_table[num-2000].preset=o->value();} {}
   }
   Function {fill_mptable(int num,int value)} {} {
     code {for (int t=0; t<scroll->children();t++)

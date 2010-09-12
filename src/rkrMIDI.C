@@ -190,6 +190,9 @@ RKR::midievents()
 
       if (midievent->data.control.channel == MidiCh)
 	{
+
+       if(!midi_table)
+        {
 	  if ((midievent->data.control.value > 0)
 	      && (midievent->data.control.value < 61))
 	    preset = midievent->data.control.value;
@@ -199,8 +202,12 @@ RKR::midievents()
         
           if (midievent->data.control.value == 82)
           if (Selected_Preset<60) preset = Selected_Preset+1;
-           	   
-
+         }  	   
+        else 
+         {
+          preset = midievent->data.control.value;
+          printf("Received %d\n",preset);
+         }
 
 	}
     }

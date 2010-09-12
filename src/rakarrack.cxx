@@ -1118,8 +1118,43 @@ if(stecla==5)
 
 if (preset!=1000)
 {
+
+if(!rkr->midi_table)
+{
  Preset_Counter->value(preset);
  Preset_Counter->do_callback();
+}
+else
+{
+ if(rkr->a_bank != rkr->M_table[preset].bank)
+  {
+    switch(rkr->M_table[preset].bank)
+    
+     {
+       case 0:
+       L_B1->do_callback();
+       break;
+
+       case 1:
+       L_B2->do_callback();
+       break;
+     
+       case 2:
+       L_B3->do_callback();
+       break;
+
+       case 3:
+       L_B4->do_callback();
+       break;
+     
+     
+     }   
+   }
+ Preset_Counter->value(rkr->M_table[preset].preset+1);
+ Preset_Counter->do_callback();
+
+}
+
  preset=1000;
 }
 
@@ -9326,6 +9361,7 @@ char temp[128];
 int ok=rkr->loadbank(temp);
 if(ok) 
 {
+rkr->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
 };
@@ -9342,6 +9378,7 @@ char temp[128];
  int ok=rkr->loadbank(temp);
 if(ok) 
 {
+rkr->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
 };
@@ -9358,6 +9395,7 @@ char temp[128];
  int ok=rkr->loadbank(temp);
 if(ok) 
 {
+rkr->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
 };
@@ -9371,6 +9409,7 @@ void RKRGUI::cb_L_B4_i(Fl_Button*, void*) {
 int ok=rkr->loadbank(rkr->BankFilename);
 if(ok) 
 {
+rkr->a_bank=3;
 BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
 };
