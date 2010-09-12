@@ -860,7 +860,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -958,7 +958,7 @@ Show_Next_Time();}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings}
+          label {&Settings} open
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -10799,7 +10799,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1430 145 640 528} type Double color 4 hide
+      xywh {1423 138 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -11594,8 +11594,9 @@ if(rkr->midi_table) scroll->activate(); else
 scroll->deactivate();}
             xywh {157 337 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
           }
-          Fl_Scroll scroll {open
-            xywh {15 360 469 162} type VERTICAL_ALWAYS
+          Fl_Scroll scroll {
+            user_data 5000 open
+            xywh {15 360 585 162} type VERTICAL_ALWAYS
           } {}
         }
         Fl_Group JACK_SET {
@@ -12476,7 +12477,50 @@ aux_midi->value(rkr->Aux_MIDI);
 rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
 aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
-aux_max->value(rkr->Aux_Maximum);} {}
+aux_max->value(rkr->Aux_Maximum);
+
+
+char temp[64];
+
+
+for(int i=0; i<128; i++)
+{
+if(i<60) k=i;
+if((i>59)&&(i<120))k=1000+i-60;
+if(i>119) k=0;
+memset(temp,0,sizeof(temp));
+sprintf(temp, "Midi Table Program %d",i);
+rakarrack.get(rkr->PrefNom(temp),f,k);
+
+
+
+if(f<1000) 
+{
+rkr->M_table[i].bank=0;
+rkr->M_table[i].preset=f;
+}
+
+if((f>999) && (f<2000)) 
+{
+rkr->M_table[i].bank=1;
+rkr->M_table[i].preset=f-1000;
+}
+
+if((f>1999) && (f<3000))
+{
+rkr->M_table[i].bank=2;
+rkr->M_table[i].preset=f-2000;
+}
+
+
+if((f>2999) && (f<4000))
+{
+rkr->M_table[i].bank=3;
+rkr->M_table[i].preset=f-3000;
+}
+
+
+}} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -12681,6 +12725,15 @@ rakarrack.set(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool);
 
 int k=1;
 char temp1[128];
+
+
+for(i=0; i<128;i++)
+{
+      memset(temp1,0, sizeof(temp1));
+      sprintf(temp1, "Midi Table Program %d",i);
+      rakarrack.set(rkr->PrefNom(temp1),rkr->M_table[i].bank*1000+rkr->M_table[i].preset);
+}
+
 
 
 for(i=1; i<=JackCo->size();i++)
@@ -17438,15 +17491,15 @@ reordena();} {}
   Function {make_table_window()} {} {
     code {scroll->begin();
 
-int n = 0;
   for (int y=0; y<128; y++)
    {
-    char buf[20]; sprintf(buf,"%d",n++);
+    char buf[20]; sprintf(buf,"%d",y);
   
     Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
     b->box(FL_DOWN_BOX);
     b->copy_label(buf);
     b->labelcolor(FL_WHITE);
+    b->user_data((void *) 8000);
     
     Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
     cb->copy_label("Bank");
@@ -17455,28 +17508,81 @@ int n = 0;
     cb->add("2");
     cb->add("3");
     cb->add("U");
-    cb->user_data((void *) y);
+    cb->user_data((void *) (1000+y));
     cb->callback((Fl_Callback *)bank_click); 
+    scroll->add(cb);
     
-    Fl_Choice* cp = new Fl_Choice(260,y*25+25,120,20);
+    Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
     cp->copy_label("Preset");
     cp->labelcolor(FL_WHITE);
-    
-  
+    cp->user_data((void *) (2000+y));
+    cp->callback((Fl_Callback *)p_click); 
+    scroll->add(cp);
   
   
   }
-  scroll->end();} {}
+  scroll->end();
+  
+
+  for(int i=0;i<128;i++)
+{
+ mtfillvalue(i+1000, rkr->M_table[i].bank);
+ fill_mptable(i+2000, rkr->M_table[i].bank);
+ mtfillvalue(i+2000, rkr->M_table[i].preset);
+}
+
+ scroll->position(0,0);} {}
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {
-    code {((RKRGUI*)(o->parent()->parent()->user_data()))->bank_click_i(o,v);} {}
+    code {((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->bank_click_i(o,v);} {}
   }
   Function {bank_click_i(Fl_Choice* o, void*)} {C return_type {inline void}
   } {
     code {long long kk = (long long) o->user_data();
 int num = (int) kk;
-printf("%d %d \\n",num, o->value());} {selected
+
+rkr->M_table[num-1000].bank=(int) o->value();
+fill_mptable(num+1000,rkr->M_table[num-1000].bank);} {}
+  }
+  Function {p_click(Fl_Choice* o, void* v)} {return_type {static void}
+  } {
+    code {((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->p_click_i(o,v);} {}
+  }
+  Function {p_click_i(Fl_Choice* o, void*)} {C return_type {inline void}
+  } {
+    code {long long kk = (long long) o->user_data();
+int num = (int) kk;
+
+rkr->M_table[num-2000].preset=o->value();} {selected
     }
+  }
+  Function {fill_mptable(int num,int value)} {} {
+    code {for (int t=0; t<scroll->children();t++)
+  {
+    Fl_Widget *w = scroll->child(t);
+    long long temp = (long long) w->user_data();
+    if ((int)temp == num)
+    {
+     Fl_Choice *p = (Fl_Choice * ) w; 
+     p->clear(); 
+     for(int i=1; i<=60;i++)
+     p->add(rkr->B_Names[value][i].Preset_Name);
+     break;
+    }
+  }} {}
+  }
+  Function {mtfillvalue(int num,int value)} {} {
+    code {for (int t=0; t<scroll->children();t++)
+  {
+    Fl_Widget *w = scroll->child(t);
+    long long temp = (long long) w->user_data();
+    if ((int)temp == num)
+    {
+     Fl_Choice *p = (Fl_Choice * ) w; 
+     p->value(value); 
+     break;
+    }
+  }} {}
   }
 } 

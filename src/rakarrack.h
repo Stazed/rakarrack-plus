@@ -4242,5 +4242,9 @@ public:
   void make_table_window();
   static void bank_click(Fl_Choice* o, void* v);
   inline void bank_click_i(Fl_Choice* o, void*);
+  static void p_click(Fl_Choice* o, void* v);
+  inline void p_click_i(Fl_Choice* o, void*);
+  void fill_mptable(int num,int value);
+  void mtfillvalue(int num,int value);
 };
 #endif

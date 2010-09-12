@@ -21276,8 +21276,9 @@ R average.");
           MTable->callback((Fl_Callback*)cb_MTable);
           MTable->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* MTable
-        { scroll = new Fl_Scroll(15, 360, 469, 162);
+        { scroll = new Fl_Scroll(15, 360, 585, 162);
           scroll->type(6);
+          scroll->user_data((void*)(5000));
           scroll->end();
         } // Fl_Scroll* scroll
         MIDI_SET->end();
@@ -22131,6 +22132,49 @@ rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
 aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
 aux_max->value(rkr->Aux_Maximum);
+
+
+char temp[64];
+
+
+for(int i=0; i<128; i++)
+{
+if(i<60) k=i;
+if((i>59)&&(i<120))k=1000+i-60;
+if(i>119) k=0;
+memset(temp,0,sizeof(temp));
+sprintf(temp, "Midi Table Program %d",i);
+rakarrack.get(rkr->PrefNom(temp),f,k);
+
+
+
+if(f<1000) 
+{
+rkr->M_table[i].bank=0;
+rkr->M_table[i].preset=f;
+}
+
+if((f>999) && (f<2000)) 
+{
+rkr->M_table[i].bank=1;
+rkr->M_table[i].preset=f-1000;
+}
+
+if((f>1999) && (f<3000))
+{
+rkr->M_table[i].bank=2;
+rkr->M_table[i].preset=f-2000;
+}
+
+
+if((f>2999) && (f<4000))
+{
+rkr->M_table[i].bank=3;
+rkr->M_table[i].preset=f-3000;
+}
+
+
+}
 }
 
 void RKRGUI::save_stat(int i) {
@@ -22336,6 +22380,15 @@ rakarrack.set(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool);
 
 int k=1;
 char temp1[128];
+
+
+for(i=0; i<128;i++)
+{
+      memset(temp1,0, sizeof(temp1));
+      sprintf(temp1, "Midi Table Program %d",i);
+      rakarrack.set(rkr->PrefNom(temp1),rkr->M_table[i].bank*1000+rkr->M_table[i].preset);
+}
+
 
 
 for(i=1; i<=JackCo->size();i++)
@@ -27130,15 +27183,15 @@ reordena();
 void RKRGUI::make_table_window() {
   scroll->begin();
 
-int n = 0;
   for (int y=0; y<128; y++)
    {
-    char buf[20]; sprintf(buf,"%d",n++);
+    char buf[20]; sprintf(buf,"%d",y);
   
     Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
     b->box(FL_DOWN_BOX);
     b->copy_label(buf);
     b->labelcolor(FL_WHITE);
+    b->user_data((void *) 8000);
     
     Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
     cb->copy_label("Bank");
@@ -27147,26 +27200,81 @@ int n = 0;
     cb->add("2");
     cb->add("3");
     cb->add("U");
-    cb->user_data((void *) y);
+    cb->user_data((void *) (1000+y));
     cb->callback((Fl_Callback *)bank_click); 
+    scroll->add(cb);
     
-    Fl_Choice* cp = new Fl_Choice(260,y*25+25,120,20);
+    Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
     cp->copy_label("Preset");
     cp->labelcolor(FL_WHITE);
-    
-  
+    cp->user_data((void *) (2000+y));
+    cp->callback((Fl_Callback *)p_click); 
+    scroll->add(cp);
   
   
   }
   scroll->end();
+  
+
+  for(int i=0;i<128;i++)
+{
+ mtfillvalue(i+1000, rkr->M_table[i].bank);
+ fill_mptable(i+2000, rkr->M_table[i].bank);
+ mtfillvalue(i+2000, rkr->M_table[i].preset);
+}
+
+ scroll->position(0,0);
 }
 
 void RKRGUI::bank_click(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->bank_click_i(o,v);
+  ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->bank_click_i(o,v);
 }
 
 inline void RKRGUI::bank_click_i(Fl_Choice* o, void*) {
   long long kk = (long long) o->user_data();
 int num = (int) kk;
-printf("%d %d \n",num, o->value());
+
+rkr->M_table[num-1000].bank=(int) o->value();
+fill_mptable(num+1000,rkr->M_table[num-1000].bank);
+}
+
+void RKRGUI::p_click(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->p_click_i(o,v);
+}
+
+inline void RKRGUI::p_click_i(Fl_Choice* o, void*) {
+  long long kk = (long long) o->user_data();
+int num = (int) kk;
+
+rkr->M_table[num-2000].preset=o->value();
+}
+
+void RKRGUI::fill_mptable(int num,int value) {
+  for (int t=0; t<scroll->children();t++)
+  {
+    Fl_Widget *w = scroll->child(t);
+    long long temp = (long long) w->user_data();
+    if ((int)temp == num)
+    {
+     Fl_Choice *p = (Fl_Choice * ) w; 
+     p->clear(); 
+     for(int i=1; i<=60;i++)
+     p->add(rkr->B_Names[value][i].Preset_Name);
+     break;
+    }
+  }
+}
+
+void RKRGUI::mtfillvalue(int num,int value) {
+  for (int t=0; t<scroll->children();t++)
+  {
+    Fl_Widget *w = scroll->child(t);
+    long long temp = (long long) w->user_data();
+    if ((int)temp == num)
+    {
+     Fl_Choice *p = (Fl_Choice * ) w; 
+     p->value(value); 
+     break;
+    }
+  }
 }
