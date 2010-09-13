@@ -1,6 +1,9 @@
 ==v0.6.x (  /  /2010) ==
 
-- Added Program Change MIDI table
+
+- Added Program Change MIDI table.
+- Added LFO type Sample % Hold.
+- Added LFO type Lorentz Fractal XY.
 - Fix MIDI Converter octave change.
 - Fix MuTroMojo now display the internal preset "Mode"
 - Fix Echotron Length save/restore
