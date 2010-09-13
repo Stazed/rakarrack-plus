@@ -1423,7 +1423,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -10853,7 +10853,7 @@ Settings->hide();}
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
@@ -17579,7 +17579,8 @@ reordena();} {}
  mtfillvalue(i+2000, rkr->M_table[i].preset);
 }
 
- scroll->position(0,0);} {}
+ scroll->position(0,-339);} {selected
+    }
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {

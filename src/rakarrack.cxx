@@ -27272,7 +27272,7 @@ void RKRGUI::make_table_window() {
  mtfillvalue(i+2000, rkr->M_table[i].preset);
 }
 
- scroll->position(0,0);
+ scroll->position(0,-339);
 }
 
 void RKRGUI::bank_click(Fl_Choice* o, void* v) {
