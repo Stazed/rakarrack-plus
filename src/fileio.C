@@ -2734,3 +2734,51 @@ system(orden);
 
 
 }
+
+void
+RKR::savemiditable(char *filename)
+{
+
+  int i;
+  FILE *fn;
+  char buf[256];
+  fn = fopen (filename, "w");
+  if(errno == EACCES)
+  {
+   Error_Handle(3);
+   fclose(fn);
+   return;
+  }  
+
+  for(i=0;i<128;i++)
+  {
+  memset (buf, 0, sizeof (buf));
+  sprintf (buf, "%d,%d\n", M_table[i].bank,M_table[i].preset);
+  fputs (buf, fn);
+  }
+  
+  fclose(fn);
+}  
+
+
+void
+RKR::loadmiditable (char *filename)
+{
+  int i;
+  char buf[256];
+  FILE *fn;
+
+  if ((fn = fopen (filename, "r")) == NULL)
+    return;
+
+  for(i=0;i<128;i++)
+  {
+  memset (buf, 0, sizeof (buf));
+  fgets (buf, sizeof buf, fn);
+  sscanf (buf, "%d,%d\n", &M_table[i].bank, &M_table[i].preset);
+  }
+  fclose(fn);
+
+}
+
+ 

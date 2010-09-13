@@ -126,6 +126,16 @@ private:
   void cb_Save_Skin_i(Fl_Menu_*, void*);
   static void cb_Save_Skin(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *Load_MTable;
+private:
+  void cb_Load_MTable_i(Fl_Menu_*, void*);
+  static void cb_Load_MTable(Fl_Menu_*, void*);
+public:
+  static Fl_Menu_Item *Save_MTable;
+private:
+  void cb_Save_MTable_i(Fl_Menu_*, void*);
+  static void cb_Save_MTable(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *ConvertReverb;
 private:
   void cb_ConvertReverb_i(Fl_Menu_*, void*);
@@ -4246,5 +4256,6 @@ public:
   inline void p_click_i(Fl_Choice* o, void*);
   void fill_mptable(int num,int value);
   void mtfillvalue(int num,int value);
+  void Put_MidiTable();
 };
 #endif

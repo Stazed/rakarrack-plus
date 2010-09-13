@@ -922,6 +922,27 @@ rkr->sschema = scheme_ch->value();
 rkr->saveskin(filename);}
             xywh {0 0 36 21} divider
           }
+          MenuItem Load_MTable {
+            label {Load MIDI Table}
+            callback {char *filename;
+filename=fl_file_chooser("Load MIDI Table:","(*.rmt)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rmt");
+rkr->loadmiditable(filename);
+Put_MidiTable();} selected
+            xywh {10 10 36 21}
+          }
+          MenuItem Save_MTable {
+            label {Save MIDI Table}
+            callback {char *filename;
+\#define EXT ".rmt"
+filename=fl_file_chooser("Save MIDI Table:","(*"EXT")","",0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,EXT);
+\#undef EXT
+rkr->savemiditable(filename);}
+            xywh {10 10 36 21} divider
+          }
           MenuItem ConvertReverb {
             label {&Convert Reverb IR File}
             callback {char *filename;
@@ -17571,16 +17592,10 @@ reordena();} {}
   }
   scroll->end();
   
+Put_MidiTable();
+ 
 
-  for(int i=0;i<128;i++)
-{
- mtfillvalue(i+1000, rkr->M_table[i].bank);
- fill_mptable(i+2000, rkr->M_table[i].bank);
- mtfillvalue(i+2000, rkr->M_table[i].preset);
-}
-
- scroll->position(0,-339);} {selected
-    }
+ scroll->position(0,-339);} {}
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {
@@ -17632,5 +17647,13 @@ rkr->M_table[num-2000].preset=o->value();} {}
      break;
     }
   }} {}
+  }
+  Function {Put_MidiTable()} {} {
+    code {for(int i=0;i<128;i++)
+{
+ mtfillvalue(i+1000, rkr->M_table[i].bank);
+ fill_mptable(i+2000, rkr->M_table[i].bank);
+ mtfillvalue(i+2000, rkr->M_table[i].preset);
+}} {}
   }
 } 

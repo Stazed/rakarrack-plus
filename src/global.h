@@ -209,6 +209,8 @@ public:
   void SaveIntPreset(int num, char *name);
   void DelIntPreset(int num, char *name);
   void MergeIntPreset(char *filename);
+  void loadmiditable (char *filename);
+  void savemiditable (char *filename);
   void loadskin (char *filename);
   void saveskin (char *filename);
   int loadbank (char *filename);
