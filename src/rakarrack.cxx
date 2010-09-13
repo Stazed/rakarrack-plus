@@ -1068,14 +1068,24 @@ if (Principal->w() != rkr->resolution) adjustfont();
 
 if(stecla==1)
 {
- if(rkr->Selected_Preset<60) preset=rkr->Selected_Preset+1;
+ if(rkr->Selected_Preset<60) 
+ {
+ Preset_Counter->value(rkr->Selected_Preset+1);
+ Preset_Counter->do_callback();
+ }
  stecla=0;
 }
 
 
 if(stecla==2)
 {
- if(rkr->Selected_Preset>1) preset=rkr->Selected_Preset-1;
+ if(rkr->Selected_Preset>1) 
+ {
+ Preset_Counter->value(rkr->Selected_Preset-1);
+ Preset_Counter->do_callback();
+ }
+ 
+ 
  stecla=0;
 }
 

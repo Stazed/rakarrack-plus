@@ -1,5 +1,6 @@
 ==v0.6.x (  /  /2010) ==
 
+- Added Program Change MIDI table
 - Fix MIDI Converter octave change.
 - Fix MuTroMojo now display the internal preset "Mode"
 - Fix Echotron Length save/restore
