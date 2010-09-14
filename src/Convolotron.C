@@ -259,8 +259,18 @@ Filenum = value;
 memset(Filename,0, sizeof(Filename));
 sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
 }
+
+
 sfinfo.format = 0;
-if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) return(0);
+if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) {
+
+printf("Failed Convolotron File:  %s\nLoading defaults\n",Filename);
+real_len = 1;
+length = 1;
+rbuf[0] = 1.0f;
+return(0);
+}
+
 if (sfinfo.frames > maxx_read) real_len = maxx_read; else real_len=sfinfo.frames;
 readcount = sf_seek (infile,0, SEEK_SET);
 readcount = sf_readf_float(infile,buf,real_len);
@@ -291,7 +301,7 @@ Convolotron::process_rbuf()
  float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp, IRpowa, IRpowb, ngain, maxamp;
  memset(buf,0, sizeof(float)*real_len);
  
- 
+ if (length > real_len) length = real_len;
  /*Blackman Window function
  wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
  a0 = (1 - alpha)/2; a1 = 0.5; a2 = alpha/2

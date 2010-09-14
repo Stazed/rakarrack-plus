@@ -58,7 +58,7 @@ private:
   void setlpf (int Plpf);
   void setfb(int value);
   void convert_time();
-
+  void loaddefault();
 
 
   //Parametrii

@@ -229,7 +229,7 @@ float tBP=0.0f;
 float tHP=0.0f;
 float tFreq=20.0f;
 float tQ=1.0f;
-int tiStages;
+int tiStages = 0;
 
 FILE *fs;
 
@@ -242,7 +242,12 @@ memset(Filename,0,sizeof(Filename));
 sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
 }
 
-if ((fs = fopen (Filename, "r")) == NULL) return(0);
+if ((fs = fopen (Filename, "r")) == NULL) 
+{
+printf("Failed to load Echotron File:  %s\nSetting Default\n",Filename);
+loaddefault();
+return(0);
+}
 
  while (fgets(wbuf,sizeof wbuf,fs) != NULL)
  {
@@ -341,6 +346,24 @@ cleanup();
 init_params();
 return(1);
 };
+
+void
+Echotron::loaddefault()
+{
+Plength = 1;
+fPan[0] = 0.0f;  //
+fTime[0] = 1.0f;  //default 1 measure delay
+fLevel[0] = 0.7f;
+fLP[0] = 1.0f;
+fBP[0] = -1.0f;
+fHP[0] = 1.0f;
+fFreq[800];
+fQ[2];
+iStages[1];
+subdiv_dmod = 1.0f;
+subdiv_fmod = 1.0f;
+init_params();
+}
 
 void Echotron::init_params()
 {

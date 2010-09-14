@@ -40,7 +40,8 @@ public:
   void cleanup ();
   int setfile (int value);
   void adjust(int DS);
-
+  void loaddefault();
+  
   int Ppreset;
 
   float *efxoutl;

@@ -269,8 +269,11 @@ memset(Filename,0, sizeof(Filename));
 sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
 }
 
-if ((fs = fopen (Filename, "r")) == NULL) return(0);
-
+if ((fs = fopen (Filename, "r")) == NULL) {
+printf("Failed to load Reverbtron File:  %s\nSetting Default\n",Filename);
+loaddefault();
+return(0);
+}
 cleanup();
 memset(tdata, 0, sizeof(float)*2000);
 memset(ftime, 0, sizeof(float)*2000);
@@ -318,6 +321,16 @@ cleanup();
 convert_time();
 return(1);
 };
+void Reverbtron::loaddefault()
+{
+data_length = Plength = 2;
+ftime[0] = 1.0f;
+ftime[1] = 1.25f;
+tdata[0] = 0.75f;
+tdata[1] = 0.5f;
+cleanup();
+convert_time();
+}
 
 void Reverbtron::convert_time()
 {

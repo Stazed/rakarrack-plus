@@ -64,6 +64,7 @@ private:
   void init_params();
   void modulate_delay();
   void modulate_filters();
+  void loaddefault();
 
 
 
