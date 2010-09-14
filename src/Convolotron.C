@@ -268,6 +268,7 @@ printf("Failed Convolotron File:  %s\nLoading defaults\n",Filename);
 real_len = 1;
 length = 1;
 rbuf[0] = 1.0f;
+process_rbuff();
 return(0);
 }
 
