@@ -204,10 +204,7 @@ RKR::midievents()
           if (Selected_Preset<60) preset = Selected_Preset+1;
          }  	   
         else 
-         {
           preset = midievent->data.control.value;
-          printf("Received %d\n",preset);
-         }
 
 	}
     }
@@ -819,16 +816,21 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
       
       if (cmdchan == MidiCh)
 	{
+         if(!midi_table)
+          {
 	  if ((cmdvalue > 0)
 	      && (cmdvalue < 61))
 	    preset = cmdvalue;
 
           if (cmdvalue==81) if (Selected_Preset>1) preset = Selected_Preset-1;
           if (cmdvalue==82) if (Selected_Preset<60) preset = Selected_Preset+1;
-          
-
+          }
+          else
+            preset = cmdvalue;
 
 	}
+
+
     }
 
 
