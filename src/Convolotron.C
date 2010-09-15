@@ -263,12 +263,10 @@ sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
 
 sfinfo.format = 0;
 if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) {
-
-printf("Failed Convolotron File:  %s\nLoading defaults\n",Filename);
 real_len = 1;
 length = 1;
 rbuf[0] = 1.0f;
-process_rbuff();
+process_rbuf();
 return(0);
 }
 

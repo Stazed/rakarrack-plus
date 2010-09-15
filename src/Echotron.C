@@ -244,7 +244,6 @@ sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
 
 if ((fs = fopen (Filename, "r")) == NULL) 
 {
-printf("Failed to load Echotron File:  %s\nSetting Default\n",Filename);
 loaddefault();
 return(0);
 }
@@ -357,9 +356,9 @@ fLevel[0] = 0.7f;
 fLP[0] = 1.0f;
 fBP[0] = -1.0f;
 fHP[0] = 1.0f;
-fFreq[800];
-fQ[2];
-iStages[1];
+fFreq[0]=800.0f;;
+fQ[0]=2.0f;
+iStages[0]=1;
 subdiv_dmod = 1.0f;
 subdiv_fmod = 1.0f;
 init_params();

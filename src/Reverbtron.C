@@ -270,7 +270,6 @@ sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);
 }
 
 if ((fs = fopen (Filename, "r")) == NULL) {
-printf("Failed to load Reverbtron File:  %s\nSetting Default\n",Filename);
 loaddefault();
 return(0);
 }
