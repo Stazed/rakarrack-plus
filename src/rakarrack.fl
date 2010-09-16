@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -844,16 +844,18 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {349 84 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -929,7 +931,7 @@ filename=fl_file_chooser("Load MIDI Table:","(*.rmt)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rmt");
 rkr->loadmiditable(filename);
-Put_MidiTable();} selected
+Put_MidiTable();}
             xywh {10 10 36 21}
           }
           MenuItem Save_MTable {
@@ -6665,7 +6667,7 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
         }
       }
       Fl_Group CONVOLOTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button convo_activar {
@@ -6811,7 +6813,7 @@ rkr->efx_Convol->setfile(100);}
         Fl_Choice convo_fnum {
           label Preset
           user_data 12
-          callback {rkr->efx_Convol->changepar(8,(int)o->value());}
+          callback {rkr->efx_Convol->changepar(8,(int)o->value());} open
           xywh {371 369 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6845,6 +6847,10 @@ rkr->efx_Convol->setfile(100);}
           MenuItem {} {
             label Ampeg
             xywh {30 30 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Marshall2 selected
+            xywh {40 40 36 21} labelsize 10
           }
         }
       }
