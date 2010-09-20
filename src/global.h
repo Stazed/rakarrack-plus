@@ -540,6 +540,7 @@ public:
   int numpc;
   int midi_table;
   int a_bank;
+  int new_bank_loaded;
 
   int Aux_Gain;
   int Aux_Threshold;

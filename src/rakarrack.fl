@@ -844,8 +844,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -854,7 +853,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {349 84 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -10194,6 +10193,7 @@ if(ok)
 rkr->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 }}
           xywh {418 30 22 16} color 62 labelsize 10
         }
@@ -10210,6 +10210,7 @@ if(ok)
 rkr->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 }}
           xywh {442 30 22 16} color 62 labelsize 10
         }
@@ -10226,6 +10227,7 @@ if(ok)
 rkr->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 }}
           xywh {466 30 22 16} color 62 labelsize 10
         }
@@ -10239,6 +10241,7 @@ if(ok)
 rkr->a_bank=3;
 BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 }}
           xywh {490 30 22 16} color 62 labelsize 10
         }
@@ -10708,7 +10711,8 @@ if(ok)
 {
 BankWin_Label(temp);
 Put_Loaded_Bank();
-}} open
+unlight_preset(rkr->Selected_Preset);
+}} open selected
         xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
       } {}
       Fl_Group ob {
@@ -13135,7 +13139,7 @@ Fl::repeat_timeout(.04,tick,v);} {}
   } {
     code {((RKRGUI*)(o->parent()->parent()->user_data()))->preset_click_i(o,v);} {}
   }
-  Function {preset_click_i(Fl_Button* o, void*)} {open C return_type {inline void}
+  Function {preset_click_i(Fl_Button* o, void*)} {C return_type {inline void}
   } {
     code {int ok;
 int num; 
@@ -13157,19 +13161,8 @@ if(drag!=1000)
  rkr->Bank[num]=rkr->Bank[0];
  Put_Loaded_Bank();
  rkr->modified=1;
+ num=en;
  drag = 1000;
- if(rkr->Selected_Preset == num)
- {
- unlight_preset(num);
- light_preset(en);
- }
- else
- {
-  unlight_preset(num);
-  unlight_preset(en);
-  num=en;
- 
- }
  }
 }
 
@@ -13179,9 +13172,6 @@ drag = num;
 return;
 }
 else drag = 1000;
-
-
-if(Fl::event()==FL_PUSH) return;
 
   
 if ((Fl::event_button()==3) && (Fl::event()==FL_RELEASE))
@@ -13217,8 +13207,9 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
 if ((Fl::event_button()==1) || tecla == 32)
 {
 
-if(num != rkr->Selected_Preset)
+if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
 {
+rkr->new_bank_loaded=0;
 Fl_Widget *w = ob->child(num-1);
 unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;
@@ -13226,8 +13217,7 @@ w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
 Preset_Counter->do_callback();
 }
-}} {selected
-    }
+}} {}
   }
   Function {make_window_banks()} {} {
     code {int i,j,x,y,num;

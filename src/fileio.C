@@ -1668,6 +1668,7 @@ RKR::loadbank (char *filename)
   int err_message=1;
   char meslabel[64];
   FILE *fn;
+  
 
   memset(meslabel,0, sizeof(meslabel));
   sprintf(meslabel, "%s %s",jackcliname,VERSION);
@@ -1706,6 +1707,7 @@ RKR::loadbank (char *filename)
       if(BigEndian()) fix_endianess();
       convert_IO();
       modified=0;
+      new_bank_loaded=1;
       return (1);
     }
   return (0);

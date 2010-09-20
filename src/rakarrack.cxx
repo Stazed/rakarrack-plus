@@ -9404,6 +9404,7 @@ if(ok)
 rkr->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B1(Fl_Button* o, void* v) {
@@ -9421,6 +9422,7 @@ if(ok)
 rkr->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B2(Fl_Button* o, void* v) {
@@ -9438,6 +9440,7 @@ if(ok)
 rkr->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B3(Fl_Button* o, void* v) {
@@ -9452,6 +9455,7 @@ if(ok)
 rkr->a_bank=3;
 BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B4(Fl_Button* o, void* v) {
@@ -9873,6 +9877,7 @@ if(ok)
 {
 BankWin_Label(temp);
 Put_Loaded_Bank();
+unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_CH_UB(Fl_Choice* o, void* v) {
@@ -22818,19 +22823,8 @@ if(drag!=1000)
  rkr->Bank[num]=rkr->Bank[0];
  Put_Loaded_Bank();
  rkr->modified=1;
+ num=en;
  drag = 1000;
- if(rkr->Selected_Preset == num)
- {
- unlight_preset(num);
- light_preset(en);
- }
- else
- {
-  unlight_preset(num);
-  unlight_preset(en);
-  num=en;
- 
- }
  }
 }
 
@@ -22840,9 +22834,6 @@ drag = num;
 return;
 }
 else drag = 1000;
-
-
-if(Fl::event()==FL_PUSH) return;
 
   
 if ((Fl::event_button()==3) && (Fl::event()==FL_RELEASE))
@@ -22878,8 +22869,9 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
 if ((Fl::event_button()==1) || tecla == 32)
 {
 
-if(num != rkr->Selected_Preset)
+if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
 {
+rkr->new_bank_loaded=0;
 Fl_Widget *w = ob->child(num-1);
 unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;
