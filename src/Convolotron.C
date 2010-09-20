@@ -54,6 +54,7 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS, int uq, int
   buf = (float *) malloc (sizeof (float) * maxx_size);
   rbuf = (float *) malloc (sizeof (float) * maxx_size);
   lxn = (float *) malloc (sizeof (float) * maxx_size);  
+  maxx_size--;
   offset = 0;  
   M_Resample = new Resample(0);
   U_Resample = new Resample(dq);//Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
@@ -195,7 +196,7 @@ Convolotron::out (float * smpsl, float * smpsr)
       templ[i] = lyn * levpanl;
       tempr[i] = lyn * levpanr;  
 
-      if (++offset>=maxx_size) offset = 0;     
+      if (++offset>maxx_size) offset = 0;     
 
       
     };
