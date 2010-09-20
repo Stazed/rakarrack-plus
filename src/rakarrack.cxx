@@ -22819,9 +22819,20 @@ if(drag!=1000)
  Put_Loaded_Bank();
  rkr->modified=1;
  drag = 1000;
+ if(rkr->Selected_Preset == num)
+ {
+ unlight_preset(num);
+ light_preset(en);
+ }
+ else
+ {
+  unlight_preset(num);
+  unlight_preset(en);
+  num=en;
+ 
+ }
+ }
 }
-}
-
 
 if((Fl::event_is_click()==0)&&(Fl::event()==5)) 
 {
@@ -22864,7 +22875,7 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
 
 
 
-if ((Fl::event_button()==1) && (Fl::event()==FL_RELEASE))
+if ((Fl::event_button()==1) || tecla == 32)
 {
 
 if(num != rkr->Selected_Preset)
