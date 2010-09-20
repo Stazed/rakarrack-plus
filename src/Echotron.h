@@ -137,30 +137,5 @@ float dlyrange;
 
 };
 
-// class Lagrange
-// {
-//     public:
-//     float xk[5];  //up to 5th order interp
-//     float yn[5]; //past samples in immediate area
-//     int order;
-//    //this will select a time in the delay line at order/2
-//
-//     Lagrange()
-//     {
-//     order = 3;
-//     for (int i = 0; i<5; i++) {
-//     xk[i] = (float) i;
-//     yn[i] = 0.0f;
-//     }
-//     }
-//     
-//
-//     void interpolate()
-//     {
-//     
-//     }
-//
-//
-// }
 
 #endif
