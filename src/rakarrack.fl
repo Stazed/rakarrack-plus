@@ -10712,7 +10712,7 @@ if(ok)
 BankWin_Label(temp);
 Put_Loaded_Bank();
 unlight_preset(rkr->Selected_Preset);
-}} open selected
+}} open
         xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
       } {}
       Fl_Group ob {
@@ -17567,7 +17567,10 @@ int y = rkr->efx_order[dest];
 rkr->efx_order[source]=y;
 rkr->efx_order[dest]=x;
 
-reordena();} {}
+reordena();
+
+if (Order->visible())Prepare_Order();} {selected
+    }
   }
   Function {make_table_window()} {} {
     code {scroll->begin();

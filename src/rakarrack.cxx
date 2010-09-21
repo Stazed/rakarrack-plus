@@ -27265,6 +27265,8 @@ rkr->efx_order[source]=y;
 rkr->efx_order[dest]=x;
 
 reordena();
+
+if (Order->visible())Prepare_Order();
 }
 
 void RKRGUI::make_table_window() {
