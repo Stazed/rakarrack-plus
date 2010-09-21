@@ -129,38 +129,38 @@ RKR::RKR ()
   Input_Gain = 0.50f;
   Cabinet_Preset = 0;
 
-  rakarrack.get (PrefNom("Harmonizer Downsample"),Har_Down,0);
+  rakarrack.get (PrefNom("Harmonizer Downsample"),Har_Down,5);
   rakarrack.get (PrefNom("Harmonizer Up Quality"),Har_U_Q,4);
-  rakarrack.get (PrefNom("Harmonizer Down Quality"),Har_D_Q,4);
+  rakarrack.get (PrefNom("Harmonizer Down Quality"),Har_D_Q,2);
 
-  rakarrack.get (PrefNom("StereoHarm Downsample"),Ste_Down,0);
+  rakarrack.get (PrefNom("StereoHarm Downsample"),Ste_Down,5);
   rakarrack.get (PrefNom("StereoHarm Up Quality"),Ste_U_Q,4);
-  rakarrack.get (PrefNom("StereoHarm Down Quality"),Ste_D_Q,4);
+  rakarrack.get (PrefNom("StereoHarm Down Quality"),Ste_D_Q,2);
 
-  rakarrack.get (PrefNom("Reverbtron Downsample"),Rev_Down,0);
+  rakarrack.get (PrefNom("Reverbtron Downsample"),Rev_Down,5);
   rakarrack.get (PrefNom("Reverbtron Up Quality"),Rev_U_Q,4);
-  rakarrack.get (PrefNom("Reverbtron Down Quality"),Rev_D_Q,4);
+  rakarrack.get (PrefNom("Reverbtron Down Quality"),Rev_D_Q,2);
 
-  rakarrack.get (PrefNom("Convolotron Downsample"),Con_Down,0);
+  rakarrack.get (PrefNom("Convolotron Downsample"),Con_Down,6);
   rakarrack.get (PrefNom("Convolotron Up Quality"),Con_U_Q,4);
-  rakarrack.get (PrefNom("Convolotron Down Quality"),Con_D_Q,4);
+  rakarrack.get (PrefNom("Convolotron Down Quality"),Con_D_Q,2);
 
-  rakarrack.get (PrefNom("Sequence Downsample"),Seq_Down,0);
+  rakarrack.get (PrefNom("Sequence Downsample"),Seq_Down,5);
   rakarrack.get (PrefNom("Sequence Up Quality"),Seq_U_Q,4);
-  rakarrack.get (PrefNom("Sequence Down Quality"),Seq_D_Q,4);
+  rakarrack.get (PrefNom("Sequence Down Quality"),Seq_D_Q,2);
 
-  rakarrack.get (PrefNom("Shifter Downsample"),Shi_Down,0);
+  rakarrack.get (PrefNom("Shifter Downsample"),Shi_Down,5);
   rakarrack.get (PrefNom("Shifter Up Quality"),Shi_U_Q,4);
-  rakarrack.get (PrefNom("Shifter Down Quality"),Shi_D_Q,4);
+  rakarrack.get (PrefNom("Shifter Down Quality"),Shi_D_Q,2);
 
-  rakarrack.get (PrefNom("Vocoder Downsample"),Voc_Down,0);
+  rakarrack.get (PrefNom("Vocoder Downsample"),Voc_Down,5);
   rakarrack.get (PrefNom("Vocoder Up Quality"),Voc_U_Q,4);
-  rakarrack.get (PrefNom("Vocoder Down Quality"),Voc_D_Q,4);
+  rakarrack.get (PrefNom("Vocoder Down Quality"),Voc_D_Q,2);
 
 
-  rakarrack.get (PrefNom("Waveshape Resampling"),Wave_res_amount,0);
+  rakarrack.get (PrefNom("Waveshape Resampling"),Wave_res_amount,5);
   rakarrack.get (PrefNom("Waveshape Up Quality"),Wave_up_q,4);
-  rakarrack.get (PrefNom("Waveshape Down Quality"),Wave_down_q,4);
+  rakarrack.get (PrefNom("Waveshape Down Quality"),Wave_down_q,2);
 
 
 
