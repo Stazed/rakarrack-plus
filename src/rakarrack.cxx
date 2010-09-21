@@ -9539,7 +9539,8 @@ void RKRGUI::cb_WPreset_Name(Fl_Input* o, void* v) {
 }
 
 void RKRGUI::cb_Preset_Counter_i(Fl_Counter* o, void*) {
-  unlight_preset(rkr->Selected_Preset);
+  rkr->new_bank_loaded=0;
+unlight_preset(rkr->Selected_Preset);
 rkr->Bank_to_Preset((int) o->value());
 light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
@@ -22871,7 +22872,6 @@ if ((Fl::event_button()==1) || tecla == 32)
 
 if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
 {
-rkr->new_bank_loaded=0;
 Fl_Widget *w = ob->child(num-1);
 unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;

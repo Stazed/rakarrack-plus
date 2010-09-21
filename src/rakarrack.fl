@@ -844,7 +844,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -10316,7 +10317,8 @@ BankWindow->hide();}
         }
         Fl_Counter Preset_Counter {
           label Preset
-          callback {unlight_preset(rkr->Selected_Preset);
+          callback {rkr->new_bank_loaded=0;
+unlight_preset(rkr->Selected_Preset);
 rkr->Bank_to_Preset((int) o->value());
 light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
@@ -13209,7 +13211,6 @@ if ((Fl::event_button()==1) || tecla == 32)
 
 if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
 {
-rkr->new_bank_loaded=0;
 Fl_Widget *w = ob->child(num-1);
 unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;
@@ -13217,7 +13218,8 @@ w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
 Preset_Counter->do_callback();
 }
-}} {}
+}} {selected
+    }
   }
   Function {make_window_banks()} {} {
     code {int i,j,x,y,num;
@@ -17569,8 +17571,7 @@ rkr->efx_order[dest]=x;
 
 reordena();
 
-if (Order->visible())Prepare_Order();} {selected
-    }
+if (Order->visible())Prepare_Order();} {}
   }
   Function {make_table_window()} {} {
     code {scroll->begin();
