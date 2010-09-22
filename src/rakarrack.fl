@@ -13218,8 +13218,7 @@ w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
 Preset_Counter->do_callback();
 }
-}} {selected
-    }
+}} {}
   }
   Function {make_window_banks()} {} {
     code {int i,j,x,y,num;
@@ -13277,7 +13276,7 @@ CH_UB->color(fore_color);
 light_preset(rkr->Selected_Preset);} {}
   }
   Function {reordena()} {} {
-    code {int i,j,k,t;
+    code {int i;
 unsigned int x[10],y[10];
 ulong s[10];
 
@@ -13316,24 +13315,7 @@ y[8]=E9->y();
 y[9]=E10->y();
 
 
-//Find to Hide
 
-
-t=1;
-
-for (i=0; i<rkr->NumEffects;i++)
-{
- k=0;
- for (j=0;j<10;j++) if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
-       
- if(!k)
- 
- { 
-  rkr->availables[t]=rkr->efx_names[i].Pos;
-  t++;
- }
-
-}
 
 
 
@@ -13387,38 +13369,10 @@ for (i=0; i<rkr->NumEffects;i++)
 	
 	
 	
-for (i=1; i<=t; i++)
-
- {
-
-
-    switch ( rkr->availables[i])
-      {
-        
-        case 14:
-        har_activar->value(0);
-        rkr->Harmonizer_Bypass = 0;
-        break;
-        case 21:
-        ring_activar->value(0);
-        rkr->Ring_Bypass = 0;
-        case 42:
-        shar_activar->value(0);
-        rkr->StereoHarm_Bypass = 0;
-        break;      
-      }
-      
-    }
-    
-    
-    
-    
-    
+   
  // Show   
     
     
-         
-
 for (i=0; i<10; i++)
 {
 
@@ -14050,7 +14004,8 @@ switch (rkr->efx_order[i])
   
   
  
-  Fl::redraw();} {}
+  Fl::redraw();} {selected
+    }
   }
   Function {show_help()} {} {
     code {int x,y,w,h,k;

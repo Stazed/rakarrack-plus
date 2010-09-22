@@ -1164,7 +1164,10 @@ RKR::Actualizar_Audio ()
   Bypass = 0;
   for (i = 0; i < 12; i++)
   efx_order[i] = lv[10][i];
-
+  Harmonizer_Bypass=0;
+  Ring_Bypass = 0;
+  StereoHarm_Bypass = 0;
+  
 
   for (j=0;j<10; j++)
   {

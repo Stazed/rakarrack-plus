@@ -22939,7 +22939,7 @@ light_preset(rkr->Selected_Preset);
 }
 
 void RKRGUI::reordena() {
-  int i,j,k,t;
+  int i;
 unsigned int x[10],y[10];
 ulong s[10];
 
@@ -22978,24 +22978,7 @@ y[8]=E9->y();
 y[9]=E10->y();
 
 
-//Find to Hide
 
-
-t=1;
-
-for (i=0; i<rkr->NumEffects;i++)
-{
- k=0;
- for (j=0;j<10;j++) if (rkr->efx_order[j]==rkr->efx_names[i].Pos) k=1;
-       
- if(!k)
- 
- { 
-  rkr->availables[t]=rkr->efx_names[i].Pos;
-  t++;
- }
-
-}
 
 
 
@@ -23049,38 +23032,10 @@ for (i=0; i<rkr->NumEffects;i++)
 	
 	
 	
-for (i=1; i<=t; i++)
-
- {
-
-
-    switch ( rkr->availables[i])
-      {
-        
-        case 14:
-        har_activar->value(0);
-        rkr->Harmonizer_Bypass = 0;
-        break;
-        case 21:
-        ring_activar->value(0);
-        rkr->Ring_Bypass = 0;
-        case 42:
-        shar_activar->value(0);
-        rkr->StereoHarm_Bypass = 0;
-        break;      
-      }
-      
-    }
-    
-    
-    
-    
-    
+   
  // Show   
     
     
-         
-
 for (i=0; i<10; i++)
 {
 
