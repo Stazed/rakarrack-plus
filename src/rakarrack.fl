@@ -844,8 +844,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -10879,7 +10878,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1423 138 640 528} type Double color 4 hide
+      xywh {1416 131 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
@@ -10890,8 +10889,8 @@ Settings->hide();}
       } {
         Fl_Group Look {
           label Look
-          user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 selected
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -11611,7 +11610,7 @@ Show_Next_Time();}
         Fl_Group MIDI_SET {
           label MIDI
           user_data 1 open
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo8 {
             xywh {5 26 630 502}
@@ -14004,8 +14003,7 @@ switch (rkr->efx_order[i])
   
   
  
-  Fl::redraw();} {selected
-    }
+  Fl::redraw();} {}
   }
   Function {show_help()} {} {
     code {int x,y,w,h,k;
