@@ -44,8 +44,11 @@ public:
   void cleanup ();
   void settempo(int value);
   void setmvol(int value);
+  int looper_bar;
+  int looper_qua;
   int Ppreset;
   int progstate[6];
+  
   void getstate ();
 
   float outvolume;
@@ -53,21 +56,24 @@ public:
   float *efxoutl;
   float *efxoutr;
 
+  int Pplay;	//set to 1
+  int Pstop;	//set to 1
+
 
 private:
 
   void initdelays ();
   void setfade ();
   void setbar(int value);
+  void timeposition(int value);
   int set_len(int value);
   int cal_len(int value);
+  
 
 
   //Parameters
   int Pvolume;	//Mix
   int Precord;	//set to 1
-  int Pplay;	//set to 1
-  int Pstop;	//set to 1
   int Pclear;   //set to 1
   int Preverse;	//0 or 1
   int Pfade1;    //0...127//  crossfade track1 & 2
@@ -84,7 +90,7 @@ private:
   int Pms;
   
   int kl, kl2, rvkl, rvkl2, maxx_delay, fade, dl, dl2, first_time1, first_time2, rplaystate;
-  int barlen;
+  int barlen, looper_ts;
 
   float *ldelay, *rdelay;
   float *t2ldelay, *t2rdelay;

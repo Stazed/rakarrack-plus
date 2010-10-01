@@ -854,7 +854,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {349 84 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1381 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1336,7 +1336,27 @@ if(tta)
 
 
 
-//
+if(rkr->Looper_Bypass)
+{
+  if((rkr->efx_Looper->Pplay) && (!rkr->efx_Looper->Pstop))
+   {
+     if(looper_lqua != rkr->efx_Looper->looper_qua)
+         
+         {
+           looper_lqua = rkr->efx_Looper->looper_qua;
+           char tmp[16]; 
+           memset(tmp,0,sizeof(tmp));
+           sprintf(tmp,"%d/%d",rkr->efx_Looper->looper_bar,rkr->efx_Looper->looper_qua);
+           L_TimePos->copy_label(tmp);
+         }
+   
+   }
+   
+   
+   
+ }
+
+
 }
 
 
@@ -7137,10 +7157,13 @@ update_looper();}
           xywh {366 376 43 14} labelsize 10
         }
         Fl_Check_Button looper_mt {
-          label {Metrono.}
+          label M
           user_data 2
           callback {rkr->efx_Looper->changepar(16,(int)o->value())}
           xywh {413 378 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
+        Fl_Box L_TimePos {selected
+          xywh {441 377 35 14} align 84
         }
       }
       Fl_Group RYANWAH {
@@ -10889,7 +10912,7 @@ Settings->hide();}
       } {
         Fl_Group Look {
           label Look
-          user_data 1 selected
+          user_data 1
           xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {

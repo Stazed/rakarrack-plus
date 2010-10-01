@@ -2330,6 +2330,7 @@ private:
   void cb_looper_mt_i(Fl_Check_Button*, void*);
   static void cb_looper_mt(Fl_Check_Button*, void*);
 public:
+  Fl_Box *L_TimePos;
   Fl_Group *RYANWAH;
   Fl_Light_Button *ryanwah_activar;
 private:

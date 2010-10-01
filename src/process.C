@@ -42,6 +42,7 @@ int reconota;
 int maxx_len;
 int error_num;
 int stecla;
+int looper_lqua;
 unsigned int SAMPLE_RATE;
 float fPERIOD;
 float fSAMPLE_RATE;

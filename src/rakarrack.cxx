@@ -1338,7 +1338,27 @@ if(tta)
 
 
 
-//
+if(rkr->Looper_Bypass)
+{
+  if((rkr->efx_Looper->Pplay) && (!rkr->efx_Looper->Pstop))
+   {
+     if(looper_lqua != rkr->efx_Looper->looper_qua)
+         
+         {
+           looper_lqua = rkr->efx_Looper->looper_qua;
+           char tmp[16]; 
+           memset(tmp,0,sizeof(tmp));
+           sprintf(tmp,"%d/%d",rkr->efx_Looper->looper_bar,rkr->efx_Looper->looper_qua);
+           L_TimePos->copy_label(tmp);
+         }
+   
+   }
+   
+   
+   
+ }
+
+
 }
 
 
@@ -17304,12 +17324,15 @@ R average.");
         looper_clear->labelsize(10);
         looper_clear->callback((Fl_Callback*)cb_looper_clear, (void*)(2));
       } // Fl_Button* looper_clear
-      { looper_mt = new Fl_Check_Button(413, 378, 15, 15, "Metrono.");
+      { looper_mt = new Fl_Check_Button(413, 378, 15, 15, "M");
         looper_mt->down_box(FL_BORDER_BOX);
         looper_mt->labelsize(10);
         looper_mt->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_mt->callback((Fl_Callback*)cb_looper_mt, (void*)(2));
       } // Fl_Check_Button* looper_mt
+      { L_TimePos = new Fl_Box(441, 377, 35, 14);
+        L_TimePos->align(68|FL_ALIGN_INSIDE);
+      } // Fl_Box* L_TimePos
       LOOPER->end();
     } // Fl_Group* LOOPER
     { RYANWAH = new Fl_Group(318, 209, 158, 184);

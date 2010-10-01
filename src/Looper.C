@@ -168,6 +168,10 @@ Looper::out (float * smpsl, float * smpsr)
     if (++kl2 >= dl2)
     kl2 = 0;
     rvkl2 = dl2 - 1 - kl2;     
+    if((Plink) || (PT1)) timeposition(kl);
+    else timeposition(kl2);
+    
+
     } 
     
 	      if(Preverse)
@@ -253,14 +257,27 @@ if(a2<a1) return(((x+1)*barlen)+1);
 
 return(x*barlen+1);
 
-
 }
 
 
 int Looper::cal_len(int value)
 {
 
-return(lrintf((float)value*60.0/(float)Ptempo*fSAMPLE_RATE));
+int lenbar = lrintf((float)value*60.0/(float)Ptempo*fSAMPLE_RATE);
+
+looper_ts = lenbar / value;
+return(lenbar);
+// return(lrintf((float)value*60.0/(float)Ptempo*fSAMPLE_RATE));
+
+}
+
+
+void
+Looper::timeposition(int value)
+{
+
+looper_bar = value / barlen + 1;
+looper_qua = (value % barlen) / looper_ts + 1;
 
 }
 
