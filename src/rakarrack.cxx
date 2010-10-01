@@ -17127,7 +17127,7 @@ R average.");
       } // Fl_Choice* convo_fnum
       CONVOLOTRON->end();
     } // Fl_Group* CONVOLOTRON
-    { LOOPER = new Fl_Group(320, 211, 158, 184);
+    { LOOPER = new Fl_Group(321, 211, 158, 184);
       LOOPER->box(FL_UP_BOX);
       LOOPER->color((Fl_Color)FL_FOREGROUND_COLOR);
       LOOPER->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
@@ -17135,7 +17135,7 @@ R average.");
       LOOPER->user_data((void*)(1));
       LOOPER->align(96|FL_ALIGN_INSIDE);
       LOOPER->hide();
-      { looper_activar = new Fl_Light_Button(325, 215, 34, 18, "On");
+      { looper_activar = new Fl_Light_Button(326, 215, 34, 18, "On");
         looper_activar->shortcut(0x35);
         looper_activar->color((Fl_Color)62);
         looper_activar->selection_color((Fl_Color)1);
@@ -17144,7 +17144,7 @@ R average.");
         looper_activar->align(68|FL_ALIGN_INSIDE);
         looper_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* looper_activar
-      { looper_preset = new Fl_Choice(397, 215, 76, 18, "Preset");
+      { looper_preset = new Fl_Choice(398, 215, 76, 18, "Preset");
         looper_preset->down_box(FL_BORDER_BOX);
         looper_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         looper_preset->labelsize(10);
@@ -17155,7 +17155,7 @@ R average.");
         looper_preset->when(FL_WHEN_RELEASE_ALWAYS);
         looper_preset->menu(menu_looper_preset);
       } // Fl_Choice* looper_preset
-      { looper_WD = new SliderW(371, 236, 100, 10, "Wet/Dry");
+      { looper_WD = new SliderW(372, 236, 100, 10, "Wet/Dry");
         looper_WD->type(5);
         looper_WD->box(FL_FLAT_BOX);
         looper_WD->color((Fl_Color)178);
@@ -17172,7 +17172,7 @@ R average.");
         looper_WD->align(FL_ALIGN_LEFT);
         looper_WD->when(FL_WHEN_CHANGED);
       } // SliderW* looper_WD
-      { looper_level1 = new SliderW(371, 248, 100, 10, "Level 1");
+      { looper_level1 = new SliderW(372, 248, 100, 10, "Level 1");
         looper_level1->type(5);
         looper_level1->box(FL_FLAT_BOX);
         looper_level1->color((Fl_Color)178);
@@ -17188,7 +17188,7 @@ R average.");
         looper_level1->align(FL_ALIGN_LEFT);
         looper_level1->when(FL_WHEN_RELEASE);
       } // SliderW* looper_level1
-      { looper_level2 = new SliderW(371, 260, 100, 10, "Level 2");
+      { looper_level2 = new SliderW(372, 260, 100, 10, "Level 2");
         looper_level2->type(5);
         looper_level2->box(FL_FLAT_BOX);
         looper_level2->color((Fl_Color)178);
@@ -17204,7 +17204,7 @@ R average.");
         looper_level2->align(FL_ALIGN_LEFT);
         looper_level2->when(FL_WHEN_RELEASE);
       } // SliderW* looper_level2
-      { looper_Tempo = new SliderW(371, 272, 100, 10, "Tempo");
+      { looper_Tempo = new SliderW(372, 272, 100, 10, "Tempo");
         looper_Tempo->type(5);
         looper_Tempo->box(FL_FLAT_BOX);
         looper_Tempo->color((Fl_Color)178);
@@ -17222,7 +17222,7 @@ R average.");
         looper_Tempo->align(FL_ALIGN_LEFT);
         looper_Tempo->when(FL_WHEN_RELEASE);
       } // SliderW* looper_Tempo
-      { looper_bar = new Fl_Choice(377, 284, 40, 15, "Time Sig.");
+      { looper_bar = new Fl_Choice(378, 284, 40, 15, "Time Sig.");
         looper_bar->down_box(FL_BORDER_BOX);
         looper_bar->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         looper_bar->labelsize(10);
@@ -17233,7 +17233,7 @@ R average.");
         looper_bar->when(FL_WHEN_RELEASE_ALWAYS);
         looper_bar->menu(menu_looper_bar);
       } // Fl_Choice* looper_bar
-      { looper_ms = new Fl_Choice(441, 284, 29, 15, "MS");
+      { looper_ms = new Fl_Choice(442, 284, 29, 15, "MS");
         looper_ms->down_box(FL_BORDER_BOX);
         looper_ms->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         looper_ms->labelsize(10);
@@ -17244,70 +17244,70 @@ R average.");
         looper_ms->when(FL_WHEN_RELEASE_ALWAYS);
         looper_ms->menu(menu_looper_ms);
       } // Fl_Choice* looper_ms
-      { looper_rv = new Fl_Check_Button(328, 300, 15, 15, "Reverse");
+      { looper_rv = new Fl_Check_Button(329, 300, 15, 15, "Reverse");
         looper_rv->down_box(FL_BORDER_BOX);
         looper_rv->labelsize(10);
         looper_rv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_rv->callback((Fl_Callback*)cb_looper_rv, (void*)(2));
       } // Fl_Check_Button* looper_rv
-      { looper_ap = new Fl_Check_Button(398, 300, 15, 15, "Auto Play");
+      { looper_ap = new Fl_Check_Button(399, 300, 15, 15, "Auto Play");
         looper_ap->down_box(FL_BORDER_BOX);
         looper_ap->labelsize(10);
         looper_ap->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_ap->callback((Fl_Callback*)cb_looper_ap, (void*)(2));
       } // Fl_Check_Button* looper_ap
-      { Box_Play = new Fl_Box(324, 314, 52, 14, "Play/Stop");
+      { Box_Play = new Fl_Box(325, 314, 52, 14, "Play/Stop");
         Box_Play->labelsize(10);
         Box_Play->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* Box_Play
-      { Box_P = new Fl_Box(378, 314, 44, 14, "Pause");
+      { Box_P = new Fl_Box(379, 314, 44, 14, "Pause");
         Box_P->labelsize(10);
         Box_P->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* Box_P
-      { Fl_Box* o = new Fl_Box(429, 314, 44, 14, "Record");
+      { Fl_Box* o = new Fl_Box(430, 314, 44, 14, "Record");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
-      { looper_play = new Fl_Button(328, 328, 44, 22, "@|>");
+      { looper_play = new Fl_Button(329, 328, 44, 22, "@|>");
         looper_play->type(1);
         looper_play->shortcut(0xffc2);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
-      { looper_stop = new Fl_Button(379, 328, 44, 22, "@||");
+      { looper_stop = new Fl_Button(380, 328, 44, 22, "@||");
         looper_stop->type(1);
         looper_stop->shortcut(0xffc3);
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
       } // Fl_Button* looper_stop
-      { looper_record = new Fl_Button(429, 328, 44, 22, "@circle");
+      { looper_record = new Fl_Button(430, 328, 44, 22, "@circle");
         looper_record->type(1);
         looper_record->labelcolor((Fl_Color)1);
         looper_record->callback((Fl_Callback*)cb_looper_record, (void*)(2));
       } // Fl_Button* looper_record
-      { Fl_Box* o = new Fl_Box(391, 360, 39, 14, "Track");
+      { Fl_Box* o = new Fl_Box(392, 360, 39, 14, "Track");
         o->labelsize(10);
         o->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
-      { looper_r1 = new Fl_Check_Button(328, 364, 15, 15, "R1");
+      { looper_r1 = new Fl_Check_Button(329, 364, 15, 15, "R1");
         looper_r1->down_box(FL_BORDER_BOX);
         looper_r1->labelsize(10);
         looper_r1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_r1->callback((Fl_Callback*)cb_looper_r1, (void*)(2));
         looper_r1->align(FL_ALIGN_TOP);
       } // Fl_Check_Button* looper_r1
-      { looper_r2 = new Fl_Check_Button(347, 364, 15, 15, "R2");
+      { looper_r2 = new Fl_Check_Button(348, 364, 15, 15, "R2");
         looper_r2->down_box(FL_BORDER_BOX);
         looper_r2->labelsize(10);
         looper_r2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_r2->callback((Fl_Callback*)cb_looper_r2, (void*)(2));
         looper_r2->align(FL_ALIGN_TOP);
       } // Fl_Check_Button* looper_r2
-      { looper_t1 = new Fl_Button(431, 358, 18, 18, "1");
+      { looper_t1 = new Fl_Button(432, 358, 18, 18, "1");
         looper_t1->type(1);
         looper_t1->labelsize(10);
         looper_t1->callback((Fl_Callback*)cb_looper_t1, (void*)(2));
         looper_t1->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Button* looper_t1
-      { looper_t2 = new Fl_Button(454, 358, 18, 18, "2");
+      { looper_t2 = new Fl_Button(455, 358, 18, 18, "2");
         looper_t2->type(1);
         looper_t2->labelsize(10);
         looper_t2->callback((Fl_Callback*)cb_looper_t2, (void*)(2));
@@ -17320,17 +17320,18 @@ R average.");
         looper_lnk->callback((Fl_Callback*)cb_looper_lnk, (void*)(2));
         looper_lnk->align(FL_ALIGN_LEFT);
       } // Fl_Check_Button* looper_lnk
-      { looper_clear = new Fl_Button(366, 376, 43, 14, "Clear");
+      { looper_clear = new Fl_Button(367, 376, 43, 14, "Clear");
         looper_clear->labelsize(10);
         looper_clear->callback((Fl_Callback*)cb_looper_clear, (void*)(2));
       } // Fl_Button* looper_clear
-      { looper_mt = new Fl_Check_Button(413, 378, 15, 15, "M");
+      { looper_mt = new Fl_Check_Button(414, 378, 15, 15, "M");
         looper_mt->down_box(FL_BORDER_BOX);
         looper_mt->labelsize(10);
         looper_mt->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         looper_mt->callback((Fl_Callback*)cb_looper_mt, (void*)(2));
       } // Fl_Check_Button* looper_mt
-      { L_TimePos = new Fl_Box(441, 377, 35, 14);
+      { L_TimePos = new Fl_Box(442, 377, 35, 14);
+        L_TimePos->box(FL_DOWN_BOX);
         L_TimePos->align(68|FL_ALIGN_INSIDE);
       } // Fl_Box* L_TimePos
       LOOPER->end();
