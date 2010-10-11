@@ -82,7 +82,8 @@ spr = smpsr;
 ns = PERIOD;
 sr = SAMPLERATE;} {}
   }
-  Function {draw()} {} {
+  Function {draw()} {open
+  } {
     code {int ox=x(),oy=y(),lx=w(),ly=h();
 int i,j;
 int px,py,hy;
@@ -133,7 +134,8 @@ for(i=0; i<28; i++)
        y += fabs(oldimage);
       }
        
-      y=sqrt(y*nsp*factor);   
+      y = sqrt((double) i * y * nsp * factor); 
+      // y=sqrt(y*nsp*factor);   
      
       if (y<0.0) y=0.0;
       if (y>1.0) y=1.0;     
@@ -153,7 +155,8 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {}
+}} {selected
+    }
   }
   Function {handle(int event)} {return_type int
   } {
@@ -853,7 +856,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} selected
+Pexitprogram=1;}
       xywh {1374 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {

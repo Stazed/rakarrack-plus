@@ -81,7 +81,8 @@ for(i=0; i<28; i++)
        y += fabs(oldimage);
       }
        
-      y=sqrt(y*nsp*factor);   
+      y = sqrt((double) i * y * nsp * factor); 
+      // y=sqrt(y*nsp*factor);   
      
       if (y<0.0) y=0.0;
       if (y>1.0) y=1.0;     
