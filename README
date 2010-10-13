@@ -21,9 +21,9 @@ libjack100.0
 libasound2
 libsamplerate0
 libsndfile1
-aconnect
+aconnect  (part of Debian Package alsa-utils, name may vary on other distributions)
 jackd
-
+libxft2
 
 If you want to compile you will also need the development packages:
 
@@ -33,11 +33,21 @@ libjack-dev
 libsndfile1-dev
 libsamplerate0-dev
 libasound2-dev
-
+libxft-dev
 
 The name of the packages are typical of the naming convention for Debian-based distributions.
 These can be a little different for each distro. Use your package manager search function
 to find the equivalent package for your distribution.
+
+If you are new to building packages from source code on Linux you will need a few other things
+to set up a minimal development environment.
+1) g++ (the compiler)
+2) make
+3) autotools-dev
+
+Then if compiling from git repository, you need these too.
+1) git-core (it is probable you have this if you're reading this README as it is likely you already used it to git the code).
+2) autogen
 
 If working from a graphical environment, you may wish to install 
 qjackctl or patchage to aid with configuring jackd and connecting JACK clients.
@@ -62,6 +72,12 @@ Intel(R) Core(TM)2 Quad CPU    Q6600  @ 2.40GHz
 4GB RAM
 2.6.31.6-rt19
 Intel HDA
+
+Intel(R) Xeon(TM) CPU 3.20GHz (Dual processor -- Dell PowerEdge 1750 server)
+3GB RAM
+2.6.26-2-686
+Debian Stable
+
 
 For more information about this app or help compiling, please visit http://rakarrack.sourceforge.net or
 join the #rakarrack chanel in freenode IRC.
