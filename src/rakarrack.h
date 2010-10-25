@@ -3446,6 +3446,11 @@ private:
   static void cb_Preset_Counter(Fl_Counter*, void*);
 public:
   Fl_Box *DAuthor;
+  Fl_Button *RandomP;
+private:
+  void cb_RandomP_i(Fl_Button*, void*);
+  static void cb_RandomP(Fl_Button*, void*);
+public:
   Fl_Button *Open_Order;
 private:
   void cb_Open_Order_i(Fl_Button*, void*);
@@ -4258,5 +4263,6 @@ public:
   void fill_mptable(int num,int value);
   void mtfillvalue(int num,int value);
   void Put_MidiTable();
+  void RandomPreset();
 };
 #endif

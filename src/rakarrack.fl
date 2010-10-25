@@ -155,8 +155,7 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {selected
-    }
+}} {}
   }
   Function {handle(int event)} {return_type int
   } {
@@ -857,7 +856,7 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {1374 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1353 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6876,7 +6875,7 @@ rkr->efx_Convol->setfile(100);}
         }
       }
       Fl_Group LOOPER {
-        user_data 1 open
+        user_data 1
         xywh {321 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button looper_activar {
@@ -10357,6 +10356,12 @@ if(rkr->Tap_Updated) UpdateTGUI();}
         Fl_Box DAuthor {
           user_data 7
           xywh {246 107 266 18} box DOWN_BOX color 62 align 116
+        }
+        Fl_Button RandomP {
+          label Random
+          user_data 77
+          callback {RandomPreset();}
+          xywh {175 141 59 14} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
@@ -17650,5 +17655,307 @@ rkr->M_table[num-2000].preset=o->value();} {}
  fill_mptable(i+2000, rkr->M_table[i].bank);
  mtfillvalue(i+2000, rkr->M_table[i].preset);
 }} {}
+  }
+  Function {RandomPreset()} {} {
+    code {int i,j,l;
+int SelEff[10];
+int numEff = (int) (RND*6) + 1;
+long long k;
+
+
+S_new->do_callback();
+
+SelEff[0]=(int)(RND*rkr->NumEffects);
+
+for(i=1;i<10;i++) 
+{
+ l=0;
+ while (l==0)
+ {
+   SelEff[i]=(int)(RND* rkr->NumEffects);
+   for(j=0;j<i;j++)
+    {
+      if(SelEff[j]==SelEff[i])
+       {
+         l=0; 
+         break;
+       }    
+      else
+      l=1;
+    }
+ }
+
+
+}
+
+
+
+
+
+ for(i=0; i<10; i++)
+{
+  rkr->efx_order[i]=SelEff[i];
+  
+}
+
+
+  
+
+
+for(i=0;i<10;i++)
+ {
+
+   switch(rkr->efx_order[i])
+    {
+      
+
+     case 0: //EQ1
+     if (i<numEff)rkr->EQ1_Bypass=1; else rkr->EQ1_Bypass=0;
+     eq_activar->value(rkr->EQ1_Bypass);
+     break;
+
+     case 1://Compressor
+     if (i<numEff)rkr->Compressor_Bypass=1; else rkr->Compressor_Bypass=0;
+     compress_activar->value(rkr->Compressor_Bypass);
+     break;
+
+     case 2://Distorsion
+     if (i<numEff) rkr->Distorsion_Bypass=1; else rkr->Distorsion_Bypass=0; 
+     dist_activar->value(rkr->Distorsion_Bypass);
+     break;
+
+     case 3://Overdrive
+     if (i<numEff)rkr->Overdrive_Bypass=1; else rkr->Overdrive_Bypass=0;
+     ovrd_activar->value(rkr->Overdrive_Bypass);
+     break; 
+
+     case 4://Echo
+     if (i<numEff)rkr->Echo_Bypass=1; else rkr->Echo_Bypass=0;
+     echo_activar->value(rkr->Echo_Bypass);
+     break;
+     
+     case 5://Chorus
+     if (i<numEff)rkr->Chorus_Bypass=1; else rkr->Chorus_Bypass=0;
+     chorus_activar->value(rkr->Chorus_Bypass);
+     break;
+     
+     case 6://Phaser
+     if (i<numEff)rkr->Phaser_Bypass=1; else rkr->Phaser_Bypass=1;
+     phaser_activar->value(rkr->Phaser_Bypass);
+     break;  
+
+     case 7://Flanger
+     if (i<numEff)rkr->Flanger_Bypass=1; else rkr->Flanger_Bypass=0;
+     flanger_activar->value(rkr->Flanger_Bypass);
+     break;
+ 
+     case 8://Reverb
+     if (i<numEff)rkr->Reverb_Bypass=1; else rkr->Reverb_Bypass=0;
+     reverb_activar->value(rkr->Reverb_Bypass);
+     break;  
+
+     case 9://EQ2
+     if (i<numEff)rkr->EQ2_Bypass=1; else rkr->EQ2_Bypass=0; 
+     eqp_activar->value(rkr->EQ2_Bypass);
+     break; 
+     
+     case 10://WahWah
+     if (i<numEff)rkr->WhaWha_Bypass=1; else rkr->WhaWha_Bypass=0;
+     WhaWha_activar->value(rkr->WhaWha_Bypass);
+     break;
+
+     case 11://AlienWah
+     if (i<numEff)rkr->Alienwah_Bypass=1; else rkr->Alienwah_Bypass=0;
+     Alienwah_activar->value(rkr->Alienwah_Bypass);
+     break;
+     
+     case 12://Cabinet
+     if (i<numEff)rkr->Cabinet_Bypass=1; else rkr->Cabinet_Bypass=0;
+     Cabinet_activar->value(rkr->Cabinet_Bypass);
+     break;
+ 
+     case 13://Pan
+     if (i<numEff)rkr->Pan_Bypass=1; else rkr->Pan_Bypass=0;
+     pan_activar->value(rkr->Pan_Bypass);
+     break;
+     
+     case 14://Har
+     if (i<numEff)rkr->Harmonizer_Bypass=1; else rkr->Harmonizer_Bypass=0;
+     har_activar->value(rkr->Harmonizer_Bypass);
+     break;
+
+     case 15://MsicalDelay
+     if (i<numEff)rkr->MusDelay_Bypass=1; else rkr->MusDelay_Bypass=0;
+     musdelay_activar->value(rkr->MusDelay_Bypass);
+     break; 
+
+     case 16://NoiseGate
+     if (i<numEff)rkr->Gate_Bypass=1; else rkr->Gate_Bypass=0;
+     gate_activar->value(rkr->Gate_Bypass);
+     break; 
+
+     case 17://NewDist
+     if (i<numEff)rkr->NewDist_Bypass=1; else rkr->NewDist_Bypass=0;
+     newdist_activar->value(rkr->NewDist_Bypass);
+     break;
+     
+     case 18://APhaser
+     if (i<numEff)rkr->APhaser_Bypass=1; else rkr->APhaser_Bypass=0;
+     aphaser_activar->value(rkr->APhaser_Bypass);
+     break;
+
+     case 19://Valve
+     if (i<numEff)rkr->Valve_Bypass=1; else rkr->Valve_Bypass=0;
+     valve_activar->value(rkr->Valve_Bypass);
+     break;
+
+     case 20://Dual_Flange
+     if (i<numEff)rkr->DFlange_Bypass=1; else rkr->DFlange_Bypass=0;
+     dflange_activar->value(rkr->DFlange_Bypass);
+     break;
+
+     case 21:// Ring
+     if (i<numEff)rkr->Ring_Bypass=1; else rkr->Ring_Bypass=0;
+     ring_activar->value(rkr->Ring_Bypass);
+     break;  
+
+     case 22:// Exciter
+     if (i<numEff)rkr->Exciter_Bypass=1; else rkr->Exciter_Bypass=0;
+     exciter_activar->value(rkr->Exciter_Bypass);
+     break; 
+
+     case 23://MBDist
+     if (i<numEff)rkr->MBDist_Bypass=1; else rkr->MBDist_Bypass=0;
+     mbdist_activar->value(rkr->MBDist_Bypass);
+     break;
+
+     case 24://Arpie
+     if (i<numEff)rkr->Arpie_Bypass=1;else rkr->Arpie_Bypass=0;
+     arpie_activar->value(rkr->Arpie_Bypass);
+     break;
+
+     case 25://Expander
+     if (i<numEff)rkr->Expander_Bypass=1; else rkr->Expander_Bypass=0;
+     expander_activar->value(rkr->Expander_Bypass);
+     break;
+
+     case 26://Shuffle
+     if (i<numEff)rkr->Shuffle_Bypass=1; else rkr->Shuffle_Bypass=0;
+     shuffle_activar->value(rkr->Shuffle_Bypass);
+     break;
+
+     case 27://Synthfilter
+     if (i<numEff)rkr->Synthfilter_Bypass=1; else rkr->Synthfilter_Bypass=0;
+     synthfilter_activar->value(rkr->Synthfilter_Bypass);
+     break; 
+
+     case 28://VaryBand
+     if (i<numEff)rkr->MBVvol_Bypass=1; else rkr->MBVvol_Bypass=0;
+     mbvvol_activar->value(rkr->MBVvol_Bypass);
+     break;
+
+     case 29://Convolotron
+     if (i<numEff)rkr->Convol_Bypass=1; else rkr->Convol_Bypass=0;
+     convo_activar->value(rkr->Convol_Bypass);
+     break; 
+
+     case 30://Looper
+     if (i<numEff)rkr->Looper_Bypass=1; else rkr->Looper_Bypass=0;
+     looper_activar->value(rkr->Looper_Bypass);
+     update_looper();
+     break;
+
+     case 31://RyanWah
+     if (i<numEff)rkr->RyanWah_Bypass=1; else rkr->RyanWah_Bypass=0;
+     ryanwah_activar->value(rkr->RyanWah_Bypass);
+     break;  
+     
+     case 32:// RBEcho
+     if (i<numEff)rkr->RBEcho_Bypass=1; else rkr->RBEcho_Bypass=0;
+     rbecho_activar->value(rkr->RBEcho_Bypass);
+     break;
+     
+     case 33:// CoilCrafter
+     if (i<numEff)rkr->CoilCrafter_Bypass=1; else rkr->CoilCrafter_Bypass=0;
+     coil_activar->value(rkr->CoilCrafter_Bypass);
+     break;
+
+     case 34://ShelfBoost
+     if (i<numEff)rkr->ShelfBoost_Bypass=1; else rkr->ShelfBoost_Bypass=0;
+     shelf_activar->value(rkr->ShelfBoost_Bypass);
+     break;
+     
+     case 35://Vocoder
+     if (i<numEff)rkr->Vocoder_Bypass=1; else rkr->Vocoder_Bypass=0;
+     vo_activar->value(rkr->Vocoder_Bypass);
+     break;
+
+     case 36://Sustainer
+     if (i<numEff)rkr->Sustainer_Bypass=1; else rkr->Sustainer_Bypass=0;
+     sus_activar->value(rkr->Sustainer_Bypass);
+     break;
+     
+    case 37://Sequence
+    if (i<numEff)rkr->Sequence_Bypass=1; else rkr->Sequence_Bypass=0;
+    seq_activar->value(rkr->Sequence_Bypass);
+    break;
+
+    case 38://Shifter
+    if (i<numEff)rkr->Shifter_Bypass=1; else rkr->Shifter_Bypass=0;
+    shifter_activar->value(rkr->Shifter_Bypass);
+    break;
+
+    case 39://StompBox
+    if (i<numEff)rkr->StompBox_Bypass=1; else rkr->StompBox_Bypass=0;
+    stomp_activar->value(rkr->StompBox_Bypass);
+    break;
+
+    case 40://Reverbtron
+    if (i<numEff)rkr->Reverbtron_Bypass=1; else rkr->Reverbtron_Bypass=0;
+    revtron_activar->value(rkr->Reverbtron_Bypass);
+    break;
+
+    case 41://Echotron
+    if (i<numEff)rkr->Echotron_Bypass=1; else rkr->Echotron_Bypass=0;
+    echotron_activar->value(rkr->Echotron_Bypass);
+    break;
+
+    case 42://StereoHarm
+    if (i<numEff)rkr->StereoHarm_Bypass=1; else rkr->StereoHarm_Bypass=0;
+    shar_activar->value(rkr->StereoHarm_Bypass);
+    break; 
+
+    case 43://CompBand
+    if (i<numEff)rkr->CompBand_Bypass=1; else rkr->CompBand_Bypass=0;
+    cband_activar->value(rkr->CompBand_Bypass);
+    break;
+
+    case 44://Opticaltrem
+    if (i<numEff)rkr->Opticaltrem_Bypass=1; else rkr->Opticaltrem_Bypass=0;
+    otrem_activar->value(rkr->Opticaltrem_Bypass);
+    break;
+
+    case 45://Vibe
+    if (i<numEff)rkr->Vibe_Bypass=1; else rkr->Vibe_Bypass=0;
+    vibe_activar->value(rkr->Vibe_Bypass);
+    break;
+  }
+
+
+
+
+ Fl_Widget *w = FindWidget(SelEff[i]);
+ Fl_Choice *s = (Fl_Choice *) w;
+ k = (long long) s->user_data();
+ int Esel = (int)(RND * s->size());
+ s->value(Esel);
+ s->do_callback(w,k);
+}
+
+Put_Loaded();
+
+ActivarGeneral->value(1);
+ActivarGeneral->do_callback();} {selected
+    }
   }
 } 
