@@ -27663,6 +27663,8 @@ for(i=0;i<10;i++)
  s->do_callback(w,k);
 }
 
+FillML(0);
+Prepare_Order();
 Put_Loaded();
 
 ActivarGeneral->value(1);

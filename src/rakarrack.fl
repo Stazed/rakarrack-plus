@@ -846,7 +846,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -855,7 +856,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1353 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -17952,6 +17953,8 @@ for(i=0;i<10;i++)
  s->do_callback(w,k);
 }
 
+FillML(0);
+Prepare_Order();
 Put_Loaded();
 
 ActivarGeneral->value(1);
