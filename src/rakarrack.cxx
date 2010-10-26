@@ -27451,7 +27451,7 @@ for(i=0;i<10;i++)
      break;
      
      case 6://Phaser
-     if (i<numEff)rkr->Phaser_Bypass=1; else rkr->Phaser_Bypass=1;
+     if (i<numEff)rkr->Phaser_Bypass=1; else rkr->Phaser_Bypass=0;
      phaser_activar->value(rkr->Phaser_Bypass);
      break;  
 
