@@ -405,7 +405,7 @@ Sequence::out (float * smpsl, float * smpsr)
 
   case 5:  //Arpegiator
   
-  lfol = floorf(fsequence[scount]*12.0f);
+  lfol = floorf(fsequence[scount]*12.75f);
 
      if(DS_state != 0)
    {
@@ -424,7 +424,7 @@ Sequence::out (float * smpsl, float * smpsr)
   tcount = 0;
   scount++;
   if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
-  lfol = floorf(fsequence[scount]*12.0f);
+  lfol = floorf(fsequence[scount]*12.75f);
   }
   
   lmod = powf (2.0f, lfol / 12.0f);
@@ -769,7 +769,7 @@ Sequence::changepar (int npar, int value)
     case 6:
     case 7:
       Psequence[npar] = value;
-      fsequence[npar] = (float) value/127.0f;
+      fsequence[npar] = (float) value / 127.0f;
 
   seqpower = 0.0f;  
   for (i = 0; i<8; i++)  seqpower += fsequence[i];
