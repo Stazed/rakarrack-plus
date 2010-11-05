@@ -1351,30 +1351,36 @@ incoming signal to the output.</p>
       <p><b>Level 1</b>: Volume level of track 1. '64' is unity. 
 Higher is louder than the original signal, lower is more quiet.</p>
       <p><b>Level 2</b>: Volume level of track 2.</p>
+      <p><b>Tempo</b>:  Set the tempo of the song.  This control responds to TapTempo. 
+      However, time stretching is not used in the Looper, so changing Tempo
+      during recording, or on a recorded loop will have no effect on the
+      recorded tempo.</p>
+      
+      <p><b>Time Sig</b>:  Time Signature.  Use this to set the beat of the song.  The
+      loop will be quantized to the nearest measure.</p>
+      
+      <p><b>MS</b>:  Metronome Sound. You can select N (Normal mode) to hear a "mark"
+      on every first beat of the measure, then a lower "tick" for the
+      remaining beats, or H (High tick) to hear the "mark" sound on every
+      beat, or L (Low tick) to hear the lower tick sound on every beat.</p>
+
       <p><b>Reverse</b>: Play loop in reverse.</p>
       <p><b>Auto Play</b>: If this is checked, the looper will begin to
 play
-automatically after recording the first time.</p>
-      <p><b>Play</b>: This is more like enable/disable
-playback.  The loop keeps playing silently when disabled, so Play
-starts at whatever point is current in the loop.  It was decided
-this is better than Play/Pause, because the loop keeps tracking with
-your song (assuming you keep tempo) even when it's not audible. 
-This operates on the active track.  If you desire a play/pause
-function, use the FX "On" button.  Selecting this to "off" causes
-the whole effect to pause where it is.</p>
-      <p><b>Stop</b>: Stops playback and sets the start to
-the beginning of the loop.  Use stop if you want to start the loop
-from the beginning next time you push play.  This operates on the
-active track.</p>
-      <p><b>Record</b>: First time, begins recording and
-will continue to record until you push record again.  At this
-point you have defined the length of the loop.  If you press
-record again, everything you play will be overdubbed onto the
-track.  To erase the track, you need to have the track active and
-select "clear".  This operates on the active track only if R1 or
-R2 (corresponding to the track) is selected.  This allows you to
-record on track 2 while hearing track 1.</p>
+automatically after recording the first time. It also will cause the Record
+button to start play automatically. Disable this option to
+synchronize Looper with Jack Transport</p>
+      <p><b>Play/Stop</b>: What more needs to be said?</p>
+      <p><b>Pause</b>: Pauses whatever is happening.</p>
+      <p><b>Record</b>: Unless AutoPlay is selected, Record only arms
+      recording.  Play/Stop will set the tape rolling.  First time, it
+      begins recording and will continue to record until you push record
+      again. At this point you have defined the length of the loop. If you
+      press record again, everything you play will be overdubbed onto the
+      active track(s). To erase the track, you need to have the track active
+      and select "clear". This operates on the active track only if R1 or R2
+      (corresponding to the track) is selected. This allows you to record on
+      track 2 while hearing track 1.</p>
       <p><b>R1, R2</b>: Enable recording on track 1
 and track 2, respectively.  If neither are checked, then the
 record button will not do anything.</p>
@@ -1384,7 +1390,15 @@ Again, both the track and the R button need to be selected to record on
 the specified track.</p>
       <p><b>Clear</b>: Erase the selected track and set
 length to zero.</p>
-<p><b>M</b>: Enable Metronome.</p>
+<p><b>Lnk</b>:  Link track 1 and track 2 with the same length.  Activate this if you
+want track 1 and 2 to play at the same time.  Deactivate if you want
+something like a verse-chorus-verse-chorus song structure where track 1 is
+the chorus part, and track 2 is the verse part.</p>
+<p><b>M</b>: Enable Metronome. Note Looper has its own metronome so it is
+able to synchronize with your play/pause commands.  Pressing play resets the
+metronome to beat 1, no matter where it is in the measure.  You will
+probably confuse yourself if you try to use the master metronome and Looper
+metronome simultaneously.</p>
 
 <p>Example sequence of operation:<br>
 Set Wet/Dry to 0, Level 1 to 64, Auto Play Active, Track 1 active, R1
