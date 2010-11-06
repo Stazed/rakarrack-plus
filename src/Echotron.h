@@ -103,6 +103,7 @@ float fQ[ECHOTRON_F_SIZE];
 int iStages[ECHOTRON_F_SIZE];
 float subdiv_dmod;
 float subdiv_fmod;
+int f_qmode;
 
 int rtime[ECHOTRON_F_SIZE];
 int ltime[ECHOTRON_F_SIZE];

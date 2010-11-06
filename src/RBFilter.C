@@ -33,7 +33,7 @@ RBFilter::RBFilter (int Ftype, float Ffreq, float Fq,
   type = Ftype;
   freq = Ffreq;
   q = Fq;
-  qmode = 1;
+  qmode = 0;
   gain = 1.0f;
   outgain = 1.0f;
   needsinterpolation = 0;

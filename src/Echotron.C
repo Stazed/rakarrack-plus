@@ -47,6 +47,7 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
   rfeedback = 0.0f;
   subdiv_dmod = 1.0f;
   subdiv_fmod = 1.0f;
+  f_qmode = 0;
 
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
 
@@ -255,7 +256,7 @@ return(0);
   memset(wbuf,0,sizeof(wbuf)); 
  }
 
- sscanf(wbuf,"%f\t%f",&subdiv_fmod,&subdiv_dmod); //Second line has tempo subdivision
+ sscanf(wbuf,"%f\t%f\t%d",&subdiv_fmod,&subdiv_dmod,&f_qmode); //Second line has tempo subdivision
  //printf("subdivs:\t%f\t%f\n",subdiv_fmod,subdiv_dmod);
 
  int count = 0;
@@ -415,6 +416,8 @@ if((tfcnt<ECHOTRON_MAXFILTERS)&&(iStages[i]>=0))
  filterbank[tfcnt].r->setstages(iStages[i]);
  filterbank[tfcnt].l->setmix (1, fLP[i] , fBP[i], fHP[i]);
  filterbank[tfcnt].r->setmix (1, fLP[i] , fBP[i], fHP[i]); 
+ filterbank[tfcnt].l->setmode(f_qmode);
+ filterbank[tfcnt].r->setmode(f_qmode);  
  tfcnt++;     
 }
 }

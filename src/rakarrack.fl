@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -851,7 +851,8 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
@@ -8860,7 +8861,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1
+        user_data 1 open
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -8899,7 +8900,7 @@ echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
+echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
           xywh {399 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -9030,7 +9031,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
         }
         Fl_Choice echotron_lfotype {
           label {LFO Type}
-          callback {rkr->efx_Echotron->changepar(14,(int)o->value());}
+          callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
           xywh {408 346 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
@@ -9124,6 +9125,10 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
           MenuItem {} {
             label {90-Shifter}
             xywh {30 30 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Basic LR Delay} selected
+            xywh {40 40 36 21} labelsize 10
           }
         }
       }
@@ -17958,7 +17963,6 @@ Prepare_Order();
 Put_Loaded();
 
 ActivarGeneral->value(1);
-ActivarGeneral->do_callback();} {selected
-    }
+ActivarGeneral->do_callback();} {}
   }
 } 
