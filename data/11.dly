@@ -1,19 +1,14 @@
-#Analytical signal approximation, 90 degree delay at each center frequency
-#Filter	Delay	#LFO Tempo rate adjustment
-1.0	2.0	1
+#Simple stereo echo if using first two taps
+#Circular sounding echo if using all 5
+#First line of file is
+#Column	Parameter
+#1 Filter Modulation Tempo multiplier
+#2 Delay Modulation Tempo multiplier 
+#3 Filter Resonance Mode.  0=backward compatibility, 1=higher resonance mode (M button on Mutromojo)
+0.5	5	1
 #Pan	Time	Level	LP	BP	HP	Freq	Q	Stages
-1.0	0.00507583	1.0	0.0	1.0	0.0	49.2531	2.66145	1
-1.0	0.00347029	1.0	0.0	1.0	0.0	72.0402	2.66145	1
-1.0	0.0023726	1.0	0.0	1.0	0.0	105.37	2.66145	1
-1.0	0.00162212	1.0	0.0	1.0	0.0	154.119	2.66145	1
-1.0	0.00110902	1.0	0.0	1.0	0.0	225.423	2.66145	1
-1.0	0.000758228	1.0	0.0	1.0	0.0	329.716	2.66145	1
-1.0	0.000518392	1.0	0.0	1.0	0.0	482.261	2.66144	1
-1.0	0.000354419	1.0	0.0	1.0	0.0	705.38	2.66145	1
-1.0	0.000242312	1.0	0.0	1.0	0.0	1031.73	2.66145	1
-1.0	0.000165666	1.0	0.0	1.0	0.0	1509.06	2.66144	1
-1.0	0.000113264	1.0	0.0	1.0	0.0	2207.23	2.66145	1
-1.0	0.0000774375	1.0	0.0	1.0	0.0	3228.41	2.66145	1
-1.0	0.0000529431	1.0	0.0	1.0	0.0	4722.05	2.66145	1
-1.0	0.0000361966	1.0	0.0	1.0	0.0	6906.72	2.66144	1
-1.0	0.0000247472	1.0	0.0	1.0	0.0	10102.1	2.66145	1
+-0.5	0.5	1.0	1.0	0.0	0.0	3000	1.0	1
+0.5	1.0	0.93	1.0	0.0	0.0	1500	1.0	1
+0.0	1.5	0.86	1.0	0.0	0.0	750	1.0	1
+0.75	2.0	0.8	1.0	0.0	0.0	550	1.0	1
+-0.75	2.5	0.75	1.0	0.0	0.0	550	1.0	1
