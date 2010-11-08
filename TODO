@@ -17,7 +17,15 @@ HELP TODO:
 -Explain Comments in .dly files, maybe something about EQ's
 
 
+Things to do before 0.7.0
+
+-New Effects
+-Echotron window to edit files.
+-Repository
+ 
+
 DSP TODO:
+
 - Smooth limiting in Expander
 - Fix Synthfilter level adjustment with HPF & LPF stages
 - Improve Tuner
