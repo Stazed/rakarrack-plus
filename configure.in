@@ -1,5 +1,5 @@
 AC_PREREQ(2.61)
-AC_INIT([rakarrack],[0.6.1],[Josep Andreu holborn@telefonica.net]) 
+AC_INIT([rakarrack],[0.6.2],[Josep Andreu holborn@telefonica.net]) 
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/main.C])
 AC_CONFIG_HEADER([src/config.h])
