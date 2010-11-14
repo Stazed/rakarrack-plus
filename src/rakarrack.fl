@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -846,18 +846,16 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1353 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -8861,7 +8859,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -9127,7 +9125,7 @@ echotron_length->maximum(rkr->efx_Echotron->getpar(3));} open
             xywh {30 30 36 21} labelsize 10
           }
           MenuItem {} {
-            label {Basic LR Delay} selected
+            label {Basic LR Delay}
             xywh {40 40 36 21} labelsize 10
           }
         }
@@ -12465,6 +12463,23 @@ Label_Color_Change(label_color);
 
 if (!commandline)
 {
+rakarrack.get(rkr->PrefNom("Bank Selected"), rkr->a_bank,3);
+switch(rkr->a_bank)
+{
+ 
+       case 0:
+       L_B1->do_callback();
+       break;
+
+       case 1:
+       L_B2->do_callback();
+       break;
+     
+       case 2:
+       L_B3->do_callback();
+       break;
+} 
+ 
 rakarrack.get(rkr->PrefNom("Preset Num"),k ,1);
 rkr->Selected_Preset=k;
 Preset_Counter->value(k);
@@ -12636,7 +12651,8 @@ rkr->M_table[i].preset=f-3000;
 }
 
 
-}} {}
+}} {selected
+    }
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -12657,6 +12673,8 @@ rakarrack.set(rkr->PrefNom("Labels Color"),(int) label_color);
 rakarrack.set(rkr->PrefNom("Schema"), (int) scheme_ch->value());
 rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
 
+
+rakarrack.set(rkr->PrefNom("Bank Selected"),rkr->a_bank);
 
 if ((Preset_Counter->value() >0) && (Preset_Counter->value() < 61))
 
