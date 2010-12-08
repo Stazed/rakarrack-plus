@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -846,19 +846,17 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {879 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1424 63 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7171,7 +7169,7 @@ update_looper();}
         }
       }
       Fl_Group RYANWAH {
-        user_data 1 open
+        user_data 1
         xywh {318 209 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button ryanwah_activar {
@@ -7210,7 +7208,7 @@ ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
 svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
 ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
 o->value(rkr->efx_RyanWah->getpar(18));
-o->redraw();} open selected
+o->redraw();} open
           xywh {395 213 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7249,6 +7247,12 @@ rkr->efx_RyanWah->changepar(0,(int)(o->value()+64));}
           xywh {367 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
+        Fl_Check_Button ryanwah_qm {
+          label {M     }
+          user_data 2
+          callback {rkr->efx_RyanWah->changepar(17,(int)o->value());}
+          xywh {331 251 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 25
+        }
         Fl_Value_Slider ryanwah_lp {
           label LP
           callback {if(Fl::event_button()==3)
@@ -7260,11 +7264,11 @@ rkr->efx_RyanWah->changepar(10,(int)o->value());}
           xywh {367 252 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
-        Fl_Check_Button ryanwah_qm {
-          label {M     }
+        Fl_Check_Button ryanwah_nat {
+          label {N     }
           user_data 2
-          callback {rkr->efx_RyanWah->changepar(17,(int)o->value());}
-          xywh {331 251 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 25
+          callback {rkr->efx_RyanWah->changepar(19,(int)o->value());}
+          xywh {331 264 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 26
         }
         Fl_Value_Slider ryanwah_bp {
           label BP
@@ -7350,7 +7354,7 @@ rkr->efx_RyanWah->changepar(14,(int)o->value());}
  getMIDIControl(264);
  return;
 }
-rkr->efx_RyanWah->changepar(8,(int)o->value());}
+rkr->efx_RyanWah->changepar(8,(int)o->value());} selected
           xywh {367 356 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -7375,12 +7379,6 @@ rkr->efx_RyanWah->changepar(7,(int)o->value());}
 rkr->efx_RyanWah->changepar(9,(int)o->value());}
           xywh {367 378 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
-        }
-        Fl_Check_Button ryanwah_nat {
-          label {N     }
-          user_data 2
-          callback {rkr->efx_RyanWah->changepar(19,(int)o->value());}
-          xywh {330 264 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 26
         }
       }
       Fl_Group RBECHO {
