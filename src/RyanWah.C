@@ -42,6 +42,7 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
   Pampsns = 0;
   Pampsnsinv= 0;
   Pampsmooth= 0;
+  Pamode = 0;
   maxfreq = 5000.0f;
   minfreq = 40.0f;
   frequency = 40.0f;
@@ -74,11 +75,18 @@ void
 RyanWah::out (float * smpsl, float * smpsr)
 {
   int i;
-
+  float lmod, rmod;
   float lfol, lfor;
+  float rms = 0.0f;
   lfo.effectlfoout (&lfol, &lfor);
+  if (Pamode) {
+  lfol *= depth;
+  lfor *= depth;
+  }
+  else {
   lfol *= depth * 5.0f;
   lfor *= depth * 5.0f;
+  }
 
   for (i = 0; i < PERIOD; i++)
     {
@@ -92,10 +100,25 @@ RyanWah::out (float * smpsl, float * smpsr)
       oldfbias = oldfbias * (1.0f - wahsmooth) + fbias * wahsmooth + 1e-10f;  //smooth MIDI control
       oldfbias1 = oldfbias1 * (1.0f - wahsmooth) + oldfbias * wahsmooth + 1e-10f;
       oldfbias2 = oldfbias2 * (1.0f - wahsmooth) + oldfbias1 * wahsmooth + 1e-10f;
+      
+      if (Pamode) {
+         rms = ms1 * ampsns + oldfbias2;
+	 if (rms<0.0f) rms = 0.0f;
+         lmod = (minfreq + lfol + rms)*maxfreq;
+         rmod = (minfreq + lfor + rms)*maxfreq;
+        if(variq) q = powf(2.0f,(2.0f*(1.0f-rms)+1.0f));
+        filterl->setq(q);
+        filterr->setq(q);
+        filterl->directmod(rmod);
+        filterr->directmod(lmod);
+        efxoutl[i] = filterl->filterout_s (smpsl[i]);
+        efxoutr[i] = filterr->filterout_s (smpsr[i]);
+      
+      }
     };
 
-
-  float rms = ms1 * ampsns + oldfbias2;
+  if (!Pamode) {
+  rms = ms1 * ampsns + oldfbias2;
   
   if(rms>0.0f) //apply some smooth limiting
   {
@@ -108,8 +131,8 @@ RyanWah::out (float * smpsl, float * smpsr)
       
   if(variq) q = powf(2.0f,(2.0f*(1.0f-rms)+1.0f));
 
-   float lmod =(lfol + rms);
-   float rmod = (lfor + rms);
+   lmod =(lfol + rms);
+   rmod = (lfor + rms);
   if(lmod>1.0f) lmod = 1.0f;
   if(lmod<0.0f) lmod = 0.0f;
   if(rmod>1.0f) rmod = 1.0f;
@@ -123,10 +146,10 @@ RyanWah::out (float * smpsl, float * smpsr)
 
   filterl->setfreq_and_q (frl, q);
   filterr->setfreq_and_q (frr, q);
-
+  
   filterl->filterout (efxoutl);
   filterr->filterout (efxoutr);
-
+}
 
 };
 
@@ -192,19 +215,21 @@ RyanWah::reinitfilter ()
 void
 RyanWah::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 18;
-  const int NUM_PRESETS = 5;
+  const int PRESET_SIZE = 20;
+  const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Wah Pedal
-    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1 },
+    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1, 0, 0 },
     //Mutron
-    {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 1 },
+    {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 1, 1, 0 },
     //Phase Wah
-    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 1 },
+    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 1, 2, 0 },
     //Succulent Phaser
-    {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 1 },
+    {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 1, 3, 0 },
     //Quacky
-    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 1 } 
+    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 1, 4, 0 },
+    //Smoothtron
+     {0, 15, 138, 0, 0, 64, 0, 15, 0, 20, 32, 0, 5, 1, 2000, 60, 0, 1, 5, 1 }   
 
   };
 
@@ -292,11 +317,13 @@ RyanWah::changepar (int npar, int value)
       break;  
      case 14:
      Prange = value;
-     maxfreq = ((float) Prange);
+     if(Pamode) maxfreq = ((float) Prange)/(fSAMPLE_RATE/6.0f);
+     else maxfreq = ((float) Prange);
      break; 
      case 15:
      Pminfreq = value;
-     minfreq = (float) value;
+     if (Pamode)  minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
+     else minfreq = (float) value;
      break;  
      case 16:
      variq = value;
@@ -308,6 +335,17 @@ RyanWah::changepar (int npar, int value)
      break;
      case 18:
      Ppreset = value;
+     break;
+     case 19:
+     Pamode = value;
+     if(Pamode) {
+     minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
+     maxfreq = ((float) Prange)/(fSAMPLE_RATE/6.0f);   
+     }
+     else {
+     minfreq = (float) Pminfreq;
+     maxfreq = (float) Prange;
+     }  
      break;
            
     };
@@ -374,6 +412,9 @@ RyanWah::getpar (int npar)
       break;
     case 18:
       return (Ppreset);
+      break;
+    case 19:
+      return (Pamode);
       break;
     default:
       return (0);

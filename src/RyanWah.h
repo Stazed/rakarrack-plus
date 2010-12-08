@@ -69,6 +69,7 @@ private:
   int Pqm;	        //Qmode
   int Pstages;		//0-6// counter// Filter stages
   int Pminfreq;		//30/800//set lowest freq in range.
+  int Pamode;           //0 or 1// modulation mode.
   int variq;		//on-off//checkbox//Selects whether Q is varied w/ frequency to emulate a wahwah
   
 

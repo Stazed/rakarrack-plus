@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -846,17 +846,19 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {1353 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} open
+      xywh {879 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7169,8 +7171,8 @@ update_looper();}
         }
       }
       Fl_Group RYANWAH {
-        user_data 1
-        xywh {318 209 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 open
+        xywh {318 209 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button ryanwah_activar {
           label On
@@ -7194,6 +7196,7 @@ findpos(31,(int)o->value(),o);}
 if((ud==0)||(ud==12031))rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
 ryanwah_qm->value(rkr->efx_RyanWah->getpar(17));
+ryanwah_nat->value(rkr->efx_RyanWah->getpar(19));
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
 ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
 ryanwah_lfotype->value(rkr->efx_RyanWah->getpar(4));
@@ -7207,7 +7210,7 @@ ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
 svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
 ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
 o->value(rkr->efx_RyanWah->getpar(18));
-o->redraw();}
+o->redraw();} open selected
           xywh {395 213 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7229,6 +7232,10 @@ o->redraw();}
           MenuItem {} {
             label {Quack Quack}
             xywh {92 92 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label SmoothTron
+            xywh {102 102 36 21} labelsize 10
           }
         }
         Fl_Value_Slider ryanwah_WD {
@@ -7254,10 +7261,10 @@ rkr->efx_RyanWah->changepar(10,(int)o->value());}
           class SliderW
         }
         Fl_Check_Button ryanwah_qm {
-          label Mode
+          label {M     }
           user_data 2
           callback {rkr->efx_RyanWah->changepar(17,(int)o->value());}
-          xywh {327 269 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+          xywh {331 251 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 25
         }
         Fl_Value_Slider ryanwah_bp {
           label BP
@@ -7368,6 +7375,12 @@ rkr->efx_RyanWah->changepar(7,(int)o->value());}
 rkr->efx_RyanWah->changepar(9,(int)o->value());}
           xywh {367 378 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Check_Button ryanwah_nat {
+          label {N     }
+          user_data 2
+          callback {rkr->efx_RyanWah->changepar(19,(int)o->value());}
+          xywh {330 264 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 26
         }
       }
       Fl_Group RBECHO {
@@ -9338,7 +9351,7 @@ Chord(1);}
       }
       Fl_Group COMPBAND {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button cband_activar {
           label On
@@ -12651,8 +12664,7 @@ rkr->M_table[i].preset=f-3000;
 }
 
 
-}} {selected
-    }
+}} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -13191,7 +13203,7 @@ reordena();} {}
 o->do_callback();
 Fl::repeat_timeout(.04,tick,v);} {}
   }
-  Function {preset_click(Fl_Button* o, void* v)} {return_type {static void}
+  Function {preset_click(Fl_Button* o, void* v)} {open return_type {static void}
   } {
     code {((RKRGUI*)(o->parent()->parent()->user_data()))->preset_click_i(o,v);} {}
   }

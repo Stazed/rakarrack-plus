@@ -39,6 +39,7 @@ public:
   void setfreq (float frequency);
   void setfreq_and_q (float frequency, float q_);
   void setq (float q_);
+  void directmod(float lfo);
 
   void settype (int type_);
   void setgain (float dBgain);

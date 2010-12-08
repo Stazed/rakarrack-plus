@@ -74,7 +74,7 @@ void
 RBFilter::computefiltercoefs ()
 {
   par.f = 2.0f * sinf(PI*freq / fSAMPLE_RATE);
-  if (par.f > 0.99999)
+  if (par.f > 0.99999f)
     par.f = 0.99999f;
    par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
     par.q = powf (par.q, 1.0f / (float)(stages + 1));
@@ -86,7 +86,7 @@ void
 RBFilter::computefiltercoefs_hiQ ()  //potentially unstable at some settings, but better sound
 {
   par.f = 2.0f * sinf(PI*freq / fSAMPLE_RATE);
-  if (par.f > 0.99999)
+  if (par.f > 0.99999f)
     par.f = 0.99999f;
   if(q<0.5f) q = 0.5f;
     par.q = 1.0f/q;
@@ -95,6 +95,17 @@ RBFilter::computefiltercoefs_hiQ ()  //potentially unstable at some settings, bu
 
 };
 
+void
+RBFilter::directmod (float lfo)  //potentially unstable at some settings, but better sound
+{
+  par.f = fabs(lfo);  //cannot be less than 0
+  if (par.f > 0.99999f)
+    par.f = 0.99999f;
+    //note range on input LFO should be scaled assuming the following:
+    //A value of 1.0f sets a resonant frequency of SAMPLE_RATE/6.0
+    //A value greater than 1 makes the filter go unstable, thus the limit.  
+    //Call the filter on the same sample multiple times for cheap and dirty oversampling
+};
 void
 RBFilter::setmode (int mode)
 {
