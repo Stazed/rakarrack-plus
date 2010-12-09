@@ -855,8 +855,8 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {1424 63 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;}
+      xywh {1410 49 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7193,8 +7193,13 @@ findpos(31,(int)o->value(),o);}
           callback {long long ud= (long long) v;
 if((ud==0)||(ud==12031))rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
-ryanwah_qm->value(rkr->efx_RyanWah->getpar(17));
-ryanwah_nat->value(rkr->efx_RyanWah->getpar(19));
+
+int temp=rkr->efx_RyanWah->getpar(17);
+
+if((temp==1) || (temp==3)) ryanwah_qm->value(1); else ryanwah_qm->value(0);
+if((temp==2) || (temp==3)) ryanwah_nat->value(1); else ryanwah_nat->value(0);
+
+
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
 ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
 ryanwah_lfotype->value(rkr->efx_RyanWah->getpar(4));
@@ -7208,7 +7213,7 @@ ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
 svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
 ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
 o->value(rkr->efx_RyanWah->getpar(18));
-o->redraw();} open
+o->redraw();}
           xywh {395 213 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -7250,8 +7255,12 @@ rkr->efx_RyanWah->changepar(0,(int)(o->value()+64));}
         Fl_Check_Button ryanwah_qm {
           label {M     }
           user_data 2
-          callback {rkr->efx_RyanWah->changepar(17,(int)o->value());}
-          xywh {331 251 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 25
+          callback {if((int)o->value()) 
+rkr->efx_RyanWah->Pmode +=1;
+else
+rkr->efx_RyanWah->Pmode -=1;
+rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);} selected
+          xywh {333 251 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 25
         }
         Fl_Value_Slider ryanwah_lp {
           label LP
@@ -7267,8 +7276,12 @@ rkr->efx_RyanWah->changepar(10,(int)o->value());}
         Fl_Check_Button ryanwah_nat {
           label {N     }
           user_data 2
-          callback {rkr->efx_RyanWah->changepar(19,(int)o->value());}
-          xywh {331 264 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 26
+          callback {if((int)o->value()) 
+rkr->efx_RyanWah->Pmode +=2;
+else
+rkr->efx_RyanWah->Pmode -=2;
+rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
+          xywh {333 264 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 26
         }
         Fl_Value_Slider ryanwah_bp {
           label BP
@@ -7354,7 +7367,7 @@ rkr->efx_RyanWah->changepar(14,(int)o->value());}
  getMIDIControl(264);
  return;
 }
-rkr->efx_RyanWah->changepar(8,(int)o->value());} selected
+rkr->efx_RyanWah->changepar(8,(int)o->value());}
           xywh {367 356 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
@@ -13201,7 +13214,7 @@ reordena();} {}
 o->do_callback();
 Fl::repeat_timeout(.04,tick,v);} {}
   }
-  Function {preset_click(Fl_Button* o, void* v)} {open return_type {static void}
+  Function {preset_click(Fl_Button* o, void* v)} {return_type {static void}
   } {
     code {((RKRGUI*)(o->parent()->parent()->user_data()))->preset_click_i(o,v);} {}
   }

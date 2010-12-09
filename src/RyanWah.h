@@ -42,6 +42,7 @@ public:
 
 
   int Ppreset;
+  int Pmode;
   float outvolume;
 
   float *efxoutl;

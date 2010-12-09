@@ -6690,8 +6690,13 @@ void RKRGUI::cb_ryanwah_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12031))rkr->efx_RyanWah->setpreset((int) o->value());
 ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
-ryanwah_qm->value(rkr->efx_RyanWah->getpar(17));
-ryanwah_nat->value(rkr->efx_RyanWah->getpar(19));
+
+int temp=rkr->efx_RyanWah->getpar(17);
+
+if((temp==1) || (temp==3)) ryanwah_qm->value(1); else ryanwah_qm->value(0);
+if((temp==2) || (temp==3)) ryanwah_nat->value(1); else ryanwah_nat->value(0);
+
+
 ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
 ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
 ryanwah_lfotype->value(rkr->efx_RyanWah->getpar(4));
@@ -6734,7 +6739,11 @@ void RKRGUI::cb_ryanwah_WD(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_ryanwah_qm_i(Fl_Check_Button* o, void*) {
-  rkr->efx_RyanWah->changepar(17,(int)o->value());
+  if((int)o->value()) 
+rkr->efx_RyanWah->Pmode +=1;
+else
+rkr->efx_RyanWah->Pmode -=1;
+rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);
 }
 void RKRGUI::cb_ryanwah_qm(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ryanwah_qm_i(o,v);
@@ -6753,7 +6762,11 @@ void RKRGUI::cb_ryanwah_lp(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_ryanwah_nat_i(Fl_Check_Button* o, void*) {
-  rkr->efx_RyanWah->changepar(19,(int)o->value());
+  if((int)o->value()) 
+rkr->efx_RyanWah->Pmode +=2;
+else
+rkr->efx_RyanWah->Pmode -=2;
+rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);
 }
 void RKRGUI::cb_ryanwah_nat(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ryanwah_nat_i(o,v);
@@ -17398,7 +17411,7 @@ R average.");
         ryanwah_WD->align(FL_ALIGN_LEFT);
         ryanwah_WD->when(FL_WHEN_CHANGED);
       } // SliderW* ryanwah_WD
-      { ryanwah_qm = new Fl_Check_Button(331, 251, 15, 15, "M     ");
+      { ryanwah_qm = new Fl_Check_Button(333, 251, 15, 15, "M     ");
         ryanwah_qm->down_box(FL_BORDER_BOX);
         ryanwah_qm->labelsize(10);
         ryanwah_qm->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -17422,7 +17435,7 @@ R average.");
         ryanwah_lp->align(FL_ALIGN_LEFT);
         ryanwah_lp->when(FL_WHEN_CHANGED);
       } // SliderW* ryanwah_lp
-      { ryanwah_nat = new Fl_Check_Button(331, 264, 15, 15, "N     ");
+      { ryanwah_nat = new Fl_Check_Button(333, 264, 15, 15, "N     ");
         ryanwah_nat->down_box(FL_BORDER_BOX);
         ryanwah_nat->labelsize(10);
         ryanwah_nat->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

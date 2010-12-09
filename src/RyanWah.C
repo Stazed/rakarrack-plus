@@ -215,21 +215,21 @@ RyanWah::reinitfilter ()
 void
 RyanWah::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 20;
+  const int PRESET_SIZE = 19;
   const int NUM_PRESETS = 6;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Wah Pedal
-    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1, 0, 0 },
+    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1, 0},
     //Mutron
-    {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 1, 1, 0 },
+    {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 1, 1},
     //Phase Wah
-    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 1, 2, 0 },
+    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 1, 2},
     //Succulent Phaser
-    {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 1, 3, 0 },
+    {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 1, 3},
     //Quacky
-    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 1, 4, 0 },
+    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 1, 4},
     //Smoothtron
-     {0, 15, 138, 0, 0, 64, 0, 15, 0, 20, 32, 0, 5, 1, 2000, 60, 0, 1, 5, 1 }   
+     {0, 15, 138, 0, 0, 64, 0, 15, 0, 20, 32, 0, 5, 1, 2000, 60, 0, 3, 5}   
 
   };
 
@@ -329,15 +329,12 @@ RyanWah::changepar (int npar, int value)
      variq = value;
      break;
      case 17:
-     Pqm = value;
+     Pmode=value;
+     if((Pmode==1) || (Pmode==3)) Pqm = 1; else Pqm = 0;
      filterl->setmode(Pqm);
      filterr->setmode(Pqm);     
-     break;
-     case 18:
-     Ppreset = value;
-     break;
-     case 19:
-     Pamode = value;
+
+     if((Pmode==2) || (Pmode==3)) Pamode = 1; else Pamode = 0;
      if(Pamode) {
      minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
      maxfreq = ((float) Prange)/(fSAMPLE_RATE/6.0f);   
@@ -346,6 +343,10 @@ RyanWah::changepar (int npar, int value)
      minfreq = (float) Pminfreq;
      maxfreq = (float) Prange;
      }  
+
+     break;
+     case 18:
+     Ppreset = value;
      break;
            
     };
@@ -408,13 +409,10 @@ RyanWah::getpar (int npar)
       return (variq);
       break;
     case 17:
-      return (Pqm);  
+      return (Pmode);  
       break;
     case 18:
       return (Ppreset);
-      break;
-    case 19:
-      return (Pamode);
       break;
     default:
       return (0);
