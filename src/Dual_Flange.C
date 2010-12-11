@@ -99,6 +99,11 @@ Dflange::cleanup ()
   
 };
 
+float
+ringbuffer::getsmp(float delay_time)
+{
+return 0;
+}
 
 
 /*

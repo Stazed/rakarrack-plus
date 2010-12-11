@@ -35,7 +35,7 @@
 
     class ringbuffer {
     public:
-    float get(float delay_time);    
+    float getsmp(float delay_time);    
     private:
     float *buf;
     long inptr;
@@ -43,7 +43,7 @@
     long target;
     float fracdly;
     float statevar;        
-    }
+    };
     
 class Dflange
 {
