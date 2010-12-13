@@ -33,6 +33,18 @@
 #include "global.h"
 #include "EffectLFO.h"
 
+    class ringbuffer {
+    public:
+    float getsmp(float delay_time);    
+    private:
+    float *buf;
+    long inptr;
+    long outptr;
+    long target;
+    float fracdly;
+    float statevar;        
+    };
+    
 class Dflange
 {
 public:
@@ -90,6 +102,8 @@ private:
   float *ldelay, *rdelay, *zldelay, *zrdelay;
   float oldl, oldr;		//pt. lpf
     float rsA, rsB, lsA, lsB;	//Audio sample at given delay
+    
+
   class FPreset *Fpre;
 
 
