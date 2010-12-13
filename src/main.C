@@ -203,6 +203,17 @@ main (int argc, char *argv[])
 
 	}
 
+   
+   
+   if((!rkr.jdis) && (rkr.jshut))
+      
+      {
+       
+          rkr.jdis=1;
+          rkr.Message (1,rkr.jackcliname,
+         "Jack Shut Down, try to save your work");
+      }
+      
       
       rkr.miramidi ();
 

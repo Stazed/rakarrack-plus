@@ -321,6 +321,8 @@ public:
   jack_status_t status;
   char jackcliname[64];
 
+  int jdis;
+  int jshut;
   int DC_Offset;
   int Bypass;
   int MIDIConverter_Bypass;

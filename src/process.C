@@ -64,6 +64,8 @@ XWMHints *hints;
 RKR::RKR ()
 {
 
+  jdis=0;
+  jshut=0;
   char temp[128];
   ML_filter=0;
   error_num = 0;

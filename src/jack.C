@@ -156,6 +156,9 @@ jackprocess (jack_nframes_t nframes, void *arg)
   jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
     jack_port_get_buffer (inputport_aux, nframes);
 
+  pthread_mutex_lock (&jmutex);
+
+
   JackOUT->cpuload = jack_cpu_load(jackclient);
 
   
@@ -225,7 +228,6 @@ jackprocess (jack_nframes_t nframes, void *arg)
 
 
 
-  pthread_mutex_lock (&jmutex);
 
   float *data = (float *)jack_port_get_buffer(jack_midi_in, nframes); 
   count = jack_midi_get_event_count(data);
@@ -296,8 +298,8 @@ jackshutdown (void *arg)
   if (gui == 0)
     printf ("Jack Shut Down, sorry.\n");
   else
-    JackOUT->Message (1,JackOUT->jackcliname,
-		      "Jack Shut Down, try to save your work");
+  JackOUT->jshut=1;
+
 };
 
 
