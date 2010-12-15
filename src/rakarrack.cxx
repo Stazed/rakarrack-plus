@@ -9158,7 +9158,20 @@ void RKRGUI::cb_infinity_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_infinity_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12001))rkr->efx_Infinity->setpreset((int) o->value());
+if((ud==0)||(ud==12046))rkr->efx_Infinity->setpreset((int) o->value());
+infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
+infinity_Q->value(rkr->efx_Infinity->getpar(9));
+infinity_1->value(rkr->efx_Infinity->getpar(1));
+infinity_2->value(rkr->efx_Infinity->getpar(2));
+infinity_3->value(rkr->efx_Infinity->getpar(3));
+infinity_4->value(rkr->efx_Infinity->getpar(4));
+infinity_5->value(rkr->efx_Infinity->getpar(5));
+infinity_6->value(rkr->efx_Infinity->getpar(6));
+infinity_7->value(rkr->efx_Infinity->getpar(7));
+infinity_8->value(rkr->efx_Infinity->getpar(8));
+infinity_start->value(rkr->efx_Infinity->getpar(10));
+infinity_end->value(rkr->efx_Infinity->getpar(11));
+infinity_rate->value(rkr->efx_Infinity->getpar(12));
 }
 void RKRGUI::cb_infinity_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_preset_i(o,v);
@@ -20343,7 +20356,7 @@ R average.");
         infinity_preset->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_preset->textsize(10);
         infinity_preset->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        infinity_preset->callback((Fl_Callback*)cb_infinity_preset, (void*)(12000));
+        infinity_preset->callback((Fl_Callback*)cb_infinity_preset, (void*)(12046));
         infinity_preset->when(FL_WHEN_RELEASE_ALWAYS);
         infinity_preset->menu(menu_infinity_preset);
       } // Fl_Choice* infinity_preset

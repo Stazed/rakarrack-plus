@@ -853,12 +853,13 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1404 103 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -9875,9 +9876,22 @@ findpos(46,(int)o->value(),o);}
         }
         Fl_Choice infinity_preset {
           label Preset
-          user_data 12000
+          user_data 12046
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12001))rkr->efx_Infinity->setpreset((int) o->value());}
+if((ud==0)||(ud==12046))rkr->efx_Infinity->setpreset((int) o->value());
+infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
+infinity_Q->value(rkr->efx_Infinity->getpar(9));
+infinity_1->value(rkr->efx_Infinity->getpar(1));
+infinity_2->value(rkr->efx_Infinity->getpar(2));
+infinity_3->value(rkr->efx_Infinity->getpar(3));
+infinity_4->value(rkr->efx_Infinity->getpar(4));
+infinity_5->value(rkr->efx_Infinity->getpar(5));
+infinity_6->value(rkr->efx_Infinity->getpar(6));
+infinity_7->value(rkr->efx_Infinity->getpar(7));
+infinity_8->value(rkr->efx_Infinity->getpar(8));
+infinity_start->value(rkr->efx_Infinity->getpar(10));
+infinity_end->value(rkr->efx_Infinity->getpar(11));
+infinity_rate->value(rkr->efx_Infinity->getpar(12));} open selected
           xywh {400 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -16617,8 +16631,7 @@ MenuP->image(InOut->image());
 MenuB->image(InOut->image());
 
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {chfsize(int value)} {} {
     code {unsigned char k;
