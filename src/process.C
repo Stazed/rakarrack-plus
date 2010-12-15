@@ -1890,7 +1890,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 	      if (Infinity_Bypass)
 	      {
                   efx_Infinity->out(efxoutl, efxoutr);
-		  Vol_Efx(46,efx_Vibe->outvolume);	        
+		  Vol_Efx(46,efx_Infinity->outvolume);	        
 		
 		}
 
