@@ -34,8 +34,8 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   Ppreset = 0;
   int i;
   for (i = 0; i<NUM_INF_BANDS; i++) {
-  filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1);
-  filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1);
+  filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f);
+  filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f);
   bandstate[i].level = 1.0f;
   bandstate[i].vol = 1.0f; 
    
@@ -156,8 +156,8 @@ bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band
 //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,bandstate[i].sinp, bandstate[i].lfo, bandstate[i].ramp);
 
        
-  filterl[i]->setmix(0, NULL, NULL, NULL);
-  filterr[i]->setmix(0, NULL, NULL, NULL);
+  filterl[i]->setmix(0, 80.0f, 70.0f, 1.0f);
+  filterr[i]->setmix(0, 80.0f, 70.0f, 1.0f);
   filterl[i]->setmode(1);
   filterr[i]->setmode(1);
   filterl[i]->settype(2);
@@ -291,7 +291,7 @@ Infinity::getpar (int npar)
     case 6:
     case 7:
     case 8:
-      return (Pb[npar + 1]);
+      return (Pb[npar - 1]);
       break;
     case 9:
       return (Pq);

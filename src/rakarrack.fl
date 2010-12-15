@@ -848,18 +848,16 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1404 103 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -9891,12 +9889,24 @@ infinity_7->value(rkr->efx_Infinity->getpar(7));
 infinity_8->value(rkr->efx_Infinity->getpar(8));
 infinity_start->value(rkr->efx_Infinity->getpar(10));
 infinity_end->value(rkr->efx_Infinity->getpar(11));
-infinity_rate->value(rkr->efx_Infinity->getpar(12));} open selected
+infinity_rate->value(rkr->efx_Infinity->getpar(12));}
           xywh {400 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Plain
+            label Basic
             xywh {27 27 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Rising Comb} selected
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Falling Comb}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Laser
+            xywh {0 0 36 21} labelsize 10
           }
         }
         Fl_Value_Slider infinity_WD {
