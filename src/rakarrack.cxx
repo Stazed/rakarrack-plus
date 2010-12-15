@@ -11568,7 +11568,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       L10->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
       L10->user_data((void*)(779));
     } // Fl_Box* L10
-    { EQ = new Fl_Group(2, 212, 162, 193);
+    { EQ = new Fl_Group(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);
       EQ->color((Fl_Color)FL_FOREGROUND_COLOR);
       EQ->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
