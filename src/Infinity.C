@@ -42,11 +42,11 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   Pb[i] = 1;  
   }
 
-  //setpreset (Ppreset);
+  setpreset (Ppreset);
   Pvolume = 0;
   Pq = 30;
-  Pstartfreq = 2;
-  Pendfreq = 20;
+  Pstartfreq = 5;
+  Pendfreq = 80;
   Prate = 2;
   
   reinitfilter();
@@ -60,17 +60,19 @@ Infinity::~Infinity ()
 void inline
 Infinity::oscillator()
 {
+float modulate;
 for (int i=0; i<NUM_INF_BANDS; i++)  {
 bandstate[i].sinp += fconst*bandstate[i].cosp;
 bandstate[i].cosp -= bandstate[i].sinp*fconst;
 bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
 bandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
-if (bandstate[i].ramp > fend) bandstate[i].ramp = fstart;  //probably faster than fmod()
-//if (bandstate[i].ramp < fstart) bandstate[i].ramp = fend;  //if it is going in reverse (rampconst < 0)
+if (bandstate[i].ramp > 1.0f) bandstate[i].ramp = 0.0f;  //probably faster than fmod()
+if (bandstate[i].ramp < 0.0f) bandstate[i].ramp = 1.0f;  //if it is going in reverse (rampconst < 0)
 bandstate[i].vol = bandstate[i].level*bandstate[i].lfo;
 
-  filterl[i]->directmod(bandstate[i].ramp);
-  filterr[i]->directmod(bandstate[i].ramp);
+  modulate = linconst*powf(2.0f,logconst*bandstate[i].ramp);
+  filterl[i]->directmod(modulate);
+  filterr[i]->directmod(modulate);
 }
 
 }
@@ -143,7 +145,11 @@ bandstate[i].sinp = sinf(halfpi + D_PI*((float) i)/((float) NUM_INF_BANDS));
 bandstate[i].cosp = cosf(halfpi + D_PI*((float) i)/((float) NUM_INF_BANDS));
 bandstate[i].ramp = ((float) i)/((float) NUM_INF_BANDS);
 bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
-  
+
+//printf("sin: %f lfo: %f ramp: %f\n",bandstate[i].sinp, bandstate[i].lfo, bandstate[i].ramp);
+      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
+      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256  
+       
   filterl[i]->setmix(0, 80.0f, 70.0f, 1.0f);
   filterr[i]->setmix(0, 80.0f, 70.0f, 1.0f);
   filterl[i]->setmode(1);
@@ -154,9 +160,7 @@ bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band
   filterr[i]->setq(qq);
   filterl[i]->directmod(bandstate[i].ramp);
   filterr[i]->directmod(bandstate[i].ramp);
-  
-      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
-      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256  
+
 }
   
 };
@@ -168,7 +172,7 @@ Infinity::setpreset (int npreset)
   const int NUM_PRESETS = 1;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Basic
-    {0, 127, 127, 127, 127, 127, 127, 127, 127, 10, 20, 80, 60 }
+    {0, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60 }
 
   };
 
@@ -193,32 +197,33 @@ Infinity::setpreset (int npreset)
 void
 Infinity::adjustfreqs()
 {
-  float guard;
-  float scale;
-  float frate;
-  
-      fstart = (float) Pstartfreq/127.0f;
-      fend = (float) Pendfreq/127.0f;  
-      frate = (float) Prate/60.0f;    //beats/second  
-      guard = 20.0f/fSAMPLE_RATE;
-      scale = 44100.0f/fSAMPLE_RATE;  //makes it so presets behave the same.  Filter maxes out at 
-                                      //~7kHz w/ 44.1k samplerate, but higher sample rates
-				      //allow it to go more.  Scale keeps the range equal for all presets
-				      //regardless of sample rate.      
-      fstart += guard;
-      fend += guard;
 
-      fstart *= scale;
-      fend *= scale;
+      float frate;
+      float fmin, fmax;
+      float fs = fSAMPLE_RATE;
+  
+      fstart = 20.0f + 6000.0f*((float) Pstartfreq/127.0f);
+      fend =  20.0f + 6000.0f*((float) Pendfreq/127.0f);  
+      frate = (float) Prate/60.0f;    //beats/second  
       
-      if (fstart >= 1.0f) fstart = 0.999999f;
-      if (fstart < 0.0f) fstart = 0.0f;
-      if (fend >= 1.0f) fend = 0.999999f;
-      if (fend < 0.0f) fend = 0.0f;  
+      if (fstart < fend) {
+      rampconst = frate/fs;
+      fmin = fstart;
+      fmax = fend;
+      }
+      else {
+      rampconst = -frate/fs;
+      fmax = fstart;
+      fmin = fend;    
+      }
       
-      rampconst = frate*(fend - fstart)/fSAMPLE_RATE;  
-      //fconst =  2.0f * sinf(PI*frate / fSAMPLE_RATE);  //this is a more precise interpretation
-      fconst =  D_PI*frate / fSAMPLE_RATE;  //this seems to work well at low frequencies
+      logconst = logf(fmax/fmin)/logf(2.0f);
+      linconst = D_PI*fmin/fs;
+      
+      //fconst =  2.0f * sinf(PI*frate / fs);  //this is a more precise interpretation
+      fconst =  D_PI*frate / fs;  //this seems to work well at low frequencies
+      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
+      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256 
 }
 
 void

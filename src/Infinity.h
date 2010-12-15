@@ -77,6 +77,7 @@ private:
   float fconst;  //sine wave oscillator frequency constant // 2*pi*freq/fs 
   float rampconst;  //ramp oscillator constant// 2*freq/SR  
   float fstart, fend;  //range of filter sweep
+  float linconst, logconst;
   float qq;
   class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
 
