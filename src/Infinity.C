@@ -66,7 +66,10 @@ bandstate[i].sinp += fconst*bandstate[i].cosp;
 bandstate[i].cosp -= bandstate[i].sinp*fconst;
 bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
 bandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
-if (bandstate[i].ramp > 1.0f) bandstate[i].ramp = 0.0f;  //probably faster than fmod()
+if (bandstate[i].ramp > 1.0f)  {
+ bandstate[i].ramp = 0.0f;  //probably faster than fmod()
+ //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,bandstate[i].sinp, bandstate[i].lfo, bandstate[i].ramp);
+ }
 if (bandstate[i].ramp < 0.0f) bandstate[i].ramp = 1.0f;  //if it is going in reverse (rampconst < 0)
 bandstate[i].vol = bandstate[i].level*bandstate[i].lfo;
 
@@ -139,19 +142,22 @@ Infinity::setvolume (int Pvolume)
 void
 Infinity::reinitfilter ()
 {
+float fbandnum = (float) (NUM_INF_BANDS);
 float halfpi = -M_PI/2.0f;  //offset so bandstate[0].sinp = -1.0 when bandstate[0].ramp = 0;
-for (int i=0; i<NUM_INF_BANDS; i++)  {  //get them started on their respective phases
-bandstate[i].sinp = sinf(halfpi + D_PI*((float) i)/((float) NUM_INF_BANDS));
-bandstate[i].cosp = cosf(halfpi + D_PI*((float) i)/((float) NUM_INF_BANDS));
-bandstate[i].ramp = ((float) i)/((float) NUM_INF_BANDS);
-bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
-
-//printf("sin: %f lfo: %f ramp: %f\n",bandstate[i].sinp, bandstate[i].lfo, bandstate[i].ramp);
       if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
       else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256  
+      
+for (int i=0; i<NUM_INF_BANDS; i++)  {  //get them started on their respective phases
+bandstate[i].sinp = sinf(halfpi + D_PI*((float) i)/fbandnum);
+bandstate[i].cosp = cosf(halfpi + D_PI*((float) i)/fbandnum);
+bandstate[i].ramp = ((float) i)/fbandnum;
+bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
+
+//printf("i: %d sin: %f lfo: %f ramp: %f\n",i,bandstate[i].sinp, bandstate[i].lfo, bandstate[i].ramp);
+
        
-  filterl[i]->setmix(0, 80.0f, 70.0f, 1.0f);
-  filterr[i]->setmix(0, 80.0f, 70.0f, 1.0f);
+  filterl[i]->setmix(0, NULL, NULL, NULL);
+  filterr[i]->setmix(0, NULL, NULL, NULL);
   filterl[i]->setmode(1);
   filterr[i]->setmode(1);
   filterl[i]->settype(2);
@@ -169,11 +175,16 @@ void
 Infinity::setpreset (int npreset)
 {
   const int PRESET_SIZE = 13;
-  const int NUM_PRESETS = 1;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Basic
-    {0, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60 }
-
+    {0, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60 },
+    //Rising Comb
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 0, 127, 2 },
+    //Falling Comb
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 0, 2 },
+    //Laser
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 2, 70 }     
   };
 
   if(npreset>NUM_PRESETS-1)  
@@ -222,8 +233,7 @@ Infinity::adjustfreqs()
       
       //fconst =  2.0f * sinf(PI*frate / fs);  //this is a more precise interpretation
       fconst =  D_PI*frate / fs;  //this seems to work well at low frequencies
-      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
-      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256 
+
 }
 
 void
@@ -248,8 +258,7 @@ Infinity::changepar (int npar, int value)
       break;
     case 9:
       Pq = value;
-      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
-      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256
+      reinitfilter();
       break;
      case 10:
       Pstartfreq = value;
