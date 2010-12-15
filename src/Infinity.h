@@ -60,7 +60,8 @@ private:
   int Pstartfreq;         //0 to 127// "Start" where the filter starts
   int Pendfreq;	       //0 to 127// "End" when the filter ends
   int Prate;           //BPM// "Tempo" how fast it sweeps
-
+  int Pstdf;           //filter bands offset L&R
+  
   struct filterstate {
   float sinp;
   float cosp;      //sinusoid oscillator state variables
@@ -68,7 +69,7 @@ private:
   float level;
   float lfo;
   float vol;
-  } bandstate[NUM_INF_BANDS];
+  } rbandstate[NUM_INF_BANDS], lbandstate[NUM_INF_BANDS];
   
   /*
   fconst = freq* 2*pi/fs;
@@ -79,6 +80,7 @@ private:
   float fstart, fend;  //range of filter sweep
   float linconst, logconst;
   float qq;
+  float stdiff;
   class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
 
   class FPreset *Fpre;

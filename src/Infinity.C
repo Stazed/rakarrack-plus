@@ -36,8 +36,8 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   for (i = 0; i<NUM_INF_BANDS; i++) {
   filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f);
   filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f);
-  bandstate[i].level = 1.0f;
-  bandstate[i].vol = 1.0f; 
+  rbandstate[i].level = 1.0f;
+  rbandstate[i].vol = 1.0f; 
    
   Pb[i] = 1;  
   }
@@ -48,6 +48,7 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   Pstartfreq = 5;
   Pendfreq = 80;
   Prate = 2;
+  stdiff = 0.5f;
   
   reinitfilter();
   adjustfreqs();
@@ -60,22 +61,38 @@ Infinity::~Infinity ()
 void inline
 Infinity::oscillator()
 {
-float modulate;
-for (int i=0; i<NUM_INF_BANDS; i++)  {
-bandstate[i].sinp += fconst*bandstate[i].cosp;
-bandstate[i].cosp -= bandstate[i].sinp*fconst;
-bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
-bandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
-if (bandstate[i].ramp > 1.0f)  {
- bandstate[i].ramp = 0.0f;  //probably faster than fmod()
- //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,bandstate[i].sinp, bandstate[i].lfo, bandstate[i].ramp);
- }
-if (bandstate[i].ramp < 0.0f) bandstate[i].ramp = 1.0f;  //if it is going in reverse (rampconst < 0)
-bandstate[i].vol = bandstate[i].level*bandstate[i].lfo;
+float rmodulate, lmodulate;
 
-  modulate = linconst*powf(2.0f,logconst*bandstate[i].ramp);
-  filterl[i]->directmod(modulate);
-  filterr[i]->directmod(modulate);
+for (int i=0; i<NUM_INF_BANDS; i++)  {
+//right
+rbandstate[i].sinp += fconst*rbandstate[i].cosp;
+rbandstate[i].cosp -= rbandstate[i].sinp*fconst;
+rbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
+rbandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
+if (rbandstate[i].ramp > 1.0f)  {
+ rbandstate[i].ramp = 0.0f;  //probably faster than fmod()
+ //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,rbandstate[i].sinp, rbandstate[i].lfo, rbandstate[i].ramp);
+ }
+if (rbandstate[i].ramp < 0.0f) rbandstate[i].ramp = 1.0f;  //if it is going in reverse (rampconst < 0)
+rbandstate[i].vol = rbandstate[i].level*rbandstate[i].lfo;
+
+//left
+lbandstate[i].sinp += fconst*lbandstate[i].cosp;
+lbandstate[i].cosp -= lbandstate[i].sinp*fconst;
+lbandstate[i].lfo = 0.5f*(1.0f + lbandstate[i].sinp);  //lfo modulates filter band volume
+lbandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
+if (lbandstate[i].ramp > 1.0f)  {
+ lbandstate[i].ramp = 0.0f;  //probably faster than fmod()
+ //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,lbandstate[i].sinp, lbandstate[i].lfo, lbandstate[i].ramp);
+ }
+if (lbandstate[i].ramp < 0.0f) lbandstate[i].ramp = 1.0f;  //if it is going in reverse (rampconst < 0)
+lbandstate[i].vol = lbandstate[i].level*lbandstate[i].lfo;
+
+  lmodulate = linconst*powf(2.0f,logconst*lbandstate[i].ramp);
+  rmodulate = linconst*powf(2.0f,logconst*rbandstate[i].ramp);
+  
+  filterl[i]->directmod(lmodulate);
+  filterr[i]->directmod(rmodulate);
 }
 
 }
@@ -88,8 +105,7 @@ Infinity::out (float * smpsl, float * smpsr)
 {
   int i, j;
   float tmpr, tmpl;
-
-  
+   
   for (i = 0; i<PERIOD; i++)  {
     //modulate
     oscillator();
@@ -97,8 +113,8 @@ Infinity::out (float * smpsl, float * smpsr)
     //run filter
    
     for (j=0; j<NUM_INF_BANDS; j++)  {
-    tmpl+=bandstate[j].vol*filterl[j]->filterout_s(smpsl[i]);
-    tmpr+=bandstate[j].vol*filterr[j]->filterout_s(smpsr[i]);
+    tmpl+=lbandstate[j].vol*filterl[j]->filterout_s(smpsl[i]);
+    tmpr+=rbandstate[j].vol*filterr[j]->filterout_s(smpsr[i]);
     } 
     efxoutl[i] = tmpl;
     efxoutr[i] = tmpr;     
@@ -143,17 +159,23 @@ void
 Infinity::reinitfilter ()
 {
 float fbandnum = (float) (NUM_INF_BANDS);
-float halfpi = -M_PI/2.0f;  //offset so bandstate[0].sinp = -1.0 when bandstate[0].ramp = 0;
+float halfpi = -M_PI/2.0f;  //offset so rbandstate[0].sinp = -1.0 when rbandstate[0].ramp = 0;
       if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
       else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256  
       
 for (int i=0; i<NUM_INF_BANDS; i++)  {  //get them started on their respective phases
-bandstate[i].sinp = sinf(halfpi + D_PI*((float) i)/fbandnum);
-bandstate[i].cosp = cosf(halfpi + D_PI*((float) i)/fbandnum);
-bandstate[i].ramp = ((float) i)/fbandnum;
-bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
-
-//printf("i: %d sin: %f lfo: %f ramp: %f\n",i,bandstate[i].sinp, bandstate[i].lfo, bandstate[i].ramp);
+//right
+rbandstate[i].sinp = sinf(halfpi + D_PI*((float) i)/fbandnum);
+rbandstate[i].cosp = cosf(halfpi + D_PI*((float) i)/fbandnum);
+rbandstate[i].ramp = ((float) i)/fbandnum;
+rbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
+//left
+float stateconst = fmod((stdiff + (float) i), fbandnum);
+lbandstate[i].sinp = sinf(halfpi + D_PI*stateconst/fbandnum);
+lbandstate[i].cosp = cosf(halfpi + D_PI*stateconst/fbandnum);
+lbandstate[i].ramp = stateconst/fbandnum;
+lbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
+//printf("i: %d sin: %f lfo: %f ramp: %f\n",i,rbandstate[i].sinp, rbandstate[i].lfo, rbandstate[i].ramp);
 
        
   filterl[i]->setmix(0, 80.0f, 70.0f, 1.0f);
@@ -164,8 +186,8 @@ bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band
   filterr[i]->settype(2);  //bandpass  
   filterl[i]->setq(qq);
   filterr[i]->setq(qq);
-  filterl[i]->directmod(bandstate[i].ramp);
-  filterr[i]->directmod(bandstate[i].ramp);
+  filterl[i]->directmod(lbandstate[i].ramp);
+  filterr[i]->directmod(rbandstate[i].ramp);
 
 }
   
@@ -254,7 +276,8 @@ Infinity::changepar (int npar, int value)
     case 7:
     case 8:
       Pb[npar - 1] = value;
-      bandstate[npar - 1].level = (float) value/64.0f;
+      rbandstate[npar - 1].level = (float) value/64.0f;
+      lbandstate[npar - 1].level = (float) value/64.0f;      
       break;
     case 9:
       Pq = value;
@@ -271,7 +294,10 @@ Infinity::changepar (int npar, int value)
      case 12:
       Prate = value;
       adjustfreqs();
-      break;           
+      break;   
+     case 13:
+      Pstdf = value;
+      stdiff = ((float) value)/64.0f;        
     };
 };
 
