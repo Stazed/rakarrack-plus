@@ -144,8 +144,8 @@ bandstate[i].cosp = cosf(halfpi + D_PI*((float) i)/((float) NUM_INF_BANDS));
 bandstate[i].ramp = ((float) i)/((float) NUM_INF_BANDS);
 bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
   
-  filterl[i]->setmix(0, NULL, NULL, NULL);
-  filterr[i]->setmix(0, NULL, NULL, NULL);
+  filterl[i]->setmix(0, 80.0f, 70.0f, 1.0f);
+  filterr[i]->setmix(0, 80.0f, 70.0f, 1.0f);
   filterl[i]->setmode(1);
   filterr[i]->setmode(1);
   filterl[i]->settype(2);
