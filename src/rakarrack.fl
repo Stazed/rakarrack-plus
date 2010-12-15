@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -533,10 +533,11 @@ return 1;} {}
 
 class SliderW {: {public Fl_Value_Slider}
 } {
-  Function {SliderW(int x,int y, int w, int h, const char *label=0):Fl_Value_Slider(x,y,w,h,label)} {} {
+  Function {SliderW(int x,int y, int w, int h, const char *label=0):Fl_Value_Slider(x,y,w,h,label)} {open
+  } {
     code {} {}
   }
-  Function {handle(int event)} {return_type int
+  Function {handle(int event)} {open return_type int
   } {
     code {if (event == FL_PUSH && Fl::visible_focus()) {
     Fl::focus(this);
@@ -559,7 +560,7 @@ class SliderW {: {public Fl_Value_Slider}
                   sww-Fl::box_dw(box()),
                   shh-Fl::box_dh(box()));} {}
   }
-  Function {handle2(int event, int X, int Y, int W, int H)} {return_type int
+  Function {handle2(int event, int X, int Y, int W, int H)} {open return_type int
   } {
     code {int mul=1;
 switch (event) {
@@ -685,7 +686,8 @@ switch (event) {
     return 0;
   }} {}
   }
-  Function {draw()} {} {
+  Function {draw()} {open
+  } {
     code {int X,Y,W,H;
 int sxx = x(), syy = y(), sww = w(), shh = h();
 int bxx = x(), byy = y(), bww = w(), bhh = h();
@@ -846,17 +848,19 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {1410 49 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} open
+      xywh {1873 106 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1607,7 +1611,7 @@ Fl::focus(Open_Order);
       }
       Fl_Group EQ {
         user_data 1
-        xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {2 212 162 193} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button eq_activar {
           label On
@@ -7259,7 +7263,7 @@ rkr->efx_RyanWah->changepar(0,(int)(o->value()+64));}
 rkr->efx_RyanWah->Pmode +=1;
 else
 rkr->efx_RyanWah->Pmode -=1;
-rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);} selected
+rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
           xywh {333 251 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 25
         }
         Fl_Value_Slider ryanwah_lp {
@@ -10634,6 +10638,181 @@ UpdateTGUI();
           xywh {719 165 70 22} align 0 minimum 20 maximum 360 step 1 value 100 textcolor 7
         }
       }
+      Fl_Group INFINITY {
+        user_data 1 open selected
+        xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button infinity_activar {
+          label On
+          user_data 2
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(116); //need to modify this
+ o->value(rkr->Infinity_Bypass);
+ return;
+} 
+rkr->Infinity_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Infinity->cleanup();
+findpos(0,(int)o->value(),o);}
+          xywh {10 215 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice infinity_preset {
+          label Preset
+          user_data 12000
+          callback {long long ud= (long long) v;
+if((ud==0)||(ud==12001))rkr->efx_Infinity->setpreset((int) o->value());} open
+          xywh {82 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label Plain
+            xywh {27 27 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider infinity_WD {
+          label {Wet/Dry}
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(130);
+ return;
+} 
+rkr->efx_Infinity->changepar(0,(int)(o->value()+64));}
+          xywh {54 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_Q {
+          label Res
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(131);
+ return;
+}
+rkr->efx_Infinity->changepar(9,(int)o->value());}
+          xywh {54 251 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_1 {
+          label 1
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(132);
+ return;
+} 
+rkr->efx_Infinity->changepar(1,(int)o->value());}
+          xywh {54 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_2 {
+          label 2
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(133);
+ return;
+} 
+rkr->efx_Infinity->changepar(2,(int)o->value());}
+          xywh {54 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_3 {
+          label 3
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(134);
+ return;
+} 
+rkr->efx_Infinity->changepar(3,(int)o->value());}
+          xywh {54 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_4 {
+          label 4
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(135);
+ return;
+} 
+rkr->efx_Infinity->changepar(4,(int)o->value());}
+          xywh {54 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_5 {
+          label 5
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(136);
+ return;
+} 
+rkr->efx_Infinity->changepar(5,(int)o->value());}
+          xywh {54 311 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_6 {
+          label 6
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(137);
+ return;
+} 
+rkr->efx_Infinity->changepar(6,(int)o->value());}
+          xywh {54 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_7 {
+          label 7
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(138);
+ return;
+} 
+rkr->efx_Infinity->changepar(7,(int)o->value());}
+          xywh {54 335 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_8 {
+          label 8
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(139);
+ return;
+} 
+rkr->efx_Infinity->changepar(8,(int)o->value());}
+          xywh {54 347 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_start {
+          label Start
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(140);
+ return;
+} 
+rkr->efx_Infinity->changepar(10,(int)o->value());}
+          xywh {54 359 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_end {
+          label End
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(141);
+ return;
+} 
+rkr->efx_Infinity->changepar(11,(int)o->value());}
+          xywh {54 371 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider infinity_rate {
+          label Tempo
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(141);
+ return;
+} 
+rkr->efx_Infinity->changepar(12,(int)o->value());}
+          xywh {54 383 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          class SliderW
+        }
+      }
     }
     Fl_Window BankWindow {
       callback {o->hide();
@@ -12203,7 +12382,7 @@ rkr->Aux_MIDI = (int)o->value();}
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
   } {
     code {Fl::args(argc,argv);
 fl_open_display();
@@ -12384,7 +12563,8 @@ CH_UB->color(bcolor);
  aux_source->color(bcolor);
  Label_Color_Change(label_color);} {}
   }
-  Function {Leds_Color_Change(Fl_Color bcolor)} {} {
+  Function {Leds_Color_Change(Fl_Color bcolor)} {open
+  } {
     code {leds_color=bcolor;
 chfsize(0);} {}
   }
@@ -12397,7 +12577,8 @@ hints->icon_mask=mask;
 hints->flags = IconPixmapHint | IconMaskHint;
 XSetWMHints(fl_display, fl_xid(window), hints);} {}
   }
-  Function {load_stat()} {} {
+  Function {load_stat()} {open
+  } {
     code {int x,y,w,h,k,b,f,l,a;
 
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -12677,7 +12858,8 @@ rkr->M_table[i].preset=f-3000;
 
 }} {}
   }
-  Function {save_stat(int i)} {} {
+  Function {save_stat(int i)} {open
+  } {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
 if (i==0)
@@ -12929,7 +13111,8 @@ for(i=1; i<=JackIn->size();i++)
 
 }} {}
   }
-  Function {Put_Loaded()} {} {
+  Function {Put_Loaded()} {open
+  } {
     code {//General
 int i;
 
@@ -13202,23 +13385,28 @@ for(i=0;i<10;i++)
     vibe_activar->value(rkr->Vibe_Bypass);
     vibe_preset->do_callback(vibe_preset,1);
     break;
+    case 46://Infinity
+    infinity_activar->value(rkr->Infinity_Bypass);
+    infinity_preset->do_callback(infinity_preset,1);
+    break;
+
   }
 
 }
 
 reordena();} {}
   }
-  Function {tick(void* v)} {return_type {static void}
+  Function {tick(void* v)} {open return_type {static void}
   } {
     code {Fl_Box *o = (Fl_Box*)v;
 o->do_callback();
 Fl::repeat_timeout(.04,tick,v);} {}
   }
-  Function {preset_click(Fl_Button* o, void* v)} {return_type {static void}
+  Function {preset_click(Fl_Button* o, void* v)} {open return_type {static void}
   } {
     code {((RKRGUI*)(o->parent()->parent()->user_data()))->preset_click_i(o,v);} {}
   }
-  Function {preset_click_i(Fl_Button* o, void*)} {C return_type {inline void}
+  Function {preset_click_i(Fl_Button* o, void*)} {open C return_type {inline void}
   } {
     code {int ok;
 int num; 
@@ -13297,7 +13485,8 @@ Preset_Counter->do_callback();
 }
 }} {}
   }
-  Function {make_window_banks()} {} {
+  Function {make_window_banks()} {open
+  } {
     code {int i,j,x,y,num;
 int elw,elh;
 
@@ -13352,7 +13541,8 @@ CH_UB->color(fore_color);
 
 light_preset(rkr->Selected_Preset);} {}
   }
-  Function {reordena()} {} {
+  Function {reordena()} {open
+  } {
     code {int i;
 unsigned int x[10],y[10];
 ulong s[10];
@@ -13443,6 +13633,7 @@ y[9]=E10->y();
 	COMPBAND->hide();
 	OTREM->hide();
 	VIBE->hide();
+	INFINITY->hide();
 	
 	
 	
@@ -14024,6 +14215,17 @@ switch (rkr->efx_order[i])
        else rkr->active[i]=0;
        break; 
 
+   case 46:
+       INFINITY->position(x[i],y[i]);
+       infinity_activar->shortcut(s[i]);
+       if(!rkr->deachide)INFINITY->show();
+       if(rkr->Infinity_Bypass)
+       {
+       rkr->active[i]=1; 
+       if(rkr->deachide)INFINITY->show();
+       }
+       else rkr->active[i]=0;
+       break; 
 
  }
  
@@ -14149,7 +14351,8 @@ rkr->help_displayed=1;
 
 visor->show();} {}
   }
-  Function {MiraClientes()} {} {
+  Function {MiraClientes()} {open
+  } {
     code {int i;
 char temp[128];
 char temp1[128];
@@ -14243,7 +14446,8 @@ JackIn->clear();
    
    free(iports);} {}
   }
-  Function {MiraConfig()} {} {
+  Function {MiraConfig()} {open
+  } {
     code {int i = 1;
 int k;
 while (BMidiIn->text(i) != NULL)
@@ -14490,7 +14694,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 Font_Bro->value(rkr->font+1);} {}
   }
-  Function {BankWin_Label(char *filename)} {} {
+  Function {BankWin_Label(char *filename)} {open
+  } {
     code {char tmp[256];
 
 
@@ -14498,7 +14703,8 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%s   v%s - Bank Manager - %s",rkr->jackcliname,VERSION,fl_filename_name(filename));
 BankWindow->copy_label(tmp);} {}
   }
-  Function {is_modified()} {} {
+  Function {is_modified()} {open
+  } {
     code {int ok;
 
 
@@ -14527,7 +14733,8 @@ if (rkr->modified)
 
 }} {}
   }
-  Function {Put_Loaded_Bank()} {} {
+  Function {Put_Loaded_Bank()} {open
+  } {
     code {int k=1;
 
 for (int t=0; t<ob->children();t++)
@@ -14544,7 +14751,8 @@ for (int t=0; t<ob->children();t++)
   
 FillML(2);} {}
   }
-  Function {Chord(int eff)} {} {
+  Function {Chord(int eff)} {open
+  } {
     code {int tipo,undi;
 tipo=0;
 undi=0;
@@ -16301,7 +16509,8 @@ rkr->OnOffC--;
 
 }} {}
   }
-  Function {light_preset(int npreset)} {} {
+  Function {light_preset(int npreset)} {open
+  } {
     code {if(!made) return;
 
 for (int t=0; t<ob->children();t++)
@@ -16316,7 +16525,8 @@ for (int t=0; t<ob->children();t++)
   
   }} {}
   }
-  Function {unlight_preset(int npreset)} {} {
+  Function {unlight_preset(int npreset)} {open
+  } {
     code {if(!made) return;
 
 for (int t=0; t<ob->children();t++)
@@ -16331,7 +16541,8 @@ for (int t=0; t<ob->children();t++)
   
   }} {}
   }
-  Function {PutBackground()} {} {
+  Function {PutBackground()} {open
+  } {
     code {delete back;
 back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 if(!rkr->EnableBackgroundImage)
@@ -16423,7 +16634,8 @@ MenuB->image(InOut->image());
 
 Fl::redraw();} {}
   }
-  Function {chfsize(int value)} {} {
+  Function {chfsize(int value)} {open
+  } {
     code {unsigned char k;
 
 
@@ -16519,7 +16731,8 @@ ChangeActives();
  
 Fl::redraw();} {}
   }
-  Function {adjustfont()} {} {
+  Function {adjustfont()} {open
+  } {
     code {int change,value;
 
 change = Principal->w() - rkr->resolution;
@@ -16528,7 +16741,8 @@ rkr->resolution=Principal->w();
 rkr->relfontsize +=value;
 chfsize(value);} {}
   }
-  Function {ChangeActives()} {} {
+  Function {ChangeActives()} {open
+  } {
     code {Fl_Color on = fl_lighter(label_color);
 Fl_Color off = fl_darker(label_color);
 
@@ -16564,7 +16778,8 @@ UPS_LED->redraw();
 CLIP_LED->color(fl_darker(FL_RED));
 LMT_LED->color(fl_darker(leds_color));} {}
   }
-  Function {findpos(int num, int value, Fl_Widget *w)} {} {
+  Function {findpos(int num, int value, Fl_Widget *w)} {open
+  } {
     code {int i;
 Fl_Color on = fl_lighter(label_color);
 Fl_Color off= fl_darker(label_color);
@@ -16656,7 +16871,8 @@ Buttons_Color_Change(fore_color);
 save_stat(3);
 Fl::redraw();} {}
   }
-  Function {FillML(int type)} {} {
+  Function {FillML(int type)} {open
+  } {
     code {int i,j,k;
 char tmp[256];
 memset(tmp,0, sizeof(tmp));
@@ -16718,7 +16934,8 @@ TPresets->redraw();
 
 DisAssigns();} {}
   }
-  Function {DisAssigns()} {} {
+  Function {DisAssigns()} {open
+  } {
     code {int i,j,k;
 char tmp[8];
 
@@ -16971,7 +17188,8 @@ for(i=0;i<128;i++)
 
 }} {}
   }
-  Function {Prepare_Order()} {} {
+  Function {Prepare_Order()} {open
+  } {
     code {int i;
 Order_Bro->clear();
 
@@ -16987,7 +17205,8 @@ Fill_Avail(rkr->eff_filter);
 
 Order_Bro->select(1);} {}
   }
-  Function {Show_Next_Time()} {} {
+  Function {Show_Next_Time()} {open
+  } {
     code {if(rkr->mess_dis) return;
 Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
@@ -17018,7 +17237,8 @@ looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
 looper_t2->redraw();} {}
   }
-  Function {UpdateTGUI()} {} {
+  Function {UpdateTGUI()} {open
+  } {
     code {if(rkr->Looper_Bypass)
    {
    looper_Tempo->value(rkr->efx_Looper->getpar(14));
@@ -17138,6 +17358,11 @@ if(rkr->Chorus_Bypass)
   {
     vibe_freq->value(rkr->efx_Vibe->getpar(1));
     vibe_freq->redraw();  
+  }
+  if(rkr->Infinity_Bypass)
+  {
+    infinity_rate->value(rkr->efx_Infinity->getpar(12));
+    infinity_rate->redraw();  
   }} {}
   }
   Function {ActACI()} {} {
@@ -17196,7 +17421,7 @@ rkr->last_auxvalue = value;
 
 }} {}
   }
-  Function {Busca_Eff(int num)} {return_type int
+  Function {Busca_Eff(int num)} {open return_type int
   } {
     code {int i;
 for(i=0; i<rkr->NumEffects;i++)
@@ -17206,7 +17431,8 @@ for(i=0; i<rkr->NumEffects;i++)
  }  
  return(i);} {}
   }
-  Function {Fill_Avail(int filter)} {} {
+  Function {Fill_Avail(int filter)} {open
+  } {
     code {int i,j,t,k;
 
 Avail_Bro->clear();
@@ -17238,7 +17464,8 @@ for (i=0; i<rkr->NumEffects;i++)
 
 Avail_Bro->select(1);} {}
   }
-  Function {highlight()} {} {
+  Function {highlight()} {open
+  } {
     code {int tipo=0;
 long long k=0;
 
@@ -17309,7 +17536,7 @@ if(tecla != last_tecla)
 
 }} {}
   }
-  Function {search_but(int x, int y)} {return_type int
+  Function {search_but(int x, int y)} {open return_type int
   } {
     code {for (int t=0; t<ob->children();t++)
   {
@@ -17363,7 +17590,7 @@ if (strstr(fs->d_name,".rkrb")!=NULL)
 CH_UB->value(0);
 closedir(dir);} {}
   }
-  Function {prevnext(int e)} {return_type {static int}
+  Function {prevnext(int e)} {open return_type {static int}
   } {
     code {if(e==5)
 {
@@ -17492,7 +17719,7 @@ if(rkr->comemouse)
    } 
 }} {}
   }
-  Function {addpreset(Fl_Widget *w, int num)} {return_type {inline void}
+  Function {addpreset(Fl_Widget *w, int num)} {open return_type {inline void}
   } {
     code {if(num==12) return;
 const char *name = fl_input("Preset Name?","");
@@ -17503,7 +17730,8 @@ sprintf(NewName,"*%s",name);
 add_name(w,NewName);
 rkr->SaveIntPreset(num,NewName);} {}
   }
-  Function {add_name(Fl_Widget *w, char *name)} {} {
+  Function {add_name(Fl_Widget *w, char *name)} {open
+  } {
     code {Fl_Choice *s = (Fl_Choice * ) w;
 s->add(name);
 
@@ -17520,7 +17748,7 @@ for(int i=0; i<m->size(); i++)
      p->labelsize(k);
      }} {}
   }
-  Function {FindWidget(int num)} {return_type {Fl_Widget *}
+  Function {FindWidget(int num)} {open return_type {Fl_Widget *}
   } {
     code {for (int t=0; t<Principal->children();t++)
   {
@@ -17544,7 +17772,8 @@ for(int i=0; i<m->size(); i++)
    
 return NULL;} {}
   }
-  Function {ReadIntPresets()} {} {
+  Function {ReadIntPresets()} {open
+  } {
     code {FILE *fn;
 char tempfile[256];
 char buf[256];
@@ -17593,7 +17822,8 @@ s->value(0);
 s->redraw();
 rkr->DelIntPreset(num,Rname);} {}
   }
-  Function {Prep_Reorden(int source, int dest)} {} {
+  Function {Prep_Reorden(int source, int dest)} {open
+  } {
     code {int x = rkr->efx_order[source];
 int y = rkr->efx_order[dest];
 
@@ -17604,7 +17834,8 @@ reordena();
 
 if (Order->visible())Prepare_Order();} {}
   }
-  Function {make_table_window()} {} {
+  Function {make_table_window()} {open
+  } {
     code {scroll->begin();
 
   for (int y=0; y<128; y++)
@@ -17656,7 +17887,7 @@ int num = (int) kk;
 rkr->M_table[num-1000].bank=(int) o->value();
 fill_mptable(num+1000,rkr->M_table[num-1000].bank);} {}
   }
-  Function {p_click(Fl_Choice* o, void* v)} {return_type {static void}
+  Function {p_click(Fl_Choice* o, void* v)} {open return_type {static void}
   } {
     code {((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->p_click_i(o,v);} {}
   }

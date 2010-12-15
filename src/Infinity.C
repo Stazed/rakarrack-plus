@@ -36,9 +36,21 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   for (i = 0; i<NUM_INF_BANDS; i++) {
   filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1);
   filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1);
+  bandstate[i].level = 1.0f;
+  bandstate[i].vol = 1.0f; 
+   
+  Pb[i] = 1;  
   }
-  setpreset (Ppreset);
+
+  //setpreset (Ppreset);
+  Pvolume = 0;
+  Pq = 20;
+  Pstartfreq = 0;
+  Pendfreq = 80;
+  Prate = 20;
+  
   reinitfilter();
+  adjustfreqs();
 };
 
 Infinity::~Infinity ()
@@ -51,9 +63,10 @@ Infinity::oscillator()
 for (int i=0; i<NUM_INF_BANDS; i++)  {
 bandstate[i].sinp += fconst*bandstate[i].cosp;
 bandstate[i].cosp -= bandstate[i].sinp*fconst;
-bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);
-bandstate[i].ramp += rampconst;
-if (bandstate[i].ramp >= 1.0f) bandstate[i].ramp = 0.0f;  //probably faster than fmod()
+bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
+bandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
+if (bandstate[i].ramp > fend) bandstate[i].ramp = fstart;  //probably faster than fmod()
+if (bandstate[i].ramp < fstart) bandstate[i].ramp = fend;  //if it is going in reverse (rampconst < 0)
 bandstate[i].vol = bandstate[i].level*bandstate[i].lfo;
 
   filterl[i]->directmod(bandstate[i].ramp);
@@ -70,16 +83,16 @@ Infinity::out (float * smpsl, float * smpsr)
 {
   int i, j;
   float tmpr, tmpl;
+
+  
   for (i = 0; i<PERIOD; i++)  {
-    tmpr = tmpl = 0.0f;
-    
     //modulate
     oscillator();
-    
+   tmpr = tmpl = 0.0f;   
     //run filter
     for (j=0; j<NUM_INF_BANDS; j++)  {
-    tmpl+=bandstate[j].vol*filterl[i]->filterout_s(smpsl[i]);
-    tmpr+=bandstate[j].vol*filterr[i]->filterout_s(smpsr[i]);
+    tmpl+=bandstate[j].vol*filterl[j]->filterout_s(smpsl[i]);
+    tmpr+=bandstate[j].vol*filterr[j]->filterout_s(smpsr[i]);
     }
     efxoutl[i] = tmpl;
     efxoutr[i] = tmpr;
@@ -118,11 +131,12 @@ Infinity::setvolume (int Pvolume)
 void
 Infinity::reinitfilter ()
 {
-
+float halfpi = -M_PI/2.0f;  //offset so bandstate[0].sinp = -1.0 when bandstate[0].ramp = 0;
 for (int i=0; i<NUM_INF_BANDS; i++)  {  //get them started on their respective phases
-bandstate[i].sinp = sinf(D_PI*((float) i)/((float) NUM_INF_BANDS));
-bandstate[i].cosp = cosf(D_PI*((float) i)/((float) NUM_INF_BANDS));
+bandstate[i].sinp = sinf(halfpi + D_PI*((float) i)/((float) NUM_INF_BANDS));
+bandstate[i].cosp = cosf(halfpi + D_PI*((float) i)/((float) NUM_INF_BANDS));
 bandstate[i].ramp = ((float) i)/((float) NUM_INF_BANDS);
+bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
   
   filterl[i]->setmix(0, NULL, NULL, NULL);
   filterr[i]->setmix(0, NULL, NULL, NULL);
@@ -134,6 +148,9 @@ bandstate[i].ramp = ((float) i)/((float) NUM_INF_BANDS);
   filterr[i]->setq(qq);
   filterl[i]->directmod(bandstate[i].ramp);
   filterr[i]->directmod(bandstate[i].ramp);
+  
+      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
+      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256  
 }
   
 };
@@ -141,19 +158,11 @@ bandstate[i].ramp = ((float) i)/((float) NUM_INF_BANDS);
 void
 Infinity::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 18;
-  const int NUM_PRESETS = 5;
+  const int PRESET_SIZE = 13;
+  const int NUM_PRESETS = 1;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Wah Pedal
-    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1 },
-    //Mutron
-    {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 1 },
-    //Phase Wah
-    {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 1 },
-    //Succulent Phaser
-    {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 1 },
-    //Quacky
-    {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 1 } 
+    //Basic
+    {0, 127, 127, 127, 127, 127, 127, 127, 127, 10, 20, 80, 60 }
 
   };
 
@@ -175,42 +184,74 @@ Infinity::setpreset (int npreset)
   reinitfilter ();
 };
 
+void
+Infinity::adjustfreqs()
+{
+  float guard;
+  float scale;
+  float frate;
+  
+      fstart = (float) Pendfreq/127.0f;
+      fend = (float) Pstartfreq/127.0f;  
+      frate = (float) Prate/60.0f;    //beats/second  
+      guard = 20.0f/fSAMPLE_RATE;
+      scale = 44100.0f/fSAMPLE_RATE;  //makes it so presets behave the same.  Filter maxes out at 
+                                      //~7kHz w/ 44.1k samplerate, but higher sample rates
+				      //allow it to go more.  Scale keeps the range equal for all presets
+				      //regardless of sample rate.      
+      fstart += guard;
+      fend += guard;
+
+      fstart *= scale;
+      fend *= scale;
+      
+      if (fstart >= 1.0f) fstart = 0.999999f;
+      if (fstart < 0.0f) fstart = 0.0f;
+      if (fend >= 1.0f) fend = 0.999999f;
+      if (fend < 0.0f) fend = 0.0f;  
+      
+      rampconst = frate*(fend - fstart)/fSAMPLE_RATE;  
+      //fconst =  2.0f * sinf(PI*frate / fSAMPLE_RATE);  //this is a more precise interpretation
+      fconst =  D_PI*frate / fSAMPLE_RATE;  //this seems to work well at low frequencies
+}
 
 void
 Infinity::changepar (int npar, int value)
 {
+
   switch (npar)
     {
     case 0:
       setvolume (value);
       break;
     case 1:
-      break;
     case 2:
-      break;
     case 3:
-      break;
     case 4:
-      break;
     case 5:
-      break;
     case 6:
-      break;
     case 7:
-      break;
     case 8:
+      Pb[npar - 1] = value;
+      bandstate[npar - 1].level = (float) value/64.0f;
       break;
     case 9:
+      Pq = value;
+      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
+      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256
       break;
      case 10:
+      Pstartfreq = value;
+      adjustfreqs();
       break;     
      case 11:
+      Pendfreq = value;
+      adjustfreqs();
       break;     
      case 12:
-
-      break;
-
-           
+      Prate = value;
+      adjustfreqs();
+      break;           
     };
 };
 
@@ -223,58 +264,26 @@ Infinity::getpar (int npar)
       return (Pvolume);
       break;
     case 1:
-      return ();
-      break;
     case 2:
-      return ();
-      break;
     case 3:
-      return ();
-      break;
     case 4:
-      return ();
-      break;
     case 5:
-      return ();
-      break;
     case 6:
-      return ();
-      break;
     case 7:
-      return ();
-      break;
     case 8:
-      return ();
+      return (Pb[npar + 1]);
       break;
     case 9:
-      return ();
+      return (Pq);
       break;
     case 10:
-      return ();
+      return (Pstartfreq);
       break;
     case 11:
-      return ();
+      return (Pendfreq);
       break;
     case 12:
-      return ();
-      break;
-    case 13:
-      return ();
-      break;
-    case 14:
-      return ();    
-      break;
-    case 15:
-      return ();
-      break;
-    case 16:
-      return ();
-      break;
-    case 17:
-      return ();  
-      break;
-    case 18:
-      return ();
+      return (Prate);
       break;
     default:
       return (0);

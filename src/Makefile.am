@@ -131,7 +131,9 @@ rakarrack_SOURCES = main.C \
 	CompBand.C \
 	Opticaltrem.C \
 	Vibe.C \
-	MIDIConverter.C
+	MIDIConverter.C \
+	Infinity.C \
+	Infinity.h
 	
 	
 	

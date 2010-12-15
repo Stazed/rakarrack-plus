@@ -20,10 +20,9 @@
 
 */
 
-#ifndef INIFINITY_H
+#ifndef INFINITY_H
 #define INFINITY_H
 #include "global.h"
-#include "EffectLFO.h"
 #include "RBFilter.h"
 
 #define NUM_INF_BANDS 8
@@ -51,15 +50,16 @@ public:
 private:
 
   void setvolume (int Pvolume);
+  void adjustfreqs();
   void oscillator();
   void reinitfilter ();
 	  
-  int Pvolume;		//For wet/dry mix
-  int Pb[NUM_INF_BANDS];          //Pbx -64 to 64// adjusts mix of each filter band
-  int Pq;              //0 to 127// filter resonance
-  int Pcenter;         //300 to 8000// where the filter is centered
-  int Pspread;	       //300 to 8000// how wide of area covered by filter range
-  int Prate;           //0 to 127// how fast it sweeps
+  int Pvolume;		//For wet/dry mix // "Wet/Dry"
+  int Pb[NUM_INF_BANDS];          //Pbx -64 to 64// "Band" each label "1" through "8" adjusts mix of each filter band
+  int Pq;              //-64 to 64// "Res." filter resonance
+  int Pstartfreq;         //0 to 127// "Start" where the filter starts
+  int Pendfreq;	       //0 to 127// "End" when the filter ends
+  int Prate;           //BPM// "Tempo" how fast it sweeps
 
   struct filterstate {
   float sinp;
@@ -72,12 +72,12 @@ private:
   
   /*
   fconst = freq* 2*pi/fs;
-  rconst = 2*freq/fs;
+  rampconst = 2*freq/fs;
  */
   float fconst;  //sine wave oscillator frequency constant // 2*pi*freq/fs 
   float rampconst;  //ramp oscillator constant// 2*freq/SR  
-  float powconst;  //log(1 + spread/centerfreq)/log(2)
-
+  float fstart, fend;  //range of filter sweep
+  float qq;
   class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
 
   class FPreset *Fpre;

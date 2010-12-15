@@ -285,7 +285,7 @@ RKR::RKR ()
   efx_CompBand = new CompBand(efxoutl,efxoutr);
   efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr);
   efx_Vibe = new Vibe(efxoutl,efxoutr);
-
+  efx_Infinity = new Infinity(efxoutl,efxoutr);
 
   U_Resample = new Resample(UpQual);
   D_Resample = new Resample(DownQual);
@@ -322,7 +322,7 @@ RKR::RKR ()
 128 - Synthesis
 */
 
-  NumEffects = 46;
+  NumEffects = 47;
 
   {
     static const char *los_names[] =
@@ -348,6 +348,7 @@ RKR::RKR ()
 "Expander","25","32",
 "Flanger","7","2",
 "Harmonizer","14","128",
+"Infinity","46","16",
 "Looper","30","128",
 "MusicalDelay","15","4",
 "MuTroMojo","31","16",
@@ -569,6 +570,7 @@ RKR::RKR ()
 "Harmonizer Pan","49","14",
 "Harmonizer Wet/Dry","31","14",
 "Input","14","50",
+//Infinity when final
 "Looper Auto Play"," 271","30",
 "Looper Clear","279","30",
 "Looper Level 1","268","30",
@@ -1419,6 +1421,7 @@ RKR::cleanup_efx ()
   efx_Vibe->cleanup();
   RC->cleanup();
   efx_FLimiter->cleanup();
+  efx_Infinity->cleanup();
 
 };
 
@@ -1882,6 +1885,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 		  Vol_Efx(45,efx_Vibe->outvolume);
                 }
               break;  
+	     
+	     case 46:
+	      if (Infinity_Bypass)
+	      {
+                  efx_Infinity->out(efxoutl, efxoutr);
+		  Vol_Efx(46,efx_Vibe->outvolume);	        
+		
+		}
 
 
 
