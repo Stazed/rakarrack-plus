@@ -69,8 +69,8 @@ public:
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
-#include <FL/Fl_Input.H>
 #include <FL/Fl_Value_Input.H>
+#include <FL/Fl_Input.H>
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Tabs.H>
 #include <FL/Fl_File_Input.H>
@@ -3311,45 +3311,45 @@ private:
   void cb_infinity_Q_i(SliderW*, void*);
   static void cb_infinity_Q(SliderW*, void*);
 public:
-  SliderW *infinity_1;
+  Fl_Value_Input *infinity_1;
 private:
-  void cb_infinity_1_i(SliderW*, void*);
-  static void cb_infinity_1(SliderW*, void*);
+  void cb_infinity_1_i(Fl_Value_Input*, void*);
+  static void cb_infinity_1(Fl_Value_Input*, void*);
 public:
-  SliderW *infinity_2;
+  Fl_Value_Input *infinity_2;
 private:
-  void cb_infinity_2_i(SliderW*, void*);
-  static void cb_infinity_2(SliderW*, void*);
+  void cb_infinity_2_i(Fl_Value_Input*, void*);
+  static void cb_infinity_2(Fl_Value_Input*, void*);
 public:
-  SliderW *infinity_3;
+  Fl_Value_Input *infinity_3;
 private:
-  void cb_infinity_3_i(SliderW*, void*);
-  static void cb_infinity_3(SliderW*, void*);
+  void cb_infinity_3_i(Fl_Value_Input*, void*);
+  static void cb_infinity_3(Fl_Value_Input*, void*);
 public:
-  SliderW *infinity_4;
+  Fl_Value_Input *infinity_4;
 private:
-  void cb_infinity_4_i(SliderW*, void*);
-  static void cb_infinity_4(SliderW*, void*);
+  void cb_infinity_4_i(Fl_Value_Input*, void*);
+  static void cb_infinity_4(Fl_Value_Input*, void*);
 public:
-  SliderW *infinity_5;
+  Fl_Value_Input *infinity_5;
 private:
-  void cb_infinity_5_i(SliderW*, void*);
-  static void cb_infinity_5(SliderW*, void*);
+  void cb_infinity_5_i(Fl_Value_Input*, void*);
+  static void cb_infinity_5(Fl_Value_Input*, void*);
 public:
-  SliderW *infinity_6;
+  Fl_Value_Input *infinity_6;
 private:
-  void cb_infinity_6_i(SliderW*, void*);
-  static void cb_infinity_6(SliderW*, void*);
+  void cb_infinity_6_i(Fl_Value_Input*, void*);
+  static void cb_infinity_6(Fl_Value_Input*, void*);
 public:
-  SliderW *infinity_7;
+  Fl_Value_Input *infinity_7;
 private:
-  void cb_infinity_7_i(SliderW*, void*);
-  static void cb_infinity_7(SliderW*, void*);
+  void cb_infinity_7_i(Fl_Value_Input*, void*);
+  static void cb_infinity_7(Fl_Value_Input*, void*);
 public:
-  SliderW *infinity_8;
+  Fl_Value_Input *infinity_8;
 private:
-  void cb_infinity_8_i(SliderW*, void*);
-  static void cb_infinity_8(SliderW*, void*);
+  void cb_infinity_8_i(Fl_Value_Input*, void*);
+  static void cb_infinity_8(Fl_Value_Input*, void*);
 public:
   SliderW *infinity_start;
 private:
