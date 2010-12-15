@@ -372,6 +372,7 @@ switch(Tap_SetValue)
   if(Echotron_Bypass)  efx_Echotron->changepar(5,Tap_TempoSetD);
   if(Opticaltrem_Bypass) efx_Opticaltrem->changepar(1,Tap_TempoSetL);
   if(Vibe_Bypass) efx_Vibe->changepar(1,Tap_TempoSetL);
+  if(Infinity_Bypass) efx_Infinity->changepar(12,Tap_TempoSetL);
 
   if(Echo_Bypass) 
    {
