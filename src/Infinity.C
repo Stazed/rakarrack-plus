@@ -175,11 +175,16 @@ void
 Infinity::setpreset (int npreset)
 {
   const int PRESET_SIZE = 13;
-  const int NUM_PRESETS = 1;
+  const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Basic
-    {0, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60 }
-
+    {0, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60 },
+    //Rising Comb
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 0, 127, 2 },
+    //Falling Comb
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 0, 2 },
+    //Laser
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 2, 70 }     
   };
 
   if(npreset>NUM_PRESETS-1)  
