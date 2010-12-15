@@ -44,10 +44,10 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
 
   //setpreset (Ppreset);
   Pvolume = 0;
-  Pq = 20;
-  Pstartfreq = 0;
-  Pendfreq = 80;
-  Prate = 20;
+  Pq = 30;
+  Pstartfreq = 2;
+  Pendfreq = 20;
+  Prate = 2;
   
   reinitfilter();
   adjustfreqs();
@@ -66,7 +66,7 @@ bandstate[i].cosp -= bandstate[i].sinp*fconst;
 bandstate[i].lfo = 0.5f*(1.0f + bandstate[i].sinp);  //lfo modulates filter band volume
 bandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
 if (bandstate[i].ramp > fend) bandstate[i].ramp = fstart;  //probably faster than fmod()
-if (bandstate[i].ramp < fstart) bandstate[i].ramp = fend;  //if it is going in reverse (rampconst < 0)
+//if (bandstate[i].ramp < fstart) bandstate[i].ramp = fend;  //if it is going in reverse (rampconst < 0)
 bandstate[i].vol = bandstate[i].level*bandstate[i].lfo;
 
   filterl[i]->directmod(bandstate[i].ramp);
@@ -90,12 +90,18 @@ Infinity::out (float * smpsl, float * smpsr)
     oscillator();
    tmpr = tmpl = 0.0f;   
     //run filter
+   
     for (j=0; j<NUM_INF_BANDS; j++)  {
     tmpl+=bandstate[j].vol*filterl[j]->filterout_s(smpsl[i]);
     tmpr+=bandstate[j].vol*filterr[j]->filterout_s(smpsr[i]);
-    }
+    } 
     efxoutl[i] = tmpl;
-    efxoutr[i] = tmpr;
+    efxoutr[i] = tmpr;     
+  
+    /* Debug
+    efxoutl[i] = smpsl[i]*bandstate[0].vol*bandstate[0].ramp;
+    efxoutr[i] = smpsr[i]*bandstate[3].ramp*bandstate[3].vol;
+       */
   }
  
 };
@@ -191,8 +197,8 @@ Infinity::adjustfreqs()
   float scale;
   float frate;
   
-      fstart = (float) Pendfreq/127.0f;
-      fend = (float) Pstartfreq/127.0f;  
+      fstart = (float) Pstartfreq/127.0f;
+      fend = (float) Pendfreq/127.0f;  
       frate = (float) Prate/60.0f;    //beats/second  
       guard = 20.0f/fSAMPLE_RATE;
       scale = 44100.0f/fSAMPLE_RATE;  //makes it so presets behave the same.  Filter maxes out at 
