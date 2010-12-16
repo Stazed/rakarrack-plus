@@ -331,6 +331,8 @@ Infinity::getpar (int npar)
     case 12:
       return (Prate);
       break;
+    case 13:
+      return(Pstdf);
     default:
       return (0);
     };
