@@ -48,7 +48,9 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   Pstartfreq = 5;
   Pendfreq = 80;
   Prate = 2;
+  Psubdiv = 32;
   stdiff = 0.5f;
+  volmaster = 0.25;
   
   reinitfilter();
   adjustfreqs();
@@ -67,7 +69,7 @@ for (int i=0; i<NUM_INF_BANDS; i++)  {
 //right
 rbandstate[i].sinp += fconst*rbandstate[i].cosp;
 rbandstate[i].cosp -= rbandstate[i].sinp*fconst;
-rbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
+rbandstate[i].lfo = (1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
 rbandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
 if (rbandstate[i].ramp > 1.0f)  {
  rbandstate[i].ramp = 0.0f;  //probably faster than fmod()
@@ -79,8 +81,9 @@ rbandstate[i].vol = rbandstate[i].level*rbandstate[i].lfo;
 //left
 lbandstate[i].sinp += fconst*lbandstate[i].cosp;
 lbandstate[i].cosp -= lbandstate[i].sinp*fconst;
-lbandstate[i].lfo = 0.5f*(1.0f + lbandstate[i].sinp);  //lfo modulates filter band volume
-lbandstate[i].ramp += rampconst;  //ramp modulates filter band frequency cutoff
+lbandstate[i].lfo = (1.0f + lbandstate[i].sinp);  //lfo modulates filter band volume
+if (reverse) lbandstate[i].ramp -= rampconst;  //left reversed from right
+else lbandstate[i].ramp += rampconst;   //normal mode
 if (lbandstate[i].ramp > 1.0f)  {
  lbandstate[i].ramp = 0.0f;  //probably faster than fmod()
  //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,lbandstate[i].sinp, lbandstate[i].lfo, lbandstate[i].ramp);
@@ -116,8 +119,8 @@ Infinity::out (float * smpsl, float * smpsr)
     tmpl+=lbandstate[j].vol*filterl[j]->filterout_s(smpsl[i]);
     tmpr+=rbandstate[j].vol*filterr[j]->filterout_s(smpsr[i]);
     } 
-    efxoutl[i] = tmpl;
-    efxoutr[i] = tmpr;     
+    efxoutl[i] = volmaster*tmpl;
+    efxoutr[i] = volmaster*tmpr;     
   
     /* Debug
     efxoutl[i] = smpsl[i]*bandstate[0].vol*bandstate[0].ramp;
@@ -160,8 +163,14 @@ Infinity::reinitfilter ()
 {
 float fbandnum = (float) (NUM_INF_BANDS);
 float halfpi = -M_PI/2.0f;  //offset so rbandstate[0].sinp = -1.0 when rbandstate[0].ramp = 0;
-      if(Pq<0) qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
-      else qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256  
+      if(Pq<0) {
+       qq = powf(2.0f,((float) Pq)/64.0f);  //q ranges down to 0.5
+       volmaster = 1.0f;
+       }
+      else {
+       qq = powf(2.0f,((float) Pq)/8.0f);  //q can go up to 256  
+       volmaster = 1.0f/sqrt(qq);
+       }
       
 for (int i=0; i<NUM_INF_BANDS; i++)  {  //get them started on their respective phases
 //right
@@ -196,17 +205,17 @@ lbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter ba
 void
 Infinity::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 13;
+  const int PRESET_SIZE = 15;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Basic
-    {64, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60 },
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60, 0, 1 },
     //Rising Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 0, 127, 2 },
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 0, 127, 32, 0, 16 },
     //Falling Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 0, 2 },
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 0, 32, 0, 16 },
     //Laser
-    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 2, 70 }     
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 2, 70, 0, 1 }     
   };
 
   if(npreset>NUM_PRESETS-1)  
@@ -237,7 +246,8 @@ Infinity::adjustfreqs()
   
       fstart = 20.0f + 6000.0f*((float) Pstartfreq/127.0f);
       fend =  20.0f + 6000.0f*((float) Pendfreq/127.0f);  
-      frate = (float) Prate/60.0f;    //beats/second  
+      if(Psubdiv>0) frate = (float) Prate/(((float) Psubdiv)*60.0f);    //beats/second  
+      else frate = ((float) (1 - Psubdiv))*((float) Prate)/60.0f;
       
       if (fstart < fend) {
       rampconst = frate/fs;
@@ -292,12 +302,20 @@ Infinity::changepar (int npar, int value)
       adjustfreqs();
       break;     
      case 12:
-      Prate = value;
+      Prate = abs(value);
+      if(value<0) reverse = 1;
+      else reverse = 0;
       adjustfreqs();
       break;   
      case 13:
       Pstdf = value;
-      stdiff = ((float) value)/64.0f;        
+      stdiff = ((float) value)/64.0f;
+      reinitfilter ();
+      break;
+     case 14:
+      Psubdiv = value;
+      adjustfreqs();
+      break;        
     };
 };
 
@@ -330,6 +348,15 @@ Infinity::getpar (int npar)
       break;
     case 12:
       return (Prate);
+      break;
+    case 13:
+      return (Pstdf);
+      break;
+    case 14:
+      return (Psubdiv);
+      break;
+    case 15:
+      return (Pautopan);
       break;
     default:
       return (0);

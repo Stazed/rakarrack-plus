@@ -3366,6 +3366,16 @@ private:
   void cb_infinity_rate_i(SliderW*, void*);
   static void cb_infinity_rate(SliderW*, void*);
 public:
+  SliderW *infinity_stdf;
+private:
+  void cb_infinity_stdf_i(SliderW*, void*);
+  static void cb_infinity_stdf(SliderW*, void*);
+public:
+  SliderW *infinity_subdiv;
+private:
+  void cb_infinity_subdiv_i(SliderW*, void*);
+  static void cb_infinity_subdiv(SliderW*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

@@ -61,6 +61,8 @@ private:
   int Pendfreq;	       //0 to 127// "End" when the filter ends
   int Prate;           //BPM// "Tempo" how fast it sweeps
   int Pstdf;           //filter bands offset L&R
+  int Psubdiv;
+  int Pautopan;
   
   struct filterstate {
   float sinp;
@@ -81,6 +83,8 @@ private:
   float linconst, logconst;
   float qq;
   float stdiff;
+  float volmaster;
+  bool reverse;
   class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
 
   class FPreset *Fpre;

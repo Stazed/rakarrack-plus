@@ -9341,6 +9341,30 @@ void RKRGUI::cb_infinity_rate(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_rate_i(o,v);
 }
 
+void RKRGUI::cb_infinity_stdf_i(SliderW* o, void*) {
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(140);
+ return;
+} 
+rkr->efx_Infinity->changepar(13,(int)o->value());
+}
+void RKRGUI::cb_infinity_stdf(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_stdf_i(o,v);
+}
+
+void RKRGUI::cb_infinity_subdiv_i(SliderW* o, void*) {
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(140);
+ return;
+} 
+rkr->efx_Infinity->changepar(14,(int)o->value());
+}
+void RKRGUI::cb_infinity_subdiv(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_subdiv_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -11575,6 +11599,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       EQ->labelfont(1);
       EQ->user_data((void*)(1));
       EQ->align(96|FL_ALIGN_INSIDE);
+      EQ->hide();
       { eq_activar = new Fl_Light_Button(7, 216, 34, 18, "On");
         eq_activar->shortcut(0x31);
         eq_activar->color((Fl_Color)62);
@@ -20342,7 +20367,6 @@ R average.");
       INFINIT->labelfont(1);
       INFINIT->user_data((void*)(1));
       INFINIT->align(96|FL_ALIGN_INSIDE);
-      INFINIT->hide();
       { infinity_activar = new Fl_Light_Button(10, 213, 34, 18, "On");
         infinity_activar->shortcut(0x31);
         infinity_activar->color((Fl_Color)62);
@@ -20477,7 +20501,7 @@ R average.");
         infinity_8->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_8->callback((Fl_Callback*)cb_infinity_8);
       } // Fl_Value_Input* infinity_8
-      { infinity_start = new SliderW(54, 357, 100, 10, "Start");
+      { infinity_start = new SliderW(54, 345, 100, 10, "Start");
         infinity_start->type(5);
         infinity_start->box(FL_FLAT_BOX);
         infinity_start->color((Fl_Color)178);
@@ -20493,7 +20517,7 @@ R average.");
         infinity_start->align(FL_ALIGN_LEFT);
         infinity_start->when(FL_WHEN_CHANGED);
       } // SliderW* infinity_start
-      { infinity_end = new SliderW(54, 369, 100, 10, "End");
+      { infinity_end = new SliderW(54, 357, 100, 10, "End");
         infinity_end->type(5);
         infinity_end->box(FL_FLAT_BOX);
         infinity_end->color((Fl_Color)178);
@@ -20509,7 +20533,7 @@ R average.");
         infinity_end->align(FL_ALIGN_LEFT);
         infinity_end->when(FL_WHEN_CHANGED);
       } // SliderW* infinity_end
-      { infinity_rate = new SliderW(54, 381, 100, 10, "Tempo");
+      { infinity_rate = new SliderW(54, 369, 100, 10, "Tempo");
         infinity_rate->type(5);
         infinity_rate->box(FL_FLAT_BOX);
         infinity_rate->color((Fl_Color)178);
@@ -20518,7 +20542,7 @@ R average.");
         infinity_rate->labelfont(0);
         infinity_rate->labelsize(10);
         infinity_rate->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        infinity_rate->minimum(1);
+        infinity_rate->minimum(-600);
         infinity_rate->maximum(600);
         infinity_rate->step(1);
         infinity_rate->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -20526,6 +20550,40 @@ R average.");
         infinity_rate->align(FL_ALIGN_LEFT);
         infinity_rate->when(FL_WHEN_CHANGED);
       } // SliderW* infinity_rate
+      { infinity_stdf = new SliderW(54, 333, 100, 10, "St.df");
+        infinity_stdf->type(5);
+        infinity_stdf->box(FL_FLAT_BOX);
+        infinity_stdf->color((Fl_Color)178);
+        infinity_stdf->selection_color((Fl_Color)62);
+        infinity_stdf->labeltype(FL_NORMAL_LABEL);
+        infinity_stdf->labelfont(0);
+        infinity_stdf->labelsize(10);
+        infinity_stdf->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        infinity_stdf->minimum(-64);
+        infinity_stdf->maximum(64);
+        infinity_stdf->step(1);
+        infinity_stdf->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        infinity_stdf->callback((Fl_Callback*)cb_infinity_stdf);
+        infinity_stdf->align(FL_ALIGN_LEFT);
+        infinity_stdf->when(FL_WHEN_CHANGED);
+      } // SliderW* infinity_stdf
+      { infinity_subdiv = new SliderW(54, 381, 100, 10, "Subdiv");
+        infinity_subdiv->type(5);
+        infinity_subdiv->box(FL_FLAT_BOX);
+        infinity_subdiv->color((Fl_Color)178);
+        infinity_subdiv->selection_color((Fl_Color)62);
+        infinity_subdiv->labeltype(FL_NORMAL_LABEL);
+        infinity_subdiv->labelfont(0);
+        infinity_subdiv->labelsize(10);
+        infinity_subdiv->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        infinity_subdiv->minimum(-16);
+        infinity_subdiv->maximum(16);
+        infinity_subdiv->step(1);
+        infinity_subdiv->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        infinity_subdiv->callback((Fl_Callback*)cb_infinity_subdiv);
+        infinity_subdiv->align(FL_ALIGN_LEFT);
+        infinity_subdiv->when(FL_WHEN_CHANGED);
+      } // SliderW* infinity_subdiv
       INFINIT->end();
     } // Fl_Group* INFINIT
     { Tuner = new Fl_Group(520, 24, 276, 58);
