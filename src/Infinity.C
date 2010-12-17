@@ -358,6 +358,7 @@ Infinity::getpar (int npar)
     case 15:
       return (Pautopan);
       break;
+
     default:
       return (0);
     };

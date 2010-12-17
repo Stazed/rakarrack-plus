@@ -20367,7 +20367,7 @@ R average.");
       INFINIT->labelfont(1);
       INFINIT->user_data((void*)(1));
       INFINIT->align(96|FL_ALIGN_INSIDE);
-      { infinity_activar = new Fl_Light_Button(10, 213, 34, 18, "On");
+      { infinity_activar = new Fl_Light_Button(10, 215, 34, 18, "On");
         infinity_activar->shortcut(0x31);
         infinity_activar->color((Fl_Color)62);
         infinity_activar->selection_color((Fl_Color)1);
@@ -20376,7 +20376,7 @@ R average.");
         infinity_activar->align(68|FL_ALIGN_INSIDE);
         infinity_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* infinity_activar
-      { infinity_preset = new Fl_Choice(82, 213, 76, 18, "Preset");
+      { infinity_preset = new Fl_Choice(82, 215, 76, 18, "Preset");
         infinity_preset->down_box(FL_BORDER_BOX);
         infinity_preset->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         infinity_preset->labelsize(10);
@@ -20387,7 +20387,7 @@ R average.");
         infinity_preset->when(FL_WHEN_RELEASE_ALWAYS);
         infinity_preset->menu(menu_infinity_preset);
       } // Fl_Choice* infinity_preset
-      { infinity_WD = new SliderW(54, 235, 100, 10, "Wet/Dry");
+      { infinity_WD = new SliderW(54, 237, 100, 10, "Wet/Dry");
         infinity_WD->type(5);
         infinity_WD->box(FL_FLAT_BOX);
         infinity_WD->color((Fl_Color)178);
@@ -20404,7 +20404,7 @@ R average.");
         infinity_WD->align(FL_ALIGN_LEFT);
         infinity_WD->when(FL_WHEN_CHANGED);
       } // SliderW* infinity_WD
-      { infinity_Q = new SliderW(54, 249, 100, 10, "Res");
+      { infinity_Q = new SliderW(54, 251, 100, 10, "Res");
         infinity_Q->type(5);
         infinity_Q->box(FL_FLAT_BOX);
         infinity_Q->color((Fl_Color)178);
@@ -20421,7 +20421,7 @@ R average.");
         infinity_Q->align(FL_ALIGN_LEFT);
         infinity_Q->when(FL_WHEN_CHANGED);
       } // SliderW* infinity_Q
-      { infinity_1 = new Fl_Value_Input(18, 263, 20, 15, "1");
+      { infinity_1 = new Fl_Value_Input(18, 265, 20, 15, "1");
         infinity_1->labelsize(10);
         infinity_1->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_1->minimum(-64);
@@ -20431,7 +20431,7 @@ R average.");
         infinity_1->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_1->callback((Fl_Callback*)cb_infinity_1);
       } // Fl_Value_Input* infinity_1
-      { infinity_2 = new Fl_Value_Input(54, 264, 20, 15, "2");
+      { infinity_2 = new Fl_Value_Input(54, 266, 20, 15, "2");
         infinity_2->labelsize(10);
         infinity_2->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_2->minimum(-64);
@@ -20441,7 +20441,7 @@ R average.");
         infinity_2->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_2->callback((Fl_Callback*)cb_infinity_2);
       } // Fl_Value_Input* infinity_2
-      { infinity_3 = new Fl_Value_Input(90, 263, 20, 15, "3");
+      { infinity_3 = new Fl_Value_Input(90, 265, 20, 15, "3");
         infinity_3->labelsize(10);
         infinity_3->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_3->minimum(-64);
@@ -20451,7 +20451,7 @@ R average.");
         infinity_3->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_3->callback((Fl_Callback*)cb_infinity_3);
       } // Fl_Value_Input* infinity_3
-      { infinity_4 = new Fl_Value_Input(126, 263, 20, 15, "4");
+      { infinity_4 = new Fl_Value_Input(126, 265, 20, 15, "4");
         infinity_4->labelsize(10);
         infinity_4->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_4->minimum(-64);
@@ -20461,7 +20461,7 @@ R average.");
         infinity_4->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_4->callback((Fl_Callback*)cb_infinity_4);
       } // Fl_Value_Input* infinity_4
-      { infinity_5 = new Fl_Value_Input(18, 282, 20, 15, "5");
+      { infinity_5 = new Fl_Value_Input(18, 284, 20, 15, "5");
         infinity_5->labelsize(10);
         infinity_5->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_5->minimum(-64);
@@ -20471,7 +20471,7 @@ R average.");
         infinity_5->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_5->callback((Fl_Callback*)cb_infinity_5);
       } // Fl_Value_Input* infinity_5
-      { infinity_6 = new Fl_Value_Input(54, 282, 20, 15, "6");
+      { infinity_6 = new Fl_Value_Input(54, 284, 20, 15, "6");
         infinity_6->labelsize(10);
         infinity_6->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_6->minimum(-64);
@@ -20481,7 +20481,7 @@ R average.");
         infinity_6->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_6->callback((Fl_Callback*)cb_infinity_6);
       } // Fl_Value_Input* infinity_6
-      { infinity_7 = new Fl_Value_Input(90, 282, 20, 15, "7");
+      { infinity_7 = new Fl_Value_Input(90, 284, 20, 15, "7");
         infinity_7->labelsize(10);
         infinity_7->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_7->minimum(-64);
@@ -20491,7 +20491,7 @@ R average.");
         infinity_7->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_7->callback((Fl_Callback*)cb_infinity_7);
       } // Fl_Value_Input* infinity_7
-      { infinity_8 = new Fl_Value_Input(126, 282, 20, 15, "8");
+      { infinity_8 = new Fl_Value_Input(126, 284, 20, 15, "8");
         infinity_8->labelsize(10);
         infinity_8->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         infinity_8->minimum(-64);
