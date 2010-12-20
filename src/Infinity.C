@@ -49,8 +49,12 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   Pendfreq = 80;
   Prate = 2;
   Psubdiv = 32;
-  stdiff = 0.5f;
+  Pstdf = 0;
   volmaster = 0.25;
+  Preverse = 0;
+  Pautopan = 0;
+  autopan = 0.0f;
+
   
   reinitfilter();
   adjustfreqs();
@@ -82,7 +86,7 @@ rbandstate[i].vol = rbandstate[i].level*rbandstate[i].lfo;
 lbandstate[i].sinp += fconst*lbandstate[i].cosp;
 lbandstate[i].cosp -= lbandstate[i].sinp*fconst;
 lbandstate[i].lfo = (1.0f + lbandstate[i].sinp);  //lfo modulates filter band volume
-if (reverse) lbandstate[i].ramp -= rampconst;  //left reversed from right
+if (Preverse) lbandstate[i].ramp -= rampconst;  //left reversed from right
 else lbandstate[i].ramp += rampconst;   //normal mode
 if (lbandstate[i].ramp > 1.0f)  {
  lbandstate[i].ramp = 0.0f;  //probably faster than fmod()
@@ -119,8 +123,12 @@ Infinity::out (float * smpsl, float * smpsr)
     tmpl+=lbandstate[j].vol*filterl[j]->filterout_s(smpsl[i]);
     tmpr+=rbandstate[j].vol*filterr[j]->filterout_s(smpsr[i]);
     } 
-    efxoutl[i] = volmaster*tmpl;
-    efxoutr[i] = volmaster*tmpr;     
+    
+    //master oscillator
+     msin += mconst*mcos;
+     mcos -= msin*mconst;    
+    efxoutl[i] = (1.0f + autopan*mcos)*volmaster*tmpl;
+    efxoutr[i] = (1.0f - autopan*mcos)*volmaster*tmpr;     
   
     /* Debug
     efxoutl[i] = smpsl[i]*bandstate[0].vol*bandstate[0].ramp;
@@ -199,7 +207,8 @@ lbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter ba
   filterr[i]->directmod(rbandstate[i].ramp);
 
 }
-  
+ msin = 0.0f;
+ mcos = 1.0f; 
 };
 
 void
@@ -265,7 +274,7 @@ Infinity::adjustfreqs()
       
       //fconst =  2.0f * sinf(PI*frate / fs);  //this is a more precise interpretation
       fconst =  D_PI*frate / fs;  //this seems to work well at low frequencies
-
+      mconst = D_PI*((float) Prate)/(fs*60.0f*4.0f);
 }
 
 void
@@ -303,19 +312,28 @@ Infinity::changepar (int npar, int value)
       break;     
      case 12:
       Prate = abs(value);
-      if(value<0) reverse = 1;
-      else reverse = 0;
       adjustfreqs();
       break;   
      case 13:
       Pstdf = value;
-      stdiff = ((float) value)/64.0f;
+      stdiff = ((float) value)/127.0f;
       reinitfilter ();
       break;
      case 14:
       Psubdiv = value;
       adjustfreqs();
       break;        
+     case 15:
+      Pautopan = value;
+      autopan = ((float) Pautopan)/127.0f;
+      if (autopan > 1.0f) autopan = 1.0f;
+      if (autopan < 0.0f) autopan = 0.0f;
+      adjustfreqs();      
+      break;
+     case 16:
+      Preverse = value;
+      adjustfreqs();      
+      break;
     };
 };
 
@@ -358,7 +376,9 @@ Infinity::getpar (int npar)
     case 15:
       return (Pautopan);
       break;
-
+    case 16:
+      return (Preverse);
+      break;
     default:
       return (0);
     };

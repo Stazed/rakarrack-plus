@@ -3376,6 +3376,16 @@ private:
   void cb_infinity_subdiv_i(SliderW*, void*);
   static void cb_infinity_subdiv(SliderW*, void*);
 public:
+  SliderW *infinity_pan;
+private:
+  void cb_infinity_pan_i(SliderW*, void*);
+  static void cb_infinity_pan(SliderW*, void*);
+public:
+  Fl_Check_Button *infinity_rev;
+private:
+  void cb_infinity_rev_i(Fl_Check_Button*, void*);
+  static void cb_infinity_rev(Fl_Check_Button*, void*);
+public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
 private:

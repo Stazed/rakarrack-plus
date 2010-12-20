@@ -9365,6 +9365,30 @@ void RKRGUI::cb_infinity_subdiv(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_subdiv_i(o,v);
 }
 
+void RKRGUI::cb_infinity_pan_i(SliderW* o, void*) {
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(140);
+ return;
+} 
+rkr->efx_Infinity->changepar(15,(int)o->value());
+}
+void RKRGUI::cb_infinity_pan(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_pan_i(o,v);
+}
+
+void RKRGUI::cb_infinity_rev_i(Fl_Check_Button* o, void*) {
+  if(Fl::event_button()==3)
+{
+ getMIDIControl(140);
+ return;
+} 
+rkr->efx_Infinity->changepar(16,(int)o->value());
+}
+void RKRGUI::cb_infinity_rev(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_rev_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(Fl_Light_Button* o, void*) {
   rkr->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
@@ -20542,7 +20566,6 @@ R average.");
         infinity_rate->labelfont(0);
         infinity_rate->labelsize(10);
         infinity_rate->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
-        infinity_rate->minimum(-600);
         infinity_rate->maximum(600);
         infinity_rate->step(1);
         infinity_rate->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -20584,6 +20607,30 @@ R average.");
         infinity_subdiv->align(FL_ALIGN_LEFT);
         infinity_subdiv->when(FL_WHEN_CHANGED);
       } // SliderW* infinity_subdiv
+      { infinity_pan = new SliderW(54, 321, 100, 10, "AutoPan");
+        infinity_pan->type(5);
+        infinity_pan->box(FL_FLAT_BOX);
+        infinity_pan->color((Fl_Color)178);
+        infinity_pan->selection_color((Fl_Color)62);
+        infinity_pan->labeltype(FL_NORMAL_LABEL);
+        infinity_pan->labelfont(0);
+        infinity_pan->labelsize(10);
+        infinity_pan->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        infinity_pan->maximum(127);
+        infinity_pan->step(1);
+        infinity_pan->textcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        infinity_pan->callback((Fl_Callback*)cb_infinity_pan);
+        infinity_pan->align(FL_ALIGN_LEFT);
+        infinity_pan->when(FL_WHEN_CHANGED);
+      } // SliderW* infinity_pan
+      { infinity_rev = new Fl_Check_Button(8, 303, 15, 15, "Rev");
+        infinity_rev->tooltip("Reverse left from right directions");
+        infinity_rev->down_box(FL_BORDER_BOX);
+        infinity_rev->labelsize(10);
+        infinity_rev->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        infinity_rev->callback((Fl_Callback*)cb_infinity_rev, (void*)(2));
+        infinity_rev->align(FL_ALIGN_RIGHT);
+      } // Fl_Check_Button* infinity_rev
       INFINIT->end();
     } // Fl_Group* INFINIT
     { Tuner = new Fl_Group(520, 24, 276, 58);

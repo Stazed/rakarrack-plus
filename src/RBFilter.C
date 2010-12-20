@@ -287,7 +287,7 @@ RBFilter::filterout (float * smp)
 
 };
 
-float
+float 
 RBFilter::filterout_s (float smp)
 {
   int i;
@@ -307,7 +307,7 @@ RBFilter::filterout_s (float smp)
 
 };
 
-float
+float inline
 RBFilter::singlefilterout_s (float smp, fstage & x, parameters & par)
 {
   float *out = NULL;
@@ -334,7 +334,6 @@ RBFilter::singlefilterout_s (float smp, fstage & x, parameters & par)
       
       x.low = x.low + oldf * x.band;
       x.high = oldsq * smp - x.low - oldq * x.band;
-      //x.high = smp - x.low - oldq * x.band;
       x.band = oldf * x.high + x.band;
       
       if(en_mix)

@@ -63,6 +63,7 @@ private:
   int Pstdf;           //filter bands offset L&R
   int Psubdiv;
   int Pautopan;
+  int Preverse;
   
   struct filterstate {
   float sinp;
@@ -84,7 +85,7 @@ private:
   float qq;
   float stdiff;
   float volmaster;
-  bool reverse;
+  float autopan, msin, mcos, mconst;
   class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
 
   class FPreset *Fpre;

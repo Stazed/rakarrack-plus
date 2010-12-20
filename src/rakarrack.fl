@@ -861,7 +861,6 @@ save_stat(0);
 
 Pexitprogram=1;} open
       xywh {223 96 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
-
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -9857,10 +9856,8 @@ rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
         }
       }
       Fl_Group INFINIT {
-
         user_data 1 open
         xywh {2 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
-
       } {
         Fl_Light_Button infinity_activar {
           label On
@@ -10046,7 +10043,7 @@ rkr->efx_Infinity->changepar(11,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(12,(int)o->value());}
-          xywh {54 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -600 maximum 600 step 1 textcolor 7
+          xywh {54 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 600 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider infinity_stdf {
@@ -10067,9 +10064,31 @@ rkr->efx_Infinity->changepar(13,(int)o->value());}
  getMIDIControl(140);
  return;
 } 
-rkr->efx_Infinity->changepar(14,(int)o->value());} selected
+rkr->efx_Infinity->changepar(14,(int)o->value());}
           xywh {54 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -16 maximum 16 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Value_Slider infinity_pan {
+          label AutoPan
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(140);
+ return;
+} 
+rkr->efx_Infinity->changepar(15,(int)o->value());}
+          xywh {54 321 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Check_Button infinity_rev {
+          label Rev
+          user_data 2
+          callback {if(Fl::event_button()==3)
+{
+ getMIDIControl(140);
+ return;
+} 
+rkr->efx_Infinity->changepar(16,(int)o->value());} selected
+          tooltip {Reverse left from right directions} xywh {8 303 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
       }
       Fl_Group Tuner {
