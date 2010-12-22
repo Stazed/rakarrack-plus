@@ -98,7 +98,7 @@ RBFilter::computefiltercoefs_hiQ ()  //potentially unstable at some settings, bu
 void
 RBFilter::directmod (float lfo)  //potentially unstable at some settings, but better sound
 {
-  par.f = fabs(lfo);  //cannot be less than 0
+  par.f = fabsf(lfo);  //cannot be less than 0
   if (par.f > 0.99999f)
     par.f = 0.99999f;
     //note range on input LFO should be scaled assuming the following:

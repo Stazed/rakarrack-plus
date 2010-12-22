@@ -38,7 +38,7 @@ public:
   void changepar (int npar, int value);
   int getpar (int npar);
   void cleanup ();
-
+  float f_pow2(float x);
 
   int Ppreset;
   float outvolume;
