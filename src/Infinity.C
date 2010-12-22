@@ -165,20 +165,28 @@ Infinity::setvolume (int Pvolume)
   outvolume = (float)Pvolume / 127.0f;
 };
 
-
+void
+Infinity::setq ()
+{
+      if(Pq<0) {
+       qq = f_pow2(((float) Pq)/500.0f);  //q ranges down to 0.5
+       volmaster = 0.707f;
+       }
+      else {
+       qq = f_pow2(((float) Pq)/125.0f);  //q can go up to 256  
+       volmaster = 0.707f/sqrt(qq);
+       }
+       
+for (int i=0; i<NUM_INF_BANDS; i++)  { 
+  filterl[i]->setq(qq);
+  filterr[i]->setq(qq);
+}     
+}
 void
 Infinity::reinitfilter ()
 {
 float fbandnum = (float) (NUM_INF_BANDS);
 float halfpi = -M_PI/2.0f;  //offset so rbandstate[0].sinp = -1.0 when rbandstate[0].ramp = 0;
-      if(Pq<0) {
-       qq = f_pow2(((float) Pq)/500.0f);  //q ranges down to 0.5
-       volmaster = 1.0f;
-       }
-      else {
-       qq = f_pow2(((float) Pq)/125.0f);  //q can go up to 256  
-       volmaster = 1.0f/sqrt(qq);
-       }
       
 for (int i=0; i<NUM_INF_BANDS; i++)  {  //get them started on their respective phases
 //right
@@ -209,40 +217,6 @@ lbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter ba
 }
  msin = 0.0f;
  mcos = 1.0f; 
-};
-
-void
-Infinity::setpreset (int npreset)
-{
-  const int PRESET_SIZE = 15;
-  const int NUM_PRESETS = 4;
-  int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Basic
-    {64, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60, 0, 1 },
-    //Rising Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 0, 127, 32, 0, 16 },
-    //Falling Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 0, 32, 0, 16 },
-    //Laser
-    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 2, 70, 0, 1 }     
-  };
-
-  if(npreset>NUM_PRESETS-1)  
-    {   
-     Fpre->ReadPreset(46,npreset-NUM_PRESETS+1);    
-     for (int n = 0; n < PRESET_SIZE; n++)    
-     changepar (n, pdata[n]);    
-    }    
-  else                                      
-  {     
-
-  for (int n = 0; n < PRESET_SIZE; n++)
-    changepar (n, presets[npreset][n]);
-  }
-
-  Ppreset = npreset;
-  
-  reinitfilter ();
 };
 
 void
@@ -278,6 +252,41 @@ Infinity::adjustfreqs()
 }
 
 void
+Infinity::setpreset (int npreset)
+{
+  const int PRESET_SIZE = 15;
+  const int NUM_PRESETS = 4;
+  int presets[NUM_PRESETS][PRESET_SIZE] = {
+    //Basic
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60, 0, 1 },
+    //Rising Comb
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 0, 127, 32, 0, 16 },
+    //Falling Comb
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 0, 32, 0, 16 },
+    //Laser
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 2, 70, 0, 1 }     
+  };
+
+  if(npreset>NUM_PRESETS-1)  
+    {   
+     Fpre->ReadPreset(46,npreset-NUM_PRESETS+1);    
+     for (int n = 0; n < PRESET_SIZE; n++)    
+     changepar (n, pdata[n]);    
+    }    
+  else                                      
+  {     
+
+  for (int n = 0; n < PRESET_SIZE; n++)
+    changepar (n, presets[npreset][n]);
+  }
+
+  Ppreset = npreset;
+  
+  reinitfilter ();
+};
+
+
+void
 Infinity::changepar (int npar, int value)
 {
 
@@ -300,7 +309,7 @@ Infinity::changepar (int npar, int value)
       break;
     case 9:
       Pq = value;
-      reinitfilter();
+      setq();
       break;
      case 10:
       Pstartfreq = value;

@@ -52,7 +52,8 @@ private:
   void adjustfreqs();
   void oscillator();
   void reinitfilter ();
-	  
+  void setq ();
+  	  
   int Pvolume;		//For wet/dry mix // "Wet/Dry"
   int Pb[NUM_INF_BANDS];          //Pbx -64 to 64// "Band" each label "1" through "8" adjusts mix of each filter band
   int Pq;              //-64 to 64// "Res." filter resonance
