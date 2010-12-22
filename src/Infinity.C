@@ -172,11 +172,11 @@ Infinity::reinitfilter ()
 float fbandnum = (float) (NUM_INF_BANDS);
 float halfpi = -M_PI/2.0f;  //offset so rbandstate[0].sinp = -1.0 when rbandstate[0].ramp = 0;
       if(Pq<0) {
-       qq = f_pow2(((float) Pq)/64.0f);  //q ranges down to 0.5
+       qq = f_pow2(((float) Pq)/500.0f);  //q ranges down to 0.5
        volmaster = 1.0f;
        }
       else {
-       qq = f_pow2(((float) Pq)/8.0f);  //q can go up to 256  
+       qq = f_pow2(((float) Pq)/125.0f);  //q can go up to 256  
        volmaster = 1.0f/sqrt(qq);
        }
       
