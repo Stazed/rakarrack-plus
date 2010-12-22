@@ -183,7 +183,7 @@ Valve::out (float * smpsl, float * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutl[i] == q) fx = fdist;
-              else fx =efxoutl[i] / (1.0f - f_pow2(-dist * efxoutl[i] * LN2R));
+              else fx =efxoutl[i] / (1.0f - expf(-dist * efxoutl[i] ));
               otml = atk * otml + fx - itml;
               itml = fx;
               efxoutl[i]= otml;
@@ -194,7 +194,7 @@ Valve::out (float * smpsl, float * smpsr)
            for (i = 0; i < PERIOD; i++) 
              {
                if (efxoutl[i] == q) fx = fdist + qcoef;
-               else fx =(efxoutl[i] - q) / (1.0f - f_pow2(-dist * (efxoutl[i] - q)* LN2R)) + qcoef;
+               else fx =(efxoutl[i] - q) / (1.0f - expf(-dist * (efxoutl[i] - q))) + qcoef;
 	       otml = atk * otml + fx - itml;
                itml = fx;
                efxoutl[i]= otml;
@@ -211,7 +211,7 @@ Valve::out (float * smpsl, float * smpsr)
            for (i =0; i<PERIOD; i++) 
              {
               if (efxoutr[i] == q) fx = fdist;
-              else fx = efxoutr[i] / (1.0f - f_pow2(-dist * efxoutr[i] * LN2R));
+              else fx = efxoutr[i] / (1.0f - expf(-dist * efxoutr[i] ));
               otmr = atk * otmr + fx - itmr;
               itmr = fx;
               efxoutr[i]= otmr;
@@ -223,7 +223,7 @@ Valve::out (float * smpsl, float * smpsr)
            for (i = 0; i < PERIOD; i++) 
              {
                if (efxoutr[i] == q) fx = fdist + qcoef;
-               else fx = (efxoutr[i] - q) / (1.0f - f_pow2(-dist * (efxoutr[i] - q)* LN2R)) + qcoef;
+               else fx = (efxoutr[i] - q) / (1.0f - expf(-dist * (efxoutr[i] - q))) + qcoef;
                otmr = atk * otmr + fx - itmr;
                itmr = fx;
                efxoutr[i]= otmr;
@@ -271,7 +271,7 @@ Valve::out (float * smpsl, float * smpsr)
  void
 Valve::init_coefs()
 {
-  coef = 1.0 / (1.0f - f_pow2(dist * q * LN2R));
+  coef = 1.0 / (1.0f - expf(dist * q ));
   qcoef = q * coef;
   fdist = 1.0f / dist;
   inputvol = powf (4.0f, ((float)Pdrive - 32.0f) / 127.0f);
