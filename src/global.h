@@ -84,7 +84,10 @@
 #define REV_APS 4
 #define MAX_SFILTER_STAGES 12
 
-
+typedef union {
+        float f;
+        int i;
+        } ls_pcast32;
 
 
 
