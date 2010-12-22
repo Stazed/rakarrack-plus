@@ -376,7 +376,7 @@ int tfcnt = 0;
 
 initparams=0;
 depth = ((float) (Pdepth - 64))/64.0f;
-dlyrange = 0.008*powf(2.0f, 4.5f*depth);
+dlyrange = 0.008*f_pow2(4.5f*depth);
 width = ((float) Pwidth)/127.0f;
 
 tmptempo = (float) Ptempo;
@@ -407,7 +407,7 @@ rdata[i]=fLevel[i]*tpanr;
 
 if((tfcnt<ECHOTRON_MAXFILTERS)&&(iStages[i]>=0))
 {
- int Freq=fFreq[i]*powf(2.0f,depth*4.5f);
+ int Freq=fFreq[i]*f_pow2(depth*4.5f);
  if (Freq<20.0) Freq=20.0f;
  if (Freq>hSR) Freq=hSR;
  filterbank[tfcnt].l->setfreq_and_q(Freq,fQ[i]);
@@ -434,8 +434,8 @@ float fperiod = 1.0f/fPERIOD;
   dlfo.effectlfoout (&dlfol, &dlfor);
 if(Pmodfilts)
 {  
-  lfmod = powf(2.0f,(lfol*width + 0.25f + depth)*4.5f);
-  rfmod = powf(2.0f,(lfor*width + 0.25f + depth)*4.5f); 
+  lfmod = f_pow2((lfol*width + 0.25f + depth)*4.5f);
+  rfmod = f_pow2((lfor*width + 0.25f + depth)*4.5f); 
 for(int i=0; i<ECHOTRON_MAXFILTERS; i++)
 {
  
@@ -477,7 +477,7 @@ Echotron::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
   hidamp = 1.0f - (float)Phidamp / 127.1f;
-  float fr = 20.0f*powf(2.0, hidamp*10.0f);
+  float fr = 20.0f*f_pow2(hidamp*10.0f);
   lpfl->setfreq (fr);
   lpfr->setfreq (fr);
 };

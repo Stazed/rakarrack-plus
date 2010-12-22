@@ -350,7 +350,7 @@ Vocoder::setbands (int numbands, float startfreq, float endfreq)
   //calculate intermediate values
   float pwer = logf(endband/start)/log(2.0f);
   
-  for(k=0;k<=VOC_BANDS; k++) output[k] = start*powf(2.0f, ((float) k)*pwer/fnumbands); 
+  for(k=0;k<=VOC_BANDS; k++) output[k] = start*f_pow2(((float) k)*pwer/fnumbands); 
   for(k=0;k<VOC_BANDS; k++)
   {
         filterbank[k].sfreq = output[k] + (output[k+1] - output[k])*0.5f;

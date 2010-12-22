@@ -106,7 +106,7 @@ RyanWah::out (float * smpsl, float * smpsr)
 	 if (rms<0.0f) rms = 0.0f;
          lmod = (minfreq + lfol + rms)*maxfreq;
          rmod = (minfreq + lfor + rms)*maxfreq;
-        if(variq) q = powf(2.0f,(2.0f*(1.0f-rms)+1.0f));
+        if(variq) q = f_pow2((2.0f*(1.0f-rms)+1.0f));
         filterl->setq(q);
         filterr->setq(q);
         filterl->directmod(rmod);
@@ -129,7 +129,7 @@ RyanWah::out (float * smpsl, float * smpsr)
   rms = -1.0f + 1.0f/(rms*rms + 1.0f);  
   }
       
-  if(variq) q = powf(2.0f,(2.0f*(1.0f-rms)+1.0f));
+  if(variq) q = f_pow2((2.0f*(1.0f-rms)+1.0f));
 
    lmod =(lfol + rms);
    rmod = (lfor + rms);
