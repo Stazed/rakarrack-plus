@@ -122,20 +122,20 @@ Vibe::out (float *smpsl, float *smpsr)
     //Left Cds   
     stepl = gl*alphal + dalphal*oldstepl;
     oldstepl = stepl;
-    dRCl = dTC*expf(stepl*minTC);
+    dRCl = dTC*f_exp(stepl*minTC);
     alphal = cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
     dalphal = 1.0f - cSAMPLE_RATE/(0.5f*dRCl + cSAMPLE_RATE);     //different attack & release character
     xl = CNST_E + stepl*b;
-    fxl = expf(Ra/logf(xl));   
+    fxl = f_exp(Ra/logf(xl));   
     
     //Right Cds   
     stepr = gr*alphar + dalphar*oldstepr;
     oldstepr = stepr;
-    dRCr = dTC*expf(stepr*minTC);
+    dRCr = dTC*f_exp(stepr*minTC);
     alphar = cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);  
     dalphar = 1.0f - cSAMPLE_RATE/(0.5f*dRCr + cSAMPLE_RATE);      //different attack & release character
     xr = CNST_E + stepr*b;
-    fxr = expf(Ra/logf(xr));
+    fxr = f_exp(Ra/logf(xr));
 
     if(i%16 == 0)  modulate(fxl, fxr);   
      

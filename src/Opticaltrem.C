@@ -106,19 +106,19 @@ Opticaltrem::out (float *smpsl, float *smpsr)
     //Left Cds   
     stepl = gl*(1.0f - alphal) + alphal*oldstepl;
     oldstepl = stepl;
-    dRCl = dTC*expf(stepl*minTC);
+    dRCl = dTC*f_exp(stepl*minTC);
     alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
     xl = CNST_E + stepl*b;
-    fxl = expf(Ra/logf(xl));     
+    fxl = f_exp(Ra/logf(xl));     
     fxl = R1/(fxl + R1);
     
     //Right Cds   
     stepr = gr*(1.0f - alphar) + alphar*oldstepr;
     oldstepr = stepr;
-    dRCr = dTC*expf(stepr*minTC);
+    dRCr = dTC*f_exp(stepr*minTC);
     alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);        
     xr = CNST_E + stepr*b;
-    fxr = expf(Ra/logf(xr));
+    fxr = f_exp(Ra/logf(xr));
     fxr = R1/(fxr + R1);  
     
     //Modulate input signal

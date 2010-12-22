@@ -282,7 +282,7 @@ void
 RBEcho::sethidamp (int Phidamp)
 {
   this->Phidamp = Phidamp;
-  hidamp = expf(-D_PI * 500.0f * ((float) Phidamp)/fSAMPLE_RATE);
+  hidamp = f_exp(-D_PI * 500.0f * ((float) Phidamp)/fSAMPLE_RATE);
 };
 
 void

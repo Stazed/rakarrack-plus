@@ -323,7 +323,7 @@ Dflange::changepar (int npar, int value)
       break;
     case 7:
       Phidamp = value;
-      fhidamp = expf(-D_PI * (float) Phidamp/fSAMPLE_RATE);
+      fhidamp = f_exp(-D_PI * (float) Phidamp/fSAMPLE_RATE);
       break;
     case 8:
       Psubtract = value;

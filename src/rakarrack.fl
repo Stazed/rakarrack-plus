@@ -848,19 +848,17 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {223 96 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;}
+      xywh {1424 141 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -9856,7 +9854,7 @@ rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
         }
       }
       Fl_Group INFINIT {
-        user_data 1 open
+        user_data 1
         xywh {2 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button infinity_activar {
@@ -9929,8 +9927,8 @@ rkr->efx_Infinity->changepar(0,(int)(o->value()+64));}
  getMIDIControl(131);
  return;
 }
-rkr->efx_Infinity->changepar(9,(int)o->value());}
-          xywh {54 251 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+rkr->efx_Infinity->changepar(9,(int)o->value());} selected
+          xywh {54 251 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -1000 maximum 1000 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Input infinity_1 {
@@ -10087,7 +10085,7 @@ rkr->efx_Infinity->changepar(15,(int)o->value());}
  getMIDIControl(140);
  return;
 } 
-rkr->efx_Infinity->changepar(16,(int)o->value());} selected
+rkr->efx_Infinity->changepar(16,(int)o->value());}
           tooltip {Reverse left from right directions} xywh {8 303 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
       }

@@ -109,6 +109,7 @@ static inline float f_pow2(float x)
 }
 
 
+#define f_exp(x) f_pow2(x * LN2R)
 
 #include "config.h"
 #include <pthread.h>

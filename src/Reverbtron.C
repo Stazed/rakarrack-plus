@@ -67,7 +67,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS, int uq, int d
   hlength = 0;
   fstretch = 1.0f;
   idelay = 0.0f;
-  decay = expf(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
+  decay = f_exp(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
   lpfr =  new AnalogFilter (0, 800, 1, 0);;
