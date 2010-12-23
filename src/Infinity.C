@@ -31,7 +31,6 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
 
-  Ppreset = 0;
   int i;
   for (i = 0; i<NUM_INF_BANDS; i++) {
   filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f);
@@ -41,7 +40,7 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
    
   Pb[i] = 1;  
   }
-
+  Ppreset = 2;
   setpreset (Ppreset);
   Pvolume = 64;
   outvolume = 0.5;
@@ -267,17 +266,17 @@ Infinity::adjustfreqs()
 void
 Infinity::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 15;
+  const int PRESET_SIZE = 17;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Basic
-    {64, 64, 64, 64, 64, 64, 64, 64, 64, 10, 20, 80, 60, 0, 1 },
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 150, 20, 80, 60, 0, 1, 0, 0 },
     //Rising Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 0, 127, 32, 0, 16 },
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 600, 0, 127, 32, 0, 16, 0, 0 },
     //Falling Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 0, 32, 0, 16 },
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 600, 127, 0, 32, 0, 16, 0, 0 },
     //Laser
-    {0, 64, -64, 64, -64, 64, -64, 64, -64, 35, 127, 2, 70, 0, 1 }     
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 600, 127, 2, 70, 0, 1, 0, 0 }     
   };
 
   if(npreset>NUM_PRESETS-1)  
