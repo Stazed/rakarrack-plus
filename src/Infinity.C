@@ -123,8 +123,8 @@ Infinity::out (float * smpsl, float * smpsr)
     //run filter
    
     for (j=0; j<NUM_INF_BANDS; j++)  {
-    tmpl+=lbandstate[j].vol*filterl[j]->filterout_s(smpsl[i]);
-    tmpr+=rbandstate[j].vol*filterr[j]->filterout_s(smpsr[i]);
+    tmpl+=filterl[j]->filterout_s(lbandstate[j].vol*smpsl[i]);
+    tmpr+=filterr[j]->filterout_s(rbandstate[j].vol*smpsr[i]);
     } 
     
     //master oscillator
@@ -171,13 +171,14 @@ Infinity::setvolume (int Pvolume)
 void
 Infinity::setq ()
 {
+float fq = (float) Pq;
       if(Pq<0) {
-       qq = f_pow2(((float) Pq)/500.0f);  //q ranges down to 0.5
+       qq = f_pow2(fq/500.0f);  //q ranges down to 0.5
        volmaster = 1.0f;
        }
       else {
-       qq = f_pow2(((float) Pq)/125.0f);  //q can go up to 256  
-       volmaster = (1.0f-qq/512.0f)/sqrt(qq);
+       qq = f_pow2(fq/125.0f);  //q can go up to 256  
+       volmaster = (1.0f-fq/1500.0f)/sqrt(qq);
        }
        
 for (int i=0; i<NUM_INF_BANDS; i++)  { 
