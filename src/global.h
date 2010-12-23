@@ -344,6 +344,7 @@ public:
   jack_status_t status;
   char jackcliname[64];
 
+  int db6booster;
   int jdis;
   int jshut;
   int DC_Offset;

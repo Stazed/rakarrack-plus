@@ -63,7 +63,7 @@ XWMHints *hints;
 
 RKR::RKR ()
 {
-
+  db6booster=0;
   jdis=0;
   jshut=0;
   char temp[128];
@@ -1304,8 +1304,30 @@ RKR::Control_Volume (float *origl,float *origr)
   float tmp;
   float Temp_M_Volume = 0.0f;
   
-  if((flpos)&&(have_signal)) efx_FLimiter->out(efxoutl, efxoutr); 
+  if((flpos)&&(have_signal)) 
+  {
+   if(db6booster)
+    {
+      for(i=0;i<PERIOD;i++)
+       {
+        efxoutl[i] *=.5f; 
+        efxoutr[i] *=.5f; 
+       }
+     } 
+   
+   efx_FLimiter->out(efxoutl, efxoutr); 
+ 
+   if(db6booster)
+    {
+      for(i=0;i<PERIOD;i++)
+       {
+        efxoutl[i] *=2.0f; 
+        efxoutr[i] *=2.0f; 
+       }
+    } 
+  
 
+  }
 
    memcpy(anall, efxoutl, sizeof(float)* PERIOD);
    memcpy(analr, efxoutr, sizeof(float)* PERIOD);
@@ -1344,8 +1366,32 @@ RKR::Control_Volume (float *origl,float *origr)
 
     }
 
-  if ((!flpos) && (have_signal)) efx_FLimiter->out(efxoutl, efxoutr);  //then limit final output
+  if ((!flpos) && (have_signal)) 
+  {
+   if(db6booster)
+    {
+      for(i=0;i<PERIOD;i++)
+       {
+        efxoutl[i] *=.5f;
+        efxoutr[i] *=.5f; 
+       }
+     } 
+ 
+  efx_FLimiter->out(efxoutl, efxoutr);  //then limit final output
   
+   if(db6booster)
+    {
+      for(i=0;i<PERIOD;i++)
+       {
+        efxoutl[i] *=2.0f; 
+        efxoutr[i] *=2.0f; 
+       }
+     } 
+
+
+   }
+
+
   for (i = 0; i <= PERIOD; i++)
     {
       

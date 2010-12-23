@@ -3914,6 +3914,11 @@ private:
   void cb_FLPosition_i(Fl_Check_Button*, void*);
   static void cb_FLPosition(Fl_Check_Button*, void*);
 public:
+  Fl_Check_Button *DB6B;
+private:
+  void cb_DB6B_i(Fl_Check_Button*, void*);
+  static void cb_DB6B(Fl_Check_Button*, void*);
+public:
   Fl_Counter *Calibration;
 private:
   void cb_Calibration_i(Fl_Counter*, void*);

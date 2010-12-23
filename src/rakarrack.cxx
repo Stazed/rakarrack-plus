@@ -9172,6 +9172,10 @@ infinity_8->value(rkr->efx_Infinity->getpar(8));
 infinity_start->value(rkr->efx_Infinity->getpar(10));
 infinity_end->value(rkr->efx_Infinity->getpar(11));
 infinity_rate->value(rkr->efx_Infinity->getpar(12));
+infinity_stdf->value(rkr->efx_Infinity->getpar(13));
+infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
+infinity_pan->value(rkr->efx_Infinity->getpar(15));
+infinity_rev->value(rkr->efx_Infinity->getpar(16));
 }
 void RKRGUI::cb_infinity_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_preset_i(o,v);
@@ -10732,6 +10736,13 @@ void RKRGUI::cb_FLPosition_i(Fl_Check_Button* o, void*) {
 }
 void RKRGUI::cb_FLPosition(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FLPosition_i(o,v);
+}
+
+void RKRGUI::cb_DB6B_i(Fl_Check_Button* o, void*) {
+  rkr->db6booster=(int)o->value();
+}
+void RKRGUI::cb_DB6B(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_DB6B_i(o,v);
 }
 
 void RKRGUI::cb_Calibration_i(Fl_Counter* o, void*) {
@@ -21386,6 +21397,7 @@ R average.");
         Look->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(FL_ALIGN_LEFT);
+        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -21466,7 +21478,6 @@ R average.");
         AUDIO_SET->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(FL_ALIGN_LEFT);
-        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
@@ -21592,6 +21603,13 @@ R average.");
           FLPosition->callback((Fl_Callback*)cb_FLPosition);
           FLPosition->align(FL_ALIGN_LEFT);
         } // Fl_Check_Button* FLPosition
+        { DB6B = new Fl_Check_Button(324, 222, 23, 20, "+6dB Final Limiter ");
+          DB6B->down_box(FL_DOWN_BOX);
+          DB6B->labelsize(11);
+          DB6B->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+          DB6B->callback((Fl_Callback*)cb_DB6B);
+          DB6B->align(FL_ALIGN_LEFT);
+        } // Fl_Check_Button* DB6B
         { Calibration = new Fl_Counter(120, 249, 116, 21, "Tuner Calibration A4 ");
           Calibration->labelsize(10);
           Calibration->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -22700,6 +22718,7 @@ rkr->MidiCh--;
 rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh,1);
 rkr->HarCh--;
 rakarrack.get(rkr->PrefNom("Limiter Position"),rkr->flpos,0);
+rakarrack.get(rkr->PrefNom("Limiter +6dB"),rkr->db6booster,0);
 rakarrack.get(rkr->PrefNom("Booster"),rkr->booster,1.0f);
 if (rkr->booster==1.0) BostBut->value(0); else BostBut->value(1);
 
@@ -22975,6 +22994,8 @@ rakarrack.set(rkr->PrefNom("Filter DC Offset"),rkr->DC_Offset);
 
 rakarrack.set(rkr->PrefNom("Update Tap"),rkr->Tap_Updated);
 rakarrack.set(rkr->PrefNom("Limiter Position"),rkr->flpos);
+rakarrack.set(rkr->PrefNom("Limiter +6dB"),rkr->db6booster);
+
 rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti);
 rakarrack.set(rkr->PrefNom("Harmonizer Downsample"),rkr->Har_Down);
 rakarrack.set(rkr->PrefNom("Harmonizer Up Quality"),rkr->Har_U_Q);
@@ -24488,6 +24509,7 @@ Pre_Serve->value(rkr->actuvol);
 LM_Volume->value(rkr->Metro_Vol);
 Filter_DC->value(rkr->DC_Offset);
 FLPosition->value(rkr->flpos);
+DB6B->value(rkr->db6booster);
 Har_Downsample->value(rkr->Har_Down);
 Har_Down_Qua->value(rkr->Har_D_Q);
 Har_Up_Qua->value(rkr->Har_U_Q);
