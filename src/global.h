@@ -86,7 +86,7 @@
 
 typedef union {
         float f;
-        int i;
+        long int i;
         } ls_pcast32;
 
 
