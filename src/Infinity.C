@@ -76,10 +76,16 @@ rbandstate[i].cosp -= rbandstate[i].sinp*fconst;
 rbandstate[i].lfo = (1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
 rbandstate[i].ramp *= rampconst;  //ramp modulates filter band frequency cutoff
 if (rbandstate[i].ramp > maxlevel)  {
- rbandstate[i].ramp = minlevel;  //probably faster than fmod()
+ rbandstate[i].ramp = minlevel;  
+ rbandstate[i].sinp = -1.0f;
+ rbandstate[i].cosp = 0.0f;  //phase drift catch-all
  //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,rbandstate[i].sinp, rbandstate[i].lfo, rbandstate[i].ramp);
  }
-if (rbandstate[i].ramp < minlevel) rbandstate[i].ramp = maxlevel;  //if it is going in reverse (rampconst < 0)
+if (rbandstate[i].ramp < minlevel) {
+ rbandstate[i].ramp = maxlevel;  //if it is going in reverse (rampconst < 0)
+ rbandstate[i].sinp = -1.0f;
+ rbandstate[i].cosp = 0.0f;   //phase drift catch-all
+}
 rbandstate[i].vol = rbandstate[i].level*rbandstate[i].lfo;
 
 //left
@@ -89,10 +95,16 @@ lbandstate[i].lfo = (1.0f + lbandstate[i].sinp);  //lfo modulates filter band vo
 if (Preverse) lbandstate[i].ramp *= irampconst;  //left reversed from right
 else lbandstate[i].ramp *= rampconst;   //normal mode
 if (lbandstate[i].ramp > maxlevel)  {
- lbandstate[i].ramp = minlevel;  //probably faster than fmod()
+ lbandstate[i].ramp = minlevel;  
+ lbandstate[i].sinp = -1.0f;
+ lbandstate[i].cosp = 0.0f;  //phase drift catch-all
  //printf("i: %d sin: %f lfo: %f ramp: %f\n",i,lbandstate[i].sinp, lbandstate[i].lfo, lbandstate[i].ramp);
  }
-if (lbandstate[i].ramp < minlevel) lbandstate[i].ramp = maxlevel;  //if it is going in reverse (rampconst < 0)
+if (lbandstate[i].ramp < minlevel) {
+ lbandstate[i].ramp = maxlevel;  //if it is going in reverse (rampconst < 0)
+ lbandstate[i].sinp = -1.0f;
+ lbandstate[i].cosp = 0.0f;  //phase drift catch-all  
+  }
 lbandstate[i].vol = lbandstate[i].level*lbandstate[i].lfo;
 
   //lmodulate = linconst*f_pow2(logconst*lbandstate[i].ramp);
@@ -270,7 +282,7 @@ Infinity::setpreset (int npreset)
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Basic
-    {64, 64, 64, 64, 64, 64, 64, 64, 64, 150, 20, 80, 60, 0, 1, 0, 0 },
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 700, 20, 80, 60, 0, 1, 0, 0 },
     //Rising Comb
     {64, 64, -64, 64, -64, 64, -64, 64, -64, 600, 0, 127, 32, 0, 16, 0, 0 },
     //Falling Comb
