@@ -210,19 +210,15 @@ for (int i=0; i<NUM_INF_BANDS; i++)  {  //get them started on their respective p
 idx = (float) i;
 rbandstate[i].sinp = sinf(halfpi + D_PI*idx/fbandnum);
 rbandstate[i].cosp = cosf(halfpi + D_PI*idx/fbandnum);
-//rbandstate[i].ramp = idx/fbandnum;
 rbandstate[i].ramp = linconst*powf(2.0f,logconst*idx/fbandnum);
 rbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
 //left
 stateconst = fmod((stdiff + idx), fbandnum);
 lbandstate[i].sinp = sinf(halfpi + D_PI*stateconst/fbandnum);
 lbandstate[i].cosp = cosf(halfpi + D_PI*stateconst/fbandnum);
-//lbandstate[i].ramp = stateconst/fbandnum;
 lbandstate[i].ramp = linconst*powf(2.0f,logconst*stateconst/fbandnum);
 lbandstate[i].lfo = 0.5f*(1.0f + rbandstate[i].sinp);  //lfo modulates filter band volume
 //printf("i: %d sin: %f lfo: %f ramp: %f max: %f min: %f\n",i,rbandstate[i].sinp, rbandstate[i].lfo, rbandstate[i].ramp, maxlevel, minlevel);
-  //lmodulate = linconst*powf(2.0f,logconst*idx/fbandnum);
-  //rmodulate = linconst*powf(2.0f,logconst*stateconst/fbandnum);
        
   filterl[i]->setmix(0, 80.0f, 70.0f, 1.0f);
   filterr[i]->setmix(0, 80.0f, 70.0f, 1.0f);
@@ -264,7 +260,7 @@ Infinity::adjustfreqs()
       }
       irampconst = 1.0f/rampconst;
       logconst = logf(frmax/frmin)/logf(2.0f);
-      linconst = D_PI*frmin/fs;  //these lines are for using powf() in the loop
+      linconst = D_PI*frmin/fs;  //these lines are for using powf() in the initialization
       
       minlevel = D_PI*frmin/fs;
       maxlevel = minlevel*frmax/frmin;
@@ -360,8 +356,7 @@ Infinity::changepar (int npar, int value)
       Pautopan = value;
       autopan = ((float) Pautopan)/127.0f;
       if (autopan > 1.0f) autopan = 1.0f;
-      if (autopan < 0.0f) autopan = 0.0f;
-      adjustfreqs();      
+      if (autopan < 0.0f) autopan = 0.0f;    
       break;
      case 16:
       Preverse = value;
