@@ -52,7 +52,7 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
   lpmix = 0.5f;
   bpmix = 2.0f;
   Ppreset = 0;
-  wahsmooth = 1.0f - f_exp(-1.0f/(0.02f*fSAMPLE_RATE));  //0.02 seconds
+  wahsmooth = 1.0f - expf(-1.0f/(0.02f*fSAMPLE_RATE));  //0.02 seconds
   
   Fstages = 1;
   Ftype = 1;
@@ -192,15 +192,16 @@ RyanWah::setampsns (int Pp)
   Pampsns = Pp;
   if(Pampsns>0)
   {
-  ampsns = f_exp(0.083f*(float)Pampsns);
+  ampsns = expf(0.083f*(float)Pampsns);
   }  
   else
   {
-  ampsns = - f_exp(-0.083f*(float)Pampsns);
+  ampsns = - expf(-0.083f*(float)Pampsns);
   }  
   fbias  =  ((float)Pampsnsinv )/ 127.0f;
-  ampsmooth = f_exp(-1.0f/((((float) Pampsmooth)/127.0f + 0.01f)*fSAMPLE_RATE)); //goes up to 1 second
-
+  
+  ampsmooth = f_exp(-1.0f/((((float) Pampsmooth)/127.0f + 0.01f)*fSAMPLE_RATE)); //goes up to 1 second 
+ 
 };
 
 void

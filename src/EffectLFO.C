@@ -29,7 +29,7 @@
 
 #include "global.h"
 #include "EffectLFO.h"
-
+#include "f_sin.h"
 
 EffectLFO::EffectLFO ()
 {
@@ -135,16 +135,16 @@ float EffectLFO::getlfoshape (float x)
     break; 
     case 4:                     //ZigZag
        x = x * 2.0f - 1.0f;
-        tmpv = 0.33f * sinf(x);
-        out = sinf(sinf(x*D_PI)*x/tmpv);       
+        tmpv = 0.33f * f_sin(x);
+        out = f_sin(f_sin(x*D_PI)*x/tmpv);       
      break;  
     case 5:                     //Modulated Square ?? ;-)
        tmpv = x * D_PI;
-       out=sinf(tmpv+sinf(2.0f*tmpv));  
+       out=f_sin(tmpv+f_sin(2.0f*tmpv));  
      break; 
     case 6:                     // Modulated Saw 
        tmpv = x * D_PI;
-       out=sinf(tmpv+sinf(tmpv));  
+       out=f_sin(tmpv+f_sin(tmpv));  
      break; 
     case 8:                       //Lorenz Fractal, faster, using X,Y outputs
     iterations = 4;
@@ -192,7 +192,7 @@ float EffectLFO::getlfoshape (float x)
 
       //more to be added here; also ::updateparams() need to be updated (to allow more lfotypes)
     default:
-      out = cosf (x * D_PI);	//EffectLFO_SINE
+      out = f_cos (x * D_PI);	//EffectLFO_SINE
     };
   return (out);
 };

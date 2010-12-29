@@ -89,24 +89,25 @@ typedef union {
         long i;
         } ls_pcast32;
 
+/*
+static inline float f_pow2(float x)
+{
+        ls_pcast32 *px, tx, lx;
+        float dx;
 
-// static inline float f_pow2(float x)
-// {
-//         ls_pcast32 *px, tx, lx;
-//         float dx;
-//
-//         px = (ls_pcast32 *)&x; // store address of float as long pointer
-//         tx.f = (x-0.5f) + (3<<22); // temporary value for truncation
-//         lx.i = tx.i - 0x4b400000; // integer power of 2
-//         dx = x - (float)lx.i; // float remainder of power of 2
-//
-//         x = 1.0f + dx * (0.6960656421638072f + // cubic apporoximation of 2^x
-//                    dx * (0.224494337302845f +  // for x in the range [0, 1]
-//                    dx * (0.07944023841053369f)));
-//         (*px).i += (lx.i << 23); // add integer power of 2 to exponent
-//
-//         return (*px).f;
-// }
+        px = (ls_pcast32 *)&x; // store address of float as long pointer
+        tx.f = (x-0.5f) + (3<<22); // temporary value for truncation
+        lx.i = tx.i - 0x4b400000; // integer power of 2
+        dx = x - (float)lx.i; // float remainder of power of 2
+
+        x = 1.0f + dx * (0.6960656421638072f + // cubic apporoximation of 2^x
+                   dx * (0.224494337302845f +  // for x in the range [0, 1]
+                   dx * (0.07944023841053369f)));
+        (*px).i += (lx.i << 23); // add integer power of 2 to exponent
+
+        return (*px).f;
+}
+*/
 
 #define P2a0  1.00000534060469
 #define P2a1   0.693057900547259
@@ -116,14 +117,19 @@ typedef union {
 #include <math.h>
 static inline float f_pow2(float x)
 {
-long xint = (int) ceil(x); 
-float xx = x - xint; 
+float y,xx, intpow;
+long xint = (int) fabs(ceil(x)); 
+xx = x - ceil(x); 
 xint = xint<<xint;
-float intpow = (float) xint;
-float y = intpow*(xx*(xx*(xx*(xx*P2a4 + P2a3) + P2a2) + P2a1) + P2a0);  
+if(x>0) intpow = (float) xint;
+else intpow = 1.0f;
+
+y = intpow*(xx*(xx*(xx*(xx*P2a4 + P2a3) + P2a2) + P2a1) + P2a0);  
+
 return y;
  
 }
+
 
 
 #define f_exp(x) f_pow2(x * LN2R)

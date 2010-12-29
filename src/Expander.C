@@ -104,7 +104,7 @@ Expander::Expander_Change (int np, int value)
     case 2:
       Pshape = value;
       sfactor = dB2rap ((float)Pshape/2);
-      sgain = f_exp(-sfactor);
+      sgain = expf(-sfactor);
       break;
     case 3:
       Pattack = value;
@@ -225,7 +225,7 @@ Expander::out (float *efxoutl, float *efxoutr)
 	//End envelope power detection
 	
 	if (env > tlevel) env = tlevel;	
-	expenv = sgain * (f_exp(env*sfactor*tfactor) - 1.0f);		//Envelope waveshaping
+	expenv = sgain * (expf(env*sfactor*tfactor) - 1.0f);		//Envelope waveshaping
       
       gain = (1.0f - d_rate) * oldgain + d_rate * expenv;
       oldgain = gain;				//smooth it out a little bit

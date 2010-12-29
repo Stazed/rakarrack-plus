@@ -20,6 +20,7 @@ rakarrack_SOURCES = main.C \
 	EQ.h \
 	Exciter.h \
 	Expander.h \
+	f_sin.h \
 	Filter_.h \
 	Filter.h \
 	FilterParams.h \

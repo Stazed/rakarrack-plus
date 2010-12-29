@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Waveshaper.h"
+#include "f_sin.h"
 
 Waveshaper::Waveshaper()
 {
@@ -140,12 +141,12 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
     case 2:
       ws = ws * ws * 32.0f + 0.0001f;	//Asymmetric
       if (ws < 1.0)
-	tmpv = sinf (ws) + 0.1f;
+	tmpv = f_sin (ws) + 0.1f;
       else
 	tmpv = 1.1f;
       for (i = 0; i < nn; i++)
 	{
-	  temps[i] = sinf (temps[i] * (0.1f + ws - ws * temps[i])) / tmpv;
+	  temps[i] = f_sin (temps[i] * (0.1f + ws - ws * temps[i])) / tmpv;
 	};
       break;
     case 3:
@@ -166,11 +167,11 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
     case 4:
       ws = ws * ws * ws * 32.0f + 0.0001f;	//Sine
       if (ws < 1.57f)
-	tmpv = sinf (ws);
+	tmpv = f_sin (ws);
       else
 	tmpv = 1.0f;
       for (i = 0; i < nn; i++)
-	temps[i] = sinf (temps[i] * ws) / tmpv;
+	temps[i] = f_sin (temps[i] * ws) / tmpv;
       break;
     case 5:
       ws = ws * ws + 0.000001f;	//Quantisize
@@ -180,11 +181,11 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
     case 6:
       ws = ws * ws * ws * 32.0f + 0.0001f;	//Zigzag
       if (ws < 1.0)
-	tmpv = sinf (ws);
+	tmpv = f_sin (ws);
       else
 	tmpv = 1.0f;
       for (i = 0; i < nn; i++)
-	temps[i] = asinf (sinf (temps[i] * ws)) / tmpv;
+	temps[i] = asinf (f_sin (temps[i] * ws)) / tmpv;
       break;
     case 7:
       ws = powf (2.0f, -ws * ws * 8.0f);	//Limiter
@@ -360,22 +361,22 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
        case 18:
       ws = ws*D_PI+.00001;
       if (ws < 1.57f)
-	tmpv = sinf (ws);
+	tmpv = f_sin (ws);
       else
 	tmpv = 1.0f;
       for (i = 0; i < nn; i++)
-        temps[i]=sinf(ws * temps[i] + sinf( ws * 2.0f*temps[i]))/ tmpv;  
+        temps[i]=f_sin(ws * temps[i] + f_sin( ws * 2.0f*temps[i]))/ tmpv;  
 
       break;                                                               
 
       case 19:
       ws =  ws * D_PI + 0.0001f;
        if (ws < 1.57f)
-	tmpv = sinf (ws);
+	tmpv = f_sin (ws);
       else
 	tmpv = 1.0f;
        for (i = 0; i < nn; i++)
-       temps[i]=sinf(ws * temps[i] + sinf(ws * temps[i])/tmpv);  
+       temps[i]=f_sin(ws * temps[i] + f_sin(ws * temps[i])/tmpv);  
       break;                                                               
         
       case 20:  //Compression
