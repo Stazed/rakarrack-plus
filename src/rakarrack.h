@@ -3351,6 +3351,26 @@ private:
   void cb_infinity_8_i(Fl_Value_Input*, void*);
   static void cb_infinity_8(Fl_Value_Input*, void*);
 public:
+  Fl_Check_Button *infinity_rev;
+private:
+  void cb_infinity_rev_i(Fl_Check_Button*, void*);
+  static void cb_infinity_rev(Fl_Check_Button*, void*);
+public:
+  Fl_Counter *infinity_stages;
+private:
+  void cb_infinity_stages_i(Fl_Counter*, void*);
+  static void cb_infinity_stages(Fl_Counter*, void*);
+public:
+  SliderW *infinity_pan;
+private:
+  void cb_infinity_pan_i(SliderW*, void*);
+  static void cb_infinity_pan(SliderW*, void*);
+public:
+  SliderW *infinity_stdf;
+private:
+  void cb_infinity_stdf_i(SliderW*, void*);
+  static void cb_infinity_stdf(SliderW*, void*);
+public:
   SliderW *infinity_start;
 private:
   void cb_infinity_start_i(SliderW*, void*);
@@ -3366,25 +3386,10 @@ private:
   void cb_infinity_rate_i(SliderW*, void*);
   static void cb_infinity_rate(SliderW*, void*);
 public:
-  SliderW *infinity_stdf;
-private:
-  void cb_infinity_stdf_i(SliderW*, void*);
-  static void cb_infinity_stdf(SliderW*, void*);
-public:
   SliderW *infinity_subdiv;
 private:
   void cb_infinity_subdiv_i(SliderW*, void*);
   static void cb_infinity_subdiv(SliderW*, void*);
-public:
-  SliderW *infinity_pan;
-private:
-  void cb_infinity_pan_i(SliderW*, void*);
-  static void cb_infinity_pan(SliderW*, void*);
-public:
-  Fl_Check_Button *infinity_rev;
-private:
-  void cb_infinity_rev_i(Fl_Check_Button*, void*);
-  static void cb_infinity_rev(Fl_Check_Button*, void*);
 public:
   Fl_Group *Tuner;
   Fl_Light_Button *tuner_activar;
