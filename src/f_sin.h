@@ -6,6 +6,7 @@ This is unlicensed.  Do whatever you want with but use at your own disgression.
 The author makes no guarantee of its suitability for any purpose.  
 */
 
+
 #ifndef FSIN_H
 #define FSIN_H
 
@@ -23,7 +24,7 @@ f_sin(float x_) {
 
 	float y;  //function output
 	float tmp;
-	float x;  // the test variable
+	float x=x_;  // the test variable
 	bool sign;
 
 	if ((x>D_PI) || (x<-D_PI)) x = fmod(x_,D_PI);
