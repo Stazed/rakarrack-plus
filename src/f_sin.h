@@ -20,11 +20,10 @@ static const float mp2 = -p2;
 static const float fact3 = 0.148148148148148f; //can multiply by 1/fact3
 
 static inline float 
-f_sin(float x_) {
+f_sin(float x) {
 
 	float y;  //function output
 	float tmp;
-	float x=x_;  // the test variable
 	bool sign;
 	if ((x>D_PI) || (x<-D_PI)) x = fmod(x,D_PI);
 	if (x < 0.0f) x+=D_PI;
