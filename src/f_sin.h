@@ -26,7 +26,7 @@ f_sin(float x_) {
 	float x;  // the test variable
 	bool sign;
 
-	x = fmod(x_,D_PI);
+	if ((x>D_PI) || (x<-D_PI)) x = fmod(x_,D_PI);
 	if (x < 0.0f) x+=D_PI;
 	sign = 0;
 	if(x>M_PI) {
