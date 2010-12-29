@@ -64,6 +64,7 @@ private:
   int Psubdiv;
   int Pautopan;
   int Preverse;
+  int Pstages;        //filter stages
   
   struct filterstate {
   float sinp;

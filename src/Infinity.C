@@ -274,17 +274,17 @@ Infinity::adjustfreqs()
 void
 Infinity::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 17;
+  const int PRESET_SIZE = 18;
   const int NUM_PRESETS = 4;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Basic
-    {64, 64, 64, 64, 64, 64, 64, 64, 64, 700, 20, 80, 60, 0, 1, 0, 0 },
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 700, 20, 80, 60, 0, 1, 0, 0, 1 },
     //Rising Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 600, 0, 127, 32, 0, 16, 0, 0 },
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 600, 0, 127, 32, 0, 16, 0, 0, 1 },
     //Falling Comb
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 600, 127, 0, 32, 0, 16, 0, 0 },
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 600, 127, 0, 32, 0, 16, 0, 0, 1 },
     //Laser
-    {0, 64, -64, 64, -64, 64, -64, 64, -64, 600, 127, 2, 70, 0, 1, 0, 0 }     
+    {0, 64, -64, 64, -64, 64, -64, 64, -64, 600, 127, 2, 70, 0, 1, 0, 0, 1 }     
   };
 
   if(npreset>NUM_PRESETS-1)  
@@ -362,6 +362,13 @@ Infinity::changepar (int npar, int value)
       Preverse = value;
       adjustfreqs();      
       break;
+     case 17:
+       Pstages = value;
+       for (int i=0; i<NUM_INF_BANDS; i++)  { 
+       filterl[i]->setstages(value - 1);
+       filterr[i]->setstages(value - 1);
+       }
+       break;
     };
 };
 
@@ -406,6 +413,9 @@ Infinity::getpar (int npar)
       break;
     case 16:
       return (Preverse);
+      break;
+    case 17:
+      return (Pstages);
       break;
     default:
       return (0);
