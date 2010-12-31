@@ -26274,7 +26274,7 @@ switch (i)
      infinity_pan->redraw();
      break;  	
      case 398:
-     infinity_stdf->value(rkr->efx_Infinity->getpar(13));
+     infinity_stdf->value(rkr->efx_Infinity->getpar(13)-64);
      infinity_stdf->redraw();
      break;  	
      case 399:

@@ -848,7 +848,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {selected
+class RKRGUI {open
 } {
   decl {RKR *rkr;} {}
   decl {int made;} {}
@@ -16307,7 +16307,7 @@ switch (i)
      infinity_pan->redraw();
      break;  	
      case 398:
-     infinity_stdf->value(rkr->efx_Infinity->getpar(13));
+     infinity_stdf->value(rkr->efx_Infinity->getpar(13)-64);
      infinity_stdf->redraw();
      break;  	
      case 399:
@@ -16336,7 +16336,8 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {}
+rkr->Mvalue=0;} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {int miralo;
