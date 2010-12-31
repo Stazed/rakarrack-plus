@@ -9193,7 +9193,7 @@ Fl_Menu_Item RKRGUI::menu_infinity_preset[] = {
 void RKRGUI::cb_infinity_WD_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(130);
+ getMIDIControl(395);
  return;
 } 
 rkr->efx_Infinity->changepar(0,(int)(o->value()+64));
@@ -9205,7 +9205,7 @@ void RKRGUI::cb_infinity_WD(SliderW* o, void* v) {
 void RKRGUI::cb_infinity_Q_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(131);
+ getMIDIControl(396);
  return;
 }
 rkr->efx_Infinity->changepar(9,(int)o->value());
@@ -9215,108 +9215,63 @@ void RKRGUI::cb_infinity_Q(SliderW* o, void* v) {
 }
 
 void RKRGUI::cb_infinity_1_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(1,(int)o->value());
+  rkr->efx_Infinity->changepar(1,(int)o->value());
 }
 void RKRGUI::cb_infinity_1(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_1_i(o,v);
 }
 
 void RKRGUI::cb_infinity_2_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(2,(int)o->value());
+  rkr->efx_Infinity->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_infinity_2(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_2_i(o,v);
 }
 
 void RKRGUI::cb_infinity_3_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(3,(int)o->value());
+  rkr->efx_Infinity->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_infinity_3(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_3_i(o,v);
 }
 
 void RKRGUI::cb_infinity_4_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(4,(int)o->value());
+  rkr->efx_Infinity->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_infinity_4(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_4_i(o,v);
 }
 
 void RKRGUI::cb_infinity_5_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(5,(int)o->value());
+  rkr->efx_Infinity->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_infinity_5(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_5_i(o,v);
 }
 
 void RKRGUI::cb_infinity_6_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(6,(int)o->value());
+  rkr->efx_Infinity->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_infinity_6(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_6_i(o,v);
 }
 
 void RKRGUI::cb_infinity_7_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(7,(int)o->value());
+  rkr->efx_Infinity->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_infinity_7(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_7_i(o,v);
 }
 
 void RKRGUI::cb_infinity_8_i(Fl_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(8,(int)o->value());
+  rkr->efx_Infinity->changepar(8,(int)o->value());
 }
 void RKRGUI::cb_infinity_8(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_8_i(o,v);
 }
 
 void RKRGUI::cb_infinity_rev_i(Fl_Check_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(140);
- return;
-} 
-rkr->efx_Infinity->changepar(16,(int)o->value());
+  rkr->efx_Infinity->changepar(16,(int)o->value());
 }
 void RKRGUI::cb_infinity_rev(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_infinity_rev_i(o,v);
@@ -9332,7 +9287,7 @@ void RKRGUI::cb_infinity_stages(Fl_Counter* o, void* v) {
 void RKRGUI::cb_infinity_pan_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(397);
  return;
 } 
 rkr->efx_Infinity->changepar(15,(int)o->value());
@@ -9344,7 +9299,7 @@ void RKRGUI::cb_infinity_pan(SliderW* o, void* v) {
 void RKRGUI::cb_infinity_stdf_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(398);
  return;
 } 
 rkr->efx_Infinity->changepar(13,(int)o->value());
@@ -9356,7 +9311,7 @@ void RKRGUI::cb_infinity_stdf(SliderW* o, void* v) {
 void RKRGUI::cb_infinity_start_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(399);
  return;
 } 
 rkr->efx_Infinity->changepar(10,(int)o->value());
@@ -9368,7 +9323,7 @@ void RKRGUI::cb_infinity_start(SliderW* o, void* v) {
 void RKRGUI::cb_infinity_end_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(141);
+ getMIDIControl(400);
  return;
 } 
 rkr->efx_Infinity->changepar(11,(int)o->value());
@@ -9380,7 +9335,7 @@ void RKRGUI::cb_infinity_end(SliderW* o, void* v) {
 void RKRGUI::cb_infinity_rate_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(141);
+ getMIDIControl(401);
  return;
 } 
 rkr->efx_Infinity->changepar(12,(int)o->value());
@@ -9392,7 +9347,7 @@ void RKRGUI::cb_infinity_rate(SliderW* o, void* v) {
 void RKRGUI::cb_infinity_subdiv_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(402);
  return;
 } 
 rkr->efx_Infinity->changepar(14,(int)o->value());
@@ -26306,7 +26261,40 @@ switch (i)
      vibe_pan->value(rkr->efx_Vibe->getpar(6)-64);
      vibe_pan->redraw();
      break;
-       	
+     case 395:
+     infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
+     infinity_WD->redraw();
+     break;  	
+     case 396:
+     infinity_Q->value(rkr->efx_Infinity->getpar(9));
+     infinity_Q->redraw();
+     break;  	
+     case 397:
+     infinity_pan->value(rkr->efx_Infinity->getpar(15));
+     infinity_pan->redraw();
+     break;  	
+     case 398:
+     infinity_stdf->value(rkr->efx_Infinity->getpar(13));
+     infinity_stdf->redraw();
+     break;  	
+     case 399:
+     infinity_start->value(rkr->efx_Infinity->getpar(10));
+     infinity_start->redraw();
+     break;  	
+     case 400:
+     infinity_end->value(rkr->efx_Infinity->getpar(11));
+     infinity_end->redraw();
+     break;  	
+     case 401:
+     infinity_rate->value(rkr->efx_Infinity->getpar(12));
+     infinity_rate->redraw();
+     break;  	
+     case 402:
+     infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
+     infinity_subdiv->redraw();
+     break;  	
+
+
      
       
 }
@@ -26518,7 +26506,10 @@ case 45:
   vibe_activar->value(rkr->Vibe_Bypass);
   vibe_activar->do_callback();
   break;
-
+case 46:
+  infinity_activar->value(rkr->Infinity_Bypass);
+  infinity_activar->do_callback();
+  break;
   
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);

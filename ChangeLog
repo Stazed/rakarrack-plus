@@ -1,5 +1,9 @@
 ==v0.6.2 ( / /201 ) ==
 
+- Added effect Infinity
+- Added fast sin functions
+- Added +6dB option in settings to the final Limiter
+- Added fast f_pow functions
 - Improved handling of jackd shutdown.
 - Improved Dual Flanger
 - New  Mode on MuTroMojo

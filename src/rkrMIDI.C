@@ -430,6 +430,9 @@ else
    case 45:
     if(inoff) Vibe_Bypass=1; else Vibe_Bypass=0;
      break;
+   case 46:
+    if(inoff) Infinity_Bypass=1; else Infinity_Bypass=0;
+     break;
 
    
    case 121:
@@ -603,6 +606,9 @@ RKR::checkonoff(int miraque)
      break;
    case 45:
      if (Vibe_Bypass) return(0);
+     break;
+   case 46:
+     if (Infinity_Bypass) return(0);
      break;
 
 
@@ -2315,15 +2321,15 @@ RKR::process_midi_controller_events(int parameter, int value)
          break;
 
     case 378:
-         efx_CompBand->changepar(9,20+(int)((float)value*7.71653));
+         efx_CompBand->changepar(9,20+(int)((float)value*7.71653f));
          break;
          
     case 379:
-         efx_CompBand->changepar(10,1000+(int)((float)value*55.11811));
+         efx_CompBand->changepar(10,1000+(int)((float)value*55.11811f));
          break;
          
     case 380:
-         efx_CompBand->changepar(11,2000+(int)((float)value*188.97638));
+         efx_CompBand->changepar(11,2000+(int)((float)value*188.97638f));
          break;
  
     case 381:
@@ -2382,6 +2388,37 @@ RKR::process_midi_controller_events(int parameter, int value)
          efx_Vibe->changepar(5,value);
          break;
 
+    case 395:
+         efx_Infinity->changepar(0,value);
+         break;
+
+    case 396:
+         efx_Infinity->changepar(9,-1000+(int)((float)value*15.748031f));
+         break;
+
+    case 397:
+         efx_Infinity->changepar(15,value);
+         break;
+
+    case 398:
+         efx_Infinity->changepar(13,value);
+         break;
+
+    case 399:
+         efx_Infinity->changepar(10,value);
+         break;
+
+    case 400:
+         efx_Infinity->changepar(11,value);
+         break;
+
+    case 401:
+         efx_Infinity->changepar(12,ret_Tempo(value));
+         break;
+
+    case 402:
+         efx_Infinity->changepar(14,-16+(int)((float)value*.2418685f));
+         break;
 
 
    } 
