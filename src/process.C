@@ -388,7 +388,7 @@ RKR::RKR ()
   }
 
 
-  NumParams= 369;
+  NumParams= 377;
 
 {
    static const char *los_params[] = 
@@ -569,8 +569,15 @@ RKR::RKR ()
 "Harmonizer Interval","27","14",
 "Harmonizer Pan","49","14",
 "Harmonizer Wet/Dry","31","14",
+"Infinity WD","395","46",
+"Infinity Res","396","46",
+"Infinity AutoPan","397","46",
+"Infinity St_df","398","46",
+"Infinity Start","399","46",
+"Infinity End","400","46",
+"Infinity Tempo","401","46",
+"Infinity Subdiv","402","46",
 "Input","14","50",
-//Infinity when final
 "Looper Auto Play"," 271","30",
 "Looper Clear","279","30",
 "Looper Level 1","268","30",

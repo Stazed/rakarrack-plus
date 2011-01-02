@@ -401,6 +401,15 @@ void RKR::putbuf(char *buf, int j)
 		  &Vibe_B);
 	  break;
 
+	case 46:
+	  //Infinity
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		  &lv[47][0], &lv[47][1], &lv[47][2], &lv[47][3], &lv[47][4],
+		  &lv[47][5], &lv[47][6], &lv[47][7], &lv[47][8], &lv[47][9],
+		  &lv[47][10], &lv[47][11], &lv[47][12], &lv[47][13], &lv[47][14],
+		  &lv[47][15], &lv[47][16], &lv[47][17], &Infinity_B);
+	  break;
+
 
 
 	}
@@ -930,6 +939,21 @@ void RKR::getbuf(char *buf, int j)
 		   efx_Vibe->getpar (6), efx_Vibe->getpar (7),
 		   efx_Vibe->getpar (8), efx_Vibe->getpar (9),
                    Vibe_Bypass);
+	  break;
+
+	case 46:
+	  //Infinity
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+		   efx_Infinity->getpar (0), efx_Infinity->getpar (1),
+		   efx_Infinity->getpar (2), efx_Infinity->getpar (3),
+		   efx_Infinity->getpar (4), efx_Infinity->getpar (5),
+		   efx_Infinity->getpar (6), efx_Infinity->getpar (7),
+		   efx_Infinity->getpar (8), efx_Infinity->getpar (9),
+                   efx_Infinity->getpar (10), efx_Infinity->getpar (11),
+		   efx_Infinity->getpar (12), efx_Infinity->getpar (13),
+		   efx_Infinity->getpar (14), efx_Infinity->getpar (15),
+		   efx_Infinity->getpar (16), efx_Infinity->getpar (17),
+                   Infinity_Bypass);
 	  break;
 
 
@@ -1597,6 +1621,15 @@ RKR::Actualizar_Audio ()
         efx_Vibe->changepar (i, lv[46][i]);
         Vibe_Bypass = Vibe_B;
         break;
+
+        case 46://Infinity 
+
+        Infinity_Bypass = 0;
+        efx_Infinity->cleanup();
+        for (i = 0; i <= 17; i++)
+        efx_Infinity->changepar (i, lv[47][i]);
+        Infinity_Bypass = Infinity_B;
+        break;
   
         }  
     }
@@ -1744,7 +1777,7 @@ RKR::New ()
 
   int j, k;
 
-  int presets[47][16] = {
+  int presets[48][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1838,9 +1871,10 @@ RKR::New ()
 //Opticaltrem
     {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Vibe
-    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0}
-    
-    
+    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0},
+//Infinity    
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 700, 20, 80, 60, 0, 1, 0}
+
     
 
     
@@ -1928,7 +1962,8 @@ RKR::New ()
   CompBand_B = 0;
   Opticaltrem_B = 0;
   Vibe_B = 0;    
- 
+  Infinity_B=0;
+   
   Bypass_B = 0;
 
   
@@ -1951,7 +1986,7 @@ RKR::New_Bank ()
 
   int i, j, k;
 
-  int presets[47][16] = {
+  int presets[48][16] = {
 //Reverb
     {80, 64, 63, 24, 0, 0, 0, 85, 5, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -2045,7 +2080,9 @@ RKR::New_Bank ()
 //Opticaltrem
     {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //Vibe
-    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0}
+    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0},
+//Infinity    
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 700, 20, 80, 60, 0, 1, 0}
     
     
     
@@ -2172,6 +2209,7 @@ RKR::Bank_to_Preset (int i)
   CompBand_B = Bank[i].lv[44][19];
   Opticaltrem_B = Bank[i].lv[45][19];
   Vibe_B = Bank[i].lv[46][19];
+  Infinity_B = Bank[i].lv[47][19];
 
 
   Bypass_B = Bypass;
@@ -2304,6 +2342,8 @@ RKR::Preset_to_Bank (int i)
     lv[45][j] = efx_Opticaltrem->getpar(j);
   for (j = 0; j <= 9; j++)
     lv[46][j] = efx_Vibe->getpar(j);
+  for (j = 0; j <= 17; j++)
+    lv[47][j] = efx_Infinity->getpar(j);
 
 
   for (j = 0; j <= 12; j++)
@@ -2384,6 +2424,7 @@ RKR::Preset_to_Bank (int i)
   Bank[i].lv[44][19] = CompBand_Bypass;
   Bank[i].lv[45][19] = Opticaltrem_Bypass;
   Bank[i].lv[46][19] = Vibe_Bypass;
+  Bank[i].lv[47][19] = Infinity_Bypass;
   
 
   memcpy(Bank[i].XUserMIDI,XUserMIDI,sizeof(XUserMIDI));

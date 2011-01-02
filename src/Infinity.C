@@ -408,7 +408,7 @@ Infinity::changepar (int npar, int value)
      case 16:
       Preverse = value;
       adjustfreqs();      
-      break;
+
      case 17:
        Pstages = value - 1;
 //        for (int i=0; i<NUM_INF_BANDS; i++)  { 

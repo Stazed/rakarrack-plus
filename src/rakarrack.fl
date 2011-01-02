@@ -848,7 +848,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -9918,7 +9919,7 @@ infinity_stages->value(rkr->efx_Infinity->getpar(17));}
           label {Wet/Dry}
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(130);
+ getMIDIControl(395);
  return;
 } 
 rkr->efx_Infinity->changepar(0,(int)(o->value()+64));}
@@ -9929,7 +9930,7 @@ rkr->efx_Infinity->changepar(0,(int)(o->value()+64));}
           label Res
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(131);
+ getMIDIControl(396);
  return;
 }
 rkr->efx_Infinity->changepar(9,(int)o->value());}
@@ -9938,105 +9939,60 @@ rkr->efx_Infinity->changepar(9,(int)o->value());}
         }
         Fl_Value_Input infinity_1 {
           label 1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(1,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(1,(int)o->value());}
           xywh {17 267 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Value_Input infinity_2 {
           label 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(2,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(2,(int)o->value());}
           xywh {53 267 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Value_Input infinity_3 {
           label 3
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(3,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(3,(int)o->value());}
           xywh {89 266 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Value_Input infinity_4 {
           label 4
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(4,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(4,(int)o->value());}
           xywh {125 266 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Value_Input infinity_5 {
           label 5
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(5,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(5,(int)o->value());}
           xywh {17 285 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Value_Input infinity_6 {
           label 6
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(6,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(6,(int)o->value());}
           xywh {53 285 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Value_Input infinity_7 {
           label 7
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(7,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(7,(int)o->value());}
           xywh {89 285 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Value_Input infinity_8 {
           label 8
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(132);
- return;
-} 
-rkr->efx_Infinity->changepar(8,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(8,(int)o->value());}
           xywh {125 285 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
         }
         Fl_Check_Button infinity_rev {
           label Rev
           user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(140);
- return;
-} 
-rkr->efx_Infinity->changepar(16,(int)o->value());}
+          callback {rkr->efx_Infinity->changepar(16,(int)o->value());}
           tooltip {Reverse left from right directions} xywh {7 304 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
         Fl_Counter infinity_stages {
           label Stages
-          callback {rkr->efx_Infinity->changepar(17,(int)o->value());} selected
+          callback {rkr->efx_Infinity->changepar(17,(int)o->value());}
           xywh {91 304 46 15} type Simple labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 10
         }
         Fl_Value_Slider infinity_pan {
           label AutoPan
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(397);
  return;
 } 
 rkr->efx_Infinity->changepar(15,(int)o->value());}
@@ -10047,7 +10003,7 @@ rkr->efx_Infinity->changepar(15,(int)o->value());}
           label {St.df}
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(398);
  return;
 } 
 rkr->efx_Infinity->changepar(13,(int)o->value());}
@@ -10058,7 +10014,7 @@ rkr->efx_Infinity->changepar(13,(int)o->value());}
           label Start
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(399);
  return;
 } 
 rkr->efx_Infinity->changepar(10,(int)o->value());}
@@ -10069,7 +10025,7 @@ rkr->efx_Infinity->changepar(10,(int)o->value());}
           label End
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(141);
+ getMIDIControl(400);
  return;
 } 
 rkr->efx_Infinity->changepar(11,(int)o->value());}
@@ -10080,7 +10036,7 @@ rkr->efx_Infinity->changepar(11,(int)o->value());}
           label Tempo
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(141);
+ getMIDIControl(401);
  return;
 } 
 rkr->efx_Infinity->changepar(12,(int)o->value());}
@@ -10091,7 +10047,7 @@ rkr->efx_Infinity->changepar(12,(int)o->value());}
           label Subdiv
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(140);
+ getMIDIControl(402);
  return;
 } 
 rkr->efx_Infinity->changepar(14,(int)o->value());}
@@ -16338,7 +16294,40 @@ switch (i)
      vibe_pan->value(rkr->efx_Vibe->getpar(6)-64);
      vibe_pan->redraw();
      break;
-       	
+     case 395:
+     infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
+     infinity_WD->redraw();
+     break;  	
+     case 396:
+     infinity_Q->value(rkr->efx_Infinity->getpar(9));
+     infinity_Q->redraw();
+     break;  	
+     case 397:
+     infinity_pan->value(rkr->efx_Infinity->getpar(15));
+     infinity_pan->redraw();
+     break;  	
+     case 398:
+     infinity_stdf->value(rkr->efx_Infinity->getpar(13)-64);
+     infinity_stdf->redraw();
+     break;  	
+     case 399:
+     infinity_start->value(rkr->efx_Infinity->getpar(10));
+     infinity_start->redraw();
+     break;  	
+     case 400:
+     infinity_end->value(rkr->efx_Infinity->getpar(11));
+     infinity_end->redraw();
+     break;  	
+     case 401:
+     infinity_rate->value(rkr->efx_Infinity->getpar(12));
+     infinity_rate->redraw();
+     break;  	
+     case 402:
+     infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
+     infinity_subdiv->redraw();
+     break;  	
+
+
      
       
 }
@@ -16347,7 +16336,8 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {}
+rkr->Mvalue=0;} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {int miralo;
@@ -16549,7 +16539,10 @@ case 45:
   vibe_activar->value(rkr->Vibe_Bypass);
   vibe_activar->do_callback();
   break;
-
+case 46:
+  infinity_activar->value(rkr->Infinity_Bypass);
+  infinity_activar->do_callback();
+  break;
   
   case 121:
   Tap_activar->value(rkr->Tap_Bypass);
