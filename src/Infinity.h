@@ -75,6 +75,13 @@ private:
   float vol;
   } rbandstate[NUM_INF_BANDS], lbandstate[NUM_INF_BANDS];
   
+  struct phasevars {
+  float yn1[MAX_PHASER_STAGES];
+  float xn1[MAX_PHASER_STAGES];
+  float gain;
+  } rphaser[NUM_INF_BANDS], lphaser[NUM_INF_BANDS];
+   float phaserfb;
+  float phaser(phasevars *pstruct, float fxn, int j);
   /*
   fconst = freq* 2*pi/fs;
   rampconst = 2*freq/fs;

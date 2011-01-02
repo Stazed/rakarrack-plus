@@ -37,7 +37,15 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f);
   rbandstate[i].level = 1.0f;
   rbandstate[i].vol = 1.0f; 
-   
+  lphaser[i].gain = 0.5f;
+  rphaser[i].gain = 0.5f;
+  for (int j = 0; j<MAX_PHASER_STAGES; j++) {
+  lphaser[i].yn1[j] = 0.0f;
+  rphaser[i].yn1[j] = 0.0f; 
+  lphaser[i].xn1[j] = 0.0f;
+  rphaser[i].xn1[j] = 0.0f; 
+  } 
+      
   Pb[i] = 1;  
   }
   Ppreset = 2;
@@ -54,6 +62,8 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   Preverse = 0;
   Pautopan = 0;
   autopan = 0.0f;
+  Pstages = 0;
+  phaserfb = 0.0f;
   
   adjustfreqs(); 
   reinitfilter();
@@ -63,6 +73,25 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
 Infinity::~Infinity ()
 {
 };
+
+float inline
+Infinity::phaser(phasevars *pstruct, float fxn, int j)
+{
+int k;
+float xn = fxn + DENORMAL_GUARD;
+
+for (k = 0; k < Pstages; k++)
+	{
+	  pstruct[j].yn1[k] = pstruct[j].xn1[k] - pstruct[j].gain * (xn + pstruct[j].yn1[k]);
+	  //pstruct[j].yn1[k] += DENORMAL_GUARD;
+	  pstruct[j].xn1[k] = fxn;
+	  xn = pstruct[j].yn1[k];
+	};
+pstruct[j].yn1[0] -= phaserfb*fxn;
+
+return fxn;
+
+}
 
 void inline
 Infinity::oscillator()
@@ -109,11 +138,14 @@ lbandstate[i].vol = lbandstate[i].level*lbandstate[i].lfo;
 
   //lmodulate = linconst*f_pow2(logconst*lbandstate[i].ramp);
   //rmodulate = linconst*f_pow2(logconst*rbandstate[i].ramp);
-  lmodulate = lbandstate[i].ramp;
-  rmodulate = rbandstate[i].ramp;  
+  lmodulate = 1.0f - 0.25f*lbandstate[i].ramp;
+  rmodulate = 1.0f - 0.25f*rbandstate[i].ramp;  
   
-  filterl[i]->directmod(lmodulate);
-  filterr[i]->directmod(rmodulate);
+  filterl[i]->directmod(lbandstate[i].ramp);
+  filterr[i]->directmod(rbandstate[i].ramp);
+  
+  lphaser[i].gain = lmodulate;
+  rphaser[i].gain = rmodulate;
 }
 
 }
@@ -133,9 +165,19 @@ Infinity::out (float * smpsl, float * smpsr)
    tmpr = tmpl = 0.0f;   
     //run filter
    
-    for (j=0; j<NUM_INF_BANDS; j++)  {
+
+
+    if(Pstages) {
+    for (j=0; j<NUM_INF_BANDS; j++)  {    
+    tmpl+=phaser(lphaser, filterl[j]->filterout_s(lbandstate[j].vol*smpsl[i]), j );
+    tmpr+=phaser(rphaser, filterr[j]->filterout_s(rbandstate[j].vol*smpsr[i]), j );   
+     }
+    }
+    else {
+    for (j=0; j<NUM_INF_BANDS; j++)  {     
     tmpl+=filterl[j]->filterout_s(lbandstate[j].vol*smpsl[i]);
-    tmpr+=filterr[j]->filterout_s(rbandstate[j].vol*smpsr[i]);
+    tmpr+=filterr[j]->filterout_s(rbandstate[j].vol*smpsr[i]);    
+    }
     } 
     
     //master oscillator
@@ -144,10 +186,7 @@ Infinity::out (float * smpsl, float * smpsr)
     efxoutl[i] = (1.0f + autopan*mcos)*volmaster*tmpl;
     efxoutr[i] = (1.0f - autopan*mcos)*volmaster*tmpr;     
   
-    /* Debug
-    efxoutl[i] = smpsl[i]*bandstate[0].vol*bandstate[0].ramp;
-    efxoutr[i] = smpsr[i]*bandstate[3].ramp*bandstate[3].vol;
-       */
+
   }
  
 };
@@ -162,6 +201,14 @@ Infinity::cleanup ()
   for ( int i = 0; i<NUM_INF_BANDS; i++) {
   filterl[i]->cleanup();
   filterr[i]->cleanup();
+  lphaser[i].gain = 0.5f;
+  rphaser[i].gain = 0.5f;
+  for (int j = 0; j<MAX_PHASER_STAGES; j++) {
+  lphaser[i].yn1[j] = 0.0f;
+  rphaser[i].yn1[j] = 0.0f; 
+  lphaser[i].xn1[j] = 0.0f;
+  rphaser[i].xn1[j] = 0.0f; 
+  }
   }
   
   
@@ -363,11 +410,12 @@ Infinity::changepar (int npar, int value)
       adjustfreqs();      
       break;
      case 17:
-       Pstages = value;
-       for (int i=0; i<NUM_INF_BANDS; i++)  { 
-       filterl[i]->setstages(value - 1);
-       filterr[i]->setstages(value - 1);
-       }
+       Pstages = value - 1;
+//        for (int i=0; i<NUM_INF_BANDS; i++)  { 
+//        filterl[i]->setstages(value - 1);
+//        filterr[i]->setstages(value - 1);
+//        }
+       phaserfb = 0.5f + (((float) (Pstages))/12.0f)*0.5f;
        break;
     };
 };
@@ -415,7 +463,7 @@ Infinity::getpar (int npar)
       return (Preverse);
       break;
     case 17:
-      return (Pstages);
+      return (Pstages + 1);
       break;
     default:
       return (0);
