@@ -65,6 +65,10 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   Pstages = 0;
   phaserfb = 0.0f;
   
+  float dt = 1.0f/fSAMPLE_RATE;
+  alpha = dt/(0.5f + dt);          //200ms time constant on parameter change -- quick but not jerky
+  beta = 1.0f - alpha;
+  
   adjustfreqs(); 
   reinitfilter();
 
@@ -97,6 +101,11 @@ void inline
 Infinity::oscillator()
 {
 float rmodulate, lmodulate;
+
+//smooth parameters for tempo change
+rampconst = alpha*rampconst + beta*crampconst;
+irampconst = 1.0f/rampconst;
+fconst = alpha*fconst + beta*cfconst;
 
 for (int i=0; i<NUM_INF_BANDS; i++)  {
 //right
@@ -294,18 +303,18 @@ Infinity::adjustfreqs()
       fend =  20.0f + 6000.0f*((float) Pendfreq/127.0f);  
       if(Psubdiv>0) frate = (float) Prate/(((float) Psubdiv)*60.0f);    //beats/second  
       else frate = ((float) (1 - Psubdiv))*((float) Prate)/60.0f;
-      
+          
       if (fstart < fend) {
       frmin = fstart;
       frmax = fend;
-      rampconst = 1.0f + frate*logf(frmax/frmin)/fs;
+      crampconst = 1.0f + frate*logf(frmax/frmin)/fs;
       }
       else {
       frmax = fstart;
       frmin = fend;    
-      rampconst = 1.0f/(1.0f + frate*logf(frmax/frmin)/fs);
+      crampconst = 1.0f/(1.0f + frate*logf(frmax/frmin)/fs);
       }
-      irampconst = 1.0f/rampconst;
+      cirampconst = 1.0f/rampconst;
       logconst = logf(frmax/frmin)/logf(2.0f);
       linconst = D_PI*frmin/fs;  //these lines are for using powf() in the initialization
       
@@ -313,9 +322,9 @@ Infinity::adjustfreqs()
       maxlevel = minlevel*frmax/frmin;
       //printf("min %f max %f rampconst %f irampconst %f\n", minlevel, maxlevel,rampconst, irampconst);
       //fconst =  2.0f * sinf(PI*frate / fs);  //this is a more precise interpretation
-      fconst =  D_PI*frate / fs;  //this seems to work well at low frequencies
+      cfconst =  D_PI*frate / fs;  //this seems to work well at low frequencies
       mconst = D_PI*((float) Prate)/(fs*60.0f*4.0f);
-      reinitfilter ();
+      //reinitfilter ();
 }
 
 void

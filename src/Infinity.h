@@ -86,8 +86,9 @@ private:
   fconst = freq* 2*pi/fs;
   rampconst = 2*freq/fs;
  */
-  float fconst;  //sine wave oscillator frequency constant // 2*pi*freq/fs 
-  float rampconst, irampconst;  //ramp oscillator constant// 2*freq/SR  
+  float cfconst, fconst;  //sine wave oscillator frequency constant // 2*pi*freq/fs 
+  float rampconst, irampconst, crampconst, cirampconst;  //ramp oscillator constant// 2*freq/SR  
+  float alpha, beta;
   float fstart, fend;  //range of filter sweep
   float linconst, logconst;
   float minlevel, maxlevel;
