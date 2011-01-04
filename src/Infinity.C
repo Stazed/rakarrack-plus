@@ -64,6 +64,9 @@ Infinity::Infinity (float * efxoutl_, float * efxoutr_)
   autopan = 0.0f;
   Pstages = 0;
   phaserfb = 0.0f;
+  dsin = 0.0f;
+  tflag = 0;
+  ratescale = 1.0f;
   
   float dt = 1.0f/fSAMPLE_RATE;
   alpha = dt/(0.5f + dt);          //200ms time constant on parameter change -- quick but not jerky
@@ -100,12 +103,28 @@ return fxn;
 void inline
 Infinity::oscillator()
 {
-float rmodulate, lmodulate;
+float rmodulate, lmodulate, ratemod;
 
+    //master oscillator
+     msin += mconst*mcos;
+     mcos -= msin*mconst; 
+       
+//introduce doppler effect
+if(Pstages<9) {
 //smooth parameters for tempo change
 rampconst = alpha*rampconst + beta*crampconst;
 irampconst = 1.0f/rampconst;
 fconst = alpha*fconst + beta*cfconst;
+} 
+else {
+     dsin = autopan*ratescale*msin;
+     ratemod = (1.0f + dsin/fSAMPLE_RATE);
+//smooth parameters for tempo change
+rampconst = alpha*rampconst + beta*crampconst*ratemod;
+irampconst = 1.0f/rampconst;
+fconst = alpha*fconst + beta*cfconst*ratemod;
+     }
+
 
 for (int i=0; i<NUM_INF_BANDS; i++)  {
 //right
@@ -189,12 +208,11 @@ Infinity::out (float * smpsl, float * smpsr)
     }
     } 
     
-    //master oscillator
-     msin += mconst*mcos;
-     mcos -= msin*mconst;    
+   
     efxoutl[i] = (1.0f + autopan*mcos)*volmaster*tmpl;
     efxoutr[i] = (1.0f - autopan*mcos)*volmaster*tmpr;     
   
+
 
   }
  
@@ -240,11 +258,11 @@ Infinity::setq ()
 {
 float fq = (float) Pq;
       if(Pq<0) {
-       qq = f_pow2(fq/500.0f);  //q ranges down to 0.5
+       qq = powf(2.0f, fq/500.0f);  //q ranges down to 0.5
        volmaster = 1.0f;
        }
       else {
-       qq = f_pow2(fq/125.0f);  //q can go up to 256  
+       qq = powf(2.0f, fq/125.0f);  //q can go up to 256  
        volmaster = (1.0f-fq/1500.0f)/sqrt(qq);
        }
        
@@ -298,10 +316,10 @@ Infinity::adjustfreqs()
 
       float frate;
       float fs = fSAMPLE_RATE;
-  
+       
       fstart = 20.0f + 6000.0f*((float) Pstartfreq/127.0f);
       fend =  20.0f + 6000.0f*((float) Pendfreq/127.0f);  
-      if(Psubdiv>0) frate = (float) Prate/(((float) Psubdiv)*60.0f);    //beats/second  
+      if(Psubdiv>0) frate = ((float) ( 1+ Prate ))/(((float) Psubdiv)*60.0f);    //beats/second  
       else frate = ((float) (1 - Psubdiv))*((float) Prate)/60.0f;
           
       if (fstart < fend) {
@@ -311,10 +329,11 @@ Infinity::adjustfreqs()
       }
       else {
       frmax = fstart;
-      frmin = fend;    
+      frmin = fend; 
       crampconst = 1.0f/(1.0f + frate*logf(frmax/frmin)/fs);
       }
-      cirampconst = 1.0f/rampconst;
+      
+      cirampconst = 1.0f/crampconst;
       logconst = logf(frmax/frmin)/logf(2.0f);
       linconst = D_PI*frmin/fs;  //these lines are for using powf() in the initialization
       
@@ -324,7 +343,7 @@ Infinity::adjustfreqs()
       //fconst =  2.0f * sinf(PI*frate / fs);  //this is a more precise interpretation
       cfconst =  D_PI*frate / fs;  //this seems to work well at low frequencies
       mconst = D_PI*((float) Prate)/(fs*60.0f*4.0f);
-      //reinitfilter ();
+ 
 }
 
 void
@@ -390,13 +409,15 @@ Infinity::changepar (int npar, int value)
      case 10:
       Pstartfreq = value;
       adjustfreqs();
+      reinitfilter ();
       break;     
      case 11:
       Pendfreq = value;
       adjustfreqs();
+      reinitfilter ();
       break;     
      case 12:
-      Prate = abs(value);
+      Prate = value;
       adjustfreqs();
       break;   
      case 13:
@@ -406,6 +427,8 @@ Infinity::changepar (int npar, int value)
       break;
      case 14:
       Psubdiv = value;
+      if(value!=0) ratescale =  10.0f/((float) abs(value));
+      else ratescale = 10.0f;
       adjustfreqs();
       break;        
      case 15:
@@ -416,15 +439,16 @@ Infinity::changepar (int npar, int value)
       break;
      case 16:
       Preverse = value;
-      adjustfreqs();      
-
+      adjustfreqs(); 
+      reinitfilter ();     
+      break;
      case 17:
        Pstages = value - 1;
 //        for (int i=0; i<NUM_INF_BANDS; i++)  { 
 //        filterl[i]->setstages(value - 1);
 //        filterr[i]->setstages(value - 1);
 //        }
-       phaserfb = 0.5f + (((float) (Pstages))/12.0f)*0.5f;
+       phaserfb = 0.5f + (((float) (Pstages))/11.01f)*0.5f;
        break;
     };
 };

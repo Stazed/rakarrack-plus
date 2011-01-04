@@ -96,7 +96,10 @@ private:
   float qq;
   float stdiff;
   float volmaster;
-  float autopan, msin, mcos, mconst;
+  float autopan, msin, dsin, mcos, mconst;
+  float ratescale;
+  int tflag;
+  
   class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
 
   class FPreset *Fpre;
