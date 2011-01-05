@@ -108,7 +108,7 @@ static inline float f_pow2(float x)
         return (*px).f;
 }
 */
-
+/*
 #define P2a0  1.00000534060469
 #define P2a1   0.693057900547259
 #define P2a2   0.239411678986933
@@ -129,8 +129,41 @@ y = intpow*(xx*(xx*(xx*(xx*P2a4 + P2a3) + P2a2) + P2a1) + P2a0);
 return y;
  
 }
+*/
 
+//The below pow function really works & is good to 16 bits, but is it faster than math lib powf()???
+//globals
+#include <math.h>
+static const float a[5] = { 1.00000534060469, 0.693057900547259, 0.239411678986933, 0.0532229404911678, 0.00686649174914722 };
+//lookup for positive powers of 2
+static const float pw2[25] = {1.0f, 2.0f, 4.0f, 8.0f, 16.0f, 32.0f, 64.0f, 128.0f, 256.0f, 512.0f, 1024.0f, 2048.0f, 4096.0f, 8192.0f, 16384.0f, 32768.0f, 65536.0f, 131072.0f, 262144.0f, 524288.0f, 1048576.0f, 2097152.0f, 4194304.0f, 8388608.0f, 16777216.0f};
+//negative powers of 2, notice ipw2[0] will never be indexed.
+static const float ipw2[25] = {1.0, 5.0e-01, 2.5e-01, 1.25e-01, 6.25e-02, 3.125e-02, 1.5625e-02, 7.8125e-03, 3.90625e-03, 1.953125e-03, 9.765625e-04, 4.8828125e-04, 2.44140625e-04, 1.220703125e-04, 6.103515625e-05, 3.0517578125e-05, 1.52587890625e-05, 7.62939453125e-06, 3.814697265625e-06, 1.9073486328125e-06, 9.5367431640625e-07, 4.76837158203125e-07, 2.38418579101562e-07, 1.19209289550781e-07, 5.96046447753906e-08};
 
+static inline float f_pow2(float x) {
+float y = 0.0f;
+
+if(x >=24) return pw2[24];
+else if (x <= -24.0f) return ipw2[24];
+else {
+float whole =  ceilf(x);
+int xint = (int) whole;
+x = x - whole;
+
+if (xint>=0) {
+ y = pw2[xint]*(x*(x*(x*(x*a[4] + a[3]) + a[2]) + a[1]) + a[0]);
+
+ }
+else  {
+
+ y = ipw2[-xint]*(x*(x*(x*(x*a[4] + a[3]) + a[2]) + a[1]) + a[0]);
+
+ }
+
+return y;
+}
+
+}
 
 #define f_exp(x) f_pow2(x * LN2R)
 
