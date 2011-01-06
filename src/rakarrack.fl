@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -853,12 +853,13 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1413 133 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -9855,7 +9856,7 @@ rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
         }
       }
       Fl_Group INFINIT {
-        user_data 1
+        user_data 1 open
         xywh {1 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button infinity_activar {
@@ -9895,7 +9896,7 @@ infinity_stdf->value(rkr->efx_Infinity->getpar(13));
 infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
 infinity_pan->value(rkr->efx_Infinity->getpar(15));
 infinity_rev->value(rkr->efx_Infinity->getpar(16));
-infinity_stages->value(rkr->efx_Infinity->getpar(17));}
+infinity_stages->value(rkr->efx_Infinity->getpar(17));} open
           xywh {81 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -9913,6 +9914,30 @@ infinity_stages->value(rkr->efx_Infinity->getpar(17));}
           MenuItem {} {
             label Laser
             xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Doppler
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Detune
+            xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Dizzy Sailor}
+            xywh {30 30 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Stereo Phaser}
+            xywh {40 40 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label Corkscrew
+            xywh {50 50 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label FreqeeVox selected
+            xywh {60 60 36 21} labelsize 10
           }
         }
         Fl_Value_Slider infinity_WD {
@@ -16336,8 +16361,7 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {selected
-    }
+rkr->Mvalue=0;} {}
   }
   Function {ActOnOff()} {} {
     code {int miralo;
