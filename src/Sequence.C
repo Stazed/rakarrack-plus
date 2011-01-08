@@ -55,10 +55,26 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
   tcount = 0;
   rndflag = 0;
   subdiv = 2;
+  lmod = 0.5f;
+  rmod = 0.5f;
   filterl = new RBFilter (0, 80.0f, 40.0f, 2);
   filterr = new RBFilter (0, 80.0f, 40.0f, 2);
-  modfilterl = new RBFilter (0, 25.0f, 0.15f, 2);
-  modfilterr = new RBFilter (0, 25.0f, 0.15f, 2);  
+  modfilterl = new RBFilter (0, 15.0f, 0.5f, 1);
+  modfilterr = new RBFilter (0, 15.0f, 0.5f, 1);  
+  rmsfilter = new RBFilter (0, 15.0f, 0.15f, 1);  
+  peaklpfilter = new RBFilter (0, 25.0f, 0.5f, 0); 
+  peaklpfilter2 = new RBFilter (0, 25.0f, 0.5f, 0);  
+  peakhpfilter = new RBFilter (1, 45.0f, 0.5f, 0); 
+     
+ //Trigger Filter Settings 
+  peakpulse = peak = envrms = 0.0f;
+  peakdecay = 10.0f/fSAMPLE_RATE;
+  targatk = 12.0f/fSAMPLE_RATE;   ///for smoothing filter transition
+  atk = 200.0f/fSAMPLE_RATE;
+  trigtime = SAMPLE_RATE/12; //time to take next peak
+  onset = 0;
+  trigthresh = 0.15f;
+    
   setpreset (Ppreset);
   
   filterl->setmix(1, 0.33f, -1.0f, 0.25f);
@@ -101,9 +117,8 @@ Sequence::out (float * smpsl, float * smpsr)
   int hPERIOD;
 
   float ldiff, rdiff, lfol, lfor, ftcount;
-  float lmod = 0.0f;
-  float rmod = 0.0f;
   float ldbl, ldbr;
+  float tmp;
   
   if((Pmode==3)||(Pmode ==5) || (Pmode==6)) hPERIOD=nPERIOD; else hPERIOD=PERIOD;
 
@@ -116,7 +131,10 @@ Sequence::out (float * smpsl, float * smpsr)
    fsequence[i] = RND1;
    }
   }  
+  
 
+  
+  
   switch(Pmode)
   {
   case 0:	//Lineal
@@ -543,8 +561,88 @@ Sequence::out (float * smpsl, float * smpsr)
 
  
    break;
+
+case 7:  //TrigStepper
+   float ltarget,rtarget;
+   float triggernow = 0.0f;
+  for ( i = 0; i < PERIOD; i++)  //Detect dynamics onset
+  {
+
+  tmp = 10.0f*fabs(smpsl[i] + smpsr[i]);
+  envrms = rmsfilter->filterout_s(tmp);  
+  if ( tmp > peak) peak =  atk + tmp;
+  if ( envrms < peak) peak -= peakdecay;
+  if(peak<0.0f) peak = 0.0f;
+
+  peakpulse = peaklpfilter2->filterout_s(fabs(peakhpfilter->filterout_s(peak)));
  
-  // here case 6:
+  
+  if( peakpulse > trigthresh ) {
+     if (trigtimeout==0) { 
+     onset = 1;
+     triggernow = 0.5f;
+     trigtimeout = trigtime;
+     }
+     else {
+     onset = 0;
+     triggernow = 0.0f;
+     }
+  }
+  else {
+    if (--trigtimeout<0) {
+    trigtimeout = 0;
+    }
+  
+  }
+
+
+
+  if (onset)
+  {
+  tcount = 0;
+  scount++;
+  if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+  dscount = (scount + Pstdiff) % 8;
+  }
+ 
+  ltarget = fsequence[scount];
+  rtarget = fsequence[dscount];
+  
+  if (lmod<ltarget) lmod+=targatk;
+  else lmod-=targatk;
+  if (rmod<rtarget) rmod+=targatk;
+  else rmod-=targatk; 
+  ltarget = peaklpfilter->filterout_s(lmod);
+  rtarget = peaklpfilter->filterout_s(rmod);
+  
+  if (Pamplitude)
+  {
+  ldbl = seqpower * ltarget; 
+  ldbr = seqpower * rtarget; 
+
+  efxoutl[i] = ldbl * smpsl[i];
+  efxoutr[i] = ldbr * smpsr[i];
+  }
+  
+  float frl = MINFREQ + ltarget * MAXFREQ;
+  float frr = MINFREQ + rtarget * MAXFREQ;
+
+
+  if ( i % 8 == 0)
+  {
+  filterl->setfreq_and_q (frl, fq);
+  filterr->setfreq_and_q (frr, fq);
+  }
+  
+  efxoutl[i] = filterl->filterout_s (efxoutl[i]);
+  efxoutr[i] = filterr->filterout_s (efxoutr[i]);  
+  
+  //efxoutl[i] += triggernow;  //test to see the pulse
+  //efxoutr[i] = peakpulse;     
+ } 
+ 
+  break;   
+  // here case 8:
   //
   // break;
 
@@ -809,6 +907,8 @@ Sequence::changepar (int npar, int value)
     case 13:
       Pmode = value;
       settempo(Ptempo);
+      lmod = 0.5f;
+      rmod = 0.5f;
       break;
     case 14:
       Prange = value;

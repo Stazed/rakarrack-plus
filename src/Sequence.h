@@ -82,9 +82,13 @@ private:
   float *outi;
   float *outo;
   float *templ, *tempr;
+
+//Variables for TrigStepper detecting trigger state.
+  float peakpulse, peak, envrms, peakdecay, trigthresh;
+  int trigtimeout, trigtime, onset, atk;
+  float targatk, lmod, rmod;
   
- 
-  class RBFilter *filterl, *filterr, *modfilterl, *modfilterr;
+  class RBFilter *filterl, *filterr, *modfilterl, *modfilterr, *rmsfilter, *peaklpfilter, *peakhpfilter, *peaklpfilter2;
 
   Resample *U_Resample;
   Resample *D_Resample;
