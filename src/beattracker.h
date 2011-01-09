@@ -27,6 +27,27 @@
 #include "RBFilter.h"
 
 
+/*
+Using beattracker:
+Call detect() function on a set of samples.  
+The array, index[], returns a number of samples processed before finding the beat onset.
+
+For example, if after processing 20 samples into the stream it finds a beat, then index[0] will have the number 20.
+Then if it finds another beat at 67 samples into the stream, then index[1] will be 67.
+
+So you loop through index[] until index[n] = 0.  
+
+These numbers may be used directly to index the onset of a beat in the audio stream.
+
+index[] is initialized to the length of PERIOD, but it is unlikely that more than 1 beat per PERIOD will ever be found, so maybe
+I need to change the design...for now it will do the job.
+
+Next is the tempo calculator, but that code has not yet been started. The plan is:
+call beattracker
+call get_tempo() whenever you want the most current tempo calculation.
+
+*/
+
 class beattracker
 {
 public:
