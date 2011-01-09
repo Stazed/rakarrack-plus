@@ -4,6 +4,7 @@ rakarrack_SOURCES = main.C \
 	AnalogFilter.h \
 	APhaser.h \
 	Arpie.h \
+	beattracker.h \
 	Chorus.h \
 	CoilCrafter.h \
 	CompBand.h \
@@ -84,6 +85,7 @@ rakarrack_SOURCES = main.C \
 	Compressor.C \
 	AnalogFilter.C \
 	Alienwah.C \
+	beattracker.C \
 	Filter.C \
 	HarmonicEnhancer.C \
 	DynamicFilter.C \
