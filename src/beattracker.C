@@ -72,7 +72,7 @@ beattracker::detect (float * smpsl, float * smpsr)
      if (trigtimeout==0) { 
      index[idx] = i;  
      timeseries[tsidx] = tscntr;
-     tsidx = ++tsidx%19;
+     tsidx++;
      tscntr = 0;
      idx++;
      
@@ -96,6 +96,8 @@ beattracker::detect (float * smpsl, float * smpsr)
 float 
 beattracker::get_tempo()  //returns tempo in float beats per minute
 {
+
+return(0);
 
 };
 
