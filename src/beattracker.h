@@ -70,6 +70,7 @@ private:
   
   class RBFilter *rmsfilter, *peaklpfilter, *peakhpfilter, *peaklpfilter2;
 
+  float oldbpm, oldmost;
 
 };
 

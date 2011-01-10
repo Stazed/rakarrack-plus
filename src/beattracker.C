@@ -22,6 +22,8 @@
   
   tscntr = 0;
   tsidx = 0;
+  
+  oldbpm = oldmost = 0;
     
   cleanup ();
 
@@ -40,7 +42,7 @@ beattracker::cleanup ()
   peakdecay = 10.0f/fSAMPLE_RATE;
   targatk = 12.0f/fSAMPLE_RATE;   ///for smoothing filter transition
   atk = 200.0f/fSAMPLE_RATE;
-  trigtime = SAMPLE_RATE/12; //time to take next peak
+  trigtime = SAMPLE_RATE/20; //time to take next peak
   onset = 0;
   trigthresh = 0.15f;
   
@@ -59,7 +61,7 @@ beattracker::detect (float * smpsl, float * smpsr)
   {
   index[i] = 0; //initializes all elements to zero
    
-  tmp = 10.0f*fabs(smpsl[i] + smpsr[i]);
+  tmp = 15.0f*fabs(smpsl[i] + smpsr[i]);
   envrms = rmsfilter->filterout_s(tmp);  
   if ( tmp > peak) peak =  atk + tmp;
   if ( envrms < peak) peak -= peakdecay;
@@ -73,10 +75,14 @@ beattracker::detect (float * smpsl, float * smpsr)
      index[idx] = i;  
      timeseries[tsidx] = tscntr;
      tsidx++;
+     tsidx%=20;
      tscntr = 0;
      idx++;
      
      trigtimeout = trigtime;
+     
+     //test
+     get_tempo();
      }
 
   }
@@ -84,10 +90,9 @@ beattracker::detect (float * smpsl, float * smpsr)
     if (--trigtimeout<0) {
     trigtimeout = 0;
     }
-    
-    tscntr++;
-  }
 
+  }
+    tscntr++;
 }
 
 
@@ -96,8 +101,41 @@ beattracker::detect (float * smpsl, float * smpsr)
 float 
 beattracker::get_tempo()  //returns tempo in float beats per minute
 {
+float time = 0;
+if(tsidx>0) time = ((float) timeseries[tsidx-1])/fSAMPLE_RATE;
+else  time = ((float) timeseries[19])/fSAMPLE_RATE;
 
-return(0);
+//below really needs to be more clever to pull out 1/8, 1/4, 1/2, triplets or other time signatures.
+//for now it's good enough to work with relatively steady patterns in 4/4
+float divisor = 0;
+int intdiv = 0;
+if(time<1.0f) {
+intdiv = lrintf(1.0f/time);
+divisor = (float) intdiv;
+time*=divisor;
+}
+else {
+intdiv = lrintf(time);
+divisor = 1.0f/((float) intdiv);
+time*=divisor;
+}
+
+float bpm = 120.0f/time;
+
+//below is some code to look at the outputs, a crude statistical analysis
+float avg = 0.8f*oldbpm + 0.2f*bpm;
+oldbpm = avg;
+
+float low = avg*0.95f;
+float high = avg*1.05f;
+if ( (bpm>low) && (bpm<high) ) {
+oldmost = 0.1f*oldmost + 0.9f*bpm;
+}
+
+//uncomment below to see what is happening
+//printf("time: %f bpm: %f avg: %f most: %f time: 1/%f \n", time, bpm, avg, oldmost,divisor);
+
+return(bpm);
 
 };
 

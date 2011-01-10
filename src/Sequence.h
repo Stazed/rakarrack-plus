@@ -26,6 +26,7 @@
 #include "global.h"
 #include "RBFilter.h"
 #include "smbPitchShift.h"
+#include "beattracker.h"
 
 
 class Sequence
@@ -96,7 +97,8 @@ private:
   PitchShifter *PS;
 
   class FPreset *Fpre;  
-
+  class beattracker *beats;
+  
 };
 
 

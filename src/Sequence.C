@@ -41,6 +41,8 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
 
   U_Resample = new Resample(dq);
   D_Resample = new Resample(uq);
+  
+  beats = new beattracker();
 
 
 
@@ -565,6 +567,11 @@ Sequence::out (float * smpsl, float * smpsr)
 case 7:  //TrigStepper
    float ltarget,rtarget;
    float triggernow = 0.0f;
+   
+   //testing beattracker object -- doesn't do anything useful yet other than a convenient place
+   //to see how well it performs.
+   beats->detect(smpsl, smpsr);
+   
   for ( i = 0; i < PERIOD; i++)  //Detect dynamics onset
   {
 
