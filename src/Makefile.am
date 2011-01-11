@@ -11,6 +11,7 @@ rakarrack_SOURCES = main.C \
 	Compressor.h \
 	config.h \
 	Convolotron.h \
+	delayline.h \
 	Distorsion.h \
 	Dual_Flange.h \
 	DynamicFilter.h \
@@ -86,6 +87,7 @@ rakarrack_SOURCES = main.C \
 	AnalogFilter.C \
 	Alienwah.C \
 	beattracker.C \
+	delayline.C \
 	Filter.C \
 	HarmonicEnhancer.C \
 	DynamicFilter.C \
