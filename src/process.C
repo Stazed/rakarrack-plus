@@ -1502,12 +1502,13 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
       {
         beat->detect(efxoutl,efxoutr);
         int bt_tempo=lrintf(beat->get_tempo());
-        if((bt_tempo>19) && (bt_tempo<360))
+        if((bt_tempo>19) && (bt_tempo<360) && (bt_tempo != Tap_TempoSet))
             {   
              Tap_TempoSet=bt_tempo;
              Update_tempo();  
-             }
-        Tap_Display=1;
+             Tap_Display=1;
+            } 
+      
       }   
       
 
