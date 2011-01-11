@@ -102,8 +102,8 @@ int dlytime = lrintf(oldtime[tap]);
 int bufptr = (dlytime + zero_index);  //this points to the sample we want to get 
 if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 
+if(++stctr[tap]>4) stctr[tap] = 0;  //set a continuously morphing fractional delay time to each interpolating phase stage
 pstruct[tap].gain[stctr[tap]] =  oldtime[tap] - floorf(oldtime[tap]);
-if(++stctr[tap]>4) stctr = 0;  //set a continuously morphing fractional delay time to each interpolating phase stage
 
 return ( phaser(ringbuffer[bufptr]) );
 
