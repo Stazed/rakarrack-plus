@@ -236,7 +236,7 @@ Echo::Tempo2Delay(int value)
 Pdelay = 60.0f/(float)value * 1000.0f;
 delay = (float)Pdelay / 1000.0f * fSAMPLE_RATE;;
 if ((unsigned int) delay > (SAMPLE_RATE * MAX_DELAY)) delay = SAMPLE_RATE*MAX_DELAY;
-initdelays();
+//initdelays();
 }
 
 void
