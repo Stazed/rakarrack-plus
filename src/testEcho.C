@@ -33,7 +33,7 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
-
+  oldtst = 0;
   //default values
   Ppreset = 0;
   Pvolume = 50;
@@ -53,6 +53,10 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
 
   ldelay = new float[maxx_delay];  
   rdelay = new float[maxx_delay];
+  float tmp = 2.0f;
+  mytest = new delayline(tmp, 1);
+  msin = 1.0f;
+  mcos = 0.0f;
   
   setpreset (Ppreset);
   cleanup ();
@@ -100,10 +104,10 @@ Echo::initdelays ()
   rvkr = dr - 1;
   Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
 
-//   for (i = dl; i < maxx_delay; i++)
-//     ldelay[i] = 0.0;
-//   for (i = dr; i < maxx_delay; i++)
-//     rdelay[i] = 0.0;
+  for (i = dl; i < maxx_delay; i++)
+    ldelay[i] = 0.0;
+  for (i = dr; i < maxx_delay; i++)
+    rdelay[i] = 0.0;
 
   oldl = 0.0;
   oldr = 0.0;
@@ -119,10 +123,19 @@ Echo::out (float * smpsl, float * smpsr)
 {
   int i;
   float l, r, ldl, rdl, ldlout, rdlout, rswell, lswell;
+  float mconst = 0.25f*D_PI/fSAMPLE_RATE;
 
   for (i = 0; i < PERIOD; i++)
     {
-      ldl = ldelay[kl];
+    l = smpsl[i]+smpsr[i] + fb*oldtst;
+     msin += mconst*mcos;
+     mcos -= msin*mconst; 
+     mod = 0.001f*(1.0f+msin) + 0.01f*tstdly;
+    efxoutl[i] = mytest->delay(l, tstdly, 0, 1);
+    efxoutr[i] = efxoutl[i];
+    oldtst = efxoutl[i];
+    
+    /*  ldl = ldelay[kl];
       rdl = rdelay[kr];
       l = ldl * (1.0f - lrcross) + rdl * lrcross;
       r = rdl * (1.0f - lrcross) + ldl * lrcross;
@@ -196,7 +209,7 @@ Echo::out (float * smpsl, float * smpsr)
       if (rvfl > dl) rvfl = rvfl - dl;  
       if (rvfl < 0) rvfl = 0;    
       if (rvfr > dr) rvfr = rvfr - dr;
-      if (rvfr < 0) rvfr = 0;       
+      if (rvfr < 0) rvfr = 0;       */
     };
 
 };
@@ -244,6 +257,7 @@ Echo::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
   delay=Pdelay;
+  tstdly = ((float) Pdelay)/1000.0f;
   if (delay < 10) delay = 10;
   if (delay > MAX_DELAY * 1000) delay = 1000 * MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
   delay = 1 + lrintf ( ((float) delay / 1000.0f) * fSAMPLE_RATE );	
