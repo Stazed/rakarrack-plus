@@ -1501,6 +1501,12 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
       if((Tap_Bypass) && (Tap_Selection == 4))  
       {
         beat->detect(efxoutl,efxoutr);
+        int bt_tempo=lrintf(beat->get_tempo());
+        if((bt_tempo>19) && (bt_tempo<360))
+            {   
+             Tap_TempoSet=bt_tempo;
+             Update_tempo();  
+             }
         Tap_Display=1;
       }   
       

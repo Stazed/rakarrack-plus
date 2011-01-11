@@ -1232,16 +1232,6 @@ if(error_num>0) rkr->Error_Handle(error_num);
 if(rkr->Tap_Bypass)
 {
    
-    if(rkr->Tap_Selection==4)  
-  {
-   int bt_tempo=lrintf(rkr->beat->get_tempo());
-   if((bt_tempo>19) && (bt_tempo<360))
-    {   
-     rkr->Tap_TempoSet=bt_tempo;
-     rkr->Update_tempo();  
-    }
-  } 
-
 
   if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
    {
