@@ -43,6 +43,7 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
   Plrcross = 100;
   Pfb = 40;
   Phidamp = 60;
+  olddr = olddl = SAMPLE_RATE;
 
   ldelay = NULL;
   rdelay = NULL;
@@ -75,6 +76,7 @@ Echo::cleanup ()
     rdelay[i] = 0.0;
   oldl = 0.0;
   oldr = 0.0;
+
 };
 
 
@@ -107,6 +109,9 @@ Echo::initdelays ()
 
   oldl = 0.0;
   oldr = 0.0;
+  
+  olddr = dr;
+  olddl = dl;
 
 
 };
@@ -182,16 +187,21 @@ Echo::out (float * smpsl, float * smpsr)
       oldl = ldl + DENORMAL_GUARD;
       oldr = rdl + DENORMAL_GUARD;
 
+      if(dl>olddl) olddl++;        ///now index will not change more than one sample at a time -- will be more graceful
+      else if (dl<olddl) olddl--;
       
-      if (++kl >= dl)
+      if(dr>olddr) olddr++;
+      else if (dr<olddr) olddr--;
+      
+      if (++kl >= olddl)
 	kl = 0;
-      if (++kr >= dr)
+      if (++kr >= olddr)
 	kr = 0;
-      rvkl = dl - 1 - kl;
-      rvkr = dr - 1 - kr;
+      rvkl = olddl - 1 - kl;
+      rvkr = olddr - 1 - kr;
       
-      rvfl = dl + fade - kl;
-      rvfr = dr + fade - kr;
+      rvfl = olddl + fade - kl;
+      rvfr = olddr + fade - kr;
       //Safety checks to avoid addressing data outside of buffer
       if (rvfl > dl) rvfl = rvfl - dl;  
       if (rvfl < 0) rvfl = 0;    

@@ -74,7 +74,7 @@ private:
   //Parametrii reali
   void initdelays ();
 
-  int dl, dr, delay, lrdelay;
+  int dl, dr, olddl, olddr, delay, lrdelay;
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
 
   float *ldelay, *rdelay;
