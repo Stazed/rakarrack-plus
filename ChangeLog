@@ -1,5 +1,6 @@
 ==v0.6.2 ( / /201 ) ==
 
+- Added beattracker to TapTempo
 - Added effect Infinity
 - Added fast sin functions
 - Added +6dB option in settings to the final Limiter

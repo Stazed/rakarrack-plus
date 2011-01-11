@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -853,13 +853,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1413 133 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -1235,6 +1234,17 @@ if(error_num>0) rkr->Error_Handle(error_num);
 if(rkr->Tap_Bypass)
 {
    
+    if(rkr->Tap_Selection==4)  
+  {
+   int bt_tempo=lrintf(rkr->beat->get_tempo());
+   if((bt_tempo>19) && (bt_tempo<360))
+    {   
+     rkr->Tap_TempoSet=bt_tempo;
+     rkr->Update_tempo();  
+    }
+  } 
+
+
   if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
    {
      T_DIS->value(rkr->Tap_TempoSet);
@@ -1249,6 +1259,7 @@ if(rkr->Tap_Bypass)
      Tap_activar->do_callback();
    }  
 
+ 
 }
 
 
@@ -1470,7 +1481,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -8019,7 +8030,7 @@ rkr->efx_Sustainer->changepar(1,(int)o->value());}
         }
       }
       Fl_Group SEQUENCE {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button seq_activar {
@@ -8241,7 +8252,7 @@ rkr->efx_Sequence->changepar(12,(int)o->value());}
         Fl_Choice seq_mode {
           label Mode
           user_data 12
-          callback {rkr->efx_Sequence->changepar(13,(int)o->value())} open
+          callback {rkr->efx_Sequence->changepar(13,(int)o->value())}
           xywh {353 380 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
@@ -8273,7 +8284,7 @@ rkr->efx_Sequence->changepar(12,(int)o->value());}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label TrigStepper selected
+            label TrigStepper
             xywh {10 10 36 21} labelsize 9
           }
         }
@@ -9860,7 +9871,7 @@ rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
         }
       }
       Fl_Group INFINIT {
-        user_data 1 open
+        user_data 1
         xywh {1 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button infinity_activar {
@@ -9900,7 +9911,7 @@ infinity_stdf->value(rkr->efx_Infinity->getpar(13));
 infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
 infinity_pan->value(rkr->efx_Infinity->getpar(15));
 infinity_rev->value(rkr->efx_Infinity->getpar(16));
-infinity_stages->value(rkr->efx_Infinity->getpar(17));} open
+infinity_stages->value(rkr->efx_Infinity->getpar(17));}
           xywh {81 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -10720,6 +10731,10 @@ TAP_LABEL->redraw_label();}
           }
           MenuItem {} {
             label MTC
+            xywh {0 0 36 21} labelsize 9
+          }
+          MenuItem {} {
+            label {Beat Tracker}
             xywh {0 0 36 21} labelsize 9
           }
         }

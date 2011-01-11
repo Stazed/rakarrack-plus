@@ -291,7 +291,7 @@ RKR::RKR ()
   D_Resample = new Resample(DownQual);
   A_Resample = new Resample(3);
 
-
+  beat = new beattracker();
   efx_Tuner = new Tuner ();
   efx_MIDIConverter = new MIDIConverter();
   RecNote = new Recognize (efxoutl, efxoutr, rtrig);
@@ -1498,6 +1498,12 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
       if(Metro_Bypass) M_Metronome->metronomeout(m_ticks);
 
+      if((Tap_Bypass) && (Tap_Selection == 4))  
+      {
+        beat->detect(efxoutl,efxoutr);
+        Tap_Display=1;
+      }   
+      
 
       if (Tuner_Bypass)
 	efx_Tuner->schmittFloat (PERIOD, efxoutl, efxoutr);

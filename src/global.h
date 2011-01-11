@@ -226,6 +226,7 @@ return y;
 #include "Opticaltrem.h"
 #include "Vibe.h"
 #include "Infinity.h"
+#include "beattracker.h"
 
 extern int Pexitprogram, preset;
 extern int commandline, gui;
@@ -357,6 +358,7 @@ public:
   class Tuner *efx_Tuner;
   class MIDIConverter *efx_MIDIConverter;
   class metronome *M_Metronome; 
+  class beattracker *beat;
 
   class Recognize *RecNote;
   class RecChord *RC;
