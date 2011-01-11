@@ -100,10 +100,10 @@ Echo::initdelays ()
   rvkr = dr - 1;
   Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
 
-//   for (i = dl; i < maxx_delay; i++)
-//     ldelay[i] = 0.0;
-//   for (i = dr; i < maxx_delay; i++)
-//     rdelay[i] = 0.0;
+  for (i = dl; i < maxx_delay; i++)
+    ldelay[i] = 0.0;
+  for (i = dr; i < maxx_delay; i++)
+    rdelay[i] = 0.0;
 
   oldl = 0.0;
   oldr = 0.0;
@@ -236,7 +236,17 @@ Echo::Tempo2Delay(int value)
 Pdelay = 60.0f/(float)value * 1000.0f;
 delay = (float)Pdelay / 1000.0f * fSAMPLE_RATE;;
 if ((unsigned int) delay > (SAMPLE_RATE * MAX_DELAY)) delay = SAMPLE_RATE*MAX_DELAY;
-initdelays();
+//initdelays();
+  dl = delay - lrdelay;
+  if (dl < 1)
+    dl = 1;
+  dr = delay + lrdelay;
+  if (dr < 1)
+    dr = 1;
+
+  rvkl = dl - 1;
+  rvkr = dr - 1;
+  Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
 }
 
 void
