@@ -28,6 +28,7 @@
 #define ECHO_H
 
 #include "global.h"
+#include "delayline.h"
 
 class Echo
 {
@@ -74,12 +75,14 @@ private:
   //Parametrii reali
   void initdelays ();
 
-  int dl, dr, olddl, olddr, delay, lrdelay;
+  int dl, dr;
+  float delay, lrdelay;
   int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade;
 
-  float *ldelay, *rdelay;
+  class delayline *ldelay, *rdelay;
+  float ltime, rtime;
   float oldl, oldr;		//pt. lpf
-  float panning, lrcross, fb, hidamp, reverse;
+  float panning, lrcross, fb, hidamp, reverse, ireverse;
   float  Srate_Attack_Coeff;
 };
 

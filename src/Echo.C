@@ -33,7 +33,6 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
 {
   efxoutl = efxoutl_;
   efxoutr = efxoutr_;
-
   //default values
   Ppreset = 0;
   Pvolume = 50;
@@ -43,18 +42,18 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
   Plrcross = 100;
   Pfb = 40;
   Phidamp = 60;
-  olddr = olddl = SAMPLE_RATE;
 
-  ldelay = NULL;
-  rdelay = NULL;
   lrdelay = 0;
   Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
   maxx_delay = SAMPLE_RATE * MAX_DELAY;
   fade = SAMPLE_RATE / 5;    //1/5 SR fade time available
 
-  ldelay = new float[maxx_delay];  
-  rdelay = new float[maxx_delay];
-  
+  //ldelay = new float[maxx_delay];  
+  //rdelay = new float[maxx_delay];
+  float tmp = 2.0f;
+  ldelay = new delayline(tmp, 2);
+  rdelay = new delayline(tmp, 2);
+
   setpreset (Ppreset);
   cleanup ();
 };
@@ -69,14 +68,10 @@ Echo::~Echo ()
 void
 Echo::cleanup ()
 {
-  int i;
-  for (i = 0; i < maxx_delay; i++)
-    ldelay[i] = 0.0;
-  for (i = 0; i < maxx_delay; i++)
-    rdelay[i] = 0.0;
+  ldelay->cleanup();
+  rdelay->cleanup();
   oldl = 0.0;
   oldr = 0.0;
-
 };
 
 
@@ -88,32 +83,16 @@ Echo::initdelays ()
 {
   int i;
 
-  kl = 0;
-  kr = 0;
-
-  dl = delay - lrdelay;
-  if (dl < 1)
-    dl = 1;
-  dr = delay + lrdelay;
-  if (dr < 1)
-    dr = 1;
-
-  rvkl = dl - 1;
-  rvkr = dr - 1;
-  Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
-
-  for (i = dl; i < maxx_delay; i++)
-    ldelay[i] = 0.0;
-  for (i = dr; i < maxx_delay; i++)
-    rdelay[i] = 0.0;
-
   oldl = 0.0;
   oldr = 0.0;
+  ltime = delay + lrdelay;
+  rtime = delay - lrdelay;
   
-  olddr = dr;
-  olddl = dl;
+  if(ltime > 2.0f) ltime = 2.0f;
+  if(ltime<0.01f) ltime = 0.01f;
 
-
+  if(rtime > 2.0f) rtime = 2.0f;
+  if(rtime<0.01f) rtime = 0.01f;
 };
 
 /*
@@ -123,23 +102,33 @@ void
 Echo::out (float * smpsl, float * smpsr)
 {
   int i;
-  float l, r, ldl, rdl, ldlout, rdlout, rswell, lswell;
+  float l, r, ldl, rdl, ldlout, rdlout, rvl, rvr;
 
   for (i = 0; i < PERIOD; i++)
     {
-      ldl = ldelay[kl];
-      rdl = rdelay[kr];
+
+      ldl = ldelay->delay(oldl, ltime, 0, 1, 0);
+      rdl = rdelay->delay(oldr, rtime, 0, 1, 0); 
+      
+      if(Preverse)
+      {
+      rvl = ldelay->delay(oldl, ltime, 1, 0, 1)*ldelay->envelope();
+      rvr = rdelay->delay(oldr, rtime, 1, 0, 1)*rdelay->envelope();   
+      ldl = ireverse*ldl + reverse*rvl;
+      rdl = ireverse*rdl + reverse*rvr;
+      }
+ 
       l = ldl * (1.0f - lrcross) + rdl * lrcross;
       r = rdl * (1.0f - lrcross) + ldl * lrcross;
       ldl = l;
       rdl = r;
 
-      ldlout = 0.0 - ldl * fb;
-      rdlout = 0.0 - rdl * fb;
+      ldlout = -ldl*fb;
+      rdlout = -rdl*fb;
       if (!Pdirect)
       {
-        ldlout = ldl = smpsl[i] * panning + ldlout;
-        rdlout = rdl = smpsr[i] * (1.0f - panning) + rdlout;
+        l = ldl = smpsl[i] * panning + ldlout;
+        r = rdl = smpsr[i] * (1.0f - panning) + rdlout;
       }
       else
       {
@@ -147,66 +136,15 @@ Echo::out (float * smpsl, float * smpsr)
         rdl = smpsr[i] * (1.0f - panning) + rdlout;
       }
       
-      if(reverse > 0.0)
-      {
-
-      lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
-	      if (lswell <= PI) 
-	      {
-	      lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
-	      efxoutl[i] = reverse * (ldelay[rvkl] * lswell + ldelay[rvfl] * (1.0f - lswell))  + (ldlout * (1-reverse));   //Volume ducking near zero crossing.     
-	      }  
-	      else
-	      {
-	      efxoutl[i] = (ldelay[rvkl] * reverse)  + (ldlout * (1-reverse));        
-	      }
-       
-      rswell = 	(float)(abs(kr - rvkr)) * Srate_Attack_Coeff;  
-	      if (rswell <= PI)
-	      {
-	       rswell = 0.5f * (1.0f - cosf(rswell));   //Clickless transition 
-	       efxoutr[i] = reverse * (rdelay[rvkr] * rswell + rdelay[rvfr] * (1.0f - rswell))  + (rdlout * (1-reverse));  //Volume ducking near zero crossing.
-	      }
-	      else
-	      {
-	      efxoutr[i] = (rdelay[rvkr] * reverse)  + (rdlout * (1-reverse));
-	      }
-      
-
-      }
-      else
-      {
-      efxoutl[i]= ldlout;
-      efxoutr[i]= rdlout;
-      }
-      
-      
+      efxoutl[i]= l;
+      efxoutr[i]= r;
+         
       //LowPass Filter
-      ldelay[kl] = ldl = ldl * hidamp + oldl * (1.0f - hidamp);
-      rdelay[kr] = rdl = rdl * hidamp + oldr * (1.0f - hidamp);
-      oldl = ldl + DENORMAL_GUARD;
-      oldr = rdl + DENORMAL_GUARD;
-
-      if(dl>olddl) olddl++;        ///now index will not change more than one sample at a time -- will be more graceful
-      else if (dl<olddl) olddl--;
-      
-      if(dr>olddr) olddr++;
-      else if (dr<olddr) olddr--;
-      
-      if (++kl >= olddl)
-	kl = 0;
-      if (++kr >= olddr)
-	kr = 0;
-      rvkl = olddl - 1 - kl;
-      rvkr = olddr - 1 - kr;
-      
-      rvfl = olddl + fade - kl;
-      rvfr = olddr + fade - kr;
-      //Safety checks to avoid addressing data outside of buffer
-      if (rvfl > dl) rvfl = rvfl - dl;  
-      if (rvfl < 0) rvfl = 0;    
-      if (rvfr > dr) rvfr = rvfr - dr;
-      if (rvfr < 0) rvfr = 0;       
+      oldl = ldl * hidamp + oldl * (1.0f - hidamp);
+      oldr = rdl * hidamp + oldr * (1.0f - hidamp);
+      oldl += DENORMAL_GUARD;
+      oldr += DENORMAL_GUARD;
+    
     };
 
 };
@@ -220,8 +158,6 @@ Echo::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
   outvolume = (float)Pvolume / 127.0f;
-  if (Pvolume == 0)
-    cleanup ();
 
 };
 
@@ -237,6 +173,7 @@ Echo::setreverse (int Preverse)
 {
   this->Preverse = Preverse;
   reverse = (float) Preverse / 127.0f;
+  ireverse = 1.0f - reverse;
 };
 
 void
@@ -246,28 +183,18 @@ Echo::Tempo2Delay(int value)
 Pdelay = 60.0f/(float)value * 1000.0f;
 delay = (float)Pdelay / 1000.0f * fSAMPLE_RATE;;
 if ((unsigned int) delay > (SAMPLE_RATE * MAX_DELAY)) delay = SAMPLE_RATE*MAX_DELAY;
-//initdelays();
-  dl = delay - lrdelay;
-  if (dl < 1)
-    dl = 1;
-  dr = delay + lrdelay;
-  if (dr < 1)
-    dr = 1;
-
-  rvkl = dl - 1;
-  rvkr = dr - 1;
-  Srate_Attack_Coeff = 15.0f / (dl + dr);   // Set swell time to 1/10th of average delay time 
+  ldelay->set_averaging(0.5f); 
+  rdelay->set_averaging(0.5f); 
+initdelays();
 }
 
 void
 Echo::setdelay (int Pdelay)
 {
   this->Pdelay = Pdelay;
-  delay=Pdelay;
-  if (delay < 10) delay = 10;
-  if (delay > MAX_DELAY * 1000) delay = 1000 * MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
-  delay = 1 + lrintf ( ((float) delay / 1000.0f) * fSAMPLE_RATE );	
-
+  delay= ((float) Pdelay)/1000.0f;
+  ldelay->set_averaging(0.05f); 
+  rdelay->set_averaging(0.05f); 
   initdelays ();
 };
 
@@ -278,10 +205,10 @@ Echo::setlrdelay (int Plrdelay)
   this->Plrdelay = Plrdelay;
   tmp =
     (powf (2.0, fabsf ((float)Plrdelay - 64.0f) / 64.0f * 9.0f) -
-     1.0f) / 1000.0f * fSAMPLE_RATE;
+     1.0f) / 1000.0f;
   if (Plrdelay < 64.0)
     tmp = -tmp;
-  lrdelay = lrintf(tmp);
+  lrdelay = tmp;
   initdelays ();
 };
 

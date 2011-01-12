@@ -32,14 +32,28 @@ public:
   delayline (float maxdelay, int maxtaps_);  //construct the object with intended maximum delay time
   ~delayline ();
   void cleanup (); 
-  void set_averaging();  //use this if you want the time change averaging longer or shorter
-  float delay (float smps, float time, int tap_, int touch);  //puts a new sample at the current pointer
+  void set_averaging(float tc);  //use this if you want the time change averaging longer or shorter
+  float envelope();
+  
+  //Delay line simple use case is this:
+  // mydelayed_sample = mydelayline->delay(input, delay_time, 0, 1, 0)
+  float delay (float smps, float time, int tap_, int touch, int reverse);  //puts a new sample at the current pointer
+  //smps  -The current input sample
+  //time  -amount of delay you want
+  //tap_  -if multi-tap delay, this is the tap you want to access. Usually set touch=0 
+           //when accessing multiple taps after input.
+  //touch  -set to zero if you want smps written to the delay line.  Set nonzero if you only want to read out of delay line
+  //reverse -set to nonzero if you want to play the samples in the delay line backward.
+            //Typically you want to apply an envelope to eliminate the click at wraparound from old to recent.
+	    //in this case, multiply the sample by the envelope:
+	    // myreversedelayedsample = mydelayline->delay(input, delay_time, 0, 1, 1) * mydelayline->envelope;
 
 private:
   int zero_index; 
   int tap, maxtaps;
   float maxtime;
   long maxdelaysmps;
+  int rvptr, distance;
  
   float *oldtime, *avgtime;     //keeping it from changing too quickly
   float tconst, alpha, beta;  //don't allow change in delay time exceed 1 sample at a time
