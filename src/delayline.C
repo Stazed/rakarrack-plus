@@ -73,6 +73,72 @@ stctr[i] = 0;
 
 
 float
+delayline::delay_simple(float smps, float time_, int tap_, int touch, int reverse)
+{
+int dlytime = 0;
+int bufptr = 0;
+
+if(tap_ >= maxtaps) tap = 0;
+else tap = tap_;
+
+float time = fSAMPLE_RATE*time_;    //convert to something that can be used as a delay line index
+
+//Do some checks to keep things in bounds
+if(time>maxtime) time = maxtime;
+
+//now put in the sample
+if(touch) {  //make touch zero if you only want to pull samples off the delay line
+ringbuffer[zero_index] = smps;
+
+if(--zero_index<0) zero_index = maxdelaysmps;
+
+
+}
+
+oldtime[tap] = time;   
+
+dlytime = lrintf(oldtime[tap]);
+
+//if we want reverse delay
+//you need to call this every time to keep the buffers up to date, and it's on a different tap
+if(reverse) {
+
+bufptr = (dlytime + zero_index);  //this points to the sample we want to get 
+if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
+if(++rvptr>maxdelaysmps) rvptr = 0;
+
+if(bufptr>zero_index) {
+  if(rvptr>bufptr) {
+  rvptr = zero_index;
+  distance = 0;
+  }  
+  else distance = rvptr - zero_index;  
+}
+else if ((bufptr<zero_index) && (rvptr<zero_index))
+{
+  if(rvptr>bufptr){
+  rvptr = zero_index;
+  distance = 0;
+  }
+  else distance = rvptr + maxdelaysmps - zero_index;
+}
+else distance = rvptr - zero_index;
+
+
+bufptr = rvptr;// + zero_index;  //this points to the sample we want to get 
+//if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
+
+}
+else {
+bufptr = (dlytime + zero_index);  //this points to the sample we want to get 
+if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
+}
+
+return ( ringbuffer[bufptr] );
+
+};
+
+float
 delayline::delay(float smps, float time_, int tap_, int touch, int reverse)
 {
 int dlytime = 0;
