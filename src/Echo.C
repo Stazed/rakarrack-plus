@@ -8,6 +8,7 @@
   Modified for rakarrack by Josep Andreu
   Reverse Echo effect by Transmogrifox
   Echo Direct patch From: Arnout Engelen <arnouten@bzzt.net>
+  delayline utility by Transmogrifox
   
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License 
@@ -107,13 +108,13 @@ Echo::out (float * smpsl, float * smpsr)
   for (i = 0; i < PERIOD; i++)
     {
 
-      ldl = ldelay->delay(oldl, ltime, 0, 1, 0);
-      rdl = rdelay->delay(oldr, rtime, 0, 1, 0); 
+      ldl = ldelay->delay_simple(oldl, ltime, 0, 1, 0);
+      rdl = rdelay->delay_simple(oldr, rtime, 0, 1, 0); 
       
       if(Preverse)
       {
-      rvl = ldelay->delay(oldl, ltime, 1, 0, 1)*ldelay->envelope();
-      rvr = rdelay->delay(oldr, rtime, 1, 0, 1)*rdelay->envelope();   
+      rvl = ldelay->delay_simple(oldl, ltime, 1, 0, 1)*ldelay->envelope();
+      rvr = rdelay->delay_simple(oldr, rtime, 1, 0, 1)*rdelay->envelope();   
       ldl = ireverse*ldl + reverse*rvl;
       rdl = ireverse*rdl + reverse*rvr;
       }
