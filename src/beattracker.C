@@ -23,7 +23,8 @@
   tscntr = 0;
   tsidx = 0;
   
-  oldbpm = oldmost = 0;
+  oldbpm = 0.0f;
+  oldmost = 0.0f;
     
   cleanup ();
 
@@ -45,7 +46,8 @@ beattracker::cleanup ()
   trigtime = SAMPLE_RATE/20; //time to take next peak
   onset = 0;
   trigthresh = 0.15f;
-  
+  oldbpm = 0.0f;
+  oldmost = 0.0f; 
   tscntr = 0;
   tsidx = 0;
 };
@@ -82,7 +84,7 @@ beattracker::detect (float * smpsl, float * smpsr)
      trigtimeout = trigtime;
      
      //test
-     get_tempo();
+     //get_tempo();
      }
 
   }
@@ -101,6 +103,8 @@ beattracker::detect (float * smpsl, float * smpsr)
 float 
 beattracker::get_tempo()  //returns tempo in float beats per minute
 {
+if((oldbpm>600.0f) || (oldbpm<0.0f)) oldbpm = 0.0f;
+
 float time = 0;
 if(tsidx>0) time = ((float) timeseries[tsidx-1])/fSAMPLE_RATE;
 else  time = ((float) timeseries[19])/fSAMPLE_RATE;
@@ -123,17 +127,21 @@ time*=divisor;
 float bpm = 120.0f/time;
 
 //below is some code to look at the outputs, a crude statistical analysis
-float avg = 0.8f*oldbpm + 0.2f*bpm;
-oldbpm = avg;
+
+//oldbpm = 0.95f*oldbpm + 0.05f*bpm;
+
+/*
+//oldbpm = avg;
+//avg = oldmost;
 
 float low = avg*0.95f;
 float high = avg*1.05f;
 if ( (bpm>low) && (bpm<high) ) {
 oldmost = 0.1f*oldmost + 0.9f*bpm;
 }
-
+*/
 //uncomment below to see what is happening
-//printf("time: %f bpm: %f avg: %f most: %f time: 1/%f \n", time, bpm, avg, oldmost,divisor);
+//printf("time: %f bpm: %f avg: %f most: %f time: 1/%f \n", time, bpm, oldbpm, oldmost,divisor);
 
 return(bpm);
 
