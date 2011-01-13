@@ -82,7 +82,6 @@ Echo::cleanup ()
 void
 Echo::initdelays ()
 {
-  int i;
 
   oldl = 0.0;
   oldr = 0.0;
