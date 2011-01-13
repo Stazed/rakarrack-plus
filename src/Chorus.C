@@ -38,7 +38,15 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_)
 
   Ppreset = 0;
   setpreset (0,Ppreset);
-
+  
+  float tmp = 0.08f;
+  ldelay = new delayline(tmp, 2);
+  rdelay = new delayline(tmp, 2);
+  ldelay -> set_averaging(0.05f);
+  rdelay -> set_averaging(0.05f);  
+  oldr = 0.0f;
+  oldl = 0.0f;
+  awesome_mode = 0;
   lfo.effectlfoout (&lfol, &lfor);
   dl2 = getdelay (lfol);
   dr2 = getdelay (lfor);
@@ -81,13 +89,39 @@ void
 Chorus::out (float * smpsl, float * smpsr)
 {
   int i;
+  float tmp;
   dl1 = dl2;
   dr1 = dr2;
   lfo.effectlfoout (&lfol, &lfor);
 
+if(awesome_mode) //use interpolated delay line for better sound
+{
+  float tmpsub;
+  dl2 = delay + lfol * depth;
+  dr2 = delay + lfor * depth;
+  if (Poutsub != 0) tmpsub = -1.0f;
+  else tmpsub = 1.0f;
+   
+  for (i = 0; i < PERIOD; i++)
+    {  
+    //Left
+    mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
+    tmp = smpsl[i] + oldl*fb;
+    efxoutl[i] = tmpsub*ldelay->delay(tmp, mdel, 0, 1, 0);
+    oldl = efxoutl[i];
+    
+    //Right     
+    mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
+    tmp = smpsr[i] + oldl*fb;    
+    efxoutr[i] = tmpsub*rdelay->delay(tmp, mdel, 0, 1, 0);
+    oldr =  efxoutr[i]; 
+    }
+
+}
+else {
+
   dl2 = getdelay (lfol);
   dr2 = getdelay (lfor);
-
   for (i = 0; i < PERIOD; i++)
     {
       float inl = smpsl[i];
@@ -132,6 +166,7 @@ Chorus::out (float * smpsl, float * smpsr)
 
     };
 
+
   if (Poutsub != 0)
     for (i = 0; i < PERIOD; i++)
       {
@@ -145,6 +180,8 @@ Chorus::out (float * smpsl, float * smpsr)
       efxoutl[i] *= panning;
       efxoutr[i] *= (1.0f - panning);
     };
+    
+ } //end awesome_mode test   
 };
 
 /*
@@ -309,7 +346,12 @@ Chorus::changepar (int npar, int value)
 	value = 1;
       Poutsub = value;
       break;
-    };
+    case 12:
+      if (value > 1)
+	value = 1;
+      awesome_mode = value;
+      break;    
+      };
 };
 
 int

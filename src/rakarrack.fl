@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0109 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -848,17 +848,19 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {} {
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {1413 133 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} open
+      xywh {199 252 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1470,7 +1472,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -2514,7 +2516,7 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
         }
       }
       Fl_Group CHORUS {
-        user_data 1
+        user_data 1 open
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button chorus_activar {
@@ -2718,6 +2720,12 @@ rkr->efx_Chorus->changepar(9,(int)(o->value()+64));}
           xywh {51 581 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
+        Fl_Check_Button chorus_awesome {
+          label Awex
+          user_data 2
+          callback {rkr->efx_Chorus->changepar(12,(int)o->value())}
+          xywh {100 508 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
       }
       Fl_Group PHASER {
         user_data 1
@@ -2901,7 +2909,7 @@ rkr->efx_Phaser->changepar(9,(int)(o->value()+64));}
         }
       }
       Fl_Group FLANGER {
-        user_data 1
+        user_data 1 open
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button flanger_activar {
@@ -3063,6 +3071,12 @@ rkr->efx_Flanger->changepar(8,(int)o->value());}
 rkr->efx_Flanger->changepar(9,(int)(o->value()+64));}
           xywh {373 581 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Check_Button flanger_awesome {
+          label Awex
+          user_data 2
+          callback {rkr->efx_Flanger->changepar(12,(int)o->value());} selected
+          xywh {425 507 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group REVERB {

@@ -26,6 +26,7 @@
 #define CHORUS_H
 #include "global.h"
 #include "EffectLFO.h"
+#include "delayline.h"
 
 class Chorus
 {
@@ -71,14 +72,16 @@ private:
   //Valorile interne
   int maxdelay;
   int dlk, drk, dlhi, dlhi2;
+  int awesome_mode;
 
-  float depth, delay, fb, lrcross, panning;
+  float depth, delay, fb, lrcross, panning, oldr, oldl;
   float dl1, dl2, dr1, dr2, lfol, lfor;
   float *delayl, *delayr;
   float getdelay (float xlfo);
   float dllo, mdel;
   
   class FPreset *Fpre;
+  class delayline *ldelay, *rdelay;
   
 };
 

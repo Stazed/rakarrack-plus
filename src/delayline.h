@@ -48,6 +48,12 @@ public:
             //Typically you want to apply an envelope to eliminate the click at wraparound from old to recent.
 	    //in this case, multiply the sample by the envelope:
 	    // myreversedelayedsample = mydelayline->delay(input, delay_time, 0, 1, 1) * mydelayline->envelope;
+	    
+  float get_phaser(float smps, float lfo, float tap_);  //Allows you to use phaser directly without delay line
+     //smps  - input sample
+     //lfo   - ranges from 0 to 1
+     //tap   - allows multiple separate phasers with the same object
+     //Note:  phaser is a 4-stage phaser and this is hard-coded
 
 private:
   int zero_index; 
@@ -56,8 +62,9 @@ private:
   long maxdelaysmps;
   int rvptr, distance;
  
-  float *oldtime, *avgtime;     //keeping it from changing too quickly
+  float *oldtime, *avgtime, *olddelta;     //keeping it from changing too quickly
   float tconst, alpha, beta;  //don't allow change in delay time exceed 1 sample at a time
+  float itap;
   
   struct phasevars {
   float yn1[4];
