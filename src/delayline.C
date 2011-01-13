@@ -159,9 +159,11 @@ else tap = tap_;
 avgtime[tap] = alpha*time_ + beta*avgtime[tap];  //smoothing the rate of time change
 float time = 1.0f + fSAMPLE_RATE*avgtime[tap];    //convert to something that can be used as a delay line index
 
+
 //Do some checks to keep things in bounds
 if(time>maxtime) time = maxtime;
 if(time<0.0f) time = 0.0f;
+float fract = time - floorf(time); //compute fractional delay
 
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
@@ -172,9 +174,10 @@ if(--zero_index<0) zero_index = maxdelaysmps -1;
 }
 
 //slew rate limiting to prevent delay from changing more than one sample
-	if(oldtime[tap]<time) oldtime[tap] += tconst;
-	else if (oldtime[tap]>time) oldtime[tap] -= tconst;
-        else oldtime[tap] = time;   
+//         time = floorf(time);
+// 	if(oldtime[tap]<time) oldtime[tap] += tconst;
+// 	else if (oldtime[tap]>time) oldtime[tap] -= tconst;
+//         else oldtime[tap] = time;   
 
 dlytime = lrintf(oldtime[tap]);
 
@@ -226,7 +229,20 @@ increment+=1.0f;
 }
 olddelta[tap] = delta;
 
-return ( phaser(ringbuffer[bufptr]) );
+float output = 0.0f;
+output = phaser(ringbuffer[bufptr]);
+while(oldtime[tap]<time) {  //shove samples through phaser until we catch up
+if (++bufptr > maxdelaysmps) bufptr-=maxdelaysmps;
+oldtime[tap]+=1.0f;
+output = phaser(ringbuffer[bufptr]);
+}
+while(oldtime[tap]>time) { 
+if (--bufptr < 0) bufptr+=maxdelaysmps;
+oldtime[tap]-=1.0f;
+output = phaser(ringbuffer[bufptr]);
+}
+oldtime[tap] = time;
+return ( output );
 //return ( ringbuffer[bufptr] );
 
 };
