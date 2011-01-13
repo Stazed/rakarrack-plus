@@ -37,10 +37,11 @@ public:
   
   //Delay line simple use case is this:
   // mydelayed_sample = mydelayline->delay(input, delay_time, 0, 1, 0)
-  float delay (float smps, float time, int tap_, int touch, int reverse);  //interpolating delay
+  float delay (float smps, float time, float lfo, int tap_, int touch, int reverse);  //interpolating delay
   float delay_simple (float smps, float time, int tap_, int touch, int reverse);  //simple ring buffer
   //smps  -The current input sample
   //time  -amount of delay you want
+  //lfo   -a fractional delay amount to interpolate modulated delays.
   //tap_  -if multi-tap delay, this is the tap you want to access. Usually set touch=0 
            //when accessing multiple taps after input.
   //touch  -set to zero if you want smps written to the delay line.  Set nonzero if you only want to read out of delay line

@@ -148,7 +148,7 @@ return ( ringbuffer[bufptr] );
 };
 
 float
-delayline::delay(float smps, float time_, int tap_, int touch, int reverse)
+delayline::delay(float smps, float time_, float lfo, int tap_, int touch, int reverse)
 {
 int dlytime = 0;
 int bufptr = 0;
@@ -167,16 +167,14 @@ if(time<0.0f) time = 0.0f;
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
 ringbuffer[zero_index] = smps;
 
-if(--zero_index<0) zero_index = maxdelaysmps;
+if(--zero_index<0) zero_index = maxdelaysmps -1;
 
 }
 
 //slew rate limiting to prevent delay from changing more than one sample
-float tfloor = floorf(time);
-float fracdly = time - tfloor;
-	if(oldtime[tap]<tfloor) oldtime[tap] += tconst;
-	else if (oldtime[tap]>tfloor) oldtime[tap] -= tconst;
-        else oldtime[tap] = tfloor;   
+	if(oldtime[tap]<time) oldtime[tap] += tconst;
+	else if (oldtime[tap]>time) oldtime[tap] -= tconst;
+        else oldtime[tap] = time;   
 
 dlytime = lrintf(oldtime[tap]);
 
@@ -216,7 +214,7 @@ if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 }
 
 
-float delta = (1.0f - fracdly)/(1.0f + fracdly);
+float delta = (1.0f - lfo)/(1.0f + lfo);
 
 float increment = 0.0f;
 float dfract = itap*(delta - olddelta[tap]);
