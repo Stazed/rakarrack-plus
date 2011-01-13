@@ -157,7 +157,7 @@ if(tap_ >= maxtaps) tap = 0;
 else tap = tap_;
 
 avgtime[tap] = alpha*time_ + beta*avgtime[tap];  //smoothing the rate of time change
-float time = fSAMPLE_RATE*avgtime[tap];    //convert to something that can be used as a delay line index
+float time = 1.0f + fSAMPLE_RATE*avgtime[tap];    //convert to something that can be used as a delay line index
 
 //Do some checks to keep things in bounds
 if(time>maxtime) time = maxtime;
