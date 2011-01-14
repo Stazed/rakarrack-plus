@@ -79,7 +79,6 @@ private:
   float *delayl, *delayr;
   float getdelay (float xlfo);
   float dllo, mdel;
-  float scale;
   
   class FPreset *Fpre;
   class delayline *ldelay, *rdelay;

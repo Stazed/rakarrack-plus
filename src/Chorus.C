@@ -50,7 +50,6 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_)
   lfo.effectlfoout (&lfol, &lfor);
   dl2 = getdelay (lfol);
   dr2 = getdelay (lfor);
-  scale = 0.0086207f;
   cleanup (); 
 };
 
@@ -98,7 +97,7 @@ Chorus::out (float * smpsl, float * smpsr)
 if(awesome_mode) //use interpolated delay line for better sound
 {
   float tmpsub;
-  float tmpdly;
+
   dl2 = delay + lfol * depth;
   dr2 = delay + lfor * depth;
   if (Poutsub != 0) tmpsub = -1.0f;
@@ -108,16 +107,14 @@ if(awesome_mode) //use interpolated delay line for better sound
     {  
     //Left
     mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
-    tmpdly = mdel*scale;
     tmp = smpsl[i] + oldl*fb;
-    efxoutl[i] = tmpsub*ldelay->delay(tmp, mdel, tmpdly, 0, 1, 0);
+    efxoutl[i] = tmpsub*ldelay->delay(tmp, mdel, 0, 1, 0);
     oldl = efxoutl[i];
     
     //Right     
     mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
-    tmpdly = mdel*scale;    
     tmp = smpsr[i] + oldr*fb;    
-    efxoutr[i] = tmpsub*rdelay->delay(tmp, mdel, tmpdly, 0, 1, 0);
+    efxoutr[i] = tmpsub*rdelay->delay(tmp, mdel, 0, 1, 0);
     oldr =  efxoutr[i]; 
     }
 

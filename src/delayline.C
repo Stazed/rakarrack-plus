@@ -25,25 +25,19 @@ maxtaps = maxtaps_;
 maxtime = fSAMPLE_RATE*maxdelay;
 maxdelaysmps = SAMPLE_RATE*lrintf( ceilf(maxdelay));
 ringbuffer = (float *) malloc (sizeof (float) * maxdelaysmps);
-oldtime =  (float *) malloc (sizeof (float) * maxtaps);
 avgtime =  (float *) malloc (sizeof (float) * maxtaps);
-olddelta =  (float *) malloc (sizeof (float) * maxtaps);
-stctr =  (int *) malloc (sizeof (int) * maxtaps);
+time =  (float *) malloc (sizeof (float) * maxtaps);
 
 pstruct = (phasevars *) malloc(sizeof (struct phasevars)*maxtaps);
 
 zero_index = 0;
-tconst = 1.0f;
-itap = 1.0f/((float) maxtaps);
 tap = 0;
 rvptr=0;
 distance = 0;
 
-
 float dt = 1.0f/fSAMPLE_RATE;
 alpha = dt/(0.15f + dt);
 beta = 1.0f - alpha;   //time change smoothing parameters
-
 
 cleanup();
 };
@@ -61,10 +55,8 @@ int i,k;
   for (i = 0; i < maxdelaysmps; i++)
     ringbuffer[i] = 0.0;
   for (i = 0; i < maxtaps; i++){
-    oldtime[i] = 0.0;    
     avgtime[i] = 0.0;  
-    olddelta[tap] = 0.0; 
-     
+    time[i] = 0.0;      
     for(k = 0; k<4;k++) {
     pstruct[i].yn1[k] = 0.0f;
     pstruct[i].xn1[k] = 0.0f;    
@@ -74,8 +66,6 @@ int i,k;
     
 for (i=0;i<maxtaps;i++) {
 avgtime[i] = 0.5f*fSAMPLE_RATE;
-oldtime[i] = avgtime[i];
-stctr[i] = 0;
 }
 
 };
@@ -90,23 +80,17 @@ int bufptr = 0;
 if(tap_ >= maxtaps) tap = 0;
 else tap = tap_;
 
-float time = fSAMPLE_RATE*time_;    //convert to something that can be used as a delay line index
+time[tap] = fSAMPLE_RATE*time_;    //convert to something that can be used as a delay line index
 
 //Do some checks to keep things in bounds
-if(time>maxtime) time = maxtime;
+if(time[tap]>maxtime) time[tap] = maxtime;
+dlytime = lrintf(time[tap]);
 
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
 ringbuffer[zero_index] = smps;
-
 if(--zero_index<0) zero_index = maxdelaysmps;
-
-
 }
-
-oldtime[tap] = time;   
-
-dlytime = lrintf(oldtime[tap]);
 
 //if we want reverse delay
 //you need to call this every time to keep the buffers up to date, and it's on a different tap
@@ -135,7 +119,6 @@ else distance = rvptr - zero_index;
 
 
 bufptr = rvptr;// + zero_index;  //this points to the sample we want to get 
-//if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 
 }
 else {
@@ -148,22 +131,23 @@ return ( ringbuffer[bufptr] );
 };
 
 float
-delayline::delay(float smps, float time_, float lfo, int tap_, int touch, int reverse)
+delayline::delay(float smps, float time_, int tap_, int touch, int reverse)
 {
 int dlytime = 0;
 int bufptr = 0;
 
-if(tap_ >= maxtaps) tap = 0;
-else tap = tap_;
+tap = fabs(tap_);
+if(tap >= maxtaps) tap = 0;
 
 avgtime[tap] = alpha*time_ + beta*avgtime[tap];  //smoothing the rate of time change
-float time = 1.0f + fSAMPLE_RATE*avgtime[tap];    //convert to something that can be used as a delay line index
-
+time[tap] = 1.0f + fSAMPLE_RATE*avgtime[tap];    //convert to something that can be used as a delay line index
 
 //Do some checks to keep things in bounds
-if(time>maxtime) time = maxtime;
-if(time<0.0f) time = 0.0f;
-float fract = time - floorf(time); //compute fractional delay
+if(time[tap]>maxtime) time[tap] = maxtime;
+if(time[tap]<0.0f) time[tap] = 0.0f;
+
+float fract = time[tap] - floorf(time[tap]); //compute fractional delay
+dlytime = lrintf(floorf(time[tap]));
 
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
@@ -172,14 +156,6 @@ ringbuffer[zero_index] = smps;
 if(--zero_index<0) zero_index = maxdelaysmps -1;
 
 }
-
-//slew rate limiting to prevent delay from changing more than one sample
-//         time = floorf(time);
-// 	if(oldtime[tap]<time) oldtime[tap] += tconst;
-// 	else if (oldtime[tap]>time) oldtime[tap] -= tconst;
-//         else oldtime[tap] = time;   
-
-dlytime = lrintf(oldtime[tap]);
 
 //if we want reverse delay
 //you need to call this every time to keep the buffers up to date, and it's on a different tap
@@ -206,9 +182,7 @@ else if ((bufptr<zero_index) && (rvptr<zero_index))
 }
 else distance = rvptr - zero_index;
 
-
-bufptr = rvptr;// + zero_index;  //this points to the sample we want to get 
-//if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
+bufptr = rvptr; //this points to the sample we want to get 
 
 }
 else {
@@ -217,33 +191,13 @@ if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 }
 
 
-float delta = (1.0f - lfo)/(1.0f + lfo);
+float delta = (1.0f - fract)/(1.0f + fract);
 
-float increment = 0.0f;
-float dfract = itap*(delta - olddelta[tap]);
-for(int k = 0; k<4; k++) //continuous elevation of phase stages
-{
-//pstruct[tap].gain[k] = 0.33333f;
-pstruct[tap].gain[k] =  olddelta[tap] + dfract*increment;
-increment+=1.0f;
-}
-olddelta[tap] = delta;
+pstruct[tap].gain[0] = delta;
 
-float output = 0.0f;
-output = phaser(ringbuffer[bufptr]);
-while(oldtime[tap]<time) {  //shove samples through phaser until we catch up
-if (++bufptr > maxdelaysmps) bufptr-=maxdelaysmps;
-oldtime[tap]+=1.0f;
-output = phaser(ringbuffer[bufptr]);
-}
-while(oldtime[tap]>time) { 
-if (--bufptr < 0) bufptr+=maxdelaysmps;
-oldtime[tap]-=1.0f;
-output = phaser(ringbuffer[bufptr]);
-}
-oldtime[tap] = time;
+float output = delta*ringbuffer[bufptr] + (1.0f - delta)*phaser(ringbuffer[bufptr]);
+
 return ( output );
-//return ( ringbuffer[bufptr] );
 
 };
 
@@ -256,24 +210,23 @@ if(delta > 1.0f) delta = 1.0f;
 if(delta < 0.0f) delta = 0.0f;
 tap = tap_;
 
-pstruct[tap].gain[stctr[tap]] =  (1.0f - delta)/(1.0f + delta);
+pstruct[tap].gain[0] =  (1.0f - delta)/(1.0f + delta);
 
 return ( phaser(smps) );
 };
 
 
 inline float
-delayline::phaser(float fxn)  //4-stage All-pass phaser interpolation
+delayline::phaser(float fxn)  //All-pass interpolation
 {
 
 float xn = fxn;
-         for (int st = 0; st<4; st++) {
+         int st = 0;
 	  pstruct[tap].yn1[st] = pstruct[tap].xn1[st] - pstruct[tap].gain[st] * (xn + pstruct[tap].yn1[st]);
 	  pstruct[tap].xn1[st] = xn;
-	  xn = pstruct[tap].yn1[st];  //feed to the next stage
-	  }
 	  
-return fxn;
+//return xn;
+return pstruct[tap].yn1[0];
 
 };
 
@@ -288,7 +241,7 @@ beta = 1.0f - alpha;   //time change smoothing parameters
 float
 delayline::envelope()
 {
-float fdist = ((float) distance)/oldtime[tap];
+float fdist = ((float) distance)/time[tap];
 if(fdist>0.5f) {
  if(fdist<=1.0f) fdist = 1.0f - fdist;
  else fdist = 0.0f;

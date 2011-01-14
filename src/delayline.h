@@ -37,7 +37,7 @@ public:
   
   //Delay line simple use case is this:
   // mydelayed_sample = mydelayline->delay(input, delay_time, 0, 1, 0)
-  float delay (float smps, float time, float lfo, int tap_, int touch, int reverse);  //interpolating delay
+  float delay (float smps, float time, int tap_, int touch, int reverse);  //interpolating delay
   float delay_simple (float smps, float time, int tap_, int touch, int reverse);  //simple ring buffer
   //smps  -The current input sample
   //time  -amount of delay you want
@@ -63,16 +63,14 @@ private:
   long maxdelaysmps;
   int rvptr, distance;
  
-  float *oldtime, *avgtime, *olddelta;     //keeping it from changing too quickly
+  float *avgtime, *time;     //keeping it from changing too quickly
   float tconst, alpha, beta;  //don't allow change in delay time exceed 1 sample at a time
-  float itap;
   
   struct phasevars {
   float yn1[4];
   float xn1[4];
   float gain[4];
   } *pstruct; 
-  int *stctr;
   
   float phaser(float fxn);
   

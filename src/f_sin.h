@@ -14,9 +14,7 @@ The author makes no guarantee of its suitability for any purpose.
 #include "global.h"
 
 //globals
-static const float p2 = M_PI/2.0f;
-static const float mp2 = -p2;
-//static const float fact3 = 6.75f;  
+static const float p2 = M_PI/2.0f; 
 static const float fact3 = 0.148148148148148f; //can multiply by 1/fact3
 
 static inline float 
