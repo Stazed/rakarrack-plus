@@ -51,7 +51,7 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
 
   //ldelay = new float[maxx_delay];  
   //rdelay = new float[maxx_delay];
-  float tmp = 2.0f;
+  //  float tmp = 2.0f;
   ldelay = new delayline(0.25, 1);
   rdelay = new delayline(0.25, 1);
 
