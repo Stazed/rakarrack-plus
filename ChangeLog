@@ -1,5 +1,7 @@
 ==v0.6.2 ( / /201 ) ==
 
+- Chorus and Flanger Mode Awesome with the a delayline
+- Echo now use new delayline
 - Added beattracker to TapTempo
 - Added effect Infinity
 - Added fast sin functions

@@ -48,18 +48,18 @@ void RKR::putbuf(char *buf, int j)
 
 	case 5:
 	  //Chorus
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[2][0], &lv[2][1], &lv[2][2], &lv[2][3], &lv[2][4],
 		  &lv[2][5], &lv[2][6], &lv[2][7], &lv[2][8], &lv[2][9],
-		  &lv[2][10], &lv[2][11], &Chorus_B);
+		  &lv[2][10], &lv[2][11], &lv[2][12], &Chorus_B);
 	  break;
 
 	case 7:
 	  //Flanger
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[3][0], &lv[3][1], &lv[3][2], &lv[3][3], &lv[3][4],
 		  &lv[3][5], &lv[3][6], &lv[3][7], &lv[3][8], &lv[3][9],
-		  &lv[3][10], &lv[3][11], &Flanger_B);
+		  &lv[3][10], &lv[3][11], &lv[3][12], &Flanger_B);
 	  break;
 
 	case 6:
@@ -449,26 +449,26 @@ void RKR::getbuf(char *buf, int j)
 
 	case 5:
 	  //Chorus
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Chorus->getpar (0), efx_Chorus->getpar (1),
 		   efx_Chorus->getpar (2), efx_Chorus->getpar (3),
 		   efx_Chorus->getpar (4), efx_Chorus->getpar (5),
 		   efx_Chorus->getpar (6), efx_Chorus->getpar (7),
 		   efx_Chorus->getpar (8), efx_Chorus->getpar (9),
 		   efx_Chorus->getpar (10), efx_Chorus->getpar (11),
-		   Chorus_Bypass);
+		   efx_Chorus->getpar (12), Chorus_Bypass);
 	  break;
 
 	case 7:
 	  //Flanger
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Flanger->getpar (0), efx_Flanger->getpar (1),
 		   efx_Flanger->getpar (2), efx_Flanger->getpar (3),
 		   efx_Flanger->getpar (4), efx_Flanger->getpar (5),
 		   efx_Flanger->getpar (6), efx_Flanger->getpar (7),
 		   efx_Flanger->getpar (8), efx_Flanger->getpar (9),
 		   efx_Flanger->getpar (10), efx_Flanger->getpar (11),
-		   Flanger_Bypass);
+                   efx_Flanger->getpar (12), Flanger_Bypass);
 	  break;
 
 	case 6:
@@ -1248,7 +1248,7 @@ RKR::Actualizar_Audio ()
         
           Chorus_Bypass = 0;
           efx_Chorus->cleanup();
-          for (i = 0; i <= 11; i++)
+          for (i = 0; i <= 12; i++)
           efx_Chorus->changepar (i, lv[2][i]);
           Chorus_Bypass = Chorus_B;
           break;
@@ -1266,7 +1266,7 @@ RKR::Actualizar_Audio ()
                  
           Flanger_Bypass = 0;
           efx_Flanger->cleanup();
-          for (i = 0; i <= 11; i++)
+          for (i = 0; i <= 12; i++)
           efx_Flanger->changepar (i, lv[3][i]);
           Flanger_Bypass = Flanger_B;
           break;    
@@ -2260,9 +2260,9 @@ RKR::Preset_to_Bank (int i)
     lv[0][j] = efx_Rev->getpar (j);
   for (j = 0; j <= 8; j++)
     lv[1][j] = efx_Echo->getpar (j);
-  for (j = 0; j <= 11; j++)
+  for (j = 0; j <= 12; j++)
     lv[2][j] = efx_Chorus->getpar (j);
-  for (j = 0; j <= 11; j++)
+  for (j = 0; j <= 12; j++)
     lv[3][j] = efx_Flanger->getpar (j);
   for (j = 0; j <= 11; j++)
     lv[4][j] = efx_Phaser->getpar (j);
