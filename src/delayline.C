@@ -67,7 +67,11 @@ int i,k;
 for (i=0;i<maxtaps;i++) {
 avgtime[i] = 0.5f*fSAMPLE_RATE;
 }
-for(i=0; i<4; i++) lvars[i] = 0.0f;
+for(i=0; i<4; i++) {
+lvars[i] = 0.0f;
+fracts[i] = 0.0f;
+}
+
 
 };
 
@@ -201,8 +205,12 @@ lvars[3] = lvars[2];
 lvars[2] = lvars[1];
 lvars[1] = lvars[0];
 lvars[0] = ringbuffer[bufptr];
+ fracts[3] =  fracts[2];
+ fracts[2] =  fracts[1];
+ fracts[1] =  fracts[0];
+ fracts[0] = fract;
 
-float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], fract);
+float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], fracts[1]);
 
 return ( output );
 

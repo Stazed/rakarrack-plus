@@ -75,6 +75,7 @@ private:
   float phaser(float fxn);
   float lagrange(float p0, float p1, float p2, float p3, float x_);
   float lvars[4];
+  float fracts[4];
   
   float *ringbuffer;
 
