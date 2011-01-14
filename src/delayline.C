@@ -67,6 +67,7 @@ int i,k;
 for (i=0;i<maxtaps;i++) {
 avgtime[i] = 0.5f*fSAMPLE_RATE;
 }
+for(i=0; i<4; i++) lvars[i] = 0.0f;
 
 };
 
@@ -195,7 +196,13 @@ float delta = (1.0f - fract)/(1.0f + fract);
 
 pstruct[tap].gain[0] = delta;
 
-float output = delta*ringbuffer[bufptr] + (1.0f - delta)*phaser(ringbuffer[bufptr]);
+//float output = delta*ringbuffer[bufptr] + (1.0f - delta)*phaser(ringbuffer[bufptr]);
+lvars[3] = lvars[2];
+lvars[2] = lvars[1];
+lvars[1] = lvars[0];
+lvars[0] = ringbuffer[bufptr];
+
+float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], fract);
 
 return ( output );
 
@@ -228,6 +235,20 @@ float xn = fxn;
 //return xn;
 return pstruct[tap].yn1[0];
 
+};
+
+inline float
+delayline::lagrange(float p0, float p1, float p2, float p3, float x_)
+{
+float x = x_;
+//float x1 = -1;
+//float x2 = 0;
+//float x3 = 1;
+//float x4 = 2;
+
+x = -p0*x*(x - 1.0f)*(x - 2.0f)*0.16666666667f + p1*(x + 1.0f)*(x - 1.0f)*(x - 2.0f)*0.5f - p2*x*(x + 1.0f)*(x - 2.0f)*0.5f + p3*x*(x + 1.0f)*(x - 1.0f)*0.16666666667f;     
+
+return x;
 };
 
 void
