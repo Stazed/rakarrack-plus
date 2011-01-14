@@ -94,7 +94,7 @@ dlytime = lrintf(time[tap]);
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
 ringbuffer[zero_index] = smps;
-if(--zero_index<0) zero_index = maxdelaysmps;
+if(--zero_index<0) zero_index = maxdelaysmps - 1;
 }
 
 //if we want reverse delay
@@ -153,7 +153,7 @@ if(time[tap]<0.0f) time[tap] = 0.0f;
 
 float fract = time[tap] - floorf(time[tap]); //compute fractional delay
 dlytime = lrintf(floorf(time[tap]));
-
+//dlytime = lrintf(time[tap]);
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
 ringbuffer[zero_index] = smps;
@@ -210,7 +210,8 @@ lvars[0] = ringbuffer[bufptr];
  fracts[1] =  fracts[0];
  fracts[0] = fract;
 
-float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], fracts[1]);
+float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], 0.5f*(fracts[1] + fracts[2]));
+
 
 return ( output );
 
