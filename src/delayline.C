@@ -123,7 +123,7 @@ else if ((bufptr<zero_index) && (rvptr<zero_index))
 else distance = rvptr - zero_index;
 
 
-bufptr = rvptr;// + zero_index;  //this points to the sample we want to get 
+bufptr = rvptr;    //this points to the sample we want to get 
 
 }
 else {
@@ -197,9 +197,9 @@ lvars[3] = lvars[2];
 lvars[2] = lvars[1];
 lvars[1] = lvars[0];
 lvars[0] = ringbuffer[bufptr];
-fracts[3] =  fracts[2];
-fracts[2] =  fracts[1];
-fracts[1] =  fracts[0];
+fracts[3] = fracts[2];
+fracts[2] = fracts[1];
+fracts[1] = fracts[0];
 fracts[0] = fract;
 
 float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], 0.5f*(fracts[1] + fracts[2]));
