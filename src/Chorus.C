@@ -42,8 +42,8 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_)
   float tmp = 0.08f;
   ldelay = new delayline(tmp, 2);
   rdelay = new delayline(tmp, 2);
-  ldelay -> set_averaging(0.05f);
-  rdelay -> set_averaging(0.05f);  
+  ldelay -> set_averaging(0.005f);
+  rdelay -> set_averaging(0.005f);  
   oldr = 0.0f;
   oldl = 0.0f;
   awesome_mode = 0;

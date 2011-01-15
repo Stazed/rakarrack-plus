@@ -153,13 +153,11 @@ if(time[tap]<0.0f) time[tap] = 0.0f;
 
 float fract = time[tap] - floorf(time[tap]); //compute fractional delay
 dlytime = lrintf(floorf(time[tap]));
-//dlytime = lrintf(time[tap]);
+
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
 ringbuffer[zero_index] = smps;
-
 if(--zero_index<0) zero_index = maxdelaysmps -1;
-
 }
 
 //if we want reverse delay
@@ -195,23 +193,16 @@ bufptr = (dlytime + zero_index);  //this points to the sample we want to get
 if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 }
 
-
-float delta = (1.0f - fract)/(1.0f + fract);
-
-pstruct[tap].gain[0] = delta;
-
-//float output = delta*ringbuffer[bufptr] + (1.0f - delta)*phaser(ringbuffer[bufptr]);
 lvars[3] = lvars[2];
 lvars[2] = lvars[1];
 lvars[1] = lvars[0];
 lvars[0] = ringbuffer[bufptr];
- fracts[3] =  fracts[2];
- fracts[2] =  fracts[1];
- fracts[1] =  fracts[0];
- fracts[0] = fract;
+fracts[3] =  fracts[2];
+fracts[2] =  fracts[1];
+fracts[1] =  fracts[0];
+fracts[0] = fract;
 
 float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], 0.5f*(fracts[1] + fracts[2]));
-
 
 return ( output );
 
@@ -254,8 +245,8 @@ float x = x_;
 //float x2 = 0;
 //float x3 = 1;
 //float x4 = 2;
-
-x = -p0*x*(x - 1.0f)*(x - 2.0f)*0.16666666667f + p1*(x + 1.0f)*(x - 1.0f)*(x - 2.0f)*0.5f - p2*x*(x + 1.0f)*(x - 2.0f)*0.5f + p3*x*(x + 1.0f)*(x - 1.0f)*0.16666666667f;     
+float xm2xm1 = (x - 1.0f)*(x - 2.0f);
+x = -p0*x*xm2xm1*0.16666666667f + p1*(x + 1.0f)*xm2xm1*0.5f - p2*x*(x + 1.0f)*(x - 2.0f)*0.5f + p3*x*(x + 1.0f)*(x - 1.0f)*0.16666666667f;     
 
 return x;
 };
