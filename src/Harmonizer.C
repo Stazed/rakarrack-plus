@@ -179,7 +179,7 @@ Harmonizer::setinterval (int value)
 
   this->Pinterval = value;
   interval = (float)Pinterval - 12.0f;
-  PS->ratio = powf (2.0f, interval / 12.0f);
+  PS->ratio = powf(2.0f, interval / 12.0f);
   if (Pinterval % 12 == 0)
     mira = 0;
   else
@@ -214,7 +214,7 @@ Harmonizer::fsetq (int value)
 
   float tmp;
   this->fPq = value;
-  tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+  tmp = powf(30.0f, ((float)value - 64.0f) / 64.0f);
   pl->setq (tmp);
 
 }

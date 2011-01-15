@@ -215,7 +215,7 @@ switch(chan)
   case 0:
   Pintervall = value;
   intervall = (float)Pintervall - 12.0f;
-  PSl->ratio = f_pow2 (intervall / 12.0f)+chromel;
+  PSl->ratio = powf(2.0f,intervall / 12.0f)+chromel;
   if (Pintervall % 12 == 0)
     mira = 0;
   else
@@ -225,7 +225,7 @@ switch(chan)
   case 1:
   Pintervalr = value;
   intervalr = (float)Pintervalr - 12.0f;
-  PSr->ratio = f_pow2(intervalr / 12.0f)+chromer;
+  PSr->ratio = powf(2.0f,intervalr / 12.0f)+chromer;
   if (Pintervalr % 12 == 0)
     mira = 0;
   else
@@ -247,12 +247,12 @@ min = 0.0;
 switch(chan)
 {
     case 0:
-    max = f_pow2((intervall+1.0f) / 12.0f);
-    min = f_pow2((intervall-1.0f) / 12.0f);
+    max = powf(2.0f,(intervall+1.0f) / 12.0f);
+    min = powf(2.0f,(intervall-1.0f) / 12.0f);
     break;
     case 1:
-    max = f_pow2((intervalr+1.0f) / 12.0f);
-    min = f_pow2((intervalr-1.0f) / 12.0f);
+    max = powf(2.0f,(intervalr+1.0f) / 12.0f);
+    min = powf(2.0f,(intervalr-1.0f) / 12.0f);
     break;
 }
 
@@ -265,12 +265,12 @@ switch(chan)
     case 0:
     Pchromel=value;
     chromel=(max-min)/4000.0f*(float)value;
-    PSl->ratio=f_pow2(intervall/12.0f)+chromel;
+    PSl->ratio=powf(2.0f,intervall/12.0f)+chromel;
     break;
     case 1:
     Pchromer=value;
     chromer=(max-min)/4000.0f*(float)value;
-    PSr->ratio=f_pow2(intervalr/12.0f)+chromer;
+    PSr->ratio=powf(2.0f,intervalr/12.0f)+chromer;
     break;
 }
 
