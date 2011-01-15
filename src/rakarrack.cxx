@@ -12646,13 +12646,13 @@ R average.");
         chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype, (void*)(12));
         chorus_lfotype->menu(menu_chorus_lfotype);
       } // Fl_Choice* chorus_lfotype
-      { chorus_subs = new Fl_Check_Button(37, 507, 15, 15, "Subtract");
+      { chorus_subs = new Fl_Check_Button(27, 507, 15, 15, "Subtract");
         chorus_subs->down_box(FL_BORDER_BOX);
         chorus_subs->labelsize(10);
         chorus_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         chorus_subs->callback((Fl_Callback*)cb_chorus_subs, (void*)(2));
       } // Fl_Check_Button* chorus_subs
-      { chorus_awesome = new Fl_Check_Button(100, 508, 15, 15, "Awex");
+      { chorus_awesome = new Fl_Check_Button(90, 508, 15, 15, "Intense");
         chorus_awesome->down_box(FL_BORDER_BOX);
         chorus_awesome->labelsize(10);
         chorus_awesome->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
@@ -13052,13 +13052,13 @@ R average.");
         flanger_lfotype->callback((Fl_Callback*)cb_flanger_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* flanger_lfotype
-      { flanger_subs = new Fl_Check_Button(363, 507, 15, 15, "Subtract");
+      { flanger_subs = new Fl_Check_Button(353, 507, 15, 15, "Subtract");
         flanger_subs->down_box(FL_BORDER_BOX);
         flanger_subs->labelsize(10);
         flanger_subs->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
         flanger_subs->callback((Fl_Callback*)cb_flanger_subs, (void*)(2));
       } // Fl_Check_Button* flanger_subs
-      { flanger_awesome = new Fl_Check_Button(425, 507, 15, 15, "Awex");
+      { flanger_awesome = new Fl_Check_Button(415, 507, 15, 15, "Intense");
         flanger_awesome->down_box(FL_BORDER_BOX);
         flanger_awesome->labelsize(10);
         flanger_awesome->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);

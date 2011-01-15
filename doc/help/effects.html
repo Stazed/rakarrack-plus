@@ -316,6 +316,17 @@ will make the echo sound more natural. </p>
       <p>Tips</p>
       <p><b>Tempo</b>: LFO Rate</p>
       <p><b>Rnd</b>: Add noise to LFO to make it more natural sounding.</p>
+      <p><b>Intense</b>: Increase effect intensity.  A digital Flanger or
+      Chorus uses a delay line with several hundred to several thousand
+      taps.  When it changes taps to modulate the delay time, there is a
+      discontinuous change in the signal called "zipper noise".  To
+      eliminate this, fractional delay times need to be calculated in order
+      to smoothly transition from one delay line tap to the next.  The
+      default Rakarrack Phaser and Chorus use linear interpolation.  This
+      mode makes use of a Lagrange interpolation polynomial to estimate
+      fractional delay times and some other tricks to maximize the flanger
+      depth and flatten the frequency response on the chorus.  Adding the
+      mode switch adds the feature without breaking old presets.</p>
       <p><b>St.df</b> : Stereo difference of LFO.</p>
       <p><b>L/R Cr.</b> : Mix left into right, Right into left. At maximum
 level, left and right channels are swapped.</p>
@@ -468,6 +479,17 @@ To our ears, musical pitch increases exponentially with frequency.</p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       <p>Adapted from the ZynAddSubFX Chorus</p>
+      <p><b>Intense</b>: Increase effect intensity.  A digital Flanger or
+      Chorus uses a delay line with several hundred to several thousand
+      taps.  When it changes taps to modulate the delay time, there is a
+      discontinuous change in the signal called "zipper noise".  To
+      eliminate this, fractional delay times need to be calculated in order
+      to smoothly transition from one delay line tap to the next.  The
+      default Rakarrack Phaser and Chorus use linear interpolation.  This
+      mode makes use of a Lagrange interpolation polynomial to estimate
+      fractional delay times and some other tricks to maximize the flanger
+      depth and flatten the frequency response on the chorus.  Adding the
+      mode switch adds the feature without breaking old presets.</p>
       </td>
     </tr>
   </tbody>
@@ -2469,6 +2491,81 @@ a certain amount dry.</p>
       </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       
 <p>Ininity</p>
+<p>This is an implementation of and audio counterpart to the classic barberpole
+illusion:  the filters appear to be continuously ascending (or descending)
+akin to the manner in which the colored strips on the barberpole appear to
+have no beginning or end.  There are other illusions that come out of this
+effect model as well when you increase the rate.</p>
+
+<p>One such illusion is the apparent beat frequency.  Set the "Rev" switch to
+reverse left and right channel directions and mix all wet.  Turn up the rate
+until you hear a beat frequency.  If you are wearing headphones, remove one
+from the left or right ear:  the beat frequency is gone.  With stereo
+speakers, mute one speaker and the beat frequency goes away.  It is most
+interesting with headphones because the left and right channel signals are
+completely isolated.  The perception of a beat frequency is entirely in your
+head!</p>
+
+<p>The infinity is also capable of frequency shifting, as in Single Sideband
+Modulation, not pitch shifting.  This does crazy robotic things to vocals,
+or in a more subtle form may be used to slightly detune your instrument. 
+You may also use it to detune a delay then use jack to create a feedback
+loop so you have an echo which is perpetually ascending or descending.</p>
+
+<p>Apart from illusions and crazy sound effects, there is a wide range of
+subtle swirls or stereo panning and doppler shift effects possible.</p>
+
+<p>Think of this as an 8-band EQ where each band perpetually moves up the
+spectrum to the top of the range, then starts over at the bottom.  This will
+give an understanding for adjusting the level on the bands #1-8.</p>
+
+<p><b>Wet/Dry</b>:  Mix un-filtered signal with the filtered signal.</p>
+
+<p><b>Res</b>:  Filter resonance, also known as an adjustment of the Q factor.  More
+positive is more resonance, negative is less resonance.   It is suggested to
+set Res to 0 or less when using Infinity for frequency shifting or doppler
+effects.</p>
+
+<p><b>1-8</b>:  Level of filter bands.  Infinity uses 8-bandpass filters spaced evenly
+on a logarithmic scale from Start to End.  The mix level of each filter band
+is adjusted by these controls.  If all are set to the same value, they have
+practically no effect except when resonance is set quite high.  It is
+suggested to use alternating +/- settings.  A varying volume (like tremolo)
+effect can be obtained by setting them at different levels and low Res with
+some 0 in between.</p>
+
+<p><b>Rev</b>: Reverse the direction between left and right channels.  If Right channel
+filters are sweeping upward, left will be falling when this is
+activated.</p>
+
+<p><b>Stages</b>: This adds up to 12 phaser stages to each filter band.  A strong
+phaser effect can be obtained by setting this to something greater than 4
+and alternating the bands #1-8 by 64, -64, 64, -64...  There is an
+interesting switch internally that interacts with the Pan parameter when
+Stages is greater than 8.  This makes pan into a variable rate parameter,
+which allows for rotating doppler effects.</p>
+
+<p><b>AutoPan</b>: As long as stages is, this acts only as an auto-panning effect
+that alternates amplitude on left and right channels.  When stages then
+it acts as a variable rate control allowing doppler frequency bending to
+create the illusion of rotation.</p>
+
+<p><b>St. df</b>: Stereo offset between left and right filters.</p>
+
+<p><b>Start</b>: Where the filters start.  Set lower than end if you want filters to
+sweep upward.  Set greater than End if you want filters to sweep
+downward.</p>
+
+<p><b>End</b>: Where the filters end.</p>
+
+<p><b>Tempo</b>: The rate the filters sweep up or down.</p>
+
+<p><b>Subdiv</b>: Tempo frequency subdivision.  Numbers greater than zero make the
+rate slower.  Numbers less than 0 make the rate faster, even up into audible
+range frequencies for the crazy pitch shifting and ring modulation type
+sounds.  Notice this has no effect on the AutoPan frequency.  AutoPan Tempo
+is hard-coded to cycle every full measure at Tempo.</p>
+
 </td></tr></tbody>
 </table>
 <br>
