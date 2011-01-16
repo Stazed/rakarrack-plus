@@ -44,9 +44,13 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_)
   rdelay = new delayline(tmp, 2);
   ldelay -> set_averaging(0.005f);
   rdelay -> set_averaging(0.005f);  
+  ldelay->set_mix( 0.5f );
+  rdelay->set_mix( 0.5f ); 
+      
   oldr = 0.0f;
   oldl = 0.0f;
   awesome_mode = 0;
+
   lfo.effectlfoout (&lfol, &lfor);
   dl2 = getdelay (lfol);
   dr2 = getdelay (lfor);
@@ -227,7 +231,14 @@ void
 Chorus::setvolume (int Pvolume)
 {
   this->Pvolume = Pvolume;
-  outvolume = (float)Pvolume / 127.0f;
+if(awesome_mode) //use interpolated delay line for better sound
+{
+  outvolume = 0.0f;
+  ldelay->set_mix( ((float)Pvolume / 128.0f) );
+  rdelay->set_mix( ((float)Pvolume / 128.0f) );  
+  }
+else   outvolume = (float)Pvolume / 127.0f;
+  
 };
 
 void
@@ -351,6 +362,9 @@ Chorus::changepar (int npar, int value)
       if (value > 1)
 	value = 1;
       awesome_mode = value;
+      outvolume = 0.0f;
+      ldelay->set_mix( ((float)Pvolume / 127.0f) );
+      rdelay->set_mix( ((float)Pvolume / 127.0f) );  
       break;    
       };
 };

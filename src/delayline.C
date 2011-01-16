@@ -35,6 +35,9 @@ tap = 0;
 rvptr=0;
 distance = 0;
 
+mix = 0.5f;
+imix = 0.5f;
+
 float dt = 1.0f/fSAMPLE_RATE;
 alpha = dt/(0.15f + dt);
 beta = 1.0f - alpha;   //time change smoothing parameters
@@ -69,6 +72,7 @@ avgtime[i] = 0.5f*fSAMPLE_RATE;
 }
 for(i=0; i<4; i++) {
 lvars[i] = 0.0f;
+ivars[i] = 0.0f;
 fracts[i] = 0.0f;
 }
 
@@ -197,12 +201,21 @@ lvars[3] = lvars[2];
 lvars[2] = lvars[1];
 lvars[1] = lvars[0];
 lvars[0] = ringbuffer[bufptr];
+
+ivars[3] = ivars[2];
+ivars[2] = ivars[1];
+ivars[1] = ivars[0];
+ivars[0] = smps;
+
 fracts[3] = fracts[2];
 fracts[2] = fracts[1];
 fracts[1] = fracts[0];
 fracts[0] = fract;
+float tmpfrac = 0.5f*(fracts[1] + fracts[2]);
+//float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], 0.5f*(fracts[1] + fracts[2]));
+float output = mix*lagrange(ivars[0], ivars[1], ivars[2], ivars[3], 0.5f) + imix*lagrange(lvars[0], lvars[1], lvars[2], lvars[3], tmpfrac);
 
-float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], 0.5f*(fracts[1] + fracts[2]));
+//float output = spline(ivars[0], ivars[1], ivars[2], ivars[3], fracts[1]) + spline(lvars[0], lvars[1], lvars[2], lvars[3], fracts[1]);
 
 return ( output );
 
@@ -251,6 +264,21 @@ x = -p0*x*xm2xm1*0.16666666667f + p1*(x + 1.0f)*xm2xm1*0.5f - p2*x*(x + 1.0f)*(x
 return x;
 };
 
+inline float
+delayline::spline(float p0, float p1, float p2, float p3, float x_)
+{
+//does not produce any better results than lagrange(), but has less multiplies
+
+        float x=x_;
+        
+        float const c0 = p1;
+        float const c1 = 0.5f*(p2-p0);
+        float const c2 = p0 - 2.5f*p1 + 2.0f*p2 - 0.5f*p3;
+        float const c3 = 0.5f*(p3-p0) + 1.5f*(p1-p2);
+        
+        return ( ((c3*x+c2)*x+c1)*x+c0 );
+}
+
 void
 delayline::set_averaging(float tc)
 {
@@ -258,6 +286,13 @@ float dt = 1.0f/fSAMPLE_RATE;
 alpha = dt/(tc + dt);
 beta = 1.0f - alpha;   //time change smoothing parameters
 };
+
+void
+delayline::set_mix(float mix_)
+{
+mix = mix_;
+imix = 1.0f - mix;
+}
 
 float
 delayline::envelope()

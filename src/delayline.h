@@ -33,16 +33,17 @@ public:
   ~delayline ();
   void cleanup (); 
   void set_averaging(float tc);  //use this if you want the time change averaging longer or shorter
+  void set_mix(float mix_);
   float envelope();
   
   //Delay line simple use case is this:
   // mydelayed_sample = mydelayline->delay(input, delay_time, 0, 1, 0)
   float delay (float smps, float time, int tap_, int touch, int reverse);  //interpolating delay
   float delay_simple (float smps, float time, int tap_, int touch, int reverse);  //simple ring buffer
-  //smps  -The current input sample
-  //time  -amount of delay you want
-  //lfo   -a fractional delay amount to interpolate modulated delays.
-  //tap_  -if multi-tap delay, this is the tap you want to access. Usually set touch=0 
+  //smps  - The current input sample
+  //time  - amount of delay you want
+  //mix   - for chorus or flanger how much of original to mix
+  //tap_  - if multi-tap delay, this is the tap you want to access. Usually set touch=0 
            //when accessing multiple taps after input.
   //touch  -set to zero if you want smps written to the delay line.  Set nonzero if you only want to read out of delay line
   //reverse -set to nonzero if you want to play the samples in the delay line backward.
@@ -64,7 +65,7 @@ private:
   int rvptr, distance;
  
   float *avgtime, *time;     //keeping it from changing too quickly
-  float tconst, alpha, beta;  //don't allow change in delay time exceed 1 sample at a time
+  float tconst, alpha, beta, mix, imix;  //don't allow change in delay time exceed 1 sample at a time
   
   struct phasevars {
   float yn1[4];
@@ -74,7 +75,8 @@ private:
   
   float phaser(float fxn);
   float lagrange(float p0, float p1, float p2, float p3, float x_);
-  float lvars[4];
+  float spline(float p0, float p1, float p2, float p3, float x_);  
+  float lvars[4], ivars[4];
   float fracts[4];
   
   float *ringbuffer;
