@@ -50,6 +50,14 @@ beattracker::cleanup ()
   oldmost = 0.0f; 
   tscntr = 0;
   tsidx = 0;
+  for( int i = 0; i<17; i++) {
+  avbpm[i] = ( ((float) i) + 0.5f) * 10.0f;  //center the initial average in the bin
+  statsbin[i] = 1.0f;  //set all to 1.0 and let fly from there  
+  }
+  statsbin[12] = 1.1f;  //slightly bias to 120bpm
+  maxptr = 12;
+  oldbpm = 120.0f;
+  bpm_change_cntr = 0;
 };
  
 void 
@@ -83,8 +91,8 @@ beattracker::detect (float * smpsl, float * smpsr)
      
      trigtimeout = trigtime;
      
-     //test
-     //get_tempo();
+     //calculate tempo on every beat detected
+     calc_tempo();
      }
 
   }
@@ -99,7 +107,7 @@ beattracker::detect (float * smpsl, float * smpsr)
 
 
 };
-
+/*
 float 
 beattracker::get_tempo()  //returns tempo in float beats per minute
 {
@@ -130,7 +138,7 @@ float bpm = 120.0f/time;
 
 //oldbpm = 0.95f*oldbpm + 0.05f*bpm;
 
-/*
+/
 //oldbpm = avg;
 //avg = oldmost;
 
@@ -139,11 +147,58 @@ float high = avg*1.05f;
 if ( (bpm>low) && (bpm<high) ) {
 oldmost = 0.1f*oldmost + 0.9f*bpm;
 }
-*/
+//
 //uncomment below to see what is happening
 //printf("time: %f bpm: %f avg: %f most: %f time: 1/%f \n", time, bpm, oldbpm, oldmost,divisor);
 
 return(bpm);
 
 };
+*/
 
+void
+beattracker::calc_tempo()  //returns tempo in float beats per minute
+{
+if((oldbpm>600.0f) || (oldbpm<0.0f)) oldbpm = 0.0f;
+
+float time = 0;
+if(tsidx>0) time = ((float) timeseries[tsidx-1])/fSAMPLE_RATE;
+else  time = ((float) timeseries[19])/fSAMPLE_RATE;
+
+float bpm = 30.0f/time;
+
+while(bpm < 80.0f) bpm*=2.0f;
+while(bpm > 160.0f) bpm*=0.5f;  //normalize by powers of 2 to 80<bpm<160
+
+int binptr = lrintf(floorf(0.1f*bpm));  //get a bin address
+statsbin[binptr] += 1.0f;  //increase count
+avbpm[binptr] = 0.6f*avbpm[binptr] + 0.4f*bpm;
+if(avbpm[binptr] < 0.1f) avbpm[binptr] = 0.01f;  //create a floor to avoid denormal computations
+
+float maxbin = 0.0f; 
+maxptr = binptr;
+for(int i = 8; i<15; i++) {
+statsbin[i] *= 0.9f;  //weight 80 through 160 bins
+if(statsbin[i] > maxbin) {
+   maxbin = statsbin[i];
+   maxptr = i;
+   }
+   
+}
+
+if(fabs(oldbpm - avbpm[maxptr]) > 10.0f) {//prevent bpm from changing too abruptly and frequently
+	if( ++bpm_change_cntr > 4) {
+	oldbpm = avbpm[maxptr];  //wait 4 beats before allowing change > 10 bpm
+	bpm_change_cntr = 0;
+	}
+}
+else oldbpm = avbpm[maxptr];
+
+};
+
+float 
+beattracker::get_tempo() 
+{
+
+return(oldbpm);
+};

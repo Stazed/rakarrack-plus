@@ -71,7 +71,11 @@ private:
   class RBFilter *rmsfilter, *peaklpfilter, *peakhpfilter, *peaklpfilter2;
 
   float oldbpm, oldmost;
-
+  float avbpm[17], statsbin[17];
+  int maxptr;
+  int bpm_change_cntr;
+  
+  void calc_tempo();   //called by detect() on every beat detected
 };
 
 
