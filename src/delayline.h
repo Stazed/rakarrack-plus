@@ -67,6 +67,11 @@ private:
   float *avgtime, *time;     //keeping it from changing too quickly
   float tconst, alpha, beta, mix, imix;  //don't allow change in delay time exceed 1 sample at a time
   
+  int *newtime;
+  int *oldtime;
+  int crossfade;
+  float xfade, fadetime;
+  
   struct phasevars {
   float yn1[4];
   float xn1[4];

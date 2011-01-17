@@ -68,6 +68,8 @@ Echo::cleanup ()
 {
   ldelay->cleanup();
   rdelay->cleanup();
+  ldelay->set_averaging(0.25f);
+  rdelay->set_averaging(0.25f);  
   oldl = 0.0;
   oldr = 0.0;
 };

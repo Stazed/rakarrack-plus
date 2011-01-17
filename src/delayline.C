@@ -27,6 +27,8 @@ maxdelaysmps = SAMPLE_RATE*lrintf( ceilf(maxdelay));
 ringbuffer = (float *) malloc (sizeof (float) * maxdelaysmps);
 avgtime =  (float *) malloc (sizeof (float) * maxtaps);
 time =  (float *) malloc (sizeof (float) * maxtaps);
+oldtime =  (int *) malloc (sizeof (int) * maxtaps);
+newtime =  (int *) malloc (sizeof (int) * maxtaps);
 
 pstruct = (phasevars *) malloc(sizeof (struct phasevars)*maxtaps);
 
@@ -69,6 +71,8 @@ int i,k;
     
 for (i=0;i<maxtaps;i++) {
 avgtime[i] = 0.5f*fSAMPLE_RATE;
+newtime[i] = 0;
+oldtime[i] = 0;
 }
 for(i=0; i<4; i++) {
 lvars[i] = 0.0f;
@@ -76,6 +80,9 @@ ivars[i] = 0.0f;
 fracts[i] = 0.0f;
 }
 
+set_averaging(0.25f);
+xfade = 0.0f;
+crossfade = 0;
 
 };
 
@@ -94,6 +101,26 @@ time[tap] = fSAMPLE_RATE*time_;    //convert to something that can be used as a 
 //Do some checks to keep things in bounds
 if(time[tap]>maxtime) time[tap] = maxtime;
 dlytime = lrintf(time[tap]);
+
+if(crossfade == 0) {
+if(dlytime != oldtime[tap]) {
+crossfade = 1;
+xfade = 0.0f;
+oldtime[tap] = newtime[tap];
+newtime[tap] = dlytime;
+}
+
+}
+
+if(crossfade) {
+xfade += fadetime;
+	if(xfade>=1.0f) {
+	xfade = 0.0f;
+	crossfade = 0;
+	}
+} 
+
+dlytime = newtime[tap];
 
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
@@ -135,7 +162,15 @@ bufptr = (dlytime + zero_index);  //this points to the sample we want to get
 if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 }
 
-return ( ringbuffer[bufptr] );
+int oldnewdiff = newtime[tap] - oldtime[tap];
+
+if(crossfade)
+{
+int tmpptr = bufptr + oldnewdiff;
+if(tmpptr >= maxdelaysmps) tmpptr -= maxdelaysmps;
+return(xfade*ringbuffer[bufptr] + (1.0f - xfade)*ringbuffer[tmpptr]);  //fade nicely to new tap
+}
+else return ( ringbuffer[bufptr] );
 
 };
 
@@ -305,6 +340,7 @@ void
 delayline::set_averaging(float tc)
 {
 float dt = 1.0f/fSAMPLE_RATE;
+fadetime = fSAMPLE_RATE*tc;
 alpha = dt/(tc + dt);
 beta = 1.0f - alpha;   //time change smoothing parameters
 };
