@@ -51,11 +51,11 @@ public:
 	    //in this case, multiply the sample by the envelope:
 	    // myreversedelayedsample = mydelayline->delay(input, delay_time, 0, 1, 1) * mydelayline->envelope;
 	    
-  float get_phaser(float smps, float lfo, float tap_);  //Allows you to use phaser directly without delay line
+  float get_phaser(float smps, float lfo, int tap_, int stg);  //Allows you to use phaser directly without delay line
      //smps  - input sample
      //lfo   - ranges from 0 to 1
      //tap   - allows multiple separate phasers with the same object
-     //Note:  phaser is a 4-stage phaser and this is hard-coded
+     //stg   - number of phase stages to process
 
 private:
   int zero_index; 
@@ -71,6 +71,7 @@ private:
   float yn1[4];
   float xn1[4];
   float gain[4];
+  int stages;
   } *pstruct; 
   
   float phaser(float fxn);

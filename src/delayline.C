@@ -222,8 +222,8 @@ return ( output );
 };
 
 
-float
-delayline::get_phaser(float smps, float lfo, float tap_)
+inline float
+delayline::get_phaser(float smps, float lfo, int tap_, int stg)
 {
 float delta = lfo;
 if(delta > 1.0f) delta = 1.0f;
@@ -231,6 +231,7 @@ if(delta < 0.0f) delta = 0.0f;
 tap = tap_;
 
 pstruct[tap].gain[0] =  (1.0f - delta)/(1.0f + delta);
+pstruct[tap].stages =  stg;
 
 return ( phaser(smps) );
 };
@@ -241,26 +242,46 @@ delayline::phaser(float fxn)  //All-pass interpolation
 {
 
 float xn = fxn;
-         int st = 0;
+         for(int st = 0; st<pstruct[tap].stages; st++) {
 	  pstruct[tap].yn1[st] = pstruct[tap].xn1[st] - pstruct[tap].gain[st] * (xn + pstruct[tap].yn1[st]);
 	  pstruct[tap].xn1[st] = xn;
+	  xn =  pstruct[tap].yn1[st];
+	  }
 	  
-//return xn;
-return pstruct[tap].yn1[0];
+return xn;
 
 };
 
+/*  Unfactored WYSIWYG implementation of order=4 Lagrange interpolation polynomial
 inline float
 delayline::lagrange(float p0, float p1, float p2, float p3, float x_)
 {
 float x = x_;
-//float x1 = -1;
-//float x2 = 0;
-//float x3 = 1;
-//float x4 = 2;
+
 float xm2xm1 = (x - 1.0f)*(x - 2.0f);
 x = -p0*x*xm2xm1*0.16666666667f + p1*(x + 1.0f)*xm2xm1*0.5f - p2*x*(x + 1.0f)*(x - 2.0f)*0.5f + p3*x*(x + 1.0f)*(x - 1.0f)*0.16666666667f;     
 
+return x;
+};
+*/
+
+inline float
+delayline::lagrange(float p0, float p1, float p2, float p3, float x_)
+{
+//factored version for less multiplies
+float x = x_;
+
+const float c0p0 = -0.16666666667f*p0;
+const float c1p1 = 0.5f*p1;
+const float c2p2 = -0.5f*p2;
+const float c3p3 = 0.16666666667f*p3;
+
+const float a = c3p3 + c2p2 + c1p1 + c0p0;
+const float b = -3.0f*c0p0 - p1 - c2p2;
+const float c = 2.0f*c0p0 - c1p1 + p2 - c3p3;
+const float d = p1;
+
+x = ((a*x + b)*x + c)*x + d;
 return x;
 };
 
@@ -268,6 +289,7 @@ inline float
 delayline::spline(float p0, float p1, float p2, float p3, float x_)
 {
 //does not produce any better results than lagrange(), but has less multiplies
+//seems to produce discontinuities on a low level (-48dB), so not a preferred algorithm
 
         float x=x_;
         
