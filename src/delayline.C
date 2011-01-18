@@ -119,11 +119,14 @@ if(crossfade[tap] == 0) {
 	if(dlytime != oldtime[tap]) {
 	crossfade[tap] = 1;
 	xfade[tap] = 0.0f;
-
-	//printf("%d\n", dlytime);
+	oldtime[tap] = newtime[tap];
+	newtime[tap] = dlytime;	
+	printf("%d\n", dlytime);
 	}
 
 }
+
+
 
 
 
