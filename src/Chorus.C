@@ -359,12 +359,13 @@ Chorus::changepar (int npar, int value)
       Poutsub = value;
       break;
     case 12:
-      if (value > 1)
-	value = 1;
       awesome_mode = value;
+      if(awesome_mode)
+      {
       outvolume = 0.0f;
-      ldelay->set_mix( ((float)Pvolume / 128.0f) );
-      rdelay->set_mix( ((float)Pvolume / 128.0f) );  
+      ldelay->set_mix(((float)Pvolume / 128.0f) );
+      rdelay->set_mix(((float)Pvolume / 128.0f) );  
+      }
       break;    
       };
 };
@@ -409,6 +410,9 @@ Chorus::getpar (int npar)
       break;
     case 11:
       return (Poutsub);
+      break;
+    case 12:
+      return (awesome_mode);
       break;
     default:
       return (0);
