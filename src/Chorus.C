@@ -363,9 +363,10 @@ Chorus::changepar (int npar, int value)
       if(awesome_mode)
       {
       outvolume = 0.0f;
-      ldelay->set_mix(((float)Pvolume / 128.0f) );
-      rdelay->set_mix(((float)Pvolume / 128.0f) );  
+      ldelay->set_mix(((float)Pvolume/128.0f) );
+      rdelay->set_mix(((float)Pvolume/128.0f) );  
       }
+      else outvolume = (float)Pvolume / 127.0f;
       break;    
       };
 };
