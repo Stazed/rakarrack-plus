@@ -28,6 +28,7 @@
 #define RBECHO_H
 
 #include "global.h"
+#include "delayline.h"
 
 class RBEcho
 {
@@ -60,28 +61,27 @@ private:
   void initdelays ();
 
   //Parametrii
-  int Pvolume;	//Volumul or E/R
+  int Pvolume;	// E/R
   int Ppanning;	//Panning
   int Pdelay;
   int Plrdelay;	// L/R delay difference
   int Plrcross;	// L/R Mixing
-  int Pfb;		//Feed-back-ul
+  int Pfb;		//Feed-back
   int Phidamp;
   int Preverse;
   int Psubdiv;
   int Pes;
 
-
-  //Parametrii reali
-  int dl, dr, delay, lrdelay;
-  int kl, kr, rkr, rkl, rvkl, rvkr, rvfl, rvfr, maxx_delay;
-
-  float fdelay, subdiv, pes, pingpong;
-  float rpanning, lpanning, lrcross, fb, hidamp, reverse, lfeedback, rfeedback;
-  float *ldelay, *rdelay;
+  int maxx_delay;
+  
+  float delay, lrdelay, ltime, rtime;
+  float fdelay, subdiv, pes, pingpong, ipingpong;
+  float rvl, rvr;
+  float rpanning, lpanning, lrcross, fb, hidamp, reverse, ireverse, lfeedback, rfeedback;
   float oldl, oldr;		//pt. lpf
   float  Srate_Attack_Coeff;
-
+  
+  class delayline *ldelay, *rdelay;
   class FPreset *Fpre;
 };
 

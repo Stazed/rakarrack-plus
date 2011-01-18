@@ -27,8 +27,10 @@ maxdelaysmps = SAMPLE_RATE*lrintf( ceilf(maxdelay));
 ringbuffer = (float *) malloc (sizeof (float) * maxdelaysmps);
 avgtime =  (float *) malloc (sizeof (float) * maxtaps);
 time =  (float *) malloc (sizeof (float) * maxtaps);
+xfade =  (float *) malloc (sizeof (float) * maxtaps);
 oldtime =  (int *) malloc (sizeof (int) * maxtaps);
 newtime =  (int *) malloc (sizeof (int) * maxtaps);
+crossfade =  (int *) malloc (sizeof (int) * maxtaps);
 
 pstruct = (phasevars *) malloc(sizeof (struct phasevars)*maxtaps);
 
@@ -73,6 +75,9 @@ for (i=0;i<maxtaps;i++) {
 avgtime[i] = 0.5f*fSAMPLE_RATE;
 newtime[i] = 0;
 oldtime[i] = 0;
+xfade[i] = 0.0f;
+crossfade[i] = 0;
+
 }
 for(i=0; i<4; i++) {
 lvars[i] = 0.0f;
@@ -81,8 +86,6 @@ fracts[i] = 0.0f;
 }
 
 set_averaging(0.25f);
-xfade = 0.0f;
-crossfade = 0;
 
 };
 
@@ -102,23 +105,27 @@ time[tap] = fSAMPLE_RATE*time_;    //convert to something that can be used as a 
 if(time[tap]>maxtime) time[tap] = maxtime;
 dlytime = lrintf(time[tap]);
 
-if(crossfade == 0) {
-if(dlytime != oldtime[tap]) {
-crossfade = 1;
-xfade = 0.0f;
-oldtime[tap] = newtime[tap];
-newtime[tap] = dlytime;
-}
-
-}
-
-if(crossfade) {
-xfade += fadetime;
-	if(xfade>=1.0f) {
-	xfade = 0.0f;
-	crossfade = 0;
+if(crossfade[tap]) {
+xfade[tap] += fadetime;
+	if(xfade[tap]>=1.0f) {
+	xfade[tap] = 0.0f;
+	crossfade[tap] = 0;
+	oldtime[tap] = newtime[tap];
+	newtime[tap] = dlytime;
 	}
 } 
+
+if(crossfade[tap] == 0) {
+	if(dlytime != oldtime[tap]) {
+	crossfade[tap] = 1;
+	xfade[tap] = 0.0f;
+
+	printf("%d\n", dlytime);
+	}
+
+}
+
+
 
 dlytime = newtime[tap];
 
@@ -163,12 +170,13 @@ if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 }
 
 int oldnewdiff = newtime[tap] - oldtime[tap];
-
-if(crossfade)
+int tmpptr = 0;
+if(crossfade[tap] != 0)
 {
-int tmpptr = bufptr + oldnewdiff;
+tmpptr = bufptr + oldnewdiff;
 if(tmpptr >= maxdelaysmps) tmpptr -= maxdelaysmps;
-return(xfade*ringbuffer[bufptr] + (1.0f - xfade)*ringbuffer[tmpptr]);  //fade nicely to new tap
+else if (tmpptr <= 0) tmpptr += maxdelaysmps; 
+return(xfade[tap]*ringbuffer[bufptr] + (1.0f - xfade[tap])*ringbuffer[tmpptr]);  //fade nicely to new tap
 }
 else return ( ringbuffer[bufptr] );
 
@@ -340,7 +348,7 @@ void
 delayline::set_averaging(float tc)
 {
 float dt = 1.0f/fSAMPLE_RATE;
-fadetime = fSAMPLE_RATE*tc;
+fadetime = dt*tc;
 alpha = dt/(tc + dt);
 beta = 1.0f - alpha;   //time change smoothing parameters
 };

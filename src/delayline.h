@@ -69,8 +69,8 @@ private:
   
   int *newtime;
   int *oldtime;
-  int crossfade;
-  float xfade, fadetime;
+  int *crossfade;
+  float *xfade, fadetime;
   
   struct phasevars {
   float yn1[4];
