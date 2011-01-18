@@ -120,7 +120,7 @@ if(crossfade[tap] == 0) {
 	crossfade[tap] = 1;
 	xfade[tap] = 0.0f;
 
-	printf("%d\n", dlytime);
+	//printf("%d\n", dlytime);
 	}
 
 }
