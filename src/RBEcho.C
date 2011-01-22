@@ -69,7 +69,6 @@ RBEcho::~RBEcho ()
 void
 RBEcho::cleanup ()
 {
-  int i;
   ldelay->cleanup();
   rdelay->cleanup();
   ldelay->set_averaging(0.25f);
