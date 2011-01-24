@@ -27,6 +27,7 @@
 #include "global.h"
 #include "AnalogFilter.h"
 #include "EffectLFO.h"
+#include "delayline.h"
 
 #define  ECHOTRON_F_SIZE   128       //Allow up to 150 points in the file
 #define  ECHOTRON_MAXFILTERS  32      //filters available
@@ -105,8 +106,8 @@ float subdiv_dmod;
 float subdiv_fmod;
 int f_qmode;
 
-int rtime[ECHOTRON_F_SIZE];
-int ltime[ECHOTRON_F_SIZE];
+float rtime[ECHOTRON_F_SIZE];
+float ltime[ECHOTRON_F_SIZE];
 float ldata[ECHOTRON_F_SIZE];
 float rdata[ECHOTRON_F_SIZE];
 
@@ -120,7 +121,7 @@ float dlyrange;
   float width, depth;
   float lpanning, rpanning, hidamp, alpha_hidamp, convlength;
   
-  float *lxn, *rxn;
+  delayline *lxn, *rxn;
   
   float level,fb, rfeedback, lfeedback,levpanl,levpanr, lrcross, ilrcross;
   float tempo_coeff;

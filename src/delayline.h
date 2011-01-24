@@ -71,6 +71,7 @@ private:
   int *oldtime;
   int *crossfade;
   float *xfade, fadetime;
+  float *cur_smps;
   
   struct phasevars {
   float yn1[4];
@@ -82,8 +83,12 @@ private:
   float phaser(float fxn);
   float lagrange(float p0, float p1, float p2, float p3, float x_);
   float spline(float p0, float p1, float p2, float p3, float x_);  
-  float lvars[4], ivars[4];
+  
+  struct tapvars {
+  float lvars[4];
+  float ivars[4];
   float fracts[4];
+  } *tapstruct;
   
   float *ringbuffer;
 

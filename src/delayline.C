@@ -28,11 +28,13 @@ ringbuffer = (float *) malloc (sizeof (float) * maxdelaysmps);
 avgtime =  (float *) malloc (sizeof (float) * maxtaps);
 time =  (float *) malloc (sizeof (float) * maxtaps);
 xfade =  (float *) malloc (sizeof (float) * maxtaps);
+cur_smps =  (float *) malloc (sizeof (float) * maxtaps);
 oldtime =  (int *) malloc (sizeof (int) * maxtaps);
 newtime =  (int *) malloc (sizeof (int) * maxtaps);
 crossfade =  (int *) malloc (sizeof (int) * maxtaps);
 
 pstruct = (phasevars *) malloc(sizeof (struct phasevars)*maxtaps);
+tapstruct = (tapvars *) malloc(sizeof (struct tapvars)*maxtaps);
 
 zero_index = 0;
 tap = 0;
@@ -67,22 +69,22 @@ int i,k;
     for(k = 0; k<4;k++) {
     pstruct[i].yn1[k] = 0.0f;
     pstruct[i].xn1[k] = 0.0f;    
-    pstruct[i].gain[k] = 0.0f;     
+    pstruct[i].gain[k] = 0.0f;  
+    tapstruct[i].lvars[k] = 0.0f;
+    tapstruct[i].ivars[k] = 0.0f;
+    tapstruct[i].fracts[k] = 0.0f;
+       
     }   
     }
     
 for (i=0;i<maxtaps;i++) {
-avgtime[i] = 0.5f*fSAMPLE_RATE;
+avgtime[i] = 0.0f;
 newtime[i] = 0;
 oldtime[i] = 0;
 xfade[i] = 0.0f;
 crossfade[i] = 0;
+cur_smps[i] = 0.0f;
 
-}
-for(i=0; i<4; i++) {
-lvars[i] = 0.0f;
-ivars[i] = 0.0f;
-fracts[i] = 0.0f;
 }
 
 set_averaging(0.25f);
@@ -184,6 +186,10 @@ else return ( ringbuffer[bufptr] );
 
 };
 
+/*
+*  Interpolated delay line
+*/
+
 float
 delayline::delay(float smps, float time_, int tap_, int touch, int reverse)
 {
@@ -205,7 +211,7 @@ dlytime = lrintf(floorf(time[tap]));
 
 //now put in the sample
 if(touch) {  //make touch zero if you only want to pull samples off the delay line
-ringbuffer[zero_index] = smps;
+cur_smps[tap] = ringbuffer[zero_index] = smps;
 if(--zero_index<0) zero_index = maxdelaysmps -1;
 }
 
@@ -242,25 +248,24 @@ bufptr = (dlytime + zero_index);  //this points to the sample we want to get
 if (bufptr >= maxdelaysmps) bufptr-=maxdelaysmps;
 }
 
-lvars[3] = lvars[2];
-lvars[2] = lvars[1];
-lvars[1] = lvars[0];
-lvars[0] = ringbuffer[bufptr];
+tapstruct[tap].lvars[3] = tapstruct[tap].lvars[2];
+tapstruct[tap].lvars[2] = tapstruct[tap].lvars[1];
+tapstruct[tap].lvars[1] = tapstruct[tap].lvars[0];
+tapstruct[tap].lvars[0] = ringbuffer[bufptr];
 
-ivars[3] = ivars[2];
-ivars[2] = ivars[1];
-ivars[1] = ivars[0];
-ivars[0] = smps;
+tapstruct[tap].ivars[3] = tapstruct[tap].ivars[2];
+tapstruct[tap].ivars[2] = tapstruct[tap].ivars[1];
+tapstruct[tap].ivars[1] = tapstruct[tap].ivars[0];
+tapstruct[tap].ivars[0] = cur_smps[tap];
 
-fracts[3] = fracts[2];
-fracts[2] = fracts[1];
-fracts[1] = fracts[0];
-fracts[0] = fract;
-float tmpfrac = 0.5f*(fracts[1] + fracts[2]);
-//float output = lagrange(lvars[0], lvars[1], lvars[2], lvars[3], 0.5f*(fracts[1] + fracts[2]));
-float output = mix*lagrange(ivars[0], ivars[1], ivars[2], ivars[3], 0.5f) + imix*lagrange(lvars[0], lvars[1], lvars[2], lvars[3], tmpfrac);
+tapstruct[tap].fracts[3] = tapstruct[tap].fracts[2];
+tapstruct[tap].fracts[2] = tapstruct[tap].fracts[1];
+tapstruct[tap].fracts[1] = tapstruct[tap].fracts[0];
+tapstruct[tap].fracts[0] = fract;
 
-//float output = spline(ivars[0], ivars[1], ivars[2], ivars[3], fracts[1]) + spline(lvars[0], lvars[1], lvars[2], lvars[3], fracts[1]);
+float tmpfrac = 0.5f*(tapstruct[tap].fracts[1] + tapstruct[tap].fracts[2]);
+
+float output = mix*lagrange(tapstruct[tap].ivars[0], tapstruct[tap].ivars[1], tapstruct[tap].ivars[2], tapstruct[tap].ivars[3], 0.5f) + imix*lagrange(tapstruct[tap].lvars[0], tapstruct[tap].lvars[1], tapstruct[tap].lvars[2], tapstruct[tap].lvars[3], tmpfrac);
 
 return ( output );
 
@@ -356,7 +361,7 @@ beta = 1.0f - alpha;   //time change smoothing parameters
 };
 
 void
-delayline::set_mix(float mix_)
+delayline::set_mix(float mix_)  //mix amount of dry w/ wet
 {
 mix = mix_;
 imix = 1.0f - mix;

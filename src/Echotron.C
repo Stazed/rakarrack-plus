@@ -51,9 +51,12 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_)
 
   maxx_size = (SAMPLE_RATE * 6);   //6 Seconds delay time
 
-  lxn = (float *) malloc (sizeof (float) * (1 + maxx_size)); 
-  rxn = (float *) malloc (sizeof (float) * (1 + maxx_size));    
-
+  lxn = new delayline(6.0f, ECHOTRON_F_SIZE); 
+  rxn = new delayline(6.0f, ECHOTRON_F_SIZE);  
+  
+  lxn->set_mix(0.0f);  
+  rxn->set_mix(0.0f);
+    
   offset = 0;
 
   lpfl =  new AnalogFilter (0, 800, 1, 0);;
@@ -91,8 +94,11 @@ Echotron::~Echotron ()
 void
 Echotron::cleanup ()
 {
-memset(lxn,0,sizeof(float)*maxx_size);
-memset(rxn,0,sizeof(float)*maxx_size);
+
+lxn->cleanup();
+rxn->cleanup();
+lxn->set_averaging(0.05f);
+rxn->set_averaging(0.05f);
 
 lpfl->cleanup ();
 lpfr->cleanup ();
@@ -105,7 +111,8 @@ lpfr->cleanup ();
 void
 Echotron::out (float * smpsl, float * smpsr)
 {
-  int i, j, k, rxindex, lxindex;
+  int i, j, k; 
+  float rxindex, lxindex;
   float l,r,lyn, ryn;
   int length = Plength;
 
@@ -114,21 +121,14 @@ else interpl = interpr = 0;
 
   float tmpmodl = oldldmod;
   float tmpmodr = oldrdmod;
-  int intmodl, intmodr;
 
   for (i = 0; i < PERIOD; i++)
     {
       tmpmodl+=interpl;
       tmpmodr+=interpr;
-      
-      intmodl = lrintf(tmpmodl);
-      intmodr = lrintf(tmpmodr);
 
-      l = lpfl->filterout_s(smpsl[i] + lfeedback);  //High Freq damping 
-      r = lpfr->filterout_s(smpsr[i] + rfeedback);
-
-      lxn[offset] = l;
-      rxn[offset] = r;
+      l = lxn->delay( (lpfl->filterout_s(smpsl[i] + lfeedback) ), 0.0f, 0, 1, 0);  //High Freq damping 
+      r = rxn->delay( (lpfr->filterout_s(smpsr[i] + rfeedback) ), 0.0f, 0, 1, 0);
       
       //Convolve 
       lyn = 0.0f;
@@ -139,20 +139,19 @@ else interpl = interpr = 0;
       j=0;
       for (k=0; k<length; k++)
       {   
-      lxindex = offset + ltime[k] + intmodl;
-      rxindex = offset + rtime[k] + intmodr;
-      if(lxindex>=maxx_size) lxindex -= maxx_size;
-      if(rxindex>=maxx_size) rxindex -= maxx_size;
+      lxindex = ltime[k] + tmpmodl;
+      rxindex = rtime[k] + tmpmodr;      
+
       if((iStages[k]>=0)&&(j<ECHOTRON_MAXFILTERS)) 
       {
-      lyn += filterbank[j].l->filterout_s(lxn[lxindex]) * ldata[k];		//filter each tap specified
-      ryn += filterbank[j].r->filterout_s(rxn[rxindex]) * rdata[k];
+      lyn += filterbank[j].l->filterout_s(lxn->delay(l, lxindex, k, 0, 0)) * ldata[k];		//filter each tap specified
+      ryn += filterbank[j].r->filterout_s(rxn->delay(r, lxindex, k, 0, 0)) * rdata[k];
       j++;
       }
       else
       {
-      lyn += lxn[lxindex] * ldata[k];		
-      ryn += rxn[rxindex] * rdata[k];      
+      lyn += lxn->delay(l, lxindex, k, 0, 0) * ldata[k]; 		
+      ryn += rxn->delay(r, lxindex, k, 0, 0) * rdata[k];  
       }
 
       }
@@ -162,13 +161,11 @@ else interpl = interpr = 0;
       {      
       for (k=0; k<length; k++)
       {   
-  
-      lxindex = offset + ltime[k] + intmodl;
-      rxindex = offset + rtime[k] + intmodr;
-      if(lxindex>=maxx_size) lxindex -= maxx_size;
-      if(rxindex>=maxx_size) rxindex -= maxx_size;
-      lyn += lxn[lxindex] * ldata[k];		
-      ryn += rxn[rxindex] * rdata[k];
+      lxindex = ltime[k] + tmpmodl;
+      rxindex = rtime[k] + tmpmodr;   
+
+      lyn += lxn->delay(l, lxindex, k, 0, 0) * ldata[k];		
+      ryn += rxn->delay(r, lxindex, k, 0, 0) * rdata[k];
       }      
 
       }
@@ -178,10 +175,7 @@ else interpl = interpr = 0;
       efxoutl[i] = lfeedback;
       efxoutr[i] = rfeedback;       
       lfeedback *= fb;
-      rfeedback *= fb;      
-
-      offset--;
-      if (offset<0) offset = maxx_size;   
+      rfeedback *= fb;        
      
     };
 
@@ -369,7 +363,6 @@ void Echotron::init_params()
 {
 
 float hSR = fSAMPLE_RATE*0.5f;
-float tmp_time;
 float tpanl, tpanr;
 float tmptempo;
 int tfcnt = 0;
@@ -385,10 +378,10 @@ dlfo.Pfreq = lrintf(subdiv_dmod*tmptempo);
       
 for(int i=0; i<Plength; i++)
 {
-tmp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
-if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
+// tmp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
+// if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
-ltime[i] = rtime[i];  
+ltime[i] = rtime[i] = fTime[i]*tempo_coeff;  
  
 
 if(fPan[i]>=0.0f)
@@ -453,9 +446,10 @@ oldrdmod = rdmod;
 ldmod = width*dlfol;
 rdmod = width*dlfor;
 
-ldmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*ldmod);
-rdmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*rdmod);
-
+// ldmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*ldmod);
+// rdmod=lrintf(dlyrange*tempo_coeff*fSAMPLE_RATE*rdmod);
+ldmod=dlyrange*tempo_coeff*ldmod;
+rdmod=dlyrange*tempo_coeff*rdmod;
 interpl = (ldmod - oldldmod)*fperiod;
 interpr = (rdmod - oldrdmod)*fperiod;
 }
