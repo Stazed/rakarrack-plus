@@ -143,8 +143,8 @@ RBEcho::out (float * smpsl, float * smpsr)
       
       if(Pes)
       {
-          efxoutl[i] *= cosf(lrcross);
-          efxoutr[i] *= sinf(lrcross);
+          ldl *= cosf(lrcross);
+          rdl *= sinf(lrcross);
           
        	  avg = (efxoutl[i] + efxoutr[i]) * 0.5f;
 	  ldiff = ldl - avg;
