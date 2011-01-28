@@ -146,7 +146,7 @@ RBEcho::out (float * smpsl, float * smpsr)
           ldl *= cosf(lrcross);
           rdl *= sinf(lrcross);
           
-       	  avg = (efxoutl[i] + efxoutr[i]) * 0.5f;
+       	  avg = (ldl + rdl) * 0.5f;
 	  ldiff = ldl - avg;
 	  rdiff = rdl - avg;
 
