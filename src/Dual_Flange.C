@@ -46,24 +46,40 @@ Dflange::Dflange (float * efxoutl_, float * efxoutr_)
   rdelay = NULL;
 
   
-  maxx_delay = (int) SAMPLE_RATE * D_FLANGE_MAX_DELAY;
+  maxx_delay = (int) SAMPLE_RATE * 0.055f;
   ldelay = new float[maxx_delay];  
   rdelay = new float[maxx_delay];
   zldelay = new float[maxx_delay];  
   zrdelay = new float[maxx_delay];  
+  
+  ldelayline0  = new delayline(0.055f, 2);
+  rdelayline0  = new delayline(0.055f, 2);
+  ldelayline1  = new delayline(0.055f, 2); 
+  rdelayline1  = new delayline(0.055f, 2);  
+  ldelayline0 -> set_averaging(0.05f);
+  rdelayline0 -> set_averaging(0.05f);  
+  ldelayline0->set_mix( 0.5f );
+  rdelayline0->set_mix( 0.5f ); 
+  ldelayline1 -> set_averaging(0.05f);
+  rdelayline1 -> set_averaging(0.05f);  
+  ldelayline1->set_mix( 0.5f );
+  rdelayline1->set_mix( 0.5f );  
+
   fsubtract = 0.5f;
   fhidamp = 1.0f;
   fwidth = 800;
   fdepth = 50;
-  zcenter = (int) floorf(0.5f * (fdepth + fwidth));
+  zcenter = (int) fSAMPLE_RATE/floorf(0.5f * (fdepth + fwidth));
   base = 7.0f;		//sets curve of modulation to frequency relationship
   ibase = 1.0f/base;
   //default values
   Ppreset = 0;  
+  Pintense = 0;
   rsA = 0.0f;
   rsB = 0.0f; 
   lsA  = 0.0f;
   lsB = 0.0f;
+  logmax = logf(1000.0f)/logf(2.0f);
   setpreset (Ppreset);
   cleanup ();
 };
@@ -99,12 +115,6 @@ Dflange::cleanup ()
   
 };
 
-float
-ringbuffer::getsmp(float delay_time)
-{
-return 0;
-}
-
 
 /*
  * Effect output
@@ -115,6 +125,7 @@ Dflange::out (float * smpsl, float * smpsr)
   int i;
   //deal with LFO's
     int tmp0, tmp1;
+    float tmp;
 
     float lfol, lfor, lmod, rmod, lmodfreq, rmodfreq, rx0, rx1, lx0, lx1;
     float ldif0, ldif1, rdif0, rdif1;  //Difference between fractional delay and floor(fractional delay)
@@ -122,9 +133,104 @@ Dflange::out (float * smpsl, float * smpsr)
     
   lfo.effectlfoout (&lfol, &lfor);
   lmod = lfol;
-  rmod = lfor;
-//  lmod = (powf (2.0f, lmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;  //2^x type sweep for musical interpretation of moving delay line.
-//  rmod = (powf (2.0f, rmod*LOG_FMAX) - 1.0f) * LFO_CONSTANT;
+  if(Pzero && Pintense) rmod = 1.0f - lfol;  //using lfol is intentional
+  else rmod = lfor; 
+
+if(Pintense) {
+//do intense stuff
+ lmodfreq = (f_pow2(lmod*lmod*logmax)) * fdepth;  //2^x type sweep for musical interpretation of moving delay line.
+ rmodfreq = (f_pow2(rmod*rmod*logmax)) * fdepth;  //logmax depends on depth
+ rflange0 = 0.5f/rmodfreq;		//Turn the notch frequency into 1/2 period delay
+ rflange1 = rflange0 + (1.0f - foffset)/fdepth;				//Set relationship of second delay line
+ lflange0 = 0.5f/lmodfreq;
+ lflange1 = lflange0 + (1.0f - foffset)/fdepth;
+ 
+ rx0 = (rflange0 - oldrflange0) * period_const;  //amount to add each time around the loop.  Less processing of linear LFO interp inside the loop.
+ rx1 =  (rflange1 - oldrflange1) * period_const;
+ lx0 = (lflange0 - oldlflange0) * period_const;
+ lx1  = (lflange1 - oldlflange1) * period_const; 
+ 
+ // Now there is a fractional amount to add  
+ drA = oldrflange0;
+ drB = oldrflange1;
+ dlA = oldlflange0;
+ dlB = oldlflange1; 
+ 
+ oldrflange0 = rflange0;
+ oldrflange1 = rflange1;
+ oldlflange0 = lflange0;
+ oldlflange1 = lflange1;
+  //lfo ready...
+ 
+ if(Pzero) { 
+  for (i = 0; i < PERIOD; i++) { 
+  
+      ldl = smpsl[i] * lpan + ldl * ffb;
+      rdl = smpsr[i] * rpan + rdl * ffb;
+          
+      //LowPass Filter
+      ldl = ldl * (1.0f - fhidamp) + oldl * fhidamp;
+      rdl = rdl * (1.0f - fhidamp) + oldr * fhidamp;
+      oldl = ldl + DENORMAL_GUARD;
+      oldr = rdl + DENORMAL_GUARD; 
+ /*
+ Here do the delay line stuff
+ basically,
+ dl1(dl2(smps));
+ ^^This runs two flangers in series so you can get a double notch
+ */
+
+ ldl = ldelayline0->delay(ldl,dlA, 0, 1, 0)  + ldelayline1->delay(ldl,drA, 0, 1, 0); 
+ rdl = rdelayline0->delay(rdl,dlB, 0, 1, 0) + rdelayline1->delay(rdl,drB, 0, 1, 0);  
+ 
+ efxoutl[i] = ldl = ldl * flrcross + rdl * frlcross;
+ efxoutr[i] = rdl = rdl * flrcross + ldl * frlcross;
+ 
+ // Increment LFO
+ drA += rx0;
+ drB += rx1;
+ dlA += lx0;
+ dlB += lx1;
+ }
+   }
+ else {
+  for (i = 0; i < PERIOD; i++) { 
+  
+      ldl = smpsl[i] * lpan + ldl * ffb;
+      rdl = smpsr[i] * rpan + rdl * ffb;
+          
+      //LowPass Filter
+      ldl = ldl * (1.0f - fhidamp) + oldl * fhidamp;
+      rdl = rdl * (1.0f - fhidamp) + oldr * fhidamp;
+      oldl = ldl + DENORMAL_GUARD;
+      oldr = rdl + DENORMAL_GUARD; 
+ /*
+ Here do the delay line stuff
+ basically,
+ dl1(dl2(smps));
+ ^^This runs two flangers in series so you can get a double notch
+ */
+
+ ldl = ldelayline0->delay(ldl,dlA, 0, 1, 0);
+ ldl = ldelayline1->delay(ldl,dlB, 0, 1, 0); 
+
+ rdl = rdelayline0->delay(rdl,drA, 0, 1, 0);
+ rdl = rdelayline1->delay(rdl,drB, 0, 1, 0);  
+ 
+ efxoutl[i] = ldl = ldl * flrcross + rdl * frlcross;
+ efxoutr[i] = rdl = rdl * flrcross + ldl * frlcross;
+ 
+ // Increment LFO
+ drA += rx0;
+ drB += rx1;
+ dlA += lx0;
+ dlB += lx1;
+ }
+ }
+
+
+}
+else {
 
   lmodfreq = fdepth + fwidth*(powf(base, lmod) - 1.0f)*ibase;	//sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
   rmodfreq = fdepth + fwidth*(powf(base, rmod) - 1.0f)*ibase;
@@ -231,7 +337,7 @@ Dflange::out (float * smpsl, float * smpsr)
 	tmp0 = (kl + (int) floor(dlB)) %  maxx_delay;
 	tmp1 = tmp0 + 1;
 	if (tmp1 >= maxx_delay) tmp1 =  0;
-	//lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the second leftt channel delay
+	//lsB = ldelay[tmp0] + ldif1 * (ldelay[tmp1] - ldelay[tmp0]);	//here is the second left channel delay
 	lsB = ldelay[tmp1] + ldif1 * (ldelay[tmp0] - lsB );		
 	//End flanging, next process outputs
 
@@ -262,8 +368,9 @@ Dflange::out (float * smpsl, float * smpsr)
  dlA += lx0;
  dlB += lx1;
  
-    };
-    
+    };  //end for loop
+
+}  //end intense if statement  
 
 
 };
@@ -282,6 +389,20 @@ Dflange::changepar (int npar, int value)
       Pwetdry = value;
       dry = (float) (Pwetdry+64) /128.0f;
       wet = 1.0f - dry;
+
+      if(Psubtract) {
+      ldelayline0->set_mix(-dry);
+      rdelayline0->set_mix(-dry);  
+      ldelayline1->set_mix(-dry);
+      rdelayline1->set_mix(-dry); 
+      }
+      else {
+      ldelayline0->set_mix(dry);
+      rdelayline0->set_mix(dry);  
+      ldelayline1->set_mix(dry);
+      rdelayline1->set_mix(dry);   
+      }   
+       
       break;
     case 1:
       Ppanning = value;
@@ -304,14 +425,14 @@ Dflange::changepar (int npar, int value)
     case 3:
       Pdepth = value;
       fdepth =  (float) Pdepth;
-        zcenter = (int) floor(0.5f * (fdepth + fwidth));
-
+      zcenter = (int) fSAMPLE_RATE/floor(0.5f * (fdepth + fwidth));
+      logmax = logf( (fdepth + fwidth)/fdepth )/LOG_2;
       break;
     case 4:
       Pwidth = value;
       fwidth = (float) Pwidth;
-        zcenter = (int) floor(0.5f * (fdepth + fwidth));
-
+      zcenter = (int) fSAMPLE_RATE/floor(0.5f * (fdepth + fwidth));
+      logmax = logf( (fdepth + fwidth)/fdepth )/LOG_2;
       break;
     case 5:
       Poffset = value;
@@ -328,7 +449,13 @@ Dflange::changepar (int npar, int value)
     case 8:
       Psubtract = value;
       fsubtract = 0.5f;
-      if(Psubtract) fsubtract = -0.5f;  //In loop a mult by 0.5f is necessary, so this kills 2 birds with 1...
+      if(Psubtract) {
+      fsubtract = -0.5f;  //In loop a mult by 0.5f is necessary, so this kills 2 birds with 1...
+      ldelayline0->set_mix(-dry);
+      rdelayline0->set_mix(-dry);  
+      ldelayline1->set_mix(-dry);
+      rdelayline1->set_mix(-dry); 
+      }
       break;      
      case 9:
       Pzero = value;
@@ -349,7 +476,10 @@ Dflange::changepar (int npar, int value)
      case 13:
       lfo.Prandomness = value;
       lfo.updateparams ();  
-      break;              
+      break;   
+     case 14:
+      Pintense = value; 
+      break;                   
     };
 };
 
@@ -400,6 +530,9 @@ Dflange::getpar (int npar)
      case 13:
       return (lfo.Prandomness);
       break;
+     case 14:
+      return Pintense;
+      break;
     };
   return (0);			//in case of bogus parameter number
 };
@@ -408,27 +541,27 @@ Dflange::getpar (int npar)
 void
 Dflange::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 14;
+  const int PRESET_SIZE = 15;
   const int NUM_PRESETS = 9;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Preset 1
-    {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10},
+    {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 1},
     //Flange-Wha
-    {0, 0, 64, 500, 3000, 50, -40, 8000, 1, 0, 196, 96, 0, 0},
+    {0, 0, 64, 500, 3000, 50, -40, 8000, 1, 0, 196, 96, 0, 0, 0},
     //FbFlange
-    {0, 0, 64, 68, 75, 50, -50, 8000, 0, 1, 23, 96, 5, 0},
+    {0, 0, 64, 68, 75, 50, -50, 8000, 0, 1, 23, 96, 5, 0, 0},
     //SoftFlange
-    {-32, 0, 64, 60, 10, 100, 20, 16000, 0, 0, 16, 90, 4, 0},
+    {-32, 0, 64, 60, 10, 100, 20, 16000, 0, 0, 16, 90, 4, 0, 0},
     //Flanger
-    {-32, 0, 64, 170, 1200, 50, 0, 16000, 1, 0, 68, 127, 0, 0},
+    {-32, 0, 64, 170, 1200, 50, 0, 16000, 1, 0, 68, 127, 0, 0, 0},
     //Chorus 1
-    {-15, 0, 0, 42, 12, 50, -10, 1500, 0, 0, 120, 0, 0, 20},
+    {-15, 0, 0, 42, 12, 50, -10, 1500, 0, 0, 120, 0, 0, 20, 0},
     //Chorus 2
-    {-40, 0, 0, 35, 9, 67, 12, 4700, 1, 1, 160, 75, 0, 60},
+    {-40, 0, 0, 35, 9, 67, 12, 4700, 1, 1, 160, 75, 0, 60, 0},
     //Preset 8
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Preset 9
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
 
   if(npreset>NUM_PRESETS-1)  

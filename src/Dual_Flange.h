@@ -32,19 +32,8 @@
 
 #include "global.h"
 #include "EffectLFO.h"
-
-    class ringbuffer {
-    public:
-    float getsmp(float delay_time);    
-    private:
-    float *buf;
-    long inptr;
-    long outptr;
-    long target;
-    float fracdly;
-    float statevar;        
-    };
-    
+#include "delayline.h"
+  
 class Dflange
 {
 public:
@@ -78,6 +67,7 @@ private:
 			// 11 //LFO stereo diff
 			// 12 //LFO type
 			// 13 //LFO Randomness
+  int Pintense;		// 14 //Intense Mode
 
   float wet, dry;		//Wet/Dry mix.  
   float lpan, rpan;		//Panning.  
@@ -89,6 +79,7 @@ private:
   float fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
   float fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
   float fzero;		//Enable through-zero flanging
+  float logmax;
   EffectLFO lfo;		//lfo Flanger
   
   //Internally used variables
@@ -103,7 +94,7 @@ private:
   float oldl, oldr;		//pt. lpf
     float rsA, rsB, lsA, lsB;	//Audio sample at given delay
     
-
+  delayline *ldelayline0, *rdelayline0, *ldelayline1, *rdelayline1;
   class FPreset *Fpre;
 
 

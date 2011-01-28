@@ -389,8 +389,9 @@ void delayline::set_averaging(float tc)
 
 void delayline::set_mix(float mix_)	//mix amount of dry w/ wet
 {
-	mix = mix_;
+	mix = fabs(mix_);
 	imix = 1.0f - mix;
+	if(mix_<0.0f) imix*=-1.0f;
 }
 
 float delayline::envelope()
