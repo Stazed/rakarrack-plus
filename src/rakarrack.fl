@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -848,19 +848,17 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {185 238 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;}
+      xywh {178 231 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -4945,7 +4943,7 @@ rkr->efx_Valve->changepar(7,(int)o->value());}
         }
       }
       Fl_Group DFLANGE {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button dflange_activar {
@@ -4981,7 +4979,8 @@ dflange_LR->value(rkr->efx_DFlange->getpar(2));
 dflange_subs->value(rkr->efx_DFlange->getpar(8));
 dflange_tz->value(rkr->efx_DFlange->getpar(9));
 dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));}
+dflange_lpf->value(rkr->efx_DFlange->getpar(7));
+dflange_intense->value(rkr->efx_DFlange->getpar(14));} selected
           xywh {397 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5113,6 +5112,12 @@ rkr->efx_DFlange->changepar(7,(int)o->value());}
           callback {rkr->efx_DFlange->changepar(9,(int)o->value());}
           xywh {368 324 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
+        Fl_Check_Button dflange_intense {
+          label Intense
+          user_data 2
+          callback {rkr->efx_DFlange->changepar(14,(int)o->value());}
+          xywh {422 324 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+        }
         Fl_Value_Slider dflange_freq {
           label Tempo
           callback {if(Fl::event_button()==3)
@@ -5151,12 +5156,6 @@ rkr->efx_DFlange->changepar(11,(int)o->value());}
 rkr->efx_DFlange->changepar(13,(int)o->value());}
           xywh {372 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
-        }
-        Fl_Check_Button dflange_intense {
-          label Intense
-          user_data 2
-          callback {rkr->efx_DFlange->changepar(14,(int)o->value());} selected
-          xywh {422 324 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group RING {
