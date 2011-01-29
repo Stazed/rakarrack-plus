@@ -187,10 +187,11 @@ void RKR::putbuf(char *buf, int j)
 
 	case 20:
 	  //Dual Flnage
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[21][0], &lv[21][1], &lv[21][2], &lv[21][3], &lv[21][4],
 		  &lv[21][5], &lv[21][6], &lv[21][7], &lv[21][8], &lv[21][9],
-		  &lv[21][10], &lv[21][11], &lv[21][12], &lv[21][13],&DFlange_B);
+		  &lv[21][10], &lv[21][11], &lv[21][12], &lv[21][13], &lv[21][14],
+		  &DFlange_B);
 	  break;
 
 	case 21:
@@ -648,7 +649,7 @@ void RKR::getbuf(char *buf, int j)
 
 	case 20:
 	  //Dual_Flange
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_DFlange->getpar (0), efx_DFlange->getpar (1),
 		   efx_DFlange->getpar (2), efx_DFlange->getpar (3),
 		   efx_DFlange->getpar (4), efx_DFlange->getpar (5),
@@ -656,7 +657,7 @@ void RKR::getbuf(char *buf, int j)
 		   efx_DFlange->getpar (8), efx_DFlange->getpar (9),
 		   efx_DFlange->getpar (10), efx_DFlange->getpar (11),
 		   efx_DFlange->getpar (12), efx_DFlange->getpar (13),
-		   DFlange_Bypass);
+		   efx_DFlange->getpar (14),DFlange_Bypass);
 	  break;
 
 	case 21:
@@ -1389,7 +1390,7 @@ RKR::Actualizar_Audio ()
 
         DFlange_Bypass = 0;
         efx_DFlange->cleanup();
-        for (i = 0; i <= 13; i++)
+        for (i = 0; i <= 14; i++)
         efx_DFlange->changepar (i, lv[21][i]);
         DFlange_Bypass = DFlange_B;
         break;
@@ -2290,7 +2291,7 @@ RKR::Preset_to_Bank (int i)
     lv[19][j] = efx_APhaser->getpar(j);
   for (j = 0; j <= 12; j++)
     lv[20][j] = efx_Valve->getpar(j);
-  for (j = 0; j <= 13; j++)
+  for (j = 0; j <= 14; j++)
     lv[21][j] = efx_DFlange->getpar(j);
   for (j = 0; j <= 12; j++)
     lv[22][j] = efx_Ring->getpar(j);
