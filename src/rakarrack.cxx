@@ -7717,6 +7717,7 @@ Fl_Menu_Item RKRGUI::menu_seq_mode[] = {
  {"Arpegiator", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {"TrigStepper", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
+ {"Seq Delay", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

@@ -31,7 +31,7 @@ class delayline {
 	delayline(float maxdelay, int maxtaps_);	//construct the object with intended maximum delay time
 	~delayline();
 	void cleanup();
-	void set_averaging(float tc);	//use this if you want the time change averaging longer or shorter
+	void set_averaging(float tc_);	//use this if you want the time change averaging longer or shorter
 	void set_mix(float mix_);
 	float envelope();
 

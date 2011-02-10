@@ -27,7 +27,7 @@
 #include "RBFilter.h"
 #include "smbPitchShift.h"
 #include "beattracker.h"
-
+#include "delayline.h"
 
 class Sequence
 {
@@ -89,6 +89,10 @@ private:
   int trigtimeout, trigtime, onset, atk;
   float targatk, lmod, rmod;
   
+  float maxdly, tempodiv, fb, rdlyfb, ldlyfb;
+  float avtime;
+  int avflag;
+  
   class RBFilter *filterl, *filterr, *modfilterl, *modfilterr, *rmsfilter, *peaklpfilter, *peakhpfilter, *peaklpfilter2;
 
   Resample *U_Resample;
@@ -98,6 +102,7 @@ private:
 
   class FPreset *Fpre;  
   class beattracker *beats;
+  class delayline *ldelay, *rdelay;
   
 };
 

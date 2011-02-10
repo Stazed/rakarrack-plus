@@ -379,8 +379,9 @@ inline float
 	return (((c3 * x + c2) * x + c1) * x + c0);
 }
 
-void delayline::set_averaging(float tc)
+void delayline::set_averaging(float tc_)
 {
+        float tc = tc_;
 	float dt = 1.0f / fSAMPLE_RATE;
 	fadetime = dt * tc;
 	alpha = dt / (tc + dt);

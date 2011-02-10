@@ -25,6 +25,7 @@
 #include <math.h>
 #include "Sequence.h"
 #include <time.h>
+#include "f_sin.h"
 
 Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS, int uq, int dq)
 {
@@ -43,8 +44,6 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
   D_Resample = new Resample(uq);
   
   beats = new beattracker();
-
-
 
   filterl = NULL;
   filterr = NULL;
@@ -81,11 +80,20 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
   
   filterl->setmix(1, 0.33f, -1.0f, 0.25f);
   filterr->setmix(1, 0.33f, -1.0f, 0.25f);  
+  
+  maxdly = 4.0f;  //sets max time to 4 seconds
+  tempodiv = maxdly;
+  ldelay = new delayline(maxdly, 1);
+  rdelay = new delayline(maxdly, 1);
+  fb = 0.0f;
+  rdlyfb = 0.0f;
+  ldlyfb = 0.0f;
+  avtime = 0.25f;
+  avflag = 1;
 
   PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
   PS->ratio = 1.0f;
-
-
+  
   cleanup ();
 };
 
@@ -102,6 +110,11 @@ Sequence::cleanup ()
 
   memset(outi, 0, sizeof(float)*nPERIOD);
   memset(outo, 0, sizeof(float)*nPERIOD);
+
+  ldelay->cleanup();
+  rdelay->cleanup();
+  ldelay->set_averaging(0.25f);
+  rdelay->set_averaging(0.25f);  
 
 };
 
@@ -121,6 +134,15 @@ Sequence::out (float * smpsl, float * smpsr)
   float ldiff, rdiff, lfol, lfor, ftcount;
   float ldbl, ldbr;
   float tmp;
+
+   float ltarget,rtarget;
+   float triggernow = 0.0f;
+   
+   if (avflag) {
+   ldelay->set_averaging(avtime);
+   rdelay->set_averaging(avtime);   
+   avflag = 0;
+   }
   
   if((Pmode==3)||(Pmode ==5) || (Pmode==6)) hPERIOD=nPERIOD; else hPERIOD=PERIOD;
 
@@ -565,8 +587,6 @@ Sequence::out (float * smpsl, float * smpsr)
    break;
 
 case 7:  //TrigStepper
-   float ltarget,rtarget;
-   float triggernow = 0.0f;
    
    //testing beattracker object -- doesn't do anything useful yet other than a convenient place
    //to see how well it performs.
@@ -649,7 +669,50 @@ case 7:  //TrigStepper
  } 
  
   break;   
-  // here case 8:
+  
+ case 8:  //delay
+      
+  for ( i = 0; i < PERIOD; i++)  //Maintain sequenced modulator
+  {
+
+  if (++tcount >= intperiod)
+  {
+  tcount = 0;
+  scount++;
+  if(scount > 7) scount = 0;  //reset to beginning of sequence buffer
+  dscount = (scount + Pstdiff) % 8;
+  }
+
+  if (Pamplitude)
+  {
+  ftcount = M_PI * ifperiod * (float)(tcount);
+
+  lmod = f_sin(ftcount)*fsequence[scount];
+  rmod = f_sin(ftcount)*fsequence[dscount];
+   
+  ldbl = lmod * (1.0f - f_cos(2.0f*ftcount)); 
+  ldbr = rmod * (1.0f - f_cos(2.0f*ftcount)); 
+  
+  lmod = tempodiv*fsequence[scount];
+  rmod = tempodiv*fsequence[dscount];
+      
+   efxoutl[i] = ldbl*ldelay->delay((ldlyfb + smpsl[i]), lmod, 0, 1, 0);
+   efxoutr[i] = ldbr*rdelay->delay((rdlyfb + smpsr[i]), rmod, 0, 1, 0);
+
+  }
+ 
+  lmod = tempodiv*fsequence[scount];
+  rmod = tempodiv*fsequence[dscount];
+      
+   efxoutl[i] = ldelay->delay_simple((ldlyfb + smpsl[i]), lmod, 0, 1, 0);
+   efxoutr[i] = rdelay->delay_simple((rdlyfb + smpsr[i]), rmod, 0, 1, 0); 
+  
+  ldlyfb = fb*efxoutl[i];
+  rdlyfb = fb*efxoutr[i];
+  
+  }
+  break;
+  // here case 9:
   //
   // break;
 
@@ -810,6 +873,13 @@ Sequence::settempo(int value)
 
  ifperiod = 1.0f/fperiod;
  intperiod = (int) fperiod;
+
+
+      tempodiv = 240.0f/((float) value);
+      if (tempodiv>maxdly) tempodiv = maxdly;
+      avtime = 60.0f/((float) value);
+      avflag = 1;
+
 }
 
 
@@ -863,6 +933,7 @@ void
 Sequence::changepar (int npar, int value)
 {
   int testegg, i;
+
   switch (npar)
     {
     case 0:
@@ -902,8 +973,9 @@ Sequence::changepar (int npar, int value)
       break;
     case 10:
       Pq = value;
-      panning = ((float)value+64.0f) /128.0;
+      panning = (((float)value) + 64.0f) /128.0f;
       fq = powf (60.0f, ((float)value - 64.0f) / 64.0f);
+      fb = ( (float) value)/128.0f;
       break;
     case 11:
       Pamplitude = value;
