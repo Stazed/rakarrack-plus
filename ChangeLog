@@ -1,7 +1,11 @@
 ==v0.6.2 ( / /201 ) ==
 
+- Add Seq Delay mode to Sequence effect using delayline
+- Echotron and Echoverse use new delayline utility.
+- Dual Flange Intense mode with delayline
 - Chorus and Flanger Mode Awesome with the a delayline
 - Echo now use new delayline
+- Add delayline, interpolated delay line object
 - Added beattracker to TapTempo
 - Added effect Infinity
 - Added fast sin functions
