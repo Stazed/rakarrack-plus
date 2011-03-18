@@ -15,6 +15,17 @@ OPTS="no"
 fi
 
 
+AC_ARG_ENABLE(vectorize,
+AC_HELP_STRING([--enable-vectorize[=yes/no]],[enable vectorize (default=yes)]),
+[ac_vectorize="$enableval"], [ac_vectorize="yes"])
+
+if test "x$ac_vectorize" = "xyes"; then
+VECTOR="-ftree-vectorize"
+else
+ac_vectorize="no"
+fi
+
+
 AC_ARG_ENABLE(sse,
 AC_HELP_STRING([--enable-see],[enable sse (default=automatic check)]),
 [ac_sse="$enableval"])
@@ -292,7 +303,7 @@ fi
 fi
 
 LIBS="`$FLTKCONFIG --use-images --ldflags` $LIBS"
-CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math -pipe $ADDS -fsigned-char `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags sndfile` `pkg-config --cflags jack` $CXXFLAGS"
+CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math $VECTOR -pipe $ADDS -fsigned-char `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags sndfile` `pkg-config --cflags jack` $CXXFLAGS"
 AC_CONFIG_FILES([Makefile src/Makefile man/Makefile data/Makefile icons/Makefile doc/Makefile doc/help/Makefile doc/help/imagenes/Makefile doc/help/css/Makefile extra/Makefile])
 AC_OUTPUT
 
@@ -301,6 +312,7 @@ echo  " $PACKAGE_NAME $PACKAGE_VERSION"
 echo
 echo
 echo  " Optimizations__________________________________________________"
+echo  " Vectorization. . . . . . . . . . . . . . . . . . . . . .: $ac_vectorize"
 echo  " Use altivec. . . . . . . . . . . . . . . . . . . . . . .: $ac_altivec"
 echo  " Use sse  . . . . . . . . . . . . . . . . . . . . . . . .: $ac_sse"
 echo  " Use sse2 . . . . . . . . . . . . . . . . . . . . . . . .: $ac_sse2"
