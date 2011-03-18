@@ -183,7 +183,7 @@ Shifter::out (float *smpsl, float *smpsr)
 
     for (i=0; i < nPERIOD; i++)
     {
-     if(Pmode == 0)
+     if((Pmode == 0) || (Pmode ==2))
      {
      sum = fabsf(smpsl[i])+fabsf(smpsr[i]);
      if (sum>env) env = sum;  else env=sum*ENV_TR+env*(1.0f-ENV_TR);
@@ -204,6 +204,7 @@ Shifter::out (float *smpsl, float *smpsr)
      
      if (state==WAIT)
         {
+	tune = 1.0f;
          if (env<td_level)
          state=DOWN;
          }
@@ -226,9 +227,10 @@ Shifter::out (float *smpsl, float *smpsr)
     
     }
 
+ 
    if (Pmode == 1) use = whammy; else use = tune;
    if ((Pmode == 0) && (Pinterval == 0)) use = tune * whammy;
-
+   if (Pmode == 2) use = 1.0f - tune; 
 
   if(Pupdown)
     PS->ratio = 1.0f-(1.0f-range)*use;
