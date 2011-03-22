@@ -20,7 +20,7 @@ AC_HELP_STRING([--enable-vectorize[=yes/no]],[enable vectorize (default=yes)]),
 [ac_vectorize="$enableval"], [ac_vectorize="yes"])
 
 if test "x$ac_vectorize" = "xyes"; then
-VECTOR="-ftree-vectorize"
+VECTOR="-ftree-vectorize -fvect-cost-model"
 else
 ac_vectorize="no"
 fi
