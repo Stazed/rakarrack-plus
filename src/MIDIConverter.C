@@ -41,9 +41,6 @@ MIDIConverter::MIDIConverter ()
 
   // Open Alsa Seq
 
-  int alsaport_out;
-
-
 
   int err = snd_seq_open (&port, "default", SND_SEQ_OPEN_OUTPUT, 0);
   if (err < 0)
@@ -58,7 +55,7 @@ MIDIConverter::MIDIConverter ()
   // Create Alsa Seq Client
 
   sprintf (portname, "rakarrack MC OUT");
-  alsaport_out = snd_seq_create_simple_port (port, portname,
+  snd_seq_create_simple_port (port, portname,
 					     SND_SEQ_PORT_CAP_READ |
 					     SND_SEQ_PORT_CAP_SUBS_READ,
 					     SND_SEQ_PORT_TYPE_APPLICATION);

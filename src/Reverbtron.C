@@ -337,7 +337,6 @@ int i;
 int index = 0;
 int count;
 float tmp;
-int chunk;
 float skip = 0.0f;
 float incr = 0.0f;
 float findex;
@@ -364,7 +363,7 @@ tmpstretch = 1.0f + 0.95f*fstretch;
 
 skip = 0.0f;
 index = 0;
-chunk = 10;
+
 
 if(data_length>Plength)
 {

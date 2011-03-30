@@ -189,14 +189,12 @@ int
 loadbank (char *filename)
 {
 
-  int i,k;
-  k=0;
   FILE *fn;
   if ((fn = fopen (filename, "rb")) != NULL)
     {
       while (!feof (fn))
 	{
-	  i = fread (&Bank, sizeof (Bank), 1, fn);
+	  fread (&Bank, sizeof (Bank), 1, fn);
 	}
       fclose (fn);
       return (1);

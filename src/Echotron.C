@@ -111,11 +111,13 @@ lpfr->cleanup ();
 void
 Echotron::out (float * smpsl, float * smpsr)
 {
+ 
   int i, j, k; 
-  float rxindex, lxindex;
-  float l,r,lyn, ryn;
   int length = Plength;
+  float l,r,lyn, ryn;
+  float rxindex,lxindex;
 
+ 
 if((Pmoddly)||(Pmodfilts)) modulate_delay(); 
 else interpl = interpr = 0; 
 
@@ -136,6 +138,7 @@ else interpl = interpr = 0;
 
       if(Pfilters)
       {
+
       j=0;
       for (k=0; k<length; k++)
       {   
@@ -151,7 +154,7 @@ else interpl = interpr = 0;
       else
       {
       lyn += lxn->delay(l, lxindex, k, 0, 0) * ldata[k]; 		
-      ryn += rxn->delay(r, lxindex, k, 0, 0) * rdata[k];  
+      ryn += rxn->delay(r, rxindex, k, 0, 0) * rdata[k];  
       }
 
       }
@@ -165,7 +168,7 @@ else interpl = interpr = 0;
       rxindex = rtime[k] + tmpmodr;   
 
       lyn += lxn->delay(l, lxindex, k, 0, 0) * ldata[k];		
-      ryn += rxn->delay(r, lxindex, k, 0, 0) * rdata[k];
+      ryn += rxn->delay(r, rxindex, k, 0, 0) * rdata[k];
       }      
 
       }

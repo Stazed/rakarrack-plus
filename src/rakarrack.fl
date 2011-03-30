@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0109 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public
@@ -82,11 +82,10 @@ spr = smpsr;
 ns = PERIOD;
 sr = SAMPLERATE;} {}
   }
-  Function {draw()} {open
-  } {
+  Function {draw()} {} {
     code {int ox=x(),oy=y(),lx=w(),ly=h();
 int i,j;
-int px,py,hy;
+int px,py;
 double y=0.0;
 double t=0.0;
 double nsp = 1.0 / (double) ns;
@@ -100,10 +99,8 @@ char buf[4];
 double xscale[] = {22.0,31.0,39.0,62.0,79.0,125.0,158.0,200.0,251.0,317.0,400.0,503.0,634.0,800.0,1000.0,1200.0,1500.0,2000.0,2500.0,3200.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,16000.0,20000.0};
 
 memset(buf,0, sizeof(buf));
-
-
 px = (lx-22) / 29;
-hy = ly;
+
 
 double scale = (double) ly ;
 
@@ -853,13 +850,12 @@ class RKRGUI {open
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
-  Function {make_window()} {open
-  } {
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {178 231 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -8479,7 +8475,7 @@ rkr->efx_Shifter->changepar(9,(int)o->value());}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label Portamento selected
+            label Portamento
             xywh {10 10 36 21} labelsize 9
           }
         }
@@ -12483,10 +12479,8 @@ fl_open_display();
 XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display),(char **)icono_rakarrack_128x128,&p ,&mask, NULL);
 
 Fl::visual(FL_DOUBLE|FL_RGB);
-//Fl::get_system_colors();
 fl_register_images();
-int num_fonts=0;
-num_fonts = Fl::set_fonts(0);
+Fl::set_fonts(0);
 rkr=rkr_;
 
 back = NULL;
@@ -12542,7 +12536,8 @@ HideUE->redraw();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
-Fl::add_handler(prevnext);} {}
+Fl::add_handler(prevnext);} {selected
+    }
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);

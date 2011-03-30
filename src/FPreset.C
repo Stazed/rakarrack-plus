@@ -37,7 +37,6 @@ FPreset::ReadPreset(int eff, int num)
 FILE *fn;
 char tempfile[256];
 char buf[256];
-char *name;
 char *sbuf;
 int k=0;
 int reff=0;
@@ -54,8 +53,8 @@ if (( fn = fopen (tempfile, "r")) != NULL)
              if(reff==eff) k++;
              if(k==num)
                 {
-                 name = strsep(&sbuf,",");
-                 name = strsep(&sbuf,",");
+                 strsep(&sbuf,",");
+                 strsep(&sbuf,",");
                  sscanf(sbuf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d.%d.%d\n",
                  &pdata[0],&pdata[1],&pdata[2],&pdata[3],&pdata[4],&pdata[5],&pdata[6],&pdata[7],&pdata[8],&pdata[9],
                  &pdata[10],&pdata[11],&pdata[12],&pdata[13],&pdata[14],&pdata[15],&pdata[16],&pdata[17],&pdata[18],&pdata[19],

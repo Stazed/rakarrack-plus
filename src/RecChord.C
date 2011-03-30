@@ -479,7 +479,6 @@ RecChord::MiraChord ()
   int nnotes = 0;
   int temp;
   int di1, di2, di3, di4;
-  int tienebass = 0;
   int labaja;
   char AName[20];
 
@@ -647,7 +646,6 @@ sigue:
 
   if (nnotes == 5)
     {
-      tienebass = 1;
       bass = anote[0] % 12;
 
       for (i = 1; i <= 4; i++)

@@ -31,7 +31,6 @@ RKR::InitMIDI ()
 
   // Open Alsa Seq
 
-  int alsaport_in;
 
   int err = snd_seq_open (&midi_in, "default", SND_SEQ_OPEN_INPUT, 0);
   if (err < 0)
@@ -46,7 +45,7 @@ RKR::InitMIDI ()
   // Create Alsa Seq Client
 
   sprintf (portname, "rakarrack IN");
-  alsaport_in = snd_seq_create_simple_port (midi_in, portname,
+  snd_seq_create_simple_port (midi_in, portname,
 					    SND_SEQ_PORT_CAP_WRITE |
 					    SND_SEQ_PORT_CAP_SUBS_WRITE,
 					    SND_SEQ_PORT_TYPE_SYNTH);

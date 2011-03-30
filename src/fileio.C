@@ -1645,7 +1645,7 @@ RKR::Actualizar_Audio ()
 void
 RKR::loadnames()
 {
- int i,j,k;
+ int j,k;
  FILE *fn;
   char temp[128];
 
@@ -1687,7 +1687,7 @@ RKR::loadnames()
       New_Bank();
       while (!feof (fn))
 	{
-	  i = fread (&Bank, sizeof (Bank), 1, fn);
+	  fread (&Bank, sizeof (Bank), 1, fn);
           for(j=1;j<=60;j++) strcpy(B_Names[k][j].Preset_Name,Bank[j].Preset_Name);                    
 	}
       fclose (fn);
@@ -1701,7 +1701,6 @@ int
 RKR::loadbank (char *filename)
 {
 
-  int i;
   int err_message=1;
   char meslabel[64];
   FILE *fn;
@@ -1738,7 +1737,7 @@ RKR::loadbank (char *filename)
       New_Bank();
       while (!feof (fn))
 	{
-	  i = fread (&Bank, sizeof (Bank), 1, fn);
+	  fread (&Bank, sizeof (Bank), 1, fn);
 	}
       fclose (fn);
       if(BigEndian()) fix_endianess();
@@ -2639,12 +2638,12 @@ int
 RKR::CheckOldBank(char *filename)
 {
 
-long Pos,Length;
+long Length;
 FILE *fs;
 
 if ((fs = fopen (filename, "r")) != NULL) 
 {
-Pos = ftell(fs);
+ftell(fs);
 fseek(fs, 0L, SEEK_END);
 Length = ftell(fs);
 fclose(fs);

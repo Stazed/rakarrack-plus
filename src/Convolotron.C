@@ -247,7 +247,6 @@ int
 Convolotron::setfile(int value)
 {
 
-int readcount;
 double sr_ratio;
 
 offset = 0;
@@ -272,8 +271,8 @@ return(0);
 }
 
 if (sfinfo.frames > maxx_read) real_len = maxx_read; else real_len=sfinfo.frames;
-readcount = sf_seek (infile,0, SEEK_SET);
-readcount = sf_readf_float(infile,buf,real_len);
+sf_seek (infile,0, SEEK_SET);
+sf_readf_float(infile,buf,real_len);
 sf_close(infile);
 
 

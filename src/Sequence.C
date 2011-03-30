@@ -136,7 +136,6 @@ Sequence::out (float * smpsl, float * smpsr)
   float tmp;
 
    float ltarget,rtarget;
-   float triggernow = 0.0f;
    
    if (avflag) {
    ldelay->set_averaging(avtime);
@@ -607,12 +606,10 @@ case 7:  //TrigStepper
   if( peakpulse > trigthresh ) {
      if (trigtimeout==0) { 
      onset = 1;
-     triggernow = 0.5f;
      trigtimeout = trigtime;
      }
      else {
      onset = 0;
-     triggernow = 0.0f;
      }
   }
   else {
