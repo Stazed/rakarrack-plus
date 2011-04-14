@@ -22,7 +22,7 @@ Things to do before 0.7.0
 -New Effects
 -Echotron window to edit files.
 -Repository
- 
+-Waveshaper  2.0 * sin(PERIOD/(i+1)) * sin(PERIOD/(i+1)) * sample * sample 
 
 DSP TODO:
 

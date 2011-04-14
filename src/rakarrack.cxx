@@ -10172,7 +10172,7 @@ chname=p->label();
 is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s%s%s", rkr->UDirFilename,chname,".rkrb");
+  sprintf (temp, "%s/%s%s", rkr->UDirFilename,chname,".rkrb");
 
 int ok=rkr->loadbank(temp);
 if(ok) 

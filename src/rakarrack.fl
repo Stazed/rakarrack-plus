@@ -845,8 +845,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -10901,8 +10900,8 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {o->hide();
-save_stat(1);}
-      xywh {1529 293 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+save_stat(1);} open
+      xywh {1528 288 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -11028,7 +11027,7 @@ chname=p->label();
 is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s%s%s", rkr->UDirFilename,chname,".rkrb");
+  sprintf (temp, "%s/%s%s", rkr->UDirFilename,chname,".rkrb");
 
 int ok=rkr->loadbank(temp);
 if(ok) 
@@ -11036,7 +11035,7 @@ if(ok)
 BankWin_Label(temp);
 Put_Loaded_Bank();
 unlight_preset(rkr->Selected_Preset);
-}} open
+}} open selected
         xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
       } {}
       Fl_Group ob {
@@ -12536,8 +12535,7 @@ HideUE->redraw();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
-Fl::add_handler(prevnext);} {selected
-    }
+Fl::add_handler(prevnext);} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
