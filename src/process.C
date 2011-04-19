@@ -28,7 +28,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <Fl/Fl_Preferences.H>
+#include <FL/Fl_Preferences.H>
 #include "global.h"
 
 int Pexitprogram, preset;
