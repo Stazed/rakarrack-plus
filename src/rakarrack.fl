@@ -1,32 +1,32 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
-decl {\#include "global.h"} {public
+decl {\#include "global.h"} {public local
 } 
 
-decl {\#include <FL/Fl_Value_Slider.H>} {public
+decl {\#include <FL/Fl_Value_Slider.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Scroll.H>} {public
+decl {\#include <FL/Fl_Scroll.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Progress.H>} {public
+decl {\#include <FL/Fl_Progress.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Tooltip.H>} {public
+decl {\#include <FL/Fl_Tooltip.H>} {public local
 } 
 
-decl {\#include <FL/x.H>} {public
+decl {\#include <FL/x.H>} {public local
 } 
 
-decl {\#include <FL/Fl_PNG_Image.H>} {public
+decl {\#include <FL/Fl_PNG_Image.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Tiled_Image.H>} {public
+decl {\#include <FL/Fl_Tiled_Image.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Help_Dialog.H>} {public
+decl {\#include <FL/Fl_Help_Dialog.H>} {public local
 } 
 
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
@@ -35,41 +35,59 @@ decl {\#include <FL/Fl_File_Chooser.H>} {public global
 decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 } 
 
-decl {\#include "icono_rakarrack_128x128.xpm"} {} 
+decl {\#include "icono_rakarrack_128x128.xpm"} {private local
+} 
 
-decl {Fl_Tiled_Image *back;} {} 
+decl {Fl_Tiled_Image *back;} {private local
+} 
 
-decl {Fl_Color leds_color;} {} 
+decl {Fl_Color leds_color;} {private local
+} 
 
-decl {Fl_Color back_color;} {} 
+decl {Fl_Color back_color;} {private local
+} 
 
-decl {Fl_Color fore_color;} {} 
+decl {Fl_Color fore_color;} {private local
+} 
 
-decl {Fl_Color label_color;} {} 
+decl {Fl_Color label_color;} {private local
+} 
 
-decl {Fl_Widget *old;} {} 
+decl {Fl_Widget *old;} {private local
+} 
 
-decl {float *spl;} {} 
+decl {float *spl;} {private local
+} 
 
-decl {float *spr;} {} 
+decl {float *spr;} {private local
+} 
 
-decl {int last_tecla;} {} 
+decl {int last_tecla;} {private local
+} 
 
-decl {int drag;} {} 
+decl {int drag;} {private local
+} 
 
-decl {int sr;} {} 
+decl {int sr;} {private local
+} 
 
-decl {int ns;} {} 
+decl {int ns;} {private local
+} 
 
-decl {int at;} {} 
+decl {int at;} {private local
+} 
 
-decl {int nt;} {} 
+decl {int nt;} {private local
+} 
 
-decl {int tta;} {} 
+decl {int tta;} {private local
+} 
 
-decl {int Scope_ON;} {} 
+decl {int Scope_ON;} {private local
+} 
 
-decl {int Analyzer_ON;} {} 
+decl {int Analyzer_ON;} {private local
+} 
 
 class Analyzer {: {public Fl_Box}
 } {
@@ -174,7 +192,8 @@ break;
 }
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {}
+  decl {EQ *efx_EQ1;} {private local
+  }
 } 
 
 class Scope {: {public Fl_Box}
@@ -294,12 +313,15 @@ break;
 
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {}
+  decl {EQ *efx_EQ1;} {private local
+  }
 } 
 
 class NewVum {: {public Fl_Slider}
 } {
-  Function {NewVum(int x,int y, int w, int h, const char *label=0):Fl_Slider(x,y,w,h,label)} {} {}
+  Function {NewVum(int x,int y, int w, int h, const char *label=0):Fl_Slider(x,y,w,h,label)} {} {
+    code {} {}
+  }
   Function {draw_bg(int X, int Y, int W, int H)} {} {
     code {fl_push_clip(X, Y, W, H);
 //  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
@@ -449,7 +471,9 @@ return 1;} {}
 
 class TunerLed {: {public Fl_Slider}
 } {
-  Function {TunerLed(int x,int y, int w, int h, const char *label=0):Fl_Slider(x,y,w,h,label)} {} {}
+  Function {TunerLed(int x,int y, int w, int h, const char *label=0):Fl_Slider(x,y,w,h,label)} {} {
+    code {} {}
+  }
   Function {draw_bg(int X, int Y, int W, int H)} {} {
     code {fl_push_clip(X, Y, W, H);
  // draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
@@ -845,10 +869,14 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
-  decl {RKR *rkr;} {}
-  decl {int made;} {}
-  decl {Fl_Help_Dialog *visor;} {}
+class RKRGUI {selected
+} {
+  decl {RKR *rkr;} {private local
+  }
+  decl {int made;} {private local
+  }
+  decl {Fl_Help_Dialog *visor;} {private local
+  }
   Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
@@ -860,7 +888,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -979,7 +1007,7 @@ Show_Next_Time();}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings} open
+          label {&Settings}
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -10900,7 +10928,7 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {o->hide();
-save_stat(1);} open
+save_stat(1);}
       xywh {1528 288 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
@@ -11035,7 +11063,7 @@ if(ok)
 BankWin_Label(temp);
 Put_Loaded_Bank();
 unlight_preset(rkr->Selected_Preset);
-}} open selected
+}}
         xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
       } {}
       Fl_Group ob {
