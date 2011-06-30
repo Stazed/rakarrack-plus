@@ -21425,7 +21425,6 @@ R average.");
         Look->labelcolor(FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
         Look->align(Fl_Align(FL_ALIGN_LEFT));
-        Look->hide();
         { Fondo6 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -21506,6 +21505,7 @@ R average.");
         AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
+        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(5, 26, 630, 502);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
@@ -22565,6 +22565,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
        w->color(fore_color);
     }  
   
+  Font_Bro->textcolor(label_color);
   ACI_LABEL->labelcolor(fl_lighter(label_color));
   aux_source->labelcolor(label_color);
   aux_midi->labelcolor(label_color);

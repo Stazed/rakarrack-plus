@@ -11238,8 +11238,8 @@ Settings->hide();}
       } {
         Fl_Group Look {
           label Look
-          user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -11401,7 +11401,7 @@ PutBackground();}
         Fl_Group AUDIO_SET {
           label Audio
           user_data 1
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -12648,11 +12648,13 @@ for (int t=0; t<MIDILearn->children();t++)
      w->color(fore_color);
   }  
 
+Font_Bro->textcolor(label_color);
 ACI_LABEL->labelcolor(fl_lighter(label_color));
 aux_source->labelcolor(label_color);
 aux_midi->labelcolor(label_color);
 
-Fl::redraw();} {}
+Fl::redraw();} {selected
+    }
   }
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
     code {if (made)
@@ -16986,8 +16988,7 @@ for(i=0; i<10; i++)
      L10->redraw_label();
      break;  
        
- }} {selected
-    }
+ }} {}
   }
   Function {Put_Skin(int last)} {} {
     code {Principal->resize(Principal->x(),Principal->y(),rkr->resolution,rkr->sh);
