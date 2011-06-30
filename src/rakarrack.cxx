@@ -26821,7 +26821,7 @@ void RKRGUI::adjustfont() {
 }
 
 void RKRGUI::ChangeActives() {
-  Fl_Color on = fl_lighter(label_color);
+  Fl_Color on =  fl_lighter(fl_lighter(label_color));
   Fl_Color off = fl_darker(label_color);
   
   
@@ -26859,7 +26859,7 @@ void RKRGUI::ChangeActives() {
 
 void RKRGUI::findpos(int num, int value, Fl_Widget *w) {
   int i;
-  Fl_Color on = fl_lighter(label_color);
+  Fl_Color on = fl_lighter(fl_lighter(label_color));
   Fl_Color off= fl_darker(label_color);
   
   for(i=0; i<10; i++)

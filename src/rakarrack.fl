@@ -869,8 +869,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {selected
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {private local
   }
   decl {int made;} {private local
@@ -8334,7 +8333,7 @@ rkr->efx_Sequence->changepar(12,(int)o->value());}
         }
       }
       Fl_Group SHIFTER {
-        user_data 1 open
+        user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button shifter_activar {
@@ -16881,7 +16880,7 @@ rkr->relfontsize +=value;
 chfsize(value);} {}
   }
   Function {ChangeActives()} {} {
-    code {Fl_Color on = fl_lighter(label_color);
+    code {Fl_Color on =  fl_lighter(fl_lighter(label_color));
 Fl_Color off = fl_darker(label_color);
 
 
@@ -16918,7 +16917,7 @@ LMT_LED->color(fl_darker(leds_color));} {}
   }
   Function {findpos(int num, int value, Fl_Widget *w)} {} {
     code {int i;
-Fl_Color on = fl_lighter(label_color);
+Fl_Color on = fl_lighter(fl_lighter(label_color));
 Fl_Color off= fl_darker(label_color);
 
 for(i=0; i<10; i++)
@@ -16987,7 +16986,8 @@ for(i=0; i<10; i++)
      L10->redraw_label();
      break;  
        
- }} {}
+ }} {selected
+    }
   }
   Function {Put_Skin(int last)} {} {
     code {Principal->resize(Principal->x(),Principal->y(),rkr->resolution,rkr->sh);
