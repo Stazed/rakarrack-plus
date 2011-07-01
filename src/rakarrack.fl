@@ -882,12 +882,12 @@ class RKRGUI {} {
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {178 231 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {1532 223 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -1521,8 +1521,8 @@ Fl::focus(Open_Order);
       }
       Fl_Box P_MIN_ST {
         label {Midi In}
-        user_data 5
-        xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128
+        user_data 5 selected
+        xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
       }
       Fl_Box P_MOUT_ST {
         label {Midi Out}
@@ -12653,8 +12653,7 @@ ACI_LABEL->labelcolor(fl_lighter(label_color));
 aux_source->labelcolor(label_color);
 aux_midi->labelcolor(label_color);
 
-Fl::redraw();} {selected
-    }
+Fl::redraw();} {}
   }
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
     code {if (made)

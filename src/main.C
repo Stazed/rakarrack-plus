@@ -171,17 +171,6 @@ main (int argc, char *argv[])
 
   RKR rkr;
  
-  if(needtodump)
-   { 
-     rkr.dump_preset_names ();
-     exit(1);
-   }
-
-  if (needtoloadstate) rkr.loadfile(statefile);
-  if (needtoloadfile) rkr.loadfile(filetoload);
-  if (needtoloadbank) rkr.loadbank(banktoload);
-  
-
   if (nojack)
     {
       show_help ();
@@ -193,17 +182,25 @@ main (int argc, char *argv[])
 
 
 
+  if(needtodump)
+   { 
+     rkr.dump_preset_names ();
+     exit(1);
+   }
 
-  // Launch GUI
-
-
-   if (gui) new RKRGUI (argc, argv, &rkr);
-
+  if (needtoloadstate) rkr.loadfile(statefile);
+  if (needtoloadfile) rkr.loadfile(filetoload);
+  if (needtoloadbank) rkr.loadbank(banktoload);
+  
 
   JACKstart (&rkr, rkr.jackclient);
   rkr.InitMIDI ();
-
   rkr.ConnectMIDI ();
+
+  // Launch GUI
+
+ if (gui) new RKRGUI (argc, argv, &rkr);
+
 
   if (gui == 0)
     {

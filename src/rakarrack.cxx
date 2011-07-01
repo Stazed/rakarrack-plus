@@ -11475,6 +11475,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       P_MIN_ST->labelcolor(FL_BACKGROUND2_COLOR);
       P_MIN_ST->user_data((void*)(5));
       P_MIN_ST->align(Fl_Align(FL_ALIGN_WRAP));
+      P_MIN_ST->hide();
     } // Fl_Box* P_MIN_ST
     { P_MOUT_ST = new Fl_Box(648, 3, 29, 20, "Midi Out");
       P_MOUT_ST->labelfont(1);

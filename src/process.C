@@ -97,6 +97,7 @@ RKR::RKR ()
   sprintf (temp, "rakarrack");
   
 
+
   #ifdef JACK_SESSION
   jackclient = jack_client_open (temp, JackSessionID, NULL, s_uuid);
   #else

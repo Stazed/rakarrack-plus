@@ -359,11 +359,15 @@ void session_callback(jack_session_event_t *event, void *arg)
     snprintf( filename, sizeof(filename), "%srackstate.rkr", s_event->session_dir );
     snprintf( command, sizeof(command), "rakarrack -u %s ${SESSION_DIR}rackstate.rkr", s_event->client_uuid );
 
-    JackOUT->savefile(filename);
 
     s_event->command_line = strdup( command );
     jack_session_reply( jackclient, s_event );
-    if (s_event->type == JackSessionSaveAndQuit) Pexitprogram=1;
+    if (s_event->type == JackSessionSaveAndQuit) 
+    {
+    JackOUT->savefile(filename);
+    Pexitprogram=1;
+    }
+    
     jack_session_event_free (s_event);
 
 
