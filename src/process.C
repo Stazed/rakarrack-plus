@@ -56,7 +56,10 @@ float r__ratio[12];
 float freqs[12];
 float lfreqs[12];
 float aFreq;
-
+char *s_uuid;
+char *statefile;
+char *filetoload;
+char *banktoload;
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 Pixmap p, mask;
 XWMHints *hints;
@@ -92,14 +95,13 @@ RKR::RKR ()
   actuvol= 0;
   OnCounter=0;
   sprintf (temp, "rakarrack");
-
+  
 
   #ifdef JACK_SESSION
   jackclient = jack_client_open (temp, JackSessionID, NULL, s_uuid);
   #else
   jackclient = jack_client_open (temp, options, &status, NULL);
   #endif
-
 
 
 
@@ -868,7 +870,6 @@ efx_FLimiter->Compressor_Change_Preset(0,3);
   afreq_old = 0;
   cents_old = 0;
 
-  preset = 1000;
   MidiCh = 0;
   RControl = 0;
   ControlGet = 0;

@@ -83,30 +83,26 @@ main (int argc, char *argv[])
     {"no-gui", 0, NULL, 'n'},
     {"dump-preset-names", 0, NULL, 'x'},
     {"help", 0, NULL, 'h'},
-    {"session",2,NULL,'u'},
+    {"session",1,NULL,'u'},
     {0, 0, 0, 0}
   };
 
 
+  int needtoloadfile=0;
+  int needtoloadbank=0;
+  int needtoloadstate=0;
+  int needtodump=0;
 
   Pexitprogram = 0;
+  preset=1000;
   commandline = 0;
   gui = 1;
   opterr = 0;
   int option_index = 0, opt;
-  RKR rkr;
-
-  if (nojack)
-    {
-      show_help ();
-      if (gui)
-	rkr.Message (1,"rakarrack error",
-		     "Cannot make a jack client, is jackd running?");
-      return (0);
-    }
-
+  s_uuid=NULL;
   exitwithhelp = 0;
 
+  option_index=0;
 
   while (1)
     {
@@ -128,13 +124,15 @@ main (int argc, char *argv[])
 	  if (optarguments != NULL)
 	    {
 	      commandline = 1;
-	      rkr.loadfile (optarguments);
+              needtoloadfile=1; 
+	      filetoload=strdup(optarguments);
 	      break;
 	    }
 	case 'b':
 	  if (optarguments != NULL)
 	    {
-	      rkr.loadbank (optarguments);
+	      needtoloadbank=1;
+	      banktoload=strdup(optarguments);
 	      break;
 	    }  
         case 'p':
@@ -144,19 +142,18 @@ main (int argc, char *argv[])
               break;
             }  
         case 'x':
-              rkr.dump_preset_names ();
-              exit(1);
+              needtodump=1;
               break;
 
         case 'u':
            if(optarguments != NULL)
             {
 	      commandline = 1;
-              rkr.s_uuid=strdup(optarguments);
-	      rkr.loadfile (argv[optind]);
+	      needtoloadstate=1;
+	      s_uuid=strdup(optarguments);
+	      statefile=strdup(argv[optind]);
               break;
             }  
-        
          
               
 
@@ -170,6 +167,30 @@ main (int argc, char *argv[])
       show_help ();
       return (0);
     };
+
+
+  RKR rkr;
+ 
+  if(needtodump)
+   { 
+     rkr.dump_preset_names ();
+     exit(1);
+   }
+
+  if (needtoloadstate) rkr.loadfile(statefile);
+  if (needtoloadfile) rkr.loadfile(filetoload);
+  if (needtoloadbank) rkr.loadbank(banktoload);
+  
+
+  if (nojack)
+    {
+      show_help ();
+      if (gui)
+	rkr.Message (1,"rakarrack error",
+		     "Cannot make a jack client, is jackd running?");
+      return (0);
+    }
+
 
 
 

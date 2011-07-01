@@ -256,8 +256,10 @@ extern XWMHints *hints;
 extern float freqs[12];
 extern float lfreqs[12];
 extern float aFreq;
-
-
+extern char *s_uuid;
+extern char *statefile;
+extern char *filetoload;
+extern char *banktoload;
 class RKR
 {
 
@@ -710,7 +712,7 @@ public:
   char *Author;
   char *Bank_Saved;
   char *UserRealName;
-  char *s_uuid;
+
 
 
   char MID[128];
