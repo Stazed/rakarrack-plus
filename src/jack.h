@@ -25,6 +25,10 @@
 
 #include "global.h"
 
+#ifdef JACK_SESSION
+#include <jack/session.h>
+#endif 
+
 int JACKstart (RKR * rkr_, jack_client_t * jackclient);
 void JACKfinish ();
 int timebase(jack_transport_state_t state, jack_position_t *pos, void *arg);

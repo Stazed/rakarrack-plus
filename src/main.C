@@ -83,6 +83,7 @@ main (int argc, char *argv[])
     {"no-gui", 0, NULL, 'n'},
     {"dump-preset-names", 0, NULL, 'x'},
     {"help", 0, NULL, 'h'},
+    {"session",2,NULL,'u'},
     {0, 0, 0, 0}
   };
 
@@ -109,7 +110,7 @@ main (int argc, char *argv[])
 
   while (1)
     {
-      opt = getopt_long (argc, argv, "l:b:p:nxh", opts, &option_index);
+      opt = getopt_long (argc, argv, "l:b:p:u:nxh", opts, &option_index);
       char *optarguments = optarg;
 
       if (opt == -1)
@@ -146,6 +147,18 @@ main (int argc, char *argv[])
               rkr.dump_preset_names ();
               exit(1);
               break;
+
+        case 'u':
+           if(optarguments != NULL)
+            {
+	      commandline = 1;
+              rkr.s_uuid=strdup(optarguments);
+	      rkr.loadfile (argv[optind]);
+              break;
+            }  
+        
+         
+              
 
           }
 

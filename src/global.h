@@ -710,7 +710,7 @@ public:
   char *Author;
   char *Bank_Saved;
   char *UserRealName;
-
+  char *s_uuid;
 
 
   char MID[128];

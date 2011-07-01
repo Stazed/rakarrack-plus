@@ -36,10 +36,14 @@ jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
 void *dataout;
-
+jack_session_event_t *s_event;
 int jackprocess (jack_nframes_t nframes, void *arg);
-
+void session_callback (jack_session_event_t *event, void *arg);
 RKR *JackOUT;
+
+
+
+
 
 
 
@@ -53,6 +57,10 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
 
   jack_set_sync_callback(jackclient, timebase, NULL);
   jack_set_process_callback (jackclient, jackprocess, 0);
+#ifdef JACK_SESSION
+  jack_set_session_callback (jackclient, session_callback, NULL);
+#endif
+
   jack_on_shutdown (jackclient, jackshutdown, 0);
 
 
@@ -340,5 +348,29 @@ JackOUT->Update_tempo();
 JackOUT->Tap_Display=1;
 }
 
+
+#ifdef JACK_SESSION
+void session_callback(jack_session_event_t *event, void *arg)
+{
+    char filename[256];
+    char command[256];
+
+    s_event = event;
+    snprintf( filename, sizeof(filename), "%srackstate.rkr", s_event->session_dir );
+    snprintf( command, sizeof(command), "rakarrack -u %s ${SESSION_DIR}rackstate.rkr", s_event->client_uuid );
+
+    JackOUT->savefile(filename);
+
+    s_event->command_line = strdup( command );
+    jack_session_reply( jackclient, s_event );
+    if (s_event->type == JackSessionSaveAndQuit) Pexitprogram=1;
+    jack_session_event_free (s_event);
+
+
+}
+
+#endif
+ 
+ 
 
 

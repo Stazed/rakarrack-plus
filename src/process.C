@@ -92,7 +92,16 @@ RKR::RKR ()
   actuvol= 0;
   OnCounter=0;
   sprintf (temp, "rakarrack");
+
+
+  #ifdef JACK_SESSION
+  jackclient = jack_client_open (temp, JackSessionID, NULL, s_uuid);
+  #else
   jackclient = jack_client_open (temp, options, &status, NULL);
+  #endif
+
+
+
 
   if (jackclient == NULL)
     {
