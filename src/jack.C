@@ -158,7 +158,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
   jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
     jack_port_get_buffer (inputport_aux, nframes);
 
-//  pthread_mutex_lock (&jmutex);
+  pthread_mutex_lock (&jmutex);
 
 
   JackOUT->cpuload = jack_cpu_load(jackclient);
@@ -276,7 +276,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
 	  sizeof (jack_default_audio_sample_t) * nframes);
   
   
-//  pthread_mutex_unlock (&jmutex);
+  pthread_mutex_unlock (&jmutex);
 
 
   return 0;
@@ -287,7 +287,9 @@ jackprocess (jack_nframes_t nframes, void *arg)
 void
 JACKfinish ()
 {
+  
   jack_client_close (jackclient);
+  pthread_mutex_unlock(&jmutex);
   pthread_mutex_destroy (&jmutex);
   usleep (1000);
 };
@@ -351,7 +353,7 @@ void session_callback(jack_session_event_t *event, void *arg)
 
     s_event = event;
     snprintf( filename, sizeof(filename), "%srackstate.rkr", s_event->session_dir );
-    snprintf( command, sizeof(command), "rakarrack -u %s ${SESSION_DIR}rackstate.rkr", s_event->client_uuid );
+    snprintf( command, sizeof(command), "rakarrack -u %s ${SESSION_DIR}rackstate.rkr", s_event->client_uuid);
 
 
     s_event->command_line = strdup( command );

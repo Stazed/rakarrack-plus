@@ -95,12 +95,8 @@ RKR::RKR ()
   actuvol= 0;
   OnCounter=0;
 
-  sprintf (temp, "rakarrack");
-
-  pthread_mutex_t jmutex = PTHREAD_MUTEX_INITIALIZER;
-//  pthread_mutex_init (&jmutex, NULL);
-  pthread_mutex_lock (&jmutex);
   
+  sprintf (temp, "rakarrack");
   
   #ifdef JACK_SESSION
   jackclient = jack_client_open (temp, JackSessionID, NULL, s_uuid);
@@ -108,8 +104,6 @@ RKR::RKR ()
   jackclient = jack_client_open (temp, options, &status, NULL);
   #endif
 
-pthread_mutex_unlock (&jmutex);
-  
 
   if (jackclient == NULL)
     {
@@ -121,6 +115,10 @@ pthread_mutex_unlock (&jmutex);
     }
 
   strcpy (jackcliname, jack_get_client_name (jackclient));
+
+  
+
+
   J_SAMPLE_RATE = jack_get_sample_rate (jackclient);
   J_PERIOD = jack_get_buffer_size (jackclient);
   
