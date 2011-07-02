@@ -1,5 +1,8 @@
 ==v0.6.2 ( / /201 ) ==
 
+- some bug fixes
+- Add jack session support
+- Add "Portamento mode" to shifter effect
 - Add Seq Delay mode to Sequence effect using delayline
 - Echotron and Echoverse use new delayline utility.
 - Dual Flange Intense mode with delayline

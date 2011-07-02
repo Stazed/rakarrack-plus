@@ -99,7 +99,6 @@ main (int argc, char *argv[])
   gui = 1;
   opterr = 0;
   int option_index = 0, opt;
-  s_uuid=NULL;
   exitwithhelp = 0;
 
   option_index=0;
@@ -154,8 +153,7 @@ main (int argc, char *argv[])
 	      statefile=strdup(argv[optind]);
               break;
             }  
-         
-              
+                    
 
           }
 
@@ -187,15 +185,17 @@ main (int argc, char *argv[])
      rkr.dump_preset_names ();
      exit(1);
    }
-
-  if (needtoloadstate) rkr.loadfile(statefile);
-  if (needtoloadfile) rkr.loadfile(filetoload);
-  if (needtoloadbank) rkr.loadbank(banktoload);
   
 
   JACKstart (&rkr, rkr.jackclient);
   rkr.InitMIDI ();
   rkr.ConnectMIDI ();
+
+
+  if (needtoloadstate) rkr.loadfile(statefile);
+  if (needtoloadfile) rkr.loadfile(filetoload);
+  if (needtoloadbank) rkr.loadbank(banktoload);
+
 
   // Launch GUI
 

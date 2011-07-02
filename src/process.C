@@ -69,7 +69,7 @@ RKR::RKR ()
   db6booster=0;
   jdis=0;
   jshut=0;
-  char temp[128];
+  char temp[256];
   ML_filter=0;
   error_num = 0;
   eff_filter = 0;
@@ -94,17 +94,22 @@ RKR::RKR ()
   Mvalue = 0;
   actuvol= 0;
   OnCounter=0;
+
   sprintf (temp, "rakarrack");
+
+  pthread_mutex_t jmutex = PTHREAD_MUTEX_INITIALIZER;
+//  pthread_mutex_init (&jmutex, NULL);
+  pthread_mutex_lock (&jmutex);
   
-
-
+  
   #ifdef JACK_SESSION
   jackclient = jack_client_open (temp, JackSessionID, NULL, s_uuid);
   #else
   jackclient = jack_client_open (temp, options, &status, NULL);
   #endif
 
-
+pthread_mutex_unlock (&jmutex);
+  
 
   if (jackclient == NULL)
     {
@@ -114,8 +119,6 @@ RKR::RKR ()
       return;
 
     }
-
-
 
   strcpy (jackcliname, jack_get_client_name (jackclient));
   J_SAMPLE_RATE = jack_get_sample_rate (jackclient);

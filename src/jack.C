@@ -28,9 +28,9 @@
 #include "global.h"
 
 
-pthread_mutex_t jmutex;
+RKR *JackOUT;
 
-
+pthread_mutex_t jmutex = PTHREAD_MUTEX_INITIALIZER;
 jack_client_t *jackclient;
 jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
@@ -39,7 +39,6 @@ void *dataout;
 jack_session_event_t *s_event;
 int jackprocess (jack_nframes_t nframes, void *arg);
 void session_callback (jack_session_event_t *event, void *arg);
-RKR *JackOUT;
 
 
 
@@ -51,14 +50,14 @@ int
 JACKstart (RKR * rkr_, jack_client_t * jackclient_)
 {
 
-
   JackOUT = rkr_;
   jackclient = jackclient_;
 
   jack_set_sync_callback(jackclient, timebase, NULL);
   jack_set_process_callback (jackclient, jackprocess, 0);
+
 #ifdef JACK_SESSION
-  jack_set_session_callback (jackclient, session_callback, NULL);
+jack_set_session_callback (jackclient, session_callback, NULL);
 #endif
 
   jack_on_shutdown (jackclient, jackshutdown, 0);
@@ -130,11 +129,6 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
 
 
 
-
-
-  pthread_mutex_init (&jmutex, NULL);
-
-
   return 3;
 
 };
@@ -164,7 +158,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
   jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
     jack_port_get_buffer (inputport_aux, nframes);
 
-  pthread_mutex_lock (&jmutex);
+//  pthread_mutex_lock (&jmutex);
 
 
   JackOUT->cpuload = jack_cpu_load(jackclient);
@@ -282,7 +276,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
 	  sizeof (jack_default_audio_sample_t) * nframes);
   
   
-  pthread_mutex_unlock (&jmutex);
+//  pthread_mutex_unlock (&jmutex);
 
 
   return 0;
@@ -295,7 +289,7 @@ JACKfinish ()
 {
   jack_client_close (jackclient);
   pthread_mutex_destroy (&jmutex);
-  usleep (100000);
+  usleep (1000);
 };
 
 
@@ -369,7 +363,6 @@ void session_callback(jack_session_event_t *event, void *arg)
     }
     
     jack_session_event_free (s_event);
-
 
 }
 
