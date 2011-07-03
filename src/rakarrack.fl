@@ -881,7 +881,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;}
       xywh {1532 223 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -10245,7 +10245,7 @@ else rkr->booster=1.0f;}
  getMIDIControl(12);
  return;
 } 
-rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
+rkr->Fraction_Bypass=(float)(o->value()/100.0f);} selected
           xywh {15 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 100 maximum 0 step 1 value 100 textcolor 7
           class SliderW
         }
@@ -12997,8 +12997,7 @@ rkr->M_table[i].preset=f-3000;
 }
 
 
-}} {selected
-    }
+}} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -14937,7 +14936,7 @@ for (i=1; i<(rkr->NumParams+26); i++)
 switch (i)
 {
      case 12:
-     Balance->value(rkr->Fraction_Bypass*100);
+     Balance->value(rkr->Fraction_Bypass*100.0);
      Balance->redraw();
      break;
      case 14:

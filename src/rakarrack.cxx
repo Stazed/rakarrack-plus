@@ -24871,7 +24871,7 @@ void RKRGUI::ActMIDI() {
   switch (i)
   {
        case 12:
-       Balance->value(rkr->Fraction_Bypass*100);
+       Balance->value(rkr->Fraction_Bypass*100.0);
        Balance->redraw();
        break;
        case 14:

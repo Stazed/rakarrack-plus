@@ -1060,7 +1060,6 @@ RKR::loadfile (char *filename)
 {
 
   int i, j;
-  int Num_Version=0;
   int l[10];
   FILE *fn;
   float in_vol, out_vol; 
@@ -1125,9 +1124,6 @@ RKR::loadfile (char *filename)
 
   memset (buf, 0, sizeof (buf));
   fgets (buf, sizeof buf, fn);
-  if(Num_Version < 50)
-  sscanf (buf, "%f,%f,%d\n", &in_vol, &out_vol, &Bypass_B);
-  else
   sscanf (buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &Bypass_B);
 
   if (actuvol == 0)
