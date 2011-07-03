@@ -43,6 +43,7 @@ int maxx_len;
 int error_num;
 int stecla;
 int looper_lqua;
+int needtoloadstate;
 unsigned int SAMPLE_RATE;
 float fPERIOD;
 float fSAMPLE_RATE;

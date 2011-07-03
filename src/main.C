@@ -90,9 +90,9 @@ main (int argc, char *argv[])
 
   int needtoloadfile=0;
   int needtoloadbank=0;
-  int needtoloadstate=0;
   int needtodump=0;
-
+  
+  needtoloadstate=0;
   Pexitprogram = 0;
   preset=1000;
   commandline = 0;
@@ -200,7 +200,9 @@ main (int argc, char *argv[])
 
   // Launch GUI
 
- if (gui) new RKRGUI (argc, argv, &rkr);
+  RKRGUI *rgui=NULL; 
+
+  if (gui) rgui = new RKRGUI (argc, argv, &rkr);
 
 
   if (gui == 0)
@@ -252,7 +254,8 @@ main (int argc, char *argv[])
     }
 
 // free memory etc.
-
+ 
+  if(needtoloadstate) rgui->save_stat(0);
   JACKfinish ();
   return (0);
 

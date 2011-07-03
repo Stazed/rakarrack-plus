@@ -22792,6 +22792,10 @@ void RKRGUI::load_stat() {
   MIDIOctave->value(k);
   MIDIOctave->do_callback();
   
+  rakarrack.get(rkr->PrefNom("MIDI Converter On/Off"),k,0);
+  nidi_activar->value(k);
+  nidi_activar->do_callback();
+  
   //Metronome
   
   rakarrack.get(rkr->PrefNom("Internal Metronome Time"),k,2);
@@ -22812,6 +22816,10 @@ void RKRGUI::load_stat() {
   
   rakarrack.get(rkr->PrefNom("Internal Metronome Show"),rkr->sw_stat,0);
   
+  rakarrack.get(rkr->PrefNom("Internal Metronome On/Off"),k,0);
+  metro_activar->value(k);
+  metro_activar->do_callback();
+  
   if(rkr->sw_stat==1) 
   { 
     Midi->hide();
@@ -22823,6 +22831,12 @@ void RKRGUI::load_stat() {
     Midi->show();
    }
   
+  //Tuner
+  
+  rakarrack.get(rkr->PrefNom("Tuner On/Off"),k,0);
+  tuner_activar->value(k);
+  tuner_activar->do_callback();
+  
   
   //Tap Tempo
   
@@ -22833,9 +22847,16 @@ void RKRGUI::load_stat() {
   rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
   T_SET->value(rkr->Tap_SetValue);
   
+  rakarrack.get(rkr->PrefNom("TapTempo On/Off"),k,0);
+  Tap_activar->value(k);
+  Tap_activar->do_callback();
+  
+  
+  
   rakarrack.get(rkr->PrefNom("Disable Warnings"),rkr->mess_dis,0);
   rakarrack.get(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool,1);
   Fl_Tooltip::enable(rkr->ena_tool);
+  
   //Trigger
   
   rakarrack.get(rkr->PrefNom("Aux Source"),rkr->Aux_Source,0);
@@ -22931,17 +22952,21 @@ void RKRGUI::save_stat(int i) {
   rakarrack.set(rkr->PrefNom("Help TextSize"),visor->textsize());
   }
   
+  //Tuner
+  
+  rakarrack.set(rkr->PrefNom("Tuner On/Off"),(int) rkr->Tuner_Bypass);
   
   
   //MIDIConverter
   
+  rakarrack.set(rkr->PrefNom("MIDI Converter On/Off"),(int) rkr->MIDIConverter_Bypass);
   rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
   rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
   rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
   rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDIOctave->value());
   
   //Metronome
-  
+  rakarrack.set(rkr->PrefNom("Internal Metronome On/Off"),(int)rkr->Metro_Bypass); 
   rakarrack.set(rkr->PrefNom("Internal Metronome Time"),(int)MetroBar->value()); 
   rakarrack.set(rkr->PrefNom("Internal Metronome Volume"),(int)Metro_Volume->value());
   rakarrack.set(rkr->PrefNom("Internal Metronome Tempo"),(int)Metro_Tempo->value());
@@ -22953,8 +22978,10 @@ void RKRGUI::save_stat(int i) {
   
   
   //Tap Tempo
+  rakarrack.set(rkr->PrefNom("TapTempo On/Off"),(int)rkr->Tap_Bypass); 
   rakarrack.set(rkr->PrefNom("TapTempo Input"),(int)rkr->Tap_Selection); 
   rakarrack.set(rkr->PrefNom("TapTempo Set"),(int)rkr->Tap_SetValue); 
+  
   
   
   }

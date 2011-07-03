@@ -235,6 +235,7 @@ extern int maxx_len;
 extern int error_num;
 extern int PERIOD;
 extern int reconota;
+extern int needtoloadstate;
 extern int stecla;
 extern int looper_lqua;
 extern unsigned int SAMPLE_RATE;

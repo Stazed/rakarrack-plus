@@ -95,7 +95,7 @@ jack_set_session_callback (jackclient, session_callback, NULL);
       return (2);
     };
 
-  if (JackOUT->aconnect_JA)
+  if ((JackOUT->aconnect_JA) && (!needtoloadstate))
     {
 
       for (int i = 0; i < JackOUT->cuan_jack; i += 2)
@@ -107,7 +107,7 @@ jack_set_session_callback (jackclient, session_callback, NULL);
 	}
     }
 
-  if (JackOUT->aconnect_JIA)
+  if ((JackOUT->aconnect_JIA) && (!needtoloadstate))
     {
 
        if(JackOUT->cuan_ijack == 1)
@@ -361,6 +361,7 @@ void session_callback(jack_session_event_t *event, void *arg)
     if (s_event->type == JackSessionSaveAndQuit) 
     {
     JackOUT->savefile(filename);
+    needtoloadstate=1;
     Pexitprogram=1;
     }
     
