@@ -89,9 +89,9 @@ main (int argc, char *argv[])
 
 
   int needtoloadfile=0;
-  int needtoloadbank=0;
   int needtodump=0;
-  
+
+  needtoloadbank=0;
   needtoloadstate=0;
   Pexitprogram = 0;
   preset=1000;

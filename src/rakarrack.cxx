@@ -22701,9 +22701,11 @@ void RKRGUI::load_stat() {
   Leds_Color_Change(leds_color);
   Label_Color_Change(label_color);
   
-  if (!commandline)
-  {
   rakarrack.get(rkr->PrefNom("Bank Selected"), rkr->a_bank,3);
+  
+  if (!needtoloadbank)
+  {
+  
   switch(rkr->a_bank)
   {
    
@@ -22719,7 +22721,11 @@ void RKRGUI::load_stat() {
          L_B3->do_callback();
          break;
   } 
+  } 
    
+  if (!commandline)
+  {
+  
   rakarrack.get(rkr->PrefNom("Preset Num"),k ,1);
   rkr->Selected_Preset=k;
   Preset_Counter->value(k);

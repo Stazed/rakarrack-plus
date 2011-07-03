@@ -881,7 +881,7 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {1532 223 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
@@ -12779,9 +12779,11 @@ Buttons_Color_Change(fore_color);
 Leds_Color_Change(leds_color);
 Label_Color_Change(label_color);
 
-if (!commandline)
-{
 rakarrack.get(rkr->PrefNom("Bank Selected"), rkr->a_bank,3);
+
+if (!needtoloadbank)
+{
+
 switch(rkr->a_bank)
 {
  
@@ -12797,7 +12799,11 @@ switch(rkr->a_bank)
        L_B3->do_callback();
        break;
 } 
+} 
  
+if (!commandline)
+{
+
 rakarrack.get(rkr->PrefNom("Preset Num"),k ,1);
 rkr->Selected_Preset=k;
 Preset_Counter->value(k);

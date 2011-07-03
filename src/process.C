@@ -44,6 +44,7 @@ int error_num;
 int stecla;
 int looper_lqua;
 int needtoloadstate;
+int needtoloadbank;
 unsigned int SAMPLE_RATE;
 float fPERIOD;
 float fSAMPLE_RATE;
