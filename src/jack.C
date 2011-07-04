@@ -30,7 +30,6 @@
 
 RKR *JackOUT;
 
-pthread_mutex_t jmutex = PTHREAD_MUTEX_INITIALIZER;
 jack_client_t *jackclient;
 jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
@@ -39,11 +38,6 @@ void *dataout;
 jack_session_event_t *s_event;
 int jackprocess (jack_nframes_t nframes, void *arg);
 void session_callback (jack_session_event_t *event, void *arg);
-
-
-
-
-
 
 
 int
@@ -157,8 +151,6 @@ jackprocess (jack_nframes_t nframes, void *arg)
 
   jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
     jack_port_get_buffer (inputport_aux, nframes);
-
-  pthread_mutex_lock (&jmutex);
 
 
   JackOUT->cpuload = jack_cpu_load(jackclient);
@@ -276,8 +268,6 @@ jackprocess (jack_nframes_t nframes, void *arg)
 	  sizeof (jack_default_audio_sample_t) * nframes);
   
   
-  pthread_mutex_unlock (&jmutex);
-
 
   return 0;
 
@@ -289,8 +279,6 @@ JACKfinish ()
 {
   
   jack_client_close (jackclient);
-  pthread_mutex_unlock(&jmutex);
-  pthread_mutex_destroy (&jmutex);
   usleep (1000);
 };
 
