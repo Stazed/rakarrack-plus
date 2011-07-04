@@ -23,7 +23,6 @@
 #ifndef EFFECT_H
 #define EFFECT_H
 
-#include <pthread.h>
 #include "global.h"
 #include "FilterParams.h"
 

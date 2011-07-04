@@ -168,7 +168,6 @@ return y;
 #define f_exp(x) f_pow2(x * LN2R)
 
 #include "config.h"
-#include <pthread.h>
 #include <signal.h>
 #include <dirent.h>
 #include <sys/time.h>
