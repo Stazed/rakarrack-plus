@@ -1006,7 +1006,7 @@ RKR::savefile (char *filename)
 
   //General
   memset (buf, 0, sizeof (buf));
-  sprintf (buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass_B);
+  sprintf (buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass);
   fputs (buf, fn);
 
 
@@ -1126,7 +1126,7 @@ RKR::loadfile (char *filename)
   fgets (buf, sizeof buf, fn);
   sscanf (buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &Bypass_B);
 
-  if (actuvol == 0)
+  if ((actuvol == 0) || (needtoloadstate))
     {
       Fraction_Bypass = balance;
       Input_Gain = in_vol;
@@ -1634,6 +1634,11 @@ RKR::Actualizar_Audio ()
 
       
   Bypass = Bypass_B;
+  if(needtoloadstate)
+  {
+  calculavol(1);
+  calculavol(2);
+  }
 
 }
 

@@ -10245,7 +10245,7 @@ else rkr->booster=1.0f;}
  getMIDIControl(12);
  return;
 } 
-rkr->Fraction_Bypass=(float)(o->value()/100.0f);} selected
+rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
           xywh {15 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 100 maximum 0 step 1 value 100 textcolor 7
           class SliderW
         }
@@ -11238,8 +11238,8 @@ Settings->hide();}
       } {
         Fl_Group Look {
           label Look
-          user_data 1 open
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1
+          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -11400,8 +11400,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -12844,7 +12844,7 @@ rakarrack.get(rkr->PrefNom("Auto Assign"),rkr->autoassign,0);
 
 if(rkr->init_state)
 {
-  rkr->Bypass=1;
+  if(!needtoloadstate) rkr->Bypass=1;
   rkr->calculavol(1);
   rkr->calculavol(2);
 }  
@@ -12997,7 +12997,8 @@ rkr->M_table[i].preset=f-3000;
 }
 
 
-}} {}
+}} {selected
+    }
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
