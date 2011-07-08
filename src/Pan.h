@@ -61,7 +61,7 @@ private:
   int PextraON;
 
 
-  float dvalue;
+  float dvalue,cdvalue,sdvalue;
   float panning, mul;
   float lfol, lfor;
   float ll, lr;

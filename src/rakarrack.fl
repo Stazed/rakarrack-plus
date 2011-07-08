@@ -1,32 +1,32 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {\#include "global.h"} {public local
+decl {\#include "global.h"} {public
 } 
 
-decl {\#include <FL/Fl_Value_Slider.H>} {public local
+decl {\#include <FL/Fl_Value_Slider.H>} {public
 } 
 
-decl {\#include <FL/Fl_Scroll.H>} {public local
+decl {\#include <FL/Fl_Scroll.H>} {public
 } 
 
-decl {\#include <FL/Fl_Progress.H>} {public local
+decl {\#include <FL/Fl_Progress.H>} {public
 } 
 
-decl {\#include <FL/Fl_Tooltip.H>} {public local
+decl {\#include <FL/Fl_Tooltip.H>} {public
 } 
 
-decl {\#include <FL/x.H>} {public local
+decl {\#include <FL/x.H>} {public
 } 
 
-decl {\#include <FL/Fl_PNG_Image.H>} {public local
+decl {\#include <FL/Fl_PNG_Image.H>} {public
 } 
 
-decl {\#include <FL/Fl_Tiled_Image.H>} {public local
+decl {\#include <FL/Fl_Tiled_Image.H>} {public
 } 
 
-decl {\#include <FL/Fl_Help_Dialog.H>} {public local
+decl {\#include <FL/Fl_Help_Dialog.H>} {public
 } 
 
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
@@ -35,59 +35,41 @@ decl {\#include <FL/Fl_File_Chooser.H>} {public global
 decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 } 
 
-decl {\#include "icono_rakarrack_128x128.xpm"} {private local
-} 
+decl {\#include "icono_rakarrack_128x128.xpm"} {} 
 
-decl {Fl_Tiled_Image *back;} {private local
-} 
+decl {Fl_Tiled_Image *back;} {} 
 
-decl {Fl_Color leds_color;} {private local
-} 
+decl {Fl_Color leds_color;} {} 
 
-decl {Fl_Color back_color;} {private local
-} 
+decl {Fl_Color back_color;} {} 
 
-decl {Fl_Color fore_color;} {private local
-} 
+decl {Fl_Color fore_color;} {} 
 
-decl {Fl_Color label_color;} {private local
-} 
+decl {Fl_Color label_color;} {} 
 
-decl {Fl_Widget *old;} {private local
-} 
+decl {Fl_Widget *old;} {} 
 
-decl {float *spl;} {private local
-} 
+decl {float *spl;} {} 
 
-decl {float *spr;} {private local
-} 
+decl {float *spr;} {} 
 
-decl {int last_tecla;} {private local
-} 
+decl {int last_tecla;} {} 
 
-decl {int drag;} {private local
-} 
+decl {int drag;} {} 
 
-decl {int sr;} {private local
-} 
+decl {int sr;} {} 
 
-decl {int ns;} {private local
-} 
+decl {int ns;} {} 
 
-decl {int at;} {private local
-} 
+decl {int at;} {} 
 
-decl {int nt;} {private local
-} 
+decl {int nt;} {} 
 
-decl {int tta;} {private local
-} 
+decl {int tta;} {} 
 
-decl {int Scope_ON;} {private local
-} 
+decl {int Scope_ON;} {} 
 
-decl {int Analyzer_ON;} {private local
-} 
+decl {int Analyzer_ON;} {} 
 
 class Analyzer {: {public Fl_Box}
 } {
@@ -100,7 +82,8 @@ spr = smpsr;
 ns = PERIOD;
 sr = SAMPLERATE;} {}
   }
-  Function {draw()} {} {
+  Function {draw()} {open
+  } {
     code {int ox=x(),oy=y(),lx=w(),ly=h();
 int i,j;
 int px,py;
@@ -126,8 +109,6 @@ double scale = (double) ly ;
 if (Analyzer_ON)
 {
 
-//Draw Response  
-// draw_box(FL_FLAT_BOX,ox,oy,lx,ly,back_color);
 
 fl_draw(buf, ox, oy, lx, ly, FL_ALIGN_CLIP ,back);
 
@@ -150,7 +131,7 @@ for(i=0; i<28; i++)
       }
        
       y = sqrt((double) i * y * nsp * factor); 
-      // y=sqrt(y*nsp*factor);   
+  
      
       if (y<0.0) y=0.0;
       if (y>1.0) y=1.0;     
@@ -170,7 +151,8 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {}
+}} {selected
+    }
   }
   Function {handle(int event)} {return_type int
   } {
@@ -192,8 +174,7 @@ break;
 }
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {private local
-  }
+  decl {EQ *efx_EQ1;} {}
 } 
 
 class Scope {: {public Fl_Box}
@@ -313,8 +294,7 @@ break;
 
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {private local
-  }
+  decl {EQ *efx_EQ1;} {}
 } 
 
 class NewVum {: {public Fl_Slider}
@@ -870,12 +850,9 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
 } 
 
 class RKRGUI {} {
-  decl {RKR *rkr;} {private local
-  }
-  decl {int made;} {private local
-  }
-  decl {Fl_Help_Dialog *visor;} {private local
-  }
+  decl {RKR *rkr;} {}
+  decl {int made;} {}
+  decl {Fl_Help_Dialog *visor;} {}
   Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
@@ -12997,8 +12974,7 @@ rkr->M_table[i].preset=f-3000;
 }
 
 
-}} {selected
-    }
+}} {}
   }
   Function {save_stat(int i)} {} {
     code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);

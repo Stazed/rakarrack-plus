@@ -67,6 +67,8 @@ Pan::out (float *smpsl, float *smpsr)
   float coeff_PERIOD = 1.0 / fPERIOD; 
   float fi,P_i;
 
+
+
   if (PextraON)
     {
    
@@ -79,10 +81,10 @@ Pan::out (float *smpsl, float *smpsr)
 	  rdiff = smpsr[i] - avg;
 
 	  tmp = avg + ldiff * mul;
-	  smpsl[i] = tmp*cosf(dvalue);
+	  smpsl[i] = tmp*cdvalue;
 
 	  tmp = avg + rdiff * mul;
-	  smpsr[i] = tmp*sinf(dvalue);
+	  smpsr[i] = tmp*sdvalue;
 
 
 	}
@@ -137,7 +139,9 @@ Pan::setpanning (int Ppanning)
   this->Ppanning = Ppanning;
   panning = ((float)Ppanning)/ 127.0f;
   dvalue= panning*M_PI_2;
-
+  cdvalue=cosf(dvalue);
+  sdvalue=sinf(dvalue);
+  
 
 };
 
