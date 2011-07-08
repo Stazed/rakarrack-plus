@@ -24597,6 +24597,7 @@ Calibration->value(aFreq);
 RTrigger->value(rkr->RecNote->trigfact);
 RC_Opti->value(rkr->RCOpti);
 
+
 switch(rkr->VocBands)
 {
   case 16:

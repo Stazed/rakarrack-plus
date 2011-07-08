@@ -151,8 +151,7 @@ else
 {
 draw_box(box(),ox,oy,lx,ly,back_color);
 draw_label();
-}} {selected
-    }
+}} {}
   }
   Function {handle(int event)} {return_type int
   } {
@@ -849,7 +848,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {}
   decl {int made;} {}
   decl {Fl_Help_Dialog *visor;} {}
@@ -11204,13 +11204,13 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();}
-      xywh {1409 124 640 528} type Double color 4 hide
+      xywh {1395 110 640 528} type Double color 4 hide
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
@@ -11377,7 +11377,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
+          user_data 1
           xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -14646,6 +14646,7 @@ Calibration->value(aFreq);
 RTrigger->value(rkr->RecNote->trigfact);
 RC_Opti->value(rkr->RCOpti);
 
+
 switch(rkr->VocBands)
 {
   case 16:
@@ -14814,7 +14815,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {}
+Font_Bro->value(rkr->font+1);} {selected
+    }
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];

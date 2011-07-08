@@ -1,4 +1,4 @@
-==v0.6.2 ( / /201 ) ==
+==v0.6.2 ( / /2011) ==
 
 - some bug fixes
 - Add jack session support
@@ -16,7 +16,7 @@
 - Added fast f_pow functions
 - Improved handling of jackd shutdown.
 - Improved Dual Flanger
-- New  Mode on MuTroMojo
+- New Mode on MuTroMojo
 - Store/Retrieve Last Selected Bank
 
 

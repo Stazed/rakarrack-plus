@@ -62,8 +62,6 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
   hpfr = new AnalogFilter (3, 300, 1, 0);
 
 
-
-
   schmittInit (24);
 
 }
