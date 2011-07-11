@@ -170,6 +170,8 @@ public:
 private:
   void cb_ACI_Menu_i(Fl_Menu_*, void*);
   static void cb_ACI_Menu(Fl_Menu_*, void*);
+  void cb_Fullscreen_i(Fl_Menu_*, void*);
+  static void cb_Fullscreen(Fl_Menu_*, void*);
 public:
   static Fl_Menu_Item *Ayuda;
   static Fl_Menu_Item *Contenido;

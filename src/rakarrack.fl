@@ -880,13 +880,13 @@ class RKRGUI {} {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
+Pexitprogram=1;}
       xywh {1349 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -1005,7 +1005,7 @@ Show_Next_Time();}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings}
+          label {&Settings} open
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -1047,7 +1047,12 @@ else
 Trigger->hide();
 rkr->ACI_Bypass = 0;
 }}
-            xywh {0 0 36 21} shortcut 0x61
+            xywh {0 0 36 21} shortcut 0x61 divider
+          }
+          MenuItem {} {
+            label Fullscreen
+            callback {Principal->fullscreen();} selected
+            xywh {0 0 36 21} shortcut 0xffc9
           }
         }
         Submenu Ayuda {

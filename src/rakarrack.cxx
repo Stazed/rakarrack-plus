@@ -976,6 +976,13 @@ void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ACI_Menu_i(o,v);
 }
 
+void RKRGUI::cb_Fullscreen_i(Fl_Menu_*, void*) {
+  Principal->fullscreen();
+}
+void RKRGUI::cb_Fullscreen(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_Fullscreen_i(o,v);
+}
+
 void RKRGUI::cb_Contenido_i(Fl_Menu_*, void*) {
   show_help();
 }
@@ -1016,7 +1023,8 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"&Settings", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {"Preferences", 0x69,  (Fl_Callback*)RKRGUI::cb_Ajustes, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
  {"MIDI Learn", 0x65,  (Fl_Callback*)RKRGUI::cb_ML_Menu, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
- {"ACI", 0x61,  (Fl_Callback*)RKRGUI::cb_ACI_Menu, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"ACI", 0x61,  (Fl_Callback*)RKRGUI::cb_ACI_Menu, 0, 128, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Fullscreen", 0xffc9,  (Fl_Callback*)RKRGUI::cb_Fullscreen, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"&Help", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 7},
  {"Help Contents", 0xffbe,  (Fl_Callback*)RKRGUI::cb_Contenido, 0, 128, FL_NORMAL_LABEL, 0, 14, 7},
@@ -1041,9 +1049,9 @@ Fl_Menu_Item* RKRGUI::Bank_Menu = RKRGUI::menu_MenuP + 14;
 Fl_Menu_Item* RKRGUI::Ajustes = RKRGUI::menu_MenuP + 16;
 Fl_Menu_Item* RKRGUI::ML_Menu = RKRGUI::menu_MenuP + 17;
 Fl_Menu_Item* RKRGUI::ACI_Menu = RKRGUI::menu_MenuP + 18;
-Fl_Menu_Item* RKRGUI::Ayuda = RKRGUI::menu_MenuP + 20;
-Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 21;
-Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 22;
+Fl_Menu_Item* RKRGUI::Ayuda = RKRGUI::menu_MenuP + 21;
+Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 22;
+Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 23;
 
 void RKRGUI::cb_MT_i(Fl_Box*, void*) {
   highlight();

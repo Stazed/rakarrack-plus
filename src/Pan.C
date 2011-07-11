@@ -77,6 +77,7 @@ Pan::out (float *smpsl, float *smpsr)
 	{
 
        	  avg = (smpsl[i] + smpsr[i]) * .5f;
+
 	  ldiff = smpsl[i] - avg;
 	  rdiff = smpsr[i] - avg;
 
