@@ -4393,5 +4393,6 @@ public:
   void mtfillvalue(int num,int value);
   void Put_MidiTable();
   void RandomPreset();
+  void drag_effect();
 };
 #endif

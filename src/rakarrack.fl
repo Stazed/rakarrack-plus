@@ -868,7 +868,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {open
+} {
   decl {RKR *rkr;} {private local
   }
   decl {int made;} {private local
@@ -886,7 +887,7 @@ Pexitprogram=1;}
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -1051,7 +1052,7 @@ rkr->ACI_Bypass = 0;
           }
           MenuItem {} {
             label Fullscreen
-            callback {Principal->fullscreen();} selected
+            callback {Principal->fullscreen();}
             xywh {0 0 36 21} shortcut 0xffc9
           }
         }
@@ -1080,6 +1081,7 @@ put_icon(AboutWin);}
       }
       Fl_Box MT {
         callback {highlight();
+drag_effect();
 
 
 if (rkr->Tuner_Bypass)
@@ -17767,17 +17769,7 @@ closedir(dir);} {}
  if((k<770)||( k>779)) return 0;
  drag=k-770;
  return 1;
-}
- 
-if((drag!=1000) && (Fl::event_button1()==0))
-{
-Fl_Widget *w = Fl::belowmouse();
-long long k = (long long) w->user_data();
-if((k<770)||( k>779)) return 0;
-if(drag != (int)k-770) ((RKRGUI*)(w->parent()->user_data()))->Prep_Reorden(drag,(int)k-770);
-drag=1000;
-return 1;
-}
+} 
 
 
 if(e != 12) return 0;
@@ -18401,5 +18393,20 @@ Put_Loaded();
 
 ActivarGeneral->value(1);
 ActivarGeneral->do_callback();} {}
+  }
+  Function {drag_effect()} {open
+  } {
+    code {if((drag!=1000) && (Fl::event_button1()==0))
+{
+Fl_Widget *w = Fl::belowmouse();
+if (w !=NULL)
+{
+long long k = (long long) w->user_data();
+if((k<770)||( k>779)) return;
+if(drag != (int)k-770) Prep_Reorden(drag,(int)k-770);
+}
+drag=1000;
+}} {selected
+    }
   }
 } 

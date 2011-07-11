@@ -1055,6 +1055,7 @@ Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 23;
 
 void RKRGUI::cb_MT_i(Fl_Box*, void*) {
   highlight();
+drag_effect();
 
 
 if (rkr->Tuner_Bypass)
@@ -27723,17 +27724,7 @@ int RKRGUI::prevnext(int e) {
    if((k<770)||( k>779)) return 0;
    drag=k-770;
    return 1;
-  }
-   
-  if((drag!=1000) && (Fl::event_button1()==0))
-  {
-  Fl_Widget *w = Fl::belowmouse();
-  long long k = (long long) w->user_data();
-  if((k<770)||( k>779)) return 0;
-  if(drag != (int)k-770) ((RKRGUI*)(w->parent()->user_data()))->Prep_Reorden(drag,(int)k-770);
-  drag=1000;
-  return 1;
-  }
+  } 
   
   
   if(e != 12) return 0;
@@ -28367,4 +28358,18 @@ void RKRGUI::RandomPreset() {
   
   ActivarGeneral->value(1);
   ActivarGeneral->do_callback();
+}
+
+void RKRGUI::drag_effect() {
+  if((drag!=1000) && (Fl::event_button1()==0))
+  {
+  Fl_Widget *w = Fl::belowmouse();
+  if (w !=NULL)
+  {
+  long long k = (long long) w->user_data();
+  if((k<770)||( k>779)) return;
+  if(drag != (int)k-770) Prep_Reorden(drag,(int)k-770);
+  }
+  drag=1000;
+  }
 }
