@@ -346,6 +346,14 @@ void session_callback(jack_session_event_t *event, void *arg)
 
     s_event->command_line = strdup( command );
     jack_session_reply( jackclient, s_event );
+
+    if (s_event->type == JackSessionSave) 
+    {
+    JackOUT->savefile(filename);
+    }
+    
+
+
     if (s_event->type == JackSessionSaveAndQuit) 
     {
     JackOUT->savefile(filename);
