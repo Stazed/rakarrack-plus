@@ -1,5 +1,6 @@
 ==v0.6.2 ( / /2011) ==
 
+- Fixed Tuner to recognize Low notes
 - some bug fixes
 - Add jack session support
 - Add "Portamento mode" to shifter effect

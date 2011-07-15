@@ -27,7 +27,7 @@ Tuner::Tuner ()
   note = 0;
   nfreq = 0;
   afreq = 0;
-  schmittInit (32);
+  schmittInit (2);
 
 };
 
