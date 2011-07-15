@@ -20701,7 +20701,7 @@ R average.");
         tuner_activar->callback((Fl_Callback*)cb_tuner_activar, (void*)(2));
         tuner_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* tuner_activar
-      { TunerLed* o = tuner_bar = new TunerLed(586, 31, 206, 14);
+      { TunerLed* o = tuner_bar = new TunerLed(586, 31, 205, 14);
         tuner_bar->box(FL_THIN_DOWN_BOX);
         tuner_bar->color(FL_DARK1);
         tuner_bar->selection_color(FL_RED);
