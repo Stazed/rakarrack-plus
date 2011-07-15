@@ -1087,6 +1087,13 @@ WNfreq->copy_label(nofreq);
 rkr->afreq_old=rkr->efx_Tuner->afreq;
 }
 
+if(rkr->efx_Tuner->afreq==0.0f)
+{
+ char notas[3];
+ sprintf(notas,"  ");
+ WNote->copy_label(notas);
+} 
+
 
 if(rkr->efx_Tuner->cents != rkr->cents_old)
 {

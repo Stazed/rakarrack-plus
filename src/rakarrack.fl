@@ -868,8 +868,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {open
-} {
+class RKRGUI {} {
   decl {RKR *rkr;} {private local
   }
   decl {int made;} {private local
@@ -1112,6 +1111,13 @@ if (abs(rkr->efx_Tuner->cents)>5) WNfreq->labelcolor(FL_RED); else WNfreq->label
 WNfreq->copy_label(nofreq);
 rkr->afreq_old=rkr->efx_Tuner->afreq;
 }
+
+if(rkr->efx_Tuner->afreq==0.0f)
+{
+ char notas[3];
+ sprintf(notas,"  ");
+ WNote->copy_label(notas);
+} 
 
 
 if(rkr->efx_Tuner->cents != rkr->cents_old)
@@ -1500,7 +1506,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -18406,7 +18412,6 @@ if((k<770)||( k>779)) return;
 if(drag != (int)k-770) Prep_Reorden(drag,(int)k-770);
 }
 drag=1000;
-}} {selected
-    }
+}} {}
   }
 } 
