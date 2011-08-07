@@ -31,7 +31,7 @@ struct Midi_Event
 class MIDIConverter
 {
 public:
-  MIDIConverter ();
+  MIDIConverter (char *jname);
   ~MIDIConverter ();
 
 

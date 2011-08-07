@@ -14,7 +14,7 @@
 #include "global.h"
 
 
-MIDIConverter::MIDIConverter ()
+MIDIConverter::MIDIConverter (char *jname)
 {
 
   velocity = 100;
@@ -45,7 +45,7 @@ MIDIConverter::MIDIConverter ()
   int err = snd_seq_open (&port, "default", SND_SEQ_OPEN_OUTPUT, 0);
   if (err < 0)
     printf ("Cannot activate ALSA seq client\n");
-  snd_seq_set_client_name (port, "rakarrack");
+  snd_seq_set_client_name (port, jname);
   snd_config_update_free_global ();
 
 
@@ -54,7 +54,7 @@ MIDIConverter::MIDIConverter ()
 
   // Create Alsa Seq Client
 
-  sprintf (portname, "rakarrack MC OUT");
+  sprintf (portname, "%s MC OUT",jname);
   snd_seq_create_simple_port (port, portname,
 					     SND_SEQ_PORT_CAP_READ |
 					     SND_SEQ_PORT_CAP_SUBS_READ,

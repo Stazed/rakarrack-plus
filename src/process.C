@@ -308,7 +308,7 @@ RKR::RKR ()
 
   beat = new beattracker();
   efx_Tuner = new Tuner ();
-  efx_MIDIConverter = new MIDIConverter();
+  efx_MIDIConverter = new MIDIConverter(jackcliname);
   RecNote = new Recognize (efxoutl, efxoutr, rtrig);
   RC = new RecChord ();
 
