@@ -22113,6 +22113,7 @@ R average.");
       } // Fl_Group* BANK_SET
       STabs->end();
     } // Fl_Tabs* STabs
+    Settings->size_range(640, 528);
     Settings->end();
   } // Fl_Double_Window* Settings
   { MIDILearn = new Fl_Double_Window(640, 480);
@@ -23059,7 +23060,10 @@ void RKRGUI::save_stat(int i) {
   rakarrack.set(rkr->PrefNom("Settings Y"),Settings->y());
   rakarrack.set(rkr->PrefNom("Settings W"),Settings->w());
   rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
+  }
   
+  if((i==3) || (i==0))
+  {
   rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
   rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
   rakarrack.set(rkr->PrefNom("Metronome Volume"),rkr->Metro_Vol);
