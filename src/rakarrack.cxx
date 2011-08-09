@@ -13563,7 +13563,7 @@ R average.");
       } // SliderW* eqp_HQ
       PEQ->end();
     } // Fl_Group* PEQ
-    { WHAWHA = new Fl_Group(12, 612, 158, 184);
+    { WHAWHA = new Fl_Group(320, 210, 158, 184);
       WHAWHA->box(FL_UP_BOX);
       WHAWHA->color(FL_FOREGROUND_COLOR);
       WHAWHA->selection_color(FL_FOREGROUND_COLOR);
@@ -13571,7 +13571,7 @@ R average.");
       WHAWHA->user_data((void*)(1));
       WHAWHA->align(Fl_Align(96|FL_ALIGN_INSIDE));
       WHAWHA->hide();
-      { WhaWha_activar = new Fl_Light_Button(17, 616, 34, 18, "On");
+      { WhaWha_activar = new Fl_Light_Button(325, 214, 34, 18, "On");
         WhaWha_activar->shortcut(0x36);
         WhaWha_activar->color((Fl_Color)62);
         WhaWha_activar->selection_color((Fl_Color)1);
@@ -13580,7 +13580,7 @@ R average.");
         WhaWha_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
         WhaWha_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* WhaWha_activar
-      { WhaWha_preset = new Fl_Choice(89, 616, 76, 18, "Preset");
+      { WhaWha_preset = new Fl_Choice(397, 214, 76, 18, "Preset");
         WhaWha_preset->down_box(FL_BORDER_BOX);
         WhaWha_preset->selection_color(FL_FOREGROUND_COLOR);
         WhaWha_preset->labelsize(10);
@@ -13591,7 +13591,7 @@ R average.");
         WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
         WhaWha_preset->menu(menu_WhaWha_preset);
       } // Fl_Choice* WhaWha_preset
-      { WhaWha_WD = new SliderW(61, 641, 100, 10, "Wet/Dry");
+      { WhaWha_WD = new SliderW(369, 239, 100, 10, "Wet/Dry");
         WhaWha_WD->type(5);
         WhaWha_WD->box(FL_FLAT_BOX);
         WhaWha_WD->color((Fl_Color)178);
@@ -13608,7 +13608,7 @@ R average.");
         WhaWha_WD->align(Fl_Align(FL_ALIGN_LEFT));
         WhaWha_WD->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_WD
-      { WhaWha_pan = new SliderW(61, 653, 100, 10, "Pan");
+      { WhaWha_pan = new SliderW(369, 251, 100, 10, "Pan");
         WhaWha_pan->type(5);
         WhaWha_pan->box(FL_FLAT_BOX);
         WhaWha_pan->color((Fl_Color)178);
@@ -13625,7 +13625,7 @@ R average.");
         WhaWha_pan->align(Fl_Align(FL_ALIGN_LEFT));
         WhaWha_pan->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_pan
-      { WhaWha_freq = new SliderW(61, 665, 100, 10, "Tempo");
+      { WhaWha_freq = new SliderW(369, 263, 100, 10, "Tempo");
         WhaWha_freq->type(5);
         WhaWha_freq->box(FL_FLAT_BOX);
         WhaWha_freq->color((Fl_Color)178);
@@ -13642,7 +13642,7 @@ R average.");
         WhaWha_freq->align(Fl_Align(FL_ALIGN_LEFT));
         WhaWha_freq->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_freq
-      { WhaWha_rnd = new SliderW(61, 677, 100, 10, "Rnd");
+      { WhaWha_rnd = new SliderW(369, 275, 100, 10, "Rnd");
         WhaWha_rnd->type(5);
         WhaWha_rnd->box(FL_FLAT_BOX);
         WhaWha_rnd->color((Fl_Color)178);
@@ -13658,7 +13658,7 @@ R average.");
         WhaWha_rnd->align(Fl_Align(FL_ALIGN_LEFT));
         WhaWha_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_rnd
-      { Fl_Choice* o = WhaWha_lfotype = new Fl_Choice(73, 691, 72, 16, "LFO Type");
+      { Fl_Choice* o = WhaWha_lfotype = new Fl_Choice(381, 289, 72, 16, "LFO Type");
         WhaWha_lfotype->down_box(FL_BORDER_BOX);
         WhaWha_lfotype->selection_color(FL_FOREGROUND_COLOR);
         WhaWha_lfotype->labelsize(10);
@@ -13668,7 +13668,7 @@ R average.");
         WhaWha_lfotype->callback((Fl_Callback*)cb_WhaWha_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* WhaWha_lfotype
-      { WhaWha_stdf = new SliderW(61, 717, 100, 10, "St.df");
+      { WhaWha_stdf = new SliderW(369, 315, 100, 10, "St.df");
         WhaWha_stdf->type(5);
         WhaWha_stdf->box(FL_FLAT_BOX);
         WhaWha_stdf->color((Fl_Color)178);
@@ -13684,7 +13684,7 @@ R average.");
         WhaWha_stdf->align(Fl_Align(FL_ALIGN_LEFT));
         WhaWha_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_stdf
-      { WhaWha_dpth = new SliderW(61, 729, 100, 10, "Depth");
+      { WhaWha_dpth = new SliderW(369, 327, 100, 10, "Depth");
         WhaWha_dpth->type(5);
         WhaWha_dpth->box(FL_FLAT_BOX);
         WhaWha_dpth->color((Fl_Color)178);
@@ -13700,7 +13700,7 @@ R average.");
         WhaWha_dpth->align(Fl_Align(FL_ALIGN_LEFT));
         WhaWha_dpth->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_dpth
-      { WhaWha_ampsns = new SliderW(61, 741, 100, 10, "Amp.S.");
+      { WhaWha_ampsns = new SliderW(369, 339, 100, 10, "Amp.S.");
         WhaWha_ampsns->type(5);
         WhaWha_ampsns->box(FL_FLAT_BOX);
         WhaWha_ampsns->color((Fl_Color)178);
@@ -13716,13 +13716,13 @@ R average.");
         WhaWha_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
         WhaWha_ampsns->when(FL_WHEN_CHANGED);
       } // SliderW* WhaWha_ampsns
-      { WhaWha_ampsnsinv = new Fl_Check_Button(67, 759, 70, 15, "Amp.S Inv");
+      { WhaWha_ampsnsinv = new Fl_Check_Button(375, 357, 70, 15, "Amp.S Inv");
         WhaWha_ampsnsinv->down_box(FL_BORDER_BOX);
         WhaWha_ampsnsinv->labelsize(10);
         WhaWha_ampsnsinv->labelcolor(FL_BACKGROUND2_COLOR);
         WhaWha_ampsnsinv->callback((Fl_Callback*)cb_WhaWha_ampsnsinv, (void*)(2));
       } // Fl_Check_Button* WhaWha_ampsnsinv
-      { WhaWha_smooth = new SliderW(61, 777, 100, 10, "Smooth");
+      { WhaWha_smooth = new SliderW(369, 375, 100, 10, "Smooth");
         WhaWha_smooth->type(5);
         WhaWha_smooth->box(FL_FLAT_BOX);
         WhaWha_smooth->color((Fl_Color)178);
@@ -13740,7 +13740,7 @@ R average.");
       } // SliderW* WhaWha_smooth
       WHAWHA->end();
     } // Fl_Group* WHAWHA
-    { ALIENWAH = new Fl_Group(193, 613, 158, 184);
+    { ALIENWAH = new Fl_Group(320, 212, 158, 184);
       ALIENWAH->box(FL_UP_BOX);
       ALIENWAH->color(FL_FOREGROUND_COLOR);
       ALIENWAH->selection_color(FL_FOREGROUND_COLOR);
@@ -13748,7 +13748,7 @@ R average.");
       ALIENWAH->user_data((void*)(1));
       ALIENWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ALIENWAH->hide();
-      { Alienwah_activar = new Fl_Light_Button(197, 617, 34, 18, "On");
+      { Alienwah_activar = new Fl_Light_Button(324, 216, 34, 18, "On");
         Alienwah_activar->shortcut(0x36);
         Alienwah_activar->color((Fl_Color)62);
         Alienwah_activar->selection_color((Fl_Color)1);
@@ -13757,7 +13757,7 @@ R average.");
         Alienwah_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
         Alienwah_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Alienwah_activar
-      { Alienwah_preset = new Fl_Choice(269, 617, 76, 18, "Preset");
+      { Alienwah_preset = new Fl_Choice(396, 216, 76, 18, "Preset");
         Alienwah_preset->down_box(FL_BORDER_BOX);
         Alienwah_preset->selection_color(FL_FOREGROUND_COLOR);
         Alienwah_preset->labelsize(10);
@@ -13768,7 +13768,7 @@ R average.");
         Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
         Alienwah_preset->menu(menu_Alienwah_preset);
       } // Fl_Choice* Alienwah_preset
-      { Alienwah_WD = new SliderW(241, 642, 100, 10, "Wet/Dry");
+      { Alienwah_WD = new SliderW(368, 241, 100, 10, "Wet/Dry");
         Alienwah_WD->type(5);
         Alienwah_WD->box(FL_FLAT_BOX);
         Alienwah_WD->color((Fl_Color)178);
@@ -13785,7 +13785,7 @@ R average.");
         Alienwah_WD->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_WD->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_WD
-      { Alienwah_pan = new SliderW(241, 654, 100, 10, "Pan");
+      { Alienwah_pan = new SliderW(368, 253, 100, 10, "Pan");
         Alienwah_pan->type(5);
         Alienwah_pan->box(FL_FLAT_BOX);
         Alienwah_pan->color((Fl_Color)178);
@@ -13802,7 +13802,7 @@ R average.");
         Alienwah_pan->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_pan->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_pan
-      { Alienwah_freq = new SliderW(241, 666, 100, 10, "Tempo");
+      { Alienwah_freq = new SliderW(368, 265, 100, 10, "Tempo");
         Alienwah_freq->type(5);
         Alienwah_freq->box(FL_FLAT_BOX);
         Alienwah_freq->color((Fl_Color)178);
@@ -13819,7 +13819,7 @@ R average.");
         Alienwah_freq->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_freq->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_freq
-      { Alienwah_rnd = new SliderW(241, 678, 100, 10, "Rnd");
+      { Alienwah_rnd = new SliderW(368, 277, 100, 10, "Rnd");
         Alienwah_rnd->type(5);
         Alienwah_rnd->box(FL_FLAT_BOX);
         Alienwah_rnd->color((Fl_Color)178);
@@ -13835,7 +13835,7 @@ R average.");
         Alienwah_rnd->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_rnd
-      { Fl_Choice* o = Alienwah_lfotype = new Fl_Choice(253, 692, 72, 16, "LFO Type");
+      { Fl_Choice* o = Alienwah_lfotype = new Fl_Choice(380, 291, 72, 16, "LFO Type");
         Alienwah_lfotype->down_box(FL_BORDER_BOX);
         Alienwah_lfotype->selection_color(FL_FOREGROUND_COLOR);
         Alienwah_lfotype->labelsize(10);
@@ -13845,7 +13845,7 @@ R average.");
         Alienwah_lfotype->callback((Fl_Callback*)cb_Alienwah_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* Alienwah_lfotype
-      { Alienwah_phase = new SliderW(241, 718, 100, 10, "Phase");
+      { Alienwah_phase = new SliderW(368, 317, 100, 10, "Phase");
         Alienwah_phase->type(5);
         Alienwah_phase->box(FL_FLAT_BOX);
         Alienwah_phase->color((Fl_Color)178);
@@ -13861,7 +13861,7 @@ R average.");
         Alienwah_phase->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_phase->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_phase
-      { Alienwah_stdf = new SliderW(241, 730, 100, 10, "St.df");
+      { Alienwah_stdf = new SliderW(368, 329, 100, 10, "St.df");
         Alienwah_stdf->type(5);
         Alienwah_stdf->box(FL_FLAT_BOX);
         Alienwah_stdf->color((Fl_Color)178);
@@ -13877,7 +13877,7 @@ R average.");
         Alienwah_stdf->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_stdf
-      { Alienwah_dpth = new SliderW(241, 742, 100, 10, "Depth");
+      { Alienwah_dpth = new SliderW(368, 341, 100, 10, "Depth");
         Alienwah_dpth->type(5);
         Alienwah_dpth->box(FL_FLAT_BOX);
         Alienwah_dpth->color((Fl_Color)178);
@@ -13893,7 +13893,7 @@ R average.");
         Alienwah_dpth->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_dpth->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_dpth
-      { Alienwah_delay = new SliderW(241, 754, 100, 10, "Delay");
+      { Alienwah_delay = new SliderW(368, 353, 100, 10, "Delay");
         Alienwah_delay->type(5);
         Alienwah_delay->box(FL_FLAT_BOX);
         Alienwah_delay->color((Fl_Color)178);
@@ -13909,7 +13909,7 @@ R average.");
         Alienwah_delay->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_delay->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_delay
-      { Alienwah_fb = new SliderW(241, 766, 100, 10, "Fb");
+      { Alienwah_fb = new SliderW(368, 365, 100, 10, "Fb");
         Alienwah_fb->type(5);
         Alienwah_fb->box(FL_FLAT_BOX);
         Alienwah_fb->color((Fl_Color)178);
@@ -13925,7 +13925,7 @@ R average.");
         Alienwah_fb->align(Fl_Align(FL_ALIGN_LEFT));
         Alienwah_fb->when(FL_WHEN_CHANGED);
       } // SliderW* Alienwah_fb
-      { Alienwah_LR = new SliderW(241, 779, 100, 10, "L/R.Cr");
+      { Alienwah_LR = new SliderW(368, 378, 100, 10, "L/R.Cr");
         Alienwah_LR->type(5);
         Alienwah_LR->box(FL_FLAT_BOX);
         Alienwah_LR->color((Fl_Color)178);
