@@ -35,10 +35,11 @@ jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
 void *dataout;
-jack_session_event_t *s_event;
 int jackprocess (jack_nframes_t nframes, void *arg);
+#ifdef JACK_SESSION
+jack_session_event_t *s_event;
 void session_callback (jack_session_event_t *event, void *arg);
-
+#endif
 
 int
 JACKstart (RKR * rkr_, jack_client_t * jackclient_)
