@@ -240,8 +240,8 @@ void fft_filter::mayer_fht(float *fz, int n)
              bg0     = (bc1 + bc2);
              bf3     = (bs3 - bs4);     
              bf2     = (bs3 + bs4);
-             bg3     = M_SQRT2*bc4;               
-             bg2     = M_SQRT2*bc3;
+             bg3     = M_SQRT22*bc4;               
+             bg2     = M_SQRT22*bc3;
              fi[4 ] = bf0 - bf2;
              fi[0 ] = bf0 + bf2;
              fi[6 ] = bf1 - bf3;
@@ -280,8 +280,8 @@ void fft_filter::mayer_fht(float *fz, int n)
              fi[k1]  = f1         + f3;
              g1      = gi[0 ] - gi[k1];
              g0      = gi[0 ] + gi[k1];
-             g3      = M_SQRT2  * gi[k3];
-             g2      = M_SQRT2  * gi[k2];
+             g3      = M_SQRT22  * gi[k3];
+             g2      = M_SQRT22  * gi[k2];
              gi[k2]  = g0         - g2;
              gi[0 ]  = g0         + g2;
              gi[k3]  = g1         - g3;

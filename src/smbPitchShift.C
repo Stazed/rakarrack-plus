@@ -49,23 +49,9 @@
 	Time Fourier Transform.
 	Author: (c)1999-2006 Stephan M. Bernsee <smb [AT] dspdimension [DOT] com>
 */
-PitchShifter::PitchShifter (long fftFrameSize_, long osamp_, float sampleRate_)
+PitchShifter::PitchShifter (long fftFrameSize, long osamp, float sampleRate)
 {
 
-init(fftFrameSize_, osamp_, sampleRate_);
-
-} 
-
-PitchShifter::~PitchShifter ()
-{
-} 
-
-void
-PitchShifter::init(long fftFrameSize_, long osamp_, float sampleRate_)
-{
-  fftFrameSize = fftFrameSize_;
-  osamp = osamp_;
-  sampleRate = sampleRate_;
   /* set up some handy variables */
   fftFrameSize2 = fftFrameSize / 2;
   FS_osamp = fftFrameSize2 * osamp;
@@ -91,32 +77,19 @@ PitchShifter::init(long fftFrameSize_, long osamp_, float sampleRate_)
   memset (gOutputAccum, 0, 2 * MAX_FRAME_LENGTH * sizeof (float));
   memset (gAnaFreq, 0, MAX_FRAME_LENGTH * sizeof (float));
   memset (gAnaMagn, 0, MAX_FRAME_LENGTH * sizeof (float));
-  memset (window, 0, MAX_FRAME_LENGTH * sizeof (float));
- 
-  make_window();
+} 
 
-}
-
-void
-PitchShifter::make_window()
+PitchShifter::~PitchShifter ()
 {
-int k;
-	  for (k = 0; k < fftFrameSize; k++)
-	    {
-	      double dk = (double) k;
-	      window[k] =
-		-.5 * cos (dpi_coef * dk) +
-		.5;
-	    }
-}
+} 
+
 
 void
 PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
-			     long fftFrameSize_, long osamp_, float sampleRate_,
+			     long fftFrameSize, long osamp, float sampleRate,
 			     float *indata, float *outdata)
 {
   long i;
-  int fn = (int) fftFrameSize;
 
   /* main processing loop */
   for (i = 0; i < numSampsToProcess; i++)
@@ -135,26 +108,24 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 	  /* do windowing and re,im interleave */
 	  for (k = 0; k < fftFrameSize; k++)
 	    {
-
-	      //gFFTworksp[2 * k] = gInFIFO[k] * window[k];
-	      //gFFTworksp[2 * k + 1] = 0.;
-             gFFTworksp[k] = gInFIFO[k] * window[k];
+	      double dk = (double) k;
+	      window =
+		-.5 * cos (dpi_coef * dk) +
+		.5;
+	      gFFTworksp[2 * k] = gInFIFO[k] * window;
+	      gFFTworksp[2 * k + 1] = 0.;
 	    }
 	  /* ***************** ANALYSIS ******************* */
 	  /* do transform */
-	  //smbFft (gFFTworksp, fftFrameSize, -1);
-          mayer.mayer_realfft(fn, gFFTworksp);
+	  smbFft (gFFTworksp, fftFrameSize, -1);
 
 	  /* this is the analysis step */
 	  for (k = 0; k <= fftFrameSize2; k++)
 	    {
               double dk = (double) k;
 	      /* de-interlace FFT buffer */
-	      //real = gFFTworksp[2 * k];
-	      //imag = gFFTworksp[2 * k + 1];
-	      real = gFFTworksp[k];
-	      imag = gFFTworksp[1+fftFrameSize - k];
-
+	      real = gFFTworksp[2 * k];
+	      imag = gFFTworksp[2 * k + 1];
 
 	      /* compute magnitude and phase */
 	      magn = 2. * sqrt (real * real + imag * imag);
@@ -226,26 +197,24 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 	      phase = gSumPhase[k];
 
 	      /* get real and imag part and re-interleave */
-	      //gFFTworksp[2 * k] = magn * cos (phase);
-	      //gFFTworksp[2 * k + 1] = magn * sin (phase);
-	      gFFTworksp[k] = magn * cos (phase);
-	      gFFTworksp[1+fftFrameSize2 + k] = magn * sin (phase);
+	      gFFTworksp[2 * k] = magn * cos (phase);
+	      gFFTworksp[2 * k + 1] = magn * sin (phase);
 	    }
 	  /* zero negative frequencies */
-	  //for (k = fftFrameSize + 2; k < 2 * fftFrameSize; k++)
-	    //gFFTworksp[k] = 0.;
-	for (k = fftFrameSize2+1; k < fftFrameSize+1; k++)
-	gFFTworksp[k] = 0.;
+	  for (k = fftFrameSize + 2; k < 2 * fftFrameSize; k++)
+	    gFFTworksp[k] = 0.;
+
 	  /* do inverse transform */
-	  //smbFft (gFFTworksp, fftFrameSize, 1);
-          mayer.mayer_realifft(fn, gFFTworksp);
+	  smbFft (gFFTworksp, fftFrameSize, 1);
 
 	  /* do windowing and add to output accumulator */
 	  for (k = 0; k < fftFrameSize; k++)
 	    {
+	      window =
+		-.5 * cos (dpi_coef * (double) k) +
+		.5;
 	      gOutputAccum[k] +=
-		//2. * window[k] * gFFTworksp[2 * k] / FS_osamp;
-                  2. * window[k] * gFFTworksp[k] / FS_osamp;
+		2. * window * gFFTworksp[2 * k] / FS_osamp;
 	  } for (k = 0; k < stepSize; k++)
 	    gOutFIFO[k] = gOutputAccum[k];
 
