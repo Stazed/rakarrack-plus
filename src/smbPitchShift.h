@@ -43,19 +43,26 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
+#include "mayer_fft.h"
 
 
 #define MAX_FRAME_LENGTH 2048
 class PitchShifter
 {
-public:PitchShifter (long fftFrameSize, long osamp, float sampleRate);
+public:PitchShifter (long fftFrameSize_, long osamp_, float sampleRate);
    ~PitchShifter ();
   void smbPitchShift (float pitchShift, long numSampsToProcess,
-		      long fftFrameSize, long osamp, float sampleRate,
+		      long fftFrameSize_, long osamp_, float sampleRate_,
 		      float *indata, float *outdata);
+
+  void init(long fftFrameSize_, long osamp_, float sampleRate_);
+  void make_window();
+
   void smbFft (float *fftBuffer, long fftFrameSize, long sign);
   double smbAtan2 (double x, double y);
   float ratio;
+  float sampleRate;
+
 private:
   float gInFIFO[MAX_FRAME_LENGTH];
   float gOutFIFO[MAX_FRAME_LENGTH];
@@ -67,10 +74,14 @@ private:
   float gAnaMagn[MAX_FRAME_LENGTH];
   float gSynFreq[MAX_FRAME_LENGTH];
   float gSynMagn[MAX_FRAME_LENGTH];
+  double window[MAX_FRAME_LENGTH];
+
   double dfftFrameSize, coef_dfftFrameSize, dpi_coef;
-  double magn, phase, tmp, window, real, imag;
+  double magn, phase, tmp, real, imag;
   double freqPerBin, expct, coefPB, coef_dpi, coef_mpi;
-  long k, qpd, index, inFifoLatency, stepSize, fftFrameSize2, gRover, FS_osamp;
+  long k, qpd, index, inFifoLatency, stepSize, fftFrameSize, fftFrameSize2, gRover, osamp, FS_osamp;
+
+  class fft_filter mayer;
 };
 
 

@@ -34,6 +34,7 @@ rakarrack_SOURCES = main.C \
 	Harmonizer.h \
 	jack.h \
 	Looper.h \
+        mayer_fft.h \
 	MBDist.h \
 	MBVvol.h \
 	metronome.h\
@@ -114,6 +115,7 @@ rakarrack_SOURCES = main.C \
 	Expander.C \
 	Ring.C \
 	Shuffle.C \
+        mayer_fft.C \
 	MBVvol.C \
 	metronome.C\
 	Convolotron.C \
