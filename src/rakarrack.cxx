@@ -22937,10 +22937,13 @@ void RKRGUI::load_stat() {
   }
 }
 
-void RKRGUI::save_stat(int i) {
+void RKRGUI::save_stat(int whati) {
+  int i,k;
+  char temp1[128];
+  
   Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
   
-  if (i==0)
+  if (whati==0)
   {
   rakarrack.set(rkr->PrefNom("Principal X"),Principal->x());
   rakarrack.set(rkr->PrefNom("Principal Y"),Principal->y());
@@ -23008,7 +23011,7 @@ void RKRGUI::save_stat(int i) {
   }
   
   
-  if (i==1)
+  if (whati==1)
   {
   rakarrack.set(rkr->PrefNom("BankWindow X"),BankWindow->x());
   rakarrack.set(rkr->PrefNom("BankWindow Y"),BankWindow->y());
@@ -23018,7 +23021,7 @@ void RKRGUI::save_stat(int i) {
   
   }
   
-  if (i==5)
+  if (whati==5)
   {
   rakarrack.set(rkr->PrefNom("MIDI Learn X"),MIDILearn->x());
   rakarrack.set(rkr->PrefNom("MIDI Learn Y"),MIDILearn->y());
@@ -23027,7 +23030,7 @@ void RKRGUI::save_stat(int i) {
   }
   
   
-  if (i==6)
+  if (whati==6)
   {
   rakarrack.set(rkr->PrefNom("Trigger X"),Trigger->x());
   rakarrack.set(rkr->PrefNom("Trigger Y"),Trigger->y());
@@ -23046,7 +23049,7 @@ void RKRGUI::save_stat(int i) {
   
   
   
-  if (i==2)
+  if (whati==2)
   {
   rakarrack.set(rkr->PrefNom("Order X"),Order->x());
   rakarrack.set(rkr->PrefNom("Order Y"),Order->y());
@@ -23054,7 +23057,7 @@ void RKRGUI::save_stat(int i) {
   rakarrack.set(rkr->PrefNom("Order H"),Order->h());
   }
   
-  if (i==3)
+  if (whati==3)
   {
   rakarrack.set(rkr->PrefNom("Settings X"),Settings->x());
   rakarrack.set(rkr->PrefNom("Settings Y"),Settings->y());
@@ -23062,7 +23065,7 @@ void RKRGUI::save_stat(int i) {
   rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
   }
   
-  if((i==3) || (i==0))
+  if((whati==3) || (whati==0))
   {
   rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
   rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
@@ -23151,8 +23154,7 @@ void RKRGUI::save_stat(int i) {
   
   
   
-  int k=1;
-  char temp1[128];
+  k=1;
   
   
   for(i=0; i<128;i++)
@@ -23162,6 +23164,14 @@ void RKRGUI::save_stat(int i) {
         rakarrack.set(rkr->PrefNom(temp1),rkr->M_table[i].bank*1000+rkr->M_table[i].preset);
   }
   
+  
+  }
+  
+  
+  
+  
+  if(whati==3)
+  {
   
   
   for(i=1; i<=JackCo->size();i++)

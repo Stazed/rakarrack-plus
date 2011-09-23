@@ -870,7 +870,8 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {} {
+class RKRGUI {selected
+} {
   decl {RKR *rkr;} {private local
   }
   decl {int made;} {private local
@@ -8078,7 +8079,7 @@ rkr->efx_Sustainer->changepar(1,(int)o->value());}
         }
       }
       Fl_Group SEQUENCE {
-        user_data 1 selected
+        user_data 1
         xywh {319 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button seq_activar {
@@ -13013,10 +13014,11 @@ rkr->M_table[i].preset=f-3000;
 
 }} {}
   }
-  Function {save_stat(int i)} {} {
-    code {Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
+  Function {save_stat(int whati)} {} {
+    code {int i;
+Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
-if (i==0)
+if (whati==0)
 {
 rakarrack.set(rkr->PrefNom("Principal X"),Principal->x());
 rakarrack.set(rkr->PrefNom("Principal Y"),Principal->y());
@@ -13084,7 +13086,7 @@ rakarrack.set(rkr->PrefNom("TapTempo Set"),(int)rkr->Tap_SetValue);
 }
 
 
-if (i==1)
+if (whati==1)
 {
 rakarrack.set(rkr->PrefNom("BankWindow X"),BankWindow->x());
 rakarrack.set(rkr->PrefNom("BankWindow Y"),BankWindow->y());
@@ -13094,7 +13096,7 @@ rakarrack.set(rkr->PrefNom("BankWindow H"),BankWindow->h());
 
 }
 
-if (i==5)
+if (whati==5)
 {
 rakarrack.set(rkr->PrefNom("MIDI Learn X"),MIDILearn->x());
 rakarrack.set(rkr->PrefNom("MIDI Learn Y"),MIDILearn->y());
@@ -13103,7 +13105,7 @@ rakarrack.set(rkr->PrefNom("MIDI Learn H"),MIDILearn->h());
 }
 
 
-if (i==6)
+if (whati==6)
 {
 rakarrack.set(rkr->PrefNom("Trigger X"),Trigger->x());
 rakarrack.set(rkr->PrefNom("Trigger Y"),Trigger->y());
@@ -13122,7 +13124,7 @@ rakarrack.set(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum);
 
 
 
-if (i==2)
+if (whati==2)
 {
 rakarrack.set(rkr->PrefNom("Order X"),Order->x());
 rakarrack.set(rkr->PrefNom("Order Y"),Order->y());
@@ -13130,7 +13132,7 @@ rakarrack.set(rkr->PrefNom("Order W"),Order->w());
 rakarrack.set(rkr->PrefNom("Order H"),Order->h());
 }
 
-if (i==3)
+if (whati==3)
 {
 rakarrack.set(rkr->PrefNom("Settings X"),Settings->x());
 rakarrack.set(rkr->PrefNom("Settings Y"),Settings->y());
@@ -13138,7 +13140,7 @@ rakarrack.set(rkr->PrefNom("Settings W"),Settings->w());
 rakarrack.set(rkr->PrefNom("Settings H"),Settings->h());
 }
 
-if((i==3) || (i==0))
+if((whati==3) || (whati==0))
 {
 rakarrack.set(rkr->PrefNom("UserName"),rkr->UserRealName);
 rakarrack.set(rkr->PrefNom("Preserve Gain/Master"),rkr->actuvol);
@@ -18405,8 +18407,7 @@ Put_Loaded();
 ActivarGeneral->value(1);
 ActivarGeneral->do_callback();} {}
   }
-  Function {drag_effect()} {open
-  } {
+  Function {drag_effect()} {} {
     code {if((drag!=1000) && (Fl::event_button1()==0))
 {
 Fl_Widget *w = Fl::belowmouse();

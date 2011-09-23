@@ -4338,7 +4338,7 @@ public:
   void Leds_Color_Change(Fl_Color bcolor);
   void put_icon(Fl_Window* window);
   void load_stat();
-  void save_stat(int i);
+  void save_stat(int whati);
   void Put_Loaded();
   static void tick(void* v);
   static void preset_click(Fl_Button* o, void* v);
