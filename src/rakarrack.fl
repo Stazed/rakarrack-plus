@@ -870,7 +870,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   }
 } 
 
-class RKRGUI {selected
+class RKRGUI {open
 } {
   decl {RKR *rkr;} {private local
   }
@@ -13014,8 +13014,11 @@ rkr->M_table[i].preset=f-3000;
 
 }} {}
   }
-  Function {save_stat(int whati)} {} {
-    code {int i;
+  Function {save_stat(int whati)} {open
+  } {
+    code {int i,k;
+char temp1[128];
+
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
 if (whati==0)
@@ -13229,8 +13232,7 @@ rakarrack.set(rkr->PrefNom("Enable Tooltips"),rkr->ena_tool);
 
 
 
-int k=1;
-char temp1[128];
+k=1;
 
 
 for(i=0; i<128;i++)
@@ -13240,6 +13242,14 @@ for(i=0; i<128;i++)
       rakarrack.set(rkr->PrefNom(temp1),rkr->M_table[i].bank*1000+rkr->M_table[i].preset);
 }
 
+
+}
+
+
+
+
+if(whati==3)
+{
 
 
 for(i=1; i<=JackCo->size();i++)
@@ -13276,7 +13286,8 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
