@@ -55,8 +55,9 @@ http://crca.ucsd.edu/~msp/software.html */
 /* Use below only as needed /
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 */
+
+#include <math.h>
 #include "mayer_fft.h"
 
 
@@ -392,8 +393,59 @@ void fft_filter::mayer_realifft(int n, float *real)
  mayer_fht(real,n);
 }
 
-void fft_filter::make_window(int size)
+void 
+fft_filter::realifft(int n, float *real)
 {
+//this way, realpart[0] = real[0] 
+//and imagpart[0] = real[n/2] for easier indexing
+//This function will reverse the order set with reallfft()
+int i,j,k;
+float tmp = 0.0f;
+
+real[n/2] = 0.0f;
+//unwrap this thing into something easier to index
+ for (i=1+(n/2),j=n-1,k=n;i<k;i++,j--) {
+ tmp = real[j];
+ real[j] = real[i];
+ real[i] = tmp;
+ }
+
+mayer_realifft(n, real);
+}
+
+
+void 
+fft_filter::realfft(int n, float *real)
+{
+//this way, realpart[0] = real[0] 
+//and imagpart[0] = real[n/2] for easier indexing
+int i,j,k;
+float tmp = 0.0f;
+mayer_realfft(n, real);
+real[n/2] = 0.0f;
+//unwrap this thing into something easier to index
+ for (i=1+(n/2),j=n-1,k=(n - n/4);i<k;i++,j--) {
+ tmp = real[j];
+ real[j] = real[i];
+ real[i] = tmp;
+
+ }
+
+}
+
+void fft_filter::make_window(int n, float *window)
+{
+int i;
+float Ts = 1.0f/((float) n);
+float x = 2.0f*M_PI*Ts;
+float tt = 0.0f;
+for(i=0; i<n; i++)
+{
+  window[i] = 0.5f - 0.5f*cosf(tt);
+  tt+=x;
+
+}
+
 }
 
 void fft_filter::load_impulse(int size, char* filename)

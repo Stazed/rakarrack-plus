@@ -70,7 +70,7 @@ public:
   fft_filter();
   ~fft_filter ();
   void out (float * smpsl, float * smpr);
-  void make_window(int size);
+  void make_window(int n, float* window);
   void load_impulse(int size, char* filename);
   void run_filter(float* smps);
 
@@ -79,9 +79,10 @@ public:
 
   float *efxoutl;
   float *efxoutr;
-
-  void mayer_realifft(int n, float *real);
-  void mayer_realfft(int n, float *real);
+ 
+  //makes linear indexing easier
+  void realifft(int n, float *real);
+  void realfft(int n, float *real);
 
 //  void interleaved_real_fft(int n, float *real);
 //  void interleaved_real_ifft(int n, float *real);
@@ -90,7 +91,8 @@ private:
 void mayer_fft(int n, float *real, float *imag);
 void mayer_ifft(int n, float *real, float *imag);
 void mayer_fht(float *fz, int n);
-
+  void mayer_realifft(int n, float *real);
+  void mayer_realfft(int n, float *real);
 
 static float halsec[20];
 static float costab[20];
