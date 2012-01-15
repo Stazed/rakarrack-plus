@@ -73,7 +73,7 @@ public:
   void make_window(int n, float* window);
   void load_impulse(int size, char* filename);
   void run_filter(float* smps);
-
+  void resample_impulse(int size, float* ir);
   void cleanup ();
   float outvolume;
 

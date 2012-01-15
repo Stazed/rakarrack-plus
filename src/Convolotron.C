@@ -330,11 +330,11 @@ Convolotron::process_rbuf()
 	}
 
 
- 	memcpy(buf,rbuf,real_len*sizeof(float));
+ 	//memcpy(buf,rbuf,real_len*sizeof(float));
 
 	IRpowa = IRpowb = maxamp = 0.0f;
 	//compute IR signal power
-	 for(j=0;j<maxx_read;j++)
+	 for(j=0;j<length;j++)
 	 {
 	 IRpowa += fabsf(rbuf[j]);
             if(maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]);   //find maximum level to normalize	
@@ -350,6 +350,25 @@ Convolotron::process_rbuf()
 	 ngain = IRpowa/IRpowb;
 	 if (ngain > maxx_read) ngain = maxx_read;
 	 for(j=0; j<length; j++) buf[j] *= ngain; 
+        
+         if (Psafe) {
+         impulse.resample_impulse(length, buf);
+         length = 156;
+         convlength = length/fSAMPLE_RATE;
+         }
+         /*
+         //This section can be uncommented to make a text file you can plot
+         //with something like gnuplot
+         FILE * textfile;
+         textfile = fopen("IR.txt", "w");
+         if (textfile!=NULL)
+         {
+         for(j=0;j<length;j++) {
+         fprintf (textfile, "%d\t%f\n",j,buf[j]);
+         }
+         fclose (textfile);
+         }
+         */
 
          
 
@@ -394,6 +413,13 @@ Convolotron::setpreset (int npreset)
   Ppreset = npreset;
 };
 
+void
+Convolotron::UpdateLength ()
+{
+      convlength = ((float) Plength)/1000.0f;                   //time in seconds
+      length = (int) (nfSAMPLE_RATE * convlength);        //time in samples       
+      process_rbuf();
+}
 
 void
 Convolotron::changepar (int npar, int value)
@@ -408,22 +434,15 @@ Convolotron::changepar (int npar, int value)
       break;
     case 2:
       Psafe = value;
+      UpdateLength();
       break;
     case 3:
-      if (Psafe)
-      {
-      if (value < maxx_len)
       Plength = value;
-      else
-      Plength = maxx_len;
-      }
-      else Plength = value;
-      convlength = ((float) Plength)/1000.0f;                   //time in seconds
-      length = (int) (nfSAMPLE_RATE * convlength);        //time in samples       
-      process_rbuf();
+      UpdateLength();
       break;
     case 8:
       if(!setfile(value)) error_num=1;
+      UpdateLength();
       break;
     case 5:
       break;

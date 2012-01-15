@@ -27,6 +27,7 @@
 #include <sndfile.h>
 #include "global.h"
 #include "Resample.h"
+#include "mayer_fft.h"
 
 class Convolotron
 {
@@ -67,6 +68,7 @@ private:
   void setpanning (int Ppanning);
   void sethidamp (int Phidamp);
   void process_rbuf();
+  void UpdateLength ();
 
   int offset;
   int maxx_size,maxx_read,real_len,length;
@@ -96,6 +98,8 @@ private:
   class Resample *D_Resample;
 
    class FPreset *Fpre;
+
+  fft_filter impulse;
 
 
 };

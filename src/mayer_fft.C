@@ -59,7 +59,9 @@ http://crca.ucsd.edu/~msp/software.html */
 
 #include <math.h>
 #include "mayer_fft.h"
-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 
 float fft_filter::halsec[20]=\
@@ -404,7 +406,7 @@ float tmp = 0.0f;
 
 real[n/2] = 0.0f;
 //unwrap this thing into something easier to index
- for (i=1+(n/2),j=n-1,k=n;i<k;i++,j--) {
+ for (i=1+(n/2),j=n-1,k=(n - n/4);i<k;i++,j--) {
  tmp = real[j];
  real[j] = real[i];
  real[i] = tmp;
@@ -448,8 +450,96 @@ for(i=0; i<n; i++)
 
 }
 
+void fft_filter::resample_impulse(int size, float* ir)
+{
+
+float* fftBuf;
+float ratio = sqrtf(256.0f)/((float) size);
+int interval = size/128;
+int i,j;
+int fftLength = 512;
+while(fftLength<size) fftLength*=2;  //make sure it's a power of 2
+
+fftBuf = (float*) malloc(fftLength*sizeof(float));
+memset(fftBuf, 0.0f, fftLength*sizeof(float));
+memcpy(fftBuf, ir, size*sizeof(float));
+
+realfft(fftLength, fftBuf);
+for(i=0,j=fftLength/2; i<fftLength/2; i++, j++)
+{
+fftBuf[i]*=ratio;
+fftBuf[j]*=ratio;
+fftBuf[i] = fftBuf[i]*fftBuf[i] + fftBuf[j]*fftBuf[j];
+fftBuf[j] = 0.0f;
+}
+
+//now downsample this thing
+float tmp = 0.0f;
+float sign = -1.0f;
+int cnta, cntb, cntc;
+cnta=cntb=0;
+cntc=128;
+for(i=0;i<fftLength/2; i++)
+{
+tmp+=fftBuf[i];
+fftBuf[i] = 0.0f;
+if(++cntb>interval) {
+if(cnta<128)
+{
+fftBuf[cnta] =  tmp*sign;
+fftBuf[cntc] =  -tmp*sign;//tmp;
+sign*=-1.0f;
+}
+tmp = 0.0f;
+cntb = 0;
+cnta++;
+cntc++;
+}
+
+//fftBuf[0]  *= 1.14f;
+fftBuf[128]  = 0;
+//fftBuf[255] = 0;
+
+}
+memset(ir, 0.0f, size*sizeof(float));
+realifft(256, fftBuf);
+memcpy(ir, fftBuf, 256*sizeof(float));
+
+for(i=0; i<100; i++)
+{
+ir[i]=0.0f;
+}
+//Now convert it to something that looks more like a causal IR
+//by adding the forward asymmetry
+for(i=100; i<128; i++)
+{
+ir[i]*=(0.5f-0.5f*cos(M_PI*(float) (i-100)/27.0f));
+ir[i]*=(0.5f-0.5f*cos(M_PI*(float) (i-100)/27.0f)); //square it
+}
+for(i=128; i<256; i++)
+{
+ir[i]*=(0.5f-0.5f*cos(2.0f*M_PI*(float) i/256.0f));
+}
+for(i=0,j=100; j<256; j++,i++)
+{
+ir[i] = ir[j];
+ir[j] = 0.0f;
+}
+
+//Just some debugging code to verify the freq response
+/*realfft(256, ir);
+
+for(i=0; i<256; i++)
+{
+ir[i] = fabs(ir[i]);
+}*/
+
+}
+
 void fft_filter::load_impulse(int size, char* filename)
 {
+
+
 }
 
 void fft_filter::run_filter(float* smps)
