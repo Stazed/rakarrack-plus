@@ -1676,7 +1676,7 @@ RKR::loadnames()
 
    case 3:
     memset (temp, 0, sizeof (temp));
-    sprintf (temp, BankFilename);
+    sprintf (temp, "%s",BankFilename);
     break;
    
    }

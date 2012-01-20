@@ -41,7 +41,7 @@ RKR::Message (int prio, const char *labelwin, const char *message_text)
   w->image (a);
   w->align (FL_ALIGN_TOP | FL_ALIGN_INSIDE);
   w->parent ()->copy_label (labelwin);
-  fl_message (message_text);
+  fl_message ("%s",message_text);
   return (0);
 
 };

@@ -13014,8 +13014,7 @@ rkr->M_table[i].preset=f-3000;
 
 }} {}
   }
-  Function {save_stat(int whati)} {open
-  } {
+  Function {save_stat(int whati)} {} {
     code {int i,k;
 char temp1[128];
 
@@ -13286,8 +13285,7 @@ for(i=1; i<=JackIn->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -13630,7 +13628,7 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
   Fl_Widget *m = fl_message_icon();
   m->parent()->copy_label(rkr->jackcliname);
   sprintf(temp2,"Overwrite? \\"%s\\"",w->label());
-  ok=fl_choice(temp2,"No","Yes",NULL);
+  ok=fl_choice("%d",temp2,"No","Yes",NULL);
  if (!ok)
  { 
  o->value(0);
@@ -14889,7 +14887,7 @@ if (rkr->modified)
  w->parent()->copy_label(rkr->jackcliname);
  
 
- ok=fl_choice("Bank was modified, but not saved","Discard","Save",NULL);
+ ok=fl_choice("%d","Bank was modified, but not saved","Discard","Save",NULL);
 
 
 
@@ -17996,14 +17994,15 @@ if(strncmp(s->text(),"*",1)!=0)
 } 
 
 sprintf(temp2,"Delete? \\"%s\\"",s->text());
-ok=fl_choice(temp2,"No","Yes",NULL);
+ok=fl_choice("%d",temp2,"No","Yes",NULL);
 if (!ok) return;
 memset(Rname,0,sizeof(Rname));
 sprintf(Rname,"%s",s->text());
 s->remove(s->value());
 s->value(0);
 s->redraw();
-rkr->DelIntPreset(num,Rname);} {}
+rkr->DelIntPreset(num,Rname);} {selected
+    }
   }
   Function {Prep_Reorden(int source, int dest)} {} {
     code {int x = rkr->efx_order[source];
