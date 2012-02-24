@@ -80,6 +80,8 @@ class RKRGUI {
   RKR *rkr; 
   int made; 
   Fl_Help_Dialog *visor; 
+  struct list_element *mBankNameList;
+  struct list_element *mBankNameListTail;
 public:
   Fl_Double_Window* make_window();
   Fl_Double_Window *Principal;
@@ -4394,5 +4396,7 @@ public:
   void Put_MidiTable();
   void RandomPreset();
   void drag_effect();
+  int AddBankName(const char *name);
+  void ClearBankNames();
 };
 #endif

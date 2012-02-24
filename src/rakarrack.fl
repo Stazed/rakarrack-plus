@@ -878,9 +878,9 @@ class RKRGUI {open
   }
   decl {Fl_Help_Dialog *visor;} {private local
   }
-  decl {struct list_element *mBankNameList; } { private local
+  decl {struct list_element *mBankNameList;} {private local
   }
-  decl {struct list_element *mBankNameListTail; } { private local
+  decl {struct list_element *mBankNameListTail;} {private local
   }
   Function {make_window()} {} {
     Fl_Window Principal {
@@ -10947,7 +10947,7 @@ UpdateTGUI();
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);}
-      xywh {1528 288 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {1488 150 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -11072,22 +11072,13 @@ put_icon(AboutWin);}
       }
       Fl_Choice CH_UB {
         label {User Banks       }
-        callback {const char *chname;
-
-const Fl_Menu_Item *p, *m;  
-m = o->menu();
-p=m->next((int)o->value());
-chname=p->label();
-
-is_modified();
-
-int ok=rkr->loadbank((char *)v);
+        callback {int ok=rkr->loadbank((char *)v);
 if(ok) 
 {
 BankWin_Label((char *)v);
 Put_Loaded_Bank();
 unlight_preset(rkr->Selected_Preset);
-}}
+}} open selected
         xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
       } {}
       Fl_Group ob {
@@ -17762,8 +17753,7 @@ if(tecla != last_tecla)
 return(1000);} {}
   }
   Function {ScanDir()} {} {
-    code {
-  char nombre[64];
+    code {char nombre[64];
   char *nombank;
   DIR *dir;
   struct dirent *fs;
@@ -17819,10 +17809,8 @@ return(1000);} {}
   }
   closedir(dir);
 
-  CH_UB->value(0);
-} {}
-}
-
+  CH_UB->value(0);} {}
+  }
   Function {prevnext(int e)} {return_type {static int}
   } {
     code {if(e==5)
@@ -18042,8 +18030,7 @@ sprintf(Rname,"%s",s->text());
 s->remove(s->value());
 s->value(0);
 s->redraw();
-rkr->DelIntPreset(num,Rname);} {selected
-    }
+rkr->DelIntPreset(num,Rname);} {}
   }
   Function {Prep_Reorden(int source, int dest)} {} {
     code {int x = rkr->efx_order[source];
@@ -18471,10 +18458,9 @@ if(drag != (int)k-770) Prep_Reorden(drag,(int)k-770);
 drag=1000;
 }} {}
   }
-
-Function { AddBankName(const char *name) } { return_type int } {
-code {
-        struct list_element *elem;
+  Function {AddBankName(const char *name)} {return_type int
+  } {
+    code {struct list_element *elem;
 
         elem = (struct list_element *)calloc(1,sizeof(struct list_element));
         if (elem == NULL) {
@@ -18493,21 +18479,16 @@ code {
                 insque(elem, mBankNameListTail);
         }
         mBankNameListTail = elem;
-        return 1;
-}  {}
-}
-
-Function {ClearBankNames()} {} {
-code {
-        struct list_element *elem;
+        return 1;} {}
+  }
+  Function {ClearBankNames()} {} {
+    code {struct list_element *elem;
         while (mBankNameList != NULL) {
                 elem = mBankNameList;
                 mBankNameList = elem->forward;
                 free(elem->name);
                 remque(elem);
                 free(elem);
-        }
-} {} 
-}
-
-}
+        }} {}
+  }
+} 
