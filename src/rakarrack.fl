@@ -878,6 +878,10 @@ class RKRGUI {open
   }
   decl {Fl_Help_Dialog *visor;} {private local
   }
+  decl {struct list_element *mBankNameList; } { private local
+  }
+  decl {struct list_element *mBankNameListTail; } { private local
+  }
   Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
@@ -10975,7 +10979,16 @@ if(ok)
 {
 BankWin_Label(filename);
 Put_Loaded_Bank();
-
+AddBankName(filename);
+if(rkr->CheckOldBank(filename)==0)
+{
+        char nombre[64];
+        char *filepart;
+        memset(nombre,0,sizeof(nombre));
+        filepart = strrchr(filename,'/')+1;
+        strncpy(nombre,filepart,strlen(filepart)-5);
+        CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
+}
 }}
             xywh {10 10 45 26}
           }
@@ -11067,14 +11080,11 @@ p=m->next((int)o->value());
 chname=p->label();
 
 is_modified();
-char temp[128];           
-  memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s/%s%s", rkr->UDirFilename,chname,".rkrb");
 
-int ok=rkr->loadbank(temp);
+int ok=rkr->loadbank((char *)v);
 if(ok) 
 {
-BankWin_Label(temp);
+BankWin_Label((char *)v);
 Put_Loaded_Bank();
 unlight_preset(rkr->Selected_Preset);
 }}
@@ -12523,6 +12533,9 @@ Fl::visual(FL_DOUBLE|FL_RGB);
 fl_register_images();
 Fl::set_fonts(0);
 rkr=rkr_;
+
+mBankNameList = NULL;
+mBankNameListTail = NULL;
 
 back = NULL;
 old = NULL;
@@ -17749,39 +17762,67 @@ if(tecla != last_tecla)
 return(1000);} {}
   }
   Function {ScanDir()} {} {
-    code {char nombank[256];
-char nombre[64];
+    code {
+  char nombre[64];
+  char *nombank;
+  DIR *dir;
+  struct dirent *fs;
 
-DIR *dir=opendir(rkr->UDirFilename);
+  ClearBankNames();     /* This will free all memory allocated for names */
+  CH_UB->clear();
 
-if (dir==NULL) return;
+  dir=opendir(DATADIR);
+  if (dir==NULL) return;
 
-CH_UB->clear();
-
-struct dirent *fs;
-
-while ((fs=readdir(dir)))
-{
-
-if (strstr(fs->d_name,".rkrb")!=NULL)              
-  { 
-    memset(nombank,0,sizeof(nombank));
-    sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
-    if(rkr->CheckOldBank(nombank)==0)
+  while ((fs=readdir(dir)))
+  {
+  if (strstr(fs->d_name,".rkrb")!=NULL)
     {
-     memset(nombre,0,sizeof(nombre));
-     strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
-     if(nombre != NULL) CH_UB->add(nombre);  
-    }
-  
-   }
+      nombank = (char *)calloc(1, 256);
+      sprintf(nombank,"%s/%s",DATADIR, fs->d_name);
+      AddBankName(nombank);
+      if(rkr->CheckOldBank(nombank)==0)
+      {
+       memset(nombre,0,sizeof(nombre));
+       strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
+       if(nombre != NULL)
+       {
+          CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
+       }
+      }
 
-   
-}
- 
-CH_UB->value(0);
-closedir(dir);} {}
+     }
   }
+  closedir(dir);
+
+  dir=opendir(rkr->UDirFilename);
+  if (dir==NULL) return;
+
+  while ((fs=readdir(dir)))
+  {
+  if (strstr(fs->d_name,".rkrb")!=NULL)
+    {
+      nombank = (char *)calloc(1, 256);
+      sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
+      AddBankName(nombank);
+      if(rkr->CheckOldBank(nombank)==0)
+      {
+       memset(nombre,0,sizeof(nombre));
+       strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
+       if(nombre != NULL)
+       {
+          CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
+       }
+      }
+
+     }
+  }
+  closedir(dir);
+
+  CH_UB->value(0);
+} {}
+}
+
   Function {prevnext(int e)} {return_type {static int}
   } {
     code {if(e==5)
@@ -18430,4 +18471,43 @@ if(drag != (int)k-770) Prep_Reorden(drag,(int)k-770);
 drag=1000;
 }} {}
   }
-} 
+
+Function { AddBankName(const char *name) } { return_type int } {
+code {
+        struct list_element *elem;
+
+        elem = (struct list_element *)calloc(1,sizeof(struct list_element));
+        if (elem == NULL) {
+                return 0;
+        }
+        elem->name = (char *)calloc(1,256);
+        if (elem->name == NULL) {
+                free(elem);
+                return 0;
+        }
+        strncpy(elem->name, name, 255);
+        if (mBankNameList == NULL) {
+                mBankNameList = elem;
+                insque(elem, NULL);
+        } else {
+                insque(elem, mBankNameListTail);
+        }
+        mBankNameListTail = elem;
+        return 1;
+}  {}
+}
+
+Function {ClearBankNames()} {} {
+code {
+        struct list_element *elem;
+        while (mBankNameList != NULL) {
+                elem = mBankNameList;
+                mBankNameList = elem->forward;
+                free(elem->name);
+                remque(elem);
+                free(elem);
+        }
+} {} 
+}
+
+}

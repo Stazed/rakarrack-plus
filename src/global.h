@@ -170,6 +170,7 @@ return y;
 #include "config.h"
 #include <signal.h>
 #include <dirent.h>
+#include <search.h>
 #include <sys/time.h>
 #include <alsa/asoundlib.h>
 #include <X11/xpm.h>
@@ -790,7 +791,11 @@ public:
 
 };
 
-
+struct list_element {
+        struct list_element *forward;
+        struct list_element *backward;
+        char *name;
+};
 
 #endif
 
