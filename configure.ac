@@ -228,6 +228,16 @@ else
 
 fi
 
+
+AC_CHECK_LIB([fftw3], [main], [ac_fftw3="yes"], [ac_fftw3="no"])
+if test "x$ac_m" = "xno"; then
+AC_MSG_ERROR([fftw library not found.])
+else 
+   LIBS="$LIBS -lfftw3"
+fi
+
+
+
 if test "x$ac_jack_session" = "xyes"; then
    AC_CHECK_LIB(jack, jack_set_session_callback, [ac_jack_session="yes"], [ac_jack_session="no"])
 else
