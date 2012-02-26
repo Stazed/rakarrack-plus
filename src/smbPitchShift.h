@@ -43,7 +43,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
-#include <fftw3.h>
+
 
 #define MAX_FRAME_LENGTH 2048
 class PitchShifter
@@ -71,10 +71,6 @@ private:
   double magn, phase, tmp, window, real, imag;
   double freqPerBin, expct, coefPB, coef_dpi, coef_mpi;
   long k, qpd, index, inFifoLatency, stepSize, fftFrameSize2, gRover, FS_osamp;
-
-  //FFTW variables
-     fftw_complex fftw_in[MAX_FRAME_LENGTH], fftw_out[MAX_FRAME_LENGTH];
-     fftw_plan ftPlanForward, ftPlanInverse;
 };
 
 
