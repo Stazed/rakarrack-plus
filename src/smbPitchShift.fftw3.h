@@ -57,6 +57,7 @@ public:PitchShifter (long fftFrameSize, long osamp, float sampleRate);
   double smbAtan2 (double x, double y);
   float ratio;
 private:
+  void makeWindow(long fftFrameSize);
   float gInFIFO[MAX_FRAME_LENGTH];
   float gOutFIFO[MAX_FRAME_LENGTH];
   float gFFTworksp[2 * MAX_FRAME_LENGTH];
@@ -67,8 +68,9 @@ private:
   float gAnaMagn[MAX_FRAME_LENGTH];
   float gSynFreq[MAX_FRAME_LENGTH];
   float gSynMagn[MAX_FRAME_LENGTH];
+  double window[MAX_FRAME_LENGTH];
   double dfftFrameSize, coef_dfftFrameSize, dpi_coef;
-  double magn, phase, tmp, window, real, imag;
+  double magn, phase, tmp, real, imag;
   double freqPerBin, expct, coefPB, coef_dpi, coef_mpi;
   long k, qpd, index, inFifoLatency, stepSize, fftFrameSize2, gRover, FS_osamp;
 

@@ -76,6 +76,7 @@ PitchShifter::PitchShifter (long fftFrameSize, long osamp, float sampleRate)
   memset (gOutputAccum, 0, 2 * MAX_FRAME_LENGTH * sizeof (float));
   memset (gAnaFreq, 0, MAX_FRAME_LENGTH * sizeof (float));
   memset (gAnaMagn, 0, MAX_FRAME_LENGTH * sizeof (float));
+  memset (window, 0, MAX_FRAME_LENGTH * sizeof (double));
 
   //create FFTW plan
      int nfftFrameSize = (int) fftFrameSize;
@@ -83,6 +84,9 @@ PitchShifter::PitchShifter (long fftFrameSize, long osamp, float sampleRate)
 
      ftPlanForward = fftw_plan_dft_1d(nfftFrameSize, fftw_in, fftw_out, FFTW_FORWARD, FFTW_MEASURE);
      ftPlanInverse = fftw_plan_dft_1d(nfftFrameSize, fftw_in, fftw_out, FFTW_BACKWARD, FFTW_MEASURE);
+    
+    //Pre-compute window function
+    makeWindow(fftFrameSize);
 } 
 
 PitchShifter::~PitchShifter ()
@@ -92,6 +96,15 @@ PitchShifter::~PitchShifter ()
      fftw_destroy_plan(ftPlanInverse);  
 } 
 
+void
+PitchShifter::makeWindow(long fftFrameSize)
+{
+	  for (k = 0; k < fftFrameSize; k++)
+             {
+	      double dk = (double) k;
+	      window[k] = 0.5 -0.5 * cos (dpi_coef * dk);
+             }
+}
 
 void
 PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
@@ -117,12 +130,12 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 	  /* do windowing and re,im interleave */
 	  for (k = 0; k < fftFrameSize; k++)
 	    {
-	      double dk = (double) k;
-	      window =
-		-.5 * cos (dpi_coef * dk) +
-		.5;
+//	      double dk = (double) k;
+//	      window =
+//		-.5 * cos (dpi_coef * dk) +
+//		.5;
 
-	     fftw_in[k][0] = gInFIFO[k] * window;
+	     fftw_in[k][0] = gInFIFO[k] * window[k];
 	     fftw_in[k][1] = 0.0;
 	    //  gFFTworksp[2 * k] = gInFIFO[k] * window;
 	     // gFFTworksp[2 * k + 1] = 0.;
@@ -235,10 +248,10 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
           /* do windowing and add to output accumulator */
 	  for (k = 0; k < fftFrameSize; k++)
 	    {
-	      window =
-		-.5 * cos (dpi_coef * (double) k) +
-		.5;
-	    gOutputAccum[k] += 2. * window * fftw_out[ k][0] / FS_osamp;
+	      //window =
+	//	-.5 * cos (dpi_coef * (double) k) +
+	//	.5;
+	    gOutputAccum[k] += 2. * window[k] * fftw_out[k][0] / FS_osamp;
       //gOutputAccum[k] +=
 //		2. * window * gFFTworksp[2 * k] / FS_osamp;
 	  } for (k = 0; k < stepSize; k++)
