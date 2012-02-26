@@ -234,11 +234,11 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 	  /* zero negative frequencies */
 //	  for (k = fftFrameSize + 2; k < 2 * fftFrameSize; k++)
 //	    gFFTworksp[k] = 0.;
-	  /*for (k = fftFrameSize2; k < fftFrameSize; k++)
+	  for (k = 1 + fftFrameSize2; k < fftFrameSize; k++)
 	    {
-            fftw_in[k+1][0] = 0.;
-	    fftw_in[k][1] = 0.;
-	    } */
+            fftw_in[k][0] = 0.;
+	    fftw_in[k-1][1] = 0.;
+	    } 
  
             /* do inverse transform */
 	//  smbFft (gFFTworksp, fftFrameSize, 1);

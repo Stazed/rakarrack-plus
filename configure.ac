@@ -237,14 +237,11 @@ else
 fi
 
 
-
 if test "x$ac_jack_session" = "xyes"; then
    AC_CHECK_LIB(jack, jack_set_session_callback, [ac_jack_session="yes"], [ac_jack_session="no"])
 else
    AC_MSG_WARN([*** JACK latency support will be disabled.])
 fi
-
-
 
 
 if test "x$prefix" = "xNONE"; then
@@ -254,7 +251,7 @@ AC_DEFINE_UNQUOTED(PREFIX, "$prefix", [Install prefix])
 fi
 AC_HEADER_DIRENT
 AC_HEADER_STDC
-AC_CHECK_HEADERS([fcntl.h libintl.h stdlib.h string.h sys/ioctl.h unistd.h sndfile.h samplerate.h X11/xpm.h])
+AC_CHECK_HEADERS([fcntl.h libintl.h stdlib.h string.h sys/ioctl.h unistd.h sndfile.h samplerate.h fftw3.h X11/xpm.h])
 AC_CHECK_HEADER(alsa/asoundlib.h, true, AC_MSG_ERROR([Alsa is required]))
 AC_SUBST(SAMPLERATE_CFLAG)
 AC_SUBST(SAMPLERATE_LIBS)
@@ -369,6 +366,7 @@ echo  " JACK Session support . . . . . . . . . . . . . . . . . .: $ac_jack_sessi
 echo  " ALSA MIDI Sequencer support  . . . . . . . . . . . . . .: $ac_asound"
 echo  " Samplerate conversion (libsamplerate). . . . . . . . . .: $ac_samplerate"
 echo  " General audio file (libsndfile)  . . . . . . . . . . . .: $ac_sndfile"
+echo  " Fast Fourier Transform (fftw3)   . . . . . . . . . . . .: $ac_fftw3"
 echo  
 echo  " Now maybe you can run 'make' to build the sources."
 echo
