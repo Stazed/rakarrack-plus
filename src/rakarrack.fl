@@ -13631,8 +13631,8 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
 { 
   Fl_Widget *m = fl_message_icon();
   m->parent()->copy_label(rkr->jackcliname);
-  sprintf(temp2,"Overwrite? \\"%s\\"",w->label());
-  ok=fl_choice("%d",temp2,"No","Yes",NULL);
+  sprintf(temp2,"Overwrite \\"%s\\"?",w->label());
+  ok=fl_choice(temp2, "No","Yes", NULL);
  if (!ok)
  { 
  o->value(0);
@@ -14891,7 +14891,7 @@ if (rkr->modified)
  w->parent()->copy_label(rkr->jackcliname);
  
 
- ok=fl_choice("%d","Bank was modified, but not saved","Discard","Save",NULL);
+ ok=fl_choice("Bank was modified, but not saved", "Discard","Save",NULL);
 
 
 
