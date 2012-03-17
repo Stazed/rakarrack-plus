@@ -396,9 +396,9 @@ void RKR::putbuf(char *buf, int j)
 
 	case 45:
 	  //Vibe
-	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		  &lv[46][0], &lv[46][1], &lv[46][2], &lv[46][3], &lv[46][4],
-		  &lv[46][5], &lv[46][6], &lv[46][7], &lv[46][8], &lv[46][9],
+		  &lv[46][5], &lv[46][6], &lv[46][7], &lv[46][8], &lv[46][9], &lv[46][10],
 		  &Vibe_B);
 	  break;
 
@@ -933,12 +933,12 @@ void RKR::getbuf(char *buf, int j)
 
 	case 45:
 	  //Vibe
-	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+	  sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 		   efx_Vibe->getpar (0), efx_Vibe->getpar (1),
 		   efx_Vibe->getpar (2), efx_Vibe->getpar (3),
 		   efx_Vibe->getpar (4), efx_Vibe->getpar (5),
 		   efx_Vibe->getpar (6), efx_Vibe->getpar (7),
-		   efx_Vibe->getpar (8), efx_Vibe->getpar (9),
+		   efx_Vibe->getpar (8), efx_Vibe->getpar (9),efx_Vibe->getpar (10),
                    Vibe_Bypass);
 	  break;
 
@@ -1614,7 +1614,7 @@ RKR::Actualizar_Audio ()
 
         Vibe_Bypass = 0;
         efx_Vibe->cleanup();
-        for (i = 0; i <= 9; i++)
+        for (i = 0; i <= 10; i++)
         efx_Vibe->changepar (i, lv[46][i]);
         Vibe_Bypass = Vibe_B;
         break;
@@ -2341,7 +2341,7 @@ RKR::Preset_to_Bank (int i)
     lv[44][j] = efx_CompBand->getpar(j);
   for (j = 0; j <= 5; j++)
     lv[45][j] = efx_Opticaltrem->getpar(j);
-  for (j = 0; j <= 9; j++)
+  for (j = 0; j <= 10; j++)
     lv[46][j] = efx_Vibe->getpar(j);
   for (j = 0; j <= 17; j++)
     lv[47][j] = efx_Infinity->getpar(j);
