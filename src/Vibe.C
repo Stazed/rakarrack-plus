@@ -47,10 +47,12 @@ minTC = logf(0.005f/dTC);
 alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
 alphar = alphal;
 dalphal = dalphar = alphal;
-lampTC = cSAMPLE_RATE/(0.02 + cSAMPLE_RATE);  //guessing 10ms
+lampTC = cSAMPLE_RATE/(0.012 + cSAMPLE_RATE);  //guessing twiddle factor
 ilampTC = 1.0f - lampTC;
 lstep = 0.0f;
 rstep = 0.0f;
+
+Pstereo = 1; //1 if you want to process in stereo, 0 to do mono proc
 Pdepth = 127;
 Ppanning = 64;
 lpanning = 1.0f;
@@ -86,7 +88,7 @@ Vibe::out (float *smpsl, float *smpsr)
 
   int i,j;
   float lfol, lfor, xl, xr, fxl, fxr;
-  float vbe,vin;
+  //float vbe,vin;
   float cvolt, ocvolt, evolt, input;
   float emitterfb = 0.0f;
   float outl, outr;
@@ -96,29 +98,26 @@ Vibe::out (float *smpsl, float *smpsr)
   lfo.effectlfoout (&lfol, &lfor);
 
   lfol = fdepth + lfol*fwidth;
-  lfor = fdepth + lfor*fwidth;   
-  
-   if (lfol > 1.0f)
+    if (lfol > 1.0f)
     lfol = 1.0f;
-  else if (lfol < 0.0f)
+    else if (lfol < 0.0f)
     lfol = 0.0f;
-  if (lfor > 1.0f)
-    lfor = 1.0f;
-  else if (lfor < 0.0f)
-    lfor = 0.0f;  
-    
-    lfor = 2.0f - 2.0f/(lfor + 1.0f);   // 
     lfol = 2.0f - 2.0f/(lfol + 1.0f); //emulate lamp turn on/off characteristic by typical curves 
-      
+
+  if(Pstereo)
+  {
+   lfor = fdepth + lfor*fwidth;   
+     if (lfor > 1.0f) lfor = 1.0f;
+     else if (lfor < 0.0f) lfor = 0.0f;  
+     lfor = 2.0f - 2.0f/(lfor + 1.0f);   // 
+  }
+
   for (i = 0; i < PERIOD; i++)
     {
     //Left Lamp
      gl = lfol*lampTC + oldgl*ilampTC; 
      oldgl = gl;  
-    //Right Lamp
-     gr = lfor*lampTC + oldgr*ilampTC; 
-     oldgr = gr;   
-       
+
     //Left Cds   
     stepl = gl*alphal + dalphal*oldstepl;
     oldstepl = stepl;
@@ -127,7 +126,12 @@ Vibe::out (float *smpsl, float *smpsr)
     dalphal = 1.0f - cSAMPLE_RATE/(0.5f*dRCl + cSAMPLE_RATE);     //different attack & release character
     xl = CNST_E + stepl*b;
     fxl = f_exp(Ra/logf(xl));   
-    
+ 
+   //Right Lamp
+  if(Pstereo) {
+     gr = lfor*lampTC + oldgr*ilampTC; 
+     oldgr = gr;   
+ 
     //Right Cds   
     stepr = gr*alphar + dalphar*oldstepr;
     oldstepr = stepr;
@@ -136,15 +140,16 @@ Vibe::out (float *smpsl, float *smpsr)
     dalphar = 1.0f - cSAMPLE_RATE/(0.5f*dRCr + cSAMPLE_RATE);      //different attack & release character
     xr = CNST_E + stepr*b;
     fxr = f_exp(Ra/logf(xr));
+     }
 
     if(i%16 == 0)  modulate(fxl, fxr);   
      
     //Left Channel  
-
-//    input = bjt_shape(fbl + smpsl[i]);  
-
+    input = bjt_shape(fbl + smpsl[i]);  
 
 
+/*
+//Inline BJT Shaper bleow
     vin = 7.5f*(1.0f + fbl+smpsl[i]);
     if(vin<0.0f) vin = 0.0f;
     if(vin>15.0f) vin = 15.0f;
@@ -152,12 +157,13 @@ Vibe::out (float *smpsl, float *smpsr)
     input = vin - vbe;
     input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
 
-
+*/
     
     emitterfb = 25.0f/fxl;     
     for(j=0;j<4;j++) //4 stages phasing
     {
-
+/*
+//Inline filter implementation below
     float y0 = 0.0f;
     y0 = input*ecvc[j].n0 + ecvc[j].x1*ecvc[j].n1 - ecvc[j].y1*ecvc[j].d1;
     ecvc[j].y1 = y0 + DENORMAL_GUARD;
@@ -189,36 +195,45 @@ Vibe::out (float *smpsl, float *smpsr)
     vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
     input = vin - vbe;
     input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+*/
 
-
-
-//    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
-//    ocvolt = vibefilter(cvolt,vcvo,j);
-//    oldcvolt[j] = ocvolt;
-//    evolt = vibefilter(input, vevo,j);
+// Orig code, Comment below if instead using inline
+    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
+    ocvolt = vibefilter(cvolt,vcvo,j);
+    oldcvolt[j] = ocvolt;
+    evolt = vibefilter(input, vevo,j);
     
-//    input = bjt_shape(ocvolt + evolt);
+    input = bjt_shape(ocvolt + evolt);
+    //Close comment here if using inline
+
     }
     fbl = fb*ocvolt;
     outl = lpanning*input;    
     
     //Right channel
 
-    
+  if(Pstereo) {
+   /*
+   //Inline BJT shaper 
     vin = 7.5f*(1.0f + fbr+smpsr[i]);
     if(vin<0.0f) vin = 0.0f;
     if(vin>15.0f) vin = 15.0f;
     vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
     input = vin - vbe;
     input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+    */
 
 
-
-//    input = bjt_shape(fbr + smpsr[i]);  
-    
+//Orig code
+    input = bjt_shape(fbr + smpsr[i]);  
+   //Close Comment here if using Inline instead
+ 
     emitterfb = 25.0f/fxr;     
     for(j=4;j<8;j++) //4 stages phasing
     {
+
+/*
+//This is the inline version
 
     float y0 = 0.0f;
     y0 = input*ecvc[j].n0 + ecvc[j].x1*ecvc[j].n1 - ecvc[j].y1*ecvc[j].d1;
@@ -253,14 +268,16 @@ Vibe::out (float *smpsl, float *smpsr)
     input = vin - vbe;
     input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
 
+*/
 
-
-//    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
-//    ocvolt = vibefilter(cvolt,vcvo,j);
-//    oldcvolt[j] = ocvolt;
-//    evolt = vibefilter(input, vevo,j);
+//  Comment block below if using inline code instead
+    cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
+    ocvolt = vibefilter(cvolt,vcvo,j);
+    oldcvolt[j] = ocvolt;
+    evolt = vibefilter(input, vevo,j);
     
-//    input = bjt_shape(ocvolt + evolt);
+    input = bjt_shape(ocvolt + evolt);
+// Close comment here if inlining
     }
     
     fbr = fb*ocvolt;
@@ -268,7 +285,11 @@ Vibe::out (float *smpsl, float *smpsr)
     
     efxoutl[i] = outl*fcross + outr*flrcross;
     efxoutr[i] = outr*fcross + outl*flrcross;
-    
+    }  else {  //if(Pstereo)
+    efxoutl[i] = outl;
+    efxoutr[i] = outl;
+    }
+ 
     };
  
 };
@@ -292,7 +313,7 @@ if(vin<0.0f) vin = 0.0f;
 if(vin>15.0f) vin = 15.0f;
 vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
 vout = vin - vbe;
-vout = vout*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+vout = vout*0.1333333333f - 0.90588f;  //some magic numbers to return gain to unity & zero the DC
 return vout;
 }
 
@@ -387,6 +408,9 @@ float C2pC1;
 Rv = 4700.0f + ldrl;
 R1pRv = R1 + Rv;
 
+int lrchoice;
+if(Pstereo) lrchoice = 8;
+else lrchoice = 4;
 
 for(int i =0; i<8; i++)
 {
@@ -471,25 +495,25 @@ Vibe::setvolume (int value)
 void
 Vibe::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 10;
+  const int PRESET_SIZE = 11;
   const int NUM_PRESETS = 8;
   int presets[NUM_PRESETS][PRESET_SIZE] = {
     //Classic
-    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64},
+    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0},
     //Stereo Classic
-    {35, 120, 10, 0, 48, 64, 64, 64, 3, 64},
+    {35, 120, 10, 0, 48, 64, 64, 64, 3, 64, 1},
     //Wide Vibe
-    {127, 80, 10, 0, 0, 64, 64, 64, 0, 64},
+    {127, 80, 10, 0, 0, 64, 64, 64, 0, 64, 1},
     //Classic Chorus
-    {35, 360, 10, 0, 48, 64, 0, 64, 3, 64},   
+    {35, 360, 10, 0, 48, 64, 0, 64, 3, 64, 0},   
     //Vibe Chorus
-    {75, 330, 10, 0, 50, 64, 0, 64, 17, 64},
+    {75, 330, 10, 0, 50, 64, 0, 64, 17, 64, 0},
     //Lush Chorus
-    {55, 260, 10, 0, 64, 70, 0, 49, 20, 48},  
+    {55, 260, 10, 0, 64, 70, 0, 49, 20, 48, 0},  
     //Sick Phaser
-    {110, 75, 10, 0, 32, 64, 64, 14, 0, 30},
+    {110, 75, 10, 0, 32, 64, 64, 14, 0, 30, 1},
     //Warble
-    {127, 360, 10, 0, 0, 64, 0, 0, 0, 37}
+    {127, 360, 10, 0, 0, 64, 0, 0, 0, 37, 0}
     
   };
 
@@ -551,9 +575,11 @@ Vibe::changepar (int npar, int value)
     case 9: //lrcross
     Plrcross = value;
     flrcross = ((float) (Plrcross - 64))/64.0f;
-    fcross = 1.0f - abs(flrcross);
+    fcross = 1.0f - fabs(flrcross);
       break; 
-    
+    case 10: //Stereo
+    Pstereo = value;
+      break; 
 
     }
    
@@ -596,6 +622,10 @@ Vibe::getpar (int npar)
     case 9:
       return(Plrcross);
       break;   
+    case 10: //Stereo
+      return(Pstereo);
+      break; 
+
 
     }
 

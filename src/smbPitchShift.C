@@ -68,15 +68,15 @@ PitchShifter::PitchShifter (long fftFrameSize, long osamp, float sampleRate)
   ratio = 1.0;
 
   /* initialize our static arrays */
-  memset (gInFIFO, 0, MAX_FRAME_LENGTH * sizeof (float));
-  memset (gOutFIFO, 0, MAX_FRAME_LENGTH * sizeof (float));
-  memset (gFFTworksp, 0, 2 * MAX_FRAME_LENGTH * sizeof (float));
-  memset (gLastPhase, 0, (MAX_FRAME_LENGTH / 2 + 1) * sizeof (float));
-  memset (gSumPhase, 0, (MAX_FRAME_LENGTH / 2 + 1) * sizeof (float));
-  memset (gOutputAccum, 0, 2 * MAX_FRAME_LENGTH * sizeof (float));
-  memset (gAnaFreq, 0, MAX_FRAME_LENGTH * sizeof (float));
-  memset (gAnaMagn, 0, MAX_FRAME_LENGTH * sizeof (float));
-  memset (window, 0, MAX_FRAME_LENGTH * sizeof (double));
+  memset (gInFIFO, 0.0, MAX_FRAME_LENGTH * sizeof (float));
+  memset (gOutFIFO, 0.0, MAX_FRAME_LENGTH * sizeof (float));
+  memset (gFFTworksp, 0.0, 2 * MAX_FRAME_LENGTH * sizeof (float));
+  memset (gLastPhase, 0.0, (MAX_FRAME_LENGTH / 2 + 1) * sizeof (float));
+  memset (gSumPhase, 0.0, (MAX_FRAME_LENGTH / 2 + 1) * sizeof (float));
+  memset (gOutputAccum, 0.0, 2 * MAX_FRAME_LENGTH * sizeof (float));
+  memset (gAnaFreq, 0.0, MAX_FRAME_LENGTH * sizeof (float));
+  memset (gAnaMagn, 0.0, MAX_FRAME_LENGTH * sizeof (float));
+  memset (window, 0.0, MAX_FRAME_LENGTH * sizeof (double));
 
   //create FFTW plan
      int nfftFrameSize = (int) fftFrameSize;
@@ -112,6 +112,8 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 			     float *indata, float *outdata)
 {
   long i;
+  float maxmag = 0.0f;
+  float tunefrq = 0.0f;
 
   /* main processing loop */
   for (i = 0; i < numSampsToProcess; i++)
@@ -184,7 +186,12 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 	      /* store magnitude and true frequency in analysis arrays */
 	      gAnaMagn[k] = magn;
 	      gAnaFreq[k] = tmp;
+              if(magn>maxmag){
+               maxmag = magn;
+               tunefrq = tmp;
+               }
 	    }
+
 	  /* ***************** PROCESSING ******************* */
 	  /* this does the actual pitch shifting */
 	  memset (gSynMagn, 0, fftFrameSize * sizeof (float));
@@ -234,12 +241,11 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 	  /* zero negative frequencies */
 //	  for (k = fftFrameSize + 2; k < 2 * fftFrameSize; k++)
 //	    gFFTworksp[k] = 0.;
-	  for (k = 1 + fftFrameSize2; k < fftFrameSize; k++)
+	  for (k = 2 + fftFrameSize2; k < fftFrameSize; k++)
 	    {
             fftw_in[k][0] = 0.;
 	    fftw_in[k-1][1] = 0.;
 	    } 
- 
             /* do inverse transform */
 	//  smbFft (gFFTworksp, fftFrameSize, 1);
 
@@ -266,6 +272,8 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 	    gInFIFO[k] = gInFIFO[k + stepSize];
 	}
     }
+
+            //printf("\rFreq: %f", tunefrq);
 }
 
 

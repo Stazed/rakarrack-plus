@@ -9049,6 +9049,7 @@ vibe_stdf->value(rkr->efx_Vibe->getpar(4));
 vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
 vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
 vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
+vibe_stereo->value(rkr->efx_Vibe->getpar(10));
 }
 void RKRGUI::cb_vibe_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_preset_i(o,v);
@@ -9179,6 +9180,13 @@ rkr->efx_Vibe->changepar(5,(int)(o->value()+64));
 }
 void RKRGUI::cb_vibe_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_pan_i(o,v);
+}
+
+void RKRGUI::cb_vibe_stereo_i(Fl_Check_Button* o, void*) {
+  rkr->efx_Vibe->changepar(10,(int)o->value());
+}
+void RKRGUI::cb_vibe_stereo(Fl_Check_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vibe_stereo_i(o,v);
 }
 
 void RKRGUI::cb_infinity_activar_i(Fl_Light_Button* o, void*) {
@@ -20240,7 +20248,6 @@ R average.");
       VIBE->labelfont(1);
       VIBE->user_data((void*)(1));
       VIBE->align(96|FL_ALIGN_INSIDE);
-      VIBE->hide();
       { vibe_activar = new Fl_Light_Button(485, 215, 34, 18, "On");
         vibe_activar->shortcut(0x38);
         vibe_activar->color((Fl_Color)62);
@@ -20278,7 +20285,7 @@ R average.");
         vibe_WD->align(FL_ALIGN_LEFT);
         vibe_WD->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_WD
-      { vibe_width = new SliderW(532, 254, 100, 10, "Width");
+      { vibe_width = new SliderW(532, 253, 100, 10, "Width");
         vibe_width->type(5);
         vibe_width->box(FL_FLAT_BOX);
         vibe_width->color((Fl_Color)178);
@@ -20294,7 +20301,7 @@ R average.");
         vibe_width->align(FL_ALIGN_LEFT);
         vibe_width->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_width
-      { vibe_dpth = new SliderW(532, 268, 100, 10, "Depth");
+      { vibe_dpth = new SliderW(532, 266, 100, 10, "Depth");
         vibe_dpth->type(5);
         vibe_dpth->box(FL_FLAT_BOX);
         vibe_dpth->color((Fl_Color)178);
@@ -20310,7 +20317,7 @@ R average.");
         vibe_dpth->align(FL_ALIGN_LEFT);
         vibe_dpth->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_dpth
-      { vibe_freq = new SliderW(532, 282, 100, 10, "Tempo");
+      { vibe_freq = new SliderW(532, 279, 100, 10, "Tempo");
         vibe_freq->type(5);
         vibe_freq->box(FL_FLAT_BOX);
         vibe_freq->color((Fl_Color)178);
@@ -20327,7 +20334,7 @@ R average.");
         vibe_freq->align(FL_ALIGN_LEFT);
         vibe_freq->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_freq
-      { vibe_rnd = new SliderW(532, 296, 100, 10, "Rnd");
+      { vibe_rnd = new SliderW(532, 292, 100, 10, "Rnd");
         vibe_rnd->type(5);
         vibe_rnd->box(FL_FLAT_BOX);
         vibe_rnd->color((Fl_Color)178);
@@ -20343,7 +20350,7 @@ R average.");
         vibe_rnd->align(FL_ALIGN_LEFT);
         vibe_rnd->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_rnd
-      { Fl_Choice* o = vibe_lfotype = new Fl_Choice(543, 310, 72, 16, "LFO Type");
+      { Fl_Choice* o = vibe_lfotype = new Fl_Choice(543, 307, 72, 16, "LFO Type");
         vibe_lfotype->down_box(FL_BORDER_BOX);
         vibe_lfotype->selection_color((Fl_Color)FL_FOREGROUND_COLOR);
         vibe_lfotype->labelsize(10);
@@ -20353,7 +20360,7 @@ R average.");
         vibe_lfotype->callback((Fl_Callback*)cb_vibe_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* vibe_lfotype
-      { vibe_stdf = new SliderW(532, 330, 100, 10, "St.df");
+      { vibe_stdf = new SliderW(532, 329, 100, 10, "St.df");
         vibe_stdf->type(5);
         vibe_stdf->box(FL_FLAT_BOX);
         vibe_stdf->color((Fl_Color)178);
@@ -20369,7 +20376,7 @@ R average.");
         vibe_stdf->align(FL_ALIGN_LEFT);
         vibe_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_stdf
-      { vibe_fb = new SliderW(532, 344, 100, 10, "Fb");
+      { vibe_fb = new SliderW(532, 342, 100, 10, "Fb");
         vibe_fb->type(5);
         vibe_fb->box(FL_FLAT_BOX);
         vibe_fb->color((Fl_Color)178);
@@ -20386,7 +20393,7 @@ R average.");
         vibe_fb->align(FL_ALIGN_LEFT);
         vibe_fb->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_fb
-      { vibe_LR = new SliderW(532, 358, 100, 10, "L/R.Cr");
+      { vibe_LR = new SliderW(532, 355, 100, 10, "L/R.Cr");
         vibe_LR->type(5);
         vibe_LR->box(FL_FLAT_BOX);
         vibe_LR->color((Fl_Color)178);
@@ -20403,7 +20410,7 @@ R average.");
         vibe_LR->align(FL_ALIGN_LEFT);
         vibe_LR->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_LR
-      { vibe_pan = new SliderW(532, 372, 100, 10, "Pan");
+      { vibe_pan = new SliderW(532, 368, 100, 10, "Pan");
         vibe_pan->type(5);
         vibe_pan->box(FL_FLAT_BOX);
         vibe_pan->color((Fl_Color)178);
@@ -20420,6 +20427,12 @@ R average.");
         vibe_pan->align(FL_ALIGN_LEFT);
         vibe_pan->when(FL_WHEN_CHANGED);
       } // SliderW* vibe_pan
+      { vibe_stereo = new Fl_Check_Button(583, 380, 43, 14, "Stereo");
+        vibe_stereo->down_box(FL_BORDER_BOX);
+        vibe_stereo->labelsize(10);
+        vibe_stereo->labelcolor((Fl_Color)FL_BACKGROUND2_COLOR);
+        vibe_stereo->callback((Fl_Callback*)cb_vibe_stereo, (void*)(2));
+      } // Fl_Check_Button* vibe_stereo
       VIBE->end();
     } // Fl_Group* VIBE
     { INFINIT = new Fl_Group(479, 212, 158, 184);

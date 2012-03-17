@@ -1,32 +1,32 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0110 
 header_name {.h} 
 code_name {.cxx}
-decl {\#include "global.h"} {public local
+decl {\#include "global.h"} {public
 } 
 
-decl {\#include <FL/Fl_Value_Slider.H>} {public local
+decl {\#include <FL/Fl_Value_Slider.H>} {public
 } 
 
-decl {\#include <FL/Fl_Scroll.H>} {public local
+decl {\#include <FL/Fl_Scroll.H>} {public
 } 
 
-decl {\#include <FL/Fl_Progress.H>} {public local
+decl {\#include <FL/Fl_Progress.H>} {public
 } 
 
-decl {\#include <FL/Fl_Tooltip.H>} {public local
+decl {\#include <FL/Fl_Tooltip.H>} {public
 } 
 
-decl {\#include <FL/x.H>} {public local
+decl {\#include <FL/x.H>} {public
 } 
 
-decl {\#include <FL/Fl_PNG_Image.H>} {public local
+decl {\#include <FL/Fl_PNG_Image.H>} {public
 } 
 
-decl {\#include <FL/Fl_Tiled_Image.H>} {public local
+decl {\#include <FL/Fl_Tiled_Image.H>} {public
 } 
 
-decl {\#include <FL/Fl_Help_Dialog.H>} {public local
+decl {\#include <FL/Fl_Help_Dialog.H>} {public
 } 
 
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
@@ -35,59 +35,41 @@ decl {\#include <FL/Fl_File_Chooser.H>} {public global
 decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 } 
 
-decl {\#include "icono_rakarrack_128x128.xpm"} {private local
-} 
+decl {\#include "icono_rakarrack_128x128.xpm"} {} 
 
-decl {Fl_Tiled_Image *back;} {private local
-} 
+decl {Fl_Tiled_Image *back;} {} 
 
-decl {Fl_Color leds_color;} {private local
-} 
+decl {Fl_Color leds_color;} {} 
 
-decl {Fl_Color back_color;} {private local
-} 
+decl {Fl_Color back_color;} {} 
 
-decl {Fl_Color fore_color;} {private local
-} 
+decl {Fl_Color fore_color;} {} 
 
-decl {Fl_Color label_color;} {private local
-} 
+decl {Fl_Color label_color;} {} 
 
-decl {Fl_Widget *old;} {private local
-} 
+decl {Fl_Widget *old;} {} 
 
-decl {float *spl;} {private local
-} 
+decl {float *spl;} {} 
 
-decl {float *spr;} {private local
-} 
+decl {float *spr;} {} 
 
-decl {int last_tecla;} {private local
-} 
+decl {int last_tecla;} {} 
 
-decl {int drag;} {private local
-} 
+decl {int drag;} {} 
 
-decl {int sr;} {private local
-} 
+decl {int sr;} {} 
 
-decl {int ns;} {private local
-} 
+decl {int ns;} {} 
 
-decl {int at;} {private local
-} 
+decl {int at;} {} 
 
-decl {int nt;} {private local
-} 
+decl {int nt;} {} 
 
-decl {int tta;} {private local
-} 
+decl {int tta;} {} 
 
-decl {int Scope_ON;} {private local
-} 
+decl {int Scope_ON;} {} 
 
-decl {int Analyzer_ON;} {private local
-} 
+decl {int Analyzer_ON;} {} 
 
 class Analyzer {: {public Fl_Box}
 } {
@@ -191,8 +173,7 @@ break;
 }
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {private local
-  }
+  decl {EQ *efx_EQ1;} {}
 } 
 
 class Scope {: {public Fl_Box}
@@ -312,8 +293,7 @@ break;
 
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {private local
-  }
+  decl {EQ *efx_EQ1;} {}
 } 
 
 class NewVum {: {public Fl_Slider}
@@ -872,23 +852,19 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
 
 class RKRGUI {open
 } {
-  decl {RKR *rkr;} {private local
-  }
-  decl {int made;} {private local
-  }
-  decl {Fl_Help_Dialog *visor;} {private local
-  }
-  decl {struct list_element *mBankNameList;} {private local
-  }
-  decl {struct list_element *mBankNameListTail;} {private local
-  }
-  Function {make_window()} {} {
+  decl {RKR *rkr;} {}
+  decl {int made;} {}
+  decl {Fl_Help_Dialog *visor;} {}
+  decl {struct list_element *mBankNameList;} {}
+  decl {struct list_element *mBankNameListTail;} {}
+  Function {make_window()} {open
+  } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {1321 23 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+Pexitprogram=1;} open
+      xywh {461 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6755,7 +6731,7 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
         }
       }
       Fl_Group CONVOLOTRON {
-        user_data 1
+        user_data 1 open
         xywh {322 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button convo_activar {
@@ -9758,7 +9734,7 @@ rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));}
       }
       Fl_Group VIBE {
         user_data 1
-        xywh {480 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {480 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button vibe_activar {
           label On
@@ -9789,7 +9765,8 @@ vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
 vibe_stdf->value(rkr->efx_Vibe->getpar(4));
 vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
 vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
-vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);}
+vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
+vibe_stereo->value(rkr->efx_Vibe->getpar(10));}
           xywh {557 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -9844,7 +9821,7 @@ rkr->efx_Vibe->changepar(6,(int)(o->value())+64);}
  return;
 }
 rkr->efx_Vibe->changepar(0,(int)o->value());}
-          xywh {532 254 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {532 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_dpth {
@@ -9855,7 +9832,7 @@ rkr->efx_Vibe->changepar(0,(int)o->value());}
  return;
 }
 rkr->efx_Vibe->changepar(8,(int)o->value());}
-          xywh {532 268 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {532 266 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_freq {
@@ -9866,7 +9843,7 @@ rkr->efx_Vibe->changepar(8,(int)o->value());}
  return;
 }
 rkr->efx_Vibe->changepar(1,(int)o->value());}
-          xywh {532 282 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          xywh {532 279 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_rnd {
@@ -9877,13 +9854,13 @@ rkr->efx_Vibe->changepar(1,(int)o->value());}
  return;
 }
 rkr->efx_Vibe->changepar(2,(int)o->value());}
-          xywh {532 296 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {532 292 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice vibe_lfotype {
           label {LFO Type}
           callback {rkr->efx_Vibe->changepar(3,(int)o->value());}
-          xywh {543 310 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {543 307 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
         Fl_Value_Slider vibe_stdf {
@@ -9894,7 +9871,7 @@ rkr->efx_Vibe->changepar(2,(int)o->value());}
  return;
 }
 rkr->efx_Vibe->changepar(4,(int)o->value());}
-          xywh {532 330 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {532 329 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_fb {
@@ -9905,7 +9882,7 @@ rkr->efx_Vibe->changepar(4,(int)o->value());}
  return;
 }
 rkr->efx_Vibe->changepar(7,(int)(o->value()+64));}
-          xywh {532 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {532 342 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_LR {
@@ -9916,7 +9893,7 @@ rkr->efx_Vibe->changepar(7,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Vibe->changepar(9,(int)(o->value()+64));}
-          xywh {532 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {532 355 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider vibe_pan {
@@ -9927,8 +9904,14 @@ rkr->efx_Vibe->changepar(9,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
-          xywh {532 372 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {532 368 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
+        }
+        Fl_Check_Button vibe_stereo {
+          label Stereo
+          user_data 2
+          callback {rkr->efx_Vibe->changepar(10,(int)o->value())}
+          xywh {583 380 43 14} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
       Fl_Group INFINIT {
@@ -10157,7 +10140,7 @@ rkr->efx_Infinity->changepar(14,(int)o->value());}
         }
       }
       Fl_Group Tuner {
-        user_data 1
+        user_data 1 selected
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
@@ -11078,7 +11061,7 @@ if(ok)
 BankWin_Label((char *)v);
 Put_Loaded_Bank();
 unlight_preset(rkr->Selected_Preset);
-}} open selected
+}} open
         xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
       } {}
       Fl_Group ob {
@@ -12514,7 +12497,7 @@ rkr->Aux_MIDI = (int)o->value();}
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
   } {
     code {Fl::args(argc,argv);
 fl_open_display();

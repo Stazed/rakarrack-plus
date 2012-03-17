@@ -49,7 +49,6 @@ public:
   float *efxoutl;
   float *efxoutr;
 
-
 private:
   int Pwidth;
   int Pfb;
@@ -57,7 +56,8 @@ private:
   int Pdepth;
   int Ppanning;
   int Pvolume;
-  
+  int Pstereo;
+ 
   float fwidth;
   float fdepth;
   float rpanning, lpanning; 

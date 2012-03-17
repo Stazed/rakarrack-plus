@@ -3308,6 +3308,11 @@ private:
   void cb_vibe_pan_i(SliderW*, void*);
   static void cb_vibe_pan(SliderW*, void*);
 public:
+  Fl_Check_Button *vibe_stereo;
+private:
+  void cb_vibe_stereo_i(Fl_Check_Button*, void*);
+  static void cb_vibe_stereo(Fl_Check_Button*, void*);
+public:
   Fl_Group *INFINIT;
   Fl_Light_Button *infinity_activar;
 private:
