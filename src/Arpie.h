@@ -4,11 +4,11 @@
   Author: Nasca Octavian Paul
 
   Modified for rakarrack by Josep Andreu
-  
+
   Arpeggiated Echo by Ryan Billing (a.k.a. Transmogrifox)
-    
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -30,59 +30,59 @@
 class Arpie
 {
 public:
-  Arpie (float * efxoutl_, float * efxoutr_);
-  ~Arpie ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    Arpie (float * efxoutl_, float * efxoutr_);
+    ~Arpie ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
-  int Ppreset;
-  float *efxoutl;
-  float *efxoutr;
-  float outvolume;
+    int Ppreset;
+    float *efxoutl;
+    float *efxoutr;
+    float outvolume;
 
 private:
-  //Parametrii
-  int Pvolume;	//Volumul or E/R
-  int Ppanning;	//Panning
-  int Pdelay;
-  int Plrdelay;	// L/R delay difference
-  int Plrcross;	// L/R Mixing
-  int Pfb;		//Feed-back-ul
-  int Phidamp;
-  int Preverse;
-  int Ppattern;
-  int Pharms;
-  int Psubdiv;
+    //Parametrii
+    int Pvolume;	//Volumul or E/R
+    int Ppanning;	//Panning
+    int Pdelay;
+    int Plrdelay;	// L/R delay difference
+    int Plrcross;	// L/R Mixing
+    int Pfb;		//Feed-back-ul
+    int Phidamp;
+    int Preverse;
+    int Ppattern;
+    int Pharms;
+    int Psubdiv;
 
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setdelay (int Pdelay);
-  void setlrdelay (int Plrdelay);
-  void setlrcross (int Plrcross);
-  void setfb (int Pfb);
-  void sethidamp (int Phidamp);
-  void setreverse (int Preverse);
-  void setpattern (int Ppattern);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setdelay (int Pdelay);
+    void setlrdelay (int Plrdelay);
+    void setlrcross (int Plrcross);
+    void setfb (int Pfb);
+    void sethidamp (int Phidamp);
+    void setreverse (int Preverse);
+    void setpattern (int Ppattern);
 
 
-  //Parametrii reali
-  void initdelays ();
+    //Parametrii reali
+    void initdelays ();
 
-  int dl, dr, delay, lrdelay;
-  int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade, harmonic, envcnt, invattack;
-  int subdiv;
-  int *pattern;
+    int dl, dr, delay, lrdelay;
+    int kl, kr, rvkl, rvkr, rvfl, rvfr, maxx_delay, fade, harmonic, envcnt, invattack;
+    int subdiv;
+    int *pattern;
 
-  float panning, lrcross, fb, hidamp, reverse;
-  float *ldelay, *rdelay;
-  float oldl, oldr;		//pt. lpf
-  float  Srate_Attack_Coeff, envattack, envswell;
+    float panning, lrcross, fb, hidamp, reverse;
+    float *ldelay, *rdelay;
+    float oldl, oldr;		//pt. lpf
+    float  Srate_Attack_Coeff, envattack, envswell;
 
-  class FPreset *Fpre;
+    class FPreset *Fpre;
 };
 
 

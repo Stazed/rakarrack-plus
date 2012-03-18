@@ -1,6 +1,6 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   FormantFilter.h - formant filter
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -9,7 +9,7 @@
 
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -34,38 +34,36 @@
 class FormantFilter:public Filter_
 {
 public:
-  FormantFilter (class FilterParams * pars);
-  ~FormantFilter ();
-  void filterout (float * smp);
-  void setfreq (float frequency);
-  void setfreq_and_q (float frequency, float q_);
-  void setq (float q_);
+    FormantFilter (class FilterParams * pars);
+    ~FormantFilter ();
+    void filterout (float * smp);
+    void setfreq (float frequency);
+    void setfreq_and_q (float frequency, float q_);
+    void setq (float q_);
 
-  void cleanup ();
+    void cleanup ();
 private:
 
-  void setpos (float input);
+    void setpos (float input);
 
 
-  struct
-  {
-    float freq, amp, q;	//frequency,amplitude,Q
-  } formantpar[FF_MAX_VOWELS][FF_MAX_FORMANTS],
+    struct {
+        float freq, amp, q;	//frequency,amplitude,Q
+    } formantpar[FF_MAX_VOWELS][FF_MAX_FORMANTS],
     currentformants[FF_MAX_FORMANTS];
 
-  struct
-  {
-    unsigned char nvowel;
-  } sequence[FF_MAX_SEQUENCE];
+    struct {
+        unsigned char nvowel;
+    } sequence[FF_MAX_SEQUENCE];
 
-  int sequencesize, numformants, firsttime;
+    int sequencesize, numformants, firsttime;
 
-  float oldformantamp[FF_MAX_FORMANTS];
-  float oldinput, slowinput;
-  float Qfactor, formantslowness, oldQfactor;
-  float vowelclearness, sequencestretch;
+    float oldformantamp[FF_MAX_FORMANTS];
+    float oldinput, slowinput;
+    float Qfactor, formantslowness, oldQfactor;
+    float vowelclearness, sequencestretch;
 
-  float *inbuffer, *tmpbuf;
+    float *inbuffer, *tmpbuf;
 
     AnalogFilter * formant[FF_MAX_FORMANTS];
 

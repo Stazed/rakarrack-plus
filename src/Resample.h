@@ -1,9 +1,9 @@
 /*
-    Resample - Resample                                          
-    
+    Resample - Resample
+
     Resample.h  - headers.
-    Copyright (C) 2008-2010 Josep Andreu               
-    Author: Josep Andreu 
+    Copyright (C) 2008-2010 Josep Andreu
+    Author: Josep Andreu
 
 
  This program is free software; you can redistribute it and/or modify
@@ -34,37 +34,37 @@
 class Resample
 {
 public:
-  Resample(int type);	
-/*
-Types:
-          SRC_SINC_BEST_QUALITY       = 0,
-          SRC_SINC_MEDIUM_QUALITY     = 1,
-          SRC_SINC_FASTEST            = 2,
-          SRC_ZERO_ORDER_HOLD         = 3,
-          SRC_LINEAR                  = 4
-*/
+    Resample(int type);
+    /*
+    Types:
+              SRC_SINC_BEST_QUALITY       = 0,
+              SRC_SINC_MEDIUM_QUALITY     = 1,
+              SRC_SINC_FASTEST            = 2,
+              SRC_ZERO_ORDER_HOLD         = 3,
+              SRC_LINEAR                  = 4
+    */
 
-  ~Resample(); 
-  void cleanup();
-  void out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio);
-  void mono_out(float *inl, float *outl, int frames, double ratio, int o_frames);
+    ~Resample();
+    void cleanup();
+    void out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio);
+    void mono_out(float *inl, float *outl, int frames, double ratio, int o_frames);
 
-  // ratio Equal to output_sample_rate / input_sample_rate.
+    // ratio Equal to output_sample_rate / input_sample_rate.
 
 
-SRC_DATA srcinfor;
-SRC_DATA srcinfol;
+    SRC_DATA srcinfor;
+    SRC_DATA srcinfol;
 
 
 private:
 
-int errorl,errorr;
+    int errorl,errorr;
 
 
-SRC_STATE *statel;
-SRC_STATE *stater;
+    SRC_STATE *statel;
+    SRC_STATE *stater;
 
-    
+
 };
 
 #endif

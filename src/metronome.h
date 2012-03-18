@@ -1,6 +1,6 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   metronome.h - Stereo LFO used by some effects
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -9,7 +9,7 @@
 
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -31,22 +31,22 @@
 class metronome
 {
 public:
-  metronome ();
-  ~metronome ();
-  void cleanup();
-  void metronomeout (float * tickout);
-  void set_tempo (int bpm);
-  void set_meter (int counts);
-  int markctr;
+    metronome ();
+    ~metronome ();
+    void cleanup();
+    void metronomeout (float * tickout);
+    void set_tempo (int bpm);
+    void set_meter (int counts);
+    int markctr;
 
 private:
-  int tick_interval;
-  int tickctr;
-  int meter;
-  int tickper;
-  int ticktype;
+    int tick_interval;
+    int tickctr;
+    int meter;
+    int tickper;
+    int ticktype;
 
-  class AnalogFilter *dulltick,*sharptick, *hpf;  
+    class AnalogFilter *dulltick,*sharptick, *hpf;
 
 };
 

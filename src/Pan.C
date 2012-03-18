@@ -29,16 +29,16 @@
 Pan::Pan (float *efxoutl_, float *efxoutr_)
 {
 
-  efxoutl = efxoutl_;
-  efxoutr = efxoutr_;
+    efxoutl = efxoutl_;
+    efxoutr = efxoutr_;
 
 
-  Ppreset = 0;
-  setpreset (Ppreset);
-  
-  lfo.effectlfoout (&lfol, &lfor);
+    Ppreset = 0;
+    setpreset (Ppreset);
 
-  cleanup ();
+    lfo.effectlfoout (&lfol, &lfor);
+
+    cleanup ();
 
 
 };
@@ -61,57 +61,54 @@ void
 Pan::out (float *smpsl, float *smpsr)
 {
 
-  int i;
-  float avg, ldiff, rdiff, tmp;
-  float pp;
-  float coeff_PERIOD = 1.0 / fPERIOD; 
-  float fi,P_i;
+    int i;
+    float avg, ldiff, rdiff, tmp;
+    float pp;
+    float coeff_PERIOD = 1.0 / fPERIOD;
+    float fi,P_i;
 
 
 
-  if (PextraON)
-    {
-   
-      for (i = 0; i < PERIOD; i++)
+    if (PextraON) {
 
-	{
+        for (i = 0; i < PERIOD; i++)
 
-       	  avg = (smpsl[i] + smpsr[i]) * .5f;
+        {
 
-	  ldiff = smpsl[i] - avg;
-	  rdiff = smpsr[i] - avg;
+            avg = (smpsl[i] + smpsr[i]) * .5f;
 
-	  tmp = avg + ldiff * mul;
-	  smpsl[i] = tmp*cdvalue;
+            ldiff = smpsl[i] - avg;
+            rdiff = smpsr[i] - avg;
 
-	  tmp = avg + rdiff * mul;
-	  smpsr[i] = tmp*sdvalue;
+            tmp = avg + ldiff * mul;
+            smpsl[i] = tmp*cdvalue;
+
+            tmp = avg + rdiff * mul;
+            smpsr[i] = tmp*sdvalue;
 
 
-	}
+        }
 
     }
 
-  if (PAutoPan)
-    {
+    if (PAutoPan) {
 
-      ll = lfol;
-      lr = lfor;
-      lfo.effectlfoout (&lfol, &lfor);
-      for (i = 0; i < PERIOD; i++)
-	{
-	  fi = (float) i;
-	  P_i = (float) (PERIOD - i);
-	  
-	  pp = (ll * P_i + lfol * fi) * coeff_PERIOD;
+        ll = lfol;
+        lr = lfor;
+        lfo.effectlfoout (&lfol, &lfor);
+        for (i = 0; i < PERIOD; i++) {
+            fi = (float) i;
+            P_i = (float) (PERIOD - i);
 
-	  smpsl[i] *= pp * panning;
+            pp = (ll * P_i + lfol * fi) * coeff_PERIOD;
 
-	  pp =  (lr * P_i + lfor * fi) * coeff_PERIOD;
+            smpsl[i] *= pp * panning;
 
-          smpsr[i] *= pp * (1.0f - panning);
+            pp =  (lr * P_i + lfor * fi) * coeff_PERIOD;
 
-	}
+            smpsr[i] *= pp * (1.0f - panning);
+
+        }
 
     }
 
@@ -128,8 +125,8 @@ Pan::out (float *smpsl, float *smpsr)
 void
 Pan::setvolume (int Pvolume)
 {
-  this->Pvolume = Pvolume;
-  outvolume = (float)Pvolume / 127.0f;
+    this->Pvolume = Pvolume;
+    outvolume = (float)Pvolume / 127.0f;
 };
 
 
@@ -137,12 +134,12 @@ Pan::setvolume (int Pvolume)
 void
 Pan::setpanning (int Ppanning)
 {
-  this->Ppanning = Ppanning;
-  panning = ((float)Ppanning)/ 127.0f;
-  dvalue= panning*M_PI_2;
-  cdvalue=cosf(dvalue);
-  sdvalue=sinf(dvalue);
-  
+    this->Ppanning = Ppanning;
+    panning = ((float)Ppanning)/ 127.0f;
+    dvalue= panning*M_PI_2;
+    cdvalue=cosf(dvalue);
+    sdvalue=sinf(dvalue);
+
 
 };
 
@@ -151,38 +148,35 @@ Pan::setpanning (int Ppanning)
 void
 Pan::setextra (int Pextra)
 {
-  this->Pextra = Pextra;
-  mul = 4.0f * (float)Pextra / 127.0f;
+    this->Pextra = Pextra;
+    mul = 4.0f * (float)Pextra / 127.0f;
 };
 
 
 void
 Pan::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 9;
-  const int NUM_PRESETS = 2;
-  int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //AutoPan
-    {64, 64, 26, 0, 0, 0, 0, 1, 0},
-    //Extra Stereo
-    {64, 64, 80, 0, 0, 0, 10, 0, 1}
-  };
+    const int PRESET_SIZE = 9;
+    const int NUM_PRESETS = 2;
+    int presets[NUM_PRESETS][PRESET_SIZE] = {
+        //AutoPan
+        {64, 64, 26, 0, 0, 0, 0, 1, 0},
+        //Extra Stereo
+        {64, 64, 80, 0, 0, 0, 10, 0, 1}
+    };
 
-  if(npreset>NUM_PRESETS-1)
-   {
- 
-   Fpre->ReadPreset(13,npreset-NUM_PRESETS+1);
-   for (int n = 0; n < PRESET_SIZE; n++)
-   changepar (n, pdata[n]);
-  }
-   else
-   {
+    if(npreset>NUM_PRESETS-1) {
 
-  for (int n = 0; n < PRESET_SIZE; n++)
-    changepar (n, presets[npreset][n]);
-   }
+        Fpre->ReadPreset(13,npreset-NUM_PRESETS+1);
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar (n, pdata[n]);
+    } else {
 
-  Ppreset = npreset;
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar (n, presets[npreset][n]);
+    }
+
+    Ppreset = npreset;
 
 
 };
@@ -193,39 +187,38 @@ void
 Pan::changepar (int npar, int value)
 {
 
-  switch (npar)
-    {
+    switch (npar) {
     case 0:
-      setvolume (value);
-      break;
+        setvolume (value);
+        break;
     case 1:
-      setpanning (value);
-      break;
+        setpanning (value);
+        break;
     case 2:
-      lfo.Pfreq = value;
-      lfo.updateparams ();
-      break;
+        lfo.Pfreq = value;
+        lfo.updateparams ();
+        break;
     case 3:
-      lfo.Prandomness = value;
-      lfo.updateparams ();
-      break;
+        lfo.Prandomness = value;
+        lfo.updateparams ();
+        break;
     case 4:
-      lfo.PLFOtype = value;
-      lfo.updateparams ();
-      break;
+        lfo.PLFOtype = value;
+        lfo.updateparams ();
+        break;
     case 5:
-      lfo.Pstereo = value;
-      lfo.updateparams ();
-      break;
+        lfo.Pstereo = value;
+        lfo.updateparams ();
+        break;
     case 6:
-      setextra (value);
-      break;
+        setextra (value);
+        break;
     case 7:
-      PAutoPan = value;
-      break;
+        PAutoPan = value;
+        break;
     case 8:
-      PextraON = value;
-      break;
+        PextraON = value;
+        break;
 
     }
 
@@ -236,37 +229,36 @@ Pan::changepar (int npar, int value)
 int
 Pan::getpar (int npar)
 {
-  switch (npar)
-    {
+    switch (npar) {
     case 0:
-      return (Pvolume);
-      break;
+        return (Pvolume);
+        break;
     case 1:
-      return (Ppanning);
-      break;
+        return (Ppanning);
+        break;
     case 2:
-      return (lfo.Pfreq);
-      break;
+        return (lfo.Pfreq);
+        break;
     case 3:
-      return (lfo.Prandomness);
-      break;
+        return (lfo.Prandomness);
+        break;
     case 4:
-      return (lfo.PLFOtype);
-      break;
+        return (lfo.PLFOtype);
+        break;
     case 5:
-      return (lfo.Pstereo);
-      break;
+        return (lfo.Pstereo);
+        break;
     case 6:
-      return (Pextra);
-      break;
+        return (Pextra);
+        break;
     case 7:
-      return (PAutoPan);
-      break;
+        return (PAutoPan);
+        break;
     case 8:
-      return (PextraON);
-      break;
+        return (PextraON);
+        break;
     default:
-      return (0);
+        return (0);
 
     }
 

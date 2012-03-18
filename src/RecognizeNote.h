@@ -20,38 +20,38 @@
 class Recognize
 {
 public:
-  Recognize (float * efxoutl_, float * efxoutr_, float trig);
-  ~Recognize ();
+    Recognize (float * efxoutl_, float * efxoutr_, float trig);
+    ~Recognize ();
 
-  void schmittFloat (float *indatal, float *indatar);
-  void sethpf(int value);
-  void setlpf(int value);
-  int note;
+    void schmittFloat (float *indatal, float *indatar);
+    void sethpf(int value);
+    void setlpf(int value);
+    int note;
 
-  signed short int *schmittBuffer;
-  signed short int *schmittPointer;
-  const char **notes;
-  float trigfact;
-  float lafreq;
-  float nfreq, afreq, freq;
-  float *efxoutl;
-  float *efxoutr;
-  
+    signed short int *schmittBuffer;
+    signed short int *schmittPointer;
+    const char **notes;
+    float trigfact;
+    float lafreq;
+    float nfreq, afreq, freq;
+    float *efxoutl;
+    float *efxoutr;
+
 
 
 private:
 
-  void displayFrequency (float freq);
-  void schmittInit (int size);
-  void schmittS16LE (signed short int *indata);
-  void schmittFree ();
+    void displayFrequency (float freq);
+    void schmittInit (int size);
+    void schmittS16LE (signed short int *indata);
+    void schmittFree ();
 
-  int ultima;
-  int blockSize;
+    int ultima;
+    int blockSize;
 
-  AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
+    AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
 
-  class Sustainer *Sus;
+    class Sustainer *Sus;
 
 };
 

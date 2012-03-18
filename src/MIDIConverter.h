@@ -19,11 +19,10 @@
 #include <alsa/asoundlib.h>
 
 
-struct Midi_Event
-{ 
- jack_nframes_t  time;
- int             len;    /* Length of MIDI message, in bytes. */
- jack_midi_data_t  *dataloc;
+struct Midi_Event {
+    jack_nframes_t  time;
+    int             len;    /* Length of MIDI message, in bytes. */
+    jack_midi_data_t  *dataloc;
 } ;
 
 
@@ -31,52 +30,52 @@ struct Midi_Event
 class MIDIConverter
 {
 public:
-  MIDIConverter (char *jname);
-  ~MIDIConverter ();
+    MIDIConverter (char *jname);
+    ~MIDIConverter ();
 
 
-  float *efxoutl;
-  float *efxoutr;
-  signed short int *schmittBuffer;
-  signed short int *schmittPointer;
-  const char **notes;
-  int note;
-  float nfreq, afreq, freq;
-  float TrigVal;
-  int cents;
-  void schmittFloat (int nframes, float *indatal, float *indatar);
-  void setmidichannel (int channel);
-  void panic ();
-  void setTriggerAdjust (int val);
-  void setVelAdjust (int val);
+    float *efxoutl;
+    float *efxoutr;
+    signed short int *schmittBuffer;
+    signed short int *schmittPointer;
+    const char **notes;
+    int note;
+    float nfreq, afreq, freq;
+    float TrigVal;
+    int cents;
+    void schmittFloat (int nframes, float *indatal, float *indatar);
+    void setmidichannel (int channel);
+    void panic ();
+    void setTriggerAdjust (int val);
+    void setVelAdjust (int val);
 
-  int channel;
-  int lanota;
-  int nota_actual;
-  int hay;
-  int preparada;
-  int ponla;
-  int velocity;
-  int moutdatasize;
-  int ev_count; 
-  int Moctave;
+    int channel;
+    int lanota;
+    int nota_actual;
+    int hay;
+    int preparada;
+    int ponla;
+    int velocity;
+    int moutdatasize;
+    int ev_count;
+    int Moctave;
 
-  float VelVal;
-  jack_midi_data_t  moutdata[2048];  
-  Midi_Event Midi_event[2048];
-  snd_seq_t *port;
+    float VelVal;
+    jack_midi_data_t  moutdata[2048];
+    Midi_Event Midi_event[2048];
+    snd_seq_t *port;
 
 
 private:
 
-  void displayFrequency (float freq);
-  void schmittInit (int size);
-  void schmittS16LE (int nframes, signed short int *indata);
-  void schmittFree ();
-  void MIDI_Send_Note_On (int note);
-  void MIDI_Send_Note_Off (int note);
+    void displayFrequency (float freq);
+    void schmittInit (int size);
+    void schmittS16LE (int nframes, signed short int *indata);
+    void schmittFree ();
+    void MIDI_Send_Note_On (int note);
+    void MIDI_Send_Note_Off (int note);
 
-  int blockSize;
+    int blockSize;
 
 
 

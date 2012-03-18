@@ -34,74 +34,75 @@ class Vibe
 
 public:
 
-  Vibe (float * efxoutl_, float * efxoutr_);
-  ~Vibe ();
+    Vibe (float * efxoutl_, float * efxoutr_);
+    ~Vibe ();
 
-  void out (float * smpsl, float * smpsr);
-  void setvolume(int value);
-  void setpanning(int value);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    void out (float * smpsl, float * smpsr);
+    void setvolume(int value);
+    void setpanning(int value);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
-  float outvolume;
-  float *efxoutl;
-  float *efxoutr;
+    float outvolume;
+    float *efxoutl;
+    float *efxoutr;
 
 private:
-  int Pwidth;
-  int Pfb;
-  int Plrcross;
-  int Pdepth;
-  int Ppanning;
-  int Pvolume;
-  int Pstereo;
- 
-  float fwidth;
-  float fdepth;
-  float rpanning, lpanning; 
-  float flrcross, fcross;
-  float fb;
-  EffectLFO lfo;
-  
-  float Ra, Rb, b, dTC, dRCl, dRCr, lampTC, ilampTC, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr;
-  float fbr, fbl;
-  float dalphal, dalphar;
-  float lstep,rstep;
-  float cperiod;
-  float gl, oldgl;
-  float gr, oldgr; 
-  
-  class fparams {
-  public:
-  float x1;
-  float y1;
-  //filter coefficients
-  float n0;
-  float n1;
-  float d0;
-  float d1; 
-  } vc[8], vcvo[8], ecvc[8], vevo[8], bootstrap[8];
+    int Pwidth;
+    int Pfb;
+    int Plrcross;
+    int Pdepth;
+    int Ppanning;
+    int Pvolume;
+    int Pstereo;
 
-  float vibefilter(float data, fparams *ftype, int stage); 
-  void init_vibes();
-  void modulate(float ldrl, float ldrr);
-  float bjt_shape(float data);
+    float fwidth;
+    float fdepth;
+    float rpanning, lpanning;
+    float flrcross, fcross;
+    float fb;
+    EffectLFO lfo;
 
-float R1;
-float Rv;
-float C2;
-float C1[8];
-float beta;  //transistor forward gain.
-float gain, k;
-float oldcvolt[8] ;
-float en1[8], en0[8], ed1[8], ed0[8];
-float cn1[8], cn0[8], cd1[8], cd0[8];
-float ecn1[8], ecn0[8], ecd1[8], ecd0[8];
-float on1[8], on0[8], od1[8], od0[8];
+    float Ra, Rb, b, dTC, dRCl, dRCr, lampTC, ilampTC, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr;
+    float fbr, fbl;
+    float dalphal, dalphar;
+    float lstep,rstep;
+    float cperiod;
+    float gl, oldgl;
+    float gr, oldgr;
 
-   class FPreset *Fpre;
+    class fparams
+    {
+    public:
+        float x1;
+        float y1;
+        //filter coefficients
+        float n0;
+        float n1;
+        float d0;
+        float d1;
+    } vc[8], vcvo[8], ecvc[8], vevo[8], bootstrap[8];
+
+    float vibefilter(float data, fparams *ftype, int stage);
+    void init_vibes();
+    void modulate(float ldrl, float ldrr);
+    float bjt_shape(float data);
+
+    float R1;
+    float Rv;
+    float C2;
+    float C1[8];
+    float beta;  //transistor forward gain.
+    float gain, k;
+    float oldcvolt[8] ;
+    float en1[8], en0[8], ed1[8], ed0[8];
+    float cn1[8], cn0[8], cd1[8], cd0[8];
+    float ecn1[8], ecn0[8], ecd1[8], ecd0[8];
+    float on1[8], on0[8], od1[8], od0[8];
+
+    class FPreset *Fpre;
 
 
 };

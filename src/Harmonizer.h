@@ -35,77 +35,77 @@ class Harmonizer
 {
 
 public:
-  Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
-   ~Harmonizer ();
-  void out (float *smpsl, float *smpsr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
-  void applyfilters (float * efxoutl);
-  void adjust(int DS);
+    Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
+    ~Harmonizer ();
+    void out (float *smpsl, float *smpsr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
+    void applyfilters (float * efxoutl);
+    void adjust(int DS);
 
 
-  int Ppreset;
-  int Pinterval;
-  int PMIDI;
-  int PSELECT;
-  int mira;
-  int DS_state;
-  int nPERIOD;
-  int nSAMPLE_RATE;
-  long window;
+    int Ppreset;
+    int Pinterval;
+    int PMIDI;
+    int PSELECT;
+    int mira;
+    int DS_state;
+    int nPERIOD;
+    int nSAMPLE_RATE;
+    long window;
 
-  long int hq;
+    long int hq;
 
-  double u_up;
-  double u_down;
-  float nfSAMPLE_RATE;
+    double u_up;
+    double u_down;
+    float nfSAMPLE_RATE;
 
 
-  float *efxoutl;
-  float *efxoutr;
-  float *outi;
-  float *outo;
-  float *templ, *tempr;
+    float *efxoutl;
+    float *efxoutr;
+    float *outi;
+    float *outo;
+    float *templ, *tempr;
 
-  float outvolume;
+    float outvolume;
 
 
 
 private:
 
-  int Pvolume;
-  int Pgain;
-  int Ppan;
-  int Pnote;
-  int Ptype;
+    int Pvolume;
+    int Pgain;
+    int Ppan;
+    int Pnote;
+    int Ptype;
 
-  int fPfreq;
-  int fPgain;
-  int fPq;
+    int fPfreq;
+    int fPgain;
+    int fPq;
 
-  float panning;
-  float gain;
-  float interval;
+    float panning;
+    float gain;
+    float interval;
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppan);
-  void setinterval (int Pinterval);
-  void setgain (int Pgain);
-  void setMIDI (int PMIDI);
-  void fsetfreq (int value);
-  void fsetgain (int value);
-  void fsetq (int value);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppan);
+    void setinterval (int Pinterval);
+    void setgain (int Pgain);
+    void setMIDI (int PMIDI);
+    void fsetfreq (int value);
+    void fsetgain (int value);
+    void fsetq (int value);
 
 
-  AnalogFilter *pl;
+    AnalogFilter *pl;
 
-  class Resample *U_Resample;
-  class Resample *D_Resample;
+    class Resample *U_Resample;
+    class Resample *D_Resample;
 
-  PitchShifter *PS;
-  class FPreset *Fpre;
+    PitchShifter *PS;
+    class FPreset *Fpre;
 
 };
 

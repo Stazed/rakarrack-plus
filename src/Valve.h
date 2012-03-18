@@ -1,13 +1,13 @@
 /*
-  ZynAddSubFX - a software synthesizer 
+  ZynAddSubFX - a software synthesizer
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Based on valve Steve Harris LADSPA plugin.
   Valve.h - Distorsion Effect
 
   Modified and adapted to rakarrack by Josep Andreu.
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -31,59 +31,59 @@
 class Valve
 {
 public:
-  Valve (float * efxoutl_, float * efxoutr_);
-  ~Valve ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  float Wshape(float x);
-  void cleanup ();
-  void applyfilters (float * efxoutl, float * efxoutr);
+    Valve (float * efxoutl_, float * efxoutr_);
+    ~Valve ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    float Wshape(float x);
+    void cleanup ();
+    void applyfilters (float * efxoutl, float * efxoutr);
 
-  int Ppreset;
-  float outvolume;
+    int Ppreset;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
+    float *efxoutl;
+    float *efxoutr;
 
 private:
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
-  void setlpf (int Plpf);
-  void sethpf (int Phpf);
-  void setpresence(int value);
-  void init_coefs();
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setlrcross (int Plrcross);
+    void setlpf (int Plpf);
+    void sethpf (int Phpf);
+    void setpresence(int value);
+    void init_coefs();
 
 
-  //Parametrii
-  int Pvolume;	//Volumul or E/R
-  int Ppanning;	//Panning
-  int Plrcross;	// L/R Mixing
-  int Pdrive;		//the input amplification
-  int Plevel;		//the ouput amplification
-  int Pnegate;	//if the input is negated 
-  int Plpf;		//lowpass filter
-  int Phpf;		//highpass filter
-  int Pstereo;	//0=mono,1=stereo
-  int Pprefiltering;	//if you want to do the filtering before the distorsion
-  int Q_q;
-  int Ped;
-  int Presence;
-  
-  //Parametrii reali
-  float panning, lrcross, q, dist, otml,otmr, itml, itmr, factor, atk;
-  float rm[10];
-  
-  float coef;
-  float qcoef;
-  float fdist;
-  float inputvol;
-  
-  AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
-  class HarmEnhancer *harm;
-  class FPreset *Fpre;
+    //Parametrii
+    int Pvolume;	//Volumul or E/R
+    int Ppanning;	//Panning
+    int Plrcross;	// L/R Mixing
+    int Pdrive;		//the input amplification
+    int Plevel;		//the ouput amplification
+    int Pnegate;	//if the input is negated
+    int Plpf;		//lowpass filter
+    int Phpf;		//highpass filter
+    int Pstereo;	//0=mono,1=stereo
+    int Pprefiltering;	//if you want to do the filtering before the distorsion
+    int Q_q;
+    int Ped;
+    int Presence;
+
+    //Parametrii reali
+    float panning, lrcross, q, dist, otml,otmr, itml, itmr, factor, atk;
+    float rm[10];
+
+    float coef;
+    float qcoef;
+    float fdist;
+    float inputvol;
+
+    AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
+    class HarmEnhancer *harm;
+    class FPreset *Fpre;
 
 };
 

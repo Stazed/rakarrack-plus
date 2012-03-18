@@ -34,33 +34,33 @@ class Opticaltrem
 
 public:
 
-  Opticaltrem (float * efxoutl_, float * efxoutr_);
-  ~Opticaltrem ();
+    Opticaltrem (float * efxoutl_, float * efxoutr_);
+    ~Opticaltrem ();
 
-  void out (float * smpsl, float * smpsr);
-  void setpanning(int value);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    void out (float * smpsl, float * smpsr);
+    void setpanning(int value);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
-  float *efxoutl;
-  float *efxoutr;
+    float *efxoutl;
+    float *efxoutr;
 
 
 private:
-  int Pdepth;
-  int Ppanning;
-  
-  float Ra, Rb, R1, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
-  float lstep,rstep;
-  float cperiod;
-  float gl, oldgl;
-  float gr, oldgr; 
-  float rpanning, lpanning; 
-  EffectLFO lfo;
+    int Pdepth;
+    int Ppanning;
 
-  class FPreset *Fpre;
+    float Ra, Rb, R1, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
+    float lstep,rstep;
+    float cperiod;
+    float gl, oldgl;
+    float gr, oldgr;
+    float rpanning, lpanning;
+    EffectLFO lfo;
+
+    class FPreset *Fpre;
 
 };
 

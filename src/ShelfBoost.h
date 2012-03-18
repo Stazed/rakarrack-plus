@@ -1,10 +1,10 @@
 /*
-  Rakarrack   Audio FX software 
+  Rakarrack   Audio FX software
   ShelfBoost.h - Tone Booster
   Modified for rakarrack by Ryan Billing & Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -27,37 +27,37 @@
 class ShelfBoost
 {
 public:
-  ShelfBoost (float * efxoutl_, float * efxoutr_);
-  ~ShelfBoost ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    ShelfBoost (float * efxoutl_, float * efxoutr_);
+    ~ShelfBoost ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
 
-  int Ppreset;
+    int Ppreset;
 
-  float outvolume;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
+    float *efxoutl;
+    float *efxoutr;
 
 private:
 
-  void setvolume (int value);
+    void setvolume (int value);
 
-  int Pvolume;
-  int Plevel;
-  int Pq1;
-  int Pfreq1;
-  int Pstereo;
-  
-  float freq1,q1,gain,u_gain; 
+    int Pvolume;
+    int Plevel;
+    int Pq1;
+    int Pfreq1;
+    int Pstereo;
 
-  class AnalogFilter *RB1l, *RB1r;
+    float freq1,q1,gain,u_gain;
 
-   class FPreset *Fpre;
+    class AnalogFilter *RB1l, *RB1r;
+
+    class FPreset *Fpre;
 
 };
 

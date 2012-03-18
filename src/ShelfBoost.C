@@ -1,10 +1,10 @@
 /*
-  Rakarrack   Audio FX software 
+  Rakarrack   Audio FX software
   ShelfBoost.C - Tone Booster
   Modified for rakarrack by Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -27,22 +27,22 @@
 
 ShelfBoost::ShelfBoost (float * efxoutl_, float * efxoutr_)
 {
-  efxoutl = efxoutl_;
-  efxoutr = efxoutr_;
+    efxoutl = efxoutl_;
+    efxoutr = efxoutr_;
 
 
-  //default values
-  Ppreset = 0;
-  Pvolume = 50;
-  Pstereo = 0;
+    //default values
+    Ppreset = 0;
+    Pvolume = 50;
+    Pstereo = 0;
 
-  RB1l =  new AnalogFilter(7,3200.0f,0.5f,0);
-  RB1r =  new AnalogFilter(7,3200.0f,0.5f,0);
+    RB1l =  new AnalogFilter(7,3200.0f,0.5f,0);
+    RB1r =  new AnalogFilter(7,3200.0f,0.5f,0);
 
 
-  cleanup ();
+    cleanup ();
 
-  setpreset (Ppreset);
+    setpreset (Ppreset);
 };
 
 ShelfBoost::~ShelfBoost ()
@@ -56,9 +56,9 @@ void
 ShelfBoost::cleanup ()
 {
 
- RB1l->cleanup();
- RB1r->cleanup();
- 
+    RB1l->cleanup();
+    RB1r->cleanup();
+
 };
 
 
@@ -68,20 +68,19 @@ ShelfBoost::cleanup ()
 void
 ShelfBoost::out (float * smpsl, float * smpsr)
 {
-int i;
+    int i;
 
 
-RB1l->filterout(smpsl);
-if(Pstereo) RB1r->filterout(smpsr);
+    RB1l->filterout(smpsl);
+    if(Pstereo) RB1r->filterout(smpsr);
 
 
-for(i=0; i<PERIOD; i++)
-{
- smpsl[i]*=outvolume*u_gain;
- if(Pstereo) smpsr[i]*=outvolume*u_gain;
-}
+    for(i=0; i<PERIOD; i++) {
+        smpsl[i]*=outvolume*u_gain;
+        if(Pstereo) smpsr[i]*=outvolume*u_gain;
+    }
 
-if(!Pstereo) memcpy(smpsr,smpsl,sizeof(float)*PERIOD);
+    if(!Pstereo) memcpy(smpsr,smpsl,sizeof(float)*PERIOD);
 
 
 
@@ -95,41 +94,38 @@ if(!Pstereo) memcpy(smpsr,smpsl,sizeof(float)*PERIOD);
 void
 ShelfBoost::setvolume (int value)
 {
-  Pvolume = value;
-  outvolume = (float)Pvolume / 127.0f;
+    Pvolume = value;
+    outvolume = (float)Pvolume / 127.0f;
 
 };
 
 void
 ShelfBoost::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 5;
-  const int NUM_PRESETS = 4;
-  int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Trebble
-    {127, 64, 16000, 1, 24},
-    //Mid
-    {127, 64, 4400, 1, 24},
-    //Bass
-    {127, 64, 220, 1, 24},
-    //Distortion 1
-    {6, 40, 12600, 1, 127}    
+    const int PRESET_SIZE = 5;
+    const int NUM_PRESETS = 4;
+    int presets[NUM_PRESETS][PRESET_SIZE] = {
+        //Trebble
+        {127, 64, 16000, 1, 24},
+        //Mid
+        {127, 64, 4400, 1, 24},
+        //Bass
+        {127, 64, 220, 1, 24},
+        //Distortion 1
+        {6, 40, 12600, 1, 127}
 
-  };
+    };
 
-  if(npreset>NUM_PRESETS-1)  
-    {   
-     Fpre->ReadPreset(34,npreset-NUM_PRESETS+1);    
-     for (int n = 0; n < PRESET_SIZE; n++)    
-     changepar (n, pdata[n]);    
-    }    
-  else                                      
-  {     
-  for (int n = 0; n < PRESET_SIZE; n++)
-  changepar (n, presets[npreset][n]);
-  }
-  Ppreset = npreset;
-  cleanup ();
+    if(npreset>NUM_PRESETS-1) {
+        Fpre->ReadPreset(34,npreset-NUM_PRESETS+1);
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar (n, pdata[n]);
+    } else {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar (n, presets[npreset][n]);
+    }
+    Ppreset = npreset;
+    cleanup ();
 
 };
 
@@ -137,59 +133,57 @@ ShelfBoost::setpreset (int npreset)
 void
 ShelfBoost::changepar (int npar, int value)
 {
-  switch (npar)
-    {
+    switch (npar) {
     case 0:
-      setvolume (value);
-      break;
-     case 1:
-      Pq1 = value;
-      q1 = powf (30.0f, ((float)value - 64.0f) / 64.0f);
-      RB1l->setq(q1);
-      RB1r->setq(q1);
-      break;
-     case 2: 
-      Pfreq1 = value;
-      freq1 = (float) value;
-      RB1l->setfreq(freq1);
-      RB1r->setfreq(freq1);
-      break;
+        setvolume (value);
+        break;
+    case 1:
+        Pq1 = value;
+        q1 = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+        RB1l->setq(q1);
+        RB1r->setq(q1);
+        break;
+    case 2:
+        Pfreq1 = value;
+        freq1 = (float) value;
+        RB1l->setfreq(freq1);
+        RB1r->setfreq(freq1);
+        break;
     case 3:
-      Pstereo = value;
-      break;
+        Pstereo = value;
+        break;
     case 4:
-      Plevel = value;
-      gain = .375f * (float)value;
-      u_gain = 1.0f / gain;
-      RB1l->setgain(gain);
-      RB1r->setgain(gain); 
-      break;
- 
+        Plevel = value;
+        gain = .375f * (float)value;
+        u_gain = 1.0f / gain;
+        RB1l->setgain(gain);
+        RB1r->setgain(gain);
+        break;
+
     };
 };
 
 int
 ShelfBoost::getpar (int npar)
 {
-  switch (npar)
-    {
+    switch (npar) {
     case 0:
-      return (Pvolume);
-      break;
+        return (Pvolume);
+        break;
     case 1:
-      return (Pq1);
-      break;
+        return (Pq1);
+        break;
     case 2:
-      return (Pfreq1);
-      break;
+        return (Pfreq1);
+        break;
     case 3:
-      return (Pstereo);
-      break;
+        return (Pstereo);
+        break;
     case 4:
-      return (Plevel);
-      break; 
+        return (Plevel);
+        break;
 
     };
-  return (0);			//in case of bogus parameter number
+    return (0);			//in case of bogus parameter number
 };
 

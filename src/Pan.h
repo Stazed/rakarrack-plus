@@ -31,43 +31,43 @@ class Pan
 {
 
 public:
-  Pan (float *efxoutl_, float *efxoutr_);
-   ~Pan ();
-  void out (float *smpsl, float *smpsr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    Pan (float *efxoutl_, float *efxoutr_);
+    ~Pan ();
+    void out (float *smpsl, float *smpsr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
 
-  int Ppreset;
-  float outvolume;
+    int Ppreset;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
+    float *efxoutl;
+    float *efxoutr;
 
 
 
 private:
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setextra (int Pdepth);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setextra (int Pdepth);
 
-  int Pvolume;
-  int Ppanning;
-  int Pextra;
-  int PAutoPan;
-  int PextraON;
+    int Pvolume;
+    int Ppanning;
+    int Pextra;
+    int PAutoPan;
+    int PextraON;
 
 
-  float dvalue,cdvalue,sdvalue;
-  float panning, mul;
-  float lfol, lfor;
-  float ll, lr;
+    float dvalue,cdvalue,sdvalue;
+    float panning, mul;
+    float lfol, lfor;
+    float ll, lr;
 
-  EffectLFO lfo;
-  class FPreset *Fpre;
+    EffectLFO lfo;
+    class FPreset *Fpre;
 
 };
 

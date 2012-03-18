@@ -1,14 +1,14 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   Phaser.h - Phaser effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
   Modified for rakarrack by Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -30,51 +30,51 @@
 class Phaser
 {
 public:
-  Phaser (float * efxoutl_, float * efxoutr_);
-  ~Phaser ();
-  void out (float * smpsl, float * smpsr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
-  int Ppreset;
-  float outvolume;
+    Phaser (float * efxoutl_, float * efxoutr_);
+    ~Phaser ();
+    void out (float * smpsl, float * smpsr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
+    int Ppreset;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
+    float *efxoutl;
+    float *efxoutr;
 
 
 
 private:
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setdepth (int Pdepth);
-  void setfb (int Pfb);
-  void setlrcross (int Plrcross);
-  void setstages (int Pstages);
-  void setphase (int Pphase);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setdepth (int Pdepth);
+    void setfb (int Pfb);
+    void setlrcross (int Plrcross);
+    void setstages (int Pstages);
+    void setphase (int Pphase);
 
 
-  //Parametrii Phaser
-  int Pvolume;
-  int Ppanning;
-  int Pdepth;		//the depth of the Phaser
-  int Pfb;		//feedback
-  int Plrcross;	//feedback
-  int Pstages;
-  int Poutsub;	//if I wish to substract the output instead of the adding it
-  int Pphase;
+    //Parametrii Phaser
+    int Pvolume;
+    int Ppanning;
+    int Pdepth;		//the depth of the Phaser
+    int Pfb;		//feedback
+    int Plrcross;	//feedback
+    int Pstages;
+    int Poutsub;	//if I wish to substract the output instead of the adding it
+    int Pphase;
 
-  //Control Parametrii
+    //Control Parametrii
 
-  //Valorile interne
-  float panning, fb, depth, lrcross, fbl, fbr, phase;
-  float *oldl, *oldr;
-  float oldlgain, oldrgain;
+    //Valorile interne
+    float panning, fb, depth, lrcross, fbl, fbr, phase;
+    float *oldl, *oldr;
+    float oldlgain, oldrgain;
 
-  EffectLFO lfo;		//lfo-ul Phaser
-  class FPreset *Fpre;
+    EffectLFO lfo;		//lfo-ul Phaser
+    class FPreset *Fpre;
 
 };
 

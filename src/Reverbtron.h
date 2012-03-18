@@ -2,12 +2,12 @@
   Reverbtron.h - Reverbtron Effect
 
   Author: Ryan Billing & Josep Andreu
-  
+
   Adapted effect structure of ZynAddSubFX - a software synthesizer
   Author: Nasca Octavian Paul
-   
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -31,88 +31,88 @@
 class Reverbtron
 {
 public:
-  Reverbtron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq);
-  ~Reverbtron ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
-  int setfile (int value);
-  void adjust(int DS);
+    Reverbtron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq);
+    ~Reverbtron ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
+    int setfile (int value);
+    void adjust(int DS);
 
-  int Ppreset;
+    int Ppreset;
 
-  float *efxoutl;
-  float *efxoutr;
-  float outvolume;
+    float *efxoutl;
+    float *efxoutr;
+    float outvolume;
 
-  char Filename[128];
+    char Filename[128];
 
 
 private:
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void sethidamp (int Phidamp);
-  void setlpf (int Plpf);
-  void setfb(int value);
-  void convert_time();
-  void loaddefault();
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void sethidamp (int Phidamp);
+    void setlpf (int Plpf);
+    void setfb(int value);
+    void convert_time();
+    void loaddefault();
 
 
-  //Parametrii
-  int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
-  int Ppanning;	//Panning
-  int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
-  int Phidamp;
-  int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
-  int Plength;		//20... 1500// Set maximum number of IR points to calculate.
-  int Puser;		//-64...64//Feedback.
-  int Pstretch;		//-64 ... 64//For stretching reverb responses
-  int Pidelay;         //0 ... 500ms// initial delay time
-  int Filenum;
-  int Psafe;
-  int Pfb;		//-64 ... 64// amount of feedback
-  int Pfade;
-  int Pes;		//0 or 1// Add stereo spatialization
-  int Prv;              //Shuffle
-  int Plpf;
-  int Pdiff;
+    //Parametrii
+    int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
+    int Ppanning;	//Panning
+    int Plrcross;	// L/R Mixing  // This is a mono effect, so lrcross and panning are pointless
+    int Phidamp;
+    int Plevel;		//This should only adjust the level of the IR effect, and not wet/dry mix
+    int Plength;		//20... 1500// Set maximum number of IR points to calculate.
+    int Puser;		//-64...64//Feedback.
+    int Pstretch;		//-64 ... 64//For stretching reverb responses
+    int Pidelay;         //0 ... 500ms// initial delay time
+    int Filenum;
+    int Psafe;
+    int Pfb;		//-64 ... 64// amount of feedback
+    int Pfade;
+    int Pes;		//0 or 1// Add stereo spatialization
+    int Prv;              //Shuffle
+    int Plpf;
+    int Pdiff;
 
-  int imctr; 
-  int imax;
-  int offset;
-  int hoffset;
-  int maxx_size;
-  int data_length;
-  int avgtime;
-  int hrtf_size;
-  int hlength;
-  int DS_state;
-  int nPERIOD;
-  int nSAMPLE_RATE;
+    int imctr;
+    int imax;
+    int offset;
+    int hoffset;
+    int maxx_size;
+    int data_length;
+    int avgtime;
+    int hrtf_size;
+    int hlength;
+    int DS_state;
+    int nPERIOD;
+    int nSAMPLE_RATE;
 
 
-  int *time, *rndtime;
-  double u_up;
-  double u_down;
-  float nfSAMPLE_RATE;
+    int *time, *rndtime;
+    double u_up;
+    double u_down;
+    float nfSAMPLE_RATE;
 
-  float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
-  float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-  float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
-  float *templ, *tempr;
-  float level,fb, feedback,levpanl,levpanr;
-  float roomsize;
+    float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
+    float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
+    float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
+    float *templ, *tempr;
+    float level,fb, feedback,levpanl,levpanr;
+    float roomsize;
 
-  class Resample *U_Resample;
-  class Resample *D_Resample;
+    class Resample *U_Resample;
+    class Resample *D_Resample;
 
- 
-  class AnalogFilter *lpfl, *lpfr;	//filters
 
-  class FPreset *Fpre;
+    class AnalogFilter *lpfl, *lpfr;	//filters
+
+    class FPreset *Fpre;
 
 };
 

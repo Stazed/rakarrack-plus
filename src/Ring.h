@@ -5,9 +5,9 @@
   Ring.h - Distorsion Effect
 
   Modified and adapted to rakarrack by Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -30,53 +30,53 @@
 class Ring
 {
 public:
-  Ring (float * efxoutl_, float * efxoutr_);
-  ~Ring ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void setscale();
-  void cleanup ();
-  void Create_Tables();
-  
-  int Ppreset;
-  int Pafreq;
-  int Pfreq;
+    Ring (float * efxoutl_, float * efxoutr_);
+    ~Ring ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void setscale();
+    void cleanup ();
+    void Create_Tables();
 
-  float outvolume;
+    int Ppreset;
+    int Pafreq;
+    int Pfreq;
 
-  float *efxoutl;
-  float *efxoutr;
+    float outvolume;
+
+    float *efxoutl;
+    float *efxoutr;
 
 private:
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setlrcross (int Plrcross);
 
 
-  //Parametrii
-  int Pvolume;	//Volumul or E/R
-  int Ppanning;	//Panning
-  int Plrcross;	// L/R Mixing
-  int Pinput;
-  int Plevel;		//the ouput amplification
-  int Pdepthp; 
-  int Psin;		//highpass filter
-  int Ptri;
-  int Psaw;
-  int Psqu;
-  int Pstereo;	//0=mono,1=stereo
-  
+    //Parametrii
+    int Pvolume;	//Volumul or E/R
+    int Ppanning;	//Panning
+    int Plrcross;	// L/R Mixing
+    int Pinput;
+    int Plevel;		//the ouput amplification
+    int Pdepthp;
+    int Psin;		//highpass filter
+    int Ptri;
+    int Psaw;
+    int Psqu;
+    int Pstereo;	//0=mono,1=stereo
 
-  //Parametrii reali
-  unsigned int offset;
-  float panning, lrcross; 
-  float *sin_tbl, *tri_tbl, *saw_tbl, *squ_tbl;
-  float sin,tri,saw,squ,scale,depth, idepth;
 
-  class FPreset *Fpre;
+    //Parametrii reali
+    unsigned int offset;
+    float panning, lrcross;
+    float *sin_tbl, *tri_tbl, *saw_tbl, *squ_tbl;
+    float sin,tri,saw,squ,scale,depth, idepth;
+
+    class FPreset *Fpre;
 };
 
 

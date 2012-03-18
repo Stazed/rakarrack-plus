@@ -1,14 +1,14 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   Distorsion.h - Distorsion Effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
   Modified for rakarrack by Josep Andreu  & Ryan Billing
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -36,62 +36,62 @@
 class NewDist
 {
 public:
-  NewDist (float * efxoutl_, float * efxoutr_);
-  ~NewDist ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
-  void applyfilters (float * efxoutl, float * efxoutr);
+    NewDist (float * efxoutl_, float * efxoutr_);
+    ~NewDist ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
+    void applyfilters (float * efxoutl, float * efxoutr);
 
-  int Ppreset;
-  float outvolume;
+    int Ppreset;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
-  float inpll[4096];
-  float inplr[4096];
+    float *efxoutl;
+    float *efxoutr;
+    float inpll[4096];
+    float inplr[4096];
 
 private:
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setlrcross (int Plrcross);
-  void setoctave (int Poctave);
-  void setlpf (int Plpf);
-  void sethpf (int Phpf);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setlrcross (int Plrcross);
+    void setoctave (int Poctave);
+    void setlpf (int Plpf);
+    void sethpf (int Phpf);
 
 
-  //Parametrii
-  int Pvolume;	//Volumul or E/R
-  int Ppanning;	//Panning
-  int Plrcross;	// L/R Mixing
-  int Pdrive;		//the input amplification
-  int Plevel;		//the ouput amplification
-  int Ptype;		//Distorsion type
-  int Pnegate;	//if the input is negated 
-  int Plpf;		//lowpass filter
-  int Phpf;		//highpass filter
-  int Prfreq;	        
-  int Pprefiltering;	//if you want to do the filtering before the distorsion
-  int Poctave;	//mix sub octave
+    //Parametrii
+    int Pvolume;	//Volumul or E/R
+    int Ppanning;	//Panning
+    int Plrcross;	// L/R Mixing
+    int Pdrive;		//the input amplification
+    int Plevel;		//the ouput amplification
+    int Ptype;		//Distorsion type
+    int Pnegate;	//if the input is negated
+    int Plpf;		//lowpass filter
+    int Phpf;		//highpass filter
+    int Prfreq;
+    int Pprefiltering;	//if you want to do the filtering before the distorsion
+    int Poctave;	//mix sub octave
 
 
-  float rfreq;
-  float panning, lrcross, octave_memoryl, togglel, octave_memoryr, toggler, octmix;
-  float *octoutl, *octoutr;
+    float rfreq;
+    float panning, lrcross, octave_memoryl, togglel, octave_memoryr, toggler, octmix;
+    float *octoutl, *octoutr;
 
 
-  //Parametrii reali
-  AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
-  class Waveshaper *wshapel, *wshaper;
+    //Parametrii reali
+    AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
+    class Waveshaper *wshapel, *wshaper;
 
 
-  class Filter *filterl, *filterr;
-  class FilterParams *filterpars;  
+    class Filter *filterl, *filterr;
+    class FilterParams *filterpars;
 
-  class FPreset *Fpre;
+    class FPreset *Fpre;
 
 };
 

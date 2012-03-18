@@ -66,39 +66,39 @@
 class fft_filter
 {
 public:
-  //fft_filter (float * efxoutl_, float * efxoutr_, float size);
-  fft_filter();
-  ~fft_filter ();
-  void out (float * smpsl, float * smpr);
-  void make_window(int n, float* window);
-  void load_impulse(int size, char* filename);
-  void run_filter(float* smps);
-  void resample_impulse(int size, float* ir);
-  void cleanup ();
-  float outvolume;
+    //fft_filter (float * efxoutl_, float * efxoutr_, float size);
+    fft_filter();
+    ~fft_filter ();
+    void out (float * smpsl, float * smpr);
+    void make_window(int n, float* window);
+    void load_impulse(int size, char* filename);
+    void run_filter(float* smps);
+    void resample_impulse(int size, float* ir);
+    void cleanup ();
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
- 
-  //makes linear indexing easier
-  void realifft(int n, float *real);
-  void realfft(int n, float *real);
+    float *efxoutl;
+    float *efxoutr;
+
+    //makes linear indexing easier
+    void realifft(int n, float *real);
+    void realfft(int n, float *real);
 
 //  void interleaved_real_fft(int n, float *real);
 //  void interleaved_real_ifft(int n, float *real);
 
 private:
-void mayer_fft(int n, float *real, float *imag);
-void mayer_ifft(int n, float *real, float *imag);
-void mayer_fht(float *fz, int n);
-  void mayer_realifft(int n, float *real);
-  void mayer_realfft(int n, float *real);
+    void mayer_fft(int n, float *real, float *imag);
+    void mayer_ifft(int n, float *real, float *imag);
+    void mayer_fht(float *fz, int n);
+    void mayer_realifft(int n, float *real);
+    void mayer_realfft(int n, float *real);
 
-static float halsec[20];
-static float costab[20];
-static float sintab[20];
-static float coswrk[20];
-static float sinwrk[20];
+    static float halsec[20];
+    static float costab[20];
+    static float sintab[20];
+    static float coswrk[20];
+    static float sinwrk[20];
 
 };
 

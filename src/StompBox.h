@@ -1,11 +1,11 @@
 /*
-  Rakarrack   Audio FX software 
+  Rakarrack   Audio FX software
   Stompbox.h - stompbox modeler
   Using Steve Harris LADSPA Plugin harmonic_gen
   Modified for rakarrack by Ryan Billing & Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -29,42 +29,42 @@
 class StompBox
 {
 public:
-  StompBox (float * efxoutl_, float * efxoutr_);
-  ~StompBox ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    StompBox (float * efxoutl_, float * efxoutr_);
+    ~StompBox ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
 
-  int Ppreset;
+    int Ppreset;
 
-  float *efxoutl;
-  float *efxoutr;
+    float *efxoutl;
+    float *efxoutr;
 
 private:
 
-  void setvolume (int value);
-  void init_mode (int value);
-  void init_tone ();  
+    void setvolume (int value);
+    void init_mode (int value);
+    void init_tone ();
 
-  int Pvolume;
-  int Pgain;
-  int Phigh;
-  int Pmid;
-  int Plow;
-  int Pmode;
+    int Pvolume;
+    int Pgain;
+    int Phigh;
+    int Pmid;
+    int Plow;
+    int Pmode;
 
-  float gain, pre1gain, pre2gain, lowb, midb, highb, volume; 
-  float LG, MG, HG, RGP2, RGPST, pgain;
+    float gain, pre1gain, pre2gain, lowb, midb, highb, volume;
+    float LG, MG, HG, RGP2, RGPST, pgain;
 
-  AnalogFilter *linput, *lpre1, *lpre2, *lpost, *ltonehg, *ltonemd, *ltonelw;
-  AnalogFilter *rinput, *rpre1, *rpre2, *rpost, *rtonehg, *rtonemd, *rtonelw;  
-  AnalogFilter *ranti, *lanti;
-  class Waveshaper *lwshape, *rwshape, *lwshape2, *rwshape2;  
+    AnalogFilter *linput, *lpre1, *lpre2, *lpost, *ltonehg, *ltonemd, *ltonelw;
+    AnalogFilter *rinput, *rpre1, *rpre2, *rpost, *rtonehg, *rtonemd, *rtonelw;
+    AnalogFilter *ranti, *lanti;
+    class Waveshaper *lwshape, *rwshape, *lwshape2, *rwshape2;
 
-  class FPreset *Fpre;
+    class FPreset *Fpre;
 
 };
 

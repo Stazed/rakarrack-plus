@@ -34,76 +34,76 @@ class StereoHarm
 {
 
 public:
-  StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
-   ~StereoHarm ();
-  void out (float *smpsl, float *smpsr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
-  void adjust(int DS);
+    StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
+    ~StereoHarm ();
+    void out (float *smpsl, float *smpsr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
+    void adjust(int DS);
 
 
-  int Ppreset;
-  int Pintervall;
-  int Pintervalr;
-  
-  int PMIDI;
-  int PSELECT;
-  int mira;
-  int DS_state;
-  int nPERIOD;
-  int nSAMPLE_RATE;
-  long window;
+    int Ppreset;
+    int Pintervall;
+    int Pintervalr;
 
-  long int hq;
+    int PMIDI;
+    int PSELECT;
+    int mira;
+    int DS_state;
+    int nPERIOD;
+    int nSAMPLE_RATE;
+    long window;
 
-  double u_up;
-  double u_down;
-  float nfSAMPLE_RATE;
+    long int hq;
+
+    double u_up;
+    double u_down;
+    float nfSAMPLE_RATE;
 
 
-  float *efxoutl;
-  float *efxoutr;
-  float *outil,*outir;
-  float *outol,*outor;
-  float *templ, *tempr;
+    float *efxoutl;
+    float *efxoutr;
+    float *outil,*outir;
+    float *outol,*outor;
+    float *templ, *tempr;
 
-  float outvolume;
+    float outvolume;
 
 
 
 private:
 
-  int Pvolume;
-  int Plrcross;
-  int Pgainl;
-  int Pgainr;
-  int Pchromel;
-  int Pchromer;
-  int Pnote;
-  int Ptype;
+    int Pvolume;
+    int Plrcross;
+    int Pgainl;
+    int Pgainr;
+    int Pchromel;
+    int Pchromer;
+    int Pnote;
+    int Ptype;
 
 
-  float gainl,gainr;
-  float intervall;
-  float intervalr;
-  float chromel;
-  float chromer;
-  float lrcross;
-  void setvolume (int Pvolume);
-  void setinterval (int chan, int value);
-  void setchrome(int chan, int value);
-  void setgain (int chan, int value);
-  void setMIDI (int PMIDI);
-  void setlrcross(int value);
+    float gainl,gainr;
+    float intervall;
+    float intervalr;
+    float chromel;
+    float chromer;
+    float lrcross;
+    void setvolume (int Pvolume);
+    void setinterval (int chan, int value);
+    void setchrome(int chan, int value);
+    void setgain (int chan, int value);
+    void setMIDI (int PMIDI);
+    void setlrcross(int value);
 
-  class Resample *U_Resample;
-  class Resample *D_Resample;
+    class Resample *U_Resample;
+    class Resample *D_Resample;
 
-  PitchShifter *PSl, *PSr;
+    PitchShifter *PSl, *PSr;
 
-  class FPreset *Fpre;
+    class FPreset *Fpre;
 };
 
 #endif

@@ -39,68 +39,68 @@ class Shifter
 {
 
 public:
-  Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
-   ~Shifter ();
-  void out (float *smpsl, float *smpsr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
-  void applyfilters (float * efxoutl);
-  void adjust(int DS);
+    Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
+    ~Shifter ();
+    void out (float *smpsl, float *smpsr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
+    void applyfilters (float * efxoutl);
+    void adjust(int DS);
 
-  int Ppreset;
-  long int hq;
-  float outvolume;
+    int Ppreset;
+    long int hq;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
-  float *outi;
-  float *outo;
+    float *efxoutl;
+    float *efxoutr;
+    float *outi;
+    float *outo;
 
 
 
 
 private:
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppan);
-  void setinterval (int Pinterval);
-  void setgain (int Pgain);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppan);
+    void setinterval (int Pinterval);
+    void setgain (int Pgain);
 
-  int Pvolume;
-  int Pgain;
-  int Ppan;
-  int Pinterval;
-  int Pupdown;
-  int Pmode;
-  int Pattack;
-  int Pdecay;
-  int Pthreshold;
-  int Pwhammy;
-  int state;
-  int DS_state;
-  int nPERIOD;
-  int nSAMPLE_RATE;
-  long window;
-  
-  double u_up;
-  double u_down;
-  float nfSAMPLE_RATE;
-  float env, t_level, td_level, tz_level;
-  float a_rate,d_rate,tune, range, whammy;
-  float panning;
-  float gain;
-  float interval;
-  float *templ, *tempr;
-  
-  Resample *U_Resample;
-  Resample *D_Resample;
+    int Pvolume;
+    int Pgain;
+    int Ppan;
+    int Pinterval;
+    int Pupdown;
+    int Pmode;
+    int Pattack;
+    int Pdecay;
+    int Pthreshold;
+    int Pwhammy;
+    int state;
+    int DS_state;
+    int nPERIOD;
+    int nSAMPLE_RATE;
+    long window;
+
+    double u_up;
+    double u_down;
+    float nfSAMPLE_RATE;
+    float env, t_level, td_level, tz_level;
+    float a_rate,d_rate,tune, range, whammy;
+    float panning;
+    float gain;
+    float interval;
+    float *templ, *tempr;
+
+    Resample *U_Resample;
+    Resample *D_Resample;
 
 
-  PitchShifter *PS;
+    PitchShifter *PS;
 
-  class FPreset *Fpre;
+    class FPreset *Fpre;
 };
 
 #endif

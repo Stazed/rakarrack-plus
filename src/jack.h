@@ -27,7 +27,7 @@
 
 #ifdef JACK_SESSION
 #include <jack/session.h>
-#endif 
+#endif
 
 int JACKstart (RKR * rkr_, jack_client_t * jackclient);
 void JACKfinish ();

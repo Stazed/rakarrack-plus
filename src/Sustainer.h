@@ -1,12 +1,12 @@
 /*
   Rakarrack Guitar FX
- 
+
   Sustainer.h - Simple compressor/sustainer effect with easy interface, minimal controls
   Copyright (C) 2010 Ryan Billing
   Author: Ryan Billing
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 3 of the GNU General Public License 
+  it under the terms of version 3 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -28,30 +28,30 @@
 class Sustainer
 {
 public:
-  Sustainer (float * efxoutl_, float * efxoutr_);
-  ~Sustainer ();
-   void cleanup (); 
-   
-  void out (float * smpsl, float * smpr);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void setpreset (int npreset);
+    Sustainer (float * efxoutl_, float * efxoutr_);
+    ~Sustainer ();
+    void cleanup ();
 
-  int Ppreset;
-  
-  float *efxoutl;
-  float *efxoutr;
+    void out (float * smpsl, float * smpr);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void setpreset (int npreset);
+
+    int Ppreset;
+
+    float *efxoutl;
+    float *efxoutr;
 
 private:
-  //Parametrii
-  int Pvolume;	//Output Level
-  int Psustain;	//Compression amount
+    //Parametrii
+    int Pvolume;	//Output Level
+    int Psustain;	//Compression amount
 
-  int timer, hold;
-  float level, fsustain, input,tmpgain;
-  float prls, compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
+    int timer, hold;
+    float level, fsustain, input,tmpgain;
+    float prls, compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
 
-  class FPreset *Fpre; 
+    class FPreset *Fpre;
 };
 
 

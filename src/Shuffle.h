@@ -1,5 +1,5 @@
 /*
- 
+
   Shuffle.h - Stereo Shuffle
 
   Copyright (C) 2002-2005 Nasca Octavian Paul
@@ -7,9 +7,9 @@
   ZynAddSubFX - a software synthesizer
 
   Modified for rakarrack by Josep Andreu & Hernan Ordiales
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -33,57 +33,57 @@
 class Shuffle
 {
 public:
-  Shuffle (float * efxoutl_, float * efxoutr_);
-  ~Shuffle ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    Shuffle (float * efxoutl_, float * efxoutr_);
+    ~Shuffle ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
-  int Ppreset;
-  float outvolume;
+    int Ppreset;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
-  float *inputl;
-  float *inputr;
-  
+    float *efxoutl;
+    float *efxoutr;
+    float *inputl;
+    float *inputr;
+
 
 private:
 
-  void setvolume (int Pvolume);
-  void setCross1 (int value);
-  void setCross2 (int value);
-  void setCross3 (int value);
-  void setCross4 (int value);
-  void setGainL (int value);
-  void setGainML (int value);
-  void setGainMH (int value);
-  void setGainH (int value);
+    void setvolume (int Pvolume);
+    void setCross1 (int value);
+    void setCross2 (int value);
+    void setCross3 (int value);
+    void setCross4 (int value);
+    void setGainL (int value);
+    void setGainML (int value);
+    void setGainMH (int value);
+    void setGainH (int value);
 
-  //Parametrii
-  int Pvolume;	//Volumul or E/R
-  int PvolL;
-  int PvolML;
-  int PvolMH;
-  int PvolH;
-  int PQ;
-  int E;
-    
-  int Cross1;		//lowpass filter
-  int Cross2;		//highpass filter
-  int Cross3;
-  int Cross4;
-  
+    //Parametrii
+    int Pvolume;	//Volumul or E/R
+    int PvolL;
+    int PvolML;
+    int PvolMH;
+    int PvolH;
+    int PQ;
+    int E;
 
-  //Parametrii reali
-  float tmp;
-  float volL,volML,volMH,volH;
-  AnalogFilter  *lr, *hr;
-  AnalogFilter  *mlr,*mhr;
-  
-  class FPreset *Fpre;
+    int Cross1;		//lowpass filter
+    int Cross2;		//highpass filter
+    int Cross3;
+    int Cross4;
+
+
+    //Parametrii reali
+    float tmp;
+    float volL,volML,volMH,volH;
+    AnalogFilter  *lr, *hr;
+    AnalogFilter  *mlr,*mhr;
+
+    class FPreset *Fpre;
 
 };
 

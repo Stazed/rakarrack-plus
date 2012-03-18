@@ -28,32 +28,32 @@
 
 Opticaltrem::Opticaltrem (float * efxoutl_, float * efxoutr_)
 {
-  efxoutl = efxoutl_;
-  efxoutr = efxoutr_;
+    efxoutl = efxoutl_;
+    efxoutr = efxoutr_;
 
-R1 = 2700.0f;	   //tremolo circuit series resistance 
-Ra = 1000000.0f;  //Cds cell dark resistance.
-Ra = logf(Ra);		//this is done for clarity 
-Rb = 300.0f;         //Cds cell full illumination
-b = exp(Ra/logf(Rb)) - CNST_E;
-dTC = 0.03f;
-dRCl = dTC;
-dRCr = dTC;   //Right & left channel dynamic time contsants
-minTC = logf(0.005f/dTC);
-alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
-alphar = alphal;
-lstep = 0.0f;
-rstep = 0.0f;
-Pdepth = 127;
-Ppanning = 64;
-lpanning = 1.0f;
-rpanning = 1.0f;
-fdepth = 1.0f;  
-oldgl = 0.0f;
-oldgr = 0.0f;
-gl = 0.0f;
-gr = 0.0f;
-cperiod = 1.0f/fPERIOD;
+    R1 = 2700.0f;	   //tremolo circuit series resistance
+    Ra = 1000000.0f;  //Cds cell dark resistance.
+    Ra = logf(Ra);		//this is done for clarity
+    Rb = 300.0f;         //Cds cell full illumination
+    b = exp(Ra/logf(Rb)) - CNST_E;
+    dTC = 0.03f;
+    dRCl = dTC;
+    dRCr = dTC;   //Right & left channel dynamic time contsants
+    minTC = logf(0.005f/dTC);
+    alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
+    alphar = alphal;
+    lstep = 0.0f;
+    rstep = 0.0f;
+    Pdepth = 127;
+    Ppanning = 64;
+    lpanning = 1.0f;
+    rpanning = 1.0f;
+    fdepth = 1.0f;
+    oldgl = 0.0f;
+    oldgr = 0.0f;
+    gl = 0.0f;
+    gr = 0.0f;
+    cperiod = 1.0f/fPERIOD;
 
 }
 
@@ -73,61 +73,60 @@ void
 Opticaltrem::out (float *smpsl, float *smpsr)
 {
 
-  int i;
-  float lfol, lfor, xl, xr, fxl, fxr;
-  float rdiff, ldiff;
-  lfo.effectlfoout (&lfol, &lfor);
+    int i;
+    float lfol, lfor, xl, xr, fxl, fxr;
+    float rdiff, ldiff;
+    lfo.effectlfoout (&lfol, &lfor);
 
-  lfol = 1.0f - lfol*fdepth;
-  lfor = 1.0f - lfor*fdepth;   
-  
-   if (lfol > 1.0f)
-    lfol = 1.0f;
-  else if (lfol < 0.0f)
-    lfol = 0.0f;
-  if (lfor > 1.0f)
-    lfor = 1.0f;
-  else if (lfor < 0.0f)
-    lfor = 0.0f;  
-    
+    lfol = 1.0f - lfol*fdepth;
+    lfor = 1.0f - lfor*fdepth;
+
+    if (lfol > 1.0f)
+        lfol = 1.0f;
+    else if (lfol < 0.0f)
+        lfol = 0.0f;
+    if (lfor > 1.0f)
+        lfor = 1.0f;
+    else if (lfor < 0.0f)
+        lfor = 0.0f;
+
     lfor = powf(lfor, 1.9f);
     lfol = powf(lfol, 1.9f);  //emulate lamp turn on/off characteristic
-    
+
     //lfo interpolation
     rdiff = (lfor - oldgr)*cperiod;
-    ldiff = (lfol - oldgl)*cperiod; 
+    ldiff = (lfol - oldgl)*cperiod;
     gr = lfor;
     gl = lfol;
     oldgr = lfor;
     oldgl = lfol;
-    
-  for (i = 0; i < PERIOD; i++)
-    {
-    //Left Cds   
-    stepl = gl*(1.0f - alphal) + alphal*oldstepl;
-    oldstepl = stepl;
-    dRCl = dTC*f_exp(stepl*minTC);
-    alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);  
-    xl = CNST_E + stepl*b;
-    fxl = f_exp(Ra/logf(xl));     
-    fxl = R1/(fxl + R1);
-    
-    //Right Cds   
-    stepr = gr*(1.0f - alphar) + alphar*oldstepr;
-    oldstepr = stepr;
-    dRCr = dTC*f_exp(stepr*minTC);
-    alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);        
-    xr = CNST_E + stepr*b;
-    fxr = f_exp(Ra/logf(xr));
-    fxr = R1/(fxr + R1);  
-    
-    //Modulate input signal
-    efxoutl[i] = lpanning*fxl*smpsl[i];
-    efxoutr[i] = rpanning*fxr*smpsr[i];     
-    
-    gl += ldiff;
-    gr += rdiff;  //linear interpolation of LFO 
-    
+
+    for (i = 0; i < PERIOD; i++) {
+        //Left Cds
+        stepl = gl*(1.0f - alphal) + alphal*oldstepl;
+        oldstepl = stepl;
+        dRCl = dTC*f_exp(stepl*minTC);
+        alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
+        xl = CNST_E + stepl*b;
+        fxl = f_exp(Ra/logf(xl));
+        fxl = R1/(fxl + R1);
+
+        //Right Cds
+        stepr = gr*(1.0f - alphar) + alphar*oldstepr;
+        oldstepr = stepr;
+        dRCr = dTC*f_exp(stepr*minTC);
+        alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);
+        xr = CNST_E + stepr*b;
+        fxr = f_exp(Ra/logf(xr));
+        fxr = R1/(fxr + R1);
+
+        //Modulate input signal
+        efxoutl[i] = lpanning*fxl*smpsl[i];
+        efxoutr[i] = rpanning*fxr*smpsr[i];
+
+        gl += ldiff;
+        gr += rdiff;  //linear interpolation of LFO
+
     };
 
 };
@@ -135,49 +134,46 @@ Opticaltrem::out (float *smpsl, float *smpsr)
 void
 Opticaltrem::setpanning (int value)
 {
-  Ppanning = value;
-  rpanning = ((float)Ppanning) / 64.0f;
-  lpanning = 2.0f - rpanning;
-  lpanning = 10.0f * powf(lpanning, 4);
-  rpanning = 10.0f * powf(rpanning, 4);
-  lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
-  rpanning = 1.0f - 1.0f/(rpanning + 1.0f); 
-  lpanning *= 1.3f;
-  rpanning *= 1.3f; 
+    Ppanning = value;
+    rpanning = ((float)Ppanning) / 64.0f;
+    lpanning = 2.0f - rpanning;
+    lpanning = 10.0f * powf(lpanning, 4);
+    rpanning = 10.0f * powf(rpanning, 4);
+    lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
+    rpanning = 1.0f - 1.0f/(rpanning + 1.0f);
+    lpanning *= 1.3f;
+    rpanning *= 1.3f;
 };
 
 void
 Opticaltrem::setpreset (int npreset)
 {
-  const int PRESET_SIZE = 6;
-  const int NUM_PRESETS = 6;
-  int presets[NUM_PRESETS][PRESET_SIZE] = {
-    //Fast
-    {127, 260, 10, 0, 64, 64},
-    //trem2
-    {45, 140, 10, 0, 64, 64},
-    //hard pan
-    {127, 120, 10, 5, 0, 64},
-    //soft pan
-    {45, 240, 10, 1, 16, 64},    
-    //ramp down
-    {65, 200, 0, 3, 32, 64},
-    //hard ramp
-    {127, 480, 0, 3, 32, 64}  
-    
-  };
+    const int PRESET_SIZE = 6;
+    const int NUM_PRESETS = 6;
+    int presets[NUM_PRESETS][PRESET_SIZE] = {
+        //Fast
+        {127, 260, 10, 0, 64, 64},
+        //trem2
+        {45, 140, 10, 0, 64, 64},
+        //hard pan
+        {127, 120, 10, 5, 0, 64},
+        //soft pan
+        {45, 240, 10, 1, 16, 64},
+        //ramp down
+        {65, 200, 0, 3, 32, 64},
+        //hard ramp
+        {127, 480, 0, 3, 32, 64}
 
-  if(npreset>NUM_PRESETS-1)  
-    {   
-     Fpre->ReadPreset(44,npreset-NUM_PRESETS+1);    
-     for (int n = 0; n < PRESET_SIZE; n++)    
-     changepar (n, pdata[n]);    
-    }    
-  else                                      
-  {     
-  for (int n = 0; n < PRESET_SIZE; n++)
-  changepar (n, presets[npreset][n]);
-  }
+    };
+
+    if(npreset>NUM_PRESETS-1) {
+        Fpre->ReadPreset(44,npreset-NUM_PRESETS+1);
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar (n, pdata[n]);
+    } else {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar (n, presets[npreset][n]);
+    }
 
 };
 
@@ -185,64 +181,63 @@ void
 Opticaltrem::changepar (int npar, int value)
 {
 
-  switch (npar)
-    {
+    switch (npar) {
 
     case 0:
-      Pdepth = value;
-      fdepth = 0.5f + ((float) Pdepth)/254.0f;    
-      break;
+        Pdepth = value;
+        fdepth = 0.5f + ((float) Pdepth)/254.0f;
+        break;
     case 1:
-      lfo.Pfreq = value;
-      lfo.updateparams ();
-      break;
+        lfo.Pfreq = value;
+        lfo.updateparams ();
+        break;
     case 2:
-      lfo.Prandomness = value;
-      lfo.updateparams ();
-      break;
+        lfo.Prandomness = value;
+        lfo.updateparams ();
+        break;
     case 3:
-      lfo.PLFOtype = value;
-      lfo.updateparams ();
-      break;
+        lfo.PLFOtype = value;
+        lfo.updateparams ();
+        break;
     case 4:
-      lfo.Pstereo = value;
-      lfo.updateparams ();
-      break;
+        lfo.Pstereo = value;
+        lfo.updateparams ();
+        break;
     case 5: // pan
-    setpanning(value);
-      break;  
+        setpanning(value);
+        break;
     }
-   
+
 };
 
 int
 Opticaltrem::getpar (int npar)
 {
 
-  switch (npar)
+    switch (npar)
 
     {
     case 0:
-      return (Pdepth);
-      break;
+        return (Pdepth);
+        break;
     case 1:
-      return (lfo.Pfreq);
-      break;
+        return (lfo.Pfreq);
+        break;
     case 2:
-      return (lfo.Prandomness);
-      break;
+        return (lfo.Prandomness);
+        break;
     case 3:
-      return (lfo.PLFOtype);
-      break;
+        return (lfo.PLFOtype);
+        break;
     case 4:
-      return (lfo.Pstereo);
-      break;
+        return (lfo.Pstereo);
+        break;
     case 5:
-      return (Ppanning); //pan
+        return (Ppanning); //pan
 
     }
 
-  return (0);
+    return (0);
 
 };
 

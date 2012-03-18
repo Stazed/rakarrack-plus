@@ -1,12 +1,12 @@
 /*
-  Rakarrack   Audio FX software 
+  Rakarrack   Audio FX software
   CoilCrafter.h - Pick Up Emulation
   Using RBFilter
   Using Steve Harris LADSPA Plugin harmonic_gen
   Modified for rakarrack by Ryan Billing & Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -30,51 +30,51 @@
 class CoilCrafter
 {
 public:
-  CoilCrafter (float * efxoutl_, float * efxoutr_);
-  ~CoilCrafter ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    CoilCrafter (float * efxoutl_, float * efxoutr_);
+    ~CoilCrafter ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
 
-  int Ppreset;
+    int Ppreset;
 
-  float *efxoutl;
-  float *efxoutr;
-  float outvolume;
+    float *efxoutl;
+    float *efxoutr;
+    float outvolume;
 
 private:
 
-  void setvolume (int value);
-  void sethpf (int value);
-  void setfreq1();
-  void setfreq2();
-  void setq1();
-  void setq2();
+    void setvolume (int value);
+    void sethpf (int value);
+    void setfreq1();
+    void setfreq2();
+    void setq1();
+    void setq2();
 
-  int Pvolume;
-  int Ppo;
-  int Ppd;
-  int Ptone;
-  int Pq1;
-  int Pfreq1;
-  int Pq2;
-  int Pfreq2;
-  int Pmode;
+    int Pvolume;
+    int Ppo;
+    int Ppd;
+    int Ptone;
+    int Pq1;
+    int Pfreq1;
+    int Pq2;
+    int Pfreq2;
+    int Pmode;
 
-  float tfreqs[10];
-  float tqs[10];
-  float rm[10];
-  float freq1,q1,freq2,q2; 
-  float att;
+    float tfreqs[10];
+    float tqs[10];
+    float rm[10];
+    float freq1,q1,freq2,q2;
+    float att;
 
-  class HarmEnhancer *harm;
-  class AnalogFilter *RB1l, *RB1r;
-  class AnalogFilter *RB2l,*RB2r;
+    class HarmEnhancer *harm;
+    class AnalogFilter *RB1l, *RB1r;
+    class AnalogFilter *RB2l,*RB2r;
 
-  class FPreset *Fpre;
+    class FPreset *Fpre;
 
 };
 

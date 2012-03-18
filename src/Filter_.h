@@ -1,6 +1,6 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   Filter_.h - This class is inherited by filter classes
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -8,7 +8,7 @@
   Modified for rakarrack by Josep Andreu
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -32,14 +32,14 @@
 class Filter_
 {
 public:
-  virtual ~ Filter_ ()  {};
-  virtual void filterout (float * smp) { };
-  virtual void setfreq (float frequency) {};
-  virtual void setfreq_and_q (float frequency, float q_) { };
-  virtual void setq (float q_) { };
-  virtual void setgain (float dBgain) {};
+    virtual ~ Filter_ ()  {};
+    virtual void filterout (float * smp) { };
+    virtual void setfreq (float frequency) {};
+    virtual void setfreq_and_q (float frequency, float q_) { };
+    virtual void setq (float q_) { };
+    virtual void setgain (float dBgain) {};
 
-  float outgain;
+    float outgain;
 };
 
 

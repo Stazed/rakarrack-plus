@@ -1,6 +1,6 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   EffectLFO.h - Stereo LFO used by some effects
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -9,7 +9,7 @@
 
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -31,38 +31,38 @@
 class EffectLFO
 {
 public:
-  EffectLFO ();
-  ~EffectLFO ();
-  void effectlfoout (float * outl, float * outr);
-  void updateparams ();
-  int Pfreq;
-  int Prandomness;
-  int PLFOtype;
-  int Pstereo;	//"64"=0
+    EffectLFO ();
+    ~EffectLFO ();
+    void effectlfoout (float * outl, float * outr);
+    void updateparams ();
+    int Pfreq;
+    int Prandomness;
+    int PLFOtype;
+    int Pstereo;	//"64"=0
 private:
     float getlfoshape (float x);
 
-  float xl, xr;
-  float incx;
-  float ampl1, ampl2, ampr1, ampr2;	//necesar pentru "randomness"
-  float lfointensity;
-  float lfornd;
-  int lfotype;
-  
-  //Lorenz Fractal parameters
-   float x0,y0,z0,x1,y1,z1,radius;
-   float h;
-   float a;
-   float b;
-   float c;
-   float scale;
-   float iperiod; 
-   float ratediv;
-   
-   //Sample/Hold
-   int holdflag;  //toggle left/right channel changes
-   float tca, tcb, maxrate;
-   float rreg, lreg, xlreg,xrreg, oldrreg, oldlreg;
+    float xl, xr;
+    float incx;
+    float ampl1, ampl2, ampr1, ampr2;	//necesar pentru "randomness"
+    float lfointensity;
+    float lfornd;
+    int lfotype;
+
+    //Lorenz Fractal parameters
+    float x0,y0,z0,x1,y1,z1,radius;
+    float h;
+    float a;
+    float b;
+    float c;
+    float scale;
+    float iperiod;
+    float ratediv;
+
+    //Sample/Hold
+    int holdflag;  //toggle left/right channel changes
+    float tca, tcb, maxrate;
+    float rreg, lreg, xlreg,xrreg, oldrreg, oldlreg;
 };
 
 

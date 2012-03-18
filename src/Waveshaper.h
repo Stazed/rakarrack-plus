@@ -1,14 +1,14 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   Waveshaper.h - Distortion Effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
   Modified and evolved for rakarrack by Josep Andreu & Ryan Billing
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -30,35 +30,35 @@
 class Waveshaper
 {
 public:
-  Waveshaper ();
-  ~Waveshaper ();
+    Waveshaper ();
+    ~Waveshaper ();
 //Waveshaping
-  void waveshapesmps (int n, float * smps, int type,
-		    int drive, int eff);
-  void cleanup();
-  
-  int period_coeff;  
+    void waveshapesmps (int n, float * smps, int type,
+                        int drive, int eff);
+    void cleanup();
 
-  double u_up;
-  double u_down;
+    int period_coeff;
 
-  float dthresh;  //dynamic threshold in compression waveshaper 
-  float dyno;
-  float dynodecay;  //dynamically control symmetry
-  
-  float compg;  //used by compression distortion
-  float cratio;  //used by compression for hardness
-  float tmpgain;  // compression distortion temp variable
-  float ncSAMPLE_RATE;
-  float *temps;
- 
- float R, P, Vgbias, Vsupp, Ip, Vmin, Vg, Vfactor, Vdyno;  //Valve1 Modeling variables.
- float mu, V2bias, Is, Vg2, vfact, ffact, Vlv2out, V2dyno; //Valve2 variables
- 
-  class Resample *U_Resample;
-  class Resample *D_Resample;
+    double u_up;
+    double u_down;
 
-  
+    float dthresh;  //dynamic threshold in compression waveshaper
+    float dyno;
+    float dynodecay;  //dynamically control symmetry
+
+    float compg;  //used by compression distortion
+    float cratio;  //used by compression for hardness
+    float tmpgain;  // compression distortion temp variable
+    float ncSAMPLE_RATE;
+    float *temps;
+
+    float R, P, Vgbias, Vsupp, Ip, Vmin, Vg, Vfactor, Vdyno;  //Valve1 Modeling variables.
+    float mu, V2bias, Is, Vg2, vfact, ffact, Vlv2out, V2dyno; //Valve2 variables
+
+    class Resample *U_Resample;
+    class Resample *D_Resample;
+
+
 };
 
 #endif

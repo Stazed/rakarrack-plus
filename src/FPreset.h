@@ -1,10 +1,10 @@
 /*
-  Rakarrack   Audio FX software 
+  Rakarrack   Audio FX software
   FPreset.h - Internal Preset Reader
   by Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -27,9 +27,9 @@ class FPreset
 {
 public:
 
-FPreset();
-~FPreset();
-void ReadPreset(int eff, int num);
+    FPreset();
+    ~FPreset();
+    void ReadPreset(int eff, int num);
 };
 
 

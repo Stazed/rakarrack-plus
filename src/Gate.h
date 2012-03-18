@@ -6,7 +6,7 @@
 
  Gate.h  -  Noise Gate Effect definitions
  Based on Steve Harris LADSPA gate.
- 
+
   Copyright (C) 2008 Josep Andreu
   Author: Josep Andreu
 
@@ -38,56 +38,56 @@ class Gate
 
 public:
 
-  Gate (float * efxoutl_, float * efxoutr_);
-  ~Gate ();
+    Gate (float * efxoutl_, float * efxoutr_);
+    ~Gate ();
 
-  void out (float * smps_l, float * smps_r);
+    void out (float * smps_l, float * smps_r);
 
-  void Gate_Change (int np, int value);
-  void Gate_Change_Preset (int npreset);
-  void cleanup ();
-  int getpar (int npar);
-
-
+    void Gate_Change (int np, int value);
+    void Gate_Change_Preset (int npreset);
+    void cleanup ();
+    int getpar (int npar);
 
 
-  // Compressor
 
-  int Pthreshold;		// attack time  (ms)
-  int Pattack;			// release time (ms)
-  int Ohold;
-  int Pdecay;
-  int Prange;
-  int Plpf;
-  int Phpf;
-  int Phold;
 
-  float *efxoutl;
-  float *efxoutr;
+    // Compressor
+
+    int Pthreshold;		// attack time  (ms)
+    int Pattack;			// release time (ms)
+    int Ohold;
+    int Pdecay;
+    int Prange;
+    int Plpf;
+    int Phpf;
+    int Phold;
+
+    float *efxoutl;
+    float *efxoutr;
 
 
 private:
 
-  void setlpf (int Plpf);
-  void sethpf (int Phpf);
+    void setlpf (int Plpf);
+    void sethpf (int Phpf);
 
 
-  int hold_count;
-  int state;
-  float range;
-  float cut;
-  float t_level;
-  float a_rate;
-  float d_rate;
-  float env;
-  float gate;
-  float fs;
-  float hold;
+    int hold_count;
+    int state;
+    float range;
+    float cut;
+    float t_level;
+    float a_rate;
+    float d_rate;
+    float env;
+    float gate;
+    float fs;
+    float hold;
 
 
 
-  AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
-  class FPreset *Fpre;
+    AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
+    class FPreset *Fpre;
 
 };
 

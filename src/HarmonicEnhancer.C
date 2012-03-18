@@ -28,29 +28,29 @@
 #include "HarmonicEnhancer.h"
 
 
-HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain) 
+HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
 {
 
- inputl = (float *) malloc (sizeof (float) * PERIOD);
- inputr = (float *) malloc (sizeof (float) * PERIOD);
+    inputl = (float *) malloc (sizeof (float) * PERIOD);
+    inputr = (float *) malloc (sizeof (float) * PERIOD);
 
-  set_vol(0,gain);
-  realvol = gain;
-  itm1l = 0.0f;
-  itm1r = 0.0f;
-  otm1l = 0.0f;
-  otm1r = 0.0f;
+    set_vol(0,gain);
+    realvol = gain;
+    itm1l = 0.0f;
+    itm1r = 0.0f;
+    otm1l = 0.0f;
+    otm1r = 0.0f;
 
-  hpffreq = hfreq;
-  lpffreq = lfreq;
-  hpfl = new AnalogFilter(3, hfreq, 1, 0);
-  hpfr = new AnalogFilter(3, hfreq, 1, 0);
-  lpfl = new AnalogFilter(2, lfreq, 1, 0);
-  lpfr = new AnalogFilter(2, lfreq, 1, 0);
- 
-  limiter = new Compressor (inputl, inputr);
-  limiter->Compressor_Change_Preset(0,4);
-  calcula_mag(Rmag);
+    hpffreq = hfreq;
+    lpffreq = lfreq;
+    hpfl = new AnalogFilter(3, hfreq, 1, 0);
+    hpfr = new AnalogFilter(3, hfreq, 1, 0);
+    lpfl = new AnalogFilter(2, lfreq, 1, 0);
+    lpfr = new AnalogFilter(2, lfreq, 1, 0);
+
+    limiter = new Compressor (inputl, inputr);
+    limiter->Compressor_Change_Preset(0,4);
+    calcula_mag(Rmag);
 }
 
 
@@ -61,11 +61,11 @@ HarmEnhancer::~HarmEnhancer()
 void
 HarmEnhancer::cleanup()
 {
-  lpfl->cleanup ();
-  hpfl->cleanup ();
-  lpfr->cleanup ();
-  hpfr->cleanup ();
-  limiter->cleanup();
+    lpfl->cleanup ();
+    hpfl->cleanup ();
+    lpfr->cleanup ();
+    hpfr->cleanup ();
+    limiter->cleanup();
 
 };
 
@@ -75,39 +75,37 @@ HarmEnhancer::cleanup()
 void
 HarmEnhancer::set_vol(int mode, float gain)
 {
-  if(!mode) vol = gain;
-  else
-  vol = realvol + gain;
+    if(!mode) vol = gain;
+    else
+        vol = realvol + gain;
 
-  vol*=2.0f;
+    vol*=2.0f;
 }
 
-void  
+void
 HarmEnhancer::set_freqh(int mode, float freq)
 {
-if(!mode) 
-{
-hpffreq = freq;
-freq = 0.0;
+    if(!mode) {
+        hpffreq = freq;
+        freq = 0.0;
+    }
+
+    hpfl->setfreq(hpffreq+freq);
+    hpfr->setfreq(hpffreq+freq);
+
 }
 
-hpfl->setfreq(hpffreq+freq);
-hpfr->setfreq(hpffreq+freq);
 
-}
-
-
-void  
+void
 HarmEnhancer::set_freql(int mode, float freq)
 {
-if(!mode)
-{
- lpffreq = freq;
- freq = 0.0;
-} 
+    if(!mode) {
+        lpffreq = freq;
+        freq = 0.0;
+    }
 
-lpfl->setfreq(lpffreq+freq);
-lpfr->setfreq(lpffreq+freq);
+    lpfl->setfreq(lpffreq+freq);
+    lpfr->setfreq(lpffreq+freq);
 
 }
 
@@ -119,35 +117,31 @@ lpfr->setfreq(lpffreq+freq);
 void
 HarmEnhancer::chebpc (float c[], float d[])
 {
-  int j,k;
+    int j,k;
 
-  float sv, dd[HARMONICS];
+    float sv, dd[HARMONICS];
 
-  for (j = 0; j < HARMONICS; j++)
-    {
-      d[j] = dd[j] = 0.0;
+    for (j = 0; j < HARMONICS; j++) {
+        d[j] = dd[j] = 0.0;
     }
 
-  d[0] = c[HARMONICS - 1];
+    d[0] = c[HARMONICS - 1];
 
-  for (j = HARMONICS - 2; j >= 1; j--)
-    {
-      for (k = HARMONICS - j; k >= 1; k--)
-	{
-	  sv = d[k];
-	  d[k] = 2.0 * d[k - 1] - dd[k];
-	  dd[k] = sv;
-	}
-      sv = d[0];
-      d[0] = -dd[0] + c[j];
-      dd[0] = sv;
+    for (j = HARMONICS - 2; j >= 1; j--) {
+        for (k = HARMONICS - j; k >= 1; k--) {
+            sv = d[k];
+            d[k] = 2.0 * d[k - 1] - dd[k];
+            dd[k] = sv;
+        }
+        sv = d[0];
+        d[0] = -dd[0] + c[j];
+        dd[0] = sv;
     }
 
-  for (j = HARMONICS - 1; j >= 1; j--)
-    {
-      d[j] = d[j - 1] - dd[j];
+    for (j = HARMONICS - 1; j >= 1; j--) {
+        d[j] = d[j - 1] - dd[j];
     }
-  d[0] = -dd[0] + 0.5 * c[0];
+    d[0] = -dd[0] + 0.5 * c[0];
 
 
 
@@ -159,37 +153,33 @@ void
 HarmEnhancer::calcula_mag (float *Rmag)
 {
 
-  int i;
-  float mag_fix = 0.0f;
+    int i;
+    float mag_fix = 0.0f;
 
-  float mag[HARMONICS] =
-    { 0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
-    Rmag[6], Rmag[7], Rmag[8], Rmag[9]
-  };
-
-
-
-  // Normalise magnitudes
-
-  for (i = 0; i < 10; i++)
-    mag_fix += fabs (Rmag[i]);
+    float mag[HARMONICS] = {
+        0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
+        Rmag[6], Rmag[7], Rmag[8], Rmag[9]
+    };
 
 
-  if (mag_fix < 1.0f)
-    {
-      mag_fix = 1.0f;
+
+    // Normalise magnitudes
+
+    for (i = 0; i < 10; i++)
+        mag_fix += fabs (Rmag[i]);
+
+
+    if (mag_fix < 1.0f) {
+        mag_fix = 1.0f;
+    } else {
+        mag_fix = 1.0f / mag_fix;
     }
-  else
-    {
-      mag_fix = 1.0f / mag_fix;
-    }
-  for (i = 0; i < HARMONICS; i++)
-    {
-      mag[i] *= mag_fix;
+    for (i = 0; i < HARMONICS; i++) {
+        mag[i] *= mag_fix;
     }
 
-  // Calculate polynomial coefficients, using Chebychev aproximation
-  chebpc (mag, p);
+    // Calculate polynomial coefficients, using Chebychev aproximation
+    chebpc (mag, p);
 
 }
 
@@ -197,56 +187,53 @@ void
 HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 {
 
-  int i,j;
+    int i,j;
 
-  memcpy(inputl,smpsl, sizeof(float)*PERIOD);
-  memcpy(inputr,smpsr, sizeof(float)*PERIOD);
-   
+    memcpy(inputl,smpsl, sizeof(float)*PERIOD);
+    memcpy(inputr,smpsr, sizeof(float)*PERIOD);
 
 
-  hpfl->filterout(inputl);
-  hpfr->filterout(inputr);
-  
-  limiter->out(inputl,inputr);
 
-  for (i=0; i<PERIOD; i++)
-    {
-      float xl = inputl[i];
-      float xr = inputr[i];
-      float yl=0.0f;
-      float yr=0.0f;
+    hpfl->filterout(inputl);
+    hpfr->filterout(inputr);
 
-      for(j=10;j>0;j--)
-        {
-          yl = (yl+p[j])*xl;
-          yr = (yr+p[j])*xr;
+    limiter->out(inputl,inputr);
+
+    for (i=0; i<PERIOD; i++) {
+        float xl = inputl[i];
+        float xr = inputr[i];
+        float yl=0.0f;
+        float yr=0.0f;
+
+        for(j=10; j>0; j--) {
+            yl = (yl+p[j])*xl;
+            yr = (yr+p[j])*xr;
         }
-          yl+=p[0];
-          yr+=p[0];
-           
+        yl+=p[0];
+        yr+=p[0];
 
-      otm1l = 0.999f * otm1l + yl - itm1l;
-      itm1l = yl;
-      otm1r = 0.999f * otm1r + yr - itm1r;
-      itm1r = yr;
 
-      otm1l = yl;
-      otm1r = yr;
-       
-      inputl[i] = otm1l;
-      inputr[i] = otm1r;
+        otm1l = 0.999f * otm1l + yl - itm1l;
+        itm1l = yl;
+        otm1r = 0.999f * otm1r + yr - itm1r;
+        itm1r = yr;
 
-     }
+        otm1l = yl;
+        otm1r = yr;
 
-  lpfl->filterout(inputl);
-  lpfr->filterout(inputr);
+        inputl[i] = otm1l;
+        inputr[i] = otm1r;
 
-    for (i=0; i<PERIOD; i++)
-    {
-      smpsl[i] =(smpsl[i]+inputl[i]*vol);
-      smpsr[i] =(smpsr[i]+inputr[i]*vol);
     }
-    
+
+    lpfl->filterout(inputl);
+    lpfr->filterout(inputr);
+
+    for (i=0; i<PERIOD; i++) {
+        smpsl[i] =(smpsl[i]+inputl[i]*vol);
+        smpsr[i] =(smpsr[i]+inputr[i]*vol);
+    }
+
 }
 
 

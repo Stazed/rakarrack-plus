@@ -1,6 +1,6 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   Alienwah.h - "AlienWah" effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -9,7 +9,7 @@
   Modified for rakarrack by Josep Andreu
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -30,59 +30,58 @@
 
 
 
-struct COMPLEXTYPE
-{
-  float a, b;
+struct COMPLEXTYPE {
+    float a, b;
 };
 
 class Alienwah
 {
 public:
-  Alienwah (float * efxoutl_, float * efxoutr_);
-  ~Alienwah ();
-  void out (float * smpsl, float * smpsr);
+    Alienwah (float * efxoutl_, float * efxoutr_);
+    ~Alienwah ();
+    void out (float * smpsl, float * smpsr);
 
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
-  int Ppreset;
+    int Ppreset;
 
-  float *efxoutl;
-  float *efxoutr;
+    float *efxoutl;
+    float *efxoutr;
 
-  float outvolume;
+    float outvolume;
 
 
 private:
-  //Parametrii Alienwah
+    //Parametrii Alienwah
     EffectLFO lfo;		//lfo-ul Alienwah
-  int Pvolume;
-  int Ppanning;
-  int Pdepth;		//the depth of the Alienwah
-  int Pfb;		//feedback
-  int Plrcross;	//feedback
-  int Pdelay;
-  int Pphase;
+    int Pvolume;
+    int Ppanning;
+    int Pdepth;		//the depth of the Alienwah
+    int Pfb;		//feedback
+    int Plrcross;	//feedback
+    int Pdelay;
+    int Pphase;
 
-  int oldk;
-  int oldpdelay;
+    int oldk;
+    int oldpdelay;
 
-  //Control Parametrii
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setdepth (int Pdepth);
-  void setfb (int Pfb);
-  void setlrcross (int Plrcross);
-  void setdelay (int Pdelay);
-  void setphase (int Pphase);
+    //Control Parametrii
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setdepth (int Pdepth);
+    void setfb (int Pfb);
+    void setlrcross (int Plrcross);
+    void setdelay (int Pdelay);
+    void setphase (int Pphase);
 
-  //Valorile interne
-  float panning, fb, depth, lrcross, phase;
-  struct COMPLEXTYPE oldl[MAX_ALIENWAH_DELAY], oldr[MAX_ALIENWAH_DELAY];
-  COMPLEXTYPE oldclfol, oldclfor;
-  class FPreset *Fpre;
+    //Valorile interne
+    float panning, fb, depth, lrcross, phase;
+    struct COMPLEXTYPE oldl[MAX_ALIENWAH_DELAY], oldr[MAX_ALIENWAH_DELAY];
+    COMPLEXTYPE oldclfol, oldclfor;
+    class FPreset *Fpre;
 
 };
 

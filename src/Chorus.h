@@ -1,6 +1,6 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   Chorus.h - Chorus and Flange effects
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -8,7 +8,7 @@
   Modified for rakarrack by Josep Andreu
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -32,57 +32,57 @@ class Chorus
 {
 
 public:
-  Chorus (float * efxoutl_, float * efxoutr_);
-  ~Chorus ();
-  void out (float * smpsl, float * smpsr);
-  void setpreset (int dgui, int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    Chorus (float * efxoutl_, float * efxoutr_);
+    ~Chorus ();
+    void out (float * smpsl, float * smpsr);
+    void setpreset (int dgui, int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
 
-  int Ppreset;
-  float *efxoutl;
-  float *efxoutr;
-  float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
+    int Ppreset;
+    float *efxoutl;
+    float *efxoutr;
+    float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
 
 
 
 private:
-  //Parametrii Chorus
+    //Parametrii Chorus
     EffectLFO lfo;		//lfo-ul chorus
-  int Pvolume;
-  int Ppanning;
-  int Pdepth;		//the depth of the Chorus(ms)
-  int Pdelay;		//the delay (ms)
-  int Pfb;		//feedback
-  int Plrcross;	//feedback
-  int Pflangemode;	//how the LFO is scaled, to result chorus or flange
-  int Poutsub;	//if I wish to substract the output instead of the adding it
+    int Pvolume;
+    int Ppanning;
+    int Pdepth;		//the depth of the Chorus(ms)
+    int Pdelay;		//the delay (ms)
+    int Pfb;		//feedback
+    int Plrcross;	//feedback
+    int Pflangemode;	//how the LFO is scaled, to result chorus or flange
+    int Poutsub;	//if I wish to substract the output instead of the adding it
 
 
-  //Control Parametrii
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setdepth (int Pdepth);
-  void setdelay (int Pdelay);
-  void setfb (int Pfb);
-  void setlrcross (int Plrcross);
+    //Control Parametrii
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setdepth (int Pdepth);
+    void setdelay (int Pdelay);
+    void setfb (int Pfb);
+    void setlrcross (int Plrcross);
 
-  //Valorile interne
-  int maxdelay;
-  int dlk, drk, dlhi, dlhi2;
-  int awesome_mode;
+    //Valorile interne
+    int maxdelay;
+    int dlk, drk, dlhi, dlhi2;
+    int awesome_mode;
 
-  float depth, delay, fb, lrcross, panning, oldr, oldl;
-  float dl1, dl2, dr1, dr2, lfol, lfor;
-  float *delayl, *delayr;
-  float getdelay (float xlfo);
-  float dllo, mdel;
-  
-  class FPreset *Fpre;
-  class delayline *ldelay, *rdelay;
-  
+    float depth, delay, fb, lrcross, panning, oldr, oldl;
+    float dl1, dl2, dr1, dr2, lfol, lfor;
+    float *delayl, *delayr;
+    float getdelay (float xlfo);
+    float dllo, mdel;
+
+    class FPreset *Fpre;
+    class delayline *ldelay, *rdelay;
+
 };
 
 #endif

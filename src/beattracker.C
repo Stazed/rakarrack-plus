@@ -1,32 +1,32 @@
 #include <math.h>
 #include "beattracker.h"
 
- beattracker:: beattracker ()
+beattracker:: beattracker ()
 {
-  
-  rmsfilter = new RBFilter (0, 15.0f, 0.15f, 1);  
-  peaklpfilter = new RBFilter (0, 25.0f, 0.5f, 0); 
-  peaklpfilter2 = new RBFilter (0, 25.0f, 0.5f, 0);  
-  peakhpfilter = new RBFilter (1, 45.0f, 0.5f, 0); 
-  
-  index = (int *) malloc (sizeof (int) * PERIOD);
-     
- //Trigger Filter Settings 
-  peakpulse = peak = envrms = 0.0f;
-  peakdecay = 10.0f/fSAMPLE_RATE;
-  targatk = 12.0f/fSAMPLE_RATE;   ///for smoothing filter transition
-  atk = 200.0f/fSAMPLE_RATE;
-  trigtime = SAMPLE_RATE/12; //time to take next peak
-  onset = 0;
-  trigthresh = 0.15f;
-  
-  tscntr = 0;
-  tsidx = 0;
-  
-  oldbpm = 0.0f;
-  oldmost = 0.0f;
-    
-  cleanup ();
+
+    rmsfilter = new RBFilter (0, 15.0f, 0.15f, 1);
+    peaklpfilter = new RBFilter (0, 25.0f, 0.5f, 0);
+    peaklpfilter2 = new RBFilter (0, 25.0f, 0.5f, 0);
+    peakhpfilter = new RBFilter (1, 45.0f, 0.5f, 0);
+
+    index = (int *) malloc (sizeof (int) * PERIOD);
+
+//Trigger Filter Settings
+    peakpulse = peak = envrms = 0.0f;
+    peakdecay = 10.0f/fSAMPLE_RATE;
+    targatk = 12.0f/fSAMPLE_RATE;   ///for smoothing filter transition
+    atk = 200.0f/fSAMPLE_RATE;
+    trigtime = SAMPLE_RATE/12; //time to take next peak
+    onset = 0;
+    trigthresh = 0.15f;
+
+    tscntr = 0;
+    tsidx = 0;
+
+    oldbpm = 0.0f;
+    oldmost = 0.0f;
+
+    cleanup ();
 
 };
 
@@ -35,80 +35,78 @@ beattracker::~beattracker ()
 
 };
 
-void 
+void
 beattracker::cleanup ()
 {
 
-  peakpulse = peak = envrms = 0.0f;
-  peakdecay = 10.0f/fSAMPLE_RATE;
-  targatk = 12.0f/fSAMPLE_RATE;   ///for smoothing filter transition
-  atk = 200.0f/fSAMPLE_RATE;
-  trigtime = SAMPLE_RATE/20; //time to take next peak
-  onset = 0;
-  trigthresh = 0.15f;
-  oldbpm = 0.0f;
-  oldmost = 0.0f; 
-  tscntr = 0;
-  tsidx = 0;
-  for( int i = 0; i<17; i++) {
-  avbpm[i] = ( ((float) i) + 0.5f) * 10.0f;  //center the initial average in the bin
-  statsbin[i] = 1.0f;  //set all to 1.0 and let fly from there  
-  }
-  statsbin[12] = 1.1f;  //slightly bias to 120bpm
-  maxptr = 12;
-  oldbpm = 120.0f;
-  bpm_change_cntr = 0;
+    peakpulse = peak = envrms = 0.0f;
+    peakdecay = 10.0f/fSAMPLE_RATE;
+    targatk = 12.0f/fSAMPLE_RATE;   ///for smoothing filter transition
+    atk = 200.0f/fSAMPLE_RATE;
+    trigtime = SAMPLE_RATE/20; //time to take next peak
+    onset = 0;
+    trigthresh = 0.15f;
+    oldbpm = 0.0f;
+    oldmost = 0.0f;
+    tscntr = 0;
+    tsidx = 0;
+    for( int i = 0; i<17; i++) {
+        avbpm[i] = ( ((float) i) + 0.5f) * 10.0f;  //center the initial average in the bin
+        statsbin[i] = 1.0f;  //set all to 1.0 and let fly from there
+    }
+    statsbin[12] = 1.1f;  //slightly bias to 120bpm
+    maxptr = 12;
+    oldbpm = 120.0f;
+    bpm_change_cntr = 0;
 };
- 
-void 
+
+void
 beattracker::detect (float * smpsl, float * smpsr)
 {
-   float tmp;
-   int idx = 0;
-   int i = 0;
-   
-  for ( i = 0; i < PERIOD; i++)  //Detect dynamics onset
-  {
-  index[i] = 0; //initializes all elements to zero
-   
-  tmp = 15.0f*fabs(smpsl[i] + smpsr[i]);
-  envrms = rmsfilter->filterout_s(tmp);  
-  if ( tmp > peak) peak =  atk + tmp;
-  if ( envrms < peak) peak -= peakdecay;
-  if(peak<0.0f) peak = 0.0f;
+    float tmp;
+    int idx = 0;
+    int i = 0;
 
-  peakpulse = peaklpfilter2->filterout_s(fabs(peakhpfilter->filterout_s(peak)));
- 
-  
-  if( peakpulse > trigthresh ) {
-     if (trigtimeout==0) { 
-     index[idx] = i;  
-     timeseries[tsidx] = tscntr;
-     tsidx++;
-     tsidx%=20;
-     tscntr = 0;
-     idx++;
-     
-     trigtimeout = trigtime;
-     
-     //calculate tempo on every beat detected
-     calc_tempo();
-     }
+    for ( i = 0; i < PERIOD; i++) { //Detect dynamics onset
+        index[i] = 0; //initializes all elements to zero
 
-  }
-  else {
-    if (--trigtimeout<0) {
-    trigtimeout = 0;
+        tmp = 15.0f*fabs(smpsl[i] + smpsr[i]);
+        envrms = rmsfilter->filterout_s(tmp);
+        if ( tmp > peak) peak =  atk + tmp;
+        if ( envrms < peak) peak -= peakdecay;
+        if(peak<0.0f) peak = 0.0f;
+
+        peakpulse = peaklpfilter2->filterout_s(fabs(peakhpfilter->filterout_s(peak)));
+
+
+        if( peakpulse > trigthresh ) {
+            if (trigtimeout==0) {
+                index[idx] = i;
+                timeseries[tsidx] = tscntr;
+                tsidx++;
+                tsidx%=20;
+                tscntr = 0;
+                idx++;
+
+                trigtimeout = trigtime;
+
+                //calculate tempo on every beat detected
+                calc_tempo();
+            }
+
+        } else {
+            if (--trigtimeout<0) {
+                trigtimeout = 0;
+            }
+
+        }
+        tscntr++;
     }
-
-  }
-    tscntr++;
-}
 
 
 };
 /*
-float 
+float
 beattracker::get_tempo()  //returns tempo in float beats per minute
 {
 if((oldbpm>600.0f) || (oldbpm<0.0f)) oldbpm = 0.0f;
@@ -159,46 +157,45 @@ return(bpm);
 void
 beattracker::calc_tempo()  //returns tempo in float beats per minute
 {
-if((oldbpm>600.0f) || (oldbpm<0.0f)) oldbpm = 0.0f;
+    if((oldbpm>600.0f) || (oldbpm<0.0f)) oldbpm = 0.0f;
 
-float time = 0;
-if(tsidx>0) time = ((float) timeseries[tsidx-1])/fSAMPLE_RATE;
-else  time = ((float) timeseries[19])/fSAMPLE_RATE;
+    float time = 0;
+    if(tsidx>0) time = ((float) timeseries[tsidx-1])/fSAMPLE_RATE;
+    else  time = ((float) timeseries[19])/fSAMPLE_RATE;
 
-float bpm = 30.0f/time;
+    float bpm = 30.0f/time;
 
-while(bpm < 80.0f) bpm*=2.0f;
-while(bpm > 160.0f) bpm*=0.5f;  //normalize by powers of 2 to 80<bpm<160
+    while(bpm < 80.0f) bpm*=2.0f;
+    while(bpm > 160.0f) bpm*=0.5f;  //normalize by powers of 2 to 80<bpm<160
 
-int binptr = lrintf(floorf(0.1f*bpm));  //get a bin address
-statsbin[binptr] += 1.0f;  //increase count
-avbpm[binptr] = 0.6f*avbpm[binptr] + 0.4f*bpm;
-if(avbpm[binptr] < 0.1f) avbpm[binptr] = 0.01f;  //create a floor to avoid denormal computations
+    int binptr = lrintf(floorf(0.1f*bpm));  //get a bin address
+    statsbin[binptr] += 1.0f;  //increase count
+    avbpm[binptr] = 0.6f*avbpm[binptr] + 0.4f*bpm;
+    if(avbpm[binptr] < 0.1f) avbpm[binptr] = 0.01f;  //create a floor to avoid denormal computations
 
-float maxbin = 0.0f; 
-maxptr = binptr;
-for(int i = 8; i<15; i++) {
-statsbin[i] *= 0.9f;  //weight 80 through 160 bins
-if(statsbin[i] > maxbin) {
-   maxbin = statsbin[i];
-   maxptr = i;
-   }
-   
-}
+    float maxbin = 0.0f;
+    maxptr = binptr;
+    for(int i = 8; i<15; i++) {
+        statsbin[i] *= 0.9f;  //weight 80 through 160 bins
+        if(statsbin[i] > maxbin) {
+            maxbin = statsbin[i];
+            maxptr = i;
+        }
 
-if(fabs(oldbpm - avbpm[maxptr]) > 10.0f) {//prevent bpm from changing too abruptly and frequently
-	if( ++bpm_change_cntr > 4) {
-	oldbpm = avbpm[maxptr];  //wait 4 beats before allowing change > 10 bpm
-	bpm_change_cntr = 0;
-	}
-}
-else oldbpm = avbpm[maxptr];
+    }
+
+    if(fabs(oldbpm - avbpm[maxptr]) > 10.0f) {//prevent bpm from changing too abruptly and frequently
+        if( ++bpm_change_cntr > 4) {
+            oldbpm = avbpm[maxptr];  //wait 4 beats before allowing change > 10 bpm
+            bpm_change_cntr = 0;
+        }
+    } else oldbpm = avbpm[maxptr];
 
 };
 
-float 
-beattracker::get_tempo() 
+float
+beattracker::get_tempo()
 {
 
-return(oldbpm);
+    return(oldbpm);
 };

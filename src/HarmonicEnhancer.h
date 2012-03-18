@@ -1,9 +1,9 @@
 /*
-    HarnEnhancer - Harmonic Enhancer Class                                          
-    
+    HarnEnhancer - Harmonic Enhancer Class
+
     HarmEnhancer.h  - headers.
-    Copyright (C) 2008-2010 Josep Andreu               
-    Author: Josep Andreu 
+    Copyright (C) 2008-2010 Josep Andreu
+    Author: Josep Andreu
 
     Based on Steve Harris LADSPA harmonic
 
@@ -34,37 +34,37 @@
 class HarmEnhancer
 {
 public:
-  HarmEnhancer(float *harmonics, float hfreq, float lfreq, float gain);
-  ~HarmEnhancer(); 
-   void cleanup();
-   void chebpc(float c[], float d[]);
-   void calcula_mag(float *Rmag);
-   void harm_out(float *smpsl, float *smpsr);
-   void set_vol(int mode, float gain);
-   void set_freqh(int mode, float freq); 
-   void set_freql(int mode, float freq); 
+    HarmEnhancer(float *harmonics, float hfreq, float lfreq, float gain);
+    ~HarmEnhancer();
+    void cleanup();
+    void chebpc(float c[], float d[]);
+    void calcula_mag(float *Rmag);
+    void harm_out(float *smpsl, float *smpsr);
+    void set_vol(int mode, float gain);
+    void set_freqh(int mode, float freq);
+    void set_freql(int mode, float freq);
 
-  float realvol;
-  float hpffreq;
-  float lpffreq;
+    float realvol;
+    float hpffreq;
+    float lpffreq;
 
 private:
 
-  float *inputl;
-  float *inputr;
-  float vol;
-  float itm1l;
-  float itm1r;
-  float otm1l;
-  float otm1r;
-  
-    float p[HARMONICS];
-  
-  AnalogFilter *hpfl, *hpfr;
-  AnalogFilter *lpfl, *lpfr;
+    float *inputl;
+    float *inputr;
+    float vol;
+    float itm1l;
+    float itm1r;
+    float otm1l;
+    float otm1r;
 
-  class Compressor *limiter;  
-    
+    float p[HARMONICS];
+
+    AnalogFilter *hpfl, *hpfr;
+    AnalogFilter *lpfl, *lpfr;
+
+    class Compressor *limiter;
+
 };
 
 #endif

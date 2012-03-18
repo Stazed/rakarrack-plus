@@ -1,5 +1,5 @@
 /*
- 
+
   MBDist.h - Distorsion Effect
 
   Copyright (C) 2002-2005 Nasca Octavian Paul
@@ -7,9 +7,9 @@
   ZynAddSubFX - a software synthesizer
 
   Modified for rakarrack by Josep Andreu
-  
+
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -33,61 +33,61 @@
 class MBVvol
 {
 public:
-  MBVvol (float * efxoutl_, float * efxoutr_);
-  ~MBVvol ();
-  void out (float * smpsl, float * smpr);
-  void setpreset (int npreset);
-  void changepar (int npar, int value);
-  int getpar (int npar);
-  void cleanup ();
+    MBVvol (float * efxoutl_, float * efxoutr_);
+    ~MBVvol ();
+    void out (float * smpsl, float * smpr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
+    void cleanup ();
 
-  int Ppreset;
-  float outvolume;
+    int Ppreset;
+    float outvolume;
 
-  float *efxoutl;
-  float *efxoutr;
-  float *lowl;
-  float *lowr;
-  float *midll;
-  float *midlr;
-  float *midhl;
-  float *midhr;
-  float *highl;
-  float *highr;
-  
+    float *efxoutl;
+    float *efxoutr;
+    float *lowl;
+    float *lowr;
+    float *midll;
+    float *midlr;
+    float *midhl;
+    float *midhr;
+    float *highl;
+    float *highr;
+
 
 private:
 
-  void setvolume (int Pvolume);
-  void setpanning (int Ppanning);
-  void setCross1 (int value);
-  void setCross2 (int value);
-  void setCross3 (int value);
-  void setCombi (int value);
+    void setvolume (int Pvolume);
+    void setpanning (int Ppanning);
+    void setCross1 (int value);
+    void setCross2 (int value);
+    void setCross3 (int value);
+    void setCombi (int value);
 
 
-  //Parametrii
-  int Pvolume;	//Volumul or E/R
-  int Pcombi;
-  int Cross1;
-  int Cross2;
-  int Cross3;
-  
-  //Parametrii reali
-  
-  float coeff;
-  float lfo1l,lfo1r,lfo2l,lfo2r;
-  float v1l,v1r,v2l,v2r;
-  float d1,d2,d3,d4;
-  float volL,volML,volMH,volH;
-  float volLr,volMLr,volMHr,volHr;
-  AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
-  AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
-  AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
+    //Parametrii
+    int Pvolume;	//Volumul or E/R
+    int Pcombi;
+    int Cross1;
+    int Cross2;
+    int Cross3;
 
-  EffectLFO lfo1,lfo2;  
+    //Parametrii reali
 
-  class FPreset *Fpre;
+    float coeff;
+    float lfo1l,lfo1r,lfo2l,lfo2r;
+    float v1l,v1r,v2l,v2r;
+    float d1,d2,d3,d4;
+    float volL,volML,volMH,volH;
+    float volLr,volMLr,volMHr,volHr;
+    AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
+    AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
+    AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
+
+    EffectLFO lfo1,lfo2;
+
+    class FPreset *Fpre;
 
 };
 

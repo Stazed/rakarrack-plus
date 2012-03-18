@@ -1,6 +1,6 @@
 /*
   ZynAddSubFX - a software synthesizer
- 
+
   SVFilter.C - Several state-variable filters
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -8,7 +8,7 @@
   Modified for rakarrack by Josep Andreu
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of version 2 of the GNU General Public License 
+  it under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
 
   This program is distributed in the hope that it will be useful,
@@ -27,20 +27,20 @@
 #include "SVFilter.h"
 
 SVFilter::SVFilter (unsigned char Ftype, float Ffreq, float Fq,
-		    unsigned char Fstages)
+                    unsigned char Fstages)
 {
-  stages = Fstages;
-  type = Ftype;
-  freq = Ffreq;
-  q = Fq;
-  gain = 1.0f;
-  outgain = 1.0f;
-  needsinterpolation = 0;
-  firsttime = 1;
-  if (stages >= MAX_FILTER_STAGES)
-    stages = MAX_FILTER_STAGES;
-  cleanup ();
-  setfreq_and_q (Ffreq, Fq);
+    stages = Fstages;
+    type = Ftype;
+    freq = Ffreq;
+    q = Fq;
+    gain = 1.0f;
+    outgain = 1.0f;
+    needsinterpolation = 0;
+    firsttime = 1;
+    if (stages >= MAX_FILTER_STAGES)
+        stages = MAX_FILTER_STAGES;
+    cleanup ();
+    setfreq_and_q (Ffreq, Fq);
 };
 
 SVFilter::~SVFilter ()
@@ -50,156 +50,150 @@ SVFilter::~SVFilter ()
 void
 SVFilter::cleanup ()
 {
-  for (int i = 0; i < MAX_FILTER_STAGES + 1; i++)
-    {
-      st[i].low = 0.0;
-      st[i].high = 0.0;
-      st[i].band = 0.0;
-      st[i].notch = 0.0;
+    for (int i = 0; i < MAX_FILTER_STAGES + 1; i++) {
+        st[i].low = 0.0;
+        st[i].high = 0.0;
+        st[i].band = 0.0;
+        st[i].notch = 0.0;
     };
-  oldabovenq = 0;
-  abovenq = 0;
+    oldabovenq = 0;
+    abovenq = 0;
 };
 
 void
 SVFilter::computefiltercoefs ()
 {
-  par.f = freq / fSAMPLE_RATE * 4.0f;
-  if (par.f > 0.99999)
-    par.f = 0.99999f;
-  par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
-  par.q = powf (par.q, 1.0f / (float)(stages + 1));
-  par.q_sqrt = sqrtf (par.q);
+    par.f = freq / fSAMPLE_RATE * 4.0f;
+    if (par.f > 0.99999)
+        par.f = 0.99999f;
+    par.q = 1.0f - atanf (sqrtf (q)) * 2.0f / PI;
+    par.q = powf (par.q, 1.0f / (float)(stages + 1));
+    par.q_sqrt = sqrtf (par.q);
 };
 
 
 void
 SVFilter::setfreq (float frequency)
 {
-  if (frequency < 0.1)
-    frequency = 0.1f;
-  float rap = freq / frequency;
-  if (rap < 1.0)
-    rap = 1.0f / rap;
+    if (frequency < 0.1)
+        frequency = 0.1f;
+    float rap = freq / frequency;
+    if (rap < 1.0)
+        rap = 1.0f / rap;
 
-  oldabovenq = abovenq;
-  abovenq = frequency > (fSAMPLE_RATE / 2.0f - 500.0f);
+    oldabovenq = abovenq;
+    abovenq = frequency > (fSAMPLE_RATE / 2.0f - 500.0f);
 
-  int nyquistthresh = (abovenq ^ oldabovenq);
+    int nyquistthresh = (abovenq ^ oldabovenq);
 
 
-  if ((rap > 3.0) || (nyquistthresh != 0))
-    {				//if the frequency is changed fast, it needs interpolation (now, filter and coeficients backup)
-      if (firsttime == 0)
-	needsinterpolation = 1;
-      ipar = par;
+    if ((rap > 3.0) || (nyquistthresh != 0)) {
+        //if the frequency is changed fast, it needs interpolation (now, filter and coeficients backup)
+        if (firsttime == 0)
+            needsinterpolation = 1;
+        ipar = par;
     };
-  freq = frequency;
-  computefiltercoefs ();
-  firsttime = 0;
+    freq = frequency;
+    computefiltercoefs ();
+    firsttime = 0;
 
 };
 
 void
 SVFilter::setfreq_and_q (float frequency, float q_)
 {
-  q = q_;
-  setfreq (frequency);
+    q = q_;
+    setfreq (frequency);
 };
 
 void
 SVFilter::setq (float q_)
 {
-  q = q_;
-  computefiltercoefs ();
+    q = q_;
+    computefiltercoefs ();
 };
 
 void
 SVFilter::settype (int type_)
 {
-  type = type_;
-  computefiltercoefs ();
+    type = type_;
+    computefiltercoefs ();
 };
 
 void
 SVFilter::setgain (float dBgain)
 {
-  gain = dB2rap (dBgain);
-  computefiltercoefs ();
+    gain = dB2rap (dBgain);
+    computefiltercoefs ();
 };
 
 void
 SVFilter::setstages (int stages_)
 {
-  if (stages_ >= MAX_FILTER_STAGES)
-    stages_ = MAX_FILTER_STAGES - 1;
-  stages = stages_;
-  cleanup ();
-  computefiltercoefs ();
+    if (stages_ >= MAX_FILTER_STAGES)
+        stages_ = MAX_FILTER_STAGES - 1;
+    stages = stages_;
+    cleanup ();
+    computefiltercoefs ();
 };
 
 void
 SVFilter::singlefilterout (float * smp, fstage & x, parameters & par)
 {
-  int i;
-  float *out = NULL;
-  switch (type)
-    {
+    int i;
+    float *out = NULL;
+    switch (type) {
     case 0:
-      out = &x.low;
-      break;
+        out = &x.low;
+        break;
     case 1:
-      out = &x.high;
-      break;
+        out = &x.high;
+        break;
     case 2:
-      out = &x.band;
-      break;
+        out = &x.band;
+        break;
     case 3:
-      out = &x.notch;
-      break;
+        out = &x.notch;
+        break;
     };
 
-  for (i = 0; i < PERIOD; i++)
-    {
-      x.low = x.low + par.f * x.band;
-      x.high = par.q_sqrt * smp[i] - x.low - par.q * x.band;
-      x.band = par.f * x.high + x.band;
-      x.notch = x.high + x.low;
+    for (i = 0; i < PERIOD; i++) {
+        x.low = x.low + par.f * x.band;
+        x.high = par.q_sqrt * smp[i] - x.low - par.q * x.band;
+        x.band = par.f * x.high + x.band;
+        x.notch = x.high + x.low;
 
-      smp[i] = *out;
+        smp[i] = *out;
     };
 };
 
 void
 SVFilter::filterout (float * smp)
 {
-  int i;
-  float *ismp = NULL;
+    int i;
+    float *ismp = NULL;
 
-  if (needsinterpolation != 0)
-    {
-      ismp = new float[PERIOD];
-      for (i = 0; i < PERIOD; i++)
-	ismp[i] = smp[i];
-      for (i = 0; i < stages + 1; i++)
-	singlefilterout (ismp, st[i], ipar);
+    if (needsinterpolation != 0) {
+        ismp = new float[PERIOD];
+        for (i = 0; i < PERIOD; i++)
+            ismp[i] = smp[i];
+        for (i = 0; i < stages + 1; i++)
+            singlefilterout (ismp, st[i], ipar);
     };
 
-  for (i = 0; i < stages + 1; i++)
-    singlefilterout (smp, st[i], par);
+    for (i = 0; i < stages + 1; i++)
+        singlefilterout (smp, st[i], par);
 
-  if (needsinterpolation != 0)
-    {
-      for (i = 0; i < PERIOD; i++)
-	{
-	  float x = (float) i / fPERIOD;
-	  smp[i] = ismp[i] * (1.0f - x) + smp[i] * x;
-	};
-      delete (ismp);
-      needsinterpolation = 0;
+    if (needsinterpolation != 0) {
+        for (i = 0; i < PERIOD; i++) {
+            float x = (float) i / fPERIOD;
+            smp[i] = ismp[i] * (1.0f - x) + smp[i] * x;
+        };
+        delete (ismp);
+        needsinterpolation = 0;
     };
 
-  for (i = 0; i < PERIOD; i++)
-    smp[i] *= outgain;
+    for (i = 0; i < PERIOD; i++)
+        smp[i] *= outgain;
 
 };
