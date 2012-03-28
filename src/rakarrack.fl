@@ -1,32 +1,32 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0110 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
-decl {\#include "global.h"} {public
+decl {\#include "global.h"} {public local
 } 
 
-decl {\#include <FL/Fl_Value_Slider.H>} {public
+decl {\#include <FL/Fl_Value_Slider.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Scroll.H>} {public
+decl {\#include <FL/Fl_Scroll.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Progress.H>} {public
+decl {\#include <FL/Fl_Progress.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Tooltip.H>} {public
+decl {\#include <FL/Fl_Tooltip.H>} {public local
 } 
 
-decl {\#include <FL/x.H>} {public
+decl {\#include <FL/x.H>} {public local
 } 
 
-decl {\#include <FL/Fl_PNG_Image.H>} {public
+decl {\#include <FL/Fl_PNG_Image.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Tiled_Image.H>} {public
+decl {\#include <FL/Fl_Tiled_Image.H>} {public local
 } 
 
-decl {\#include <FL/Fl_Help_Dialog.H>} {public
+decl {\#include <FL/Fl_Help_Dialog.H>} {public local
 } 
 
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
@@ -35,41 +35,59 @@ decl {\#include <FL/Fl_File_Chooser.H>} {public global
 decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 } 
 
-decl {\#include "icono_rakarrack_128x128.xpm"} {} 
+decl {\#include "icono_rakarrack_128x128.xpm"} {private local
+} 
 
-decl {Fl_Tiled_Image *back;} {} 
+decl {Fl_Tiled_Image *back;} {private local
+} 
 
-decl {Fl_Color leds_color;} {} 
+decl {Fl_Color leds_color;} {private local
+} 
 
-decl {Fl_Color back_color;} {} 
+decl {Fl_Color back_color;} {private local
+} 
 
-decl {Fl_Color fore_color;} {} 
+decl {Fl_Color fore_color;} {private local
+} 
 
-decl {Fl_Color label_color;} {} 
+decl {Fl_Color label_color;} {private local
+} 
 
-decl {Fl_Widget *old;} {} 
+decl {Fl_Widget *old;} {private local
+} 
 
-decl {float *spl;} {} 
+decl {float *spl;} {private local
+} 
 
-decl {float *spr;} {} 
+decl {float *spr;} {private local
+} 
 
-decl {int last_tecla;} {} 
+decl {int last_tecla;} {private local
+} 
 
-decl {int drag;} {} 
+decl {int drag;} {private local
+} 
 
-decl {int sr;} {} 
+decl {int sr;} {private local
+} 
 
-decl {int ns;} {} 
+decl {int ns;} {private local
+} 
 
-decl {int at;} {} 
+decl {int at;} {private local
+} 
 
-decl {int nt;} {} 
+decl {int nt;} {private local
+} 
 
-decl {int tta;} {} 
+decl {int tta;} {private local
+} 
 
-decl {int Scope_ON;} {} 
+decl {int Scope_ON;} {private local
+} 
 
-decl {int Analyzer_ON;} {} 
+decl {int Analyzer_ON;} {private local
+} 
 
 class Analyzer {: {public Fl_Box}
 } {
@@ -173,7 +191,8 @@ break;
 }
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {}
+  decl {EQ *efx_EQ1;} {private local
+  }
 } 
 
 class Scope {: {public Fl_Box}
@@ -293,7 +312,8 @@ break;
 
 return(0);} {}
   }
-  decl {EQ *efx_EQ1;} {}
+  decl {EQ *efx_EQ1;} {private local
+  }
 } 
 
 class NewVum {: {public Fl_Slider}
@@ -852,19 +872,23 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
 
 class RKRGUI {open
 } {
-  decl {RKR *rkr;} {}
-  decl {int made;} {}
-  decl {Fl_Help_Dialog *visor;} {}
-  decl {struct list_element *mBankNameList;} {}
-  decl {struct list_element *mBankNameListTail;} {}
-  Function {make_window()} {open
-  } {
+  decl {RKR *rkr;} {private local
+  }
+  decl {int made;} {private local
+  }
+  decl {Fl_Help_Dialog *visor;} {private local
+  }
+  decl {struct list_element *mBankNameList;} {private local
+  }
+  decl {struct list_element *mBankNameListTail;} {private local
+  }
+  Function {make_window()} {} {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {461 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;}
+      xywh {454 61 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -10140,7 +10164,7 @@ rkr->efx_Infinity->changepar(14,(int)o->value());}
         }
       }
       Fl_Group Tuner {
-        user_data 1 selected
+        user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
@@ -12497,7 +12521,7 @@ rkr->Aux_MIDI = (int)o->value();}
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
   } {
     code {Fl::args(argc,argv);
 fl_open_display();
@@ -13569,7 +13593,7 @@ Fl::repeat_timeout(.04,tick,v);} {}
   } {
     code {((RKRGUI*)(o->parent()->parent()->user_data()))->preset_click_i(o,v);} {}
   }
-  Function {preset_click_i(Fl_Button* o, void*)} {C return_type {inline void}
+  Function {preset_click_i(Fl_Button* o, void*)} {open C return_type {inline void}
   } {
     code {int ok;
 int num; 
@@ -13615,8 +13639,8 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
   Fl_Widget *m = fl_message_icon();
   m->parent()->copy_label(rkr->jackcliname);
   sprintf(temp2,"Overwrite \\"%s\\"?",w->label());
-  ok=fl_choice(temp2, "No","Yes", NULL);
- if (!ok)
+  ok=fl_choice(temp2, "No","Yes","Cancel",NULL);
+ if ((ok==0) || (ok ==2))
  { 
  o->value(0);
  o->redraw();
@@ -13646,7 +13670,8 @@ w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
 Preset_Counter->do_callback();
 }
-}} {}
+}} {selected
+    }
   }
   Function {make_window_banks()} {} {
     code {int i,j,x,y,num;
