@@ -80,7 +80,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_,int DS, int uq, int d
     D_Resample = new Resample(uq);
 
     setpreset (Ppreset);
-    cleanup ();
+    loaddefault();
 };
 
 Reverbtron::~Reverbtron ()
@@ -293,6 +293,10 @@ Reverbtron::setfile(int value)
     float averaget = 0.0f;
     float tempor = 0.0f;
     for(i=0; i<data_length; i++) {
+        //ensure reasonable value
+        if(ftime[i] < 0.0f) ftime[i] = 0.0f;
+
+        //get maximums to normalize
         if(ftime[i] > maxtime) maxtime = ftime[i];
         if(tdata[i] > maxdata) maxdata = tdata[i];  //used to normalize so feedback is more predictable
         if(i>0) {
@@ -358,6 +362,7 @@ void Reverbtron::convert_time()
                         data[i] = 0.0f;
                     }
                     time[index]=lrintf(tmpstretch*(idelay + ftime[i])*nfSAMPLE_RATE);  //Add initial delay to all the samples
+                    if(time[index] < 0) time[index] = 0;  //prevent improper indexing
                     data[index]=normal*tdata[i];
                     index++;
                 }
