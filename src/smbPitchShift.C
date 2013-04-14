@@ -112,6 +112,7 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
 {
     long i;
     float maxmag = 0.0f;
+    float tunefrq = 0.0f;
 
     /* main processing loop */
     for (i = 0; i < numSampsToProcess; i++) {
@@ -182,6 +183,7 @@ PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
                 gAnaFreq[k] = tmp;
                 if(magn>maxmag) {
                     maxmag = magn;
+                    tunefrq = tmp;
                 }
             }
 

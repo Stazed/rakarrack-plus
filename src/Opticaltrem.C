@@ -35,6 +35,7 @@ Opticaltrem::Opticaltrem (float * efxoutl_, float * efxoutr_)
     Ra = 1000000.0f;  //Cds cell dark resistance.
     Ra = logf(Ra);		//this is done for clarity
     Rb = 300.0f;         //Cds cell full illumination
+    Rp = 100000.0f;      //Resistor in parallel with Cds cell
     b = exp(Ra/logf(Rb)) - CNST_E;
     dTC = 0.03f;
     dRCl = dTC;
@@ -49,6 +50,7 @@ Opticaltrem::Opticaltrem (float * efxoutl_, float * efxoutr_)
     lpanning = 1.0f;
     rpanning = 1.0f;
     fdepth = 1.0f;
+    Pinvert = 0;
     oldgl = 0.0f;
     oldgr = 0.0f;
     gl = 0.0f;
@@ -78,8 +80,13 @@ Opticaltrem::out (float *smpsl, float *smpsr)
     float rdiff, ldiff;
     lfo.effectlfoout (&lfol, &lfor);
 
-    lfol = 1.0f - lfol*fdepth;
+    if(Pinvert) {
+    lfol = lfol*fdepth;
+    lfor = lfor*fdepth;
+    } else {
     lfor = 1.0f - lfor*fdepth;
+    lfol = 1.0f - lfol*fdepth;
+    }
 
     if (lfol > 1.0f)
         lfol = 1.0f;
@@ -109,8 +116,12 @@ Opticaltrem::out (float *smpsl, float *smpsr)
         alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
         xl = CNST_E + stepl*b;
         fxl = f_exp(Ra/logf(xl));
-        fxl = R1/(fxl + R1);
-
+        if(Pinvert) {
+        fxl = fxl*Rp/(fxl + Rp); //Parallel resistance
+        fxl = fxl/(fxl + R1);
+        }
+        else fxl = R1/(fxl + R1);
+        
         //Right Cds
         stepr = gr*(1.0f - alphar) + alphar*oldstepr;
         oldstepr = stepr;
@@ -118,7 +129,11 @@ Opticaltrem::out (float *smpsl, float *smpsr)
         alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);
         xr = CNST_E + stepr*b;
         fxr = f_exp(Ra/logf(xr));
-        fxr = R1/(fxr + R1);
+        if(Pinvert) {
+        fxr = fxr*Rp/(fxr + Rp); //Parallel resistance
+        fxr = fxr/(fxr + R1);
+        } 
+        else fxr = R1/(fxr + R1);
 
         //Modulate input signal
         efxoutl[i] = lpanning*fxl*smpsl[i];
@@ -128,6 +143,7 @@ Opticaltrem::out (float *smpsl, float *smpsr)
         gr += rdiff;  //linear interpolation of LFO
 
     };
+
 
 };
 
@@ -141,28 +157,35 @@ Opticaltrem::setpanning (int value)
     rpanning = 10.0f * powf(rpanning, 4);
     lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
     rpanning = 1.0f - 1.0f/(rpanning + 1.0f);
-    lpanning *= 1.3f;
+    
+    if(Pinvert) {
+    rpanning *= 2.0f;
+    lpanning *= 2.0f;
+    } else {
     rpanning *= 1.3f;
+    lpanning *= 1.3f;
+    }
+
 };
 
 void
 Opticaltrem::setpreset (int npreset)
 {
-    const int PRESET_SIZE = 6;
+    const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 6;
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Fast
-        {127, 260, 10, 0, 64, 64},
+        {127, 260, 10, 0, 64, 64, 0},
         //trem2
-        {45, 140, 10, 0, 64, 64},
+        {45, 140, 10, 0, 64, 64, 0},
         //hard pan
-        {127, 120, 10, 5, 0, 64},
+        {127, 120, 10, 5, 0, 64, 0},
         //soft pan
-        {45, 240, 10, 1, 16, 64},
+        {45, 240, 10, 1, 16, 64, 0},
         //ramp down
-        {65, 200, 0, 3, 32, 64},
+        {65, 200, 0, 3, 32, 64, 0},
         //hard ramp
-        {127, 480, 0, 3, 32, 64}
+        {127, 480, 0, 3, 32, 64, 0}
 
     };
 
@@ -204,9 +227,25 @@ Opticaltrem::changepar (int npar, int value)
         lfo.updateparams ();
         break;
     case 5: // pan
+        Ppanning = value;
         setpanning(value);
         break;
-    }
+    case 6: //Invert
+        Pinvert = value;
+        if(Pinvert) {
+          R1 = 68000.0f;   //tremolo circuit series resistance
+          Ra = 500000.0f;  //Cds cell dark resistance.
+        } else {
+          R1 = 2700.0f;	   //tremolo circuit series resistance
+          Ra = 1000000.0f;  //Cds cell dark resistance.
+        }
+        setpanning(Ppanning);
+ 
+        Ra = logf(Ra);		//this is done for clarity
+        Rb = 300.0f;         //Cds cell full illumination
+        b = exp(Ra/logf(Rb)) - CNST_E;
+           break;
+   }
 
 };
 
@@ -234,6 +273,10 @@ Opticaltrem::getpar (int npar)
         break;
     case 5:
         return (Ppanning); //pan
+        break;
+    case 6:
+        return (Pinvert); //pan
+        break;
 
     }
 

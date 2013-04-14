@@ -51,8 +51,9 @@ public:
 private:
     int Pdepth;
     int Ppanning;
-
-    float Ra, Rb, R1, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
+    int Pinvert;  //Invert the opto and resistor relationship
+ 
+    float Ra, Rb, R1, Rp, b, dTC, dRCl, dRCr, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr, fdepth;
     float lstep,rstep;
     float cperiod;
     float gl, oldgl;

@@ -207,7 +207,8 @@ delayline::delay(float smps, float time_, int tap_, int touch,
     if (tap >= maxtaps)
         tap = 0;
 
-    avgtime[tap] = alpha * time_ + beta * avgtime[tap];	//smoothing the rate of time change
+    if (reverse)  avgtime[tap] = alpha * 2.0*time_ + beta * avgtime[tap];	//smoothing the rate of time change
+    else avgtime[tap] = alpha * time_ + beta * avgtime[tap];	//smoothing the rate of time change
     time[tap] = 1.0f + fSAMPLE_RATE * avgtime[tap];	//convert to something that can be used as a delay line index
 
 //Do some checks to keep things in bounds
@@ -216,7 +217,7 @@ delayline::delay(float smps, float time_, int tap_, int touch,
     if (time[tap] < 0.0f)
         time[tap] = 0.0f;
 
-    float fract = time[tap] - floorf(time[tap]);	//compute fractional delay
+    float fract = (time[tap] - floorf(time[tap]));	//compute fractional delay
     dlytime = lrintf(floorf(time[tap]));
 
 //now put in the sample
@@ -276,13 +277,15 @@ delayline::delay(float smps, float time_, int tap_, int touch,
 
     float tmpfrac =
         0.5f * (tapstruct[tap].fracts[1] + tapstruct[tap].fracts[2]);
+    //float itmpfrac = 1.0f - tmpfrac;
+    float itmpfrac = 0.5f;  //it was the original approximation 
 
     float output =
         mix * lagrange(tapstruct[tap].ivars[0],
                        tapstruct[tap].ivars[1],
                        tapstruct[tap].ivars[2],
                        tapstruct[tap].ivars[3],
-                       0.5f) + imix * lagrange(tapstruct[tap].lvars[0],
+                       itmpfrac) + imix * lagrange(tapstruct[tap].lvars[0],
                                tapstruct[tap].lvars[1],
                                tapstruct[tap].lvars[2],
                                tapstruct[tap].lvars[3],

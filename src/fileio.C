@@ -921,11 +921,11 @@ void RKR::getbuf(char *buf, int j)
 
     case 44:
         //Opticaltrem
-        sprintf (buf, "%d,%d,%d,%d,%d,%d,%d\n",
+        sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                  efx_Opticaltrem->getpar (0), efx_Opticaltrem->getpar (1),
                  efx_Opticaltrem->getpar (2), efx_Opticaltrem->getpar (3),
                  efx_Opticaltrem->getpar (4), efx_Opticaltrem->getpar (5),
-                 Opticaltrem_Bypass);
+                 efx_Opticaltrem->getpar (6), Opticaltrem_Bypass);
         break;
 
 
@@ -1590,7 +1590,7 @@ RKR::Actualizar_Audio ()
 
             Opticaltrem_Bypass = 0;
             efx_Opticaltrem->cleanup();
-            for (i = 0; i <= 5; i++)
+            for (i = 0; i <= 6; i++)
                 efx_Opticaltrem->changepar (i, lv[45][i]);
             Opticaltrem_Bypass = Opticaltrem_B;
             break;
@@ -2307,7 +2307,7 @@ RKR::Preset_to_Bank (int i)
         lv[43][j] = efx_StereoHarm->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[44][j] = efx_CompBand->getpar(j);
-    for (j = 0; j <= 5; j++)
+    for (j = 0; j <= 6; j++)
         lv[45][j] = efx_Opticaltrem->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[46][j] = efx_Vibe->getpar(j);

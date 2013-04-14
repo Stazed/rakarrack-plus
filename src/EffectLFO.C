@@ -84,8 +84,8 @@ EffectLFO::updateparams ()
     else if (lfornd > 1.0)
         lfornd = 1.0;
 
-    if (PLFOtype > 9)
-        PLFOtype = 0;		//this has to be updated if more lfo's are added
+    if (PLFOtype > 11)   //this has to be updated if more lfo's are added
+        PLFOtype = 0;		
     lfotype = PLFOtype;
 
     xr = fmodf (xl + ((float)Pstereo - 64.0f) / 127.0f + 1.0f, 1.0f);
@@ -186,8 +186,24 @@ float EffectLFO::getlfoshape (float x)
 
 
         break;
-
-
+    case 10:   //Tri-top
+        if(x<=0.5f) out = -f_sin(x*D_PI);
+        else if ((x > 0.5f) && (x < 0.75f))
+        out = 6 * (x-0.5);
+        else
+        out = 1.5 - 6.0f *( x - 0.75f);
+        out-=0.25f;
+        out*=0.88888889f;
+    break;
+    case 11:  //Tri-Bottom
+        if(x<=0.5f) out = -f_sin(x*D_PI);
+        else if ((x > 0.5f) && (x < 0.75f))
+        out = 6 * (x-0.5);
+        else
+        out = 1.5 - 6.0f *( x - 0.75f);
+        out-=0.25f;
+        out*=-0.88888889f;
+    break; 
         //more to be added here; also ::updateparams() need to be updated (to allow more lfotypes)
     default:
         out = f_cos (x * D_PI);	//EffectLFO_SINE
