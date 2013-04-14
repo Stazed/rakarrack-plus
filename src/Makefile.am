@@ -34,7 +34,7 @@ rakarrack_SOURCES = main.C \
 	Harmonizer.h \
 	jack.h \
 	Looper.h \
-        mayer_fft.h \
+	mayer_fft.h \
 	MBDist.h \
 	MBVvol.h \
 	metronome.h\
@@ -97,7 +97,7 @@ rakarrack_SOURCES = main.C \
 	FormantFilter.C \
 	FilterParams.C \
 	Pan.C \
-        Harmonizer.C \
+	Harmonizer.C \
 	smbPitchShift.C \
 	Tuner.C \
 	MusicDelay.C \
@@ -115,7 +115,7 @@ rakarrack_SOURCES = main.C \
 	Expander.C \
 	Ring.C \
 	Shuffle.C \
-        mayer_fft.C \
+	mayer_fft.C \
 	MBVvol.C \
 	metronome.C\
 	Convolotron.C \
@@ -141,14 +141,3 @@ rakarrack_SOURCES = main.C \
 	MIDIConverter.C \
 	Infinity.C \
 	Infinity.h
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	

@@ -27,7 +27,7 @@ fi
 
 
 AC_ARG_ENABLE(sse,
-AC_HELP_STRING([--enable-see],[enable sse (default=automatic check)]),
+AC_HELP_STRING([--enable-sse],[enable sse (default=automatic check)]),
 [ac_sse="$enableval"])
 
 if test "x$ac_sse" = "xyes"; then
@@ -37,7 +37,7 @@ ac_sse="no"
 fi
 
 AC_ARG_ENABLE(sse2,
-AC_HELP_STRING([--enable-see2],[enable sse2 (default=automatic check)]),
+AC_HELP_STRING([--enable-sse2],[enable sse2 (default=automatic check)]),
 [ac_sse2="$enableval"])
 
 if test "x$ac_sse2" = "xyes"; then
@@ -70,6 +70,8 @@ AC_PROG_MAKE_SET
 AC_CHECK_PROG([FLTKCONFIG], [fltk-config], [fltk-config])
 if test -z "$FLTKCONFIG"; then
   AC_MSG_ERROR([fltk not installed!])
+else
+  ac_fltk="yes"
 fi
 AC_CHECK_PROG([ACONNECT],[aconnect],[aconnect])
 if test -z "$ACONNECT"; then
@@ -134,11 +136,6 @@ AC_MSG_ERROR([dl library not found.])
 else 
    LIBS="$LIBS -ldl"
 
-fi
-
-AC_CHECK_LIB([fltk], [main], [ac_fltk="yes"], [ac_fltk="no"])
-if test "x$ac_fltk" = "xno"; then
-AC_MSG_ERROR([FLTK library not found.])
 fi
 
 AC_CHECK_LIB([Xpm],[main], [ac_Xpm="yes"], [ac_Xpm="no"])
