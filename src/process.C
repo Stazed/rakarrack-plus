@@ -1549,10 +1549,6 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
         if(ponlast) last=reconota;
 
-        for (i = 0; i <= PERIOD; i++) {
-        efxoutl[i] = efxoutl[i] - efxoutr[i];
-        }
-
         for (i = 0; i < 10; i++) {
             switch (efx_order[i]) {
             case 0:
