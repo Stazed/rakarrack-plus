@@ -27,6 +27,7 @@
 #include "global.h"
 #include "EffectLFO.h"
 #include "RBFilter.h"
+#include "AnalogFilter.h"
 
 class RyanWah
 {
@@ -86,6 +87,7 @@ private:
     float centfreq; //testing
     EffectLFO lfo;		//lfo-ul RyanWah
     class RBFilter *filterl, *filterr;
+    class AnalogFilter *sidechain_filter;
 
     class FPreset *Fpre;
 

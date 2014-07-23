@@ -40,10 +40,12 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_)
     Ra = logf(Ra);		//this is done for clarity
     Rb = 600.0f;         //Cds cell full illumination
     b = exp(Ra/logf(Rb)) - CNST_E;
-    dTC = 0.085f;
+    dTC = 0.045f;
+    //dTC = 0.085f;
     dRCl = dTC;
     dRCr = dTC;   //Right & left channel dynamic time contsants
-    minTC = logf(0.005f/dTC);
+    minTC = logf(0.0025f/dTC);
+    //minTC = logf(0.0025f/dTC);
     alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
     alphar = alphal;
     dalphal = dalphar = alphal;
@@ -140,14 +142,15 @@ Vibe::out (float *smpsl, float *smpsr)
             fxr = f_exp(Ra/logf(xr));
         }
 
-        if(i%16 == 0)  modulate(fxl, fxr);
+        if(i%4 == 0)  modulate(fxl, fxr);
+        //if(i%16 == 0)  modulate(fxl, fxr);
 
         //Left Channel
         input = bjt_shape(fbl + smpsl[i]);
 
 
         /*
-        //Inline BJT Shaper bleow
+        //Inline BJT Shaper below
             vin = 7.5f*(1.0f + fbl+smpsl[i]);
             if(vin<0.0f) vin = 0.0f;
             if(vin>15.0f) vin = 15.0f;

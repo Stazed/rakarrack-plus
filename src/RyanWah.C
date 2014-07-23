@@ -24,6 +24,7 @@
 
 #include <math.h>
 #include "RyanWah.h"
+#include "AnalogFilter.h"
 #include <stdio.h>
 
 RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
@@ -58,6 +59,8 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_)
     Ftype = 1;
     filterl = new RBFilter (0, 80.0f, 70.0f, 1);
     filterr = new RBFilter (0, 80.0f, 70.0f, 1);
+    
+    sidechain_filter = new AnalogFilter (1, 630.0, 1.0, 1);
     setpreset (Ppreset);
 
     cleanup ();
@@ -91,7 +94,7 @@ RyanWah::out (float * smpsl, float * smpsr)
         efxoutl[i] = smpsl[i];
         efxoutr[i] = smpsr[i];
 
-        float x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
+        float x = (fabsf ( sidechain_filter->filterout_s(smpsl[i] + smpsr[i]))) * 0.5f;
         ms1 = ms1 * ampsmooth + x * (1.0f - ampsmooth) + 1e-10f;
 
         //oldfbias -= 0.001 * oldfbias2;
