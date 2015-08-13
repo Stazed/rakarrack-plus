@@ -26,17 +26,17 @@
 #include <stdio.h>
 #include "FormantFilter.h"
 
-FormantFilter::FormantFilter (FilterParams * pars)
+FormantFilter::FormantFilter (FilterParams * pars, float* interpbuf)
 {
     numformants = pars->Pnumformants;
-    for (int i = 0; i < numformants; i++)
-        formant[i] = new AnalogFilter (4 /*BPF*/, 1000.0f, 10.0f, pars->Pstages);
+    for (unsigned int i = 0; i < numformants; i++)
+        formant[i] = new AnalogFilter (4 /*BPF*/, 1000.0f, 10.0f, pars->Pstages, pars->fSAMPLE_RATE, interpbuf);
     cleanup ();
-    inbuffer = new float[PERIOD];
-    tmpbuf = new float[PERIOD];
+    inbuffer = new float[pars->intermediate_bufsize];
+    tmpbuf = new float[pars->intermediate_bufsize];
 
     for (int j = 0; j < FF_MAX_VOWELS; j++)
-        for (int i = 0; i < numformants; i++) {
+        for (unsigned int i = 0; i < numformants; i++) {
             formantpar[j][i].freq =
                 pars->getformantfreq (pars->Pvowels[j].formants[i].freq);
             formantpar[j][i].amp =
@@ -46,7 +46,7 @@ FormantFilter::FormantFilter (FilterParams * pars)
         };
     for (int i = 0; i < FF_MAX_FORMANTS; i++)
         oldformantamp[i] = 1.0;
-    for (int i = 0; i < numformants; i++) {
+    for (unsigned int i = 0; i < numformants; i++) {
         currentformants[i].freq = 1000.0f;
         currentformants[i].amp = 1.0f;
         currentformants[i].q = 2.0f;
@@ -57,7 +57,7 @@ FormantFilter::FormantFilter (FilterParams * pars)
     sequencesize = pars->Psequencesize;
     if (sequencesize == 0)
         sequencesize = 1;
-    for (int k = 0; k < sequencesize; k++)
+    for (unsigned int k = 0; k < sequencesize; k++)
         sequence[k].nvowel = pars->Psequence[k].nvowel;
 
     vowelclearness = powf (10.0f, ((float)pars->Pvowelclearness - 32.0f) / 48.0f);
@@ -76,7 +76,7 @@ FormantFilter::FormantFilter (FilterParams * pars)
 
 FormantFilter::~FormantFilter ()
 {
-    for (int i = 0; i < numformants; i++)
+    for (unsigned int i = 0; i < numformants; i++)
         delete (formant[i]);
     delete (inbuffer);
     delete (tmpbuf);
@@ -88,7 +88,7 @@ FormantFilter::~FormantFilter ()
 void
 FormantFilter::cleanup ()
 {
-    for (int i = 0; i < numformants; i++)
+    for (unsigned int i = 0; i < numformants; i++)
         formant[i]->cleanup ();
 };
 
@@ -134,7 +134,7 @@ FormantFilter::setpos (float input)
     p2 = sequence[p2].nvowel;
 
     if (firsttime != 0) {
-        for (int i = 0; i < numformants; i++) {
+        for (unsigned int i = 0; i < numformants; i++) {
             currentformants[i].freq =
                 formantpar[p1][i].freq * (1.0f - pos) +
                 formantpar[p2][i].freq * pos;
@@ -148,7 +148,7 @@ FormantFilter::setpos (float input)
         };
         firsttime = 0;
     } else {
-        for (int i = 0; i < numformants; i++) {
+        for (unsigned int i = 0; i < numformants; i++) {
             currentformants[i].freq =
                 currentformants[i].freq * (1.0f - formantslowness) +
                 (formantpar[p1][i].freq * (1.0f - pos) +
@@ -182,7 +182,7 @@ void
 FormantFilter::setq (float q_)
 {
     Qfactor = q_;
-    for (int i = 0; i < numformants; i++)
+    for (unsigned int i = 0; i < numformants; i++)
         formant[i]->setq (Qfactor * currentformants[i].q);
 };
 
@@ -195,28 +195,28 @@ FormantFilter::setfreq_and_q (float frequency, float q_)
 
 
 void
-FormantFilter::filterout (float * smp)
+FormantFilter::filterout (float * smp, uint32_t period)
 {
-    int i, j;
-    for (i = 0; i < PERIOD; i++) {
+    unsigned int i, j;
+    for (i = 0; i < period; i++) {
         inbuffer[i] = smp[i];
         smp[i] = 0.0;
     };
 
     for (j = 0; j < numformants; j++) {
-        for (i = 0; i < PERIOD; i++)
+        for (i = 0; i < period; i++)
             tmpbuf[i] = inbuffer[i] * outgain;
-        formant[j]->filterout (tmpbuf);
+        formant[j]->filterout (tmpbuf, period);
 
         if (ABOVE_AMPLITUDE_THRESHOLD
                 (oldformantamp[j], currentformants[j].amp))
-            for (i = 0; i < PERIOD; i++)
+            for (i = 0; i < period; i++)
                 smp[i] +=
                     tmpbuf[i] * INTERPOLATE_AMPLITUDE (oldformantamp[j],
                                                        currentformants[j].amp, i,
-                                                       PERIOD);
+                                                       period);
         else
-            for (i = 0; i < PERIOD; i++)
+            for (i = 0; i < period; i++)
                 smp[i] += tmpbuf[i] * currentformants[j].amp;
         oldformantamp[j] = currentformants[j].amp;
     };

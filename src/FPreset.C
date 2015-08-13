@@ -31,7 +31,7 @@ FPreset::~FPreset()
 };
 
 void
-FPreset::ReadPreset(int eff, int num)
+FPreset::ReadPreset(int eff, int num, int pdata[])
 {
 
     FILE *fn;
@@ -41,7 +41,7 @@ FPreset::ReadPreset(int eff, int num)
     int k=0;
     int reff=0;
     memset(tempfile,0,sizeof(tempfile));
-    memset(pdata,0,sizeof(pdata));
+    memset(pdata,0,sizeof(int)*50);
     sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
     if (( fn = fopen (tempfile, "r")) != NULL) {
         while (fgets (buf, sizeof buf, fn) != NULL)

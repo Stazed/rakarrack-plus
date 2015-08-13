@@ -28,10 +28,11 @@
 #include <math.h>
 #include "RBEcho.h"
 
-RBEcho::RBEcho (float * efxoutl_, float * efxoutr_)
+RBEcho::RBEcho (float * efxoutl_, float * efxoutr_, double sample_rate)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
+    fSAMPLE_RATE = sample_rate;
 
     //default values
     Ppreset = 0;
@@ -49,11 +50,11 @@ RBEcho::RBEcho (float * efxoutl_, float * efxoutr_)
     ipingpong = 1.0f;
 
     lrdelay = 0;
-    Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
-    maxx_delay = 1 + SAMPLE_RATE * MAX_DELAY;
+    Srate_Attack_Coeff = 1.0f / (sample_rate * ATTACK);
+    maxx_delay = 1 + sample_rate * MAX_DELAY;
 
-    ldelay = new delayline(2.0f, 3);
-    rdelay = new delayline(2.0f, 3);
+    ldelay = new delayline(2.0f, 3, sample_rate);
+    rdelay = new delayline(2.0f, 3, sample_rate);
 
     setpreset (Ppreset);
     cleanup ();
@@ -61,6 +62,8 @@ RBEcho::RBEcho (float * efxoutl_, float * efxoutr_)
 
 RBEcho::~RBEcho ()
 {
+	delete ldelay;
+	delete rdelay;
 };
 
 /*
@@ -108,14 +111,14 @@ RBEcho::initdelays ()
  * Effect output
  */
 void
-RBEcho::out (float * smpsl, float * smpsr)
+RBEcho::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+    unsigned int i;
     float ldl, rdl;
     float avg, ldiff, rdiff, tmp;
 
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
 
         //LowPass Filter
         ldl = lfeedback * hidamp + oldl * (1.0f - hidamp);
@@ -136,8 +139,10 @@ RBEcho::out (float * smpsl, float * smpsr)
         }
 
 
-        lfeedback = lpanning * fb * ldl;
-        rfeedback = rpanning * fb * rdl;
+        //lfeedback = lpanning * fb * ldl;
+        //rfeedback = rpanning * fb * rdl;
+        lfeedback = rpanning * fb * ldl;
+        rfeedback = lpanning * fb * rdl;
 
         if(Pes) {
             ldl *= cosf(lrcross);
@@ -155,8 +160,10 @@ RBEcho::out (float * smpsl, float * smpsr)
 
 
         }
-        efxoutl[i] = (ipingpong*ldl + pingpong *ldelay->delay_simple(0.0f, ltime, 2, 0, 0)) * lpanning;
-        efxoutr[i] = (ipingpong*rdl + pingpong *rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * rpanning;
+        //efxoutl[i] = (ipingpong*ldl + pingpong *ldelay->delay_simple(0.0f, ltime, 2, 0, 0)) * lpanning;
+        //efxoutr[i] = (ipingpong*rdl + pingpong *rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * rpanning;
+        efxoutl[i] = (ipingpong*ldl + pingpong *ldelay->delay_simple(0.0f, ltime, 2, 0, 0)) * rpanning;
+        efxoutr[i] = (ipingpong*rdl + pingpong *rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * lpanning;
 
     };
 
@@ -248,6 +255,7 @@ RBEcho::setpreset (int npreset)
 {
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 3;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Echo 1
         {64, 64, 90, 64, 64, 64, 64, 0, 1, 96},
@@ -258,7 +266,7 @@ RBEcho::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(32,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(32,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

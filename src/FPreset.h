@@ -29,7 +29,7 @@ public:
 
     FPreset();
     ~FPreset();
-    void ReadPreset(int eff, int num);
+    void ReadPreset(int eff, int num, int pdata[]);
 };
 
 

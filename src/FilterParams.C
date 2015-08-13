@@ -29,13 +29,16 @@
 #include "FilterParams.h"
 
 FilterParams::FilterParams (unsigned char Ptype_, unsigned char Pfreq_,
-                            unsigned char Pq_)
+                            unsigned char Pq_, double sample_rate, uint32_t ibufsz)
 {
 
     // setpresettype("Pfilter");
     Dtype = Ptype_;
     Dfreq = Pfreq_;
     Dq = Pq_;
+    SAMPLE_RATE = sample_rate;
+    fSAMPLE_RATE = sample_rate;
+    intermediate_bufsize = ibufsz;
 
     changed = false;
     defaults ();

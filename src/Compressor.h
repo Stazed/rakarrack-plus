@@ -28,7 +28,6 @@
 #ifndef COMPRESSOR_H
 #define COMPRESSOR_H
 
-#include "global.h"
 #include "FPreset.h"
 
 class Compressor
@@ -36,10 +35,10 @@ class Compressor
 
 public:
 
-    Compressor (float * efxoutl_, float * efxoutr_);
+    Compressor (float * efxoutl_, float * efxoutr_, double samplerate);
     ~Compressor ();
 
-    void out (float * smps_l, float * smps_r);
+    void out (float * smps_l, float * smps_r, uint32_t period);
 
     void Compressor_Change (int np, int value);
     void Compressor_Change_Preset (int dgui,int npreset);
@@ -104,6 +103,8 @@ private:
     float rpeak;
 
     class FPreset *Fpre;
+
+    float cSAMPLE_RATE;
 
 };
 

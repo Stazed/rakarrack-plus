@@ -26,38 +26,45 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Waveshaper.h"
+#include "Resample.h"
 #include "f_sin.h"
 
-Waveshaper::Waveshaper()
+Waveshaper::Waveshaper(double samplerate, int Wave_Res_Amount, int Wave_up_q, int Wave_down_q, unsigned short tempbufsize)
 {
-
+double csamplerate = 1/samplerate;
+	Wave_res_amount = Wave_Res_Amount;
 
     switch(Wave_res_amount) {
     case 0:
         period_coeff = 1;
-        ncSAMPLE_RATE=cSAMPLE_RATE;
+        ncSAMPLE_RATE=csamplerate;
         break;
     case 1:
         period_coeff = 2;
-        ncSAMPLE_RATE=cSAMPLE_RATE/2.0f;
+        ncSAMPLE_RATE=csamplerate/2.0f;
         break;
     case 2:
         period_coeff = 4;
-        ncSAMPLE_RATE=cSAMPLE_RATE/4.0f;
+        ncSAMPLE_RATE=csamplerate/4.0f;
         break;
     case 3:
         period_coeff = 8;
-        ncSAMPLE_RATE=cSAMPLE_RATE/8.0f;
+        ncSAMPLE_RATE=csamplerate/8.0f;
         break;
     case 4:
         period_coeff = 12;
-        ncSAMPLE_RATE=cSAMPLE_RATE/12.0f;
+        ncSAMPLE_RATE=csamplerate/12.0f;
         break;
-
     }
 
 
-    temps = (float *) malloc (sizeof (float) * PERIOD * period_coeff);
+    //create and zero temp buffer
+    temps = (float *) malloc (sizeof (float) * tempbufsize * period_coeff);
+    long i;
+    for(i=0; i<tempbufsize*period_coeff; i++)
+    {
+    	temps[i] = 0;
+    }
     u_up= (double)period_coeff;
     u_down = 1.0 / u_up;
 
@@ -97,6 +104,9 @@ Waveshaper::Waveshaper()
 
 Waveshaper::~Waveshaper()
 {
+	free(temps);
+	delete U_Resample;
+	delete D_Resample;
 };
 void Waveshaper::cleanup()
 {
@@ -120,7 +130,6 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
         nn=n*period_coeff;
         U_Resample->mono_out(smps,temps,n,u_up,nn);
     }
-
     else memcpy(temps,smps,sizeof(float)*n);
 
     int i;
@@ -555,7 +564,7 @@ Waveshaper::waveshapesmps (int n, float * smps, int type,
 
     };
 
-    if(Wave_res_amount>= 0) {
+    if(Wave_res_amount> 0) {
         D_Resample->mono_out(temps,smps,nn,u_down,n);
     } else
         memcpy(smps,temps,sizeof(float)*n);

@@ -30,9 +30,9 @@
 class CoilCrafter
 {
 public:
-    CoilCrafter (float * efxoutl_, float * efxoutr_);
+    CoilCrafter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~CoilCrafter ();
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -73,6 +73,7 @@ private:
     class HarmEnhancer *harm;
     class AnalogFilter *RB1l, *RB1r;
     class AnalogFilter *RB2l,*RB2r;
+    float* interpbuf;
 
     class FPreset *Fpre;
 

@@ -26,17 +26,19 @@
 
 
 
-Pan::Pan (float *efxoutl_, float *efxoutr_)
+Pan::Pan (float *efxoutl_, float *efxoutr_, double sample_rate)
 {
 
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
+    lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
+    PERIOD = 256; //make our best guess for the initializing
     setpreset (Ppreset);
 
-    lfo.effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout (&lfol, &lfor);
 
     cleanup ();
 
@@ -47,6 +49,7 @@ Pan::Pan (float *efxoutl_, float *efxoutr_)
 
 Pan::~Pan ()
 {
+	delete lfo;
 };
 
 void
@@ -58,10 +61,11 @@ Pan::cleanup ()
 
 
 void
-Pan::out (float *smpsl, float *smpsr)
+Pan::out (float *smpsl, float *smpsr, uint32_t period)
 {
 
-    int i;
+    unsigned int i;
+    float fPERIOD = period;
     float avg, ldiff, rdiff, tmp;
     float pp;
     float coeff_PERIOD = 1.0 / fPERIOD;
@@ -71,7 +75,7 @@ Pan::out (float *smpsl, float *smpsr)
 
     if (PextraON) {
 
-        for (i = 0; i < PERIOD; i++)
+        for (i = 0; i < period; i++)
 
         {
 
@@ -95,10 +99,10 @@ Pan::out (float *smpsl, float *smpsr)
 
         ll = lfol;
         lr = lfor;
-        lfo.effectlfoout (&lfol, &lfor);
-        for (i = 0; i < PERIOD; i++) {
+        lfo->effectlfoout (&lfol, &lfor);
+        for (i = 0; i < period; i++) {
             fi = (float) i;
-            P_i = (float) (PERIOD - i);
+            P_i = (float) (period - i);
 
             pp = (ll * P_i + lfol * fi) * coeff_PERIOD;
 
@@ -154,10 +158,11 @@ Pan::setextra (int Pextra)
 
 
 void
-Pan::setpreset (int npreset)
+Pan::setpreset (int npreset )
 {
     const int PRESET_SIZE = 9;
     const int NUM_PRESETS = 2;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //AutoPan
         {64, 64, 26, 0, 0, 0, 0, 1, 0},
@@ -167,7 +172,7 @@ Pan::setpreset (int npreset)
 
     if(npreset>NUM_PRESETS-1) {
 
-        Fpre->ReadPreset(13,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(13,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {
@@ -195,20 +200,20 @@ Pan::changepar (int npar, int value)
         setpanning (value);
         break;
     case 2:
-        lfo.Pfreq = value;
-        lfo.updateparams ();
+        lfo->Pfreq = value;
+        lfo->updateparams (PERIOD);
         break;
     case 3:
-        lfo.Prandomness = value;
-        lfo.updateparams ();
+        lfo->Prandomness = value;
+        lfo->updateparams (PERIOD);
         break;
     case 4:
-        lfo.PLFOtype = value;
-        lfo.updateparams ();
+        lfo->PLFOtype = value;
+        lfo->updateparams (PERIOD);
         break;
     case 5:
-        lfo.Pstereo = value;
-        lfo.updateparams ();
+        lfo->Pstereo = value;
+        lfo->updateparams (PERIOD);
         break;
     case 6:
         setextra (value);
@@ -237,16 +242,16 @@ Pan::getpar (int npar)
         return (Ppanning);
         break;
     case 2:
-        return (lfo.Pfreq);
+        return (lfo->Pfreq);
         break;
     case 3:
-        return (lfo.Prandomness);
+        return (lfo->Prandomness);
         break;
     case 4:
-        return (lfo.PLFOtype);
+        return (lfo->PLFOtype);
         break;
     case 5:
-        return (lfo.Pstereo);
+        return (lfo->Pstereo);
         break;
     case 6:
         return (Pextra);

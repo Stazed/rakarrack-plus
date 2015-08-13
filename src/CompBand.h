@@ -30,16 +30,16 @@
 #ifndef COMPBANDL_H
 #define COMPBANDL_H
 
-#include "global.h"
 #include "Compressor.h"
+#include "AnalogFilter.h"
 
 
 class CompBand
 {
 public:
-    CompBand (float * efxoutl_, float * efxoutr_);
+    CompBand (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~CompBand ();
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -94,6 +94,7 @@ private:
     AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
     AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
     AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
+    float * interpbuf;//buffer for filters
 
     Compressor *CL,*CML,*CMH,*CH;
 

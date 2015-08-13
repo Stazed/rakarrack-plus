@@ -26,7 +26,7 @@
 
 
 
-Exciter::Exciter (float * efxoutl_, float * efxoutr_)
+Exciter::Exciter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
@@ -43,7 +43,7 @@ Exciter::Exciter (float * efxoutl_, float * efxoutr_)
         rm[i]=0.0f;
     }
 
-    harm = new HarmEnhancer (rm, 2500.0f,8000.0,1.0f);
+    harm = new HarmEnhancer (rm, 2500.0f,8000.0,1.0f, sample_rate, intermediate_bufsize);
 
     cleanup ();
 
@@ -52,6 +52,7 @@ Exciter::Exciter (float * efxoutl_, float * efxoutr_)
 
 Exciter::~Exciter ()
 {
+	delete harm;
 };
 
 /*
@@ -68,9 +69,9 @@ Exciter::cleanup ()
  * Effect output
  */
 void
-Exciter::out (float * smpsl, float * smpsr)
+Exciter::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    harm->harm_out(smpsl,smpsr);
+    harm->harm_out(smpsl,smpsr, period);
 
 };
 
@@ -117,6 +118,7 @@ Exciter::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 5;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
         {64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20},
@@ -132,7 +134,7 @@ Exciter::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(22,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(22,npreset-NUM_PRESETS+1, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

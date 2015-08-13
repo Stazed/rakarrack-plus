@@ -30,7 +30,7 @@
 #include <math.h>
 #include "Echo.h"
 
-Echo::Echo (float * efxoutl_, float * efxoutr_)
+Echo::Echo (float * efxoutl_, float * efxoutr_, double samplerate)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
@@ -45,12 +45,12 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
     Phidamp = 60;
 
     lrdelay = 0;
-    Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
-    maxx_delay = SAMPLE_RATE * MAX_DELAY;
-    fade = SAMPLE_RATE / 5;    //1/5 SR fade time available
+    Srate_Attack_Coeff = 1.0f / (samplerate * ATTACK);
+    maxx_delay = samplerate * MAX_DELAY;
+    fade = samplerate / 5;    //1/5 SR fade time available
 
-    ldelay = new delayline(2.0f, 1);
-    rdelay = new delayline(2.0f, 1);
+    ldelay = new delayline(2.0f, 1, samplerate);
+    rdelay = new delayline(2.0f, 1, samplerate);
 
     setpreset (Ppreset);
     cleanup ();
@@ -58,6 +58,8 @@ Echo::Echo (float * efxoutl_, float * efxoutr_)
 
 Echo::~Echo ()
 {
+	delete ldelay;
+	delete rdelay;
 };
 
 /*
@@ -98,12 +100,12 @@ Echo::initdelays ()
  * Effect output
  */
 void
-Echo::out (float * smpsl, float * smpsr)
+Echo::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+    unsigned int i;
     float l, r, ldl, rdl, ldlout, rdlout, rvl, rvr;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
 
         ldl = ldelay->delay_simple(oldl, ltime, 0, 1, 0);
         rdl = rdelay->delay_simple(oldr, rtime, 0, 1, 0);

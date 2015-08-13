@@ -34,7 +34,7 @@ public:
     ~RecChord ();
     void MiraChord ();
     void IniciaChords ();
-    void Vamos (int voz, int interval);
+    void Vamos (int voz, int interval, int reconota);
     void cleanup ();
 
     int cc;
@@ -60,7 +60,10 @@ public:
     } NCE[25];
 
 
-
+    int note_active[POLY];
+    int rnote[POLY];
+    int gate[POLY];
+    float r__ratio[POLY];
 
 private:
 

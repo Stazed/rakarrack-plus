@@ -33,10 +33,11 @@
 */
 
 #include <math.h>
+#include "global.h"
 #include "Compressor.h"
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
-Compressor::Compressor (float * efxoutl_, float * efxoutr_)
+Compressor::Compressor (float * efxoutl_, float * efxoutr_, double samplerate)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
@@ -67,11 +68,11 @@ Compressor::Compressor (float * efxoutl_, float * efxoutr_)
     rell = relr = attr = attl = 1.0f;
 
     ltimer = rtimer = 0;
-    hold = (int) (SAMPLE_RATE*0.0125);  //12.5ms
+    hold = (int) (samplerate*0.0125);  //12.5ms
     clipping = 0;
     limit = 0;
 
-
+    cSAMPLE_RATE = 1.0/samplerate;
 }
 
 Compressor::~Compressor ()
@@ -206,13 +207,13 @@ Compressor::getpar (int np)
 
 }
 
-
 void
 Compressor::Compressor_Change_Preset (int dgui, int npreset)
 {
 
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 7;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //2:1
         {-30, 2, -6, 20, 120, 1, 0, 0, 0},
@@ -233,7 +234,7 @@ Compressor::Compressor_Change_Preset (int dgui, int npreset)
     };
 
     if((dgui)&&(npreset>2)) {
-        Fpre->ReadPreset(1,npreset-2);
+        Fpre->ReadPreset(1,npreset-2,pdata);
         for (int n = 1; n < PRESET_SIZE; n++)
             Compressor_Change (n , pdata[n-1]);
 
@@ -247,13 +248,13 @@ Compressor::Compressor_Change_Preset (int dgui, int npreset)
 
 
 void
-Compressor::out (float *efxoutl, float *efxoutr)
+Compressor::out (float *efxoutl, float *efxoutr, uint32_t period)
 {
 
-    int i;
+    unsigned int i;
 
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         float rdelta = 0.0f;
         float ldelta = 0.0f;
 //Right Channel

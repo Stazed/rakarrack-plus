@@ -28,31 +28,37 @@
 
 
 
-Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq)
+Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq,
+		uint16_t intermediate_bufsize, double sample_rate)
 {
-
-
 
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
     hq = Quality;
-    adjust(DS);
+    SAMPLE_RATE = (unsigned int)sample_rate;
+    adjust(DS, intermediate_bufsize);
+    DS_init = 0;
 
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
+    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
 
 
-    outi = (float *) malloc (sizeof (float) * nPERIOD);
-    outo = (float *) malloc (sizeof (float) * nPERIOD);
+    outi = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    outo = (float *) malloc (sizeof (float) * intermediate_bufsize);
 
-    memset (outi, 0, sizeof (float) * nPERIOD);
-    memset (outo, 0, sizeof (float) * nPERIOD);
+    unsigned int i;
+    for(i=0; i<intermediate_bufsize;i++)
+    {
+    	templ[i] = tempr[i] = 0;
+    	outi[i] = outo[i] = 0;
+    }
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
 
 
-    pl = new AnalogFilter (6, 22000, 1, 0);
+    interpbuf = new float[intermediate_bufsize];
+    pl = new AnalogFilter (6, 22000, 1, 0, sample_rate, interpbuf);
 
     PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
@@ -71,6 +77,16 @@ Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int 
 
 Harmonizer::~Harmonizer ()
 {
+	free(templ);
+	free(tempr);
+	free(outi);
+	free(outo);
+	delete U_Resample;
+	delete D_Resample;
+	delete pl;
+	delete PS;
+	delete[] interpbuf;
+
 };
 
 void
@@ -83,28 +99,29 @@ Harmonizer::cleanup ()
 
 
 void
-Harmonizer::applyfilters (float * efxoutl)
+Harmonizer::applyfilters (float * efxoutl, uint32_t period)
 {
-    pl->filterout (efxoutl);
+    pl->filterout (efxoutl, period);
 };
 
 
 
 void
-Harmonizer::out (float *smpsl, float *smpsr)
+Harmonizer::out (float *smpsl, float *smpsr, uint32_t period)
 {
 
     int i;
 
+    if(!DS_init){
+    	adjust(DS_state,period);//readjust now that we know period size
+    }
     if((DS_state != 0) && (Pinterval !=12)) {
-        memcpy(templ, smpsl,sizeof(float)*PERIOD);
-        memcpy(tempr, smpsr,sizeof(float)*PERIOD);
-        U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+        U_Resample->out(smpsl,smpsr,templ,tempr,period,u_up);
     }
 
 
     for (i = 0; i < nPERIOD; i++) {
-        outi[i] = (smpsl[i] + smpsr[i])*.5;
+        outi[i] = (templ[i] + tempr[i])*.5;
         if (outi[i] > 1.0)
             outi[i] = 1.0f;
         if (outi[i] < -1.0)
@@ -113,26 +130,27 @@ Harmonizer::out (float *smpsl, float *smpsr)
     }
 
     if ((PMIDI) || (PSELECT))
-        PS->ratio = r__ratio[0];
+        PS->ratio = r_ratio;
 
     if (Pinterval != 12) {
         PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
+    }
 
-        if((DS_state != 0) && (Pinterval != 12)) {
-            D_Resample->mono_out(outo,templ,nPERIOD,u_down,PERIOD);
-        } else {
-            memcpy(templ, outo,sizeof(float)*PERIOD);
-        }
+    if((DS_state != 0) && (Pinterval != 12)) {
+        D_Resample->mono_out(outo,templ,nPERIOD,u_down,period);
+    } else {
+        memcpy(templ,smpsl, sizeof(float)*period);
+    }
 
+    applyfilters (templ,period);
 
-
-        applyfilters (templ);
-
-        for (i = 0; i < PERIOD; i++) {
-            efxoutl[i] = templ[i] * gain * panning;
-            efxoutr[i] = templ[i] * gain * (1.0f - panning);
-        }
-
+    //for (i = 0; i < (signed int)period; i++) {
+        //efxoutl[i] = templ[i] * gain * panning;
+        //efxoutr[i] = templ[i] * gain * (1.0f - panning);
+    //}
+    for (i = 0; i < (signed int)period; i++) {
+        efxoutl[i] = templ[i] * gain * (1.0f - panning);
+        efxoutr[i] = templ[i] * gain * panning;
     }
 
 };
@@ -221,16 +239,19 @@ Harmonizer::setMIDI (int value)
 
 
 void
-Harmonizer::adjust(int DS)
+Harmonizer::adjust(int DS, uint32_t period)
 {
 
     DS_state=DS;
+    DS_init = 1;
+    float fSAMPLE_RATE = SAMPLE_RATE;
+    float fPERIOD = period;
 
 
     switch(DS) {
 
     case 0:
-        nPERIOD = PERIOD;
+        nPERIOD = period;
         nSAMPLE_RATE = SAMPLE_RATE;
         nfSAMPLE_RATE = fSAMPLE_RATE;
         window = 2048;
@@ -300,8 +321,8 @@ Harmonizer::adjust(int DS)
         window = 256;
         break;
     }
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
+    u_up= (double)nPERIOD / (double)period;
+    u_down= (double)period / (double)nPERIOD;
 }
 
 
@@ -313,6 +334,7 @@ Harmonizer::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 3;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
         {64, 64, 64, 12, 6000, 0, 0, 0, 64, 64, 0},
@@ -325,7 +347,7 @@ Harmonizer::setpreset (int npreset)
 
     if(npreset>NUM_PRESETS-1) {
 
-        Fpre->ReadPreset(14,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(14,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {
@@ -362,7 +384,9 @@ Harmonizer::changepar (int npar, int value)
         fsetfreq (value);
         break;
     case 5:
-        PSELECT = value;;
+        PSELECT = value;
+        if(!value)
+        	setinterval(Pinterval);
         break;
     case 6:
         Pnote = value;
@@ -378,6 +402,8 @@ Harmonizer::changepar (int npar, int value)
         break;
     case 10:
         setMIDI (value);
+        if(!value)
+    	    setinterval(Pinterval);
         break;
 
 

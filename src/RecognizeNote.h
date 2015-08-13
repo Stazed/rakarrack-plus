@@ -16,14 +16,15 @@
 #include <math.h>
 #include "global.h"
 #include "AnalogFilter.h"
+#include "Sustainer.h"
 
 class Recognize
 {
 public:
-    Recognize (float * efxoutl_, float * efxoutr_, float trig);
+    Recognize (float * efxoutl_, float * efxoutr_, float trig, double sample_rate, float tune, uint32_t intermediate_bufsize);
     ~Recognize ();
 
-    void schmittFloat (float *indatal, float *indatar);
+    void schmittFloat (float *indatal, float *indatar, uint32_t period);
     void sethpf(int value);
     void setlpf(int value);
     int note;
@@ -37,21 +38,27 @@ public:
     float *efxoutl;
     float *efxoutr;
 
-
+    int reconota;
+    int last;
 
 private:
 
     void displayFrequency (float freq);
-    void schmittInit (int size);
-    void schmittS16LE (signed short int *indata);
-    void schmittFree ();
+    void schmittInit (int size, double sample_rate);
+    void schmittS16LE (signed short int *indata, uint32_t period);
+    void update_freqs(float tune);
 
     int ultima;
     int blockSize;
 
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
+    float* interpbuf; //buffer for filters
 
     class Sustainer *Sus;
+
+    float fSAMPLE_RATE;
+    float freqs[12];
+    float lfreqs[12];
 
 };
 

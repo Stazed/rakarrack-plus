@@ -36,12 +36,15 @@
 #include <math.h>
 #include "APhaser.h"
 #include <stdio.h>
+#include "FPreset.h"
 #define PHASER_LFO_SHAPE 2
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_)
+Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate)
 {
+    float fSAMPLE_RATE = sample_rate;
+
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
@@ -76,16 +79,18 @@ Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_)
     Rconst = 1.0f + Rmx;  // Handle parallel resistor relationship
     C = 0.00000005f;	     // 50 nF
     CFs = 2.0f*fSAMPLE_RATE*C;
-    invperiod = 1.0f / fPERIOD;
 
+    lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
-    setpreset (Ppreset);
+    PERIOD = 255; //make best guess for init;
+    setpreset (Ppreset);//this will get done before out is run
     cleanup ();
 };
 
 Analog_Phaser::~Analog_Phaser ()
 {
+	delete lfo;
 };
 
 
@@ -93,10 +98,12 @@ Analog_Phaser::~Analog_Phaser ()
  * Effect output
  */
 void
-Analog_Phaser::out (float * smpsl, float * smpsr)
+Analog_Phaser::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i, j;
+    unsigned int i;
+    int j;
     float lfol, lfor, lgain, rgain, bl, br, gl, gr, rmod, lmod, d, hpfr, hpfl;
+    invperiod = 1.0f / (float)PERIOD;//had to move this to run
     lgain = 0.0;
     rgain = 0.0;
 
@@ -104,7 +111,7 @@ Analog_Phaser::out (float * smpsl, float * smpsr)
     hpfl = 0.0;
     hpfr = 0.0;
 
-    lfo.effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout (&lfol, &lfor);
     lmod = lfol*width + depth;
     rmod = lfor*width + depth;
 
@@ -134,7 +141,7 @@ Analog_Phaser::out (float * smpsl, float * smpsr)
     oldlgain = lmod;
     oldrgain = rmod;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
 
         gl += ldiff;	// Linear interpolation between LFO samples
         gr += rdiff;
@@ -193,7 +200,7 @@ Analog_Phaser::out (float * smpsl, float * smpsr)
     };
 
     if (Poutsub != 0)
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         };
@@ -286,6 +293,7 @@ Analog_Phaser::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 6;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Phaser1
         {64, 20, 14, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1},
@@ -303,7 +311,7 @@ Analog_Phaser::setpreset (int npreset)
 
     if(npreset>NUM_PRESETS-1) {
 
-        Fpre->ReadPreset(18,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(18,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {
@@ -327,22 +335,22 @@ Analog_Phaser::changepar (int npar, int value)
         setdistortion (value);
         break;
     case 2:
-        lfo.Pfreq = value;
-        lfo.updateparams ();
+        lfo->Pfreq = value;
+        lfo->updateparams (PERIOD);
         break;
     case 3:
-        lfo.Prandomness = value;
-        lfo.updateparams ();
+        lfo->Prandomness = value;
+        lfo->updateparams (PERIOD);
         break;
     case 4:
-        lfo.PLFOtype = value;
-        lfo.updateparams ();
+        lfo->PLFOtype = value;
+        lfo->updateparams (PERIOD);
         barber = 0;
         if (value == 2) barber = 1;
         break;
     case 5:
-        lfo.Pstereo = value;
-        lfo.updateparams ();
+        lfo->Pstereo = value;
+        lfo->updateparams (PERIOD);
         break;
     case 6:
         setwidth (value);
@@ -383,16 +391,16 @@ Analog_Phaser::getpar (int npar)
         return (Pdistortion);
         break;
     case 2:
-        return (lfo.Pfreq);
+        return (lfo->Pfreq);
         break;
     case 3:
-        return (lfo.Prandomness);
+        return (lfo->Prandomness);
         break;
     case 4:
-        return (lfo.PLFOtype);
+        return (lfo->PLFOtype);
         break;
     case 5:
-        return (lfo.Pstereo);
+        return (lfo->Pstereo);
         break;
     case 6:
         return (Pwidth);

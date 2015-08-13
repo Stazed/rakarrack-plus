@@ -25,16 +25,17 @@
 
 #ifndef EFFECT_LFO_H
 #define EFFECT_LFO_H
+
 #include "global.h"
 
 
 class EffectLFO
 {
 public:
-    EffectLFO ();
+    EffectLFO (double sample_rate);
     ~EffectLFO ();
     void effectlfoout (float * outl, float * outr);
-    void updateparams ();
+    void updateparams (uint32_t period);
     int Pfreq;
     int Prandomness;
     int PLFOtype;
@@ -63,6 +64,8 @@ private:
     int holdflag;  //toggle left/right channel changes
     float tca, tcb, maxrate;
     float rreg, lreg, xlreg,xrreg, oldrreg, oldlreg;
+
+    float fSAMPLE_RATE;
 };
 
 

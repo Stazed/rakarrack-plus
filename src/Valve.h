@@ -31,15 +31,15 @@
 class Valve
 {
 public:
-    Valve (float * efxoutl_, float * efxoutr_);
+    Valve (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Valve ();
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     float Wshape(float x);
     void cleanup ();
-    void applyfilters (float * efxoutl, float * efxoutr);
+    void applyfilters (float * efxoutl, float * efxoutr, uint32_t period);
 
     int Ppreset;
     float outvolume;
@@ -81,6 +81,7 @@ private:
     float fdist;
     float inputvol;
 
+    float* interpbuf; //buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
     class HarmEnhancer *harm;
     class FPreset *Fpre;

@@ -31,9 +31,9 @@
 class EQ
 {
 public:
-    EQ (float * efxoutl_, float * efxoutr_);
+    EQ (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize);
     ~EQ ();
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -49,6 +49,7 @@ public:
     float *efxoutl;
     float *efxoutr;
 
+    float * interpbuf;//buffer for filter
 
     struct {
         //parameters

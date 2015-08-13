@@ -88,7 +88,7 @@ metronome::metronomeout (float * tickout)
     float hipass = 0.0f;
     int i;
 
-    for(i=0; i<PERIOD; i++) {
+    for(i=0; i<period; i++) {
         tickctr++;
 
         if (tickctr>tick_interval) {

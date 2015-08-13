@@ -22493,8 +22493,8 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   Analyzer_ON=0;
   Scope_ON=0;
   
-  Sco->init(rkr->anall, rkr->analr, PERIOD);
-  Analy->init(rkr->anall, rkr->analr, PERIOD, SAMPLE_RATE);
+  Sco->init(rkr->anall, rkr->analr, period);
+  Analy->init(rkr->anall, rkr->analr, period, SAMPLE_RATE);
   
   memset(tmp,0, sizeof(tmp));
   sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
@@ -24650,10 +24650,10 @@ void RKRGUI::MiraConfig() {
   Voc_Up_Qua->value(rkr->Voc_U_Q);
   Ste_Downsample->value(rkr->Ste_Down);
   Ste_Down_Qua->value(rkr->Ste_D_Q);
-  Ste_Up_Qua->value(rkr->Ste_U_Q);
-  Wave_Amo->value(Wave_res_amount);
-  Wave_Up_Qua->value(Wave_up_q);
-  Wave_Down_Qua->value(Wave_down_q);
+  Ste_Up_Qua->value(rkr->Ste_U_Q)//;
+//  Wave_Amo->value(Wave_res_amount);
+//  Wave_Up_Qua->value(Wave_up_q);
+//  Wave_Down_Qua->value(Wave_down_q);
   Calibration->value(aFreq);
   RTrigger->value(rkr->RecNote->trigfact);
   RC_Opti->value(rkr->RCOpti);

@@ -28,22 +28,23 @@
 #include "Expander.h"
 
 
-Expander::Expander (float * efxoutl_, float * efxoutr_)
+Expander::Expander (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
 
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
 
-    lpfl = new AnalogFilter (2, 22000, 1, 0);
-    lpfr = new AnalogFilter (2, 22000, 1, 0);
-    hpfl = new AnalogFilter (3, 20, 1, 0);
-    hpfr = new AnalogFilter (3, 20, 1, 0);
+    interpbuf = new float[intermediate_bufsize];
+    lpfl = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
+    lpfr = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
+    hpfl = new AnalogFilter (3, 20, 1, 0, sample_rate, interpbuf);
+    hpfr = new AnalogFilter (3, 20, 1, 0, sample_rate, interpbuf);
 
     env = 0.0;
     oldgain = 0.0;
     efollower = 0;
-    fs = fSAMPLE_RATE;
+    fs = sample_rate;
 
     Expander_Change_Preset(0);
 
@@ -52,6 +53,11 @@ Expander::Expander (float * efxoutl_, float * efxoutr_)
 
 Expander::~Expander ()
 {
+	delete[] interpbuf;
+	delete lpfl;
+	delete lpfr;
+	delete hpfl;
+	delete hpfr;
 }
 
 
@@ -170,6 +176,7 @@ Expander::Expander_Change_Preset (int npreset)
 
     const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 3;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
 
         //Noise Gate
@@ -181,7 +188,7 @@ Expander::Expander_Change_Preset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(25,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(25,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             Expander_Change (n+1, pdata[n]);
     } else {
@@ -194,22 +201,22 @@ Expander::Expander_Change_Preset (int npreset)
 
 
 void
-Expander::out (float *efxoutl, float *efxoutr)
+Expander::out (float *efxoutl, float *efxoutr, uint32_t period)
 {
 
 
-    int i;
+    unsigned int i;
     float delta = 0.0f;
     float expenv = 0.0f;
 
 
-    lpfl->filterout (efxoutl);
-    hpfl->filterout (efxoutl);
-    lpfr->filterout (efxoutr);
-    hpfr->filterout (efxoutr);
+    lpfl->filterout (efxoutl, period);
+    hpfl->filterout (efxoutl, period);
+    lpfr->filterout (efxoutr, period);
+    hpfr->filterout (efxoutr, period);
 
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
 
         delta = 0.5f*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
         if (delta > 0.0)

@@ -19,11 +19,12 @@
 #include <stdlib.h>
 #include "f_sin.h"
 
-delayline::delayline(float maxdelay, int maxtaps_)
+delayline::delayline(float maxdelay, int maxtaps_, double samplerate)
 {
+    fSAMPLE_RATE = samplerate;
     maxtaps = maxtaps_;
     maxtime = fSAMPLE_RATE * maxdelay;
-    maxdelaysmps = SAMPLE_RATE * lrintf(ceilf(maxdelay));
+    maxdelaysmps = fSAMPLE_RATE * lrintf(ceilf(maxdelay));
     ringbuffer = (float *) malloc(sizeof(float) * maxdelaysmps);
     avgtime = (float *) malloc(sizeof(float) * maxtaps);
     time = (float *) malloc(sizeof(float) * maxtaps);
@@ -53,7 +54,16 @@ delayline::delayline(float maxdelay, int maxtaps_)
 
 delayline::~delayline()
 {
-
+	free(ringbuffer);
+	free(avgtime);
+	free(time);
+	free(xfade);
+	free(cur_smps);
+	free(oldtime);
+	free(newtime);
+	free(crossfade);
+	free(pstruct);
+	free(tapstruct);
 }
 
 void

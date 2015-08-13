@@ -33,9 +33,9 @@
 class Analog_Phaser
 {
 public:
-    Analog_Phaser (float * efxoutl_, float * efxoutr_);
+    Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate);
     ~Analog_Phaser ();
-    void out (float * smpsl, float * smpsr);
+    void out (float * smpsl, float * smpsr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -45,9 +45,11 @@ public:
     float *efxoutr;
     float outvolume;
 
+    uint32_t PERIOD;
+
 private:
     //Phaser parameters
-    EffectLFO lfo;		//Phaser modulator
+    EffectLFO *lfo;		//Phaser modulator
     int Pvolume;        //Used in Process.C to set wet/dry mix
     int Pdistortion;    //Model distortion added by FET element
     int Pwidth;		//Phaser width (LFO amplitude)
@@ -81,7 +83,7 @@ private:
     float Rconst;      // Handle parallel resistor relationship
     float C;	        // Capacitor
     float CFs;		// A constant derived from capacitor and resistor relationships
-
+    float fPERIOD;
 
     class FPreset *Fpre;
 

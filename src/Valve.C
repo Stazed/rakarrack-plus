@@ -29,16 +29,17 @@
 
 
 
-Valve::Valve (float * efxoutl_, float * efxoutr_)
+Valve::Valve (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
-    lpfl = new AnalogFilter (2, 22000.0f, 1.0f, 0);
-    lpfr = new AnalogFilter (2, 22000.0f, 1.0f, 0);
-    hpfl = new AnalogFilter (3, 20.0f, 1.0f, 0);
-    hpfr = new AnalogFilter (3, 20.0f, 1.0f, 0);
-    harm = new HarmEnhancer (rm, 20.0f,20000.0f,1.0f);
+    interpbuf = new float[intermediate_bufsize];
+    lpfl = new AnalogFilter (2, 22000.0f, 1.0f, 0, sample_rate, interpbuf);
+    lpfr = new AnalogFilter (2, 22000.0f, 1.0f, 0, sample_rate, interpbuf);
+    hpfl = new AnalogFilter (3, 20.0f, 1.0f, 0, sample_rate, interpbuf);
+    hpfr = new AnalogFilter (3, 20.0f, 1.0f, 0, sample_rate, interpbuf);
+    harm = new HarmEnhancer (rm, 20.0f,20000.0f,1.0f, sample_rate, intermediate_bufsize);
 
 
     //default values
@@ -58,7 +59,7 @@ Valve::Valve (float * efxoutl_, float * efxoutr_)
     dist = 0.0f;
     setlpf(127);
     sethpf(1);
-    atk = 1.0f - 40.0f/fSAMPLE_RATE;
+    atk = 1.0f - 40.0f/sample_rate;
 
     for(int i=0; i<10; i++) rm[i]=0.0;
     rm[0]=1.0f;
@@ -75,6 +76,12 @@ Valve::Valve (float * efxoutl_, float * efxoutr_)
 
 Valve::~Valve ()
 {
+	delete[] interpbuf;
+	delete lpfl;
+	delete lpfr;
+	delete hpfl;
+	delete hpfr;
+	delete harm;
 };
 
 /*
@@ -103,15 +110,15 @@ Valve::cleanup ()
  */
 
 void
-Valve::applyfilters (float * efxoutl, float * efxoutr)
+Valve::applyfilters (float * efxoutl, float * efxoutr, uint32_t period)
 {
-    lpfl->filterout (efxoutl);
-    hpfl->filterout (efxoutl);
+    lpfl->filterout (efxoutl, period);
+    hpfl->filterout (efxoutl, period);
 
     if (Pstereo != 0) {
         //stereo
-        lpfr->filterout (efxoutr);
-        hpfr->filterout (efxoutr);
+        lpfr->filterout (efxoutr, period);
+        hpfr->filterout (efxoutr, period);
     };
 
 };
@@ -133,40 +140,40 @@ Valve::Wshape(float x)
  * Effect output
  */
 void
-Valve::out (float * smpsl, float * smpsr)
+Valve::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+    unsigned int i;
 
     float l, r, lout, rout, fx;
 
 
     if (Pstereo != 0) {
         //Stereo
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             efxoutl[i] = smpsl[i] * inputvol;
             efxoutr[i] = smpsr[i] * inputvol;
         };
     } else {
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             efxoutl[i] =
                 (smpsl[i]  +  smpsr[i] ) * inputvol;
         };
     };
 
-    harm->harm_out(efxoutl,efxoutr);
+    harm->harm_out(efxoutl,efxoutr, period);
 
 
     if (Pprefiltering != 0)
-        applyfilters (efxoutl, efxoutr);
+        applyfilters (efxoutl, efxoutr, period);
 
     if(Ped) {
-        for (i =0; i<PERIOD; i++) {
+        for (i =0; i<period; i++) {
             efxoutl[i]=Wshape(efxoutl[i]);
             if (Pstereo != 0) efxoutr[i]=Wshape(efxoutr[i]);
         }
     }
 
-    for (i =0; i<PERIOD; i++) { //soft limiting to 3.0 (max)
+    for (i =0; i<period; i++) { //soft limiting to 3.0 (max)
         fx = efxoutl[i];
         if (fx>1.0f) fx = 3.0f - 2.0f/sqrtf(fx);
         efxoutl[i] = fx;
@@ -176,7 +183,7 @@ Valve::out (float * smpsl, float * smpsr)
     }
 
     if (q == 0.0f) {
-        for (i =0; i<PERIOD; i++) {
+        for (i =0; i<period; i++) {
             if (efxoutl[i] == q) fx = fdist;
             else fx =efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] ));
             otml = atk * otml + fx - itml;
@@ -184,7 +191,7 @@ Valve::out (float * smpsl, float * smpsr)
             efxoutl[i]= otml;
         }
     } else {
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             if (efxoutl[i] == q) fx = fdist + qcoef;
             else fx =(efxoutl[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutl[i] - q))) + qcoef;
             otml = atk * otml + fx - itml;
@@ -198,7 +205,7 @@ Valve::out (float * smpsl, float * smpsr)
     if (Pstereo != 0) {
 
         if (q == 0.0f) {
-            for (i =0; i<PERIOD; i++) {
+            for (i =0; i<period; i++) {
                 if (efxoutr[i] == q) fx = fdist;
                 else fx = efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] ));
                 otmr = atk * otmr + fx - itmr;
@@ -207,7 +214,7 @@ Valve::out (float * smpsl, float * smpsr)
 
             }
         } else {
-            for (i = 0; i < PERIOD; i++) {
+            for (i = 0; i < period; i++) {
                 if (efxoutr[i] == q) fx = fdist + qcoef;
                 else fx = (efxoutr[i] - q) / (1.0f - powf(2.0f,-dist * (efxoutr[i] - q))) + qcoef;
                 otmr = atk * otmr + fx - itmr;
@@ -222,14 +229,14 @@ Valve::out (float * smpsl, float * smpsr)
 
 
     if (Pprefiltering == 0)
-        applyfilters (efxoutl, efxoutr);
+        applyfilters (efxoutl, efxoutr, period);
 
-    if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
+    if (Pstereo == 0) memcpy (efxoutr , efxoutl, period * sizeof(float));
 
 
     float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         lout = efxoutl[i];
         rout = efxoutr[i];
 
@@ -240,8 +247,10 @@ Valve::out (float * smpsl, float * smpsr)
         lout = l;
         rout = r;
 
-        efxoutl[i] = lout * 2.0f * level * panning;
-        efxoutr[i] = rout * 2.0f * level * (1.0f -panning);
+        //efxoutl[i] = lout * 2.0f * level * panning;
+        //efxoutr[i] = rout * 2.0f * level * (1.0f -panning);
+        efxoutl[i] = lout * 2.0f * level * (1.0f -panning);
+        efxoutr[i] = rout * 2.0f * level * panning;
 
     };
 
@@ -333,6 +342,7 @@ Valve::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 3;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Valve 1
         {0, 64, 64, 127, 64, 0, 5841, 61, 1, 0, 69, 1, 84},
@@ -344,7 +354,7 @@ Valve::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(19,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(19,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

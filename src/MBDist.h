@@ -33,9 +33,10 @@
 class MBDist
 {
 public:
-    MBDist (float * efxoutl_, float * efxoutr_);
+    MBDist (float * efxoutl_, float * efxoutr_, double samplerate,
+    		uint32_t intermediate_bufsize, int wave_res, int wave_upq, int wave_dnq);
     ~MBDist ();
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -90,6 +91,7 @@ private:
     AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
     AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
     AnalogFilter *DCl, *DCr;
+    float* interpbuf; //buffer for filters
 
     class Waveshaper *mbwshape1l, *mbwshape2l, *mbwshape3l;
     class Waveshaper *mbwshape1r, *mbwshape2r, *mbwshape3r;

@@ -28,19 +28,17 @@
 
 
 
-StereoHarm::StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq)
-{
-
-
-
+StereoHarm::StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq, uint32_t intermediate_bufsize, double sample_rate)
+{ 
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
     hq = Quality;
-    adjust(DS);
+    SAMPLE_RATE = (unsigned int)sample_rate;
+    adjust(DS, intermediate_bufsize);
+    nPERIOD = lrintf(intermediate_bufsize*nRATIO);
 
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
-
+    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
 
     outil = (float *) malloc (sizeof (float) * nPERIOD);
     outir = (float *) malloc (sizeof (float) * nPERIOD);
@@ -81,6 +79,16 @@ StereoHarm::StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int 
 
 StereoHarm::~StereoHarm ()
 {
+	free(templ);
+	free(tempr);
+	free(outil);
+	free(outir);
+	free(outol);
+	free(outor);
+	delete U_Resample;
+	delete D_Resample;
+	delete PSl;
+	delete PSr;
 };
 
 void
@@ -98,29 +106,35 @@ StereoHarm::cleanup ()
 
 
 void
-StereoHarm::out (float *smpsl, float *smpsr)
+StereoHarm::out (float *smpsl, float *smpsr, uint32_t period)
 {
 
-    int i;
+    unsigned int i;
 
+    nPERIOD = lrintf(period*nRATIO);
+    u_up= (double)nPERIOD / (double)period;
+    u_down= (double)period / (double)nPERIOD;
 
     if(DS_state != 0) {
-        memcpy(templ, smpsl,sizeof(float)*PERIOD);
-        memcpy(tempr, smpsr,sizeof(float)*PERIOD);
-        U_Resample->out(templ,tempr,smpsl,smpsr,PERIOD,u_up);
+        U_Resample->out(smpsl,smpsr,templ,tempr,period,u_up);
+    }
+    else
+    {
+        memcpy(templ, smpsl,sizeof(float)*period);
+        memcpy(tempr, smpsr,sizeof(float)*period);
     }
 
 
     for (i = 0; i < nPERIOD; i++) {
 
 
-        outil[i] = smpsl[i] * (1.0f - lrcross) + smpsr[i] * lrcross;
+        outil[i] = tempr[i];
         if (outil[i] > 1.0)
             outil[i] = 1.0f;
         if (outil[i] < -1.0)
             outil[i] = -1.0f;
 
-        outir[i] = smpsr[i] * (1.0f - lrcross) + smpsl[i] * lrcross;
+        outir[i] = templ[i];
         if (outir[i] > 1.0)
             outir[i] = 1.0f;
         if (outir[i] < -1.0)
@@ -129,8 +143,8 @@ StereoHarm::out (float *smpsl, float *smpsr)
     }
 
     if ((PMIDI) || (PSELECT)) {
-        PSl->ratio = r__ratio[1];
-        PSr->ratio = r__ratio[2];
+        PSl->ratio = r_ratiol;
+        PSr->ratio = r_ratior;
     }
 
     if (PSl->ratio != 1.0f) {
@@ -148,21 +162,23 @@ StereoHarm::out (float *smpsl, float *smpsr)
     if(DS_state != 0) {
         D_Resample->out(outol,outor,templ,tempr,nPERIOD,u_down);
     } else {
-        memcpy(templ, outol,sizeof(float)*PERIOD);
-        memcpy(tempr, outor,sizeof(float)*PERIOD);
+        memcpy(templ, outol,sizeof(float)*period);
+        memcpy(tempr, outor,sizeof(float)*period);
 
     }
 
 
-    for (i = 0; i < PERIOD; i++) {
-        efxoutl[i] = templ[i] * gainl;
-        efxoutr[i] = tempr[i] * gainr;
+    //for (i = 0; i < period; i++) {
+        //efxoutl[i] = templ[i] * gainl;
+        //efxoutr[i] = tempr[i] * gainr;
+        
+    //}
+    for (i = 0; i < period; i++) {
+        efxoutl[i] = templ[i] * gainl * (1.0f - lrcross) + tempr[i] * gainr * lrcross;
+        efxoutr[i] = tempr[i] * gainr * (1.0f - lrcross) + templ[i] * gainl * lrcross;
     }
-
-
 
 };
-
 
 
 void
@@ -270,23 +286,26 @@ StereoHarm::setMIDI (int value)
 
 
 void
-StereoHarm::adjust(int DS)
+StereoHarm::adjust(int DS, uint32_t period)
 {
 
     DS_state=DS;
+    float fSAMPLE_RATE = SAMPLE_RATE;
 
 
     switch(DS) {
 
     case 0:
-        nPERIOD = PERIOD;
+        //nPERIOD = period;
+        nRATIO = 1;
         nSAMPLE_RATE = SAMPLE_RATE;
         nfSAMPLE_RATE = fSAMPLE_RATE;
         window = 2048;
         break;
 
     case 1:
-        nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+        nRATIO = 96000.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 96000;
         nfSAMPLE_RATE = 96000.0f;
         window = 2048;
@@ -294,56 +313,64 @@ StereoHarm::adjust(int DS)
 
 
     case 2:
-        nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+        nRATIO = 48000.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 48000;
         nfSAMPLE_RATE = 48000.0f;
         window = 2048;
         break;
 
     case 3:
-        nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+        nRATIO = 44100.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 44100;
         nfSAMPLE_RATE = 44100.0f;
         window = 2048;
         break;
 
     case 4:
-        nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+        nRATIO = 32000.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 32000;
         nfSAMPLE_RATE = 32000.0f;
         window = 2048;
         break;
 
     case 5:
-        nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+        nRATIO = 22050.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 22050;
         nfSAMPLE_RATE = 22050.0f;
         window = 1024;
         break;
 
     case 6:
-        nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+        nRATIO = 16000.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 16000;
         nfSAMPLE_RATE = 16000.0f;
         window = 1024;
         break;
 
     case 7:
-        nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+        nRATIO = 12000.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 12000;
         nfSAMPLE_RATE = 12000.0f;
         window = 512;
         break;
 
     case 8:
-        nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+        nRATIO = 8000.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 8000;
         nfSAMPLE_RATE = 8000.0f;
         window = 512;
         break;
 
     case 9:
-        nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+        //nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+        nRATIO = 4000.0f/fSAMPLE_RATE;
         nSAMPLE_RATE = 4000;
         nfSAMPLE_RATE = 4000.0f;
         window = 256;
@@ -352,8 +379,8 @@ StereoHarm::adjust(int DS)
 
 
 
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
+    u_up= (double)nPERIOD / (double)period;
+    u_down= (double)period / (double)nPERIOD;
 }
 
 
@@ -372,6 +399,7 @@ StereoHarm::setpreset (int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 4;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
         {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64},
@@ -386,7 +414,7 @@ StereoHarm::setpreset (int npreset)
 
     cleanup();
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(42,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(42,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

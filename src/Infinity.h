@@ -30,9 +30,9 @@
 class Infinity
 {
 public:
-    Infinity (float * efxoutl_, float * efxoutr_);
+    Infinity (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Infinity ();
-    void out (float * smpsl, float * smpsr);
+    void out (float * smpsl, float * smpsr, uint32_t period);
 
     void setpreset (int npreset);
     void changepar (int npar, int value);
@@ -100,6 +100,9 @@ private:
     float ratescale;
     int tflag;
 
+    float fSAMPLE_RATE;
+
+    float* interpbuf; //buffer for filters
     class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
 
     class FPreset *Fpre;

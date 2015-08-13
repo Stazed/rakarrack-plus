@@ -30,12 +30,17 @@
 
 /*TODO: EarlyReflections,Prdelay,Perbalance */
 
-Reverb::Reverb (float * efxoutl_, float * efxoutr_)
+Reverb::Reverb (float * efxoutl_, float * efxoutr_, double samplerate, uint16_t intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
-    inputbuf = new float[PERIOD];
+    inputbuf = new float[intermediate_bufsize];
     //filterpars=NULL;
+    unsigned int i;
+    for(i=0;i<intermediate_bufsize;i++)
+    {
+    	inputbuf[i] = 0;
+    }
 
 
     //defaults
@@ -56,23 +61,35 @@ Reverb::Reverb (float * efxoutl_, float * efxoutr_)
     rs = 1.0f;
     rs_coeff = rs / (float) REV_COMBS;
 
+    fSAMPLE_RATE = samplerate;
+
+    //max comb length
+    unsigned int tmp = lrintf(220023.0*samplerate/44100.0);
+
     for (int i = 0; i < REV_COMBS * 2; i++) {
         comblen[i] = 800 + (int) (RND * 1400);
         combk[i] = 0;
         lpcomb[i] = 0;
         combfb[i] = -0.97f;
-        comb[i] = NULL;
+        comb[i] = new float[tmp];//set to make length so we don't need to reallocate ever
     };
+
+    //max ap length
+    tmp = lrintf(100023.0*samplerate/44100.0);
 
     for (int i = 0; i < REV_APS * 2; i++) {
         aplen[i] = 500 + (int) (RND * 500);
         apk[i] = 0;
-        ap[i] = NULL;
+        ap[i] = new float[tmp]; //set to max length
     };
 
-    lpf =  new AnalogFilter (2, 22000, 1, 0);;
-    hpf =  new AnalogFilter (3, 20, 1, 0);
-    idelay = NULL;
+    interpbuf = new float[intermediate_bufsize];
+    lpf =  new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
+    hpf =  new AnalogFilter (3, 20, 1, 0, samplerate, interpbuf);
+
+    //max delay length
+    tmp = lrintf(2.5*samplerate);
+    idelay = new float[tmp]; //set to max length
 
     setpreset (Ppreset);
     cleanup ();			//do not call this before the comb initialisation
@@ -81,6 +98,17 @@ Reverb::Reverb (float * efxoutl_, float * efxoutr_)
 
 Reverb::~Reverb ()
 {
+	delete lpf;
+	delete hpf;
+	delete[] interpbuf;
+	delete[] inputbuf;
+    for (int i = 0; i < REV_COMBS * 2; i++) {
+        delete[] comb[i];
+    }
+    for (int i = 0; i < REV_APS * 2; i++) {
+        delete[] ap[i];
+    }
+    delete[] idelay;
 };
 
 /*
@@ -114,9 +142,9 @@ Reverb::cleanup ()
  * Process one channel; 0=left,1=right
  */
 void
-Reverb::processmono (int ch, float * output)
+Reverb::processmono (unsigned int ch, float * output, uint32_t period)
 {
-    int i, j;
+    unsigned int i, j;
     float fbout, tmp;
     //TODO: implement the high part from lohidamp
 
@@ -126,7 +154,7 @@ Reverb::processmono (int ch, float * output)
         int comblength = comblen[j];
         float lpcombj = lpcomb[j];
 
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             fbout = comb[j][ck] * combfb[j];
             fbout = fbout * (1.0f - lohifb) + (lpcombj * lohifb);
             lpcombj = fbout;
@@ -145,7 +173,7 @@ Reverb::processmono (int ch, float * output)
     for (j = REV_APS * ch; j < REV_APS * (1 + ch); j++) {
         int ak = apk[j];
         int aplength = aplen[j];
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             tmp = ap[j][ak];
             ap[j][ak] = 0.7f * tmp + output[i];
             output[i] = tmp - 0.7f * ap[j][ak];
@@ -160,11 +188,11 @@ Reverb::processmono (int ch, float * output)
  * Effect output
  */
 void
-Reverb::out (float * smps_l, float * smps_r)
+Reverb::out (float * smps_l, float * smps_r, uint32_t period)
 {
-    int i;
+    unsigned int i;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         inputbuf[i] = (smps_l[i] + smps_r[i]) * .5f;
         //Initial delay r
         if (idelay != NULL) {
@@ -178,18 +206,18 @@ Reverb::out (float * smps_l, float * smps_r)
     };
 
 
-    lpf->filterout (inputbuf);
-    hpf->filterout (inputbuf);
+    lpf->filterout (inputbuf, period);
+    hpf->filterout (inputbuf, period);
 
-    processmono (0, efxoutl);	//left
-    processmono (1, efxoutr);	//right
+    processmono (0, efxoutl, period);	//left
+    processmono (1, efxoutr, period);	//right
 
 
 
     float lvol = rs_coeff * pan * 2.0f;
     float rvol = rs_coeff * (1.0f - pan) * 2.0f;
 
-    for (int i = 0; i < PERIOD; i++) {
+    for (unsigned int i = 0; i < period; i++) {
         efxoutl[i] *= lvol;
         efxoutr[i] *= rvol;
 
@@ -263,14 +291,9 @@ Reverb::setidelay (int Pidelay)
     this->Pidelay = Pidelay;
     delay = powf (50.0f * (float)Pidelay / 127.0f, 2.0f) - 1.0f;
 
-    if (idelay != NULL)
-        delete (idelay);
-    idelay = NULL;
-
     idelaylen = lrintf (fSAMPLE_RATE * delay / 1000.0f);
     if (idelaylen > 1) {
         idelayk = 0;
-        idelay = new float[idelaylen];
         for (int i = 0; i < idelaylen; i++)
             idelay[i] = 0.0;
     };
@@ -338,9 +361,6 @@ Reverb::settype (int Ptype)
         comblen[i] = lrintf(tmp);
         combk[i] = 0;
         lpcomb[i] = 0;
-        if (comb[i] != NULL)
-            delete comb[i];
-        comb[i] = new float[comblen[i]];
     };
 
     for (int i = 0; i < REV_APS * 2; i++) {
@@ -356,9 +376,6 @@ Reverb::settype (int Ptype)
             tmp = 10;
         aplen[i] = lrintf(tmp);
         apk[i] = 0;
-        if (ap[i] != NULL)
-            delete ap[i];
-        ap[i] = new float[aplen[i]];
     };
     settime (Ptime);
     cleanup ();
@@ -384,6 +401,7 @@ Reverb::setpreset (int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 13;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Cathedral1
         {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64},
@@ -416,7 +434,7 @@ Reverb::setpreset (int npreset)
 
     if(npreset>NUM_PRESETS-1) {
 
-        Fpre->ReadPreset(8,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(8,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

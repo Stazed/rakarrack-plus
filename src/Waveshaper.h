@@ -25,12 +25,10 @@
 #ifndef WAVESHAPER_H
 #define WAVESHAPER_H
 
-#include "global.h"
-
 class Waveshaper
 {
 public:
-    Waveshaper ();
+    Waveshaper (double samplerate, int Wave_Res_Amount, int Wave_Up_Q, int Wave_Dn_Q, unsigned short intermediatebufsize);
     ~Waveshaper ();
 //Waveshaping
     void waveshapesmps (int n, float * smps, int type,
@@ -57,6 +55,9 @@ public:
 
     class Resample *U_Resample;
     class Resample *D_Resample;
+
+private:
+    int Wave_res_amount;
 
 
 };

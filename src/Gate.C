@@ -205,7 +205,7 @@ Gate::out (float *efxoutl, float *efxoutr)
     hpfr->filterout (efxoutr);
 
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
 
         sum = fabsf (efxoutl[i]) + fabsf (efxoutr[i]);
 

@@ -676,7 +676,7 @@ RecChord::plus (int nota)
 
 
 void
-RecChord::Vamos (int voz, int interval)
+RecChord::Vamos (int voz, int interval, int reconota)
 {
 
     int n1, h1;

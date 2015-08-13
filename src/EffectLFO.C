@@ -31,8 +31,10 @@
 #include "EffectLFO.h"
 #include "f_sin.h"
 
-EffectLFO::EffectLFO ()
+EffectLFO::EffectLFO (double sample_rate)
 {
+    float fPERIOD = 256;//this is our best guess at what it will be, later we'll correct it when we actually know fPERIOD
+    fSAMPLE_RATE = sample_rate;
     xl = 0.0;
     xr = 0.0;
     Pfreq = 40;
@@ -51,7 +53,7 @@ EffectLFO::EffectLFO ()
     tca = iperiod/(iperiod + 0.02);  //20ms default
     tcb = 1.0f - tca;
     rreg = lreg = oldrreg = oldlreg = 0.0f;
-    updateparams ();
+    updateparams ((uint32_t)fPERIOD);
 
     ampl1 = (1.0f - lfornd) + lfornd * (float)RND;
     ampl2 = (1.0f - lfornd) + lfornd * (float)RND;
@@ -70,8 +72,15 @@ EffectLFO::~EffectLFO ()
  * Update the changed parameters
  */
 void
-EffectLFO::updateparams ()
+EffectLFO::updateparams (uint32_t period)
 {
+    float fPERIOD = period;
+    //must update several parameters once we actually know the period
+    iperiod = fPERIOD/fSAMPLE_RATE;
+    h = iperiod;
+    tca = iperiod/(iperiod + 0.02);  //20ms default
+    tcb = 1.0f - tca;
+
 
     incx = (float)Pfreq * fPERIOD / (fSAMPLE_RATE * 60.0f);
 

@@ -34,9 +34,9 @@
 class FormantFilter:public Filter_
 {
 public:
-    FormantFilter (class FilterParams * pars);
+    FormantFilter (class FilterParams * pars, float* interpbuf);//interpbuff MUST be an array greater or equal to period
     ~FormantFilter ();
-    void filterout (float * smp);
+    void filterout (float * smp, uint32_t period);
     void setfreq (float frequency);
     void setfreq_and_q (float frequency, float q_);
     void setq (float q_);
@@ -56,7 +56,7 @@ private:
         unsigned char nvowel;
     } sequence[FF_MAX_SEQUENCE];
 
-    int sequencesize, numformants, firsttime;
+    unsigned int sequencesize, numformants, firsttime;
 
     float oldformantamp[FF_MAX_FORMANTS];
     float oldinput, slowinput;

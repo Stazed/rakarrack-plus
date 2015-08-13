@@ -29,21 +29,22 @@
 #include "global.h"
 #include "AnalogFilter.h"
 #include "smbPitchShift.h"
+#include "Resample.h"
 
 
 class Harmonizer
 {
 
 public:
-    Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq);
+    Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq, uint16_t intermediate_bufsize, double sample_rate);
     ~Harmonizer ();
-    void out (float *smpsl, float *smpsr);
+    void out (float *smpsl, float *smpsr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-    void applyfilters (float * efxoutl);
-    void adjust(int DS);
+    void applyfilters (float * efxoutl, uint32_t period);
+    void adjust(int DS, uint32_t period);
 
 
     int Ppreset;
@@ -63,6 +64,7 @@ public:
     float nfSAMPLE_RATE;
 
 
+
     float *efxoutl;
     float *efxoutr;
     float *outi;
@@ -71,7 +73,7 @@ public:
 
     float outvolume;
 
-
+    float r_ratio;
 
 private:
 
@@ -100,6 +102,7 @@ private:
 
 
     AnalogFilter *pl;
+    float* interpbuf; //buffer for filters
 
     class Resample *U_Resample;
     class Resample *D_Resample;
@@ -107,6 +110,8 @@ private:
     PitchShifter *PS;
     class FPreset *Fpre;
 
+    unsigned int SAMPLE_RATE;
+    bool DS_init;
 };
 
 #endif

@@ -28,18 +28,19 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
+#include "Compressor.h"
 
 
 
 class HarmEnhancer
 {
 public:
-    HarmEnhancer(float *harmonics, float hfreq, float lfreq, float gain);
+    HarmEnhancer(float *harmonics, float hfreq, float lfreq, float gain, double sample_rate, uint32_t intermediate_bufsize);
     ~HarmEnhancer();
     void cleanup();
     void chebpc(float c[], float d[]);
     void calcula_mag(float *Rmag);
-    void harm_out(float *smpsl, float *smpsr);
+    void harm_out(float *smpsl, float *smpsr, uint32_t period);
     void set_vol(int mode, float gain);
     void set_freqh(int mode, float freq);
     void set_freql(int mode, float freq);
@@ -62,6 +63,7 @@ private:
 
     AnalogFilter *hpfl, *hpfr;
     AnalogFilter *lpfl, *lpfr;
+    float* interpbuf; //buffer for filters
 
     class Compressor *limiter;
 

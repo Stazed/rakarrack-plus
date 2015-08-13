@@ -75,7 +75,7 @@ Phaser::out (float * smpsl, float * smpsr)
     else if (rgain < 0.0)
         rgain = 0.0f;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         float x = (float) i / fPERIOD;
         float x1 = 1.0f - x;
         float gl = lgain * x + oldlgain * x1;
@@ -114,7 +114,7 @@ Phaser::out (float * smpsl, float * smpsr)
     oldrgain = rgain;
 
     if (Poutsub != 0)
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         };

@@ -36,7 +36,7 @@
 
 
 
-Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
+Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig, double sample_rate, float tune, uint32_t intermediate_bufsize)
 {
 
     efxoutl = efxoutl_;
@@ -51,29 +51,38 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig)
     afreq = 0;
     trigfact = trig;
 
-    Sus = new Sustainer(efxoutl,efxoutr);
+    Sus = new Sustainer(efxoutl,efxoutr,sample_rate);
     Sus->changepar(1,64);
     Sus->changepar(2,127);
 
+    interpbuf = new float[intermediate_bufsize];
+    lpfl = new AnalogFilter (2, 3000, 1, 0, sample_rate, interpbuf);
+    lpfr = new AnalogFilter (2, 3000, 1, 0, sample_rate, interpbuf);
+    hpfl = new AnalogFilter (3, 300, 1, 0, sample_rate, interpbuf);
+    hpfr = new AnalogFilter (3, 300, 1, 0, sample_rate, interpbuf);
 
-    lpfl = new AnalogFilter (2, 3000, 1, 0);
-    lpfr = new AnalogFilter (2, 3000, 1, 0);
-    hpfl = new AnalogFilter (3, 300, 1, 0);
-    hpfr = new AnalogFilter (3, 300, 1, 0);
+    reconota = last = -1;
 
-
-    schmittInit (24);
+    update_freqs(tune);
+    schmittInit (24, sample_rate);
 
 }
 
 Recognize::~Recognize ()
 
 {
+	free(schmittBuffer);
+	delete Sus;
+	delete lpfl;
+	delete lpfr;
+	delete hpfl;
+	delete hpfr;
+	delete[] interpbuf;
 }
 
 
 void
-Recognize::schmittInit (int size)
+Recognize::schmittInit (int size, double SAMPLE_RATE)
 {
     blockSize = SAMPLE_RATE / size;
     schmittBuffer =
@@ -83,11 +92,12 @@ Recognize::schmittInit (int size)
 
 
 void
-Recognize::schmittS16LE (signed short int *indata)
+Recognize::schmittS16LE (signed short int *indata, uint32_t period)
 {
-    int i, j;
+    unsigned int i;
+    int j;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         *schmittPointer++ = indata[i];
         if (schmittPointer - schmittBuffer >= blockSize) {
             int endpoint, startpoint, t1, t2, A1, A2, tc, schmittTriggered;
@@ -119,20 +129,12 @@ Recognize::schmittS16LE (signed short int *indata)
                 }
             }
             if (endpoint > startpoint) {
-                afreq =
-                fSAMPLE_RATE *((float)tc / (float) (endpoint - startpoint));
+                afreq = fSAMPLE_RATE *((float)tc / (float) (endpoint - startpoint));
                 displayFrequency (afreq);
 
             }
         }
     }
-};
-
-
-void
-Recognize::schmittFree ()
-{
-    free (schmittBuffer);
 };
 
 
@@ -156,24 +158,23 @@ Recognize::sethpf (int value)
 }
 
 
-
 void
-Recognize::schmittFloat (float *indatal, float *indatar)
+Recognize::schmittFloat (float *indatal, float *indatar, uint32_t period)
 {
-    int i;
-    signed short int buf[PERIOD];
+    unsigned int i;
+    signed short int buf[period];//TODO: buf should probably be a member of this class
 
-    lpfl->filterout (indatal);
-    hpfl->filterout (indatal);
-    lpfr->filterout (indatar);
-    hpfr->filterout (indatar);
+    lpfl->filterout (indatal, period);
+    hpfl->filterout (indatal, period);
+    lpfr->filterout (indatar, period);
+    hpfr->filterout (indatar, period);
 
-    Sus->out(indatal,indatar);
+    Sus->out(indatal,indatar,period);
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         buf[i] = (short) ((indatal[i]+indatar[i]) * 32768);
     }
-    schmittS16LE (buf);
+    schmittS16LE (buf, period);
 };
 
 
@@ -225,17 +226,30 @@ Recognize::displayFrequency (float freq)
     }
 
 
-
     if (!noteoff) {
 //    reconota = 24 + (octave * 12) + note - 3;
         offset = lrintf(nfreq / 20.0);
         if (fabsf(lafreq-freq)>offset) {
             lafreq = nfreq;
+            last = reconota;
             reconota = 24 + (octave * 12) + note - 3;
 
 //    printf("%f\n",lafreq);
         }
     }
 
-
 };
+
+void
+Recognize::update_freqs(float tune)
+{
+    //update freqs (tables for stuff)
+    int i;
+
+    freqs[0] = tune;
+    lfreqs[0] = logf (freqs[0]);
+    for (i = 1; i < 12; i++) {
+        freqs[i] = freqs[i - 1] * D_NOTE;
+        lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
+    }
+}

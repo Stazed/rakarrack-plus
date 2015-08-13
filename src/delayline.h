@@ -29,7 +29,7 @@
 class delayline
 {
 public:
-    delayline(float maxdelay, int maxtaps_);	//construct the object with intended maximum delay time
+    delayline(float maxdelay, int maxtaps_, double samplerate);	//construct the object with intended maximum delay time
     ~delayline();
     void cleanup();
     void set_averaging(float tc_);	//use this if you want the time change averaging longer or shorter
@@ -92,6 +92,7 @@ private:
 
     float *ringbuffer;
 
+    float fSAMPLE_RATE;
 
 };
 

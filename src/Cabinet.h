@@ -1,11 +1,9 @@
 /*
-  ZynAddSubFX - a software synthesizer
+  Rakarrack
 
-  Filter_.h - This class is inherited by filter classes
-  Copyright (C) 2002-2005 Nasca Octavian Paul
-  Author: Nasca Octavian Paul
-
-  Modified for rakarrack by Josep Andreu
+  Cabinet.C - eq curves to approximate a guitar cabinet
+  Copyright (C) 2015 Spencer Jackson
+  Author: Spencer Jackson
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -22,25 +20,28 @@
 
 */
 
-#ifndef FILTER__H
-#define FILTER__H
+#ifndef CABINET_H
+#define CABINET_H
 
-#include "global.h"
+#include "EQ.h"
 
-
-
-class Filter_
+class Cabinet
 {
 public:
-    virtual ~ Filter_ ()  {};
-    virtual void filterout (float * smp, uint32_t period) { };
-    virtual void setfreq (float frequency) {};
-    virtual void setfreq_and_q (float frequency, float q_) { };
-    virtual void setq (float q_) { };
-    virtual void setgain (float dBgain) {};
+    Cabinet (float * efxoutl_, float * efxoutr_, double sample_frequency, uint32_t intermediate_bufsize);
+    ~Cabinet ();
+    void cleanup();
+    void out (float * smpsl, float * smpsr, uint32_t period);
+    void setpreset(int npreset);
+    int Cabinet_Preset;
+    void changepar(int i, int val);
+    int getpar(int i);
 
-    float outgain;
+    float* efxoutl;
+    float* efxoutr;
+
+private:
+    EQ* eq;
 };
-
 
 #endif

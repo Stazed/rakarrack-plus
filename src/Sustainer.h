@@ -28,14 +28,14 @@
 class Sustainer
 {
 public:
-    Sustainer (float * efxoutl_, float * efxoutr_);
+    Sustainer (float * efxoutl_, float * efxoutr_m, double sample_rate);
     ~Sustainer ();
     void cleanup ();
 
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void changepar (int npar, int value);
     int getpar (int npar);
-    void setpreset (int npreset);
+    void setpreset (int npreset,int pdata[]);
 
     int Ppreset;
 

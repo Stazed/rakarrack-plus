@@ -84,6 +84,8 @@
 #define REV_APS 4
 #define MAX_SFILTER_STAGES 12
 
+#define TEMPBUFSIZE 1024
+
 typedef union {
     float f;
     long i;
@@ -167,17 +169,25 @@ static inline float f_pow2(float x)
 
 #define f_exp(x) f_pow2(x * LN2R)
 
-#include "config.h"
+//#include "config.h"
 #include <signal.h>
 #include <dirent.h>
 #include <search.h>
 #include <sys/time.h>
+#ifdef NOTLV2
 #include <alsa/asoundlib.h>
 #include <X11/xpm.h>
 #include <jack/jack.h>
 #include <jack/midiport.h>
 #include <FL/Fl_Preferences.H>
+#else
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#endif
 #include "FPreset.h"
+#if(0)
 #include "Reverb.h"
 #include "Chorus.h"
 #include "Echo.h"
@@ -227,32 +237,35 @@ static inline float f_pow2(float x)
 #include "Vibe.h"
 #include "Infinity.h"
 #include "beattracker.h"
+#endif
 
+
+#if(0)
 extern int Pexitprogram, preset;
 extern int commandline, gui;
 extern int exitwithhelp, nojack;
 extern int maxx_len;
 extern int error_num;
-extern int PERIOD;
+//extern int period;
 extern int reconota;
 extern int needtoloadstate;
 extern int needtoloadbank;
 extern int stecla;
 extern int looper_lqua;
-extern unsigned int SAMPLE_RATE;
+//extern unsigned int SAMPLE_RATE;
 extern int note_active[POLY];
 extern int rnote[POLY];
 extern int gate[POLY];
-extern int pdata[50];
+//extern int pdata[50];
 extern float val_sum;
-extern float fPERIOD;
-extern unsigned int SAMPLE_RATE;
-extern float fSAMPLE_RATE;
-extern float cSAMPLE_RATE;
+//extern float fPERIOD;
+//extern unsigned int SAMPLE_RATE;
+//extern float fSAMPLE_RATE;
+//extern float cSAMPLE_RATE;
 extern float r__ratio[12];
-extern int Wave_res_amount;
-extern int Wave_up_q;
-extern int Wave_down_q;
+//extern int Wave_res_amount;
+//extern int Wave_up_q;
+//extern int Wave_down_q;
 extern Pixmap p, mask;
 extern XWMHints *hints;
 extern float freqs[12];
@@ -790,6 +803,7 @@ struct list_element {
     struct list_element *backward;
     char *name;
 };
+#endif
 
 #endif
 

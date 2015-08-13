@@ -32,7 +32,7 @@
 class FilterParams
 {
 public:
-    FilterParams (unsigned char Ptype_, unsigned char Pfreq, unsigned char Pq_);
+    FilterParams (unsigned char Ptype_, unsigned char Pfreq, unsigned char Pq_, double sample_ratei, uint32_t intermediate_bufsize);
     ~FilterParams ();
 
     void defaults ();
@@ -87,9 +87,12 @@ public:
     float getformantamp (unsigned char amp);
     float getformantq (unsigned char q);
 
+    float fSAMPLE_RATE;
+    uint32_t intermediate_bufsize;
 
 private:
     void defaults (int n);
+    int SAMPLE_RATE;
 
     //stored default parameters
     unsigned char Dtype;

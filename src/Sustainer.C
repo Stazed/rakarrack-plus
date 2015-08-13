@@ -25,8 +25,9 @@
 #include <math.h>
 #include "Sustainer.h"
 
-Sustainer::Sustainer (float * efxoutl_, float * efxoutr_)
+Sustainer::Sustainer (float * efxoutl_, float * efxoutr_, double sample_rate)
 {
+	float cSAMPLE_RATE = 1/sample_rate;
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
@@ -35,7 +36,7 @@ Sustainer::Sustainer (float * efxoutl_, float * efxoutr_)
     fsustain = 0.5f;
     level = 0.5f;
 
-    float tmp = 0.01f;  //10 ms decay time on peak detectors
+    float tmp = 0.01f;  //10 ms decay time on peak detectorS
     prls = 1.0f - (cSAMPLE_RATE/(cSAMPLE_RATE + tmp));
 
     tmp = 0.05f; //50 ms att/rel on compressor
@@ -45,7 +46,7 @@ Sustainer::Sustainer (float * efxoutl_, float * efxoutr_)
     cratio = 0.25f;
 
     timer = 0;
-    hold = (int) (SAMPLE_RATE*0.0125);  //12.5ms
+    hold = (int) (sample_rate*0.0125);  //12.5ms
     cleanup ();
 };
 
@@ -73,14 +74,14 @@ Sustainer::cleanup ()
  * Effect output
  */
 void
-Sustainer::out (float * smpsl, float * smpsr)
+Sustainer::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+    unsigned int i;
     float auxtempl = 0.0f;
     float auxtempr = 0.0f;
     float auxcombi = 0.0f;
 
-    for (i = 0; i<PERIOD; i++) {  //apply compression to auxresampled
+    for (i = 0; i<period; i++) {  //apply compression to auxresampled
         auxtempl = input * smpsl[i];
         auxtempr = input * smpsr[i];
         auxcombi = 0.5f * (auxtempl + auxtempr);
@@ -120,7 +121,7 @@ Sustainer::out (float * smpsl, float * smpsr)
 
 
 void
-Sustainer::setpreset (int npreset)
+Sustainer::setpreset (int npreset, int pdata[])
 {
     const int PRESET_SIZE = 2;
     const int NUM_PRESETS = 3;
@@ -135,7 +136,7 @@ Sustainer::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(36,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(36,npreset-NUM_PRESETS+1, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

@@ -37,9 +37,9 @@ struct COMPLEXTYPE {
 class Alienwah
 {
 public:
-    Alienwah (float * efxoutl_, float * efxoutr_);
+    Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate);
     ~Alienwah ();
-    void out (float * smpsl, float * smpsr);
+    void out (float * smpsl, float * smpsr, uint32_t period);
 
     void setpreset (int npreset);
     void changepar (int npar, int value);
@@ -53,10 +53,11 @@ public:
 
     float outvolume;
 
+    uint32_t PERIOD;
 
 private:
     //Parametrii Alienwah
-    EffectLFO lfo;		//lfo-ul Alienwah
+    EffectLFO *lfo;		//lfo-ul Alienwah
     int Pvolume;
     int Ppanning;
     int Pdepth;		//the depth of the Alienwah

@@ -28,6 +28,8 @@
 #include "global.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
+#include "FilterParams.h"
+#include "Filter.h"
 
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
 // void waveshapesmps (int n, float * smps, int type,
@@ -36,14 +38,15 @@
 class NewDist
 {
 public:
-    NewDist (float * efxoutl_, float * efxoutr_);
+    NewDist (float * efxoutl_, float * efxoutr_, double sample_rate,
+        uint32_t intermdediate_bufsize, int wave_res, int wave_upq, int wave_dnq);
     ~NewDist ();
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-    void applyfilters (float * efxoutl, float * efxoutr);
+    void applyfilters (float * efxoutl, float * efxoutr, uint32_t period);
 
     int Ppreset;
     float outvolume;
@@ -84,6 +87,7 @@ private:
 
 
     //Parametrii reali
+    float* interpbuf;//buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
     class Waveshaper *wshapel, *wshaper;
 

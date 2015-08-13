@@ -26,12 +26,15 @@
 #include "Alienwah.h"
 #include <stdio.h>
 
-Alienwah::Alienwah (float * efxoutl_, float * efxoutr_)
+Alienwah::Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
+    lfo = new EffectLFO(sample_rate);
+
     Ppreset = 0;
+    PERIOD = 256;//best guess until the effect starts running;
     setpreset (Ppreset);
     cleanup ();
     oldclfol.a = fb;
@@ -43,6 +46,7 @@ Alienwah::Alienwah (float * efxoutl_, float * efxoutr_)
 
 Alienwah::~Alienwah ()
 {
+	delete lfo;
 };
 
 
@@ -50,13 +54,14 @@ Alienwah::~Alienwah ()
  * Apply the effect
  */
 void
-Alienwah::out (float * smpsl, float * smpsr)
+Alienwah::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+	unsigned int i;
     float lfol, lfor;
+    float fPERIOD = period;
     COMPLEXTYPE clfol, clfor, out, tmp;
 
-    lfo.effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout (&lfol, &lfor);
     lfol *= depth * D_PI;
     lfor *= depth * D_PI;
     clfol.a = cosf (lfol + phase) * fb;
@@ -64,7 +69,7 @@ Alienwah::out (float * smpsl, float * smpsr)
     clfor.a = cosf (lfor + phase) * fb;
     clfor.b = sinf (lfor + phase) * fb;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         float x = (float)i / fPERIOD;
         float x1 = 1.0f - x;
         //left
@@ -187,6 +192,7 @@ Alienwah::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //AlienWah1
         {64, 64, 80, 0, 0, 62, 60, 105, 25, 0, 64},
@@ -200,7 +206,7 @@ Alienwah::setpreset (int npreset)
 
     if(npreset>NUM_PRESETS-1) {
 
-        Fpre->ReadPreset(11,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(11,npreset-NUM_PRESETS+1, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {
@@ -226,20 +232,20 @@ Alienwah::changepar (int npar, int value)
         setpanning (value);
         break;
     case 2:
-        lfo.Pfreq = value;
-        lfo.updateparams ();
+        lfo->Pfreq = value;
+        lfo->updateparams (PERIOD);
         break;
     case 3:
-        lfo.Prandomness = value;
-        lfo.updateparams ();
+        lfo->Prandomness = value;
+        lfo->updateparams (PERIOD);
         break;
     case 4:
-        lfo.PLFOtype = value;
-        lfo.updateparams ();
+        lfo->PLFOtype = value;
+        lfo->updateparams (PERIOD);
         break;
     case 5:
-        lfo.Pstereo = value;
-        lfo.updateparams ();
+        lfo->Pstereo = value;
+        lfo->updateparams (PERIOD);
         break;
     case 6:
         setdepth (value);
@@ -270,16 +276,16 @@ Alienwah::getpar (int npar)
         return (Ppanning);
         break;
     case 2:
-        return (lfo.Pfreq);
+        return (lfo->Pfreq);
         break;
     case 3:
-        return (lfo.Prandomness);
+        return (lfo->Prandomness);
         break;
     case 4:
-        return (lfo.PLFOtype);
+        return (lfo->PLFOtype);
         break;
     case 5:
-        return (lfo.Pstereo);
+        return (lfo->Pstereo);
         break;
     case 6:
         return (Pdepth);

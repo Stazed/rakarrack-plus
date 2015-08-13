@@ -29,18 +29,23 @@
 
 
 
-Ring::Ring (float * efxoutl_, float * efxoutr_)
+Ring::Ring (float * efxoutl_, float * efxoutr_, double sample_rate)
 {
 
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
+    SAMPLE_RATE = lrintf(sample_rate);
 
     sin_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
     tri_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
     squ_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
     saw_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
+    //sin_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
+    //tri_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
+    //squ_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
+    //saw_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
 
-    Create_Tables();
+    Create_Tables(sample_rate);
 
     offset = 0;
 
@@ -64,13 +69,21 @@ Ring::Ring (float * efxoutl_, float * efxoutr_)
 
 Ring::~Ring ()
 {
+	//delete [] sin_tbl;
+	//delete [] sin_tbl;
+	//delete [] sin_tbl;
+	//delete [] sin_tbl;
+	//free(sin_tbl);
+	//free(tri_tbl);
+	//free(squ_tbl);
+	//free(saw_tbl);
 };
 
 /*
 * Create Tables
 */
 void
-Ring::Create_Tables()
+Ring::Create_Tables(float fSAMPLE_RATE)
 {
     unsigned int i;
     float SR = fSAMPLE_RATE;
@@ -105,16 +118,16 @@ Ring::cleanup ()
  * Effect output
  */
 void
-Ring::out (float * smpsl, float * smpsr)
+Ring::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+    unsigned int i;
     float l, r, lout, rout, tmpfactor;
 
     float inputvol = (float) Pinput /127.0f;
 
     if (Pstereo != 0) {
         //Stereo
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             efxoutl[i] = smpsl[i] * inputvol;
             efxoutr[i] = smpsr[i] * inputvol;
             if(inputvol == 0.0) {
@@ -123,7 +136,7 @@ Ring::out (float * smpsl, float * smpsr)
             }
         };
     } else {
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             efxoutl[i] =
                 (smpsl[i]  +  smpsr[i] ) * inputvol;
             if (inputvol == 0.0) efxoutl[i]=1.0;
@@ -131,7 +144,7 @@ Ring::out (float * smpsl, float * smpsr)
     };
 
 
-    for (i=0; i < PERIOD; i++) {
+    for (i=0; i < period; i++) {
         tmpfactor =  depth * (scale * ( sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset] ) + idepth) ;    //This is now mathematically equivalent, but less computation
         efxoutl[i] *= tmpfactor;
 
@@ -143,11 +156,11 @@ Ring::out (float * smpsl, float * smpsr)
     }
 
 
-    if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
+    if (Pstereo == 0) memcpy (efxoutr , efxoutl, period * sizeof(float));
 
     float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
-    for (i= 0; i<PERIOD; i++) {
+    for (i= 0; i<period; i++) {
         lout = efxoutl[i];
         rout = efxoutr[i];
 
@@ -158,8 +171,10 @@ Ring::out (float * smpsl, float * smpsr)
         lout = l;
         rout = r;
 
-        efxoutl[i] = lout * level * panning;
-        efxoutr[i] = rout * level * (1.0f-panning);
+        //efxoutl[i] = lout * level * panning;
+        //efxoutr[i] = rout * level * (1.0f-panning);
+        efxoutl[i] = lout * level * (1.0f-panning);
+        efxoutr[i] = rout * level * panning;
 
     }
 
@@ -205,6 +220,7 @@ Ring::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 6;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Saw-Sin
         {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1},
@@ -221,7 +237,7 @@ Ring::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(21,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(21,npreset-NUM_PRESETS+1, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

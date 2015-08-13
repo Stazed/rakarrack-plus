@@ -37,6 +37,8 @@ Resample::Resample(int type)
 
 Resample::~Resample()
 {
+	src_delete(statel);
+	src_delete(stater);
 };
 
 void

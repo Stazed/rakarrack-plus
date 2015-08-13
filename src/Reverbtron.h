@@ -26,20 +26,34 @@
 
 #include "global.h"
 #include "AnalogFilter.h"
+#include "Resample.h"
 
+class RvbFile
+{
+public:
+	char Filename[128];
+	float tdata[2000];
+	float ftime[2000];
+	int data_length;
+	float maxtime;
+	float maxdata;
+};
 
 class Reverbtron
 {
 public:
-    Reverbtron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq);
+    Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize,
+    		int DS, int uq, int dq);
     ~Reverbtron ();
-    void out (float * smpsl, float * smpr);
+    void out (float * smpsl, float * smpr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
     int setfile (int value);
-    void adjust(int DS);
+    void adjust(int DS, double sample_rate);
+    RvbFile loadfile(char* filename);
+    void applyfile(RvbFile file);
 
     int Ppreset;
 
@@ -48,7 +62,7 @@ public:
     float outvolume;
 
     char Filename[128];
-
+    RvbFile File;
 
 private:
 
@@ -58,7 +72,7 @@ private:
     void setlpf (int Plpf);
     void setfb(int value);
     void convert_time();
-    void loaddefault();
+    RvbFile loaddefault();
 
 
     //Parametrii
@@ -85,13 +99,16 @@ private:
     int offset;
     int hoffset;
     int maxx_size;
-    int data_length;
+    //int data_length;
+    int error;// flag if error when loading file
+    int Llength; //Plength but limited
     int avgtime;
     int hrtf_size;
     int hlength;
     int DS_state;
     int nPERIOD;
     int nSAMPLE_RATE;
+    float nRATIO;
 
 
     int *time, *rndtime;
@@ -99,9 +116,11 @@ private:
     double u_down;
     float nfSAMPLE_RATE;
 
-    float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
+    //float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
+    float fstretch, idelay, ffade, decay, diffusion;
     float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
-    float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
+    //float *data, *lxn, *imdelay, *ftime, *tdata, *rnddata, *hrtf;
+    float *data, *lxn, *imdelay, *rnddata, *hrtf;
     float *templ, *tempr;
     float level,fb, feedback,levpanl,levpanr;
     float roomsize;
@@ -110,6 +129,7 @@ private:
     class Resample *D_Resample;
 
 
+    float* interpbuf; //buffer for filters
     class AnalogFilter *lpfl, *lpfr;	//filters
 
     class FPreset *Fpre;

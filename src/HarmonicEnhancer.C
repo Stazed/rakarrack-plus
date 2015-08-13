@@ -28,11 +28,16 @@
 #include "HarmonicEnhancer.h"
 
 
-HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
+HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, double sample_rate, uint32_t intermediate_bufsize)
 {
 
-    inputl = (float *) malloc (sizeof (float) * PERIOD);
-    inputr = (float *) malloc (sizeof (float) * PERIOD);
+    inputl = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    inputr = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    unsigned int i;
+    for(i=0;i<intermediate_bufsize;i++)
+    {
+    	inputl[i] = inputr[i] = 0;
+    }
 
     set_vol(0,gain);
     realvol = gain;
@@ -43,12 +48,13 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
 
     hpffreq = hfreq;
     lpffreq = lfreq;
-    hpfl = new AnalogFilter(3, hfreq, 1, 0);
-    hpfr = new AnalogFilter(3, hfreq, 1, 0);
-    lpfl = new AnalogFilter(2, lfreq, 1, 0);
-    lpfr = new AnalogFilter(2, lfreq, 1, 0);
+    interpbuf = new float[intermediate_bufsize];
+    hpfl = new AnalogFilter(3, hfreq, 1, 0, sample_rate, interpbuf);
+    hpfr = new AnalogFilter(3, hfreq, 1, 0, sample_rate, interpbuf);
+    lpfl = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
+    lpfr = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
 
-    limiter = new Compressor (inputl, inputr);
+    limiter = new Compressor (inputl, inputr, sample_rate);
     limiter->Compressor_Change_Preset(0,4);
     calcula_mag(Rmag);
 }
@@ -56,6 +62,12 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain)
 
 HarmEnhancer::~HarmEnhancer()
 {
+	delete hpfl;
+	delete hpfr;
+	delete lpfl;
+	delete lpfr;
+	delete limiter;
+	delete interpbuf;
 };
 
 void
@@ -184,22 +196,23 @@ HarmEnhancer::calcula_mag (float *Rmag)
 }
 
 void
-HarmEnhancer::harm_out(float *smpsl, float *smpsr)
+HarmEnhancer::harm_out(float *smpsl, float *smpsr, uint32_t period)
 {
 
-    int i,j;
+    unsigned int i;
+    int j;
 
-    memcpy(inputl,smpsl, sizeof(float)*PERIOD);
-    memcpy(inputr,smpsr, sizeof(float)*PERIOD);
+    memcpy(inputl,smpsl, sizeof(float)*period);
+    memcpy(inputr,smpsr, sizeof(float)*period);
 
 
 
-    hpfl->filterout(inputl);
-    hpfr->filterout(inputr);
+    hpfl->filterout(inputl,period);
+    hpfr->filterout(inputr,period);
 
-    limiter->out(inputl,inputr);
+    limiter->out(inputl,inputr,period);
 
-    for (i=0; i<PERIOD; i++) {
+    for (i=0; i<period; i++) {
         float xl = inputl[i];
         float xr = inputr[i];
         float yl=0.0f;
@@ -226,10 +239,10 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr)
 
     }
 
-    lpfl->filterout(inputl);
-    lpfr->filterout(inputr);
+    lpfl->filterout(inputl,period);
+    lpfr->filterout(inputr,period);
 
-    for (i=0; i<PERIOD; i++) {
+    for (i=0; i<period; i++) {
         smpsl[i] =(smpsl[i]+inputl[i]*vol);
         smpsr[i] =(smpsr[i]+inputr[i]*vol);
     }

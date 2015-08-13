@@ -27,12 +27,13 @@
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ (float * efxoutl_, float * efxoutr_)
+EQ::EQ (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize)
 {
 
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
+    interpbuf = new float[intermediate_bufsize];
 
     for (int i = 0; i < MAX_EQ_BANDS; i++) {
         filter[i].Ptype = 0;
@@ -40,8 +41,8 @@ EQ::EQ (float * efxoutl_, float * efxoutr_)
         filter[i].Pgain = 64;
         filter[i].Pq = 64;
         filter[i].Pstages = 0;
-        filter[i].l = new AnalogFilter (6, 1000.0f, 1.0f, 0);
-        filter[i].r = new AnalogFilter (6, 1000.0f, 1.0f, 0);
+        filter[i].l = new AnalogFilter (6, 1000.0f, 1.0f, 0, samplerate, interpbuf);
+        filter[i].r = new AnalogFilter (6, 1000.0f, 1.0f, 0, samplerate, interpbuf);
     };
     //default values
     Ppreset = 0;
@@ -53,6 +54,12 @@ EQ::EQ (float * efxoutl_, float * efxoutr_)
 
 EQ::~EQ ()
 {
+    for (int i = 0; i < MAX_EQ_BANDS; i++) {
+    	delete filter[i].l;
+    	delete filter[i].r;
+    }
+    delete[] interpbuf;
+
 };
 
 /*
@@ -73,18 +80,18 @@ EQ::cleanup ()
  * Effect output
  */
 void
-EQ::out (float * smpsl, float * smpsr)
+EQ::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+    unsigned int i;
     for (i = 0; i < MAX_EQ_BANDS; i++) {
         if (filter[i].Ptype == 0)
             continue;
-        filter[i].l->filterout (efxoutl);
-        filter[i].r->filterout (efxoutr);
+        filter[i].l->filterout (efxoutl, period);
+        filter[i].r->filterout (efxoutr, period);
     };
 
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < period; i++) {
         efxoutl[i] = smpsl[i] * outvolume;
         efxoutr[i] = smpsr[i] * outvolume;
     };
@@ -104,7 +111,6 @@ EQ::setvolume (int Pvolume)
 
 
 };
-
 
 void
 EQ::setpreset (int npreset)

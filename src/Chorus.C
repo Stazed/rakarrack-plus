@@ -25,33 +25,37 @@
 #include <math.h>
 #include "Chorus.h"
 #include <stdio.h>
+#include "FPreset.h"
 
-Chorus::Chorus (float * efxoutl_, float * efxoutr_)
+Chorus::Chorus (float * efxoutl_, float * efxoutr_, double sample_rate)
 {
+    fSAMPLE_RATE = sample_rate;
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
     dlk = 0;
     drk = 0;
-    maxdelay = lrintf (MAX_CHORUS_DELAY / 1000.0 * SAMPLE_RATE);
+    maxdelay = lrintf (MAX_CHORUS_DELAY / 1000.0 * (int)sample_rate);
     delayl = new float[maxdelay];
     delayr = new float[maxdelay];
-
-    Ppreset = 0;
-    setpreset (0,Ppreset);
+    lfo = new EffectLFO(sample_rate);
 
     float tmp = 0.08f;
-    ldelay = new delayline(tmp, 2);
-    rdelay = new delayline(tmp, 2);
+    ldelay = new delayline(tmp, 2, sample_rate);
+    rdelay = new delayline(tmp, 2, sample_rate);
     ldelay -> set_averaging(0.005f);
     rdelay -> set_averaging(0.005f);
     ldelay->set_mix( 0.5f );
     rdelay->set_mix( 0.5f );
 
+    Ppreset = 0;
+    PERIOD = 256; //make our best guess for the initializing
+    setpreset (0,Ppreset);
+
     oldr = 0.0f;
     oldl = 0.0f;
     awesome_mode = 0;
 
-    lfo.effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout (&lfol, &lfor);
     dl2 = getdelay (lfol);
     dr2 = getdelay (lfor);
     cleanup ();
@@ -59,6 +63,11 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_)
 
 Chorus::~Chorus ()
 {
+	delete delayl;
+	delete delayr;
+	delete ldelay;
+	delete rdelay;
+	delete lfo;
 };
 
 /*
@@ -87,13 +96,14 @@ float Chorus::getdelay (float xlfo)
  * Apply the effect
  */
 void
-Chorus::out (float * smpsl, float * smpsr)
+Chorus::out (float * smpsl, float * smpsr, uint32_t period)
 {
-    int i;
+    unsigned int i;
     float tmp;
+    float fPERIOD = period;
     dl1 = dl2;
     dr1 = dr2;
-    lfo.effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout (&lfol, &lfor);
 
     if(awesome_mode) { //use interpolated delay line for better sound
         float tmpsub;
@@ -103,15 +113,15 @@ Chorus::out (float * smpsl, float * smpsr)
         if (Poutsub != 0) tmpsub = -1.0f;
         else tmpsub = 1.0f;
 
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             //Left
-            mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
+            mdel = (dl1 * (float)(period - i) + dl2 * (float)i) / fPERIOD;
             tmp = smpsl[i] + oldl*fb;
             efxoutl[i] = tmpsub*ldelay->delay(tmp, mdel, 0, 1, 0);
             oldl = efxoutl[i];
 
             //Right
-            mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
+            mdel = (dr1 * (float)(period - i) + dr2 * (float)i) / fPERIOD;
             tmp = smpsr[i] + oldr*fb;
             efxoutr[i] = tmpsub*rdelay->delay(tmp, mdel, 0, 1, 0);
             oldr =  efxoutr[i];
@@ -121,7 +131,7 @@ Chorus::out (float * smpsl, float * smpsr)
 
         dl2 = getdelay (lfol);
         dr2 = getdelay (lfor);
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < period; i++) {
             float inl = smpsl[i];
             float inr = smpsr[i];
             //LRcross
@@ -133,7 +143,7 @@ Chorus::out (float * smpsl, float * smpsr)
             //Left channel
 
             //compute the delay in samples using linear interpolation between the lfo delays
-            mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
+            mdel = (dl1 * (float)(period - i) + dl2 * (float)i) / fPERIOD;
             if (++dlk >= maxdelay)
                 dlk = 0;
             float tmp = (float) dlk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
@@ -149,7 +159,7 @@ Chorus::out (float * smpsl, float * smpsr)
             //Right channel
 
             //compute the delay in samples using linear interpolation between the lfo delays
-            mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
+            mdel = (dr1 * (float)(period - i) + dr2 * (float)i) / fPERIOD;
             if (++drk >= maxdelay)
                 drk = 0;
             tmp = (float)drk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
@@ -166,15 +176,19 @@ Chorus::out (float * smpsl, float * smpsr)
 
 
         if (Poutsub != 0)
-            for (i = 0; i < PERIOD; i++) {
+            for (i = 0; i < period; i++) {
                 efxoutl[i] *= -1.0f;
                 efxoutr[i] *= -1.0f;
             };
 
 
-        for (int i = 0; i < PERIOD; i++) {
-            efxoutl[i] *= panning;
-            efxoutr[i] *= (1.0f - panning);
+        //for (i = 0; i < period; i++) {
+            //efxoutl[i] *= panning;
+            //efxoutr[i] *= (1.0f - panning);
+        //};
+        for (i = 0; i < period; i++) {
+            efxoutl[i] *= (1.0f - panning);
+            efxoutr[i] *= panning;
         };
 
     } //end awesome_mode test
@@ -248,6 +262,7 @@ Chorus::setpreset (int dgui, int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 10;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Chorus1
         {64, 64, 33, 0, 0, 90, 40, 85, 64, 119, 0, 0},
@@ -273,12 +288,12 @@ Chorus::setpreset (int dgui, int npreset)
 
 
     if((dgui==0) && (npreset>4)) {
-        Fpre->ReadPreset(5,npreset-4);
+        Fpre->ReadPreset(5,npreset-4, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
 
     } else if((dgui==1) && (npreset>9)) {
-        Fpre->ReadPreset(7,npreset-9);
+        Fpre->ReadPreset(7,npreset-9, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {
@@ -302,20 +317,20 @@ Chorus::changepar (int npar, int value)
         setpanning (value);
         break;
     case 2:
-        lfo.Pfreq = value;
-        lfo.updateparams ();
+        lfo->Pfreq = value;
+        lfo->updateparams (PERIOD);
         break;
     case 3:
-        lfo.Prandomness = value;
-        lfo.updateparams ();
+        lfo->Prandomness = value;
+        lfo->updateparams (PERIOD);
         break;
     case 4:
-        lfo.PLFOtype = value;
-        lfo.updateparams ();
+        lfo->PLFOtype = value;
+        lfo->updateparams (PERIOD);
         break;
     case 5:
-        lfo.Pstereo = value;
-        lfo.updateparams ();
+        lfo->Pstereo = value;
+        lfo->updateparams (PERIOD);
         break;
     case 6:
         setdepth (value);
@@ -361,16 +376,16 @@ Chorus::getpar (int npar)
         return (Ppanning);
         break;
     case 2:
-        return (lfo.Pfreq);
+        return (lfo->Pfreq);
         break;
     case 3:
-        return (lfo.Prandomness);
+        return (lfo->Prandomness);
         break;
     case 4:
-        return (lfo.PLFOtype);
+        return (lfo->PLFOtype);
         break;
     case 5:
-        return (lfo.Pstereo);
+        return (lfo->Pstereo);
         break;
     case 6:
         return (Pdepth);

@@ -31,9 +31,9 @@ class Pan
 {
 
 public:
-    Pan (float *efxoutl_, float *efxoutr_);
+    Pan (float *efxoutl_, float *efxoutr_, double sample_rate);
     ~Pan ();
-    void out (float *smpsl, float *smpsr);
+    void out (float *smpsl, float *smpsr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -46,7 +46,7 @@ public:
     float *efxoutl;
     float *efxoutr;
 
-
+    uint32_t PERIOD;
 
 private:
 
@@ -66,7 +66,7 @@ private:
     float lfol, lfor;
     float ll, lr;
 
-    EffectLFO lfo;
+    EffectLFO* lfo;
     class FPreset *Fpre;
 
 };
