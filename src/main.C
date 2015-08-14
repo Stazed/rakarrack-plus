@@ -27,6 +27,7 @@
 #include <sys/mman.h>
 #include "global.h"
 #include "rakarrack.h"
+#include "process.h"
 #include "jack.h"
 
 void
