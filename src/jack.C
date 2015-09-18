@@ -26,7 +26,6 @@
 #include <jack/transport.h>
 #include "jack.h"
 #include "global.h"
-#include "process.h"
 
 
 RKR *JackOUT;

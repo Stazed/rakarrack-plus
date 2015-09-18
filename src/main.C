@@ -28,6 +28,7 @@
 #include "global.h"
 #include "rakarrack.h"
 #include "process.h"
+#include "config.h"
 #include "jack.h"
 
 void

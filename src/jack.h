@@ -24,6 +24,7 @@
 #define JACK_OUTPUT_H
 
 #include "global.h"
+#include "process.h"
 
 #ifdef JACK_SESSION
 #include <jack/session.h>

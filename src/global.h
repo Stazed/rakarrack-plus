@@ -239,42 +239,43 @@ static inline float f_pow2(float x)
 #include "beattracker.h"
 #endif
 
-
-#if(0)
+//TODO: move these values into the RKR object
 extern int Pexitprogram, preset;
 extern int commandline, gui;
 extern int exitwithhelp, nojack;
-extern int maxx_len;
+//extern int maxx_len;
 extern int error_num;
-//extern int period;
-extern int reconota;
+////extern int period;
+//extern int reconota;
 extern int needtoloadstate;
 extern int needtoloadbank;
 extern int stecla;
 extern int looper_lqua;
-//extern unsigned int SAMPLE_RATE;
-extern int note_active[POLY];
-extern int rnote[POLY];
-extern int gate[POLY];
-//extern int pdata[50];
-extern float val_sum;
-//extern float fPERIOD;
-//extern unsigned int SAMPLE_RATE;
-//extern float fSAMPLE_RATE;
-//extern float cSAMPLE_RATE;
-extern float r__ratio[12];
-//extern int Wave_res_amount;
-//extern int Wave_up_q;
-//extern int Wave_down_q;
-extern Pixmap p, mask;
-extern XWMHints *hints;
-extern float freqs[12];
-extern float lfreqs[12];
-extern float aFreq;
+////extern unsigned int SAMPLE_RATE;
+//extern int note_active[POLY];
+//extern int rnote[POLY];
+//extern int gate[POLY];
+////extern int pdata[50];
+//extern float val_sum;
+////extern float fPERIOD;
+////extern unsigned int SAMPLE_RATE;
+////extern float fSAMPLE_RATE;
+////extern float cSAMPLE_RATE;
+////extern float r__ratio[12];
+////extern int Wave_res_amount;
+////extern int Wave_up_q;
+////extern int Wave_down_q;
+//extern Pixmap p, mask;
+//extern XWMHints *hints;
+//extern float freqs[12];
+//extern float lfreqs[12];
+//extern float aFreq;
 extern char *s_uuid;
 extern char *statefile;
 extern char *filetoload;
 extern char *banktoload;
+
+#if(0)
 class RKR
 {
 

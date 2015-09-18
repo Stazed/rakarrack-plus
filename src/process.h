@@ -1,5 +1,8 @@
 //spencer jackson
 
+#ifndef PROCESS_H
+#define PROCESS_H
+
 //main class for processing engine
 #include "global.h"
 
@@ -595,3 +598,5 @@ struct list_element {
     struct list_element *backward;
     char *name;
 };
+
+#endif
