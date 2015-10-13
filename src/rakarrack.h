@@ -5,6 +5,7 @@
 #include <FL/Fl.H>
 #include "global.h"
 #include "process.h"
+#include "config.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>

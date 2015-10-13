@@ -365,6 +365,7 @@ public:
     int Ste_Down;
     int Ste_U_Q;
     int Ste_D_Q;
+    float aFreq;
 
     int Metro_Vol;
     int M_Metro_Sound;

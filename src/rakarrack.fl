@@ -1,14 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0302 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include "global.h"} {public local
 } 
 
-decl {\#include "process.h"} {selected public local
+decl {\#include "process.h"} {public local
 } 
 
-decl {\#include "config.h"} {selected public local
+decl {\#include "config.h"} {public local
 } 
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
@@ -895,7 +895,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {1922 28 956 1740} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {785 750 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7932,115 +7932,115 @@ findpos(35,(int)o->value(),o);}
         vo_input->value(rkr->efx_Vocoder->getpar(4));
         vo_ring->value(rkr->efx_Vocoder->getpar(6));
         vo_level->value(rkr->efx_Vocoder->getpar(5));}
-                  xywh {240 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-                } {
-                  MenuItem {} {
-                    label {Vocoder 1}
-                    xywh {77 77 36 21} labelsize 10
-                  }
-                  MenuItem {} {
-                    label {Vocoder 2}
-                    xywh {77 77 36 21} labelsize 10
-                  }
-                  MenuItem {} {
-                    label {Vocoder 3}
-                    xywh {77 77 36 21} labelsize 10
-                  }
-                  MenuItem {} {
-                    label {Vocoder 4}
-                    xywh {87 87 36 21} labelsize 10
-                  }
-                }
-                Fl_Value_Slider vo_WD {
-                  label {Wet/Dry}
-                  callback {if(Fl::event_button()==3)
+          xywh {240 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+        } {
+          MenuItem {} {
+            label {Vocoder 1}
+            xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Vocoder 2}
+            xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Vocoder 3}
+            xywh {77 77 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {Vocoder 4}
+            xywh {87 87 36 21} labelsize 10
+          }
+        }
+        Fl_Value_Slider vo_WD {
+          label {Wet/Dry}
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(296);
          return;
         }
         rkr->efx_Vocoder->changepar(0,(int)(o->value()+64));}
-                  xywh {213 243 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-                  class SliderW
-                }
-                Fl_Value_Slider vo_pan {
-                  label Pan
-                  callback {if(Fl::event_button()==3)
+          xywh {213 243 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vo_pan {
+          label Pan
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(297);
          return;
         }
         rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));}
-                  xywh {213 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-                  class SliderW
-                }
-                Fl_Value_Slider vo_input {
-                  label Input
-                  callback {if(Fl::event_button()==3)
+          xywh {213 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vo_input {
+          label Input
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(298);
          return;
         }
         rkr->efx_Vocoder->changepar(4,(int)o->value());}
-                  xywh {213 283 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-                  class SliderW
-                }
-                Fl_Value_Slider vo_mu {
-                  label {Muf.}
-                  callback {if(Fl::event_button()==3)
+          xywh {213 283 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vo_mu {
+          label {Muf.}
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(299);
          return;
         }
         rkr->efx_Vocoder->changepar(2,(int)o->value());}
-                  xywh {213 303 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-                  class SliderW
-                }
-                Fl_Value_Slider vo_q {
-                  label Q
-                  callback {if(Fl::event_button()==3)
+          xywh {213 303 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vo_q {
+          label Q
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(300);
          return;
         }
         rkr->efx_Vocoder->changepar(3,(int)o->value());}
-                  xywh {213 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
-                  class SliderW
-                }
-                Fl_Value_Slider vo_ring {
-                  label Ring
-                  callback {if(Fl::event_button()==3)
+          xywh {213 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vo_ring {
+          label Ring
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(301);
          return;
         }
         rkr->efx_Vocoder->changepar(6,(int)o->value());}
-                  xywh {213 343 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-                  class SliderW
-                }
-                Fl_Value_Slider vo_level {
-                  label Level
-                  callback {if(Fl::event_button()==3)
+          xywh {213 343 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider vo_level {
+          label Level
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(302);
          return;
         }
         rkr->efx_Vocoder->changepar(5,(int)o->value());}
-                  xywh {213 363 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-                  class SliderW
-                }
-                Fl_Slider vu_vu {
-                  xywh {168 268 11 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
-                  class NewVum
-                }
-              }
-              Fl_Group SUSTAINER {
-                user_data 1
-                xywh {161 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-              } {
-                Fl_Light_Button sus_activar {
-                  label On
-                  user_data 2
-                  callback {if(Fl::event_button()==3)
+          xywh {213 363 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Slider vu_vu {
+          xywh {168 268 11 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
+          class NewVum
+        }
+      }
+      Fl_Group SUSTAINER {
+        user_data 1
+        xywh {161 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+      } {
+        Fl_Light_Button sus_activar {
+          label On
+          user_data 2
+          callback {if(Fl::event_button()==3)
         {
          getMIDIControl(116);
          o->value(rkr->Sustainer_Bypass);
@@ -8050,12 +8050,12 @@ findpos(35,(int)o->value(),o);}
         if((int) o->value()==0)
         rkr->efx_Sustainer->cleanup();
         findpos(36,(int)o->value(),o);}
-                  xywh {166 217 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-                }
-                Fl_Choice sus_preset {
-                  label Preset
-                  user_data 12036
-                  callback {long long ud= (long long) v;
+          xywh {166 217 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+        }
+        Fl_Choice sus_preset {
+          label Preset
+          user_data 12036
+          callback {long long ud= (long long) v;
         if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
 sus_sus->value(rkr->efx_Sustainer->getpar(1));}
@@ -11271,20 +11271,20 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();}
+Settings->hide();} open
       xywh {1388 103 640 528} type Double color 4 hide size_range {640 528 0 0}
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
           label Look
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
             xywh {5 26 630 502}
@@ -11445,8 +11445,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
-          xywh {0 26 635 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          user_data 1 open
+          xywh {0 26 635 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {5 26 630 502}
@@ -11727,8 +11727,8 @@ Show_Next_Time();}
           }
           Fl_Counter Calibration {
             label {Tuner Calibration A4 }
-            callback {aFreq=o->value();
-rkr->update_freqs(aFreq);}
+            callback {rkr->aFreq=o->value();
+rkr->update_freqs(rkr->aFreq);} selected
             xywh {120 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
           }
           Fl_Counter RTrigger {
@@ -12009,7 +12009,7 @@ Show_Next_Time();}
         Fl_Group MIDI_SET {
           label MIDI
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo8 {
             xywh {5 26 630 502}
@@ -12045,7 +12045,7 @@ rkr->Conecta();}
           }
           Fl_Group wMIDI {
             label {MIDI implementation}
-            xywh {15 285 273 23} box PLASTIC_DOWN_FRAME labelsize 10 labelcolor 7 align 5
+            xywh {15 285 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
           } {
             Fl_Check_Button Mw0 {
               label Default
@@ -12080,7 +12080,7 @@ scroll->deactivate();}
         Fl_Group JACK_SET {
           label Jack
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo9 {
             xywh {5 26 630 502}
@@ -12111,7 +12111,7 @@ else JackIn->deactivate();}
         Fl_Group MISC_SET {
           label Misc
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo10 {
             xywh {5 26 630 502}
@@ -12141,7 +12141,7 @@ Fl_Tooltip::enable(rkr->ena_tool);}
         Fl_Group BANK_SET {
           label Bank
           user_data 1
-          xywh {5 26 630 502} box PLASTIC_DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo11 {
             xywh {5 26 630 502}
@@ -13216,7 +13216,7 @@ rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"),rkr->Ste_D_Q);
 rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
-rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
+rakarrack.set(rkr->PrefNom("Calibration"),rkr->aFreq);
 rakarrack.set(rkr->PrefNom("Recognize Trigger"),rkr->rtrig);
 
 rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
@@ -14560,8 +14560,7 @@ rkr->help_displayed=1;
 
 visor->show();} {}
   }
-  Function {MiraClientes()} {open
-  } {
+  Function {MiraClientes()} {} {
     code {int i;
 char temp[128];
 char temp1[128];
@@ -14729,7 +14728,7 @@ Ste_Up_Qua->value(rkr->Ste_U_Q);
 Wave_Amo->value(Wave_res_amount);
 Wave_Up_Qua->value(Wave_up_q);
 Wave_Down_Qua->value(Wave_down_q);
-Calibration->value(aFreq);
+Calibration->value(rkr->aFreq);
 RTrigger->value(rkr->RecNote->trigfact);
 RC_Opti->value(rkr->RCOpti);
 

@@ -370,6 +370,7 @@ RKR::Update_tempo()
 
 }
 
+/*
 void
 RKR::update_freqs(float val)
 {
@@ -384,6 +385,7 @@ RKR::update_freqs(float val)
     }
 
 }
+*/
 
 
 

@@ -1422,7 +1422,7 @@ if (rkr->Harmonizer_Bypass)
     har_chordname->copy_label(rkr->RC->NombreAcorde);
     if(!rkr->StereoHarm_Bypass) rkr->RC->cc=0;  
     har_chordname->redraw(); 
-    rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12);      
+    rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->RecNote->reconota);      
     }
      }
 
@@ -1439,8 +1439,8 @@ if (rkr->StereoHarm_Bypass)
     shar_chordname->copy_label(rkr->RC->NombreAcorde);
     rkr->RC->cc=0;  
     shar_chordname->redraw(); 
-    rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12);      
-    rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12);      
+    rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->RecNote->reconota);      
+    rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->RecNote->reconota);      
     
     }
      }
@@ -7349,14 +7349,14 @@ void RKRGUI::cb_vo_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_vo_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
-vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
-vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
-vo_mu->value(rkr->efx_Vocoder->getpar(2));
-vo_q->value(rkr->efx_Vocoder->getpar(3));
-vo_input->value(rkr->efx_Vocoder->getpar(4));
-vo_ring->value(rkr->efx_Vocoder->getpar(6));
-vo_level->value(rkr->efx_Vocoder->getpar(5));
+        if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
+        vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
+        vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
+        vo_mu->value(rkr->efx_Vocoder->getpar(2));
+        vo_q->value(rkr->efx_Vocoder->getpar(3));
+        vo_input->value(rkr->efx_Vocoder->getpar(4));
+        vo_ring->value(rkr->efx_Vocoder->getpar(6));
+        vo_level->value(rkr->efx_Vocoder->getpar(5));
 }
 void RKRGUI::cb_vo_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_preset_i(o,v);
@@ -7372,11 +7372,11 @@ Fl_Menu_Item RKRGUI::menu_vo_preset[] = {
 
 void RKRGUI::cb_vo_WD_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(296);
- return;
-}
-rkr->efx_Vocoder->changepar(0,(int)(o->value()+64));
+        {
+         getMIDIControl(296);
+         return;
+        }
+        rkr->efx_Vocoder->changepar(0,(int)(o->value()+64));
 }
 void RKRGUI::cb_vo_WD(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_WD_i(o,v);
@@ -7384,11 +7384,11 @@ void RKRGUI::cb_vo_WD(SliderW* o, void* v) {
 
 void RKRGUI::cb_vo_pan_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(297);
- return;
-}
-rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));
+        {
+         getMIDIControl(297);
+         return;
+        }
+        rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));
 }
 void RKRGUI::cb_vo_pan(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_pan_i(o,v);
@@ -7396,11 +7396,11 @@ void RKRGUI::cb_vo_pan(SliderW* o, void* v) {
 
 void RKRGUI::cb_vo_input_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(298);
- return;
-}
-rkr->efx_Vocoder->changepar(4,(int)o->value());
+        {
+         getMIDIControl(298);
+         return;
+        }
+        rkr->efx_Vocoder->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_vo_input(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_input_i(o,v);
@@ -7408,11 +7408,11 @@ void RKRGUI::cb_vo_input(SliderW* o, void* v) {
 
 void RKRGUI::cb_vo_mu_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(299);
- return;
-}
-rkr->efx_Vocoder->changepar(2,(int)o->value());
+        {
+         getMIDIControl(299);
+         return;
+        }
+        rkr->efx_Vocoder->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_vo_mu(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_mu_i(o,v);
@@ -7420,11 +7420,11 @@ void RKRGUI::cb_vo_mu(SliderW* o, void* v) {
 
 void RKRGUI::cb_vo_q_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(300);
- return;
-}
-rkr->efx_Vocoder->changepar(3,(int)o->value());
+        {
+         getMIDIControl(300);
+         return;
+        }
+        rkr->efx_Vocoder->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_vo_q(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_q_i(o,v);
@@ -7432,11 +7432,11 @@ void RKRGUI::cb_vo_q(SliderW* o, void* v) {
 
 void RKRGUI::cb_vo_ring_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(301);
- return;
-}
-rkr->efx_Vocoder->changepar(6,(int)o->value());
+        {
+         getMIDIControl(301);
+         return;
+        }
+        rkr->efx_Vocoder->changepar(6,(int)o->value());
 }
 void RKRGUI::cb_vo_ring(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_ring_i(o,v);
@@ -7444,11 +7444,11 @@ void RKRGUI::cb_vo_ring(SliderW* o, void* v) {
 
 void RKRGUI::cb_vo_level_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(302);
- return;
-}
-rkr->efx_Vocoder->changepar(5,(int)o->value());
+        {
+         getMIDIControl(302);
+         return;
+        }
+        rkr->efx_Vocoder->changepar(5,(int)o->value());
 }
 void RKRGUI::cb_vo_level(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_level_i(o,v);
@@ -7456,15 +7456,15 @@ void RKRGUI::cb_vo_level(SliderW* o, void* v) {
 
 void RKRGUI::cb_sus_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Sustainer_Bypass);
- return;
-}
-rkr->Sustainer_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Sustainer->cleanup();
-findpos(36,(int)o->value(),o);
+        {
+         getMIDIControl(116);
+         o->value(rkr->Sustainer_Bypass);
+         return;
+        }
+        rkr->Sustainer_Bypass=(int)o->value();
+        if((int) o->value()==0)
+        rkr->efx_Sustainer->cleanup();
+        findpos(36,(int)o->value(),o);
 }
 void RKRGUI::cb_sus_activar(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_sus_activar_i(o,v);
@@ -7472,7 +7472,7 @@ void RKRGUI::cb_sus_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_sus_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
+        if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
 sus_sus->value(rkr->efx_Sustainer->getpar(1));
 }
@@ -10772,8 +10772,8 @@ void RKRGUI::cb_DB6B(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Calibration_i(Fl_Counter* o, void*) {
-  aFreq=o->value();
-rkr->update_freqs(aFreq);
+  rkr->aFreq=o->value();
+rkr->update_freqs(rkr->aFreq);
 }
 void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Calibration_i(o,v);
@@ -21463,7 +21463,7 @@ e a stompbox Opto Trem");
     { STabs = new Fl_Tabs(0, 0, 636, 535);
       STabs->user_data((void*)(1));
       { Look = new Fl_Group(5, 26, 630, 502, "Look");
-        Look->box(FL_PLASTIC_DOWN_FRAME);
+        Look->box(FL_DOWN_FRAME);
         Look->labelfont(1);
         Look->labelcolor(FL_BACKGROUND2_COLOR);
         Look->user_data((void*)(1));
@@ -21544,7 +21544,7 @@ e a stompbox Opto Trem");
         Look->end();
       } // Fl_Group* Look
       { AUDIO_SET = new Fl_Group(0, 26, 635, 502, "Audio");
-        AUDIO_SET->box(FL_PLASTIC_DOWN_FRAME);
+        AUDIO_SET->box(FL_DOWN_FRAME);
         AUDIO_SET->labelfont(1);
         AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
@@ -21931,7 +21931,7 @@ e a stompbox Opto Trem");
         AUDIO_SET->end();
       } // Fl_Group* AUDIO_SET
       { MIDI_SET = new Fl_Group(5, 26, 630, 502, "MIDI");
-        MIDI_SET->box(FL_PLASTIC_DOWN_FRAME);
+        MIDI_SET->box(FL_DOWN_FRAME);
         MIDI_SET->labelfont(1);
         MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
         MIDI_SET->user_data((void*)(1));
@@ -21983,7 +21983,7 @@ e a stompbox Opto Trem");
           Har_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
         } // Fl_Counter* Har_In_Counter
         { wMIDI = new Fl_Group(15, 285, 273, 23, "MIDI implementation");
-          wMIDI->box(FL_PLASTIC_DOWN_FRAME);
+          wMIDI->box(FL_DOWN_FRAME);
           wMIDI->labelsize(10);
           wMIDI->labelcolor(FL_BACKGROUND2_COLOR);
           wMIDI->align(Fl_Align(FL_ALIGN_TOP_LEFT));
@@ -22027,7 +22027,7 @@ e a stompbox Opto Trem");
         MIDI_SET->end();
       } // Fl_Group* MIDI_SET
       { JACK_SET = new Fl_Group(5, 26, 630, 502, "Jack");
-        JACK_SET->box(FL_PLASTIC_DOWN_FRAME);
+        JACK_SET->box(FL_DOWN_FRAME);
         JACK_SET->labelfont(1);
         JACK_SET->labelcolor(FL_BACKGROUND2_COLOR);
         JACK_SET->user_data((void*)(1));
@@ -22070,7 +22070,7 @@ e a stompbox Opto Trem");
         JACK_SET->end();
       } // Fl_Group* JACK_SET
       { MISC_SET = new Fl_Group(5, 26, 630, 502, "Misc");
-        MISC_SET->box(FL_PLASTIC_DOWN_FRAME);
+        MISC_SET->box(FL_DOWN_FRAME);
         MISC_SET->labelfont(1);
         MISC_SET->labelcolor(FL_BACKGROUND2_COLOR);
         MISC_SET->user_data((void*)(1));
@@ -22109,7 +22109,7 @@ e a stompbox Opto Trem");
         MISC_SET->end();
       } // Fl_Group* MISC_SET
       { BANK_SET = new Fl_Group(5, 26, 630, 502, "Bank");
-        BANK_SET->box(FL_PLASTIC_DOWN_FRAME);
+        BANK_SET->box(FL_DOWN_FRAME);
         BANK_SET->labelfont(1);
         BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
         BANK_SET->user_data((void*)(1));
@@ -22493,8 +22493,8 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   Analyzer_ON=0;
   Scope_ON=0;
   
-  Sco->init(rkr->anall, rkr->analr, period);
-  Analy->init(rkr->anall, rkr->analr, period, SAMPLE_RATE);
+  Sco->init(rkr->anall, rkr->analr, PERIOD);
+  Analy->init(rkr->anall, rkr->analr, PERIOD, SAMPLE_RATE);
   
   memset(tmp,0, sizeof(tmp));
   sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
@@ -23135,7 +23135,7 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
   rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
   rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
-  rakarrack.set(rkr->PrefNom("Calibration"),aFreq);
+  rakarrack.set(rkr->PrefNom("Calibration"),rkr->aFreq);
   rakarrack.set(rkr->PrefNom("Recognize Trigger"),rkr->rtrig);
   
   rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
@@ -24650,11 +24650,11 @@ void RKRGUI::MiraConfig() {
   Voc_Up_Qua->value(rkr->Voc_U_Q);
   Ste_Downsample->value(rkr->Ste_Down);
   Ste_Down_Qua->value(rkr->Ste_D_Q);
-  Ste_Up_Qua->value(rkr->Ste_U_Q)//;
-//  Wave_Amo->value(Wave_res_amount);
-//  Wave_Up_Qua->value(Wave_up_q);
-//  Wave_Down_Qua->value(Wave_down_q);
-  Calibration->value(aFreq);
+  Ste_Up_Qua->value(rkr->Ste_U_Q);
+  Wave_Amo->value(Wave_res_amount);
+  Wave_Up_Qua->value(Wave_up_q);
+  Wave_Down_Qua->value(Wave_down_q);
+  Calibration->value(rkr->aFreq);
   RTrigger->value(rkr->RecNote->trigfact);
   RC_Opti->value(rkr->RCOpti);
   
