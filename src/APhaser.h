@@ -39,6 +39,7 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    EffectLFO *lfo;		//Phaser modulator
     int Ppreset;
     float *efxoutl;
     float *efxoutr;
@@ -48,7 +49,6 @@ public:
 
 private:
     //Phaser parameters
-    EffectLFO *lfo;		//Phaser modulator
     int Pvolume;        //Used in Process.C to set wet/dry mix
     int Pdistortion;    //Model distortion added by FET element
     int Pwidth;		//Phaser width (LFO amplitude)

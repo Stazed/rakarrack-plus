@@ -1336,7 +1336,7 @@ RKR::Actualizar_Audio ()
             Gate_Bypass = 0;
             efx_Gate->cleanup();
             for (i = 0; i <= 6; i++)
-                efx_Gate->Gate_Change (i + 1,lv[17][i]);
+                efx_Gate->changepar (i + 1,lv[17][i]);
             Gate_Bypass = Gate_B;
             break;
 

@@ -4028,7 +4028,7 @@ void RKRGUI::cb_gate_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_gate_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12016))rkr->efx_Gate->Gate_Change_Preset((int) o->value());
+if((ud==0)||(ud==12016))rkr->efx_Gate->setpreset((int) o->value());
 gate_ATime->value(rkr->efx_Gate->getpar(3));
 gate_RTime->value(rkr->efx_Gate->getpar(4));
 gate_range->value(rkr->efx_Gate->getpar(2));
@@ -4049,49 +4049,49 @@ Fl_Menu_Item RKRGUI::menu_gate_preset[] = {
 };
 
 void RKRGUI::cb_gate_ATime_i(SliderW* o, void*) {
-  rkr->efx_Gate->Gate_Change(3,(int)o->value());
+  rkr->efx_Gate->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_gate_ATime(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_ATime_i(o,v);
 }
 
 void RKRGUI::cb_gate_RTime_i(SliderW* o, void*) {
-  rkr->efx_Gate->Gate_Change(4, (int) o->value());
+  rkr->efx_Gate->changepar(4, (int) o->value());
 }
 void RKRGUI::cb_gate_RTime(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_RTime_i(o,v);
 }
 
 void RKRGUI::cb_gate_range_i(SliderW* o, void*) {
-  rkr->efx_Gate->Gate_Change(2, (int) o->value());
+  rkr->efx_Gate->changepar(2, (int) o->value());
 }
 void RKRGUI::cb_gate_range(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_range_i(o,v);
 }
 
 void RKRGUI::cb_gate_threshold_i(SliderW* o, void*) {
-  rkr->efx_Gate->Gate_Change(1, (int)o->value());
+  rkr->efx_Gate->changepar(1, (int)o->value());
 }
 void RKRGUI::cb_gate_threshold(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_threshold_i(o,v);
 }
 
 void RKRGUI::cb_gate_hold_i(SliderW* o, void*) {
-  rkr->efx_Gate->Gate_Change(7,(int)o->value());
+  rkr->efx_Gate->changepar(7,(int)o->value());
 }
 void RKRGUI::cb_gate_hold(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_hold_i(o,v);
 }
 
 void RKRGUI::cb_gate_LPF_i(SliderW* o, void*) {
-  rkr->efx_Gate->Gate_Change(5, (int)o->value());
+  rkr->efx_Gate->changepar(5, (int)o->value());
 }
 void RKRGUI::cb_gate_LPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_LPF_i(o,v);
 }
 
 void RKRGUI::cb_gate_HPF_i(SliderW* o, void*) {
-  rkr->efx_Gate->Gate_Change(6, (int)o->value());
+  rkr->efx_Gate->changepar(6, (int)o->value());
 }
 void RKRGUI::cb_gate_HPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_HPF_i(o,v);

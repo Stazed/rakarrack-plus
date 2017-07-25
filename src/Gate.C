@@ -49,6 +49,7 @@ Gate::Gate (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t inte
     state = CLOSED;
     hold_count = 0;
 
+    setpreset(0);
 }
 
 Gate::~Gate ()
@@ -94,10 +95,10 @@ Gate::sethpf (int value)
 
 
 void
-Gate::Gate_Change (int np, int value)
+Gate::changepar (int npar, int value)
 {
 
-    switch (np) {
+    switch (npar) {
 
     case 1:
         Pthreshold = value;
@@ -165,7 +166,7 @@ Gate::getpar (int np)
 
 
 void
-Gate::Gate_Change_Preset (int npreset)
+Gate::setpreset (int npreset)
 {
 
     const int PRESET_SIZE = 7;
@@ -184,10 +185,10 @@ Gate::Gate_Change_Preset (int npreset)
 
         Fpre->ReadPreset(16,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
-            Gate_Change(n + 1, pdata[n]);
+            changepar(n + 1, pdata[n]);
     } else {
         for (int n = 0; n < PRESET_SIZE; n++)
-            Gate_Change (n + 1, presets[npreset][n]);
+            changepar(n + 1, presets[npreset][n]);
     }
 
 }

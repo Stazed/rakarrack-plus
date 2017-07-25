@@ -42,8 +42,8 @@ public:
 
     void out (float * smps_l, float * smps_r, uint32_t period);
 
-    void Gate_Change (int np, int value);
-    void Gate_Change_Preset (int npreset);
+    void changepar (int npar, int value);
+    void setpreset (int npreset);
     void cleanup ();
     int getpar (int npar);
 
