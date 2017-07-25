@@ -37,6 +37,8 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate,
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
+    nSAMPLE_RATE = (int)sample_rate;
+    nfSAMPLE_RATE = sample_rate;
     //default values
     Ppreset = 0;
     Pvolume = 50;
@@ -65,6 +67,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate,
     hrtf =  (float *) malloc (sizeof (float) * (1 + hrtf_size));
     imax = nSAMPLE_RATE/2;  // 1/2 second available
     imdelay = (float *) malloc (sizeof (float) * imax);
+    imctr = 0;
     offset = 0;
     hoffset = 0;
     hlength = 0;
@@ -128,7 +131,7 @@ Reverbtron::cleanup ()
  * Effect output
  */
 void
-Reverbtron::out (float * smpsl, float * smpsr, uint32_t period)
+Reverbtron::out (float * smpsl, float * smpsr, uint32_t period) // FIXME double CPU usage
 {
     int  i, j, xindex, hindex;
     float l,lyn, hyn;
