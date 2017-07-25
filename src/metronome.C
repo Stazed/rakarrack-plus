@@ -29,11 +29,15 @@
 #include "metronome.h"
 
 
-metronome::metronome ()
+metronome::metronome (double samplerate, uint32_t intermediate_bufsize)
 {
-    dulltick =  new AnalogFilter(4,1600.0f,80.0f,1);   //BPF
-    sharptick =  new AnalogFilter(4,2800.0f,80.0f,1);  //BPF
-    hpf =  new AnalogFilter(3,850.0f,60.0f,1);  //HPF
+    interpbuf = new float[intermediate_bufsize];
+    SAMPLE_RATE = samplerate;
+    fSAMPLE_RATE = float(samplerate);
+    
+    dulltick =  new AnalogFilter(4,1600.0f,80.0f,1,samplerate, interpbuf);   //BPF
+    sharptick =  new AnalogFilter(4,2800.0f,80.0f,1,samplerate, interpbuf);  //BPF
+    hpf =  new AnalogFilter(3,850.0f,60.0f,1,samplerate, interpbuf);  //HPF
     tick_interval = SAMPLE_RATE;
     tickctr = 0;
     markctr = 0;
@@ -45,6 +49,7 @@ metronome::metronome ()
 
 metronome::~metronome ()
 {
+    delete[] interpbuf;
 };
 
 void
@@ -81,7 +86,7 @@ metronome::set_meter (int counts)  //how many counts to hear the "mark"
  * Audible output
  */
 void
-metronome::metronomeout (float * tickout)
+metronome::metronomeout (float * tickout, int period)
 {
     float outsharp, outdull;
     float ticker = 0.0f;

@@ -27,6 +27,7 @@ public:
     void schmittFloat (float *indatal, float *indatar, uint32_t period);
     void sethpf(int value);
     void setlpf(int value);
+    void update_freqs(float tune);
     int note;
 
     signed short int *schmittBuffer;
@@ -40,13 +41,15 @@ public:
 
     int reconota;
     int last;
+    float freqs[12];
+    float lfreqs[12];
+    
 
 private:
 
     void displayFrequency (float freq);
     void schmittInit (int size, double sample_rate);
     void schmittS16LE (signed short int *indata, uint32_t period);
-    void update_freqs(float tune);
 
     int ultima;
     int blockSize;
@@ -57,8 +60,6 @@ private:
     class Sustainer *Sus;
 
     float fSAMPLE_RATE;
-    float freqs[12];
-    float lfreqs[12];
 
 };
 

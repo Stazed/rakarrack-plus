@@ -31,13 +31,14 @@
 class metronome
 {
 public:
-    metronome ();
+    metronome (double samplerate, uint32_t intermediate_bufsize);
     ~metronome ();
     void cleanup();
-    void metronomeout (float * tickout);
+    void metronomeout (float * tickout, int period);
     void set_tempo (int bpm);
     void set_meter (int counts);
     int markctr;
+    float * interpbuf;//buffer for filter
 
 private:
     int tick_interval;
@@ -45,8 +46,12 @@ private:
     int meter;
     int tickper;
     int ticktype;
+    
+    float fSAMPLE_RATE;
+    unsigned int SAMPLE_RATE;
 
     class AnalogFilter *dulltick,*sharptick, *hpf;
+    
 
 };
 
