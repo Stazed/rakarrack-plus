@@ -49,7 +49,6 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_, double sample_rate)
 
     Ppreset = 0;
     PERIOD = 256; //make our best guess for the initializing
-    setpreset (0,Ppreset);
 
     oldr = 0.0f;
     oldl = 0.0f;
@@ -58,6 +57,7 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_, double sample_rate)
     lfo->effectlfoout (&lfol, &lfor);
     dl2 = getdelay (lfol);
     dr2 = getdelay (lfor);
+    setpreset (0,Ppreset);  // must be set after call to getdelay
     cleanup ();
 };
 
