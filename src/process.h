@@ -55,6 +55,8 @@
 #include "Vibe.h"
 #include "Infinity.h"
 #include "beattracker.h"
+#include "config.h"
+#include <jack/jack.h>
 
 
 class RKR
@@ -132,7 +134,6 @@ public:
     void Update_tempo();
     int checkforaux();
     void Error_Handle(int num);
-    void update_freqs(float val);
 
     class FPreset *Fpre;
     class Reverb *efx_Rev;
@@ -389,7 +390,6 @@ public:
     int sample_rate;
     float fSample_rate;
     float cSample_rate;
-    int reconota;
     float *interpbuf;//buffer for analog filters to interpolate (shared)
 
     int Wave_res_amount;
@@ -412,10 +412,6 @@ public:
     int have_signal;
     int OnCounter;
     int t_periods;
-
-    //   Recognize
-
-    int last;
 
     // Harmonizer
     int HarQual;
@@ -496,7 +492,7 @@ public:
     float Log_M_Volume;
     float M_Metro_Vol;
 
-
+    float val_sum;
     float old_il_sum;
     float old_ir_sum;
     float old_vl_sum;

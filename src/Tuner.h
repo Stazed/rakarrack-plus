@@ -20,9 +20,9 @@
 class Tuner
 {
 public:
-    Tuner ();
+    Tuner (double sample_rate);
     ~Tuner ();
-    void schmittFloat (int nframes, float *indatal, float *indatar);
+    void schmittFloat (int nframes, float *indatal, float *indatar, float *freqs, float *lfreqs);
 
     int note;
     int preparada;
@@ -37,12 +37,14 @@ public:
 
 private:
 
-    void displayFrequency (float freq);
+    void displayFrequency (float freq, float *freqs, float *lfreqs);
     void schmittInit (int size);
-    void schmittS16LE (int nframes, signed short int *indata);
+    void schmittS16LE (int nframes, signed short int *indata, float *freqs, float *lfreqs);
     void schmittFree ();
 
     int blockSize;
+    float fSAMPLE_RATE;
+    unsigned int SAMPLE_RATE;
 
 };
 

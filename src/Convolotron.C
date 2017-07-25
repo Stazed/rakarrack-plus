@@ -25,11 +25,15 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Convolotron.h"
+#include "config.h" // for DATADIR
 
-Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq)
+Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq,
+                          double sample_rate, uint16_t intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
+    SAMPLE_RATE = (unsigned int)sample_rate;
+    fSAMPLE_RATE = (float)sample_rate;
 
     //default values
     Ppreset = 0;
@@ -45,10 +49,10 @@ Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS, int uq, int
     convlength = .5f;
     fb = 0.0f;
     feedback = 0.0f;
-    adjust(DS);
+    adjust(DS, intermediate_bufsize);
 
-    templ = (float *) malloc (sizeof (float) * period);
-    tempr = (float *) malloc (sizeof (float) * period);
+    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
 
     maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
     buf = (float *) malloc (sizeof (float) * maxx_size);
@@ -79,11 +83,11 @@ Convolotron::cleanup ()
 };
 
 void
-Convolotron::adjust(int DS)
+Convolotron::adjust(int DS, uint32_t period)
 {
 
     DS_state=DS;
-
+    fPERIOD = (float)period;
 
     switch(DS) {
 
@@ -160,7 +164,7 @@ Convolotron::adjust(int DS)
  * Effect output
  */
 void
-Convolotron::out (float * smpsl, float * smpsr)
+Convolotron::out (float * smpsl, float * smpsr, uint32_t period)
 {
     int i, j, xindex;
     float l,lyn;
@@ -373,6 +377,7 @@ Convolotron::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Convolotron 1
         {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0},
@@ -385,7 +390,7 @@ Convolotron::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(29,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(29,npreset-NUM_PRESETS+1, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

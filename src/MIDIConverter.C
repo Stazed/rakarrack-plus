@@ -14,9 +14,11 @@
 #include "global.h"
 
 
-MIDIConverter::MIDIConverter (char *jname)
+MIDIConverter::MIDIConverter (char *jname, double sample_rate)
 {
 
+    fSAMPLE_RATE = float(sample_rate);
+    SAMPLE_RATE = sample_rate;
     velocity = 100;
     channel = 0;
     lanota = -1;
@@ -74,7 +76,7 @@ MIDIConverter::~MIDIConverter ()
 
 
 void
-MIDIConverter::displayFrequency (float ffreq)
+MIDIConverter::displayFrequency (float ffreq, float val_sum, float *freqs, float *lfreqs)
 {
     int i;
     int noteoff = 0;
@@ -135,7 +137,7 @@ MIDIConverter::displayFrequency (float ffreq)
             MIDI_Send_Note_Off (nota_actual);
         }
 
-        MIDI_Send_Note_On (lanota);
+        MIDI_Send_Note_On (lanota, val_sum, freqs,  lfreqs);
         nota_actual = lanota;
     }
 
@@ -160,7 +162,7 @@ MIDIConverter::schmittInit (int size)
 
 
 void
-MIDIConverter::schmittS16LE (int nframes, signed short int *indata)
+MIDIConverter::schmittS16LE (int nframes, signed short int *indata, float val_sum, float *freqs, float *lfreqs)
 {
     int i, j;
     float trigfact = 0.6f;
@@ -200,7 +202,7 @@ MIDIConverter::schmittS16LE (int nframes, signed short int *indata)
             if (endpoint > startpoint) {
                 afreq =
                 fSAMPLE_RATE *((float)tc / (float) (endpoint - startpoint));
-                displayFrequency (afreq);
+                displayFrequency (afreq, val_sum, freqs, lfreqs);
 
             }
         }
@@ -214,7 +216,7 @@ MIDIConverter::schmittFree ()
 };
 
 void
-MIDIConverter::schmittFloat (int nframes, float *indatal, float *indatar)
+MIDIConverter::schmittFloat (int nframes, float *indatal, float *indatar, float val_sum, float *freqs, float *lfreqs)
 {
     int i;
 
@@ -223,12 +225,12 @@ MIDIConverter::schmittFloat (int nframes, float *indatal, float *indatar)
         buf[i] =
         (short) ((TrigVal * indatal[i] + TrigVal * indatar[i]) * 32768);
     }
-    schmittS16LE (nframes, buf);
+    schmittS16LE (nframes, buf, val_sum, freqs, lfreqs);
 };
 
 
 void
-MIDIConverter::MIDI_Send_Note_On (int nota)
+MIDIConverter::MIDI_Send_Note_On (int nota, float val_sum, float *freqs, float *lfreqs)
 {
 
 

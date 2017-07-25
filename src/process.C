@@ -64,8 +64,6 @@ char *statefile;
 char *filetoload;
 char *banktoload;
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
-Pixmap p, mask;
-XWMHints *hints;
 
 RKR::RKR ()
 {
@@ -136,7 +134,8 @@ RKR::RKR ()
 
     rakarrack.get (PrefNom ("Looper Size"), looper_size, 1);
     rakarrack.get (PrefNom ("Calibration"), aFreq, 440.0f);
-    update_freqs(aFreq);
+    RecNote = new Recognize (efxoutl, efxoutr, rtrig, fSample_rate, 440.0, period); // FIXME sample/period - have to declare here before call to update_freqs()
+    RecNote->update_freqs(aFreq);
 
     rakarrack.get (PrefNom ("Vocoder Bands"), VocBands, 32);
     rakarrack.get (PrefNom ("Recognize Trigger"), rtrig, .6f);
@@ -252,15 +251,15 @@ RKR::RKR ()
     Fpre = new FPreset();
     DC_Offsetl = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
     DC_Offsetr = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
-    M_Metronome = new metronome();
+    M_Metronome = new metronome(fSample_rate, period);
     efx_Chorus = new Chorus (efxoutl, efxoutr, fSample_rate);
     efx_Flanger = new Chorus (efxoutl, efxoutr, fSample_rate);
     efx_Rev = new Reverb (efxoutl, efxoutr, fSample_rate, period);
     efx_Echo = new Echo (efxoutl, efxoutr, fSample_rate);
-    efx_Phaser = new Phaser (efxoutl, efxoutr);
+    efx_Phaser = new Phaser (efxoutl, efxoutr, fSample_rate);
     efx_APhaser = new Analog_Phaser(efxoutl, efxoutr, fSample_rate);
-    efx_Distorsion = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);
-    efx_Overdrive = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);
+    efx_Distorsion = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
+    efx_Overdrive = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_EQ2 = new EQ (efxoutl, efxoutr, fSample_rate, period);
     efx_EQ1 = new EQ (efxoutl, efxoutr, fSample_rate, period);
     efx_Compressor = new Compressor (efxoutl, efxoutr, fSample_rate);
@@ -268,23 +267,23 @@ RKR::RKR ()
     efx_Alienwah = new Alienwah (efxoutl, efxoutr, fSample_rate);
     efx_Cabinet = new EQ (efxoutl, efxoutr, fSample_rate, period);
     efx_Pan = new Pan (efxoutl, efxoutr, fSample_rate);
-    efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
+    efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q, period, fSample_rate); // FIXME reversed sample/period
     efx_MusDelay = new MusicDelay (efxoutl, efxoutr, fSample_rate);
-    efx_Gate = new Gate (efxoutl, efxoutr);
-    efx_NewDist = new NewDist(efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);
+    efx_Gate = new Gate (efxoutl, efxoutr, fSample_rate, period);
+    efx_NewDist = new NewDist(efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_FLimiter = new Compressor (efxoutl, efxoutr, fSample_rate);
     efx_Valve = new Valve(efxoutl, efxoutr, fSample_rate, period);
     efx_DFlange = new Dflange(efxoutl,efxoutr, fSample_rate);
     efx_Ring = new Ring(efxoutl,efxoutr, fSample_rate);
     efx_Exciter = new Exciter(efxoutl,efxoutr, fSample_rate, period);
-    efx_MBDist = new MBDist(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);
+    efx_MBDist = new MBDist(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Arpie = new Arpie(efxoutl,efxoutr, fSample_rate);
     efx_Expander = new Expander(efxoutl,efxoutr, fSample_rate, period);
     efx_Shuffle = new Shuffle(efxoutl,efxoutr, fSample_rate, period);
     efx_Synthfilter = new Synthfilter(efxoutl,efxoutr, fSample_rate);
     efx_MBVvol = new MBVvol(efxoutl,efxoutr, fSample_rate, period);
-    efx_Convol = new Convolotron(efxoutl,efxoutr,Con_Down,Con_U_Q,Con_D_Q);
-    efx_Looper = new Looper(efxoutl,efxoutr,looper_size);
+    efx_Convol = new Convolotron(efxoutl,efxoutr,Con_Down,Con_U_Q,Con_D_Q, fSample_rate, period);
+    efx_Looper = new Looper(efxoutl,efxoutr,looper_size,fSample_rate, period);
     efx_RyanWah = new RyanWah(efxoutl,efxoutr, fSample_rate, period);
     efx_RBEcho = new RBEcho(efxoutl,efxoutr, fSample_rate);
     efx_CoilCrafter = new CoilCrafter(efxoutl,efxoutr, fSample_rate, period);
@@ -293,10 +292,10 @@ RKR::RKR ()
     efx_Sustainer = new Sustainer(efxoutl,efxoutr, fSample_rate);
     efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
-    efx_StompBox = new StompBox(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);
-    efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
+    efx_StompBox = new StompBox(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
+    efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,fSample_rate, period, Rev_Down, Rev_U_Q, Rev_D_Q);      // FIXME make consistent sample/period
     efx_Echotron = new Echotron(efxoutl,efxoutr, fSample_rate, period);
-    efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
+    efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, period, fSample_rate);  // FIXME reversed sample/period
     efx_CompBand = new CompBand(efxoutl,efxoutr, fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr, fSample_rate);
     efx_Vibe = new Vibe(efxoutl,efxoutr, fSample_rate);
@@ -307,9 +306,8 @@ RKR::RKR ()
     A_Resample = new Resample(3);
 
     beat = new beattracker(fSample_rate, period);
-    efx_Tuner = new Tuner ();
-    efx_MIDIConverter = new MIDIConverter(jackcliname);
-    RecNote = new Recognize (efxoutl, efxoutr, rtrig, fSample_rate, 440.0, period);
+    efx_Tuner = new Tuner (fSample_rate);
+    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate);
     RC = new RecChord ();
 
 
@@ -846,7 +844,7 @@ RKR::init_rkr ()
 
     efx_FLimiter->Compressor_Change_Preset(0,3);
 
-
+    val_sum = 0.0f;
     old_il_sum = -0.0f;
     old_ir_sum = -0.0f;
 
@@ -897,7 +895,7 @@ RKR::init_rkr ()
 
     }
     RC->cleanup ();
-    reconota = -1;
+    RecNote->reconota = -1;
 
 }
 
@@ -1076,6 +1074,7 @@ RKR::EQ1_setpreset (int npreset)
 
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 3;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
         {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64},
@@ -1086,7 +1085,7 @@ RKR::EQ1_setpreset (int npreset)
     };
 
     if (npreset >= NUM_PRESETS) {
-        Fpre->ReadPreset(0,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(0,npreset-NUM_PRESETS+1, pdata);
         for (int n = 0; n < 10; n++)
             efx_EQ1->changepar (n * 5 + 12, pdata[n]);
         efx_EQ1->changepar (0, pdata[10]);
@@ -1110,6 +1109,7 @@ RKR::EQ2_setpreset (int npreset)
 
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 3;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
         {72, 64, 64, 1077, 64, 64, 8111, 64, 64, 64},
@@ -1122,7 +1122,7 @@ RKR::EQ2_setpreset (int npreset)
 
     if (npreset >= NUM_PRESETS) {
 
-        Fpre->ReadPreset(9,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(9,npreset-NUM_PRESETS+1, pdata);
         for (int n = 0; n < 3; n++) {
             efx_EQ2->changepar (n * 5 + 11, pdata[n * 3]);
             efx_EQ2->changepar (n * 5 + 12, pdata[n * 3 + 1]);
@@ -1485,7 +1485,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
         Control_Gain (origl, origr);
 
-        if(Metro_Bypass) M_Metronome->metronomeout(m_ticks);
+        if(Metro_Bypass) M_Metronome->metronomeout(m_ticks, period);
 
         if((Tap_Bypass) && (Tap_Selection == 4)) {
             beat->detect(efxoutl,efxoutr,period);
@@ -1500,10 +1500,10 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
 
         if (Tuner_Bypass)
-            efx_Tuner->schmittFloat (period, efxoutl, efxoutr);
+            efx_Tuner->schmittFloat (period, efxoutl, efxoutr, RecNote->freqs, RecNote->lfreqs);
 
         if (MIDIConverter_Bypass)
-            efx_MIDIConverter->schmittFloat (period, efxoutl, efxoutr);
+            efx_MIDIConverter->schmittFloat (period, efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
 
 
         if ((Harmonizer_Bypass) && (have_signal)) {
@@ -1511,9 +1511,9 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 if ((efx_Har->PMIDI) || (efx_Har->PSELECT)) {
                     RecNote->schmittFloat (efxoutl, efxoutr,period);
                     reco=1;
-                    if ((reconota != -1) && (reconota != last)) {
+                    if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
                         if(RecNote->afreq > 0.0) {
-                            RC->Vamos (0,efx_Har->Pinterval - 12,reconota);
+                            RC->Vamos (0,efx_Har->Pinterval - 12,RecNote->reconota);
                             ponlast = 1;
                         }
                     }
@@ -1527,10 +1527,10 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 if ((efx_StereoHarm->PMIDI) || (efx_StereoHarm->PSELECT)) {
                     if(!reco) RecNote->schmittFloat (efxoutl, efxoutr,period);
                     reco=1;
-                    if ((reconota != -1) && (reconota != last)) {
+                    if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
                         if(RecNote->afreq > 0.0) {
-                            RC->Vamos (1,efx_StereoHarm->Pintervall - 12,reconota);
-                            RC->Vamos (2,efx_StereoHarm->Pintervalr - 12,reconota);
+                            RC->Vamos (1,efx_StereoHarm->Pintervall - 12,RecNote->reconota);
+                            RC->Vamos (2,efx_StereoHarm->Pintervalr - 12,RecNote->reconota);
                             ponlast = 1;
                         }
                     }
@@ -1542,7 +1542,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
         if((Ring_Bypass) && (efx_Ring->Pafreq)) {
             if(!reco) RecNote->schmittFloat (efxoutl, efxoutr, period);
             reco=1;
-            if ((reconota != -1) && (reconota != last)) {
+            if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
                 if(RecNote->afreq > 0.0) {
                     efx_Ring->Pfreq=lrintf(RecNote->lafreq);
                     ponlast = 1;
@@ -1550,7 +1550,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
             }
         }
 
-        if(ponlast) last=reconota;
+        if(ponlast) RecNote->last=RecNote->reconota;
 
         for (i = 0; i < 10; i++) {
             switch (efx_order[i]) {
@@ -1584,7 +1584,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
             case 6:
                 if (Phaser_Bypass) {
-                    efx_Phaser->out (efxoutl, efxoutr);
+                    efx_Phaser->out (efxoutl, efxoutr, period);
                     Vol_Efx (6, efx_Phaser->outvolume);
                 }
                 break;
@@ -1668,7 +1668,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
             case 16:
                 if (Gate_Bypass) {
-                    efx_Gate->out (efxoutl, efxoutr);
+                    efx_Gate->out (efxoutl, efxoutr, period);
                     Vol2_Efx ();
                 }
                 break;
@@ -1759,14 +1759,14 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
             case 29:
                 if (Convol_Bypass) {
-                    efx_Convol->out(efxoutl, efxoutr);
+                    efx_Convol->out(efxoutl, efxoutr, period);
                     Vol_Efx(29,efx_Convol->outvolume);
                 }
                 break;
 
             case 30:
                 if (Looper_Bypass) {
-                    efx_Looper->out(efxoutl, efxoutr);
+                    efx_Looper->out(efxoutl, efxoutr, period);
                     Vol_Efx(30,efx_Looper->outvolume);
                 }
                 break;
@@ -1896,4 +1896,3 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
     }
 
 }
-

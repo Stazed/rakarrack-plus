@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <jack/midiport.h>
 #include <alsa/asoundlib.h>
+#include "process.h"
 
 
 struct Midi_Event {
@@ -30,7 +31,7 @@ struct Midi_Event {
 class MIDIConverter
 {
 public:
-    MIDIConverter (char *jname);
+    MIDIConverter (char *jname,double sample_rate);
     ~MIDIConverter ();
 
 
@@ -43,7 +44,7 @@ public:
     float nfreq, afreq, freq;
     float TrigVal;
     int cents;
-    void schmittFloat (int nframes, float *indatal, float *indatar);
+    void schmittFloat (int nframes, float *indatal, float *indatar, float val_sum, float *freqs, float *lfreqs);
     void setmidichannel (int channel);
     void panic ();
     void setTriggerAdjust (int val);
@@ -68,16 +69,17 @@ public:
 
 private:
 
-    void displayFrequency (float freq);
+    void displayFrequency (float freq, float val_sum, float *freqs, float *lfreqs);
     void schmittInit (int size);
-    void schmittS16LE (int nframes, signed short int *indata);
+    void schmittS16LE (int nframes, signed short int *indata, float val_sum, float *freqs, float *lfreqs);
     void schmittFree ();
-    void MIDI_Send_Note_On (int note);
+    void MIDI_Send_Note_On (int note, float val_sum, float *freqs, float *lfreqs);
     void MIDI_Send_Note_Off (int note);
 
     int blockSize;
-
-
+    
+    float fSAMPLE_RATE;
+    unsigned int SAMPLE_RATE;
 
 };
 

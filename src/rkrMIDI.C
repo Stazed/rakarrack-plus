@@ -22,7 +22,7 @@
 */
 
 
-#include "global.h"
+#include "process.h"
 
 
 void
@@ -123,10 +123,10 @@ RKR::midievents()
         if (midievent->data.note.channel == HarCh) {
             for (i = 0; i < POLY; i++) {
                 if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0)) {
-                    if (note_active[i] == 0) {
-                        note_active[i] = 1;
-                        rnote[i] = cmdnote;
-                        gate[i] = 1;
+                    if (RC->note_active[i] == 0) {
+                        RC->note_active[i] = 1;
+                        RC->rnote[i] = cmdnote;
+                        RC->gate[i] = 1;
                         RC->MiraChord ();
                         break;
                     }
@@ -136,9 +136,9 @@ RKR::midievents()
 
                 if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo == 0)) {
 
-                    if ((note_active[i]) && (rnote[i] == cmdnote)) {
-                        note_active[i] = 0;
-                        gate[i] = 0;
+                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
+                        RC->note_active[i] = 0;
+                        RC->gate[i] = 0;
                         break;
                     }
 
@@ -147,9 +147,9 @@ RKR::midievents()
 
                 if (midievent->type == SND_SEQ_EVENT_NOTEOFF) {
 
-                    if ((note_active[i]) && (rnote[i] == cmdnote)) {
-                        note_active[i] = 0;
-                        gate[i] = 0;
+                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
+                        RC->note_active[i] = 0;
+                        RC->gate[i] = 0;
                         break;
                     }
 
@@ -770,10 +770,10 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
         if (cmdchan == HarCh) {
             for (i = 0; i < POLY; i++) {
                 if ((type==9) && (cmdvelo != 0)) {
-                    if (note_active[i] == 0) {
-                        note_active[i] = 1;
-                        rnote[i] = cmdnote;
-                        gate[i] = 1;
+                    if (RC->note_active[i] == 0) {
+                        RC->note_active[i] = 1;
+                        RC->rnote[i] = cmdnote;
+                        RC->gate[i] = 1;
                         RC->MiraChord ();
                         break;
                     }
@@ -783,9 +783,9 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
 
                 if ((type==9) && (cmdvelo == 0)) {
 
-                    if ((note_active[i]) && (rnote[i] == cmdnote)) {
-                        note_active[i] = 0;
-                        gate[i] = 0;
+                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
+                        RC->note_active[i] = 0;
+                        RC->gate[i] = 0;
                         break;
                     }
 
@@ -793,9 +793,9 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
 
                 if (type==8) {
 
-                    if ((note_active[i]) && (rnote[i] == cmdnote)) {
-                        note_active[i] = 0;
-                        gate[i] = 0;
+                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
+                        RC->note_active[i] = 0;
+                        RC->gate[i] = 0;
                         break;
                     }
 

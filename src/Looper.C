@@ -28,10 +28,14 @@
 #include <math.h>
 #include "Looper.h"
 
-Looper::Looper (float * efxoutl_, float * efxoutr_, float size)
+Looper::Looper (float * efxoutl_, float * efxoutr_, float size,double samplerate, uint32_t intermediate_bufsize):
+    ticker(samplerate,intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
+    
+    SAMPLE_RATE = samplerate;
+    fSAMPLE_RATE = float(samplerate);
 
     //default values
     Pclear = 1;
@@ -128,12 +132,12 @@ Looper::initdelays ()
  * Effect output
  */
 void
-Looper::out (float * smpsl, float * smpsr)
+Looper::out (float * smpsl, float * smpsr, int period)
 {
     int i;
     float rswell, lswell;
     float ticktock[period];
-    if((Pmetro) && (Pplay) && (!Pstop)) ticker.metronomeout(ticktock);
+    if((Pmetro) && (Pplay) && (!Pstop)) ticker.metronomeout(ticktock, period);
 
     for (i = 0; i < period; i++) {
 
@@ -319,6 +323,7 @@ Looper::setpreset (int npreset)
 {
     const int PRESET_SIZE = 14;
     const int NUM_PRESETS = 2;
+    int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Looper 2 seconds
         {64, 0, 1, 0, 1, 0, 64, 1, 0, 1, 64, 1, 0, 0},
@@ -326,7 +331,7 @@ Looper::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(30,npreset-NUM_PRESETS+1);
+        Fpre->ReadPreset(30,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

@@ -20,6 +20,9 @@ static int tta;
 static int Scope_ON; 
 static int Analyzer_ON; 
 
+Pixmap p, mask;
+XWMHints *hints = NULL;
+
 Analyzer::Analyzer(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
 }
 
@@ -10773,7 +10776,7 @@ void RKRGUI::cb_DB6B(Fl_Check_Button* o, void* v) {
 
 void RKRGUI::cb_Calibration_i(Fl_Counter* o, void*) {
   rkr->aFreq=o->value();
-rkr->update_freqs(rkr->aFreq);
+rkr->RecNote->update_freqs(rkr->aFreq);
 }
 void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Calibration_i(o,v);
@@ -11022,7 +11025,7 @@ Fl_Menu_Item RKRGUI::menu_Wave_Amo[] = {
 };
 
 void RKRGUI::cb_Wave_Down_Qua_i(Fl_Choice* o, void*) {
-  Wave_down_q=(int)o->value();
+  rkr->Wave_down_q=(int)o->value();
 Show_Next_Time();
 }
 void RKRGUI::cb_Wave_Down_Qua(Fl_Choice* o, void* v) {
@@ -11030,7 +11033,7 @@ void RKRGUI::cb_Wave_Down_Qua(Fl_Choice* o, void* v) {
 }
 
 void RKRGUI::cb_Wave_Up_Qua_i(Fl_Choice* o, void*) {
-  Wave_up_q=(int)o->value();
+  rkr->Wave_up_q=(int)o->value();
 Show_Next_Time();
 }
 void RKRGUI::cb_Wave_Up_Qua(Fl_Choice* o, void* v) {
@@ -22493,8 +22496,8 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   Analyzer_ON=0;
   Scope_ON=0;
   
-  Sco->init(rkr->anall, rkr->analr, PERIOD);
-  Analy->init(rkr->anall, rkr->analr, PERIOD, SAMPLE_RATE);
+  Sco->init(rkr->anall, rkr->analr, rkr->period);
+  Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate);
   
   memset(tmp,0, sizeof(tmp));
   sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
@@ -23133,8 +23136,8 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"),rkr->Ste_D_Q);
   
   rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
-  rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
-  rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
+  rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),rkr->Wave_up_q);
+  rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),rkr->Wave_down_q);
   rakarrack.set(rkr->PrefNom("Calibration"),rkr->aFreq);
   rakarrack.set(rkr->PrefNom("Recognize Trigger"),rkr->rtrig);
   
@@ -24651,9 +24654,9 @@ void RKRGUI::MiraConfig() {
   Ste_Downsample->value(rkr->Ste_Down);
   Ste_Down_Qua->value(rkr->Ste_D_Q);
   Ste_Up_Qua->value(rkr->Ste_U_Q);
-  Wave_Amo->value(Wave_res_amount);
-  Wave_Up_Qua->value(Wave_up_q);
-  Wave_Down_Qua->value(Wave_down_q);
+  Wave_Amo->value(rkr->Wave_res_amount);
+  Wave_Up_Qua->value(rkr->Wave_up_q);
+  Wave_Down_Qua->value(rkr->Wave_down_q);
   Calibration->value(rkr->aFreq);
   RTrigger->value(rkr->RecNote->trigfact);
   RC_Opti->value(rkr->RCOpti);
@@ -24756,7 +24759,7 @@ void RKRGUI::MiraConfig() {
   else JackIn->deactivate();
   
   Fl_Menu_Item *p;  
-  unsigned int SR_value=SAMPLE_RATE;
+  unsigned int SR_value=rkr->sample_rate;
   
   for(int j=0; j<menu_Har_Downsample->size(); j++)
    {
@@ -24765,7 +24768,7 @@ void RKRGUI::MiraConfig() {
         switch(j)
          {
               case 0:
-               SR_value = SAMPLE_RATE;
+               SR_value = rkr->sample_rate;
                break;
               case 1:  
                SR_value = 96000;
@@ -24798,7 +24801,7 @@ void RKRGUI::MiraConfig() {
          
          }     
   
-          if((j>0) && (SAMPLE_RATE<=SR_value)) p->deactivate(); else p->activate();
+          if((j>0) && (rkr->sample_rate<=SR_value)) p->deactivate(); else p->activate();
   
   
    }

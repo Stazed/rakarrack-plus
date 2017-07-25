@@ -3,7 +3,6 @@
 #ifndef rakarrack_h
 #define rakarrack_h
 #include <FL/Fl.H>
-#include "global.h"
 #include "process.h"
 #include "config.h"
 #include <FL/Fl_Value_Slider.H>
@@ -16,6 +15,9 @@
 #include <FL/Fl_Help_Dialog.H>
 #include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Color_Chooser.H>
+#include <X11/xpm.h>
+
+class RKR;
 
 class Analyzer : public Fl_Box {
 public:

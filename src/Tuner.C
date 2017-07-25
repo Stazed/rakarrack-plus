@@ -14,9 +14,11 @@
 #include "global.h"
 
 
-Tuner::Tuner ()
+Tuner::Tuner (double sample_rate)
 {
 
+    fSAMPLE_RATE = float(sample_rate);
+    SAMPLE_RATE = sample_rate;
     schmittBuffer = NULL;
     schmittPointer = NULL;
     static const char *englishNotes[12] =
@@ -41,7 +43,7 @@ Tuner::~Tuner ()
 
 
 void
-Tuner::displayFrequency (float ffreq)
+Tuner::displayFrequency (float ffreq, float *freqs, float *lfreqs)
 {
     int i;
 
@@ -90,7 +92,7 @@ Tuner::schmittInit (int size)
 
 
 void
-Tuner::schmittS16LE (int nframes, signed short int *indata)
+Tuner::schmittS16LE (int nframes, signed short int *indata, float *freqs, float *lfreqs)
 {
     int i, j;
     float trigfact = 0.5f;
@@ -129,7 +131,7 @@ Tuner::schmittS16LE (int nframes, signed short int *indata)
             if (endpoint > startpoint) {
                 afreq =
                 fSAMPLE_RATE *((float)tc / (float) (endpoint - startpoint));
-                displayFrequency (afreq);
+                displayFrequency (afreq, freqs, lfreqs);
 
             }
         }
@@ -143,7 +145,7 @@ Tuner::schmittFree ()
 };
 
 void
-Tuner::schmittFloat (int nframes, float *indatal, float *indatar)
+Tuner::schmittFloat (int nframes, float *indatal, float *indatar, float *freqs, float *lfreqs)
 {
     int i;
 
@@ -151,6 +153,6 @@ Tuner::schmittFloat (int nframes, float *indatal, float *indatar)
     for (i = 0; i < nframes; i++) {
         buf[i] = (short) ((indatal[i] + indatar[i]) * 32768);
     }
-    schmittS16LE (nframes, buf);
+    schmittS16LE (nframes, buf, freqs, lfreqs);
 };
 

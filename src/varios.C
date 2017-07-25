@@ -27,6 +27,7 @@
 #include <FL/Fl_Widget.H>
 #include "icono_rakarrack_32x32.xpm"
 #include "global.h"
+#include "process.h"
 
 int
 RKR::Message (int prio, const char *labelwin, const char *message_text)
@@ -125,6 +126,7 @@ RKR::Get_Bogomips()
     char temp[256];
     char *tmp;
     FILE *fp;
+    int maxx_len;
 
     if ((fp = fopen ("/proc/cpuinfo", "r")) != NULL) {
         memset (temp, 0, sizeof (temp));
