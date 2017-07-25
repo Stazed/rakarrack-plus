@@ -26,7 +26,6 @@
 #ifndef LOOPER_H
 #define LOOPER_H
 
-#include "global.h"
 #include "metronome.h"
 
 class Looper

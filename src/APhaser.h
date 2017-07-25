@@ -26,7 +26,6 @@
 
 #ifndef APHASER_H
 #define APHASER_H
-#include "global.h"
 #include "EffectLFO.h"
 
 

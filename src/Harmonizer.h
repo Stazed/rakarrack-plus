@@ -26,7 +26,6 @@
 #ifndef HARMONIZER_H
 #define HARMONIZER_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "smbPitchShift.h"
 #include "Resample.h"

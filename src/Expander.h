@@ -31,7 +31,6 @@
 #ifndef EXPANDER_H
 #define EXPANDER_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 
 class Expander

@@ -23,7 +23,7 @@
 #ifndef SUSTAINER_H
 #define SUSTAINER_H
 
-#include "global.h"
+#include "FPreset.h"
 
 class Sustainer
 {

@@ -22,7 +22,6 @@
 #ifndef STOMPBOX_H
 #define STOMPBOX_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 

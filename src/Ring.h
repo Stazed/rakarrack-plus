@@ -24,8 +24,7 @@
 #ifndef RING_H
 #define RING_H
 
-#include "global.h"
-
+#include "FPreset.h"
 
 class Ring
 {

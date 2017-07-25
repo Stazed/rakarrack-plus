@@ -30,7 +30,6 @@
 #ifndef NOISEGATE_H
 #define NOISEGATE_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 
 class Gate

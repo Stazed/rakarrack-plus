@@ -25,7 +25,6 @@
 #ifndef EQ_H
 #define EQ_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 
 class EQ

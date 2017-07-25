@@ -24,7 +24,6 @@
 #ifndef VOCODER_H
 #define VOCODER_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "Resample.h"
 

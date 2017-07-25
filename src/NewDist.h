@@ -25,7 +25,6 @@
 #ifndef NEWDIST_H
 #define NEWDIST_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 #include "FilterParams.h"

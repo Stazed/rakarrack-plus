@@ -26,7 +26,6 @@
 #ifndef Opticaltrem_H
 #define Opticaltrem_H
 
-#include "global.h"
 #include "EffectLFO.h"
 
 class Opticaltrem
@@ -48,6 +47,7 @@ public:
     float *efxoutr;
 
     uint32_t PERIOD;
+    EffectLFO* lfo;
 
 private:
     int Pdepth;
@@ -60,7 +60,6 @@ private:
     float gl, oldgl;
     float gr, oldgr;
     float rpanning, lpanning;
-    EffectLFO* lfo;
 
     float cSAMPLE_RATE;
 

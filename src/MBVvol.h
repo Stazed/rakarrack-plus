@@ -26,7 +26,6 @@
 #ifndef MBVVOL_H
 #define MBVVOL_H
 
-#include "global.h"
 #include "EffectLFO.h"
 #include "AnalogFilter.h"
 
@@ -57,6 +56,7 @@ public:
     float *highr;
 
     uint32_t PERIOD;
+    EffectLFO* lfo1,*lfo2;
 
 private:
 
@@ -94,7 +94,6 @@ private:
     AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
     float* interpbuf; //buffer for filters
 
-    EffectLFO* lfo1,*lfo2;
 
     class FPreset *Fpre;
 

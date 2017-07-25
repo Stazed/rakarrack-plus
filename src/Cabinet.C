@@ -30,6 +30,7 @@ Cabinet::Cabinet(float * efxoutl_, float * efxoutr_, double sample_frequency, ui
     Cabinet_Preset = 0;
     eq->efxoutl = efxoutl;
     eq->efxoutr = efxoutr;
+    setpreset(Cabinet_Preset);
 }
 
 

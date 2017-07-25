@@ -23,7 +23,6 @@
 #ifndef SEQUENCE_H
 #define SEQUENCE_H
 
-#include "global.h"
 #include "RBFilter.h"
 #include "smbPitchShift.h"
 #include "beattracker.h"

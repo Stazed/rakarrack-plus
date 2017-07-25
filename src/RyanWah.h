@@ -24,7 +24,6 @@
 
 #ifndef RYANWAH_H
 #define RYANWAH_H
-#include "global.h"
 #include "EffectLFO.h"
 #include "RBFilter.h"
 #include "AnalogFilter.h"
@@ -50,6 +49,8 @@ public:
     float *efxoutr;
 
     unsigned int PERIOD;
+    EffectLFO *lfo;		//lfo-ul RyanWah
+    
 private:
 
     void setvolume (int Pvolume);
@@ -62,7 +63,7 @@ private:
     int Pampsns;	        //0/127//how the filter varies according to the input amplitude
     int Pampsnsinv;	//-64/64//bias of the filter
     int Pampsmooth;	//0/127//how smooth the input amplitude changes the filter, also for Pampsinsinv smoothing for wah wah pedal
-    int Prange;		//10/5000Hz//how far filter can deviate.
+    int Prange;		//10/6000Hz//how far filter can deviate.
     int Php;		//-64/64//high pass filter mix
     int Plp;		//-64/64//low pass filter mix
     int Pbp;		//-64/64//Bandpass filter mix
@@ -84,7 +85,6 @@ private:
     float rpanning, lpanning, depth, ampsns, ampsmooth, wahsmooth, fbias, oldfbias, oldfbias1, oldfbias2, q, frequency, maxfreq, base, ibase, minfreq;
     float ms1, lpmix, hpmix, bpmix;	//mean squares
     float centfreq; //testing
-    EffectLFO *lfo;		//lfo-ul RyanWah
     class RBFilter *filterl, *filterr;
     class AnalogFilter *sidechain_filter;
     float* interpbuf; //buffer for filters

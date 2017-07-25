@@ -35,6 +35,7 @@ Sustainer::Sustainer (float * efxoutl_, float * efxoutr_, double sample_rate)
     Psustain = 64;
     fsustain = 0.5f;
     level = 0.5f;
+    Ppreset = 0;
 
     float tmp = 0.01f;  //10 ms decay time on peak detectorS
     prls = 1.0f - (cSAMPLE_RATE/(cSAMPLE_RATE + tmp));
@@ -47,6 +48,8 @@ Sustainer::Sustainer (float * efxoutl_, float * efxoutr_, double sample_rate)
 
     timer = 0;
     hold = (int) (sample_rate*0.0125);  //12.5ms
+    setpreset(Ppreset);
+
     cleanup ();
 };
 
@@ -163,8 +166,7 @@ Sustainer::changepar (int npar, int value)
         input = dB2rap (42.0f * fsustain - 6.0f);
         cthresh = 0.25 + fsustain;
         break;
-
-    };
+    }
 };
 
 int

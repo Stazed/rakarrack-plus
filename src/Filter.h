@@ -25,7 +25,6 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include "global.h"
 #include "Filter_.h"
 #include "AnalogFilter.h"
 #include "FormantFilter.h"

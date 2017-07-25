@@ -24,7 +24,6 @@
 
 #ifndef PHASER_H
 #define PHASER_H
-#include "global.h"
 #include "EffectLFO.h"
 
 class Phaser

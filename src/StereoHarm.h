@@ -26,7 +26,6 @@
 #ifndef STEREOHARM_H
 #define STEREOHARM_H
 
-#include "global.h"
 #include "smbPitchShift.h"
 #include "Resample.h"
 

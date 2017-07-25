@@ -26,7 +26,6 @@
 #ifndef SHUFFLE_H
 #define SHUFFLE_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 
 

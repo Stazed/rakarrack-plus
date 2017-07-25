@@ -25,7 +25,6 @@
 #define CONVOLOTRON_H
 
 #include <sndfile.h>
-#include "global.h"
 #include "Resample.h"
 #include "mayer_fft.h"
 

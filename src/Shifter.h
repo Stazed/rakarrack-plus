@@ -24,7 +24,6 @@
 #ifndef SHIFTER_H
 #define SHIFTER_H
 
-#include "global.h"
 #include "smbPitchShift.h"
 #include "Resample.h"
 

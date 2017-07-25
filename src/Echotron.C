@@ -164,7 +164,7 @@ Echotron::out (float * smpsl, float * smpsr, uint32_t period)
 
                 if((File.iStages[k]>=0)&&(j<ECHOTRON_MAXFILTERS)) {
                     lyn += filterbank[j].l->filterout_s(lxn->delay(l, lxindex, k, 0, 0)) * File.ldata[k];		//filter each tap specified
-                    ryn += filterbank[j].r->filterout_s(rxn->delay(r, lxindex, k, 0, 0)) * File.rdata[k];
+                    ryn += filterbank[j].r->filterout_s(rxn->delay(r, rxindex, k, 0, 0)) * File.rdata[k];
                     j++;
                 } else {
                     lyn += lxn->delay(l, lxindex, k, 0, 0) * File.ldata[k];
@@ -640,6 +640,7 @@ Echotron::changepar (int npar, int value)
         lfo->Pfreq = lrintf(File.subdiv_fmod*tmptempo);
         dlfo->Pfreq = lrintf(File.subdiv_dmod*tmptempo);
         lfo->updateparams (fPERIOD);
+        dlfo->updateparams (fPERIOD);
         initparams=1;
         break;
     case 6:

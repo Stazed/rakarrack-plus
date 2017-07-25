@@ -25,8 +25,7 @@
 #ifndef MUSDELAY_H
 #define MUSDELAY_H
 
-#include "global.h"
-
+#include "FPreset.h"
 
 class MusicDelay
 {

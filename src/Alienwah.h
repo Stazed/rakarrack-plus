@@ -25,7 +25,6 @@
 
 #ifndef ALIENWAH_H
 #define ALIENWAH_H
-#include "global.h"
 #include "EffectLFO.h"
 
 
@@ -54,10 +53,10 @@ public:
     float outvolume;
 
     uint32_t PERIOD;
+    EffectLFO *lfo;		//lfo-ul Alienwah
 
 private:
     //Parametrii Alienwah
-    EffectLFO *lfo;		//lfo-ul Alienwah
     int Pvolume;
     int Ppanning;
     int Pdepth;		//the depth of the Alienwah

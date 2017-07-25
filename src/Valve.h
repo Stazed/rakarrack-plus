@@ -24,7 +24,6 @@
 #ifndef VALVE_H
 #define VALVE_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "HarmonicEnhancer.h"
 

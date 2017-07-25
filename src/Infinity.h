@@ -22,7 +22,6 @@
 
 #ifndef INFINITY_H
 #define INFINITY_H
-#include "global.h"
 #include "RBFilter.h"
 
 #define NUM_INF_BANDS 8

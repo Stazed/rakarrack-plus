@@ -22,7 +22,6 @@
 #ifndef EXCITER_H
 #define EXCITER_H
 
-#include "global.h"
 #include "HarmonicEnhancer.h"
 
 

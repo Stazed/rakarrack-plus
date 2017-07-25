@@ -21,7 +21,6 @@
 #ifndef SHELFBOOST_H
 #define SHELFBOOST_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 
 class ShelfBoost

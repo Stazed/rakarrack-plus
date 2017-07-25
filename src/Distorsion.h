@@ -25,7 +25,6 @@
 #ifndef DISTORSION_H
 #define DISTORSION_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 

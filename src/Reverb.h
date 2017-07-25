@@ -25,8 +25,6 @@
 #ifndef REVERB_H
 #define REVERB_H
 
-
-#include "global.h"
 #include "AnalogFilter.h"
 
 class Reverb

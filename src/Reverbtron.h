@@ -24,7 +24,6 @@
 #ifndef REVERBTRON_H
 #define REVERBTRON_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "Resample.h"
 

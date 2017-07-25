@@ -27,7 +27,6 @@
 #ifndef RBECHO_H
 #define RBECHO_H
 
-#include "global.h"
 #include "delayline.h"
 
 class RBEcho

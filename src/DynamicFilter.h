@@ -25,7 +25,6 @@
 #ifndef DYNAMICFILTER_H
 #define DYNAMICFILTER_H
 
-#include "global.h"
 #include "EffectLFO.h"
 #include "Filter.h"
 
@@ -48,10 +47,10 @@ public:
     float outvolume; 
 
     uint32_t PERIOD;
+    EffectLFO* lfo;		//lfo-ul DynamicFilter
 
 private:
     //Parametrii DynamicFilter
-    EffectLFO* lfo;		//lfo-ul DynamicFilter
     int Pvolume;
     int Ppanning;
     int Pdepth;		//the depth of the lfo of the DynamicFilter

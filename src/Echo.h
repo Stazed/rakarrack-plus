@@ -27,7 +27,6 @@
 #ifndef ECHO_H
 #define ECHO_H
 
-#include "global.h"
 #include "delayline.h"
 
 class Echo

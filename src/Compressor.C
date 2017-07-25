@@ -73,6 +73,8 @@ Compressor::Compressor (float * efxoutl_, float * efxoutr_, double samplerate)
     limit = 0;
 
     cSAMPLE_RATE = 1.0/samplerate;
+    
+    Compressor_Change_Preset(0,0);
 }
 
 Compressor::~Compressor ()
@@ -142,10 +144,8 @@ Compressor::Compressor_Change (int np, int value)
     case 9:
         peak = value;
         break;
-
-
     }
-
+    
     kratio = logf(ratio)/LOG_2;  //  Log base 2 relationship matches slope
     knee = -kpct*thres_db;
 
@@ -163,7 +163,6 @@ Compressor::Compressor_Change (int np, int value)
         outlevel = dB2rap((float)toutput) * makeuplin;
     else
         outlevel = dB2rap((float)toutput);
-
 }
 
 int

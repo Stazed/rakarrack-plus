@@ -332,6 +332,8 @@ RyanWah::changepar (int npar, int value)
         break;
     case 16:
         variq = value;
+        if(!variq)          // when variq is unset, we need to reset q back to default (case 1)
+            q = (float) Pq; // or q continues with variq values until user manually moves slider for resonance (q)
         break;
     case 17:
     	//legacy method of changing Pqm and Pamode, presets use this

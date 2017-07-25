@@ -24,7 +24,6 @@
 #ifndef AUTOPAN_H
 #define AUTOPAN_H
 
-#include "global.h"
 #include "EffectLFO.h"
 
 class Pan
@@ -47,6 +46,7 @@ public:
     float *efxoutr;
 
     uint32_t PERIOD;
+    EffectLFO* lfo;
 
 private:
 
@@ -66,7 +66,6 @@ private:
     float lfol, lfor;
     float ll, lr;
 
-    EffectLFO* lfo;
     class FPreset *Fpre;
 
 };

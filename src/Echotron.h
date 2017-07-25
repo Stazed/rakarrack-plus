@@ -24,7 +24,6 @@
 #ifndef ECHOTRON_H
 #define ECHOTRON_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "EffectLFO.h"
 #include "delayline.h"
@@ -86,6 +85,9 @@ public:
     DlyFile File;
 
     int error;
+    float fPERIOD;
+    EffectLFO *lfo;
+    EffectLFO *dlfo;
 
 private:
 
@@ -101,8 +103,6 @@ private:
 
 
     //User input parameters
-    EffectLFO *lfo;
-    EffectLFO *dlfo;
     int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
     int Ppanning;	//Panning
     int Plrcross;	// L/R Mixing  //
@@ -161,7 +161,6 @@ private:
     float level,fb, rfeedback, lfeedback,levpanl,levpanr, lrcross, ilrcross;
     float tempo_coeff;
 
-    float fPERIOD;
     float fSAMPLE_RATE;
 
     class AnalogFilter *lpfl, *lpfr;	//filters

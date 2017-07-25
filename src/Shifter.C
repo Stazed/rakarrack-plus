@@ -39,6 +39,7 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, in
     hq = Quality;
     adjust(DS,sample_rate);
 
+    nRATIO = 1;
     //temp value till period actually known
     nPERIOD = intermediate_bufsize*nRATIO;
 
@@ -373,10 +374,7 @@ Shifter::changepar (int npar, int value)
         Pwhammy = value;
         whammy = (float) value / 127.0f;
         break;
-
     }
-
-
 };
 
 

@@ -251,93 +251,93 @@ DynamicFilter::changepar (int npar, int value)
         break;
 
     case 10:
-    {
-        Pmode = value;
-        filterpars->defaults ();
+        {
+            Pmode = value;
+            filterpars->defaults ();
         switch (Pmode) {
-        case 0:
-            filterpars->Pcategory = 0;
-            filterpars->Ptype = 2;
-            filterpars->Pfreq = 45;
-            filterpars->Pq = 64;
-            filterpars->Pstages = 1;
-            filterpars->Pgain = 64;
-            break;
-        case 1:
-            filterpars->Pcategory = 2;
-            filterpars->Ptype = 0;
-            filterpars->Pfreq = 72;
-            filterpars->Pq = 64;
-            filterpars->Pstages = 0;
-            filterpars->Pgain = 64;
-            break;
-        case 2:
-            filterpars->Pcategory = 0;
-            filterpars->Ptype = 4;
-            filterpars->Pfreq = 64;
-            filterpars->Pq = 64;
-            filterpars->Pstages = 2;
-            filterpars->Pgain = 64;
-            break;
-        case 3:
-            filterpars->Pcategory = 1;
-            filterpars->Ptype = 0;
-            filterpars->Pfreq = 50;
-            filterpars->Pq = 70;
-            filterpars->Pstages = 1;
-            filterpars->Pgain = 64;
+            case 0:
+                filterpars->Pcategory = 0;
+                filterpars->Ptype = 2;
+                filterpars->Pfreq = 45;
+                filterpars->Pq = 64;
+                filterpars->Pstages = 1;
+                filterpars->Pgain = 64;
+                break;
+            case 1:
+                filterpars->Pcategory = 2;
+                filterpars->Ptype = 0;
+                filterpars->Pfreq = 72;
+                filterpars->Pq = 64;
+                filterpars->Pstages = 0;
+                filterpars->Pgain = 64;
+                break;
+            case 2:
+                filterpars->Pcategory = 0;
+                filterpars->Ptype = 4;
+                filterpars->Pfreq = 64;
+                filterpars->Pq = 64;
+                filterpars->Pstages = 2;
+                filterpars->Pgain = 64;
+                break;
+            case 3:
+                filterpars->Pcategory = 1;
+                filterpars->Ptype = 0;
+                filterpars->Pfreq = 50;
+                filterpars->Pq = 70;
+                filterpars->Pstages = 1;
+                filterpars->Pgain = 64;
 
-            filterpars->Psequencesize = 2;
-            // "I"
-            filterpars->Pvowels[0].formants[0].freq = 34;
-            filterpars->Pvowels[0].formants[0].amp = 127;
-            filterpars->Pvowels[0].formants[0].q = 64;
-            filterpars->Pvowels[0].formants[1].freq = 99;
-            filterpars->Pvowels[0].formants[1].amp = 122;
-            filterpars->Pvowels[0].formants[1].q = 64;
-            filterpars->Pvowels[0].formants[2].freq = 108;
-            filterpars->Pvowels[0].formants[2].amp = 112;
-            filterpars->Pvowels[0].formants[2].q = 64;
-            // "A"
-            filterpars->Pvowels[1].formants[0].freq = 61;
-            filterpars->Pvowels[1].formants[0].amp = 127;
-            filterpars->Pvowels[1].formants[0].q = 64;
-            filterpars->Pvowels[1].formants[1].freq = 71;
-            filterpars->Pvowels[1].formants[1].amp = 121;
-            filterpars->Pvowels[1].formants[1].q = 64;
-            filterpars->Pvowels[1].formants[2].freq = 99;
-            filterpars->Pvowels[1].formants[2].amp = 117;
-            filterpars->Pvowels[1].formants[2].q = 64;
-            break;
-        case 4:
-            filterpars->Pcategory = 1;
-            filterpars->Ptype = 0;
-            filterpars->Pfreq = 64;
-            filterpars->Pq = 70;
-            filterpars->Pstages = 1;
-            filterpars->Pgain = 64;
+                filterpars->Psequencesize = 2;
+                // "I"
+                filterpars->Pvowels[0].formants[0].freq = 34;
+                filterpars->Pvowels[0].formants[0].amp = 127;
+                filterpars->Pvowels[0].formants[0].q = 64;
+                filterpars->Pvowels[0].formants[1].freq = 99;
+                filterpars->Pvowels[0].formants[1].amp = 122;
+                filterpars->Pvowels[0].formants[1].q = 64;
+                filterpars->Pvowels[0].formants[2].freq = 108;
+                filterpars->Pvowels[0].formants[2].amp = 112;
+                filterpars->Pvowels[0].formants[2].q = 64;
+                // "A"
+                filterpars->Pvowels[1].formants[0].freq = 61;
+                filterpars->Pvowels[1].formants[0].amp = 127;
+                filterpars->Pvowels[1].formants[0].q = 64;
+                filterpars->Pvowels[1].formants[1].freq = 71;
+                filterpars->Pvowels[1].formants[1].amp = 121;
+                filterpars->Pvowels[1].formants[1].q = 64;
+                filterpars->Pvowels[1].formants[2].freq = 99;
+                filterpars->Pvowels[1].formants[2].amp = 117;
+                filterpars->Pvowels[1].formants[2].q = 64;
+                break;
+            case 4:
+                filterpars->Pcategory = 1;
+                filterpars->Ptype = 0;
+                filterpars->Pfreq = 64;
+                filterpars->Pq = 70;
+                filterpars->Pstages = 1;
+                filterpars->Pgain = 64;
 
-            filterpars->Psequencesize = 2;
-            filterpars->Pnumformants = 2;
-            filterpars->Pvowelclearness = 0;
+                filterpars->Psequencesize = 2;
+                filterpars->Pnumformants = 2;
+                filterpars->Pvowelclearness = 0;
 
-            filterpars->Pvowels[0].formants[0].freq = 70;
-            filterpars->Pvowels[0].formants[0].amp = 127;
-            filterpars->Pvowels[0].formants[0].q = 64;
-            filterpars->Pvowels[0].formants[1].freq = 80;
-            filterpars->Pvowels[0].formants[1].amp = 122;
-            filterpars->Pvowels[0].formants[1].q = 64;
+                filterpars->Pvowels[0].formants[0].freq = 70;
+                filterpars->Pvowels[0].formants[0].amp = 127;
+                filterpars->Pvowels[0].formants[0].q = 64;
+                filterpars->Pvowels[0].formants[1].freq = 80;
+                filterpars->Pvowels[0].formants[1].amp = 122;
+                filterpars->Pvowels[0].formants[1].q = 64;
 
-            filterpars->Pvowels[1].formants[0].freq = 20;
-            filterpars->Pvowels[1].formants[0].amp = 127;
-            filterpars->Pvowels[1].formants[0].q = 64;
-            filterpars->Pvowels[1].formants[1].freq = 100;
-            filterpars->Pvowels[1].formants[1].amp = 121;
-            filterpars->Pvowels[1].formants[1].q = 64;
-            break; 
-        };
-        reinitfilter ();
-     }
+                filterpars->Pvowels[1].formants[0].freq = 20;
+                filterpars->Pvowels[1].formants[0].amp = 127;
+                filterpars->Pvowels[1].formants[0].q = 64;
+                filterpars->Pvowels[1].formants[1].freq = 100;
+                filterpars->Pvowels[1].formants[1].amp = 121;
+                filterpars->Pvowels[1].formants[1].q = 64;
+                break; 
+            };
+            reinitfilter ();
+        }
     };
 };
 

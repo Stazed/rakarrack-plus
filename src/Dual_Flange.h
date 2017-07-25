@@ -30,7 +30,6 @@
 #ifndef DUAL_FLANGE_H
 #define DUAL_FLANGE_H
 
-#include "global.h"
 #include "EffectLFO.h"
 #include "delayline.h"
 
@@ -51,6 +50,7 @@ public:
     float *efxoutr;
 
     uint32_t PERIOD;
+    EffectLFO *lfo;		//lfo Flanger
 
 private:
     //Parameters
@@ -81,7 +81,6 @@ private:
     float fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
     float fzero;		//Enable through-zero flanging
     float logmax;
-    EffectLFO *lfo;		//lfo Flanger
 
     //Internally used variables
     int maxx_delay;

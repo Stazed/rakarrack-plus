@@ -26,7 +26,6 @@
 #ifndef HARM_ENHANCER_H
 #define HARM_ENHANCER_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "Compressor.h"
 

@@ -29,7 +29,6 @@
 
 #ifndef SYNTHFILTER_H
 #define SYNTHFILTER_H
-#include "global.h"
 #include "EffectLFO.h"
 
 
@@ -51,6 +50,7 @@ public:
     float *efxoutr;
 
     uint32_t PERIOD;
+    EffectLFO* lfo;	         //Filter modulator
 
 private:
 
@@ -90,7 +90,6 @@ private:
     float Rmin;	// 2N5457 typical on resistance at Vgs = 0
     float Rmax;	// Resistor parallel to FET
     float C, Clp, Chp;	        // Capacitor
-    EffectLFO* lfo;	         //Filter modulator
 
     class FPreset *Fpre;
 

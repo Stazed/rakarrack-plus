@@ -26,7 +26,6 @@
 #ifndef MBDIST_H
 #define MBDIST_H
 
-#include "global.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 

@@ -24,7 +24,6 @@
 
 #ifndef CHORUS_H
 #define CHORUS_H
-#include "global.h"
 #include "EffectLFO.h"
 #include "delayline.h"
 
@@ -47,10 +46,10 @@ public:
     float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
 
     uint32_t PERIOD;
+    EffectLFO* lfo;		//lfo-ul chorus
     
 private:
     //Parametrii Chorus
-    EffectLFO* lfo;		//lfo-ul chorus
     int Pvolume;
     int Ppanning;
     int Pdepth;		//the depth of the Chorus(ms)

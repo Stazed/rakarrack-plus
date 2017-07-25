@@ -26,7 +26,6 @@
 #ifndef Vibe_H
 #define Vibe_H
 
-#include "global.h"
 #include "EffectLFO.h"
 
 class Vibe
@@ -49,6 +48,7 @@ public:
     float *efxoutl;
     float *efxoutr;
     uint32_t PERIOD;
+    EffectLFO* lfo;
 
 private:
     int Pwidth;
@@ -64,7 +64,6 @@ private:
     float rpanning, lpanning;
     float flrcross, fcross;
     float fb;
-    EffectLFO* lfo;
 
     float Ra, Rb, b, dTC, dRCl, dRCr, lampTC, ilampTC, minTC, alphal, alphar, stepl, stepr, oldstepl, oldstepr;
     float fbr, fbl;

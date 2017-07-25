@@ -23,7 +23,6 @@
 #ifndef COILCRAFTER_H
 #define COILCRAFTER_H
 
-#include "global.h"
 #include "HarmonicEnhancer.h"
 #include "AnalogFilter.h"
 
