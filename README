@@ -1,3 +1,110 @@
+This fork is from: 
+    https://github.com/ssj71/rakarrack.git
+
+The original was an incomplete attempt at merging the rkrlv2 plugins into the original rakarrack project.
+This project is to complete the merging.
+
+The current build is also a merging of autotools and cmake :).
+
+To build rakarrack:
+From base directory:
+
+./autogen.sh
+ mkdir Release
+ cd Release
+ ../configure CPPFLAGS=-DNDEBUG
+ make
+ make install (as root)
+ 
+ To build rkrlv2 plugins:
+ From base directory:
+ 
+ mkdir buildlv2
+ cd buildlv2
+ cmake ..
+ make
+ make install (as root)
+ 
+
+----------------------------------------------------------
+Original from rkrlv2 project https://github.com/ssj71/rkrlv2.git
+
+This project is the rakarrack effects ported to LV2 plugins.
+The ports are done such that hopefully when rakarrack gets
+an active maintainer these will get merged into the original
+project. This was forked from version 6.1 (git commit 7dba0c4bccf88740c56867568d5b218b4a131499).
+
+To install simply download the files and open a terminal in the extracted directory
+and execute:
+
+ mkdir build
+ cd build
+ cmake ..
+ make
+ sudo make install
+
+This will also install carla project files. These project files are the plugin
+equivalent of the preset banks in the standalone rakarrack version. These must be in
+/usr/share/rkr.lv2/ for reverbtron or echotron to work properly. 
+
+EFFECTS (X - done, W - won't do, + - done with missing features)
+[X] Lineal EQ
+[X] Compressor
+[X] Distortion 
+[W] Overdrive - exact same engine as distortion, but has fewer controls, presets were added to dist.
+[X] Echo 
+[X] Chorus 
+[X] Phaser
+[X] Analog Phaser 
+[W] Flanger - this is identical to the chorus, presets from this will be included there
+[X] Reverb 
+[X] Parametric EQ 
+[X] Cabinet Emulation - created new class for it 
+[X] AutoPan/Stereo Expander 
+[+] Harmonizer - still need to do midi mode version
+[X] Musical Delay 
+[X] Noise Gate - Direct copy of Steve Harris's Gate ladspa plugin
+[X] WahWah 
+[X] AlienWah 
+[X] Derelict 
+[X] Valve 
+[X] Dual Flange 
+[X] Ring 
+[X] Exciter 
+[X] DistBand 
+[X] Arpie 
+[X] Expander 
+[X] Shuffle 
+[X] Synthfilter 
+[X] VaryBand 
+[W] Convolotron - these require special input files, adding complexity. other excellent lv2 convolution engines already exist
+[W] Looper - other good lv2 loopers exist
+[X] MuTroMojo 
+[X] Echoverse 
+[X] CoilCrafter 
+[X] ShelfBoost 
+[X] Vocoder 
+[X] Sustainer 
+[X] Sequence 
+[X] Shifter 
+[X] StompBox 
+[X] Reverbtron 
+[X] Echotron 
+[+] StereoHarm - no midi
+[X] CompBand 
+[X] Opticaltrem 
+[X] Vibe 
+[X] Infinity
+
+__fx in preset bank 1__
+stompbox
+echotron
+reverbtron
+
+
+Here is the original rakarrack README:
+
+
 This app was born after an informal conversation about effects for guitar using GNU/linux.
 The major part of this apps are discontinued or simply not have new versions after few
 years. Josep Andreu say on the IRC chat "I can made an app based on the effects set 

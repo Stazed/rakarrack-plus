@@ -1,0 +1,134 @@
+@prefix atom: <http://lv2plug.in/ns/ext/atom#> .
+@prefix lv2: <http://lv2plug.in/ns/lv2core#> .
+@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix state: <http://lv2plug.in/ns/ext/state#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://rakarrack.sourceforge.net/effects.html#eql:preset:plain> 
+	a pset:Preset ;
+	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eql> ;
+	rdfs:label "Plain" ;
+	lv2:port [
+		lv2:symbol "GAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "Q" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ31" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ63" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ125" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ250" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ500" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ1" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ2" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ4" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ8" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ16" ;
+		pset:value 0.0
+	] .
+
+<http://rakarrack.sourceforge.net/effects.html#eql:preset:pop> 
+	a pset:Preset ;
+	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eql> ;
+	rdfs:label "Pop" ;
+	lv2:port [
+		lv2:symbol "GAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "Q" ;
+		pset:value -22.0
+	] , [
+		lv2:symbol "HZ31" ;
+		pset:value 14.0
+	] , [
+		lv2:symbol "HZ63" ;
+		pset:value 7.0
+	] , [
+		lv2:symbol "HZ125" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ250" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ500" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ1" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ2" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ4" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ8" ;
+		pset:value 7.0
+	] , [
+		lv2:symbol "KHZ16" ;
+		pset:value 16.0
+	] .
+
+<http://rakarrack.sourceforge.net/effects.html#eql:preset:jazz> 
+	a pset:Preset ;
+	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eql> ;
+	rdfs:label "Jazz" ;
+	lv2:port [
+		lv2:symbol "GAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "Q" ;
+		pset:value -24.0
+	] , [
+		lv2:symbol "HZ31" ;
+		pset:value 7.0
+	] , [
+		lv2:symbol "HZ63" ;
+		pset:value 4.0
+	] , [
+		lv2:symbol "HZ125" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ250" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HZ500" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ1" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ2" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ4" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "KHZ8" ;
+		pset:value 2.0
+	] , [
+		lv2:symbol "KHZ16" ;
+		pset:value 5.0
+	] .
+

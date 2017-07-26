@@ -1,0 +1,160 @@
+@prefix doap:  <http://usefulinc.com/ns/doap#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix units: <http://lv2plug.in/ns/extensions/units#> .
+@prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
+@prefix param: <http://lv2plug.in/ns/ext/parameters#> .
+@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
+@prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
+@prefix lv2midi: <http://lv2plug.in/ns/ext/midi#> .
+
+@prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
+
+# <http://rakarrack.sourceforge.net/effects.html#midi_converter_ui>
+# 	a ui:X11UI ;
+# 	ui:binary <rkrlv2_ui.so> ;
+# 	lv2:extensionData ui:idleInterface ;
+# 	.
+
+<http://rakarrack.sourceforge.net/effects.html#midi_converter>
+        a lv2:Plugin, lv2:ConverterPlugin ;
+        doap:name "rkr Midi Converter" ;
+        doap:description "Audio to Midi conversion";
+        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:minorVersion 0 ;
+        lv2:microVersion 0 ;
+        rdfs:comment "An experimental monophonic midi converter." ;
+        lv2:optionalFeature lv2:hardRTCapable ;
+#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#midi_converter_ui> ;
+
+        lv2:port [
+                a lv2:InputPort, lv2:AudioPort ;
+                lv2:index 0 ;
+                lv2:symbol "INPUT_L" ;
+                lv2:name "Audio In L" ;
+        ] ;
+        lv2:port [
+                a lv2:InputPort, lv2:AudioPort ;
+                lv2:index 1 ;
+                lv2:symbol "INPUT_R" ;
+                lv2:name "Audio In R" ;
+        ] ;
+        lv2:port [
+                a lv2:OutputPort, lv2:AudioPort ;
+                lv2:index 2 ;
+                lv2:symbol "OUTPUT_L" ;
+                lv2:name "Audio Out L" ;
+        ] ;
+        lv2:port [
+                a lv2:OutputPort, lv2:AudioPort ;
+                lv2:index 3 ;
+                lv2:symbol "OUTPUT_R" ;
+                lv2:name "Audio Out R" ;
+        ] ;
+        lv2:port [
+                a lv2:InputPort, atom:AtomPort ;
+                lv2:index 4 ;
+                lv2:symbol "MIDI_IN" ;
+                lv2:name "MIDI In" ;
+                atom:bufferType atom:Sequence ;
+                atom:supports lv2midi:MidiEvent ;
+        ] ;        
+        lv2:port [
+                a lv2:OutputPort, atom:AtomPort ;
+                lv2:index 5 ;
+                lv2:symbol "MIDI_OUT" ;
+                lv2:name "MIDI Out" ;
+                atom:bufferType atom:Sequence ;
+                atom:supports lv2midi:MidiEvent ;
+        ] ;        
+        lv2:port [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 6 ;
+                lv2:symbol "BYPASS" ;
+                lv2:name "Bypass" ;
+                lv2:default 0 ;
+                lv2:minimum 0 ;
+                lv2:maximum 1 ;
+                lv2:portProperty lv2:integer ;
+                lv2:portProperty lv2:toggled ;
+        ], [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 7 ;
+                lv2:symbol "GAIN" ;
+                lv2:name "Gain" ;
+                lv2:default 0 ;
+                lv2:minimum -50 ;
+                lv2:maximum 50 ;
+                lv2:portProperty lv2:integer ;
+        ], [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 8 ;
+                lv2:symbol "TRIGGER" ;
+                lv2:name "Trigger" ;
+                lv2:default 40 ;
+                lv2:minimum 2 ;
+                lv2:maximum 60 ;
+                lv2:portProperty lv2:integer ;
+        ], [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 9 ;
+                lv2:symbol "VELOCITY" ;
+                lv2:name "Velocity" ;
+                lv2:default 75 ;
+                lv2:minimum 1 ;
+                lv2:maximum 100 ;
+                lv2:portProperty lv2:integer ;
+        ], [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 10 ;
+                lv2:symbol "CHANNEL" ;
+                lv2:name "Channel" ;
+                lv2:default 1 ;
+                lv2:minimum 1 ;
+                lv2:maximum 16 ;
+                lv2:portProperty lv2:integer ;
+        ], [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 11 ;
+                lv2:symbol "OCTAVE" ;
+                lv2:name "Octave" ;
+                lv2:default 0 ;
+                lv2:minimum -2 ;
+                lv2:maximum 2 ;
+                lv2:portProperty lv2:integer ;
+                units:unit units:semitone12TET ;
+        ], [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 12 ;
+                lv2:symbol "FFT" ;
+                lv2:name "Use FFT" ;
+                lv2:default 0 ;
+                lv2:minimum 0 ;
+                lv2:maximum 1 ;
+                lv2:portProperty lv2:integer ;
+                lv2:portProperty lv2:toggled ;
+        ], [
+                a lv2:InputPort, lv2:ControlPort ;
+                lv2:index 13 ;
+                lv2:symbol "PANIC" ;
+                lv2:name "Panic" ;
+                lv2:default 0 ;
+                lv2:minimum 0 ;
+                lv2:maximum 1 ;
+                lv2:portProperty lv2:integer ;
+                lv2:portProperty lv2:toggled ;
+        ], [
+                a lv2:OutputPort, lv2:ControlPort ;
+                lv2:index 14 ;
+                lv2:symbol "NOTE" ;
+                lv2:name "Note Register" ;
+                lv2:default 0 ;
+                lv2:minimum 0 ;
+                lv2:maximum 1 ;
+                lv2:portProperty lv2:integer ;
+                lv2:portProperty lv2:toggled ;
+        ] ;
+	.
+   

@@ -1,0 +1,115 @@
+@prefix atom: <http://lv2plug.in/ns/ext/atom#> .
+@prefix lv2: <http://lv2plug.in/ns/lv2core#> .
+@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix state: <http://lv2plug.in/ns/ext/state#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://rakarrack.sourceforge.net/effects.html#eqp:preset:plain> 
+	a pset:Preset ;
+	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eqp> ;
+	rdfs:label "Plain" ;
+	lv2:port [
+		lv2:symbol "GAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LFREQ" ;
+		pset:value 72.0
+	] , [
+		lv2:symbol "LGAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LQ" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "MFREQ" ;
+		pset:value 1077.0
+	] , [
+		lv2:symbol "MGAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "MQ" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HFREQ" ;
+		pset:value 8111.0
+	] , [
+		lv2:symbol "HGAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HQ" ;
+		pset:value 0.0
+	] .
+
+<http://rakarrack.sourceforge.net/effects.html#eqp:preset:pop> 
+	a pset:Preset ;
+	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eqp> ;
+	rdfs:label "Pop" ;
+	lv2:port [
+		lv2:symbol "GAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LFREQ" ;
+		pset:value 72.0
+	] , [
+		lv2:symbol "LGAIN" ;
+		pset:value 9.0
+	] , [
+		lv2:symbol "LQ" ;
+		pset:value -19.0
+	] , [
+		lv2:symbol "MFREQ" ;
+		pset:value 1077.0
+	] , [
+		lv2:symbol "MGAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "MQ" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HFREQ" ;
+		pset:value 8111.0
+	] , [
+		lv2:symbol "HGAIN" ;
+		pset:value 5.0
+	] , [
+		lv2:symbol "HQ" ;
+		pset:value -26.0
+	] .
+	
+<http://rakarrack.sourceforge.net/effects.html#eqp:preset:jazz> 
+	a pset:Preset ;
+	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eqp> ;
+	rdfs:label "Jazz" ;
+	lv2:port [
+		lv2:symbol "GAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LFREQ" ;
+		pset:value 72.0
+	] , [
+		lv2:symbol "LGAIN" ;
+		pset:value 7.0
+	] , [
+		lv2:symbol "LQ" ;
+		pset:value -26.0
+	] , [
+		lv2:symbol "MFREQ" ;
+		pset:value 1077.0
+	] , [
+		lv2:symbol "MGAIN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "MQ" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "HFREQ" ;
+		pset:value 10580.0
+	] , [
+		lv2:symbol "HGAIN" ;
+		pset:value 5.0
+	] , [
+		lv2:symbol "HQ" ;
+		pset:value -26.0
+	] .
