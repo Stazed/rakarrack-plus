@@ -29,21 +29,19 @@
 class Phaser
 {
 public:
-    Phaser (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Phaser ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out (float * smpsl, float * smpsr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
     int Ppreset;
     float outvolume;
 
     float *efxoutl;
     float *efxoutr;
-
-    uint32_t PERIOD;
-    EffectLFO *lfo;     //Phaser modulator
 
 private:
     void setvolume (int Pvolume);
@@ -71,6 +69,10 @@ private:
     float panning, fb, depth, lrcross, fbl, fbr, phase;
     float *oldl, *oldr;
     float oldlgain, oldrgain;
+    
+    uint32_t PERIOD;
+    float fPERIOD;
+    EffectLFO *lfo;     //Phaser modulator
 
     class FPreset *Fpre;
 

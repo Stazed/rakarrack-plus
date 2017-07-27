@@ -28,7 +28,7 @@
 #include "FPreset.h"
 #define PHASER_LFO_SHAPE 2
 
-Phaser::Phaser (float * efxoutl_, float * efxoutr_, double sample_rate)
+Phaser::Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
@@ -39,7 +39,8 @@ Phaser::Phaser (float * efxoutl_, float * efxoutr_, double sample_rate)
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
-    PERIOD = 256; //best guess until the effect starts running;
+    PERIOD = intermediate_bufsize; // will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
+    fPERIOD = intermediate_bufsize;// will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
     setpreset (Ppreset);
     cleanup ();
 };
@@ -54,7 +55,7 @@ Phaser::~Phaser ()
  * Effect output
  */
 void
-Phaser::out (float * smpsl, float * smpsr, uint32_t period)
+Phaser::out (float * smpsl, float * smpsr)
 {
     unsigned int i;
     int j;
@@ -81,8 +82,8 @@ Phaser::out (float * smpsl, float * smpsr, uint32_t period)
     else if (rgain < 0.0)
         rgain = 0.0f;
 
-    for (i = 0; i < period; i++) {
-        float x = (float) i / ((float)period);
+    for (i = 0; i < PERIOD; i++) {
+        float x = (float) i / fPERIOD;
         float x1 = 1.0f - x;
         float gl = lgain * x + oldlgain * x1;
         float gr = rgain * x + oldrgain * x1;
@@ -120,7 +121,7 @@ Phaser::out (float * smpsl, float * smpsr, uint32_t period)
     oldrgain = rgain;
 
     if (Poutsub != 0)
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         };
@@ -142,6 +143,14 @@ Phaser::cleanup ()
         oldr[i] = 0.0;
     };
 };
+
+void
+Phaser::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    fPERIOD = period;
+    lfo->updateparams(period);
+}
 
 /*
  * Parameter control
