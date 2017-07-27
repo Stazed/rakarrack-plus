@@ -1,10 +1,7 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0303 
 header_name {.h} 
 code_name {.cxx}
-decl {\#include "global.h"} {public local
-} 
-
 decl {\#include "process.h"} {public local
 } 
 
@@ -39,6 +36,12 @@ decl {\#include <FL/Fl_File_Chooser.H>} {public global
 } 
 
 decl {\#include <FL/Fl_Color_Chooser.H>} {public global
+} 
+
+decl {\#include <X11/xpm.h>} {public global
+} 
+
+decl {class RKR;  // forward declaration} {public global
 } 
 
 decl {\#include "icono_rakarrack_128x128.xpm"} {private local
@@ -89,10 +92,16 @@ decl {int nt;} {private local
 decl {int tta;} {private local
 } 
 
-decl {int Scope_ON;} {private local
+decl {int Scope_ON;} {selected private local
 } 
 
 decl {int Analyzer_ON;} {private local
+} 
+
+decl {Pixmap p, mask;} {private local
+} 
+
+decl {XWMHints *hints = NULL;} {private local
 } 
 
 class Analyzer {: {public Fl_Box}
@@ -895,7 +904,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {785 750 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {900 479 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -4414,14 +4423,14 @@ findpos(16,(int)o->value(),o);}
           label Preset
           user_data 12016
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12016))rkr->efx_Gate->Gate_Change_Preset((int) o->value());
+if((ud==0)||(ud==12016))rkr->efx_Gate->setpreset((int) o->value());
 gate_ATime->value(rkr->efx_Gate->getpar(3));
 gate_RTime->value(rkr->efx_Gate->getpar(4));
 gate_range->value(rkr->efx_Gate->getpar(2));
 gate_threshold->value(rkr->efx_Gate->getpar(1));
 gate_hold->value(rkr->efx_Gate->getpar(7));
 gate_HPF->value(rkr->efx_Gate->getpar(6));
-gate_LPF->value(rkr->efx_Gate->getpar(5));}
+gate_LPF->value(rkr->efx_Gate->getpar(5));} open
           xywh {239 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -4439,43 +4448,43 @@ gate_LPF->value(rkr->efx_Gate->getpar(5));}
         }
         Fl_Value_Slider gate_ATime {
           label {A. Time}
-          callback {rkr->efx_Gate->Gate_Change(3,(int)o->value());}
+          callback {rkr->efx_Gate->changepar(3,(int)o->value());}
           xywh {213 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 250 step 1 value 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider gate_RTime {
           label {R. Time}
-          callback {rkr->efx_Gate->Gate_Change(4, (int) o->value());}
+          callback {rkr->efx_Gate->changepar(4, (int) o->value());}
           xywh {212 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 250 step 1 value 120 textcolor 7
           class SliderW
         }
         Fl_Value_Slider gate_range {
           label Range
-          callback {rkr->efx_Gate->Gate_Change(2, (int) o->value());}
+          callback {rkr->efx_Gate->changepar(2, (int) o->value());}
           xywh {212 294 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -90 maximum 0 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider gate_threshold {
           label Thrhold
-          callback {rkr->efx_Gate->Gate_Change(1, (int)o->value());}
+          callback {rkr->efx_Gate->changepar(1, (int)o->value());}
           xywh {212 316 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider gate_hold {
           label Hold
-          callback {rkr->efx_Gate->Gate_Change(7,(int)o->value());}
+          callback {rkr->efx_Gate->changepar(7,(int)o->value());}
           xywh {212 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 500 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider gate_LPF {
           label LPF
-          callback {rkr->efx_Gate->Gate_Change(5, (int)o->value());}
+          callback {rkr->efx_Gate->changepar(5, (int)o->value());}
           xywh {212 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
           class SliderW
         }
         Fl_Value_Slider gate_HPF {
           label HPF
-          callback {rkr->efx_Gate->Gate_Change(6, (int)o->value());}
+          callback {rkr->efx_Gate->changepar(6, (int)o->value());}
           xywh {212 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
           class SliderW
         }
@@ -11728,7 +11737,7 @@ Show_Next_Time();}
           Fl_Counter Calibration {
             label {Tuner Calibration A4 }
             callback {rkr->aFreq=o->value();
-rkr->update_freqs(rkr->aFreq);} selected
+rkr->RecNote->update_freqs(rkr->aFreq);}
             xywh {120 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
           }
           Fl_Counter RTrigger {
@@ -11993,14 +12002,14 @@ Show_Next_Time();} open
           }
           Fl_Choice Wave_Down_Qua {
             label Down
-            callback {Wave_down_q=(int)o->value();
+            callback {rkr->Wave_down_q=(int)o->value();
 Show_Next_Time();}
             xywh {252 497 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
           } {}
           Fl_Choice Wave_Up_Qua {
             label Up
-            callback {Wave_up_q=(int)o->value();
+            callback {rkr->Wave_up_q=(int)o->value();
 Show_Next_Time();}
             xywh {345 497 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
             code0 {o->menu(menu_Upr_Qual);}
@@ -12579,8 +12588,8 @@ tta=0;
 Analyzer_ON=0;
 Scope_ON=0;
 
-Sco->init(rkr->anall, rkr->analr, PERIOD);
-Analy->init(rkr->anall, rkr->analr, PERIOD, SAMPLE_RATE);
+Sco->init(rkr->anall, rkr->analr, rkr->period);
+Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate);
 
 memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
@@ -13049,7 +13058,8 @@ rkr->M_table[i].preset=f-3000;
 
 }} {}
   }
-  Function {save_stat(int whati)} {} {
+  Function {save_stat(int whati)} {open
+  } {
     code {int i,k;
 char temp1[128];
 
@@ -13214,8 +13224,8 @@ rakarrack.set(rkr->PrefNom("StereoHarm Up Quality"),rkr->Ste_U_Q);
 rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"),rkr->Ste_D_Q);
 
 rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
-rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),Wave_up_q);
-rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),Wave_down_q);
+rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),rkr->Wave_up_q);
+rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),rkr->Wave_down_q);
 rakarrack.set(rkr->PrefNom("Calibration"),rkr->aFreq);
 rakarrack.set(rkr->PrefNom("Recognize Trigger"),rkr->rtrig);
 
@@ -14654,7 +14664,8 @@ JackIn->clear();
    
    free(iports);} {}
   }
-  Function {MiraConfig()} {} {
+  Function {MiraConfig()} {open
+  } {
     code {int i = 1;
 int k;
 while (BMidiIn->text(i) != NULL)
@@ -14725,9 +14736,9 @@ Voc_Up_Qua->value(rkr->Voc_U_Q);
 Ste_Downsample->value(rkr->Ste_Down);
 Ste_Down_Qua->value(rkr->Ste_D_Q);
 Ste_Up_Qua->value(rkr->Ste_U_Q);
-Wave_Amo->value(Wave_res_amount);
-Wave_Up_Qua->value(Wave_up_q);
-Wave_Down_Qua->value(Wave_down_q);
+Wave_Amo->value(rkr->Wave_res_amount);
+Wave_Up_Qua->value(rkr->Wave_up_q);
+Wave_Down_Qua->value(rkr->Wave_down_q);
 Calibration->value(rkr->aFreq);
 RTrigger->value(rkr->RecNote->trigfact);
 RC_Opti->value(rkr->RCOpti);
@@ -14830,7 +14841,7 @@ if (rkr->aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();
 
 Fl_Menu_Item *p;  
-unsigned int SR_value=SAMPLE_RATE;
+unsigned int SR_value=rkr->sample_rate;
 
 for(int j=0; j<menu_Har_Downsample->size(); j++)
  {
@@ -14839,7 +14850,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
       switch(j)
        {
             case 0:
-             SR_value = SAMPLE_RATE;
+             SR_value = rkr->sample_rate;
              break;
             case 1:  
              SR_value = 96000;
@@ -14872,7 +14883,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
        
        }     
 
-        if((j>0) && (SAMPLE_RATE<=SR_value)) p->deactivate(); else p->activate();
+        if((j>0) && (rkr->sample_rate<=SR_value)) p->deactivate(); else p->activate();
 
 
  }
