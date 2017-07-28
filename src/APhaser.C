@@ -41,9 +41,11 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate)
+Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
     float fSAMPLE_RATE = sample_rate;
+    PERIOD = intermediate_bufsize;
+    fPERIOD = intermediate_bufsize;
 
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
@@ -79,11 +81,11 @@ Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_
     Rconst = 1.0f + Rmx;  // Handle parallel resistor relationship
     C = 0.00000005f;	     // 50 nF
     CFs = 2.0f*fSAMPLE_RATE*C;
-
+    invperiod = 1.0f / fPERIOD;
+    
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
-    PERIOD = 255; //make best guess for init;
     setpreset (Ppreset);//this will get done before out is run
     cleanup ();
 };
@@ -98,12 +100,11 @@ Analog_Phaser::~Analog_Phaser ()
  * Effect output
  */
 void
-Analog_Phaser::out (float * smpsl, float * smpsr, uint32_t period)
+Analog_Phaser::out (float * smpsl, float * smpsr)
 {
     unsigned int i;
     int j;
     float lfol, lfor, lgain, rgain, bl, br, gl, gr, rmod, lmod, d, hpfr, hpfl;
-    invperiod = 1.0f / (float)PERIOD;//had to move this to run
     lgain = 0.0;
     rgain = 0.0;
 
@@ -141,7 +142,7 @@ Analog_Phaser::out (float * smpsl, float * smpsr, uint32_t period)
     oldlgain = lmod;
     oldrgain = rmod;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
         gl += ldiff;	// Linear interpolation between LFO samples
         gr += rdiff;
@@ -200,7 +201,7 @@ Analog_Phaser::out (float * smpsl, float * smpsr, uint32_t period)
     };
 
     if (Poutsub != 0)
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         };
@@ -228,6 +229,15 @@ Analog_Phaser::cleanup ()
 
     };
 };
+
+void
+Analog_Phaser::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    fPERIOD = period;
+    lfo->updateparams(period);
+    invperiod = 1.0f / fPERIOD;
+}
 
 /*
  * Parameter control

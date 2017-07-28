@@ -593,8 +593,9 @@ LV2_Handle init_aphaselv2(const LV2_Descriptor *descriptor,double sample_freq, c
     plug->effectindex = IAPHASE;
     plug->prev_bypass = 1;
     
-    plug->aphase = new Analog_Phaser(0,0,sample_freq);
-    plug->init_params = 1; // LFO init
+    getFeatures(plug,host_features);    // for period_max
+    
+    plug->aphase = new Analog_Phaser(0,0,sample_freq, plug->period_max);
 
     return plug;
 }
@@ -615,12 +616,14 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
         return;
     }
 
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->aphase->PERIOD = nframes;
-        plug->aphase->lfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->aphase->lv2_update_params(nframes);
     }
 
     //check and set changed parameters
@@ -651,7 +654,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     plug->aphase->efxoutr = plug->output_r_p;
 
     //now run
-    plug->aphase->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->aphase->out(plug->input_l_p,plug->input_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->aphase->outvolume, nframes);
@@ -4042,7 +4045,7 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
             return;
         
         plug->period_max = nframes;
-        plug->phase->lv2_update_params(nframes);
+        plug->gate->lv2_update_params(nframes);
     }
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)

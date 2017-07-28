@@ -32,20 +32,19 @@
 class Analog_Phaser
 {
 public:
-    Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Analog_Phaser ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out (float * smpsl, float * smpsr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-    EffectLFO *lfo;		//Phaser modulator
+    void lv2_update_params(uint32_t period);
+
     int Ppreset;
     float *efxoutl;
     float *efxoutr;
     float outvolume;
-
-    uint32_t PERIOD;
 
 private:
     //Phaser parameters
@@ -83,7 +82,10 @@ private:
     float C;	        // Capacitor
     float CFs;		// A constant derived from capacitor and resistor relationships
     float fPERIOD;
+    uint32_t PERIOD;
 
+    EffectLFO *lfo;		//Phaser modulator
+    
     class FPreset *Fpre;
 
 };
