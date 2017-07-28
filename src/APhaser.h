@@ -34,7 +34,7 @@ class Analog_Phaser
 public:
     Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Analog_Phaser ();
-    void out (float * smpsl, float * smpsr);
+    void out ();
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);

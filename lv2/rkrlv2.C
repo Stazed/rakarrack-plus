@@ -614,6 +614,11 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
+    }else
+    {
+        //inline
+        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
     }
 
     /* adjust for possible variable nframes */
@@ -654,7 +659,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     plug->aphase->efxoutr = plug->output_r_p;
 
     //now run
-    plug->aphase->out(plug->input_l_p,plug->input_r_p);
+    plug->aphase->out();
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->aphase->outvolume, nframes);

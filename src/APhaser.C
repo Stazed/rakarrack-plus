@@ -100,7 +100,7 @@ Analog_Phaser::~Analog_Phaser ()
  * Effect output
  */
 void
-Analog_Phaser::out (float * smpsl, float * smpsr)
+Analog_Phaser::out ()
 {
     unsigned int i;
     int j;
@@ -147,8 +147,8 @@ Analog_Phaser::out (float * smpsl, float * smpsr)
         gl += ldiff;	// Linear interpolation between LFO samples
         gr += rdiff;
 
-        float lxn = smpsl[i];
-        float rxn = smpsr[i];
+        float lxn = efxoutl[i];
+        float rxn = efxoutr[i];
 
 
         if (barber) {

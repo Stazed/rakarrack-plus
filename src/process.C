@@ -1662,7 +1662,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 18:
                 if (APhaser_Bypass) {
-                    efx_APhaser->out (efxoutl, efxoutr);
+                    efx_APhaser->out ();
                     Vol_Efx (18, efx_APhaser->outvolume);
                 }
                 break;
