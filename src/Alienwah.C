@@ -26,7 +26,7 @@
 #include "Alienwah.h"
 #include <stdio.h>
 
-Alienwah::Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate)
+Alienwah::Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
@@ -34,7 +34,9 @@ Alienwah::Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate)
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
-    PERIOD = 256;//best guess until the effect starts running;
+    
+    PERIOD = intermediate_bufsize;  // correct for rakarrak, may be adjusted for lv2
+    fPERIOD = intermediate_bufsize; // correct for rakarrak, may be adjusted for lv2
     setpreset (Ppreset);
     cleanup ();
     oldclfol.a = fb;
@@ -54,11 +56,10 @@ Alienwah::~Alienwah ()
  * Apply the effect
  */
 void
-Alienwah::out (float * smpsl, float * smpsr, uint32_t period)
+Alienwah::out ()
 {
 	unsigned int i;
     float lfol, lfor;
-    float fPERIOD = period;
     COMPLEXTYPE clfol, clfor, out, tmp;
 
     lfo->effectlfoout (&lfol, &lfor);
@@ -69,7 +70,7 @@ Alienwah::out (float * smpsl, float * smpsr, uint32_t period)
     clfor.a = cosf (lfor + phase) * fb;
     clfor.b = sinf (lfor + phase) * fb;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         float x = (float)i / fPERIOD;
         float x1 = 1.0f - x;
         //left
@@ -77,7 +78,7 @@ Alienwah::out (float * smpsl, float * smpsr, uint32_t period)
         tmp.b = clfol.b * x + oldclfol.b * x1;
 
         out.a = tmp.a * oldl[oldk].a - tmp.b * oldl[oldk].b
-                + (1.0f - fabsf (fb)) * smpsl[i] * panning;
+                + (1.0f - fabsf (fb)) * efxoutl[i] * panning;
         out.b = tmp.a * oldl[oldk].b + tmp.b * oldl[oldk].a;
         oldl[oldk].a = out.a;
         oldl[oldk].b = out.b;
@@ -88,7 +89,7 @@ Alienwah::out (float * smpsl, float * smpsr, uint32_t period)
         tmp.b = clfor.b * x + oldclfor.b * x1;
 
         out.a = tmp.a * oldr[oldk].a - tmp.b * oldr[oldk].b
-                + (1.0f - fabsf (fb)) * smpsr[i] * (1.0f - panning);
+                + (1.0f - fabsf (fb)) * efxoutr[i] * (1.0f - panning);
         out.b = tmp.a * oldr[oldk].b + tmp.b * oldr[oldk].a;
         oldr[oldk].a = out.a;
         oldr[oldk].b = out.b;
@@ -125,6 +126,13 @@ Alienwah::cleanup ()
     oldk = 0;
 };
 
+void
+Alienwah::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    fPERIOD = period;
+    lfo->updateparams(period);
+}
 
 /*
  * Parameter control

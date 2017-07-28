@@ -36,14 +36,15 @@ struct COMPLEXTYPE {
 class Alienwah
 {
 public:
-    Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Alienwah ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out ();
 
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
 
     int Ppreset;
 
@@ -51,9 +52,6 @@ public:
     float *efxoutr;
 
     float outvolume;
-
-    uint32_t PERIOD;
-    EffectLFO *lfo;		//lfo-ul Alienwah
 
 private:
     //Parametrii Alienwah
@@ -76,7 +74,11 @@ private:
     void setlrcross (int Plrcross);
     void setdelay (int Pdelay);
     void setphase (int Pphase);
-
+    
+    float fPERIOD;
+    uint32_t PERIOD;
+    EffectLFO *lfo;		//lfo-ul Alienwah
+    
     //Valorile interne
     float panning, fb, depth, lrcross, phase;
     struct COMPLEXTYPE oldl[MAX_ALIENWAH_DELAY], oldr[MAX_ALIENWAH_DELAY];

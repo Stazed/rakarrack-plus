@@ -614,7 +614,8 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
-    }else
+    }
+    else
     {
         //inline
         memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -1023,8 +1024,9 @@ LV2_Handle init_alienlv2(const LV2_Descriptor *descriptor,double sample_freq, co
     plug->effectindex = IAWAH;
     plug->prev_bypass = 1;
     
-    plug->alien = new Alienwah(0,0,sample_freq);
-    plug->init_params = 1; // LFO init
+    getFeatures(plug,host_features);    // for period_max
+    
+    plug->alien = new Alienwah(0,0,sample_freq, plug->period_max);
 
     return plug;
 }
@@ -1045,13 +1047,21 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+    else
     {
-        plug->alien->PERIOD = nframes;
-        plug->alien->lfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        //inline
+        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    }
+
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->alien->lv2_update_params(nframes);
     }
 
     //check and set changed parameters
@@ -1108,7 +1118,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     plug->alien->efxoutr = plug->output_r_p;
 
     //now run
-    plug->alien->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->alien->out();
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->alien->outvolume, nframes);

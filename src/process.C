@@ -248,7 +248,7 @@ RKR::RKR ()
     efx_EQ1 = new EQ (efxoutl, efxoutr, fSample_rate, period);
     efx_Compressor = new Compressor (efxoutl, efxoutr, fSample_rate);
     efx_WhaWha = new DynamicFilter (efxoutl, efxoutr, fSample_rate, period);
-    efx_Alienwah = new Alienwah (efxoutl, efxoutr, fSample_rate);
+    efx_Alienwah = new Alienwah (efxoutl, efxoutr, fSample_rate, period);
     efx_Cabinet = new EQ (efxoutl, efxoutr, fSample_rate, period);
     efx_Pan = new Pan (efxoutl, efxoutr, fSample_rate);
     efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q, period, fSample_rate); // FIXME reversed sample/period
@@ -1612,7 +1612,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 11:
                 if (Alienwah_Bypass) {
-                    efx_Alienwah->out (efxoutl, efxoutr, period);
+                    efx_Alienwah->out ();
                     Vol_Efx (11, efx_Alienwah->outvolume);
                 }
                 break;
