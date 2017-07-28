@@ -115,8 +115,7 @@ RKR::RKR ()
 
     rakarrack.get (PrefNom ("Looper Size"), looper_size, 1);
     rakarrack.get (PrefNom ("Calibration"), aFreq, 440.0f);
-    RecNote = new Recognize (efxoutl, efxoutr, rtrig, fSample_rate, 440.0, period); // FIXME sample/period - have to declare here before call to update_freqs()
-    RecNote->update_freqs(aFreq);
+//    RecNote->update_freqs(aFreq); // cannot call here until RecNote is declared, which must be placed after efxoutl, efxoutr initialization
 
     rakarrack.get (PrefNom ("Vocoder Bands"), VocBands, 32);
     rakarrack.get (PrefNom ("Recognize Trigger"), rtrig, .6f);
@@ -230,6 +229,10 @@ RKR::RKR ()
 
 
     Fpre = new FPreset();
+    
+    RecNote = new Recognize (efxoutl, efxoutr, rtrig, fSample_rate, 440.0, period); // FIXME sample/period 
+    RecNote->update_freqs(aFreq); // - have to call here after declaration
+    
     DC_Offsetl = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
     DC_Offsetr = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
     M_Metronome = new metronome(fSample_rate, period);
@@ -1451,14 +1454,11 @@ RKR::cleanup_efx ()
 
 
 void
-RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
+RKR::Alg (float *origl, float *origr, void *)
 {
-
     int i;
     int reco=0;
     int ponlast=0;
-    efxoutl = inl1;
-    efxoutr = inr1;
 
     if((t_timeout) && (Tap_Bypass)) TapTempo_Timeout(1);
 
@@ -1476,7 +1476,6 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
                 Update_tempo();
                 Tap_Display=1;
             }
-
         }
 
 

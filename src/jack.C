@@ -239,10 +239,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
             sizeof (jack_default_audio_sample_t) * nframes);
 
 
-
-
-    JackOUT->Alg (JackOUT->efxoutl, JackOUT->efxoutr, inl, inr ,0);
-
+    JackOUT->Alg (inl, inr ,0);
 
     memcpy (outl, JackOUT->efxoutl,
             sizeof (jack_default_audio_sample_t) * nframes);
