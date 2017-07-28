@@ -1649,7 +1649,7 @@ RKR::Alg (float *inl1, float *inr1, float *origl, float *origr, void *)
 
             case 16:
                 if (Gate_Bypass) {
-                    efx_Gate->out (efxoutl, efxoutr, period);
+                    efx_Gate->out (efxoutl, efxoutr);
                     Vol2_Efx ();
                 }
                 break;

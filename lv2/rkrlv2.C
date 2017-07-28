@@ -4035,7 +4035,15 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->phase->lv2_update_params(nframes);
+    }
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)
     {
@@ -4055,7 +4063,7 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
     plug->gate->efxoutr = plug->output_r_p;
 
     //now run
-    plug->gate->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->gate->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;

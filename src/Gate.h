@@ -40,11 +40,12 @@ public:
     Gate (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize);
     ~Gate ();
 
-    void out (float * smps_l, float * smps_r, uint32_t period);
+    void out (float *efxoutl, float *efxoutr);
 
     void changepar (int npar, int value);
     void setpreset (int npreset);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
     int getpar (int npar);
 
 
@@ -82,7 +83,8 @@ private:
     float gate;
     float fs;
     float hold;
-
+    
+    uint32_t PERIOD;
 
     float* interpbuf; //buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;

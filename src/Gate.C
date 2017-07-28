@@ -32,7 +32,7 @@
 
 Gate::Gate (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize)
 {
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
@@ -72,7 +72,11 @@ Gate::cleanup ()
     hpfr->cleanup ();
 }
 
-
+void
+Gate::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+}
 
 
 void
@@ -196,19 +200,19 @@ Gate::setpreset (int npreset)
 
 
 void
-Gate::out (float *efxoutl, float *efxoutr, uint32_t period)
+Gate::out (float *efxoutl, float *efxoutr)
 {
     unsigned i;
     float sum = 0.0f;
 
 
-    lpfl->filterout (efxoutl,period);
-    hpfl->filterout (efxoutl,period);
-    lpfr->filterout (efxoutr,period);
-    hpfr->filterout (efxoutr,period);
+    lpfl->filterout (efxoutl,PERIOD);
+    hpfl->filterout (efxoutl,PERIOD);
+    lpfr->filterout (efxoutr,PERIOD);
+    hpfr->filterout (efxoutr,PERIOD);
 
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
         sum = fabsf (efxoutl[i]) + fabsf (efxoutr[i]);
 
