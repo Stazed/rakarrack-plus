@@ -286,7 +286,7 @@ LV2_Handle init_complv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->nparams = 9;
     plug->effectindex = ICOMP;
     plug->prev_bypass = 1;
-
+    
     plug->comp = new Compressor(0,0, sample_freq);
 
     return plug;
@@ -415,7 +415,7 @@ LV2_Handle init_echolv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->nparams = 9;
     plug->effectindex = IECHO;
     plug->prev_bypass = 1;
-
+    
     plug->echo = new Echo(0,0,sample_freq);
 
     return plug;
@@ -494,7 +494,7 @@ LV2_Handle init_choruslv2(const LV2_Descriptor *descriptor,double sample_freq, c
     plug->nparams = 12;
     plug->effectindex = ICHORUS;
     plug->prev_bypass = 1;
-
+    
     plug->chorus = new Chorus(0,0,sample_freq);
     plug->init_params = 1; // set for LFO first pass
 
@@ -592,7 +592,7 @@ LV2_Handle init_aphaselv2(const LV2_Descriptor *descriptor,double sample_freq, c
     plug->nparams = 13;
     plug->effectindex = IAPHASE;
     plug->prev_bypass = 1;
-
+    
     plug->aphase = new Analog_Phaser(0,0,sample_freq);
     plug->init_params = 1; // LFO init
 
@@ -922,7 +922,7 @@ LV2_Handle init_panlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     plug->nparams = 9;
     plug->effectindex = IPAN;
     plug->prev_bypass = 1;
-
+    
     plug->pan = new Pan(0,0,sample_freq);
     plug->init_params = 1; // LFO init
 
@@ -1014,7 +1014,7 @@ LV2_Handle init_alienlv2(const LV2_Descriptor *descriptor,double sample_freq, co
     plug->nparams = 11;
     plug->effectindex = IAWAH;
     plug->prev_bypass = 1;
-
+    
     plug->alien = new Alienwah(0,0,sample_freq);
     plug->init_params = 1; // LFO init
 
@@ -1342,7 +1342,7 @@ LV2_Handle init_mdellv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->nparams = 13;
     plug->effectindex = IMDEL;
     plug->prev_bypass = 1;
-
+    
     plug->mdel = new MusicDelay (0,0,sample_freq);
 
     return plug;
@@ -1649,7 +1649,7 @@ LV2_Handle init_dflangelv2(const LV2_Descriptor *descriptor,double sample_freq, 
     plug->nparams = 15;
     plug->effectindex = IDFLANGE;
     plug->prev_bypass = 1;
-
+    
     plug->dflange = new Dflange(0,0, sample_freq);
     plug->init_params = 1; // LFO init
 
@@ -1887,7 +1887,7 @@ LV2_Handle init_arplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     plug->nparams = 11;
     plug->effectindex = IARPIE;
     plug->prev_bypass = 1;
-
+    
     plug->arp = new Arpie(0,0,sample_freq);
 
     return plug;
@@ -2079,7 +2079,7 @@ LV2_Handle init_synthlv2(const LV2_Descriptor *descriptor,double sample_freq, co
     plug->nparams = 16;
     plug->effectindex = ISYNTH;
     plug->prev_bypass = 1;
-
+    
     plug->synth = new Synthfilter(0,0,sample_freq);
     plug->init_params = 1; // LFO init
 
@@ -2344,7 +2344,7 @@ LV2_Handle init_echoverselv2(const LV2_Descriptor *descriptor,double sample_freq
     plug->nparams = 10;
     plug->effectindex = IECHOVERSE;
     plug->prev_bypass = 1;
-
+    
     plug->echoverse = new RBEcho(0,0,sample_freq);
 
     return plug;
@@ -2611,7 +2611,7 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_suslv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
-
+    
     plug->nparams = 2;
     plug->effectindex = ISUS;
     plug->prev_bypass = 1;
@@ -3685,7 +3685,7 @@ LV2_Handle init_otremlv2(const LV2_Descriptor *descriptor,double sample_freq, co
     plug->nparams = 6;
     plug->effectindex = IOPTTREM;
     plug->prev_bypass = 1;
-
+    
     plug->otrem = new Opticaltrem(0,0, sample_freq);
     plug->init_params = 1; // LFO init
 
@@ -3762,7 +3762,7 @@ LV2_Handle init_vibelv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->nparams = 11;
     plug->effectindex = IVIBE;
     plug->prev_bypass = 1;
-
+    
     plug->vibe = new Vibe(0,0, sample_freq);
     plug->init_params = 1; // LFO init
 
@@ -3913,9 +3913,10 @@ LV2_Handle init_phaselv2(const LV2_Descriptor *descriptor,double sample_freq, co
     plug->nparams = 12;
     plug->effectindex = IPHASE;
     plug->prev_bypass = 1;
+    
+    getFeatures(plug,host_features);    // needed to set period_max
 
     plug->phase = new Phaser(0,0,sample_freq, plug->period_max);    // period max could be wrong at this point
-    plug->init_params = 1; // LFO init and PERIOD adjustment for above period max
 
     return plug;
 }
@@ -3936,11 +3937,21 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
         return;
     }
 
-    //effects require period be adjusted because initial period_max may be wrong guess
-    if(plug->init_params)
+/*  From lv2.h _LV2_Descriptor 
+    The plugin must pay careful attention to the block size passed to run() since the block
+    allocated may only just be large enough to contain the data, and is not guaranteed to
+    remain constant between run() calls. Plugins MUST NOT crash when `sample_count` is 0.
+  
+    'sample count' is our nframes from rkrlv2.C which is PERIOD/fPERIOD for phaser.
+ */
+
+    if(plug->period_max != nframes)
     {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
         plug->phase->lv2_update_params(nframes);
-        plug->init_params = 0; // so we only do this once
     }
 
     //check and set changed parameters

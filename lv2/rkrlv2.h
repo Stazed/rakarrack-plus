@@ -202,7 +202,7 @@ typedef struct _RKRLV2
 {
     uint8_t nparams;
     uint8_t effectindex;//index of effect
-    uint16_t period_max;
+    uint32_t period_max;
     uint8_t loading_file;//flag to indicate that file load work is underway
     uint8_t init_params; //flag to indicate to force parameter (LFO) update & sample update on first run
     uint8_t file_changed;
