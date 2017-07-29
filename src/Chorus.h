@@ -31,25 +31,23 @@ class Chorus
 {
 
 public:
-    Chorus (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Chorus (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Chorus ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out ();
     void setpreset (int dgui, int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
 
     int Ppreset;
     float *efxoutl;
     float *efxoutr;
     float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
 
-    uint32_t PERIOD;
-    EffectLFO* lfo;		//lfo-ul chorus
-    
 private:
     //Parametrii Chorus
+    EffectLFO* lfo;		//lfo-ul chorus
     int Pvolume;
     int Ppanning;
     int Pdepth;		//the depth of the Chorus(ms)
@@ -83,6 +81,8 @@ private:
     class delayline *ldelay, *rdelay;
 
     float fSAMPLE_RATE;
+    uint32_t PERIOD;
+    float fPERIOD;
 
 };
 

@@ -518,8 +518,9 @@ LV2_Handle init_choruslv2(const LV2_Descriptor *descriptor,double sample_freq, c
     plug->effectindex = ICHORUS;
     plug->prev_bypass = 1;
     
-    plug->chorus = new Chorus(0,0,sample_freq);
-    plug->init_params = 1; // set for LFO first pass
+    getFeatures(plug,host_features);    // for period_max
+    
+    plug->chorus = new Chorus(0,0,sample_freq, plug->period_max);
 
     return plug;
 }
@@ -540,14 +541,21 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+    
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->chorus->PERIOD = nframes;
-        plug->chorus->lfo->updateparams(nframes);
-        plug->init_params = 0; // clear so we only do this once
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->chorus->lv2_update_params(nframes);
     }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i=0;
@@ -598,7 +606,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     plug->chorus->efxoutr = plug->output_r_p;
 
     //now run
-    plug->chorus->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->chorus->out();
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->chorus->outvolume, nframes);

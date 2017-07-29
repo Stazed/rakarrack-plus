@@ -27,11 +27,14 @@
 #include <stdio.h>
 #include "FPreset.h"
 
-Chorus::Chorus (float * efxoutl_, float * efxoutr_, double sample_rate)
+Chorus::Chorus (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
     fSAMPLE_RATE = sample_rate;
+    PERIOD = intermediate_bufsize; //correct for rakarrack, may be adjusted for lv2
+    fPERIOD = intermediate_bufsize; //correct for rakarrack, may be adjusted for lv2
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
+    
     dlk = 0;
     drk = 0;
     maxdelay = lrintf (MAX_CHORUS_DELAY / 1000.0 * (int)sample_rate);
@@ -48,7 +51,6 @@ Chorus::Chorus (float * efxoutl_, float * efxoutr_, double sample_rate)
     rdelay->set_mix( 0.5f );
 
     Ppreset = 0;
-    PERIOD = 256; //make our best guess for the initializing
 
     oldr = 0.0f;
     oldl = 0.0f;
@@ -96,11 +98,10 @@ float Chorus::getdelay (float xlfo)
  * Apply the effect
  */
 void
-Chorus::out (float * smpsl, float * smpsr, uint32_t period)
+Chorus::out ()
 {
     unsigned int i;
     float tmp;
-    float fPERIOD = period;
     dl1 = dl2;
     dr1 = dr2;
     lfo->effectlfoout (&lfol, &lfor);
@@ -113,16 +114,16 @@ Chorus::out (float * smpsl, float * smpsr, uint32_t period)
         if (Poutsub != 0) tmpsub = -1.0f;
         else tmpsub = 1.0f;
 
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             //Left
-            mdel = (dl1 * (float)(period - i) + dl2 * (float)i) / fPERIOD;
-            tmp = smpsl[i] + oldl*fb;
+            mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
+            tmp = efxoutl[i] + oldl*fb;
             efxoutl[i] = tmpsub*ldelay->delay(tmp, mdel, 0, 1, 0);
             oldl = efxoutl[i];
 
             //Right
-            mdel = (dr1 * (float)(period - i) + dr2 * (float)i) / fPERIOD;
-            tmp = smpsr[i] + oldr*fb;
+            mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
+            tmp = efxoutr[i] + oldr*fb;
             efxoutr[i] = tmpsub*rdelay->delay(tmp, mdel, 0, 1, 0);
             oldr =  efxoutr[i];
         }
@@ -131,9 +132,9 @@ Chorus::out (float * smpsl, float * smpsr, uint32_t period)
 
         dl2 = getdelay (lfol);
         dr2 = getdelay (lfor);
-        for (i = 0; i < period; i++) {
-            float inl = smpsl[i];
-            float inr = smpsr[i];
+        for (i = 0; i < PERIOD; i++) {
+            float inl = efxoutl[i];
+            float inr = efxoutr[i];
             //LRcross
             float l = inl;
             float r = inr;
@@ -143,7 +144,7 @@ Chorus::out (float * smpsl, float * smpsr, uint32_t period)
             //Left channel
 
             //compute the delay in samples using linear interpolation between the lfo delays
-            mdel = (dl1 * (float)(period - i) + dl2 * (float)i) / fPERIOD;
+            mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
             if (++dlk >= maxdelay)
                 dlk = 0;
             float tmp = (float) dlk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
@@ -159,7 +160,7 @@ Chorus::out (float * smpsl, float * smpsr, uint32_t period)
             //Right channel
 
             //compute the delay in samples using linear interpolation between the lfo delays
-            mdel = (dr1 * (float)(period - i) + dr2 * (float)i) / fPERIOD;
+            mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
             if (++drk >= maxdelay)
                 drk = 0;
             tmp = (float)drk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
@@ -176,7 +177,7 @@ Chorus::out (float * smpsl, float * smpsr, uint32_t period)
 
 
         if (Poutsub != 0)
-            for (i = 0; i < period; i++) {
+            for (i = 0; i < PERIOD; i++) {
                 efxoutl[i] *= -1.0f;
                 efxoutr[i] *= -1.0f;
             };
@@ -186,7 +187,7 @@ Chorus::out (float * smpsl, float * smpsr, uint32_t period)
             //efxoutl[i] *= panning;
             //efxoutr[i] *= (1.0f - panning);
         //};
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             efxoutl[i] *= (1.0f - panning);
             efxoutr[i] *= panning;
         };
@@ -206,6 +207,14 @@ Chorus::cleanup ()
     };
 
 };
+
+void
+Chorus::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    fPERIOD = period;
+    lfo->updateparams(period);
+}
 
 /*
  * Parameter control
@@ -260,30 +269,30 @@ Chorus::setlrcross (int Plrcross)
 void
 Chorus::setpreset (int dgui, int npreset)
 {
-    const int PRESET_SIZE = 12;
+    const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 10;
     int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Chorus1
-        {64, 64, 33, 0, 0, 90, 40, 85, 64, 119, 0, 0},
+        {64, 64, 33, 0, 0, 90, 40, 85, 64, 119, 0, 0, 0},
         //Chorus2
-        {64, 64, 19, 0, 0, 98, 56, 90, 64, 19, 0, 0},
+        {64, 64, 19, 0, 0, 98, 56, 90, 64, 19, 0, 0, 1},
         //Chorus3
-        {64, 64, 7, 0, 1, 42, 97, 95, 90, 127, 0, 0},
+        {64, 64, 7, 0, 1, 42, 97, 95, 90, 127, 0, 0, 0},
         //Celeste1
-        {64, 64, 1, 0, 0, 42, 115, 18, 90, 127, 0, 0},
+        {64, 64, 1, 0, 0, 42, 115, 18, 90, 127, 0, 0, 0},
         //Celeste2
-        {64, 64, 7, 117, 0, 50, 115, 9, 31, 127, 0, 1},
+        {64, 64, 7, 117, 0, 50, 115, 9, 31, 127, 0, 1, 0},
         //Flange1
-        {64, 64, 39, 0, 0, 60, 23, 3, 62, 0, 0, 0},
+        {64, 64, 39, 0, 0, 60, 23, 3, 62, 0, 0, 0, 0},
         //Flange2
-        {64, 64, 9, 34, 1, 40, 35, 3, 109, 0, 0, 0},
+        {64, 64, 9, 34, 1, 40, 35, 3, 109, 0, 0, 0, 0},
         //Flange3
-        {64, 64, 31, 34, 1, 94, 35, 3, 54, 0, 0, 1},
+        {64, 64, 31, 34, 1, 94, 35, 3, 54, 0, 0, 1, 0},
         //Flange4
-        {64, 64, 14, 0, 1, 62, 12, 19, 97, 0, 0, 0},
+        {64, 64, 14, 0, 1, 62, 12, 19, 97, 0, 0, 0, 1},
         //Flange5
-        {64, 64, 34, 105, 0, 24, 39, 19, 17, 0, 0, 1}
+        {64, 64, 34, 105, 0, 24, 39, 19, 17, 0, 0, 1, 1}
     };
 
 

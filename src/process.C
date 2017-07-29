@@ -235,8 +235,8 @@ RKR::RKR ()
     DC_Offsetl = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
     DC_Offsetr = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
     M_Metronome = new metronome(fSample_rate, period);
-    efx_Chorus = new Chorus (efxoutl, efxoutr, fSample_rate);
-    efx_Flanger = new Chorus (efxoutl, efxoutr, fSample_rate);
+    efx_Chorus = new Chorus (efxoutl, efxoutr, fSample_rate, period);
+    efx_Flanger = new Chorus (efxoutl, efxoutr, fSample_rate, period);
     efx_Rev = new Reverb (efxoutl, efxoutr, fSample_rate, period);
     efx_Echo = new Echo (efxoutl, efxoutr, fSample_rate);
     efx_Phaser = new Phaser (efxoutl, efxoutr, fSample_rate, period);
@@ -1423,14 +1423,14 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 5:
                 if (Chorus_Bypass) {
-                    efx_Chorus->out (efxoutl, efxoutr, period);
+                    efx_Chorus->out ();
                     Vol_Efx (5, efx_Chorus->outvolume);
                 }
                 break;
 
             case 7:
                 if (Flanger_Bypass) {
-                    efx_Flanger->out (efxoutl, efxoutr, period);
+                    efx_Flanger->out ();
                     Vol_Efx (7, efx_Flanger->outvolume);
                 }
                 break;
