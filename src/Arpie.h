@@ -30,13 +30,14 @@
 class Arpie
 {
 public:
-    Arpie (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Arpie (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
     ~Arpie ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out ();
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
 
     int Ppreset;
     float *efxoutl;
@@ -85,6 +86,7 @@ private:
     class FPreset *Fpre;
 
     float fSAMPLE_RATE;
+    uint32_t PERIOD;
 };
 
 

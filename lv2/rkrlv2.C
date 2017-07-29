@@ -615,13 +615,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-    else
-    {
-        //inline
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-    }
-
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -631,6 +625,11 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
         plug->period_max = nframes;
         plug->aphase->lv2_update_params(nframes);
     }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     for(i=0; i<7; i++) //0-6
@@ -1047,12 +1046,6 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-    else
-    {
-        //inline
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-    }
 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
@@ -1063,6 +1056,11 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
         plug->period_max = nframes;
         plug->alien->lv2_update_params(nframes);
     }
+    
+    // we are good to go
+    //inline
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i=0;
@@ -1906,7 +1904,9 @@ LV2_Handle init_arplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     plug->effectindex = IARPIE;
     plug->prev_bypass = 1;
     
-    plug->arp = new Arpie(0,0,sample_freq);
+    getFeatures(plug,host_features);    // needed to set period_max
+    
+    plug->arp = new Arpie(0,0,sample_freq, plug->period_max);
 
     return plug;
 }
@@ -1926,6 +1926,21 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
+    
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->arp->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //inline, copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i=0;
@@ -1966,7 +1981,7 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     plug->arp->efxoutr = plug->output_r_p;
 
     //now run
-    plug->arp->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->arp->out();
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->arp->outvolume, nframes);

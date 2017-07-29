@@ -26,12 +26,13 @@
 #include <math.h>
 #include "Arpie.h"
 
-Arpie::Arpie (float * efxoutl_, float * efxoutr_, double sample_rate)
+Arpie::Arpie (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
 {
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
     uint32_t SAMPLE_RATE = sample_rate;
     fSAMPLE_RATE = sample_rate;
+    PERIOD = intermediate_bufsize;
 
     //default values
     Ppreset = 0;
@@ -87,6 +88,11 @@ Arpie::cleanup ()
     harmonic = 1;
 };
 
+void
+Arpie::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+}
 
 /*
  * Initialize the delays
@@ -134,12 +140,12 @@ Arpie::initdelays ()
  * Effect output
  */
 void
-Arpie::out (float * smpsl, float * smpsr, uint32_t period)
+Arpie::out ()
 {
     unsigned int i;
     float l, r, ldl, rdl, rswell, lswell;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         ldl = ldelay[kl];
         rdl = rdelay[kr];
         l = ldl * (1.0f - lrcross) + rdl * lrcross;
@@ -148,8 +154,8 @@ Arpie::out (float * smpsl, float * smpsr, uint32_t period)
         rdl = r;
 
 
-        ldl = smpsl[i] * panning - ldl * fb;
-        rdl = smpsr[i] * (1.0f - panning) - rdl * fb;
+        ldl = efxoutl[i] * panning - ldl * fb;
+        rdl = efxoutr[i] * (1.0f - panning) - rdl * fb;
 
         if(reverse > 0.0) {
 
