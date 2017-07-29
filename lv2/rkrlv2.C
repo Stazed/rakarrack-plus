@@ -1343,6 +1343,21 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
+    
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->cab->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     val = (int)*plug->param_p[0]+64;//gain
@@ -1357,16 +1372,12 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
         plug->cab->setpreset(val);
     }
 
-    //cab does it inline?
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //now set out ports
     plug->cab->efxoutl = plug->output_l_p;
     plug->cab->efxoutr = plug->output_r_p;
 
     //now run
-    plug->cab->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->cab->out();
 
     xfade_check(plug,nframes);
     return;

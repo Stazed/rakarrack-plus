@@ -140,4 +140,6 @@ rakarrack_SOURCES = main.C \
 	Vibe.C \
 	MIDIConverter.C \
 	Infinity.C \
-	Infinity.h
+	Infinity.h \
+	Cabinet.C \
+	Cabinet.h

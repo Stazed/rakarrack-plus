@@ -92,7 +92,7 @@ decl {int nt;} {private local
 decl {int tta;} {private local
 } 
 
-decl {int Scope_ON;} {selected private local
+decl {int Scope_ON;} {private local
 } 
 
 decl {int Analyzer_ON;} {private local
@@ -3824,7 +3824,7 @@ rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
         }
       }
       Fl_Group CABINET {
-        user_data 1
+        user_data 1 open
         xywh {161 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button Cabinet_activar {
@@ -3843,7 +3843,7 @@ findpos(12,(int)o->value(),o);}
         Fl_Choice Cabinet_preset {
           label Preset
           user_data 12012
-          callback {rkr->Cabinet_setpreset((int) o->value());}
+          callback {rkr->efx_Cabinet->setpreset((int) o->value());} selected
           xywh {206 256 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {

@@ -14,6 +14,7 @@
 #include "EQ.h"
 #include "Compressor.h"
 #include "Alienwah.h"
+#include "Cabinet.h"
 #include "DynamicFilter.h"
 #include "Pan.h"
 #include "Harmonizer.h"
@@ -109,7 +110,6 @@ public:
     char *PrefNom (const char *dato);
     void EQ1_setpreset (int npreset);
     void EQ2_setpreset (int npreset);
-    int Cabinet_setpreset (int npreset);
     void InitMIDI ();
     void ConnectMIDI ();
     void ActiveUn(int value);
@@ -149,7 +149,7 @@ public:
     class Compressor *efx_Compressor;
     class DynamicFilter *efx_WhaWha;
     class Alienwah *efx_Alienwah;
-    class EQ *efx_Cabinet;      // FIXME us Cabinet class
+    class Cabinet *efx_Cabinet;
     class Pan *efx_Pan;
     class Harmonizer *efx_Har;
     class MusicDelay *efx_MusDelay;
@@ -308,7 +308,6 @@ public:
     int Vibe_B;
     int Infinity_B;
 
-    int Cabinet_Preset;
     int Selected_Preset;
     int lv[70][20];
     int saved_order[16];

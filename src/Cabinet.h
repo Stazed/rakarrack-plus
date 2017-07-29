@@ -31,11 +31,12 @@ public:
     Cabinet (float * efxoutl_, float * efxoutr_, double sample_frequency, uint32_t intermediate_bufsize);
     ~Cabinet ();
     void cleanup();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out ();
     void setpreset(int npreset);
     int Cabinet_Preset;
     void changepar(int i, int val);
     int getpar(int i);
+    void lv2_update_params(uint32_t period);
 
     float* efxoutl;
     float* efxoutr;

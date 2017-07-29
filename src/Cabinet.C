@@ -31,8 +31,6 @@ Cabinet::Cabinet(float * efxoutl_, float * efxoutr_, double sample_frequency, ui
     
     eq = new EQ(efxoutl_, efxoutr_, sample_frequency, intermediate_bufsize);
     Cabinet_Preset = 0;
-//    eq->efxoutl = efxoutl;
-//    eq->efxoutr = efxoutr;
     setpreset(Cabinet_Preset);
 }
 
@@ -50,7 +48,7 @@ Cabinet::cleanup()
 
 
 void
-Cabinet::out(float* smpsl, float* smpsr, uint32_t period)
+Cabinet::out()
 {
     eq->efxoutl = efxoutl;
     eq->efxoutr = efxoutr;
@@ -194,3 +192,8 @@ Cabinet::getpar(int i)
     return 0;
 }
 
+void
+Cabinet::lv2_update_params(uint32_t period)
+{
+    eq->lv2_update_params(period);
+}

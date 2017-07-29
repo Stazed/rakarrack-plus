@@ -3500,7 +3500,7 @@ void RKRGUI::cb_Cabinet_activar(Fl_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Cabinet_preset_i(Fl_Choice* o, void*) {
-  rkr->Cabinet_setpreset((int) o->value());
+  rkr->efx_Cabinet->setpreset((int) o->value());
 }
 void RKRGUI::cb_Cabinet_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_preset_i(o,v);

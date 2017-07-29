@@ -564,7 +564,7 @@ void RKR::getbuf(char *buf, int j)
     case 12:
         //Cabinet
         sprintf (buf, "%d,%d,%d\n",
-                 Cabinet_Preset, efx_Cabinet->getpar (0), Cabinet_Bypass);
+                 efx_Cabinet->Cabinet_Preset, efx_Cabinet->getpar (0), Cabinet_Bypass);
         break;
 
     case 13:
@@ -1299,7 +1299,7 @@ RKR::Actualizar_Audio ()
 
             Cabinet_Bypass = 0;
             efx_Cabinet->cleanup();
-            Cabinet_setpreset (lv[13][0]);
+            efx_Cabinet->setpreset (lv[13][0]);
             efx_Cabinet->changepar (0,lv[13][1]);
             Cabinet_Bypass = Cabinet_B;
             break;
@@ -2330,7 +2330,7 @@ RKR::Preset_to_Bank (int i)
     }
     lv[8][9] = efx_EQ2->getpar (0);
 
-    lv[13][0] = Cabinet_Preset;
+    lv[13][0] = efx_Cabinet->Cabinet_Preset;
     lv[13][1] = efx_Cabinet->getpar (0);
 
 
