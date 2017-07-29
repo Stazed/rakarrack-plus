@@ -111,6 +111,18 @@ xfade_check (RKRLV2* plug, uint32_t period)
     }
 }
 
+void
+Vol3_Efx (RKRLV2* plug, uint32_t period)
+{
+    unsigned i;
+    float att=2.0f;
+
+    for (i = 0; i < period; i++) {
+        plug->output_l_p[i] *= att;
+        plug->output_r_p[i] *= att;
+    }
+}
+
 #if 0
 /**
  * add a midi message to the output port
@@ -1378,6 +1390,9 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
 
     //now run
     plug->cab->out();
+    
+    //post effect volume adjustment from rakarrack
+    Vol3_Efx(plug,nframes);
 
     xfade_check(plug,nframes);
     return;
