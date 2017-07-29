@@ -32,14 +32,16 @@ class EQ
 public:
     EQ (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize);
     ~EQ ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out ();
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
     float getfreqresponse (float freq);
     void setvolume (int Pvolume);
 
+    uint32_t PERIOD;
     int Ppreset;
     int Pvolume;	//Volumul
 

@@ -33,6 +33,7 @@ EQ::EQ (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermed
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
+    PERIOD = intermediate_bufsize;
     interpbuf = new float[intermediate_bufsize];
 
     for (int i = 0; i < MAX_EQ_BANDS; i++) {
@@ -74,26 +75,31 @@ EQ::cleanup ()
     };
 };
 
+void
+EQ::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+}
 
 
 /*
  * Effect output
  */
 void
-EQ::out (float * smpsl, float * smpsr, uint32_t period)
+EQ::out ()
 {
     unsigned int i;
     for (i = 0; i < MAX_EQ_BANDS; i++) {
         if (filter[i].Ptype == 0)
             continue;
-        filter[i].l->filterout (efxoutl, period);
-        filter[i].r->filterout (efxoutr, period);
+        filter[i].l->filterout (efxoutl, PERIOD);
+        filter[i].r->filterout (efxoutr, PERIOD);
     };
 
 
-    for (i = 0; i < period; i++) {
-        efxoutl[i] = smpsl[i] * outvolume;
-        efxoutr[i] = smpsr[i] * outvolume;
+    for (i = 0; i < PERIOD; i++) {
+        efxoutl[i] = efxoutl[i] * outvolume;
+        efxoutr[i] = efxoutr[i] * outvolume;
     };
 
 };

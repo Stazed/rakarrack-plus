@@ -149,7 +149,7 @@ public:
     class Compressor *efx_Compressor;
     class DynamicFilter *efx_WhaWha;
     class Alienwah *efx_Alienwah;
-    class EQ *efx_Cabinet;
+    class EQ *efx_Cabinet;      // FIXME us Cabinet class
     class Pan *efx_Pan;
     class Harmonizer *efx_Har;
     class MusicDelay *efx_MusDelay;

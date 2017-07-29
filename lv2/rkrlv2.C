@@ -236,6 +236,21 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
+    
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->eq->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i = 0;
@@ -262,16 +277,12 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //eq does in inline?
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //now set out ports
     plug->eq->efxoutl = plug->output_l_p;
     plug->eq->efxoutr = plug->output_r_p;
 
     //now run
-    plug->eq->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->eq->out();
 
     xfade_check(plug,nframes);
 
@@ -1242,6 +1253,21 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
         return;
     }
 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->eq->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    
     //check and set changed parameters
     i = 0;
 
@@ -1276,16 +1302,12 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //eq does it inline?
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //now set out ports
     plug->eq->efxoutl = plug->output_l_p;
     plug->eq->efxoutr = plug->output_r_p;
 
     //now run
-    plug->eq->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->eq->out();
 
     xfade_check(plug,nframes);
     return;
