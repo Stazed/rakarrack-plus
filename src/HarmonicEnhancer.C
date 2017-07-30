@@ -81,12 +81,6 @@ HarmEnhancer::cleanup()
 
 };
 
-void
-HarmEnhancer::lv2_update_params(uint32_t period)
-{
-    //limiter->lv2_update_params(period); // FIXME
-}
-
 
 void
 HarmEnhancer::set_vol(int mode, float gain)

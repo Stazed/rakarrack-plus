@@ -114,7 +114,6 @@ void
 CoilCrafter::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
-    harm->lv2_update_params(period);
 }
 
 /*
