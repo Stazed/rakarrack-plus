@@ -27,14 +27,12 @@
 #include <stdio.h>
 #include "FPreset.h"
 
-Chorus::Chorus (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
 {
     fSAMPLE_RATE = sample_rate;
     PERIOD = intermediate_bufsize; //correct for rakarrack, may be adjusted for lv2
     fPERIOD = intermediate_bufsize; //correct for rakarrack, may be adjusted for lv2
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-    
+
     dlk = 0;
     drk = 0;
     maxdelay = lrintf (MAX_CHORUS_DELAY / 1000.0 * (int)sample_rate);
@@ -98,7 +96,7 @@ float Chorus::getdelay (float xlfo)
  * Apply the effect
  */
 void
-Chorus::out ()
+Chorus::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float tmp;

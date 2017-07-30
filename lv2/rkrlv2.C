@@ -520,7 +520,7 @@ LV2_Handle init_choruslv2(const LV2_Descriptor *descriptor,double sample_freq, c
     
     getFeatures(plug,host_features);    // for period_max
     
-    plug->chorus = new Chorus(0,0,sample_freq, plug->period_max);
+    plug->chorus = new Chorus(sample_freq, plug->period_max);
 
     return plug;
 }
@@ -601,12 +601,8 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->chorus->efxoutl = plug->output_l_p;
-    plug->chorus->efxoutr = plug->output_r_p;
-
     //now run
-    plug->chorus->out();
+    plug->chorus->out(plug->output_l_p, plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->chorus->outvolume, nframes);
