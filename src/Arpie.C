@@ -26,10 +26,8 @@
 #include <math.h>
 #include "Arpie.h"
 
-Arpie::Arpie (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Arpie::Arpie (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
     uint32_t SAMPLE_RATE = sample_rate;
     fSAMPLE_RATE = sample_rate;
     PERIOD = intermediate_bufsize;
@@ -140,7 +138,7 @@ Arpie::initdelays ()
  * Effect output
  */
 void
-Arpie::out ()
+Arpie::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, ldl, rdl, rswell, lswell;

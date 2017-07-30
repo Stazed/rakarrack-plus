@@ -1954,7 +1954,7 @@ LV2_Handle init_arplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     
     getFeatures(plug,host_features);    // needed to set period_max
     
-    plug->arp = new Arpie(0,0,sample_freq, plug->period_max);
+    plug->arp = new Arpie(sample_freq, plug->period_max);
 
     return plug;
 }
@@ -2024,12 +2024,8 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->arp->efxoutl = plug->output_l_p;
-    plug->arp->efxoutr = plug->output_r_p;
-
     //now run
-    plug->arp->out();
+    plug->arp->out(plug->output_l_p, plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->arp->outvolume, nframes);
