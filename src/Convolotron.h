@@ -31,9 +31,9 @@
 class Convolotron
 {
 public:
-    Convolotron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize);
+    Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize);
     ~Convolotron ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -43,9 +43,6 @@ public:
     void loaddefault();
 
     int Ppreset;
-
-    float *efxoutl;
-    float *efxoutr;
     float outvolume;
 
     char Filename[128];

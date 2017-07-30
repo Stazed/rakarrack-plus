@@ -265,7 +265,7 @@ RKR::RKR ()
     efx_Shuffle = new Shuffle(efxoutl,efxoutr, fSample_rate, period);
     efx_Synthfilter = new Synthfilter(efxoutl,efxoutr, fSample_rate);
     efx_MBVvol = new MBVvol(efxoutl,efxoutr, fSample_rate, period);
-    efx_Convol = new Convolotron(efxoutl,efxoutr,Con_Down,Con_U_Q,Con_D_Q, fSample_rate, period);
+    efx_Convol = new Convolotron(Con_Down,Con_U_Q,Con_D_Q, fSample_rate, period);
     efx_Looper = new Looper(efxoutl,efxoutr,looper_size,fSample_rate, period);
     efx_RyanWah = new RyanWah(efxoutl,efxoutr, fSample_rate, period);
     efx_RBEcho = new RBEcho(efxoutl,efxoutr, fSample_rate);
@@ -1173,7 +1173,7 @@ RKR::Control_Volume (float *origl,float *origr)
     float Temp_M_Volume = 0.0f;
 
     if((flpos)&&(have_signal)) {
-        if(db6booster) {
+        if(db6booster) {                // +6dB Final Limiter in settings/audio
             for(i=0; i<period; i++) {
                 efxoutl[i] *=.5f;
                 efxoutr[i] *=.5f;
@@ -1210,11 +1210,11 @@ RKR::Control_Volume (float *origl,float *origr)
 
     for (i = 0; i <= period; i++) { //control volume
 
-        efxoutl[i] *= Temp_M_Volume*booster;
+        efxoutl[i] *= Temp_M_Volume*booster; // +10dB booster main window
         efxoutr[i] *= Temp_M_Volume*booster;
 
 
-        if (Fraction_Bypass < 1.0f) {
+        if (Fraction_Bypass < 1.0f) {   // FX% main window
             efxoutl[i]= (origl[i] * (1.0f - Fraction_Bypass) + efxoutl[i] * Fraction_Bypass);
             efxoutr[i]= (origr[i] * (1.0f - Fraction_Bypass) + efxoutr[i] * Fraction_Bypass);
         }

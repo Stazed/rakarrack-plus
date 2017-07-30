@@ -27,11 +27,8 @@
 #include "Convolotron.h"
 #include "config.h" // for DATADIR
 
-Convolotron::Convolotron (float * efxoutl_, float * efxoutr_,int DS, int uq, int dq,
-                          double sample_rate, uint16_t intermediate_bufsize)
+Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
     SAMPLE_RATE = (unsigned int)sample_rate;
     fSAMPLE_RATE = (float)sample_rate;
 
@@ -164,21 +161,20 @@ Convolotron::adjust(int DS, uint32_t period)
  * Effect output
  */
 void
-Convolotron::out (float * smpsl, float * smpsr, uint32_t period)
+Convolotron::out (float * efxoutl, float * efxoutr, uint32_t period)
 {
     int i, j, xindex;
     float l,lyn;
 
     if(DS_state != 0) {
-        memcpy(templ, smpsl,sizeof(float)*period);
-        memcpy(tempr, smpsr,sizeof(float)*period);
-        U_Resample->out(templ,tempr,smpsl,smpsr,period,u_up);
+        memcpy(templ, efxoutl,sizeof(float)*period);
+        memcpy(tempr, efxoutr,sizeof(float)*period);
+        U_Resample->out(templ,tempr,efxoutl,efxoutr,period,u_up);
     }
-
 
     for (i = 0; i < nPERIOD; i++) {
 
-        l = smpsl[i] + smpsr[i] + feedback;
+        l = efxoutl[i] + efxoutr[i] + feedback;
         oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
         lxn[offset] = oldl;
 
@@ -197,9 +193,7 @@ Convolotron::out (float * smpsl, float * smpsr, uint32_t period)
         tempr[i] = lyn * levpanr;
 
         if (++offset>maxx_size) offset = 0;
-
-
-    };
+    }
 
     if(DS_state != 0) {
         D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
@@ -208,12 +202,7 @@ Convolotron::out (float * smpsl, float * smpsr, uint32_t period)
         memcpy(efxoutl, templ,sizeof(float)*period);
         memcpy(efxoutr, tempr,sizeof(float)*period);
     }
-
-
-
-
-
-};
+}
 
 
 /*
