@@ -30,9 +30,9 @@
 class EQ
 {
 public:
-    EQ (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize);
+    EQ (double samplerate, uint32_t intermediate_bufsize);
     ~EQ ();
-    void out ();
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -46,9 +46,6 @@ public:
     int Pvolume;	//Volumul
 
     float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of
-
-    float *efxoutl;
-    float *efxoutr;
 
     float * interpbuf;//buffer for filter
 

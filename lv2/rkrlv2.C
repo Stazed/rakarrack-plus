@@ -211,7 +211,7 @@ LV2_Handle init_eqlv2(const LV2_Descriptor *descriptor,double sample_freq, const
 
     getFeatures(plug,host_features);
 
-    plug->eq = new EQ(0,0,sample_freq, plug->period_max);
+    plug->eq = new EQ(sample_freq, plug->period_max);
 
     //eq has a bunch of setup stuff. Why isn't this in the EQ initalizer?
     for (int i = 0; i <= 45; i += 5)
@@ -289,12 +289,8 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports
-    plug->eq->efxoutl = plug->output_l_p;
-    plug->eq->efxoutr = plug->output_r_p;
-
     //now run
-    plug->eq->out();
+    plug->eq->out(plug->output_l_p, plug->output_r_p);
 
     xfade_check(plug,nframes);
 
@@ -1232,7 +1228,7 @@ LV2_Handle init_eqplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
     getFeatures(plug,host_features);
 
-    plug->eq = new EQ(0,0,sample_freq, plug->period_max);
+    plug->eq = new EQ(sample_freq, plug->period_max);
 
     //eq has a bunch of setup stuff. Why isn't this in the EQ initalizer?
     for (int i = 0; i <= 10; i += 5)
@@ -1310,12 +1306,8 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports
-    plug->eq->efxoutl = plug->output_l_p;
-    plug->eq->efxoutr = plug->output_r_p;
-
     //now run
-    plug->eq->out();
+    plug->eq->out(plug->output_l_p, plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;

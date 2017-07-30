@@ -27,12 +27,8 @@
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize)
+EQ::EQ (double samplerate, uint32_t intermediate_bufsize)
 {
-
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
     PERIOD = intermediate_bufsize;
     interpbuf = new float[intermediate_bufsize];
 
@@ -86,7 +82,7 @@ EQ::lv2_update_params(uint32_t period)
  * Effect output
  */
 void
-EQ::out ()
+EQ::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     for (i = 0; i < MAX_EQ_BANDS; i++) {

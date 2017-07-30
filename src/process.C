@@ -243,8 +243,8 @@ RKR::RKR ()
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     efx_Distorsion = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Overdrive = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
-    efx_EQ2 = new EQ (efxoutl, efxoutr, fSample_rate, period);
-    efx_EQ1 = new EQ (efxoutl, efxoutr, fSample_rate, period);
+    efx_EQ2 = new EQ (fSample_rate, period);
+    efx_EQ1 = new EQ (fSample_rate, period);
     efx_Compressor = new Compressor (efxoutl, efxoutr, fSample_rate);
     efx_WhaWha = new DynamicFilter (efxoutl, efxoutr, fSample_rate, period);
     efx_Alienwah = new Alienwah (fSample_rate, period);
@@ -1409,7 +1409,7 @@ RKR::Alg (float *origl, float *origr, void *)
             switch (efx_order[i]) {
             case 0:
                 if (EQ1_Bypass) {
-                    efx_EQ1->out ();
+                    efx_EQ1->out (efxoutl, efxoutr);
                     Vol2_Efx ();
                 }
                 break;
@@ -1471,7 +1471,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 9:
                 if (EQ2_Bypass) {
-                    efx_EQ2->out ();
+                    efx_EQ2->out (efxoutl, efxoutr);
                     Vol2_Efx ();
                 }
                 break;

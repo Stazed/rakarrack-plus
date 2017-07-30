@@ -26,7 +26,7 @@
 
 Cabinet::Cabinet(double sample_frequency, uint32_t intermediate_bufsize)
 {
-    eq = new EQ(0, 0, sample_frequency, intermediate_bufsize);
+    eq = new EQ(sample_frequency, intermediate_bufsize);
     Cabinet_Preset = 0;
     setpreset(Cabinet_Preset);
 }
@@ -47,9 +47,7 @@ Cabinet::cleanup()
 void
 Cabinet::out(float * efxoutl, float * efxoutr)
 {
-    eq->efxoutl = efxoutl;
-    eq->efxoutr = efxoutr;
-    eq->out();
+    eq->out(efxoutl, efxoutr);
 }
 
 void
