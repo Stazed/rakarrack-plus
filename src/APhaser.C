@@ -41,14 +41,14 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Analog_Phaser::Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Analog_Phaser::Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize)
 {
     float fSAMPLE_RATE = sample_rate;
     PERIOD = intermediate_bufsize;
     fPERIOD = intermediate_bufsize;
 
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+ //   efxoutl = efxoutl_;
+ //   efxoutr = efxoutr_;
 
     lxn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
 
@@ -100,7 +100,7 @@ Analog_Phaser::~Analog_Phaser ()
  * Effect output
  */
 void
-Analog_Phaser::out ()
+Analog_Phaser::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     int j;

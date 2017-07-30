@@ -32,9 +32,9 @@
 class Analog_Phaser
 {
 public:
-    Analog_Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize);
     ~Analog_Phaser ();
-    void out ();
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -42,8 +42,8 @@ public:
     void lv2_update_params(uint32_t period);
 
     int Ppreset;
-    float *efxoutl;
-    float *efxoutr;
+//    float *efxoutl;
+//    float *efxoutr;
     float outvolume;
 
 private:

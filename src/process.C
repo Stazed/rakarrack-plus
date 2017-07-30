@@ -240,7 +240,7 @@ RKR::RKR ()
     efx_Rev = new Reverb (efxoutl, efxoutr, fSample_rate, period);
     efx_Echo = new Echo (efxoutl, efxoutr, fSample_rate);
     efx_Phaser = new Phaser (efxoutl, efxoutr, fSample_rate, period);
-    efx_APhaser = new Analog_Phaser(efxoutl, efxoutr, fSample_rate, period);
+    efx_APhaser = new Analog_Phaser(fSample_rate, period);
     efx_Distorsion = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Overdrive = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_EQ2 = new EQ (efxoutl, efxoutr, fSample_rate, period);
@@ -1535,7 +1535,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 18:
                 if (APhaser_Bypass) {
-                    efx_APhaser->out ();
+                    efx_APhaser->out (efxoutl, efxoutr);
                     Vol_Efx (18, efx_APhaser->outvolume);
                 }
                 break;
