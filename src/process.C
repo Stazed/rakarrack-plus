@@ -241,8 +241,8 @@ RKR::RKR ()
     efx_Echo = new Echo (efxoutl, efxoutr, fSample_rate);
     efx_Phaser = new Phaser (efxoutl, efxoutr, fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
-    efx_Distorsion = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
-    efx_Overdrive = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
+    efx_Distorsion = new Distorsion (Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
+    efx_Overdrive = new Distorsion (Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_EQ2 = new EQ (fSample_rate, period);
     efx_EQ1 = new EQ (fSample_rate, period);
     efx_Compressor = new Compressor (fSample_rate);

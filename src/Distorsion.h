@@ -31,10 +31,9 @@
 class Distorsion
 {
 public:
-    Distorsion (float * efxoutl_, float * efxoutr_, double samplerate,
-    		uint32_t intermediate_bufsize, int wave_res, int wave_upq, int wave_dnq);
+    Distorsion (int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize);
     ~Distorsion ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr, uint32_t period);
     void setpreset (int dgui, int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -42,8 +41,6 @@ public:
     void applyfilters (float * efxoutl, float * efxoutr, uint32_t period);
 
     int Ppreset;
-    float *efxoutl;
-    float *efxoutr;
     float *octoutl;
     float *octoutr;
     float outvolume;

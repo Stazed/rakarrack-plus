@@ -28,13 +28,8 @@
 #include "Distorsion.h"
 #include "FPreset.h"
 
-Distorsion::Distorsion (float * efxoutl_, float * efxoutr_, double samplerate,
-		uint32_t intermediate_bufsize,
-		int wave_res, int wave_upq, int wave_dnq)
+Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
     octoutl = (float *) malloc (sizeof (float) * intermediate_bufsize);
     octoutr = (float *) malloc (sizeof (float) * intermediate_bufsize);
     unsigned int i;
@@ -141,7 +136,7 @@ Distorsion::applyfilters (float * efxoutl, float * efxoutr, uint32_t period)
  * Effect output
  */
 void
-Distorsion::out (float * smpsl, float * smpsr, uint32_t period)
+Distorsion::out (float * efxoutl, float * efxoutr, uint32_t period)
 {
     unsigned int i;
     float l, r, lout, rout;
@@ -153,13 +148,13 @@ Distorsion::out (float * smpsl, float * smpsr, uint32_t period)
     if (Pstereo != 0) {
         //Stereo
         for (i = 0; i < period; i++) {
-            efxoutl[i] = smpsl[i] * inputvol * 2.0f;
-            efxoutr[i] = smpsr[i] * inputvol * 2.0f;
+            efxoutl[i] = efxoutl[i] * inputvol * 2.0f;
+            efxoutr[i] = efxoutr[i] * inputvol * 2.0f;
         };
     } else {
         for (i = 0; i < period; i++) {
             efxoutl[i] =
-                (smpsl[i]  +  smpsr[i] ) * inputvol;
+                (efxoutl[i]  +  efxoutr[i] ) * inputvol;
         };
     };
 

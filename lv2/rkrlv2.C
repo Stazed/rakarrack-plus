@@ -362,14 +362,16 @@ LV2_Handle init_distlv2(const LV2_Descriptor *descriptor,double sample_freq, con
 
     getFeatures(plug,host_features);
 
-    plug->dist = new Distorsion(0,0, sample_freq, plug->period_max, /*oversampling*/2,
-                                /*up interpolation method*/4, /*down interpolation method*/2);
+    plug->dist = new Distorsion(/*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_distlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if(nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -383,6 +385,10 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
+    
+    // inline
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i=0;
@@ -411,12 +417,8 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
         plug->dist->changepar(i,val);
     }
 
-    //now set out ports and global period size
-    plug->dist->efxoutl = plug->output_l_p;
-    plug->dist->efxoutr = plug->output_r_p;
-
     //now run
-    plug->dist->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->dist->out(plug->output_l_p, plug->output_r_p, nframes);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->dist->outvolume, nframes);
