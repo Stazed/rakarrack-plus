@@ -235,6 +235,9 @@ LV2_Handle init_eqlv2(const LV2_Descriptor *descriptor,double sample_freq, const
 
 void run_eqlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+         return;
+    
     int i;
     int val;
 
@@ -252,9 +255,6 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->eq->lv2_update_params(nframes);
     }
@@ -524,6 +524,9 @@ LV2_Handle init_choruslv2(const LV2_Descriptor *descriptor,double sample_freq, c
 
 void run_choruslv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -542,9 +545,6 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->chorus->lv2_update_params(nframes);
     }
@@ -1052,6 +1052,9 @@ LV2_Handle init_alienlv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
 void run_alienlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -1070,9 +1073,6 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->alien->lv2_update_params(nframes);
     }
@@ -1244,6 +1244,9 @@ LV2_Handle init_eqplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
 void run_eqplv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+         return;
+    
     int i;
     int val;
 
@@ -1261,9 +1264,6 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->eq->lv2_update_params(nframes);
     }
@@ -1332,6 +1332,9 @@ LV2_Handle init_cablv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
 void run_cablv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
@@ -1348,9 +1351,6 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->cab->lv2_update_params(nframes);
     }
@@ -1943,6 +1943,9 @@ LV2_Handle init_arplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
 void run_arplv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -1960,9 +1963,6 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->arp->lv2_update_params(nframes);
     }
@@ -2493,6 +2493,9 @@ LV2_Handle init_coillv2(const LV2_Descriptor *descriptor,double sample_freq, con
 
 void run_coillv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -2510,9 +2513,6 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->coil->lv2_update_params(nframes);
     }
