@@ -246,7 +246,7 @@ RKR::RKR ()
     efx_EQ2 = new EQ (fSample_rate, period);
     efx_EQ1 = new EQ (fSample_rate, period);
     efx_Compressor = new Compressor (fSample_rate);
-    efx_WhaWha = new DynamicFilter (efxoutl, efxoutr, fSample_rate, period);
+    efx_WhaWha = new DynamicFilter (fSample_rate, period);
     efx_Alienwah = new Alienwah (fSample_rate, period);
     efx_Cabinet = new Cabinet (fSample_rate, period);
     efx_Pan = new Pan (efxoutl, efxoutr, fSample_rate);
@@ -1478,7 +1478,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 10:
                 if (WhaWha_Bypass) {
-                    efx_WhaWha->out (efxoutl, efxoutr, period);
+                    efx_WhaWha->out (efxoutl, efxoutr);
                     Vol_Efx (10, efx_WhaWha->outvolume);
                 }
                 break;

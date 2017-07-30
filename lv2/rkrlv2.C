@@ -1474,14 +1474,16 @@ LV2_Handle init_wahlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
     getFeatures(plug,host_features);
 
-    plug->wah = new DynamicFilter(0,0,sample_freq, plug->period_max);
-    plug->init_params = 1; // set for init LFO
+    plug->wah = new DynamicFilter(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_wahlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if(nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -1496,13 +1498,17 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
         return;
     }
 
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->wah->PERIOD = nframes;
-        plug->wah->lfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        plug->period_max = nframes;
+        plug->wah->lv2_update_params(nframes);
     }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i=0;
@@ -1539,12 +1545,8 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->wah->efxoutl = plug->output_l_p;
-    plug->wah->efxoutr = plug->output_r_p;
-
     //now run
-    plug->wah->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->wah->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->wah->outvolume, nframes);

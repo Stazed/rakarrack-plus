@@ -31,23 +31,18 @@
 class DynamicFilter
 {
 public:
-    DynamicFilter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    DynamicFilter (double sample_rate, uint32_t intermediate_bufsize);
     ~DynamicFilter ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
 
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
 
     int Ppreset;
-    float *efxoutl;
-    float *efxoutr;
     float outvolume; 
-
-    uint32_t PERIOD;
-    EffectLFO* lfo;		//lfo-ul DynamicFilter
 
 private:
     //Parametrii DynamicFilter
@@ -71,6 +66,9 @@ private:
 
     float panning, depth, ampsns, ampsmooth;
     float ms1, ms2, ms3, ms4;	//mean squares
+    
+    uint32_t PERIOD;
+    EffectLFO* lfo;		//lfo-ul DynamicFilter
 
     class Filter *filterl, *filterr;
     class FilterParams *filterpars;

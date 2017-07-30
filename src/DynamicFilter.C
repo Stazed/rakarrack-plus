@@ -26,18 +26,15 @@
 #include "DynamicFilter.h"
 #include <stdio.h>
 
-DynamicFilter::DynamicFilter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t ibufsz)
+DynamicFilter::DynamicFilter (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize; // correct for rakarrack, many be adjusted for lv2
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
     filterl = NULL;
     filterr = NULL;
-    filterpars = new FilterParams (0, 64, 64, sample_rate, ibufsz);
-    PERIOD = 256;//best guess of period size
+    filterpars = new FilterParams (0, 64, 64, sample_rate, intermediate_bufsize);
     setpreset (Ppreset);
     cleanup ();
 };
@@ -55,7 +52,7 @@ DynamicFilter::~DynamicFilter ()
  * Apply the effect
  */
 void
-DynamicFilter::out (float * smpsl, float * smpsr, uint32_t period)
+DynamicFilter::out (float * efxoutl, float * efxoutr)
 {
     uint32_t i;
     float lfol, lfor;
@@ -71,11 +68,11 @@ DynamicFilter::out (float * smpsl, float * smpsr, uint32_t period)
     float freq = filterpars->getfreq ();
     float q = filterpars->getq ();
 
-    for (i = 0; i < period; i++) {
-        efxoutl[i] = smpsl[i];
-        efxoutr[i] = smpsr[i];
+    for (i = 0; i < PERIOD; i++) {
+        efxoutl[i] = efxoutl[i];
+        efxoutr[i] = efxoutr[i];
 
-        float x = (fabsf (smpsl[i]) + fabsf (smpsr[i])) * 0.5f;
+        float x = (fabsf (efxoutl[i]) + fabsf (efxoutr[i])) * 0.5f;
         ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
     };
 
@@ -93,15 +90,15 @@ DynamicFilter::out (float * smpsl, float * smpsr, uint32_t period)
     filterr->setfreq_and_q (frr, q);
 
 
-    filterl->filterout (efxoutl, period);
-    filterr->filterout (efxoutr, period);
+    filterl->filterout (efxoutl, PERIOD);
+    filterr->filterout (efxoutr, PERIOD);
 
     //panning
     //for (i = 0; i < period; i++) {
         //efxoutl[i] *= panning;
         //efxoutr[i] *= (1.0f - panning);
     //};
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         efxoutl[i] *= (1.0f - panning);
         efxoutr[i] *= panning;
     };
@@ -121,7 +118,12 @@ DynamicFilter::cleanup ()
     ms4 = 0.0;
 };
 
-
+void
+DynamicFilter::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    lfo->updateparams(period);
+}
 /*
  * Parameter control
  */
