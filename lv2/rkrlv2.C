@@ -626,6 +626,9 @@ LV2_Handle init_aphaselv2(const LV2_Descriptor *descriptor,double sample_freq, c
 
 void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -643,9 +646,6 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
-        if( nframes == 0)
-            return;
-        
         plug->period_max = nframes;
         plug->aphase->lv2_update_params(nframes);
     }
@@ -1699,14 +1699,17 @@ LV2_Handle init_dflangelv2(const LV2_Descriptor *descriptor,double sample_freq, 
     plug->effectindex = IDFLANGE;
     plug->prev_bypass = 1;
     
-    plug->dflange = new Dflange(0,0, sample_freq);
-    plug->init_params = 1; // LFO init
+    getFeatures(plug,host_features);    // for period_max
+    plug->dflange = new Dflange(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 {
+    if(nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -1721,13 +1724,17 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
         return;
     }
 
-    //lfo effects must set period before params
-    if(plug->init_params)
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->dflange->PERIOD = nframes;
-        plug->dflange->lfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        plug->period_max = nframes;
+        plug->dflange->lv2_update_params(nframes);
     }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i=0;
@@ -1745,20 +1752,8 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->dflange->efxoutl = plug->output_l_p;
-    plug->dflange->efxoutr = plug->output_r_p;
-
-    //dflange does it inline?
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->dflange->efxoutl = plug->output_l_p;
-    plug->dflange->efxoutr = plug->output_r_p;
-
     //now run
-    plug->dflange->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->dflange->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;

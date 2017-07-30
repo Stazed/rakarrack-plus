@@ -32,11 +32,10 @@
 #include <math.h>
 #include "Dual_Flange.h"
 
-Dflange::Dflange (float * efxoutl_, float * efxoutr_, double sample_rate)
+Dflange::Dflange (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
     fSAMPLE_RATE = sample_rate;
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted for lv2
 
     //default values
     Ppreset = 0;
@@ -81,7 +80,6 @@ Dflange::Dflange (float * efxoutl_, float * efxoutr_, double sample_rate)
     logmax = logf(1000.0f)/logf(2.0f);
 
     lfo = new EffectLFO(sample_rate);
-    PERIOD = 255;//best guess for init
     setpreset (Ppreset);
     cleanup ();
 };
@@ -125,18 +123,23 @@ Dflange::cleanup ()
 
 };
 
+void
+Dflange::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    lfo->updateparams(period);
+}
 
 /*
  * Effect output
  */
 void
-Dflange::out (float * smpsl, float * smpsr, uint32_t period)
+Dflange::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     //deal with LFO's
     int tmp0, tmp1;
-    period_const = 1.0f/(float)period;
-    PERIOD = period;
+    period_const = 1.0f/(float)PERIOD;
 
     float lfol, lfor, lmod, rmod, lmodfreq, rmodfreq, rx0, rx1, lx0, lx1;
     float ldif0, ldif1, rdif0, rdif1;  //Difference between fractional delay and floor(fractional delay)
@@ -174,10 +177,10 @@ Dflange::out (float * smpsl, float * smpsr, uint32_t period)
         //lfo ready...
 
         if(Pzero) {
-            for (i = 0; i < period; i++) {
+            for (i = 0; i < PERIOD; i++) {
 
-                ldl = smpsl[i] * lpan + ldl * ffb;
-                rdl = smpsr[i] * rpan + rdl * ffb;
+                ldl = efxoutl[i] * lpan + ldl * ffb;
+                rdl = efxoutr[i] * rpan + rdl * ffb;
 
                 //LowPass Filter
                 ldl = ldl * (1.0f - fhidamp) + oldl * fhidamp;
@@ -204,10 +207,10 @@ Dflange::out (float * smpsl, float * smpsr, uint32_t period)
                 dlB += lx1;
             }
         } else {
-            for (i = 0; i < period; i++) {
+            for (i = 0; i < PERIOD; i++) {
 
-                ldl = smpsl[i] * lpan + ldl * ffb;
-                rdl = smpsr[i] * rpan + rdl * ffb;
+                ldl = efxoutl[i] * lpan + ldl * ffb;
+                rdl = efxoutr[i] * rpan + rdl * ffb;
 
                 //LowPass Filter
                 ldl = ldl * (1.0f - fhidamp) + oldl * fhidamp;
@@ -282,7 +285,7 @@ Dflange::out (float * smpsl, float * smpsr, uint32_t period)
         //lfo ready...
 
 
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
 
             //Delay line utility
             ldl = ldelay[kl];
@@ -291,8 +294,8 @@ Dflange::out (float * smpsl, float * smpsr, uint32_t period)
             r = rdl * flrcross + ldl * frlcross;
             ldl = l;
             rdl = r;
-            ldl = smpsl[i] * lpan - ldl * ffb;
-            rdl = smpsr[i] * rpan - rdl * ffb;
+            ldl = efxoutl[i] * lpan - ldl * ffb;
+            rdl = efxoutr[i] * rpan - rdl * ffb;
 
 
             //LowPass Filter
@@ -305,8 +308,8 @@ Dflange::out (float * smpsl, float * smpsr, uint32_t period)
                 //Offset zero reference delay
                 zdl = zldelay[zl];
                 zdr = zrdelay[zr];
-                zldelay[zl] = smpsl[i];
-                zrdelay[zr] = smpsr[i];
+                zldelay[zl] = efxoutl[i];
+                zrdelay[zr] = efxoutr[i];
                 if (--zl < 0)   //Cycle delay buffer in reverse so delay time can be indexed directly with addition
                     zl =  zcenter;
                 if (--zr < 0)
@@ -349,22 +352,17 @@ Dflange::out (float * smpsl, float * smpsr, uint32_t period)
             //End flanging, next process outputs
 
             if(Pzero) {
-                efxoutl[i]= dry * smpsl[i] +  fsubtract * wet * (fsubtract * (lsA + lsB)  + zdl);    // Make final FX out mix
-                efxoutr[i]= dry * smpsr[i] +  fsubtract * wet * (fsubtract * (rsA + rsB)  + zdr);
+                efxoutl[i]= dry * efxoutl[i] +  fsubtract * wet * (fsubtract * (lsA + lsB)  + zdl);    // Make final FX out mix
+                efxoutr[i]= dry * efxoutr[i] +  fsubtract * wet * (fsubtract * (rsA + rsB)  + zdr);
             } else {
-                efxoutl[i]= dry * smpsl[i] +  wet * fsubtract * (lsA + lsB);    // Make final FX out mix
-                efxoutr[i]= dry * smpsr[i] +  wet * fsubtract * (rsA + rsB);
+                efxoutl[i]= dry * efxoutl[i] +  wet * fsubtract * (lsA + lsB);    // Make final FX out mix
+                efxoutr[i]= dry * efxoutr[i] +  wet * fsubtract * (rsA + rsB);
             }
-
-
-
 
             if (--kl < 0)   //Cycle delay buffer in reverse so delay time can be indexed directly with addition
                 kl =  maxx_delay;
             if (--kr < 0)
                 kr =  maxx_delay;
-
-
 
 // Increment LFO
             drA += rx0;
@@ -372,12 +370,9 @@ Dflange::out (float * smpsl, float * smpsr, uint32_t period)
             dlA += lx0;
             dlB += lx1;
 
-        };  //end for loop
-
+        }  //end for loop
     }  //end intense if statement
-
-
-};
+}
 
 
 /*

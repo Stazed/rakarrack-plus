@@ -36,21 +36,16 @@
 class Dflange
 {
 public:
-    Dflange (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Dflange (double sample_rate, uint32_t intermediate_bufsize);
     ~Dflange ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
 
     int Ppreset;
-
-    float *efxoutl;
-    float *efxoutr;
-
-    uint32_t PERIOD;
-    EffectLFO *lfo;		//lfo Flanger
 
 private:
     //Parameters
@@ -98,7 +93,8 @@ private:
     class FPreset *Fpre;
 
     float fSAMPLE_RATE;
-
+    uint32_t PERIOD;
+    EffectLFO *lfo;		//lfo Flanger
 
 };
 
