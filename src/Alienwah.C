@@ -26,11 +26,8 @@
 #include "Alienwah.h"
 #include <stdio.h>
 
-Alienwah::Alienwah (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Alienwah::Alienwah (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
@@ -56,7 +53,7 @@ Alienwah::~Alienwah ()
  * Apply the effect
  */
 void
-Alienwah::out ()
+Alienwah::out (float * efxoutl, float * efxoutr)
 {
 	unsigned int i;
     float lfol, lfor;
