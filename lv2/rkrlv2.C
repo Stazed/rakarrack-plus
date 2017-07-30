@@ -436,13 +436,16 @@ LV2_Handle init_echolv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->effectindex = IECHO;
     plug->prev_bypass = 1;
     
-    plug->echo = new Echo(0,0,sample_freq);
+    plug->echo = new Echo(sample_freq);
 
     return plug;
 }
 
 void run_echolv2(LV2_Handle handle, uint32_t nframes)
 {
+    if(nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -458,6 +461,10 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
         return;
     }
 
+    // inline
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//wet/dry
@@ -492,12 +499,8 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->echo->efxoutl = plug->output_l_p;
-    plug->echo->efxoutr = plug->output_r_p;
-
     //now run
-    plug->echo->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->echo->out(plug->output_l_p, plug->output_r_p, nframes);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->echo->outvolume, nframes);

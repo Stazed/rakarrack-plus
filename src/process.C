@@ -238,7 +238,7 @@ RKR::RKR ()
     efx_Chorus = new Chorus (fSample_rate, period);
     efx_Flanger = new Chorus (fSample_rate, period);
     efx_Rev = new Reverb (efxoutl, efxoutr, fSample_rate, period);
-    efx_Echo = new Echo (efxoutl, efxoutr, fSample_rate);
+    efx_Echo = new Echo (fSample_rate);
     efx_Phaser = new Phaser (efxoutl, efxoutr, fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     efx_Distorsion = new Distorsion (Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);

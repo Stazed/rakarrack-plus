@@ -32,19 +32,15 @@
 class Echo
 {
 public:
-    Echo (float * efxoutl_, float * efxoutr_, double samplerate);
+    Echo (double samplerate);
     ~Echo ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr, uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
 
     int Ppreset;
-
-    float *efxoutl;
-    float *efxoutr;
-
     float outvolume;
 
     void Tempo2Delay(int delay);

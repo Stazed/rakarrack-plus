@@ -30,10 +30,8 @@
 #include <math.h>
 #include "Echo.h"
 
-Echo::Echo (float * efxoutl_, float * efxoutr_, double samplerate)
+Echo::Echo (double samplerate)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
     //default values
     Ppreset = 0;
     Pvolume = 50;
@@ -100,7 +98,7 @@ Echo::initdelays ()
  * Effect output
  */
 void
-Echo::out (float * smpsl, float * smpsr, uint32_t period)
+Echo::out (float * efxoutl, float * efxoutr, uint32_t period)
 {
     unsigned int i;
     float l, r, ldl, rdl, ldlout, rdlout, rvl, rvr;
@@ -125,11 +123,11 @@ Echo::out (float * smpsl, float * smpsr, uint32_t period)
         ldlout = -ldl*fb;
         rdlout = -rdl*fb;
         if (!Pdirect) {
-            l = ldl = smpsl[i] * panning + ldlout;
-            r = rdl = smpsr[i] * (1.0f - panning) + rdlout;
+            l = ldl = efxoutl[i] * panning + ldlout;
+            r = rdl = efxoutr[i] * (1.0f - panning) + rdlout;
         } else {
-            ldl = smpsl[i] * panning + ldlout;
-            rdl = smpsr[i] * (1.0f - panning) + rdlout;
+            ldl = efxoutl[i] * panning + ldlout;
+            rdl = efxoutr[i] * (1.0f - panning) + rdlout;
         }
 
         efxoutl[i]= l;
@@ -140,10 +138,8 @@ Echo::out (float * smpsl, float * smpsr, uint32_t period)
         oldr = rdl * hidamp + oldr * (1.0f - hidamp);
         oldl += DENORMAL_GUARD;
         oldr += DENORMAL_GUARD;
-
-    };
-
-};
+    }
+}
 
 
 /*
