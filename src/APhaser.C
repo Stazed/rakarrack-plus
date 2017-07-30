@@ -47,9 +47,6 @@ Analog_Phaser::Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize)
     PERIOD = intermediate_bufsize;
     fPERIOD = intermediate_bufsize;
 
- //   efxoutl = efxoutl_;
- //   efxoutr = efxoutr_;
-
     lxn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
 
     lyn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);

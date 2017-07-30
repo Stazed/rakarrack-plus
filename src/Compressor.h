@@ -35,20 +35,15 @@ class Compressor
 
 public:
 
-    Compressor (float * efxoutl_, float * efxoutr_, double samplerate);
+    Compressor (double samplerate);
     ~Compressor ();
 
-    void out (float * smps_l, float * smps_r, uint32_t period);
+    void out (float *efxoutl, float *efxoutr, uint32_t period);
 
     void Compressor_Change (int np, int value);
     void Compressor_Change_Preset (int dgui,int npreset);
     int getpar (int npar);
     void cleanup ();
-
-    float *efxoutl;
-    float *efxoutr;
-
-
 
     // Compressor
 

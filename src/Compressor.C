@@ -37,11 +37,8 @@
 #include "Compressor.h"
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
-Compressor::Compressor (float * efxoutl_, float * efxoutr_, double samplerate)
+Compressor::Compressor (double samplerate)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
     rvolume = 0.0f;
     rvolume_db = 0.0f;
     lvolume = 0.0f;

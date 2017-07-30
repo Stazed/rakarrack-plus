@@ -68,10 +68,10 @@ CompBand::CompBand (float * efxoutl_, float * efxoutr_, double sample_rate, uint
     hpf3r = new AnalogFilter (3, 5000.0f,.7071f, 0, sample_rate, interpbuf);
 
 
-    CL = new Compressor(efxoutl,efxoutr, sample_rate);
-    CML = new Compressor(efxoutl,efxoutr, sample_rate);
-    CMH = new Compressor(efxoutl,efxoutr, sample_rate);
-    CH = new Compressor(efxoutl,efxoutr, sample_rate);
+    CL = new Compressor(sample_rate);
+    CML = new Compressor(sample_rate);
+    CMH = new Compressor(sample_rate);
+    CH = new Compressor(sample_rate);
 
     CL->Compressor_Change_Preset(0,5);
     CML->Compressor_Change_Preset(0,5);

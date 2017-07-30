@@ -245,7 +245,7 @@ RKR::RKR ()
     efx_Overdrive = new Distorsion (efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_EQ2 = new EQ (fSample_rate, period);
     efx_EQ1 = new EQ (fSample_rate, period);
-    efx_Compressor = new Compressor (efxoutl, efxoutr, fSample_rate);
+    efx_Compressor = new Compressor (fSample_rate);
     efx_WhaWha = new DynamicFilter (efxoutl, efxoutr, fSample_rate, period);
     efx_Alienwah = new Alienwah (fSample_rate, period);
     efx_Cabinet = new Cabinet (fSample_rate, period);
@@ -254,7 +254,7 @@ RKR::RKR ()
     efx_MusDelay = new MusicDelay (efxoutl, efxoutr, fSample_rate);
     efx_Gate = new Gate (efxoutl, efxoutr, fSample_rate, period);
     efx_NewDist = new NewDist(efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
-    efx_FLimiter = new Compressor (efxoutl, efxoutr, fSample_rate);
+    efx_FLimiter = new Compressor (fSample_rate);
     efx_Valve = new Valve(efxoutl, efxoutr, fSample_rate, period);
     efx_DFlange = new Dflange(efxoutl,efxoutr, fSample_rate);
     efx_Ring = new Ring(efxoutl,efxoutr, fSample_rate);

@@ -306,13 +306,16 @@ LV2_Handle init_complv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->effectindex = ICOMP;
     plug->prev_bypass = 1;
     
-    plug->comp = new Compressor(0,0, sample_freq);
+    plug->comp = new Compressor(sample_freq);
 
     return plug;
 }
 
 void run_complv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
@@ -340,10 +343,6 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
     //comp does in inline
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->comp->efxoutl = plug->output_l_p;
-    plug->comp->efxoutr = plug->output_r_p;
 
     //now run
     plug->comp->out(plug->output_l_p,plug->output_r_p,nframes);
@@ -707,7 +706,7 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(0,0,sample_freq);
+    plug->comp = new Compressor(sample_freq);
     // set default values
     plug->comp->Compressor_Change(1,-24);//threshold
     plug->comp->Compressor_Change(2,4);  //ratio
@@ -3513,7 +3512,7 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(0,0,sample_freq);
+    plug->comp = new Compressor(sample_freq);
     // set default values
     plug->comp->Compressor_Change(1,-24);//threshold
     plug->comp->Compressor_Change(2,4);  //ratio
