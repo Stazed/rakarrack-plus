@@ -1336,7 +1336,7 @@ LV2_Handle init_cablv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
     getFeatures(plug,host_features);
 
-    plug->cab = new Cabinet(0,0,sample_freq, plug->period_max);
+    plug->cab = new Cabinet(sample_freq, plug->period_max);
 
     return plug;
 }
@@ -1384,12 +1384,8 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
         plug->cab->setpreset(val);
     }
 
-    //now set out ports
-    plug->cab->efxoutl = plug->output_l_p;
-    plug->cab->efxoutr = plug->output_r_p;
-
     //now run
-    plug->cab->out();
+    plug->cab->out(plug->output_l_p, plug->output_r_p);
     
     //post effect volume adjustment from rakarrack
     Vol3_Efx(plug,nframes);

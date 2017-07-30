@@ -248,7 +248,7 @@ RKR::RKR ()
     efx_Compressor = new Compressor (efxoutl, efxoutr, fSample_rate);
     efx_WhaWha = new DynamicFilter (efxoutl, efxoutr, fSample_rate, period);
     efx_Alienwah = new Alienwah (fSample_rate, period);
-    efx_Cabinet = new Cabinet (efxoutl, efxoutr, fSample_rate, period);
+    efx_Cabinet = new Cabinet (fSample_rate, period);
     efx_Pan = new Pan (efxoutl, efxoutr, fSample_rate);
     efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q, period, fSample_rate); // FIXME reversed sample/period
     efx_MusDelay = new MusicDelay (efxoutl, efxoutr, fSample_rate);
@@ -1492,7 +1492,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 12:
                 if (Cabinet_Bypass) {
-                    efx_Cabinet->out ();
+                    efx_Cabinet->out (efxoutl, efxoutr);
                     Vol3_Efx ();
                 }
 
