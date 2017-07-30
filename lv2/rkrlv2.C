@@ -2516,7 +2516,7 @@ LV2_Handle init_coillv2(const LV2_Descriptor *descriptor,double sample_freq, con
 
     getFeatures(plug,host_features);
 
-    plug->coil = new CoilCrafter(0,0,sample_freq,plug->period_max);
+    plug->coil = new CoilCrafter(sample_freq,plug->period_max);
 
     return plug;
 }
@@ -2536,6 +2536,21 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
+    
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        if( nframes == 0)
+            return;
+        
+        plug->period_max = nframes;
+        plug->coil->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     //check and set changed parameters
     i=0;
@@ -2552,16 +2567,9 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
             plug->coil->changepar(i+2,val);
         }
     }
-    //coilcrafter does it inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->coil->efxoutl = plug->output_l_p;
-    plug->coil->efxoutr = plug->output_r_p;
 
     //now run
-    plug->coil->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->coil->out(plug->output_l_p, plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;

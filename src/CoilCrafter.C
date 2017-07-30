@@ -27,11 +27,9 @@
 
 
 
-CoilCrafter::CoilCrafter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+CoilCrafter::CoilCrafter (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted for lv2
 
     //default values
     Ppreset = 0;
@@ -112,44 +110,49 @@ CoilCrafter::cleanup ()
 
 };
 
+void
+CoilCrafter::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    harm->lv2_update_params(period);
+}
 
 /*
  * Effect output
  */
 void
-CoilCrafter::out (float * smpsl, float * smpsr, uint32_t period)
+CoilCrafter::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
 
     if(Ppo>0) {
-        RB1l->filterout(smpsl, period);
-        RB1r->filterout(smpsr, period);
+        RB1l->filterout(efxoutl, PERIOD);
+        RB1r->filterout(efxoutr, PERIOD);
 
-        for (i=0; i<period; i++) {
-            smpsl[i]*=att;
-            smpsr[i]*=att;
+        for (i=0; i<PERIOD; i++) {
+            efxoutl[i]*=att;
+            efxoutr[i]*=att;
         }
 
     }
     if(Ppd>0) {
-        RB2l->filterout(smpsl, period);
-        RB2r->filterout(smpsr, period);
+        RB2l->filterout(efxoutl, PERIOD);
+        RB2r->filterout(efxoutr, PERIOD);
     }
 
-    if(Pmode) harm->harm_out(smpsl,smpsr, period);
+    if(Pmode) harm->harm_out(efxoutl,efxoutr, PERIOD);
 
 
-    for (i=0; i<period; i++) {
-        smpsl[i]*=outvolume;
-        smpsr[i]*=outvolume;
+    for (i=0; i<PERIOD; i++) {
+        efxoutl[i]*=outvolume;
+        efxoutr[i]*=outvolume;
 
         if(Pmode) {
-            smpsl[i]*=.5f;
-            smpsr[i]*=.5f;
+            efxoutl[i]*=.5f;
+            efxoutr[i]*=.5f;
         }
     }
-
 };
 
 

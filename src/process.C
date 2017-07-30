@@ -269,7 +269,7 @@ RKR::RKR ()
     efx_Looper = new Looper(efxoutl,efxoutr,looper_size,fSample_rate, period);
     efx_RyanWah = new RyanWah(efxoutl,efxoutr, fSample_rate, period);
     efx_RBEcho = new RBEcho(efxoutl,efxoutr, fSample_rate);
-    efx_CoilCrafter = new CoilCrafter(efxoutl,efxoutr, fSample_rate, period);
+    efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr, fSample_rate, period);
     efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled,VocBands,Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
     efx_Sustainer = new Sustainer(efxoutl,efxoutr, fSample_rate);
@@ -1640,7 +1640,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 33:
                 if (CoilCrafter_Bypass) {
-                    efx_CoilCrafter->out(efxoutl, efxoutr, period);
+                    efx_CoilCrafter->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;
