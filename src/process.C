@@ -279,7 +279,7 @@ RKR::RKR ()
     efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,fSample_rate, period, Rev_Down, Rev_U_Q, Rev_D_Q);      // FIXME make consistent sample/period
     efx_Echotron = new Echotron(efxoutl,efxoutr, fSample_rate, period);
     efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, period, fSample_rate);  // FIXME reversed sample/period
-    efx_CompBand = new CompBand(efxoutl,efxoutr, fSample_rate, period);
+    efx_CompBand = new CompBand(fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr, fSample_rate);
     efx_Vibe = new Vibe(efxoutl,efxoutr, fSample_rate);
     efx_Infinity = new Infinity(efxoutl,efxoutr, fSample_rate, period);

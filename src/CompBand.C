@@ -38,11 +38,8 @@
 
 
 
-CompBand::CompBand (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
     lowl = (float *) malloc (sizeof (float) * intermediate_bufsize);
     lowr = (float *) malloc (sizeof (float) * intermediate_bufsize);
     midll = (float *) malloc (sizeof (float) * intermediate_bufsize);
@@ -146,15 +143,14 @@ CompBand::cleanup ()
  * Effect output
  */
 void
-CompBand::out (float * smpsl, float * smpsr, uint32_t period)
+CompBand::out (float * efxoutl, float * efxoutr, uint32_t period)
 {
     unsigned int i;
 
-
-    memcpy(lowl,smpsl,sizeof(float) * period);
-    memcpy(midll,smpsl,sizeof(float) * period);
-    memcpy(midhl,smpsl,sizeof(float) * period);
-    memcpy(highl,smpsl,sizeof(float) * period);
+    memcpy(lowl,efxoutl,sizeof(float) * period);
+    memcpy(midll,efxoutl,sizeof(float) * period);
+    memcpy(midhl,efxoutl,sizeof(float) * period);
+    memcpy(highl,efxoutl,sizeof(float) * period);
 
     lpf1l->filterout(lowl, period);
     hpf1l->filterout(midll, period);
@@ -163,10 +159,10 @@ CompBand::out (float * smpsl, float * smpsr, uint32_t period)
     lpf3l->filterout(midhl, period);
     hpf3l->filterout(highl, period);
 
-    memcpy(lowr,smpsr,sizeof(float) * period);
-    memcpy(midlr,smpsr,sizeof(float) * period);
-    memcpy(midhr,smpsr,sizeof(float) * period);
-    memcpy(highr,smpsr,sizeof(float) * period);
+    memcpy(lowr,efxoutr,sizeof(float) * period);
+    memcpy(midlr,efxoutr,sizeof(float) * period);
+    memcpy(midhr,efxoutr,sizeof(float) * period);
+    memcpy(highr,efxoutr,sizeof(float) * period);
 
     lpf1r->filterout(lowr, period);
     hpf1r->filterout(midlr, period);

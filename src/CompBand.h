@@ -37,9 +37,9 @@
 class CompBand
 {
 public:
-    CompBand (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    CompBand (double sample_rate, uint32_t intermediate_bufsize);
     ~CompBand ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr,  uint32_t period);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -49,8 +49,6 @@ public:
     float outvolume;
     float level;
 
-    float *efxoutl;
-    float *efxoutr;
     float *lowl;
     float *lowr;
     float *midll;
