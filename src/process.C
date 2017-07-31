@@ -238,7 +238,7 @@ RKR::RKR ()
     efx_Chorus = new Chorus (fSample_rate, period);
     efx_Flanger = new Chorus (fSample_rate, period);
     efx_Rev = new Reverb (efxoutl, efxoutr, fSample_rate, period);
-    efx_Echo = new Echo (fSample_rate);
+    efx_Echo = new Echo (fSample_rate, period);
     efx_Phaser = new Phaser (efxoutl, efxoutr, fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     efx_Distorsion = new Distorsion (Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
@@ -1458,7 +1458,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 4:
                 if (Echo_Bypass) {
-                    efx_Echo->out (efxoutl, efxoutr, period);
+                    efx_Echo->out (efxoutl, efxoutr);
                     Vol_Efx (4, efx_Echo->outvolume);
                 }
                 break;

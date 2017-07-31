@@ -236,22 +236,24 @@ LV2_Handle init_eqlv2(const LV2_Descriptor *descriptor,double sample_freq, const
 void run_eqlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
-         return;
+        return;
     
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->eq->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-    
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -260,10 +262,6 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     i = 0;
     val = (int)*plug->param_p[0]+64;//gain
@@ -450,35 +448,42 @@ LV2_Handle init_echolv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->effectindex = IECHO;
     plug->prev_bypass = 1;
     
-    plug->echo = new Echo(sample_freq);
+    getFeatures(plug,host_features);
+    
+    plug->echo = new Echo(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_echolv2(LV2_Handle handle, uint32_t nframes)
 {
-    if(nframes == 0)
+    if( nframes == 0)
         return;
     
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
-
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->echo->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    // inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->echo->lv2_update_params(nframes);
+    }
     
+    // we are good to run now
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//wet/dry
@@ -514,7 +519,7 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     }
 
     //now run
-    plug->echo->out(plug->output_l_p, plug->output_r_p, nframes);
+    plug->echo->out(plug->output_l_p, plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->echo->outvolume, nframes);
@@ -1254,22 +1259,24 @@ LV2_Handle init_eqplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 void run_eqplv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
-         return;
+        return;
     
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->eq->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -1278,10 +1285,6 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-    
     //check and set changed parameters
     i = 0;
 
@@ -1488,23 +1491,25 @@ LV2_Handle init_wahlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
 void run_wahlv2(LV2_Handle handle, uint32_t nframes)
 {
-    if(nframes == 0)
+    if( nframes == 0)
         return;
     
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->wah->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -1513,10 +1518,6 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];
@@ -1716,23 +1717,25 @@ LV2_Handle init_dflangelv2(const LV2_Descriptor *descriptor,double sample_freq, 
 
 void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 {
-    if(nframes == 0)
+    if( nframes == 0)
         return;
     
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->dflange->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -1741,10 +1744,6 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i]-64;//0 Wet/dry

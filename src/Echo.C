@@ -30,8 +30,10 @@
 #include <math.h>
 #include "Echo.h"
 
-Echo::Echo (double samplerate)
+Echo::Echo (double samplerate, uint32_t intermediate_bufsize)
 {
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    
     //default values
     Ppreset = 0;
     Pvolume = 50;
@@ -74,6 +76,11 @@ Echo::cleanup ()
     oldr = 0.0;
 };
 
+void
+Echo::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+}
 
 /*
  * Initialize the delays
@@ -98,12 +105,12 @@ Echo::initdelays ()
  * Effect output
  */
 void
-Echo::out (float * efxoutl, float * efxoutr, uint32_t period)
+Echo::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, ldl, rdl, ldlout, rdlout, rvl, rvr;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
         ldl = ldelay->delay_simple(oldl, ltime, 0, 1, 0);
         rdl = rdelay->delay_simple(oldr, rtime, 0, 1, 0);

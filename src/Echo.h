@@ -32,14 +32,15 @@
 class Echo
 {
 public:
-    Echo (double samplerate);
+    Echo (double samplerate, uint32_t intermediate_bufsize);
     ~Echo ();
-    void out (float * efxoutl, float * efxoutr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    
     int Ppreset;
     float outvolume;
 
@@ -79,6 +80,8 @@ private:
     float oldl, oldr;		//pt. lpf
     float panning, lrcross, fb, hidamp, reverse, ireverse;
     float  Srate_Attack_Coeff;
+    
+    uint32_t PERIOD;
 };
 
 
