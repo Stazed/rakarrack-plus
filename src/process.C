@@ -255,10 +255,10 @@ RKR::RKR ()
     efx_Gate = new Gate (efxoutl, efxoutr, fSample_rate, period);
     efx_NewDist = new NewDist(efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_FLimiter = new Compressor (fSample_rate, period);
-    efx_Valve = new Valve(efxoutl, efxoutr, fSample_rate, period);
+    efx_Valve = new Valve(fSample_rate, period);
     efx_DFlange = new Dflange(fSample_rate, period);
     efx_Ring = new Ring(efxoutl,efxoutr, fSample_rate);
-    efx_Exciter = new Exciter(efxoutl,efxoutr, fSample_rate, period);
+    efx_Exciter = new Exciter(fSample_rate, period);
     efx_MBDist = new MBDist(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Arpie = new Arpie(fSample_rate, period);
     efx_Expander = new Expander(efxoutl,efxoutr, fSample_rate, period);
@@ -1542,7 +1542,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 19:
                 if (Valve_Bypass) {
-                    efx_Valve->out(efxoutl, efxoutr, period);
+                    efx_Valve->out(efxoutl, efxoutr);
                     Vol_Efx (19, efx_Valve->outvolume);
                 }
                 break;
@@ -1563,7 +1563,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 22:
                 if (Exciter_Bypass) {
-                    efx_Exciter->out(efxoutl, efxoutr, period);
+                    efx_Exciter->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

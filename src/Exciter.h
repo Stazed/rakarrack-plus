@@ -28,18 +28,16 @@
 class Exciter
 {
 public:
-    Exciter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    Exciter (double sample_rate, uint32_t intermediate_bufsize);
     ~Exciter ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    
     int Ppreset;
-
-    float *efxoutl;
-    float *efxoutr;
     float outvolume;
 
 private:
@@ -57,7 +55,7 @@ private:
 
     float rm[10];
 
-
+    uint32_t PERIOD;
 
     class HarmEnhancer *harm;
 

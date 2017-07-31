@@ -30,11 +30,12 @@
 
 HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, double sample_rate, uint32_t intermediate_bufsize)
 {
-
-    inputl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    inputr = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    
+    inputl = (float *) malloc (sizeof (float) * PERIOD);
+    inputr = (float *) malloc (sizeof (float) * PERIOD);
     unsigned int i;
-    for(i=0;i<intermediate_bufsize;i++)
+    for(i=0;i<PERIOD;i++)
     {
     	inputl[i] = inputr[i] = 0;
     }
@@ -48,13 +49,13 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, do
 
     hpffreq = hfreq;
     lpffreq = lfreq;
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
     hpfl = new AnalogFilter(3, hfreq, 1, 0, sample_rate, interpbuf);
     hpfr = new AnalogFilter(3, hfreq, 1, 0, sample_rate, interpbuf);
     lpfl = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
     lpfr = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
 
-    limiter = new Compressor (sample_rate, intermediate_bufsize);
+    limiter = new Compressor (sample_rate, PERIOD);
     limiter->Compressor_Change_Preset(0,4);
     calcula_mag(Rmag);
 }
@@ -81,6 +82,12 @@ HarmEnhancer::cleanup()
 
 };
 
+void
+HarmEnhancer::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    limiter->lv2_update_params(period);
+}
 
 void
 HarmEnhancer::set_vol(int mode, float gain)
@@ -105,7 +112,6 @@ HarmEnhancer::set_freqh(int mode, float freq)
 
 }
 
-
 void
 HarmEnhancer::set_freql(int mode, float freq)
 {
@@ -116,11 +122,7 @@ HarmEnhancer::set_freql(int mode, float freq)
 
     lpfl->setfreq(lpffreq+freq);
     lpfr->setfreq(lpffreq+freq);
-
 }
-
-
-
 
 /* Calculate Chebychev coefficents from partial magnitudes, adapted from
  * example in Num. Rec. */
@@ -153,11 +155,7 @@ HarmEnhancer::chebpc (float c[], float d[])
     }
     d[0] = -dd[0] + 0.5 * c[0];
 
-
-
 }
-
-
 
 void
 HarmEnhancer::calcula_mag (float *Rmag)
@@ -194,23 +192,23 @@ HarmEnhancer::calcula_mag (float *Rmag)
 }
 
 void
-HarmEnhancer::harm_out(float *smpsl, float *smpsr, uint32_t period)
+HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
 {
 
     unsigned int i;
     int j;
 
-    memcpy(inputl,smpsl, sizeof(float)*period);
-    memcpy(inputr,smpsr, sizeof(float)*period);
+    memcpy(inputl,efxoutl, sizeof(float)*PERIOD);
+    memcpy(inputr,efxoutr, sizeof(float)*PERIOD);
 
 
 
-    hpfl->filterout(inputl,period);
-    hpfr->filterout(inputr,period);
+    hpfl->filterout(inputl,PERIOD);
+    hpfr->filterout(inputr,PERIOD);
 
     limiter->out(inputl,inputr);
 
-    for (i=0; i<period; i++) {
+    for (i=0; i<PERIOD; i++) {
         float xl = inputl[i];
         float xr = inputr[i];
         float yl=0.0f;
@@ -237,15 +235,11 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr, uint32_t period)
 
     }
 
-    lpfl->filterout(inputl,period);
-    lpfr->filterout(inputr,period);
+    lpfl->filterout(inputl,PERIOD);
+    lpfr->filterout(inputr,PERIOD);
 
-    for (i=0; i<period; i++) {
-        smpsl[i] =(smpsl[i]+inputl[i]*vol);
-        smpsr[i] =(smpsr[i]+inputr[i]*vol);
+    for (i=0; i<PERIOD; i++) {
+        efxoutl[i] =(efxoutl[i]+inputl[i]*vol);
+        efxoutr[i] =(efxoutr[i]+inputr[i]*vol);
     }
-
 }
-
-
-

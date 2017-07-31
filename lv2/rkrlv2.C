@@ -912,28 +912,40 @@ LV2_Handle init_exciterlv2(const LV2_Descriptor *descriptor,double sample_freq, 
 
     getFeatures(plug,host_features);
 
-    plug->exciter = new Exciter(0,0, sample_freq, plug->period_max);
+    plug->exciter = new Exciter(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
-
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->exciter->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->exciter->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)
     {
@@ -944,16 +956,8 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //comp does in inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->exciter->efxoutl = plug->output_l_p;
-    plug->exciter->efxoutr = plug->output_r_p;
-
     //now run
-    plug->exciter->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->exciter->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;
@@ -1643,27 +1647,40 @@ LV2_Handle init_valvelv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
     getFeatures(plug,host_features);
 
-    plug->valve = new Valve(0,0, sample_freq, plug->period_max);
+    plug->valve = new Valve(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_valvelv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->valve->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->valve->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//0 Wet/dry
@@ -1686,12 +1703,8 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->valve->efxoutl = plug->output_l_p;
-    plug->valve->efxoutr = plug->output_r_p;
-
     //now run
-    plug->valve->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->valve->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->valve->outvolume, nframes);

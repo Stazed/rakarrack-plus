@@ -26,11 +26,9 @@
 
 
 
-Exciter::Exciter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Exciter::Exciter (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
 
     //default values
     Ppreset = 0;
@@ -43,7 +41,7 @@ Exciter::Exciter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32
         rm[i]=0.0f;
     }
 
-    harm = new HarmEnhancer (rm, 2500.0f,8000.0,1.0f, sample_rate, intermediate_bufsize);
+    harm = new HarmEnhancer (rm, 2500.0f,8000.0,1.0f, sample_rate, PERIOD);
 
     cleanup ();
 
@@ -52,7 +50,7 @@ Exciter::Exciter (float * efxoutl_, float * efxoutr_, double sample_rate, uint32
 
 Exciter::~Exciter ()
 {
-	delete harm;
+    delete harm;
 };
 
 /*
@@ -64,14 +62,20 @@ Exciter::cleanup ()
     harm->cleanup ();
 };
 
+void
+Exciter::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    harm->lv2_update_params(period);
+}
 
 /*
  * Effect output
  */
 void
-Exciter::out (float * smpsl, float * smpsr, uint32_t period)
+Exciter::out (float * efxoutl, float * efxoutr)
 {
-    harm->harm_out(smpsl,smpsr, period);
+    harm->harm_out(efxoutl,efxoutr);
 
 };
 

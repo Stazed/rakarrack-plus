@@ -69,9 +69,9 @@ CoilCrafter::CoilCrafter (double sample_rate, uint32_t intermediate_bufsize)
     rm[8]=1.0;
 
 
-    harm = new HarmEnhancer (rm, 2500.0f,4400.0f,1.0f,sample_rate,intermediate_bufsize);
+    harm = new HarmEnhancer (rm, 2500.0f,4400.0f,1.0f,sample_rate,PERIOD);
 
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
     RB1l =  new AnalogFilter(2,2000.0f,1.0f,0,sample_rate, interpbuf);
     RB1r =  new AnalogFilter(2,2000.0f,1.0f,0,sample_rate, interpbuf);
     RB2l =  new AnalogFilter(2,2000.0f,1.0f,0,sample_rate, interpbuf);
@@ -114,6 +114,7 @@ void
 CoilCrafter::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
+    harm->lv2_update_params(period);
 }
 
 /*
@@ -140,7 +141,7 @@ CoilCrafter::out (float * efxoutl, float * efxoutr)
         RB2r->filterout(efxoutr, PERIOD);
     }
 
-    if(Pmode) harm->harm_out(efxoutl,efxoutr, PERIOD);
+    if(Pmode) harm->harm_out(efxoutl,efxoutr);
 
 
     for (i=0; i<PERIOD; i++) {

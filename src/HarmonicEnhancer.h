@@ -37,9 +37,10 @@ public:
     HarmEnhancer(float *harmonics, float hfreq, float lfreq, float gain, double sample_rate, uint32_t intermediate_bufsize);
     ~HarmEnhancer();
     void cleanup();
+    void lv2_update_params(uint32_t period);
     void chebpc(float c[], float d[]);
     void calcula_mag(float *Rmag);
-    void harm_out(float *smpsl, float *smpsr, uint32_t period);
+    void harm_out(float *efxoutl, float *efxoutr);
     void set_vol(int mode, float gain);
     void set_freqh(int mode, float freq);
     void set_freql(int mode, float freq);
@@ -50,6 +51,7 @@ public:
 
 private:
 
+    uint32_t PERIOD;
     float *inputl;
     float *inputr;
     float vol;
