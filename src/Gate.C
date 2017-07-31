@@ -30,13 +30,11 @@
 #include "Gate.h"
 
 
-Gate::Gate (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize)
+Gate::Gate (double samplerate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
 
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
 
     lpfl = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
     lpfr = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);

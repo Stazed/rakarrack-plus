@@ -37,7 +37,7 @@ class Gate
 
 public:
 
-    Gate (float * efxoutl_, float * efxoutr_, double samplerate, uint32_t intermediate_bufsize);
+    Gate (double samplerate, uint32_t intermediate_bufsize);
     ~Gate ();
 
     void out (float *efxoutl, float *efxoutr);
@@ -47,9 +47,6 @@ public:
     void cleanup ();
     void lv2_update_params(uint32_t period);
     int getpar (int npar);
-
-
-
 
     // Compressor
 
@@ -61,10 +58,6 @@ public:
     int Plpf;
     int Phpf;
     int Phold;
-
-    float *efxoutl;
-    float *efxoutr;
-
 
 private:
 
