@@ -32,11 +32,13 @@
 #define DATADIR "/usr/local/share/rakarrack"
 #endif
 
-Echotron::Echotron (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
 
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fPERIOD = intermediate_bufsize;
+    fSAMPLE_RATE = sample_rate;
+    
     initparams=0;
     //default values
     Ppreset = 0;
@@ -51,8 +53,6 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_, double sample_rate, uint
     lfeedback = 0.0f;
     rfeedback = 0.0f;
     File = loaddefault();
-    fPERIOD = 256; //best guess until we know better
-    fSAMPLE_RATE = sample_rate;
 
     lfo = new EffectLFO(sample_rate);
     dlfo = new EffectLFO(sample_rate);
@@ -68,7 +68,7 @@ Echotron::Echotron (float * efxoutl_, float * efxoutr_, double sample_rate, uint
 
     offset = 0;
 
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
     lpfl =  new AnalogFilter (0, 800, 1, 0, sample_rate, interpbuf);
     lpfr =  new AnalogFilter (0, 800, 1, 0, sample_rate, interpbuf);
 
@@ -120,23 +120,28 @@ Echotron::cleanup ()
 
     lpfl->cleanup ();
     lpfr->cleanup ();
+}
 
-};
+void
+Echotron::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    fPERIOD = period;
+    lfo->updateparams(fPERIOD);
+    dlfo->updateparams(fPERIOD);
+}
 
 /*
  * Effect output
  */
 void
-Echotron::out (float * smpsl, float * smpsr, uint32_t period)
+Echotron::out (float * efxoutl, float * efxoutr)
 {
-
-	unsigned int i;
+    unsigned int i;
     int j, k;
     int length = Plength>File.fLength?File.fLength:Plength;
     float l,r,lyn, ryn;
     float rxindex,lxindex;
-
-    fPERIOD = period;
 
     if((Pmoddly)||(Pmodfilts)) modulate_delay();
     else interpl = interpr = 0;
@@ -144,12 +149,12 @@ Echotron::out (float * smpsl, float * smpsr, uint32_t period)
     float tmpmodl = oldldmod;
     float tmpmodr = oldrdmod;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         tmpmodl+=interpl;
         tmpmodr+=interpr;
 
-        l = lxn->delay( (lpfl->filterout_s(smpsl[i] + lfeedback) ), 0.0f, 0, 1, 0);  //High Freq damping
-        r = rxn->delay( (lpfr->filterout_s(smpsr[i] + rfeedback) ), 0.0f, 0, 1, 0);
+        l = lxn->delay( (lpfl->filterout_s(efxoutl[i] + lfeedback) ), 0.0f, 0, 1, 0);  //High Freq damping
+        r = rxn->delay( (lpfr->filterout_s(efxoutr[i] + rfeedback) ), 0.0f, 0, 1, 0);
 
         //Convolve
         lyn = 0.0f;
@@ -231,7 +236,7 @@ int
 Echotron::setfile(int value)
 {
 
-	DlyFile filedata;
+    DlyFile filedata;
 
     if(!Puser) {
         Filenum = value;
@@ -239,6 +244,7 @@ Echotron::setfile(int value)
         sprintf(Filename, "%s/%d.dly",DATADIR,Filenum+1);
     }
 
+//    printf("Filename %s\n",Filename);
     filedata = loadfile(Filename);
     applyfile(filedata);
     if(error)

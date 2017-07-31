@@ -3224,7 +3224,7 @@ LV2_Handle init_echotronlv2(const LV2_Descriptor *descriptor,double sample_freq,
     }
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
-    plug->echotron = new Echotron(0,0, sample_freq, plug->period_max);
+    plug->echotron = new Echotron(sample_freq, plug->period_max);
     plug->echotron->changepar(4,1);//set to user selected files
     plug->dlyfile = new DlyFile;
     plug->init_params = 1; // LFO init
@@ -3234,29 +3234,33 @@ LV2_Handle init_echotronlv2(const LV2_Descriptor *descriptor,double sample_freq,
 
 void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->echotron->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->echotron->fPERIOD = nframes;
-        plug->echotron->lfo->updateparams(nframes);
-        plug->echotron->dlfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        plug->period_max = nframes;
+        plug->echotron->lv2_update_params(nframes);
     }
-
+    
+    // we are good to run now
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//0 w/d
@@ -3381,12 +3385,8 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
         }//atom is object
     }//each atom in sequence
 
-    //now set out ports
-    plug->echotron->efxoutl = plug->output_l_p;
-    plug->echotron->efxoutr = plug->output_r_p;
-
     //now run
-    plug->echotron->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->echotron->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->echotron->outvolume, nframes);

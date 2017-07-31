@@ -63,31 +63,26 @@ public:
 class Echotron
 {
 public:
-    Echotron (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    Echotron (double sample_rate, uint32_t intermediate_bufsize);
     ~Echotron ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
     int setfile (int value);
     DlyFile loadfile(char* path);
     void applyfile(DlyFile);
     int Ppreset;
 
     int Pchange;
-
-    float *efxoutl;
-    float *efxoutr;
     float outvolume;
 
     char Filename[128];
     DlyFile File;
 
     int error;
-    float fPERIOD;
-    EffectLFO *lfo;
-    EffectLFO *dlfo;
 
 private:
 
@@ -162,6 +157,10 @@ private:
     float tempo_coeff;
 
     float fSAMPLE_RATE;
+    uint32_t PERIOD;
+    float fPERIOD;
+    EffectLFO *lfo;
+    EffectLFO *dlfo;
 
     class AnalogFilter *lpfl, *lpfr;	//filters
     float* interpbuf; //buffer for filters

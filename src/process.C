@@ -277,7 +277,7 @@ RKR::RKR ()
     efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
     efx_StompBox = new StompBox(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Reverbtron = new Reverbtron(efxoutl,efxoutr,fSample_rate, period, Rev_Down, Rev_U_Q, Rev_D_Q);      // FIXME make consistent sample/period
-    efx_Echotron = new Echotron(efxoutl,efxoutr, fSample_rate, period);
+    efx_Echotron = new Echotron(fSample_rate, period);
     efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, period, fSample_rate);  // FIXME reversed sample/period
     efx_CompBand = new CompBand(fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr, fSample_rate);
@@ -1696,7 +1696,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 41:
                 if (Echotron_Bypass) {
-                    efx_Echotron->out(efxoutl, efxoutr, period);
+                    efx_Echotron->out(efxoutl, efxoutr);
                     Vol_Efx(41,efx_Echotron->outvolume);
                 }
                 break;
