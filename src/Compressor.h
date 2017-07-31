@@ -40,8 +40,8 @@ public:
 
     void out (float *efxoutl, float *efxoutr);
 
-    void Compressor_Change (int np, int value);
-    void Compressor_Change_Preset (int dgui,int npreset);
+    void changepar (int np, int value);
+    void setpreset (int dgui,int npreset);
     int getpar (int npar);
     void cleanup ();
     void lv2_update_params(uint32_t period);

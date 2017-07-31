@@ -72,10 +72,10 @@ CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
     CMH = new Compressor(sample_rate, PERIOD);
     CH = new Compressor(sample_rate, PERIOD);
 
-    CL->Compressor_Change_Preset(0,5);
-    CML->Compressor_Change_Preset(0,5);
-    CMH->Compressor_Change_Preset(0,5);
-    CH->Compressor_Change_Preset(0,5);
+    CL->setpreset(0,5);
+    CML->setpreset(0,5);
+    CMH->setpreset(0,5);
+    CH->setpreset(0,5);
 
 
     //default values
@@ -225,16 +225,16 @@ CompBand::setratio(int ch, int value)
 
     switch(ch) {
     case 0:
-        CL->Compressor_Change(2,value);
+        CL->changepar(2,value);
         break;
     case 1:
-        CML->Compressor_Change(2,value);
+        CML->changepar(2,value);
         break;
     case 2:
-        CMH->Compressor_Change(2,value);
+        CMH->changepar(2,value);
         break;
     case 3:
-        CH->Compressor_Change(2,value);
+        CH->changepar(2,value);
         break;
     }
 }
@@ -246,16 +246,16 @@ CompBand::setthres(int ch, int value)
 
     switch(ch) {
     case 0:
-        CL->Compressor_Change(1,value);
+        CL->changepar(1,value);
         break;
     case 1:
-        CML->Compressor_Change(1,value);
+        CML->changepar(1,value);
         break;
     case 2:
-        CMH->Compressor_Change(1,value);
+        CMH->changepar(1,value);
         break;
     case 3:
-        CH->Compressor_Change(1,value);
+        CH->changepar(1,value);
         break;
     }
 }

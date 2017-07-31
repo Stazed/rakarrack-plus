@@ -73,7 +73,7 @@ Compressor::Compressor (double samplerate, uint32_t intermediate_bufsize)
 
     cSAMPLE_RATE = 1.0/samplerate;
     
-    Compressor_Change_Preset(0,0);
+    setpreset(0,0);
 }
 
 Compressor::~Compressor ()
@@ -100,7 +100,7 @@ Compressor::lv2_update_params (uint32_t period)
 }
 
 void
-Compressor::Compressor_Change (int np, int value)
+Compressor::changepar (int np, int value)
 {
 
     switch (np) {
@@ -211,7 +211,7 @@ Compressor::getpar (int np)
 }
 
 void
-Compressor::Compressor_Change_Preset (int dgui, int npreset)
+Compressor::setpreset (int dgui, int npreset)
 {
 
     const int PRESET_SIZE = 10;
@@ -233,19 +233,17 @@ Compressor::Compressor_Change_Preset (int dgui, int npreset)
         //End CompBand
         {-60, 2, 0, 10, 500, 1, 0, 1, 1},
 
-
     };
 
     if((dgui)&&(npreset>2)) {
         Fpre->ReadPreset(1,npreset-2,pdata);
         for (int n = 1; n < PRESET_SIZE; n++)
-            Compressor_Change (n , pdata[n-1]);
+            changepar (n , pdata[n-1]);
 
     } else {
         for (int n = 1; n < PRESET_SIZE; n++)
-            Compressor_Change (n , presets[npreset][n-1]);
+            changepar (n , presets[npreset][n-1]);
     }
-
 }
 
 void

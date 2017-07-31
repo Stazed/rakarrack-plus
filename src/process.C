@@ -825,7 +825,7 @@ RKR::init_rkr ()
     }
 
 
-    efx_FLimiter->Compressor_Change_Preset(0,3);
+    efx_FLimiter->setpreset(0,3);
 
     val_sum = 0.0f;
     old_il_sum = -0.0f;

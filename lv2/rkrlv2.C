@@ -346,7 +346,7 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
         val = (int)*plug->param_p[i];
         if(plug->comp->getpar(i+1) != val)//this effect is 1 indexed
         {
-            plug->comp->Compressor_Change(i+1,val);
+            plug->comp->changepar(i+1,val);
         }
     }
 
@@ -727,13 +727,13 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
 
     plug->comp = new Compressor(sample_freq, plug->period_max);     // FIXME update params
     // set default values
-    plug->comp->Compressor_Change(1,-24);//threshold
-    plug->comp->Compressor_Change(2,4);  //ratio
-    plug->comp->Compressor_Change(3,-10);//output
-    plug->comp->Compressor_Change(4,20); //attack
-    plug->comp->Compressor_Change(5,50); //release
-    plug->comp->Compressor_Change(6,1);  //a_out
-    plug->comp->Compressor_Change(7,30); //knee
+    plug->comp->changepar(1,-24);//threshold
+    plug->comp->changepar(2,4);  //ratio
+    plug->comp->changepar(3,-10);//output
+    plug->comp->changepar(4,20); //attack
+    plug->comp->changepar(5,50); //release
+    plug->comp->changepar(6,1);  //a_out
+    plug->comp->changepar(7,30); //knee
 
 
     plug->init_params = 0; // used for PSELECT - setting default reconota to -1
@@ -3533,13 +3533,13 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
 
     plug->comp = new Compressor(sample_freq, plug->period_max);     // FIXME need update params
     // set default values
-    plug->comp->Compressor_Change(1,-24);//threshold
-    plug->comp->Compressor_Change(2,4);  //ratio
-    plug->comp->Compressor_Change(3,-10);//output
-    plug->comp->Compressor_Change(4,20); //attack
-    plug->comp->Compressor_Change(5,50); //release
-    plug->comp->Compressor_Change(6,1);  //a_out
-    plug->comp->Compressor_Change(7,30); //knee
+    plug->comp->changepar(1,-24);//threshold
+    plug->comp->changepar(2,4);  //ratio
+    plug->comp->changepar(3,-10);//output
+    plug->comp->changepar(4,20); //attack
+    plug->comp->changepar(5,50); //release
+    plug->comp->changepar(6,1);  //a_out
+    plug->comp->changepar(7,30); //knee
 
 
     plug->init_params = 0; // used for PSELECT - setting default reconota to -1

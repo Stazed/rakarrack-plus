@@ -1707,7 +1707,7 @@ void RKRGUI::cb_compress_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_compress_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12001))rkr->efx_Compressor->Compressor_Change_Preset(1,(int) o->value());
+if((ud==0)||(ud==12001))rkr->efx_Compressor->setpreset(1,(int) o->value());
 compress_threshold->value(rkr->efx_Compressor->getpar(1));
 compress_Ratio->value(rkr->efx_Compressor->getpar(2));
 compress_output->value(rkr->efx_Compressor->getpar(3));
@@ -1735,7 +1735,7 @@ void RKRGUI::cb_compress_ATime_i(SliderW* o, void*) {
  getMIDIControl(142);
  return;
 } 
-rkr->efx_Compressor->Compressor_Change(4,(int)o->value());
+rkr->efx_Compressor->changepar(4,(int)o->value());
 }
 void RKRGUI::cb_compress_ATime(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_ATime_i(o,v);
@@ -1747,7 +1747,7 @@ void RKRGUI::cb_compress_RTime_i(SliderW* o, void*) {
  getMIDIControl(143);
  return;
 } 
-rkr->efx_Compressor->Compressor_Change(5, (int) o->value());
+rkr->efx_Compressor->changepar(5, (int) o->value());
 }
 void RKRGUI::cb_compress_RTime(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_RTime_i(o,v);
@@ -1759,7 +1759,7 @@ void RKRGUI::cb_compress_Ratio_i(SliderW* o, void*) {
  getMIDIControl(144);
  return;
 } 
-rkr->efx_Compressor->Compressor_Change(2, (int) o->value());
+rkr->efx_Compressor->changepar(2, (int) o->value());
 }
 void RKRGUI::cb_compress_Ratio(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_Ratio_i(o,v);
@@ -1771,7 +1771,7 @@ void RKRGUI::cb_compress_Knee_i(SliderW* o, void*) {
  getMIDIControl(145);
  return;
 } 
-rkr->efx_Compressor->Compressor_Change(7, (int) o->value());
+rkr->efx_Compressor->changepar(7, (int) o->value());
 }
 void RKRGUI::cb_compress_Knee(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_Knee_i(o,v);
@@ -1783,7 +1783,7 @@ void RKRGUI::cb_compress_threshold_i(SliderW* o, void*) {
  getMIDIControl(146);
  return;
 } 
-rkr->efx_Compressor->Compressor_Change(1, (int)o->value());
+rkr->efx_Compressor->changepar(1, (int)o->value());
 }
 void RKRGUI::cb_compress_threshold(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_threshold_i(o,v);
@@ -1795,14 +1795,14 @@ void RKRGUI::cb_compress_output_i(SliderW* o, void*) {
  getMIDIControl(147);
  return;
 } 
-rkr->efx_Compressor->Compressor_Change(3,(int)o->value());
+rkr->efx_Compressor->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_compress_output(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_compress_output_i(o,v);
 }
 
 void RKRGUI::cb_Auto_Output_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Compressor->Compressor_Change(6,(int)o->value());
+  rkr->efx_Compressor->changepar(6,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();
 }
 void RKRGUI::cb_Auto_Output(Fl_Check_Button* o, void* v) {
@@ -1810,7 +1810,7 @@ void RKRGUI::cb_Auto_Output(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Stereo_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Compressor->Compressor_Change(8,(int)o->value());
+  rkr->efx_Compressor->changepar(8,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();
 }
 void RKRGUI::cb_Stereo(Fl_Check_Button* o, void* v) {
@@ -1818,7 +1818,7 @@ void RKRGUI::cb_Stereo(Fl_Check_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Peak_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Compressor->Compressor_Change(9,(int)o->value());
+  rkr->efx_Compressor->changepar(9,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();
 }
 void RKRGUI::cb_Peak(Fl_Check_Button* o, void* v) {

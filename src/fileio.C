@@ -1196,7 +1196,7 @@ RKR::Actualizar_Audio ()
             Compressor_Bypass = 0;
             efx_Compressor->cleanup();
             for (i = 0; i <= 9; i++)
-                efx_Compressor->Compressor_Change (i + 1, lv[9][i]);
+                efx_Compressor->changepar (i + 1, lv[9][i]);
             Compressor_Bypass = Compressor_B;
             break;
 
