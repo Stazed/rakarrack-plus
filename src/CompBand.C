@@ -40,17 +40,19 @@
 
 CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
 {
-    lowl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    lowr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midll = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midlr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midhl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midhr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    highl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    highr = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    
+    lowl = (float *) malloc (sizeof (float) * PERIOD);
+    lowr = (float *) malloc (sizeof (float) * PERIOD);
+    midll = (float *) malloc (sizeof (float) * PERIOD);
+    midlr = (float *) malloc (sizeof (float) * PERIOD);
+    midhl = (float *) malloc (sizeof (float) * PERIOD);
+    midhr = (float *) malloc (sizeof (float) * PERIOD);
+    highl = (float *) malloc (sizeof (float) * PERIOD);
+    highr = (float *) malloc (sizeof (float) * PERIOD);
 
 
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
     lpf1l = new AnalogFilter (2, 500.0f,.7071f, 0, sample_rate, interpbuf);
     lpf1r = new AnalogFilter (2, 500.0f,.7071f, 0, sample_rate, interpbuf);
     hpf1l = new AnalogFilter (3, 500.0f,.7071f, 0, sample_rate, interpbuf);
@@ -65,10 +67,10 @@ CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
     hpf3r = new AnalogFilter (3, 5000.0f,.7071f, 0, sample_rate, interpbuf);
 
 
-    CL = new Compressor(sample_rate);
-    CML = new Compressor(sample_rate);
-    CMH = new Compressor(sample_rate);
-    CH = new Compressor(sample_rate);
+    CL = new Compressor(sample_rate, PERIOD);
+    CML = new Compressor(sample_rate, PERIOD);
+    CMH = new Compressor(sample_rate, PERIOD);
+    CH = new Compressor(sample_rate, PERIOD);
 
     CL->Compressor_Change_Preset(0,5);
     CML->Compressor_Change_Preset(0,5);
@@ -137,55 +139,61 @@ CompBand::cleanup ()
     CML->cleanup();
     CMH->cleanup();
     CH->cleanup();
+}
 
-};
+void
+CompBand::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    CL->lv2_update_params(period);
+    CML->lv2_update_params(period);
+    CMH->lv2_update_params(period);
+    CH->lv2_update_params(period);
+}
 /*
  * Effect output
  */
 void
-CompBand::out (float * efxoutl, float * efxoutr, uint32_t period)
+CompBand::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    memcpy(lowl,efxoutl,sizeof(float) * period);
-    memcpy(midll,efxoutl,sizeof(float) * period);
-    memcpy(midhl,efxoutl,sizeof(float) * period);
-    memcpy(highl,efxoutl,sizeof(float) * period);
+    memcpy(lowl,efxoutl,sizeof(float) * PERIOD);
+    memcpy(midll,efxoutl,sizeof(float) * PERIOD);
+    memcpy(midhl,efxoutl,sizeof(float) * PERIOD);
+    memcpy(highl,efxoutl,sizeof(float) * PERIOD);
 
-    lpf1l->filterout(lowl, period);
-    hpf1l->filterout(midll, period);
-    lpf2l->filterout(midll, period);
-    hpf2l->filterout(midhl, period);
-    lpf3l->filterout(midhl, period);
-    hpf3l->filterout(highl, period);
+    lpf1l->filterout(lowl, PERIOD);
+    hpf1l->filterout(midll, PERIOD);
+    lpf2l->filterout(midll, PERIOD);
+    hpf2l->filterout(midhl, PERIOD);
+    lpf3l->filterout(midhl, PERIOD);
+    hpf3l->filterout(highl, PERIOD);
 
-    memcpy(lowr,efxoutr,sizeof(float) * period);
-    memcpy(midlr,efxoutr,sizeof(float) * period);
-    memcpy(midhr,efxoutr,sizeof(float) * period);
-    memcpy(highr,efxoutr,sizeof(float) * period);
+    memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(midlr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(midhr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(highr,efxoutr,sizeof(float) * PERIOD);
 
-    lpf1r->filterout(lowr, period);
-    hpf1r->filterout(midlr, period);
-    lpf2r->filterout(midlr, period);
-    hpf2r->filterout(midhr, period);
-    lpf3r->filterout(midhr, period);
-    hpf3r->filterout(highr, period);
-
-
-    CL->out(lowl,lowr, period);
-    CML->out(midll,midlr, period);
-    CMH->out(midhl,midhr, period);
-    CH->out(highl,highr, period);
+    lpf1r->filterout(lowr, PERIOD);
+    hpf1r->filterout(midlr, PERIOD);
+    lpf2r->filterout(midlr, PERIOD);
+    hpf2r->filterout(midhr, PERIOD);
+    lpf3r->filterout(midhr, PERIOD);
+    hpf3r->filterout(highr, PERIOD);
 
 
-    for (i = 0; i < period; i++) {
+    CL->out(lowl,lowr);
+    CML->out(midll,midlr);
+    CMH->out(midhl,midhr);
+    CH->out(highl,highr);
+
+
+    for (i = 0; i < PERIOD; i++) {
         efxoutl[i]=(lowl[i]+midll[i]+midhl[i]+highl[i])*level;
         efxoutr[i]=(lowr[i]+midlr[i]+midhr[i]+highr[i])*level;
     }
-
-
-
-};
+}
 
 
 /*

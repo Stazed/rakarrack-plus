@@ -37,8 +37,10 @@
 #include "Compressor.h"
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
-Compressor::Compressor (double samplerate)
+Compressor::Compressor (double samplerate, uint32_t intermediate_bufsize)
 {
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    
     rvolume = 0.0f;
     rvolume_db = 0.0f;
     lvolume = 0.0f;
@@ -91,6 +93,11 @@ Compressor::cleanup ()
     clipping = 0;
 }
 
+void
+Compressor::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+}
 
 void
 Compressor::Compressor_Change (int np, int value)
@@ -241,16 +248,14 @@ Compressor::Compressor_Change_Preset (int dgui, int npreset)
 
 }
 
-
-
 void
-Compressor::out (float *efxoutl, float *efxoutr, uint32_t period)
+Compressor::out (float *efxoutl, float *efxoutr)
 {
 
     unsigned int i;
 
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         float rdelta = 0.0f;
         float ldelta = 0.0f;
 //Right Channel
@@ -391,6 +396,5 @@ Compressor::out (float *efxoutl, float *efxoutr, uint32_t period)
             //highly probably there is a more elegant way to do that, but what the hey...
         }
     }
-
 }
 

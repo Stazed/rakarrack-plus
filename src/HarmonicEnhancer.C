@@ -54,7 +54,7 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, do
     lpfl = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
     lpfr = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
 
-    limiter = new Compressor (sample_rate);
+    limiter = new Compressor (sample_rate, intermediate_bufsize);
     limiter->Compressor_Change_Preset(0,4);
     calcula_mag(Rmag);
 }
@@ -208,7 +208,7 @@ HarmEnhancer::harm_out(float *smpsl, float *smpsr, uint32_t period)
     hpfl->filterout(inputl,period);
     hpfr->filterout(inputr,period);
 
-    limiter->out(inputl,inputr,period);
+    limiter->out(inputl,inputr);
 
     for (i=0; i<period; i++) {
         float xl = inputl[i];

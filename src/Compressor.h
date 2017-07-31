@@ -35,15 +35,16 @@ class Compressor
 
 public:
 
-    Compressor (double samplerate);
+    Compressor (double samplerate, uint32_t intermediate_bufsize);
     ~Compressor ();
 
-    void out (float *efxoutl, float *efxoutr, uint32_t period);
+    void out (float *efxoutl, float *efxoutr);
 
     void Compressor_Change (int np, int value);
     void Compressor_Change_Preset (int dgui,int npreset);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
 
     // Compressor
 
@@ -100,6 +101,7 @@ private:
     class FPreset *Fpre;
 
     float cSAMPLE_RATE;
+    uint32_t PERIOD;
 
 };
 

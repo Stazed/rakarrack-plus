@@ -306,7 +306,8 @@ LV2_Handle init_complv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->effectindex = ICOMP;
     plug->prev_bypass = 1;
     
-    plug->comp = new Compressor(sample_freq);
+    getFeatures(plug,host_features);
+    plug->comp = new Compressor(sample_freq, plug->period_max);
 
     return plug;
 }
@@ -320,15 +321,26 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->comp->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->comp->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
 
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)
@@ -340,12 +352,8 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //comp does in inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //now run
-    plug->comp->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->comp->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;
@@ -534,17 +542,18 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
-
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->chorus->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-    
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -553,10 +562,6 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];
@@ -636,13 +641,15 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->aphase->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
  
@@ -654,10 +661,6 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     for(i=0; i<7; i++) //0-6
     {
@@ -711,7 +714,7 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq);
+    plug->comp = new Compressor(sample_freq, plug->period_max);     // FIXME update params
     // set default values
     plug->comp->Compressor_Change(1,-24);//threshold
     plug->comp->Compressor_Change(2,4);  //ratio
@@ -870,7 +873,7 @@ see process.C ln 1507
         The user can duplicate the sound produced by rakarrack by adjusting wet/dry in
         the harmonizer plug, but the overall sound will be quieter...
     */
-    plug->comp->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->comp->out(plug->output_l_p,plug->output_r_p);
 
     //now set out ports and global period size
     plug->harm->efxoutl = plug->output_l_p;
@@ -1062,17 +1065,18 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
-
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->alien->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -1080,11 +1084,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
         plug->alien->lv2_update_params(nframes);
     }
     
-    // we are good to go
-    //inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
+    // we are good to run now
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//0 Wet/Dry
@@ -1341,16 +1341,18 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->cab->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-    
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -1359,10 +1361,6 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     val = (int)*plug->param_p[0]+64;//gain
     if(plug->cab->getpar(0) != val)
@@ -1953,16 +1951,18 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->arp->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-    
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -1971,10 +1971,6 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline, copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//w/d
@@ -2503,16 +2499,18 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->coil->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-    
+ 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -2521,10 +2519,6 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//wet/dry
@@ -3514,7 +3508,7 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq);
+    plug->comp = new Compressor(sample_freq, plug->period_max);     // FIXME need update params
     // set default values
     plug->comp->Compressor_Change(1,-24);//threshold
     plug->comp->Compressor_Change(2,4);  //ratio
@@ -3671,7 +3665,7 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    plug->comp->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->comp->out(plug->output_l_p,plug->output_r_p);
 
     //now set out ports and global period size
     plug->sharm->efxoutl = plug->output_l_p;
@@ -3705,22 +3699,33 @@ LV2_Handle init_mbcomplv2(const LV2_Descriptor *descriptor,double sample_freq, c
 
 void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
 {
-    if(nframes == 0)
+    if( nframes == 0)
         return;
     
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->mbcomp->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->mbcomp->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
 
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)
@@ -3732,12 +3737,8 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //compband does it inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     //now run
-    plug->mbcomp->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->mbcomp->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->mbcomp->outvolume, nframes);

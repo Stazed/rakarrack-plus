@@ -245,7 +245,7 @@ RKR::RKR ()
     efx_Overdrive = new Distorsion (Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_EQ2 = new EQ (fSample_rate, period);
     efx_EQ1 = new EQ (fSample_rate, period);
-    efx_Compressor = new Compressor (fSample_rate);
+    efx_Compressor = new Compressor (fSample_rate, period);
     efx_WhaWha = new DynamicFilter (fSample_rate, period);
     efx_Alienwah = new Alienwah (fSample_rate, period);
     efx_Cabinet = new Cabinet (fSample_rate, period);
@@ -254,7 +254,7 @@ RKR::RKR ()
     efx_MusDelay = new MusicDelay (efxoutl, efxoutr, fSample_rate);
     efx_Gate = new Gate (efxoutl, efxoutr, fSample_rate, period);
     efx_NewDist = new NewDist(efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
-    efx_FLimiter = new Compressor (fSample_rate);
+    efx_FLimiter = new Compressor (fSample_rate, period);
     efx_Valve = new Valve(efxoutl, efxoutr, fSample_rate, period);
     efx_DFlange = new Dflange(fSample_rate, period);
     efx_Ring = new Ring(efxoutl,efxoutr, fSample_rate);
@@ -1180,7 +1180,7 @@ RKR::Control_Volume (float *origl,float *origr)
             }
         }
 
-        efx_FLimiter->out(efxoutl, efxoutr,period);
+        efx_FLimiter->out(efxoutl, efxoutr);
 
         if(db6booster) {
             for(i=0; i<period; i++) {
@@ -1234,7 +1234,7 @@ RKR::Control_Volume (float *origl,float *origr)
             }
         }
 
-        efx_FLimiter->out(efxoutl, efxoutr,period);  //then limit final output
+        efx_FLimiter->out(efxoutl, efxoutr);  //then limit final output
 
         if(db6booster) {
             for(i=0; i<period; i++) {
@@ -1416,7 +1416,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 1:
                 if (Compressor_Bypass) {
-                    efx_Compressor->out (efxoutl, efxoutr, period);
+                    efx_Compressor->out (efxoutl, efxoutr);
                     Vol2_Efx ();
                 }
                 break;
@@ -1710,7 +1710,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 43:
                 if (CompBand_Bypass) {
-                    efx_CompBand->out(efxoutl, efxoutr, period);
+                    efx_CompBand->out(efxoutl, efxoutr);
                     Vol_Efx(43,efx_CompBand->outvolume);
                 }
                 break;
