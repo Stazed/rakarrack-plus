@@ -38,20 +38,16 @@ class Expander
 
 public:
 
-    Expander (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    Expander (double sample_rate, uint32_t intermediate_bufsize);
     ~Expander ();
 
-    void out (float * smps_l, float * smps_r, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
 
-    void Expander_Change (int np, int value);
-    void Expander_Change_Preset (int npreset);
+    void changepar (int np, int value);
+    void setpreset (int npreset);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
     int getpar (int npar);
-
-    float *efxoutl;
-    float *efxoutr;
-
-
 
     // Compressor
 
@@ -91,6 +87,8 @@ private:
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
 
     class FPreset *Fpre;
+    
+    uint32_t PERIOD;
 
 };
 

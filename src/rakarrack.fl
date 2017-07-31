@@ -904,7 +904,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {900 479 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {88 91 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2573,7 +2573,7 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
         }
       }
       Fl_Group CHORUS {
-        user_data 1 open
+        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button chorus_activar {
@@ -2794,7 +2794,7 @@ rkr->efx_Chorus->changepar(9,(int)(o->value()+64));}
         }
       }
       Fl_Group PHASER {
-        user_data 1 open
+        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button phaser_activar {
@@ -3824,7 +3824,7 @@ rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
         }
       }
       Fl_Group CABINET {
-        user_data 1 open
+        user_data 1
         xywh {161 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button Cabinet_activar {
@@ -3843,7 +3843,7 @@ findpos(12,(int)o->value(),o);}
         Fl_Choice Cabinet_preset {
           label Preset
           user_data 12012
-          callback {rkr->efx_Cabinet->setpreset((int) o->value());} selected
+          callback {rkr->efx_Cabinet->setpreset((int) o->value());}
           xywh {206 256 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -5010,7 +5010,7 @@ rkr->efx_Valve->changepar(7,(int)o->value());}
         }
       }
       Fl_Group DFLANGE {
-        user_data 1 open
+        user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button dflange_activar {
@@ -6089,14 +6089,14 @@ findpos(25,(int)o->value(),o);}
           label Preset
           user_data 12025
           callback {long long ud= (long long) v;
-if((ud==0)||(ud==12025))rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+if((ud==0)||(ud==12025))rkr->efx_Expander->setpreset((int) o->value());
 expander_ATime->value(rkr->efx_Expander->getpar(3));
 expander_RTime->value(rkr->efx_Expander->getpar(4));
 expander_shape->value(rkr->efx_Expander->getpar(2));
 expander_threshold->value(rkr->efx_Expander->getpar(1));
 expander_HPF->value(rkr->efx_Expander->getpar(6));
 expander_LPF->value(rkr->efx_Expander->getpar(5));
-expander_level->value(rkr->efx_Expander->getpar(7));}
+expander_level->value(rkr->efx_Expander->getpar(7));} selected
           xywh {398 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6119,7 +6119,7 @@ expander_level->value(rkr->efx_Expander->getpar(7));}
  getMIDIControl(220);
  return;
 } 
-rkr->efx_Expander->Expander_Change(3,(int)o->value());}
+rkr->efx_Expander->changepar(3,(int)o->value());}
           xywh {372 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 5000 step 1 value 10 textcolor 7
           class SliderW
         }
@@ -6130,7 +6130,7 @@ rkr->efx_Expander->Expander_Change(3,(int)o->value());}
  getMIDIControl(221);
  return;
 } 
-rkr->efx_Expander->Expander_Change(4,(int) o->value());}
+rkr->efx_Expander->changepar(4,(int) o->value());}
           xywh {371 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 1000 step 1 value 500 textcolor 7
           class SliderW
         }
@@ -6141,7 +6141,7 @@ rkr->efx_Expander->Expander_Change(4,(int) o->value());}
  getMIDIControl(222);
  return;
 } 
-rkr->efx_Expander->Expander_Change(2, (int) o->value());}
+rkr->efx_Expander->changepar(2, (int) o->value());}
           xywh {371 294 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 50 step 1 value 1 textcolor 7
           class SliderW
         }
@@ -6152,7 +6152,7 @@ rkr->efx_Expander->Expander_Change(2, (int) o->value());}
  getMIDIControl(223);
  return;
 } 
-rkr->efx_Expander->Expander_Change(1, (int)o->value());}
+rkr->efx_Expander->changepar(1, (int)o->value());}
           xywh {371 316 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -80 maximum 0 step 1 textcolor 7
           class SliderW
         }
@@ -6163,7 +6163,7 @@ rkr->efx_Expander->Expander_Change(1, (int)o->value());}
  getMIDIControl(224);
  return;
 } 
-rkr->efx_Expander->Expander_Change(7, (int) o->value());}
+rkr->efx_Expander->changepar(7, (int) o->value());}
           xywh {371 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
           class SliderW
         }
@@ -6174,7 +6174,7 @@ rkr->efx_Expander->Expander_Change(7, (int) o->value());}
  getMIDIControl(225);
  return;
 } 
-rkr->efx_Expander->Expander_Change(5, (int)o->value());}
+rkr->efx_Expander->changepar(5, (int)o->value());}
           xywh {371 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
           class SliderW
         }
@@ -6185,7 +6185,7 @@ rkr->efx_Expander->Expander_Change(5, (int)o->value());}
  getMIDIControl(226);
  return;
 } 
-rkr->efx_Expander->Expander_Change(6, (int)o->value());}
+rkr->efx_Expander->changepar(6, (int)o->value());}
           xywh {371 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
           class SliderW
         }

@@ -5630,7 +5630,7 @@ void RKRGUI::cb_expander_activar(Fl_Light_Button* o, void* v) {
 
 void RKRGUI::cb_expander_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12025))rkr->efx_Expander->Expander_Change_Preset((int) o->value());
+if((ud==0)||(ud==12025))rkr->efx_Expander->setpreset((int) o->value());
 expander_ATime->value(rkr->efx_Expander->getpar(3));
 expander_RTime->value(rkr->efx_Expander->getpar(4));
 expander_shape->value(rkr->efx_Expander->getpar(2));
@@ -5656,7 +5656,7 @@ void RKRGUI::cb_expander_ATime_i(SliderW* o, void*) {
  getMIDIControl(220);
  return;
 } 
-rkr->efx_Expander->Expander_Change(3,(int)o->value());
+rkr->efx_Expander->changepar(3,(int)o->value());
 }
 void RKRGUI::cb_expander_ATime(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_ATime_i(o,v);
@@ -5668,7 +5668,7 @@ void RKRGUI::cb_expander_RTime_i(SliderW* o, void*) {
  getMIDIControl(221);
  return;
 } 
-rkr->efx_Expander->Expander_Change(4,(int) o->value());
+rkr->efx_Expander->changepar(4,(int) o->value());
 }
 void RKRGUI::cb_expander_RTime(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_RTime_i(o,v);
@@ -5680,7 +5680,7 @@ void RKRGUI::cb_expander_shape_i(SliderW* o, void*) {
  getMIDIControl(222);
  return;
 } 
-rkr->efx_Expander->Expander_Change(2, (int) o->value());
+rkr->efx_Expander->changepar(2, (int) o->value());
 }
 void RKRGUI::cb_expander_shape(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_shape_i(o,v);
@@ -5692,7 +5692,7 @@ void RKRGUI::cb_expander_threshold_i(SliderW* o, void*) {
  getMIDIControl(223);
  return;
 } 
-rkr->efx_Expander->Expander_Change(1, (int)o->value());
+rkr->efx_Expander->changepar(1, (int)o->value());
 }
 void RKRGUI::cb_expander_threshold(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_threshold_i(o,v);
@@ -5704,7 +5704,7 @@ void RKRGUI::cb_expander_level_i(SliderW* o, void*) {
  getMIDIControl(224);
  return;
 } 
-rkr->efx_Expander->Expander_Change(7, (int) o->value());
+rkr->efx_Expander->changepar(7, (int) o->value());
 }
 void RKRGUI::cb_expander_level(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_level_i(o,v);
@@ -5716,7 +5716,7 @@ void RKRGUI::cb_expander_LPF_i(SliderW* o, void*) {
  getMIDIControl(225);
  return;
 } 
-rkr->efx_Expander->Expander_Change(5, (int)o->value());
+rkr->efx_Expander->changepar(5, (int)o->value());
 }
 void RKRGUI::cb_expander_LPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_LPF_i(o,v);
@@ -5728,7 +5728,7 @@ void RKRGUI::cb_expander_HPF_i(SliderW* o, void*) {
  getMIDIControl(226);
  return;
 } 
-rkr->efx_Expander->Expander_Change(6, (int)o->value());
+rkr->efx_Expander->changepar(6, (int)o->value());
 }
 void RKRGUI::cb_expander_HPF(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_expander_HPF_i(o,v);

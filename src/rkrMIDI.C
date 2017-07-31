@@ -1664,31 +1664,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 220:
-        efx_Expander->Expander_Change(3,10+(int)((float)value*15.669291f));
+        efx_Expander->changepar(3,10+(int)((float)value*15.669291f));
         break;
 
     case 221:
-        efx_Expander->Expander_Change(4,10+(int)((float)value*3.8582677f));
+        efx_Expander->changepar(4,10+(int)((float)value*3.8582677f));
         break;
 
     case 222:
-        efx_Expander->Expander_Change(2,1+(int)((float)value*.3858f));
+        efx_Expander->changepar(2,1+(int)((float)value*.3858f));
         break;
 
     case 223:
-        efx_Expander->Expander_Change(1,(int)((float)value*-.629921f));
+        efx_Expander->changepar(1,(int)((float)value*-.629921f));
         break;
 
     case 224:
-        efx_Expander->Expander_Change(7,value);
+        efx_Expander->changepar(7,value);
         break;
 
     case 225:
-        efx_Expander->Expander_Change(5,ret_LPF(value));
+        efx_Expander->changepar(5,ret_LPF(value));
         break;
 
     case 226:
-        efx_Expander->Expander_Change(6,ret_HPF(value));
+        efx_Expander->changepar(6,ret_HPF(value));
         break;
 
     case 227:

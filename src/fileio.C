@@ -1417,7 +1417,7 @@ RKR::Actualizar_Audio ()
             Expander_Bypass = 0;
             efx_Expander->cleanup();
             for (i = 0; i <= 6; i++)
-                efx_Expander->Expander_Change (i + 1,lv[26][i]);
+                efx_Expander->changepar (i + 1,lv[26][i]);
             Expander_Bypass = Expander_B;
             break;
 

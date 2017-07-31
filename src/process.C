@@ -261,7 +261,7 @@ RKR::RKR ()
     efx_Exciter = new Exciter(fSample_rate, period);
     efx_MBDist = new MBDist(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Arpie = new Arpie(fSample_rate, period);
-    efx_Expander = new Expander(efxoutl,efxoutr, fSample_rate, period);
+    efx_Expander = new Expander(fSample_rate, period);
     efx_Shuffle = new Shuffle(efxoutl,efxoutr, fSample_rate, period);
     efx_Synthfilter = new Synthfilter(efxoutl,efxoutr, fSample_rate);
     efx_MBVvol = new MBVvol(efxoutl,efxoutr, fSample_rate, period);
@@ -1584,7 +1584,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 25:
                 if (Expander_Bypass) {
-                    efx_Expander->out(efxoutl, efxoutr, period);
+                    efx_Expander->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

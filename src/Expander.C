@@ -28,14 +28,12 @@
 #include "Expander.h"
 
 
-Expander::Expander (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Expander::Expander (double sample_rate, uint32_t intermediate_bufsize)
 {
 
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
-
-    interpbuf = new float[intermediate_bufsize];
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    
+    interpbuf = new float[PERIOD];
     lpfl = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
     lpfr = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
     hpfl = new AnalogFilter (3, 20, 1, 0, sample_rate, interpbuf);
@@ -46,9 +44,7 @@ Expander::Expander (float * efxoutl_, float * efxoutr_, double sample_rate, uint
     efollower = 0;
     fs = sample_rate;
 
-    Expander_Change_Preset(0);
-
-
+    setpreset(0);
 }
 
 Expander::~Expander ()
@@ -73,7 +69,11 @@ Expander::cleanup ()
 
 }
 
-
+void
+Expander::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+}
 
 
 void
@@ -96,7 +96,7 @@ Expander::sethpf (int value)
 
 
 void
-Expander::Expander_Change (int np, int value)
+Expander::changepar (int np, int value)
 {
 
     switch (np) {
@@ -131,8 +131,6 @@ Expander::Expander_Change (int np, int value)
         break;
 
     }
-
-
 }
 
 int
@@ -171,7 +169,7 @@ Expander::getpar (int np)
 
 
 void
-Expander::Expander_Change_Preset (int npreset)
+Expander::setpreset (int npreset)
 {
 
     const int PRESET_SIZE = 7;
@@ -190,33 +188,29 @@ Expander::Expander_Change_Preset (int npreset)
     if(npreset>NUM_PRESETS-1) {
         Fpre->ReadPreset(25,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
-            Expander_Change (n+1, pdata[n]);
+            changepar (n+1, pdata[n]);
     } else {
         for (int n = 0; n < PRESET_SIZE; n++)
-            Expander_Change (n + 1, presets[npreset][n]);
+            changepar (n + 1, presets[npreset][n]);
     }
 
 }
 
-
-
 void
-Expander::out (float *efxoutl, float *efxoutr, uint32_t period)
+Expander::out (float *efxoutl, float *efxoutr)
 {
-
-
     unsigned int i;
     float delta = 0.0f;
     float expenv = 0.0f;
 
 
-    lpfl->filterout (efxoutl, period);
-    hpfl->filterout (efxoutl, period);
-    lpfr->filterout (efxoutr, period);
-    hpfr->filterout (efxoutr, period);
+    lpfl->filterout (efxoutl, PERIOD);
+    hpfl->filterout (efxoutl, PERIOD);
+    lpfr->filterout (efxoutr, PERIOD);
+    hpfr->filterout (efxoutr, PERIOD);
 
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
         delta = 0.5f*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
         if (delta > 0.0)
@@ -239,9 +233,5 @@ Expander::out (float *efxoutl, float *efxoutr, uint32_t period)
             efxoutl[i] *= gain*level;
             efxoutr[i] *= gain*level;
         }
-
     }
-
-
-
-};
+}
