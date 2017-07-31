@@ -1444,14 +1444,14 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 2:
                 if (Distorsion_Bypass) {
-                    efx_Distorsion->out (efxoutl, efxoutr, period);
+                    efx_Distorsion->out (efxoutl, efxoutr);
                     Vol_Efx (2, efx_Distorsion->outvolume);
                 }
                 break;
 
             case 3:
                 if (Overdrive_Bypass) {
-                    efx_Overdrive->out (efxoutl, efxoutr, period);
+                    efx_Overdrive->out (efxoutl, efxoutr);
                     Vol_Efx (3, efx_Overdrive->outvolume);
                 }
                 break;
@@ -1612,7 +1612,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 29:
                 if (Convol_Bypass) {
-                    efx_Convol->out(efxoutl, efxoutr, period);
+                    efx_Convol->out(efxoutl, efxoutr);
                     Vol_Efx(29,efx_Convol->outvolume);
                 }
                 break;

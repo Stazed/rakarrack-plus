@@ -30,15 +30,17 @@
 
 Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize)
 {
-    octoutl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    octoutr = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    PERIOD = intermediate_bufsize;
+    
+    octoutl = (float *) malloc (sizeof (float) * PERIOD);
+    octoutr = (float *) malloc (sizeof (float) * PERIOD);
     unsigned int i;
-    for(i=0;i<intermediate_bufsize;i++)
+    for(i=0;i<PERIOD;i++)
     {
     	octoutl[i] = octoutr[i] = 0;
     }
 
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
     lpfl = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
     lpfr = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
     hpfl = new AnalogFilter (3, 20, 1, 0, samplerate, interpbuf);
@@ -52,8 +54,8 @@ Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double sampler
     DCl->setfreq (30.0f);
     DCr->setfreq (30.0f);
 
-    dwshapel = new Waveshaper(samplerate, wave_res, wave_upq, wave_dnq, intermediate_bufsize);
-    dwshaper = new Waveshaper(samplerate, wave_res, wave_upq, wave_dnq, intermediate_bufsize);
+    dwshapel = new Waveshaper(samplerate, wave_res, wave_upq, wave_dnq, PERIOD);
+    dwshaper = new Waveshaper(samplerate, wave_res, wave_upq, wave_dnq, PERIOD);
 
     //default values
     Ppreset = 0;
@@ -112,31 +114,35 @@ Distorsion::cleanup ()
 
 };
 
+void
+Distorsion::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+}
 
 /*
  * Apply the filters
  */
 
 void
-Distorsion::applyfilters (float * efxoutl, float * efxoutr, uint32_t period)
+Distorsion::applyfilters (float * efxoutl, float * efxoutr)
 {
-    lpfl->filterout (efxoutl, period);
-    hpfl->filterout (efxoutl, period);
+    lpfl->filterout (efxoutl, PERIOD);
+    hpfl->filterout (efxoutl, PERIOD);
 
     if (Pstereo != 0) {
         //stereo
-        lpfr->filterout (efxoutr, period);
-        hpfr->filterout (efxoutr, period);
-    };
-
-};
+        lpfr->filterout (efxoutr, PERIOD);
+        hpfr->filterout (efxoutr, PERIOD);
+    }
+}
 
 
 /*
  * Effect output
  */
 void
-Distorsion::out (float * efxoutl, float * efxoutr, uint32_t period)
+Distorsion::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, lout, rout;
@@ -147,34 +153,34 @@ Distorsion::out (float * efxoutl, float * efxoutr, uint32_t period)
 
     if (Pstereo != 0) {
         //Stereo
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             efxoutl[i] = efxoutl[i] * inputvol * 2.0f;
             efxoutr[i] = efxoutr[i] * inputvol * 2.0f;
         };
     } else {
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             efxoutl[i] =
                 (efxoutl[i]  +  efxoutr[i] ) * inputvol;
         };
     };
 
     if (Pprefiltering != 0)
-        applyfilters (efxoutl, efxoutr, period);
+        applyfilters (efxoutl, efxoutr);
 
     //no optimised, yet (no look table)
 
 
-    dwshapel->waveshapesmps (period, efxoutl, Ptype, Pdrive, 1);
+    dwshapel->waveshapesmps (PERIOD, efxoutl, Ptype, Pdrive, 1);
     if (Pstereo != 0)
-        dwshaper->waveshapesmps (period, efxoutr, Ptype, Pdrive, 1);
+        dwshaper->waveshapesmps (PERIOD, efxoutr, Ptype, Pdrive, 1);
 
     if (Pprefiltering == 0)
-        applyfilters (efxoutl, efxoutr,period);
+        applyfilters (efxoutl, efxoutr);
 
-    if (Pstereo == 0) memcpy (efxoutr , efxoutl, period * sizeof(float));
+    if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
 
     if (octmix > 0.01f) {
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             lout = efxoutl[i];
             rout = efxoutr[i];
 
@@ -191,15 +197,15 @@ Distorsion::out (float * efxoutl, float * efxoutr, uint32_t period)
             octoutr[i] = rout *  toggler;
         }
 
-        blockDCr->filterout (octoutr,period);
-        blockDCl->filterout (octoutl,period);
+        blockDCr->filterout (octoutr,PERIOD);
+        blockDCl->filterout (octoutl,PERIOD);
     }
 
 
 
     float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         lout = efxoutl[i];
         rout = efxoutr[i];
 
@@ -222,8 +228,8 @@ Distorsion::out (float * efxoutl, float * efxoutr, uint32_t period)
 
     };
 
-    DCr->filterout (efxoutr,period);
-    DCl->filterout (efxoutl,period);
+    DCr->filterout (efxoutr,PERIOD);
+    DCl->filterout (efxoutl,PERIOD);
 };
 
 

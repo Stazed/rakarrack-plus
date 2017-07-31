@@ -377,27 +377,33 @@ LV2_Handle init_distlv2(const LV2_Descriptor *descriptor,double sample_freq, con
 
 void run_distlv2(LV2_Handle handle, uint32_t nframes)
 {
-    if(nframes == 0)
+    if( nframes == 0)
         return;
     
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
-
-    if(*plug->bypass_p && plug->prev_bypass)
-    {
-        plug->dist->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-        return;
-    }
     
-    // inline
+    //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        plug->dist->cleanup();
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->dist->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//0 Wet/dry
@@ -426,7 +432,7 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
     }
 
     //now run
-    plug->dist->out(plug->output_l_p, plug->output_r_p, nframes);
+    plug->dist->out(plug->output_l_p, plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->dist->outvolume, nframes);

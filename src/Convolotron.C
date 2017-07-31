@@ -31,6 +31,7 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
 {
     SAMPLE_RATE = (unsigned int)sample_rate;
     fSAMPLE_RATE = (float)sample_rate;
+    PERIOD = intermediate_bufsize;
 
     //default values
     Ppreset = 0;
@@ -46,10 +47,10 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
     convlength = .5f;
     fb = 0.0f;
     feedback = 0.0f;
-    adjust(DS, intermediate_bufsize);
+    adjust(DS, PERIOD);
 
-    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
 
     maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
     buf = (float *) malloc (sizeof (float) * maxx_size);
@@ -161,15 +162,15 @@ Convolotron::adjust(int DS, uint32_t period)
  * Effect output
  */
 void
-Convolotron::out (float * efxoutl, float * efxoutr, uint32_t period)
+Convolotron::out (float * efxoutl, float * efxoutr)
 {
     int i, j, xindex;
     float l,lyn;
 
     if(DS_state != 0) {
-        memcpy(templ, efxoutl,sizeof(float)*period);
-        memcpy(tempr, efxoutr,sizeof(float)*period);
-        U_Resample->out(templ,tempr,efxoutl,efxoutr,period,u_up);
+        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+        U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
     }
 
     for (i = 0; i < nPERIOD; i++) {
@@ -199,8 +200,8 @@ Convolotron::out (float * efxoutl, float * efxoutr, uint32_t period)
         D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
 
     } else {
-        memcpy(efxoutl, templ,sizeof(float)*period);
-        memcpy(efxoutr, tempr,sizeof(float)*period);
+        memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+        memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
     }
 }
 
