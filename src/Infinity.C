@@ -26,14 +26,13 @@
 #include "Infinity.h"
 #include <stdio.h>
 
-Infinity::Infinity (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Infinity::Infinity (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
     fSAMPLE_RATE = sample_rate;
 
     int i;
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
     for (i = 0; i<NUM_INF_BANDS; i++) {
         filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f, sample_rate, interpbuf);
         filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f, sample_rate, interpbuf);
@@ -187,40 +186,33 @@ Infinity::oscillator()
  * Apply the effect
  */
 void
-Infinity::out (float * smpsl, float * smpsr, uint32_t period)
+Infinity::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i, j;
     float tmpr, tmpl;
 
-    for (i = 0; i<period; i++)  {
+    for (i = 0; i<PERIOD; i++)  {
         //modulate
         oscillator();
         tmpr = tmpl = 0.0f;
         //run filter
 
-
-
         if(Pstages) {
             for (j=0; j<NUM_INF_BANDS; j++)  {
-                tmpl+=phaser(lphaser, filterl[j]->filterout_s(lbandstate[j].vol*smpsl[i]), j );
-                tmpr+=phaser(rphaser, filterr[j]->filterout_s(rbandstate[j].vol*smpsr[i]), j );
+                tmpl+=phaser(lphaser, filterl[j]->filterout_s(lbandstate[j].vol*efxoutl[i]), j );
+                tmpr+=phaser(rphaser, filterr[j]->filterout_s(rbandstate[j].vol*efxoutr[i]), j );
             }
         } else {
             for (j=0; j<NUM_INF_BANDS; j++)  {
-                tmpl+=filterl[j]->filterout_s(lbandstate[j].vol*smpsl[i]);
-                tmpr+=filterr[j]->filterout_s(rbandstate[j].vol*smpsr[i]);
+                tmpl+=filterl[j]->filterout_s(lbandstate[j].vol*efxoutl[i]);
+                tmpr+=filterr[j]->filterout_s(rbandstate[j].vol*efxoutr[i]);
             }
         }
 
-
         efxoutl[i] = (1.0f + autopan*mcos)*volmaster*tmpl;
         efxoutr[i] = (1.0f - autopan*mcos)*volmaster*tmpr;
-
-
-
     }
-
-};
+}
 
 /*
  * Cleanup the effect
@@ -241,9 +233,13 @@ Infinity::cleanup ()
             rphaser[i].xn1[j] = 0.0f;
         }
     }
+}
 
-
-};
+void
+Infinity::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+}
 
 
 /*

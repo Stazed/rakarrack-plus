@@ -29,21 +29,18 @@
 class Infinity
 {
 public:
-    Infinity (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    Infinity (double sample_rate, uint32_t intermediate_bufsize);
     ~Infinity ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
 
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    
     int Ppreset;
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
-
 
 private:
 
@@ -100,6 +97,7 @@ private:
     int tflag;
 
     float fSAMPLE_RATE;
+    uint32_t PERIOD;
 
     float* interpbuf; //buffer for filters
     class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];

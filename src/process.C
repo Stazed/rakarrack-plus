@@ -282,7 +282,7 @@ RKR::RKR ()
     efx_CompBand = new CompBand(fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr, fSample_rate);
     efx_Vibe = new Vibe(efxoutl,efxoutr, fSample_rate);
-    efx_Infinity = new Infinity(efxoutl,efxoutr, fSample_rate, period);
+    efx_Infinity = new Infinity(fSample_rate, period);
 
     U_Resample = new Resample(UpQual);
     D_Resample = new Resample(DownQual);
@@ -1731,7 +1731,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 46:
                 if (Infinity_Bypass) {
-                    efx_Infinity->out(efxoutl, efxoutr, period);
+                    efx_Infinity->out(efxoutl, efxoutr);
                     Vol_Efx(46,efx_Infinity->outvolume);
 
                 }
