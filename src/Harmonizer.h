@@ -35,13 +35,14 @@ class Harmonizer
 {
 
 public:
-    Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq, uint16_t intermediate_bufsize, double sample_rate);
+    Harmonizer (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
     ~Harmonizer ();
-    void out (float *smpsl, float *smpsr, uint32_t period);
+    void out (float *efxoutl, float *efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
     void applyfilters (float * efxoutl, uint32_t period);
     void adjust(int DS, uint32_t period);
 
@@ -62,10 +63,6 @@ public:
     double u_down;
     float nfSAMPLE_RATE;
 
-
-
-    float *efxoutl;
-    float *efxoutr;
     float *outi;
     float *outo;
     float *templ, *tempr;
@@ -110,6 +107,7 @@ private:
     class FPreset *Fpre;
 
     unsigned int SAMPLE_RATE;
+    uint32_t PERIOD;
     bool DS_init;
 };
 

@@ -28,26 +28,25 @@
 
 
 
-Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq,
-		uint16_t intermediate_bufsize, double sample_rate)
+Harmonizer::Harmonizer (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
-
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    
     hq = Quality;
     SAMPLE_RATE = (unsigned int)sample_rate;
-    adjust(DS, intermediate_bufsize);
+    adjust(DS, PERIOD);
     DS_init = 0;
 
-    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
 
 
-    outi = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    outo = (float *) malloc (sizeof (float) * intermediate_bufsize);
+    outi = (float *) malloc (sizeof (float) * PERIOD);
+    outo = (float *) malloc (sizeof (float) * PERIOD);
 
     unsigned int i;
-    for(i=0; i<intermediate_bufsize;i++)
+    for(i=0; i< PERIOD; i++)
     {
     	templ[i] = tempr[i] = 0;
     	outi[i] = outo[i] = 0;
@@ -57,7 +56,7 @@ Harmonizer::Harmonizer (float *efxoutl_, float *efxoutr_, long int Quality, int 
     D_Resample = new Resample(uq);
 
 
-    interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[PERIOD];
     pl = new AnalogFilter (6, 22000, 1, 0, sample_rate, interpbuf);
 
     PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
@@ -97,6 +96,12 @@ Harmonizer::cleanup ()
     memset(outo, 0, sizeof(float)*nPERIOD);
 };
 
+void
+Harmonizer::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    adjust(DS_state,PERIOD);//readjust now that we know period size
+}
 
 void
 Harmonizer::applyfilters (float * efxoutl, uint32_t period)
@@ -107,16 +112,55 @@ Harmonizer::applyfilters (float * efxoutl, uint32_t period)
 
 
 void
-Harmonizer::out (float *smpsl, float *smpsr, uint32_t period)
+Harmonizer::out (float *efxoutl, float *efxoutr)
 {
 
     int i;
 
-    if(!DS_init){
-    	adjust(DS_state,period);//readjust now that we know period size
+//    if(!DS_init){
+//    	adjust(DS_state,PERIOD);//readjust now that we know period size
+//    }
+    
+    if((DS_state != 0) && (Pinterval !=12))
+    {
+        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+        U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
     }
-    if((DS_state != 0) && (Pinterval !=12)) {
-        U_Resample->out(smpsl,smpsr,templ,tempr,period,u_up);
+    
+    for (i = 0; i < nPERIOD; i++)
+    {
+        outi[i] = (efxoutl[i] + efxoutr[i])*.5;
+        if (outi[i] > 1.0)
+            outi[i] = 1.0f;
+        if (outi[i] < -1.0)
+            outi[i] = -1.0f;
+    }
+    
+    if ((PMIDI) || (PSELECT))
+        PS->ratio = r_ratio;        // FIXME for rakarrack
+        //PS->ratio = r__ratio[0];  // FIXME for rakarrack from RecChord.C was global
+
+    if (Pinterval != 12)
+    {
+        PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
+
+        if((DS_state != 0) && (Pinterval != 12)) {
+            D_Resample->mono_out(outo,templ,nPERIOD,u_down,PERIOD);
+        } else {
+            memcpy(templ, outo,sizeof(float)*PERIOD);
+        }
+
+        applyfilters (templ,PERIOD);
+        
+        for (i = 0; i < (signed int)PERIOD; i++)
+        {
+            efxoutl[i] = templ[i] * gain * (1.0f - panning);
+            efxoutr[i] = templ[i] * gain * panning;
+        }
+    }
+/*    if((DS_state != 0) && (Pinterval !=12)) {
+        U_Resample->out(smpsl,smpsr,templ,tempr,PERIOD,u_up);
     }
 
 
@@ -126,7 +170,6 @@ Harmonizer::out (float *smpsl, float *smpsr, uint32_t period)
             outi[i] = 1.0f;
         if (outi[i] < -1.0)
             outi[i] = -1.0f;
-
     }
 
     if ((PMIDI) || (PSELECT))
@@ -137,22 +180,22 @@ Harmonizer::out (float *smpsl, float *smpsr, uint32_t period)
     }
 
     if((DS_state != 0) && (Pinterval != 12)) {
-        D_Resample->mono_out(outo,templ,nPERIOD,u_down,period);
+        D_Resample->mono_out(outo,templ,nPERIOD,u_down,PERIOD);
     } else {
-        memcpy(templ,smpsl, sizeof(float)*period);
+        memcpy(templ,smpsl, sizeof(float)*PERIOD);
     }
 
-    applyfilters (templ,period);
+    applyfilters (templ,PERIOD);
 
     //for (i = 0; i < (signed int)period; i++) {
         //efxoutl[i] = templ[i] * gain * panning;
         //efxoutr[i] = templ[i] * gain * (1.0f - panning);
     //}
-    for (i = 0; i < (signed int)period; i++) {
+    for (i = 0; i < (signed int)PERIOD; i++) {
         efxoutl[i] = templ[i] * gain * (1.0f - panning);
         efxoutr[i] = templ[i] * gain * panning;
     }
-
+*/
 };
 
 

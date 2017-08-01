@@ -250,7 +250,7 @@ RKR::RKR ()
     efx_Alienwah = new Alienwah (fSample_rate, period);
     efx_Cabinet = new Cabinet (fSample_rate, period);
     efx_Pan = new Pan (efxoutl, efxoutr, fSample_rate);
-    efx_Har = new Harmonizer (efxoutl, efxoutr, (long) HarQual, Har_Down, Har_U_Q, Har_D_Q, period, fSample_rate); // FIXME reversed sample/period
+    efx_Har = new Harmonizer ((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     efx_MusDelay = new MusicDelay (efxoutl, efxoutr, fSample_rate);
     efx_Gate = new Gate (fSample_rate, period);
     efx_NewDist = new NewDist(efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
@@ -1507,7 +1507,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 14:
                 if (Harmonizer_Bypass) {
-                    efx_Har->out (efxoutl, efxoutr, period);
+                    efx_Har->out (efxoutl, efxoutr);
                     Vol_Efx (14, efx_Har->outvolume);
                 }
                 break;
