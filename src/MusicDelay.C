@@ -27,11 +27,9 @@
 #include <math.h>
 #include "MusicDelay.h"
 
-MusicDelay::MusicDelay (float * efxoutl_, float * efxoutr_, double sample_rate)
+MusicDelay::MusicDelay (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
     fSAMPLE_RATE = sample_rate;
 
     //default values
@@ -95,6 +93,11 @@ MusicDelay::cleanup ()
     oldr2 = 0.0;
 };
 
+void
+MusicDelay::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+}
 
 /*
  * Initialize the delays
@@ -143,12 +146,12 @@ MusicDelay::initdelays ()
  * Effect output
  */
 void
-MusicDelay::out (float * smpsl, float * smpsr, uint32_t period)
+MusicDelay::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l1, r1, ldl1, rdl1, l2, r2, ldl2, rdl2;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         ldl1 = ldelay1[kl1];
         rdl1 = rdelay1[kr1];
         l1 = ldl1 * (1.0f - lrcross) + rdl1 * lrcross;
@@ -163,15 +166,14 @@ MusicDelay::out (float * smpsl, float * smpsr, uint32_t period)
         ldl2 = l2;
         rdl2 = r2;
 
-        ldl1 = smpsl[i] * gain1 * panning1 - ldl1 * fb1;
-        rdl1 = smpsr[i] * gain1 * (1.0f - panning1) - rdl1 * fb1;
+        ldl1 = efxoutl[i] * gain1 * panning1 - ldl1 * fb1;
+        rdl1 = efxoutr[i] * gain1 * (1.0f - panning1) - rdl1 * fb1;
 
-        ldl2 = smpsl[i] * gain2 * panning2 - ldl2 * fb2;
-        rdl2 = smpsr[i] * gain2 * (1.0f - panning2) - rdl2 * fb2;
+        ldl2 = efxoutl[i] * gain2 * panning2 - ldl2 * fb2;
+        rdl2 = efxoutr[i] * gain2 * (1.0f - panning2) - rdl2 * fb2;
 
         efxoutl[i] = (ldl1 + ldl2) * 2.0f;
         efxoutr[i] = (rdl1 + rdl2) * 2.0f;
-
 
 
         //LowPass Filter
@@ -195,9 +197,8 @@ MusicDelay::out (float * smpsl, float * smpsr, uint32_t period)
         if (++kr2 >= dr2)
             kr2 = 0;
 
-    };
-
-};
+    }
+}
 
 
 /*
