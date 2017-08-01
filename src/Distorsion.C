@@ -31,31 +31,12 @@
 Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;
+    fSAMPLE_RATE = samplerate;
+    WAVE_RES = wave_res;
+    WAVE_UPQ = wave_upq;
+    WAVE_DNQ = wave_dnq;
     
-    octoutl = (float *) malloc (sizeof (float) * PERIOD);
-    octoutr = (float *) malloc (sizeof (float) * PERIOD);
-    unsigned int i;
-    for(i=0;i<PERIOD;i++)
-    {
-    	octoutl[i] = octoutr[i] = 0;
-    }
-
-    interpbuf = new float[PERIOD];
-    lpfl = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
-    lpfr = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
-    hpfl = new AnalogFilter (3, 20, 1, 0, samplerate, interpbuf);
-    hpfr = new AnalogFilter (3, 20, 1, 0, samplerate, interpbuf);
-    blockDCl = new AnalogFilter (2, 440.0f, 1, 0, samplerate, interpbuf);
-    blockDCr = new AnalogFilter (2, 440.0f, 1, 0, samplerate, interpbuf);
-    blockDCl->setfreq (75.0f);
-    blockDCr->setfreq (75.0f);
-    DCl = new AnalogFilter (3, 30, 1, 0, samplerate, interpbuf);
-    DCr = new AnalogFilter (3, 30, 1, 0, samplerate, interpbuf);
-    DCl->setfreq (30.0f);
-    DCr->setfreq (30.0f);
-
-    dwshapel = new Waveshaper(samplerate, wave_res, wave_upq, wave_dnq, PERIOD);
-    dwshaper = new Waveshaper(samplerate, wave_res, wave_upq, wave_dnq, PERIOD);
+    initialize();
 
     //default values
     Ppreset = 0;
@@ -82,19 +63,7 @@ Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double sampler
 
 Distorsion::~Distorsion ()
 {
-	free(octoutl);
-	free(octoutr);
-	delete lpfl;
-	delete lpfr;
-	delete hpfl;
-	delete hpfr;
-	delete blockDCl;
-	delete blockDCr;
-	delete DCl;
-	delete DCr;
-	delete dwshapel;
-	delete dwshaper;
-	delete[] interpbuf;
+    clear_initialize();
 };
 
 /*
@@ -118,6 +87,8 @@ void
 Distorsion::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
+    clear_initialize();
+    initialize();
 }
 
 /*
@@ -137,6 +108,52 @@ Distorsion::applyfilters (float * efxoutl, float * efxoutr)
     }
 }
 
+void 
+Distorsion::initialize ()
+{
+    octoutl = (float *) malloc (sizeof (float) * PERIOD);
+    octoutr = (float *) malloc (sizeof (float) * PERIOD);
+    unsigned int i;
+    for(i=0;i<PERIOD;i++)
+    {
+    	octoutl[i] = octoutr[i] = 0;
+    }
+
+    interpbuf = new float[PERIOD];
+    lpfl = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCl = new AnalogFilter (2, 440.0f, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCr = new AnalogFilter (2, 440.0f, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCl->setfreq (75.0f);
+    blockDCr->setfreq (75.0f);
+    DCl = new AnalogFilter (3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
+    DCr = new AnalogFilter (3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
+    DCl->setfreq (30.0f);
+    DCr->setfreq (30.0f);
+
+    dwshapel = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
+    dwshaper = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
+}
+
+void
+Distorsion::clear_initialize()
+{
+    free(octoutl);
+    free(octoutr);
+    delete lpfl;
+    delete lpfr;
+    delete hpfl;
+    delete hpfr;
+    delete blockDCl;
+    delete blockDCr;
+    delete DCl;
+    delete DCr;
+    delete dwshapel;
+    delete dwshaper;
+    delete[] interpbuf;
+}
 
 /*
  * Effect output

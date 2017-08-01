@@ -40,6 +40,8 @@ public:
     void cleanup ();
     void lv2_update_params(uint32_t period);
     void applyfilters (float * efxoutl, float * efxoutr);
+    void initialize ();
+    void clear_initialize();
 
     int Ppreset;
     float *octoutl;
@@ -61,6 +63,10 @@ private:
     int Pprefiltering;	//if you want to do the filtering before the distorsion
     int Poctave;	//mix sub octave
 
+    int WAVE_RES;
+    int WAVE_UPQ;
+    int WAVE_DNQ;
+    
     void setvolume (int Pvolume);
     void setpanning (int Ppanning);
     void setlrcross (int Plrcross);
@@ -76,6 +82,7 @@ private:
 
     float * interpbuf;//buffer for filters
     uint32_t PERIOD;
+    double fSAMPLE_RATE;
 
 };
 
