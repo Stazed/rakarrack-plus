@@ -266,7 +266,7 @@ RKR::RKR ()
     efx_Synthfilter = new Synthfilter(efxoutl,efxoutr, fSample_rate);
     efx_MBVvol = new MBVvol(efxoutl,efxoutr, fSample_rate, period);
     efx_Convol = new Convolotron(Con_Down,Con_U_Q,Con_D_Q, fSample_rate, period);
-    efx_Looper = new Looper(efxoutl,efxoutr,looper_size,fSample_rate, period);
+    efx_Looper = new Looper(looper_size,fSample_rate, period);
     efx_RyanWah = new RyanWah(efxoutl,efxoutr, fSample_rate, period);
     efx_RBEcho = new RBEcho(efxoutl,efxoutr, fSample_rate);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
@@ -1620,7 +1620,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 30:
                 if (Looper_Bypass) {
-                    efx_Looper->out(efxoutl, efxoutr, period);
+                    efx_Looper->out(efxoutl, efxoutr);
                     Vol_Efx(30,efx_Looper->outvolume);
                 }
                 break;

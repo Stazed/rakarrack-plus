@@ -31,9 +31,9 @@
 class Looper
 {
 public:
-    Looper (float * efxoutl_, float * efxoutr_, float size,double samplerate, uint32_t intermediate_bufsize);
+    Looper (float size, double samplerate, uint32_t intermediate_bufsize);
     ~Looper ();
-    void out (float * smpsl, float * smpr, int period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void loadpreset (int npar, int value);  // to set one from a preset
     void changepar (int npar, int value);
@@ -51,9 +51,6 @@ public:
     void getstate ();
 
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
 
     int Pplay;	//set to 1
     int Pstop;	//set to 1
@@ -104,6 +101,7 @@ private:
     
     float fSAMPLE_RATE;
     unsigned int SAMPLE_RATE;
+    uint32_t PERIOD;
 
 };
 

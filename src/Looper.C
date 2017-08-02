@@ -28,12 +28,10 @@
 #include <math.h>
 #include "Looper.h"
 
-Looper::Looper (float * efxoutl_, float * efxoutr_, float size,double samplerate, uint32_t intermediate_bufsize):
+Looper::Looper (float size,double samplerate, uint32_t intermediate_bufsize):
     ticker(samplerate,intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-    
+    PERIOD = intermediate_bufsize;
     SAMPLE_RATE = samplerate;
     fSAMPLE_RATE = float(samplerate);
 
@@ -132,24 +130,24 @@ Looper::initdelays ()
  * Effect output
  */
 void
-Looper::out (float * smpsl, float * smpsr, int period)
+Looper::out (float * efxoutl, float * efxoutr)
 {
-    int i;
+    unsigned i;
     float rswell, lswell;
-    float ticktock[period];
-    if((Pmetro) && (Pplay) && (!Pstop)) ticker.metronomeout(ticktock, period);
+    float ticktock[PERIOD];
+    if((Pmetro) && (Pplay) && (!Pstop)) ticker.metronomeout(ticktock, PERIOD);
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
         if((Pplay) && (!Pstop)) {
             if(Precord) {
                 if((Prec1) && (PT1)) {
-                    ldelay[kl] += pregain1*smpsl[i];
-                    rdelay[kl] += pregain1*smpsr[i];
+                    ldelay[kl] += pregain1*efxoutl[i];
+                    rdelay[kl] += pregain1*efxoutr[i];
                 }
                 if((Prec2) && (PT2)) {
-                    t2ldelay[kl2] += pregain2*smpsl[i];
-                    t2rdelay[kl2] += pregain2*smpsr[i];
+                    t2ldelay[kl2] += pregain2*efxoutl[i];
+                    t2rdelay[kl2] += pregain2*efxoutr[i];
                 }
 
             }
