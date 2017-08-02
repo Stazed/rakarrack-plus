@@ -718,15 +718,18 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
 
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
     plug->harm = new Harmonizer(4,5,4,2, sample_freq, plug->period_max);
-    plug->noteID = new Recognize(0,0,.6, sample_freq, 440.0, plug->period_max);//.6 is default trigger value
+    plug->noteID = new Recognize(0,0,.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
     plug->chordID = new RecChord();
+    plug->noteID->reconota = -1;
 
     // set in :void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) and used by schmittFloat();
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq, plug->period_max);     // FIXME update params
-    // set default values
+    plug->comp = new Compressor(sample_freq, plug->period_max);
+    plug->comp->setpreset(0,3); //Final Limiter
+
+/*
     plug->comp->changepar(1,-24);//threshold
     plug->comp->changepar(2,4);  //ratio
     plug->comp->changepar(3,-10);//output
@@ -734,9 +737,8 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
     plug->comp->changepar(5,50); //release
     plug->comp->changepar(6,1);  //a_out
     plug->comp->changepar(7,30); //knee
-
-
-    plug->init_params = 0; // used for PSELECT - setting default reconota to -1
+*/
+//    plug->init_params = 0; // used for PSELECT - setting default reconota to -1
 
     return plug;
 }
@@ -759,7 +761,7 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(*plug->bypass_p && plug->prev_bypass)
     {
         //plug->harm->cleanup(); // Why do this?? It means the user must toggle slider, etc to reset parameters.
-        plug->init_params = 1; // reset if bypass removed
+        //plug->init_params = 1; // reset if bypass removed
         return;
     }
  
@@ -769,6 +771,7 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->period_max = nframes;
         plug->harm->lv2_update_params(nframes);
         plug->comp->lv2_update_params(nframes);
+        plug->noteID->lv2_update_params(nframes);
     }
     
     // we are good to run now
@@ -791,7 +794,7 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->harm->getpar(i) != val)
     {
         plug->harm->changepar(i,val);
-        plug->init_params = 1;//set default reconota to -1 if valid
+        //plug->init_params = 1;//set default reconota to -1 if valid
     }
     i++;
     val = (int)*plug->param_p[i];//4 filter freq
@@ -806,7 +809,7 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->harm->changepar(i,val);
         plug->chordID->cleanup();
         if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
-        plug->init_params = 1;//set default reconota to -1 if valid
+        //plug->init_params = 1;//set default reconota to -1 if valid
     }
     for(i++; i<8; i++) //6-7
     {
@@ -817,7 +820,7 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
             plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
             plug->chordID->fundi = plug->harm->getpar(6);//set root note
             plug->chordID->cc = 1;//mark chord has changed
-            plug->init_params = 1;//set default reconota to -1 if valid
+           // plug->init_params = 1;//set default reconota to -1 if valid
         }
     }
     for(; i<10; i++) // 8-9
@@ -854,6 +857,7 @@ if((rkr->efx_Har->PSELECT)|| (rkr->efx_Har->PMIDI))
     }
  }
 */
+#if 0
     if(plug->init_params) // only on change
     {
         // This call from above seems for !mira and default (-1) reconata
@@ -865,12 +869,34 @@ if((rkr->efx_Har->PSELECT)|| (rkr->efx_Har->PMIDI))
         }
         plug->init_params = 0; // shut off
     }
+#endif // 0
 /*
 see Chord() in rkr.fl
 harmonizer, need recChord and recNote.
 see process.C ln 1507
 */
-
+    
+    if(have_signal(plug->output_l_p, plug->output_r_p, nframes))
+    {
+        if(plug->harm->mira)
+        {
+            if(plug->harm->PSELECT)
+            {
+                plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p, nframes);
+                if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
+                {
+                    if(plug->noteID->afreq > 0.0)
+                    {
+                        plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
+                        plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+                        plug->noteID->last = plug->noteID->reconota;
+                    }
+                }
+            }
+        }
+    }
+#if 0
+// rkrlv2
     if(plug->harm->mira && plug->harm->PSELECT
         && have_signal( plug->input_l_p, plug->input_r_p, nframes))
     {
@@ -884,17 +910,13 @@ see process.C ln 1507
             }
         }
     }
+#endif // 0
 
-    /*  Compressor... this most closely approximates the wet amount from rakarrack,
-        but the dry amount in rakarrack seems to be doubled, even if 100% dry.
-        This seems to be a bug, since the dry amount should not be altered if
-        100% dry. Not sure why rakarrack is doing this... it occurs when schmittFloat()
-        is called, and the sustainer is invoked within. Too many circular, global variables.
-        The user can duplicate the sound produced by rakarrack by adjusting wet/dry in
-        the harmonizer plug, but the overall sound will be quieter...
-    */
-    plug->comp->out(plug->output_l_p,plug->output_r_p);
-
+    if(plug->harm->PSELECT)
+    {
+        plug->comp->out(plug->output_l_p,plug->output_r_p);
+    }
+    
     //now run
     plug->harm->out(plug->output_l_p,plug->output_r_p);
 
@@ -1809,7 +1831,7 @@ LV2_Handle init_ringlv2(const LV2_Descriptor *descriptor,double sample_freq, con
 
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
     plug->ring = new Ring(0,0, sample_freq);
-    plug->noteID = new Recognize(0,0,.6, sample_freq, 440.0, plug->period_max);//.6 is default trigger value
+    plug->noteID = new Recognize(0,0,.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
 
     return plug;
 }
@@ -3541,7 +3563,7 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
 
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
     plug->sharm = new StereoHarm(0,0,4,5,4,2, plug->period_max, sample_freq);
-    plug->noteID = new Recognize(0,0,.6, sample_freq, 440.0, plug->period_max);//.6 is default trigger value
+    plug->noteID = new Recognize(0,0,.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
     plug->chordID = new RecChord();
     // set in :void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) and used by schmittFloat();
     plug->noteID->setlpf(5500); // default user option in rakarrack

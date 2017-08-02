@@ -229,7 +229,7 @@ RKR::RKR ()
 
     Fpre = new FPreset();
     
-    RecNote = new Recognize (efxoutl, efxoutr, rtrig, fSample_rate, 440.0, period); // FIXME sample/period 
+    RecNote = new Recognize (efxoutl, efxoutr, rtrig, 440.0, fSample_rate, period);
     RecNote->update_freqs(aFreq); // - have to call here after declaration
     
     DC_Offsetl = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
@@ -1367,6 +1367,7 @@ RKR::Alg (float *origl, float *origr, void *)
                     if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
                         if(RecNote->afreq > 0.0) {
                             RC->Vamos (0,efx_Har->Pinterval - 12,RecNote->reconota);
+                            efx_Har->r_ratio = RC->r__ratio[0];//pass the found ratio
                             ponlast = 1;
                         }
                     }

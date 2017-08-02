@@ -21,13 +21,14 @@
 class Recognize
 {
 public:
-    Recognize (float * efxoutl_, float * efxoutr_, float trig, double sample_rate, float tune, uint32_t intermediate_bufsize);
+    Recognize (float * efxoutl_, float * efxoutr_, float trig, float tune, double sample_rate, uint32_t intermediate_bufsize);
     ~Recognize ();
 
     void schmittFloat (float *indatal, float *indatar, uint32_t period);
     void sethpf(int value);
     void setlpf(int value);
     void update_freqs(float tune);
+    void lv2_update_params(uint32_t period);
     int note;
 
     signed short int *schmittBuffer;
@@ -43,7 +44,7 @@ public:
     int last;
     float freqs[12];
     float lfreqs[12];
-    
+
 
 private:
 
@@ -60,6 +61,7 @@ private:
     class Sustainer *Sus;
 
     float fSAMPLE_RATE;
+    double dSAMPLE_RATE;
 
 };
 

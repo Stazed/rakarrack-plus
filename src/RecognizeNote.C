@@ -36,9 +36,10 @@
 
 
 
-Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig, double sample_rate, float tune, uint32_t intermediate_bufsize)
+Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig, float tune, double sample_rate, uint32_t intermediate_bufsize)
 {
-
+    fSAMPLE_RATE = (float)sample_rate;
+    dSAMPLE_RATE = sample_rate;
     efxoutl = efxoutl_;
     efxoutr = efxoutr_;
 
@@ -252,4 +253,21 @@ Recognize::update_freqs(float tune)
         freqs[i] = freqs[i - 1] * D_NOTE;
         lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
     }
+}
+
+void
+Recognize::lv2_update_params (uint32_t period)
+{
+    delete lpfl;
+    delete lpfr;
+    delete hpfl;
+    delete hpfr;
+    delete[] interpbuf;
+    interpbuf = new float[period];
+    lpfl = new AnalogFilter (2, 3000, 1, 0, dSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter (2, 3000, 1, 0, dSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter (3, 300, 1, 0, dSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter (3, 300, 1, 0, dSAMPLE_RATE, interpbuf);
+    setlpf(5500); // default user option in rakarrack
+    sethpf(80); // default user option in rakarrack
 }

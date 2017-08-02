@@ -65,6 +65,7 @@ Harmonizer::Harmonizer (long int Quality, int DS, int uq, int dq, double sample_
     Ppreset = 0;
     PMIDI = 0;
     mira = 0;
+    r_ratio = 0.0f;
     setpreset (Ppreset);
 
 
@@ -114,12 +115,13 @@ Harmonizer::applyfilters (float * efxoutl, uint32_t period)
 void
 Harmonizer::out (float *efxoutl, float *efxoutr)
 {
-
     int i;
 
-//    if(!DS_init){
-//    	adjust(DS_state,PERIOD);//readjust now that we know period size
-//    }
+#if 0       // rkrlv2
+    if(!DS_init){
+    	adjust(DS_state,PERIOD);//readjust now that we know period size
+    }
+#endif // 0
     
     if((DS_state != 0) && (Pinterval !=12))
     {
@@ -138,8 +140,7 @@ Harmonizer::out (float *efxoutl, float *efxoutr)
     }
     
     if ((PMIDI) || (PSELECT))
-        PS->ratio = r_ratio;        // FIXME for rakarrack
-        //PS->ratio = r__ratio[0];  // FIXME for rakarrack from RecChord.C was global
+        PS->ratio = r_ratio;    // rakarrack value passed from r__ratio[0] in process
 
     if (Pinterval != 12)
     {
@@ -159,7 +160,9 @@ Harmonizer::out (float *efxoutl, float *efxoutr)
             efxoutr[i] = templ[i] * gain * panning;
         }
     }
-/*    if((DS_state != 0) && (Pinterval !=12)) {
+
+#if 0 // rkrlv2
+    if((DS_state != 0) && (Pinterval !=12)) {
         U_Resample->out(smpsl,smpsr,templ,tempr,PERIOD,u_up);
     }
 
@@ -195,9 +198,9 @@ Harmonizer::out (float *efxoutl, float *efxoutr)
         efxoutl[i] = templ[i] * gain * (1.0f - panning);
         efxoutr[i] = templ[i] * gain * panning;
     }
-*/
-};
-
+#endif // 0
+    
+}
 
 
 void

@@ -283,6 +283,8 @@ RecChord::RecChord ()
     NCE[22].note = -2;
     NCE[23].note = -1;
 
+    ctipo = 0;//set chord type initial
+    fundi = 0;//set root note initial
 
     IniciaChords ();
     memset (NombreAcorde, 0, sizeof (NombreAcorde));
