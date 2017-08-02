@@ -18,7 +18,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 64.0
+				pset:value 0.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 41.0
@@ -71,7 +71,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 127.0
+				pset:value 64.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 20.0
@@ -123,7 +123,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 64.0
+				pset:value 0.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 32.0
@@ -175,7 +175,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 64.0
+				pset:value 0.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 36.0
@@ -227,7 +227,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 64.0
+				pset:value 0.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 24.0
@@ -279,7 +279,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 64.0
+				pset:value 0.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 64.0
@@ -331,7 +331,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 64.0
+				pset:value 0.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 64.0
@@ -383,7 +383,7 @@
 				pset:value 0.0
         ], [
                 lv2:symbol "LRCr" ;
-				pset:value 64.0
+				pset:value 0.0
         ], [
                 lv2:symbol "DRIVE" ;
 				pset:value 30.0
