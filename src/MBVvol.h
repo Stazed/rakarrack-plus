@@ -33,14 +33,17 @@
 class MBVvol
 {
 public:
-    MBVvol (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    MBVvol (double sample_rate, uint32_t intermediate_bufsize);
     ~MBVvol ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    void initialize ();
+    void clear_initialize();
+    
     int Ppreset;
     float outvolume;
 
@@ -54,9 +57,6 @@ public:
     float *midhr;
     float *highl;
     float *highr;
-
-    uint32_t PERIOD;
-    EffectLFO* lfo1,*lfo2;
 
 private:
 
@@ -96,6 +96,10 @@ private:
 
 
     class FPreset *Fpre;
+    
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
+    EffectLFO* lfo1,*lfo2;
 
 };
 

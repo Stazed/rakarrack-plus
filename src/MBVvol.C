@@ -32,38 +32,15 @@
 
 
 
-MBVvol::MBVvol (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+MBVvol::MBVvol (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
-    lowl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    lowr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midll = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midlr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midhl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    midhr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    highl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    highr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-
-
-    interpbuf = new float[intermediate_bufsize];
-    lpf1l = new AnalogFilter (2, 500.0f, .7071f, 0, sample_rate, interpbuf);
-    lpf1r = new AnalogFilter (2, 500.0f, .7071f, 0, sample_rate, interpbuf);
-    hpf1l = new AnalogFilter (3, 500.0f, .7071f, 0, sample_rate, interpbuf);
-    hpf1r = new AnalogFilter (3, 500.0f, .7071f, 0, sample_rate, interpbuf);
-    lpf2l = new AnalogFilter (2, 2500.0f, .7071f, 0, sample_rate, interpbuf);
-    lpf2r = new AnalogFilter (2, 2500.0f, .7071f, 0, sample_rate, interpbuf);
-    hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0, sample_rate, interpbuf);
-    hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0, sample_rate, interpbuf);
-    lpf3l = new AnalogFilter (2, 5000.0f, .7071f, 0, sample_rate, interpbuf);
-    lpf3r = new AnalogFilter (2, 5000.0f, .7071f, 0, sample_rate, interpbuf);
-    hpf3l = new AnalogFilter (3, 5000.0f, .7071f, 0, sample_rate, interpbuf);
-    hpf3r = new AnalogFilter (3, 5000.0f, .7071f, 0, sample_rate, interpbuf);
-
-    lfo1 = new EffectLFO(sample_rate);
-    lfo2 = new EffectLFO(sample_rate);
-    PERIOD = 256;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
+    
+    initialize();
+    
+    lfo1 = new EffectLFO(fSAMPLE_RATE);
+    lfo2 = new EffectLFO(fSAMPLE_RATE);
 
     //default values
     Ppreset = 0;
@@ -77,28 +54,8 @@ MBVvol::MBVvol (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t
 
 MBVvol::~MBVvol ()
 {
-	free(lowl);
-    free(lowr);
-    free(midll);
-    free(midlr);
-    free(midhl);
-    free(midhr);
-    free(highl);
-    free(highr);
-    delete lpf1l;
-    delete lpf1r;
-    delete hpf1l;
-    delete hpf1r;
-    delete lpf2l;
-    delete lpf2r;
-    delete hpf2l;
-    delete hpf2r;
-    delete lpf3l;
-    delete lpf3r;
-    delete hpf3l;
-    delete hpf3r;
-    delete[] interpbuf;
-};
+    clear_initialize();
+}
 
 /*
  * Cleanup the effect
@@ -120,55 +77,118 @@ MBVvol::cleanup ()
     hpf3r->cleanup ();
 
 };
+
+void
+MBVvol::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+    lfo1->updateparams (PERIOD);
+    lfo2->updateparams (PERIOD);
+}
+
+void 
+MBVvol::initialize ()
+{
+    lowl = (float *) malloc (sizeof (float) * PERIOD);
+    lowr = (float *) malloc (sizeof (float) * PERIOD);
+    midll = (float *) malloc (sizeof (float) * PERIOD);
+    midlr = (float *) malloc (sizeof (float) * PERIOD);
+    midhl = (float *) malloc (sizeof (float) * PERIOD);
+    midhr = (float *) malloc (sizeof (float) * PERIOD);
+    highl = (float *) malloc (sizeof (float) * PERIOD);
+    highr = (float *) malloc (sizeof (float) * PERIOD);
+
+
+    interpbuf = new float[PERIOD];
+    lpf1l = new AnalogFilter (2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf1r = new AnalogFilter (2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1l = new AnalogFilter (3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1r = new AnalogFilter (3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2l = new AnalogFilter (2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2r = new AnalogFilter (2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3l = new AnalogFilter (2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3r = new AnalogFilter (2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3l = new AnalogFilter (3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3r = new AnalogFilter (3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+}
+
+void
+MBVvol::clear_initialize()
+{
+    free(lowl);
+    free(lowr);
+    free(midll);
+    free(midlr);
+    free(midhl);
+    free(midhr);
+    free(highl);
+    free(highr);
+    delete lpf1l;
+    delete lpf1r;
+    delete hpf1l;
+    delete hpf1r;
+    delete lpf2l;
+    delete lpf2r;
+    delete hpf2l;
+    delete hpf2r;
+    delete lpf3l;
+    delete lpf3r;
+    delete hpf3l;
+    delete hpf3r;
+    delete[] interpbuf;
+}
 /*
  * Effect output
  */
 void
-MBVvol::out (float * smpsl, float * smpsr, uint32_t period)
+MBVvol::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    memcpy(lowl,smpsl,sizeof(float) * period);
-    memcpy(midll,smpsl,sizeof(float) * period);
-    memcpy(midhl,smpsl,sizeof(float) * period);
-    memcpy(highl,smpsl,sizeof(float) * period);
+    memcpy(lowl,efxoutl,sizeof(float) * PERIOD);
+    memcpy(midll,efxoutl,sizeof(float) * PERIOD);
+    memcpy(midhl,efxoutl,sizeof(float) * PERIOD);
+    memcpy(highl,efxoutl,sizeof(float) * PERIOD);
 
-    lpf1l->filterout(lowl, period);
-    hpf1l->filterout(midll, period);
-    lpf2l->filterout(midll, period);
-    hpf2l->filterout(midhl, period);
-    lpf3l->filterout(midhl, period);
-    hpf3l->filterout(highl, period);
+    lpf1l->filterout(lowl, PERIOD);
+    hpf1l->filterout(midll, PERIOD);
+    lpf2l->filterout(midll, PERIOD);
+    hpf2l->filterout(midhl, PERIOD);
+    lpf3l->filterout(midhl, PERIOD);
+    hpf3l->filterout(highl, PERIOD);
 
-    memcpy(lowr,smpsr,sizeof(float) * period);
-    memcpy(midlr,smpsr,sizeof(float) * period);
-    memcpy(midhr,smpsr,sizeof(float) * period);
-    memcpy(highr,smpsr,sizeof(float) * period);
+    memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(midlr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(midhr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(highr,efxoutr,sizeof(float) * PERIOD);
 
-    lpf1r->filterout(lowr, period);
-    hpf1r->filterout(midlr, period);
-    lpf2r->filterout(midlr, period);
-    hpf2r->filterout(midhr, period);
-    lpf3r->filterout(midhr, period);
-    hpf3r->filterout(highr, period);
+    lpf1r->filterout(lowr, PERIOD);
+    hpf1r->filterout(midlr, PERIOD);
+    lpf2r->filterout(midlr, PERIOD);
+    hpf2r->filterout(midhr, PERIOD);
+    lpf3r->filterout(midhr, PERIOD);
+    hpf3r->filterout(highr, PERIOD);
 
     lfo1->effectlfoout (&lfo1l, &lfo1r);
     lfo2->effectlfoout (&lfo2l, &lfo2r);
 
-    d1=(lfo1l-v1l)/(float)period;
-    d2=(lfo1r-v1r)/(float)period;
-    d3=(lfo2l-v2l)/(float)period;
-    d4=(lfo2r-v2r)/(float)period;
+    d1=(lfo1l-v1l)/(float)PERIOD;
+    d2=(lfo1r-v1r)/(float)PERIOD;
+    d3=(lfo2l-v2l)/(float)PERIOD;
+    d4=(lfo2r-v2r)/(float)PERIOD;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
     	updateVols();
 
         efxoutl[i]=lowl[i]*volL+midll[i]*volML+midhl[i]*volMH+highl[i]*volH;
         efxoutr[i]=lowr[i]*volLr+midlr[i]*volMLr+midhr[i]*volMHr+highr[i]*volHr;
     }
-
-};
+}
 
 
 /*

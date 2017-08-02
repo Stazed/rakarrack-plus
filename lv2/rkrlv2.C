@@ -2282,43 +2282,46 @@ LV2_Handle init_mbvollv2(const LV2_Descriptor *descriptor,double sample_freq, co
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 14;
+    plug->nparams = 14; // 15 minus legacy skipped
     plug->effectindex = IMBVOL;
     plug->prev_bypass = 1;
 
     getFeatures(plug,host_features);
 
-    plug->mbvol = new MBVvol(0,0,sample_freq,plug->period_max);
-    plug->init_params = 1; // LFO init
+    plug->mbvol = new MBVvol(sample_freq,plug->period_max);
 
     return plug;
 }
 
 void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->mbvol->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->mbvol->PERIOD = nframes;
-        plug->mbvol->lfo1->updateparams(nframes);
-        plug->mbvol->lfo2->updateparams(nframes);
-        plug->init_params = 0; // clear so we only do this once
+        plug->period_max = nframes;
+        plug->mbvol->lv2_update_params(nframes);
     }
-
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<3; i++)
     {
@@ -2363,12 +2366,8 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->mbvol->efxoutl = plug->output_l_p;
-    plug->mbvol->efxoutr = plug->output_r_p;
-
     //now run
-    plug->mbvol->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->mbvol->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->mbvol->outvolume, nframes);
