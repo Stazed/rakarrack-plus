@@ -45,6 +45,8 @@ public:
     int getpar (int npar);
     void cleanup ();
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
 
     int Ppreset;
     float outvolume;
@@ -98,6 +100,7 @@ private:
     Compressor *CL,*CML,*CMH,*CH;
     
     uint32_t PERIOD;
+    double fSAMPLE_RATE;
     class FPreset *Fpre;
 
 };

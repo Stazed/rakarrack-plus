@@ -41,31 +41,9 @@
 CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
     
-    lowl = (float *) malloc (sizeof (float) * PERIOD);
-    lowr = (float *) malloc (sizeof (float) * PERIOD);
-    midll = (float *) malloc (sizeof (float) * PERIOD);
-    midlr = (float *) malloc (sizeof (float) * PERIOD);
-    midhl = (float *) malloc (sizeof (float) * PERIOD);
-    midhr = (float *) malloc (sizeof (float) * PERIOD);
-    highl = (float *) malloc (sizeof (float) * PERIOD);
-    highr = (float *) malloc (sizeof (float) * PERIOD);
-
-
-    interpbuf = new float[PERIOD];
-    lpf1l = new AnalogFilter (2, 500.0f,.7071f, 0, sample_rate, interpbuf);
-    lpf1r = new AnalogFilter (2, 500.0f,.7071f, 0, sample_rate, interpbuf);
-    hpf1l = new AnalogFilter (3, 500.0f,.7071f, 0, sample_rate, interpbuf);
-    hpf1r = new AnalogFilter (3, 500.0f,.7071f, 0, sample_rate, interpbuf);
-    lpf2l = new AnalogFilter (2, 2500.0f,.7071f, 0, sample_rate, interpbuf);
-    lpf2r = new AnalogFilter (2, 2500.0f,.7071f, 0, sample_rate, interpbuf);
-    hpf2l = new AnalogFilter (3, 2500.0f,.7071f, 0, sample_rate, interpbuf);
-    hpf2r = new AnalogFilter (3, 2500.0f,.7071f, 0, sample_rate, interpbuf);
-    lpf3l = new AnalogFilter (2, 5000.0f,.7071f, 0, sample_rate, interpbuf);
-    lpf3r = new AnalogFilter (2, 5000.0f,.7071f, 0, sample_rate, interpbuf);
-    hpf3l = new AnalogFilter (3, 5000.0f,.7071f, 0, sample_rate, interpbuf);
-    hpf3r = new AnalogFilter (3, 5000.0f,.7071f, 0, sample_rate, interpbuf);
-
+    initialize();
 
     CL = new Compressor(sample_rate, PERIOD);
     CML = new Compressor(sample_rate, PERIOD);
@@ -88,28 +66,7 @@ CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
 
 CompBand::~CompBand ()
 {
-	free(lowl);
-	free(lowr);
-	free(midll);
-	free(midlr);
-	free(midhl);
-	free(midhr);
-	free(highl);
-	free(highr);
-
-    delete lpf1l;
-    delete lpf1r;
-    delete hpf1l;
-    delete hpf1r;
-    delete lpf2l;
-    delete lpf2r;
-    delete hpf2l;
-    delete hpf2r;
-    delete lpf3l;
-    delete lpf3r;
-    delete hpf3l;
-    delete hpf3r;
-    delete[] interpbuf;
+    clear_initialize();
 
     delete CL;
     delete CML;
@@ -145,10 +102,66 @@ void
 CompBand::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
+    clear_initialize();
+    initialize();
     CL->lv2_update_params(period);
     CML->lv2_update_params(period);
     CMH->lv2_update_params(period);
     CH->lv2_update_params(period);
+}
+
+void
+CompBand::initialize()
+{
+    lowl = (float *) malloc (sizeof (float) * PERIOD);
+    lowr = (float *) malloc (sizeof (float) * PERIOD);
+    midll = (float *) malloc (sizeof (float) * PERIOD);
+    midlr = (float *) malloc (sizeof (float) * PERIOD);
+    midhl = (float *) malloc (sizeof (float) * PERIOD);
+    midhr = (float *) malloc (sizeof (float) * PERIOD);
+    highl = (float *) malloc (sizeof (float) * PERIOD);
+    highr = (float *) malloc (sizeof (float) * PERIOD);
+
+
+    interpbuf = new float[PERIOD];
+    lpf1l = new AnalogFilter (2, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf1r = new AnalogFilter (2, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1l = new AnalogFilter (3, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1r = new AnalogFilter (3, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2l = new AnalogFilter (2, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2r = new AnalogFilter (2, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2l = new AnalogFilter (3, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2r = new AnalogFilter (3, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3l = new AnalogFilter (2, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3r = new AnalogFilter (2, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3l = new AnalogFilter (3, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3r = new AnalogFilter (3, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+}
+void
+CompBand::clear_initialize()
+{
+    free(lowl);
+    free(lowr);
+    free(midll);
+    free(midlr);
+    free(midhl);
+    free(midhr);
+    free(highl);
+    free(highr);
+
+    delete lpf1l;
+    delete lpf1r;
+    delete hpf1l;
+    delete hpf1r;
+    delete lpf2l;
+    delete lpf2r;
+    delete hpf2l;
+    delete hpf2r;
+    delete lpf3l;
+    delete lpf3r;
+    delete hpf3l;
+    delete hpf3r;
+    delete[] interpbuf;
 }
 /*
  * Effect output
