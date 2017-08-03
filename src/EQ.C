@@ -30,17 +30,10 @@
 EQ::EQ (double samplerate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;
-    interpbuf = new float[intermediate_bufsize];
+    fSAMPLE_RATE = samplerate;
+    
+    initialize();
 
-    for (int i = 0; i < MAX_EQ_BANDS; i++) {
-        filter[i].Ptype = 0;
-        filter[i].Pfreq = 64;
-        filter[i].Pgain = 64;
-        filter[i].Pq = 64;
-        filter[i].Pstages = 0;
-        filter[i].l = new AnalogFilter (6, 1000.0f, 1.0f, 0, samplerate, interpbuf);
-        filter[i].r = new AnalogFilter (6, 1000.0f, 1.0f, 0, samplerate, interpbuf);
-    };
     //default values
     Ppreset = 0;
     Pvolume = 50;
@@ -51,12 +44,7 @@ EQ::EQ (double samplerate, uint32_t intermediate_bufsize)
 
 EQ::~EQ ()
 {
-    for (int i = 0; i < MAX_EQ_BANDS; i++) {
-    	delete filter[i].l;
-    	delete filter[i].r;
-    }
-    delete[] interpbuf;
-
+    clear_initialize();
 };
 
 /*
@@ -75,6 +63,36 @@ void
 EQ::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
+    clear_initialize();
+    initialize();
+    setpreset (Ppreset);
+    cleanup ();
+}
+
+void
+EQ::initialize()
+{
+    interpbuf = new float[PERIOD];
+
+    for (int i = 0; i < MAX_EQ_BANDS; i++) {
+        filter[i].Ptype = 0;
+        filter[i].Pfreq = 64;
+        filter[i].Pgain = 64;
+        filter[i].Pq = 64;
+        filter[i].Pstages = 0;
+        filter[i].l = new AnalogFilter (6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+        filter[i].r = new AnalogFilter (6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    };
+}
+
+void
+EQ::clear_initialize()
+{
+    for (int i = 0; i < MAX_EQ_BANDS; i++) {
+    	delete filter[i].l;
+    	delete filter[i].r;
+    }
+    delete[] interpbuf;
 }
 
 

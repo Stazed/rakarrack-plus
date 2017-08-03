@@ -38,10 +38,13 @@ public:
     int getpar (int npar);
     void cleanup ();
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     float getfreqresponse (float freq);
     void setvolume (int Pvolume);
 
     uint32_t PERIOD;
+    double fSAMPLE_RATE;
     int Ppreset;
     int Pvolume;	//Volumul
 
