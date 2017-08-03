@@ -30,10 +30,13 @@
 class Reverb
 {
 public:
-    Reverb (float * efxoutl_, float * efxoutr_, double samplerate, uint16_t intermediate_bufsize);
+    Reverb (double samplerate, uint16_t intermediate_bufsize);
     ~Reverb ();
-    void out (float * smps_l, float * smps_r, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
 
     void setpreset (int npreset);
     void changepar (int npar, int value);
@@ -41,11 +44,6 @@ public:
 
     int Ppreset;
     float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su
-
-    float *efxoutl;
-    float *efxoutr;
-
-
 
 private:
 
@@ -59,10 +57,10 @@ private:
     void setlpf (int Plpf);
     void settype (int Ptype);
     void setroomsize (int Proomsize);
-    void processmono (unsigned int ch, float * output, uint32_t period);
+    void processmono (unsigned int ch, float * output);
 
     float fSAMPLE_RATE;
-
+    uint32_t PERIOD;
 
     //Parametrii
     //Amount of the reverb,

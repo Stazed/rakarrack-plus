@@ -30,19 +30,13 @@
 
 /*TODO: EarlyReflections,Prdelay,Perbalance */
 
-Reverb::Reverb (float * efxoutl_, float * efxoutr_, double samplerate, uint16_t intermediate_bufsize)
+Reverb::Reverb (double samplerate, uint16_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-    inputbuf = new float[intermediate_bufsize];
-    //filterpars=NULL;
-    unsigned int i;
-    for(i=0;i<intermediate_bufsize;i++)
-    {
-    	inputbuf[i] = 0;
-    }
-
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = samplerate;
+    
+    initialize();
+    
     //defaults
     Ppreset = 0;
     Pvolume = 48;
@@ -60,8 +54,6 @@ Reverb::Reverb (float * efxoutl_, float * efxoutr_, double samplerate, uint16_t 
     roomsize = 1.0f;
     rs = 1.0f;
     rs_coeff = rs / (float) REV_COMBS;
-
-    fSAMPLE_RATE = samplerate;
 
     //max comb length
     unsigned int tmp = lrintf(220023.0*samplerate/44100.0);
@@ -83,10 +75,6 @@ Reverb::Reverb (float * efxoutl_, float * efxoutr_, double samplerate, uint16_t 
         ap[i] = new float[tmp]; //set to max length
     };
 
-    interpbuf = new float[intermediate_bufsize];
-    lpf =  new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
-    hpf =  new AnalogFilter (3, 20, 1, 0, samplerate, interpbuf);
-
     //max delay length
     tmp = lrintf(2.5*samplerate);
     idelay = new float[tmp]; //set to max length
@@ -98,10 +86,8 @@ Reverb::Reverb (float * efxoutl_, float * efxoutr_, double samplerate, uint16_t 
 
 Reverb::~Reverb ()
 {
-	delete lpf;
-	delete hpf;
-	delete[] interpbuf;
-	delete[] inputbuf;
+    clear_initialize();
+
     for (int i = 0; i < REV_COMBS * 2; i++) {
         delete[] comb[i];
     }
@@ -134,15 +120,45 @@ Reverb::cleanup ()
 
     hpf->cleanup ();
     lpf->cleanup ();
+}
 
+void
+Reverb::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
 
-};
+void
+Reverb::initialize()
+{
+    inputbuf = new float[PERIOD];
+    unsigned int i;
+    for(i=0;i<PERIOD;i++)
+    {
+    	inputbuf[i] = 0;
+    }
+    
+    interpbuf = new float[PERIOD];
+    lpf =  new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpf =  new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+}
+
+void
+Reverb::clear_initialize()
+{
+    delete lpf;
+    delete hpf;
+    delete[] interpbuf;
+    delete[] inputbuf;
+}
 
 /*
  * Process one channel; 0=left,1=right
  */
 void
-Reverb::processmono (unsigned int ch, float * output, uint32_t period)
+Reverb::processmono (unsigned int ch, float * output)
 {
     unsigned int i, j;
     float fbout, tmp;
@@ -154,7 +170,7 @@ Reverb::processmono (unsigned int ch, float * output, uint32_t period)
         int comblength = comblen[j];
         float lpcombj = lpcomb[j];
 
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             fbout = comb[j][ck] * combfb[j];
             fbout = fbout * (1.0f - lohifb) + (lpcombj * lohifb);
             lpcombj = fbout;
@@ -173,7 +189,7 @@ Reverb::processmono (unsigned int ch, float * output, uint32_t period)
     for (j = REV_APS * ch; j < REV_APS * (1 + ch); j++) {
         int ak = apk[j];
         int aplength = aplen[j];
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             tmp = ap[j][ak];
             ap[j][ak] = 0.7f * tmp + output[i];
             output[i] = tmp - 0.7f * ap[j][ak];
@@ -188,12 +204,12 @@ Reverb::processmono (unsigned int ch, float * output, uint32_t period)
  * Effect output
  */
 void
-Reverb::out (float * smps_l, float * smps_r, uint32_t period)
+Reverb::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    for (i = 0; i < period; i++) {
-        inputbuf[i] = (smps_l[i] + smps_r[i]) * .5f;
+    for (i = 0; i < PERIOD; i++) {
+        inputbuf[i] = (efxoutl[i] + efxoutr[i]) * .5f;
         //Initial delay r
         if (idelay != NULL) {
             float tmp = inputbuf[i] + idelay[idelayk] * idelayfb;
@@ -202,27 +218,25 @@ Reverb::out (float * smps_l, float * smps_r, uint32_t period)
             idelayk++;
             if (idelayk >= idelaylen)
                 idelayk = 0;
-        };
-    };
+        }
+    }
 
 
-    lpf->filterout (inputbuf, period);
-    hpf->filterout (inputbuf, period);
+    lpf->filterout (inputbuf, PERIOD);
+    hpf->filterout (inputbuf, PERIOD);
 
-    processmono (0, efxoutl, period);	//left
-    processmono (1, efxoutr, period);	//right
-
+    processmono (0, efxoutl);	//left
+    processmono (1, efxoutr);	//right
 
 
     float lvol = rs_coeff * pan * 2.0f;
     float rvol = rs_coeff * (1.0f - pan) * 2.0f;
 
-    for (unsigned int i = 0; i < period; i++) {
+    for (unsigned int i = 0; i < PERIOD; i++) {
         efxoutl[i] *= lvol;
         efxoutr[i] *= rvol;
-
-    };
-};
+    }
+}
 
 
 /*
