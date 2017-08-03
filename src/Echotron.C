@@ -68,42 +68,16 @@ Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
 
     offset = 0;
 
-    interpbuf = new float[PERIOD];
-    lpfl =  new AnalogFilter (0, 800, 1, 0, sample_rate, interpbuf);
-    lpfr =  new AnalogFilter (0, 800, 1, 0, sample_rate, interpbuf);
+    initialize();
 
-    float center, qq;
-    for (int i = 0; i < ECHOTRON_MAXFILTERS; i++) {
-        center = 500;
-        qq = 1.0f;
-        filterbank[i].sfreq = center;
-        filterbank[i].sq = qq;
-        filterbank[i].sLP = 0.25f;
-        filterbank[i].sBP = -1.0f;
-        filterbank[i].sHP = 0.5f;
-        filterbank[i].sStg = 1.0f;
-        filterbank[i].l = new RBFilter (0, center, qq, 0, sample_rate, interpbuf);
-        filterbank[i].r = new RBFilter (0, center, qq, 0, sample_rate, interpbuf);
-
-        filterbank[i].l->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);
-        filterbank[i].r->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);
-    };
-
-    setpreset (Ppreset);
-    cleanup ();
 };
 
 Echotron::~Echotron ()
 {
-	delete lxn;
-	delete rxn;
-	delete lpfl;
-	delete lpfr;
-    for (int i = 0; i < ECHOTRON_MAXFILTERS; i++) {
-    	delete filterbank[i].l;
-    	delete filterbank[i].r;
-    }
-    delete[] interpbuf;
+    delete lxn;
+    delete rxn;
+
+    clear_initialize();
 };
 
 /*
@@ -127,10 +101,51 @@ Echotron::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
     fPERIOD = period;
+    clear_initialize();
+    initialize();
     lfo->updateparams(fPERIOD);
     dlfo->updateparams(fPERIOD);
 }
 
+void
+Echotron::initialize()
+{
+    interpbuf = new float[PERIOD];
+    lpfl =  new AnalogFilter (0, 800, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr =  new AnalogFilter (0, 800, 1, 0, fSAMPLE_RATE, interpbuf);
+
+    float center, qq;
+    for (int i = 0; i < ECHOTRON_MAXFILTERS; i++) {
+        center = 500;
+        qq = 1.0f;
+        filterbank[i].sfreq = center;
+        filterbank[i].sq = qq;
+        filterbank[i].sLP = 0.25f;
+        filterbank[i].sBP = -1.0f;
+        filterbank[i].sHP = 0.5f;
+        filterbank[i].sStg = 1.0f;
+        filterbank[i].l = new RBFilter (0, center, qq, 0, fSAMPLE_RATE, interpbuf);
+        filterbank[i].r = new RBFilter (0, center, qq, 0, fSAMPLE_RATE, interpbuf);
+
+        filterbank[i].l->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);
+        filterbank[i].r->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);
+    }
+    
+    setpreset (Ppreset);
+    cleanup ();
+}
+
+void
+Echotron::clear_initialize()
+{
+    delete lpfl;
+    delete lpfr;
+    for (int i = 0; i < ECHOTRON_MAXFILTERS; i++) {
+    	delete filterbank[i].l;
+    	delete filterbank[i].r;
+    }
+    delete[] interpbuf;
+}
 /*
  * Effect output
  */
