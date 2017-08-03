@@ -55,6 +55,8 @@ MBVvol::MBVvol (double sample_rate, uint32_t intermediate_bufsize)
 MBVvol::~MBVvol ()
 {
     clear_initialize();
+    delete lfo1;
+    delete lfo2;
 }
 
 /*
@@ -339,8 +341,6 @@ MBVvol::setCombi(int value)
         break;
 
     }
-
-
 }
 
 void
@@ -377,24 +377,24 @@ MBVvol::setCross3 (int value)
 };
 
 void
-MBVvol::setSource (float* ptr, float* ptrr, int val)
+MBVvol::setSource (float** ptr, float** ptrr, int val)
 {
 	switch(val){
 	case 0:
-		ptr = &v1l;
-		ptrr = &v1r;
+		*ptr = &v1l;
+		*ptrr = &v1r;
 		break;
 	case 1:
-		ptr = &v2l;
-		ptrr = &v2r;
+		*ptr = &v2l;
+		*ptrr = &v2r;
 		break;
 	case 2:
-		ptr = &one;
-		ptrr = &one;
+		*ptr = &one;
+		*ptrr = &one;
 		break;
 	case 3:
-		ptr = &zero;
-		ptrr = &zero;
+		*ptr = &zero;
+		*ptrr = &zero;
 		break;
 	default:
 		return; //no change
@@ -411,7 +411,7 @@ MBVvol::setpreset (int npreset)
         //Vary1
         {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0},
         //Vary2
-        {0, 80, 0, 64, 40, 0, 0, 120, 600, 2300, 1},
+        {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1},
         //Vary3
         {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2}
     };
@@ -476,22 +476,22 @@ MBVvol::changepar (int npar, int value)
         break;
     case 11:
     	PsL=value;
-    	setSource(sourceL, sourceLr, value);
+    	setSource(&sourceL, &sourceLr, value);
     	break;
     case 12:
     	PsML=value;
-    	setSource(sourceML, sourceMLr, value);
+    	setSource(&sourceML, &sourceMLr, value);
     	break;
     case 13:
     	PsMH=value;
-    	setSource(sourceMH, sourceMHr, value);
+    	setSource(&sourceMH, &sourceMHr, value);
     	break;
     case 14:
     	PsH=value;
-    	setSource(sourceH, sourceHr, value);
+    	setSource(&sourceH, &sourceHr, value);
     	break;
-    };
-};
+    }
+}
 
 int
 MBVvol::getpar (int npar)

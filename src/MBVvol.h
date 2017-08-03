@@ -67,7 +67,7 @@ private:
     void setCross3 (int value);
     void setCombi (int value);
     void updateVols(void);
-    void setSource(float* ptr, float* ptrr, int val);
+    void setSource(float** ptr, float** ptrr, int val);
 
 
     //Parametrii
@@ -80,7 +80,6 @@ private:
 
     //Parametrii reali
 
-    float coeff;
     float lfo1l,lfo1r,lfo2l,lfo2r;
     float v1l,v1r,v2l,v2r;
     float d1,d2,d3,d4;
