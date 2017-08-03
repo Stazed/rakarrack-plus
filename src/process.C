@@ -249,7 +249,7 @@ RKR::RKR ()
     efx_WhaWha = new DynamicFilter (fSample_rate, period);
     efx_Alienwah = new Alienwah (fSample_rate, period);
     efx_Cabinet = new Cabinet (fSample_rate, period);
-    efx_Pan = new Pan (efxoutl, efxoutr, fSample_rate);
+    efx_Pan = new Pan (fSample_rate, period);
     efx_Har = new Harmonizer ((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     efx_MusDelay = new MusicDelay (fSample_rate, period);
     efx_Gate = new Gate (fSample_rate, period);
@@ -1501,7 +1501,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 13:
                 if (Pan_Bypass) {
-                    efx_Pan->out (efxoutl, efxoutr, period);
+                    efx_Pan->out (efxoutl, efxoutr);
                     Vol_Efx (13, efx_Pan->outvolume);
                 }
                 break;

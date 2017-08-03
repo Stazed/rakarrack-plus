@@ -999,36 +999,42 @@ LV2_Handle init_panlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     plug->effectindex = IPAN;
     plug->prev_bypass = 1;
     
-    plug->pan = new Pan(0,0,sample_freq);
-    plug->init_params = 1; // LFO init
+    getFeatures(plug,host_features);
+    
+    plug->pan = new Pan(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_panlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->pan->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->pan->PERIOD = nframes;
-        plug->pan->lfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        plug->period_max = nframes;
+        plug->pan->lv2_update_params(nframes);
     }
-
+    
+    // we are good to run now
     //check and set changed parameters
     i = 0;
     val = (int)*plug->param_p[i];// 0 wet/dry
@@ -1064,16 +1070,8 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //Pan does it inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports and global period size
-    plug->pan->efxoutl = plug->output_l_p;
-    plug->pan->efxoutr = plug->output_r_p;
-
     //now run
-    plug->pan->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->pan->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->pan->outvolume, nframes);

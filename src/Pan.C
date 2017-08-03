@@ -26,16 +26,14 @@
 
 
 
-Pan::Pan (float *efxoutl_, float *efxoutr_, double sample_rate)
+Pan::Pan (double sample_rate, uint32_t intermediate_bufsize)
 {
-
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fPERIOD = intermediate_bufsize;
+    
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
-    PERIOD = 256; //make our best guess for the initializing
     setpreset (Ppreset);
 
     lfo->effectlfoout (&lfol, &lfor);
@@ -46,10 +44,9 @@ Pan::Pan (float *efxoutl_, float *efxoutr_, double sample_rate)
 };
 
 
-
 Pan::~Pan ()
 {
-	delete lfo;
+    delete lfo;
 };
 
 void
@@ -57,42 +54,43 @@ Pan::cleanup ()
 {
 };
 
-
+void
+Pan::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    fPERIOD = period;
+    lfo->updateparams(period);
+}
 
 
 void
-Pan::out (float *smpsl, float *smpsr, uint32_t period)
+Pan::out (float *efxoutl, float *efxoutr)
 {
 
     unsigned int i;
-    float fPERIOD = period;
     float avg, ldiff, rdiff, tmp;
     float pp;
     float coeff_PERIOD = 1.0 / fPERIOD;
     float fi,P_i;
 
-
-
     if (PextraON) {
 
-        for (i = 0; i < period; i++)
+        for (i = 0; i < PERIOD; i++)
 
         {
 
-            avg = (smpsl[i] + smpsr[i]) * .5f;
+            avg = (efxoutl[i] + efxoutr[i]) * .5f;
 
-            ldiff = smpsl[i] - avg;
-            rdiff = smpsr[i] - avg;
+            ldiff = efxoutl[i] - avg;
+            rdiff = efxoutr[i] - avg;
 
             tmp = avg + ldiff * mul;
-            smpsl[i] = tmp*cdvalue;
+            efxoutl[i] = tmp*cdvalue;
 
             tmp = avg + rdiff * mul;
-            smpsr[i] = tmp*sdvalue;
-
+            efxoutr[i] = tmp*sdvalue;
 
         }
-
     }
 
     if (PAutoPan) {
@@ -100,30 +98,21 @@ Pan::out (float *smpsl, float *smpsr, uint32_t period)
         ll = lfol;
         lr = lfor;
         lfo->effectlfoout (&lfol, &lfor);
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             fi = (float) i;
-            P_i = (float) (period - i);
+            P_i = (float) (PERIOD - i);
 
             pp = (ll * P_i + lfol * fi) * coeff_PERIOD;
 
-            smpsl[i] *= pp * panning;
+            efxoutl[i] *= pp * panning;
 
             pp =  (lr * P_i + lfor * fi) * coeff_PERIOD;
 
-            smpsr[i] *= pp * (1.0f - panning);
+            efxoutr[i] *= pp * (1.0f - panning);
 
         }
-
     }
-
-
-
-
-
-
-
-};
-
+}
 
 
 void
