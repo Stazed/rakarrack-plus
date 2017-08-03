@@ -31,12 +31,9 @@
 #define DATADIR "/usr/local/share/rakarrack"
 #endif
 
-Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate,
-		uint32_t intermediate_bufsize, int DS, int uq, int dq)
+Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     nSAMPLE_RATE = (int)sample_rate;
     nfSAMPLE_RATE = sample_rate;
     //default values
@@ -54,8 +51,6 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate,
     fb = 0.0f;
     feedback = 0.0f;
     adjust(DS, sample_rate);
-    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
 
     hrtf_size = nSAMPLE_RATE/2;
     maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
@@ -75,13 +70,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate,
     idelay = 0.0f;
     decay = f_exp(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
 
-    interpbuf = new float[intermediate_bufsize];
-    lpfl =  new AnalogFilter (0, 800, 1, 0, sample_rate, interpbuf);
-    lpfr =  new AnalogFilter (0, 800, 1, 0, sample_rate, interpbuf);
-
-    lpfl->setSR(nSAMPLE_RATE);
-    lpfr->setSR(nSAMPLE_RATE);
-
+    initialize();
 
     U_Resample = new Resample(dq);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
     D_Resample = new Resample(uq);
@@ -92,8 +81,7 @@ Reverbtron::Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate,
 
 Reverbtron::~Reverbtron ()
 {
-    free(templ);
-    free(tempr);
+    clear_initialize();
 
     free(time);
     free(rndtime);
@@ -102,10 +90,6 @@ Reverbtron::~Reverbtron ()
     free(lxn);
     free(hrtf);
     free(imdelay);
-
-    delete[] interpbuf;
-    delete lpfl;
-    delete lpfr;
 
     delete U_Resample;
     delete D_Resample;
@@ -124,14 +108,45 @@ Reverbtron::cleanup ()
     oldl = 0.0f;
     lpfl->cleanup ();
     lpfr->cleanup ();
+}
 
-};
+void
+Reverbtron::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
+
+void
+Reverbtron::initialize()
+{
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
+    
+    interpbuf = new float[PERIOD];
+    lpfl =  new AnalogFilter (0, 800, 1, 0, nfSAMPLE_RATE, interpbuf);
+    lpfr =  new AnalogFilter (0, 800, 1, 0, nfSAMPLE_RATE, interpbuf);
+    lpfl->setSR(nSAMPLE_RATE);
+    lpfr->setSR(nSAMPLE_RATE);
+}
+
+void
+Reverbtron::clear_initialize()
+{
+    free(templ);
+    free(tempr);
+
+    delete[] interpbuf;
+    delete lpfl;
+    delete lpfr;
+}
 
 /*
  * Effect output
  */
 void
-Reverbtron::out (float * smpsl, float * smpsr, uint32_t period) // FIXME double CPU usage
+Reverbtron::out (float * efxoutl, float * efxoutr)
 {
     int  i, j, xindex, hindex;
     float l,lyn, hyn;
@@ -140,22 +155,22 @@ Reverbtron::out (float * smpsl, float * smpsr, uint32_t period) // FIXME double 
     hlength = Pdiff;
     int doffset;
 
-    nPERIOD = lrintf((float)period*nRATIO);
+    nPERIOD = lrintf((float)PERIOD*nRATIO);
     if(DS_state != 0) {
-        memcpy(templ, smpsl,sizeof(float)*period);
-        memcpy(tempr, smpsr,sizeof(float)*period);
-        u_up= (double)nPERIOD / (double)period;
-        u_down= (double)period / (double)nPERIOD;
-        U_Resample->out(templ,tempr,smpsl,smpsr,period,u_up);
+        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+        u_up= (double)nPERIOD / (double)PERIOD;
+        u_down= (double)PERIOD / (double)nPERIOD;
+        U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
     }
 
 
     for (i = 0; i < nPERIOD; i++) {
 
-        l = 0.5f*(smpsr[i] + smpsl[i]);
+        l = 0.5f*(efxoutr[i] + efxoutl[i]);
         oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
         if(Prv) {
-            oldl = 0.5f*oldl - smpsl[i];
+            oldl = 0.5f*oldl - efxoutl[i];
         }
 
         lxn[offset] = oldl;
@@ -228,14 +243,10 @@ Reverbtron::out (float * smpsl, float * smpsr, uint32_t period) // FIXME double 
         D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
 
     } else {
-        memcpy(efxoutl, templ,sizeof(float)*period);
-        memcpy(efxoutr, tempr,sizeof(float)*period);
+        memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+        memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
     }
-
-
-
-
-};
+}
 
 
 /*

@@ -3058,7 +3058,7 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor *descriptor,double sample_freq, 
     }
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
-    plug->revtron = new Reverbtron(0,0, sample_freq, plug->period_max, /*downsample*/5, /*up interpolation method*/4, /*down interpolation method*/2);
+    plug->revtron = new Reverbtron( /*downsample*/5, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
     plug->revtron->changepar(4,1);//set to user selected files
     plug->rvbfile = new RvbFile;
 
@@ -3067,20 +3067,33 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor *descriptor,double sample_freq, 
 
 void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->revtron->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->revtron->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<4; i++)//skip user
     {
@@ -3182,12 +3195,8 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
         }//atom is object
     }//each atom in sequence
 
-    //now set out ports
-    plug->revtron->efxoutl = plug->output_l_p;
-    plug->revtron->efxoutr = plug->output_r_p;
-
     //now run
-    plug->revtron->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->revtron->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->revtron->outvolume, nframes);

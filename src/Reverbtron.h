@@ -41,23 +41,22 @@ public:
 class Reverbtron
 {
 public:
-    Reverbtron (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize,
-    		int DS, int uq, int dq);
+    Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
     ~Reverbtron ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     int setfile (int value);
     void adjust(int DS, double sample_rate);
     RvbFile loadfile(char* filename);
     void applyfile(RvbFile file);
 
     int Ppreset;
-
-    float *efxoutl;
-    float *efxoutr;
     float outvolume;
 
     char Filename[128];
@@ -105,6 +104,7 @@ private:
     int hrtf_size;
     int hlength;
     int DS_state;
+    uint32_t PERIOD;
     int nPERIOD;
     int nSAMPLE_RATE;
     float nRATIO;
