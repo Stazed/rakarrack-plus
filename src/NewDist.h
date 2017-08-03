@@ -37,21 +37,21 @@
 class NewDist
 {
 public:
-    NewDist (float * efxoutl_, float * efxoutr_, double sample_rate,
-        uint32_t intermdediate_bufsize, int wave_res, int wave_upq, int wave_dnq);
+    NewDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
     ~NewDist ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     void applyfilters (float * efxoutl, float * efxoutr, uint32_t period);
 
     int Ppreset;
     float outvolume;
 
-    float *efxoutl;
-    float *efxoutr;
     float inpll[4096];
     float inplr[4096];
 
@@ -95,6 +95,10 @@ private:
     class FilterParams *filterpars;
 
     class FPreset *Fpre;
+    
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
+    int WAVE_RES, WAVE_UPQ, WAVE_DNQ;
 
 };
 

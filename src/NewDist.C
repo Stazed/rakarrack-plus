@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "NewDist.h"
+#include "NewDist.h"    // Derelict
 
 /*
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
@@ -33,59 +33,16 @@
 
 // does anyone else see how funny this class is? say it out loud. Perhaps this will become so popular they will start a new_dist colony ;)
 
-NewDist::NewDist (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize,
-		int wave_res, int wave_upq, int wave_dnq)
+NewDist::NewDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
-    octoutl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    octoutr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-
-    unsigned int i;
-    for(i=0;i<intermediate_bufsize;i++)
-    {
-    	octoutl[i] = octoutr[i] = 0;
-    }
-
-    interpbuf = new float[intermediate_bufsize];
-    lpfl = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
-    lpfr = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
-    hpfl = new AnalogFilter (3, 20, 1, 0, sample_rate, interpbuf);
-    hpfr = new AnalogFilter (3, 20, 1, 0, sample_rate, interpbuf);
-    blockDCl = new AnalogFilter (2, 75.0f, 1, 0, sample_rate, interpbuf);
-    blockDCr = new AnalogFilter (2, 75.0f, 1, 0, sample_rate, interpbuf);
-    wshapel = new Waveshaper(sample_rate, wave_res, wave_upq, wave_dnq, intermediate_bufsize);
-    wshaper = new Waveshaper(sample_rate, wave_res, wave_upq, wave_dnq, intermediate_bufsize);
-
-    blockDCl->setfreq (75.0f);
-    blockDCr->setfreq (75.0f);
-
-    DCl = new AnalogFilter (3, 30, 1, 0, sample_rate, interpbuf);
-    DCr = new AnalogFilter (3, 30, 1, 0, sample_rate, interpbuf);
-    DCl->setfreq (30.0f);
-    DCr->setfreq (30.0f);
-
-
-
-
-    filterpars = new FilterParams (0, 64, 64, sample_rate, intermediate_bufsize);
-
-    filterpars->Pcategory = 2;
-    filterpars->Ptype = 0;
-    filterpars->Pfreq = 72;
-    filterpars->Pq = 76;
-    filterpars->Pstages = 0;
-    filterpars->Pgain = 76;
-
-
-
-    filterl = new Filter (filterpars);
-    filterr = new Filter (filterpars);
+    WAVE_RES = wave_res;
+    WAVE_UPQ = wave_upq;
+    WAVE_DNQ = wave_dnq;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
 
     Ppreset=0;
-    setpreset (Ppreset);
-
+    initialize();
 
     //default values
     Ppreset = 0;
@@ -106,13 +63,88 @@ NewDist::NewDist (float * efxoutl_, float * efxoutr_, double sample_rate, uint32
     octave_memoryr = -1.0;
     octmix=0.0;
 
-
-
-
     cleanup ();
 };
 
 NewDist::~NewDist ()
+{
+    clear_initialize();
+}
+
+/*
+ * Cleanup the effect
+ */
+void
+NewDist::cleanup ()
+{
+    lpfl->cleanup ();
+    hpfl->cleanup ();
+    lpfr->cleanup ();
+    hpfr->cleanup ();
+    blockDCr->cleanup ();
+    blockDCl->cleanup ();
+    DCl->cleanup();
+    DCr->cleanup();
+}
+
+
+void
+NewDist::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
+
+void
+NewDist::initialize()
+{
+    octoutl = (float *) malloc (sizeof (float) * PERIOD);
+    octoutr = (float *) malloc (sizeof (float) * PERIOD);
+
+    unsigned int i;
+    for(i=0;i<PERIOD;i++)
+    {
+    	octoutl[i] = octoutr[i] = 0;
+    }
+
+    interpbuf = new float[PERIOD];
+    lpfl = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCl = new AnalogFilter (2, 75.0f, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCr = new AnalogFilter (2, 75.0f, 1, 0, fSAMPLE_RATE, interpbuf);
+    wshapel = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
+    wshaper = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
+
+    blockDCl->setfreq (75.0f);
+    blockDCr->setfreq (75.0f);
+
+    DCl = new AnalogFilter (3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
+    DCr = new AnalogFilter (3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
+    DCl->setfreq (30.0f);
+    DCr->setfreq (30.0f);
+
+
+    filterpars = new FilterParams (0, 64, 64, fSAMPLE_RATE, PERIOD);
+
+    filterpars->Pcategory = 2;
+    filterpars->Ptype = 0;
+    filterpars->Pfreq = 72;
+    filterpars->Pq = 76;
+    filterpars->Pstages = 0;
+    filterpars->Pgain = 76;
+
+    filterl = new Filter (filterpars);
+    filterr = new Filter (filterpars);
+
+    setpreset (Ppreset);
+
+}
+
+void
+NewDist::clear_initialize()
 {
     free(octoutl);
     free(octoutr);
@@ -133,27 +165,7 @@ NewDist::~NewDist ()
     delete filterpars;
     delete filterl;
     delete filterr;
-
-};
-
-/*
- * Cleanup the effect
- */
-void
-NewDist::cleanup ()
-{
-    lpfl->cleanup ();
-    hpfl->cleanup ();
-    lpfr->cleanup ();
-    hpfr->cleanup ();
-    blockDCr->cleanup ();
-    blockDCl->cleanup ();
-    DCl->cleanup();
-    DCr->cleanup();
-
-
-};
-
+}
 
 /*
  * Apply the filters
@@ -174,7 +186,7 @@ NewDist::applyfilters (float * efxoutl, float * efxoutr, uint32_t period)
  * Effect output
  */
 void
-NewDist::out (float * smpsl, float * smpsr, uint32_t period)
+NewDist::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, lout, rout;
@@ -186,26 +198,17 @@ NewDist::out (float * smpsl, float * smpsr, uint32_t period)
 
 
     if (Pprefiltering != 0)
-        applyfilters (smpsl, smpsr, period);
+        applyfilters (efxoutl, efxoutr, PERIOD);
 
     //no optimised, yet (no look table)
 
 
-    wshapel->waveshapesmps (period, smpsl, Ptype, Pdrive, 2);
-    wshaper->waveshapesmps (period, smpsr, Ptype, Pdrive, 2);
-
-
-
-
-    memcpy(efxoutl,smpsl,period * sizeof(float));
-    memcpy(efxoutr,smpsl,period * sizeof(float));
-
-
-
+    wshapel->waveshapesmps (PERIOD, efxoutl, Ptype, Pdrive, 2);
+    wshaper->waveshapesmps (PERIOD, efxoutr, Ptype, Pdrive, 2);
 
 
     if (octmix > 0.01f) {
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             lout = efxoutl[i];
             rout = efxoutr[i];
 
@@ -221,25 +224,25 @@ NewDist::out (float * smpsl, float * smpsr, uint32_t period)
         }
 
 
-        blockDCr->filterout (octoutr, period);
-        blockDCl->filterout (octoutl, period);
+        blockDCr->filterout (octoutr, PERIOD);
+        blockDCl->filterout (octoutl, PERIOD);
     }
 
 
 
-    filterl->filterout(smpsl, period);
-    filterr->filterout(smpsr, period);
+    filterl->filterout(efxoutl, PERIOD);
+    filterr->filterout(efxoutr, PERIOD);
 
 
 
     if (Pprefiltering == 0)
-        applyfilters (efxoutl, efxoutr, period);
+        applyfilters (efxoutl, efxoutr, PERIOD);
 
 
 
     float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         lout = efxoutl[i];
         rout = efxoutr[i];
 
@@ -261,8 +264,8 @@ NewDist::out (float * smpsl, float * smpsr, uint32_t period)
 
     };
 
-    DCr->filterout (efxoutr, period);
-    DCl->filterout (efxoutl, period);
+    DCr->filterout (efxoutr, PERIOD);
+    DCl->filterout (efxoutl, PERIOD);
 
 
 };

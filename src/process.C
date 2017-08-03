@@ -253,7 +253,7 @@ RKR::RKR ()
     efx_Har = new Harmonizer ((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     efx_MusDelay = new MusicDelay (fSample_rate, period);
     efx_Gate = new Gate (fSample_rate, period);
-    efx_NewDist = new NewDist(efxoutl, efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
+    efx_NewDist = new NewDist(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_FLimiter = new Compressor (fSample_rate, period);
     efx_Valve = new Valve(fSample_rate, period);
     efx_DFlange = new Dflange(fSample_rate, period);
@@ -1529,7 +1529,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 17:
                 if(NewDist_Bypass) {
-                    efx_NewDist->out (efxoutl, efxoutr, period);
+                    efx_NewDist->out (efxoutl, efxoutr);
                     Vol_Efx(17,efx_NewDist->outvolume);
                 }
                 break;
