@@ -2477,27 +2477,42 @@ LV2_Handle init_echoverselv2(const LV2_Descriptor *descriptor,double sample_freq
     plug->effectindex = IECHOVERSE;
     plug->prev_bypass = 1;
     
-    plug->echoverse = new RBEcho(0,0,sample_freq);
+    getFeatures(plug,host_features);
+    
+    plug->echoverse = new RBEcho(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->echoverse->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->echoverse->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//wet/dry
@@ -2534,12 +2549,8 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->echoverse->efxoutl = plug->output_l_p;
-    plug->echoverse->efxoutr = plug->output_r_p;
-
     //now run
-    plug->echoverse->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->echoverse->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->echoverse->outvolume, nframes);

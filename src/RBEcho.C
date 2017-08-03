@@ -26,12 +26,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "RBEcho.h"
+#include "RBEcho.h"     // Echoverse
 
-RBEcho::RBEcho (float * efxoutl_, float * efxoutr_, double sample_rate)
+RBEcho::RBEcho (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
     //default values
@@ -80,7 +79,11 @@ RBEcho::cleanup ()
     oldr = 0.0;
 };
 
-
+void
+RBEcho::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+}
 /*
  * Initialize the delays
  */
@@ -111,14 +114,14 @@ RBEcho::initdelays ()
  * Effect output
  */
 void
-RBEcho::out (float * smpsl, float * smpsr, uint32_t period)
+RBEcho::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float ldl, rdl;
     float avg, ldiff, rdiff, tmp;
 
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
         //LowPass Filter
         ldl = lfeedback * hidamp + oldl * (1.0f - hidamp);
@@ -126,8 +129,8 @@ RBEcho::out (float * smpsl, float * smpsr, uint32_t period)
         oldl = ldl + DENORMAL_GUARD;
         oldr = rdl + DENORMAL_GUARD;
 
-        ldl = ldelay->delay_simple((ldl + smpsl[i]), delay, 0, 1, 0);
-        rdl = rdelay->delay_simple((rdl + smpsr[i]), delay, 0, 1, 0);
+        ldl = ldelay->delay_simple((ldl + efxoutl[i]), delay, 0, 1, 0);
+        rdl = rdelay->delay_simple((rdl + efxoutr[i]), delay, 0, 1, 0);
 
 
         if(Preverse) {
@@ -262,7 +265,7 @@ RBEcho::setpreset (int npreset)
         //Echo 2
         {64, 64, 90, 64, 64, 64, 64, 0, 2 ,96},
         //Echo 3
-        {64, 64, 90, 64, 64, 64, 64, 0, 3 ,96}
+        {64, 64, 90, 64, 64, 111, 127, 77, 3 ,96}
     };
 
     if(npreset>NUM_PRESETS-1) {
