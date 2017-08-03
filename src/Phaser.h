@@ -29,9 +29,9 @@
 class Phaser
 {
 public:
-    Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    Phaser (double sample_rate, uint32_t intermediate_bufsize);
     ~Phaser ();
-    void out (float * smpsl, float * smpsr);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -39,9 +39,6 @@ public:
     void lv2_update_params(uint32_t period);
     int Ppreset;
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
 
 private:
     void setvolume (int Pvolume);

@@ -28,10 +28,10 @@
 #include "FPreset.h"
 #define PHASER_LFO_SHAPE 2
 
-Phaser::Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Phaser::Phaser (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize; // will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
+    fPERIOD = intermediate_bufsize;// will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
 
     oldl = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES * 2);
     oldr = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES * 2);
@@ -39,8 +39,6 @@ Phaser::Phaser (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
-    PERIOD = intermediate_bufsize; // will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
-    fPERIOD = intermediate_bufsize;// will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
     setpreset (Ppreset);
     cleanup ();
 };
@@ -55,7 +53,7 @@ Phaser::~Phaser ()
  * Effect output
  */
 void
-Phaser::out (float * smpsl, float * smpsr)
+Phaser::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     int j;
@@ -87,8 +85,8 @@ Phaser::out (float * smpsl, float * smpsr)
         float x1 = 1.0f - x;
         float gl = lgain * x + oldlgain * x1;
         float gr = rgain * x + oldrgain * x1;
-        float inl = smpsl[i] * panning + fbl;
-        float inr = smpsr[i] * (1.0f - panning) + fbr;
+        float inl = efxoutl[i] * panning + fbl;
+        float inr = efxoutr[i] * (1.0f - panning) + fbr;
 
         //Left channel
         for (j = 0; j < Pstages * 2; j++) {
