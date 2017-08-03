@@ -280,7 +280,7 @@ RKR::RKR ()
     efx_Echotron = new Echotron(fSample_rate, period);
     efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, period, fSample_rate);  // FIXME reversed sample/period
     efx_CompBand = new CompBand(fSample_rate, period);
-    efx_Opticaltrem = new Opticaltrem(efxoutl,efxoutr, fSample_rate);
+    efx_Opticaltrem = new Opticaltrem(fSample_rate, period);
     efx_Vibe = new Vibe(efxoutl,efxoutr, fSample_rate);
     efx_Infinity = new Infinity(fSample_rate, period);
 
@@ -1718,7 +1718,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 44:
                 if (Opticaltrem_Bypass) {
-                    efx_Opticaltrem->out(efxoutl, efxoutr, period);
+                    efx_Opticaltrem->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

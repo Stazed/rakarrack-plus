@@ -26,10 +26,9 @@
 #include <math.h>
 #include "Opticaltrem.h"
 
-Opticaltrem::Opticaltrem (float * efxoutl_, float * efxoutr_, double sample_rate)
+Opticaltrem::Opticaltrem (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     cSAMPLE_RATE = 1.0f/sample_rate;
 
     R1 = 2700.0f;	   //tremolo circuit series resistance
@@ -58,7 +57,6 @@ Opticaltrem::Opticaltrem (float * efxoutl_, float * efxoutr_, double sample_rate
     gr = 0.0f;
 
     lfo = new EffectLFO(sample_rate);
-    PERIOD = 256;//best guess until better info comes
 
 }
 
@@ -76,7 +74,14 @@ Opticaltrem::cleanup ()
 };
 
 void
-Opticaltrem::out (float *smpsl, float *smpsr, uint32_t period)
+Opticaltrem::lv2_update_params (uint32_t period)
+{
+    PERIOD = period;
+    lfo->updateparams(period);
+}
+
+void
+Opticaltrem::out (float *efxoutl, float *efxoutr)
 {
 
     unsigned int i;
@@ -105,14 +110,14 @@ Opticaltrem::out (float *smpsl, float *smpsr, uint32_t period)
     lfol = powf(lfol, 1.9f);  //emulate lamp turn on/off characteristic
 
     //lfo interpolation
-    rdiff = (lfor - oldgr)/(float)period;
-    ldiff = (lfol - oldgl)/(float)period;
+    rdiff = (lfor - oldgr)/(float)PERIOD;
+    ldiff = (lfol - oldgl)/(float)PERIOD;
     gr = lfor;
     gl = lfol;
     oldgr = lfor;
     oldgl = lfol;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         //Left Cds
         stepl = gl*(1.0f - alphal) + alphal*oldstepl;
         oldstepl = stepl;
@@ -140,8 +145,8 @@ Opticaltrem::out (float *smpsl, float *smpsr, uint32_t period)
         else fxr = R1/(fxr + R1);
 
         //Modulate input signal
-        efxoutl[i] = lpanning*fxl*smpsl[i];
-        efxoutr[i] = rpanning*fxr*smpsr[i];
+        efxoutl[i] = lpanning*fxl*efxoutl[i];
+        efxoutr[i] = rpanning*fxr*efxoutr[i];
 
         gl += ldiff;
         gr += rdiff;  //linear interpolation of LFO
