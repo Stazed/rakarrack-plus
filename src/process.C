@@ -211,13 +211,13 @@ RKR::RKR ()
 
     efxoutl = (float *) malloc (sizeof (float) * period);
     efxoutr = (float *) malloc (sizeof (float) * period);
-
+    
     smpl = (float *) malloc (sizeof (float) * period);
     smpr = (float *) malloc (sizeof (float) * period);
-
+    
     anall = (float *) malloc (sizeof (float) * period);
     analr = (float *) malloc (sizeof (float) * period);
-
+    
     auxdata = (float *) malloc (sizeof (float) * period);
     auxresampled = (float *) malloc (sizeof (float) * period);
 
@@ -226,6 +226,18 @@ RKR::RKR ()
     //ssj
     interpbuf = (float*) malloc (sizeof (float)* period);
 
+    for (i = 0; i <= period; i++) {
+        efxoutl[i] = 0.0f;
+        efxoutr[i] = 0.0f;
+        smpl[i] = 0.0f;
+        smpr[i] = 0.0f;
+        anall[i] = 0.0f;
+        analr[i] = 0.0f;
+        auxdata[i] = 0.0f;
+        auxresampled[i] = 0.0f;
+        m_ticks[i] = 0.0f;
+        interpbuf[i] = 0.0f;
+    }
 
     Fpre = new FPreset();
     
