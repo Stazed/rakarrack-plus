@@ -31,25 +31,21 @@
 class RyanWah
 {
 public:
-    RyanWah (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    RyanWah (double sample_rate, uint32_t intermediate_bufsize);
     ~RyanWah ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
 
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
 
     int Ppreset;
     int Pmode;
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
-
-    unsigned int PERIOD;
-    EffectLFO *lfo;		//lfo-ul RyanWah
     
 private:
 
@@ -92,7 +88,9 @@ private:
     class FPreset *Fpre;
 
     float fSAMPLE_RATE;
-
+    uint32_t PERIOD;
+    EffectLFO *lfo;		//lfo-ul RyanWah
+    
 };
 
 #endif

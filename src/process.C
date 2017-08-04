@@ -267,7 +267,7 @@ RKR::RKR ()
     efx_MBVvol = new MBVvol(fSample_rate, period);
     efx_Convol = new Convolotron(Con_Down,Con_U_Q,Con_D_Q, fSample_rate, period);
     efx_Looper = new Looper(looper_size,fSample_rate, period);
-    efx_RyanWah = new RyanWah(efxoutl,efxoutr, fSample_rate, period);
+    efx_RyanWah = new RyanWah(fSample_rate, period);
     efx_RBEcho = new RBEcho(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr, fSample_rate, period);
@@ -1627,7 +1627,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 31:
                 if (RyanWah_Bypass) {
-                    efx_RyanWah->out(efxoutl, efxoutr, period);
+                    efx_RyanWah->out(efxoutl, efxoutr);
                     Vol_Efx(31,efx_RyanWah->outvolume);
                 }
                 break;

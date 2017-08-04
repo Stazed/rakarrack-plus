@@ -23,15 +23,13 @@
 */
 
 #include <math.h>
-#include "RyanWah.h"
+#include "RyanWah.h"        // Mutromojo
 #include "AnalogFilter.h"
 #include <stdio.h>
 
-RyanWah::RyanWah (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+RyanWah::RyanWah (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
     Ppreset = 0;
@@ -58,15 +56,11 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_, double sample_rate, uint32
     wahsmooth = 1.0f - expf(-1.0f/(0.02f*sample_rate));  //0.02 seconds
 
     lfo = new EffectLFO(sample_rate);
-    PERIOD = 256; //best guess until we know better
 
     Fstages = 1;
     Ftype = 1;
-    interpbuf = new float[intermediate_bufsize];
-    filterl = new RBFilter (0, 80.0f, 70.0f, 1, sample_rate,interpbuf);
-    filterr = new RBFilter (0, 80.0f, 70.0f, 1, sample_rate,interpbuf);
     
-    sidechain_filter = new AnalogFilter (1, 630.0, 1.0, 1, sample_rate,interpbuf);
+    initialize();
     setpreset (Ppreset);
 
     cleanup ();
@@ -74,19 +68,17 @@ RyanWah::RyanWah (float * efxoutl_, float * efxoutr_, double sample_rate, uint32
 
 RyanWah::~RyanWah ()
 {
-	delete lfo;
-	delete filterl;
-	delete filterr;
-	delete sidechain_filter;
-	delete[] interpbuf;
-};
+    delete lfo;
+    clear_initialize();
+}
+
 
 
 /*
  * Apply the effect
  */
 void
-RyanWah::out (float * smpsl, float * smpsr, uint32_t period)
+RyanWah::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float lmod, rmod;
@@ -102,11 +94,11 @@ RyanWah::out (float * smpsl, float * smpsr, uint32_t period)
         lfor *= depth * 5.0f;
     }
 
-    for (i = 0; i < period; i++) {
-        efxoutl[i] = smpsl[i];
-        efxoutr[i] = smpsr[i];
+    for (i = 0; i < PERIOD; i++) {
+        efxoutl[i] = efxoutl[i];
+        efxoutr[i] = efxoutr[i];
 
-        float x = (fabsf ( sidechain_filter->filterout_s(smpsl[i] + smpsr[i]))) * 0.5f;
+        float x = (fabsf ( sidechain_filter->filterout_s(efxoutl[i] + efxoutr[i]))) * 0.5f;
         ms1 = ms1 * ampsmooth + x * (1.0f - ampsmooth) + 1e-10f;
 
         //oldfbias -= 0.001 * oldfbias2;
@@ -124,8 +116,8 @@ RyanWah::out (float * smpsl, float * smpsr, uint32_t period)
             filterr->setq(q);
             filterl->directmod(rmod);
             filterr->directmod(lmod);
-            efxoutl[i] = filterl->filterout_s (smpsl[i]);
-            efxoutr[i] = filterr->filterout_s (smpsr[i]);
+            efxoutl[i] = filterl->filterout_s (efxoutl[i]);
+            efxoutr[i] = filterr->filterout_s (efxoutr[i]);
 
         }
     };
@@ -157,8 +149,8 @@ RyanWah::out (float * smpsl, float * smpsr, uint32_t period)
         filterl->setfreq_and_q (frl, q);
         filterr->setfreq_and_q (frr, q);
 
-        filterl->filterout (efxoutl, period);
-        filterr->filterout (efxoutr, period);
+        filterl->filterout (efxoutl, PERIOD);
+        filterr->filterout (efxoutr, PERIOD);
     }
 
 };
@@ -176,6 +168,33 @@ RyanWah::cleanup ()
     filterr->cleanup();
 };
 
+void
+RyanWah::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    lfo->updateparams(period);
+    clear_initialize();
+    initialize();
+}
+
+void
+RyanWah::initialize()
+{
+    interpbuf = new float[PERIOD];
+    filterl = new RBFilter (0, 80.0f, 70.0f, 1, fSAMPLE_RATE,interpbuf);
+    filterr = new RBFilter (0, 80.0f, 70.0f, 1, fSAMPLE_RATE,interpbuf);
+    
+    sidechain_filter = new AnalogFilter (1, 630.0, 1.0, 1, fSAMPLE_RATE,interpbuf);
+}
+
+void
+RyanWah::clear_initialize()
+{
+    delete filterl;
+    delete filterr;
+    delete sidechain_filter;
+    delete[] interpbuf;
+}
 
 /*
  * Parameter control
