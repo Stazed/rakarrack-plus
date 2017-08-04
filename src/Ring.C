@@ -29,11 +29,10 @@
 
 
 
-Ring::Ring (float * efxoutl_, float * efxoutr_, double sample_rate)
+Ring::Ring (double sample_rate, uint32_t intermediate_bufsize)
 {
 
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     SAMPLE_RATE = lrintf(sample_rate);
 
     sin_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
@@ -108,6 +107,11 @@ Ring::cleanup ()
 
 };
 
+void
+Ring::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+}
 
 /*
  * Apply the filters
@@ -118,7 +122,7 @@ Ring::cleanup ()
  * Effect output
  */
 void
-Ring::out (float * smpsl, float * smpsr, uint32_t period)
+Ring::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, lout, rout, tmpfactor;
@@ -127,24 +131,24 @@ Ring::out (float * smpsl, float * smpsr, uint32_t period)
 
     if (Pstereo != 0) {
         //Stereo
-        for (i = 0; i < period; i++) {
-            efxoutl[i] = smpsl[i] * inputvol;
-            efxoutr[i] = smpsr[i] * inputvol;
+        for (i = 0; i < PERIOD; i++) {
+            efxoutl[i] = efxoutl[i] * inputvol;
+            efxoutr[i] = efxoutr[i] * inputvol;
             if(inputvol == 0.0) {
                 efxoutl[i]=1.0;
                 efxoutr[i]=1.0;
             }
         };
     } else {
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             efxoutl[i] =
-                (smpsl[i]  +  smpsr[i] ) * inputvol;
+                (efxoutl[i]  +  efxoutr[i] ) * inputvol;
             if (inputvol == 0.0) efxoutl[i]=1.0;
         };
     };
 
 
-    for (i=0; i < period; i++) {
+    for (i=0; i < PERIOD; i++) {
         tmpfactor =  depth * (scale * ( sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset] ) + idepth) ;    //This is now mathematically equivalent, but less computation
         efxoutl[i] *= tmpfactor;
 
@@ -156,11 +160,11 @@ Ring::out (float * smpsl, float * smpsr, uint32_t period)
     }
 
 
-    if (Pstereo == 0) memcpy (efxoutr , efxoutl, period * sizeof(float));
+    if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
 
     float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
 
-    for (i= 0; i<period; i++) {
+    for (i= 0; i<PERIOD; i++) {
         lout = efxoutl[i];
         rout = efxoutr[i];
 
@@ -175,12 +179,8 @@ Ring::out (float * smpsl, float * smpsr, uint32_t period)
         //efxoutr[i] = rout * level * (1.0f-panning);
         efxoutl[i] = lout * level * (1.0f-panning);
         efxoutr[i] = rout * level * panning;
-
     }
-
-
-
-};
+}
 
 
 /*

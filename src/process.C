@@ -257,7 +257,7 @@ RKR::RKR ()
     efx_FLimiter = new Compressor (fSample_rate, period);
     efx_Valve = new Valve(fSample_rate, period);
     efx_DFlange = new Dflange(fSample_rate, period);
-    efx_Ring = new Ring(efxoutl,efxoutr, fSample_rate);
+    efx_Ring = new Ring(fSample_rate, period);
     efx_Exciter = new Exciter(fSample_rate, period);
     efx_MBDist = new MBDist(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_Arpie = new Arpie(fSample_rate, period);
@@ -1557,7 +1557,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 21:
                 if (Ring_Bypass) {
-                    efx_Ring->out(efxoutl, efxoutr, period);
+                    efx_Ring->out(efxoutl, efxoutr);
                     Vol_Efx (21,efx_Ring->outvolume);
                 }
                 break;

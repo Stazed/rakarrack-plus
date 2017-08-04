@@ -29,14 +29,15 @@
 class Ring
 {
 public:
-    Ring (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Ring (double sample_rate, uint32_t intermediate_bufsize);
     ~Ring ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void setscale();
     void cleanup ();
+    void lv2_update_params(uint32_t period);
     void Create_Tables(float sample_rate);
 
     int Ppreset;
@@ -44,9 +45,6 @@ public:
     int Pfreq;
 
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
 
 private:
 
@@ -78,6 +76,7 @@ private:
     class FPreset *Fpre;
 
     unsigned int SAMPLE_RATE;
+    uint32_t PERIOD;
 };
 
 
