@@ -2925,7 +2925,7 @@ LV2_Handle init_shiftlv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
     getFeatures(plug,host_features);
 
-    plug->shift = new Shifter(0,0,/*shifter quality*/4,/*downsamplex2*/5,/*upsample quality*/4,
+    plug->shift = new Shifter(/*shifter quality*/4,/*downsamplex2*/5,/*upsample quality*/4,
                               /*downsample quality*/ 2,sample_freq,plug->period_max);
 
     return plug;
@@ -2933,20 +2933,33 @@ LV2_Handle init_shiftlv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
 void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->shift->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->shift->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     i=0;
     val = (int)*plug->param_p[i];//wet/dry
@@ -2971,12 +2984,8 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //set out ports
-    plug->shift->efxoutl = plug->output_l_p;
-    plug->shift->efxoutr = plug->output_r_p;
-
     //now run
-    plug->shift->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->shift->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->shift->outvolume, nframes);

@@ -39,13 +39,16 @@ class Shifter
 {
 
 public:
-    Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
+    Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
     ~Shifter ();
-    void out (float *smpsl, float *smpsr, uint32_t period);
+    void out (float *efxoutl, float *efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     void applyfilters (float * efxoutl);
     void adjust(int DS, double sample_rate);
 
@@ -53,8 +56,6 @@ public:
     long int hq;
     float outvolume;
 
-    float *efxoutl;
-    float *efxoutr;
     float *outi;
     float *outo;
 
@@ -78,6 +79,7 @@ private:
     int Pwhammy;
     int state;
     int DS_state;
+    uint32_t PERIOD;
     int nPERIOD;
     int nSAMPLE_RATE;
     float nRATIO;

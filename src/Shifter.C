@@ -28,26 +28,15 @@
 
 
 
-Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq,
-				  double sample_rate, uint32_t intermediate_bufsize)
+Shifter::Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
-
-
-
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     hq = Quality;
     adjust(DS,sample_rate);
 
     nRATIO = 1;
-    //temp value till period actually known
-    nPERIOD = intermediate_bufsize*nRATIO;
-
-    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-
-    outi = (float *) malloc (sizeof (float) * nPERIOD);
-    outo = (float *) malloc (sizeof (float) * nPERIOD);
+    
+    initialize();
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
@@ -70,11 +59,8 @@ Shifter::Shifter (float *efxoutl_, float *efxoutr_, long int Quality, int DS, in
 
 Shifter::~Shifter ()
 {
-	free(templ);
-	free(tempr);
-	free(outi);
-	free(outo);
-	delete PS;
+    clear_initialize();
+    delete PS;
 };
 
 void
@@ -84,6 +70,35 @@ Shifter::cleanup ()
     memset(outi, 0, sizeof(float)*nPERIOD);
     memset(outo, 0, sizeof(float)*nPERIOD);
 };
+
+void
+Shifter::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
+
+void
+Shifter::initialize()
+{
+    nPERIOD = PERIOD*nRATIO;
+
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
+
+    outi = (float *) malloc (sizeof (float) * nPERIOD);
+    outo = (float *) malloc (sizeof (float) * nPERIOD);
+}
+
+void
+Shifter::clear_initialize()
+{
+    free(templ);
+    free(tempr);
+    free(outi);
+    free(outo);
+}
 
 void
 Shifter::adjust(int DS, double SAMPLE_RATE)
@@ -168,27 +183,26 @@ Shifter::adjust(int DS, double SAMPLE_RATE)
 
 
 void
-Shifter::out (float *smpsl, float *smpsr, uint32_t period)
+Shifter::out (float *efxoutl, float *efxoutr)
 {
-
     int i;
     float sum;
     float use;
 
     //This should probably be moved to a separate function so it doesn't need to recalculate every time
-    nPERIOD = lrintf((float)period*nRATIO);
-    u_up= (double)nPERIOD / (double)period;
-    u_down= (double)period / (double)nPERIOD;
+    nPERIOD = lrintf((float)PERIOD*nRATIO);
+    u_up= (double)nPERIOD / (double)PERIOD;
+    u_down= (double)PERIOD / (double)nPERIOD;
 
     if(DS_state != 0) {
-        memcpy(templ, smpsl,sizeof(float)*period);
-        memcpy(tempr, smpsr,sizeof(float)*period);
-        U_Resample->out(templ,tempr,smpsl,smpsr,period,u_up);
+        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+        U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
     }
 
     for (i=0; i < nPERIOD; i++) {
         if((Pmode == 0) || (Pmode ==2)) {
-            sum = fabsf(smpsl[i])+fabsf(smpsr[i]);
+            sum = fabsf(efxoutl[i])+fabsf(efxoutr[i]);
             if (sum>env) env = sum;
             else env=sum*ENV_TR+env*(1.0f-ENV_TR);
 
@@ -218,7 +232,7 @@ Shifter::out (float *smpsl, float *smpsr, uint32_t period)
                 }
             }
         }
-        outi[i] = (smpsl[i] + smpsr[i])*.5;
+        outi[i] = (efxoutl[i] + efxoutr[i])*.5;
         if (outi[i] > 1.0)
             outi[i] = 1.0f;
         if (outi[i] < -1.0)
@@ -250,11 +264,10 @@ Shifter::out (float *smpsl, float *smpsr, uint32_t period)
         D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
 
     } else {
-        memcpy(efxoutl, templ,sizeof(float)*period);
-        memcpy(efxoutr, tempr,sizeof(float)*period);
+        memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+        memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
     }
-
-};
+}
 
 
 

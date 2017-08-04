@@ -34,7 +34,6 @@ Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate
     fSAMPLE_RATE = sample_rate;
     adjust(DS, sample_rate);
     
-    nPERIOD = PERIOD*nRATIO;
     initialize();
 
     U_Resample = new Resample(dq);
@@ -120,6 +119,7 @@ Sequence::lv2_update_params(uint32_t period)
 void
 Sequence::initialize()
 {
+    nPERIOD = PERIOD*nRATIO;
     templ = (float *) malloc (sizeof (float) * PERIOD);
     tempr = (float *) malloc (sizeof (float) * PERIOD);
 
