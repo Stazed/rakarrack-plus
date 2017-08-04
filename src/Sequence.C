@@ -27,30 +27,18 @@
 #include <time.h>
 #include "f_sin.h"
 
-Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     hq = Quality;
     fSAMPLE_RATE = sample_rate;
     adjust(DS, sample_rate);
-
-    //temp value till period actually known
-    nPERIOD = intermediate_bufsize*nRATIO;
-
-    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-
-    outi = (float *) malloc (sizeof (float) * nPERIOD);
-    outo = (float *) malloc (sizeof (float) * nPERIOD);
+    
+    nPERIOD = PERIOD*nRATIO;
+    initialize();
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
-
-    beats = new beattracker(sample_rate, intermediate_bufsize);
-
-    filterl = NULL;
-    filterr = NULL;
 
     MAXFREQ = 10000.0f;
     MINFREQ = 100.0f;
@@ -62,15 +50,6 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
     subdiv = 2;
     lmod = 0.5f;
     rmod = 0.5f;
-    interpbuf = new float[intermediate_bufsize];
-    filterl = new RBFilter (0, 80.0f, 40.0f, 2,sample_rate, interpbuf);
-    filterr = new RBFilter (0, 80.0f, 40.0f, 2,sample_rate, interpbuf);
-    modfilterl = new RBFilter (0, 15.0f, 0.5f, 1,sample_rate, interpbuf);
-    modfilterr = new RBFilter (0, 15.0f, 0.5f, 1,sample_rate, interpbuf);
-    rmsfilter = new RBFilter (0, 15.0f, 0.15f, 1,sample_rate, interpbuf);
-    peaklpfilter = new RBFilter (0, 25.0f, 0.5f, 0,sample_rate, interpbuf);
-    peaklpfilter2 = new RBFilter (0, 25.0f, 0.5f, 0,sample_rate, interpbuf);
-    peakhpfilter = new RBFilter (1, 45.0f, 0.5f, 0,sample_rate, interpbuf);
 
 //Trigger Filter Settings
     peakpulse = peak = envrms = 0.0f;
@@ -104,25 +83,13 @@ Sequence::Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS
 
 Sequence::~Sequence ()
 {
-    free(templ);
-    free(tempr);
-    free(outi);
-    free(outo);
+    clear_initialize();
+
     delete U_Resample;
     delete D_Resample;
-    delete beats;
-    delete filterl;
-    delete filterr;
-    delete modfilterl;
-    delete modfilterr;
-    delete rmsfilter;
-    delete peaklpfilter;
-    delete peaklpfilter2;
-    delete peakhpfilter;
     delete ldelay;
     delete rdelay;
     delete PS;
-    delete[] interpbuf;
 };
 
 /*
@@ -142,14 +109,65 @@ Sequence::cleanup ()
 
 };
 
+void
+Sequence::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
 
+void
+Sequence::initialize()
+{
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
+
+    outi = (float *) malloc (sizeof (float) * nPERIOD);
+    outo = (float *) malloc (sizeof (float) * nPERIOD);
+
+    beats = new beattracker(fSAMPLE_RATE, PERIOD);
+    
+    filterl = NULL;
+    filterr = NULL;
+    
+    interpbuf = new float[PERIOD];
+    filterl = new RBFilter (0, 80.0f, 40.0f, 2,fSAMPLE_RATE, interpbuf);
+    filterr = new RBFilter (0, 80.0f, 40.0f, 2,fSAMPLE_RATE, interpbuf);
+    modfilterl = new RBFilter (0, 15.0f, 0.5f, 1,fSAMPLE_RATE, interpbuf);
+    modfilterr = new RBFilter (0, 15.0f, 0.5f, 1,fSAMPLE_RATE, interpbuf);
+    rmsfilter = new RBFilter (0, 15.0f, 0.15f, 1,fSAMPLE_RATE, interpbuf);
+    peaklpfilter = new RBFilter (0, 25.0f, 0.5f, 0,fSAMPLE_RATE, interpbuf);
+    peaklpfilter2 = new RBFilter (0, 25.0f, 0.5f, 0,fSAMPLE_RATE, interpbuf);
+    peakhpfilter = new RBFilter (1, 45.0f, 0.5f, 0,fSAMPLE_RATE, interpbuf);
+}
+
+void
+Sequence::clear_initialize()
+{
+    free(templ);
+    free(tempr);
+    free(outi);
+    free(outo);
+
+    delete beats;
+    delete filterl;
+    delete filterr;
+    delete modfilterl;
+    delete modfilterr;
+    delete rmsfilter;
+    delete peaklpfilter;
+    delete peaklpfilter2;
+    delete peakhpfilter;
+    delete[] interpbuf;
+}
 
 
 /*
  * Effect output
  */
 void
-Sequence::out (float * smpsl, float * smpsr, uint32_t period)
+Sequence::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     int nextcount,dnextcount;
@@ -169,12 +187,12 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
 
     if((Pmode==3)||(Pmode ==5) || (Pmode==6)){
     	//This should probably be moved to a separate function so it doesn't need to recalculate every time
-        nPERIOD = lrintf((float)period*nRATIO);
-        u_up= (double)nPERIOD / (double)period;
-        u_down= (double)period / (double)nPERIOD;
+        nPERIOD = lrintf((float)PERIOD*nRATIO);
+        u_up= (double)nPERIOD / (double)PERIOD;
+        u_down= (double)PERIOD / (double)nPERIOD;
     	hPERIOD=nPERIOD;
     }
-    else hPERIOD=period;
+    else hPERIOD=PERIOD;
 
 
     if ((rndflag) && (tcount < hPERIOD + 1)) { //This is an Easter Egg
@@ -201,7 +219,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
         rdiff = ifperiod * (fsequence[dnextcount] - fsequence[dscount]);
         lfor = fsequence[dscount];
 
-        for ( i = 0; i < period; i++) { //Maintain sequenced modulator
+        for ( i = 0; i < PERIOD; i++) { //Maintain sequenced modulator
 
             if (++tcount >= intperiod) {
                 tcount = 0;
@@ -230,8 +248,8 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
                 ldbl = lmod * (1.0f - cosf(D_PI*ifperiod*ftcount));
                 ldbr = rmod * (1.0f - cosf(D_PI*ifperiod*ftcount));
 
-                efxoutl[i] = ldbl * smpsl[i];
-                efxoutr[i] = ldbr * smpsr[i];
+                efxoutl[i] = ldbl * efxoutl[i];
+                efxoutr[i] = ldbr * efxoutr[i];
             }
 
             float frl = MINFREQ + MAXFREQ*lmod;
@@ -251,7 +269,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
     case 1:		//Up Down
 
 
-        for ( i = 0; i < period; i++) { //Maintain sequenced modulator
+        for ( i = 0; i < PERIOD; i++) { //Maintain sequenced modulator
 
             if (++tcount >= intperiod) {
                 tcount = 0;
@@ -269,8 +287,8 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
                 ldbl = lmod * (1.0f - cosf(2.0f*ftcount));
                 ldbr = rmod * (1.0f - cosf(2.0f*ftcount));
 
-                efxoutl[i] = ldbl * smpsl[i];
-                efxoutr[i] = ldbr * smpsr[i];
+                efxoutl[i] = ldbl * efxoutl[i];
+                efxoutr[i] = ldbr * efxoutr[i];
             }
 
             float frl = MINFREQ + MAXFREQ*lmod;
@@ -291,7 +309,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
 
     case 2:  //Stepper
 
-        for ( i = 0; i < period; i++) { //Maintain sequenced modulator
+        for ( i = 0; i < PERIOD; i++) { //Maintain sequenced modulator
 
             if (++tcount >= intperiod) {
                 tcount = 0;
@@ -310,8 +328,8 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
                 ldbl = seqpower * lmod;
                 ldbr = seqpower * rmod;
 
-                efxoutl[i] = ldbl * smpsl[i];
-                efxoutr[i] = ldbr * smpsr[i];
+                efxoutl[i] = ldbl * efxoutl[i];
+                efxoutr[i] = ldbr * efxoutr[i];
             }
 
             float frl = MINFREQ + lmod * MAXFREQ;
@@ -338,9 +356,9 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
         lfol = fsequence[scount];
 
         if(DS_state != 0) {
-            memcpy(templ, smpsl,sizeof(float)*period);
-            memcpy(tempr, smpsr,sizeof(float)*period);
-            U_Resample->out(templ,tempr,smpsl,smpsr,period,u_up);
+            memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+            memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+            U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
         }
 
 
@@ -363,7 +381,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
 
             if (Pamplitude) lmod = 1.0f - (lfol + ldiff * ftcount) * .5f;
 
-            outi[i] = (smpsl[i] + smpsr[i])*.5;
+            outi[i] = (efxoutl[i] + efxoutr[i])*.5;
             if (outi[i] > 1.0)
                 outi[i] = 1.0f;
             if (outi[i] < -1.0)
@@ -382,8 +400,8 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
         if(DS_state != 0) {
             D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
         } else {
-            memcpy(efxoutl, templ,sizeof(float)*period);
-            memcpy(efxoutr, tempr,sizeof(float)*period);
+            memcpy(efxoutl, templ,sizeof(float)*PERIOD);
+            memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
         }
 
 
@@ -406,7 +424,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
         rdiff = ifperiod * (fsequence[dnextcount] - fsequence[dscount]);
         lfor = fsequence[dscount];
 
-        for ( i = 0; i < period; i++) { //Maintain sequenced modulator
+        for ( i = 0; i < PERIOD; i++) { //Maintain sequenced modulator
 
             if (++tcount >= intperiod) {
                 tcount = 0;
@@ -433,16 +451,16 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
                 ldbl = seqpower * lmod * (1.0f - cosf(D_PI*ifperiod*ftcount));
                 ldbr = seqpower * rmod * (1.0f - cosf(D_PI*ifperiod*ftcount));
 
-                efxoutl[i] = ldbl * smpsl[i];
-                efxoutr[i] = ldbr * smpsr[i];
+                efxoutl[i] = ldbl * efxoutl[i];
+                efxoutr[i] = ldbr * efxoutr[i];
             } else {
                 lmod = seqpower * fsequence[scount];
                 rmod = seqpower * fsequence[dscount];
                 lmod = modfilterl->filterout_s(lmod);
                 rmod = modfilterr->filterout_s(rmod);
 
-                efxoutl[i] = lmod * smpsl[i];
-                efxoutr[i] = rmod * smpsr[i];
+                efxoutl[i] = lmod * efxoutl[i];
+                efxoutr[i] = rmod * efxoutr[i];
             }
 
 
@@ -453,9 +471,9 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
         lfol = floorf(fsequence[scount]*12.75f);
 
         if(DS_state != 0) {
-            memcpy(templ, smpsl,sizeof(float)*period);
-            memcpy(tempr, smpsr,sizeof(float)*period);
-            U_Resample->out(templ,tempr,smpsl,smpsr,period,u_up);
+            memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+            memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+            U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
         }
 
 
@@ -473,7 +491,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
 
             if (Pamplitude) lmod = powf (2.0f, -lfol / 12.0f);
 
-            outi[i] = (smpsl[i] + smpsr[i])*.5;
+            outi[i] = (efxoutl[i] + efxoutr[i])*.5;
             if (outi[i] > 1.0)
                 outi[i] = 1.0f;
             if (outi[i] < -1.0)
@@ -507,9 +525,9 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
         lfol = fsequence[scount];
 
         if(DS_state != 0) {
-            memcpy(templ, smpsl,sizeof(float)*period);
-            memcpy(tempr, smpsr,sizeof(float)*period);
-            U_Resample->out(templ,tempr,smpsl,smpsr,period,u_up);
+            memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+            memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+            U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
         }
 
 
@@ -532,7 +550,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
             lmod = 1.0f + (lfol + ldiff * ftcount)*.03f;
             if (Pamplitude) lmod = 1.0f - (lfol + ldiff * ftcount)*.03f;
 
-            outi[i] = (smpsl[i] + smpsr[i])*.5;
+            outi[i] = (efxoutl[i] + efxoutr[i])*.5;
             if (outi[i] > 1.0)
                 outi[i] = 1.0f;
             if (outi[i] < -1.0)
@@ -545,8 +563,8 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
 
         if(Pstdiff==1) {
             for ( i = 0; i < nPERIOD; i++) {
-                templ[i]=smpsl[i]-smpsr[i]+outo[i];
-                tempr[i]=smpsl[i]-smpsr[i]+outo[i];
+                templ[i]=efxoutl[i]-efxoutr[i]+outo[i];
+                tempr[i]=efxoutl[i]-efxoutr[i]+outo[i];
             }
         } else if(Pstdiff==2) {
             for ( i = 0; i < nPERIOD; i++) {
@@ -573,11 +591,11 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
 
         //testing beattracker object -- doesn't do anything useful yet other than a convenient place
         //to see how well it performs.
-        beats->detect(smpsl, smpsr, period);
+        beats->detect(efxoutl, efxoutr, PERIOD);
 
-        for ( i = 0; i < period; i++) { //Detect dynamics onset
+        for ( i = 0; i < PERIOD; i++) { //Detect dynamics onset
 
-            tmp = 10.0f*fabs(smpsl[i] + smpsr[i]);
+            tmp = 10.0f*fabs(efxoutl[i] + efxoutr[i]);
             envrms = rmsfilter->filterout_s(tmp);
             if ( tmp > peak) peak =  atk + tmp;
             if ( envrms < peak) peak -= peakdecay;
@@ -623,8 +641,8 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
                 ldbl = seqpower * ltarget;
                 ldbr = seqpower * rtarget;
 
-                efxoutl[i] = ldbl * smpsl[i];
-                efxoutr[i] = ldbr * smpsr[i];
+                efxoutl[i] = ldbl * efxoutl[i];
+                efxoutr[i] = ldbr * efxoutr[i];
             }
 
             float frl = MINFREQ + ltarget * MAXFREQ;
@@ -647,7 +665,7 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
 
     case 8:  //delay
 
-        for ( i = 0; i < period; i++) { //Maintain sequenced modulator
+        for ( i = 0; i < PERIOD; i++) { //Maintain sequenced modulator
 
             if (++tcount >= intperiod) {
                 tcount = 0;
@@ -668,16 +686,16 @@ Sequence::out (float * smpsl, float * smpsr, uint32_t period)
                 lmod = tempodiv*fsequence[scount];
                 rmod = tempodiv*fsequence[dscount];
 
-                efxoutl[i] = ldbl*ldelay->delay((ldlyfb + smpsl[i]), lmod, 0, 1, 0);
-                efxoutr[i] = ldbr*rdelay->delay((rdlyfb + smpsr[i]), rmod, 0, 1, 0);
+                efxoutl[i] = ldbl*ldelay->delay((ldlyfb + efxoutl[i]), lmod, 0, 1, 0);
+                efxoutr[i] = ldbr*rdelay->delay((rdlyfb + efxoutr[i]), rmod, 0, 1, 0);
 
             }
 
             lmod = tempodiv*fsequence[scount];
             rmod = tempodiv*fsequence[dscount];
 
-            efxoutl[i] = ldelay->delay_simple((ldlyfb + smpsl[i]), lmod, 0, 1, 0);
-            efxoutr[i] = rdelay->delay_simple((rdlyfb + smpsr[i]), rmod, 0, 1, 0);
+            efxoutl[i] = ldelay->delay_simple((ldlyfb + efxoutl[i]), lmod, 0, 1, 0);
+            efxoutr[i] = rdelay->delay_simple((rdlyfb + efxoutr[i]), rmod, 0, 1, 0);
 
             ldlyfb = fb*efxoutl[i];
             rdlyfb = fb*efxoutr[i];

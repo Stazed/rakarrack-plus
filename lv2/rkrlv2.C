@@ -2840,7 +2840,7 @@ LV2_Handle init_seqlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
     getFeatures(plug,host_features);
 
-    plug->seq = new Sequence(0,0,/*shifter quality*/4,/*downsamplex2*/5,/*upsample quality*/4,
+    plug->seq = new Sequence(/*shifter quality*/4,/*downsamplex2*/5,/*upsample quality*/4,
                              /*downsample quality*/ 2,sample_freq,plug->period_max);
 
     return plug;
@@ -2848,23 +2848,33 @@ LV2_Handle init_seqlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
 void run_seqlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
-
-    if(*plug->bypass_p && plug->prev_bypass)
-    {
-        plug->seq->cleanup();
-        //copy dry signal & get out
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-        return;
-    }
-
+    
+    //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        plug->seq->cleanup();
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->seq->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<10; i++)
     {
@@ -2888,12 +2898,8 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //set out ports
-    plug->seq->efxoutl = plug->output_l_p;
-    plug->seq->efxoutr = plug->output_r_p;
-
     //now run
-    plug->seq->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->seq->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->seq->outvolume, nframes);

@@ -32,10 +32,13 @@
 class Sequence
 {
 public:
-    Sequence (float * efxoutl_, float * efxoutr_, long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsze);
+    Sequence (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsze);
     ~Sequence ();
     void cleanup ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
+    void out (float * efxoutl, float * efxoutr);
     void changepar (int npar, int value);
     int getpar (int npar);
     void setpreset (int npreset);
@@ -46,9 +49,6 @@ public:
     int Ppreset;
 
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
 
 private:
     //Parametrii
@@ -64,6 +64,7 @@ private:
     int subdiv;
     int rndflag;
     int DS_state;
+    uint32_t PERIOD;
     unsigned int nPERIOD;
     int nSAMPLE_RATE;
     float nRATIO;

@@ -285,7 +285,7 @@ RKR::RKR ()
     efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr, fSample_rate, period);
     efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled,VocBands,Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
     efx_Sustainer = new Sustainer(efxoutl,efxoutr, fSample_rate);
-    efx_Sequence = new Sequence(efxoutl,efxoutr, (long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
+    efx_Sequence = new Sequence((long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter =  new Shifter(efxoutl,efxoutr, (long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
     efx_StompBox = new StompBox(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
@@ -1681,7 +1681,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 37:
                 if (Sequence_Bypass) {
-                    efx_Sequence->out(efxoutl, efxoutr, period);
+                    efx_Sequence->out(efxoutl, efxoutr);
                     Vol_Efx(37,efx_Sequence->outvolume);
                 }
                 break;
