@@ -282,7 +282,7 @@ RKR::RKR ()
     efx_RyanWah = new RyanWah(fSample_rate, period);
     efx_RBEcho = new RBEcho(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
-    efx_ShelfBoost = new ShelfBoost(efxoutl,efxoutr, fSample_rate, period);
+    efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
     efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled,VocBands,Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
     efx_Sustainer = new Sustainer(efxoutl,efxoutr, fSample_rate);
     efx_Sequence = new Sequence((long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
@@ -1660,7 +1660,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 34:
                 if (ShelfBoost_Bypass) {
-                    efx_ShelfBoost->out(efxoutl, efxoutr, period);
+                    efx_ShelfBoost->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

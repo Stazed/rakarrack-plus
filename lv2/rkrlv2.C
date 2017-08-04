@@ -2655,27 +2655,40 @@ LV2_Handle init_shelflv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
     getFeatures(plug,host_features);
 
-    plug->shelf = new ShelfBoost(0,0,sample_freq, plug->period_max);
+    plug->shelf = new ShelfBoost(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_shelflv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->shelf->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->shelf->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)
     {
@@ -2685,16 +2698,9 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
             plug->shelf->changepar(i,val);
         }
     }
-    //coilcrafter does it inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->shelf->efxoutl = plug->output_l_p;
-    plug->shelf->efxoutr = plug->output_r_p;
 
     //now run
-    plug->shelf->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->shelf->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;

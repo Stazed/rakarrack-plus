@@ -904,7 +904,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {88 91 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {88 91 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1984,7 +1984,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
           label Peak
           user_data 2
           callback {rkr->efx_Compressor->changepar(9,(int)o->value());
-if ((int) o->value() == 0) compress_output->do_callback();} selected
+if ((int) o->value() == 0) compress_output->do_callback();}
           tooltip {Peak Mode Compression} xywh {180 365 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
       }
@@ -7812,7 +7812,7 @@ rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
         }
       }
       Fl_Group SHELFBOOST {
-        user_data 1
+        user_data 1 open
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button shelf_activar {
@@ -7839,11 +7839,11 @@ shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
 shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
-shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
+shelf_level->value(rkr->efx_ShelfBoost->getpar(4));} open
           xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Trebble
+            label Treble selected
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {

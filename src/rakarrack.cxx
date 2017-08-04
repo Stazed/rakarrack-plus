@@ -7271,7 +7271,7 @@ void RKRGUI::cb_shelf_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item RKRGUI::menu_shelf_preset[] = {
- {"Trebble", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
+ {"Treble", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Mid", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Low", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  {"Distortion 1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},

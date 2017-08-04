@@ -25,21 +25,17 @@
 
 
 
-ShelfBoost::ShelfBoost (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+ShelfBoost::ShelfBoost (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
 
     //default values
     Ppreset = 0;
     Pvolume = 50;
     Pstereo = 0;
 
-    interpbuf = new float[intermediate_bufsize];
-    RB1l =  new AnalogFilter(7,3200.0f,0.5f,0,sample_rate, interpbuf);
-    RB1r =  new AnalogFilter(7,3200.0f,0.5f,0,sample_rate, interpbuf);
-
+    initialize();
 
     cleanup ();
 
@@ -48,9 +44,7 @@ ShelfBoost::ShelfBoost (float * efxoutl_, float * efxoutr_, double sample_rate, 
 
 ShelfBoost::~ShelfBoost ()
 {
-	delete RB1l;
-	delete RB1r;
-	delete[] interpbuf;
+    clear_initialize();
 };
 
 /*
@@ -65,31 +59,51 @@ ShelfBoost::cleanup ()
 
 };
 
+void
+ShelfBoost::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
+
+void
+ShelfBoost::initialize()
+{
+    interpbuf = new float[PERIOD];
+    RB1l =  new AnalogFilter(7,3200.0f,0.5f,0,fSAMPLE_RATE, interpbuf);
+    RB1r =  new AnalogFilter(7,3200.0f,0.5f,0,fSAMPLE_RATE, interpbuf);
+}
+
+void
+ShelfBoost::clear_initialize()
+{
+    delete RB1l;
+    delete RB1r;
+    delete[] interpbuf;
+}
 
 /*
  * Effect output
  */
 void
-ShelfBoost::out (float * smpsl, float * smpsr, uint32_t period)
+ShelfBoost::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
 
-    RB1l->filterout(smpsl,period);
-    if(Pstereo) RB1r->filterout(smpsr,period);
+    RB1l->filterout(efxoutl,PERIOD);
+    if(Pstereo) RB1r->filterout(efxoutr,PERIOD);
 
 
-    for(i=0; i<period; i++) {
-        smpsl[i]*=outvolume*u_gain;
-        if(Pstereo) smpsr[i]*=outvolume*u_gain;
+    for(i=0; i<PERIOD; i++) {
+        efxoutl[i]*=outvolume*u_gain;
+        if(Pstereo) efxoutr[i]*=outvolume*u_gain;
     }
 
-    if(!Pstereo) memcpy(smpsr,smpsl,sizeof(float)*period);
+    if(!Pstereo) memcpy(efxoutr,efxoutl,sizeof(float)*PERIOD);
 
-
-
-
-};
+}
 
 
 /*
@@ -110,7 +124,7 @@ ShelfBoost::setpreset (int npreset)
     const int NUM_PRESETS = 4;
     int pdata[PRESET_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //Trebble
+        //Treble
         {127, 64, 16000, 1, 24},
         //Mid
         {127, 64, 4400, 1, 24},

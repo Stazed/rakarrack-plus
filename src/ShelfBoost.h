@@ -26,21 +26,20 @@
 class ShelfBoost
 {
 public:
-    ShelfBoost (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    ShelfBoost (double sample_rate, uint32_t intermediate_bufsize);
     ~ShelfBoost ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
 
     int Ppreset;
 
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
 
 private:
 
@@ -58,7 +57,9 @@ private:
     float* interpbuf; //buffer for filters
 
     class FPreset *Fpre;
-
+    
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
 };
 
 
