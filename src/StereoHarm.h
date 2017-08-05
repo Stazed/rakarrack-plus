@@ -34,13 +34,16 @@ class StereoHarm
 {
 
 public:
-    StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq, uint32_t intermediate_bufsize, double sample_rate);
+    StereoHarm (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
     ~StereoHarm ();
-    void out (float *smpsl, float *smpsr, uint32_t period);
+    void out (float *efxoutl, float *efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     void adjust(int DS, uint32_t period);
 
 
@@ -52,21 +55,14 @@ public:
     int PSELECT;
     int mira;
     int DS_state;
-    unsigned int nPERIOD;
-    float nRATIO;
-    int nSAMPLE_RATE;
-    unsigned int SAMPLE_RATE;
+    
     long window;
 
     long int hq;
 
     double u_up;
     double u_down;
-    float nfSAMPLE_RATE;
 
-
-    float *efxoutl;
-    float *efxoutr;
     float *outil,*outir;
     float *outol,*outor;
     float *templ, *tempr;
@@ -79,6 +75,14 @@ public:
 
 private:
 
+    int STE_DOWN;
+    uint32_t PERIOD;
+    unsigned int nPERIOD;
+    float nRATIO;
+    int nSAMPLE_RATE;
+    unsigned int SAMPLE_RATE;
+    float nfSAMPLE_RATE;
+    
     int Pvolume;
     int Plrcross;
     int Pgainl;

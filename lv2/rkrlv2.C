@@ -3642,7 +3642,7 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
     getFeatures(plug,host_features);
 
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
-    plug->sharm = new StereoHarm(0,0,4,5,4,2, plug->period_max, sample_freq);
+    plug->sharm = new StereoHarm(4,5,4,2,sample_freq, plug->period_max);
     plug->noteID = new Recognize(0,0,.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
     plug->chordID = new RecChord();
     // set in :void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) and used by schmittFloat();
@@ -3668,21 +3668,33 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
 
 void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        //plug->sharm->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-        plug->init_params = 1; // reset if bypass removed
+        plug->sharm->cleanup();
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->sharm->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     i = 0;
     val = (int)*plug->param_p[i];// 0 wet/dry
@@ -3787,8 +3799,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     */
 
     // seems to need inline for schmittFloat which sends to sustainer
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+//    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+//    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
     if(plug->sharm->mira && plug->sharm->PSELECT
         && have_signal( plug->input_l_p, plug->input_r_p, nframes))
@@ -3808,12 +3820,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
 
     plug->comp->out(plug->output_l_p,plug->output_r_p);
 
-    //now set out ports and global period size
-    plug->sharm->efxoutl = plug->output_l_p;
-    plug->sharm->efxoutr = plug->output_r_p;
-
     //now run
-    plug->sharm->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->sharm->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->sharm->outvolume, nframes);

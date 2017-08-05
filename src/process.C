@@ -290,7 +290,7 @@ RKR::RKR ()
     efx_StompBox = new StompBox(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
     efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     efx_Echotron = new Echotron(fSample_rate, period);
-    efx_StereoHarm = new StereoHarm(efxoutl, efxoutr, (long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, period, fSample_rate);  // FIXME reversed sample/period
+    efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
     efx_CompBand = new CompBand(fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(fSample_rate, period);
     efx_Vibe = new Vibe(efxoutl,efxoutr, fSample_rate);
@@ -1397,6 +1397,8 @@ RKR::Alg (float *origl, float *origr, void *)
                         if(RecNote->afreq > 0.0) {
                             RC->Vamos (1,efx_StereoHarm->Pintervall - 12,RecNote->reconota);
                             RC->Vamos (2,efx_StereoHarm->Pintervalr - 12,RecNote->reconota);
+                            efx_StereoHarm->r_ratiol = RC->r__ratio[1];
+                            efx_StereoHarm->r_ratior = RC->r__ratio[2];
                             ponlast = 1;
                         }
                     }
@@ -1716,7 +1718,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 42:
                 if (StereoHarm_Bypass) {
-                    efx_StereoHarm->out(efxoutl, efxoutr, period);
+                    efx_StereoHarm->out(efxoutl, efxoutr);
                     Vol_Efx(42,efx_StereoHarm->outvolume);
                 }
                 break;

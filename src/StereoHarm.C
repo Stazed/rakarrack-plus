@@ -28,29 +28,14 @@
 
 
 
-StereoHarm::StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int DS, int uq, int dq, uint32_t intermediate_bufsize, double sample_rate)
+StereoHarm::StereoHarm (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 { 
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    STE_DOWN = DS;
     hq = Quality;
     SAMPLE_RATE = (unsigned int)sample_rate;
-    adjust(DS, intermediate_bufsize);
-    nPERIOD = lrintf(intermediate_bufsize*nRATIO);
-
-    templ = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    tempr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-
-    outil = (float *) malloc (sizeof (float) * nPERIOD);
-    outir = (float *) malloc (sizeof (float) * nPERIOD);
-
-    outol = (float *) malloc (sizeof (float) * nPERIOD);
-    outor = (float *) malloc (sizeof (float) * nPERIOD);
-
-    memset (outil, 0, sizeof (float) * nPERIOD);
-    memset (outir, 0, sizeof (float) * nPERIOD);
-
-    memset (outol, 0, sizeof (float) * nPERIOD);
-    memset (outor, 0, sizeof (float) * nPERIOD);
+    
+    initialize();
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
@@ -79,16 +64,11 @@ StereoHarm::StereoHarm (float *efxoutl_, float *efxoutr_, long int Quality, int 
 
 StereoHarm::~StereoHarm ()
 {
-	free(templ);
-	free(tempr);
-	free(outil);
-	free(outir);
-	free(outol);
-	free(outor);
-	delete U_Resample;
-	delete D_Resample;
-	delete PSl;
-	delete PSr;
+    clear_initialize();
+    delete U_Resample;
+    delete D_Resample;
+    delete PSl;
+    delete PSr;
 };
 
 void
@@ -104,24 +84,65 @@ StereoHarm::cleanup ()
 
 };
 
+void
+StereoHarm::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
 
 void
-StereoHarm::out (float *smpsl, float *smpsr, uint32_t period)
+StereoHarm::initialize()
+{
+    adjust(STE_DOWN, PERIOD);
+    nPERIOD = lrintf(PERIOD*nRATIO);
+
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
+
+    outil = (float *) malloc (sizeof (float) * nPERIOD);
+    outir = (float *) malloc (sizeof (float) * nPERIOD);
+
+    outol = (float *) malloc (sizeof (float) * nPERIOD);
+    outor = (float *) malloc (sizeof (float) * nPERIOD);
+
+    memset (outil, 0, sizeof (float) * nPERIOD);
+    memset (outir, 0, sizeof (float) * nPERIOD);
+
+    memset (outol, 0, sizeof (float) * nPERIOD);
+    memset (outor, 0, sizeof (float) * nPERIOD);
+}
+
+void
+StereoHarm::clear_initialize()
+{
+    free(templ);
+    free(tempr);
+    free(outil);
+    free(outir);
+    free(outol);
+    free(outor);
+}
+
+
+void
+StereoHarm::out (float *efxoutl, float *efxoutr)
 {
 
     unsigned int i;
 
-    nPERIOD = lrintf(period*nRATIO);
-    u_up= (double)nPERIOD / (double)period;
-    u_down= (double)period / (double)nPERIOD;
+    nPERIOD = lrintf(PERIOD*nRATIO);
+    u_up= (double)nPERIOD / (double)PERIOD;
+    u_down= (double)PERIOD / (double)nPERIOD;
 
     if(DS_state != 0) {
-        U_Resample->out(smpsl,smpsr,templ,tempr,period,u_up);
+        U_Resample->out(efxoutl,efxoutr,templ,tempr,PERIOD,u_up);
     }
     else
     {
-        memcpy(templ, smpsl,sizeof(float)*period);
-        memcpy(tempr, smpsr,sizeof(float)*period);
+        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
+        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
     }
 
 
@@ -162,18 +183,18 @@ StereoHarm::out (float *smpsl, float *smpsr, uint32_t period)
     if(DS_state != 0) {
         D_Resample->out(outol,outor,templ,tempr,nPERIOD,u_down);
     } else {
-        memcpy(templ, outol,sizeof(float)*period);
-        memcpy(tempr, outor,sizeof(float)*period);
+        memcpy(templ, outol,sizeof(float)*PERIOD);
+        memcpy(tempr, outor,sizeof(float)*PERIOD);
 
     }
 
 
-    //for (i = 0; i < period; i++) {
+    //for (i = 0; i < PERIOD; i++) {
         //efxoutl[i] = templ[i] * gainl;
         //efxoutr[i] = tempr[i] * gainr;
         
     //}
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         efxoutl[i] = templ[i] * gainl * (1.0f - lrcross) + tempr[i] * gainr * lrcross;
         efxoutr[i] = tempr[i] * gainr * (1.0f - lrcross) + templ[i] * gainl * lrcross;
     }
