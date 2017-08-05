@@ -31,24 +31,8 @@ Infinity::Infinity (double sample_rate, uint32_t intermediate_bufsize)
     PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
     fSAMPLE_RATE = sample_rate;
 
-    int i;
-    interpbuf = new float[PERIOD];
-    for (i = 0; i<NUM_INF_BANDS; i++) {
-        filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f, sample_rate, interpbuf);
-        filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f, sample_rate, interpbuf);
-        rbandstate[i].level = 1.0f;
-        rbandstate[i].vol = 1.0f;
-        lphaser[i].gain = 0.5f;
-        rphaser[i].gain = 0.5f;
-        for (int j = 0; j<MAX_PHASER_STAGES; j++) {
-            lphaser[i].yn1[j] = 0.0f;
-            rphaser[i].yn1[j] = 0.0f;
-            lphaser[i].xn1[j] = 0.0f;
-            rphaser[i].xn1[j] = 0.0f;
-        }
+    initialize();
 
-        Pb[i] = 1;
-    }
     Ppreset = 2;
     setpreset (Ppreset);
     Pvolume = 64;
@@ -80,11 +64,7 @@ Infinity::Infinity (double sample_rate, uint32_t intermediate_bufsize)
 
 Infinity::~Infinity ()
 {
-	delete interpbuf;
-    for (int i = 0; i<NUM_INF_BANDS; i++) {
-    	delete filterl[i];
-    	delete filterr[i];
-    }
+    clear_initialize();
 };
 
 float inline
@@ -239,8 +219,41 @@ void
 Infinity::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
+    clear_initialize();
+    initialize();
+    cleanup();
 }
 
+void Infinity::initialize()
+{
+    int i;
+    interpbuf = new float[PERIOD];
+    for (i = 0; i<NUM_INF_BANDS; i++) {
+        filterl[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f, fSAMPLE_RATE, interpbuf);
+        filterr[i] = new RBFilter (0, 80.0f, 70.0f, 1.0f, fSAMPLE_RATE, interpbuf);
+        rbandstate[i].level = 1.0f;
+        rbandstate[i].vol = 1.0f;
+        lphaser[i].gain = 0.5f;
+        rphaser[i].gain = 0.5f;
+        for (int j = 0; j<MAX_PHASER_STAGES; j++) {
+            lphaser[i].yn1[j] = 0.0f;
+            rphaser[i].yn1[j] = 0.0f;
+            lphaser[i].xn1[j] = 0.0f;
+            rphaser[i].xn1[j] = 0.0f;
+        }
+
+        Pb[i] = 1;
+    }
+}
+
+void Infinity::clear_initialize()
+{
+    delete interpbuf;
+    for (int i = 0; i<NUM_INF_BANDS; i++) {
+    	delete filterl[i];
+    	delete filterr[i];
+    }
+}
 
 /*
  * Parameter control
