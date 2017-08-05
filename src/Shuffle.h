@@ -32,19 +32,20 @@
 class Shuffle
 {
 public:
-    Shuffle (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize);
+    Shuffle (double sample_rate, uint32_t intermediate_bufsize);
     ~Shuffle ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
+    
     int Ppreset;
     float outvolume;
 
-    float *efxoutl;
-    float *efxoutr;
     float *inputl;
     float *inputr;
 
@@ -75,6 +76,8 @@ private:
     int Cross3;
     int Cross4;
 
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
 
     //Parametrii reali
     float tmp;

@@ -274,7 +274,7 @@ RKR::RKR ()
     efx_MBDist = new MBDist(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_Arpie = new Arpie(fSample_rate, period);
     efx_Expander = new Expander(fSample_rate, period);
-    efx_Shuffle = new Shuffle(efxoutl,efxoutr, fSample_rate, period);
+    efx_Shuffle = new Shuffle(fSample_rate, period);
     efx_Synthfilter = new Synthfilter(efxoutl,efxoutr, fSample_rate);
     efx_MBVvol = new MBVvol(fSample_rate, period);
     efx_Convol = new Convolotron(Con_Down,Con_U_Q,Con_D_Q, fSample_rate, period);
@@ -1604,7 +1604,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 26:
                 if (Shuffle_Bypass) {
-                    efx_Shuffle->out(efxoutl, efxoutr, period);
+                    efx_Shuffle->out(efxoutl, efxoutr);
                     Vol_Efx(26,efx_Shuffle->outvolume);
                 }
                 break;

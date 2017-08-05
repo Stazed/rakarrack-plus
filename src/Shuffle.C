@@ -33,21 +33,12 @@
 
 
 
-Shuffle::Shuffle (float * efxoutl_, float * efxoutr_, double sample_rate, uint32_t intermediate_bufsize)
+Shuffle::Shuffle (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
-    inputl = (float *) malloc (sizeof (float) * intermediate_bufsize);
-    inputr = (float *) malloc (sizeof (float) * intermediate_bufsize);
-
-
-    interpbuf = new float[intermediate_bufsize];
-    lr = new AnalogFilter (6, 300.0f, .3f, 0, sample_rate,interpbuf);
-    hr = new AnalogFilter (6, 8000.0f,.3f, 0, sample_rate,interpbuf);
-    mlr = new AnalogFilter (6, 1200.0f,.3f, 0, sample_rate,interpbuf);
-    mhr = new AnalogFilter (6, 2400.0f,.3f, 0, sample_rate,interpbuf);
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
+    
+    initialize();
 
     //default values
     Ppreset = 0;
@@ -63,14 +54,7 @@ Shuffle::Shuffle (float * efxoutl_, float * efxoutr_, double sample_rate, uint32
 
 Shuffle::~Shuffle ()
 {
-	free(inputl);
-	free(inputr);
-	delete[] interpbuf;
-	delete lr;
-	delete hr;
-	delete mlr;
-	delete mhr;
-
+    clear_initialize();
 };
 
 /*
@@ -85,42 +69,75 @@ Shuffle::cleanup ()
     mhr->cleanup ();
 
 };
+
+void
+Shuffle::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
+
+void
+Shuffle::initialize()
+{
+    inputl = (float *) malloc (sizeof (float) * PERIOD);
+    inputr = (float *) malloc (sizeof (float) * PERIOD);
+
+
+    interpbuf = new float[PERIOD];
+    lr = new AnalogFilter (6, 300.0f, .3f, 0, fSAMPLE_RATE,interpbuf);
+    hr = new AnalogFilter (6, 8000.0f,.3f, 0, fSAMPLE_RATE,interpbuf);
+    mlr = new AnalogFilter (6, 1200.0f,.3f, 0, fSAMPLE_RATE,interpbuf);
+    mhr = new AnalogFilter (6, 2400.0f,.3f, 0, fSAMPLE_RATE,interpbuf);
+}
+
+void
+Shuffle::clear_initialize()
+{
+    free(inputl);
+    free(inputr);
+    delete[] interpbuf;
+    delete lr;
+    delete hr;
+    delete mlr;
+    delete mhr;
+}
+
 /*
  * Effect output
  */
 void
-Shuffle::out (float * smpsl, float * smpsr, uint32_t period)
+Shuffle::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
-        inputl[i] = smpsl[i] + smpsr[i];
-        inputr[i] = smpsl[i] - smpsr[i];
+        inputl[i] = efxoutl[i] + efxoutr[i];
+        inputr[i] = efxoutl[i] - efxoutr[i];
     }
 
     if(E) {
 
-        lr->filterout(inputr, period);
-        mlr->filterout(inputr, period);
-        mhr->filterout(inputr, period);
-        hr->filterout(inputr, period);
+        lr->filterout(inputr, PERIOD);
+        mlr->filterout(inputr, PERIOD);
+        mhr->filterout(inputr, PERIOD);
+        hr->filterout(inputr, PERIOD);
     } else {
-        lr->filterout(inputl, period);
-        mlr->filterout(inputl, period);
-        mhr->filterout(inputl, period);
-        hr->filterout(inputl, period);
+        lr->filterout(inputl, PERIOD);
+        mlr->filterout(inputl, PERIOD);
+        mhr->filterout(inputl, PERIOD);
+        hr->filterout(inputl, PERIOD);
     }
 
 
-    for (i = 0; i < period; i++) {
-        efxoutl[i]=(inputl[i]+inputr[i]-smpsl[i])*.333333f;
-        efxoutr[i]=(inputl[i]-inputr[i]-smpsr[i])*.333333f;
+    for (i = 0; i < PERIOD; i++) {
+        efxoutl[i]=(inputl[i]+inputr[i]-efxoutl[i])*.333333f;
+        efxoutr[i]=(inputl[i]-inputr[i]-efxoutr[i])*.333333f;
 
     }
-
-
-};
+}
 
 
 /*
