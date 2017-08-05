@@ -52,9 +52,11 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig, float tune, 
     afreq = 0;
     trigfact = trig;
 
-    Sus = new Sustainer(efxoutl,efxoutr,sample_rate);
-    Sus->changepar(1,64);
-    Sus->changepar(2,127);
+    Sus = new Sustainer(sample_rate, intermediate_bufsize);
+    Sus->changepar(0,101);  // This approximates the original wrong settings in rakarrack ;)
+    Sus->changepar(1,64);   // This approximates the original wrong settings in rakarrack ;)
+    //Sus->changepar(1,64);   // This is wrong - parameters are 0 & 1, not 1 & 2
+    //Sus->changepar(2,127);  // This is wrong - parameters are 0 & 1, not 1 & 2
 
     interpbuf = new float[intermediate_bufsize];
     lpfl = new AnalogFilter (2, 3000, 1, 0, sample_rate, interpbuf);
@@ -170,7 +172,7 @@ Recognize::schmittFloat (float *indatal, float *indatar, uint32_t period)
     lpfr->filterout (indatar, period);
     hpfr->filterout (indatar, period);
 
-    Sus->out(indatal,indatar,period);
+    Sus->out(indatal,indatar);
 
     for (i = 0; i < period; i++) {
         buf[i] = (short) ((indatal[i]+indatar[i]) * 32768);

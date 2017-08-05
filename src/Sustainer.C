@@ -25,11 +25,10 @@
 #include <math.h>
 #include "Sustainer.h"
 
-Sustainer::Sustainer (float * efxoutl_, float * efxoutr_, double sample_rate)
+Sustainer::Sustainer (double sample_rate, uint32_t intermediate_bufsize)
 {
-	float cSAMPLE_RATE = 1/sample_rate;
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    float cSAMPLE_RATE = 1/sample_rate;
 
     Pvolume = 64;
     Psustain = 64;
@@ -70,23 +69,27 @@ Sustainer::cleanup ()
     cpthresh = cthresh; //dynamic threshold
 };
 
-
+void
+Sustainer::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+}
 
 
 /*
  * Effect output
  */
 void
-Sustainer::out (float * smpsl, float * smpsr, uint32_t period)
+Sustainer::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float auxtempl = 0.0f;
     float auxtempr = 0.0f;
     float auxcombi = 0.0f;
 
-    for (i = 0; i<period; i++) {  //apply compression to auxresampled
-        auxtempl = input * smpsl[i];
-        auxtempr = input * smpsr[i];
+    for (i = 0; i<PERIOD; i++) {  //apply compression to auxresampled
+        auxtempl = input * efxoutl[i];
+        auxtempr = input * efxoutr[i];
         auxcombi = 0.5f * (auxtempl + auxtempr);
         if(fabs(auxcombi) > compeak) {
             compeak = fabs(auxcombi);   //First do peak detection on the signal
@@ -111,8 +114,8 @@ Sustainer::out (float * smpsl, float * smpsr, uint32_t period)
         if(compenv < cpthresh) cpthresh = compenv;
         if(cpthresh < cthresh) cpthresh = cthresh;
 
-        smpsl[i] = auxtempl * tmpgain * level;
-        smpsr[i] = auxtempr * tmpgain * level;
+        efxoutl[i] = auxtempl * tmpgain * level;
+        efxoutr[i] = auxtempr * tmpgain * level;
     };
     //End compression
 };

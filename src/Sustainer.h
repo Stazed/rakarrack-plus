@@ -28,19 +28,17 @@
 class Sustainer
 {
 public:
-    Sustainer (float * efxoutl_, float * efxoutr_m, double sample_rate);
+    Sustainer (double sample_rate, uint32_t intermediate_bufsize);
     ~Sustainer ();
     void cleanup ();
-
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void lv2_update_params(uint32_t period);
+    
+    void out (float * efxoutl, float * efxoutr);
     void changepar (int npar, int value);
     int getpar (int npar);
     void setpreset (int npreset);
-
+    
     int Ppreset;
-
-    float *efxoutl;
-    float *efxoutr;
 
 private:
     //Parametrii
@@ -52,6 +50,8 @@ private:
     float prls, compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
 
     class FPreset *Fpre;
+    
+    uint32_t PERIOD;
 };
 
 

@@ -286,7 +286,7 @@ RKR::RKR ()
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
     efx_Vocoder = new Vocoder(efxoutl,efxoutr,auxresampled,VocBands,Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
-    efx_Sustainer = new Sustainer(efxoutl,efxoutr, fSample_rate);
+    efx_Sustainer = new Sustainer(fSample_rate, period);
     efx_Sequence = new Sequence((long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter =  new Shifter((long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
     efx_StompBox = new StompBox(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
@@ -1678,7 +1678,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 36:
                 if (Sustainer_Bypass) {
-                    efx_Sustainer->out(efxoutl, efxoutr, period);
+                    efx_Sustainer->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;
