@@ -3980,36 +3980,42 @@ LV2_Handle init_vibelv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->effectindex = IVIBE;
     plug->prev_bypass = 1;
     
-    plug->vibe = new Vibe(0,0, sample_freq);
-    plug->init_params = 1; // LFO init
+    getFeatures(plug,host_features);
+    
+    plug->vibe = new Vibe(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_vibelv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->vibe->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
     {
-        plug->vibe->PERIOD = nframes;
-        plug->vibe->lfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        plug->period_max = nframes;
+        plug->vibe->lv2_update_params(nframes);
     }
-
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<4; i++)//0-4
     {
@@ -4047,16 +4053,8 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //vibe does it inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->vibe->efxoutl = plug->output_l_p;
-    plug->vibe->efxoutr = plug->output_r_p;
-
     //now run
-    plug->vibe->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->vibe->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->vibe->outvolume, nframes);

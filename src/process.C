@@ -293,7 +293,7 @@ RKR::RKR ()
     efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
     efx_CompBand = new CompBand(fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(fSample_rate, period);
-    efx_Vibe = new Vibe(efxoutl,efxoutr, fSample_rate);
+    efx_Vibe = new Vibe(fSample_rate, period);
     efx_Infinity = new Infinity(fSample_rate, period);
 
     U_Resample = new Resample(UpQual);
@@ -1739,7 +1739,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 45:
                 if (Vibe_Bypass) {
-                    efx_Vibe->out(efxoutl, efxoutr, period);
+                    efx_Vibe->out(efxoutl, efxoutr);
                     Vol_Efx(45,efx_Vibe->outvolume);
                 }
                 break;

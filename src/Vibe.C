@@ -26,11 +26,9 @@
 #include <math.h>
 #include "Vibe.h"
 
-Vibe::Vibe (float * efxoutl_, float * efxoutr_, double sample_rate)
+Vibe::Vibe (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
-
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     cSAMPLE_RATE = 1.f/sample_rate;
     fSAMPLE_RATE = sample_rate;
 
@@ -69,8 +67,6 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_, double sample_rate)
     gr = 0.0f;
     for(int jj = 0; jj<8; jj++) oldcvolt[jj] = 0.0f;
     lfo = new EffectLFO(sample_rate);
-    PERIOD = 256;//best guess until we know better
-
 
     init_vibes();
     cleanup();
@@ -79,7 +75,7 @@ Vibe::Vibe (float * efxoutl_, float * efxoutr_, double sample_rate)
 
 Vibe::~Vibe ()
 {
-	delete lfo;
+    delete lfo;
 }
 
 
@@ -91,7 +87,14 @@ Vibe::cleanup ()
 };
 
 void
-Vibe::out (float *smpsl, float *smpsr, uint32_t period)
+Vibe::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    lfo->updateparams(period);
+}
+
+void
+Vibe::out (float *efxoutl, float *efxoutr)
 {
 
     unsigned int i,j;
@@ -119,7 +122,7 @@ Vibe::out (float *smpsl, float *smpsr, uint32_t period)
         lfor = 2.0f - 2.0f/(lfor + 1.0f);   //
     }
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         //Left Lamp
         gl = lfol*lampTC + oldgl*ilampTC;
         oldgl = gl;
@@ -153,12 +156,12 @@ Vibe::out (float *smpsl, float *smpsr, uint32_t period)
         //if(i%16 == 0)  modulate(fxl, fxr);
 
         //Left Channel
-        input = bjt_shape(fbl + smpsl[i]);
+        input = bjt_shape(fbl + efxoutl[i]);
 
 
         /*
         //Inline BJT Shaper below
-            vin = 7.5f*(1.0f + fbl+smpsl[i]);
+            vin = 7.5f*(1.0f + fbl+efxoutl[i]);
             if(vin<0.0f) vin = 0.0f;
             if(vin>15.0f) vin = 15.0f;
             vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
@@ -222,7 +225,7 @@ Vibe::out (float *smpsl, float *smpsr, uint32_t period)
         if(Pstereo) {
             /*
             //Inline BJT shaper
-             vin = 7.5f*(1.0f + fbr+smpsr[i]);
+             vin = 7.5f*(1.0f + fbr+efxoutr[i]);
              if(vin<0.0f) vin = 0.0f;
              if(vin>15.0f) vin = 15.0f;
              vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
@@ -232,7 +235,7 @@ Vibe::out (float *smpsl, float *smpsr, uint32_t period)
 
 
 //Orig code
-            input = bjt_shape(fbr + smpsr[i]);
+            input = bjt_shape(fbr + efxoutr[i]);
             //Close Comment here if using Inline instead
 
             emitterfb = 25.0f/fxr;

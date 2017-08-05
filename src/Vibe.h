@@ -33,22 +33,19 @@ class Vibe
 
 public:
 
-    Vibe (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Vibe (double sample_rate, uint32_t intermediate_bufsize);
     ~Vibe ();
 
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setvolume(int value);
     void setpanning(int value);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    
     float outvolume;
-    float *efxoutl;
-    float *efxoutr;
-    uint32_t PERIOD;
-    EffectLFO* lfo;
 
 private:
     int Pwidth;
@@ -106,7 +103,8 @@ private:
     float on1[8], on0[8], od1[8], od0[8];
 
     class FPreset *Fpre;
-
+    uint32_t PERIOD;
+    EffectLFO* lfo;
 
 };
 
