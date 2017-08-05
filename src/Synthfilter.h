@@ -35,22 +35,17 @@
 class Synthfilter
 {
 public:
-    Synthfilter (float * efxoutl_, float * efxoutr_, double sample_rate);
+    Synthfilter (double sample_rate, uint32_t intermediate_bufsize);
     ~Synthfilter ();
-    void out (float * smpsl, float * smpsr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-
+    void lv2_update_params(uint32_t period);
+    
     int Ppreset;
     float outvolume;
-
-    float *efxoutl;
-    float *efxoutr;
-
-    uint32_t PERIOD;
-    EffectLFO* lfo;	         //Filter modulator
 
 private:
 
@@ -92,7 +87,9 @@ private:
     float C, Clp, Chp;	        // Capacitor
 
     class FPreset *Fpre;
-
+    
+    uint32_t PERIOD;
+    EffectLFO* lfo;	         //Filter modulator
 };
 
 #endif

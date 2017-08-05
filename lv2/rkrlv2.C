@@ -2239,39 +2239,42 @@ LV2_Handle init_synthlv2(const LV2_Descriptor *descriptor,double sample_freq, co
     plug->effectindex = ISYNTH;
     plug->prev_bypass = 1;
     
-    plug->synth = new Synthfilter(0,0,sample_freq);
-    plug->init_params = 1; // LFO init
+    getFeatures(plug,host_features);
+    
+    plug->synth = new Synthfilter(sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_synthlv2(LV2_Handle handle, uint32_t nframes)
 {
-    unsigned int i;
+    if( nframes == 0)
+        return;
+    
+    int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
-
-    if(*plug->bypass_p && plug->prev_bypass)
-    {
-        plug->synth->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-        return;
-    }
-
+    
+    //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
-    //LFO effects require period be set before setting other params
-    if(plug->init_params)
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->synth->PERIOD = nframes;
-        plug->synth->lfo->updateparams(nframes);
-        plug->init_params = 0; // so we only do this once
+        plug->synth->cleanup();
+        return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->synth->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<5; i++) //0-4
     {
@@ -2295,12 +2298,8 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //now set out ports and global period size
-    plug->synth->efxoutl = plug->output_l_p;
-    plug->synth->efxoutr = plug->output_r_p;
-
     //now run
-    plug->synth->out(plug->input_l_p,plug->input_r_p,nframes);
+    plug->synth->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
     wetdry_mix(plug, plug->synth->outvolume, nframes);

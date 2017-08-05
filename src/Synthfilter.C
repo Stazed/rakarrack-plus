@@ -40,10 +40,9 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Synthfilter::Synthfilter (float * efxoutl_, float * efxoutr_, double sample_rate)
+Synthfilter::Synthfilter (double sample_rate, uint32_t intermediate_bufsize)
 {
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
 
     lyn1 = new float[MAX_SFILTER_STAGES];
     ryn1 = new float[MAX_SFILTER_STAGES];
@@ -65,7 +64,7 @@ Synthfilter::Synthfilter (float * efxoutl_, float * efxoutr_, double sample_rate
     rls = delta * 5.0f;		//200ms
 
     lfo = new EffectLFO(sample_rate);
-
+    inv_period = 1.f/(float)PERIOD;
 
     Ppreset = 0;
     setpreset (Ppreset);
@@ -88,12 +87,11 @@ Synthfilter::~Synthfilter ()
  * Effect output
  */
 void
-Synthfilter::out (float * smpsl, float * smpsr, uint32_t period)
+Synthfilter::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 	int j;
     float lfol, lfor, lgain, rgain,rmod, lmod, d;
-    inv_period = 1.f/(float)period;
     lgain = 0.0;
     rgain = 0.0;
 
@@ -120,10 +118,10 @@ Synthfilter::out (float * smpsl, float * smpsr, uint32_t period)
     float gl = oldlgain;	// Linear interpolation between LFO samples
     float gr = oldrgain;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
 
-        float lxn = bandgain*smpsl[i];
-        float rxn = bandgain*smpsr[i]; //extra gain
+        float lxn = bandgain*efxoutl[i];
+        float rxn = bandgain*efxoutr[i]; //extra gain
 
         gl += xl;
         gr += xr;   //linear interpolation of LFO
@@ -207,7 +205,7 @@ Synthfilter::out (float * smpsl, float * smpsr, uint32_t period)
     oldrgain = rmod;
 
     if (Poutsub != 0)
-        for (i = 0; i < period; i++) {
+        for (i = 0; i < PERIOD; i++) {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         };
@@ -237,6 +235,14 @@ Synthfilter::cleanup ()
     };
 };
 
+
+void
+Synthfilter::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    lfo->updateparams(period);
+    inv_period = 1.f/(float)period;
+}
 /*
  * Parameter control
  */
