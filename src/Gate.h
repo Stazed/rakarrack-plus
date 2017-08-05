@@ -46,6 +46,8 @@ public:
     void setpreset (int npreset);
     void cleanup ();
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     int getpar (int npar);
 
     // Compressor
@@ -78,6 +80,7 @@ private:
     float hold;
     
     uint32_t PERIOD;
+    double fSAMPLE_RATE;
 
     float* interpbuf; //buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;

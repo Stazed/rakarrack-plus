@@ -33,13 +33,9 @@
 Gate::Gate (double samplerate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
-
-    interpbuf = new float[PERIOD];
-
-    lpfl = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
-    lpfr = new AnalogFilter (2, 22000, 1, 0, samplerate, interpbuf);
-    hpfl = new AnalogFilter (3, 20, 1, 0, samplerate, interpbuf);
-    hpfr = new AnalogFilter (3, 20, 1, 0, samplerate, interpbuf);
+    fSAMPLE_RATE = samplerate;
+    
+    initialize();
 
     env = 0.0;
     gate = 0.0;
@@ -52,11 +48,7 @@ Gate::Gate (double samplerate, uint32_t intermediate_bufsize)
 
 Gate::~Gate ()
 {
-    delete[] interpbuf;
-    delete lpfl;
-    delete lpfr;
-    delete hpfl;
-    delete hpfr;
+    clear_initialize();
 }
 
 
@@ -74,8 +66,30 @@ void
 Gate::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
+    clear_initialize();
+    initialize();
 }
 
+void
+Gate::initialize()
+{
+    interpbuf = new float[PERIOD];
+
+    lpfl = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+}
+
+void
+Gate::clear_initialize()
+{
+    delete[] interpbuf;
+    delete lpfl;
+    delete lpfr;
+    delete hpfl;
+    delete hpfr;
+}
 
 void
 Gate::setlpf (int value)
