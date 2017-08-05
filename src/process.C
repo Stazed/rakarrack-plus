@@ -226,18 +226,20 @@ RKR::RKR ()
     //ssj
     interpbuf = (float*) malloc (sizeof (float)* period);
 
-    for (i = 0; i <= period; i++) {
-        efxoutl[i] = 0.0f;
-        efxoutr[i] = 0.0f;
-        smpl[i] = 0.0f;
-        smpr[i] = 0.0f;
-        anall[i] = 0.0f;
-        analr[i] = 0.0f;
-        auxdata[i] = 0.0f;
-        auxresampled[i] = 0.0f;
-        m_ticks[i] = 0.0f;
-        interpbuf[i] = 0.0f;
-    }
+    memset(efxoutl, 0, sizeof(float)*period);
+    memset(efxoutr, 0, sizeof(float)*period);
+    
+    memset(smpl, 0, sizeof(float)*period);
+    memset(smpr, 0, sizeof(float)*period);
+    
+    memset(anall, 0, sizeof(float)*period);
+    memset(analr, 0, sizeof(float)*period);
+
+    memset(auxdata, 0, sizeof(float)*period);
+    memset(auxresampled, 0, sizeof(float)*period);
+
+    memset(m_ticks, 0, sizeof(float)*period);
+    memset(interpbuf, 0, sizeof(float)*period);
 
     Fpre = new FPreset();
     
