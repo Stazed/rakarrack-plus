@@ -47,6 +47,8 @@ public:
     void setpreset (int npreset);
     void cleanup ();
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     int getpar (int npar);
 
     // Compressor
@@ -89,7 +91,7 @@ private:
     class FPreset *Fpre;
     
     uint32_t PERIOD;
-
+    double fSAMPLE_RATE;
 };
 
 #endif

@@ -32,13 +32,10 @@ Expander::Expander (double sample_rate, uint32_t intermediate_bufsize)
 {
 
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
     
-    interpbuf = new float[PERIOD];
-    lpfl = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
-    lpfr = new AnalogFilter (2, 22000, 1, 0, sample_rate, interpbuf);
-    hpfl = new AnalogFilter (3, 20, 1, 0, sample_rate, interpbuf);
-    hpfr = new AnalogFilter (3, 20, 1, 0, sample_rate, interpbuf);
-
+    initialize();
+    
     env = 0.0;
     oldgain = 0.0;
     efollower = 0;
@@ -49,11 +46,7 @@ Expander::Expander (double sample_rate, uint32_t intermediate_bufsize)
 
 Expander::~Expander ()
 {
-	delete[] interpbuf;
-	delete lpfl;
-	delete lpfr;
-	delete hpfl;
-	delete hpfr;
+    clear_initialize();
 }
 
 
@@ -73,8 +66,28 @@ void
 Expander::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
+    clear_initialize();
+    initialize();
 }
 
+void 
+Expander::initialize()
+{
+    interpbuf = new float[PERIOD];
+    lpfl = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+}
+
+void Expander::clear_initialize()
+{
+    delete[] interpbuf;
+    delete lpfl;
+    delete lpfr;
+    delete hpfl;
+    delete hpfr;
+}
 
 void
 Expander::setlpf (int value)
