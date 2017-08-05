@@ -287,7 +287,7 @@ RKR::RKR ()
     efx_Sustainer = new Sustainer(efxoutl,efxoutr, fSample_rate);
     efx_Sequence = new Sequence((long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter =  new Shifter((long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
-    efx_StompBox = new StompBox(efxoutl,efxoutr, fSample_rate, period, Wave_res_amount, Wave_up_q, Wave_down_q);// FIXME make consistent sample/period
+    efx_StompBox = new StompBox(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     efx_Echotron = new Echotron(fSample_rate, period);
     efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
@@ -1697,7 +1697,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
             case 39:
                 if (StompBox_Bypass) {
-                    efx_StompBox->out(efxoutl, efxoutr, period);
+                    efx_StompBox->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

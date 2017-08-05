@@ -3014,28 +3014,40 @@ LV2_Handle init_stomplv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
     getFeatures(plug,host_features);
 
-    plug->stomp = new StompBox(0,0, sample_freq, plug->period_max, /*oversampling*/2,
-                               /*up interpolation method*/4, /*down interpolation method*/2);
+    plug->stomp = new StompBox(/*oversampling*/2,/*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
 
     return plug;
 }
 
 void run_stomplv2(LV2_Handle handle, uint32_t nframes)
 {
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
 
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->stomp->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->stomp->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)
     {
@@ -3046,16 +3058,8 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    //stompbox does it inline
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->stomp->efxoutl = plug->output_l_p;
-    plug->stomp->efxoutr = plug->output_r_p;
-
     //now run
-    plug->stomp->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->stomp->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
     return;
@@ -3072,8 +3076,7 @@ LV2_Handle init_stomp_fuzzlv2(const LV2_Descriptor *descriptor,double sample_fre
 
     getFeatures(plug,host_features);
 
-    plug->stomp = new StompBox(0,0, sample_freq, plug->period_max, /*oversampling*/2,
-                               /*up interpolation method*/4, /*down interpolation method*/2);
+    plug->stomp = new StompBox(/*oversampling*/2,/*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
     plug->stomp->changepar(5,7);//set to fuzz
 
     return plug;
