@@ -39,6 +39,8 @@ public:
     float Wshape(float x);
     void cleanup ();
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     void applyfilters (float * efxoutl, float * efxoutr);
 
     int Ppreset;
@@ -84,6 +86,7 @@ private:
     class FPreset *Fpre;
 
     uint32_t PERIOD;
+    double fSAMPLE_RATE;
 };
 
 

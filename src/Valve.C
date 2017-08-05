@@ -32,12 +32,10 @@
 Valve::Valve (double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
-
-    interpbuf = new float[PERIOD];
-    lpfl = new AnalogFilter (2, 22000.0f, 1.0f, 0, sample_rate, interpbuf);
-    lpfr = new AnalogFilter (2, 22000.0f, 1.0f, 0, sample_rate, interpbuf);
-    hpfl = new AnalogFilter (3, 20.0f, 1.0f, 0, sample_rate, interpbuf);
-    hpfr = new AnalogFilter (3, 20.0f, 1.0f, 0, sample_rate, interpbuf);
+    fSAMPLE_RATE = sample_rate;
+    
+    initialize();
+    
     harm = new HarmEnhancer (rm, 20.0f,20000.0f,1.0f, sample_rate, PERIOD);
 
 
@@ -75,12 +73,8 @@ Valve::Valve (double sample_rate, uint32_t intermediate_bufsize)
 
 Valve::~Valve ()
 {
-	delete[] interpbuf;
-	delete lpfl;
-	delete lpfr;
-	delete hpfl;
-	delete hpfr;
-	delete harm;
+    clear_initialize();
+    delete harm;
 };
 
 /*
@@ -104,8 +98,30 @@ Valve::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
     harm->lv2_update_params(period);
+    clear_initialize();
+    initialize();
+    cleanup();
 }
 
+void
+Valve::initialize()
+{
+    interpbuf = new float[PERIOD];
+    lpfl = new AnalogFilter (2, 22000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter (2, 22000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter (3, 20.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter (3, 20.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+}
+
+void
+Valve::clear_initialize()
+{
+    delete[] interpbuf;
+    delete lpfl;
+    delete lpfr;
+    delete hpfl;
+    delete hpfr;
+}
 
 /*
  * Apply the filters
