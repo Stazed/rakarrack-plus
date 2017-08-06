@@ -243,8 +243,6 @@ RKR::RKR ()
 
     Fpre = new FPreset();
     
-    RecNote = new Recognize (efxoutl, efxoutr, rtrig, 440.0, fSample_rate, period);
-    RecNote->update_freqs(aFreq); // - have to call here after declaration
     
     DC_Offsetl = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
     DC_Offsetr = new AnalogFilter (1, 20, 1, 0, sample_rate, interpbuf);
@@ -305,6 +303,7 @@ RKR::RKR ()
     beat = new beattracker(fSample_rate, period);
     efx_Tuner = new Tuner (fSample_rate);
     efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate);
+    RecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
     RC = new RecChord ();
 
 
@@ -1376,7 +1375,7 @@ RKR::Alg (float *origl, float *origr, void *)
         if ((Harmonizer_Bypass) && (have_signal)) {
             if (efx_Har->mira) {
                 if ((efx_Har->PMIDI) || (efx_Har->PSELECT)) {
-                    RecNote->schmittFloat (efxoutl, efxoutr,period);
+                    RecNote->schmittFloat (efxoutl, efxoutr);
                     reco=1;
                     if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
                         if(RecNote->afreq > 0.0) {
@@ -1393,7 +1392,7 @@ RKR::Alg (float *origl, float *origr, void *)
         if ((StereoHarm_Bypass) && (have_signal)) {
             if (efx_StereoHarm->mira) {
                 if ((efx_StereoHarm->PMIDI) || (efx_StereoHarm->PSELECT)) {
-                    if(!reco) RecNote->schmittFloat (efxoutl, efxoutr,period);
+                    if(!reco) RecNote->schmittFloat (efxoutl, efxoutr);
                     reco=1;
                     if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
                         if(RecNote->afreq > 0.0) {
@@ -1410,7 +1409,7 @@ RKR::Alg (float *origl, float *origr, void *)
 
 
         if((Ring_Bypass) && (efx_Ring->Pafreq)) {
-            if(!reco) RecNote->schmittFloat (efxoutl, efxoutr, period);
+            if(!reco) RecNote->schmittFloat (efxoutl, efxoutr);
             reco=1;
             if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
                 if(RecNote->afreq > 0.0) {

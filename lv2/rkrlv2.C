@@ -718,7 +718,7 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
 
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
     plug->harm = new Harmonizer(4,5,4,2, sample_freq, plug->period_max);
-    plug->noteID = new Recognize(0,0,.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
+    plug->noteID = new Recognize(.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
     plug->chordID = new RecChord();
     plug->noteID->reconota = -1;
 
@@ -772,6 +772,8 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->harm->lv2_update_params(nframes);
         plug->comp->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
+        plug->noteID->setlpf(5500); // default user option in rakarrack
+        plug->noteID->sethpf(80); // default user option in rakarrack
     }
     
     // we are good to run now
@@ -882,7 +884,7 @@ see process.C ln 1507
         {
             if(plug->harm->PSELECT)
             {
-                plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p, nframes);
+                plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
                 if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
                 {
                     if(plug->noteID->afreq > 0.0)
@@ -1845,7 +1847,10 @@ LV2_Handle init_ringlv2(const LV2_Descriptor *descriptor,double sample_freq, con
 
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
     plug->ring = new Ring(sample_freq, plug->period_max);
-    plug->noteID = new Recognize(0,0,.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
+    plug->noteID = new Recognize(.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
+    
+//   plug->noteID->setlpf(5500); // default user option in rakarrack FIXME check this
+//   plug->noteID->sethpf(80); // default user option in rakarrack  FIXME check this
 
     return plug;
 }
@@ -1876,6 +1881,9 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->period_max = nframes;
         plug->ring->lv2_update_params(nframes);
+        plug->noteID->lv2_update_params(nframes);
+       // plug->noteID->setlpf(5500); // default user option in rakarrack FIXME check
+       // plug->noteID->sethpf(80); // default user option in rakarrack   FIXME check
     }
     
     // we are good to run now
@@ -1914,7 +1922,7 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
         //copy over the data so that noteID doesn't tamper with it
 //        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
 //        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-        plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p,nframes);
+        plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
         if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
         {
             if(plug->noteID->afreq > 0.0)
@@ -3662,21 +3670,23 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
 
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
     plug->sharm = new StereoHarm(4,5,4,2,sample_freq, plug->period_max);
-    plug->noteID = new Recognize(0,0,.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
+    plug->noteID = new Recognize(.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
     plug->chordID = new RecChord();
+    plug->noteID->reconota = -1;
     // set in :void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) and used by schmittFloat();
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq, plug->period_max);     // FIXME need update params
+    plug->comp = new Compressor(sample_freq, plug->period_max);
+    plug->comp->setpreset(0,3); //Final Limiter
     // set default values
-    plug->comp->changepar(1,-24);//threshold
+/*    plug->comp->changepar(1,-24);//threshold
     plug->comp->changepar(2,4);  //ratio
     plug->comp->changepar(3,-10);//output
     plug->comp->changepar(4,20); //attack
     plug->comp->changepar(5,50); //release
     plug->comp->changepar(6,1);  //a_out
-    plug->comp->changepar(7,30); //knee
+    plug->comp->changepar(7,30); //knee*/
 
 
     plug->init_params = 0; // used for PSELECT - setting default reconota to -1
@@ -3711,6 +3721,10 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->period_max = nframes;
         plug->sharm->lv2_update_params(nframes);
+        plug->comp->lv2_update_params(nframes);
+        plug->noteID->lv2_update_params(nframes);
+        plug->noteID->setlpf(5500); // default user option in rakarrack
+        plug->noteID->sethpf(80); // default user option in rakarrack
     }
     
     // we are good to run now
@@ -3796,7 +3810,7 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->sharm->changepar(i+1,val);
     }
 
-
+#if 0
     if(plug->init_params) // only on change
     {
         // This call from above seems for !mira and default (-1) reconata
@@ -3811,6 +3825,7 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         }
         plug->init_params = 0; // shut off
     }
+#endif // 0
     /*
     see Chord() in rkr.fl
     harmonizer, need recChord and recNote.
@@ -3820,11 +3835,33 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     // seems to need inline for schmittFloat which sends to sustainer
 //    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
 //    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
+    if(have_signal(plug->output_l_p, plug->output_r_p, nframes))
+    {
+        if(plug->sharm->mira)
+        {printf("Got here\n");
+            if(plug->sharm->PSELECT)
+            {
+                plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
+                if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
+                {
+                    if(plug->noteID->afreq > 0.0)
+                    {
+                        plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
+                        plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
+                        plug->sharm->r_ratiol = plug->chordID->r__ratio[1];//pass the found ratio
+                        plug->sharm->r_ratior = plug->chordID->r__ratio[2];//pass the found ratio
+                        plug->noteID->last = plug->noteID->reconota;
+                        printf("plug->sharm->r_ratiol = %f: plug->sharm->r_ratior = %f\n",plug->sharm->r_ratiol,plug->sharm->r_ratior );
+                    }
+                }
+            }
+        }
+    }
+/*   
     if(plug->sharm->mira && plug->sharm->PSELECT
         && have_signal( plug->input_l_p, plug->input_r_p, nframes))
     {
-        plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p,nframes);
+        plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
         if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
         {
             if(plug->noteID->afreq > 0.0)
@@ -3836,8 +3873,11 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
             }
         }
     }
-
-    plug->comp->out(plug->output_l_p,plug->output_r_p);
+*/
+    if(plug->sharm->PSELECT)
+    {
+        plug->comp->out(plug->output_l_p,plug->output_r_p);
+    }
 
     //now run
     plug->sharm->out(plug->output_l_p,plug->output_r_p);

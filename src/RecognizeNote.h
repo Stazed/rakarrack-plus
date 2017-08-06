@@ -21,14 +21,16 @@
 class Recognize
 {
 public:
-    Recognize (float * efxoutl_, float * efxoutr_, float trig, float tune, double sample_rate, uint32_t intermediate_bufsize);
+    Recognize (float trig, float tune, double sample_rate, uint32_t intermediate_bufsize);
     ~Recognize ();
 
-    void schmittFloat (float *indatal, float *indatar, uint32_t period);
+    void schmittFloat (float *indatal, float *indatar);
     void sethpf(int value);
     void setlpf(int value);
     void update_freqs(float tune);
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     int note;
 
     signed short int *schmittBuffer;
@@ -37,8 +39,6 @@ public:
     float trigfact;
     float lafreq;
     float nfreq, afreq, freq;
-    float *efxoutl;
-    float *efxoutr;
 
     int reconota;
     int last;
@@ -50,7 +50,7 @@ private:
 
     void displayFrequency (float freq);
     void schmittInit (int size, double sample_rate);
-    void schmittS16LE (signed short int *indata, uint32_t period);
+    void schmittS16LE (signed short int *indata);
 
     int ultima;
     int blockSize;
@@ -62,6 +62,7 @@ private:
 
     float fSAMPLE_RATE;
     double dSAMPLE_RATE;
+    uint32_t PERIOD;
 
 };
 

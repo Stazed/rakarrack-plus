@@ -36,12 +36,11 @@
 
 
 
-Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig, float tune, double sample_rate, uint32_t intermediate_bufsize)
+Recognize::Recognize (float trig, float tune, double sample_rate, uint32_t intermediate_bufsize)
 {
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = (float)sample_rate;
     dSAMPLE_RATE = sample_rate;
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
 
     static const char *englishNotes[12] =
     { "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#" };
@@ -52,19 +51,15 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig, float tune, 
     afreq = 0;
     trigfact = trig;
 
-    Sus = new Sustainer(sample_rate, intermediate_bufsize);
+    Sus = new Sustainer(sample_rate, PERIOD);
     Sus->changepar(0,101);  // This approximates the original wrong settings in rakarrack ;)
     Sus->changepar(1,64);   // This approximates the original wrong settings in rakarrack ;)
     //Sus->changepar(1,64);   // This is wrong - parameters are 0 & 1, not 1 & 2
     //Sus->changepar(2,127);  // This is wrong - parameters are 0 & 1, not 1 & 2
 
-    interpbuf = new float[intermediate_bufsize];
-    lpfl = new AnalogFilter (2, 3000, 1, 0, sample_rate, interpbuf);
-    lpfr = new AnalogFilter (2, 3000, 1, 0, sample_rate, interpbuf);
-    hpfl = new AnalogFilter (3, 300, 1, 0, sample_rate, interpbuf);
-    hpfr = new AnalogFilter (3, 300, 1, 0, sample_rate, interpbuf);
+    initialize();
 
-    reconota = last = -1;
+//    reconota = last = -1;
 
     update_freqs(tune);
     schmittInit (24, sample_rate);
@@ -74,13 +69,9 @@ Recognize::Recognize (float *efxoutl_, float *efxoutr_, float trig, float tune, 
 Recognize::~Recognize ()
 
 {
-	free(schmittBuffer);
-	delete Sus;
-	delete lpfl;
-	delete lpfr;
-	delete hpfl;
-	delete hpfr;
-	delete[] interpbuf;
+    free(schmittBuffer);
+    clear_initialize();
+    delete Sus;
 }
 
 
@@ -95,12 +86,12 @@ Recognize::schmittInit (int size, double SAMPLE_RATE)
 
 
 void
-Recognize::schmittS16LE (signed short int *indata, uint32_t period)
+Recognize::schmittS16LE (signed short int *indata)
 {
     unsigned int i;
     int j;
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         *schmittPointer++ = indata[i];
         if (schmittPointer - schmittBuffer >= blockSize) {
             int endpoint, startpoint, t1, t2, A1, A2, tc, schmittTriggered;
@@ -162,22 +153,22 @@ Recognize::sethpf (int value)
 
 
 void
-Recognize::schmittFloat (float *indatal, float *indatar, uint32_t period)
+Recognize::schmittFloat (float *indatal, float *indatar)
 {
     unsigned int i;
-    signed short int buf[period];//TODO: buf should probably be a member of this class
+    signed short int buf[PERIOD];//TODO: buf should probably be a member of this class
 
-    lpfl->filterout (indatal, period);
-    hpfl->filterout (indatal, period);
-    lpfr->filterout (indatar, period);
-    hpfr->filterout (indatar, period);
+    lpfl->filterout (indatal, PERIOD);
+    hpfl->filterout (indatal, PERIOD);
+    lpfr->filterout (indatar, PERIOD);
+    hpfr->filterout (indatar, PERIOD);
 
     Sus->out(indatal,indatar);
 
-    for (i = 0; i < period; i++) {
+    for (i = 0; i < PERIOD; i++) {
         buf[i] = (short) ((indatal[i]+indatar[i]) * 32768);
     }
-    schmittS16LE (buf, period);
+    schmittS16LE (buf);
 };
 
 
@@ -234,7 +225,7 @@ Recognize::displayFrequency (float freq)
         offset = lrintf(nfreq / 20.0);
         if (fabsf(lafreq-freq)>offset) {
             lafreq = nfreq;
-            last = reconota;
+//            last = reconota;        // FIXME check this for rakarrack - from rkrlv2
             reconota = 24 + (octave * 12) + note - 3;
 
 //    printf("%f\n",lafreq);
@@ -260,16 +251,27 @@ Recognize::update_freqs(float tune)
 void
 Recognize::lv2_update_params (uint32_t period)
 {
+    PERIOD = period;
+    Sus->lv2_update_params(period);
+    
+    clear_initialize();
+    initialize();
+}
+
+void Recognize::initialize()
+{
+    interpbuf = new float[PERIOD];
+    lpfl = new AnalogFilter (2, 3000, 1, 0, dSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter (2, 3000, 1, 0, dSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter (3, 300, 1, 0, dSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter (3, 300, 1, 0, dSAMPLE_RATE, interpbuf);
+}
+
+void Recognize::clear_initialize()
+{
     delete lpfl;
     delete lpfr;
     delete hpfl;
     delete hpfr;
     delete[] interpbuf;
-    interpbuf = new float[period];
-    lpfl = new AnalogFilter (2, 3000, 1, 0, dSAMPLE_RATE, interpbuf);
-    lpfr = new AnalogFilter (2, 3000, 1, 0, dSAMPLE_RATE, interpbuf);
-    hpfl = new AnalogFilter (3, 300, 1, 0, dSAMPLE_RATE, interpbuf);
-    hpfr = new AnalogFilter (3, 300, 1, 0, dSAMPLE_RATE, interpbuf);
-    setlpf(5500); // default user option in rakarrack
-    sethpf(80); // default user option in rakarrack
 }
