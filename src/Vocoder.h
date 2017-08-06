@@ -30,22 +30,22 @@
 class Vocoder
 {
 public:
-    Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands, int DS, int uq, int dq,
-    		double sample_rate, uint32_t intermediate_bufsize);
+    Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
     ~Vocoder ();
-    void out (float * smpsl, float * smpr, uint32_t period);
+    void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     void adjust(int DS, double sample_rate);
 
     int Ppreset;
     float outvolume;
     float vulevel;
 
-    float *efxoutl;
-    float *efxoutr;
     float *auxresampled;
 
 private:
@@ -68,7 +68,9 @@ private:
     int Pring;
 
     int DS_state;
+    uint32_t PERIOD;
     int nPERIOD;
+    double fSAMPLE_RATE;
     int nSAMPLE_RATE;
     float nRATIO;
 

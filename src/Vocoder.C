@@ -26,15 +26,14 @@
 #include <math.h>
 #include "Vocoder.h"
 
-Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int bands, int DS, int uq, int dq,
-		double sample_rate, uint32_t intermediate_bufsize)
+Vocoder::Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
+    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
 
     adjust(DS, sample_rate);
 
     VOC_BANDS = bands;
-    efxoutl = efxoutl_;
-    efxoutr = efxoutr_;
     auxresampled = auxresampled_;
     //default values
     Ppreset = 0;
@@ -44,17 +43,7 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
     Ppanning = 64;
     Plrcross = 100;
 
-    //temp value till period actually known
-    nPERIOD = intermediate_bufsize*nRATIO;
-
-    filterbank = (fbank *) malloc(sizeof(fbank) * VOC_BANDS);
-    tmpl = (float *) malloc (sizeof (float) * nPERIOD);
-    tmpr = (float *) malloc (sizeof (float) * nPERIOD);
-    tsmpsl = (float *) malloc (sizeof (float) * nPERIOD);
-    tsmpsr = (float *) malloc (sizeof (float) * nPERIOD);
-    tmpaux = (float *) malloc (sizeof (float) * nPERIOD);
-
-
+    initialize();
 
     Pmuffle = 10;
     float tmp = 0.01f;  //10 ms decay time on peak detectors
@@ -71,33 +60,9 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
     cpthresh = cthresh; //dynamic threshold
     cratio = 0.25f;
 
-
-    float center;
-    float qq;
-
     A_Resample = new Resample(dq);
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
-
-
-    interpbuf = new float[intermediate_bufsize];
-    for (int i = 0; i < VOC_BANDS; i++) {
-        center = (float) i * 20000.0f/((float) VOC_BANDS);
-        qq = 60.0f;
-
-        filterbank[i].l = new AnalogFilter (4, center, qq, 0, sample_rate, interpbuf);
-        filterbank[i].l->setSR(nSAMPLE_RATE);
-        filterbank[i].r = new AnalogFilter (4, center, qq, 0, sample_rate, interpbuf);
-        filterbank[i].r->setSR(nSAMPLE_RATE);
-        filterbank[i].aux = new AnalogFilter (4, center, qq, 0, sample_rate, interpbuf);
-        filterbank[i].aux->setSR(nSAMPLE_RATE);
-    };
-
-    vlp = new AnalogFilter (2, 4000.0f, 1.0f, 1, sample_rate, interpbuf);
-    vhp = new AnalogFilter (3, 200.0f, 0.707f, 1, sample_rate, interpbuf);
-
-    vlp->setSR(nSAMPLE_RATE);
-    vhp->setSR(nSAMPLE_RATE);
 
     setbands(VOC_BANDS, 200.0f, 4000.0f);
     setpreset (Ppreset);
@@ -106,24 +71,12 @@ Vocoder::Vocoder (float * efxoutl_, float * efxoutr_, float *auxresampled_,int b
 
 Vocoder::~Vocoder ()
 {
-    free(filterbank);
-    free(tmpl);
-    free(tmpr);
-    free(tsmpsl);
-    free(tsmpsr);
-    free(tmpaux);
+    clear_initialize();
+
     delete A_Resample;
     delete U_Resample;
     delete D_Resample;
-    delete[] interpbuf;
-    for (int i = 0; i < VOC_BANDS; i++) {
-    	delete filterbank[i].l;
-    	delete filterbank[i].r;
-    	delete filterbank[i].aux;
-    }
-    delete vlp;
-    delete vhp;
-};
+}
 
 /*
  * Cleanup the effect
@@ -147,6 +100,68 @@ Vocoder::cleanup ()
 
 };
 
+void
+Vocoder::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
+void
+Vocoder::initialize()
+{
+    nPERIOD = lrintf((float)PERIOD*nRATIO);
+    u_up= (double)nPERIOD / (double)PERIOD;
+    u_down= (double)PERIOD / (double)nPERIOD;
+    
+    filterbank = (fbank *) malloc(sizeof(fbank) * VOC_BANDS);
+    tmpl = (float *) malloc (sizeof (float) * nPERIOD);
+    tmpr = (float *) malloc (sizeof (float) * nPERIOD);
+    tsmpsl = (float *) malloc (sizeof (float) * nPERIOD);
+    tsmpsr = (float *) malloc (sizeof (float) * nPERIOD);
+    tmpaux = (float *) malloc (sizeof (float) * nPERIOD);
+    
+    float center;
+    float qq;
+    interpbuf = new float[PERIOD];
+    for (int i = 0; i < VOC_BANDS; i++) {
+        center = (float) i * 20000.0f/((float) VOC_BANDS);
+        qq = 60.0f;
+
+        filterbank[i].l = new AnalogFilter (4, center, qq, 0, fSAMPLE_RATE, interpbuf);
+        filterbank[i].l->setSR(nSAMPLE_RATE);
+        filterbank[i].r = new AnalogFilter (4, center, qq, 0, fSAMPLE_RATE, interpbuf);
+        filterbank[i].r->setSR(nSAMPLE_RATE);
+        filterbank[i].aux = new AnalogFilter (4, center, qq, 0, fSAMPLE_RATE, interpbuf);
+        filterbank[i].aux->setSR(nSAMPLE_RATE);
+    };
+
+    vlp = new AnalogFilter (2, 4000.0f, 1.0f, 1, fSAMPLE_RATE, interpbuf);
+    vhp = new AnalogFilter (3, 200.0f, 0.707f, 1, fSAMPLE_RATE, interpbuf);
+
+    vlp->setSR(nSAMPLE_RATE);
+    vhp->setSR(nSAMPLE_RATE);
+}
+
+void
+Vocoder::clear_initialize()
+{
+    free(filterbank);
+    free(tmpl);
+    free(tmpr);
+    free(tsmpsl);
+    free(tsmpsr);
+    free(tmpaux);
+
+    delete[] interpbuf;
+    for (int i = 0; i < VOC_BANDS; i++) {
+    	delete filterbank[i].l;
+    	delete filterbank[i].r;
+    	delete filterbank[i].aux;
+    }
+    delete vlp;
+    delete vhp;
+}
 
 void
 Vocoder::adjust(int DS, double SAMPLE_RATE)
@@ -231,7 +246,7 @@ Vocoder::adjust(int DS, double SAMPLE_RATE)
  * Effect output
  */
 void
-Vocoder::out (float * smpsl, float * smpsr, uint32_t period)
+Vocoder::out (float * efxoutl, float * efxoutr)
 {
     int i, j;
 
@@ -239,13 +254,8 @@ Vocoder::out (float * smpsl, float * smpsr, uint32_t period)
     float maxgain=0.0f;
     float auxtemp, tmpgain;
 
-    //This should probably be moved to a separate function so it doesn't need to recalculate every time
-    nPERIOD = lrintf((float)period*nRATIO);
-    u_up= (double)nPERIOD / (double)period;
-    u_down= (double)period / (double)nPERIOD;
-
     if(DS_state != 0) {
-        A_Resample->mono_out(auxresampled,tmpaux,period,u_up,nPERIOD);
+        A_Resample->mono_out(auxresampled,tmpaux,PERIOD,u_up,nPERIOD);
     } else
         memcpy(tmpaux,auxresampled,sizeof(float)*nPERIOD);
 
@@ -283,10 +293,10 @@ Vocoder::out (float * smpsl, float * smpsr, uint32_t period)
     auxtemp = 0.0f;
 
     if(DS_state != 0) {
-        U_Resample->out(smpsl,smpsr,tsmpsl,tsmpsr,period,u_up);
+        U_Resample->out(efxoutl,efxoutr,tsmpsl,tsmpsr,PERIOD,u_up);
     } else {
-        memcpy(tsmpsl,smpsl,sizeof(float)*nPERIOD);
-        memcpy(tsmpsr,smpsr,sizeof(float)*nPERIOD);
+        memcpy(tsmpsl,efxoutl,sizeof(float)*nPERIOD);
+        memcpy(tsmpsr,efxoutr,sizeof(float)*nPERIOD);
     }
 
 
