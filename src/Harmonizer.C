@@ -32,32 +32,17 @@ Harmonizer::Harmonizer (long int Quality, int DS, int uq, int dq, double sample_
 {
     
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
     
     hq = Quality;
     SAMPLE_RATE = (unsigned int)sample_rate;
     adjust(DS, PERIOD);
     DS_init = 0;
 
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
-
-
-    outi = (float *) malloc (sizeof (float) * PERIOD);
-    outo = (float *) malloc (sizeof (float) * PERIOD);
-
-    unsigned int i;
-    for(i=0; i< PERIOD; i++)
-    {
-    	templ[i] = tempr[i] = 0;
-    	outi[i] = outo[i] = 0;
-    }
+    initialize();
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
-
-
-    interpbuf = new float[PERIOD];
-    pl = new AnalogFilter (6, 22000, 1, 0, sample_rate, interpbuf);
 
     PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
@@ -77,17 +62,11 @@ Harmonizer::Harmonizer (long int Quality, int DS, int uq, int dq, double sample_
 
 Harmonizer::~Harmonizer ()
 {
-	free(templ);
-	free(tempr);
-	free(outi);
-	free(outo);
-	delete U_Resample;
-	delete D_Resample;
-	delete pl;
-	delete PS;
-	delete[] interpbuf;
-
-};
+    clear_initialize();
+    delete U_Resample;
+    delete D_Resample;
+    delete PS;
+}
 
 void
 Harmonizer::cleanup ()
@@ -102,6 +81,38 @@ Harmonizer::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
     adjust(DS_state,PERIOD);//readjust now that we know period size
+    clear_initialize();
+    initialize();
+}
+
+void Harmonizer::initialize()
+{
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
+
+
+    outi = (float *) malloc (sizeof (float) * PERIOD);
+    outo = (float *) malloc (sizeof (float) * PERIOD);
+
+    unsigned int i;
+    for(i=0; i< PERIOD; i++)
+    {
+    	templ[i] = tempr[i] = 0;
+    	outi[i] = outo[i] = 0;
+    }
+    
+    interpbuf = new float[PERIOD];
+    pl = new AnalogFilter (6, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+}
+
+void Harmonizer::clear_initialize()
+{
+    free(templ);
+    free(tempr);
+    free(outi);
+    free(outo);
+    delete pl;
+    delete[] interpbuf;
 }
 
 void

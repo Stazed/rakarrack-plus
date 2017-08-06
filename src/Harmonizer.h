@@ -43,6 +43,8 @@ public:
     int getpar (int npar);
     void cleanup ();
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     void applyfilters (float * efxoutl, uint32_t period);
     void adjust(int DS, uint32_t period);
 
@@ -107,6 +109,7 @@ private:
     class FPreset *Fpre;
 
     unsigned int SAMPLE_RATE;
+    double fSAMPLE_RATE;
     uint32_t PERIOD;
     bool DS_init;
 };
