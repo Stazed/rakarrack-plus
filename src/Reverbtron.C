@@ -103,7 +103,7 @@ Reverbtron::cleanup ()
 {
     memset(lxn,0,sizeof(float)*(maxx_size+1));
     memset(hrtf,0,sizeof(float)*(hrtf_size+1));
-
+    
     feedback = 0.0f;
     oldl = 0.0f;
     lpfl->cleanup ();

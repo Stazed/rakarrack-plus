@@ -1804,10 +1804,14 @@ LV2_Handle init_ringlv2(const LV2_Descriptor *descriptor,double sample_freq, con
     //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
     plug->ring = new Ring(sample_freq, plug->period_max);
     plug->noteID = new Recognize(.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
+    plug->noteID->reconota = -1;
     
-//   plug->noteID->setlpf(5500); // default user option in rakarrack FIXME check this
-//   plug->noteID->sethpf(80); // default user option in rakarrack  FIXME check this
+    plug->noteID->setlpf(5500);
+    plug->noteID->sethpf(80);
 
+    plug->comp = new Compressor(sample_freq, plug->period_max);
+    plug->comp->setpreset(0,3); //Final Limiter
+    
     return plug;
 }
 
@@ -1838,8 +1842,9 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
         plug->period_max = nframes;
         plug->ring->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
-       // plug->noteID->setlpf(5500); // default user option in rakarrack FIXME check
-       // plug->noteID->sethpf(80); // default user option in rakarrack   FIXME check
+        plug->comp->lv2_update_params(nframes);
+        plug->noteID->setlpf(5500);
+        plug->noteID->sethpf(80);
     }
     
     // we are good to run now
@@ -1872,12 +1877,8 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
     }
 //see process.C ln 1539
 
-    //TODO may need to make sure input is over some threshold
     if(plug->ring->Pafreq)
     {
-        //copy over the data so that noteID doesn't tamper with it
-//        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-//        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
         if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
         {
@@ -1889,6 +1890,11 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
+    if(plug->ring->Pafreq)
+    {
+        plug->comp->out(plug->output_l_p,plug->output_r_p);
+    }
+    
     //now run
     plug->ring->out(plug->output_l_p,plug->output_r_p);
 
