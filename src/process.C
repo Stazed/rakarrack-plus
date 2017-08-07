@@ -1373,7 +1373,8 @@ RKR::Alg (float *origl, float *origr, void *)
 
 
         if ((Harmonizer_Bypass) && (have_signal)) {
-            if (efx_Har->mira) {
+            if (efx_Har->mira)
+            {
                 if ((efx_Har->PMIDI) || (efx_Har->PSELECT)) {
                     RecNote->schmittFloat (efxoutl, efxoutr);
                     reco=1;
@@ -1385,12 +1386,19 @@ RKR::Alg (float *origl, float *origr, void *)
                         }
                     }
                 }
+            }else
+            {
+                if (RC->cc) 
+                {
+                    efx_Har->r_ratio = RC->r__ratio[0];//pass the found ratio
+                }
             }
         }
 
 
         if ((StereoHarm_Bypass) && (have_signal)) {
-            if (efx_StereoHarm->mira) {
+            if (efx_StereoHarm->mira)
+            {
                 if ((efx_StereoHarm->PMIDI) || (efx_StereoHarm->PSELECT)) {
                     if(!reco) RecNote->schmittFloat (efxoutl, efxoutr);
                     reco=1;
@@ -1403,6 +1411,14 @@ RKR::Alg (float *origl, float *origr, void *)
                             ponlast = 1;
                         }
                     }
+                }
+            }else
+            {
+                if (RC->cc) 
+                {
+                    efx_StereoHarm->r_ratiol = RC->r__ratio[1];
+                    efx_StereoHarm->r_ratior = RC->r__ratio[2];
+                    RC->cc = 0;
                 }
             }
         }

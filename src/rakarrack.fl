@@ -1485,7 +1485,7 @@ if (rkr->StereoHarm_Bypass)
     if (rkr->RC->cc) 
     {
     shar_chordname->copy_label(rkr->RC->NombreAcorde);
-    rkr->RC->cc=0;  
+    //rkr->RC->cc=0; // this now must be done in process Alg()
     shar_chordname->redraw(); 
     rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->RecNote->reconota);      
     rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->RecNote->reconota);      
@@ -1529,7 +1529,7 @@ if (rkr->RControl)
       
       
     }   
-}}
+}} selected
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -7812,7 +7812,7 @@ rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
         }
       }
       Fl_Group SHELFBOOST {
-        user_data 1 open
+        user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button shelf_activar {
@@ -7843,7 +7843,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));} open
           xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
-            label Treble selected
+            label Treble
             xywh {42 42 36 21} labelsize 10
           }
           MenuItem {} {
@@ -17454,7 +17454,8 @@ Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
 fl_message("This setting will be changed the next time you run rakarrack");} {}
   }
-  Function {update_looper()} {} {
+  Function {update_looper()} {open
+  } {
     code {rkr->efx_Looper->getstate();
 
 looper_play->value(rkr->efx_Looper->progstate[0]);
@@ -17607,7 +17608,8 @@ if(rkr->Chorus_Bypass)
     infinity_rate->redraw();  
   }} {}
   }
-  Function {ActACI()} {} {
+  Function {ActACI()} {open
+  } {
     code {int value;
 int i,amax,amin;
 float gain =  0.0;

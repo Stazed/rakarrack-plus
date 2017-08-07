@@ -1439,7 +1439,7 @@ if (rkr->StereoHarm_Bypass)
     if (rkr->RC->cc) 
     {
     shar_chordname->copy_label(rkr->RC->NombreAcorde);
-    rkr->RC->cc=0;  
+    //rkr->RC->cc=0; // this now must be done in process Alg()
     shar_chordname->redraw(); 
     rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->RecNote->reconota);      
     rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->RecNote->reconota);      

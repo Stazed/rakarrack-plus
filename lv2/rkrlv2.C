@@ -738,8 +738,6 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
     plug->comp->changepar(6,1);  //a_out
     plug->comp->changepar(7,30); //knee
 */
-//    plug->init_params = 0; // used for PSELECT - setting default reconota to -1
-
     return plug;
 }
 
@@ -761,7 +759,6 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(*plug->bypass_p && plug->prev_bypass)
     {
         //plug->harm->cleanup(); // Why do this?? It means the user must toggle slider, etc to reset parameters.
-        //plug->init_params = 1; // reset if bypass removed
         return;
     }
  
@@ -796,7 +793,6 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->harm->getpar(i) != val)
     {
         plug->harm->changepar(i,val);
-        //plug->init_params = 1;//set default reconota to -1 if valid
     }
     i++;
     val = (int)*plug->param_p[i];//4 filter freq
@@ -811,7 +807,6 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->harm->changepar(i,val);
         plug->chordID->cleanup();
         if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
-        //plug->init_params = 1;//set default reconota to -1 if valid
     }
     for(i++; i<8; i++) //6-7
     {
@@ -822,7 +817,6 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
             plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
             plug->chordID->fundi = plug->harm->getpar(6);//set root note
             plug->chordID->cc = 1;//mark chord has changed
-           // plug->init_params = 1;//set default reconota to -1 if valid
         }
     }
     for(; i<10; i++) // 8-9
@@ -842,36 +836,6 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
 //        if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
 //    }
 
-
-/*
-From rakarrack.cc ln: 1425
-void RKRGUI::cb_MT_i(Fl_Box*, void*)
-
-if((rkr->efx_Har->PSELECT)|| (rkr->efx_Har->PMIDI))
-{
-
-    if (rkr->RC->cc)
-    {
-        har_chordname->copy_label(rkr->RC->NombreAcorde);
-        if(!rkr->StereoHarm_Bypass) rkr->RC->cc=0;
-        har_chordname->redraw();
-        rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12); // --- this is the line
-    }
- }
-*/
-#if 0
-    if(plug->init_params) // only on change
-    {
-        // This call from above seems for !mira and default (-1) reconata
-        if(plug->harm->PSELECT && !plug->harm->mira )
-        {
-            plug->noteID->reconota = -1;
-            plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota); // reconata = -1
-            plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
-        }
-        plug->init_params = 0; // shut off
-    }
-#endif // 0
 /*
 see Chord() in rkr.fl
 harmonizer, need recChord and recNote.
@@ -895,24 +859,16 @@ see process.C ln 1507
                     }
                 }
             }
-        }
-    }
-#if 0
-// rkrlv2
-    if(plug->harm->mira && plug->harm->PSELECT
-        && have_signal( plug->input_l_p, plug->input_r_p, nframes))
-    {
-        plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p,nframes);
-        if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
+        }else
         {
-            if(plug->noteID->afreq > 0.0)
+            if (plug->chordID->cc) 
             {
                 plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
                 plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+                plug->chordID->cc = 0;
             }
         }
     }
-#endif // 0
 
     if(plug->harm->PSELECT)
     {
@@ -3679,7 +3635,7 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
 
     plug->comp = new Compressor(sample_freq, plug->period_max);
     plug->comp->setpreset(0,3); //Final Limiter
-    // set default values
+
 /*    plug->comp->changepar(1,-24);//threshold
     plug->comp->changepar(2,4);  //ratio
     plug->comp->changepar(3,-10);//output
@@ -3687,10 +3643,6 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
     plug->comp->changepar(5,50); //release
     plug->comp->changepar(6,1);  //a_out
     plug->comp->changepar(7,30); //knee*/
-
-
-    plug->init_params = 0; // used for PSELECT - setting default reconota to -1
-
 
     return plug;
 }
@@ -3746,7 +3698,6 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->sharm->getpar(i) != val)
     {
         plug->sharm->changepar(i,val);
-        plug->init_params = 1;//set default reconota to -1 if valid
     }
     i++;
     val = (int)*plug->param_p[i];// 3 chroma l
@@ -3765,7 +3716,6 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->sharm->getpar(i) != val)
     {
         plug->sharm->changepar(i,val);
-        plug->init_params = 1;//set default reconota to -1 if valid
     }
     i++;
     val = (int)*plug->param_p[i];//6 set chrome 2
@@ -3783,7 +3733,6 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
             plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
             plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         }
-        plug->init_params = 1;//set default reconota to -1 if valid
     }
     for(i++; i<10; i++) //8-9
     {
@@ -3794,7 +3743,6 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
             plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
             plug->chordID->fundi = plug->sharm->getpar(8);//set root note
             plug->chordID->cc = 1;//mark chord has changed
-            plug->init_params = 1;//set default reconota to -1 if valid
         }
     }
 // skip midi mode, not implementing midi here
@@ -3810,35 +3758,16 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->sharm->changepar(i+1,val);
     }
 
-#if 0
-    if(plug->init_params) // only on change
-    {
-        // This call from above seems for !mira and default (-1) reconata
-        if(plug->sharm->PSELECT && !plug->sharm->mira )
-        {
-            plug->noteID->reconota = -1;
-            plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota); // reconata = -1
-            plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota); // reconata = -1
-            plug->sharm->r_ratiol = plug->chordID->r__ratio[1];//pass the found ratio
-            plug->sharm->r_ratior = plug->chordID->r__ratio[2];//pass the found ratio
-            plug->chordID->cc = 0;
-        }
-        plug->init_params = 0; // shut off
-    }
-#endif // 0
     /*
     see Chord() in rkr.fl
     harmonizer, need recChord and recNote.
     see process.C ln 1507
     */
 
-    // seems to need inline for schmittFloat which sends to sustainer
-//    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-//    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
     if(have_signal(plug->output_l_p, plug->output_r_p, nframes))
     {
         if(plug->sharm->mira)
-        {printf("Got here\n");
+        {
             if(plug->sharm->PSELECT)
             {
                 plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
@@ -3851,29 +3780,22 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
                         plug->sharm->r_ratiol = plug->chordID->r__ratio[1];//pass the found ratio
                         plug->sharm->r_ratior = plug->chordID->r__ratio[2];//pass the found ratio
                         plug->noteID->last = plug->noteID->reconota;
-                        printf("plug->sharm->r_ratiol = %f: plug->sharm->r_ratior = %f\n",plug->sharm->r_ratiol,plug->sharm->r_ratior );
                     }
                 }
             }
-        }
-    }
-/*   
-    if(plug->sharm->mira && plug->sharm->PSELECT
-        && have_signal( plug->input_l_p, plug->input_r_p, nframes))
-    {
-        plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
-        if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
+        }else
         {
-            if(plug->noteID->afreq > 0.0)
-            {
+            if (plug->chordID->cc) 
+            {   
                 plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
                 plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
-                plug->sharm->r_ratiol = plug->chordID->r__ratio[1];//pass the found ratio
-                plug->sharm->r_ratior = plug->chordID->r__ratio[2];//pass the found ratio
+                plug->sharm->r_ratiol = plug->chordID->r__ratio[1];
+                plug->sharm->r_ratior = plug->chordID->r__ratio[2];
+                plug->chordID->cc = 0;
             }
         }
     }
-*/
+
     if(plug->sharm->PSELECT)
     {
         plug->comp->out(plug->output_l_p,plug->output_r_p);

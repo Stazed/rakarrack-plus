@@ -127,12 +127,6 @@ void
 Harmonizer::out (float *efxoutl, float *efxoutr)
 {
     int i;
-
-#if 0       // rkrlv2
-    if(!DS_init){
-    	adjust(DS_state,PERIOD);//readjust now that we know period size
-    }
-#endif // 0
     
     if((DS_state != 0) && (Pinterval !=12))
     {
