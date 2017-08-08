@@ -61,7 +61,7 @@
 #include"Infinity.h"
 #include"Phaser.h"
 #include"Gate.h"
-//#include"MIDIConverter.h"
+#include"MIDIConverter.h"
 
 #define EQLV2_URI "http://rakarrack.sourceforge.net/effects.html#eql"
 #define COMPLV2_URI "http://rakarrack.sourceforge.net/effects.html#comp"
@@ -108,14 +108,13 @@
 #define INFLV2_URI "http://rakarrack.sourceforge.net/effects.html#Infinity"
 #define PHASELV2_URI "http://rakarrack.sourceforge.net/effects.html#phas"
 #define GATELV2_URI "http://rakarrack.sourceforge.net/effects.html#gate"
-//#define MIDICLV2_URI "http://rakarrack.sourceforge.net/effects.html#midi_converter"
+#define MIDICLV2_URI "http://rakarrack.sourceforge.net/effects.html#midi_converter"
 
 
 #define RVBFILE_URI "http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile"
 #define DLYFILE_URI "http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile"
 
-// forward declaration
-//class MIDIConverter;
+class MIDIConverter;    // forward declaration
 
 enum RKRLV2_ports_
 {
@@ -195,7 +194,7 @@ enum RKRLV2_effects_
 	IINF,
 	IPHASE,
 	IGATE,
-//	IMIDIC
+	IMIDIC
 };
 
 typedef struct _RKRLV2
@@ -290,7 +289,7 @@ typedef struct _RKRLV2
     Infinity* inf;		//41
     Phaser* phase;      //42
     Gate* gate;         //43
-//    MIDIConverter* midic; //44
+    MIDIConverter* midic; //44
 } RKRLV2;
 
 void forge_midimessage(RKRLV2* plug,

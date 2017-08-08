@@ -233,7 +233,7 @@
         lv2:binary <rkrlv2.so> ;
         rdfs:seeAlso <gate.ttl> .
 # 44 
-#<http://rakarrack.sourceforge.net/effects.html#midi_converter>
-#        a lv2:Plugin, lv2:ConverterPlugin ;
-#        lv2:binary <rkrlv2.so> ;
-#        rdfs:seeAlso <midi_converter.ttl> .
+<http://rakarrack.sourceforge.net/effects.html#midi_converter>
+        a lv2:Plugin, lv2:ConverterPlugin ;
+        lv2:binary <rkrlv2.so> ;
+        rdfs:seeAlso <midi_converter.ttl> .

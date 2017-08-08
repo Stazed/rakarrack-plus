@@ -11,7 +11,7 @@ enum other_ports
     HARMONIZER_MIDI,//unassigned right now
     VOCODER_AUX_IN = 7,
     VOCODER_VU_LEVEL = 8,
-//    MIDIC_NOTE_REGISTER = 7
+    MIDIC_NOTE_REGISTER = 7
 };
 
 // A few helper functions taken from the RKR object
@@ -123,7 +123,7 @@ Vol3_Efx (RKRLV2* plug, uint32_t period)
     }
 }
 
-#if 0
+
 /**
  * add a midi message to the output port
  * This is used by MIDIConverter
@@ -143,7 +143,7 @@ forge_midimessage(RKRLV2* plug,
 	if (0 == lv2_atom_forge_raw(&plug->forge, buffer, size)) return;
 	lv2_atom_forge_pad(&plug->forge, sizeof(LV2_Atom) + size);
 }
-#endif //0
+
 
 //TODO: make this return error is required feature not supported
 void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
@@ -4276,7 +4276,7 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
-#if 0
+
 ///// MIDIConverter /////////
 LV2_Handle init_midiclv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
 {
@@ -4298,43 +4298,49 @@ LV2_Handle init_midiclv2(const LV2_Descriptor *descriptor,double sample_freq, co
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
 
-    plug->midic = new MIDIConverter(0,0, sample_freq);
+    plug->midic = new MIDIConverter(0, sample_freq, plug->period_max);
 
 
     return plug;
 }
 
 void run_midiclv2(LV2_Handle handle, uint32_t nframes)
-{
+{    
+    if( nframes == 0)
+        return;
+    
     int i;
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
 
-    plug->midic->plug = plug;
+    plug->midic->plug = plug;       // for MIDIConverter direct access to lv2 
 
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+
+    // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->midic->cleanup();
-        //copy dry signal
-        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
         return;
     }
-
-    plug->midic->PERIOD = nframes;
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->midic->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    
     const uint32_t out_capacity = plug->atom_out_p->atom.size;
 
     lv2_atom_forge_set_buffer(&plug->forge, (uint8_t*)plug->atom_out_p, out_capacity);
     lv2_atom_forge_sequence_head(&plug->forge, &plug->atom_frame, 0);
 
-    //copy dry signal for gain
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
-    //now set out ports
-    plug->midic->efxoutl = plug->output_l_p;
-    plug->midic->efxoutr = plug->output_r_p;
 
     //check and set changed parameters
     for(i=0; i<plug->nparams; i++)
@@ -4347,7 +4353,7 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
     }
 
     //now run
-    plug->midic->out(plug->output_l_p,plug->output_r_p,nframes);
+    plug->midic->out(plug->output_l_p,plug->output_r_p);
 
     //and set NOTE meter
     *plug->param_p[MIDIC_NOTE_REGISTER] = plug->midic->hay;
@@ -4355,7 +4361,6 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
     xfade_check(plug,nframes);
     return;
 }
-#endif // 0
 
 /////////////////////////////////
 //       END OF FX
@@ -4505,9 +4510,9 @@ void cleanup_rkrlv2(LV2_Handle handle)
     case IGATE:
         delete plug->gate;
         break;
-//    case IMIDIC:
-//        delete plug->midic;
-//        break;
+    case IMIDIC:
+        delete plug->midic;
+        break;
     }
     free(plug);
 }
@@ -5214,7 +5219,6 @@ static const LV2_Descriptor gatelv2_descriptor=
     0//extension
 };
 
-#if 0
 static const LV2_Descriptor midiclv2_descriptor=
 {
     MIDICLV2_URI,
@@ -5226,7 +5230,7 @@ static const LV2_Descriptor midiclv2_descriptor=
     cleanup_rkrlv2,
     0//extension
 };
-#endif //
+
 
 LV2_SYMBOL_EXPORT
 const LV2_Descriptor* lv2_descriptor(uint32_t index)
@@ -5321,8 +5325,8 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &phaselv2_descriptor ;
     case IGATE:
         return &gatelv2_descriptor ;
-//    case IMIDIC:
-//        return &midiclv2_descriptor ;
+    case IMIDIC:
+        return &midiclv2_descriptor ;
     default:
         return 0;
     }

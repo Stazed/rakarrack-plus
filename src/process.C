@@ -302,7 +302,7 @@ RKR::RKR ()
 
     beat = new beattracker(fSample_rate, period);
     efx_Tuner = new Tuner (fSample_rate);
-    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate);
+    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate, period);
     RecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
     RC = new RecChord ();
 
@@ -1369,7 +1369,7 @@ RKR::Alg (float *origl, float *origr, void *)
             efx_Tuner->schmittFloat (period, efxoutl, efxoutr, RecNote->freqs, RecNote->lfreqs);
 
         if (MIDIConverter_Bypass)
-            efx_MIDIConverter->schmittFloat (period, efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
+            efx_MIDIConverter->schmittFloat (efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
 
 
         if ((Harmonizer_Bypass) && (have_signal)) {
