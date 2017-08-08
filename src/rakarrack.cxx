@@ -20959,6 +20959,12 @@ e a stompbox Opto Trem");
         Midi_out_Counter->textsize(11);
         Midi_out_Counter->callback((Fl_Callback*)cb_Midi_out_Counter);
       } // Fl_Counter* Midi_out_Counter
+      { Use_FFT = new Fl_Check_Button(571, 119, 15, 15, "FFT");
+        Use_FFT->down_box(FL_BORDER_BOX);
+        Use_FFT->labelsize(10);
+        Use_FFT->labelcolor(FL_BACKGROUND2_COLOR);
+        Use_FFT->align(Fl_Align(FL_ALIGN_TOP));
+      } // Fl_Check_Button* Use_FFT
       { Trig_Adj = new SliderW(667, 100, 117, 11, "Trigger");
         Trig_Adj->type(5);
         Trig_Adj->box(FL_FLAT_BOX);

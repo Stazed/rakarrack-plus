@@ -3483,6 +3483,7 @@ private:
   inline void cb_Midi_out_Counter_i(Fl_Counter*, void*);
   static void cb_Midi_out_Counter(Fl_Counter*, void*);
 public:
+  Fl_Check_Button *Use_FFT;
   SliderW *Trig_Adj;
 private:
   inline void cb_Trig_Adj_i(SliderW*, void*);

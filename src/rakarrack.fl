@@ -904,7 +904,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {88 91 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {45 429 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1529,7 +1529,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -10354,7 +10354,7 @@ rkr->calculavol(2);}
         }
       }
       Fl_Group Midi {
-        user_data 1
+        user_data 1 open
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button nidi_activar {
@@ -10429,6 +10429,10 @@ MIDI_LABEL->redraw_label();}
           callback {rkr->efx_MIDIConverter->setmidichannel((int)o->value()-1);}
           xywh {601 89 60 17} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
         }
+        Fl_Check_Button Use_FFT {
+          label FFT selected
+          xywh {571 119 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+        }
         Fl_Value_Slider Trig_Adj {
           label Trigger
           callback {rkr->efx_MIDIConverter->setTriggerAdjust((int)o->value());}
@@ -10465,7 +10469,7 @@ BankWin_Label(filename);
         }
       }
       Fl_Group Metro {
-        user_data 1
+        user_data 1 open
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
