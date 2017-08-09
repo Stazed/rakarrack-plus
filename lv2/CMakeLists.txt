@@ -82,6 +82,8 @@ add_library(rkrlv2 SHARED
   ../src/MIDIConverter.C
 )
 
+target_compile_definitions(rkrlv2 PRIVATE LV2RUN=1)
+
 set_target_properties(rkrlv2 PROPERTIES PREFIX "")
 
 set_target_properties(rkrlv2 PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)

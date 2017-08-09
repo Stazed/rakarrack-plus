@@ -18,8 +18,7 @@
 #include <complex.h>
 #include <fftw3.h>
 
-#undef LV2RUN     // for rakarrack FIXME for build
-//#define LV2RUN     //  for lv2 FIXME for build
+
 #ifdef LV2RUN
 
 #include "lv2/lv2plug.in/ns/ext/midi/midi.h"
