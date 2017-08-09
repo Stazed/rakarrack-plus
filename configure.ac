@@ -342,7 +342,7 @@ fi
 
 
 LIBS="`$FLTKCONFIG --use-images --ldflags` $LIBS"
-CXXFLAGS="-Wall $SSE $ALTIVEC -ffast-math $VECTOR -pipe $ADDS -fsigned-char `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags sndfile` `pkg-config --cflags jack` $CXXFLAGS"
+CXXFLAGS="-Wall $SSE $ALTIVEC -std=gnu++98 -ffast-math $VECTOR -pipe $ADDS -fsigned-char `$FLTKCONFIG --use-images --cxxflags` `pkg-config --cflags sndfile` `pkg-config --cflags jack` $CXXFLAGS"
 AC_CONFIG_FILES([Makefile src/Makefile man/Makefile data/Makefile icons/Makefile doc/Makefile doc/help/Makefile doc/help/imagenes/Makefile doc/help/css/Makefile extra/Makefile])
 AC_OUTPUT
 
