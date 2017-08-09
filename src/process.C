@@ -1369,8 +1369,15 @@ RKR::Alg (float *origl, float *origr, void *)
             efx_Tuner->schmittFloat (period, efxoutl, efxoutr, RecNote->freqs, RecNote->lfreqs);
 
         if (MIDIConverter_Bypass)
-            efx_MIDIConverter->schmittFloat (efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
-
+        {
+            if(efx_MIDIConverter->getpar(5))
+            {
+                efx_MIDIConverter->fftFloat (efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
+            }else
+            {
+                efx_MIDIConverter->schmittFloat (efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
+            }
+        }
 
         if ((Harmonizer_Bypass) && (have_signal)) {
             if (efx_Har->mira)

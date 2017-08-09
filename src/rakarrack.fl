@@ -904,7 +904,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {45 429 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {109 91 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1028,7 +1028,7 @@ Show_Next_Time();}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings} open
+          label {&Settings}
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -10240,7 +10240,7 @@ TUNER_LABEL->redraw_label();}
         }
       }
       Fl_Group InOut {
-        user_data 1
+        user_data 1 open
         xywh {2 24 164 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button ActivarGeneral {
@@ -10279,8 +10279,8 @@ if (!o->value())
         } 
     if (rkr->MIDIConverter_Bypass)  
         {
-            nidi_activar->value(0);
-            nidi_activar->do_callback();
+            midi_activar->value(0);
+            midi_activar->do_callback();
         }
              
 rkr->cleanup_efx();
@@ -10357,7 +10357,7 @@ rkr->calculavol(2);}
         user_data 1 open
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
-        Fl_Light_Button nidi_activar {
+        Fl_Light_Button midi_activar {
           label On
           user_data 2
           callback {if ((int)o->value()==0)
@@ -10381,27 +10381,28 @@ MIDI_LABEL->redraw_label();}
           callback {switch((int)o->value())
 {
   case 0:
-  rkr->efx_MIDIConverter->Moctave=-2;
+  rkr->efx_MIDIConverter->changepar(4,-2);
   break;
   
   case 1:
-  rkr->efx_MIDIConverter->Moctave=-1;
+  rkr->efx_MIDIConverter->changepar(4,-1);
   break;
 
   case 2:
-  rkr->efx_MIDIConverter->Moctave=0;
+  rkr->efx_MIDIConverter->changepar(4,0);
   break;
 
   case 3:
-  rkr->efx_MIDIConverter->Moctave=1;
+  rkr->efx_MIDIConverter->changepar(4,1);
+
   break;
 
   case 4:
-  rkr->efx_MIDIConverter->Moctave=2;
+  rkr->efx_MIDIConverter->changepar(4,2);
   break;
 
-}}
-          xywh {624 118 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
+}} open selected
+          xywh {624 118 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
             label {-2}
@@ -10426,22 +10427,24 @@ MIDI_LABEL->redraw_label();}
         }
         Fl_Counter Midi_out_Counter {
           label Channel
-          callback {rkr->efx_MIDIConverter->setmidichannel((int)o->value()-1);}
+          callback {rkr->efx_MIDIConverter->changepar(3, (int)o->value());}
           xywh {601 89 60 17} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
         }
         Fl_Check_Button Use_FFT {
-          label FFT selected
+          label FFT
+          user_data 2
+          callback {rkr->efx_MIDIConverter->changepar(5, (int)o->value());}
           xywh {571 119 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
         }
         Fl_Value_Slider Trig_Adj {
           label Trigger
-          callback {rkr->efx_MIDIConverter->setTriggerAdjust((int)o->value());}
+          callback {rkr->efx_MIDIConverter->changepar(1,(int)o->value());}
           xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 2 maximum 60 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider Vel_Adj {
           label Velocity
-          callback {rkr->efx_MIDIConverter->setVelAdjust((int)o->value());}
+          callback {rkr->efx_MIDIConverter->changepar(2,(int)o->value());}
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 1 maximum 100 step 1 textcolor 7
           class SliderW
         }
@@ -12940,8 +12943,8 @@ MIDIOctave->value(k);
 MIDIOctave->do_callback();
 
 rakarrack.get(rkr->PrefNom("MIDI Converter On/Off"),k,0);
-nidi_activar->value(k);
-nidi_activar->do_callback();
+midi_activar->value(k);
+midi_activar->do_callback();
 
 //Metronome
 
@@ -13336,7 +13339,8 @@ for(i=1; i<=JackIn->size();i++)
 
 }} {}
   }
-  Function {Put_Loaded()} {} {
+  Function {Put_Loaded()} {open
+  } {
     code {//General
 int i;
 
@@ -16536,7 +16540,8 @@ switch (i)
 
 rkr->Mvalue=0;} {}
   }
-  Function {ActOnOff()} {} {
+  Function {ActOnOff()} {open
+  } {
     code {int miralo;
 
 
@@ -16746,8 +16751,8 @@ case 46:
   Tap_activar->do_callback();
   break;
   case 122:
-  nidi_activar->value(rkr->MIDIConverter_Bypass);
-  nidi_activar->do_callback();
+  midi_activar->value(rkr->MIDIConverter_Bypass);
+  midi_activar->do_callback();
   break;
   case 123:
   tuner_activar->value(rkr->Tuner_Bypass);

@@ -3467,10 +3467,10 @@ public:
   NewVum *output_vur;
   Fl_Box *LABEL_IO;
   Fl_Group *Midi;
-  Fl_Light_Button *nidi_activar;
+  Fl_Light_Button *midi_activar;
 private:
-  inline void cb_nidi_activar_i(Fl_Light_Button*, void*);
-  static void cb_nidi_activar(Fl_Light_Button*, void*);
+  inline void cb_midi_activar_i(Fl_Light_Button*, void*);
+  static void cb_midi_activar(Fl_Light_Button*, void*);
 public:
   Fl_Choice *MIDIOctave;
 private:
@@ -3484,6 +3484,10 @@ private:
   static void cb_Midi_out_Counter(Fl_Counter*, void*);
 public:
   Fl_Check_Button *Use_FFT;
+private:
+  inline void cb_Use_FFT_i(Fl_Check_Button*, void*);
+  static void cb_Use_FFT(Fl_Check_Button*, void*);
+public:
   SliderW *Trig_Adj;
 private:
   inline void cb_Trig_Adj_i(SliderW*, void*);
