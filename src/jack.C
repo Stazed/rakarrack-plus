@@ -219,7 +219,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
         JackOUT->jack_process_midievents(&midievent);
     }
 
-    for (i=0; i<=JackOUT->efx_MIDIConverter->ev_count; i++) {
+    for (i=1; i<=JackOUT->efx_MIDIConverter->ev_count; i++) {
         jack_midi_event_write(dataout,
                               JackOUT->efx_MIDIConverter->Midi_event[i].time,
                               JackOUT->efx_MIDIConverter->Midi_event[i].dataloc,

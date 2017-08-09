@@ -454,8 +454,6 @@ MIDIConverter::MIDI_Send_Note_On (int nota, float val_sum, float *freqs, float *
 
     forge_midimessage(plug,0, midi_ON_msg,3);
 
-    //printf("note ON anota %d\n", (int)anota);
-
 #else
     // ALSA
     snd_seq_event_t ev;
@@ -466,17 +464,17 @@ MIDIConverter::MIDI_Send_Note_On (int nota, float val_sum, float *freqs, float *
     snd_seq_event_output_direct (port, &ev);
 
     // JACK
-    ev_count++;
-    Midi_event[ev_count].dataloc=&moutdata[moutdatasize];
-    Midi_event[ev_count].time=0;
-    Midi_event[ev_count].len=3;
-
     moutdata[moutdatasize]=144+channel;
     moutdatasize++;
     moutdata[moutdatasize]=anota;
     moutdatasize++;
     moutdata[moutdatasize]=velocity;
     moutdatasize++;
+    
+    ev_count++;
+    Midi_event[ev_count].dataloc=moutdata;
+    Midi_event[ev_count].time=0;
+    Midi_event[ev_count].len=3;
 
 #endif // LV2RUN
 
@@ -496,7 +494,6 @@ MIDIConverter::MIDI_Send_Note_Off (int nota)
 
     forge_midimessage(plug,0, midi_OFF_msg,3);
 
-    //printf("note off anota %d\n", (int)anota);
 #else
     // ALSA
     snd_seq_event_t ev;
@@ -507,15 +504,20 @@ MIDIConverter::MIDI_Send_Note_Off (int nota)
     snd_seq_event_output_direct (port, &ev);
 
     // JACK
-    ev_count++;
-    Midi_event[ev_count].dataloc=&moutdata[moutdatasize];
-    Midi_event[ev_count].time=0;
-    Midi_event[ev_count].len=2;
-
+    
     moutdata[moutdatasize]=128+channel;
     moutdatasize++;
     moutdata[moutdatasize]=anota;
     moutdatasize++;
+    moutdata[moutdatasize]=64;
+    moutdatasize++;
+    
+    
+    ev_count++;
+    Midi_event[ev_count].dataloc=moutdata;
+    Midi_event[ev_count].time=0;
+    Midi_event[ev_count].len=3;
+
 #endif // LV2RUN
 };
 
