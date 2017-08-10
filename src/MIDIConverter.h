@@ -18,6 +18,7 @@
 #include <complex.h>
 #include <fftw3.h>
 
+class RKR;          // Forward declaration
 
 #ifdef LV2RUN
 
@@ -41,7 +42,7 @@ struct Midi_Event {
 class MIDIConverter
 {
 public:
-    MIDIConverter (char *jname, double sample_rate, uint32_t intermediate_bufsize);
+    MIDIConverter (char *jname, RKR *_rkr, double sample_rate, uint32_t intermediate_bufsize);
     ~MIDIConverter ();
 
     void out (float * efxoutl, float * efxoutr);
@@ -78,21 +79,23 @@ public:
     int preparada;
     int ponla;
     int velocity;
-    int moutdatasize;
-    int ev_count;
     int Moctave;
     uint32_t PERIOD;
 
     float VelVal;
     uint8_t        midi_ON_msg[3];
     uint8_t        midi_OFF_msg[3];
+    RKR *rkr;       // for passed jack port buffer
 
 #ifdef LV2RUN
     _RKRLV2* plug; // for access to forge_midimessage()
 #else
-    jack_midi_data_t  moutdata[2048];
-    Midi_Event Midi_event[2048];
+    jack_midi_data_t  moutdata_ON[2048];
+    jack_midi_data_t  moutdata_OFF[2048];
+    Midi_Event Midi_event_ON[2048];
+    Midi_Event Midi_event_OFF[2048];
     snd_seq_t *port;
+    void *dataout_ON, *dataout_OFF;
 #endif // LV2RUN
 
 private:

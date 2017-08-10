@@ -18,8 +18,9 @@
 #define MAX_PEAKS 8
 
 
-MIDIConverter::MIDIConverter (char *jname, double sample_rate, uint32_t intermediate_bufsize)
+MIDIConverter::MIDIConverter (char *jname, RKR *_rkr, double sample_rate, uint32_t intermediate_bufsize)
 {
+    rkr = _rkr;     // for jack midi event write
     SAMPLE_RATE = sample_rate;
     fSAMPLE_RATE = (float)sample_rate;
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
@@ -34,8 +35,6 @@ MIDIConverter::MIDIConverter (char *jname, double sample_rate, uint32_t intermed
     TrigVal = .25f;
     hay = 0;    // This is used for the red light on/off display
     ponla = 0;
-    moutdatasize=0;
-    ev_count=0;
 
     schmittBuffer = NULL;
     schmittPointer = NULL;
@@ -213,8 +212,8 @@ MIDIConverter::displayFrequency (float ffreq, float val_sum, float *freqs, float
 
         MIDI_Send_Note_On (lanota, val_sum, freqs, lfreqs);
         nota_actual = lanota;
-    }
-
+    }  
+    
     if ((lanota > 0 && lanota < 128) && (lanota != nota_actual))
         preparada = lanota;
 
@@ -464,18 +463,26 @@ MIDIConverter::MIDI_Send_Note_On (int nota, float val_sum, float *freqs, float *
     snd_seq_event_output_direct (port, &ev);
 
     // JACK
-    moutdata[moutdatasize]=144+channel;
+ 
+    int moutdatasize = 0;
+    moutdata_ON[moutdatasize]=144+channel;
     moutdatasize++;
-    moutdata[moutdatasize]=anota;
+    moutdata_ON[moutdatasize]=anota;
     moutdatasize++;
-    moutdata[moutdatasize]=velocity;
+    moutdata_ON[moutdatasize]=velocity;
     moutdatasize++;
     
-    ev_count++;
-    Midi_event[ev_count].dataloc=moutdata;
-    Midi_event[ev_count].time=0;
-    Midi_event[ev_count].len=3;
-
+    Midi_event_ON[0].dataloc=moutdata_ON;
+    Midi_event_ON[0].time=0;
+    Midi_event_ON[0].len=3;
+    
+    dataout_ON = rkr->dataout;  // dataout = jack_port_get_buffer(jack_midi_out, nframes);
+ 
+    jack_midi_event_write(dataout_ON,
+                              Midi_event_ON[0].time,
+                              Midi_event_ON[0].dataloc,
+                              Midi_event_ON[0].len);
+    
 #endif // LV2RUN
 
 };
@@ -504,20 +511,26 @@ MIDIConverter::MIDI_Send_Note_Off (int nota)
     snd_seq_event_output_direct (port, &ev);
 
     // JACK
+    int moutdatasize = 0;
     
-    moutdata[moutdatasize]=128+channel;
+    moutdata_OFF[moutdatasize]=128+channel;
     moutdatasize++;
-    moutdata[moutdatasize]=anota;
+    moutdata_OFF[moutdatasize]=anota;
     moutdatasize++;
-    moutdata[moutdatasize]=64;
+    moutdata_OFF[moutdatasize]=64;
     moutdatasize++;
     
+    Midi_event_OFF[0].dataloc=moutdata_OFF;
+    Midi_event_OFF[0].time=0;
+    Midi_event_OFF[0].len=3;
     
-    ev_count++;
-    Midi_event[ev_count].dataloc=moutdata;
-    Midi_event[ev_count].time=0;
-    Midi_event[ev_count].len=3;
-
+    dataout_OFF = rkr->dataout; // dataout = jack_port_get_buffer(jack_midi_out, nframes);
+    
+    jack_midi_event_write(dataout_OFF,
+                              Midi_event_OFF[0].time,
+                              Midi_event_OFF[0].dataloc,
+                              Midi_event_OFF[0].len);
+    
 #endif // LV2RUN
 };
 

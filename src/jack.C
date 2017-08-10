@@ -83,7 +83,8 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
     jack_midi_out =
         jack_port_register(jackclient, "MC out", JACK_DEFAULT_MIDI_TYPE, JackPortIsOutput, 0);
 
-
+    JackOUT->jack_midi_out = jack_midi_out;     // Passed to MIDIConverter
+    
     if (jack_activate (jackclient)) {
         fprintf (stderr, "Cannot activate jack client.\n");
         return (2);
@@ -212,8 +213,10 @@ jackprocess (jack_nframes_t nframes, void *arg)
 
     dataout = jack_port_get_buffer(jack_midi_out, nframes);
     jack_midi_clear_buffer(dataout);
+    
+    JackOUT->dataout = dataout;     // passed to MIDIConverter
 
-
+#if 0   // old code did not work
     for (i = 0; i < count; i++) {
         jack_midi_event_get(&midievent, data, i);
         JackOUT->jack_process_midievents(&midievent);
@@ -229,7 +232,7 @@ jackprocess (jack_nframes_t nframes, void *arg)
     JackOUT->efx_MIDIConverter->moutdatasize = 0;
     JackOUT->efx_MIDIConverter->ev_count = 0;
 
-
+#endif
 
     memcpy (JackOUT->efxoutl, inl,
             sizeof (jack_default_audio_sample_t) * nframes);
