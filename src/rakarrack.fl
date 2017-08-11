@@ -904,7 +904,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {109 91 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {133 99 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -10401,7 +10401,7 @@ MIDI_LABEL->redraw_label();}
   rkr->efx_MIDIConverter->changepar(4,2);
   break;
 
-}} open selected
+}} open
           xywh {624 118 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -13358,7 +13358,7 @@ Balance->value((int)(rkr->Fraction_Bypass*100.0));
 ActivarGeneral->value(rkr->Bypass);
 
 if (rkr->Bypass==0)
-{
+\{
 
 rkr->val_il_sum=-50;
 rkr->val_ir_sum=-50;
@@ -13373,14 +13373,24 @@ output_vul->value(-50);
 output_vur->value(-50);
 
 
-}
+\}
 
 
-for(i=0;i<10;i++)
- {
-   switch(rkr->efx_order[i])
-    {
-      
+/*  Original set and cleared for only the ten current from efx_order[] which did not
+    clear other efx from leftover settings. The new behavior will reset all efx to default
+    if not used. The reset will occur when the New button is pressed or a new bank is selected.
+    If an existing bank repositions an effect, by replacement and then moving it to a new location
+    then the settings are kept from previous.
+    
+    Legacy:
+    for(i=0;i<10;i++) \{
+    switch(rkr->efx_order[i])\{
+*/
+
+for(i=0;i<rkr->NumEffects;i++)
+\{
+     switch(i)
+     \{     
 
      case 0: //EQ1
      eq_activar->value(rkr->EQ1_Bypass);
@@ -13619,11 +13629,12 @@ for(i=0;i<10;i++)
     infinity_preset->do_callback(infinity_preset,1);
     break;
 
-  }
+  \}
 
-}
+\}
 
-reordena();} {}
+reordena();} {selected
+    }
   }
   Function {tick(void* v)} {return_type {static void}
   } {

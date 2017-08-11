@@ -23296,11 +23296,21 @@ void RKRGUI::Put_Loaded() {
   }
   
   
-  for(i=0;i<10;i++)
-   {
-     switch(rkr->efx_order[i])
-      {
-        
+  /*  Original set and cleared for only the ten current from efx_order[] which did not
+      clear other efx from leftover settings. The new behavior will reset all efx to default
+      if not used. The reset will occur when the New button is pressed or a new bank is selected.
+      If an existing bank repositions an effect, by replacement and then moving it to a new location
+      then the settings are kept from previous.
+      
+      Legacy:
+      for(i=0;i<10;i++) {
+      switch(rkr->efx_order[i]){
+  */
+  
+  for(i=0;i<rkr->NumEffects;i++)
+  {
+       switch(i)
+       {     
   
        case 0: //EQ1
        eq_activar->value(rkr->EQ1_Bypass);

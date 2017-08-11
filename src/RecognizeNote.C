@@ -59,8 +59,6 @@ Recognize::Recognize (float trig, float tune, double sample_rate, uint32_t inter
 
     initialize();
 
-//    reconota = last = -1;
-
     update_freqs(tune);
     schmittInit (24, sample_rate);
 
@@ -225,7 +223,6 @@ Recognize::displayFrequency (float freq)
         offset = lrintf(nfreq / 20.0);
         if (fabsf(lafreq-freq)>offset) {
             lafreq = nfreq;
-//            last = reconota;        // FIXME check this for rakarrack - from rkrlv2
             reconota = 24 + (octave * 12) + note - 3;
 
 //    printf("%f\n",lafreq);

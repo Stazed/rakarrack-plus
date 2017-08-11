@@ -1178,9 +1178,19 @@ RKR::Actualizar_Audio ()
     Ring_Bypass = 0;
     StereoHarm_Bypass = 0;
 
-
+/*  Original set and cleared for only the ten current from efx_order[] which did not
+    clear other efx from leftover settings. The new behavior will reset all efx to default
+    if not used. The reset will occur when the New button is pressed or a new bank is selected.
+    If an existing bank repositions an effect, by replacement and then moving it to a new location
+    then the settings are kept from previous.
+    Legacy:
     for (j=0; j<10; j++) {
         switch(efx_order[j]) {
+*/
+           
+    for (j=0; j<NumEffects; j++) {
+        switch(j) {
+            
         case 0: //EQ1
             EQ1_Bypass = 0;
             efx_EQ1->cleanup();
@@ -1887,7 +1897,7 @@ RKR::New ()
 
 
     for (k = 0; k < 12; k++)
-        efx_order[k] = presets[10][k];
+        efx_order[k] = presets[10][k];  // magic number 10 is order
 
 
 
