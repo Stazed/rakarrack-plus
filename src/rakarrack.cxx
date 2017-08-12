@@ -21197,7 +21197,7 @@ e a stompbox Opto Trem");
         DAuthor->align(Fl_Align(100|FL_ALIGN_INSIDE));
       } // Fl_Box* DAuthor
       { RandomP = new Fl_Button(175, 141, 59, 14, "Random");
-        RandomP->shortcut(0xffc6);
+        RandomP->shortcut(0xffc4);
         RandomP->color((Fl_Color)62);
         RandomP->labelsize(10);
         RandomP->callback((Fl_Callback*)cb_RandomP, (void*)(77));
@@ -21241,7 +21241,7 @@ e a stompbox Opto Trem");
         HideUE->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* HideUE
       { SwitchMod = new Fl_Button(480, 137, 32, 18, "Sw");
-        SwitchMod->shortcut(0xffc6);
+        SwitchMod->shortcut(0xffc5);
         SwitchMod->color((Fl_Color)62);
         SwitchMod->labelsize(10);
         SwitchMod->callback((Fl_Callback*)cb_SwitchMod, (void*)(77));
@@ -21257,7 +21257,7 @@ e a stompbox Opto Trem");
       Tap->user_data((void*)(1));
       Tap->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { Tap_activar = new Fl_Light_Button(525, 144, 38, 18, "On");
-        Tap_activar->shortcut(0x6d);
+        Tap_activar->shortcut(0x68);
         Tap_activar->color((Fl_Color)62);
         Tap_activar->selection_color((Fl_Color)1);
         Tap_activar->labelsize(10);

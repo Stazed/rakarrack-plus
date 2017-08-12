@@ -10575,7 +10575,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -10738,8 +10738,8 @@ if(rkr->Tap_Updated) UpdateTGUI();}
         Fl_Button RandomP {
           label Random
           user_data 77
-          callback {RandomPreset();}
-          xywh {175 141 59 14} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
+          callback {RandomPreset();} selected
+          xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
@@ -10801,11 +10801,11 @@ else
   Metro->hide();
   Midi->show();
  }}
-          xywh {480 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
+          xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsize 10 align 80 when 6
         }
       }
       Fl_Group Tap {
-        user_data 1
+        user_data 1 open
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -10815,7 +10815,7 @@ else
 if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
 ChangeActives();
 TAP_LABEL->redraw_label();}
-          xywh {525 144 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
+          xywh {525 144 38 18} shortcut 0x68 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice T_SEL {
           label Input
@@ -18100,8 +18100,7 @@ sprintf(Rname,"%s",s->text());
 s->remove(s->value());
 s->value(0);
 s->redraw();
-rkr->DelIntPreset(num,Rname);} {selected
-    }
+rkr->DelIntPreset(num,Rname);} {}
   }
   Function {Prep_Reorden(int source, int dest)} {} {
     code {int x = rkr->efx_order[source];
