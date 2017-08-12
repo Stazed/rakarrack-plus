@@ -1854,7 +1854,7 @@ rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));}
         }
       }
       Fl_Group COMPRESS {
-        user_data 1 open
+        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button compress_activar {
@@ -7156,7 +7156,7 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
 }
 rkr->efx_Looper->changepar(1,(int)o->value());
 update_looper();}
-          xywh {327 330 44 22} type Toggle shortcut 0xffc2
+          tooltip {Play - Shortcut 'F5'} xywh {327 330 44 22} type Toggle shortcut 0xffc2
         }
         Fl_Button looper_stop {
           label {@||}
@@ -7168,7 +7168,7 @@ update_looper();}
 }
 rkr->efx_Looper->changepar(2,(int)o->value());
 update_looper();}
-          xywh {378 330 44 22} type Toggle shortcut 0xffc3
+          tooltip {Stop - Shortcut 'F6'} xywh {378 330 44 22} type Toggle shortcut 0xffc3
         }
         Fl_Button looper_record {
           label {@circle}
@@ -10208,7 +10208,7 @@ WRfreq->copy_label("");
 WNfreq->copy_label("");
 ChangeActives();
 TUNER_LABEL->redraw_label();}
-          xywh {526 28 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
+          tooltip {Enable Tuner - Shortcut 'T'} xywh {526 28 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Progress tuner_bar {
           xywh {586 31 205 14} box THIN_DOWN_BOX color 47 selection_color 88 align 80
@@ -10286,14 +10286,14 @@ if (!o->value())
 rkr->cleanup_efx();
 
 }}
-          xywh {6 30 52 18} down_box BORDER_BOX shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
+          tooltip {Enable rakarrack - Shortcut 'R'} xywh {6 30 52 18} down_box BORDER_BOX shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
         }
         Fl_Button BostBut {
           label {+10dB}
           user_data 78
           callback {if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;}
-          xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
+          tooltip {+10 dB Booster - Shortcut 'F10'} xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
         }
         Fl_Value_Slider Balance {
           label {FX%}
@@ -10327,8 +10327,8 @@ rkr->calculavol(1);}
 } 
 
 rkr->Master_Volume=(float)((o->value()+50)/100.0);
-rkr->calculavol(2);}
-          xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
+rkr->calculavol(2);} selected
+          tooltip {Shortcut 'F2' decrease volume, 'F3' Increase volume} xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class SliderW
         }
         Fl_Slider input_vul {
@@ -10373,7 +10373,7 @@ Midi_out_Counter->do_callback();
 
 ChangeActives();
 MIDI_LABEL->redraw_label();}
-          xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
+          tooltip {Enable MIDI Converter - Shortcut 'M'} xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice MIDIOctave {
           label Octave
@@ -10401,7 +10401,7 @@ MIDI_LABEL->redraw_label();}
   rkr->efx_MIDIConverter->changepar(4,2);
   break;
 
-}} open
+}}
           xywh {624 118 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -10472,7 +10472,7 @@ BankWin_Label(filename);
         }
       }
       Fl_Group Metro {
-        user_data 1 open
+        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -10490,7 +10490,7 @@ rkr->Metro_Bypass=(int)o->value();
 
 ChangeActives();
 Metro_Label->redraw_label();}
-          xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
+          tooltip {Enable Metronome - Shortcut 'M'} xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice MetroBar {
           label {Time Sig.}
@@ -10656,7 +10656,7 @@ DisAssigns();
 FillML(0);
 Prepare_Order();
 Put_Loaded();}
-          xywh {174 50 64 18} shortcut 0x6e color 62 labelsize 12
+          tooltip {New preset - Shortcut 'N'} xywh {174 50 64 18} shortcut 0x6e color 62 labelsize 12
         }
         Fl_Button L_preset {
           label Load
@@ -10667,7 +10667,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkr");
 rkr->loadfile(filename);
 Put_Loaded();}
-          xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
+          tooltip {Open load preset window - Shortcut 'L'} xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
         }
         Fl_Button S_preset {
           label Save
@@ -10679,7 +10679,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
 rkr->savefile(filename);}
-          xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
+          tooltip {Open save preset window - Shortcut 'S'} xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
         }
         Fl_Light_Button Compare {
           label Compare
@@ -10696,7 +10696,7 @@ else
  rkr->Bank_to_Preset(0);
  Put_Loaded();
 }}
-          xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
+          tooltip {Compare to bank preset - Shortcut 'P'} xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
         }
         Fl_Button B_preset {
           label Bank
@@ -10710,7 +10710,7 @@ ScanDir();
 }
 else
 BankWindow->hide();}
-          xywh {448 50 64 18} shortcut 0x62 color 62 labelsize 12
+          tooltip {Open bank window - Shortcut 'B'} xywh {448 50 64 18} shortcut 0x62 color 62 labelsize 12
         }
         Fl_Input WPreset_Name {
           callback {strcpy(rkr->Preset_Name,o->value());}
@@ -10729,7 +10729,7 @@ FillML(0);
 Prepare_Order();
 Put_Loaded();
 if(rkr->Tap_Updated) UpdateTGUI();}
-          xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
+          tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
         Fl_Box DAuthor {
           user_data 7
@@ -10738,8 +10738,8 @@ if(rkr->Tap_Updated) UpdateTGUI();}
         Fl_Button RandomP {
           label Random
           user_data 77
-          callback {RandomPreset();} selected
-          xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
+          callback {RandomPreset();}
+          tooltip {Random Preset selection - Shortcut 'F7'} xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
@@ -10754,7 +10754,7 @@ put_icon(Order);
 }
 else
 Order->hide();}
-          xywh {247 132 195 24} shortcut 0x6f color 62 align 80 when 6
+          tooltip {Open preset order window - Shortcut 'O'} xywh {247 132 195 24} shortcut 0x6f color 62 align 80 when 6
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)
@@ -10784,7 +10784,7 @@ rkr->deachide=1;
 }
  
 reordena();}
-          xywh {445 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
+          tooltip {Hide/Show unused Effects - Shortcut 'F9'} xywh {445 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
         }
         Fl_Button SwitchMod {
           label Sw
@@ -10801,11 +10801,12 @@ else
   Metro->hide();
   Midi->show();
  }}
-          xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsize 10 align 80 when 6
+          tooltip {Switch between Midi Converter &
+Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsize 10 align 80 when 6
         }
       }
       Fl_Group Tap {
-        user_data 1 open
+        user_data 1
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -10815,7 +10816,7 @@ else
 if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
 ChangeActives();
 TAP_LABEL->redraw_label();}
-          xywh {525 144 38 18} shortcut 0x68 color 62 selection_color 1 labelsize 10 when 1
+          tooltip {Enable Tap Tempo - Shortcut 'H'} xywh {525 144 38 18} shortcut 0x68 color 62 selection_color 1 labelsize 10 when 1
         }
         Fl_Choice T_SEL {
           label Input
@@ -10969,7 +10970,7 @@ UpdateTGUI();
 T_DIS->value(rkr->TapTempo());
 UpdateTGUI();
 }}
-          xywh {671 165 38 23} shortcut 0x67 labelsize 12
+          tooltip {Tap tempo set - Shortcut 'G'} xywh {671 165 38 23} shortcut 0x67 labelsize 12
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
@@ -11133,7 +11134,7 @@ unlight_preset(rkr->Selected_Preset);
     Fl_Window Order {
       callback {save_stat(2);
 Order->hide();}
-      xywh {759 23 500 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
+      xywh {759 49 500 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
         xywh {1 1 600 400}
@@ -11287,7 +11288,7 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();} open
+Settings->hide();}
       xywh {1388 103 640 528} type Double color 4 hide size_range {640 528 0 0}
     } {
       Fl_Box Fondo2 {
@@ -11461,7 +11462,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
+          user_data 1
           xywh {0 26 635 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -12199,7 +12200,7 @@ ScanDir();}
       callback {CancelRec->do_callback();
 save_stat(5);
 MIDILearn->hide();}
-      xywh {1429 23 640 480} type Double hide
+      xywh {1279 49 640 480} type Double hide
     } {
       Fl_Box Fondo4 {
         xywh {1 1 640 480}

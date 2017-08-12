@@ -17616,11 +17616,13 @@ R average.");
         o->labelcolor(FL_BACKGROUND2_COLOR);
       } // Fl_Box* o
       { looper_play = new Fl_Button(327, 330, 44, 22, "@|>");
+        looper_play->tooltip("Play - Shortcut \'F5\'");
         looper_play->type(1);
         looper_play->shortcut(0xffc2);
         looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
       } // Fl_Button* looper_play
       { looper_stop = new Fl_Button(378, 330, 44, 22, "@||");
+        looper_stop->tooltip("Stop - Shortcut \'F6\'");
         looper_stop->type(1);
         looper_stop->shortcut(0xffc3);
         looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
@@ -20732,6 +20734,7 @@ e a stompbox Opto Trem");
       Tuner->user_data((void*)(1));
       Tuner->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { tuner_activar = new Fl_Light_Button(526, 28, 38, 18, "On");
+        tuner_activar->tooltip("Enable Tuner - Shortcut \'T\'");
         tuner_activar->shortcut(0x74);
         tuner_activar->color((Fl_Color)62);
         tuner_activar->selection_color((Fl_Color)1);
@@ -20791,6 +20794,7 @@ e a stompbox Opto Trem");
       InOut->user_data((void*)(1));
       InOut->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { ActivarGeneral = new Fl_Light_Button(6, 30, 52, 18, "FX On");
+        ActivarGeneral->tooltip("Enable rakarrack - Shortcut \'R\'");
         ActivarGeneral->shortcut(0x72);
         ActivarGeneral->down_box(FL_BORDER_BOX);
         ActivarGeneral->color((Fl_Color)62);
@@ -20801,6 +20805,7 @@ e a stompbox Opto Trem");
         ActivarGeneral->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* ActivarGeneral
       { BostBut = new Fl_Button(132, 30, 30, 14, "+10dB");
+        BostBut->tooltip("+10 dB Booster - Shortcut \'F10\'");
         BostBut->type(1);
         BostBut->shortcut(0xffc7);
         BostBut->color((Fl_Color)62);
@@ -20843,6 +20848,7 @@ e a stompbox Opto Trem");
         Nivel_Entrada->when(FL_WHEN_CHANGED);
       } // SliderW* Nivel_Entrada
       { Nivel_Salida = new SliderW(115, 48, 19, 126, "Output");
+        Nivel_Salida->tooltip("Shortcut \'F2\' decrease volume, \'F3\' Increase volume");
         Nivel_Salida->type(4);
         Nivel_Salida->box(FL_FLAT_BOX);
         Nivel_Salida->color(FL_FOREGROUND_COLOR);
@@ -20938,6 +20944,7 @@ e a stompbox Opto Trem");
       Midi->user_data((void*)(1));
       Midi->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { midi_activar = new Fl_Light_Button(525, 89, 38, 18, "On");
+        midi_activar->tooltip("Enable MIDI Converter - Shortcut \'M\'");
         midi_activar->shortcut(0x6d);
         midi_activar->color((Fl_Color)62);
         midi_activar->selection_color((Fl_Color)1);
@@ -21029,6 +21036,7 @@ e a stompbox Opto Trem");
       Metro->user_data((void*)(1));
       Metro->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { metro_activar = new Fl_Light_Button(525, 89, 38, 18, "On");
+        metro_activar->tooltip("Enable Metronome - Shortcut \'M\'");
         metro_activar->shortcut(0x6d);
         metro_activar->color((Fl_Color)62);
         metro_activar->selection_color((Fl_Color)1);
@@ -21136,24 +21144,28 @@ e a stompbox Opto Trem");
         L_B4->callback((Fl_Callback*)cb_L_B4, (void*)(77));
       } // Fl_Button* L_B4
       { S_new = new Fl_Button(174, 50, 64, 18, "New");
+        S_new->tooltip("New preset - Shortcut \'N\'");
         S_new->shortcut(0x6e);
         S_new->color((Fl_Color)62);
         S_new->labelsize(12);
         S_new->callback((Fl_Callback*)cb_S_new, (void*)(77));
       } // Fl_Button* S_new
       { L_preset = new Fl_Button(240, 50, 64, 18, "Load");
+        L_preset->tooltip("Open load preset window - Shortcut \'L\'");
         L_preset->shortcut(0x6c);
         L_preset->color((Fl_Color)62);
         L_preset->labelsize(12);
         L_preset->callback((Fl_Callback*)cb_L_preset, (void*)(77));
       } // Fl_Button* L_preset
       { S_preset = new Fl_Button(306, 50, 64, 18, "Save");
+        S_preset->tooltip("Open save preset window - Shortcut \'S\'");
         S_preset->shortcut(0x73);
         S_preset->color((Fl_Color)62);
         S_preset->labelsize(12);
         S_preset->callback((Fl_Callback*)cb_S_preset, (void*)(77));
       } // Fl_Button* S_preset
       { Compare = new Fl_Light_Button(373, 50, 72, 18, "Compare");
+        Compare->tooltip("Compare to bank preset - Shortcut \'P\'");
         Compare->shortcut(0x70);
         Compare->color((Fl_Color)62);
         Compare->selection_color((Fl_Color)1);
@@ -21163,6 +21175,7 @@ e a stompbox Opto Trem");
         Compare->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Compare
       { B_preset = new Fl_Button(448, 50, 64, 18, "Bank");
+        B_preset->tooltip("Open bank window - Shortcut \'B\'");
         B_preset->shortcut(0x62);
         B_preset->color((Fl_Color)62);
         B_preset->labelsize(12);
@@ -21178,6 +21191,7 @@ e a stompbox Opto Trem");
         o->maximum_size(22);
       } // Fl_Input* WPreset_Name
       { Preset_Counter = new Fl_Counter(174, 106, 60, 20, "Preset");
+        Preset_Counter->tooltip("Next or previous preset - Shortcut +(plus) or -(minus)");
         Preset_Counter->type(1);
         Preset_Counter->color((Fl_Color)62);
         Preset_Counter->selection_color(FL_FOREGROUND_COLOR);
@@ -21197,6 +21211,7 @@ e a stompbox Opto Trem");
         DAuthor->align(Fl_Align(100|FL_ALIGN_INSIDE));
       } // Fl_Box* DAuthor
       { RandomP = new Fl_Button(175, 141, 59, 14, "Random");
+        RandomP->tooltip("Random Preset selection - Shortcut \'F7\'");
         RandomP->shortcut(0xffc4);
         RandomP->color((Fl_Color)62);
         RandomP->labelsize(10);
@@ -21205,6 +21220,7 @@ e a stompbox Opto Trem");
         RandomP->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* RandomP
       { Open_Order = new Fl_Button(247, 132, 195, 24, "Put Order in your Rack");
+        Open_Order->tooltip("Open preset order window - Shortcut \'O\'");
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
         Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(77));
@@ -21233,6 +21249,7 @@ e a stompbox Opto Trem");
         Analy->hide();
       } // Analyzer* Analy
       { HideUE = new Fl_Button(445, 137, 32, 18, "Hide");
+        HideUE->tooltip("Hide/Show unused Effects - Shortcut \'F9\'");
         HideUE->shortcut(0xffc6);
         HideUE->color((Fl_Color)62);
         HideUE->labelsize(10);
@@ -21241,6 +21258,7 @@ e a stompbox Opto Trem");
         HideUE->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* HideUE
       { SwitchMod = new Fl_Button(480, 137, 32, 18, "Sw");
+        SwitchMod->tooltip("Switch between Midi Converter &\nMetronome - Shortcut \'F8\'");
         SwitchMod->shortcut(0xffc5);
         SwitchMod->color((Fl_Color)62);
         SwitchMod->labelsize(10);
@@ -21257,6 +21275,7 @@ e a stompbox Opto Trem");
       Tap->user_data((void*)(1));
       Tap->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { Tap_activar = new Fl_Light_Button(525, 144, 38, 18, "On");
+        Tap_activar->tooltip("Enable Tap Tempo - Shortcut \'H\'");
         Tap_activar->shortcut(0x68);
         Tap_activar->color((Fl_Color)62);
         Tap_activar->selection_color((Fl_Color)1);
@@ -21288,6 +21307,7 @@ e a stompbox Opto Trem");
         T_Apply->callback((Fl_Callback*)cb_T_Apply, (void*)(77));
       } // Fl_Button* T_Apply
       { T_BUT = new Fl_Button(671, 165, 38, 23, "Tap");
+        T_BUT->tooltip("Tap tempo set - Shortcut \'G\'");
         T_BUT->shortcut(0x67);
         T_BUT->labelsize(12);
         T_BUT->callback((Fl_Callback*)cb_T_BUT, (void*)(77));
