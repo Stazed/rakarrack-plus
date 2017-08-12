@@ -656,7 +656,7 @@ Reverbtron::setpreset (int npreset)
 {
     const int PRESET_SIZE = 16;
     const int NUM_PRESETS = 9;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Spring
         {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 0},

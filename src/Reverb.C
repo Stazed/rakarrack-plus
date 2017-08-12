@@ -415,7 +415,7 @@ Reverb::setpreset (int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 13;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Cathedral1
         {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64},

@@ -182,7 +182,7 @@ Opticaltrem::setpreset (int npreset)
 {
     const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 6;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Fast
         {127, 260, 10, 0, 64, 64, 0},

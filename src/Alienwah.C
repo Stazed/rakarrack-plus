@@ -197,7 +197,7 @@ Alienwah::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //AlienWah1
         {64, 64, 80, 0, 0, 62, 60, 105, 25, 0, 64},

@@ -151,7 +151,7 @@ Pan::setpreset (int npreset )
 {
     const int PRESET_SIZE = 9;
     const int NUM_PRESETS = 2;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //AutoPan
         {64, 64, 26, 0, 0, 0, 0, 1, 0},

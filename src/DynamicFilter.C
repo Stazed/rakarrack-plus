@@ -178,7 +178,7 @@ DynamicFilter::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 5;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //WahWah
         {64, 64, 80, 0, 0, 64, 70, 90, 0, 60, 0},

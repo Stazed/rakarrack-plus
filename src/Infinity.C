@@ -362,7 +362,7 @@ Infinity::setpreset (int npreset)
 {
     const int PRESET_SIZE = 18;
     const int NUM_PRESETS = 10;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Basic
         {64, 64, 64, 64, 64, 64, 64, 64, 64, 700, 20, 80, 60, 0, 1, 0, 0, 1 },

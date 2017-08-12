@@ -245,6 +245,7 @@ Echo::setpreset (int npreset)
 {
     const int PRESET_SIZE = 9;
     const int NUM_PRESETS = 9;
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Echo 1
         {67, 64, 565, 64, 30, 59, 0, 127, 0},
@@ -266,9 +267,15 @@ Echo::setpreset (int npreset)
         {62, 64, 456, 64, 100, 90, 55, 0, 0}
     };
 
+    if(npreset>NUM_PRESETS-1) {
+        Fpre->ReadPreset(4,npreset-NUM_PRESETS+1,pdata);
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar (n, pdata[n]);
+    } else {
 
     for (int n = 0; n < PRESET_SIZE; n++)
         changepar (n, presets[npreset][n]);
+    }
     Ppreset = npreset;
 };
 

@@ -536,7 +536,7 @@ Dflange::setpreset (int npreset)
 {
     const int PRESET_SIZE = 15;
     const int NUM_PRESETS = 9;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Preset 1
         {-32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0},

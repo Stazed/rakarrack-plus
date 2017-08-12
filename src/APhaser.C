@@ -300,7 +300,7 @@ Analog_Phaser::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 6;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Phaser1
         {64, 20, 14, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1},

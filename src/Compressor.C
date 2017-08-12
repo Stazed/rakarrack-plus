@@ -216,7 +216,7 @@ Compressor::setpreset (int dgui, int npreset)
 
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 7;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //2:1
         {-30, 2, -6, 20, 120, 1, 0, 0, 0},

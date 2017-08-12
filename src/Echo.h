@@ -82,6 +82,8 @@ private:
     float  Srate_Attack_Coeff;
     
     uint32_t PERIOD;
+    
+    class FPreset *Fpre;
 };
 
 

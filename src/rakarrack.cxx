@@ -27836,31 +27836,31 @@ int RKRGUI::prevnext(int e) {
   else
   {
   
-  if((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43))) 
+  if((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43)))     // +(plus) key
   {
   stecla=1;
   return 1;
   }
   
-  if((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45)))
+  if((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45)))     // -(minus) key
   {
   stecla=2;
   return 1;
   }
   
-  if(Fl::event_key(65471))
+  if(Fl::event_key(65471))      // F2 key - decrease output volume
   {
   stecla=3;
   return 1;
   }
   
-  if(Fl::event_key(65472))
+  if(Fl::event_key(65472))      // F3 key - increase output volume
   {
   stecla=4;
   return 1;
   }
   
-  if(Fl::event_key(65379))
+  if(Fl::event_key(65379))      // Insert key - add user preset
   {
    Fl_Widget *w = Fl::belowmouse();
    long long k = (long long) w->user_data();
@@ -27871,7 +27871,7 @@ int RKRGUI::prevnext(int e) {
   }
   
   
-  if(Fl::event_key(65535))
+  if(Fl::event_key(65535))      // Delete key - delete user preset
   {
    Fl_Widget *w = Fl::belowmouse();
    long long k = (long long) w->user_data();

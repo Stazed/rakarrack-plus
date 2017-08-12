@@ -211,7 +211,7 @@ Phaser::setpreset (int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 6;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Phaser1
         {64, 64, 11, 0, 0, 64, 110, 64, 1, 0, 0, 20},

@@ -431,7 +431,7 @@ Vocoder::setpreset (int npreset)
 {
     const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 4;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Vocoder 1
         {0, 64, 10, 70, 70, 40, 0},

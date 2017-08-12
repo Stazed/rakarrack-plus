@@ -876,7 +876,7 @@ Sequence::setpreset (int npreset)
 {
     const int PRESET_SIZE = 15;
     const int NUM_PRESETS = 10;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Jumpy
         {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3},

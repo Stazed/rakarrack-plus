@@ -131,7 +131,7 @@ Sustainer::setpreset (int npreset)
 {
     const int PRESET_SIZE = 2;
     const int NUM_PRESETS = 3;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Moderate
         {79, 54},

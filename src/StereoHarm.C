@@ -420,7 +420,7 @@ StereoHarm::setpreset (int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 4;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
         {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64},

@@ -258,7 +258,7 @@ RBEcho::setpreset (int npreset)
 {
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 3;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Echo 1
         {64, 64, 90, 64, 64, 64, 64, 0, 1, 96},

@@ -367,7 +367,7 @@ Convolotron::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Convolotron 1
         {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0},

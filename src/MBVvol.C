@@ -406,7 +406,7 @@ MBVvol::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 3;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Vary1
         {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0},

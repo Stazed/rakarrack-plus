@@ -501,7 +501,7 @@ Vibe::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 8;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Classic
         {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0},

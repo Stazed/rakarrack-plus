@@ -311,7 +311,7 @@ Distorsion::setpreset (int dgui, int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 6;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Overdrive 1
         {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0},

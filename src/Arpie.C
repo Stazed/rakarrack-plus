@@ -317,7 +317,7 @@ Arpie::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 11;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Arpie 1
         {67, 64, 35, 64, 30, 59, 0, 127, 4, 0, 0},

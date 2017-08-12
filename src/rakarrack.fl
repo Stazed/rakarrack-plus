@@ -13633,8 +13633,7 @@ for(i=0;i<rkr->NumEffects;i++)
 
 \}
 
-reordena();} {selected
-    }
+reordena();} {}
   }
   Function {tick(void* v)} {return_type {static void}
   } {
@@ -17878,7 +17877,7 @@ return(1000);} {}
 
   CH_UB->value(0);} {}
   }
-  Function {prevnext(int e)} {return_type {static int}
+  Function {prevnext(int e)} {open return_type {static int}
   } {
     code {if(e==5)
 {
@@ -17894,31 +17893,31 @@ if(e != 12) return 0;
 else
 {
 
-if((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43))) 
+if((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43)))     // +(plus) key
 {
 stecla=1;
 return 1;
 }
 
-if((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45)))
+if((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45)))     // -(minus) key
 {
 stecla=2;
 return 1;
 }
 
-if(Fl::event_key(65471))
+if(Fl::event_key(65471))      // F2 key - decrease output volume
 {
 stecla=3;
 return 1;
 }
 
-if(Fl::event_key(65472))
+if(Fl::event_key(65472))      // F3 key - increase output volume
 {
 stecla=4;
 return 1;
 }
 
-if(Fl::event_key(65379))
+if(Fl::event_key(65379))      // Insert key - add user preset
 {
  Fl_Widget *w = Fl::belowmouse();
  long long k = (long long) w->user_data();
@@ -17929,7 +17928,7 @@ return 1;
 }
 
 
-if(Fl::event_key(65535))
+if(Fl::event_key(65535))      // Delete key - delete user preset
 {
  Fl_Widget *w = Fl::belowmouse();
  long long k = (long long) w->user_data();
@@ -17949,7 +17948,8 @@ return 1;
 
 }
 
-return 0;} {}
+return 0;} {selected
+    }
   }
   Function {getMIDIControl(int num)} {} {
     code {int i = 0;

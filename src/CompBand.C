@@ -315,7 +315,7 @@ CompBand::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 3;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Good Start
         {0, 16, 16, 16, 16, 0, 0, 0, 0, 1000, 5000, 10000, 48},

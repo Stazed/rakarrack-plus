@@ -220,7 +220,7 @@ Ring::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 6;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Saw-Sin
         {-64, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1},

@@ -122,7 +122,7 @@ ShelfBoost::setpreset (int npreset)
 {
     const int PRESET_SIZE = 5;
     const int NUM_PRESETS = 4;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Treble
         {127, 64, 16000, 1, 24},

@@ -307,7 +307,7 @@ MBDist::setpreset (int npreset)
 {
     const int PRESET_SIZE = 15;
     const int NUM_PRESETS = 8;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Saturation
         {0, 64, 0, 41, 64, 26, 19, 26, 41, 20, 35, 0, 400, 1200, 0},

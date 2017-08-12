@@ -332,7 +332,7 @@ NewDist::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 3;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //NewDist 1
         {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0},

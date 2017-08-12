@@ -85,6 +85,7 @@
 #define MAX_SFILTER_STAGES 12
 
 #define TEMPBUFSIZE 1024
+#define MAX_PDATA_SIZE 50
 
 typedef union {
     float f;

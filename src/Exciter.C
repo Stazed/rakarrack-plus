@@ -122,7 +122,7 @@ Exciter::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 5;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
         {64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20},

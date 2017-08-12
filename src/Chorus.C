@@ -269,7 +269,7 @@ Chorus::setpreset (int dgui, int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 10;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Chorus1
         {64, 64, 33, 0, 0, 90, 40, 85, 64, 119, 0, 0, 0},

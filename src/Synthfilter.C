@@ -294,7 +294,7 @@ Synthfilter::setpreset (int npreset)
 {
     const int PRESET_SIZE = 16;
     const int NUM_PRESETS = 7;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Low Pass
         {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0},

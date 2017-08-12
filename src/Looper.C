@@ -321,7 +321,7 @@ Looper::setpreset (int npreset)
 {
     const int PRESET_SIZE = 14;
     const int NUM_PRESETS = 2;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Looper 2 seconds
         {64, 0, 1, 0, 1, 0, 64, 1, 0, 1, 64, 1, 0, 0},

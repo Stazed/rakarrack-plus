@@ -221,7 +221,7 @@ Shuffle::setpreset (int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Shuffle 1
         {64, 10, 0, 0, 0,600, 1200,2000, 6000,-14, 1},

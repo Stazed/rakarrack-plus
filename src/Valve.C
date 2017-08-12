@@ -354,7 +354,7 @@ Valve::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 3;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Valve 1
         {0, 64, 64, 127, 64, 0, 5841, 61, 1, 0, 69, 1, 84},

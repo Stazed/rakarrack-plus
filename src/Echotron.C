@@ -602,7 +602,7 @@ Echotron::setpreset (int npreset)
 {
     const int PRESET_SIZE = 16;
     const int NUM_PRESETS = 5;
-    int pdata[PRESET_SIZE];
+    int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Summer
         {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1},
