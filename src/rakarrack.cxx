@@ -979,7 +979,10 @@ void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_Fullscreen_i(Fl_Menu_*, void*) {
-  Principal->fullscreen();
+  if(Principal->fullscreen_active())
+    Principal->fullscreen_off();
+  else
+    Principal->fullscreen();
 }
 void RKRGUI::cb_Fullscreen(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Fullscreen_i(o,v);

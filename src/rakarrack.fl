@@ -909,7 +909,7 @@ Pexitprogram=1;} open
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -1028,7 +1028,7 @@ Show_Next_Time();}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings}
+          label {&Settings} open
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -1074,7 +1074,10 @@ rkr->ACI_Bypass = 0;
           }
           MenuItem {} {
             label Fullscreen
-            callback {Principal->fullscreen();}
+            callback {if(Principal->fullscreen_active())
+    Principal->fullscreen_off();
+  else
+    Principal->fullscreen();} selected
             xywh {0 0 36 21} shortcut 0xffc9
           }
         }
@@ -10240,7 +10243,7 @@ TUNER_LABEL->redraw_label();}
         }
       }
       Fl_Group InOut {
-        user_data 1 open
+        user_data 1
         xywh {2 24 164 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button ActivarGeneral {
@@ -10327,7 +10330,7 @@ rkr->calculavol(1);}
 } 
 
 rkr->Master_Volume=(float)((o->value()+50)/100.0);
-rkr->calculavol(2);} selected
+rkr->calculavol(2);}
           tooltip {Shortcut 'F2' decrease volume, 'F3' Increase volume} xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class SliderW
         }
@@ -10354,7 +10357,7 @@ rkr->calculavol(2);} selected
         }
       }
       Fl_Group Midi {
-        user_data 1 open
+        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button midi_activar {
@@ -10575,7 +10578,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -11295,7 +11298,7 @@ Settings->hide();}
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1 open
+        user_data 1
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
