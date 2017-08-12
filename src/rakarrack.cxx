@@ -27863,6 +27863,8 @@ int RKRGUI::prevnext(int e) {
   if(Fl::event_key(65379))      // Insert key - add user preset
   {
    Fl_Widget *w = Fl::belowmouse();
+   if(w == NULL)
+     return 0;
    long long k = (long long) w->user_data();
    if((k>11999) && (k<12100)) 
    ((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset(w,k-12000);
@@ -27874,6 +27876,8 @@ int RKRGUI::prevnext(int e) {
   if(Fl::event_key(65535))      // Delete key - delete user preset
   {
    Fl_Widget *w = Fl::belowmouse();
+   if(w == NULL)
+      return 0;
    long long k = (long long) w->user_data();
    if((k>11999) && (k<12100)) 
    ((RKRGUI*)(w->parent()->parent()->user_data()))->delpreset(w,k-12000);
@@ -28025,18 +28029,18 @@ void RKRGUI::ReadIntPresets() {
 
 inline void RKRGUI::delpreset(Fl_Widget *w, int num) {
   if(num==12) return;
-  int ok;
+  int ok = 0;
   char temp2[128];
   char Rname[128];
   Fl_Choice *s = (Fl_Choice * ) w;
   if(strncmp(s->text(),"*",1)!=0) 
   {
-   fl_message("Released Internal Presets can not be deleted ");
+   fl_message("Internal Presets can not be deleted ");
    return;
   } 
   
   sprintf(temp2,"Delete? \"%s\"",s->text());
-  ok=fl_choice("%d",temp2,"No","Yes",NULL);
+  ok=fl_choice(temp2,"No","Yes",NULL);
   if (!ok) return;
   memset(Rname,0,sizeof(Rname));
   sprintf(Rname,"%s",s->text());

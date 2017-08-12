@@ -17920,6 +17920,8 @@ return 1;
 if(Fl::event_key(65379))      // Insert key - add user preset
 {
  Fl_Widget *w = Fl::belowmouse();
+ if(w == NULL)
+   return 0;
  long long k = (long long) w->user_data();
  if((k>11999) && (k<12100)) 
  ((RKRGUI*)(w->parent()->parent()->user_data()))->addpreset(w,k-12000);
@@ -17931,6 +17933,8 @@ return 1;
 if(Fl::event_key(65535))      // Delete key - delete user preset
 {
  Fl_Widget *w = Fl::belowmouse();
+ if(w == NULL)
+    return 0;
  long long k = (long long) w->user_data();
  if((k>11999) && (k<12100)) 
  ((RKRGUI*)(w->parent()->parent()->user_data()))->delpreset(w,k-12000);
@@ -17948,8 +17952,7 @@ return 1;
 
 }
 
-return 0;} {selected
-    }
+return 0;} {}
   }
   Function {getMIDIControl(int num)} {} {
     code {int i = 0;
@@ -18076,28 +18079,29 @@ if (( fn = fopen (tempfile, "r")) != NULL)
  fclose(fn);
 }} {}
   }
-  Function {delpreset(Fl_Widget *w, int num)} {return_type {inline void}
+  Function {delpreset(Fl_Widget *w, int num)} {open return_type {inline void}
   } {
     code {if(num==12) return;
-int ok;
+int ok = 0;
 char temp2[128];
 char Rname[128];
 Fl_Choice *s = (Fl_Choice * ) w;
 if(strncmp(s->text(),"*",1)!=0) 
 {
- fl_message("Released Internal Presets can not be deleted ");
+ fl_message("Internal Presets can not be deleted ");
  return;
 } 
 
 sprintf(temp2,"Delete? \\"%s\\"",s->text());
-ok=fl_choice("%d",temp2,"No","Yes",NULL);
+ok=fl_choice(temp2,"No","Yes",NULL);
 if (!ok) return;
 memset(Rname,0,sizeof(Rname));
 sprintf(Rname,"%s",s->text());
 s->remove(s->value());
 s->value(0);
 s->redraw();
-rkr->DelIntPreset(num,Rname);} {}
+rkr->DelIntPreset(num,Rname);} {selected
+    }
   }
   Function {Prep_Reorden(int source, int dest)} {} {
     code {int x = rkr->efx_order[source];
