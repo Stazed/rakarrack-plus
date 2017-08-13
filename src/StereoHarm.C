@@ -96,7 +96,6 @@ void
 StereoHarm::initialize()
 {
     adjust(STE_DOWN, PERIOD);
-    nPERIOD = lrintf(PERIOD*nRATIO);
 
     templ = (float *) malloc (sizeof (float) * PERIOD);
     tempr = (float *) malloc (sizeof (float) * PERIOD);
@@ -131,10 +130,6 @@ StereoHarm::out (float *efxoutl, float *efxoutr)
 {
 
     unsigned int i;
-
-    nPERIOD = lrintf(PERIOD*nRATIO);
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
 
     if(DS_state != 0) {
         U_Resample->out(efxoutl,efxoutr,templ,tempr,PERIOD,u_up);
@@ -398,8 +393,7 @@ StereoHarm::adjust(int DS, uint32_t period)
         break;
     }
 
-
-
+    nPERIOD = lrintf(PERIOD*nRATIO);
     u_up= (double)nPERIOD / (double)period;
     u_down= (double)period / (double)nPERIOD;
 }
