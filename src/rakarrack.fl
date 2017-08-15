@@ -1077,7 +1077,7 @@ rkr->ACI_Bypass = 0;
             callback {if(Principal->fullscreen_active())
     Principal->fullscreen_off();
   else
-    Principal->fullscreen();} selected
+    Principal->fullscreen();}
             xywh {0 0 36 21} shortcut 0xffc9
           }
         }
@@ -8990,7 +8990,7 @@ rkr->efx_Reverbtron->setfile(100);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1
+        user_data 1 open
         xywh {323 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -9029,7 +9029,7 @@ echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
           xywh {402 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -9194,7 +9194,7 @@ filename=fl_filename_setext(filename,".dly");
 strcpy(rkr->efx_Echotron->Filename,filename);
 rkr->efx_Echotron->setfile(100);
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
           xywh {429 368 46 10} labelsize 10 deactivate
         }
         Fl_Counter echotron_length {
@@ -9212,7 +9212,7 @@ rkr->efx_Echotron->changepar(3,(int)o->value());}
           user_data 12
           callback {rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));}
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
           xywh {411 380 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {

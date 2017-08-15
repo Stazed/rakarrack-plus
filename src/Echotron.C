@@ -449,8 +449,12 @@ Echotron::loadfile(char* Filename)
     }
     fclose(fs);
 
-    f.fLength = count;  // to hold value for limit of Plength
-    Plength = count;    // to update gui value to max length - may be adjusted by use downward only
+    f.fLength = count;  // to hold value for maximum limit of Plength & gui limit
+    if(Puser)
+    {
+        if(Plength>f.fLength) Plength = f.fLength;
+    }
+
     return f;
 };
 
@@ -609,9 +613,9 @@ Echotron::setpreset (int npreset)
         //Summer
         {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1},
         //Ambience
-        {96, 64, 16, 4, 0, 180, 50, 64, 0, 96, -4, 64, 1, 0, 0, 0},
+        {96, 64, 16, 3, 0, 180, 50, 64, 1, 96, -4, 64, 1, 0, 0, 0},
         //Arranjer
-        {64, 64, 10, 4, 0, 400, 32, 64, 0, 96, -8, 64, 1, 0, 0, 0},
+        {64, 64, 10, 3, 0, 400, 32, 64, 1, 96, -8, 64, 1, 0, 0, 0},
         //Suction
         {0, 47, 28, 8, 0, 92, 0, 64, 3, 32, 0, 64, 1, 1, 1, 1},
         //SucFlange
@@ -650,7 +654,6 @@ Echotron::changepar (int npar, int value)
     case 3:
         Plength = value;
         if(Plength>127) Plength = 127;
-        if(Plength>File.fLength) Plength = File.fLength;
         initparams=1;
         break;
     case 4:

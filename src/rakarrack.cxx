@@ -8306,7 +8306,7 @@ echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);
 }
 void RKRGUI::cb_echotron_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_preset_i(o,v);
@@ -8474,7 +8474,7 @@ filename=fl_filename_setext(filename,".dly");
 strcpy(rkr->efx_Echotron->Filename,filename);
 rkr->efx_Echotron->setfile(100);
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);
 }
 void RKRGUI::cb_B_ech(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_ech_i(o,v);
@@ -8495,7 +8495,7 @@ void RKRGUI::cb_echotron_length(Fl_Counter* o, void* v) {
 void RKRGUI::cb_echotron_fnum_i(Fl_Choice* o, void*) {
   rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->getpar(3));
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);
 }
 void RKRGUI::cb_echotron_fnum(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echotron_fnum_i(o,v);
