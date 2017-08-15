@@ -78,7 +78,6 @@ public:
     void applyfile(DlyFile);
     int Ppreset;
 
-    int Pchange;
     float outvolume;
 
     char Filename[128];

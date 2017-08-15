@@ -25,11 +25,12 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Reverbtron.h"
+#include "config.h"
 
 //TODO: make LV2 plugins deal with this correctly
-#ifndef DATADIR
-#define DATADIR "/usr/local/share/rakarrack"
-#endif
+//#ifndef DATADIR
+//#define DATADIR "/usr/local/share/rakarrack"
+//#endif
 
 Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {

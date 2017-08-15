@@ -75,7 +75,7 @@
 		pset:value 16.0
     ], [
         lv2:symbol "LENGTH" ;
-		pset:value 3.0
+		pset:value 4.0
         #skip user
     ], [
         lv2:symbol "TEMPO" ;
@@ -110,7 +110,7 @@
 		pset:value 0.0
     ] ;
     state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile> <Short_Delays.dly>
+		<http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile> <SwingPong.dly>
 	] 
 	.
 
@@ -129,7 +129,7 @@
 		pset:value 10.0
     ], [
         lv2:symbol "LENGTH" ;
-		pset:value 3.0
+		pset:value 4.0
         #skip user
     ], [
         lv2:symbol "TEMPO" ;
@@ -164,7 +164,7 @@
 		pset:value 0.0
     ] ;
     state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile> <Short_Delays.dly>
+		<http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile> <SwingPong.dly>
 	] 
 	.
 

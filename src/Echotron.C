@@ -24,13 +24,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "config.h"
 
 #include "Echotron.h"
 
 //TODO: make LV2 plugins deal with this correctly
-#ifndef DATADIR
-#define DATADIR "/usr/local/share/rakarrack"
-#endif
+//#ifndef DATADIR
+//#define DATADIR "/usr/local/share/rakarrack"
+//#endif
 
 Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
 {
@@ -132,7 +133,7 @@ Echotron::initialize()
     }
     
     setpreset (Ppreset);
-    cleanup ();
+    init_params();
 }
 
 void
@@ -154,7 +155,7 @@ Echotron::out (float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     int j, k;
-    int length = Plength>File.fLength?File.fLength:Plength;
+    int length = Plength;
     float l,r,lyn, ryn;
     float rxindex,lxindex;
 
@@ -448,24 +449,24 @@ Echotron::loadfile(char* Filename)
     }
     fclose(fs);
 
-    f.fLength = count;
+    f.fLength = count;  // to hold value for limit of Plength
+    Plength = count;    // to update gui value to max length - may be adjusted by use downward only
     return f;
 };
 
 void
 Echotron::applyfile(DlyFile f)
 {
-    //if(!Pchange) Llength=f.fLength;//ssj this doesn't do anything does it?
-    cleanup();
-	File = f;
+    File = f;
     init_params();
 }
 
 DlyFile
 Echotron::loaddefault()
 {
-	DlyFile f;
-	strcpy(f.Filename,"default");
+    Plength = 1;
+    DlyFile f;
+    strcpy(f.Filename,"default");
     f.fLength = 1;
     f.fPan[0] = 0.0f;  //
     f.fTime[0] = 1.0f;  //default 1 measure delay
@@ -484,6 +485,7 @@ Echotron::loaddefault()
 
 void Echotron::init_params()
 {
+    cleanup();              // should always do this on init or junk left over
 
     float hSR = fSAMPLE_RATE*0.5f;
     float tpanl, tpanr;
@@ -499,7 +501,7 @@ void Echotron::init_params()
     lfo->Pfreq = lrintf(File.subdiv_fmod*tmptempo);
     dlfo->Pfreq = lrintf(File.subdiv_dmod*tmptempo);
 
-    for(int i=0; i<File.fLength; i++) {
+    for(int i=0; i<Plength; i++) {
 // tmp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
 // if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
@@ -550,7 +552,7 @@ void Echotron::modulate_delay()
 
             filterbank[i].l->setfreq(lfmod*File.fFreq[i]);
             filterbank[i].r->setfreq(rfmod*File.fFreq[i]);
-
+            
         }
 
     }
@@ -607,9 +609,9 @@ Echotron::setpreset (int npreset)
         //Summer
         {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1},
         //Ambience
-        {96, 64, 16, 4, 0, 180, 50, 64, 1, 96, -4, 64, 1, 0, 0, 0},
+        {96, 64, 16, 4, 0, 180, 50, 64, 0, 96, -4, 64, 1, 0, 0, 0},
         //Arranjer
-        {64, 64, 10, 4, 0, 400, 32, 64, 1, 96, -8, 64, 1, 0, 0, 0},
+        {64, 64, 10, 4, 0, 400, 32, 64, 0, 96, -8, 64, 1, 0, 0, 0},
         //Suction
         {0, 47, 28, 8, 0, 92, 0, 64, 3, 32, 0, 64, 1, 1, 1, 1},
         //SucFlange
@@ -648,7 +650,8 @@ Echotron::changepar (int npar, int value)
     case 3:
         Plength = value;
         if(Plength>127) Plength = 127;
-        //initparams=1;//no longer re-init, just don't process extra length
+        if(Plength>File.fLength) Plength = File.fLength;
+        initparams=1;
         break;
     case 4:
         Puser = value;

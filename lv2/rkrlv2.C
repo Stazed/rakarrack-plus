@@ -3399,14 +3399,20 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->echotron->changepar(i,val);
     }
-    for(i++; i<4; i++)//skip user
+    i++;
+    val = (int)*plug->param_p[i];  //2 width
+    if(plug->echotron->getpar(i) != val)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->echotron->getpar(i) != val)
-        {
-            plug->echotron->changepar(i,val);
-        }
+        plug->echotron->changepar(i,val);
     }
+    i++;
+    // 3 taps - has max of File.fLength
+    val = (int)*plug->param_p[i] > plug->echotron->File.fLength ? plug->echotron->File.fLength: (int)*plug->param_p[i];
+    if(plug->echotron->getpar(i) != val)
+    {
+        plug->echotron->changepar(i,val);
+    }
+    i++;                //skip #4 user select
     for(; i+1<7; i++)
     {
         val = (int)*plug->param_p[i];
