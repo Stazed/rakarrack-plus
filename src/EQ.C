@@ -65,8 +65,6 @@ EQ::lv2_update_params(uint32_t period)
     PERIOD = period;
     clear_initialize();
     initialize();
-    setpreset (Ppreset);
-    cleanup ();
 }
 
 void
