@@ -83,8 +83,7 @@ MIDIConverter::~MIDIConverter ()
 {
     schmittFree();
     fftFree();
-#ifdef LV2RUN
-#else
+#ifndef LV2RUN
     snd_seq_close (port);
 #endif // LV2RUN
 }

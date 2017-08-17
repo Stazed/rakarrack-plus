@@ -956,7 +956,7 @@ Put_Skin(last);}
             label {Save Sk&in}
             callback {char *filename;
 \#define EXT ".rkrs"
-filename=fl_file_chooser("Save Skin:","(*"EXT")","",0);
+filename=fl_file_chooser("Save Skin:","(*" EXT")","",0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
@@ -986,7 +986,7 @@ Put_MidiTable();}
             label {Save MIDI Table}
             callback {char *filename;
 \#define EXT ".rmt"
-filename=fl_file_chooser("Save MIDI Table:","(*"EXT")","",0);
+filename=fl_file_chooser("Save MIDI Table:","(*" EXT")","",0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
@@ -10461,7 +10461,7 @@ MIDI_LABEL->redraw_label();}
 char *filename;
 
 \#define EXT ".rkrb"
-filename=fl_file_chooser("Save Bank File:","(*"EXT")",rkr->Bank_Saved,0);
+filename=fl_file_chooser("Save Bank File:","(*" EXT")",rkr->Bank_Saved,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
@@ -10677,7 +10677,7 @@ Put_Loaded();}
           user_data 77
           callback {char *filename;
 \#define EXT ".rkr"
-filename=fl_file_chooser("Save Preset:","(*"EXT")",rkr->Preset_Name,0);
+filename=fl_file_chooser("Save Preset:","(*" EXT")",rkr->Preset_Name,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
@@ -14905,7 +14905,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
        
        }     
 
-        if((j>0) && (rkr->sample_rate<=SR_value)) p->deactivate(); else p->activate();
+        if((j>0) && ((unsigned int)rkr->sample_rate<=SR_value)) p->deactivate(); else p->activate();
 
 
  }
