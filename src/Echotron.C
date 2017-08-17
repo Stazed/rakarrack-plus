@@ -70,7 +70,9 @@ Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
     offset = 0;
 
     initialize();
-
+    
+    setpreset (Ppreset);
+    init_params();
 };
 
 Echotron::~Echotron ()
@@ -131,9 +133,6 @@ Echotron::initialize()
         filterbank[i].l->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);
         filterbank[i].r->setmix (1,filterbank[i].sLP , filterbank[i].sBP,filterbank[i].sHP);
     }
-    
-    setpreset (Ppreset);
-    init_params();
 }
 
 void
