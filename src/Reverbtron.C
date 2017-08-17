@@ -37,6 +37,7 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     nSAMPLE_RATE = (int)sample_rate;
     nfSAMPLE_RATE = sample_rate;
+    fSAMPLE_RATE = sample_rate;
     //default values
     Ppreset = 0;
     Pvolume = 50;
@@ -115,6 +116,7 @@ void
 Reverbtron::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
+    adjust(DS_state, fSAMPLE_RATE);
     clear_initialize();
     initialize();
 }
@@ -156,12 +158,9 @@ Reverbtron::out (float * efxoutl, float * efxoutr)
     hlength = Pdiff;
     int doffset;
 
-    nPERIOD = lrintf((float)PERIOD*nRATIO);
     if(DS_state != 0) {
         memcpy(templ, efxoutl,sizeof(float)*PERIOD);
         memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
-        u_up= (double)nPERIOD / (double)PERIOD;
-        u_down= (double)PERIOD / (double)nPERIOD;
         U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
     }
 
@@ -647,6 +646,10 @@ Reverbtron::adjust(int DS, double fSAMPLE_RATE)
         nfSAMPLE_RATE = 4000.0f;
         break;
     }
+    
+    nPERIOD = lrintf((float)PERIOD*nRATIO);
+    u_up= (double)nPERIOD / (double)PERIOD;
+    u_down= (double)PERIOD / (double)nPERIOD;
 }
 
 

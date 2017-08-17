@@ -107,6 +107,7 @@ private:
     uint32_t PERIOD;
     int nPERIOD;
     int nSAMPLE_RATE;
+    double fSAMPLE_RATE;
     float nRATIO;
 
 
