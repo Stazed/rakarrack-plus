@@ -112,6 +112,7 @@ void
 Sequence::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
+    adjust(DS_state, fSAMPLE_RATE);
     clear_initialize();
     initialize();
 }
@@ -119,7 +120,6 @@ Sequence::lv2_update_params(uint32_t period)
 void
 Sequence::initialize()
 {
-    nPERIOD = PERIOD*nRATIO;
     templ = (float *) malloc (sizeof (float) * PERIOD);
     tempr = (float *) malloc (sizeof (float) * PERIOD);
 
@@ -185,14 +185,10 @@ Sequence::out (float * efxoutl, float * efxoutr)
         avflag = 0;
     }
 
-    if((Pmode==3)||(Pmode ==5) || (Pmode==6)){
-    	//This should probably be moved to a separate function so it doesn't need to recalculate every time
-        nPERIOD = lrintf((float)PERIOD*nRATIO);
-        u_up= (double)nPERIOD / (double)PERIOD;
-        u_down= (double)PERIOD / (double)nPERIOD;
-    	hPERIOD=nPERIOD;
-    }
-    else hPERIOD=PERIOD;
+    if((Pmode==3)||(Pmode ==5) || (Pmode==6))
+        hPERIOD=nPERIOD;
+    else
+        hPERIOD=PERIOD;
 
 
     if ((rndflag) && (tcount < hPERIOD + 1)) { //This is an Easter Egg
@@ -845,6 +841,10 @@ Sequence::adjust(int DS, double SAMPLE_RATE)
         window = 256;
         break;
     }
+
+    nPERIOD = lrintf((float)PERIOD*nRATIO);
+    u_up= (double)nPERIOD / (double)PERIOD;
+    u_down= (double)PERIOD / (double)nPERIOD;
 }
 
 
