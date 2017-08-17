@@ -31,10 +31,9 @@
 Shifter::Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
     hq = Quality;
     adjust(DS,sample_rate);
-
-    nRATIO = 1;
     
     initialize();
 
@@ -75,6 +74,7 @@ void
 Shifter::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
+    adjust(DS_state, fSAMPLE_RATE);
     clear_initialize();
     initialize();
 }
@@ -82,8 +82,6 @@ Shifter::lv2_update_params(uint32_t period)
 void
 Shifter::initialize()
 {
-    nPERIOD = PERIOD*nRATIO;
-
     templ = (float *) malloc (sizeof (float) * PERIOD);
     tempr = (float *) malloc (sizeof (float) * PERIOD);
 
@@ -179,6 +177,10 @@ Shifter::adjust(int DS, double SAMPLE_RATE)
         window = 256;
         break;
     }
+    
+    nPERIOD = lrintf((float)PERIOD*nRATIO);
+    u_up= (double)nPERIOD / (double)PERIOD;
+    u_down= (double)PERIOD / (double)nPERIOD;
 }
 
 
@@ -188,11 +190,6 @@ Shifter::out (float *efxoutl, float *efxoutr)
     int i;
     float sum;
     float use;
-
-    //This should probably be moved to a separate function so it doesn't need to recalculate every time
-    nPERIOD = lrintf((float)PERIOD*nRATIO);
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
 
     if(DS_state != 0) {
         memcpy(templ, efxoutl,sizeof(float)*PERIOD);

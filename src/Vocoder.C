@@ -104,16 +104,13 @@ void
 Vocoder::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
+    adjust(DS_state, fSAMPLE_RATE);
     clear_initialize();
     initialize();
 }
 void
 Vocoder::initialize()
-{
-    nPERIOD = lrintf((float)PERIOD*nRATIO);
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
-    
+{   
     filterbank = (fbank *) malloc(sizeof(fbank) * VOC_BANDS);
     tmpl = (float *) malloc (sizeof (float) * nPERIOD);
     tmpr = (float *) malloc (sizeof (float) * nPERIOD);
@@ -236,6 +233,9 @@ Vocoder::adjust(int DS, double SAMPLE_RATE)
     }
 
     ncSAMPLE_RATE = 1.0f / nfSAMPLE_RATE;
+    nPERIOD = lrintf((float)PERIOD*nRATIO);
+    u_up= (double)nPERIOD / (double)PERIOD;
+    u_down= (double)PERIOD / (double)nPERIOD;
 
 }
 
