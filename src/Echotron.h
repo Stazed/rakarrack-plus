@@ -173,6 +173,8 @@ private:
     } filterbank[ECHOTRON_MAXFILTERS];
 
     class FPreset *Fpre;
+    
+    char* FILENAME;     // for lv2 if need to re-initialize and reset .dly file
 
 };
 

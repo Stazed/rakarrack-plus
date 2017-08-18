@@ -102,10 +102,25 @@ Echotron::cleanup ()
 void
 Echotron::lv2_update_params (uint32_t period)
 {
-    PERIOD = period;
-    fPERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        fPERIOD = period;
+        clear_initialize();
+        initialize();
+        
+        DlyFile filedata;               // need to reload the file to reset the parameters
+        filedata = loadfile(FILENAME);
+
+        applyfile(filedata);
+        sethidamp(Phidamp);             // set for the analog filter
+    }
+    else
+    {
+        PERIOD = period;
+        fPERIOD = period;
+    }
+
     lfo->updateparams(fPERIOD);
     dlfo->updateparams(fPERIOD);
 }
@@ -354,6 +369,8 @@ Echotron::setfile(int value)
 DlyFile
 Echotron::loadfile(char* Filename)
 {
+    FILENAME = Filename;    // For lv2 if need to re-initialize and reload file
+
     float tPan=0.0f;
     float tTime=0.0f;
     float tLevel=0.0f;
@@ -453,7 +470,7 @@ Echotron::loadfile(char* Filename)
     {
         if(Plength>f.fLength) Plength = f.fLength;
     }
-
+        
     return f;
 };
 
