@@ -304,70 +304,70 @@
    </Parameter>
 
    <Parameter>
-    <Index>1</Index>
+    <Index>2</Index>
     <Name>Frequency</Name>
     <Symbol>LFREQ</Symbol>
     <Value>207</Value>
    </Parameter>
 
    <Parameter>
-    <Index>2</Index>
+    <Index>3</Index>
     <Name>Gain</Name>
     <Symbol>LGAIN</Symbol>
     <Value>2</Value>
    </Parameter>
 
    <Parameter>
-    <Index>3</Index>
+    <Index>4</Index>
     <Name>Width</Name>
     <Symbol>LQ</Symbol>
     <Value>-44</Value>
    </Parameter>
 
    <Parameter>
-    <Index>4</Index>
+    <Index>5</Index>
     <Name>Frequency</Name>
     <Symbol>MFREQ</Symbol>
     <Value>2240</Value>
    </Parameter>
 
    <Parameter>
-    <Index>5</Index>
+    <Index>6</Index>
     <Name>Gain</Name>
     <Symbol>MGAIN</Symbol>
     <Value>4</Value>
    </Parameter>
 
    <Parameter>
-    <Index>6</Index>
+    <Index>7</Index>
     <Name>Width</Name>
     <Symbol>MQ</Symbol>
     <Value>-44</Value>
    </Parameter>
 
    <Parameter>
-    <Index>7</Index>
+    <Index>8</Index>
     <Name>Frequency</Name>
     <Symbol>HFREQ</Symbol>
     <Value>9455</Value>
    </Parameter>
 
    <Parameter>
-    <Index>8</Index>
+    <Index>9</Index>
     <Name>Gain</Name>
     <Symbol>HGAIN</Symbol>
     <Value>2</Value>
    </Parameter>
 
    <Parameter>
-    <Index>9</Index>
+    <Index>10</Index>
     <Name>Width</Name>
     <Symbol>HQ</Symbol>
     <Value>-63</Value>
    </Parameter>
 
    <Parameter>
-    <Index>10</Index>
+    <Index>1</Index>
     <Name>Gain</Name>
     <Symbol>GAIN</Symbol>
     <Value>0</Value>

@@ -142,7 +142,7 @@
     <Index>2</Index>
     <Name>Pan</Name>
     <Symbol>PAN</Symbol>
-    <Value>-64</Value>
+    <Value>63</Value>
    </Parameter>
 
    <Parameter>

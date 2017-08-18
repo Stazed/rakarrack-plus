@@ -25,84 +25,84 @@
    </Parameter>
 
    <Parameter>
-    <Index>1</Index>
+    <Index>3</Index>
     <Name>31 Hz</Name>
     <Symbol>HZ31</Symbol>
     <Value>-46</Value>
    </Parameter>
 
    <Parameter>
-    <Index>2</Index>
+    <Index>4</Index>
     <Name>63 Hz</Name>
     <Symbol>HZ63</Symbol>
     <Value>-24</Value>
    </Parameter>
 
    <Parameter>
-    <Index>3</Index>
+    <Index>5</Index>
     <Name>125 Hz</Name>
     <Symbol>HZ125</Symbol>
     <Value>-11</Value>
    </Parameter>
 
    <Parameter>
-    <Index>4</Index>
+    <Index>6</Index>
     <Name>250 Hz</Name>
     <Symbol>HZ250</Symbol>
     <Value>-6</Value>
    </Parameter>
 
    <Parameter>
-    <Index>5</Index>
+    <Index>7</Index>
     <Name>500 Hz</Name>
     <Symbol>HZ500</Symbol>
     <Value>4</Value>
    </Parameter>
 
    <Parameter>
-    <Index>6</Index>
+    <Index>8</Index>
     <Name>1 kHz</Name>
     <Symbol>KHZ1</Symbol>
     <Value>2</Value>
    </Parameter>
 
    <Parameter>
-    <Index>7</Index>
+    <Index>9</Index>
     <Name>2 kHz</Name>
     <Symbol>KHZ2</Symbol>
     <Value>-3</Value>
    </Parameter>
 
    <Parameter>
-    <Index>8</Index>
+    <Index>10</Index>
     <Name>4 kHz</Name>
     <Symbol>KHZ4</Symbol>
     <Value>-21</Value>
    </Parameter>
 
    <Parameter>
-    <Index>9</Index>
+    <Index>11</Index>
     <Name>8 kHz</Name>
     <Symbol>KHZ8</Symbol>
     <Value>-38</Value>
    </Parameter>
 
    <Parameter>
-    <Index>10</Index>
+    <Index>12</Index>
     <Name>16 kHz</Name>
     <Symbol>KHZ16</Symbol>
     <Value>-64</Value>
    </Parameter>
 
    <Parameter>
-    <Index>11</Index>
+    <Index>1</Index>
     <Name>Gain</Name>
     <Symbol>GAIN</Symbol>
     <Value>25</Value>
    </Parameter>
 
    <Parameter>
-    <Index>12</Index>
+    <Index>2</Index>
     <Name>Q</Name>
     <Symbol>Q</Symbol>
     <Value>4</Value>
@@ -525,70 +525,70 @@
    </Parameter>
 
    <Parameter>
-    <Index>1</Index>
+    <Index>2</Index>
     <Name>Frequency</Name>
     <Symbol>LFREQ</Symbol>
     <Value>128</Value>
    </Parameter>
 
    <Parameter>
-    <Index>2</Index>
+    <Index>3</Index>
     <Name>Gain</Name>
     <Symbol>LGAIN</Symbol>
     <Value>6</Value>
    </Parameter>
 
    <Parameter>
-    <Index>3</Index>
+    <Index>4</Index>
     <Name>Width</Name>
     <Symbol>LQ</Symbol>
     <Value>25</Value>
    </Parameter>
 
    <Parameter>
-    <Index>4</Index>
+    <Index>5</Index>
     <Name>Frequency</Name>
     <Symbol>MFREQ</Symbol>
     <Value>825</Value>
    </Parameter>
 
    <Parameter>
-    <Index>5</Index>
+    <Index>6</Index>
     <Name>Gain</Name>
     <Symbol>MGAIN</Symbol>
     <Value>-6</Value>
    </Parameter>
 
    <Parameter>
-    <Index>6</Index>
+    <Index>7</Index>
     <Name>Width</Name>
     <Symbol>MQ</Symbol>
     <Value>-24</Value>
    </Parameter>
 
    <Parameter>
-    <Index>7</Index>
+    <Index>8</Index>
     <Name>Frequency</Name>
     <Symbol>HFREQ</Symbol>
     <Value>7691</Value>
    </Parameter>
 
    <Parameter>
-    <Index>8</Index>
+    <Index>9</Index>
     <Name>Gain</Name>
     <Symbol>HGAIN</Symbol>
     <Value>-7</Value>
    </Parameter>
 
    <Parameter>
-    <Index>9</Index>
+    <Index>10</Index>
     <Name>Width</Name>
     <Symbol>HQ</Symbol>
     <Value>-17</Value>
    </Parameter>
 
    <Parameter>
-    <Index>10</Index>
+    <Index>1</Index>
     <Name>Gain</Name>
     <Symbol>GAIN</Symbol>
     <Value>32</Value>
