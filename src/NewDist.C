@@ -41,7 +41,6 @@ NewDist::NewDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, 
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
-    Ppreset=0;
     initialize();
 
     //default values
@@ -62,7 +61,10 @@ NewDist::NewDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, 
     toggler = 1.0;
     octave_memoryr = -1.0;
     octmix=0.0;
-
+    
+    Ppreset=0;
+    
+    setpreset (Ppreset);
     cleanup ();
 };
 
@@ -138,9 +140,6 @@ NewDist::initialize()
 
     filterl = new Filter (filterpars);
     filterr = new Filter (filterpars);
-
-    setpreset (Ppreset);
-
 }
 
 void
