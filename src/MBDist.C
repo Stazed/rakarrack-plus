@@ -88,9 +88,18 @@ MBDist::cleanup ()
 void
 MBDist::lv2_update_params (uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+        setCross1 (Cross1);
+        setCross2 (Cross2);
+    }
+    else
+    {
+        PERIOD = PERIOD;
+    }
 }
 
 void 

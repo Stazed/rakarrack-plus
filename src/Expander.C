@@ -65,9 +65,19 @@ Expander::cleanup ()
 void
 Expander::lv2_update_params (uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+        setlpf (Plpf);
+        sethpf (Phpf);
+    }
+    else
+    {
+        PERIOD = period;
+    }
+
 }
 
 void 

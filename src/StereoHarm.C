@@ -35,6 +35,8 @@ StereoHarm::StereoHarm (long int Quality, int DS, int uq, int dq, double sample_
     hq = Quality;
     SAMPLE_RATE = (unsigned int)sample_rate;
     
+    adjust(STE_DOWN, PERIOD);
+    
     initialize();
 
     U_Resample = new Resample(dq);
@@ -87,16 +89,23 @@ StereoHarm::cleanup ()
 void
 StereoHarm::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        adjust(STE_DOWN, PERIOD);
+        clear_initialize();
+        initialize();
+    }
+    else
+    {
+        PERIOD = period;
+        adjust(STE_DOWN, PERIOD);
+    }
 }
 
 void
 StereoHarm::initialize()
 {
-    adjust(STE_DOWN, PERIOD);
-
     templ = (float *) malloc (sizeof (float) * PERIOD);
     tempr = (float *) malloc (sizeof (float) * PERIOD);
 

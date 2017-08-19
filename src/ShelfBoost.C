@@ -62,9 +62,19 @@ ShelfBoost::cleanup ()
 void
 ShelfBoost::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+        set_q(Pq1);
+        set_freq(Pfreq1);
+        set_gain(Plevel);
+    }
+    else
+    {
+        PERIOD = period;
+    }
 }
 
 void
@@ -150,6 +160,34 @@ ShelfBoost::setpreset (int npreset)
 
 
 void
+ShelfBoost::set_q(int value)
+{
+    Pq1 = value;
+    q1 = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+    RB1l->setq(q1);
+    RB1r->setq(q1);
+}
+
+void
+ShelfBoost::set_freq(int value)
+{
+    Pfreq1 = value;
+    freq1 = (float) value;
+    RB1l->setfreq(freq1);
+    RB1r->setfreq(freq1);
+}
+
+void
+ShelfBoost::set_gain(int value)
+{
+    Plevel = value;
+    gain = .375f * (float)value;
+    u_gain = 1.0f / gain;
+    RB1l->setgain(gain);
+    RB1r->setgain(gain);
+}
+
+void
 ShelfBoost::changepar (int npar, int value)
 {
     switch (npar) {
@@ -157,26 +195,16 @@ ShelfBoost::changepar (int npar, int value)
         setvolume (value);
         break;
     case 1:
-        Pq1 = value;
-        q1 = powf (30.0f, ((float)value - 64.0f) / 64.0f);
-        RB1l->setq(q1);
-        RB1r->setq(q1);
+        set_q(value);
         break;
     case 2:
-        Pfreq1 = value;
-        freq1 = (float) value;
-        RB1l->setfreq(freq1);
-        RB1r->setfreq(freq1);
+        set_freq(value);
         break;
     case 3:
         Pstereo = value;
         break;
     case 4:
-        Plevel = value;
-        gain = .375f * (float)value;
-        u_gain = 1.0f / gain;
-        RB1l->setgain(gain);
-        RB1r->setgain(gain);
+        set_gain(value);
         break;
 
     };

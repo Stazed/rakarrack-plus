@@ -62,9 +62,17 @@ EQ::cleanup ()
 void
 EQ::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+        //FIXME need to set filter freqs
+    }
+    else
+    {
+        PERIOD = period;
+    }
 }
 
 void

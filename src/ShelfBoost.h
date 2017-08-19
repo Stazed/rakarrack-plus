@@ -36,6 +36,9 @@ public:
     void lv2_update_params(uint32_t period);
     void initialize();
     void clear_initialize();
+    void set_q(int value);
+    void set_freq(int value);
+    void set_gain(int value);
 
     int Ppreset;
 

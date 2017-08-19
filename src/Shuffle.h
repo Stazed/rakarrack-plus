@@ -61,6 +61,7 @@ private:
     void setGainML (int value);
     void setGainMH (int value);
     void setGainH (int value);
+    void set_q(int value);
 
     //Parametrii
     int Pvolume;	//Volumul or E/R

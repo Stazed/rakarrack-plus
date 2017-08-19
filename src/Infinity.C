@@ -218,10 +218,19 @@ Infinity::cleanup ()
 void
 Infinity::lv2_update_params (uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
-    cleanup();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+        cleanup();
+        adjustfreqs();
+        reinitfilter();
+    }
+    else
+    {
+        PERIOD = period;
+    }
 }
 
 void Infinity::initialize()

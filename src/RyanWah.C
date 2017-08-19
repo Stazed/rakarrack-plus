@@ -171,10 +171,23 @@ RyanWah::cleanup ()
 void
 RyanWah::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+        reinitfilter ();
+        filterl->setstages(Pstages);
+        filterr->setstages(Pstages);
+        filterl->setmode(Pqm);
+        filterr->setmode(Pqm);
+    }
+    else
+    {
+        PERIOD = period;
+    }
+    
     lfo->updateparams(period);
-    clear_initialize();
-    initialize();
 }
 
 void

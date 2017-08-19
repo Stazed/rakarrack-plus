@@ -111,10 +111,20 @@ Sequence::cleanup ()
 void
 Sequence::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
-    adjust(DS_state, fSAMPLE_RATE);
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        adjust(DS_state, fSAMPLE_RATE);
+        clear_initialize();
+        initialize();
+        filterl->setmix(1, 0.33f, -1.0f, 0.25f);
+        filterr->setmix(1, 0.33f, -1.0f, 0.25f);
+    }
+    else
+    {
+        PERIOD = period;
+        adjust(DS_state, fSAMPLE_RATE);
+    }
 }
 
 void

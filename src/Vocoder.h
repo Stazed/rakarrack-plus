@@ -53,7 +53,7 @@ private:
     void setvolume (int Pvolume);
     void setpanning (int Ppanning);
     void init_filters();
-    void adjustq(float q);
+    void adjustq(int value);
     void   setbands(int numbands, float startfreq, float endfreq);
     int VOC_BANDS;
     //Parametrii

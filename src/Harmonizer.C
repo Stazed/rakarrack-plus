@@ -79,10 +79,21 @@ Harmonizer::cleanup ()
 void
 Harmonizer::lv2_update_params (uint32_t period)
 {
-    PERIOD = period;
-    adjust(DS_state,PERIOD);//readjust now that we know period size
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        adjust(DS_state,PERIOD);//readjust now that we know period size
+        clear_initialize();
+        initialize();
+        fsetfreq (fPfreq);
+        fsetgain (fPgain);
+        fsetq (fPq);
+    }
+    else
+    {
+        PERIOD = period;
+        adjust(DS_state,PERIOD);//readjust now that we know period size
+    }
 }
 
 void Harmonizer::initialize()

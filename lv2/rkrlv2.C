@@ -769,8 +769,8 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->harm->lv2_update_params(nframes);
         plug->comp->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
-        plug->noteID->setlpf(5500); // default user option in rakarrack
-        plug->noteID->sethpf(80); // default user option in rakarrack
+     //   plug->noteID->setlpf(5500); // default user option in rakarrack
+     //   plug->noteID->sethpf(80); // default user option in rakarrack
     }
     
     // we are good to run now
@@ -1843,8 +1843,8 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
         plug->ring->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
         plug->comp->lv2_update_params(nframes);
-        plug->noteID->setlpf(5500);
-        plug->noteID->sethpf(80);
+     //   plug->noteID->setlpf(5500);
+     //   plug->noteID->sethpf(80);
     }
     
     // we are good to run now
@@ -3687,8 +3687,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->sharm->lv2_update_params(nframes);
         plug->comp->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
-        plug->noteID->setlpf(5500); // default user option in rakarrack
-        plug->noteID->sethpf(80); // default user option in rakarrack
+    //    plug->noteID->setlpf(5500); // default user option in rakarrack
+    //    plug->noteID->sethpf(80); // default user option in rakarrack
     }
     
     // we are good to run now

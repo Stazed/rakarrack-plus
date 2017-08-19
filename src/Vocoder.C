@@ -65,6 +65,7 @@ Vocoder::Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double
     D_Resample = new Resample(uq);
 
     setbands(VOC_BANDS, 200.0f, 4000.0f);
+    init_filters();
     setpreset (Ppreset);
 
 };
@@ -103,10 +104,21 @@ Vocoder::cleanup ()
 void
 Vocoder::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
-    adjust(DS_state, fSAMPLE_RATE);
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        adjust(DS_state, fSAMPLE_RATE);
+        clear_initialize();
+        initialize();
+        setbands(VOC_BANDS, 200.0f, 4000.0f);
+        init_filters();
+        adjustq(Pqq);
+    }
+    else
+    {
+        PERIOD = period;
+        adjust(DS_state, fSAMPLE_RATE);
+    }
 }
 void
 Vocoder::initialize()
@@ -400,7 +412,7 @@ Vocoder::setpanning (int Ppanning)
 
 
 void
-Vocoder::init_filters()
+Vocoder::init_filters()     // FIXME this is never used
 {
     float ff, qq;
 
@@ -415,8 +427,11 @@ Vocoder::init_filters()
 }
 
 void
-Vocoder::adjustq(float q)
+Vocoder::adjustq(int value)
 {
+    Pqq = value;
+    float q = 0;
+    q = (float) value;
 
     for (int ii = 0; ii < VOC_BANDS; ii++) {
         filterbank[ii].l->setq (q);
@@ -475,9 +490,10 @@ Vocoder::changepar (int npar, int value)
         beta = 1.0f - alpha;
         break;
     case 3:
-        Pqq = value;
+        adjustq(value);
+/*        Pqq = value;
         tmp = (float) value;
-        adjustq(tmp);
+        adjustq(tmp);*/
         break;
     case 4:
         Pinput = value;

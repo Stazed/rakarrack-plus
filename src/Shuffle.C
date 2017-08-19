@@ -73,9 +73,25 @@ Shuffle::cleanup ()
 void
 Shuffle::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+        setCross1 (Cross1);
+        setCross2 (Cross2);
+        setCross3 (Cross3);
+        setCross4 (Cross4);
+        setGainL (getpar(1));
+        setGainML (getpar(2));
+        setGainMH (getpar(3));
+        setGainH (getpar(4));
+        set_q(PQ);
+    }
+    else
+    {
+        PERIOD = period;
+    }
 }
 
 void
@@ -215,6 +231,18 @@ Shuffle::setGainH(int value)
     hr->setgain(volH);
 }
 
+void
+Shuffle::set_q(int value)
+{
+    PQ = value;
+    value +=64;
+    tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+    lr->setq(tmp);
+    mlr->setq(tmp);
+    mhr->setq(tmp);
+    hr->setq(tmp);
+}
+
 
 void
 Shuffle::setpreset (int npreset)
@@ -277,13 +305,7 @@ Shuffle::changepar (int npar, int value)
         setCross4 (value);
         break;
     case 9:
-        PQ = value;
-        value +=64;
-        tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
-        lr->setq(tmp);
-        mlr->setq(tmp);
-        mhr->setq(tmp);
-        hr->setq(tmp);
+        set_q (value);
         break;
     case 10:
         E=value;

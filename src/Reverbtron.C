@@ -115,10 +115,20 @@ Reverbtron::cleanup ()
 void
 Reverbtron::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
-    adjust(DS_state, fSAMPLE_RATE);
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        adjust(DS_state, fSAMPLE_RATE);
+        clear_initialize();
+        initialize();
+        setlpf (Plpf);
+        sethidamp (Phidamp);
+    }
+    else
+    {
+        PERIOD = period;
+        adjust(DS_state, fSAMPLE_RATE);
+    }
 }
 
 void
