@@ -37,13 +37,6 @@ Dflange::Dflange (double sample_rate, uint32_t intermediate_bufsize)
     fSAMPLE_RATE = sample_rate;
     PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted for lv2
 
-    //default values
-    Ppreset = 0;
-
-    ldelay = NULL;
-    rdelay = NULL;
-
-
     maxx_delay = (int) sample_rate * 0.055f;
     ldelay = new float[maxx_delay];
     rdelay = new float[maxx_delay];
@@ -86,15 +79,15 @@ Dflange::Dflange (double sample_rate, uint32_t intermediate_bufsize)
 
 Dflange::~Dflange ()
 {
-    delete ldelay;
-    delete rdelay;
-    delete zldelay;
-    delete zrdelay;
+    delete[] ldelay;
+    delete[] rdelay;
+    delete[] zldelay;
+    delete[] zrdelay;
     delete ldelayline0;
     delete rdelayline0;
     delete ldelayline1;
     delete rdelayline1;
-	delete lfo;
+    delete lfo;
 };
 
 /*
@@ -120,6 +113,12 @@ Dflange::cleanup ()
     lflange0 = 0.0f;
     rflange1 = 0.0f;
     lflange1 = 0.0f;
+    oldrflange0 = 0.0f;
+    oldrflange1 = 0.0f;
+    oldlflange0 = 0.0f;
+    oldlflange1 = 0.0f;
+    kl = kr = zl = zr = 0;
+    oldl = oldr = 0.0f;
 
 };
 
