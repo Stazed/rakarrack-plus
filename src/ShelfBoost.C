@@ -34,6 +34,9 @@ ShelfBoost::ShelfBoost (double sample_rate, uint32_t intermediate_bufsize)
     Ppreset = 0;
     Pvolume = 50;
     Pstereo = 0;
+    Pq1 = Pfreq1 = Plevel = 0;
+    
+    freq1 = q1 = gain = u_gain = outvolume = 1.0f;
 
     initialize();
 

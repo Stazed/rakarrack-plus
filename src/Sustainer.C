@@ -34,7 +34,10 @@ Sustainer::Sustainer (double sample_rate, uint32_t intermediate_bufsize)
     Psustain = 64;
     fsustain = 0.5f;
     level = 0.5f;
+    input = tmpgain = 0.0f;
     Ppreset = 0;
+    
+    compeak = compg =  compenv = oldcompenv = cpthresh = 0.0f;
 
     float tmp = 0.01f;  //10 ms decay time on peak detectorS
     prls = 1.0f - (cSAMPLE_RATE/(cSAMPLE_RATE + tmp));

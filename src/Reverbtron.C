@@ -44,10 +44,17 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     Ppanning = 64;
     Plrcross = 100;
     Phidamp = 60;
+    Plevel = 0;
+    Plength = 20;
     Filenum = 0;
     Llength = 50;
     Puser = 0;
+    Pstretch = 0;
+    Pidelay = 0;
     Psafe = 0;
+    Pes = 0;
+    Prv = 0;
+    Plpf = 20000;
     Pdiff = 1;
     Pfade = 1;
     Pfb = 1;
@@ -56,6 +63,9 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
 
     level = fb = feedback = levpanl = levpanr = 0.0f;
     roomsize = 1.0f;
+    lpanning = rpanning = 0.0f;
+    outvolume = 64.0f;
+    
     adjust(DS, sample_rate);
 
     hrtf_size = nSAMPLE_RATE/2;

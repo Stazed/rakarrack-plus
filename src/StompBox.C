@@ -55,6 +55,7 @@ StompBox::StompBox (int wave_res, int wave_upq, int wave_dnq, double sample_rate
     initialize();
 
     setpreset (Ppreset);
+    
 };
 
 StompBox::~StompBox ()
@@ -105,6 +106,7 @@ StompBox::lv2_update_params(uint32_t period)
         initialize();
         init_mode (Pmode);
         init_tone();
+        cleanup ();
     }
     else
     {
@@ -143,7 +145,7 @@ StompBox::initialize()
     rwshape2 = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
     lwshape2 = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
 
-    cleanup ();
+//    cleanup ();
 }
 
 void
