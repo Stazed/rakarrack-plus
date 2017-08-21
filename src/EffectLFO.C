@@ -52,7 +52,7 @@ EffectLFO::EffectLFO (double sample_rate)
     holdflag = 0;
     tca = iperiod/(iperiod + 0.02);  //20ms default
     tcb = 1.0f - tca;
-    rreg = lreg = oldrreg = oldlreg = 0.0f;
+    xlreg = xrreg = rreg = lreg = oldrreg = oldlreg = 0.0f;
     updateparams ((uint32_t)fPERIOD);
 
     ampl1 = (1.0f - lfornd) + lfornd * (float)RND;
