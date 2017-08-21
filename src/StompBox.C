@@ -36,6 +36,21 @@ StompBox::StompBox (int wave_res, int wave_upq, int wave_dnq, double sample_rate
     //default values
     Ppreset = 0;
     Pvolume = 50;
+    Pgain = 64;
+    Phigh = Pmid = Plow =  0;
+    Pmode = 0;
+    gain = 0.0f;
+    pre1gain = 100.0f;
+    pre2gain = 3000.0f;
+    lowb = midb = highb = 0.0f;
+    volume = (float)Pvolume / 127.0f;
+    
+    LG = 22.0f;
+    MG = 11.0f;
+    HG = 11.0f;
+    RGP2 = 10.0f;
+    RGPST = 3.0f;
+    pgain = 110.0f;
 
     initialize();
 

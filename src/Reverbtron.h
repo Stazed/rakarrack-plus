@@ -100,7 +100,7 @@ private:
     //int data_length;
     int error;// flag if error when loading file
     int Llength; //Plength but limited
-    int avgtime;
+//    int avgtime;
     int hrtf_size;
     int hlength;
     int DS_state;

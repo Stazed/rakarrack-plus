@@ -48,10 +48,14 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     Llength = 50;
     Puser = 0;
     Psafe = 0;
+    Pdiff = 1;
+    Pfade = 1;
+    Pfb = 1;
     error = 0;
     convlength = 10.0f;  //max reverb time
-    fb = 0.0f;
-    feedback = 0.0f;
+
+    level = fb = feedback = levpanl = levpanr = 0.0f;
+    roomsize = 1.0f;
     adjust(DS, sample_rate);
 
     hrtf_size = nSAMPLE_RATE/2;
@@ -69,7 +73,9 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     hoffset = 0;
     hlength = 0;
     fstretch = 1.0f;
-    idelay = 0.0f;
+    idelay = 1.0f;
+    ffade = diffusion = hidamp = 0.0f;
+    alpha_hidamp = 1.0f - hidamp;
     decay = f_exp(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
 
     initialize();
@@ -105,6 +111,12 @@ Reverbtron::cleanup ()
 {
     memset(lxn,0,sizeof(float)*(maxx_size+1));
     memset(hrtf,0,sizeof(float)*(hrtf_size+1));
+    
+    memset(imdelay,0,sizeof(float)*imax);
+    memset(rnddata,0,sizeof(float)* 2000);
+    
+    memset(templ,0,sizeof(float)*PERIOD);
+    memset(tempr,0,sizeof(float)*PERIOD);
     
     feedback = 0.0f;
     oldl = 0.0f;
@@ -441,7 +453,6 @@ Reverbtron::loadfile(char* filename)
 void
 Reverbtron::applyfile(RvbFile file)
 {
-    cleanup();
     File = file;
     convert_time();
 };
@@ -474,6 +485,7 @@ void Reverbtron::convert_time()
 
     memset(data, 0, sizeof(float)*2000);
     memset(time, 0, sizeof(int)*2000);
+    memset(rndtime, 0, sizeof(int)*2000);
 
     if(Llength>=File.data_length) Llength = File.data_length;
     if(Llength==0) Llength=400;
@@ -546,7 +558,7 @@ void Reverbtron::convert_time()
     if(roomsize>imax) roomsize = imax;
     setfb(Pfb);
 
-
+    cleanup();
 };
 
 
