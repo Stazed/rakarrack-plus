@@ -95,8 +95,6 @@ RyanWah::out (float * efxoutl, float * efxoutr)
     }
 
     for (i = 0; i < PERIOD; i++) {
-        efxoutl[i] = efxoutl[i];
-        efxoutr[i] = efxoutr[i];
 
         float x = (fabsf ( sidechain_filter->filterout_s(efxoutl[i] + efxoutr[i]))) * 0.5f;
         ms1 = ms1 * ampsmooth + x * (1.0f - ampsmooth) + 1e-10f;
