@@ -30,7 +30,7 @@
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
  */
 
-
+// DistBand
 
 MBDist::MBDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize)
 {
@@ -98,7 +98,7 @@ MBDist::lv2_update_params (uint32_t period)
     }
     else
     {
-        PERIOD = PERIOD;
+        PERIOD = period;
     }
 }
 
