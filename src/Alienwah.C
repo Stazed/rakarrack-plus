@@ -34,6 +34,9 @@ Alienwah::Alienwah (double sample_rate, uint32_t intermediate_bufsize)
     
     PERIOD = intermediate_bufsize;  // correct for rakarrak, may be adjusted for lv2
     fPERIOD = intermediate_bufsize; // correct for rakarrak, may be adjusted for lv2
+    
+    panning = fb = depth = lrcross = phase = 0.0f;
+    
     setpreset (Ppreset);
     cleanup ();
     oldclfol.a = fb;
@@ -45,7 +48,7 @@ Alienwah::Alienwah (double sample_rate, uint32_t intermediate_bufsize)
 
 Alienwah::~Alienwah ()
 {
-	delete lfo;
+    delete lfo;
 };
 
 
@@ -55,7 +58,7 @@ Alienwah::~Alienwah ()
 void
 Alienwah::out (float * efxoutl, float * efxoutr)
 {
-	unsigned int i;
+    unsigned int i;
     float lfol, lfor;
     COMPLEXTYPE clfol, clfor, out, tmp;
 
