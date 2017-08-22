@@ -41,6 +41,7 @@ Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double sampler
     //default values
     Ppreset = 0;
     Pvolume = 50;
+    Ppanning = 0;
     Plrcross = 40;
     Pdrive = 90;
     Plevel = 64;
@@ -56,6 +57,8 @@ Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double sampler
     toggler = 1.0;
     octave_memoryr = -1.0;
     octmix = 0.0;
+    panning = lrcross = 0.0f;
+    outvolume = 64.f;
 
     setpreset (0,Ppreset);
     cleanup ();
@@ -86,9 +89,16 @@ Distorsion::cleanup ()
 void
 Distorsion::lv2_update_params (uint32_t period)
 {
-    PERIOD = period;
-    clear_initialize();
-    initialize();
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+    }
+    else
+    {
+        PERIOD = period;
+    }
 }
 
 /*

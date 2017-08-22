@@ -56,6 +56,7 @@ AnalogFilter::AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,
     firsttime = 1;
     d[0] = 0;			//this is not used
     outgain = 1.0;
+    order = 0;
 
     ismp = interpbuf;
 };
