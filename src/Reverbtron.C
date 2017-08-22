@@ -64,7 +64,7 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     level = fb = feedback = levpanl = levpanr = 0.0f;
     roomsize = 1.0f;
     lpanning = rpanning = 0.0f;
-    outvolume = 64.0f;
+    outvolume = 0.5f;
     
     adjust(DS, sample_rate);
 

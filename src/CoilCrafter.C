@@ -36,6 +36,8 @@ CoilCrafter::CoilCrafter (double sample_rate, uint32_t intermediate_bufsize)
     Pvolume = 50;
     Ptone = 20;
     att = 16.0f*powf(PI,sample_rate/44100.0f);
+    
+    outvolume = 1.5f;
 
     tfreqs[0]=4000.0f;
     tfreqs[1]=4400.0f;

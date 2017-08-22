@@ -53,6 +53,8 @@ Arpie::Arpie (double sample_rate, uint32_t intermediate_bufsize)
     envattack = 1.0f/(float)invattack;
     maxx_delay = SAMPLE_RATE * MAX_DELAY;
     fade = SAMPLE_RATE / 10;    //200ms fade time available
+    
+    outvolume = 0.5f;
 
     ldelay = new float[maxx_delay];
     rdelay = new float[maxx_delay];

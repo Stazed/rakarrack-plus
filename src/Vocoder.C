@@ -42,6 +42,7 @@ Vocoder::Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double
     Pinput = 0;
     Ppanning = 64;
     Plrcross = 100;
+    outvolume = 0.5f;
 
     initialize();
 

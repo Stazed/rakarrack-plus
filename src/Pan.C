@@ -33,6 +33,7 @@ Pan::Pan (double sample_rate, uint32_t intermediate_bufsize)
     
     lfo = new EffectLFO(sample_rate);
 
+    outvolume = 0.5f;
     Ppreset = 0;
     setpreset (Ppreset);
 

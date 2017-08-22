@@ -55,6 +55,7 @@ StereoHarm::StereoHarm (long int Quality, int DS, int uq, int dq, double sample_
     Ppreset = 0;
     PMIDI = 0;
     mira = 0;
+    outvolume = 0.5f;
     setpreset (Ppreset);
 
 

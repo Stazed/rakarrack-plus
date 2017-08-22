@@ -51,6 +51,8 @@ Harmonizer::Harmonizer (long int Quality, int DS, int uq, int dq, double sample_
     PMIDI = 0;
     mira = 0;
     r_ratio = 0.0f;
+    outvolume = 0.5f;
+    
     setpreset (Ppreset);
 
 

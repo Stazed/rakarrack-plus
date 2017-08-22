@@ -36,6 +36,7 @@ Alienwah::Alienwah (double sample_rate, uint32_t intermediate_bufsize)
     fPERIOD = intermediate_bufsize; // correct for rakarrak, may be adjusted for lv2
     
     panning = fb = depth = lrcross = phase = 0.0f;
+    outvolume = 0.5f;
     
     setpreset (Ppreset);
     cleanup ();

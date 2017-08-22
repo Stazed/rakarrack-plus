@@ -62,6 +62,7 @@ Synthfilter::Synthfilter (double sample_rate, uint32_t intermediate_bufsize)
     Clp = 0.00000005f;
     att = delta * 5.0f;		//200ms
     rls = delta * 5.0f;		//200ms
+    outvolume = 0.5f;
 
     lfo = new EffectLFO(sample_rate);
     inv_period = 1.f/(float)PERIOD;

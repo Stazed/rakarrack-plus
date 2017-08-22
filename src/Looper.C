@@ -48,6 +48,7 @@ Looper::Looper (float size,double samplerate, uint32_t intermediate_bufsize):
     first_time2 = 1;
     Pms = 0;
     Ptempo = 120;
+    outvolume = 0.5f;
     settempo(120);
     Pbar = 2;
     setbar(2);

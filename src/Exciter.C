@@ -35,6 +35,7 @@ Exciter::Exciter (double sample_rate, uint32_t intermediate_bufsize)
     Pvolume = 50;
     lpffreq = 8000;
     hpffreq = 2500;
+    outvolume = 0.5f;
 
     for(int i=0; i<10; i++) {
         Prm[i]=0;

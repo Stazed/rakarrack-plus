@@ -49,6 +49,7 @@ Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate
     subdiv = 2;
     lmod = 0.5f;
     rmod = 0.5f;
+    outvolume = 0.5f;
 
 //Trigger Filter Settings
     peakpulse = peak = envrms = 0.0f;

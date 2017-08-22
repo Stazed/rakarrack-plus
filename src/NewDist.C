@@ -61,6 +61,7 @@ NewDist::NewDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, 
     toggler = 1.0;
     octave_memoryr = -1.0;
     octmix=0.0;
+    outvolume = 0.5f;
     
     Ppreset=0;
     

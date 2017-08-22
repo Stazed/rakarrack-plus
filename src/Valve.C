@@ -52,6 +52,7 @@ Valve::Valve (double sample_rate, uint32_t intermediate_bufsize)
     Ped = 0;
     Pstereo = 0;
     Pprefiltering = 0;
+    outvolume = 0.5f;
     q = 0.0f;
     dist = 0.0f;
     setlpf(127);

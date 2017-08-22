@@ -58,7 +58,7 @@ Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double sampler
     octave_memoryr = -1.0;
     octmix = 0.0;
     panning = lrcross = 0.0f;
-    outvolume = 64.f;
+    outvolume = 0.5f;
 
     setpreset (0,Ppreset);
     cleanup ();

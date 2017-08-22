@@ -55,6 +55,7 @@ Ring::Ring (double sample_rate, uint32_t intermediate_bufsize)
     Plrcross = 40;
     Plevel = 64;
     Pstereo = 0;
+    outvolume = 0.5f;
 
     scale = 1.0f;
     sin = 0.0f;

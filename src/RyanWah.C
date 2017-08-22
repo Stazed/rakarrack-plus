@@ -54,6 +54,7 @@ RyanWah::RyanWah (double sample_rate, uint32_t intermediate_bufsize)
     bpmix = 2.0f;
     Ppreset = 0;
     wahsmooth = 1.0f - expf(-1.0f/(0.02f*sample_rate));  //0.02 seconds
+    outvolume = 0.5f;
 
     lfo = new EffectLFO(sample_rate);
 

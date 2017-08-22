@@ -59,6 +59,7 @@ CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
     //default values
     Ppreset = 0;
     Pvolume = 50;
+    outvolume = 0.5f;
 
     setpreset (Ppreset);
     cleanup ();

@@ -36,7 +36,7 @@ Infinity::Infinity (double sample_rate, uint32_t intermediate_bufsize)
     Ppreset = 2;
     setpreset (Ppreset);
     Pvolume = 64;
-    outvolume = 0.5;
+    outvolume = 0.5f;
     Pq = 30;
     Pstartfreq = 5;
     Pendfreq = 80;

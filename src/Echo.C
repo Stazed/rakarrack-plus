@@ -43,6 +43,7 @@ Echo::Echo (double samplerate, uint32_t intermediate_bufsize)
     Plrcross = 100;
     Pfb = 40;
     Phidamp = 60;
+    outvolume = 0.5f;
 
     lrdelay = 0;
     Srate_Attack_Coeff = 1.0f / (samplerate * ATTACK);

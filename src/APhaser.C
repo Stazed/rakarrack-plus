@@ -79,6 +79,7 @@ Analog_Phaser::Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize)
     C = 0.00000005f;	     // 50 nF
     CFs = 2.0f*fSAMPLE_RATE*C;
     invperiod = 1.0f / fPERIOD;
+    outvolume = 0.5f;
     
     lfo = new EffectLFO(sample_rate);
 

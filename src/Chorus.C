@@ -53,6 +53,8 @@ Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
     oldr = 0.0f;
     oldl = 0.0f;
     awesome_mode = 0;
+    
+    outvolume = 0.5f;
 
     lfo->effectlfoout (&lfol, &lfor);
     dl2 = getdelay (lfol);

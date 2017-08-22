@@ -47,6 +47,7 @@ MusicDelay::MusicDelay (double sample_rate, uint32_t intermediate_bufsize)
     Pfb2 = 40;
     Ptempo = 100;
     Phidamp = 60;
+    outvolume = 0.5f;
 
     maxx_delay = sample_rate * MAX_DELAY;
     ldelay1 = new float[maxx_delay];

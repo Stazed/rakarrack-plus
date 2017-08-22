@@ -58,6 +58,7 @@ Vibe::Vibe (double sample_rate, uint32_t intermediate_bufsize)
     Pstereo = 1; //1 if you want to process in stereo, 0 to do mono proc
     Pdepth = 127;
     Ppanning = 64;
+    outvolume = 0.5f;
     lpanning = 1.0f;
     rpanning = 1.0f;
     fdepth = 1.0f;

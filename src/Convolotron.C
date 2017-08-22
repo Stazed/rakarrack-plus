@@ -47,6 +47,8 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
     convlength = .5f;
     fb = 0.0f;
     feedback = 0.0f;
+    outvolume = 0.5f;
+    
     adjust(DS, PERIOD);
 
     templ = (float *) malloc (sizeof (float) * PERIOD);

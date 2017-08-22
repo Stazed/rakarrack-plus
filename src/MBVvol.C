@@ -48,6 +48,8 @@ MBVvol::MBVvol (double sample_rate, uint32_t intermediate_bufsize)
     volL=volLr=volML=volMLr=volMH=volMHr=volH=volHr=2.0f;
     one = 1.0f;
     zero = 0.0f;
+    outvolume = 0.5f;
+    
     setpreset (Ppreset);
     cleanup ();
 };

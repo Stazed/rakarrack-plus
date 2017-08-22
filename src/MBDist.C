@@ -56,6 +56,7 @@ MBDist::MBDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, ui
     PvolH = 0;
     Pnegate = 0;
     Pstereo = 0;
+    outvolume = 0.5f;
 
     setpreset (Ppreset);
     cleanup ();

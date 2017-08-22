@@ -54,6 +54,7 @@ Reverb::Reverb (double samplerate, uint16_t intermediate_bufsize)
     roomsize = 1.0f;
     rs = 1.0f;
     rs_coeff = rs / (float) REV_COMBS;
+    outvolume = 0.5f;
 
     //max comb length
     unsigned int tmp = lrintf(220023.0*samplerate/44100.0);

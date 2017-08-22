@@ -31,6 +31,7 @@ DynamicFilter::DynamicFilter (double sample_rate, uint32_t intermediate_bufsize)
     PERIOD = intermediate_bufsize; // correct for rakarrack, many be adjusted for lv2
     lfo = new EffectLFO(sample_rate);
 
+    outvolume = 0.5f;
     Ppreset = 0;
     filterl = NULL;
     filterr = NULL;

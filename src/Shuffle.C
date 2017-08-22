@@ -48,6 +48,7 @@ Shuffle::Shuffle (double sample_rate, uint32_t intermediate_bufsize)
     PvolMH = 0;
     PvolH = 0;
     E=0;
+    outvolume = 0.5f;
     setpreset (Ppreset);
     cleanup ();
 };

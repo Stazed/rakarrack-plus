@@ -53,6 +53,7 @@ Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
     fb = 0.0f;
     lfeedback = 0.0f;
     rfeedback = 0.0f;
+    outvolume = 0.5f;
     File = loaddefault();
 
     lfo = new EffectLFO(sample_rate);

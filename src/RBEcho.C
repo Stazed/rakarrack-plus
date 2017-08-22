@@ -48,6 +48,7 @@ RBEcho::RBEcho (double sample_rate, uint32_t intermediate_bufsize)
     lfeedback = rfeedback = 0.0f;
     pingpong = 0.0f;
     ipingpong = 1.0f;
+    outvolume = 0.5f;
 
     delay = lrdelay = ltime = rtime = 0.0f;
     Srate_Attack_Coeff = 1.0f / (sample_rate * ATTACK);
