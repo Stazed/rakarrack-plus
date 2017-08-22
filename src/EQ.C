@@ -37,6 +37,7 @@ EQ::EQ (double samplerate, uint32_t intermediate_bufsize)
     //default values
     Ppreset = 0;
     Pvolume = 50;
+    outvolume = 0.7f;
 
     setpreset (Ppreset);
     cleanup ();
