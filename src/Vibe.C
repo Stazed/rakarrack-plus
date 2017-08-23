@@ -54,7 +54,19 @@ Vibe::Vibe (double sample_rate, uint32_t intermediate_bufsize)
     ilampTC = 1.0f - lampTC;
     lstep = 0.0f;
     rstep = 0.0f;
+    stepr = stepl = 0.0f;
+    oldstepl = oldstepr = 0.5f;
+    fbr = fbl = 0.5f;
 
+    Pwidth = 0;
+    Pfb = 0;
+    Plrcross = 0;
+    Pvolume = 50;
+    fwidth = ((float) Pwidth)/90.0f;
+    flrcross = ((float) (Plrcross - 64))/64.0f;
+    fcross = 1.0f - fabs(flrcross);
+    fb = ((float) (Pfb - 64))/65.0f;
+    
     Pstereo = 1; //1 if you want to process in stereo, 0 to do mono proc
     Pdepth = 127;
     Ppanning = 64;
@@ -170,7 +182,7 @@ Vibe::out (float *efxoutl, float *efxoutr)
             input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
 
         */
-
+        
         emitterfb = 25.0f/fxl;
         for(j=0; j<4; j++) { //4 stages phasing
             /*
@@ -207,7 +219,7 @@ Vibe::out (float *efxoutl, float *efxoutr)
                 input = vin - vbe;
                 input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
             */
-
+            
 // Orig code, Comment below if instead using inline
             cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
             ocvolt = vibefilter(cvolt,vcvo,j);
@@ -233,7 +245,7 @@ Vibe::out (float *efxoutl, float *efxoutr)
              input = vin - vbe;
              input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
              */
-
+             
 
 //Orig code
             input = bjt_shape(fbr + efxoutr[i]);
@@ -279,7 +291,7 @@ Vibe::out (float *efxoutl, float *efxoutr)
                     input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
 
                 */
-
+                
 //  Comment block below if using inline code instead
                 cvolt = vibefilter(input,ecvc,j) + vibefilter(input + emitterfb*oldcvolt[j],vc,j);
                 ocvolt = vibefilter(cvolt,vcvo,j);
@@ -301,7 +313,7 @@ Vibe::out (float *efxoutl, float *efxoutr)
         }
 
     };
-
+    
 };
 
 float
@@ -381,24 +393,32 @@ Vibe::init_vibes()
         vc[i].n0 = tmpgain*(cn1[i] + cn0[i]);
         vc[i].d1 = tmpgain*(cd0[i] - cd1[i]);
         vc[i].d0 = 1.0f;
+        vc[i].x1 = 0.0f;
+        vc[i].y1 = 0.0f;
 
         tmpgain =  1.0f/(ecd1[i] + ecd0[i]);
         ecvc[i].n1 = tmpgain*(ecn0[i] - ecn1[i]);
         ecvc[i].n0 = tmpgain*(ecn1[i] + ecn0[i]);
         ecvc[i].d1 = tmpgain*(ecd0[i] - ecd1[i]);
         ecvc[i].d0 = 1.0f;
+        ecvc[i].x1 = 0.0f;
+        ecvc[i].y1 = 0.0f;
 
         tmpgain =  1.0f/(od1[i] + od0[i]);
         vcvo[i].n1 = tmpgain*(on0[i] - on1[i]);
         vcvo[i].n0 = tmpgain*(on1[i] + on0[i]);
         vcvo[i].d1 = tmpgain*(od0[i] - od1[i]);
         vcvo[i].d0 = 1.0f;
+        vcvo[i].x1 = 0.0f;
+        vcvo[i].y1 = 0.0f;
 
         tmpgain =  1.0f/(ed1[i] + ed0[i]);
         vevo[i].n1 = tmpgain*(en0[i] - en1[i]);
         vevo[i].n0 = tmpgain*(en1[i] + en0[i]);
         vevo[i].d1 = tmpgain*(ed0[i] - ed1[i]);
         vevo[i].d0 = 1.0f;
+        vevo[i].x1 = 0.0f;
+        vevo[i].y1 = 0.0f;
 
 // bootstrap[i].n1
 // bootstrap[i].n0
