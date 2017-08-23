@@ -66,7 +66,7 @@ private:
     float fbr, fbl;
     float dalphal, dalphar;
     float lstep,rstep;
-    float cperiod;
+//    float cperiod;
     float gl, oldgl;
     float gr, oldgr;
 

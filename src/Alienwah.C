@@ -37,6 +37,8 @@ Alienwah::Alienwah (double sample_rate, uint32_t intermediate_bufsize)
     
     panning = fb = depth = lrcross = phase = 0.0f;
     outvolume = 0.5f;
+    oldk = 0;
+    oldpdelay = 0;
     
     setpreset (Ppreset);
     cleanup ();
