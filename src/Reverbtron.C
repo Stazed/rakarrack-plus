@@ -89,6 +89,7 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     decay = f_exp(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
 
     initialize();
+    File = loaddefault();
 
     U_Resample = new Resample(dq);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
     D_Resample = new Resample(uq);
