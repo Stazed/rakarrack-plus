@@ -42,6 +42,7 @@ Valve::Valve (double sample_rate, uint32_t intermediate_bufsize)
     //default values
     Ppreset = 0;
     Pvolume = 50;
+    Ppanning = 0;
     Plrcross = 40;
     Pdrive = 90;
     Plevel = 64;
@@ -53,12 +54,15 @@ Valve::Valve (double sample_rate, uint32_t intermediate_bufsize)
     Pstereo = 0;
     Pprefiltering = 0;
     outvolume = 0.5f;
-    q = 0.0f;
-    dist = 0.0f;
+    q = (float)Q_q /127.0f - 1.0f;
+    factor = 1.0f - ((float)Q_q / 128.0f);
+    dist = (float) Pdrive / 127.0f * 40.0f + .5f;
+    lrcross = (float)Plrcross / 127.0f * 1.0f;
     setlpf(127);
     sethpf(1);
     atk = 1.0f - 40.0f/sample_rate;
-
+    panning = otml = otmr = itml = itmr = 0.0f;
+    
     for(int i=0; i<10; i++) rm[i]=0.0;
     rm[0]=1.0f;
     rm[2]= -1.0f;

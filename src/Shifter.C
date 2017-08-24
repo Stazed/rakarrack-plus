@@ -44,8 +44,10 @@ Shifter::Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, 
     PS->ratio = 1.0f;
 
     state = IDLE;
-    env = 0.0f;
-    tune = 0.0f;
+    env = t_level = td_level = tz_level = 0.0f;
+    tune = a_rate = d_rate = range = whammy = 0.0f;
+    panning = gain = 0.0f;
+    interval = 0.0f;
     Pupdown = 0;
     Pinterval = 0;
     outvolume = 0.5f;
@@ -69,6 +71,9 @@ Shifter::cleanup ()
     state = IDLE;
     memset(outi, 0, sizeof(float)*nPERIOD);
     memset(outo, 0, sizeof(float)*nPERIOD);
+    
+    memset(templ, 0, sizeof(float)*PERIOD);
+    memset(tempr, 0, sizeof(float)*PERIOD);
 };
 
 void

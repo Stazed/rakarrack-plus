@@ -43,13 +43,18 @@ Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate
     MINFREQ = 100.0f;
     fq = 75.0f;
     Ppreset = 0;
+    Pamplitude = 0;
+    Pstdiff = 1;
+    Pmode = 3;
     scount = 0;
     tcount = 0;
+    dscount = 0;
     rndflag = 0;
     subdiv = 2;
     lmod = 0.5f;
     rmod = 0.5f;
     outvolume = 0.5f;
+    panning = 0.0f;
 
 //Trigger Filter Settings
     peakpulse = peak = envrms = 0.0f;
@@ -59,6 +64,9 @@ Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate
     trigtime = sample_rate/12; //time to take next peak
     onset = 0;
     trigthresh = 0.15f;
+    
+    for (int i = 0; i<8; i++)
+        fsequence[i] = Psequence[i] = 0.0f;
 
     setpreset (Ppreset);
 
@@ -72,8 +80,12 @@ Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate
     fb = 0.0f;
     rdlyfb = 0.0f;
     ldlyfb = 0.0f;
+    ifperiod = 0.0f;
+    intperiod = 0;
     avtime = 0.25f;
     avflag = 1;
+    seqpower = 0.0f;
+    trigtimeout = 0;
 
     PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
@@ -101,6 +113,9 @@ Sequence::cleanup ()
 
     memset(outi, 0, sizeof(float)*nPERIOD);
     memset(outo, 0, sizeof(float)*nPERIOD);
+    
+    memset(templ, 0, sizeof(float)*PERIOD);
+    memset(tempr, 0, sizeof(float)*PERIOD);
 
     ldelay->cleanup();
     rdelay->cleanup();
