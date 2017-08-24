@@ -150,11 +150,13 @@ private:
     float dlyrange;
 
     float width, depth;
-    float lpanning, rpanning, hidamp, alpha_hidamp, convlength;
+//    float lpanning, rpanning, hidamp, alpha_hidamp, convlength;
+    float lpanning, rpanning, hidamp;
 
     delayline *lxn, *rxn;
 
-    float level,fb, rfeedback, lfeedback,levpanl,levpanr, lrcross, ilrcross;
+//    float level,fb, rfeedback, lfeedback,levpanl,levpanr, lrcross, ilrcross;
+    float fb, rfeedback, lfeedback, lrcross, ilrcross;
     float tempo_coeff;
 
     float fSAMPLE_RATE;

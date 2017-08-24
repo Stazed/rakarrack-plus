@@ -48,12 +48,21 @@ Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
     Plrcross = 100;
     Phidamp = 60;
     Filenum = 0;
+    Pwidth = 64;
+    Pdepth = 64;
     Plength = 10;
     Puser = 0;
+    Ptempo = 76;
     fb = 0.0f;
     lfeedback = 0.0f;
     rfeedback = 0.0f;
     outvolume = 0.5f;
+    ldmod = rdmod = oldldmod = oldrdmod = interpl = interpr = 0.0f;
+    lpanning = rpanning = 0.0f;
+    lrcross = ilrcross = 0.0f;
+    
+    tempo_coeff = 60.0f / (float) Ptempo;
+    
     File = loaddefault();
 
     lfo = new EffectLFO(sample_rate);
