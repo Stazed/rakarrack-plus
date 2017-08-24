@@ -45,7 +45,9 @@ StereoHarm::StereoHarm (long int Quality, int DS, int uq, int dq, double sample_
 
     chromel=0.0;
     chromer=0.0;
-
+    gainl = gainr = 0.5f;
+    intervall = intervalr = 0.0f;
+    lrcross = 0.5f;
 
     PSl = new PitchShifter (window, hq, nfSAMPLE_RATE);
     PSl->ratio = 1.0f;
@@ -84,6 +86,8 @@ StereoHarm::cleanup ()
     memset(outir, 0, sizeof(float)*nPERIOD);
     memset(outol, 0, sizeof(float)*nPERIOD);
     memset(outor, 0, sizeof(float)*nPERIOD);
+    memset(templ, 0, sizeof (float)*PERIOD);
+    memset(tempr, 0, sizeof (float)*PERIOD);
 
 };
 
@@ -121,6 +125,9 @@ StereoHarm::initialize()
 
     memset (outol, 0, sizeof (float) * nPERIOD);
     memset (outor, 0, sizeof (float) * nPERIOD);
+    
+    memset (templ, 0, sizeof (float) * PERIOD);
+    memset (tempr, 0, sizeof (float) * PERIOD);
 }
 
 void
