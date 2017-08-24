@@ -36,7 +36,7 @@ MBVvol::MBVvol (double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
-    
+
     initialize();
     
     lfo1 = new EffectLFO(fSAMPLE_RATE);
@@ -45,6 +45,13 @@ MBVvol::MBVvol (double sample_rate, uint32_t intermediate_bufsize)
     //default values
     Ppreset = 0;
     Pvolume = 50;
+    Pcombi = 0;
+    Cross1 = 500;
+    Cross2 = 2500;
+    Cross3 = 5000;
+    PsL = PsML = PsMH = PsH = 0;
+    v1l = v1r = v2l = v2r = 0.0f;
+    d1 = d2 = d3 = d4 = 0.0f;
     volL=volLr=volML=volMLr=volMH=volMHr=volH=volHr=2.0f;
     one = 1.0f;
     zero = 0.0f;
@@ -114,6 +121,15 @@ MBVvol::initialize ()
     midhr = (float *) malloc (sizeof (float) * PERIOD);
     highl = (float *) malloc (sizeof (float) * PERIOD);
     highr = (float *) malloc (sizeof (float) * PERIOD);
+    
+    unsigned int i;
+    for(i=0;i<PERIOD;i++)
+    {
+    	lowl[i] = lowr[i] = 0;
+    	midll[i] = midlr[i] = 0;
+        midhl[i] = midhr[i] = 0;
+    	highl[i] = highr[i] = 0;
+    }
 
 
     interpbuf = new float[PERIOD];
