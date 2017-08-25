@@ -111,7 +111,7 @@ private:
     void fftS16LE (signed short int *indata, float val_sum, float *freqs, float *lfreqs);
     void fftFree ();
 
-    void MIDI_Send_Note_On (int note, float val_sum, float *freqs, float *lfreqs);
+    void MIDI_Send_Note_On (int note, float val_sum);
     void MIDI_Send_Note_Off (int note);
 
     unsigned int blockSize;

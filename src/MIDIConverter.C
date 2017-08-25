@@ -209,7 +209,7 @@ MIDIConverter::displayFrequency (float ffreq, float val_sum, float *freqs, float
             MIDI_Send_Note_Off (nota_actual);
         }
 
-        MIDI_Send_Note_On (lanota, val_sum, freqs, lfreqs);
+        MIDI_Send_Note_On (lanota, val_sum);
         nota_actual = lanota;
     }  
     
@@ -429,12 +429,12 @@ MIDIConverter::fftFree ()
 
 
 void
-MIDIConverter::MIDI_Send_Note_On (int nota, float val_sum, float *freqs, float *lfreqs)
+MIDIConverter::MIDI_Send_Note_On (int nota, float val_sum)
 {
     int k;
 
     const uint8_t anota = (uint8_t) nota + ( Moctave * 12) ;
-    if((anota<0) || (anota>127)) return;
+    if(anota>127) return;
 
     k = lrintf ((val_sum + 96) * 2);
 
@@ -491,7 +491,7 @@ void
 MIDIConverter::MIDI_Send_Note_Off (int nota)
 {
     const uint8_t anota = (uint8_t) nota + ( Moctave * 12) ;
-    if((anota<0) || (anota>127)) return;
+    if(anota>127) return;
 
 #ifdef LV2RUN
     midi_OFF_msg[0]=LV2_MIDI_MSG_NOTE_OFF + channel;
