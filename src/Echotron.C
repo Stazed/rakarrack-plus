@@ -402,6 +402,8 @@ Echotron::loadfile(char* Filename)
     	error = 1;
         return loaddefault();
     }
+ 
+    strcpy(f.Filename,Filename);        // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
 
     while (fgets(wbuf,sizeof wbuf,fs) != NULL) {
         //fgets(wbuf,sizeof wbuf,fs);
