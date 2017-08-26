@@ -168,24 +168,24 @@
 	] 
 	.
 
-#<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Marshall JCM200>
-#        a pset:Preset ;
-#        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
-#        rdfs:seeAlso <convolotron_presets.ttl> .
+<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Marshall_JCM200>
+        a pset:Preset ;
+        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        rdfs:seeAlso <convolotron_presets.ttl> .
 
-#<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Fender Superchamp>
-#        a pset:Preset ;
-#        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
-#        rdfs:seeAlso <convolotron_presets.ttl> .
+<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Fender_Superchamp>
+        a pset:Preset ;
+        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        rdfs:seeAlso <convolotron_presets.ttl> .
 
-#<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa Boogie>
-#        a pset:Preset ;
-#        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
-#        rdfs:seeAlso <convolotron_presets.ttl> .
+<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie>
+        a pset:Preset ;
+        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        rdfs:seeAlso <convolotron_presets.ttl> .
 
-#<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa Boogie 2>
-#        a pset:Preset ;
-#        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
-#        rdfs:seeAlso <convolotron_presets.ttl> .
+<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie_2>
+        a pset:Preset ;
+        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        rdfs:seeAlso <convolotron_presets.ttl> .
 
 

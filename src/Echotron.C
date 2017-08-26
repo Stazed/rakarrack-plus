@@ -707,7 +707,7 @@ Echotron::changepar (int npar, int value)
         ilrcross = 1.0f - abs(lrcross);
         break;
     case 8:
-        if(!setfile(value)) error=4;
+        if(!setfile(value)) error=4;    // FIXME what to do with error
         break;
     case 9:
         lfo->Pstereo = value;
