@@ -70,6 +70,7 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
 
 Convolotron::~Convolotron ()
 {
+    // FIXME
 };
 
 /*
@@ -81,6 +82,26 @@ Convolotron::cleanup ()
 
 
 };
+
+void
+Convolotron::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize(); // FIXME
+    initialize();       // FIXME
+}
+
+void
+Convolotron::initialize()
+{
+    // FIXME
+}
+
+void
+Convolotron::clear_initialize()
+{
+    // FIXME
+}
 
 void
 Convolotron::adjust(int DS, uint32_t period)
@@ -248,7 +269,7 @@ Convolotron::setfile(int value)
         sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
     }
 
-
+    printf("Convolotron Filename %s: value %d: Filenum %d\n",Filename, value,Filenum);
     sfinfo.format = 0;
     if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) {
         real_len = 1;

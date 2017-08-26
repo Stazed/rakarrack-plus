@@ -80,6 +80,7 @@ add_library(rkrlv2 SHARED
   ../src/Phaser.C
   ../src/Gate.C
   ../src/MIDIConverter.C
+  ../src/Convolotron.C
 )
 
 target_compile_definitions(rkrlv2 PRIVATE LV2RUN=1)

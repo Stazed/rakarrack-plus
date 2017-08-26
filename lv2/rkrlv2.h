@@ -17,6 +17,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
+#include <sndfile.h>
 
 #include"EQ.h"
 #include"Compressor.h"
@@ -62,6 +63,7 @@
 #include"Phaser.h"
 #include"Gate.h"
 #include"MIDIConverter.h"
+#include"Convolotron.h"
 
 #define EQLV2_URI "http://rakarrack.sourceforge.net/effects.html#eql"
 #define COMPLV2_URI "http://rakarrack.sourceforge.net/effects.html#comp"
@@ -109,10 +111,12 @@
 #define PHASELV2_URI "http://rakarrack.sourceforge.net/effects.html#phas"
 #define GATELV2_URI "http://rakarrack.sourceforge.net/effects.html#gate"
 #define MIDICLV2_URI "http://rakarrack.sourceforge.net/effects.html#midi_converter"
+#define CONVOLOTRONLV2_URI "http://rakarrack.sourceforge.net/effects.html#Convolotron"
 
 
 #define RVBFILE_URI "http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile"
 #define DLYFILE_URI "http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile"
+#define WAVFILE_URI "http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile"
 
 class MIDIConverter;    // forward declaration
 
@@ -194,7 +198,8 @@ enum RKRLV2_effects_
 	IINF,
 	IPHASE,
 	IGATE,
-	IMIDIC
+	IMIDIC,
+        ICONVO
 };
 
 typedef struct _RKRLV2
@@ -208,6 +213,7 @@ typedef struct _RKRLV2
     uint8_t prev_bypass;
     RvbFile* rvbfile;//file for reverbtron
     DlyFile* dlyfile;//file for echotron
+    char* wavfile;//file for convolotron
 
     //ports
     float *input_l_p;
@@ -241,6 +247,7 @@ typedef struct _RKRLV2
         LV2_URID 	patch_value;
         LV2_URID 	filetype_rvb;
         LV2_URID 	filetype_dly;
+        LV2_URID        filetype_wav;
 
     } URIDs;
 
@@ -290,6 +297,8 @@ typedef struct _RKRLV2
     Phaser* phase;      //42
     Gate* gate;         //43
     MIDIConverter* midic; //44
+    Convolotron* convol;  //45
+    
 } RKRLV2;
 
 void forge_midimessage(RKRLV2* plug,

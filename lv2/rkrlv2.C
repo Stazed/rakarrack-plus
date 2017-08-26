@@ -190,7 +190,7 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
                 plug->URIDs.patch_value = plug->urid_map->map(plug->urid_map->handle,LV2_PATCH__value);
                 plug->URIDs.filetype_rvb = plug->urid_map->map(plug->urid_map->handle,RVBFILE_URI);
                 plug->URIDs.filetype_dly = plug->urid_map->map(plug->urid_map->handle,DLYFILE_URI);
-
+                plug->URIDs.filetype_wav = plug->urid_map->map(plug->urid_map->handle,WAVFILE_URI);
             }
         }
     }
@@ -3548,6 +3548,7 @@ static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function
         plug->loading_file = 1;
         *plug->dlyfile = plug->echotron->loadfile(path);
         respond(rhandle,0,0);
+        printf("echowork path %s\n",path);
     }//got file
     else
         return LV2_WORKER_ERR_UNKNOWN;
@@ -3556,7 +3557,7 @@ static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function
 }
 
 static LV2_Worker_Status echowork_response(LV2_Handle handle, uint32_t size, const void* data)
-{
+{printf("echowork_response\n");
     RKRLV2* plug = (RKRLV2*)handle;
     plug->echotron->applyfile(*plug->dlyfile);
     plug->loading_file = 0;//clear flag for next file load
@@ -3581,7 +3582,7 @@ static LV2_State_Status echosave(LV2_Handle handle, LV2_State_Store_Function  st
 
     store(state_handle, plug->URIDs.filetype_dly, abstractpath, strlen(plug->echotron->File.Filename) + 1,
     		plug->URIDs.atom_Path, LV2_STATE_IS_POD | LV2_STATE_IS_PORTABLE);
-
+    printf("echosave abstractpath %s\n",abstractpath);
     free(abstractpath);
 
     return LV2_STATE_SUCCESS;
@@ -3600,10 +3601,11 @@ static LV2_State_Status echorestore(LV2_Handle handle, LV2_State_Retrieve_Functi
 
     if (value)
     {
-            char* path = (char*)value;
-            DlyFile f = plug->echotron->loadfile(path);
-            plug->echotron->applyfile(f);
-            plug->file_changed = 1;
+        char* path = (char*)value;
+        DlyFile f = plug->echotron->loadfile(path);
+        plug->echotron->applyfile(f);
+        plug->file_changed = 1;
+        printf("echorestore path %s\n",path);
     }
 
     return LV2_STATE_SUCCESS;
@@ -4368,6 +4370,263 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
+
+///// Convolotron /////////
+LV2_Handle init_convollv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+{
+    RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    plug->nparams = 7;
+    plug->effectindex = ICONVO;
+    plug->prev_bypass = 1;
+
+    getFeatures(plug,host_features);
+    if(!plug->scheduler || !plug->urid_map)
+    {
+    	//a required feature was not supported by host
+    	free(plug);
+    	return 0;
+    }
+    lv2_atom_forge_init(&plug->forge, plug->urid_map);
+
+    plug->convol = new Convolotron( /*downsample*/6, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
+    plug->convol->changepar(4,1);//set to user selected files
+//    plug->wavfile = new char;
+
+    return plug;
+}
+
+void run_convollv2(LV2_Handle handle, uint32_t nframes)
+{
+    if( nframes == 0)
+        return;
+    
+    int i;
+    int val;
+
+    RKRLV2* plug = (RKRLV2*)handle;
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        plug->convol->cleanup();
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->convol->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //check and set changed parameters
+    for(i=0; i<4; i++)//skip user #4  & missing #5
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->convol->getpar(i) != val)
+        {
+            plug->convol->changepar(i,val);
+        }
+    }
+    for(; i+2<8; i++)//skip file num #8 & missing #9
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->convol->getpar(i+2) != val)
+        {
+            plug->convol->changepar(i+2,val);
+        }
+    }
+    for(; i+4<plug->nparams; i++)
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->convol->getpar(i+4) != val)
+        {
+            plug->convol->changepar(i+4,val);
+        }
+    }
+
+    // Set up forge to write directly to notify output port.
+    const uint32_t notify_capacity = plug->atom_out_p->atom.size;
+    lv2_atom_forge_set_buffer(&plug->forge, (uint8_t*)plug->atom_out_p, notify_capacity);
+
+    // Start a sequence in the notify output port.
+    lv2_atom_forge_sequence_head(&plug->forge, &plug->atom_frame, 0);
+
+    //if we loaded a state, send the new file name to the host to display
+    if(plug->file_changed)
+    {
+    	plug->file_changed = 0;
+    	lv2_atom_forge_frame_time(&plug->forge, 0);
+        LV2_Atom_Forge_Frame frame;
+        lv2_atom_forge_object( &plug->forge, &frame, 0, plug->URIDs.patch_Set);
+
+        lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_property);
+        lv2_atom_forge_urid(&plug->forge, plug->URIDs.filetype_wav);
+        lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_value);
+        lv2_atom_forge_path(&plug->forge, plug->convol->Filename, strlen(plug->convol->Filename)+1);
+
+        lv2_atom_forge_pop(&plug->forge, &frame);
+    }
+
+
+    //see if there's a file
+    LV2_ATOM_SEQUENCE_FOREACH( plug->atom_in_p, ev)
+    {
+        if (ev->body.type == plug->URIDs.atom_Object)
+        {
+            const LV2_Atom_Object* obj = (const LV2_Atom_Object*)&ev->body;
+            if (obj->body.otype == plug->URIDs.patch_Set)
+            {
+                // Get the property the set message is setting
+                const LV2_Atom* property = NULL;
+                lv2_atom_object_get(obj, plug->URIDs.patch_property, &property, 0);
+                if (property && property->type == plug->URIDs.atom_URID)
+                {
+                    const uint32_t key = ((const LV2_Atom_URID*)property)->body;
+                    if (key == plug->URIDs.filetype_wav)
+                    {
+                        // a new file! pass the atom to the worker thread to load it
+                        plug->scheduler->schedule_work(plug->scheduler->handle, lv2_atom_total_size(&ev->body), &ev->body);
+                    }//property is wav file
+                }//property is URID
+            }
+            else if (obj->body.otype == plug->URIDs.patch_Get)
+            {
+                // Received a get message, emit our state (probably to UI)
+                lv2_atom_forge_frame_time(&plug->forge, ev->time.frames );//use current event's time
+                LV2_Atom_Forge_Frame frame;
+                lv2_atom_forge_object( &plug->forge, &frame, 0, plug->URIDs.patch_Set);
+
+            	lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_property);
+            	lv2_atom_forge_urid(&plug->forge, plug->URIDs.filetype_wav);
+            	lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_value);
+            	lv2_atom_forge_path(&plug->forge, plug->convol->Filename, strlen(plug->convol->Filename)+1);
+
+            	lv2_atom_forge_pop(&plug->forge, &frame);
+            }
+        }//atom is object
+    }//each atom in sequence
+
+    //now run
+    plug->convol->out(plug->output_l_p,plug->output_r_p);
+
+    //and for whatever reason we have to do the wet/dry mix ourselves
+    wetdry_mix(plug, plug->convol->outvolume, nframes);
+
+    xfade_check(plug,nframes);
+    return;
+}
+
+static LV2_Worker_Status convwork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t size, const void* data)
+{
+
+    RKRLV2* plug = (RKRLV2*)handle;
+    LV2_Atom_Object* obj = (LV2_Atom_Object*)data;
+    const LV2_Atom* file_path;
+
+    //work was scheduled to load a new file
+    lv2_atom_object_get(obj, plug->URIDs.patch_value, &file_path, 0);
+    if (file_path && file_path->type == plug->URIDs.atom_Path)
+    {
+        // Load file.
+        char* path = (char*)LV2_ATOM_BODY_CONST(file_path);
+        //the file is too large for a host's circular buffer
+        //so store it in the plugin for the response to use
+        //to prevent threading issues, we'll use a simple
+        //flag as a crude mutex
+        while(plug->loading_file)
+        	usleep(1000);
+        plug->loading_file = 1;
+        *plug->convol->Filename = *path;
+//        *plug->wavfile = *plug->convol->Filename;
+        printf("Filename %s\n",plug->convol->Filename);
+        plug->convol->setfile(100);
+//        *plug->wavfile = plug->convol->loadfile(path);
+        respond(rhandle,0,0);
+    }//got file
+    else
+        return LV2_WORKER_ERR_UNKNOWN;
+
+    return LV2_WORKER_SUCCESS;
+}
+
+static LV2_Worker_Status convwork_response(LV2_Handle handle, uint32_t size, const void* data)
+{
+    RKRLV2* plug = (RKRLV2*)handle;
+//    plug->convol->applyfile(*plug->wavfile);
+    plug->loading_file = 0;//clear flag for next file load
+    return LV2_WORKER_SUCCESS;
+}
+
+static LV2_State_Status convsave(LV2_Handle handle, LV2_State_Store_Function  store, LV2_State_Handle state_handle,
+		uint32_t flags, const LV2_Feature* const* features)
+{
+    RKRLV2* plug = (RKRLV2*)handle;
+
+    LV2_State_Map_Path* map_path = NULL;
+    for (int i = 0; features[i]; ++i)
+    {
+        if (!strcmp(features[i]->URI, LV2_STATE__mapPath))
+        {
+            map_path = (LV2_State_Map_Path*)features[i]->data;
+        }
+    }
+
+    char* abstractpath = map_path->abstract_path(map_path->handle, plug->convol->Filename);
+
+    store(state_handle, plug->URIDs.filetype_wav, abstractpath, strlen(plug->convol->Filename) + 1,
+    		plug->URIDs.atom_Path, LV2_STATE_IS_POD | LV2_STATE_IS_PORTABLE);
+
+    free(abstractpath);
+
+    return LV2_STATE_SUCCESS;
+}
+
+static LV2_State_Status convrestore(LV2_Handle handle, LV2_State_Retrieve_Function retrieve,
+		LV2_State_Handle state_handle, uint32_t flags, const LV2_Feature* const* features)
+{
+    RKRLV2* plug = (RKRLV2*)handle;
+
+    size_t   size;
+    uint32_t type;
+    uint32_t valflags;
+
+    const void* value = retrieve( state_handle, plug->URIDs.filetype_wav, &size, &type, &valflags);
+
+    if (value)
+    {
+            char* path = (char*)value;
+            *plug->convol->Filename = *path;
+            plug->convol->setfile(100);
+//            SNDFILE f = plug->convol->loadfile(path);
+//            plug->convol->applyfile(f);
+            plug->file_changed = 1;
+    }
+
+    return LV2_STATE_SUCCESS;
+}
+
+static const void* convol_extension_data(const char* uri)
+{
+    static const LV2_Worker_Interface worker = { convwork, convwork_response, NULL };
+    static const LV2_State_Interface state_iface = { convsave, convrestore };
+    if (!strcmp(uri, LV2_STATE__interface))
+    {
+        return &state_iface;
+    }
+    else if (!strcmp(uri, LV2_WORKER__interface))
+    {
+        return &worker;
+    }
+    return NULL;
+}
+
 /////////////////////////////////
 //       END OF FX
 /////////////////////////////////
@@ -4518,6 +4777,10 @@ void cleanup_rkrlv2(LV2_Handle handle)
         break;
     case IMIDIC:
         delete plug->midic;
+        break;
+    case ICONVO:
+        delete plug->convol;
+     //   delete plug->wavfile;
         break;
     }
     free(plug);
@@ -5237,6 +5500,17 @@ static const LV2_Descriptor midiclv2_descriptor=
     0//extension
 };
 
+static const LV2_Descriptor convollv2_descriptor=
+{
+    CONVOLOTRONLV2_URI,
+    init_convollv2,
+    connect_rkrlv2_ports_w_atom,
+    0,//activate
+    run_convollv2,
+    0,//deactivate
+    cleanup_rkrlv2,
+    convol_extension_data
+};
 
 LV2_SYMBOL_EXPORT
 const LV2_Descriptor* lv2_descriptor(uint32_t index)
@@ -5333,6 +5607,8 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &gatelv2_descriptor ;
     case IMIDIC:
         return &midiclv2_descriptor ;
+    case ICONVO:
+        return &convollv2_descriptor ;
     default:
         return 0;
     }

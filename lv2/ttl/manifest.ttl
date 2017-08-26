@@ -237,3 +237,8 @@
         a lv2:Plugin, lv2:ConverterPlugin ;
         lv2:binary <rkrlv2.so> ;
         rdfs:seeAlso <midi_converter.ttl> .
+# 45
+<http://rakarrack.sourceforge.net/effects.html#Convolotron>
+        a lv2:Plugin, lv2:ConvolutionPlugin ;
+        lv2:binary <rkrlv2.so> ;
+        rdfs:seeAlso <convolotron.ttl> .
