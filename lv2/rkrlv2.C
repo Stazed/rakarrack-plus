@@ -4423,7 +4423,20 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
 
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<4; i++)//skip user #4  & missing #5
+    i=0;
+    val = (int)*plug->param_p[i];
+    if(plug->convol->getpar(i) != val)
+    {
+        plug->convol->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i] +64;// 1 pan offset
+    if(plug->convol->getpar(i) != val)
+    {
+        plug->convol->changepar(i,val);
+    }
+    
+    for(i++; i<4; i++)//skip user #4  & missing #5
     {
         val = (int)*plug->param_p[i];
         if(plug->convol->getpar(i) != val)
