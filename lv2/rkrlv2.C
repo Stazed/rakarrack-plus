@@ -4423,7 +4423,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
         plug->period_max = nframes;
         plug->convol->lv2_update_params(nframes);
     }
-    
+
     // we are good to run now
     //check and set changed parameters
     for(i=0; i<4; i++)//skip user #4  & missing #5
@@ -4442,7 +4442,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
             plug->convol->changepar(i+2,val);
         }
     }
-    for(; i+4<plug->nparams; i++)
+    for(; i<plug->nparams; i++)
     {
         val = (int)*plug->param_p[i];
         if(plug->convol->getpar(i+4) != val)
@@ -4512,7 +4512,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
             }
         }//atom is object
     }//each atom in sequence
-
+    
     //now run
     plug->convol->out(plug->output_l_p,plug->output_r_p);
 

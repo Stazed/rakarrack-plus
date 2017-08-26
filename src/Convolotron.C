@@ -441,7 +441,7 @@ Convolotron::changepar (int npar, int value)
         UpdateLength();
         break;
     case 8:
-        if(!setfile(value)) error_num=1;
+        if(!setfile(value)) ; // error_num=1; // FIXME
         UpdateLength();
         break;
     case 5:
