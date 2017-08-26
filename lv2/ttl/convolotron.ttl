@@ -164,7 +164,7 @@
             lv2:portProperty lv2:integer ;
     ] ;
     state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> <1.wav>
+		<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> <Marshall_JCM200.wav>
 	] 
 	.
 
