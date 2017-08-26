@@ -24,11 +24,11 @@
 # 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile>
+<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile>
     a lv2:Parameter ;
-    rdfs:label "wav file" ;
+    rdfs:label "Impulse file" ;
     rdfs:range atom:Path ;
-#    mediatype: mime:text ;
+    mediatype: mime:audio ;
     .
 
 <http://rakarrack.sourceforge.net/effects.html#Convolotron>
@@ -43,7 +43,7 @@
     lv2:optionalFeature lv2:hardRTCapable, state:loadDefaultState ;
     lv2:extensionData worker:interface, state:interface ;
 #    ui:ui  <http://rakarrack.sourceforge.net/effects.html#Convolotron_ui> ;
-    patch:writable <http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> ;
+    patch:writable <http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> ;
 
     lv2:port [
             a lv2:InputPort, lv2:AudioPort ;
@@ -164,7 +164,7 @@
             lv2:portProperty lv2:integer ;
     ] ;
     state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> <Marshall_JCM200.wav>
+		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Marshall_JCM200.wav>
 	] 
 	.
 

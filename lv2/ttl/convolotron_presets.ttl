@@ -35,7 +35,7 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> <Marshall_JCM200.wav>
+		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Marshall_JCM200.wav>
 	] .
 
 <http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Fender_Superchamp>
@@ -67,7 +67,7 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> <Fender_Superchamp.wav>
+		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Fender_Superchamp.wav>
 	] .
 
 <http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie>
@@ -99,7 +99,7 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> <Mesa_Boogie.wav>
+		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Mesa_Boogie.wav>
 	] .
 
 <http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie_2>
@@ -131,5 +131,5 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile> <Mesa_Boogie-2.wav>
+		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Mesa_Boogie-2.wav>
 	] .

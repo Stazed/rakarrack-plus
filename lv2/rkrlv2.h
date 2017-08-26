@@ -17,7 +17,6 @@
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
-#include <sndfile.h>
 
 #include"EQ.h"
 #include"Compressor.h"
@@ -116,7 +115,7 @@
 
 #define RVBFILE_URI "http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile"
 #define DLYFILE_URI "http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile"
-#define WAVFILE_URI "http://rakarrack.sourceforge.net/effects.html#Convolotron:wavfile"
+#define SNDFILE_URI "http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile"
 
 class MIDIConverter;    // forward declaration
 
@@ -213,7 +212,6 @@ typedef struct _RKRLV2
     uint8_t prev_bypass;
     RvbFile* rvbfile;//file for reverbtron
     DlyFile* dlyfile;//file for echotron
-    char* wavfile;//file for convolotron
 
     //ports
     float *input_l_p;
@@ -247,7 +245,7 @@ typedef struct _RKRLV2
         LV2_URID 	patch_value;
         LV2_URID 	filetype_rvb;
         LV2_URID 	filetype_dly;
-        LV2_URID        filetype_wav;
+        LV2_URID        filetype_snd;
 
     } URIDs;
 
