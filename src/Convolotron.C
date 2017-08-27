@@ -40,26 +40,38 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
     Plrcross = 100;
     Psafe = 1;
     Phidamp = 60;
+    Plevel = 20;
     Filenum = 0;
     Plength = 50;
     Puser = 0;
+    Pfb = 0;
     real_len = 0;
     convlength = .5f;
     fb = 0.0f;
     feedback = 0.0f;
     outvolume = 0.5f;
+    lpanning = ((float)Ppanning + 0.5f) / 127.0f;
+    rpanning = 1.0f - lpanning;
+    level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+    levpanl=lpanning*level*2.0f;
+    levpanr=rpanning*level*2.0f;
+    hidamp = 1.0f - (float)Phidamp / 127.1f;
+    alpha_hidamp = 1.0f - hidamp;
     
     adjust(DS, PERIOD);
 
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
+    initialize();
 
     maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
     buf = (float *) malloc (sizeof (float) * maxx_size);
     rbuf = (float *) malloc (sizeof (float) * maxx_size);
     lxn = (float *) malloc (sizeof (float) * maxx_size);
     maxx_size--;
+    maxx_read = maxx_size / 2;    
     offset = 0;
+    length = 1;
+    oldl = 0.0f;
+    
     M_Resample = new Resample(0);
     U_Resample = new Resample(dq);//Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
     D_Resample = new Resample(uq);
@@ -70,6 +82,15 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
 
 Convolotron::~Convolotron ()
 {
+    clear_initialize();
+    
+    free(buf);
+    free(rbuf);
+    free(lxn);
+    
+    delete M_Resample;
+    delete U_Resample;
+    delete D_Resample;
 };
 
 /*
@@ -78,9 +99,47 @@ Convolotron::~Convolotron ()
 void
 Convolotron::cleanup ()
 {
+    memset(templ,0,sizeof(float)*PERIOD);
+    memset(tempr,0,sizeof(float)*PERIOD);
 
-
+    fb = 0.0f;
+    feedback = 0.0f;
+    oldl = 0.0f;
 };
+
+void
+Convolotron::lv2_update_params(uint32_t period)
+{
+    adjust(DS_state, period);
+    
+    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    {
+        PERIOD = period;
+        clear_initialize();
+        initialize();
+    }
+    else
+    {
+        PERIOD = period;
+    }
+}
+
+void
+Convolotron::initialize()
+{
+    templ = (float *) malloc (sizeof (float) * PERIOD);
+    tempr = (float *) malloc (sizeof (float) * PERIOD);
+    
+    memset(templ,0,sizeof(float)*PERIOD);
+    memset(tempr,0,sizeof(float)*PERIOD);
+}
+
+void
+Convolotron::clear_initialize()
+{
+    free(templ);
+    free(tempr);
+}
 
 void
 Convolotron::adjust(int DS, uint32_t period)
@@ -248,7 +307,7 @@ Convolotron::setfile(int value)
         sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
     }
 
-
+//    printf("Convolotron Filename %s: value %d: Filenum %d\n",Filename, value,Filenum);
     sfinfo.format = 0;
     if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) {
         real_len = 1;
@@ -420,7 +479,7 @@ Convolotron::changepar (int npar, int value)
         UpdateLength();
         break;
     case 8:
-        if(!setfile(value)) error_num=1;
+        if(!setfile(value)) ; // error_num=1; // FIXME
         UpdateLength();
         break;
     case 5:

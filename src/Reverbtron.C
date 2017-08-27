@@ -766,7 +766,7 @@ Reverbtron::changepar (int npar, int value)
         levpanr=level*rpanning;
         break;
     case 8:
-        if(!setfile(value)) ;//error_num=2;//TODO: how to handle error
+        if(!setfile(value)) ;//error_num=2;//TODO: how to handle error FIXME
         break;
     case 9:
         Pstretch = value;
