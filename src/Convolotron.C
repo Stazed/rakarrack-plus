@@ -114,6 +114,8 @@ Convolotron::cleanup ()
 void
 Convolotron::lv2_update_params(uint32_t period)
 {
+    adjust(DS_state, period);
+    
     if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
