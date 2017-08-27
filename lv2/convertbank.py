@@ -100,6 +100,24 @@ def makeDlyData(f,v):
     f.write("    <Value>/usr/share/rkr.lv2/" + p[v] + "</Value>\n")
     f.write("   </CustomData>\n")
 
+def makeSndData(f,v):
+    p = {
+        0 : "Marshall_JCM200.wav" ,
+        1 : "Fender_Superchamp.wav" ,
+        2 : "Mesa_Boogie.wav" ,
+        3 : "Mesa_Boogie-2.wav" ,
+        4 : "Marshall_Plexi.wav" ,
+        5 : "Bassman.wav" ,
+        6 : "JCM2000.wav" ,
+        7 : "Ampeg.wav" ,
+        8 : "Marshall-2.wav" ,
+    }
+    f.write("   <CustomData>\n")
+    f.write("    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n")
+    f.write("    <Key>http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile</Key>\n")
+    f.write("    <Value>/usr/share/rkr.lv2/" + p[v] + "</Value>\n")
+    f.write("   </CustomData>\n")
+
 def efxorder2structindex(x):
     return{
         0 : 7, # eq1
@@ -226,8 +244,8 @@ def readBankFile(filename):
 #            if (j==16):
 #                print(" WARNING: gate not done")
 #                continue
-            if (j == 29):
-                print(" WARNING: convo not done")
+#            if (j == 29):
+#                print(" WARNING: convo not done")
             if (j == 30):
                 print(" WARNING: looper not done")
                 continue
@@ -248,6 +266,8 @@ def readBankFile(filename):
                     makePort(of,data,params[k])
                 k += 1
                 data = rkrremap.remap(j,k)
+            if (j == 29):
+                makeSndData(of,params[8])
             if (j == 40):
                 makeRvbData(of,params[8])
             if (j == 41):

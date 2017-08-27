@@ -141,12 +141,12 @@
   </Data>
  </Plugin>
 
- <!-- rkr Cabinet -->
+ <!-- rkr Convolotron -->
  <Plugin>
   <Info>
    <Type>LV2</Type>
-   <Name>rkr Cabinet</Name>
-   <URI>http://rakarrack.sourceforge.net/effects.html#cabe</URI>
+   <Name>rkr Convolotron</Name>
+   <URI>http://rakarrack.sourceforge.net/effects.html#Convolotron</URI>
   </Info>
 
   <Data>
@@ -162,12 +162,59 @@
    </Parameter>
 
    <Parameter>
-    <Index>2</Index>
-    <Name>Preset</Name>
-    <Symbol>PRESET</Symbol>
-    <Value>10</Value>
+    <Index>1</Index>
+    <Name>Wet/Dry</Name>
+    <Symbol>WETDRY</Symbol>
+    <Value>0</Value>
    </Parameter>
 
+   <Parameter>
+    <Index>2</Index>
+    <Name>Pan</Name>
+    <Symbol>PAN</Symbol>
+    <Value>0</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>3</Index>
+    <Name>Safe</Name>
+    <Symbol>SAFE</Symbol>
+    <Value>0</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>4</Index>
+    <Name>Length</Name>
+    <Symbol>LENGTH</Symbol>
+    <Value>76</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>5</Index>
+    <Name>Dampening</Name>
+    <Symbol>DAMP</Symbol>
+    <Value>0</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>6</Index>
+    <Name>Level</Name>
+    <Symbol>LEVEL</Symbol>
+    <Value>70</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>7</Index>
+    <Name>Feedback</Name>
+    <Symbol>FB</Symbol>
+    <Value>0</Value>
+   </Parameter>
+
+   <CustomData>
+    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>
+    <Key>http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile</Key>
+    <Value>/usr/share/rkr.lv2/Marshall_JCM200.wav</Value>
+   </CustomData>
   </Data>
  </Plugin>
 

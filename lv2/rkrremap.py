@@ -42,18 +42,18 @@ def remap_special(efxindex, paramindex, value):
  #8"Jazz-Chorus", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  #9"Vox-Bright", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  #10"Marshall-I", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
-    if (efxindex,paramindex) == (29,8): #convolutron approximated by cab preset
-        return{
-            0 : (1, 10,10) ,
-            1 : (1, 10,1) ,
-            2 : (1, 10,7) ,
-            3 : (1, 10,7) ,
-            4 : (1, 10,0) ,
-            5 : (1, 10,7) ,
-            6 : (1, 10,7) ,
-            7 : (1, 10,4) ,
-            8 : (1, 10,0) ,
-        }[value]
+#    if (efxindex,paramindex) == (29,8): #convolutron approximated by cab preset
+#        return{
+#            0 : (1, 10,10) ,
+#            1 : (1, 10,1) ,
+#            2 : (1, 10,7) ,
+#            3 : (1, 10,7) ,
+#            4 : (1, 10,0) ,
+#            5 : (1, 10,7) ,
+#            6 : (1, 10,7) ,
+#            7 : (1, 10,4) ,
+#            8 : (1, 10,0) ,
+#        }[value]
     if (efxindex,paramindex) == (31,17): #mutron "mode"
         return{
             0 : (2, 20,0, 21,0) ,
@@ -492,18 +492,18 @@ def remap(efxindex, paramindex):
          (28, 16) : (-1,) ,
 
          #convo
-         (29, -1) : ('rkr Cabinet', 'http://rakarrack.sourceforge.net/effects.html#cabe') ,
-         (29, 0) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 1) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 2) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 3) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 4) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 5) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 6) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 7) : (0, 'SKIP', 'SKIP', 0) ,
-         (29, 8) : (0, 'SPECIAL', 'SPECIAL', 0) ,
-         (29, 9) : (-1,) ,
-         (29, 10) : (2, 'Preset', 'PRESET', 0) ,
+         (29, -1) : ('rkr Convolotron', 'http://rakarrack.sourceforge.net/effects.html#Convolotron') ,
+         (29, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (29, 1) : (2, 'Pan', 'PAN', -64) ,
+         (29, 2) : (3, 'Safe', 'SAFE', 0) ,
+         (29, 3) : (4, 'Length', 'LENGTH', 0) ,
+         (29, 4) : (0, 'SKIP', 'SKIP', 0) ,#user file
+         (29, 5) : (0, 'SKIP', 'SKIP', 0) ,#not used
+         (29, 6) : (5, 'Dampening', 'DAMP', 0) ,
+         (29, 7) : (6, 'Level', 'LEVEL', 0) ,
+         (29, 8) : (0, 'SKIP', 'SKIP', 0) ,#file Number
+         (29, 9) : (0, 'SKIP', 'SKIP', 0) ,#not used
+         (29, 10) : (7, 'Feedback', 'FB', 0) ,
          (29, 11) : (-1,) ,
 
          #looper

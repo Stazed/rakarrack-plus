@@ -101,11 +101,7 @@ Convolotron::cleanup ()
 {
     memset(templ,0,sizeof(float)*PERIOD);
     memset(tempr,0,sizeof(float)*PERIOD);
-    
-    memset(buf,0,sizeof(float)*maxx_size);
-    memset(rbuf,0,sizeof(float)*maxx_size);
-    memset(lxn,0,sizeof(float)*maxx_size);
-    
+
     fb = 0.0f;
     feedback = 0.0f;
     oldl = 0.0f;
