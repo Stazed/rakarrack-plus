@@ -67,8 +67,6 @@
 #undef OLDRKRLV2    // comment this for original method
 //#define OLDRKRLV2  // use this for original
 
-#define USERFILE 100    // used by Convolotron, Echotron, Reverbtron to indicate user file
-
 #define EQLV2_URI "http://rakarrack.sourceforge.net/effects.html#eql"
 #define COMPLV2_URI "http://rakarrack.sourceforge.net/effects.html#comp"
 #define DISTLV2_URI "http://rakarrack.sourceforge.net/effects.html#dist"

@@ -86,6 +86,7 @@
 
 #define TEMPBUFSIZE 1024
 #define MAX_PDATA_SIZE 50
+#define USERFILE 100    // used by Convolotron, Echotron, Reverbtron to indicate user file in setfile()
 
 typedef union {
     float f;
