@@ -216,12 +216,13 @@ jackprocess (jack_nframes_t nframes, void *arg)
     
     JackOUT->dataout = dataout;     // passed to MIDIConverter
 
-#if 0   // old code did not work
+    /* For midi incoming */
     for (i = 0; i < count; i++) {
         jack_midi_event_get(&midievent, data, i);
         JackOUT->jack_process_midievents(&midievent);
     }
-
+    
+#if 0   // old code did not work
     for (i=1; i<=JackOUT->efx_MIDIConverter->ev_count; i++) {
         jack_midi_event_write(dataout,
                               JackOUT->efx_MIDIConverter->Midi_event[i].time,
