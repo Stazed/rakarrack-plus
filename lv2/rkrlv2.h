@@ -64,6 +64,11 @@
 #include"MIDIConverter.h"
 #include"Convolotron.h"
 
+#undef OLDRKRLV2    // comment this for original method
+//#define OLDRKRLV2  // use this for original
+
+#define USERFILE 100    // used by Convolotron, Echotron, Reverbtron to indicate user file
+
 #define EQLV2_URI "http://rakarrack.sourceforge.net/effects.html#eql"
 #define COMPLV2_URI "http://rakarrack.sourceforge.net/effects.html#comp"
 #define DISTLV2_URI "http://rakarrack.sourceforge.net/effects.html#dist"
@@ -210,9 +215,11 @@ typedef struct _RKRLV2
     uint8_t init_params; //flag to indicate to force parameter (LFO) update & sample update on first run
     uint8_t file_changed;
     uint8_t prev_bypass;
+    
+#ifdef OLDRKRLV2
     RvbFile* rvbfile;//file for reverbtron
     DlyFile* dlyfile;//file for echotron
-
+#endif
     //ports
     float *input_l_p;
     float *input_r_p;

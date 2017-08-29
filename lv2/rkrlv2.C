@@ -3088,7 +3088,10 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor *descriptor,double sample_freq, 
 
     plug->revtron = new Reverbtron( /*downsample*/5, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
     plug->revtron->changepar(4,1);//set to user selected files
+    
+#ifdef OLDRKRLV2
     plug->rvbfile = new RvbFile;
+#endif // OLDRKRLV2
 
     return plug;
 }
@@ -3246,6 +3249,8 @@ static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function 
     {
         // Load file.
         char* path = (char*)LV2_ATOM_BODY_CONST(file_path);
+        
+#ifdef OLDRKRLV2
         //the file is too large for a host's circular buffer
         //so store it in the plugin for the response to use
         //to prevent threading issues, we'll use a simple
@@ -3254,6 +3259,12 @@ static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function 
         	usleep(1000);
         plug->loading_file = 1;
         *plug->rvbfile = plug->revtron->loadfile(path);
+#else
+        plug->loading_file = 1;
+        strcpy(plug->revtron->Filename,path);
+        plug->revtron->setfile(USERFILE);
+#endif // OLDRKRLV2
+        
         respond(rhandle,0,0);
     }//got file
     else
@@ -3265,7 +3276,11 @@ static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function 
 static LV2_Worker_Status revwork_response(LV2_Handle handle, uint32_t size, const void* data)
 {
     RKRLV2* plug = (RKRLV2*)handle;
+    
+#ifdef OLDRKRLV2
     plug->revtron->applyfile(*plug->rvbfile);
+#endif // OLDRKRLV2
+    
     plug->loading_file = 0;//clear flag for next file load
     return LV2_WORKER_SUCCESS;
 }
@@ -3308,8 +3323,15 @@ static LV2_State_Status revrestore(LV2_Handle handle, LV2_State_Retrieve_Functio
     if (value)
     {
             char* path = (char*)value;
+            
+#ifdef OLDRKRLV2
             RvbFile f = plug->revtron->loadfile(path);
             plug->revtron->applyfile(f);
+#else   
+            strcpy(plug->revtron->Filename,path);
+            plug->revtron->setfile(USERFILE);
+#endif // OLDRKRLV2
+            
             plug->file_changed = 1;
     }
 
@@ -3351,7 +3373,11 @@ LV2_Handle init_echotronlv2(const LV2_Descriptor *descriptor,double sample_freq,
 
     plug->echotron = new Echotron(sample_freq, plug->period_max);
     plug->echotron->changepar(4,1);//set to user selected files
+    
+#ifdef OLDRKRLV2
     plug->dlyfile = new DlyFile;
+#endif // OLDRKRLV2
+    
     plug->init_params = 1; // LFO init
 
     return plug;
@@ -3539,6 +3565,8 @@ static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function
     {
         // Load file.
         char* path = (char*)LV2_ATOM_BODY_CONST(file_path);
+
+#ifdef OLDRKRLV2
         //the file is too large for a host's circular buffer
         //so store it in the plugin for the response to use
         //to prevent threading issues, we'll use a simple
@@ -3547,6 +3575,12 @@ static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function
         	usleep(1000);
         plug->loading_file = 1;
         *plug->dlyfile = plug->echotron->loadfile(path);
+#else
+        plug->loading_file = 1;
+        strcpy(plug->echotron->Filename,path);
+        plug->echotron->setfile(USERFILE);
+#endif // OLDRKRLV2
+        
         respond(rhandle,0,0);
     }//got file
     else
@@ -3558,7 +3592,11 @@ static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function
 static LV2_Worker_Status echowork_response(LV2_Handle handle, uint32_t size, const void* data)
 {
     RKRLV2* plug = (RKRLV2*)handle;
+
+#ifdef OLDRKRLV2
     plug->echotron->applyfile(*plug->dlyfile);
+#endif // OLDRKRLV2
+
     plug->loading_file = 0;//clear flag for next file load
     return LV2_WORKER_SUCCESS;
 }
@@ -3601,8 +3639,15 @@ static LV2_State_Status echorestore(LV2_Handle handle, LV2_State_Retrieve_Functi
     if (value)
     {
         char* path = (char*)value;
+        
+#ifdef OLDRKRLV2
         DlyFile f = plug->echotron->loadfile(path);
         plug->echotron->applyfile(f);
+#else     
+        strcpy(plug->echotron->Filename,path);
+        plug->echotron->setfile(USERFILE);
+#endif // OLDRKRLV2
+        
         plug->file_changed = 1;
     }
 
@@ -4546,15 +4591,19 @@ static LV2_Worker_Status convwork(LV2_Handle handle, LV2_Worker_Respond_Function
     {
         // Load file.
         char* path = (char*)LV2_ATOM_BODY_CONST(file_path);
+        
+#ifdef OLDRKRLV2
         //the file is too large for a host's circular buffer
         //so store it in the plugin for the response to use
         //to prevent threading issues, we'll use a simple
         //flag as a crude mutex
         while(plug->loading_file)
         	usleep(1000);
+#endif
+        
         plug->loading_file = 1;
         strcpy(plug->convol->Filename,path);
-        plug->convol->setfile(100);
+        plug->convol->setfile(USERFILE);
         respond(rhandle,0,0);
     }//got file
     else
@@ -4609,7 +4658,7 @@ static LV2_State_Status convrestore(LV2_Handle handle, LV2_State_Retrieve_Functi
     {
             char* path = (char*)value;
             strcpy(plug->convol->Filename,path);
-            plug->convol->setfile(100);
+            plug->convol->setfile(USERFILE);
             plug->file_changed = 1;
     }
 
@@ -4749,11 +4798,15 @@ void cleanup_rkrlv2(LV2_Handle handle)
         break;
     case IREVTRON:
         delete plug->revtron;
+#ifdef OLDRKRLV2
         delete plug->rvbfile;
+#endif
         break;
     case IECHOTRON:
         delete plug->echotron;
+#ifdef OLDRKRLV2
         delete plug->dlyfile;
+#endif
         break;
     case ISHARM_NM:
     	delete plug->sharm;

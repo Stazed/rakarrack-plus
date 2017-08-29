@@ -447,15 +447,15 @@ Reverbtron::loadfile(char* filename)
 
     f.maxtime = 0.0f;
     f.maxdata = 0.0f;
-    float averaget = 0.0f;
-    float tempor = 0.0f;
+//    float averaget = 0.0f;
+//    float tempor = 0.0f;
     for(i=0; i<f.data_length; i++) {
         if(f.ftime[i] > f.maxtime) f.maxtime = f.ftime[i];
         if(f.tdata[i] > f.maxdata) f.maxdata = f.tdata[i];  //used to normalize so feedback is more predictable
-        if(i>0) {
-            tempor = f.ftime[i] - f.ftime[i-1];
-            if(tempor>averaget) averaget = tempor;
-        }
+//        if(i>0) {
+//            tempor = f.ftime[i] - f.ftime[i-1];       // f.ftime does not get altered here 
+//            if(tempor>averaget) averaget = tempor;    // averaget & tempor do not get used elsewhere - this has no effect
+//        }
     }
 
     return f;
