@@ -123,19 +123,19 @@ main (int argc, char *argv[])
                 commandline = 1;
                 needtoloadfile=1;
                 filetoload=strdup(optarguments);
-                break;
             }
+            break;
         case 'b':
             if (optarguments != NULL) {
                 needtoloadbank=1;
                 banktoload=strdup(optarguments);
-                break;
             }
+            break;
         case 'p':
             if(optarguments != NULL) {
                 preset=atoi(optarguments);
-                break;
             }
+            break;
         case 'x':
             needtodump=1;
             break;
@@ -146,13 +146,9 @@ main (int argc, char *argv[])
                 needtoloadstate=1;
                 s_uuid=strdup(optarguments);
                 statefile=strdup(argv[optind]);
-                break;
-
             }
-
-
+            break;
         }
-
     }
 
 
