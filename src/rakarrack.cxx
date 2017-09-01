@@ -55,21 +55,30 @@ RKRGUI::check_signals ( void *usrPtr )
     {
         printf( "Got SIGTERM, quitting...\n" );
         got_signal = 0;
-        if(filetoload != NULL)
+        
+        if(filetoload != NULL)      // individual preset
         {
-            printf("filetoload %s\n",filetoload);
             // should check a modified flag here and prompt FIXME
             // gui->check_file_modified() - should return true/false for savefile
-            // if(savefile)
-            gui->rkr->savefile(filetoload);
-            Pexitprogram=1;
+            Fl_Widget *w = fl_message_icon();
+            w->parent()->copy_label(filetoload);
+            
+            int savefile = 0;
+            savefile = fl_choice("Session file was modified, but not saved", "Discard","Save",NULL);
+            
+            if(savefile)
+            {
+                printf("Saving file...\n");
+                gui->rkr->savefile(filetoload);
+            }
         }
-        else
+        else                        // bank modified
         {
             gui->is_modified();
             gui->save_stat(0);
-            Pexitprogram=1;
         }
+        
+        Pexitprogram = 1;
     }
     
     if( got_signal == SIGUSR1)
