@@ -1161,7 +1161,10 @@ RKR::loadfile (char *filename)
     char buf[256];
 
     if ((fn = fopen (filename, "r")) == NULL)
+    {
+        filetoload = NULL;  // bad file name
         return;
+    }
 
 
     New();

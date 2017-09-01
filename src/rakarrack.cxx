@@ -22,6 +22,75 @@ static int Analyzer_ON;
 static Pixmap p, mask; 
 static XWMHints *hints = NULL; 
 
+static volatile int got_signal = 0;
+
+void
+RKRGUI::sigterm_handler ( int sig)
+{
+    if(sig == SIGUSR1)
+    {
+        got_signal = SIGUSR1;
+    }
+
+    if(sig == SIGINT)
+    {
+        got_signal = SIGINT;
+    }
+
+}
+
+void
+RKRGUI::check_signals ( void *usrPtr )
+{
+    RKRGUI  *gui = NULL;
+    gui = (RKRGUI*)usrPtr;
+    
+    if(!gui)
+        return;
+    
+    signal( SIGINT, sigterm_handler );
+    signal( SIGUSR1, sigterm_handler );
+    
+    if ( got_signal == SIGINT )
+    {
+        printf( "Got SIGTERM, quitting...\n" );
+        got_signal = 0;
+        if(filetoload != NULL)
+        {
+            printf("filetoload %s\n",filetoload);
+            // should check a modified flag here and prompt FIXME
+            // gui->check_file_modified() - should return true/false for savefile
+            // if(savefile)
+            gui->rkr->savefile(filetoload);
+            Pexitprogram=1;
+        }
+        else
+        {
+            gui->is_modified();
+            gui->save_stat(0);
+            Pexitprogram=1;
+        }
+    }
+    
+    if( got_signal == SIGUSR1)
+    {
+        printf("Got SIGUSR1, saving...\n");
+        got_signal = 0;
+        
+        if(filetoload != NULL)
+        {
+            printf("filetoload %s\n",filetoload);
+            gui->rkr->savefile(filetoload);
+        }
+        else
+        {
+            gui->is_modified();
+        }
+    }
+    
+    Fl::repeat_timeout( 0.5f, check_signals, gui );
+}
+
 Analyzer::Analyzer(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
 }
 
@@ -22538,7 +22607,14 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate);
   
   memset(tmp,0, sizeof(tmp));
-  sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
+  if(filetoload != NULL)
+  {
+      sprintf(tmp,"Session: %s",filetoload); 
+  }
+  else
+  {
+    sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
+  }
   Principal->copy_label(tmp);
   BankWin_Label(rkr->BankFilename);
   memset(tmp,0, sizeof(tmp));
@@ -22566,6 +22642,7 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   void * v=MT;
   Fl::add_timeout(.04,tick,v);
   Fl::add_handler(prevnext);
+  Fl::add_timeout( 0.5f, check_signals, this );
 }
 
 void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
@@ -24903,7 +24980,7 @@ void RKRGUI::is_modified() {
   
    ok=fl_choice("Bank was modified, but not saved", "Discard","Save",NULL);
   
-  
+
   
    switch(ok)
     

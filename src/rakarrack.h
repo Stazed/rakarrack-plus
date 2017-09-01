@@ -4396,6 +4396,8 @@ public:
   int search_but(int x, int y);
   void ScanDir();
   static int prevnext(int e);
+  static void sigterm_handler ( int sig);
+  static void check_signals ( void * );
   void getMIDIControl(int num);
   void PrepareML();
   inline void addpreset(Fl_Widget *w, int num);

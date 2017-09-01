@@ -42,7 +42,7 @@ int needtoloadstate;
 int needtoloadbank;
 char *s_uuid;
 char *statefile;
-char *filetoload;
+char *filetoload = NULL;
 char *banktoload;
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
