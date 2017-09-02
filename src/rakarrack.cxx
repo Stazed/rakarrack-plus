@@ -22,25 +22,48 @@ static int Analyzer_ON;
 static Pixmap p, mask; 
 static XWMHints *hints = NULL; 
 
-static volatile int got_signal = 0;
+static volatile int got_sigint = 0;
+static volatile int got_sigusr1 = 0;
 
 void
 RKRGUI::sigterm_handler ( int sig)
 {
     if(sig == SIGUSR1)
     {
-        got_signal = SIGUSR1;
+        got_sigusr1 = sig;
     }
 
     if(sig == SIGINT)
     {
-        got_signal = SIGINT;
+        got_sigint = sig;
+    }
+}
+
+bool
+RKRGUI::install_signal_handlers()
+{
+    /*install signal handlers*/
+    struct sigaction action;
+    memset(&action, 0, sizeof(action));
+    action.sa_handler = sigterm_handler;
+
+    if (sigaction(SIGUSR1, &action, NULL) == -1)
+    {
+        printf("sigaction() failed: \n");
+        return false;
     }
 
+    if (sigaction(SIGINT, &action, NULL) == -1)
+    {
+        printf("sigaction() failed: \n");
+        return false;
+    }
+
+    return true;
 }
 
 void
-RKRGUI::check_signals ( void *usrPtr )
+RKRGUI::check_signals (void *usrPtr)
 {
     RKRGUI  *gui = NULL;
     gui = (RKRGUI*)usrPtr;
@@ -48,57 +71,26 @@ RKRGUI::check_signals ( void *usrPtr )
     if(!gui)
         return;
     
-    signal( SIGINT, sigterm_handler );
-    signal( SIGUSR1, sigterm_handler );
-    
-    if ( got_signal == SIGINT )
+    if(got_sigusr1 == SIGUSR1)
     {
-        printf( "Got SIGTERM, quitting...\n" );
-        got_signal = 0;
-        
         if(filetoload != NULL)      // individual preset
         {
-            // should check a modified flag here and prompt FIXME
-            // gui->check_file_modified() - should return true/false for savefile
-            Fl_Widget *w = fl_message_icon();
-            w->parent()->copy_label(filetoload);
-            
-            int savefile = 0;
-            savefile = fl_choice("Session file was modified, but not saved", "Discard","Save",NULL);
-            
-            if(savefile)
-            {
-                printf("Saving file...\n");
-                gui->rkr->savefile(filetoload);
-            }
-        }
-        else                        // bank modified
-        {
-            gui->is_modified();
-            gui->save_stat(0);
-        }
-        
-        Pexitprogram = 1;
-    }
-    
-    if( got_signal == SIGUSR1)
-    {
-        printf("Got SIGUSR1, saving...\n");
-        got_signal = 0;
-        
-        if(filetoload != NULL)
-        {
-            printf("filetoload %s\n",filetoload);
+            printf("Saving file: %s\n", filetoload);
+            got_sigusr1 = 0;
             gui->rkr->savefile(filetoload);
         }
-        else
-        {
-            gui->is_modified();
-        }
+        return;
     }
     
-    Fl::repeat_timeout( 0.5f, check_signals, gui );
+    if(got_sigint == SIGINT)
+    {
+        printf( "Got SIGTERM, quitting...\n" );
+        got_sigint = 0;
+        Pexitprogram = 1;
+    }
 }
+
+
 
 Analyzer::Analyzer(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
 }
@@ -1140,6 +1132,7 @@ void RKRGUI::cb_MT_i(Fl_Box*, void*) {
   highlight();
 drag_effect();
 
+check_signals(this);
 
 if (rkr->Tuner_Bypass)
 {
@@ -22651,7 +22644,7 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   void * v=MT;
   Fl::add_timeout(.04,tick,v);
   Fl::add_handler(prevnext);
-  Fl::add_timeout( 0.5f, check_signals, this );
+  install_signal_handlers();
 }
 
 void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
