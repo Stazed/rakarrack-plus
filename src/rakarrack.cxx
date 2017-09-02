@@ -21,76 +21,8 @@ static int Scope_ON;
 static int Analyzer_ON; 
 static Pixmap p, mask; 
 static XWMHints *hints = NULL; 
-
-static volatile int got_sigint = 0;
-static volatile int got_sigusr1 = 0;
-
-void
-RKRGUI::sigterm_handler ( int sig)
-{
-    if(sig == SIGUSR1)
-    {
-        got_sigusr1 = sig;
-    }
-
-    if(sig == SIGINT)
-    {
-        got_sigint = sig;
-    }
-}
-
-bool
-RKRGUI::install_signal_handlers()
-{
-    /*install signal handlers*/
-    struct sigaction action;
-    memset(&action, 0, sizeof(action));
-    action.sa_handler = sigterm_handler;
-
-    if (sigaction(SIGUSR1, &action, NULL) == -1)
-    {
-        printf("sigaction() failed: \n");
-        return false;
-    }
-
-    if (sigaction(SIGINT, &action, NULL) == -1)
-    {
-        printf("sigaction() failed: \n");
-        return false;
-    }
-
-    return true;
-}
-
-void
-RKRGUI::check_signals (void *usrPtr)
-{
-    RKRGUI  *gui = NULL;
-    gui = (RKRGUI*)usrPtr;
-    
-    if(!gui)
-        return;
-    
-    if(got_sigusr1 == SIGUSR1)
-    {
-        if(filetoload != NULL)      // individual preset
-        {
-            printf("Saving file: %s\n", filetoload);
-            got_sigusr1 = 0;
-            gui->rkr->savefile(filetoload);
-        }
-        return;
-    }
-    
-    if(got_sigint == SIGINT)
-    {
-        printf( "Got SIGTERM, quitting...\n" );
-        got_sigint = 0;
-        Pexitprogram = 1;
-    }
-}
-
-
+static volatile int got_sigint = 0; 
+static volatile int got_sigusr1 = 0; 
 
 Analyzer::Analyzer(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
 }
@@ -1131,7 +1063,6 @@ Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 23;
 void RKRGUI::cb_MT_i(Fl_Box*, void*) {
   highlight();
 drag_effect();
-
 check_signals(this);
 
 if (rkr->Tuner_Bypass)
@@ -22611,12 +22542,13 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   memset(tmp,0, sizeof(tmp));
   if(filetoload != NULL)
   {
-      sprintf(tmp,"Session: %s",filetoload); 
+    sprintf(tmp,"Session: %s",filetoload); 
   }
-  else
+    else
   {
     sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
   }
+   
   Principal->copy_label(tmp);
   BankWin_Label(rkr->BankFilename);
   memset(tmp,0, sizeof(tmp));
@@ -24982,7 +24914,7 @@ void RKRGUI::is_modified() {
   
    ok=fl_choice("Bank was modified, but not saved", "Discard","Save",NULL);
   
-
+  
   
    switch(ok)
     
@@ -27998,6 +27930,65 @@ int RKRGUI::prevnext(int e) {
   }
   
   return 0;
+}
+
+bool RKRGUI::install_signal_handlers() {
+  /*install signal handlers*/
+      struct sigaction action;
+      memset(&action, 0, sizeof(action));
+      action.sa_handler = sigterm_handler;
+  
+      if (sigaction(SIGUSR1, &action, NULL) == -1)
+      {
+          printf("sigaction() failed: \n");
+          return false;
+      }
+  
+      if (sigaction(SIGINT, &action, NULL) == -1)
+      {
+          printf("sigaction() failed: \n");
+          return false;
+      }
+  
+      return true;
+}
+
+void RKRGUI::sigterm_handler(int sig) {
+  if(sig == SIGUSR1)
+      {
+          got_sigusr1 = sig;
+      }
+  
+      if(sig == SIGINT)
+      {
+          got_sigint = sig;
+      }
+}
+
+void RKRGUI::check_signals(void *usrPtr) {
+  RKRGUI  *gui = NULL;
+      gui = (RKRGUI*)usrPtr;
+      
+      if(!gui)
+          return;
+      
+      if(got_sigusr1 == SIGUSR1)
+      {
+          if(filetoload != NULL)      // individual preset
+          {
+              printf("Saving file: %s\n", filetoload);
+              got_sigusr1 = 0;
+              gui->rkr->savefile(filetoload);
+          }
+          return;
+      }
+      
+      if(got_sigint == SIGINT)
+      {
+          printf( "Got SIGTERM, quitting...\n" );
+          got_sigint = 0;
+          Pexitprogram = 1;
+      }
 }
 
 void RKRGUI::getMIDIControl(int num) {

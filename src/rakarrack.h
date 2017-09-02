@@ -4397,8 +4397,8 @@ public:
   void ScanDir();
   static int prevnext(int e);
   bool install_signal_handlers();
-  static void sigterm_handler ( int sig);
-  static void check_signals (void *usrPtr);
+  static void sigterm_handler(int sig);
+  static void check_signals(void *usrPtr);
   void getMIDIControl(int num);
   void PrepareML();
   inline void addpreset(Fl_Widget *w, int num);

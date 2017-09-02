@@ -1,108 +1,114 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0303 
-header_name {.h} 
+version 1.0304
+header_name {.h}
 code_name {.cxx}
 decl {\#include "process.h"} {public local
-} 
+}
 
 decl {\#include "config.h"} {public local
-} 
+}
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
-} 
+}
 
 decl {\#include <FL/Fl_Scroll.H>} {public local
-} 
+}
 
 decl {\#include <FL/Fl_Progress.H>} {public local
-} 
+}
 
 decl {\#include <FL/Fl_Tooltip.H>} {public local
-} 
+}
 
 decl {\#include <FL/x.H>} {public local
-} 
+}
 
 decl {\#include <FL/Fl_PNG_Image.H>} {public local
-} 
+}
 
 decl {\#include <FL/Fl_Tiled_Image.H>} {public local
-} 
+}
 
 decl {\#include <FL/Fl_Help_Dialog.H>} {public local
-} 
+}
 
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
-} 
+}
 
 decl {\#include <FL/Fl_Color_Chooser.H>} {public global
-} 
+}
 
 decl {\#include <X11/xpm.h>} {public global
-} 
+}
 
 decl {class RKR;  // forward declaration} {public global
-} 
+}
 
 decl {\#include "icono_rakarrack_128x128.xpm"} {private local
-} 
+}
 
 decl {Fl_Tiled_Image *back;} {private local
-} 
+}
 
 decl {Fl_Color leds_color;} {private local
-} 
+}
 
 decl {Fl_Color back_color;} {private local
-} 
+}
 
 decl {Fl_Color fore_color;} {private local
-} 
+}
 
 decl {Fl_Color label_color;} {private local
-} 
+}
 
 decl {Fl_Widget *old;} {private local
-} 
+}
 
 decl {float *spl;} {private local
-} 
+}
 
 decl {float *spr;} {private local
-} 
+}
 
 decl {int last_tecla;} {private local
-} 
+}
 
 decl {int drag;} {private local
-} 
+}
 
 decl {int sr;} {private local
-} 
+}
 
 decl {int ns;} {private local
-} 
+}
 
 decl {int at;} {private local
-} 
+}
 
 decl {int nt;} {private local
-} 
+}
 
 decl {int tta;} {private local
-} 
+}
 
 decl {int Scope_ON;} {private local
-} 
+}
 
 decl {int Analyzer_ON;} {private local
-} 
+}
 
 decl {Pixmap p, mask;} {private local
-} 
+}
 
 decl {XWMHints *hints = NULL;} {private local
-} 
+}
+
+decl {volatile int got_sigint = 0;} {private local
+}
+
+decl {volatile int got_sigusr1 = 0;} {selected private local
+}
 
 class Analyzer {: {public Fl_Box}
 } {
@@ -208,7 +214,7 @@ return(0);} {}
   }
   decl {EQ *efx_EQ1;} {private local
   }
-} 
+}
 
 class Scope {: {public Fl_Box}
 } {
@@ -329,7 +335,7 @@ return(0);} {}
   }
   decl {EQ *efx_EQ1;} {private local
   }
-} 
+}
 
 class NewVum {: {public Fl_Slider}
 } {
@@ -481,7 +487,7 @@ return 0;
 
 return 1;} {}
   }
-} 
+}
 
 class TunerLed {: {public Fl_Slider}
 } {
@@ -566,7 +572,7 @@ return 0;
 
 return 1;} {}
   }
-} 
+}
 
 class SliderW {: {public Fl_Value_Slider}
 } {
@@ -883,7 +889,7 @@ when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
   fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {}
   }
-} 
+}
 
 class RKRGUI {open
 } {
@@ -904,7 +910,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {133 99 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {188 92 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1107,7 +1113,7 @@ put_icon(AboutWin);}
       Fl_Box MT {
         callback {highlight();
 drag_effect();
-
+check_signals(this);
 
 if (rkr->Tuner_Bypass)
 {
@@ -8990,7 +8996,7 @@ rkr->efx_Reverbtron->setfile(USERFILE);}
         }
       }
       Fl_Group ECHOTRON {
-        user_data 1 open
+        user_data 1
         xywh {323 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button echotron_activar {
@@ -9212,7 +9218,7 @@ rkr->efx_Echotron->changepar(3,(int)o->value());}
           user_data 12
           callback {rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
           xywh {411 380 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -12603,7 +12609,15 @@ Sco->init(rkr->anall, rkr->analr, rkr->period);
 Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate);
 
 memset(tmp,0, sizeof(tmp));
-sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
+if(filetoload != NULL)
+{
+  sprintf(tmp,"Session: %s",filetoload); 
+}
+  else
+{
+  sprintf(tmp,"%s   v%s",rkr->jackcliname,VERSION); 
+}
+ 
 Principal->copy_label(tmp);
 BankWin_Label(rkr->BankFilename);
 memset(tmp,0, sizeof(tmp));
@@ -12630,7 +12644,8 @@ HideUE->redraw();
 
 void * v=MT;
 Fl::add_timeout(.04,tick,v);
-Fl::add_handler(prevnext);} {}
+Fl::add_handler(prevnext);
+install_signal_handlers();} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
@@ -17958,6 +17973,65 @@ return 1;
 
 return 0;} {}
   }
+  Function {install_signal_handlers()} {open return_type bool
+  } {
+    code {/*install signal handlers*/
+    struct sigaction action;
+    memset(&action, 0, sizeof(action));
+    action.sa_handler = sigterm_handler;
+
+    if (sigaction(SIGUSR1, &action, NULL) == -1)
+    {
+        printf("sigaction() failed: \\n");
+        return false;
+    }
+
+    if (sigaction(SIGINT, &action, NULL) == -1)
+    {
+        printf("sigaction() failed: \\n");
+        return false;
+    }
+
+    return true;} {}
+  }
+  Function {sigterm_handler(int sig)} {open return_type {static void}
+  } {
+    code {if(sig == SIGUSR1)
+    {
+        got_sigusr1 = sig;
+    }
+
+    if(sig == SIGINT)
+    {
+        got_sigint = sig;
+    }} {}
+  }
+  Function {check_signals(void *usrPtr)} {open return_type {static void}
+  } {
+    code {RKRGUI  *gui = NULL;
+    gui = (RKRGUI*)usrPtr;
+    
+    if(!gui)
+        return;
+    
+    if(got_sigusr1 == SIGUSR1)
+    {
+        if(filetoload != NULL)      // individual preset
+        {
+            printf("Saving file: %s\\n", filetoload);
+            got_sigusr1 = 0;
+            gui->rkr->savefile(filetoload);
+        }
+        return;
+    }
+    
+    if(got_sigint == SIGINT)
+    {
+        printf( "Got SIGTERM, quitting...\\n" );
+        got_sigint = 0;
+        Pexitprogram = 1;
+    }} {}
+  }
   Function {getMIDIControl(int num)} {} {
     code {int i = 0;
 rkr->comemouse=1;
@@ -18565,4 +18639,4 @@ drag=1000;
                 free(elem);
         }} {}
   }
-} 
+}
