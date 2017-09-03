@@ -42,6 +42,7 @@ show_help ()
     fprintf (stderr, "  -b File, --bank=File \t\t\t loads bank\n");
     fprintf (stderr, "  -p #,    --preset=# \t\t\t set preset\n");
     fprintf (stderr, "  -u uuid, --session=# \t\t\t set jack session uuid\n");
+    fprintf (stderr, "  -j Name, --jack-client-name=Name \t set alternate jack name: default=rakarrack\n");    
     fprintf (stderr, "  -x, --dump-preset-names \t\t prints bank of preset names and IDs\n\n");
     fprintf (stderr, "FLTK options are:\n\n");
     fprintf (stderr, "  -bg2 color\n");
@@ -86,6 +87,7 @@ main (int argc, char *argv[])
         {"dump-preset-names", 0, NULL, 'x'},
         {"help", 0, NULL, 'h'},
         {"session",1,NULL,'u'},
+        {"jack-client-name",1,NULL,'j'},
         {0, 0, 0, 0}
     };
 
@@ -106,7 +108,7 @@ main (int argc, char *argv[])
     option_index=0;
 
     while (1) {
-        opt = getopt_long (argc, argv, "l:b:p:u:nxh", opts, &option_index);
+        opt = getopt_long (argc, argv, "l:b:p:u:nxhj:", opts, &option_index);
         char *optarguments = optarg;
 
         if (opt == -1)
@@ -149,6 +151,12 @@ main (int argc, char *argv[])
                 statefile=strdup(argv[optind]);
             }
             break;
+            
+        case 'j':
+            if(optarguments != NULL){
+                jack_client_name=strdup(optarguments);
+            }
+            break;   
         }
     }
 

@@ -44,6 +44,8 @@ char *s_uuid;
 char *statefile;
 char *filetoload = NULL;
 char *banktoload;
+char *jack_client_name = (char*)"rakarrack";
+
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
 
 RKR::RKR ()
@@ -78,7 +80,7 @@ RKR::RKR ()
     OnCounter=0;
 
 
-    sprintf (temp, "rakarrack");
+    sprintf (temp, jack_client_name);
 
 #ifdef JACK_SESSION
     jackclient = jack_client_open (temp, JackSessionID, NULL, s_uuid);
