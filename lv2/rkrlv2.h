@@ -213,6 +213,8 @@ typedef struct _RKRLV2
     uint8_t init_params; //flag to indicate to force parameter (LFO) update & sample update on first run
     uint8_t file_changed;
     uint8_t prev_bypass;
+    float	*tmp_l;//temporary buffers for wet/dry mixing for hosts with shared in/out buffers(Ardour)
+    float 	*tmp_r;
     
 #ifdef OLDRKRLV2
     RvbFile* rvbfile;//file for reverbtron

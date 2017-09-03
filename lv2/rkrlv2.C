@@ -66,12 +66,28 @@ have_signal(float* efxoutl, float* efxoutr, uint32_t period)
     else  return 0;
 }
 
+//checks if input and output buffers are shared and copies it in a temp buffer so wet/dry works
+void
+check_shared_buf(RKRLV2* plug, uint32_t nframes)
+{
+    if(plug->input_l_p == plug->output_l_p )
+    {
+        memcpy(plug->tmp_l,plug->input_l_p,sizeof(float)*nframes);
+        plug->input_l_p = plug->tmp_l;
+    }
+    if(plug->input_r_p == plug->output_r_p)
+    {
+        memcpy(plug->tmp_r,plug->input_r_p,sizeof(float)*nframes);
+        plug->input_r_p = plug->tmp_r;
+    }
+}
+
 void
 xfade_in (RKRLV2* plug, uint32_t period)
 {
-	unsigned int i;
-	float v = 0;
-	float step = 1/(float)period;
+    unsigned int i;
+    float v = 0;
+    float step = 1/(float)period;
 	//just a linear fade since it's (hopefully) correlated
     for (i = 0; i < period; i++)
     {
@@ -84,9 +100,9 @@ xfade_in (RKRLV2* plug, uint32_t period)
 void
 xfade_out (RKRLV2* plug, uint32_t period)
 {
-	unsigned int i;
-	float v = 0;
-	float step = 1/(float)period;
+    unsigned int i;
+    float v = 0;
+    float step = 1/(float)period;
 	//just a linear fade since it's (hopefully) correlated
     for (i = 0; i < period; i++)
     {
@@ -163,6 +179,8 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
                     if(option[j].type == plug->URIDs.atom_Int)
                     {
                         plug->period_max = *(const int*)option[j].value;
+                        plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);//initialize these here - most use them
+                        plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
                     }
                     //other types?
                 }
@@ -383,6 +401,8 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -464,6 +484,8 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -553,6 +575,8 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -653,6 +677,8 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -750,6 +776,8 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -974,6 +1002,8 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -1063,6 +1093,8 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -1167,6 +1199,8 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -1414,6 +1448,8 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -1505,6 +1541,8 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -1595,6 +1633,8 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -1671,6 +1711,8 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -1825,6 +1867,8 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -1932,6 +1976,8 @@ void run_mbdistlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -2008,6 +2054,8 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -2160,6 +2208,8 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -2225,6 +2275,8 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -2303,6 +2355,8 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -2403,6 +2457,8 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -2488,6 +2544,8 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -2711,6 +2769,8 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -2857,6 +2917,8 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -2935,6 +2997,8 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -3105,6 +3169,8 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -3392,6 +3458,8 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -3714,6 +3782,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -3894,6 +3964,8 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -4035,6 +4107,8 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -4127,6 +4201,8 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
+    check_shared_buf(plug,nframes);
+    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -4199,6 +4275,8 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
@@ -4447,6 +4525,8 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
     int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
     
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
