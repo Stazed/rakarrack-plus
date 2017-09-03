@@ -41,6 +41,7 @@ show_help ()
     fprintf (stderr, "  -l File, --load=File \t\t\t loads preset\n");
     fprintf (stderr, "  -b File, --bank=File \t\t\t loads bank\n");
     fprintf (stderr, "  -p #,    --preset=# \t\t\t set preset\n");
+    fprintf (stderr, "  -u uuid, --session=# \t\t\t set jack session uuid\n");
     fprintf (stderr, "  -x, --dump-preset-names \t\t prints bank of preset names and IDs\n\n");
     fprintf (stderr, "FLTK options are:\n\n");
     fprintf (stderr, "  -bg2 color\n");
