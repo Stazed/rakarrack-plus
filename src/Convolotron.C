@@ -333,8 +333,8 @@ Convolotron::setfile(int value)
     }
 
     else memcpy(rbuf,buf,real_len*sizeof(float));
-
-    process_rbuf();
+    
+    UpdateLength ();  // this calls process_rbuf() as well
 
     return(1);
 };
@@ -480,7 +480,6 @@ Convolotron::changepar (int npar, int value)
         break;
     case 8:
         if(!setfile(value)) ; // error_num=1; // FIXME
-        UpdateLength();
         break;
     case 5:
         break;
