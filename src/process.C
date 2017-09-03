@@ -154,7 +154,7 @@ RKR::RKR ()
     rakarrack.get (PrefNom("Vocoder Down Quality"),Voc_D_Q,2);
 
 
-    rakarrack.get (PrefNom("Waveshape Resampling"),Wave_res_amount,5);
+    rakarrack.get (PrefNom("Waveshape Resampling"),Wave_res_amount,2);
     rakarrack.get (PrefNom("Waveshape Up Quality"),Wave_up_q,4);
     rakarrack.get (PrefNom("Waveshape Down Quality"),Wave_down_q,2);
 
