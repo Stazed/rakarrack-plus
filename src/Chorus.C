@@ -245,11 +245,10 @@ Chorus::setvolume (int Pvolume)
 {
     this->Pvolume = Pvolume;
     if(awesome_mode) { //use interpolated delay line for better sound
-        outvolume = 0.0f;
         ldelay->set_mix( ((float)Pvolume / 128.0f) );
         rdelay->set_mix( ((float)Pvolume / 128.0f) );
-    } else   outvolume = (float)Pvolume / 127.0f;
-
+    }
+    outvolume = (float)Pvolume / 127.0f;
 };
 
 void
@@ -366,10 +365,10 @@ Chorus::changepar (int npar, int value)
     case 12:
         awesome_mode = value;
         if(awesome_mode) {
-            outvolume = 0.0f;
             ldelay->set_mix(((float)Pvolume/128.0f) );
             rdelay->set_mix(((float)Pvolume/128.0f) );
-        } else outvolume = (float)Pvolume / 127.0f;
+        }
+        outvolume = (float)Pvolume / 127.0f;
         break;
     };
 };
