@@ -64,8 +64,11 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
 
     maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
     buf = (float *) malloc (sizeof (float) * maxx_size);
+    memset(buf,0,sizeof(float) * maxx_size);
     rbuf = (float *) malloc (sizeof (float) * maxx_size);
+    memset(rbuf,0,sizeof(float) * maxx_size);
     lxn = (float *) malloc (sizeof (float) * maxx_size);
+    memset(lxn,0,sizeof(float) * maxx_size);
     maxx_size--;
     maxx_read = maxx_size / 2;    
     offset = 0;
@@ -110,8 +113,6 @@ Convolotron::cleanup ()
 void
 Convolotron::lv2_update_params(uint32_t period)
 {
-    adjust(DS_state, period);
-    
     if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
@@ -122,8 +123,10 @@ Convolotron::lv2_update_params(uint32_t period)
     {
         PERIOD = period;
     }
+    
+    adjust(DS_state, period);
 }
-
+    
 void
 Convolotron::initialize()
 {
