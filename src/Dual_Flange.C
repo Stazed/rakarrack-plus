@@ -65,12 +65,7 @@ Dflange::Dflange (double sample_rate, uint32_t intermediate_bufsize)
     ibase = 1.0f/base;
     //default values
     Ppreset = 0;
-    Pwetdry = 0;
-    dry = 0.5f;
-    wet = 0.5f;
-    outvolume = 0.5f;
     Pintense = 0;
-    Pzero = 0;
     rsA = 0.0f;
     rsB = 0.0f;
     lsA  = 0.0f;
@@ -403,7 +398,7 @@ Dflange::changepar (int npar, int value)
             ldelayline1->set_mix(dry);
             rdelayline1->set_mix(dry);
         }
-        outvolume = (float)(Pwetdry+64) / 127.0f;
+
         break;
     case 1:
         Ppanning = value;

@@ -46,7 +46,6 @@ public:
     void lv2_update_params(uint32_t period);
 
     int Ppreset;
-    float outvolume;		//this is the volume of effect.
 
 private:
     //Parameters

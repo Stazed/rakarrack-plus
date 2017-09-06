@@ -1591,7 +1591,7 @@ RKR::Alg (float *origl, float *origr, void *)
             case 20:
                 if (DFlange_Bypass) {
                     efx_DFlange->out(efxoutl, efxoutr);
-                    Vol_Efx (20, efx_DFlange->outvolume);
+                    Vol2_Efx ();
                 }
                 break;
 

@@ -1790,8 +1790,6 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    check_shared_buf(plug,nframes);
-    
     //inline copy input to output
     memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
     memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
@@ -1829,8 +1827,6 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 
     //now run
     plug->dflange->out(plug->output_l_p,plug->output_r_p);
-    
-    wetdry_mix(plug, plug->dflange->outvolume, nframes);
 
     xfade_check(plug,nframes);
     return;
