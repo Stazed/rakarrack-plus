@@ -334,7 +334,7 @@ void
 MusicDelay::setpreset (int npreset)
 {
     const int PRESET_SIZE = 13;
-    const int NUM_PRESETS = 3;
+    const int NUM_PRESETS = 2;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Echo 1
