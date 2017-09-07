@@ -339,16 +339,16 @@ NewDist::setoctave (int Poctave)
 void
 NewDist::setpreset (int npreset)
 {
-    const int PRESET_SIZE = 11;
+    const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //NewDist 1
-        {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0},
+        {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0, 0},
         //NewDist 2
-        {0, 64, 64, 95, 45, 6, 0, 3459, 209, 60, 1},
+        {0, 64, 64, 95, 45, 6, 0, 3459, 209, 60, 1, 0},
         //NewDist 3
-        {0, 64, 64, 43, 77, 16, 0, 2983, 118, 83, 0}
+        {0, 64, 64, 43, 77, 16, 0, 2983, 118, 83, 0, 0}
     };
 
     if(npreset>NUM_PRESETS-1) {
