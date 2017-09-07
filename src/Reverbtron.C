@@ -717,7 +717,7 @@ Reverbtron::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(40,npreset-NUM_PRESETS+1, pdata);
+        Fpre->ReadPreset(40,npreset-NUM_PRESETS+1, pdata, Filename);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

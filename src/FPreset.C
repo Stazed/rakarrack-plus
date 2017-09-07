@@ -45,7 +45,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
     if (( fn = fopen (tempfile, "r")) != NULL)
     {
-        if(eff != 29)   // Convolotron - FIXME && 41 (Echotron) && 40 (Reverbtron)
+        if(eff != 29 && eff != 40 && eff != 41)   // 29 (Convolotron) - 40 (Reverbtron) - 41 (Echotron)
         {
             while (fgets (buf, sizeof buf, fn) != NULL)
             {
@@ -79,6 +79,64 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
                     sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
                            &pdata[0],&pdata[1],&pdata[2],&pdata[3],&pdata[4],&pdata[5],
                            &pdata[6],&pdata[7],&pdata[8],&pdata[9],&pdata[10],&pdata[11],
+                           cfilename);
+                    break;
+                }
+            }
+                    
+            if(filename != NULL)
+            {
+                memset(filename,0, sizeof(*filename));
+                strcpy(filename,cfilename);
+            }
+            free(cfilename);
+
+        }else if(eff == 40) // reverbtron
+        {
+            char *cfilename;
+            cfilename = (char *) malloc (sizeof (char) * 128);
+            memset(cfilename,0, sizeof(*cfilename));
+            while (fgets (buf, sizeof buf, fn) != NULL)
+            {
+                sbuf = buf;
+                sscanf(buf,"%d",&reff);
+                if(reff==eff) k++;
+                if(k==num) {
+                    strsep(&sbuf,",");
+                    strsep(&sbuf,",");
+                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+                           &pdata[0],&pdata[1],&pdata[2],&pdata[3],&pdata[4],&pdata[5],
+                           &pdata[6],&pdata[7],&pdata[8],&pdata[9],&pdata[10],&pdata[11],
+                           &pdata[12],&pdata[13],&pdata[14],&pdata[15],&pdata[16],
+                           cfilename);
+                    break;
+                }
+            }
+                    
+            if(filename != NULL)
+            {
+                memset(filename,0, sizeof(*filename));
+                strcpy(filename,cfilename);
+            }
+            free(cfilename);
+            
+        }else if(eff == 41) // echotron
+        {
+            char *cfilename;
+            cfilename = (char *) malloc (sizeof (char) * 128);
+            memset(cfilename,0, sizeof(*cfilename));
+            while (fgets (buf, sizeof buf, fn) != NULL)
+            {
+                sbuf = buf;
+                sscanf(buf,"%d",&reff);
+                if(reff==eff) k++;
+                if(k==num) {
+                    strsep(&sbuf,",");
+                    strsep(&sbuf,",");
+                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+                           &pdata[0],&pdata[1],&pdata[2],&pdata[3],&pdata[4],&pdata[5],
+                           &pdata[6],&pdata[7],&pdata[8],&pdata[9],&pdata[10],&pdata[11],
+                           &pdata[12],&pdata[13],&pdata[14],&pdata[15],&pdata[16],
                            cfilename);
                     break;
                 }
