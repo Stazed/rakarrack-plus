@@ -366,7 +366,7 @@
                 pset:value 3.0
         ], [
                 lv2:symbol "RANGE" ;
-                pset:value 0.0
+                pset:value 1.0
         ] ;
 	.
 
@@ -470,7 +470,7 @@
                 pset:value 5.0
         ], [
                 lv2:symbol "RANGE" ;
-                pset:value 0.0
+                pset:value 1.0
         ] ;
 	.
 
@@ -522,7 +522,7 @@
                 pset:value 6.0
         ], [
                 lv2:symbol "RANGE" ;
-                pset:value 0.0
+                pset:value 1.0
         ] ;
 	.
 
@@ -574,6 +574,6 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "RANGE" ;
-                pset:value 0.0
+                pset:value 1.0
         ] ;
 	.
