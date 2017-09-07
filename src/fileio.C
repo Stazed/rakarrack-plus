@@ -718,19 +718,19 @@ void RKR::getbuf(char *buf, int j)
                  efx_NewDist->getpar (6), efx_NewDist->getpar (7),
                  efx_NewDist->getpar (8), efx_NewDist->getpar (9),
                  efx_NewDist->getpar (10), efx_NewDist->getpar (11),
-                 efx_NewDist->getpar(11),NewDist_Bypass);
+                 efx_NewDist->getpar(12),NewDist_Bypass);
         break;
 
     case 18:
         //Analog Phaser
-        sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+        sprintf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                  efx_APhaser->getpar (0), efx_APhaser->getpar (1),
                  efx_APhaser->getpar (2), efx_APhaser->getpar (3),
                  efx_APhaser->getpar (4), efx_APhaser->getpar (5),
                  efx_APhaser->getpar (6), efx_APhaser->getpar (7),
                  efx_APhaser->getpar (8), efx_APhaser->getpar (9),
                  efx_APhaser->getpar (10), efx_APhaser->getpar (11),
-                 APhaser_Bypass);
+                 efx_APhaser->getpar (12),APhaser_Bypass);
         break;
 
     case 19:
