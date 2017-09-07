@@ -444,7 +444,7 @@ Convolotron::setpreset (int npreset)
     };
 
     if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(29,npreset-NUM_PRESETS+1, pdata);
+        Fpre->ReadPreset(29,npreset-NUM_PRESETS+1, pdata,Filename);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {

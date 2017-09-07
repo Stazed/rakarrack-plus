@@ -31,7 +31,7 @@ FPreset::~FPreset()
 };
 
 void
-FPreset::ReadPreset(int eff, int num, int pdata[])
+FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
 {
 
     FILE *fn;
@@ -43,30 +43,57 @@ FPreset::ReadPreset(int eff, int num, int pdata[])
     memset(tempfile,0,sizeof(tempfile));
     memset(pdata,0,sizeof(int)*MAX_PDATA_SIZE);
     sprintf (tempfile, "%s%s", getenv ("HOME"), "/.rkrintpreset");
-    if (( fn = fopen (tempfile, "r")) != NULL) {
-        while (fgets (buf, sizeof buf, fn) != NULL)
-
+    if (( fn = fopen (tempfile, "r")) != NULL)
+    {
+        if(eff != 29)   // Convolotron - FIXME && 41 (Echotron) && 40 (Reverbtron)
         {
-            sbuf = buf;
-            sscanf(buf,"%d",&reff);
-            if(reff==eff) k++;
-            if(k==num) {
-                strsep(&sbuf,",");
-                strsep(&sbuf,",");
-                sscanf(sbuf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d.%d.%d\n",
-                       &pdata[0],&pdata[1],&pdata[2],&pdata[3],&pdata[4],&pdata[5],&pdata[6],&pdata[7],&pdata[8],&pdata[9],
-                       &pdata[10],&pdata[11],&pdata[12],&pdata[13],&pdata[14],&pdata[15],&pdata[16],&pdata[17],&pdata[18],&pdata[19],
-                       &pdata[20],&pdata[21],&pdata[22],&pdata[23],&pdata[24],&pdata[25],&pdata[26],&pdata[27],&pdata[28],&pdata[29]);
-                break;
+            while (fgets (buf, sizeof buf, fn) != NULL)
+            {
+                sbuf = buf;
+                sscanf(buf,"%d",&reff);
+                if(reff==eff) k++;
+                if(k==num) {
+                    strsep(&sbuf,",");
+                    strsep(&sbuf,",");
+                    sscanf(sbuf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d.%d.%d\n",
+                           &pdata[0],&pdata[1],&pdata[2],&pdata[3],&pdata[4],&pdata[5],&pdata[6],&pdata[7],&pdata[8],&pdata[9],
+                           &pdata[10],&pdata[11],&pdata[12],&pdata[13],&pdata[14],&pdata[15],&pdata[16],&pdata[17],&pdata[18],&pdata[19],
+                           &pdata[20],&pdata[21],&pdata[22],&pdata[23],&pdata[24],&pdata[25],&pdata[26],&pdata[27],&pdata[28],&pdata[29]);
+                    break;
+                }
             }
         }
-
-
+        else if(eff == 29)  // Convolotron
+        {
+            char *cfilename;
+            cfilename = (char *) malloc (sizeof (char) * 128);
+            memset(cfilename,0, sizeof(*cfilename));
+            while (fgets (buf, sizeof buf, fn) != NULL)
+            {
+                sbuf = buf;
+                sscanf(buf,"%d",&reff);
+                if(reff==eff) k++;
+                if(k==num) {
+                    strsep(&sbuf,",");
+                    strsep(&sbuf,",");
+                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+                           &pdata[0],&pdata[1],&pdata[2],&pdata[3],&pdata[4],&pdata[5],
+                           &pdata[6],&pdata[7],&pdata[8],&pdata[9],&pdata[10],&pdata[11],
+                           cfilename);
+                    break;
+                }
+            }
+                    
+            if(filename != NULL)
+            {
+                memset(filename,0, sizeof(*filename));
+                strcpy(filename,cfilename);
+            }
+            free(cfilename);
+        }
+        
         fclose(fn);
     }
-
-
-
 };
 
 
