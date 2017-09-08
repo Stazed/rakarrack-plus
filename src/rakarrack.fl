@@ -6321,7 +6321,7 @@ rkr->efx_Shuffle->changepar(7,(int)o->value());}
           class SliderW
         }
         Fl_Value_Slider shuffle_volMH {
-          label {M.L Gain}
+          label {M.H. Gain}
           callback {if(Fl::event_button()==3)
 {
  getMIDIControl(233);

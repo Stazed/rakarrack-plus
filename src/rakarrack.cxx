@@ -16795,7 +16795,7 @@ R average.");
         shuffle_cross3->align(Fl_Align(FL_ALIGN_LEFT));
         shuffle_cross3->when(FL_WHEN_CHANGED);
       } // SliderW* shuffle_cross3
-      { shuffle_volMH = new SliderW(535, 335, 100, 10, "M.L Gain");
+      { shuffle_volMH = new SliderW(535, 335, 100, 10, "M.H. Gain");
         shuffle_volMH->type(5);
         shuffle_volMH->box(FL_FLAT_BOX);
         shuffle_volMH->color((Fl_Color)178);
