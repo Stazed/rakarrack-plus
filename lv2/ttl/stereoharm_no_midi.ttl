@@ -148,7 +148,7 @@
                 lv2:index 13 ;
                 lv2:symbol "NOTE" ;
                 lv2:name "Note" ;
-                lv2:default 4 ;
+                lv2:default 0 ;
                 lv2:minimum 0 ;
                 lv2:maximum 23 ;
                 lv2:portProperty lv2:integer ;
@@ -236,7 +236,7 @@
                 lv2:index 15 ;
                 lv2:symbol "LRC" ;
                 lv2:name "Left/Right Crossover" ;
-                lv2:default 0 ;
+                lv2:default 64 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
