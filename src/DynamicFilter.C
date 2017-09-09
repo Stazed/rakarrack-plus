@@ -195,7 +195,7 @@ DynamicFilter::setpreset (int npreset)
 
     if(npreset>NUM_PRESETS-1) {
 
-        Fpre->ReadPreset(11,npreset-NUM_PRESETS+1,pdata);
+        Fpre->ReadPreset(10,npreset-NUM_PRESETS+1,pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar (n, pdata[n]);
     } else {
