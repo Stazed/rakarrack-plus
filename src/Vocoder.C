@@ -413,7 +413,7 @@ Vocoder::setpanning (int Ppanning)
 
 
 void
-Vocoder::init_filters()     // FIXME this is never used
+Vocoder::init_filters()
 {
     float ff, qq;
 
