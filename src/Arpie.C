@@ -154,8 +154,8 @@ Arpie::out (float * efxoutl, float * efxoutr)
         rdl = r;
 
 
-        ldl = efxoutl[i] * panning - ldl * fb;
-        rdl = efxoutr[i] * (1.0f - panning) - rdl * fb;
+        ldl = efxoutl[i] * (1.0f - panning) - ldl * fb;
+        rdl = efxoutr[i] * panning - rdl * fb;
 
         if(reverse > 0.0) {
 
