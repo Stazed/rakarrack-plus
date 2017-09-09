@@ -266,8 +266,6 @@ NewDist::out (float * efxoutl, float * efxoutr)
             rout = r;
         }
 
-        //efxoutl[i] = lout * level * panning;
-        //efxoutr[i] = rout * level * ( 1.0f - panning);
         efxoutl[i] = lout * level * ( 1.0f - panning);
         efxoutr[i] = rout * level * panning;
 
