@@ -239,8 +239,8 @@ Reverb::out (float * efxoutl, float * efxoutr)
     processmono (1, efxoutr);	//right
 
 
-    float lvol = rs_coeff * pan * 2.0f;
-    float rvol = rs_coeff * (1.0f - pan) * 2.0f;
+    float lvol = rs_coeff * (1.0f - pan) * 2.0f;
+    float rvol = rs_coeff * pan * 2.0f;
 
     for (unsigned int i = 0; i < PERIOD; i++) {
         efxoutl[i] *= lvol;
