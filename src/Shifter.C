@@ -266,8 +266,8 @@ Shifter::out (float *efxoutl, float *efxoutr)
     PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
 
     for (i = 0; i < nPERIOD; i++) {
-        templ[i] = outo[i] * gain * panning;
-        tempr[i] = outo[i] * gain * (1.0f - panning);
+        templ[i] = outo[i] * gain * (1.0f - panning);
+        tempr[i] = outo[i] * gain * panning;
     }
 
 
