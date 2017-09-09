@@ -131,11 +131,11 @@ Echo::out (float * efxoutl, float * efxoutr)
         ldlout = -ldl*fb;
         rdlout = -rdl*fb;
         if (!Pdirect) {
-            l = ldl = efxoutl[i] * panning + ldlout;
-            r = rdl = efxoutr[i] * (1.0f - panning) + rdlout;
+            l = ldl = efxoutl[i] * (1.0f - panning) + ldlout;
+            r = rdl = efxoutr[i] * panning + rdlout;
         } else {
-            ldl = efxoutl[i] * panning + ldlout;
-            rdl = efxoutr[i] * (1.0f - panning) + rdlout;
+            ldl = efxoutl[i] * (1.0f - panning) + ldlout;
+            rdl = efxoutr[i] * panning + rdlout;
         }
 
         efxoutl[i]= l;
