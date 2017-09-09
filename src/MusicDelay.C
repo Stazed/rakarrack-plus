@@ -167,11 +167,11 @@ MusicDelay::out (float * efxoutl, float * efxoutr)
         ldl2 = l2;
         rdl2 = r2;
 
-        ldl1 = efxoutl[i] * gain1 * panning1 - ldl1 * fb1;
-        rdl1 = efxoutr[i] * gain1 * (1.0f - panning1) - rdl1 * fb1;
+        ldl1 = efxoutl[i] * gain1 * (1.0f - panning1) - ldl1 * fb1;
+        rdl1 = efxoutr[i] * gain1 * panning1 - rdl1 * fb1;
 
-        ldl2 = efxoutl[i] * gain2 * panning2 - ldl2 * fb2;
-        rdl2 = efxoutr[i] * gain2 * (1.0f - panning2) - rdl2 * fb2;
+        ldl2 = efxoutl[i] * gain2 * (1.0f - panning2) - ldl2 * fb2;
+        rdl2 = efxoutr[i] * gain2 * panning2 - rdl2 * fb2;
 
         efxoutl[i] = (ldl1 + ldl2) * 2.0f;
         efxoutr[i] = (rdl1 + rdl2) * 2.0f;
