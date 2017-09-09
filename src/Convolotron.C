@@ -287,8 +287,8 @@ void
 Convolotron::setpanning (int Ppanning)
 {
     this->Ppanning = Ppanning;
-    lpanning = ((float)Ppanning + 0.5f) / 127.0f;
-    rpanning = 1.0f - lpanning;
+    rpanning = ((float)Ppanning + 0.5f) / 127.0f;
+    lpanning = 1.0f - rpanning;
     levpanl=lpanning*level*2.0f;
     levpanr=rpanning*level*2.0f;
 
