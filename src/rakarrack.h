@@ -2055,6 +2055,11 @@ private:
   inline void cb_synthfilter_freq_i(SliderW*, void*);
   static void cb_synthfilter_freq(SliderW*, void*);
 public:
+  SliderW *synthfilter_rand;
+private:
+  inline void cb_synthfilter_rand_i(SliderW*, void*);
+  static void cb_synthfilter_rand(SliderW*, void*);
+public:
   Fl_Choice *synthfilter_lfotype;
 private:
   inline void cb_synthfilter_lfotype_i(Fl_Choice*, void*);

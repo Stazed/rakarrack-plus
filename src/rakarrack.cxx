@@ -5931,6 +5931,7 @@ if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
 synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
 synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
 synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
@@ -5993,6 +5994,18 @@ rkr->efx_Synthfilter->changepar(2,(int)o->value());
 }
 void RKRGUI::cb_synthfilter_freq(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_freq_i(o,v);
+}
+
+void RKRGUI::cb_synthfilter_rand_i(SliderW* o, void*) {
+  /*if(Fl::event_button()==3)
+{
+ getMIDIControl(240);
+ return;
+}*/
+rkr->efx_Synthfilter->changepar(3,(int)o->value());
+}
+void RKRGUI::cb_synthfilter_rand(SliderW* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_rand_i(o,v);
 }
 
 void RKRGUI::cb_synthfilter_lfotype_i(Fl_Choice* o, void*) {
@@ -16878,7 +16891,6 @@ R average.");
       SYNTHFILTER->labelfont(1);
       SYNTHFILTER->user_data((void*)(1));
       SYNTHFILTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      SYNTHFILTER->hide();
       { synthfilter_activar = new Fl_Light_Button(324, 215, 34, 18, "On");
         synthfilter_activar->shortcut(0x37);
         synthfilter_activar->color((Fl_Color)62);
@@ -16899,7 +16911,7 @@ R average.");
         synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
         synthfilter_preset->menu(menu_synthfilter_preset);
       } // Fl_Choice* synthfilter_preset
-      { synthfilter_WD = new SliderW(368, 236, 100, 10, "Wet/Dry");
+      { synthfilter_WD = new SliderW(368, 236, 100, 9, "Wet/Dry");
         synthfilter_WD->type(5);
         synthfilter_WD->box(FL_FLAT_BOX);
         synthfilter_WD->color((Fl_Color)178);
@@ -16916,7 +16928,7 @@ R average.");
         synthfilter_WD->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_WD->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_WD
-      { synthfilter_Distort = new SliderW(368, 248, 100, 10, "Distort");
+      { synthfilter_Distort = new SliderW(368, 247, 100, 9, "Distort");
         synthfilter_Distort->type(5);
         synthfilter_Distort->box(FL_FLAT_BOX);
         synthfilter_Distort->color((Fl_Color)178);
@@ -16932,7 +16944,7 @@ R average.");
         synthfilter_Distort->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_Distort->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_Distort
-      { synthfilter_freq = new SliderW(368, 260, 100, 10, "Tempo");
+      { synthfilter_freq = new SliderW(368, 259, 100, 9, "Tempo");
         synthfilter_freq->type(5);
         synthfilter_freq->box(FL_FLAT_BOX);
         synthfilter_freq->color((Fl_Color)178);
@@ -16949,7 +16961,23 @@ R average.");
         synthfilter_freq->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_freq->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_freq
-      { Fl_Choice* o = synthfilter_lfotype = new Fl_Choice(373, 271, 52, 13, "LFO Type");
+      { synthfilter_rand = new SliderW(368, 270, 100, 9, "Random");
+        synthfilter_rand->type(5);
+        synthfilter_rand->box(FL_FLAT_BOX);
+        synthfilter_rand->color((Fl_Color)178);
+        synthfilter_rand->selection_color((Fl_Color)62);
+        synthfilter_rand->labeltype(FL_NORMAL_LABEL);
+        synthfilter_rand->labelfont(0);
+        synthfilter_rand->labelsize(10);
+        synthfilter_rand->labelcolor(FL_BACKGROUND2_COLOR);
+        synthfilter_rand->maximum(127);
+        synthfilter_rand->step(1);
+        synthfilter_rand->textcolor(FL_BACKGROUND2_COLOR);
+        synthfilter_rand->callback((Fl_Callback*)cb_synthfilter_rand);
+        synthfilter_rand->align(Fl_Align(FL_ALIGN_LEFT));
+        synthfilter_rand->when(FL_WHEN_CHANGED);
+      } // SliderW* synthfilter_rand
+      { Fl_Choice* o = synthfilter_lfotype = new Fl_Choice(373, 280, 52, 13, "LFO Type");
         synthfilter_lfotype->down_box(FL_BORDER_BOX);
         synthfilter_lfotype->selection_color(FL_FOREGROUND_COLOR);
         synthfilter_lfotype->labelsize(10);
@@ -16959,13 +16987,13 @@ R average.");
         synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
         o->menu(menu_chorus_lfotype);
       } // Fl_Choice* synthfilter_lfotype
-      { synthfilter_subs = new Fl_Check_Button(428, 270, 46, 15, "Subtr.");
+      { synthfilter_subs = new Fl_Check_Button(428, 279, 46, 15, "Subtr.");
         synthfilter_subs->down_box(FL_BORDER_BOX);
         synthfilter_subs->labelsize(10);
         synthfilter_subs->labelcolor(FL_BACKGROUND2_COLOR);
         synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
       } // Fl_Check_Button* synthfilter_subs
-      { synthfilter_stdf = new SliderW(368, 286, 100, 10, "St.df");
+      { synthfilter_stdf = new SliderW(368, 294, 100, 9, "St.df");
         synthfilter_stdf->type(5);
         synthfilter_stdf->box(FL_FLAT_BOX);
         synthfilter_stdf->color((Fl_Color)178);
@@ -16981,7 +17009,7 @@ R average.");
         synthfilter_stdf->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_stdf->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_stdf
-      { synthfilter_width = new SliderW(368, 298, 100, 10, "Width");
+      { synthfilter_width = new SliderW(368, 305, 100, 9, "Width");
         synthfilter_width->type(5);
         synthfilter_width->box(FL_FLAT_BOX);
         synthfilter_width->color((Fl_Color)178);
@@ -16997,7 +17025,7 @@ R average.");
         synthfilter_width->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_width->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_width
-      { synthfilter_fb = new SliderW(368, 310, 100, 10, "Fb");
+      { synthfilter_fb = new SliderW(368, 316, 100, 9, "Fb");
         synthfilter_fb->type(5);
         synthfilter_fb->box(FL_FLAT_BOX);
         synthfilter_fb->color((Fl_Color)178);
@@ -17014,7 +17042,7 @@ R average.");
         synthfilter_fb->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_fb->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_fb
-      { synthfilter_Lstages = new Fl_Counter(367, 322, 28, 11, "LPF Stg.");
+      { synthfilter_Lstages = new Fl_Counter(367, 327, 28, 11, "LPF Stg.");
         synthfilter_Lstages->type(1);
         synthfilter_Lstages->box(FL_THIN_UP_BOX);
         synthfilter_Lstages->labelsize(10);
@@ -17027,7 +17055,7 @@ R average.");
         synthfilter_Lstages->callback((Fl_Callback*)cb_synthfilter_Lstages);
         synthfilter_Lstages->align(Fl_Align(FL_ALIGN_LEFT));
       } // Fl_Counter* synthfilter_Lstages
-      { synthfilter_Hstages = new Fl_Counter(444, 322, 28, 11, "HPF Stg.");
+      { synthfilter_Hstages = new Fl_Counter(444, 327, 28, 11, "HPF Stg.");
         synthfilter_Hstages->type(1);
         synthfilter_Hstages->box(FL_THIN_UP_BOX);
         synthfilter_Hstages->labelsize(10);
@@ -17040,7 +17068,7 @@ R average.");
         synthfilter_Hstages->callback((Fl_Callback*)cb_synthfilter_Hstages);
         synthfilter_Hstages->align(Fl_Align(FL_ALIGN_LEFT));
       } // Fl_Counter* synthfilter_Hstages
-      { synthfilter_dpth = new SliderW(368, 335, 100, 10, "Depth");
+      { synthfilter_dpth = new SliderW(368, 339, 100, 9, "Depth");
         synthfilter_dpth->type(5);
         synthfilter_dpth->box(FL_FLAT_BOX);
         synthfilter_dpth->color((Fl_Color)178);
@@ -17056,7 +17084,7 @@ R average.");
         synthfilter_dpth->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_dpth->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_dpth
-      { synthfilter_EnvSens = new SliderW(368, 347, 100, 10, "E.Sens");
+      { synthfilter_EnvSens = new SliderW(368, 350, 100, 9, "E.Sens");
         synthfilter_EnvSens->type(5);
         synthfilter_EnvSens->box(FL_FLAT_BOX);
         synthfilter_EnvSens->color((Fl_Color)178);
@@ -17073,7 +17101,7 @@ R average.");
         synthfilter_EnvSens->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_EnvSens->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_EnvSens
-      { synthfilter_ATime = new SliderW(368, 359, 100, 10, "A.Time");
+      { synthfilter_ATime = new SliderW(368, 361, 100, 9, "A.Time");
         synthfilter_ATime->type(5);
         synthfilter_ATime->box(FL_FLAT_BOX);
         synthfilter_ATime->color((Fl_Color)178);
@@ -17091,7 +17119,7 @@ R average.");
         synthfilter_ATime->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_ATime->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_ATime
-      { synthfilter_RTime = new SliderW(368, 371, 100, 10, "R.Time");
+      { synthfilter_RTime = new SliderW(368, 372, 100, 9, "R.Time");
         synthfilter_RTime->type(5);
         synthfilter_RTime->box(FL_FLAT_BOX);
         synthfilter_RTime->color((Fl_Color)178);
@@ -17109,7 +17137,7 @@ R average.");
         synthfilter_RTime->align(Fl_Align(FL_ALIGN_LEFT));
         synthfilter_RTime->when(FL_WHEN_CHANGED);
       } // SliderW* synthfilter_RTime
-      { synthfilter_Offset = new SliderW(368, 383, 100, 10, "Offset");
+      { synthfilter_Offset = new SliderW(368, 383, 100, 9, "Offset");
         synthfilter_Offset->type(5);
         synthfilter_Offset->box(FL_FLAT_BOX);
         synthfilter_Offset->color((Fl_Color)178);
@@ -20154,6 +20182,7 @@ R average.");
       OTREM->labelfont(1);
       OTREM->user_data((void*)(1));
       OTREM->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      OTREM->hide();
       { otrem_activar = new Fl_Light_Button(325, 217, 34, 18, "On");
         otrem_activar->shortcut(0x38);
         otrem_activar->color((Fl_Color)62);

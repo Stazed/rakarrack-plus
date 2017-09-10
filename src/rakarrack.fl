@@ -107,7 +107,7 @@ decl {XWMHints *hints = NULL;} {private local
 decl {volatile int got_sigint = 0;} {private local
 }
 
-decl {volatile int got_sigusr1 = 0;} {selected private local
+decl {volatile int got_sigusr1 = 0;} {private local
 }
 
 class Analyzer {: {public Fl_Box}
@@ -910,7 +910,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {188 92 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {215 167 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -6372,8 +6372,8 @@ rkr->efx_Shuffle->changepar(9,(int)o->value());}
         }
       }
       Fl_Group SYNTHFILTER {
-        user_data 1
-        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 open
+        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button synthfilter_activar {
           label On
@@ -6398,6 +6398,7 @@ if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
 synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
 synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
 synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
@@ -6409,7 +6410,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open selected
           xywh {396 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6449,7 +6450,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
  return;
 }
 rkr->efx_Synthfilter->changepar(0,(int)(o->value()+64));}
-          xywh {368 236 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+          xywh {368 236 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_Distort {
@@ -6460,7 +6461,7 @@ rkr->efx_Synthfilter->changepar(0,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Synthfilter->changepar(1,(int)o->value());}
-          xywh {368 248 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {368 247 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_freq {
@@ -6471,20 +6472,31 @@ rkr->efx_Synthfilter->changepar(1,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(2,(int)o->value());}
-          xywh {368 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          xywh {368 259 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+          class SliderW
+        }
+        Fl_Value_Slider synthfilter_rand {
+          label Random
+          callback {/*if(Fl::event_button()==3)
+{
+ getMIDIControl(240);
+ return;
+}*/
+rkr->efx_Synthfilter->changepar(3,(int)o->value());}
+          xywh {368 270 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Choice synthfilter_lfotype {
           label {LFO Type}
           callback {rkr->efx_Synthfilter->changepar(4,(int)o->value());}
-          xywh {373 271 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          xywh {373 280 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_chorus_lfotype);}
         } {}
         Fl_Check_Button synthfilter_subs {
           label {Subtr.}
           user_data 2
           callback {rkr->efx_Synthfilter->changepar(10,(int)o->value())}
-          xywh {428 270 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+          xywh {428 279 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
         }
         Fl_Value_Slider synthfilter_stdf {
           label {St.df}
@@ -6494,7 +6506,7 @@ rkr->efx_Synthfilter->changepar(2,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(5,(int)o->value());}
-          xywh {368 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {368 294 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_width {
@@ -6505,7 +6517,7 @@ rkr->efx_Synthfilter->changepar(5,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(6,(int)o->value());}
-          xywh {368 298 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {368 305 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_fb {
@@ -6516,18 +6528,18 @@ rkr->efx_Synthfilter->changepar(6,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(7,(int)o->value());}
-          xywh {368 310 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {368 316 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Counter synthfilter_Lstages {
           label {LPF Stg.}
           callback {rkr->efx_Synthfilter->changepar(8,(int)o->value());}
-          xywh {367 322 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
+          xywh {367 327 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
         }
         Fl_Counter synthfilter_Hstages {
           label {HPF Stg.}
           callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());}
-          xywh {444 322 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
+          xywh {444 327 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
         }
         Fl_Value_Slider synthfilter_dpth {
           label Depth
@@ -6537,7 +6549,7 @@ rkr->efx_Synthfilter->changepar(7,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(11,(int)o->value());}
-          xywh {368 335 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {368 339 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_EnvSens {
@@ -6548,7 +6560,7 @@ rkr->efx_Synthfilter->changepar(11,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(12,(int)(o->value()));}
-          xywh {368 347 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+          xywh {368 350 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_ATime {
@@ -6559,7 +6571,7 @@ rkr->efx_Synthfilter->changepar(12,(int)(o->value()));}
  return;
 }
 rkr->efx_Synthfilter->changepar(13,(int)o->value());}
-          xywh {368 359 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 5 maximum 1000 step 1 value 5 textcolor 7
+          xywh {368 361 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 5 maximum 1000 step 1 value 5 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_RTime {
@@ -6570,7 +6582,7 @@ rkr->efx_Synthfilter->changepar(13,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(14,(int)o->value());}
-          xywh {368 371 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 5 maximum 500 step 1 value 5 textcolor 7
+          xywh {368 372 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 5 maximum 500 step 1 value 5 textcolor 7
           class SliderW
         }
         Fl_Value_Slider synthfilter_Offset {
@@ -6581,7 +6593,7 @@ rkr->efx_Synthfilter->changepar(14,(int)o->value());}
  return;
 }
 rkr->efx_Synthfilter->changepar(15,(int)o->value());}
-          xywh {368 383 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+          xywh {368 383 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
           class SliderW
         }
       }
@@ -9672,7 +9684,7 @@ rkr->efx_CompBand->changepar(11,(int)o->value());}
       }
       Fl_Group OTREM {
         user_data 1
-        xywh {320 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {320 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button otrem_activar {
           label On
