@@ -257,11 +257,11 @@ void
 MBVvol::setCombi(int value)
 {
 /*
-                                                            NEW         LEGACY
-                                                             0            1         LFO 1
-                                                             1            2         LF0 2
-                                                             2            o         Constant
-                                                             3            x         Muted
+NEW         LEGACY
+ 0            1         LFO 1
+ 1            2         LF0 2
+ 2            o         Constant
+ 3            x         Muted
 
 
                                                              NEW        LEGACY
@@ -285,6 +285,10 @@ MBVvol::setCombi(int value)
  * the four values are saved in the original Pcombi variable and now use CalcCombi() and parseCombi()
  * for the new method saving and loading.
 */
+    if(value < 0 || value > 13333)  // sanity check
+    {
+        Pcombi = 0;                 // set to defualt
+    }
     
     if(value < 10000)   // legacy value from old files and banks
     {
