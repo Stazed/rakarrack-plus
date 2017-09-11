@@ -256,7 +256,92 @@ MBVvol::updateVols(void)
 void
 MBVvol::setCombi(int value)
 {
+/*
+                                                            NEW         LEGACY
+                                                             0            1         LFO 1
+                                                             1            2         LF0 2
+                                                             2            o         Constant
+                                                             3            x         Muted
 
+
+                                                             NEW        LEGACY
+ {"1122", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0011         0
+ {"1221", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0110         1
+ {"1212", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0101         2
+ {"o11o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 2002         3
+ {"o12o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 2012         4
+ {"x11x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 3003         5
+ {"x12x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 3013         6
+ {"1oo1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0220         7
+ {"1oo2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0221         8
+ {"1xx1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0330         9
+ {"1xx2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0331        10
+
+ * The above NEW values plus 10000 are the calculated magic numbers for the legacy case defaults = Pcombi new value.
+ * All of this is to maintain the legacy file saving structure and still use the more flexible rkr.lv2 method
+ * of allowing users to set their own combination. Legacy had only one saved variable for the four sources.
+ * Legacy hard coded the above preset combinations, limiting user flexibility. The rkr.lv2 method separated each
+ * source into four parts to allow maximum user flexibility. To avoid having to re-write the rakarrack file structure,
+ * the four values are saved in the original Pcombi variable and now use CalcCombi() and parseCombi()
+ * for the new method saving and loading.
+*/
+    
+    if(value < 10000)   // legacy value from old files and banks
+    {
+        switch(value)
+        {
+        case 0:
+            Pcombi = 10011;
+            parseCombi(Pcombi);
+            break;
+        case 1:
+            Pcombi = 10110;
+            parseCombi(Pcombi);
+            break;
+        case 2:
+            Pcombi = 10101;
+            parseCombi(Pcombi);
+            break;
+        case 3:
+            Pcombi = 12002;
+            parseCombi(Pcombi);
+            break;
+        case 4:
+            Pcombi = 12012;
+            parseCombi(Pcombi);
+            break;
+        case 5:
+            Pcombi = 13003;
+            parseCombi(Pcombi);
+            break;
+        case 6:
+            Pcombi = 13013;
+            parseCombi(Pcombi);
+            break;
+        case 7:
+            Pcombi = 10220;
+            parseCombi(Pcombi);
+            break;
+        case 8:
+            Pcombi = 10221;
+            parseCombi(Pcombi);
+            break;
+        case 9:
+            Pcombi = 10330;
+            parseCombi(Pcombi);
+            break;
+        case 10:
+            Pcombi = 10331;
+            parseCombi(Pcombi);
+            break;
+        }
+    }
+    else
+    {
+        parseCombi(Pcombi);
+    }
+
+#if 0
     switch(value) {
     case 0:
         sourceL = &v1l;
@@ -368,8 +453,37 @@ MBVvol::setCombi(int value)
         sourceH = &v2l;
         sourceHr = &v2r;
         break;
-
     }
+#endif // 0
+}
+
+void
+MBVvol::calcCombi ()
+{
+    /* To save all four variables in the one Pcombi variable */
+    Pcombi = ((PsL * 1000) + (PsML * 100) + (PsMH * 10) + PsH) + 10000;
+}
+
+void
+MBVvol::parseCombi (int value)
+{
+    /* New file saving for the rkr.lv2 method - four variables saved in one variable location */
+    
+    value -= 10000;
+    PsL  = value / 1000;
+    setSource(&sourceL, &sourceLr, PsL);
+    
+    value %= 1000;
+    PsML = value / 100;
+    setSource(&sourceML, &sourceMLr, PsML);
+    
+    value %= 100;
+    PsMH = value / 10;
+    setSource(&sourceMH, &sourceMHr, PsMH);
+    
+    value %= 10;
+    PsH  = value;
+    setSource(&sourceH, &sourceHr, value);
 }
 
 void
@@ -408,41 +522,42 @@ MBVvol::setCross3 (int value)
 void
 MBVvol::setSource (float** ptr, float** ptrr, int val)
 {
-	switch(val){
-	case 0:
-		*ptr = &v1l;
-		*ptrr = &v1r;
-		break;
-	case 1:
-		*ptr = &v2l;
-		*ptrr = &v2r;
-		break;
-	case 2:
-		*ptr = &one;
-		*ptrr = &one;
-		break;
-	case 3:
-		*ptr = &zero;
-		*ptrr = &zero;
-		break;
-	default:
-		return; //no change
-	}
+    switch(val){
+    case 0:
+            *ptr = &v1l;
+            *ptrr = &v1r;
+            break;
+    case 1:
+            *ptr = &v2l;
+            *ptrr = &v2r;
+            break;
+    case 2:
+            *ptr = &one;
+            *ptrr = &one;
+            break;
+    case 3:
+            *ptr = &zero;
+            *ptrr = &zero;
+            break;
+    default:
+            return; //no change
+    }
+    calcCombi();    // to update the Pcombi file saving value
 }
 
 void
 MBVvol::setpreset (int npreset)
 {
-    const int PRESET_SIZE = 15;
+    const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Vary1
-        {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 1, 1},   // 0, 0, 1, 1
+        {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0},   // 0, 0, 1, 1
         //Vary2
-        {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1, 0, 1, 1, 0},   // 0, 1, 1, 0
+        {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1},   // 0, 1, 1, 0
         //Vary3
-        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2, 0, 1, 0, 1}   // 0, 1, 0, 1
+        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2}   // 0, 1, 0, 1
     };
 
     if(npreset>NUM_PRESETS-1) {
@@ -500,8 +615,8 @@ MBVvol::changepar (int npar, int value)
         setCross3(value);
         break;
     case 10:
-//        Pcombi=value;     // FIXME some creative storage for 11 through 14
-//        setCombi(value);
+        Pcombi=value;
+        setCombi(value);
         break;
     case 11:
     	PsL=value;

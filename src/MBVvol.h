@@ -66,6 +66,8 @@ private:
     void setCross2 (int value);
     void setCross3 (int value);
     void setCombi (int value);
+    void calcCombi ();
+    void parseCombi (int value);
     void updateVols(void);
     void setSource(float** ptr, float** ptrr, int val);
 
