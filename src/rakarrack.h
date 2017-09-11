@@ -2182,11 +2182,29 @@ private:
   inline void cb_mbvvol_cross3_i(SliderW*, void*);
   static void cb_mbvvol_cross3(SliderW*, void*);
 public:
-  Fl_Choice *mbvvol_combi;
+  Fl_Choice *mbvvol_LB;
 private:
-  inline void cb_mbvvol_combi_i(Fl_Choice*, void*);
-  static void cb_mbvvol_combi(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_mbvvol_combi[];
+  inline void cb_mbvvol_LB_i(Fl_Choice*, void*);
+  static void cb_mbvvol_LB(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbvvol_LB[];
+public:
+  Fl_Choice *mbvvol_MB1;
+private:
+  inline void cb_mbvvol_MB1_i(Fl_Choice*, void*);
+  static void cb_mbvvol_MB1(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbvvol_MB1[];
+public:
+  Fl_Choice *mbvvol_MB2;
+private:
+  inline void cb_mbvvol_MB2_i(Fl_Choice*, void*);
+  static void cb_mbvvol_MB2(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbvvol_MB2[];
+public:
+  Fl_Choice *mbvvol_HB;
+private:
+  inline void cb_mbvvol_HB_i(Fl_Choice*, void*);
+  static void cb_mbvvol_HB(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_mbvvol_HB[];
 public:
   Fl_Group *CONVOLOTRON;
   Fl_Light_Button *convo_activar;

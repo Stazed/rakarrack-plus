@@ -6372,8 +6372,8 @@ rkr->efx_Shuffle->changepar(9,(int)o->value());}
         }
       }
       Fl_Group SYNTHFILTER {
-        user_data 1 open
-        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        user_data 1
+        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button synthfilter_activar {
           label On
@@ -6410,7 +6410,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open selected
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
           xywh {396 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6598,8 +6598,8 @@ rkr->efx_Synthfilter->changepar(15,(int)o->value());}
         }
       }
       Fl_Group MBVVOL {
-        user_data 1
-        xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 open
+        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button mbvvol_activar {
           label On
@@ -6631,7 +6631,11 @@ mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
 mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
 mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
 mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
-mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));}
+//mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));
+mbvvol_LB->value(rkr->efx_MBVvol->getpar(11));
+mbvvol_MB1->value(rkr->efx_MBVvol->getpar(12));
+mbvvol_MB2->value(rkr->efx_MBVvol->getpar(13));
+mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));} selected
           xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
         } {
           MenuItem {} {
@@ -6747,55 +6751,96 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
           xywh {373 363 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
           class SliderW
         }
-        Fl_Choice mbvvol_combi {
-          label Combi
+        Fl_Choice mbvvol_LB {
+          label L
           user_data 12
-          callback {rkr->efx_MBVvol->changepar(10,(int)o->value());}
-          xywh {384 375 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          callback {rkr->efx_MBVvol->changepar(11,(int)o->value());} open
+          tooltip {Low Band Volume} xywh {330 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
         } {
           MenuItem {} {
-            label 1122
+            label {1 - LFO 1}
             xywh {0 0 36 21} labelsize 10
           }
           MenuItem {} {
-            label 1221
+            label {2 - LFO 2}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {C - Constant}
+            xywh {0 0 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {M - Muted}
+            xywh {0 0 36 21} labelsize 10
+          }
+        }
+        Fl_Choice mbvvol_MB1 {
+          label M
+          user_data 12
+          callback {rkr->efx_MBVvol->changepar(12,(int)o->value());} open
+          tooltip {Mid Band 1 Volume} xywh {369 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
+        } {
+          MenuItem {} {
+            label {1 - LFO 1}
             xywh {10 10 36 21} labelsize 10
           }
           MenuItem {} {
-            label 1212
+            label {2 - LFO 2}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {C - Constant}
+            xywh {10 10 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {M - Muted}
+            xywh {10 10 36 21} labelsize 10
+          }
+        }
+        Fl_Choice mbvvol_MB2 {
+          label M
+          user_data 12
+          callback {rkr->efx_MBVvol->changepar(13,(int)o->value());} open
+          tooltip {Mid Band 2 Volume} xywh {409 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
+        } {
+          MenuItem {} {
+            label {1 - LFO 1}
             xywh {20 20 36 21} labelsize 10
           }
           MenuItem {} {
-            label o11o
+            label {2 - LFO 2}
+            xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {C - Constant}
+            xywh {20 20 36 21} labelsize 10
+          }
+          MenuItem {} {
+            label {M - Muted}
+            xywh {456 375 36 21} labelsize 10
+          }
+        }
+        Fl_Choice mbvvol_HB {
+          label H
+          user_data 12
+          callback {rkr->efx_MBVvol->changepar(14,(int)o->value());} open
+          tooltip {High Band Volume} xywh {447 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
+        } {
+          MenuItem {} {
+            label {1 - LFO 1}
             xywh {30 30 36 21} labelsize 10
           }
           MenuItem {} {
-            label o12o
-            xywh {40 40 36 21} labelsize 10
+            label {2 - LFO 2}
+            xywh {30 30 36 21} labelsize 10
           }
           MenuItem {} {
-            label x11x
-            xywh {50 50 36 21} labelsize 10
+            label {C - Constant}
+            xywh {30 30 36 21} labelsize 10
           }
           MenuItem {} {
-            label x12x
-            xywh {60 60 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label 1oo1
-            xywh {40 40 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label 1oo2
-            xywh {50 50 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label 1xx1
-            xywh {60 60 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label 1xx2
-            xywh {70 70 36 21} labelsize 10
+            label {M - Muted}
+            xywh {30 30 36 21} labelsize 10
           }
         }
       }

@@ -6161,7 +6161,11 @@ mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
 mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
 mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
 mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
-mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));
+//mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));
+mbvvol_LB->value(rkr->efx_MBVvol->getpar(11));
+mbvvol_MB1->value(rkr->efx_MBVvol->getpar(12));
+mbvvol_MB2->value(rkr->efx_MBVvol->getpar(13));
+mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));
 }
 void RKRGUI::cb_mbvvol_preset(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_preset_i(o,v);
@@ -6284,25 +6288,63 @@ void RKRGUI::cb_mbvvol_cross3(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_cross3_i(o,v);
 }
 
-void RKRGUI::cb_mbvvol_combi_i(Fl_Choice* o, void*) {
-  rkr->efx_MBVvol->changepar(10,(int)o->value());
+void RKRGUI::cb_mbvvol_LB_i(Fl_Choice* o, void*) {
+  rkr->efx_MBVvol->changepar(11,(int)o->value());
 }
-void RKRGUI::cb_mbvvol_combi(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_combi_i(o,v);
+void RKRGUI::cb_mbvvol_LB(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_LB_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_mbvvol_combi[] = {
- {"1122", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1221", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1212", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"o11o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"o12o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x11x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x12x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1oo1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1oo2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1xx1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1xx2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+Fl_Menu_Item RKRGUI::menu_mbvvol_LB[] = {
+ {"1 - LFO 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"2 - LFO 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"C - Constant", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"M - Muted", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_mbvvol_MB1_i(Fl_Choice* o, void*) {
+  rkr->efx_MBVvol->changepar(12,(int)o->value());
+}
+void RKRGUI::cb_mbvvol_MB1(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_MB1_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_mbvvol_MB1[] = {
+ {"1 - LFO 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"2 - LFO 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"C - Constant", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"M - Muted", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_mbvvol_MB2_i(Fl_Choice* o, void*) {
+  rkr->efx_MBVvol->changepar(13,(int)o->value());
+}
+void RKRGUI::cb_mbvvol_MB2(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_MB2_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_mbvvol_MB2[] = {
+ {"1 - LFO 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"2 - LFO 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"C - Constant", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"M - Muted", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_mbvvol_HB_i(Fl_Choice* o, void*) {
+  rkr->efx_MBVvol->changepar(14,(int)o->value());
+}
+void RKRGUI::cb_mbvvol_HB(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbvvol_HB_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_mbvvol_HB[] = {
+ {"1 - LFO 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"2 - LFO 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"C - Constant", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"M - Muted", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -16891,6 +16933,7 @@ R average.");
       SYNTHFILTER->labelfont(1);
       SYNTHFILTER->user_data((void*)(1));
       SYNTHFILTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      SYNTHFILTER->hide();
       { synthfilter_activar = new Fl_Light_Button(324, 215, 34, 18, "On");
         synthfilter_activar->shortcut(0x37);
         synthfilter_activar->color((Fl_Color)62);
@@ -17155,14 +17198,13 @@ R average.");
       } // SliderW* synthfilter_Offset
       SYNTHFILTER->end();
     } // Fl_Group* SYNTHFILTER
-    { MBVVOL = new Fl_Group(321, 212, 158, 184);
+    { MBVVOL = new Fl_Group(319, 211, 158, 184);
       MBVVOL->box(FL_UP_BOX);
       MBVVOL->color(FL_FOREGROUND_COLOR);
       MBVVOL->selection_color(FL_FOREGROUND_COLOR);
       MBVVOL->labelfont(1);
       MBVVOL->user_data((void*)(1));
       MBVVOL->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      MBVVOL->hide();
       { mbvvol_activar = new Fl_Light_Button(326, 216, 34, 18, "On");
         mbvvol_activar->shortcut(0x38);
         mbvvol_activar->color((Fl_Color)62);
@@ -17337,16 +17379,50 @@ R average.");
         mbvvol_cross3->align(Fl_Align(FL_ALIGN_LEFT));
         mbvvol_cross3->when(FL_WHEN_CHANGED);
       } // SliderW* mbvvol_cross3
-      { mbvvol_combi = new Fl_Choice(384, 375, 72, 16, "Combi");
-        mbvvol_combi->down_box(FL_BORDER_BOX);
-        mbvvol_combi->selection_color(FL_FOREGROUND_COLOR);
-        mbvvol_combi->labelsize(10);
-        mbvvol_combi->labelcolor(FL_BACKGROUND2_COLOR);
-        mbvvol_combi->textsize(10);
-        mbvvol_combi->textcolor(FL_BACKGROUND2_COLOR);
-        mbvvol_combi->callback((Fl_Callback*)cb_mbvvol_combi, (void*)(12));
-        mbvvol_combi->menu(menu_mbvvol_combi);
-      } // Fl_Choice* mbvvol_combi
+      { mbvvol_LB = new Fl_Choice(330, 375, 27, 16, "L");
+        mbvvol_LB->tooltip("Low Band Volume");
+        mbvvol_LB->down_box(FL_BORDER_BOX);
+        mbvvol_LB->selection_color(FL_FOREGROUND_COLOR);
+        mbvvol_LB->labelsize(8);
+        mbvvol_LB->labelcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_LB->textsize(9);
+        mbvvol_LB->textcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_LB->callback((Fl_Callback*)cb_mbvvol_LB, (void*)(12));
+        mbvvol_LB->menu(menu_mbvvol_LB);
+      } // Fl_Choice* mbvvol_LB
+      { mbvvol_MB1 = new Fl_Choice(369, 375, 27, 16, "M");
+        mbvvol_MB1->tooltip("Mid Band 1 Volume");
+        mbvvol_MB1->down_box(FL_BORDER_BOX);
+        mbvvol_MB1->selection_color(FL_FOREGROUND_COLOR);
+        mbvvol_MB1->labelsize(8);
+        mbvvol_MB1->labelcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_MB1->textsize(9);
+        mbvvol_MB1->textcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_MB1->callback((Fl_Callback*)cb_mbvvol_MB1, (void*)(12));
+        mbvvol_MB1->menu(menu_mbvvol_MB1);
+      } // Fl_Choice* mbvvol_MB1
+      { mbvvol_MB2 = new Fl_Choice(409, 375, 27, 16, "M");
+        mbvvol_MB2->tooltip("Mid Band 2 Volume");
+        mbvvol_MB2->down_box(FL_BORDER_BOX);
+        mbvvol_MB2->selection_color(FL_FOREGROUND_COLOR);
+        mbvvol_MB2->labelsize(8);
+        mbvvol_MB2->labelcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_MB2->textsize(9);
+        mbvvol_MB2->textcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_MB2->callback((Fl_Callback*)cb_mbvvol_MB2, (void*)(12));
+        mbvvol_MB2->menu(menu_mbvvol_MB2);
+      } // Fl_Choice* mbvvol_MB2
+      { mbvvol_HB = new Fl_Choice(447, 375, 27, 16, "H");
+        mbvvol_HB->tooltip("High Band Volume");
+        mbvvol_HB->down_box(FL_BORDER_BOX);
+        mbvvol_HB->selection_color(FL_FOREGROUND_COLOR);
+        mbvvol_HB->labelsize(8);
+        mbvvol_HB->labelcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_HB->textsize(9);
+        mbvvol_HB->textcolor(FL_BACKGROUND2_COLOR);
+        mbvvol_HB->callback((Fl_Callback*)cb_mbvvol_HB, (void*)(12));
+        mbvvol_HB->menu(menu_mbvvol_HB);
+      } // Fl_Choice* mbvvol_HB
       MBVVOL->end();
     } // Fl_Group* MBVVOL
     { CONVOLOTRON = new Fl_Group(322, 213, 158, 184);

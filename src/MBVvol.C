@@ -433,16 +433,16 @@ MBVvol::setSource (float** ptr, float** ptrr, int val)
 void
 MBVvol::setpreset (int npreset)
 {
-    const int PRESET_SIZE = 11;
+    const int PRESET_SIZE = 15;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Vary1
-        {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0},
+        {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 1, 1},   // 0, 0, 1, 1
         //Vary2
-        {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1},
+        {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1, 0, 1, 1, 0},   // 0, 1, 1, 0
         //Vary3
-        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2}
+        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2, 0, 1, 0, 1}   // 0, 1, 0, 1
     };
 
     if(npreset>NUM_PRESETS-1) {
@@ -500,8 +500,8 @@ MBVvol::changepar (int npar, int value)
         setCross3(value);
         break;
     case 10:
-        Pcombi=value;
-        setCombi(value);
+//        Pcombi=value;     // FIXME some creative storage for 11 through 14
+//        setCombi(value);
         break;
     case 11:
     	PsL=value;
