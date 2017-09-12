@@ -296,56 +296,46 @@ NEW         LEGACY
         {
         case 0:
             Pcombi = 10011;
-            parseCombi(Pcombi);
             break;
         case 1:
             Pcombi = 10110;
-            parseCombi(Pcombi);
             break;
         case 2:
             Pcombi = 10101;
-            parseCombi(Pcombi);
             break;
         case 3:
             Pcombi = 12002;
-            parseCombi(Pcombi);
             break;
         case 4:
             Pcombi = 12012;
-            parseCombi(Pcombi);
             break;
         case 5:
             Pcombi = 13003;
-            parseCombi(Pcombi);
             break;
         case 6:
             Pcombi = 13013;
-            parseCombi(Pcombi);
             break;
         case 7:
             Pcombi = 10220;
-            parseCombi(Pcombi);
             break;
         case 8:
             Pcombi = 10221;
-            parseCombi(Pcombi);
             break;
         case 9:
             Pcombi = 10330;
-            parseCombi(Pcombi);
             break;
         case 10:
             Pcombi = 10331;
-            parseCombi(Pcombi);
             break;
         }
     }
-    else
-    {
-        parseCombi(Pcombi);
-    }
+
+    parseCombi(Pcombi);
+
+// --------------------------------
 
 #if 0
+/* Legacy method */
     switch(value) {
     case 0:
         sourceL = &v1l;
