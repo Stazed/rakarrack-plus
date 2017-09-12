@@ -287,7 +287,7 @@ NEW         LEGACY
 */
     if(value < 0 || value > 13333)  // sanity check
     {
-        Pcombi = 0;                 // set to defualt
+        Pcombi = value = 0;                 // set to defualt
     }
     
     if(value < 10000)   // legacy value from old files and banks
