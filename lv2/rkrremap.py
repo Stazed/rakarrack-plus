@@ -4,21 +4,36 @@
 # in a tuple of format (nparams, index1, val1, index2, val2, ...)
 # index and values must be run through remap again for port data
 def remap_special(efxindex, paramindex, value):
-    if (efxindex,paramindex) == (28,10): #varyband "combi"
-        return{
-            #v1 v2 1 0
-            0 : (4, 12,0 ,13,0 ,14,1 ,15,1 ) ,
-            1 : (4, 12,0 ,13,1 ,14,1 ,15,0 ) ,
-            2 : (4, 12,0 ,13,1 ,14,0 ,15,1 ) ,
-            3 : (4, 12,2 ,13,0 ,14,0 ,15,2 ) ,
-            4 : (4, 12,2 ,13,0 ,14,1 ,15,2 ) ,
-            5 : (4, 12,3 ,13,0 ,14,0 ,15,3 ) ,
-            6 : (4, 12,3 ,13,0 ,14,1 ,15,3 ) ,
-            7 : (4, 12,0 ,13,2 ,14,2 ,15,0 ) ,
-            8 : (4, 12,0 ,13,2 ,14,2 ,15,1 ) ,
-            9 : (4, 12,0 ,13,3 ,14,3 ,15,0 ) ,
-            10 : (4,12,0 ,13,3 ,14,3 ,15,1 ) ,
-        }[value]
+    if value < 10000: #legacy method
+        if (efxindex,paramindex) == (28,10): #varyband "combi"
+            return{
+                #v1 v2 1 0
+                0 : (4, 12,0 ,13,0 ,14,1 ,15,1 ) ,
+                1 : (4, 12,0 ,13,1 ,14,1 ,15,0 ) ,
+                2 : (4, 12,0 ,13,1 ,14,0 ,15,1 ) ,
+                3 : (4, 12,2 ,13,0 ,14,0 ,15,2 ) ,
+                4 : (4, 12,2 ,13,0 ,14,1 ,15,2 ) ,
+                5 : (4, 12,3 ,13,0 ,14,0 ,15,3 ) ,
+                6 : (4, 12,3 ,13,0 ,14,1 ,15,3 ) ,
+                7 : (4, 12,0 ,13,2 ,14,2 ,15,0 ) ,
+                8 : (4, 12,0 ,13,2 ,14,2 ,15,1 ) ,
+                9 : (4, 12,0 ,13,3 ,14,3 ,15,0 ) ,
+                10 : (4,12,0 ,13,3 ,14,3 ,15,1 ) ,
+            }[value]
+    else: #rkr.lv2 method
+        if (efxindex,paramindex) == (28,10):
+            value -= 10000;
+            PsL  = int(value / 1000);
+            value %= 1000;
+            PsML = int(value / 100);
+            value %= 100;
+            PsMH = int(value / 10);
+            value %= 10;
+            PsH  = int(value);
+            return{
+                0 : (4, 12,PsL ,13,PsML ,14,PsMH ,15,PsH ) ,
+            }[0]
+            
  #convo files
  #0{"Marshall JCM200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
  #1"Fender Superchamp", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 10, 0},
