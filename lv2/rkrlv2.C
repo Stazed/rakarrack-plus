@@ -179,8 +179,6 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
                     if(option[j].type == plug->URIDs.atom_Int)
                     {
                         plug->period_max = *(const int*)option[j].value;
-                        plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);//initialize these here - most use them
-                        plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
                     }
                     //other types?
                 }
@@ -387,6 +385,10 @@ LV2_Handle init_distlv2(const LV2_Descriptor *descriptor,double sample_freq, con
     getFeatures(plug,host_features);
 
     plug->dist = new Distorsion(/*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -471,6 +473,10 @@ LV2_Handle init_echolv2(const LV2_Descriptor *descriptor,double sample_freq, con
     getFeatures(plug,host_features);
     
     plug->echo = new Echo(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -562,6 +568,10 @@ LV2_Handle init_choruslv2(const LV2_Descriptor *descriptor,double sample_freq, c
     getFeatures(plug,host_features);    // for period_max
     
     plug->chorus = new Chorus(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -663,6 +673,10 @@ LV2_Handle init_aphaselv2(const LV2_Descriptor *descriptor,double sample_freq, c
     getFeatures(plug,host_features);    // for period_max
     
     plug->aphase = new Analog_Phaser(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -754,6 +768,10 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq
 
     plug->comp = new Compressor(sample_freq, plug->period_max);
     plug->comp->setpreset(0,3); //Final Limiter
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
 /*
     plug->comp->changepar(1,-24);//threshold
@@ -988,6 +1006,10 @@ LV2_Handle init_panlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     getFeatures(plug,host_features);
     
     plug->pan = new Pan(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -1080,6 +1102,10 @@ LV2_Handle init_alienlv2(const LV2_Descriptor *descriptor,double sample_freq, co
     getFeatures(plug,host_features);    // for period_max
     
     plug->alien = new Alienwah(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -1186,6 +1212,10 @@ LV2_Handle init_revelv2(const LV2_Descriptor *descriptor,double sample_freq, con
     getFeatures(plug,host_features);
 
     plug->reve = new Reverb(sample_freq,plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -1434,6 +1464,10 @@ LV2_Handle init_mdellv2(const LV2_Descriptor *descriptor,double sample_freq, con
     getFeatures(plug,host_features);    // for period_max
     
     plug->mdel = new MusicDelay (sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -1527,6 +1561,10 @@ LV2_Handle init_wahlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     getFeatures(plug,host_features);
 
     plug->wah = new DynamicFilter(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -1619,6 +1657,10 @@ LV2_Handle init_derelv2(const LV2_Descriptor *descriptor,double sample_freq, con
     getFeatures(plug,host_features);
 
     plug->dere = new NewDist( /*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max); 
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -1698,6 +1740,10 @@ LV2_Handle init_valvelv2(const LV2_Descriptor *descriptor,double sample_freq, co
     getFeatures(plug,host_features);
 
     plug->valve = new Valve(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -1854,6 +1900,10 @@ LV2_Handle init_ringlv2(const LV2_Descriptor *descriptor,double sample_freq, con
     plug->comp = new Compressor(sample_freq, plug->period_max);
     plug->comp->setpreset(0,3); //Final Limiter
     
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+    
     return plug;
 }
 
@@ -1962,6 +2012,10 @@ LV2_Handle init_mbdistlv2(const LV2_Descriptor *descriptor,double sample_freq, c
     getFeatures(plug,host_features);
 
     plug->mbdist = new MBDist( /*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2041,6 +2095,10 @@ LV2_Handle init_arplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     getFeatures(plug,host_features);    // needed to set period_max
     
     plug->arp = new Arpie(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2194,6 +2252,10 @@ LV2_Handle init_shuflv2(const LV2_Descriptor *descriptor,double sample_freq, con
     getFeatures(plug,host_features);
 
     plug->shuf = new Shuffle(sample_freq,plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2262,6 +2324,10 @@ LV2_Handle init_synthlv2(const LV2_Descriptor *descriptor,double sample_freq, co
     getFeatures(plug,host_features);
     
     plug->synth = new Synthfilter(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2342,6 +2408,10 @@ LV2_Handle init_mbvollv2(const LV2_Descriptor *descriptor,double sample_freq, co
     getFeatures(plug,host_features);
 
     plug->mbvol = new MBVvol(sample_freq,plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2443,6 +2513,10 @@ LV2_Handle init_mutrolv2(const LV2_Descriptor *descriptor,double sample_freq, co
     getFeatures(plug,host_features);
 
     plug->mutro = new RyanWah(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2531,6 +2605,10 @@ LV2_Handle init_echoverselv2(const LV2_Descriptor *descriptor,double sample_freq
     getFeatures(plug,host_features);
     
     plug->echoverse = new RBEcho(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2755,6 +2833,10 @@ LV2_Handle init_voclv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
     plug->voc = new Vocoder(0,/*bands*/32,/*downsamplex2*/5,/*upsample quality*/4,
                             /*downsample quality*/ 2,sample_freq,plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2903,6 +2985,10 @@ LV2_Handle init_seqlv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
     plug->seq = new Sequence(/*shifter quality*/4,/*downsamplex2*/5,/*upsample quality*/4,
                              /*downsample quality*/ 2,sample_freq,plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -2984,6 +3070,10 @@ LV2_Handle init_shiftlv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
     plug->shift = new Shifter(/*shifter quality*/4,/*downsamplex2*/5,/*upsample quality*/4,
                               /*downsample quality*/ 2,sample_freq,plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -3156,6 +3246,10 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor *descriptor,double sample_freq, 
 #ifdef OLDRKRLV2
     plug->rvbfile = new RvbFile;
 #endif // OLDRKRLV2
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -3444,8 +3538,10 @@ LV2_Handle init_echotronlv2(const LV2_Descriptor *descriptor,double sample_freq,
     plug->dlyfile = new DlyFile;
 #endif // OLDRKRLV2
     
-    plug->init_params = 1; // LFO init
-
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+    
     return plug;
 }
 
@@ -3760,6 +3856,10 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_fre
 
     plug->comp = new Compressor(sample_freq, plug->period_max);
     plug->comp->setpreset(0,3); //Final Limiter
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
 /*    plug->comp->changepar(1,-24);//threshold
     plug->comp->changepar(2,4);  //ratio
@@ -3950,6 +4050,10 @@ LV2_Handle init_mbcomplv2(const LV2_Descriptor *descriptor,double sample_freq, c
     getFeatures(plug,host_features);
 
     plug->mbcomp = new CompBand(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -4093,6 +4197,10 @@ LV2_Handle init_vibelv2(const LV2_Descriptor *descriptor,double sample_freq, con
     getFeatures(plug,host_features);
     
     plug->vibe = new Vibe(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -4187,6 +4295,10 @@ LV2_Handle init_inflv2(const LV2_Descriptor *descriptor,double sample_freq, cons
     getFeatures(plug,host_features);
 
     plug->inf = new Infinity(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -4255,6 +4367,10 @@ LV2_Handle init_phaselv2(const LV2_Descriptor *descriptor,double sample_freq, co
     getFeatures(plug,host_features);    // needed to set period_max
 
     plug->phase = new Phaser(sample_freq, plug->period_max);    // period max could be wrong at this point
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
@@ -4512,6 +4628,10 @@ LV2_Handle init_convollv2(const LV2_Descriptor *descriptor,double sample_freq, c
 
     plug->convol = new Convolotron( /*downsample*/6, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
     plug->convol->changepar(4,1);//set to user selected files
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
 
     return plug;
 }
