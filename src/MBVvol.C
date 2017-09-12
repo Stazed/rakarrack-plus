@@ -451,6 +451,7 @@ NEW         LEGACY
 #endif // 0
 }
 
+// rakarrack only, not lv2
 void
 MBVvol::calcCombi ()
 {
@@ -458,6 +459,7 @@ MBVvol::calcCombi ()
     Pcombi = ((PsL * 1000) + (PsML * 100) + (PsMH * 10) + PsH) + 10000;
 }
 
+// rakarrack only, not lv2
 void
 MBVvol::parseCombi (int value)
 {
@@ -477,7 +479,7 @@ MBVvol::parseCombi (int value)
     
     value %= 10;
     PsH  = value;
-    setSource(&sourceH, &sourceHr, value);
+    setSource(&sourceH, &sourceHr, PsH);
 }
 
 void
@@ -518,25 +520,26 @@ MBVvol::setSource (float** ptr, float** ptrr, int val)
 {
     switch(val){
     case 0:
-            *ptr = &v1l;
-            *ptrr = &v1r;
-            break;
+        *ptr = &v1l;
+        *ptrr = &v1r;
+        break;
     case 1:
-            *ptr = &v2l;
-            *ptrr = &v2r;
-            break;
+        *ptr = &v2l;
+        *ptrr = &v2r;
+        break;
     case 2:
-            *ptr = &one;
-            *ptrr = &one;
-            break;
+        *ptr = &one;
+        *ptrr = &one;
+        break;
     case 3:
-            *ptr = &zero;
-            *ptrr = &zero;
-            break;
+        *ptr = &zero;
+        *ptrr = &zero;
+        break;
     default:
-            return; //no change
+        return; //no change
     }
-    calcCombi();    // to update the Pcombi file saving value
+    
+    calcCombi();    // to update the Pcombi file saving value rakarrack only, not lv2
 }
 
 void
