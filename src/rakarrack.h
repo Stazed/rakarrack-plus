@@ -2413,10 +2413,25 @@ private:
   inline void cb_ryanwah_bp_i(SliderW*, void*);
   static void cb_ryanwah_bp(SliderW*, void*);
 public:
+  Fl_Check_Button *ryanwah_res;
+private:
+  inline void cb_ryanwah_res_i(Fl_Check_Button*, void*);
+  static void cb_ryanwah_res(Fl_Check_Button*, void*);
+public:
   SliderW *ryanwah_hp;
 private:
   inline void cb_ryanwah_hp_i(SliderW*, void*);
   static void cb_ryanwah_hp(SliderW*, void*);
+public:
+  SliderW *ryanwah_Rnd;
+private:
+  inline void cb_ryanwah_Rnd_i(SliderW*, void*);
+  static void cb_ryanwah_Rnd(SliderW*, void*);
+public:
+  SliderW *ryanwah_St;
+private:
+  inline void cb_ryanwah_St_i(SliderW*, void*);
+  static void cb_ryanwah_St(SliderW*, void*);
 public:
   Fl_Counter *svfilter_stages;
 private:
@@ -2462,6 +2477,11 @@ public:
 private:
   inline void cb_ryanwah_smooth_i(SliderW*, void*);
   static void cb_ryanwah_smooth(SliderW*, void*);
+public:
+  SliderW *ryanwah_minfreq;
+private:
+  inline void cb_ryanwah_minfreq_i(SliderW*, void*);
+  static void cb_ryanwah_minfreq(SliderW*, void*);
 public:
   Fl_Group *RBECHO;
   Fl_Light_Button *rbecho_activar;

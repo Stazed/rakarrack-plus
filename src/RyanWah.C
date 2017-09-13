@@ -304,7 +304,7 @@ RyanWah::changepar (int npar, int value)
         lfo->Pfreq = value;
         lfo->updateparams (PERIOD);
         break;
-    case 3:
+    case 3: // LV2 - LFO Randomness (legacy, no slider in rakarrack - set by presets) 0 - 127
         lfo->Prandomness = value;
         lfo->updateparams (PERIOD);
         break;
@@ -312,7 +312,7 @@ RyanWah::changepar (int npar, int value)
         lfo->PLFOtype = value;
         lfo->updateparams (PERIOD);
         break;
-    case 5:
+    case 5: // LV2 - LFO L/R Delay (legacy, no slider in rakarrack - set by presets) -64 - 63 (0-27 actual + 64 offset)
         lfo->Pstereo = value;
         lfo->updateparams (PERIOD);
         break;
@@ -356,12 +356,12 @@ RyanWah::changepar (int npar, int value)
         if(Pamode) maxfreq = ((float) Prange)/(fSAMPLE_RATE/6.0f);
         else maxfreq = ((float) Prange);
         break;
-    case 15:
+    case 15:    // LV2 - Starting Frequency (legacy, no slider in rakarrack - set by presets) 30 - 300
         Pminfreq = value;
         if (Pamode)  minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
         else minfreq = (float) value;
         break;
-    case 16:
+    case 16:    // LV2 - Modulate Resonance (legacy no checkbox in rakarrack, but set by presets)
         variq = value;
         if(!variq)          // when variq is unset, we need to reset q back to default (case 1)
             q = (float) Pq; // or q continues with variq values until user manually moves slider for resonance (q)
@@ -385,15 +385,15 @@ RyanWah::changepar (int npar, int value)
         }
 
         break;
-    case 18:
+    case 18:    // used by rakarrack to update gui display upon new button 
         Ppreset = value;
         break;
-    case 19:
+    case 19:    // LV2 - Analog Gain Mode (M box in rakarrack) 
     	Pqm=value;
         filterl->setmode(Pqm);
         filterr->setmode(Pqm);
         break;
-    case 20:
+    case 20:    // LV2 - Exponential Wah (N box in rakarrack)
     	Pamode=value;
         if(Pamode) {
             minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
