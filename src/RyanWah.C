@@ -32,8 +32,6 @@ RyanWah::RyanWah (double sample_rate, uint32_t intermediate_bufsize)
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
-    Ppreset = 0;
-
     filterl = NULL;
     filterr = NULL;
 

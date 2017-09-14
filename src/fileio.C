@@ -24,7 +24,7 @@
 #include "process.h"
 
 
-const int presets_default[48][16] = {
+const int presets_default[48][MAX_PRESET_SIZE] = {
 //Reverb
         {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64, 0, 0, 0, 0},
 //Echo
@@ -1879,7 +1879,7 @@ RKR::New ()
     memset(lv, 0 , sizeof(lv));
 
     for (j = 0; j < NumEffects; j++) {
-        for (k = 0; k < 16; k++) {
+        for (k = 0; k < MAX_PRESET_SIZE; k++) {
             lv[j][k] = presets_default[j][k];
 
         }
@@ -1971,7 +1971,7 @@ RKR::New_Bank ()
         memset(Bank[i].lv , 0 , sizeof(Bank[i].lv));
 
         for (j = 0; j < NumEffects; j++) {
-            for (k = 0; k < 16; k++) {
+            for (k = 0; k < MAX_PRESET_SIZE; k++) {
                 Bank[i].lv[j][k] = presets_default[j][k];
             }
             Bank[i].lv[j][19] =0;
