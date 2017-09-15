@@ -80,7 +80,7 @@ RKR::RKR ()
     OnCounter=0;
 
 
-    sprintf (temp, jack_client_name);
+    sprintf (temp, "%s",jack_client_name);
 
 #ifdef JACK_SESSION
     jackclient = jack_client_open (temp, JackSessionID, NULL, s_uuid);
