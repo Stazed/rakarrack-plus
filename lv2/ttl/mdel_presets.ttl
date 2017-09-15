@@ -12,43 +12,43 @@
         rdfs:label "Echo 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
-                pset:value 64;
+                pset:value 64.0
         ], [
                 lv2:symbol "PAN1" ;
-                pset:value -64;
+                pset:value -64.0
         ], [
                 lv2:symbol "DEL1" ;
-                pset:value 2;
+                pset:value 2.0
         ], [
                 lv2:symbol "OFFS" ;
-                pset:value 7;
+                pset:value 7.0
         ], [
                 lv2:symbol "LRCr" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "FB1" ;
-                pset:value 59;
+                pset:value 59.0
         ], [
                 lv2:symbol "DAMP" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "PAN2" ;
-                pset:value 63;
+                pset:value 63.0
         ], [
                 lv2:symbol "DEL2" ;
-                pset:value 4;
+                pset:value 4.0
         ], [
                 lv2:symbol "FB2" ;
-                pset:value 59;
+                pset:value 59.0
         ], [
                 lv2:symbol "TEMPO" ;
-                pset:value 106;
+                pset:value 106.0
         ], [
                 lv2:symbol "GAIN1" ;
-                pset:value 75;
+                pset:value 75.0
         ], [
                 lv2:symbol "GAIN2" ;
-                pset:value 75;
+                pset:value 75.0
         ] ;
 	.
 
@@ -58,42 +58,42 @@
         rdfs:label "Echo 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
-                pset:value 67;
+                pset:value 67.0
         ], [
                 lv2:symbol "PAN1" ;
-                pset:value -64;
+                pset:value -64.0
         ], [
                 lv2:symbol "DEL1" ;
-                pset:value 3;
+                pset:value 3.0
         ], [
                 lv2:symbol "OFFS" ;
-                pset:value 7;
+                pset:value 7.0
         ], [
                 lv2:symbol "LRCr" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "FB1" ;
-                pset:value 59;
+                pset:value 59.0
         ], [
                 lv2:symbol "DAMP" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "PAN2" ;
-                pset:value 63;
+                pset:value 63.0
         ], [
                 lv2:symbol "DEL2" ;
-                pset:value 6;
+                pset:value 6.0
         ], [
                 lv2:symbol "FB2" ;
-                pset:value 69;
+                pset:value 69.0
         ], [
                 lv2:symbol "TEMPO" ;
-                pset:value 60;
+                pset:value 60.0
         ], [
                 lv2:symbol "GAIN1" ;
-                pset:value 127;
+                pset:value 127.0
         ], [
                 lv2:symbol "GAIN2" ;
-                pset:value 127;
+                pset:value 127.0
         ] ;
 	.

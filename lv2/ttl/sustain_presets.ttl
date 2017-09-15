@@ -12,10 +12,10 @@
         rdfs:label "Moderate Sustain" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
-                pset:value 79;
+                pset:value 79.0
         ], [
                 lv2:symbol "SUS" ;
-                pset:value 54;
+                pset:value 54.0
         ] ;
 	.
 
@@ -25,10 +25,10 @@
         rdfs:label "Extreme Sustain" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
-                pset:value 16;
+                pset:value 16.0
         ], [
                 lv2:symbol "SUS" ;
-                pset:value 127;
+                pset:value 127.0
         ] ;
 	.
 
@@ -38,9 +38,9 @@
         rdfs:label "Mild Sustain" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
-                pset:value 120;
+                pset:value 120.0
         ], [
                 lv2:symbol "SUS" ;
-                pset:value 15;
+                pset:value 15.0
         ] ;
 	.

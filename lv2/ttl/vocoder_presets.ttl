@@ -14,25 +14,25 @@
         rdfs:label "Vocoder 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "PAN" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "MUF" ;
-                pset:value 10;
+                pset:value 10.0
         ], [
                 lv2:symbol "Q" ;
-                pset:value 70;
+                pset:value 70.0
         ], [
                 lv2:symbol "INGAIN" ;
-                pset:value 70;
+                pset:value 70.0
         ], [
                 lv2:symbol "LEVEL" ;
-                pset:value 40;
+                pset:value 40.0
         ], [
                 lv2:symbol "RING" ;
-                pset:value 0;
+                pset:value 0.0
         ] ;
 	.
 
@@ -42,25 +42,25 @@
         rdfs:label "Vocoder 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "PAN" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "MUF" ;
-                pset:value 14;
+                pset:value 14.0
         ], [
                 lv2:symbol "Q" ;
-                pset:value 80;
+                pset:value 80.0
         ], [
                 lv2:symbol "INGAIN" ;
-                pset:value 70;
+                pset:value 70.0
         ], [
                 lv2:symbol "LEVEL" ;
-                pset:value 40;
+                pset:value 40.0
         ], [
                 lv2:symbol "RING" ;
-                pset:value 32;
+                pset:value 32.0
         ] ;
 	.
 
@@ -70,25 +70,25 @@
         rdfs:label "Vocoder 3" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "PAN" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "MUF" ;
-                pset:value 20;
+                pset:value 20.0
         ], [
                 lv2:symbol "Q" ;
-                pset:value 90;
+                pset:value 90.0
         ], [
                 lv2:symbol "INGAIN" ;
-                pset:value 70;
+                pset:value 70.0
         ], [
                 lv2:symbol "LEVEL" ;
-                pset:value 40;
+                pset:value 40.0
         ], [
                 lv2:symbol "RING" ;
-                pset:value 64;
+                pset:value 64.0
         ] ;
 	.
 
@@ -98,24 +98,24 @@
         rdfs:label "Vocoder 4" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "PAN" ;
-                pset:value 0;
+                pset:value 0.0
         ], [
                 lv2:symbol "MUF" ;
-                pset:value 30;
+                pset:value 30.0
         ], [
                 lv2:symbol "Q" ;
-                pset:value 100;
+                pset:value 100.0
         ], [
                 lv2:symbol "INGAIN" ;
-                pset:value 70;
+                pset:value 70.0
         ], [
                 lv2:symbol "LEVEL" ;
-                pset:value 40;
+                pset:value 40.0
         ], [
                 lv2:symbol "RING" ;
-                pset:value 127;
+                pset:value 127.0
         ] ;
 	.

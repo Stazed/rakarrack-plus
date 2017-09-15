@@ -12,25 +12,25 @@
         rdfs:label "H to S" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
-                pset:value 32;
+                pset:value 32.0
         ], [
                 lv2:symbol "F1" ;
-                pset:value 3300;
+                pset:value 3300.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 16;
+                pset:value 16.0
         ], [
                 lv2:symbol "F2" ;
-                pset:value 4400;
+                pset:value 4400.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 42;
+                pset:value 42.0
         ], [
                 lv2:symbol "TONE" ;
-                pset:value 20;
+                pset:value 20.0
         ], [
                 lv2:symbol "MODE" ;
-                pset:value 0;
+                pset:value 0.0
         ] ;
 	.
 
@@ -40,25 +40,25 @@
         rdfs:label "S to H" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
-                pset:value 32;
+                pset:value 32.0
         ], [
                 lv2:symbol "F1" ;
-                pset:value 4400;
+                pset:value 4400.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 42;
+                pset:value 42.0
         ], [
                 lv2:symbol "F2" ;
-                pset:value 3300;
+                pset:value 3300.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 16;
+                pset:value 16.0
         ], [
                 lv2:symbol "TONE" ;
-                pset:value 20;
+                pset:value 20.0
         ], [
                 lv2:symbol "MODE" ;
-                pset:value 0;
+                pset:value 0.0
         ] ;
 	.
 
@@ -69,10 +69,10 @@
         rdfs:label "Origin: Fender Strat (old)" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 4400;
+                pset:value 4400.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 42;
+                pset:value 42.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofsn>
@@ -81,10 +81,10 @@
         rdfs:label "Origin: Fender Strat (new)" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 4200;
+                pset:value 4200.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 23;
+                pset:value 23.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:oss>
@@ -93,10 +93,10 @@
         rdfs:label "Origin: Squier Strat" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 2900;
+                pset:value 2900.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 18;
+                pset:value 18.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofh>
@@ -105,10 +105,10 @@
         rdfs:label "Origin: Fender Humbucker" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 3000;
+                pset:value 3000.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 22;
+                pset:value 22.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogp90>
@@ -117,10 +117,10 @@
         rdfs:label "Origin: Gibson P90" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 2700;
+                pset:value 2700.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 21;
+                pset:value 21.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogs>
@@ -129,10 +129,10 @@
         rdfs:label "Origin: Gibson Standard" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 3300;
+                pset:value 3300.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 17;
+                pset:value 17.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogm>
@@ -141,10 +141,10 @@
         rdfs:label "Origin: Gibson Mini" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 3300;
+                pset:value 3300.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 17;
+                pset:value 17.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogsl6s>
@@ -153,10 +153,10 @@
         rdfs:label "Origin: Gibson Super L6S" ;
         lv2:port [
                 lv2:symbol "F1" ;
-                pset:value 2800;
+                pset:value 2800.0
         ], [
                 lv2:symbol "Q1" ;
-                pset:value 18;
+                pset:value 18.0
         ] ;
 	.
 
@@ -167,10 +167,10 @@
         rdfs:label "Destination: Fender Strat (old)" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 4400;
+                pset:value 4400.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 42;
+                pset:value 42.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfsn>
@@ -179,10 +179,10 @@
         rdfs:label "Destination: Fender Strat (new)" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 4200;
+                pset:value 4200.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 23;
+                pset:value 23.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dss>
@@ -191,10 +191,10 @@
         rdfs:label "Destination: Squier Strat" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 2900;
+                pset:value 2900.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 18;
+                pset:value 18.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfh>
@@ -203,10 +203,10 @@
         rdfs:label "Destination: Fender Humbucker" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 3000;
+                pset:value 3000.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 22;
+                pset:value 22.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgp90>
@@ -215,10 +215,10 @@
         rdfs:label "Destination: Gibson P90" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 2700;
+                pset:value 2700.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 21;
+                pset:value 21.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgs>
@@ -227,10 +227,10 @@
         rdfs:label "Destination: Gibson Standard" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 3300;
+                pset:value 3300.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 17;
+                pset:value 17.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgm>
@@ -239,10 +239,10 @@
         rdfs:label "Destination: Gibson Mini" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 3300;
+                pset:value 3300.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 17;
+                pset:value 17.0
         ] ;
 	.
 <http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgsl6s>
@@ -251,9 +251,9 @@
         rdfs:label "Destination: Gibson Super L6S" ;
         lv2:port [
                 lv2:symbol "F2" ;
-                pset:value 2800;
+                pset:value 2800.0
         ], [
                 lv2:symbol "Q2" ;
-                pset:value 18;
+                pset:value 18.0
         ] ;
 	.
