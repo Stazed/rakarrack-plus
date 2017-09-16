@@ -18052,7 +18052,7 @@ R average.");
         ryanwah_freq->align(Fl_Align(FL_ALIGN_LEFT));
         ryanwah_freq->when(FL_WHEN_CHANGED);
       } // SliderW* ryanwah_freq
-      { ryanwah_q = new SliderW(529, 333, 100, 10, "Res.");
+      { ryanwah_q = new SliderW(529, 333, 100, 8, "Res.");
         ryanwah_q->type(5);
         ryanwah_q->box(FL_FLAT_BOX);
         ryanwah_q->color((Fl_Color)178);
@@ -18069,7 +18069,7 @@ R average.");
         ryanwah_q->align(Fl_Align(FL_ALIGN_LEFT));
         ryanwah_q->when(FL_WHEN_CHANGED);
       } // SliderW* ryanwah_q
-      { ryanwah_rng = new SliderW(529, 345, 100, 8, "Range");
+      { ryanwah_rng = new SliderW(529, 343, 100, 8, "Range");
         ryanwah_rng->type(5);
         ryanwah_rng->box(FL_FLAT_BOX);
         ryanwah_rng->color((Fl_Color)178);
@@ -18086,7 +18086,7 @@ R average.");
         ryanwah_rng->align(Fl_Align(FL_ALIGN_LEFT));
         ryanwah_rng->when(FL_WHEN_CHANGED);
       } // SliderW* ryanwah_rng
-      { ryanwah_ampsnsinv = new SliderW(529, 355, 100, 8, "Wah");
+      { ryanwah_ampsnsinv = new SliderW(529, 353, 100, 8, "Wah");
         ryanwah_ampsnsinv->type(5);
         ryanwah_ampsnsinv->box(FL_FLAT_BOX);
         ryanwah_ampsnsinv->color((Fl_Color)178);
@@ -18102,7 +18102,7 @@ R average.");
         ryanwah_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT));
         ryanwah_ampsnsinv->when(FL_WHEN_CHANGED);
       } // SliderW* ryanwah_ampsnsinv
-      { ryanwah_ampsns = new SliderW(529, 364, 100, 8, "E. Sens");
+      { ryanwah_ampsns = new SliderW(529, 363, 100, 8, "E. Sens");
         ryanwah_ampsns->type(5);
         ryanwah_ampsns->box(FL_FLAT_BOX);
         ryanwah_ampsns->color((Fl_Color)178);
