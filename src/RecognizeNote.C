@@ -250,6 +250,7 @@ Recognize::lv2_update_params (uint32_t period)
 {
     if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
+        PERIOD = period;
         clear_initialize();
         initialize();
         setlpf(5500);
