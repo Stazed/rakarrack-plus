@@ -36,6 +36,7 @@ Looper::Looper (float size,double samplerate, uint32_t intermediate_bufsize):
     fSAMPLE_RATE = float(samplerate);
 
     //default values
+    Ppreset = 0;
     Pclear = 1;
     Pplay = 0;
     Precord = 0;
