@@ -36,8 +36,14 @@ Valve::Valve (double sample_rate, uint32_t intermediate_bufsize)
     
     initialize();
     
-    harm = new HarmEnhancer (rm, 20.0f,20000.0f,1.0f, sample_rate, PERIOD);
+   for(int i=0; i<10; i++) rm[i]=0.0;
+    rm[0]=1.0f;
+    rm[2]= -1.0f;
+    rm[4]=1.0f;
+    rm[6]=-1.0f;
+    rm[8]=1.0f;
 
+    harm = new HarmEnhancer (rm, 20.0f,20000.0f,1.0f, sample_rate, PERIOD);
 
     //default values
     Ppreset = 0;
@@ -63,16 +69,8 @@ Valve::Valve (double sample_rate, uint32_t intermediate_bufsize)
     atk = 1.0f - 40.0f/sample_rate;
     panning = otml = otmr = itml = itmr = 0.0f;
     
-    for(int i=0; i<10; i++) rm[i]=0.0;
-    rm[0]=1.0f;
-    rm[2]= -1.0f;
-    rm[4]=1.0f;
-    rm[6]=-1.0f;
-    rm[8]=1.0f;
-    harm->calcula_mag(rm);
-
-    setpreset (Ppreset);
     init_coefs();
+    setpreset (Ppreset);
     cleanup ();
 };
 
@@ -216,7 +214,8 @@ Valve::out (float * efxoutl, float * efxoutr)
 
     if (q == 0.0f) {
         for (i =0; i<PERIOD; i++) {
-            if (efxoutl[i] == q) fx = fdist;
+//            if (efxoutl[i] == q) fx = fdist;
+            if((fabs(efxoutl[i] - 0.0f) <= 1.19e-7f))fx = fdist;       // float comparison to zero (1.19e-7f) otherwise we get inf & no sound
             else fx =efxoutl[i] / (1.0f - powf(2.0f,-dist * efxoutl[i] ));
             otml = atk * otml + fx - itml;
             itml = fx;
@@ -238,7 +237,8 @@ Valve::out (float * efxoutl, float * efxoutr)
 
         if (q == 0.0f) {
             for (i =0; i<PERIOD; i++) {
-                if (efxoutr[i] == q) fx = fdist;
+//                if (efxoutr[i] == q) fx = fdist;
+                if ((fabs(efxoutr[i] - 0.0f) <= 1.19e-7f)) fx = fdist; // float comparison to zero (1.19e-7f) otherwise we get inf & no sound
                 else fx = efxoutr[i] / (1.0f - powf(2.0f,-dist * efxoutr[i] ));
                 otmr = atk * otmr + fx - itmr;
                 itmr = fx;
