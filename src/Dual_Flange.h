@@ -74,7 +74,6 @@ private:
     float ffb;			//Feedback parameter.  Range -0.99 to 0.99
     float fhidamp;		//Lowpass filter delay line.  Range 20 to 20000 (Hz)
     float fsubtract;		//Subtract wet/dry instead of add.  Nonzero is true
-    float fzero;		//Enable through-zero flanging
     float logmax;
 
     //Internally used variables

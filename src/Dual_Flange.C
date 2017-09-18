@@ -63,9 +63,17 @@ Dflange::Dflange (double sample_rate, uint32_t intermediate_bufsize)
     zcenter = (int) fSAMPLE_RATE/floorf(0.5f * (fdepth + fwidth));
     base = 7.0f;		//sets curve of modulation to frequency relationship
     ibase = 1.0f/base;
+    zdr = zdl = 0.0f;
+    dry = wet = 0.5f;
+    lpan = rpan = 1.0f;
+    flrcross = frlcross = 0.5f;
+    foffset = ffb = 0.0f;
+    
     //default values
     Ppreset = 0;
     Pintense = 0;
+    Pzero = 0;
+    Psubtract = 0;
     rsA = 0.0f;
     rsB = 0.0f;
     lsA  = 0.0f;
@@ -452,7 +460,6 @@ Dflange::changepar (int npar, int value)
         break;
     case 9:
         Pzero = value;
-        if (Pzero) fzero = 1.0f;
         break;
     case 10:
         lfo->Pfreq = value;
