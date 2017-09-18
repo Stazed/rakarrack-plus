@@ -65,8 +65,8 @@ Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
 
 Chorus::~Chorus ()
 {
-	delete delayl;
-	delete delayr;
+	delete[] delayl;
+	delete[] delayr;
 	delete ldelay;
 	delete rdelay;
 	delete lfo;

@@ -70,6 +70,10 @@ Looper::Looper (float size,double samplerate, uint32_t intermediate_bufsize):
 
 Looper::~Looper ()
 {
+    delete[] ldelay;
+    delete[] rdelay;
+    delete[] t2ldelay;
+    delete[] t2rdelay;
 };
 
 /*

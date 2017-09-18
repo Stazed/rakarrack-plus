@@ -92,7 +92,7 @@ CoilCrafter::~CoilCrafter ()
 	delete RB1r;
 	delete RB2l;
 	delete RB2r;
-	delete interpbuf;
+	delete[] interpbuf;
 };
 
 /*

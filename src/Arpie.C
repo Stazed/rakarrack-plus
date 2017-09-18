@@ -67,6 +67,9 @@ Arpie::Arpie (double sample_rate, uint32_t intermediate_bufsize)
 
 Arpie::~Arpie ()
 {
+    delete[] ldelay;
+    delete[] rdelay;
+    delete[] pattern;
 };
 
 /*

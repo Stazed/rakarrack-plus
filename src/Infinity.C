@@ -257,7 +257,7 @@ void Infinity::initialize()
 
 void Infinity::clear_initialize()
 {
-    delete interpbuf;
+    delete[] interpbuf;
     for (int i = 0; i<NUM_INF_BANDS; i++) {
     	delete filterl[i];
     	delete filterr[i];

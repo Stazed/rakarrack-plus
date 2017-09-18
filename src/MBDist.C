@@ -155,7 +155,7 @@ MBDist::clear_initialize()
     free(highl);
     free(highr);
 
-    delete interpbuf;
+    delete[] interpbuf;
     delete lpf1l;
     delete lpf1r;
     delete hpf1l;

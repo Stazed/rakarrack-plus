@@ -70,6 +70,10 @@ MusicDelay::MusicDelay (double sample_rate, uint32_t intermediate_bufsize)
 
 MusicDelay::~MusicDelay ()
 {
+    delete[] ldelay1;
+    delete[] rdelay1;
+    delete[] ldelay2;
+    delete[] rdelay2;
 };
 
 /*

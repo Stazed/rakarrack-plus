@@ -68,7 +68,7 @@ HarmEnhancer::~HarmEnhancer()
 	delete lpfl;
 	delete lpfr;
 	delete limiter;
-	delete interpbuf;
+	delete[] interpbuf;
 };
 
 void
