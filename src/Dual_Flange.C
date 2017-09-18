@@ -359,9 +359,9 @@ Dflange::out (float * efxoutl, float * efxoutr)
             }
 
             if (--kl < 0)   //Cycle delay buffer in reverse so delay time can be indexed directly with addition
-                kl =  maxx_delay;
+                kl =  maxx_delay-1;		// -1 or out of range since array is maxx_delay size
             if (--kr < 0)
-                kr =  maxx_delay;
+                kr =  maxx_delay-1;		// -1 or out of range since array is maxx_delay size
 
 // Increment LFO
             drA += rx0;
