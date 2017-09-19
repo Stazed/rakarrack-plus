@@ -38,6 +38,8 @@ public:
     ~HarmEnhancer();
     void cleanup();
     void lv2_update_params(uint32_t period);
+    void initialize();
+    void clear_initialize();
     void chebpc(float c[], float d[]);
     void calcula_mag(float *Rmag);
     void harm_out(float *efxoutl, float *efxoutr);
@@ -52,6 +54,8 @@ public:
 private:
 
     uint32_t PERIOD;
+    double fSAMPLE_RATE;
+    float HFREQ, LFREQ;
     float *inputl;
     float *inputr;
     float vol;

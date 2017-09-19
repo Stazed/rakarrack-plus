@@ -31,15 +31,12 @@
 HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    fSAMPLE_RATE = sample_rate;
+    HFREQ = hfreq;
+    LFREQ = lfreq;
     
-    inputl = (float *) malloc (sizeof (float) * PERIOD);
-    inputr = (float *) malloc (sizeof (float) * PERIOD);
-    unsigned int i;
-    for(i=0;i<PERIOD;i++)
-    {
-    	inputl[i] = inputr[i] = 0;
-    }
-
+    initialize();
+    
     set_vol(0,gain);
     realvol = gain;
     itm1l = 0.0f;
@@ -49,12 +46,7 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, do
 
     hpffreq = hfreq;
     lpffreq = lfreq;
-    interpbuf = new float[PERIOD];
-    hpfl = new AnalogFilter(3, hfreq, 1, 0, sample_rate, interpbuf);
-    hpfr = new AnalogFilter(3, hfreq, 1, 0, sample_rate, interpbuf);
-    lpfl = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
-    lpfr = new AnalogFilter(2, lfreq, 1, 0, sample_rate, interpbuf);
-
+    
     limiter = new Compressor (sample_rate, PERIOD);
     limiter->setpreset(0,4);
     calcula_mag(Rmag);
@@ -63,12 +55,8 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, do
 
 HarmEnhancer::~HarmEnhancer()
 {
-	delete hpfl;
-	delete hpfr;
-	delete lpfl;
-	delete lpfr;
-	delete limiter;
-	delete[] interpbuf;
+    clear_initialize();
+    delete limiter;
 };
 
 void
@@ -86,7 +74,39 @@ void
 HarmEnhancer::lv2_update_params (uint32_t period)
 {
     PERIOD = period;
+    clear_initialize();
+    initialize();
     limiter->lv2_update_params(period);
+}
+
+void
+HarmEnhancer::initialize()
+{
+    inputl = (float *) malloc (sizeof (float) * PERIOD);
+    inputr = (float *) malloc (sizeof (float) * PERIOD);
+    unsigned int i;
+    for(i=0;i<PERIOD;i++)
+    {
+    	inputl[i] = inputr[i] = 0;
+    }
+    
+    interpbuf = new float[PERIOD];
+    hpfl = new AnalogFilter(3, HFREQ, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter(3, HFREQ, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfl = new AnalogFilter(2, LFREQ, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter(2, LFREQ, 1, 0, fSAMPLE_RATE, interpbuf);
+}
+
+void
+HarmEnhancer::clear_initialize()
+{
+    free(inputl);
+    free(inputr);
+    delete hpfl;
+    delete hpfr;
+    delete lpfl;
+    delete lpfr;
+    delete[] interpbuf;
 }
 
 void
