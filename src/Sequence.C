@@ -135,6 +135,7 @@ Sequence::lv2_update_params(uint32_t period)
         initialize();
         filterl->setmix(1, 0.33f, -1.0f, 0.25f);
         filterr->setmix(1, 0.33f, -1.0f, 0.25f);
+        cleanup();
     }
     else
     {
