@@ -68,6 +68,7 @@ private:
     float ms1, ms2, ms3, ms4;	//mean squares
     
     uint32_t PERIOD;
+    double fSAMPLE_RATE;
     EffectLFO* lfo;		//lfo-ul DynamicFilter
 
     class Filter *filterl, *filterr;
