@@ -2,7 +2,7 @@
 
 #include"rkrlv2.h"
 
-//this is the default hopefully hosts don't use periods of more than this, or they will communicate the max bufsize
+//this is the default, host may use periods greater, it will now be adjusted.
 #define INTERMEDIATE_BUFSIZE 1024
 
 enum other_ports
@@ -70,6 +70,14 @@ have_signal(float* efxoutl, float* efxoutr, uint32_t period)
 void
 check_shared_buf(RKRLV2* plug, uint32_t nframes)
 {
+    if(nframes > plug->period_max)
+    {
+        free(plug->tmp_l);
+        free(plug->tmp_r);
+        plug->tmp_l = (float*)malloc(sizeof(float)*nframes);
+        plug->tmp_r = (float*)malloc(sizeof(float)*nframes);
+    }
+    
     if(plug->input_l_p == plug->output_l_p )
     {
         memcpy(plug->tmp_l,plug->input_l_p,sizeof(float)*nframes);
