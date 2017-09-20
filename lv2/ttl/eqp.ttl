@@ -90,7 +90,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 6 ;
                 lv2:symbol "LFREQ" ;
-                lv2:name "Frequency" ;
+                lv2:name "Low Frequency" ;
                 lv2:default 200 ;
                 lv2:minimum 20 ;
                 lv2:maximum 1000 ;
@@ -101,7 +101,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 7 ;
                 lv2:symbol "LGAIN" ;
-                lv2:name "Gain" ;
+                lv2:name "Low Gain" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
@@ -111,7 +111,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 8 ;
                 lv2:symbol "LQ" ;
-                lv2:name "Width" ;
+                lv2:name "Low Width" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
@@ -121,7 +121,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 9 ;
                 lv2:symbol "MFREQ" ;
-                lv2:name "Frequency" ;
+                lv2:name "Mid Frequency" ;
                 lv2:default 800 ;
                 lv2:minimum 80 ;
                 lv2:maximum 8000 ;
@@ -132,7 +132,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 10 ;
                 lv2:symbol "MGAIN" ;
-                lv2:name "Gain" ;
+                lv2:name "Mid Gain" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
@@ -142,7 +142,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 11 ;
                 lv2:symbol "MQ" ;
-                lv2:name "Width" ;
+                lv2:name "Mid Width" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
@@ -152,7 +152,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 12 ;
                 lv2:symbol "HFREQ" ;
-                lv2:name "Frequency" ;
+                lv2:name "High Frequency" ;
                 lv2:default 12000 ;
                 lv2:minimum 6000 ;
                 lv2:maximum 26000 ;
@@ -163,7 +163,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 13 ;
                 lv2:symbol "HGAIN" ;
-                lv2:name "Gain" ;
+                lv2:name "High Gain" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
@@ -173,7 +173,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 14 ;
                 lv2:symbol "HQ" ;
-                lv2:name "Width" ;
+                lv2:name "High Width" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
