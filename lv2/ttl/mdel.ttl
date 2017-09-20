@@ -26,7 +26,7 @@
     a param:ControlGroup ;
     lv2:index 1 ;
     lv2:name "Delay 2" ;
-    lv2:symbol "delline1" .
+    lv2:symbol "delline2" .
 
 <http://rakarrack.sourceforge.net/effects.html#delm>
         a lv2:Plugin, lv2:DelayPlugin ;
