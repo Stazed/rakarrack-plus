@@ -235,25 +235,8 @@ LV2_Handle init_eqlv2(const LV2_Descriptor *descriptor,double sample_freq, const
 
     getFeatures(plug,host_features);
 
-    plug->eq = new EQ(sample_freq, plug->period_max);
+    plug->eq = new EQ(EQ1_REGULAR, sample_freq, plug->period_max);
 
-    //eq has a bunch of setup stuff. Why isn't this in the EQ initalizer?
-    for (int i = 0; i <= 45; i += 5)
-    {
-        plug->eq->changepar (i + 10, 7);
-        plug->eq->changepar (i + 14, 0);
-    }
-
-    plug->eq->changepar (11, 31);
-    plug->eq->changepar (16, 63);
-    plug->eq->changepar (21, 125);
-    plug->eq->changepar (26, 250);
-    plug->eq->changepar (31, 500);
-    plug->eq->changepar (36, 1000);
-    plug->eq->changepar (41, 2000);
-    plug->eq->changepar (46, 4000);
-    plug->eq->changepar (51, 8000);
-    plug->eq->changepar (56, 16000);
     return plug;
 }
 
@@ -282,7 +265,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-        plug->eq->lv2_update_params(nframes);
+        plug->eq->lv2_update_params(EQ1_REGULAR, nframes);
     }
     
     // we are good to run now
@@ -1310,16 +1293,8 @@ LV2_Handle init_eqplv2(const LV2_Descriptor *descriptor,double sample_freq, cons
 
     getFeatures(plug,host_features);
 
-    plug->eq = new EQ(sample_freq, plug->period_max);
+    plug->eq = new EQ(EQ2_PARAMETRIC, sample_freq, plug->period_max);
 
-    //eq has a bunch of setup stuff. Why isn't this in the EQ initalizer?
-    for (int i = 0; i <= 10; i += 5)
-    {
-        plug->eq->changepar (i + 10, 7);
-        plug->eq->changepar (i + 13, 64);
-        plug->eq->changepar (i + 14, 0);
-
-    }
     return plug;
 }
 
@@ -1348,7 +1323,7 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-        plug->eq->lv2_update_params(nframes);
+        plug->eq->lv2_update_params(EQ2_PARAMETRIC, nframes);
     }
     
     // we are good to run now

@@ -27,12 +27,12 @@
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ (double samplerate, uint32_t intermediate_bufsize)
+EQ::EQ (eq_type type, double samplerate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;
     fSAMPLE_RATE = samplerate;
     
-    initialize();
+    initialize(type);
 
     //default values
     Ppreset = 0;
@@ -61,14 +61,13 @@ EQ::cleanup ()
 };
 
 void
-EQ::lv2_update_params(uint32_t period)
+EQ::lv2_update_params(eq_type type, uint32_t period)
 {
     if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
-        initialize();
-        //FIXME need to set filter freqs
+        initialize(type);
     }
     else
     {
@@ -77,7 +76,7 @@ EQ::lv2_update_params(uint32_t period)
 }
 
 void
-EQ::initialize()
+EQ::initialize(eq_type type)
 {
     interpbuf = new float[PERIOD];
 
@@ -89,7 +88,36 @@ EQ::initialize()
         filter[i].Pstages = 0;
         filter[i].l = new AnalogFilter (6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
         filter[i].r = new AnalogFilter (6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    };
+    }
+    
+    if(type == EQ1_REGULAR)
+    {
+        for (int i = 0; i <= 45; i += 5)
+        {
+            changepar (i + 10, 7);
+            changepar (i + 14, 0);
+        }
+        
+        changepar (11, 31);
+        changepar (16, 63);
+        changepar (21, 125);
+        changepar (26, 250);
+        changepar (31, 500);
+        changepar (36, 1000);
+        changepar (41, 2000);
+        changepar (46, 4000);
+        changepar (51, 8000);
+        changepar (56, 16000);
+    }
+    if(type == EQ2_PARAMETRIC)
+    {
+        for (int i = 0; i <= 10; i += 5)
+        {
+            changepar (i + 10, 7);
+            changepar (i + 13, 64);
+            changepar (i + 14, 0);
+        }
+    }
 }
 
 void

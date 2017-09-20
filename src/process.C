@@ -257,8 +257,8 @@ RKR::RKR ()
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     efx_Distorsion = new Distorsion (Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_Overdrive = new Distorsion (Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
-    efx_EQ2 = new EQ (fSample_rate, period);
-    efx_EQ1 = new EQ (fSample_rate, period);
+    efx_EQ2 = new EQ (EQ2_PARAMETRIC, fSample_rate, period);
+    efx_EQ1 = new EQ (EQ1_REGULAR, fSample_rate, period);
     efx_Compressor = new Compressor (fSample_rate, period);
     efx_WhaWha = new DynamicFilter (fSample_rate, period);
     efx_Alienwah = new Alienwah (fSample_rate, period);
@@ -815,30 +815,6 @@ RKR::init_rkr ()
     Tuner_Bypass = 0;
     MIDIConverter_Bypass = 0;
     Metro_Bypass = 0;
-
-    for (int i = 0; i <= 45; i += 5) {
-        efx_EQ1->changepar (i + 10, 7);
-        efx_EQ1->changepar (i + 14, 0);
-    }
-
-    efx_EQ1->changepar (11, 31);
-    efx_EQ1->changepar (16, 63);
-    efx_EQ1->changepar (21, 125);
-    efx_EQ1->changepar (26, 250);
-    efx_EQ1->changepar (31, 500);
-    efx_EQ1->changepar (36, 1000);
-    efx_EQ1->changepar (41, 2000);
-    efx_EQ1->changepar (46, 4000);
-    efx_EQ1->changepar (51, 8000);
-    efx_EQ1->changepar (56, 16000);
-
-    for (int i = 0; i <= 10; i += 5) {
-        efx_EQ2->changepar (i + 10, 7);
-        efx_EQ2->changepar (i + 13, 64);
-        efx_EQ2->changepar (i + 14, 0);
-
-    }
-
 
     efx_FLimiter->setpreset(0,3);
 
