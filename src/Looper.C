@@ -50,8 +50,8 @@ Looper::Looper (float size,double samplerate, uint32_t intermediate_bufsize):
     Pms = 0;
     Ptempo = 120;
     outvolume = 0.5f;
+    Pbar = 2;   // this must be set before calling settempo()
     settempo(120);
-    Pbar = 2;
     setbar(2);
     ticker.cleanup();
 
