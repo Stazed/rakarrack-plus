@@ -34,6 +34,8 @@ DynamicFilter::DynamicFilter (double sample_rate, uint32_t intermediate_bufsize)
 
     outvolume = 0.5f;
     Ppreset = 0;
+    Pampsnsinv = 0;
+    Pampsmooth = 0;
     filterl = NULL;
     filterr = NULL;
     filterpars = new FilterParams (0, 64, 64, sample_rate, PERIOD);
