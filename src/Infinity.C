@@ -34,7 +34,6 @@ Infinity::Infinity (double sample_rate, uint32_t intermediate_bufsize)
     initialize();
 
     Ppreset = 2;
-    setpreset (Ppreset);
     Pvolume = 64;
     outvolume = 0.5f;
     Pq = 30;
@@ -52,11 +51,13 @@ Infinity::Infinity (double sample_rate, uint32_t intermediate_bufsize)
     dsin = 0.0f;
     tflag = 0;
     ratescale = 1.0f;
+    stdiff = 0.0f;
 
     float dt = 1.0f/fSAMPLE_RATE;
     alpha = dt/(0.5f + dt);          //200ms time constant on parameter change -- quick but not jerky
     beta = 1.0f - alpha;
-
+    
+    setpreset (Ppreset);
     adjustfreqs();
     reinitfilter();
 
