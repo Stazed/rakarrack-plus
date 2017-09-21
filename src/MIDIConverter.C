@@ -102,7 +102,7 @@ MIDIConverter::out(float * efxoutl, float * efxoutr)
     Log_I_Gain = powf (Input_Gain * 2.0f, 4);
 
 
-    for (unsigned i = 0; i <= PERIOD; i++) {
+    for (unsigned i = 0; i < PERIOD; i++) {
         efxoutl[i] *= Log_I_Gain;
         efxoutr[i] *= Log_I_Gain;
         tmp = fabsf(efxoutr[i]);

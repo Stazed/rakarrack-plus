@@ -53,7 +53,7 @@ have_signal(float* efxoutl, float* efxoutr, uint32_t period)
     uint32_t i;
     float il_sum = 1e-12f;
     float ir_sum = 1e-12f;
-    for (i = 0; i <= period; i++) {
+    for (i = 0; i < period; i++) {
 
         tmp = fabsf (efxoutl[i]);
         if (tmp > il_sum) il_sum = tmp;

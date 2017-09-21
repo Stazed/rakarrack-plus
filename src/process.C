@@ -1116,7 +1116,7 @@ RKR::Control_Gain (float *origl, float *origr)
 
 
 
-    for (i = 0; i <= period; i++) {
+    for (i = 0; i < period; i++) {
         efxoutl[i] *= Log_I_Gain;
         efxoutr[i] *= Log_I_Gain;
         tmp = fabsf(efxoutr[i]);
@@ -1141,7 +1141,7 @@ RKR::Control_Gain (float *origl, float *origr)
     if((ACI_Bypass) && (Aux_Source==0)) {
         temp_sum = 0.0;
         tmp = 0.0;
-        for (i = 0; i <= period; i++) {
+        for (i = 0; i < period; i++) {
             tmp = fabsf(auxresampled[i]);
             if (tmp > a_sum) a_sum = tmp;
         }
@@ -1205,7 +1205,7 @@ RKR::Control_Volume (float *origl,float *origr)
 
     else Temp_M_Volume = Log_M_Volume;
 
-    for (i = 0; i <= period; i++) { //control volume
+    for (i = 0; i < period; i++) { //control volume
 
         efxoutl[i] *= Temp_M_Volume*booster; // +10dB booster main window
         efxoutr[i] *= Temp_M_Volume*booster;
@@ -1244,7 +1244,7 @@ RKR::Control_Volume (float *origl,float *origr)
     }
 
 
-    for (i = 0; i <= period; i++) {
+    for (i = 0; i < period; i++) {
 
         tmp = fabsf (efxoutl[i]);
         if (tmp > il_sum) il_sum = tmp;
