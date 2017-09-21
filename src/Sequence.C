@@ -68,8 +68,6 @@ Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate
     for (int i = 0; i<8; i++)
         fsequence[i] = Psequence[i] = 0.0f;
 
-    setpreset (Ppreset);
-
     filterl->setmix(1, 0.33f, -1.0f, 0.25f);
     filterr->setmix(1, 0.33f, -1.0f, 0.25f);
 
@@ -89,7 +87,8 @@ Sequence::Sequence (long int Quality, int DS, int uq, int dq, double sample_rate
 
     PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
-
+    
+    setpreset (Ppreset);
     cleanup ();
 };
 
