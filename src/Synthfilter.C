@@ -53,6 +53,7 @@ Synthfilter::Synthfilter (double sample_rate, uint32_t intermediate_bufsize)
 
     Plpstages = 4;
     Phpstages = 2;
+    Pbandwidth = 0;
 
     delta = 1.0/sample_rate;
     Rmin = 185.0f;		// 2N5457 typical on resistance at Vgs = 0
