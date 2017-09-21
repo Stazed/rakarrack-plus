@@ -43,6 +43,7 @@ Arpie::Arpie (double sample_rate, uint32_t intermediate_bufsize)
     Phidamp = 60;
     Pharms = 3;
     Psubdiv = 1;
+    subdiv = Psubdiv + 1;
 
     ldelay = NULL;
     rdelay = NULL;
