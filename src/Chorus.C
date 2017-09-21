@@ -49,6 +49,9 @@ Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
     rdelay->set_mix( 0.5f );
 
     Ppreset = 0;
+    Pflangemode = 0;
+    delay = 0.0f;
+    depth = 0.0f;
 
     oldr = 0.0f;
     oldl = 0.0f;
@@ -77,8 +80,7 @@ Chorus::~Chorus ()
  */
 float Chorus::getdelay (float xlfo)
 {
-    float
-    result;
+    float result = 0;
     if (Pflangemode == 0) {
         result = (delay + xlfo * depth) * fSAMPLE_RATE;
     } else
