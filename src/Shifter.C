@@ -52,6 +52,7 @@ Shifter::Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, 
     Pinterval = 0;
     outvolume = 0.5f;
     Ppreset = 0;
+    Pmode = 0;
     setpreset (Ppreset);
     cleanup ();
 
