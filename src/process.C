@@ -59,6 +59,7 @@ RKR::RKR ()
     eff_filter = 0;
     OnOffC = 0;
     flpos = 0;
+    have_signal = 0;
     Har_Down = 0;
     Rev_Down = 0;
     Con_Down = 0;
@@ -815,6 +816,11 @@ RKR::init_rkr ()
     Tuner_Bypass = 0;
     MIDIConverter_Bypass = 0;
     Metro_Bypass = 0;
+    Tap_Bypass = 0;
+    Tap_Updated = 0;
+    t_timeout = 0;
+    ACI_Bypass = 0;
+    Selected_Preset = 1;
 
     efx_FLimiter->setpreset(0,3);
 
