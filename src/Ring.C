@@ -157,7 +157,7 @@ Ring::out (float * efxoutl, float * efxoutr)
             efxoutr[i] *= tmpfactor;
         }
         offset += Pfreq;
-        if (offset > SAMPLE_RATE) offset -=SAMPLE_RATE;
+        if (offset >= SAMPLE_RATE) offset -=SAMPLE_RATE;
     }
 
 
