@@ -582,11 +582,17 @@ void Echotron::modulate_delay()
         rfmod = f_pow2((lfor*width + 0.25f + depth)*4.5f);
         for(int i=0; i<ECHOTRON_MAXFILTERS; i++) {
 
-            filterbank[i].l->setfreq(lfmod*File.fFreq[i]);
-            filterbank[i].r->setfreq(rfmod*File.fFreq[i]);
-            
+            if(i < File.fLength)
+            {
+                filterbank[i].l->setfreq(lfmod*File.fFreq[i]);
+                filterbank[i].r->setfreq(rfmod*File.fFreq[i]);
+            }
+            else    // valgrind says that these are uninitialized
+            {
+                filterbank[i].l->setfreq(0);
+                filterbank[i].r->setfreq(0);
+            }
         }
-
     }
 
     if(Pmoddly) {
