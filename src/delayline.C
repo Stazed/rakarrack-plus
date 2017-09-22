@@ -160,7 +160,7 @@ delayline::delay_simple(float smps, float time_, int tap_, int touch,
         bufptr = (dlytime + zero_index);	//this points to the sample we want to get
         if (bufptr >= maxdelaysmps)
             bufptr -= maxdelaysmps;
-        if (++rvptr > maxdelaysmps)
+        if (++rvptr >= maxdelaysmps)
             rvptr = 0;
 
         if (bufptr > zero_index) {
