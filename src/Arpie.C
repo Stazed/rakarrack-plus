@@ -52,6 +52,7 @@ Arpie::Arpie (double sample_rate, uint32_t intermediate_bufsize)
     Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
     invattack = SAMPLE_RATE/15;
     envattack = 1.0f/(float)invattack;
+    envcnt = 0;
     maxx_delay = SAMPLE_RATE * MAX_DELAY;
     fade = SAMPLE_RATE / 10;    //200ms fade time available
     
