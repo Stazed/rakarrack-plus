@@ -46,7 +46,9 @@ Phaser::Phaser (double sample_rate, uint32_t intermediate_bufsize)
 
 Phaser::~Phaser ()
 {
-	delete lfo;
+    free(oldl);
+    free(oldr);
+    delete lfo;
 };
 
 
