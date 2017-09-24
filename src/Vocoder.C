@@ -156,7 +156,6 @@ Vocoder::initialize()
 void
 Vocoder::clear_initialize()
 {
-    free(filterbank);
     free(tmpl);
     free(tmpr);
     free(tsmpsl);
@@ -169,6 +168,8 @@ Vocoder::clear_initialize()
     	delete filterbank[i].r;
     	delete filterbank[i].aux;
     }
+    
+    free(filterbank);   // don't free until after the voc bands are deleted first
     delete vlp;
     delete vhp;
 }
