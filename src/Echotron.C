@@ -589,8 +589,8 @@ void Echotron::modulate_delay()
             }
             else    // valgrind says that these are uninitialized
             {
-                filterbank[i].l->setfreq(0);
-                filterbank[i].r->setfreq(0);
+                filterbank[i].l->setfreq(0.1);  // .01 is minimum
+                filterbank[i].r->setfreq(0.1);  // .01 is minimum
             }
         }
     }

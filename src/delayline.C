@@ -25,7 +25,7 @@ delayline::delayline(float maxdelay, int maxtaps_, double samplerate)
     maxtaps = maxtaps_;
     maxtime = fSAMPLE_RATE * maxdelay;
     maxdelaysmps = fSAMPLE_RATE * lrintf(ceilf(maxdelay));
-    ringbuffer = (float *) malloc(sizeof(float) * maxdelaysmps);
+    ringbuffer = (float *) malloc(sizeof(float) * (maxdelaysmps+1));
     avgtime = (float *) malloc(sizeof(float) * maxtaps);
     time = (float *) malloc(sizeof(float) * maxtaps);
     xfade = (float *) malloc(sizeof(float) * maxtaps);
