@@ -63,6 +63,8 @@ Shifter::Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, 
 Shifter::~Shifter ()
 {
     clear_initialize();
+    delete U_Resample;
+    delete D_Resample;
     delete PS;
 };
 
