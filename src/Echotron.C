@@ -87,6 +87,8 @@ Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
 
 Echotron::~Echotron ()
 {
+    delete lfo;
+    delete dlfo;
     delete lxn;
     delete rxn;
 
