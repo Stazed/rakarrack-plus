@@ -33,6 +33,7 @@ Filter::Filter (FilterParams * pars)
     category = pars->Pcategory;
 
     interpbuf = new float[pars->intermediate_bufsize];
+    filter = NULL;
 
     switch (category) {
     case 1:
@@ -56,7 +57,8 @@ Filter::Filter (FilterParams * pars)
 
 Filter::~Filter ()
 {
-	delete[] interpbuf;
+    delete filter;
+    delete[] interpbuf;
 };
 
 void
