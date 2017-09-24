@@ -124,7 +124,7 @@ RKR::Get_Bogomips()
 {
 
     char temp[256];
-    char *tmp;
+    char *tmp, *tmp2;
     FILE *fp;
     int maxx_len;
 
@@ -137,8 +137,9 @@ RKR::Get_Bogomips()
 
             {
                 tmp=strdup(temp);
-                strsep(&tmp,":");
-                sscanf (tmp, "%f", &bogomips);
+                tmp2 = tmp;         // needed since strsep alters original == memory leak
+                strsep(&tmp2,":");
+                sscanf (tmp2, "%f", &bogomips);
                 break;
             }
 
@@ -159,6 +160,7 @@ RKR::Get_Bogomips()
 
 
         fclose(fp);
+        free(tmp);
         return(1);
     }
 
