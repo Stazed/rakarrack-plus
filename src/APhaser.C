@@ -90,7 +90,12 @@ Analog_Phaser::Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize)
 
 Analog_Phaser::~Analog_Phaser ()
 {
-	delete lfo;
+    delete lfo;
+    free(lxn1);
+    free(lyn1);
+    free(rxn1);
+    free(ryn1);
+    free(offset);
 };
 
 
