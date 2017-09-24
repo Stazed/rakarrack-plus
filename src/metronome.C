@@ -50,6 +50,9 @@ metronome::metronome (double samplerate, uint32_t intermediate_bufsize)
 metronome::~metronome ()
 {
     delete[] interpbuf;
+    delete dulltick;
+    delete sharptick;
+    delete hpf;
 };
 
 void
