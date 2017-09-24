@@ -520,6 +520,7 @@ void fft_filter::resample_impulse(int size, float* ir)
         ir[j] = 0.0f;
     }
 
+    free(fftBuf);
 //Just some debugging code to verify the freq response
     /*realfft(256, ir);
 
