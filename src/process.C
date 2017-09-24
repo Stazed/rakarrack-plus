@@ -804,6 +804,76 @@ RKR::RKR ()
 
 RKR::~RKR ()
 {
+    /* To clean up valgrind log */
+    
+    delete DC_Offsetl;
+    delete DC_Offsetr;
+    delete M_Metronome;
+    delete efx_Chorus;
+    delete efx_Flanger;
+    delete efx_Rev;
+    delete efx_Echo;
+    delete efx_Phaser;
+    delete efx_APhaser;
+    delete efx_Distorsion;
+    delete efx_Overdrive;
+    delete efx_EQ2;
+    delete efx_EQ1;
+    delete efx_Compressor;
+    delete efx_WhaWha;
+    delete efx_Alienwah;
+    delete efx_Cabinet;
+    delete efx_Pan;
+    delete efx_Har;
+    delete efx_MusDelay;
+    delete efx_Gate;
+    delete efx_NewDist;
+    delete efx_FLimiter;
+    delete efx_Valve;
+    delete efx_DFlange;
+    delete efx_Ring;
+    delete efx_Exciter;
+    delete efx_MBDist;
+    delete efx_Arpie;
+    delete efx_Expander;
+    delete efx_Shuffle;
+    delete efx_Synthfilter;
+    delete efx_MBVvol;
+    delete efx_Convol;
+    delete efx_Looper;
+    delete efx_RyanWah;
+    delete efx_RBEcho;
+    delete efx_CoilCrafter;
+    delete efx_ShelfBoost;
+    delete efx_Vocoder;
+    delete efx_Sustainer;
+    delete efx_Sequence;
+    delete efx_Shifter;
+    delete efx_StompBox;
+    delete efx_Reverbtron;
+    delete efx_Echotron;
+    delete efx_StereoHarm;
+    delete efx_CompBand;
+    delete efx_Opticaltrem;
+    delete efx_Vibe;
+    delete efx_Infinity;
+
+    delete U_Resample;
+    delete D_Resample;
+    delete A_Resample;
+
+    delete beat;
+    delete efx_Tuner;
+    delete efx_MIDIConverter;
+    delete RecNote;
+    delete RC ;
+    
+    delete Fpre;
+    free(Preset_Name);
+    free(Author);
+    free(Bank_Saved);
+    free(UserRealName);
+
 };
 
 
