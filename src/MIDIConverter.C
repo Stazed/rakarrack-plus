@@ -425,6 +425,7 @@ MIDIConverter::fftFree ()
     fftwf_destroy_plan(fftPlan);
     fftwf_free(fftIn);
     free(fftSampleBuffer);
+    free(fftLastPhase);
 }
 
 
