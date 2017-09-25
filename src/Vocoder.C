@@ -43,6 +43,8 @@ Vocoder::Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double
     Ppanning = 64;
     Plrcross = 100;
     outvolume = 0.5f;
+    input = dB2rap (75.0f * (float)Pinput / 127.0f - 40.0f);
+    vulevel = 0.0f;
 
     initialize();
 
@@ -130,6 +132,12 @@ Vocoder::initialize()
     tsmpsl = (float *) malloc (sizeof (float) * nPERIOD);
     tsmpsr = (float *) malloc (sizeof (float) * nPERIOD);
     tmpaux = (float *) malloc (sizeof (float) * nPERIOD);
+    
+    memset(tmpl, 0, sizeof(float)*nPERIOD);
+    memset(tmpr, 0, sizeof(float)*nPERIOD);
+    memset(tsmpsl, 0, sizeof(float)*nPERIOD);
+    memset(tsmpsr, 0, sizeof(float)*nPERIOD);
+    memset(tmpaux, 0, sizeof(float)*nPERIOD);
     
     float center;
     float qq;
