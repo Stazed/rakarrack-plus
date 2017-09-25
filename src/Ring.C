@@ -73,10 +73,10 @@ Ring::~Ring ()
 	//delete [] sin_tbl;
 	//delete [] sin_tbl;
 	//delete [] sin_tbl;
-	//free(sin_tbl);
-	//free(tri_tbl);
-	//free(squ_tbl);
-	//free(saw_tbl);
+    free(sin_tbl);
+    free(tri_tbl);
+    free(squ_tbl);
+    free(saw_tbl);
 };
 
 /*
