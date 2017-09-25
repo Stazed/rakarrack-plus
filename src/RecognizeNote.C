@@ -78,7 +78,9 @@ Recognize::schmittInit (int size, double SAMPLE_RATE)
 {
     blockSize = SAMPLE_RATE / size;
     schmittBuffer =
-    (signed short int *) malloc (blockSize * sizeof (signed short int));
+        (signed short int *) malloc (sizeof (signed short int) * (blockSize + 2));  // +2 because valgrind bitches about invalid reads in schmittS16LE()
+    
+    memset (schmittBuffer, 0, sizeof (signed short int) * (blockSize + 2));
     schmittPointer = schmittBuffer;
 };
 
