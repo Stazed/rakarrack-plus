@@ -869,6 +869,17 @@ RKR::~RKR ()
     delete RC ;
     
     delete Fpre;
+    
+    free(efxoutl);
+    free(efxoutr);
+    free(auxdata);
+    free(auxresampled);
+    free(anall);
+    free(analr);
+    free(smpl);
+    free(smpr);
+    free(m_ticks);
+    free(interpbuf);
     free(Preset_Name);
     free(Author);
     free(Bank_Saved);
