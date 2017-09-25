@@ -35,6 +35,15 @@ MIDIConverter::MIDIConverter (char *jname, RKR *_rkr, double sample_rate, uint32
     TrigVal = .25f;
     hay = 0;    // This is used for the red light on/off display
     ponla = 0;
+    Moctave = 0;
+    
+    Pgain = 64;              // lv2 only
+    Pmidi = 0;
+    Poctave = 0;
+    Ppanic = 0;
+    Pvelocity = 0;
+    Ptrigger = 0;
+    Pfft = 0;
 
     schmittBuffer = NULL;
     schmittPointer = NULL;
