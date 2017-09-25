@@ -50,6 +50,7 @@ Looper::Looper (float size,double samplerate, uint32_t intermediate_bufsize):
     Pms = 0;
     Ptempo = 120;
     outvolume = 0.5f;
+    Pmetro = 0;
     Pbar = 2;   // this must be set before calling settempo()
     settempo(120);
     setbar(2);
