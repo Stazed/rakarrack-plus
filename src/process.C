@@ -885,6 +885,8 @@ RKR::~RKR ()
     free(Bank_Saved);
     free(UserRealName);
 
+    // alsa
+    snd_seq_close (midi_in);
 };
 
 
