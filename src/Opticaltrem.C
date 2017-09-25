@@ -55,6 +55,8 @@ Opticaltrem::Opticaltrem (double sample_rate, uint32_t intermediate_bufsize)
     oldgr = 0.0f;
     gl = 0.0f;
     gr = 0.0f;
+    oldstepl = 0.0f;
+    oldstepr = 0.0f;
 
     lfo = new EffectLFO(sample_rate);
 
