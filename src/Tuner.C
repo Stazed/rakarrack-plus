@@ -37,6 +37,7 @@ Tuner::Tuner (double sample_rate)
 
 Tuner::~Tuner ()
 {
+    schmittFree ();
 }
 
 
