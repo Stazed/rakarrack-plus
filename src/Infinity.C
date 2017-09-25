@@ -52,6 +52,8 @@ Infinity::Infinity (double sample_rate, uint32_t intermediate_bufsize)
     tflag = 0;
     ratescale = 1.0f;
     stdiff = 0.0f;
+    rampconst = 1.0f;
+    fconst = 0.0f;
 
     float dt = 1.0f/fSAMPLE_RATE;
     alpha = dt/(0.5f + dt);          //200ms time constant on parameter change -- quick but not jerky
