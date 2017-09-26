@@ -34,7 +34,16 @@ Looper::Looper (float size,double samplerate, uint32_t intermediate_bufsize):
     PERIOD = intermediate_bufsize;
     SAMPLE_RATE = samplerate;
     fSAMPLE_RATE = float(samplerate);
-
+    
+    kl = 0;
+    kl2 = 0;
+    rvkl = 0;
+    rvkl2 = 0;
+    looper_bar = 0;
+    looper_qua = 0;
+    dl = 0;
+    dl2 = 0;
+    
     //default values
     Ppreset = 0;
     Pclear = 1;
@@ -164,9 +173,14 @@ Looper::out (float * efxoutl, float * efxoutr)
                 if (++kl >= dl)
                     kl = 0;
                 rvkl = dl - 1 - kl;
+                if(rvkl < 0)
+                    rvkl = 0;
+                
                 if (++kl2 >= dl2)
                     kl2 = 0;
                 rvkl2 = dl2 - 1 - kl2;
+                if(rvkl2 < 0)
+                    rvkl2 = 0;
                 if((Plink) || (PT1)) timeposition(kl);
                 else timeposition(kl2);
 
@@ -174,7 +188,7 @@ Looper::out (float * efxoutl, float * efxoutr)
             }
 
             if(Preverse) {
-
+                
                 lswell =	(float)(abs(kl - rvkl)) * Srate_Attack_Coeff;
                 if (lswell <= PI) {
                     lswell = 0.5f * (1.0f - cosf(lswell));  //Clickless transition
