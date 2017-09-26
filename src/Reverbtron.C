@@ -72,7 +72,7 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
     time = (int *) malloc (sizeof (int) * 2000);
     rndtime = (int *) malloc (sizeof (int) * 2000);
-    data = (float *) malloc (sizeof (float) * 2000);
+    data = (float *) malloc (sizeof (float) * (1 + hrtf_size));
     rnddata = (float *) malloc (sizeof (float) * 2000);
     lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));
     hrtf =  (float *) malloc (sizeof (float) * (1 + hrtf_size));
@@ -494,7 +494,7 @@ void Reverbtron::convert_time()
     float tmpstretch = 1.0f;
     float normal = 0.9999f/File.maxdata;
 
-    memset(data, 0, sizeof(float)*2000);
+    memset(data, 0, sizeof(float)*(1 + hrtf_size));
     memset(time, 0, sizeof(int)*2000);
     memset(rndtime, 0, sizeof(int)*2000);
 
