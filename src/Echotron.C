@@ -58,6 +58,7 @@ Echotron::Echotron (double sample_rate, uint32_t intermediate_bufsize)
     rfeedback = 0.0f;
     outvolume = 0.5f;
     ldmod = rdmod = oldldmod = oldrdmod = interpl = interpr = 0.0f;
+    interpl = interpr = 0;
     lpanning = rpanning = 0.0f;
     lrcross = ilrcross = 0.0f;
     
@@ -218,7 +219,7 @@ Echotron::out (float * efxoutl, float * efxoutr)
                     ryn += rxn->delay(r, rxindex, k, 0, 0) * File.rdata[k];
                 }
 
-            }
+                }
 
         } else {
             for (k=0; k<length; k++) {
@@ -535,7 +536,8 @@ void Echotron::init_params()
     lfo->Pfreq = lrintf(File.subdiv_fmod*tmptempo);
     dlfo->Pfreq = lrintf(File.subdiv_dmod*tmptempo);
 
-    for(int i=0; i<Plength; i++) {
+    /* Need to process full file length or have uninitialized values if user increased Plength*/
+    for(int i=0; i<File.fLength; i++) {
 // tmp_time=lrintf(fTime[i]*tempo_coeff*fSAMPLE_RATE);
 // if(tmp_time<maxx_size) rtime[i]=tmp_time; else rtime[i]=maxx_size;
 
