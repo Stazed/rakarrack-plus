@@ -10685,8 +10685,9 @@ void RKRGUI::cb_Update_TAP(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Update_TAP_i(o,v);
 }
 
-void RKRGUI::cb_UPSAMPLE_C_i(Fl_Check_Button*, void*) {
-  Show_Next_Time();
+void RKRGUI::cb_UPSAMPLE_C_i(Fl_Check_Button* o, void*) {
+  rkr->upsample=(int)o->value();
+Show_Next_Time();
 }
 void RKRGUI::cb_UPSAMPLE_C(Fl_Check_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_UPSAMPLE_C_i(o,v);
@@ -10743,8 +10744,9 @@ void RKRGUI::cb_Downr_Qual(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Downr_Qual_i(o,v);
 }
 
-void RKRGUI::cb_L_SIZE_i(Fl_Counter*, void*) {
-  if(!rkr->m_displayed)
+void RKRGUI::cb_L_SIZE_i(Fl_Counter* o, void*) {
+  rkr->looper_size=o->value();
+if(!rkr->m_displayed)
 {
 Show_Next_Time();
 rkr->m_displayed=1;
@@ -11122,8 +11124,9 @@ void RKRGUI::cb_Ste_Up_Qua(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Ste_Up_Qua_i(o,v);
 }
 
-void RKRGUI::cb_Wave_Amo_i(Fl_Choice*, void*) {
-  Show_Next_Time();
+void RKRGUI::cb_Wave_Amo_i(Fl_Choice* o, void*) {
+  rkr->Wave_res_amount=(int)o->value();
+Show_Next_Time();
 }
 void RKRGUI::cb_Wave_Amo(Fl_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Wave_Amo_i(o,v);
@@ -23401,7 +23404,7 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("StereoHarm Up Quality"),rkr->Ste_U_Q);
   rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"),rkr->Ste_D_Q);
   
-  rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
+  rakarrack.set(rkr->PrefNom("Waveshape Resampling"),rkr->Wave_res_amount);
   rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),rkr->Wave_up_q);
   rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),rkr->Wave_down_q);
   rakarrack.set(rkr->PrefNom("Calibration"),rkr->aFreq);
@@ -23414,12 +23417,12 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
   rakarrack.set(rkr->PrefNom("Auto Assign"),rkr->autoassign);
   
-  rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
-  rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
-  rakarrack.set(rkr->PrefNom("DownQuality"),(int)Downr_Qual->value());
+  rakarrack.set(rkr->PrefNom("UpSampling"),rkr->upsample);
+  rakarrack.set(rkr->PrefNom("UpQuality"),rkr->UpQual);
+  rakarrack.set(rkr->PrefNom("DownQuality"),rkr->DownQual);
   
-  rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
-  rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
+  rakarrack.set(rkr->PrefNom("UpAmount"),rkr->UpAmo);
+  rakarrack.set(rkr->PrefNom("Looper Size"),rkr->looper_size);
   
   
   

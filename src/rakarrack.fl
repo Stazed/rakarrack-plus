@@ -11397,14 +11397,14 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();}
+Settings->hide();} open
       xywh {1388 103 640 528} type Double color 4 hide size_range {640 528 0 0}
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 528}
       }
       Fl_Tabs STabs {
-        user_data 1
+        user_data 1 open
         xywh {0 0 636 535}
       } {
         Fl_Group Look {
@@ -11571,7 +11571,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
+          user_data 1 open
           xywh {0 26 635 502} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -11599,7 +11599,8 @@ PutBackground();}
           }
           Fl_Check_Button UPSAMPLE_C {
             label Upsampling
-            callback {Show_Next_Time();}
+            callback {rkr->upsample=(int)o->value();
+Show_Next_Time();}
             xywh {83 124 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
           }
           Fl_Choice Upr_Amo {
@@ -11692,11 +11693,12 @@ Show_Next_Time();}
           } {}
           Fl_Counter L_SIZE {
             label {Looper Size Seconds     }
-            callback {if(!rkr->m_displayed)
+            callback {rkr->looper_size=o->value();
+if(!rkr->m_displayed)
 {
 Show_Next_Time();
 rkr->m_displayed=1;
-}}
+}} selected
             xywh {133 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
           }
           Fl_Counter LM_Volume {
@@ -12093,7 +12095,8 @@ Show_Next_Time();} open
           } {}
           Fl_Choice Wave_Amo {
             label {Waveshape Resampling   }
-            callback {Show_Next_Time();}
+            callback {rkr->Wave_res_amount=(int)o->value();
+Show_Next_Time();}
             xywh {145 497 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           } {
             MenuItem {} {
@@ -13349,7 +13352,7 @@ rakarrack.set(rkr->PrefNom("StereoHarm Downsample"),rkr->Ste_Down);
 rakarrack.set(rkr->PrefNom("StereoHarm Up Quality"),rkr->Ste_U_Q);
 rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"),rkr->Ste_D_Q);
 
-rakarrack.set(rkr->PrefNom("Waveshape Resampling"),(int)Wave_Amo->value());
+rakarrack.set(rkr->PrefNom("Waveshape Resampling"),rkr->Wave_res_amount);
 rakarrack.set(rkr->PrefNom("Waveshape Up Quality"),rkr->Wave_up_q);
 rakarrack.set(rkr->PrefNom("Waveshape Down Quality"),rkr->Wave_down_q);
 rakarrack.set(rkr->PrefNom("Calibration"),rkr->aFreq);
@@ -13362,12 +13365,12 @@ rakarrack.set(rkr->PrefNom("Vocoder Bands"),rkr->VocBands);
 rakarrack.set(rkr->PrefNom("FX_init_state"),rkr->init_state);
 rakarrack.set(rkr->PrefNom("Auto Assign"),rkr->autoassign);
 
-rakarrack.set(rkr->PrefNom("UpSampling"),(int)UPSAMPLE_C->value());
-rakarrack.set(rkr->PrefNom("UpQuality"),(int)Upr_Qual->value());
-rakarrack.set(rkr->PrefNom("DownQuality"),(int)Downr_Qual->value());
+rakarrack.set(rkr->PrefNom("UpSampling"),rkr->upsample);
+rakarrack.set(rkr->PrefNom("UpQuality"),rkr->UpQual);
+rakarrack.set(rkr->PrefNom("DownQuality"),rkr->DownQual);
 
-rakarrack.set(rkr->PrefNom("UpAmount"),(int)Upr_Amo->value());
-rakarrack.set(rkr->PrefNom("Looper Size"),L_SIZE->value());
+rakarrack.set(rkr->PrefNom("UpAmount"),rkr->UpAmo);
+rakarrack.set(rkr->PrefNom("Looper Size"),rkr->looper_size);
 
 
 
@@ -17997,8 +18000,7 @@ return(1000);} {}
   closedir(dir);
 
   CH_UB->value(0);
-  free(forFree);} {selected
-    }
+  free(forFree);} {}
   }
   Function {prevnext(int e)} {open return_type {static int}
   } {
