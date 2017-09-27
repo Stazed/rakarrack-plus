@@ -7327,7 +7327,7 @@ update_looper();}
         }
       }
       Fl_Group RYANWAH {
-        user_data 1 open selected
+        user_data 1
         xywh {479 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button ryanwah_activar {
@@ -17321,13 +17321,15 @@ DisAssigns();} {}
     code {int i,j,k;
 char tmp[8];
 
-int the_one;
+int the_one = 0;
 
-if (rkr->ML_filter==0)
- the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = rkr->ML_clist[(int)Epar->value()-1];
-
+if((int)Epar->value())
+{
+  if (rkr->ML_filter==0)
+    the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+  else
+    the_one = rkr->ML_clist[(int)Epar->value()-1];
+}
 
 k=0;
 
@@ -17940,6 +17942,8 @@ return(1000);} {}
   Function {ScanDir()} {} {
     code {char nombre[64];
   char *nombank;
+  nombank = (char *)calloc(1, 256);
+  char * const  forFree = nombank; /* <--- saving calloc() returned value */ 
   DIR *dir;
   struct dirent *fs;
 
@@ -17953,7 +17957,6 @@ return(1000);} {}
   {
   if (strstr(fs->d_name,".rkrb")!=NULL)
     {
-      nombank = (char *)calloc(1, 256);
       sprintf(nombank,"%s/%s",DATADIR, fs->d_name);
       AddBankName(nombank);
       if(rkr->CheckOldBank(nombank)==0)
@@ -17977,7 +17980,6 @@ return(1000);} {}
   {
   if (strstr(fs->d_name,".rkrb")!=NULL)
     {
-      nombank = (char *)calloc(1, 256);
       sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
       AddBankName(nombank);
       if(rkr->CheckOldBank(nombank)==0)
@@ -17994,7 +17996,9 @@ return(1000);} {}
   }
   closedir(dir);
 
-  CH_UB->value(0);} {}
+  CH_UB->value(0);
+  free(forFree);} {selected
+    }
   }
   Function {prevnext(int e)} {open return_type {static int}
   } {

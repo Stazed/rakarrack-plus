@@ -27392,13 +27392,15 @@ void RKRGUI::DisAssigns() {
   int i,j,k;
   char tmp[8];
   
-  int the_one;
+  int the_one = 0;
   
-  if (rkr->ML_filter==0)
-   the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
-   else
-   the_one = rkr->ML_clist[(int)Epar->value()-1];
-  
+  if((int)Epar->value())
+  {
+    if (rkr->ML_filter==0)
+      the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+    else
+      the_one = rkr->ML_clist[(int)Epar->value()-1];
+  }
   
   k=0;
   
@@ -28015,6 +28017,8 @@ int RKRGUI::search_but(int x, int y) {
 void RKRGUI::ScanDir() {
   char nombre[64];
     char *nombank;
+    nombank = (char *)calloc(1, 256);
+    char * const  forFree = nombank; /* <--- saving calloc() returned value */ 
     DIR *dir;
     struct dirent *fs;
   
@@ -28028,7 +28032,6 @@ void RKRGUI::ScanDir() {
     {
     if (strstr(fs->d_name,".rkrb")!=NULL)
       {
-        nombank = (char *)calloc(1, 256);
         sprintf(nombank,"%s/%s",DATADIR, fs->d_name);
         AddBankName(nombank);
         if(rkr->CheckOldBank(nombank)==0)
@@ -28052,7 +28055,6 @@ void RKRGUI::ScanDir() {
     {
     if (strstr(fs->d_name,".rkrb")!=NULL)
       {
-        nombank = (char *)calloc(1, 256);
         sprintf(nombank,"%s/%s",rkr->UDirFilename,fs->d_name);
         AddBankName(nombank);
         if(rkr->CheckOldBank(nombank)==0)
@@ -28070,6 +28072,7 @@ void RKRGUI::ScanDir() {
     closedir(dir);
   
     CH_UB->value(0);
+    free(forFree);
 }
 
 int RKRGUI::prevnext(int e) {
