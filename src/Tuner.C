@@ -29,6 +29,7 @@ Tuner::Tuner (double sample_rate)
     note = 0;
     nfreq = 0;
     afreq = 0;
+    cents = 0;
     schmittInit (2);
 
 };
