@@ -48,6 +48,8 @@ StereoHarm::StereoHarm (long int Quality, int DS, int uq, int dq, double sample_
     gainl = gainr = 0.5f;
     intervall = intervalr = 0.0f;
     lrcross = 0.5f;
+    r_ratiol = 0;
+    r_ratior = 0;
 
     PSl = new PitchShifter (window, hq, nfSAMPLE_RATE);
     PSl->ratio = 1.0f;
