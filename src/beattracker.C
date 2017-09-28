@@ -4,7 +4,7 @@
 beattracker:: beattracker (double sample_rate, uint32_t intermediate_bufsize)
 {
 
-	interpbuf = new float[intermediate_bufsize];
+    interpbuf = new float[intermediate_bufsize];
     rmsfilter = new RBFilter (0, 15.0f, 0.15f, 1, sample_rate, interpbuf);
     peaklpfilter = new RBFilter (0, 25.0f, 0.5f, 0, sample_rate, interpbuf);
     peaklpfilter2 = new RBFilter (0, 25.0f, 0.5f, 0, sample_rate, interpbuf);
@@ -21,7 +21,8 @@ beattracker:: beattracker (double sample_rate, uint32_t intermediate_bufsize)
     trigtime = sample_rate/12; //time to take next peak
     onset = 0;
     trigthresh = 0.15f;
-
+    trigtimeout = 0;
+    
     tscntr = 0;
     tsidx = 0;
 
