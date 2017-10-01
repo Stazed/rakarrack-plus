@@ -160,7 +160,9 @@ public:
     class metronome *M_Metronome;
     class beattracker *beat;
 
-    class Recognize *RecNote;
+    class Recognize *HarmRecNote;
+    class Recognize *StHarmRecNote;
+    class Recognize *RingRecNote;
     class RecChord *RC;
     class Compressor *efx_FLimiter;
     class Valve *efx_Valve;
@@ -448,8 +450,10 @@ public:
     int last_auxvalue;
     int ena_tool;
     int VocBands;
-    int RCOpti;
-
+    int RCOpti_Harm;
+    int RCOpti_Stereo;
+    int RCOpti_Ring;
+    
     int M_Metro_Tempo;
     int M_Metro_Bar;
     int mtc_counter;

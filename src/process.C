@@ -306,7 +306,9 @@ RKR::RKR ()
     beat = new beattracker(fSample_rate, period);
     efx_Tuner = new Tuner (fSample_rate);
     efx_MIDIConverter = new MIDIConverter(jackcliname, this, fSample_rate, period);
-    RecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
+    HarmRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
+    StHarmRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
+    RingRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
     RC = new RecChord ();
 
 
@@ -865,7 +867,9 @@ RKR::~RKR ()
     delete beat;
     delete efx_Tuner;
     delete efx_MIDIConverter;
-    delete RecNote;
+    delete HarmRecNote;
+    delete StHarmRecNote;
+    delete RingRecNote;
     delete RC ;
     
     delete Fpre;
@@ -958,7 +962,9 @@ RKR::init_rkr ()
 
     }
     RC->cleanup ();
-    RecNote->reconota = -1;
+    HarmRecNote->reconota = -1;
+    StHarmRecNote->reconota = -1;
+    RingRecNote->reconota = -1;
 
 }
 
@@ -1410,8 +1416,6 @@ void
 RKR::Alg (float *origl, float *origr, void *)
 {
     int i;
-    int reco=0;
-    int ponlast=0;
 
     if((t_timeout) && (Tap_Bypass)) TapTempo_Timeout(1);
 
@@ -1433,16 +1437,16 @@ RKR::Alg (float *origl, float *origr, void *)
 
 
         if (Tuner_Bypass)
-            efx_Tuner->schmittFloat (period, efxoutl, efxoutr, RecNote->freqs, RecNote->lfreqs);
+            efx_Tuner->schmittFloat (period, efxoutl, efxoutr, HarmRecNote->freqs, HarmRecNote->lfreqs);
 
         if (MIDIConverter_Bypass)
         {
             if(efx_MIDIConverter->getpar(5))
             {
-                efx_MIDIConverter->fftFloat (efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
+                efx_MIDIConverter->fftFloat (efxoutl, efxoutr, val_sum, HarmRecNote->freqs, HarmRecNote->lfreqs);
             }else
             {
-                efx_MIDIConverter->schmittFloat (efxoutl, efxoutr, val_sum, RecNote->freqs, RecNote->lfreqs);
+                efx_MIDIConverter->schmittFloat (efxoutl, efxoutr, val_sum, HarmRecNote->freqs, HarmRecNote->lfreqs);
             }
         }
 
@@ -1450,13 +1454,12 @@ RKR::Alg (float *origl, float *origr, void *)
             if (efx_Har->mira)
             {
                 if ((efx_Har->PMIDI) || (efx_Har->PSELECT)) {
-                    RecNote->schmittFloat (efxoutl, efxoutr);
-                    reco=1;
-                    if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
-                        if(RecNote->afreq > 0.0) {
-                            RC->Vamos (0,efx_Har->Pinterval - 12,RecNote->reconota);
+                    HarmRecNote->schmittFloat (efxoutl, efxoutr);
+                    if ((HarmRecNote->reconota != -1) && (HarmRecNote->reconota != HarmRecNote->last)) {
+                        if(HarmRecNote->afreq > 0.0) {
+                            RC->Vamos (0,efx_Har->Pinterval - 12,HarmRecNote->reconota);
                             efx_Har->r_ratio = RC->r__ratio[0];//pass the found ratio
-                            ponlast = 1;
+                            HarmRecNote->last=HarmRecNote->reconota;
                         }
                     }
                 }
@@ -1474,15 +1477,14 @@ RKR::Alg (float *origl, float *origr, void *)
             if (efx_StereoHarm->mira)
             {
                 if ((efx_StereoHarm->PMIDI) || (efx_StereoHarm->PSELECT)) {
-                    if(!reco) RecNote->schmittFloat (efxoutl, efxoutr);
-                    reco=1;
-                    if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
-                        if(RecNote->afreq > 0.0) {
-                            RC->Vamos (1,efx_StereoHarm->Pintervall - 12,RecNote->reconota);
-                            RC->Vamos (2,efx_StereoHarm->Pintervalr - 12,RecNote->reconota);
+                    StHarmRecNote->schmittFloat (efxoutl, efxoutr);
+                    if ((StHarmRecNote->reconota != -1) && (StHarmRecNote->reconota != StHarmRecNote->last)) {
+                        if(StHarmRecNote->afreq > 0.0) {
+                            RC->Vamos (1,efx_StereoHarm->Pintervall - 12,StHarmRecNote->reconota);
+                            RC->Vamos (2,efx_StereoHarm->Pintervalr - 12,StHarmRecNote->reconota);
                             efx_StereoHarm->r_ratiol = RC->r__ratio[1];
                             efx_StereoHarm->r_ratior = RC->r__ratio[2];
-                            ponlast = 1;
+                            StHarmRecNote->last=StHarmRecNote->reconota;
                         }
                     }
                 }
@@ -1499,17 +1501,15 @@ RKR::Alg (float *origl, float *origr, void *)
 
 
         if((Ring_Bypass) && (efx_Ring->Pafreq)) {
-            if(!reco) RecNote->schmittFloat (efxoutl, efxoutr);
-            reco=1;
-            if ((RecNote->reconota != -1) && (RecNote->reconota != RecNote->last)) {
-                if(RecNote->afreq > 0.0) {
-                    efx_Ring->Pfreq=lrintf(RecNote->lafreq);
-                    ponlast = 1;
+            RingRecNote->schmittFloat (efxoutl, efxoutr);
+            if ((RingRecNote->reconota != -1) && (RingRecNote->reconota != RingRecNote->last)) {
+                if(RingRecNote->afreq > 0.0) {
+                    efx_Ring->Pfreq=lrintf(RingRecNote->lafreq);
+                    StHarmRecNote->last=StHarmRecNote->reconota;
                 }
             }
         }
 
-        if(ponlast) RecNote->last=RecNote->reconota;
 
         for (i = 0; i < 10; i++) {
             switch (efx_order[i]) {

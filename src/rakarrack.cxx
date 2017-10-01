@@ -1429,7 +1429,7 @@ if (rkr->Harmonizer_Bypass)
     har_chordname->copy_label(rkr->RC->NombreAcorde);
     if(!rkr->StereoHarm_Bypass) rkr->RC->cc=0;  
     har_chordname->redraw(); 
-    rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->RecNote->reconota);      
+    rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota);      
     }
      }
 
@@ -1446,8 +1446,8 @@ if (rkr->StereoHarm_Bypass)
     shar_chordname->copy_label(rkr->RC->NombreAcorde);
     //rkr->RC->cc=0; // this now must be done in process Alg()
     shar_chordname->redraw(); 
-    rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->RecNote->reconota);      
-    rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->RecNote->reconota);      
+    rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
+    rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
     
     }
      }
@@ -10892,7 +10892,9 @@ void RKRGUI::cb_DB6B(Fl_Check_Button* o, void* v) {
 
 void RKRGUI::cb_Calibration_i(Fl_Counter* o, void*) {
   rkr->aFreq=o->value();
-rkr->RecNote->update_freqs(rkr->aFreq);
+rkr->HarmRecNote->update_freqs(rkr->aFreq);
+rkr->StHarmRecNote->update_freqs(rkr->aFreq);
+rkr->RingRecNote->update_freqs(rkr->aFreq);
 }
 void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Calibration_i(o,v);
@@ -10900,42 +10902,116 @@ void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
 
 void RKRGUI::cb_RTrigger_i(Fl_Counter* o, void*) {
   rkr->rtrig = o->value();
-rkr->RecNote->trigfact = o->value();
+rkr->HarmRecNote->trigfact = o->value();
+rkr->StHarmRecNote->trigfact = o->value();
+rkr->RingRecNote->trigfact = o->value();
 }
 void RKRGUI::cb_RTrigger(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RTrigger_i(o,v);
 }
 
-void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) {
-  rkr->RCOpti =(int) o->value();
+void RKRGUI::cb_RC_Harm_Opti_i(Fl_Choice* o, void*) {
+  rkr->RCOpti_Harm =(int) o->value();
 
-switch(rkr->RCOpti)
+switch(rkr->RCOpti_Harm)
   {
   
   
     case 0:
-    	rkr->RecNote->setlpf(5500);
-    	rkr->RecNote->sethpf(80);
+    	rkr->HarmRecNote->setlpf(5500);
+    	rkr->HarmRecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	rkr->RecNote->setlpf(4500);
-    	rkr->RecNote->sethpf(80);
+    	rkr->HarmRecNote->setlpf(4500);
+    	rkr->HarmRecNote->sethpf(80);
     	break;
     	
     case 2:
-    	rkr->RecNote->setlpf(3000);
-    	rkr->RecNote->sethpf(300);
+    	rkr->HarmRecNote->setlpf(3000);
+    	rkr->HarmRecNote->sethpf(300);
     	break;
 
 };
 }
-void RKRGUI::cb_RC_Opti(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_Opti_i(o,v);
+void RKRGUI::cb_RC_Harm_Opti(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_Harm_Opti_i(o,v);
 }
 
-Fl_Menu_Item RKRGUI::menu_RC_Opti[] = {
+Fl_Menu_Item RKRGUI::menu_RC_Harm_Opti[] = {
+ {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_RC_St_Harm_Opti_i(Fl_Choice* o, void*) {
+  rkr->RCOpti_Stereo =(int) o->value();
+
+switch(rkr->RCOpti_Stereo)
+  {
+  
+  
+    case 0:
+    	rkr->StHarmRecNote->setlpf(5500);
+    	rkr->StHarmRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	rkr->StHarmRecNote->setlpf(4500);
+    	rkr->StHarmRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	rkr->StHarmRecNote->setlpf(3000);
+    	rkr->StHarmRecNote->sethpf(300);
+    	break;
+
+};
+}
+void RKRGUI::cb_RC_St_Harm_Opti(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_St_Harm_Opti_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_RC_St_Harm_Opti[] = {
+ {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void RKRGUI::cb_RC_Ring_Opti_i(Fl_Choice* o, void*) {
+  rkr->RCOpti_Ring =(int) o->value();
+
+switch(rkr->RCOpti_Ring)
+  {
+  
+  
+    case 0:
+    	rkr->RingRecNote->setlpf(5500);
+    	rkr->RingRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	rkr->RingRecNote->setlpf(4500);
+    	rkr->RingRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	rkr->RingRecNote->setlpf(3000);
+    	rkr->RingRecNote->sethpf(300);
+    	break;
+
+};
+}
+void RKRGUI::cb_RC_Ring_Opti(Fl_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_Ring_Opti_i(o,v);
+}
+
+Fl_Menu_Item RKRGUI::menu_RC_Ring_Opti[] = {
  {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
@@ -21718,14 +21794,14 @@ e a stompbox Opto Trem");
     Order->end();
     Order->resizable(Order);
   } // Fl_Double_Window* Order
-  { Settings = new Fl_Double_Window(640, 528);
+  { Settings = new Fl_Double_Window(640, 580);
     Settings->color((Fl_Color)4);
     Settings->callback((Fl_Callback*)cb_Settings, (void*)(this));
-    { Fondo2 = new Fl_Box(1, 1, 640, 528);
+    { Fondo2 = new Fl_Box(1, 1, 640, 580);
     } // Fl_Box* Fondo2
-    { STabs = new Fl_Tabs(0, 0, 636, 535);
+    { STabs = new Fl_Tabs(0, 0, 636, 606);
       STabs->user_data((void*)(1));
-      { Look = new Fl_Group(5, 26, 630, 502, "Look");
+      { Look = new Fl_Group(5, 26, 630, 554, "Look");
         Look->box(FL_DOWN_FRAME);
         Look->labelfont(1);
         Look->labelcolor(FL_BACKGROUND2_COLOR);
@@ -21806,13 +21882,13 @@ e a stompbox Opto Trem");
         } // Fl_Check_Button* Enable_DeacHide
         Look->end();
       } // Fl_Group* Look
-      { AUDIO_SET = new Fl_Group(0, 26, 635, 502, "Audio");
+      { AUDIO_SET = new Fl_Group(5, 26, 630, 554, "Audio");
         AUDIO_SET->box(FL_DOWN_FRAME);
         AUDIO_SET->labelfont(1);
         AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        { Fondo7 = new Fl_Box(5, 26, 630, 502);
+        { Fondo7 = new Fl_Box(0, 26, 635, 553);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
           INSTATE->down_box(FL_DOWN_BOX);
@@ -21966,16 +22042,37 @@ e a stompbox Opto Trem");
           RTrigger->align(Fl_Align(FL_ALIGN_LEFT));
           o->lstep(0.1);
         } // Fl_Counter* RTrigger
-        { RC_Opti = new Fl_Choice(160, 277, 72, 18, "Recognize Note Optimization");
-          RC_Opti->down_box(FL_BORDER_BOX);
-          RC_Opti->labelsize(10);
-          RC_Opti->labelcolor(FL_BACKGROUND2_COLOR);
-          RC_Opti->textsize(10);
-          RC_Opti->textcolor(FL_BACKGROUND2_COLOR);
-          RC_Opti->callback((Fl_Callback*)cb_RC_Opti);
-          RC_Opti->menu(menu_RC_Opti);
-        } // Fl_Choice* RC_Opti
-        { Har_Downsample = new Fl_Choice(145, 306, 70, 18, "Harmonizer Downsample ");
+        { RC_Harm_Opti = new Fl_Choice(165, 297, 72, 18, "Harmonizer");
+          RC_Harm_Opti->down_box(FL_BORDER_BOX);
+          RC_Harm_Opti->labelsize(10);
+          RC_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
+          RC_Harm_Opti->textsize(10);
+          RC_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
+          RC_Harm_Opti->callback((Fl_Callback*)cb_RC_Harm_Opti);
+          RC_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
+          RC_Harm_Opti->menu(menu_RC_Harm_Opti);
+        } // Fl_Choice* RC_Harm_Opti
+        { RC_St_Harm_Opti = new Fl_Choice(265, 297, 72, 18, "Stereo Harmonizer");
+          RC_St_Harm_Opti->down_box(FL_BORDER_BOX);
+          RC_St_Harm_Opti->labelsize(10);
+          RC_St_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
+          RC_St_Harm_Opti->textsize(10);
+          RC_St_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
+          RC_St_Harm_Opti->callback((Fl_Callback*)cb_RC_St_Harm_Opti);
+          RC_St_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
+          RC_St_Harm_Opti->menu(menu_RC_St_Harm_Opti);
+        } // Fl_Choice* RC_St_Harm_Opti
+        { RC_Ring_Opti = new Fl_Choice(365, 297, 72, 18, "Ring");
+          RC_Ring_Opti->down_box(FL_BORDER_BOX);
+          RC_Ring_Opti->labelsize(10);
+          RC_Ring_Opti->labelcolor(FL_BACKGROUND2_COLOR);
+          RC_Ring_Opti->textsize(10);
+          RC_Ring_Opti->textcolor(FL_BACKGROUND2_COLOR);
+          RC_Ring_Opti->callback((Fl_Callback*)cb_RC_Ring_Opti);
+          RC_Ring_Opti->align(Fl_Align(FL_ALIGN_TOP));
+          RC_Ring_Opti->menu(menu_RC_Ring_Opti);
+        } // Fl_Choice* RC_Ring_Opti
+        { Har_Downsample = new Fl_Choice(145, 336, 70, 18, "Harmonizer Downsample ");
           Har_Downsample->down_box(FL_BORDER_BOX);
           Har_Downsample->labelsize(10);
           Har_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
@@ -21984,7 +22081,7 @@ e a stompbox Opto Trem");
           Har_Downsample->callback((Fl_Callback*)cb_Har_Downsample);
           Har_Downsample->menu(menu_Har_Downsample);
         } // Fl_Choice* Har_Downsample
-        { Fl_Choice* o = Har_Down_Qua = new Fl_Choice(250, 306, 72, 18, "Down");
+        { Fl_Choice* o = Har_Down_Qua = new Fl_Choice(250, 336, 72, 18, "Down");
           Har_Down_Qua->down_box(FL_BORDER_BOX);
           Har_Down_Qua->labelsize(10);
           Har_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -21993,7 +22090,7 @@ e a stompbox Opto Trem");
           Har_Down_Qua->callback((Fl_Callback*)cb_Har_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Har_Down_Qua
-        { Fl_Choice* o = Har_Up_Qua = new Fl_Choice(343, 306, 72, 18, "Up");
+        { Fl_Choice* o = Har_Up_Qua = new Fl_Choice(343, 336, 72, 18, "Up");
           Har_Up_Qua->down_box(FL_BORDER_BOX);
           Har_Up_Qua->labelsize(10);
           Har_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22002,7 +22099,7 @@ e a stompbox Opto Trem");
           Har_Up_Qua->callback((Fl_Callback*)cb_Har_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Har_Up_Qua
-        { Fl_Choice* o = Rev_Downsample = new Fl_Choice(145, 329, 70, 18, "Reverbtron Downsample  ");
+        { Fl_Choice* o = Rev_Downsample = new Fl_Choice(145, 359, 70, 18, "Reverbtron Downsample  ");
           Rev_Downsample->down_box(FL_BORDER_BOX);
           Rev_Downsample->labelsize(10);
           Rev_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22011,7 +22108,7 @@ e a stompbox Opto Trem");
           Rev_Downsample->callback((Fl_Callback*)cb_Rev_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Rev_Downsample
-        { Fl_Choice* o = Rev_Down_Qua = new Fl_Choice(250, 329, 72, 18, "Down");
+        { Fl_Choice* o = Rev_Down_Qua = new Fl_Choice(250, 359, 72, 18, "Down");
           Rev_Down_Qua->down_box(FL_BORDER_BOX);
           Rev_Down_Qua->labelsize(10);
           Rev_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22020,7 +22117,7 @@ e a stompbox Opto Trem");
           Rev_Down_Qua->callback((Fl_Callback*)cb_Rev_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Rev_Down_Qua
-        { Fl_Choice* o = Rev_Up_Qua = new Fl_Choice(343, 329, 72, 18, "Up");
+        { Fl_Choice* o = Rev_Up_Qua = new Fl_Choice(343, 359, 72, 18, "Up");
           Rev_Up_Qua->down_box(FL_BORDER_BOX);
           Rev_Up_Qua->labelsize(10);
           Rev_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22029,7 +22126,7 @@ e a stompbox Opto Trem");
           Rev_Up_Qua->callback((Fl_Callback*)cb_Rev_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Rev_Up_Qua
-        { Fl_Choice* o = Con_Downsample = new Fl_Choice(145, 352, 70, 18, "Convolotron Downsample");
+        { Fl_Choice* o = Con_Downsample = new Fl_Choice(145, 382, 70, 18, "Convolotron Downsample");
           Con_Downsample->down_box(FL_BORDER_BOX);
           Con_Downsample->labelsize(10);
           Con_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22038,7 +22135,7 @@ e a stompbox Opto Trem");
           Con_Downsample->callback((Fl_Callback*)cb_Con_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Con_Downsample
-        { Fl_Choice* o = Con_Down_Qua = new Fl_Choice(250, 352, 72, 18, "Down");
+        { Fl_Choice* o = Con_Down_Qua = new Fl_Choice(250, 382, 72, 18, "Down");
           Con_Down_Qua->down_box(FL_BORDER_BOX);
           Con_Down_Qua->labelsize(10);
           Con_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22047,7 +22144,7 @@ e a stompbox Opto Trem");
           Con_Down_Qua->callback((Fl_Callback*)cb_Con_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Con_Down_Qua
-        { Fl_Choice* o = Con_Up_Qua = new Fl_Choice(343, 352, 72, 18, "Up");
+        { Fl_Choice* o = Con_Up_Qua = new Fl_Choice(343, 382, 72, 18, "Up");
           Con_Up_Qua->down_box(FL_BORDER_BOX);
           Con_Up_Qua->labelsize(10);
           Con_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22056,7 +22153,7 @@ e a stompbox Opto Trem");
           Con_Up_Qua->callback((Fl_Callback*)cb_Con_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Con_Up_Qua
-        { Fl_Choice* o = Seq_Downsample = new Fl_Choice(145, 375, 70, 18, "Sequence Downsample    ");
+        { Fl_Choice* o = Seq_Downsample = new Fl_Choice(145, 405, 70, 18, "Sequence Downsample    ");
           Seq_Downsample->down_box(FL_BORDER_BOX);
           Seq_Downsample->labelsize(10);
           Seq_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22065,7 +22162,7 @@ e a stompbox Opto Trem");
           Seq_Downsample->callback((Fl_Callback*)cb_Seq_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Seq_Downsample
-        { Fl_Choice* o = Seq_Down_Qua = new Fl_Choice(250, 375, 72, 18, "Down");
+        { Fl_Choice* o = Seq_Down_Qua = new Fl_Choice(250, 405, 72, 18, "Down");
           Seq_Down_Qua->down_box(FL_BORDER_BOX);
           Seq_Down_Qua->labelsize(10);
           Seq_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22074,7 +22171,7 @@ e a stompbox Opto Trem");
           Seq_Down_Qua->callback((Fl_Callback*)cb_Seq_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Seq_Down_Qua
-        { Fl_Choice* o = Seq_Up_Qua = new Fl_Choice(343, 375, 72, 18, "Up");
+        { Fl_Choice* o = Seq_Up_Qua = new Fl_Choice(343, 405, 72, 18, "Up");
           Seq_Up_Qua->down_box(FL_BORDER_BOX);
           Seq_Up_Qua->labelsize(10);
           Seq_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22083,7 +22180,7 @@ e a stompbox Opto Trem");
           Seq_Up_Qua->callback((Fl_Callback*)cb_Seq_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Seq_Up_Qua
-        { Fl_Choice* o = Shi_Downsample = new Fl_Choice(145, 398, 70, 18, "Shifter Downsample         ");
+        { Fl_Choice* o = Shi_Downsample = new Fl_Choice(145, 428, 70, 18, "Shifter Downsample         ");
           Shi_Downsample->down_box(FL_BORDER_BOX);
           Shi_Downsample->labelsize(10);
           Shi_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22092,7 +22189,7 @@ e a stompbox Opto Trem");
           Shi_Downsample->callback((Fl_Callback*)cb_Shi_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Shi_Downsample
-        { Fl_Choice* o = Shi_Down_Qua = new Fl_Choice(250, 398, 72, 18, "Down");
+        { Fl_Choice* o = Shi_Down_Qua = new Fl_Choice(250, 428, 72, 18, "Down");
           Shi_Down_Qua->down_box(FL_BORDER_BOX);
           Shi_Down_Qua->labelsize(10);
           Shi_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22101,7 +22198,7 @@ e a stompbox Opto Trem");
           Shi_Down_Qua->callback((Fl_Callback*)cb_Shi_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Shi_Down_Qua
-        { Fl_Choice* o = Shi_Up_Qua = new Fl_Choice(343, 398, 72, 18, "Up");
+        { Fl_Choice* o = Shi_Up_Qua = new Fl_Choice(343, 428, 72, 18, "Up");
           Shi_Up_Qua->down_box(FL_BORDER_BOX);
           Shi_Up_Qua->labelsize(10);
           Shi_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22110,7 +22207,7 @@ e a stompbox Opto Trem");
           Shi_Up_Qua->callback((Fl_Callback*)cb_Shi_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Shi_Up_Qua
-        { Fl_Choice* o = Voc_Downsample = new Fl_Choice(145, 422, 70, 18, "Vocoder Downsample      ");
+        { Fl_Choice* o = Voc_Downsample = new Fl_Choice(145, 452, 70, 18, "Vocoder Downsample      ");
           Voc_Downsample->down_box(FL_BORDER_BOX);
           Voc_Downsample->labelsize(10);
           Voc_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22119,7 +22216,7 @@ e a stompbox Opto Trem");
           Voc_Downsample->callback((Fl_Callback*)cb_Voc_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Voc_Downsample
-        { Fl_Choice* o = Voc_Down_Qua = new Fl_Choice(250, 422, 72, 18, "Down");
+        { Fl_Choice* o = Voc_Down_Qua = new Fl_Choice(250, 452, 72, 18, "Down");
           Voc_Down_Qua->down_box(FL_BORDER_BOX);
           Voc_Down_Qua->labelsize(10);
           Voc_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22128,7 +22225,7 @@ e a stompbox Opto Trem");
           Voc_Down_Qua->callback((Fl_Callback*)cb_Voc_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Voc_Down_Qua
-        { Fl_Choice* o = Voc_Up_Qua = new Fl_Choice(343, 422, 72, 18, "Up");
+        { Fl_Choice* o = Voc_Up_Qua = new Fl_Choice(343, 452, 72, 18, "Up");
           Voc_Up_Qua->down_box(FL_BORDER_BOX);
           Voc_Up_Qua->labelsize(10);
           Voc_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22137,7 +22234,7 @@ e a stompbox Opto Trem");
           Voc_Up_Qua->callback((Fl_Callback*)cb_Voc_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Voc_Up_Qua
-        { Fl_Choice* o = Ste_Downsample = new Fl_Choice(145, 447, 70, 18, "StereoHarm Downsample");
+        { Fl_Choice* o = Ste_Downsample = new Fl_Choice(145, 477, 70, 18, "StereoHarm Downsample");
           Ste_Downsample->down_box(FL_BORDER_BOX);
           Ste_Downsample->labelsize(10);
           Ste_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22146,7 +22243,7 @@ e a stompbox Opto Trem");
           Ste_Downsample->callback((Fl_Callback*)cb_Ste_Downsample);
           o->menu(menu_Har_Downsample);
         } // Fl_Choice* Ste_Downsample
-        { Fl_Choice* o = Ste_Down_Qua = new Fl_Choice(250, 447, 72, 18, "Down");
+        { Fl_Choice* o = Ste_Down_Qua = new Fl_Choice(250, 477, 72, 18, "Down");
           Ste_Down_Qua->down_box(FL_BORDER_BOX);
           Ste_Down_Qua->labelsize(10);
           Ste_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22155,7 +22252,7 @@ e a stompbox Opto Trem");
           Ste_Down_Qua->callback((Fl_Callback*)cb_Ste_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Ste_Down_Qua
-        { Fl_Choice* o = Ste_Up_Qua = new Fl_Choice(343, 447, 72, 18, "Up");
+        { Fl_Choice* o = Ste_Up_Qua = new Fl_Choice(343, 477, 72, 18, "Up");
           Ste_Up_Qua->down_box(FL_BORDER_BOX);
           Ste_Up_Qua->labelsize(10);
           Ste_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22164,7 +22261,7 @@ e a stompbox Opto Trem");
           Ste_Up_Qua->callback((Fl_Callback*)cb_Ste_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Ste_Up_Qua
-        { Wave_Amo = new Fl_Choice(145, 497, 70, 18, "Waveshape Resampling   ");
+        { Wave_Amo = new Fl_Choice(145, 527, 70, 18, "Waveshape Resampling   ");
           Wave_Amo->down_box(FL_BORDER_BOX);
           Wave_Amo->labelsize(10);
           Wave_Amo->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22173,7 +22270,7 @@ e a stompbox Opto Trem");
           Wave_Amo->callback((Fl_Callback*)cb_Wave_Amo);
           Wave_Amo->menu(menu_Wave_Amo);
         } // Fl_Choice* Wave_Amo
-        { Fl_Choice* o = Wave_Down_Qua = new Fl_Choice(252, 497, 72, 18, "Down");
+        { Fl_Choice* o = Wave_Down_Qua = new Fl_Choice(252, 527, 72, 18, "Down");
           Wave_Down_Qua->down_box(FL_BORDER_BOX);
           Wave_Down_Qua->labelsize(10);
           Wave_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22182,7 +22279,7 @@ e a stompbox Opto Trem");
           Wave_Down_Qua->callback((Fl_Callback*)cb_Wave_Down_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Wave_Down_Qua
-        { Fl_Choice* o = Wave_Up_Qua = new Fl_Choice(345, 497, 72, 18, "Up");
+        { Fl_Choice* o = Wave_Up_Qua = new Fl_Choice(345, 527, 72, 18, "Up");
           Wave_Up_Qua->down_box(FL_BORDER_BOX);
           Wave_Up_Qua->labelsize(10);
           Wave_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22191,9 +22288,14 @@ e a stompbox Opto Trem");
           Wave_Up_Qua->callback((Fl_Callback*)cb_Wave_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Wave_Up_Qua
+        { Recognize_Label = new Fl_Box(10, 298, 150, 17, "Recognize Note Otimization");
+          Recognize_Label->labelsize(10);
+          Recognize_Label->user_data((void*)(7));
+          Recognize_Label->when(FL_WHEN_NEVER);
+        } // Fl_Box* Recognize_Label
         AUDIO_SET->end();
       } // Fl_Group* AUDIO_SET
-      { MIDI_SET = new Fl_Group(5, 26, 630, 502, "MIDI");
+      { MIDI_SET = new Fl_Group(5, 26, 630, 554, "MIDI");
         MIDI_SET->box(FL_DOWN_FRAME);
         MIDI_SET->labelfont(1);
         MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22289,7 +22391,7 @@ e a stompbox Opto Trem");
         } // Fl_Scroll* scroll
         MIDI_SET->end();
       } // Fl_Group* MIDI_SET
-      { JACK_SET = new Fl_Group(5, 26, 630, 502, "Jack");
+      { JACK_SET = new Fl_Group(5, 26, 630, 554, "Jack");
         JACK_SET->box(FL_DOWN_FRAME);
         JACK_SET->labelfont(1);
         JACK_SET->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22332,7 +22434,7 @@ e a stompbox Opto Trem");
         } // Fl_Browser* JackIn
         JACK_SET->end();
       } // Fl_Group* JACK_SET
-      { MISC_SET = new Fl_Group(5, 26, 630, 502, "Misc");
+      { MISC_SET = new Fl_Group(5, 26, 630, 554, "Misc");
         MISC_SET->box(FL_DOWN_FRAME);
         MISC_SET->labelfont(1);
         MISC_SET->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22371,7 +22473,7 @@ e a stompbox Opto Trem");
         } // Fl_Check_Button* ENA_TOOL
         MISC_SET->end();
       } // Fl_Group* MISC_SET
-      { BANK_SET = new Fl_Group(5, 26, 630, 502, "Bank");
+      { BANK_SET = new Fl_Group(5, 26, 630, 554, "Bank");
         BANK_SET->box(FL_DOWN_FRAME);
         BANK_SET->labelfont(1);
         BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22404,7 +22506,7 @@ e a stompbox Opto Trem");
       } // Fl_Group* BANK_SET
       STabs->end();
     } // Fl_Tabs* STabs
-    Settings->size_range(640, 528);
+    Settings->size_range(740, 528);
     Settings->end();
   } // Fl_Double_Window* Settings
   { MIDILearn = new Fl_Double_Window(640, 480);
@@ -23090,9 +23192,17 @@ void RKRGUI::load_stat() {
   }  
   
   
-  rakarrack.get(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti,0);
-  RC_Opti->value(rkr->RCOpti);
-  RC_Opti->do_callback();
+  rakarrack.get(rkr->PrefNom("Recognize Optimization Harmonizer"),rkr->RCOpti_Harm,0);
+  RC_Harm_Opti->value(rkr->RCOpti_Harm);
+  RC_Harm_Opti->do_callback();
+  
+  rakarrack.get(rkr->PrefNom("Recognize Optimization Stereo Harm"),rkr->RCOpti_Stereo,0);
+  RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
+  RC_St_Harm_Opti->do_callback();
+  
+  rakarrack.get(rkr->PrefNom("Recognize Optimization Ring"),rkr->RCOpti_Ring,0);
+  RC_Ring_Opti->value(rkr->RCOpti_Ring);
+  RC_Ring_Opti->do_callback();
   
   
   //MIDIConverter
@@ -23381,7 +23491,11 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("Limiter Position"),rkr->flpos);
   rakarrack.set(rkr->PrefNom("Limiter +6dB"),rkr->db6booster);
   
-  rakarrack.set(rkr->PrefNom("Recognize Optimization"),rkr->RCOpti);
+  rakarrack.set(rkr->PrefNom("Recognize Optimization Harmonizer"),rkr->RCOpti_Harm);
+  rakarrack.set(rkr->PrefNom("Recognize Optimization Stereo Harm"),rkr->RCOpti_Stereo);
+  rakarrack.set(rkr->PrefNom("Recognize Optimization Ring"),rkr->RCOpti_Ring);
+  
+  
   rakarrack.set(rkr->PrefNom("Harmonizer Downsample"),rkr->Har_Down);
   rakarrack.set(rkr->PrefNom("Harmonizer Up Quality"),rkr->Har_U_Q);
   rakarrack.set(rkr->PrefNom("Harmonizer Down Quality"),rkr->Har_D_Q);
@@ -24937,8 +25051,10 @@ void RKRGUI::MiraConfig() {
   Wave_Up_Qua->value(rkr->Wave_up_q);
   Wave_Down_Qua->value(rkr->Wave_down_q);
   Calibration->value(rkr->aFreq);
-  RTrigger->value(rkr->RecNote->trigfact);
-  RC_Opti->value(rkr->RCOpti);
+  RTrigger->value(rkr->HarmRecNote->trigfact);
+  RC_Harm_Opti->value(rkr->RCOpti_Harm);
+  RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
+  RC_Ring_Opti->value(rkr->RCOpti_Ring);
   
   
   switch(rkr->VocBands)

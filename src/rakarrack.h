@@ -4014,11 +4014,23 @@ private:
   inline void cb_RTrigger_i(Fl_Counter*, void*);
   static void cb_RTrigger(Fl_Counter*, void*);
 public:
-  Fl_Choice *RC_Opti;
+  Fl_Choice *RC_Harm_Opti;
 private:
-  inline void cb_RC_Opti_i(Fl_Choice*, void*);
-  static void cb_RC_Opti(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_RC_Opti[];
+  inline void cb_RC_Harm_Opti_i(Fl_Choice*, void*);
+  static void cb_RC_Harm_Opti(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_RC_Harm_Opti[];
+public:
+  Fl_Choice *RC_St_Harm_Opti;
+private:
+  inline void cb_RC_St_Harm_Opti_i(Fl_Choice*, void*);
+  static void cb_RC_St_Harm_Opti(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_RC_St_Harm_Opti[];
+public:
+  Fl_Choice *RC_Ring_Opti;
+private:
+  inline void cb_RC_Ring_Opti_i(Fl_Choice*, void*);
+  static void cb_RC_Ring_Opti(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_RC_Ring_Opti[];
 public:
   Fl_Choice *Har_Downsample;
 private:
@@ -4142,6 +4154,7 @@ private:
   inline void cb_Wave_Up_Qua_i(Fl_Choice*, void*);
   static void cb_Wave_Up_Qua(Fl_Choice*, void*);
 public:
+  Fl_Box *Recognize_Label;
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;
