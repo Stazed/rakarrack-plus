@@ -974,7 +974,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 27:
         if (Harmonizer_Bypass) {
             Harmonizer_Bypass = 0;
-            efx_Har->changepar (3, value);
+            efx_Har->changepar (3, (int)((float)value*.18897638f));
             Harmonizer_Bypass = 1;
         }
         break;
