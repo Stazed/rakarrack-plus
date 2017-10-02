@@ -133,7 +133,6 @@ RKR::midievents()
 
                 }
 
-
                 if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo == 0)) {
 
                     if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote)) {
@@ -144,7 +143,6 @@ RKR::midievents()
 
                 }
 
-
                 if (midievent->type == SND_SEQ_EVENT_NOTEOFF) {
 
                     if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote)) {
@@ -152,12 +150,42 @@ RKR::midievents()
                         RC_Harm->gate[i] = 0;
                         break;
                     }
-
                 }
             }
+        }
+        
+        if (midievent->data.note.channel == StereoHarCh) {
+            for (i = 0; i < POLY; i++) {
+                if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0)) {
+                    if (RC_Stereo_Harm->note_active[i] == 0) {
+                        RC_Stereo_Harm->note_active[i] = 1;
+                        RC_Stereo_Harm->rnote[i] = cmdnote;
+                        RC_Stereo_Harm->gate[i] = 1;
+                        RC_Stereo_Harm->MiraChord ();
+                        break;
+                    }
 
+                }
 
+                if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo == 0)) {
 
+                    if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == cmdnote)) {
+                        RC_Stereo_Harm->note_active[i] = 0;
+                        RC_Stereo_Harm->gate[i] = 0;
+                        break;
+                    }
+
+                }
+
+                if (midievent->type == SND_SEQ_EVENT_NOTEOFF) {
+
+                    if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == cmdnote)) {
+                        RC_Stereo_Harm->note_active[i] = 0;
+                        RC_Stereo_Harm->gate[i] = 0;
+                        break;
+                    }
+                }
+            }
         }
 
 
@@ -780,7 +808,6 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
 
                 }
 
-
                 if ((type==9) && (cmdvelo == 0)) {
 
                     if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote)) {
@@ -798,18 +825,45 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
                         RC_Harm->gate[i] = 0;
                         break;
                     }
-
                 }
             }
+        }
+        
+        if (cmdchan == StereoHarCh) {
+            for (i = 0; i < POLY; i++) {
+                if ((type==9) && (cmdvelo != 0)) {
+                    if (RC_Stereo_Harm->note_active[i] == 0) {
+                        RC_Stereo_Harm->note_active[i] = 1;
+                        RC_Stereo_Harm->rnote[i] = cmdnote;
+                        RC_Stereo_Harm->gate[i] = 1;
+                        RC_Stereo_Harm->MiraChord ();
+                        break;
+                    }
 
+                }
 
+                if ((type==9) && (cmdvelo == 0)) {
 
+                    if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == cmdnote)) {
+                        RC_Stereo_Harm->note_active[i] = 0;
+                        RC_Stereo_Harm->gate[i] = 0;
+                        break;
+                    }
+
+                }
+
+                if (type==8) {
+
+                    if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == cmdnote)) {
+                        RC_Stereo_Harm->note_active[i] = 0;
+                        RC_Stereo_Harm->gate[i] = 0;
+                        break;
+                    }
+                }
+            }
         }
 
-
     }
-
-
 
 
 

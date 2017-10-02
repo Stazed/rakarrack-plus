@@ -11242,7 +11242,7 @@ unlight_preset(rkr->Selected_Preset);
     }
     Fl_Window Order {
       callback {save_stat(2);
-Order->hide();} selected
+Order->hide();}
       xywh {759 49 500 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
@@ -11397,8 +11397,8 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();} open
-      xywh {205 325 640 580} type Double color 4 hide size_range {740 554 0 0}
+Settings->hide();}
+      xywh {759 407 640 580} type Double color 4 hide size_range {740 554 0 0}
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 580}
@@ -11413,7 +11413,7 @@ Settings->hide();} open
           xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo6 {
-            xywh {5 26 630 502}
+            xywh {5 26 630 554}
           }
           Fl_Choice scheme_ch {
             label Schema
@@ -11572,10 +11572,10 @@ PutBackground();}
         Fl_Group AUDIO_SET {
           label Audio
           user_data 1
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo7 {
-            xywh {0 26 635 553}
+            xywh {0 26 635 554}
           }
           Fl_Check_Button INSTATE {
             label {FX On at start}
@@ -12227,10 +12227,10 @@ Show_Next_Time();}
         Fl_Group MIDI_SET {
           label MIDI
           user_data 1
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo8 {
-            xywh {5 26 630 502}
+            xywh {5 26 630 554}
           }
           Fl_Check_Button D_A_Connect {
             label {Auto Connect MIDI In}
@@ -12261,34 +12261,39 @@ rkr->Conecta();}
             callback {rkr->HarCh=(int)o->value()-1;}
             xywh {162 235 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
           }
+          Fl_Counter Stereo_Har_In_Counter {
+            label {Stereo Harmonizer Receive Channel}
+            callback {rkr->StereoHarCh=(int)o->value()-1;}
+            xywh {200 276 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
+          }
           Fl_Group wMIDI {
             label {MIDI implementation}
-            xywh {15 285 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
+            xywh {15 325 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
           } {
             Fl_Check_Button Mw0 {
               label Default
               callback {rkr->MIDIway=0;
 ML_Menu->deactivate();}
-              xywh {72 287 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+              xywh {72 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
             }
             Fl_Check_Button Mw1 {
               label {MIDI Learn}
               callback {rkr->MIDIway=1;
 ML_Menu->activate();}
-              xywh {183 287 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+              xywh {183 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
             }
           }
           Fl_Check_Button AAssign {
             label {Auto Assign MIDI Learn}
             callback {rkr->autoassign=o->value();}
-            xywh {134 319 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+            xywh {134 359 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
           }
           Fl_Check_Button MTable {
             label {MIDI Program Change Table}
             callback {rkr->midi_table=o->value();
 if(rkr->midi_table) scroll->activate(); else 
 scroll->deactivate();}
-            xywh {157 337 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+            xywh {157 377 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
           }
           Fl_Scroll scroll {
             user_data 5000 open
@@ -12301,7 +12306,7 @@ scroll->deactivate();}
           xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo9 {
-            xywh {5 26 630 502}
+            xywh {5 26 630 554}
           }
           Fl_Check_Button D_J_Connect {
             label {Auto Connect Out}
@@ -12332,7 +12337,7 @@ else JackIn->deactivate();}
           xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo10 {
-            xywh {5 26 630 502}
+            xywh {5 26 630 554}
           }
           Fl_Input Username {
             label {Username:}
@@ -12358,11 +12363,11 @@ Fl_Tooltip::enable(rkr->ena_tool);}
         }
         Fl_Group BANK_SET {
           label Bank
-          user_data 1
+          user_data 1 open
           xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo11 {
-            xywh {5 26 630 502}
+            xywh {5 26 630 554}
           }
           Fl_File_Input BFiname {
             label {Bank Filename}
@@ -13105,6 +13110,9 @@ rkr->MidiCh--;
 
 rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh,1);
 rkr->HarCh--;
+rakarrack.get(rkr->PrefNom("MIDI IN Stereo Harmonizer"),rkr->StereoHarCh,1);
+rkr->StereoHarCh--;
+
 rakarrack.get(rkr->PrefNom("Limiter Position"),rkr->flpos,0);
 rakarrack.get(rkr->PrefNom("Limiter +6dB"),rkr->db6booster,0);
 rakarrack.get(rkr->PrefNom("Booster"),rkr->booster,1.0f);
@@ -13496,6 +13504,7 @@ if (temp!=NULL)
 rakarrack.set(rkr->PrefNom("MIDI IN Device"),temp);
 rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
 rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
+rakarrack.set(rkr->PrefNom("MIDI IN Stereo Harmonizer"),rkr->StereoHarCh+1);
 rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
 rakarrack.set(rkr->PrefNom("StereoHarm Quality"),rkr->SteQual);
 rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
@@ -15025,6 +15034,7 @@ D_IJ_Connect->value(rkr->aconnect_JIA);
 
 Midi_In_Counter->value(rkr->MidiCh+1);
 Har_In_Counter->value(rkr->HarCh+1);
+Stereo_Har_In_Counter->value(rkr->StereoHarCh+1);
 
 switch(rkr->HarQual)
 {
@@ -15151,7 +15161,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {}
+Font_Bro->value(rkr->font+1);} {selected
+    }
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];

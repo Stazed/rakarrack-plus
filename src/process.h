@@ -322,6 +322,7 @@ public:
     int active[12];
     int MidiCh;
     int HarCh;
+    int StereoHarCh;
     int init_state;
     int actuvol;
     int help_displayed;

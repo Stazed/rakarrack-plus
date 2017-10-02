@@ -11270,6 +11270,13 @@ void RKRGUI::cb_Har_In_Counter(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_In_Counter_i(o,v);
 }
 
+void RKRGUI::cb_Stereo_Har_In_Counter_i(Fl_Counter* o, void*) {
+  rkr->StereoHarCh=(int)o->value()-1;
+}
+void RKRGUI::cb_Stereo_Har_In_Counter(Fl_Counter* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Stereo_Har_In_Counter_i(o,v);
+}
+
 void RKRGUI::cb_Mw0_i(Fl_Check_Button*, void*) {
   rkr->MIDIway=0;
 ML_Menu->deactivate();
@@ -21808,7 +21815,7 @@ e a stompbox Opto Trem");
         Look->user_data((void*)(1));
         Look->align(Fl_Align(FL_ALIGN_LEFT));
         Look->hide();
-        { Fondo6 = new Fl_Box(5, 26, 630, 502);
+        { Fondo6 = new Fl_Box(5, 26, 630, 554);
         } // Fl_Box* Fondo6
         { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
           scheme_ch->down_box(FL_BORDER_BOX);
@@ -21882,13 +21889,14 @@ e a stompbox Opto Trem");
         } // Fl_Check_Button* Enable_DeacHide
         Look->end();
       } // Fl_Group* Look
-      { AUDIO_SET = new Fl_Group(5, 26, 630, 554, "Audio");
+      { AUDIO_SET = new Fl_Group(0, 26, 635, 554, "Audio");
         AUDIO_SET->box(FL_DOWN_FRAME);
         AUDIO_SET->labelfont(1);
         AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        { Fondo7 = new Fl_Box(0, 26, 635, 553);
+        AUDIO_SET->hide();
+        { Fondo7 = new Fl_Box(0, 26, 635, 554);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
           INSTATE->down_box(FL_DOWN_BOX);
@@ -22301,8 +22309,7 @@ e a stompbox Opto Trem");
         MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
         MIDI_SET->user_data((void*)(1));
         MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        MIDI_SET->hide();
-        { Fondo8 = new Fl_Box(5, 26, 630, 502);
+        { Fondo8 = new Fl_Box(5, 26, 630, 554);
         } // Fl_Box* Fondo8
         { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
           D_A_Connect->down_box(FL_DOWN_BOX);
@@ -22347,12 +22354,25 @@ e a stompbox Opto Trem");
           Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
           Har_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
         } // Fl_Counter* Har_In_Counter
-        { wMIDI = new Fl_Group(15, 285, 273, 23, "MIDI implementation");
+        { Stereo_Har_In_Counter = new Fl_Counter(200, 276, 60, 24, "Stereo Harmonizer Receive Channel");
+          Stereo_Har_In_Counter->type(1);
+          Stereo_Har_In_Counter->color((Fl_Color)25);
+          Stereo_Har_In_Counter->labelsize(10);
+          Stereo_Har_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
+          Stereo_Har_In_Counter->minimum(1);
+          Stereo_Har_In_Counter->maximum(16);
+          Stereo_Har_In_Counter->step(1);
+          Stereo_Har_In_Counter->value(1);
+          Stereo_Har_In_Counter->textsize(11);
+          Stereo_Har_In_Counter->callback((Fl_Callback*)cb_Stereo_Har_In_Counter);
+          Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
+        } // Fl_Counter* Stereo_Har_In_Counter
+        { wMIDI = new Fl_Group(15, 325, 273, 23, "MIDI implementation");
           wMIDI->box(FL_DOWN_FRAME);
           wMIDI->labelsize(10);
           wMIDI->labelcolor(FL_BACKGROUND2_COLOR);
           wMIDI->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-          { Mw0 = new Fl_Check_Button(72, 287, 18, 18, "Default");
+          { Mw0 = new Fl_Check_Button(72, 327, 18, 18, "Default");
             Mw0->type(102);
             Mw0->down_box(FL_DOWN_BOX);
             Mw0->labelsize(11);
@@ -22360,7 +22380,7 @@ e a stompbox Opto Trem");
             Mw0->callback((Fl_Callback*)cb_Mw0);
             Mw0->align(Fl_Align(FL_ALIGN_LEFT));
           } // Fl_Check_Button* Mw0
-          { Mw1 = new Fl_Check_Button(183, 287, 18, 18, "MIDI Learn");
+          { Mw1 = new Fl_Check_Button(183, 327, 18, 18, "MIDI Learn");
             Mw1->type(102);
             Mw1->down_box(FL_DOWN_BOX);
             Mw1->labelsize(11);
@@ -22370,14 +22390,14 @@ e a stompbox Opto Trem");
           } // Fl_Check_Button* Mw1
           wMIDI->end();
         } // Fl_Group* wMIDI
-        { AAssign = new Fl_Check_Button(134, 319, 16, 15, "Auto Assign MIDI Learn");
+        { AAssign = new Fl_Check_Button(134, 359, 16, 15, "Auto Assign MIDI Learn");
           AAssign->down_box(FL_DOWN_BOX);
           AAssign->labelsize(10);
           AAssign->labelcolor(FL_BACKGROUND2_COLOR);
           AAssign->callback((Fl_Callback*)cb_AAssign);
           AAssign->align(Fl_Align(FL_ALIGN_LEFT));
         } // Fl_Check_Button* AAssign
-        { MTable = new Fl_Check_Button(157, 337, 16, 15, "MIDI Program Change Table");
+        { MTable = new Fl_Check_Button(157, 377, 16, 15, "MIDI Program Change Table");
           MTable->down_box(FL_DOWN_BOX);
           MTable->labelsize(10);
           MTable->labelcolor(FL_BACKGROUND2_COLOR);
@@ -22398,7 +22418,7 @@ e a stompbox Opto Trem");
         JACK_SET->user_data((void*)(1));
         JACK_SET->align(Fl_Align(FL_ALIGN_LEFT));
         JACK_SET->hide();
-        { Fondo9 = new Fl_Box(5, 26, 630, 502);
+        { Fondo9 = new Fl_Box(5, 26, 630, 554);
         } // Fl_Box* Fondo9
         { D_J_Connect = new Fl_Check_Button(114, 40, 25, 20, "Auto Connect Out");
           D_J_Connect->down_box(FL_DOWN_BOX);
@@ -22441,7 +22461,7 @@ e a stompbox Opto Trem");
         MISC_SET->user_data((void*)(1));
         MISC_SET->align(Fl_Align(FL_ALIGN_LEFT));
         MISC_SET->hide();
-        { Fondo10 = new Fl_Box(5, 26, 630, 502);
+        { Fondo10 = new Fl_Box(5, 26, 630, 554);
         } // Fl_Box* Fondo10
         { Username = new Fl_Input(80, 32, 240, 21, "Username:");
           Username->labelsize(11);
@@ -22480,7 +22500,7 @@ e a stompbox Opto Trem");
         BANK_SET->user_data((void*)(1));
         BANK_SET->align(Fl_Align(FL_ALIGN_LEFT));
         BANK_SET->hide();
-        { Fondo11 = new Fl_Box(5, 26, 630, 502);
+        { Fondo11 = new Fl_Box(5, 26, 630, 554);
         } // Fl_Box* Fondo11
         { BFiname = new Fl_File_Input(20, 50, 390, 30, "Bank Filename");
           BFiname->labelsize(11);
@@ -23171,6 +23191,9 @@ void RKRGUI::load_stat() {
   
   rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh,1);
   rkr->HarCh--;
+  rakarrack.get(rkr->PrefNom("MIDI IN Stereo Harmonizer"),rkr->StereoHarCh,1);
+  rkr->StereoHarCh--;
+  
   rakarrack.get(rkr->PrefNom("Limiter Position"),rkr->flpos,0);
   rakarrack.get(rkr->PrefNom("Limiter +6dB"),rkr->db6booster,0);
   rakarrack.get(rkr->PrefNom("Booster"),rkr->booster,1.0f);
@@ -23563,6 +23586,7 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("MIDI IN Device"),temp);
   rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
   rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"),rkr->HarCh+1);
+  rakarrack.set(rkr->PrefNom("MIDI IN Stereo Harmonizer"),rkr->StereoHarCh+1);
   rakarrack.set(rkr->PrefNom("Harmonizer Quality"),rkr->HarQual);
   rakarrack.set(rkr->PrefNom("StereoHarm Quality"),rkr->SteQual);
   rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout);
@@ -25099,6 +25123,7 @@ void RKRGUI::MiraConfig() {
   
   Midi_In_Counter->value(rkr->MidiCh+1);
   Har_In_Counter->value(rkr->HarCh+1);
+  Stereo_Har_In_Counter->value(rkr->StereoHarCh+1);
   
   switch(rkr->HarQual)
   {

@@ -4177,6 +4177,11 @@ private:
   inline void cb_Har_In_Counter_i(Fl_Counter*, void*);
   static void cb_Har_In_Counter(Fl_Counter*, void*);
 public:
+  Fl_Counter *Stereo_Har_In_Counter;
+private:
+  inline void cb_Stereo_Har_In_Counter_i(Fl_Counter*, void*);
+  static void cb_Stereo_Har_In_Counter(Fl_Counter*, void*);
+public:
   Fl_Group *wMIDI;
   Fl_Check_Button *Mw0;
 private:
