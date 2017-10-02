@@ -15161,8 +15161,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {selected
-    }
+Font_Bro->value(rkr->font+1);} {}
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
@@ -15682,7 +15681,7 @@ switch (i)
      newdist_oct->redraw();
      break;
      case 9:
-     dist_oct->value(rkr->efx_NewDist->getpar(12));
+     dist_oct->value(rkr->efx_Distorsion->getpar(12));
      dist_oct->redraw();
      break;
      case 130:
@@ -16789,7 +16788,8 @@ switch (i)
 }
 
 
-rkr->Mvalue=0;} {}
+rkr->Mvalue=0;} {selected
+    }
   }
   Function {ActOnOff()} {} {
     code {int miralo;
