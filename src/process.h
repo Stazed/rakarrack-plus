@@ -163,7 +163,8 @@ public:
     class Recognize *HarmRecNote;
     class Recognize *StHarmRecNote;
     class Recognize *RingRecNote;
-    class RecChord *RC;
+    class RecChord *RC_Harm;
+    class RecChord *RC_Stereo_Harm;
     class Compressor *efx_FLimiter;
     class Valve *efx_Valve;
     class Dflange *efx_DFlange;

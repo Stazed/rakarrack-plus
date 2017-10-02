@@ -1474,12 +1474,12 @@ if (rkr->Harmonizer_Bypass)
     if((rkr->efx_Har->PSELECT)|| (rkr->efx_Har->PMIDI))
      {
 
-    if (rkr->RC->cc) 
+    if (rkr->RC_Harm->cc) 
     {
-    har_chordname->copy_label(rkr->RC->NombreAcorde);
-    if(!rkr->StereoHarm_Bypass) rkr->RC->cc=0;  
+    har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
+    //rkr->RC_Harm->cc=0;   // this now must be done in process Alg()
     har_chordname->redraw(); 
-    rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota);      
+    rkr->RC_Harm->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota);      
     }
      }
 
@@ -1491,13 +1491,13 @@ if (rkr->StereoHarm_Bypass)
     if((rkr->efx_StereoHarm->PSELECT)|| (rkr->efx_StereoHarm->PMIDI))
      {
 
-    if (rkr->RC->cc) 
+    if (rkr->RC_Stereo_Harm->cc) 
     {
-    shar_chordname->copy_label(rkr->RC->NombreAcorde);
-    //rkr->RC->cc=0; // this now must be done in process Alg()
+    shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
+    //rkr->RC_Stereo_Harm->cc=0; // this now must be done in process Alg()
     shar_chordname->redraw(); 
-    rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
-    rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
+    rkr->RC_Stereo_Harm->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
+    rkr->RC_Stereo_Harm->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
     
     }
      }
@@ -4152,7 +4152,7 @@ rkr->efx_Har->changepar(4,(int)o->value());}
           label MIDI
           user_data 2
           callback {rkr->efx_Har->changepar(10,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));}
           xywh {171 537 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
         }
@@ -4160,7 +4160,7 @@ if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));}
           label SEL
           user_data 2
           callback {rkr->efx_Har->changepar(5,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);}
           xywh {171 555 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
@@ -9522,7 +9522,7 @@ rkr->efx_StereoHarm->changepar(11,(int)(o->value()+64));}
           label MIDI
           user_data 2
           callback {rkr->efx_StereoHarm->changepar(10,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Stereo_Harm->cleanup();
 
 if(!(int)o->value())
 {
@@ -9535,7 +9535,7 @@ rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
           label SEL
           user_data 2
           callback {rkr->efx_StereoHarm->changepar(7,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Stereo_Harm->cleanup();
 Chord(1);
 
 if(!(int)o->value())
@@ -15155,8 +15155,7 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 }
 
-Font_Bro->value(rkr->font+1);} {selected
-    }
+Font_Bro->value(rkr->font+1);} {}
   }
   Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
@@ -15213,7 +15212,8 @@ for (int t=0; t<ob->children();t++)
   
 FillML(2);} {}
   }
-  Function {Chord(int eff)} {} {
+  Function {Chord(int eff)} {open
+  } {
     code {int tipo,undi;
 tipo=0;
 undi=0;
@@ -15231,12 +15231,23 @@ break;
 }
 
 
+if(eff==0)
+{
+sprintf(rkr->RC_Harm->NombreAcorde,"%s%s", rkr->RC_Harm->NCE[undi].Nom,rkr->RC_Harm->ChN[tipo].Nom);
 
-sprintf(rkr->RC->NombreAcorde,"%s%s", rkr->RC->NCE[undi].Nom,rkr->RC->ChN[tipo].Nom);
+rkr->RC_Harm->ctipo=tipo;
+rkr->RC_Harm->fundi=undi;
+rkr->RC_Harm->cc=1;
+}
+else
+{
+sprintf(rkr->RC_Stereo_Harm->NombreAcorde,"%s%s", rkr->RC_Stereo_Harm->NCE[undi].Nom,rkr->RC_Stereo_Harm->ChN[tipo].Nom);
 
-rkr->RC->ctipo=tipo;
-rkr->RC->fundi=undi;
-rkr->RC->cc=1;} {}
+rkr->RC_Stereo_Harm->ctipo=tipo;
+rkr->RC_Stereo_Harm->fundi=undi;
+rkr->RC_Stereo_Harm->cc=1;
+}} {selected
+    }
   }
   Function {ActMIDI()} {} {
     code {if (rkr->Mvalue==0) return;

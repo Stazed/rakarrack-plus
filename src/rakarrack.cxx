@@ -1424,12 +1424,12 @@ if (rkr->Harmonizer_Bypass)
     if((rkr->efx_Har->PSELECT)|| (rkr->efx_Har->PMIDI))
      {
 
-    if (rkr->RC->cc) 
+    if (rkr->RC_Harm->cc) 
     {
-    har_chordname->copy_label(rkr->RC->NombreAcorde);
-    if(!rkr->StereoHarm_Bypass) rkr->RC->cc=0;  
+    har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
+    //rkr->RC_Harm->cc=0;   // this now must be done in process Alg()
     har_chordname->redraw(); 
-    rkr->RC->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota);      
+    rkr->RC_Harm->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota);      
     }
      }
 
@@ -1441,13 +1441,13 @@ if (rkr->StereoHarm_Bypass)
     if((rkr->efx_StereoHarm->PSELECT)|| (rkr->efx_StereoHarm->PMIDI))
      {
 
-    if (rkr->RC->cc) 
+    if (rkr->RC_Stereo_Harm->cc) 
     {
-    shar_chordname->copy_label(rkr->RC->NombreAcorde);
-    //rkr->RC->cc=0; // this now must be done in process Alg()
+    shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
+    //rkr->RC_Stereo_Harm->cc=0; // this now must be done in process Alg()
     shar_chordname->redraw(); 
-    rkr->RC->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
-    rkr->RC->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
+    rkr->RC_Stereo_Harm->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
+    rkr->RC_Stereo_Harm->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
     
     }
      }
@@ -3778,7 +3778,7 @@ void RKRGUI::cb_har_q1(SliderW* o, void* v) {
 
 void RKRGUI::cb_har_MIDI_i(Fl_Check_Button* o, void*) {
   rkr->efx_Har->changepar(10,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 }
 void RKRGUI::cb_har_MIDI(Fl_Check_Button* o, void* v) {
@@ -3787,7 +3787,7 @@ void RKRGUI::cb_har_MIDI(Fl_Check_Button* o, void* v) {
 
 void RKRGUI::cb_har_SELECT_i(Fl_Check_Button* o, void*) {
   rkr->efx_Har->changepar(5,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 Chord(0);
 }
@@ -8770,7 +8770,7 @@ void RKRGUI::cb_shar_lrc(SliderW* o, void* v) {
 
 void RKRGUI::cb_shar_MIDI_i(Fl_Check_Button* o, void*) {
   rkr->efx_StereoHarm->changepar(10,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Stereo_Harm->cleanup();
 
 if(!(int)o->value())
 {
@@ -8784,7 +8784,7 @@ void RKRGUI::cb_shar_MIDI(Fl_Check_Button* o, void* v) {
 
 void RKRGUI::cb_shar_SELECT_i(Fl_Check_Button* o, void*) {
   rkr->efx_StereoHarm->changepar(7,(int)o->value());
-rkr->RC->cleanup();
+rkr->RC_Stereo_Harm->cleanup();
 Chord(1);
 
 if(!(int)o->value())
@@ -25303,12 +25303,22 @@ void RKRGUI::Chord(int eff) {
   }
   
   
+  if(eff==0)
+  {
+  sprintf(rkr->RC_Harm->NombreAcorde,"%s%s", rkr->RC_Harm->NCE[undi].Nom,rkr->RC_Harm->ChN[tipo].Nom);
   
-  sprintf(rkr->RC->NombreAcorde,"%s%s", rkr->RC->NCE[undi].Nom,rkr->RC->ChN[tipo].Nom);
+  rkr->RC_Harm->ctipo=tipo;
+  rkr->RC_Harm->fundi=undi;
+  rkr->RC_Harm->cc=1;
+  }
+  else
+  {
+  sprintf(rkr->RC_Stereo_Harm->NombreAcorde,"%s%s", rkr->RC_Stereo_Harm->NCE[undi].Nom,rkr->RC_Stereo_Harm->ChN[tipo].Nom);
   
-  rkr->RC->ctipo=tipo;
-  rkr->RC->fundi=undi;
-  rkr->RC->cc=1;
+  rkr->RC_Stereo_Harm->ctipo=tipo;
+  rkr->RC_Stereo_Harm->fundi=undi;
+  rkr->RC_Stereo_Harm->cc=1;
+  }
 }
 
 void RKRGUI::ActMIDI() {

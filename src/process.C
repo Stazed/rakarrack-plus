@@ -309,8 +309,8 @@ RKR::RKR ()
     HarmRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
     StHarmRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
     RingRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
-    RC = new RecChord ();
-
+    RC_Harm = new RecChord ();
+    RC_Stereo_Harm = new RecChord ();
 
     Preset_Name = (char *) malloc (sizeof (char) * 64);
     memset (Preset_Name, 0, sizeof (char) * 64);
@@ -870,7 +870,8 @@ RKR::~RKR ()
     delete HarmRecNote;
     delete StHarmRecNote;
     delete RingRecNote;
-    delete RC ;
+    delete RC_Harm;
+    delete RC_Stereo_Harm;
     
     delete Fpre;
     
@@ -961,7 +962,8 @@ RKR::init_rkr ()
         a_bank=3;
 
     }
-    RC->cleanup ();
+    RC_Harm->cleanup ();
+    RC_Stereo_Harm->cleanup ();
     HarmRecNote->reconota = -1;
     StHarmRecNote->reconota = -1;
     RingRecNote->reconota = -1;
@@ -1405,7 +1407,8 @@ RKR::cleanup_efx ()
     efx_CompBand->cleanup();
     efx_Opticaltrem->cleanup();
     efx_Vibe->cleanup();
-    RC->cleanup();
+    RC_Harm->cleanup ();
+    RC_Stereo_Harm->cleanup ();
     efx_FLimiter->cleanup();
     efx_Infinity->cleanup();
 
@@ -1457,17 +1460,18 @@ RKR::Alg (float *origl, float *origr, void *)
                     HarmRecNote->schmittFloat (efxoutl, efxoutr);
                     if ((HarmRecNote->reconota != -1) && (HarmRecNote->reconota != HarmRecNote->last)) {
                         if(HarmRecNote->afreq > 0.0) {
-                            RC->Vamos (0,efx_Har->Pinterval - 12,HarmRecNote->reconota);
-                            efx_Har->r_ratio = RC->r__ratio[0];//pass the found ratio
+                            RC_Harm->Vamos (0,efx_Har->Pinterval - 12,HarmRecNote->reconota);
+                            efx_Har->r_ratio = RC_Harm->r__ratio[0];//pass the found ratio
                             HarmRecNote->last=HarmRecNote->reconota;
                         }
                     }
                 }
             }else
             {
-                if (RC->cc) 
+                if (RC_Harm->cc) 
                 {
-                    efx_Har->r_ratio = RC->r__ratio[0];//pass the found ratio
+                    efx_Har->r_ratio = RC_Harm->r__ratio[0];//pass the found ratio
+                    RC_Harm->cc=0;
                 }
             }
         }
@@ -1480,21 +1484,21 @@ RKR::Alg (float *origl, float *origr, void *)
                     StHarmRecNote->schmittFloat (efxoutl, efxoutr);
                     if ((StHarmRecNote->reconota != -1) && (StHarmRecNote->reconota != StHarmRecNote->last)) {
                         if(StHarmRecNote->afreq > 0.0) {
-                            RC->Vamos (1,efx_StereoHarm->Pintervall - 12,StHarmRecNote->reconota);
-                            RC->Vamos (2,efx_StereoHarm->Pintervalr - 12,StHarmRecNote->reconota);
-                            efx_StereoHarm->r_ratiol = RC->r__ratio[1];
-                            efx_StereoHarm->r_ratior = RC->r__ratio[2];
+                            RC_Stereo_Harm->Vamos (1,efx_StereoHarm->Pintervall - 12,StHarmRecNote->reconota);
+                            RC_Stereo_Harm->Vamos (2,efx_StereoHarm->Pintervalr - 12,StHarmRecNote->reconota);
+                            efx_StereoHarm->r_ratiol = RC_Stereo_Harm->r__ratio[1];
+                            efx_StereoHarm->r_ratior = RC_Stereo_Harm->r__ratio[2];
                             StHarmRecNote->last=StHarmRecNote->reconota;
                         }
                     }
                 }
             }else
             {
-                if (RC->cc) 
+                if (RC_Stereo_Harm->cc) 
                 {
-                    efx_StereoHarm->r_ratiol = RC->r__ratio[1];
-                    efx_StereoHarm->r_ratior = RC->r__ratio[2];
-                    RC->cc = 0;
+                    efx_StereoHarm->r_ratiol = RC_Stereo_Harm->r__ratio[1];
+                    efx_StereoHarm->r_ratior = RC_Stereo_Harm->r__ratio[2];
+                    RC_Stereo_Harm->cc = 0;
                 }
             }
         }

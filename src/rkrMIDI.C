@@ -123,11 +123,11 @@ RKR::midievents()
         if (midievent->data.note.channel == HarCh) {
             for (i = 0; i < POLY; i++) {
                 if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0)) {
-                    if (RC->note_active[i] == 0) {
-                        RC->note_active[i] = 1;
-                        RC->rnote[i] = cmdnote;
-                        RC->gate[i] = 1;
-                        RC->MiraChord ();
+                    if (RC_Harm->note_active[i] == 0) {
+                        RC_Harm->note_active[i] = 1;
+                        RC_Harm->rnote[i] = cmdnote;
+                        RC_Harm->gate[i] = 1;
+                        RC_Harm->MiraChord ();
                         break;
                     }
 
@@ -136,9 +136,9 @@ RKR::midievents()
 
                 if ((midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo == 0)) {
 
-                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
-                        RC->note_active[i] = 0;
-                        RC->gate[i] = 0;
+                    if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote)) {
+                        RC_Harm->note_active[i] = 0;
+                        RC_Harm->gate[i] = 0;
                         break;
                     }
 
@@ -147,9 +147,9 @@ RKR::midievents()
 
                 if (midievent->type == SND_SEQ_EVENT_NOTEOFF) {
 
-                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
-                        RC->note_active[i] = 0;
-                        RC->gate[i] = 0;
+                    if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote)) {
+                        RC_Harm->note_active[i] = 0;
+                        RC_Harm->gate[i] = 0;
                         break;
                     }
 
@@ -770,11 +770,11 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
         if (cmdchan == HarCh) {
             for (i = 0; i < POLY; i++) {
                 if ((type==9) && (cmdvelo != 0)) {
-                    if (RC->note_active[i] == 0) {
-                        RC->note_active[i] = 1;
-                        RC->rnote[i] = cmdnote;
-                        RC->gate[i] = 1;
-                        RC->MiraChord ();
+                    if (RC_Harm->note_active[i] == 0) {
+                        RC_Harm->note_active[i] = 1;
+                        RC_Harm->rnote[i] = cmdnote;
+                        RC_Harm->gate[i] = 1;
+                        RC_Harm->MiraChord ();
                         break;
                     }
 
@@ -783,9 +783,9 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
 
                 if ((type==9) && (cmdvelo == 0)) {
 
-                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
-                        RC->note_active[i] = 0;
-                        RC->gate[i] = 0;
+                    if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote)) {
+                        RC_Harm->note_active[i] = 0;
+                        RC_Harm->gate[i] = 0;
                         break;
                     }
 
@@ -793,9 +793,9 @@ RKR::jack_process_midievents (jack_midi_event_t *midievent)
 
                 if (type==8) {
 
-                    if ((RC->note_active[i]) && (RC->rnote[i] == cmdnote)) {
-                        RC->note_active[i] = 0;
-                        RC->gate[i] = 0;
+                    if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote)) {
+                        RC_Harm->note_active[i] = 0;
+                        RC_Harm->gate[i] = 0;
                         break;
                     }
 

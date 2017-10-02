@@ -1684,7 +1684,7 @@ RKR::Actualizar_Audio ()
             efx_StereoHarm->cleanup();
             for (i = 0; i <= 11; i++)
                 efx_StereoHarm->changepar (i, lv[43][i]);
-            if (lv[43][10]) RC->cleanup ();
+            if (lv[43][10]) RC_Stereo_Harm->cleanup ();
             StereoHarm_Bypass = StereoHarm_B;
             break;
 
