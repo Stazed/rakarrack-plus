@@ -25775,7 +25775,7 @@ void RKRGUI::ActMIDI() {
        newdist_oct->redraw();
        break;
        case 9:
-       dist_oct->value(rkr->efx_NewDist->getpar(12));
+       dist_oct->value(rkr->efx_Distorsion->getpar(12));
        dist_oct->redraw();
        break;
        case 130:

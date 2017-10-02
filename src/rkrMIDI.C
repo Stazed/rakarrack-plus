@@ -968,7 +968,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 26:
-        efx_Har->changepar (4, value);
+        efx_Har->changepar (4, ret_LPF(value));
         break;
 
     case 27:
@@ -1344,7 +1344,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 9:
-        efx_NewDist->changepar (12, value);
+        efx_Distorsion->changepar (12, value);
         break;
 
     case 12:
