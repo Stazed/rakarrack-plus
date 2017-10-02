@@ -11242,7 +11242,7 @@ unlight_preset(rkr->Selected_Preset);
     }
     Fl_Window Order {
       callback {save_stat(2);
-Order->hide();}
+Order->hide();} selected
       xywh {759 49 500 400} type Double color 178 hide resizable size_range {500 400 3200 2400}
     } {
       Fl_Box Fondo1 {
@@ -11398,7 +11398,7 @@ Order->do_callback();}
     Fl_Window Settings {
       callback {save_stat(3);
 Settings->hide();} open
-      xywh {344 411 640 580} type Double color 4 hide size_range {740 528 0 0}
+      xywh {205 325 640 580} type Double color 4 hide size_range {740 554 0 0}
     } {
       Fl_Box Fondo2 {
         xywh {1 1 640 580}
@@ -11571,7 +11571,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
+          user_data 1
           xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -12967,8 +12967,7 @@ hints->icon_mask=mask;
 hints->flags = IconPixmapHint | IconMaskHint;
 XSetWMHints(fl_display, fl_xid(window), hints);} {}
   }
-  Function {load_stat()} {open
-  } {
+  Function {load_stat()} {} {
     code {int x,y,w,h,k,b,f,l,a;
 
 Fl_Preferences rakarrack (Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -13038,10 +13037,10 @@ Trigger->resize(x,y,w,h);
 rakarrack.get(rkr->PrefNom("Settings X"),x,1);
 rakarrack.get(rkr->PrefNom("Settings Y"),y,1);
 rakarrack.get(rkr->PrefNom("Settings W"),w,640);
-rakarrack.get(rkr->PrefNom("Settings H"),h,528);
+rakarrack.get(rkr->PrefNom("Settings H"),h,554);
 
 if (w<640) w=640;
-if (h<528) h=528;
+if (h<554) h=554;
 
 Settings->resize(x,y,w,h);
 
@@ -13284,8 +13283,7 @@ rkr->M_table[i].preset=f-3000;
 
 }} {}
   }
-  Function {save_stat(int whati)} {open
-  } {
+  Function {save_stat(int whati)} {} {
     code {int i,k;
 char temp1[128];
 
@@ -13562,8 +13560,7 @@ for(i=1; i<=JackIn->size();i++)
 
 }} {}
   }
-  Function {Put_Loaded()} {open
-  } {
+  Function {Put_Loaded()} {} {
     code {//General
 int i;
 
@@ -14905,8 +14902,7 @@ JackIn->clear();
    
    free(iports);} {}
   }
-  Function {MiraConfig()} {open
-  } {
+  Function {MiraConfig()} {} {
     code {int i = 1;
 int k;
 while (BMidiIn->text(i) != NULL)
@@ -15165,8 +15161,7 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%s   v%s - Bank Manager - %s",rkr->jackcliname,VERSION,fl_filename_name(filename));
 BankWindow->copy_label(tmp);} {}
   }
-  Function {is_modified()} {open
-  } {
+  Function {is_modified()} {} {
     code {int ok;
 
 
@@ -15212,8 +15207,7 @@ for (int t=0; t<ob->children();t++)
   
 FillML(2);} {}
   }
-  Function {Chord(int eff)} {open
-  } {
+  Function {Chord(int eff)} {} {
     code {int tipo,undi;
 tipo=0;
 undi=0;
@@ -15246,8 +15240,7 @@ sprintf(rkr->RC_Stereo_Harm->NombreAcorde,"%s%s", rkr->RC_Stereo_Harm->NCE[undi]
 rkr->RC_Stereo_Harm->ctipo=tipo;
 rkr->RC_Stereo_Harm->fundi=undi;
 rkr->RC_Stereo_Harm->cc=1;
-}} {selected
-    }
+}} {}
   }
   Function {ActMIDI()} {} {
     code {if (rkr->Mvalue==0) return;
@@ -16787,8 +16780,7 @@ switch (i)
 
 rkr->Mvalue=0;} {}
   }
-  Function {ActOnOff()} {open
-  } {
+  Function {ActOnOff()} {} {
     code {int miralo;
 
 

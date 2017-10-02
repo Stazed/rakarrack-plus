@@ -22506,7 +22506,7 @@ e a stompbox Opto Trem");
       } // Fl_Group* BANK_SET
       STabs->end();
     } // Fl_Tabs* STabs
-    Settings->size_range(740, 528);
+    Settings->size_range(740, 554);
     Settings->end();
   } // Fl_Double_Window* Settings
   { MIDILearn = new Fl_Double_Window(640, 480);
@@ -23103,10 +23103,10 @@ void RKRGUI::load_stat() {
   rakarrack.get(rkr->PrefNom("Settings X"),x,1);
   rakarrack.get(rkr->PrefNom("Settings Y"),y,1);
   rakarrack.get(rkr->PrefNom("Settings W"),w,640);
-  rakarrack.get(rkr->PrefNom("Settings H"),h,528);
+  rakarrack.get(rkr->PrefNom("Settings H"),h,554);
   
   if (w<640) w=640;
-  if (h<528) h=528;
+  if (h<554) h=554;
   
   Settings->resize(x,y,w,h);
   
