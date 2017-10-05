@@ -795,7 +795,9 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        //plug->harm->cleanup(); // Why do this?? It means the user must toggle slider, etc to reset parameters.
+        plug->harm->cleanup();
+        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
+        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
         return;
     }
  
@@ -806,8 +808,6 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->harm->lv2_update_params(nframes);
         plug->comp->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
-     //   plug->noteID->setlpf(5500); // default user option in rakarrack
-     //   plug->noteID->sethpf(80); // default user option in rakarrack
     }
     
     // we are good to run now
@@ -843,7 +843,9 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->harm->changepar(i,val);
         plug->chordID->cleanup();
-        if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
+        if(!val) plug->harm->changepar(3,plug->harm->getpar(3)); // Reset interval
+
+        plug->chordID->cc = 1;//mark chord has changed to update parameters after cleanup
     }
     for(i++; i<8; i++) //6-7
     {
@@ -851,8 +853,8 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         if(plug->harm->getpar(i) != val)
         {
             plug->harm->changepar(i,val);
-            plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
-            plug->chordID->fundi = plug->harm->getpar(6);//set root note
+        //    plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
+        //    plug->chordID->fundi = plug->harm->getpar(6);//set root note
             plug->chordID->cc = 1;//mark chord has changed
         }
     }
@@ -886,7 +888,7 @@ see process.C ln 1507
             if(plug->harm->PSELECT)
             {
                 plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
-                if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
+                if((plug->noteID->reconota != -1) && (plug->noteID->reconota != plug->noteID->last))
                 {
                     if(plug->noteID->afreq > 0.0)
                     {
@@ -896,19 +898,19 @@ see process.C ln 1507
                     }
                 }
             }
-        }else
-        {
-            if (plug->chordID->cc) 
-            {
-                plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
-                plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
-                plug->chordID->cc = 0;
-            }
         }
     }
-
+    
     if(plug->harm->PSELECT)
     {
+        if (plug->chordID->cc) 
+        {
+            plug->chordID->cc = 0;
+            plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
+            plug->chordID->fundi = plug->harm->getpar(6);//set root note
+            plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
+            plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+        }
         plug->comp->out(plug->output_l_p,plug->output_r_p);
     }
     
@@ -3875,6 +3877,9 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(*plug->bypass_p && plug->prev_bypass)
     {
         plug->sharm->cleanup();
+        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
+        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
+        plug->chordID->cc = 1;//mark chord has changed
         return;
     }
  
@@ -3885,8 +3890,6 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         plug->sharm->lv2_update_params(nframes);
         plug->comp->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
-    //    plug->noteID->setlpf(5500); // default user option in rakarrack
-    //    plug->noteID->sethpf(80); // default user option in rakarrack
     }
     
     // we are good to run now
@@ -3943,6 +3946,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
             plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
             plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         }
+        
+        plug->chordID->cc = 1;//mark chord has changed
     }
     for(i++; i<10; i++) //8-9
     {
@@ -3950,8 +3955,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         if(plug->sharm->getpar(i) != val)
         {
             plug->sharm->changepar(i,val);
-            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
-            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+//            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
+//            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
             plug->chordID->cc = 1;//mark chord has changed
         }
     }
@@ -3981,7 +3986,7 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
             if(plug->sharm->PSELECT)
             {
                 plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
-                if(plug->noteID->reconota != -1 && plug->noteID->reconota != plug->noteID->last)
+                if((plug->noteID->reconota != -1) && (plug->noteID->reconota != plug->noteID->last))
                 {
                     if(plug->noteID->afreq > 0.0)
                     {
@@ -3993,21 +3998,21 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
                     }
                 }
             }
-        }else
-        {
-            if (plug->chordID->cc) 
-            {   
-                plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
-                plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
-                plug->sharm->r_ratiol = plug->chordID->r__ratio[1];
-                plug->sharm->r_ratior = plug->chordID->r__ratio[2];
-                plug->chordID->cc = 0;
-            }
         }
     }
 
     if(plug->sharm->PSELECT)
     {
+        if (plug->chordID->cc) 
+        {   
+            plug->chordID->cc = 0;
+            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
+            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+            plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
+            plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
+            plug->sharm->r_ratiol = plug->chordID->r__ratio[1];
+            plug->sharm->r_ratior = plug->chordID->r__ratio[2];
+        }
         plug->comp->out(plug->output_l_p,plug->output_r_p);
     }
 

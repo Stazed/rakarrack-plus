@@ -1466,13 +1466,6 @@ RKR::Alg (float *origl, float *origr, void *)
                         }
                     }
                 }
-            }else
-            {
-                if (RC_Harm->cc) 
-                {
-                    efx_Har->r_ratio = RC_Harm->r__ratio[0];//pass the found ratio
-                    RC_Harm->cc=0;
-                }
             }
         }
 
@@ -1491,14 +1484,6 @@ RKR::Alg (float *origl, float *origr, void *)
                             StHarmRecNote->last=StHarmRecNote->reconota;
                         }
                     }
-                }
-            }else
-            {
-                if (RC_Stereo_Harm->cc) 
-                {
-                    efx_StereoHarm->r_ratiol = RC_Stereo_Harm->r__ratio[1];
-                    efx_StereoHarm->r_ratior = RC_Stereo_Harm->r__ratio[2];
-                    RC_Stereo_Harm->cc = 0;
                 }
             }
         }

@@ -1427,9 +1427,10 @@ if (rkr->Harmonizer_Bypass)
     if (rkr->RC_Harm->cc) 
     {
     har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
-    //rkr->RC_Harm->cc=0;   // this now must be done in process Alg()
+    rkr->RC_Harm->cc=0;
     har_chordname->redraw(); 
-    rkr->RC_Harm->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota);      
+    rkr->RC_Harm->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota); 
+    rkr->efx_Har->r_ratio = rkr->RC_Harm->r__ratio[0];//pass the found ratio     
     }
      }
 
@@ -1444,11 +1445,13 @@ if (rkr->StereoHarm_Bypass)
     if (rkr->RC_Stereo_Harm->cc) 
     {
     shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
-    //rkr->RC_Stereo_Harm->cc=0; // this now must be done in process Alg()
+    rkr->RC_Stereo_Harm->cc=0;
     shar_chordname->redraw(); 
     rkr->RC_Stereo_Harm->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
     rkr->RC_Stereo_Harm->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
-    
+    rkr->efx_StereoHarm->r_ratiol = rkr->RC_Stereo_Harm->r__ratio[1];
+    rkr->efx_StereoHarm->r_ratior = rkr->RC_Stereo_Harm->r__ratio[2];
+
     }
      }
 
