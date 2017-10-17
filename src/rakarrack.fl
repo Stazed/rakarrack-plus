@@ -1541,7 +1541,7 @@ if (rkr->RControl)
       
       
     }   
-}} selected
+}}
         xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
@@ -11400,7 +11400,7 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();}
+Settings->hide();} open
       xywh {759 407 640 580} type Double color 4 hide size_range {740 554 0 0}
     } {
       Fl_Box Fondo2 {
@@ -11574,8 +11574,8 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1
-          xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+          user_data 1 open
+          xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
             xywh {0 26 635 554}
@@ -12222,15 +12222,15 @@ Show_Next_Time();}
             code0 {o->menu(menu_Upr_Qual);}
           } {}
           Fl_Box Recognize_Label {
-            label {Recognize Note Otimization}
-            user_data 7
+            label {Recognize Note Optimization}
+            user_data 7 selected
             xywh {10 298 150 17} labelsize 10 when 0
           }
         }
         Fl_Group MIDI_SET {
           label MIDI
           user_data 1
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
         } {
           Fl_Box Fondo8 {
             xywh {5 26 630 554}

@@ -21898,7 +21898,6 @@ e a stompbox Opto Trem");
         AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
         AUDIO_SET->user_data((void*)(1));
         AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        AUDIO_SET->hide();
         { Fondo7 = new Fl_Box(0, 26, 635, 554);
         } // Fl_Box* Fondo7
         { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
@@ -22299,7 +22298,7 @@ e a stompbox Opto Trem");
           Wave_Up_Qua->callback((Fl_Callback*)cb_Wave_Up_Qua);
           o->menu(menu_Upr_Qual);
         } // Fl_Choice* Wave_Up_Qua
-        { Recognize_Label = new Fl_Box(10, 298, 150, 17, "Recognize Note Otimization");
+        { Recognize_Label = new Fl_Box(10, 298, 150, 17, "Recognize Note Optimization");
           Recognize_Label->labelsize(10);
           Recognize_Label->user_data((void*)(7));
           Recognize_Label->when(FL_WHEN_NEVER);
@@ -22312,6 +22311,7 @@ e a stompbox Opto Trem");
         MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
         MIDI_SET->user_data((void*)(1));
         MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
+        MIDI_SET->hide();
         { Fondo8 = new Fl_Box(5, 26, 630, 554);
         } // Fl_Box* Fondo8
         { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
