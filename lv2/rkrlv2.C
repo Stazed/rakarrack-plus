@@ -4530,9 +4530,7 @@ LV2_Handle init_midiclv2(const LV2_Descriptor *descriptor,double sample_freq, co
 
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
-
-    plug->midic = new MIDIConverter(0, 0, sample_freq, plug->period_max);
-
+    plug->midic = new MIDIConverter(0, sample_freq, plug->period_max);
 
     return plug;
 }

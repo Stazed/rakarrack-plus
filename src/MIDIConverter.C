@@ -18,9 +18,8 @@
 #define MAX_PEAKS 8
 
 
-MIDIConverter::MIDIConverter (char *jname, RKR *_rkr, double sample_rate, uint32_t intermediate_bufsize)
+MIDIConverter::MIDIConverter (char *jname, double sample_rate, uint32_t intermediate_bufsize)
 {
-    rkr = _rkr;     // for jack midi event write
     SAMPLE_RATE = sample_rate;
     fSAMPLE_RATE = (float)sample_rate;
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
@@ -206,7 +205,7 @@ MIDIConverter::displayFrequency (float ffreq, float val_sum, float *freqs, float
 
 
     if ((noteoff) & (hay)) {
-        MIDI_Send_Note_Off (nota_actual);
+        send_Midi_Note(nota_actual, 0, false);      // false = note off: 0 is not used for note off
         hay = 0;
         nota_actual = -1;
     }
@@ -215,10 +214,10 @@ MIDIConverter::displayFrequency (float ffreq, float val_sum, float *freqs, float
 
         hay = 1;
         if (nota_actual != -1) {
-            MIDI_Send_Note_Off (nota_actual);
+            send_Midi_Note(nota_actual, 0, false);  // false = note off: 0 is not used for note off
         }
 
-        MIDI_Send_Note_On (lanota, val_sum);
+        send_Midi_Note(lanota, val_sum, true);      // true = note on
         nota_actual = lanota;
     }  
     
@@ -439,112 +438,61 @@ MIDIConverter::fftFree ()
     free(fftLastPhase);
 }
 
-
-void
-MIDIConverter::MIDI_Send_Note_On (int nota, float val_sum)
+void 
+MIDIConverter::send_Midi_Note (uint nota, float val_sum, bool is_On)
 {
-    int k;
-
     const uint8_t anota = (uint8_t) nota + ( Moctave * 12) ;
     if(anota>127) return;
+    
+    if(is_On)   // Note On
+    {
+        int k = lrintf ((val_sum + 96) * 2);
 
-    k = lrintf ((val_sum + 96) * 2);
+        if (k > 127)
+            k = 127;
+        if (k < 1)
+            k = 1;
 
-    if (k > 127)
-        k = 127;
-    if (k < 1)
-        k = 1;
-
-    velocity = lrintf((float)k / VelVal);
-
+        velocity = lrintf((float)k / VelVal);
+    }else       // Note Off
+    {
+        velocity = 64;
+    }
+    
+    if(is_On)
+        midi_Note_Message[0]=EVENT_NOTE_ON + channel;
+    else
+        midi_Note_Message[0]=EVENT_NOTE_OFF + channel;
+    
+    midi_Note_Message[1]=anota;
+    midi_Note_Message[2]=velocity;
+    
 #ifdef LV2RUN
-    midi_ON_msg[0]=LV2_MIDI_MSG_NOTE_ON + channel;
-    midi_ON_msg[1]=anota;
-    midi_ON_msg[2]=velocity;
-
-    forge_midimessage(plug,0, midi_ON_msg,3);
-
+    forge_midimessage(plug,0, midi_Note_Message,3);
 #else
+    
     // ALSA
     snd_seq_event_t ev;
     snd_seq_ev_clear (&ev);
-    snd_seq_ev_set_noteon (&ev,channel,anota,velocity);
+    if(is_On)
+        snd_seq_ev_set_noteon (&ev,channel,anota,velocity);
+    else
+        snd_seq_ev_set_noteoff (&ev, channel, anota, velocity);
     snd_seq_ev_set_subs (&ev);
     snd_seq_ev_set_direct (&ev);
     snd_seq_event_output_direct (port, &ev);
 
     // JACK
- 
-    int moutdatasize = 0;
-    moutdata_ON[moutdatasize]=144+channel;
-    moutdatasize++;
-    moutdata_ON[moutdatasize]=anota;
-    moutdatasize++;
-    moutdata_ON[moutdatasize]=velocity;
-    moutdatasize++;
+    size_t size = 3;
+    int nBytes = static_cast<int>(size);
     
-    Midi_event_ON[0].dataloc=moutdata_ON;
-    Midi_event_ON[0].time=0;
-    Midi_event_ON[0].len=3;
+    // Write full message to buffer
+    jack_ringbuffer_write( m_buffMessage, ( const char * ) midi_Note_Message,
+                           nBytes );
+    jack_ringbuffer_write( m_buffSize, ( char * ) &nBytes, sizeof( nBytes ) );
     
-    dataout_ON = rkr->dataout;  // dataout = jack_port_get_buffer(jack_midi_out, nframes);
- 
-    jack_midi_event_write(dataout_ON,
-                              Midi_event_ON[0].time,
-                              Midi_event_ON[0].dataloc,
-                              Midi_event_ON[0].len);
-    
-#endif // LV2RUN
-
-};
-
-
-void
-MIDIConverter::MIDI_Send_Note_Off (int nota)
-{
-    const uint8_t anota = (uint8_t) nota + ( Moctave * 12) ;
-    if(anota>127) return;
-
-#ifdef LV2RUN
-    midi_OFF_msg[0]=LV2_MIDI_MSG_NOTE_OFF + channel;
-    midi_OFF_msg[1]=anota;
-    midi_OFF_msg[2]=64;   // velocity
-
-    forge_midimessage(plug,0, midi_OFF_msg,3);
-
-#else
-    // ALSA
-    snd_seq_event_t ev;
-    snd_seq_ev_clear (&ev);
-    snd_seq_ev_set_noteoff (&ev, channel, anota, 0);
-    snd_seq_ev_set_subs (&ev);
-    snd_seq_ev_set_direct (&ev);
-    snd_seq_event_output_direct (port, &ev);
-
-    // JACK
-    int moutdatasize = 0;
-    
-    moutdata_OFF[moutdatasize]=128+channel;
-    moutdatasize++;
-    moutdata_OFF[moutdatasize]=anota;
-    moutdatasize++;
-    moutdata_OFF[moutdatasize]=64;
-    moutdatasize++;
-    
-    Midi_event_OFF[0].dataloc=moutdata_OFF;
-    Midi_event_OFF[0].time=0;
-    Midi_event_OFF[0].len=3;
-    
-    dataout_OFF = rkr->dataout; // dataout = jack_port_get_buffer(jack_midi_out, nframes);
-    
-    jack_midi_event_write(dataout_OFF,
-                              Midi_event_OFF[0].time,
-                              Midi_event_OFF[0].dataloc,
-                              Midi_event_OFF[0].len);
-    
-#endif // LV2RUN
-};
-
+#endif // LV2RUN    
+}
 
 void
 MIDIConverter::setGain(int value)
@@ -558,7 +506,7 @@ MIDIConverter::panic ()
     int i;
 
     for (i = 0; i < 127; i++)
-        MIDI_Send_Note_Off (i);
+        send_Midi_Note(i, 0, false);  // false = note off: 0 is not used for note off
     hay = 0;
     nota_actual = -1;
 }

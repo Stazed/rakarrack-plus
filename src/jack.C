@@ -48,6 +48,10 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
     JackOUT = rkr_;
     jackclient = jackclient_;
 
+    // Initialize output ringbuffers for MIDIConverter
+    JackOUT->efx_MIDIConverter->m_buffSize = jack_ringbuffer_create( JACK_RINGBUFFER_SIZE );
+    JackOUT->efx_MIDIConverter->m_buffMessage = jack_ringbuffer_create( JACK_RINGBUFFER_SIZE );
+    
     jack_set_sync_callback(jackclient, timebase, NULL);
     jack_set_process_callback (jackclient, jackprocess, 0);
 
@@ -56,7 +60,6 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
 #endif
 
     jack_on_shutdown (jackclient, jackshutdown, 0);
-
 
 
     inputport_left =
@@ -83,7 +86,6 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
     jack_midi_out =
         jack_port_register(jackclient, "MC out", JACK_DEFAULT_MIDI_TYPE, JackPortIsOutput, 0);
 
-    JackOUT->jack_midi_out = jack_midi_out;     // Passed to MIDIConverter
     
     if (jack_activate (jackclient)) {
         fprintf (stderr, "Cannot activate jack client.\n");
@@ -116,10 +118,7 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
 
     }
 
-
-
     return 3;
-
 };
 
 
@@ -211,10 +210,6 @@ jackprocess (jack_nframes_t nframes, void *arg)
     float *data = (float *)jack_port_get_buffer(jack_midi_in, nframes);
     count = jack_midi_get_event_count(data);
 
-    dataout = jack_port_get_buffer(jack_midi_out, nframes);
-    jack_midi_clear_buffer(dataout);
-    
-    JackOUT->dataout = dataout;     // passed to MIDIConverter
 
     /* For midi incoming */
     for (i = 0; i < count; i++) {
@@ -222,18 +217,21 @@ jackprocess (jack_nframes_t nframes, void *arg)
         JackOUT->jack_process_midievents(&midievent);
     }
     
-#if 0   // old code did not work
-    for (i=1; i<=JackOUT->efx_MIDIConverter->ev_count; i++) {
-        jack_midi_event_write(dataout,
-                              JackOUT->efx_MIDIConverter->Midi_event[i].time,
-                              JackOUT->efx_MIDIConverter->Midi_event[i].dataloc,
-                              JackOUT->efx_MIDIConverter->Midi_event[i].len);
+    /* For midi outgoing - MIDIConverter */
+    jack_midi_data_t *midiData;
+    int space;
+
+    void *buffer = jack_port_get_buffer( jack_midi_out, nframes );
+    jack_midi_clear_buffer( buffer );
+
+    while ( jack_ringbuffer_read_space( JackOUT->efx_MIDIConverter->m_buffSize ) > 0 )
+    {
+        jack_ringbuffer_read( JackOUT->efx_MIDIConverter->m_buffSize, (char *) &space, (size_t) sizeof(space) );
+        midiData = jack_midi_event_reserve( buffer, 0, space );
+
+        jack_ringbuffer_read( JackOUT->efx_MIDIConverter->m_buffMessage, (char *) midiData, (size_t) space );
     }
-
-    JackOUT->efx_MIDIConverter->moutdatasize = 0;
-    JackOUT->efx_MIDIConverter->ev_count = 0;
-
-#endif
+    
 
     memcpy (JackOUT->efxoutl, inl,
             sizeof (jack_default_audio_sample_t) * nframes);

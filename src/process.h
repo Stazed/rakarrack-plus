@@ -201,8 +201,6 @@ public:
     class Infinity *efx_Infinity;
 
     jack_client_t *jackclient;
-    jack_port_t *jack_midi_out;     // Passed to MIDIConverter
-    void *dataout;                  // Jack buffer passed to MIDIConverter
     jack_options_t options;
     jack_status_t status;
     char jackcliname[64];

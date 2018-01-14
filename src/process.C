@@ -305,7 +305,7 @@ RKR::RKR ()
 
     beat = new beattracker(fSample_rate, period);
     efx_Tuner = new Tuner (fSample_rate);
-    efx_MIDIConverter = new MIDIConverter(jackcliname, this, fSample_rate, period);
+    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate, period);
     HarmRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
     StHarmRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);
     RingRecNote = new Recognize (rtrig, aFreq, fSample_rate, period);

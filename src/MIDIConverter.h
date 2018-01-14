@@ -18,7 +18,9 @@
 #include <complex.h>
 #include <fftw3.h>
 
-class RKR;          // Forward declaration
+const unsigned char  EVENT_NOTE_OFF         = 0x80;
+const unsigned char  EVENT_NOTE_ON          = 0x90;
+const unsigned char  NOTE_OFF_VELOCITY      = 64;
 
 #ifdef LV2RUN
 
@@ -29,20 +31,16 @@ struct _RKRLV2;     // Forward declaration
 
 #else
 #include <jack/midiport.h>
+#include <jack/ringbuffer.h>
 #include <alsa/asoundlib.h>
 #include "process.h"
 
-struct Midi_Event {
-    jack_nframes_t  time;
-    int             len;    /* Length of MIDI message, in bytes. */
-    jack_midi_data_t  *dataloc;
-} ;
 #endif // LV2RUN
 
 class MIDIConverter
 {
 public:
-    MIDIConverter (char *jname, RKR *_rkr, double sample_rate, uint32_t intermediate_bufsize);
+    MIDIConverter (char *jname, double sample_rate, uint32_t intermediate_bufsize);
     ~MIDIConverter ();
 
     void out (float * efxoutl, float * efxoutr);
@@ -83,19 +81,14 @@ public:
     uint32_t PERIOD;
 
     float VelVal;
-    uint8_t        midi_ON_msg[3];
-    uint8_t        midi_OFF_msg[3];
-    RKR *rkr;       // for passed jack port buffer
+    unsigned char        midi_Note_Message[3];
 
 #ifdef LV2RUN
     _RKRLV2* plug; // for access to forge_midimessage()
 #else
-    jack_midi_data_t  moutdata_ON[2048];
-    jack_midi_data_t  moutdata_OFF[2048];
-    Midi_Event Midi_event_ON[2048];
-    Midi_Event Midi_event_OFF[2048];
+    jack_ringbuffer_t   *m_buffSize;
+    jack_ringbuffer_t   *m_buffMessage;
     snd_seq_t *port;
-    void *dataout_ON, *dataout_OFF;
 #endif // LV2RUN
 
 private:
@@ -110,9 +103,7 @@ private:
     void fftMeasure (int overlap, float *indata, float val_sum, float *freqs, float *lfreqs);
     void fftS16LE (signed short int *indata, float val_sum, float *freqs, float *lfreqs);
     void fftFree ();
-
-    void MIDI_Send_Note_On (int note, float val_sum);
-    void MIDI_Send_Note_Off (int note);
+    void send_Midi_Note (uint nota, float val_sum, bool is_On);
 
     unsigned int blockSize;
 
