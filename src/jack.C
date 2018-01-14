@@ -258,7 +258,8 @@ jackprocess (jack_nframes_t nframes, void *arg)
 void
 JACKfinish ()
 {
-
+    jack_ringbuffer_free( JackOUT->efx_MIDIConverter->m_buffSize );
+    jack_ringbuffer_free( JackOUT->efx_MIDIConverter->m_buffMessage );
     jack_client_close (jackclient);
     usleep (1000);
 };
