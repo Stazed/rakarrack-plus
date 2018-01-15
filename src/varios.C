@@ -124,7 +124,8 @@ RKR::Get_Bogomips()
 {
 
     char temp[256];
-    char *tmp, *tmp2;
+    char *tmp = NULL;
+    char *tmp2 = NULL;
     FILE *fp;
     int maxx_len;
 
