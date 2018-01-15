@@ -38,7 +38,6 @@ rakarrack_SOURCES = main.C \
 	MBDist.h \
 	MBVvol.h \
 	metronome.h\
-	MIDIConverter.h \
 	MusicDelay.h \
 	NewDist.h \
 	Opticaltrem.h \
@@ -138,8 +137,15 @@ rakarrack_SOURCES = main.C \
 	CompBand.C \
 	Opticaltrem.C \
 	Vibe.C \
-	MIDIConverter.C \
 	Infinity.C \
 	Infinity.h \
 	Cabinet.C \
 	Cabinet.h
+
+## Compile MIDIConverter separate since it needs additional flags for creal() & cimag() from complex.h
+## Add CXXFLAGS -std=gnu++98 required by MIDIConverter for FFT code
+rakarrack_LDADD = libMIDIConverter.a
+     noinst_LIBRARIES = libMIDIConverter.a
+     libMIDIConverter_a_SOURCES = MIDIConverter.C MIDIConverter.h
+     libMIDIConverter_a_CXXFLAGS = -std=gnu++98
+
