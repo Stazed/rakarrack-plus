@@ -236,7 +236,7 @@ fi
 
 AC_CHECK_LIB([fftw3f], [main], [ac_fftw3f="yes"], [ac_fftw3f="no"])
 if test "x$ac_m" = "xno"; then
-AC_MSG_ERROR([fftwf library not found.])
+AC_MSG_ERROR([fftw3f library not found.])
 else 
    LIBS="$LIBS -lfftw3f"
 fi
@@ -372,6 +372,7 @@ echo  " ALSA MIDI Sequencer support  . . . . . . . . . . . . . .: $ac_asound"
 echo  " Samplerate conversion (libsamplerate). . . . . . . . . .: $ac_samplerate"
 echo  " General audio file (libsndfile)  . . . . . . . . . . . .: $ac_sndfile"
 echo  " Fast Fourier Transform (fftw3)   . . . . . . . . . . . .: $ac_fftw3"
+echo  " Fast Fourier Transform (float)(fftw3f) . . . . . . . . .: $ac_fftw3f"
 echo  
 echo  " Now maybe you can run 'make' to build the sources."
 echo
