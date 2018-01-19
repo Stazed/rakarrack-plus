@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.6)
 project (rkrlv2)
 
 set(LV2_INSTALL_DIR lib/lv2/rkr.lv2 ) # CACHE PATH "Specifies where the LV2 libraries should be installed")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++98 -Wall -O3 -msse -msse2 -mfpmath=sse -ffast-math")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -msse -msse2 -mfpmath=sse -ffast-math")
 
 # check for our various libraries
 find_package(PkgConfig)
@@ -80,9 +80,14 @@ add_library(rkrlv2 SHARED
   ../src/Infinity.C
   ../src/Phaser.C
   ../src/Gate.C
-  ../src/MIDIConverter.C
   ../src/mayer_fft.C
   ../src/Convolotron.C
+)
+
+set_source_files_properties(../src/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=gnu++98)
+
+target_sources(rkrlv2 PRIVATE
+  ../src/MIDIConverter.C
 )
 
 target_compile_definitions(rkrlv2 PRIVATE LV2RUN=1)
