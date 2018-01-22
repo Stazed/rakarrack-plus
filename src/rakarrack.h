@@ -4,7 +4,7 @@
 #define rakarrack_h
 #include <FL/Fl.H>
 #include "process.h"
-#include "config.h"
+#include "config.h"     // Not needed ??
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>

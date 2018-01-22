@@ -56,7 +56,7 @@
 #include "Vibe.h"
 #include "Infinity.h"
 #include "beattracker.h"
-#include "config.h"
+#include "config.h"       // WEBSITE, PACKAGE, DATADIR
 #include <jack/jack.h>
 
 
