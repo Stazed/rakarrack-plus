@@ -57,17 +57,21 @@ else (FLTK_FOUND)
     message (FATAL_ERROR "FLTK required but not found")
 endif (FLTK_FOUND)
 
+#find_program (HAVE_ACONNECT NAMES aconnect )
+#check_library_exists(aconnect "" "" HAVE_ACONNECT)
+#pkg_check_modules (ACONNECT REQUIRED aconnect)
 #find_package (ACONNECT REQUIRED)
-#if (ACONNECT_FOUND)
+#if (HAVE_ACONNECT)
 #    message (STATUS "Found Aconnect")
-#else (ACONNECT_FOUND)
+#else (HAVE_ACONNECT)
 #    message (FATAL_ERROR "Aconnect required but not found")
-#endif (ACONNECT_FOUND)
+#endif (HAVE_ACONNECT)
 
 # Alsa
 pkg_check_modules (ALSA REQUIRED alsa>=1.0.17)
 if (ALSA_FOUND)
     message(STATUS "Found Alsa ${ALSA_VERSION}")
+    set (ALSA_LIBRARIES "${ALSA_LIBRARIES}")
 else (ALSA_FOUND)
     message(FATAL_ERROR "Alsa >=1.0.17 required but not found")
 endif (ALSA_FOUND)
@@ -76,6 +80,7 @@ endif (ALSA_FOUND)
 pkg_check_modules (JACK REQUIRED jack>=0.115.6)
 if (JACK_FOUND)
     message(STATUS "Found jack ${JACK_VERSION}")
+    set (JACK_LIBRARIES "${JACK_LIBRARIES}")
 else (JACK_FOUND)
     message(FATAL_ERROR "Jack >=0.115.6 required but not found")
 endif (JACK_FOUND)
@@ -85,6 +90,7 @@ pkg_check_modules (FONTCONFIG REQUIRED fontconfig>=0.22)
 mark_as_advanced(FONTCONFIG_LIBRARIES)
 if(FONTCONFIG_FOUND)
     message (STATUS "Found fontconfig ${FONTCONFIG_VERSION}")
+    set (FONTCONFIG_LIBRARIES "${FONTCONFIG_LIBRARIES}")
 else(FONTCONFIG_FOUND)
     message (FATAL_ERROR "fontconfig>=0.22 required but not found")
 endif(FONTCONFIG_FOUND)
@@ -134,48 +140,48 @@ else (SAMPLERATE_FOUND)
 endif (SAMPLERATE_FOUND)
 
 # X11
-pkg_check_modules(X11 X11)
+pkg_check_modules(X11 REQUIRED x11)
 if (X11_FOUND)
     set (X11_LIBRARIES "${X11_LIBRARIES}")
     message (STATUS "Found x11 ${X11_VERSION}")
 else (X11_FOUND)
-    message ("x11 not found")
+    message (FATAL_ERROR "x11 required but not found")
 endif (X11_FOUND)
 
 # Xft
-pkg_check_modules(XFT XFT)
+pkg_check_modules(XFT REQUIRED xft)
 if (XFT_FOUND)
     set (XFT_LIBRARIES "${XFT_LIBRARIES}")
     message (STATUS "Found Xft ${XFT_VERSION}")
 else (XFT_FOUND)
-    message ("Xft not found")
+    message (FATAL_ERROR "Xft required but not found")
 endif (XFT_FOUND)
 
 # Xrender
-pkg_check_modules(XRENDER  XRENDER)
+pkg_check_modules(XRENDER REQUIRED xrender)
 if (XRENDER_FOUND)
     set (XRENDER_LIBRARIES "${XRENDER_LIBRARIES}")
-    message (STATUS "Found Xrender ${XRENDER_VERSION}")
+    message (STATUS "Found xrender ${XRENDER_VERSION}")
 else (XRENDER_FOUND)
-    message ("Xrender not found")
+    message (FATAL_ERROR "Xrender required but not found")
 endif (XRENDER_FOUND)
 
 # Xpm
-pkg_check_modules(XPM XPM)
+pkg_check_modules(XPM REQUIRED xpm)
 if (XPM_FOUND)
     set (XPM_LIBRARIES "${XPM_LIBRARIES}")
     message (STATUS "Found Xpm ${XPM_VERSION}")
 else (XPM_FOUND)
-    message ("Xpm not found")
+    message (FATAL_ERROR "Xpm required but not found")
 endif (XPM_FOUND)
 
 # freetype
-pkg_check_modules(FREETYPE [freetype2])
+pkg_check_modules(FREETYPE REQUIRED freetype2)
 if (FREETYPE_FOUND)
     set (FREETYPE_LIBRARIES "${FREETYPE_LIBRARIES}")
     message (STATUS "Found freetype ${FREETYPE_VERSION}")
 else (FREETYPE_FOUND)
-    message ("freetype not found")
+    message (FATAL_ERROR "freetype required but not found")
 endif (FREETYPE_FOUND)
 
 # libz
@@ -199,6 +205,8 @@ endif (HAS_LIBZ)
 check_library_exists(rt nanosleep "" HAVE_LIBRT)
 if (HAVE_LIBRT)
   set(CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES} rt)
+else (HAVE_RT)
+    message (FATAL_ERROR "rt required but not found")
 endif (HAVE_LIBRT)
 #To link-in librt.a or librt.so, which is the Realtime Extensions library.
 
@@ -209,38 +217,6 @@ if (JackSessionSupport)
 else (JackSessionSupport)
     message(STATUS "Without jack session support")
 endif (JackSessionSupport)
-
-
-#AC_CHECK_LIB([X11]
-#AC_CHECK_LIB([Xft]
-#AC_CHECK_LIB([Xrender]
-#AC_CHECK_LIB([dl]          // not found by pkg-config ${CMAKE_DL_LIBS} target_link_libraries(MY_TARGET LIB1 LIB2 ... LIBN ${CMAKE_DL_LIBS})
-#AC_CHECK_LIB([Xpm]
-#AC_CHECK_LIB([freetype]
-#AC_CHECK_LIB([m]           // not found  -- SET(MY_MATH_LIB -lm)
-#AC_CHECK_LIB([rt]          //  "           target_link_libraries(target_name rt)
-#AC_CHECK_LIB([z]           //  " -- zlib
-
-#include(CheckFunctionExists)
-
-#CHECK_FUNCTION_EXISTS(pow RESULT)
-#if(NOT RESULT)
-#  unset(RESULT)
-#  list(APPEND CMAKE_REQUIRED_LIBRARIES m)
-#  CHECK_FUNCTION_EXISTS(pow RESULT)
-#  if(RESULT)
-#    target_link_libraries(yourtarget m)
-#  else()
-#    message(FATAL_ERROR "No pow() found")
-#  endif()
-#endif()
-
-
-# librt
-#check_library_exists(rt nanosleep "" HAVE_LIBRT)
-#if (HAVE_LIBRT)
-#  set(CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES} rt)
-#endif (HAVE_LIBRT)
 
 set (ProgSources
     jack.C 
@@ -312,38 +288,28 @@ set (ProgSources
     Vibe.C
     Infinity.C
     Cabinet.C
-    icono_rakarrack_128x128.xpm
-    icono_rakarrack_32x32.xpm
-
-#    Interface/CmdInterface.cpp
-#    Interface/InterChange.cpp
-#    Interface/MidiLearn.cpp
-#    Interface/MidiDecode.cpp
-#    UI/MiscGui.cpp
 )
 
 
 set(ExternLibraries
-    ${FONTCONFIG_LIBRARIES}
     ${FLTK_LIBRARIES}
     ${ALSA_LIBRARIES}
     ${JACK_LIBRARIES}
-    ${SNDFILE_LIBRARIES}
+    ${FONTCONFIG_LIBRARIES}
     ${FFTW3_LIBRARIES}
     ${FFTW3F_LIBRARIES}
-    ${FREETYPE_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${SNDFILE_LIBRARIES}
     ${SAMPLERATE_LIBRARIES}
     ${X11_LIBRARIES}
-    ${XRENDER_LIBRARIES}
     ${XFT_LIBRARIES}
+    ${XRENDER_LIBRARIES}
     ${XPM_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
+    ${FREETYPE_LIBRARIES}
     z
     dl
     rt
     m
-    Xpm
-    X11
 )
 
 add_executable (rakarrack ${ProgSources} main.C)
@@ -372,5 +338,5 @@ if (LV2Plugin)
     else (LV2_FOUND)
         message (FATAL_ERROR "lv2 package required but not found (version 1.0.0 needed)")
     endif (LV2_FOUND)
-#    add_subdirectory(lv2)
+#    add_subdirectory(../lv2)
 endif (LV2Plugin)
