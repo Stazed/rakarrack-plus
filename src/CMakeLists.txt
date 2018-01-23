@@ -13,39 +13,6 @@ set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
     # Rebuild objects if rules have changed, even if source hasn't.
 
 message (STATUS "Building Rakarrack version ${VERSION} for ${CMAKE_SYSTEM_NAME}")
-include (CheckCSourceCompiles)
-
-option (BuildForDebug "Include gdb debugging support" OFF)
-option (LV2Plugin "Build rakarack lv2 plugin interface" ON)
-option (optimizations "Enable optimizations" ON)
-option (vectorize "Enable vectorize" ON)
-option (sse "Enable sse (default=automatic check)" ON)
-option (sse2 "Enable sse2 (default=automatic check)" ON)
-option (altivec "Enable altivec (default=automatic check)" ON)
-
-# Check for jack session availability
-check_c_source_compiles (
-    "#include <jack/session.h>
-    int main(int argc, char **argv)
-    {
-        jack_session_event_type_t x = JackSessionSave;
-        return 0;
-    }" HasJackSession
-)
-
-if (HasJackSession)
-    option (JackSessionSupport "Include Jack Session Support" ON)
-else (HasJackSession)
-    set (JackSessionSupport OFF)
-endif (HasJackSession)
-
-
-find_package (PkgConfig REQUIRED)
-if (PKG_CONFIG_FOUND)
-    message(STATUS "Found pkg-config ${PKG_CONFIG_EXECUTABLE}")
-else (PKG_CONFIG_FOUND)
-    message(FATAL_ERROR "pkg-config required but not found")
-endif (PKG_CONFIG_FOUND)
 
 
 # fltk
@@ -321,22 +288,8 @@ target_sources(rakarrack PRIVATE
   MIDIConverter.C
 )
 
+#FIXME
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -msse -msse2 -mfpmath=sse -ffast-math")
+
 install (TARGETS rakarrack RUNTIME DESTINATION bin)
 
-if (LV2Plugin)
-    if (EXISTS $ENV{LV2_PATH})
-        set(LV2_INSTALL_DIR $ENV{LV2_PATH} CACHE PATH
-        "Specifies where the LV2 libraries should be installed")
-    else()
-        set(LV2_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/lv2 CACHE PATH
-        "Specifies where the LV2 libraries should be installed")
-    endif()
-
-    pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
-    if (LV2_FOUND)
-        message (STATUS "Found lv2 package ${LV2_VERSION}")
-    else (LV2_FOUND)
-        message (FATAL_ERROR "lv2 package required but not found (version 1.0.0 needed)")
-    endif (LV2_FOUND)
-#    add_subdirectory(../lv2)
-endif (LV2Plugin)
