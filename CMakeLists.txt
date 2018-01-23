@@ -1,4 +1,4 @@
-#CMake file for LV2 Versions of Rakarrack Effects
+#CMake file for Rakarrack & LV2
 
 cmake_minimum_required(VERSION 2.6)
 
@@ -65,20 +65,17 @@ mark_as_advanced (CMAKE_BUILD_TYPE)
 mark_as_advanced (CMAKE_INSTALL_PREFIX)
 
 if (LV2Plugin)
-#    if (EXISTS $ENV{LV2_PATH})
-#        set(LV2_INSTALL_DIR $ENV{LV2_PATH} CACHE PATH
-#        "Specifies where the LV2 libraries should be installed")
-#        message ("Got env-lv2 path")
-#    else()
-#        set(LV2_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/lv2 CACHE PATH
-#        "Specifies where the LV2 libraries should be installed")
-#        message ("got lv2 libdir - ${CMAKE_INSTALL_LIBDIR}")
-#    endif()
-
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
     if (LV2_FOUND)
         message (STATUS "Found lv2 package ${LV2_VERSION}")
-        set(LV2_INSTALL_DIR lib/lv2/rkr.lv2 ) # CACHE PATH "Specifies where the LV2 libraries should be installed")
+
+        if (EXISTS $ENV{LV2_PATH})
+            set(LV2_INSTALL_DIR $ENV{LV2_PATH} CACHE PATH
+            "Specifies where the LV2 libraries should be installed")
+        else()
+            set(LV2_INSTALL_DIR lib/lv2/rkr.lv2 CACHE PATH
+            "Specifies where the LV2 libraries should be installed")
+        endif()
 
         #rename these files so they are easier to use for plugins
         SET( RVB x;Chamber;Concrete_Stairwell;Hall;Med_Hall;Large_Room;Large_Hall;Guitar_Ambience;Studio;Twilight;Santa_Lucia )

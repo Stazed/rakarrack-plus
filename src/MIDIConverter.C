@@ -58,7 +58,7 @@ MIDIConverter::MIDIConverter (char *jname, double sample_rate, uint32_t intermed
     schmittInit (32); // 32 == latency (tuneit default = 10)
     fftInit (32);     // == latency
 
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
     VAL_SUM = -50.0f;
     old_il_sum = -50.0f;
     old_ir_sum = -50.0f;
@@ -82,7 +82,7 @@ MIDIConverter::MIDIConverter (char *jname, double sample_rate, uint32_t intermed
     SND_SEQ_PORT_CAP_READ |
     SND_SEQ_PORT_CAP_SUBS_READ,
     SND_SEQ_PORT_TYPE_APPLICATION);
-#endif // LV2RUN
+#endif // LV2_SUPPORT
 
 };
 
@@ -91,12 +91,12 @@ MIDIConverter::~MIDIConverter ()
 {
     schmittFree();
     fftFree();
-#ifndef LV2RUN
+#ifndef LV2_SUPPORT
     snd_seq_close (port);
-#endif // LV2RUN
+#endif // LV2_SUPPORT
 }
 
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
 void
 MIDIConverter::out(float * efxoutl, float * efxoutr)
 {
@@ -141,7 +141,7 @@ MIDIConverter::out(float * efxoutl, float * efxoutr)
         schmittFloat(efxoutl,efxoutr, VAL_SUM, FREQS, LFREQS);
 
 }
-#endif // LV2RUN
+#endif // LV2_SUPPORT
 
 void
 MIDIConverter::cleanup()
@@ -467,7 +467,7 @@ MIDIConverter::send_Midi_Note (uint nota, float val_sum, bool is_On)
     midi_Note_Message[1]=anota;
     midi_Note_Message[2]=velocity;
     
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
     forge_midimessage(plug,0, midi_Note_Message,3);
 #else
     
@@ -491,7 +491,7 @@ MIDIConverter::send_Midi_Note (uint nota, float val_sum, bool is_On)
                            nBytes );
     jack_ringbuffer_write( m_buffSize, ( char * ) &nBytes, sizeof( nBytes ) );
     
-#endif // LV2RUN    
+#endif // LV2_SUPPORT    
 }
 
 void
@@ -603,7 +603,7 @@ MIDIConverter::getpar (int npar)
 
 };
 
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
 void
 MIDIConverter::update_freqs(float val) // val = 440.0f - user default settings
 {
@@ -618,4 +618,4 @@ MIDIConverter::update_freqs(float val) // val = 440.0f - user default settings
         LFREQS[i] = LFREQS[i - 1] + LOG_D_NOTE;
     }
 }
-#endif // LV2RUN
+#endif // LV2_SUPPORT

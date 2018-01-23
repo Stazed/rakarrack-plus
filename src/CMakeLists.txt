@@ -63,7 +63,7 @@ else(FONTCONFIG_FOUND)
 endif(FONTCONFIG_FOUND)
 
 # fftw3
-pkg_check_modules (FFTW3 REQUIRED fftw3>=0.22)
+pkg_check_modules (FFTW3 REQUIRED fftw3>=0.22 fftw3f>=0.22)
 if (FFTW3_FOUND)
     set (FFTW3_LIBRARIES "${FFTW3_LIBRARIES}")
     message (STATUS "Found fftw3 ${FFTW3_VERSION}")
@@ -71,23 +71,11 @@ else (FFTW3_FOUND)
     message (FATAL_ERROR "fftw3 >=0.22 required but not found")
 endif (FFTW3_FOUND)
 
-# fftw3f
-pkg_check_modules (FFTW3F REQUIRED fftw3f>=0.22)
-if (FFTW3F_FOUND)
-    set (FFTW3F_LIBRARIES "${FFTW3F_LIBRARIES}")
-    message (STATUS "Found fftw3f ${FFTW3F_VERSION}")
-else (FFTW3F_FOUND)
-    message (FATAL_ERROR "fftw3f >=0.22 required but not found")
-endif (FFTW3F_FOUND)
-
 find_package(Threads REQUIRED)
 if(THREADS_HAVE_PTHREAD_ARG)
   set_property(TARGET rakarrack PROPERTY COMPILE_OPTIONS "-pthread")
   set_property(TARGET rakarrack PROPERTY INTERFACE_COMPILE_OPTIONS "-pthread")
 endif()
-#if(CMAKE_THREAD_LIBS_INIT)
-#  target_link_libraries(rakarrack "${CMAKE_THREAD_LIBS_INIT}")
-#endif()
 
 pkg_check_modules(SNDFILE REQUIRED sndfile)
 if (SNDFILE_FOUND)
@@ -264,7 +252,6 @@ set(ExternLibraries
     ${JACK_LIBRARIES}
     ${FONTCONFIG_LIBRARIES}
     ${FFTW3_LIBRARIES}
-    ${FFTW3F_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
     ${SNDFILE_LIBRARIES}
     ${SAMPLERATE_LIBRARIES}

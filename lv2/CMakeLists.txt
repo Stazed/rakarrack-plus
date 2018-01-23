@@ -1,22 +1,8 @@
 #CMake file for LV2 Versions of Rakarrack Effects
 
-cmake_minimum_required(VERSION 2.6)
-
 project (rkrlv2)
 
-#set(LV2_INSTALL_DIR lib/lv2/rkr.lv2 ) # CACHE PATH "Specifies where the LV2 libraries should be installed")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -msse -msse2 -mfpmath=sse -ffast-math")
-
-# check for our various libraries
-#find_package(PkgConfig)
-#pkg_check_modules(LV2 REQUIRED lv2>=1.10.0)
-#pkg_check_modules(SAMPLERATE REQUIRED samplerate>=0.1.5)
-#pkg_check_modules(FFTW  REQUIRED fftw3f;fftw3) # fftw3f for midiconverter
-#pkg_check_modules(SNDFILE REQUIRED sndfile)
-
-include_directories (${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${FFTW_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
-link_directories (${LV2_LIBRARY_DIRS} ${SAMPLERATE_LIBRARY_DIRS} ${FFTW_LIBRARY_DIRS} ${SNDFILE_LIBRARY_DIRS})
-
 
 # config libraries
 
@@ -90,13 +76,14 @@ target_sources(rkrlv2 PRIVATE
   ../src/MIDIConverter.C
 )
 
-target_compile_definitions(rkrlv2 PRIVATE LV2RUN=1)
+target_compile_definitions(rkrlv2 PRIVATE LV2_SUPPORT=1)
 
 set_target_properties(rkrlv2 PROPERTIES PREFIX "")
 
 set_target_properties(rkrlv2 PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)
 
-target_link_libraries(rkrlv2 ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${FFTW3_LIBRARIES} ${FFTW3F_LIBRARIES} ${SNDFILE_LIBRARIES} )
+target_include_directories (rkrlv2 PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${FFTW3_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
+target_link_libraries(rkrlv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${FFTW3_LIBRARIES} ${SNDFILE_LIBRARIES} )
 
 # config install
 install(TARGETS rkrlv2

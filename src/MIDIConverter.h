@@ -22,7 +22,7 @@ const unsigned char  EVENT_NOTE_OFF         = 0x80;
 const unsigned char  EVENT_NOTE_ON          = 0x90;
 const unsigned char  NOTE_OFF_VELOCITY      = 64;
 
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
 
 #include "lv2/lv2plug.in/ns/ext/midi/midi.h"
 #include"../lv2/rkrlv2.h"
@@ -35,7 +35,7 @@ struct _RKRLV2;     // Forward declaration
 #include <alsa/asoundlib.h>
 #include "process.h"
 
-#endif // LV2RUN
+#endif // LV2_SUPPORT
 
 class MIDIConverter
 {
@@ -66,9 +66,9 @@ public:
     void cleanup ();
     void lv2_update_params(uint32_t period);
 
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
     void update_freqs(float val);
-#endif // LV2RUN
+#endif // LV2_SUPPORT
     
     int channel;
     int lanota;
@@ -83,13 +83,13 @@ public:
     float VelVal;
     unsigned char        midi_Note_Message[3];
 
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
     _RKRLV2* plug; // for access to forge_midimessage()
 #else
     jack_ringbuffer_t   *m_buffSize;
     jack_ringbuffer_t   *m_buffMessage;
     snd_seq_t *port;
-#endif // LV2RUN
+#endif // LV2_SUPPORT
 
 private:
 
@@ -111,7 +111,7 @@ private:
     float fSAMPLE_RATE;
     
     float Input_Gain;       // lv2 only
-#ifdef LV2RUN
+#ifdef LV2_SUPPORT
     float FREQS[12];
     float LFREQS[12];
     float VAL_SUM;
@@ -119,7 +119,7 @@ private:
     float old_ir_sum; // -50.0
     float val_il_sum;
     float val_ir_sum;
-#endif // LV2RUN
+#endif // LV2_SUPPORT
     
     //Parametrii
     int Pgain;              // lv2 only
