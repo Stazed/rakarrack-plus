@@ -8,7 +8,14 @@ import argparse
 import os
 import struct
 import rkrremap
+import sys
 
+
+try:
+    datadir = sys.argv[1]
+except IndexError:
+    datadir = "/usr/share/rkr.lv2"
+    
 def makeCarlaPresetHeader(f):
     f.write("<?xml version='1.0' encoding='UTF-8'?>\n")
     f.write("<!DOCTYPE CARLA-PROJECT>\n")
@@ -76,7 +83,7 @@ def makeRvbData(f,v):
     f.write("   <CustomData>\n")
     f.write("    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n")
     f.write("    <Key>http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile</Key>\n")
-    f.write("    <Value>/usr/share/rkr.lv2/" + p[v] + "</Value>\n")
+    f.write("    <Value>" + datadir + "/" + p[v] + "</Value>\n")
     f.write("   </CustomData>\n")
 
 def makeDlyData(f,v):
@@ -97,7 +104,7 @@ def makeDlyData(f,v):
     f.write("   <CustomData>\n")
     f.write("    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n")
     f.write("    <Key>http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile</Key>\n")
-    f.write("    <Value>/usr/share/rkr.lv2/" + p[v] + "</Value>\n")
+    f.write("    <Value>" + datadir + "/" + p[v] + "</Value>\n")
     f.write("   </CustomData>\n")
 
 def makeSndData(f,v):
@@ -115,7 +122,7 @@ def makeSndData(f,v):
     f.write("   <CustomData>\n")
     f.write("    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n")
     f.write("    <Key>http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile</Key>\n")
-    f.write("    <Value>/usr/share/rkr.lv2/" + p[v] + "</Value>\n")
+    f.write("    <Value>" + datadir + "/" + p[v] + "</Value>\n")
     f.write("   </CustomData>\n")
 
 def efxorder2structindex(x):
