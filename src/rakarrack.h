@@ -4,7 +4,6 @@
 #define rakarrack_h
 #include <FL/Fl.H>
 #include "process.h"
-#include "config.h"     // Not needed ??
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -16,6 +15,11 @@
 #include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Color_Chooser.H>
 #include <X11/xpm.h>
+
+#ifndef CMAKE_BUILD // FIXME remove when finished - update fluid
+#include "config.h"     // Not needed ??
+#endif
+
 class RKR;  // forward declaration
 
 class Analyzer : public Fl_Box {

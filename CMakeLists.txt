@@ -1,6 +1,16 @@
 #CMake file for Rakarrack & LV2
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
+
+set (VERSION "0.7.0")
+
+add_definitions (-D'VERSION="${VERSION}"')
+
+add_definitions(-DCMAKE_BUILD=1)
+add_definitions(-D'WEBSITE="rakarrack.sf.net"')
+add_definitions(-D'PACKAGE="rakarrack"')
+add_definitions(-D'DATADIR="/usr/local/share/rakarrack"') #FIXME directory
+add_definitions(-D'HELPDIR="/usr/local/share/doc/rakarrack"') #FIXME directory
 
 include (CheckCSourceCompiles)
 
@@ -29,12 +39,6 @@ else (HasJackSession)
 endif (HasJackSession)
 
 find_package (PkgConfig REQUIRED)
-if (PKG_CONFIG_FOUND)
-    message(STATUS "Found pkg-config ${PKG_CONFIG_EXECUTABLE}")
-else (PKG_CONFIG_FOUND)
-    message(FATAL_ERROR "pkg-config required but not found")
-endif (PKG_CONFIG_FOUND)
-
 
 # uninstall target
 if(NOT TARGET uninstall)
@@ -63,6 +67,11 @@ add_subdirectory(extra)
 
 install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
     DESTINATION share/doc/rakarrack)
+
+#TODO move from /data to main
+#install(FILES rakarrack.desktop
+#    DESTINATION share/applications)
+
 
 if (LV2Plugin)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)

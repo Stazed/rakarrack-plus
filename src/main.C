@@ -28,8 +28,11 @@
 #include "global.h"
 #include "rakarrack.h"
 #include "process.h"
-#include "config.h"     // PACKAGE, VERSION
 #include "jack.h"
+
+#ifndef CMAKE_BUILD // FIXME remove when finished
+#include "config.h"     // PACKAGE, VERSION
+#endif
 
 void
 show_help ()

@@ -25,7 +25,10 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Reverbtron.h"
+
+#ifndef CMAKE_BUILD // FIXME remove when finished
 #include "config.h"
+#endif
 
 //TODO: make LV2 plugins deal with this correctly
 //#ifndef DATADIR

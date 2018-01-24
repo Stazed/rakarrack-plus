@@ -2,18 +2,12 @@
 
 project (rakarrack)
 
-#WEBSITE, PACKAGE, DATADIR, VERSION
-#define WEBSITE "rakarrack.sf.net"
-#define PACKAGE "rakarrack"
-#define DATADIR "/usr/local/share/rakarrack"
-
-set (VERSION "0.7.0")
-
 set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
     # Rebuild objects if rules have changed, even if source hasn't.
 
 message (STATUS "Building Rakarrack version ${VERSION} for ${CMAKE_SYSTEM_NAME}")
 
+#Dependency check
 
 # fltk
 find_package (FLTK REQUIRED)

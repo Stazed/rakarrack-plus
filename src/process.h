@@ -56,9 +56,11 @@
 #include "Vibe.h"
 #include "Infinity.h"
 #include "beattracker.h"
-#include "config.h"       // WEBSITE, PACKAGE, DATADIR
 #include <jack/jack.h>
 
+#ifndef CMAKE_BUILD // FIXME remove when finished
+#include "config.h"       // WEBSITE, PACKAGE, DATADIR
+#endif
 
 class RKR
 {
