@@ -9,8 +9,8 @@ add_definitions (-D'VERSION="${VERSION}"')
 add_definitions(-DCMAKE_BUILD=1)
 add_definitions(-D'WEBSITE="rakarrack.sf.net"')
 add_definitions(-D'PACKAGE="rakarrack"')
-add_definitions(-D'DATADIR="/usr/local/share/rakarrack"') #FIXME directory
-add_definitions(-D'HELPDIR="/usr/local/share/doc/rakarrack"') #FIXME directory
+add_definitions(-D'DATADIR="${CMAKE_INSTALL_PREFIX}/share/rakarrack"')
+add_definitions(-D'HELPDIR="${CMAKE_INSTALL_PREFIX}/share/doc/rakarrack"')
 
 include (CheckCSourceCompiles)
 
