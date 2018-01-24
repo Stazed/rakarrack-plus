@@ -55,16 +55,14 @@ add_subdirectory(icons)
 add_subdirectory(doc)
 add_subdirectory(extra)
 
-include(GNUInstallDirs)
-mark_as_advanced (EXECUTABLE_OUTPUT_PATH)
-mark_as_advanced (LIBRARY_OUTPUT_PATH)
-mark_as_advanced (CMAKE_BUILD_TYPE)
-mark_as_advanced (CMAKE_INSTALL_PREFIX)
+#include(GNUInstallDirs)
+#mark_as_advanced (EXECUTABLE_OUTPUT_PATH)
+#mark_as_advanced (LIBRARY_OUTPUT_PATH)
+#mark_as_advanced (CMAKE_BUILD_TYPE)
+#mark_as_advanced (CMAKE_INSTALL_PREFIX)
 
-
- #/usr/bin/install -c -m 644 COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README '/usr/local/share/doc/rakarrack'
-
-
+install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
+    DESTINATION share/doc/rakarrack)
 
 if (LV2Plugin)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)

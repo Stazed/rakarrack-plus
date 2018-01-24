@@ -1,6 +1,4 @@
-#message("In /doc/help")
 
-add_subdirectory(imagenes)
 add_subdirectory(css)
 
 install (FILES help.html
