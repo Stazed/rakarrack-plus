@@ -210,7 +210,7 @@ def readBankFile(filename):
         b = struct.unpack(rkb_fmt,buf);
         if b[0].decode("utf-8")[0] == '\00':
             continue
-        print(b[0].decode("utf-8"))
+    #    print(b[0].decode("utf-8"))
     #    print("char Preset_Name[64]; ", b[0].decode("utf-8"))
     #    print("char Author[64]; ", b[1].decode("utf-8"))
     #    print("char Classe[36]; ", b[2].decode("utf-8"))

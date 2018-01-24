@@ -99,9 +99,12 @@ install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
 )
 
 #also install carla presets into usr share
-install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
-  DESTINATION share/rkr.lv2
-)
-install (DIRECTORY presets/
-  DESTINATION share/rkr.lv2
-)
+#install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
+#  DESTINATION share/rkr.lv2
+#)
+
+if(BuildCarlaPresets)
+    install (DIRECTORY presets/
+      DESTINATION share/rkr.lv2
+    )
+endif(BuildCarlaPresets)

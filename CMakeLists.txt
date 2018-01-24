@@ -16,6 +16,7 @@ include (CheckCSourceCompiles)
 
 option (BuildForDebug "Include gdb debugging support" OFF)
 option (LV2Plugin "Build rakarack lv2 plugin interface" ON)
+option (BuildCarlaPresets "Build Carla .carxp for lv2 from default banks" ON)
 #option (optimizations "Enable optimizations" ON)
 #option (vectorize "Enable vectorize" ON)
 #option (sse "Enable sse (default=automatic check)" ON)
@@ -85,6 +86,10 @@ if (LV2Plugin)
             set(LV2_INSTALL_DIR lib/lv2/rkr.lv2 CACHE PATH
             "Specifies where the LV2 libraries should be installed")
         endif()
+
+        if(BuildCarlaPresets)
+            execute_process(COMMAND ./convertbank.py ${CMAKE_INSTALL_PREFIX}/${LV2_INSTALL_DIR} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/lv2)
+        endif(BuildCarlaPresets)
 
         #rename these files so they are easier to use for plugins
         SET( RVB x;Chamber;Concrete_Stairwell;Hall;Med_Hall;Large_Room;Large_Hall;Guitar_Ambience;Studio;Twilight;Santa_Lucia )
