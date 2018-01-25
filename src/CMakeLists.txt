@@ -18,15 +18,13 @@ else (FLTK_FOUND)
     message (FATAL_ERROR "FLTK required but not found")
 endif (FLTK_FOUND)
 
-#find_program (HAVE_ACONNECT NAMES aconnect )
-#check_library_exists(aconnect "" "" HAVE_ACONNECT)
-#pkg_check_modules (ACONNECT REQUIRED aconnect)
-#find_package (ACONNECT REQUIRED)
-#if (HAVE_ACONNECT)
-#    message (STATUS "Found Aconnect")
-#else (HAVE_ACONNECT)
-#    message (FATAL_ERROR "Aconnect required but not found")
-#endif (HAVE_ACONNECT)
+#aconnect
+find_program(ACONNECT aconnect)
+if (ACONNECT)
+    message (STATUS "Found aconnect in ${ACONNECT}")
+else (ACONNECT)
+    message (FATAL_ERROR "Aconnect required but not found")
+endif (ACONNECT)
 
 # Alsa
 pkg_check_modules (ALSA REQUIRED alsa>=1.0.17)
