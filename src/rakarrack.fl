@@ -5,9 +5,6 @@ code_name {.cxx}
 decl {\#include "process.h"} {public local
 }
 
-decl {\#include "config.h"} {public local
-}
-
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
 }
 
@@ -910,7 +907,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {50 111 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {715 235 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -12223,7 +12220,7 @@ Show_Next_Time();}
           } {}
           Fl_Box Recognize_Label {
             label {Recognize Note Optimization}
-            user_data 7 selected
+            user_data 7
             xywh {10 298 150 17} labelsize 10 when 0
           }
         }
