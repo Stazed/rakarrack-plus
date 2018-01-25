@@ -16,6 +16,10 @@ try:
 except IndexError:
     datadir = "/usr/share/rkr.lv2"
     
+directory = "presets"
+if not os.path.exists(directory):
+    os.makedirs(directory)    
+
 def makeCarlaPresetHeader(f):
     f.write("<?xml version='1.0' encoding='UTF-8'?>\n")
     f.write("<!DOCTYPE CARLA-PROJECT>\n")
@@ -237,6 +241,8 @@ def readBankFile(filename):
         #open file
         ofname = b[0].decode("utf-8")
         ofname = "presets/" + ofname.split('\0',1)[0] + ".carxp"
+        
+        directory = "presets"
         of = open(ofname,'w')
 
         #print header

@@ -88,7 +88,10 @@ if (LV2Plugin)
         endif()
 
         if(BuildCarlaPresets)
+            message (STATUS "Building Carla presets...")
             execute_process(COMMAND ./convertbank.py ${CMAKE_INSTALL_PREFIX}/${LV2_INSTALL_DIR} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/lv2)
+        else(BuildCarlaPresets)
+            message (STATUS "Not building Carla presets.")
         endif(BuildCarlaPresets)
 
         #rename these files so they are easier to use for plugins
