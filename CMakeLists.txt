@@ -89,14 +89,6 @@ if(NOT TARGET uninstall)
         COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif()
 
-
-add_subdirectory(src)
-add_subdirectory(man)
-add_subdirectory(data)
-add_subdirectory(icons)
-add_subdirectory(doc)
-add_subdirectory(extra)
-
 #include(GNUInstallDirs)
 #mark_as_advanced (EXECUTABLE_OUTPUT_PATH)
 #mark_as_advanced (LIBRARY_OUTPUT_PATH)
@@ -110,6 +102,46 @@ install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
 #install(FILES rakarrack.desktop
 #    DESTINATION share/applications)
 
+if (BuildForDebug)
+	set (CMAKE_BUILD_TYPE "Debug")
+	set (CMAKE_CXX_FLAGS_DEBUG ${BuildOptionsDebug})
+	message (STATUS "Building for ${CMAKE_BUILD_TYPE}, flags: ${CMAKE_CXX_FLAGS_DEBUG}")
+else (BuildForDebug)
+	set (CMAKE_BUILD_TYPE "Release")
+	
+	set (CMAKE_CXX_FLAGS_RELEASE ${BuildOptionsBasic})
+					
+	if (SUPPORT_SSE)
+            if(EnableSSE)
+                if(EnableSSE2)
+                    set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_SSE2}")
+                else(EnableSSE2)
+                    set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_SSE}")
+                endif(EnableSSE2)
+            endif(EnableSSE)
+	endif (SUPPORT_SSE)
+
+        if (SUPPORT_VECTOR)
+            if(EnableVectorization)
+                set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_Vectorization}")
+            endif(EnableVectorization)
+        endif(SUPPORT_VECTOR)
+
+        if (SUPPORT_ALTIVEC)
+            if(EnableAltivec)
+                set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} $[BuildOptions_Altivec}")
+            endif(EnableAltivec)
+	endif (SUPPORT_ALTIVEC)
+
+	message (STATUS "Building for ${CMAKE_BUILD_TYPE}, flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+endif (BuildForDebug)
+
+add_subdirectory(src)
+add_subdirectory(man)
+add_subdirectory(data)
+add_subdirectory(icons)
+add_subdirectory(doc)
+add_subdirectory(extra)
 
 if (BuildLV2Plugin)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
