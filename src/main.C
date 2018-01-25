@@ -30,10 +30,6 @@
 #include "process.h"
 #include "jack.h"
 
-#ifndef CMAKE_BUILD // FIXME remove when finished
-#include "config.h"     // PACKAGE, VERSION
-#endif
-
 void
 show_help ()
 {

@@ -15,11 +15,6 @@
 #include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Color_Chooser.H>
 #include <X11/xpm.h>
-
-#ifndef CMAKE_BUILD // FIXME remove when finished - update fluid
-#include "config.h"     // Not needed ??
-#endif
-
 class RKR;  // forward declaration
 
 class Analyzer : public Fl_Box {

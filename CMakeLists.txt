@@ -5,8 +5,6 @@ cmake_minimum_required(VERSION 3.1)
 set (PACKAGE_VERSION "0.7.0")
 
 add_definitions (-D'VERSION="${PACKAGE_VERSION}"')
-
-add_definitions(-DCMAKE_BUILD=1)
 add_definitions(-D'WEBSITE="rakarrack.sf.net"')
 add_definitions(-D'PACKAGE="rakarrack"')
 add_definitions(-D'DATADIR="${CMAKE_INSTALL_PREFIX}/share/rakarrack"')

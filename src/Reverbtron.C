@@ -26,15 +26,6 @@
 #include <math.h>
 #include "Reverbtron.h"
 
-#ifndef CMAKE_BUILD // FIXME remove when finished
-#include "config.h"
-#endif
-
-//TODO: make LV2 plugins deal with this correctly
-//#ifndef DATADIR
-//#define DATADIR "/usr/local/share/rakarrack"
-//#endif
-
 Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2

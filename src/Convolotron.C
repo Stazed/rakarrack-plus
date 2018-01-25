@@ -26,10 +26,6 @@
 #include <math.h>
 #include "Convolotron.h"
 
-#ifndef CMAKE_BUILD // FIXME remove when finished
-#include "config.h" // for DATADIR
-#endif
-
 Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize)
 {
     SAMPLE_RATE = (unsigned int)sample_rate;
