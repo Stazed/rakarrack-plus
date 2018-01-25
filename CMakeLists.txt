@@ -13,15 +13,33 @@ add_definitions(-D'DATADIR="${CMAKE_INSTALL_PREFIX}/share/rakarrack"')
 add_definitions(-D'HELPDIR="${CMAKE_INSTALL_PREFIX}/share/doc/rakarrack"')
 
 include (CheckCSourceCompiles)
+include(CheckCXXCompilerFlag)
 
-option (BuildForDebug "Include gdb debugging support" OFF)
+check_cxx_compiler_flag("-msse2" SUPPORT_SSE)
+
 option (LV2Plugin "Build rakarack lv2 plugin interface" ON)
 option (BuildCarlaPresets "Build Carla .carxp for lv2 from default banks" ON)
+option (BuildForDebug "Include gdb debugging support" OFF)
 #option (optimizations "Enable optimizations" ON)
 #option (vectorize "Enable vectorize" ON)
-#option (sse "Enable sse (default=automatic check)" ON)
-#option (sse2 "Enable sse2 (default=automatic check)" ON)
 #option (altivec "Enable altivec (default=automatic check)" ON)
+
+
+set(CMAKE_BUILD_TYPE "Release")
+
+set (BuildOptions_SSE
+	"-msse -msse2 -mfpmath=sse"
+  CACHE STRING "SSE compiler options"
+)
+
+set (BuildOptionsBasic
+    "-Wno-unused-parameter -O3 -ffast-math"
+    CACHE STRING "basic X86 complier options"
+)
+
+set (BuildOptionsDebug
+    "-O0 -g3 -ggdb -Wall -Wno-unused-parameter -Wpointer-arith" CACHE STRING "Debug build flags")
+
 
 # Check for jack session availability
 check_c_source_compiles (

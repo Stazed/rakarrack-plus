@@ -269,8 +269,24 @@ target_sources(rakarrack PRIVATE
   MIDIConverter.C
 )
 
+if (BuildForDebug)
+	set (CMAKE_BUILD_TYPE "Debug")
+	set (CMAKE_CXX_FLAGS_DEBUG ${BuildOptionsDebug})
+	message (STATUS "Building for ${CMAKE_BUILD_TYPE}, flags: ${CMAKE_CXX_FLAGS_DEBUG}")
+else (BuildForDebug)
+	set (CMAKE_BUILD_TYPE "Release")
+	
+	set (CMAKE_CXX_FLAGS_RELEASE ${BuildOptionsBasic})
+					
+	if (SUPPORT_SSE)
+		set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_SSE}")
+	endif (SUPPORT_SSE)
+	
+	message (STATUS "Building for ${CMAKE_BUILD_TYPE}, flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+endif (BuildForDebug)
+
 #FIXME
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -msse -msse2 -mfpmath=sse -ffast-math")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -msse -msse2 -mfpmath=sse -ffast-math")
 
 install (TARGETS rakarrack RUNTIME DESTINATION bin)
 
