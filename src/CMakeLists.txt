@@ -279,14 +279,29 @@ else (BuildForDebug)
 	set (CMAKE_CXX_FLAGS_RELEASE ${BuildOptionsBasic})
 					
 	if (SUPPORT_SSE)
-		set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_SSE}")
+            if(EnableSSE)
+                if(EnableSSE2)
+                    set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_SSE2}")
+                else(EnableSSE2)
+                    set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_SSE}")
+                endif(EnableSSE2)
+            endif(EnableSSE)
 	endif (SUPPORT_SSE)
-	
+
+        if (SUPPORT_VECTOR)
+            if(EnableVectorization)
+                set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_Vectorization}")
+            endif(EnableVectorization)
+        endif(SUPPORT_VECTOR)
+
+        if (SUPPORT_ALTIVEC)
+            if(EnableAltivec)
+                set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} $[BuildOptions_Altivec}")
+            endif(EnableAltivec)
+	endif (SUPPORT_ALTIVEC)
+
 	message (STATUS "Building for ${CMAKE_BUILD_TYPE}, flags: ${CMAKE_CXX_FLAGS_RELEASE}")
 endif (BuildForDebug)
-
-#FIXME
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -msse -msse2 -mfpmath=sse -ffast-math")
 
 install (TARGETS rakarrack RUNTIME DESTINATION bin)
 

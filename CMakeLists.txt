@@ -16,24 +16,43 @@ include (CheckCSourceCompiles)
 include(CheckCXXCompilerFlag)
 
 check_cxx_compiler_flag("-msse2" SUPPORT_SSE)
+check_cxx_compiler_flag("-ftree-vectorize" SUPPORT_VECTOR)
+check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 
-option (LV2Plugin "Build rakarack lv2 plugin interface" ON)
+option (BuildLV2Plugin "Build rakarack lv2 plugin interface" ON)
 option (BuildCarlaPresets "Build Carla .carxp for lv2 from default banks" ON)
 option (BuildForDebug "Include gdb debugging support" OFF)
 #option (optimizations "Enable optimizations" ON)
-#option (vectorize "Enable vectorize" ON)
-#option (altivec "Enable altivec (default=automatic check)" ON)
+option (EnableSSE "Enable SSE (default=automatic check)" ON)
+option (EnableSSE2 "Enable SSE2 (default=automatic check)" ON)
+option (EnableVectorization "Enable vectorize" ON)
+option (EnableAltivec "Enable altivec (default=automatic check)" ON)
 
 
 set(CMAKE_BUILD_TYPE "Release")
 
 set (BuildOptions_SSE
-	"-msse -msse2 -mfpmath=sse"
-  CACHE STRING "SSE compiler options"
+    "-msse -mfpmath=sse"
+    CACHE STRING "SSE compiler options"
+)
+
+set (BuildOptions_SSE2
+    "-msse -msse2 -mfpmath=sse"
+    CACHE STRING "SSE2 compiler options"
+)
+
+set(BuildOptions_Vectorization
+    "-ftree-vectorize -fvect-cost-model"
+    CACHE STRING "Vectorization compiler options"
+)
+
+set(BuildOptions_Altivec
+    "-maltivec"
+    CACHE STRING "Altivec compiler options"
 )
 
 set (BuildOptionsBasic
-    "-Wno-unused-parameter -O3 -ffast-math"
+    "-Wno-unused-parameter -O3 -ffast-math -pipe -fsigned-char"
     CACHE STRING "basic X86 complier options"
 )
 
@@ -81,8 +100,8 @@ add_subdirectory(extra)
 #include(GNUInstallDirs)
 #mark_as_advanced (EXECUTABLE_OUTPUT_PATH)
 #mark_as_advanced (LIBRARY_OUTPUT_PATH)
-#mark_as_advanced (CMAKE_BUILD_TYPE)
-#mark_as_advanced (CMAKE_INSTALL_PREFIX)
+mark_as_advanced (CMAKE_BUILD_TYPE)
+mark_as_advanced (CMAKE_INSTALL_PREFIX)
 
 install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
     DESTINATION share/doc/rakarrack)
@@ -92,7 +111,7 @@ install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
 #    DESTINATION share/applications)
 
 
-if (LV2Plugin)
+if (BuildLV2Plugin)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
     if (LV2_FOUND)
         message (STATUS "Found lv2 package ${LV2_VERSION}")
@@ -140,4 +159,4 @@ if (LV2Plugin)
     else (LV2_FOUND)
         message (FATAL_ERROR "lv2 package required but not found (version 1.0.0 needed)")
     endif (LV2_FOUND)
-endif (LV2Plugin)
+endif (BuildLV2Plugin)
