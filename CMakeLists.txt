@@ -1,10 +1,10 @@
 #CMake file for Rakarrack & LV2
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
-set (VERSION "0.7.0")
+set (PACKAGE_VERSION "0.7.0")
 
-add_definitions (-D'VERSION="${VERSION}"')
+add_definitions (-D'VERSION="${PACKAGE_VERSION}"')
 
 add_definitions(-DCMAKE_BUILD=1)
 add_definitions(-D'WEBSITE="rakarrack.sf.net"')
