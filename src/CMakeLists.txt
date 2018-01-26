@@ -13,8 +13,6 @@ message (STATUS "Building Rakarrack version ${VERSION} for ${CMAKE_SYSTEM_NAME}"
 find_package (FLTK REQUIRED)
 if (FLTK_FOUND)
     set (FLTK_LIBRARIES "${FLTK_LIBRARIES}")
-else (FLTK_FOUND)
-    message (FATAL_ERROR "FLTK required but not found")
 endif (FLTK_FOUND)
 
 #aconnect
@@ -26,19 +24,15 @@ else (ACONNECT)
 endif (ACONNECT)
 
 # Alsa
-pkg_check_modules (ALSA REQUIRED alsa>=1.0.17)
+find_package (ALSA REQUIRED alsa>=1.0.17)
 if (ALSA_FOUND)
     set (ALSA_LIBRARIES "${ALSA_LIBRARIES}")
-else (ALSA_FOUND)
-    message(FATAL_ERROR "Alsa >=1.0.17 required but not found")
 endif (ALSA_FOUND)
 
 # Jack
 pkg_check_modules (JACK REQUIRED jack>=0.115.6)
 if (JACK_FOUND)
     set (JACK_LIBRARIES "${JACK_LIBRARIES}")
-else (JACK_FOUND)
-    message(FATAL_ERROR "Jack >=0.115.6 required but not found")
 endif (JACK_FOUND)
 
 # fontconfig
@@ -46,16 +40,12 @@ pkg_check_modules (FONTCONFIG REQUIRED fontconfig>=0.22)
 mark_as_advanced(FONTCONFIG_LIBRARIES)
 if(FONTCONFIG_FOUND)
     set (FONTCONFIG_LIBRARIES "${FONTCONFIG_LIBRARIES}")
-else(FONTCONFIG_FOUND)
-    message (FATAL_ERROR "fontconfig>=0.22 required but not found")
 endif(FONTCONFIG_FOUND)
 
 # fftw3
 pkg_check_modules (FFTW3 REQUIRED fftw3>=0.22 fftw3f>=0.22)
 if (FFTW3_FOUND)
     set (FFTW3_LIBRARIES "${FFTW3_LIBRARIES}")
-else (FFTW3_FOUND)
-    message (FATAL_ERROR "fftw3 >=0.22 required but not found")
 endif (FFTW3_FOUND)
 
 find_package(Threads REQUIRED)
@@ -67,64 +57,48 @@ endif()
 pkg_check_modules(SNDFILE REQUIRED sndfile)
 if (SNDFILE_FOUND)
     set (SNDFILE_LIBRARIES "${SNDFILE_LIBRARIES}")
-else (SNDFILE_FOUND)
-    message (FATAL_ERROR "sndfile required but not found")
 endif (SNDFILE_FOUND)
 
 # samplerate
 pkg_check_modules(SAMPLERATE REQUIRED samplerate>=0.1.5)
 if (SAMPLERATE_FOUND)
     set (SAMPLERATE_LIBRARIES "${SAMPLERATE_LIBRARIES}")
-else (SAMPLERATE_FOUND)
-    message (FATAL_ERROR "samplerate required but not found")
 endif (SAMPLERATE_FOUND)
 
 # X11
 find_package(X11 REQUIRED)
 if (X11_FOUND)
     set (X11_LIBRARIES "${X11_LIBRARIES}")
-else (X11_FOUND)
-    message (FATAL_ERROR "x11 required but not found")
 endif (X11_FOUND)
 
 # Xft
 pkg_check_modules(XFT REQUIRED xft)
 if (XFT_FOUND)
     set (XFT_LIBRARIES "${XFT_LIBRARIES}")
-else (XFT_FOUND)
-    message (FATAL_ERROR "Xft required but not found")
 endif (XFT_FOUND)
 
 # Xrender
 pkg_check_modules(XRENDER REQUIRED xrender)
 if (XRENDER_FOUND)
     set (XRENDER_LIBRARIES "${XRENDER_LIBRARIES}")
-else (XRENDER_FOUND)
-    message (FATAL_ERROR "Xrender required but not found")
 endif (XRENDER_FOUND)
 
 # Xpm
 pkg_check_modules(XPM REQUIRED xpm)
 if (XPM_FOUND)
     set (XPM_LIBRARIES "${XPM_LIBRARIES}")
-else (XPM_FOUND)
-    message (FATAL_ERROR "Xpm required but not found")
 endif (XPM_FOUND)
 
 # freetype
 find_package(Freetype REQUIRED )
 if (FREETYPE_FOUND)
     set (FREETYPE_LIBRARIES "${FREETYPE_LIBRARIES}")
-else (FREETYPE_FOUND)
-    message (FATAL_ERROR "freetype required but not found")
 endif (FREETYPE_FOUND)
 
 # libz
 find_package(ZLIB REQUIRED)
 if (ZLIB_FOUND)
     set (ZLIB_LIBRARIES "${ZLIB_LIBRARIES}")
-else (ZLIB_FOUND)
-    message(FATAL_ERROR "libz required but not found")
 endif (ZLIB_FOUND)
 
 # librt
