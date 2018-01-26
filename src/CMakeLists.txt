@@ -5,7 +5,11 @@ project (rakarrack)
 set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
     # Rebuild objects if rules have changed, even if source hasn't.
 
-message (STATUS "Building Rakarrack version ${VERSION} for ${CMAKE_SYSTEM_NAME}")
+if(BuildRakarrack)
+    message (STATUS "Building Rakarrack version ${VERSION} for ${CMAKE_SYSTEM_NAME}")
+else(BuildRakarrack)
+    message (WARNING "Not building Rakarrack efx host!")
+endif (BuildRakarrack)
 
 #Dependency check
 
@@ -110,132 +114,133 @@ else (HAVE_RT)
 endif (HAVE_LIBRT)
 #To link-in librt.a or librt.so, which is the Realtime Extensions library.
 
+if(BuildRakarrack)
+    if (EnableJackSessionSupport)
+        message(STATUS "With jack session support")
+        add_definitions(-DJACK_SESSION=1)
+    else (EnableJackSessionSupport)
+        message(STATUS "Without jack session support")
+    endif (EnableJackSessionSupport)
 
-if (JackSessionSupport)
-    message(STATUS "With jack session support")
-    add_definitions(-DJACK_SESSION=1)
-else (JackSessionSupport)
-    message(STATUS "Without jack session support")
-endif (JackSessionSupport)
-
-set (ProgSources
-    jack.C 
-    rakarrack.cxx
-    process.C
-    fileio.C
-    varios.C
-    FPreset.C
-    Reverb.C
-    Chorus.C
-    EffectLFO.C
-    Echo.C
-    Phaser.C
-    Distorsion.C
-    EQ.C
-    Compressor.C
-    AnalogFilter.C
-    Alienwah.C
-    beattracker.C
-    delayline.C
-    Filter.C
-    HarmonicEnhancer.C
-    DynamicFilter.C
-    SVFilter.C
-    RBFilter.C
-    FormantFilter.C
-    FilterParams.C
-    Pan.C
-    Harmonizer.C
-    smbPitchShift.C
-    Tuner.C
-    MusicDelay.C
-    Gate.C
-    RecognizeNote.C
-    RecChord.C
-    rkrMIDI.C
-    NewDist.C
-    APhaser.C
-    Dual_Flange.C
-    Exciter.C
-    MBDist.C
-    Valve.C
-    Arpie.C
-    Expander.C
-    Ring.C
-    Shuffle.C
-    mayer_fft.C
-    MBVvol.C
-    metronome.C
-    Convolotron.C
-    Synthfilter.C
-    Resample.C
-    Looper.C
-    RyanWah.C
-    RBEcho.C
-    CoilCrafter.C
-    ShelfBoost.C
-    Vocoder.C
-    Waveshaper.C
-    Sustainer.C
-    Sequence.C
-    Shifter.C
-    StompBox.C
-    Reverbtron.C
-    Echotron.C
-    StereoHarm.C
-    CompBand.C
-    Opticaltrem.C
-    Vibe.C
-    Infinity.C
-    Cabinet.C
-)
+    set (ProgSources
+        jack.C 
+        rakarrack.cxx
+        process.C
+        fileio.C
+        varios.C
+        FPreset.C
+        Reverb.C
+        Chorus.C
+        EffectLFO.C
+        Echo.C
+        Phaser.C
+        Distorsion.C
+        EQ.C
+        Compressor.C
+        AnalogFilter.C
+        Alienwah.C
+        beattracker.C
+        delayline.C
+        Filter.C
+        HarmonicEnhancer.C
+        DynamicFilter.C
+        SVFilter.C
+        RBFilter.C
+        FormantFilter.C
+        FilterParams.C
+        Pan.C
+        Harmonizer.C
+        smbPitchShift.C
+        Tuner.C
+        MusicDelay.C
+        Gate.C
+        RecognizeNote.C
+        RecChord.C
+        rkrMIDI.C
+        NewDist.C
+        APhaser.C
+        Dual_Flange.C
+        Exciter.C
+        MBDist.C
+        Valve.C
+        Arpie.C
+        Expander.C
+        Ring.C
+        Shuffle.C
+        mayer_fft.C
+        MBVvol.C
+        metronome.C
+        Convolotron.C
+        Synthfilter.C
+        Resample.C
+        Looper.C
+        RyanWah.C
+        RBEcho.C
+        CoilCrafter.C
+        ShelfBoost.C
+        Vocoder.C
+        Waveshaper.C
+        Sustainer.C
+        Sequence.C
+        Shifter.C
+        StompBox.C
+        Reverbtron.C
+        Echotron.C
+        StereoHarm.C
+        CompBand.C
+        Opticaltrem.C
+        Vibe.C
+        Infinity.C
+        Cabinet.C
+    )
 
 
-set(ExternLibraries
-    ${FLTK_LIBRARIES}
-    ${ALSA_LIBRARIES}
-    ${JACK_LIBRARIES}
-    ${FONTCONFIG_LIBRARIES}
-    ${FFTW3_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
-    ${SNDFILE_LIBRARIES}
-    ${SAMPLERATE_LIBRARIES}
-    ${X11_LIBRARIES}
-    ${XFT_LIBRARIES}
-    ${XRENDER_LIBRARIES}
-    ${XPM_LIBRARIES}
-    ${FREETYPE_LIBRARIES}
-    ${ZLIB_LIBRARIES}
-    dl
-    rt
-    m
-)
+    set(ExternLibraries
+        ${FLTK_LIBRARIES}
+        ${ALSA_LIBRARIES}
+        ${JACK_LIBRARIES}
+        ${FONTCONFIG_LIBRARIES}
+        ${FFTW3_LIBRARIES}
+        ${CMAKE_THREAD_LIBS_INIT}
+        ${SNDFILE_LIBRARIES}
+        ${SAMPLERATE_LIBRARIES}
+        ${X11_LIBRARIES}
+        ${XFT_LIBRARIES}
+        ${XRENDER_LIBRARIES}
+        ${XPM_LIBRARIES}
+        ${FREETYPE_LIBRARIES}
+        ${ZLIB_LIBRARIES}
+        dl
+        rt
+        m
+    )
 
-add_executable (rakarrack ${ProgSources} main.C)
+    add_executable (rakarrack ${ProgSources} main.C)
 
-target_include_directories (
-    rakarrack PRIVATE
-    ${FLTK_INCLUDE_DIRS}
-    ${ALSA_INCLUDE_DIRS}
-    ${JACK_INCLUDE_DIRS}
-    ${FONTCONFIG_INCLUDE_DIRS}
-    ${FFTW3_INCLuDE_DIRS}
-    ${SNDFILE_INCLUDE_DIRS}
-    ${SAMPLERATE_INCLUDE_DIRS}
-    ${X11_INCLUDE_DIRS}
-    ${XFT_INCLUDE_DIRS}
-    ${XRENDER_INCLUDE_DIRS}
-    ${XPM_INCLUDE_DIRS}
-    ${FREETYPE_INCLUDE_DIRS}
-    ${ZLIB_INCLUDE_DIRS}
-)
+    target_include_directories (
+        rakarrack PRIVATE
+        ${FLTK_INCLUDE_DIRS}
+        ${ALSA_INCLUDE_DIRS}
+        ${JACK_INCLUDE_DIRS}
+        ${FONTCONFIG_INCLUDE_DIRS}
+        ${FFTW3_INCLuDE_DIRS}
+        ${SNDFILE_INCLUDE_DIRS}
+        ${SAMPLERATE_INCLUDE_DIRS}
+        ${X11_INCLUDE_DIRS}
+        ${XFT_INCLUDE_DIRS}
+        ${XRENDER_INCLUDE_DIRS}
+        ${XPM_INCLUDE_DIRS}
+        ${FREETYPE_INCLUDE_DIRS}
+        ${ZLIB_INCLUDE_DIRS}
+    )
 
-target_link_libraries (rakarrack ${ExternLibraries})
+    target_link_libraries (rakarrack ${ExternLibraries})
 
-set_source_files_properties(MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=gnu++98)
-target_sources(rakarrack PRIVATE
-  MIDIConverter.C
-)
+    set_source_files_properties(MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=gnu++98)
+    target_sources(rakarrack PRIVATE
+      MIDIConverter.C
+    )
 
-install (TARGETS rakarrack RUNTIME DESTINATION bin)
+    install (TARGETS rakarrack RUNTIME DESTINATION bin)
 
+endif(BuildRakarrack)

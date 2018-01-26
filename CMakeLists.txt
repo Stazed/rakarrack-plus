@@ -17,7 +17,8 @@ check_cxx_compiler_flag("-msse2" SUPPORT_SSE)
 check_cxx_compiler_flag("-ftree-vectorize" SUPPORT_VECTOR)
 check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 
-option (BuildLV2Plugin "Build rakarack lv2 plugin interface" ON)
+option (BuildRakarrack "Build rakarrack" ON)
+option (BuildLV2Plugin "Build rakarack lv2 plugins (rkrlv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
 option (BuildForDebug "Include gdb debugging support" OFF)
 #option (optimizations "Enable optimizations" ON)
@@ -69,9 +70,9 @@ check_c_source_compiles (
 )
 
 if (HasJackSession)
-    option (JackSessionSupport "Include Jack Session Support" ON)
+    option (EnableJackSessionSupport "Include Jack Session Support" ON)
 else (HasJackSession)
-    set (JackSessionSupport OFF)
+    set (EnableJackSessionSupport OFF)
 endif (HasJackSession)
 
 find_package (PkgConfig REQUIRED)
@@ -92,10 +93,12 @@ endif()
 #mark_as_advanced (LIBRARY_OUTPUT_PATH)
 mark_as_advanced (CMAKE_BUILD_TYPE)
 mark_as_advanced (CMAKE_INSTALL_PREFIX)
+mark_as_advanced (ACONNECT)
 
-install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
-    DESTINATION share/doc/rakarrack)
-
+if(BuildRakarrack)
+    install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
+        DESTINATION share/doc/rakarrack)
+endif(BuildRakarrack)
 #TODO move from /data to main
 #install(FILES rakarrack.desktop
 #    DESTINATION share/applications)
@@ -135,11 +138,14 @@ else (BuildForDebug)
 endif (BuildForDebug)
 
 add_subdirectory(src)
-add_subdirectory(man)
-add_subdirectory(data)
-add_subdirectory(icons)
-add_subdirectory(doc)
-add_subdirectory(extra)
+
+if(BuildRakarrack)
+    add_subdirectory(man)
+    add_subdirectory(data)
+    add_subdirectory(icons)
+    add_subdirectory(doc)
+    add_subdirectory(extra)
+endif (BuildRakarrack)
 
 if (BuildLV2Plugin)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
@@ -184,4 +190,6 @@ if (BuildLV2Plugin)
 
         add_subdirectory(lv2)
     endif (LV2_FOUND)
+else (BuildLV2Plugin)
+    message (WARNING "Not building LV2 plugins!")
 endif (BuildLV2Plugin)
