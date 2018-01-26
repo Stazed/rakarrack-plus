@@ -183,8 +183,5 @@ if (BuildLV2Plugin)
         configure_file(data/10.rvb lv2data/${NEWNAME}.rvb COPYONLY)
 
         add_subdirectory(lv2)
-
-    else (LV2_FOUND)
-        message (FATAL_ERROR "lv2 package required but not found (version 1.0.0 needed)")
     endif (LV2_FOUND)
 endif (BuildLV2Plugin)
