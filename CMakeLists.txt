@@ -18,7 +18,7 @@ check_cxx_compiler_flag("-ftree-vectorize" SUPPORT_VECTOR)
 check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 
 option (BuildLV2Plugin "Build rakarack lv2 plugin interface" ON)
-option (BuildCarlaPresets "Build Carla .carxp for lv2 from default banks" ON)
+option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
 option (BuildForDebug "Include gdb debugging support" OFF)
 #option (optimizations "Enable optimizations" ON)
 option (EnableSSE "Enable SSE (default=automatic check)" ON)
@@ -144,8 +144,6 @@ add_subdirectory(extra)
 if (BuildLV2Plugin)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
     if (LV2_FOUND)
-        message (STATUS "Found lv2 package ${LV2_VERSION}")
-
         if (EXISTS $ENV{LV2_PATH})
             set(LV2_INSTALL_DIR $ENV{LV2_PATH} CACHE PATH
             "Specifies where the LV2 libraries should be installed")
@@ -158,7 +156,7 @@ if (BuildLV2Plugin)
             message (STATUS "Building Carla presets...")
             execute_process(COMMAND ./convertbank.py ${CMAKE_INSTALL_PREFIX}/${LV2_INSTALL_DIR} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/lv2)
         else(BuildCarlaPresets)
-            message (STATUS "Not building Carla presets.")
+            message (WARNING "Not building Carla presets.")
         endif(BuildCarlaPresets)
 
         #rename these files so they are easier to use for plugins
