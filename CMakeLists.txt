@@ -20,7 +20,7 @@ check_cxx_compiler_flag("-ftree-vectorize" SUPPORT_VECTOR)
 check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 
 option (BuildRakarrack "Build rakarrack" ON)
-option (BuildLV2Plugin "Build rakarack lv2 plugins (rkrlv2)" ON)
+option (BuildLV2Plugins "Build rakarack lv2 plugins (rkrlv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
 option (BuildForDebug "Include gdb debugging support" OFF)
 option (EnableOptimizations "Enable optimizations" ON)
@@ -200,7 +200,7 @@ if(BuildRakarrack)
     add_subdirectory(extra)
 endif (BuildRakarrack)
 
-if (BuildLV2Plugin)
+if (BuildLV2Plugins)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
     if (LV2_FOUND)
         if (EXISTS $ENV{LV2_PATH})
@@ -241,9 +241,9 @@ if (BuildLV2Plugin)
 
         add_subdirectory(lv2)
     endif (LV2_FOUND)
-else (BuildLV2Plugin)
+else (BuildLV2Plugins)
     set (BuildCarlaPresets OFF)
-endif (BuildLV2Plugin)
+endif (BuildLV2Plugins)
 
 
 ##Summarize The Full Configuration
@@ -295,7 +295,7 @@ package_status(EnableAltivec       "Use altiveck . . . . . . . . . . . . . . . .
 package_status(EnableSSE           "Use sse. . . . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableSSE2          "Use sse2 . . . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(BuildRakarrack      "Build Rakarrack. . . . . . . . . . . . . . . . . . . . .:"  )
-package_status(BuildLV2Plugin      "Build LV2s (rkr.lv2) . . . . . . . . . . . . . . . . . .:"  )
+package_status(BuildLV2Plugins     "Build LV2s (rkr.lv2) . . . . . . . . . . . . . . . . . .:"  )
 package_status(BuildCarlaPresets   "Build Carla lv2 presets. . . . . . . . . . . . . . . . .:"  )
 package_status(BuildForDebug       "Build for debug. . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableJackSessionSupport "JACK Session support . . . . . . . . . . . . . . . . . .:"  )
