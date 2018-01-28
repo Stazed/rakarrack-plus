@@ -476,7 +476,7 @@ RecChord::MiraChord ()
     int temp;
     int di1, di2, di3, di4;
     int labaja;
-    char AName[20];
+    char AName[21];
 
 
     for (i = 0; i < POLY; i++) {
