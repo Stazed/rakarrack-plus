@@ -1,30 +1,56 @@
-This fork is from: 
-    https://github.com/ssj71/rakarrack.git
+Release-0.7.0
 
-The original was an incomplete attempt at merging the rkrlv2 plugins into the original rakarrack project.
-This project is to complete the merging.
+This is the first official release of the merged Rakarrack and rkr.lv2 projects.
+The build has been entirely moved to cmake.
 
-The current build is also a merging of autotools and cmake :).
+To build both rakarrack and rkr.lv2:
+From top checkout directory:
+    mkdir build
+    cd build
+    cmake ..
+    make
+    make install (as root)
+    
+To remove:
+    make uninstall (as root)
 
-To build rakarrack:
-From base directory:
+The Carla presets originally included with rkr.lv2 are no longer included with
+the download. They can be generated and installed by setting the "BuildCarlaPresets"
+flag (OFF by default). Use:
 
-./autogen.sh
- mkdir Release
- cd Release
- ../configure CPPFLAGS=-DNDEBUG
- make
- make install (as root)
- 
- To build rkrlv2 plugins:
- From base directory:
- 
- mkdir buildlv2
- cd buildlv2
- cmake ..
- make
- make install (as root)
- 
+    cmake -DBuildCarlaPresets=ON ..
+
+To build Rakarrack only set "BuildLV2Plugins" to OFF:
+
+    cmake -DBuildLV2Plugins=OFF ..
+    
+To build rkr.lv2 only set "BuildRakarrack" to OFF
+
+    cmake -DBuildRakarrack=OFF ..
+    
+In addition to merging of Rakarrack and rkr.lv2, this release contains many bug
+fixes some notable enhancements:
+
+Added to lv2 :
+    Convolotron
+    MIDIConverter
+    
+Added to Rakarrack: 
+    SIGUSR1 & SIGINT for session support (applies only to .rkr preset saving, not banks).
+    Added FFT button to MIDIConverter. Fixed jack MC out, channel and octave settings.
+    Added command line -j option for changing client name.
+    Added separate midi channel receive spin buttons for Harmonizer and Stereo Harmonizer.
+    Added separate Recognize note optimization for Harmonizer, Stereo Harmonizer and Ring.
+    Added F12 fullscreen to toggle.
+    Fix preferences file saving for: Waveshape Resampling, Upsampling, UpQuality, DownQuality, UpAmount & Looper Size.
+    Added additional hidden parameters to MuTroMojo so they can be adjusted by user.
+    Modified VaryBand band volumes to be user adjustable instead of preset (backwards compatible).
+    A number of tooltips added and keybinding fixed.
+    Fixed file reading of user presets added, for Convolotron, Echotron and Reverbtron.
+    ... and many more.
+    
+In addition many, many, many uninitialized variables and invalid buffer reads were fixed (thanks to valgrind).
+This should make both Rakarrack and rkr.lv2 much more stable.
 
 ----------------------------------------------------------
 Original from rkrlv2 project https://github.com/ssj71/rkrlv2.git
