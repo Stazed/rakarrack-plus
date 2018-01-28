@@ -1794,7 +1794,7 @@ RKR::loadbank (char *filename)
 {
 
     int err_message=1;
-    char meslabel[64];
+    char meslabel[70];
     FILE *fn;
 
 

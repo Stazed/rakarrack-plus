@@ -894,7 +894,7 @@ void RKRGUI::cb_Save_MTable(Fl_Menu_* o, void* v) {
 
 void RKRGUI::cb_ConvertReverb_i(Fl_Menu_*, void*) {
   char *filename;
-char name[64];
+char name[70];
 memset(name,0, sizeof(name));
 sprintf(name,"%s %s",rkr->jackcliname, VERSION);
 
@@ -10222,7 +10222,7 @@ void RKRGUI::cb_Save_Bank(Fl_Menu_* o, void* v) {
 
 void RKRGUI::cb_Convert_Old_Bank_i(Fl_Menu_*, void*) {
   char *filename;
-char name[64];
+char name[70];
 memset(name,0, sizeof(name));
 sprintf(name,"%s %s",rkr->jackcliname, VERSION);
 

@@ -51,7 +51,7 @@ RKR::Message (int prio, const char *labelwin, const char *message_text)
 void
 RKR::Error_Handle(int num)
 {
-    char meslabel[64];
+    char meslabel[70];
     char error_msg[256];
     memset(meslabel,0, sizeof(meslabel));
     sprintf(meslabel, "%s %s",jackcliname,VERSION);

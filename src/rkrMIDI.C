@@ -40,7 +40,7 @@ RKR::InitMIDI ()
 
 
 
-    char portname[50];
+    char portname[70];
 
     // Create Alsa Seq Client
 

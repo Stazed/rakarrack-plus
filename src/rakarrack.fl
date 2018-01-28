@@ -907,7 +907,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {715 235 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {918 179 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -916,7 +916,7 @@ Pexitprogram=1;} open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File}
+          label {&File} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -999,7 +999,7 @@ rkr->savemiditable(filename);}
           MenuItem ConvertReverb {
             label {&Convert Reverb IR File}
             callback {char *filename;
-char name[64];
+char name[70];
 memset(name,0, sizeof(name));
 sprintf(name,"%s %s",rkr->jackcliname, VERSION);
 
@@ -1085,7 +1085,7 @@ rkr->ACI_Bypass = 0;
           }
         }
         Submenu Ayuda {
-          label {&Help}
+          label {&Help} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Contenido {
@@ -11101,13 +11101,13 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {o->hide();
-save_stat(1);}
+save_stat(1);} open
       xywh {1488 150 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuB {
+      Fl_Menu_Bar MenuB {open
         xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
@@ -11155,7 +11155,7 @@ if(rkr->CheckOldBank(filename)==0)
           MenuItem Convert_Old_Bank {
             label {Convert &Old Bank}
             callback {char *filename;
-char name[64];
+char name[70];
 memset(name,0, sizeof(name));
 sprintf(name,"%s %s",rkr->jackcliname, VERSION);
 
@@ -11169,7 +11169,7 @@ rkr->ConvertOldFile(filename);
 rkr->Message(1,name, "Please, now try to load the new files");
 }
 else
-rkr->Message(1, name, "This file has already the new format");}
+rkr->Message(1, name, "This file has already the new format");} selected
             xywh {0 0 36 21} divider
           }
           MenuItem salirB {
