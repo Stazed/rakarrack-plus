@@ -310,12 +310,24 @@ int
 Reverbtron::setfile(int value)
 {
     RvbFile filedata;
+    
+#ifdef LV2_SUPPORT
+    /* LV2 will only call setfile() directly with Puser set and the value will be always USERFILE.
+       This single case occurs upon initialization before Puser is set because setpreset() is called
+       by initializer. So we just ignore the initial call for LV2 since the value will be incorrect
+       and immediately replaced by the default file set in the ttl */
+    if(value != USERFILE)
+    {
+        return(0);
+    }
+#endif // LV2_SUPPORT
 
     if(!Puser) {
         Filenum = value;
         memset(Filename,0, sizeof(Filename));
         sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);//DATADIR comes from  config.h (autotools)
     }
+//    printf("Filename %s\n",Filename);
     filedata = loadfile(Filename);
     applyfile(filedata);
     if(error)
@@ -760,7 +772,11 @@ Reverbtron::changepar (int npar, int value)
         levpanr=level*rpanning;
         break;
     case 8:
-        if(!setfile(value)) ;//error_num=2;//TODO: how to handle error FIXME
+#ifdef LV2_SUPPORT
+        setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
+#else
+        if(!setfile(value))error_num=2;
+#endif 
         break;
     case 9:
         Pstretch = value;

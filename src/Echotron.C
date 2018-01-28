@@ -271,7 +271,17 @@ Echotron::setpanning (int value)
 int
 Echotron::setfile(int value)
 {
-
+#ifdef LV2_SUPPORT
+    /* LV2 will only call setfile() directly with Puser set and the value will be always USERFILE.
+       This single case occurs upon initialization before Puser is set because setpreset() is called
+       by initializer. So we just ignore the initial call for LV2 since the value will be incorrect
+       and immediately replaced by the default file set in the ttl */
+    if(value != USERFILE)
+    {
+        return(0);
+    }
+#endif // LV2_SUPPORT
+    
     DlyFile filedata;
 
     if(!Puser) {
@@ -478,6 +488,12 @@ Echotron::loadfile(char* Filename)
     {
         if(Plength>f.fLength) Plength = f.fLength;
     }
+    
+#ifdef LV2_SUPPORT
+    // what to do here - FIXME how does lv2 handle file errors?
+#else
+    error_num = error;  // error_num is used by rakarrack to pop up a warning dialog
+#endif     
         
     return f;
 };
@@ -710,7 +726,11 @@ Echotron::changepar (int npar, int value)
         ilrcross = 1.0f - abs(lrcross);
         break;
     case 8:
-        if(!setfile(value)) error=4;    // FIXME what to do with error
+#ifdef LV2_SUPPORT
+        setfile(value); // This will only be called by changepar() upon initialization for lv2 and is ignored.
+#else
+        if(!setfile(value)) error_num=4;
+#endif
         break;
     case 9:
         lfo->Pstereo = value;

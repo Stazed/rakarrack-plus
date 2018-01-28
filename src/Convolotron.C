@@ -303,6 +303,22 @@ Convolotron::setfile(int value)
     maxx_read = maxx_size / 2;
     memset(buf,0,sizeof(float) * maxx_size);
     memset(rbuf,0,sizeof(float) * maxx_size);
+    
+#ifdef LV2_SUPPORT
+    /* LV2 will only call setfile() directly with Puser set and the value will be always USERFILE.
+       This single case occurs upon initialization before Puser is set because setpreset() is called
+       by initializer. So we just ignore the initial call for LV2 since the value will be incorrect
+       and immediately replaced by the default file set in the ttl */
+    if(value != USERFILE)
+    {
+        real_len = 1;
+        length = 1;
+        rbuf[0] = 1.0f;
+        process_rbuf();
+        return(0);
+    }
+#endif // LV2_SUPPORT
+    
     if(!Puser) {
         Filenum = value;
         memset(Filename,0, sizeof(Filename));
@@ -481,7 +497,11 @@ Convolotron::changepar (int npar, int value)
         UpdateLength();
         break;
     case 8:
-        if(!setfile(value)) ; // error_num=1; // FIXME
+#ifdef LV2_SUPPORT
+        setfile(value);  // This will only be called from changepar() upon initialization for lv2 and is ignored.
+#else
+        if(!setfile(value)) error_num=1;
+#endif
         break;
     case 5:
         break;
