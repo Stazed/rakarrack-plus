@@ -24005,8 +24005,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
   { 
     Fl_Widget *m = fl_message_icon();
     m->parent()->copy_label(rkr->jackcliname);
-    sprintf(temp2,"Overwrite \"%s\"?",w->label());
-    ok=fl_choice(temp2, "No","Yes", NULL);
+    ok=fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
    if (!ok)
    { 
    o->value(0);
@@ -28509,8 +28508,7 @@ inline void RKRGUI::delpreset(Fl_Widget *w, int num) {
    return;
   } 
   
-  sprintf(temp2,"Delete? \"%s\"",s->text());
-  ok=fl_choice(temp2,"No","Yes",NULL);
+  ok=fl_choice("Delete \"%s\"?","No","Yes",NULL, s->text());
   if (!ok) return;
   memset(Rname,0,sizeof(Rname));
   sprintf(Rname,"%s",s->text());

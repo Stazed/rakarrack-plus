@@ -907,7 +907,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {918 179 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {157 479 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -11107,11 +11107,11 @@ save_stat(1);} open
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
       }
-      Fl_Menu_Bar MenuB {open
+      Fl_Menu_Bar MenuB {
         xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu ArchivoB {
-          label {&File} open
+          label {&File}
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem NewB {
@@ -11169,7 +11169,7 @@ rkr->ConvertOldFile(filename);
 rkr->Message(1,name, "Please, now try to load the new files");
 }
 else
-rkr->Message(1, name, "This file has already the new format");} selected
+rkr->Message(1, name, "This file has already the new format");}
             xywh {0 0 36 21} divider
           }
           MenuItem salirB {
@@ -11179,7 +11179,7 @@ rkr->Message(1, name, "This file has already the new format");} selected
           }
         }
         Submenu AyudaB {
-          label {&Help} open
+          label {&Help}
           xywh {10 10 100 20} labelcolor 7
         } {
           MenuItem ContenidoB {
@@ -13919,8 +13919,7 @@ if (strlen(rkr->Bank[num].Preset_Name) >0)
 { 
   Fl_Widget *m = fl_message_icon();
   m->parent()->copy_label(rkr->jackcliname);
-  sprintf(temp2,"Overwrite \\"%s\\"?",w->label());
-  ok=fl_choice(temp2, "No","Yes", NULL);
+  ok=fl_choice("Overwrite \\"%s\\"?", "No", "Yes", NULL, w->label());
  if (!ok)
  { 
  o->value(0);
@@ -18393,15 +18392,15 @@ if(strncmp(s->text(),"*",1)!=0)
  return;
 } 
 
-sprintf(temp2,"Delete? \\"%s\\"",s->text());
-ok=fl_choice(temp2,"No","Yes",NULL);
+ok=fl_choice("Delete \\"%s\\"?","No","Yes",NULL, s->text());
 if (!ok) return;
 memset(Rname,0,sizeof(Rname));
 sprintf(Rname,"%s",s->text());
 s->remove(s->value());
 s->value(0);
 s->redraw();
-rkr->DelIntPreset(num,Rname);} {}
+rkr->DelIntPreset(num,Rname);} {selected
+    }
   }
   Function {Prep_Reorden(int source, int dest)} {} {
     code {int x = rkr->efx_order[source];
