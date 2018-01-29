@@ -132,13 +132,14 @@ if(NOT TARGET uninstall)
         COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif()
 
-#include(GNUInstallDirs)
-#mark_as_advanced (EXECUTABLE_OUTPUT_PATH)
-#mark_as_advanced (LIBRARY_OUTPUT_PATH)
 mark_as_advanced (FONTCONFIG_LIBRARIES)
 mark_as_advanced (CMAKE_BUILD_TYPE)
 mark_as_advanced (CMAKE_INSTALL_PREFIX)
 mark_as_advanced (ACONNECT)
+mark_as_advanced (FLTK_DIR)
+mark_as_advanced (FLTK_MATH_LIBRARY)
+mark_as_advanced (LIBDL)
+mark_as_advanced (LIBRT)
 
 if(BuildRakarrack)
     install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
@@ -285,7 +286,10 @@ package_status(SAMPLERATE_FOUND    "Samplerate conversion (libsamplerate). . . .
 package_status(XFT_FOUND           "Xft support. . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(XRENDER_FOUND       "Xrender support. . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(XPM_FOUND           "Xpm support (libxpm) . . . . . . . . . . . . . . . . . .:"  )
-package_status(LV2_FOUND           "LV2 support. . . . . . . . . . . . . . . . . . . . . . .:"  )
+
+if(BuildLV2Plugins)
+    package_status(LV2_FOUND           "LV2 support. . . . . . . . . . . . . . . . . . . . . . .:"  )
+endif(BuildLV2Plugins)
 
 message (STATUS)
 message (STATUS                    "____________________ User Options________________________"  )
