@@ -907,7 +907,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {157 479 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {991 379 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -13880,7 +13880,6 @@ Fl::repeat_timeout(.04,tick,v);} {}
 int num; 
 int tecla = Fl::event_key();
 long long kk = (long long) o->user_data();
-char temp2[128];
 
 
 num = (int) kk;
@@ -17713,8 +17712,7 @@ Fl_Widget *w = fl_message_icon();
 w->parent()->copy_label(rkr->jackcliname);         
 fl_message("This setting will be changed the next time you run rakarrack");} {}
   }
-  Function {update_looper()} {open
-  } {
+  Function {update_looper()} {} {
     code {rkr->efx_Looper->getstate();
 
 looper_play->value(rkr->efx_Looper->progstate[0]);
@@ -17739,8 +17737,7 @@ looper_t1->redraw();
 looper_t2->value(rkr->efx_Looper->progstate[5]);
 looper_t2->redraw();} {}
   }
-  Function {UpdateTGUI()} {open
-  } {
+  Function {UpdateTGUI()} {} {
     code {if(rkr->Looper_Bypass)
    {
    looper_Tempo->value(rkr->efx_Looper->getpar(14));
@@ -17867,8 +17864,7 @@ if(rkr->Chorus_Bypass)
     infinity_rate->redraw();  
   }} {}
   }
-  Function {ActACI()} {open
-  } {
+  Function {ActACI()} {} {
     code {int value;
 int i,amax,amin;
 float gain =  0.0;
@@ -17924,7 +17920,7 @@ rkr->last_auxvalue = value;
 
 }} {}
   }
-  Function {Busca_Eff(int num)} {open return_type int
+  Function {Busca_Eff(int num)} {return_type int
   } {
     code {int i;
 for(i=0; i<rkr->NumEffects;i++)
@@ -17934,8 +17930,7 @@ for(i=0; i<rkr->NumEffects;i++)
  }  
  return(i);} {}
   }
-  Function {Fill_Avail(int filter)} {open
-  } {
+  Function {Fill_Avail(int filter)} {} {
     code {int i,j,t,k;
 
 Avail_Bro->clear();
@@ -18118,7 +18113,7 @@ return(1000);} {}
   CH_UB->value(0);
   free(forFree);} {}
   }
-  Function {prevnext(int e)} {open return_type {static int}
+  Function {prevnext(int e)} {return_type {static int}
   } {
     code {if(e==5)
 {
@@ -18195,7 +18190,7 @@ return 1;
 
 return 0;} {}
   }
-  Function {install_signal_handlers()} {open return_type bool
+  Function {install_signal_handlers()} {return_type bool
   } {
     code {/*install signal handlers*/
     struct sigaction action;
@@ -18216,7 +18211,7 @@ return 0;} {}
 
     return true;} {}
   }
-  Function {sigterm_handler(int sig)} {open return_type {static void}
+  Function {sigterm_handler(int sig)} {return_type {static void}
   } {
     code {if(sig == SIGUSR1)
     {
@@ -18228,7 +18223,7 @@ return 0;} {}
         got_sigint = sig;
     }} {}
   }
-  Function {check_signals(void *usrPtr)} {open return_type {static void}
+  Function {check_signals(void *usrPtr)} {return_type {static void}
   } {
     code {RKRGUI  *gui = NULL;
     gui = (RKRGUI*)usrPtr;
@@ -18383,7 +18378,6 @@ if (( fn = fopen (tempfile, "r")) != NULL)
   } {
     code {if(num==12) return;
 int ok = 0;
-char temp2[128];
 char Rname[128];
 Fl_Choice *s = (Fl_Choice * ) w;
 if(strncmp(s->text(),"*",1)!=0) 

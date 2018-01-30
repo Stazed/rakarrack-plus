@@ -23966,7 +23966,6 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
   int num; 
   int tecla = Fl::event_key();
   long long kk = (long long) o->user_data();
-  char temp2[128];
   
   
   num = (int) kk;
@@ -28499,7 +28498,6 @@ void RKRGUI::ReadIntPresets() {
 inline void RKRGUI::delpreset(Fl_Widget *w, int num) {
   if(num==12) return;
   int ok = 0;
-  char temp2[128];
   char Rname[128];
   Fl_Choice *s = (Fl_Choice * ) w;
   if(strncmp(s->text(),"*",1)!=0) 
