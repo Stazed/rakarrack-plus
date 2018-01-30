@@ -92,12 +92,23 @@ install(TARGETS rkrlv2
 install (DIRECTORY ttl/
   DESTINATION ${LV2_INSTALL_DIR}
 )
+
+#Data files needed for default settings and presets. They must be included in the lv2 bundle folder.
+#We copy all the data files here, but only those indicated by the presets & defaults are actually needed.
+#Rakarrack has a pop up 'preset' selector that gives access to all the data files. This feature is
+#not implemented in the lv2s. Instead the lv2s must use the user file lookup.
 install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
   DESTINATION ${LV2_INSTALL_DIR}
 )
 
+#This is a convenience for the user to easily access the data files from the user file lookup
+#which are also be copied to the lv2 bundle folder above. 
+install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
+  DESTINATION share/rkr.lv2
+)
+
 if(BuildCarlaPresets)
     install (DIRECTORY presets/
-      DESTINATION share/rkr.lv2
+        DESTINATION share/rkr.lv2
     )
 endif(BuildCarlaPresets)
