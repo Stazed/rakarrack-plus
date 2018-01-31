@@ -53,12 +53,12 @@ set(BuildOptions_Altivec
 )
 
 set (BuildOptionsBasic
-    "-Wno-unused-parameter -Wno-int-to-pointer-cast -O3 -ffast-math -pipe -fsigned-char"
+    "-std=c++11 -Wno-unused-parameter -O3 -ffast-math -pipe -fsigned-char"
     CACHE STRING "basic X86 complier options"
 )
 
 set (BuildOptionsDebug
-    "-O0 -g3 -ggdb -Wall -Wno-unused-parameter -Wpointer-arith"
+    "-std=c++11 -O0 -g3 -ggdb -Wall -Wextra -Wpointer-arith"
     CACHE STRING "Debug build flags"
 )
 

@@ -68,7 +68,7 @@ add_library(rkrlv2 SHARED
   ../src/Convolotron.C
 )
 
-set_source_files_properties(../src/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=gnu++98)
+set_source_files_properties(../src/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 
 target_sources(rkrlv2 PRIVATE
   ../src/MIDIConverter.C

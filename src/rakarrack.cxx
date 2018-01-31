@@ -24039,8 +24039,9 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
 }
 
 void RKRGUI::make_window_banks() {
-  int i,j,x,y,num;
+  int i,j,x,y;
   int elw,elh;
+  intptr_t num;
   
   elw=176*BankWindow->w()/800;
   elh=32*BankWindow->h()/600;
@@ -28531,9 +28532,9 @@ void RKRGUI::Prep_Reorden(int source, int dest) {
 void RKRGUI::make_table_window() {
   scroll->begin();
   
-    for (int y=0; y<128; y++)
+    for (intptr_t y=0; y<128; y++)
      {
-      char buf[20]; sprintf(buf,"%d",y);
+      char buf[20]; sprintf(buf,"%d",(int)y);
     
       Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
       b->box(FL_DOWN_BOX);

@@ -5660,7 +5660,8 @@ static const LV2_Descriptor sharmnomidlv2_descriptor=
     0,//activate
     run_sharmnomidlv2,
     0,//deactivate
-    cleanup_rkrlv2
+    cleanup_rkrlv2,
+    0//extension
 };
 
 static const LV2_Descriptor mbcomplv2_descriptor=
@@ -5671,7 +5672,8 @@ static const LV2_Descriptor mbcomplv2_descriptor=
     0,//activate
     run_mbcomplv2,
     0,//deactivate
-    cleanup_rkrlv2
+    cleanup_rkrlv2,
+    0//extension
 };
 
 static const LV2_Descriptor otremlv2_descriptor=
@@ -5682,7 +5684,8 @@ static const LV2_Descriptor otremlv2_descriptor=
     0,//activate
     run_otremlv2,
     0,//deactivate
-    cleanup_rkrlv2
+    cleanup_rkrlv2,
+    0//extension
 };
 
 static const LV2_Descriptor vibelv2_descriptor=
@@ -5693,7 +5696,8 @@ static const LV2_Descriptor vibelv2_descriptor=
     0,//activate
     run_vibelv2,
     0,//deactivate
-    cleanup_rkrlv2
+    cleanup_rkrlv2,
+    0//extension
 };
 
 static const LV2_Descriptor inflv2_descriptor=
@@ -5704,7 +5708,8 @@ static const LV2_Descriptor inflv2_descriptor=
     0,//activate
     run_inflv2,
     0,//deactivate
-    cleanup_rkrlv2
+    cleanup_rkrlv2,
+    0//extension
 };
 
 static const LV2_Descriptor phaselv2_descriptor=

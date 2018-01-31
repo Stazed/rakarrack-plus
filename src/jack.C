@@ -124,7 +124,7 @@ JACKstart (RKR * rkr_, jack_client_t * jackclient_)
 
 
 int
-jackprocess (jack_nframes_t nframes, void *arg)
+jackprocess (jack_nframes_t nframes, void * /* arg */)
 {
 
     int i,count;
@@ -267,7 +267,7 @@ JACKfinish ()
 
 
 void
-jackshutdown (void *arg)
+jackshutdown (void * /* arg */)
 {
     if (gui == 0)
         printf ("Jack Shut Down, sorry.\n");
@@ -279,7 +279,7 @@ jackshutdown (void *arg)
 
 
 int
-timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
+timebase(jack_transport_state_t state, jack_position_t *pos, void * /* arg */)
 {
 
     JackOUT->jt_state=state;
@@ -313,7 +313,7 @@ actualiza_tap(double val)
 
 
 #ifdef JACK_SESSION
-void session_callback(jack_session_event_t *event, void *arg)
+void session_callback(jack_session_event_t *event, void * /* arg */)
 {
     char filename[256];
     char command[256];

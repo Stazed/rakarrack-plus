@@ -209,7 +209,7 @@ CoilCrafter::setq2()
 void
 CoilCrafter::sethpf (int value)
 {
-    harm->set_freqh (0,(float)Ptone);
+    harm->set_freqh (0,(float)value);
 };
 
 

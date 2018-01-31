@@ -11102,7 +11102,7 @@ UpdateTGUI();
     Fl_Window BankWindow {
       callback {o->hide();
 save_stat(1);} open
-      xywh {1488 150 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
+      xywh {988 161 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
         xywh {1 1 800 600}
@@ -13952,8 +13952,9 @@ Preset_Counter->do_callback();
 }} {}
   }
   Function {make_window_banks()} {} {
-    code {int i,j,x,y,num;
+    code {int i,j,x,y;
 int elw,elh;
+intptr_t num;
 
 elw=176*BankWindow->w()/800;
 elh=32*BankWindow->h()/600;
@@ -18374,7 +18375,7 @@ if (( fn = fopen (tempfile, "r")) != NULL)
  fclose(fn);
 }} {}
   }
-  Function {delpreset(Fl_Widget *w, int num)} {open return_type {inline void}
+  Function {delpreset(Fl_Widget *w, int num)} {return_type {inline void}
   } {
     code {if(num==12) return;
 int ok = 0;
@@ -18393,8 +18394,7 @@ sprintf(Rname,"%s",s->text());
 s->remove(s->value());
 s->value(0);
 s->redraw();
-rkr->DelIntPreset(num,Rname);} {selected
-    }
+rkr->DelIntPreset(num,Rname);} {}
   }
   Function {Prep_Reorden(int source, int dest)} {} {
     code {int x = rkr->efx_order[source];
@@ -18407,12 +18407,13 @@ reordena();
 
 if (Order->visible())Prepare_Order();} {}
   }
-  Function {make_table_window()} {} {
+  Function {make_table_window()} {open
+  } {
     code {scroll->begin();
 
-  for (int y=0; y<128; y++)
+  for (intptr_t y=0; y<128; y++)
    {
-    char buf[20]; sprintf(buf,"%d",y);
+    char buf[20]; sprintf(buf,"%d",(int)y);
   
     Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
     b->box(FL_DOWN_BOX);
@@ -18445,7 +18446,8 @@ if (Order->visible())Prepare_Order();} {}
 Put_MidiTable();
  
 
- scroll->position(0,-339);} {}
+ scroll->position(0,-339);} {selected
+    }
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {

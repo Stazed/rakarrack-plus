@@ -120,7 +120,7 @@ target_include_directories (
 
 target_link_libraries (rakarrack ${ExternLibraries})
 
-set_source_files_properties(MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=gnu++98)
+set_source_files_properties(MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 target_sources(rakarrack PRIVATE
   MIDIConverter.C
 )
