@@ -192,9 +192,16 @@ loadbank (char *filename)
   FILE *fn;
   if ((fn = fopen (filename, "rb")) != NULL)
     {
-      while (!feof (fn))
+      while (1)
 	{
-	  fread (&Bank, sizeof (Bank), 1, fn);
+	  size_t ret = fread (&Bank, sizeof (Bank), 1, fn);
+          if(feof (fn))
+              break;
+          if(ret != 1)
+          {
+              printf("Error loading %s file!\n", filename);
+              break;
+          }
 	}
       fclose (fn);
       return (1);

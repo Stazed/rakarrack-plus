@@ -334,19 +334,32 @@ loadbank (char *filename)
 for(j=0;j<80;j++)
    {
     memset(buf,0, sizeof(buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        printf("Error loading %s file!\n", filename);
+        break;
+    }
     sscanf(buf,"%d\n",&k);
       if(k)
           { 
            for(i=0;i<128;i++)
              {
               memset(buf,0, sizeof(buf));
-              fgets (buf, sizeof buf, fn);
+              if(fgets (buf, sizeof buf, fn) == NULL)
+              {
+                  printf("Error loading %s file!\n", filename);
+                  break;
+              }
               sscanf(buf,"%d\n",&t);
               if(t)
                  { 
                   memset(buf,0, sizeof(buf));
-                  fgets (buf, sizeof buf, fn);
+                  
+                  if(fgets (buf, sizeof buf, fn) == NULL)
+                  {
+                      printf("Error loading %s file!\n", filename);
+                      break;
+                  }
                   sscanf(buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &PML[j].XUserMIDI[i][0], &PML[j].XUserMIDI[i][1], &PML[j].XUserMIDI[i][2], &PML[j].XUserMIDI[i][3], &PML[j].XUserMIDI[i][4],
            &PML[j].XUserMIDI[i][5], &PML[j].XUserMIDI[i][6], &PML[j].XUserMIDI[i][7], &PML[j].XUserMIDI[i][8], &PML[j].XUserMIDI[i][9],

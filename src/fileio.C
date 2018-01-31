@@ -22,6 +22,7 @@
 
 #include <errno.h>
 #include "process.h"
+#include <FL/fl_ask.H> // for error pop up
 
 
 const int presets_default[48][MAX_PRESET_SIZE] = {
@@ -1152,7 +1153,7 @@ RKR::savefile (char *filename)
 void
 RKR::loadfile (char *filename)
 {
-
+    
     int i, j;
     int l[10];
     FILE *fn;
@@ -1171,13 +1172,21 @@ RKR::loadfile (char *filename)
 
     for (i = 0; i < 14; i++) {
         memset (buf, 0, sizeof (buf));
-        fgets (buf, sizeof buf, fn);
+        if(fgets (buf, sizeof buf, fn) == NULL)
+        {
+            fl_alert("Error loading %s file!\n", filename);
+            goto FILE_ERROR;
+        }
 
     }
 
     //Order
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error loading %s file Order!\n", filename);
+        goto FILE_ERROR;
+    }
     sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
             &l[0], &l[1], &l[2], &l[3], &l[4], &l[5], &l[6], &l[7], &l[8],
             &l[9]);
@@ -1191,14 +1200,22 @@ RKR::loadfile (char *filename)
     }
     //Version
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error loading %s file Version!\n", filename);
+        goto FILE_ERROR;
+    }
 
 
     //Author
 
     memset (Author,0, 64);
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error loading %s file Author!\n", filename);
+        goto FILE_ERROR;
+    }
 
     for (i = 0; i < 64; i++)
         if (buf[i] > 20)
@@ -1209,7 +1226,11 @@ RKR::loadfile (char *filename)
 
     memset (Preset_Name, 0,64);
     memset(buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error loading %s file Preset Name!\n", filename);
+        goto FILE_ERROR;
+    }
 
     for (i = 0; i < 64; i++)
         if (buf[i] > 20)
@@ -1218,7 +1239,11 @@ RKR::loadfile (char *filename)
     //General
 
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error loading %s file General!\n", filename);
+        goto FILE_ERROR;
+    }
     sscanf (buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &Bypass_B);
 
     if ((actuvol == 0) || (needtoloadstate)) {
@@ -1232,7 +1257,11 @@ RKR::loadfile (char *filename)
         j = l[i];
 
         memset (buf, 0, sizeof (buf));
-        fgets (buf, sizeof buf, fn);
+        if(fgets (buf, sizeof buf, fn) == NULL)
+        {
+            fl_alert("Error loading %s file General!\n", filename);
+            goto FILE_ERROR;
+        }
         putbuf(buf,j);
 
 
@@ -1241,7 +1270,11 @@ RKR::loadfile (char *filename)
 
     //Order
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error loading %s file Order!\n", filename);
+        goto FILE_ERROR;
+    }
     sscanf (buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
             &lv[10][0], &lv[10][1], &lv[10][2], &lv[10][3], &lv[10][4],
             &lv[10][5], &lv[10][6], &lv[10][7], &lv[10][8], &lv[10][9]);
@@ -1250,7 +1283,11 @@ RKR::loadfile (char *filename)
 
     for(i=0; i<128; i++) {
         memset(buf,0, sizeof(buf));
-        fgets (buf, sizeof buf, fn);
+        if(fgets (buf, sizeof buf, fn) == NULL)
+        {
+            fl_alert("Error loading %s file MIDI!\n", filename);
+            goto FILE_ERROR;
+        }
 
         sscanf(buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &XUserMIDI[i][0], &XUserMIDI[i][1], &XUserMIDI[i][2], &XUserMIDI[i][3], &XUserMIDI[i][4],
@@ -1260,7 +1297,7 @@ RKR::loadfile (char *filename)
 
     }
 
-
+FILE_ERROR:
 
     fclose (fn);
     Actualizar_Audio ();
@@ -1778,8 +1815,15 @@ RKR::loadnames()
 
         if ((fn = fopen (temp, "rb")) != NULL) {
             New_Bank();
-            while (!feof (fn)) {
-                fread (&Bank, sizeof (Bank), 1, fn);
+            while (1) {
+                size_t ret = fread (&Bank, sizeof (Bank), 1, fn);
+                if (feof(fn))
+                    break;
+                if(ret != 1)
+                {
+                    fl_alert("fread error in loadnames()");
+                    break;
+                }
                 for(j=1; j<=60; j++) strcpy(B_Names[k][j].Preset_Name,Bank[j].Preset_Name);
             }
             fclose (fn);
@@ -1825,8 +1869,15 @@ RKR::loadbank (char *filename)
 
     if ((fn = fopen (filename, "rb")) != NULL) {
         New_Bank();
-        while (!feof (fn)) {
-            fread (&Bank, sizeof (Bank), 1, fn);
+        while (1) {
+            size_t ret = fread (&Bank, sizeof (Bank), 1, fn);
+            if (feof(fn))
+                break;
+            if(ret != 1)
+            {
+                fl_alert("fread error in loadbank()");
+                break;
+            }
         }
         fclose (fn);
         if(BigEndian()) fix_endianess();
@@ -2432,28 +2483,48 @@ RKR::loadskin (char *filename)
         return;
 
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error reading %s file!\n", filename);
+        goto FILE_ERROR;
+    }
     sscanf (buf, "%d,%d\n", &resolution, &sh);
 
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error reading %s file!\n", filename);
+        goto FILE_ERROR;
+    }
     sscanf (buf, "%d,%d,%d,%d\n", &sback_color,&sfore_color,&slabel_color,&sleds_color);
 
     memset (BackgroundImage, 0, sizeof(BackgroundImage));
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
-
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error reading %s file!\n", filename);
+        goto FILE_ERROR;
+    }
     for(i=0; i<256; i++) if(buf[i]>20) BackgroundImage[i]=buf[i];
 
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL)
+    {
+        fl_alert("Error reading %s file!\n", filename);
+        goto FILE_ERROR;
+    }
     sscanf (buf, "%d,%d\n", &relfontsize,&font);
 
     memset (buf, 0, sizeof (buf));
-    fgets (buf, sizeof buf, fn);
+    if(fgets (buf, sizeof buf, fn) == NULL);
+    {
+        fl_alert("Error reading %s file!\n", filename);
+        goto FILE_ERROR;
+    }
     sscanf (buf, "%d\n", &sschema);
 
-
+FILE_ERROR:
+        
     fclose(fn);
 
 }
@@ -2481,7 +2552,6 @@ RKR::CheckOldBank(char *filename)
     FILE *fs;
 
     if ((fs = fopen (filename, "r")) != NULL) {
-        ftell(fs);
         fseek(fs, 0L, SEEK_END);
         Length = ftell(fs);
         fclose(fs);
@@ -2501,8 +2571,9 @@ RKR::ConvertOldFile(char * filename)
     char buff[255];
     memset(buff,0,sizeof(buff));
     sprintf(buff,"rakconvert -c '%s'",filename);
-    system(buff);
-
+    if(system(buff) == -1)
+        fl_alert("Error running rakconvert...\n");
+    
 }
 
 void
@@ -2512,7 +2583,8 @@ RKR::ConvertReverbFile(char * filename)
     memset(buff,0, sizeof(buff));
     sprintf(buff,"rakverb -i '%s'",filename);
     printf("%s\n",buff);
-    system(buff);
+    if(system(buff) == -1)
+        fl_alert("Error running rakverb...\n");
 }
 
 
@@ -2583,8 +2655,8 @@ RKR::DelIntPreset(int num, char *name)
     fclose(fn);
 
     sprintf(orden,"mv %s %s\n",tempfile2,tempfile);
-    system(orden);
-
+    if(system(orden) == -1)
+        fl_alert("Error removing internal preset");
 }
 
 void
@@ -2605,12 +2677,14 @@ RKR::MergeIntPreset(char *filename)
 
 
     sprintf(orden,"cat %s %s > %s\n",tempfile,filename,tempfile2);
-    system(orden);
+    if(system(orden) == -1)
+        fl_alert("Error merging internal presets!");
 
     memset(orden,0,sizeof(orden));
 
     sprintf(orden,"mv %s %s\n",tempfile2,tempfile);
-    system(orden);
+    if(system(orden) == -1)
+        fl_alert("Error merging internal presets!");
 
 
 }
@@ -2651,7 +2725,11 @@ RKR::loadmiditable (char *filename)
 
     for(i=0; i<128; i++) {
         memset (buf, 0, sizeof (buf));
-        fgets (buf, sizeof buf, fn);
+        if(fgets (buf, sizeof buf, fn) == NULL)
+        {
+            fl_alert("Error loading %s file!\n", filename);
+            break;
+        }
         sscanf (buf, "%d,%d\n", &M_table[i].bank, &M_table[i].preset);
     }
     fclose(fn);

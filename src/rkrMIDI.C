@@ -23,7 +23,7 @@
 
 
 #include "process.h"
-
+#include <FL/fl_ask.H>  // for error pop up
 
 void
 RKR::InitMIDI ()
@@ -744,8 +744,10 @@ RKR::conectaaconnect ()
     if (MID != NULL) {
         memset (tempi, 0, sizeof (tempi));
         sprintf (tempi, "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
-        system (tempi);
-        IsCoIn = 1;
+        if(system (tempi) == -1)
+            fl_alert("Error running aconnect!");
+        else
+            IsCoIn = 1;
     }
 
 };
@@ -759,8 +761,10 @@ RKR::disconectaaconnect ()
     if (MID != NULL) {
         memset (tempi, 0, sizeof (tempi));
         sprintf (tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
-        system (tempi);
-        IsCoIn = 0;
+        if(system (tempi) == -1)
+            fl_alert("Error running aconnect!");
+        else
+            IsCoIn = 0;
     }
 
 
