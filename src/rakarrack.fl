@@ -17282,7 +17282,8 @@ UPS_LED->redraw();
 CLIP_LED->color(fl_darker(FL_RED));
 LMT_LED->color(fl_darker(leds_color));} {}
   }
-  Function {findpos(int num, int value, Fl_Widget *w)} {} {
+  Function {findpos(int num, int value, Fl_Widget*)} {selected
+  } {
     code {int i;
 Fl_Color on = fl_lighter(fl_lighter(label_color));
 Fl_Color off= fl_darker(label_color);
@@ -17950,7 +17951,7 @@ for (i=0; i<rkr->NumEffects;i++)
  
  { 
  
-  if((rkr->efx_names[i].Type&rkr->eff_filter)==rkr->eff_filter) 
+  if((rkr->efx_names[i].Type&rkr->eff_filter)==filter) 
  { 
   Avail_Bro->add(rkr->efx_names[i].Nom);
   rkr->availables[t]=rkr->efx_names[i].Pos;
@@ -18446,8 +18447,7 @@ if (Order->visible())Prepare_Order();} {}
 Put_MidiTable();
  
 
- scroll->position(0,-339);} {selected
-    }
+ scroll->position(0,-339);} {}
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {

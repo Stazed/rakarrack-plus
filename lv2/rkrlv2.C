@@ -225,7 +225,7 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
 ////////////////////////////////////////
 
 ///// EQ /////////
-LV2_Handle init_eqlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_eqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -303,7 +303,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// comp /////////
-LV2_Handle init_complv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_complv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -365,7 +365,7 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// dist /////////
-LV2_Handle init_distlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_distlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -453,7 +453,7 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// echo /////////
-LV2_Handle init_echolv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_echolv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -548,7 +548,7 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// chorus/flanger /////////
-LV2_Handle init_choruslv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_choruslv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -653,7 +653,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Analog Phaser /////////
-LV2_Handle init_aphaselv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_aphaselv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -737,7 +737,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
 }
 
 //////// harmonizer /////////
-LV2_Handle init_harmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_harmnomidlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -926,7 +926,7 @@ see process.C ln 1507
 
 
 ///// exciter /////////
-LV2_Handle init_exciterlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_exciterlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -988,7 +988,7 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// pan /////////
-LV2_Handle init_panlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_panlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1084,7 +1084,7 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// AlienWah /////////
-LV2_Handle init_alienlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_alienlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1194,7 +1194,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// reverb /////////
-LV2_Handle init_revelv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_revelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1285,7 +1285,7 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// EQ Parametric /////////
-LV2_Handle init_eqplv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_eqplv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1371,7 +1371,7 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Cabinet /////////
-LV2_Handle init_cablv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_cablv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1438,7 +1438,7 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Musical Delay /////////
-LV2_Handle init_mdellv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_mdellv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1535,7 +1535,7 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// wahwah /////////
-LV2_Handle init_wahlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_wahlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1631,7 +1631,7 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// derelict /////////
-LV2_Handle init_derelv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_derelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1714,7 +1714,7 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// valve /////////
-LV2_Handle init_valvelv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_valvelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1797,7 +1797,7 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// dual flange /////////
-LV2_Handle init_dflangelv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_dflangelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1864,7 +1864,7 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 }
 
 //////// ring /////////
-LV2_Handle init_ringlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_ringlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -1986,7 +1986,7 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
 
 
 ///// mbdist /////////
-LV2_Handle init_mbdistlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_mbdistlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2069,7 +2069,7 @@ void run_mbdistlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// arp /////////
-LV2_Handle init_arplv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_arplv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2164,7 +2164,7 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// expand /////////
-LV2_Handle init_expandlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_expandlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2226,7 +2226,7 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// shuffle /////////
-LV2_Handle init_shuflv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_shuflv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2298,7 +2298,7 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
 
 
 ///// synth /////////
-LV2_Handle init_synthlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_synthlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2382,7 +2382,7 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// mbvol /////////
-LV2_Handle init_mbvollv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_mbvollv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2487,7 +2487,7 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// mutro /////////
-LV2_Handle init_mutrolv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_mutrolv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2579,7 +2579,7 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// echoverse /////////
-LV2_Handle init_echoverselv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_echoverselv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2676,7 +2676,7 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// coilcrafter /////////
-LV2_Handle init_coillv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_coillv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2744,7 +2744,7 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// shelfboost /////////
-LV2_Handle init_shelflv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_shelflv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2806,7 +2806,7 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Vocoder /////////
-LV2_Handle init_voclv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_voclv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -2896,7 +2896,7 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Sustainer /////////
-LV2_Handle init_suslv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_suslv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
     
@@ -2958,7 +2958,7 @@ void run_suslv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Sequence /////////
-LV2_Handle init_seqlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_seqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -3043,7 +3043,7 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Shifter /////////
-LV2_Handle init_shiftlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_shiftlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -3129,7 +3129,7 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// StompBox /////////
-LV2_Handle init_stomplv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_stomplv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -3190,7 +3190,7 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 ///// StompBox Fuzz /////////
-LV2_Handle init_stomp_fuzzlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_stomp_fuzzlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     //this is the same but has better labeling as controls act differently
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
@@ -3208,7 +3208,7 @@ LV2_Handle init_stomp_fuzzlv2(const LV2_Descriptor *descriptor,double sample_fre
 }
 
 ///// Reverbtron /////////
-LV2_Handle init_revtronlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_revtronlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -3381,7 +3381,7 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
-static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t size, const void* data)
+static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t /* size */, const void* data)
 {
 
     RKRLV2* plug = (RKRLV2*)handle;
@@ -3418,7 +3418,7 @@ static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function 
     return LV2_WORKER_SUCCESS;
 }
 
-static LV2_Worker_Status revwork_response(LV2_Handle handle, uint32_t size, const void* data)
+static LV2_Worker_Status revwork_response(LV2_Handle handle, uint32_t /* size */, const void* /* data */)
 {
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3431,7 +3431,7 @@ static LV2_Worker_Status revwork_response(LV2_Handle handle, uint32_t size, cons
 }
 
 static LV2_State_Status revsave(LV2_Handle handle, LV2_State_Store_Function  store, LV2_State_Handle state_handle,
-		uint32_t flags, const LV2_Feature* const* features)
+		uint32_t /* flags */, const LV2_Feature* const* features)
 {
     RKRLV2* plug = (RKRLV2*)handle;
 
@@ -3455,7 +3455,7 @@ static LV2_State_Status revsave(LV2_Handle handle, LV2_State_Store_Function  sto
 }
 
 static LV2_State_Status revrestore(LV2_Handle handle, LV2_State_Retrieve_Function retrieve,
-		LV2_State_Handle state_handle, uint32_t flags, const LV2_Feature* const* features)
+		LV2_State_Handle state_handle, uint32_t /* flags */, const LV2_Feature* const* /* features */)
 {
     RKRLV2* plug = (RKRLV2*)handle;
 
@@ -3499,7 +3499,7 @@ static const void* revtron_extension_data(const char* uri)
 }
 
 ///// Echotron /////////
-LV2_Handle init_echotronlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_echotronlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -3701,7 +3701,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
-static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t size, const void* data)
+static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t /* size */, const void* data)
 {
 
     RKRLV2* plug = (RKRLV2*)handle;
@@ -3738,7 +3738,7 @@ static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function
     return LV2_WORKER_SUCCESS;
 }
 
-static LV2_Worker_Status echowork_response(LV2_Handle handle, uint32_t size, const void* data)
+static LV2_Worker_Status echowork_response(LV2_Handle handle, uint32_t /* size */, const void* /* data */)
 {
     RKRLV2* plug = (RKRLV2*)handle;
 
@@ -3751,7 +3751,7 @@ static LV2_Worker_Status echowork_response(LV2_Handle handle, uint32_t size, con
 }
 
 static LV2_State_Status echosave(LV2_Handle handle, LV2_State_Store_Function  store, LV2_State_Handle state_handle,
-		uint32_t flags, const LV2_Feature* const* features)
+		uint32_t /* flags */, const LV2_Feature* const* features)
 {
     RKRLV2* plug = (RKRLV2*)handle;
 
@@ -3775,7 +3775,7 @@ static LV2_State_Status echosave(LV2_Handle handle, LV2_State_Store_Function  st
 }
 
 static LV2_State_Status echorestore(LV2_Handle handle, LV2_State_Retrieve_Function retrieve,
-		LV2_State_Handle state_handle, uint32_t flags, const LV2_Feature* const* features)
+		LV2_State_Handle state_handle, uint32_t /* flags */, const LV2_Feature* const* /* features */)
 {
     RKRLV2* plug = (RKRLV2*)handle;
 
@@ -3820,7 +3820,7 @@ static const void* echotron_extension_data(const char* uri)
 
 
 //////// stereo harmonizer /////////
-LV2_Handle init_sharmnomidlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_sharmnomidlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4027,7 +4027,7 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// MB comp /////////
-LV2_Handle init_mbcomplv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_mbcomplv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4099,7 +4099,7 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// OptTrem /////////
-LV2_Handle init_otremlv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_otremlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4174,7 +4174,7 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Vibe /////////
-LV2_Handle init_vibelv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_vibelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4272,7 +4272,7 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// Infinity /////////
-LV2_Handle init_inflv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_inflv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4344,7 +4344,7 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
 
 
 ///// Phaser /////////
-LV2_Handle init_phaselv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_phaselv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4448,7 +4448,7 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
 }
 
 ///// NoiseGate /////////
-LV2_Handle init_gatelv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_gatelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4511,7 +4511,7 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
 
 
 ///// MIDIConverter /////////
-LV2_Handle init_midiclv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_midiclv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4595,7 +4595,7 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
 
 
 ///// Convolotron /////////
-LV2_Handle init_convollv2(const LV2_Descriptor *descriptor,double sample_freq, const char *bundle_path,const LV2_Feature * const* host_features)
+LV2_Handle init_convollv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
@@ -4764,7 +4764,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
-static LV2_Worker_Status convwork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t size, const void* data)
+static LV2_Worker_Status convwork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t /* size */, const void* data)
 {
 
     RKRLV2* plug = (RKRLV2*)handle;
@@ -4798,7 +4798,7 @@ static LV2_Worker_Status convwork(LV2_Handle handle, LV2_Worker_Respond_Function
     return LV2_WORKER_SUCCESS;
 }
 
-static LV2_Worker_Status convwork_response(LV2_Handle handle, uint32_t size, const void* data)
+static LV2_Worker_Status convwork_response(LV2_Handle handle, uint32_t /* size */, const void* /* data */)
 {
     RKRLV2* plug = (RKRLV2*)handle;
     plug->loading_file = 0;//clear flag for next file load
@@ -4806,7 +4806,7 @@ static LV2_Worker_Status convwork_response(LV2_Handle handle, uint32_t size, con
 }
 
 static LV2_State_Status convsave(LV2_Handle handle, LV2_State_Store_Function  store, LV2_State_Handle state_handle,
-		uint32_t flags, const LV2_Feature* const* features)
+		uint32_t /* flags */, const LV2_Feature* const* features)
 {
     RKRLV2* plug = (RKRLV2*)handle;
 
@@ -4830,7 +4830,7 @@ static LV2_State_Status convsave(LV2_Handle handle, LV2_State_Store_Function  st
 }
 
 static LV2_State_Status convrestore(LV2_Handle handle, LV2_State_Retrieve_Function retrieve,
-		LV2_State_Handle state_handle, uint32_t flags, const LV2_Feature* const* features)
+		LV2_State_Handle state_handle, uint32_t /* flags */, const LV2_Feature* const* /* features */)
 {
     RKRLV2* plug = (RKRLV2*)handle;
 

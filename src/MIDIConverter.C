@@ -58,6 +58,9 @@ MIDIConverter::MIDIConverter (char *jname, double sample_rate, uint32_t intermed
     schmittInit (32); // 32 == latency (tuneit default = 10)
     fftInit (32);     // == latency
 
+    char portname[50];                      // used by alsa - put here to avoid unused variable compiler warning on jname
+    sprintf (portname, "%s MC OUT",jname);  // used by alsa - put here to avoid unused variable compiler warning on jname
+    
 #ifdef LV2_SUPPORT
     VAL_SUM = -50.0f;
     old_il_sum = -50.0f;
@@ -73,11 +76,7 @@ MIDIConverter::MIDIConverter (char *jname, double sample_rate, uint32_t intermed
     snd_seq_set_client_name (port, jname);
     snd_config_update_free_global ();
 
-    char portname[50];
-
     // Create Alsa Seq Client
-
-    sprintf (portname, "%s MC OUT",jname);
     snd_seq_create_simple_port (port, portname,
     SND_SEQ_PORT_CAP_READ |
     SND_SEQ_PORT_CAP_SUBS_READ,

@@ -107,7 +107,7 @@ PitchShifter::makeWindow(long fftFrameSize)
 
 void
 PitchShifter::smbPitchShift (float pitchShift, long numSampsToProcess,
-                             long fftFrameSize, long osamp, float sampleRate,
+                             long fftFrameSize, long osamp, float /* sampleRate */,
                              float *indata, float *outdata)
 {
     long i;

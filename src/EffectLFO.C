@@ -155,7 +155,7 @@ float EffectLFO::getlfoshape (float x)
         out=f_sin(tmpv+f_sin(tmpv));
         break;
     case 8:                       //Lorenz Fractal, faster, using X,Y outputs
-        iterations = 4;
+        iterations = 4;         // intentional fall through
     case 7:			// Lorenz Fractal
         for(int j=0; j<iterations; j++) {
             x1 = x0 + h * a * (y0 - x0);

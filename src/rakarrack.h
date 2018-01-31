@@ -4441,7 +4441,7 @@ public:
   void chfsize(int value);
   void adjustfont();
   void ChangeActives();
-  void findpos(int num, int value, Fl_Widget *w);
+  void findpos(int num, int value, Fl_Widget*);
   void Put_Skin(int last);
   void FillML(int type);
   void DisAssigns();

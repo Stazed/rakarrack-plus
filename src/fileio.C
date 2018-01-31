@@ -2516,7 +2516,7 @@ RKR::loadskin (char *filename)
     sscanf (buf, "%d,%d\n", &relfontsize,&font);
 
     memset (buf, 0, sizeof (buf));
-    if(fgets (buf, sizeof buf, fn) == NULL);
+    if(fgets (buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error reading %s file!\n", filename);
         goto FILE_ERROR;

@@ -27387,7 +27387,7 @@ void RKRGUI::ChangeActives() {
   LMT_LED->color(fl_darker(leds_color));
 }
 
-void RKRGUI::findpos(int num, int value, Fl_Widget *w) {
+void RKRGUI::findpos(int num, int value, Fl_Widget*) {
   int i;
   Fl_Color on = fl_lighter(fl_lighter(label_color));
   Fl_Color off= fl_darker(label_color);
@@ -28064,7 +28064,7 @@ void RKRGUI::Fill_Avail(int filter) {
    
    { 
    
-    if((rkr->efx_names[i].Type&rkr->eff_filter)==rkr->eff_filter) 
+    if((rkr->efx_names[i].Type&rkr->eff_filter)==filter) 
    { 
     Avail_Bro->add(rkr->efx_names[i].Nom);
     rkr->availables[t]=rkr->efx_names[i].Pos;
