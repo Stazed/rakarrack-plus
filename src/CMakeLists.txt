@@ -9,6 +9,7 @@ endif (EnableJackSessionSupport)
 set (ProgSources
     jack.C 
     UI/rakarrack.cxx
+    UI/analyzer.cxx
     process.C
     fileio.C
     varios.C

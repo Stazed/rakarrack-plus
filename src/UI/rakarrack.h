@@ -4,6 +4,7 @@
 #define rakarrack_h
 #include <FL/Fl.H>
 #include "../process.h"
+#include "analyzer.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -16,16 +17,6 @@
 #include <FL/Fl_Color_Chooser.H>
 #include <X11/xpm.h>
 class RKR;  // forward declaration
-
-class Analyzer : public Fl_Box {
-public:
-  Analyzer(int x,int y, int w, int h, const char *label=0);
-  void init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE);
-  void draw();
-  int handle(int event);
-private:
-  EQ *efx_EQ1; 
-};
 
 class Scope : public Fl_Box {
 public:

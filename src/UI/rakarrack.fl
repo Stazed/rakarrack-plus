@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "../process.h"} {public local
 }
 
+decl {\#include "analyzer.h"} {public global
+}
+
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
 }
 
@@ -41,7 +44,7 @@ decl {\#include <X11/xpm.h>} {public global
 decl {class RKR;  // forward declaration} {public global
 }
 
-decl {\#include "../icono_rakarrack_128x128.xpm"} {selected private local
+decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
 decl {Fl_Tiled_Image *back;} {private local
@@ -74,9 +77,6 @@ decl {int last_tecla;} {private local
 decl {int drag;} {private local
 }
 
-decl {int sr;} {private local
-}
-
 decl {int ns;} {private local
 }
 
@@ -92,9 +92,6 @@ decl {int tta;} {private local
 decl {int Scope_ON;} {private local
 }
 
-decl {int Analyzer_ON;} {private local
-}
-
 decl {Pixmap p, mask;} {private local
 }
 
@@ -105,112 +102,6 @@ decl {volatile int got_sigint = 0;} {private local
 }
 
 decl {volatile int got_sigusr1 = 0;} {private local
-}
-
-class Analyzer {: {public Fl_Box}
-} {
-  Function {Analyzer(int x,int y, int w, int h, const char *label=0):Fl_Box(x,y,w,h,label)} {} {
-    code {} {}
-  }
-  Function {init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE)} {} {
-    code {spl = smpsl;
-spr = smpsr;
-ns = PERIOD;
-sr = SAMPLERATE;} {}
-  }
-  Function {draw()} {open
-  } {
-    code {int ox=x(),oy=y(),lx=w(),ly=h();
-int i,j;
-int px,py;
-double y=0.0;
-double t=0.0;
-double nsp = 1.0 / (double) ns;
-double dsr = (double) sr;
-double udsr = 1.0 / dsr;
-double acoeff= udsr/(0.005+udsr);
-double image=0.0;
-double oldimage =0.0;
-double factor = (double) ns / 64.0;
-char buf[4];
-double xscale[] = {22.0,31.0,39.0,62.0,79.0,125.0,158.0,200.0,251.0,317.0,400.0,503.0,634.0,800.0,1000.0,1200.0,1500.0,2000.0,2500.0,3200.0,4000.0,5000.0,6000.0,8000.0,10000.0,12000.0,16000.0,20000.0};
-
-memset(buf,0, sizeof(buf));
-px = (lx-22) / 29;
-
-
-double scale = (double) ly ;
-
-
-if (Analyzer_ON)
-{
-
-
-fl_draw(buf, ox, oy, lx, ly, FL_ALIGN_CLIP ,back);
-
-    
-fl_color(leds_color);
-
-for(i=0; i<28; i++)
-{
-      y = 0.0;
-      double coeff = xscale[i]*udsr;
-
-      for(j=0; j<ns; j++)
-      {
-                   
-       t = cos(D_PI * (double) j * coeff);
-       image = t * spl[j];
-       oldimage = acoeff*image + ( 1.0 - acoeff) * oldimage;
-
-       y += fabs(oldimage);
-      }
-       
-      y = sqrt((double) i * y * nsp * factor); 
-  
-     
-      if (y<0.0) y=0.0;
-      if (y>1.0) y=1.0;     
-                  
-      py = lrint(y*scale); 
-            
-      
-      fl_color(leds_color);
-      fl_rectf(px+ox+px*i+4,oy+ly-py,px-2,py);
-
-} 
- 
- 
-}
-
-else
-{
-draw_box(box(),ox,oy,lx,ly,back_color);
-draw_label();
-}} {}
-  }
-  Function {handle(int event)} {return_type int
-  } {
-    code {if ((event==FL_PUSH)||(event==FL_DRAG)||(event==FL_RELEASE)) {
-
-switch(event)
-{
-case FL_RELEASE:
-
-if(Analyzer_ON) 
-{
-Analyzer_ON=0; 
-at=0;
-tta=1;
-}
-return(1);
-break;
-}
-}
-return(0);} {}
-  }
-  decl {EQ *efx_EQ1;} {private local
-  }
 }
 
 class Scope {: {public Fl_Box}
@@ -1388,13 +1279,18 @@ if (nt)
  }  
 
 
-if (Analyzer_ON)
+if (Analy->get_analyzer_ON())
 { 
  at++;
  if(at==3)
    { Analy->redraw();
      at=0; 
    }
+}
+else
+{
+  at=0;
+  tta=1;
 }
 
 if(tta)
@@ -10684,7 +10580,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -10870,8 +10766,8 @@ Order->hide();}
 {
 o->hide();
 Analy->show();
-Analyzer_ON=1;
-}}
+Analy->set_analyzer_ON(true);
+}} selected
           xywh {174 160 340 28} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
         }
         Fl_Box Analy {
@@ -11571,7 +11467,7 @@ PutBackground();}
         }
         Fl_Group AUDIO_SET {
           label Audio
-          user_data 1 open
+          user_data 1
           xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
         } {
           Fl_Box Fondo7 {
@@ -12799,7 +12695,7 @@ drag=1000;
 nt=0;
 at=0;
 tta=0;
-Analyzer_ON=0;
+Analy->set_analyzer_ON(false);
 Scope_ON=0;
 
 Sco->init(rkr->anall, rkr->analr, rkr->period);
@@ -12849,12 +12745,12 @@ install_signal_handlers();} {}
 MenuB->color(bcolor);
 
 back_color = bcolor;
+Analy->background_color_change(bcolor);
 
 Label_Color_Change(label_color);
 if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);} {}
   }
-  Function {Label_Color_Change(Fl_Color bcolor)} {open
-  } {
+  Function {Label_Color_Change(Fl_Color bcolor)} {} {
     code {label_color = bcolor;
 chfsize(0);
 
@@ -12961,6 +12857,7 @@ CH_UB->color(bcolor);
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
+Analy->leds_color_change(bcolor);
 chfsize(0);} {}
   }
   Function {put_icon(Fl_Window* window)} {} {
@@ -17049,12 +16946,14 @@ for (int t=0; t<ob->children();t++)
   
   }} {}
   }
-  Function {PutBackground()} {} {
+  Function {PutBackground()} {open
+  } {
     code {delete back;
 back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 if(!rkr->EnableBackgroundImage)
 back->color_average(back_color,0.0);
 
+Analy->background_image_change(back);
 InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());
@@ -18407,8 +18306,7 @@ reordena();
 
 if (Order->visible())Prepare_Order();} {}
   }
-  Function {make_table_window()} {open
-  } {
+  Function {make_table_window()} {} {
     code {scroll->begin();
 
   for (intptr_t y=0; y<128; y++)
