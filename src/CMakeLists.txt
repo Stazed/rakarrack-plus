@@ -8,7 +8,7 @@ endif (EnableJackSessionSupport)
 
 set (ProgSources
     jack.C 
-    rakarrack.cxx
+    UI/rakarrack.cxx
     process.C
     fileio.C
     varios.C
@@ -116,6 +116,8 @@ target_include_directories (
     ${XPM_INCLUDE_DIRS}
     ${FREETYPE_INCLUDE_DIRS}
     ${ZLIB_INCLUDE_DIRS}
+    "${CMAKE_CURRENT_SOURCE_DIR}/UI"
+    "${CMAKE_CURRENT_BINARY_DIR}/UI"
 )
 
 target_link_libraries (rakarrack ${ExternLibraries})
