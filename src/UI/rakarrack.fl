@@ -2,7 +2,7 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-decl {\#include "process.h"} {public local
+decl {\#include "../process.h"} {public local
 }
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
@@ -41,7 +41,7 @@ decl {\#include <X11/xpm.h>} {public global
 decl {class RKR;  // forward declaration} {public global
 }
 
-decl {\#include "icono_rakarrack_128x128.xpm"} {private local
+decl {\#include "../icono_rakarrack_128x128.xpm"} {selected private local
 }
 
 decl {Fl_Tiled_Image *back;} {private local
@@ -17282,8 +17282,7 @@ UPS_LED->redraw();
 CLIP_LED->color(fl_darker(FL_RED));
 LMT_LED->color(fl_darker(leds_color));} {}
   }
-  Function {findpos(int num, int value, Fl_Widget*)} {selected
-  } {
+  Function {findpos(int num, int value, Fl_Widget*)} {} {
     code {int i;
 Fl_Color on = fl_lighter(fl_lighter(label_color));
 Fl_Color off= fl_darker(label_color);
