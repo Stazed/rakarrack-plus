@@ -4,8 +4,6 @@
 #define rakarrack_h
 #include <FL/Fl.H>
 #include "../process.h"
-#include "analyzer.h"
-#include "scope.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -48,6 +46,7 @@ public:
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Button.H>
+#include "scope.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -55,6 +54,7 @@ public:
 #include <FL/Fl_Counter.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Input.H>
+#include "analyzer.h"
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Tabs.H>
 #include <FL/Fl_File_Input.H>

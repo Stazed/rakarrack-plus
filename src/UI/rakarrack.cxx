@@ -11463,6 +11463,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       MT->callback((Fl_Callback*)cb_MT);
     } // Fl_Box* MT
     { TITTLE_L = new Fl_Button(521, 2, 276, 21);
+      TITTLE_L->tooltip("Click here to activate scope");
       TITTLE_L->type(1);
       TITTLE_L->box(FL_NO_BOX);
       TITTLE_L->labeltype(FL_EMBOSSED_LABEL);
@@ -21327,6 +21328,7 @@ e a stompbox Opto Trem");
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
       } // Fl_Button* Open_Order
       { Etit = new Fl_Button(174, 160, 340, 28);
+        Etit->tooltip("Click here to toggle analyzer ON/OFF");
         Etit->type(1);
         Etit->box(FL_NO_BOX);
         Etit->labeltype(FL_EMBOSSED_LABEL);

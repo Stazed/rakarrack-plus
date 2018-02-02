@@ -5,12 +5,6 @@ code_name {.cxx}
 decl {\#include "../process.h"} {public local
 }
 
-decl {\#include "analyzer.h"} {public global
-}
-
-decl {\#include "scope.h"} {public global
-}
-
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
 }
 
@@ -677,7 +671,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {459 238 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {459 238 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1328,7 +1322,7 @@ Sco->show();
 Sco->set_scope_ON(true);
 Fl::focus(Open_Order);
 }}
-        xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
+        tooltip {Click here to activate scope} xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
       }
       Fl_Box LMT_LED {
         label Lmt
@@ -1374,6 +1368,7 @@ Fl::focus(Open_Order);
       Fl_Box Sco {
         label Rakarrack
         xywh {545 19 226 65} labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 labelcolor 7 align 80 hide
+        code0 {\#include "scope.h"}
         class Scope
       }
       Fl_Box E1 {
@@ -10463,7 +10458,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -10651,10 +10646,11 @@ o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
 }}
-          xywh {174 160 340 28} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
+          tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
         }
-        Fl_Box Analy {
+        Fl_Box Analy {selected
           xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
+          code0 {\#include "analyzer.h"}
           class Analyzer
         }
         Fl_Button HideUE {
@@ -12633,8 +12629,7 @@ Analy->background_color_change(bcolor);
 Sco->background_color_change(bcolor);
 
 Label_Color_Change(label_color);
-if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);} {selected
-    }
+if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);} {}
   }
   Function {Label_Color_Change(Fl_Color bcolor)} {} {
     code {label_color = bcolor;
