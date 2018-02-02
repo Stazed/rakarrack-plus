@@ -10,6 +10,7 @@ set (ProgSources
     jack.C 
     UI/rakarrack.cxx
     UI/analyzer.cxx
+    UI/scope.cxx
     process.C
     fileio.C
     varios.C

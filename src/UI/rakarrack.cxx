@@ -16,128 +16,10 @@ static int ns;
 static int at; 
 static int nt; 
 static int tta; 
-static int Scope_ON; 
 static Pixmap p, mask; 
 static XWMHints *hints = NULL; 
 static volatile int got_sigint = 0; 
 static volatile int got_sigusr1 = 0; 
-
-Scope::Scope(int x,int y, int w, int h, const char *label):Fl_Box(x,y,w,h,label) {
-}
-
-void Scope::init(float *smpsl, float *smpsr, int PERIOD) {
-  spl = smpsl;
-  spr = smpsr;
-  ns = PERIOD;
-}
-
-void Scope::draw() {
-  int ox=x(),oy=y(),lx=w(),ly=h();
-  int i;
-  int Xl,Xr,Yl,Yr;
-  int SW,SH;
-  int px,py,old_px,old_py,oldr_px,oldr_py;
-  int posx;
-  double pP = (double) ns; 
-  double value=0.0;
-  
-  SW=lx/2-5;
-  SH=ly;
-  
-  Xl=ox;
-  Yl=oy+ly/2;
-  
-  
-  Xr=ox+SW+5;
-  Yr=Yl;
-  
-  
-  double dSW = (double) SW;
-  double coeff = 1.0 / pP * dSW;
-  
-  
-  
-  if (Scope_ON)
-  {
-  
-  //Draw Curve Reponse  
-   
-  
-  
-  back->draw(ox,oy);
-  
-  fl_color(leds_color);
-  
-  
-  old_px = Xl;
-  old_py = Yl;
-  oldr_px = Xr;
-  oldr_py = Yr;
-  
-  for(i=0; i<ns; i++)
-  {
-    posx = (int) ((double) i * coeff);
-  
-    value=spr[i];
-    if (value>1.0) value=1.0;
-    if (value<-1.0) value=-1.0;
-    
-  
-    px = Xl + posx;
-    py = Yl + lrint(value * .5 * SH);
-     
-    // printf("%d %d %d\n",i,px,py);
-     
-  
-  if (i>0) fl_line(old_px, old_py,px,py);
-    
-    old_px=px; old_py=py;
-    
-    value=spl[i];
-    if (value>1.0) value=1.0;
-    if (value<-1.0) value=-1.0;
-  
-  
-  
-    px = Xr + posx;
-    py = Yr + lrint(value * .5 * SH);
-   
-  if (i>0) fl_line(oldr_px, oldr_py,px,py);
-  
-    oldr_px=px; oldr_py=py;
-   
-   
-   }
-   
-  }
-  
-  else
-  {
-  draw_box(box(),ox,oy,lx,ly,back_color);
-  draw_label();
-  }
-}
-
-int Scope::handle(int event) {
-  if ((event==FL_PUSH)||(event==FL_DRAG)||(event==FL_RELEASE)) {
-  
-  switch(event)
-  {
-  case FL_RELEASE:
-  
-  if(Scope_ON) 
-  {
-  Scope_ON=0; 
-  nt = 1;
-  }
-  return(1);
-  break;
-  }
-  
-  }
-  
-  return(0);
-}
 
 NewVum::NewVum(int x,int y, int w, int h, const char *label):Fl_Slider(x,y,w,h,label) {
 }
@@ -1227,7 +1109,11 @@ if(rkr->checkforaux())
  vu_vu->value(rkr->efx_Vocoder->vulevel);
 }
 
-if (Scope_ON)Sco->redraw();
+if (Sco->get_scope_ON())
+  {
+   Sco->redraw();
+  }
+else { nt = 1;}
 
 if (nt)
   { 
@@ -1404,7 +1290,7 @@ void RKRGUI::cb_TITTLE_L_i(Fl_Button*, void*) {
 {
 Tuner->hide();
 Sco->show();
-Scope_ON=1;
+Sco->set_scope_ON(true);
 Fl::focus(Open_Order);
 };
 }
@@ -22781,7 +22667,7 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
   at=0;
   tta=0;
   Analy->set_analyzer_ON(false);
-  Scope_ON=0;
+  Sco->set_scope_ON(false);
   
   Sco->init(rkr->anall, rkr->analr, rkr->period);
   Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate);
@@ -22832,6 +22718,7 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
   
   back_color = bcolor;
   Analy->background_color_change(bcolor);
+  Sco->background_color_change(bcolor);
   
   Label_Color_Change(label_color);
   if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);
@@ -22947,6 +22834,7 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor) {
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor) {
   leds_color=bcolor;
   Analy->leds_color_change(bcolor);
+  Sco->leds_color_change(bcolor);
   chfsize(0);
 }
 
@@ -27060,6 +26948,7 @@ void RKRGUI::PutBackground() {
   if(!rkr->EnableBackgroundImage)
   back->color_average(back_color,0.0);
   
+  Sco->background_image_change(back);
   Analy->background_image_change(back);
   InOut->image(back);
   EQ->image(InOut->image());

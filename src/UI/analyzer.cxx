@@ -116,18 +116,3 @@ int Analyzer::handle(int event)
     }
     return (0);
 }
-
-void Analyzer::background_image_change(Fl_Tiled_Image *a_back)
-{
-    back = a_back;
-}
-
-void Analyzer::leds_color_change(Fl_Color a_leds_color)
-{
-    leds_color = a_leds_color;
-}
-
-void Analyzer::background_color_change(Fl_Color a_back_color)
-{
-    back_color = a_back_color;
-}
