@@ -43,7 +43,7 @@ private:
     float *spr; 
     int sr; 
     int ns; 
-    int Analyzer_ON; 
+    bool Analyzer_ON; 
     Fl_Tiled_Image *back;
     Fl_Color leds_color;
     Fl_Color back_color; 

@@ -20,6 +20,10 @@
 
 Analyzer::Analyzer(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h, label)
 {
+    Analyzer_ON = false;
+    back = NULL;
+    leds_color = 0;
+    back_color = 0;
 }
 
 void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE)
@@ -28,10 +32,6 @@ void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE)
     spr = smpsr;
     ns = PERIOD;
     sr = SAMPLERATE;
-    Analyzer_ON = 0;
-    back = NULL;
-    leds_color = 0;
-    back_color = 0;
 }
 
 void Analyzer::draw()
@@ -108,7 +108,7 @@ int Analyzer::handle(int event)
 
             if (Analyzer_ON)    // toggle
             {
-                Analyzer_ON = 0;
+                Analyzer_ON = false;
             }
             return (1);
             break;
