@@ -24,6 +24,7 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Tiled_Image.H>
 #include <FL/fl_draw.H>
+#include <FL/Fl_Tooltip.H>
 #include "../global.h"
 
 class Analyzer : public Fl_Box {

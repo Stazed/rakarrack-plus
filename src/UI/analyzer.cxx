@@ -114,5 +114,7 @@ int Analyzer::handle(int event)
             break;
         }
     }
+    if(Fl::belowmouse() == this)
+        Fl_Tooltip::enter(this);
     return (0);
 }

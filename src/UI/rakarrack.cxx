@@ -11535,7 +11535,8 @@ Fl_Double_Window* RKRGUI::make_window() {
       CPULOAD->labelcolor(FL_BACKGROUND2_COLOR);
       CPULOAD->user_data((void*)(5));
     } // Fl_Box* CPULOAD
-    { Sco = new Scope(545, 19, 226, 65, "Rakarrack");
+    { Sco = new Scope(545, 25, 226, 59, "Rakarrack");
+      Sco->tooltip("Click here to turn off scope");
       Sco->box(FL_NO_BOX);
       Sco->color(FL_BACKGROUND_COLOR);
       Sco->selection_color(FL_BACKGROUND_COLOR);
@@ -21338,6 +21339,7 @@ e a stompbox Opto Trem");
         Etit->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
       } // Fl_Button* Etit
       { Analy = new Analyzer(174, 160, 340, 28);
+        Analy->tooltip("Click here to toggle analyzer ON/OFF");
         Analy->box(FL_NO_BOX);
         Analy->color(FL_BACKGROUND_COLOR);
         Analy->selection_color(FL_BACKGROUND_COLOR);

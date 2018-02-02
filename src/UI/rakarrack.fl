@@ -671,7 +671,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {459 238 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {400 291 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1366,8 +1366,8 @@ Fl::focus(Open_Order);
         xywh {750 5 45 17} labelsize 10 labelcolor 7
       }
       Fl_Box Sco {
-        label Rakarrack
-        xywh {545 19 226 65} labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 labelcolor 7 align 80 hide
+        label Rakarrack selected
+        tooltip {Click here to turn off scope} xywh {545 25 226 59} labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 labelcolor 7 align 80 hide
         code0 {\#include "scope.h"}
         class Scope
       }
@@ -10648,8 +10648,8 @@ Analy->set_analyzer_ON(true);
 }}
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
         }
-        Fl_Box Analy {selected
-          xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
+        Fl_Box Analy {
+          tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
           code0 {\#include "analyzer.h"}
           class Analyzer
         }
