@@ -8,7 +8,10 @@ decl {\#include "../process.h"} {public local
 decl {\#include "../global.h"} {public global
 }
 
-decl {\#include "sliderW.h"} {selected public global
+decl {\#include "sliderW.h"} {public global
+}
+
+decl {\#include "newvum.h"} {selected public global
 }
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
@@ -102,158 +105,6 @@ decl {volatile int got_sigint = 0;} {private local
 }
 
 decl {volatile int got_sigusr1 = 0;} {private local
-}
-
-class NewVum {: {public Fl_Slider}
-} {
-  Function {NewVum(int x,int y, int w, int h, const char *label=0):Fl_Slider(x,y,w,h,label)} {} {
-    code {} {}
-  }
-  Function {draw_bg(int X, int Y, int W, int H)} {} {
-    code {fl_push_clip(X, Y, W, H);
-//  draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
-back->draw(X,Y);
-
-  fl_pop_clip();
-
-//Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;} {}
-  }
-  Function {draw_rest(int X, int Y, int W, int H)} {} {
-    code {int x = X;
-int y = Y;
-int h = H;
-int w = W;
-int S,S1,S2,S3;
-int ko;
-double val;
-
-
-double fred=.239f;
-double fora=.35f;
-double fyel=.508f;
-
-
-    val = 1.0-((value() + 48.0) *.015873016);
-    if (val > 1.0) val = 1.0;
-    else if (val < 0.0) val = 0.0;
-  
-  
-   S = h - lrint(val*h+.5); 
-  
-   S1 = h - lrint(fred*(double)h+.5f);
-   S2 = h - lrint(fora*(double)h+.5f); 
-   S3 = h - lrint(fyel*(double)h+.5f);
- 
-
-    draw_bg(X, Y, W, H);
- 
- ko=H+Y-S;
-
- if (val < fred)  
-  {
-  
-   
-  
-  fl_color(fl_darker(FL_RED)); 
-  fl_rectf(x+1,h+y-S,3,S-S1);
-  fl_color(FL_RED); 
-  fl_rectf(x+4,h+y-S,w-7,S-S1); 
-  fl_color(fl_darker(FL_RED)); 
-  fl_rectf(x+w-3,h+y-S,2,S-S1);
- 
-   S=S1;
-  }   
-  
- if (val < fora)  
-  {
-   
-   
- 
- 
- fl_color(fl_darker((Fl_Color) 93)); 
-  fl_rectf(x+1,h+y-S,3,S-S2);
-  fl_color((Fl_Color)93); 
-  fl_rectf(x+4,h+y-S,w-7,S-S2); 
- fl_color(fl_darker((Fl_Color)93)); 
-  fl_rectf(x+w-3,h+y-S,2,S-S2);
- 
-   S=S2;
-  }       
-
-  if (val < fyel)  
-  {
-  
-  
-  
-  fl_color(fl_darker(FL_YELLOW)); 
-  fl_rectf(x+1,h+y-S,3,S-S3);
-  fl_color(FL_YELLOW); 
-  fl_rectf(x+4,h+y-S,w-7,S-S3); 
-  fl_color(fl_darker(FL_YELLOW)); 
-  fl_rectf(x+w-3,h+y-S,2,S-S3);
-  
-  
-   S=S3;
-  }   
-   
-  
-  fl_color(fl_darker(FL_GREEN)); 
-  fl_rectf(x+1,h+y-S,3,S);
-  fl_color(FL_GREEN); 
-  fl_rectf(x+4,h+y-S,w-7,S); 
-  fl_color(fl_darker(FL_GREEN)); 
-  fl_rectf(x+w-3,h+y-S,2,S);
-  
- 
-if (val < 1.0)
- {
- fl_color(FL_BLACK);
-   
- for(int i=H+Y-4;i>ko;i=i-4)   
-  fl_line(x, i, x+w-1,i);
-  
-}} {}
-  }
-  Function {draw()} {} {
-    code {if (damage()&FL_DAMAGE_ALL) draw_box();
-
-
-  draw_rest(x()+Fl::box_dx(box()),
-       y()+Fl::box_dy(box()),
-       w()-Fl::box_dw(box()),
-       h()-Fl::box_dh(box()));} {}
-  }
-  Function {handle(int event)} {return_type int
-  } {
-    code {switch(event)
-{
-case FL_SHOW:
-             
-             
-case FL_HIDE:
-             
-
-case FL_RELEASE:
-
-{
-return 0;
-}
-
-
-case FL_DRAG: 
-{
-return 0;
-}
-
-case FL_SHORTCUT:
-return 0;
-
-default:
-return 0;
-}
-
-return 1;} {}
-  }
 }
 
 class TunerLed {: {public Fl_Slider}

@@ -6,6 +6,7 @@
 #include "../process.h"
 #include "../global.h"
 #include "sliderW.h"
+#include "newvum.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -18,15 +19,6 @@
 #include <FL/Fl_Color_Chooser.H>
 #include <X11/xpm.h>
 class RKR;  // forward declaration
-
-class NewVum : public Fl_Slider {
-public:
-  NewVum(int x,int y, int w, int h, const char *label=0);
-  void draw_bg(int X, int Y, int W, int H);
-  void draw_rest(int X, int Y, int W, int H);
-  void draw();
-  int handle(int event);
-};
 
 class TunerLed : public Fl_Slider {
 public:

@@ -12,6 +12,7 @@ set (ProgSources
     UI/analyzer.cxx
     UI/scope.cxx
     UI/sliderW.cxx
+    UI/newvum.cxx
     process.C
     fileio.C
     varios.C
