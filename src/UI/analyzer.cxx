@@ -13,7 +13,9 @@
   You should have received a copy of the GNU General Public License (version 2)
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
-
+  
+  This class is the analyzer that is activated by clicking below the "Put Order in your Rack" button
+  in the main window Presets section.
 */
 
 #include "analyzer.h"
