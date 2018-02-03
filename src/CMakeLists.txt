@@ -13,6 +13,7 @@ set (ProgSources
     UI/scope.cxx
     UI/sliderW.cxx
     UI/newvum.cxx
+    UI/tunerbar.cxx
     process.C
     fileio.C
     varios.C

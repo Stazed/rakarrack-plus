@@ -21,88 +21,6 @@ static XWMHints *hints = NULL;
 static volatile int got_sigint = 0; 
 static volatile int got_sigusr1 = 0; 
 
-TunerLed::TunerLed(int x,int y, int w, int h, const char *label):Fl_Slider(x,y,w,h,label) {
-}
-
-void TunerLed::draw_bg(int X, int Y, int W, int H) {
-  fl_push_clip(X, Y, W, H);
-   // draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
-   
-   back->draw(X,Y);
-    fl_pop_clip();
-  
-  //Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;
-}
-
-void TunerLed::draw_rest(int X, int Y, int W, int H) {
-  int x = X;
-  int y = Y;
-  int h = H;
-  int w = W;
-  double val;
-  
-     val = (float)(value()-minimum())/(maximum()-minimum());
-     if (val > 1.0) val = 1.0;
-     else if (val < 0.0) val = 0.0;
-    
-    
-    int S = (int)((double)w*val);  
-   
-    
-    draw_bg(X, Y, W, H);
-   
-     
-     
-    if ((val > .1) && (val < .9))
-    {
-    fl_color(fl_lighter(FL_RED)); 
-    fl_rectf(x+S-3,y+2,7,h-4);
-    
-    
-    }
-}
-
-void TunerLed::draw() {
-  if (damage()&FL_DAMAGE_ALL) draw_box();
-  
-  
-    draw_rest(x()+Fl::box_dx(box()),
-         y()+Fl::box_dy(box()),
-         w()-Fl::box_dw(box()),
-         h()-Fl::box_dh(box()));
-}
-
-int TunerLed::handle(int event) {
-  switch(event)
-  {
-  case FL_SHOW:
-               
-               
-  case FL_HIDE:
-               
-  
-  case FL_RELEASE:
-  
-  {
-  return 0;
-  }
-  
-  
-  case FL_DRAG: 
-  {
-  return 0;
-  }
-  
-  case FL_SHORTCUT:
-  return 0;
-  
-  default:
-  return 0;
-  }
-  
-  return 1;
-}
-
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();
 save_stat(0);
@@ -20380,7 +20298,7 @@ e a stompbox Opto Trem");
         tuner_activar->callback((Fl_Callback*)cb_tuner_activar, (void*)(2));
         tuner_activar->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* tuner_activar
-      { TunerLed* o = tuner_bar = new TunerLed(586, 31, 205, 14);
+      { TunerBar* o = tuner_bar = new TunerBar(586, 31, 205, 14);
         tuner_bar->box(FL_THIN_DOWN_BOX);
         tuner_bar->color(FL_DARK1);
         tuner_bar->selection_color(FL_RED);
@@ -20393,7 +20311,7 @@ e a stompbox Opto Trem");
         o->minimum(-32);
         o->maximum(32);
         o->value(-32);
-      } // TunerLed* tuner_bar
+      } // TunerBar* tuner_bar
       { WNote = new Fl_Box(676, 57, 28, 22);
         WNote->labelfont(1);
         WNote->labelcolor(FL_BACKGROUND2_COLOR);

@@ -7,6 +7,7 @@
 #include "../global.h"
 #include "sliderW.h"
 #include "newvum.h"
+#include "tunerbar.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -19,15 +20,6 @@
 #include <FL/Fl_Color_Chooser.H>
 #include <X11/xpm.h>
 class RKR;  // forward declaration
-
-class TunerLed : public Fl_Slider {
-public:
-  TunerLed(int x,int y, int w, int h, const char *label=0);
-  void draw_bg(int X, int Y, int W, int H);
-  void draw_rest(int X, int Y, int W, int H);
-  void draw();
-  int handle(int event);
-};
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -3439,7 +3431,7 @@ private:
   inline void cb_tuner_activar_i(Fl_Light_Button*, void*);
   static void cb_tuner_activar(Fl_Light_Button*, void*);
 public:
-  TunerLed *tuner_bar;
+  TunerBar *tuner_bar;
   Fl_Box *WNote;
   Fl_Box *WRfreq;
   Fl_Box *WNfreq;
