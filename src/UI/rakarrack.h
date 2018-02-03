@@ -4,6 +4,8 @@
 #define rakarrack_h
 #include <FL/Fl.H>
 #include "../process.h"
+#include "../global.h"
+#include "sliderW.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -33,14 +35,6 @@ public:
   void draw_rest(int X, int Y, int W, int H);
   void draw();
   int handle(int event);
-};
-
-class SliderW : public Fl_Value_Slider {
-public:
-  SliderW(int x,int y, int w, int h, const char *label=0);
-  int handle(int event);
-  int handle2(int event, int X, int Y, int W, int H);
-  void draw();
 };
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>

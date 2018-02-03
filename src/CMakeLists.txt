@@ -11,6 +11,7 @@ set (ProgSources
     UI/rakarrack.cxx
     UI/analyzer.cxx
     UI/scope.cxx
+    UI/sliderW.cxx
     process.C
     fileio.C
     varios.C

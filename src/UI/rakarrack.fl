@@ -5,6 +5,12 @@ code_name {.cxx}
 decl {\#include "../process.h"} {public local
 }
 
+decl {\#include "../global.h"} {public global
+}
+
+decl {\#include "sliderW.h"} {selected public global
+}
+
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
 }
 
@@ -44,19 +50,19 @@ decl {class RKR;  // forward declaration} {public global
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
-decl {Fl_Tiled_Image *back;} {private local
+decl {Fl_Tiled_Image *back;} {private global
 }
 
-decl {Fl_Color leds_color;} {private local
+decl {Fl_Color leds_color;} {private global
 }
 
-decl {Fl_Color back_color;} {private local
+decl {Fl_Color back_color;} {private global
 }
 
-decl {Fl_Color fore_color;} {private local
+decl {Fl_Color fore_color;} {private global
 }
 
-decl {Fl_Color label_color;} {private local
+decl {Fl_Color label_color;} {private global
 }
 
 decl {Fl_Widget *old;} {private local
@@ -335,323 +341,6 @@ return 1;} {}
   }
 }
 
-class SliderW {: {public Fl_Value_Slider}
-} {
-  Function {SliderW(int x,int y, int w, int h, const char *label=0):Fl_Value_Slider(x,y,w,h,label)} {open
-  } {
-    code {} {}
-  }
-  Function {handle(int event)} {open return_type int
-  } {
-    code {if (event == FL_PUSH && Fl::visible_focus()) {
-    Fl::focus(this);
-    redraw();
-}  
-  
-  int sxx = x(), syy = y(), sww = w(), shh = h();
-  
-  if (horizontal()) {
-    sxx += 35; sww -= 35;
-  } else {
-    syy += 25; shh -= 25;
- }
-  
- 
-  
- return handle2(event,
-                  sxx+Fl::box_dx(box()),
-                  syy+Fl::box_dy(box()),
-                  sww-Fl::box_dw(box()),
-                  shh-Fl::box_dh(box()));} {}
-  }
-  Function {handle2(int event, int X, int Y, int W, int H)} {open return_type int
-  } {
-    code {int mul=1;
-switch (event) {
-  case FL_PUSH:
-    if (!Fl::event_inside(X, Y, W, H)) return 0;
-     handle_push();
-  case FL_DRAG: {
-    if(Fl::event_button()==3) return 1;
-    double val;
-    if (minimum() == maximum())
-      val = 0.5;
-    else {
-      val = (value()-minimum())/(maximum()-minimum());
-      if (val > 1.0) val = 1.0;
-      else if (val < 0.0) val = 0.0;
-    }
-
-    int ww = (horizontal() ? W : H);
-    int mx = (horizontal() ? Fl::event_x()-X : Fl::event_y()-Y);
-    int S=0;
-    static int offcenter;
-
-   
-      S = int(0*ww+.5); if (S >= ww) return 0;
-      int T = (horizontal() ? H : W)/2+1;
-      T += 4;
-      if (S < T) S = T;
-      if (event == FL_PUSH) {
-       int xx = int(val*(ww-S)+.5);
-      
-        offcenter = mx-xx;
-        if (offcenter < 0) offcenter = 0;
-        else if (offcenter > S) offcenter = S;
-        else return 1;
-      }
-    
-
-    int xx = mx-offcenter;
-    double v;
-    char tryAgain = 1;
-    while (tryAgain)
-    {
-      tryAgain = 0;
-      if (xx < 0) {
-        xx = 0;
-        offcenter = mx; if (offcenter < 0) offcenter = 0;
-      } else if (xx > (ww-S)) {
-        xx = ww-S;
-        offcenter = mx-xx; if (offcenter > S) offcenter = S;
-      }
-        v = round(xx*(maximum()-minimum())/(ww-S) + minimum());
-        
-        
-        // make sure a click outside the sliderbar moves it:
-      if (event == FL_PUSH && v == value()) {
-        offcenter = S/2;
-        event = FL_DRAG;
-        tryAgain = 1;
-      }
-    }
-
-
-   handle_drag(clamp(v));
-    } return 1;
- 
-    case FL_MOUSEWHEEL :
-  
-      if (Fl::e_dy==0) return 0;
-      handle_push();
-      handle_drag(clamp(increment(value(),Fl::e_dy)));
-      handle_release();
-      return 1;
-    
- 
-  case FL_RELEASE:
-    
-    handle_release();
-    return 1;
-  case FL_KEYBOARD :
-       if (Fl::event_state(FL_SHIFT)) mul=10; else 
-       if (Fl::event_state(FL_CTRL)) mul=100; else
-       mul = 1;
-        
-      switch (Fl::event_key()) {
-      case FL_Up:
-        if (horizontal()) return 0;
-        handle_push();
-        handle_drag(clamp(increment(value(),-1*mul)));
-        handle_release();
-        return 1;
-      case FL_Down:
-        if (horizontal()) return 0;
-        handle_push();
-        handle_drag(clamp(increment(value(),1*mul)));
-        handle_release();
-        return 1;
-      case FL_Left:
-        if (!horizontal()) return 0;
-        handle_push();
-        handle_drag(clamp(increment(value(),-1*mul)));
-        handle_release();
-        return 1;
-      case FL_Right:
-        if (!horizontal()) return 0;
-        handle_push();
-        handle_drag(clamp(increment(value(),1*mul)));
-        handle_release();
-        return 1;
-      default:
-        return 0;
-    }
-    // break not required because of switch...
-  case FL_FOCUS :
-  case FL_UNFOCUS :
-    if (Fl::visible_focus()) {
-      redraw();
-      return 1;
-    } else return 0;
-  case FL_ENTER :
-  case FL_LEAVE :
-    return 1;
-  default:
-    return 0;
-  }} {}
-  }
-  Function {draw()} {open
-  } {
-    code {int X,Y,W,H;
-int sxx = x(), syy = y(), sww = w(), shh = h();
-int bxx = x(), byy = y(), bww = w(), bhh = h();
-when(FL_WHEN_RELEASE_ALWAYS | FL_WHEN_CHANGED);
- 
-  if (horizontal()) {
-    bww = 35; sxx += 35; sww -= 35;
-  } else {
-    syy += 25; bhh = 25; shh -= 25;
-  }
- 
-
-//  if (damage()&FL_DAMAGE_ALL) draw_box(box(),sxx,syy,sww,shh,back_color);
-
-                  X=sxx+Fl::box_dx(box());
-                  Y=syy+Fl::box_dy(box());
-                  W=sww-Fl::box_dw(box());
-                  H=shh-Fl::box_dh(box());
- 
- 
- 
- 
-  double val;
-  if (minimum() == maximum())
-    val = 0.5;
-  else {
-    val = (value()-minimum())/(maximum()-minimum());
-    if (val > 1.0) val = 1.0;
-    else if (val < 0.0) val = 0.0;
-  }
-
- int ww = (horizontal() ? W : H);
-  int xx, S;
-
-    S = int(.25*ww+.5)+1;
-    int T = (horizontal() ? H : W)/2+1;
-    T += 12;
-    
-   
-    xx = int(val*(ww-S)+.5);
-  
-  int xsl, ysl, wsl, hsl;
-  if (horizontal()) {
-    xsl = X+xx;
-    wsl = S-4;
-    ysl = Y;
-    hsl = H-1;
-  } else {
-    ysl = Y+xx;
-    hsl = S;
-    xsl = X;
-    wsl = W-1;
-  }
-
-
-  fl_push_clip(X, Y, W, H);
-  back->draw(X,Y);
-  fl_pop_clip();
-
-  Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;
- 
-  if (type() == FL_VERT_NICE_SLIDER)
-   {
-    draw_box(FL_THIN_DOWN_BOX, X+W/2-2, Y, 4, H, black);
-   } 
-   else 
-   if (type() == FL_HOR_NICE_SLIDER)
-    {
-     draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2, W-4, 4, black);
-    }
- 
- 
- //Line to the knob --- I dont like 
-
-/*
- 
- if (type() == FL_VERT_NICE_SLIDER) {
-   draw_box(FL_THIN_DOWN_BOX, X+W/2-2, ysl, 3,Y+H-ysl , fl_darker(leds_color));
-  }
-  else
-  {
-    draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2,xsl-X,3, fl_darker(leds_color));
-  }  
-  
-*/  
-  
-  
-  Fl_Color juan,pepe,luis;
-  float vval=fabsf((float)val);
-  
-  juan = fl_color_average(fl_darker(fl_darker(leds_color)),fl_lighter(fl_lighter(leds_color)),vval);
-  pepe = fl_color_average(fl_lighter(fl_lighter(leds_color)),fl_darker(fl_darker(leds_color)),vval);
-
- Fl_Boxtype box1 = slider();
-
-  if (!box1) 
-  {
-  box1 = (Fl_Boxtype)(box()&-2);
-  if (!box1) box1 = FL_UP_BOX;
-  }
-  
-  if (type() == FL_VERT_NICE_SLIDER)
-   {
-     
-    draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
-    int d = (hsl-6)/2;
-   
-    draw_box(FL_THIN_DOWN_BOX, xsl+2, ysl+d, wsl-4, hsl-2*d,juan);
-   } 
-  else 
-   if (type() == FL_HOR_NICE_SLIDER)
-    {
-    draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
-    int d = (wsl-6)/2;
-    draw_box(FL_THIN_DOWN_BOX, xsl+d, ysl+2, wsl-2*d, hsl-4,pepe);
-    }
-  
-  
-  labelcolor(label_color);
-  draw_label(xsl, ysl, wsl, hsl);
-  
-  if (Fl::focus() == this) 
-  {
-  draw_focus(box1, xsl, ysl, wsl, hsl);
-  luis = leds_color;
-  }
-  else luis = textcolor();
-  
-/*  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
-  {
-  
-  
-   if (type() == FL_HOR_NICE_SLIDER)
-     back->draw(bxx+2,byy);
-     
-   else
-     back->draw(bxx,byy); 
-  
-   }
-   else
-    back->draw(bxx,byy);
-*/    
-
-  int datasize;
-  
-  if(labelsize()< 11) datasize = labelsize();
-  else datasize = 11;
-
-  char buf[128];
-  format(buf);
-  fl_font(textfont(), datasize);
-  if (( Fl::scheme_) && (strcmp(Fl::scheme_, "plastic")==0)) 
-  fl_color(active_r() ? leds_color: fl_inactive(textcolor()));
-  else
-  fl_color(active_r() ? luis: fl_inactive(textcolor()));
-  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP ,back);
-  fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);} {}
-  }
-}
-
 class RKRGUI {open
 } {
   decl {RKR *rkr;} {private local
@@ -671,7 +360,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {400 291 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {363 356 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1366,7 +1055,7 @@ Fl::focus(Open_Order);
         xywh {750 5 45 17} labelsize 10 labelcolor 7
       }
       Fl_Box Sco {
-        label Rakarrack selected
+        label Rakarrack
         tooltip {Click here to turn off scope} xywh {545 25 226 59} labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 labelcolor 7 align 80 hide
         code0 {\#include "scope.h"}
         class Scope
