@@ -63,6 +63,8 @@ show_help ()
 
 }
 
+RKRGUI *rgui=NULL;  // global
+
 int
 main (int argc, char *argv[])
 {
@@ -196,7 +198,6 @@ main (int argc, char *argv[])
 
     // Launch GUI
 
-    RKRGUI *rgui=NULL;
 
     if (gui) rgui = new RKRGUI (argc, argv, &rkr);
 

@@ -14,6 +14,7 @@ set (ProgSources
     UI/sliderW.cxx
     UI/newvum.cxx
     UI/tunerbar.cxx
+    UI/sustain_gui.cxx
     process.C
     fileio.C
     varios.C

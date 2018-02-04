@@ -7,6 +7,7 @@ Fl_Color leds_color;
 Fl_Color back_color; 
 Fl_Color fore_color; 
 Fl_Color label_color; 
+RKR *rkr; // extern global
 static Fl_Widget *old; 
 static int last_tecla; 
 static int drag; 
@@ -6804,63 +6805,6 @@ void RKRGUI::cb_vo_level_i(SliderW* o, void*) {
 }
 void RKRGUI::cb_vo_level(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_vo_level_i(o,v);
-}
-
-void RKRGUI::cb_sus_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-        {
-         getMIDIControl(116);
-         o->value(rkr->Sustainer_Bypass);
-         return;
-        }
-        rkr->Sustainer_Bypass=(int)o->value();
-        if((int) o->value()==0)
-        rkr->efx_Sustainer->cleanup();
-        findpos(36,(int)o->value(),o);
-}
-void RKRGUI::cb_sus_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_sus_activar_i(o,v);
-}
-
-void RKRGUI::cb_sus_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-        if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
-sus_gain->value(rkr->efx_Sustainer->getpar(0));
-sus_sus->value(rkr->efx_Sustainer->getpar(1));
-}
-void RKRGUI::cb_sus_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_sus_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_sus_preset[] = {
- {"Sustain 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Sustain 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Sustain 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_sus_gain_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(312);
- return;
-}
-rkr->efx_Sustainer->changepar(0,(int)o->value());
-}
-void RKRGUI::cb_sus_gain(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_sus_gain_i(o,v);
-}
-
-void RKRGUI::cb_sus_sus_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(313);
- return;
-}
-rkr->efx_Sustainer->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_sus_sus(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_sus_sus_i(o,v);
 }
 
 void RKRGUI::cb_seq_activar_i(Fl_Light_Button* o, void*) {
@@ -18110,70 +18054,20 @@ R average.");
       } // NewVum* vu_vu
       VOCODER->end();
     } // Fl_Group* VOCODER
-    { SUSTAINER = new Fl_Group(161, 213, 158, 184);
+    { SUSTAINER = new SustainGui(320, 212, 158, 184);
       SUSTAINER->box(FL_UP_BOX);
       SUSTAINER->color(FL_FOREGROUND_COLOR);
       SUSTAINER->selection_color(FL_FOREGROUND_COLOR);
+      SUSTAINER->labeltype(FL_NORMAL_LABEL);
       SUSTAINER->labelfont(1);
+      SUSTAINER->labelsize(14);
+      SUSTAINER->labelcolor(FL_FOREGROUND_COLOR);
       SUSTAINER->user_data((void*)(1));
       SUSTAINER->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      SUSTAINER->when(FL_WHEN_RELEASE);
       SUSTAINER->hide();
-      { sus_activar = new Fl_Light_Button(166, 217, 34, 18, "On");
-        sus_activar->shortcut(0x31);
-        sus_activar->color((Fl_Color)62);
-        sus_activar->selection_color((Fl_Color)1);
-        sus_activar->labelsize(10);
-        sus_activar->callback((Fl_Callback*)cb_sus_activar, (void*)(2));
-        sus_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        sus_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* sus_activar
-      { sus_preset = new Fl_Choice(238, 217, 76, 18, "Preset");
-        sus_preset->down_box(FL_BORDER_BOX);
-        sus_preset->selection_color(FL_FOREGROUND_COLOR);
-        sus_preset->labelsize(10);
-        sus_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        sus_preset->textsize(10);
-        sus_preset->textcolor(FL_BACKGROUND2_COLOR);
-        sus_preset->callback((Fl_Callback*)cb_sus_preset, (void*)(12036));
-        sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        sus_preset->menu(menu_sus_preset);
-      } // Fl_Choice* sus_preset
-      { sus_gain = new SliderW(210, 275, 100, 10, "Gain");
-        sus_gain->type(5);
-        sus_gain->box(FL_FLAT_BOX);
-        sus_gain->color((Fl_Color)178);
-        sus_gain->selection_color((Fl_Color)62);
-        sus_gain->labeltype(FL_NORMAL_LABEL);
-        sus_gain->labelfont(0);
-        sus_gain->labelsize(10);
-        sus_gain->labelcolor(FL_BACKGROUND2_COLOR);
-        sus_gain->maximum(127);
-        sus_gain->step(1);
-        sus_gain->textcolor(FL_BACKGROUND2_COLOR);
-        sus_gain->callback((Fl_Callback*)cb_sus_gain);
-        sus_gain->align(Fl_Align(FL_ALIGN_LEFT));
-        sus_gain->when(FL_WHEN_CHANGED);
-      } // SliderW* sus_gain
-      { sus_sus = new SliderW(210, 299, 100, 10, "Sustain");
-        sus_sus->type(5);
-        sus_sus->box(FL_FLAT_BOX);
-        sus_sus->color((Fl_Color)178);
-        sus_sus->selection_color((Fl_Color)62);
-        sus_sus->labeltype(FL_NORMAL_LABEL);
-        sus_sus->labelfont(0);
-        sus_sus->labelsize(10);
-        sus_sus->labelcolor(FL_BACKGROUND2_COLOR);
-        sus_sus->minimum(1);
-        sus_sus->maximum(127);
-        sus_sus->step(1);
-        sus_sus->value(32);
-        sus_sus->textcolor(FL_BACKGROUND2_COLOR);
-        sus_sus->callback((Fl_Callback*)cb_sus_sus);
-        sus_sus->align(Fl_Align(FL_ALIGN_LEFT));
-        sus_sus->when(FL_WHEN_CHANGED);
-      } // SliderW* sus_sus
       SUSTAINER->end();
-    } // Fl_Group* SUSTAINER
+    } // SustainGui* SUSTAINER
     { SEQUENCE = new Fl_Group(319, 212, 158, 184);
       SEQUENCE->box(FL_UP_BOX);
       SEQUENCE->color(FL_FOREGROUND_COLOR);
@@ -23134,8 +23028,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 36://Sustainer
-       sus_activar->value(rkr->Sustainer_Bypass);
-       sus_preset->do_callback(sus_preset,1);
+       SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
+       SUSTAINER->sus_preset->do_callback(SUSTAINER->sus_preset,1);
        break;
        
       case 37://Sequence
@@ -23894,7 +23788,7 @@ void RKRGUI::reordena() {
   
      case 36:
          SUSTAINER->position(x[i],y[i]);
-         sus_activar->shortcut(s[i]);
+         SUSTAINER->sus_activar->shortcut(s[i]);
          if(!rkr->deachide)SUSTAINER->show();
          if(rkr->Sustainer_Bypass)
          {
@@ -25753,12 +25647,12 @@ void RKRGUI::ActMIDI() {
        rbecho_angle->redraw();
        break;
        case 312:
-       sus_gain->value(rkr->efx_Sustainer->getpar(0));
-       sus_gain->redraw();
+       SUSTAINER->sus_gain->value(rkr->efx_Sustainer->getpar(0));
+       SUSTAINER->sus_gain->redraw();
        break;
        case 313:
-       sus_sus->value(rkr->efx_Sustainer->getpar(1));
-       sus_sus->redraw();
+       SUSTAINER->sus_sus->value(rkr->efx_Sustainer->getpar(1));
+       SUSTAINER->sus_sus->redraw();
        break;
        case 314:
        seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
@@ -26292,8 +26186,8 @@ void RKRGUI::ActOnOff() {
     vo_activar->do_callback();
     break;
     case 36:
-    sus_activar->value(rkr->Sustainer_Bypass);
-    sus_activar->do_callback();
+    SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
+    SUSTAINER->sus_activar->do_callback();
     break;
     case 37:
     seq_activar->value(rkr->Sequence_Bypass);
@@ -27598,7 +27492,7 @@ void RKRGUI::check_signals(void *usrPtr) {
           {
               printf("Saving file: %s\n", filetoload);
               got_sigusr1 = 0;
-              gui->rkr->savefile(filetoload);
+              rkr->savefile(filetoload);
           }
           return;
       }
@@ -28112,7 +28006,7 @@ void RKRGUI::RandomPreset() {
   
        case 36://Sustainer
        if (i<numEff)rkr->Sustainer_Bypass=1; else rkr->Sustainer_Bypass=0;
-       sus_activar->value(rkr->Sustainer_Bypass);
+       SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
        break;
        
       case 37://Sequence

@@ -24,6 +24,7 @@ class Scope;  // forward declaration
 class NewVum;  // forward declaration
 class Analyzer;  // forward declaration
 class TunerBar;  // forward declaration
+class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -34,6 +35,7 @@ class TunerBar;  // forward declaration
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
+#include "sustain_gui.h"
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Input.H>
 #include "analyzer.h"
@@ -43,7 +45,6 @@ class TunerBar;  // forward declaration
 #include <FL/Fl_Scroll.H>
 
 class RKRGUI {
-  RKR *rkr; 
   int made; 
   Fl_Help_Dialog *visor; 
   struct list_element *mBankNameList;
@@ -2651,28 +2652,7 @@ private:
   static void cb_vo_level(SliderW*, void*);
 public:
   NewVum *vu_vu;
-  Fl_Group *SUSTAINER;
-  Fl_Light_Button *sus_activar;
-private:
-  inline void cb_sus_activar_i(Fl_Light_Button*, void*);
-  static void cb_sus_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *sus_preset;
-private:
-  inline void cb_sus_preset_i(Fl_Choice*, void*);
-  static void cb_sus_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_sus_preset[];
-public:
-  SliderW *sus_gain;
-private:
-  inline void cb_sus_gain_i(SliderW*, void*);
-  static void cb_sus_gain(SliderW*, void*);
-public:
-  SliderW *sus_sus;
-private:
-  inline void cb_sus_sus_i(SliderW*, void*);
-  static void cb_sus_sus(SliderW*, void*);
-public:
+  SustainGui *SUSTAINER;
   Fl_Group *SEQUENCE;
   Fl_Light_Button *seq_activar;
 private:

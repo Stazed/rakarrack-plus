@@ -62,7 +62,10 @@ decl {class NewVum;  // forward declaration} {public global
 decl {class Analyzer;  // forward declaration} {public global
 }
 
-decl {class TunerBar;  // forward declaration} {selected public global
+decl {class TunerBar;  // forward declaration} {public global
+}
+
+decl {class SustainGui; // forward declaration} {public global
 }
 
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
@@ -81,6 +84,9 @@ decl {Fl_Color fore_color;} {private global
 }
 
 decl {Fl_Color label_color;} {private global
+}
+
+decl {RKR *rkr; // extern global} {private global
 }
 
 decl {Fl_Widget *old;} {private local
@@ -115,8 +121,6 @@ decl {volatile int got_sigusr1 = 0;} {private local
 
 class RKRGUI {open
 } {
-  decl {RKR *rkr;} {private local
-  }
   decl {int made;} {private local
   }
   decl {Fl_Help_Dialog *visor;} {private local
@@ -132,7 +136,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {368 185 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {194 233 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7387,69 +7391,11 @@ findpos(35,(int)o->value(),o);}
         }
       }
       Fl_Group SUSTAINER {
-        user_data 1
-        xywh {161 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button sus_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(116);
-         o->value(rkr->Sustainer_Bypass);
-         return;
-        }
-        rkr->Sustainer_Bypass=(int)o->value();
-        if((int) o->value()==0)
-        rkr->efx_Sustainer->cleanup();
-        findpos(36,(int)o->value(),o);}
-          xywh {166 217 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice sus_preset {
-          label Preset
-          user_data 12036
-          callback {long long ud= (long long) v;
-        if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
-sus_gain->value(rkr->efx_Sustainer->getpar(0));
-sus_sus->value(rkr->efx_Sustainer->getpar(1));}
-          xywh {238 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Sustain 1}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Sustain 2}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Sustain 3}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider sus_gain {
-          label Gain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(312);
- return;
-}
-rkr->efx_Sustainer->changepar(0,(int)o->value());}
-          xywh {210 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider sus_sus {
-          label Sustain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(313);
- return;
-}
-rkr->efx_Sustainer->changepar(1,(int)o->value());}
-          xywh {210 299 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
-          class SliderW
-        }
-      }
+        user_data 1 selected
+        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "sustain_gui.h"}
+        class SustainGui
+      } {}
       Fl_Group SEQUENCE {
         user_data 1
         xywh {319 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -9539,7 +9485,7 @@ rkr->efx_Infinity->changepar(14,(int)o->value());}
         }
       }
       Fl_Group Tuner {
-        user_data 1 open
+        user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
@@ -12080,8 +12026,7 @@ Fl::add_timeout(.04,tick,v);
 Fl::add_handler(prevnext);
 install_signal_handlers();} {}
   }
-  Function {Background_Color_Change(Fl_Color bcolor)} {open
-  } {
+  Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
 MenuB->color(bcolor);
 
@@ -12195,8 +12140,7 @@ CH_UB->color(bcolor);
  aux_source->color(bcolor);
  Label_Color_Change(label_color);} {}
   }
-  Function {Leds_Color_Change(Fl_Color bcolor)} {open
-  } {
+  Function {Leds_Color_Change(Fl_Color bcolor)} {} {
     code {leds_color=bcolor;
 chfsize(0);} {}
   }
@@ -12806,7 +12750,8 @@ for(i=1; i<=JackIn->size();i++)
 
 }} {}
   }
-  Function {Put_Loaded()} {} {
+  Function {Put_Loaded()} {open
+  } {
     code {//General
 int i;
 
@@ -13041,8 +12986,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 36://Sustainer
-     sus_activar->value(rkr->Sustainer_Bypass);
-     sus_preset->do_callback(sus_preset,1);
+     SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
+     SUSTAINER->sus_preset->do_callback(SUSTAINER->sus_preset,1);
      break;
      
     case 37://Sequence
@@ -13244,7 +13189,8 @@ CH_UB->color(fore_color);
 
 light_preset(rkr->Selected_Preset);} {}
   }
-  Function {reordena()} {} {
+  Function {reordena()} {open
+  } {
     code {int i;
 unsigned int x[10],y[10];
 ulong s[10];
@@ -13799,7 +13745,7 @@ switch (rkr->efx_order[i])
 
    case 36:
        SUSTAINER->position(x[i],y[i]);
-       sus_activar->shortcut(s[i]);
+       SUSTAINER->sus_activar->shortcut(s[i]);
        if(!rkr->deachide)SUSTAINER->show();
        if(rkr->Sustainer_Bypass)
        {
@@ -14488,7 +14434,8 @@ rkr->RC_Stereo_Harm->fundi=undi;
 rkr->RC_Stereo_Harm->cc=1;
 }} {}
   }
-  Function {ActMIDI()} {} {
+  Function {ActMIDI()} {open
+  } {
     code {if (rkr->Mvalue==0) return;
 
 int i;
@@ -15649,12 +15596,12 @@ switch (i)
      rbecho_angle->redraw();
      break;
      case 312:
-     sus_gain->value(rkr->efx_Sustainer->getpar(0));
-     sus_gain->redraw();
+     SUSTAINER->sus_gain->value(rkr->efx_Sustainer->getpar(0));
+     SUSTAINER->sus_gain->redraw();
      break;
      case 313:
-     sus_sus->value(rkr->efx_Sustainer->getpar(1));
-     sus_sus->redraw();
+     SUSTAINER->sus_sus->value(rkr->efx_Sustainer->getpar(1));
+     SUSTAINER->sus_sus->redraw();
      break;
      case 314:
      seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
@@ -16026,7 +15973,8 @@ switch (i)
 
 rkr->Mvalue=0;} {}
   }
-  Function {ActOnOff()} {} {
+  Function {ActOnOff()} {open
+  } {
     code {int miralo;
 
 
@@ -16187,8 +16135,8 @@ switch(miralo)
   vo_activar->do_callback();
   break;
   case 36:
-  sus_activar->value(rkr->Sustainer_Bypass);
-  sus_activar->do_callback();
+  SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
+  SUSTAINER->sus_activar->do_callback();
   break;
   case 37:
   seq_activar->value(rkr->Sequence_Bypass);
@@ -17476,7 +17424,7 @@ return 0;} {}
         {
             printf("Saving file: %s\\n", filetoload);
             got_sigusr1 = 0;
-            gui->rkr->savefile(filetoload);
+            rkr->savefile(filetoload);
         }
         return;
     }
@@ -17744,7 +17692,8 @@ rkr->M_table[num-2000].preset=o->value();} {}
  mtfillvalue(i+2000, rkr->M_table[i].preset);
 }} {}
   }
-  Function {RandomPreset()} {} {
+  Function {RandomPreset()} {open
+  } {
     code {int i,j,l;
 int SelEff[10];
 int numEff = (int) (RND*6) + 1;
@@ -17980,7 +17929,7 @@ for(i=0;i<10;i++)
 
      case 36://Sustainer
      if (i<numEff)rkr->Sustainer_Bypass=1; else rkr->Sustainer_Bypass=0;
-     sus_activar->value(rkr->Sustainer_Bypass);
+     SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
      break;
      
     case 37://Sequence
