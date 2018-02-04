@@ -193,6 +193,11 @@ static inline float f_pow2(float x)
 
 /* Global GUI items */
 #include <FL/Fl_Tiled_Image.H>
+class RKRGUI;   // forward declaration
+class RKR;      // forward declaration
+
+extern RKRGUI *rgui;    // define in main
+extern RKR *rkr;        // rakarrack.h 
 extern Fl_Tiled_Image *back; 
 extern Fl_Color leds_color; 
 extern Fl_Color back_color; 

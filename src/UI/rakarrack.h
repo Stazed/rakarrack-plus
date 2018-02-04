@@ -20,6 +20,10 @@
 #include <FL/Fl_Color_Chooser.H>
 #include <X11/xpm.h>
 class RKR;  // forward declaration
+class Scope;  // forward declaration
+class NewVum;  // forward declaration
+class Analyzer;  // forward declaration
+class TunerBar;  // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>

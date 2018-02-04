@@ -53,6 +53,18 @@ decl {\#include <X11/xpm.h>} {public global
 decl {class RKR;  // forward declaration} {public global
 }
 
+decl {class Scope;  // forward declaration} {public global
+}
+
+decl {class NewVum;  // forward declaration} {public global
+}
+
+decl {class Analyzer;  // forward declaration} {public global
+}
+
+decl {class TunerBar;  // forward declaration} {selected public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -12186,8 +12198,7 @@ CH_UB->color(bcolor);
   Function {Leds_Color_Change(Fl_Color bcolor)} {open
   } {
     code {leds_color=bcolor;
-chfsize(0);} {selected
-    }
+chfsize(0);} {}
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)
