@@ -25,6 +25,7 @@ class NewVum;  // forward declaration
 class Analyzer;  // forward declaration
 class TunerBar;  // forward declaration
 class EqGui; // forward declaration
+class CompressGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -32,6 +33,7 @@ class SustainGui; // forward declaration
 #include <FL/Fl_Button.H>
 #include "scope.h"
 #include "eq_gui.h"
+#include "compress_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -196,63 +198,7 @@ public:
   Fl_Box *L9;
   Fl_Box *L10;
   EqGui *EQ;
-  Fl_Group *COMPRESS;
-  Fl_Light_Button *compress_activar;
-private:
-  inline void cb_compress_activar_i(Fl_Light_Button*, void*);
-  static void cb_compress_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *compress_preset;
-private:
-  inline void cb_compress_preset_i(Fl_Choice*, void*);
-  static void cb_compress_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_compress_preset[];
-public:
-  SliderW *compress_ATime;
-private:
-  inline void cb_compress_ATime_i(SliderW*, void*);
-  static void cb_compress_ATime(SliderW*, void*);
-public:
-  SliderW *compress_RTime;
-private:
-  inline void cb_compress_RTime_i(SliderW*, void*);
-  static void cb_compress_RTime(SliderW*, void*);
-public:
-  SliderW *compress_Ratio;
-private:
-  inline void cb_compress_Ratio_i(SliderW*, void*);
-  static void cb_compress_Ratio(SliderW*, void*);
-public:
-  SliderW *compress_Knee;
-private:
-  inline void cb_compress_Knee_i(SliderW*, void*);
-  static void cb_compress_Knee(SliderW*, void*);
-public:
-  SliderW *compress_threshold;
-private:
-  inline void cb_compress_threshold_i(SliderW*, void*);
-  static void cb_compress_threshold(SliderW*, void*);
-public:
-  SliderW *compress_output;
-private:
-  inline void cb_compress_output_i(SliderW*, void*);
-  static void cb_compress_output(SliderW*, void*);
-public:
-  Fl_Check_Button *Auto_Output;
-private:
-  inline void cb_Auto_Output_i(Fl_Check_Button*, void*);
-  static void cb_Auto_Output(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *Stereo;
-private:
-  inline void cb_Stereo_i(Fl_Check_Button*, void*);
-  static void cb_Stereo(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *Peak;
-private:
-  inline void cb_Peak_i(Fl_Check_Button*, void*);
-  static void cb_Peak(Fl_Check_Button*, void*);
-public:
+  CompressGui *COMPRESS;
   Fl_Group *DIST;
   Fl_Light_Button *dist_activar;
 private:
