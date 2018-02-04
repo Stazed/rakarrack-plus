@@ -24,12 +24,14 @@ class Scope;  // forward declaration
 class NewVum;  // forward declaration
 class Analyzer;  // forward declaration
 class TunerBar;  // forward declaration
+class EqGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Button.H>
 #include "scope.h"
+#include "eq_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -193,78 +195,7 @@ public:
   Fl_Box *L8;
   Fl_Box *L9;
   Fl_Box *L10;
-  Fl_Group *EQ;
-  Fl_Light_Button *eq_activar;
-private:
-  inline void cb_eq_activar_i(Fl_Light_Button*, void*);
-  static void cb_eq_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *eq_preset;
-private:
-  inline void cb_eq_preset_i(Fl_Choice*, void*);
-  static void cb_eq_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_eq_preset[];
-public:
-  SliderW *eq_Gain;
-private:
-  inline void cb_eq_Gain_i(SliderW*, void*);
-  static void cb_eq_Gain(SliderW*, void*);
-public:
-  SliderW *eq_Q;
-private:
-  inline void cb_eq_Q_i(SliderW*, void*);
-  static void cb_eq_Q(SliderW*, void*);
-public:
-  SliderW *eq_1;
-private:
-  inline void cb_eq_1_i(SliderW*, void*);
-  static void cb_eq_1(SliderW*, void*);
-public:
-  SliderW *eq_2;
-private:
-  inline void cb_eq_2_i(SliderW*, void*);
-  static void cb_eq_2(SliderW*, void*);
-public:
-  SliderW *eq_3;
-private:
-  inline void cb_eq_3_i(SliderW*, void*);
-  static void cb_eq_3(SliderW*, void*);
-public:
-  SliderW *eq_4;
-private:
-  inline void cb_eq_4_i(SliderW*, void*);
-  static void cb_eq_4(SliderW*, void*);
-public:
-  SliderW *eq_5;
-private:
-  inline void cb_eq_5_i(SliderW*, void*);
-  static void cb_eq_5(SliderW*, void*);
-public:
-  SliderW *eq_6;
-private:
-  inline void cb_eq_6_i(SliderW*, void*);
-  static void cb_eq_6(SliderW*, void*);
-public:
-  SliderW *eq_7;
-private:
-  inline void cb_eq_7_i(SliderW*, void*);
-  static void cb_eq_7(SliderW*, void*);
-public:
-  SliderW *eq_8;
-private:
-  inline void cb_eq_8_i(SliderW*, void*);
-  static void cb_eq_8(SliderW*, void*);
-public:
-  SliderW *eq_9;
-private:
-  inline void cb_eq_9_i(SliderW*, void*);
-  static void cb_eq_9(SliderW*, void*);
-public:
-  SliderW *eq_10;
-private:
-  inline void cb_eq_10_i(SliderW*, void*);
-  static void cb_eq_10(SliderW*, void*);
-public:
+  EqGui *EQ;
   Fl_Group *COMPRESS;
   Fl_Light_Button *compress_activar;
 private:
