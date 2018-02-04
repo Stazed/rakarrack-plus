@@ -74,19 +74,10 @@ decl {Fl_Color label_color;} {private global
 decl {Fl_Widget *old;} {private local
 }
 
-decl {float *spl;} {private local
-}
-
-decl {float *spr;} {private local
-}
-
 decl {int last_tecla;} {private local
 }
 
 decl {int drag;} {private local
-}
-
-decl {int ns;} {private local
 }
 
 decl {int at;} {private local
@@ -129,7 +120,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {363 356 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {368 185 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -9551,7 +9542,7 @@ ChangeActives();
 TUNER_LABEL->redraw_label();}
           tooltip {Enable Tuner - Shortcut 'T'} xywh {526 28 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
         }
-        Fl_Progress tuner_bar {selected
+        Fl_Progress tuner_bar {
           xywh {586 31 205 14} box THIN_DOWN_BOX color 47 selection_color 88 align 80
           code0 {o->minimum(-32);}
           code1 {o->maximum(32);}
@@ -12083,8 +12074,6 @@ install_signal_handlers();} {}
 MenuB->color(bcolor);
 
 back_color = bcolor;
-Analy->background_color_change(bcolor);
-Sco->background_color_change(bcolor);
 
 Label_Color_Change(label_color);
 if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);} {}
@@ -12197,9 +12186,8 @@ CH_UB->color(bcolor);
   Function {Leds_Color_Change(Fl_Color bcolor)} {open
   } {
     code {leds_color=bcolor;
-Analy->leds_color_change(bcolor);
-Sco->leds_color_change(bcolor);
-chfsize(0);} {}
+chfsize(0);} {selected
+    }
   }
   Function {put_icon(Fl_Window* window)} {} {
     code {if (hints == NULL)
@@ -16294,8 +16282,6 @@ back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 if(!rkr->EnableBackgroundImage)
 back->color_average(back_color,0.0);
 
-Sco->background_image_change(back);
-Analy->background_image_change(back);
 InOut->image(back);
 EQ->image(InOut->image());
 COMPRESS->image(InOut->image());

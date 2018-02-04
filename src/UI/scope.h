@@ -21,7 +21,6 @@
 
 #include <FL/Fl.H>
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Tiled_Image.H>
 #include <FL/fl_draw.H>
 #include <FL/Fl_Tooltip.H>
 #include "../global.h"
@@ -34,16 +33,10 @@ public:
     int handle(int event);
     void set_scope_ON(bool a_set){Scope_ON = a_set;}
     bool get_scope_ON(){return Scope_ON;}
-    void background_image_change (Fl_Tiled_Image *a_back){back = a_back;}
-    void leds_color_change (Fl_Color a_leds_color){leds_color = a_leds_color;}
-    void background_color_change(Fl_Color a_back_color){back_color = a_back_color;}
 private:
     float *spl; 
     float *spr; 
     int ns; 
     bool Scope_ON;
-    Fl_Tiled_Image *back;
-    Fl_Color leds_color;
-    Fl_Color back_color;  
 };
 #endif

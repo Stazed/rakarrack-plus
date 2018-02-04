@@ -191,7 +191,7 @@ static inline float f_pow2(float x)
 #endif
 #include "FPreset.h"
 
-/* For the special sliderW class*/
+/* Global GUI items */
 #include <FL/Fl_Tiled_Image.H>
 extern Fl_Tiled_Image *back; 
 extern Fl_Color leds_color; 

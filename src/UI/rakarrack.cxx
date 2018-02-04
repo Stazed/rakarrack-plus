@@ -8,11 +8,8 @@ Fl_Color back_color;
 Fl_Color fore_color; 
 Fl_Color label_color; 
 static Fl_Widget *old; 
-static float *spl; 
-static float *spr; 
 static int last_tecla; 
 static int drag; 
-static int ns; 
 static int at; 
 static int nt; 
 static int tta; 
@@ -22176,8 +22173,6 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
   MenuB->color(bcolor);
   
   back_color = bcolor;
-  Analy->background_color_change(bcolor);
-  Sco->background_color_change(bcolor);
   
   Label_Color_Change(label_color);
   if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);
@@ -22292,8 +22287,6 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor) {
 
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor) {
   leds_color=bcolor;
-  Analy->leds_color_change(bcolor);
-  Sco->leds_color_change(bcolor);
   chfsize(0);
 }
 
@@ -26407,8 +26400,6 @@ void RKRGUI::PutBackground() {
   if(!rkr->EnableBackgroundImage)
   back->color_average(back_color,0.0);
   
-  Sco->background_image_change(back);
-  Analy->background_image_change(back);
   InOut->image(back);
   EQ->image(InOut->image());
   COMPRESS->image(InOut->image());
