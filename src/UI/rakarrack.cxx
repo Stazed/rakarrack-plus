@@ -10521,7 +10521,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       L10->labelcolor(FL_BACKGROUND2_COLOR);
       L10->user_data((void*)(779));
     } // Fl_Box* L10
-    { EQ = new EqGui(330, 222, 158, 184);
+    { EQ = new EqGui(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);
       EQ->color(FL_FOREGROUND_COLOR);
       EQ->selection_color(FL_FOREGROUND_COLOR);
@@ -10535,7 +10535,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       EQ->hide();
       EQ->end();
     } // EqGui* EQ
-    { COMPRESS = new CompressGui(350, 242, 158, 184);
+    { COMPRESS = new CompressGui(161, 212, 158, 184);
       COMPRESS->box(FL_UP_BOX);
       COMPRESS->color(FL_FOREGROUND_COLOR);
       COMPRESS->selection_color(FL_FOREGROUND_COLOR);
@@ -10549,7 +10549,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       COMPRESS->hide();
       COMPRESS->end();
     } // CompressGui* COMPRESS
-    { DIST = new DistGui(340, 232, 158, 184);
+    { DIST = new DistGui(320, 212, 158, 184);
       DIST->box(FL_UP_BOX);
       DIST->color(FL_FOREGROUND_COLOR);
       DIST->selection_color(FL_FOREGROUND_COLOR);
@@ -18522,7 +18522,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       } // SliderW* cband_cross3
       COMPBAND->end();
     } // Fl_Group* COMPBAND
-    { OTREM = new Fl_Group(320, 213, 158, 184);
+    { OTREM = new Fl_Group(320, 212, 158, 184);
       OTREM->box(FL_UP_BOX);
       OTREM->color(FL_FOREGROUND_COLOR);
       OTREM->selection_color(FL_FOREGROUND_COLOR);

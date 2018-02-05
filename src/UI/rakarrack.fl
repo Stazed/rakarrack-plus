@@ -71,7 +71,7 @@ decl {class EqGui; // forward declaration} {public global
 decl {class CompressGui; // forward declaration} {public global
 }
 
-decl {class DistGui; // forward declaration} {selected public global
+decl {class DistGui; // forward declaration} {public global
 }
 
 decl {class SustainGui; // forward declaration} {public global
@@ -145,7 +145,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {194 233 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {600 383 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -927,19 +927,19 @@ Fl::focus(Open_Order);
       }
       Fl_Group EQ {
         user_data 1
-        xywh {330 222 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "eq_gui.h"}
         class EqGui
       } {}
       Fl_Group COMPRESS {
         user_data 1
-        xywh {350 242 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "compress_gui.h"}
         class CompressGui
       } {}
       Fl_Group DIST {
         user_data 1
-        xywh {340 232 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "dist_gui.h"}
         class DistGui
       } {}
@@ -8370,8 +8370,8 @@ rkr->efx_CompBand->changepar(11,(int)o->value());}
         }
       }
       Fl_Group OTREM {
-        user_data 1
-        xywh {320 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 selected
+        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button otrem_activar {
           label On
