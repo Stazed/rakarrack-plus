@@ -751,208 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_dist_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Distorsion_Bypass);
- return;
-}
-rkr->Distorsion_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Distorsion->cleanup();
-findpos(2,(int)o->value(),o);
-}
-void RKRGUI::cb_dist_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_activar_i(o,v);
-}
-
-void RKRGUI::cb_dist_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset(0,(int)(o->value()+2));
-dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
-dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
-dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
-dist_drive->value(rkr->efx_Distorsion->getpar(3));
-dist_level->value(rkr->efx_Distorsion->getpar(4));
-dist_tipo->value(rkr->efx_Distorsion->getpar(5));
-dist_neg->value(rkr->efx_Distorsion->getpar(6));
-dist_lpf->value(rkr->efx_Distorsion->getpar(7));
-dist_hpf->value(rkr->efx_Distorsion->getpar(8));
-dist_st->value(rkr->efx_Distorsion->getpar(9));
-dist_pf->value(rkr->efx_Distorsion->getpar(10));
-dist_oct->value(rkr->efx_Distorsion->getpar(12));
-}
-void RKRGUI::cb_dist_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_dist_preset[] = {
- {"Distorsion 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Distorsion 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Distorsion 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar Amp", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_dist_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(30);
- return;
-} 
-rkr->efx_Distorsion->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_dist_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_WD_i(o,v);
-}
-
-void RKRGUI::cb_dist_LRc_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(95);
- return;
-} 
-rkr->efx_Distorsion->changepar(2,(int)(o->value()+64));
-}
-void RKRGUI::cb_dist_LRc(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_LRc_i(o,v);
-}
-
-void RKRGUI::cb_dist_drive_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(69);
- return;
-} 
-rkr->efx_Distorsion->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_dist_drive(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_drive_i(o,v);
-}
-
-void RKRGUI::cb_dist_level_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(71);
- return;
-} 
-rkr->efx_Distorsion->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_dist_level(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_level_i(o,v);
-}
-
-void RKRGUI::cb_dist_tipo_i(Fl_Choice* o, void*) {
-  rkr->efx_Distorsion->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_dist_tipo(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_tipo_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_dist_tipo[] = {
- {"Atan", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Compress", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Overdrive", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Soft", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Super Soft", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Compress", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt-NoGain", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"FET", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"DynoFET", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Valve 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Valve 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Diode clipper", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_dist_neg_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_dist_neg(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_neg_i(o,v);
-}
-
-void RKRGUI::cb_dist_pf_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_dist_pf(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_pf_i(o,v);
-}
-
-void RKRGUI::cb_dist_st_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_dist_st(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_st_i(o,v);
-}
-
-void RKRGUI::cb_dist_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(48);
- return;
-} 
-rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_dist_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_pan_i(o,v);
-}
-
-void RKRGUI::cb_dist_oct_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(9);
- return;
-} 
-rkr->efx_Distorsion->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_dist_oct(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_oct_i(o,v);
-}
-
-void RKRGUI::cb_dist_lpf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(86);
- return;
-} 
-rkr->efx_Distorsion->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_dist_lpf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_lpf_i(o,v);
-}
-
-void RKRGUI::cb_dist_hpf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(89);
- return;
-} 
-rkr->efx_Distorsion->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_dist_hpf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dist_hpf_i(o,v);
-}
-
 void RKRGUI::cb_ovrd_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -10751,199 +10549,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       COMPRESS->hide();
       COMPRESS->end();
     } // CompressGui* COMPRESS
-    { DIST = new Fl_Group(320, 212, 158, 184);
+    { DIST = new DistGui(340, 232, 158, 184);
       DIST->box(FL_UP_BOX);
       DIST->color(FL_FOREGROUND_COLOR);
       DIST->selection_color(FL_FOREGROUND_COLOR);
+      DIST->labeltype(FL_NORMAL_LABEL);
       DIST->labelfont(1);
+      DIST->labelsize(14);
+      DIST->labelcolor(FL_FOREGROUND_COLOR);
       DIST->user_data((void*)(1));
       DIST->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      DIST->when(FL_WHEN_RELEASE);
       DIST->hide();
-      { dist_activar = new Fl_Light_Button(325, 216, 34, 18, "On");
-        dist_activar->shortcut(0x33);
-        dist_activar->color((Fl_Color)62);
-        dist_activar->selection_color((Fl_Color)1);
-        dist_activar->labelsize(10);
-        dist_activar->callback((Fl_Callback*)cb_dist_activar, (void*)(2));
-        dist_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        dist_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* dist_activar
-      { dist_preset = new Fl_Choice(397, 216, 76, 18, "Preset");
-        dist_preset->down_box(FL_BORDER_BOX);
-        dist_preset->selection_color(FL_FOREGROUND_COLOR);
-        dist_preset->labelsize(10);
-        dist_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_preset->textsize(10);
-        dist_preset->textcolor(FL_BACKGROUND2_COLOR);
-        dist_preset->callback((Fl_Callback*)cb_dist_preset, (void*)(12002));
-        dist_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        dist_preset->menu(menu_dist_preset);
-      } // Fl_Choice* dist_preset
-      { dist_WD = new SliderW(372, 247, 100, 10, "Wet/Dry");
-        dist_WD->type(5);
-        dist_WD->box(FL_FLAT_BOX);
-        dist_WD->color((Fl_Color)178);
-        dist_WD->selection_color((Fl_Color)62);
-        dist_WD->labeltype(FL_NORMAL_LABEL);
-        dist_WD->labelfont(0);
-        dist_WD->labelsize(10);
-        dist_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_WD->minimum(-64);
-        dist_WD->maximum(63);
-        dist_WD->step(1);
-        dist_WD->textcolor(FL_BACKGROUND2_COLOR);
-        dist_WD->callback((Fl_Callback*)cb_dist_WD);
-        dist_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_WD
-      { dist_LRc = new SliderW(372, 260, 100, 10, "L/R.Cr");
-        dist_LRc->type(5);
-        dist_LRc->box(FL_FLAT_BOX);
-        dist_LRc->color((Fl_Color)178);
-        dist_LRc->selection_color((Fl_Color)62);
-        dist_LRc->labeltype(FL_NORMAL_LABEL);
-        dist_LRc->labelfont(0);
-        dist_LRc->labelsize(10);
-        dist_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_LRc->minimum(-64);
-        dist_LRc->maximum(63);
-        dist_LRc->step(1);
-        dist_LRc->textcolor(FL_BACKGROUND2_COLOR);
-        dist_LRc->callback((Fl_Callback*)cb_dist_LRc);
-        dist_LRc->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_LRc->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_LRc
-      { dist_drive = new SliderW(372, 273, 100, 10, "Drive");
-        dist_drive->type(5);
-        dist_drive->box(FL_FLAT_BOX);
-        dist_drive->color((Fl_Color)178);
-        dist_drive->selection_color((Fl_Color)62);
-        dist_drive->labeltype(FL_NORMAL_LABEL);
-        dist_drive->labelfont(0);
-        dist_drive->labelsize(10);
-        dist_drive->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_drive->maximum(127);
-        dist_drive->step(1);
-        dist_drive->textcolor(FL_BACKGROUND2_COLOR);
-        dist_drive->callback((Fl_Callback*)cb_dist_drive);
-        dist_drive->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_drive->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_drive
-      { dist_level = new SliderW(372, 287, 100, 10, "Level");
-        dist_level->type(5);
-        dist_level->box(FL_FLAT_BOX);
-        dist_level->color((Fl_Color)178);
-        dist_level->selection_color((Fl_Color)62);
-        dist_level->labeltype(FL_NORMAL_LABEL);
-        dist_level->labelfont(0);
-        dist_level->labelsize(10);
-        dist_level->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_level->maximum(127);
-        dist_level->step(1);
-        dist_level->textcolor(FL_BACKGROUND2_COLOR);
-        dist_level->callback((Fl_Callback*)cb_dist_level);
-        dist_level->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_level->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_level
-      { dist_tipo = new Fl_Choice(354, 303, 70, 16, "Type");
-        dist_tipo->down_box(FL_BORDER_BOX);
-        dist_tipo->selection_color(FL_FOREGROUND_COLOR);
-        dist_tipo->labelsize(10);
-        dist_tipo->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_tipo->textsize(10);
-        dist_tipo->textcolor(FL_BACKGROUND2_COLOR);
-        dist_tipo->callback((Fl_Callback*)cb_dist_tipo, (void*)(12));
-        dist_tipo->menu(menu_dist_tipo);
-      } // Fl_Choice* dist_tipo
-      { dist_neg = new Fl_Check_Button(430, 304, 41, 15, "Neg.");
-        dist_neg->down_box(FL_BORDER_BOX);
-        dist_neg->labelsize(10);
-        dist_neg->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_neg->callback((Fl_Callback*)cb_dist_neg, (void*)(2));
-      } // Fl_Check_Button* dist_neg
-      { dist_pf = new Fl_Check_Button(329, 320, 67, 15, "Pre Filter");
-        dist_pf->down_box(FL_BORDER_BOX);
-        dist_pf->labelsize(10);
-        dist_pf->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_pf->callback((Fl_Callback*)cb_dist_pf, (void*)(2));
-      } // Fl_Check_Button* dist_pf
-      { dist_st = new Fl_Check_Button(394, 320, 57, 15, "Stereo");
-        dist_st->down_box(FL_BORDER_BOX);
-        dist_st->labelsize(10);
-        dist_st->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_st->callback((Fl_Callback*)cb_dist_st, (void*)(2));
-      } // Fl_Check_Button* dist_st
-      { dist_pan = new SliderW(372, 337, 100, 10, "Pan");
-        dist_pan->type(5);
-        dist_pan->box(FL_FLAT_BOX);
-        dist_pan->color((Fl_Color)178);
-        dist_pan->selection_color((Fl_Color)62);
-        dist_pan->labeltype(FL_NORMAL_LABEL);
-        dist_pan->labelfont(0);
-        dist_pan->labelsize(10);
-        dist_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_pan->minimum(-64);
-        dist_pan->maximum(63);
-        dist_pan->step(1);
-        dist_pan->textcolor(FL_BACKGROUND2_COLOR);
-        dist_pan->callback((Fl_Callback*)cb_dist_pan);
-        dist_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_pan
-      { dist_oct = new SliderW(372, 357, 100, 10, "Sub Octv");
-        dist_oct->type(5);
-        dist_oct->box(FL_FLAT_BOX);
-        dist_oct->color((Fl_Color)178);
-        dist_oct->selection_color((Fl_Color)62);
-        dist_oct->labeltype(FL_NORMAL_LABEL);
-        dist_oct->labelfont(0);
-        dist_oct->labelsize(10);
-        dist_oct->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_oct->maximum(127);
-        dist_oct->step(1);
-        dist_oct->textcolor(FL_BACKGROUND2_COLOR);
-        dist_oct->callback((Fl_Callback*)cb_dist_oct);
-        dist_oct->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_oct->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_oct
-      { dist_lpf = new SliderW(372, 369, 100, 10, "LPF");
-        dist_lpf->type(5);
-        dist_lpf->box(FL_FLAT_BOX);
-        dist_lpf->color((Fl_Color)178);
-        dist_lpf->selection_color((Fl_Color)62);
-        dist_lpf->labeltype(FL_NORMAL_LABEL);
-        dist_lpf->labelfont(0);
-        dist_lpf->labelsize(10);
-        dist_lpf->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_lpf->minimum(20);
-        dist_lpf->maximum(26000);
-        dist_lpf->step(1);
-        dist_lpf->value(20000);
-        dist_lpf->textcolor(FL_BACKGROUND2_COLOR);
-        dist_lpf->callback((Fl_Callback*)cb_dist_lpf);
-        dist_lpf->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_lpf->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_lpf
-      { dist_hpf = new SliderW(372, 381, 100, 10, "HPF");
-        dist_hpf->type(5);
-        dist_hpf->box(FL_FLAT_BOX);
-        dist_hpf->color((Fl_Color)178);
-        dist_hpf->selection_color((Fl_Color)62);
-        dist_hpf->labeltype(FL_NORMAL_LABEL);
-        dist_hpf->labelfont(0);
-        dist_hpf->labelsize(10);
-        dist_hpf->labelcolor(FL_BACKGROUND2_COLOR);
-        dist_hpf->minimum(20);
-        dist_hpf->maximum(20000);
-        dist_hpf->step(1);
-        dist_hpf->value(20);
-        dist_hpf->textcolor(FL_BACKGROUND2_COLOR);
-        dist_hpf->callback((Fl_Callback*)cb_dist_hpf);
-        dist_hpf->align(Fl_Align(FL_ALIGN_LEFT));
-        dist_hpf->when(FL_WHEN_CHANGED);
-      } // SliderW* dist_hpf
       DIST->end();
-    } // Fl_Group* DIST
+    } // DistGui* DIST
     { OVRD = new Fl_Group(480, 212, 158, 184);
       OVRD->box(FL_UP_BOX);
       OVRD->color(FL_FOREGROUND_COLOR);
@@ -11046,7 +10665,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         ovrd_tipo->textsize(10);
         ovrd_tipo->textcolor(FL_BACKGROUND2_COLOR);
         ovrd_tipo->callback((Fl_Callback*)cb_ovrd_tipo);
-        o->menu(menu_dist_tipo);
+        o->menu(DIST->get_menu_dist_tipo());
       } // Fl_Choice* ovrd_tipo
       { ovrd_neg = new Fl_Check_Button(589, 304, 42, 15, "Neg.");
         ovrd_neg->down_box(FL_BORDER_BOX);
@@ -13547,7 +13166,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         newdist_tipo->textsize(10);
         newdist_tipo->textcolor(FL_BACKGROUND2_COLOR);
         newdist_tipo->callback((Fl_Callback*)cb_newdist_tipo);
-        o->menu(menu_dist_tipo);
+        o->menu(DIST->get_menu_dist_tipo());
       } // Fl_Choice* newdist_tipo
       { newdist_neg = new Fl_Check_Button(590, 296, 42, 15, "Neg.");
         newdist_neg->down_box(FL_BORDER_BOX);
@@ -14952,7 +14571,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         mbdist_tipoL->textsize(10);
         mbdist_tipoL->textcolor(FL_BACKGROUND2_COLOR);
         mbdist_tipoL->callback((Fl_Callback*)cb_mbdist_tipoL);
-        o->menu(menu_dist_tipo);
+        o->menu(DIST->get_menu_dist_tipo());
       } // Fl_Choice* mbdist_tipoL
       { Fl_Choice* o = mbdist_tipoM = new Fl_Choice(534, 350, 50, 16);
         mbdist_tipoM->down_box(FL_BORDER_BOX);
@@ -14962,7 +14581,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         mbdist_tipoM->textsize(10);
         mbdist_tipoM->textcolor(FL_BACKGROUND2_COLOR);
         mbdist_tipoM->callback((Fl_Callback*)cb_mbdist_tipoM);
-        o->menu(menu_dist_tipo);
+        o->menu(DIST->get_menu_dist_tipo());
       } // Fl_Choice* mbdist_tipoM
       { Fl_Choice* o = mbdist_tipoH = new Fl_Choice(585, 350, 50, 16);
         mbdist_tipoH->down_box(FL_BORDER_BOX);
@@ -14972,7 +14591,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         mbdist_tipoH->textsize(10);
         mbdist_tipoH->textcolor(FL_BACKGROUND2_COLOR);
         mbdist_tipoH->callback((Fl_Callback*)cb_mbdist_tipoH);
-        o->menu(menu_dist_tipo);
+        o->menu(DIST->get_menu_dist_tipo());
       } // Fl_Choice* mbdist_tipoH
       { mbdist_pan = new SliderW(532, 369, 100, 10, "Pan");
         mbdist_pan->type(5);
@@ -22172,8 +21791,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 2://Distorsion
-       dist_activar->value(rkr->Distorsion_Bypass);
-       dist_preset->do_callback(dist_preset, 1);
+       DIST->dist_activar->value(rkr->Distorsion_Bypass);
+       DIST->dist_preset->do_callback(DIST->dist_preset, 1);
        break;
   
        case 3://Overdrive
@@ -22684,7 +22303,7 @@ void RKRGUI::reordena() {
        case 2:
       
          DIST->position(x[i],y[i]);
-         dist_activar->shortcut(s[i]);
+         DIST->dist_activar->shortcut(s[i]);
          if(!rkr->deachide)DIST->show();
          if(rkr->Distorsion_Bypass)
          {
@@ -23876,8 +23495,8 @@ void RKRGUI::ActMIDI() {
        ovrd_WD->redraw();
        break;
        case 30:
-       dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
-       dist_WD->redraw();
+       DIST->dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
+       DIST->dist_WD->redraw();
        break;
        case 31:
        har_WD->value(rkr->efx_Har->getpar(0)-64);
@@ -23924,8 +23543,8 @@ void RKRGUI::ActMIDI() {
        ovrd_pan->redraw();
        break;
        case 48:
-       dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
-       dist_pan->redraw();
+       DIST->dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
+       DIST->dist_pan->redraw();
        break;
        case 49:
        har_pan->value(rkr->efx_Har->getpar(1)-64);
@@ -23972,16 +23591,16 @@ void RKRGUI::ActMIDI() {
        ovrd_drive->redraw();
        break;
        case 69:
-       dist_drive->value(rkr->efx_Distorsion->getpar(3));
-       dist_drive->redraw();
+       DIST->dist_drive->value(rkr->efx_Distorsion->getpar(3));
+       DIST->dist_drive->redraw();
        break;
        case 70:
        ovrd_level->value(rkr->efx_Overdrive->getpar(4));
        ovrd_level->redraw();
        break;
        case 71:
-       dist_level->value(rkr->efx_Distorsion->getpar(4));
-       dist_level->redraw();
+       DIST->dist_level->value(rkr->efx_Distorsion->getpar(4));
+       DIST->dist_level->redraw();
        break;
        case 72:
        chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -24040,8 +23659,8 @@ void RKRGUI::ActMIDI() {
        ovrd_lpf->redraw();
        break;
        case 86:
-       dist_lpf->value(rkr->efx_Distorsion->getpar(7));
-       dist_lpf->redraw();
+       DIST->dist_lpf->value(rkr->efx_Distorsion->getpar(7));
+       DIST->dist_lpf->redraw();
        break;
        case 87:
        reverb_LPF->value(rkr->efx_Rev->getpar(7));
@@ -24052,8 +23671,8 @@ void RKRGUI::ActMIDI() {
        ovrd_hpf->redraw();
        break;
        case 89:
-       dist_hpf->value(rkr->efx_Distorsion->getpar(8));
-       dist_hpf->redraw();
+       DIST->dist_hpf->value(rkr->efx_Distorsion->getpar(8));
+       DIST->dist_hpf->redraw();
        break;
        case 90:
        reverb_HPF->value(rkr->efx_Rev->getpar(8));
@@ -24076,8 +23695,8 @@ void RKRGUI::ActMIDI() {
        ovrd_LRc->redraw();
        break;
        case 95:
-       dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
-       dist_LRc->redraw();
+       DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
+       DIST->dist_LRc->redraw();
        break;
        case 96:
        Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
@@ -24231,8 +23850,8 @@ void RKRGUI::ActMIDI() {
        newdist_oct->redraw();
        break;
        case 9:
-       dist_oct->value(rkr->efx_Distorsion->getpar(12));
-       dist_oct->redraw();
+       DIST->dist_oct->value(rkr->efx_Distorsion->getpar(12));
+       DIST->dist_oct->redraw();
        break;
        case 130:
        EQ->eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
@@ -25366,8 +24985,8 @@ void RKRGUI::ActOnOff() {
     COMPRESS->compress_activar->do_callback();
     break;
     case 2:
-    dist_activar->value(rkr->Distorsion_Bypass);
-    dist_activar->do_callback();
+    DIST->dist_activar->value(rkr->Distorsion_Bypass);
+    DIST->dist_activar->do_callback();
     break;
     case 3:
     ovrd_activar->value(rkr->Overdrive_Bypass);
@@ -27151,7 +26770,7 @@ void RKRGUI::RandomPreset() {
   
        case 2://Distorsion
        if (i<numEff) rkr->Distorsion_Bypass=1; else rkr->Distorsion_Bypass=0; 
-       dist_activar->value(rkr->Distorsion_Bypass);
+       DIST->dist_activar->value(rkr->Distorsion_Bypass);
        break;
   
        case 3://Overdrive

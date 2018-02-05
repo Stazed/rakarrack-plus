@@ -68,7 +68,10 @@ decl {class TunerBar;  // forward declaration} {public global
 decl {class EqGui; // forward declaration} {public global
 }
 
-decl {class CompressGui; // forward declaration} {selected public global
+decl {class CompressGui; // forward declaration} {public global
+}
+
+decl {class DistGui; // forward declaration} {selected public global
 }
 
 decl {class SustainGui; // forward declaration} {public global
@@ -936,293 +939,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group DIST {
         user_data 1
-        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button dist_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Distorsion_Bypass);
- return;
-}
-rkr->Distorsion_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Distorsion->cleanup();
-findpos(2,(int)o->value(),o);}
-          xywh {325 216 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice dist_preset {
-          label Preset
-          user_data 12002
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset(0,(int)(o->value()+2));
-dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
-dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
-dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
-dist_drive->value(rkr->efx_Distorsion->getpar(3));
-dist_level->value(rkr->efx_Distorsion->getpar(4));
-dist_tipo->value(rkr->efx_Distorsion->getpar(5));
-dist_neg->value(rkr->efx_Distorsion->getpar(6));
-dist_lpf->value(rkr->efx_Distorsion->getpar(7));
-dist_hpf->value(rkr->efx_Distorsion->getpar(8));
-dist_st->value(rkr->efx_Distorsion->getpar(9));
-dist_pf->value(rkr->efx_Distorsion->getpar(10));
-dist_oct->value(rkr->efx_Distorsion->getpar(12));}
-          xywh {397 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Distorsion 1}
-            xywh {32 32 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Distorsion 2}
-            xywh {32 32 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Distorsion 3}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Guitar Amp}
-            xywh {32 32 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider dist_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(30);
- return;
-} 
-rkr->efx_Distorsion->changepar(0,(int)(o->value()+64));}
-          xywh {372 247 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dist_LRc {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(95);
- return;
-} 
-rkr->efx_Distorsion->changepar(2,(int)(o->value()+64));}
-          xywh {372 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dist_drive {
-          label Drive
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(69);
- return;
-} 
-rkr->efx_Distorsion->changepar(3,(int)o->value());}
-          xywh {372 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dist_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(71);
- return;
-} 
-rkr->efx_Distorsion->changepar(4,(int)o->value());}
-          xywh {372 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice dist_tipo {
-          label Type
-          user_data 12
-          callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
-          xywh {354 303 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Atan
-            xywh {32 32 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym1
-            xywh {32 32 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow
-            xywh {32 32 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sine
-            xywh {42 42 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Qnts
-            xywh {52 52 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Zigzg
-            xywh {62 62 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Lmt
-            xywh {72 72 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtU
-            xywh {82 82 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label LmtL
-            xywh {92 92 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label ILmt
-            xywh {102 102 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Clip
-            xywh {112 112 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Asym2
-            xywh {122 122 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Pow2
-            xywh {132 132 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Sgm
-            xywh {142 142 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Crunch
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Hard Crunch}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Dirty Octave+}
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Square}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Compress
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Overdrive
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Soft
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Super Soft}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Hard Compress}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Lmt-NoGain}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label FET
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label DynoFET
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Valve 1}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Valve 2}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Diode clipper}
-            xywh {0 0 36 21} labelsize 9
-          }
-        }
-        Fl_Check_Button dist_neg {
-          label {Neg.}
-          user_data 2
-          callback {rkr->efx_Distorsion->changepar(6,(int)o->value());}
-          xywh {430 304 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button dist_pf {
-          label {Pre Filter}
-          user_data 2
-          callback {rkr->efx_Distorsion->changepar(10,(int)o->value());}
-          xywh {329 320 67 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button dist_st {
-          label Stereo
-          user_data 2
-          callback {rkr->efx_Distorsion->changepar(9,(int)o->value());}
-          xywh {394 320 57 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider dist_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(48);
- return;
-} 
-rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));}
-          xywh {372 337 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dist_oct {
-          label {Sub Octv}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(9);
- return;
-} 
-rkr->efx_Distorsion->changepar(12,(int)o->value());}
-          xywh {372 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dist_lpf {
-          label LPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(86);
- return;
-} 
-rkr->efx_Distorsion->changepar(7,(int)o->value());}
-          xywh {372 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dist_hpf {
-          label HPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(89);
- return;
-} 
-rkr->efx_Distorsion->changepar(8,(int)o->value());}
-          xywh {372 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {340 232 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "dist_gui.h"}
+        class DistGui
+      } {}
       Fl_Group OVRD {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -1317,7 +1037,7 @@ rkr->efx_Overdrive->changepar(4,(int)o->value());}
           label Type
           callback {rkr->efx_Overdrive->changepar(5,(int)o->value());} open
           xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_dist_tipo);}
+          code0 {o->menu(DIST->get_menu_dist_tipo());}
         } {}
         Fl_Check_Button ovrd_neg {
           label {Neg.}
@@ -3534,7 +3254,7 @@ rkr->efx_NewDist->changepar(4,(int)o->value());}
           label Type
           callback {rkr->efx_NewDist->changepar(5,(int)o->value());}
           xywh {514 296 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_dist_tipo);}
+          code0 {o->menu(DIST->get_menu_dist_tipo());}
         } {}
         Fl_Check_Button newdist_neg {
           label {Neg.}
@@ -4749,17 +4469,17 @@ rkr->efx_MBDist->changepar(13,(int)o->value());}
         Fl_Choice mbdist_tipoL {
           callback {rkr->efx_MBDist->changepar(5,(int)o->value());} open
           xywh {483 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_dist_tipo);}
+          code0 {o->menu(DIST->get_menu_dist_tipo());}
         } {}
         Fl_Choice mbdist_tipoM {
           callback {rkr->efx_MBDist->changepar(6,(int)o->value());} open
           xywh {534 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_dist_tipo);}
+          code0 {o->menu(DIST->get_menu_dist_tipo());}
         } {}
         Fl_Choice mbdist_tipoH {
           callback {rkr->efx_MBDist->changepar(7,(int)o->value());} open
           xywh {585 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_dist_tipo);}
+          code0 {o->menu(DIST->get_menu_dist_tipo());}
         } {}
         Fl_Value_Slider mbdist_pan {
           label Pan
@@ -12512,8 +12232,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 2://Distorsion
-     dist_activar->value(rkr->Distorsion_Bypass);
-     dist_preset->do_callback(dist_preset, 1);
+     DIST->dist_activar->value(rkr->Distorsion_Bypass);
+     DIST->dist_preset->do_callback(DIST->dist_preset, 1);
      break;
 
      case 3://Overdrive
@@ -13023,7 +12743,7 @@ switch (rkr->efx_order[i])
      case 2:
     
        DIST->position(x[i],y[i]);
-       dist_activar->shortcut(s[i]);
+       DIST->dist_activar->shortcut(s[i]);
        if(!rkr->deachide)DIST->show();
        if(rkr->Distorsion_Bypass)
        {
@@ -14207,8 +13927,8 @@ switch (i)
      ovrd_WD->redraw();
      break;
      case 30:
-     dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
-     dist_WD->redraw();
+     DIST->dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
+     DIST->dist_WD->redraw();
      break;
      case 31:
      har_WD->value(rkr->efx_Har->getpar(0)-64);
@@ -14255,8 +13975,8 @@ switch (i)
      ovrd_pan->redraw();
      break;
      case 48:
-     dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
-     dist_pan->redraw();
+     DIST->dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
+     DIST->dist_pan->redraw();
      break;
      case 49:
      har_pan->value(rkr->efx_Har->getpar(1)-64);
@@ -14303,16 +14023,16 @@ switch (i)
      ovrd_drive->redraw();
      break;
      case 69:
-     dist_drive->value(rkr->efx_Distorsion->getpar(3));
-     dist_drive->redraw();
+     DIST->dist_drive->value(rkr->efx_Distorsion->getpar(3));
+     DIST->dist_drive->redraw();
      break;
      case 70:
      ovrd_level->value(rkr->efx_Overdrive->getpar(4));
      ovrd_level->redraw();
      break;
      case 71:
-     dist_level->value(rkr->efx_Distorsion->getpar(4));
-     dist_level->redraw();
+     DIST->dist_level->value(rkr->efx_Distorsion->getpar(4));
+     DIST->dist_level->redraw();
      break;
      case 72:
      chorus_freq->value(rkr->efx_Chorus->getpar(2));
@@ -14371,8 +14091,8 @@ switch (i)
      ovrd_lpf->redraw();
      break;
      case 86:
-     dist_lpf->value(rkr->efx_Distorsion->getpar(7));
-     dist_lpf->redraw();
+     DIST->dist_lpf->value(rkr->efx_Distorsion->getpar(7));
+     DIST->dist_lpf->redraw();
      break;
      case 87:
      reverb_LPF->value(rkr->efx_Rev->getpar(7));
@@ -14383,8 +14103,8 @@ switch (i)
      ovrd_hpf->redraw();
      break;
      case 89:
-     dist_hpf->value(rkr->efx_Distorsion->getpar(8));
-     dist_hpf->redraw();
+     DIST->dist_hpf->value(rkr->efx_Distorsion->getpar(8));
+     DIST->dist_hpf->redraw();
      break;
      case 90:
      reverb_HPF->value(rkr->efx_Rev->getpar(8));
@@ -14407,8 +14127,8 @@ switch (i)
      ovrd_LRc->redraw();
      break;
      case 95:
-     dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
-     dist_LRc->redraw();
+     DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
+     DIST->dist_LRc->redraw();
      break;
      case 96:
      Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
@@ -14562,8 +14282,8 @@ switch (i)
      newdist_oct->redraw();
      break;
      case 9:
-     dist_oct->value(rkr->efx_Distorsion->getpar(12));
-     dist_oct->redraw();
+     DIST->dist_oct->value(rkr->efx_Distorsion->getpar(12));
+     DIST->dist_oct->redraw();
      break;
      case 130:
      EQ->eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
@@ -15697,8 +15417,8 @@ switch(miralo)
   COMPRESS->compress_activar->do_callback();
   break;
   case 2:
-  dist_activar->value(rkr->Distorsion_Bypass);
-  dist_activar->do_callback();
+  DIST->dist_activar->value(rkr->Distorsion_Bypass);
+  DIST->dist_activar->do_callback();
   break;
   case 3:
   ovrd_activar->value(rkr->Overdrive_Bypass);
@@ -17456,7 +17176,7 @@ for(i=0;i<10;i++)
 
      case 2://Distorsion
      if (i<numEff) rkr->Distorsion_Bypass=1; else rkr->Distorsion_Bypass=0; 
-     dist_activar->value(rkr->Distorsion_Bypass);
+     DIST->dist_activar->value(rkr->Distorsion_Bypass);
      break;
 
      case 3://Overdrive

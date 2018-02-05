@@ -17,6 +17,7 @@ set (ProgSources
     UI/sustain_gui.cxx
     UI/eq_gui.cxx
     UI/compress_gui.cxx
+    UI/dist_gui.cxx
     process.C
     fileio.C
     varios.C

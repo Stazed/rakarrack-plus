@@ -26,6 +26,7 @@ class Analyzer;  // forward declaration
 class TunerBar;  // forward declaration
 class EqGui; // forward declaration
 class CompressGui; // forward declaration
+class DistGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -34,6 +35,7 @@ class SustainGui; // forward declaration
 #include "scope.h"
 #include "eq_gui.h"
 #include "compress_gui.h"
+#include "dist_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -199,79 +201,7 @@ public:
   Fl_Box *L10;
   EqGui *EQ;
   CompressGui *COMPRESS;
-  Fl_Group *DIST;
-  Fl_Light_Button *dist_activar;
-private:
-  inline void cb_dist_activar_i(Fl_Light_Button*, void*);
-  static void cb_dist_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *dist_preset;
-private:
-  inline void cb_dist_preset_i(Fl_Choice*, void*);
-  static void cb_dist_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_dist_preset[];
-public:
-  SliderW *dist_WD;
-private:
-  inline void cb_dist_WD_i(SliderW*, void*);
-  static void cb_dist_WD(SliderW*, void*);
-public:
-  SliderW *dist_LRc;
-private:
-  inline void cb_dist_LRc_i(SliderW*, void*);
-  static void cb_dist_LRc(SliderW*, void*);
-public:
-  SliderW *dist_drive;
-private:
-  inline void cb_dist_drive_i(SliderW*, void*);
-  static void cb_dist_drive(SliderW*, void*);
-public:
-  SliderW *dist_level;
-private:
-  inline void cb_dist_level_i(SliderW*, void*);
-  static void cb_dist_level(SliderW*, void*);
-public:
-  Fl_Choice *dist_tipo;
-private:
-  inline void cb_dist_tipo_i(Fl_Choice*, void*);
-  static void cb_dist_tipo(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_dist_tipo[];
-public:
-  Fl_Check_Button *dist_neg;
-private:
-  inline void cb_dist_neg_i(Fl_Check_Button*, void*);
-  static void cb_dist_neg(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *dist_pf;
-private:
-  inline void cb_dist_pf_i(Fl_Check_Button*, void*);
-  static void cb_dist_pf(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *dist_st;
-private:
-  inline void cb_dist_st_i(Fl_Check_Button*, void*);
-  static void cb_dist_st(Fl_Check_Button*, void*);
-public:
-  SliderW *dist_pan;
-private:
-  inline void cb_dist_pan_i(SliderW*, void*);
-  static void cb_dist_pan(SliderW*, void*);
-public:
-  SliderW *dist_oct;
-private:
-  inline void cb_dist_oct_i(SliderW*, void*);
-  static void cb_dist_oct(SliderW*, void*);
-public:
-  SliderW *dist_lpf;
-private:
-  inline void cb_dist_lpf_i(SliderW*, void*);
-  static void cb_dist_lpf(SliderW*, void*);
-public:
-  SliderW *dist_hpf;
-private:
-  inline void cb_dist_hpf_i(SliderW*, void*);
-  static void cb_dist_hpf(SliderW*, void*);
-public:
+  DistGui *DIST;
   Fl_Group *OVRD;
   Fl_Light_Button *ovrd_activar;
 private:
