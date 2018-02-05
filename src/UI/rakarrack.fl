@@ -83,6 +83,9 @@ decl {class EchoGui; // forward declaration} {public global
 decl {class ChorusGui; // forward declaration} {public global
 }
 
+decl {class PhaserGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -159,11 +162,11 @@ Pexitprogram=1;} open
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -965,192 +968,17 @@ Fl::focus(Open_Order);
         class EchoGui
       } {}
       Fl_Group CHORUS {
-        user_data 1 selected
+        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "chorus_gui.h"}
         class ChorusGui
       } {}
       Fl_Group PHASER {
-        user_data 1
-        xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
-      } {
-        Fl_Light_Button phaser_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Phaser_Bypass);
- return;
-}
-rkr->Phaser_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Phaser->cleanup();
-findpos(6,(int)o->value(),o);}
-          xywh {166 417 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice phaser_preset {
-          label Preset
-          user_data 12006
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12006))rkr->efx_Phaser->setpreset((int) o->value());
-phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
-phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
-phaser_freq->value(rkr->efx_Phaser->getpar(2));
-phaser_rnd->value(rkr->efx_Phaser->getpar(3));
-phaser_lfotype->value(rkr->efx_Phaser->getpar(4));
-phaser_stdf->value(rkr->efx_Phaser->getpar(5));
-phaser_dpth->value(rkr->efx_Phaser->getpar(6));
-phaser_stages->value(rkr->efx_Phaser->getpar(8));
-phaser_fb->value(rkr->efx_Phaser->getpar(7));
-phaser_stages->value(rkr->efx_Phaser->getpar(8));
-phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
-phaser_subs->value(rkr->efx_Phaser->getpar(10));
-phaser_phase->value(rkr->efx_Phaser->getpar(11));}
-          xywh {238 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Phaser 1}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Phaser 2}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Phaser 3}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Phaser 4}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Phaser 5}
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Phaser 6}
-            xywh {92 92 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider phaser_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(54);
- return;
-} 
-rkr->efx_Phaser->changepar(0,(int)(o->value()+64));}
-          xywh {210 442 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider phaser_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(60);
- return;
-} 
-rkr->efx_Phaser->changepar(1,(int)(o->value()+64));}
-          xywh {210 454 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 value 64 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider phaser_freq {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(74);
- return;
-} 
-rkr->efx_Phaser->changepar(2,(int)o->value());}
-          xywh {210 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider phaser_rnd {
-          label Rnd
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(107);
- return;
-} 
-rkr->efx_Phaser->changepar(3,(int)o->value());}
-          xywh {210 478 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice phaser_lfotype {
-          label {LFO Type}
-          callback {rkr->efx_Phaser->changepar(4,(int)o->value());} open
-          xywh {221 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Check_Button phaser_subs {
-          label Subtract
-          user_data 2
-          callback {rkr->efx_Phaser->changepar(10,(int)o->value())}
-          xywh {201 507 65 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider phaser_phase {
-          label Phase
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(114);
- return;
-} 
-rkr->efx_Phaser->changepar(11,(int)o->value());}
-          xywh {210 523 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider phaser_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(101);
- return;
-} 
-rkr->efx_Phaser->changepar(5,(int)o->value());}
-          xywh {210 534 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider phaser_dpth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(21);
- return;
-} 
-rkr->efx_Phaser->changepar(6,(int)o->value());}
-          xywh {210 545 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider phaser_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(81);
- return;
-} 
-rkr->efx_Phaser->changepar(7,(int)o->value());}
-          xywh {210 557 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Counter phaser_stages {
-          label Stages
-          callback {rkr->efx_Phaser->changepar(8,(int)o->value());}
-          xywh {233 569 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
-        }
-        Fl_Value_Slider phaser_LR {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(93);
- return;
-} 
-rkr->efx_Phaser->changepar(9,(int)(o->value()+64));}
-          xywh {210 584 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        user_data 1 selected
+        xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "phaser_gui.h"}
+        class PhaserGui
+      } {}
       Fl_Group FLANGER {
         user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
@@ -7882,7 +7710,7 @@ rkr->efx_CompBand->changepar(11,(int)o->value());}
       }
       Fl_Group OTREM {
         user_data 1
-        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
       } {
         Fl_Light_Button otrem_activar {
           label On
@@ -8794,7 +8622,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -11763,8 +11591,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
      
      case 6://Phaser
-     phaser_activar->value(rkr->Phaser_Bypass);
-     phaser_preset->do_callback(phaser_preset,1);
+     PHASER->phaser_activar->value(rkr->Phaser_Bypass);
+     PHASER->phaser_preset->do_callback(PHASER->phaser_preset,1);
      break;  
 
      case 7://Flanger
@@ -12306,7 +12134,7 @@ switch (rkr->efx_order[i])
      case 6:
     
        PHASER->position(x[i],y[i]);
-       phaser_activar->shortcut(s[i]);
+       PHASER->phaser_activar->shortcut(s[i]);
        if(!rkr->deachide)PHASER->show();
        if(rkr->Phaser_Bypass)
        {
@@ -13402,8 +13230,8 @@ switch (i)
      Alienwah_dpth->redraw();
      break;
      case 21:
-     phaser_dpth->value(rkr->efx_Phaser->getpar(6));
-     phaser_dpth->redraw();
+     PHASER->phaser_dpth->value(rkr->efx_Phaser->getpar(6));
+     PHASER->phaser_dpth->redraw();
      break;
      case 22:
      flanger_dpth->value(rkr->efx_Flanger->getpar(6));
@@ -13454,8 +13282,8 @@ switch (i)
      flanger_WD->redraw();
      break;
      case 54:
-     phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
-     phaser_WD->redraw();
+     PHASER->phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
+     PHASER->phaser_WD->redraw();
      break;
      case 55:
      Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
@@ -13502,8 +13330,8 @@ switch (i)
      flanger_pan->redraw();
      break;
      case 60:
-     phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
-     phaser_pan->redraw();
+     PHASER->phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
+     PHASER->phaser_pan->redraw();
      break;
      case 61:
      Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
@@ -13554,8 +13382,8 @@ switch (i)
      flanger_freq->redraw();
      break;
      case 74:
-     phaser_freq->value(rkr->efx_Phaser->getpar(2));
-     phaser_freq->redraw();
+     PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(2));
+     PHASER->phaser_freq->redraw();
      break;
      case 75:
      WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
@@ -13582,8 +13410,8 @@ switch (i)
      flanger_fb->redraw();
      break;
      case 81:
-     phaser_fb->value(rkr->efx_Phaser->getpar(7));
-     phaser_fb->redraw();
+     PHASER->phaser_fb->value(rkr->efx_Phaser->getpar(7));
+     PHASER->phaser_fb->redraw();
      break;
      case 82:
      Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
@@ -13630,8 +13458,8 @@ switch (i)
      flanger_LR->redraw();
      break;
      case 93:
-     phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
-     phaser_LR->redraw();
+     PHASER->phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
+     PHASER->phaser_LR->redraw();
      break;
      case 94:
      OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
@@ -13662,8 +13490,8 @@ switch (i)
      flanger_stdf->redraw();
      break;
      case 101:
-     phaser_stdf->value(rkr->efx_Phaser->getpar(5));
-     phaser_stdf->redraw();
+     PHASER->phaser_stdf->value(rkr->efx_Phaser->getpar(5));
+     PHASER->phaser_stdf->redraw();
      break;
      case 102:
      WhaWha_stdf->value(rkr->efx_WhaWha->getpar(5));
@@ -13686,8 +13514,8 @@ switch (i)
      flanger_rnd->redraw();
      break;
      case 107:
-     phaser_rnd->value(rkr->efx_Phaser->getpar(3));
-     phaser_rnd->redraw();
+     PHASER->phaser_rnd->value(rkr->efx_Phaser->getpar(3));
+     PHASER->phaser_rnd->redraw();
      break;
      case 108:
      WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
@@ -13714,8 +13542,8 @@ switch (i)
      WhaWha_smooth->redraw();
      break;
      case 114:
-     phaser_phase->value(rkr->efx_Phaser->getpar(11));
-     phaser_phase->redraw();
+     PHASER->phaser_phase->value(rkr->efx_Phaser->getpar(11));
+     PHASER->phaser_phase->redraw();
      break;
      case 115:
      Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
@@ -14944,8 +14772,8 @@ switch(miralo)
   CHORUS->chorus_activar->do_callback();
   break;
   case 6:
-  phaser_activar->value(rkr->Phaser_Bypass);
-  phaser_activar->do_callback();
+  PHASER->phaser_activar->value(rkr->Phaser_Bypass);
+  PHASER->phaser_activar->do_callback();
   break;
   case 7:
   flanger_activar->value(rkr->Flanger_Bypass);
@@ -15874,8 +15702,8 @@ if(rkr->Chorus_Bypass)
   
   if(rkr->Phaser_Bypass)
   {
-  phaser_freq->value(rkr->efx_Phaser->getpar(2));
-  phaser_freq->redraw();
+  PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(2));
+  PHASER->phaser_freq->redraw();
   }
   
   if(rkr->Pan_Bypass)
@@ -16707,7 +16535,7 @@ for(i=0;i<10;i++)
      
      case 6://Phaser
      if (i<numEff)rkr->Phaser_Bypass=1; else rkr->Phaser_Bypass=0;
-     phaser_activar->value(rkr->Phaser_Bypass);
+     PHASER->phaser_activar->value(rkr->Phaser_Bypass);
      break;  
 
      case 7://Flanger

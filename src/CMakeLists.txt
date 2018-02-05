@@ -15,13 +15,14 @@ set (ProgSources
     UI/newvum.cxx
     UI/tunerbar.cxx
     UI/common_gui_menu.cxx
-    UI/sustain_gui.cxx
     UI/eq_gui.cxx
     UI/compress_gui.cxx
     UI/dist_gui.cxx
     UI/ovrd_gui.cxx
     UI/echo_gui.cxx
     UI/chorus_gui.cxx
+    UI/phaser_gui.cxx
+    UI/sustain_gui.cxx
     process.C
     fileio.C
     varios.C
