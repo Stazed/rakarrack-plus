@@ -80,6 +80,9 @@ decl {class OvrdGui; // forward declaration} {public global
 decl {class EchoGui; // forward declaration} {public global
 }
 
+decl {class ChorusGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -150,8 +153,8 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
-      xywh {488 140 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;} open
+      xywh {260 118 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -962,226 +965,11 @@ Fl::focus(Open_Order);
         class EchoGui
       } {}
       Fl_Group CHORUS {
-        user_data 1
-        xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
-      } {
-        Fl_Light_Button chorus_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Chorus_Bypass);
- return;
-}
-rkr->Chorus_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Chorus->cleanup();
-findpos(5,(int)o->value(),o);}
-          xywh {7 417 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice chorus_preset {
-          label Preset
-          user_data 12005
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
-chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
-chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
-chorus_freq->value(rkr->efx_Chorus->getpar(2));
-chorus_rnd->value(rkr->efx_Chorus->getpar(3));
-chorus_lfotype->value(rkr->efx_Chorus->getpar(4));
-chorus_stdf->value(rkr->efx_Chorus->getpar(5));
-chorus_dpth->value(rkr->efx_Chorus->getpar(6));
-chorus_delay->value(rkr->efx_Chorus->getpar(7));
-chorus_fb->value(rkr->efx_Chorus->getpar(8));
-chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
-chorus_subs->value(rkr->efx_Chorus->getpar(11));
-chorus_awesome->value(rkr->efx_Chorus->getpar(12));}
-          xywh {79 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Chorus 1}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Chorus 2}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Chorus 3}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Celeste 1}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Celeste 2}
-            xywh {72 72 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider chorus_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(52);
- return;
-} 
-rkr->efx_Chorus->changepar(0,(int)(o->value()+64));}
-          xywh {51 442 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider chorus_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(50);
- return;
-} 
-rkr->efx_Chorus->changepar(1,(int)(o->value()+64));}
-          xywh {51 454 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider chorus_freq {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(72);
- return;
-} 
-rkr->efx_Chorus->changepar(2,(int)o->value());}
-          xywh {51 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider chorus_rnd {
-          label Rnd
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(105);
- return;
-} 
-rkr->efx_Chorus->changepar(3,(int)o->value());}
-          xywh {51 478 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice chorus_lfotype {
-          label {LFO Type}
-          user_data 12
-          callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open
-          xywh {63 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Sine
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tri
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Up}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label ZigZag
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M. Sqare}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {M.Saw}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {L. Fractal}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {L. Fractal XY}
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {S/H Random}
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {-Sine +Tri}
-            xywh {40 40 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {-Tri +Sine}
-            xywh {50 50 36 21} labelsize 9
-          }
-        }
-        Fl_Check_Button chorus_subs {
-          label Subtract
-          user_data 2
-          callback {rkr->efx_Chorus->changepar(11,(int)o->value())}
-          xywh {27 507 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button chorus_awesome {
-          label Intense
-          user_data 2
-          callback {rkr->efx_Chorus->changepar(12,(int)o->value())}
-          xywh {90 508 56 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider chorus_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(99);
- return;
-} 
-rkr->efx_Chorus->changepar(5,(int)o->value());}
-          xywh {51 528 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider chorus_dpth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(23);
- return;
-} 
-rkr->efx_Chorus->changepar(6,(int)o->value());}
-          xywh {51 541 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider chorus_delay {
-          label Delay
-          callback {rkr->efx_Chorus->changepar(7,(int)o->value());}
-          xywh {51 554 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider chorus_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(79);
- return;
-} 
-rkr->efx_Chorus->changepar(8,(int)o->value());}
-          xywh {51 567 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider chorus_LR {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(91);
- return;
-} 
-rkr->efx_Chorus->changepar(9,(int)(o->value()+64));}
-          xywh {51 581 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        user_data 1 selected
+        xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "chorus_gui.h"}
+        class ChorusGui
+      } {}
       Fl_Group PHASER {
         user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
@@ -1294,7 +1082,7 @@ rkr->efx_Phaser->changepar(3,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Phaser->changepar(4,(int)o->value());} open
           xywh {221 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Check_Button phaser_subs {
           label Subtract
@@ -1470,7 +1258,7 @@ rkr->efx_Flanger->changepar(3,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
           xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Check_Button flanger_subs {
           label Subtract
@@ -1986,7 +1774,7 @@ rkr->efx_WhaWha->changepar(3,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_WhaWha->changepar(4,(int)o->value())} open
           xywh {381 289 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider WhaWha_stdf {
           label {St.df}
@@ -2146,7 +1934,7 @@ rkr->efx_Alienwah->changepar(3,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open
           xywh {380 291 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider Alienwah_phase {
           label Phase
@@ -2385,7 +2173,7 @@ rkr->efx_Pan->changepar(3,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Pan->changepar(4,(int)o->value());} open
           xywh {381 315 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider pan_stdf {
           label {St.df}
@@ -3125,7 +2913,7 @@ rkr->efx_APhaser->changepar(0,(int)(o->value()+64));}
           label {LFO Type}
           callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open
           xywh {555 252 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider aphaser_freq {
           label Tempo
@@ -3600,7 +3388,7 @@ rkr->efx_DFlange->changepar(11,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_DFlange->changepar(12,(int)o->value());} open
           xywh {384 365 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider dflange_rnd {
           label Rnd
@@ -4870,7 +4658,7 @@ rkr->efx_Synthfilter->changepar(3,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Synthfilter->changepar(4,(int)o->value());}
           xywh {373 280 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Check_Button synthfilter_subs {
           label {Subtr.}
@@ -5057,7 +4845,7 @@ rkr->efx_MBVvol->changepar(1,(int)o->value());}
           label {LFO 1 Type}
           callback {rkr->efx_MBVvol->changepar(2,(int)o->value());}
           xywh {384 264 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider mbvvol_stdf1 {
           label {St.df 1}
@@ -5085,7 +4873,7 @@ rkr->efx_MBVvol->changepar(4,(int)o->value());}
           label {LFO 2 Type}
           callback {rkr->efx_MBVvol->changepar(5,(int)o->value());}
           xywh {384 308 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider mbvvol_stdf2 {
           label {St.df 2}
@@ -5884,7 +5672,7 @@ rkr->efx_RyanWah->changepar(5,(int)o->value()+64);}
           label LFO
           callback {rkr->efx_RyanWah->changepar(4,(int)o->value())}
           xywh {559 293 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider ryanwah_dpth {
           label Depth
@@ -7590,7 +7378,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
           xywh {411 347 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Check_Button echotron_mf {
           label MF
@@ -8187,7 +7975,7 @@ rkr->efx_Opticaltrem->changepar(2,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Opticaltrem->changepar(3,(int)o->value());}
           xywh {383 313 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider otrem_stdf {
           label {St.df}
@@ -8347,7 +8135,7 @@ rkr->efx_Vibe->changepar(2,(int)o->value());}
           label {LFO Type}
           callback {rkr->efx_Vibe->changepar(3,(int)o->value());}
           xywh {543 307 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_chorus_lfotype);}
+          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
         } {}
         Fl_Value_Slider vibe_stdf {
           label {St.df}
@@ -11970,8 +11758,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
      
      case 5://Chorus
-     chorus_activar->value(rkr->Chorus_Bypass);
-     chorus_preset->do_callback(chorus_preset,1); 
+     CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
+     CHORUS->chorus_preset->do_callback(CHORUS->chorus_preset,1); 
      break;
      
      case 6://Phaser
@@ -12505,7 +12293,7 @@ switch (rkr->efx_order[i])
      case 5:
     
        CHORUS->position(x[i],y[i]);
-       chorus_activar->shortcut(s[i]);
+       CHORUS->chorus_activar->shortcut(s[i]);
        if(!rkr->deachide)CHORUS->show();
        if(rkr->Chorus_Bypass)
        {
@@ -13622,8 +13410,8 @@ switch (i)
      flanger_dpth->redraw();
      break;
      case 23:
-     chorus_dpth->value(rkr->efx_Chorus->getpar(6));
-     chorus_dpth->redraw();
+     CHORUS->chorus_dpth->value(rkr->efx_Chorus->getpar(6));
+     CHORUS->chorus_dpth->redraw();
      break;
      case 24:
      musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
@@ -13658,8 +13446,8 @@ switch (i)
      har_WD->redraw();
      break;
      case 52:
-     chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
-     chorus_WD->redraw();
+     CHORUS->chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
+     CHORUS->chorus_WD->redraw();
      break;
      case 53:
      flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
@@ -13706,8 +13494,8 @@ switch (i)
      har_pan->redraw();
      break;
      case 50:
-     chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
-     chorus_pan->redraw();
+     CHORUS->chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
+     CHORUS->chorus_pan->redraw();
      break;
      case 51:
      flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
@@ -13758,8 +13546,8 @@ switch (i)
      DIST->dist_level->redraw();
      break;
      case 72:
-     chorus_freq->value(rkr->efx_Chorus->getpar(2));
-     chorus_freq->redraw();
+     CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(2));
+     CHORUS->chorus_freq->redraw();
      break;
      case 73:
      flanger_freq->value(rkr->efx_Flanger->getpar(2));
@@ -13786,8 +13574,8 @@ switch (i)
      ECHO->echo_fb->redraw();
      break;
      case 79:
-     chorus_fb->value(rkr->efx_Chorus->getpar(8));
-     chorus_fb->redraw();
+     CHORUS->chorus_fb->value(rkr->efx_Chorus->getpar(8));
+     CHORUS->chorus_fb->redraw();
      break;
      case 80:
      flanger_fb->value(rkr->efx_Flanger->getpar(8));
@@ -13834,8 +13622,8 @@ switch (i)
      reverb_HPF->redraw();
      break;
      case 91:
-     chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
-     chorus_LR->redraw();
+     CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
+     CHORUS->chorus_LR->redraw();
      break;
      case 92:
      flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
@@ -13866,8 +13654,8 @@ switch (i)
      musdelay_LRc->redraw();
      break;
      case 99:
-     chorus_stdf->value(rkr->efx_Chorus->getpar(5));
-     chorus_stdf->redraw();
+     CHORUS->chorus_stdf->value(rkr->efx_Chorus->getpar(5));
+     CHORUS->chorus_stdf->redraw();
      break;
      case 100:
      flanger_stdf->value(rkr->efx_Flanger->getpar(5));
@@ -13890,8 +13678,8 @@ switch (i)
      pan_stdf->redraw();
      break;
      case 105:
-     chorus_rnd->value(rkr->efx_Chorus->getpar(3));
-     chorus_rnd->redraw();
+     CHORUS->chorus_rnd->value(rkr->efx_Chorus->getpar(3));
+     CHORUS->chorus_rnd->redraw();
      break;
      case 106:
      flanger_rnd->value(rkr->efx_Flanger->getpar(3));
@@ -15152,8 +14940,8 @@ switch(miralo)
   ECHO->echo_activar->do_callback();
   break;
   case 5:
-  chorus_activar->value(rkr->Chorus_Bypass);
-  chorus_activar->do_callback();
+  CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
+  CHORUS->chorus_activar->do_callback();
   break;
   case 6:
   phaser_activar->value(rkr->Phaser_Bypass);
@@ -16074,8 +15862,8 @@ looper_t2->redraw();} {}
 
 if(rkr->Chorus_Bypass)
   {
-  chorus_freq->value(rkr->efx_Chorus->getpar(2));
-  chorus_freq->redraw();
+  CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(2));
+  CHORUS->chorus_freq->redraw();
   }
   
   if(rkr->Flanger_Bypass)
@@ -16914,7 +16702,7 @@ for(i=0;i<10;i++)
      
      case 5://Chorus
      if (i<numEff)rkr->Chorus_Bypass=1; else rkr->Chorus_Bypass=0;
-     chorus_activar->value(rkr->Chorus_Bypass);
+     CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
      break;
      
      case 6://Phaser

@@ -751,191 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_chorus_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Chorus_Bypass);
- return;
-}
-rkr->Chorus_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Chorus->cleanup();
-findpos(5,(int)o->value(),o);
-}
-void RKRGUI::cb_chorus_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_activar_i(o,v);
-}
-
-void RKRGUI::cb_chorus_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
-chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
-chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
-chorus_freq->value(rkr->efx_Chorus->getpar(2));
-chorus_rnd->value(rkr->efx_Chorus->getpar(3));
-chorus_lfotype->value(rkr->efx_Chorus->getpar(4));
-chorus_stdf->value(rkr->efx_Chorus->getpar(5));
-chorus_dpth->value(rkr->efx_Chorus->getpar(6));
-chorus_delay->value(rkr->efx_Chorus->getpar(7));
-chorus_fb->value(rkr->efx_Chorus->getpar(8));
-chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
-chorus_subs->value(rkr->efx_Chorus->getpar(11));
-chorus_awesome->value(rkr->efx_Chorus->getpar(12));
-}
-void RKRGUI::cb_chorus_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_chorus_preset[] = {
- {"Chorus 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Chorus 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Chorus 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Celeste 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Celeste 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_chorus_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(52);
- return;
-} 
-rkr->efx_Chorus->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_chorus_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_WD_i(o,v);
-}
-
-void RKRGUI::cb_chorus_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(50);
- return;
-} 
-rkr->efx_Chorus->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_chorus_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_pan_i(o,v);
-}
-
-void RKRGUI::cb_chorus_freq_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(72);
- return;
-} 
-rkr->efx_Chorus->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_chorus_freq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_freq_i(o,v);
-}
-
-void RKRGUI::cb_chorus_rnd_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(105);
- return;
-} 
-rkr->efx_Chorus->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_chorus_rnd(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_rnd_i(o,v);
-}
-
-void RKRGUI::cb_chorus_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Chorus->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_chorus_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_lfotype_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_chorus_lfotype[] = {
- {"Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Ramp Down", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"ZigZag", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M. Sqare", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"L. Fractal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"L. Fractal XY", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"S/H Random", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"-Sine +Tri", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"-Tri +Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_chorus_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Chorus->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_chorus_subs(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_subs_i(o,v);
-}
-
-void RKRGUI::cb_chorus_awesome_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Chorus->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_chorus_awesome(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_awesome_i(o,v);
-}
-
-void RKRGUI::cb_chorus_stdf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(99);
- return;
-} 
-rkr->efx_Chorus->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_chorus_stdf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_stdf_i(o,v);
-}
-
-void RKRGUI::cb_chorus_dpth_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(23);
- return;
-} 
-rkr->efx_Chorus->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_chorus_dpth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_dpth_i(o,v);
-}
-
-void RKRGUI::cb_chorus_delay_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_chorus_delay(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_delay_i(o,v);
-}
-
-void RKRGUI::cb_chorus_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(79);
- return;
-} 
-rkr->efx_Chorus->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_chorus_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_fb_i(o,v);
-}
-
-void RKRGUI::cb_chorus_LR_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(91);
- return;
-} 
-rkr->efx_Chorus->changepar(9,(int)(o->value()+64));
-}
-void RKRGUI::cb_chorus_LR(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_chorus_LR_i(o,v);
-}
-
 void RKRGUI::cb_phaser_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -10309,205 +10124,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       ECHO->hide();
       ECHO->end();
     } // EchoGui* ECHO
-    { CHORUS = new Fl_Group(2, 413, 158, 184);
+    { CHORUS = new ChorusGui(2, 413, 158, 184);
       CHORUS->box(FL_UP_BOX);
       CHORUS->color(FL_FOREGROUND_COLOR);
       CHORUS->selection_color(FL_FOREGROUND_COLOR);
+      CHORUS->labeltype(FL_NORMAL_LABEL);
       CHORUS->labelfont(1);
+      CHORUS->labelsize(14);
+      CHORUS->labelcolor(FL_FOREGROUND_COLOR);
       CHORUS->user_data((void*)(1));
       CHORUS->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      { chorus_activar = new Fl_Light_Button(7, 417, 34, 18, "On");
-        chorus_activar->shortcut(0x36);
-        chorus_activar->color((Fl_Color)62);
-        chorus_activar->selection_color((Fl_Color)1);
-        chorus_activar->labelsize(10);
-        chorus_activar->callback((Fl_Callback*)cb_chorus_activar, (void*)(2));
-        chorus_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        chorus_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* chorus_activar
-      { chorus_preset = new Fl_Choice(79, 417, 76, 18, "Preset");
-        chorus_preset->down_box(FL_BORDER_BOX);
-        chorus_preset->selection_color(FL_FOREGROUND_COLOR);
-        chorus_preset->labelsize(10);
-        chorus_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_preset->textsize(10);
-        chorus_preset->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_preset->callback((Fl_Callback*)cb_chorus_preset, (void*)(12005));
-        chorus_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        chorus_preset->menu(menu_chorus_preset);
-      } // Fl_Choice* chorus_preset
-      { chorus_WD = new SliderW(51, 442, 100, 10, "Wet/Dry");
-        chorus_WD->type(5);
-        chorus_WD->box(FL_FLAT_BOX);
-        chorus_WD->color((Fl_Color)178);
-        chorus_WD->selection_color((Fl_Color)62);
-        chorus_WD->labeltype(FL_NORMAL_LABEL);
-        chorus_WD->labelfont(0);
-        chorus_WD->labelsize(10);
-        chorus_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_WD->minimum(-64);
-        chorus_WD->maximum(63);
-        chorus_WD->step(1);
-        chorus_WD->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_WD->callback((Fl_Callback*)cb_chorus_WD);
-        chorus_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_WD
-      { chorus_pan = new SliderW(51, 454, 100, 10, "Pan");
-        chorus_pan->type(5);
-        chorus_pan->box(FL_FLAT_BOX);
-        chorus_pan->color((Fl_Color)178);
-        chorus_pan->selection_color((Fl_Color)62);
-        chorus_pan->labeltype(FL_NORMAL_LABEL);
-        chorus_pan->labelfont(0);
-        chorus_pan->labelsize(10);
-        chorus_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_pan->minimum(-64);
-        chorus_pan->maximum(63);
-        chorus_pan->step(1);
-        chorus_pan->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_pan->callback((Fl_Callback*)cb_chorus_pan);
-        chorus_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_pan
-      { chorus_freq = new SliderW(51, 466, 100, 10, "Tempo");
-        chorus_freq->type(5);
-        chorus_freq->box(FL_FLAT_BOX);
-        chorus_freq->color((Fl_Color)178);
-        chorus_freq->selection_color((Fl_Color)62);
-        chorus_freq->labeltype(FL_NORMAL_LABEL);
-        chorus_freq->labelfont(0);
-        chorus_freq->labelsize(10);
-        chorus_freq->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_freq->minimum(1);
-        chorus_freq->maximum(600);
-        chorus_freq->step(1);
-        chorus_freq->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_freq->callback((Fl_Callback*)cb_chorus_freq);
-        chorus_freq->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_freq->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_freq
-      { chorus_rnd = new SliderW(51, 478, 100, 10, "Rnd");
-        chorus_rnd->type(5);
-        chorus_rnd->box(FL_FLAT_BOX);
-        chorus_rnd->color((Fl_Color)178);
-        chorus_rnd->selection_color((Fl_Color)62);
-        chorus_rnd->labeltype(FL_NORMAL_LABEL);
-        chorus_rnd->labelfont(0);
-        chorus_rnd->labelsize(10);
-        chorus_rnd->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_rnd->maximum(127);
-        chorus_rnd->step(1);
-        chorus_rnd->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_rnd->callback((Fl_Callback*)cb_chorus_rnd);
-        chorus_rnd->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_rnd->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_rnd
-      { chorus_lfotype = new Fl_Choice(63, 490, 72, 16, "LFO Type");
-        chorus_lfotype->down_box(FL_BORDER_BOX);
-        chorus_lfotype->selection_color(FL_FOREGROUND_COLOR);
-        chorus_lfotype->labelsize(10);
-        chorus_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_lfotype->textsize(10);
-        chorus_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype, (void*)(12));
-        chorus_lfotype->menu(menu_chorus_lfotype);
-      } // Fl_Choice* chorus_lfotype
-      { chorus_subs = new Fl_Check_Button(27, 507, 62, 15, "Subtract");
-        chorus_subs->down_box(FL_BORDER_BOX);
-        chorus_subs->labelsize(10);
-        chorus_subs->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_subs->callback((Fl_Callback*)cb_chorus_subs, (void*)(2));
-      } // Fl_Check_Button* chorus_subs
-      { chorus_awesome = new Fl_Check_Button(90, 508, 56, 15, "Intense");
-        chorus_awesome->down_box(FL_BORDER_BOX);
-        chorus_awesome->labelsize(10);
-        chorus_awesome->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_awesome->callback((Fl_Callback*)cb_chorus_awesome, (void*)(2));
-      } // Fl_Check_Button* chorus_awesome
-      { chorus_stdf = new SliderW(51, 528, 100, 10, "St.df");
-        chorus_stdf->type(5);
-        chorus_stdf->box(FL_FLAT_BOX);
-        chorus_stdf->color((Fl_Color)178);
-        chorus_stdf->selection_color((Fl_Color)62);
-        chorus_stdf->labeltype(FL_NORMAL_LABEL);
-        chorus_stdf->labelfont(0);
-        chorus_stdf->labelsize(10);
-        chorus_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_stdf->maximum(127);
-        chorus_stdf->step(1);
-        chorus_stdf->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_stdf->callback((Fl_Callback*)cb_chorus_stdf);
-        chorus_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_stdf
-      { chorus_dpth = new SliderW(51, 541, 100, 10, "Depth");
-        chorus_dpth->type(5);
-        chorus_dpth->box(FL_FLAT_BOX);
-        chorus_dpth->color((Fl_Color)178);
-        chorus_dpth->selection_color((Fl_Color)62);
-        chorus_dpth->labeltype(FL_NORMAL_LABEL);
-        chorus_dpth->labelfont(0);
-        chorus_dpth->labelsize(10);
-        chorus_dpth->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_dpth->maximum(127);
-        chorus_dpth->step(1);
-        chorus_dpth->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_dpth->callback((Fl_Callback*)cb_chorus_dpth);
-        chorus_dpth->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_dpth->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_dpth
-      { chorus_delay = new SliderW(51, 554, 100, 10, "Delay");
-        chorus_delay->type(5);
-        chorus_delay->box(FL_FLAT_BOX);
-        chorus_delay->color((Fl_Color)178);
-        chorus_delay->selection_color((Fl_Color)62);
-        chorus_delay->labeltype(FL_NORMAL_LABEL);
-        chorus_delay->labelfont(0);
-        chorus_delay->labelsize(10);
-        chorus_delay->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_delay->maximum(127);
-        chorus_delay->step(1);
-        chorus_delay->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_delay->callback((Fl_Callback*)cb_chorus_delay);
-        chorus_delay->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_delay->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_delay
-      { chorus_fb = new SliderW(51, 567, 100, 10, "Fb");
-        chorus_fb->type(5);
-        chorus_fb->box(FL_FLAT_BOX);
-        chorus_fb->color((Fl_Color)178);
-        chorus_fb->selection_color((Fl_Color)62);
-        chorus_fb->labeltype(FL_NORMAL_LABEL);
-        chorus_fb->labelfont(0);
-        chorus_fb->labelsize(10);
-        chorus_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_fb->maximum(127);
-        chorus_fb->step(1);
-        chorus_fb->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_fb->callback((Fl_Callback*)cb_chorus_fb);
-        chorus_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_fb
-      { chorus_LR = new SliderW(51, 581, 100, 10, "L/R.Cr");
-        chorus_LR->type(5);
-        chorus_LR->box(FL_FLAT_BOX);
-        chorus_LR->color((Fl_Color)178);
-        chorus_LR->selection_color((Fl_Color)62);
-        chorus_LR->labeltype(FL_NORMAL_LABEL);
-        chorus_LR->labelfont(0);
-        chorus_LR->labelsize(10);
-        chorus_LR->labelcolor(FL_BACKGROUND2_COLOR);
-        chorus_LR->minimum(-64);
-        chorus_LR->maximum(63);
-        chorus_LR->step(1);
-        chorus_LR->textcolor(FL_BACKGROUND2_COLOR);
-        chorus_LR->callback((Fl_Callback*)cb_chorus_LR);
-        chorus_LR->align(Fl_Align(FL_ALIGN_LEFT));
-        chorus_LR->when(FL_WHEN_CHANGED);
-      } // SliderW* chorus_LR
+      CHORUS->when(FL_WHEN_RELEASE);
+      CHORUS->hide();
       CHORUS->end();
-    } // Fl_Group* CHORUS
+    } // ChorusGui* CHORUS
     { PHASER = new Fl_Group(161, 413, 158, 184);
       PHASER->box(FL_UP_BOX);
       PHASER->color(FL_FOREGROUND_COLOR);
@@ -10611,7 +10241,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         phaser_lfotype->textsize(10);
         phaser_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         phaser_lfotype->callback((Fl_Callback*)cb_phaser_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* phaser_lfotype
       { phaser_subs = new Fl_Check_Button(201, 507, 65, 15, "Subtract");
         phaser_subs->down_box(FL_BORDER_BOX);
@@ -10817,7 +10447,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         flanger_lfotype->textsize(10);
         flanger_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         flanger_lfotype->callback((Fl_Callback*)cb_flanger_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* flanger_lfotype
       { flanger_subs = new Fl_Check_Button(353, 507, 62, 15, "Subtract");
         flanger_subs->down_box(FL_BORDER_BOX);
@@ -11411,7 +11041,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         WhaWha_lfotype->textsize(10);
         WhaWha_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         WhaWha_lfotype->callback((Fl_Callback*)cb_WhaWha_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* WhaWha_lfotype
       { WhaWha_stdf = new SliderW(369, 315, 100, 10, "St.df");
         WhaWha_stdf->type(5);
@@ -11588,7 +11218,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         Alienwah_lfotype->textsize(10);
         Alienwah_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         Alienwah_lfotype->callback((Fl_Callback*)cb_Alienwah_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* Alienwah_lfotype
       { Alienwah_phase = new SliderW(368, 317, 100, 10, "Phase");
         Alienwah_phase->type(5);
@@ -11845,7 +11475,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         pan_lfotype->textsize(10);
         pan_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         pan_lfotype->callback((Fl_Callback*)cb_pan_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* pan_lfotype
       { pan_stdf = new SliderW(369, 336, 100, 10, "St.df");
         pan_stdf->type(5);
@@ -12721,7 +12351,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         aphaser_lfotype->textsize(10);
         aphaser_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         aphaser_lfotype->callback((Fl_Callback*)cb_aphaser_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* aphaser_lfotype
       { aphaser_freq = new SliderW(528, 273, 100, 10, "Tempo");
         aphaser_freq->type(5);
@@ -13292,7 +12922,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         dflange_lfotype->textsize(10);
         dflange_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         dflange_lfotype->callback((Fl_Callback*)cb_dflange_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* dflange_lfotype
       { dflange_rnd = new SliderW(373, 382, 100, 10, "Rnd");
         dflange_rnd->type(5);
@@ -14687,7 +14317,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         synthfilter_lfotype->textsize(10);
         synthfilter_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* synthfilter_lfotype
       { synthfilter_subs = new Fl_Check_Button(428, 279, 46, 15, "Subtr.");
         synthfilter_subs->down_box(FL_BORDER_BOX);
@@ -14927,7 +14557,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         mbvvol_lfotype1->textsize(10);
         mbvvol_lfotype1->textcolor(FL_BACKGROUND2_COLOR);
         mbvvol_lfotype1->callback((Fl_Callback*)cb_mbvvol_lfotype1);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* mbvvol_lfotype1
       { mbvvol_stdf1 = new SliderW(373, 283, 100, 10, "St.df 1");
         mbvvol_stdf1->type(5);
@@ -14970,7 +14600,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         mbvvol_lfotype2->textsize(10);
         mbvvol_lfotype2->textcolor(FL_BACKGROUND2_COLOR);
         mbvvol_lfotype2->callback((Fl_Callback*)cb_mbvvol_lfotype2);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* mbvvol_lfotype2
       { mbvvol_stdf2 = new SliderW(373, 327, 100, 10, "St.df 2");
         mbvvol_stdf2->type(5);
@@ -15629,7 +15259,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         ryanwah_lfotype->textsize(10);
         ryanwah_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         ryanwah_lfotype->callback((Fl_Callback*)cb_ryanwah_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* ryanwah_lfotype
       { ryanwah_dpth = new SliderW(529, 313, 100, 8, "Depth");
         ryanwah_dpth->type(5);
@@ -17405,7 +17035,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         echotron_lfotype->textsize(10);
         echotron_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         echotron_lfotype->callback((Fl_Callback*)cb_echotron_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* echotron_lfotype
       { echotron_mf = new Fl_Check_Button(325, 363, 33, 15, "MF");
         echotron_mf->down_box(FL_BORDER_BOX);
@@ -18009,7 +17639,7 @@ Fl_Double_Window* RKRGUI::make_window() {
         otrem_lfotype->textsize(10);
         otrem_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         otrem_lfotype->callback((Fl_Callback*)cb_otrem_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* otrem_lfotype
       { otrem_stdf = new SliderW(372, 340, 100, 10, "St.df");
         otrem_stdf->type(5);
@@ -18172,7 +17802,7 @@ e a stompbox Opto Trem");
         vibe_lfotype->textsize(10);
         vibe_lfotype->textcolor(FL_BACKGROUND2_COLOR);
         vibe_lfotype->callback((Fl_Callback*)cb_vibe_lfotype);
-        o->menu(menu_chorus_lfotype);
+        o->menu(CHORUS->get_menu_chorus_lfotype());
       } // Fl_Choice* vibe_lfotype
       { vibe_stdf = new SliderW(532, 329, 100, 10, "St.df");
         vibe_stdf->type(5);
@@ -21208,8 +20838,8 @@ void RKRGUI::Put_Loaded() {
        break;
        
        case 5://Chorus
-       chorus_activar->value(rkr->Chorus_Bypass);
-       chorus_preset->do_callback(chorus_preset,1); 
+       CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
+       CHORUS->chorus_preset->do_callback(CHORUS->chorus_preset,1); 
        break;
        
        case 6://Phaser
@@ -21744,7 +21374,7 @@ void RKRGUI::reordena() {
        case 5:
       
          CHORUS->position(x[i],y[i]);
-         chorus_activar->shortcut(s[i]);
+         CHORUS->chorus_activar->shortcut(s[i]);
          if(!rkr->deachide)CHORUS->show();
          if(rkr->Chorus_Bypass)
          {
@@ -22869,8 +22499,8 @@ void RKRGUI::ActMIDI() {
        flanger_dpth->redraw();
        break;
        case 23:
-       chorus_dpth->value(rkr->efx_Chorus->getpar(6));
-       chorus_dpth->redraw();
+       CHORUS->chorus_dpth->value(rkr->efx_Chorus->getpar(6));
+       CHORUS->chorus_dpth->redraw();
        break;
        case 24:
        musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
@@ -22905,8 +22535,8 @@ void RKRGUI::ActMIDI() {
        har_WD->redraw();
        break;
        case 52:
-       chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
-       chorus_WD->redraw();
+       CHORUS->chorus_WD->value(rkr->efx_Chorus->getpar(0)-64);
+       CHORUS->chorus_WD->redraw();
        break;
        case 53:
        flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
@@ -22953,8 +22583,8 @@ void RKRGUI::ActMIDI() {
        har_pan->redraw();
        break;
        case 50:
-       chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
-       chorus_pan->redraw();
+       CHORUS->chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
+       CHORUS->chorus_pan->redraw();
        break;
        case 51:
        flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
@@ -23005,8 +22635,8 @@ void RKRGUI::ActMIDI() {
        DIST->dist_level->redraw();
        break;
        case 72:
-       chorus_freq->value(rkr->efx_Chorus->getpar(2));
-       chorus_freq->redraw();
+       CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(2));
+       CHORUS->chorus_freq->redraw();
        break;
        case 73:
        flanger_freq->value(rkr->efx_Flanger->getpar(2));
@@ -23033,8 +22663,8 @@ void RKRGUI::ActMIDI() {
        ECHO->echo_fb->redraw();
        break;
        case 79:
-       chorus_fb->value(rkr->efx_Chorus->getpar(8));
-       chorus_fb->redraw();
+       CHORUS->chorus_fb->value(rkr->efx_Chorus->getpar(8));
+       CHORUS->chorus_fb->redraw();
        break;
        case 80:
        flanger_fb->value(rkr->efx_Flanger->getpar(8));
@@ -23081,8 +22711,8 @@ void RKRGUI::ActMIDI() {
        reverb_HPF->redraw();
        break;
        case 91:
-       chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
-       chorus_LR->redraw();
+       CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
+       CHORUS->chorus_LR->redraw();
        break;
        case 92:
        flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
@@ -23113,8 +22743,8 @@ void RKRGUI::ActMIDI() {
        musdelay_LRc->redraw();
        break;
        case 99:
-       chorus_stdf->value(rkr->efx_Chorus->getpar(5));
-       chorus_stdf->redraw();
+       CHORUS->chorus_stdf->value(rkr->efx_Chorus->getpar(5));
+       CHORUS->chorus_stdf->redraw();
        break;
        case 100:
        flanger_stdf->value(rkr->efx_Flanger->getpar(5));
@@ -23137,8 +22767,8 @@ void RKRGUI::ActMIDI() {
        pan_stdf->redraw();
        break;
        case 105:
-       chorus_rnd->value(rkr->efx_Chorus->getpar(3));
-       chorus_rnd->redraw();
+       CHORUS->chorus_rnd->value(rkr->efx_Chorus->getpar(3));
+       CHORUS->chorus_rnd->redraw();
        break;
        case 106:
        flanger_rnd->value(rkr->efx_Flanger->getpar(3));
@@ -24399,8 +24029,8 @@ void RKRGUI::ActOnOff() {
     ECHO->echo_activar->do_callback();
     break;
     case 5:
-    chorus_activar->value(rkr->Chorus_Bypass);
-    chorus_activar->do_callback();
+    CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
+    CHORUS->chorus_activar->do_callback();
     break;
     case 6:
     phaser_activar->value(rkr->Phaser_Bypass);
@@ -25334,8 +24964,8 @@ void RKRGUI::UpdateTGUI() {
   
   if(rkr->Chorus_Bypass)
     {
-    chorus_freq->value(rkr->efx_Chorus->getpar(2));
-    chorus_freq->redraw();
+    CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(2));
+    CHORUS->chorus_freq->redraw();
     }
     
     if(rkr->Flanger_Bypass)
@@ -26187,7 +25817,7 @@ void RKRGUI::RandomPreset() {
        
        case 5://Chorus
        if (i<numEff)rkr->Chorus_Bypass=1; else rkr->Chorus_Bypass=0;
-       chorus_activar->value(rkr->Chorus_Bypass);
+       CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
        break;
        
        case 6://Phaser

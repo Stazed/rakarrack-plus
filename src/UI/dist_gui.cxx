@@ -403,6 +403,7 @@ end();
 
 /**
  Returns the distortion type for overdrive, distortion and MBdist
+ FIXME rerun dist_gui.fl when others are done to get rid of this.
 */
 Fl_Menu_Item* DistGui::get_menu_dist_tipo() {
   return menu_dist_tipo;

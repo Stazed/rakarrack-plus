@@ -29,6 +29,7 @@ class CompressGui; // forward declaration
 class DistGui; // forward declaration
 class OvrdGui; // forward declaration
 class EchoGui; // forward declaration
+class ChorusGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -40,6 +41,7 @@ class SustainGui; // forward declaration
 #include "dist_gui.h"
 #include "ovrd_gui.h"
 #include "echo_gui.h"
+#include "chorus_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -208,79 +210,7 @@ public:
   DistGui *DIST;
   OvrdGui *OVRD;
   EchoGui *ECHO;
-  Fl_Group *CHORUS;
-  Fl_Light_Button *chorus_activar;
-private:
-  inline void cb_chorus_activar_i(Fl_Light_Button*, void*);
-  static void cb_chorus_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *chorus_preset;
-private:
-  inline void cb_chorus_preset_i(Fl_Choice*, void*);
-  static void cb_chorus_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_chorus_preset[];
-public:
-  SliderW *chorus_WD;
-private:
-  inline void cb_chorus_WD_i(SliderW*, void*);
-  static void cb_chorus_WD(SliderW*, void*);
-public:
-  SliderW *chorus_pan;
-private:
-  inline void cb_chorus_pan_i(SliderW*, void*);
-  static void cb_chorus_pan(SliderW*, void*);
-public:
-  SliderW *chorus_freq;
-private:
-  inline void cb_chorus_freq_i(SliderW*, void*);
-  static void cb_chorus_freq(SliderW*, void*);
-public:
-  SliderW *chorus_rnd;
-private:
-  inline void cb_chorus_rnd_i(SliderW*, void*);
-  static void cb_chorus_rnd(SliderW*, void*);
-public:
-  Fl_Choice *chorus_lfotype;
-private:
-  inline void cb_chorus_lfotype_i(Fl_Choice*, void*);
-  static void cb_chorus_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_chorus_lfotype[];
-public:
-  Fl_Check_Button *chorus_subs;
-private:
-  inline void cb_chorus_subs_i(Fl_Check_Button*, void*);
-  static void cb_chorus_subs(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *chorus_awesome;
-private:
-  inline void cb_chorus_awesome_i(Fl_Check_Button*, void*);
-  static void cb_chorus_awesome(Fl_Check_Button*, void*);
-public:
-  SliderW *chorus_stdf;
-private:
-  inline void cb_chorus_stdf_i(SliderW*, void*);
-  static void cb_chorus_stdf(SliderW*, void*);
-public:
-  SliderW *chorus_dpth;
-private:
-  inline void cb_chorus_dpth_i(SliderW*, void*);
-  static void cb_chorus_dpth(SliderW*, void*);
-public:
-  SliderW *chorus_delay;
-private:
-  inline void cb_chorus_delay_i(SliderW*, void*);
-  static void cb_chorus_delay(SliderW*, void*);
-public:
-  SliderW *chorus_fb;
-private:
-  inline void cb_chorus_fb_i(SliderW*, void*);
-  static void cb_chorus_fb(SliderW*, void*);
-public:
-  SliderW *chorus_LR;
-private:
-  inline void cb_chorus_LR_i(SliderW*, void*);
-  static void cb_chorus_LR(SliderW*, void*);
-public:
+  ChorusGui *CHORUS;
   Fl_Group *PHASER;
   Fl_Light_Button *phaser_activar;
 private:
