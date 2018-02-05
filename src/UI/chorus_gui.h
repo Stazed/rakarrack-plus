@@ -7,6 +7,7 @@
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
+#include "common_gui_menu.h"
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
@@ -49,7 +50,6 @@ public:
 private:
   inline void cb_chorus_lfotype_i(Fl_Choice*, void*);
   static void cb_chorus_lfotype(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_chorus_lfotype[];
 public:
   Fl_Check_Button *chorus_subs;
 private:
@@ -85,6 +85,7 @@ public:
 private:
   inline void cb_chorus_LR_i(SliderW*, void*);
   static void cb_chorus_LR(SliderW*, void*);
+  CommonGuiMenu *m_lfo_menu; 
 public:
   Fl_Menu_Item *get_menu_chorus_lfotype();
 };

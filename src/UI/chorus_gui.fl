@@ -2,12 +2,13 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class ChorusGui {
+widget_class {\#include "common_gui_menu.h"} ChorusGui {
   user_data 1 open
   xywh {1075 81 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
-  code2 {\#include "rakarrack.h"} visible position_relative
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
 } {
   Fl_Light_Button chorus_activar {
     label On
@@ -113,56 +114,8 @@ rkr->efx_Chorus->changepar(3,(int)o->value());}
     user_data 12
     callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open
     xywh {61 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-  } {
-    MenuItem {} {
-      label Sine
-      xywh {102 102 36 21} labelsize 10
-    }
-    MenuItem {} {
-      label Tri
-      xywh {102 102 36 21} labelsize 10
-    }
-    MenuItem {} {
-      label {Ramp Up}
-      xywh {50 50 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Ramp Down}
-      xywh {50 50 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label ZigZag
-      xywh {60 60 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {M. Sqare}
-      xywh {50 50 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {M.Saw}
-      xywh {50 50 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {L. Fractal}
-      xywh {60 60 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {L. Fractal XY}
-      xywh {70 70 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {S/H Random}
-      xywh {80 80 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {-Sine +Tri}
-      xywh {90 90 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {-Tri +Sine}
-      xywh {100 100 36 21} labelsize 9
-    }
-  }
+    code0 {o->menu(m_lfo_menu->get_lfo_type());}
+  } {}
   Fl_Check_Button chorus_subs {
     label Subtract
     user_data 2
@@ -221,8 +174,10 @@ rkr->efx_Chorus->changepar(8,(int)o->value());}
  rgui->getMIDIControl(91);
  return;
 } 
-rkr->efx_Chorus->changepar(9,(int)(o->value()+64));} selected
+rkr->efx_Chorus->changepar(9,(int)(o->value()+64));}
     xywh {49 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
+  }
+  decl {CommonGuiMenu *m_lfo_menu;} {selected private local
   }
 }

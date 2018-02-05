@@ -102,22 +102,6 @@ void ChorusGui::cb_chorus_lfotype(Fl_Choice* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_lfotype_i(o,v);
 }
 
-Fl_Menu_Item ChorusGui::menu_chorus_lfotype[] = {
- {"Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Ramp Up", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Ramp Down", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"ZigZag", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M. Sqare", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"L. Fractal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"L. Fractal XY", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"S/H Random", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"-Sine +Tri", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"-Tri +Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void ChorusGui::cb_chorus_subs_i(Fl_Check_Button* o, void*) {
   rkr->efx_Chorus->changepar(11,(int)o->value());
 }
@@ -280,7 +264,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* chorus_rnd
-{ chorus_lfotype = new Fl_Choice(61, 77, 72, 16, "LFO Type");
+{ Fl_Choice* o = chorus_lfotype = new Fl_Choice(61, 77, 72, 16, "LFO Type");
   chorus_lfotype->down_box(FL_BORDER_BOX);
   chorus_lfotype->selection_color(FL_FOREGROUND_COLOR);
   chorus_lfotype->labelsize(10);
@@ -288,7 +272,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_lfotype->textsize(10);
   chorus_lfotype->textcolor(FL_BACKGROUND2_COLOR);
   chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype, (void*)(12));
-  chorus_lfotype->menu(menu_chorus_lfotype);
+  o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* chorus_lfotype
 { chorus_subs = new Fl_Check_Button(25, 94, 62, 15, "Subtract");
   chorus_subs->down_box(FL_BORDER_BOX);
@@ -392,5 +376,5 @@ end();
  FIXME rerun chorus_gui.fl write code after all others are done to get rid of this
 */
 Fl_Menu_Item* ChorusGui::get_menu_chorus_lfotype() {
-  return menu_chorus_lfotype;
+  return m_lfo_menu->get_lfo_type();
 }
