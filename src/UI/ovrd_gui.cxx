@@ -99,6 +99,10 @@ void OvrdGui::cb_ovrd_tipo(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item OvrdGui::menu_ovrd_tipo[] = {
+ /*
+  The ovrd_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
+  If any of these menu items change here, then they must be changed in the others.
+  */
  {"Atan", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"Asym1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"Pow", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},

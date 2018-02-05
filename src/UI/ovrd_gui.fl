@@ -101,123 +101,125 @@ rkr->efx_Overdrive->changepar(4,(int)o->value());}
     xywh {33 91 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
   } {
     MenuItem {} {
-      label Atan selected
+      label Atan
+      comment {The ovrd_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
+If any of these menu items change here, then they must be changed in the others.} selected
       xywh {32 32 36 21} labelsize 9
     }
     MenuItem {} {
-      label Asym1 selected
+      label Asym1
       xywh {32 32 36 21} labelsize 9
     }
     MenuItem {} {
-      label Pow selected
+      label Pow
       xywh {32 32 36 21} labelsize 9
     }
     MenuItem {} {
-      label Sine selected
+      label Sine
       xywh {42 42 36 21} labelsize 9
     }
     MenuItem {} {
-      label Qnts selected
+      label Qnts
       xywh {52 52 36 21} labelsize 9
     }
     MenuItem {} {
-      label Zigzg selected
+      label Zigzg
       xywh {62 62 36 21} labelsize 9
     }
     MenuItem {} {
-      label Lmt selected
+      label Lmt
       xywh {72 72 36 21} labelsize 9
     }
     MenuItem {} {
-      label LmtU selected
+      label LmtU
       xywh {82 82 36 21} labelsize 9
     }
     MenuItem {} {
-      label LmtL selected
+      label LmtL
       xywh {92 92 36 21} labelsize 9
     }
     MenuItem {} {
-      label ILmt selected
+      label ILmt
       xywh {102 102 36 21} labelsize 9
     }
     MenuItem {} {
-      label Clip selected
+      label Clip
       xywh {112 112 36 21} labelsize 9
     }
     MenuItem {} {
-      label Asym2 selected
+      label Asym2
       xywh {122 122 36 21} labelsize 9
     }
     MenuItem {} {
-      label Pow2 selected
+      label Pow2
       xywh {132 132 36 21} labelsize 9
     }
     MenuItem {} {
-      label Sgm selected
+      label Sgm
       xywh {142 142 36 21} labelsize 9
     }
     MenuItem {} {
-      label Crunch selected
+      label Crunch
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Hard Crunch} selected
+      label {Hard Crunch}
       xywh {10 10 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Dirty Octave+} selected
+      label {Dirty Octave+}
       xywh {20 20 36 21} labelsize 9
     }
     MenuItem {} {
-      label {M.Square} selected
+      label {M.Square}
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label {M.Saw} selected
+      label {M.Saw}
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label Compress selected
+      label Compress
       xywh {10 10 36 21} labelsize 9
     }
     MenuItem {} {
-      label Overdrive selected
+      label Overdrive
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label Soft selected
+      label Soft
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Super Soft} selected
+      label {Super Soft}
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Hard Compress} selected
+      label {Hard Compress}
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Lmt-NoGain} selected
+      label {Lmt-NoGain}
       xywh {10 10 36 21} labelsize 9
     }
     MenuItem {} {
-      label FET selected
+      label FET
       xywh {20 20 36 21} labelsize 9
     }
     MenuItem {} {
-      label DynoFET selected
+      label DynoFET
       xywh {30 30 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Valve 1} selected
+      label {Valve 1}
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Valve 2} selected
+      label {Valve 2}
       xywh {0 0 36 21} labelsize 9
     }
     MenuItem {} {
-      label {Diode clipper} selected
+      label {Diode clipper}
       xywh {0 0 36 21} labelsize 9
     }
   }

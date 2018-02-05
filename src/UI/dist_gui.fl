@@ -107,11 +107,13 @@ rkr->efx_Distorsion->changepar(4,(int)o->value());}
   Fl_Choice dist_tipo {
     label Type
     user_data 12
-    callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
+    callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
     xywh {34 91 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
   } {
     MenuItem {} {
       label Atan
+      comment {The dist_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
+If any of these menu items change here, then they must be changed in the others.} selected
       xywh {32 32 36 21} labelsize 9
     }
     MenuItem {} {
@@ -292,10 +294,5 @@ rkr->efx_Distorsion->changepar(7,(int)o->value());}
 rkr->efx_Distorsion->changepar(8,(int)o->value());}
     xywh {52 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
-  }
-  Function {get_menu_dist_tipo()} {
-    comment {Returns the distortion type for overdrive, distortion and MBdist} open selected return_type Fl_Menu_Item
-  } {
-    code {return menu_dist_tipo;} {}
   }
 }
