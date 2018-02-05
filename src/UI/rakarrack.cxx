@@ -751,159 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_ovrd_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Overdrive_Bypass);
- return;
-}
-rkr->Overdrive_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Overdrive->cleanup();
-findpos(3,(int)o->value(),o);
-}
-void RKRGUI::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_activar_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
-ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
-ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
-ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
-ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
-ovrd_level->value(rkr->efx_Overdrive->getpar(4));
-ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
-ovrd_neg->value(rkr->efx_Overdrive->getpar(6));
-ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
-ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
-ovrd_st->value(rkr->efx_Overdrive->getpar(9));
-ovrd_pf->value(rkr->efx_Overdrive->getpar(10));
-}
-void RKRGUI::cb_ovrd_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_ovrd_preset[] = {
- {"Overdrive 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Overdrive 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_ovrd_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(29);
- return;
-} 
-rkr->efx_Overdrive->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_ovrd_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_WD_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_LRc_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(94);
- return;
-} 
-rkr->efx_Overdrive->changepar(2,(int)(o->value()+64));
-}
-void RKRGUI::cb_ovrd_LRc(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_LRc_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_drive_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(68);
- return;
-} 
-rkr->efx_Overdrive->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_ovrd_drive(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_drive_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_level_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(70);
- return;
-} 
-rkr->efx_Overdrive->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_ovrd_level(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_level_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_tipo_i(Fl_Choice* o, void*) {
-  rkr->efx_Overdrive->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_ovrd_tipo(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_tipo_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_neg_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_ovrd_neg(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_neg_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_st_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_ovrd_st(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_st_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(47);
- return;
-} 
-rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_ovrd_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_pan_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_pf_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_ovrd_pf(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_pf_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_lpf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(85);
- return;
-} 
-rkr->efx_Overdrive->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_ovrd_lpf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_lpf_i(o,v);
-}
-
-void RKRGUI::cb_ovrd_hpf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(88);
- return;
-} 
-rkr->efx_Overdrive->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_ovrd_hpf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ovrd_hpf_i(o,v);
-}
-
 void RKRGUI::cb_echo_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -10563,183 +10410,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       DIST->hide();
       DIST->end();
     } // DistGui* DIST
-    { OVRD = new Fl_Group(480, 212, 158, 184);
+    { OVRD = new OvrdGui(480, 212, 158, 184);
       OVRD->box(FL_UP_BOX);
       OVRD->color(FL_FOREGROUND_COLOR);
       OVRD->selection_color(FL_FOREGROUND_COLOR);
+      OVRD->labeltype(FL_NORMAL_LABEL);
       OVRD->labelfont(1);
+      OVRD->labelsize(14);
+      OVRD->labelcolor(FL_FOREGROUND_COLOR);
       OVRD->user_data((void*)(1));
       OVRD->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      OVRD->when(FL_WHEN_RELEASE);
       OVRD->hide();
-      { ovrd_activar = new Fl_Light_Button(485, 216, 34, 18, "On");
-        ovrd_activar->shortcut(0x34);
-        ovrd_activar->color((Fl_Color)62);
-        ovrd_activar->selection_color((Fl_Color)1);
-        ovrd_activar->labelsize(10);
-        ovrd_activar->callback((Fl_Callback*)cb_ovrd_activar, (void*)(2));
-        ovrd_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        ovrd_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* ovrd_activar
-      { ovrd_preset = new Fl_Choice(557, 216, 76, 18, "Preset");
-        ovrd_preset->down_box(FL_BORDER_BOX);
-        ovrd_preset->selection_color(FL_FOREGROUND_COLOR);
-        ovrd_preset->labelsize(10);
-        ovrd_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_preset->textsize(10);
-        ovrd_preset->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset, (void*)(12003));
-        ovrd_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        ovrd_preset->menu(menu_ovrd_preset);
-      } // Fl_Choice* ovrd_preset
-      { ovrd_WD = new SliderW(531, 247, 100, 10, "Wet/Dry");
-        ovrd_WD->type(5);
-        ovrd_WD->box(FL_FLAT_BOX);
-        ovrd_WD->color((Fl_Color)178);
-        ovrd_WD->selection_color((Fl_Color)62);
-        ovrd_WD->labeltype(FL_NORMAL_LABEL);
-        ovrd_WD->labelfont(0);
-        ovrd_WD->labelsize(10);
-        ovrd_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_WD->minimum(-64);
-        ovrd_WD->maximum(63);
-        ovrd_WD->step(1);
-        ovrd_WD->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_WD->callback((Fl_Callback*)cb_ovrd_WD);
-        ovrd_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        ovrd_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* ovrd_WD
-      { ovrd_LRc = new SliderW(531, 260, 100, 10, "L/R Cr.");
-        ovrd_LRc->type(5);
-        ovrd_LRc->box(FL_FLAT_BOX);
-        ovrd_LRc->color((Fl_Color)178);
-        ovrd_LRc->selection_color((Fl_Color)62);
-        ovrd_LRc->labeltype(FL_NORMAL_LABEL);
-        ovrd_LRc->labelfont(0);
-        ovrd_LRc->labelsize(10);
-        ovrd_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_LRc->minimum(-64);
-        ovrd_LRc->maximum(63);
-        ovrd_LRc->step(1);
-        ovrd_LRc->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_LRc->callback((Fl_Callback*)cb_ovrd_LRc);
-        ovrd_LRc->align(Fl_Align(FL_ALIGN_LEFT));
-        ovrd_LRc->when(FL_WHEN_CHANGED);
-      } // SliderW* ovrd_LRc
-      { ovrd_drive = new SliderW(531, 273, 100, 10, "Drive");
-        ovrd_drive->type(5);
-        ovrd_drive->box(FL_FLAT_BOX);
-        ovrd_drive->color((Fl_Color)178);
-        ovrd_drive->selection_color((Fl_Color)62);
-        ovrd_drive->labeltype(FL_NORMAL_LABEL);
-        ovrd_drive->labelfont(0);
-        ovrd_drive->labelsize(10);
-        ovrd_drive->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_drive->maximum(127);
-        ovrd_drive->step(1);
-        ovrd_drive->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_drive->callback((Fl_Callback*)cb_ovrd_drive);
-        ovrd_drive->align(Fl_Align(FL_ALIGN_LEFT));
-        ovrd_drive->when(FL_WHEN_CHANGED);
-      } // SliderW* ovrd_drive
-      { ovrd_level = new SliderW(531, 287, 100, 10, "Level");
-        ovrd_level->type(5);
-        ovrd_level->box(FL_FLAT_BOX);
-        ovrd_level->color((Fl_Color)178);
-        ovrd_level->selection_color((Fl_Color)62);
-        ovrd_level->labeltype(FL_NORMAL_LABEL);
-        ovrd_level->labelfont(0);
-        ovrd_level->labelsize(10);
-        ovrd_level->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_level->maximum(127);
-        ovrd_level->step(1);
-        ovrd_level->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_level->callback((Fl_Callback*)cb_ovrd_level);
-        ovrd_level->align(Fl_Align(FL_ALIGN_LEFT));
-        ovrd_level->when(FL_WHEN_CHANGED);
-      } // SliderW* ovrd_level
-      { Fl_Choice* o = ovrd_tipo = new Fl_Choice(513, 303, 72, 16, "Type");
-        ovrd_tipo->down_box(FL_BORDER_BOX);
-        ovrd_tipo->selection_color(FL_FOREGROUND_COLOR);
-        ovrd_tipo->labelsize(10);
-        ovrd_tipo->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_tipo->textsize(10);
-        ovrd_tipo->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_tipo->callback((Fl_Callback*)cb_ovrd_tipo);
-        o->menu(DIST->get_menu_dist_tipo());
-      } // Fl_Choice* ovrd_tipo
-      { ovrd_neg = new Fl_Check_Button(589, 304, 42, 15, "Neg.");
-        ovrd_neg->down_box(FL_BORDER_BOX);
-        ovrd_neg->labelsize(10);
-        ovrd_neg->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_neg->callback((Fl_Callback*)cb_ovrd_neg, (void*)(2));
-      } // Fl_Check_Button* ovrd_neg
-      { ovrd_st = new Fl_Check_Button(521, 322, 54, 15, "Stereo");
-        ovrd_st->down_box(FL_BORDER_BOX);
-        ovrd_st->labelsize(10);
-        ovrd_st->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_st->callback((Fl_Callback*)cb_ovrd_st, (void*)(2));
-      } // Fl_Check_Button* ovrd_st
-      { ovrd_pan = new SliderW(531, 337, 100, 10, "Pan");
-        ovrd_pan->type(5);
-        ovrd_pan->box(FL_FLAT_BOX);
-        ovrd_pan->color((Fl_Color)178);
-        ovrd_pan->selection_color((Fl_Color)62);
-        ovrd_pan->labeltype(FL_NORMAL_LABEL);
-        ovrd_pan->labelfont(0);
-        ovrd_pan->labelsize(10);
-        ovrd_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_pan->minimum(-64);
-        ovrd_pan->maximum(63);
-        ovrd_pan->step(1);
-        ovrd_pan->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_pan->callback((Fl_Callback*)cb_ovrd_pan);
-        ovrd_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        ovrd_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* ovrd_pan
-      { ovrd_pf = new Fl_Check_Button(521, 350, 68, 15, "Pre Filter");
-        ovrd_pf->down_box(FL_BORDER_BOX);
-        ovrd_pf->labelsize(10);
-        ovrd_pf->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_pf->callback((Fl_Callback*)cb_ovrd_pf, (void*)(2));
-      } // Fl_Check_Button* ovrd_pf
-      { ovrd_lpf = new SliderW(531, 369, 100, 10, "LPF");
-        ovrd_lpf->type(5);
-        ovrd_lpf->box(FL_FLAT_BOX);
-        ovrd_lpf->color((Fl_Color)178);
-        ovrd_lpf->selection_color((Fl_Color)62);
-        ovrd_lpf->labeltype(FL_NORMAL_LABEL);
-        ovrd_lpf->labelfont(0);
-        ovrd_lpf->labelsize(10);
-        ovrd_lpf->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_lpf->minimum(20);
-        ovrd_lpf->maximum(26000);
-        ovrd_lpf->step(1);
-        ovrd_lpf->value(20000);
-        ovrd_lpf->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_lpf->callback((Fl_Callback*)cb_ovrd_lpf);
-        ovrd_lpf->align(Fl_Align(FL_ALIGN_LEFT));
-        ovrd_lpf->when(FL_WHEN_CHANGED);
-      } // SliderW* ovrd_lpf
-      { ovrd_hpf = new SliderW(531, 381, 100, 10, "HPF");
-        ovrd_hpf->type(5);
-        ovrd_hpf->box(FL_FLAT_BOX);
-        ovrd_hpf->color((Fl_Color)178);
-        ovrd_hpf->selection_color((Fl_Color)62);
-        ovrd_hpf->labeltype(FL_NORMAL_LABEL);
-        ovrd_hpf->labelfont(0);
-        ovrd_hpf->labelsize(10);
-        ovrd_hpf->labelcolor(FL_BACKGROUND2_COLOR);
-        ovrd_hpf->minimum(20);
-        ovrd_hpf->maximum(20000);
-        ovrd_hpf->step(1);
-        ovrd_hpf->value(20);
-        ovrd_hpf->textcolor(FL_BACKGROUND2_COLOR);
-        ovrd_hpf->callback((Fl_Callback*)cb_ovrd_hpf);
-        ovrd_hpf->align(Fl_Align(FL_ALIGN_LEFT));
-        ovrd_hpf->when(FL_WHEN_CHANGED);
-      } // SliderW* ovrd_hpf
       OVRD->end();
-    } // Fl_Group* OVRD
+    } // OvrdGui* OVRD
     { ECHO = new Fl_Group(639, 212, 158, 184);
       ECHO->box(FL_UP_BOX);
       ECHO->color(FL_FOREGROUND_COLOR);
@@ -15463,6 +15147,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       MBVVOL->labelfont(1);
       MBVVOL->user_data((void*)(1));
       MBVVOL->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      MBVVOL->hide();
       { mbvvol_activar = new Fl_Light_Button(326, 216, 34, 18, "On");
         mbvvol_activar->shortcut(0x38);
         mbvvol_activar->color((Fl_Color)62);
@@ -21796,8 +21481,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 3://Overdrive
-       ovrd_activar->value(rkr->Overdrive_Bypass);
-       ovrd_preset->do_callback(ovrd_preset,1);
+       OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
+       OVRD->ovrd_preset->do_callback(OVRD->ovrd_preset,1);
        break; 
   
        case 4://Echo
@@ -22316,7 +22001,7 @@ void RKRGUI::reordena() {
        case 3:
       
          OVRD->position(x[i],y[i]);
-         ovrd_activar->shortcut(s[i]);
+         OVRD->ovrd_activar->shortcut(s[i]);
          if(!rkr->deachide)OVRD->show();
          if(rkr->Overdrive_Bypass)
          {
@@ -23491,8 +23176,8 @@ void RKRGUI::ActMIDI() {
        WhaWha_WD->redraw();
        break;
        case 29:
-       ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
-       ovrd_WD->redraw();
+       OVRD->ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
+       OVRD->ovrd_WD->redraw();
        break;
        case 30:
        DIST->dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
@@ -23539,8 +23224,8 @@ void RKRGUI::ActMIDI() {
        echo_pan->redraw();
        break;
        case 47:
-       ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
-       ovrd_pan->redraw();
+       OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
+       OVRD->ovrd_pan->redraw();
        break;
        case 48:
        DIST->dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
@@ -23587,16 +23272,16 @@ void RKRGUI::ActMIDI() {
        pan_pan->redraw();
        break;
        case 68:
-       ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
-       ovrd_drive->redraw();
+       OVRD->ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
+       OVRD->ovrd_drive->redraw();
        break;
        case 69:
        DIST->dist_drive->value(rkr->efx_Distorsion->getpar(3));
        DIST->dist_drive->redraw();
        break;
        case 70:
-       ovrd_level->value(rkr->efx_Overdrive->getpar(4));
-       ovrd_level->redraw();
+       OVRD->ovrd_level->value(rkr->efx_Overdrive->getpar(4));
+       OVRD->ovrd_level->redraw();
        break;
        case 71:
        DIST->dist_level->value(rkr->efx_Distorsion->getpar(4));
@@ -23655,8 +23340,8 @@ void RKRGUI::ActMIDI() {
        musdelay_fb2->redraw();
        break;
        case 85:
-       ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
-       ovrd_lpf->redraw();
+       OVRD->ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
+       OVRD->ovrd_lpf->redraw();
        break;
        case 86:
        DIST->dist_lpf->value(rkr->efx_Distorsion->getpar(7));
@@ -23667,8 +23352,8 @@ void RKRGUI::ActMIDI() {
        reverb_LPF->redraw();
        break;
        case 88:
-       ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
-       ovrd_hpf->redraw();
+       OVRD->ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
+       OVRD->ovrd_hpf->redraw();
        break;
        case 89:
        DIST->dist_hpf->value(rkr->efx_Distorsion->getpar(8));
@@ -23691,8 +23376,8 @@ void RKRGUI::ActMIDI() {
        phaser_LR->redraw();
        break;
        case 94:
-       ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
-       ovrd_LRc->redraw();
+       OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
+       OVRD->ovrd_LRc->redraw();
        break;
        case 95:
        DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
@@ -24989,8 +24674,8 @@ void RKRGUI::ActOnOff() {
     DIST->dist_activar->do_callback();
     break;
     case 3:
-    ovrd_activar->value(rkr->Overdrive_Bypass);
-    ovrd_activar->do_callback();
+    OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
+    OVRD->ovrd_activar->do_callback();
     break;
     case 4:
     echo_activar->value(rkr->Echo_Bypass);
@@ -26775,7 +26460,7 @@ void RKRGUI::RandomPreset() {
   
        case 3://Overdrive
        if (i<numEff)rkr->Overdrive_Bypass=1; else rkr->Overdrive_Bypass=0;
-       ovrd_activar->value(rkr->Overdrive_Bypass);
+       OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
        break; 
   
        case 4://Echo

@@ -1,0 +1,275 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class OvrdGui {
+  user_data 1 open
+  xywh {1703 220 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"} visible position_relative
+} {
+  Fl_Light_Button ovrd_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->Overdrive_Bypass);
+ return;
+}
+rkr->Overdrive_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Overdrive->cleanup();
+rgui->findpos(3,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice ovrd_preset {
+    label Preset
+    user_data 12003
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
+ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
+ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
+ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
+ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
+ovrd_level->value(rkr->efx_Overdrive->getpar(4));
+ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
+ovrd_neg->value(rkr->efx_Overdrive->getpar(6));
+ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
+ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
+ovrd_st->value(rkr->efx_Overdrive->getpar(9));
+ovrd_pf->value(rkr->efx_Overdrive->getpar(10));}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label {Overdrive 1}
+      xywh {42 42 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Overdrive 2}
+      xywh {42 42 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider ovrd_WD {
+    label {Wet/Dry}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(29);
+ return;
+} 
+rkr->efx_Overdrive->changepar(0,(int)(o->value()+64));}
+    xywh {51 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider ovrd_LRc {
+    label {L/R Cr.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(94);
+ return;
+} 
+rkr->efx_Overdrive->changepar(2,(int)(o->value()+64));}
+    xywh {51 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider ovrd_drive {
+    label Drive
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(68);
+ return;
+} 
+rkr->efx_Overdrive->changepar(3,(int)o->value());}
+    xywh {51 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider ovrd_level {
+    label Level
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(70);
+ return;
+} 
+rkr->efx_Overdrive->changepar(4,(int)o->value());}
+    xywh {51 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice ovrd_tipo {
+    label Type
+    callback {rkr->efx_Overdrive->changepar(5,(int)o->value());} open
+    xywh {33 91 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label Atan selected
+      xywh {32 32 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Asym1 selected
+      xywh {32 32 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Pow selected
+      xywh {32 32 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Sine selected
+      xywh {42 42 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Qnts selected
+      xywh {52 52 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Zigzg selected
+      xywh {62 62 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Lmt selected
+      xywh {72 72 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label LmtU selected
+      xywh {82 82 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label LmtL selected
+      xywh {92 92 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label ILmt selected
+      xywh {102 102 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Clip selected
+      xywh {112 112 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Asym2 selected
+      xywh {122 122 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Pow2 selected
+      xywh {132 132 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Sgm selected
+      xywh {142 142 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Crunch selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Hard Crunch} selected
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Dirty Octave+} selected
+      xywh {20 20 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {M.Square} selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {M.Saw} selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Compress selected
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Overdrive selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Soft selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Super Soft} selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Hard Compress} selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Lmt-NoGain} selected
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label FET selected
+      xywh {20 20 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label DynoFET selected
+      xywh {30 30 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Valve 1} selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Valve 2} selected
+      xywh {0 0 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Diode clipper} selected
+      xywh {0 0 36 21} labelsize 9
+    }
+  }
+  Fl_Check_Button ovrd_neg {
+    label {Neg.}
+    user_data 2
+    callback {rkr->efx_Overdrive->changepar(6,(int)o->value());}
+    xywh {109 92 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Check_Button ovrd_st {
+    label Stereo
+    user_data 2
+    callback {rkr->efx_Overdrive->changepar(9,(int)o->value());}
+    xywh {41 110 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Value_Slider ovrd_pan {
+    label Pan
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(47);
+ return;
+} 
+rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));}
+    xywh {51 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Check_Button ovrd_pf {
+    label {Pre Filter}
+    user_data 2
+    callback {rkr->efx_Overdrive->changepar(10,(int)o->value());}
+    xywh {41 138 68 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Value_Slider ovrd_lpf {
+    label LPF
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(85);
+ return;
+} 
+rkr->efx_Overdrive->changepar(7,(int)o->value());}
+    xywh {51 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider ovrd_hpf {
+    label HPF
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(88);
+ return;
+} 
+rkr->efx_Overdrive->changepar(8,(int)o->value());}
+    xywh {51 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+    class SliderW
+  }
+}

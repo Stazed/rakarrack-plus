@@ -74,6 +74,9 @@ decl {class CompressGui; // forward declaration} {public global
 decl {class DistGui; // forward declaration} {public global
 }
 
+decl {class OvrdGui; // forward declaration} {selected public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -145,7 +148,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {600 383 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {387 227 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -946,151 +949,9 @@ Fl::focus(Open_Order);
       Fl_Group OVRD {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button ovrd_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Overdrive_Bypass);
- return;
-}
-rkr->Overdrive_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Overdrive->cleanup();
-findpos(3,(int)o->value(),o);}
-          xywh {485 216 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice ovrd_preset {
-          label Preset
-          user_data 12003
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
-ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
-ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
-ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
-ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
-ovrd_level->value(rkr->efx_Overdrive->getpar(4));
-ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
-ovrd_neg->value(rkr->efx_Overdrive->getpar(6));
-ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
-ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
-ovrd_st->value(rkr->efx_Overdrive->getpar(9));
-ovrd_pf->value(rkr->efx_Overdrive->getpar(10));}
-          xywh {557 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Overdrive 1}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Overdrive 2}
-            xywh {42 42 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider ovrd_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(29);
- return;
-} 
-rkr->efx_Overdrive->changepar(0,(int)(o->value()+64));}
-          xywh {531 247 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ovrd_LRc {
-          label {L/R Cr.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(94);
- return;
-} 
-rkr->efx_Overdrive->changepar(2,(int)(o->value()+64));}
-          xywh {531 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ovrd_drive {
-          label Drive
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(68);
- return;
-} 
-rkr->efx_Overdrive->changepar(3,(int)o->value());}
-          xywh {531 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ovrd_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(70);
- return;
-} 
-rkr->efx_Overdrive->changepar(4,(int)o->value());}
-          xywh {531 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice ovrd_tipo {
-          label Type
-          callback {rkr->efx_Overdrive->changepar(5,(int)o->value());} open
-          xywh {513 303 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(DIST->get_menu_dist_tipo());}
-        } {}
-        Fl_Check_Button ovrd_neg {
-          label {Neg.}
-          user_data 2
-          callback {rkr->efx_Overdrive->changepar(6,(int)o->value());}
-          xywh {589 304 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button ovrd_st {
-          label Stereo
-          user_data 2
-          callback {rkr->efx_Overdrive->changepar(9,(int)o->value());}
-          xywh {521 322 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider ovrd_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(47);
- return;
-} 
-rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));}
-          xywh {531 337 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button ovrd_pf {
-          label {Pre Filter}
-          user_data 2
-          callback {rkr->efx_Overdrive->changepar(10,(int)o->value());}
-          xywh {521 350 68 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider ovrd_lpf {
-          label LPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(85);
- return;
-} 
-rkr->efx_Overdrive->changepar(7,(int)o->value());}
-          xywh {531 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ovrd_hpf {
-          label HPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(88);
- return;
-} 
-rkr->efx_Overdrive->changepar(8,(int)o->value());}
-          xywh {531 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-      }
+        code0 {\#include "ovrd_gui.h"}
+        class OvrdGui
+      } {}
       Fl_Group ECHO {
         user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
@@ -5256,7 +5117,7 @@ rkr->efx_Synthfilter->changepar(15,(int)o->value());}
       }
       Fl_Group MBVVOL {
         user_data 1
-        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
+        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button mbvvol_activar {
           label On
@@ -8370,7 +8231,7 @@ rkr->efx_CompBand->changepar(11,(int)o->value());}
         }
       }
       Fl_Group OTREM {
-        user_data 1 selected
+        user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
       } {
         Fl_Light_Button otrem_activar {
@@ -12237,8 +12098,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 3://Overdrive
-     ovrd_activar->value(rkr->Overdrive_Bypass);
-     ovrd_preset->do_callback(ovrd_preset,1);
+     OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
+     OVRD->ovrd_preset->do_callback(OVRD->ovrd_preset,1);
      break; 
 
      case 4://Echo
@@ -12756,7 +12617,7 @@ switch (rkr->efx_order[i])
      case 3:
     
        OVRD->position(x[i],y[i]);
-       ovrd_activar->shortcut(s[i]);
+       OVRD->ovrd_activar->shortcut(s[i]);
        if(!rkr->deachide)OVRD->show();
        if(rkr->Overdrive_Bypass)
        {
@@ -13923,8 +13784,8 @@ switch (i)
      WhaWha_WD->redraw();
      break;
      case 29:
-     ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
-     ovrd_WD->redraw();
+     OVRD->ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
+     OVRD->ovrd_WD->redraw();
      break;
      case 30:
      DIST->dist_WD->value(rkr->efx_Distorsion->getpar(0)-64);
@@ -13971,8 +13832,8 @@ switch (i)
      echo_pan->redraw();
      break;
      case 47:
-     ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
-     ovrd_pan->redraw();
+     OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
+     OVRD->ovrd_pan->redraw();
      break;
      case 48:
      DIST->dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
@@ -14019,16 +13880,16 @@ switch (i)
      pan_pan->redraw();
      break;
      case 68:
-     ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
-     ovrd_drive->redraw();
+     OVRD->ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
+     OVRD->ovrd_drive->redraw();
      break;
      case 69:
      DIST->dist_drive->value(rkr->efx_Distorsion->getpar(3));
      DIST->dist_drive->redraw();
      break;
      case 70:
-     ovrd_level->value(rkr->efx_Overdrive->getpar(4));
-     ovrd_level->redraw();
+     OVRD->ovrd_level->value(rkr->efx_Overdrive->getpar(4));
+     OVRD->ovrd_level->redraw();
      break;
      case 71:
      DIST->dist_level->value(rkr->efx_Distorsion->getpar(4));
@@ -14087,8 +13948,8 @@ switch (i)
      musdelay_fb2->redraw();
      break;
      case 85:
-     ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
-     ovrd_lpf->redraw();
+     OVRD->ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
+     OVRD->ovrd_lpf->redraw();
      break;
      case 86:
      DIST->dist_lpf->value(rkr->efx_Distorsion->getpar(7));
@@ -14099,8 +13960,8 @@ switch (i)
      reverb_LPF->redraw();
      break;
      case 88:
-     ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
-     ovrd_hpf->redraw();
+     OVRD->ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
+     OVRD->ovrd_hpf->redraw();
      break;
      case 89:
      DIST->dist_hpf->value(rkr->efx_Distorsion->getpar(8));
@@ -14123,8 +13984,8 @@ switch (i)
      phaser_LR->redraw();
      break;
      case 94:
-     ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
-     ovrd_LRc->redraw();
+     OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
+     OVRD->ovrd_LRc->redraw();
      break;
      case 95:
      DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(2)-64);
@@ -15421,8 +15282,8 @@ switch(miralo)
   DIST->dist_activar->do_callback();
   break;
   case 3:
-  ovrd_activar->value(rkr->Overdrive_Bypass);
-  ovrd_activar->do_callback();
+  OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
+  OVRD->ovrd_activar->do_callback();
   break;
   case 4:
   echo_activar->value(rkr->Echo_Bypass);
@@ -17181,7 +17042,7 @@ for(i=0;i<10;i++)
 
      case 3://Overdrive
      if (i<numEff)rkr->Overdrive_Bypass=1; else rkr->Overdrive_Bypass=0;
-     ovrd_activar->value(rkr->Overdrive_Bypass);
+     OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
      break; 
 
      case 4://Echo
