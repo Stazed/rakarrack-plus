@@ -1,0 +1,201 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class CommonGuiMenu {
+  user_data 1 open
+  xywh {1079 102 158 184} type Double box UP_BOX color 0 selection_color 0 align 112 visible position_relative
+} {
+  Fl_Choice lfo_type {
+    label {LFO Type}
+    user_data 12
+    xywh {61 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label Sine
+      xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Tri
+      xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Ramp Up}
+      xywh {50 50 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Ramp Down}
+      xywh {50 50 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label ZigZag
+      xywh {60 60 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {M. Sqare}
+      xywh {50 50 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {M.Saw}
+      xywh {50 50 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {L. Fractal}
+      xywh {60 60 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {L. Fractal XY}
+      xywh {70 70 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {S/H Random}
+      xywh {80 80 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {-Sine +Tri}
+      xywh {90 90 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {-Tri +Sine}
+      xywh {100 100 36 21} labelsize 9
+    }
+  }
+  Fl_Choice distortion_type {
+    label Type
+    user_data 12
+    xywh {44 101 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label Atan
+      comment {The dist_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
+If any of these menu items change here, then they must be changed in the others.}
+      xywh {42 42 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Asym1
+      xywh {42 42 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Pow
+      xywh {42 42 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Sine
+      xywh {52 52 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Qnts
+      xywh {62 62 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Zigzg
+      xywh {72 72 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Lmt
+      xywh {82 82 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label LmtU
+      xywh {92 92 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label LmtL
+      xywh {102 102 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label ILmt
+      xywh {112 112 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Clip
+      xywh {122 122 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Asym2
+      xywh {132 132 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Pow2
+      xywh {142 142 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Sgm
+      xywh {152 152 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Crunch
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Hard Crunch}
+      xywh {20 20 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Dirty Octave+}
+      xywh {30 30 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {M.Square}
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {M.Saw}
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Compress
+      xywh {20 20 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Overdrive
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Soft
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Super Soft}
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Hard Compress}
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Lmt-NoGain}
+      xywh {20 20 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label FET
+      xywh {30 30 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label DynoFET
+      xywh {40 40 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Valve 1}
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Valve 2}
+      xywh {10 10 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Diode clipper}
+      xywh {10 10 36 21} labelsize 9
+    }
+  }
+  Function {get_lfo_type()} {
+    comment {Common menu types used by many efx.} open return_type {Fl_Menu_Item *}
+  } {
+    code {return menu_lfo_type;} {}
+  }
+  Function {get_distortion_type()} {
+    comment {Common distortion types used by various efx.} open selected return_type {Fl_Menu_Item*}
+  } {
+    code {return menu_distortion_type;} {}
+  }
+}

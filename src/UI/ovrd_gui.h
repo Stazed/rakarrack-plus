@@ -7,6 +7,7 @@
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
+#include "common_gui_menu.h"
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
@@ -49,7 +50,6 @@ public:
 private:
   inline void cb_ovrd_tipo_i(Fl_Choice*, void*);
   static void cb_ovrd_tipo(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_ovrd_tipo[];
 public:
   Fl_Check_Button *ovrd_neg;
 private:
@@ -80,5 +80,6 @@ public:
 private:
   inline void cb_ovrd_hpf_i(SliderW*, void*);
   static void cb_ovrd_hpf(SliderW*, void*);
+  CommonGuiMenu *m_dist_menu; 
 };
 #endif

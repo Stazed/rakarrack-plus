@@ -101,44 +101,6 @@ void DistGui::cb_dist_tipo(Fl_Choice* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_tipo_i(o,v);
 }
 
-Fl_Menu_Item DistGui::menu_dist_tipo[] = {
- /*
-  The dist_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
-  If any of these menu items change here, then they must be changed in the others.
-  */
- {"Atan", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Compress", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Overdrive", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Soft", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Super Soft", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Compress", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt-NoGain", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"FET", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"DynoFET", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Valve 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Valve 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Diode clipper", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void DistGui::cb_dist_neg_i(Fl_Check_Button* o, void*) {
   rkr->efx_Distorsion->changepar(6,(int)o->value());
 }
@@ -300,7 +262,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_level->align(Fl_Align(FL_ALIGN_LEFT));
   dist_level->when(FL_WHEN_CHANGED);
 } // SliderW* dist_level
-{ dist_tipo = new Fl_Choice(34, 91, 70, 16, "Type");
+{ Fl_Choice* o = dist_tipo = new Fl_Choice(34, 91, 70, 16, "Type");
   dist_tipo->down_box(FL_BORDER_BOX);
   dist_tipo->selection_color(FL_FOREGROUND_COLOR);
   dist_tipo->labelsize(10);
@@ -308,7 +270,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_tipo->textsize(10);
   dist_tipo->textcolor(FL_BACKGROUND2_COLOR);
   dist_tipo->callback((Fl_Callback*)cb_dist_tipo, (void*)(12));
-  dist_tipo->menu(menu_dist_tipo);
+  o->menu(m_dist_menu->get_distortion_type());
 } // Fl_Choice* dist_tipo
 { dist_neg = new Fl_Check_Button(110, 92, 41, 15, "Neg.");
   dist_neg->down_box(FL_BORDER_BOX);
@@ -406,5 +368,5 @@ end();
  FIXME rerun dist_gui.fl when others are done to get rid of this.
 */
 Fl_Menu_Item* DistGui::get_menu_dist_tipo() {
-  return menu_dist_tipo;
+  return m_dist_menu->get_distortion_type();
 }

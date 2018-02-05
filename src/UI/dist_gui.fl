@@ -2,12 +2,13 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class DistGui {
-  user_data 1 open
+widget_class {\#include "common_gui_menu.h"} DistGui {
+  user_data 1 open selected
   xywh {1176 113 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
-  code2 {\#include "rakarrack.h"} visible position_relative
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
 } {
   Fl_Light_Button dist_activar {
     label On
@@ -109,130 +110,8 @@ rkr->efx_Distorsion->changepar(4,(int)o->value());}
     user_data 12
     callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} open
     xywh {34 91 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-  } {
-    MenuItem {} {
-      label Atan
-      comment {The dist_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
-If any of these menu items change here, then they must be changed in the others.} selected
-      xywh {32 32 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Asym1
-      xywh {32 32 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Pow
-      xywh {32 32 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Sine
-      xywh {42 42 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Qnts
-      xywh {52 52 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Zigzg
-      xywh {62 62 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Lmt
-      xywh {72 72 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label LmtU
-      xywh {82 82 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label LmtL
-      xywh {92 92 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label ILmt
-      xywh {102 102 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Clip
-      xywh {112 112 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Asym2
-      xywh {122 122 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Pow2
-      xywh {132 132 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Sgm
-      xywh {142 142 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Crunch
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Hard Crunch}
-      xywh {10 10 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Dirty Octave+}
-      xywh {20 20 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {M.Square}
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {M.Saw}
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Compress
-      xywh {10 10 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Overdrive
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label Soft
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Super Soft}
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Hard Compress}
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Lmt-NoGain}
-      xywh {10 10 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label FET
-      xywh {20 20 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label DynoFET
-      xywh {30 30 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Valve 1}
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Valve 2}
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {Diode clipper}
-      xywh {0 0 36 21} labelsize 9
-    }
-  }
+    code0 {o->menu(m_dist_menu->get_distortion_type());}
+  } {}
   Fl_Check_Button dist_neg {
     label {Neg.}
     user_data 2
@@ -294,5 +173,7 @@ rkr->efx_Distorsion->changepar(7,(int)o->value());}
 rkr->efx_Distorsion->changepar(8,(int)o->value());}
     xywh {52 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
+  }
+  decl {CommonGuiMenu *m_dist_menu;} {private local
   }
 }

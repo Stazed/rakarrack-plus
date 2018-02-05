@@ -14,6 +14,7 @@ set (ProgSources
     UI/sliderW.cxx
     UI/newvum.cxx
     UI/tunerbar.cxx
+    UI/common_gui_menu.cxx
     UI/sustain_gui.cxx
     UI/eq_gui.cxx
     UI/compress_gui.cxx

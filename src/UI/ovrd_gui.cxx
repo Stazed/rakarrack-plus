@@ -98,44 +98,6 @@ void OvrdGui::cb_ovrd_tipo(Fl_Choice* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_tipo_i(o,v);
 }
 
-Fl_Menu_Item OvrdGui::menu_ovrd_tipo[] = {
- /*
-  The ovrd_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
-  If any of these menu items change here, then they must be changed in the others.
-  */
- {"Atan", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Qnts", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Zigzg", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtU", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"LmtL", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"ILmt", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Clip", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Asym2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Pow2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Sgm", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Crunch", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Crunch", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Dirty Octave+", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Square", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Compress", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Overdrive", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Soft", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Super Soft", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Hard Compress", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Lmt-NoGain", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"FET", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"DynoFET", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Valve 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Valve 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Diode clipper", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void OvrdGui::cb_ovrd_neg_i(Fl_Check_Button* o, void*) {
   rkr->efx_Overdrive->changepar(6,(int)o->value());
 }
@@ -285,7 +247,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_level->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_level->when(FL_WHEN_CHANGED);
 } // SliderW* ovrd_level
-{ ovrd_tipo = new Fl_Choice(33, 91, 72, 16, "Type");
+{ Fl_Choice* o = ovrd_tipo = new Fl_Choice(33, 91, 72, 16, "Type");
   ovrd_tipo->down_box(FL_BORDER_BOX);
   ovrd_tipo->selection_color(FL_FOREGROUND_COLOR);
   ovrd_tipo->labelsize(10);
@@ -293,7 +255,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_tipo->textsize(10);
   ovrd_tipo->textcolor(FL_BACKGROUND2_COLOR);
   ovrd_tipo->callback((Fl_Callback*)cb_ovrd_tipo);
-  ovrd_tipo->menu(menu_ovrd_tipo);
+  o->menu(m_dist_menu->get_distortion_type());
 } // Fl_Choice* ovrd_tipo
 { ovrd_neg = new Fl_Check_Button(109, 92, 42, 15, "Neg.");
   ovrd_neg->down_box(FL_BORDER_BOX);
