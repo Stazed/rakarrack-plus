@@ -22,6 +22,7 @@ set (ProgSources
     UI/echo_gui.cxx
     UI/chorus_gui.cxx
     UI/phaser_gui.cxx
+    UI/flanger_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C

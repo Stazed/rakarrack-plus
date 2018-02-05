@@ -751,175 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_flanger_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Flanger_Bypass);
- return;
-}
-rkr->Flanger_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Flanger->cleanup();
-findpos(7,(int)o->value(),o);
-}
-void RKRGUI::cb_flanger_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_activar_i(o,v);
-}
-
-void RKRGUI::cb_flanger_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
-flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
-flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
-flanger_freq->value(rkr->efx_Flanger->getpar(2));
-flanger_rnd->value(rkr->efx_Flanger->getpar(3));
-flanger_lfotype->value(rkr->efx_Flanger->getpar(4));
-flanger_stdf->value(rkr->efx_Flanger->getpar(5));
-flanger_dpth->value(rkr->efx_Flanger->getpar(6));
-flanger_delay->value(rkr->efx_Flanger->getpar(7));
-flanger_fb->value(rkr->efx_Flanger->getpar(8));
-flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
-flanger_subs->value(rkr->efx_Flanger->getpar(11));
-flanger_awesome->value(rkr->efx_Flanger->getpar(12));
-}
-void RKRGUI::cb_flanger_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_flanger_preset[] = {
- {"Flange 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange 5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_flanger_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(53);
- return;
-} 
-rkr->efx_Flanger->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_flanger_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_WD_i(o,v);
-}
-
-void RKRGUI::cb_flanger_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(51);
- return;
-} 
-rkr->efx_Flanger->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_flanger_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_pan_i(o,v);
-}
-
-void RKRGUI::cb_flanger_freq_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(73);
- return;
-} 
-rkr->efx_Flanger->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_flanger_freq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_freq_i(o,v);
-}
-
-void RKRGUI::cb_flanger_rnd_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(106);
- return;
-} 
-rkr->efx_Flanger->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_flanger_rnd(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_rnd_i(o,v);
-}
-
-void RKRGUI::cb_flanger_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Flanger->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_flanger_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_lfotype_i(o,v);
-}
-
-void RKRGUI::cb_flanger_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Flanger->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_flanger_subs(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_subs_i(o,v);
-}
-
-void RKRGUI::cb_flanger_awesome_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Flanger->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_flanger_awesome(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_awesome_i(o,v);
-}
-
-void RKRGUI::cb_flanger_stdf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(100);
- return;
-} 
-rkr->efx_Flanger->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_flanger_stdf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_stdf_i(o,v);
-}
-
-void RKRGUI::cb_flanger_dpth_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(22);
- return;
-} 
-rkr->efx_Flanger->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_flanger_dpth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_dpth_i(o,v);
-}
-
-void RKRGUI::cb_flanger_delay_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_flanger_delay(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_delay_i(o,v);
-}
-
-void RKRGUI::cb_flanger_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(80);
- return;
-} 
-rkr->efx_Flanger->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_flanger_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_fb_i(o,v);
-}
-
-void RKRGUI::cb_flanger_LR_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(92);
- return;
-} 
-rkr->efx_Flanger->changepar(9,(int)(o->value()+64));
-}
-void RKRGUI::cb_flanger_LR(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_flanger_LR_i(o,v);
-}
-
 void RKRGUI::cb_reverb_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -9976,205 +9807,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       PHASER->hide();
       PHASER->end();
     } // PhaserGui* PHASER
-    { FLANGER = new Fl_Group(321, 413, 158, 184);
+    { FLANGER = new FlangerGui(321, 413, 158, 184);
       FLANGER->box(FL_UP_BOX);
       FLANGER->color(FL_FOREGROUND_COLOR);
       FLANGER->selection_color(FL_FOREGROUND_COLOR);
+      FLANGER->labeltype(FL_NORMAL_LABEL);
       FLANGER->labelfont(1);
+      FLANGER->labelsize(14);
+      FLANGER->labelcolor(FL_FOREGROUND_COLOR);
       FLANGER->user_data((void*)(1));
       FLANGER->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      { flanger_activar = new Fl_Light_Button(326, 417, 34, 18, "On");
-        flanger_activar->shortcut(0x38);
-        flanger_activar->color((Fl_Color)62);
-        flanger_activar->selection_color((Fl_Color)1);
-        flanger_activar->labelsize(10);
-        flanger_activar->callback((Fl_Callback*)cb_flanger_activar, (void*)(2));
-        flanger_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        flanger_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* flanger_activar
-      { flanger_preset = new Fl_Choice(398, 417, 76, 18, "Preset");
-        flanger_preset->down_box(FL_BORDER_BOX);
-        flanger_preset->selection_color(FL_FOREGROUND_COLOR);
-        flanger_preset->labelsize(10);
-        flanger_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_preset->textsize(10);
-        flanger_preset->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_preset->callback((Fl_Callback*)cb_flanger_preset, (void*)(12007));
-        flanger_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        flanger_preset->menu(menu_flanger_preset);
-      } // Fl_Choice* flanger_preset
-      { flanger_WD = new SliderW(373, 442, 100, 10, "Wet/Dry");
-        flanger_WD->type(5);
-        flanger_WD->box(FL_FLAT_BOX);
-        flanger_WD->color((Fl_Color)178);
-        flanger_WD->selection_color((Fl_Color)62);
-        flanger_WD->labeltype(FL_NORMAL_LABEL);
-        flanger_WD->labelfont(0);
-        flanger_WD->labelsize(10);
-        flanger_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_WD->minimum(-64);
-        flanger_WD->maximum(63);
-        flanger_WD->step(1);
-        flanger_WD->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_WD->callback((Fl_Callback*)cb_flanger_WD);
-        flanger_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_WD
-      { flanger_pan = new SliderW(373, 454, 100, 10, "Pan");
-        flanger_pan->type(5);
-        flanger_pan->box(FL_FLAT_BOX);
-        flanger_pan->color((Fl_Color)178);
-        flanger_pan->selection_color((Fl_Color)62);
-        flanger_pan->labeltype(FL_NORMAL_LABEL);
-        flanger_pan->labelfont(0);
-        flanger_pan->labelsize(10);
-        flanger_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_pan->minimum(-64);
-        flanger_pan->maximum(63);
-        flanger_pan->step(1);
-        flanger_pan->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_pan->callback((Fl_Callback*)cb_flanger_pan);
-        flanger_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_pan
-      { flanger_freq = new SliderW(373, 466, 100, 10, "Tempo");
-        flanger_freq->type(5);
-        flanger_freq->box(FL_FLAT_BOX);
-        flanger_freq->color((Fl_Color)178);
-        flanger_freq->selection_color((Fl_Color)62);
-        flanger_freq->labeltype(FL_NORMAL_LABEL);
-        flanger_freq->labelfont(0);
-        flanger_freq->labelsize(10);
-        flanger_freq->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_freq->minimum(1);
-        flanger_freq->maximum(600);
-        flanger_freq->step(1);
-        flanger_freq->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_freq->callback((Fl_Callback*)cb_flanger_freq);
-        flanger_freq->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_freq->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_freq
-      { flanger_rnd = new SliderW(373, 478, 100, 10, "Rnd");
-        flanger_rnd->type(5);
-        flanger_rnd->box(FL_FLAT_BOX);
-        flanger_rnd->color((Fl_Color)178);
-        flanger_rnd->selection_color((Fl_Color)62);
-        flanger_rnd->labeltype(FL_NORMAL_LABEL);
-        flanger_rnd->labelfont(0);
-        flanger_rnd->labelsize(10);
-        flanger_rnd->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_rnd->maximum(127);
-        flanger_rnd->step(1);
-        flanger_rnd->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_rnd->callback((Fl_Callback*)cb_flanger_rnd);
-        flanger_rnd->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_rnd->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_rnd
-      { Fl_Choice* o = flanger_lfotype = new Fl_Choice(384, 490, 72, 16, "LFO Type");
-        flanger_lfotype->down_box(FL_BORDER_BOX);
-        flanger_lfotype->selection_color(FL_FOREGROUND_COLOR);
-        flanger_lfotype->labelsize(10);
-        flanger_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_lfotype->textsize(10);
-        flanger_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_lfotype->callback((Fl_Callback*)cb_flanger_lfotype);
-        o->menu(CHORUS->get_menu_chorus_lfotype());
-      } // Fl_Choice* flanger_lfotype
-      { flanger_subs = new Fl_Check_Button(353, 507, 62, 15, "Subtract");
-        flanger_subs->down_box(FL_BORDER_BOX);
-        flanger_subs->labelsize(10);
-        flanger_subs->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_subs->callback((Fl_Callback*)cb_flanger_subs, (void*)(2));
-      } // Fl_Check_Button* flanger_subs
-      { flanger_awesome = new Fl_Check_Button(415, 507, 58, 15, "Intense");
-        flanger_awesome->down_box(FL_BORDER_BOX);
-        flanger_awesome->labelsize(10);
-        flanger_awesome->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_awesome->callback((Fl_Callback*)cb_flanger_awesome, (void*)(2));
-      } // Fl_Check_Button* flanger_awesome
-      { flanger_stdf = new SliderW(373, 528, 100, 10, "St.df");
-        flanger_stdf->type(5);
-        flanger_stdf->box(FL_FLAT_BOX);
-        flanger_stdf->color((Fl_Color)178);
-        flanger_stdf->selection_color((Fl_Color)62);
-        flanger_stdf->labeltype(FL_NORMAL_LABEL);
-        flanger_stdf->labelfont(0);
-        flanger_stdf->labelsize(10);
-        flanger_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_stdf->maximum(127);
-        flanger_stdf->step(1);
-        flanger_stdf->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_stdf->callback((Fl_Callback*)cb_flanger_stdf);
-        flanger_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_stdf
-      { flanger_dpth = new SliderW(373, 541, 100, 10, "Depth");
-        flanger_dpth->type(5);
-        flanger_dpth->box(FL_FLAT_BOX);
-        flanger_dpth->color((Fl_Color)178);
-        flanger_dpth->selection_color((Fl_Color)62);
-        flanger_dpth->labeltype(FL_NORMAL_LABEL);
-        flanger_dpth->labelfont(0);
-        flanger_dpth->labelsize(10);
-        flanger_dpth->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_dpth->maximum(127);
-        flanger_dpth->step(1);
-        flanger_dpth->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_dpth->callback((Fl_Callback*)cb_flanger_dpth);
-        flanger_dpth->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_dpth->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_dpth
-      { flanger_delay = new SliderW(373, 554, 100, 10, "Delay");
-        flanger_delay->type(5);
-        flanger_delay->box(FL_FLAT_BOX);
-        flanger_delay->color((Fl_Color)178);
-        flanger_delay->selection_color((Fl_Color)62);
-        flanger_delay->labeltype(FL_NORMAL_LABEL);
-        flanger_delay->labelfont(0);
-        flanger_delay->labelsize(10);
-        flanger_delay->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_delay->maximum(127);
-        flanger_delay->step(1);
-        flanger_delay->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_delay->callback((Fl_Callback*)cb_flanger_delay);
-        flanger_delay->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_delay->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_delay
-      { flanger_fb = new SliderW(373, 567, 100, 10, "Fb");
-        flanger_fb->type(5);
-        flanger_fb->box(FL_FLAT_BOX);
-        flanger_fb->color((Fl_Color)178);
-        flanger_fb->selection_color((Fl_Color)62);
-        flanger_fb->labeltype(FL_NORMAL_LABEL);
-        flanger_fb->labelfont(0);
-        flanger_fb->labelsize(10);
-        flanger_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_fb->maximum(127);
-        flanger_fb->step(1);
-        flanger_fb->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_fb->callback((Fl_Callback*)cb_flanger_fb);
-        flanger_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_fb
-      { flanger_LR = new SliderW(373, 581, 100, 10, "L/R.Cr");
-        flanger_LR->type(5);
-        flanger_LR->box(FL_FLAT_BOX);
-        flanger_LR->color((Fl_Color)178);
-        flanger_LR->selection_color((Fl_Color)62);
-        flanger_LR->labeltype(FL_NORMAL_LABEL);
-        flanger_LR->labelfont(0);
-        flanger_LR->labelsize(10);
-        flanger_LR->labelcolor(FL_BACKGROUND2_COLOR);
-        flanger_LR->minimum(-64);
-        flanger_LR->maximum(63);
-        flanger_LR->step(1);
-        flanger_LR->textcolor(FL_BACKGROUND2_COLOR);
-        flanger_LR->callback((Fl_Callback*)cb_flanger_LR);
-        flanger_LR->align(Fl_Align(FL_ALIGN_LEFT));
-        flanger_LR->when(FL_WHEN_CHANGED);
-      } // SliderW* flanger_LR
+      FLANGER->when(FL_WHEN_RELEASE);
+      FLANGER->hide();
       FLANGER->end();
-    } // Fl_Group* FLANGER
+    } // FlangerGui* FLANGER
     { REVERB = new Fl_Group(480, 413, 158, 184);
       REVERB->box(FL_UP_BOX);
       REVERB->color(FL_FOREGROUND_COLOR);
@@ -20478,8 +20124,8 @@ void RKRGUI::Put_Loaded() {
        break;  
   
        case 7://Flanger
-       flanger_activar->value(rkr->Flanger_Bypass);
-       flanger_preset->do_callback(flanger_preset,1); 
+       FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
+       FLANGER->flanger_preset->do_callback(FLANGER->flanger_preset,1); 
        break;
    
        case 8://Reverb
@@ -21030,7 +20676,7 @@ void RKRGUI::reordena() {
        case 7:
       
          FLANGER->position(x[i],y[i]);
-         flanger_activar->shortcut(s[i]);
+         FLANGER->flanger_activar->shortcut(s[i]);
          if(!rkr->deachide)FLANGER->show();
          if(rkr->Flanger_Bypass)
          {
@@ -22125,8 +21771,8 @@ void RKRGUI::ActMIDI() {
        PHASER->phaser_dpth->redraw();
        break;
        case 22:
-       flanger_dpth->value(rkr->efx_Flanger->getpar(6));
-       flanger_dpth->redraw();
+       FLANGER->flanger_dpth->value(rkr->efx_Flanger->getpar(6));
+       FLANGER->flanger_dpth->redraw();
        break;
        case 23:
        CHORUS->chorus_dpth->value(rkr->efx_Chorus->getpar(6));
@@ -22169,8 +21815,8 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_WD->redraw();
        break;
        case 53:
-       flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
-       flanger_WD->redraw();
+       FLANGER->flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
+       FLANGER->flanger_WD->redraw();
        break;
        case 54:
        PHASER->phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
@@ -22217,8 +21863,8 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_pan->redraw();
        break;
        case 51:
-       flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
-       flanger_pan->redraw();
+       FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
+       FLANGER->flanger_pan->redraw();
        break;
        case 60:
        PHASER->phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
@@ -22269,8 +21915,8 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_freq->redraw();
        break;
        case 73:
-       flanger_freq->value(rkr->efx_Flanger->getpar(2));
-       flanger_freq->redraw();
+       FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(2));
+       FLANGER->flanger_freq->redraw();
        break;
        case 74:
        PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(2));
@@ -22297,8 +21943,8 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_fb->redraw();
        break;
        case 80:
-       flanger_fb->value(rkr->efx_Flanger->getpar(8));
-       flanger_fb->redraw();
+       FLANGER->flanger_fb->value(rkr->efx_Flanger->getpar(8));
+       FLANGER->flanger_fb->redraw();
        break;
        case 81:
        PHASER->phaser_fb->value(rkr->efx_Phaser->getpar(7));
@@ -22345,8 +21991,8 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_LR->redraw();
        break;
        case 92:
-       flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
-       flanger_LR->redraw();
+       FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
+       FLANGER->flanger_LR->redraw();
        break;
        case 93:
        PHASER->phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
@@ -22377,8 +22023,8 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_stdf->redraw();
        break;
        case 100:
-       flanger_stdf->value(rkr->efx_Flanger->getpar(5));
-       flanger_stdf->redraw();
+       FLANGER->flanger_stdf->value(rkr->efx_Flanger->getpar(5));
+       FLANGER->flanger_stdf->redraw();
        break;
        case 101:
        PHASER->phaser_stdf->value(rkr->efx_Phaser->getpar(5));
@@ -22401,8 +22047,8 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_rnd->redraw();
        break;
        case 106:
-       flanger_rnd->value(rkr->efx_Flanger->getpar(3));
-       flanger_rnd->redraw();
+       FLANGER->flanger_rnd->value(rkr->efx_Flanger->getpar(3));
+       FLANGER->flanger_rnd->redraw();
        break;
        case 107:
        PHASER->phaser_rnd->value(rkr->efx_Phaser->getpar(3));
@@ -23667,8 +23313,8 @@ void RKRGUI::ActOnOff() {
     PHASER->phaser_activar->do_callback();
     break;
     case 7:
-    flanger_activar->value(rkr->Flanger_Bypass);
-    flanger_activar->do_callback();
+    FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
+    FLANGER->flanger_activar->do_callback();
     break;
     case 8:
     reverb_activar->value(rkr->Reverb_Bypass);
@@ -24600,8 +24246,8 @@ void RKRGUI::UpdateTGUI() {
     
     if(rkr->Flanger_Bypass)
     {
-    flanger_freq->value(rkr->efx_Flanger->getpar(2));
-    flanger_freq->redraw();
+    FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(2));
+    FLANGER->flanger_freq->redraw();
     }
     
     if(rkr->Phaser_Bypass)
@@ -25457,7 +25103,7 @@ void RKRGUI::RandomPreset() {
   
        case 7://Flanger
        if (i<numEff)rkr->Flanger_Bypass=1; else rkr->Flanger_Bypass=0;
-       flanger_activar->value(rkr->Flanger_Bypass);
+       FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
        break;
    
        case 8://Reverb

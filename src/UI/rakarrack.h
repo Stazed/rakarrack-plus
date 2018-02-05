@@ -31,6 +31,7 @@ class OvrdGui; // forward declaration
 class EchoGui; // forward declaration
 class ChorusGui; // forward declaration
 class PhaserGui; // forward declaration
+class FlangerGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -44,6 +45,7 @@ class SustainGui; // forward declaration
 #include "echo_gui.h"
 #include "chorus_gui.h"
 #include "phaser_gui.h"
+#include "flanger_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -214,78 +216,7 @@ public:
   EchoGui *ECHO;
   ChorusGui *CHORUS;
   PhaserGui *PHASER;
-  Fl_Group *FLANGER;
-  Fl_Light_Button *flanger_activar;
-private:
-  inline void cb_flanger_activar_i(Fl_Light_Button*, void*);
-  static void cb_flanger_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *flanger_preset;
-private:
-  inline void cb_flanger_preset_i(Fl_Choice*, void*);
-  static void cb_flanger_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_flanger_preset[];
-public:
-  SliderW *flanger_WD;
-private:
-  inline void cb_flanger_WD_i(SliderW*, void*);
-  static void cb_flanger_WD(SliderW*, void*);
-public:
-  SliderW *flanger_pan;
-private:
-  inline void cb_flanger_pan_i(SliderW*, void*);
-  static void cb_flanger_pan(SliderW*, void*);
-public:
-  SliderW *flanger_freq;
-private:
-  inline void cb_flanger_freq_i(SliderW*, void*);
-  static void cb_flanger_freq(SliderW*, void*);
-public:
-  SliderW *flanger_rnd;
-private:
-  inline void cb_flanger_rnd_i(SliderW*, void*);
-  static void cb_flanger_rnd(SliderW*, void*);
-public:
-  Fl_Choice *flanger_lfotype;
-private:
-  inline void cb_flanger_lfotype_i(Fl_Choice*, void*);
-  static void cb_flanger_lfotype(Fl_Choice*, void*);
-public:
-  Fl_Check_Button *flanger_subs;
-private:
-  inline void cb_flanger_subs_i(Fl_Check_Button*, void*);
-  static void cb_flanger_subs(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *flanger_awesome;
-private:
-  inline void cb_flanger_awesome_i(Fl_Check_Button*, void*);
-  static void cb_flanger_awesome(Fl_Check_Button*, void*);
-public:
-  SliderW *flanger_stdf;
-private:
-  inline void cb_flanger_stdf_i(SliderW*, void*);
-  static void cb_flanger_stdf(SliderW*, void*);
-public:
-  SliderW *flanger_dpth;
-private:
-  inline void cb_flanger_dpth_i(SliderW*, void*);
-  static void cb_flanger_dpth(SliderW*, void*);
-public:
-  SliderW *flanger_delay;
-private:
-  inline void cb_flanger_delay_i(SliderW*, void*);
-  static void cb_flanger_delay(SliderW*, void*);
-public:
-  SliderW *flanger_fb;
-private:
-  inline void cb_flanger_fb_i(SliderW*, void*);
-  static void cb_flanger_fb(SliderW*, void*);
-public:
-  SliderW *flanger_LR;
-private:
-  inline void cb_flanger_LR_i(SliderW*, void*);
-  static void cb_flanger_LR(SliderW*, void*);
-public:
+  FlangerGui *FLANGER;
   Fl_Group *REVERB;
   Fl_Light_Button *reverb_activar;
 private:

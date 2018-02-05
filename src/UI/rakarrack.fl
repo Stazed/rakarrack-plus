@@ -86,6 +86,9 @@ decl {class ChorusGui; // forward declaration} {public global
 decl {class PhaserGui; // forward declaration} {public global
 }
 
+decl {class FlangerGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -974,183 +977,17 @@ Fl::focus(Open_Order);
         class ChorusGui
       } {}
       Fl_Group PHASER {
-        user_data 1 selected
+        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "phaser_gui.h"}
         class PhaserGui
       } {}
       Fl_Group FLANGER {
-        user_data 1
-        xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
-      } {
-        Fl_Light_Button flanger_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Flanger_Bypass);
- return;
-}
-rkr->Flanger_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Flanger->cleanup();
-findpos(7,(int)o->value(),o);}
-          xywh {326 417 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice flanger_preset {
-          label Preset
-          user_data 12007
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
-flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
-flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
-flanger_freq->value(rkr->efx_Flanger->getpar(2));
-flanger_rnd->value(rkr->efx_Flanger->getpar(3));
-flanger_lfotype->value(rkr->efx_Flanger->getpar(4));
-flanger_stdf->value(rkr->efx_Flanger->getpar(5));
-flanger_dpth->value(rkr->efx_Flanger->getpar(6));
-flanger_delay->value(rkr->efx_Flanger->getpar(7));
-flanger_fb->value(rkr->efx_Flanger->getpar(8));
-flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
-flanger_subs->value(rkr->efx_Flanger->getpar(11));
-flanger_awesome->value(rkr->efx_Flanger->getpar(12));}
-          xywh {398 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Flange 1}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Flange 2}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Flange 3}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Flange 4}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Flange 5}
-            xywh {82 82 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider flanger_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(53);
- return;
-} 
-rkr->efx_Flanger->changepar(0,(int)(o->value()+64));}
-          xywh {373 442 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider flanger_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(51);
- return;
-} 
-rkr->efx_Flanger->changepar(1,(int)(o->value()+64));}
-          xywh {373 454 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider flanger_freq {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(73);
- return;
-} 
-rkr->efx_Flanger->changepar(2,(int)o->value());}
-          xywh {373 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider flanger_rnd {
-          label Rnd
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(106);
- return;
-} 
-rkr->efx_Flanger->changepar(3,(int)o->value());}
-          xywh {373 478 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice flanger_lfotype {
-          label {LFO Type}
-          callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
-          xywh {384 490 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Check_Button flanger_subs {
-          label Subtract
-          user_data 2
-          callback {rkr->efx_Flanger->changepar(11,(int)o->value());}
-          xywh {353 507 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button flanger_awesome {
-          label Intense
-          user_data 2
-          callback {rkr->efx_Flanger->changepar(12,(int)o->value());}
-          xywh {415 507 58 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider flanger_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(100);
- return;
-} 
-rkr->efx_Flanger->changepar(5,(int)o->value());}
-          xywh {373 528 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider flanger_dpth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(22);
- return;
-} 
-rkr->efx_Flanger->changepar(6,(int)o->value());}
-          xywh {373 541 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider flanger_delay {
-          label Delay
-          callback {rkr->efx_Flanger->changepar(7,(int)o->value());}
-          xywh {373 554 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider flanger_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(80);
- return;
-} 
-rkr->efx_Flanger->changepar(8,(int)o->value());}
-          xywh {373 567 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider flanger_LR {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(92);
- return;
-} 
-rkr->efx_Flanger->changepar(9,(int)(o->value()+64));}
-          xywh {373 581 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        user_data 1 selected
+        xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "flanger_gui.h"}
+        class FlangerGui
+      } {}
       Fl_Group REVERB {
         user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
@@ -11596,8 +11433,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;  
 
      case 7://Flanger
-     flanger_activar->value(rkr->Flanger_Bypass);
-     flanger_preset->do_callback(flanger_preset,1); 
+     FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
+     FLANGER->flanger_preset->do_callback(FLANGER->flanger_preset,1); 
      break;
  
      case 8://Reverb
@@ -12147,7 +11984,7 @@ switch (rkr->efx_order[i])
      case 7:
     
        FLANGER->position(x[i],y[i]);
-       flanger_activar->shortcut(s[i]);
+       FLANGER->flanger_activar->shortcut(s[i]);
        if(!rkr->deachide)FLANGER->show();
        if(rkr->Flanger_Bypass)
        {
@@ -13234,8 +13071,8 @@ switch (i)
      PHASER->phaser_dpth->redraw();
      break;
      case 22:
-     flanger_dpth->value(rkr->efx_Flanger->getpar(6));
-     flanger_dpth->redraw();
+     FLANGER->flanger_dpth->value(rkr->efx_Flanger->getpar(6));
+     FLANGER->flanger_dpth->redraw();
      break;
      case 23:
      CHORUS->chorus_dpth->value(rkr->efx_Chorus->getpar(6));
@@ -13278,8 +13115,8 @@ switch (i)
      CHORUS->chorus_WD->redraw();
      break;
      case 53:
-     flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
-     flanger_WD->redraw();
+     FLANGER->flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
+     FLANGER->flanger_WD->redraw();
      break;
      case 54:
      PHASER->phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
@@ -13326,8 +13163,8 @@ switch (i)
      CHORUS->chorus_pan->redraw();
      break;
      case 51:
-     flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
-     flanger_pan->redraw();
+     FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
+     FLANGER->flanger_pan->redraw();
      break;
      case 60:
      PHASER->phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
@@ -13378,8 +13215,8 @@ switch (i)
      CHORUS->chorus_freq->redraw();
      break;
      case 73:
-     flanger_freq->value(rkr->efx_Flanger->getpar(2));
-     flanger_freq->redraw();
+     FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(2));
+     FLANGER->flanger_freq->redraw();
      break;
      case 74:
      PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(2));
@@ -13406,8 +13243,8 @@ switch (i)
      CHORUS->chorus_fb->redraw();
      break;
      case 80:
-     flanger_fb->value(rkr->efx_Flanger->getpar(8));
-     flanger_fb->redraw();
+     FLANGER->flanger_fb->value(rkr->efx_Flanger->getpar(8));
+     FLANGER->flanger_fb->redraw();
      break;
      case 81:
      PHASER->phaser_fb->value(rkr->efx_Phaser->getpar(7));
@@ -13454,8 +13291,8 @@ switch (i)
      CHORUS->chorus_LR->redraw();
      break;
      case 92:
-     flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
-     flanger_LR->redraw();
+     FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
+     FLANGER->flanger_LR->redraw();
      break;
      case 93:
      PHASER->phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
@@ -13486,8 +13323,8 @@ switch (i)
      CHORUS->chorus_stdf->redraw();
      break;
      case 100:
-     flanger_stdf->value(rkr->efx_Flanger->getpar(5));
-     flanger_stdf->redraw();
+     FLANGER->flanger_stdf->value(rkr->efx_Flanger->getpar(5));
+     FLANGER->flanger_stdf->redraw();
      break;
      case 101:
      PHASER->phaser_stdf->value(rkr->efx_Phaser->getpar(5));
@@ -13510,8 +13347,8 @@ switch (i)
      CHORUS->chorus_rnd->redraw();
      break;
      case 106:
-     flanger_rnd->value(rkr->efx_Flanger->getpar(3));
-     flanger_rnd->redraw();
+     FLANGER->flanger_rnd->value(rkr->efx_Flanger->getpar(3));
+     FLANGER->flanger_rnd->redraw();
      break;
      case 107:
      PHASER->phaser_rnd->value(rkr->efx_Phaser->getpar(3));
@@ -14776,8 +14613,8 @@ switch(miralo)
   PHASER->phaser_activar->do_callback();
   break;
   case 7:
-  flanger_activar->value(rkr->Flanger_Bypass);
-  flanger_activar->do_callback();
+  FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
+  FLANGER->flanger_activar->do_callback();
   break;
   case 8:
   reverb_activar->value(rkr->Reverb_Bypass);
@@ -15696,8 +15533,8 @@ if(rkr->Chorus_Bypass)
   
   if(rkr->Flanger_Bypass)
   {
-  flanger_freq->value(rkr->efx_Flanger->getpar(2));
-  flanger_freq->redraw();
+  FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(2));
+  FLANGER->flanger_freq->redraw();
   }
   
   if(rkr->Phaser_Bypass)
@@ -16540,7 +16377,7 @@ for(i=0;i<10;i++)
 
      case 7://Flanger
      if (i<numEff)rkr->Flanger_Bypass=1; else rkr->Flanger_Bypass=0;
-     flanger_activar->value(rkr->Flanger_Bypass);
+     FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
      break;
  
      case 8://Reverb

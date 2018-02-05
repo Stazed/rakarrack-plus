@@ -1,0 +1,182 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class {\#include "common_gui_menu.h"} FlangerGui {
+  user_data 1 open
+  xywh {1384 93 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
+} {
+  Fl_Light_Button flanger_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->Flanger_Bypass);
+ return;
+}
+rkr->Flanger_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Flanger->cleanup();
+rgui->findpos(7,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice flanger_preset {
+    label Preset
+    user_data 12007
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
+flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
+flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
+flanger_freq->value(rkr->efx_Flanger->getpar(2));
+flanger_rnd->value(rkr->efx_Flanger->getpar(3));
+flanger_lfotype->value(rkr->efx_Flanger->getpar(4));
+flanger_stdf->value(rkr->efx_Flanger->getpar(5));
+flanger_dpth->value(rkr->efx_Flanger->getpar(6));
+flanger_delay->value(rkr->efx_Flanger->getpar(7));
+flanger_fb->value(rkr->efx_Flanger->getpar(8));
+flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
+flanger_subs->value(rkr->efx_Flanger->getpar(11));
+flanger_awesome->value(rkr->efx_Flanger->getpar(12));}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label {Flange 1}
+      xywh {62 62 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Flange 2}
+      xywh {62 62 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Flange 3}
+      xywh {62 62 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Flange 4}
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Flange 5}
+      xywh {82 82 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider flanger_WD {
+    label {Wet/Dry}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(53);
+ return;
+} 
+rkr->efx_Flanger->changepar(0,(int)(o->value()+64));}
+    xywh {52 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider flanger_pan {
+    label Pan
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(51);
+ return;
+} 
+rkr->efx_Flanger->changepar(1,(int)(o->value()+64));}
+    xywh {52 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider flanger_freq {
+    label Tempo
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(73);
+ return;
+} 
+rkr->efx_Flanger->changepar(2,(int)o->value());}
+    xywh {52 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider flanger_rnd {
+    label Rnd
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(106);
+ return;
+} 
+rkr->efx_Flanger->changepar(3,(int)o->value());}
+    xywh {52 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice flanger_lfotype {
+    label {LFO Type}
+    callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
+    xywh {63 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    code0 {o->menu(m_lfo_menu->get_lfo_type());}
+  } {}
+  Fl_Check_Button flanger_subs {
+    label Subtract
+    user_data 2
+    callback {rkr->efx_Flanger->changepar(11,(int)o->value());}
+    xywh {32 94 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Check_Button flanger_awesome {
+    label Intense
+    user_data 2
+    callback {rkr->efx_Flanger->changepar(12,(int)o->value());}
+    xywh {94 94 58 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Value_Slider flanger_stdf {
+    label {St.df}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(100);
+ return;
+} 
+rkr->efx_Flanger->changepar(5,(int)o->value());}
+    xywh {52 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider flanger_dpth {
+    label Depth
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(22);
+ return;
+} 
+rkr->efx_Flanger->changepar(6,(int)o->value());}
+    xywh {52 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider flanger_delay {
+    label Delay
+    callback {rkr->efx_Flanger->changepar(7,(int)o->value());}
+    xywh {52 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider flanger_fb {
+    label Fb
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(80);
+ return;
+} 
+rkr->efx_Flanger->changepar(8,(int)o->value());}
+    xywh {52 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider flanger_LR {
+    label {L/R.Cr}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(92);
+ return;
+} 
+rkr->efx_Flanger->changepar(9,(int)(o->value()+64));}
+    xywh {52 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  decl {CommonGuiMenu *m_lfo_menu;} {selected private local
+  }
+}
