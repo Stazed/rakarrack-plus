@@ -751,135 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_echo_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Echo_Bypass);
- return;
-}
-rkr->Echo_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Echo->cleanup();
-findpos(4,(int)o->value(),o);
-}
-void RKRGUI::cb_echo_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_activar_i(o,v);
-}
-
-void RKRGUI::cb_echo_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12004))rkr->efx_Echo->setpreset((int) o->value());
-echo_WD->value(rkr->efx_Echo->getpar(0)-64);
-echo_pan->value(rkr->efx_Echo->getpar(1)-64);
-echo_delay->value(rkr->efx_Echo->getpar(2));
-echo_LRdl->value(rkr->efx_Echo->getpar(3));
-echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
-echo_fb->value(rkr->efx_Echo->getpar(5));
-echo_damp->value(rkr->efx_Echo->getpar(6));
-echo_RV->value(rkr->efx_Echo->getpar(7));
-echo_direct->value(rkr->efx_Echo->getpar(8));
-}
-void RKRGUI::cb_echo_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_echo_preset[] = {
- {"Echo 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Echo 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Echo 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Simple Echo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Canyon", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Panning Echo 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Feedback Echo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_echo_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(59);
- return;
-} 
-rkr->efx_Echo->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_echo_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_WD_i(o,v);
-}
-
-void RKRGUI::cb_echo_RV_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_echo_RV(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_RV_i(o,v);
-}
-
-void RKRGUI::cb_echo_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(46);
- return;
-} 
-rkr->efx_Echo->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_echo_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_pan_i(o,v);
-}
-
-void RKRGUI::cb_echo_delay_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_echo_delay(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_delay_i(o,v);
-}
-
-void RKRGUI::cb_echo_LRdl_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_echo_LRdl(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_LRdl_i(o,v);
-}
-
-void RKRGUI::cb_echo_LRc_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(97);
- return;
-} 
-rkr->efx_Echo->changepar(4,(int)(o->value()+64));
-}
-void RKRGUI::cb_echo_LRc(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_LRc_i(o,v);
-}
-
-void RKRGUI::cb_echo_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(78);
- return;
-} 
-rkr->efx_Echo->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_echo_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_fb_i(o,v);
-}
-
-void RKRGUI::cb_echo_direct_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Echo->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_echo_direct(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_direct_i(o,v);
-}
-
-void RKRGUI::cb_echo_damp_i(SliderW* o, void*) {
-  rkr->efx_Echo->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_echo_damp(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_echo_damp_i(o,v);
-}
-
 void RKRGUI::cb_chorus_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -10424,174 +10295,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       OVRD->hide();
       OVRD->end();
     } // OvrdGui* OVRD
-    { ECHO = new Fl_Group(639, 212, 158, 184);
+    { ECHO = new EchoGui(639, 212, 158, 184);
       ECHO->box(FL_UP_BOX);
       ECHO->color(FL_FOREGROUND_COLOR);
       ECHO->selection_color(FL_FOREGROUND_COLOR);
+      ECHO->labeltype(FL_NORMAL_LABEL);
       ECHO->labelfont(1);
+      ECHO->labelsize(14);
+      ECHO->labelcolor(FL_FOREGROUND_COLOR);
       ECHO->user_data((void*)(1));
       ECHO->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      { echo_activar = new Fl_Light_Button(644, 216, 34, 18, "On");
-        echo_activar->shortcut(0x35);
-        echo_activar->color((Fl_Color)62);
-        echo_activar->selection_color((Fl_Color)1);
-        echo_activar->labelsize(10);
-        echo_activar->callback((Fl_Callback*)cb_echo_activar, (void*)(2));
-        echo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        echo_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* echo_activar
-      { echo_preset = new Fl_Choice(716, 216, 76, 18, "Preset");
-        echo_preset->down_box(FL_BORDER_BOX);
-        echo_preset->selection_color(FL_FOREGROUND_COLOR);
-        echo_preset->labelsize(10);
-        echo_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_preset->textsize(10);
-        echo_preset->textcolor(FL_BACKGROUND2_COLOR);
-        echo_preset->callback((Fl_Callback*)cb_echo_preset, (void*)(12004));
-        echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        echo_preset->menu(menu_echo_preset);
-      } // Fl_Choice* echo_preset
-      { echo_WD = new SliderW(690, 247, 100, 10, "Wet/Dry");
-        echo_WD->type(5);
-        echo_WD->box(FL_FLAT_BOX);
-        echo_WD->color((Fl_Color)178);
-        echo_WD->selection_color((Fl_Color)62);
-        echo_WD->labeltype(FL_NORMAL_LABEL);
-        echo_WD->labelfont(0);
-        echo_WD->labelsize(10);
-        echo_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_WD->minimum(-64);
-        echo_WD->maximum(63);
-        echo_WD->step(1);
-        echo_WD->textcolor(FL_BACKGROUND2_COLOR);
-        echo_WD->callback((Fl_Callback*)cb_echo_WD);
-        echo_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* echo_WD
-      { echo_RV = new SliderW(690, 270, 100, 10, "Reverse");
-        echo_RV->type(5);
-        echo_RV->box(FL_FLAT_BOX);
-        echo_RV->color((Fl_Color)178);
-        echo_RV->selection_color((Fl_Color)62);
-        echo_RV->labeltype(FL_NORMAL_LABEL);
-        echo_RV->labelfont(0);
-        echo_RV->labelsize(10);
-        echo_RV->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_RV->maximum(127);
-        echo_RV->step(1);
-        echo_RV->textcolor(FL_BACKGROUND2_COLOR);
-        echo_RV->callback((Fl_Callback*)cb_echo_RV);
-        echo_RV->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_RV->when(FL_WHEN_CHANGED);
-      } // SliderW* echo_RV
-      { echo_pan = new SliderW(690, 285, 100, 10, "Pan");
-        echo_pan->type(5);
-        echo_pan->box(FL_FLAT_BOX);
-        echo_pan->color((Fl_Color)178);
-        echo_pan->selection_color((Fl_Color)62);
-        echo_pan->labeltype(FL_NORMAL_LABEL);
-        echo_pan->labelfont(0);
-        echo_pan->labelsize(10);
-        echo_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_pan->minimum(-64);
-        echo_pan->maximum(63);
-        echo_pan->step(1);
-        echo_pan->textcolor(FL_BACKGROUND2_COLOR);
-        echo_pan->callback((Fl_Callback*)cb_echo_pan);
-        echo_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* echo_pan
-      { echo_delay = new SliderW(690, 300, 100, 10, "Delay");
-        echo_delay->type(5);
-        echo_delay->box(FL_FLAT_BOX);
-        echo_delay->color((Fl_Color)178);
-        echo_delay->selection_color((Fl_Color)62);
-        echo_delay->labeltype(FL_NORMAL_LABEL);
-        echo_delay->labelfont(0);
-        echo_delay->labelsize(10);
-        echo_delay->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_delay->minimum(20);
-        echo_delay->maximum(2000);
-        echo_delay->step(1);
-        echo_delay->value(20);
-        echo_delay->textcolor(FL_BACKGROUND2_COLOR);
-        echo_delay->callback((Fl_Callback*)cb_echo_delay);
-        echo_delay->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_delay->when(FL_WHEN_RELEASE);
-      } // SliderW* echo_delay
-      { echo_LRdl = new SliderW(690, 315, 100, 10, "LRdl.");
-        echo_LRdl->type(5);
-        echo_LRdl->box(FL_FLAT_BOX);
-        echo_LRdl->color((Fl_Color)178);
-        echo_LRdl->selection_color((Fl_Color)62);
-        echo_LRdl->labeltype(FL_NORMAL_LABEL);
-        echo_LRdl->labelfont(0);
-        echo_LRdl->labelsize(10);
-        echo_LRdl->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_LRdl->maximum(127);
-        echo_LRdl->step(1);
-        echo_LRdl->textcolor(FL_BACKGROUND2_COLOR);
-        echo_LRdl->callback((Fl_Callback*)cb_echo_LRdl);
-        echo_LRdl->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_LRdl->when(FL_WHEN_RELEASE);
-      } // SliderW* echo_LRdl
-      { echo_LRc = new SliderW(690, 330, 100, 10, "L/R.Cr");
-        echo_LRc->type(5);
-        echo_LRc->box(FL_FLAT_BOX);
-        echo_LRc->color((Fl_Color)178);
-        echo_LRc->selection_color((Fl_Color)62);
-        echo_LRc->labeltype(FL_NORMAL_LABEL);
-        echo_LRc->labelfont(0);
-        echo_LRc->labelsize(10);
-        echo_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_LRc->minimum(-64);
-        echo_LRc->maximum(63);
-        echo_LRc->step(1);
-        echo_LRc->textcolor(FL_BACKGROUND2_COLOR);
-        echo_LRc->callback((Fl_Callback*)cb_echo_LRc);
-        echo_LRc->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_LRc->when(FL_WHEN_CHANGED);
-      } // SliderW* echo_LRc
-      { echo_fb = new SliderW(690, 345, 100, 10, "Fb.");
-        echo_fb->type(5);
-        echo_fb->box(FL_FLAT_BOX);
-        echo_fb->color((Fl_Color)178);
-        echo_fb->selection_color((Fl_Color)62);
-        echo_fb->labeltype(FL_NORMAL_LABEL);
-        echo_fb->labelfont(0);
-        echo_fb->labelsize(10);
-        echo_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_fb->maximum(127);
-        echo_fb->step(1);
-        echo_fb->textcolor(FL_BACKGROUND2_COLOR);
-        echo_fb->callback((Fl_Callback*)cb_echo_fb);
-        echo_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* echo_fb
-      { echo_direct = new Fl_Check_Button(690, 360, 53, 15, "Direct");
-        echo_direct->down_box(FL_BORDER_BOX);
-        echo_direct->labelsize(10);
-        echo_direct->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_direct->callback((Fl_Callback*)cb_echo_direct, (void*)(2));
-      } // Fl_Check_Button* echo_direct
-      { echo_damp = new SliderW(690, 379, 100, 10, "Damp");
-        echo_damp->type(5);
-        echo_damp->box(FL_FLAT_BOX);
-        echo_damp->color((Fl_Color)178);
-        echo_damp->selection_color((Fl_Color)62);
-        echo_damp->labeltype(FL_NORMAL_LABEL);
-        echo_damp->labelfont(0);
-        echo_damp->labelsize(10);
-        echo_damp->labelcolor(FL_BACKGROUND2_COLOR);
-        echo_damp->maximum(127);
-        echo_damp->step(1);
-        echo_damp->textcolor(FL_BACKGROUND2_COLOR);
-        echo_damp->callback((Fl_Callback*)cb_echo_damp);
-        echo_damp->align(Fl_Align(FL_ALIGN_LEFT));
-        echo_damp->when(FL_WHEN_CHANGED);
-      } // SliderW* echo_damp
+      ECHO->when(FL_WHEN_RELEASE);
+      ECHO->hide();
       ECHO->end();
-    } // Fl_Group* ECHO
+    } // EchoGui* ECHO
     { CHORUS = new Fl_Group(2, 413, 158, 184);
       CHORUS->box(FL_UP_BOX);
       CHORUS->color(FL_FOREGROUND_COLOR);
@@ -21486,8 +21203,8 @@ void RKRGUI::Put_Loaded() {
        break; 
   
        case 4://Echo
-       echo_activar->value(rkr->Echo_Bypass);
-       echo_preset->do_callback(echo_preset,1);
+       ECHO->echo_activar->value(rkr->Echo_Bypass);
+       ECHO->echo_preset->do_callback(ECHO->echo_preset,1);
        break;
        
        case 5://Chorus
@@ -22014,7 +21731,7 @@ void RKRGUI::reordena() {
        case 4:
       
          ECHO->position(x[i],y[i]);
-         echo_activar->shortcut(s[i]);
+         ECHO->echo_activar->shortcut(s[i]);
          if(!rkr->deachide)ECHO->show();
          if(rkr->Echo_Bypass)
          {
@@ -23216,12 +22933,12 @@ void RKRGUI::ActMIDI() {
        pan_WD->redraw();
        break;
        case 59:
-       echo_WD->value(rkr->efx_Echo->getpar(0)-64);
-       echo_WD->redraw();
+       ECHO->echo_WD->value(rkr->efx_Echo->getpar(0)-64);
+       ECHO->echo_WD->redraw();
        break;
        case 46:
-       echo_pan->value(rkr->efx_Echo->getpar(1)-64);
-       echo_pan->redraw();
+       ECHO->echo_pan->value(rkr->efx_Echo->getpar(1)-64);
+       ECHO->echo_pan->redraw();
        break;
        case 47:
        OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
@@ -23312,8 +23029,8 @@ void RKRGUI::ActMIDI() {
        pan_freq->redraw();
        break;
        case 78:
-       echo_fb->value(rkr->efx_Echo->getpar(5));
-       echo_fb->redraw();
+       ECHO->echo_fb->value(rkr->efx_Echo->getpar(5));
+       ECHO->echo_fb->redraw();
        break;
        case 79:
        chorus_fb->value(rkr->efx_Chorus->getpar(8));
@@ -23388,8 +23105,8 @@ void RKRGUI::ActMIDI() {
        Alienwah_LR->redraw();
        break;
        case 97:
-       echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
-       echo_LRc->redraw();
+       ECHO->echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
+       ECHO->echo_LRc->redraw();
        break;
        case 98:
        musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
@@ -24678,8 +24395,8 @@ void RKRGUI::ActOnOff() {
     OVRD->ovrd_activar->do_callback();
     break;
     case 4:
-    echo_activar->value(rkr->Echo_Bypass);
-    echo_activar->do_callback();
+    ECHO->echo_activar->value(rkr->Echo_Bypass);
+    ECHO->echo_activar->do_callback();
     break;
     case 5:
     chorus_activar->value(rkr->Chorus_Bypass);
@@ -25711,8 +25428,8 @@ void RKRGUI::UpdateTGUI() {
     }
     if(rkr->Echo_Bypass)
     { 
-     echo_delay->value(rkr->efx_Echo->getpar(2));
-     echo_delay->redraw();
+     ECHO->echo_delay->value(rkr->efx_Echo->getpar(2));
+     ECHO->echo_delay->redraw();
     }
     if(rkr->Echotron_Bypass)
     { 
@@ -26465,7 +26182,7 @@ void RKRGUI::RandomPreset() {
   
        case 4://Echo
        if (i<numEff)rkr->Echo_Bypass=1; else rkr->Echo_Bypass=0;
-       echo_activar->value(rkr->Echo_Bypass);
+       ECHO->echo_activar->value(rkr->Echo_Bypass);
        break;
        
        case 5://Chorus

@@ -28,6 +28,7 @@ class EqGui; // forward declaration
 class CompressGui; // forward declaration
 class DistGui; // forward declaration
 class OvrdGui; // forward declaration
+class EchoGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -38,6 +39,7 @@ class SustainGui; // forward declaration
 #include "compress_gui.h"
 #include "dist_gui.h"
 #include "ovrd_gui.h"
+#include "echo_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -205,63 +207,7 @@ public:
   CompressGui *COMPRESS;
   DistGui *DIST;
   OvrdGui *OVRD;
-  Fl_Group *ECHO;
-  Fl_Light_Button *echo_activar;
-private:
-  inline void cb_echo_activar_i(Fl_Light_Button*, void*);
-  static void cb_echo_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *echo_preset;
-private:
-  inline void cb_echo_preset_i(Fl_Choice*, void*);
-  static void cb_echo_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_echo_preset[];
-public:
-  SliderW *echo_WD;
-private:
-  inline void cb_echo_WD_i(SliderW*, void*);
-  static void cb_echo_WD(SliderW*, void*);
-public:
-  SliderW *echo_RV;
-private:
-  inline void cb_echo_RV_i(SliderW*, void*);
-  static void cb_echo_RV(SliderW*, void*);
-public:
-  SliderW *echo_pan;
-private:
-  inline void cb_echo_pan_i(SliderW*, void*);
-  static void cb_echo_pan(SliderW*, void*);
-public:
-  SliderW *echo_delay;
-private:
-  inline void cb_echo_delay_i(SliderW*, void*);
-  static void cb_echo_delay(SliderW*, void*);
-public:
-  SliderW *echo_LRdl;
-private:
-  inline void cb_echo_LRdl_i(SliderW*, void*);
-  static void cb_echo_LRdl(SliderW*, void*);
-public:
-  SliderW *echo_LRc;
-private:
-  inline void cb_echo_LRc_i(SliderW*, void*);
-  static void cb_echo_LRc(SliderW*, void*);
-public:
-  SliderW *echo_fb;
-private:
-  inline void cb_echo_fb_i(SliderW*, void*);
-  static void cb_echo_fb(SliderW*, void*);
-public:
-  Fl_Check_Button *echo_direct;
-private:
-  inline void cb_echo_direct_i(Fl_Check_Button*, void*);
-  static void cb_echo_direct(Fl_Check_Button*, void*);
-public:
-  SliderW *echo_damp;
-private:
-  inline void cb_echo_damp_i(SliderW*, void*);
-  static void cb_echo_damp(SliderW*, void*);
-public:
+  EchoGui *ECHO;
   Fl_Group *CHORUS;
   Fl_Light_Button *chorus_activar;
 private:

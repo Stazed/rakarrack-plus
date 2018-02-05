@@ -19,6 +19,7 @@ set (ProgSources
     UI/compress_gui.cxx
     UI/dist_gui.cxx
     UI/ovrd_gui.cxx
+    UI/echo_gui.cxx
     process.C
     fileio.C
     varios.C
