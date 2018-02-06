@@ -95,6 +95,9 @@ decl {class ReverbGui; // forward declaration} {public global
 decl {class PeqGui; // forward declaration} {public global
 }
 
+decl {class WhawhaGui; // forward declaration} {selected public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -166,7 +169,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {201 86 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1001,7 +1004,7 @@ Fl::focus(Open_Order);
         class ReverbGui
       } {}
       Fl_Group PEQ {
-        user_data 1 selected
+        user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "peq_gui.h"}
         class PeqGui
@@ -1009,168 +1012,9 @@ Fl::focus(Open_Order);
       Fl_Group WHAWHA {
         user_data 1
         xywh {320 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button WhaWha_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->WhaWha_Bypass);
- return;
-}
-rkr->WhaWha_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_WhaWha->cleanup();
-findpos(10,(int)o->value(),o);}
-          xywh {325 214 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice WhaWha_preset {
-          label Preset
-          user_data 12010
-          callback {rkr->WhaWha_Bypass=0;
-long long ud= (long long) v;
-if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
-WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
-WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
-WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
-WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
-WhaWha_lfotype->value(rkr->efx_WhaWha->getpar(4));
-WhaWha_stdf->value(rkr->efx_WhaWha->getpar(5));
-WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
-WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
-WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
-WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
-if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
-          xywh {397 214 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label WahWah
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label AutoWah
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Sweep
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label VocalMorph1
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label VocalMorph2
-            xywh {82 82 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider WhaWha_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(28);
- return;
-} 
-rkr->efx_WhaWha->changepar(0,(int)(o->value()+64));}
-          xywh {369 239 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider WhaWha_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(66);
- return;
-} 
-rkr->efx_WhaWha->changepar(1,(int)(o->value()+64));}
-          xywh {369 251 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider WhaWha_freq {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(75);
- return;
-} 
-rkr->efx_WhaWha->changepar(2,(int)o->value());}
-          xywh {369 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider WhaWha_rnd {
-          label Rnd
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(108);
- return;
-} 
-rkr->efx_WhaWha->changepar(3,(int)o->value());}
-          xywh {369 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice WhaWha_lfotype {
-          label {LFO Type}
-          callback {rkr->efx_WhaWha->changepar(4,(int)o->value())} open
-          xywh {381 289 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Value_Slider WhaWha_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(102);
- return;
-} 
-rkr->efx_WhaWha->changepar(5,(int)o->value());}
-          xywh {369 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider WhaWha_dpth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(1);
- return;
-} 
-rkr->efx_WhaWha->changepar(6,(int)o->value());}
-          xywh {369 327 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider WhaWha_ampsns {
-          label {Amp.S.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(111);
- return;
-} 
-rkr->efx_WhaWha->changepar(7,(int)o->value());}
-          xywh {369 339 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button WhaWha_ampsnsinv {
-          label {Amp.S Inv}
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(112);
- return;
-} 
-rkr->efx_WhaWha->changepar(8,(int)o->value());}
-          xywh {375 357 70 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider WhaWha_smooth {
-          label Smooth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(113);
- return;
-} 
-rkr->efx_WhaWha->changepar(9,(int)o->value());}
-          xywh {369 375 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        code0 {\#include "whawha_gui.h"}
+        class WhawhaGui
+      } {}
       Fl_Group ALIENWAH {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -11122,8 +10966,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break; 
      
      case 10://WahWah
-     WhaWha_activar->value(rkr->WhaWha_Bypass);
-     WhaWha_preset->do_callback(WhaWha_preset,1);
+     WHAWHA->WhaWha_activar->value(rkr->WhaWha_Bypass);
+     WHAWHA->WhaWha_preset->do_callback(WHAWHA->WhaWha_preset,1);
      break;
 
      case 11://AlienWah
@@ -11697,7 +11541,7 @@ switch (rkr->efx_order[i])
      case 10:
     
        WHAWHA->position(x[i],y[i]);
-       WhaWha_activar->shortcut(s[i]);
+       WHAWHA->WhaWha_activar->shortcut(s[i]);
        if(!rkr->deachide)WHAWHA->show();
        if(rkr->WhaWha_Bypass)
        {
@@ -12733,8 +12577,8 @@ switch (i)
      Nivel_Salida->redraw();
      break;  
      case 1:
-     WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
-     WhaWha_dpth->redraw();
+     WHAWHA->WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
+     WHAWHA->WhaWha_dpth->redraw();
      break;
      case 20:
      Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
@@ -12769,8 +12613,8 @@ switch (i)
      har_int->redraw();
      break;
      case 28:
-     WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
-     WhaWha_WD->redraw();
+     WHAWHA->WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
+     WHAWHA->WhaWha_WD->redraw();
      break;
      case 29:
      OVRD->ovrd_WD->value(rkr->efx_Overdrive->getpar(0)-64);
@@ -12861,8 +12705,8 @@ switch (i)
      musdelay_pan2->redraw();
      break;
      case 66:
-     WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
-     WhaWha_pan->redraw();
+     WHAWHA->WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
+     WHAWHA->WhaWha_pan->redraw();
      break;
      case 67:
      pan_pan->value(rkr->efx_Pan->getpar(1)-64);
@@ -12897,8 +12741,8 @@ switch (i)
      PHASER->phaser_freq->redraw();
      break;
      case 75:
-     WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
-     WhaWha_freq->redraw();
+     WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
+     WHAWHA->WhaWha_freq->redraw();
      break;
      case 76:
      Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
@@ -13005,8 +12849,8 @@ switch (i)
      PHASER->phaser_stdf->redraw();
      break;
      case 102:
-     WhaWha_stdf->value(rkr->efx_WhaWha->getpar(5));
-     WhaWha_stdf->redraw();
+     WHAWHA->WhaWha_stdf->value(rkr->efx_WhaWha->getpar(5));
+     WHAWHA->WhaWha_stdf->redraw();
      break;
      case 103:
      Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
@@ -13029,8 +12873,8 @@ switch (i)
      PHASER->phaser_rnd->redraw();
      break;
      case 108:
-     WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
-     WhaWha_rnd->redraw();
+     WHAWHA->WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
+     WHAWHA->WhaWha_rnd->redraw();
      break;
      case 109:
      Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
@@ -13041,16 +12885,16 @@ switch (i)
      pan_rnd->redraw();
      break;
      case 111:
-     WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
-     WhaWha_ampsns->redraw();
+     WHAWHA->WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
+     WHAWHA->WhaWha_ampsns->redraw();
      break;
      case 112:
-     WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
-     WhaWha_ampsnsinv->redraw();
+     WHAWHA->WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
+     WHAWHA->WhaWha_ampsnsinv->redraw();
      break;
      case 113:
-     WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
-     WhaWha_smooth->redraw();
+     WHAWHA->WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
+     WHAWHA->WhaWha_smooth->redraw();
      break;
      case 114:
      PHASER->phaser_phase->value(rkr->efx_Phaser->getpar(11));
@@ -14299,8 +14143,8 @@ switch(miralo)
   PEQ->eqp_activar->do_callback();
   break;
   case 10:
-  WhaWha_activar->value(rkr->WhaWha_Bypass);
-  WhaWha_activar->do_callback();
+  WHAWHA->WhaWha_activar->value(rkr->WhaWha_Bypass);
+  WHAWHA->WhaWha_activar->do_callback();
   break;
   case 11:
   Alienwah_activar->value(rkr->Alienwah_Bypass);
@@ -15225,8 +15069,8 @@ if(rkr->Chorus_Bypass)
   
   if(rkr->WhaWha_Bypass)
   {
-  WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
-  WhaWha_freq->redraw();
+  WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
+  WHAWHA->WhaWha_freq->redraw();
   }
   
   if(rkr->Alienwah_Bypass)
@@ -16066,7 +15910,7 @@ for(i=0;i<10;i++)
      
      case 10://WahWah
      if (i<numEff)rkr->WhaWha_Bypass=1; else rkr->WhaWha_Bypass=0;
-     WhaWha_activar->value(rkr->WhaWha_Bypass);
+     WHAWHA->WhaWha_activar->value(rkr->WhaWha_Bypass);
      break;
 
      case 11://AlienWah

@@ -34,6 +34,7 @@ class PhaserGui; // forward declaration
 class FlangerGui; // forward declaration
 class ReverbGui; // forward declaration
 class PeqGui; // forward declaration
+class WhawhaGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -50,6 +51,7 @@ class SustainGui; // forward declaration
 #include "flanger_gui.h"
 #include "reverb_gui.h"
 #include "peq_gui.h"
+#include "whawha_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -223,68 +225,7 @@ public:
   FlangerGui *FLANGER;
   ReverbGui *REVERB;
   PeqGui *PEQ;
-  Fl_Group *WHAWHA;
-  Fl_Light_Button *WhaWha_activar;
-private:
-  inline void cb_WhaWha_activar_i(Fl_Light_Button*, void*);
-  static void cb_WhaWha_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *WhaWha_preset;
-private:
-  inline void cb_WhaWha_preset_i(Fl_Choice*, void*);
-  static void cb_WhaWha_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_WhaWha_preset[];
-public:
-  SliderW *WhaWha_WD;
-private:
-  inline void cb_WhaWha_WD_i(SliderW*, void*);
-  static void cb_WhaWha_WD(SliderW*, void*);
-public:
-  SliderW *WhaWha_pan;
-private:
-  inline void cb_WhaWha_pan_i(SliderW*, void*);
-  static void cb_WhaWha_pan(SliderW*, void*);
-public:
-  SliderW *WhaWha_freq;
-private:
-  inline void cb_WhaWha_freq_i(SliderW*, void*);
-  static void cb_WhaWha_freq(SliderW*, void*);
-public:
-  SliderW *WhaWha_rnd;
-private:
-  inline void cb_WhaWha_rnd_i(SliderW*, void*);
-  static void cb_WhaWha_rnd(SliderW*, void*);
-public:
-  Fl_Choice *WhaWha_lfotype;
-private:
-  inline void cb_WhaWha_lfotype_i(Fl_Choice*, void*);
-  static void cb_WhaWha_lfotype(Fl_Choice*, void*);
-public:
-  SliderW *WhaWha_stdf;
-private:
-  inline void cb_WhaWha_stdf_i(SliderW*, void*);
-  static void cb_WhaWha_stdf(SliderW*, void*);
-public:
-  SliderW *WhaWha_dpth;
-private:
-  inline void cb_WhaWha_dpth_i(SliderW*, void*);
-  static void cb_WhaWha_dpth(SliderW*, void*);
-public:
-  SliderW *WhaWha_ampsns;
-private:
-  inline void cb_WhaWha_ampsns_i(SliderW*, void*);
-  static void cb_WhaWha_ampsns(SliderW*, void*);
-public:
-  Fl_Check_Button *WhaWha_ampsnsinv;
-private:
-  inline void cb_WhaWha_ampsnsinv_i(Fl_Check_Button*, void*);
-  static void cb_WhaWha_ampsnsinv(Fl_Check_Button*, void*);
-public:
-  SliderW *WhaWha_smooth;
-private:
-  inline void cb_WhaWha_smooth_i(SliderW*, void*);
-  static void cb_WhaWha_smooth(SliderW*, void*);
-public:
+  WhawhaGui *WHAWHA;
   Fl_Group *ALIENWAH;
   Fl_Light_Button *Alienwah_activar;
 private:
