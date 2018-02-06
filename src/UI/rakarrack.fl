@@ -110,6 +110,9 @@ decl {class PanGui; // forward declaration} {public global
 decl {class HarGui; // forward declaration} {public global
 }
 
+decl {class MusdelayGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -180,7 +183,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
+Pexitprogram=1;} open
       xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1052,233 +1055,11 @@ Fl::focus(Open_Order);
         class HarGui
       } {}
       Fl_Group MUSDELAY {
-        user_data 1
-        xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button musdelay_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->MusDelay_Bypass);
- return;
-}
-rkr->MusDelay_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_MusDelay->cleanup();
-findpos(15,(int)o->value(),o);}
-          xywh {485 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice musdelay_preset {
-          label Preset
-          user_data 12015
-          callback {rkr->MusDelay_Bypass=0;
-long long ud= (long long) v;
-if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
-musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
-musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
-musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
-musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
-musdelay_delay1->value(rkr->efx_MusDelay->getpar(2)-1);
-musdelay_delay2->value(rkr->efx_MusDelay->getpar(8)-1);
-musdelay_delay3->value(rkr->efx_MusDelay->getpar(3)-1);
-musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
-musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
-musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
-musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
-musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
-musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {557 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Echo 1}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Echo 2}
-            xywh {62 62 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider musdelay_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(56);
- return;
-} 
-rkr->efx_MusDelay->changepar(0,(int)o->value()+64);}
-          xywh {533 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_LRc {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(98);
- return;
-} 
-rkr->efx_MusDelay->changepar(4,(int)o->value()+64);}
-          xywh {533 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_pan1 {
-          label Pan1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(62);
- return;
-} 
-rkr->efx_MusDelay->changepar(1,(int)o->value()+64);}
-          xywh {533 262 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_pan2 {
-          label Pan2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(65);
- return;
-} 
-rkr->efx_MusDelay->changepar(7,(int)o->value()+64);}
-          xywh {533 274 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice musdelay_delay1 {
-          user_data 12
-          callback {rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(2,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {490 294 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label 1
-            xywh {0 0 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/2}
-            xywh {10 10 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/3}
-            xywh {20 20 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/4}
-            xywh {30 30 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/5}
-            xywh {40 40 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/6}
-            xywh {50 50 45 26} labelsize 10
-          }
-        }
-        Fl_Choice musdelay_delay3 {
-          user_data 12
-          callback {rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(3,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {542 294 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label 1
-            xywh {10 10 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/2}
-            xywh {20 20 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/3}
-            xywh {30 30 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/4}
-            xywh {40 40 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/5}
-            xywh {50 50 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {1/6}
-            xywh {60 60 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label 0
-            xywh {0 0 45 26} labelsize 10
-          }
-        }
-        Fl_Choice musdelay_delay2 {
-          callback {rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(8,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {594 294 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_musdelay_delay1);}
-        } {}
-        Fl_Value_Slider musdelay_tempo {
-          label Tempo
-          callback {rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(10,(int)o->value());
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
-          xywh {533 315 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 10 maximum 480 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_gain1 {
-          label Gain1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(24);
- return;
-} 
-rkr->efx_MusDelay->changepar(11,(int)o->value()+64);}
-          xywh {533 334 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_gain2 {
-          label Gain2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(25);
- return;
-} 
-rkr->efx_MusDelay->changepar(12,(int)o->value()+64);}
-          xywh {533 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_fb1 {
-          label {Fb1.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(83);
- return;
-} 
-rkr->efx_MusDelay->changepar(5,(int)o->value());}
-          xywh {533 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_fb2 {
-          label {Fb2.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(84);
- return;
-} 
-rkr->efx_MusDelay->changepar(9,(int)o->value());}
-          xywh {533 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider musdelay_damp {
-          label Damp
-          callback {rkr->efx_MusDelay->changepar(6,(int)o->value());}
-          xywh {533 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        user_data 1 selected
+        xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "musdelay_gui.h"}
+        class MusdelayGui
+      } {}
       Fl_Group GATE {
         user_data 1
         xywh {162 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -10509,8 +10290,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 15://MsicalDelay
-     musdelay_activar->value(rkr->MusDelay_Bypass);
-     musdelay_preset->do_callback(musdelay_preset,1);
+     MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
+     MUSDELAY->musdelay_preset->do_callback(MUSDELAY->musdelay_preset,1);
      break; 
 
      case 16://NoiseGate
@@ -11121,7 +10902,7 @@ switch (rkr->efx_order[i])
      
      case 15:
        MUSDELAY->position(x[i],y[i]);
-       musdelay_activar->shortcut(s[i]);
+       MUSDELAY->musdelay_activar->shortcut(s[i]);
        if(!rkr->deachide)MUSDELAY->show();
        if(rkr->MusDelay_Bypass)
        {
@@ -12114,12 +11895,12 @@ switch (i)
      CHORUS->chorus_dpth->redraw();
      break;
      case 24:
-     musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
-     musdelay_gain1->redraw();
+     MUSDELAY->musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
+     MUSDELAY->musdelay_gain1->redraw();
      break;
      case 25:
-     musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
-     musdelay_gain2->redraw();
+     MUSDELAY->musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
+     MUSDELAY->musdelay_gain2->redraw();
      break;
      case 26:
      HAR->har_freq1->value(rkr->efx_Har->getpar(4));
@@ -12162,8 +11943,8 @@ switch (i)
      ALIENWAH->Alienwah_WD->redraw();
      break;
      case 56:
-     musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
-     musdelay_WD->redraw();
+     MUSDELAY->musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
+     MUSDELAY->musdelay_WD->redraw();
      break;
      case 57:
      REVERB->reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
@@ -12210,16 +11991,16 @@ switch (i)
      ALIENWAH->Alienwah_pan->redraw();
      break;
      case 62:
-     musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
-     musdelay_pan1->redraw();
+     MUSDELAY->musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
+     MUSDELAY->musdelay_pan1->redraw();
      break;
      case 63:
      REVERB->reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
      REVERB->reverb_pan->redraw();
      break;
      case 65:
-     musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
-     musdelay_pan2->redraw();
+     MUSDELAY->musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
+     MUSDELAY->musdelay_pan2->redraw();
      break;
      case 66:
      WHAWHA->WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
@@ -12290,12 +12071,12 @@ switch (i)
      ALIENWAH->Alienwah_fb->redraw();
      break;
      case 83:
-     musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
-     musdelay_fb1->redraw();
+     MUSDELAY->musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
+     MUSDELAY->musdelay_fb1->redraw();
      break;
      case 84:
-     musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
-     musdelay_fb2->redraw();
+     MUSDELAY->musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
+     MUSDELAY->musdelay_fb2->redraw();
      break;
      case 85:
      OVRD->ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
@@ -12350,8 +12131,8 @@ switch (i)
      ECHO->echo_LRc->redraw();
      break;
      case 98:
-     musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
-     musdelay_LRc->redraw();
+     MUSDELAY->musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
+     MUSDELAY->musdelay_LRc->redraw();
      break;
      case 99:
      CHORUS->chorus_stdf->value(rkr->efx_Chorus->getpar(5));
@@ -13680,8 +13461,8 @@ switch(miralo)
   HAR->har_activar->do_callback();
   break;
   case 15:
-  musdelay_activar->value(rkr->MusDelay_Bypass);
-  musdelay_activar->do_callback();
+  MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
+  MUSDELAY->musdelay_activar->do_callback();
   break;
   case 16:
   gate_activar->value(rkr->Gate_Bypass);
@@ -14598,8 +14379,8 @@ if(rkr->Chorus_Bypass)
   
   if(rkr->MusDelay_Bypass)
   {
-  musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
-  musdelay_tempo->redraw();
+  MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
+  MUSDELAY->musdelay_tempo->redraw();
   }
   
   if(rkr->APhaser_Bypass)
@@ -15452,7 +15233,7 @@ for(i=0;i<10;i++)
 
      case 15://MsicalDelay
      if (i<numEff)rkr->MusDelay_Bypass=1; else rkr->MusDelay_Bypass=0;
-     musdelay_activar->value(rkr->MusDelay_Bypass);
+     MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
      break; 
 
      case 16://NoiseGate

@@ -751,211 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_musdelay_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->MusDelay_Bypass);
- return;
-}
-rkr->MusDelay_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_MusDelay->cleanup();
-findpos(15,(int)o->value(),o);
-}
-void RKRGUI::cb_musdelay_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_activar_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_preset_i(Fl_Choice* o, void* v) {
-  rkr->MusDelay_Bypass=0;
-long long ud= (long long) v;
-if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
-musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
-musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
-musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
-musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
-musdelay_delay1->value(rkr->efx_MusDelay->getpar(2)-1);
-musdelay_delay2->value(rkr->efx_MusDelay->getpar(8)-1);
-musdelay_delay3->value(rkr->efx_MusDelay->getpar(3)-1);
-musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
-musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
-musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
-musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
-musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
-musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;
-}
-void RKRGUI::cb_musdelay_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_musdelay_preset[] = {
- {"Echo 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Echo 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_musdelay_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(56);
- return;
-} 
-rkr->efx_MusDelay->changepar(0,(int)o->value()+64);
-}
-void RKRGUI::cb_musdelay_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_WD_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_LRc_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(98);
- return;
-} 
-rkr->efx_MusDelay->changepar(4,(int)o->value()+64);
-}
-void RKRGUI::cb_musdelay_LRc(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_LRc_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_pan1_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(62);
- return;
-} 
-rkr->efx_MusDelay->changepar(1,(int)o->value()+64);
-}
-void RKRGUI::cb_musdelay_pan1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_pan1_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_pan2_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(65);
- return;
-} 
-rkr->efx_MusDelay->changepar(7,(int)o->value()+64);
-}
-void RKRGUI::cb_musdelay_pan2(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_pan2_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_delay1_i(Fl_Choice* o, void*) {
-  rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(2,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;
-}
-void RKRGUI::cb_musdelay_delay1(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_delay1_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_musdelay_delay1[] = {
- {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_musdelay_delay3_i(Fl_Choice* o, void*) {
-  rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(3,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;
-}
-void RKRGUI::cb_musdelay_delay3(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_delay3_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_musdelay_delay3[] = {
- {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"1/6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"0", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_musdelay_delay2_i(Fl_Choice* o, void*) {
-  rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(8,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;
-}
-void RKRGUI::cb_musdelay_delay2(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_delay2_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_tempo_i(SliderW* o, void*) {
-  rkr->MusDelay_Bypass=0;
-rkr->efx_MusDelay->changepar(10,(int)o->value());
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;
-}
-void RKRGUI::cb_musdelay_tempo(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_tempo_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_gain1_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(24);
- return;
-} 
-rkr->efx_MusDelay->changepar(11,(int)o->value()+64);
-}
-void RKRGUI::cb_musdelay_gain1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_gain1_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_gain2_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(25);
- return;
-} 
-rkr->efx_MusDelay->changepar(12,(int)o->value()+64);
-}
-void RKRGUI::cb_musdelay_gain2(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_gain2_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_fb1_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(83);
- return;
-} 
-rkr->efx_MusDelay->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_musdelay_fb1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_fb1_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_fb2_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(84);
- return;
-} 
-rkr->efx_MusDelay->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_musdelay_fb2(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_fb2_i(o,v);
-}
-
-void RKRGUI::cb_musdelay_damp_i(SliderW* o, void*) {
-  rkr->efx_MusDelay->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_musdelay_damp(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_musdelay_damp_i(o,v);
-}
-
 void RKRGUI::cb_gate_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -8952,230 +8747,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       HAR->hide();
       HAR->end();
     } // HarGui* HAR
-    { MUSDELAY = new Fl_Group(480, 212, 158, 184);
+    { MUSDELAY = new MusdelayGui(2, 413, 158, 184);
       MUSDELAY->box(FL_UP_BOX);
       MUSDELAY->color(FL_FOREGROUND_COLOR);
       MUSDELAY->selection_color(FL_FOREGROUND_COLOR);
+      MUSDELAY->labeltype(FL_NORMAL_LABEL);
       MUSDELAY->labelfont(1);
+      MUSDELAY->labelsize(14);
+      MUSDELAY->labelcolor(FL_FOREGROUND_COLOR);
       MUSDELAY->user_data((void*)(1));
       MUSDELAY->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      MUSDELAY->when(FL_WHEN_RELEASE);
       MUSDELAY->hide();
-      { musdelay_activar = new Fl_Light_Button(485, 216, 34, 18, "On");
-        musdelay_activar->shortcut(0x35);
-        musdelay_activar->color((Fl_Color)62);
-        musdelay_activar->selection_color((Fl_Color)1);
-        musdelay_activar->labelsize(10);
-        musdelay_activar->callback((Fl_Callback*)cb_musdelay_activar, (void*)(2));
-        musdelay_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        musdelay_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* musdelay_activar
-      { musdelay_preset = new Fl_Choice(557, 216, 76, 18, "Preset");
-        musdelay_preset->down_box(FL_BORDER_BOX);
-        musdelay_preset->selection_color(FL_FOREGROUND_COLOR);
-        musdelay_preset->labelsize(10);
-        musdelay_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_preset->textsize(10);
-        musdelay_preset->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset, (void*)(12015));
-        musdelay_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        musdelay_preset->menu(menu_musdelay_preset);
-      } // Fl_Choice* musdelay_preset
-      { musdelay_WD = new SliderW(533, 238, 100, 10, "Wet/Dry");
-        musdelay_WD->type(5);
-        musdelay_WD->box(FL_FLAT_BOX);
-        musdelay_WD->color((Fl_Color)178);
-        musdelay_WD->selection_color((Fl_Color)62);
-        musdelay_WD->labeltype(FL_NORMAL_LABEL);
-        musdelay_WD->labelfont(0);
-        musdelay_WD->labelsize(10);
-        musdelay_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_WD->minimum(-64);
-        musdelay_WD->maximum(63);
-        musdelay_WD->step(1);
-        musdelay_WD->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_WD->callback((Fl_Callback*)cb_musdelay_WD);
-        musdelay_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_WD
-      { musdelay_LRc = new SliderW(533, 250, 100, 10, "L/R.Cr");
-        musdelay_LRc->type(5);
-        musdelay_LRc->box(FL_FLAT_BOX);
-        musdelay_LRc->color((Fl_Color)178);
-        musdelay_LRc->selection_color((Fl_Color)62);
-        musdelay_LRc->labeltype(FL_NORMAL_LABEL);
-        musdelay_LRc->labelfont(0);
-        musdelay_LRc->labelsize(10);
-        musdelay_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_LRc->minimum(-64);
-        musdelay_LRc->maximum(63);
-        musdelay_LRc->step(1);
-        musdelay_LRc->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_LRc->callback((Fl_Callback*)cb_musdelay_LRc);
-        musdelay_LRc->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_LRc->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_LRc
-      { musdelay_pan1 = new SliderW(533, 262, 100, 10, "Pan1");
-        musdelay_pan1->type(5);
-        musdelay_pan1->box(FL_FLAT_BOX);
-        musdelay_pan1->color((Fl_Color)178);
-        musdelay_pan1->selection_color((Fl_Color)62);
-        musdelay_pan1->labeltype(FL_NORMAL_LABEL);
-        musdelay_pan1->labelfont(0);
-        musdelay_pan1->labelsize(10);
-        musdelay_pan1->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_pan1->minimum(-64);
-        musdelay_pan1->maximum(63);
-        musdelay_pan1->step(1);
-        musdelay_pan1->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_pan1->callback((Fl_Callback*)cb_musdelay_pan1);
-        musdelay_pan1->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_pan1->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_pan1
-      { musdelay_pan2 = new SliderW(533, 274, 100, 10, "Pan2");
-        musdelay_pan2->type(5);
-        musdelay_pan2->box(FL_FLAT_BOX);
-        musdelay_pan2->color((Fl_Color)178);
-        musdelay_pan2->selection_color((Fl_Color)62);
-        musdelay_pan2->labeltype(FL_NORMAL_LABEL);
-        musdelay_pan2->labelfont(0);
-        musdelay_pan2->labelsize(10);
-        musdelay_pan2->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_pan2->minimum(-64);
-        musdelay_pan2->maximum(63);
-        musdelay_pan2->step(1);
-        musdelay_pan2->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_pan2->callback((Fl_Callback*)cb_musdelay_pan2);
-        musdelay_pan2->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_pan2->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_pan2
-      { musdelay_delay1 = new Fl_Choice(490, 294, 38, 14);
-        musdelay_delay1->down_box(FL_BORDER_BOX);
-        musdelay_delay1->labelsize(10);
-        musdelay_delay1->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_delay1->textsize(10);
-        musdelay_delay1->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_delay1->callback((Fl_Callback*)cb_musdelay_delay1, (void*)(12));
-        musdelay_delay1->menu(menu_musdelay_delay1);
-      } // Fl_Choice* musdelay_delay1
-      { musdelay_delay3 = new Fl_Choice(542, 294, 38, 14);
-        musdelay_delay3->down_box(FL_BORDER_BOX);
-        musdelay_delay3->labelsize(10);
-        musdelay_delay3->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_delay3->textsize(10);
-        musdelay_delay3->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_delay3->callback((Fl_Callback*)cb_musdelay_delay3, (void*)(12));
-        musdelay_delay3->menu(menu_musdelay_delay3);
-      } // Fl_Choice* musdelay_delay3
-      { Fl_Choice* o = musdelay_delay2 = new Fl_Choice(594, 294, 38, 14);
-        musdelay_delay2->down_box(FL_BORDER_BOX);
-        musdelay_delay2->labelsize(10);
-        musdelay_delay2->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_delay2->textsize(10);
-        musdelay_delay2->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_delay2->callback((Fl_Callback*)cb_musdelay_delay2);
-        o->menu(menu_musdelay_delay1);
-      } // Fl_Choice* musdelay_delay2
-      { musdelay_tempo = new SliderW(533, 315, 100, 10, "Tempo");
-        musdelay_tempo->type(5);
-        musdelay_tempo->box(FL_FLAT_BOX);
-        musdelay_tempo->color((Fl_Color)178);
-        musdelay_tempo->selection_color((Fl_Color)62);
-        musdelay_tempo->labeltype(FL_NORMAL_LABEL);
-        musdelay_tempo->labelfont(0);
-        musdelay_tempo->labelsize(10);
-        musdelay_tempo->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_tempo->minimum(10);
-        musdelay_tempo->maximum(480);
-        musdelay_tempo->step(1);
-        musdelay_tempo->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_tempo->callback((Fl_Callback*)cb_musdelay_tempo);
-        musdelay_tempo->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_tempo->when(FL_WHEN_RELEASE);
-      } // SliderW* musdelay_tempo
-      { musdelay_gain1 = new SliderW(533, 334, 100, 10, "Gain1");
-        musdelay_gain1->type(5);
-        musdelay_gain1->box(FL_FLAT_BOX);
-        musdelay_gain1->color((Fl_Color)178);
-        musdelay_gain1->selection_color((Fl_Color)62);
-        musdelay_gain1->labeltype(FL_NORMAL_LABEL);
-        musdelay_gain1->labelfont(0);
-        musdelay_gain1->labelsize(10);
-        musdelay_gain1->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_gain1->minimum(-64);
-        musdelay_gain1->maximum(63);
-        musdelay_gain1->step(1);
-        musdelay_gain1->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_gain1->callback((Fl_Callback*)cb_musdelay_gain1);
-        musdelay_gain1->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_gain1->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_gain1
-      { musdelay_gain2 = new SliderW(533, 346, 100, 10, "Gain2");
-        musdelay_gain2->type(5);
-        musdelay_gain2->box(FL_FLAT_BOX);
-        musdelay_gain2->color((Fl_Color)178);
-        musdelay_gain2->selection_color((Fl_Color)62);
-        musdelay_gain2->labeltype(FL_NORMAL_LABEL);
-        musdelay_gain2->labelfont(0);
-        musdelay_gain2->labelsize(10);
-        musdelay_gain2->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_gain2->minimum(-64);
-        musdelay_gain2->maximum(63);
-        musdelay_gain2->step(1);
-        musdelay_gain2->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_gain2->callback((Fl_Callback*)cb_musdelay_gain2);
-        musdelay_gain2->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_gain2->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_gain2
-      { musdelay_fb1 = new SliderW(533, 358, 100, 10, "Fb1.");
-        musdelay_fb1->type(5);
-        musdelay_fb1->box(FL_FLAT_BOX);
-        musdelay_fb1->color((Fl_Color)178);
-        musdelay_fb1->selection_color((Fl_Color)62);
-        musdelay_fb1->labeltype(FL_NORMAL_LABEL);
-        musdelay_fb1->labelfont(0);
-        musdelay_fb1->labelsize(10);
-        musdelay_fb1->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_fb1->maximum(127);
-        musdelay_fb1->step(1);
-        musdelay_fb1->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_fb1->callback((Fl_Callback*)cb_musdelay_fb1);
-        musdelay_fb1->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_fb1->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_fb1
-      { musdelay_fb2 = new SliderW(533, 370, 100, 10, "Fb2.");
-        musdelay_fb2->type(5);
-        musdelay_fb2->box(FL_FLAT_BOX);
-        musdelay_fb2->color((Fl_Color)178);
-        musdelay_fb2->selection_color((Fl_Color)62);
-        musdelay_fb2->labeltype(FL_NORMAL_LABEL);
-        musdelay_fb2->labelfont(0);
-        musdelay_fb2->labelsize(10);
-        musdelay_fb2->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_fb2->maximum(127);
-        musdelay_fb2->step(1);
-        musdelay_fb2->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_fb2->callback((Fl_Callback*)cb_musdelay_fb2);
-        musdelay_fb2->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_fb2->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_fb2
-      { musdelay_damp = new SliderW(533, 382, 100, 10, "Damp");
-        musdelay_damp->type(5);
-        musdelay_damp->box(FL_FLAT_BOX);
-        musdelay_damp->color((Fl_Color)178);
-        musdelay_damp->selection_color((Fl_Color)62);
-        musdelay_damp->labeltype(FL_NORMAL_LABEL);
-        musdelay_damp->labelfont(0);
-        musdelay_damp->labelsize(10);
-        musdelay_damp->labelcolor(FL_BACKGROUND2_COLOR);
-        musdelay_damp->maximum(127);
-        musdelay_damp->step(1);
-        musdelay_damp->textcolor(FL_BACKGROUND2_COLOR);
-        musdelay_damp->callback((Fl_Callback*)cb_musdelay_damp);
-        musdelay_damp->align(Fl_Align(FL_ALIGN_LEFT));
-        musdelay_damp->when(FL_WHEN_CHANGED);
-      } // SliderW* musdelay_damp
       MUSDELAY->end();
-    } // Fl_Group* MUSDELAY
+    } // MusdelayGui* MUSDELAY
     { GATE = new Fl_Group(162, 211, 158, 184);
       GATE->box(FL_UP_BOX);
       GATE->color(FL_FOREGROUND_COLOR);
@@ -18124,8 +17709,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 15://MsicalDelay
-       musdelay_activar->value(rkr->MusDelay_Bypass);
-       musdelay_preset->do_callback(musdelay_preset,1);
+       MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
+       MUSDELAY->musdelay_preset->do_callback(MUSDELAY->musdelay_preset,1);
        break; 
   
        case 16://NoiseGate
@@ -18737,7 +18322,7 @@ void RKRGUI::reordena() {
        
        case 15:
          MUSDELAY->position(x[i],y[i]);
-         musdelay_activar->shortcut(s[i]);
+         MUSDELAY->musdelay_activar->shortcut(s[i]);
          if(!rkr->deachide)MUSDELAY->show();
          if(rkr->MusDelay_Bypass)
          {
@@ -19738,12 +19323,12 @@ void RKRGUI::ActMIDI() {
        CHORUS->chorus_dpth->redraw();
        break;
        case 24:
-       musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
-       musdelay_gain1->redraw();
+       MUSDELAY->musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
+       MUSDELAY->musdelay_gain1->redraw();
        break;
        case 25:
-       musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
-       musdelay_gain2->redraw();
+       MUSDELAY->musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
+       MUSDELAY->musdelay_gain2->redraw();
        break;
        case 26:
        HAR->har_freq1->value(rkr->efx_Har->getpar(4));
@@ -19786,8 +19371,8 @@ void RKRGUI::ActMIDI() {
        ALIENWAH->Alienwah_WD->redraw();
        break;
        case 56:
-       musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
-       musdelay_WD->redraw();
+       MUSDELAY->musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
+       MUSDELAY->musdelay_WD->redraw();
        break;
        case 57:
        REVERB->reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
@@ -19834,16 +19419,16 @@ void RKRGUI::ActMIDI() {
        ALIENWAH->Alienwah_pan->redraw();
        break;
        case 62:
-       musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
-       musdelay_pan1->redraw();
+       MUSDELAY->musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
+       MUSDELAY->musdelay_pan1->redraw();
        break;
        case 63:
        REVERB->reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
        REVERB->reverb_pan->redraw();
        break;
        case 65:
-       musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
-       musdelay_pan2->redraw();
+       MUSDELAY->musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
+       MUSDELAY->musdelay_pan2->redraw();
        break;
        case 66:
        WHAWHA->WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
@@ -19914,12 +19499,12 @@ void RKRGUI::ActMIDI() {
        ALIENWAH->Alienwah_fb->redraw();
        break;
        case 83:
-       musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
-       musdelay_fb1->redraw();
+       MUSDELAY->musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
+       MUSDELAY->musdelay_fb1->redraw();
        break;
        case 84:
-       musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
-       musdelay_fb2->redraw();
+       MUSDELAY->musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
+       MUSDELAY->musdelay_fb2->redraw();
        break;
        case 85:
        OVRD->ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
@@ -19974,8 +19559,8 @@ void RKRGUI::ActMIDI() {
        ECHO->echo_LRc->redraw();
        break;
        case 98:
-       musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
-       musdelay_LRc->redraw();
+       MUSDELAY->musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
+       MUSDELAY->musdelay_LRc->redraw();
        break;
        case 99:
        CHORUS->chorus_stdf->value(rkr->efx_Chorus->getpar(5));
@@ -21304,8 +20889,8 @@ void RKRGUI::ActOnOff() {
     HAR->har_activar->do_callback();
     break;
     case 15:
-    musdelay_activar->value(rkr->MusDelay_Bypass);
-    musdelay_activar->do_callback();
+    MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
+    MUSDELAY->musdelay_activar->do_callback();
     break;
     case 16:
     gate_activar->value(rkr->Gate_Bypass);
@@ -22235,8 +21820,8 @@ void RKRGUI::UpdateTGUI() {
     
     if(rkr->MusDelay_Bypass)
     {
-    musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
-    musdelay_tempo->redraw();
+    MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
+    MUSDELAY->musdelay_tempo->redraw();
     }
     
     if(rkr->APhaser_Bypass)
@@ -23102,7 +22687,7 @@ void RKRGUI::RandomPreset() {
   
        case 15://MsicalDelay
        if (i<numEff)rkr->MusDelay_Bypass=1; else rkr->MusDelay_Bypass=0;
-       musdelay_activar->value(rkr->MusDelay_Bypass);
+       MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
        break; 
   
        case 16://NoiseGate
