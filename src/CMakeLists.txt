@@ -35,6 +35,7 @@ set (ProgSources
     UI/newdist_gui.cxx
     UI/aphaser_gui.cxx
     UI/valve_gui.cxx
+    UI/dflange_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C

@@ -44,6 +44,7 @@ class GateGui; // forward declaration
 class NewdistGui; // forward declaration
 class AphaserGui; // forward declaration
 class ValveGui; // forward declaration
+class DflangeGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -70,6 +71,7 @@ class SustainGui; // forward declaration
 #include "newdist_gui.h"
 #include "aphaser_gui.h"
 #include "valve_gui.h"
+#include "dflange_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -253,93 +255,7 @@ public:
   NewdistGui *NEWDIST;
   AphaserGui *APHASER;
   ValveGui *VALVE;
-  Fl_Group *DFLANGE;
-  Fl_Light_Button *dflange_activar;
-private:
-  inline void cb_dflange_activar_i(Fl_Light_Button*, void*);
-  static void cb_dflange_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *dflange_preset;
-private:
-  inline void cb_dflange_preset_i(Fl_Choice*, void*);
-  static void cb_dflange_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_dflange_preset[];
-public:
-  SliderW *dflange_WD;
-private:
-  inline void cb_dflange_WD_i(SliderW*, void*);
-  static void cb_dflange_WD(SliderW*, void*);
-public:
-  SliderW *dflange_pan;
-private:
-  inline void cb_dflange_pan_i(SliderW*, void*);
-  static void cb_dflange_pan(SliderW*, void*);
-public:
-  SliderW *dflange_LR;
-private:
-  inline void cb_dflange_LR_i(SliderW*, void*);
-  static void cb_dflange_LR(SliderW*, void*);
-public:
-  SliderW *dflange_depth;
-private:
-  inline void cb_dflange_depth_i(SliderW*, void*);
-  static void cb_dflange_depth(SliderW*, void*);
-public:
-  SliderW *dflange_width;
-private:
-  inline void cb_dflange_width_i(SliderW*, void*);
-  static void cb_dflange_width(SliderW*, void*);
-public:
-  SliderW *dflange_offset;
-private:
-  inline void cb_dflange_offset_i(SliderW*, void*);
-  static void cb_dflange_offset(SliderW*, void*);
-public:
-  SliderW *dflange_fb;
-private:
-  inline void cb_dflange_fb_i(SliderW*, void*);
-  static void cb_dflange_fb(SliderW*, void*);
-public:
-  SliderW *dflange_lpf;
-private:
-  inline void cb_dflange_lpf_i(SliderW*, void*);
-  static void cb_dflange_lpf(SliderW*, void*);
-public:
-  Fl_Check_Button *dflange_subs;
-private:
-  inline void cb_dflange_subs_i(Fl_Check_Button*, void*);
-  static void cb_dflange_subs(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *dflange_tz;
-private:
-  inline void cb_dflange_tz_i(Fl_Check_Button*, void*);
-  static void cb_dflange_tz(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *dflange_intense;
-private:
-  inline void cb_dflange_intense_i(Fl_Check_Button*, void*);
-  static void cb_dflange_intense(Fl_Check_Button*, void*);
-public:
-  SliderW *dflange_freq;
-private:
-  inline void cb_dflange_freq_i(SliderW*, void*);
-  static void cb_dflange_freq(SliderW*, void*);
-public:
-  SliderW *dflange_stdf;
-private:
-  inline void cb_dflange_stdf_i(SliderW*, void*);
-  static void cb_dflange_stdf(SliderW*, void*);
-public:
-  Fl_Choice *dflange_lfotype;
-private:
-  inline void cb_dflange_lfotype_i(Fl_Choice*, void*);
-  static void cb_dflange_lfotype(Fl_Choice*, void*);
-public:
-  SliderW *dflange_rnd;
-private:
-  inline void cb_dflange_rnd_i(SliderW*, void*);
-  static void cb_dflange_rnd(SliderW*, void*);
-public:
+  DflangeGui *DFLANGE;
   Fl_Group *RING;
   Fl_Light_Button *ring_activar;
 private:

@@ -125,6 +125,9 @@ decl {class AphaserGui; // forward declaration} {public global
 decl {class ValveGui; // forward declaration} {public global
 }
 
+decl {class DflangeGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1098,220 +1101,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group DFLANGE {
         user_data 1
-        xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button dflange_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->DFlange_Bypass);
- return;
-}
-rkr->DFlange_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_DFlange->cleanup();
-findpos(20,(int)o->value(),o);}
-          xywh {326 216 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice dflange_preset {
-          label Preset
-          user_data 12020
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
-dflange_WD->value(rkr->efx_DFlange->getpar(0));
-dflange_pan->value(rkr->efx_DFlange->getpar(1));
-dflange_freq->value(rkr->efx_DFlange->getpar(10));
-dflange_rnd->value(rkr->efx_DFlange->getpar(13));
-dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
-dflange_stdf->value(rkr->efx_DFlange->getpar(11));
-dflange_width->value(rkr->efx_DFlange->getpar(4));
-dflange_depth->value(rkr->efx_DFlange->getpar(3));
-dflange_fb->value(rkr->efx_DFlange->getpar(6));
-dflange_LR->value(rkr->efx_DFlange->getpar(2));
-dflange_subs->value(rkr->efx_DFlange->getpar(8));
-dflange_tz->value(rkr->efx_DFlange->getpar(9));
-dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));
-dflange_intense->value(rkr->efx_DFlange->getpar(14));}
-          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Dual Flange 1}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Flange-Wah}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label FbFlange
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label SoftFlange
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Flanger
-            xywh {92 92 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Deep Chorus}
-            xywh {102 102 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Bright Chorus}
-            xywh {112 112 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider dflange_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(158);
- return;
-} 
-rkr->efx_DFlange->changepar(0,(int)(o->value()));}
-          xywh {373 236 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(159);
- return;
-} 
-rkr->efx_DFlange->changepar(1,(int)o->value());}
-          xywh {373 247 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_LR {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(160);
- return;
-} 
-rkr->efx_DFlange->changepar(2,(int)o->value());}
-          xywh {373 258 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_depth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(161);
- return;
-} 
-rkr->efx_DFlange->changepar(3,(int)o->value());}
-          xywh {373 269 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 2500 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_width {
-          label Width
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(162);
- return;
-} 
-rkr->efx_DFlange->changepar(4,(int)o->value());}
-          xywh {373 281 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 6000 step 5 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_offset {
-          label Offset
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(163);
- return;
-} 
-rkr->efx_DFlange->changepar(5,(int)o->value());}
-          xywh {373 292 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(164);
- return;
-} 
-rkr->efx_DFlange->changepar(6,(int)o->value());}
-          xywh {373 303 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_lpf {
-          label LPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(165);
- return;
-} 
-rkr->efx_DFlange->changepar(7,(int)o->value());}
-          xywh {373 314 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button dflange_subs {
-          label Subtr
-          user_data 2
-          callback {rkr->efx_DFlange->changepar(8,(int)o->value());}
-          xywh {326 325 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button dflange_tz {
-          label {Th. zero}
-          user_data 2
-          callback {rkr->efx_DFlange->changepar(9,(int)o->value());}
-          xywh {369 325 55 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button dflange_intense {
-          label Intense
-          user_data 2
-          callback {rkr->efx_DFlange->changepar(14,(int)o->value());}
-          xywh {423 325 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider dflange_freq {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(166);
- return;
-} 
-rkr->efx_DFlange->changepar(10,(int)o->value());}
-          xywh {373 340 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 value 100 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider dflange_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(167);
- return;
-} 
-rkr->efx_DFlange->changepar(11,(int)o->value());}
-          xywh {373 352 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice dflange_lfotype {
-          label {LFO Type}
-          callback {rkr->efx_DFlange->changepar(12,(int)o->value());} open
-          xywh {384 365 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Value_Slider dflange_rnd {
-          label Rnd
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(168);
- return;
-} 
-rkr->efx_DFlange->changepar(13,(int)o->value());}
-          xywh {373 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "dflange_gui.h"}
+        class DflangeGui
+      } {}
       Fl_Group RING {
         user_data 1
         xywh {322 411 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -9744,8 +9537,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 20://Dual_Flange
-     dflange_activar->value(rkr->DFlange_Bypass);
-     dflange_preset->do_callback(dflange_preset,1);
+     DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
+     DFLANGE->dflange_preset->do_callback(DFLANGE->dflange_preset,1);
      break;
 
      case 21:// Ring
@@ -10391,7 +10184,7 @@ switch (rkr->efx_order[i])
 
      case 20:
        DFLANGE->position(x[i],y[i]);
-       dflange_activar->shortcut(s[i]);
+       DFLANGE->dflange_activar->shortcut(s[i]);
        if(!rkr->deachide)DFLANGE->show();
        if(rkr->DFlange_Bypass)
        {
@@ -11819,48 +11612,48 @@ switch (i)
      PEQ->eqp_HQ->redraw();
      break;
      case 158:
-     dflange_WD->value(rkr->efx_DFlange->getpar(0));
-     dflange_WD->redraw();
+     DFLANGE->dflange_WD->value(rkr->efx_DFlange->getpar(0));
+     DFLANGE->dflange_WD->redraw();
      break;
      case 159:
-     dflange_pan->value(rkr->efx_DFlange->getpar(1));
-     dflange_pan->redraw();
+     DFLANGE->dflange_pan->value(rkr->efx_DFlange->getpar(1));
+     DFLANGE->dflange_pan->redraw();
      break;
      case 160:
-     dflange_LR->value(rkr->efx_DFlange->getpar(2));
-     dflange_LR->redraw();
+     DFLANGE->dflange_LR->value(rkr->efx_DFlange->getpar(2));
+     DFLANGE->dflange_LR->redraw();
      break;
      case 161:
-     dflange_depth->value(rkr->efx_DFlange->getpar(3));
-     dflange_depth->redraw();
+     DFLANGE->dflange_depth->value(rkr->efx_DFlange->getpar(3));
+     DFLANGE->dflange_depth->redraw();
      break;
      case 162:
-     dflange_width->value(rkr->efx_DFlange->getpar(4));
-     dflange_width->redraw();
+     DFLANGE->dflange_width->value(rkr->efx_DFlange->getpar(4));
+     DFLANGE->dflange_width->redraw();
      break;
      case 163:
-     dflange_offset->value(rkr->efx_DFlange->getpar(5));
-     dflange_offset->redraw();
+     DFLANGE->dflange_offset->value(rkr->efx_DFlange->getpar(5));
+     DFLANGE->dflange_offset->redraw();
      break;
      case 164:
-     dflange_fb->value(rkr->efx_DFlange->getpar(6));
-     dflange_fb->redraw();
+     DFLANGE->dflange_fb->value(rkr->efx_DFlange->getpar(6));
+     DFLANGE->dflange_fb->redraw();
      break;
      case 165:
-     dflange_lpf->value(rkr->efx_DFlange->getpar(7));
-     dflange_lpf->redraw();
+     DFLANGE->dflange_lpf->value(rkr->efx_DFlange->getpar(7));
+     DFLANGE->dflange_lpf->redraw();
      break;
      case 166:
-     dflange_freq->value(rkr->efx_DFlange->getpar(10));
-     dflange_freq->redraw();
+     DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(10));
+     DFLANGE->dflange_freq->redraw();
      break;
      case 167:
-     dflange_stdf->value(rkr->efx_DFlange->getpar(11));
-     dflange_stdf->redraw();
+     DFLANGE->dflange_stdf->value(rkr->efx_DFlange->getpar(11));
+     DFLANGE->dflange_stdf->redraw();
      break;
      case 168:
-     dflange_rnd->value(rkr->efx_DFlange->getpar(13));
-     dflange_rnd->redraw();
+     DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(13));
+     DFLANGE->dflange_rnd->redraw();
      break;
      case 169:
      VALVE->valve_WD->value(rkr->efx_Valve->getpar(0)-64);
@@ -12910,8 +12703,8 @@ switch(miralo)
   VALVE->valve_activar->do_callback();
   break;
   case 20:
-  dflange_activar->value(rkr->DFlange_Bypass);
-  dflange_activar->do_callback();
+  DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
+  DFLANGE->dflange_activar->do_callback();
   break;
   case 21:
   ring_activar->value(rkr->Ring_Bypass);
@@ -13820,8 +13613,8 @@ if(rkr->Chorus_Bypass)
   
   if(rkr->DFlange_Bypass)
   {
-  dflange_freq->value(rkr->efx_DFlange->getpar(10));
-  dflange_freq->redraw();
+  DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(10));
+  DFLANGE->dflange_freq->redraw();
   }
   
   if(rkr->Synthfilter_Bypass)
@@ -14687,7 +14480,7 @@ for(i=0;i<10;i++)
 
      case 20://Dual_Flange
      if (i<numEff)rkr->DFlange_Bypass=1; else rkr->DFlange_Bypass=0;
-     dflange_activar->value(rkr->DFlange_Bypass);
+     DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
      break;
 
      case 21:// Ring

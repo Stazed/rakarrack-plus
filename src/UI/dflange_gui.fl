@@ -1,0 +1,226 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class {\#include "common_gui_menu.h"} DflangeGui {
+  user_data 1 open
+  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
+} {
+  Fl_Light_Button dflange_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->DFlange_Bypass);
+ return;
+}
+rkr->DFlange_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_DFlange->cleanup();
+rgui->findpos(20,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice dflange_preset {
+    label Preset
+    user_data 12020
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
+dflange_WD->value(rkr->efx_DFlange->getpar(0));
+dflange_pan->value(rkr->efx_DFlange->getpar(1));
+dflange_freq->value(rkr->efx_DFlange->getpar(10));
+dflange_rnd->value(rkr->efx_DFlange->getpar(13));
+dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
+dflange_stdf->value(rkr->efx_DFlange->getpar(11));
+dflange_width->value(rkr->efx_DFlange->getpar(4));
+dflange_depth->value(rkr->efx_DFlange->getpar(3));
+dflange_fb->value(rkr->efx_DFlange->getpar(6));
+dflange_LR->value(rkr->efx_DFlange->getpar(2));
+dflange_subs->value(rkr->efx_DFlange->getpar(8));
+dflange_tz->value(rkr->efx_DFlange->getpar(9));
+dflange_offset->value(rkr->efx_DFlange->getpar(5));
+dflange_lpf->value(rkr->efx_DFlange->getpar(7));
+dflange_intense->value(rkr->efx_DFlange->getpar(14));}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label {Dual Flange 1}
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Flange-Wah}
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label FbFlange
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label SoftFlange
+      xywh {82 82 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Flanger
+      xywh {92 92 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Deep Chorus}
+      xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Bright Chorus}
+      xywh {112 112 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider dflange_WD {
+    label {Wet/Dry}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(158);
+ return;
+} 
+rkr->efx_DFlange->changepar(0,(int)(o->value()));}
+    xywh {52 24 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_pan {
+    label Pan
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(159);
+ return;
+} 
+rkr->efx_DFlange->changepar(1,(int)o->value());}
+    xywh {52 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_LR {
+    label {L/R.Cr}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(160);
+ return;
+} 
+rkr->efx_DFlange->changepar(2,(int)o->value());}
+    xywh {52 46 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_depth {
+    label Depth
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(161);
+ return;
+} 
+rkr->efx_DFlange->changepar(3,(int)o->value());}
+    xywh {52 57 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 2500 step 1 value 20 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_width {
+    label Width
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(162);
+ return;
+} 
+rkr->efx_DFlange->changepar(4,(int)o->value());}
+    xywh {52 69 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 6000 step 5 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_offset {
+    label Offset
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(163);
+ return;
+} 
+rkr->efx_DFlange->changepar(5,(int)o->value());}
+    xywh {52 80 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_fb {
+    label Fb
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(164);
+ return;
+} 
+rkr->efx_DFlange->changepar(6,(int)o->value());}
+    xywh {52 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_lpf {
+    label LPF
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(165);
+ return;
+} 
+rkr->efx_DFlange->changepar(7,(int)o->value());}
+    xywh {52 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+    class SliderW
+  }
+  Fl_Check_Button dflange_subs {
+    label Subtr
+    user_data 2
+    callback {rkr->efx_DFlange->changepar(8,(int)o->value());}
+    xywh {5 113 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Check_Button dflange_tz {
+    label {Th. zero}
+    user_data 2
+    callback {rkr->efx_DFlange->changepar(9,(int)o->value());}
+    xywh {48 113 55 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Check_Button dflange_intense {
+    label Intense
+    user_data 2
+    callback {rkr->efx_DFlange->changepar(14,(int)o->value());}
+    xywh {102 113 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Value_Slider dflange_freq {
+    label Tempo
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(166);
+ return;
+} 
+rkr->efx_DFlange->changepar(10,(int)o->value());}
+    xywh {52 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 value 100 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider dflange_stdf {
+    label {St.df}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(167);
+ return;
+} 
+rkr->efx_DFlange->changepar(11,(int)o->value());}
+    xywh {52 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice dflange_lfotype {
+    label {LFO Type}
+    callback {rkr->efx_DFlange->changepar(12,(int)o->value());} open selected
+    xywh {63 153 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    code0 {o->menu(m_lfo_menu->get_lfo_type());}
+  } {}
+  Fl_Value_Slider dflange_rnd {
+    label Rnd
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(168);
+ return;
+} 
+rkr->efx_DFlange->changepar(13,(int)o->value());}
+    xywh {52 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+}

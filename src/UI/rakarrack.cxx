@@ -751,216 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_dflange_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->DFlange_Bypass);
- return;
-}
-rkr->DFlange_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_DFlange->cleanup();
-findpos(20,(int)o->value(),o);
-}
-void RKRGUI::cb_dflange_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_activar_i(o,v);
-}
-
-void RKRGUI::cb_dflange_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
-dflange_WD->value(rkr->efx_DFlange->getpar(0));
-dflange_pan->value(rkr->efx_DFlange->getpar(1));
-dflange_freq->value(rkr->efx_DFlange->getpar(10));
-dflange_rnd->value(rkr->efx_DFlange->getpar(13));
-dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
-dflange_stdf->value(rkr->efx_DFlange->getpar(11));
-dflange_width->value(rkr->efx_DFlange->getpar(4));
-dflange_depth->value(rkr->efx_DFlange->getpar(3));
-dflange_fb->value(rkr->efx_DFlange->getpar(6));
-dflange_LR->value(rkr->efx_DFlange->getpar(2));
-dflange_subs->value(rkr->efx_DFlange->getpar(8));
-dflange_tz->value(rkr->efx_DFlange->getpar(9));
-dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));
-dflange_intense->value(rkr->efx_DFlange->getpar(14));
-}
-void RKRGUI::cb_dflange_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_dflange_preset[] = {
- {"Dual Flange 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Flange-Wah", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"FbFlange", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"SoftFlange", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Flanger", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Deep Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Bright Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_dflange_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(158);
- return;
-} 
-rkr->efx_DFlange->changepar(0,(int)(o->value()));
-}
-void RKRGUI::cb_dflange_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_WD_i(o,v);
-}
-
-void RKRGUI::cb_dflange_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(159);
- return;
-} 
-rkr->efx_DFlange->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_dflange_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_pan_i(o,v);
-}
-
-void RKRGUI::cb_dflange_LR_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(160);
- return;
-} 
-rkr->efx_DFlange->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_dflange_LR(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_LR_i(o,v);
-}
-
-void RKRGUI::cb_dflange_depth_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(161);
- return;
-} 
-rkr->efx_DFlange->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_dflange_depth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_depth_i(o,v);
-}
-
-void RKRGUI::cb_dflange_width_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(162);
- return;
-} 
-rkr->efx_DFlange->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_dflange_width(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_width_i(o,v);
-}
-
-void RKRGUI::cb_dflange_offset_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(163);
- return;
-} 
-rkr->efx_DFlange->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_dflange_offset(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_offset_i(o,v);
-}
-
-void RKRGUI::cb_dflange_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(164);
- return;
-} 
-rkr->efx_DFlange->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_dflange_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_fb_i(o,v);
-}
-
-void RKRGUI::cb_dflange_lpf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(165);
- return;
-} 
-rkr->efx_DFlange->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_dflange_lpf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_lpf_i(o,v);
-}
-
-void RKRGUI::cb_dflange_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_DFlange->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_dflange_subs(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_subs_i(o,v);
-}
-
-void RKRGUI::cb_dflange_tz_i(Fl_Check_Button* o, void*) {
-  rkr->efx_DFlange->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_dflange_tz(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_tz_i(o,v);
-}
-
-void RKRGUI::cb_dflange_intense_i(Fl_Check_Button* o, void*) {
-  rkr->efx_DFlange->changepar(14,(int)o->value());
-}
-void RKRGUI::cb_dflange_intense(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_intense_i(o,v);
-}
-
-void RKRGUI::cb_dflange_freq_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(166);
- return;
-} 
-rkr->efx_DFlange->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_dflange_freq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_freq_i(o,v);
-}
-
-void RKRGUI::cb_dflange_stdf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(167);
- return;
-} 
-rkr->efx_DFlange->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_dflange_stdf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_stdf_i(o,v);
-}
-
-void RKRGUI::cb_dflange_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_DFlange->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_dflange_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_lfotype_i(o,v);
-}
-
-void RKRGUI::cb_dflange_rnd_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(168);
- return;
-} 
-rkr->efx_DFlange->changepar(13,(int)o->value());
-}
-void RKRGUI::cb_dflange_rnd(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_dflange_rnd_i(o,v);
-}
-
 void RKRGUI::cb_ring_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -8210,249 +8000,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       VALVE->hide();
       VALVE->end();
     } // ValveGui* VALVE
-    { DFLANGE = new Fl_Group(321, 212, 158, 184);
+    { DFLANGE = new DflangeGui(2, 212, 158, 184);
       DFLANGE->box(FL_UP_BOX);
       DFLANGE->color(FL_FOREGROUND_COLOR);
       DFLANGE->selection_color(FL_FOREGROUND_COLOR);
+      DFLANGE->labeltype(FL_NORMAL_LABEL);
       DFLANGE->labelfont(1);
+      DFLANGE->labelsize(14);
+      DFLANGE->labelcolor(FL_FOREGROUND_COLOR);
       DFLANGE->user_data((void*)(1));
       DFLANGE->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      DFLANGE->when(FL_WHEN_RELEASE);
       DFLANGE->hide();
-      { dflange_activar = new Fl_Light_Button(326, 216, 34, 18, "On");
-        dflange_activar->shortcut(0x38);
-        dflange_activar->color((Fl_Color)62);
-        dflange_activar->selection_color((Fl_Color)1);
-        dflange_activar->labelsize(10);
-        dflange_activar->callback((Fl_Callback*)cb_dflange_activar, (void*)(2));
-        dflange_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        dflange_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* dflange_activar
-      { dflange_preset = new Fl_Choice(398, 216, 76, 18, "Preset");
-        dflange_preset->down_box(FL_BORDER_BOX);
-        dflange_preset->selection_color(FL_FOREGROUND_COLOR);
-        dflange_preset->labelsize(10);
-        dflange_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_preset->textsize(10);
-        dflange_preset->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_preset->callback((Fl_Callback*)cb_dflange_preset, (void*)(12020));
-        dflange_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        dflange_preset->menu(menu_dflange_preset);
-      } // Fl_Choice* dflange_preset
-      { dflange_WD = new SliderW(373, 236, 100, 10, "Wet/Dry");
-        dflange_WD->type(5);
-        dflange_WD->box(FL_FLAT_BOX);
-        dflange_WD->color((Fl_Color)178);
-        dflange_WD->selection_color((Fl_Color)62);
-        dflange_WD->labeltype(FL_NORMAL_LABEL);
-        dflange_WD->labelfont(0);
-        dflange_WD->labelsize(10);
-        dflange_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_WD->minimum(-64);
-        dflange_WD->maximum(64);
-        dflange_WD->step(1);
-        dflange_WD->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_WD->callback((Fl_Callback*)cb_dflange_WD);
-        dflange_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_WD
-      { dflange_pan = new SliderW(373, 247, 100, 10, "Pan");
-        dflange_pan->type(5);
-        dflange_pan->box(FL_FLAT_BOX);
-        dflange_pan->color((Fl_Color)178);
-        dflange_pan->selection_color((Fl_Color)62);
-        dflange_pan->labeltype(FL_NORMAL_LABEL);
-        dflange_pan->labelfont(0);
-        dflange_pan->labelsize(10);
-        dflange_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_pan->minimum(-64);
-        dflange_pan->maximum(64);
-        dflange_pan->step(1);
-        dflange_pan->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_pan->callback((Fl_Callback*)cb_dflange_pan);
-        dflange_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_pan
-      { dflange_LR = new SliderW(373, 258, 100, 10, "L/R.Cr");
-        dflange_LR->type(5);
-        dflange_LR->box(FL_FLAT_BOX);
-        dflange_LR->color((Fl_Color)178);
-        dflange_LR->selection_color((Fl_Color)62);
-        dflange_LR->labeltype(FL_NORMAL_LABEL);
-        dflange_LR->labelfont(0);
-        dflange_LR->labelsize(10);
-        dflange_LR->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_LR->maximum(127);
-        dflange_LR->step(1);
-        dflange_LR->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_LR->callback((Fl_Callback*)cb_dflange_LR);
-        dflange_LR->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_LR->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_LR
-      { dflange_depth = new SliderW(373, 269, 100, 10, "Depth");
-        dflange_depth->type(5);
-        dflange_depth->box(FL_FLAT_BOX);
-        dflange_depth->color((Fl_Color)178);
-        dflange_depth->selection_color((Fl_Color)62);
-        dflange_depth->labeltype(FL_NORMAL_LABEL);
-        dflange_depth->labelfont(0);
-        dflange_depth->labelsize(10);
-        dflange_depth->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_depth->minimum(20);
-        dflange_depth->maximum(2500);
-        dflange_depth->step(1);
-        dflange_depth->value(20);
-        dflange_depth->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_depth->callback((Fl_Callback*)cb_dflange_depth);
-        dflange_depth->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_depth->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_depth
-      { dflange_width = new SliderW(373, 281, 100, 10, "Width");
-        dflange_width->type(5);
-        dflange_width->box(FL_FLAT_BOX);
-        dflange_width->color((Fl_Color)178);
-        dflange_width->selection_color((Fl_Color)62);
-        dflange_width->labeltype(FL_NORMAL_LABEL);
-        dflange_width->labelfont(0);
-        dflange_width->labelsize(10);
-        dflange_width->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_width->maximum(6000);
-        dflange_width->step(5);
-        dflange_width->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_width->callback((Fl_Callback*)cb_dflange_width);
-        dflange_width->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_width->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_width
-      { dflange_offset = new SliderW(373, 292, 100, 10, "Offset");
-        dflange_offset->type(5);
-        dflange_offset->box(FL_FLAT_BOX);
-        dflange_offset->color((Fl_Color)178);
-        dflange_offset->selection_color((Fl_Color)62);
-        dflange_offset->labeltype(FL_NORMAL_LABEL);
-        dflange_offset->labelfont(0);
-        dflange_offset->labelsize(10);
-        dflange_offset->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_offset->maximum(100);
-        dflange_offset->step(1);
-        dflange_offset->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_offset->callback((Fl_Callback*)cb_dflange_offset);
-        dflange_offset->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_offset->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_offset
-      { dflange_fb = new SliderW(373, 303, 100, 10, "Fb");
-        dflange_fb->type(5);
-        dflange_fb->box(FL_FLAT_BOX);
-        dflange_fb->color((Fl_Color)178);
-        dflange_fb->selection_color((Fl_Color)62);
-        dflange_fb->labeltype(FL_NORMAL_LABEL);
-        dflange_fb->labelfont(0);
-        dflange_fb->labelsize(10);
-        dflange_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_fb->minimum(-64);
-        dflange_fb->maximum(64);
-        dflange_fb->step(1);
-        dflange_fb->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_fb->callback((Fl_Callback*)cb_dflange_fb);
-        dflange_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_fb
-      { dflange_lpf = new SliderW(373, 314, 100, 10, "LPF");
-        dflange_lpf->type(5);
-        dflange_lpf->box(FL_FLAT_BOX);
-        dflange_lpf->color((Fl_Color)178);
-        dflange_lpf->selection_color((Fl_Color)62);
-        dflange_lpf->labeltype(FL_NORMAL_LABEL);
-        dflange_lpf->labelfont(0);
-        dflange_lpf->labelsize(10);
-        dflange_lpf->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_lpf->minimum(20);
-        dflange_lpf->maximum(20000);
-        dflange_lpf->step(1);
-        dflange_lpf->value(20);
-        dflange_lpf->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_lpf->callback((Fl_Callback*)cb_dflange_lpf);
-        dflange_lpf->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_lpf->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_lpf
-      { dflange_subs = new Fl_Check_Button(326, 325, 46, 15, "Subtr");
-        dflange_subs->down_box(FL_BORDER_BOX);
-        dflange_subs->labelsize(10);
-        dflange_subs->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_subs->callback((Fl_Callback*)cb_dflange_subs, (void*)(2));
-      } // Fl_Check_Button* dflange_subs
-      { dflange_tz = new Fl_Check_Button(369, 325, 55, 15, "Th. zero");
-        dflange_tz->down_box(FL_BORDER_BOX);
-        dflange_tz->labelsize(10);
-        dflange_tz->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_tz->callback((Fl_Callback*)cb_dflange_tz, (void*)(2));
-      } // Fl_Check_Button* dflange_tz
-      { dflange_intense = new Fl_Check_Button(423, 325, 52, 15, "Intense");
-        dflange_intense->down_box(FL_BORDER_BOX);
-        dflange_intense->labelsize(10);
-        dflange_intense->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_intense->callback((Fl_Callback*)cb_dflange_intense, (void*)(2));
-      } // Fl_Check_Button* dflange_intense
-      { dflange_freq = new SliderW(373, 340, 100, 10, "Tempo");
-        dflange_freq->type(5);
-        dflange_freq->box(FL_FLAT_BOX);
-        dflange_freq->color((Fl_Color)178);
-        dflange_freq->selection_color((Fl_Color)62);
-        dflange_freq->labeltype(FL_NORMAL_LABEL);
-        dflange_freq->labelfont(0);
-        dflange_freq->labelsize(10);
-        dflange_freq->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_freq->minimum(1);
-        dflange_freq->maximum(600);
-        dflange_freq->step(1);
-        dflange_freq->value(100);
-        dflange_freq->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_freq->callback((Fl_Callback*)cb_dflange_freq);
-        dflange_freq->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_freq->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_freq
-      { dflange_stdf = new SliderW(373, 352, 100, 10, "St.df");
-        dflange_stdf->type(5);
-        dflange_stdf->box(FL_FLAT_BOX);
-        dflange_stdf->color((Fl_Color)178);
-        dflange_stdf->selection_color((Fl_Color)62);
-        dflange_stdf->labeltype(FL_NORMAL_LABEL);
-        dflange_stdf->labelfont(0);
-        dflange_stdf->labelsize(10);
-        dflange_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_stdf->maximum(127);
-        dflange_stdf->step(1);
-        dflange_stdf->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_stdf->callback((Fl_Callback*)cb_dflange_stdf);
-        dflange_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_stdf
-      { Fl_Choice* o = dflange_lfotype = new Fl_Choice(384, 365, 72, 15, "LFO Type");
-        dflange_lfotype->down_box(FL_BORDER_BOX);
-        dflange_lfotype->selection_color(FL_FOREGROUND_COLOR);
-        dflange_lfotype->labelsize(10);
-        dflange_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_lfotype->textsize(10);
-        dflange_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_lfotype->callback((Fl_Callback*)cb_dflange_lfotype);
-        o->menu(CHORUS->get_menu_chorus_lfotype());
-      } // Fl_Choice* dflange_lfotype
-      { dflange_rnd = new SliderW(373, 382, 100, 10, "Rnd");
-        dflange_rnd->type(5);
-        dflange_rnd->box(FL_FLAT_BOX);
-        dflange_rnd->color((Fl_Color)178);
-        dflange_rnd->selection_color((Fl_Color)62);
-        dflange_rnd->labeltype(FL_NORMAL_LABEL);
-        dflange_rnd->labelfont(0);
-        dflange_rnd->labelsize(10);
-        dflange_rnd->labelcolor(FL_BACKGROUND2_COLOR);
-        dflange_rnd->maximum(127);
-        dflange_rnd->step(1);
-        dflange_rnd->textcolor(FL_BACKGROUND2_COLOR);
-        dflange_rnd->callback((Fl_Callback*)cb_dflange_rnd);
-        dflange_rnd->align(Fl_Align(FL_ALIGN_LEFT));
-        dflange_rnd->when(FL_WHEN_CHANGED);
-      } // SliderW* dflange_rnd
       DFLANGE->end();
-    } // Fl_Group* DFLANGE
+    } // DflangeGui* DFLANGE
     { RING = new Fl_Group(322, 411, 158, 184);
       RING->box(FL_UP_BOX);
       RING->color(FL_FOREGROUND_COLOR);
@@ -16424,8 +15985,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 20://Dual_Flange
-       dflange_activar->value(rkr->DFlange_Bypass);
-       dflange_preset->do_callback(dflange_preset,1);
+       DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
+       DFLANGE->dflange_preset->do_callback(DFLANGE->dflange_preset,1);
        break;
   
        case 21:// Ring
@@ -17072,7 +16633,7 @@ void RKRGUI::reordena() {
   
        case 20:
          DFLANGE->position(x[i],y[i]);
-         dflange_activar->shortcut(s[i]);
+         DFLANGE->dflange_activar->shortcut(s[i]);
          if(!rkr->deachide)DFLANGE->show();
          if(rkr->DFlange_Bypass)
          {
@@ -18508,48 +18069,48 @@ void RKRGUI::ActMIDI() {
        PEQ->eqp_HQ->redraw();
        break;
        case 158:
-       dflange_WD->value(rkr->efx_DFlange->getpar(0));
-       dflange_WD->redraw();
+       DFLANGE->dflange_WD->value(rkr->efx_DFlange->getpar(0));
+       DFLANGE->dflange_WD->redraw();
        break;
        case 159:
-       dflange_pan->value(rkr->efx_DFlange->getpar(1));
-       dflange_pan->redraw();
+       DFLANGE->dflange_pan->value(rkr->efx_DFlange->getpar(1));
+       DFLANGE->dflange_pan->redraw();
        break;
        case 160:
-       dflange_LR->value(rkr->efx_DFlange->getpar(2));
-       dflange_LR->redraw();
+       DFLANGE->dflange_LR->value(rkr->efx_DFlange->getpar(2));
+       DFLANGE->dflange_LR->redraw();
        break;
        case 161:
-       dflange_depth->value(rkr->efx_DFlange->getpar(3));
-       dflange_depth->redraw();
+       DFLANGE->dflange_depth->value(rkr->efx_DFlange->getpar(3));
+       DFLANGE->dflange_depth->redraw();
        break;
        case 162:
-       dflange_width->value(rkr->efx_DFlange->getpar(4));
-       dflange_width->redraw();
+       DFLANGE->dflange_width->value(rkr->efx_DFlange->getpar(4));
+       DFLANGE->dflange_width->redraw();
        break;
        case 163:
-       dflange_offset->value(rkr->efx_DFlange->getpar(5));
-       dflange_offset->redraw();
+       DFLANGE->dflange_offset->value(rkr->efx_DFlange->getpar(5));
+       DFLANGE->dflange_offset->redraw();
        break;
        case 164:
-       dflange_fb->value(rkr->efx_DFlange->getpar(6));
-       dflange_fb->redraw();
+       DFLANGE->dflange_fb->value(rkr->efx_DFlange->getpar(6));
+       DFLANGE->dflange_fb->redraw();
        break;
        case 165:
-       dflange_lpf->value(rkr->efx_DFlange->getpar(7));
-       dflange_lpf->redraw();
+       DFLANGE->dflange_lpf->value(rkr->efx_DFlange->getpar(7));
+       DFLANGE->dflange_lpf->redraw();
        break;
        case 166:
-       dflange_freq->value(rkr->efx_DFlange->getpar(10));
-       dflange_freq->redraw();
+       DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(10));
+       DFLANGE->dflange_freq->redraw();
        break;
        case 167:
-       dflange_stdf->value(rkr->efx_DFlange->getpar(11));
-       dflange_stdf->redraw();
+       DFLANGE->dflange_stdf->value(rkr->efx_DFlange->getpar(11));
+       DFLANGE->dflange_stdf->redraw();
        break;
        case 168:
-       dflange_rnd->value(rkr->efx_DFlange->getpar(13));
-       dflange_rnd->redraw();
+       DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(13));
+       DFLANGE->dflange_rnd->redraw();
        break;
        case 169:
        VALVE->valve_WD->value(rkr->efx_Valve->getpar(0)-64);
@@ -19599,8 +19160,8 @@ void RKRGUI::ActOnOff() {
     VALVE->valve_activar->do_callback();
     break;
     case 20:
-    dflange_activar->value(rkr->DFlange_Bypass);
-    dflange_activar->do_callback();
+    DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
+    DFLANGE->dflange_activar->do_callback();
     break;
     case 21:
     ring_activar->value(rkr->Ring_Bypass);
@@ -20522,8 +20083,8 @@ void RKRGUI::UpdateTGUI() {
     
     if(rkr->DFlange_Bypass)
     {
-    dflange_freq->value(rkr->efx_DFlange->getpar(10));
-    dflange_freq->redraw();
+    DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(10));
+    DFLANGE->dflange_freq->redraw();
     }
     
     if(rkr->Synthfilter_Bypass)
@@ -21402,7 +20963,7 @@ void RKRGUI::RandomPreset() {
   
        case 20://Dual_Flange
        if (i<numEff)rkr->DFlange_Bypass=1; else rkr->DFlange_Bypass=0;
-       dflange_activar->value(rkr->DFlange_Bypass);
+       DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
        break;
   
        case 21:// Ring
