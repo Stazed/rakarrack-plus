@@ -45,6 +45,7 @@ class NewdistGui; // forward declaration
 class AphaserGui; // forward declaration
 class ValveGui; // forward declaration
 class DflangeGui; // forward declaration
+class RingGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -72,6 +73,7 @@ class SustainGui; // forward declaration
 #include "aphaser_gui.h"
 #include "valve_gui.h"
 #include "dflange_gui.h"
+#include "ring_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -256,83 +258,7 @@ public:
   AphaserGui *APHASER;
   ValveGui *VALVE;
   DflangeGui *DFLANGE;
-  Fl_Group *RING;
-  Fl_Light_Button *ring_activar;
-private:
-  inline void cb_ring_activar_i(Fl_Light_Button*, void*);
-  static void cb_ring_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *ring_preset;
-private:
-  inline void cb_ring_preset_i(Fl_Choice*, void*);
-  static void cb_ring_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_ring_preset[];
-public:
-  SliderW *ring_WD;
-private:
-  inline void cb_ring_WD_i(SliderW*, void*);
-  static void cb_ring_WD(SliderW*, void*);
-public:
-  SliderW *ring_LRc;
-private:
-  inline void cb_ring_LRc_i(SliderW*, void*);
-  static void cb_ring_LRc(SliderW*, void*);
-public:
-  SliderW *ring_input;
-private:
-  inline void cb_ring_input_i(SliderW*, void*);
-  static void cb_ring_input(SliderW*, void*);
-public:
-  SliderW *ring_level;
-private:
-  inline void cb_ring_level_i(SliderW*, void*);
-  static void cb_ring_level(SliderW*, void*);
-public:
-  SliderW *ring_pan;
-private:
-  inline void cb_ring_pan_i(SliderW*, void*);
-  static void cb_ring_pan(SliderW*, void*);
-public:
-  Fl_Check_Button *ring_st;
-private:
-  inline void cb_ring_st_i(Fl_Check_Button*, void*);
-  static void cb_ring_st(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *ring_afreq;
-private:
-  inline void cb_ring_afreq_i(Fl_Check_Button*, void*);
-  static void cb_ring_afreq(Fl_Check_Button*, void*);
-public:
-  SliderW *ring_depth;
-private:
-  inline void cb_ring_depth_i(SliderW*, void*);
-  static void cb_ring_depth(SliderW*, void*);
-public:
-  SliderW *ring_freq;
-private:
-  inline void cb_ring_freq_i(SliderW*, void*);
-  static void cb_ring_freq(SliderW*, void*);
-public:
-  SliderW *ring_sin;
-private:
-  inline void cb_ring_sin_i(SliderW*, void*);
-  static void cb_ring_sin(SliderW*, void*);
-public:
-  SliderW *ring_tri;
-private:
-  inline void cb_ring_tri_i(SliderW*, void*);
-  static void cb_ring_tri(SliderW*, void*);
-public:
-  SliderW *ring_saw;
-private:
-  inline void cb_ring_saw_i(SliderW*, void*);
-  static void cb_ring_saw(SliderW*, void*);
-public:
-  SliderW *ring_squ;
-private:
-  inline void cb_ring_squ_i(SliderW*, void*);
-  static void cb_ring_squ(SliderW*, void*);
-public:
+  RingGui *RING;
   Fl_Group *EXCITER;
   Fl_Light_Button *exciter_activar;
 private:

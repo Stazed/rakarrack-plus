@@ -128,6 +128,9 @@ decl {class ValveGui; // forward declaration} {public global
 decl {class DflangeGui; // forward declaration} {public global
 }
 
+decl {class RingGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1107,202 +1110,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group RING {
         user_data 1
-        xywh {322 411 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button ring_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Ring_Bypass);
- return;
-}
-rkr->Ring_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Ring->cleanup();
-findpos(21,(int)o->value(),o);}
-          xywh {327 415 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice ring_preset {
-          label Preset
-          user_data 12021
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12021))rkr->efx_Ring->setpreset((int) o->value());
-ring_WD->value(rkr->efx_Ring->getpar(0));
-ring_LRc->value(rkr->efx_Ring->getpar(2));
-ring_input->value(rkr->efx_Ring->getpar(11));
-ring_level->value(rkr->efx_Ring->getpar(3));
-ring_st->value(rkr->efx_Ring->getpar(6));
-ring_depth->value(rkr->efx_Ring->getpar(4));
-ring_freq->value(rkr->efx_Ring->getpar(5));
-ring_sin->value(rkr->efx_Ring->getpar(7));
-ring_tri->value(rkr->efx_Ring->getpar(8));
-ring_saw->value(rkr->efx_Ring->getpar(9));
-ring_squ->value(rkr->efx_Ring->getpar(10));
-ring_pan->value(rkr->efx_Ring->getpar(1));
-ring_afreq->value(rkr->efx_Ring->getpar(12));}
-          xywh {399 415 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Saw_Sin
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {E string}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {A string}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Dissonance
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Fast Beat}
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ring Amp}
-            xywh {92 92 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider ring_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(178);
- return;
-} 
-rkr->efx_Ring->changepar(0,(int)o->value());}
-          xywh {373 440 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_LRc {
-          label {L/R Cr.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(179);
- return;
-} 
-rkr->efx_Ring->changepar(2,(int)o->value());}
-          xywh {373 453 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_input {
-          label Input
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(180);
- return;
-} 
-rkr->efx_Ring->changepar(11,(int)o->value());}
-          xywh {373 466 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(181);
- return;
-} 
-rkr->efx_Ring->changepar(3,(int)o->value());}
-          xywh {373 479 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(182);
- return;
-} 
-rkr->efx_Ring->changepar(1,(int)o->value());}
-          xywh {373 492 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button ring_st {
-          label Stereo
-          user_data 2
-          callback {rkr->efx_Ring->changepar(6,(int)o->value());}
-          xywh {350 503 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button ring_afreq {
-          label {Auto Freq}
-          user_data 2
-          callback {rkr->efx_Ring->changepar(12,(int)o->value());}
-          xywh {402 503 69 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider ring_depth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(183);
- return;
-} 
-rkr->efx_Ring->changepar(4,(int)o->value());}
-          xywh {373 517 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_freq {
-          label Freq
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(184);
- return;
-} 
-rkr->efx_Ring->changepar(5,(int)o->value());}
-          xywh {373 529 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 20000 step 10 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_sin {
-          label Sin
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(185);
- return;
-} 
-rkr->efx_Ring->changepar(7,(int)o->value());}
-          xywh {373 541 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_tri {
-          label Tri
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(186);
- return;
-} 
-rkr->efx_Ring->changepar(8,(int)o->value());}
-          xywh {373 553 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_saw {
-          label Saw
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(187);
- return;
-} 
-rkr->efx_Ring->changepar(9,(int)o->value());}
-          xywh {373 565 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ring_squ {
-          label Squ
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(188);
- return;
-} 
-rkr->efx_Ring->changepar(10,(int)o->value());}
-          xywh {373 578 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "ring_gui.h"}
+        class RingGui
+      } {}
       Fl_Group EXCITER {
         user_data 1
         xywh {162 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -9542,8 +9353,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 21:// Ring
-     ring_activar->value(rkr->Ring_Bypass);
-     ring_preset->do_callback(ring_preset,1);
+     RING->ring_activar->value(rkr->Ring_Bypass);
+     RING->ring_preset->do_callback(RING->ring_preset,1);
      break;  
 
      case 22:// Exciter
@@ -10196,7 +10007,7 @@ switch (rkr->efx_order[i])
 
      case 21:
        RING->position(x[i],y[i]);
-       ring_activar->shortcut(s[i]);
+       RING->ring_activar->shortcut(s[i]);
        if(!rkr->deachide)RING->show();
        if(rkr->Ring_Bypass)
        {
@@ -11692,48 +11503,48 @@ switch (i)
      VALVE->valve_hpf->redraw();
      break;
      case 178:
-     ring_WD->value(rkr->efx_Ring->getpar(0));
-     ring_WD->redraw();
+     RING->ring_WD->value(rkr->efx_Ring->getpar(0));
+     RING->ring_WD->redraw();
      break;  
      case 179:
-     ring_LRc->value(rkr->efx_Ring->getpar(2));
-     ring_LRc->redraw();
+     RING->ring_LRc->value(rkr->efx_Ring->getpar(2));
+     RING->ring_LRc->redraw();
      break;  
      case 180:
-     ring_input->value(rkr->efx_Ring->getpar(11));
-     ring_input->redraw();
+     RING->ring_input->value(rkr->efx_Ring->getpar(11));
+     RING->ring_input->redraw();
      break;  
      case 181:
-     ring_level->value(rkr->efx_Ring->getpar(3));
-     ring_level->redraw();
+     RING->ring_level->value(rkr->efx_Ring->getpar(3));
+     RING->ring_level->redraw();
      break;  
      case 182:
-     ring_pan->value(rkr->efx_Ring->getpar(1));
-     ring_pan->redraw();
+     RING->ring_pan->value(rkr->efx_Ring->getpar(1));
+     RING->ring_pan->redraw();
      break;  
      case 183:
-     ring_depth->value(rkr->efx_Ring->getpar(4));
-     ring_depth->redraw();
+     RING->ring_depth->value(rkr->efx_Ring->getpar(4));
+     RING->ring_depth->redraw();
      break;  
      case 184:
-     ring_freq->value(rkr->efx_Ring->getpar(5));
-     ring_freq->redraw();
+     RING->ring_freq->value(rkr->efx_Ring->getpar(5));
+     RING->ring_freq->redraw();
      break;  
      case 185:
-     ring_sin->value(rkr->efx_Ring->getpar(7));
-     ring_sin->redraw();
+     RING->ring_sin->value(rkr->efx_Ring->getpar(7));
+     RING->ring_sin->redraw();
      break;  
      case 186:
-     ring_tri->value(rkr->efx_Ring->getpar(8));
-     ring_tri->redraw();
+     RING->ring_tri->value(rkr->efx_Ring->getpar(8));
+     RING->ring_tri->redraw();
      break;  
      case 187:
-     ring_saw->value(rkr->efx_Ring->getpar(9));
-     ring_saw->redraw();
+     RING->ring_saw->value(rkr->efx_Ring->getpar(9));
+     RING->ring_saw->redraw();
      break;  
      case 188:
-     ring_squ->value(rkr->efx_Ring->getpar(10));
-     ring_squ->redraw();
+     RING->ring_squ->value(rkr->efx_Ring->getpar(10));
+     RING->ring_squ->redraw();
      break;  
      case 189:
      ex_Gain->value(rkr->efx_Exciter->getpar(0));
@@ -12707,8 +12518,8 @@ switch(miralo)
   DFLANGE->dflange_activar->do_callback();
   break;
   case 21:
-  ring_activar->value(rkr->Ring_Bypass);
-  ring_activar->do_callback();
+  RING->ring_activar->value(rkr->Ring_Bypass);
+  RING->ring_activar->do_callback();
   break;
   case 22:
   exciter_activar->value(rkr->Exciter_Bypass);
@@ -14485,7 +14296,7 @@ for(i=0;i<10;i++)
 
      case 21:// Ring
      if (i<numEff)rkr->Ring_Bypass=1; else rkr->Ring_Bypass=0;
-     ring_activar->value(rkr->Ring_Bypass);
+     RING->ring_activar->value(rkr->Ring_Bypass);
      break;  
 
      case 22:// Exciter
