@@ -41,6 +41,7 @@ class PanGui; // forward declaration
 class HarGui; // forward declaration
 class MusdelayGui; // forward declaration
 class GateGui; // forward declaration
+class NewdistGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -64,11 +65,12 @@ class SustainGui; // forward declaration
 #include "har_gui.h"
 #include "musdelay_gui.h"
 #include "gate_gui.h"
+#include "newdist_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
+#include <FL/Fl_Check_Button.H>
 #include "sustain_gui.h"
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Input.H>
@@ -244,78 +246,7 @@ public:
   HarGui *HAR;
   MusdelayGui *MUSDELAY;
   GateGui *GATE;
-  Fl_Group *NEWDIST;
-  Fl_Light_Button *newdist_activar;
-private:
-  inline void cb_newdist_activar_i(Fl_Light_Button*, void*);
-  static void cb_newdist_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *newdist_preset;
-private:
-  inline void cb_newdist_preset_i(Fl_Choice*, void*);
-  static void cb_newdist_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_newdist_preset[];
-public:
-  SliderW *newdist_WD;
-private:
-  inline void cb_newdist_WD_i(SliderW*, void*);
-  static void cb_newdist_WD(SliderW*, void*);
-public:
-  SliderW *newdist_LRc;
-private:
-  inline void cb_newdist_LRc_i(SliderW*, void*);
-  static void cb_newdist_LRc(SliderW*, void*);
-public:
-  SliderW *newdist_drive;
-private:
-  inline void cb_newdist_drive_i(SliderW*, void*);
-  static void cb_newdist_drive(SliderW*, void*);
-public:
-  SliderW *newdist_level;
-private:
-  inline void cb_newdist_level_i(SliderW*, void*);
-  static void cb_newdist_level(SliderW*, void*);
-public:
-  Fl_Choice *newdist_tipo;
-private:
-  inline void cb_newdist_tipo_i(Fl_Choice*, void*);
-  static void cb_newdist_tipo(Fl_Choice*, void*);
-public:
-  Fl_Check_Button *newdist_neg;
-private:
-  inline void cb_newdist_neg_i(Fl_Check_Button*, void*);
-  static void cb_newdist_neg(Fl_Check_Button*, void*);
-public:
-  SliderW *newdist_st;
-private:
-  inline void cb_newdist_st_i(SliderW*, void*);
-  static void cb_newdist_st(SliderW*, void*);
-public:
-  SliderW *newdist_oct;
-private:
-  inline void cb_newdist_oct_i(SliderW*, void*);
-  static void cb_newdist_oct(SliderW*, void*);
-public:
-  SliderW *newdist_pan;
-private:
-  inline void cb_newdist_pan_i(SliderW*, void*);
-  static void cb_newdist_pan(SliderW*, void*);
-public:
-  Fl_Check_Button *newdist_pf;
-private:
-  inline void cb_newdist_pf_i(Fl_Check_Button*, void*);
-  static void cb_newdist_pf(Fl_Check_Button*, void*);
-public:
-  SliderW *newdist_lpf;
-private:
-  inline void cb_newdist_lpf_i(SliderW*, void*);
-  static void cb_newdist_lpf(SliderW*, void*);
-public:
-  SliderW *newdist_hpf;
-private:
-  inline void cb_newdist_hpf_i(SliderW*, void*);
-  static void cb_newdist_hpf(SliderW*, void*);
-public:
+  NewdistGui *NEWDIST;
   Fl_Group *APHASER;
   Fl_Light_Button *aphaser_activar;
 private:

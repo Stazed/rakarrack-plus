@@ -116,6 +116,9 @@ decl {class MusdelayGui; // forward declaration} {public global
 decl {class GateGui; // forward declaration} {public global
 }
 
+decl {class NewdistGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1071,173 +1074,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group NEWDIST {
         user_data 1
-        xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button newdist_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->NewDist_Bypass);
- return;
-}
-rkr->NewDist_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_NewDist->cleanup();
-findpos(17,(int)o->value(),o);}
-          xywh {485 216 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice newdist_preset {
-          label Preset
-          user_data 12017
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12017))rkr->efx_NewDist->setpreset((int) o->value());
-newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
-newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
-newdist_drive->value(rkr->efx_NewDist->getpar(3));
-newdist_level->value(rkr->efx_NewDist->getpar(4));
-newdist_tipo->value(rkr->efx_NewDist->getpar(5));
-newdist_neg->value(rkr->efx_NewDist->getpar(6));
-newdist_st->value(rkr->efx_NewDist->getpar(9));
-newdist_oct->value(rkr->efx_NewDist->getpar(11));
-newdist_pan->value(rkr->efx_NewDist->getpar(1)-64);
-newdist_pf->value(rkr->efx_NewDist->getpar(10));
-newdist_lpf->value(rkr->efx_NewDist->getpar(7));
-newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
-          xywh {557 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {New Dist 1}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {New Dist 2}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {New Dist 3}
-            xywh {52 52 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider newdist_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(125);
- return;
-} 
-rkr->efx_NewDist->changepar(0,(int)(o->value()+64));}
-          xywh {532 240 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider newdist_LRc {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(127);
- return;
-} 
-rkr->efx_NewDist->changepar(2,(int)(o->value()+64));}
-          xywh {532 254 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider newdist_drive {
-          label Drive
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(2);
- return;
-} 
-rkr->efx_NewDist->changepar(3,(int)o->value());}
-          xywh {532 268 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider newdist_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(3);
- return;
-} 
-rkr->efx_NewDist->changepar(4,(int)o->value());}
-          xywh {532 282 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice newdist_tipo {
-          label Type
-          callback {rkr->efx_NewDist->changepar(5,(int)o->value());}
-          xywh {514 296 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(DIST->get_menu_dist_tipo());}
-        } {}
-        Fl_Check_Button newdist_neg {
-          label {Neg.}
-          user_data 2
-          callback {rkr->efx_NewDist->changepar(6,(int)o->value());}
-          xywh {590 296 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider newdist_st {
-          label Color
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(6);
- return;
-} 
-rkr->efx_NewDist->changepar(9,(int)o->value());}
-          xywh {532 318 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider newdist_oct {
-          label {Sub Octv}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(8);
- return;
-} 
-rkr->efx_NewDist->changepar(11,(int)o->value());}
-          xywh {532 332 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider newdist_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(126);
- return;
-} 
-rkr->efx_NewDist->changepar(1,(int)(o->value()+64));}
-          xywh {532 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button newdist_pf {
-          label {Pre Filter}
-          user_data 2
-          callback {rkr->efx_NewDist->changepar(10,(int)o->value());}
-          xywh {530 356 66 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider newdist_lpf {
-          label LPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(4);
- return;
-} 
-rkr->efx_NewDist->changepar(7,(int)o->value());}
-          xywh {532 371 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider newdist_hpf {
-          label HPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(5);
- return;
-} 
-rkr->efx_NewDist->changepar(8,(int)o->value());}
-          xywh {532 383 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "newdist_gui.h"}
+        class NewdistGui
+      } {}
       Fl_Group APHASER {
         user_data 1
         xywh {480 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -10222,8 +10062,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break; 
 
      case 17://NewDist
-     newdist_activar->value(rkr->NewDist_Bypass);
-     newdist_preset->do_callback(newdist_preset,1);
+     NEWDIST->newdist_activar->value(rkr->NewDist_Bypass);
+     NEWDIST->newdist_preset->do_callback(NEWDIST->newdist_preset,1);
      break;
      
      case 18://APhaser
@@ -10848,7 +10688,7 @@ switch (rkr->efx_order[i])
      
      case 17:
        NEWDIST->position(x[i],y[i]);
-       newdist_activar->shortcut(s[i]);
+       NEWDIST->newdist_activar->shortcut(s[i]);
        if(!rkr->deachide)NEWDIST->show();
        if(rkr->NewDist_Bypass)
        {
@@ -12160,40 +12000,40 @@ switch (i)
      aphaser_stdf->redraw();
      break;
      case 125:
-     newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
-     newdist_WD->redraw();
+     NEWDIST->newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
+     NEWDIST->newdist_WD->redraw();
      break;
      case 126:
-     newdist_pan->value(rkr->efx_NewDist->getpar(1)-64);
-     newdist_pan->redraw();
+     NEWDIST->newdist_pan->value(rkr->efx_NewDist->getpar(1)-64);
+     NEWDIST->newdist_pan->redraw();
      break;
      case 127:
-     newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
-     newdist_LRc->redraw();
+     NEWDIST->newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
+     NEWDIST->newdist_LRc->redraw();
      break;
      case 2:
-     newdist_drive->value(rkr->efx_NewDist->getpar(3));
-     newdist_drive->redraw();
+     NEWDIST->newdist_drive->value(rkr->efx_NewDist->getpar(3));
+     NEWDIST->newdist_drive->redraw();
      break;
      case 3:
-     newdist_level->value(rkr->efx_NewDist->getpar(4));
-     newdist_level->redraw();
+     NEWDIST->newdist_level->value(rkr->efx_NewDist->getpar(4));
+     NEWDIST->newdist_level->redraw();
      break;
      case 4:
-     newdist_lpf->value(rkr->efx_NewDist->getpar(7));
-     newdist_lpf->redraw();
+     NEWDIST->newdist_lpf->value(rkr->efx_NewDist->getpar(7));
+     NEWDIST->newdist_lpf->redraw();
      break;
      case 5:
-     newdist_hpf->value(rkr->efx_NewDist->getpar(8));
-     newdist_hpf->redraw();
+     NEWDIST->newdist_hpf->value(rkr->efx_NewDist->getpar(8));
+     NEWDIST->newdist_hpf->redraw();
      break;
      case 6:
-     newdist_st->value(rkr->efx_NewDist->getpar(9));
-     newdist_st->redraw();
+     NEWDIST->newdist_st->value(rkr->efx_NewDist->getpar(9));
+     NEWDIST->newdist_st->redraw();
      break;
      case 8:
-     newdist_oct->value(rkr->efx_NewDist->getpar(11));
-     newdist_oct->redraw();
+     NEWDIST->newdist_oct->value(rkr->efx_NewDist->getpar(11));
+     NEWDIST->newdist_oct->redraw();
      break;
      case 9:
      DIST->dist_oct->value(rkr->efx_Distorsion->getpar(12));
@@ -13391,8 +13231,8 @@ switch(miralo)
   GATE->gate_activar->do_callback();
   break;
   case 17:
-  newdist_activar->value(rkr->NewDist_Bypass);
-  newdist_activar->do_callback();
+  NEWDIST->newdist_activar->value(rkr->NewDist_Bypass);
+  NEWDIST->newdist_activar->do_callback();
   break;
   case 18:
   aphaser_activar->value(rkr->APhaser_Bypass);
@@ -15165,7 +15005,7 @@ for(i=0;i<10;i++)
 
      case 17://NewDist
      if (i<numEff)rkr->NewDist_Bypass=1; else rkr->NewDist_Bypass=0;
-     newdist_activar->value(rkr->NewDist_Bypass);
+     NEWDIST->newdist_activar->value(rkr->NewDist_Bypass);
      break;
      
      case 18://APhaser
