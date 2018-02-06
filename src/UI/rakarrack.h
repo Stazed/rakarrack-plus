@@ -37,6 +37,7 @@ class PeqGui; // forward declaration
 class WhawhaGui; // forward declaration
 class AlienwahGui; // forward declaration
 class CabinetGui; // forward declaration
+class PanGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -56,6 +57,7 @@ class SustainGui; // forward declaration
 #include "whawha_gui.h"
 #include "alienwah_gui.h"
 #include "cabinet_gui.h"
+#include "pan_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -232,63 +234,7 @@ public:
   WhawhaGui *WHAWHA;
   AlienwahGui *ALIENWAH;
   CabinetGui *CABINET;
-  Fl_Group *PAN;
-  Fl_Light_Button *pan_activar;
-private:
-  inline void cb_pan_activar_i(Fl_Light_Button*, void*);
-  static void cb_pan_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *pan_preset;
-private:
-  inline void cb_pan_preset_i(Fl_Choice*, void*);
-  static void cb_pan_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_pan_preset[];
-public:
-  SliderW *pan_WD;
-private:
-  inline void cb_pan_WD_i(SliderW*, void*);
-  static void cb_pan_WD(SliderW*, void*);
-public:
-  SliderW *pan_pan;
-private:
-  inline void cb_pan_pan_i(SliderW*, void*);
-  static void cb_pan_pan(SliderW*, void*);
-public:
-  Fl_Check_Button *pan_autopan;
-private:
-  inline void cb_pan_autopan_i(Fl_Check_Button*, void*);
-  static void cb_pan_autopan(Fl_Check_Button*, void*);
-public:
-  SliderW *pan_freq;
-private:
-  inline void cb_pan_freq_i(SliderW*, void*);
-  static void cb_pan_freq(SliderW*, void*);
-public:
-  SliderW *pan_rnd;
-private:
-  inline void cb_pan_rnd_i(SliderW*, void*);
-  static void cb_pan_rnd(SliderW*, void*);
-public:
-  Fl_Choice *pan_lfotype;
-private:
-  inline void cb_pan_lfotype_i(Fl_Choice*, void*);
-  static void cb_pan_lfotype(Fl_Choice*, void*);
-public:
-  SliderW *pan_stdf;
-private:
-  inline void cb_pan_stdf_i(SliderW*, void*);
-  static void cb_pan_stdf(SliderW*, void*);
-public:
-  Fl_Check_Button *pan_extraon;
-private:
-  inline void cb_pan_extraon_i(Fl_Check_Button*, void*);
-  static void cb_pan_extraon(Fl_Check_Button*, void*);
-public:
-  SliderW *pan_extra;
-private:
-  inline void cb_pan_extra_i(SliderW*, void*);
-  static void cb_pan_extra(SliderW*, void*);
-public:
+  PanGui *PAN;
   Fl_Group *HAR;
   Fl_Light_Button *har_activar;
 private:

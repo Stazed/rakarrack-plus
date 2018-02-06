@@ -751,133 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_pan_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Pan_Bypass);
- return;
-}
-rkr->Pan_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Pan->cleanup();
-findpos(13,(int)o->value(),o);
-}
-void RKRGUI::cb_pan_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_activar_i(o,v);
-}
-
-void RKRGUI::cb_pan_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12013))rkr->efx_Pan->setpreset((int) o->value());
-pan_WD->value(rkr->efx_Pan->getpar(0)-64);
-pan_pan->value(rkr->efx_Pan->getpar(1)-64);
-pan_freq->value(rkr->efx_Pan->getpar(2));
-pan_rnd->value(rkr->efx_Pan->getpar(3));
-pan_lfotype->value(rkr->efx_Pan->getpar(4));
-pan_stdf->value(rkr->efx_Pan->getpar(5));
-pan_extra->value(rkr->efx_Pan->getpar(6));
-pan_autopan->value(rkr->efx_Pan->getpar(7));
-pan_extraon->value(rkr->efx_Pan->getpar(8));
-}
-void RKRGUI::cb_pan_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_pan_preset[] = {
- {"AutoPan", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Extra Stereo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_pan_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(58);
- return;
-} 
-rkr->efx_Pan->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_pan_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_WD_i(o,v);
-}
-
-void RKRGUI::cb_pan_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(67);
- return;
-} 
-rkr->efx_Pan->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_pan_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_pan_i(o,v);
-}
-
-void RKRGUI::cb_pan_autopan_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_pan_autopan(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_autopan_i(o,v);
-}
-
-void RKRGUI::cb_pan_freq_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(77);
- return;
-} 
-rkr->efx_Pan->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_pan_freq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_freq_i(o,v);
-}
-
-void RKRGUI::cb_pan_rnd_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(110);
- return;
-} 
-rkr->efx_Pan->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_pan_rnd(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_rnd_i(o,v);
-}
-
-void RKRGUI::cb_pan_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Pan->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_pan_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_lfotype_i(o,v);
-}
-
-void RKRGUI::cb_pan_stdf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(104);
- return;
-} 
-rkr->efx_Pan->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_pan_stdf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_stdf_i(o,v);
-}
-
-void RKRGUI::cb_pan_extraon_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_pan_extraon(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_extraon_i(o,v);
-}
-
-void RKRGUI::cb_pan_extra_i(SliderW* o, void*) {
-  rkr->efx_Pan->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_pan_extra(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_pan_extra_i(o,v);
-}
-
 void RKRGUI::cb_har_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -9188,7 +9061,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       ALIENWAH->hide();
       ALIENWAH->end();
     } // AlienwahGui* ALIENWAH
-    { CABINET = new CabinetGui(480, 212, 158, 184);
+    { CABINET = new CabinetGui(320, 212, 158, 184);
       CABINET->box(FL_UP_BOX);
       CABINET->color(FL_FOREGROUND_COLOR);
       CABINET->selection_color(FL_FOREGROUND_COLOR);
@@ -9202,157 +9075,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       CABINET->hide();
       CABINET->end();
     } // CabinetGui* CABINET
-    { PAN = new Fl_Group(320, 212, 158, 184);
+    { PAN = new PanGui(480, 212, 158, 184);
       PAN->box(FL_UP_BOX);
       PAN->color(FL_FOREGROUND_COLOR);
       PAN->selection_color(FL_FOREGROUND_COLOR);
+      PAN->labeltype(FL_NORMAL_LABEL);
       PAN->labelfont(1);
+      PAN->labelsize(14);
+      PAN->labelcolor(FL_FOREGROUND_COLOR);
       PAN->user_data((void*)(1));
       PAN->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      PAN->when(FL_WHEN_RELEASE);
       PAN->hide();
-      { pan_activar = new Fl_Light_Button(325, 216, 34, 18, "On");
-        pan_activar->shortcut(0x36);
-        pan_activar->color((Fl_Color)62);
-        pan_activar->selection_color((Fl_Color)1);
-        pan_activar->labelsize(10);
-        pan_activar->callback((Fl_Callback*)cb_pan_activar, (void*)(2));
-        pan_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        pan_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* pan_activar
-      { pan_preset = new Fl_Choice(397, 216, 76, 18, "Preset");
-        pan_preset->down_box(FL_BORDER_BOX);
-        pan_preset->selection_color(FL_FOREGROUND_COLOR);
-        pan_preset->labelsize(10);
-        pan_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_preset->textsize(10);
-        pan_preset->textcolor(FL_BACKGROUND2_COLOR);
-        pan_preset->callback((Fl_Callback*)cb_pan_preset, (void*)(12013));
-        pan_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        pan_preset->menu(menu_pan_preset);
-      } // Fl_Choice* pan_preset
-      { pan_WD = new SliderW(369, 241, 100, 10, "Wet/Dry");
-        pan_WD->type(5);
-        pan_WD->box(FL_FLAT_BOX);
-        pan_WD->color((Fl_Color)178);
-        pan_WD->selection_color((Fl_Color)62);
-        pan_WD->labeltype(FL_NORMAL_LABEL);
-        pan_WD->labelfont(0);
-        pan_WD->labelsize(10);
-        pan_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_WD->minimum(-64);
-        pan_WD->maximum(63);
-        pan_WD->step(1);
-        pan_WD->textcolor(FL_BACKGROUND2_COLOR);
-        pan_WD->callback((Fl_Callback*)cb_pan_WD);
-        pan_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        pan_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* pan_WD
-      { pan_pan = new SliderW(369, 256, 100, 10, "Pan");
-        pan_pan->type(5);
-        pan_pan->box(FL_FLAT_BOX);
-        pan_pan->color((Fl_Color)178);
-        pan_pan->selection_color((Fl_Color)62);
-        pan_pan->labeltype(FL_NORMAL_LABEL);
-        pan_pan->labelfont(0);
-        pan_pan->labelsize(10);
-        pan_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_pan->minimum(-64);
-        pan_pan->maximum(63);
-        pan_pan->step(1);
-        pan_pan->textcolor(FL_BACKGROUND2_COLOR);
-        pan_pan->callback((Fl_Callback*)cb_pan_pan);
-        pan_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        pan_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* pan_pan
-      { pan_autopan = new Fl_Check_Button(355, 268, 70, 18, "AutoPan");
-        pan_autopan->down_box(FL_BORDER_BOX);
-        pan_autopan->labelsize(10);
-        pan_autopan->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
-      } // Fl_Check_Button* pan_autopan
-      { pan_freq = new SliderW(369, 285, 100, 10, "Tempo");
-        pan_freq->type(5);
-        pan_freq->box(FL_FLAT_BOX);
-        pan_freq->color((Fl_Color)178);
-        pan_freq->selection_color((Fl_Color)62);
-        pan_freq->labeltype(FL_NORMAL_LABEL);
-        pan_freq->labelfont(0);
-        pan_freq->labelsize(10);
-        pan_freq->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_freq->minimum(1);
-        pan_freq->maximum(600);
-        pan_freq->step(1);
-        pan_freq->textcolor(FL_BACKGROUND2_COLOR);
-        pan_freq->callback((Fl_Callback*)cb_pan_freq);
-        pan_freq->align(Fl_Align(FL_ALIGN_LEFT));
-        pan_freq->when(FL_WHEN_CHANGED);
-      } // SliderW* pan_freq
-      { pan_rnd = new SliderW(369, 297, 100, 10, "Rnd");
-        pan_rnd->type(5);
-        pan_rnd->box(FL_FLAT_BOX);
-        pan_rnd->color((Fl_Color)178);
-        pan_rnd->selection_color((Fl_Color)62);
-        pan_rnd->labeltype(FL_NORMAL_LABEL);
-        pan_rnd->labelfont(0);
-        pan_rnd->labelsize(10);
-        pan_rnd->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_rnd->maximum(127);
-        pan_rnd->step(1);
-        pan_rnd->textcolor(FL_BACKGROUND2_COLOR);
-        pan_rnd->callback((Fl_Callback*)cb_pan_rnd);
-        pan_rnd->align(Fl_Align(FL_ALIGN_LEFT));
-        pan_rnd->when(FL_WHEN_CHANGED);
-      } // SliderW* pan_rnd
-      { Fl_Choice* o = pan_lfotype = new Fl_Choice(381, 315, 72, 16, "LFO Type");
-        pan_lfotype->down_box(FL_BORDER_BOX);
-        pan_lfotype->selection_color(FL_FOREGROUND_COLOR);
-        pan_lfotype->labelsize(10);
-        pan_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_lfotype->textsize(10);
-        pan_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-        pan_lfotype->callback((Fl_Callback*)cb_pan_lfotype);
-        o->menu(CHORUS->get_menu_chorus_lfotype());
-      } // Fl_Choice* pan_lfotype
-      { pan_stdf = new SliderW(369, 336, 100, 10, "St.df");
-        pan_stdf->type(5);
-        pan_stdf->box(FL_FLAT_BOX);
-        pan_stdf->color((Fl_Color)178);
-        pan_stdf->selection_color((Fl_Color)62);
-        pan_stdf->labeltype(FL_NORMAL_LABEL);
-        pan_stdf->labelfont(0);
-        pan_stdf->labelsize(10);
-        pan_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_stdf->maximum(127);
-        pan_stdf->step(1);
-        pan_stdf->textcolor(FL_BACKGROUND2_COLOR);
-        pan_stdf->callback((Fl_Callback*)cb_pan_stdf);
-        pan_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-        pan_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* pan_stdf
-      { pan_extraon = new Fl_Check_Button(355, 352, 82, 15, "Extra Stereo");
-        pan_extraon->down_box(FL_BORDER_BOX);
-        pan_extraon->labelsize(10);
-        pan_extraon->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_extraon->callback((Fl_Callback*)cb_pan_extraon, (void*)(2));
-      } // Fl_Check_Button* pan_extraon
-      { pan_extra = new SliderW(369, 373, 100, 10, "E.S.");
-        pan_extra->type(5);
-        pan_extra->box(FL_FLAT_BOX);
-        pan_extra->color((Fl_Color)178);
-        pan_extra->selection_color((Fl_Color)62);
-        pan_extra->labeltype(FL_NORMAL_LABEL);
-        pan_extra->labelfont(0);
-        pan_extra->labelsize(10);
-        pan_extra->labelcolor(FL_BACKGROUND2_COLOR);
-        pan_extra->maximum(127);
-        pan_extra->step(1);
-        pan_extra->textcolor(FL_BACKGROUND2_COLOR);
-        pan_extra->callback((Fl_Callback*)cb_pan_extra);
-        pan_extra->align(Fl_Align(FL_ALIGN_LEFT));
-        pan_extra->when(FL_WHEN_CHANGED);
-      } // SliderW* pan_extra
       PAN->end();
-    } // Fl_Group* PAN
+    } // PanGui* PAN
     { HAR = new Fl_Group(162, 413, 158, 184);
       HAR->box(FL_UP_BOX);
       HAR->color(FL_FOREGROUND_COLOR);
@@ -18714,8 +18450,8 @@ void RKRGUI::Put_Loaded() {
        break;
    
        case 13://Pan
-       pan_activar->value(rkr->Pan_Bypass);
-       pan_preset->do_callback(pan_preset,1);
+       PAN->pan_activar->value(rkr->Pan_Bypass);
+       PAN->pan_preset->do_callback(PAN->pan_preset,1);
        break;
        
        case 14://Har
@@ -19313,7 +19049,7 @@ void RKRGUI::reordena() {
        case 13:
        
          PAN->position(x[i],y[i]);   
-         pan_activar->shortcut(s[i]);
+         PAN->pan_activar->shortcut(s[i]);
          if(!rkr->deachide)PAN->show();
          if(rkr->Pan_Bypass)
          {
@@ -20394,8 +20130,8 @@ void RKRGUI::ActMIDI() {
        REVERB->reverb_WD->redraw();
        break;
        case 58:
-       pan_WD->value(rkr->efx_Pan->getpar(0)-64);
-       pan_WD->redraw();
+       PAN->pan_WD->value(rkr->efx_Pan->getpar(0)-64);
+       PAN->pan_WD->redraw();
        break;
        case 59:
        ECHO->echo_WD->value(rkr->efx_Echo->getpar(0)-64);
@@ -20450,8 +20186,8 @@ void RKRGUI::ActMIDI() {
        WHAWHA->WhaWha_pan->redraw();
        break;
        case 67:
-       pan_pan->value(rkr->efx_Pan->getpar(1)-64);
-       pan_pan->redraw();
+       PAN->pan_pan->value(rkr->efx_Pan->getpar(1)-64);
+       PAN->pan_pan->redraw();
        break;
        case 68:
        OVRD->ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
@@ -20490,8 +20226,8 @@ void RKRGUI::ActMIDI() {
        ALIENWAH->Alienwah_freq->redraw();
        break;
        case 77:
-       pan_freq->value(rkr->efx_Pan->getpar(2));
-       pan_freq->redraw();
+       PAN->pan_freq->value(rkr->efx_Pan->getpar(2));
+       PAN->pan_freq->redraw();
        break;
        case 78:
        ECHO->echo_fb->value(rkr->efx_Echo->getpar(5));
@@ -20598,8 +20334,8 @@ void RKRGUI::ActMIDI() {
        ALIENWAH->Alienwah_stdf->redraw();
        break;
        case 104:
-       pan_stdf->value(rkr->efx_Pan->getpar(5));
-       pan_stdf->redraw();
+       PAN->pan_stdf->value(rkr->efx_Pan->getpar(5));
+       PAN->pan_stdf->redraw();
        break;
        case 105:
        CHORUS->chorus_rnd->value(rkr->efx_Chorus->getpar(3));
@@ -20622,8 +20358,8 @@ void RKRGUI::ActMIDI() {
        ALIENWAH->Alienwah_rnd->redraw();
        break;
        case 110:
-       pan_rnd->value(rkr->efx_Pan->getpar(3));
-       pan_rnd->redraw();
+       PAN->pan_rnd->value(rkr->efx_Pan->getpar(3));
+       PAN->pan_rnd->redraw();
        break;
        case 111:
        WHAWHA->WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
@@ -21896,8 +21632,8 @@ void RKRGUI::ActOnOff() {
     CABINET->Cabinet_activar->do_callback();
     break;
     case 13:
-    pan_activar->value(rkr->Pan_Bypass);
-    pan_activar->do_callback();
+    PAN->pan_activar->value(rkr->Pan_Bypass);
+    PAN->pan_activar->do_callback();
     break;
     case 14:
     har_activar->value(rkr->Harmonizer_Bypass);
@@ -22817,8 +22553,8 @@ void RKRGUI::UpdateTGUI() {
     
     if(rkr->Pan_Bypass)
     {
-    pan_freq->value(rkr->efx_Pan->getpar(2));
-    pan_freq->redraw();
+    PAN->pan_freq->value(rkr->efx_Pan->getpar(2));
+    PAN->pan_freq->redraw();
     }
     
     if(rkr->WhaWha_Bypass)
@@ -23692,7 +23428,7 @@ void RKRGUI::RandomPreset() {
    
        case 13://Pan
        if (i<numEff)rkr->Pan_Bypass=1; else rkr->Pan_Bypass=0;
-       pan_activar->value(rkr->Pan_Bypass);
+       PAN->pan_activar->value(rkr->Pan_Bypass);
        break;
        
        case 14://Har

@@ -28,6 +28,7 @@ set (ProgSources
     UI/whawha_gui.cxx
     UI/alienwah_gui.cxx
     UI/cabinet_gui.cxx
+    UI/pan_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C
