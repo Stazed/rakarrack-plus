@@ -33,6 +33,7 @@ class ChorusGui; // forward declaration
 class PhaserGui; // forward declaration
 class FlangerGui; // forward declaration
 class ReverbGui; // forward declaration
+class PeqGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -48,6 +49,7 @@ class SustainGui; // forward declaration
 #include "phaser_gui.h"
 #include "flanger_gui.h"
 #include "reverb_gui.h"
+#include "peq_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -220,68 +222,7 @@ public:
   PhaserGui *PHASER;
   FlangerGui *FLANGER;
   ReverbGui *REVERB;
-  Fl_Group *PEQ;
-  Fl_Light_Button *eqp_activar;
-private:
-  inline void cb_eqp_activar_i(Fl_Light_Button*, void*);
-  static void cb_eqp_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *eqp_preset;
-private:
-  inline void cb_eqp_preset_i(Fl_Choice*, void*);
-  static void cb_eqp_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_eqp_preset[];
-public:
-  SliderW *eqp_Gain;
-private:
-  inline void cb_eqp_Gain_i(SliderW*, void*);
-  static void cb_eqp_Gain(SliderW*, void*);
-public:
-  SliderW *eqp_LF;
-private:
-  inline void cb_eqp_LF_i(SliderW*, void*);
-  static void cb_eqp_LF(SliderW*, void*);
-public:
-  SliderW *eqp_LFg;
-private:
-  inline void cb_eqp_LFg_i(SliderW*, void*);
-  static void cb_eqp_LFg(SliderW*, void*);
-public:
-  SliderW *eqp_LQ;
-private:
-  inline void cb_eqp_LQ_i(SliderW*, void*);
-  static void cb_eqp_LQ(SliderW*, void*);
-public:
-  SliderW *eqp_MF;
-private:
-  inline void cb_eqp_MF_i(SliderW*, void*);
-  static void cb_eqp_MF(SliderW*, void*);
-public:
-  SliderW *eqp_MFg;
-private:
-  inline void cb_eqp_MFg_i(SliderW*, void*);
-  static void cb_eqp_MFg(SliderW*, void*);
-public:
-  SliderW *eqp_MQ;
-private:
-  inline void cb_eqp_MQ_i(SliderW*, void*);
-  static void cb_eqp_MQ(SliderW*, void*);
-public:
-  SliderW *eqp_HF;
-private:
-  inline void cb_eqp_HF_i(SliderW*, void*);
-  static void cb_eqp_HF(SliderW*, void*);
-public:
-  SliderW *eqp_HFg;
-private:
-  inline void cb_eqp_HFg_i(SliderW*, void*);
-  static void cb_eqp_HFg(SliderW*, void*);
-public:
-  SliderW *eqp_HQ;
-private:
-  inline void cb_eqp_HQ_i(SliderW*, void*);
-  static void cb_eqp_HQ(SliderW*, void*);
-public:
+  PeqGui *PEQ;
   Fl_Group *WHAWHA;
   Fl_Light_Button *WhaWha_activar;
 private:

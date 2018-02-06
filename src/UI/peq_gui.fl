@@ -1,0 +1,167 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class PeqGui {
+  user_data 1 open selected
+  xywh {1514 80 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"} visible position_relative
+} {
+  Fl_Light_Button eqp_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->EQ2_Bypass);
+ return;
+}
+rkr->EQ2_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_EQ2->cleanup();
+rgui->findpos(9,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+  }
+  Fl_Choice eqp_preset {
+    label Preset
+    user_data 12009
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12009)) rkr->EQ2_setpreset((int)o->value());
+eqp_LF->value(rkr->efx_EQ2->getpar(11));
+eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
+eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
+eqp_MF->value(rkr->efx_EQ2->getpar(16));
+eqp_MFg->value(rkr->efx_EQ2->getpar(17)-64);
+eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
+eqp_HF->value(rkr->efx_EQ2->getpar(21));
+eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
+eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
+eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label Plain
+      xywh {22 22 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Pop
+      xywh {22 22 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Jazz
+      xywh {22 22 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider eqp_Gain {
+    label Gain
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(148);
+ return;
+} 
+rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
+    xywh {50 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_LF {
+    label {Low F.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(149);
+ return;
+} 
+rkr->efx_EQ2->changepar(11,(int)o->value());}
+    xywh {50 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 value 400 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_LFg {
+    label {Low G.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(150);
+ return;
+} 
+rkr->efx_EQ2->changepar(12,(int)(o->value()+64));}
+    xywh {50 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_LQ {
+    label Q
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(151);
+ return;
+} 
+rkr->efx_EQ2->changepar(13,(int)(o->value()+64));}
+    xywh {50 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_MF {
+    label {Mid F.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(152);
+ return;
+} 
+rkr->efx_EQ2->changepar(5+11,(int)o->value());}
+    xywh {50 98 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 8000 step 1 value 2000 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_MFg {
+    label {Mid G.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(153);
+ return;
+} 
+rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));}
+    xywh {50 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_MQ {
+    label Q
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(154);
+ return;
+} 
+rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));}
+    xywh {50 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_HF {
+    label {High F.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(155);
+ return;
+} 
+rkr->efx_EQ2->changepar(10+11,(int)o->value());}
+    xywh {50 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 value 8000 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_HFg {
+    label {High G.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(156);
+ return;
+} 
+rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));}
+    xywh {50 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider eqp_HQ {
+    label Q
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(157);
+ return;
+} 
+rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));}
+    xywh {50 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+}

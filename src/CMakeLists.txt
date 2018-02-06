@@ -24,6 +24,7 @@ set (ProgSources
     UI/phaser_gui.cxx
     UI/flanger_gui.cxx
     UI/reverb_gui.cxx
+    UI/peq_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C
