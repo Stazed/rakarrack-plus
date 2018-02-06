@@ -751,186 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_valve_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Valve_Bypass);
- return;
-}
-rkr->Valve_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Valve->cleanup();
-findpos(19,(int)o->value(),o);
-}
-void RKRGUI::cb_valve_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_activar_i(o,v);
-}
-
-void RKRGUI::cb_valve_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
-valve_WD->value(rkr->efx_Valve->getpar(0)-64);
-valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
-valve_drive->value(rkr->efx_Valve->getpar(3));
-valve_level->value(rkr->efx_Valve->getpar(4));
-valve_neg->value(rkr->efx_Valve->getpar(5));
-valve_st->value(rkr->efx_Valve->getpar(8));
-valve_pan->value(rkr->efx_Valve->getpar(1)-64);
-valve_pf->value(rkr->efx_Valve->getpar(9));
-valve_lpf->value(rkr->efx_Valve->getpar(6));
-valve_hpf->value(rkr->efx_Valve->getpar(7));
-valve_Q->value(rkr->efx_Valve->getpar(10));
-valve_ed->value(rkr->efx_Valve->getpar(11));
-valve_Pre->value(rkr->efx_Valve->getpar(12));
-}
-void RKRGUI::cb_valve_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_valve_preset[] = {
- {"Valve 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Valve 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Valve 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_valve_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(169);
- return;
-} 
-rkr->efx_Valve->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_valve_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_WD_i(o,v);
-}
-
-void RKRGUI::cb_valve_LRc_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(170);
- return;
-} 
-rkr->efx_Valve->changepar(2,(int)(o->value()+64));
-}
-void RKRGUI::cb_valve_LRc(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_LRc_i(o,v);
-}
-
-void RKRGUI::cb_valve_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(171);
- return;
-} 
-rkr->efx_Valve->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_valve_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_pan_i(o,v);
-}
-
-void RKRGUI::cb_valve_level_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(172);
- return;
-} 
-rkr->efx_Valve->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_valve_level(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_level_i(o,v);
-}
-
-void RKRGUI::cb_valve_drive_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(173);
- return;
-} 
-rkr->efx_Valve->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_valve_drive(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_drive_i(o,v);
-}
-
-void RKRGUI::cb_valve_ed_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_valve_ed(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_ed_i(o,v);
-}
-
-void RKRGUI::cb_valve_Q_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(174);
- return;
-} 
-rkr->efx_Valve->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_valve_Q(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_Q_i(o,v);
-}
-
-void RKRGUI::cb_valve_Pre_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(175);
- return;
-} 
-rkr->efx_Valve->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_valve_Pre(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_Pre_i(o,v);
-}
-
-void RKRGUI::cb_valve_pf_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_valve_pf(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_pf_i(o,v);
-}
-
-void RKRGUI::cb_valve_st_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_valve_st(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_st_i(o,v);
-}
-
-void RKRGUI::cb_valve_neg_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_valve_neg(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_neg_i(o,v);
-}
-
-void RKRGUI::cb_valve_lpf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(176);
- return;
-} 
-rkr->efx_Valve->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_valve_lpf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_lpf_i(o,v);
-}
-
-void RKRGUI::cb_valve_hpf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(177);
- return;
-} 
-rkr->efx_Valve->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_valve_hpf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_valve_hpf_i(o,v);
-}
-
 void RKRGUI::cb_dflange_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -8376,211 +8196,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       APHASER->hide();
       APHASER->end();
     } // AphaserGui* APHASER
-    { VALVE = new Fl_Group(161, 212, 158, 184);
+    { VALVE = new ValveGui(639, 413, 158, 184);
       VALVE->box(FL_UP_BOX);
       VALVE->color(FL_FOREGROUND_COLOR);
       VALVE->selection_color(FL_FOREGROUND_COLOR);
+      VALVE->labeltype(FL_NORMAL_LABEL);
       VALVE->labelfont(1);
+      VALVE->labelsize(14);
+      VALVE->labelcolor(FL_FOREGROUND_COLOR);
       VALVE->user_data((void*)(1));
       VALVE->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      VALVE->when(FL_WHEN_RELEASE);
       VALVE->hide();
-      { valve_activar = new Fl_Light_Button(166, 216, 34, 18, "On");
-        valve_activar->shortcut(0x33);
-        valve_activar->color((Fl_Color)62);
-        valve_activar->selection_color((Fl_Color)1);
-        valve_activar->labelsize(10);
-        valve_activar->callback((Fl_Callback*)cb_valve_activar, (void*)(2));
-        valve_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        valve_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* valve_activar
-      { valve_preset = new Fl_Choice(238, 216, 76, 18, "Preset");
-        valve_preset->down_box(FL_BORDER_BOX);
-        valve_preset->selection_color(FL_FOREGROUND_COLOR);
-        valve_preset->labelsize(10);
-        valve_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_preset->textsize(10);
-        valve_preset->textcolor(FL_BACKGROUND2_COLOR);
-        valve_preset->callback((Fl_Callback*)cb_valve_preset, (void*)(12019));
-        valve_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        valve_preset->menu(menu_valve_preset);
-      } // Fl_Choice* valve_preset
-      { valve_WD = new SliderW(214, 243, 100, 10, "Wet/Dry");
-        valve_WD->type(5);
-        valve_WD->box(FL_FLAT_BOX);
-        valve_WD->color((Fl_Color)178);
-        valve_WD->selection_color((Fl_Color)62);
-        valve_WD->labeltype(FL_NORMAL_LABEL);
-        valve_WD->labelfont(0);
-        valve_WD->labelsize(10);
-        valve_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_WD->minimum(-64);
-        valve_WD->maximum(63);
-        valve_WD->step(1);
-        valve_WD->textcolor(FL_BACKGROUND2_COLOR);
-        valve_WD->callback((Fl_Callback*)cb_valve_WD);
-        valve_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_WD
-      { valve_LRc = new SliderW(214, 256, 100, 10, "L/R.Cr");
-        valve_LRc->type(5);
-        valve_LRc->box(FL_FLAT_BOX);
-        valve_LRc->color((Fl_Color)178);
-        valve_LRc->selection_color((Fl_Color)62);
-        valve_LRc->labeltype(FL_NORMAL_LABEL);
-        valve_LRc->labelfont(0);
-        valve_LRc->labelsize(10);
-        valve_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_LRc->minimum(-64);
-        valve_LRc->maximum(63);
-        valve_LRc->step(1);
-        valve_LRc->textcolor(FL_BACKGROUND2_COLOR);
-        valve_LRc->callback((Fl_Callback*)cb_valve_LRc);
-        valve_LRc->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_LRc->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_LRc
-      { valve_pan = new SliderW(214, 269, 100, 10, "Pan");
-        valve_pan->type(5);
-        valve_pan->box(FL_FLAT_BOX);
-        valve_pan->color((Fl_Color)178);
-        valve_pan->selection_color((Fl_Color)62);
-        valve_pan->labeltype(FL_NORMAL_LABEL);
-        valve_pan->labelfont(0);
-        valve_pan->labelsize(10);
-        valve_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_pan->minimum(-64);
-        valve_pan->maximum(63);
-        valve_pan->step(1);
-        valve_pan->textcolor(FL_BACKGROUND2_COLOR);
-        valve_pan->callback((Fl_Callback*)cb_valve_pan);
-        valve_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_pan
-      { valve_level = new SliderW(214, 283, 100, 10, "Level");
-        valve_level->type(5);
-        valve_level->box(FL_FLAT_BOX);
-        valve_level->color((Fl_Color)178);
-        valve_level->selection_color((Fl_Color)62);
-        valve_level->labeltype(FL_NORMAL_LABEL);
-        valve_level->labelfont(0);
-        valve_level->labelsize(10);
-        valve_level->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_level->maximum(127);
-        valve_level->step(1);
-        valve_level->textcolor(FL_BACKGROUND2_COLOR);
-        valve_level->callback((Fl_Callback*)cb_valve_level);
-        valve_level->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_level->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_level
-      { valve_drive = new SliderW(214, 296, 100, 10, "Drive");
-        valve_drive->type(5);
-        valve_drive->box(FL_FLAT_BOX);
-        valve_drive->color((Fl_Color)178);
-        valve_drive->selection_color((Fl_Color)62);
-        valve_drive->labeltype(FL_NORMAL_LABEL);
-        valve_drive->labelfont(0);
-        valve_drive->labelsize(10);
-        valve_drive->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_drive->maximum(127);
-        valve_drive->step(1);
-        valve_drive->textcolor(FL_BACKGROUND2_COLOR);
-        valve_drive->callback((Fl_Callback*)cb_valve_drive);
-        valve_drive->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_drive->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_drive
-      { valve_ed = new Fl_Check_Button(176, 308, 72, 15, "Extra Dist.");
-        valve_ed->down_box(FL_BORDER_BOX);
-        valve_ed->labelsize(10);
-        valve_ed->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_ed->callback((Fl_Callback*)cb_valve_ed, (void*)(2));
-      } // Fl_Check_Button* valve_ed
-      { valve_Q = new SliderW(214, 324, 100, 10, "Dist.");
-        valve_Q->type(5);
-        valve_Q->box(FL_FLAT_BOX);
-        valve_Q->color((Fl_Color)178);
-        valve_Q->selection_color((Fl_Color)62);
-        valve_Q->labeltype(FL_NORMAL_LABEL);
-        valve_Q->labelfont(0);
-        valve_Q->labelsize(10);
-        valve_Q->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_Q->maximum(127);
-        valve_Q->step(1);
-        valve_Q->textcolor(FL_BACKGROUND2_COLOR);
-        valve_Q->callback((Fl_Callback*)cb_valve_Q);
-        valve_Q->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_Q->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_Q
-      { valve_Pre = new SliderW(214, 339, 100, 10, "Presence");
-        valve_Pre->type(5);
-        valve_Pre->box(FL_FLAT_BOX);
-        valve_Pre->color((Fl_Color)178);
-        valve_Pre->selection_color((Fl_Color)62);
-        valve_Pre->labeltype(FL_NORMAL_LABEL);
-        valve_Pre->labelfont(0);
-        valve_Pre->labelsize(10);
-        valve_Pre->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_Pre->maximum(100);
-        valve_Pre->step(1);
-        valve_Pre->textcolor(FL_BACKGROUND2_COLOR);
-        valve_Pre->callback((Fl_Callback*)cb_valve_Pre);
-        valve_Pre->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_Pre->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_Pre
-      { valve_pf = new Fl_Check_Button(166, 351, 62, 15, "Pre Filter");
-        valve_pf->down_box(FL_BORDER_BOX);
-        valve_pf->labelsize(10);
-        valve_pf->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_pf->callback((Fl_Callback*)cb_valve_pf, (void*)(2));
-      } // Fl_Check_Button* valve_pf
-      { valve_st = new Fl_Check_Button(226, 351, 50, 15, "Stereo");
-        valve_st->down_box(FL_BORDER_BOX);
-        valve_st->labelsize(10);
-        valve_st->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_st->callback((Fl_Callback*)cb_valve_st, (void*)(2));
-      } // Fl_Check_Button* valve_st
-      { valve_neg = new Fl_Check_Button(275, 351, 40, 15, "Neg.");
-        valve_neg->down_box(FL_BORDER_BOX);
-        valve_neg->labelsize(10);
-        valve_neg->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_neg->callback((Fl_Callback*)cb_valve_neg, (void*)(2));
-      } // Fl_Check_Button* valve_neg
-      { valve_lpf = new SliderW(214, 368, 100, 10, "LPF");
-        valve_lpf->type(5);
-        valve_lpf->box(FL_FLAT_BOX);
-        valve_lpf->color((Fl_Color)178);
-        valve_lpf->selection_color((Fl_Color)62);
-        valve_lpf->labeltype(FL_NORMAL_LABEL);
-        valve_lpf->labelfont(0);
-        valve_lpf->labelsize(10);
-        valve_lpf->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_lpf->minimum(20);
-        valve_lpf->maximum(26000);
-        valve_lpf->step(1);
-        valve_lpf->value(20000);
-        valve_lpf->textcolor(FL_BACKGROUND2_COLOR);
-        valve_lpf->callback((Fl_Callback*)cb_valve_lpf);
-        valve_lpf->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_lpf->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_lpf
-      { valve_hpf = new SliderW(214, 381, 100, 10, "HPF");
-        valve_hpf->type(5);
-        valve_hpf->box(FL_FLAT_BOX);
-        valve_hpf->color((Fl_Color)178);
-        valve_hpf->selection_color((Fl_Color)62);
-        valve_hpf->labeltype(FL_NORMAL_LABEL);
-        valve_hpf->labelfont(0);
-        valve_hpf->labelsize(10);
-        valve_hpf->labelcolor(FL_BACKGROUND2_COLOR);
-        valve_hpf->minimum(20);
-        valve_hpf->maximum(20000);
-        valve_hpf->step(1);
-        valve_hpf->value(20);
-        valve_hpf->textcolor(FL_BACKGROUND2_COLOR);
-        valve_hpf->callback((Fl_Callback*)cb_valve_hpf);
-        valve_hpf->align(Fl_Align(FL_ALIGN_LEFT));
-        valve_hpf->when(FL_WHEN_CHANGED);
-      } // SliderW* valve_hpf
       VALVE->end();
-    } // Fl_Group* VALVE
+    } // ValveGui* VALVE
     { DFLANGE = new Fl_Group(321, 212, 158, 184);
       DFLANGE->box(FL_UP_BOX);
       DFLANGE->color(FL_FOREGROUND_COLOR);
@@ -16790,8 +16419,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 19://Valve
-       valve_activar->value(rkr->Valve_Bypass);
-       valve_preset->do_callback(valve_preset,1);
+       VALVE->valve_activar->value(rkr->Valve_Bypass);
+       VALVE->valve_preset->do_callback(VALVE->valve_preset,1);
        break;
   
        case 20://Dual_Flange
@@ -17431,7 +17060,7 @@ void RKRGUI::reordena() {
    
        case 19:
          VALVE->position(x[i],y[i]);
-         valve_activar->shortcut(s[i]);
+         VALVE->valve_activar->shortcut(s[i]);
          if(!rkr->deachide)VALVE->show();
          if(rkr->Valve_Bypass)
          {
@@ -18923,40 +18552,40 @@ void RKRGUI::ActMIDI() {
        dflange_rnd->redraw();
        break;
        case 169:
-       valve_WD->value(rkr->efx_Valve->getpar(0)-64);
-       valve_WD->redraw();
+       VALVE->valve_WD->value(rkr->efx_Valve->getpar(0)-64);
+       VALVE->valve_WD->redraw();
        break;
        case 170:
-       valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
-       valve_LRc->redraw();
+       VALVE->valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
+       VALVE->valve_LRc->redraw();
        break;
        case 171:
-       valve_pan->value(rkr->efx_Valve->getpar(1)-64);
-       valve_pan->redraw();
+       VALVE->valve_pan->value(rkr->efx_Valve->getpar(1)-64);
+       VALVE->valve_pan->redraw();
        break;
        case 172:
-       valve_level->value(rkr->efx_Valve->getpar(4));
-       valve_level->redraw();
+       VALVE->valve_level->value(rkr->efx_Valve->getpar(4));
+       VALVE->valve_level->redraw();
        break;
        case 173:
-       valve_drive->value(rkr->efx_Valve->getpar(3));
-       valve_drive->redraw();
+       VALVE->valve_drive->value(rkr->efx_Valve->getpar(3));
+       VALVE->valve_drive->redraw();
        break;
        case 174:
-       valve_Q->value(rkr->efx_Valve->getpar(10));
-       valve_Q->redraw();
+       VALVE->valve_Q->value(rkr->efx_Valve->getpar(10));
+       VALVE->valve_Q->redraw();
        break;
        case 175:
-       valve_Pre->value(rkr->efx_Valve->getpar(12));
-       valve_Pre->redraw();
+       VALVE->valve_Pre->value(rkr->efx_Valve->getpar(12));
+       VALVE->valve_Pre->redraw();
        break;
        case 176:
-       valve_lpf->value(rkr->efx_Valve->getpar(6));
-       valve_lpf->redraw();
+       VALVE->valve_lpf->value(rkr->efx_Valve->getpar(6));
+       VALVE->valve_lpf->redraw();
        break;
        case 177:
-       valve_hpf->value(rkr->efx_Valve->getpar(7));
-       valve_hpf->redraw();
+       VALVE->valve_hpf->value(rkr->efx_Valve->getpar(7));
+       VALVE->valve_hpf->redraw();
        break;
        case 178:
        ring_WD->value(rkr->efx_Ring->getpar(0));
@@ -19966,8 +19595,8 @@ void RKRGUI::ActOnOff() {
     APHASER->aphaser_activar->do_callback();
     break;
     case 19:
-    valve_activar->value(rkr->Valve_Bypass);
-    valve_activar->do_callback();
+    VALVE->valve_activar->value(rkr->Valve_Bypass);
+    VALVE->valve_activar->do_callback();
     break;
     case 20:
     dflange_activar->value(rkr->DFlange_Bypass);
@@ -21768,7 +21397,7 @@ void RKRGUI::RandomPreset() {
   
        case 19://Valve
        if (i<numEff)rkr->Valve_Bypass=1; else rkr->Valve_Bypass=0;
-       valve_activar->value(rkr->Valve_Bypass);
+       VALVE->valve_activar->value(rkr->Valve_Bypass);
        break;
   
        case 20://Dual_Flange

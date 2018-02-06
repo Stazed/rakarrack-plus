@@ -43,6 +43,7 @@ class MusdelayGui; // forward declaration
 class GateGui; // forward declaration
 class NewdistGui; // forward declaration
 class AphaserGui; // forward declaration
+class ValveGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -68,6 +69,7 @@ class SustainGui; // forward declaration
 #include "gate_gui.h"
 #include "newdist_gui.h"
 #include "aphaser_gui.h"
+#include "valve_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -250,83 +252,7 @@ public:
   GateGui *GATE;
   NewdistGui *NEWDIST;
   AphaserGui *APHASER;
-  Fl_Group *VALVE;
-  Fl_Light_Button *valve_activar;
-private:
-  inline void cb_valve_activar_i(Fl_Light_Button*, void*);
-  static void cb_valve_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *valve_preset;
-private:
-  inline void cb_valve_preset_i(Fl_Choice*, void*);
-  static void cb_valve_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_valve_preset[];
-public:
-  SliderW *valve_WD;
-private:
-  inline void cb_valve_WD_i(SliderW*, void*);
-  static void cb_valve_WD(SliderW*, void*);
-public:
-  SliderW *valve_LRc;
-private:
-  inline void cb_valve_LRc_i(SliderW*, void*);
-  static void cb_valve_LRc(SliderW*, void*);
-public:
-  SliderW *valve_pan;
-private:
-  inline void cb_valve_pan_i(SliderW*, void*);
-  static void cb_valve_pan(SliderW*, void*);
-public:
-  SliderW *valve_level;
-private:
-  inline void cb_valve_level_i(SliderW*, void*);
-  static void cb_valve_level(SliderW*, void*);
-public:
-  SliderW *valve_drive;
-private:
-  inline void cb_valve_drive_i(SliderW*, void*);
-  static void cb_valve_drive(SliderW*, void*);
-public:
-  Fl_Check_Button *valve_ed;
-private:
-  inline void cb_valve_ed_i(Fl_Check_Button*, void*);
-  static void cb_valve_ed(Fl_Check_Button*, void*);
-public:
-  SliderW *valve_Q;
-private:
-  inline void cb_valve_Q_i(SliderW*, void*);
-  static void cb_valve_Q(SliderW*, void*);
-public:
-  SliderW *valve_Pre;
-private:
-  inline void cb_valve_Pre_i(SliderW*, void*);
-  static void cb_valve_Pre(SliderW*, void*);
-public:
-  Fl_Check_Button *valve_pf;
-private:
-  inline void cb_valve_pf_i(Fl_Check_Button*, void*);
-  static void cb_valve_pf(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *valve_st;
-private:
-  inline void cb_valve_st_i(Fl_Check_Button*, void*);
-  static void cb_valve_st(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *valve_neg;
-private:
-  inline void cb_valve_neg_i(Fl_Check_Button*, void*);
-  static void cb_valve_neg(Fl_Check_Button*, void*);
-public:
-  SliderW *valve_lpf;
-private:
-  inline void cb_valve_lpf_i(SliderW*, void*);
-  static void cb_valve_lpf(SliderW*, void*);
-public:
-  SliderW *valve_hpf;
-private:
-  inline void cb_valve_hpf_i(SliderW*, void*);
-  static void cb_valve_hpf(SliderW*, void*);
-public:
+  ValveGui *VALVE;
   Fl_Group *DFLANGE;
   Fl_Light_Button *dflange_activar;
 private:
