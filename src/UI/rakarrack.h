@@ -38,6 +38,7 @@ class WhawhaGui; // forward declaration
 class AlienwahGui; // forward declaration
 class CabinetGui; // forward declaration
 class PanGui; // forward declaration
+class HarGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -58,6 +59,7 @@ class SustainGui; // forward declaration
 #include "alienwah_gui.h"
 #include "cabinet_gui.h"
 #include "pan_gui.h"
+#include "har_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -235,74 +237,7 @@ public:
   AlienwahGui *ALIENWAH;
   CabinetGui *CABINET;
   PanGui *PAN;
-  Fl_Group *HAR;
-  Fl_Light_Button *har_activar;
-private:
-  inline void cb_har_activar_i(Fl_Light_Button*, void*);
-  static void cb_har_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *har_preset;
-private:
-  inline void cb_har_preset_i(Fl_Choice*, void*);
-  static void cb_har_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_har_preset[];
-public:
-  SliderW *har_WD;
-private:
-  inline void cb_har_WD_i(SliderW*, void*);
-  static void cb_har_WD(SliderW*, void*);
-public:
-  SliderW *har_int;
-private:
-  inline void cb_har_int_i(SliderW*, void*);
-  static void cb_har_int(SliderW*, void*);
-public:
-  SliderW *har_gan;
-private:
-  inline void cb_har_gan_i(SliderW*, void*);
-  static void cb_har_gan(SliderW*, void*);
-public:
-  SliderW *har_pan;
-private:
-  inline void cb_har_pan_i(SliderW*, void*);
-  static void cb_har_pan(SliderW*, void*);
-public:
-  SliderW *har_freq1;
-private:
-  inline void cb_har_freq1_i(SliderW*, void*);
-  static void cb_har_freq1(SliderW*, void*);
-public:
-  SliderW *har_gan1;
-private:
-  inline void cb_har_gan1_i(SliderW*, void*);
-  static void cb_har_gan1(SliderW*, void*);
-public:
-  SliderW *har_q1;
-private:
-  inline void cb_har_q1_i(SliderW*, void*);
-  static void cb_har_q1(SliderW*, void*);
-public:
-  Fl_Check_Button *har_MIDI;
-private:
-  inline void cb_har_MIDI_i(Fl_Check_Button*, void*);
-  static void cb_har_MIDI(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *har_SELECT;
-private:
-  inline void cb_har_SELECT_i(Fl_Check_Button*, void*);
-  static void cb_har_SELECT(Fl_Check_Button*, void*);
-public:
-  Fl_Box *har_chordname;
-  SliderW *har_note;
-private:
-  inline void cb_har_note_i(SliderW*, void*);
-  static void cb_har_note(SliderW*, void*);
-public:
-  SliderW *har_type;
-private:
-  inline void cb_har_type_i(SliderW*, void*);
-  static void cb_har_type(SliderW*, void*);
-public:
+  HarGui *HAR;
   Fl_Group *MUSDELAY;
   Fl_Light_Button *musdelay_activar;
 private:
