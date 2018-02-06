@@ -26,6 +26,7 @@ set (ProgSources
     UI/reverb_gui.cxx
     UI/peq_gui.cxx
     UI/whawha_gui.cxx
+    UI/alienwah_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C

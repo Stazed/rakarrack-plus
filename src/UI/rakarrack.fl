@@ -95,7 +95,10 @@ decl {class ReverbGui; // forward declaration} {public global
 decl {class PeqGui; // forward declaration} {public global
 }
 
-decl {class WhawhaGui; // forward declaration} {selected public global
+decl {class WhawhaGui; // forward declaration} {public global
+}
+
+decl {class AlienwahGui; // forward declaration} {public global
 }
 
 decl {class SustainGui; // forward declaration} {public global
@@ -168,7 +171,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;} open selected
       xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1018,171 +1021,9 @@ Fl::focus(Open_Order);
       Fl_Group ALIENWAH {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button Alienwah_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Alienwah_Bypass);
- return;
-}
-rkr->Alienwah_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Alienwah->cleanup();
-findpos(11,(int)o->value(),o);}
-          xywh {324 216 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice Alienwah_preset {
-          label Preset
-          user_data 12011
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
-Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
-Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
-Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
-Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
-Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(4));
-Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
-Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
-Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
-Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
-Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
-Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));}
-          xywh {396 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label AlienWah1
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label AlienWah2
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label AlienWah3
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label AlienWah4
-            xywh {82 82 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider Alienwah_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(55);
- return;
-} 
-rkr->efx_Alienwah->changepar(0,(int)(o->value()+64));}
-          xywh {368 241 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(61);
- return;
-} 
-rkr->efx_Alienwah->changepar(1,(int)(o->value()+64));}
-          xywh {368 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_freq {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(76);
- return;
-} 
-rkr->efx_Alienwah->changepar(2,(int)o->value());}
-          xywh {368 265 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_rnd {
-          label Rnd
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(109);
- return;
-} 
-rkr->efx_Alienwah->changepar(3,(int)o->value());}
-          xywh {368 277 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice Alienwah_lfotype {
-          label {LFO Type}
-          callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open
-          xywh {380 291 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Value_Slider Alienwah_phase {
-          label Phase
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(115);
- return;
-} 
-rkr->efx_Alienwah->changepar(10,(int)o->value());}
-          xywh {368 317 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(103);
- return;
-} 
-rkr->efx_Alienwah->changepar(5,(int)o->value());}
-          xywh {368 329 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_dpth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(20);
- return;
-} 
-rkr->efx_Alienwah->changepar(6,(int)o->value());}
-          xywh {368 341 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_delay {
-          label Delay
-          callback {rkr->Alienwah_Bypass=0;
-rkr->efx_Alienwah->changepar(8,(int)o->value());
-if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
-          xywh {368 353 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(82);
- return;
-} 
-rkr->efx_Alienwah->changepar(7,(int)o->value());}
-          xywh {368 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Alienwah_LR {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(96);
- return;
-} 
-rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
-          xywh {368 378 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        code0 {\#include "alienwah_gui.h"}
+        class AlienwahGui
+      } {}
       Fl_Group CABINET {
         user_data 1
         xywh {161 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -10971,8 +10812,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 11://AlienWah
-     Alienwah_activar->value(rkr->Alienwah_Bypass);
-     Alienwah_preset->do_callback(Alienwah_preset,1); 
+     ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
+     ALIENWAH->Alienwah_preset->do_callback(ALIENWAH->Alienwah_preset,1); 
      break;
      
      case 12://Cabinet
@@ -11554,7 +11395,7 @@ switch (rkr->efx_order[i])
      case 11:
     
        ALIENWAH->position(x[i],y[i]);
-       Alienwah_activar->shortcut(s[i]);
+       ALIENWAH->Alienwah_activar->shortcut(s[i]);
        if(!rkr->deachide)ALIENWAH->show();
        if(rkr->Alienwah_Bypass)
        {
@@ -12581,8 +12422,8 @@ switch (i)
      WHAWHA->WhaWha_dpth->redraw();
      break;
      case 20:
-     Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
-     Alienwah_dpth->redraw();
+     ALIENWAH->Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
+     ALIENWAH->Alienwah_dpth->redraw();
      break;
      case 21:
      PHASER->phaser_dpth->value(rkr->efx_Phaser->getpar(6));
@@ -12641,8 +12482,8 @@ switch (i)
      PHASER->phaser_WD->redraw();
      break;
      case 55:
-     Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
-     Alienwah_WD->redraw();
+     ALIENWAH->Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
+     ALIENWAH->Alienwah_WD->redraw();
      break;
      case 56:
      musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
@@ -12689,8 +12530,8 @@ switch (i)
      PHASER->phaser_pan->redraw();
      break;
      case 61:
-     Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
-     Alienwah_pan->redraw();
+     ALIENWAH->Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
+     ALIENWAH->Alienwah_pan->redraw();
      break;
      case 62:
      musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
@@ -12745,8 +12586,8 @@ switch (i)
      WHAWHA->WhaWha_freq->redraw();
      break;
      case 76:
-     Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
-     Alienwah_freq->redraw();
+     ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+     ALIENWAH->Alienwah_freq->redraw();
      break;
      case 77:
      pan_freq->value(rkr->efx_Pan->getpar(2));
@@ -12769,8 +12610,8 @@ switch (i)
      PHASER->phaser_fb->redraw();
      break;
      case 82:
-     Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
-     Alienwah_fb->redraw();
+     ALIENWAH->Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
+     ALIENWAH->Alienwah_fb->redraw();
      break;
      case 83:
      musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
@@ -12825,8 +12666,8 @@ switch (i)
      DIST->dist_LRc->redraw();
      break;
      case 96:
-     Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
-     Alienwah_LR->redraw();
+     ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
+     ALIENWAH->Alienwah_LR->redraw();
      break;
      case 97:
      ECHO->echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
@@ -12853,8 +12694,8 @@ switch (i)
      WHAWHA->WhaWha_stdf->redraw();
      break;
      case 103:
-     Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
-     Alienwah_stdf->redraw();
+     ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
+     ALIENWAH->Alienwah_stdf->redraw();
      break;
      case 104:
      pan_stdf->value(rkr->efx_Pan->getpar(5));
@@ -12877,8 +12718,8 @@ switch (i)
      WHAWHA->WhaWha_rnd->redraw();
      break;
      case 109:
-     Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
-     Alienwah_rnd->redraw();
+     ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
+     ALIENWAH->Alienwah_rnd->redraw();
      break;
      case 110:
      pan_rnd->value(rkr->efx_Pan->getpar(3));
@@ -12901,8 +12742,8 @@ switch (i)
      PHASER->phaser_phase->redraw();
      break;
      case 115:
-     Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
-     Alienwah_phase->redraw();
+     ALIENWAH->Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
+     ALIENWAH->Alienwah_phase->redraw();
      break;
      case 116:
      ActOnOff();
@@ -14147,8 +13988,8 @@ switch(miralo)
   WHAWHA->WhaWha_activar->do_callback();
   break;
   case 11:
-  Alienwah_activar->value(rkr->Alienwah_Bypass);
-  Alienwah_activar->do_callback();
+  ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
+  ALIENWAH->Alienwah_activar->do_callback();
   break;
   case 12:
   Cabinet_activar->value(rkr->Cabinet_Bypass);
@@ -15075,8 +14916,8 @@ if(rkr->Chorus_Bypass)
   
   if(rkr->Alienwah_Bypass)
   {
-  Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
-  Alienwah_freq->redraw();
+  ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+  ALIENWAH->Alienwah_freq->redraw();
   }
   
   if(rkr->MusDelay_Bypass)
@@ -15915,7 +15756,7 @@ for(i=0;i<10;i++)
 
      case 11://AlienWah
      if (i<numEff)rkr->Alienwah_Bypass=1; else rkr->Alienwah_Bypass=0;
-     Alienwah_activar->value(rkr->Alienwah_Bypass);
+     ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
      break;
      
      case 12://Cabinet

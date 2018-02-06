@@ -751,173 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_Alienwah_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Alienwah_Bypass);
- return;
-}
-rkr->Alienwah_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Alienwah->cleanup();
-findpos(11,(int)o->value(),o);
-}
-void RKRGUI::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_activar_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
-Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
-Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
-Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
-Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
-Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(4));
-Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
-Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
-Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
-Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
-Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
-Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
-}
-void RKRGUI::cb_Alienwah_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Alienwah_preset[] = {
- {"AlienWah1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"AlienWah2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"AlienWah3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"AlienWah4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Alienwah_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(55);
- return;
-} 
-rkr->efx_Alienwah->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_Alienwah_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_WD_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(61);
- return;
-} 
-rkr->efx_Alienwah->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_Alienwah_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_pan_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_freq_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(76);
- return;
-} 
-rkr->efx_Alienwah->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_Alienwah_freq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_freq_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_rnd_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(109);
- return;
-} 
-rkr->efx_Alienwah->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_Alienwah_rnd(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_rnd_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Alienwah->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_Alienwah_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_lfotype_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_phase_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(115);
- return;
-} 
-rkr->efx_Alienwah->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_Alienwah_phase(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_phase_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_stdf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(103);
- return;
-} 
-rkr->efx_Alienwah->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_Alienwah_stdf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_stdf_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_dpth_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(20);
- return;
-} 
-rkr->efx_Alienwah->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_Alienwah_dpth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_dpth_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_delay_i(SliderW* o, void*) {
-  rkr->Alienwah_Bypass=0;
-rkr->efx_Alienwah->changepar(8,(int)o->value());
-if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;
-}
-void RKRGUI::cb_Alienwah_delay(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_delay_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(82);
- return;
-} 
-rkr->efx_Alienwah->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_Alienwah_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_fb_i(o,v);
-}
-
-void RKRGUI::cb_Alienwah_LR_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(96);
- return;
-} 
-rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));
-}
-void RKRGUI::cb_Alienwah_LR(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Alienwah_LR_i(o,v);
-}
-
 void RKRGUI::cb_Cabinet_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -9384,210 +9217,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       WHAWHA->hide();
       WHAWHA->end();
     } // WhawhaGui* WHAWHA
-    { ALIENWAH = new Fl_Group(320, 212, 158, 184);
+    { ALIENWAH = new AlienwahGui(320, 212, 158, 184);
       ALIENWAH->box(FL_UP_BOX);
       ALIENWAH->color(FL_FOREGROUND_COLOR);
       ALIENWAH->selection_color(FL_FOREGROUND_COLOR);
+      ALIENWAH->labeltype(FL_NORMAL_LABEL);
       ALIENWAH->labelfont(1);
+      ALIENWAH->labelsize(14);
+      ALIENWAH->labelcolor(FL_FOREGROUND_COLOR);
       ALIENWAH->user_data((void*)(1));
       ALIENWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      ALIENWAH->when(FL_WHEN_RELEASE);
       ALIENWAH->hide();
-      { Alienwah_activar = new Fl_Light_Button(324, 216, 34, 18, "On");
-        Alienwah_activar->shortcut(0x36);
-        Alienwah_activar->color((Fl_Color)62);
-        Alienwah_activar->selection_color((Fl_Color)1);
-        Alienwah_activar->labelsize(10);
-        Alienwah_activar->callback((Fl_Callback*)cb_Alienwah_activar, (void*)(2));
-        Alienwah_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        Alienwah_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* Alienwah_activar
-      { Alienwah_preset = new Fl_Choice(396, 216, 76, 18, "Preset");
-        Alienwah_preset->down_box(FL_BORDER_BOX);
-        Alienwah_preset->selection_color(FL_FOREGROUND_COLOR);
-        Alienwah_preset->labelsize(10);
-        Alienwah_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_preset->textsize(10);
-        Alienwah_preset->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset, (void*)(12011));
-        Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        Alienwah_preset->menu(menu_Alienwah_preset);
-      } // Fl_Choice* Alienwah_preset
-      { Alienwah_WD = new SliderW(368, 241, 100, 10, "Wet/Dry");
-        Alienwah_WD->type(5);
-        Alienwah_WD->box(FL_FLAT_BOX);
-        Alienwah_WD->color((Fl_Color)178);
-        Alienwah_WD->selection_color((Fl_Color)62);
-        Alienwah_WD->labeltype(FL_NORMAL_LABEL);
-        Alienwah_WD->labelfont(0);
-        Alienwah_WD->labelsize(10);
-        Alienwah_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_WD->minimum(-64);
-        Alienwah_WD->maximum(63);
-        Alienwah_WD->step(1);
-        Alienwah_WD->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_WD->callback((Fl_Callback*)cb_Alienwah_WD);
-        Alienwah_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_WD
-      { Alienwah_pan = new SliderW(368, 253, 100, 10, "Pan");
-        Alienwah_pan->type(5);
-        Alienwah_pan->box(FL_FLAT_BOX);
-        Alienwah_pan->color((Fl_Color)178);
-        Alienwah_pan->selection_color((Fl_Color)62);
-        Alienwah_pan->labeltype(FL_NORMAL_LABEL);
-        Alienwah_pan->labelfont(0);
-        Alienwah_pan->labelsize(10);
-        Alienwah_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_pan->minimum(-64);
-        Alienwah_pan->maximum(63);
-        Alienwah_pan->step(1);
-        Alienwah_pan->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_pan->callback((Fl_Callback*)cb_Alienwah_pan);
-        Alienwah_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_pan
-      { Alienwah_freq = new SliderW(368, 265, 100, 10, "Tempo");
-        Alienwah_freq->type(5);
-        Alienwah_freq->box(FL_FLAT_BOX);
-        Alienwah_freq->color((Fl_Color)178);
-        Alienwah_freq->selection_color((Fl_Color)62);
-        Alienwah_freq->labeltype(FL_NORMAL_LABEL);
-        Alienwah_freq->labelfont(0);
-        Alienwah_freq->labelsize(10);
-        Alienwah_freq->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_freq->minimum(1);
-        Alienwah_freq->maximum(600);
-        Alienwah_freq->step(1);
-        Alienwah_freq->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_freq->callback((Fl_Callback*)cb_Alienwah_freq);
-        Alienwah_freq->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_freq->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_freq
-      { Alienwah_rnd = new SliderW(368, 277, 100, 10, "Rnd");
-        Alienwah_rnd->type(5);
-        Alienwah_rnd->box(FL_FLAT_BOX);
-        Alienwah_rnd->color((Fl_Color)178);
-        Alienwah_rnd->selection_color((Fl_Color)62);
-        Alienwah_rnd->labeltype(FL_NORMAL_LABEL);
-        Alienwah_rnd->labelfont(0);
-        Alienwah_rnd->labelsize(10);
-        Alienwah_rnd->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_rnd->maximum(127);
-        Alienwah_rnd->step(1);
-        Alienwah_rnd->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_rnd->callback((Fl_Callback*)cb_Alienwah_rnd);
-        Alienwah_rnd->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_rnd->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_rnd
-      { Fl_Choice* o = Alienwah_lfotype = new Fl_Choice(380, 291, 72, 16, "LFO Type");
-        Alienwah_lfotype->down_box(FL_BORDER_BOX);
-        Alienwah_lfotype->selection_color(FL_FOREGROUND_COLOR);
-        Alienwah_lfotype->labelsize(10);
-        Alienwah_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_lfotype->textsize(10);
-        Alienwah_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_lfotype->callback((Fl_Callback*)cb_Alienwah_lfotype);
-        o->menu(CHORUS->get_menu_chorus_lfotype());
-      } // Fl_Choice* Alienwah_lfotype
-      { Alienwah_phase = new SliderW(368, 317, 100, 10, "Phase");
-        Alienwah_phase->type(5);
-        Alienwah_phase->box(FL_FLAT_BOX);
-        Alienwah_phase->color((Fl_Color)178);
-        Alienwah_phase->selection_color((Fl_Color)62);
-        Alienwah_phase->labeltype(FL_NORMAL_LABEL);
-        Alienwah_phase->labelfont(0);
-        Alienwah_phase->labelsize(10);
-        Alienwah_phase->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_phase->maximum(127);
-        Alienwah_phase->step(1);
-        Alienwah_phase->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_phase->callback((Fl_Callback*)cb_Alienwah_phase);
-        Alienwah_phase->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_phase->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_phase
-      { Alienwah_stdf = new SliderW(368, 329, 100, 10, "St.df");
-        Alienwah_stdf->type(5);
-        Alienwah_stdf->box(FL_FLAT_BOX);
-        Alienwah_stdf->color((Fl_Color)178);
-        Alienwah_stdf->selection_color((Fl_Color)62);
-        Alienwah_stdf->labeltype(FL_NORMAL_LABEL);
-        Alienwah_stdf->labelfont(0);
-        Alienwah_stdf->labelsize(10);
-        Alienwah_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_stdf->maximum(127);
-        Alienwah_stdf->step(1);
-        Alienwah_stdf->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_stdf->callback((Fl_Callback*)cb_Alienwah_stdf);
-        Alienwah_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_stdf
-      { Alienwah_dpth = new SliderW(368, 341, 100, 10, "Depth");
-        Alienwah_dpth->type(5);
-        Alienwah_dpth->box(FL_FLAT_BOX);
-        Alienwah_dpth->color((Fl_Color)178);
-        Alienwah_dpth->selection_color((Fl_Color)62);
-        Alienwah_dpth->labeltype(FL_NORMAL_LABEL);
-        Alienwah_dpth->labelfont(0);
-        Alienwah_dpth->labelsize(10);
-        Alienwah_dpth->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_dpth->maximum(127);
-        Alienwah_dpth->step(1);
-        Alienwah_dpth->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_dpth->callback((Fl_Callback*)cb_Alienwah_dpth);
-        Alienwah_dpth->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_dpth->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_dpth
-      { Alienwah_delay = new SliderW(368, 353, 100, 10, "Delay");
-        Alienwah_delay->type(5);
-        Alienwah_delay->box(FL_FLAT_BOX);
-        Alienwah_delay->color((Fl_Color)178);
-        Alienwah_delay->selection_color((Fl_Color)62);
-        Alienwah_delay->labeltype(FL_NORMAL_LABEL);
-        Alienwah_delay->labelfont(0);
-        Alienwah_delay->labelsize(10);
-        Alienwah_delay->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_delay->maximum(127);
-        Alienwah_delay->step(1);
-        Alienwah_delay->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_delay->callback((Fl_Callback*)cb_Alienwah_delay);
-        Alienwah_delay->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_delay->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_delay
-      { Alienwah_fb = new SliderW(368, 365, 100, 10, "Fb");
-        Alienwah_fb->type(5);
-        Alienwah_fb->box(FL_FLAT_BOX);
-        Alienwah_fb->color((Fl_Color)178);
-        Alienwah_fb->selection_color((Fl_Color)62);
-        Alienwah_fb->labeltype(FL_NORMAL_LABEL);
-        Alienwah_fb->labelfont(0);
-        Alienwah_fb->labelsize(10);
-        Alienwah_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_fb->maximum(127);
-        Alienwah_fb->step(1);
-        Alienwah_fb->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_fb->callback((Fl_Callback*)cb_Alienwah_fb);
-        Alienwah_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_fb
-      { Alienwah_LR = new SliderW(368, 378, 100, 10, "L/R.Cr");
-        Alienwah_LR->type(5);
-        Alienwah_LR->box(FL_FLAT_BOX);
-        Alienwah_LR->color((Fl_Color)178);
-        Alienwah_LR->selection_color((Fl_Color)62);
-        Alienwah_LR->labeltype(FL_NORMAL_LABEL);
-        Alienwah_LR->labelfont(0);
-        Alienwah_LR->labelsize(10);
-        Alienwah_LR->labelcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_LR->minimum(-64);
-        Alienwah_LR->maximum(63);
-        Alienwah_LR->step(1);
-        Alienwah_LR->textcolor(FL_BACKGROUND2_COLOR);
-        Alienwah_LR->callback((Fl_Callback*)cb_Alienwah_LR);
-        Alienwah_LR->align(Fl_Align(FL_ALIGN_LEFT));
-        Alienwah_LR->when(FL_WHEN_CHANGED);
-      } // SliderW* Alienwah_LR
       ALIENWAH->end();
-    } // Fl_Group* ALIENWAH
+    } // AlienwahGui* ALIENWAH
     { CABINET = new Fl_Group(161, 211, 158, 184);
       CABINET->box(FL_UP_BOX);
       CABINET->color(FL_FOREGROUND_COLOR);
@@ -19136,8 +18779,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 11://AlienWah
-       Alienwah_activar->value(rkr->Alienwah_Bypass);
-       Alienwah_preset->do_callback(Alienwah_preset,1); 
+       ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
+       ALIENWAH->Alienwah_preset->do_callback(ALIENWAH->Alienwah_preset,1); 
        break;
        
        case 12://Cabinet
@@ -19720,7 +19363,7 @@ void RKRGUI::reordena() {
        case 11:
       
          ALIENWAH->position(x[i],y[i]);
-         Alienwah_activar->shortcut(s[i]);
+         ALIENWAH->Alienwah_activar->shortcut(s[i]);
          if(!rkr->deachide)ALIENWAH->show();
          if(rkr->Alienwah_Bypass)
          {
@@ -20755,8 +20398,8 @@ void RKRGUI::ActMIDI() {
        WHAWHA->WhaWha_dpth->redraw();
        break;
        case 20:
-       Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
-       Alienwah_dpth->redraw();
+       ALIENWAH->Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
+       ALIENWAH->Alienwah_dpth->redraw();
        break;
        case 21:
        PHASER->phaser_dpth->value(rkr->efx_Phaser->getpar(6));
@@ -20815,8 +20458,8 @@ void RKRGUI::ActMIDI() {
        PHASER->phaser_WD->redraw();
        break;
        case 55:
-       Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
-       Alienwah_WD->redraw();
+       ALIENWAH->Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
+       ALIENWAH->Alienwah_WD->redraw();
        break;
        case 56:
        musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
@@ -20863,8 +20506,8 @@ void RKRGUI::ActMIDI() {
        PHASER->phaser_pan->redraw();
        break;
        case 61:
-       Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
-       Alienwah_pan->redraw();
+       ALIENWAH->Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
+       ALIENWAH->Alienwah_pan->redraw();
        break;
        case 62:
        musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
@@ -20919,8 +20562,8 @@ void RKRGUI::ActMIDI() {
        WHAWHA->WhaWha_freq->redraw();
        break;
        case 76:
-       Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
-       Alienwah_freq->redraw();
+       ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+       ALIENWAH->Alienwah_freq->redraw();
        break;
        case 77:
        pan_freq->value(rkr->efx_Pan->getpar(2));
@@ -20943,8 +20586,8 @@ void RKRGUI::ActMIDI() {
        PHASER->phaser_fb->redraw();
        break;
        case 82:
-       Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
-       Alienwah_fb->redraw();
+       ALIENWAH->Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
+       ALIENWAH->Alienwah_fb->redraw();
        break;
        case 83:
        musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
@@ -20999,8 +20642,8 @@ void RKRGUI::ActMIDI() {
        DIST->dist_LRc->redraw();
        break;
        case 96:
-       Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
-       Alienwah_LR->redraw();
+       ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
+       ALIENWAH->Alienwah_LR->redraw();
        break;
        case 97:
        ECHO->echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
@@ -21027,8 +20670,8 @@ void RKRGUI::ActMIDI() {
        WHAWHA->WhaWha_stdf->redraw();
        break;
        case 103:
-       Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
-       Alienwah_stdf->redraw();
+       ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
+       ALIENWAH->Alienwah_stdf->redraw();
        break;
        case 104:
        pan_stdf->value(rkr->efx_Pan->getpar(5));
@@ -21051,8 +20694,8 @@ void RKRGUI::ActMIDI() {
        WHAWHA->WhaWha_rnd->redraw();
        break;
        case 109:
-       Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
-       Alienwah_rnd->redraw();
+       ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
+       ALIENWAH->Alienwah_rnd->redraw();
        break;
        case 110:
        pan_rnd->value(rkr->efx_Pan->getpar(3));
@@ -21075,8 +20718,8 @@ void RKRGUI::ActMIDI() {
        PHASER->phaser_phase->redraw();
        break;
        case 115:
-       Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
-       Alienwah_phase->redraw();
+       ALIENWAH->Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
+       ALIENWAH->Alienwah_phase->redraw();
        break;
        case 116:
        ActOnOff();
@@ -22321,8 +21964,8 @@ void RKRGUI::ActOnOff() {
     WHAWHA->WhaWha_activar->do_callback();
     break;
     case 11:
-    Alienwah_activar->value(rkr->Alienwah_Bypass);
-    Alienwah_activar->do_callback();
+    ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
+    ALIENWAH->Alienwah_activar->do_callback();
     break;
     case 12:
     Cabinet_activar->value(rkr->Cabinet_Bypass);
@@ -23262,8 +22905,8 @@ void RKRGUI::UpdateTGUI() {
     
     if(rkr->Alienwah_Bypass)
     {
-    Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
-    Alienwah_freq->redraw();
+    ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+    ALIENWAH->Alienwah_freq->redraw();
     }
     
     if(rkr->MusDelay_Bypass)
@@ -24115,7 +23758,7 @@ void RKRGUI::RandomPreset() {
   
        case 11://AlienWah
        if (i<numEff)rkr->Alienwah_Bypass=1; else rkr->Alienwah_Bypass=0;
-       Alienwah_activar->value(rkr->Alienwah_Bypass);
+       ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
        break;
        
        case 12://Cabinet

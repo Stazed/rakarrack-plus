@@ -1,0 +1,178 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class {\#include "common_gui_menu.h"} AlienwahGui {
+  user_data 1 open
+  xywh {1664 386 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
+} {
+  Fl_Light_Button Alienwah_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->Alienwah_Bypass);
+ return;
+}
+rkr->Alienwah_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Alienwah->cleanup();
+rgui->findpos(11,(int)o->value(),o);}
+    xywh {4 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice Alienwah_preset {
+    label Preset
+    user_data 12011
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
+Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
+Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
+Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
+Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(4));
+Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
+Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
+Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
+Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
+Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
+Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));}
+    xywh {76 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label AlienWah1
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label AlienWah2
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label AlienWah3
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label AlienWah4
+      xywh {82 82 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider Alienwah_WD {
+    label {Wet/Dry}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(55);
+ return;
+} 
+rkr->efx_Alienwah->changepar(0,(int)(o->value()+64));}
+    xywh {48 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_pan {
+    label Pan
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(61);
+ return;
+} 
+rkr->efx_Alienwah->changepar(1,(int)(o->value()+64));}
+    xywh {48 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_freq {
+    label Tempo
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(76);
+ return;
+} 
+rkr->efx_Alienwah->changepar(2,(int)o->value());}
+    xywh {48 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_rnd {
+    label Rnd
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(109);
+ return;
+} 
+rkr->efx_Alienwah->changepar(3,(int)o->value());}
+    xywh {48 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice Alienwah_lfotype {
+    label {LFO Type}
+    callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open selected
+    xywh {60 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    code0 {o->menu(m_lfo_menu->get_lfo_type());}
+  } {}
+  Fl_Value_Slider Alienwah_phase {
+    label Phase
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(115);
+ return;
+} 
+rkr->efx_Alienwah->changepar(10,(int)o->value());}
+    xywh {48 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_stdf {
+    label {St.df}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(103);
+ return;
+} 
+rkr->efx_Alienwah->changepar(5,(int)o->value());}
+    xywh {48 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_dpth {
+    label Depth
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(20);
+ return;
+} 
+rkr->efx_Alienwah->changepar(6,(int)o->value());}
+    xywh {48 129 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_delay {
+    label Delay
+    callback {rkr->Alienwah_Bypass=0;
+rkr->efx_Alienwah->changepar(8,(int)o->value());
+if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
+    xywh {48 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_fb {
+    label Fb
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(82);
+ return;
+} 
+rkr->efx_Alienwah->changepar(7,(int)o->value());}
+    xywh {48 153 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider Alienwah_LR {
+    label {L/R.Cr}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(96);
+ return;
+} 
+rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
+    xywh {48 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+}
