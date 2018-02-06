@@ -32,6 +32,7 @@ class EchoGui; // forward declaration
 class ChorusGui; // forward declaration
 class PhaserGui; // forward declaration
 class FlangerGui; // forward declaration
+class ReverbGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -46,6 +47,7 @@ class SustainGui; // forward declaration
 #include "chorus_gui.h"
 #include "phaser_gui.h"
 #include "flanger_gui.h"
+#include "reverb_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -217,71 +219,7 @@ public:
   ChorusGui *CHORUS;
   PhaserGui *PHASER;
   FlangerGui *FLANGER;
-  Fl_Group *REVERB;
-  Fl_Light_Button *reverb_activar;
-private:
-  inline void cb_reverb_activar_i(Fl_Light_Button*, void*);
-  static void cb_reverb_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *reverb_preset;
-private:
-  inline void cb_reverb_preset_i(Fl_Choice*, void*);
-  static void cb_reverb_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_reverb_preset[];
-public:
-  SliderW *reverb_WD;
-private:
-  inline void cb_reverb_WD_i(SliderW*, void*);
-  static void cb_reverb_WD(SliderW*, void*);
-public:
-  SliderW *reverb_pan;
-private:
-  inline void cb_reverb_pan_i(SliderW*, void*);
-  static void cb_reverb_pan(SliderW*, void*);
-public:
-  SliderW *reverb_time;
-private:
-  inline void cb_reverb_time_i(SliderW*, void*);
-  static void cb_reverb_time(SliderW*, void*);
-public:
-  SliderW *reverb_ldel;
-private:
-  inline void cb_reverb_ldel_i(SliderW*, void*);
-  static void cb_reverb_ldel(SliderW*, void*);
-public:
-  SliderW *reverb_ldelft;
-private:
-  inline void cb_reverb_ldelft_i(SliderW*, void*);
-  static void cb_reverb_ldelft(SliderW*, void*);
-public:
-  Fl_Choice *reverb_type;
-private:
-  inline void cb_reverb_type_i(Fl_Choice*, void*);
-  static void cb_reverb_type(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_reverb_type[];
-  inline void cb_Random_i(Fl_Menu_*, void*);
-  static void cb_Random(Fl_Menu_*, void*);
-public:
-  SliderW *reverb_RS;
-private:
-  inline void cb_reverb_RS_i(SliderW*, void*);
-  static void cb_reverb_RS(SliderW*, void*);
-public:
-  SliderW *reverb_LPF;
-private:
-  inline void cb_reverb_LPF_i(SliderW*, void*);
-  static void cb_reverb_LPF(SliderW*, void*);
-public:
-  SliderW *reverb_HPF;
-private:
-  inline void cb_reverb_HPF_i(SliderW*, void*);
-  static void cb_reverb_HPF(SliderW*, void*);
-public:
-  SliderW *reverb_damp;
-private:
-  inline void cb_reverb_damp_i(SliderW*, void*);
-  static void cb_reverb_damp(SliderW*, void*);
-public:
+  ReverbGui *REVERB;
   Fl_Group *PEQ;
   Fl_Light_Button *eqp_activar;
 private:

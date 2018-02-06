@@ -89,6 +89,9 @@ decl {class PhaserGui; // forward declaration} {public global
 decl {class FlangerGui; // forward declaration} {public global
 }
 
+decl {class ReverbGui; // forward declaration} {selected public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -983,195 +986,17 @@ Fl::focus(Open_Order);
         class PhaserGui
       } {}
       Fl_Group FLANGER {
-        user_data 1 selected
+        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "flanger_gui.h"}
         class FlangerGui
       } {}
       Fl_Group REVERB {
         user_data 1
-        xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
-      } {
-        Fl_Light_Button reverb_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Reverb_Bypass);
- return;
-}
-rkr->Reverb_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Rev->cleanup();
-findpos(8,(int)o->value(),o);}
-          xywh {485 417 34 18} shortcut 0x39 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice reverb_preset {
-          label Preset
-          user_data 12008
-          callback {rkr->Reverb_Bypass=0;
-long long ud= (long long) v;
-if((ud==0)||(ud==12008))rkr->efx_Rev->setpreset((int) o->value());
-reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
-reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
-reverb_time->value(rkr->efx_Rev->getpar(2));
-reverb_ldel->value(rkr->efx_Rev->getpar(3));
-reverb_ldelft->value(rkr->efx_Rev->getpar(4));
-reverb_LPF->value(rkr->efx_Rev->getpar(7));
-reverb_HPF->value(rkr->efx_Rev->getpar(8));
-reverb_damp->value(rkr->efx_Rev->getpar(9));
-reverb_RS->value(rkr->efx_Rev->getpar(11));
-reverb_type->value(rkr->efx_Rev->getpar(10));
-if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
-          xywh {557 417 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Cathedral 1}
-            xywh {44 44 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Cathedral 2}
-            xywh {44 44 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Cathedral 3}
-            xywh {44 44 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Hall 1}
-            xywh {54 54 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Hall 2}
-            xywh {64 64 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Room 1}
-            xywh {74 74 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Room 2}
-            xywh {84 84 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Basement
-            xywh {94 94 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Tunnel
-            xywh {104 104 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Echoed 1}
-            xywh {114 114 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Echoed 2}
-            xywh {124 124 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Very Long 1}
-            xywh {134 134 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Very Long 2}
-            xywh {144 144 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider reverb_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(57);
- return;
-} 
-rkr->efx_Rev->changepar(0,(int)(o->value()+64));}
-          xywh {531 440 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider reverb_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(63);
- return;
-} 
-rkr->efx_Rev->changepar(1,(int)(o->value()+64));}
-          xywh {531 452 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider reverb_time {
-          label Time
-          callback {rkr->efx_Rev->changepar(2,(int)o->value());}
-          xywh {531 465 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider reverb_ldel {
-          label {I.Del}
-          callback {rkr->efx_Rev->changepar(3,(int)o->value());}
-          xywh {531 477 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider reverb_ldelft {
-          label {Del.E/R}
-          callback {rkr->efx_Rev->changepar(4,(int)o->value());}
-          xywh {531 490 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice reverb_type {
-          label Type
-          user_data 12
-          callback {rkr->efx_Rev->changepar(10,(int)o->value());}
-          xywh {542 505 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Freeverb
-            xywh {34 34 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Random
-            callback {rkr->efx_Rev->changepar(10,1)}
-            xywh {34 34 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider reverb_RS {
-          label {R.Size}
-          callback {rkr->Reverb_Bypass=0;
-rkr->efx_Rev->changepar(11,(int)o->value());
-if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
-          xywh {531 529 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider reverb_LPF {
-          label LPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(87);
- return;
-} 
-rkr->efx_Rev->changepar(7,(int)o->value());}
-          xywh {531 544 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider reverb_HPF {
-          label HPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(90);
- return;
-} 
-rkr->efx_Rev->changepar(8,(int)o->value());}
-          xywh {531 560 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider reverb_damp {
-          label Damp
-          callback {rkr->efx_Rev->changepar(9,(int)o->value());}
-          xywh {531 576 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "reverb_gui.h"}
+        class ReverbGui
+      } {}
       Fl_Group PEQ {
         user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
@@ -11438,8 +11263,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
  
      case 8://Reverb
-     reverb_activar->value(rkr->Reverb_Bypass);
-     reverb_preset->do_callback(reverb_preset,1);
+     REVERB->reverb_activar->value(rkr->Reverb_Bypass);
+     REVERB->reverb_preset->do_callback(REVERB->reverb_preset,1);
      break;  
 
      case 9://EQ2
@@ -11997,7 +11822,7 @@ switch (rkr->efx_order[i])
      case 8:
     
        REVERB->position(x[i],y[i]);
-       reverb_activar->shortcut(s[i]);
+       REVERB->reverb_activar->shortcut(s[i]);
        if(!rkr->deachide)REVERB->show();
        if(rkr->Reverb_Bypass)
        {
@@ -13131,8 +12956,8 @@ switch (i)
      musdelay_WD->redraw();
      break;
      case 57:
-     reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
-     reverb_WD->redraw();
+     REVERB->reverb_WD->value(rkr->efx_Rev->getpar(0)-64);
+     REVERB->reverb_WD->redraw();
      break;
      case 58:
      pan_WD->value(rkr->efx_Pan->getpar(0)-64);
@@ -13179,8 +13004,8 @@ switch (i)
      musdelay_pan1->redraw();
      break;
      case 63:
-     reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
-     reverb_pan->redraw();
+     REVERB->reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
+     REVERB->reverb_pan->redraw();
      break;
      case 65:
      musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
@@ -13271,8 +13096,8 @@ switch (i)
      DIST->dist_lpf->redraw();
      break;
      case 87:
-     reverb_LPF->value(rkr->efx_Rev->getpar(7));
-     reverb_LPF->redraw();
+     REVERB->reverb_LPF->value(rkr->efx_Rev->getpar(7));
+     REVERB->reverb_LPF->redraw();
      break;
      case 88:
      OVRD->ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
@@ -13283,8 +13108,8 @@ switch (i)
      DIST->dist_hpf->redraw();
      break;
      case 90:
-     reverb_HPF->value(rkr->efx_Rev->getpar(8));
-     reverb_HPF->redraw();
+     REVERB->reverb_HPF->value(rkr->efx_Rev->getpar(8));
+     REVERB->reverb_HPF->redraw();
      break;
      case 91:
      CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
@@ -14617,8 +14442,8 @@ switch(miralo)
   FLANGER->flanger_activar->do_callback();
   break;
   case 8:
-  reverb_activar->value(rkr->Reverb_Bypass);
-  reverb_activar->do_callback();
+  REVERB->reverb_activar->value(rkr->Reverb_Bypass);
+  REVERB->reverb_activar->do_callback();
   break;
   case 9:
   eqp_activar->value(rkr->EQ2_Bypass);
@@ -16382,7 +16207,7 @@ for(i=0;i<10;i++)
  
      case 8://Reverb
      if (i<numEff)rkr->Reverb_Bypass=1; else rkr->Reverb_Bypass=0;
-     reverb_activar->value(rkr->Reverb_Bypass);
+     REVERB->reverb_activar->value(rkr->Reverb_Bypass);
      break;  
 
      case 9://EQ2
