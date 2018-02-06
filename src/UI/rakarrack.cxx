@@ -751,176 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_aphaser_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->APhaser_Bypass);
- return;
-}
-rkr->APhaser_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_APhaser->cleanup();
-findpos(18,(int)o->value(),o);
-}
-void RKRGUI::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_activar_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
-aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
-aphaser_pan->value(rkr->efx_APhaser->getpar(1));
-aphaser_freq->value(rkr->efx_APhaser->getpar(2));
-aphaser_lfotype->value(rkr->efx_APhaser->getpar(4));
-aphaser_stdf->value(rkr->efx_APhaser->getpar(5));
-aphaser_dpth->value(rkr->efx_APhaser->getpar(6));
-aphaser_stages->value(rkr->efx_APhaser->getpar(8));
-aphaser_fb->value(rkr->efx_APhaser->getpar(7)-64);
-aphaser_LR->value(rkr->efx_APhaser->getpar(9));
-aphaser_subs->value(rkr->efx_APhaser->getpar(10));
-aphaser_phase->value(rkr->efx_APhaser->getpar(11));
-aphaser_hyper->value(rkr->efx_APhaser->getpar(12));
-}
-void RKRGUI::cb_aphaser_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_aphaser_preset[] = {
- {"Phaser 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Phaser 6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_aphaser_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(117);
- return;
-} 
-rkr->efx_APhaser->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_aphaser_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_WD_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_APhaser->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_aphaser_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_lfotype_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_freq_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(119);
- return;
-} 
-rkr->efx_APhaser->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_aphaser_freq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_freq_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_dpth_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(121);
- return;
-} 
-rkr->efx_APhaser->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_aphaser_dpth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_dpth_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_phase_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(120);
- return;
-} 
-rkr->efx_APhaser->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_aphaser_phase(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_phase_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(122);
- return;
-} 
-rkr->efx_APhaser->changepar(7,(int)(o->value()+64));
-}
-void RKRGUI::cb_aphaser_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_fb_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_LR_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(123);
- return;
-} 
-rkr->efx_APhaser->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_aphaser_LR(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_LR_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(118);
- return;
-} 
-rkr->efx_APhaser->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_aphaser_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_pan_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_stdf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(124);
- return;
-} 
-rkr->efx_APhaser->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_aphaser_stdf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_stdf_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_stages_i(Fl_Counter* o, void*) {
-  rkr->efx_APhaser->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_aphaser_stages(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_stages_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_aphaser_subs(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_subs_i(o,v);
-}
-
-void RKRGUI::cb_aphaser_hyper_i(Fl_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_aphaser_hyper(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_aphaser_hyper_i(o,v);
-}
-
 void RKRGUI::cb_valve_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -8532,202 +8362,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       NEWDIST->hide();
       NEWDIST->end();
     } // NewdistGui* NEWDIST
-    { APHASER = new Fl_Group(480, 211, 158, 184);
+    { APHASER = new AphaserGui(480, 413, 158, 184);
       APHASER->box(FL_UP_BOX);
       APHASER->color(FL_FOREGROUND_COLOR);
       APHASER->selection_color(FL_FOREGROUND_COLOR);
+      APHASER->labeltype(FL_NORMAL_LABEL);
       APHASER->labelfont(1);
+      APHASER->labelsize(14);
+      APHASER->labelcolor(FL_FOREGROUND_COLOR);
       APHASER->user_data((void*)(1));
       APHASER->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      APHASER->when(FL_WHEN_RELEASE);
       APHASER->hide();
-      { aphaser_activar = new Fl_Light_Button(485, 215, 34, 18, "On");
-        aphaser_activar->shortcut(0x37);
-        aphaser_activar->color((Fl_Color)62);
-        aphaser_activar->selection_color((Fl_Color)1);
-        aphaser_activar->labelsize(10);
-        aphaser_activar->callback((Fl_Callback*)cb_aphaser_activar, (void*)(2));
-        aphaser_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        aphaser_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* aphaser_activar
-      { aphaser_preset = new Fl_Choice(557, 215, 76, 18, "Preset");
-        aphaser_preset->down_box(FL_BORDER_BOX);
-        aphaser_preset->selection_color(FL_FOREGROUND_COLOR);
-        aphaser_preset->labelsize(10);
-        aphaser_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_preset->textsize(10);
-        aphaser_preset->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset, (void*)(12018));
-        aphaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        aphaser_preset->menu(menu_aphaser_preset);
-      } // Fl_Choice* aphaser_preset
-      { aphaser_WD = new SliderW(529, 238, 100, 10, "Wet/Dry");
-        aphaser_WD->type(5);
-        aphaser_WD->box(FL_FLAT_BOX);
-        aphaser_WD->color((Fl_Color)178);
-        aphaser_WD->selection_color((Fl_Color)62);
-        aphaser_WD->labeltype(FL_NORMAL_LABEL);
-        aphaser_WD->labelfont(0);
-        aphaser_WD->labelsize(10);
-        aphaser_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_WD->minimum(-64);
-        aphaser_WD->maximum(63);
-        aphaser_WD->step(1);
-        aphaser_WD->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_WD->callback((Fl_Callback*)cb_aphaser_WD);
-        aphaser_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_WD
-      { Fl_Choice* o = aphaser_lfotype = new Fl_Choice(555, 252, 72, 16, "LFO Type");
-        aphaser_lfotype->down_box(FL_BORDER_BOX);
-        aphaser_lfotype->selection_color(FL_FOREGROUND_COLOR);
-        aphaser_lfotype->labelsize(10);
-        aphaser_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_lfotype->textsize(10);
-        aphaser_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_lfotype->callback((Fl_Callback*)cb_aphaser_lfotype);
-        o->menu(CHORUS->get_menu_chorus_lfotype());
-      } // Fl_Choice* aphaser_lfotype
-      { aphaser_freq = new SliderW(528, 273, 100, 10, "Tempo");
-        aphaser_freq->type(5);
-        aphaser_freq->box(FL_FLAT_BOX);
-        aphaser_freq->color((Fl_Color)178);
-        aphaser_freq->selection_color((Fl_Color)62);
-        aphaser_freq->labeltype(FL_NORMAL_LABEL);
-        aphaser_freq->labelfont(0);
-        aphaser_freq->labelsize(10);
-        aphaser_freq->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_freq->minimum(1);
-        aphaser_freq->maximum(600);
-        aphaser_freq->step(1);
-        aphaser_freq->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_freq->callback((Fl_Callback*)cb_aphaser_freq);
-        aphaser_freq->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_freq->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_freq
-      { aphaser_dpth = new SliderW(528, 297, 100, 10, "Width");
-        aphaser_dpth->type(5);
-        aphaser_dpth->box(FL_FLAT_BOX);
-        aphaser_dpth->color((Fl_Color)178);
-        aphaser_dpth->selection_color((Fl_Color)62);
-        aphaser_dpth->labeltype(FL_NORMAL_LABEL);
-        aphaser_dpth->labelfont(0);
-        aphaser_dpth->labelsize(10);
-        aphaser_dpth->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_dpth->maximum(127);
-        aphaser_dpth->step(1);
-        aphaser_dpth->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_dpth->callback((Fl_Callback*)cb_aphaser_dpth);
-        aphaser_dpth->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_dpth->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_dpth
-      { aphaser_phase = new SliderW(529, 285, 100, 10, "Depth");
-        aphaser_phase->type(5);
-        aphaser_phase->box(FL_FLAT_BOX);
-        aphaser_phase->color((Fl_Color)178);
-        aphaser_phase->selection_color((Fl_Color)62);
-        aphaser_phase->labeltype(FL_NORMAL_LABEL);
-        aphaser_phase->labelfont(0);
-        aphaser_phase->labelsize(10);
-        aphaser_phase->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_phase->maximum(127);
-        aphaser_phase->step(1);
-        aphaser_phase->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_phase->callback((Fl_Callback*)cb_aphaser_phase);
-        aphaser_phase->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_phase->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_phase
-      { aphaser_fb = new SliderW(528, 309, 100, 10, "Fb");
-        aphaser_fb->type(5);
-        aphaser_fb->box(FL_FLAT_BOX);
-        aphaser_fb->color((Fl_Color)178);
-        aphaser_fb->selection_color((Fl_Color)62);
-        aphaser_fb->labeltype(FL_NORMAL_LABEL);
-        aphaser_fb->labelfont(0);
-        aphaser_fb->labelsize(10);
-        aphaser_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_fb->minimum(-64);
-        aphaser_fb->maximum(64);
-        aphaser_fb->step(1);
-        aphaser_fb->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_fb->callback((Fl_Callback*)cb_aphaser_fb);
-        aphaser_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_fb
-      { aphaser_LR = new SliderW(528, 322, 100, 10, "Mismatch");
-        aphaser_LR->type(5);
-        aphaser_LR->box(FL_FLAT_BOX);
-        aphaser_LR->color((Fl_Color)178);
-        aphaser_LR->selection_color((Fl_Color)62);
-        aphaser_LR->labeltype(FL_NORMAL_LABEL);
-        aphaser_LR->labelfont(0);
-        aphaser_LR->labelsize(7);
-        aphaser_LR->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_LR->maximum(100);
-        aphaser_LR->step(1);
-        aphaser_LR->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_LR->callback((Fl_Callback*)cb_aphaser_LR);
-        aphaser_LR->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_LR->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_LR
-      { aphaser_pan = new SliderW(528, 333, 100, 10, "Distort");
-        aphaser_pan->type(5);
-        aphaser_pan->box(FL_FLAT_BOX);
-        aphaser_pan->color((Fl_Color)178);
-        aphaser_pan->selection_color((Fl_Color)62);
-        aphaser_pan->labeltype(FL_NORMAL_LABEL);
-        aphaser_pan->labelfont(0);
-        aphaser_pan->labelsize(10);
-        aphaser_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_pan->maximum(100);
-        aphaser_pan->step(1);
-        aphaser_pan->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_pan->callback((Fl_Callback*)cb_aphaser_pan);
-        aphaser_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_pan
-      { aphaser_stdf = new SliderW(529, 345, 100, 10, "St.df");
-        aphaser_stdf->type(5);
-        aphaser_stdf->box(FL_FLAT_BOX);
-        aphaser_stdf->color((Fl_Color)178);
-        aphaser_stdf->selection_color((Fl_Color)62);
-        aphaser_stdf->labeltype(FL_NORMAL_LABEL);
-        aphaser_stdf->labelfont(0);
-        aphaser_stdf->labelsize(10);
-        aphaser_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_stdf->maximum(127);
-        aphaser_stdf->step(1);
-        aphaser_stdf->textcolor(FL_BACKGROUND2_COLOR);
-        aphaser_stdf->callback((Fl_Callback*)cb_aphaser_stdf);
-        aphaser_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-        aphaser_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* aphaser_stdf
-      { aphaser_stages = new Fl_Counter(560, 362, 52, 12, "Stages");
-        aphaser_stages->type(1);
-        aphaser_stages->box(FL_THIN_UP_BOX);
-        aphaser_stages->labelsize(10);
-        aphaser_stages->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_stages->minimum(1);
-        aphaser_stages->maximum(12);
-        aphaser_stages->step(1);
-        aphaser_stages->value(1);
-        aphaser_stages->textsize(9);
-        aphaser_stages->callback((Fl_Callback*)cb_aphaser_stages);
-        aphaser_stages->align(Fl_Align(FL_ALIGN_LEFT));
-      } // Fl_Counter* aphaser_stages
-      { aphaser_subs = new Fl_Check_Button(490, 376, 64, 15, "Subtract");
-        aphaser_subs->down_box(FL_BORDER_BOX);
-        aphaser_subs->labelsize(10);
-        aphaser_subs->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_subs->callback((Fl_Callback*)cb_aphaser_subs, (void*)(2));
-      } // Fl_Check_Button* aphaser_subs
-      { aphaser_hyper = new Fl_Check_Button(555, 376, 53, 15, "Hyper");
-        aphaser_hyper->down_box(FL_BORDER_BOX);
-        aphaser_hyper->labelsize(10);
-        aphaser_hyper->labelcolor(FL_BACKGROUND2_COLOR);
-        aphaser_hyper->callback((Fl_Callback*)cb_aphaser_hyper, (void*)(2));
-      } // Fl_Check_Button* aphaser_hyper
       APHASER->end();
-    } // Fl_Group* APHASER
+    } // AphaserGui* APHASER
     { VALVE = new Fl_Group(161, 212, 158, 184);
       VALVE->box(FL_UP_BOX);
       VALVE->color(FL_FOREGROUND_COLOR);
@@ -17137,8 +16785,8 @@ void RKRGUI::Put_Loaded() {
        break;
        
        case 18://APhaser
-       aphaser_activar->value(rkr->APhaser_Bypass);
-       aphaser_preset->do_callback(aphaser_preset,1);
+       APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
+       APHASER->aphaser_preset->do_callback(APHASER->aphaser_preset,1);
        break;
   
        case 19://Valve
@@ -17771,7 +17419,7 @@ void RKRGUI::reordena() {
         
        case 18:
          APHASER->position(x[i],y[i]);
-         aphaser_activar->shortcut(s[i]);
+         APHASER->aphaser_activar->shortcut(s[i]);
          if(!rkr->deachide)APHASER->show();
          if(rkr->APhaser_Bypass)
          {
@@ -19047,36 +18695,36 @@ void RKRGUI::ActMIDI() {
        ActOnOff();
        break;
        case 117:
-       aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
-       aphaser_WD->redraw();
+       APHASER->aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
+       APHASER->aphaser_WD->redraw();
        break;
        case 118:
-       aphaser_pan->value(rkr->efx_APhaser->getpar(1));
-       aphaser_pan->redraw();
+       APHASER->aphaser_pan->value(rkr->efx_APhaser->getpar(1));
+       APHASER->aphaser_pan->redraw();
        break;
        case 119:
-       aphaser_freq->value(rkr->efx_APhaser->getpar(2));
-       aphaser_freq->redraw();
+       APHASER->aphaser_freq->value(rkr->efx_APhaser->getpar(2));
+       APHASER->aphaser_freq->redraw();
        break;
        case 120:
-       aphaser_phase->value(rkr->efx_APhaser->getpar(11));
-       aphaser_phase->redraw();
+       APHASER->aphaser_phase->value(rkr->efx_APhaser->getpar(11));
+       APHASER->aphaser_phase->redraw();
        break;
        case 121:
-       aphaser_dpth->value(rkr->efx_APhaser->getpar(6));
-       aphaser_dpth->redraw();
+       APHASER->aphaser_dpth->value(rkr->efx_APhaser->getpar(6));
+       APHASER->aphaser_dpth->redraw();
        break;
        case 122:
-       aphaser_fb->value(rkr->efx_APhaser->getpar(7)-64);
-       aphaser_fb->redraw();
+       APHASER->aphaser_fb->value(rkr->efx_APhaser->getpar(7)-64);
+       APHASER->aphaser_fb->redraw();
        break;
        case 123:
-       aphaser_LR->value(rkr->efx_APhaser->getpar(9));
-       aphaser_LR->redraw();
+       APHASER->aphaser_LR->value(rkr->efx_APhaser->getpar(9));
+       APHASER->aphaser_LR->redraw();
        break;
        case 124:
-       aphaser_stdf->value(rkr->efx_APhaser->getpar(5));
-       aphaser_stdf->redraw();
+       APHASER->aphaser_stdf->value(rkr->efx_APhaser->getpar(5));
+       APHASER->aphaser_stdf->redraw();
        break;
        case 125:
        NEWDIST->newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
@@ -20314,8 +19962,8 @@ void RKRGUI::ActOnOff() {
     NEWDIST->newdist_activar->do_callback();
     break;
     case 18:
-    aphaser_activar->value(rkr->APhaser_Bypass);
-    aphaser_activar->do_callback();
+    APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
+    APHASER->aphaser_activar->do_callback();
     break;
     case 19:
     valve_activar->value(rkr->Valve_Bypass);
@@ -21239,8 +20887,8 @@ void RKRGUI::UpdateTGUI() {
     
     if(rkr->APhaser_Bypass)
     {
-    aphaser_freq->value(rkr->efx_APhaser->getpar(2));
-    aphaser_freq->redraw();
+    APHASER->aphaser_freq->value(rkr->efx_APhaser->getpar(2));
+    APHASER->aphaser_freq->redraw();
     }
     
     if(rkr->DFlange_Bypass)
@@ -22115,7 +21763,7 @@ void RKRGUI::RandomPreset() {
        
        case 18://APhaser
        if (i<numEff)rkr->APhaser_Bypass=1; else rkr->APhaser_Bypass=0;
-       aphaser_activar->value(rkr->APhaser_Bypass);
+       APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
        break;
   
        case 19://Valve

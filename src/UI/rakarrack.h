@@ -42,6 +42,7 @@ class HarGui; // forward declaration
 class MusdelayGui; // forward declaration
 class GateGui; // forward declaration
 class NewdistGui; // forward declaration
+class AphaserGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -66,11 +67,12 @@ class SustainGui; // forward declaration
 #include "musdelay_gui.h"
 #include "gate_gui.h"
 #include "newdist_gui.h"
+#include "aphaser_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 #include <FL/Fl_Check_Button.H>
+#include <FL/Fl_Counter.H>
 #include "sustain_gui.h"
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Input.H>
@@ -247,78 +249,7 @@ public:
   MusdelayGui *MUSDELAY;
   GateGui *GATE;
   NewdistGui *NEWDIST;
-  Fl_Group *APHASER;
-  Fl_Light_Button *aphaser_activar;
-private:
-  inline void cb_aphaser_activar_i(Fl_Light_Button*, void*);
-  static void cb_aphaser_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *aphaser_preset;
-private:
-  inline void cb_aphaser_preset_i(Fl_Choice*, void*);
-  static void cb_aphaser_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_aphaser_preset[];
-public:
-  SliderW *aphaser_WD;
-private:
-  inline void cb_aphaser_WD_i(SliderW*, void*);
-  static void cb_aphaser_WD(SliderW*, void*);
-public:
-  Fl_Choice *aphaser_lfotype;
-private:
-  inline void cb_aphaser_lfotype_i(Fl_Choice*, void*);
-  static void cb_aphaser_lfotype(Fl_Choice*, void*);
-public:
-  SliderW *aphaser_freq;
-private:
-  inline void cb_aphaser_freq_i(SliderW*, void*);
-  static void cb_aphaser_freq(SliderW*, void*);
-public:
-  SliderW *aphaser_dpth;
-private:
-  inline void cb_aphaser_dpth_i(SliderW*, void*);
-  static void cb_aphaser_dpth(SliderW*, void*);
-public:
-  SliderW *aphaser_phase;
-private:
-  inline void cb_aphaser_phase_i(SliderW*, void*);
-  static void cb_aphaser_phase(SliderW*, void*);
-public:
-  SliderW *aphaser_fb;
-private:
-  inline void cb_aphaser_fb_i(SliderW*, void*);
-  static void cb_aphaser_fb(SliderW*, void*);
-public:
-  SliderW *aphaser_LR;
-private:
-  inline void cb_aphaser_LR_i(SliderW*, void*);
-  static void cb_aphaser_LR(SliderW*, void*);
-public:
-  SliderW *aphaser_pan;
-private:
-  inline void cb_aphaser_pan_i(SliderW*, void*);
-  static void cb_aphaser_pan(SliderW*, void*);
-public:
-  SliderW *aphaser_stdf;
-private:
-  inline void cb_aphaser_stdf_i(SliderW*, void*);
-  static void cb_aphaser_stdf(SliderW*, void*);
-public:
-  Fl_Counter *aphaser_stages;
-private:
-  inline void cb_aphaser_stages_i(Fl_Counter*, void*);
-  static void cb_aphaser_stages(Fl_Counter*, void*);
-public:
-  Fl_Check_Button *aphaser_subs;
-private:
-  inline void cb_aphaser_subs_i(Fl_Check_Button*, void*);
-  static void cb_aphaser_subs(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *aphaser_hyper;
-private:
-  inline void cb_aphaser_hyper_i(Fl_Check_Button*, void*);
-  static void cb_aphaser_hyper(Fl_Check_Button*, void*);
-public:
+  AphaserGui *APHASER;
   Fl_Group *VALVE;
   Fl_Light_Button *valve_activar;
 private:

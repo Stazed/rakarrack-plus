@@ -33,6 +33,7 @@ set (ProgSources
     UI/musdelay_gui.cxx
     UI/gate_gui.cxx
     UI/newdist_gui.cxx
+    UI/aphaser_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C
