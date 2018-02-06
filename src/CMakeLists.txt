@@ -38,6 +38,7 @@ set (ProgSources
     UI/dflange_gui.cxx
     UI/ring_gui.cxx
     UI/exciter_gui.cxx
+    UI/mbdist_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C

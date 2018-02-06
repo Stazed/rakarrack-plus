@@ -134,6 +134,9 @@ decl {class RingGui; // forward declaration} {public global
 decl {class ExciterGui; // forward declaration} {public global
 }
 
+decl {class MbdistGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1125,216 +1128,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group MBDIST {
         user_data 1
-        xywh {480 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button mbdist_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->MBDist_Bypass);
- return;
-}
-rkr->MBDist_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_MBDist->cleanup();
-findpos(23,(int)o->value(),o);}
-          xywh {485 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice mbdist_preset {
-          label Preset
-          user_data 12023
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12023))rkr->efx_MBDist->setpreset((int)o->value());
-mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
-mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
-mbdist_drive->value(rkr->efx_MBDist->getpar(3));
-mbdist_level->value(rkr->efx_MBDist->getpar(4));
-mbdist_tipoL->value(rkr->efx_MBDist->getpar(5));
-mbdist_tipoM->value(rkr->efx_MBDist->getpar(6));
-mbdist_tipoH->value(rkr->efx_MBDist->getpar(7));
-mbdist_volL->value(rkr->efx_MBDist->getpar(8));
-mbdist_volM->value(rkr->efx_MBDist->getpar(9));
-mbdist_volH->value(rkr->efx_MBDist->getpar(10));
-mbdist_neg->value(rkr->efx_MBDist->getpar(11));
-mbdist_st->value(rkr->efx_MBDist->getpar(14));
-mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
-mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
-mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
-          xywh {557 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Saturation
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Distorsion 1}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Soft
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Modulated
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Crunch
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Distortion 2}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Distortion 3}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Distortion 4}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider mbdist_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(202);
- return;
-} 
-rkr->efx_MBDist->changepar(0,(int)(o->value()+64));}
-          xywh {532 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_LRc {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(203);
- return;
-} 
-rkr->efx_MBDist->changepar(2,(int)(o->value()+64));}
-          xywh {532 249 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_drive {
-          label Drive
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(204);
- return;
-} 
-rkr->efx_MBDist->changepar(3,(int)o->value());}
-          xywh {532 261 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(205);
- return;
-} 
-rkr->efx_MBDist->changepar(4,(int)o->value());}
-          xywh {532 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_volL {
-          label {L.Gain}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(206);
- return;
-} 
-rkr->efx_MBDist->changepar(8,(int)o->value());}
-          xywh {532 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_volM {
-          label {M.Gain}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(207);
- return;
-} 
-rkr->efx_MBDist->changepar(9,(int)o->value());}
-          xywh {532 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_volH {
-          label {H. Gain}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(208);
- return;
-} 
-rkr->efx_MBDist->changepar(10,(int)o->value());}
-          xywh {532 313 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_cross1 {
-          label Cross1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(209);
- return;
-} 
-rkr->efx_MBDist->changepar(12,(int)o->value());}
-          xywh {532 326 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbdist_cross2 {
-          label Cross2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(210);
- return;
-} 
-rkr->efx_MBDist->changepar(13,(int)o->value());}
-          xywh {532 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 12000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice mbdist_tipoL {
-          callback {rkr->efx_MBDist->changepar(5,(int)o->value());} open
-          xywh {483 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(DIST->get_menu_dist_tipo());}
-        } {}
-        Fl_Choice mbdist_tipoM {
-          callback {rkr->efx_MBDist->changepar(6,(int)o->value());} open
-          xywh {534 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(DIST->get_menu_dist_tipo());}
-        } {}
-        Fl_Choice mbdist_tipoH {
-          callback {rkr->efx_MBDist->changepar(7,(int)o->value());} open
-          xywh {585 350 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(DIST->get_menu_dist_tipo());}
-        } {}
-        Fl_Value_Slider mbdist_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(211);
- return;
-} 
-rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
-          xywh {532 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button mbdist_st {
-          label Stereo
-          user_data 2
-          callback {rkr->efx_MBDist->changepar(14,(int)o->value());}
-          xywh {512 379 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button mbdist_neg {
-          label {Neg.}
-          user_data 2
-          callback {rkr->efx_MBDist->changepar(11,(int)o->value());}
-          xywh {581 378 44 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-      }
+        xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "mbdist_gui.h"}
+        class MbdistGui
+      } {}
       Fl_Group ARPIE {
         user_data 1
         xywh {161 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -9168,8 +8965,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break; 
 
      case 23://MBDist
-     mbdist_activar->value(rkr->MBDist_Bypass);
-     mbdist_preset->do_callback(mbdist_preset,1);
+     MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
+     MBDIST->mbdist_preset->do_callback(MBDIST->mbdist_preset,1);
      break;
 
      case 24://Arpie
@@ -9836,7 +9633,7 @@ switch (rkr->efx_order[i])
 
      case 23:
        MBDIST->position(x[i],y[i]);
-       mbdist_activar->shortcut(s[i]);
+       MBDIST->mbdist_activar->shortcut(s[i]);
        if(!rkr->deachide)MBDIST->show();
        if(rkr->MBDist_Bypass)
        {
@@ -11404,44 +11201,44 @@ switch (i)
      EXCITER->ex_10->redraw();
      break;
      case 202:
-     mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
-     mbdist_WD->redraw();
+     MBDIST->mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
+     MBDIST->mbdist_WD->redraw();
      break;
      case 203:
-     mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
-     mbdist_LRc->redraw();
+     MBDIST->mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
+     MBDIST->mbdist_LRc->redraw();
      break;
      case 204:
-     mbdist_drive->value(rkr->efx_MBDist->getpar(3));
-     mbdist_drive->redraw();
+     MBDIST->mbdist_drive->value(rkr->efx_MBDist->getpar(3));
+     MBDIST->mbdist_drive->redraw();
      break;
      case 205:
-     mbdist_level->value(rkr->efx_MBDist->getpar(4));
-     mbdist_level->redraw();
+     MBDIST->mbdist_level->value(rkr->efx_MBDist->getpar(4));
+     MBDIST->mbdist_level->redraw();
      break;
      case 206:
-     mbdist_volL->value(rkr->efx_MBDist->getpar(8));
-     mbdist_volL->redraw();
+     MBDIST->mbdist_volL->value(rkr->efx_MBDist->getpar(8));
+     MBDIST->mbdist_volL->redraw();
      break;
      case 207:
-     mbdist_volM->value(rkr->efx_MBDist->getpar(9));
-     mbdist_volM->redraw();
+     MBDIST->mbdist_volM->value(rkr->efx_MBDist->getpar(9));
+     MBDIST->mbdist_volM->redraw();
      break;
      case 208:
-     mbdist_volH->value(rkr->efx_MBDist->getpar(10));
-     mbdist_volH->redraw();
+     MBDIST->mbdist_volH->value(rkr->efx_MBDist->getpar(10));
+     MBDIST->mbdist_volH->redraw();
      break;
      case 209:
-     mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
-     mbdist_cross1->redraw();
+     MBDIST->mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
+     MBDIST->mbdist_cross1->redraw();
      break;
      case 210:
-     mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
-     mbdist_cross2->redraw();
+     MBDIST->mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
+     MBDIST->mbdist_cross2->redraw();
      break;
      case 211:
-     mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
-     mbdist_pan->redraw();
+     MBDIST->mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
+     MBDIST->mbdist_pan->redraw();
      break;
      case 212:
      arpie_WD->value(rkr->efx_Arpie->getpar(0));
@@ -12331,8 +12128,8 @@ switch(miralo)
   EXCITER->exciter_activar->do_callback();
   break;
   case 23:
-  mbdist_activar->value(rkr->MBDist_Bypass);
-  mbdist_activar->do_callback();
+  MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
+  MBDIST->mbdist_activar->do_callback();
   break;
   case 24:
   arpie_activar->value(rkr->Arpie_Bypass);
@@ -14111,7 +13908,7 @@ for(i=0;i<10;i++)
 
      case 23://MBDist
      if (i<numEff)rkr->MBDist_Bypass=1; else rkr->MBDist_Bypass=0;
-     mbdist_activar->value(rkr->MBDist_Bypass);
+     MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
      break;
 
      case 24://Arpie

@@ -751,212 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_mbdist_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->MBDist_Bypass);
- return;
-}
-rkr->MBDist_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_MBDist->cleanup();
-findpos(23,(int)o->value(),o);
-}
-void RKRGUI::cb_mbdist_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_activar_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12023))rkr->efx_MBDist->setpreset((int)o->value());
-mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
-mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
-mbdist_drive->value(rkr->efx_MBDist->getpar(3));
-mbdist_level->value(rkr->efx_MBDist->getpar(4));
-mbdist_tipoL->value(rkr->efx_MBDist->getpar(5));
-mbdist_tipoM->value(rkr->efx_MBDist->getpar(6));
-mbdist_tipoH->value(rkr->efx_MBDist->getpar(7));
-mbdist_volL->value(rkr->efx_MBDist->getpar(8));
-mbdist_volM->value(rkr->efx_MBDist->getpar(9));
-mbdist_volH->value(rkr->efx_MBDist->getpar(10));
-mbdist_neg->value(rkr->efx_MBDist->getpar(11));
-mbdist_st->value(rkr->efx_MBDist->getpar(14));
-mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
-mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
-mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
-}
-void RKRGUI::cb_mbdist_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_mbdist_preset[] = {
- {"Saturation", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Distorsion 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Soft", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Modulated", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Crunch", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Distortion 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Distortion 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Distortion 4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_mbdist_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(202);
- return;
-} 
-rkr->efx_MBDist->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_mbdist_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_WD_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_LRc_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(203);
- return;
-} 
-rkr->efx_MBDist->changepar(2,(int)(o->value()+64));
-}
-void RKRGUI::cb_mbdist_LRc(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_LRc_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_drive_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(204);
- return;
-} 
-rkr->efx_MBDist->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_mbdist_drive(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_drive_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_level_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(205);
- return;
-} 
-rkr->efx_MBDist->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_mbdist_level(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_level_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_volL_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(206);
- return;
-} 
-rkr->efx_MBDist->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_mbdist_volL(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_volL_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_volM_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(207);
- return;
-} 
-rkr->efx_MBDist->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_mbdist_volM(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_volM_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_volH_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(208);
- return;
-} 
-rkr->efx_MBDist->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_mbdist_volH(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_volH_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_cross1_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(209);
- return;
-} 
-rkr->efx_MBDist->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_mbdist_cross1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_cross1_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_cross2_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(210);
- return;
-} 
-rkr->efx_MBDist->changepar(13,(int)o->value());
-}
-void RKRGUI::cb_mbdist_cross2(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_cross2_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_tipoL_i(Fl_Choice* o, void*) {
-  rkr->efx_MBDist->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_mbdist_tipoL(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_tipoL_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_tipoM_i(Fl_Choice* o, void*) {
-  rkr->efx_MBDist->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_mbdist_tipoM(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_tipoM_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_tipoH_i(Fl_Choice* o, void*) {
-  rkr->efx_MBDist->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_mbdist_tipoH(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_tipoH_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(211);
- return;
-} 
-rkr->efx_MBDist->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_mbdist_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_pan_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_st_i(Fl_Check_Button* o, void*) {
-  rkr->efx_MBDist->changepar(14,(int)o->value());
-}
-void RKRGUI::cb_mbdist_st(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_st_i(o,v);
-}
-
-void RKRGUI::cb_mbdist_neg_i(Fl_Check_Button* o, void*) {
-  rkr->efx_MBDist->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_mbdist_neg(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_mbdist_neg_i(o,v);
-}
-
 void RKRGUI::cb_arpie_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -7647,243 +7441,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       EXCITER->hide();
       EXCITER->end();
     } // ExciterGui* EXCITER
-    { MBDIST = new Fl_Group(480, 211, 158, 184);
+    { MBDIST = new MbdistGui(480, 212, 158, 184);
       MBDIST->box(FL_UP_BOX);
       MBDIST->color(FL_FOREGROUND_COLOR);
       MBDIST->selection_color(FL_FOREGROUND_COLOR);
+      MBDIST->labeltype(FL_NORMAL_LABEL);
       MBDIST->labelfont(1);
+      MBDIST->labelsize(14);
+      MBDIST->labelcolor(FL_FOREGROUND_COLOR);
       MBDIST->user_data((void*)(1));
       MBDIST->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      MBDIST->when(FL_WHEN_RELEASE);
       MBDIST->hide();
-      { mbdist_activar = new Fl_Light_Button(485, 215, 34, 18, "On");
-        mbdist_activar->shortcut(0x33);
-        mbdist_activar->color((Fl_Color)62);
-        mbdist_activar->selection_color((Fl_Color)1);
-        mbdist_activar->labelsize(10);
-        mbdist_activar->callback((Fl_Callback*)cb_mbdist_activar, (void*)(2));
-        mbdist_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        mbdist_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* mbdist_activar
-      { mbdist_preset = new Fl_Choice(557, 215, 76, 18, "Preset");
-        mbdist_preset->down_box(FL_BORDER_BOX);
-        mbdist_preset->selection_color(FL_FOREGROUND_COLOR);
-        mbdist_preset->labelsize(10);
-        mbdist_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_preset->textsize(10);
-        mbdist_preset->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_preset->callback((Fl_Callback*)cb_mbdist_preset, (void*)(12023));
-        mbdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        mbdist_preset->menu(menu_mbdist_preset);
-      } // Fl_Choice* mbdist_preset
-      { mbdist_WD = new SliderW(532, 237, 100, 10, "Wet/Dry");
-        mbdist_WD->type(5);
-        mbdist_WD->box(FL_FLAT_BOX);
-        mbdist_WD->color((Fl_Color)178);
-        mbdist_WD->selection_color((Fl_Color)62);
-        mbdist_WD->labeltype(FL_NORMAL_LABEL);
-        mbdist_WD->labelfont(0);
-        mbdist_WD->labelsize(10);
-        mbdist_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_WD->minimum(-64);
-        mbdist_WD->maximum(64);
-        mbdist_WD->step(1);
-        mbdist_WD->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_WD->callback((Fl_Callback*)cb_mbdist_WD);
-        mbdist_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_WD
-      { mbdist_LRc = new SliderW(532, 249, 100, 10, "L/R.Cr");
-        mbdist_LRc->type(5);
-        mbdist_LRc->box(FL_FLAT_BOX);
-        mbdist_LRc->color((Fl_Color)178);
-        mbdist_LRc->selection_color((Fl_Color)62);
-        mbdist_LRc->labeltype(FL_NORMAL_LABEL);
-        mbdist_LRc->labelfont(0);
-        mbdist_LRc->labelsize(10);
-        mbdist_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_LRc->minimum(-64);
-        mbdist_LRc->maximum(64);
-        mbdist_LRc->step(1);
-        mbdist_LRc->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_LRc->callback((Fl_Callback*)cb_mbdist_LRc);
-        mbdist_LRc->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_LRc->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_LRc
-      { mbdist_drive = new SliderW(532, 261, 100, 10, "Drive");
-        mbdist_drive->type(5);
-        mbdist_drive->box(FL_FLAT_BOX);
-        mbdist_drive->color((Fl_Color)178);
-        mbdist_drive->selection_color((Fl_Color)62);
-        mbdist_drive->labeltype(FL_NORMAL_LABEL);
-        mbdist_drive->labelfont(0);
-        mbdist_drive->labelsize(10);
-        mbdist_drive->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_drive->maximum(127);
-        mbdist_drive->step(1);
-        mbdist_drive->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_drive->callback((Fl_Callback*)cb_mbdist_drive);
-        mbdist_drive->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_drive->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_drive
-      { mbdist_level = new SliderW(532, 273, 100, 10, "Level");
-        mbdist_level->type(5);
-        mbdist_level->box(FL_FLAT_BOX);
-        mbdist_level->color((Fl_Color)178);
-        mbdist_level->selection_color((Fl_Color)62);
-        mbdist_level->labeltype(FL_NORMAL_LABEL);
-        mbdist_level->labelfont(0);
-        mbdist_level->labelsize(10);
-        mbdist_level->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_level->maximum(127);
-        mbdist_level->step(1);
-        mbdist_level->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_level->callback((Fl_Callback*)cb_mbdist_level);
-        mbdist_level->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_level->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_level
-      { mbdist_volL = new SliderW(532, 287, 100, 10, "L.Gain");
-        mbdist_volL->type(5);
-        mbdist_volL->box(FL_FLAT_BOX);
-        mbdist_volL->color((Fl_Color)178);
-        mbdist_volL->selection_color((Fl_Color)62);
-        mbdist_volL->labeltype(FL_NORMAL_LABEL);
-        mbdist_volL->labelfont(0);
-        mbdist_volL->labelsize(10);
-        mbdist_volL->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_volL->maximum(100);
-        mbdist_volL->step(1);
-        mbdist_volL->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_volL->callback((Fl_Callback*)cb_mbdist_volL);
-        mbdist_volL->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_volL->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_volL
-      { mbdist_volM = new SliderW(532, 300, 100, 10, "M.Gain");
-        mbdist_volM->type(5);
-        mbdist_volM->box(FL_FLAT_BOX);
-        mbdist_volM->color((Fl_Color)178);
-        mbdist_volM->selection_color((Fl_Color)62);
-        mbdist_volM->labeltype(FL_NORMAL_LABEL);
-        mbdist_volM->labelfont(0);
-        mbdist_volM->labelsize(10);
-        mbdist_volM->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_volM->maximum(100);
-        mbdist_volM->step(1);
-        mbdist_volM->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_volM->callback((Fl_Callback*)cb_mbdist_volM);
-        mbdist_volM->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_volM->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_volM
-      { mbdist_volH = new SliderW(532, 313, 100, 10, "H. Gain");
-        mbdist_volH->type(5);
-        mbdist_volH->box(FL_FLAT_BOX);
-        mbdist_volH->color((Fl_Color)178);
-        mbdist_volH->selection_color((Fl_Color)62);
-        mbdist_volH->labeltype(FL_NORMAL_LABEL);
-        mbdist_volH->labelfont(0);
-        mbdist_volH->labelsize(10);
-        mbdist_volH->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_volH->maximum(100);
-        mbdist_volH->step(1);
-        mbdist_volH->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_volH->callback((Fl_Callback*)cb_mbdist_volH);
-        mbdist_volH->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_volH->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_volH
-      { mbdist_cross1 = new SliderW(532, 326, 100, 10, "Cross1");
-        mbdist_cross1->type(5);
-        mbdist_cross1->box(FL_FLAT_BOX);
-        mbdist_cross1->color((Fl_Color)178);
-        mbdist_cross1->selection_color((Fl_Color)62);
-        mbdist_cross1->labeltype(FL_NORMAL_LABEL);
-        mbdist_cross1->labelfont(0);
-        mbdist_cross1->labelsize(10);
-        mbdist_cross1->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_cross1->minimum(20);
-        mbdist_cross1->maximum(1000);
-        mbdist_cross1->step(1);
-        mbdist_cross1->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_cross1->callback((Fl_Callback*)cb_mbdist_cross1);
-        mbdist_cross1->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_cross1->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_cross1
-      { mbdist_cross2 = new SliderW(532, 338, 100, 10, "Cross2");
-        mbdist_cross2->type(5);
-        mbdist_cross2->box(FL_FLAT_BOX);
-        mbdist_cross2->color((Fl_Color)178);
-        mbdist_cross2->selection_color((Fl_Color)62);
-        mbdist_cross2->labeltype(FL_NORMAL_LABEL);
-        mbdist_cross2->labelfont(0);
-        mbdist_cross2->labelsize(10);
-        mbdist_cross2->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_cross2->minimum(800);
-        mbdist_cross2->maximum(12000);
-        mbdist_cross2->step(1);
-        mbdist_cross2->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_cross2->callback((Fl_Callback*)cb_mbdist_cross2);
-        mbdist_cross2->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_cross2->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_cross2
-      { Fl_Choice* o = mbdist_tipoL = new Fl_Choice(483, 350, 50, 16);
-        mbdist_tipoL->down_box(FL_BORDER_BOX);
-        mbdist_tipoL->selection_color(FL_FOREGROUND_COLOR);
-        mbdist_tipoL->labelsize(10);
-        mbdist_tipoL->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_tipoL->textsize(10);
-        mbdist_tipoL->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_tipoL->callback((Fl_Callback*)cb_mbdist_tipoL);
-        o->menu(DIST->get_menu_dist_tipo());
-      } // Fl_Choice* mbdist_tipoL
-      { Fl_Choice* o = mbdist_tipoM = new Fl_Choice(534, 350, 50, 16);
-        mbdist_tipoM->down_box(FL_BORDER_BOX);
-        mbdist_tipoM->selection_color(FL_FOREGROUND_COLOR);
-        mbdist_tipoM->labelsize(10);
-        mbdist_tipoM->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_tipoM->textsize(10);
-        mbdist_tipoM->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_tipoM->callback((Fl_Callback*)cb_mbdist_tipoM);
-        o->menu(DIST->get_menu_dist_tipo());
-      } // Fl_Choice* mbdist_tipoM
-      { Fl_Choice* o = mbdist_tipoH = new Fl_Choice(585, 350, 50, 16);
-        mbdist_tipoH->down_box(FL_BORDER_BOX);
-        mbdist_tipoH->selection_color(FL_FOREGROUND_COLOR);
-        mbdist_tipoH->labelsize(10);
-        mbdist_tipoH->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_tipoH->textsize(10);
-        mbdist_tipoH->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_tipoH->callback((Fl_Callback*)cb_mbdist_tipoH);
-        o->menu(DIST->get_menu_dist_tipo());
-      } // Fl_Choice* mbdist_tipoH
-      { mbdist_pan = new SliderW(532, 369, 100, 10, "Pan");
-        mbdist_pan->type(5);
-        mbdist_pan->box(FL_FLAT_BOX);
-        mbdist_pan->color((Fl_Color)178);
-        mbdist_pan->selection_color((Fl_Color)62);
-        mbdist_pan->labeltype(FL_NORMAL_LABEL);
-        mbdist_pan->labelfont(0);
-        mbdist_pan->labelsize(10);
-        mbdist_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_pan->minimum(-64);
-        mbdist_pan->maximum(64);
-        mbdist_pan->step(1);
-        mbdist_pan->textcolor(FL_BACKGROUND2_COLOR);
-        mbdist_pan->callback((Fl_Callback*)cb_mbdist_pan);
-        mbdist_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        mbdist_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* mbdist_pan
-      { mbdist_st = new Fl_Check_Button(512, 379, 54, 15, "Stereo");
-        mbdist_st->down_box(FL_BORDER_BOX);
-        mbdist_st->labelsize(10);
-        mbdist_st->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_st->callback((Fl_Callback*)cb_mbdist_st, (void*)(2));
-      } // Fl_Check_Button* mbdist_st
-      { mbdist_neg = new Fl_Check_Button(581, 378, 44, 15, "Neg.");
-        mbdist_neg->down_box(FL_BORDER_BOX);
-        mbdist_neg->labelsize(10);
-        mbdist_neg->labelcolor(FL_BACKGROUND2_COLOR);
-        mbdist_neg->callback((Fl_Callback*)cb_mbdist_neg, (void*)(2));
-      } // Fl_Check_Button* mbdist_neg
       MBDIST->end();
-    } // Fl_Group* MBDIST
+    } // MbdistGui* MBDIST
     { ARPIE = new Fl_Group(161, 211, 158, 184);
       ARPIE->box(FL_UP_BOX);
       ARPIE->color(FL_FOREGROUND_COLOR);
@@ -15157,8 +14728,8 @@ void RKRGUI::Put_Loaded() {
        break; 
   
        case 23://MBDist
-       mbdist_activar->value(rkr->MBDist_Bypass);
-       mbdist_preset->do_callback(mbdist_preset,1);
+       MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
+       MBDIST->mbdist_preset->do_callback(MBDIST->mbdist_preset,1);
        break;
   
        case 24://Arpie
@@ -15826,7 +15397,7 @@ void RKRGUI::reordena() {
   
        case 23:
          MBDIST->position(x[i],y[i]);
-         mbdist_activar->shortcut(s[i]);
+         MBDIST->mbdist_activar->shortcut(s[i]);
          if(!rkr->deachide)MBDIST->show();
          if(rkr->MBDist_Bypass)
          {
@@ -17402,44 +16973,44 @@ void RKRGUI::ActMIDI() {
        EXCITER->ex_10->redraw();
        break;
        case 202:
-       mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
-       mbdist_WD->redraw();
+       MBDIST->mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
+       MBDIST->mbdist_WD->redraw();
        break;
        case 203:
-       mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
-       mbdist_LRc->redraw();
+       MBDIST->mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
+       MBDIST->mbdist_LRc->redraw();
        break;
        case 204:
-       mbdist_drive->value(rkr->efx_MBDist->getpar(3));
-       mbdist_drive->redraw();
+       MBDIST->mbdist_drive->value(rkr->efx_MBDist->getpar(3));
+       MBDIST->mbdist_drive->redraw();
        break;
        case 205:
-       mbdist_level->value(rkr->efx_MBDist->getpar(4));
-       mbdist_level->redraw();
+       MBDIST->mbdist_level->value(rkr->efx_MBDist->getpar(4));
+       MBDIST->mbdist_level->redraw();
        break;
        case 206:
-       mbdist_volL->value(rkr->efx_MBDist->getpar(8));
-       mbdist_volL->redraw();
+       MBDIST->mbdist_volL->value(rkr->efx_MBDist->getpar(8));
+       MBDIST->mbdist_volL->redraw();
        break;
        case 207:
-       mbdist_volM->value(rkr->efx_MBDist->getpar(9));
-       mbdist_volM->redraw();
+       MBDIST->mbdist_volM->value(rkr->efx_MBDist->getpar(9));
+       MBDIST->mbdist_volM->redraw();
        break;
        case 208:
-       mbdist_volH->value(rkr->efx_MBDist->getpar(10));
-       mbdist_volH->redraw();
+       MBDIST->mbdist_volH->value(rkr->efx_MBDist->getpar(10));
+       MBDIST->mbdist_volH->redraw();
        break;
        case 209:
-       mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
-       mbdist_cross1->redraw();
+       MBDIST->mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
+       MBDIST->mbdist_cross1->redraw();
        break;
        case 210:
-       mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
-       mbdist_cross2->redraw();
+       MBDIST->mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
+       MBDIST->mbdist_cross2->redraw();
        break;
        case 211:
-       mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
-       mbdist_pan->redraw();
+       MBDIST->mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
+       MBDIST->mbdist_pan->redraw();
        break;
        case 212:
        arpie_WD->value(rkr->efx_Arpie->getpar(0));
@@ -18329,8 +17900,8 @@ void RKRGUI::ActOnOff() {
     EXCITER->exciter_activar->do_callback();
     break;
     case 23:
-    mbdist_activar->value(rkr->MBDist_Bypass);
-    mbdist_activar->do_callback();
+    MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
+    MBDIST->mbdist_activar->do_callback();
     break;
     case 24:
     arpie_activar->value(rkr->Arpie_Bypass);
@@ -20135,7 +19706,7 @@ void RKRGUI::RandomPreset() {
   
        case 23://MBDist
        if (i<numEff)rkr->MBDist_Bypass=1; else rkr->MBDist_Bypass=0;
-       mbdist_activar->value(rkr->MBDist_Bypass);
+       MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
        break;
   
        case 24://Arpie
