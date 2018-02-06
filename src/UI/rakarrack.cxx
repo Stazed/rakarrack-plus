@@ -751,49 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_Cabinet_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Cabinet_Bypass);
- return;
-}
-rkr->Cabinet_Bypass=(int)o->value();
-findpos(12,(int)o->value(),o);
-}
-void RKRGUI::cb_Cabinet_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_activar_i(o,v);
-}
-
-void RKRGUI::cb_Cabinet_preset_i(Fl_Choice* o, void*) {
-  rkr->efx_Cabinet->setpreset((int) o->value());
-}
-void RKRGUI::cb_Cabinet_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Cabinet_preset[] = {
- {"Marshall-4-12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Celestion G12M", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Jensen Alnico P12N", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Jensen Alnico P15N", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Delta Demon", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Celestion-EVH12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Eminence Copperhead", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Mesa Boogie", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Jazz-Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Vox-Bright", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Marshall-I", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Cabinet_output_i(SliderW* o, void*) {
-  rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_Cabinet_output(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Cabinet_output_i(o,v);
-}
-
 void RKRGUI::cb_pan_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -9231,53 +9188,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       ALIENWAH->hide();
       ALIENWAH->end();
     } // AlienwahGui* ALIENWAH
-    { CABINET = new Fl_Group(161, 211, 158, 184);
+    { CABINET = new CabinetGui(480, 212, 158, 184);
       CABINET->box(FL_UP_BOX);
       CABINET->color(FL_FOREGROUND_COLOR);
       CABINET->selection_color(FL_FOREGROUND_COLOR);
+      CABINET->labeltype(FL_NORMAL_LABEL);
       CABINET->labelfont(1);
+      CABINET->labelsize(14);
+      CABINET->labelcolor(FL_FOREGROUND_COLOR);
       CABINET->user_data((void*)(1));
       CABINET->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      CABINET->when(FL_WHEN_RELEASE);
       CABINET->hide();
-      { Cabinet_activar = new Fl_Light_Button(166, 215, 34, 18, "On");
-        Cabinet_activar->shortcut(0x32);
-        Cabinet_activar->color((Fl_Color)62);
-        Cabinet_activar->selection_color((Fl_Color)1);
-        Cabinet_activar->labelsize(10);
-        Cabinet_activar->callback((Fl_Callback*)cb_Cabinet_activar, (void*)(2));
-        Cabinet_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        Cabinet_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* Cabinet_activar
-      { Cabinet_preset = new Fl_Choice(206, 256, 106, 18, "Preset");
-        Cabinet_preset->down_box(FL_BORDER_BOX);
-        Cabinet_preset->selection_color(FL_FOREGROUND_COLOR);
-        Cabinet_preset->labelsize(10);
-        Cabinet_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        Cabinet_preset->textsize(10);
-        Cabinet_preset->textcolor(FL_BACKGROUND2_COLOR);
-        Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset, (void*)(12012));
-        Cabinet_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        Cabinet_preset->menu(menu_Cabinet_preset);
-      } // Fl_Choice* Cabinet_preset
-      { Cabinet_output = new SliderW(209, 303, 100, 10, "Gain");
-        Cabinet_output->type(5);
-        Cabinet_output->box(FL_FLAT_BOX);
-        Cabinet_output->color((Fl_Color)178);
-        Cabinet_output->selection_color((Fl_Color)62);
-        Cabinet_output->labeltype(FL_NORMAL_LABEL);
-        Cabinet_output->labelfont(0);
-        Cabinet_output->labelsize(10);
-        Cabinet_output->labelcolor(FL_BACKGROUND2_COLOR);
-        Cabinet_output->minimum(-64);
-        Cabinet_output->maximum(63);
-        Cabinet_output->step(1);
-        Cabinet_output->textcolor(FL_BACKGROUND2_COLOR);
-        Cabinet_output->callback((Fl_Callback*)cb_Cabinet_output);
-        Cabinet_output->align(Fl_Align(FL_ALIGN_LEFT));
-        Cabinet_output->when(FL_WHEN_CHANGED);
-      } // SliderW* Cabinet_output
       CABINET->end();
-    } // Fl_Group* CABINET
+    } // CabinetGui* CABINET
     { PAN = new Fl_Group(320, 212, 158, 184);
       PAN->box(FL_UP_BOX);
       PAN->color(FL_FOREGROUND_COLOR);
@@ -18784,9 +18708,9 @@ void RKRGUI::Put_Loaded() {
        break;
        
        case 12://Cabinet
-       Cabinet_output->value(rkr->lv[13][1]-64);
-       Cabinet_preset->value(rkr->lv[13][0]);
-       Cabinet_activar->value(rkr->Cabinet_Bypass);
+       CABINET->Cabinet_output->value(rkr->lv[13][1]-64);
+       CABINET->Cabinet_preset->value(rkr->lv[13][0]);
+       CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
        break;
    
        case 13://Pan
@@ -19376,7 +19300,7 @@ void RKRGUI::reordena() {
        case 12:
        
          CABINET->position(x[i],y[i]);   
-         Cabinet_activar->shortcut(s[i]);
+         CABINET->Cabinet_activar->shortcut(s[i]);
          if(!rkr->deachide)CABINET->show();
          if(rkr->Cabinet_Bypass)
          {
@@ -21968,8 +21892,8 @@ void RKRGUI::ActOnOff() {
     ALIENWAH->Alienwah_activar->do_callback();
     break;
     case 12:
-    Cabinet_activar->value(rkr->Cabinet_Bypass);
-    Cabinet_activar->do_callback();
+    CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
+    CABINET->Cabinet_activar->do_callback();
     break;
     case 13:
     pan_activar->value(rkr->Pan_Bypass);
@@ -23763,7 +23687,7 @@ void RKRGUI::RandomPreset() {
        
        case 12://Cabinet
        if (i<numEff)rkr->Cabinet_Bypass=1; else rkr->Cabinet_Bypass=0;
-       Cabinet_activar->value(rkr->Cabinet_Bypass);
+       CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
        break;
    
        case 13://Pan

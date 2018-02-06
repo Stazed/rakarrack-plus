@@ -1,0 +1,82 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class CabinetGui {
+  user_data 1 open
+  xywh {1694 174 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"} visible position_relative
+} {
+  Fl_Light_Button Cabinet_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->Cabinet_Bypass);
+ return;
+}
+rkr->Cabinet_Bypass=(int)o->value();
+rgui->findpos(12,(int)o->value(),o);} selected
+    xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice Cabinet_preset {
+    label Preset
+    user_data 12012
+    callback {rkr->efx_Cabinet->setpreset((int) o->value());}
+    xywh {45 45 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label {Marshall-4-12}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Celestion G12M}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Jensen Alnico P12N}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Jensen Alnico P15N}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Delta Demon}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Celestion-EVH12}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Eminence Copperhead}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Mesa Boogie}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Jazz-Chorus}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Vox-Bright}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Marshall-I}
+      xywh {0 0 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider Cabinet_output {
+    label Gain
+    callback {rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));}
+    xywh {48 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+}

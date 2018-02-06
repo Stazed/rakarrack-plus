@@ -101,6 +101,9 @@ decl {class WhawhaGui; // forward declaration} {public global
 decl {class AlienwahGui; // forward declaration} {public global
 }
 
+decl {class CabinetGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -171,7 +174,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;} open selected
       xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1019,86 +1022,17 @@ Fl::focus(Open_Order);
         class WhawhaGui
       } {}
       Fl_Group ALIENWAH {
-        user_data 1 selected
+        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "alienwah_gui.h"}
         class AlienwahGui
       } {}
       Fl_Group CABINET {
         user_data 1
-        xywh {161 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button Cabinet_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Cabinet_Bypass);
- return;
-}
-rkr->Cabinet_Bypass=(int)o->value();
-findpos(12,(int)o->value(),o);}
-          xywh {166 215 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice Cabinet_preset {
-          label Preset
-          user_data 12012
-          callback {rkr->efx_Cabinet->setpreset((int) o->value());}
-          xywh {206 256 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Marshall-4-12}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Celestion G12M}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Jensen Alnico P12N}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Jensen Alnico P15N}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Delta Demon}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Celestion-EVH12}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Eminence Copperhead}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Mesa Boogie}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Jazz-Chorus}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Vox-Bright}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Marshall-I}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider Cabinet_output {
-          label Gain
-          callback {rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));}
-          xywh {209 303 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "cabinet_gui.h"}
+        class CabinetGui
+      } {}
       Fl_Group PAN {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -10817,9 +10751,9 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
      
      case 12://Cabinet
-     Cabinet_output->value(rkr->lv[13][1]-64);
-     Cabinet_preset->value(rkr->lv[13][0]);
-     Cabinet_activar->value(rkr->Cabinet_Bypass);
+     CABINET->Cabinet_output->value(rkr->lv[13][1]-64);
+     CABINET->Cabinet_preset->value(rkr->lv[13][0]);
+     CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
      break;
  
      case 13://Pan
@@ -11408,7 +11342,7 @@ switch (rkr->efx_order[i])
      case 12:
      
        CABINET->position(x[i],y[i]);   
-       Cabinet_activar->shortcut(s[i]);
+       CABINET->Cabinet_activar->shortcut(s[i]);
        if(!rkr->deachide)CABINET->show();
        if(rkr->Cabinet_Bypass)
        {
@@ -13992,8 +13926,8 @@ switch(miralo)
   ALIENWAH->Alienwah_activar->do_callback();
   break;
   case 12:
-  Cabinet_activar->value(rkr->Cabinet_Bypass);
-  Cabinet_activar->do_callback();
+  CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
+  CABINET->Cabinet_activar->do_callback();
   break;
   case 13:
   pan_activar->value(rkr->Pan_Bypass);
@@ -15761,7 +15695,7 @@ for(i=0;i<10;i++)
      
      case 12://Cabinet
      if (i<numEff)rkr->Cabinet_Bypass=1; else rkr->Cabinet_Bypass=0;
-     Cabinet_activar->value(rkr->Cabinet_Bypass);
+     CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
      break;
  
      case 13://Pan

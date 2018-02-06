@@ -36,6 +36,7 @@ class ReverbGui; // forward declaration
 class PeqGui; // forward declaration
 class WhawhaGui; // forward declaration
 class AlienwahGui; // forward declaration
+class CabinetGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -54,6 +55,7 @@ class SustainGui; // forward declaration
 #include "peq_gui.h"
 #include "whawha_gui.h"
 #include "alienwah_gui.h"
+#include "cabinet_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -229,23 +231,7 @@ public:
   PeqGui *PEQ;
   WhawhaGui *WHAWHA;
   AlienwahGui *ALIENWAH;
-  Fl_Group *CABINET;
-  Fl_Light_Button *Cabinet_activar;
-private:
-  inline void cb_Cabinet_activar_i(Fl_Light_Button*, void*);
-  static void cb_Cabinet_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *Cabinet_preset;
-private:
-  inline void cb_Cabinet_preset_i(Fl_Choice*, void*);
-  static void cb_Cabinet_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_Cabinet_preset[];
-public:
-  SliderW *Cabinet_output;
-private:
-  inline void cb_Cabinet_output_i(SliderW*, void*);
-  static void cb_Cabinet_output(SliderW*, void*);
-public:
+  CabinetGui *CABINET;
   Fl_Group *PAN;
   Fl_Light_Button *pan_activar;
 private:
