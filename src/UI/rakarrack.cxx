@@ -9203,7 +9203,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       PEQ->hide();
       PEQ->end();
     } // PeqGui* PEQ
-    { WHAWHA = new WhawhaGui(320, 210, 158, 184);
+    { WHAWHA = new WhawhaGui(2, 212, 158, 184);
       WHAWHA->box(FL_UP_BOX);
       WHAWHA->color(FL_FOREGROUND_COLOR);
       WHAWHA->selection_color(FL_FOREGROUND_COLOR);
@@ -9217,7 +9217,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       WHAWHA->hide();
       WHAWHA->end();
     } // WhawhaGui* WHAWHA
-    { ALIENWAH = new AlienwahGui(320, 212, 158, 184);
+    { ALIENWAH = new AlienwahGui(161, 212, 158, 184);
       ALIENWAH->box(FL_UP_BOX);
       ALIENWAH->color(FL_FOREGROUND_COLOR);
       ALIENWAH->selection_color(FL_FOREGROUND_COLOR);

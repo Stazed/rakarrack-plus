@@ -171,7 +171,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
+Pexitprogram=1;} open
       xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1014,13 +1014,13 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group WHAWHA {
         user_data 1
-        xywh {320 210 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "whawha_gui.h"}
         class WhawhaGui
       } {}
       Fl_Group ALIENWAH {
-        user_data 1
-        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        user_data 1 selected
+        xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "alienwah_gui.h"}
         class AlienwahGui
       } {}
