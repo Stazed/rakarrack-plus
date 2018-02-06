@@ -131,6 +131,9 @@ decl {class DflangeGui; // forward declaration} {public global
 decl {class RingGui; // forward declaration} {public global
 }
 
+decl {class ExciterGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1116,208 +1119,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group EXCITER {
         user_data 1
-        xywh {162 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button exciter_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Exciter_Bypass);
- return;
-}
-rkr->Exciter_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Exciter->cleanup();
-findpos(22,(int)o->value(),o);}
-          xywh {167 216 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice exciter_preset {
-          label Preset
-          user_data 12022
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12022))rkr->efx_Exciter->setpreset((int) o->value());
-ex_Gain->value(rkr->efx_Exciter->getpar(0));
-ex_1->value(rkr->efx_Exciter->getpar(1));
-ex_2->value(rkr->efx_Exciter->getpar(2));
-ex_3->value(rkr->efx_Exciter->getpar(3));
-ex_4->value(rkr->efx_Exciter->getpar(4));
-ex_5->value(rkr->efx_Exciter->getpar(5));
-ex_6->value(rkr->efx_Exciter->getpar(6));
-ex_7->value(rkr->efx_Exciter->getpar(7));
-ex_8->value(rkr->efx_Exciter->getpar(8));
-ex_9->value(rkr->efx_Exciter->getpar(9));
-ex_10->value(rkr->efx_Exciter->getpar(10));
-ex_lfreq->value(rkr->efx_Exciter->getpar(11));
-ex_hfreq->value(rkr->efx_Exciter->getpar(12));}
-          xywh {239 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Plain
-            xywh {22 22 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Loudness
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Exciter 1}
-            xywh {22 22 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Exciter 2}
-            xywh {22 22 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Exciter 3}
-            xywh {32 32 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider ex_Gain {
-          label Gain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(189);
- return;
-} 
-rkr->efx_Exciter->changepar(0,(int)o->value());}
-          xywh {211 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_lfreq {
-          label LPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(190);
- return;
-} 
-rkr->efx_Exciter->changepar(11,(int)o->value());}
-          xywh {211 249 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_hfreq {
-          label HPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(191);
- return;
-} 
-rkr->efx_Exciter->changepar(12,(int)o->value());}
-          xywh {211 261 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_1 {
-          label {Har 1}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(192);
- return;
-} 
-rkr->efx_Exciter->changepar(1,(int)o->value());}
-          xywh {211 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_2 {
-          label {Har 2}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(193);
- return;
-} 
-rkr->efx_Exciter->changepar(2,(int)o->value());}
-          xywh {211 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_3 {
-          label {Har 3}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(194);
- return;
-} 
-rkr->efx_Exciter->changepar(3,(int)o->value());}
-          xywh {211 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_4 {
-          label {Har 4}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(195);
- return;
-} 
-rkr->efx_Exciter->changepar(4,(int)o->value());}
-          xywh {211 309 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_5 {
-          label {Har 5}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(196);
- return;
-} 
-rkr->efx_Exciter->changepar(5,(int)o->value());}
-          xywh {211 321 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_6 {
-          label {Har 6}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(197);
- return;
-} 
-rkr->efx_Exciter->changepar(6,(int)o->value());}
-          xywh {211 333 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_7 {
-          label {Har 7}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(198);
- return;
-} 
-rkr->efx_Exciter->changepar(7,(int)o->value());}
-          xywh {211 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_8 {
-          label {Har 8}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(199);
- return;
-} 
-rkr->efx_Exciter->changepar(8,(int)o->value());}
-          xywh {211 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_9 {
-          label {Har 9}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(200);
- return;
-} 
-rkr->efx_Exciter->changepar(9,(int)o->value());}
-          xywh {211 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider ex_10 {
-          label {Har 10}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(201);
- return;
-} 
-rkr->efx_Exciter->changepar(10,(int)o->value());}
-          xywh {211 381 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "exciter_gui.h"}
+        class ExciterGui
+      } {}
       Fl_Group MBDIST {
         user_data 1
         xywh {480 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -9358,8 +9163,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;  
 
      case 22:// Exciter
-     exciter_activar->value(rkr->Exciter_Bypass);
-     exciter_preset->do_callback(exciter_preset,1);
+     EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
+     EXCITER->exciter_preset->do_callback(EXCITER->exciter_preset,1);
      break; 
 
      case 23://MBDist
@@ -10019,7 +9824,7 @@ switch (rkr->efx_order[i])
 
      case 22:
        EXCITER->position(x[i],y[i]);
-       exciter_activar->shortcut(s[i]);
+       EXCITER->exciter_activar->shortcut(s[i]);
        if(!rkr->deachide)EXCITER->show();
        if(rkr->Exciter_Bypass)
        {
@@ -11547,56 +11352,56 @@ switch (i)
      RING->ring_squ->redraw();
      break;  
      case 189:
-     ex_Gain->value(rkr->efx_Exciter->getpar(0));
-     ex_Gain->redraw();
+     EXCITER->ex_Gain->value(rkr->efx_Exciter->getpar(0));
+     EXCITER->ex_Gain->redraw();
      break;
      case 190:
-     ex_hfreq->value(rkr->efx_Exciter->getpar(11));
-     ex_hfreq->redraw();
+     EXCITER->ex_hfreq->value(rkr->efx_Exciter->getpar(11));
+     EXCITER->ex_hfreq->redraw();
      break;
      case 191:
-     ex_lfreq->value(rkr->efx_Exciter->getpar(12));
-     ex_lfreq->redraw();
+     EXCITER->ex_lfreq->value(rkr->efx_Exciter->getpar(12));
+     EXCITER->ex_lfreq->redraw();
      break;
      case 192:
-     ex_1->value(rkr->efx_Exciter->getpar(1));
-     ex_1->redraw();
+     EXCITER->ex_1->value(rkr->efx_Exciter->getpar(1));
+     EXCITER->ex_1->redraw();
      break;
      case 193:
-     ex_2->value(rkr->efx_Exciter->getpar(2));
-     ex_2->redraw();
+     EXCITER->ex_2->value(rkr->efx_Exciter->getpar(2));
+     EXCITER->ex_2->redraw();
      break;
      case 194:
-     ex_3->value(rkr->efx_Exciter->getpar(3));
-     ex_3->redraw();
+     EXCITER->ex_3->value(rkr->efx_Exciter->getpar(3));
+     EXCITER->ex_3->redraw();
      break;
      case 195:
-     ex_4->value(rkr->efx_Exciter->getpar(4));
-     ex_4->redraw();
+     EXCITER->ex_4->value(rkr->efx_Exciter->getpar(4));
+     EXCITER->ex_4->redraw();
      break;
      case 196:
-     ex_5->value(rkr->efx_Exciter->getpar(5));
-     ex_5->redraw();
+     EXCITER->ex_5->value(rkr->efx_Exciter->getpar(5));
+     EXCITER->ex_5->redraw();
      break;
      case 197:
-     ex_6->value(rkr->efx_Exciter->getpar(6));
-     ex_6->redraw();
+     EXCITER->ex_6->value(rkr->efx_Exciter->getpar(6));
+     EXCITER->ex_6->redraw();
      break;
      case 198:
-     ex_7->value(rkr->efx_Exciter->getpar(7));
-     ex_7->redraw();
+     EXCITER->ex_7->value(rkr->efx_Exciter->getpar(7));
+     EXCITER->ex_7->redraw();
      break;
      case 199:
-     ex_8->value(rkr->efx_Exciter->getpar(8));
-     ex_8->redraw();
+     EXCITER->ex_8->value(rkr->efx_Exciter->getpar(8));
+     EXCITER->ex_8->redraw();
      break;
      case 200:
-     ex_9->value(rkr->efx_Exciter->getpar(9));
-     ex_9->redraw();
+     EXCITER->ex_9->value(rkr->efx_Exciter->getpar(9));
+     EXCITER->ex_9->redraw();
      break;
      case 201:
-     ex_10->value(rkr->efx_Exciter->getpar(10));
-     ex_10->redraw();
+     EXCITER->ex_10->value(rkr->efx_Exciter->getpar(10));
+     EXCITER->ex_10->redraw();
      break;
      case 202:
      mbdist_WD->value(rkr->efx_MBDist->getpar(0)-64);
@@ -12522,8 +12327,8 @@ switch(miralo)
   RING->ring_activar->do_callback();
   break;
   case 22:
-  exciter_activar->value(rkr->Exciter_Bypass);
-  exciter_activar->do_callback();
+  EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
+  EXCITER->exciter_activar->do_callback();
   break;
   case 23:
   mbdist_activar->value(rkr->MBDist_Bypass);
@@ -14301,7 +14106,7 @@ for(i=0;i<10;i++)
 
      case 22:// Exciter
      if (i<numEff)rkr->Exciter_Bypass=1; else rkr->Exciter_Bypass=0;
-     exciter_activar->value(rkr->Exciter_Bypass);
+     EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
      break; 
 
      case 23://MBDist

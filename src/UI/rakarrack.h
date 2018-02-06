@@ -46,6 +46,7 @@ class AphaserGui; // forward declaration
 class ValveGui; // forward declaration
 class DflangeGui; // forward declaration
 class RingGui; // forward declaration
+class ExciterGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -74,6 +75,7 @@ class SustainGui; // forward declaration
 #include "valve_gui.h"
 #include "dflange_gui.h"
 #include "ring_gui.h"
+#include "exciter_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -259,83 +261,7 @@ public:
   ValveGui *VALVE;
   DflangeGui *DFLANGE;
   RingGui *RING;
-  Fl_Group *EXCITER;
-  Fl_Light_Button *exciter_activar;
-private:
-  inline void cb_exciter_activar_i(Fl_Light_Button*, void*);
-  static void cb_exciter_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *exciter_preset;
-private:
-  inline void cb_exciter_preset_i(Fl_Choice*, void*);
-  static void cb_exciter_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_exciter_preset[];
-public:
-  SliderW *ex_Gain;
-private:
-  inline void cb_ex_Gain_i(SliderW*, void*);
-  static void cb_ex_Gain(SliderW*, void*);
-public:
-  SliderW *ex_lfreq;
-private:
-  inline void cb_ex_lfreq_i(SliderW*, void*);
-  static void cb_ex_lfreq(SliderW*, void*);
-public:
-  SliderW *ex_hfreq;
-private:
-  inline void cb_ex_hfreq_i(SliderW*, void*);
-  static void cb_ex_hfreq(SliderW*, void*);
-public:
-  SliderW *ex_1;
-private:
-  inline void cb_ex_1_i(SliderW*, void*);
-  static void cb_ex_1(SliderW*, void*);
-public:
-  SliderW *ex_2;
-private:
-  inline void cb_ex_2_i(SliderW*, void*);
-  static void cb_ex_2(SliderW*, void*);
-public:
-  SliderW *ex_3;
-private:
-  inline void cb_ex_3_i(SliderW*, void*);
-  static void cb_ex_3(SliderW*, void*);
-public:
-  SliderW *ex_4;
-private:
-  inline void cb_ex_4_i(SliderW*, void*);
-  static void cb_ex_4(SliderW*, void*);
-public:
-  SliderW *ex_5;
-private:
-  inline void cb_ex_5_i(SliderW*, void*);
-  static void cb_ex_5(SliderW*, void*);
-public:
-  SliderW *ex_6;
-private:
-  inline void cb_ex_6_i(SliderW*, void*);
-  static void cb_ex_6(SliderW*, void*);
-public:
-  SliderW *ex_7;
-private:
-  inline void cb_ex_7_i(SliderW*, void*);
-  static void cb_ex_7(SliderW*, void*);
-public:
-  SliderW *ex_8;
-private:
-  inline void cb_ex_8_i(SliderW*, void*);
-  static void cb_ex_8(SliderW*, void*);
-public:
-  SliderW *ex_9;
-private:
-  inline void cb_ex_9_i(SliderW*, void*);
-  static void cb_ex_9(SliderW*, void*);
-public:
-  SliderW *ex_10;
-private:
-  inline void cb_ex_10_i(SliderW*, void*);
-  static void cb_ex_10(SliderW*, void*);
-public:
+  ExciterGui *EXCITER;
   Fl_Group *MBDIST;
   Fl_Light_Button *mbdist_activar;
 private:
