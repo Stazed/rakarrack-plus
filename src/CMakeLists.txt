@@ -31,6 +31,7 @@ set (ProgSources
     UI/pan_gui.cxx
     UI/har_gui.cxx
     UI/musdelay_gui.cxx
+    UI/gate_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C

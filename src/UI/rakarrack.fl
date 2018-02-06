@@ -113,6 +113,9 @@ decl {class HarGui; // forward declaration} {public global
 decl {class MusdelayGui; // forward declaration} {public global
 }
 
+decl {class GateGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -183,7 +186,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;} open selected
       xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1055,98 +1058,17 @@ Fl::focus(Open_Order);
         class HarGui
       } {}
       Fl_Group MUSDELAY {
-        user_data 1 selected
+        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "musdelay_gui.h"}
         class MusdelayGui
       } {}
       Fl_Group GATE {
         user_data 1
-        xywh {162 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button gate_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Gate_Bypass);
- return;
-}
-rkr->Gate_Bypass=(int)o->value();
-findpos(16,(int)o->value(),o);}
-          xywh {167 215 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice gate_preset {
-          label Preset
-          user_data 12016
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12016))rkr->efx_Gate->setpreset((int) o->value());
-gate_ATime->value(rkr->efx_Gate->getpar(3));
-gate_RTime->value(rkr->efx_Gate->getpar(4));
-gate_range->value(rkr->efx_Gate->getpar(2));
-gate_threshold->value(rkr->efx_Gate->getpar(1));
-gate_hold->value(rkr->efx_Gate->getpar(7));
-gate_HPF->value(rkr->efx_Gate->getpar(6));
-gate_LPF->value(rkr->efx_Gate->getpar(5));} open
-          xywh {239 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label 0dB
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {-10dB}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {-20dB}
-            xywh {42 42 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider gate_ATime {
-          label {A. Time}
-          callback {rkr->efx_Gate->changepar(3,(int)o->value());}
-          xywh {213 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 250 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider gate_RTime {
-          label {R. Time}
-          callback {rkr->efx_Gate->changepar(4, (int) o->value());}
-          xywh {212 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 250 step 1 value 120 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider gate_range {
-          label Range
-          callback {rkr->efx_Gate->changepar(2, (int) o->value());}
-          xywh {212 294 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -90 maximum 0 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider gate_threshold {
-          label Thrhold
-          callback {rkr->efx_Gate->changepar(1, (int)o->value());}
-          xywh {212 316 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider gate_hold {
-          label Hold
-          callback {rkr->efx_Gate->changepar(7,(int)o->value());}
-          xywh {212 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 500 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider gate_LPF {
-          label LPF
-          callback {rkr->efx_Gate->changepar(5, (int)o->value());}
-          xywh {212 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider gate_HPF {
-          label HPF
-          callback {rkr->efx_Gate->changepar(6, (int)o->value());}
-          xywh {212 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "gate_gui.h"}
+        class GateGui
+      } {}
       Fl_Group NEWDIST {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -10295,8 +10217,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break; 
 
      case 16://NoiseGate
-     gate_activar->value(rkr->Gate_Bypass);
-     gate_preset->do_callback(gate_preset,1);
+     GATE->gate_activar->value(rkr->Gate_Bypass);
+     GATE->gate_preset->do_callback(GATE->gate_preset,1);
      break; 
 
      case 17://NewDist
@@ -10914,7 +10836,7 @@ switch (rkr->efx_order[i])
        
      case 16:
        GATE->position(x[i],y[i]);
-       gate_activar->shortcut(s[i]);
+       GATE->gate_activar->shortcut(s[i]);
        if(!rkr->deachide)GATE->show();
        if(rkr->Gate_Bypass)
        {
@@ -13465,8 +13387,8 @@ switch(miralo)
   MUSDELAY->musdelay_activar->do_callback();
   break;
   case 16:
-  gate_activar->value(rkr->Gate_Bypass);
-  gate_activar->do_callback();
+  GATE->gate_activar->value(rkr->Gate_Bypass);
+  GATE->gate_activar->do_callback();
   break;
   case 17:
   newdist_activar->value(rkr->NewDist_Bypass);
@@ -15238,7 +15160,7 @@ for(i=0;i<10;i++)
 
      case 16://NoiseGate
      if (i<numEff)rkr->Gate_Bypass=1; else rkr->Gate_Bypass=0;
-     gate_activar->value(rkr->Gate_Bypass);
+     GATE->gate_activar->value(rkr->Gate_Bypass);
      break; 
 
      case 17://NewDist

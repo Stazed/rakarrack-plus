@@ -40,6 +40,7 @@ class CabinetGui; // forward declaration
 class PanGui; // forward declaration
 class HarGui; // forward declaration
 class MusdelayGui; // forward declaration
+class GateGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -62,6 +63,7 @@ class SustainGui; // forward declaration
 #include "pan_gui.h"
 #include "har_gui.h"
 #include "musdelay_gui.h"
+#include "gate_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -241,53 +243,7 @@ public:
   PanGui *PAN;
   HarGui *HAR;
   MusdelayGui *MUSDELAY;
-  Fl_Group *GATE;
-  Fl_Light_Button *gate_activar;
-private:
-  inline void cb_gate_activar_i(Fl_Light_Button*, void*);
-  static void cb_gate_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *gate_preset;
-private:
-  inline void cb_gate_preset_i(Fl_Choice*, void*);
-  static void cb_gate_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_gate_preset[];
-public:
-  SliderW *gate_ATime;
-private:
-  inline void cb_gate_ATime_i(SliderW*, void*);
-  static void cb_gate_ATime(SliderW*, void*);
-public:
-  SliderW *gate_RTime;
-private:
-  inline void cb_gate_RTime_i(SliderW*, void*);
-  static void cb_gate_RTime(SliderW*, void*);
-public:
-  SliderW *gate_range;
-private:
-  inline void cb_gate_range_i(SliderW*, void*);
-  static void cb_gate_range(SliderW*, void*);
-public:
-  SliderW *gate_threshold;
-private:
-  inline void cb_gate_threshold_i(SliderW*, void*);
-  static void cb_gate_threshold(SliderW*, void*);
-public:
-  SliderW *gate_hold;
-private:
-  inline void cb_gate_hold_i(SliderW*, void*);
-  static void cb_gate_hold(SliderW*, void*);
-public:
-  SliderW *gate_LPF;
-private:
-  inline void cb_gate_LPF_i(SliderW*, void*);
-  static void cb_gate_LPF(SliderW*, void*);
-public:
-  SliderW *gate_HPF;
-private:
-  inline void cb_gate_HPF_i(SliderW*, void*);
-  static void cb_gate_HPF(SliderW*, void*);
-public:
+  GateGui *GATE;
   Fl_Group *NEWDIST;
   Fl_Light_Button *newdist_activar;
 private:

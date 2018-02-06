@@ -751,91 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_gate_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Gate_Bypass);
- return;
-}
-rkr->Gate_Bypass=(int)o->value();
-findpos(16,(int)o->value(),o);
-}
-void RKRGUI::cb_gate_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_activar_i(o,v);
-}
-
-void RKRGUI::cb_gate_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12016))rkr->efx_Gate->setpreset((int) o->value());
-gate_ATime->value(rkr->efx_Gate->getpar(3));
-gate_RTime->value(rkr->efx_Gate->getpar(4));
-gate_range->value(rkr->efx_Gate->getpar(2));
-gate_threshold->value(rkr->efx_Gate->getpar(1));
-gate_hold->value(rkr->efx_Gate->getpar(7));
-gate_HPF->value(rkr->efx_Gate->getpar(6));
-gate_LPF->value(rkr->efx_Gate->getpar(5));
-}
-void RKRGUI::cb_gate_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_gate_preset[] = {
- {"0dB", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"-10dB", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"-20dB", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_gate_ATime_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_gate_ATime(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_ATime_i(o,v);
-}
-
-void RKRGUI::cb_gate_RTime_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(4, (int) o->value());
-}
-void RKRGUI::cb_gate_RTime(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_RTime_i(o,v);
-}
-
-void RKRGUI::cb_gate_range_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(2, (int) o->value());
-}
-void RKRGUI::cb_gate_range(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_range_i(o,v);
-}
-
-void RKRGUI::cb_gate_threshold_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(1, (int)o->value());
-}
-void RKRGUI::cb_gate_threshold(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_threshold_i(o,v);
-}
-
-void RKRGUI::cb_gate_hold_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_gate_hold(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_hold_i(o,v);
-}
-
-void RKRGUI::cb_gate_LPF_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(5, (int)o->value());
-}
-void RKRGUI::cb_gate_LPF(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_LPF_i(o,v);
-}
-
-void RKRGUI::cb_gate_HPF_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(6, (int)o->value());
-}
-void RKRGUI::cb_gate_HPF(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_gate_HPF_i(o,v);
-}
-
 void RKRGUI::cb_newdist_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -8761,159 +8676,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       MUSDELAY->hide();
       MUSDELAY->end();
     } // MusdelayGui* MUSDELAY
-    { GATE = new Fl_Group(162, 211, 158, 184);
+    { GATE = new GateGui(161, 413, 158, 184);
       GATE->box(FL_UP_BOX);
       GATE->color(FL_FOREGROUND_COLOR);
       GATE->selection_color(FL_FOREGROUND_COLOR);
+      GATE->labeltype(FL_NORMAL_LABEL);
       GATE->labelfont(1);
+      GATE->labelsize(14);
+      GATE->labelcolor(FL_FOREGROUND_COLOR);
       GATE->user_data((void*)(1));
       GATE->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      GATE->when(FL_WHEN_RELEASE);
       GATE->hide();
-      { gate_activar = new Fl_Light_Button(167, 215, 34, 18, "On");
-        gate_activar->shortcut(0x32);
-        gate_activar->color((Fl_Color)62);
-        gate_activar->selection_color((Fl_Color)1);
-        gate_activar->labelsize(10);
-        gate_activar->callback((Fl_Callback*)cb_gate_activar, (void*)(2));
-        gate_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        gate_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* gate_activar
-      { gate_preset = new Fl_Choice(239, 215, 76, 18, "Preset");
-        gate_preset->down_box(FL_BORDER_BOX);
-        gate_preset->selection_color(FL_FOREGROUND_COLOR);
-        gate_preset->labelsize(10);
-        gate_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_preset->textsize(10);
-        gate_preset->textcolor(FL_BACKGROUND2_COLOR);
-        gate_preset->callback((Fl_Callback*)cb_gate_preset, (void*)(12016));
-        gate_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        gate_preset->menu(menu_gate_preset);
-      } // Fl_Choice* gate_preset
-      { gate_ATime = new SliderW(213, 250, 100, 10, "A. Time");
-        gate_ATime->type(5);
-        gate_ATime->box(FL_FLAT_BOX);
-        gate_ATime->color((Fl_Color)178);
-        gate_ATime->selection_color((Fl_Color)62);
-        gate_ATime->labeltype(FL_NORMAL_LABEL);
-        gate_ATime->labelfont(0);
-        gate_ATime->labelsize(10);
-        gate_ATime->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_ATime->minimum(1);
-        gate_ATime->maximum(250);
-        gate_ATime->step(1);
-        gate_ATime->value(1);
-        gate_ATime->textcolor(FL_BACKGROUND2_COLOR);
-        gate_ATime->callback((Fl_Callback*)cb_gate_ATime);
-        gate_ATime->align(Fl_Align(FL_ALIGN_LEFT));
-        gate_ATime->when(FL_WHEN_CHANGED);
-      } // SliderW* gate_ATime
-      { gate_RTime = new SliderW(212, 272, 100, 10, "R. Time");
-        gate_RTime->type(5);
-        gate_RTime->box(FL_FLAT_BOX);
-        gate_RTime->color((Fl_Color)178);
-        gate_RTime->selection_color((Fl_Color)62);
-        gate_RTime->labeltype(FL_NORMAL_LABEL);
-        gate_RTime->labelfont(0);
-        gate_RTime->labelsize(10);
-        gate_RTime->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_RTime->minimum(2);
-        gate_RTime->maximum(250);
-        gate_RTime->step(1);
-        gate_RTime->value(120);
-        gate_RTime->textcolor(FL_BACKGROUND2_COLOR);
-        gate_RTime->callback((Fl_Callback*)cb_gate_RTime);
-        gate_RTime->align(Fl_Align(FL_ALIGN_LEFT));
-        gate_RTime->when(FL_WHEN_CHANGED);
-      } // SliderW* gate_RTime
-      { gate_range = new SliderW(212, 294, 100, 10, "Range");
-        gate_range->type(5);
-        gate_range->box(FL_FLAT_BOX);
-        gate_range->color((Fl_Color)178);
-        gate_range->selection_color((Fl_Color)62);
-        gate_range->labeltype(FL_NORMAL_LABEL);
-        gate_range->labelfont(0);
-        gate_range->labelsize(10);
-        gate_range->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_range->minimum(-90);
-        gate_range->maximum(0);
-        gate_range->step(1);
-        gate_range->textcolor(FL_BACKGROUND2_COLOR);
-        gate_range->callback((Fl_Callback*)cb_gate_range);
-        gate_range->align(Fl_Align(FL_ALIGN_LEFT));
-        gate_range->when(FL_WHEN_CHANGED);
-      } // SliderW* gate_range
-      { gate_threshold = new SliderW(212, 316, 100, 10, "Thrhold");
-        gate_threshold->type(5);
-        gate_threshold->box(FL_FLAT_BOX);
-        gate_threshold->color((Fl_Color)178);
-        gate_threshold->selection_color((Fl_Color)62);
-        gate_threshold->labeltype(FL_NORMAL_LABEL);
-        gate_threshold->labelfont(0);
-        gate_threshold->labelsize(10);
-        gate_threshold->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_threshold->minimum(-70);
-        gate_threshold->maximum(20);
-        gate_threshold->step(1);
-        gate_threshold->textcolor(FL_BACKGROUND2_COLOR);
-        gate_threshold->callback((Fl_Callback*)cb_gate_threshold);
-        gate_threshold->align(Fl_Align(FL_ALIGN_LEFT));
-        gate_threshold->when(FL_WHEN_CHANGED);
-      } // SliderW* gate_threshold
-      { gate_hold = new SliderW(212, 338, 100, 10, "Hold");
-        gate_hold->type(5);
-        gate_hold->box(FL_FLAT_BOX);
-        gate_hold->color((Fl_Color)178);
-        gate_hold->selection_color((Fl_Color)62);
-        gate_hold->labeltype(FL_NORMAL_LABEL);
-        gate_hold->labelfont(0);
-        gate_hold->labelsize(10);
-        gate_hold->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_hold->minimum(2);
-        gate_hold->maximum(500);
-        gate_hold->step(1);
-        gate_hold->textcolor(FL_BACKGROUND2_COLOR);
-        gate_hold->callback((Fl_Callback*)cb_gate_hold);
-        gate_hold->align(Fl_Align(FL_ALIGN_LEFT));
-        gate_hold->when(FL_WHEN_CHANGED);
-      } // SliderW* gate_hold
-      { gate_LPF = new SliderW(212, 357, 100, 10, "LPF");
-        gate_LPF->type(5);
-        gate_LPF->box(FL_FLAT_BOX);
-        gate_LPF->color((Fl_Color)178);
-        gate_LPF->selection_color((Fl_Color)62);
-        gate_LPF->labeltype(FL_NORMAL_LABEL);
-        gate_LPF->labelfont(0);
-        gate_LPF->labelsize(10);
-        gate_LPF->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_LPF->minimum(20);
-        gate_LPF->maximum(26000);
-        gate_LPF->step(1);
-        gate_LPF->value(20000);
-        gate_LPF->textcolor(FL_BACKGROUND2_COLOR);
-        gate_LPF->callback((Fl_Callback*)cb_gate_LPF);
-        gate_LPF->align(Fl_Align(FL_ALIGN_LEFT));
-        gate_LPF->when(FL_WHEN_CHANGED);
-      } // SliderW* gate_LPF
-      { gate_HPF = new SliderW(212, 373, 100, 10, "HPF");
-        gate_HPF->type(5);
-        gate_HPF->box(FL_FLAT_BOX);
-        gate_HPF->color((Fl_Color)178);
-        gate_HPF->selection_color((Fl_Color)62);
-        gate_HPF->labeltype(FL_NORMAL_LABEL);
-        gate_HPF->labelfont(0);
-        gate_HPF->labelsize(10);
-        gate_HPF->labelcolor(FL_BACKGROUND2_COLOR);
-        gate_HPF->minimum(20);
-        gate_HPF->maximum(20000);
-        gate_HPF->step(1);
-        gate_HPF->value(20);
-        gate_HPF->textcolor(FL_BACKGROUND2_COLOR);
-        gate_HPF->callback((Fl_Callback*)cb_gate_HPF);
-        gate_HPF->align(Fl_Align(FL_ALIGN_LEFT));
-        gate_HPF->when(FL_WHEN_CHANGED);
-      } // SliderW* gate_HPF
       GATE->end();
-    } // Fl_Group* GATE
+    } // GateGui* GATE
     { NEWDIST = new Fl_Group(480, 212, 158, 184);
       NEWDIST->box(FL_UP_BOX);
       NEWDIST->color(FL_FOREGROUND_COLOR);
@@ -17714,8 +17490,8 @@ void RKRGUI::Put_Loaded() {
        break; 
   
        case 16://NoiseGate
-       gate_activar->value(rkr->Gate_Bypass);
-       gate_preset->do_callback(gate_preset,1);
+       GATE->gate_activar->value(rkr->Gate_Bypass);
+       GATE->gate_preset->do_callback(GATE->gate_preset,1);
        break; 
   
        case 17://NewDist
@@ -18334,7 +18110,7 @@ void RKRGUI::reordena() {
          
        case 16:
          GATE->position(x[i],y[i]);
-         gate_activar->shortcut(s[i]);
+         GATE->gate_activar->shortcut(s[i]);
          if(!rkr->deachide)GATE->show();
          if(rkr->Gate_Bypass)
          {
@@ -20893,8 +20669,8 @@ void RKRGUI::ActOnOff() {
     MUSDELAY->musdelay_activar->do_callback();
     break;
     case 16:
-    gate_activar->value(rkr->Gate_Bypass);
-    gate_activar->do_callback();
+    GATE->gate_activar->value(rkr->Gate_Bypass);
+    GATE->gate_activar->do_callback();
     break;
     case 17:
     newdist_activar->value(rkr->NewDist_Bypass);
@@ -22692,7 +22468,7 @@ void RKRGUI::RandomPreset() {
   
        case 16://NoiseGate
        if (i<numEff)rkr->Gate_Bypass=1; else rkr->Gate_Bypass=0;
-       gate_activar->value(rkr->Gate_Bypass);
+       GATE->gate_activar->value(rkr->Gate_Bypass);
        break; 
   
        case 17://NewDist
