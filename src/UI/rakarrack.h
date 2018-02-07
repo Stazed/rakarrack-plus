@@ -50,6 +50,7 @@ class ExciterGui; // forward declaration
 class MbdistGui; // forward declaration
 class ArpieGui; // forward declaration
 class ExpanderGui; // forward declaration
+class ShuffleGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -82,6 +83,7 @@ class SustainGui; // forward declaration
 #include "mbdist_gui.h"
 #include "arpie_gui.h"
 #include "expander_gui.h"
+#include "shuffle_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -271,73 +273,7 @@ public:
   MbdistGui *MBDIST;
   ArpieGui *ARPIE;
   ExpanderGui *EXPANDER;
-  Fl_Group *SHUFFLE;
-  Fl_Light_Button *shuffle_activar;
-private:
-  inline void cb_shuffle_activar_i(Fl_Light_Button*, void*);
-  static void cb_shuffle_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *shuffle_preset;
-private:
-  inline void cb_shuffle_preset_i(Fl_Choice*, void*);
-  static void cb_shuffle_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_shuffle_preset[];
-public:
-  SliderW *shuffle_WD;
-private:
-  inline void cb_shuffle_WD_i(SliderW*, void*);
-  static void cb_shuffle_WD(SliderW*, void*);
-public:
-  SliderW *shuffle_cross1;
-private:
-  inline void cb_shuffle_cross1_i(SliderW*, void*);
-  static void cb_shuffle_cross1(SliderW*, void*);
-public:
-  SliderW *shuffle_volL;
-private:
-  inline void cb_shuffle_volL_i(SliderW*, void*);
-  static void cb_shuffle_volL(SliderW*, void*);
-public:
-  SliderW *shuffle_cross2;
-private:
-  inline void cb_shuffle_cross2_i(SliderW*, void*);
-  static void cb_shuffle_cross2(SliderW*, void*);
-public:
-  SliderW *shuffle_volML;
-private:
-  inline void cb_shuffle_volML_i(SliderW*, void*);
-  static void cb_shuffle_volML(SliderW*, void*);
-public:
-  SliderW *shuffle_cross3;
-private:
-  inline void cb_shuffle_cross3_i(SliderW*, void*);
-  static void cb_shuffle_cross3(SliderW*, void*);
-public:
-  SliderW *shuffle_volMH;
-private:
-  inline void cb_shuffle_volMH_i(SliderW*, void*);
-  static void cb_shuffle_volMH(SliderW*, void*);
-public:
-  SliderW *shuffle_cross4;
-private:
-  inline void cb_shuffle_cross4_i(SliderW*, void*);
-  static void cb_shuffle_cross4(SliderW*, void*);
-public:
-  SliderW *shuffle_volH;
-private:
-  inline void cb_shuffle_volH_i(SliderW*, void*);
-  static void cb_shuffle_volH(SliderW*, void*);
-public:
-  SliderW *shuffle_Q;
-private:
-  inline void cb_shuffle_Q_i(SliderW*, void*);
-  static void cb_shuffle_Q(SliderW*, void*);
-public:
-  Fl_Check_Button *shuffle_E;
-private:
-  inline void cb_shuffle_E_i(Fl_Check_Button*, void*);
-  static void cb_shuffle_E(Fl_Check_Button*, void*);
-public:
+  ShuffleGui *SHUFFLE;
   Fl_Group *SYNTHFILTER;
   Fl_Light_Button *synthfilter_activar;
 private:

@@ -143,6 +143,9 @@ decl {class ArpieGui; // forward declaration} {public global
 decl {class ExpanderGui; // forward declaration} {public global
 }
 
+decl {class ShuffleGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1151,177 +1154,11 @@ Fl::focus(Open_Order);
         class ExpanderGui
       } {}
       Fl_Group SHUFFLE {
-        label {High Freq}
         user_data 1
-        xywh {480 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button shuffle_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Shuffle_Bypass);
- return;
-}
-rkr->Shuffle_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Shuffle->cleanup();
-findpos(26,(int)o->value(),o);}
-          xywh {485 215 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice shuffle_preset {
-          label Preset
-          user_data 12026
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12026))rkr->efx_Shuffle->setpreset((int)o->value());
-shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
-shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
-shuffle_volMH->value(rkr->efx_Shuffle->getpar(2));
-shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
-shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
-shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
-shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
-shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
-shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
-shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
-shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
-          xywh {557 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Shuffle 1}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Shuffle 2}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Shuffle 3}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Remover
-            xywh {72 72 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider shuffle_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(227);
- return;
-} 
-rkr->efx_Shuffle->changepar(0,(int)o->value()+64);}
-          xywh {535 242 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_cross1 {
-          label {Low Freq}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(228);
- return;
-} 
-rkr->efx_Shuffle->changepar(5,(int)o->value());}
-          xywh {535 260 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_volL {
-          label {Low Gain}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(229);
- return;
-} 
-rkr->efx_Shuffle->changepar(1,(int)o->value());}
-          xywh {535 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_cross2 {
-          label {M.L. Freq}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(230);
- return;
-} 
-rkr->efx_Shuffle->changepar(6,(int)o->value());}
-          xywh {535 290 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 400 maximum 4000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_volML {
-          label {M.L Gain}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(231);
- return;
-}
-rkr->efx_Shuffle->changepar(2,(int)o->value());}
-          xywh {535 305 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_cross3 {
-          label {M.H. Freq}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(232);
- return;
-}
-rkr->efx_Shuffle->changepar(7,(int)o->value());}
-          xywh {535 320 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1200 maximum 8000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_volMH {
-          label {M.H. Gain}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(233);
- return;
-}
-rkr->efx_Shuffle->changepar(3,(int)o->value());}
-          xywh {535 335 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_cross4 {
-          label {High Freq}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(234);
- return;
-}
-rkr->efx_Shuffle->changepar(8,(int)o->value());}
-          xywh {535 350 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_volH {
-          label {High Gain}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(235);
- return;
-}
-rkr->efx_Shuffle->changepar(4,(int)o->value());}
-          xywh {535 365 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shuffle_Q {
-          label Q
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(236);
- return;
-}
-rkr->efx_Shuffle->changepar(9,(int)o->value());}
-          xywh {535 380 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button shuffle_E {
-          label Rev
-          user_data 2
-          callback {rkr->efx_Shuffle->changepar(10,(int)o->value());}
-          xywh {482 378 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-      }
+        xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "shuffle_gui.h"}
+        class ShuffleGui
+      } {}
       Fl_Group SYNTHFILTER {
         user_data 1
         xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -8647,8 +8484,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 26://Shuffle
-     shuffle_activar->value(rkr->Shuffle_Bypass);
-     shuffle_preset->do_callback(shuffle_preset,1);
+     SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
+     SHUFFLE->shuffle_preset->do_callback(SHUFFLE->shuffle_preset,1);
      break;
 
      case 27://Synthfilter
@@ -9336,7 +9173,7 @@ switch (rkr->efx_order[i])
 
      case 26:
        SHUFFLE->position(x[i],y[i]);
-       shuffle_activar->shortcut(s[i]);
+       SHUFFLE->shuffle_activar->shortcut(s[i]);
        if(!rkr->deachide)SHUFFLE->show();
        if(rkr->Shuffle_Bypass)
        {
@@ -10968,44 +10805,44 @@ switch (i)
      EXPANDER->expander_HPF->redraw();
      break;
      case 227:
-     shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
-     shuffle_WD->redraw();
+     SHUFFLE->shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
+     SHUFFLE->shuffle_WD->redraw();
      break;
      case 228:
-     shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
-     shuffle_cross1->redraw();
+     SHUFFLE->shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
+     SHUFFLE->shuffle_cross1->redraw();
      break; 
      case 229:
-     shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
-     shuffle_volL->redraw();
+     SHUFFLE->shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
+     SHUFFLE->shuffle_volL->redraw();
      break; 
      case 230:
-     shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
-     shuffle_cross2->redraw();
+     SHUFFLE->shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
+     SHUFFLE->shuffle_cross2->redraw();
      break; 
      case 231:
-     shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
-     shuffle_volML->redraw();
+     SHUFFLE->shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
+     SHUFFLE->shuffle_volML->redraw();
      break; 
      case 232:
-     shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
-     shuffle_cross3->redraw();
+     SHUFFLE->shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
+     SHUFFLE->shuffle_cross3->redraw();
      break; 
      case 233:
-     shuffle_volMH->value(rkr->efx_Shuffle->getpar(3));
-     shuffle_volMH->redraw();
+     SHUFFLE->shuffle_volMH->value(rkr->efx_Shuffle->getpar(3));
+     SHUFFLE->shuffle_volMH->redraw();
      break; 
      case 234:
-     shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
-     shuffle_cross4->redraw();
+     SHUFFLE->shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
+     SHUFFLE->shuffle_cross4->redraw();
      break; 
      case 235:
-     shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
-     shuffle_volH->redraw();
+     SHUFFLE->shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
+     SHUFFLE->shuffle_volH->redraw();
      break; 
      case 236:
-     shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
-     shuffle_Q->redraw();
+     SHUFFLE->shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
+     SHUFFLE->shuffle_Q->redraw();
      break; 
      case 237:
      synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
@@ -11807,8 +11644,8 @@ switch(miralo)
   EXPANDER->expander_activar->do_callback();
   break;
   case 26:
-  shuffle_activar->value(rkr->Shuffle_Bypass);
-  shuffle_activar->do_callback();
+  SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
+  SHUFFLE->shuffle_activar->do_callback();
   break;
   case 27:
   synthfilter_activar->value(rkr->Synthfilter_Bypass);
@@ -13590,7 +13427,7 @@ for(i=0;i<10;i++)
 
      case 26://Shuffle
      if (i<numEff)rkr->Shuffle_Bypass=1; else rkr->Shuffle_Bypass=0;
-     shuffle_activar->value(rkr->Shuffle_Bypass);
+     SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
      break;
 
      case 27://Synthfilter
