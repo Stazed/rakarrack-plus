@@ -751,229 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_synthfilter_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Synthfilter_Bypass);
- return;
-}
-rkr->Synthfilter_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Synthfilter->cleanup();
-findpos(27,(int)o->value(),o);
-}
-void RKRGUI::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_activar_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
-synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
-synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
-synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
-synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
-synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
-synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
-synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
-synthfilter_Lstages->value(rkr->efx_Synthfilter->getpar(8));
-synthfilter_Hstages->value(rkr->efx_Synthfilter->getpar(9));
-synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
-synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
-synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
-synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
-synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
-synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
-}
-void RKRGUI::cb_synthfilter_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_synthfilter_preset[] = {
- {"Low Pass", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"High Pass", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Band Pass", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Lead Synth", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Water", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Pan Filter", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Multi", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_synthfilter_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(237);
- return;
-}
-rkr->efx_Synthfilter->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_synthfilter_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_WD_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_Distort_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(238);
- return;
-}
-rkr->efx_Synthfilter->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_Distort(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Distort_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_freq_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(239);
- return;
-}
-rkr->efx_Synthfilter->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_freq(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_freq_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_rand_i(SliderW* o, void*) {
-  /*if(Fl::event_button()==3)
-{
- getMIDIControl(240);
- return;
-}*/
-rkr->efx_Synthfilter->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_rand(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_rand_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_lfotype_i(Fl_Choice* o, void*) {
-  rkr->efx_Synthfilter->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_lfotype(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_lfotype_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_subs_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Synthfilter->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_subs(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_subs_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_stdf_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(240);
- return;
-}
-rkr->efx_Synthfilter->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_stdf(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_stdf_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_width_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(241);
- return;
-}
-rkr->efx_Synthfilter->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_width(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_width_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(242);
- return;
-}
-rkr->efx_Synthfilter->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_fb_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_Lstages_i(Fl_Counter* o, void*) {
-  rkr->efx_Synthfilter->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_Lstages(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Lstages_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_Hstages_i(Fl_Counter* o, void*) {
-  rkr->efx_Synthfilter->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_Hstages(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Hstages_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_dpth_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(243);
- return;
-}
-rkr->efx_Synthfilter->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_dpth(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_dpth_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_EnvSens_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(244);
- return;
-}
-rkr->efx_Synthfilter->changepar(12,(int)(o->value()));
-}
-void RKRGUI::cb_synthfilter_EnvSens(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_EnvSens_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_ATime_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(245);
- return;
-}
-rkr->efx_Synthfilter->changepar(13,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_ATime(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_ATime_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_RTime_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(246);
- return;
-}
-rkr->efx_Synthfilter->changepar(14,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_RTime(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_RTime_i(o,v);
-}
-
-void RKRGUI::cb_synthfilter_Offset_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(247);
- return;
-}
-rkr->efx_Synthfilter->changepar(15,(int)o->value());
-}
-void RKRGUI::cb_synthfilter_Offset(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_synthfilter_Offset_i(o,v);
-}
-
 void RKRGUI::cb_mbvvol_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -7022,278 +6799,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       SHUFFLE->hide();
       SHUFFLE->end();
     } // ShuffleGui* SHUFFLE
-    { SYNTHFILTER = new Fl_Group(319, 211, 158, 184);
+    { SYNTHFILTER = new SynthfilterGui(321, 413, 158, 184);
       SYNTHFILTER->box(FL_UP_BOX);
       SYNTHFILTER->color(FL_FOREGROUND_COLOR);
       SYNTHFILTER->selection_color(FL_FOREGROUND_COLOR);
+      SYNTHFILTER->labeltype(FL_NORMAL_LABEL);
       SYNTHFILTER->labelfont(1);
+      SYNTHFILTER->labelsize(14);
+      SYNTHFILTER->labelcolor(FL_FOREGROUND_COLOR);
       SYNTHFILTER->user_data((void*)(1));
       SYNTHFILTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      SYNTHFILTER->when(FL_WHEN_RELEASE);
       SYNTHFILTER->hide();
-      { synthfilter_activar = new Fl_Light_Button(324, 215, 34, 18, "On");
-        synthfilter_activar->shortcut(0x37);
-        synthfilter_activar->color((Fl_Color)62);
-        synthfilter_activar->selection_color((Fl_Color)1);
-        synthfilter_activar->labelsize(10);
-        synthfilter_activar->callback((Fl_Callback*)cb_synthfilter_activar, (void*)(2));
-        synthfilter_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        synthfilter_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* synthfilter_activar
-      { synthfilter_preset = new Fl_Choice(396, 215, 76, 18, "Preset");
-        synthfilter_preset->down_box(FL_BORDER_BOX);
-        synthfilter_preset->selection_color(FL_FOREGROUND_COLOR);
-        synthfilter_preset->labelsize(10);
-        synthfilter_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_preset->textsize(10);
-        synthfilter_preset->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset, (void*)(12027));
-        synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        synthfilter_preset->menu(menu_synthfilter_preset);
-      } // Fl_Choice* synthfilter_preset
-      { synthfilter_WD = new SliderW(368, 236, 100, 9, "Wet/Dry");
-        synthfilter_WD->type(5);
-        synthfilter_WD->box(FL_FLAT_BOX);
-        synthfilter_WD->color((Fl_Color)178);
-        synthfilter_WD->selection_color((Fl_Color)62);
-        synthfilter_WD->labeltype(FL_NORMAL_LABEL);
-        synthfilter_WD->labelfont(0);
-        synthfilter_WD->labelsize(10);
-        synthfilter_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_WD->minimum(-64);
-        synthfilter_WD->maximum(63);
-        synthfilter_WD->step(1);
-        synthfilter_WD->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_WD->callback((Fl_Callback*)cb_synthfilter_WD);
-        synthfilter_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_WD
-      { synthfilter_Distort = new SliderW(368, 247, 100, 9, "Distort");
-        synthfilter_Distort->type(5);
-        synthfilter_Distort->box(FL_FLAT_BOX);
-        synthfilter_Distort->color((Fl_Color)178);
-        synthfilter_Distort->selection_color((Fl_Color)62);
-        synthfilter_Distort->labeltype(FL_NORMAL_LABEL);
-        synthfilter_Distort->labelfont(0);
-        synthfilter_Distort->labelsize(10);
-        synthfilter_Distort->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_Distort->maximum(127);
-        synthfilter_Distort->step(1);
-        synthfilter_Distort->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_Distort->callback((Fl_Callback*)cb_synthfilter_Distort);
-        synthfilter_Distort->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_Distort->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_Distort
-      { synthfilter_freq = new SliderW(368, 259, 100, 9, "Tempo");
-        synthfilter_freq->type(5);
-        synthfilter_freq->box(FL_FLAT_BOX);
-        synthfilter_freq->color((Fl_Color)178);
-        synthfilter_freq->selection_color((Fl_Color)62);
-        synthfilter_freq->labeltype(FL_NORMAL_LABEL);
-        synthfilter_freq->labelfont(0);
-        synthfilter_freq->labelsize(10);
-        synthfilter_freq->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_freq->minimum(1);
-        synthfilter_freq->maximum(600);
-        synthfilter_freq->step(1);
-        synthfilter_freq->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_freq->callback((Fl_Callback*)cb_synthfilter_freq);
-        synthfilter_freq->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_freq->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_freq
-      { synthfilter_rand = new SliderW(368, 270, 100, 9, "Random");
-        synthfilter_rand->type(5);
-        synthfilter_rand->box(FL_FLAT_BOX);
-        synthfilter_rand->color((Fl_Color)178);
-        synthfilter_rand->selection_color((Fl_Color)62);
-        synthfilter_rand->labeltype(FL_NORMAL_LABEL);
-        synthfilter_rand->labelfont(0);
-        synthfilter_rand->labelsize(10);
-        synthfilter_rand->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_rand->maximum(127);
-        synthfilter_rand->step(1);
-        synthfilter_rand->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_rand->callback((Fl_Callback*)cb_synthfilter_rand);
-        synthfilter_rand->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_rand->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_rand
-      { Fl_Choice* o = synthfilter_lfotype = new Fl_Choice(373, 280, 52, 13, "LFO Type");
-        synthfilter_lfotype->down_box(FL_BORDER_BOX);
-        synthfilter_lfotype->selection_color(FL_FOREGROUND_COLOR);
-        synthfilter_lfotype->labelsize(10);
-        synthfilter_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_lfotype->textsize(10);
-        synthfilter_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
-        o->menu(CHORUS->get_menu_chorus_lfotype());
-      } // Fl_Choice* synthfilter_lfotype
-      { synthfilter_subs = new Fl_Check_Button(428, 279, 46, 15, "Subtr.");
-        synthfilter_subs->down_box(FL_BORDER_BOX);
-        synthfilter_subs->labelsize(10);
-        synthfilter_subs->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
-      } // Fl_Check_Button* synthfilter_subs
-      { synthfilter_stdf = new SliderW(368, 294, 100, 9, "St.df");
-        synthfilter_stdf->type(5);
-        synthfilter_stdf->box(FL_FLAT_BOX);
-        synthfilter_stdf->color((Fl_Color)178);
-        synthfilter_stdf->selection_color((Fl_Color)62);
-        synthfilter_stdf->labeltype(FL_NORMAL_LABEL);
-        synthfilter_stdf->labelfont(0);
-        synthfilter_stdf->labelsize(10);
-        synthfilter_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_stdf->maximum(127);
-        synthfilter_stdf->step(1);
-        synthfilter_stdf->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_stdf->callback((Fl_Callback*)cb_synthfilter_stdf);
-        synthfilter_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_stdf->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_stdf
-      { synthfilter_width = new SliderW(368, 305, 100, 9, "Width");
-        synthfilter_width->type(5);
-        synthfilter_width->box(FL_FLAT_BOX);
-        synthfilter_width->color((Fl_Color)178);
-        synthfilter_width->selection_color((Fl_Color)62);
-        synthfilter_width->labeltype(FL_NORMAL_LABEL);
-        synthfilter_width->labelfont(0);
-        synthfilter_width->labelsize(10);
-        synthfilter_width->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_width->maximum(127);
-        synthfilter_width->step(1);
-        synthfilter_width->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_width->callback((Fl_Callback*)cb_synthfilter_width);
-        synthfilter_width->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_width->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_width
-      { synthfilter_fb = new SliderW(368, 316, 100, 9, "Fb");
-        synthfilter_fb->type(5);
-        synthfilter_fb->box(FL_FLAT_BOX);
-        synthfilter_fb->color((Fl_Color)178);
-        synthfilter_fb->selection_color((Fl_Color)62);
-        synthfilter_fb->labeltype(FL_NORMAL_LABEL);
-        synthfilter_fb->labelfont(0);
-        synthfilter_fb->labelsize(10);
-        synthfilter_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_fb->minimum(-64);
-        synthfilter_fb->maximum(64);
-        synthfilter_fb->step(1);
-        synthfilter_fb->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_fb->callback((Fl_Callback*)cb_synthfilter_fb);
-        synthfilter_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_fb
-      { synthfilter_Lstages = new Fl_Counter(367, 327, 28, 11, "LPF Stg.");
-        synthfilter_Lstages->type(1);
-        synthfilter_Lstages->box(FL_THIN_UP_BOX);
-        synthfilter_Lstages->labelsize(10);
-        synthfilter_Lstages->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_Lstages->minimum(0);
-        synthfilter_Lstages->maximum(12);
-        synthfilter_Lstages->step(1);
-        synthfilter_Lstages->value(1);
-        synthfilter_Lstages->textsize(9);
-        synthfilter_Lstages->callback((Fl_Callback*)cb_synthfilter_Lstages);
-        synthfilter_Lstages->align(Fl_Align(FL_ALIGN_LEFT));
-      } // Fl_Counter* synthfilter_Lstages
-      { synthfilter_Hstages = new Fl_Counter(444, 327, 28, 11, "HPF Stg.");
-        synthfilter_Hstages->type(1);
-        synthfilter_Hstages->box(FL_THIN_UP_BOX);
-        synthfilter_Hstages->labelsize(10);
-        synthfilter_Hstages->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_Hstages->minimum(0);
-        synthfilter_Hstages->maximum(12);
-        synthfilter_Hstages->step(1);
-        synthfilter_Hstages->value(1);
-        synthfilter_Hstages->textsize(9);
-        synthfilter_Hstages->callback((Fl_Callback*)cb_synthfilter_Hstages);
-        synthfilter_Hstages->align(Fl_Align(FL_ALIGN_LEFT));
-      } // Fl_Counter* synthfilter_Hstages
-      { synthfilter_dpth = new SliderW(368, 339, 100, 9, "Depth");
-        synthfilter_dpth->type(5);
-        synthfilter_dpth->box(FL_FLAT_BOX);
-        synthfilter_dpth->color((Fl_Color)178);
-        synthfilter_dpth->selection_color((Fl_Color)62);
-        synthfilter_dpth->labeltype(FL_NORMAL_LABEL);
-        synthfilter_dpth->labelfont(0);
-        synthfilter_dpth->labelsize(10);
-        synthfilter_dpth->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_dpth->maximum(127);
-        synthfilter_dpth->step(1);
-        synthfilter_dpth->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_dpth->callback((Fl_Callback*)cb_synthfilter_dpth);
-        synthfilter_dpth->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_dpth->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_dpth
-      { synthfilter_EnvSens = new SliderW(368, 350, 100, 9, "E.Sens");
-        synthfilter_EnvSens->type(5);
-        synthfilter_EnvSens->box(FL_FLAT_BOX);
-        synthfilter_EnvSens->color((Fl_Color)178);
-        synthfilter_EnvSens->selection_color((Fl_Color)62);
-        synthfilter_EnvSens->labeltype(FL_NORMAL_LABEL);
-        synthfilter_EnvSens->labelfont(0);
-        synthfilter_EnvSens->labelsize(10);
-        synthfilter_EnvSens->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_EnvSens->minimum(-64);
-        synthfilter_EnvSens->maximum(64);
-        synthfilter_EnvSens->step(1);
-        synthfilter_EnvSens->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_EnvSens->callback((Fl_Callback*)cb_synthfilter_EnvSens);
-        synthfilter_EnvSens->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_EnvSens->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_EnvSens
-      { synthfilter_ATime = new SliderW(368, 361, 100, 9, "A.Time");
-        synthfilter_ATime->type(5);
-        synthfilter_ATime->box(FL_FLAT_BOX);
-        synthfilter_ATime->color((Fl_Color)178);
-        synthfilter_ATime->selection_color((Fl_Color)62);
-        synthfilter_ATime->labeltype(FL_NORMAL_LABEL);
-        synthfilter_ATime->labelfont(0);
-        synthfilter_ATime->labelsize(10);
-        synthfilter_ATime->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_ATime->minimum(5);
-        synthfilter_ATime->maximum(1000);
-        synthfilter_ATime->step(1);
-        synthfilter_ATime->value(5);
-        synthfilter_ATime->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_ATime->callback((Fl_Callback*)cb_synthfilter_ATime);
-        synthfilter_ATime->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_ATime->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_ATime
-      { synthfilter_RTime = new SliderW(368, 372, 100, 9, "R.Time");
-        synthfilter_RTime->type(5);
-        synthfilter_RTime->box(FL_FLAT_BOX);
-        synthfilter_RTime->color((Fl_Color)178);
-        synthfilter_RTime->selection_color((Fl_Color)62);
-        synthfilter_RTime->labeltype(FL_NORMAL_LABEL);
-        synthfilter_RTime->labelfont(0);
-        synthfilter_RTime->labelsize(10);
-        synthfilter_RTime->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_RTime->minimum(5);
-        synthfilter_RTime->maximum(500);
-        synthfilter_RTime->step(1);
-        synthfilter_RTime->value(5);
-        synthfilter_RTime->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_RTime->callback((Fl_Callback*)cb_synthfilter_RTime);
-        synthfilter_RTime->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_RTime->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_RTime
-      { synthfilter_Offset = new SliderW(368, 383, 100, 9, "Offset");
-        synthfilter_Offset->type(5);
-        synthfilter_Offset->box(FL_FLAT_BOX);
-        synthfilter_Offset->color((Fl_Color)178);
-        synthfilter_Offset->selection_color((Fl_Color)62);
-        synthfilter_Offset->labeltype(FL_NORMAL_LABEL);
-        synthfilter_Offset->labelfont(0);
-        synthfilter_Offset->labelsize(10);
-        synthfilter_Offset->labelcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_Offset->maximum(127);
-        synthfilter_Offset->step(1);
-        synthfilter_Offset->textcolor(FL_BACKGROUND2_COLOR);
-        synthfilter_Offset->callback((Fl_Callback*)cb_synthfilter_Offset);
-        synthfilter_Offset->align(Fl_Align(FL_ALIGN_LEFT));
-        synthfilter_Offset->when(FL_WHEN_CHANGED);
-      } // SliderW* synthfilter_Offset
       SYNTHFILTER->end();
-    } // Fl_Group* SYNTHFILTER
+    } // SynthfilterGui* SYNTHFILTER
     { MBVVOL = new Fl_Group(319, 211, 158, 184);
       MBVVOL->box(FL_UP_BOX);
       MBVVOL->color(FL_FOREGROUND_COLOR);
@@ -13755,8 +13274,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 27://Synthfilter
-       synthfilter_activar->value(rkr->Synthfilter_Bypass);
-       synthfilter_preset->do_callback(synthfilter_preset,1);
+       SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
+       SYNTHFILTER->synthfilter_preset->do_callback(SYNTHFILTER->synthfilter_preset,1);
        break; 
   
        case 28://VaryBand
@@ -14452,7 +13971,7 @@ void RKRGUI::reordena() {
   
        case 27:
          SYNTHFILTER->position(x[i],y[i]);
-         synthfilter_activar->shortcut(s[i]);
+         SYNTHFILTER->synthfilter_activar->shortcut(s[i]);
          if(!rkr->deachide)SYNTHFILTER->show();
          if(rkr->Synthfilter_Bypass)
          {
@@ -16120,48 +15639,48 @@ void RKRGUI::ActMIDI() {
        SHUFFLE->shuffle_Q->redraw();
        break; 
        case 237:
-       synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
-       synthfilter_WD->redraw();
+       SYNTHFILTER->synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
+       SYNTHFILTER->synthfilter_WD->redraw();
        break;
        case 238:
-       synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
-       synthfilter_Distort->redraw();
+       SYNTHFILTER->synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
+       SYNTHFILTER->synthfilter_Distort->redraw();
        break;
        case 239:
-       synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
-       synthfilter_freq->redraw();
+       SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+       SYNTHFILTER->synthfilter_freq->redraw();
        break;
        case 240:
-       synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
-       synthfilter_stdf->redraw();
+       SYNTHFILTER->synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
+       SYNTHFILTER->synthfilter_stdf->redraw();
        break;
        case 241:
-       synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
-       synthfilter_width->redraw();
+       SYNTHFILTER->synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
+       SYNTHFILTER->synthfilter_width->redraw();
        break;
        case 242:
-       synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
-       synthfilter_fb->redraw();
+       SYNTHFILTER->synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
+       SYNTHFILTER->synthfilter_fb->redraw();
        break;
        case 243:
-       synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
-       synthfilter_dpth->redraw();
+       SYNTHFILTER->synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
+       SYNTHFILTER->synthfilter_dpth->redraw();
        break;
        case 244:
-       synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
-       synthfilter_EnvSens->redraw();
+       SYNTHFILTER->synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
+       SYNTHFILTER->synthfilter_EnvSens->redraw();
        break;
        case 245:
-       synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-       synthfilter_ATime->redraw();
+       SYNTHFILTER->synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
+       SYNTHFILTER->synthfilter_ATime->redraw();
        break;
        case 246:
-       synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
-       synthfilter_RTime->redraw();
+       SYNTHFILTER->synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
+       SYNTHFILTER->synthfilter_RTime->redraw();
        break;
        case 247:
-       synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
-       synthfilter_Offset->redraw();
+       SYNTHFILTER->synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
+       SYNTHFILTER->synthfilter_Offset->redraw();
        break;
        case 248:
        mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
@@ -16923,8 +16442,8 @@ void RKRGUI::ActOnOff() {
     SHUFFLE->shuffle_activar->do_callback();
     break;
     case 27:
-    synthfilter_activar->value(rkr->Synthfilter_Bypass);
-    synthfilter_activar->do_callback();
+    SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
+    SYNTHFILTER->synthfilter_activar->do_callback();
     break;
     case 28:
     mbvvol_activar->value(rkr->MBVvol_Bypass);
@@ -17824,8 +17343,8 @@ void RKRGUI::UpdateTGUI() {
     
     if(rkr->Synthfilter_Bypass)
     {
-    synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
-    synthfilter_freq->redraw();
+    SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+    SYNTHFILTER->synthfilter_freq->redraw();
     }
     
     if(rkr->RyanWah_Bypass)
@@ -18733,7 +18252,7 @@ void RKRGUI::RandomPreset() {
   
        case 27://Synthfilter
        if (i<numEff)rkr->Synthfilter_Bypass=1; else rkr->Synthfilter_Bypass=0;
-       synthfilter_activar->value(rkr->Synthfilter_Bypass);
+       SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
        break; 
   
        case 28://VaryBand

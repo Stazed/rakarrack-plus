@@ -42,6 +42,7 @@ set (ProgSources
     UI/arpie_gui.cxx
     UI/expander_gui.cxx
     UI/shuffle_gui.cxx
+    UI/synthfilter_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C
