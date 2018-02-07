@@ -55,6 +55,7 @@ class SynthfilterGui; // forward declaration
 class MbvvolGui; // forward declaration
 class ConvoGui; // forward declaration
 class LooperGui; // forward declaration
+class RyanwahGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -92,12 +93,13 @@ class SustainGui; // forward declaration
 #include "mbvvol_gui.h"
 #include "convo_gui.h"
 #include "looper_gui.h"
+#include "ryanwah_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Counter.H>
 #include "sustain_gui.h"
+#include <FL/Fl_Counter.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Input.H>
 #include "analyzer.h"
@@ -286,113 +288,7 @@ public:
   MbvvolGui *MBVVOL;
   ConvoGui *CONVOLOTRON;
   LooperGui *LOOPER;
-  Fl_Group *RYANWAH;
-  Fl_Light_Button *ryanwah_activar;
-private:
-  inline void cb_ryanwah_activar_i(Fl_Light_Button*, void*);
-  static void cb_ryanwah_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *ryanwah_preset;
-private:
-  inline void cb_ryanwah_preset_i(Fl_Choice*, void*);
-  static void cb_ryanwah_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_ryanwah_preset[];
-public:
-  SliderW *ryanwah_WD;
-private:
-  inline void cb_ryanwah_WD_i(SliderW*, void*);
-  static void cb_ryanwah_WD(SliderW*, void*);
-public:
-  Fl_Check_Button *ryanwah_qm;
-private:
-  inline void cb_ryanwah_qm_i(Fl_Check_Button*, void*);
-  static void cb_ryanwah_qm(Fl_Check_Button*, void*);
-public:
-  SliderW *ryanwah_lp;
-private:
-  inline void cb_ryanwah_lp_i(SliderW*, void*);
-  static void cb_ryanwah_lp(SliderW*, void*);
-public:
-  Fl_Check_Button *ryanwah_nat;
-private:
-  inline void cb_ryanwah_nat_i(Fl_Check_Button*, void*);
-  static void cb_ryanwah_nat(Fl_Check_Button*, void*);
-public:
-  SliderW *ryanwah_bp;
-private:
-  inline void cb_ryanwah_bp_i(SliderW*, void*);
-  static void cb_ryanwah_bp(SliderW*, void*);
-public:
-  Fl_Check_Button *ryanwah_res;
-private:
-  inline void cb_ryanwah_res_i(Fl_Check_Button*, void*);
-  static void cb_ryanwah_res(Fl_Check_Button*, void*);
-public:
-  SliderW *ryanwah_hp;
-private:
-  inline void cb_ryanwah_hp_i(SliderW*, void*);
-  static void cb_ryanwah_hp(SliderW*, void*);
-public:
-  SliderW *ryanwah_Rnd;
-private:
-  inline void cb_ryanwah_Rnd_i(SliderW*, void*);
-  static void cb_ryanwah_Rnd(SliderW*, void*);
-public:
-  SliderW *ryanwah_St;
-private:
-  inline void cb_ryanwah_St_i(SliderW*, void*);
-  static void cb_ryanwah_St(SliderW*, void*);
-public:
-  Fl_Counter *svfilter_stages;
-private:
-  inline void cb_svfilter_stages_i(Fl_Counter*, void*);
-  static void cb_svfilter_stages(Fl_Counter*, void*);
-public:
-  Fl_Choice *ryanwah_lfotype;
-private:
-  inline void cb_ryanwah_lfotype_i(Fl_Choice*, void*);
-  static void cb_ryanwah_lfotype(Fl_Choice*, void*);
-public:
-  SliderW *ryanwah_dpth;
-private:
-  inline void cb_ryanwah_dpth_i(SliderW*, void*);
-  static void cb_ryanwah_dpth(SliderW*, void*);
-public:
-  SliderW *ryanwah_freq;
-private:
-  inline void cb_ryanwah_freq_i(SliderW*, void*);
-  static void cb_ryanwah_freq(SliderW*, void*);
-public:
-  SliderW *ryanwah_q;
-private:
-  inline void cb_ryanwah_q_i(SliderW*, void*);
-  static void cb_ryanwah_q(SliderW*, void*);
-public:
-  SliderW *ryanwah_rng;
-private:
-  inline void cb_ryanwah_rng_i(SliderW*, void*);
-  static void cb_ryanwah_rng(SliderW*, void*);
-public:
-  SliderW *ryanwah_ampsnsinv;
-private:
-  inline void cb_ryanwah_ampsnsinv_i(SliderW*, void*);
-  static void cb_ryanwah_ampsnsinv(SliderW*, void*);
-public:
-  SliderW *ryanwah_ampsns;
-private:
-  inline void cb_ryanwah_ampsns_i(SliderW*, void*);
-  static void cb_ryanwah_ampsns(SliderW*, void*);
-public:
-  SliderW *ryanwah_smooth;
-private:
-  inline void cb_ryanwah_smooth_i(SliderW*, void*);
-  static void cb_ryanwah_smooth(SliderW*, void*);
-public:
-  SliderW *ryanwah_minfreq;
-private:
-  inline void cb_ryanwah_minfreq_i(SliderW*, void*);
-  static void cb_ryanwah_minfreq(SliderW*, void*);
-public:
+  RyanwahGui *RYANWAH;
   Fl_Group *RBECHO;
   Fl_Light_Button *rbecho_activar;
 private:

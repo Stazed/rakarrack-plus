@@ -46,6 +46,7 @@ set (ProgSources
     UI/mbvvol_gui.cxx
     UI/convo_gui.cxx
     UI/looper_gui.cxx
+    UI/ryanwah_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C
