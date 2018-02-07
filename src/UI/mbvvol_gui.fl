@@ -1,0 +1,257 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class {\#include "common_gui_menu.h"} MbvvolGui {
+  user_data 1 open
+  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
+} {
+  Fl_Light_Button mbvvol_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->MBVvol_Bypass);
+ return;
+}
+rkr->MBVvol_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_MBVvol->cleanup();
+rgui->findpos(28,(int)o->value(),o);}
+    xywh {7 5 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice mbvvol_preset {
+    label Preset
+    user_data 12028
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12028))rkr->efx_MBVvol->setpreset((int)o->value());
+mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
+mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
+mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
+mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
+mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
+mbvvol_lfotype2->value(rkr->efx_MBVvol->getpar(5));
+mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
+mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
+mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
+mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
+//mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));
+mbvvol_LB->value(rkr->efx_MBVvol->getpar(11));
+mbvvol_MB1->value(rkr->efx_MBVvol->getpar(12));
+mbvvol_MB2->value(rkr->efx_MBVvol->getpar(13));
+mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));}
+    xywh {79 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label {VaryVol 1}
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {VaryVol 2}
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {VaryVol 3}
+      xywh {72 72 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider mbvvol_WD {
+    label {Wet/Dry}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(248);
+ return;
+}
+rkr->efx_MBVvol->changepar(0,(int)(o->value()+64));}
+    xywh {54 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider mbvvol_freq1 {
+    label {Tempo 1}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(249);
+ return;
+}
+rkr->efx_MBVvol->changepar(1,(int)o->value());}
+    xywh {54 40 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice mbvvol_lfotype1 {
+    label {LFO 1 Type}
+    callback {rkr->efx_MBVvol->changepar(2,(int)o->value());}
+    xywh {65 53 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    code0 {o->menu(m_lfo_menu->get_lfo_type());}
+  } {}
+  Fl_Value_Slider mbvvol_stdf1 {
+    label {St.df 1}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(250);
+ return;
+}
+rkr->efx_MBVvol->changepar(3,(int)o->value());}
+    xywh {54 72 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider mbvvol_freq2 {
+    label {Tempo 2}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(251);
+ return;
+}
+rkr->efx_MBVvol->changepar(4,(int)o->value());}
+    xywh {54 84 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice mbvvol_lfotype2 {
+    label {LFO 2 Type}
+    callback {rkr->efx_MBVvol->changepar(5,(int)o->value());} selected
+    xywh {65 97 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    code0 {o->menu(m_lfo_menu->get_lfo_type());}
+  } {}
+  Fl_Value_Slider mbvvol_stdf2 {
+    label {St.df 2}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(252);
+ return;
+}
+rkr->efx_MBVvol->changepar(6,(int)o->value());}
+    xywh {54 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider mbvvol_cross1 {
+    label Cross1
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(253);
+ return;
+}
+rkr->efx_MBVvol->changepar(7,(int)o->value());}
+    xywh {54 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider mbvvol_cross2 {
+    label Cross2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(254);
+ return;
+}
+rkr->efx_MBVvol->changepar(8,(int)o->value());}
+    xywh {54 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider mbvvol_cross3 {
+    label Cross3
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(255);
+ return;
+}
+rkr->efx_MBVvol->changepar(9,(int)o->value());}
+    xywh {54 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice mbvvol_LB {
+    label L
+    user_data 12
+    callback {rkr->efx_MBVvol->changepar(11,(int)o->value());} open
+    tooltip {Low Band Volume} xywh {11 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
+  } {
+    MenuItem {} {
+      label {1 - LFO 1}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {2 - LFO 2}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {C - Constant}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {M - Muted}
+      xywh {0 0 36 21} labelsize 10
+    }
+  }
+  Fl_Choice mbvvol_MB1 {
+    label M
+    user_data 12
+    callback {rkr->efx_MBVvol->changepar(12,(int)o->value());} open
+    tooltip {Mid Band 1 Volume} xywh {50 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
+  } {
+    MenuItem {} {
+      label {1 - LFO 1}
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {2 - LFO 2}
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {C - Constant}
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {M - Muted}
+      xywh {10 10 36 21} labelsize 10
+    }
+  }
+  Fl_Choice mbvvol_MB2 {
+    label M
+    user_data 12
+    callback {rkr->efx_MBVvol->changepar(13,(int)o->value());} open
+    tooltip {Mid Band 2 Volume} xywh {90 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
+  } {
+    MenuItem {} {
+      label {1 - LFO 1}
+      xywh {20 20 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {2 - LFO 2}
+      xywh {20 20 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {C - Constant}
+      xywh {20 20 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {M - Muted}
+      xywh {456 375 36 21} labelsize 10
+    }
+  }
+  Fl_Choice mbvvol_HB {
+    label H
+    user_data 12
+    callback {rkr->efx_MBVvol->changepar(14,(int)o->value());} open
+    tooltip {High Band Volume} xywh {128 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
+  } {
+    MenuItem {} {
+      label {1 - LFO 1}
+      xywh {30 30 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {2 - LFO 2}
+      xywh {30 30 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {C - Constant}
+      xywh {30 30 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {M - Muted}
+      xywh {30 30 36 21} labelsize 10
+    }
+  }
+  decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+}

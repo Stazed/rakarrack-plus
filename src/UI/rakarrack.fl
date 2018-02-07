@@ -149,6 +149,9 @@ decl {class ShuffleGui; // forward declaration} {public global
 decl {class SynthfilterGui; // forward declaration} {public global
 }
 
+decl {class MbvvolGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1170,251 +1173,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group MBVVOL {
         user_data 1
-        xywh {319 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button mbvvol_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->MBVvol_Bypass);
- return;
-}
-rkr->MBVvol_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_MBVvol->cleanup();
-findpos(28,(int)o->value(),o);}
-          xywh {326 216 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice mbvvol_preset {
-          label Preset
-          user_data 12028
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12028))rkr->efx_MBVvol->setpreset((int)o->value());
-mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
-mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
-mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
-mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
-mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
-mbvvol_lfotype2->value(rkr->efx_MBVvol->getpar(5));
-mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
-mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
-mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
-mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
-//mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));
-mbvvol_LB->value(rkr->efx_MBVvol->getpar(11));
-mbvvol_MB1->value(rkr->efx_MBVvol->getpar(12));
-mbvvol_MB2->value(rkr->efx_MBVvol->getpar(13));
-mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));}
-          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {VaryVol 1}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {VaryVol 2}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {VaryVol 3}
-            xywh {72 72 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider mbvvol_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(248);
- return;
-}
-rkr->efx_MBVvol->changepar(0,(int)(o->value()+64));}
-          xywh {373 239 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbvvol_freq1 {
-          label {Tempo 1}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(249);
- return;
-}
-rkr->efx_MBVvol->changepar(1,(int)o->value());}
-          xywh {373 251 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice mbvvol_lfotype1 {
-          label {LFO 1 Type}
-          callback {rkr->efx_MBVvol->changepar(2,(int)o->value());}
-          xywh {384 264 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Value_Slider mbvvol_stdf1 {
-          label {St.df 1}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(250);
- return;
-}
-rkr->efx_MBVvol->changepar(3,(int)o->value());}
-          xywh {373 283 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbvvol_freq2 {
-          label {Tempo 2}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(251);
- return;
-}
-rkr->efx_MBVvol->changepar(4,(int)o->value());}
-          xywh {373 295 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice mbvvol_lfotype2 {
-          label {LFO 2 Type}
-          callback {rkr->efx_MBVvol->changepar(5,(int)o->value());}
-          xywh {384 308 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Value_Slider mbvvol_stdf2 {
-          label {St.df 2}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(252);
- return;
-}
-rkr->efx_MBVvol->changepar(6,(int)o->value());}
-          xywh {373 327 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbvvol_cross1 {
-          label Cross1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(253);
- return;
-}
-rkr->efx_MBVvol->changepar(7,(int)o->value());}
-          xywh {373 339 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbvvol_cross2 {
-          label Cross2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(254);
- return;
-}
-rkr->efx_MBVvol->changepar(8,(int)o->value());}
-          xywh {373 351 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider mbvvol_cross3 {
-          label Cross3
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(255);
- return;
-}
-rkr->efx_MBVvol->changepar(9,(int)o->value());}
-          xywh {373 363 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice mbvvol_LB {
-          label L
-          user_data 12
-          callback {rkr->efx_MBVvol->changepar(11,(int)o->value());} open
-          tooltip {Low Band Volume} xywh {330 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-        } {
-          MenuItem {} {
-            label {1 - LFO 1}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {2 - LFO 2}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {C - Constant}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {M - Muted}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Choice mbvvol_MB1 {
-          label M
-          user_data 12
-          callback {rkr->efx_MBVvol->changepar(12,(int)o->value());} open
-          tooltip {Mid Band 1 Volume} xywh {369 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-        } {
-          MenuItem {} {
-            label {1 - LFO 1}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {2 - LFO 2}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {C - Constant}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {M - Muted}
-            xywh {10 10 36 21} labelsize 10
-          }
-        }
-        Fl_Choice mbvvol_MB2 {
-          label M
-          user_data 12
-          callback {rkr->efx_MBVvol->changepar(13,(int)o->value());} open
-          tooltip {Mid Band 2 Volume} xywh {409 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-        } {
-          MenuItem {} {
-            label {1 - LFO 1}
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {2 - LFO 2}
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {C - Constant}
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {M - Muted}
-            xywh {456 375 36 21} labelsize 10
-          }
-        }
-        Fl_Choice mbvvol_HB {
-          label H
-          user_data 12
-          callback {rkr->efx_MBVvol->changepar(14,(int)o->value());} open
-          tooltip {High Band Volume} xywh {447 375 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-        } {
-          MenuItem {} {
-            label {1 - LFO 1}
-            xywh {30 30 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {2 - LFO 2}
-            xywh {30 30 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {C - Constant}
-            xywh {30 30 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {M - Muted}
-            xywh {30 30 36 21} labelsize 10
-          }
-        }
-      }
+        xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "mbvvol_gui.h"}
+        class MbvvolGui
+      } {}
       Fl_Group CONVOLOTRON {
         user_data 1
         xywh {322 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -8277,8 +8039,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break; 
 
      case 28://VaryBand
-     mbvvol_activar->value(rkr->MBVvol_Bypass);
-     mbvvol_preset->do_callback(mbvvol_preset,1);
+     MBVVOL->mbvvol_activar->value(rkr->MBVvol_Bypass);
+     MBVVOL->mbvvol_preset->do_callback(MBVVOL->mbvvol_preset,1);
      break;
 
      case 29://Convolotron
@@ -8981,7 +8743,7 @@ switch (rkr->efx_order[i])
 
      case 28:
        MBVVOL->position(x[i],y[i]);
-       mbvvol_activar->shortcut(s[i]);
+       MBVVOL->mbvvol_activar->shortcut(s[i]);
        if(!rkr->deachide)MBVVOL->show();
        if(rkr->MBVvol_Bypass)
        {
@@ -10672,36 +10434,36 @@ switch (i)
      SYNTHFILTER->synthfilter_Offset->redraw();
      break;
      case 248:
-     mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
-     mbvvol_WD->redraw();
+     MBVVOL->mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
+     MBVVOL->mbvvol_WD->redraw();
      break;
      case 249:
-     mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
-     mbvvol_freq1->redraw();
+     MBVVOL->mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
+     MBVVOL->mbvvol_freq1->redraw();
      break;
      case 250:
-     mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
-     mbvvol_stdf1->redraw();
+     MBVVOL->mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
+     MBVVOL->mbvvol_stdf1->redraw();
      break;
      case 251:
-     mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
-     mbvvol_freq2->redraw();
+     MBVVOL->mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
+     MBVVOL->mbvvol_freq2->redraw();
      break;
      case 252:
-     mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
-     mbvvol_stdf2->redraw();
+     MBVVOL->mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
+     MBVVOL->mbvvol_stdf2->redraw();
      break;
      case 253:
-     mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
-     mbvvol_cross1->redraw();
+     MBVVOL->mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
+     MBVVOL->mbvvol_cross1->redraw();
      break;
      case 254:
-     mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
-     mbvvol_cross2->redraw();
+     MBVVOL->mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
+     MBVVOL->mbvvol_cross2->redraw();
      break;
      case 255:
-     mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
-     mbvvol_cross3->redraw();
+     MBVVOL->mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
+     MBVVOL->mbvvol_cross3->redraw();
      break;
      case 256:
      ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
@@ -11435,8 +11197,8 @@ switch(miralo)
   SYNTHFILTER->synthfilter_activar->do_callback();
   break;
   case 28:
-  mbvvol_activar->value(rkr->MBVvol_Bypass);
-  mbvvol_activar->do_callback();
+  MBVVOL->mbvvol_activar->value(rkr->MBVvol_Bypass);
+  MBVVOL->mbvvol_activar->do_callback();
   break;
   case 29:
   convo_activar->value(rkr->Convol_Bypass);
@@ -12331,14 +12093,14 @@ if(rkr->Chorus_Bypass)
     
   if(rkr->MBVvol_Bypass)
   {
-  mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
-  mbvvol_freq1->redraw();
+  MBVVOL->mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
+  MBVVOL->mbvvol_freq1->redraw();
   }
   
   if(rkr->MBVvol_Bypass)
   {
-  mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
-  mbvvol_freq2->redraw();
+  MBVVOL->mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
+  MBVVOL->mbvvol_freq2->redraw();
   }
   
   if(rkr->Arpie_Bypass)
@@ -13220,7 +12982,7 @@ for(i=0;i<10;i++)
 
      case 28://VaryBand
      if (i<numEff)rkr->MBVvol_Bypass=1; else rkr->MBVvol_Bypass=0;
-     mbvvol_activar->value(rkr->MBVvol_Bypass);
+     MBVVOL->mbvvol_activar->value(rkr->MBVvol_Bypass);
      break;
 
      case 29://Convolotron
