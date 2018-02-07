@@ -152,10 +152,13 @@ decl {class SynthfilterGui; // forward declaration} {public global
 decl {class MbvvolGui; // forward declaration} {public global
 }
 
-decl {class SustainGui; // forward declaration} {public global
+decl {class ConvoGui; // forward declaration} {public global
 }
 
-decl {class ConvoGui; // forward declaration} {public global
+decl {class LooperGui; // forward declaration} {public global
+}
+
+decl {class SustainGui; // forward declaration} {public global
 }
 
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
@@ -746,7 +749,7 @@ if(rkr->Looper_Bypass)
            char tmp[16]; 
            memset(tmp,0,sizeof(tmp));
            sprintf(tmp,"%d/%d",rkr->efx_Looper->looper_bar,rkr->efx_Looper->looper_qua);
-           L_TimePos->copy_label(tmp);
+           LOOPER->L_TimePos->copy_label(tmp);
          }
    
    }
@@ -1188,298 +1191,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group LOOPER {
         user_data 1
-        xywh {319 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button looper_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Looper_Bypass);
- return;
-}
-rkr->Looper_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Looper->cleanup();
-findpos(30,(int)o->value(),o);}
-          xywh {324 217 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice looper_preset {
-          label Preset
-          user_data 12030
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12030))rkr->efx_Looper->setpreset((int) o->value());
-looper_WD->value(rkr->efx_Looper->getpar(0)-64);
-looper_play->value(rkr->efx_Looper->getpar(1));
-looper_record->value(rkr->efx_Looper->getpar(3));
-looper_rv->value(rkr->efx_Looper->getpar(5));
-looper_ap->value(rkr->efx_Looper->getpar(9));
-looper_level1->value(rkr->efx_Looper->getpar(6));
-looper_level2->value(rkr->efx_Looper->getpar(10));
-
-looper_t1->value(rkr->efx_Looper->getpar(7));
-looper_t2->value(rkr->efx_Looper->getpar(8));
-looper_r1->value(rkr->efx_Looper->getpar(11));
-looper_r2->value(rkr->efx_Looper->getpar(12));
-looper_lnk->value(rkr->efx_Looper->getpar(13));
-looper_Tempo->value(rkr->efx_Looper->getpar(14));
-looper_bar->value(rkr->efx_Looper->getpar(15));
-looper_ms->value(rkr->efx_Looper->getpar(17));}
-          xywh {396 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Looper
-            xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Reverse
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider looper_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(267);
- return;
-}
-rkr->efx_Looper->changepar(0,(int)(o->value()+64));}
-          xywh {370 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider looper_level1 {
-          label {Level 1}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(268);
- return;
-}
-rkr->efx_Looper->changepar(6,(int)o->value());}
-          xywh {370 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider looper_level2 {
-          label {Level 2}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(269);
- return;
-}
-rkr->efx_Looper->changepar(10,(int)o->value());}
-          xywh {370 262 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider looper_Tempo {
-          label Tempo
-          callback {rkr->efx_Looper->changepar(14,(int)o->value());}
-          xywh {370 274 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 380 step 1 value 100 textcolor 7
-          class SliderW
-        }
-        Fl_Choice looper_bar {
-          label {Time Sig.}
-          callback {rkr->efx_Looper->changepar(15,(int)o->value());}
-          xywh {376 286 40 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {2/4}
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {3/4}
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {4/4}
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {5/4}
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {6/8}
-            xywh {40 40 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {7/8}
-            xywh {50 50 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {9/8}
-            xywh {60 60 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {11/8}
-            xywh {70 70 36 21} labelsize 9
-          }
-        }
-        Fl_Choice looper_ms {
-          label MS
-          callback {rkr->efx_Looper->changepar(17,(int)o->value());}
-          xywh {440 286 29 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label N
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label H
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label L
-            xywh {20 20 36 21} labelsize 9
-          }
-        }
-        Fl_Check_Button looper_rv {
-          label Reverse
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(270);
- return;
-}
-rkr->efx_Looper->changepar(5,(int)o->value())}
-          xywh {327 302 61 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button looper_ap {
-          label {Auto Play}
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(271);
- return;
-}
-rkr->efx_Looper->changepar(9,(int)o->value())}
-          xywh {397 302 67 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Box Box_Play {
-          label {Play/Stop}
-          xywh {323 316 52 14} labelsize 10 labelcolor 7
-        }
-        Fl_Box Box_P {
-          label Pause
-          xywh {377 316 44 14} labelsize 10 labelcolor 7
-        }
-        Fl_Box {} {
-          label Record
-          xywh {428 316 44 14} labelsize 10 labelcolor 7
-        }
-        Fl_Button looper_play {
-          label {@|>}
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(272);
- return;
-}
-rkr->efx_Looper->changepar(1,(int)o->value());
-update_looper();}
-          tooltip {Play - Shortcut 'F5'} xywh {327 330 44 22} type Toggle shortcut 0xffc2
-        }
-        Fl_Button looper_stop {
-          label {@||}
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(273);
- return;
-}
-rkr->efx_Looper->changepar(2,(int)o->value());
-update_looper();}
-          tooltip {Stop - Shortcut 'F6'} xywh {378 330 44 22} type Toggle shortcut 0xffc3
-        }
-        Fl_Button looper_record {
-          label {@circle}
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(274);
- return;
-}
-rkr->efx_Looper->changepar(3,(int)o->value());
-update_looper();}
-          xywh {428 330 44 22} type Toggle labelcolor 1
-        }
-        Fl_Box {} {
-          label Track
-          xywh {390 362 39 14} labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button looper_r1 {
-          label R1
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(275);
- return;
-}
-rkr->efx_Looper->changepar(11,(int)o->value())}
-          xywh {327 366 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
-        }
-        Fl_Check_Button looper_r2 {
-          label R2
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(276);
- return;
-}
-rkr->efx_Looper->changepar(12,(int)o->value())}
-          xywh {346 366 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
-        }
-        Fl_Button looper_t1 {
-          label 1
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(277);
- return;
-}
-rkr->efx_Looper->changepar(7,(int)o->value());
-update_looper();}
-          xywh {430 360 18 18} type Toggle labelsize 10 align 16
-        }
-        Fl_Button looper_t2 {
-          label 2
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(278);
- return;
-}
-rkr->efx_Looper->changepar(8,(int)o->value());
-update_looper();}
-          xywh {453 360 18 18} type Toggle labelsize 10 align 16
-        }
-        Fl_Check_Button looper_lnk {
-          label Lnk
-          user_data 2
-          callback {rkr->efx_Looper->changepar(13,(int)o->value())}
-          xywh {346 380 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
-        }
-        Fl_Button looper_clear {
-          label Clear
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(279);
- return;
-}
-rkr->efx_Looper->changepar(4,(int)o->value());
-update_looper();}
-          xywh {365 378 43 14} labelsize 10
-        }
-        Fl_Check_Button looper_mt {
-          label M
-          user_data 2
-          callback {rkr->efx_Looper->changepar(16,(int)o->value())}
-          xywh {412 380 27 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Box L_TimePos {
-          xywh {440 379 35 14} box DOWN_BOX align 84
-        }
-      }
+        xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "looper_gui.h"}
+        class LooperGui
+      } {}
       Fl_Group RYANWAH {
         user_data 1
         xywh {479 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
@@ -4732,7 +4447,7 @@ switch(rkr->M_Metro_Bar)
 
  }} open
           xywh {624 98 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_looper_bar);}
+          code0 {o->menu(LOOPER->get_menu_looper_bar());}
         } {}
         Fl_Value_Slider Metro_Volume {
           label Volume
@@ -4761,7 +4476,7 @@ switch(rkr->M_Metro_Sound)
 
  }} open
           xywh {634 118 28 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(menu_looper_ms);}
+          code0 {o->menu(LOOPER->get_menu_looper_ms());}
         } {}
         Fl_Value_Slider Metro_Tempo {
           label Tempo
@@ -7870,8 +7585,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break; 
 
      case 30://Looper
-     looper_activar->value(rkr->Looper_Bypass);
-     looper_preset->do_callback(looper_preset,1);
+     LOOPER->looper_activar->value(rkr->Looper_Bypass);
+     LOOPER->looper_preset->do_callback(LOOPER->looper_preset,1);
      update_looper();
      break;
 
@@ -8588,7 +8303,7 @@ switch (rkr->efx_order[i])
 
      case 30:
        LOOPER->position(x[i],y[i]);
-       looper_activar->shortcut(s[i]);
+       LOOPER->looper_activar->shortcut(s[i]);
        if(!rkr->deachide)LOOPER->show();
        if(rkr->Looper_Bypass)
        {
@@ -10331,55 +10046,55 @@ switch (i)
      ryanwah_smooth->redraw();
      break;
      case 267:
-     looper_WD->value(rkr->efx_Looper->getpar(0)-64);
-     looper_WD->redraw();
+     LOOPER->looper_WD->value(rkr->efx_Looper->getpar(0)-64);
+     LOOPER->looper_WD->redraw();
      break;
      case 268:
-     looper_level1->value(rkr->efx_Looper->getpar(6));
-     looper_level1->redraw();
+     LOOPER->looper_level1->value(rkr->efx_Looper->getpar(6));
+     LOOPER->looper_level1->redraw();
      break; 
      case 269:
-     looper_level2->value(rkr->efx_Looper->getpar(10));
-     looper_level2->redraw();
+     LOOPER->looper_level2->value(rkr->efx_Looper->getpar(10));
+     LOOPER->looper_level2->redraw();
      break; 
      case 270:
-     looper_rv->value(rkr->efx_Looper->getpar(5));
-     looper_rv->redraw();
+     LOOPER->looper_rv->value(rkr->efx_Looper->getpar(5));
+     LOOPER->looper_rv->redraw();
      break;
      case 271:
-     looper_ap->value(rkr->efx_Looper->getpar(9));
-     looper_ap->redraw();
+     LOOPER->looper_ap->value(rkr->efx_Looper->getpar(9));
+     LOOPER->looper_ap->redraw();
      break;
      case 272:
-     looper_play->value(rkr->efx_Looper->getpar(1));
+     LOOPER->looper_play->value(rkr->efx_Looper->getpar(1));
      update_looper();
      break;
      case 273:
-     looper_stop->value(rkr->efx_Looper->getpar(2));
+     LOOPER->looper_stop->value(rkr->efx_Looper->getpar(2));
      update_looper();
      break;
      case 274:
-     looper_record->value(rkr->efx_Looper->getpar(3));
+     LOOPER->looper_record->value(rkr->efx_Looper->getpar(3));
      update_looper();
      break;
      case 275:
-     looper_r1->value(rkr->efx_Looper->getpar(11));
-     looper_r1->redraw();
+     LOOPER->looper_r1->value(rkr->efx_Looper->getpar(11));
+     LOOPER->looper_r1->redraw();
      break;
      case 276:
-     looper_r2->value(rkr->efx_Looper->getpar(12));
-     looper_r2->redraw();
+     LOOPER->looper_r2->value(rkr->efx_Looper->getpar(12));
+     LOOPER->looper_r2->redraw();
      break;
      case 277:
-     looper_t1->value(rkr->efx_Looper->getpar(7));
+     LOOPER->looper_t1->value(rkr->efx_Looper->getpar(7));
      update_looper();
      break;
      case 278:
-     looper_t2->value(rkr->efx_Looper->getpar(8));
+     LOOPER->looper_t2->value(rkr->efx_Looper->getpar(8));
      update_looper();
      break;
      case 279:
-     looper_clear->value(rkr->efx_Looper->getpar(4));
+     LOOPER->looper_clear->value(rkr->efx_Looper->getpar(4));
      update_looper();
      break;
      case 280:
@@ -11026,8 +10741,8 @@ switch(miralo)
   CONVOLOTRON->convo_activar->do_callback();
   break;
   case 30:
-  looper_activar->value(rkr->Looper_Bypass);
-  looper_activar->do_callback();
+  LOOPER->looper_activar->value(rkr->Looper_Bypass);
+  LOOPER->looper_activar->do_callback();
   break;
   case 31:
   ryanwah_activar->value(rkr->RyanWah_Bypass);
@@ -11817,33 +11532,33 @@ fl_message("This setting will be changed the next time you run rakarrack");} {}
   Function {update_looper()} {} {
     code {rkr->efx_Looper->getstate();
 
-looper_play->value(rkr->efx_Looper->progstate[0]);
-looper_play->redraw();
-looper_record->value(rkr->efx_Looper->progstate[2]);
-looper_record->redraw();
-looper_stop->value(rkr->efx_Looper->progstate[1]);
-looper_stop->redraw();
+LOOPER->looper_play->value(rkr->efx_Looper->progstate[0]);
+LOOPER->looper_play->redraw();
+LOOPER->looper_record->value(rkr->efx_Looper->progstate[2]);
+LOOPER->looper_record->redraw();
+LOOPER->looper_stop->value(rkr->efx_Looper->progstate[1]);
+LOOPER->looper_stop->redraw();
 if(rkr->efx_Looper->progstate[2])
 {
-  Box_P->copy_label("Stop");
-  looper_stop->copy_label("@square");  
+  LOOPER->Box_P->copy_label("Stop");
+  LOOPER->looper_stop->copy_label("@square");  
 }
 else
 {
-  Box_P->copy_label("Pause");
-  looper_stop->copy_label("@||");
+  LOOPER->Box_P->copy_label("Pause");
+  LOOPER->looper_stop->copy_label("@||");
 }
   
-looper_t1->value(rkr->efx_Looper->progstate[4]);
-looper_t1->redraw();
-looper_t2->value(rkr->efx_Looper->progstate[5]);
-looper_t2->redraw();} {}
+LOOPER->looper_t1->value(rkr->efx_Looper->progstate[4]);
+LOOPER->looper_t1->redraw();
+LOOPER->looper_t2->value(rkr->efx_Looper->progstate[5]);
+LOOPER->looper_t2->redraw();} {}
   }
   Function {UpdateTGUI()} {} {
     code {if(rkr->Looper_Bypass)
    {
-   looper_Tempo->value(rkr->efx_Looper->getpar(14));
-   looper_Tempo->redraw();
+   LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(14));
+   LOOPER->looper_Tempo->redraw();
    }  
 
 if(rkr->Chorus_Bypass)
@@ -12813,7 +12528,7 @@ for(i=0;i<10;i++)
 
      case 30://Looper
      if (i<numEff)rkr->Looper_Bypass=1; else rkr->Looper_Bypass=0;
-     looper_activar->value(rkr->Looper_Bypass);
+     LOOPER->looper_activar->value(rkr->Looper_Bypass);
      update_looper();
      break;
 
