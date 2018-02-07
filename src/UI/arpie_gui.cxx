@@ -377,7 +377,7 @@ end();
 }
 
 /**
- FIXME rerun chorus_gui.fl write code after all others are done to get rid of this
+ FIXME rerun arpie_gui.fl write code after all others are done to get rid of this
 */
 Fl_Menu_Item* ArpieGui::get_menu_arpie_subdiv_type() {
   return m_subdiv_menu->get_subdiv_type();

@@ -140,6 +140,9 @@ decl {class MbdistGui; // forward declaration} {public global
 decl {class ArpieGui; // forward declaration} {public global
 }
 
+decl {class ExpanderGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1143,126 +1146,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group EXPANDER {
         user_data 1
-        xywh {321 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button expander_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Expander_Bypass);
- return;
-}
-rkr->Expander_Bypass=(int)o->value();
-findpos(25,(int)o->value(),o);}
-          xywh {326 215 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice expander_preset {
-          label Preset
-          user_data 12025
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12025))rkr->efx_Expander->setpreset((int) o->value());
-expander_ATime->value(rkr->efx_Expander->getpar(3));
-expander_RTime->value(rkr->efx_Expander->getpar(4));
-expander_shape->value(rkr->efx_Expander->getpar(2));
-expander_threshold->value(rkr->efx_Expander->getpar(1));
-expander_HPF->value(rkr->efx_Expander->getpar(6));
-expander_LPF->value(rkr->efx_Expander->getpar(5));
-expander_level->value(rkr->efx_Expander->getpar(7));}
-          xywh {398 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Noise Gate}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Boost Gate}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Treble swell}
-            xywh {52 52 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider expander_ATime {
-          label {A. Time}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(220);
- return;
-} 
-rkr->efx_Expander->changepar(3,(int)o->value());}
-          xywh {372 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 5000 step 1 value 10 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider expander_RTime {
-          label {R. Time}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(221);
- return;
-} 
-rkr->efx_Expander->changepar(4,(int) o->value());}
-          xywh {371 272 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 1000 step 1 value 500 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider expander_shape {
-          label Shape
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(222);
- return;
-} 
-rkr->efx_Expander->changepar(2, (int) o->value());}
-          xywh {371 294 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 50 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider expander_threshold {
-          label Thrhold
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(223);
- return;
-} 
-rkr->efx_Expander->changepar(1, (int)o->value());}
-          xywh {371 316 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -80 maximum 0 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider expander_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(224);
- return;
-} 
-rkr->efx_Expander->changepar(7, (int) o->value());}
-          xywh {371 336 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider expander_LPF {
-          label LPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(225);
- return;
-} 
-rkr->efx_Expander->changepar(5, (int)o->value());}
-          xywh {371 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider expander_HPF {
-          label HPF
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(226);
- return;
-} 
-rkr->efx_Expander->changepar(6, (int)o->value());}
-          xywh {371 373 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "expander_gui.h"}
+        class ExpanderGui
+      } {}
       Fl_Group SHUFFLE {
         label {High Freq}
         user_data 1
@@ -8755,8 +8642,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 25://Expander
-     expander_activar->value(rkr->Expander_Bypass);
-     expander_preset->do_callback(expander_preset,1);
+     EXPANDER->expander_activar->value(rkr->Expander_Bypass);
+     EXPANDER->expander_preset->do_callback(EXPANDER->expander_preset,1);
      break;
 
      case 26://Shuffle
@@ -9437,7 +9324,7 @@ switch (rkr->efx_order[i])
 
      case 25:
        EXPANDER->position(x[i],y[i]);
-       expander_activar->shortcut(s[i]);
+       EXPANDER->expander_activar->shortcut(s[i]);
        if(!rkr->deachide)EXPANDER->show();
        if(rkr->Expander_Bypass)
        {
@@ -11053,32 +10940,32 @@ switch (i)
      ARPIE->arpie_damp->redraw();
      break; 	
      case 220:
-     expander_ATime->value(rkr->efx_Expander->getpar(3));
-     expander_ATime->redraw();
+     EXPANDER->expander_ATime->value(rkr->efx_Expander->getpar(3));
+     EXPANDER->expander_ATime->redraw();
      break;
      case 221:
-     expander_RTime->value(rkr->efx_Expander->getpar(4));
-     expander_RTime->redraw();
+     EXPANDER->expander_RTime->value(rkr->efx_Expander->getpar(4));
+     EXPANDER->expander_RTime->redraw();
      break;
      case 222:
-     expander_shape->value(rkr->efx_Expander->getpar(2));
-     expander_shape->redraw();
+     EXPANDER->expander_shape->value(rkr->efx_Expander->getpar(2));
+     EXPANDER->expander_shape->redraw();
      break;
      case 223:
-     expander_threshold->value(rkr->efx_Expander->getpar(1));
-     expander_threshold->redraw();
+     EXPANDER->expander_threshold->value(rkr->efx_Expander->getpar(1));
+     EXPANDER->expander_threshold->redraw();
      break;
      case 224:
-     expander_level->value(rkr->efx_Expander->getpar(7));
-     expander_level->redraw();
+     EXPANDER->expander_level->value(rkr->efx_Expander->getpar(7));
+     EXPANDER->expander_level->redraw();
      break;
      case 225:
-     expander_LPF->value(rkr->efx_Expander->getpar(5));
-     expander_LPF->redraw();
+     EXPANDER->expander_LPF->value(rkr->efx_Expander->getpar(5));
+     EXPANDER->expander_LPF->redraw();
      break;
      case 226:
-     expander_HPF->value(rkr->efx_Expander->getpar(6));
-     expander_HPF->redraw();
+     EXPANDER->expander_HPF->value(rkr->efx_Expander->getpar(6));
+     EXPANDER->expander_HPF->redraw();
      break;
      case 227:
      shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
@@ -11916,8 +11803,8 @@ switch(miralo)
   ARPIE->arpie_activar->do_callback();
   break;
   case 25:
-  expander_activar->value(rkr->Expander_Bypass);
-  expander_activar->do_callback();
+  EXPANDER->expander_activar->value(rkr->Expander_Bypass);
+  EXPANDER->expander_activar->do_callback();
   break;
   case 26:
   shuffle_activar->value(rkr->Shuffle_Bypass);
@@ -13698,7 +13585,7 @@ for(i=0;i<10;i++)
 
      case 25://Expander
      if (i<numEff)rkr->Expander_Bypass=1; else rkr->Expander_Bypass=0;
-     expander_activar->value(rkr->Expander_Bypass);
+     EXPANDER->expander_activar->value(rkr->Expander_Bypass);
      break;
 
      case 26://Shuffle

@@ -49,6 +49,7 @@ class RingGui; // forward declaration
 class ExciterGui; // forward declaration
 class MbdistGui; // forward declaration
 class ArpieGui; // forward declaration
+class ExpanderGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -80,6 +81,7 @@ class SustainGui; // forward declaration
 #include "exciter_gui.h"
 #include "mbdist_gui.h"
 #include "arpie_gui.h"
+#include "expander_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -268,53 +270,7 @@ public:
   ExciterGui *EXCITER;
   MbdistGui *MBDIST;
   ArpieGui *ARPIE;
-  Fl_Group *EXPANDER;
-  Fl_Light_Button *expander_activar;
-private:
-  inline void cb_expander_activar_i(Fl_Light_Button*, void*);
-  static void cb_expander_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *expander_preset;
-private:
-  inline void cb_expander_preset_i(Fl_Choice*, void*);
-  static void cb_expander_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_expander_preset[];
-public:
-  SliderW *expander_ATime;
-private:
-  inline void cb_expander_ATime_i(SliderW*, void*);
-  static void cb_expander_ATime(SliderW*, void*);
-public:
-  SliderW *expander_RTime;
-private:
-  inline void cb_expander_RTime_i(SliderW*, void*);
-  static void cb_expander_RTime(SliderW*, void*);
-public:
-  SliderW *expander_shape;
-private:
-  inline void cb_expander_shape_i(SliderW*, void*);
-  static void cb_expander_shape(SliderW*, void*);
-public:
-  SliderW *expander_threshold;
-private:
-  inline void cb_expander_threshold_i(SliderW*, void*);
-  static void cb_expander_threshold(SliderW*, void*);
-public:
-  SliderW *expander_level;
-private:
-  inline void cb_expander_level_i(SliderW*, void*);
-  static void cb_expander_level(SliderW*, void*);
-public:
-  SliderW *expander_LPF;
-private:
-  inline void cb_expander_LPF_i(SliderW*, void*);
-  static void cb_expander_LPF(SliderW*, void*);
-public:
-  SliderW *expander_HPF;
-private:
-  inline void cb_expander_HPF_i(SliderW*, void*);
-  static void cb_expander_HPF(SliderW*, void*);
-public:
+  ExpanderGui *EXPANDER;
   Fl_Group *SHUFFLE;
   Fl_Light_Button *shuffle_activar;
 private:
