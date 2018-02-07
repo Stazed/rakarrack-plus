@@ -1,0 +1,165 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class {\#include "common_gui_menu.h"} RbechoGui {
+  user_data 1 open selected
+  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
+} {
+  Fl_Light_Button rbecho_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->RBEcho_Bypass);
+ return;
+}
+rkr->RBEcho_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_RBEcho->cleanup();
+rgui->findpos(32,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice rbecho_preset {
+    label Preset
+    user_data 12032
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12032))rkr->efx_RBEcho->setpreset((int) o->value());
+rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
+rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
+rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
+rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
+rbecho_angle->value(rkr->efx_RBEcho->getpar(4)-64);
+rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
+rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
+rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
+rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
+rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label {Echo 1}
+      xywh {67 67 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Echo 2}
+      xywh {67 67 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Echo 3}
+      xywh {67 67 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider rbecho_WD {
+    label {Wet/Dry}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(303);
+ return;
+}
+rkr->efx_RBEcho->changepar(0,(int)(o->value()+64));}
+    xywh {51 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider rbecho_RV {
+    label Reverse
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(304);
+ return;
+}
+rkr->efx_RBEcho->changepar(7,(int)o->value());}
+    xywh {51 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider rbecho_pan {
+    label Pan
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(305);
+ return;
+}
+rkr->efx_RBEcho->changepar(1,(int)(o->value()+64));}
+    xywh {51 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider rbecho_delay {
+    label Tempo
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(306);
+ return;
+}
+rkr->efx_RBEcho->changepar(2,(int)o->value());}
+    xywh {51 69 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 20 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider rbecho_LRdl {
+    label {LRdl.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(307);
+ return;
+}
+rkr->efx_RBEcho->changepar(3,(int)o->value());}
+    xywh {51 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider rbecho_fb {
+    label {Fb.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(308);
+ return;
+}
+rkr->efx_RBEcho->changepar(5,(int)o->value());}
+    xywh {51 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice rbecho_subdiv {
+    label SubDivision
+    callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open
+    xywh {77 111 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
+  } {}
+  Fl_Value_Slider rbecho_damp {
+    label Damp
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(309);
+ return;
+}
+rkr->efx_RBEcho->changepar(6,(int)o->value());}
+    xywh {51 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider rbecho_es {
+    label {E.S.}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(310);
+ return;
+}
+rkr->efx_RBEcho->changepar(9,(int)o->value());}
+    xywh {51 148 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider rbecho_angle {
+    label Angle
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(311);
+ return;
+}
+rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
+    xywh {51 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  decl {CommonGuiMenu *m_subdiv_menu;} {private local
+  }
+}

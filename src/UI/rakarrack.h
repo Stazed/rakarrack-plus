@@ -56,6 +56,7 @@ class MbvvolGui; // forward declaration
 class ConvoGui; // forward declaration
 class LooperGui; // forward declaration
 class RyanwahGui; // forward declaration
+class RbechoGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -94,6 +95,7 @@ class SustainGui; // forward declaration
 #include "convo_gui.h"
 #include "looper_gui.h"
 #include "ryanwah_gui.h"
+#include "rbecho_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -289,68 +291,7 @@ public:
   ConvoGui *CONVOLOTRON;
   LooperGui *LOOPER;
   RyanwahGui *RYANWAH;
-  Fl_Group *RBECHO;
-  Fl_Light_Button *rbecho_activar;
-private:
-  inline void cb_rbecho_activar_i(Fl_Light_Button*, void*);
-  static void cb_rbecho_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *rbecho_preset;
-private:
-  inline void cb_rbecho_preset_i(Fl_Choice*, void*);
-  static void cb_rbecho_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_rbecho_preset[];
-public:
-  SliderW *rbecho_WD;
-private:
-  inline void cb_rbecho_WD_i(SliderW*, void*);
-  static void cb_rbecho_WD(SliderW*, void*);
-public:
-  SliderW *rbecho_RV;
-private:
-  inline void cb_rbecho_RV_i(SliderW*, void*);
-  static void cb_rbecho_RV(SliderW*, void*);
-public:
-  SliderW *rbecho_pan;
-private:
-  inline void cb_rbecho_pan_i(SliderW*, void*);
-  static void cb_rbecho_pan(SliderW*, void*);
-public:
-  SliderW *rbecho_delay;
-private:
-  inline void cb_rbecho_delay_i(SliderW*, void*);
-  static void cb_rbecho_delay(SliderW*, void*);
-public:
-  SliderW *rbecho_LRdl;
-private:
-  inline void cb_rbecho_LRdl_i(SliderW*, void*);
-  static void cb_rbecho_LRdl(SliderW*, void*);
-public:
-  SliderW *rbecho_fb;
-private:
-  inline void cb_rbecho_fb_i(SliderW*, void*);
-  static void cb_rbecho_fb(SliderW*, void*);
-public:
-  Fl_Choice *rbecho_subdiv;
-private:
-  inline void cb_rbecho_subdiv_i(Fl_Choice*, void*);
-  static void cb_rbecho_subdiv(Fl_Choice*, void*);
-public:
-  SliderW *rbecho_damp;
-private:
-  inline void cb_rbecho_damp_i(SliderW*, void*);
-  static void cb_rbecho_damp(SliderW*, void*);
-public:
-  SliderW *rbecho_es;
-private:
-  inline void cb_rbecho_es_i(SliderW*, void*);
-  static void cb_rbecho_es(SliderW*, void*);
-public:
-  SliderW *rbecho_angle;
-private:
-  inline void cb_rbecho_angle_i(SliderW*, void*);
-  static void cb_rbecho_angle(SliderW*, void*);
-public:
+  RbechoGui *RBECHO;
   Fl_Group *COILCRAFTER;
   Fl_Light_Button *coil_activar;
 private:
