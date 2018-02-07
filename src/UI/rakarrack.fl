@@ -164,6 +164,9 @@ decl {class RyanwahGui; // forward declaration} {public global
 decl {class RbechoGui; // forward declaration} {public global
 }
 
+decl {class CoilGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1215,174 +1218,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group COILCRAFTER {
         user_data 1
-        xywh {478 214 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button coil_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->CoilCrafter_Bypass);
- return;
-}
-rkr->CoilCrafter_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_CoilCrafter->cleanup();
-findpos(33,(int)o->value(),o);}
-          xywh {483 218 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice coil_preset {
-          label Preset
-          user_data 12033
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12033))rkr->efx_CoilCrafter->setpreset((int) o->value());
-coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
-coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
-coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
-coil_destiny->value(rkr->efx_CoilCrafter->getpar(2));
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
-coil_mode->value(rkr->efx_CoilCrafter->getpar(8));}
-          xywh {555 218 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {H to S}
-            xywh {32 32 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {S to H}
-            xywh {10 10 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider coil_WD {
-          label Gain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(286);
- return;
-}
-rkr->efx_CoilCrafter->changepar(0,(int)o->value());}
-          xywh {527 239 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider coil_tone {
-          label Tone
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(287);
- return;
-}
-rkr->efx_CoilCrafter->changepar(7,(int)o->value());}
-          xywh {527 255 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 4400 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Choice coil_origin {
-          label Origin
-          user_data 12
-          callback {rkr->efx_CoilCrafter->changepar(1,(int)o->value());
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));}
-          xywh {526 269 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Off
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Fender Strat (old)}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Fender Strat (new)}
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Squire Strat}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Fender Hambucker}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Gibson P90}
-            xywh {52 52 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Gibson Standard}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Gibson Mini}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Gibson Super L6S}
-            xywh {10 10 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider coil_freq1 {
-          label Freq1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(288);
- return;
-}
-rkr->efx_CoilCrafter->changepar(3,(int)o->value());}
-          xywh {527 293 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2600 maximum 4500 step 1 value 3200 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider coil_q1 {
-          label Q1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(289);
- return;
-}
-rkr->efx_CoilCrafter->changepar(4,(int)o->value());}
-          xywh {527 308 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice coil_destiny {
-          label Destiny
-          callback {rkr->efx_CoilCrafter->changepar(2,(int)o->value());
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open
-          xywh {526 321 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-          code0 {o->menu(menu_coil_origin);}
-        } {}
-        Fl_Value_Slider coil_freq2 {
-          label Freq2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(290);
- return;
-}
-rkr->efx_CoilCrafter->changepar(5,(int)o->value());}
-          xywh {527 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2600 maximum 4500 step 1 value 3200 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider coil_q2 {
-          label Q2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(291);
- return;
-}
-rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
-          xywh {528 361 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button coil_mode {
-          label {Pos.}
-          user_data 2
-          callback {rkr->efx_CoilCrafter->changepar(8,(int)o->value());}
-          xywh {491 375 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-      }
+        xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "coil_gui.h"}
+        class CoilGui
+      } {}
       Fl_Group SHELFBOOST {
         user_data 1
         xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -7195,8 +7034,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
      
      case 33:// CoilCrafter
-     coil_activar->value(rkr->CoilCrafter_Bypass);
-     coil_preset->do_callback(coil_preset,1);
+     COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
+     COILCRAFTER->coil_preset->do_callback(COILCRAFTER->coil_preset,1);
      break;
 
      case 34://ShelfBoost
@@ -7933,7 +7772,7 @@ switch (rkr->efx_order[i])
 
      case 33:
        COILCRAFTER->position(x[i],y[i]);
-       coil_activar->shortcut(s[i]);
+       COILCRAFTER->coil_activar->shortcut(s[i]);
        if(!rkr->deachide)COILCRAFTER->show();
        if(rkr->CoilCrafter_Bypass)
        {
@@ -9716,28 +9555,28 @@ switch (i)
      CONVOLOTRON->convo_length->redraw();
      break;
      case 286:
-     coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
-     coil_WD->redraw();
+     COILCRAFTER->coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
+     COILCRAFTER->coil_WD->redraw();
      break;
      case 287:
-     coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
-     coil_tone->redraw();
+     COILCRAFTER->coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
+     COILCRAFTER->coil_tone->redraw();
      break;
      case 288:
-     coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-     coil_freq1->redraw();
+     COILCRAFTER->coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
+     COILCRAFTER->coil_freq1->redraw();
      break;
      case 289:
-     coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
-     coil_q1->redraw();
+     COILCRAFTER->coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
+     COILCRAFTER->coil_q1->redraw();
      break;
      case 290:
-     coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-     coil_freq2->redraw();
+     COILCRAFTER->coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
+     COILCRAFTER->coil_freq2->redraw();
      break;
      case 291:
-     coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
-     coil_q2->redraw();
+     COILCRAFTER->coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
+     COILCRAFTER->coil_q2->redraw();
      break;
      case 292:
      shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
@@ -10347,8 +10186,8 @@ switch(miralo)
   RBECHO->rbecho_activar->do_callback();
   break;
   case 33:
-  coil_activar->value(rkr->CoilCrafter_Bypass);
-  coil_activar->do_callback();
+  COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
+  COILCRAFTER->coil_activar->do_callback();
   break;
   case 34:
   shelf_activar->value(rkr->ShelfBoost_Bypass);
@@ -12138,7 +11977,7 @@ for(i=0;i<10;i++)
      
      case 33:// CoilCrafter
      if (i<numEff)rkr->CoilCrafter_Bypass=1; else rkr->CoilCrafter_Bypass=0;
-     coil_activar->value(rkr->CoilCrafter_Bypass);
+     COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
      break;
 
      case 34://ShelfBoost

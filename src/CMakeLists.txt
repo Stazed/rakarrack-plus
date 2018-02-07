@@ -48,6 +48,7 @@ set (ProgSources
     UI/looper_gui.cxx
     UI/ryanwah_gui.cxx
     UI/rbecho_gui.cxx
+    UI/coil_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C

@@ -57,6 +57,7 @@ class ConvoGui; // forward declaration
 class LooperGui; // forward declaration
 class RyanwahGui; // forward declaration
 class RbechoGui; // forward declaration
+class CoilGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -96,6 +97,7 @@ class SustainGui; // forward declaration
 #include "looper_gui.h"
 #include "ryanwah_gui.h"
 #include "rbecho_gui.h"
+#include "coil_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -292,64 +294,7 @@ public:
   LooperGui *LOOPER;
   RyanwahGui *RYANWAH;
   RbechoGui *RBECHO;
-  Fl_Group *COILCRAFTER;
-  Fl_Light_Button *coil_activar;
-private:
-  inline void cb_coil_activar_i(Fl_Light_Button*, void*);
-  static void cb_coil_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *coil_preset;
-private:
-  inline void cb_coil_preset_i(Fl_Choice*, void*);
-  static void cb_coil_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_coil_preset[];
-public:
-  SliderW *coil_WD;
-private:
-  inline void cb_coil_WD_i(SliderW*, void*);
-  static void cb_coil_WD(SliderW*, void*);
-public:
-  SliderW *coil_tone;
-private:
-  inline void cb_coil_tone_i(SliderW*, void*);
-  static void cb_coil_tone(SliderW*, void*);
-public:
-  Fl_Choice *coil_origin;
-private:
-  inline void cb_coil_origin_i(Fl_Choice*, void*);
-  static void cb_coil_origin(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_coil_origin[];
-public:
-  SliderW *coil_freq1;
-private:
-  inline void cb_coil_freq1_i(SliderW*, void*);
-  static void cb_coil_freq1(SliderW*, void*);
-public:
-  SliderW *coil_q1;
-private:
-  inline void cb_coil_q1_i(SliderW*, void*);
-  static void cb_coil_q1(SliderW*, void*);
-public:
-  Fl_Choice *coil_destiny;
-private:
-  inline void cb_coil_destiny_i(Fl_Choice*, void*);
-  static void cb_coil_destiny(Fl_Choice*, void*);
-public:
-  SliderW *coil_freq2;
-private:
-  inline void cb_coil_freq2_i(SliderW*, void*);
-  static void cb_coil_freq2(SliderW*, void*);
-public:
-  SliderW *coil_q2;
-private:
-  inline void cb_coil_q2_i(SliderW*, void*);
-  static void cb_coil_q2(SliderW*, void*);
-public:
-  Fl_Check_Button *coil_mode;
-private:
-  inline void cb_coil_mode_i(Fl_Check_Button*, void*);
-  static void cb_coil_mode(Fl_Check_Button*, void*);
-public:
+  CoilGui *COILCRAFTER;
   Fl_Group *SHELFBOOST;
   Fl_Light_Button *shelf_activar;
 private:

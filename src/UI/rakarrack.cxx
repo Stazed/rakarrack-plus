@@ -751,155 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_coil_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->CoilCrafter_Bypass);
- return;
-}
-rkr->CoilCrafter_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_CoilCrafter->cleanup();
-findpos(33,(int)o->value(),o);
-}
-void RKRGUI::cb_coil_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_activar_i(o,v);
-}
-
-void RKRGUI::cb_coil_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12033))rkr->efx_CoilCrafter->setpreset((int) o->value());
-coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
-coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
-coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
-coil_destiny->value(rkr->efx_CoilCrafter->getpar(2));
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
-coil_mode->value(rkr->efx_CoilCrafter->getpar(8));
-}
-void RKRGUI::cb_coil_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_coil_preset[] = {
- {"H to S", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"S to H", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_coil_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(286);
- return;
-}
-rkr->efx_CoilCrafter->changepar(0,(int)o->value());
-}
-void RKRGUI::cb_coil_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_WD_i(o,v);
-}
-
-void RKRGUI::cb_coil_tone_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(287);
- return;
-}
-rkr->efx_CoilCrafter->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_coil_tone(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_tone_i(o,v);
-}
-
-void RKRGUI::cb_coil_origin_i(Fl_Choice* o, void*) {
-  rkr->efx_CoilCrafter->changepar(1,(int)o->value());
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
-}
-void RKRGUI::cb_coil_origin(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_origin_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_coil_origin[] = {
- {"Off", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Strat (old)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Strat (new)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Squire Strat", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Hambucker", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson P90", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson Standard", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson Mini", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Gibson Super L6S", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_coil_freq1_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(288);
- return;
-}
-rkr->efx_CoilCrafter->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_coil_freq1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq1_i(o,v);
-}
-
-void RKRGUI::cb_coil_q1_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(289);
- return;
-}
-rkr->efx_CoilCrafter->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_coil_q1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q1_i(o,v);
-}
-
-void RKRGUI::cb_coil_destiny_i(Fl_Choice* o, void*) {
-  rkr->efx_CoilCrafter->changepar(2,(int)o->value());
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
-}
-void RKRGUI::cb_coil_destiny(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_destiny_i(o,v);
-}
-
-void RKRGUI::cb_coil_freq2_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(290);
- return;
-}
-rkr->efx_CoilCrafter->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_coil_freq2(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_freq2_i(o,v);
-}
-
-void RKRGUI::cb_coil_q2_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(291);
- return;
-}
-rkr->efx_CoilCrafter->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_coil_q2(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_q2_i(o,v);
-}
-
-void RKRGUI::cb_coil_mode_i(Fl_Check_Button* o, void*) {
-  rkr->efx_CoilCrafter->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_coil_mode(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_coil_mode_i(o,v);
-}
-
 void RKRGUI::cb_shelf_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -5816,170 +5667,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       RBECHO->hide();
       RBECHO->end();
     } // RbechoGui* RBECHO
-    { COILCRAFTER = new Fl_Group(478, 214, 158, 184);
+    { COILCRAFTER = new CoilGui(480, 212, 158, 184);
       COILCRAFTER->box(FL_UP_BOX);
       COILCRAFTER->color(FL_FOREGROUND_COLOR);
       COILCRAFTER->selection_color(FL_FOREGROUND_COLOR);
+      COILCRAFTER->labeltype(FL_NORMAL_LABEL);
       COILCRAFTER->labelfont(1);
+      COILCRAFTER->labelsize(14);
+      COILCRAFTER->labelcolor(FL_FOREGROUND_COLOR);
       COILCRAFTER->user_data((void*)(1));
       COILCRAFTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      COILCRAFTER->when(FL_WHEN_RELEASE);
       COILCRAFTER->hide();
-      { coil_activar = new Fl_Light_Button(483, 218, 34, 18, "On");
-        coil_activar->shortcut(0x31);
-        coil_activar->color((Fl_Color)62);
-        coil_activar->selection_color((Fl_Color)1);
-        coil_activar->labelsize(10);
-        coil_activar->callback((Fl_Callback*)cb_coil_activar, (void*)(2));
-        coil_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        coil_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* coil_activar
-      { coil_preset = new Fl_Choice(555, 218, 76, 18, "Preset");
-        coil_preset->down_box(FL_BORDER_BOX);
-        coil_preset->selection_color(FL_FOREGROUND_COLOR);
-        coil_preset->labelsize(10);
-        coil_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_preset->textsize(10);
-        coil_preset->textcolor(FL_BACKGROUND2_COLOR);
-        coil_preset->callback((Fl_Callback*)cb_coil_preset, (void*)(12033));
-        coil_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        coil_preset->menu(menu_coil_preset);
-      } // Fl_Choice* coil_preset
-      { coil_WD = new SliderW(527, 239, 100, 10, "Gain");
-        coil_WD->type(5);
-        coil_WD->box(FL_FLAT_BOX);
-        coil_WD->color((Fl_Color)178);
-        coil_WD->selection_color((Fl_Color)62);
-        coil_WD->labeltype(FL_NORMAL_LABEL);
-        coil_WD->labelfont(0);
-        coil_WD->labelsize(10);
-        coil_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_WD->maximum(127);
-        coil_WD->step(1);
-        coil_WD->value(127);
-        coil_WD->textcolor(FL_BACKGROUND2_COLOR);
-        coil_WD->callback((Fl_Callback*)cb_coil_WD);
-        coil_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        coil_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* coil_WD
-      { coil_tone = new SliderW(527, 255, 100, 10, "Tone");
-        coil_tone->type(5);
-        coil_tone->box(FL_FLAT_BOX);
-        coil_tone->color((Fl_Color)178);
-        coil_tone->selection_color((Fl_Color)62);
-        coil_tone->labeltype(FL_NORMAL_LABEL);
-        coil_tone->labelfont(0);
-        coil_tone->labelsize(10);
-        coil_tone->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_tone->minimum(20);
-        coil_tone->maximum(4400);
-        coil_tone->step(1);
-        coil_tone->value(20);
-        coil_tone->textcolor(FL_BACKGROUND2_COLOR);
-        coil_tone->callback((Fl_Callback*)cb_coil_tone);
-        coil_tone->align(Fl_Align(FL_ALIGN_LEFT));
-        coil_tone->when(FL_WHEN_CHANGED);
-      } // SliderW* coil_tone
-      { coil_origin = new Fl_Choice(526, 269, 90, 18, "Origin");
-        coil_origin->down_box(FL_BORDER_BOX);
-        coil_origin->selection_color(FL_FOREGROUND_COLOR);
-        coil_origin->labelsize(10);
-        coil_origin->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_origin->textsize(10);
-        coil_origin->textcolor(FL_BACKGROUND2_COLOR);
-        coil_origin->callback((Fl_Callback*)cb_coil_origin, (void*)(12));
-        coil_origin->when(FL_WHEN_RELEASE_ALWAYS);
-        coil_origin->menu(menu_coil_origin);
-      } // Fl_Choice* coil_origin
-      { coil_freq1 = new SliderW(527, 293, 100, 10, "Freq1");
-        coil_freq1->type(5);
-        coil_freq1->box(FL_FLAT_BOX);
-        coil_freq1->color((Fl_Color)178);
-        coil_freq1->selection_color((Fl_Color)62);
-        coil_freq1->labeltype(FL_NORMAL_LABEL);
-        coil_freq1->labelfont(0);
-        coil_freq1->labelsize(10);
-        coil_freq1->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_freq1->minimum(2600);
-        coil_freq1->maximum(4500);
-        coil_freq1->step(1);
-        coil_freq1->value(3200);
-        coil_freq1->textcolor(FL_BACKGROUND2_COLOR);
-        coil_freq1->callback((Fl_Callback*)cb_coil_freq1);
-        coil_freq1->align(Fl_Align(FL_ALIGN_LEFT));
-        coil_freq1->when(FL_WHEN_CHANGED);
-      } // SliderW* coil_freq1
-      { coil_q1 = new SliderW(527, 308, 100, 10, "Q1");
-        coil_q1->type(5);
-        coil_q1->box(FL_FLAT_BOX);
-        coil_q1->color((Fl_Color)178);
-        coil_q1->selection_color((Fl_Color)62);
-        coil_q1->labeltype(FL_NORMAL_LABEL);
-        coil_q1->labelfont(0);
-        coil_q1->labelsize(10);
-        coil_q1->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_q1->minimum(10);
-        coil_q1->maximum(65);
-        coil_q1->step(1);
-        coil_q1->textcolor(FL_BACKGROUND2_COLOR);
-        coil_q1->callback((Fl_Callback*)cb_coil_q1);
-        coil_q1->align(Fl_Align(FL_ALIGN_LEFT));
-        coil_q1->when(FL_WHEN_CHANGED);
-      } // SliderW* coil_q1
-      { Fl_Choice* o = coil_destiny = new Fl_Choice(526, 321, 90, 18, "Destiny");
-        coil_destiny->down_box(FL_BORDER_BOX);
-        coil_destiny->selection_color(FL_FOREGROUND_COLOR);
-        coil_destiny->labelsize(10);
-        coil_destiny->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_destiny->textsize(10);
-        coil_destiny->textcolor(FL_BACKGROUND2_COLOR);
-        coil_destiny->callback((Fl_Callback*)cb_coil_destiny);
-        coil_destiny->when(FL_WHEN_RELEASE_ALWAYS);
-        o->menu(menu_coil_origin);
-      } // Fl_Choice* coil_destiny
-      { coil_freq2 = new SliderW(527, 346, 100, 10, "Freq2");
-        coil_freq2->type(5);
-        coil_freq2->box(FL_FLAT_BOX);
-        coil_freq2->color((Fl_Color)178);
-        coil_freq2->selection_color((Fl_Color)62);
-        coil_freq2->labeltype(FL_NORMAL_LABEL);
-        coil_freq2->labelfont(0);
-        coil_freq2->labelsize(10);
-        coil_freq2->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_freq2->minimum(2600);
-        coil_freq2->maximum(4500);
-        coil_freq2->step(1);
-        coil_freq2->value(3200);
-        coil_freq2->textcolor(FL_BACKGROUND2_COLOR);
-        coil_freq2->callback((Fl_Callback*)cb_coil_freq2);
-        coil_freq2->align(Fl_Align(FL_ALIGN_LEFT));
-        coil_freq2->when(FL_WHEN_CHANGED);
-      } // SliderW* coil_freq2
-      { coil_q2 = new SliderW(528, 361, 100, 10, "Q2");
-        coil_q2->type(5);
-        coil_q2->box(FL_FLAT_BOX);
-        coil_q2->color((Fl_Color)178);
-        coil_q2->selection_color((Fl_Color)62);
-        coil_q2->labeltype(FL_NORMAL_LABEL);
-        coil_q2->labelfont(0);
-        coil_q2->labelsize(10);
-        coil_q2->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_q2->minimum(10);
-        coil_q2->maximum(65);
-        coil_q2->step(1);
-        coil_q2->value(20);
-        coil_q2->textcolor(FL_BACKGROUND2_COLOR);
-        coil_q2->callback((Fl_Callback*)cb_coil_q2);
-        coil_q2->align(Fl_Align(FL_ALIGN_LEFT));
-        coil_q2->when(FL_WHEN_CHANGED);
-      } // SliderW* coil_q2
-      { coil_mode = new Fl_Check_Button(491, 375, 41, 15, "Pos.");
-        coil_mode->down_box(FL_BORDER_BOX);
-        coil_mode->labelsize(10);
-        coil_mode->labelcolor(FL_BACKGROUND2_COLOR);
-        coil_mode->callback((Fl_Callback*)cb_coil_mode, (void*)(2));
-      } // Fl_Check_Button* coil_mode
       COILCRAFTER->end();
-    } // Fl_Group* COILCRAFTER
+    } // CoilGui* COILCRAFTER
     { SHELFBOOST = new Fl_Group(321, 212, 158, 184);
       SHELFBOOST->box(FL_UP_BOX);
       SHELFBOOST->color(FL_FOREGROUND_COLOR);
@@ -11207,8 +10908,8 @@ void RKRGUI::Put_Loaded() {
        break;
        
        case 33:// CoilCrafter
-       coil_activar->value(rkr->CoilCrafter_Bypass);
-       coil_preset->do_callback(coil_preset,1);
+       COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
+       COILCRAFTER->coil_preset->do_callback(COILCRAFTER->coil_preset,1);
        break;
   
        case 34://ShelfBoost
@@ -11946,7 +11647,7 @@ void RKRGUI::reordena() {
   
        case 33:
          COILCRAFTER->position(x[i],y[i]);
-         coil_activar->shortcut(s[i]);
+         COILCRAFTER->coil_activar->shortcut(s[i]);
          if(!rkr->deachide)COILCRAFTER->show();
          if(rkr->CoilCrafter_Bypass)
          {
@@ -13737,28 +13438,28 @@ void RKRGUI::ActMIDI() {
        CONVOLOTRON->convo_length->redraw();
        break;
        case 286:
-       coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
-       coil_WD->redraw();
+       COILCRAFTER->coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
+       COILCRAFTER->coil_WD->redraw();
        break;
        case 287:
-       coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
-       coil_tone->redraw();
+       COILCRAFTER->coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
+       COILCRAFTER->coil_tone->redraw();
        break;
        case 288:
-       coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-       coil_freq1->redraw();
+       COILCRAFTER->coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
+       COILCRAFTER->coil_freq1->redraw();
        break;
        case 289:
-       coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
-       coil_q1->redraw();
+       COILCRAFTER->coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
+       COILCRAFTER->coil_q1->redraw();
        break;
        case 290:
-       coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-       coil_freq2->redraw();
+       COILCRAFTER->coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
+       COILCRAFTER->coil_freq2->redraw();
        break;
        case 291:
-       coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
-       coil_q2->redraw();
+       COILCRAFTER->coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
+       COILCRAFTER->coil_q2->redraw();
        break;
        case 292:
        shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
@@ -14368,8 +14069,8 @@ void RKRGUI::ActOnOff() {
     RBECHO->rbecho_activar->do_callback();
     break;
     case 33:
-    coil_activar->value(rkr->CoilCrafter_Bypass);
-    coil_activar->do_callback();
+    COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
+    COILCRAFTER->coil_activar->do_callback();
     break;
     case 34:
     shelf_activar->value(rkr->ShelfBoost_Bypass);
@@ -16185,7 +15886,7 @@ void RKRGUI::RandomPreset() {
        
        case 33:// CoilCrafter
        if (i<numEff)rkr->CoilCrafter_Bypass=1; else rkr->CoilCrafter_Bypass=0;
-       coil_activar->value(rkr->CoilCrafter_Bypass);
+       COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
        break;
   
        case 34://ShelfBoost
