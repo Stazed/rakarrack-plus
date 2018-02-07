@@ -170,6 +170,9 @@ decl {class CoilGui; // forward declaration} {public global
 decl {class ShelfGui; // forward declaration} {public global
 }
 
+decl {class VocoderGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -707,8 +710,8 @@ rkr->efx_FLimiter->limit=0;
 
 if(rkr->checkforaux())
 {
- if(vu_vu->value()!=rkr->efx_Vocoder->vulevel)
- vu_vu->value(rkr->efx_Vocoder->vulevel);
+ if(VOCODER->vu_vu->value()!=rkr->efx_Vocoder->vulevel)
+ VOCODER->vu_vu->value(rkr->efx_Vocoder->vulevel);
 }
 
 if (Sco->get_scope_ON())
@@ -1233,136 +1236,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group VOCODER {
         user_data 1
-        xywh {161 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button vo_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Vocoder_Bypass);
- return;
-}
-rkr->Vocoder_Bypass=(int)o->value();
-if((int) o->value()==0)
-vu_vu->value(-48);
-findpos(35,(int)o->value(),o);}
-          xywh {167 217 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice vo_preset {
-          label Preset
-          user_data 12035
-          callback {long long ud= (long long) v;
-        if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
-        vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
-        vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
-        vo_mu->value(rkr->efx_Vocoder->getpar(2));
-        vo_q->value(rkr->efx_Vocoder->getpar(3));
-        vo_input->value(rkr->efx_Vocoder->getpar(4));
-        vo_ring->value(rkr->efx_Vocoder->getpar(6));
-        vo_level->value(rkr->efx_Vocoder->getpar(5));}
-          xywh {240 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Vocoder 1}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Vocoder 2}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Vocoder 3}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Vocoder 4}
-            xywh {87 87 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider vo_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(296);
-         return;
-        }
-        rkr->efx_Vocoder->changepar(0,(int)(o->value()+64));}
-          xywh {213 243 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider vo_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(297);
-         return;
-        }
-        rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));}
-          xywh {213 263 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider vo_input {
-          label Input
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(298);
-         return;
-        }
-        rkr->efx_Vocoder->changepar(4,(int)o->value());}
-          xywh {213 283 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider vo_mu {
-          label {Muf.}
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(299);
-         return;
-        }
-        rkr->efx_Vocoder->changepar(2,(int)o->value());}
-          xywh {213 303 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider vo_q {
-          label Q
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(300);
-         return;
-        }
-        rkr->efx_Vocoder->changepar(3,(int)o->value());}
-          xywh {213 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider vo_ring {
-          label Ring
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(301);
-         return;
-        }
-        rkr->efx_Vocoder->changepar(6,(int)o->value());}
-          xywh {213 343 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider vo_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-        {
-         getMIDIControl(302);
-         return;
-        }
-        rkr->efx_Vocoder->changepar(5,(int)o->value());}
-          xywh {213 363 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Slider vu_vu {
-          xywh {168 268 11 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
-          class NewVum
-        }
-      }
+        xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "vocoder_gui.h"}
+        class VocoderGui
+      } {}
       Fl_Group SUSTAINER {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -6954,8 +6831,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
      
      case 35://Vocoder
-     vo_activar->value(rkr->Vocoder_Bypass);
-     vo_preset->do_callback(vo_preset,1);
+     VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
+     VOCODER->vo_preset->do_callback(VOCODER->vo_preset,1);
      break;
 
      case 36://Sustainer
@@ -7706,7 +7583,7 @@ switch (rkr->efx_order[i])
 
    case 35:
        VOCODER->position(x[i],y[i]);
-       vo_activar->shortcut(s[i]);
+       VOCODER->vo_activar->shortcut(s[i]);
        if(!rkr->deachide)VOCODER->show();
        if(rkr->Vocoder_Bypass)
        {
@@ -9505,32 +9382,32 @@ switch (i)
      SHELFBOOST->shelf_q1->redraw();     
      break;
      case 296:
-     vo_WD->value(rkr->efx_Vocoder->getpar(0)-64); 
-     vo_WD->redraw();
+     VOCODER->vo_WD->value(rkr->efx_Vocoder->getpar(0)-64); 
+     VOCODER->vo_WD->redraw();
      break;
      case 297:
-     vo_pan->value(rkr->efx_Vocoder->getpar(1)-64); 
-     vo_pan->redraw();
+     VOCODER->vo_pan->value(rkr->efx_Vocoder->getpar(1)-64); 
+     VOCODER->vo_pan->redraw();
      break;
      case 298:
-     vo_input->value(rkr->efx_Vocoder->getpar(4)); 
-     vo_input->redraw();
+     VOCODER->vo_input->value(rkr->efx_Vocoder->getpar(4)); 
+     VOCODER->vo_input->redraw();
      break;
      case 299:
-     vo_mu->value(rkr->efx_Vocoder->getpar(2)); 
-     vo_mu->redraw();
+     VOCODER->vo_mu->value(rkr->efx_Vocoder->getpar(2)); 
+     VOCODER->vo_mu->redraw();
      break;
      case 300:
-     vo_q->value(rkr->efx_Vocoder->getpar(3)); 
-     vo_q->redraw();
+     VOCODER->vo_q->value(rkr->efx_Vocoder->getpar(3)); 
+     VOCODER->vo_q->redraw();
      break;
      case 301:
-     vo_ring->value(rkr->efx_Vocoder->getpar(6)); 
-     vo_ring->redraw();
+     VOCODER->vo_ring->value(rkr->efx_Vocoder->getpar(6)); 
+     VOCODER->vo_ring->redraw();
      break;
      case 302:
-     vo_level->value(rkr->efx_Vocoder->getpar(5)); 
-     vo_level->redraw();
+     VOCODER->vo_level->value(rkr->efx_Vocoder->getpar(5)); 
+     VOCODER->vo_level->redraw();
      break;
      case 303:
      RBECHO->rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
@@ -10104,8 +9981,8 @@ switch(miralo)
   SHELFBOOST->shelf_activar->do_callback();
   break;
   case 35:
-  vo_activar->value(rkr->Vocoder_Bypass);
-  vo_activar->do_callback();
+  VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
+  VOCODER->vo_activar->do_callback();
   break;
   case 36:
   SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
@@ -11897,7 +11774,7 @@ for(i=0;i<10;i++)
      
      case 35://Vocoder
      if (i<numEff)rkr->Vocoder_Bypass=1; else rkr->Vocoder_Bypass=0;
-     vo_activar->value(rkr->Vocoder_Bypass);
+     VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
      break;
 
      case 36://Sustainer
