@@ -167,6 +167,9 @@ decl {class RbechoGui; // forward declaration} {public global
 decl {class CoilGui; // forward declaration} {public global
 }
 
+decl {class ShelfGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1224,103 +1227,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group SHELFBOOST {
         user_data 1
-        xywh {321 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button shelf_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->ShelfBoost_Bypass);
- return;
-}
-rkr->ShelfBoost_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_ShelfBoost->cleanup();
-findpos(34,(int)o->value(),o);}
-          xywh {326 216 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice shelf_preset {
-          label Preset
-          user_data 12034
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12034))rkr->efx_ShelfBoost->setpreset((int) o->value());
-shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
-shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
-shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
-shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
-shelf_level->value(rkr->efx_ShelfBoost->getpar(4));} open
-          xywh {398 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Treble
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Mid
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Low
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Distortion 1}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider shelf_gain {
-          label Gain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(292);
- return;
-}
-rkr->efx_ShelfBoost->changepar(0,(int)o->value());}
-          xywh {370 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shelf_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(293);
- return;
-}
-rkr->efx_ShelfBoost->changepar(4,(int)o->value());}
-          xywh {370 298 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shelf_freq1 {
-          label Tone
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(294);
- return;
-}
-rkr->efx_ShelfBoost->changepar(2,(int)o->value());}
-          xywh {370 318 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 220 maximum 16000 step 1 value 1000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shelf_q1 {
-          label {Pres.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(295);
- return;
-}
-rkr->efx_ShelfBoost->changepar(1,(int)o->value());}
-          xywh {370 338 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button shelf_mode {
-          label Stereo
-          user_data 2
-          callback {rkr->efx_ShelfBoost->changepar(3,(int)o->value());}
-          xywh {334 373 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-      }
+        xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "shelf_gui.h"}
+        class ShelfGui
+      } {}
       Fl_Group VOCODER {
         user_data 1
         xywh {161 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -7039,8 +6949,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 34://ShelfBoost
-     shelf_activar->value(rkr->ShelfBoost_Bypass);
-     shelf_preset->do_callback(shelf_preset,1);
+     SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
+     SHELFBOOST->shelf_preset->do_callback(SHELFBOOST->shelf_preset,1);
      break;
      
      case 35://Vocoder
@@ -7784,7 +7694,7 @@ switch (rkr->efx_order[i])
 
      case 34:
        SHELFBOOST->position(x[i],y[i]);
-       shelf_activar->shortcut(s[i]);
+       SHELFBOOST->shelf_activar->shortcut(s[i]);
        if(!rkr->deachide)SHELFBOOST->show();
        if(rkr->ShelfBoost_Bypass)
        {
@@ -9579,20 +9489,20 @@ switch (i)
      COILCRAFTER->coil_q2->redraw();
      break;
      case 292:
-     shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
-     shelf_gain->redraw();     
+     SHELFBOOST->shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
+     SHELFBOOST->shelf_gain->redraw();     
      break;
      case 293:
-     shelf_level->value(rkr->efx_ShelfBoost->getpar(4));
-     shelf_level->redraw();     
+     SHELFBOOST->shelf_level->value(rkr->efx_ShelfBoost->getpar(4));
+     SHELFBOOST->shelf_level->redraw();     
      break;
      case 294:
-     shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
-     shelf_freq1->redraw();     
+     SHELFBOOST->shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
+     SHELFBOOST->shelf_freq1->redraw();     
      break;
      case 295:
-     shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
-     shelf_q1->redraw();     
+     SHELFBOOST->shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
+     SHELFBOOST->shelf_q1->redraw();     
      break;
      case 296:
      vo_WD->value(rkr->efx_Vocoder->getpar(0)-64); 
@@ -10190,8 +10100,8 @@ switch(miralo)
   COILCRAFTER->coil_activar->do_callback();
   break;
   case 34:
-  shelf_activar->value(rkr->ShelfBoost_Bypass);
-  shelf_activar->do_callback();
+  SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
+  SHELFBOOST->shelf_activar->do_callback();
   break;
   case 35:
   vo_activar->value(rkr->Vocoder_Bypass);
@@ -11982,7 +11892,7 @@ for(i=0;i<10;i++)
 
      case 34://ShelfBoost
      if (i<numEff)rkr->ShelfBoost_Bypass=1; else rkr->ShelfBoost_Bypass=0;
-     shelf_activar->value(rkr->ShelfBoost_Bypass);
+     SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
      break;
      
      case 35://Vocoder

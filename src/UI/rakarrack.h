@@ -58,6 +58,7 @@ class LooperGui; // forward declaration
 class RyanwahGui; // forward declaration
 class RbechoGui; // forward declaration
 class CoilGui; // forward declaration
+class ShelfGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -98,11 +99,12 @@ class SustainGui; // forward declaration
 #include "ryanwah_gui.h"
 #include "rbecho_gui.h"
 #include "coil_gui.h"
+#include "shelf_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 #include "sustain_gui.h"
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Input.H>
@@ -295,43 +297,7 @@ public:
   RyanwahGui *RYANWAH;
   RbechoGui *RBECHO;
   CoilGui *COILCRAFTER;
-  Fl_Group *SHELFBOOST;
-  Fl_Light_Button *shelf_activar;
-private:
-  inline void cb_shelf_activar_i(Fl_Light_Button*, void*);
-  static void cb_shelf_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *shelf_preset;
-private:
-  inline void cb_shelf_preset_i(Fl_Choice*, void*);
-  static void cb_shelf_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_shelf_preset[];
-public:
-  SliderW *shelf_gain;
-private:
-  inline void cb_shelf_gain_i(SliderW*, void*);
-  static void cb_shelf_gain(SliderW*, void*);
-public:
-  SliderW *shelf_level;
-private:
-  inline void cb_shelf_level_i(SliderW*, void*);
-  static void cb_shelf_level(SliderW*, void*);
-public:
-  SliderW *shelf_freq1;
-private:
-  inline void cb_shelf_freq1_i(SliderW*, void*);
-  static void cb_shelf_freq1(SliderW*, void*);
-public:
-  SliderW *shelf_q1;
-private:
-  inline void cb_shelf_q1_i(SliderW*, void*);
-  static void cb_shelf_q1(SliderW*, void*);
-public:
-  Fl_Check_Button *shelf_mode;
-private:
-  inline void cb_shelf_mode_i(Fl_Check_Button*, void*);
-  static void cb_shelf_mode(Fl_Check_Button*, void*);
-public:
+  ShelfGui *SHELFBOOST;
   Fl_Group *VOCODER;
   Fl_Light_Button *vo_activar;
 private:
