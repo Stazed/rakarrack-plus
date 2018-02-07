@@ -55,6 +55,16 @@ Fl_Menu_Item CommonGuiMenu::menu_distortion_type[] = {
  {"Diode clipper", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
+
+Fl_Menu_Item CommonGuiMenu::menu_subdiv_type[] = {
+ {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"1/6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 CommonGuiMenu::CommonGuiMenu(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
@@ -72,7 +82,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   lfo_type->user_data((void*)(12));
   lfo_type->menu(menu_lfo_type);
 } // Fl_Choice* lfo_type
-{ distortion_type = new Fl_Choice(44, 101, 70, 16, "Type");
+{ distortion_type = new Fl_Choice(39, 105, 70, 16, "Type");
   distortion_type->down_box(FL_BORDER_BOX);
   distortion_type->selection_color(FL_FOREGROUND_COLOR);
   distortion_type->labelsize(10);
@@ -82,6 +92,17 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   distortion_type->user_data((void*)(12));
   distortion_type->menu(menu_distortion_type);
 } // Fl_Choice* distortion_type
+{ subdiv_type = new Fl_Choice(73, 42, 76, 18, "SubDivision");
+  subdiv_type->down_box(FL_BORDER_BOX);
+  subdiv_type->selection_color(FL_FOREGROUND_COLOR);
+  subdiv_type->labelsize(10);
+  subdiv_type->labelcolor(FL_BACKGROUND2_COLOR);
+  subdiv_type->textsize(10);
+  subdiv_type->textcolor(FL_BACKGROUND2_COLOR);
+  subdiv_type->user_data((void*)(12));
+  subdiv_type->when(FL_WHEN_RELEASE_ALWAYS);
+  subdiv_type->menu(menu_subdiv_type);
+} // Fl_Choice* subdiv_type
 position(X, Y);
 end();
 }
@@ -98,4 +119,11 @@ Fl_Menu_Item * CommonGuiMenu::get_lfo_type() {
 */
 Fl_Menu_Item* CommonGuiMenu::get_distortion_type() {
   return menu_distortion_type;
+}
+
+/**
+ Common menu types used by many efx.
+*/
+Fl_Menu_Item * CommonGuiMenu::get_subdiv_type() {
+  return menu_subdiv_type;
 }

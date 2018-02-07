@@ -63,7 +63,7 @@ widget_class CommonGuiMenu {
   Fl_Choice distortion_type {
     label Type
     user_data 12
-    xywh {44 101 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    xywh {39 105 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
   } {
     MenuItem {} {
       label Atan
@@ -188,14 +188,49 @@ If any of these menu items change here, then they must be changed in the others.
       xywh {10 10 36 21} labelsize 9
     }
   }
+  Fl_Choice subdiv_type {
+    label SubDivision
+    user_data 12 selected
+    xywh {73 42 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label 1
+      xywh {87 87 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {1/2}
+      xywh {87 87 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {1/3}
+      xywh {87 87 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {1/4}
+      xywh {97 97 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {1/5}
+      xywh {107 107 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {1/6}
+      xywh {127 127 36 21} labelsize 10
+    }
+  }
   Function {get_lfo_type()} {
     comment {Common menu types used by many efx.} open return_type {Fl_Menu_Item *}
   } {
     code {return menu_lfo_type;} {}
   }
   Function {get_distortion_type()} {
-    comment {Common distortion types used by various efx.} open selected return_type {Fl_Menu_Item*}
+    comment {Common distortion types used by various efx.} open return_type {Fl_Menu_Item*}
   } {
     code {return menu_distortion_type;} {}
+  }
+  Function {get_subdiv_type()} {
+    comment {Common menu types used by many efx.} open return_type {Fl_Menu_Item *}
+  } {
+    code {return menu_subdiv_type;} {}
   }
 }

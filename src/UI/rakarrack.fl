@@ -137,6 +137,9 @@ decl {class ExciterGui; // forward declaration} {public global
 decl {class MbdistGui; // forward declaration} {public global
 }
 
+decl {class ArpieGui; // forward declaration} {public global
+}
+
 decl {class SustainGui; // forward declaration} {public global
 }
 
@@ -1134,233 +1137,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group ARPIE {
         user_data 1
-        xywh {161 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button arpie_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Arpie_Bypass);
- return;
-}
-rkr->Arpie_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Arpie->cleanup();
-findpos(24,(int)o->value(),o);}
-          xywh {166 215 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice arpie_preset {
-          label Preset
-          user_data 12024
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
-arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
-arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
-arpie_delay->value(rkr->efx_Arpie->getpar(2));
-arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
-arpie_LRc->value(rkr->efx_Arpie->getpar(4)-64);
-arpie_fb->value(rkr->efx_Arpie->getpar(5));
-arpie_damp->value(rkr->efx_Arpie->getpar(6));
-arpie_arpe->value(rkr->efx_Arpie->getpar(7));
-arpie_harm->value(rkr->efx_Arpie->getpar(8));
-arpie_pattern->value(rkr->efx_Arpie->getpar(9));
-arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
-          xywh {238 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Arpie 1}
-            xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Arpie 2}
-            xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Arpie 3}
-            xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Simple Arpie}
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Canyon
-            xywh {87 87 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Panning Arpie 1}
-            xywh {107 107 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Panning Arpie 2}
-            xywh {117 117 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Panning Arpie 3}
-            xywh {127 127 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Feedback Arpie}
-            xywh {137 137 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider arpie_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(212);
- return;
-} 
-rkr->efx_Arpie->changepar(0,(int)(o->value()+64));}
-          xywh {212 239 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider arpie_arpe {
-          label {Arpe's}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(213);
- return;
-} 
-rkr->efx_Arpie->changepar(7,(int)o->value());}
-          xywh {212 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider arpie_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(214);
- return;
-} 
-rkr->efx_Arpie->changepar(1,(int)(o->value()+64));}
-          xywh {212 267 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider arpie_delay {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(215);
- return;
-} 
-rkr->efx_Arpie->changepar(2,(int)o->value());}
-          xywh {212 281 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice arpie_subdiv {
-          label SubDivision
-          user_data 12
-          callback {rkr->efx_Arpie->changepar(10,(int)o->value());}
-          xywh {239 293 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label 1
-            xywh {87 87 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {1/2}
-            xywh {87 87 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {1/3}
-            xywh {87 87 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {1/4}
-            xywh {97 97 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {1/5}
-            xywh {107 107 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {1/6}
-            xywh {127 127 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider arpie_LRdl {
-          label {LRdl.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(216);
- return;
-} 
-rkr->efx_Arpie->changepar(3,(int)o->value());}
-          xywh {212 314 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider arpie_LRc {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(217);
- return;
-} 
-rkr->efx_Arpie->changepar(4,(int)(o->value()+64));}
-          xywh {212 329 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider arpie_fb {
-          label {Fb.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(218);
- return;
-} 
-rkr->efx_Arpie->changepar(5,(int)o->value());}
-          xywh {212 344 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider arpie_damp {
-          label Damp
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(219);
- return;
-} 
-rkr->efx_Arpie->changepar(6,(int)o->value());}
-          xywh {212 378 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Counter arpie_harm {
-          label H
-          callback {rkr->efx_Arpie->changepar(8,(int)o->value());}
-          tooltip {Number of steps in the pattern} xywh {181 361 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
-        }
-        Fl_Choice arpie_pattern {
-          user_data 12
-          callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
-          xywh {238 358 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Ascending
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Descending
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label UpDown
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Stutter
-            xywh {87 87 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Interrupted Descent}
-            xywh {97 97 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Double Descend }
-            xywh {117 117 36 21} labelsize 10
-          }
-        }
-      }
+        xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "arpie_gui.h"}
+        class ArpieGui
+      } {}
       Fl_Group EXPANDER {
         user_data 1
         xywh {321 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -2998,7 +2778,7 @@ rkr->efx_RBEcho->changepar(5,(int)o->value());}
           label SubDivision
           callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open
           xywh {552 323 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-          code0 {o->menu(menu_arpie_subdiv);}
+          code0 {o->menu(ARPIE->get_menu_arpie_subdiv_type());}
         } {}
         Fl_Value_Slider rbecho_damp {
           label Damp
@@ -8970,8 +8750,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 24://Arpie
-     arpie_activar->value(rkr->Arpie_Bypass);
-     arpie_preset->do_callback(arpie_preset,1);
+     ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
+     ARPIE->arpie_preset->do_callback(ARPIE->arpie_preset,1);
      break;
 
      case 25://Expander
@@ -9645,7 +9425,7 @@ switch (rkr->efx_order[i])
      
      case 24:
        ARPIE->position(x[i],y[i]);
-       arpie_activar->shortcut(s[i]);
+       ARPIE->arpie_activar->shortcut(s[i]);
        if(!rkr->deachide)ARPIE->show();
        if(rkr->Arpie_Bypass)
        {
@@ -11241,36 +11021,36 @@ switch (i)
      MBDIST->mbdist_pan->redraw();
      break;
      case 212:
-     arpie_WD->value(rkr->efx_Arpie->getpar(0));
-     arpie_WD->redraw();
+     ARPIE->arpie_WD->value(rkr->efx_Arpie->getpar(0));
+     ARPIE->arpie_WD->redraw();
      break; 	
      case 213:
-     arpie_arpe->value(rkr->efx_Arpie->getpar(7));
-     arpie_arpe->redraw();
+     ARPIE->arpie_arpe->value(rkr->efx_Arpie->getpar(7));
+     ARPIE->arpie_arpe->redraw();
      break; 	
      case 214:
-     arpie_pan->value(rkr->efx_Arpie->getpar(1));
-     arpie_pan->redraw();
+     ARPIE->arpie_pan->value(rkr->efx_Arpie->getpar(1));
+     ARPIE->arpie_pan->redraw();
      break; 	
      case 215:
-     arpie_delay->value(rkr->efx_Arpie->getpar(2));
-     arpie_delay->redraw();
+     ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(2));
+     ARPIE->arpie_delay->redraw();
      break; 	
      case 216:
-     arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
-     arpie_LRdl->redraw();
+     ARPIE->arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
+     ARPIE->arpie_LRdl->redraw();
      break; 	
      case 217:
-     arpie_LRc->value(rkr->efx_Arpie->getpar(4));
-     arpie_LRc->redraw();
+     ARPIE->arpie_LRc->value(rkr->efx_Arpie->getpar(4));
+     ARPIE->arpie_LRc->redraw();
      break; 	
      case 218:
-     arpie_fb->value(rkr->efx_Arpie->getpar(5));
-     arpie_fb->redraw();
+     ARPIE->arpie_fb->value(rkr->efx_Arpie->getpar(5));
+     ARPIE->arpie_fb->redraw();
      break; 	
      case 219:
-     arpie_damp->value(rkr->efx_Arpie->getpar(6));
-     arpie_damp->redraw();
+     ARPIE->arpie_damp->value(rkr->efx_Arpie->getpar(6));
+     ARPIE->arpie_damp->redraw();
      break; 	
      case 220:
      expander_ATime->value(rkr->efx_Expander->getpar(3));
@@ -12132,8 +11912,8 @@ switch(miralo)
   MBDIST->mbdist_activar->do_callback();
   break;
   case 24:
-  arpie_activar->value(rkr->Arpie_Bypass);
-  arpie_activar->do_callback();
+  ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
+  ARPIE->arpie_activar->do_callback();
   break;
   case 25:
   expander_activar->value(rkr->Expander_Bypass);
@@ -13056,8 +12836,8 @@ if(rkr->Chorus_Bypass)
   
   if(rkr->Arpie_Bypass)
   {
-  arpie_delay->value(rkr->efx_Arpie->getpar(2));
-  arpie_delay->redraw();
+  ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(2));
+  ARPIE->arpie_delay->redraw();
   }
  
   if(rkr->RBEcho_Bypass)
@@ -13913,7 +13693,7 @@ for(i=0;i<10;i++)
 
      case 24://Arpie
      if (i<numEff)rkr->Arpie_Bypass=1;else rkr->Arpie_Bypass=0;
-     arpie_activar->value(rkr->Arpie_Bypass);
+     ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
      break;
 
      case 25://Expander

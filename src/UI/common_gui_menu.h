@@ -13,7 +13,10 @@ public:
   static Fl_Menu_Item menu_lfo_type[];
   Fl_Choice *distortion_type;
   static Fl_Menu_Item menu_distortion_type[];
+  Fl_Choice *subdiv_type;
+  static Fl_Menu_Item menu_subdiv_type[];
   Fl_Menu_Item * get_lfo_type();
   Fl_Menu_Item* get_distortion_type();
+  Fl_Menu_Item * get_subdiv_type();
 };
 #endif

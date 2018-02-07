@@ -48,6 +48,7 @@ class DflangeGui; // forward declaration
 class RingGui; // forward declaration
 class ExciterGui; // forward declaration
 class MbdistGui; // forward declaration
+class ArpieGui; // forward declaration
 class SustainGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -78,11 +79,12 @@ class SustainGui; // forward declaration
 #include "ring_gui.h"
 #include "exciter_gui.h"
 #include "mbdist_gui.h"
+#include "arpie_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 #include <FL/Fl_Check_Button.H>
+#include <FL/Fl_Counter.H>
 #include "sustain_gui.h"
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Input.H>
@@ -265,75 +267,7 @@ public:
   RingGui *RING;
   ExciterGui *EXCITER;
   MbdistGui *MBDIST;
-  Fl_Group *ARPIE;
-  Fl_Light_Button *arpie_activar;
-private:
-  inline void cb_arpie_activar_i(Fl_Light_Button*, void*);
-  static void cb_arpie_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *arpie_preset;
-private:
-  inline void cb_arpie_preset_i(Fl_Choice*, void*);
-  static void cb_arpie_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_arpie_preset[];
-public:
-  SliderW *arpie_WD;
-private:
-  inline void cb_arpie_WD_i(SliderW*, void*);
-  static void cb_arpie_WD(SliderW*, void*);
-public:
-  SliderW *arpie_arpe;
-private:
-  inline void cb_arpie_arpe_i(SliderW*, void*);
-  static void cb_arpie_arpe(SliderW*, void*);
-public:
-  SliderW *arpie_pan;
-private:
-  inline void cb_arpie_pan_i(SliderW*, void*);
-  static void cb_arpie_pan(SliderW*, void*);
-public:
-  SliderW *arpie_delay;
-private:
-  inline void cb_arpie_delay_i(SliderW*, void*);
-  static void cb_arpie_delay(SliderW*, void*);
-public:
-  Fl_Choice *arpie_subdiv;
-private:
-  inline void cb_arpie_subdiv_i(Fl_Choice*, void*);
-  static void cb_arpie_subdiv(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_arpie_subdiv[];
-public:
-  SliderW *arpie_LRdl;
-private:
-  inline void cb_arpie_LRdl_i(SliderW*, void*);
-  static void cb_arpie_LRdl(SliderW*, void*);
-public:
-  SliderW *arpie_LRc;
-private:
-  inline void cb_arpie_LRc_i(SliderW*, void*);
-  static void cb_arpie_LRc(SliderW*, void*);
-public:
-  SliderW *arpie_fb;
-private:
-  inline void cb_arpie_fb_i(SliderW*, void*);
-  static void cb_arpie_fb(SliderW*, void*);
-public:
-  SliderW *arpie_damp;
-private:
-  inline void cb_arpie_damp_i(SliderW*, void*);
-  static void cb_arpie_damp(SliderW*, void*);
-public:
-  Fl_Counter *arpie_harm;
-private:
-  inline void cb_arpie_harm_i(Fl_Counter*, void*);
-  static void cb_arpie_harm(Fl_Counter*, void*);
-public:
-  Fl_Choice *arpie_pattern;
-private:
-  inline void cb_arpie_pattern_i(Fl_Choice*, void*);
-  static void cb_arpie_pattern(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_arpie_pattern[];
-public:
+  ArpieGui *ARPIE;
   Fl_Group *EXPANDER;
   Fl_Light_Button *expander_activar;
 private:
