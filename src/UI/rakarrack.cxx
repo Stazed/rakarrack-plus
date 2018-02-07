@@ -751,168 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_convo_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Convol_Bypass);
- return;
-}
-rkr->Convol_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Convol->cleanup();
-findpos(29,(int)o->value(),o);
-}
-void RKRGUI::cb_convo_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_activar_i(o,v);
-}
-
-void RKRGUI::cb_convo_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12029))rkr->efx_Convol->setpreset((int) o->value());
-convo_pan->value(rkr->efx_Convol->getpar(1)-64);
-convo_level->value(rkr->efx_Convol->getpar(7));
-convo_WD->value(rkr->efx_Convol->getpar(0)-64);
-convo_damp->value(rkr->efx_Convol->getpar(6));
-convo_fnum->value(rkr->efx_Convol->getpar(8));
-convo_length->value(rkr->efx_Convol->getpar(3));
-convo_user->value(rkr->efx_Convol->getpar(4));
-convo_user->do_callback();
-convo_safe->value(rkr->efx_Convol->getpar(2));
-convo_fb->value(rkr->efx_Convol->getpar(10));
-}
-void RKRGUI::cb_convo_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_convo_preset[] = {
- {"Marshall JCM200", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Superchamp", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Mesa Boogie", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Mesa Boogie 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_convo_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(280);
- return;
-}
-rkr->efx_Convol->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_convo_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_WD_i(o,v);
-}
-
-void RKRGUI::cb_convo_pan_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(281);
- return;
-}
-rkr->efx_Convol->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_convo_pan(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_pan_i(o,v);
-}
-
-void RKRGUI::cb_convo_level_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(282);
- return;
-}
-rkr->efx_Convol->changepar(7,(int)o->value());
-}
-void RKRGUI::cb_convo_level(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_level_i(o,v);
-}
-
-void RKRGUI::cb_convo_damp_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(283);
- return;
-}
-rkr->efx_Convol->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_convo_damp(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_damp_i(o,v);
-}
-
-void RKRGUI::cb_convo_fb_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(284);
- return;
-}
-rkr->efx_Convol->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_convo_fb(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_fb_i(o,v);
-}
-
-void RKRGUI::cb_convo_length_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(285);
- return;
-}
-rkr->efx_Convol->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_convo_length(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_length_i(o,v);
-}
-
-void RKRGUI::cb_convo_user_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Convol->changepar(4,(int)o->value());
-
-if((int)o->value())B_wav->activate(); else B_wav->deactivate();
-}
-void RKRGUI::cb_convo_user(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_user_i(o,v);
-}
-
-void RKRGUI::cb_convo_safe_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Convol->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_convo_safe(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_safe_i(o,v);
-}
-
-void RKRGUI::cb_B_wav_i(Fl_Button*, void*) {
-  char *filename;
-filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".wav");
-strcpy(rkr->efx_Convol->Filename,filename);
-rkr->efx_Convol->setfile(USERFILE);
-}
-void RKRGUI::cb_B_wav(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_wav_i(o,v);
-}
-
-void RKRGUI::cb_convo_fnum_i(Fl_Choice* o, void*) {
-  rkr->efx_Convol->changepar(8,(int)o->value());
-}
-void RKRGUI::cb_convo_fnum(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_convo_fnum_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_convo_fnum[] = {
- {"Marshall JCM200", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Fender Superchamp", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Mesa Boogie", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Mesa Boogie 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Marshall Plexi", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Bassman", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"JCM2000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Ampeg", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Marshall2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_looper_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -6611,164 +6449,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       MBVVOL->hide();
       MBVVOL->end();
     } // MbvvolGui* MBVVOL
-    { CONVOLOTRON = new Fl_Group(322, 213, 158, 184);
+    { CONVOLOTRON = new ConvoGui(639, 413, 158, 184);
       CONVOLOTRON->box(FL_UP_BOX);
       CONVOLOTRON->color(FL_FOREGROUND_COLOR);
       CONVOLOTRON->selection_color(FL_FOREGROUND_COLOR);
+      CONVOLOTRON->labeltype(FL_NORMAL_LABEL);
       CONVOLOTRON->labelfont(1);
+      CONVOLOTRON->labelsize(14);
+      CONVOLOTRON->labelcolor(FL_FOREGROUND_COLOR);
       CONVOLOTRON->user_data((void*)(1));
       CONVOLOTRON->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      CONVOLOTRON->when(FL_WHEN_RELEASE);
       CONVOLOTRON->hide();
-      { convo_activar = new Fl_Light_Button(328, 217, 34, 18, "On");
-        convo_activar->shortcut(0x35);
-        convo_activar->color((Fl_Color)62);
-        convo_activar->selection_color((Fl_Color)1);
-        convo_activar->labelsize(10);
-        convo_activar->callback((Fl_Callback*)cb_convo_activar, (void*)(2));
-        convo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        convo_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* convo_activar
-      { convo_preset = new Fl_Choice(401, 217, 76, 18, "Preset");
-        convo_preset->down_box(FL_BORDER_BOX);
-        convo_preset->selection_color(FL_FOREGROUND_COLOR);
-        convo_preset->labelsize(10);
-        convo_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_preset->textsize(10);
-        convo_preset->textcolor(FL_BACKGROUND2_COLOR);
-        convo_preset->callback((Fl_Callback*)cb_convo_preset, (void*)(12029));
-        convo_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        convo_preset->menu(menu_convo_preset);
-      } // Fl_Choice* convo_preset
-      { convo_WD = new SliderW(374, 243, 100, 10, "Wet/Dry");
-        convo_WD->type(5);
-        convo_WD->box(FL_FLAT_BOX);
-        convo_WD->color((Fl_Color)178);
-        convo_WD->selection_color((Fl_Color)62);
-        convo_WD->labeltype(FL_NORMAL_LABEL);
-        convo_WD->labelfont(0);
-        convo_WD->labelsize(10);
-        convo_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_WD->minimum(-64);
-        convo_WD->maximum(64);
-        convo_WD->step(1);
-        convo_WD->textcolor(FL_BACKGROUND2_COLOR);
-        convo_WD->callback((Fl_Callback*)cb_convo_WD);
-        convo_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        convo_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* convo_WD
-      { convo_pan = new SliderW(374, 259, 100, 10, "Pan");
-        convo_pan->type(5);
-        convo_pan->box(FL_FLAT_BOX);
-        convo_pan->color((Fl_Color)178);
-        convo_pan->selection_color((Fl_Color)62);
-        convo_pan->labeltype(FL_NORMAL_LABEL);
-        convo_pan->labelfont(0);
-        convo_pan->labelsize(10);
-        convo_pan->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_pan->minimum(-64);
-        convo_pan->maximum(63);
-        convo_pan->step(1);
-        convo_pan->textcolor(FL_BACKGROUND2_COLOR);
-        convo_pan->callback((Fl_Callback*)cb_convo_pan);
-        convo_pan->align(Fl_Align(FL_ALIGN_LEFT));
-        convo_pan->when(FL_WHEN_CHANGED);
-      } // SliderW* convo_pan
-      { convo_level = new SliderW(374, 275, 100, 10, "Level");
-        convo_level->type(5);
-        convo_level->box(FL_FLAT_BOX);
-        convo_level->color((Fl_Color)178);
-        convo_level->selection_color((Fl_Color)62);
-        convo_level->labeltype(FL_NORMAL_LABEL);
-        convo_level->labelfont(0);
-        convo_level->labelsize(10);
-        convo_level->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_level->maximum(127);
-        convo_level->step(1);
-        convo_level->textcolor(FL_BACKGROUND2_COLOR);
-        convo_level->callback((Fl_Callback*)cb_convo_level);
-        convo_level->align(Fl_Align(FL_ALIGN_LEFT));
-        convo_level->when(FL_WHEN_CHANGED);
-      } // SliderW* convo_level
-      { convo_damp = new SliderW(374, 291, 100, 10, "Damp");
-        convo_damp->type(5);
-        convo_damp->box(FL_FLAT_BOX);
-        convo_damp->color((Fl_Color)178);
-        convo_damp->selection_color((Fl_Color)62);
-        convo_damp->labeltype(FL_NORMAL_LABEL);
-        convo_damp->labelfont(0);
-        convo_damp->labelsize(10);
-        convo_damp->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_damp->maximum(127);
-        convo_damp->step(1);
-        convo_damp->textcolor(FL_BACKGROUND2_COLOR);
-        convo_damp->callback((Fl_Callback*)cb_convo_damp);
-        convo_damp->align(Fl_Align(FL_ALIGN_LEFT));
-        convo_damp->when(FL_WHEN_CHANGED);
-      } // SliderW* convo_damp
-      { convo_fb = new SliderW(374, 307, 100, 10, "Fb");
-        convo_fb->type(5);
-        convo_fb->box(FL_FLAT_BOX);
-        convo_fb->color((Fl_Color)178);
-        convo_fb->selection_color((Fl_Color)62);
-        convo_fb->labeltype(FL_NORMAL_LABEL);
-        convo_fb->labelfont(0);
-        convo_fb->labelsize(10);
-        convo_fb->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_fb->minimum(-64);
-        convo_fb->maximum(64);
-        convo_fb->step(1);
-        convo_fb->textcolor(FL_BACKGROUND2_COLOR);
-        convo_fb->callback((Fl_Callback*)cb_convo_fb);
-        convo_fb->align(Fl_Align(FL_ALIGN_LEFT));
-        convo_fb->when(FL_WHEN_CHANGED);
-      } // SliderW* convo_fb
-      { convo_length = new SliderW(374, 323, 100, 10, "Length");
-        convo_length->type(5);
-        convo_length->box(FL_FLAT_BOX);
-        convo_length->color((Fl_Color)178);
-        convo_length->selection_color((Fl_Color)62);
-        convo_length->labeltype(FL_NORMAL_LABEL);
-        convo_length->labelfont(0);
-        convo_length->labelsize(10);
-        convo_length->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_length->minimum(5);
-        convo_length->maximum(250);
-        convo_length->step(1);
-        convo_length->value(100);
-        convo_length->textcolor(FL_BACKGROUND2_COLOR);
-        convo_length->callback((Fl_Callback*)cb_convo_length);
-        convo_length->align(Fl_Align(FL_ALIGN_LEFT));
-        convo_length->when(FL_WHEN_RELEASE);
-      } // SliderW* convo_length
-      { convo_user = new Fl_Check_Button(432, 339, 43, 15, "User");
-        convo_user->down_box(FL_BORDER_BOX);
-        convo_user->labelsize(10);
-        convo_user->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_user->callback((Fl_Callback*)cb_convo_user, (void*)(2));
-      } // Fl_Check_Button* convo_user
-      { convo_safe = new Fl_Check_Button(341, 354, 73, 15, "Safe Mode");
-        convo_safe->down_box(FL_BORDER_BOX);
-        convo_safe->labelsize(10);
-        convo_safe->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_safe->callback((Fl_Callback*)cb_convo_safe, (void*)(2));
-      } // Fl_Check_Button* convo_safe
-      { B_wav = new Fl_Button(428, 356, 46, 12, "Browse");
-        B_wav->labelsize(10);
-        B_wav->callback((Fl_Callback*)cb_B_wav, (void*)(2));
-        B_wav->deactivate();
-      } // Fl_Button* B_wav
-      { convo_fnum = new Fl_Choice(373, 372, 101, 16, "Preset");
-        convo_fnum->down_box(FL_BORDER_BOX);
-        convo_fnum->selection_color(FL_FOREGROUND_COLOR);
-        convo_fnum->labelsize(10);
-        convo_fnum->labelcolor(FL_BACKGROUND2_COLOR);
-        convo_fnum->textsize(10);
-        convo_fnum->textcolor(FL_BACKGROUND2_COLOR);
-        convo_fnum->callback((Fl_Callback*)cb_convo_fnum, (void*)(12));
-        convo_fnum->menu(menu_convo_fnum);
-      } // Fl_Choice* convo_fnum
       CONVOLOTRON->end();
-    } // Fl_Group* CONVOLOTRON
+    } // ConvoGui* CONVOLOTRON
     { LOOPER = new Fl_Group(319, 213, 158, 184);
       LOOPER->box(FL_UP_BOX);
       LOOPER->color(FL_FOREGROUND_COLOR);
@@ -12854,8 +12548,8 @@ void RKRGUI::Put_Loaded() {
        break;
   
        case 29://Convolotron
-       convo_activar->value(rkr->Convol_Bypass);
-       convo_preset->do_callback(convo_preset,1);
+       CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
+       CONVOLOTRON->convo_preset->do_callback(CONVOLOTRON->convo_preset,1);
        break; 
   
        case 30://Looper
@@ -13566,7 +13260,7 @@ void RKRGUI::reordena() {
   
        case 29:
          CONVOLOTRON->position(x[i],y[i]);
-         convo_activar->shortcut(s[i]);
+         CONVOLOTRON->convo_activar->shortcut(s[i]);
          if(!rkr->deachide)CONVOLOTRON->show();
          if(rkr->Convol_Bypass)
          {
@@ -15381,28 +15075,28 @@ void RKRGUI::ActMIDI() {
        update_looper();
        break;
        case 280:
-       convo_WD->value(rkr->efx_Convol->getpar(0)-64);
-       convo_WD->redraw();
+       CONVOLOTRON->convo_WD->value(rkr->efx_Convol->getpar(0)-64);
+       CONVOLOTRON->convo_WD->redraw();
        break;
        case 281:
-       convo_pan->value(rkr->efx_Convol->getpar(1)-64);
-       convo_pan->redraw();
+       CONVOLOTRON->convo_pan->value(rkr->efx_Convol->getpar(1)-64);
+       CONVOLOTRON->convo_pan->redraw();
        break;
        case 282:
-       convo_level->value(rkr->efx_Convol->getpar(7));
-       convo_level->redraw();
+       CONVOLOTRON->convo_level->value(rkr->efx_Convol->getpar(7));
+       CONVOLOTRON->convo_level->redraw();
        break;
        case 283:
-       convo_damp->value(rkr->efx_Convol->getpar(6));
-       convo_damp->redraw();
+       CONVOLOTRON->convo_damp->value(rkr->efx_Convol->getpar(6));
+       CONVOLOTRON->convo_damp->redraw();
        break;
        case 284:
-       convo_fb->value(rkr->efx_Convol->getpar(10));
-       convo_fb->redraw();
+       CONVOLOTRON->convo_fb->value(rkr->efx_Convol->getpar(10));
+       CONVOLOTRON->convo_fb->redraw();
        break;
        case 285:
-       convo_length->value(rkr->efx_Convol->getpar(3));
-       convo_length->redraw();
+       CONVOLOTRON->convo_length->value(rkr->efx_Convol->getpar(3));
+       CONVOLOTRON->convo_length->redraw();
        break;
        case 286:
        coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
@@ -16020,8 +15714,8 @@ void RKRGUI::ActOnOff() {
     MBVVOL->mbvvol_activar->do_callback();
     break;
     case 29:
-    convo_activar->value(rkr->Convol_Bypass);
-    convo_activar->do_callback();
+    CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
+    CONVOLOTRON->convo_activar->do_callback();
     break;
     case 30:
     looper_activar->value(rkr->Looper_Bypass);
@@ -17832,7 +17526,7 @@ void RKRGUI::RandomPreset() {
   
        case 29://Convolotron
        if (i<numEff)rkr->Convol_Bypass=1; else rkr->Convol_Bypass=0;
-       convo_activar->value(rkr->Convol_Bypass);
+       CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
        break; 
   
        case 30://Looper

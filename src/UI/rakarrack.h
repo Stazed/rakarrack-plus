@@ -54,6 +54,7 @@ class ShuffleGui; // forward declaration
 class SynthfilterGui; // forward declaration
 class MbvvolGui; // forward declaration
 class SustainGui; // forward declaration
+class ConvoGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -88,6 +89,7 @@ class SustainGui; // forward declaration
 #include "shuffle_gui.h"
 #include "synthfilter_gui.h"
 #include "mbvvol_gui.h"
+#include "convo_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -280,69 +282,7 @@ public:
   ShuffleGui *SHUFFLE;
   SynthfilterGui *SYNTHFILTER;
   MbvvolGui *MBVVOL;
-  Fl_Group *CONVOLOTRON;
-  Fl_Light_Button *convo_activar;
-private:
-  inline void cb_convo_activar_i(Fl_Light_Button*, void*);
-  static void cb_convo_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *convo_preset;
-private:
-  inline void cb_convo_preset_i(Fl_Choice*, void*);
-  static void cb_convo_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_convo_preset[];
-public:
-  SliderW *convo_WD;
-private:
-  inline void cb_convo_WD_i(SliderW*, void*);
-  static void cb_convo_WD(SliderW*, void*);
-public:
-  SliderW *convo_pan;
-private:
-  inline void cb_convo_pan_i(SliderW*, void*);
-  static void cb_convo_pan(SliderW*, void*);
-public:
-  SliderW *convo_level;
-private:
-  inline void cb_convo_level_i(SliderW*, void*);
-  static void cb_convo_level(SliderW*, void*);
-public:
-  SliderW *convo_damp;
-private:
-  inline void cb_convo_damp_i(SliderW*, void*);
-  static void cb_convo_damp(SliderW*, void*);
-public:
-  SliderW *convo_fb;
-private:
-  inline void cb_convo_fb_i(SliderW*, void*);
-  static void cb_convo_fb(SliderW*, void*);
-public:
-  SliderW *convo_length;
-private:
-  inline void cb_convo_length_i(SliderW*, void*);
-  static void cb_convo_length(SliderW*, void*);
-public:
-  Fl_Check_Button *convo_user;
-private:
-  inline void cb_convo_user_i(Fl_Check_Button*, void*);
-  static void cb_convo_user(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *convo_safe;
-private:
-  inline void cb_convo_safe_i(Fl_Check_Button*, void*);
-  static void cb_convo_safe(Fl_Check_Button*, void*);
-public:
-  Fl_Button *B_wav;
-private:
-  inline void cb_B_wav_i(Fl_Button*, void*);
-  static void cb_B_wav(Fl_Button*, void*);
-public:
-  Fl_Choice *convo_fnum;
-private:
-  inline void cb_convo_fnum_i(Fl_Choice*, void*);
-  static void cb_convo_fnum(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_convo_fnum[];
-public:
+  ConvoGui *CONVOLOTRON;
   Fl_Group *LOOPER;
   Fl_Light_Button *looper_activar;
 private:

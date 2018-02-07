@@ -155,6 +155,9 @@ decl {class MbvvolGui; // forward declaration} {public global
 decl {class SustainGui; // forward declaration} {public global
 }
 
+decl {class ConvoGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1179,192 +1182,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group CONVOLOTRON {
         user_data 1
-        xywh {322 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button convo_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Convol_Bypass);
- return;
-}
-rkr->Convol_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Convol->cleanup();
-findpos(29,(int)o->value(),o);}
-          xywh {328 217 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice convo_preset {
-          label Preset
-          user_data 12029
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12029))rkr->efx_Convol->setpreset((int) o->value());
-convo_pan->value(rkr->efx_Convol->getpar(1)-64);
-convo_level->value(rkr->efx_Convol->getpar(7));
-convo_WD->value(rkr->efx_Convol->getpar(0)-64);
-convo_damp->value(rkr->efx_Convol->getpar(6));
-convo_fnum->value(rkr->efx_Convol->getpar(8));
-convo_length->value(rkr->efx_Convol->getpar(3));
-convo_user->value(rkr->efx_Convol->getpar(4));
-convo_user->do_callback();
-convo_safe->value(rkr->efx_Convol->getpar(2));
-convo_fb->value(rkr->efx_Convol->getpar(10));}
-          xywh {401 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Marshall JCM200}
-            xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Fender Superchamp}
-            xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Mesa Boogie}
-            xywh {67 67 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Mesa Boogie 2}
-            xywh {77 77 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider convo_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(280);
- return;
-}
-rkr->efx_Convol->changepar(0,(int)(o->value()+64));}
-          xywh {374 243 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider convo_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(281);
- return;
-}
-rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
-          xywh {374 259 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider convo_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(282);
- return;
-}
-rkr->efx_Convol->changepar(7,(int)o->value());}
-          xywh {374 275 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider convo_damp {
-          label Damp
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(283);
- return;
-}
-rkr->efx_Convol->changepar(6,(int)o->value());}
-          xywh {374 291 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider convo_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(284);
- return;
-}
-rkr->efx_Convol->changepar(10,(int)o->value());}
-          xywh {374 307 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider convo_length {
-          label Length
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(285);
- return;
-}
-rkr->efx_Convol->changepar(3,(int)o->value());}
-          xywh {374 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button convo_user {
-          label User
-          user_data 2
-          callback {rkr->efx_Convol->changepar(4,(int)o->value());
-
-if((int)o->value())B_wav->activate(); else B_wav->deactivate();}
-          xywh {432 339 43 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button convo_safe {
-          label {Safe Mode}
-          user_data 2
-          callback {rkr->efx_Convol->changepar(2,(int)o->value())}
-          xywh {341 354 73 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Button B_wav {
-          label Browse
-          user_data 2
-          callback {char *filename;
-filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".wav");
-strcpy(rkr->efx_Convol->Filename,filename);
-rkr->efx_Convol->setfile(USERFILE);}
-          xywh {428 356 46 12} labelsize 10 deactivate
-        }
-        Fl_Choice convo_fnum {
-          label Preset
-          user_data 12
-          callback {rkr->efx_Convol->changepar(8,(int)o->value());}
-          xywh {373 372 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Marshall JCM200}
-            xywh {44 44 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Fender Superchamp}
-            xywh {54 54 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Mesa Boogie}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Mesa Boogie 2}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Marshall Plexi}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Bassman
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label JCM2000
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Ampeg
-            xywh {30 30 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Marshall2
-            xywh {40 40 36 21} labelsize 10
-          }
-        }
-      }
+        xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "convo_gui.h"}
+        class ConvoGui
+      } {}
       Fl_Group LOOPER {
         user_data 1
         xywh {319 213 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -8044,8 +7865,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
 
      case 29://Convolotron
-     convo_activar->value(rkr->Convol_Bypass);
-     convo_preset->do_callback(convo_preset,1);
+     CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
+     CONVOLOTRON->convo_preset->do_callback(CONVOLOTRON->convo_preset,1);
      break; 
 
      case 30://Looper
@@ -8755,7 +8576,7 @@ switch (rkr->efx_order[i])
 
      case 29:
        CONVOLOTRON->position(x[i],y[i]);
-       convo_activar->shortcut(s[i]);
+       CONVOLOTRON->convo_activar->shortcut(s[i]);
        if(!rkr->deachide)CONVOLOTRON->show();
        if(rkr->Convol_Bypass)
        {
@@ -10562,28 +10383,28 @@ switch (i)
      update_looper();
      break;
      case 280:
-     convo_WD->value(rkr->efx_Convol->getpar(0)-64);
-     convo_WD->redraw();
+     CONVOLOTRON->convo_WD->value(rkr->efx_Convol->getpar(0)-64);
+     CONVOLOTRON->convo_WD->redraw();
      break;
      case 281:
-     convo_pan->value(rkr->efx_Convol->getpar(1)-64);
-     convo_pan->redraw();
+     CONVOLOTRON->convo_pan->value(rkr->efx_Convol->getpar(1)-64);
+     CONVOLOTRON->convo_pan->redraw();
      break;
      case 282:
-     convo_level->value(rkr->efx_Convol->getpar(7));
-     convo_level->redraw();
+     CONVOLOTRON->convo_level->value(rkr->efx_Convol->getpar(7));
+     CONVOLOTRON->convo_level->redraw();
      break;
      case 283:
-     convo_damp->value(rkr->efx_Convol->getpar(6));
-     convo_damp->redraw();
+     CONVOLOTRON->convo_damp->value(rkr->efx_Convol->getpar(6));
+     CONVOLOTRON->convo_damp->redraw();
      break;
      case 284:
-     convo_fb->value(rkr->efx_Convol->getpar(10));
-     convo_fb->redraw();
+     CONVOLOTRON->convo_fb->value(rkr->efx_Convol->getpar(10));
+     CONVOLOTRON->convo_fb->redraw();
      break;
      case 285:
-     convo_length->value(rkr->efx_Convol->getpar(3));
-     convo_length->redraw();
+     CONVOLOTRON->convo_length->value(rkr->efx_Convol->getpar(3));
+     CONVOLOTRON->convo_length->redraw();
      break;
      case 286:
      coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
@@ -11201,8 +11022,8 @@ switch(miralo)
   MBVVOL->mbvvol_activar->do_callback();
   break;
   case 29:
-  convo_activar->value(rkr->Convol_Bypass);
-  convo_activar->do_callback();
+  CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
+  CONVOLOTRON->convo_activar->do_callback();
   break;
   case 30:
   looper_activar->value(rkr->Looper_Bypass);
@@ -12987,7 +12808,7 @@ for(i=0;i<10;i++)
 
      case 29://Convolotron
      if (i<numEff)rkr->Convol_Bypass=1; else rkr->Convol_Bypass=0;
-     convo_activar->value(rkr->Convol_Bypass);
+     CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
      break; 
 
      case 30://Looper

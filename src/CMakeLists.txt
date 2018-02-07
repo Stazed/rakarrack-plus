@@ -44,6 +44,7 @@ set (ProgSources
     UI/shuffle_gui.cxx
     UI/synthfilter_gui.cxx
     UI/mbvvol_gui.cxx
+    UI/convo_gui.cxx
     UI/sustain_gui.cxx
     process.C
     fileio.C
