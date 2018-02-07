@@ -9,14 +9,20 @@
 class CommonGuiMenu : public Fl_Group {
 public:
   CommonGuiMenu(int X, int Y, int W, int H, const char *L = 0);
+  Fl_Choice *subdiv_type;
+  static Fl_Menu_Item menu_subdiv_type[];
   Fl_Choice *lfo_type;
   static Fl_Menu_Item menu_lfo_type[];
   Fl_Choice *distortion_type;
   static Fl_Menu_Item menu_distortion_type[];
-  Fl_Choice *subdiv_type;
-  static Fl_Menu_Item menu_subdiv_type[];
-  Fl_Menu_Item * get_lfo_type();
+  Fl_Choice *time_sig;
+  static Fl_Menu_Item menu_time_sig[];
+  Fl_Choice *metronome_sound;
+  static Fl_Menu_Item menu_metronome_sound[];
   Fl_Menu_Item* get_distortion_type();
+  Fl_Menu_Item * get_lfo_type();
   Fl_Menu_Item * get_subdiv_type();
+  Fl_Menu_Item * get_time_sig();
+  Fl_Menu_Item * get_metronome_sound();
 };
 #endif

@@ -51,13 +51,11 @@ public:
 private:
   inline void cb_looper_bar_i(Fl_Choice*, void*);
   static void cb_looper_bar(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_looper_bar[];
 public:
   Fl_Choice *looper_ms;
 private:
   inline void cb_looper_ms_i(Fl_Choice*, void*);
   static void cb_looper_ms(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_looper_ms[];
 public:
   Fl_Check_Button *looper_rv;
 private:
@@ -122,6 +120,10 @@ private:
   static void cb_looper_mt(Fl_Check_Button*, void*);
 public:
   Fl_Box *L_TimePos;
+private:
+  CommonGuiMenu *m_looper_bar; 
+  CommonGuiMenu *m_looper_ms; 
+public:
   Fl_Menu_Item* get_menu_looper_bar();
   Fl_Menu_Item* get_menu_looper_ms();
 };

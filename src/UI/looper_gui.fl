@@ -97,60 +97,16 @@ rkr->efx_Looper->changepar(10,(int)o->value());}
   }
   Fl_Choice looper_bar {
     label {Time Sig.}
-    callback {rkr->efx_Looper->changepar(15,(int)o->value());}
+    callback {rkr->efx_Looper->changepar(15,(int)o->value());} open
     xywh {57 73 40 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-  } {
-    MenuItem {} {
-      label {2/4}
-      xywh {0 0 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {3/4}
-      xywh {10 10 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {4/4}
-      xywh {20 20 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {5/4}
-      xywh {30 30 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {6/8}
-      xywh {40 40 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {7/8}
-      xywh {50 50 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {9/8}
-      xywh {60 60 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label {11/8}
-      xywh {70 70 36 21} labelsize 9
-    }
-  }
+    code0 {o->menu(m_looper_bar->get_time_sig());}
+  } {}
   Fl_Choice looper_ms {
     label MS
-    callback {rkr->efx_Looper->changepar(17,(int)o->value());}
+    callback {rkr->efx_Looper->changepar(17,(int)o->value());} open
     xywh {121 73 29 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-  } {
-    MenuItem {} {
-      label N
-      xywh {10 10 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label H
-      xywh {20 20 36 21} labelsize 9
-    }
-    MenuItem {} {
-      label L
-      xywh {20 20 36 21} labelsize 9
-    }
-  }
+    code0 {o->menu(m_looper_ms->get_metronome_sound());}
+  } {}
   Fl_Check_Button looper_rv {
     label Reverse
     user_data 2
@@ -298,13 +254,18 @@ rgui->update_looper();}
   Fl_Box L_TimePos {
     xywh {121 166 35 14} box DOWN_BOX align 84
   }
-  Function {get_menu_looper_bar()} {open C return_type {Fl_Menu_Item*}
-  } {
-    code {return menu_looper_bar;} {}
+  decl {CommonGuiMenu *m_looper_bar;} {private local
   }
-  Function {get_menu_looper_ms()} {open C return_type {Fl_Menu_Item*}
+  decl {CommonGuiMenu *m_looper_ms;} {private local
+  }
+  Function {get_menu_looper_bar()} {
+    comment {FIXME - remove when metronome is moved} open selected C return_type {Fl_Menu_Item*}
   } {
-    code {return menu_looper_ms;} {selected
-    }
+    code {return m_looper_bar->get_time_sig();} {}
+  }
+  Function {get_menu_looper_ms()} {
+    comment {FIXME - remove when metronome is done} open C return_type {Fl_Menu_Item*}
+  } {
+    code {return m_looper_ms->get_metronome_sound();} {}
   }
 }

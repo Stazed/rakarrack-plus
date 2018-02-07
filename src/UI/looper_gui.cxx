@@ -98,31 +98,12 @@ void LooperGui::cb_looper_bar(Fl_Choice* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_bar_i(o,v);
 }
 
-Fl_Menu_Item LooperGui::menu_looper_bar[] = {
- {"2/4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"3/4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"4/4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"5/4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"6/8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"7/8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"9/8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"11/8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void LooperGui::cb_looper_ms_i(Fl_Choice* o, void*) {
   rkr->efx_Looper->changepar(17,(int)o->value());
 }
 void LooperGui::cb_looper_ms(Fl_Choice* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_ms_i(o,v);
 }
-
-Fl_Menu_Item LooperGui::menu_looper_ms[] = {
- {"N", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"H", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"L", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void LooperGui::cb_looper_rv_i(Fl_Check_Button* o, void*) {
   if(Fl::event_button()==3)
@@ -357,7 +338,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_Tempo->align(Fl_Align(FL_ALIGN_LEFT));
   looper_Tempo->when(FL_WHEN_RELEASE);
 } // SliderW* looper_Tempo
-{ looper_bar = new Fl_Choice(57, 73, 40, 15, "Time Sig.");
+{ Fl_Choice* o = looper_bar = new Fl_Choice(57, 73, 40, 15, "Time Sig.");
   looper_bar->down_box(FL_BORDER_BOX);
   looper_bar->selection_color(FL_FOREGROUND_COLOR);
   looper_bar->labelsize(10);
@@ -366,9 +347,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_bar->textcolor(FL_BACKGROUND2_COLOR);
   looper_bar->callback((Fl_Callback*)cb_looper_bar);
   looper_bar->when(FL_WHEN_RELEASE_ALWAYS);
-  looper_bar->menu(menu_looper_bar);
+  o->menu(m_looper_bar->get_time_sig());
 } // Fl_Choice* looper_bar
-{ looper_ms = new Fl_Choice(121, 73, 29, 15, "MS");
+{ Fl_Choice* o = looper_ms = new Fl_Choice(121, 73, 29, 15, "MS");
   looper_ms->down_box(FL_BORDER_BOX);
   looper_ms->selection_color(FL_FOREGROUND_COLOR);
   looper_ms->labelsize(10);
@@ -377,7 +358,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_ms->textcolor(FL_BACKGROUND2_COLOR);
   looper_ms->callback((Fl_Callback*)cb_looper_ms);
   looper_ms->when(FL_WHEN_RELEASE_ALWAYS);
-  looper_ms->menu(menu_looper_ms);
+  o->menu(m_looper_ms->get_metronome_sound());
 } // Fl_Choice* looper_ms
 { looper_rv = new Fl_Check_Button(8, 89, 61, 15, "Reverse");
   looper_rv->down_box(FL_BORDER_BOX);
@@ -475,10 +456,16 @@ position(X, Y);
 end();
 }
 
+/**
+ FIXME - remove when metronome is moved
+*/
 Fl_Menu_Item* LooperGui::get_menu_looper_bar() {
-  return menu_looper_bar;
+  return m_looper_bar->get_time_sig();
 }
 
+/**
+ FIXME - remove when metronome is done
+*/
 Fl_Menu_Item* LooperGui::get_menu_looper_ms() {
-  return menu_looper_ms;
+  return m_looper_ms->get_metronome_sound();
 }
