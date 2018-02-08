@@ -53,6 +53,7 @@ set (ProgSources
     UI/vocoder_gui.cxx
     UI/sustain_gui.cxx
     UI/sequence_gui.cxx
+    UI/shifter_gui.cxx
     process.C
     fileio.C
     varios.C

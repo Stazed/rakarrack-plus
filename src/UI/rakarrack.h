@@ -62,6 +62,7 @@ class ShelfGui; // forward declaration
 class VocoderGui; // forward declaration
 class SustainGui; // forward declaration
 class SequenceGui; // forward declaration
+class ShifterGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -105,6 +106,7 @@ class SequenceGui; // forward declaration
 #include "vocoder_gui.h"
 #include "sustain_gui.h"
 #include "sequence_gui.h"
+#include "shifter_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -305,69 +307,7 @@ public:
   VocoderGui *VOCODER;
   SustainGui *SUSTAINER;
   SequenceGui *SEQUENCE;
-  Fl_Group *SHIFTER;
-  Fl_Light_Button *shifter_activar;
-private:
-  inline void cb_shifter_activar_i(Fl_Light_Button*, void*);
-  static void cb_shifter_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *shifter_preset;
-private:
-  inline void cb_shifter_preset_i(Fl_Choice*, void*);
-  static void cb_shifter_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_shifter_preset[];
-public:
-  SliderW *shifter_WD;
-private:
-  inline void cb_shifter_WD_i(SliderW*, void*);
-  static void cb_shifter_WD(SliderW*, void*);
-public:
-  SliderW *shifter_int;
-private:
-  inline void cb_shifter_int_i(SliderW*, void*);
-  static void cb_shifter_int(SliderW*, void*);
-public:
-  SliderW *shifter_gain;
-private:
-  inline void cb_shifter_gain_i(SliderW*, void*);
-  static void cb_shifter_gain(SliderW*, void*);
-public:
-  SliderW *shifter_pan;
-private:
-  inline void cb_shifter_pan_i(SliderW*, void*);
-  static void cb_shifter_pan(SliderW*, void*);
-public:
-  SliderW *shifter_attack;
-private:
-  inline void cb_shifter_attack_i(SliderW*, void*);
-  static void cb_shifter_attack(SliderW*, void*);
-public:
-  SliderW *shifter_decay;
-private:
-  inline void cb_shifter_decay_i(SliderW*, void*);
-  static void cb_shifter_decay(SliderW*, void*);
-public:
-  SliderW *shifter_thre;
-private:
-  inline void cb_shifter_thre_i(SliderW*, void*);
-  static void cb_shifter_thre(SliderW*, void*);
-public:
-  Fl_Check_Button *shifter_ud;
-private:
-  inline void cb_shifter_ud_i(Fl_Check_Button*, void*);
-  static void cb_shifter_ud(Fl_Check_Button*, void*);
-public:
-  SliderW *shifter_whammy;
-private:
-  inline void cb_shifter_whammy_i(SliderW*, void*);
-  static void cb_shifter_whammy(SliderW*, void*);
-public:
-  Fl_Choice *shifter_mode;
-private:
-  inline void cb_shifter_mode_i(Fl_Choice*, void*);
-  static void cb_shifter_mode(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_shifter_mode[];
-public:
+  ShifterGui *SHIFTER;
   Fl_Group *STOMPBOX;
   Fl_Light_Button *stomp_activar;
 private:

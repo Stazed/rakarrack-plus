@@ -179,6 +179,9 @@ decl {class SustainGui; // forward declaration} {public global
 decl {class SequenceGui; // forward declaration} {public global
 }
 
+decl {class ShifterGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1257,178 +1260,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group SHIFTER {
         user_data 1
-        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button shifter_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Shifter_Bypass);
- return;
-}
-rkr->Shifter_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Shifter->cleanup();
-findpos(38,(int)o->value(),o);}
-          xywh {325 216 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
-        }
-        Fl_Choice shifter_preset {
-          label Preset
-          user_data 12038
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12038))rkr->efx_Shifter->setpreset((int)o->value());
-shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
-shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
-shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
-shifter_int->value(rkr->efx_Shifter->getpar(6));
-shifter_attack->value(rkr->efx_Shifter->getpar(3));
-shifter_decay->value(rkr->efx_Shifter->getpar(4));
-shifter_thre->value(rkr->efx_Shifter->getpar(5));
-shifter_ud->value(rkr->efx_Shifter->getpar(7));
-shifter_whammy->value(rkr->efx_Shifter->getpar(9));
-
-shifter_mode->value(rkr->efx_Shifter->getpar(8));}
-          xywh {397 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Fast
-            xywh {10 10 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label {Slow Up}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Slow Down}
-            xywh {42 42 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Chorus
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Trig. Chorus}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider shifter_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(326);
- return;
-}
-rkr->efx_Shifter->changepar(0,(int)(o->value()+64));}
-          xywh {370 242 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shifter_int {
-          label {Int.}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(327);
- return;
-}
-rkr->Shifter_Bypass=0;
-rkr->efx_Shifter->changepar(6,(int)o->value());
-if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
-          xywh {370 255 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 12 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shifter_gain {
-          label Gain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(328);
- return;
-}
-rkr->efx_Shifter->changepar(2,(int)(o->value()+64));}
-          xywh {370 270 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shifter_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(329);
- return;
-}
-rkr->efx_Shifter->changepar(1,(int)(o->value()+64));}
-          xywh {370 283 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shifter_attack {
-          label Attack
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(330);
- return;
-}
-rkr->efx_Shifter->changepar(3,(int)o->value());}
-          xywh {371 300 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shifter_decay {
-          label Decay
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(331);
- return;
-}
-rkr->efx_Shifter->changepar(4,(int)o->value());}
-          xywh {370 313 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider shifter_thre {
-          label Thrshold
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(332);
- return;
-}
-rkr->efx_Shifter->changepar(5,(int)o->value());}
-          xywh {370 326 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button shifter_ud {
-          label Down
-          user_data 2
-          callback {rkr->efx_Shifter->changepar(7,(int)o->value())}
-          xywh {371 340 49 14} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Value_Slider shifter_whammy {
-          label Whamy
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(333);
- return;
-}
-rkr->efx_Shifter->changepar(9,(int)o->value());}
-          xywh {370 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice shifter_mode {
-          label Mode
-          user_data 12
-          callback {rkr->efx_Shifter->changepar(8,(int)o->value())} open
-          xywh {363 377 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
-        } {
-          MenuItem {} {
-            label Trigger
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Whammy
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Portamento
-            xywh {10 10 36 21} labelsize 9
-          }
-        }
-      }
+        xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "shifter_gui.h"}
+        class ShifterGui
+      } {}
       Fl_Group STOMPBOX {
         user_data 1
         xywh {481 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -6586,8 +6421,8 @@ for(i=0;i<rkr->NumEffects;i++)
     break;
 
     case 38://Shifter
-    shifter_activar->value(rkr->Shifter_Bypass);
-    shifter_preset->do_callback(shifter_preset,1);
+    SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
+    SHIFTER->shifter_preset->do_callback(SHIFTER->shifter_preset,1);
     break;
 
     case 39://StompBox
@@ -7359,7 +7194,7 @@ switch (rkr->efx_order[i])
 
    case 38:
        SHIFTER->position(x[i],y[i]);
-       shifter_activar->shortcut(s[i]);
+       SHIFTER->shifter_activar->shortcut(s[i]);
        if(!rkr->deachide)SHIFTER->show();
        if(rkr->Shifter_Bypass)
        {
@@ -9242,36 +9077,36 @@ switch (i)
      SEQUENCE->seq_stdf->redraw();
      break;
      case 326:
-     shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
-     shifter_WD->redraw();
+     SHIFTER->shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
+     SHIFTER->shifter_WD->redraw();
      break;
      case 327:
-     shifter_int->value(rkr->efx_Shifter->getpar(6));
-     shifter_int->redraw();
+     SHIFTER->shifter_int->value(rkr->efx_Shifter->getpar(6));
+     SHIFTER->shifter_int->redraw();
      break;
      case 328:
-     shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
-     shifter_gain->redraw();
+     SHIFTER->shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
+     SHIFTER->shifter_gain->redraw();
      break;
      case 329:
-     shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
-     shifter_pan->redraw();
+     SHIFTER->shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
+     SHIFTER->shifter_pan->redraw();
      break;
      case 330:
-     shifter_attack->value(rkr->efx_Shifter->getpar(3));
-     shifter_attack->redraw();
+     SHIFTER->shifter_attack->value(rkr->efx_Shifter->getpar(3));
+     SHIFTER->shifter_attack->redraw();
      break;
      case 331:
-     shifter_decay->value(rkr->efx_Shifter->getpar(4));
-     shifter_decay->redraw();
+     SHIFTER->shifter_decay->value(rkr->efx_Shifter->getpar(4));
+     SHIFTER->shifter_decay->redraw();
      break;
      case 332:
-     shifter_thre->value(rkr->efx_Shifter->getpar(5));
-     shifter_thre->redraw();
+     SHIFTER->shifter_thre->value(rkr->efx_Shifter->getpar(5));
+     SHIFTER->shifter_thre->redraw();
      break;
      case 333:
-     shifter_whammy->value(rkr->efx_Shifter->getpar(9));
-     shifter_whammy->redraw();
+     SHIFTER->shifter_whammy->value(rkr->efx_Shifter->getpar(9));
+     SHIFTER->shifter_whammy->redraw();
      break;
      case 334:
      stomp_WD->value(rkr->efx_StompBox->getpar(0));
@@ -9733,8 +9568,8 @@ switch(miralo)
   SEQUENCE->seq_activar->do_callback();
   break;
  case 38:
-  shifter_activar->value(rkr->Shifter_Bypass);
-  shifter_activar->do_callback();
+  SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
+  SHIFTER->shifter_activar->do_callback();
   break;
  case 39:
   stomp_activar->value(rkr->StompBox_Bypass);
@@ -11529,7 +11364,7 @@ for(i=0;i<10;i++)
 
     case 38://Shifter
     if (i<numEff)rkr->Shifter_Bypass=1; else rkr->Shifter_Bypass=0;
-    shifter_activar->value(rkr->Shifter_Bypass);
+    SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
     break;
 
     case 39://StompBox
