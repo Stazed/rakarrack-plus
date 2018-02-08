@@ -685,9 +685,9 @@ if (rkr->StereoHarm_Bypass)
 
     if (rkr->RC_Stereo_Harm->cc) 
     {
-    shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
+    SHAR->shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
     rkr->RC_Stereo_Harm->cc=0;
-    shar_chordname->redraw(); 
+    SHAR->shar_chordname->redraw(); 
     rkr->RC_Stereo_Harm->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
     rkr->RC_Stereo_Harm->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
     rkr->efx_StereoHarm->r_ratiol = rkr->RC_Stereo_Harm->r__ratio[1];
@@ -749,209 +749,6 @@ Fl::focus(Open_Order);
 }
 void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
-}
-
-void RKRGUI::cb_shar_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->StereoHarm_Bypass);
- return;
-}
-rkr->StereoHarm_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_StereoHarm->cleanup();
-rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
-rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
-Chord(1);
-findpos(42,(int)o->value(),o);
-}
-void RKRGUI::cb_shar_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_activar_i(o,v);
-}
-
-void RKRGUI::cb_shar_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12042))rkr->efx_StereoHarm->setpreset((int)o->value());
-shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
-shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
-shar_intl->value(rkr->efx_StereoHarm->getpar(2)-12);
-shar_chl->value(rkr->efx_StereoHarm->getpar(3));
-shar_ganr->value(rkr->efx_StereoHarm->getpar(4)-64);
-shar_intr->value(rkr->efx_StereoHarm->getpar(5)-12);
-shar_chr->value(rkr->efx_StereoHarm->getpar(6));
-shar_lrc->value(rkr->efx_StereoHarm->getpar(11)-64);
-shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
-shar_note->value(rkr->efx_StereoHarm->getpar(8));
-shar_type->value(rkr->efx_StereoHarm->getpar(9));
-shar_MIDI->value(rkr->efx_StereoHarm->getpar(10));
-if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) Chord(1);
-}
-void RKRGUI::cb_shar_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_shar_preset[] = {
- {"Plain", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Octavator", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Hard Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_shar_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(358);
- return;
-}
-rkr->efx_StereoHarm->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_shar_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_WD_i(o,v);
-}
-
-void RKRGUI::cb_shar_intl_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(359);
- return;
-}
-rkr->StereoHarm_Bypass=0;
-rkr->efx_StereoHarm->changepar(2,(int)(o->value()+12));
-if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;
-}
-void RKRGUI::cb_shar_intl(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_intl_i(o,v);
-}
-
-void RKRGUI::cb_shar_chl_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(360);
- return;
-}
-rkr->efx_StereoHarm->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_shar_chl(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_chl_i(o,v);
-}
-
-void RKRGUI::cb_shar_ganl_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(361);
- return;
-}
-rkr->efx_StereoHarm->changepar(1,(int)(o->value()+64));
-}
-void RKRGUI::cb_shar_ganl(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_ganl_i(o,v);
-}
-
-void RKRGUI::cb_shar_intr_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(362);
- return;
-}
-rkr->StereoHarm_Bypass=0;
-rkr->efx_StereoHarm->changepar(5,(int)(o->value()+12));
-if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;
-}
-void RKRGUI::cb_shar_intr(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_intr_i(o,v);
-}
-
-void RKRGUI::cb_shar_chr_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(363);
- return;
-}
-rkr->efx_StereoHarm->changepar(6,(int)o->value());
-}
-void RKRGUI::cb_shar_chr(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_chr_i(o,v);
-}
-
-void RKRGUI::cb_shar_ganr_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(364);
- return;
-}
-rkr->efx_StereoHarm->changepar(4,(int)(o->value()+64));
-}
-void RKRGUI::cb_shar_ganr(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_ganr_i(o,v);
-}
-
-void RKRGUI::cb_shar_lrc_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(365);
- return;
-}
-rkr->efx_StereoHarm->changepar(11,(int)(o->value()+64));
-}
-void RKRGUI::cb_shar_lrc(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_lrc_i(o,v);
-}
-
-void RKRGUI::cb_shar_MIDI_i(Fl_Check_Button* o, void*) {
-  rkr->efx_StereoHarm->changepar(10,(int)o->value());
-rkr->RC_Stereo_Harm->cleanup();
-
-if(!(int)o->value())
-{
-rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
-rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
-};
-}
-void RKRGUI::cb_shar_MIDI(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_MIDI_i(o,v);
-}
-
-void RKRGUI::cb_shar_SELECT_i(Fl_Check_Button* o, void*) {
-  rkr->efx_StereoHarm->changepar(7,(int)o->value());
-rkr->RC_Stereo_Harm->cleanup();
-Chord(1);
-
-if(!(int)o->value())
-{
-rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
-rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
-};
-}
-void RKRGUI::cb_shar_SELECT(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_SELECT_i(o,v);
-}
-
-void RKRGUI::cb_shar_note_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(366);
- return;
-}
-rkr->efx_StereoHarm->changepar(8,(int)o->value());
-Chord(1);
-}
-void RKRGUI::cb_shar_note(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_note_i(o,v);
-}
-
-void RKRGUI::cb_shar_type_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(367);
- return;
-}
-rkr->efx_StereoHarm->changepar(9,(int)o->value());
-Chord(1);
-}
-void RKRGUI::cb_shar_type(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_shar_type_i(o,v);
 }
 
 void RKRGUI::cb_cband_activar_i(Fl_Light_Button* o, void*) {
@@ -4578,221 +4375,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       ECHOTRON->hide();
       ECHOTRON->end();
     } // EchotronGui* ECHOTRON
-    { SHAR = new Fl_Group(481, 212, 158, 184);
+    { SHAR = new SharGui(320, 212, 158, 184);
       SHAR->box(FL_UP_BOX);
       SHAR->color(FL_FOREGROUND_COLOR);
       SHAR->selection_color(FL_FOREGROUND_COLOR);
+      SHAR->labeltype(FL_NORMAL_LABEL);
       SHAR->labelfont(1);
+      SHAR->labelsize(14);
+      SHAR->labelcolor(FL_FOREGROUND_COLOR);
       SHAR->user_data((void*)(1));
       SHAR->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      SHAR->when(FL_WHEN_RELEASE);
       SHAR->hide();
-      { shar_activar = new Fl_Light_Button(486, 216, 34, 18, "On");
-        shar_activar->shortcut(0x30);
-        shar_activar->color((Fl_Color)62);
-        shar_activar->selection_color((Fl_Color)1);
-        shar_activar->labelsize(10);
-        shar_activar->callback((Fl_Callback*)cb_shar_activar, (void*)(2));
-        shar_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* shar_activar
-      { shar_preset = new Fl_Choice(558, 216, 76, 18, "Preset");
-        shar_preset->down_box(FL_BORDER_BOX);
-        shar_preset->selection_color(FL_FOREGROUND_COLOR);
-        shar_preset->labelsize(10);
-        shar_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_preset->textsize(10);
-        shar_preset->textcolor(FL_BACKGROUND2_COLOR);
-        shar_preset->callback((Fl_Callback*)cb_shar_preset, (void*)(12042));
-        shar_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        shar_preset->menu(menu_shar_preset);
-      } // Fl_Choice* shar_preset
-      { shar_WD = new SliderW(531, 238, 100, 10, "Wet/Dry");
-        shar_WD->type(5);
-        shar_WD->box(FL_FLAT_BOX);
-        shar_WD->color((Fl_Color)178);
-        shar_WD->selection_color((Fl_Color)62);
-        shar_WD->labeltype(FL_NORMAL_LABEL);
-        shar_WD->labelfont(0);
-        shar_WD->labelsize(10);
-        shar_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_WD->minimum(-64);
-        shar_WD->maximum(63);
-        shar_WD->step(1);
-        shar_WD->textcolor(FL_BACKGROUND2_COLOR);
-        shar_WD->callback((Fl_Callback*)cb_shar_WD);
-        shar_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_WD
-      { shar_intl = new SliderW(531, 251, 100, 10, "Int L");
-        shar_intl->type(5);
-        shar_intl->box(FL_FLAT_BOX);
-        shar_intl->color((Fl_Color)178);
-        shar_intl->selection_color((Fl_Color)62);
-        shar_intl->labeltype(FL_NORMAL_LABEL);
-        shar_intl->labelfont(0);
-        shar_intl->labelsize(10);
-        shar_intl->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_intl->minimum(-12);
-        shar_intl->maximum(12);
-        shar_intl->step(1);
-        shar_intl->textcolor(FL_BACKGROUND2_COLOR);
-        shar_intl->callback((Fl_Callback*)cb_shar_intl);
-        shar_intl->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_intl->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_intl
-      { shar_chl = new SliderW(531, 264, 100, 10, "Chrm L");
-        shar_chl->type(5);
-        shar_chl->box(FL_FLAT_BOX);
-        shar_chl->color((Fl_Color)178);
-        shar_chl->selection_color((Fl_Color)62);
-        shar_chl->labeltype(FL_NORMAL_LABEL);
-        shar_chl->labelfont(0);
-        shar_chl->labelsize(10);
-        shar_chl->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_chl->minimum(-2000);
-        shar_chl->maximum(2000);
-        shar_chl->step(1);
-        shar_chl->textcolor(FL_BACKGROUND2_COLOR);
-        shar_chl->callback((Fl_Callback*)cb_shar_chl);
-        shar_chl->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_chl->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_chl
-      { shar_ganl = new SliderW(531, 277, 100, 10, "Gain L");
-        shar_ganl->type(5);
-        shar_ganl->box(FL_FLAT_BOX);
-        shar_ganl->color((Fl_Color)178);
-        shar_ganl->selection_color((Fl_Color)62);
-        shar_ganl->labeltype(FL_NORMAL_LABEL);
-        shar_ganl->labelfont(0);
-        shar_ganl->labelsize(10);
-        shar_ganl->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_ganl->minimum(-64);
-        shar_ganl->maximum(64);
-        shar_ganl->step(1);
-        shar_ganl->textcolor(FL_BACKGROUND2_COLOR);
-        shar_ganl->callback((Fl_Callback*)cb_shar_ganl);
-        shar_ganl->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_ganl->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_ganl
-      { shar_intr = new SliderW(531, 290, 100, 10, "Int R");
-        shar_intr->type(5);
-        shar_intr->box(FL_FLAT_BOX);
-        shar_intr->color((Fl_Color)178);
-        shar_intr->selection_color((Fl_Color)62);
-        shar_intr->labeltype(FL_NORMAL_LABEL);
-        shar_intr->labelfont(0);
-        shar_intr->labelsize(10);
-        shar_intr->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_intr->minimum(-12);
-        shar_intr->maximum(12);
-        shar_intr->step(1);
-        shar_intr->textcolor(FL_BACKGROUND2_COLOR);
-        shar_intr->callback((Fl_Callback*)cb_shar_intr);
-        shar_intr->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_intr->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_intr
-      { shar_chr = new SliderW(531, 303, 100, 10, "Chrm R");
-        shar_chr->type(5);
-        shar_chr->box(FL_FLAT_BOX);
-        shar_chr->color((Fl_Color)178);
-        shar_chr->selection_color((Fl_Color)62);
-        shar_chr->labeltype(FL_NORMAL_LABEL);
-        shar_chr->labelfont(0);
-        shar_chr->labelsize(10);
-        shar_chr->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_chr->minimum(-2000);
-        shar_chr->maximum(2000);
-        shar_chr->step(1);
-        shar_chr->textcolor(FL_BACKGROUND2_COLOR);
-        shar_chr->callback((Fl_Callback*)cb_shar_chr);
-        shar_chr->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_chr->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_chr
-      { shar_ganr = new SliderW(531, 316, 100, 10, "Gain R");
-        shar_ganr->type(5);
-        shar_ganr->box(FL_FLAT_BOX);
-        shar_ganr->color((Fl_Color)178);
-        shar_ganr->selection_color((Fl_Color)62);
-        shar_ganr->labeltype(FL_NORMAL_LABEL);
-        shar_ganr->labelfont(0);
-        shar_ganr->labelsize(10);
-        shar_ganr->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_ganr->minimum(-64);
-        shar_ganr->maximum(64);
-        shar_ganr->step(1);
-        shar_ganr->textcolor(FL_BACKGROUND2_COLOR);
-        shar_ganr->callback((Fl_Callback*)cb_shar_ganr);
-        shar_ganr->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_ganr->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_ganr
-      { shar_lrc = new SliderW(531, 329, 100, 10, "L/R.Cr");
-        shar_lrc->type(5);
-        shar_lrc->box(FL_FLAT_BOX);
-        shar_lrc->color((Fl_Color)178);
-        shar_lrc->selection_color((Fl_Color)62);
-        shar_lrc->labeltype(FL_NORMAL_LABEL);
-        shar_lrc->labelfont(0);
-        shar_lrc->labelsize(10);
-        shar_lrc->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_lrc->minimum(-64);
-        shar_lrc->maximum(64);
-        shar_lrc->step(1);
-        shar_lrc->textcolor(FL_BACKGROUND2_COLOR);
-        shar_lrc->callback((Fl_Callback*)cb_shar_lrc);
-        shar_lrc->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_lrc->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_lrc
-      { shar_MIDI = new Fl_Check_Button(490, 341, 15, 15, "MIDI");
-        shar_MIDI->down_box(FL_BORDER_BOX);
-        shar_MIDI->labelsize(10);
-        shar_MIDI->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_MIDI->callback((Fl_Callback*)cb_shar_MIDI, (void*)(2));
-        shar_MIDI->align(Fl_Align(FL_ALIGN_RIGHT));
-      } // Fl_Check_Button* shar_MIDI
-      { shar_SELECT = new Fl_Check_Button(490, 354, 15, 15, "SEL");
-        shar_SELECT->down_box(FL_BORDER_BOX);
-        shar_SELECT->labelsize(10);
-        shar_SELECT->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_SELECT->callback((Fl_Callback*)cb_shar_SELECT, (void*)(2));
-        shar_SELECT->align(Fl_Align(FL_ALIGN_RIGHT));
-      } // Fl_Check_Button* shar_SELECT
-      { shar_chordname = new Fl_Box(537, 344, 98, 21);
-        shar_chordname->labelsize(12);
-        shar_chordname->labelcolor(FL_BACKGROUND2_COLOR);
-      } // Fl_Box* shar_chordname
-      { shar_note = new SliderW(531, 370, 100, 10, "Note");
-        shar_note->type(5);
-        shar_note->box(FL_FLAT_BOX);
-        shar_note->color((Fl_Color)178);
-        shar_note->selection_color((Fl_Color)62);
-        shar_note->labeltype(FL_NORMAL_LABEL);
-        shar_note->labelfont(0);
-        shar_note->labelsize(10);
-        shar_note->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_note->maximum(23);
-        shar_note->step(1);
-        shar_note->textcolor(FL_BACKGROUND2_COLOR);
-        shar_note->callback((Fl_Callback*)cb_shar_note);
-        shar_note->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_note->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_note
-      { shar_type = new SliderW(531, 382, 100, 10, "Chord");
-        shar_type->type(5);
-        shar_type->box(FL_FLAT_BOX);
-        shar_type->color((Fl_Color)178);
-        shar_type->selection_color((Fl_Color)62);
-        shar_type->labeltype(FL_NORMAL_LABEL);
-        shar_type->labelfont(0);
-        shar_type->labelsize(10);
-        shar_type->labelcolor(FL_BACKGROUND2_COLOR);
-        shar_type->maximum(33);
-        shar_type->step(1);
-        shar_type->textcolor(FL_BACKGROUND2_COLOR);
-        shar_type->callback((Fl_Callback*)cb_shar_type);
-        shar_type->align(Fl_Align(FL_ALIGN_LEFT));
-        shar_type->when(FL_WHEN_CHANGED);
-      } // SliderW* shar_type
       SHAR->end();
-    } // Fl_Group* SHAR
+    } // SharGui* SHAR
     { COMPBAND = new Fl_Group(162, 211, 158, 184);
       COMPBAND->box(FL_UP_BOX);
       COMPBAND->color(FL_FOREGROUND_COLOR);
@@ -8517,8 +8113,8 @@ void RKRGUI::Put_Loaded() {
       break;
   
       case 42://StereoHarm
-      shar_activar->value(rkr->StereoHarm_Bypass);
-      shar_preset->do_callback(shar_preset,1);
+      SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
+      SHAR->shar_preset->do_callback(SHAR->shar_preset,1);
       break; 
   
       case 43://CompBand
@@ -9319,7 +8915,7 @@ void RKRGUI::reordena() {
   
      case 42:
          SHAR->position(x[i],y[i]);
-         shar_activar->shortcut(s[i]);
+         SHAR->shar_activar->shortcut(s[i]);
          if(!rkr->deachide)SHAR->show();
          if(rkr->StereoHarm_Bypass)
          {
@@ -11290,45 +10886,45 @@ void RKRGUI::ActMIDI() {
        ECHOTRON->echotron_length->redraw();
        break;
        case 358:
-       shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
-       shar_WD->redraw();
+       SHAR->shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
+       SHAR->shar_WD->redraw();
        break;
        case 359:
-       shar_intl->value(rkr->efx_StereoHarm->getpar(2));
-       shar_intl->redraw();
+       SHAR->shar_intl->value(rkr->efx_StereoHarm->getpar(2));
+       SHAR->shar_intl->redraw();
        break;
        case 360:
-       shar_chl->value(rkr->efx_StereoHarm->getpar(3));
-       shar_chl->redraw();
+       SHAR->shar_chl->value(rkr->efx_StereoHarm->getpar(3));
+       SHAR->shar_chl->redraw();
        break;
        case 361:
-       shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
-       shar_ganl->redraw();
+       SHAR->shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
+       SHAR->shar_ganl->redraw();
        break;
        case 362:
-       shar_intr->value(rkr->efx_StereoHarm->getpar(5));
-       shar_intr->redraw();
+       SHAR->shar_intr->value(rkr->efx_StereoHarm->getpar(5));
+       SHAR->shar_intr->redraw();
        break;
        case 363:
-       shar_chr->value(rkr->efx_StereoHarm->getpar(6));
-       shar_chr->redraw();
+       SHAR->shar_chr->value(rkr->efx_StereoHarm->getpar(6));
+       SHAR->shar_chr->redraw();
        break;
        case 364:
-       shar_ganr->value(rkr->efx_StereoHarm->getpar(4)-64);
-       shar_ganr->redraw();
+       SHAR->shar_ganr->value(rkr->efx_StereoHarm->getpar(4)-64);
+       SHAR->shar_ganr->redraw();
        break;
        case 365:
-       shar_lrc->value(rkr->efx_StereoHarm->getpar(11)-64);
-       shar_lrc->redraw();
+       SHAR->shar_lrc->value(rkr->efx_StereoHarm->getpar(11)-64);
+       SHAR->shar_lrc->redraw();
        break;
        case 366:
-       shar_note->value(rkr->efx_StereoHarm->getpar(8));
-       shar_note->redraw();
+       SHAR->shar_note->value(rkr->efx_StereoHarm->getpar(8));
+       SHAR->shar_note->redraw();
        Chord(1);
        break;
        case 367:
-       shar_type->value(rkr->efx_StereoHarm->getpar(9));
-       shar_type->redraw();
+       SHAR->shar_type->value(rkr->efx_StereoHarm->getpar(9));
+       SHAR->shar_type->redraw();
        Chord(1);
        break;
        case 368:
@@ -11669,8 +11265,8 @@ void RKRGUI::ActOnOff() {
     ECHOTRON->echotron_activar->do_callback();
     break;
    case 42:
-    shar_activar->value(rkr->StereoHarm_Bypass);
-    shar_activar->do_callback();
+    SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
+    SHAR->shar_activar->do_callback();
     break;
    case 43:
     cband_activar->value(rkr->CompBand_Bypass);
@@ -13495,7 +13091,7 @@ void RKRGUI::RandomPreset() {
   
       case 42://StereoHarm
       if (i<numEff)rkr->StereoHarm_Bypass=1; else rkr->StereoHarm_Bypass=0;
-      shar_activar->value(rkr->StereoHarm_Bypass);
+      SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
       break; 
   
       case 43://CompBand

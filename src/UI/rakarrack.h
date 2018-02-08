@@ -66,6 +66,7 @@ class ShifterGui; // forward declaration
 class StompboxGui; // forward declaration
 class RevtronGui; // forward declaration
 class EchotronGui; // forward declaration
+class SharGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -113,6 +114,7 @@ class EchotronGui; // forward declaration
 #include "stompbox_gui.h"
 #include "reverbtron_gui.h"
 #include "echotron_gui.h"
+#include "stereoharm_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -317,79 +319,7 @@ public:
   StompboxGui *STOMPBOX;
   RevtronGui *REVERBTRON;
   EchotronGui *ECHOTRON;
-  Fl_Group *SHAR;
-  Fl_Light_Button *shar_activar;
-private:
-  inline void cb_shar_activar_i(Fl_Light_Button*, void*);
-  static void cb_shar_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *shar_preset;
-private:
-  inline void cb_shar_preset_i(Fl_Choice*, void*);
-  static void cb_shar_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_shar_preset[];
-public:
-  SliderW *shar_WD;
-private:
-  inline void cb_shar_WD_i(SliderW*, void*);
-  static void cb_shar_WD(SliderW*, void*);
-public:
-  SliderW *shar_intl;
-private:
-  inline void cb_shar_intl_i(SliderW*, void*);
-  static void cb_shar_intl(SliderW*, void*);
-public:
-  SliderW *shar_chl;
-private:
-  inline void cb_shar_chl_i(SliderW*, void*);
-  static void cb_shar_chl(SliderW*, void*);
-public:
-  SliderW *shar_ganl;
-private:
-  inline void cb_shar_ganl_i(SliderW*, void*);
-  static void cb_shar_ganl(SliderW*, void*);
-public:
-  SliderW *shar_intr;
-private:
-  inline void cb_shar_intr_i(SliderW*, void*);
-  static void cb_shar_intr(SliderW*, void*);
-public:
-  SliderW *shar_chr;
-private:
-  inline void cb_shar_chr_i(SliderW*, void*);
-  static void cb_shar_chr(SliderW*, void*);
-public:
-  SliderW *shar_ganr;
-private:
-  inline void cb_shar_ganr_i(SliderW*, void*);
-  static void cb_shar_ganr(SliderW*, void*);
-public:
-  SliderW *shar_lrc;
-private:
-  inline void cb_shar_lrc_i(SliderW*, void*);
-  static void cb_shar_lrc(SliderW*, void*);
-public:
-  Fl_Check_Button *shar_MIDI;
-private:
-  inline void cb_shar_MIDI_i(Fl_Check_Button*, void*);
-  static void cb_shar_MIDI(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *shar_SELECT;
-private:
-  inline void cb_shar_SELECT_i(Fl_Check_Button*, void*);
-  static void cb_shar_SELECT(Fl_Check_Button*, void*);
-public:
-  Fl_Box *shar_chordname;
-  SliderW *shar_note;
-private:
-  inline void cb_shar_note_i(SliderW*, void*);
-  static void cb_shar_note(SliderW*, void*);
-public:
-  SliderW *shar_type;
-private:
-  inline void cb_shar_type_i(SliderW*, void*);
-  static void cb_shar_type(SliderW*, void*);
-public:
+  SharGui *SHAR;
   Fl_Group *COMPBAND;
   Fl_Light_Button *cband_activar;
 private:
