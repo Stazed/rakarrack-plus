@@ -182,6 +182,9 @@ decl {class SequenceGui; // forward declaration} {public global
 decl {class ShifterGui; // forward declaration} {public global
 }
 
+decl {class StompboxGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1266,165 +1269,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group STOMPBOX {
         user_data 1
-        xywh {481 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button stomp_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->StompBox_Bypass);
- return;
-}
-rkr->StompBox_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_StompBox->cleanup();
-findpos(39,(int)o->value(),o);}
-          xywh {486 216 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
-        }
-        Fl_Choice stomp_preset {
-          label Preset
-          user_data 12039
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12039))rkr->efx_StompBox->setpreset((int)o->value());
-stomp_WD->value(rkr->efx_StompBox->getpar(0));
-stomp_gain->value(rkr->efx_StompBox->getpar(4));
-stomp_low->value(rkr->efx_StompBox->getpar(3));
-stomp_mid->value(rkr->efx_StompBox->getpar(2));
-stomp_high->value(rkr->efx_StompBox->getpar(1));
-
-stomp_mode->value(rkr->efx_StompBox->getpar(5));}
-          xywh {558 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Odie
-            xywh {20 20 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label Grunger
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Hard Dist.}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Ratula
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Classic Dist}
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Morbid Impalement}
-            xywh {30 30 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Sharp Metal}
-            xywh {40 40 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Classic Fuzz}
-            xywh {50 50 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider stomp_WD {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(334);
- return;
-}
-rkr->efx_StompBox->changepar(0,(int)o->value());}
-          xywh {531 242 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider stomp_gain {
-          label Gain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(335);
- return;
-}
-rkr->efx_StompBox->changepar(4,(int)o->value());}
-          xywh {531 270 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider stomp_low {
-          label Low
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(336);
- return;
-}
-rkr->efx_StompBox->changepar(3,(int)o->value());}
-          xywh {531 287 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider stomp_mid {
-          label Mid
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(337);
- return;
-}
-rkr->efx_StompBox->changepar(2,(int)o->value());}
-          xywh {531 304 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 36 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider stomp_high {
-          label High
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(338);
- return;
-}
-rkr->efx_StompBox->changepar(1,(int)o->value());}
-          xywh {531 321 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice stomp_mode {
-          label Mode
-          user_data 12
-          callback {rkr->efx_StompBox->changepar(5,(int)o->value())}
-          xywh {524 377 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
-        } {
-          MenuItem {} {
-            label Amp
-            xywh {20 20 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Grunge
-            xywh {30 30 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Rat
-            xywh {40 40 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Fat Cat}
-            xywh {50 50 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Dist+}
-            xywh {60 60 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Death
-            xywh {70 70 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Mid Elves Own}
-            xywh {80 80 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Fuzz
-            xywh {90 90 36 21} labelsize 9
-          }
-        }
-      }
+        xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "stompbox_gui.h"}
+        class StompboxGui
+      } {}
       Fl_Group REVERBTRON {
         user_data 1
         xywh {158 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -6426,8 +6274,8 @@ for(i=0;i<rkr->NumEffects;i++)
     break;
 
     case 39://StompBox
-    stomp_activar->value(rkr->StompBox_Bypass);
-    stomp_preset->do_callback(stomp_preset,1);
+    STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
+    STOMPBOX->stomp_preset->do_callback(STOMPBOX->stomp_preset,1);
     break;
 
     case 40://Reverbtron
@@ -7206,7 +7054,7 @@ switch (rkr->efx_order[i])
 
    case 39:
        STOMPBOX->position(x[i],y[i]);
-       stomp_activar->shortcut(s[i]);
+       STOMPBOX->stomp_activar->shortcut(s[i]);
        if(!rkr->deachide)STOMPBOX->show();
        if(rkr->StompBox_Bypass)
        {
@@ -9109,24 +8957,24 @@ switch (i)
      SHIFTER->shifter_whammy->redraw();
      break;
      case 334:
-     stomp_WD->value(rkr->efx_StompBox->getpar(0));
-     stomp_WD->redraw();
+     STOMPBOX->stomp_WD->value(rkr->efx_StompBox->getpar(0));
+     STOMPBOX->stomp_WD->redraw();
      break;
      case 335:
-     stomp_gain->value(rkr->efx_StompBox->getpar(4));
-     stomp_gain->redraw();
+     STOMPBOX->stomp_gain->value(rkr->efx_StompBox->getpar(4));
+     STOMPBOX->stomp_gain->redraw();
      break;
      case 336:
-     stomp_low->value(rkr->efx_StompBox->getpar(3)-64);
-     stomp_low->redraw();
+     STOMPBOX->stomp_low->value(rkr->efx_StompBox->getpar(3)-64);
+     STOMPBOX->stomp_low->redraw();
      break;
      case 337:
-     stomp_mid->value(rkr->efx_StompBox->getpar(2)-64);
-     stomp_mid->redraw();
+     STOMPBOX->stomp_mid->value(rkr->efx_StompBox->getpar(2)-64);
+     STOMPBOX->stomp_mid->redraw();
      break;
      case 338:
-     stomp_high->value(rkr->efx_StompBox->getpar(1)-64);
-     stomp_high->redraw();
+     STOMPBOX->stomp_high->value(rkr->efx_StompBox->getpar(1)-64);
+     STOMPBOX->stomp_high->redraw();
      break;
      case 339:
      revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
@@ -9572,8 +9420,8 @@ switch(miralo)
   SHIFTER->shifter_activar->do_callback();
   break;
  case 39:
-  stomp_activar->value(rkr->StompBox_Bypass);
-  stomp_activar->do_callback();
+  STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
+  STOMPBOX->stomp_activar->do_callback();
   break;
  case 40:
   revtron_activar->value(rkr->Reverbtron_Bypass);
@@ -11369,7 +11217,7 @@ for(i=0;i<10;i++)
 
     case 39://StompBox
     if (i<numEff)rkr->StompBox_Bypass=1; else rkr->StompBox_Bypass=0;
-    stomp_activar->value(rkr->StompBox_Bypass);
+    STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
     break;
 
     case 40://Reverbtron

@@ -751,128 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_stomp_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->StompBox_Bypass);
- return;
-}
-rkr->StompBox_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_StompBox->cleanup();
-findpos(39,(int)o->value(),o);
-}
-void RKRGUI::cb_stomp_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_activar_i(o,v);
-}
-
-void RKRGUI::cb_stomp_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12039))rkr->efx_StompBox->setpreset((int)o->value());
-stomp_WD->value(rkr->efx_StompBox->getpar(0));
-stomp_gain->value(rkr->efx_StompBox->getpar(4));
-stomp_low->value(rkr->efx_StompBox->getpar(3));
-stomp_mid->value(rkr->efx_StompBox->getpar(2));
-stomp_high->value(rkr->efx_StompBox->getpar(1));
-
-stomp_mode->value(rkr->efx_StompBox->getpar(5));
-}
-void RKRGUI::cb_stomp_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_stomp_preset[] = {
- {"Odie", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Grunger", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Hard Dist.", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Ratula", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Classic Dist", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Morbid Impalement", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Sharp Metal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Classic Fuzz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_stomp_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(334);
- return;
-}
-rkr->efx_StompBox->changepar(0,(int)o->value());
-}
-void RKRGUI::cb_stomp_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_WD_i(o,v);
-}
-
-void RKRGUI::cb_stomp_gain_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(335);
- return;
-}
-rkr->efx_StompBox->changepar(4,(int)o->value());
-}
-void RKRGUI::cb_stomp_gain(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_gain_i(o,v);
-}
-
-void RKRGUI::cb_stomp_low_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(336);
- return;
-}
-rkr->efx_StompBox->changepar(3,(int)o->value());
-}
-void RKRGUI::cb_stomp_low(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_low_i(o,v);
-}
-
-void RKRGUI::cb_stomp_mid_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(337);
- return;
-}
-rkr->efx_StompBox->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_stomp_mid(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_mid_i(o,v);
-}
-
-void RKRGUI::cb_stomp_high_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(338);
- return;
-}
-rkr->efx_StompBox->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_stomp_high(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_high_i(o,v);
-}
-
-void RKRGUI::cb_stomp_mode_i(Fl_Choice* o, void*) {
-  rkr->efx_StompBox->changepar(5,(int)o->value());
-}
-void RKRGUI::cb_stomp_mode(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_stomp_mode_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_stomp_mode[] = {
- {"Amp", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Grunge", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Rat", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Fat Cat", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Dist+", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Death", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Mid Elves Own", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Fuzz", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void RKRGUI::cb_revtron_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -5142,127 +5020,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       SHIFTER->hide();
       SHIFTER->end();
     } // ShifterGui* SHIFTER
-    { STOMPBOX = new Fl_Group(481, 212, 158, 184);
+    { STOMPBOX = new StompboxGui(639, 413, 158, 184);
       STOMPBOX->box(FL_UP_BOX);
       STOMPBOX->color(FL_FOREGROUND_COLOR);
       STOMPBOX->selection_color(FL_FOREGROUND_COLOR);
+      STOMPBOX->labeltype(FL_NORMAL_LABEL);
       STOMPBOX->labelfont(1);
+      STOMPBOX->labelsize(14);
+      STOMPBOX->labelcolor(FL_FOREGROUND_COLOR);
       STOMPBOX->user_data((void*)(1));
       STOMPBOX->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      STOMPBOX->when(FL_WHEN_RELEASE);
       STOMPBOX->hide();
-      { stomp_activar = new Fl_Light_Button(486, 216, 34, 18, "On");
-        stomp_activar->shortcut(0x30);
-        stomp_activar->color((Fl_Color)62);
-        stomp_activar->selection_color((Fl_Color)1);
-        stomp_activar->labelsize(10);
-        stomp_activar->callback((Fl_Callback*)cb_stomp_activar, (void*)(2));
-        stomp_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* stomp_activar
-      { stomp_preset = new Fl_Choice(558, 216, 76, 18, "Preset");
-        stomp_preset->down_box(FL_BORDER_BOX);
-        stomp_preset->selection_color(FL_FOREGROUND_COLOR);
-        stomp_preset->labelsize(10);
-        stomp_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        stomp_preset->textsize(10);
-        stomp_preset->textcolor(FL_BACKGROUND2_COLOR);
-        stomp_preset->callback((Fl_Callback*)cb_stomp_preset, (void*)(12039));
-        stomp_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        stomp_preset->menu(menu_stomp_preset);
-      } // Fl_Choice* stomp_preset
-      { stomp_WD = new SliderW(531, 242, 100, 10, "Level");
-        stomp_WD->type(5);
-        stomp_WD->box(FL_FLAT_BOX);
-        stomp_WD->color((Fl_Color)178);
-        stomp_WD->selection_color((Fl_Color)62);
-        stomp_WD->labeltype(FL_NORMAL_LABEL);
-        stomp_WD->labelfont(0);
-        stomp_WD->labelsize(10);
-        stomp_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        stomp_WD->maximum(127);
-        stomp_WD->step(1);
-        stomp_WD->textcolor(FL_BACKGROUND2_COLOR);
-        stomp_WD->callback((Fl_Callback*)cb_stomp_WD);
-        stomp_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        stomp_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* stomp_WD
-      { stomp_gain = new SliderW(531, 270, 100, 10, "Gain");
-        stomp_gain->type(5);
-        stomp_gain->box(FL_FLAT_BOX);
-        stomp_gain->color((Fl_Color)178);
-        stomp_gain->selection_color((Fl_Color)62);
-        stomp_gain->labeltype(FL_NORMAL_LABEL);
-        stomp_gain->labelfont(0);
-        stomp_gain->labelsize(10);
-        stomp_gain->labelcolor(FL_BACKGROUND2_COLOR);
-        stomp_gain->maximum(127);
-        stomp_gain->step(1);
-        stomp_gain->textcolor(FL_BACKGROUND2_COLOR);
-        stomp_gain->callback((Fl_Callback*)cb_stomp_gain);
-        stomp_gain->align(Fl_Align(FL_ALIGN_LEFT));
-        stomp_gain->when(FL_WHEN_CHANGED);
-      } // SliderW* stomp_gain
-      { stomp_low = new SliderW(531, 287, 100, 10, "Low");
-        stomp_low->type(5);
-        stomp_low->box(FL_FLAT_BOX);
-        stomp_low->color((Fl_Color)178);
-        stomp_low->selection_color((Fl_Color)62);
-        stomp_low->labeltype(FL_NORMAL_LABEL);
-        stomp_low->labelfont(0);
-        stomp_low->labelsize(10);
-        stomp_low->labelcolor(FL_BACKGROUND2_COLOR);
-        stomp_low->minimum(-64);
-        stomp_low->maximum(64);
-        stomp_low->step(1);
-        stomp_low->textcolor(FL_BACKGROUND2_COLOR);
-        stomp_low->callback((Fl_Callback*)cb_stomp_low);
-        stomp_low->align(Fl_Align(FL_ALIGN_LEFT));
-        stomp_low->when(FL_WHEN_CHANGED);
-      } // SliderW* stomp_low
-      { stomp_mid = new SliderW(531, 304, 100, 10, "Mid");
-        stomp_mid->type(5);
-        stomp_mid->box(FL_FLAT_BOX);
-        stomp_mid->color((Fl_Color)178);
-        stomp_mid->selection_color((Fl_Color)62);
-        stomp_mid->labeltype(FL_NORMAL_LABEL);
-        stomp_mid->labelfont(0);
-        stomp_mid->labelsize(10);
-        stomp_mid->labelcolor(FL_BACKGROUND2_COLOR);
-        stomp_mid->minimum(-64);
-        stomp_mid->maximum(64);
-        stomp_mid->step(1);
-        stomp_mid->textcolor(FL_BACKGROUND2_COLOR);
-        stomp_mid->callback((Fl_Callback*)cb_stomp_mid);
-        stomp_mid->align(Fl_Align(36));
-        stomp_mid->when(FL_WHEN_CHANGED);
-      } // SliderW* stomp_mid
-      { stomp_high = new SliderW(531, 321, 100, 10, "High");
-        stomp_high->type(5);
-        stomp_high->box(FL_FLAT_BOX);
-        stomp_high->color((Fl_Color)178);
-        stomp_high->selection_color((Fl_Color)62);
-        stomp_high->labeltype(FL_NORMAL_LABEL);
-        stomp_high->labelfont(0);
-        stomp_high->labelsize(10);
-        stomp_high->labelcolor(FL_BACKGROUND2_COLOR);
-        stomp_high->minimum(-64);
-        stomp_high->maximum(64);
-        stomp_high->step(1);
-        stomp_high->textcolor(FL_BACKGROUND2_COLOR);
-        stomp_high->callback((Fl_Callback*)cb_stomp_high);
-        stomp_high->align(Fl_Align(FL_ALIGN_LEFT));
-        stomp_high->when(FL_WHEN_CHANGED);
-      } // SliderW* stomp_high
-      { stomp_mode = new Fl_Choice(524, 377, 78, 13, "Mode");
-        stomp_mode->down_box(FL_BORDER_BOX);
-        stomp_mode->labelsize(9);
-        stomp_mode->labelcolor(FL_BACKGROUND2_COLOR);
-        stomp_mode->textsize(9);
-        stomp_mode->textcolor(FL_BACKGROUND2_COLOR);
-        stomp_mode->callback((Fl_Callback*)cb_stomp_mode, (void*)(12));
-        stomp_mode->menu(menu_stomp_mode);
-      } // Fl_Choice* stomp_mode
       STOMPBOX->end();
-    } // Fl_Group* STOMPBOX
+    } // StompboxGui* STOMPBOX
     { REVERBTRON = new Fl_Group(158, 212, 158, 184);
       REVERBTRON->box(FL_UP_BOX);
       REVERBTRON->color(FL_FOREGROUND_COLOR);
@@ -9684,8 +9455,8 @@ void RKRGUI::Put_Loaded() {
       break;
   
       case 39://StompBox
-      stomp_activar->value(rkr->StompBox_Bypass);
-      stomp_preset->do_callback(stomp_preset,1);
+      STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
+      STOMPBOX->stomp_preset->do_callback(STOMPBOX->stomp_preset,1);
       break;
   
       case 40://Reverbtron
@@ -10465,7 +10236,7 @@ void RKRGUI::reordena() {
   
      case 39:
          STOMPBOX->position(x[i],y[i]);
-         stomp_activar->shortcut(s[i]);
+         STOMPBOX->stomp_activar->shortcut(s[i]);
          if(!rkr->deachide)STOMPBOX->show();
          if(rkr->StompBox_Bypass)
          {
@@ -12376,24 +12147,24 @@ void RKRGUI::ActMIDI() {
        SHIFTER->shifter_whammy->redraw();
        break;
        case 334:
-       stomp_WD->value(rkr->efx_StompBox->getpar(0));
-       stomp_WD->redraw();
+       STOMPBOX->stomp_WD->value(rkr->efx_StompBox->getpar(0));
+       STOMPBOX->stomp_WD->redraw();
        break;
        case 335:
-       stomp_gain->value(rkr->efx_StompBox->getpar(4));
-       stomp_gain->redraw();
+       STOMPBOX->stomp_gain->value(rkr->efx_StompBox->getpar(4));
+       STOMPBOX->stomp_gain->redraw();
        break;
        case 336:
-       stomp_low->value(rkr->efx_StompBox->getpar(3)-64);
-       stomp_low->redraw();
+       STOMPBOX->stomp_low->value(rkr->efx_StompBox->getpar(3)-64);
+       STOMPBOX->stomp_low->redraw();
        break;
        case 337:
-       stomp_mid->value(rkr->efx_StompBox->getpar(2)-64);
-       stomp_mid->redraw();
+       STOMPBOX->stomp_mid->value(rkr->efx_StompBox->getpar(2)-64);
+       STOMPBOX->stomp_mid->redraw();
        break;
        case 338:
-       stomp_high->value(rkr->efx_StompBox->getpar(1)-64);
-       stomp_high->redraw();
+       STOMPBOX->stomp_high->value(rkr->efx_StompBox->getpar(1)-64);
+       STOMPBOX->stomp_high->redraw();
        break;
        case 339:
        revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
@@ -12839,8 +12610,8 @@ void RKRGUI::ActOnOff() {
     SHIFTER->shifter_activar->do_callback();
     break;
    case 39:
-    stomp_activar->value(rkr->StompBox_Bypass);
-    stomp_activar->do_callback();
+    STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
+    STOMPBOX->stomp_activar->do_callback();
     break;
    case 40:
     revtron_activar->value(rkr->Reverbtron_Bypass);
@@ -14662,7 +14433,7 @@ void RKRGUI::RandomPreset() {
   
       case 39://StompBox
       if (i<numEff)rkr->StompBox_Bypass=1; else rkr->StompBox_Bypass=0;
-      stomp_activar->value(rkr->StompBox_Bypass);
+      STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
       break;
   
       case 40://Reverbtron

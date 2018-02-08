@@ -54,6 +54,7 @@ set (ProgSources
     UI/sustain_gui.cxx
     UI/sequence_gui.cxx
     UI/shifter_gui.cxx
+    UI/stompbox_gui.cxx
     process.C
     fileio.C
     varios.C

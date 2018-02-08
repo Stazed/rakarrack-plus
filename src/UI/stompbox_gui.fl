@@ -1,0 +1,168 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class StompboxGui {
+  user_data 1 open
+  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"} visible position_relative
+} {
+  Fl_Light_Button stomp_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->StompBox_Bypass);
+ return;
+}
+rkr->StompBox_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_StompBox->cleanup();
+rgui->findpos(39,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+  }
+  Fl_Choice stomp_preset {
+    label Preset
+    user_data 12039
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12039))rkr->efx_StompBox->setpreset((int)o->value());
+stomp_WD->value(rkr->efx_StompBox->getpar(0));
+stomp_gain->value(rkr->efx_StompBox->getpar(4));
+stomp_low->value(rkr->efx_StompBox->getpar(3));
+stomp_mid->value(rkr->efx_StompBox->getpar(2));
+stomp_high->value(rkr->efx_StompBox->getpar(1));
+
+stomp_mode->value(rkr->efx_StompBox->getpar(5));}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label Odie
+      xywh {20 20 45 26} labelsize 10
+    }
+    MenuItem {} {
+      label Grunger
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Hard Dist.}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Ratula
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Classic Dist}
+      xywh {20 20 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Morbid Impalement}
+      xywh {30 30 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Sharp Metal}
+      xywh {40 40 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Classic Fuzz}
+      xywh {50 50 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider stomp_WD {
+    label Level
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(334);
+ return;
+}
+rkr->efx_StompBox->changepar(0,(int)o->value());}
+    xywh {50 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider stomp_gain {
+    label Gain
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(335);
+ return;
+}
+rkr->efx_StompBox->changepar(4,(int)o->value());}
+    xywh {50 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider stomp_low {
+    label Low
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(336);
+ return;
+}
+rkr->efx_StompBox->changepar(3,(int)o->value());}
+    xywh {50 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider stomp_mid {
+    label Mid
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(337);
+ return;
+}
+rkr->efx_StompBox->changepar(2,(int)o->value());}
+    xywh {50 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 36 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider stomp_high {
+    label High
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(338);
+ return;
+}
+rkr->efx_StompBox->changepar(1,(int)o->value());}
+    xywh {50 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice stomp_mode {
+    label Mode
+    user_data 12
+    callback {rkr->efx_StompBox->changepar(5,(int)o->value())}
+    xywh {43 165 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
+  } {
+    MenuItem {} {
+      label Amp
+      xywh {20 20 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Grunge
+      xywh {30 30 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Rat
+      xywh {40 40 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Fat Cat}
+      xywh {50 50 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Dist+}
+      xywh {60 60 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Death
+      xywh {70 70 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Mid Elves Own}
+      xywh {80 80 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label Fuzz
+      xywh {90 90 36 21} labelsize 9
+    }
+  }
+}

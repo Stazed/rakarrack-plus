@@ -63,6 +63,7 @@ class VocoderGui; // forward declaration
 class SustainGui; // forward declaration
 class SequenceGui; // forward declaration
 class ShifterGui; // forward declaration
+class StompboxGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -107,6 +108,7 @@ class ShifterGui; // forward declaration
 #include "sustain_gui.h"
 #include "sequence_gui.h"
 #include "shifter_gui.h"
+#include "stompbox_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -308,49 +310,7 @@ public:
   SustainGui *SUSTAINER;
   SequenceGui *SEQUENCE;
   ShifterGui *SHIFTER;
-  Fl_Group *STOMPBOX;
-  Fl_Light_Button *stomp_activar;
-private:
-  inline void cb_stomp_activar_i(Fl_Light_Button*, void*);
-  static void cb_stomp_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *stomp_preset;
-private:
-  inline void cb_stomp_preset_i(Fl_Choice*, void*);
-  static void cb_stomp_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_stomp_preset[];
-public:
-  SliderW *stomp_WD;
-private:
-  inline void cb_stomp_WD_i(SliderW*, void*);
-  static void cb_stomp_WD(SliderW*, void*);
-public:
-  SliderW *stomp_gain;
-private:
-  inline void cb_stomp_gain_i(SliderW*, void*);
-  static void cb_stomp_gain(SliderW*, void*);
-public:
-  SliderW *stomp_low;
-private:
-  inline void cb_stomp_low_i(SliderW*, void*);
-  static void cb_stomp_low(SliderW*, void*);
-public:
-  SliderW *stomp_mid;
-private:
-  inline void cb_stomp_mid_i(SliderW*, void*);
-  static void cb_stomp_mid(SliderW*, void*);
-public:
-  SliderW *stomp_high;
-private:
-  inline void cb_stomp_high_i(SliderW*, void*);
-  static void cb_stomp_high(SliderW*, void*);
-public:
-  Fl_Choice *stomp_mode;
-private:
-  inline void cb_stomp_mode_i(Fl_Choice*, void*);
-  static void cb_stomp_mode(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_stomp_mode[];
-public:
+  StompboxGui *STOMPBOX;
   Fl_Group *REVERBTRON;
   Fl_Light_Button *revtron_activar;
 private:
