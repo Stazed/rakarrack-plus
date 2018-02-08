@@ -65,6 +65,7 @@ class SequenceGui; // forward declaration
 class ShifterGui; // forward declaration
 class StompboxGui; // forward declaration
 class RevtronGui; // forward declaration
+class EchotronGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -111,12 +112,13 @@ class RevtronGui; // forward declaration
 #include "shifter_gui.h"
 #include "stompbox_gui.h"
 #include "reverbtron_gui.h"
+#include "echotron_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Counter.H>
 #include <FL/Fl_Value_Input.H>
+#include <FL/Fl_Counter.H>
 #include <FL/Fl_Input.H>
 #include "analyzer.h"
 #include <FL/Fl_Browser.H>
@@ -314,104 +316,7 @@ public:
   ShifterGui *SHIFTER;
   StompboxGui *STOMPBOX;
   RevtronGui *REVERBTRON;
-  Fl_Group *ECHOTRON;
-  Fl_Light_Button *echotron_activar;
-private:
-  inline void cb_echotron_activar_i(Fl_Light_Button*, void*);
-  static void cb_echotron_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *echotron_preset;
-private:
-  inline void cb_echotron_preset_i(Fl_Choice*, void*);
-  static void cb_echotron_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_echotron_preset[];
-public:
-  SliderW *echotron_WD;
-private:
-  inline void cb_echotron_WD_i(SliderW*, void*);
-  static void cb_echotron_WD(SliderW*, void*);
-public:
-  SliderW *echotron_pan;
-private:
-  inline void cb_echotron_pan_i(SliderW*, void*);
-  static void cb_echotron_pan(SliderW*, void*);
-public:
-  SliderW *echotron_tempo;
-private:
-  inline void cb_echotron_tempo_i(SliderW*, void*);
-  static void cb_echotron_tempo(SliderW*, void*);
-public:
-  SliderW *echotron_damp;
-private:
-  inline void cb_echotron_damp_i(SliderW*, void*);
-  static void cb_echotron_damp(SliderW*, void*);
-public:
-  SliderW *echotron_fb;
-private:
-  inline void cb_echotron_fb_i(SliderW*, void*);
-  static void cb_echotron_fb(SliderW*, void*);
-public:
-  SliderW *echotron_lrcross;
-private:
-  inline void cb_echotron_lrcross_i(SliderW*, void*);
-  static void cb_echotron_lrcross(SliderW*, void*);
-public:
-  SliderW *echotron_width;
-private:
-  inline void cb_echotron_width_i(SliderW*, void*);
-  static void cb_echotron_width(SliderW*, void*);
-public:
-  SliderW *echotron_deep;
-private:
-  inline void cb_echotron_deep_i(SliderW*, void*);
-  static void cb_echotron_deep(SliderW*, void*);
-public:
-  SliderW *echotron_stdf;
-private:
-  inline void cb_echotron_stdf_i(SliderW*, void*);
-  static void cb_echotron_stdf(SliderW*, void*);
-public:
-  Fl_Check_Button *echotron_af;
-private:
-  inline void cb_echotron_af_i(Fl_Check_Button*, void*);
-  static void cb_echotron_af(Fl_Check_Button*, void*);
-public:
-  Fl_Choice *echotron_lfotype;
-private:
-  inline void cb_echotron_lfotype_i(Fl_Choice*, void*);
-  static void cb_echotron_lfotype(Fl_Choice*, void*);
-public:
-  Fl_Check_Button *echotron_mf;
-private:
-  inline void cb_echotron_mf_i(Fl_Check_Button*, void*);
-  static void cb_echotron_mf(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *echotron_md;
-private:
-  inline void cb_echotron_md_i(Fl_Check_Button*, void*);
-  static void cb_echotron_md(Fl_Check_Button*, void*);
-public:
-  Fl_Check_Button *echotron_user;
-private:
-  inline void cb_echotron_user_i(Fl_Check_Button*, void*);
-  static void cb_echotron_user(Fl_Check_Button*, void*);
-public:
-  Fl_Button *B_ech;
-private:
-  inline void cb_B_ech_i(Fl_Button*, void*);
-  static void cb_B_ech(Fl_Button*, void*);
-public:
-  Fl_Counter *echotron_length;
-private:
-  inline void cb_echotron_length_i(Fl_Counter*, void*);
-  static void cb_echotron_length(Fl_Counter*, void*);
-public:
-  Fl_Choice *echotron_fnum;
-private:
-  inline void cb_echotron_fnum_i(Fl_Choice*, void*);
-  static void cb_echotron_fnum(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_echotron_fnum[];
-public:
+  EchotronGui *ECHOTRON;
   Fl_Group *SHAR;
   Fl_Light_Button *shar_activar;
 private:

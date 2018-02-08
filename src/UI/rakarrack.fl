@@ -188,6 +188,9 @@ decl {class StompboxGui; // forward declaration} {public global
 decl {class RevtronGui; // forward declaration} {public global
 }
 
+decl {class EchotronGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1284,276 +1287,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group ECHOTRON {
         user_data 1
-        xywh {323 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button echotron_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Echotron_Bypass);
- return;
-}
-rkr->Echotron_Bypass=(int)o->value();
-if((int) o->value()==0) rkr->efx_Echotron->cleanup();
-findpos(41,(int)o->value(),o);}
-          xywh {329 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice echotron_preset {
-          label Preset
-          user_data 12041
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12041))rkr->efx_Echotron->setpreset((int) o->value());
-echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
-echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
-echotron_damp->value(rkr->efx_Echotron->getpar(6));
-echotron_fnum->value(rkr->efx_Echotron->getpar(8));
-echotron_user->value(rkr->efx_Echotron->getpar(4));
-echotron_user->do_callback();
-echotron_fb->value(rkr->efx_Echotron->getpar(10));
-echotron_tempo->value(rkr->efx_Echotron->getpar(5));
-echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
-echotron_width->value(rkr->efx_Echotron->getpar(2));
-echotron_deep->value(rkr->efx_Echotron->getpar(1)-64);
-echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
-echotron_stdf->value(rkr->efx_Echotron->getpar(9));
-echotron_af->value(rkr->efx_Echotron->getpar(15));
-echotron_mf->value(rkr->efx_Echotron->getpar(13));
-echotron_md->value(rkr->efx_Echotron->getpar(12));
-echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
-          xywh {402 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Summer
-            xywh {87 87 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Ambience
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Arranjer
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Suction
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label SuctionFlange
-            xywh {20 20 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider echotron_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(348);
- return;
-}
-rkr->efx_Echotron->changepar(0,(int)(o->value()+64));}
-          xywh {375 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(349);
- return;
-}
-rkr->efx_Echotron->changepar(11,(int)(o->value()+64));}
-          xywh {375 249 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_tempo {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(350);
- return;
-}
-rkr->efx_Echotron->changepar(5,(int)o->value());}
-          xywh {375 261 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 60 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_damp {
-          label Damp
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(351);
- return;
-}
-rkr->efx_Echotron->changepar(6,(int)o->value());}
-          xywh {375 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(352);
- return;
-}
-rkr->efx_Echotron->changepar(10,(int)o->value());}
-          xywh {375 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_lrcross {
-          label {L/R.Cr}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(353);
- return;
-}
-rkr->efx_Echotron->changepar(7,(int)(o->value()+64));}
-          xywh {375 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_width {
-          label Width
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(354);
- return;
-}
-rkr->efx_Echotron->changepar(2,(int)o->value());}
-          xywh {375 309 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_deep {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(355);
- return;
-}
-rkr->efx_Echotron->changepar(1,((int)o->value()+64));}
-          xywh {375 321 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider echotron_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(356);
- return;
-}
-rkr->efx_Echotron->changepar(9,(int)o->value());}
-          xywh {375 333 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button echotron_af {
-          label AF
-          user_data 2
-          callback {rkr->efx_Echotron->changepar(15,(int)o->value());}
-          xywh {325 348 32 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Choice echotron_lfotype {
-          label {LFO Type}
-          callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
-          xywh {411 347 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Check_Button echotron_mf {
-          label MF
-          user_data 2
-          callback {rkr->efx_Echotron->changepar(13,(int)o->value());}
-          xywh {325 363 33 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button echotron_md {
-          label MD
-          user_data 2
-          callback {rkr->efx_Echotron->changepar(12,(int)o->value());}
-          xywh {356 363 34 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button echotron_user {
-          label User
-          user_data 2
-          callback {rkr->efx_Echotron->changepar(4,(int)o->value());
-
-if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
-          xywh {390 366 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Button B_ech {
-          label Browse
-          user_data 2
-          callback {char *filename;
-filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".dly");
-strcpy(rkr->efx_Echotron->Filename,filename);
-rkr->efx_Echotron->setfile(USERFILE);
-echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
-          xywh {429 368 46 10} labelsize 10 deactivate
-        }
-        Fl_Counter echotron_length {
-          label {\#}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(357);
- return;
-}
-rkr->efx_Echotron->changepar(3,(int)o->value());}
-          xywh {339 379 48 12} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textsize 9
-        }
-        Fl_Choice echotron_fnum {
-          label File
-          user_data 12
-          callback {rkr->efx_Echotron->changepar(8,(int)o->value());
-echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
-          xywh {411 380 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label SwingPong
-            xywh {64 64 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Short Delays}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Flange + Echo}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Comb
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label EchoFlange
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Filtered Echo}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Notch-Wah}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Multi-Chorus}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label PingPong
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {90-Shifter}
-            xywh {30 30 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Basic LR Delay}
-            xywh {40 40 36 21} labelsize 10
-          }
-        }
-      }
+        xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "echotron_gui.h"}
+        class EchotronGui
+      } {}
       Fl_Group SHAR {
         user_data 1
         xywh {481 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -6017,8 +5754,8 @@ for(i=0;i<rkr->NumEffects;i++)
     break;
 
     case 41://Echotron
-    echotron_activar->value(rkr->Echotron_Bypass);
-    echotron_preset->do_callback(echotron_preset,1);
+    ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
+    ECHOTRON->echotron_preset->do_callback(ECHOTRON->echotron_preset,1);
     break;
 
     case 42://StereoHarm
@@ -6811,7 +6548,7 @@ switch (rkr->efx_order[i])
 
    case 41:
        ECHOTRON->position(x[i],y[i]);
-       echotron_activar->shortcut(s[i]);
+       ECHOTRON->echotron_activar->shortcut(s[i]);
        if(!rkr->deachide)ECHOTRON->show();
        if(rkr->Echotron_Bypass)
        {
@@ -8746,44 +8483,44 @@ switch (i)
      REVERBTRON->revtron_fade->redraw();
      break;
      case 348:
-     echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
-     echotron_WD->redraw();
+     ECHOTRON->echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
+     ECHOTRON->echotron_WD->redraw();
      break;
      case 349:
-     echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
-     echotron_pan->redraw();
+     ECHOTRON->echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
+     ECHOTRON->echotron_pan->redraw();
      break;
      case 350:
-     echotron_tempo->value(rkr->efx_Echotron->getpar(5));
-     echotron_tempo->redraw();
+     ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(5));
+     ECHOTRON->echotron_tempo->redraw();
      break;
      case 351:
-     echotron_damp->value(rkr->efx_Echotron->getpar(6));
-     echotron_damp->redraw();
+     ECHOTRON->echotron_damp->value(rkr->efx_Echotron->getpar(6));
+     ECHOTRON->echotron_damp->redraw();
      break;
      case 352:
-     echotron_fb->value(rkr->efx_Echotron->getpar(10)-64);
-     echotron_fb->redraw();
+     ECHOTRON->echotron_fb->value(rkr->efx_Echotron->getpar(10)-64);
+     ECHOTRON->echotron_fb->redraw();
      break;
      case 353:
-     echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
-     echotron_lrcross->redraw();
+     ECHOTRON->echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
+     ECHOTRON->echotron_lrcross->redraw();
      break;
      case 354:
-     echotron_width->value(rkr->efx_Echotron->getpar(2));
-     echotron_width->redraw();
+     ECHOTRON->echotron_width->value(rkr->efx_Echotron->getpar(2));
+     ECHOTRON->echotron_width->redraw();
      break;
      case 355:
-     echotron_deep->value(rkr->efx_Echotron->getpar(1)-64);
-     echotron_deep->redraw();
+     ECHOTRON->echotron_deep->value(rkr->efx_Echotron->getpar(1)-64);
+     ECHOTRON->echotron_deep->redraw();
      break;
      case 356:
-     echotron_stdf->value(rkr->efx_Echotron->getpar(9));
-     echotron_stdf->redraw();
+     ECHOTRON->echotron_stdf->value(rkr->efx_Echotron->getpar(9));
+     ECHOTRON->echotron_stdf->redraw();
      break;
      case 357:
-     echotron_length->value(rkr->efx_Echotron->getpar(3));
-     echotron_length->redraw();
+     ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(3));
+     ECHOTRON->echotron_length->redraw();
      break;
      case 358:
      shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
@@ -9161,8 +8898,8 @@ switch(miralo)
   REVERBTRON->revtron_activar->do_callback();
   break;
  case 41:
-  echotron_activar->value(rkr->Echotron_Bypass);
-  echotron_activar->do_callback();
+  ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
+  ECHOTRON->echotron_activar->do_callback();
   break;
  case 42:
   shar_activar->value(rkr->StereoHarm_Bypass);
@@ -10038,8 +9775,8 @@ if(rkr->Chorus_Bypass)
   }
   if(rkr->Echotron_Bypass)
   { 
-   echotron_tempo->value(rkr->efx_Echotron->getpar(5));
-   echotron_tempo->redraw();
+   ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(5));
+   ECHOTRON->echotron_tempo->redraw();
   }
   if(rkr->Opticaltrem_Bypass)
   {
@@ -10960,7 +10697,7 @@ for(i=0;i<10;i++)
 
     case 41://Echotron
     if (i<numEff)rkr->Echotron_Bypass=1; else rkr->Echotron_Bypass=0;
-    echotron_activar->value(rkr->Echotron_Bypass);
+    ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
     break;
 
     case 42://StereoHarm

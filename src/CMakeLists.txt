@@ -56,6 +56,7 @@ set (ProgSources
     UI/shifter_gui.cxx
     UI/stompbox_gui.cxx
     UI/reverbtron_gui.cxx
+    UI/echotron_gui.cxx
     process.C
     fileio.C
     varios.C
