@@ -197,6 +197,9 @@ decl {class SharGui; // forward declaration} {public global
 decl {class CbandGui; // forward declaration} {public global
 }
 
+decl {class OtremGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1311,130 +1314,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group OTREM {
         user_data 1
-        xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
-      } {
-        Fl_Light_Button otrem_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Opticaltrem_Bypass);
- return;
-}
-rkr->Opticaltrem_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Opticaltrem->cleanup();
-findpos(44,(int)o->value(),o);}
-          xywh {325 217 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice otrem_preset {
-          label Preset
-          user_data 12044
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12044))rkr->efx_Opticaltrem->setpreset((int)o->value());
-otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
-otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
-otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
-otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
-otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
-otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
-otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));}
-          xywh {397 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Fast
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Trem 2}
-            xywh {72 72 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Hard Pan}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Soft Pan}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Ramp Down}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Hard Ramp}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider otrem_dpth {
-          label Depth
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(381);
- return;
-}
-rkr->efx_Opticaltrem->changepar(0,(int)o->value());}
-          xywh {372 246 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider otrem_freq {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(382);
- return;
-}
-rkr->efx_Opticaltrem->changepar(1,(int)o->value());}
-          xywh {372 266 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider otrem_rnd {
-          label Rnd
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(383);
- return;
-}
-rkr->efx_Opticaltrem->changepar(2,(int)o->value());}
-          xywh {372 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Choice otrem_lfotype {
-          label {LFO Type}
-          callback {rkr->efx_Opticaltrem->changepar(3,(int)o->value());}
-          xywh {383 313 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(CHORUS->get_menu_chorus_lfotype());}
-        } {}
-        Fl_Value_Slider otrem_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(384);
- return;
-}
-rkr->efx_Opticaltrem->changepar(4,(int)o->value());}
-          xywh {372 340 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider otrem_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(385);
- return;
-}
-rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));}
-          xywh {372 360 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button otrem_invert {
-          label Invert
-          user_data 2
-          callback {rkr->efx_Opticaltrem->changepar(6,(int)o->value())}
-          tooltip {If checked it behaves more like tube preamp trem. If unchecked it behaves like a stompbox Opto Trem} xywh {428 378 73 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-      }
+        xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "otrem_gui.h"}
+        class OtremGui
+      } {}
       Fl_Group VIBE {
         user_data 1
         xywh {480 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -5384,8 +5267,8 @@ for(i=0;i<rkr->NumEffects;i++)
     break;
 
     case 44://Opticaltrem
-    otrem_activar->value(rkr->Opticaltrem_Bypass);
-    otrem_preset->do_callback(otrem_preset,1);
+    OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
+    OTREM->otrem_preset->do_callback(OTREM->otrem_preset,1);
     break;
 
     case 45://Vibe
@@ -6199,7 +6082,7 @@ switch (rkr->efx_order[i])
 
    case 44:
        OTREM->position(x[i],y[i]);
-       otrem_activar->shortcut(s[i]);
+       OTREM->otrem_activar->shortcut(s[i]);
        if(!rkr->deachide)OTREM->show();
        if(rkr->Opticaltrem_Bypass)
        {
@@ -8232,24 +8115,24 @@ switch (i)
      COMPBAND->cband_cross3->redraw();
      break;
      case 381:
-     otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
-     otrem_dpth->redraw();
+     OTREM->otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
+     OTREM->otrem_dpth->redraw();
      break;
      case 382:
-     otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
-     otrem_freq->redraw();
+     OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+     OTREM->otrem_freq->redraw();
      break;
      case 383:
-     otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
-     otrem_rnd->redraw();
+     OTREM->otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
+     OTREM->otrem_rnd->redraw();
      break;
      case 384:
-     otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
-     otrem_stdf->redraw();
+     OTREM->otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
+     OTREM->otrem_stdf->redraw();
      break;
      case 385:
-     otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
-     otrem_pan->redraw();
+     OTREM->otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
+     OTREM->otrem_pan->redraw();
      break;
      case 386:
      vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
@@ -8525,8 +8408,8 @@ switch(miralo)
   COMPBAND->cband_activar->do_callback();
   break;
  case 44:
-  otrem_activar->value(rkr->Opticaltrem_Bypass);
-  otrem_activar->do_callback();
+  OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
+  OTREM->otrem_activar->do_callback();
   break;
 case 45:
   vibe_activar->value(rkr->Vibe_Bypass);
@@ -9395,8 +9278,8 @@ if(rkr->Chorus_Bypass)
   }
   if(rkr->Opticaltrem_Bypass)
   {
-    otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
-    otrem_freq->redraw();  
+    OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+    OTREM->otrem_freq->redraw();  
   }
   if(rkr->Vibe_Bypass)
   {
@@ -10327,7 +10210,7 @@ for(i=0;i<10;i++)
 
     case 44://Opticaltrem
     if (i<numEff)rkr->Opticaltrem_Bypass=1; else rkr->Opticaltrem_Bypass=0;
-    otrem_activar->value(rkr->Opticaltrem_Bypass);
+    OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
     break;
 
     case 45://Vibe

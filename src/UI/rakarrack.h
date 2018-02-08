@@ -68,6 +68,7 @@ class RevtronGui; // forward declaration
 class EchotronGui; // forward declaration
 class SharGui; // forward declaration
 class CbandGui; // forward declaration
+class OtremGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -117,6 +118,7 @@ class CbandGui; // forward declaration
 #include "echotron_gui.h"
 #include "stereoharm_gui.h"
 #include "compband_gui.h"
+#include "otrem_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -323,53 +325,7 @@ public:
   EchotronGui *ECHOTRON;
   SharGui *SHAR;
   CbandGui *COMPBAND;
-  Fl_Group *OTREM;
-  Fl_Light_Button *otrem_activar;
-private:
-  inline void cb_otrem_activar_i(Fl_Light_Button*, void*);
-  static void cb_otrem_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *otrem_preset;
-private:
-  inline void cb_otrem_preset_i(Fl_Choice*, void*);
-  static void cb_otrem_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_otrem_preset[];
-public:
-  SliderW *otrem_dpth;
-private:
-  inline void cb_otrem_dpth_i(SliderW*, void*);
-  static void cb_otrem_dpth(SliderW*, void*);
-public:
-  SliderW *otrem_freq;
-private:
-  inline void cb_otrem_freq_i(SliderW*, void*);
-  static void cb_otrem_freq(SliderW*, void*);
-public:
-  SliderW *otrem_rnd;
-private:
-  inline void cb_otrem_rnd_i(SliderW*, void*);
-  static void cb_otrem_rnd(SliderW*, void*);
-public:
-  Fl_Choice *otrem_lfotype;
-private:
-  inline void cb_otrem_lfotype_i(Fl_Choice*, void*);
-  static void cb_otrem_lfotype(Fl_Choice*, void*);
-public:
-  SliderW *otrem_stdf;
-private:
-  inline void cb_otrem_stdf_i(SliderW*, void*);
-  static void cb_otrem_stdf(SliderW*, void*);
-public:
-  SliderW *otrem_pan;
-private:
-  inline void cb_otrem_pan_i(SliderW*, void*);
-  static void cb_otrem_pan(SliderW*, void*);
-public:
-  Fl_Check_Button *otrem_invert;
-private:
-  inline void cb_otrem_invert_i(Fl_Check_Button*, void*);
-  static void cb_otrem_invert(Fl_Check_Button*, void*);
-public:
+  OtremGui *OTREM;
   Fl_Group *VIBE;
   Fl_Light_Button *vibe_activar;
 private:

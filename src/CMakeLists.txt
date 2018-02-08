@@ -59,6 +59,7 @@ set (ProgSources
     UI/echotron_gui.cxx
     UI/stereoharm_gui.cxx
     UI/compband_gui.cxx
+    UI/otrem_gui.cxx
     process.C
     fileio.C
     varios.C
