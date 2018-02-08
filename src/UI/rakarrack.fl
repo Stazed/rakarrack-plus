@@ -203,6 +203,9 @@ decl {class OtremGui; // forward declaration} {public global
 decl {class VibeGui; // forward declaration} {public global
 }
 
+decl {class InfinityGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -270,7 +273,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;} open selected
       xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1322,236 +1325,17 @@ Fl::focus(Open_Order);
         class OtremGui
       } {}
       Fl_Group VIBE {
-        user_data 1 selected
+        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "vibe_gui.h"}
         class VibeGui
       } {}
       Fl_Group INFINIT {
         user_data 1
-        xywh {479 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button infinity_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116); 
- o->value(rkr->Infinity_Bypass);
- return;
-} 
-rkr->Infinity_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Infinity->cleanup();
-findpos(46,(int)o->value(),o);}
-          xywh {487 217 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice infinity_preset {
-          label Preset
-          user_data 12046
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12046))rkr->efx_Infinity->setpreset((int) o->value());
-infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
-infinity_Q->value(rkr->efx_Infinity->getpar(9));
-infinity_1->value(rkr->efx_Infinity->getpar(1));
-infinity_2->value(rkr->efx_Infinity->getpar(2));
-infinity_3->value(rkr->efx_Infinity->getpar(3));
-infinity_4->value(rkr->efx_Infinity->getpar(4));
-infinity_5->value(rkr->efx_Infinity->getpar(5));
-infinity_6->value(rkr->efx_Infinity->getpar(6));
-infinity_7->value(rkr->efx_Infinity->getpar(7));
-infinity_8->value(rkr->efx_Infinity->getpar(8));
-infinity_start->value(rkr->efx_Infinity->getpar(10));
-infinity_end->value(rkr->efx_Infinity->getpar(11));
-infinity_rate->value(rkr->efx_Infinity->getpar(12));
-infinity_stdf->value(rkr->efx_Infinity->getpar(13));
-infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
-infinity_pan->value(rkr->efx_Infinity->getpar(15));
-infinity_rev->value(rkr->efx_Infinity->getpar(16));
-infinity_stages->value(rkr->efx_Infinity->getpar(17));}
-          xywh {559 217 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Basic
-            xywh {27 27 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Rising Comb}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Falling Comb}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Laser
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Doppler
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Detune
-            xywh {20 20 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Dizzy Sailor}
-            xywh {30 30 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Stereo Phaser}
-            xywh {40 40 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Corkscrew
-            xywh {50 50 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label FreqeeVox
-            xywh {60 60 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider infinity_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(395);
- return;
-} 
-rkr->efx_Infinity->changepar(0,(int)(o->value()+64));}
-          xywh {531 239 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider infinity_Q {
-          label Res
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(396);
- return;
-}
-rkr->efx_Infinity->changepar(9,(int)o->value());}
-          xywh {531 253 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -1000 maximum 1000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Input infinity_1 {
-          label 1
-          callback {rkr->efx_Infinity->changepar(1,(int)o->value());}
-          xywh {495 268 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Value_Input infinity_2 {
-          label 2
-          callback {rkr->efx_Infinity->changepar(2,(int)o->value());}
-          xywh {531 268 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Value_Input infinity_3 {
-          label 3
-          callback {rkr->efx_Infinity->changepar(3,(int)o->value());}
-          xywh {567 267 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Value_Input infinity_4 {
-          label 4
-          callback {rkr->efx_Infinity->changepar(4,(int)o->value());}
-          xywh {603 267 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Value_Input infinity_5 {
-          label 5
-          callback {rkr->efx_Infinity->changepar(5,(int)o->value());}
-          xywh {495 286 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Value_Input infinity_6 {
-          label 6
-          callback {rkr->efx_Infinity->changepar(6,(int)o->value());}
-          xywh {531 286 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Value_Input infinity_7 {
-          label 7
-          callback {rkr->efx_Infinity->changepar(7,(int)o->value());}
-          xywh {567 286 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Value_Input infinity_8 {
-          label 8
-          callback {rkr->efx_Infinity->changepar(8,(int)o->value());}
-          xywh {603 286 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
-        }
-        Fl_Check_Button infinity_rev {
-          label Rev
-          user_data 2
-          callback {rkr->efx_Infinity->changepar(16,(int)o->value());}
-          tooltip {Reverse left from right directions} xywh {485 305 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
-        }
-        Fl_Counter infinity_stages {
-          label Stages
-          callback {rkr->efx_Infinity->changepar(17,(int)o->value());}
-          xywh {569 305 46 15} type Simple labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 10
-        }
-        Fl_Value_Slider infinity_pan {
-          label AutoPan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(397);
- return;
-} 
-rkr->efx_Infinity->changepar(15,(int)o->value());}
-          xywh {531 323 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider infinity_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(398);
- return;
-} 
-rkr->efx_Infinity->changepar(13,(int)o->value());}
-          xywh {531 335 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider infinity_start {
-          label Start
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(399);
- return;
-} 
-rkr->efx_Infinity->changepar(10,(int)o->value());}
-          xywh {531 347 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider infinity_end {
-          label End
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(400);
- return;
-} 
-rkr->efx_Infinity->changepar(11,(int)o->value());}
-          xywh {531 359 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider infinity_rate {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(401);
- return;
-} 
-rkr->efx_Infinity->changepar(12,(int)o->value());}
-          xywh {531 371 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider infinity_subdiv {
-          label Subdiv
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(402);
- return;
-} 
-rkr->efx_Infinity->changepar(14,(int)o->value());}
-          xywh {531 383 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -16 maximum 16 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "infinity_gui.h"}
+        class InfinityGui
+      } {}
       Fl_Group Tuner {
         user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
@@ -5104,8 +4888,8 @@ for(i=0;i<rkr->NumEffects;i++)
     break;
     
     case 46://Infinity
-    infinity_activar->value(rkr->Infinity_Bypass);
-    infinity_preset->do_callback(infinity_preset,1);
+    INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
+    INFINIT->infinity_preset->do_callback(INFINIT->infinity_preset,1);
     break;
 
   \}
@@ -5933,7 +5717,7 @@ switch (rkr->efx_order[i])
 
    case 46:
        INFINIT->position(x[i],y[i]);
-       infinity_activar->shortcut(s[i]);
+       INFINIT->infinity_activar->shortcut(s[i]);
        if(!rkr->deachide)INFINIT->show();
        if(rkr->Infinity_Bypass)
        {
@@ -7998,36 +7782,36 @@ switch (i)
      VIBE->vibe_pan->redraw();
      break;
      case 395:
-     infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
-     infinity_WD->redraw();
+     INFINIT->infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
+     INFINIT->infinity_WD->redraw();
      break;  	
      case 396:
-     infinity_Q->value(rkr->efx_Infinity->getpar(9));
-     infinity_Q->redraw();
+     INFINIT->infinity_Q->value(rkr->efx_Infinity->getpar(9));
+     INFINIT->infinity_Q->redraw();
      break;  	
      case 397:
-     infinity_pan->value(rkr->efx_Infinity->getpar(15));
-     infinity_pan->redraw();
+     INFINIT->infinity_pan->value(rkr->efx_Infinity->getpar(15));
+     INFINIT->infinity_pan->redraw();
      break;  	
      case 398:
-     infinity_stdf->value(rkr->efx_Infinity->getpar(13)-64);
-     infinity_stdf->redraw();
+     INFINIT->infinity_stdf->value(rkr->efx_Infinity->getpar(13)-64);
+     INFINIT->infinity_stdf->redraw();
      break;  	
      case 399:
-     infinity_start->value(rkr->efx_Infinity->getpar(10));
-     infinity_start->redraw();
+     INFINIT->infinity_start->value(rkr->efx_Infinity->getpar(10));
+     INFINIT->infinity_start->redraw();
      break;  	
      case 400:
-     infinity_end->value(rkr->efx_Infinity->getpar(11));
-     infinity_end->redraw();
+     INFINIT->infinity_end->value(rkr->efx_Infinity->getpar(11));
+     INFINIT->infinity_end->redraw();
      break;  	
      case 401:
-     infinity_rate->value(rkr->efx_Infinity->getpar(12));
-     infinity_rate->redraw();
+     INFINIT->infinity_rate->value(rkr->efx_Infinity->getpar(12));
+     INFINIT->infinity_rate->redraw();
      break;  	
      case 402:
-     infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
-     infinity_subdiv->redraw();
+     INFINIT->infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
+     INFINIT->infinity_subdiv->redraw();
      break;  	
 
 
@@ -8243,8 +8027,8 @@ case 45:
   VIBE->vibe_activar->do_callback();
   break;
 case 46:
-  infinity_activar->value(rkr->Infinity_Bypass);
-  infinity_activar->do_callback();
+  INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
+  INFINIT->infinity_activar->do_callback();
   break;
   
   case 121:
@@ -9115,8 +8899,8 @@ if(rkr->Chorus_Bypass)
   }
   if(rkr->Infinity_Bypass)
   {
-    infinity_rate->value(rkr->efx_Infinity->getpar(12));
-    infinity_rate->redraw();  
+    INFINIT->infinity_rate->value(rkr->efx_Infinity->getpar(12));
+    INFINIT->infinity_rate->redraw();  
   }} {}
   }
   Function {ActACI()} {} {
