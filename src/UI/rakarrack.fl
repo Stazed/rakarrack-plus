@@ -185,6 +185,9 @@ decl {class ShifterGui; // forward declaration} {public global
 decl {class StompboxGui; // forward declaration} {public global
 }
 
+decl {class RevtronGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1275,280 +1278,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group REVERBTRON {
         user_data 1
-        xywh {158 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button revtron_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Reverbtron_Bypass);
- return;
-}
-rkr->Reverbtron_Bypass=(int)o->value();
-if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-findpos(40,(int)o->value(),o);}
-          xywh {164 216 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice revtron_preset {
-          label Preset
-          user_data 12040
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12040))rkr->efx_Reverbtron->setpreset((int) o->value());
-revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
-revtron_level->value(rkr->efx_Reverbtron->getpar(7));
-revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
-revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
-revtron_fnum->value(rkr->efx_Reverbtron->getpar(8));
-revtron_length->value(rkr->efx_Reverbtron->getpar(3));
-revtron_strech->value(rkr->efx_Reverbtron->getpar(9));
-revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
-revtron_user->value(rkr->efx_Reverbtron->getpar(4));
-revtron_user->do_callback();
-revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
-revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
-revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
-revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
-revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
-
-revtron_es->value(rkr->efx_Reverbtron->getpar(12));
-revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
-          xywh {237 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Chamber
-            xywh {77 77 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Concrete Stairwell}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Hall
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Med Hall}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Room
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Hall
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Guitar
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Studio
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Cathedral
-            xywh {0 0 36 21} labelsize 9
-          }
-        }
-        Fl_Value_Slider revtron_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(339);
- return;
-}
-rkr->efx_Reverbtron->changepar(0,(int)(o->value()+64));}
-          xywh {210 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_pan {
-          label Pan
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(340);
- return;
-}
-rkr->efx_Reverbtron->changepar(11,(int)(o->value()+64));}
-          xywh {210 249 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_level {
-          label Level
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(341);
- return;
-}
-rkr->efx_Reverbtron->changepar(7,(int)o->value());}
-          xywh {210 261 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_damp {
-          label Damp
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(342);
- return;
-}
-rkr->efx_Reverbtron->changepar(6,(int)o->value());}
-          xywh {210 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_fb {
-          label Fb
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(343);
- return;
-}
-rkr->efx_Reverbtron->changepar(10,(int)o->value());}
-          xywh {210 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_length {
-          label Length
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(344);
- return;
-}
-rkr->efx_Reverbtron->changepar(3,(int)o->value());}
-          xywh {210 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 1500 step 1 value 100 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_strech {
-          label Stretch
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(345);
- return;
-}
-rkr->efx_Reverbtron->changepar(9,(int)o->value());}
-          xywh {210 309 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_idelay {
-          label {I.Del}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(346);
- return;
-}
-rkr->efx_Reverbtron->changepar(5,(int)o->value());}
-          xywh {210 321 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 500 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_fade {
-          label Fade
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(347);
- return;
-}
-rkr->efx_Reverbtron->changepar(1,(int)o->value());}
-          xywh {210 333 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_HPF {
-          label Diffusion
-          callback {rkr->efx_Reverbtron->changepar(15,(int)o->value());}
-          xywh {211 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 value 26000 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider revtron_LPF {
-          label LPF
-          callback {rkr->efx_Reverbtron->changepar(14,(int)o->value());}
-          xywh {210 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 20 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button revtron_rv {
-          label Sh
-          user_data 2
-          callback {rkr->efx_Reverbtron->changepar(13,(int)o->value());}
-          xywh {160 363 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button revtron_es {
-          label ES
-          user_data 2
-          callback {rkr->efx_Reverbtron->changepar(12,(int)o->value());}
-          xywh {160 376 29 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button revtron_safe {
-          label Safe
-          user_data 2
-          callback {rkr->efx_Reverbtron->changepar(2,(int)o->value());}
-          xywh {188 366 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Check_Button revtron_user {
-          label User
-          user_data 2
-          callback {rkr->efx_Reverbtron->changepar(4,(int)o->value());
-
-if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
-          xywh {225 366 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Button B_rvb {
-          label Browse
-          user_data 2
-          callback {char *filename;
-filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rvb");
-strcpy(rkr->efx_Reverbtron->Filename,filename);
-rkr->efx_Reverbtron->setfile(USERFILE);}
-          xywh {264 368 46 10} labelsize 10 deactivate
-        }
-        Fl_Choice revtron_fnum {
-          label File
-          user_data 12
-          callback {rkr->efx_Reverbtron->changepar(8,(int)o->value());}
-          xywh {209 380 101 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Chamber
-            xywh {54 54 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Conc. Stair}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Hall
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Med Hall}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Large Room}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Large Hall}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Guitar Ambience}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Studio
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Twilight
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Santa Lucia}
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-      }
+        xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "reverbtron_gui.h"}
+        class RevtronGui
+      } {}
       Fl_Group ECHOTRON {
         user_data 1
         xywh {323 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -6279,8 +6012,8 @@ for(i=0;i<rkr->NumEffects;i++)
     break;
 
     case 40://Reverbtron
-    revtron_activar->value(rkr->Reverbtron_Bypass);
-    revtron_preset->do_callback(revtron_preset,1);
+    REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
+    REVERBTRON->revtron_preset->do_callback(REVERBTRON->revtron_preset,1);
     break;
 
     case 41://Echotron
@@ -7066,7 +6799,7 @@ switch (rkr->efx_order[i])
 
    case 40:
        REVERBTRON->position(x[i],y[i]);
-       revtron_activar->shortcut(s[i]);
+       REVERBTRON->revtron_activar->shortcut(s[i]);
        if(!rkr->deachide)REVERBTRON->show();
        if(rkr->Reverbtron_Bypass)
        {
@@ -8977,40 +8710,40 @@ switch (i)
      STOMPBOX->stomp_high->redraw();
      break;
      case 339:
-     revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
-     revtron_WD->redraw();
+     REVERBTRON->revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
+     REVERBTRON->revtron_WD->redraw();
      break;
      case 340:
-     revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
-     revtron_pan->redraw();
+     REVERBTRON->revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
+     REVERBTRON->revtron_pan->redraw();
      break;
      case 341:
-     revtron_level->value(rkr->efx_Reverbtron->getpar(7));
-     revtron_level->redraw();
+     REVERBTRON->revtron_level->value(rkr->efx_Reverbtron->getpar(7));
+     REVERBTRON->revtron_level->redraw();
      break;
      case 342:
-     revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
-     revtron_damp->redraw();
+     REVERBTRON->revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
+     REVERBTRON->revtron_damp->redraw();
      break;
      case 343:
-     revtron_fb->value(rkr->efx_Reverbtron->getpar(10)-64);
-     revtron_fb->redraw();
+     REVERBTRON->revtron_fb->value(rkr->efx_Reverbtron->getpar(10)-64);
+     REVERBTRON->revtron_fb->redraw();
      break;
      case 344:
-     revtron_length->value(rkr->efx_Reverbtron->getpar(3));
-     revtron_length->redraw();
+     REVERBTRON->revtron_length->value(rkr->efx_Reverbtron->getpar(3));
+     REVERBTRON->revtron_length->redraw();
      break;
      case 345:
-     revtron_strech->value(rkr->efx_Reverbtron->getpar(9)-64);
-     revtron_strech->redraw();
+     REVERBTRON->revtron_strech->value(rkr->efx_Reverbtron->getpar(9)-64);
+     REVERBTRON->revtron_strech->redraw();
      break;
      case 346:
-     revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
-     revtron_idelay->redraw();
+     REVERBTRON->revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
+     REVERBTRON->revtron_idelay->redraw();
      break;
      case 347:
-     revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
-     revtron_fade->redraw();
+     REVERBTRON->revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
+     REVERBTRON->revtron_fade->redraw();
      break;
      case 348:
      echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
@@ -9424,8 +9157,8 @@ switch(miralo)
   STOMPBOX->stomp_activar->do_callback();
   break;
  case 40:
-  revtron_activar->value(rkr->Reverbtron_Bypass);
-  revtron_activar->do_callback();
+  REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
+  REVERBTRON->revtron_activar->do_callback();
   break;
  case 41:
   echotron_activar->value(rkr->Echotron_Bypass);
@@ -11222,7 +10955,7 @@ for(i=0;i<10;i++)
 
     case 40://Reverbtron
     if (i<numEff)rkr->Reverbtron_Bypass=1; else rkr->Reverbtron_Bypass=0;
-    revtron_activar->value(rkr->Reverbtron_Bypass);
+    REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
     break;
 
     case 41://Echotron
