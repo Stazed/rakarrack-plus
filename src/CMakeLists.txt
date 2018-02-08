@@ -52,6 +52,7 @@ set (ProgSources
     UI/shelf_gui.cxx
     UI/vocoder_gui.cxx
     UI/sustain_gui.cxx
+    UI/sequence_gui.cxx
     process.C
     fileio.C
     varios.C

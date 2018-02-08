@@ -61,6 +61,7 @@ class CoilGui; // forward declaration
 class ShelfGui; // forward declaration
 class VocoderGui; // forward declaration
 class SustainGui; // forward declaration
+class SequenceGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -103,6 +104,7 @@ class SustainGui; // forward declaration
 #include "shelf_gui.h"
 #include "vocoder_gui.h"
 #include "sustain_gui.h"
+#include "sequence_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -302,94 +304,7 @@ public:
   ShelfGui *SHELFBOOST;
   VocoderGui *VOCODER;
   SustainGui *SUSTAINER;
-  Fl_Group *SEQUENCE;
-  Fl_Light_Button *seq_activar;
-private:
-  inline void cb_seq_activar_i(Fl_Light_Button*, void*);
-  static void cb_seq_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *seq_preset;
-private:
-  inline void cb_seq_preset_i(Fl_Choice*, void*);
-  static void cb_seq_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_seq_preset[];
-public:
-  SliderW *seq_WD;
-private:
-  inline void cb_seq_WD_i(SliderW*, void*);
-  static void cb_seq_WD(SliderW*, void*);
-public:
-  SliderW *seq_1;
-private:
-  inline void cb_seq_1_i(SliderW*, void*);
-  static void cb_seq_1(SliderW*, void*);
-public:
-  SliderW *seq_2;
-private:
-  inline void cb_seq_2_i(SliderW*, void*);
-  static void cb_seq_2(SliderW*, void*);
-public:
-  SliderW *seq_3;
-private:
-  inline void cb_seq_3_i(SliderW*, void*);
-  static void cb_seq_3(SliderW*, void*);
-public:
-  SliderW *seq_4;
-private:
-  inline void cb_seq_4_i(SliderW*, void*);
-  static void cb_seq_4(SliderW*, void*);
-public:
-  SliderW *seq_5;
-private:
-  inline void cb_seq_5_i(SliderW*, void*);
-  static void cb_seq_5(SliderW*, void*);
-public:
-  SliderW *seq_6;
-private:
-  inline void cb_seq_6_i(SliderW*, void*);
-  static void cb_seq_6(SliderW*, void*);
-public:
-  SliderW *seq_7;
-private:
-  inline void cb_seq_7_i(SliderW*, void*);
-  static void cb_seq_7(SliderW*, void*);
-public:
-  SliderW *seq_8;
-private:
-  inline void cb_seq_8_i(SliderW*, void*);
-  static void cb_seq_8(SliderW*, void*);
-public:
-  SliderW *seq_tempo;
-private:
-  inline void cb_seq_tempo_i(SliderW*, void*);
-  static void cb_seq_tempo(SliderW*, void*);
-public:
-  SliderW *seq_q;
-private:
-  inline void cb_seq_q_i(SliderW*, void*);
-  static void cb_seq_q(SliderW*, void*);
-public:
-  SliderW *seq_stdf;
-private:
-  inline void cb_seq_stdf_i(SliderW*, void*);
-  static void cb_seq_stdf(SliderW*, void*);
-public:
-  Fl_Check_Button *seq_amp;
-private:
-  inline void cb_seq_amp_i(Fl_Check_Button*, void*);
-  static void cb_seq_amp(Fl_Check_Button*, void*);
-public:
-  Fl_Choice *seq_mode;
-private:
-  inline void cb_seq_mode_i(Fl_Choice*, void*);
-  static void cb_seq_mode(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_seq_mode[];
-public:
-  Fl_Counter *seq_range;
-private:
-  inline void cb_seq_range_i(Fl_Counter*, void*);
-  static void cb_seq_range(Fl_Counter*, void*);
-public:
+  SequenceGui *SEQUENCE;
   Fl_Group *SHIFTER;
   Fl_Light_Button *shifter_activar;
 private:

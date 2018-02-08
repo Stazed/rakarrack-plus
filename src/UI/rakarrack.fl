@@ -176,6 +176,9 @@ decl {class VocoderGui; // forward declaration} {public global
 decl {class SustainGui; // forward declaration} {public global
 }
 
+decl {class SequenceGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1242,279 +1245,16 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group SUSTAINER {
         user_data 1
-        xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "sustain_gui.h"}
         class SustainGui
       } {}
       Fl_Group SEQUENCE {
         user_data 1
-        xywh {319 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button seq_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->Sequence_Bypass);
- return;
-}
-rkr->Sequence_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_Sequence->cleanup();
-findpos(37,(int)o->value(),o);}
-          xywh {324 216 34 16} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice seq_preset {
-          label Preset
-          user_data 12037
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12037))rkr->efx_Sequence->setpreset((int) o->value());
-seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
-seq_q->value(rkr->efx_Sequence->getpar(10)-64);
-seq_amp->value(rkr->efx_Sequence->getpar(11));
-seq_tempo->value(rkr->efx_Sequence->getpar(9));
-seq_stdf->value(rkr->efx_Sequence->getpar(12));
-seq_1->value(rkr->efx_Sequence->getpar(0));
-seq_2->value(rkr->efx_Sequence->getpar(1));
-seq_3->value(rkr->efx_Sequence->getpar(2));
-seq_4->value(rkr->efx_Sequence->getpar(3));
-seq_5->value(rkr->efx_Sequence->getpar(4));
-seq_6->value(rkr->efx_Sequence->getpar(5));
-seq_7->value(rkr->efx_Sequence->getpar(6));
-seq_8->value(rkr->efx_Sequence->getpar(7));
-seq_mode->value(rkr->efx_Sequence->getpar(13));
-seq_range->value(rkr->efx_Sequence->getpar(14));}
-          xywh {396 216 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label Jumpy
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Stair Step}
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Mild
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Wah Wah}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Filter Pan}
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Stepper
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Shifter
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Zeke Trem}
-            xywh {10 10 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Boogie
-            xywh {0 0 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Chorus
-            xywh {0 0 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider seq_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(314);
- return;
-}
-rkr->efx_Sequence->changepar(8,(int)(o->value()+64));}
-          xywh {368 237 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_1 {
-          label 1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(315);
- return;
-}
-rkr->efx_Sequence->changepar(0,(int)o->value());}
-          xywh {368 249 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_2 {
-          label 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(316);
- return;
-}
-rkr->efx_Sequence->changepar(1,(int)o->value());}
-          xywh {368 261 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_3 {
-          label 3
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(317);
- return;
-}
-rkr->efx_Sequence->changepar(2,(int)o->value());}
-          xywh {368 273 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_4 {
-          label 4
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(318);
- return;
-}
-rkr->efx_Sequence->changepar(3,(int)o->value());}
-          xywh {368 285 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_5 {
-          label 5
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(319);
- return;
-}
-rkr->efx_Sequence->changepar(4,(int)o->value());}
-          xywh {369 297 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_6 {
-          label 6
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(320);
- return;
-}
-rkr->efx_Sequence->changepar(5,(int)o->value());}
-          xywh {369 309 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_7 {
-          label 7
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(321);
- return;
-}
-rkr->efx_Sequence->changepar(6,(int)o->value());}
-          xywh {369 321 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_8 {
-          label 8
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(322);
- return;
-}
-rkr->efx_Sequence->changepar(7,(int)o->value());}
-          xywh {369 333 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_tempo {
-          label Tempo
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(323);
- return;
-}
-rkr->efx_Sequence->changepar(9,(int)o->value());}
-          xywh {368 345 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_q {
-          label Q
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(324);
- return;
-}
-rkr->efx_Sequence->changepar(10,(int)o->value()+64);}
-          xywh {368 357 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider seq_stdf {
-          label {St.df}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(325);
- return;
-}
-rkr->efx_Sequence->changepar(12,(int)o->value());}
-          xywh {368 369 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Check_Button seq_amp {
-          label {Amp.}
-          user_data 2
-          callback {rkr->efx_Sequence->changepar(11,(int)o->value())}
-          xywh {432 381 43 14} down_box BORDER_BOX labelsize 10 labelcolor 7
-        }
-        Fl_Choice seq_mode {
-          label Mode
-          user_data 12
-          callback {rkr->efx_Sequence->changepar(13,(int)o->value())}
-          xywh {352 381 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
-        } {
-          MenuItem {} {
-            label Lineal
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label UpDown
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Stepper
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Shifter
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Tremor
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Arpegiator
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label Chorus
-            xywh {0 0 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label TrigStepper
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label {Seq Delay}
-            xywh {20 20 36 21} labelsize 9
-          }
-        }
-        Fl_Counter seq_range {
-          label Range
-          callback {rkr->efx_Sequence->changepar(14,(int)o->value())}
-          xywh {324 285 33 13} type Simple labelsize 10 labelcolor 7 minimum 1 maximum 8 step 1 value 1 textsize 9
-        }
-      }
+        xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "sequence_gui.h"}
+        class SequenceGui
+      } {}
       Fl_Group SHIFTER {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
@@ -6841,8 +6581,8 @@ for(i=0;i<rkr->NumEffects;i++)
      break;
      
     case 37://Sequence
-    seq_activar->value(rkr->Sequence_Bypass);
-    seq_preset->do_callback(seq_preset,1);
+    SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
+    SEQUENCE->seq_preset->do_callback(SEQUENCE->seq_preset,1);
     break;
 
     case 38://Shifter
@@ -7607,7 +7347,7 @@ switch (rkr->efx_order[i])
 
    case 37:
        SEQUENCE->position(x[i],y[i]);
-       seq_activar->shortcut(s[i]);
+       SEQUENCE->seq_activar->shortcut(s[i]);
        if(!rkr->deachide)SEQUENCE->show();
        if(rkr->Sequence_Bypass)
        {
@@ -9454,52 +9194,52 @@ switch (i)
      SUSTAINER->sus_sus->redraw();
      break;
      case 314:
-     seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
-     seq_WD->redraw();
+     SEQUENCE->seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
+     SEQUENCE->seq_WD->redraw();
      break;
      case 315:
-     seq_1->value(rkr->efx_Sequence->getpar(0));
-     seq_1->redraw();
+     SEQUENCE->seq_1->value(rkr->efx_Sequence->getpar(0));
+     SEQUENCE->seq_1->redraw();
      break;
      case 316:
-     seq_2->value(rkr->efx_Sequence->getpar(1));
-     seq_2->redraw();
+     SEQUENCE->seq_2->value(rkr->efx_Sequence->getpar(1));
+     SEQUENCE->seq_2->redraw();
      break;
      case 317:
-     seq_3->value(rkr->efx_Sequence->getpar(2));
-     seq_3->redraw();
+     SEQUENCE->seq_3->value(rkr->efx_Sequence->getpar(2));
+     SEQUENCE->seq_3->redraw();
      break;
      case 318:
-     seq_4->value(rkr->efx_Sequence->getpar(3));
-     seq_4->redraw();
+     SEQUENCE->seq_4->value(rkr->efx_Sequence->getpar(3));
+     SEQUENCE->seq_4->redraw();
      break;
      case 319:
-     seq_5->value(rkr->efx_Sequence->getpar(4));
-     seq_5->redraw();
+     SEQUENCE->seq_5->value(rkr->efx_Sequence->getpar(4));
+     SEQUENCE->seq_5->redraw();
      break;
      case 320:
-     seq_6->value(rkr->efx_Sequence->getpar(5));
-     seq_6->redraw();
+     SEQUENCE->seq_6->value(rkr->efx_Sequence->getpar(5));
+     SEQUENCE->seq_6->redraw();
      break;
      case 321:
-     seq_7->value(rkr->efx_Sequence->getpar(6));
-     seq_7->redraw();
+     SEQUENCE->seq_7->value(rkr->efx_Sequence->getpar(6));
+     SEQUENCE->seq_7->redraw();
      break;
      case 322:
-     seq_8->value(rkr->efx_Sequence->getpar(7));
-     seq_8->redraw();
+     SEQUENCE->seq_8->value(rkr->efx_Sequence->getpar(7));
+     SEQUENCE->seq_8->redraw();
      break;
      case 323:
-     seq_tempo->value(rkr->efx_Sequence->getpar(9));
-     seq_tempo->redraw();
+     SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(9));
+     SEQUENCE->seq_tempo->redraw();
      break;
      case 324:
-     seq_q->value(rkr->efx_Sequence->getpar(10)-64);
-     seq_q->redraw();
+     SEQUENCE->seq_q->value(rkr->efx_Sequence->getpar(10)-64);
+     SEQUENCE->seq_q->redraw();
      break;
      case 325:
-     seq_stdf->value(rkr->efx_Sequence->getpar(12));
-     seq_stdf->redraw();
+     SEQUENCE->seq_stdf->value(rkr->efx_Sequence->getpar(12));
+     SEQUENCE->seq_stdf->redraw();
      break;
      case 326:
      shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
@@ -9989,8 +9729,8 @@ switch(miralo)
   SUSTAINER->sus_activar->do_callback();
   break;
   case 37:
-  seq_activar->value(rkr->Sequence_Bypass);
-  seq_activar->do_callback();
+  SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
+  SEQUENCE->seq_activar->do_callback();
   break;
  case 38:
   shifter_activar->value(rkr->Shifter_Bypass);
@@ -10872,8 +10612,8 @@ if(rkr->Chorus_Bypass)
   }
   if(rkr->Sequence_Bypass)
   {
-   seq_tempo->value(rkr->efx_Sequence->getpar(9));
-   seq_tempo->redraw();
+   SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(9));
+   SEQUENCE->seq_tempo->redraw();
   }
   if(rkr->Echo_Bypass)
   { 
@@ -11784,7 +11524,7 @@ for(i=0;i<10;i++)
      
     case 37://Sequence
     if (i<numEff)rkr->Sequence_Bypass=1; else rkr->Sequence_Bypass=0;
-    seq_activar->value(rkr->Sequence_Bypass);
+    SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
     break;
 
     case 38://Shifter
