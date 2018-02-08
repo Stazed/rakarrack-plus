@@ -62,6 +62,7 @@ set (ProgSources
     UI/otrem_gui.cxx
     UI/vibe_gui.cxx
     UI/infinity_gui.cxx
+    UI/midiconv_gui.cxx
     process.C
     fileio.C
     varios.C

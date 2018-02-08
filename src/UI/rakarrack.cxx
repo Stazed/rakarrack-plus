@@ -644,17 +644,17 @@ if ((rkr->Metro_Bypass) && (MetroSound->value()==0))
 
 if (rkr->MIDIConverter_Bypass)
 {
-  if ((rkr->efx_MIDIConverter->hay) && ( (int) Mled->color() != (int) fl_lighter(FL_RED)))
+  if ((rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_lighter(FL_RED)))
   
      {
-       Mled->color(fl_lighter(FL_RED));
-       Mled->redraw();
+       MIDI->Mled->color(fl_lighter(FL_RED));
+       MIDI->Mled->redraw();
      }  
   
-  if ((!rkr->efx_MIDIConverter->hay) && ( (int) Mled->color() != (int) fl_darker(FL_RED)))   
+  if ((!rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_darker(FL_RED)))   
      {  
-     Mled->color(fl_darker(FL_RED));
-     Mled->redraw();
+     MIDI->Mled->color(fl_darker(FL_RED));
+     MIDI->Mled->redraw();
      } 
 }
 
@@ -798,8 +798,8 @@ if (!o->value())
         } 
     if (rkr->MIDIConverter_Bypass)  
         {
-            midi_activar->value(0);
-            midi_activar->do_callback();
+            MIDI->midi_activar->value(0);
+            MIDI->midi_activar->do_callback();
         }
              
 rkr->cleanup_efx();
@@ -855,112 +855,6 @@ rkr->calculavol(2);
 }
 void RKRGUI::cb_Nivel_Salida(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Salida_i(o,v);
-}
-
-void RKRGUI::cb_midi_activar_i(Fl_Light_Button* o, void*) {
-  if ((int)o->value()==0)
-{ 
-rkr->efx_MIDIConverter->panic();
-  Mled->color(fl_darker(FL_RED));
-  Mled->redraw();
-}
-
-
-rkr->MIDIConverter_Bypass=(int)o->value();
-Midi_out_Counter->do_callback();
-
-ChangeActives();
-MIDI_LABEL->redraw_label();
-}
-void RKRGUI::cb_midi_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_midi_activar_i(o,v);
-}
-
-void RKRGUI::cb_MIDIOctave_i(Fl_Choice* o, void*) {
-  switch((int)o->value())
-{
-  case 0:
-  rkr->efx_MIDIConverter->changepar(4,-2);
-  break;
-  
-  case 1:
-  rkr->efx_MIDIConverter->changepar(4,-1);
-  break;
-
-  case 2:
-  rkr->efx_MIDIConverter->changepar(4,0);
-  break;
-
-  case 3:
-  rkr->efx_MIDIConverter->changepar(4,1);
-
-  break;
-
-  case 4:
-  rkr->efx_MIDIConverter->changepar(4,2);
-  break;
-
-};
-}
-void RKRGUI::cb_MIDIOctave(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MIDIOctave_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_MIDIOctave[] = {
- {"-2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"-1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"0", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Midi_out_Counter_i(Fl_Counter* o, void*) {
-  rkr->efx_MIDIConverter->changepar(3, (int)o->value());
-}
-void RKRGUI::cb_Midi_out_Counter(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Midi_out_Counter_i(o,v);
-}
-
-void RKRGUI::cb_Use_FFT_i(Fl_Check_Button* o, void*) {
-  rkr->efx_MIDIConverter->changepar(5, (int)o->value());
-}
-void RKRGUI::cb_Use_FFT(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Use_FFT_i(o,v);
-}
-
-void RKRGUI::cb_Trig_Adj_i(SliderW* o, void*) {
-  rkr->efx_MIDIConverter->changepar(1,(int)o->value());
-}
-void RKRGUI::cb_Trig_Adj(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Trig_Adj_i(o,v);
-}
-
-void RKRGUI::cb_Vel_Adj_i(SliderW* o, void*) {
-  rkr->efx_MIDIConverter->changepar(2,(int)o->value());
-}
-void RKRGUI::cb_Vel_Adj(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Vel_Adj_i(o,v);
-}
-
-void RKRGUI::cb_MIDI_LABEL_i(Fl_Box*, void*) {
-  int ok;
-char *filename;
-
-#define EXT ".rkrb"
-filename=fl_file_chooser("Save Bank File:","(*" EXT")",rkr->Bank_Saved,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
-#undef EXT
-ok=rkr->savebank(filename);
-if (ok)
-{
-strcpy(rkr->Bank_Saved,filename);
-BankWin_Label(filename);
-};
-}
-void RKRGUI::cb_MIDI_LABEL(Fl_Box* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MIDI_LABEL_i(o,v);
 }
 
 void RKRGUI::cb_metro_activar_i(Fl_Light_Button* o, void*) {
@@ -1274,14 +1168,14 @@ void RKRGUI::cb_SwitchMod_i(Fl_Button*, void*) {
   if(rkr->sw_stat==0) 
 { 
   rkr->sw_stat = 1;
-  Midi->hide();
+  MIDI->hide();
   Metro->show();
 }
 else
  {
   rkr->sw_stat= 0;
   Metro->hide();
-  Midi->show();
+  MIDI->show();
  };
 }
 void RKRGUI::cb_SwitchMod(Fl_Button* o, void* v) {
@@ -1432,7 +1326,7 @@ void RKRGUI::cb_Load_Bank(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_Save_Bank_i(Fl_Menu_*, void*) {
-  MIDI_LABEL->do_callback();
+  MIDI->MIDI_LABEL->do_callback();
 }
 void RKRGUI::cb_Save_Bank(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Bank_i(o,v);
@@ -3948,98 +3842,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       } // Fl_Box* LABEL_IO
       InOut->end();
     } // Fl_Group* InOut
-    { Midi = new Fl_Group(520, 85, 276, 52);
-      Midi->box(FL_UP_BOX);
-      Midi->color(FL_FOREGROUND_COLOR);
-      Midi->selection_color(FL_FOREGROUND_COLOR);
-      Midi->user_data((void*)(1));
-      Midi->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      { midi_activar = new Fl_Light_Button(525, 89, 38, 18, "On");
-        midi_activar->tooltip("Enable MIDI Converter - Shortcut \'M\'");
-        midi_activar->shortcut(0x6d);
-        midi_activar->color((Fl_Color)62);
-        midi_activar->selection_color((Fl_Color)1);
-        midi_activar->labelsize(10);
-        midi_activar->callback((Fl_Callback*)cb_midi_activar, (void*)(2));
-        midi_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* midi_activar
-      { MIDIOctave = new Fl_Choice(624, 118, 37, 16, "Octave");
-        MIDIOctave->down_box(FL_BORDER_BOX);
-        MIDIOctave->selection_color(FL_FOREGROUND_COLOR);
-        MIDIOctave->labelsize(8);
-        MIDIOctave->labelcolor(FL_BACKGROUND2_COLOR);
-        MIDIOctave->textsize(10);
-        MIDIOctave->textcolor(FL_BACKGROUND2_COLOR);
-        MIDIOctave->callback((Fl_Callback*)cb_MIDIOctave, (void*)(12));
-        MIDIOctave->when(FL_WHEN_CHANGED);
-        MIDIOctave->menu(menu_MIDIOctave);
-      } // Fl_Choice* MIDIOctave
-      { Midi_out_Counter = new Fl_Counter(601, 89, 60, 17, "Channel");
-        Midi_out_Counter->type(1);
-        Midi_out_Counter->color((Fl_Color)62);
-        Midi_out_Counter->labelsize(9);
-        Midi_out_Counter->labelcolor(FL_BACKGROUND2_COLOR);
-        Midi_out_Counter->minimum(1);
-        Midi_out_Counter->maximum(16);
-        Midi_out_Counter->step(1);
-        Midi_out_Counter->value(1);
-        Midi_out_Counter->textsize(11);
-        Midi_out_Counter->callback((Fl_Callback*)cb_Midi_out_Counter);
-      } // Fl_Counter* Midi_out_Counter
-      { Use_FFT = new Fl_Check_Button(571, 119, 15, 15, "FFT");
-        Use_FFT->down_box(FL_BORDER_BOX);
-        Use_FFT->labelsize(10);
-        Use_FFT->labelcolor(FL_BACKGROUND2_COLOR);
-        Use_FFT->callback((Fl_Callback*)cb_Use_FFT, (void*)(2));
-        Use_FFT->align(Fl_Align(FL_ALIGN_TOP));
-      } // Fl_Check_Button* Use_FFT
-      { Trig_Adj = new SliderW(667, 100, 117, 11, "Trigger");
-        Trig_Adj->type(5);
-        Trig_Adj->box(FL_FLAT_BOX);
-        Trig_Adj->color((Fl_Color)178);
-        Trig_Adj->selection_color((Fl_Color)62);
-        Trig_Adj->labeltype(FL_NORMAL_LABEL);
-        Trig_Adj->labelfont(0);
-        Trig_Adj->labelsize(8);
-        Trig_Adj->labelcolor(FL_BACKGROUND2_COLOR);
-        Trig_Adj->minimum(2);
-        Trig_Adj->maximum(60);
-        Trig_Adj->step(1);
-        Trig_Adj->textcolor(FL_BACKGROUND2_COLOR);
-        Trig_Adj->callback((Fl_Callback*)cb_Trig_Adj);
-        Trig_Adj->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
-        Trig_Adj->when(FL_WHEN_CHANGED);
-      } // SliderW* Trig_Adj
-      { Vel_Adj = new SliderW(667, 119, 117, 11, "Velocity");
-        Vel_Adj->type(5);
-        Vel_Adj->box(FL_FLAT_BOX);
-        Vel_Adj->color((Fl_Color)178);
-        Vel_Adj->selection_color((Fl_Color)62);
-        Vel_Adj->labeltype(FL_NORMAL_LABEL);
-        Vel_Adj->labelfont(0);
-        Vel_Adj->labelsize(8);
-        Vel_Adj->labelcolor(FL_BACKGROUND2_COLOR);
-        Vel_Adj->minimum(1);
-        Vel_Adj->maximum(100);
-        Vel_Adj->step(1);
-        Vel_Adj->textcolor(FL_BACKGROUND2_COLOR);
-        Vel_Adj->callback((Fl_Callback*)cb_Vel_Adj);
-        Vel_Adj->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
-        Vel_Adj->when(FL_WHEN_CHANGED);
-      } // SliderW* Vel_Adj
-      { Mled = new Fl_Box(571, 90, 10, 10);
-        Mled->box(FL_ROUNDED_BOX);
-        Mled->color(FL_RED);
-        Mled->labelsize(18);
-      } // Fl_Box* Mled
-      { MIDI_LABEL = new Fl_Box(524, 117, 44, 14, "MIDI");
-        MIDI_LABEL->labelfont(1);
-        MIDI_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-        MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL, (void*)(7));
-        MIDI_LABEL->when(FL_WHEN_NEVER);
-      } // Fl_Box* MIDI_LABEL
-      Midi->end();
-    } // Fl_Group* Midi
+    { MIDI = new MidiGui(520, 85, 276, 52);
+      MIDI->box(FL_UP_BOX);
+      MIDI->color(FL_FOREGROUND_COLOR);
+      MIDI->selection_color(FL_FOREGROUND_COLOR);
+      MIDI->labeltype(FL_NORMAL_LABEL);
+      MIDI->labelfont(0);
+      MIDI->labelsize(14);
+      MIDI->labelcolor(FL_FOREGROUND_COLOR);
+      MIDI->user_data((void*)(1));
+      MIDI->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      MIDI->when(FL_WHEN_RELEASE);
+      MIDI->hide();
+      MIDI->end();
+    } // MidiGui* MIDI
     { Metro = new Fl_Group(520, 85, 276, 52);
       Metro->box(FL_UP_BOX);
       Metro->color(FL_FOREGROUND_COLOR);
@@ -5936,27 +5752,27 @@ void RKRGUI::load_stat() {
   //MIDIConverter
   
   rakarrack.get(rkr->PrefNom("Midi Out Channel"),k,1);
-  Midi_out_Counter->value(k);
-  Midi_out_Counter->do_callback();
+  MIDI->Midi_out_Counter->value(k);
+  MIDI->Midi_out_Counter->do_callback();
   
   rkr->efx_MIDIConverter->setmidichannel(k);
    
   rakarrack.get(rkr->PrefNom("Trigger Adjust"),k,4);
-  Trig_Adj->value(k);
+  MIDI->Trig_Adj->value(k);
   rkr->efx_MIDIConverter->setTriggerAdjust(k);
   
   
   rakarrack.get(rkr->PrefNom("Velocity Adjust"),k,50);
-  Vel_Adj->value(k);
+  MIDI->Vel_Adj->value(k);
   rkr->efx_MIDIConverter->setVelAdjust(k);
   
   rakarrack.get(rkr->PrefNom("Converter Octave"),k,2);
-  MIDIOctave->value(k);
-  MIDIOctave->do_callback();
+  MIDI->MIDIOctave->value(k);
+  MIDI->MIDIOctave->do_callback();
   
   rakarrack.get(rkr->PrefNom("MIDI Converter On/Off"),k,0);
-  midi_activar->value(k);
-  midi_activar->do_callback();
+  MIDI->midi_activar->value(k);
+  MIDI->midi_activar->do_callback();
   
   //Metronome
   
@@ -5984,13 +5800,13 @@ void RKRGUI::load_stat() {
   
   if(rkr->sw_stat==1) 
   { 
-    Midi->hide();
+    MIDI->hide();
     Metro->show();
   }
   else
    {
     Metro->hide();
-    Midi->show();
+    MIDI->show();
    }
   
   //Tuner
@@ -6125,10 +5941,10 @@ void RKRGUI::save_stat(int whati) {
   //MIDIConverter
   
   rakarrack.set(rkr->PrefNom("MIDI Converter On/Off"),(int) rkr->MIDIConverter_Bypass);
-  rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
-  rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
-  rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
-  rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDIOctave->value());
+  rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)MIDI->Midi_out_Counter->value()); 
+  rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)MIDI->Trig_Adj->value());
+  rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)MIDI->Vel_Adj->value());
+  rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDI->MIDIOctave->value());
   
   //Metronome
   rakarrack.set(rkr->PrefNom("Internal Metronome On/Off"),(int)rkr->Metro_Bypass); 
@@ -7988,7 +7804,7 @@ void RKRGUI::is_modified() {
             break;
   
           case 1: 
-            MIDI_LABEL->do_callback();
+            MIDI->MIDI_LABEL->do_callback();
             break;  
   
       }
@@ -9799,8 +9615,8 @@ void RKRGUI::ActOnOff() {
     Tap_activar->do_callback();
     break;
     case 122:
-    midi_activar->value(rkr->MIDIConverter_Bypass);
-    midi_activar->do_callback();
+    MIDI->midi_activar->value(rkr->MIDIConverter_Bypass);
+    MIDI->midi_activar->do_callback();
     break;
     case 123:
     tuner_activar->value(rkr->Tuner_Bypass);
@@ -9910,7 +9726,7 @@ void RKRGUI::PutBackground() {
   Tap->image(InOut->image());
   Presets->image(InOut->image());
   Tuner->image(InOut->image());
-  Midi->image(InOut->image());
+  MIDI->image(InOut->image());
   Metro->image(InOut->image());
   fondo->image(InOut->image());
   TITTLE_L->image(InOut->image());
@@ -10070,7 +9886,7 @@ void RKRGUI::ChangeActives() {
   
   
   
-  if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+  if(rkr->MIDIConverter_Bypass) MIDI->MIDI_LABEL->labelcolor(on); else MIDI->MIDI_LABEL->labelcolor(off);
   if(rkr->Metro_Bypass) Metro_Label->labelcolor(on); else Metro_Label->labelcolor(off);
   if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
   if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);

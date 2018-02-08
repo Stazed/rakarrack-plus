@@ -71,6 +71,7 @@ class CbandGui; // forward declaration
 class OtremGui; // forward declaration
 class VibeGui; // forward declaration
 class InfinityGui; // forward declaration
+class MidiGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -125,13 +126,14 @@ class InfinityGui; // forward declaration
 #include "infinity_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
+#include "midiconv_gui.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Counter.H>
 #include "analyzer.h"
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Browser.H>
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Tabs.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
@@ -375,44 +377,7 @@ public:
   NewVum *output_vul;
   NewVum *output_vur;
   Fl_Box *LABEL_IO;
-  Fl_Group *Midi;
-  Fl_Light_Button *midi_activar;
-private:
-  inline void cb_midi_activar_i(Fl_Light_Button*, void*);
-  static void cb_midi_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *MIDIOctave;
-private:
-  inline void cb_MIDIOctave_i(Fl_Choice*, void*);
-  static void cb_MIDIOctave(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_MIDIOctave[];
-public:
-  Fl_Counter *Midi_out_Counter;
-private:
-  inline void cb_Midi_out_Counter_i(Fl_Counter*, void*);
-  static void cb_Midi_out_Counter(Fl_Counter*, void*);
-public:
-  Fl_Check_Button *Use_FFT;
-private:
-  inline void cb_Use_FFT_i(Fl_Check_Button*, void*);
-  static void cb_Use_FFT(Fl_Check_Button*, void*);
-public:
-  SliderW *Trig_Adj;
-private:
-  inline void cb_Trig_Adj_i(SliderW*, void*);
-  static void cb_Trig_Adj(SliderW*, void*);
-public:
-  SliderW *Vel_Adj;
-private:
-  inline void cb_Vel_Adj_i(SliderW*, void*);
-  static void cb_Vel_Adj(SliderW*, void*);
-public:
-  Fl_Box *Mled;
-  Fl_Box *MIDI_LABEL;
-private:
-  inline void cb_MIDI_LABEL_i(Fl_Box*, void*);
-  static void cb_MIDI_LABEL(Fl_Box*, void*);
-public:
+  MidiGui *MIDI;
   Fl_Group *Metro;
   Fl_Light_Button *metro_activar;
 private:

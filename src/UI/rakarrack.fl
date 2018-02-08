@@ -206,6 +206,9 @@ decl {class VibeGui; // forward declaration} {public global
 decl {class InfinityGui; // forward declaration} {public global
 }
 
+decl {class MidiGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -826,17 +829,17 @@ if ((rkr->Metro_Bypass) && (MetroSound->value()==0))
 
 if (rkr->MIDIConverter_Bypass)
 {
-  if ((rkr->efx_MIDIConverter->hay) && ( (int) Mled->color() != (int) fl_lighter(FL_RED)))
+  if ((rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_lighter(FL_RED)))
   
      {
-       Mled->color(fl_lighter(FL_RED));
-       Mled->redraw();
+       MIDI->Mled->color(fl_lighter(FL_RED));
+       MIDI->Mled->redraw();
      }  
   
-  if ((!rkr->efx_MIDIConverter->hay) && ( (int) Mled->color() != (int) fl_darker(FL_RED)))   
+  if ((!rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_darker(FL_RED)))   
      {  
-     Mled->color(fl_darker(FL_RED));
-     Mled->redraw();
+     MIDI->Mled->color(fl_darker(FL_RED));
+     MIDI->Mled->redraw();
      } 
 }
 
@@ -1421,8 +1424,8 @@ if (!o->value())
         } 
     if (rkr->MIDIConverter_Bypass)  
         {
-            midi_activar->value(0);
-            midi_activar->do_callback();
+            MIDI->midi_activar->value(0);
+            MIDI->midi_activar->do_callback();
         }
              
 rkr->cleanup_efx();
@@ -1495,124 +1498,12 @@ rkr->calculavol(2);}
           xywh {60 30 62 14} labelfont 1 labelcolor 7 align 16
         }
       }
-      Fl_Group Midi {
+      Fl_Group MIDI {
         user_data 1
-        xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
-      } {
-        Fl_Light_Button midi_activar {
-          label On
-          user_data 2
-          callback {if ((int)o->value()==0)
-{ 
-rkr->efx_MIDIConverter->panic();
-  Mled->color(fl_darker(FL_RED));
-  Mled->redraw();
-}
-
-
-rkr->MIDIConverter_Bypass=(int)o->value();
-Midi_out_Counter->do_callback();
-
-ChangeActives();
-MIDI_LABEL->redraw_label();}
-          tooltip {Enable MIDI Converter - Shortcut 'M'} xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
-        }
-        Fl_Choice MIDIOctave {
-          label Octave
-          user_data 12
-          callback {switch((int)o->value())
-{
-  case 0:
-  rkr->efx_MIDIConverter->changepar(4,-2);
-  break;
-  
-  case 1:
-  rkr->efx_MIDIConverter->changepar(4,-1);
-  break;
-
-  case 2:
-  rkr->efx_MIDIConverter->changepar(4,0);
-  break;
-
-  case 3:
-  rkr->efx_MIDIConverter->changepar(4,1);
-
-  break;
-
-  case 4:
-  rkr->efx_MIDIConverter->changepar(4,2);
-  break;
-
-}}
-          xywh {624 118 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {-2}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {-1}
-            xywh {62 62 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label 0
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label 1
-            xywh {10 10 36 21} labelsize 9
-          }
-          MenuItem {} {
-            label 2
-            xywh {20 20 36 21} labelsize 9
-          }
-        }
-        Fl_Counter Midi_out_Counter {
-          label Channel
-          callback {rkr->efx_MIDIConverter->changepar(3, (int)o->value());}
-          xywh {601 89 60 17} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
-        }
-        Fl_Check_Button Use_FFT {
-          label FFT
-          user_data 2
-          callback {rkr->efx_MIDIConverter->changepar(5, (int)o->value());}
-          xywh {571 119 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
-        }
-        Fl_Value_Slider Trig_Adj {
-          label Trigger
-          callback {rkr->efx_MIDIConverter->changepar(1,(int)o->value());}
-          xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 2 maximum 60 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider Vel_Adj {
-          label Velocity
-          callback {rkr->efx_MIDIConverter->changepar(2,(int)o->value());}
-          xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 1 maximum 100 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Box Mled {
-          xywh {571 90 10 10} box ROUNDED_BOX color 88 labelsize 18
-        }
-        Fl_Box MIDI_LABEL {
-          label MIDI
-          user_data 7
-          callback {int ok;
-char *filename;
-
-\#define EXT ".rkrb"
-filename=fl_file_chooser("Save Bank File:","(*" EXT")",rkr->Bank_Saved,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
-\#undef EXT
-ok=rkr->savebank(filename);
-if (ok)
-{
-strcpy(rkr->Bank_Saved,filename);
-BankWin_Label(filename);
-}}
-          xywh {524 117 44 14} labelfont 1 labelcolor 7 when 0
-        }
-      }
+        xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112 hide
+        code0 {\#include "midiconv_gui.h"}
+        class MidiGui
+      } {}
       Fl_Group Metro {
         user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
@@ -1935,14 +1826,14 @@ reordena();}
           callback {if(rkr->sw_stat==0) 
 { 
   rkr->sw_stat = 1;
-  Midi->hide();
+  MIDI->hide();
   Metro->show();
 }
 else
  {
   rkr->sw_stat= 0;
   Metro->hide();
-  Midi->show();
+  MIDI->show();
  }}
           tooltip {Switch between Midi Converter &
 Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsize 10 align 80 when 6
@@ -2135,7 +2026,7 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {o->hide();
-save_stat(1);} open
+save_stat(1);}
       xywh {988 161 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
     } {
       Fl_Box Fondo3 {
@@ -2183,7 +2074,7 @@ if(rkr->CheckOldBank(filename)==0)
           }
           MenuItem Save_Bank {
             label {&Save Bank}
-            callback {MIDI_LABEL->do_callback();}
+            callback {MIDI->MIDI_LABEL->do_callback();}
             xywh {10 10 45 26} divider
           }
           MenuItem Convert_Old_Bank {
@@ -2431,7 +2322,7 @@ Order->do_callback();}
     }
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();} open
+Settings->hide();}
       xywh {759 407 640 580} type Double color 4 hide size_range {740 554 0 0}
     } {
       Fl_Box Fondo2 {
@@ -4183,27 +4074,27 @@ RC_Ring_Opti->do_callback();
 //MIDIConverter
 
 rakarrack.get(rkr->PrefNom("Midi Out Channel"),k,1);
-Midi_out_Counter->value(k);
-Midi_out_Counter->do_callback();
+MIDI->Midi_out_Counter->value(k);
+MIDI->Midi_out_Counter->do_callback();
 
 rkr->efx_MIDIConverter->setmidichannel(k);
  
 rakarrack.get(rkr->PrefNom("Trigger Adjust"),k,4);
-Trig_Adj->value(k);
+MIDI->Trig_Adj->value(k);
 rkr->efx_MIDIConverter->setTriggerAdjust(k);
 
 
 rakarrack.get(rkr->PrefNom("Velocity Adjust"),k,50);
-Vel_Adj->value(k);
+MIDI->Vel_Adj->value(k);
 rkr->efx_MIDIConverter->setVelAdjust(k);
 
 rakarrack.get(rkr->PrefNom("Converter Octave"),k,2);
-MIDIOctave->value(k);
-MIDIOctave->do_callback();
+MIDI->MIDIOctave->value(k);
+MIDI->MIDIOctave->do_callback();
 
 rakarrack.get(rkr->PrefNom("MIDI Converter On/Off"),k,0);
-midi_activar->value(k);
-midi_activar->do_callback();
+MIDI->midi_activar->value(k);
+MIDI->midi_activar->do_callback();
 
 //Metronome
 
@@ -4231,13 +4122,13 @@ metro_activar->do_callback();
 
 if(rkr->sw_stat==1) 
 { 
-  Midi->hide();
+  MIDI->hide();
   Metro->show();
 }
 else
  {
   Metro->hide();
-  Midi->show();
+  MIDI->show();
  }
 
 //Tuner
@@ -4371,10 +4262,10 @@ rakarrack.set(rkr->PrefNom("Tuner On/Off"),(int) rkr->Tuner_Bypass);
 //MIDIConverter
 
 rakarrack.set(rkr->PrefNom("MIDI Converter On/Off"),(int) rkr->MIDIConverter_Bypass);
-rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)Midi_out_Counter->value()); 
-rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)Trig_Adj->value());
-rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)Vel_Adj->value());
-rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDIOctave->value());
+rakarrack.set(rkr->PrefNom("Midi Out Channel"),(int)MIDI->Midi_out_Counter->value()); 
+rakarrack.set(rkr->PrefNom("Trigger Adjust"),(int)MIDI->Trig_Adj->value());
+rakarrack.set(rkr->PrefNom("Velocity Adjust"),(int)MIDI->Vel_Adj->value());
+rakarrack.set(rkr->PrefNom("Converter Octave"),(int)MIDI->MIDIOctave->value());
 
 //Metronome
 rakarrack.set(rkr->PrefNom("Internal Metronome On/Off"),(int)rkr->Metro_Bypass); 
@@ -6227,7 +6118,7 @@ if (rkr->modified)
           break;
 
         case 1: 
-          MIDI_LABEL->do_callback();
+          MIDI->MIDI_LABEL->do_callback();
           break;  
 
     }
@@ -8036,8 +7927,8 @@ case 46:
   Tap_activar->do_callback();
   break;
   case 122:
-  midi_activar->value(rkr->MIDIConverter_Bypass);
-  midi_activar->do_callback();
+  MIDI->midi_activar->value(rkr->MIDIConverter_Bypass);
+  MIDI->midi_activar->do_callback();
   break;
   case 123:
   tuner_activar->value(rkr->Tuner_Bypass);
@@ -8145,7 +8036,7 @@ INFINIT->image(InOut->image());
 Tap->image(InOut->image());
 Presets->image(InOut->image());
 Tuner->image(InOut->image());
-Midi->image(InOut->image());
+MIDI->image(InOut->image());
 Metro->image(InOut->image());
 fondo->image(InOut->image());
 TITTLE_L->image(InOut->image());
@@ -8302,7 +8193,7 @@ if(rkr->active[9]) L10->labelcolor(on); else L10->labelcolor(off);
 
 
 
-if(rkr->MIDIConverter_Bypass) MIDI_LABEL->labelcolor(on); else MIDI_LABEL->labelcolor(off);
+if(rkr->MIDIConverter_Bypass) MIDI->MIDI_LABEL->labelcolor(on); else MIDI->MIDI_LABEL->labelcolor(off);
 if(rkr->Metro_Bypass) Metro_Label->labelcolor(on); else Metro_Label->labelcolor(off);
 if(rkr->Tap_Bypass) TAP_LABEL->labelcolor(on); else TAP_LABEL->labelcolor(off);
 if(rkr->Tuner_Bypass) TUNER_LABEL->labelcolor(on); else TUNER_LABEL->labelcolor(off);
