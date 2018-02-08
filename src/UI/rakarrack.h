@@ -69,6 +69,7 @@ class EchotronGui; // forward declaration
 class SharGui; // forward declaration
 class CbandGui; // forward declaration
 class OtremGui; // forward declaration
+class VibeGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -119,11 +120,12 @@ class OtremGui; // forward declaration
 #include "stereoharm_gui.h"
 #include "compband_gui.h"
 #include "otrem_gui.h"
+#include "vibe_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Value_Input.H>
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
 #include <FL/Fl_Input.H>
 #include "analyzer.h"
@@ -326,73 +328,7 @@ public:
   SharGui *SHAR;
   CbandGui *COMPBAND;
   OtremGui *OTREM;
-  Fl_Group *VIBE;
-  Fl_Light_Button *vibe_activar;
-private:
-  inline void cb_vibe_activar_i(Fl_Light_Button*, void*);
-  static void cb_vibe_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *vibe_preset;
-private:
-  inline void cb_vibe_preset_i(Fl_Choice*, void*);
-  static void cb_vibe_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_vibe_preset[];
-public:
-  SliderW *vibe_WD;
-private:
-  inline void cb_vibe_WD_i(SliderW*, void*);
-  static void cb_vibe_WD(SliderW*, void*);
-public:
-  SliderW *vibe_width;
-private:
-  inline void cb_vibe_width_i(SliderW*, void*);
-  static void cb_vibe_width(SliderW*, void*);
-public:
-  SliderW *vibe_dpth;
-private:
-  inline void cb_vibe_dpth_i(SliderW*, void*);
-  static void cb_vibe_dpth(SliderW*, void*);
-public:
-  SliderW *vibe_freq;
-private:
-  inline void cb_vibe_freq_i(SliderW*, void*);
-  static void cb_vibe_freq(SliderW*, void*);
-public:
-  SliderW *vibe_rnd;
-private:
-  inline void cb_vibe_rnd_i(SliderW*, void*);
-  static void cb_vibe_rnd(SliderW*, void*);
-public:
-  Fl_Choice *vibe_lfotype;
-private:
-  inline void cb_vibe_lfotype_i(Fl_Choice*, void*);
-  static void cb_vibe_lfotype(Fl_Choice*, void*);
-public:
-  SliderW *vibe_stdf;
-private:
-  inline void cb_vibe_stdf_i(SliderW*, void*);
-  static void cb_vibe_stdf(SliderW*, void*);
-public:
-  SliderW *vibe_fb;
-private:
-  inline void cb_vibe_fb_i(SliderW*, void*);
-  static void cb_vibe_fb(SliderW*, void*);
-public:
-  SliderW *vibe_LR;
-private:
-  inline void cb_vibe_LR_i(SliderW*, void*);
-  static void cb_vibe_LR(SliderW*, void*);
-public:
-  SliderW *vibe_pan;
-private:
-  inline void cb_vibe_pan_i(SliderW*, void*);
-  static void cb_vibe_pan(SliderW*, void*);
-public:
-  Fl_Check_Button *vibe_stereo;
-private:
-  inline void cb_vibe_stereo_i(Fl_Check_Button*, void*);
-  static void cb_vibe_stereo(Fl_Check_Button*, void*);
-public:
+  VibeGui *VIBE;
   Fl_Group *INFINIT;
   Fl_Light_Button *infinity_activar;
 private:

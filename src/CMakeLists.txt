@@ -60,6 +60,7 @@ set (ProgSources
     UI/stereoharm_gui.cxx
     UI/compband_gui.cxx
     UI/otrem_gui.cxx
+    UI/vibe_gui.cxx
     process.C
     fileio.C
     varios.C

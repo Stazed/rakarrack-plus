@@ -1,0 +1,192 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class {\#include "common_gui_menu.h"} VibeGui {
+  user_data 1 open selected
+  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "sliderW.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"} visible position_relative
+} {
+  Fl_Light_Button vibe_activar {
+    label On
+    user_data 2
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(116);
+ o->value(rkr->Vibe_Bypass);
+ return;
+}
+rkr->Vibe_Bypass=(int)o->value();
+if((int) o->value()==0)
+rkr->efx_Vibe->cleanup();
+rgui->findpos(45,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+  }
+  Fl_Choice vibe_preset {
+    label Preset
+    user_data 12045
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==12045))rkr->efx_Vibe->setpreset((int)o->value());
+vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
+vibe_width->value(rkr->efx_Vibe->getpar(0));
+vibe_dpth->value(rkr->efx_Vibe->getpar(8));
+vibe_freq->value(rkr->efx_Vibe->getpar(1));
+vibe_rnd->value(rkr->efx_Vibe->getpar(2));
+vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
+vibe_stdf->value(rkr->efx_Vibe->getpar(4));
+vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
+vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
+vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
+vibe_stereo->value(rkr->efx_Vibe->getpar(10));}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label Classic
+      xywh {82 82 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Stereo Classic}
+      xywh {82 82 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Wide Vibe}
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Classic Chorus}
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Vibe Chorus}
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Lush Chorus}
+      xywh {10 10 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Sick Phaser}
+      xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Warble
+      xywh {0 0 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider vibe_WD {
+    label {Wet/Dry}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(386);
+ return;
+}
+rkr->efx_Vibe->changepar(6,(int)(o->value())+64);}
+    xywh {52 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider vibe_width {
+    label Width
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(387);
+ return;
+}
+rkr->efx_Vibe->changepar(0,(int)o->value());}
+    xywh {52 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider vibe_dpth {
+    label Depth
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(388);
+ return;
+}
+rkr->efx_Vibe->changepar(8,(int)o->value());}
+    xywh {52 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider vibe_freq {
+    label Tempo
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(389);
+ return;
+}
+rkr->efx_Vibe->changepar(1,(int)o->value());}
+    xywh {52 68 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider vibe_rnd {
+    label Rnd
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(390);
+ return;
+}
+rkr->efx_Vibe->changepar(2,(int)o->value());}
+    xywh {52 81 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Choice vibe_lfotype {
+    label {LFO Type}
+    callback {rkr->efx_Vibe->changepar(3,(int)o->value());}
+    xywh {63 96 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    code0 {o->menu(m_lfo_menu->get_lfo_type());}
+  } {}
+  Fl_Value_Slider vibe_stdf {
+    label {St.df}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(391);
+ return;
+}
+rkr->efx_Vibe->changepar(4,(int)o->value());}
+    xywh {52 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider vibe_fb {
+    label Fb
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(392);
+ return;
+}
+rkr->efx_Vibe->changepar(7,(int)(o->value()+64));}
+    xywh {52 131 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider vibe_LR {
+    label {L/R.Cr}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(393);
+ return;
+}
+rkr->efx_Vibe->changepar(9,(int)(o->value()+64));}
+    xywh {52 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Value_Slider vibe_pan {
+    label Pan
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(394);
+ return;
+}
+rkr->efx_Vibe->changepar(5,(int)(o->value()+64));}
+    xywh {52 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class SliderW
+  }
+  Fl_Check_Button vibe_stereo {
+    label Stereo
+    user_data 2
+    callback {rkr->efx_Vibe->changepar(10,(int)o->value())}
+    xywh {103 169 43 14} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+}
