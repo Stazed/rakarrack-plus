@@ -58,6 +58,7 @@ set (ProgSources
     UI/reverbtron_gui.cxx
     UI/echotron_gui.cxx
     UI/stereoharm_gui.cxx
+    UI/compband_gui.cxx
     process.C
     fileio.C
     varios.C

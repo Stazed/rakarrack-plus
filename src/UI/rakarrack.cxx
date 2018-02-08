@@ -751,207 +751,6 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
-void RKRGUI::cb_cband_activar_i(Fl_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->CompBand_Bypass);
- return;
-}
-rkr->CompBand_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_CompBand->cleanup();
-findpos(43,(int)o->value(),o);
-}
-void RKRGUI::cb_cband_activar(Fl_Light_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_activar_i(o,v);
-}
-
-void RKRGUI::cb_cband_preset_i(Fl_Choice* o, void* v) {
-  long long ud= (long long) v;
-if((ud==0)||(ud==12043))rkr->efx_CompBand->setpreset((int)o->value());
-cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
-cband_Lratio->value(rkr->efx_CompBand->getpar(1));
-cband_MLratio->value(rkr->efx_CompBand->getpar(2));
-cband_MHratio->value(rkr->efx_CompBand->getpar(3));
-cband_Hratio->value(rkr->efx_CompBand->getpar(4));
-cband_Lthres->value(rkr->efx_CompBand->getpar(5));
-cband_MLthres->value(rkr->efx_CompBand->getpar(6));
-cband_MHthres->value(rkr->efx_CompBand->getpar(7));
-cband_Hthres->value(rkr->efx_CompBand->getpar(8));
-cband_cross1->value(rkr->efx_CompBand->getpar(9));
-cband_cross2->value(rkr->efx_CompBand->getpar(10));
-cband_cross3->value(rkr->efx_CompBand->getpar(11));
-cband_cross3->value(rkr->efx_CompBand->getpar(11));
-cband_gain->value(rkr->efx_CompBand->getpar(12));
-}
-void RKRGUI::cb_cband_preset(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_preset_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_cband_preset[] = {
- {"Good Start", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Loudness", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Loudness 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_cband_WD_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(368);
- return;
-}
-rkr->efx_CompBand->changepar(0,(int)(o->value()+64));
-}
-void RKRGUI::cb_cband_WD(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_WD_i(o,v);
-}
-
-void RKRGUI::cb_cband_gain_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(369);
- return;
-}
-rkr->efx_CompBand->changepar(12,(int)o->value());
-}
-void RKRGUI::cb_cband_gain(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_gain_i(o,v);
-}
-
-void RKRGUI::cb_cband_Lratio_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(370);
- return;
-}
-rkr->efx_CompBand->changepar(1, (int) o->value());
-}
-void RKRGUI::cb_cband_Lratio(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_Lratio_i(o,v);
-}
-
-void RKRGUI::cb_cband_MLratio_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(371);
- return;
-}
-rkr->efx_CompBand->changepar(2, (int) o->value());
-}
-void RKRGUI::cb_cband_MLratio(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_MLratio_i(o,v);
-}
-
-void RKRGUI::cb_cband_MHratio_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(372);
- return;
-}
-rkr->efx_CompBand->changepar(3, (int) o->value());
-}
-void RKRGUI::cb_cband_MHratio(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_MHratio_i(o,v);
-}
-
-void RKRGUI::cb_cband_Hratio_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(373);
- return;
-}
-rkr->efx_CompBand->changepar(4, (int) o->value());
-}
-void RKRGUI::cb_cband_Hratio(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_Hratio_i(o,v);
-}
-
-void RKRGUI::cb_cband_Lthres_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(374);
- return;
-}
-rkr->efx_CompBand->changepar(5, (int)o->value());
-}
-void RKRGUI::cb_cband_Lthres(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_Lthres_i(o,v);
-}
-
-void RKRGUI::cb_cband_MLthres_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(375);
- return;
-}
-rkr->efx_CompBand->changepar(6, (int)o->value());
-}
-void RKRGUI::cb_cband_MLthres(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_MLthres_i(o,v);
-}
-
-void RKRGUI::cb_cband_MHthres_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(376);
- return;
-}
-rkr->efx_CompBand->changepar(7, (int)o->value());
-}
-void RKRGUI::cb_cband_MHthres(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_MHthres_i(o,v);
-}
-
-void RKRGUI::cb_cband_Hthres_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(377);
- return;
-}
-rkr->efx_CompBand->changepar(8, (int)o->value());
-}
-void RKRGUI::cb_cband_Hthres(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_Hthres_i(o,v);
-}
-
-void RKRGUI::cb_cband_cross1_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(378);
- return;
-}
-rkr->efx_CompBand->changepar(9,(int)o->value());
-}
-void RKRGUI::cb_cband_cross1(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_cross1_i(o,v);
-}
-
-void RKRGUI::cb_cband_cross2_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(379);
- return;
-}
-rkr->efx_CompBand->changepar(10,(int)o->value());
-}
-void RKRGUI::cb_cband_cross2(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_cross2_i(o,v);
-}
-
-void RKRGUI::cb_cband_cross3_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- getMIDIControl(380);
- return;
-}
-rkr->efx_CompBand->changepar(11,(int)o->value());
-}
-void RKRGUI::cb_cband_cross3(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_cband_cross3_i(o,v);
-}
-
 void RKRGUI::cb_otrem_activar_i(Fl_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
@@ -4389,260 +4188,20 @@ Fl_Double_Window* RKRGUI::make_window() {
       SHAR->hide();
       SHAR->end();
     } // SharGui* SHAR
-    { COMPBAND = new Fl_Group(162, 211, 158, 184);
+    { COMPBAND = new CbandGui(480, 212, 158, 184);
       COMPBAND->box(FL_UP_BOX);
       COMPBAND->color(FL_FOREGROUND_COLOR);
       COMPBAND->selection_color(FL_FOREGROUND_COLOR);
+      COMPBAND->labeltype(FL_NORMAL_LABEL);
       COMPBAND->labelfont(1);
+      COMPBAND->labelsize(14);
+      COMPBAND->labelcolor(FL_FOREGROUND_COLOR);
       COMPBAND->user_data((void*)(1));
       COMPBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      COMPBAND->when(FL_WHEN_RELEASE);
       COMPBAND->hide();
-      { cband_activar = new Fl_Light_Button(167, 215, 34, 18, "On");
-        cband_activar->shortcut(0x38);
-        cband_activar->color((Fl_Color)62);
-        cband_activar->selection_color((Fl_Color)1);
-        cband_activar->labelsize(10);
-        cband_activar->callback((Fl_Callback*)cb_cband_activar, (void*)(2));
-        cband_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-        cband_activar->when(FL_WHEN_CHANGED);
-      } // Fl_Light_Button* cband_activar
-      { cband_preset = new Fl_Choice(239, 215, 76, 18, "Preset");
-        cband_preset->down_box(FL_BORDER_BOX);
-        cband_preset->selection_color(FL_FOREGROUND_COLOR);
-        cband_preset->labelsize(10);
-        cband_preset->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_preset->textsize(10);
-        cband_preset->textcolor(FL_BACKGROUND2_COLOR);
-        cband_preset->callback((Fl_Callback*)cb_cband_preset, (void*)(12043));
-        cband_preset->when(FL_WHEN_RELEASE_ALWAYS);
-        cband_preset->menu(menu_cband_preset);
-      } // Fl_Choice* cband_preset
-      { cband_WD = new SliderW(214, 238, 100, 10, "Wet/Dry");
-        cband_WD->type(5);
-        cband_WD->box(FL_FLAT_BOX);
-        cband_WD->color((Fl_Color)178);
-        cband_WD->selection_color((Fl_Color)62);
-        cband_WD->labeltype(FL_NORMAL_LABEL);
-        cband_WD->labelfont(0);
-        cband_WD->labelsize(10);
-        cband_WD->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_WD->minimum(-64);
-        cband_WD->maximum(64);
-        cband_WD->step(1);
-        cband_WD->textcolor(FL_BACKGROUND2_COLOR);
-        cband_WD->callback((Fl_Callback*)cb_cband_WD);
-        cband_WD->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_WD->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_WD
-      { cband_gain = new SliderW(214, 250, 100, 10, "Gain");
-        cband_gain->type(5);
-        cband_gain->box(FL_FLAT_BOX);
-        cband_gain->color((Fl_Color)178);
-        cband_gain->selection_color((Fl_Color)62);
-        cband_gain->labeltype(FL_NORMAL_LABEL);
-        cband_gain->labelfont(0);
-        cband_gain->labelsize(10);
-        cband_gain->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_gain->maximum(127);
-        cband_gain->step(1);
-        cband_gain->textcolor(FL_BACKGROUND2_COLOR);
-        cband_gain->callback((Fl_Callback*)cb_cband_gain);
-        cband_gain->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_gain->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_gain
-      { cband_Lratio = new SliderW(214, 262, 100, 10, "L Ratio");
-        cband_Lratio->type(5);
-        cband_Lratio->box(FL_FLAT_BOX);
-        cband_Lratio->color((Fl_Color)178);
-        cband_Lratio->selection_color((Fl_Color)62);
-        cband_Lratio->labeltype(FL_NORMAL_LABEL);
-        cband_Lratio->labelfont(0);
-        cband_Lratio->labelsize(10);
-        cband_Lratio->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_Lratio->minimum(2);
-        cband_Lratio->maximum(42);
-        cband_Lratio->step(1);
-        cband_Lratio->value(2);
-        cband_Lratio->textcolor(FL_BACKGROUND2_COLOR);
-        cband_Lratio->callback((Fl_Callback*)cb_cband_Lratio);
-        cband_Lratio->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_Lratio->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_Lratio
-      { cband_MLratio = new SliderW(214, 274, 100, 10, "ML Ratio");
-        cband_MLratio->type(5);
-        cband_MLratio->box(FL_FLAT_BOX);
-        cband_MLratio->color((Fl_Color)178);
-        cband_MLratio->selection_color((Fl_Color)62);
-        cband_MLratio->labeltype(FL_NORMAL_LABEL);
-        cband_MLratio->labelfont(0);
-        cband_MLratio->labelsize(10);
-        cband_MLratio->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_MLratio->minimum(2);
-        cband_MLratio->maximum(42);
-        cband_MLratio->step(1);
-        cband_MLratio->value(2);
-        cband_MLratio->textcolor(FL_BACKGROUND2_COLOR);
-        cband_MLratio->callback((Fl_Callback*)cb_cband_MLratio);
-        cband_MLratio->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_MLratio->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_MLratio
-      { cband_MHratio = new SliderW(214, 286, 100, 10, "MH Ratio");
-        cband_MHratio->type(5);
-        cband_MHratio->box(FL_FLAT_BOX);
-        cband_MHratio->color((Fl_Color)178);
-        cband_MHratio->selection_color((Fl_Color)62);
-        cband_MHratio->labeltype(FL_NORMAL_LABEL);
-        cband_MHratio->labelfont(0);
-        cband_MHratio->labelsize(10);
-        cband_MHratio->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_MHratio->minimum(2);
-        cband_MHratio->maximum(42);
-        cband_MHratio->step(1);
-        cband_MHratio->value(2);
-        cband_MHratio->textcolor(FL_BACKGROUND2_COLOR);
-        cband_MHratio->callback((Fl_Callback*)cb_cband_MHratio);
-        cband_MHratio->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_MHratio->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_MHratio
-      { cband_Hratio = new SliderW(214, 298, 100, 10, "H Ratio");
-        cband_Hratio->type(5);
-        cband_Hratio->box(FL_FLAT_BOX);
-        cband_Hratio->color((Fl_Color)178);
-        cband_Hratio->selection_color((Fl_Color)62);
-        cband_Hratio->labeltype(FL_NORMAL_LABEL);
-        cband_Hratio->labelfont(0);
-        cband_Hratio->labelsize(10);
-        cband_Hratio->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_Hratio->minimum(2);
-        cband_Hratio->maximum(42);
-        cband_Hratio->step(1);
-        cband_Hratio->value(2);
-        cband_Hratio->textcolor(FL_BACKGROUND2_COLOR);
-        cband_Hratio->callback((Fl_Callback*)cb_cband_Hratio);
-        cband_Hratio->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_Hratio->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_Hratio
-      { cband_Lthres = new SliderW(214, 310, 100, 10, "L Thres");
-        cband_Lthres->type(5);
-        cband_Lthres->box(FL_FLAT_BOX);
-        cband_Lthres->color((Fl_Color)178);
-        cband_Lthres->selection_color((Fl_Color)62);
-        cband_Lthres->labeltype(FL_NORMAL_LABEL);
-        cband_Lthres->labelfont(0);
-        cband_Lthres->labelsize(10);
-        cband_Lthres->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_Lthres->minimum(-70);
-        cband_Lthres->maximum(24);
-        cband_Lthres->step(1);
-        cband_Lthres->textcolor(FL_BACKGROUND2_COLOR);
-        cband_Lthres->callback((Fl_Callback*)cb_cband_Lthres);
-        cband_Lthres->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_Lthres->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_Lthres
-      { cband_MLthres = new SliderW(214, 322, 100, 10, "ML Thres");
-        cband_MLthres->type(5);
-        cband_MLthres->box(FL_FLAT_BOX);
-        cband_MLthres->color((Fl_Color)178);
-        cband_MLthres->selection_color((Fl_Color)62);
-        cband_MLthres->labeltype(FL_NORMAL_LABEL);
-        cband_MLthres->labelfont(0);
-        cband_MLthres->labelsize(10);
-        cband_MLthres->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_MLthres->minimum(-70);
-        cband_MLthres->maximum(24);
-        cband_MLthres->step(1);
-        cband_MLthres->textcolor(FL_BACKGROUND2_COLOR);
-        cband_MLthres->callback((Fl_Callback*)cb_cband_MLthres);
-        cband_MLthres->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_MLthres->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_MLthres
-      { cband_MHthres = new SliderW(214, 334, 100, 10, "MH Thres");
-        cband_MHthres->type(5);
-        cband_MHthres->box(FL_FLAT_BOX);
-        cband_MHthres->color((Fl_Color)178);
-        cband_MHthres->selection_color((Fl_Color)62);
-        cband_MHthres->labeltype(FL_NORMAL_LABEL);
-        cband_MHthres->labelfont(0);
-        cband_MHthres->labelsize(10);
-        cband_MHthres->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_MHthres->minimum(-70);
-        cband_MHthres->maximum(24);
-        cband_MHthres->step(1);
-        cband_MHthres->textcolor(FL_BACKGROUND2_COLOR);
-        cband_MHthres->callback((Fl_Callback*)cb_cband_MHthres);
-        cband_MHthres->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_MHthres->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_MHthres
-      { cband_Hthres = new SliderW(214, 346, 100, 10, "H Thres");
-        cband_Hthres->type(5);
-        cband_Hthres->box(FL_FLAT_BOX);
-        cband_Hthres->color((Fl_Color)178);
-        cband_Hthres->selection_color((Fl_Color)62);
-        cband_Hthres->labeltype(FL_NORMAL_LABEL);
-        cband_Hthres->labelfont(0);
-        cband_Hthres->labelsize(10);
-        cband_Hthres->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_Hthres->minimum(-70);
-        cband_Hthres->maximum(24);
-        cband_Hthres->step(1);
-        cband_Hthres->textcolor(FL_BACKGROUND2_COLOR);
-        cband_Hthres->callback((Fl_Callback*)cb_cband_Hthres);
-        cband_Hthres->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_Hthres->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_Hthres
-      { cband_cross1 = new SliderW(214, 358, 100, 10, "Cross1");
-        cband_cross1->type(5);
-        cband_cross1->box(FL_FLAT_BOX);
-        cband_cross1->color((Fl_Color)178);
-        cband_cross1->selection_color((Fl_Color)62);
-        cband_cross1->labeltype(FL_NORMAL_LABEL);
-        cband_cross1->labelfont(0);
-        cband_cross1->labelsize(10);
-        cband_cross1->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_cross1->minimum(20);
-        cband_cross1->maximum(1000);
-        cband_cross1->step(1);
-        cband_cross1->textcolor(FL_BACKGROUND2_COLOR);
-        cband_cross1->callback((Fl_Callback*)cb_cband_cross1);
-        cband_cross1->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_cross1->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_cross1
-      { cband_cross2 = new SliderW(214, 370, 100, 10, "Cross2");
-        cband_cross2->type(5);
-        cband_cross2->box(FL_FLAT_BOX);
-        cband_cross2->color((Fl_Color)178);
-        cband_cross2->selection_color((Fl_Color)62);
-        cband_cross2->labeltype(FL_NORMAL_LABEL);
-        cband_cross2->labelfont(0);
-        cband_cross2->labelsize(10);
-        cband_cross2->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_cross2->minimum(1000);
-        cband_cross2->maximum(8000);
-        cband_cross2->step(1);
-        cband_cross2->textcolor(FL_BACKGROUND2_COLOR);
-        cband_cross2->callback((Fl_Callback*)cb_cband_cross2);
-        cband_cross2->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_cross2->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_cross2
-      { cband_cross3 = new SliderW(214, 382, 100, 10, "Cross3");
-        cband_cross3->type(5);
-        cband_cross3->box(FL_FLAT_BOX);
-        cband_cross3->color((Fl_Color)178);
-        cband_cross3->selection_color((Fl_Color)62);
-        cband_cross3->labeltype(FL_NORMAL_LABEL);
-        cband_cross3->labelfont(0);
-        cband_cross3->labelsize(10);
-        cband_cross3->labelcolor(FL_BACKGROUND2_COLOR);
-        cband_cross3->minimum(2000);
-        cband_cross3->maximum(26000);
-        cband_cross3->step(1);
-        cband_cross3->textcolor(FL_BACKGROUND2_COLOR);
-        cband_cross3->callback((Fl_Callback*)cb_cband_cross3);
-        cband_cross3->align(Fl_Align(FL_ALIGN_LEFT));
-        cband_cross3->when(FL_WHEN_CHANGED);
-      } // SliderW* cband_cross3
       COMPBAND->end();
-    } // Fl_Group* COMPBAND
+    } // CbandGui* COMPBAND
     { OTREM = new Fl_Group(320, 211, 158, 184);
       OTREM->box(FL_UP_BOX);
       OTREM->color(FL_FOREGROUND_COLOR);
@@ -8118,8 +7677,8 @@ void RKRGUI::Put_Loaded() {
       break; 
   
       case 43://CompBand
-      cband_activar->value(rkr->CompBand_Bypass);
-      cband_preset->do_callback(cband_preset,1);
+      COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
+      COMPBAND->cband_preset->do_callback(COMPBAND->cband_preset,1);
       break;
   
       case 44://Opticaltrem
@@ -8927,7 +8486,7 @@ void RKRGUI::reordena() {
   
      case 43:
          COMPBAND->position(x[i],y[i]);
-         cband_activar->shortcut(s[i]);
+         COMPBAND->cband_activar->shortcut(s[i]);
          if(!rkr->deachide)COMPBAND->show();
          if(rkr->CompBand_Bypass)
          {
@@ -10928,56 +10487,56 @@ void RKRGUI::ActMIDI() {
        Chord(1);
        break;
        case 368:
-       cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
-       cband_WD->redraw();
+       COMPBAND->cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
+       COMPBAND->cband_WD->redraw();
        break;
        case 369:
-       cband_gain->value(rkr->efx_CompBand->getpar(12));
-       cband_gain->redraw();
+       COMPBAND->cband_gain->value(rkr->efx_CompBand->getpar(12));
+       COMPBAND->cband_gain->redraw();
        break;
        case 370:
-       cband_Lratio->value(rkr->efx_CompBand->getpar(1));
-       cband_Lratio->redraw();
+       COMPBAND->cband_Lratio->value(rkr->efx_CompBand->getpar(1));
+       COMPBAND->cband_Lratio->redraw();
        break;
        case 371:
-       cband_MLratio->value(rkr->efx_CompBand->getpar(2));
-       cband_MLratio->redraw();
+       COMPBAND->cband_MLratio->value(rkr->efx_CompBand->getpar(2));
+       COMPBAND->cband_MLratio->redraw();
        break;
        case 372:
-       cband_MHratio->value(rkr->efx_CompBand->getpar(3));
-       cband_MHratio->redraw();
+       COMPBAND->cband_MHratio->value(rkr->efx_CompBand->getpar(3));
+       COMPBAND->cband_MHratio->redraw();
        break;
        case 373:
-       cband_Hratio->value(rkr->efx_CompBand->getpar(4));
-       cband_Hratio->redraw();
+       COMPBAND->cband_Hratio->value(rkr->efx_CompBand->getpar(4));
+       COMPBAND->cband_Hratio->redraw();
        break;
        case 374:
-       cband_Lthres->value(rkr->efx_CompBand->getpar(5));
-       cband_Lthres->redraw();
+       COMPBAND->cband_Lthres->value(rkr->efx_CompBand->getpar(5));
+       COMPBAND->cband_Lthres->redraw();
        break;
        case 375:
-       cband_MLthres->value(rkr->efx_CompBand->getpar(6));
-       cband_MLthres->redraw();
+       COMPBAND->cband_MLthres->value(rkr->efx_CompBand->getpar(6));
+       COMPBAND->cband_MLthres->redraw();
        break;
        case 376:
-       cband_MHthres->value(rkr->efx_CompBand->getpar(7));
-       cband_MHthres->redraw();
+       COMPBAND->cband_MHthres->value(rkr->efx_CompBand->getpar(7));
+       COMPBAND->cband_MHthres->redraw();
        break;
        case 377:
-       cband_Hthres->value(rkr->efx_CompBand->getpar(8));
-       cband_Hthres->redraw();
+       COMPBAND->cband_Hthres->value(rkr->efx_CompBand->getpar(8));
+       COMPBAND->cband_Hthres->redraw();
        break;
        case 378:
-       cband_cross1->value(rkr->efx_CompBand->getpar(9));
-       cband_cross1->redraw();
+       COMPBAND->cband_cross1->value(rkr->efx_CompBand->getpar(9));
+       COMPBAND->cband_cross1->redraw();
        break;
        case 379:
-       cband_cross2->value(rkr->efx_CompBand->getpar(10));
-       cband_cross2->redraw();
+       COMPBAND->cband_cross2->value(rkr->efx_CompBand->getpar(10));
+       COMPBAND->cband_cross2->redraw();
        break;
        case 380:
-       cband_cross3->value(rkr->efx_CompBand->getpar(11));
-       cband_cross3->redraw();
+       COMPBAND->cband_cross3->value(rkr->efx_CompBand->getpar(11));
+       COMPBAND->cband_cross3->redraw();
        break;
        case 381:
        otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
@@ -11269,8 +10828,8 @@ void RKRGUI::ActOnOff() {
     SHAR->shar_activar->do_callback();
     break;
    case 43:
-    cband_activar->value(rkr->CompBand_Bypass);
-    cband_activar->do_callback();
+    COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
+    COMPBAND->cband_activar->do_callback();
     break;
    case 44:
     otrem_activar->value(rkr->Opticaltrem_Bypass);
@@ -13096,7 +12655,7 @@ void RKRGUI::RandomPreset() {
   
       case 43://CompBand
       if (i<numEff)rkr->CompBand_Bypass=1; else rkr->CompBand_Bypass=0;
-      cband_activar->value(rkr->CompBand_Bypass);
+      COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
       break;
   
       case 44://Opticaltrem

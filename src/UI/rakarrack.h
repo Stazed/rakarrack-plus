@@ -67,6 +67,7 @@ class StompboxGui; // forward declaration
 class RevtronGui; // forward declaration
 class EchotronGui; // forward declaration
 class SharGui; // forward declaration
+class CbandGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -115,6 +116,7 @@ class SharGui; // forward declaration
 #include "reverbtron_gui.h"
 #include "echotron_gui.h"
 #include "stereoharm_gui.h"
+#include "compband_gui.h"
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
@@ -320,83 +322,7 @@ public:
   RevtronGui *REVERBTRON;
   EchotronGui *ECHOTRON;
   SharGui *SHAR;
-  Fl_Group *COMPBAND;
-  Fl_Light_Button *cband_activar;
-private:
-  inline void cb_cband_activar_i(Fl_Light_Button*, void*);
-  static void cb_cband_activar(Fl_Light_Button*, void*);
-public:
-  Fl_Choice *cband_preset;
-private:
-  inline void cb_cband_preset_i(Fl_Choice*, void*);
-  static void cb_cband_preset(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_cband_preset[];
-public:
-  SliderW *cband_WD;
-private:
-  inline void cb_cband_WD_i(SliderW*, void*);
-  static void cb_cband_WD(SliderW*, void*);
-public:
-  SliderW *cband_gain;
-private:
-  inline void cb_cband_gain_i(SliderW*, void*);
-  static void cb_cband_gain(SliderW*, void*);
-public:
-  SliderW *cband_Lratio;
-private:
-  inline void cb_cband_Lratio_i(SliderW*, void*);
-  static void cb_cband_Lratio(SliderW*, void*);
-public:
-  SliderW *cband_MLratio;
-private:
-  inline void cb_cband_MLratio_i(SliderW*, void*);
-  static void cb_cband_MLratio(SliderW*, void*);
-public:
-  SliderW *cband_MHratio;
-private:
-  inline void cb_cband_MHratio_i(SliderW*, void*);
-  static void cb_cband_MHratio(SliderW*, void*);
-public:
-  SliderW *cband_Hratio;
-private:
-  inline void cb_cband_Hratio_i(SliderW*, void*);
-  static void cb_cband_Hratio(SliderW*, void*);
-public:
-  SliderW *cband_Lthres;
-private:
-  inline void cb_cband_Lthres_i(SliderW*, void*);
-  static void cb_cband_Lthres(SliderW*, void*);
-public:
-  SliderW *cband_MLthres;
-private:
-  inline void cb_cband_MLthres_i(SliderW*, void*);
-  static void cb_cband_MLthres(SliderW*, void*);
-public:
-  SliderW *cband_MHthres;
-private:
-  inline void cb_cband_MHthres_i(SliderW*, void*);
-  static void cb_cband_MHthres(SliderW*, void*);
-public:
-  SliderW *cband_Hthres;
-private:
-  inline void cb_cband_Hthres_i(SliderW*, void*);
-  static void cb_cband_Hthres(SliderW*, void*);
-public:
-  SliderW *cband_cross1;
-private:
-  inline void cb_cband_cross1_i(SliderW*, void*);
-  static void cb_cband_cross1(SliderW*, void*);
-public:
-  SliderW *cband_cross2;
-private:
-  inline void cb_cband_cross2_i(SliderW*, void*);
-  static void cb_cband_cross2(SliderW*, void*);
-public:
-  SliderW *cband_cross3;
-private:
-  inline void cb_cband_cross3_i(SliderW*, void*);
-  static void cb_cband_cross3(SliderW*, void*);
-public:
+  CbandGui *COMPBAND;
   Fl_Group *OTREM;
   Fl_Light_Button *otrem_activar;
 private:

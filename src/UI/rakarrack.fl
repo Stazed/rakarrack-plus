@@ -194,6 +194,9 @@ decl {class EchotronGui; // forward declaration} {public global
 decl {class SharGui; // forward declaration} {public global
 }
 
+decl {class CbandGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -1302,201 +1305,10 @@ Fl::focus(Open_Order);
       } {}
       Fl_Group COMPBAND {
         user_data 1
-        xywh {162 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-      } {
-        Fl_Light_Button cband_activar {
-          label On
-          user_data 2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(116);
- o->value(rkr->CompBand_Bypass);
- return;
-}
-rkr->CompBand_Bypass=(int)o->value();
-if((int) o->value()==0)
-rkr->efx_CompBand->cleanup();
-findpos(43,(int)o->value(),o);}
-          xywh {167 215 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
-        }
-        Fl_Choice cband_preset {
-          label Preset
-          user_data 12043
-          callback {long long ud= (long long) v;
-if((ud==0)||(ud==12043))rkr->efx_CompBand->setpreset((int)o->value());
-cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
-cband_Lratio->value(rkr->efx_CompBand->getpar(1));
-cband_MLratio->value(rkr->efx_CompBand->getpar(2));
-cband_MHratio->value(rkr->efx_CompBand->getpar(3));
-cband_Hratio->value(rkr->efx_CompBand->getpar(4));
-cband_Lthres->value(rkr->efx_CompBand->getpar(5));
-cband_MLthres->value(rkr->efx_CompBand->getpar(6));
-cband_MHthres->value(rkr->efx_CompBand->getpar(7));
-cband_Hthres->value(rkr->efx_CompBand->getpar(8));
-cband_cross1->value(rkr->efx_CompBand->getpar(9));
-cband_cross2->value(rkr->efx_CompBand->getpar(10));
-cband_cross3->value(rkr->efx_CompBand->getpar(11));
-cband_cross3->value(rkr->efx_CompBand->getpar(11));
-cband_gain->value(rkr->efx_CompBand->getpar(12));}
-          xywh {239 215 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
-        } {
-          MenuItem {} {
-            label {Good Start}
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label Loudness
-            xywh {82 82 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label {Loudness 2}
-            xywh {82 82 36 21} labelsize 10
-          }
-        }
-        Fl_Value_Slider cband_WD {
-          label {Wet/Dry}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(368);
- return;
-}
-rkr->efx_CompBand->changepar(0,(int)(o->value()+64));}
-          xywh {214 238 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_gain {
-          label Gain
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(369);
- return;
-}
-rkr->efx_CompBand->changepar(12,(int)o->value());}
-          xywh {214 250 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_Lratio {
-          label {L Ratio}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(370);
- return;
-}
-rkr->efx_CompBand->changepar(1, (int) o->value());}
-          xywh {214 262 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_MLratio {
-          label {ML Ratio}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(371);
- return;
-}
-rkr->efx_CompBand->changepar(2, (int) o->value());}
-          xywh {214 274 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_MHratio {
-          label {MH Ratio}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(372);
- return;
-}
-rkr->efx_CompBand->changepar(3, (int) o->value());}
-          xywh {214 286 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_Hratio {
-          label {H Ratio}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(373);
- return;
-}
-rkr->efx_CompBand->changepar(4, (int) o->value());}
-          xywh {214 298 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_Lthres {
-          label {L Thres}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(374);
- return;
-}
-rkr->efx_CompBand->changepar(5, (int)o->value());}
-          xywh {214 310 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_MLthres {
-          label {ML Thres}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(375);
- return;
-}
-rkr->efx_CompBand->changepar(6, (int)o->value());}
-          xywh {214 322 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_MHthres {
-          label {MH Thres}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(376);
- return;
-}
-rkr->efx_CompBand->changepar(7, (int)o->value());}
-          xywh {214 334 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_Hthres {
-          label {H Thres}
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(377);
- return;
-}
-rkr->efx_CompBand->changepar(8, (int)o->value());}
-          xywh {214 346 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_cross1 {
-          label Cross1
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(378);
- return;
-}
-rkr->efx_CompBand->changepar(9,(int)o->value());}
-          xywh {214 358 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_cross2 {
-          label Cross2
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(379);
- return;
-}
-rkr->efx_CompBand->changepar(10,(int)o->value());}
-          xywh {214 370 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
-          class SliderW
-        }
-        Fl_Value_Slider cband_cross3 {
-          label Cross3
-          callback {if(Fl::event_button()==3)
-{
- getMIDIControl(380);
- return;
-}
-rkr->efx_CompBand->changepar(11,(int)o->value());}
-          xywh {214 382 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
-          class SliderW
-        }
-      }
+        xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "compband_gui.h"}
+        class CbandGui
+      } {}
       Fl_Group OTREM {
         user_data 1
         xywh {320 211 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112
@@ -5567,8 +5379,8 @@ for(i=0;i<rkr->NumEffects;i++)
     break; 
 
     case 43://CompBand
-    cband_activar->value(rkr->CompBand_Bypass);
-    cband_preset->do_callback(cband_preset,1);
+    COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
+    COMPBAND->cband_preset->do_callback(COMPBAND->cband_preset,1);
     break;
 
     case 44://Opticaltrem
@@ -6375,7 +6187,7 @@ switch (rkr->efx_order[i])
 
    case 43:
        COMPBAND->position(x[i],y[i]);
-       cband_activar->shortcut(s[i]);
+       COMPBAND->cband_activar->shortcut(s[i]);
        if(!rkr->deachide)COMPBAND->show();
        if(rkr->CompBand_Bypass)
        {
@@ -8368,56 +8180,56 @@ switch (i)
      Chord(1);
      break;
      case 368:
-     cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
-     cband_WD->redraw();
+     COMPBAND->cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
+     COMPBAND->cband_WD->redraw();
      break;
      case 369:
-     cband_gain->value(rkr->efx_CompBand->getpar(12));
-     cband_gain->redraw();
+     COMPBAND->cband_gain->value(rkr->efx_CompBand->getpar(12));
+     COMPBAND->cband_gain->redraw();
      break;
      case 370:
-     cband_Lratio->value(rkr->efx_CompBand->getpar(1));
-     cband_Lratio->redraw();
+     COMPBAND->cband_Lratio->value(rkr->efx_CompBand->getpar(1));
+     COMPBAND->cband_Lratio->redraw();
      break;
      case 371:
-     cband_MLratio->value(rkr->efx_CompBand->getpar(2));
-     cband_MLratio->redraw();
+     COMPBAND->cband_MLratio->value(rkr->efx_CompBand->getpar(2));
+     COMPBAND->cband_MLratio->redraw();
      break;
      case 372:
-     cband_MHratio->value(rkr->efx_CompBand->getpar(3));
-     cband_MHratio->redraw();
+     COMPBAND->cband_MHratio->value(rkr->efx_CompBand->getpar(3));
+     COMPBAND->cband_MHratio->redraw();
      break;
      case 373:
-     cband_Hratio->value(rkr->efx_CompBand->getpar(4));
-     cband_Hratio->redraw();
+     COMPBAND->cband_Hratio->value(rkr->efx_CompBand->getpar(4));
+     COMPBAND->cband_Hratio->redraw();
      break;
      case 374:
-     cband_Lthres->value(rkr->efx_CompBand->getpar(5));
-     cband_Lthres->redraw();
+     COMPBAND->cband_Lthres->value(rkr->efx_CompBand->getpar(5));
+     COMPBAND->cband_Lthres->redraw();
      break;
      case 375:
-     cband_MLthres->value(rkr->efx_CompBand->getpar(6));
-     cband_MLthres->redraw();
+     COMPBAND->cband_MLthres->value(rkr->efx_CompBand->getpar(6));
+     COMPBAND->cband_MLthres->redraw();
      break;
      case 376:
-     cband_MHthres->value(rkr->efx_CompBand->getpar(7));
-     cband_MHthres->redraw();
+     COMPBAND->cband_MHthres->value(rkr->efx_CompBand->getpar(7));
+     COMPBAND->cband_MHthres->redraw();
      break;
      case 377:
-     cband_Hthres->value(rkr->efx_CompBand->getpar(8));
-     cband_Hthres->redraw();
+     COMPBAND->cband_Hthres->value(rkr->efx_CompBand->getpar(8));
+     COMPBAND->cband_Hthres->redraw();
      break;
      case 378:
-     cband_cross1->value(rkr->efx_CompBand->getpar(9));
-     cband_cross1->redraw();
+     COMPBAND->cband_cross1->value(rkr->efx_CompBand->getpar(9));
+     COMPBAND->cband_cross1->redraw();
      break;
      case 379:
-     cband_cross2->value(rkr->efx_CompBand->getpar(10));
-     cband_cross2->redraw();
+     COMPBAND->cband_cross2->value(rkr->efx_CompBand->getpar(10));
+     COMPBAND->cband_cross2->redraw();
      break;
      case 380:
-     cband_cross3->value(rkr->efx_CompBand->getpar(11));
-     cband_cross3->redraw();
+     COMPBAND->cband_cross3->value(rkr->efx_CompBand->getpar(11));
+     COMPBAND->cband_cross3->redraw();
      break;
      case 381:
      otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
@@ -8709,8 +8521,8 @@ switch(miralo)
   SHAR->shar_activar->do_callback();
   break;
  case 43:
-  cband_activar->value(rkr->CompBand_Bypass);
-  cband_activar->do_callback();
+  COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
+  COMPBAND->cband_activar->do_callback();
   break;
  case 44:
   otrem_activar->value(rkr->Opticaltrem_Bypass);
@@ -10510,7 +10322,7 @@ for(i=0;i<10;i++)
 
     case 43://CompBand
     if (i<numEff)rkr->CompBand_Bypass=1; else rkr->CompBand_Bypass=0;
-    cband_activar->value(rkr->CompBand_Bypass);
+    COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
     break;
 
     case 44://Opticaltrem
