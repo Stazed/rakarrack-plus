@@ -50,18 +50,18 @@ void RKRGUI::cb_Save_Preset(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Preset_i(o,v);
 }
 
-void RKRGUI::cb_Load_Bank_M_i(Fl_Menu_* o, void*) {
-  Load_Bank->do_callback(o);
+void RKRGUI::cb_BankWindow_i(Fl_Menu_* o, void*) {
+  BankWindow->Load_Bank->do_callback(o);
 }
-void RKRGUI::cb_Load_Bank_M(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Load_Bank_M_i(o,v);
+void RKRGUI::cb_BankWindow(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_BankWindow_i(o,v);
 }
 
-void RKRGUI::cb_Save_Bank_M_i(Fl_Menu_* o, void*) {
-  Save_Bank->do_callback(o);
+void RKRGUI::cb_BankWindow1_i(Fl_Menu_* o, void*) {
+  BankWindow->Save_Bank->do_callback(o);
 }
-void RKRGUI::cb_Save_Bank_M(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Bank_M_i(o,v);
+void RKRGUI::cb_BankWindow1(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_BankWindow1_i(o,v);
 }
 
 void RKRGUI::cb_Load_Skin_i(Fl_Menu_*, void*) {
@@ -248,8 +248,8 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"New", 0x6e,  (Fl_Callback*)RKRGUI::cb_Menu_New, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Load Preset", 0x6c,  (Fl_Callback*)RKRGUI::cb_Load_Preset, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Save Preset", 0x73,  (Fl_Callback*)RKRGUI::cb_Save_Preset, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Load &Bank", 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank_M, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Save B&ank", 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank_M, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Load &Bank", 0,  (Fl_Callback*)RKRGUI::cb_BankWindow, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Save B&ank", 0,  (Fl_Callback*)RKRGUI::cb_BankWindow1, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Load S&kin", 0,  (Fl_Callback*)RKRGUI::cb_Load_Skin, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Save Sk&in", 0,  (Fl_Callback*)RKRGUI::cb_Save_Skin, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Load MIDI Table", 0,  (Fl_Callback*)RKRGUI::cb_Load_MTable, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
@@ -275,8 +275,6 @@ Fl_Menu_Item* RKRGUI::Archivo = RKRGUI::menu_MenuP + 0;
 Fl_Menu_Item* RKRGUI::Menu_New = RKRGUI::menu_MenuP + 1;
 Fl_Menu_Item* RKRGUI::Load_Preset = RKRGUI::menu_MenuP + 2;
 Fl_Menu_Item* RKRGUI::Save_Preset = RKRGUI::menu_MenuP + 3;
-Fl_Menu_Item* RKRGUI::Load_Bank_M = RKRGUI::menu_MenuP + 4;
-Fl_Menu_Item* RKRGUI::Save_Bank_M = RKRGUI::menu_MenuP + 5;
 Fl_Menu_Item* RKRGUI::Load_Skin = RKRGUI::menu_MenuP + 6;
 Fl_Menu_Item* RKRGUI::Save_Skin = RKRGUI::menu_MenuP + 7;
 Fl_Menu_Item* RKRGUI::Load_MTable = RKRGUI::menu_MenuP + 8;
@@ -1280,171 +1278,12 @@ void RKRGUI::cb_T_DIS(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_DIS_i(o,v);
 }
 
-void RKRGUI::cb_BankWindow_i(Fl_Double_Window* o, void*) {
-  o->hide();
-save_stat(1);
+void RKRGUI::cb_BankWindow2_i(BankWindowGui*, void*) {
+  save_stat(1);
+BankWindow->hide();
 }
-void RKRGUI::cb_BankWindow(Fl_Double_Window* o, void* v) {
-  ((RKRGUI*)(o->user_data()))->cb_BankWindow_i(o,v);
-}
-
-void RKRGUI::cb_NewB_i(Fl_Menu_*, void*) {
-  rkr->New_Bank();
-Put_Loaded_Bank();
-BankWindow->redraw();
-}
-void RKRGUI::cb_NewB(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_NewB_i(o,v);
-}
-
-void RKRGUI::cb_Load_Bank_i(Fl_Menu_*, void*) {
-  int ok;
-char *filename;
-is_modified();
-filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-ok=rkr->loadbank(filename);
-if(ok) 
-{
-BankWin_Label(filename);
-Put_Loaded_Bank();
-AddBankName(filename);
-if(rkr->CheckOldBank(filename)==0)
-{
-        char nombre[64];
-        char *filepart;
-        memset(nombre,0,sizeof(nombre));
-        filepart = strrchr(filename,'/')+1;
-        strncpy(nombre,filepart,strlen(filepart)-5);
-        CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
-}
-};
-}
-void RKRGUI::cb_Load_Bank(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Load_Bank_i(o,v);
-}
-
-void RKRGUI::cb_Save_Bank_i(Fl_Menu_*, void*) {
-  MIDI->MIDI_LABEL->do_callback();
-}
-void RKRGUI::cb_Save_Bank(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Bank_i(o,v);
-}
-
-void RKRGUI::cb_Convert_Old_Bank_i(Fl_Menu_*, void*) {
-  char *filename;
-char name[70];
-memset(name,0, sizeof(name));
-sprintf(name,"%s %s",rkr->jackcliname, VERSION);
-
-filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-
-if(rkr->CheckOldBank(filename))
-{
-rkr->ConvertOldFile(filename);
-rkr->Message(1,name, "Please, now try to load the new files");
-}
-else
-rkr->Message(1, name, "This file has already the new format");
-}
-void RKRGUI::cb_Convert_Old_Bank(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Convert_Old_Bank_i(o,v);
-}
-
-void RKRGUI::cb_salirB_i(Fl_Menu_*, void*) {
-  BankWindow->do_callback();
-}
-void RKRGUI::cb_salirB(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_salirB_i(o,v);
-}
-
-void RKRGUI::cb_ContenidoB_i(Fl_Menu_*, void*) {
-  show_help();
-}
-void RKRGUI::cb_ContenidoB(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_ContenidoB_i(o,v);
-}
-
-void RKRGUI::cb_Acerca_deB_i(Fl_Menu_*, void*) {
-  int x,y;
-
-x = BankWindow->x()+((BankWindow->w()-420)/2);
-y = BankWindow->y()+((BankWindow->h()-230)/2);
-
-AboutWin->position(x,y);
-AboutWin->show();
-put_icon(AboutWin);
-}
-void RKRGUI::cb_Acerca_deB(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Acerca_deB_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_MenuB[] = {
- {"&File", 0,  0, 0, 64, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
- {"&New", 0,  (Fl_Callback*)RKRGUI::cb_NewB, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"&Load Bank", 0,  (Fl_Callback*)RKRGUI::cb_Load_Bank, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"&Save Bank", 0,  (Fl_Callback*)RKRGUI::cb_Save_Bank, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Convert &Old Bank", 0,  (Fl_Callback*)RKRGUI::cb_Convert_Old_Bank, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"&Close", 0,  (Fl_Callback*)RKRGUI::cb_salirB, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
- {0,0,0,0,0,0,0,0,0},
- {"&Help", 0,  0, 0, 64, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
- {"Help &Contents", 0xffbe,  (Fl_Callback*)RKRGUI::cb_ContenidoB, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
- {"&About...", 0,  (Fl_Callback*)RKRGUI::cb_Acerca_deB, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
- {0,0,0,0,0,0,0,0,0},
- {0,0,0,0,0,0,0,0,0}
-};
-Fl_Menu_Item* RKRGUI::ArchivoB = RKRGUI::menu_MenuB + 0;
-Fl_Menu_Item* RKRGUI::NewB = RKRGUI::menu_MenuB + 1;
-Fl_Menu_Item* RKRGUI::Load_Bank = RKRGUI::menu_MenuB + 2;
-Fl_Menu_Item* RKRGUI::Save_Bank = RKRGUI::menu_MenuB + 3;
-Fl_Menu_Item* RKRGUI::Convert_Old_Bank = RKRGUI::menu_MenuB + 4;
-Fl_Menu_Item* RKRGUI::salirB = RKRGUI::menu_MenuB + 5;
-Fl_Menu_Item* RKRGUI::AyudaB = RKRGUI::menu_MenuB + 7;
-Fl_Menu_Item* RKRGUI::ContenidoB = RKRGUI::menu_MenuB + 8;
-Fl_Menu_Item* RKRGUI::Acerca_deB = RKRGUI::menu_MenuB + 9;
-
-void RKRGUI::cb_B_B1_i(Fl_Button*, void*) {
-  L_B1->do_callback();
-}
-void RKRGUI::cb_B_B1(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B1_i(o,v);
-}
-
-void RKRGUI::cb_B_B2_i(Fl_Button*, void*) {
-  L_B2->do_callback();
-}
-void RKRGUI::cb_B_B2(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B2_i(o,v);
-}
-
-void RKRGUI::cb_B_B3_i(Fl_Button*, void*) {
-  L_B3->do_callback();
-}
-void RKRGUI::cb_B_B3(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B3_i(o,v);
-}
-
-void RKRGUI::cb_B_B4_i(Fl_Button*, void*) {
-  L_B4->do_callback();
-}
-void RKRGUI::cb_B_B4(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_B_B4_i(o,v);
-}
-
-void RKRGUI::cb_CH_UB_i(Fl_Choice*, void* v) {
-  int ok=rkr->loadbank((char *)v);
-if(ok) 
-{
-BankWin_Label((char *)v);
-Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
-};
-}
-void RKRGUI::cb_CH_UB(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_CH_UB_i(o,v);
+void RKRGUI::cb_BankWindow2(BankWindowGui* o, void* v) {
+  ((RKRGUI*)(o->user_data()))->cb_BankWindow2_i(o,v);
 }
 
 void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
@@ -4162,57 +4001,22 @@ Fl_Double_Window* RKRGUI::make_window() {
     Principal->end();
     Principal->resizable(Principal);
   } // Fl_Double_Window* Principal
-  { BankWindow = new Fl_Double_Window(800, 600);
+  { BankWindow = new BankWindowGui(800, 600);
+    BankWindow->box(FL_FLAT_BOX);
     BankWindow->color((Fl_Color)4);
     BankWindow->selection_color(FL_BACKGROUND2_COLOR);
-    BankWindow->callback((Fl_Callback*)cb_BankWindow, (void*)(this));
-    { Fondo3 = new Fl_Box(1, 1, 800, 600);
-    } // Fl_Box* Fondo3
-    { MenuB = new Fl_Menu_Bar(0, 0, 253, 20);
-      MenuB->box(FL_NO_BOX);
-      MenuB->color((Fl_Color)55);
-      MenuB->selection_color(FL_BACKGROUND2_COLOR);
-      MenuB->labelcolor(FL_BACKGROUND2_COLOR);
-      MenuB->textcolor(FL_BACKGROUND2_COLOR);
-      MenuB->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      MenuB->menu(menu_MenuB);
-    } // Fl_Menu_Bar* MenuB
-    { B_B1 = new Fl_Button(258, 14, 32, 24, "1");
-      B_B1->color((Fl_Color)62);
-      B_B1->labelsize(10);
-      B_B1->callback((Fl_Callback*)cb_B_B1, (void*)(77));
-    } // Fl_Button* B_B1
-    { B_B2 = new Fl_Button(298, 14, 32, 24, "2");
-      B_B2->color((Fl_Color)62);
-      B_B2->labelsize(10);
-      B_B2->callback((Fl_Callback*)cb_B_B2, (void*)(77));
-    } // Fl_Button* B_B2
-    { B_B3 = new Fl_Button(338, 14, 32, 24, "3");
-      B_B3->color((Fl_Color)62);
-      B_B3->labelsize(10);
-      B_B3->callback((Fl_Callback*)cb_B_B3, (void*)(77));
-    } // Fl_Button* B_B3
-    { B_B4 = new Fl_Button(378, 14, 32, 24, "U");
-      B_B4->color((Fl_Color)62);
-      B_B4->labelsize(10);
-      B_B4->callback((Fl_Callback*)cb_B_B4, (void*)(77));
-    } // Fl_Button* B_B4
-    { CH_UB = new Fl_Choice(549, 14, 117, 24, "User Banks       ");
-      CH_UB->down_box(FL_BORDER_BOX);
-      CH_UB->selection_color(FL_BACKGROUND2_COLOR);
-      CH_UB->labelcolor(FL_BACKGROUND2_COLOR);
-      CH_UB->textcolor(FL_BACKGROUND2_COLOR);
-      CH_UB->callback((Fl_Callback*)cb_CH_UB);
-      CH_UB->when(FL_WHEN_RELEASE_ALWAYS);
-    } // Fl_Choice* CH_UB
-    { ob = new Fl_Group(0, 60, 800, 540);
-      ob->labelsize(18);
-      ob->end();
-    } // Fl_Group* ob
+    BankWindow->labeltype(FL_NO_LABEL);
+    BankWindow->labelfont(0);
+    BankWindow->labelsize(14);
+    BankWindow->labelcolor(FL_FOREGROUND_COLOR);
+    BankWindow->callback((Fl_Callback*)cb_BankWindow2, (void*)(this));
+    BankWindow->align(Fl_Align(FL_ALIGN_TOP));
+    BankWindow->when(FL_WHEN_RELEASE);
+    BankWindow->hide();
     BankWindow->size_range(640, 480, 3200, 2400);
     BankWindow->end();
     BankWindow->resizable(BankWindow);
-  } // Fl_Double_Window* BankWindow
+  } // BankWindowGui* BankWindow
   { Order = new Fl_Double_Window(500, 400);
     Order->color((Fl_Color)178);
     Order->callback((Fl_Callback*)cb_Order, (void*)(this));
@@ -5444,7 +5248,7 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
 
 void RKRGUI::Background_Color_Change(Fl_Color bcolor) {
   MenuP->color(bcolor);
-  MenuB->color(bcolor);
+  BankWindow->MenuB->color(bcolor);
   
   back_color = bcolor;
   
@@ -5491,9 +5295,9 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
     }  
   
   
-  for (int t=0; t<ob->children();t++)
+  for (int t=0; t<BankWindow->ob->children();t++)
     {
-      Fl_Widget *w = ob->child(t);
+      Fl_Widget *w = BankWindow->ob->child(t);
   
        w->labelcolor(label_color);  
     }  
@@ -5538,18 +5342,18 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
 void RKRGUI::Buttons_Color_Change(Fl_Color bcolor) {
   if (made)
   {
-  for (int t=0; t<ob->children();t++)
+  for (int t=0; t<BankWindow->ob->children();t++)
     {
-      Fl_Widget *w = ob->child(t);
+      Fl_Widget *w = BankWindow->ob->child(t);
       long long temp = (long long) w->user_data();
       if (temp > 0) w->color(bcolor); 
     }
   
-  B_B1->color(bcolor);
-  B_B2->color(bcolor);
-  B_B3->color(bcolor);
-  B_B4->color(bcolor);
-  CH_UB->color(bcolor);
+  BankWindow->B_B1->color(bcolor);
+  BankWindow->B_B2->color(bcolor);
+  BankWindow->B_B3->color(bcolor);
+  BankWindow->B_B4->color(bcolor);
+  BankWindow->CH_UB->color(bcolor);
   
   }
   
@@ -6515,7 +6319,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
   if ((Fl::event_button()==3) && (Fl::event()==FL_RELEASE))
   {
   
-  Fl_Widget *w = ob->child(num-1);
+  Fl_Widget *w = BankWindow->ob->child(num-1);
   
   
   if (strlen(rkr->Bank[num].Preset_Name) >0)
@@ -6546,7 +6350,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
   
   if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
   {
-  Fl_Widget *w = ob->child(num-1);
+  Fl_Widget *w = BankWindow->ob->child(num-1);
   unlight_preset(rkr->Selected_Preset);
   rkr->Selected_Preset=num;
   w->color(fl_darker(leds_color));
@@ -6566,7 +6370,7 @@ void RKRGUI::make_window_banks() {
   
   
   
-  ob->begin();
+  BankWindow->ob->begin();
   
   x=40;y=40;
   num=1;
@@ -6590,7 +6394,7 @@ void RKRGUI::make_window_banks() {
         butX->value(0);
         butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
         butX->callback((Fl_Callback *)preset_click);
-        ob->add(butX);
+        BankWindow->ob->add(butX);
   
   x +=elw+4;
   num++;
@@ -6601,14 +6405,14 @@ void RKRGUI::make_window_banks() {
   }
   
   
-  ob->end();
+  BankWindow->ob->end();
   made=1;
   
-  B_B1->color(fore_color);
-  B_B2->color(fore_color);
-  B_B3->color(fore_color);
-  B_B4->color(fore_color);
-  CH_UB->color(fore_color);
+  BankWindow->B_B1->color(fore_color);
+  BankWindow->B_B2->color(fore_color);
+  BankWindow->B_B3->color(fore_color);
+  BankWindow->B_B4->color(fore_color);
+  BankWindow->CH_UB->color(fore_color);
   
   light_preset(rkr->Selected_Preset);
 }
@@ -7815,9 +7619,9 @@ void RKRGUI::is_modified() {
 void RKRGUI::Put_Loaded_Bank() {
   int k=1;
   
-  for (int t=0; t<ob->children();t++)
+  for (int t=0; t<BankWindow->ob->children();t++)
     {
-      Fl_Widget *w = ob->child(t);
+      Fl_Widget *w = BankWindow->ob->child(t);
       long long temp = (long long) w->user_data();
       if (temp > 0)
       {
@@ -9639,9 +9443,9 @@ void RKRGUI::ActOnOff() {
 void RKRGUI::light_preset(int npreset) {
   if(!made) return;
   
-  for (int t=0; t<ob->children();t++)
+  for (int t=0; t<BankWindow->ob->children();t++)
     {
-      Fl_Widget *w = ob->child(t);
+      Fl_Widget *w = BankWindow->ob->child(t);
       long long temp = (long long) w->user_data();
       if (temp == npreset)
       {
@@ -9655,9 +9459,9 @@ void RKRGUI::light_preset(int npreset) {
 void RKRGUI::unlight_preset(int npreset) {
   if(!made) return;
   
-  for (int t=0; t<ob->children();t++)
+  for (int t=0; t<BankWindow->ob->children();t++)
     {
-      Fl_Widget *w = ob->child(t);
+      Fl_Widget *w = BankWindow->ob->child(t);
       long long temp = (long long) w->user_data();
       if (temp == npreset)
       {
@@ -9732,7 +9536,7 @@ void RKRGUI::PutBackground() {
   TITTLE_L->image(InOut->image());
   Fondo1->image(InOut->image());
   Fondo2->image(InOut->image());
-  Fondo3->image(InOut->image());
+  BankWindow->Fondo3->image(InOut->image());
   Fondo4->image(InOut->image());
   Fondo5->image(InOut->image());
   Fondo6->image(InOut->image());
@@ -9755,7 +9559,7 @@ void RKRGUI::PutBackground() {
   Ares->image(InOut->image());
   
   MenuP->image(InOut->image());
-  MenuB->image(InOut->image());
+  BankWindow->MenuB->image(InOut->image());
   
   
   Fl::redraw();
@@ -10669,9 +10473,9 @@ void RKRGUI::highlight() {
 }
 
 int RKRGUI::search_but(int x, int y) {
-  for (int t=0; t<ob->children();t++)
+  for (int t=0; t<BankWindow->ob->children();t++)
     {
-      Fl_Widget *w = ob->child(t);
+      Fl_Widget *w = BankWindow->ob->child(t);
   
       if( (x>=w->x() ) && (x<=(w->x()+w->w())) && (y>=w->y() ) && (y<=(w->y()+w->h())))   
       
@@ -10697,7 +10501,7 @@ void RKRGUI::ScanDir() {
     struct dirent *fs;
   
     ClearBankNames();     /* This will free all memory allocated for names */
-    CH_UB->clear();
+    BankWindow->CH_UB->clear();
   
     dir=opendir(DATADIR);
     if (dir==NULL) return;
@@ -10714,7 +10518,7 @@ void RKRGUI::ScanDir() {
          strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
          if(nombre != NULL)
          {
-            CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
+            BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
          }
         }
   
@@ -10737,7 +10541,7 @@ void RKRGUI::ScanDir() {
          strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
          if(nombre != NULL)
          {
-            CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
+            BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
          }
         }
   
@@ -10745,7 +10549,7 @@ void RKRGUI::ScanDir() {
     }
     closedir(dir);
   
-    CH_UB->value(0);
+    BankWindow->CH_UB->value(0);
     free(forFree);
 }
 

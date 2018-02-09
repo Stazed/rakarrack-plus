@@ -72,6 +72,7 @@ class OtremGui; // forward declaration
 class VibeGui; // forward declaration
 class InfinityGui; // forward declaration
 class MidiGui; // forward declaration
+class BankWindowGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -132,6 +133,7 @@ class MidiGui; // forward declaration
 #include <FL/Fl_Counter.H>
 #include "analyzer.h"
 #include <FL/Fl_Value_Input.H>
+#include "bankwindow_gui.h"
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Tabs.H>
@@ -168,16 +170,10 @@ public:
 private:
   inline void cb_Save_Preset_i(Fl_Menu_*, void*);
   static void cb_Save_Preset(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *Load_Bank_M;
-private:
-  inline void cb_Load_Bank_M_i(Fl_Menu_*, void*);
-  static void cb_Load_Bank_M(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *Save_Bank_M;
-private:
-  inline void cb_Save_Bank_M_i(Fl_Menu_*, void*);
-  static void cb_Save_Bank_M(Fl_Menu_*, void*);
+  inline void cb_BankWindow_i(Fl_Menu_*, void*);
+  static void cb_BankWindow(Fl_Menu_*, void*);
+  inline void cb_BankWindow1_i(Fl_Menu_*, void*);
+  static void cb_BankWindow1(Fl_Menu_*, void*);
 public:
   static Fl_Menu_Item *Load_Skin;
 private:
@@ -524,77 +520,11 @@ private:
   inline void cb_T_DIS_i(Fl_Value_Input*, void*);
   static void cb_T_DIS(Fl_Value_Input*, void*);
 public:
-  Fl_Double_Window *BankWindow;
+  BankWindowGui *BankWindow;
 private:
-  inline void cb_BankWindow_i(Fl_Double_Window*, void*);
-  static void cb_BankWindow(Fl_Double_Window*, void*);
+  inline void cb_BankWindow2_i(BankWindowGui*, void*);
+  static void cb_BankWindow2(BankWindowGui*, void*);
 public:
-  Fl_Box *Fondo3;
-  Fl_Menu_Bar *MenuB;
-  static Fl_Menu_Item menu_MenuB[];
-  static Fl_Menu_Item *ArchivoB;
-  static Fl_Menu_Item *NewB;
-private:
-  inline void cb_NewB_i(Fl_Menu_*, void*);
-  static void cb_NewB(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *Load_Bank;
-private:
-  inline void cb_Load_Bank_i(Fl_Menu_*, void*);
-  static void cb_Load_Bank(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *Save_Bank;
-private:
-  inline void cb_Save_Bank_i(Fl_Menu_*, void*);
-  static void cb_Save_Bank(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *Convert_Old_Bank;
-private:
-  inline void cb_Convert_Old_Bank_i(Fl_Menu_*, void*);
-  static void cb_Convert_Old_Bank(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *salirB;
-private:
-  inline void cb_salirB_i(Fl_Menu_*, void*);
-  static void cb_salirB(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *AyudaB;
-  static Fl_Menu_Item *ContenidoB;
-private:
-  inline void cb_ContenidoB_i(Fl_Menu_*, void*);
-  static void cb_ContenidoB(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *Acerca_deB;
-private:
-  inline void cb_Acerca_deB_i(Fl_Menu_*, void*);
-  static void cb_Acerca_deB(Fl_Menu_*, void*);
-public:
-  Fl_Button *B_B1;
-private:
-  inline void cb_B_B1_i(Fl_Button*, void*);
-  static void cb_B_B1(Fl_Button*, void*);
-public:
-  Fl_Button *B_B2;
-private:
-  inline void cb_B_B2_i(Fl_Button*, void*);
-  static void cb_B_B2(Fl_Button*, void*);
-public:
-  Fl_Button *B_B3;
-private:
-  inline void cb_B_B3_i(Fl_Button*, void*);
-  static void cb_B_B3(Fl_Button*, void*);
-public:
-  Fl_Button *B_B4;
-private:
-  inline void cb_B_B4_i(Fl_Button*, void*);
-  static void cb_B_B4(Fl_Button*, void*);
-public:
-  Fl_Choice *CH_UB;
-private:
-  inline void cb_CH_UB_i(Fl_Choice*, void*);
-  static void cb_CH_UB(Fl_Choice*, void*);
-public:
-  Fl_Group *ob;
   Fl_Double_Window *Order;
 private:
   inline void cb_Order_i(Fl_Double_Window*, void*);

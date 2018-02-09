@@ -209,6 +209,9 @@ decl {class InfinityGui; // forward declaration} {public global
 decl {class MidiGui; // forward declaration} {public global
 }
 
+decl {class BankWindowGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -276,8 +279,8 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
-      xywh {154 68 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;} open
+      xywh {1034 312 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -304,14 +307,14 @@ Pexitprogram=1;} open selected
             callback {S_preset->do_callback();}
             xywh {0 0 45 26} shortcut 0x73 divider
           }
-          MenuItem Load_Bank_M {
+          MenuItem {BankWindow->Load_Bank_M} {
             label {Load &Bank}
-            callback {Load_Bank->do_callback(o);}
+            callback {BankWindow->Load_Bank->do_callback(o);}
             xywh {0 0 45 26}
           }
-          MenuItem Save_Bank_M {
+          MenuItem {BankWindow->Save_Bank_M} {
             label {Save B&ank}
-            callback {Save_Bank->do_callback(o);}
+            callback {BankWindow->Save_Bank->do_callback(o);}
             xywh {0 0 45 26} divider
           }
           MenuItem Load_Skin {
@@ -2025,146 +2028,13 @@ UpdateTGUI();
       }
     }
     Fl_Window BankWindow {
-      callback {o->hide();
-save_stat(1);}
-      xywh {988 161 800 600} type Double color 4 selection_color 7 hide resizable size_range {640 480 3200 2400}
-    } {
-      Fl_Box Fondo3 {
-        xywh {1 1 800 600}
-      }
-      Fl_Menu_Bar MenuB {
-        xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
-      } {
-        Submenu ArchivoB {
-          label {&File}
-          xywh {10 10 100 20} labelcolor 7
-        } {
-          MenuItem NewB {
-            label {&New}
-            callback {rkr->New_Bank();
-Put_Loaded_Bank();
-BankWindow->redraw();}
-            xywh {0 0 45 26} divider
-          }
-          MenuItem Load_Bank {
-            label {&Load Bank}
-            callback {int ok;
-char *filename;
-is_modified();
-filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-ok=rkr->loadbank(filename);
-if(ok) 
-{
-BankWin_Label(filename);
-Put_Loaded_Bank();
-AddBankName(filename);
-if(rkr->CheckOldBank(filename)==0)
-{
-        char nombre[64];
-        char *filepart;
-        memset(nombre,0,sizeof(nombre));
-        filepart = strrchr(filename,'/')+1;
-        strncpy(nombre,filepart,strlen(filepart)-5);
-        CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
-}
-}}
-            xywh {10 10 45 26}
-          }
-          MenuItem Save_Bank {
-            label {&Save Bank}
-            callback {MIDI->MIDI_LABEL->do_callback();}
-            xywh {10 10 45 26} divider
-          }
-          MenuItem Convert_Old_Bank {
-            label {Convert &Old Bank}
-            callback {char *filename;
-char name[70];
-memset(name,0, sizeof(name));
-sprintf(name,"%s %s",rkr->jackcliname, VERSION);
-
-filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-
-if(rkr->CheckOldBank(filename))
-{
-rkr->ConvertOldFile(filename);
-rkr->Message(1,name, "Please, now try to load the new files");
-}
-else
-rkr->Message(1, name, "This file has already the new format");}
-            xywh {0 0 36 21} divider
-          }
-          MenuItem salirB {
-            label {&Close}
-            callback {BankWindow->do_callback();}
-            xywh {12 12 36 21} labelcolor 7
-          }
-        }
-        Submenu AyudaB {
-          label {&Help}
-          xywh {10 10 100 20} labelcolor 7
-        } {
-          MenuItem ContenidoB {
-            label {Help &Contents}
-            callback {show_help();}
-            xywh {10 10 100 20} shortcut 0xffbe labelcolor 7
-          }
-          MenuItem Acerca_deB {
-            label {&About...}
-            callback {int x,y;
-
-x = BankWindow->x()+((BankWindow->w()-420)/2);
-y = BankWindow->y()+((BankWindow->h()-230)/2);
-
-AboutWin->position(x,y);
-AboutWin->show();
-put_icon(AboutWin);}
-            xywh {10 10 100 20} labelcolor 7
-          }
-        }
-      }
-      Fl_Button B_B1 {
-        label 1
-        user_data 77
-        callback {L_B1->do_callback();}
-        xywh {258 14 32 24} color 62 labelsize 10
-      }
-      Fl_Button B_B2 {
-        label 2
-        user_data 77
-        callback {L_B2->do_callback();}
-        xywh {298 14 32 24} color 62 labelsize 10
-      }
-      Fl_Button B_B3 {
-        label 3
-        user_data 77
-        callback {L_B3->do_callback();}
-        xywh {338 14 32 24} color 62 labelsize 10
-      }
-      Fl_Button B_B4 {
-        label U
-        user_data 77
-        callback {L_B4->do_callback();}
-        xywh {378 14 32 24} color 62 labelsize 10
-      }
-      Fl_Choice CH_UB {
-        label {User Banks       }
-        callback {int ok=rkr->loadbank((char *)v);
-if(ok) 
-{
-BankWin_Label((char *)v);
-Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
-}} open
-        xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
-      } {}
-      Fl_Group ob {
-        xywh {0 60 800 540} labelsize 18
-      } {}
-    }
+      callback {save_stat(1);
+BankWindow->hide();} open selected
+      xywh {113 380 800 600} type Double color 4 selection_color 7 hide resizable
+      code0 {\#include "bankwindow_gui.h"}
+      code1 {BankWindow->hide();}
+      class BankWindowGui size_range {640 480 3200 2400}
+    } {}
     Fl_Window Order {
       callback {save_stat(2);
 Order->hide();}
@@ -3771,7 +3641,7 @@ install_signal_handlers();} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
-MenuB->color(bcolor);
+BankWindow->MenuB->color(bcolor);
 
 back_color = bcolor;
 
@@ -3817,9 +3687,9 @@ for (int t=0; t<BankWindow->children();t++)
   }  
 
 
-for (int t=0; t<ob->children();t++)
+for (int t=0; t<BankWindow->ob->children();t++)
   {
-    Fl_Widget *w = ob->child(t);
+    Fl_Widget *w = BankWindow->ob->child(t);
 
      w->labelcolor(label_color);  
   }  
@@ -3863,18 +3733,18 @@ Fl::redraw();} {}
   Function {Buttons_Color_Change(Fl_Color bcolor)} {} {
     code {if (made)
 {
-for (int t=0; t<ob->children();t++)
+for (int t=0; t<BankWindow->ob->children();t++)
   {
-    Fl_Widget *w = ob->child(t);
+    Fl_Widget *w = BankWindow->ob->child(t);
     long long temp = (long long) w->user_data();
     if (temp > 0) w->color(bcolor); 
   }
 
-B_B1->color(bcolor);
-B_B2->color(bcolor);
-B_B3->color(bcolor);
-B_B4->color(bcolor);
-CH_UB->color(bcolor);
+BankWindow->B_B1->color(bcolor);
+BankWindow->B_B2->color(bcolor);
+BankWindow->B_B3->color(bcolor);
+BankWindow->B_B4->color(bcolor);
+BankWindow->CH_UB->color(bcolor);
 
 }
 
@@ -4836,7 +4706,7 @@ else drag = 1000;
 if ((Fl::event_button()==3) && (Fl::event()==FL_RELEASE))
 {
 
-Fl_Widget *w = ob->child(num-1);
+Fl_Widget *w = BankWindow->ob->child(num-1);
 
 
 if (strlen(rkr->Bank[num].Preset_Name) >0)
@@ -4867,7 +4737,7 @@ if ((Fl::event_button()==1) || tecla == 32)
 
 if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
 {
-Fl_Widget *w = ob->child(num-1);
+Fl_Widget *w = BankWindow->ob->child(num-1);
 unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;
 w->color(fl_darker(leds_color));
@@ -4886,7 +4756,7 @@ elh=32*BankWindow->h()/600;
 
 
 
-ob->begin();
+BankWindow->ob->begin();
 
 x=40;y=40;
 num=1;
@@ -4910,7 +4780,7 @@ for (j=1; j<5; j++)
       butX->value(0);
       butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
       butX->callback((Fl_Callback *)preset_click);
-      ob->add(butX);
+      BankWindow->ob->add(butX);
 
 x +=elw+4;
 num++;
@@ -4921,14 +4791,14 @@ num++;
 }
 
 
-ob->end();
+BankWindow->ob->end();
 made=1;
 
-B_B1->color(fore_color);
-B_B2->color(fore_color);
-B_B3->color(fore_color);
-B_B4->color(fore_color);
-CH_UB->color(fore_color);
+BankWindow->B_B1->color(fore_color);
+BankWindow->B_B2->color(fore_color);
+BankWindow->B_B3->color(fore_color);
+BankWindow->B_B4->color(fore_color);
+BankWindow->CH_UB->color(fore_color);
 
 light_preset(rkr->Selected_Preset);} {}
   }
@@ -6128,9 +5998,9 @@ if (rkr->modified)
   Function {Put_Loaded_Bank()} {} {
     code {int k=1;
 
-for (int t=0; t<ob->children();t++)
+for (int t=0; t<BankWindow->ob->children();t++)
   {
-    Fl_Widget *w = ob->child(t);
+    Fl_Widget *w = BankWindow->ob->child(t);
     long long temp = (long long) w->user_data();
     if (temp > 0)
     {
@@ -7950,9 +7820,9 @@ rkr->OnOffC--;
   Function {light_preset(int npreset)} {} {
     code {if(!made) return;
 
-for (int t=0; t<ob->children();t++)
+for (int t=0; t<BankWindow->ob->children();t++)
   {
-    Fl_Widget *w = ob->child(t);
+    Fl_Widget *w = BankWindow->ob->child(t);
     long long temp = (long long) w->user_data();
     if (temp == npreset)
     {
@@ -7965,9 +7835,9 @@ for (int t=0; t<ob->children();t++)
   Function {unlight_preset(int npreset)} {} {
     code {if(!made) return;
 
-for (int t=0; t<ob->children();t++)
+for (int t=0; t<BankWindow->ob->children();t++)
   {
-    Fl_Widget *w = ob->child(t);
+    Fl_Widget *w = BankWindow->ob->child(t);
     long long temp = (long long) w->user_data();
     if (temp == npreset)
     {
@@ -8042,7 +7912,7 @@ fondo->image(InOut->image());
 TITTLE_L->image(InOut->image());
 Fondo1->image(InOut->image());
 Fondo2->image(InOut->image());
-Fondo3->image(InOut->image());
+BankWindow->Fondo3->image(InOut->image());
 Fondo4->image(InOut->image());
 Fondo5->image(InOut->image());
 Fondo6->image(InOut->image());
@@ -8065,7 +7935,7 @@ Etit->image(InOut->image());
 Ares->image(InOut->image());
 
 MenuP->image(InOut->image());
-MenuB->image(InOut->image());
+BankWindow->MenuB->image(InOut->image());
 
 
 Fl::redraw();} {}
@@ -8965,9 +8835,9 @@ if(tecla != last_tecla)
   }
   Function {search_but(int x, int y)} {return_type int
   } {
-    code {for (int t=0; t<ob->children();t++)
+    code {for (int t=0; t<BankWindow->ob->children();t++)
   {
-    Fl_Widget *w = ob->child(t);
+    Fl_Widget *w = BankWindow->ob->child(t);
 
     if( (x>=w->x() ) && (x<=(w->x()+w->w())) && (y>=w->y() ) && (y<=(w->y()+w->h())))   
     
@@ -8992,7 +8862,7 @@ return(1000);} {}
   struct dirent *fs;
 
   ClearBankNames();     /* This will free all memory allocated for names */
-  CH_UB->clear();
+  BankWindow->CH_UB->clear();
 
   dir=opendir(DATADIR);
   if (dir==NULL) return;
@@ -9009,7 +8879,7 @@ return(1000);} {}
        strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
        if(nombre != NULL)
        {
-          CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
+          BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
        }
       }
 
@@ -9032,7 +8902,7 @@ return(1000);} {}
        strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
        if(nombre != NULL)
        {
-          CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
+          BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
        }
       }
 
@@ -9040,7 +8910,7 @@ return(1000);} {}
   }
   closedir(dir);
 
-  CH_UB->value(0);
+  BankWindow->CH_UB->value(0);
   free(forFree);} {}
   }
   Function {prevnext(int e)} {return_type {static int}

@@ -1,0 +1,147 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class BankWindowGui {
+  callback {o->hide();
+rgui->save_stat(1);} open selected
+  xywh {199 390 800 600} type Double color 4 selection_color 7 hide resizable
+  code0 {\#include "rakarrack.h"}
+  class Fl_Window size_range {640 480 3200 2400}
+} {
+  Fl_Box Fondo3 {
+    xywh {1 1 800 600}
+  }
+  Fl_Menu_Bar MenuB {open
+    xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
+  } {
+    Submenu ArchivoB {
+      label {&File} open
+      xywh {10 10 100 20} labelcolor 7
+    } {
+      MenuItem NewB {
+        label {&New}
+        callback {rkr->New_Bank();
+rgui->Put_Loaded_Bank();
+redraw();}
+        xywh {0 0 45 26} divider
+      }
+      MenuItem Load_Bank {
+        label {&Load Bank}
+        callback {int ok;
+char *filename;
+rgui->is_modified();
+filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rkrb");
+ok=rkr->loadbank(filename);
+if(ok) 
+{
+rgui->BankWin_Label(filename);
+rgui->Put_Loaded_Bank();
+rgui->AddBankName(filename);
+if(rkr->CheckOldBank(filename)==0)
+{
+        char nombre[64];
+        char *filepart;
+        memset(nombre,0,sizeof(nombre));
+        filepart = strrchr(filename,'/')+1;
+        strncpy(nombre,filepart,strlen(filepart)-5);
+        CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
+}
+}}
+        xywh {10 10 45 26}
+      }
+      MenuItem Save_Bank {
+        label {&Save Bank}
+        callback {rgui->MIDI->MIDI_LABEL->do_callback();}
+        xywh {10 10 45 26} divider
+      }
+      MenuItem Convert_Old_Bank {
+        label {Convert &Old Bank}
+        callback {char *filename;
+char name[70];
+memset(name,0, sizeof(name));
+sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+
+filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rkrb");
+
+if(rkr->CheckOldBank(filename))
+{
+rkr->ConvertOldFile(filename);
+rkr->Message(1,name, "Please, now try to load the new files");
+}
+else
+rkr->Message(1, name, "This file has already the new format");}
+        xywh {0 0 36 21} divider
+      }
+      MenuItem salirB {
+        label {&Close}
+        callback {rgui->BankWindow->do_callback();}
+        xywh {12 12 36 21} labelcolor 7
+      }
+    }
+    Submenu AyudaB {
+      label {&Help} open
+      xywh {10 10 100 20} labelcolor 7
+    } {
+      MenuItem ContenidoB {
+        label {Help &Contents}
+        callback {rgui->show_help();}
+        xywh {10 10 100 20} shortcut 0xffbe labelcolor 7
+      }
+      MenuItem Acerca_deB {
+        label {&About...}
+        callback {int x,y;
+
+x = this->x()+((w()-420)/2);
+y = this->y()+((h()-230)/2);
+
+rgui->AboutWin->position(x,y);
+rgui->AboutWin->show();
+rgui->put_icon(rgui->AboutWin);}
+        xywh {10 10 100 20} labelcolor 7
+      }
+    }
+  }
+  Fl_Button B_B1 {
+    label 1
+    user_data 77
+    callback {rgui->L_B1->do_callback();}
+    xywh {258 14 32 24} color 62 labelsize 10
+  }
+  Fl_Button B_B2 {
+    label 2
+    user_data 77
+    callback {rgui->L_B2->do_callback();}
+    xywh {298 14 32 24} color 62 labelsize 10
+  }
+  Fl_Button B_B3 {
+    label 3
+    user_data 77
+    callback {rgui->L_B3->do_callback();}
+    xywh {338 14 32 24} color 62 labelsize 10
+  }
+  Fl_Button B_B4 {
+    label U
+    user_data 77
+    callback {rgui->L_B4->do_callback();}
+    xywh {378 14 32 24} color 62 labelsize 10
+  }
+  Fl_Choice CH_UB {
+    label {User Banks       }
+    callback {int ok=rkr->loadbank((char *)v);
+if(ok) 
+{
+rgui->BankWin_Label((char *)v);
+rgui->Put_Loaded_Bank();
+rgui->unlight_preset(rkr->Selected_Preset);
+}} open
+    xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
+  } {}
+  Fl_Group ob {
+    xywh {0 60 800 540} labelsize 18
+  } {}
+}
