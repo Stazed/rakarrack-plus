@@ -178,7 +178,7 @@ BankWindowGui::BankWindowGui()
 }
 
 void BankWindowGui::_BankWindowGui() {
-this->box(FL_FLAT_BOX);
+this->box(FL_NO_BOX);
 this->color((Fl_Color)4);
 this->selection_color(FL_BACKGROUND2_COLOR);
 this->labeltype(FL_NO_LABEL);

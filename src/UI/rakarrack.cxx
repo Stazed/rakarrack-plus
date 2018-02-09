@@ -4002,7 +4002,7 @@ Fl_Double_Window* RKRGUI::make_window() {
     Principal->resizable(Principal);
   } // Fl_Double_Window* Principal
   { BankWindow = new BankWindowGui(800, 600);
-    BankWindow->box(FL_FLAT_BOX);
+    BankWindow->box(FL_NO_BOX);
     BankWindow->color((Fl_Color)4);
     BankWindow->selection_color(FL_BACKGROUND2_COLOR);
     BankWindow->labeltype(FL_NO_LABEL);

@@ -2029,8 +2029,8 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_stat(1);
-o->hide();} open
-      xywh {113 380 800 600} type Double color 4 selection_color 7 hide resizable
+o->hide();} open selected
+      xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
       code1 {BankWindow->hide();}
       class BankWindowGui size_range {640 480 3200 2400}
@@ -8907,8 +8907,7 @@ return(1000);} {}
   closedir(dir);
 
   BankWindow->CH_UB->value(0);
-  free(forFree);} {selected
-    }
+  free(forFree);} {}
   }
   Function {prevnext(int e)} {return_type {static int}
   } {
