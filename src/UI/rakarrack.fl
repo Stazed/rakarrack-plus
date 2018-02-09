@@ -280,7 +280,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {1034 312 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {153 141 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2029,7 +2029,7 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_stat(1);
-BankWindow->hide();} open selected
+o->hide();} open
       xywh {113 380 800 600} type Double color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
       code1 {BankWindow->hide();}
@@ -4363,8 +4363,7 @@ for(i=1; i<=JackIn->size();i++)
 
 }} {}
   }
-  Function {Put_Loaded()} {open
-  } {
+  Function {Put_Loaded()} {} {
     code {//General
 int i;
 
@@ -4802,8 +4801,7 @@ BankWindow->CH_UB->color(fore_color);
 
 light_preset(rkr->Selected_Preset);} {}
   }
-  Function {reordena()} {open
-  } {
+  Function {reordena()} {} {
     code {int i;
 unsigned int x[10],y[10];
 ulong s[10];
@@ -6047,8 +6045,7 @@ rkr->RC_Stereo_Harm->fundi=undi;
 rkr->RC_Stereo_Harm->cc=1;
 }} {}
   }
-  Function {ActMIDI()} {open
-  } {
+  Function {ActMIDI()} {} {
     code {if (rkr->Mvalue==0) return;
 
 int i;
@@ -7586,8 +7583,7 @@ switch (i)
 
 rkr->Mvalue=0;} {}
   }
-  Function {ActOnOff()} {open
-  } {
+  Function {ActOnOff()} {} {
     code {int miralo;
 
 
@@ -7847,8 +7843,7 @@ for (int t=0; t<BankWindow->ob->children();t++)
   
   }} {}
   }
-  Function {PutBackground()} {open
-  } {
+  Function {PutBackground()} {} {
     code {delete back;
 back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage),1600,1200);
 if(!rkr->EnableBackgroundImage)
@@ -8853,7 +8848,8 @@ if(tecla != last_tecla)
   
 return(1000);} {}
   }
-  Function {ScanDir()} {} {
+  Function {ScanDir()} {open
+  } {
     code {char nombre[64];
   char *nombank;
   nombank = (char *)calloc(1, 256);
@@ -8879,7 +8875,7 @@ return(1000);} {}
        strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
        if(nombre != NULL)
        {
-          BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
+          BankWindow->set_bank_CH_UB(nombre, nombank);
        }
       }
 
@@ -8902,7 +8898,7 @@ return(1000);} {}
        strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
        if(nombre != NULL)
        {
-          BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
+          BankWindow->set_bank_CH_UB(nombre, nombank);
        }
       }
 
@@ -8911,7 +8907,8 @@ return(1000);} {}
   closedir(dir);
 
   BankWindow->CH_UB->value(0);
-  free(forFree);} {}
+  free(forFree);} {selected
+    }
   }
   Function {prevnext(int e)} {return_type {static int}
   } {

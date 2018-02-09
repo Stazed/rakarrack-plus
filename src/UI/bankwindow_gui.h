@@ -78,10 +78,11 @@ private:
   static void cb_B_B4(Fl_Button*, void*);
 public:
   Fl_Choice *CH_UB;
-//private:  // FIXME
+private:
   inline void cb_CH_UB_i(Fl_Choice*, void*);
   static void cb_CH_UB(Fl_Choice*, void*);
 public:
   Fl_Group *ob;
+  void set_bank_CH_UB(char* nombre, char* nombank);
 };
 #endif

@@ -2,12 +2,10 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class BankWindowGui {
-  callback {o->hide();
-rgui->save_stat(1);} open selected
-  xywh {199 390 800 600} type Double color 4 selection_color 7 hide resizable
+widget_class BankWindowGui {open selected
+  xywh {264 498 800 600} type Double color 4 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
-  class Fl_Window size_range {640 480 3200 2400}
+  class Fl_Window size_range {640 480 3200 2400} visible
 } {
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
@@ -144,4 +142,8 @@ rgui->unlight_preset(rkr->Selected_Preset);
   Fl_Group ob {
     xywh {0 60 800 540} labelsize 18
   } {}
+  Function {set_bank_CH_UB(char* nombre, char* nombank)} {open C return_type void
+  } {
+    code {CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);} {}
+  }
 }

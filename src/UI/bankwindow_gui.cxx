@@ -2,11 +2,6 @@
 
 #include "bankwindow_gui.h"
 
-static void cb_BankWindowGui(Fl_Window* o, void*) {
-  o->hide();
-rgui->save_stat(1);
-}
-
 void BankWindowGui::cb_NewB_i(Fl_Menu_*, void*) {
   rkr->New_Bank();
 rgui->Put_Loaded_Bank();
@@ -190,7 +185,6 @@ this->labeltype(FL_NO_LABEL);
 this->labelfont(0);
 this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
-this->callback((Fl_Callback*)cb_BankWindowGui);
 this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo3 = new Fl_Box(1, 1, 800, 600);
@@ -238,4 +232,8 @@ this->when(FL_WHEN_RELEASE);
 } // Fl_Group* ob
 end();
 resizable(this);
+}
+
+void BankWindowGui::set_bank_CH_UB(char* nombre, char* nombank) {
+  CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
 }

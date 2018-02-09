@@ -1278,9 +1278,9 @@ void RKRGUI::cb_T_DIS(Fl_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_DIS_i(o,v);
 }
 
-void RKRGUI::cb_BankWindow2_i(BankWindowGui*, void*) {
+void RKRGUI::cb_BankWindow2_i(BankWindowGui* o, void*) {
   save_stat(1);
-BankWindow->hide();
+o->hide();
 }
 void RKRGUI::cb_BankWindow2(BankWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_BankWindow2_i(o,v);
@@ -10518,7 +10518,7 @@ void RKRGUI::ScanDir() {
          strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
          if(nombre != NULL)
          {
-            BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
+            BankWindow->set_bank_CH_UB(nombre, nombank);
          }
         }
   
@@ -10541,7 +10541,7 @@ void RKRGUI::ScanDir() {
          strncpy(nombre,fs->d_name,strlen(fs->d_name)-5);
          if(nombre != NULL)
          {
-            BankWindow->CH_UB->add((const char *)nombre, 0, (Fl_Callback *)BankWindow->cb_CH_UB, (void *)nombank, 0);
+            BankWindow->set_bank_CH_UB(nombre, nombank);
          }
         }
   
