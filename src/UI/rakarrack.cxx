@@ -6360,63 +6360,6 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
   }
 }
 
-void RKRGUI::make_window_banks() {
-  int i,j,x,y;
-  int elw,elh;
-  intptr_t num;
-  
-  elw=176*BankWindow->w()/800;
-  elh=32*BankWindow->h()/600;
-  
-  
-  
-  BankWindow->ob->begin();
-  
-  x=40;y=40;
-  num=1;
-  
-  for (i=1;i<16;i++)
-  {
-  y +=elh+2;
-  
-  for (j=1; j<5; j++)
-  {
-     
-       Fl_Button* butX = new Fl_Button(x+1, y+1, elw,elh,rkr->Bank[num].Preset_Name);
-        butX->type(0);
-        butX->color(fore_color);
-        butX->box(FL_UP_BOX);
-        butX->selection_color(leds_color);
-        butX->labelcolor(label_color);
-        butX->labelsize(14);
-        butX->align(68|FL_ALIGN_INSIDE);
-        butX->user_data((void*) (num));
-        butX->value(0);
-        butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
-        butX->callback((Fl_Callback *)preset_click);
-        BankWindow->ob->add(butX);
-  
-  x +=elw+4;
-  num++;
-  
-  }
-   x=40;
-  
-  }
-  
-  
-  BankWindow->ob->end();
-  made=1;
-  
-  BankWindow->B_B1->color(fore_color);
-  BankWindow->B_B2->color(fore_color);
-  BankWindow->B_B3->color(fore_color);
-  BankWindow->B_B4->color(fore_color);
-  BankWindow->CH_UB->color(fore_color);
-  
-  light_preset(rkr->Selected_Preset);
-}
-
 void RKRGUI::reordena() {
   int i;
   unsigned int x[10],y[10];
@@ -9438,38 +9381,6 @@ void RKRGUI::ActOnOff() {
   
   
   }
-}
-
-void RKRGUI::light_preset(int npreset) {
-  if(!made) return;
-  
-  for (int t=0; t<BankWindow->ob->children();t++)
-    {
-      Fl_Widget *w = BankWindow->ob->child(t);
-      long long temp = (long long) w->user_data();
-      if (temp == npreset)
-      {
-       w->color(fl_darker(leds_color));
-       break;
-       }
-    
-    }
-}
-
-void RKRGUI::unlight_preset(int npreset) {
-  if(!made) return;
-  
-  for (int t=0; t<BankWindow->ob->children();t++)
-    {
-      Fl_Widget *w = BankWindow->ob->child(t);
-      long long temp = (long long) w->user_data();
-      if (temp == npreset)
-      {
-       w->color(fore_color);
-       break;
-       }
-    
-    }
 }
 
 void RKRGUI::PutBackground() {

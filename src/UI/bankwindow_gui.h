@@ -84,5 +84,8 @@ private:
 public:
   Fl_Group *ob;
   void set_bank_CH_UB(char* nombre, char* nombank);
+  void make_window_banks();
+  void light_preset(int npreset);
+  void unlight_preset(int npreset);
 };
 #endif

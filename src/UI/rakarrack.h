@@ -1185,7 +1185,6 @@ public:
   static void tick(void* v);
   static void preset_click(Fl_Button* o, void* v);
   inline void preset_click_i(Fl_Button* o, void*);
-  void make_window_banks();
   void reordena();
   void show_help();
   void show_lic();
@@ -1197,8 +1196,6 @@ public:
   void Chord(int eff);
   void ActMIDI();
   void ActOnOff();
-  void light_preset(int npreset);
-  void unlight_preset(int npreset);
   void PutBackground();
   void chfsize(int value);
   void adjustfont();
