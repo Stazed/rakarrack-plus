@@ -2,8 +2,8 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class BankWindowGui {open selected
-  xywh {264 479 800 600} type Double box NO_BOX color 4 selection_color 7 resizable
+widget_class BankWindowGui {open
+  xywh {243 388 800 600} type Double box NO_BOX color 4 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   class Fl_Window size_range {640 480 3200 2400} visible
 } {
@@ -144,6 +144,12 @@ rgui->unlight_preset(rkr->Selected_Preset);
   } {}
   Function {set_bank_CH_UB(char* nombre, char* nombank)} {open C return_type void
   } {
-    code {CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);} {}
+    code {// copy the file name (nombank) to temp so it does not get overwritten.
+char *tmp;
+tmp = (char *)calloc(1, 256);
+strcpy(tmp,nombank);
+  
+CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)tmp, 0);} {selected
+    }
   }
 }

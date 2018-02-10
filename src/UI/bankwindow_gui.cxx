@@ -235,5 +235,10 @@ resizable(this);
 }
 
 void BankWindowGui::set_bank_CH_UB(char* nombre, char* nombank) {
-  CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)nombank, 0);
+  // copy the file name (nombank) to temp so it does not get overwritten.
+  char *tmp;
+  tmp = (char *)calloc(1, 256);
+  strcpy(tmp,nombank);
+    
+  CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)tmp, 0);
 }
