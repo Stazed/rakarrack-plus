@@ -69,7 +69,7 @@ void BankWindowGui::cb_Convert_Old_Bank(Fl_Menu_* o, void* v) {
 }
 
 void BankWindowGui::cb_salirB_i(Fl_Menu_*, void*) {
-  rgui->BankWindow->do_callback();
+  do_callback();
 }
 void BankWindowGui::cb_salirB(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_salirB_i(o,v);

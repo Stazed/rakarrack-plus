@@ -77,7 +77,7 @@ rkr->Message(1, name, "This file has already the new format");}
       }
       MenuItem salirB {
         label {&Close}
-        callback {rgui->BankWindow->do_callback();}
+        callback {do_callback();}
         xywh {12 12 36 21} labelcolor 7
       }
     }
