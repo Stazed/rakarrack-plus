@@ -959,7 +959,7 @@ if(ok)
 rkr->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B1(Fl_Button* o, void* v) {
@@ -977,7 +977,7 @@ if(ok)
 rkr->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B2(Fl_Button* o, void* v) {
@@ -995,7 +995,7 @@ if(ok)
 rkr->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B3(Fl_Button* o, void* v) {
@@ -1010,7 +1010,7 @@ if(ok)
 rkr->a_bank=3;
 BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B4(Fl_Button* o, void* v) {
@@ -1074,7 +1074,7 @@ void RKRGUI::cb_Compare(Fl_Light_Button* o, void* v) {
 void RKRGUI::cb_B_preset_i(Fl_Button*, void*) {
   if(!BankWindow->visible())
 {
-if(!made) make_window_banks();
+if(!made) BankWindow->make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
 ScanDir();
@@ -1095,9 +1095,9 @@ void RKRGUI::cb_WPreset_Name(Fl_Input* o, void* v) {
 
 void RKRGUI::cb_Preset_Counter_i(Fl_Counter* o, void*) {
   rkr->new_bank_loaded=0;
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 rkr->Bank_to_Preset((int) o->value());
-light_preset((int)o->value());
+BankWindow->light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 rkr->OnCounter=0;
 FillML(0);
@@ -6351,7 +6351,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
   if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
   {
   Fl_Widget *w = BankWindow->ob->child(num-1);
-  unlight_preset(rkr->Selected_Preset);
+  BankWindow->unlight_preset(rkr->Selected_Preset);
   rkr->Selected_Preset=num;
   w->color(fl_darker(leds_color));
   Preset_Counter->value(num);

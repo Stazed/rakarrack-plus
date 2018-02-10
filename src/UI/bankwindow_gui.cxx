@@ -154,7 +154,7 @@ if(ok)
 {
 rgui->BankWin_Label((char *)v);
 rgui->Put_Loaded_Bank();
-rgui->unlight_preset(rkr->Selected_Preset);
+unlight_preset(rkr->Selected_Preset);
 };
 }
 void BankWindowGui::cb_CH_UB(Fl_Choice* o, void* v) {
@@ -248,12 +248,12 @@ void BankWindowGui::make_window_banks() {
   int elw,elh;
   intptr_t num;
   
-  elw=176*BankWindow->w()/800;
-  elh=32*BankWindow->h()/600;
+  elw=176*w()/800;
+  elh=32*h()/600;
   
   
   
-  BankWindow->ob->begin();
+  ob->begin();
   
   x=40;y=40;
   num=1;
@@ -276,8 +276,8 @@ void BankWindowGui::make_window_banks() {
         butX->user_data((void*) (num));
         butX->value(0);
         butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
-        butX->callback((Fl_Callback *)preset_click);
-        BankWindow->ob->add(butX);
+        butX->callback((Fl_Callback *)rgui->preset_click);
+        ob->add(butX);
   
   x +=elw+4;
   num++;
@@ -288,24 +288,24 @@ void BankWindowGui::make_window_banks() {
   }
   
   
-  BankWindow->ob->end();
-  made=1;
+  ob->end();
+  rgui->set_bank_made(1);
   
-  BankWindow->B_B1->color(fore_color);
-  BankWindow->B_B2->color(fore_color);
-  BankWindow->B_B3->color(fore_color);
-  BankWindow->B_B4->color(fore_color);
-  BankWindow->CH_UB->color(fore_color);
+  B_B1->color(fore_color);
+  B_B2->color(fore_color);
+  B_B3->color(fore_color);
+  B_B4->color(fore_color);
+  CH_UB->color(fore_color);
   
   light_preset(rkr->Selected_Preset);
 }
 
 void BankWindowGui::light_preset(int npreset) {
-  if(!made) return;
+  if((rgui == NULL) ||(!rgui->get_bank_made())) return;
   
-  for (int t=0; t<BankWindow->ob->children();t++)
+  for (int t=0; t<ob->children();t++)
     {
-      Fl_Widget *w = BankWindow->ob->child(t);
+      Fl_Widget *w = ob->child(t);
       long long temp = (long long) w->user_data();
       if (temp == npreset)
       {
@@ -317,11 +317,11 @@ void BankWindowGui::light_preset(int npreset) {
 }
 
 void BankWindowGui::unlight_preset(int npreset) {
-  if(!made) return;
+  if((rgui == NULL) ||(!rgui->get_bank_made())) return;
   
-  for (int t=0; t<BankWindow->ob->children();t++)
+  for (int t=0; t<ob->children();t++)
     {
-      Fl_Widget *w = BankWindow->ob->child(t);
+      Fl_Widget *w = ob->child(t);
       long long temp = (long long) w->user_data();
       if (temp == npreset)
       {

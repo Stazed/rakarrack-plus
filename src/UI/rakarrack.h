@@ -1238,5 +1238,7 @@ public:
   void drag_effect();
   int AddBankName(const char *name);
   void ClearBankNames();
+  void set_bank_made(int a_made) {made = a_made;}; 
+  int get_bank_made(){return made;}; 
 };
 #endif

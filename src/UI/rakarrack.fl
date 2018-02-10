@@ -263,7 +263,7 @@ decl {volatile int got_sigint = 0;} {private local
 decl {volatile int got_sigusr1 = 0;} {private local
 }
 
-class RKRGUI {open selected
+class RKRGUI {open
 } {
   decl {int made;} {private local
   }
@@ -1632,7 +1632,7 @@ if(ok)
 rkr->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {418 30 22 16} color 62 labelsize 10
         }
@@ -1649,7 +1649,7 @@ if(ok)
 rkr->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {442 30 22 16} color 62 labelsize 10
         }
@@ -1666,7 +1666,7 @@ if(ok)
 rkr->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {466 30 22 16} color 62 labelsize 10
         }
@@ -1680,7 +1680,7 @@ if(ok)
 rkr->a_bank=3;
 BankWin_Label(rkr->BankFilename);
 Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {490 30 22 16} color 62 labelsize 10
         }
@@ -1739,7 +1739,7 @@ else
           user_data 77
           callback {if(!BankWindow->visible())
 {
-if(!made) make_window_banks();
+if(!made) BankWindow->make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
 ScanDir();
@@ -1756,9 +1756,9 @@ BankWindow->hide();}
         Fl_Counter Preset_Counter {
           label Preset
           callback {rkr->new_bank_loaded=0;
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 rkr->Bank_to_Preset((int) o->value());
-light_preset((int)o->value());
+BankWindow->light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 rkr->OnCounter=0;
 FillML(0);
@@ -4737,7 +4737,7 @@ if ((Fl::event_button()==1) || tecla == 32)
 if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
 {
 Fl_Widget *w = BankWindow->ob->child(num-1);
-unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(rkr->Selected_Preset);
 rkr->Selected_Preset=num;
 w->color(fl_darker(leds_color));
 Preset_Counter->value(num);
@@ -9564,5 +9564,9 @@ drag=1000;
                 remque(elem);
                 free(elem);
         }} {}
+  }
+  decl {void set_bank_made(int a_made) {made = a_made;}} {selected public local
+  }
+  decl {int get_bank_made(){return made;}} {public local
   }
 }
