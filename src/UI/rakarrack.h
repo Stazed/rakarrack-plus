@@ -74,6 +74,7 @@ class InfinityGui; // forward declaration
 class MidiGui; // forward declaration
 class BankWindowGui; // forward declaration
 class OrderWindowGui; // forward declaration
+class MidiLearnWindowGui; // forward declaration
 class AboutWindowGui; // forward declaration
 class TrigWindowGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
@@ -143,6 +144,7 @@ class TrigWindowGui; // forward declaration
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
+#include "midilearnwindow_gui.h"
 #include "aboutwindow_gui.h"
 #include "trigwindow_gui.h"
 
@@ -941,104 +943,10 @@ private:
   inline void cb_UD_Browser_i(Fl_Button*, void*);
   static void cb_UD_Browser(Fl_Button*, void*);
 public:
-  Fl_Double_Window *MIDILearn;
+  MidiLearnWindowGui *MIDILearn;
 private:
-  inline void cb_MIDILearn_i(Fl_Double_Window*, void*);
-  static void cb_MIDILearn(Fl_Double_Window*, void*);
-public:
-  Fl_Box *Fondo4;
-  Fl_Browser *Epar;
-private:
-  inline void cb_Epar_i(Fl_Browser*, void*);
-  static void cb_Epar(Fl_Browser*, void*);
-public:
-  Fl_Button *GMM;
-private:
-  inline void cb_GMM_i(Fl_Button*, void*);
-  static void cb_GMM(Fl_Button*, void*);
-public:
-  Fl_Browser *TPresets;
-  Fl_Button *CopyF;
-private:
-  inline void cb_CopyF_i(Fl_Button*, void*);
-  static void cb_CopyF(Fl_Button*, void*);
-public:
-  Fl_Button *CopyT;
-private:
-  inline void cb_CopyT_i(Fl_Button*, void*);
-  static void cb_CopyT(Fl_Button*, void*);
-public:
-  Fl_Group *Ares;
-  Fl_Box *Ar1;
-  Fl_Box *Ar2;
-  Fl_Box *Ar3;
-  Fl_Box *Ar4;
-  Fl_Box *Ar5;
-  Fl_Box *Ar6;
-  Fl_Box *Ar7;
-  Fl_Box *Ar8;
-  Fl_Box *Ar9;
-  Fl_Box *Ar10;
-  Fl_Box *Ar11;
-  Fl_Box *Ar12;
-  Fl_Box *Ar13;
-  Fl_Box *Ar14;
-  Fl_Box *Ar15;
-  Fl_Box *Ar16;
-  Fl_Box *Ar17;
-  Fl_Box *Ar18;
-  Fl_Box *Ar19;
-  Fl_Box *Ar20;
-  Fl_Button *ClearA;
-private:
-  inline void cb_ClearA_i(Fl_Button*, void*);
-  static void cb_ClearA(Fl_Button*, void*);
-public:
-  Fl_Button *ClearP;
-private:
-  inline void cb_ClearP_i(Fl_Button*, void*);
-  static void cb_ClearP(Fl_Button*, void*);
-public:
-  Fl_Button *Assign;
-private:
-  inline void cb_Assign_i(Fl_Button*, void*);
-  static void cb_Assign(Fl_Button*, void*);
-public:
-  Fl_Button *AssignA;
-private:
-  inline void cb_AssignA_i(Fl_Button*, void*);
-  static void cb_AssignA(Fl_Button*, void*);
-public:
-  Fl_Button *CancelRec;
-private:
-  inline void cb_CancelRec_i(Fl_Button*, void*);
-  static void cb_CancelRec(Fl_Button*, void*);
-public:
-  Fl_Value_Input *Disp_Control;
-private:
-  inline void cb_Disp_Control_i(Fl_Value_Input*, void*);
-  static void cb_Disp_Control(Fl_Value_Input*, void*);
-public:
-  Fl_Button *CopyTAll;
-private:
-  inline void cb_CopyTAll_i(Fl_Button*, void*);
-  static void cb_CopyTAll(Fl_Button*, void*);
-public:
-  Fl_Button *CloseML;
-private:
-  inline void cb_CloseML_i(Fl_Button*, void*);
-  static void cb_CloseML(Fl_Button*, void*);
-public:
-  Fl_Group *Filters_ML;
-  Fl_Button *M_fil_all;
-private:
-  inline void cb_M_fil_all_i(Fl_Button*, void*);
-  static void cb_M_fil_all(Fl_Button*, void*);
-public:
-  Fl_Button *M_fil_current;
-private:
-  inline void cb_M_fil_current_i(Fl_Button*, void*);
-  static void cb_M_fil_current(Fl_Button*, void*);
+  inline void cb_MIDILearn_i(MidiLearnWindowGui*, void*);
+  static void cb_MIDILearn(MidiLearnWindowGui*, void*);
 public:
   AboutWindowGui *AboutWin;
 private:

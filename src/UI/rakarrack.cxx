@@ -702,14 +702,14 @@ if (rkr->RControl)
    rkr->CountWait++;
    if (rkr->CountWait==25)
       {
-        GMM->color(leds_color);
-        GMM->redraw();
+        MIDILearn->GMM->color(leds_color);
+        MIDILearn->GMM->redraw();
        } 
         
    if (rkr->CountWait==50)
        {
-         GMM->color(fore_color); 
-         GMM->redraw();
+         MIDILearn->GMM->color(fore_color); 
+         MIDILearn->GMM->redraw();
          rkr->CountWait=0;
        } 
       
@@ -717,14 +717,14 @@ if (rkr->RControl)
   if (rkr->ControlGet != 0)
     {
       rkr->RControl = 0;
-      Disp_Control->value(rkr->ControlGet);
-      Disp_Control->redraw();
-      GMM->color(fore_color);
-      GMM->redraw();
+      MIDILearn->Disp_Control->value(rkr->ControlGet);
+      MIDILearn->Disp_Control->redraw();
+      MIDILearn->GMM->color(fore_color);
+      MIDILearn->GMM->redraw();
       if((rkr->comemouse) && (rkr->autoassign))
        {
         rkr->comemouse=0;
-        Assign->do_callback();   
+        MIDILearn->Assign->do_callback();   
           
        }
       
@@ -2173,193 +2173,13 @@ void RKRGUI::cb_UD_Browser(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_UD_Browser_i(o,v);
 }
 
-void RKRGUI::cb_MIDILearn_i(Fl_Double_Window*, void*) {
-  CancelRec->do_callback();
+void RKRGUI::cb_MIDILearn_i(MidiLearnWindowGui* o, void*) {
+  MIDILearn->CancelRec->do_callback();
 save_stat(5);
-MIDILearn->hide();
+o->hide();
 }
-void RKRGUI::cb_MIDILearn(Fl_Double_Window* o, void* v) {
+void RKRGUI::cb_MIDILearn(MidiLearnWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_MIDILearn_i(o,v);
-}
-
-void RKRGUI::cb_Epar_i(Fl_Browser*, void*) {
-  DisAssigns();
-}
-void RKRGUI::cb_Epar(Fl_Browser* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Epar_i(o,v);
-}
-
-void RKRGUI::cb_GMM_i(Fl_Button*, void*) {
-  rkr->ControlGet=0;
-rkr->CountWait=0;
-rkr->RControl=1;
-}
-void RKRGUI::cb_GMM(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_GMM_i(o,v);
-}
-
-void RKRGUI::cb_CopyF_i(Fl_Button*, void*) {
-  memcpy(rkr->XUserMIDI,rkr->Bank[TPresets->value()].XUserMIDI,sizeof(rkr->XUserMIDI));
-
-DisAssigns();
-}
-void RKRGUI::cb_CopyF(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_CopyF_i(o,v);
-}
-
-void RKRGUI::cb_CopyT_i(Fl_Button*, void*) {
-  memcpy(rkr->Bank[TPresets->value()].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));
-}
-void RKRGUI::cb_CopyT(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_CopyT_i(o,v);
-}
-
-void RKRGUI::cb_ClearA_i(Fl_Button*, void*) {
-  int i, j,k;
-int the_one;
-
-if (rkr->ML_filter==0)
- the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = rkr->ML_clist[(int)Epar->value()-1];
-
-
-for(i=0; i<128; i++)
-  {
-    for(j=0;j<20;j++)
-      {
-         if (rkr->XUserMIDI[i][j] == the_one)
-           {
-             for(k=j+1;k<20;k++) rkr->XUserMIDI[i][k-1]=rkr->XUserMIDI[i][k];
-             rkr->XUserMIDI[i][19]=0;             
-           }
-       
-       }  
-   }
-   
-DisAssigns();
-}
-void RKRGUI::cb_ClearA(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_ClearA_i(o,v);
-}
-
-void RKRGUI::cb_ClearP_i(Fl_Button*, void*) {
-  memset(rkr->XUserMIDI, 0, sizeof(rkr->XUserMIDI));
-DisAssigns();
-}
-void RKRGUI::cb_ClearP(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_ClearP_i(o,v);
-}
-
-void RKRGUI::cb_Assign_i(Fl_Button*, void*) {
-  int i;
-
-int the_one;
-
-if (rkr->ML_filter==0)
- the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = rkr->ML_clist[(int)Epar->value()-1];
-
-
-for(i=0;i<20;i++)
-
- {
-    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
-
-    if(rkr->XUserMIDI[(int)Disp_Control->value()][i] ==0)
-       {
-         rkr->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
-         break;
-        }
- }
- 
- 
-DisAssigns();
-}
-void RKRGUI::cb_Assign(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Assign_i(o,v);
-}
-
-void RKRGUI::cb_AssignA_i(Fl_Button*, void*) {
-  int i,j;
-int the_one;
-
-if (rkr->ML_filter==0)
- the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = rkr->ML_clist[(int)Epar->value()-1];
-
-
-for(j=1;j<61;j++)
-
-{
-for(i=0;i<20;i++)
-
- {
-    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == the_one) break;
-
-    if(rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
-       {
-         rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=the_one;
-         break;
-        }
- }
- 
-} 
-
-Assign->do_callback();
-}
-void RKRGUI::cb_AssignA(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_AssignA_i(o,v);
-}
-
-void RKRGUI::cb_CancelRec_i(Fl_Button*, void*) {
-  rkr->RControl = 0;
-GMM->color(fore_color);
-GMM->redraw();
-}
-void RKRGUI::cb_CancelRec(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_CancelRec_i(o,v);
-}
-
-void RKRGUI::cb_Disp_Control_i(Fl_Value_Input* o, void*) {
-  if(o->value()> 127) o->value(127);
-if(o->value()< 1) o->value(1);
-}
-void RKRGUI::cb_Disp_Control(Fl_Value_Input* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Disp_Control_i(o,v);
-}
-
-void RKRGUI::cb_CopyTAll_i(Fl_Button*, void*) {
-  int i;
-for(i=1;i<61;i++) memcpy(rkr->Bank[i].XUserMIDI,rkr->XUserMIDI, sizeof(rkr->XUserMIDI));
-}
-void RKRGUI::cb_CopyTAll(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_CopyTAll_i(o,v);
-}
-
-void RKRGUI::cb_CloseML_i(Fl_Button*, void*) {
-  MIDILearn->do_callback();
-}
-void RKRGUI::cb_CloseML(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_CloseML_i(o,v);
-}
-
-void RKRGUI::cb_M_fil_all_i(Fl_Button*, void*) {
-  rkr->ML_filter=0;
-FillML(0);
-}
-void RKRGUI::cb_M_fil_all(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_M_fil_all_i(o,v);
-}
-
-void RKRGUI::cb_M_fil_current_i(Fl_Button*, void*) {
-  rkr->ML_filter=1;
-FillML(0);
-}
-void RKRGUI::cb_M_fil_current(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_M_fil_current_i(o,v);
 }
 
 void RKRGUI::cb_AboutWin_i(AboutWindowGui*, void*) {
@@ -4538,137 +4358,21 @@ void RKRGUI::make_window() {
     Settings->size_range(740, 554);
     Settings->end();
   } // Fl_Double_Window* Settings
-  { MIDILearn = new Fl_Double_Window(640, 480);
+  { MidiLearnWindowGui* o = MIDILearn = new MidiLearnWindowGui(640, 480);
+    MIDILearn->box(FL_NO_BOX);
+    MIDILearn->color((Fl_Color)4);
+    MIDILearn->selection_color(FL_BACKGROUND2_COLOR);
+    MIDILearn->labeltype(FL_NO_LABEL);
+    MIDILearn->labelfont(0);
+    MIDILearn->labelsize(14);
+    MIDILearn->labelcolor(FL_FOREGROUND_COLOR);
     MIDILearn->callback((Fl_Callback*)cb_MIDILearn, (void*)(this));
-    { Fondo4 = new Fl_Box(1, 1, 640, 480);
-    } // Fl_Box* Fondo4
-    { Epar = new Fl_Browser(10, 58, 201, 348);
-      Epar->type(2);
-      Epar->textcolor(FL_BACKGROUND2_COLOR);
-      Epar->callback((Fl_Callback*)cb_Epar, (void*)(99));
-    } // Fl_Browser* Epar
-    { GMM = new Fl_Button(10, 445, 135, 30, "Get MIDI Message");
-      GMM->callback((Fl_Callback*)cb_GMM, (void*)(77));
-    } // Fl_Button* GMM
-    { TPresets = new Fl_Browser(430, 61, 201, 348);
-      TPresets->type(2);
-      TPresets->textcolor(FL_BACKGROUND2_COLOR);
-      TPresets->when(3);
-    } // Fl_Browser* TPresets
-    { CopyF = new Fl_Button(430, 20, 95, 30, "Copy from: ");
-      CopyF->callback((Fl_Callback*)cb_CopyF, (void*)(77));
-    } // Fl_Button* CopyF
-    { CopyT = new Fl_Button(535, 20, 95, 30, "Copy to: ");
-      CopyT->callback((Fl_Callback*)cb_CopyT, (void*)(77));
-    } // Fl_Button* CopyT
-    { Ares = new Fl_Group(215, 60, 205, 180);
-      Ares->box(FL_THIN_DOWN_BOX);
-      Ares->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
-      { Ar1 = new Fl_Box(220, 65, 45, 30);
-        Ar1->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar1
-      { Ar2 = new Fl_Box(270, 65, 45, 30);
-        Ar2->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar2
-      { Ar3 = new Fl_Box(320, 65, 45, 30);
-        Ar3->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar3
-      { Ar4 = new Fl_Box(370, 65, 45, 30);
-        Ar4->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar4
-      { Ar5 = new Fl_Box(220, 100, 45, 30);
-        Ar5->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar5
-      { Ar6 = new Fl_Box(270, 100, 45, 30);
-        Ar6->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar6
-      { Ar7 = new Fl_Box(320, 100, 45, 30);
-        Ar7->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar7
-      { Ar8 = new Fl_Box(370, 100, 45, 30);
-        Ar8->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar8
-      { Ar9 = new Fl_Box(220, 135, 45, 30);
-        Ar9->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar9
-      { Ar10 = new Fl_Box(270, 135, 45, 30);
-        Ar10->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar10
-      { Ar11 = new Fl_Box(320, 135, 45, 30);
-        Ar11->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar11
-      { Ar12 = new Fl_Box(370, 135, 45, 30);
-        Ar12->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar12
-      { Ar13 = new Fl_Box(220, 170, 45, 30);
-        Ar13->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar13
-      { Ar14 = new Fl_Box(270, 170, 45, 30);
-        Ar14->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar14
-      { Ar15 = new Fl_Box(320, 170, 45, 30);
-        Ar15->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar15
-      { Ar16 = new Fl_Box(370, 170, 45, 30);
-        Ar16->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar16
-      { Ar17 = new Fl_Box(220, 205, 45, 30);
-        Ar17->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar17
-      { Ar18 = new Fl_Box(270, 205, 45, 30);
-        Ar18->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar18
-      { Ar19 = new Fl_Box(320, 205, 45, 30);
-        Ar19->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar19
-      { Ar20 = new Fl_Box(370, 205, 45, 30);
-        Ar20->box(FL_DOWN_BOX);
-      } // Fl_Box* Ar20
-      Ares->end();
-    } // Fl_Group* Ares
-    { ClearA = new Fl_Button(245, 250, 150, 30, "Clear Assignements");
-      ClearA->callback((Fl_Callback*)cb_ClearA, (void*)(77));
-    } // Fl_Button* ClearA
-    { ClearP = new Fl_Button(245, 285, 150, 30, "Clear Preset");
-      ClearP->callback((Fl_Callback*)cb_ClearP, (void*)(77));
-    } // Fl_Button* ClearP
-    { Assign = new Fl_Button(112, 20, 98, 30, "Assign");
-      Assign->callback((Fl_Callback*)cb_Assign, (void*)(77));
-    } // Fl_Button* Assign
-    { AssignA = new Fl_Button(10, 20, 98, 30, "Assign to All");
-      AssignA->callback((Fl_Callback*)cb_AssignA, (void*)(77));
-    } // Fl_Button* AssignA
-    { CancelRec = new Fl_Button(200, 450, 60, 20, "Cancel");
-      CancelRec->callback((Fl_Callback*)cb_CancelRec, (void*)(77));
-    } // Fl_Button* CancelRec
-    { Disp_Control = new Fl_Value_Input(155, 445, 40, 30);
-      Disp_Control->minimum(1);
-      Disp_Control->maximum(127);
-      Disp_Control->step(1);
-      Disp_Control->value(1);
-      Disp_Control->textcolor(FL_BACKGROUND2_COLOR);
-      Disp_Control->callback((Fl_Callback*)cb_Disp_Control);
-    } // Fl_Value_Input* Disp_Control
-    { CopyTAll = new Fl_Button(480, 412, 150, 30, "Copy to All");
-      CopyTAll->callback((Fl_Callback*)cb_CopyTAll, (void*)(77));
-    } // Fl_Button* CopyTAll
-    { CloseML = new Fl_Button(480, 445, 150, 30, "Close");
-      CloseML->callback((Fl_Callback*)cb_CloseML, (void*)(77));
-    } // Fl_Button* CloseML
-    { Filters_ML = new Fl_Group(10, 410, 200, 31);
-      Filters_ML->box(FL_DOWN_BOX);
-      { M_fil_all = new Fl_Button(16, 415, 89, 20, "All");
-        M_fil_all->type(102);
-        M_fil_all->callback((Fl_Callback*)cb_M_fil_all);
-      } // Fl_Button* M_fil_all
-      { M_fil_current = new Fl_Button(113, 415, 89, 20, "Current");
-        M_fil_current->type(102);
-        M_fil_current->callback((Fl_Callback*)cb_M_fil_current);
-      } // Fl_Button* M_fil_current
-      Filters_ML->end();
-    } // Fl_Group* Filters_ML
+    MIDILearn->align(Fl_Align(FL_ALIGN_TOP));
+    MIDILearn->when(FL_WHEN_RELEASE);
+    o->initialize(rkr, this);
+    o->hide();
     MIDILearn->end();
-  } // Fl_Double_Window* MIDILearn
+  } // MidiLearnWindowGui* MIDILearn
   { AboutWindowGui* o = AboutWin = new AboutWindowGui(375, 235, "About Rakarrack");
     AboutWin->box(FL_NO_BOX);
     AboutWin->color((Fl_Color)4);
@@ -8984,7 +8688,7 @@ void RKRGUI::PutBackground() {
   Order->Fondo1->image(InOut->image());
   Fondo2->image(InOut->image());
   BankWindow->Fondo3->image(InOut->image());
-  Fondo4->image(InOut->image());
+  MIDILearn->Fondo4->image(InOut->image());
   Trigger->Fondo5->image(InOut->image());
   Fondo6->image(InOut->image());
   Fondo7->image(InOut->image());
@@ -9003,7 +8707,7 @@ void RKRGUI::PutBackground() {
   
   
   Etit->image(InOut->image());
-  Ares->image(InOut->image());
+  MIDILearn->Ares->image(InOut->image());
   
   MenuP->image(InOut->image());
   BankWindow->MenuB->image(InOut->image());
@@ -9260,14 +8964,14 @@ void RKRGUI::FillML(int type) {
   MIDILearn->copy_label(tmp);
   
   memset(rkr->ML_clist,0,sizeof(rkr->ML_clist));
-  Epar->clear();
+  MIDILearn->Epar->clear();
   k=0;
   
   switch(rkr->ML_filter) 
   {
     
    case 0:
-   for(i=0; i<rkr->NumParams; i++) Epar->add(rkr->efx_params[i].Nom);  
+   for(i=0; i<rkr->NumParams; i++) MIDILearn->Epar->add(rkr->efx_params[i].Nom);  
    break;
   
    case 1:
@@ -9275,7 +8979,7 @@ void RKRGUI::FillML(int type) {
         {
           if(rkr->efx_params[i].Effect==50)
            { 
-           Epar->add(rkr->efx_params[i].Nom); 
+           MIDILearn->Epar->add(rkr->efx_params[i].Nom); 
            rkr->ML_clist[k]=rkr->efx_params[i].Ato;
            k++;
            }
@@ -9287,7 +8991,7 @@ void RKRGUI::FillML(int type) {
         {
           if(rkr->efx_params[i].Effect==rkr->efx_order[j])
            { 
-           Epar->add(rkr->efx_params[i].Nom); 
+           MIDILearn->Epar->add(rkr->efx_params[i].Nom); 
            rkr->ML_clist[k]=rkr->efx_params[i].Ato;
            k++;
            }
@@ -9300,15 +9004,15 @@ void RKRGUI::FillML(int type) {
     break;
   }
   
-  Epar->redraw();
+  MIDILearn->Epar->redraw();
   
   
   
   
-  TPresets->clear();
-  for(i=1; i<=60; i++)  TPresets->add(rkr->Bank[i].Preset_Name);
-  TPresets->select(rkr->Selected_Preset,1);
-  TPresets->redraw();
+  MIDILearn->TPresets->clear();
+  for(i=1; i<=60; i++)  MIDILearn->TPresets->add(rkr->Bank[i].Preset_Name);
+  MIDILearn->TPresets->select(rkr->Selected_Preset,1);
+  MIDILearn->TPresets->redraw();
   
   DisAssigns();
 }
@@ -9319,12 +9023,12 @@ void RKRGUI::DisAssigns() {
   
   int the_one = 0;
   
-  if((int)Epar->value())
+  if((int)MIDILearn->Epar->value())
   {
     if (rkr->ML_filter==0)
-      the_one = rkr->efx_params[(int)Epar->value()-1].Ato;
+      the_one = rkr->efx_params[(int)MIDILearn->Epar->value()-1].Ato;
     else
-      the_one = rkr->ML_clist[(int)Epar->value()-1];
+      the_one = rkr->ML_clist[(int)MIDILearn->Epar->value()-1];
   }
   
   k=0;
@@ -9343,103 +9047,103 @@ void RKRGUI::DisAssigns() {
              switch (k)
              {
              case 1:
-                Ar1->copy_label(tmp);
-                Ar1->redraw();
+                MIDILearn->Ar1->copy_label(tmp);
+                MIDILearn->Ar1->redraw();
                 break;     
                               
              case 2:
-                Ar2->copy_label(tmp);
-                Ar2->redraw();
+                MIDILearn->Ar2->copy_label(tmp);
+                MIDILearn->Ar2->redraw();
                 break;     
           
              case 3:
-                Ar3->copy_label(tmp);
-                Ar3->redraw();
+                MIDILearn->Ar3->copy_label(tmp);
+                MIDILearn->Ar3->redraw();
                 break;     
           
              case 4:
-                Ar4->copy_label(tmp);
-                Ar4->redraw();
+                MIDILearn->Ar4->copy_label(tmp);
+                MIDILearn->Ar4->redraw();
                 break;     
           
              case 5:
-                Ar5->copy_label(tmp);
-                Ar5->redraw();
+                MIDILearn->Ar5->copy_label(tmp);
+                MIDILearn->Ar5->redraw();
                 break;     
           
              case 6:
-                Ar6->copy_label(tmp);
-                Ar6->redraw();
+                MIDILearn->Ar6->copy_label(tmp);
+                MIDILearn->Ar6->redraw();
                 break;     
       
              case 7:
-                Ar7->copy_label(tmp);
-                Ar7->redraw();
+                MIDILearn->Ar7->copy_label(tmp);
+                MIDILearn->Ar7->redraw();
                 break;     
       
              case 8:
-                Ar8->copy_label(tmp);
-                Ar8->redraw();
+                MIDILearn->Ar8->copy_label(tmp);
+                MIDILearn->Ar8->redraw();
                 break;     
       
              case 9:
-                Ar9->copy_label(tmp);
-                Ar9->redraw();
+                MIDILearn->Ar9->copy_label(tmp);
+                MIDILearn->Ar9->redraw();
                 break;     
       
              case 10:
-                Ar10->copy_label(tmp);
-                Ar10->redraw();
+                MIDILearn->Ar10->copy_label(tmp);
+                MIDILearn->Ar10->redraw();
                 break;     
           
              case 11:
-                Ar11->copy_label(tmp);
-                Ar11->redraw();
+                MIDILearn->Ar11->copy_label(tmp);
+                MIDILearn->Ar11->redraw();
                 break;     
           
              case 12:
-                Ar12->copy_label(tmp);
-                Ar12->redraw();
+                MIDILearn->Ar12->copy_label(tmp);
+                MIDILearn->Ar12->redraw();
                 break;     
           
              case 13:
-                Ar13->copy_label(tmp);
-                Ar13->redraw();
+                MIDILearn->Ar13->copy_label(tmp);
+                MIDILearn->Ar13->redraw();
                 break;     
       
              case 14:
-                Ar14->copy_label(tmp);
-                Ar14->redraw();
+                MIDILearn->Ar14->copy_label(tmp);
+                MIDILearn->Ar14->redraw();
                 break;     
   
              case 15:
-                Ar15->copy_label(tmp);
-                Ar15->redraw();
+                MIDILearn->Ar15->copy_label(tmp);
+                MIDILearn->Ar15->redraw();
                 break;     
   
              case 16:
-                Ar16->copy_label(tmp);
-                Ar16->redraw();
+                MIDILearn->Ar16->copy_label(tmp);
+                MIDILearn->Ar16->redraw();
                 break;     
           
              case 17:
-                Ar17->copy_label(tmp);
-                Ar17->redraw();
+                MIDILearn->Ar17->copy_label(tmp);
+                MIDILearn->Ar17->redraw();
                 break;     
           
              case 18:
-                Ar18->copy_label(tmp);
-                Ar18->redraw();
+                MIDILearn->Ar18->copy_label(tmp);
+                MIDILearn->Ar18->redraw();
                 break;     
       
              case 19:
-                Ar19->copy_label(tmp);
-                Ar19->redraw();
+                MIDILearn->Ar19->copy_label(tmp);
+                MIDILearn->Ar19->redraw();
                 break;     
   
              case 20:
-                Ar20->copy_label(tmp);
-                Ar20->redraw();
+                MIDILearn->Ar20->copy_label(tmp);
+                MIDILearn->Ar20->redraw();
                 break;     
   
   
@@ -9464,103 +9168,103 @@ void RKRGUI::DisAssigns() {
              switch (i)
              {
              case 1:
-                Ar1->copy_label(tmp);
-                Ar1->redraw();
+                MIDILearn->Ar1->copy_label(tmp);
+                MIDILearn->Ar1->redraw();
                 break;     
                               
              case 2:
-                Ar2->copy_label(tmp);
-                Ar2->redraw();
+                MIDILearn->Ar2->copy_label(tmp);
+                MIDILearn->Ar2->redraw();
                 break;     
           
              case 3:
-                Ar3->copy_label(tmp);
-                Ar3->redraw();
+                MIDILearn->Ar3->copy_label(tmp);
+                MIDILearn->Ar3->redraw();
                 break;     
           
              case 4:
-                Ar4->copy_label(tmp);
-                Ar4->redraw();
+                MIDILearn->Ar4->copy_label(tmp);
+                MIDILearn->Ar4->redraw();
                 break;     
           
              case 5:
-                Ar5->copy_label(tmp);
-                Ar5->redraw();
+                MIDILearn->Ar5->copy_label(tmp);
+                MIDILearn->Ar5->redraw();
                 break;     
           
              case 6:
-                Ar6->copy_label(tmp);
-                Ar6->redraw();
+                MIDILearn->Ar6->copy_label(tmp);
+                MIDILearn->Ar6->redraw();
                 break;     
       
              case 7:
-                Ar7->copy_label(tmp);
-                Ar7->redraw();
+                MIDILearn->Ar7->copy_label(tmp);
+                MIDILearn->Ar7->redraw();
                 break;     
       
              case 8:
-                Ar8->copy_label(tmp);
-                Ar8->redraw();
+                MIDILearn->Ar8->copy_label(tmp);
+                MIDILearn->Ar8->redraw();
                 break;     
       
              case 9:
-                Ar9->copy_label(tmp);
-                Ar9->redraw();
+                MIDILearn->Ar9->copy_label(tmp);
+                MIDILearn->Ar9->redraw();
                 break;     
       
              case 10:
-                Ar10->copy_label(tmp);
-                Ar10->redraw();
+                MIDILearn->Ar10->copy_label(tmp);
+                MIDILearn->Ar10->redraw();
                 break;     
           
              case 11:
-                Ar11->copy_label(tmp);
-                Ar11->redraw();
+                MIDILearn->Ar11->copy_label(tmp);
+                MIDILearn->Ar11->redraw();
                 break;     
           
              case 12:
-                Ar12->copy_label(tmp);
-                Ar12->redraw();
+                MIDILearn->Ar12->copy_label(tmp);
+                MIDILearn->Ar12->redraw();
                 break;     
           
              case 13:
-                Ar13->copy_label(tmp);
-                Ar13->redraw();
+                MIDILearn->Ar13->copy_label(tmp);
+                MIDILearn->Ar13->redraw();
                 break;     
       
              case 14:
-                Ar14->copy_label(tmp);
-                Ar14->redraw();
+                MIDILearn->Ar14->copy_label(tmp);
+                MIDILearn->Ar14->redraw();
                 break;     
   
              case 15:
-                Ar15->copy_label(tmp);
-                Ar15->redraw();
+                MIDILearn->Ar15->copy_label(tmp);
+                MIDILearn->Ar15->redraw();
                 break;     
   
              case 16:
-                Ar16->copy_label(tmp);
-                Ar16->redraw();
+                MIDILearn->Ar16->copy_label(tmp);
+                MIDILearn->Ar16->redraw();
                 break;     
           
              case 17:
-                Ar17->copy_label(tmp);
-                Ar17->redraw();
+                MIDILearn->Ar17->copy_label(tmp);
+                MIDILearn->Ar17->redraw();
                 break;     
           
              case 18:
-                Ar18->copy_label(tmp);
-                Ar18->redraw();
+                MIDILearn->Ar18->copy_label(tmp);
+                MIDILearn->Ar18->redraw();
                 break;     
       
              case 19:
-                Ar19->copy_label(tmp);
-                Ar19->redraw();
+                MIDILearn->Ar19->copy_label(tmp);
+                MIDILearn->Ar19->redraw();
                 break;     
   
              case 20:
-                Ar20->copy_label(tmp);
-                Ar20->redraw();
+                MIDILearn->Ar20->copy_label(tmp);
+                MIDILearn->Ar20->redraw();
                 break;     
   
   
@@ -10140,19 +9844,19 @@ void RKRGUI::getMIDIControl(int num) {
   int i = 0;
   rkr->comemouse=1;
   PrepareML();
-  while (i<Epar->size())
+  while (i<MIDILearn->Epar->size())
   {
   
    if ((rkr->ML_filter==0) && (rkr->efx_params[i].Ato == num))
    
     {
-      Epar->select(i+1);
+      MIDILearn->Epar->select(i+1);
       break;
      }
   
    if ((rkr->ML_filter==1) && (rkr->ML_clist[i] == num))
     {
-      Epar->select(i+1);
+      MIDILearn->Epar->select(i+1);
       break;
      }
   
@@ -10162,7 +9866,7 @@ void RKRGUI::getMIDIControl(int num) {
   }
   
   DisAssigns();
-  GMM->do_callback();
+  MIDILearn->GMM->do_callback();
 }
 
 void RKRGUI::PrepareML() {
