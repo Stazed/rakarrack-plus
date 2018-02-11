@@ -212,6 +212,9 @@ decl {class MidiGui; // forward declaration} {public global
 decl {class BankWindowGui; // forward declaration} {public global
 }
 
+decl {class TrigWindowGui; // forward declaration} {public global
+}
+
 decl {\#include "../icono_rakarrack_128x128.xpm"} {private local
 }
 
@@ -273,14 +276,14 @@ class RKRGUI {open
   }
   decl {struct list_element *mBankNameListTail;} {private local
   }
-  Function {make_window()} {open
+  Function {make_window()} {open selected return_type void
   } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {153 141 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {129 215 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1502,7 +1505,7 @@ rkr->calculavol(2);}
         }
       }
       Fl_Group MIDI {
-        user_data 1 selected
+        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112 hide
         code0 {\#include "midiconv_gui.h"}
         code1 {o->initialize(rkr, this);}
@@ -3495,70 +3498,13 @@ FillML(0);}
     Fl_Window Trigger {
       callback {rkr->ACI_Bypass=0;
 Trigger->hide();
-save_stat(6);}
-      xywh {1991 171 205 165} type Double hide
-    } {
-      Fl_Box Fondo5 {
-        xywh {0 1 210 164}
-      }
-      Fl_Box ACI_LABEL {
-        label {Analog Control}
-        xywh {25 8 135 24} labelfont 1 labelcolor 7
-      }
-      Fl_Slider aux_vu {
-        xywh {5 18 16 144} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
-        class NewVum
-      }
-      Fl_Choice aux_source {
-        label Source
-        callback {rkr->Aux_Source = (int) o->value();}
-        xywh {100 37 50 17} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-      } {
-        MenuItem {} {
-          label Aux
-          xywh {40 40 45 26} labelsize 10
-        }
-        MenuItem {} {
-          label L
-          xywh {40 40 45 26} labelsize 10
-        }
-        MenuItem {} {
-          label R
-          xywh {30 30 36 21} labelsize 10
-        }
-      }
-      Fl_Value_Slider aux_gain {
-        label Gain
-        callback {rkr->Aux_Gain = (int)o->value();}
-        xywh {99 59 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
-        class SliderW
-      }
-      Fl_Value_Slider aux_thres {
-        label Threshold
-        callback {rkr->Aux_Threshold = (int) o->value();}
-        xywh {100 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
-        class SliderW
-      }
-      Fl_Value_Input aux_midi {
-        label {Midi Control}
-        callback {if(o->value()> 127) o->value(127);
-if(o->value()< 1) o->value(1);
-rkr->Aux_MIDI = (int)o->value();}
-        xywh {98 96 39 22} labelsize 10 labelcolor 7 minimum 1 maximum 127 step 1 value 1 textsize 10
-      }
-      Fl_Value_Slider aux_min {
-        label Minimum
-        callback {rkr->Aux_Minimum = (int) o->value();}
-        xywh {100 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-        class SliderW
-      }
-      Fl_Value_Slider aux_max {
-        label Maximum
-        callback {rkr->Aux_Maximum = (int) o->value();}
-        xywh {100 150 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
-        class SliderW
-      }
-    }
+save_stat(6);} open
+      xywh {123 390 205 165} type Double box NO_BOX color 4 selection_color 7 hide
+      code0 {\#include "trigwindow_gui.h"}
+      code1 {o->initialize(rkr);}
+      code2 {o->hide();}
+      class TrigWindowGui
+    } {}
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
 About_Version->copy_label(tmp);} {}
@@ -3726,9 +3672,9 @@ for (int t=0; t<MIDILearn->children();t++)
   }  
 
 Font_Bro->textcolor(label_color);
-ACI_LABEL->labelcolor(fl_lighter(label_color));
-aux_source->labelcolor(label_color);
-aux_midi->labelcolor(label_color);
+Trigger->ACI_LABEL->labelcolor(fl_lighter(label_color));
+Trigger->aux_source->labelcolor(label_color);
+Trigger->aux_midi->labelcolor(label_color);
 
 Fl::redraw();} {}
   }
@@ -3752,7 +3698,7 @@ BankWindow->CH_UB->color(bcolor);
 
 
  fore_color= bcolor;
- aux_source->color(bcolor);
+ Trigger->aux_source->color(bcolor);
  Label_Color_Change(label_color);} {}
   }
   Function {Leds_Color_Change(Fl_Color bcolor)} {} {
@@ -4032,17 +3978,17 @@ Fl_Tooltip::enable(rkr->ena_tool);
 //Trigger
 
 rakarrack.get(rkr->PrefNom("Aux Source"),rkr->Aux_Source,0);
-aux_source->value(rkr->Aux_Source);
+Trigger->aux_source->value(rkr->Aux_Source);
 rakarrack.get(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain,0);
-aux_gain->value(rkr->Aux_Gain);
+Trigger->aux_gain->value(rkr->Aux_Gain);
 rakarrack.get(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold,0);
-aux_thres->value(rkr->Aux_Threshold);
+Trigger->aux_thres->value(rkr->Aux_Threshold);
 rakarrack.get(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI,1);
-aux_midi->value(rkr->Aux_MIDI);
+Trigger->aux_midi->value(rkr->Aux_MIDI);
 rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
-aux_min->value(rkr->Aux_Minimum);
+Trigger->aux_min->value(rkr->Aux_Minimum);
 rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
-aux_max->value(rkr->Aux_Maximum);
+Trigger->aux_max->value(rkr->Aux_Maximum);
 
 
 char temp[64];
@@ -7825,7 +7771,7 @@ Fondo1->image(InOut->image());
 Fondo2->image(InOut->image());
 BankWindow->Fondo3->image(InOut->image());
 Fondo4->image(InOut->image());
-Fondo5->image(InOut->image());
+Trigger->Fondo5->image(InOut->image());
 Fondo6->image(InOut->image());
 Fondo7->image(InOut->image());
 Fondo8->image(InOut->image());
@@ -8600,7 +8546,7 @@ switch(rkr->Aux_Source)
 float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
 
 float threshold = (float) rkr->Aux_Threshold;
-aux_vu->value(aux_vulevel);
+Trigger->aux_vu->value(aux_vulevel);
 
 if (aux_vulevel < threshold) tmp=0.0;
 

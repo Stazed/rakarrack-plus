@@ -73,6 +73,7 @@ class VibeGui; // forward declaration
 class InfinityGui; // forward declaration
 class MidiGui; // forward declaration
 class BankWindowGui; // forward declaration
+class TrigWindowGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -139,6 +140,7 @@ class BankWindowGui; // forward declaration
 #include <FL/Fl_Tabs.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
+#include "trigwindow_gui.h"
 
 class RKRGUI {
   int made; 
@@ -146,7 +148,7 @@ class RKRGUI {
   struct list_element *mBankNameList;
   struct list_element *mBankNameListTail;
 public:
-  Fl_Double_Window* make_window();
+  void make_window();
   Fl_Double_Window *Principal;
 private:
   inline void cb_Principal_i(Fl_Double_Window*, void*);
@@ -1134,44 +1136,10 @@ private:
   static void cb_OK(Fl_Button*, void*);
 public:
   Fl_Box *AB_A4;
-  Fl_Double_Window *Trigger;
+  TrigWindowGui *Trigger;
 private:
-  inline void cb_Trigger_i(Fl_Double_Window*, void*);
-  static void cb_Trigger(Fl_Double_Window*, void*);
-public:
-  Fl_Box *Fondo5;
-  Fl_Box *ACI_LABEL;
-  NewVum *aux_vu;
-  Fl_Choice *aux_source;
-private:
-  inline void cb_aux_source_i(Fl_Choice*, void*);
-  static void cb_aux_source(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_aux_source[];
-public:
-  SliderW *aux_gain;
-private:
-  inline void cb_aux_gain_i(SliderW*, void*);
-  static void cb_aux_gain(SliderW*, void*);
-public:
-  SliderW *aux_thres;
-private:
-  inline void cb_aux_thres_i(SliderW*, void*);
-  static void cb_aux_thres(SliderW*, void*);
-public:
-  Fl_Value_Input *aux_midi;
-private:
-  inline void cb_aux_midi_i(Fl_Value_Input*, void*);
-  static void cb_aux_midi(Fl_Value_Input*, void*);
-public:
-  SliderW *aux_min;
-private:
-  inline void cb_aux_min_i(SliderW*, void*);
-  static void cb_aux_min(SliderW*, void*);
-public:
-  SliderW *aux_max;
-private:
-  inline void cb_aux_max_i(SliderW*, void*);
-  static void cb_aux_max(SliderW*, void*);
+  inline void cb_Trigger_i(TrigWindowGui*, void*);
+  static void cb_Trigger(TrigWindowGui*, void*);
 public:
   RKRGUI(int argc, char**argv,RKR *rkr_);
   void Background_Color_Change(Fl_Color bcolor);

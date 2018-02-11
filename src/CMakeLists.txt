@@ -64,6 +64,7 @@ set (ProgSources
     UI/infinity_gui.cxx
     UI/midiconv_gui.cxx
     UI/bankwindow_gui.cxx
+    UI/trigwindow_gui.cxx
     process.C
     fileio.C
     varios.C

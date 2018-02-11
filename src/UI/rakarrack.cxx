@@ -2544,67 +2544,16 @@ void RKRGUI::cb_OK(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_OK_i(o,v);
 }
 
-void RKRGUI::cb_Trigger_i(Fl_Double_Window*, void*) {
+void RKRGUI::cb_Trigger_i(TrigWindowGui*, void*) {
   rkr->ACI_Bypass=0;
 Trigger->hide();
 save_stat(6);
 }
-void RKRGUI::cb_Trigger(Fl_Double_Window* o, void* v) {
+void RKRGUI::cb_Trigger(TrigWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Trigger_i(o,v);
 }
 
-void RKRGUI::cb_aux_source_i(Fl_Choice* o, void*) {
-  rkr->Aux_Source = (int) o->value();
-}
-void RKRGUI::cb_aux_source(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_source_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_aux_source[] = {
- {"Aux", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"L", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"R", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_aux_gain_i(SliderW* o, void*) {
-  rkr->Aux_Gain = (int)o->value();
-}
-void RKRGUI::cb_aux_gain(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_gain_i(o,v);
-}
-
-void RKRGUI::cb_aux_thres_i(SliderW* o, void*) {
-  rkr->Aux_Threshold = (int) o->value();
-}
-void RKRGUI::cb_aux_thres(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_thres_i(o,v);
-}
-
-void RKRGUI::cb_aux_midi_i(Fl_Value_Input* o, void*) {
-  if(o->value()> 127) o->value(127);
-if(o->value()< 1) o->value(1);
-rkr->Aux_MIDI = (int)o->value();
-}
-void RKRGUI::cb_aux_midi(Fl_Value_Input* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_midi_i(o,v);
-}
-
-void RKRGUI::cb_aux_min_i(SliderW* o, void*) {
-  rkr->Aux_Minimum = (int) o->value();
-}
-void RKRGUI::cb_aux_min(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_min_i(o,v);
-}
-
-void RKRGUI::cb_aux_max_i(SliderW* o, void*) {
-  rkr->Aux_Maximum = (int) o->value();
-}
-void RKRGUI::cb_aux_max(SliderW* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_aux_max_i(o,v);
-}
-
-Fl_Double_Window* RKRGUI::make_window() {
+void RKRGUI::make_window() {
   { Principal = new Fl_Double_Window(800, 600);
     Principal->box(FL_DOWN_BOX);
     Principal->color(FL_FOREGROUND_COLOR);
@@ -5052,122 +5001,24 @@ ld");
     } // Fl_Box* AB_A4
     AboutWin->end();
   } // Fl_Double_Window* AboutWin
-  { Trigger = new Fl_Double_Window(205, 165);
+  { TrigWindowGui* o = Trigger = new TrigWindowGui(205, 165);
+    Trigger->box(FL_NO_BOX);
+    Trigger->color((Fl_Color)4);
+    Trigger->selection_color(FL_BACKGROUND2_COLOR);
+    Trigger->labeltype(FL_NO_LABEL);
+    Trigger->labelfont(0);
+    Trigger->labelsize(14);
+    Trigger->labelcolor(FL_FOREGROUND_COLOR);
     Trigger->callback((Fl_Callback*)cb_Trigger, (void*)(this));
-    { Fondo5 = new Fl_Box(0, 1, 210, 164);
-    } // Fl_Box* Fondo5
-    { ACI_LABEL = new Fl_Box(25, 8, 135, 24, "Analog Control");
-      ACI_LABEL->labelfont(1);
-      ACI_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-    } // Fl_Box* ACI_LABEL
-    { aux_vu = new NewVum(5, 18, 16, 144);
-      aux_vu->type(2);
-      aux_vu->box(FL_NO_BOX);
-      aux_vu->color((Fl_Color)178);
-      aux_vu->selection_color((Fl_Color)90);
-      aux_vu->labeltype(FL_NORMAL_LABEL);
-      aux_vu->labelfont(0);
-      aux_vu->labelsize(14);
-      aux_vu->labelcolor(FL_FOREGROUND_COLOR);
-      aux_vu->minimum(15);
-      aux_vu->maximum(-48);
-      aux_vu->step(1);
-      aux_vu->value(-48);
-      aux_vu->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
-      aux_vu->when(FL_WHEN_NEVER);
-    } // NewVum* aux_vu
-    { aux_source = new Fl_Choice(100, 37, 50, 17, "Source");
-      aux_source->down_box(FL_BORDER_BOX);
-      aux_source->labelsize(10);
-      aux_source->labelcolor(FL_BACKGROUND2_COLOR);
-      aux_source->textsize(10);
-      aux_source->textcolor(FL_BACKGROUND2_COLOR);
-      aux_source->callback((Fl_Callback*)cb_aux_source);
-      aux_source->menu(menu_aux_source);
-    } // Fl_Choice* aux_source
-    { aux_gain = new SliderW(99, 59, 100, 10, "Gain");
-      aux_gain->type(5);
-      aux_gain->box(FL_FLAT_BOX);
-      aux_gain->color((Fl_Color)178);
-      aux_gain->selection_color((Fl_Color)62);
-      aux_gain->labeltype(FL_NORMAL_LABEL);
-      aux_gain->labelfont(0);
-      aux_gain->labelsize(10);
-      aux_gain->labelcolor(FL_BACKGROUND2_COLOR);
-      aux_gain->minimum(1);
-      aux_gain->maximum(127);
-      aux_gain->step(1);
-      aux_gain->textcolor(FL_BACKGROUND2_COLOR);
-      aux_gain->callback((Fl_Callback*)cb_aux_gain);
-      aux_gain->align(Fl_Align(FL_ALIGN_LEFT));
-      aux_gain->when(FL_WHEN_CHANGED);
-    } // SliderW* aux_gain
-    { aux_thres = new SliderW(100, 75, 100, 10, "Threshold");
-      aux_thres->type(5);
-      aux_thres->box(FL_FLAT_BOX);
-      aux_thres->color((Fl_Color)178);
-      aux_thres->selection_color((Fl_Color)62);
-      aux_thres->labeltype(FL_NORMAL_LABEL);
-      aux_thres->labelfont(0);
-      aux_thres->labelsize(10);
-      aux_thres->labelcolor(FL_BACKGROUND2_COLOR);
-      aux_thres->minimum(-70);
-      aux_thres->maximum(20);
-      aux_thres->step(1);
-      aux_thres->textcolor(FL_BACKGROUND2_COLOR);
-      aux_thres->callback((Fl_Callback*)cb_aux_thres);
-      aux_thres->align(Fl_Align(FL_ALIGN_LEFT));
-      aux_thres->when(FL_WHEN_CHANGED);
-    } // SliderW* aux_thres
-    { aux_midi = new Fl_Value_Input(98, 96, 39, 22, "Midi Control");
-      aux_midi->labelsize(10);
-      aux_midi->labelcolor(FL_BACKGROUND2_COLOR);
-      aux_midi->minimum(1);
-      aux_midi->maximum(127);
-      aux_midi->step(1);
-      aux_midi->value(1);
-      aux_midi->textsize(10);
-      aux_midi->callback((Fl_Callback*)cb_aux_midi);
-    } // Fl_Value_Input* aux_midi
-    { aux_min = new SliderW(100, 130, 100, 10, "Minimum");
-      aux_min->type(5);
-      aux_min->box(FL_FLAT_BOX);
-      aux_min->color((Fl_Color)178);
-      aux_min->selection_color((Fl_Color)62);
-      aux_min->labeltype(FL_NORMAL_LABEL);
-      aux_min->labelfont(0);
-      aux_min->labelsize(10);
-      aux_min->labelcolor(FL_BACKGROUND2_COLOR);
-      aux_min->maximum(127);
-      aux_min->step(1);
-      aux_min->textcolor(FL_BACKGROUND2_COLOR);
-      aux_min->callback((Fl_Callback*)cb_aux_min);
-      aux_min->align(Fl_Align(FL_ALIGN_LEFT));
-      aux_min->when(FL_WHEN_CHANGED);
-    } // SliderW* aux_min
-    { aux_max = new SliderW(100, 150, 100, 10, "Maximum");
-      aux_max->type(5);
-      aux_max->box(FL_FLAT_BOX);
-      aux_max->color((Fl_Color)178);
-      aux_max->selection_color((Fl_Color)62);
-      aux_max->labeltype(FL_NORMAL_LABEL);
-      aux_max->labelfont(0);
-      aux_max->labelsize(10);
-      aux_max->labelcolor(FL_BACKGROUND2_COLOR);
-      aux_max->maximum(127);
-      aux_max->step(1);
-      aux_max->value(127);
-      aux_max->textcolor(FL_BACKGROUND2_COLOR);
-      aux_max->callback((Fl_Callback*)cb_aux_max);
-      aux_max->align(Fl_Align(FL_ALIGN_LEFT));
-      aux_max->when(FL_WHEN_CHANGED);
-    } // SliderW* aux_max
+    Trigger->align(Fl_Align(FL_ALIGN_TOP));
+    Trigger->when(FL_WHEN_RELEASE);
+    o->initialize(rkr);
+    o->hide();
     Trigger->end();
-  } // Fl_Double_Window* Trigger
+  } // TrigWindowGui* Trigger
   char tmp[64];
   sprintf(tmp,"Version %s",VERSION);
   About_Version->copy_label(tmp);
-  return Trigger;
 }
 
 RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
@@ -5334,9 +5185,9 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
     }  
   
   Font_Bro->textcolor(label_color);
-  ACI_LABEL->labelcolor(fl_lighter(label_color));
-  aux_source->labelcolor(label_color);
-  aux_midi->labelcolor(label_color);
+  Trigger->ACI_LABEL->labelcolor(fl_lighter(label_color));
+  Trigger->aux_source->labelcolor(label_color);
+  Trigger->aux_midi->labelcolor(label_color);
   
   Fl::redraw();
 }
@@ -5361,7 +5212,7 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor) {
   
   
    fore_color= bcolor;
-   aux_source->color(bcolor);
+   Trigger->aux_source->color(bcolor);
    Label_Color_Change(label_color);
 }
 
@@ -5644,17 +5495,17 @@ void RKRGUI::load_stat() {
   //Trigger
   
   rakarrack.get(rkr->PrefNom("Aux Source"),rkr->Aux_Source,0);
-  aux_source->value(rkr->Aux_Source);
+  Trigger->aux_source->value(rkr->Aux_Source);
   rakarrack.get(rkr->PrefNom("Aux Gain"),rkr->Aux_Gain,0);
-  aux_gain->value(rkr->Aux_Gain);
+  Trigger->aux_gain->value(rkr->Aux_Gain);
   rakarrack.get(rkr->PrefNom("Aux Threshold"),rkr->Aux_Threshold,0);
-  aux_thres->value(rkr->Aux_Threshold);
+  Trigger->aux_thres->value(rkr->Aux_Threshold);
   rakarrack.get(rkr->PrefNom("Aux MIDI"),rkr->Aux_MIDI,1);
-  aux_midi->value(rkr->Aux_MIDI);
+  Trigger->aux_midi->value(rkr->Aux_MIDI);
   rakarrack.get(rkr->PrefNom("Aux Minimum"),rkr->Aux_Minimum,0);
-  aux_min->value(rkr->Aux_Minimum);
+  Trigger->aux_min->value(rkr->Aux_Minimum);
   rakarrack.get(rkr->PrefNom("Aux Maximum"),rkr->Aux_Maximum,127);
-  aux_max->value(rkr->Aux_Maximum);
+  Trigger->aux_max->value(rkr->Aux_Maximum);
   
   
   char temp[64];
@@ -9451,7 +9302,7 @@ void RKRGUI::PutBackground() {
   Fondo2->image(InOut->image());
   BankWindow->Fondo3->image(InOut->image());
   Fondo4->image(InOut->image());
-  Fondo5->image(InOut->image());
+  Trigger->Fondo5->image(InOut->image());
   Fondo6->image(InOut->image());
   Fondo7->image(InOut->image());
   Fondo8->image(InOut->image());
@@ -10238,7 +10089,7 @@ void RKRGUI::ActACI() {
   float aux_vulevel =  (float)CLAMP(rap2dB(tmp), -48.0, 15.0);
   
   float threshold = (float) rkr->Aux_Threshold;
-  aux_vu->value(aux_vulevel);
+  Trigger->aux_vu->value(aux_vulevel);
   
   if (aux_vulevel < threshold) tmp=0.0;
   
