@@ -73,6 +73,7 @@ class VibeGui; // forward declaration
 class InfinityGui; // forward declaration
 class MidiGui; // forward declaration
 class BankWindowGui; // forward declaration
+class OrderWindowGui; // forward declaration
 class TrigWindowGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -135,9 +136,10 @@ class TrigWindowGui; // forward declaration
 #include "analyzer.h"
 #include <FL/Fl_Value_Input.H>
 #include "bankwindow_gui.h"
+#include "orderwindow_gui.h"
+#include <FL/Fl_Tabs.H>
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Tabs.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
 #include "trigwindow_gui.h"
@@ -527,90 +529,10 @@ private:
   inline void cb_BankWindow2_i(BankWindowGui*, void*);
   static void cb_BankWindow2(BankWindowGui*, void*);
 public:
-  Fl_Double_Window *Order;
+  OrderWindowGui *Order;
 private:
-  inline void cb_Order_i(Fl_Double_Window*, void*);
-  static void cb_Order(Fl_Double_Window*, void*);
-public:
-  Fl_Box *Fondo1;
-  Fl_Box *O_TITLE;
-  Fl_Browser *Avail_Bro;
-  Fl_Button *Pon;
-private:
-  inline void cb_Pon_i(Fl_Button*, void*);
-  static void cb_Pon(Fl_Button*, void*);
-public:
-  Fl_Browser *Order_Bro;
-  Fl_Button *Sube;
-private:
-  inline void cb_Sube_i(Fl_Button*, void*);
-  static void cb_Sube(Fl_Button*, void*);
-public:
-  Fl_Button *Baja;
-private:
-  inline void cb_Baja_i(Fl_Button*, void*);
-  static void cb_Baja(Fl_Button*, void*);
-public:
-  Fl_Group *Filters;
-  Fl_Button *Fil0;
-private:
-  inline void cb_Fil0_i(Fl_Button*, void*);
-  static void cb_Fil0(Fl_Button*, void*);
-public:
-  Fl_Button *Fil1;
-private:
-  inline void cb_Fil1_i(Fl_Button*, void*);
-  static void cb_Fil1(Fl_Button*, void*);
-public:
-  Fl_Button *Fil2;
-private:
-  inline void cb_Fil2_i(Fl_Button*, void*);
-  static void cb_Fil2(Fl_Button*, void*);
-public:
-  Fl_Button *Fil4;
-private:
-  inline void cb_Fil4_i(Fl_Button*, void*);
-  static void cb_Fil4(Fl_Button*, void*);
-public:
-  Fl_Button *Fil8;
-private:
-  inline void cb_Fil8_i(Fl_Button*, void*);
-  static void cb_Fil8(Fl_Button*, void*);
-public:
-  Fl_Button *Fil16;
-private:
-  inline void cb_Fil16_i(Fl_Button*, void*);
-  static void cb_Fil16(Fl_Button*, void*);
-public:
-  Fl_Button *Fil32;
-private:
-  inline void cb_Fil32_i(Fl_Button*, void*);
-  static void cb_Fil32(Fl_Button*, void*);
-public:
-  Fl_Button *Fil64;
-private:
-  inline void cb_Fil64_i(Fl_Button*, void*);
-  static void cb_Fil64(Fl_Button*, void*);
-public:
-  Fl_Button *Fil128;
-private:
-  inline void cb_Fil128_i(Fl_Button*, void*);
-  static void cb_Fil128(Fl_Button*, void*);
-public:
-  Fl_Check_Button *Order_DeacHide;
-private:
-  inline void cb_Order_DeacHide_i(Fl_Check_Button*, void*);
-  static void cb_Order_DeacHide(Fl_Check_Button*, void*);
-public:
-  Fl_Button *ok_order;
-private:
-  inline void cb_ok_order_i(Fl_Button*, void*);
-  static void cb_ok_order(Fl_Button*, void*);
-public:
-  Fl_Button *Cancel_order;
-private:
-  inline void cb_Cancel_order_i(Fl_Button*, void*);
-  static void cb_Cancel_order(Fl_Button*, void*);
+  inline void cb_Order_i(OrderWindowGui*, void*);
+  static void cb_Order(OrderWindowGui*, void*);
 public:
   Fl_Double_Window *Settings;
 private:

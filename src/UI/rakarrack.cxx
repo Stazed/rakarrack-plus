@@ -1121,7 +1121,7 @@ void RKRGUI::cb_Open_Order_i(Fl_Button*, void*) {
 {
 Prepare_Order();
 rkr->deachide=0;
-Order_DeacHide->value(rkr->deachide);
+Order->Order_DeacHide->value(rkr->deachide);
 Order->show();
 put_icon(Order);
 }
@@ -1286,173 +1286,12 @@ void RKRGUI::cb_BankWindow2(BankWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_BankWindow2_i(o,v);
 }
 
-void RKRGUI::cb_Order_i(Fl_Double_Window*, void*) {
+void RKRGUI::cb_Order_i(OrderWindowGui*, void*) {
   save_stat(2);
 Order->hide();
 }
-void RKRGUI::cb_Order(Fl_Double_Window* o, void* v) {
+void RKRGUI::cb_Order(OrderWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Order_i(o,v);
-}
-
-void RKRGUI::cb_Pon_i(Fl_Button*, void*) {
-  int i = Order_Bro->value();
-int j = Avail_Bro->value();
-
-if(!i) return;
-if(!j) return;
-
-Order_Bro->insert(i,Avail_Bro->text(j));
-
-Avail_Bro->remove(j);
-Order_Bro->remove(i+1);
-Order_Bro->select(1);
-rkr->new_order[i-1]=rkr->availables[j];
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Pon(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Pon_i(o,v);
-}
-
-void RKRGUI::cb_Sube_i(Fl_Button*, void*) {
-  int x,x1;
-
-int i = Order_Bro->value();
-
-Order_Bro->move(i,i-1);
-
-i--;
-
-if (i>0) 
-{
-x=rkr->new_order[i];
-x1=rkr->new_order[i-1];
-
-rkr->new_order[i]=x1;
-rkr->new_order[i-1]=x;
-};
-}
-void RKRGUI::cb_Sube(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Sube_i(o,v);
-}
-
-void RKRGUI::cb_Baja_i(Fl_Button*, void*) {
-  int x,x1;
-
-int i = Order_Bro->value();
-
-Order_Bro->move(i,i+1);
-
-i--;
-
-if (i<9)
-{
-x=rkr->new_order[i];
-x1=rkr->new_order[i+1];
-
-rkr->new_order[i]=x1;
-rkr->new_order[i+1]=x;
-};
-}
-void RKRGUI::cb_Baja(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Baja_i(o,v);
-}
-
-void RKRGUI::cb_Fil0_i(Fl_Button*, void*) {
-  rkr->eff_filter=0;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil0(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil0_i(o,v);
-}
-
-void RKRGUI::cb_Fil1_i(Fl_Button*, void*) {
-  rkr->eff_filter=1;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil1(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil1_i(o,v);
-}
-
-void RKRGUI::cb_Fil2_i(Fl_Button*, void*) {
-  rkr->eff_filter=2;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil2(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil2_i(o,v);
-}
-
-void RKRGUI::cb_Fil4_i(Fl_Button*, void*) {
-  rkr->eff_filter=4;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil4(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil4_i(o,v);
-}
-
-void RKRGUI::cb_Fil8_i(Fl_Button*, void*) {
-  rkr->eff_filter=8;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil8(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil8_i(o,v);
-}
-
-void RKRGUI::cb_Fil16_i(Fl_Button*, void*) {
-  rkr->eff_filter=16;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil16(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil16_i(o,v);
-}
-
-void RKRGUI::cb_Fil32_i(Fl_Button*, void*) {
-  rkr->eff_filter=32;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil32(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil32_i(o,v);
-}
-
-void RKRGUI::cb_Fil64_i(Fl_Button*, void*) {
-  rkr->eff_filter=64;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil64(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil64_i(o,v);
-}
-
-void RKRGUI::cb_Fil128_i(Fl_Button*, void*) {
-  rkr->eff_filter=128;
-Fill_Avail(rkr->eff_filter);
-}
-void RKRGUI::cb_Fil128(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Fil128_i(o,v);
-}
-
-void RKRGUI::cb_Order_DeacHide_i(Fl_Check_Button* o, void*) {
-  rkr->deachide=(int) o->value();
-}
-void RKRGUI::cb_Order_DeacHide(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Order_DeacHide_i(o,v);
-}
-
-void RKRGUI::cb_ok_order_i(Fl_Button*, void*) {
-  int i;
-for (i=0;i<10;i++) rkr->efx_order[i]=rkr->new_order[i];
-reordena();
-Order->do_callback();
-}
-void RKRGUI::cb_ok_order(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_ok_order_i(o,v);
-}
-
-void RKRGUI::cb_Cancel_order_i(Fl_Button*, void*) {
-  int i;
-for (i=0;i<10;i++) rkr->efx_order[i]=rkr->saved_order[i];
-Order->do_callback();
-}
-void RKRGUI::cb_Cancel_order(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Cancel_order_i(o,v);
 }
 
 void RKRGUI::cb_Settings_i(Fl_Double_Window*, void*) {
@@ -3968,115 +3807,23 @@ void RKRGUI::make_window() {
     BankWindow->end();
     BankWindow->resizable(BankWindow);
   } // BankWindowGui* BankWindow
-  { Order = new Fl_Double_Window(500, 400);
-    Order->color((Fl_Color)178);
+  { OrderWindowGui* o = Order = new OrderWindowGui(500, 400);
+    Order->box(FL_NO_BOX);
+    Order->color((Fl_Color)4);
+    Order->selection_color(FL_BACKGROUND2_COLOR);
+    Order->labeltype(FL_NO_LABEL);
+    Order->labelfont(0);
+    Order->labelsize(14);
+    Order->labelcolor(FL_FOREGROUND_COLOR);
     Order->callback((Fl_Callback*)cb_Order, (void*)(this));
-    { Fondo1 = new Fl_Box(1, 1, 600, 400);
-    } // Fl_Box* Fondo1
-    { O_TITLE = new Fl_Box(25, 3, 438, 37, "Put Order in your Rack");
-      O_TITLE->labelfont(1);
-      O_TITLE->labelsize(33);
-      O_TITLE->labelcolor(FL_BACKGROUND2_COLOR);
-    } // Fl_Box* O_TITLE
-    { Avail_Bro = new Fl_Browser(15, 50, 175, 225);
-      Avail_Bro->type(2);
-      Avail_Bro->labelsize(18);
-      Avail_Bro->textsize(18);
-      Avail_Bro->textcolor(FL_BACKGROUND2_COLOR);
-      Avail_Bro->user_data((void*)(99));
-    } // Fl_Browser* Avail_Bro
-    { Pon = new Fl_Button(200, 145, 50, 25, "@<->");
-      Pon->labelsize(18);
-      Pon->callback((Fl_Callback*)cb_Pon);
-    } // Fl_Button* Pon
-    { Order_Bro = new Fl_Browser(260, 50, 175, 225);
-      Order_Bro->type(2);
-      Order_Bro->labelsize(18);
-      Order_Bro->textsize(18);
-      Order_Bro->textcolor(FL_BACKGROUND2_COLOR);
-    } // Fl_Browser* Order_Bro
-    { Sube = new Fl_Button(442, 120, 50, 25, "@$2->");
-      Sube->labelsize(18);
-      Sube->callback((Fl_Callback*)cb_Sube);
-    } // Fl_Button* Sube
-    { Baja = new Fl_Button(442, 160, 50, 25, "@$8->");
-      Baja->labelsize(18);
-      Baja->callback((Fl_Callback*)cb_Baja);
-    } // Fl_Button* Baja
-    { Filters = new Fl_Group(15, 280, 180, 110);
-      { Fil0 = new Fl_Button(15, 284, 177, 15, "All");
-        Fil0->type(102);
-        Fil0->labelsize(10);
-        Fil0->callback((Fl_Callback*)cb_Fil0);
-        Fil0->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil0
-      { Fil1 = new Fl_Button(105, 304, 86, 15, "Distortion");
-        Fil1->type(102);
-        Fil1->labelsize(10);
-        Fil1->callback((Fl_Callback*)cb_Fil1);
-        Fil1->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil1
-      { Fil2 = new Fl_Button(15, 304, 78, 15, "Modulation");
-        Fil2->type(102);
-        Fil2->labelsize(10);
-        Fil2->callback((Fl_Callback*)cb_Fil2);
-        Fil2->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil2
-      { Fil4 = new Fl_Button(105, 325, 86, 15, "Time");
-        Fil4->type(102);
-        Fil4->labelsize(10);
-        Fil4->callback((Fl_Callback*)cb_Fil4);
-        Fil4->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil4
-      { Fil8 = new Fl_Button(15, 324, 78, 15, "Emulation");
-        Fil8->type(102);
-        Fil8->labelsize(10);
-        Fil8->callback((Fl_Callback*)cb_Fil8);
-        Fil8->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil8
-      { Fil16 = new Fl_Button(105, 345, 86, 15, "Filters");
-        Fil16->type(102);
-        Fil16->labelsize(10);
-        Fil16->callback((Fl_Callback*)cb_Fil16);
-        Fil16->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil16
-      { Fil32 = new Fl_Button(15, 344, 78, 15, "Dynamics");
-        Fil32->type(102);
-        Fil32->labelsize(10);
-        Fil32->callback((Fl_Callback*)cb_Fil32);
-        Fil32->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil32
-      { Fil64 = new Fl_Button(105, 365, 86, 15, "Processing && EQ");
-        Fil64->type(102);
-        Fil64->labelsize(10);
-        Fil64->callback((Fl_Callback*)cb_Fil64);
-        Fil64->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil64
-      { Fil128 = new Fl_Button(15, 365, 78, 15, "Synthesis");
-        Fil128->type(102);
-        Fil128->labelsize(10);
-        Fil128->callback((Fl_Callback*)cb_Fil128);
-        Fil128->when(FL_WHEN_CHANGED);
-      } // Fl_Button* Fil128
-      Filters->end();
-    } // Fl_Group* Filters
-    { Order_DeacHide = new Fl_Check_Button(420, 286, 23, 20, "Hide Unused Effect Widgets");
-      Order_DeacHide->down_box(FL_DOWN_BOX);
-      Order_DeacHide->labelsize(11);
-      Order_DeacHide->labelcolor(FL_BACKGROUND2_COLOR);
-      Order_DeacHide->callback((Fl_Callback*)cb_Order_DeacHide);
-      Order_DeacHide->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* Order_DeacHide
-    { ok_order = new Fl_Button(333, 349, 72, 26, "Ok");
-      ok_order->callback((Fl_Callback*)cb_ok_order);
-    } // Fl_Button* ok_order
-    { Cancel_order = new Fl_Button(415, 349, 72, 26, "Cancel");
-      Cancel_order->callback((Fl_Callback*)cb_Cancel_order);
-    } // Fl_Button* Cancel_order
+    Order->align(Fl_Align(FL_ALIGN_TOP));
+    Order->when(FL_WHEN_RELEASE);
+    o->initialize(rkr, this);
+    o->hide();
     Order->size_range(500, 400, 3200, 2400);
     Order->end();
     Order->resizable(Order);
-  } // Fl_Double_Window* Order
+  } // OrderWindowGui* Order
   { Settings = new Fl_Double_Window(640, 580);
     Settings->color((Fl_Color)4);
     Settings->callback((Fl_Callback*)cb_Settings, (void*)(this));
@@ -5165,9 +4912,9 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
        w->color(fore_color);
     }  
   
-  for (int t=0; t<Filters->children();t++)
+  for (int t=0; t<Order->Filters->children();t++)
     {
-      Fl_Widget *w = Filters->child(t);
+      Fl_Widget *w = Order->Filters->child(t);
   
        w->labelcolor(label_color);  
        w->selection_color(back_color);
@@ -9298,7 +9045,7 @@ void RKRGUI::PutBackground() {
   Metro->image(InOut->image());
   fondo->image(InOut->image());
   TITTLE_L->image(InOut->image());
-  Fondo1->image(InOut->image());
+  Order->Fondo1->image(InOut->image());
   Fondo2->image(InOut->image());
   BankWindow->Fondo3->image(InOut->image());
   Fondo4->image(InOut->image());
@@ -9888,19 +9635,19 @@ void RKRGUI::DisAssigns() {
 
 void RKRGUI::Prepare_Order() {
   int i;
-  Order_Bro->clear();
+  Order->Order_Bro->clear();
   
   
   for (i=0; i<10;i++) 
   {
   rkr->new_order[i]=rkr->efx_order[i];
   rkr->saved_order[i]=rkr->efx_order[i];
-  Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+  Order->Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
   }
   
   Fill_Avail(rkr->eff_filter);
   
-  Order_Bro->select(1);
+  Order->Order_Bro->select(1);
 }
 
 void RKRGUI::Show_Next_Time() {
@@ -10134,7 +9881,7 @@ int RKRGUI::Busca_Eff(int num) {
 void RKRGUI::Fill_Avail(int filter) {
   int i,j,t,k;
   
-  Avail_Bro->clear();
+  Order->Avail_Bro->clear();
   
   t=1;
   for (i=0; i<rkr->NumEffects;i++)
@@ -10152,7 +9899,7 @@ void RKRGUI::Fill_Avail(int filter) {
    
     if((rkr->efx_names[i].Type&rkr->eff_filter)==filter) 
    { 
-    Avail_Bro->add(rkr->efx_names[i].Nom);
+    Order->Avail_Bro->add(rkr->efx_names[i].Nom);
     rkr->availables[t]=rkr->efx_names[i].Pos;
     t++;
    }
@@ -10161,7 +9908,7 @@ void RKRGUI::Fill_Avail(int filter) {
   
   }
   
-  Avail_Bro->select(1);
+  Order->Avail_Bro->select(1);
 }
 
 void RKRGUI::highlight() {
