@@ -65,6 +65,7 @@ set (ProgSources
     UI/midiconv_gui.cxx
     UI/bankwindow_gui.cxx
     UI/orderwindow_gui.cxx
+    UI/midilearnwindow_gui.cxx
     UI/aboutwindow_gui.cxx
     UI/trigwindow_gui.cxx
     process.C
