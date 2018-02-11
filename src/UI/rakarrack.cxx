@@ -2362,25 +2362,11 @@ void RKRGUI::cb_M_fil_current(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_M_fil_current_i(o,v);
 }
 
-void RKRGUI::cb_AboutWin_i(Fl_Double_Window*, void*) {
+void RKRGUI::cb_AboutWin_i(AboutWindowGui*, void*) {
   AboutWin->hide();
 }
-void RKRGUI::cb_AboutWin(Fl_Double_Window* o, void* v) {
+void RKRGUI::cb_AboutWin(AboutWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_AboutWin_i(o,v);
-}
-
-void RKRGUI::cb_LICENSE_i(Fl_Button*, void*) {
-  show_lic();
-}
-void RKRGUI::cb_LICENSE(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_LICENSE_i(o,v);
-}
-
-void RKRGUI::cb_OK_i(Fl_Button*, void*) {
-  AboutWin->hide();
-}
-void RKRGUI::cb_OK(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_OK_i(o,v);
 }
 
 void RKRGUI::cb_Trigger_i(TrigWindowGui*, void*) {
@@ -4683,71 +4669,21 @@ void RKRGUI::make_window() {
     } // Fl_Group* Filters_ML
     MIDILearn->end();
   } // Fl_Double_Window* MIDILearn
-  { AboutWin = new Fl_Double_Window(375, 235, "About Rakarrack");
-    AboutWin->color((Fl_Color)36);
+  { AboutWindowGui* o = AboutWin = new AboutWindowGui(375, 235, "About Rakarrack");
+    AboutWin->box(FL_NO_BOX);
+    AboutWin->color((Fl_Color)4);
+    AboutWin->selection_color(FL_BACKGROUND2_COLOR);
+    AboutWin->labeltype(FL_NO_LABEL);
+    AboutWin->labelfont(0);
+    AboutWin->labelsize(14);
+    AboutWin->labelcolor(FL_FOREGROUND_COLOR);
     AboutWin->callback((Fl_Callback*)cb_AboutWin, (void*)(this));
-    { AB_Title = new Fl_Box(56, 4, 259, 41, "Rakarrack");
-      AB_Title->labelfont(1);
-      AB_Title->labelsize(40);
-      AB_Title->labelcolor(FL_BACKGROUND2_COLOR);
-    } // Fl_Box* AB_Title
-    { AB_SubTitle = new Fl_Box(121, 39, 130, 22, "Audio F/X");
-      AB_SubTitle->labelfont(1);
-      AB_SubTitle->labelsize(16);
-      AB_SubTitle->labelcolor(FL_BACKGROUND2_COLOR);
-    } // Fl_Box* AB_SubTitle
-    { About_Version = new Fl_Box(69, 60, 233, 15);
-      About_Version->labelsize(12);
-      About_Version->labelcolor(FL_BACKGROUND2_COLOR);
-      About_Version->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
-    } // Fl_Box* About_Version
-    { AB_url = new Fl_Box(68, 77, 234, 22, "http://rakarrack.sourceforge.net");
-      AB_url->labelfont(1);
-      AB_url->labelsize(13);
-      AB_url->labelcolor((Fl_Color)6);
-    } // Fl_Box* AB_url
-    { AB_Authors = new Fl_Box(20, 96, 345, 26, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon Arnout Engelen <2007 - \
-2010>");
-      AB_Authors->labelfont(1);
-      AB_Authors->labelsize(8);
-      AB_Authors->labelcolor(FL_BACKGROUND2_COLOR);
-      AB_Authors->align(Fl_Align(FL_ALIGN_WRAP));
-    } // Fl_Box* AB_Authors
-    { AB_A1 = new Fl_Box(44, 125, 281, 26, "Code of some effects and structure based on ZynAddSubFx by Paul Nasca Octavia\
-n");
-      AB_A1->labelfont(1);
-      AB_A1->labelsize(8);
-      AB_A1->labelcolor(FL_BACKGROUND2_COLOR);
-      AB_A1->align(Fl_Align(FL_ALIGN_WRAP));
-    } // Fl_Box* AB_A1
-    { AB_A2 = new Fl_Box(66, 172, 240, 15, "Code of Tuner taked from tuneit by Mario Lang");
-      AB_A2->labelfont(1);
-      AB_A2->labelsize(8);
-      AB_A2->labelcolor(FL_BACKGROUND2_COLOR);
-    } // Fl_Box* AB_A2
-    { AB_A3 = new Fl_Box(84, 185, 219, 24, "Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfe\
-ld");
-      AB_A3->labelfont(1);
-      AB_A3->labelsize(8);
-      AB_A3->labelcolor(FL_BACKGROUND2_COLOR);
-      AB_A3->align(Fl_Align(FL_ALIGN_WRAP));
-    } // Fl_Box* AB_A3
-    { Fl_Button* o = new Fl_Button(48, 215, 92, 16, "LICENSE");
-      o->labelsize(10);
-      o->callback((Fl_Callback*)cb_LICENSE);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(276, 215, 92, 16, "OK");
-      o->labelsize(10);
-      o->callback((Fl_Callback*)cb_OK);
-    } // Fl_Button* o
-    { AB_A4 = new Fl_Box(64, 151, 250, 20, "Code of some effects based on swh-plugins LADSPA by Steve Harris");
-      AB_A4->labelfont(1);
-      AB_A4->labelsize(8);
-      AB_A4->labelcolor(FL_BACKGROUND2_COLOR);
-      AB_A4->align(Fl_Align(FL_ALIGN_WRAP));
-    } // Fl_Box* AB_A4
+    AboutWin->align(Fl_Align(FL_ALIGN_TOP));
+    AboutWin->when(FL_WHEN_RELEASE);
+    o->initialize(this);
+    o->hide();
     AboutWin->end();
-  } // Fl_Double_Window* AboutWin
+  } // AboutWindowGui* AboutWin
   { TrigWindowGui* o = Trigger = new TrigWindowGui(205, 165);
     Trigger->box(FL_NO_BOX);
     Trigger->color((Fl_Color)4);
@@ -4765,7 +4701,7 @@ ld");
   } // TrigWindowGui* Trigger
   char tmp[64];
   sprintf(tmp,"Version %s",VERSION);
-  About_Version->copy_label(tmp);
+  AboutWin->About_Version->copy_label(tmp);
 }
 
 RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {

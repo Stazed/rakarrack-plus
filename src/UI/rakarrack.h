@@ -74,6 +74,7 @@ class InfinityGui; // forward declaration
 class MidiGui; // forward declaration
 class BankWindowGui; // forward declaration
 class OrderWindowGui; // forward declaration
+class AboutWindowGui; // forward declaration
 class TrigWindowGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
@@ -142,6 +143,7 @@ class TrigWindowGui; // forward declaration
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
+#include "aboutwindow_gui.h"
 #include "trigwindow_gui.h"
 
 class RKRGUI {
@@ -1038,26 +1040,11 @@ private:
   inline void cb_M_fil_current_i(Fl_Button*, void*);
   static void cb_M_fil_current(Fl_Button*, void*);
 public:
-  Fl_Double_Window *AboutWin;
+  AboutWindowGui *AboutWin;
 private:
-  inline void cb_AboutWin_i(Fl_Double_Window*, void*);
-  static void cb_AboutWin(Fl_Double_Window*, void*);
+  inline void cb_AboutWin_i(AboutWindowGui*, void*);
+  static void cb_AboutWin(AboutWindowGui*, void*);
 public:
-  Fl_Box *AB_Title;
-  Fl_Box *AB_SubTitle;
-  Fl_Box *About_Version;
-  Fl_Box *AB_url;
-  Fl_Box *AB_Authors;
-  Fl_Box *AB_A1;
-  Fl_Box *AB_A2;
-  Fl_Box *AB_A3;
-private:
-  inline void cb_LICENSE_i(Fl_Button*, void*);
-  static void cb_LICENSE(Fl_Button*, void*);
-  inline void cb_OK_i(Fl_Button*, void*);
-  static void cb_OK(Fl_Button*, void*);
-public:
-  Fl_Box *AB_A4;
   TrigWindowGui *Trigger;
 private:
   inline void cb_Trigger_i(TrigWindowGui*, void*);

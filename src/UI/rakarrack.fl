@@ -215,6 +215,9 @@ decl {class BankWindowGui; // forward declaration} {public global
 decl {class OrderWindowGui; // forward declaration} {public global
 }
 
+decl {class AboutWindowGui; // forward declaration} {public global
+}
+
 decl {class TrigWindowGui; // forward declaration} {public global
 }
 
@@ -3303,55 +3306,13 @@ FillML(0);}
     }
     Fl_Window AboutWin {
       label {About Rakarrack}
-      callback {AboutWin->hide();}
-      xywh {811 82 375 235} type Double color 36 hide
-    } {
-      Fl_Box AB_Title {
-        label Rakarrack
-        xywh {56 4 259 41} labelfont 1 labelsize 40 labelcolor 7
-      }
-      Fl_Box AB_SubTitle {
-        label {Audio F/X}
-        xywh {121 39 130 22} labelfont 1 labelsize 16 labelcolor 7
-      }
-      Fl_Box About_Version {
-        xywh {69 60 233 15} labelsize 12 labelcolor 7 align 16
-      }
-      Fl_Box AB_url {
-        label {http://rakarrack.sourceforge.net}
-        xywh {68 77 234 22} labelfont 1 labelsize 13 labelcolor 6
-      }
-      Fl_Box AB_Authors {
-        label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon Arnout Engelen <2007 - 2010>}
-        xywh {20 96 345 26} labelfont 1 labelsize 8 labelcolor 7 align 128
-      }
-      Fl_Box AB_A1 {
-        label {Code of some effects and structure based on ZynAddSubFx by Paul Nasca Octavian}
-        xywh {44 125 281 26} labelfont 1 labelsize 8 labelcolor 7 align 128
-      }
-      Fl_Box AB_A2 {
-        label {Code of Tuner taked from tuneit by Mario Lang}
-        xywh {66 172 240 15} labelfont 1 labelsize 8 labelcolor 7
-      }
-      Fl_Box AB_A3 {
-        label {Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfeld}
-        xywh {84 185 219 24} labelfont 1 labelsize 8 labelcolor 7 align 128
-      }
-      Fl_Button {} {
-        label LICENSE
-        callback {show_lic();}
-        xywh {48 215 92 16} labelsize 10
-      }
-      Fl_Button {} {
-        label OK
-        callback {AboutWin->hide();}
-        xywh {276 215 92 16} labelsize 10
-      }
-      Fl_Box AB_A4 {
-        label {Code of some effects based on swh-plugins LADSPA by Steve Harris}
-        xywh {64 151 250 20} labelfont 1 labelsize 8 labelcolor 7 align 128
-      }
-    }
+      callback {AboutWin->hide();} open
+      xywh {1434 804 375 235} type Double box NO_BOX color 4 selection_color 7 hide
+      code0 {\#include "aboutwindow_gui.h"}
+      code1 {o->initialize(this);}
+      code2 {o->hide();}
+      class AboutWindowGui
+    } {}
     Fl_Window Trigger {
       callback {rkr->ACI_Bypass=0;
 Trigger->hide();
@@ -3364,7 +3325,7 @@ save_stat(6);} open
     } {}
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
-About_Version->copy_label(tmp);} {}
+AboutWin->About_Version->copy_label(tmp);} {}
   }
   Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
   } {

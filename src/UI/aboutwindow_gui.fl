@@ -1,0 +1,63 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class AboutWindowGui {
+  label {About Rakarrack} open selected
+  xywh {1474 52 375 235} type Double
+  code0 {\#include "rakarrack.h"}
+  code1 {this->m_rgui = NULL;}
+  class Fl_Double_Window visible
+} {
+  Function {initialize(RKRGUI *_rgui )} {open C return_type void
+  } {
+    code {m_rgui= _rgui;} {}
+  }
+  Fl_Box AB_Title {
+    label Rakarrack
+    xywh {56 4 259 41} labelfont 1 labelsize 40 labelcolor 7
+  }
+  Fl_Box AB_SubTitle {
+    label {Audio F/X}
+    xywh {121 39 130 22} labelfont 1 labelsize 16 labelcolor 7
+  }
+  Fl_Box About_Version {
+    xywh {69 60 233 15} labelsize 12 labelcolor 7 align 16
+  }
+  Fl_Box AB_url {
+    label {http://rakarrack.sourceforge.net}
+    xywh {68 77 234 22} labelfont 1 labelsize 13 labelcolor 6
+  }
+  Fl_Box AB_Authors {
+    label {Copyrigth Josep Andreu Ryan Billing Douglas McClendon Arnout Engelen <2007 - 2010>}
+    xywh {20 96 345 26} labelfont 1 labelsize 8 labelcolor 7 align 128
+  }
+  Fl_Box AB_A1 {
+    label {Code of some effects and structure based on ZynAddSubFx by Paul Nasca Octavian}
+    xywh {44 125 281 26} labelfont 1 labelsize 8 labelcolor 7 align 128
+  }
+  Fl_Box AB_A2 {
+    label {Code of Tuner taked from tuneit by Mario Lang}
+    xywh {66 172 240 15} labelfont 1 labelsize 8 labelcolor 7
+  }
+  Fl_Box AB_A3 {
+    label {Code of Compressor based in ArtsCompresor by Matthias Kretz & Stefan Westerfeld}
+    xywh {84 185 219 24} labelfont 1 labelsize 8 labelcolor 7 align 128
+  }
+  Fl_Button {} {
+    label LICENSE
+    callback {m_rgui->show_lic();}
+    xywh {48 215 92 16} labelsize 10
+  }
+  Fl_Button {} {
+    label OK
+    callback {hide();}
+    xywh {276 215 92 16} labelsize 10
+  }
+  Fl_Box AB_A4 {
+    label {Code of some effects based on swh-plugins LADSPA by Steve Harris}
+    xywh {64 151 250 20} labelfont 1 labelsize 8 labelcolor 7 align 128
+  }
+  decl {RKRGUI* m_rgui} {private local
+  }
+}
