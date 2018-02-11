@@ -161,18 +161,18 @@ void BankWindowGui::cb_CH_UB(Fl_Choice* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_CH_UB_i(o,v);
 }
 BankWindowGui::BankWindowGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Window(X, Y, W, H, L) {
+  : Fl_Double_Window(X, Y, W, H, L) {
   _BankWindowGui();
 }
 
 BankWindowGui::BankWindowGui(int W, int H, const char *L)
-  : Fl_Window(0, 0, W, H, L) {
+  : Fl_Double_Window(0, 0, W, H, L) {
   clear_flag(16);
   _BankWindowGui();
 }
 
 BankWindowGui::BankWindowGui()
-  : Fl_Window(0, 0, 800, 600, 0) {
+  : Fl_Double_Window(0, 0, 800, 600, 0) {
   clear_flag(16);
   _BankWindowGui();
 }

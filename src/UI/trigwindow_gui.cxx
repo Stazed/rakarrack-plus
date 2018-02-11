@@ -53,18 +53,18 @@ void TrigWindowGui::cb_aux_max(SliderW* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_max_i(o,v);
 }
 TrigWindowGui::TrigWindowGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Window(X, Y, W, H, L) {
+  : Fl_Double_Window(X, Y, W, H, L) {
   _TrigWindowGui();
 }
 
 TrigWindowGui::TrigWindowGui(int W, int H, const char *L)
-  : Fl_Window(0, 0, W, H, L) {
+  : Fl_Double_Window(0, 0, W, H, L) {
   clear_flag(16);
   _TrigWindowGui();
 }
 
 TrigWindowGui::TrigWindowGui()
-  : Fl_Window(0, 0, 205, 165, 0) {
+  : Fl_Double_Window(0, 0, 205, 165, 0) {
   clear_flag(16);
   _TrigWindowGui();
 }

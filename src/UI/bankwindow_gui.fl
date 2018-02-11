@@ -7,7 +7,7 @@ widget_class BankWindowGui {open selected
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
-  class Fl_Window size_range {640 480 3200 2400} visible
+  class Fl_Double_Window size_range {640 480 3200 2400} visible
 } {
   Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
   } {

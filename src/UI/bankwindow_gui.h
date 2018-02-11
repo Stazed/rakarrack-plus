@@ -3,7 +3,7 @@
 #ifndef bankwindow_gui_h
 #define bankwindow_gui_h
 #include <FL/Fl.H>
-#include <FL/Fl_Window.H>
+#include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Menu_Bar.H>
@@ -11,7 +11,7 @@
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Group.H>
 
-class BankWindowGui : public Fl_Window {
+class BankWindowGui : public Fl_Double_Window {
   void _BankWindowGui();
 public:
   BankWindowGui(int X, int Y, int W, int H, const char *L = 0);

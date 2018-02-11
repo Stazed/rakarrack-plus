@@ -6,7 +6,7 @@ widget_class TrigWindowGui {open selected
   xywh {902 567 205 165} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
-  class Fl_Window visible
+  class Fl_Double_Window visible
 } {
   Function {initialize(RKR *_rkr)} {open C return_type void
   } {
