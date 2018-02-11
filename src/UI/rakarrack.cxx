@@ -4001,7 +4001,7 @@ Fl_Double_Window* RKRGUI::make_window() {
     Principal->end();
     Principal->resizable(Principal);
   } // Fl_Double_Window* Principal
-  { BankWindow = new BankWindowGui(800, 600);
+  { BankWindowGui* o = BankWindow = new BankWindowGui(800, 600);
     BankWindow->box(FL_NO_BOX);
     BankWindow->color((Fl_Color)4);
     BankWindow->selection_color(FL_BACKGROUND2_COLOR);
@@ -4012,7 +4012,8 @@ Fl_Double_Window* RKRGUI::make_window() {
     BankWindow->callback((Fl_Callback*)cb_BankWindow2, (void*)(this));
     BankWindow->align(Fl_Align(FL_ALIGN_TOP));
     BankWindow->when(FL_WHEN_RELEASE);
-    BankWindow->hide();
+    o->initialize(rkr, this);
+    o->hide();
     BankWindow->size_range(640, 480, 3200, 2400);
     BankWindow->end();
     BankWindow->resizable(BankWindow);

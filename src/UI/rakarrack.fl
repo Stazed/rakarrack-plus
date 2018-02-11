@@ -2029,10 +2029,11 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_stat(1);
-o->hide();} open
+o->hide();} open selected
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
-      code1 {BankWindow->hide();}
+      code1 {o->initialize(rkr, this);}
+      code2 {o->hide();}
       class BankWindowGui size_range {640 480 3200 2400}
     } {}
     Fl_Window Order {
@@ -9565,7 +9566,7 @@ drag=1000;
                 free(elem);
         }} {}
   }
-  decl {void set_bank_made(int a_made) {made = a_made;}} {selected public local
+  decl {void set_bank_made(int a_made) {made = a_made;}} {public local
   }
   decl {int get_bank_made(){return made;}} {public local
   }

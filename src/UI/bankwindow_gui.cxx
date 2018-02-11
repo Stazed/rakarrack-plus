@@ -3,8 +3,8 @@
 #include "bankwindow_gui.h"
 
 void BankWindowGui::cb_NewB_i(Fl_Menu_*, void*) {
-  rkr->New_Bank();
-rgui->Put_Loaded_Bank();
+  m_rkr->New_Bank();
+m_rgui->Put_Loaded_Bank();
 redraw();
 }
 void BankWindowGui::cb_NewB(Fl_Menu_* o, void* v) {
@@ -14,17 +14,17 @@ void BankWindowGui::cb_NewB(Fl_Menu_* o, void* v) {
 void BankWindowGui::cb_Load_Bank_i(Fl_Menu_*, void*) {
   int ok;
 char *filename;
-rgui->is_modified();
+m_rgui->is_modified();
 filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
-ok=rkr->loadbank(filename);
+ok=m_rkr->loadbank(filename);
 if(ok) 
 {
-rgui->BankWin_Label(filename);
-rgui->Put_Loaded_Bank();
-rgui->AddBankName(filename);
-if(rkr->CheckOldBank(filename)==0)
+m_rgui->BankWin_Label(filename);
+m_rgui->Put_Loaded_Bank();
+m_rgui->AddBankName(filename);
+if(m_rkr->CheckOldBank(filename)==0)
 {
         char nombre[64];
         char *filepart;
@@ -40,7 +40,7 @@ void BankWindowGui::cb_Load_Bank(Fl_Menu_* o, void* v) {
 }
 
 void BankWindowGui::cb_Save_Bank_i(Fl_Menu_*, void*) {
-  rgui->MIDI->MIDI_LABEL->do_callback();
+  m_rgui->MIDI->MIDI_LABEL->do_callback();
 }
 void BankWindowGui::cb_Save_Bank(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Save_Bank_i(o,v);
@@ -50,19 +50,19 @@ void BankWindowGui::cb_Convert_Old_Bank_i(Fl_Menu_*, void*) {
   char *filename;
 char name[70];
 memset(name,0, sizeof(name));
-sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+sprintf(name,"%s %s",m_rkr->jackcliname, VERSION);
 
 filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 
-if(rkr->CheckOldBank(filename))
+if(m_rkr->CheckOldBank(filename))
 {
-rkr->ConvertOldFile(filename);
-rkr->Message(1,name, "Please, now try to load the new files");
+m_rkr->ConvertOldFile(filename);
+m_rkr->Message(1,name, "Please, now try to load the new files");
 }
 else
-rkr->Message(1, name, "This file has already the new format");
+m_rkr->Message(1, name, "This file has already the new format");
 }
 void BankWindowGui::cb_Convert_Old_Bank(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Convert_Old_Bank_i(o,v);
@@ -76,7 +76,7 @@ void BankWindowGui::cb_salirB(Fl_Menu_* o, void* v) {
 }
 
 void BankWindowGui::cb_ContenidoB_i(Fl_Menu_*, void*) {
-  rgui->show_help();
+  m_rgui->show_help();
 }
 void BankWindowGui::cb_ContenidoB(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_ContenidoB_i(o,v);
@@ -88,9 +88,9 @@ void BankWindowGui::cb_Acerca_deB_i(Fl_Menu_*, void*) {
 x = this->x()+((w()-420)/2);
 y = this->y()+((h()-230)/2);
 
-rgui->AboutWin->position(x,y);
-rgui->AboutWin->show();
-rgui->put_icon(rgui->AboutWin);
+m_rgui->AboutWin->position(x,y);
+m_rgui->AboutWin->show();
+m_rgui->put_icon(m_rgui->AboutWin);
 }
 void BankWindowGui::cb_Acerca_deB(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Acerca_deB_i(o,v);
@@ -121,40 +121,40 @@ Fl_Menu_Item* BankWindowGui::ContenidoB = BankWindowGui::menu_MenuB + 8;
 Fl_Menu_Item* BankWindowGui::Acerca_deB = BankWindowGui::menu_MenuB + 9;
 
 void BankWindowGui::cb_B_B1_i(Fl_Button*, void*) {
-  rgui->L_B1->do_callback();
+  m_rgui->L_B1->do_callback();
 }
 void BankWindowGui::cb_B_B1(Fl_Button* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_B_B1_i(o,v);
 }
 
 void BankWindowGui::cb_B_B2_i(Fl_Button*, void*) {
-  rgui->L_B2->do_callback();
+  m_rgui->L_B2->do_callback();
 }
 void BankWindowGui::cb_B_B2(Fl_Button* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_B_B2_i(o,v);
 }
 
 void BankWindowGui::cb_B_B3_i(Fl_Button*, void*) {
-  rgui->L_B3->do_callback();
+  m_rgui->L_B3->do_callback();
 }
 void BankWindowGui::cb_B_B3(Fl_Button* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_B_B3_i(o,v);
 }
 
 void BankWindowGui::cb_B_B4_i(Fl_Button*, void*) {
-  rgui->L_B4->do_callback();
+  m_rgui->L_B4->do_callback();
 }
 void BankWindowGui::cb_B_B4(Fl_Button* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_B_B4_i(o,v);
 }
 
 void BankWindowGui::cb_CH_UB_i(Fl_Choice*, void* v) {
-  int ok=rkr->loadbank((char *)v);
+  int ok=m_rkr->loadbank((char *)v);
 if(ok) 
 {
-rgui->BankWin_Label((char *)v);
-rgui->Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+m_rgui->BankWin_Label((char *)v);
+m_rgui->Put_Loaded_Bank();
+unlight_preset(m_rkr->Selected_Preset);
 };
 }
 void BankWindowGui::cb_CH_UB(Fl_Choice* o, void* v) {
@@ -230,8 +230,15 @@ this->when(FL_WHEN_RELEASE);
   ob->labelsize(18);
   ob->end();
 } // Fl_Group* ob
+this->m_rkr = NULL;
+this->m_rgui = NULL;
 end();
 resizable(this);
+}
+
+void BankWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui ) {
+  m_rkr = _rkr;
+  m_rgui= _rgui;
 }
 
 void BankWindowGui::set_bank_CH_UB(char* nombre, char* nombank) {
@@ -265,7 +272,7 @@ void BankWindowGui::make_window_banks() {
   for (j=1; j<5; j++)
   {
      
-       Fl_Button* butX = new Fl_Button(x+1, y+1, elw,elh,rkr->Bank[num].Preset_Name);
+       Fl_Button* butX = new Fl_Button(x+1, y+1, elw,elh,m_rkr->Bank[num].Preset_Name);
         butX->type(0);
         butX->color(fore_color);
         butX->box(FL_UP_BOX);
@@ -276,7 +283,7 @@ void BankWindowGui::make_window_banks() {
         butX->user_data((void*) (num));
         butX->value(0);
         butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
-        butX->callback((Fl_Callback *)rgui->preset_click);
+        butX->callback((Fl_Callback *)m_rgui->preset_click);
         ob->add(butX);
   
   x +=elw+4;
@@ -289,7 +296,7 @@ void BankWindowGui::make_window_banks() {
   
   
   ob->end();
-  rgui->set_bank_made(1);
+  m_rgui->set_bank_made(1);
   
   B_B1->color(fore_color);
   B_B2->color(fore_color);
@@ -297,11 +304,11 @@ void BankWindowGui::make_window_banks() {
   B_B4->color(fore_color);
   CH_UB->color(fore_color);
   
-  light_preset(rkr->Selected_Preset);
+  light_preset(m_rkr->Selected_Preset);
 }
 
 void BankWindowGui::light_preset(int npreset) {
-  if((rgui == NULL) ||(!rgui->get_bank_made())) return;
+  if((m_rgui == NULL) ||(!m_rgui->get_bank_made())) return;
   
   for (int t=0; t<ob->children();t++)
     {
@@ -317,7 +324,7 @@ void BankWindowGui::light_preset(int npreset) {
 }
 
 void BankWindowGui::unlight_preset(int npreset) {
-  if((rgui == NULL) ||(!rgui->get_bank_made())) return;
+  if((m_rgui == NULL) ||(!m_rgui->get_bank_made())) return;
   
   for (int t=0; t<ob->children();t++)
     {

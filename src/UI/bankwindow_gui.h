@@ -83,6 +83,11 @@ private:
   static void cb_CH_UB(Fl_Choice*, void*);
 public:
   Fl_Group *ob;
+private:
+  RKR* m_rkr; 
+  RKRGUI* m_rgui; 
+public:
+  void initialize(RKR *_rkr,RKRGUI *_rgui );
   void set_bank_CH_UB(char* nombre, char* nombank);
   void make_window_banks();
   void light_preset(int npreset);

@@ -5,8 +5,15 @@ code_name {.cxx}
 widget_class BankWindowGui {open
   xywh {942 400 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
   code0 {\#include "rakarrack.h"}
+  code1 {this->m_rkr = NULL;}
+  code2 {this->m_rgui = NULL;}
   class Fl_Window size_range {640 480 3200 2400}
 } {
+  Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
+  } {
+    code {m_rkr = _rkr;
+m_rgui= _rgui;} {}
+  }
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
@@ -19,8 +26,8 @@ widget_class BankWindowGui {open
     } {
       MenuItem NewB {
         label {&New}
-        callback {rkr->New_Bank();
-rgui->Put_Loaded_Bank();
+        callback {m_rkr->New_Bank();
+m_rgui->Put_Loaded_Bank();
 redraw();}
         xywh {0 0 45 26} divider
       }
@@ -28,17 +35,17 @@ redraw();}
         label {&Load Bank}
         callback {int ok;
 char *filename;
-rgui->is_modified();
+m_rgui->is_modified();
 filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
-ok=rkr->loadbank(filename);
+ok=m_rkr->loadbank(filename);
 if(ok) 
 {
-rgui->BankWin_Label(filename);
-rgui->Put_Loaded_Bank();
-rgui->AddBankName(filename);
-if(rkr->CheckOldBank(filename)==0)
+m_rgui->BankWin_Label(filename);
+m_rgui->Put_Loaded_Bank();
+m_rgui->AddBankName(filename);
+if(m_rkr->CheckOldBank(filename)==0)
 {
         char nombre[64];
         char *filepart;
@@ -52,7 +59,7 @@ if(rkr->CheckOldBank(filename)==0)
       }
       MenuItem Save_Bank {
         label {&Save Bank}
-        callback {rgui->MIDI->MIDI_LABEL->do_callback();}
+        callback {m_rgui->MIDI->MIDI_LABEL->do_callback();}
         xywh {10 10 45 26} divider
       }
       MenuItem Convert_Old_Bank {
@@ -60,19 +67,19 @@ if(rkr->CheckOldBank(filename)==0)
         callback {char *filename;
 char name[70];
 memset(name,0, sizeof(name));
-sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+sprintf(name,"%s %s",m_rkr->jackcliname, VERSION);
 
 filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 
-if(rkr->CheckOldBank(filename))
+if(m_rkr->CheckOldBank(filename))
 {
-rkr->ConvertOldFile(filename);
-rkr->Message(1,name, "Please, now try to load the new files");
+m_rkr->ConvertOldFile(filename);
+m_rkr->Message(1,name, "Please, now try to load the new files");
 }
 else
-rkr->Message(1, name, "This file has already the new format");}
+m_rkr->Message(1, name, "This file has already the new format");}
         xywh {0 0 36 21} divider
       }
       MenuItem salirB {
@@ -87,7 +94,7 @@ rkr->Message(1, name, "This file has already the new format");}
     } {
       MenuItem ContenidoB {
         label {Help &Contents}
-        callback {rgui->show_help();}
+        callback {m_rgui->show_help();}
         xywh {10 10 100 20} shortcut 0xffbe labelcolor 7
       }
       MenuItem Acerca_deB {
@@ -97,9 +104,9 @@ rkr->Message(1, name, "This file has already the new format");}
 x = this->x()+((w()-420)/2);
 y = this->y()+((h()-230)/2);
 
-rgui->AboutWin->position(x,y);
-rgui->AboutWin->show();
-rgui->put_icon(rgui->AboutWin);}
+m_rgui->AboutWin->position(x,y);
+m_rgui->AboutWin->show();
+m_rgui->put_icon(m_rgui->AboutWin);}
         xywh {10 10 100 20} labelcolor 7
       }
     }
@@ -107,35 +114,35 @@ rgui->put_icon(rgui->AboutWin);}
   Fl_Button B_B1 {
     label 1
     user_data 77
-    callback {rgui->L_B1->do_callback();}
+    callback {m_rgui->L_B1->do_callback();}
     xywh {258 14 32 24} color 62 labelsize 10
   }
   Fl_Button B_B2 {
     label 2
     user_data 77
-    callback {rgui->L_B2->do_callback();}
+    callback {m_rgui->L_B2->do_callback();}
     xywh {298 14 32 24} color 62 labelsize 10
   }
   Fl_Button B_B3 {
     label 3
     user_data 77
-    callback {rgui->L_B3->do_callback();}
+    callback {m_rgui->L_B3->do_callback();}
     xywh {338 14 32 24} color 62 labelsize 10
   }
   Fl_Button B_B4 {
     label U
     user_data 77
-    callback {rgui->L_B4->do_callback();}
+    callback {m_rgui->L_B4->do_callback();}
     xywh {378 14 32 24} color 62 labelsize 10
   }
   Fl_Choice CH_UB {
     label {User Banks       }
-    callback {int ok=rkr->loadbank((char *)v);
+    callback {int ok=m_rkr->loadbank((char *)v);
 if(ok) 
 {
-rgui->BankWin_Label((char *)v);
-rgui->Put_Loaded_Bank();
-unlight_preset(rkr->Selected_Preset);
+m_rgui->BankWin_Label((char *)v);
+m_rgui->Put_Loaded_Bank();
+unlight_preset(m_rkr->Selected_Preset);
 }} open
     xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
   } {}
@@ -173,7 +180,7 @@ y +=elh+2;
 for (j=1; j<5; j++)
 {
    
-     Fl_Button* butX = new Fl_Button(x+1, y+1, elw,elh,rkr->Bank[num].Preset_Name);
+     Fl_Button* butX = new Fl_Button(x+1, y+1, elw,elh,m_rkr->Bank[num].Preset_Name);
       butX->type(0);
       butX->color(fore_color);
       butX->box(FL_UP_BOX);
@@ -184,7 +191,7 @@ for (j=1; j<5; j++)
       butX->user_data((void*) (num));
       butX->value(0);
       butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
-      butX->callback((Fl_Callback *)rgui->preset_click);
+      butX->callback((Fl_Callback *)m_rgui->preset_click);
       ob->add(butX);
 
 x +=elw+4;
@@ -197,7 +204,7 @@ num++;
 
 
 ob->end();
-rgui->set_bank_made(1);
+m_rgui->set_bank_made(1);
 
 B_B1->color(fore_color);
 B_B2->color(fore_color);
@@ -205,11 +212,10 @@ B_B3->color(fore_color);
 B_B4->color(fore_color);
 CH_UB->color(fore_color);
 
-light_preset(rkr->Selected_Preset);} {selected
-    }
+light_preset(m_rkr->Selected_Preset);} {}
   }
   Function {light_preset(int npreset)} {} {
-    code {if((rgui == NULL) ||(!rgui->get_bank_made())) return;
+    code {if((m_rgui == NULL) ||(!m_rgui->get_bank_made())) return;
 
 for (int t=0; t<ob->children();t++)
   {
@@ -224,7 +230,7 @@ for (int t=0; t<ob->children();t++)
   }} {}
   }
   Function {unlight_preset(int npreset)} {} {
-    code {if((rgui == NULL) ||(!rgui->get_bank_made())) return;
+    code {if((m_rgui == NULL) ||(!m_rgui->get_bank_made())) return;
 
 for (int t=0; t<ob->children();t++)
   {
@@ -237,5 +243,9 @@ for (int t=0; t<ob->children();t++)
      }
   
   }} {}
+  }
+  decl {RKR* m_rkr} {private local
+  }
+  decl {RKRGUI* m_rgui} {selected private local
   }
 }
