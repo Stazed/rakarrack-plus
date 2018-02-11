@@ -3,7 +3,7 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class OrderWindowGui {open selected
-  xywh {668 447 500 400} type Double color 4 resizable
+  xywh {757 626 500 400} type Double color 4 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -15,15 +15,15 @@ widget_class OrderWindowGui {open selected
 m_rgui= _rgui;} {}
   }
   Fl_Box Fondo1 {
-    xywh {21 21 600 400}
+    xywh {1 1 600 400}
   }
   Fl_Box O_TITLE {
     label {Put Order in your Rack}
-    xywh {45 23 438 37} labelfont 1 labelsize 33 labelcolor 7
+    xywh {25 3 438 37} labelfont 1 labelsize 33 labelcolor 7
   }
   Fl_Browser Avail_Bro {
     user_data 99
-    xywh {35 70 175 225} type Hold labelsize 18 textsize 18 textcolor 7
+    xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
   }
   Fl_Button Pon {
     label {@<->}
@@ -40,10 +40,10 @@ Order_Bro->remove(i+1);
 Order_Bro->select(1);
 m_rkr->new_order[i-1]=m_rkr->availables[j];
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-    xywh {220 165 50 25} labelsize 18
+    xywh {200 145 50 25} labelsize 18
   }
   Fl_Browser Order_Bro {
-    xywh {280 70 175 225} type Hold labelsize 18 textsize 18 textcolor 7
+    xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
   }
   Fl_Button Sube {
     label {@$2->}
@@ -63,7 +63,7 @@ x1=m_rkr->new_order[i-1];
 m_rkr->new_order[i]=x1;
 m_rkr->new_order[i-1]=x;
 }}
-    xywh {462 140 50 25} labelsize 18
+    xywh {442 120 50 25} labelsize 18
   }
   Fl_Button Baja {
     label {@$8->}
@@ -83,70 +83,70 @@ x1=m_rkr->new_order[i+1];
 m_rkr->new_order[i]=x1;
 m_rkr->new_order[i+1]=x;
 }}
-    xywh {462 180 50 25} labelsize 18
+    xywh {442 160 50 25} labelsize 18
   }
   Fl_Group Filters {
-    xywh {35 300 180 110}
+    xywh {15 280 180 110}
   } {
     Fl_Button Fil0 {
       label All
       callback {m_rkr->eff_filter=0;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {35 304 177 15} type Radio labelsize 10 when 1
+      xywh {15 284 177 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil1 {
       label Distortion
       callback {m_rkr->eff_filter=1;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {125 324 86 15} type Radio labelsize 10 when 1
+      xywh {105 304 86 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil2 {
       label Modulation
       callback {m_rkr->eff_filter=2;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {35 324 78 15} type Radio labelsize 10 when 1
+      xywh {15 304 78 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil4 {
       label Time
       callback {m_rkr->eff_filter=4;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {125 345 86 15} type Radio labelsize 10 when 1
+      xywh {105 325 86 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil8 {
       label Emulation
       callback {m_rkr->eff_filter=8;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {35 344 78 15} type Radio labelsize 10 when 1
+      xywh {15 324 78 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil16 {
       label Filters
       callback {m_rkr->eff_filter=16;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {125 365 86 15} type Radio labelsize 10 when 1
+      xywh {105 345 86 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil32 {
       label Dynamics
       callback {m_rkr->eff_filter=32;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {35 364 78 15} type Radio labelsize 10 when 1
+      xywh {15 344 78 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil64 {
       label {Processing && EQ}
       callback {m_rkr->eff_filter=64;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {125 385 86 15} type Radio labelsize 10 when 1
+      xywh {105 365 86 15} type Radio labelsize 10 when 1
     }
     Fl_Button Fil128 {
       label Synthesis
       callback {m_rkr->eff_filter=128;
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
-      xywh {35 385 78 15} type Radio labelsize 10 when 1
+      xywh {15 365 78 15} type Radio labelsize 10 when 1
     }
   }
   Fl_Check_Button Order_DeacHide {
     label {Hide Unused Effect Widgets}
     callback {m_rkr->deachide=(int) o->value();}
-    xywh {440 306 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+    xywh {420 286 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
   }
   Fl_Button ok_order {
     label Ok
@@ -154,14 +154,14 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
 for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->new_order[i];
 m_rgui->reordena();
 do_callback();}
-    xywh {353 369 72 26}
+    xywh {333 349 72 26}
   }
   Fl_Button Cancel_order {
     label Cancel
     callback {int i;
 for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->saved_order[i];
 do_callback();}
-    xywh {435 369 72 26}
+    xywh {415 349 72 26}
   }
   decl {RKR* m_rkr} {private local
   }

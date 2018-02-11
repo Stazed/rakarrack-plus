@@ -189,88 +189,88 @@ this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
 this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
-{ Fondo1 = new Fl_Box(21, 21, 600, 400);
+{ Fondo1 = new Fl_Box(1, 1, 600, 400);
 } // Fl_Box* Fondo1
-{ O_TITLE = new Fl_Box(45, 23, 438, 37, "Put Order in your Rack");
+{ O_TITLE = new Fl_Box(25, 3, 438, 37, "Put Order in your Rack");
   O_TITLE->labelfont(1);
   O_TITLE->labelsize(33);
   O_TITLE->labelcolor(FL_BACKGROUND2_COLOR);
 } // Fl_Box* O_TITLE
-{ Avail_Bro = new Fl_Browser(35, 70, 175, 225);
+{ Avail_Bro = new Fl_Browser(15, 50, 175, 225);
   Avail_Bro->type(2);
   Avail_Bro->labelsize(18);
   Avail_Bro->textsize(18);
   Avail_Bro->textcolor(FL_BACKGROUND2_COLOR);
   Avail_Bro->user_data((void*)(99));
 } // Fl_Browser* Avail_Bro
-{ Pon = new Fl_Button(220, 165, 50, 25, "@<->");
+{ Pon = new Fl_Button(200, 145, 50, 25, "@<->");
   Pon->labelsize(18);
   Pon->callback((Fl_Callback*)cb_Pon);
 } // Fl_Button* Pon
-{ Order_Bro = new Fl_Browser(280, 70, 175, 225);
+{ Order_Bro = new Fl_Browser(260, 50, 175, 225);
   Order_Bro->type(2);
   Order_Bro->labelsize(18);
   Order_Bro->textsize(18);
   Order_Bro->textcolor(FL_BACKGROUND2_COLOR);
 } // Fl_Browser* Order_Bro
-{ Sube = new Fl_Button(462, 140, 50, 25, "@$2->");
+{ Sube = new Fl_Button(442, 120, 50, 25, "@$2->");
   Sube->labelsize(18);
   Sube->callback((Fl_Callback*)cb_Sube);
 } // Fl_Button* Sube
-{ Baja = new Fl_Button(462, 180, 50, 25, "@$8->");
+{ Baja = new Fl_Button(442, 160, 50, 25, "@$8->");
   Baja->labelsize(18);
   Baja->callback((Fl_Callback*)cb_Baja);
 } // Fl_Button* Baja
-{ Filters = new Fl_Group(35, 300, 180, 110);
-  { Fil0 = new Fl_Button(35, 304, 177, 15, "All");
+{ Filters = new Fl_Group(15, 280, 180, 110);
+  { Fil0 = new Fl_Button(15, 284, 177, 15, "All");
     Fil0->type(102);
     Fil0->labelsize(10);
     Fil0->callback((Fl_Callback*)cb_Fil0);
     Fil0->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil0
-  { Fil1 = new Fl_Button(125, 324, 86, 15, "Distortion");
+  { Fil1 = new Fl_Button(105, 304, 86, 15, "Distortion");
     Fil1->type(102);
     Fil1->labelsize(10);
     Fil1->callback((Fl_Callback*)cb_Fil1);
     Fil1->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil1
-  { Fil2 = new Fl_Button(35, 324, 78, 15, "Modulation");
+  { Fil2 = new Fl_Button(15, 304, 78, 15, "Modulation");
     Fil2->type(102);
     Fil2->labelsize(10);
     Fil2->callback((Fl_Callback*)cb_Fil2);
     Fil2->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil2
-  { Fil4 = new Fl_Button(125, 345, 86, 15, "Time");
+  { Fil4 = new Fl_Button(105, 325, 86, 15, "Time");
     Fil4->type(102);
     Fil4->labelsize(10);
     Fil4->callback((Fl_Callback*)cb_Fil4);
     Fil4->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil4
-  { Fil8 = new Fl_Button(35, 344, 78, 15, "Emulation");
+  { Fil8 = new Fl_Button(15, 324, 78, 15, "Emulation");
     Fil8->type(102);
     Fil8->labelsize(10);
     Fil8->callback((Fl_Callback*)cb_Fil8);
     Fil8->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil8
-  { Fil16 = new Fl_Button(125, 365, 86, 15, "Filters");
+  { Fil16 = new Fl_Button(105, 345, 86, 15, "Filters");
     Fil16->type(102);
     Fil16->labelsize(10);
     Fil16->callback((Fl_Callback*)cb_Fil16);
     Fil16->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil16
-  { Fil32 = new Fl_Button(35, 364, 78, 15, "Dynamics");
+  { Fil32 = new Fl_Button(15, 344, 78, 15, "Dynamics");
     Fil32->type(102);
     Fil32->labelsize(10);
     Fil32->callback((Fl_Callback*)cb_Fil32);
     Fil32->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil32
-  { Fil64 = new Fl_Button(125, 385, 86, 15, "Processing && EQ");
+  { Fil64 = new Fl_Button(105, 365, 86, 15, "Processing && EQ");
     Fil64->type(102);
     Fil64->labelsize(10);
     Fil64->callback((Fl_Callback*)cb_Fil64);
     Fil64->when(FL_WHEN_CHANGED);
   } // Fl_Button* Fil64
-  { Fil128 = new Fl_Button(35, 385, 78, 15, "Synthesis");
+  { Fil128 = new Fl_Button(15, 365, 78, 15, "Synthesis");
     Fil128->type(102);
     Fil128->labelsize(10);
     Fil128->callback((Fl_Callback*)cb_Fil128);
@@ -278,17 +278,17 @@ this->when(FL_WHEN_RELEASE);
   } // Fl_Button* Fil128
   Filters->end();
 } // Fl_Group* Filters
-{ Order_DeacHide = new Fl_Check_Button(440, 306, 23, 20, "Hide Unused Effect Widgets");
+{ Order_DeacHide = new Fl_Check_Button(420, 286, 23, 20, "Hide Unused Effect Widgets");
   Order_DeacHide->down_box(FL_DOWN_BOX);
   Order_DeacHide->labelsize(11);
   Order_DeacHide->labelcolor(FL_BACKGROUND2_COLOR);
   Order_DeacHide->callback((Fl_Callback*)cb_Order_DeacHide);
   Order_DeacHide->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Check_Button* Order_DeacHide
-{ ok_order = new Fl_Button(353, 369, 72, 26, "Ok");
+{ ok_order = new Fl_Button(333, 349, 72, 26, "Ok");
   ok_order->callback((Fl_Callback*)cb_ok_order);
 } // Fl_Button* ok_order
-{ Cancel_order = new Fl_Button(435, 369, 72, 26, "Cancel");
+{ Cancel_order = new Fl_Button(415, 349, 72, 26, "Cancel");
   Cancel_order->callback((Fl_Callback*)cb_Cancel_order);
 } // Fl_Button* Cancel_order
 this->m_rkr = NULL;
