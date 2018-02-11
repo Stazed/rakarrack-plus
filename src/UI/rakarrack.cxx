@@ -3681,7 +3681,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       } // Fl_Box* LABEL_IO
       InOut->end();
     } // Fl_Group* InOut
-    { MIDI = new MidiGui(520, 85, 276, 52);
+    { MidiGui* o = MIDI = new MidiGui(520, 85, 276, 52);
       MIDI->box(FL_UP_BOX);
       MIDI->color(FL_FOREGROUND_COLOR);
       MIDI->selection_color(FL_FOREGROUND_COLOR);
@@ -3693,6 +3693,7 @@ Fl_Double_Window* RKRGUI::make_window() {
       MIDI->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MIDI->when(FL_WHEN_RELEASE);
       MIDI->hide();
+      o->initialize(rkr, this);
       MIDI->end();
     } // MidiGui* MIDI
     { Metro = new Fl_Group(520, 85, 276, 52);

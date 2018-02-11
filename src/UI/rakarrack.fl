@@ -279,7 +279,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open
       xywh {153 141 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1502,9 +1502,10 @@ rkr->calculavol(2);}
         }
       }
       Fl_Group MIDI {
-        user_data 1
+        user_data 1 selected
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112 hide
         code0 {\#include "midiconv_gui.h"}
+        code1 {o->initialize(rkr, this);}
         class MidiGui
       } {}
       Fl_Group Metro {
@@ -2029,7 +2030,7 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_stat(1);
-o->hide();} open selected
+o->hide();} open
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
       code1 {o->initialize(rkr, this);}

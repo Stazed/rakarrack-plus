@@ -4,20 +4,20 @@
 
 void MidiGui::cb_midi_activar_i(Fl_Light_Button* o, void*) {
   if ((int)o->value()==0)
-{ 
-rkr->efx_MIDIConverter->panic();
-  Mled->color(fl_darker(FL_RED));
-  Mled->redraw();
-}
+  { 
+    m_rkr->efx_MIDIConverter->panic();
+    Mled->color(fl_darker(FL_RED));
+    Mled->redraw();
+  }
 
 
-rkr->MIDIConverter_Bypass=(int)o->value();
-Midi_out_Counter->do_callback();
+  m_rkr->MIDIConverter_Bypass=(int)o->value();
+  Midi_out_Counter->do_callback();
 
-if(rgui != NULL)
-  rgui->ChangeActives();
+  if(m_rgui != NULL)
+    m_rgui->ChangeActives();
 
-MIDI_LABEL->redraw_label();
+  MIDI_LABEL->redraw_label();
 }
 void MidiGui::cb_midi_activar(Fl_Light_Button* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_midi_activar_i(o,v);
@@ -27,24 +27,24 @@ void MidiGui::cb_MIDIOctave_i(Fl_Choice* o, void*) {
   switch((int)o->value())
 {
   case 0:
-  rkr->efx_MIDIConverter->changepar(4,-2);
+  m_rkr->efx_MIDIConverter->changepar(4,-2);
   break;
   
   case 1:
-  rkr->efx_MIDIConverter->changepar(4,-1);
+  m_rkr->efx_MIDIConverter->changepar(4,-1);
   break;
 
   case 2:
-  rkr->efx_MIDIConverter->changepar(4,0);
+  m_rkr->efx_MIDIConverter->changepar(4,0);
   break;
 
   case 3:
-  rkr->efx_MIDIConverter->changepar(4,1);
+  m_rkr->efx_MIDIConverter->changepar(4,1);
 
   break;
 
   case 4:
-  rkr->efx_MIDIConverter->changepar(4,2);
+  m_rkr->efx_MIDIConverter->changepar(4,2);
   break;
 
 };
@@ -63,28 +63,28 @@ Fl_Menu_Item MidiGui::menu_MIDIOctave[] = {
 };
 
 void MidiGui::cb_Midi_out_Counter_i(Fl_Counter* o, void*) {
-  rkr->efx_MIDIConverter->changepar(3, (int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());
 }
 void MidiGui::cb_Midi_out_Counter(Fl_Counter* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Midi_out_Counter_i(o,v);
 }
 
 void MidiGui::cb_Use_FFT_i(Fl_Check_Button* o, void*) {
-  rkr->efx_MIDIConverter->changepar(5, (int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(5, (int)o->value());
 }
 void MidiGui::cb_Use_FFT(Fl_Check_Button* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Use_FFT_i(o,v);
 }
 
 void MidiGui::cb_Trig_Adj_i(SliderW* o, void*) {
-  rkr->efx_MIDIConverter->changepar(1,(int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(1,(int)o->value());
 }
 void MidiGui::cb_Trig_Adj(SliderW* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Trig_Adj_i(o,v);
 }
 
 void MidiGui::cb_Vel_Adj_i(SliderW* o, void*) {
-  rkr->efx_MIDIConverter->changepar(2,(int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());
 }
 void MidiGui::cb_Vel_Adj(SliderW* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Vel_Adj_i(o,v);
@@ -95,17 +95,17 @@ void MidiGui::cb_MIDI_LABEL_i(Fl_Box*, void*) {
 char *filename;
 
 #define EXT ".rkrb"
-filename=fl_file_chooser("Save Bank File:","(*" EXT")",rkr->Bank_Saved,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
+  filename=fl_file_chooser("Save Bank File:","(*" EXT")",m_rkr->Bank_Saved,0);
+  if (filename==NULL) return;
+  filename=fl_filename_setext(filename,EXT);
 #undef EXT
-ok=rkr->savebank(filename);
-if (ok)
-{
-strcpy(rkr->Bank_Saved,filename);
-if(rgui != NULL)
-  rgui->BankWin_Label(filename);
-};
+  ok=m_rkr->savebank(filename);
+  if (ok)
+  {
+   strcpy(m_rkr->Bank_Saved,filename);
+   if(m_rgui != NULL)
+   m_rgui->BankWin_Label(filename);
+  };
 }
 void MidiGui::cb_MIDI_LABEL(Fl_Box* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_MIDI_LABEL_i(o,v);
@@ -201,6 +201,12 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL, (void*)(7));
   MIDI_LABEL->when(FL_WHEN_NEVER);
 } // Fl_Box* MIDI_LABEL
+this->m_rgui = NULL; this->m_rkr = NULL;
 position(X, Y);
 end();
+}
+
+void MidiGui::initialize(RKR* _rkr, RKRGUI* _rgui) {
+  m_rkr = _rkr;
+  m_rgui= _rgui;
 }
