@@ -89,27 +89,6 @@ void MidiGui::cb_Vel_Adj_i(SliderW* o, void*) {
 void MidiGui::cb_Vel_Adj(SliderW* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Vel_Adj_i(o,v);
 }
-
-void MidiGui::cb_MIDI_LABEL_i(Fl_Box*, void*) {
-  int ok;
-char *filename;
-
-#define EXT ".rkrb"
-  filename=fl_file_chooser("Save Bank File:","(*" EXT")",m_rkr->Bank_Saved,0);
-  if (filename==NULL) return;
-  filename=fl_filename_setext(filename,EXT);
-#undef EXT
-  ok=m_rkr->savebank(filename);
-  if (ok)
-  {
-   strcpy(m_rkr->Bank_Saved,filename);
-   if(m_rgui != NULL)
-   m_rgui->BankWin_Label(filename);
-  };
-}
-void MidiGui::cb_MIDI_LABEL(Fl_Box* o, void* v) {
-  ((MidiGui*)(o->parent()))->cb_MIDI_LABEL_i(o,v);
-}
 MidiGui::MidiGui(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
@@ -198,7 +177,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
 { MIDI_LABEL = new Fl_Box(4, 32, 44, 14, "MIDI");
   MIDI_LABEL->labelfont(1);
   MIDI_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-  MIDI_LABEL->callback((Fl_Callback*)cb_MIDI_LABEL, (void*)(7));
+  MIDI_LABEL->user_data((void*)(7));
   MIDI_LABEL->when(FL_WHEN_NEVER);
 } // Fl_Box* MIDI_LABEL
 this->m_rgui = NULL; this->m_rkr = NULL;

@@ -1025,5 +1025,7 @@ public:
   void ClearBankNames();
   void set_bank_made(int a_made) {made = a_made;}; 
   int get_bank_made(){return made;}; 
+  char * get_bank_file();
+  void set_save_file();
 };
 #endif

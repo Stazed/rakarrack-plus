@@ -12,18 +12,10 @@ void BankWindowGui::cb_NewB(Fl_Menu_* o, void* v) {
 }
 
 void BankWindowGui::cb_Load_Bank_i(Fl_Menu_*, void*) {
-  int ok;
-char *filename;
-m_rgui->is_modified();
-filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-ok=m_rkr->loadbank(filename);
-if(ok) 
-{
-m_rgui->BankWin_Label(filename);
-m_rgui->Put_Loaded_Bank();
-m_rgui->AddBankName(filename);
+  char *filename =  m_rgui->get_bank_file();
+if(filename == 0)
+  return;
+
 if(m_rkr->CheckOldBank(filename)==0)
 {
         char nombre[64];
@@ -32,7 +24,6 @@ if(m_rkr->CheckOldBank(filename)==0)
         filepart = strrchr(filename,'/')+1;
         strncpy(nombre,filepart,strlen(filepart)-5);
         CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
-}
 };
 }
 void BankWindowGui::cb_Load_Bank(Fl_Menu_* o, void* v) {
@@ -40,7 +31,7 @@ void BankWindowGui::cb_Load_Bank(Fl_Menu_* o, void* v) {
 }
 
 void BankWindowGui::cb_Save_Bank_i(Fl_Menu_*, void*) {
-  m_rgui->MIDI->MIDI_LABEL->do_callback();
+  m_rgui->set_save_file();
 }
 void BankWindowGui::cb_Save_Bank(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Save_Bank_i(o,v);

@@ -50,8 +50,6 @@ public:
   Fl_Box *Mled;
   Fl_Box *MIDI_LABEL;
 private:
-  inline void cb_MIDI_LABEL_i(Fl_Box*, void*);
-  static void cb_MIDI_LABEL(Fl_Box*, void*);
   RKR  *m_rkr; 
   RKRGUI *m_rgui; 
 public:

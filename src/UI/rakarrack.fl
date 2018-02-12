@@ -291,17 +291,17 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open selected
-      xywh {129 215 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;} open
+      xywh {153 187 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File}
+          label {&File} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -321,12 +321,12 @@ Pexitprogram=1;} open selected
           }
           MenuItem {BankWindow->Load_Bank_M} {
             label {Load &Bank}
-            callback {BankWindow->Load_Bank->do_callback(o);}
+            callback {get_bank_file();}
             xywh {0 0 45 26}
           }
           MenuItem {BankWindow->Save_Bank_M} {
             label {Save B&ank}
-            callback {BankWindow->Save_Bank->do_callback(o);}
+            callback {set_save_file();}
             xywh {0 0 45 26} divider
           }
           MenuItem Load_Skin {
@@ -416,7 +416,7 @@ Show_Next_Time();}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings} open
+          label {&Settings}
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -470,7 +470,7 @@ rkr->ACI_Bypass = 0;
           }
         }
         Submenu Ayuda {
-          label {&Help} open
+          label {&Help}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Contenido {
@@ -5437,7 +5437,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
 
 Font_Bro->value(rkr->font+1);} {}
   }
-  Function {BankWin_Label(char *filename)} {} {
+  Function {BankWin_Label(char *filename)} {open
+  } {
     code {char tmp[256];
 
 
@@ -5445,7 +5446,8 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%s   v%s - Bank Manager - %s",rkr->jackcliname,VERSION,fl_filename_name(filename));
 BankWindow->copy_label(tmp);} {}
   }
-  Function {is_modified()} {} {
+  Function {is_modified()} {open
+  } {
     code {int ok;
 
 
@@ -5467,7 +5469,7 @@ if (rkr->modified)
           break;
 
         case 1: 
-          MIDI->MIDI_LABEL->do_callback();
+          set_save_file();
           break;  
 
     }
@@ -9105,5 +9107,40 @@ drag=1000;
   decl {void set_bank_made(int a_made) {made = a_made;}} {public local
   }
   decl {int get_bank_made(){return made;}} {public local
+  }
+  Function {get_bank_file()} {open C return_type {char *}
+  } {
+    code {int ok;
+char *filename;
+is_modified();
+filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
+if (filename==NULL) return 0;
+filename=fl_filename_setext(filename,".rkrb");
+ok=rkr->loadbank(filename);
+if(ok) 
+{
+  BankWin_Label(filename);
+  Put_Loaded_Bank();
+  AddBankName(filename);
+}
+
+return filename;} {}
+  }
+  Function {set_save_file()} {open selected return_type void
+  } {
+    code {int ok;
+char *filename;
+
+\#define EXT ".rkrb"
+  filename=fl_file_chooser("Save Bank File:","(*" EXT")",rkr->Bank_Saved,0);
+  if (filename==NULL) return;
+  filename=fl_filename_setext(filename,EXT);
+\#undef EXT
+  ok=rkr->savebank(filename);
+  if (ok)
+  {
+   strcpy(rkr->Bank_Saved,filename);
+   BankWin_Label(filename);
+  }} {}
   }
 }

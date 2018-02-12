@@ -50,15 +50,15 @@ void RKRGUI::cb_Save_Preset(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Preset_i(o,v);
 }
 
-void RKRGUI::cb_BankWindow_i(Fl_Menu_* o, void*) {
-  BankWindow->Load_Bank->do_callback(o);
+void RKRGUI::cb_BankWindow_i(Fl_Menu_*, void*) {
+  get_bank_file();
 }
 void RKRGUI::cb_BankWindow(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_BankWindow_i(o,v);
 }
 
-void RKRGUI::cb_BankWindow1_i(Fl_Menu_* o, void*) {
-  BankWindow->Save_Bank->do_callback(o);
+void RKRGUI::cb_BankWindow1_i(Fl_Menu_*, void*) {
+  set_save_file();
 }
 void RKRGUI::cb_BankWindow1(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_BankWindow1_i(o,v);
@@ -6791,7 +6791,7 @@ void RKRGUI::is_modified() {
             break;
   
           case 1: 
-            MIDI->MIDI_LABEL->do_callback();
+            set_save_file();
             break;  
   
       }
@@ -10455,4 +10455,39 @@ void RKRGUI::ClearBankNames() {
                   remque(elem);
                   free(elem);
           }
+}
+
+char * RKRGUI::get_bank_file() {
+  int ok;
+  char *filename;
+  is_modified();
+  filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
+  if (filename==NULL) return 0;
+  filename=fl_filename_setext(filename,".rkrb");
+  ok=rkr->loadbank(filename);
+  if(ok) 
+  {
+    BankWin_Label(filename);
+    Put_Loaded_Bank();
+    AddBankName(filename);
+  }
+  
+  return filename;
+}
+
+void RKRGUI::set_save_file() {
+  int ok;
+  char *filename;
+  
+  #define EXT ".rkrb"
+    filename=fl_file_chooser("Save Bank File:","(*" EXT")",rkr->Bank_Saved,0);
+    if (filename==NULL) return;
+    filename=fl_filename_setext(filename,EXT);
+  #undef EXT
+    ok=rkr->savebank(filename);
+    if (ok)
+    {
+     strcpy(rkr->Bank_Saved,filename);
+     BankWin_Label(filename);
+    }
 }

@@ -10,7 +10,7 @@ widget_class {this->m_rgui = NULL; this->m_rkr = NULL;} MidiGui {
   code2 {\#include "rakarrack.h"}
   code3 {this->m_rgui = NULL; this->m_rkr = NULL;} visible position_relative
 } {
-  Function {initialize(RKR* _rkr, RKRGUI* _rgui)} {open selected C return_type void
+  Function {initialize(RKR* _rkr, RKRGUI* _rgui)} {open C return_type void
   } {
     code {m_rkr = _rkr;
 m_rgui= _rgui;} {}
@@ -113,22 +113,7 @@ m_rgui= _rgui;} {}
   }
   Fl_Box MIDI_LABEL {
     label MIDI
-    user_data 7
-    callback {int ok;
-char *filename;
-
-\#define EXT ".rkrb"
-  filename=fl_file_chooser("Save Bank File:","(*" EXT")",m_rkr->Bank_Saved,0);
-  if (filename==NULL) return;
-  filename=fl_filename_setext(filename,EXT);
-\#undef EXT
-  ok=m_rkr->savebank(filename);
-  if (ok)
-  {
-   strcpy(m_rkr->Bank_Saved,filename);
-   if(m_rgui != NULL)
-   m_rgui->BankWin_Label(filename);
-  }}
+    user_data 7 selected
     xywh {4 32 44 14} labelfont 1 labelcolor 7 when 0
   }
   decl {RKR  *m_rkr} {private local

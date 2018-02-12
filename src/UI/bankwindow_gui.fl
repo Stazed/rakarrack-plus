@@ -2,8 +2,8 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class BankWindowGui {open selected
-  xywh {195 172 800 600} type Double color 4 selection_color 7 resizable
+widget_class BankWindowGui {open
+  xywh {1071 479 800 600} type Double color 4 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -33,18 +33,10 @@ redraw();}
       }
       MenuItem Load_Bank {
         label {&Load Bank}
-        callback {int ok;
-char *filename;
-m_rgui->is_modified();
-filename=fl_file_chooser("Load Bank File:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-ok=m_rkr->loadbank(filename);
-if(ok) 
-{
-m_rgui->BankWin_Label(filename);
-m_rgui->Put_Loaded_Bank();
-m_rgui->AddBankName(filename);
+        callback {char *filename =  m_rgui->get_bank_file();
+if(filename == 0)
+  return;
+
 if(m_rkr->CheckOldBank(filename)==0)
 {
         char nombre[64];
@@ -53,13 +45,12 @@ if(m_rkr->CheckOldBank(filename)==0)
         filepart = strrchr(filename,'/')+1;
         strncpy(nombre,filepart,strlen(filepart)-5);
         CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
-}
 }}
         xywh {10 10 45 26}
       }
       MenuItem Save_Bank {
         label {&Save Bank}
-        callback {m_rgui->MIDI->MIDI_LABEL->do_callback();}
+        callback {m_rgui->set_save_file();} selected
         xywh {10 10 45 26} divider
       }
       MenuItem Convert_Old_Bank {
