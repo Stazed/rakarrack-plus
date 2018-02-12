@@ -1,0 +1,1022 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0304
+header_name {.h}
+code_name {.cxx}
+widget_class SettingsWindowGui {open selected
+  xywh {1214 407 640 580} type Double
+  code0 {\#include "rakarrack.h"}
+  code1 {this->m_rkr = NULL;}
+  code2 {this->m_rgui = NULL;}
+  class Fl_Double_Window size_range {740 554 0 0} visible
+} {
+  Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
+  } {
+    code {m_rkr = _rkr;
+m_rgui= _rgui;} {}
+  }
+  Fl_Box Fondo2 {
+    xywh {1 1 640 580}
+  }
+  Fl_Tabs STabs {
+    user_data 1 open
+    xywh {0 0 636 606}
+  } {
+    Fl_Group Look {
+      label Look
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+    } {
+      Fl_Box Fondo6 {
+        xywh {5 26 630 554}
+      }
+      Fl_Choice scheme_ch {
+        label Schema
+        callback {switch ((int)o->value())
+
+{
+
+  case 0:
+
+Fl::scheme("");
+Fl::redraw();
+break;
+
+  case 1:
+
+Fl::scheme("none");
+Fl::redraw();
+break;
+
+  case 2:
+
+Fl::scheme("gtk+");
+Fl::redraw();
+break;
+
+  case 3:
+
+Fl::scheme("plastic");
+Fl::redraw();
+break;
+
+}}
+        xywh {60 50 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12 textcolor 7
+      } {
+        MenuItem {} {
+          label X11
+          xywh {30 30 45 26} labelsize 12
+        }
+        MenuItem {} {
+          label fltk
+          xywh {30 30 45 26} labelsize 12
+        }
+        MenuItem {} {
+          label {gtk+}
+          xywh {40 40 45 26} labelsize 12
+        }
+        MenuItem {} {
+          label plastic
+          xywh {50 50 45 26} labelsize 12
+        }
+      }
+      Fl_Browser Font_Bro {
+        label Font
+        callback {rkr->font = (int)o->value()-1;
+chfsize(0);}
+        xywh {20 100 400 225} type Select labelsize 11 labelcolor 7 align 1 when 1
+      }
+      Fl_Box FSLabel {
+        label {Font Size}
+        xywh {10 333 60 17} labelsize 11 labelcolor 7
+      }
+      Fl_Button FSless {
+        label {-}
+        user_data 77
+        callback {rkr->relfontsize--;
+chfsize(-1);}
+        xywh {78 330 30 20}
+      }
+      Fl_Button FSplus {
+        label {+}
+        user_data 77
+        callback {rkr->relfontsize++;
+chfsize(1);}
+        xywh {113 330 30 20}
+      }
+      Fl_Button FSReset {
+        label Reset
+        user_data 77
+        callback {rkr->relfontsize=0;
+chfsize(0);}
+        xywh {148 330 57 20}
+      }
+      Fl_Box CLLabel {
+        label Colors
+        xywh {10 358 40 19} labelsize 11 labelcolor 7
+      }
+      Fl_Button B_C {
+        label Buttons
+        user_data 77
+        callback {uchar r,g,b;
+
+Fl::get_color(fore_color,r,g,b);
+if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
+fore_color=fl_rgb_color(r,g,b);
+Buttons_Color_Change(fore_color);}
+        xywh {15 380 90 25}
+      }
+      Fl_Button A_C {
+        label Labels
+        user_data 77
+        callback {uchar r,g,b;
+Fl::get_color(label_color,r,g,b);
+if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
+label_color=fl_rgb_color(r,g,b);
+Label_Color_Change(label_color);}
+        xywh {120 380 90 25}
+      }
+      Fl_Button L_C {
+        label Leds
+        user_data 77
+        callback {uchar r,g,b;
+Fl::get_color(leds_color,r,g,b);
+if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
+leds_color=fl_rgb_color(r,g,b);
+Leds_Color_Change(leds_color);}
+        xywh {225 380 90 25}
+      }
+      Fl_Button K_C {
+        label Background
+        user_data 77
+        callback {uchar r,g,b;
+Fl::get_color(back_color,r,g,b);
+if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
+back_color=fl_rgb_color(r,g,b);
+Background_Color_Change(back_color);}
+        xywh {330 380 90 25}
+      }
+      Fl_Check_Button Enable_Back {
+        label {Enable Background Image}
+        callback {rkr->EnableBackgroundImage=(int) o->value();
+PutBackground();}
+        xywh {162 409 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_File_Input BackFiname {
+        label {Background Image}
+        xywh {10 445 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+      }
+      Fl_Button BI_Browser {
+        label Browse
+        user_data 77
+        callback {char *filename;
+filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".png");
+BackFiname->value(filename);
+strcpy(rkr->BackgroundImage,filename);
+PutBackground();}
+        xywh {410 455 65 20}
+      }
+      Fl_Check_Button Enable_DeacHide {
+        label {Hide Unused Effect Widgets}
+        callback {rkr->deachide=(int) o->value();}
+        xywh {169 500 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+    }
+    Fl_Group AUDIO_SET {
+      label Audio
+      user_data 1
+      xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+    } {
+      Fl_Box Fondo7 {
+        xywh {0 26 635 554}
+      }
+      Fl_Check_Button INSTATE {
+        label {FX On at start}
+        callback {rkr->init_state=(int) o->value();}
+        xywh {96 29 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Check_Button Filter_DC {
+        label {Filter Input DC Offset}
+        callback {rkr->DC_Offset=(int) o->value();}
+        xywh {135 53 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Check_Button Pre_Serve {
+        label {Preserve Gain/Master when Preset change}
+        callback {rkr->actuvol=(int) o->value();}
+        xywh {259 77 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Check_Button Update_TAP {
+        label {Update TapTempo when Preset change}
+        callback {rkr->Tap_Updated = (int) o->value();}
+        xywh {239 100 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Check_Button UPSAMPLE_C {
+        label Upsampling
+        callback {rkr->upsample=(int)o->value();
+Show_Next_Time();}
+        xywh {83 124 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
+      }
+      Fl_Choice Upr_Amo {
+        label Amount
+        callback {rkr->UpAmo =(int) o->value();
+
+Show_Next_Time();}
+        xywh {145 126 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label x2
+          xywh {60 60 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label x3
+          xywh {60 60 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label x4
+          xywh {50 50 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x5
+          xywh {40 40 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x6
+          xywh {40 40 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x7
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x8
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x9
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x10
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x11
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x12
+          xywh {20 20 36 21} labelsize 10
+        }
+      }
+      Fl_Choice Upr_Qual {
+        label Up
+        callback {rkr->UpQual =(int) o->value();
+
+Show_Next_Time();}
+        xywh {217 126 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label Best
+          xywh {50 50 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Medium
+          xywh {50 50 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Fastest
+          xywh {40 40 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label {Zero Order}
+          xywh {30 30 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label Linear
+          xywh {30 30 36 21} labelsize 10
+        }
+      }
+      Fl_Choice Downr_Qual {
+        label Down
+        callback {rkr->DownQual =(int) o->value();
+
+Show_Next_Time();}
+        xywh {329 126 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Counter L_SIZE {
+        label {Looper Size Seconds     }
+        callback {rkr->looper_size=o->value();
+if(!rkr->m_displayed)
+{
+Show_Next_Time();
+rkr->m_displayed=1;
+}}
+        xywh {133 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
+      }
+      Fl_Counter LM_Volume {
+        label {Looper Metronome Volume  }
+        callback {rkr->Metro_Vol=(int)o->value();
+rkr->efx_Looper->setmvol(rkr->Metro_Vol);}
+        xywh {338 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
+      }
+      Fl_Choice Har_Qual {
+        label {Harmonizer Quality      }
+        callback {int i = (int) o->value();
+
+switch(i)
+{
+     case 0:
+       rkr->HarQual=4;
+       break;
+     case 1:
+       rkr->HarQual=8;
+       break;
+     case 2:
+       rkr->HarQual=16;	
+	break;
+     case 3:
+       rkr->HarQual=32;	
+	break;
+
+		
+}
+
+
+Show_Next_Time();}
+        xywh {132 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label 4
+          xywh {40 40 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 8
+          xywh {40 40 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 16
+          xywh {30 30 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 32
+          xywh {30 30 36 21} labelsize 10
+        }
+      }
+      Fl_Choice Ste_Qual {
+        label {StereoHarm Quality}
+        callback {int i = (int) o->value();
+
+switch(i)
+{
+     case 0:
+       rkr->SteQual=4;
+       break;
+     case 1:
+       rkr->SteQual=8;
+       break;
+     case 2:
+       rkr->SteQual=16;	
+	break;
+     case 3:
+       rkr->SteQual=32;	
+	break;
+
+		
+}
+
+
+Show_Next_Time();}
+        xywh {296 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label 4
+          xywh {50 50 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 8
+          xywh {50 50 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 16
+          xywh {40 40 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 32
+          xywh {40 40 36 21} labelsize 10
+        }
+      }
+      Fl_Choice Voc_Bands {
+        label {Vocoder Bands              }
+        callback {switch((int)o->value())
+{
+  case 0:
+  rkr->VocBands = 16;
+  break;
+
+  case 1:
+  rkr->VocBands = 32;
+  break;
+
+  case 2:
+  rkr->VocBands = 64;
+  break;
+
+  case 3:
+  rkr->VocBands = 128;
+  break;
+
+  case 4:
+  rkr->VocBands = 256;
+  break;
+
+}
+
+Show_Next_Time();}
+        xywh {132 196 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label 16
+          xywh {70 70 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 32
+          xywh {70 70 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 64
+          xywh {60 60 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 128
+          xywh {50 50 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 256
+          xywh {50 50 36 21} labelsize 10
+        }
+      }
+      Fl_Check_Button FLPosition {
+        label {Limiter before Output Volume}
+        callback {rkr->flpos=(int)o->value();}
+        xywh {186 222 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Check_Button DB6B {
+        label {+6dB Final Limiter }
+        callback {rkr->db6booster=(int)o->value();}
+        xywh {324 222 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Counter Calibration {
+        label {Tuner Calibration A4 }
+        callback {rkr->aFreq=o->value();
+rkr->HarmRecNote->update_freqs(rkr->aFreq);
+rkr->StHarmRecNote->update_freqs(rkr->aFreq);
+rkr->RingRecNote->update_freqs(rkr->aFreq);}
+        xywh {120 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
+      }
+      Fl_Counter RTrigger {
+        label {Recognize Note Trigger}
+        callback {rkr->rtrig = o->value();
+rkr->HarmRecNote->trigfact = o->value();
+rkr->StHarmRecNote->trigfact = o->value();
+rkr->RingRecNote->trigfact = o->value();}
+        xywh {367 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 0.99 step 0.01 value 0.6 textsize 10
+        code0 {o->lstep(0.1);}
+      }
+      Fl_Choice RC_Harm_Opti {
+        label Harmonizer
+        callback {rkr->RCOpti_Harm =(int) o->value();
+
+switch(rkr->RCOpti_Harm)
+  {
+  
+  
+    case 0:
+    	rkr->HarmRecNote->setlpf(5500);
+    	rkr->HarmRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	rkr->HarmRecNote->setlpf(4500);
+    	rkr->HarmRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	rkr->HarmRecNote->setlpf(3000);
+    	rkr->HarmRecNote->sethpf(300);
+    	break;
+
+}}
+        xywh {165 297 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label Normal
+          xywh {70 70 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Guitar
+          xywh {70 70 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Voice
+          xywh {60 60 36 21} labelsize 10
+        }
+      }
+      Fl_Choice RC_St_Harm_Opti {
+        label {Stereo Harmonizer}
+        callback {rkr->RCOpti_Stereo =(int) o->value();
+
+switch(rkr->RCOpti_Stereo)
+  {
+  
+  
+    case 0:
+    	rkr->StHarmRecNote->setlpf(5500);
+    	rkr->StHarmRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	rkr->StHarmRecNote->setlpf(4500);
+    	rkr->StHarmRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	rkr->StHarmRecNote->setlpf(3000);
+    	rkr->StHarmRecNote->sethpf(300);
+    	break;
+
+}}
+        xywh {265 297 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label Normal
+          xywh {60 60 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Guitar
+          xywh {60 60 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Voice
+          xywh {50 50 36 21} labelsize 10
+        }
+      }
+      Fl_Choice RC_Ring_Opti {
+        label Ring
+        callback {rkr->RCOpti_Ring =(int) o->value();
+
+switch(rkr->RCOpti_Ring)
+  {
+  
+  
+    case 0:
+    	rkr->RingRecNote->setlpf(5500);
+    	rkr->RingRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	rkr->RingRecNote->setlpf(4500);
+    	rkr->RingRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	rkr->RingRecNote->setlpf(3000);
+    	rkr->RingRecNote->sethpf(300);
+    	break;
+
+}}
+        xywh {365 297 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label Normal
+          xywh {75 75 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Guitar
+          xywh {75 75 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label Voice
+          xywh {65 65 36 21} labelsize 10
+        }
+      }
+      Fl_Choice Har_Downsample {
+        label {Harmonizer Downsample }
+        callback {rkr->Har_Down=(int)o->value();
+Show_Next_Time();}
+        xywh {145 336 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label Normal
+          xywh {50 50 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 96000
+          xywh {50 50 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label 48000
+          xywh {40 40 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 44100
+          xywh {40 40 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 32000
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 22050
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 16000
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 12000
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 8000
+          xywh {20 20 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label 4000
+          xywh {20 20 36 21} labelsize 10
+        }
+      }
+      Fl_Choice Har_Down_Qua {
+        label Down
+        callback {rkr->Har_D_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {250 336 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Har_Up_Qua {
+        label Up
+        callback {rkr->Har_U_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {343 336 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Rev_Downsample {
+        label {Reverbtron Downsample  }
+        callback {rkr->Rev_Down=(int)o->value();
+Show_Next_Time();} open
+        xywh {145 359 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Har_Downsample);}
+      } {}
+      Fl_Choice Rev_Down_Qua {
+        label Down
+        callback {rkr->Rev_D_Q=(int)o->value();
+Show_Next_Time();}
+        xywh {250 359 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Rev_Up_Qua {
+        label Up
+        callback {rkr->Rev_U_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {343 359 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Con_Downsample {
+        label {Convolotron Downsample}
+        callback {rkr->Con_Down=(int)o->value();
+Show_Next_Time();} open
+        xywh {145 382 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Har_Downsample);}
+      } {}
+      Fl_Choice Con_Down_Qua {
+        label Down
+        callback {rkr->Con_D_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {250 382 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Con_Up_Qua {
+        label Up
+        callback {rkr->Con_U_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {343 382 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Seq_Downsample {
+        label {Sequence Downsample    }
+        callback {rkr->Seq_Down=(int)o->value();
+Show_Next_Time();} open
+        xywh {145 405 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Har_Downsample);}
+      } {}
+      Fl_Choice Seq_Down_Qua {
+        label Down
+        callback {rkr->Seq_D_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {250 405 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Seq_Up_Qua {
+        label Up
+        callback {rkr->Seq_U_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {343 405 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Shi_Downsample {
+        label {Shifter Downsample         }
+        callback {rkr->Shi_Down=(int)o->value();
+Show_Next_Time();} open
+        xywh {145 428 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Har_Downsample);}
+      } {}
+      Fl_Choice Shi_Down_Qua {
+        label Down
+        callback {rkr->Shi_D_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {250 428 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Shi_Up_Qua {
+        label Up
+        callback {rkr->Shi_U_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {343 428 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Voc_Downsample {
+        label {Vocoder Downsample      }
+        callback {rkr->Voc_Down=(int)o->value();
+Show_Next_Time();} open
+        xywh {145 452 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Har_Downsample);}
+      } {}
+      Fl_Choice Voc_Down_Qua {
+        label Down
+        callback {rkr->Voc_D_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {250 452 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Voc_Up_Qua {
+        label Up
+        callback {rkr->Voc_U_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {343 452 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Ste_Downsample {
+        label {StereoHarm Downsample}
+        callback {rkr->Ste_Down=(int)o->value();
+Show_Next_Time();} open
+        xywh {145 477 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Har_Downsample);}
+      } {}
+      Fl_Choice Ste_Down_Qua {
+        label Down
+        callback {rkr->Ste_D_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {250 477 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Ste_Up_Qua {
+        label Up
+        callback {rkr->Ste_U_Q=(int)o->value();
+Show_Next_Time();} open
+        xywh {343 477 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Wave_Amo {
+        label {Waveshape Resampling   }
+        callback {rkr->Wave_res_amount=(int)o->value();
+Show_Next_Time();}
+        xywh {145 527 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+      } {
+        MenuItem {} {
+          label Normal
+          xywh {70 70 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label x2
+          xywh {70 70 45 26} labelsize 10
+        }
+        MenuItem {} {
+          label x4
+          xywh {60 60 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x8
+          xywh {50 50 36 21} labelsize 10
+        }
+        MenuItem {} {
+          label x12
+          xywh {50 50 36 21} labelsize 10
+        }
+      }
+      Fl_Choice Wave_Down_Qua {
+        label Down
+        callback {rkr->Wave_down_q=(int)o->value();
+Show_Next_Time();}
+        xywh {252 527 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Choice Wave_Up_Qua {
+        label Up
+        callback {rkr->Wave_up_q=(int)o->value();
+Show_Next_Time();}
+        xywh {345 527 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        code0 {o->menu(menu_Upr_Qual);}
+      } {}
+      Fl_Box Recognize_Label {
+        label {Recognize Note Optimization}
+        user_data 7
+        xywh {10 298 150 17} labelsize 10 when 0
+      }
+    }
+    Fl_Group MIDI_SET {
+      label MIDI
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+    } {
+      Fl_Box Fondo8 {
+        xywh {5 26 630 554}
+      }
+      Fl_Check_Button D_A_Connect {
+        label {Auto Connect MIDI In}
+        callback {rkr->aconnect_MI=(int) o->value();
+
+if (rkr->aconnect_MI) BMidiIn->activate();
+else BMidiIn->deactivate();}
+        xywh {135 38 105 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Browser BMidiIn {
+        label {ALSA Sequencer Ports}
+        callback {int valor;
+valor = (int) o->value();
+if(o->text(valor) != NULL)
+strcpy(rkr->MID,o->text(valor));
+else return;
+o->select(valor,1);
+rkr->Conecta();}
+        xywh {15 72 190 111} type Hold selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+      }
+      Fl_Counter Midi_In_Counter {
+        label {Receive Channel}
+        callback {rkr->MidiCh=(int)o->value()-1;}
+        xywh {103 198 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
+      }
+      Fl_Counter Har_In_Counter {
+        label {Harmonizer Receive Channel}
+        callback {rkr->HarCh=(int)o->value()-1;}
+        xywh {162 235 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
+      }
+      Fl_Counter Stereo_Har_In_Counter {
+        label {Stereo Harmonizer Receive Channel}
+        callback {rkr->StereoHarCh=(int)o->value()-1;}
+        xywh {200 276 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
+      }
+      Fl_Group wMIDI {
+        label {MIDI implementation}
+        xywh {15 325 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
+      } {
+        Fl_Check_Button Mw0 {
+          label Default
+          callback {rkr->MIDIway=0;
+ML_Menu->deactivate();}
+          xywh {72 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        }
+        Fl_Check_Button Mw1 {
+          label {MIDI Learn}
+          callback {rkr->MIDIway=1;
+ML_Menu->activate();}
+          xywh {183 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        }
+      }
+      Fl_Check_Button AAssign {
+        label {Auto Assign MIDI Learn}
+        callback {rkr->autoassign=o->value();}
+        xywh {134 359 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+      }
+      Fl_Check_Button MTable {
+        label {MIDI Program Change Table}
+        callback {rkr->midi_table=o->value();
+if(rkr->midi_table) scroll->activate(); else 
+scroll->deactivate();}
+        xywh {157 377 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+      }
+      Fl_Scroll scroll {
+        user_data 5000 open
+        xywh {15 360 585 162} type VERTICAL_ALWAYS
+      } {}
+    }
+    Fl_Group JACK_SET {
+      label Jack
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+    } {
+      Fl_Box Fondo9 {
+        xywh {5 26 630 554}
+      }
+      Fl_Check_Button D_J_Connect {
+        label {Auto Connect Out}
+        callback {rkr->aconnect_JA=(int) o->value();
+if (rkr->aconnect_JA) JackCo->activate();
+else JackCo->deactivate();}
+        xywh {114 40 25 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Browser JackCo {
+        label {Output Ports}
+        xywh {10 72 235 138} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+      }
+      Fl_Check_Button D_IJ_Connect {
+        label {Auto Connect In}
+        callback {rkr->aconnect_JIA=(int) o->value();
+if (rkr->aconnect_JIA) JackIn->activate();
+else JackIn->deactivate();}
+        xywh {104 228 25 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Browser JackIn {
+        label {Input Ports}
+        xywh {10 259 235 131} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+      }
+    }
+    Fl_Group MISC_SET {
+      label Misc
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+    } {
+      Fl_Box Fondo10 {
+        xywh {5 26 630 554}
+      }
+      Fl_Input Username {
+        label {Username:}
+        callback {rkr->UserRealName=(char*) o->value();}
+        xywh {80 32 240 21} labelsize 11 labelcolor 7 textsize 11 textcolor 7
+      }
+      Fl_Check_Button MES_DIS {
+        label {Disable Warnings    }
+        callback {rkr->mess_dis=(int) o->value();}
+        xywh {132 68 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Check_Button T_TIMEOUT {
+        label {Tap Tempo Timeout}
+        callback {rkr->t_timeout=(int) o->value();}
+        xywh {132 88 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+      Fl_Check_Button ENA_TOOL {
+        label {Enable Tooltips       }
+        callback {rkr->ena_tool=(int) o->value();
+Fl_Tooltip::enable(rkr->ena_tool);}
+        xywh {132 108 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+      }
+    }
+    Fl_Group BANK_SET {
+      label Bank
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+    } {
+      Fl_Box Fondo11 {
+        xywh {5 26 630 554}
+      }
+      Fl_File_Input BFiname {
+        label {Bank Filename}
+        xywh {20 50 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+      }
+      Fl_Button BF_Browser {
+        label Browse
+        user_data 77
+        callback {char *filename;
+filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
+if (filename==NULL) return;
+filename=fl_filename_setext(filename,".rkrb");
+BFiname->value(filename);
+strcpy(rkr->BankFilename,filename);}
+        xywh {415 60 65 20}
+      }
+      Fl_File_Input Udir {
+        label {User Directory}
+        xywh {20 102 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+      }
+      Fl_Button UD_Browser {
+        label Browse
+        user_data 77
+        callback {char *dir;
+dir=fl_dir_chooser("Browse:",NULL,0);
+if (dir==NULL) return;
+Udir->value(dir);
+strcpy(rkr->UDirFilename,dir);
+ScanDir();}
+        xywh {415 112 65 20}
+      }
+    }
+  }
+  decl {RKR* m_rkr} {private local
+  }
+  decl {RKRGUI* m_rgui} {private local
+  }
+}
