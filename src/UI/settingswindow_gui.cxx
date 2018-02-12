@@ -46,32 +46,32 @@ Fl_Menu_Item SettingsWindowGui::menu_scheme_ch[] = {
 };
 
 void SettingsWindowGui::cb_Font_Bro_i(Fl_Browser* o, void*) {
-  rkr->font = (int)o->value()-1;
-chfsize(0);
+  m_rkr->font = (int)o->value()-1;
+m_rgui->chfsize(0);
 }
 void SettingsWindowGui::cb_Font_Bro(Fl_Browser* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Font_Bro_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSless_i(Fl_Button*, void*) {
-  rkr->relfontsize--;
-chfsize(-1);
+  m_rkr->relfontsize--;
+m_rgui->chfsize(-1);
 }
 void SettingsWindowGui::cb_FSless(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSless_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSplus_i(Fl_Button*, void*) {
-  rkr->relfontsize++;
-chfsize(1);
+  m_rkr->relfontsize++;
+m_rgui->chfsize(1);
 }
 void SettingsWindowGui::cb_FSplus(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSplus_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSReset_i(Fl_Button*, void*) {
-  rkr->relfontsize=0;
-chfsize(0);
+  m_rkr->relfontsize=0;
+m_rgui->chfsize(0);
 }
 void SettingsWindowGui::cb_FSReset(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSReset_i(o,v);
@@ -83,7 +83,7 @@ void SettingsWindowGui::cb_B_C_i(Fl_Button*, void*) {
 Fl::get_color(fore_color,r,g,b);
 if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
 fore_color=fl_rgb_color(r,g,b);
-Buttons_Color_Change(fore_color);
+m_rgui->Buttons_Color_Change(fore_color);
 }
 void SettingsWindowGui::cb_B_C(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_B_C_i(o,v);
@@ -94,7 +94,7 @@ void SettingsWindowGui::cb_A_C_i(Fl_Button*, void*) {
 Fl::get_color(label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
-Label_Color_Change(label_color);
+m_rgui->Label_Color_Change(label_color);
 }
 void SettingsWindowGui::cb_A_C(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_A_C_i(o,v);
@@ -105,7 +105,7 @@ void SettingsWindowGui::cb_L_C_i(Fl_Button*, void*) {
 Fl::get_color(leds_color,r,g,b);
 if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
 leds_color=fl_rgb_color(r,g,b);
-Leds_Color_Change(leds_color);
+m_rgui->Leds_Color_Change(leds_color);
 }
 void SettingsWindowGui::cb_L_C(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_L_C_i(o,v);
@@ -116,15 +116,15 @@ void SettingsWindowGui::cb_K_C_i(Fl_Button*, void*) {
 Fl::get_color(back_color,r,g,b);
 if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
 back_color=fl_rgb_color(r,g,b);
-Background_Color_Change(back_color);
+m_rgui->Background_Color_Change(back_color);
 }
 void SettingsWindowGui::cb_K_C(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_K_C_i(o,v);
 }
 
 void SettingsWindowGui::cb_Enable_Back_i(Fl_Check_Button* o, void*) {
-  rkr->EnableBackgroundImage=(int) o->value();
-PutBackground();
+  m_rkr->EnableBackgroundImage=(int) o->value();
+m_rgui->PutBackground();
 }
 void SettingsWindowGui::cb_Enable_Back(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Enable_Back_i(o,v);
@@ -136,60 +136,60 @@ filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
-strcpy(rkr->BackgroundImage,filename);
-PutBackground();
+strcpy(m_rkr->BackgroundImage,filename);
+m_rgui->PutBackground();
 }
 void SettingsWindowGui::cb_BI_Browser(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BI_Browser_i(o,v);
 }
 
 void SettingsWindowGui::cb_Enable_DeacHide_i(Fl_Check_Button* o, void*) {
-  rkr->deachide=(int) o->value();
+  m_rkr->deachide=(int) o->value();
 }
 void SettingsWindowGui::cb_Enable_DeacHide(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Enable_DeacHide_i(o,v);
 }
 
 void SettingsWindowGui::cb_INSTATE_i(Fl_Check_Button* o, void*) {
-  rkr->init_state=(int) o->value();
+  m_rkr->init_state=(int) o->value();
 }
 void SettingsWindowGui::cb_INSTATE(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_INSTATE_i(o,v);
 }
 
 void SettingsWindowGui::cb_Filter_DC_i(Fl_Check_Button* o, void*) {
-  rkr->DC_Offset=(int) o->value();
+  m_rkr->DC_Offset=(int) o->value();
 }
 void SettingsWindowGui::cb_Filter_DC(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Filter_DC_i(o,v);
 }
 
 void SettingsWindowGui::cb_Pre_Serve_i(Fl_Check_Button* o, void*) {
-  rkr->actuvol=(int) o->value();
+  m_rkr->actuvol=(int) o->value();
 }
 void SettingsWindowGui::cb_Pre_Serve(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Pre_Serve_i(o,v);
 }
 
 void SettingsWindowGui::cb_Update_TAP_i(Fl_Check_Button* o, void*) {
-  rkr->Tap_Updated = (int) o->value();
+  m_rkr->Tap_Updated = (int) o->value();
 }
 void SettingsWindowGui::cb_Update_TAP(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Update_TAP_i(o,v);
 }
 
 void SettingsWindowGui::cb_UPSAMPLE_C_i(Fl_Check_Button* o, void*) {
-  rkr->upsample=(int)o->value();
-Show_Next_Time();
+  m_rkr->upsample=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_UPSAMPLE_C(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UPSAMPLE_C_i(o,v);
 }
 
 void SettingsWindowGui::cb_Upr_Amo_i(Fl_Choice* o, void*) {
-  rkr->UpAmo =(int) o->value();
+  m_rkr->UpAmo =(int) o->value();
 
-Show_Next_Time();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Upr_Amo(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Upr_Amo_i(o,v);
@@ -211,9 +211,9 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Amo[] = {
 };
 
 void SettingsWindowGui::cb_Upr_Qual_i(Fl_Choice* o, void*) {
-  rkr->UpQual =(int) o->value();
+  m_rkr->UpQual =(int) o->value();
 
-Show_Next_Time();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Upr_Qual(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Upr_Qual_i(o,v);
@@ -229,20 +229,20 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Qual[] = {
 };
 
 void SettingsWindowGui::cb_Downr_Qual_i(Fl_Choice* o, void*) {
-  rkr->DownQual =(int) o->value();
+  m_rkr->DownQual =(int) o->value();
 
-Show_Next_Time();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Downr_Qual(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Downr_Qual_i(o,v);
 }
 
 void SettingsWindowGui::cb_L_SIZE_i(Fl_Counter* o, void*) {
-  rkr->looper_size=o->value();
-if(!rkr->m_displayed)
+  m_rkr->looper_size=o->value();
+if(!m_rkr->m_displayed)
 {
-Show_Next_Time();
-rkr->m_displayed=1;
+m_rgui->Show_Next_Time();
+m_rkr->m_displayed=1;
 };
 }
 void SettingsWindowGui::cb_L_SIZE(Fl_Counter* o, void* v) {
@@ -250,8 +250,8 @@ void SettingsWindowGui::cb_L_SIZE(Fl_Counter* o, void* v) {
 }
 
 void SettingsWindowGui::cb_LM_Volume_i(Fl_Counter* o, void*) {
-  rkr->Metro_Vol=(int)o->value();
-rkr->efx_Looper->setmvol(rkr->Metro_Vol);
+  m_rkr->Metro_Vol=(int)o->value();
+m_rkr->efx_Looper->setmvol(m_rkr->Metro_Vol);
 }
 void SettingsWindowGui::cb_LM_Volume(Fl_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_LM_Volume_i(o,v);
@@ -263,23 +263,23 @@ void SettingsWindowGui::cb_Har_Qual_i(Fl_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       rkr->HarQual=4;
+       m_rkr->HarQual=4;
        break;
      case 1:
-       rkr->HarQual=8;
+       m_rkr->HarQual=8;
        break;
      case 2:
-       rkr->HarQual=16;	
+       m_rkr->HarQual=16;	
 	break;
      case 3:
-       rkr->HarQual=32;	
+       m_rkr->HarQual=32;	
 	break;
 
 		
 }
 
 
-Show_Next_Time();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Qual(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Qual_i(o,v);
@@ -299,23 +299,23 @@ void SettingsWindowGui::cb_Ste_Qual_i(Fl_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       rkr->SteQual=4;
+       m_rkr->SteQual=4;
        break;
      case 1:
-       rkr->SteQual=8;
+       m_rkr->SteQual=8;
        break;
      case 2:
-       rkr->SteQual=16;	
+       m_rkr->SteQual=16;	
 	break;
      case 3:
-       rkr->SteQual=32;	
+       m_rkr->SteQual=32;	
 	break;
 
 		
 }
 
 
-Show_Next_Time();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Qual(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Qual_i(o,v);
@@ -333,28 +333,28 @@ void SettingsWindowGui::cb_Voc_Bands_i(Fl_Choice* o, void*) {
   switch((int)o->value())
 {
   case 0:
-  rkr->VocBands = 16;
+  m_rkr->VocBands = 16;
   break;
 
   case 1:
-  rkr->VocBands = 32;
+  m_rkr->VocBands = 32;
   break;
 
   case 2:
-  rkr->VocBands = 64;
+  m_rkr->VocBands = 64;
   break;
 
   case 3:
-  rkr->VocBands = 128;
+  m_rkr->VocBands = 128;
   break;
 
   case 4:
-  rkr->VocBands = 256;
+  m_rkr->VocBands = 256;
   break;
 
 }
 
-Show_Next_Time();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Voc_Bands(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Bands_i(o,v);
@@ -370,60 +370,60 @@ Fl_Menu_Item SettingsWindowGui::menu_Voc_Bands[] = {
 };
 
 void SettingsWindowGui::cb_FLPosition_i(Fl_Check_Button* o, void*) {
-  rkr->flpos=(int)o->value();
+  m_rkr->flpos=(int)o->value();
 }
 void SettingsWindowGui::cb_FLPosition(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FLPosition_i(o,v);
 }
 
 void SettingsWindowGui::cb_DB6B_i(Fl_Check_Button* o, void*) {
-  rkr->db6booster=(int)o->value();
+  m_rkr->db6booster=(int)o->value();
 }
 void SettingsWindowGui::cb_DB6B(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_DB6B_i(o,v);
 }
 
 void SettingsWindowGui::cb_Calibration_i(Fl_Counter* o, void*) {
-  rkr->aFreq=o->value();
-rkr->HarmRecNote->update_freqs(rkr->aFreq);
-rkr->StHarmRecNote->update_freqs(rkr->aFreq);
-rkr->RingRecNote->update_freqs(rkr->aFreq);
+  m_rkr->aFreq=o->value();
+m_rkr->HarmRecNote->update_freqs(m_rkr->aFreq);
+m_rkr->StHarmRecNote->update_freqs(m_rkr->aFreq);
+m_rkr->RingRecNote->update_freqs(m_rkr->aFreq);
 }
 void SettingsWindowGui::cb_Calibration(Fl_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Calibration_i(o,v);
 }
 
 void SettingsWindowGui::cb_RTrigger_i(Fl_Counter* o, void*) {
-  rkr->rtrig = o->value();
-rkr->HarmRecNote->trigfact = o->value();
-rkr->StHarmRecNote->trigfact = o->value();
-rkr->RingRecNote->trigfact = o->value();
+  m_rkr->rtrig = o->value();
+m_rkr->HarmRecNote->trigfact = o->value();
+m_rkr->StHarmRecNote->trigfact = o->value();
+m_rkr->RingRecNote->trigfact = o->value();
 }
 void SettingsWindowGui::cb_RTrigger(Fl_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RTrigger_i(o,v);
 }
 
 void SettingsWindowGui::cb_RC_Harm_Opti_i(Fl_Choice* o, void*) {
-  rkr->RCOpti_Harm =(int) o->value();
+  m_rkr->RCOpti_Harm =(int) o->value();
 
-switch(rkr->RCOpti_Harm)
+switch(m_rkr->RCOpti_Harm)
   {
   
   
     case 0:
-    	rkr->HarmRecNote->setlpf(5500);
-    	rkr->HarmRecNote->sethpf(80);
+    	m_rkr->HarmRecNote->setlpf(5500);
+    	m_rkr->HarmRecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	rkr->HarmRecNote->setlpf(4500);
-    	rkr->HarmRecNote->sethpf(80);
+    	m_rkr->HarmRecNote->setlpf(4500);
+    	m_rkr->HarmRecNote->sethpf(80);
     	break;
     	
     case 2:
-    	rkr->HarmRecNote->setlpf(3000);
-    	rkr->HarmRecNote->sethpf(300);
+    	m_rkr->HarmRecNote->setlpf(3000);
+    	m_rkr->HarmRecNote->sethpf(300);
     	break;
 
 };
@@ -440,26 +440,26 @@ Fl_Menu_Item SettingsWindowGui::menu_RC_Harm_Opti[] = {
 };
 
 void SettingsWindowGui::cb_RC_St_Harm_Opti_i(Fl_Choice* o, void*) {
-  rkr->RCOpti_Stereo =(int) o->value();
+  m_rkr->RCOpti_Stereo =(int) o->value();
 
-switch(rkr->RCOpti_Stereo)
+switch(m_rkr->RCOpti_Stereo)
   {
   
   
     case 0:
-    	rkr->StHarmRecNote->setlpf(5500);
-    	rkr->StHarmRecNote->sethpf(80);
+    	m_rkr->StHarmRecNote->setlpf(5500);
+    	m_rkr->StHarmRecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	rkr->StHarmRecNote->setlpf(4500);
-    	rkr->StHarmRecNote->sethpf(80);
+    	m_rkr->StHarmRecNote->setlpf(4500);
+    	m_rkr->StHarmRecNote->sethpf(80);
     	break;
     	
     case 2:
-    	rkr->StHarmRecNote->setlpf(3000);
-    	rkr->StHarmRecNote->sethpf(300);
+    	m_rkr->StHarmRecNote->setlpf(3000);
+    	m_rkr->StHarmRecNote->sethpf(300);
     	break;
 
 };
@@ -476,26 +476,26 @@ Fl_Menu_Item SettingsWindowGui::menu_RC_St_Harm_Opti[] = {
 };
 
 void SettingsWindowGui::cb_RC_Ring_Opti_i(Fl_Choice* o, void*) {
-  rkr->RCOpti_Ring =(int) o->value();
+  m_rkr->RCOpti_Ring =(int) o->value();
 
-switch(rkr->RCOpti_Ring)
+switch(m_rkr->RCOpti_Ring)
   {
   
   
     case 0:
-    	rkr->RingRecNote->setlpf(5500);
-    	rkr->RingRecNote->sethpf(80);
+    	m_rkr->RingRecNote->setlpf(5500);
+    	m_rkr->RingRecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	rkr->RingRecNote->setlpf(4500);
-    	rkr->RingRecNote->sethpf(80);
+    	m_rkr->RingRecNote->setlpf(4500);
+    	m_rkr->RingRecNote->sethpf(80);
     	break;
     	
     case 2:
-    	rkr->RingRecNote->setlpf(3000);
-    	rkr->RingRecNote->sethpf(300);
+    	m_rkr->RingRecNote->setlpf(3000);
+    	m_rkr->RingRecNote->sethpf(300);
     	break;
 
 };
@@ -512,8 +512,8 @@ Fl_Menu_Item SettingsWindowGui::menu_RC_Ring_Opti[] = {
 };
 
 void SettingsWindowGui::cb_Har_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Har_Down=(int)o->value();
-Show_Next_Time();
+  m_rkr->Har_Down=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Downsample(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Downsample_i(o,v);
@@ -534,168 +534,168 @@ Fl_Menu_Item SettingsWindowGui::menu_Har_Downsample[] = {
 };
 
 void SettingsWindowGui::cb_Har_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Har_D_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Har_D_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Har_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Har_U_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Har_U_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Rev_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Rev_Down=(int)o->value();
-Show_Next_Time();
+  m_rkr->Rev_Down=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Rev_Downsample(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Rev_Downsample_i(o,v);
 }
 
 void SettingsWindowGui::cb_Rev_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Rev_D_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Rev_D_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Rev_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Rev_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Rev_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Rev_U_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Rev_U_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Rev_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Rev_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Con_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Con_Down=(int)o->value();
-Show_Next_Time();
+  m_rkr->Con_Down=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Con_Downsample(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Con_Downsample_i(o,v);
 }
 
 void SettingsWindowGui::cb_Con_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Con_D_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Con_D_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Con_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Con_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Con_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Con_U_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Con_U_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Con_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Con_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Seq_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Seq_Down=(int)o->value();
-Show_Next_Time();
+  m_rkr->Seq_Down=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Seq_Downsample(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Seq_Downsample_i(o,v);
 }
 
 void SettingsWindowGui::cb_Seq_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Seq_D_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Seq_D_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Seq_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Seq_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Seq_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Seq_U_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Seq_U_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Seq_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Seq_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Shi_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Shi_Down=(int)o->value();
-Show_Next_Time();
+  m_rkr->Shi_Down=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Shi_Downsample(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shi_Downsample_i(o,v);
 }
 
 void SettingsWindowGui::cb_Shi_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Shi_D_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Shi_D_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Shi_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shi_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Shi_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Shi_U_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Shi_U_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Shi_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shi_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Voc_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Voc_Down=(int)o->value();
-Show_Next_Time();
+  m_rkr->Voc_Down=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Voc_Downsample(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Downsample_i(o,v);
 }
 
 void SettingsWindowGui::cb_Voc_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Voc_D_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Voc_D_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Voc_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Voc_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Voc_U_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Voc_U_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Voc_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Ste_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Ste_Down=(int)o->value();
-Show_Next_Time();
+  m_rkr->Ste_Down=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Downsample(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Downsample_i(o,v);
 }
 
 void SettingsWindowGui::cb_Ste_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Ste_D_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Ste_D_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Ste_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Ste_U_Q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Ste_U_Q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Wave_Amo_i(Fl_Choice* o, void*) {
-  rkr->Wave_res_amount=(int)o->value();
-Show_Next_Time();
+  m_rkr->Wave_res_amount=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Wave_Amo(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Wave_Amo_i(o,v);
@@ -711,25 +711,25 @@ Fl_Menu_Item SettingsWindowGui::menu_Wave_Amo[] = {
 };
 
 void SettingsWindowGui::cb_Wave_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Wave_down_q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Wave_down_q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Wave_Down_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Wave_Down_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Wave_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Wave_up_q=(int)o->value();
-Show_Next_Time();
+  m_rkr->Wave_up_q=(int)o->value();
+m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Wave_Up_Qua(Fl_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Wave_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_D_A_Connect_i(Fl_Check_Button* o, void*) {
-  rkr->aconnect_MI=(int) o->value();
+  m_rkr->aconnect_MI=(int) o->value();
 
-if (rkr->aconnect_MI) BMidiIn->activate();
+if (m_rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 }
 void SettingsWindowGui::cb_D_A_Connect(Fl_Check_Button* o, void* v) {
@@ -740,62 +740,62 @@ void SettingsWindowGui::cb_BMidiIn_i(Fl_Browser* o, void*) {
   int valor;
 valor = (int) o->value();
 if(o->text(valor) != NULL)
-strcpy(rkr->MID,o->text(valor));
+strcpy(m_rkr->MID,o->text(valor));
 else return;
 o->select(valor,1);
-rkr->Conecta();
+m_rkr->Conecta();
 }
 void SettingsWindowGui::cb_BMidiIn(Fl_Browser* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BMidiIn_i(o,v);
 }
 
 void SettingsWindowGui::cb_Midi_In_Counter_i(Fl_Counter* o, void*) {
-  rkr->MidiCh=(int)o->value()-1;
+  m_rkr->MidiCh=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Midi_In_Counter(Fl_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Midi_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Har_In_Counter_i(Fl_Counter* o, void*) {
-  rkr->HarCh=(int)o->value()-1;
+  m_rkr->HarCh=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Har_In_Counter(Fl_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Stereo_Har_In_Counter_i(Fl_Counter* o, void*) {
-  rkr->StereoHarCh=(int)o->value()-1;
+  m_rkr->StereoHarCh=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Stereo_Har_In_Counter(Fl_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Stereo_Har_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Mw0_i(Fl_Check_Button*, void*) {
-  rkr->MIDIway=0;
-ML_Menu->deactivate();
+  m_rkr->MIDIway=0;
+m_rgui->ML_Menu->deactivate();
 }
 void SettingsWindowGui::cb_Mw0(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Mw0_i(o,v);
 }
 
 void SettingsWindowGui::cb_Mw1_i(Fl_Check_Button*, void*) {
-  rkr->MIDIway=1;
-ML_Menu->activate();
+  m_rkr->MIDIway=1;
+m_rgui->ML_Menu->activate();
 }
 void SettingsWindowGui::cb_Mw1(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Mw1_i(o,v);
 }
 
 void SettingsWindowGui::cb_AAssign_i(Fl_Check_Button* o, void*) {
-  rkr->autoassign=o->value();
+  m_rkr->autoassign=o->value();
 }
 void SettingsWindowGui::cb_AAssign(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_AAssign_i(o,v);
 }
 
 void SettingsWindowGui::cb_MTable_i(Fl_Check_Button* o, void*) {
-  rkr->midi_table=o->value();
-if(rkr->midi_table) scroll->activate(); else 
+  m_rkr->midi_table=o->value();
+if(m_rkr->midi_table) scroll->activate(); else 
 scroll->deactivate();
 }
 void SettingsWindowGui::cb_MTable(Fl_Check_Button* o, void* v) {
@@ -803,8 +803,8 @@ void SettingsWindowGui::cb_MTable(Fl_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
-  rkr->aconnect_JA=(int) o->value();
-if (rkr->aconnect_JA) JackCo->activate();
+  m_rkr->aconnect_JA=(int) o->value();
+if (m_rkr->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();
 }
 void SettingsWindowGui::cb_D_J_Connect(Fl_Check_Button* o, void* v) {
@@ -812,8 +812,8 @@ void SettingsWindowGui::cb_D_J_Connect(Fl_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_D_IJ_Connect_i(Fl_Check_Button* o, void*) {
-  rkr->aconnect_JIA=(int) o->value();
-if (rkr->aconnect_JIA) JackIn->activate();
+  m_rkr->aconnect_JIA=(int) o->value();
+if (m_rkr->aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();
 }
 void SettingsWindowGui::cb_D_IJ_Connect(Fl_Check_Button* o, void* v) {
@@ -821,29 +821,29 @@ void SettingsWindowGui::cb_D_IJ_Connect(Fl_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Username_i(Fl_Input* o, void*) {
-  rkr->UserRealName=(char*) o->value();
+  m_rkr->UserRealName=(char*) o->value();
 }
 void SettingsWindowGui::cb_Username(Fl_Input* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);
 }
 
 void SettingsWindowGui::cb_MES_DIS_i(Fl_Check_Button* o, void*) {
-  rkr->mess_dis=(int) o->value();
+  m_rkr->mess_dis=(int) o->value();
 }
 void SettingsWindowGui::cb_MES_DIS(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MES_DIS_i(o,v);
 }
 
 void SettingsWindowGui::cb_T_TIMEOUT_i(Fl_Check_Button* o, void*) {
-  rkr->t_timeout=(int) o->value();
+  m_rkr->t_timeout=(int) o->value();
 }
 void SettingsWindowGui::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_T_TIMEOUT_i(o,v);
 }
 
 void SettingsWindowGui::cb_ENA_TOOL_i(Fl_Check_Button* o, void*) {
-  rkr->ena_tool=(int) o->value();
-Fl_Tooltip::enable(rkr->ena_tool);
+  m_rkr->ena_tool=(int) o->value();
+Fl_Tooltip::enable(m_rkr->ena_tool);
 }
 void SettingsWindowGui::cb_ENA_TOOL(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_ENA_TOOL_i(o,v);
@@ -855,7 +855,7 @@ filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
-strcpy(rkr->BankFilename,filename);
+strcpy(m_rkr->BankFilename,filename);
 }
 void SettingsWindowGui::cb_BF_Browser(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BF_Browser_i(o,v);
@@ -866,8 +866,8 @@ void SettingsWindowGui::cb_UD_Browser_i(Fl_Button*, void*) {
 dir=fl_dir_chooser("Browse:",NULL,0);
 if (dir==NULL) return;
 Udir->value(dir);
-strcpy(rkr->UDirFilename,dir);
-ScanDir();
+strcpy(m_rkr->UDirFilename,dir);
+m_rgui->ScanDir();
 }
 void SettingsWindowGui::cb_UD_Browser(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UD_Browser_i(o,v);
