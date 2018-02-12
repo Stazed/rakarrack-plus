@@ -911,6 +911,7 @@ this->when(FL_WHEN_RELEASE);
     Look->labelcolor(FL_BACKGROUND2_COLOR);
     Look->user_data((void*)(1));
     Look->align(Fl_Align(FL_ALIGN_LEFT));
+    Look->hide();
     { Fondo6 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo6
     { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -991,7 +992,6 @@ this->when(FL_WHEN_RELEASE);
     AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
     AUDIO_SET->user_data((void*)(1));
     AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    AUDIO_SET->hide();
     { Fondo7 = new Fl_Box(0, 26, 635, 554);
     } // Fl_Box* Fondo7
     { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");

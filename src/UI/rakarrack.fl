@@ -2054,7 +2054,7 @@ o->hide();} open
     } {}
     Fl_Window Order {
       callback {save_stat(2);
-Order->hide();} open
+o->hide();} open
       xywh {133 400 500 400} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "orderwindow_gui.h"}
       code1 {o->initialize(rkr, this);}
@@ -2082,8 +2082,8 @@ o->hide();} open
     } {}
     Fl_Window AboutWin {
       label {About Rakarrack}
-      callback {AboutWin->hide();} open
-      xywh {1434 804 375 235} type Double box NO_BOX color 4 selection_color 7 hide
+      callback {o->hide();} open selected
+      xywh {575 380 375 235} type Double color 8 selection_color 7 hide
       code0 {\#include "aboutwindow_gui.h"}
       code1 {o->initialize(this);}
       code2 {o->hide();}
@@ -2091,8 +2091,8 @@ o->hide();} open
     } {}
     Fl_Window Trigger {
       callback {rkr->ACI_Bypass=0;
-Trigger->hide();
-save_stat(6);} open
+save_stat(6);
+o->hide();} open
       xywh {123 390 205 165} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "trigwindow_gui.h"}
       code1 {o->initialize(rkr);}
@@ -2901,8 +2901,7 @@ for(i=1; i<=Settings->JackIn->size();i++)
 
 
 
-}} {selected
-    }
+}} {}
   }
   Function {Put_Loaded()} {} {
     code {//General

@@ -23,8 +23,8 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 open
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo6 {
         xywh {5 26 630 554}
@@ -181,14 +181,14 @@ m_rgui->PutBackground();}
       Fl_Check_Button Enable_DeacHide {
         label {Hide Unused Effect Widgets}
         callback {m_rkr->deachide=(int) o->value();
-  m_rgui->reordena();} selected
+  m_rgui->reordena();}
         xywh {169 500 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
       }
     }
     Fl_Group AUDIO_SET {
       label Audio
-      user_data 1 open
-      xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 selected
+      xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo7 {
         xywh {0 26 635 554}

@@ -1286,9 +1286,9 @@ void RKRGUI::cb_BankWindow2(BankWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_BankWindow2_i(o,v);
 }
 
-void RKRGUI::cb_Order_i(OrderWindowGui*, void*) {
+void RKRGUI::cb_Order_i(OrderWindowGui* o, void*) {
   save_stat(2);
-Order->hide();
+o->hide();
 }
 void RKRGUI::cb_Order(OrderWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Order_i(o,v);
@@ -1311,17 +1311,17 @@ void RKRGUI::cb_MIDILearn(MidiLearnWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_MIDILearn_i(o,v);
 }
 
-void RKRGUI::cb_AboutWin_i(AboutWindowGui*, void*) {
-  AboutWin->hide();
+void RKRGUI::cb_AboutWin_i(AboutWindowGui* o, void*) {
+  o->hide();
 }
 void RKRGUI::cb_AboutWin(AboutWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_AboutWin_i(o,v);
 }
 
-void RKRGUI::cb_Trigger_i(TrigWindowGui*, void*) {
+void RKRGUI::cb_Trigger_i(TrigWindowGui* o, void*) {
   rkr->ACI_Bypass=0;
-Trigger->hide();
 save_stat(6);
+o->hide();
 }
 void RKRGUI::cb_Trigger(TrigWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Trigger_i(o,v);
@@ -2791,8 +2791,8 @@ void RKRGUI::make_window() {
     MIDILearn->end();
   } // MidiLearnWindowGui* MIDILearn
   { AboutWindowGui* o = AboutWin = new AboutWindowGui(375, 235, "About Rakarrack");
-    AboutWin->box(FL_NO_BOX);
-    AboutWin->color((Fl_Color)4);
+    AboutWin->box(FL_FLAT_BOX);
+    AboutWin->color(FL_INACTIVE_COLOR);
     AboutWin->selection_color(FL_BACKGROUND2_COLOR);
     AboutWin->labeltype(FL_NO_LABEL);
     AboutWin->labelfont(0);
