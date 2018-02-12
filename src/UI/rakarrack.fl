@@ -2103,7 +2103,7 @@ save_stat(6);} open
 sprintf(tmp,"Version %s",VERSION);
 AboutWin->About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
   } {
     code {Fl::args(argc,argv);
 fl_open_display();
@@ -2816,8 +2816,6 @@ rakarrack.set(rkr->PrefNom("UpAmount"),rkr->UpAmo);
 rakarrack.set(rkr->PrefNom("Looper Size"),rkr->looper_size);
 
 
-
-rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
 rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
 rakarrack.set(rkr->PrefNom("User Directory"),rkr->UDirFilename);
 
@@ -2903,7 +2901,8 @@ for(i=1; i<=Settings->JackIn->size();i++)
 
 
 
-}} {}
+}} {selected
+    }
   }
   Function {Put_Loaded()} {} {
     code {//General
@@ -4442,8 +4441,7 @@ for(int j=0; j<Har->size(); j++)
 
 }
 
-Settings->Font_Bro->value(rkr->font+1);} {selected
-    }
+Settings->Font_Bro->value(rkr->font+1);} {}
   }
   Function {BankWin_Label(char *filename)} {open
   } {

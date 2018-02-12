@@ -70,8 +70,9 @@ void SettingsWindowGui::cb_FSplus(Fl_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_FSReset_i(Fl_Button*, void*) {
+  int size = m_rkr->relfontsize;
   m_rkr->relfontsize=0;
-m_rgui->chfsize(0);
+  m_rgui->chfsize(-size);
 }
 void SettingsWindowGui::cb_FSReset(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSReset_i(o,v);
@@ -145,6 +146,7 @@ void SettingsWindowGui::cb_BI_Browser(Fl_Button* o, void* v) {
 
 void SettingsWindowGui::cb_Enable_DeacHide_i(Fl_Check_Button* o, void*) {
   m_rkr->deachide=(int) o->value();
+  m_rgui->reordena();
 }
 void SettingsWindowGui::cb_Enable_DeacHide(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Enable_DeacHide_i(o,v);
@@ -909,7 +911,6 @@ this->when(FL_WHEN_RELEASE);
     Look->labelcolor(FL_BACKGROUND2_COLOR);
     Look->user_data((void*)(1));
     Look->align(Fl_Align(FL_ALIGN_LEFT));
-    Look->hide();
     { Fondo6 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo6
     { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
@@ -990,6 +991,7 @@ this->when(FL_WHEN_RELEASE);
     AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
     AUDIO_SET->user_data((void*)(1));
     AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    AUDIO_SET->hide();
     { Fondo7 = new Fl_Box(0, 26, 635, 554);
     } // Fl_Box* Fondo7
     { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");

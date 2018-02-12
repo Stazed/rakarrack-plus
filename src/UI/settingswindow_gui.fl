@@ -3,7 +3,7 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class SettingsWindowGui {open
-  xywh {1252 522 640 580} type Double
+  xywh {72 351 640 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -23,8 +23,8 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 open
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
         xywh {5 26 630 554}
@@ -106,8 +106,9 @@ m_rgui->chfsize(1);}
       Fl_Button FSReset {
         label Reset
         user_data 77
-        callback {m_rkr->relfontsize=0;
-m_rgui->chfsize(0);}
+        callback {int size = m_rkr->relfontsize;
+  m_rkr->relfontsize=0;
+  m_rgui->chfsize(-size);}
         xywh {148 330 57 20}
       }
       Fl_Box CLLabel {
@@ -179,14 +180,15 @@ m_rgui->PutBackground();}
       }
       Fl_Check_Button Enable_DeacHide {
         label {Hide Unused Effect Widgets}
-        callback {m_rkr->deachide=(int) o->value();}
+        callback {m_rkr->deachide=(int) o->value();
+  m_rgui->reordena();} selected
         xywh {169 500 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
       }
     }
     Fl_Group AUDIO_SET {
       label Audio
       user_data 1 open
-      xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo7 {
         xywh {0 26 635 554}
@@ -1021,7 +1023,6 @@ m_rgui->ScanDir();}
   }
   Function {get_menu_Har_Downsample()} {open C return_type {Fl_Menu_Item *}
   } {
-    code {return menu_Har_Downsample;} {selected
-    }
+    code {return menu_Har_Downsample;} {}
   }
 }

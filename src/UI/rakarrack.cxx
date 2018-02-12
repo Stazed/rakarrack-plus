@@ -3544,8 +3544,6 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("Looper Size"),rkr->looper_size);
   
   
-  
-  rakarrack.set(rkr->PrefNom("FontSize"),rkr->relfontsize);
   rakarrack.set(rkr->PrefNom("Bank Filename"),rkr->BankFilename);
   rakarrack.set(rkr->PrefNom("User Directory"),rkr->UDirFilename);
   
