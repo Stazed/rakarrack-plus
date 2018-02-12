@@ -1630,3 +1630,7 @@ void SettingsWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui ) {
   m_rkr = _rkr;
   m_rgui= _rgui;
 }
+
+Fl_Menu_Item * SettingsWindowGui::get_menu_Har_Downsample() {
+  return menu_Har_Downsample;
+}

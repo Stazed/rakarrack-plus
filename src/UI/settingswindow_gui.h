@@ -426,5 +426,6 @@ private:
   RKRGUI* m_rgui; 
 public:
   void initialize(RKR *_rkr,RKRGUI *_rgui );
+  Fl_Menu_Item * get_menu_Har_Downsample();
 };
 #endif

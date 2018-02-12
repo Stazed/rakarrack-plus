@@ -90,7 +90,7 @@ rkr->sback_color = (int) back_color;
 rkr->sfore_color = (int) fore_color;
 rkr->sleds_color = (int) leds_color;
 rkr->sh = (int) Principal->h();
-rkr->sschema = scheme_ch->value();
+rkr->sschema = Settings->scheme_ch->value();
 
 
 rkr->saveskin(filename);
@@ -1294,883 +1294,12 @@ void RKRGUI::cb_Order(OrderWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Order_i(o,v);
 }
 
-void RKRGUI::cb_Settings_i(Fl_Double_Window*, void*) {
+void RKRGUI::cb_Settings_i(SettingsWindowGui* o, void*) {
   save_stat(3);
-Settings->hide();
+o->hide();
 }
-void RKRGUI::cb_Settings(Fl_Double_Window* o, void* v) {
+void RKRGUI::cb_Settings(SettingsWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Settings_i(o,v);
-}
-
-void RKRGUI::cb_scheme_ch_i(Fl_Choice* o, void*) {
-  switch ((int)o->value())
-
-{
-
-  case 0:
-
-Fl::scheme("");
-Fl::redraw();
-break;
-
-  case 1:
-
-Fl::scheme("none");
-Fl::redraw();
-break;
-
-  case 2:
-
-Fl::scheme("gtk+");
-Fl::redraw();
-break;
-
-  case 3:
-
-Fl::scheme("plastic");
-Fl::redraw();
-break;
-
-};
-}
-void RKRGUI::cb_scheme_ch(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_scheme_ch_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_scheme_ch[] = {
- {"X11", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
- {"fltk", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
- {"gtk+", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
- {"plastic", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 12, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Font_Bro_i(Fl_Browser* o, void*) {
-  rkr->font = (int)o->value()-1;
-chfsize(0);
-}
-void RKRGUI::cb_Font_Bro(Fl_Browser* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Font_Bro_i(o,v);
-}
-
-void RKRGUI::cb_FSless_i(Fl_Button*, void*) {
-  rkr->relfontsize--;
-chfsize(-1);
-}
-void RKRGUI::cb_FSless(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSless_i(o,v);
-}
-
-void RKRGUI::cb_FSplus_i(Fl_Button*, void*) {
-  rkr->relfontsize++;
-chfsize(1);
-}
-void RKRGUI::cb_FSplus(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSplus_i(o,v);
-}
-
-void RKRGUI::cb_FSReset_i(Fl_Button*, void*) {
-  rkr->relfontsize=0;
-chfsize(0);
-}
-void RKRGUI::cb_FSReset(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FSReset_i(o,v);
-}
-
-void RKRGUI::cb_B_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-
-Fl::get_color(fore_color,r,g,b);
-if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
-fore_color=fl_rgb_color(r,g,b);
-Buttons_Color_Change(fore_color);
-}
-void RKRGUI::cb_B_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_B_C_i(o,v);
-}
-
-void RKRGUI::cb_A_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-Fl::get_color(label_color,r,g,b);
-if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
-label_color=fl_rgb_color(r,g,b);
-Label_Color_Change(label_color);
-}
-void RKRGUI::cb_A_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_A_C_i(o,v);
-}
-
-void RKRGUI::cb_L_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-Fl::get_color(leds_color,r,g,b);
-if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
-leds_color=fl_rgb_color(r,g,b);
-Leds_Color_Change(leds_color);
-}
-void RKRGUI::cb_L_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_C_i(o,v);
-}
-
-void RKRGUI::cb_K_C_i(Fl_Button*, void*) {
-  uchar r,g,b;
-Fl::get_color(back_color,r,g,b);
-if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
-back_color=fl_rgb_color(r,g,b);
-Background_Color_Change(back_color);
-}
-void RKRGUI::cb_K_C(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_K_C_i(o,v);
-}
-
-void RKRGUI::cb_Enable_Back_i(Fl_Check_Button* o, void*) {
-  rkr->EnableBackgroundImage=(int) o->value();
-PutBackground();
-}
-void RKRGUI::cb_Enable_Back(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Enable_Back_i(o,v);
-}
-
-void RKRGUI::cb_BI_Browser_i(Fl_Button*, void*) {
-  char *filename;
-filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".png");
-BackFiname->value(filename);
-strcpy(rkr->BackgroundImage,filename);
-PutBackground();
-}
-void RKRGUI::cb_BI_Browser(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BI_Browser_i(o,v);
-}
-
-void RKRGUI::cb_Enable_DeacHide_i(Fl_Check_Button* o, void*) {
-  rkr->deachide=(int) o->value();
-}
-void RKRGUI::cb_Enable_DeacHide(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Enable_DeacHide_i(o,v);
-}
-
-void RKRGUI::cb_INSTATE_i(Fl_Check_Button* o, void*) {
-  rkr->init_state=(int) o->value();
-}
-void RKRGUI::cb_INSTATE(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_INSTATE_i(o,v);
-}
-
-void RKRGUI::cb_Filter_DC_i(Fl_Check_Button* o, void*) {
-  rkr->DC_Offset=(int) o->value();
-}
-void RKRGUI::cb_Filter_DC(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Filter_DC_i(o,v);
-}
-
-void RKRGUI::cb_Pre_Serve_i(Fl_Check_Button* o, void*) {
-  rkr->actuvol=(int) o->value();
-}
-void RKRGUI::cb_Pre_Serve(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Pre_Serve_i(o,v);
-}
-
-void RKRGUI::cb_Update_TAP_i(Fl_Check_Button* o, void*) {
-  rkr->Tap_Updated = (int) o->value();
-}
-void RKRGUI::cb_Update_TAP(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Update_TAP_i(o,v);
-}
-
-void RKRGUI::cb_UPSAMPLE_C_i(Fl_Check_Button* o, void*) {
-  rkr->upsample=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_UPSAMPLE_C(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_UPSAMPLE_C_i(o,v);
-}
-
-void RKRGUI::cb_Upr_Amo_i(Fl_Choice* o, void*) {
-  rkr->UpAmo =(int) o->value();
-
-Show_Next_Time();
-}
-void RKRGUI::cb_Upr_Amo(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Upr_Amo_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Upr_Amo[] = {
- {"x2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x7", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x9", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x10", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x11", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Upr_Qual_i(Fl_Choice* o, void*) {
-  rkr->UpQual =(int) o->value();
-
-Show_Next_Time();
-}
-void RKRGUI::cb_Upr_Qual(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Upr_Qual_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Upr_Qual[] = {
- {"Best", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Medium", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Fastest", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Zero Order", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Linear", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Downr_Qual_i(Fl_Choice* o, void*) {
-  rkr->DownQual =(int) o->value();
-
-Show_Next_Time();
-}
-void RKRGUI::cb_Downr_Qual(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Downr_Qual_i(o,v);
-}
-
-void RKRGUI::cb_L_SIZE_i(Fl_Counter* o, void*) {
-  rkr->looper_size=o->value();
-if(!rkr->m_displayed)
-{
-Show_Next_Time();
-rkr->m_displayed=1;
-};
-}
-void RKRGUI::cb_L_SIZE(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_L_SIZE_i(o,v);
-}
-
-void RKRGUI::cb_LM_Volume_i(Fl_Counter* o, void*) {
-  rkr->Metro_Vol=(int)o->value();
-rkr->efx_Looper->setmvol(rkr->Metro_Vol);
-}
-void RKRGUI::cb_LM_Volume(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_LM_Volume_i(o,v);
-}
-
-void RKRGUI::cb_Har_Qual_i(Fl_Choice* o, void*) {
-  int i = (int) o->value();
-
-switch(i)
-{
-     case 0:
-       rkr->HarQual=4;
-       break;
-     case 1:
-       rkr->HarQual=8;
-       break;
-     case 2:
-       rkr->HarQual=16;	
-	break;
-     case 3:
-       rkr->HarQual=32;	
-	break;
-
-		
-}
-
-
-Show_Next_Time();
-}
-void RKRGUI::cb_Har_Qual(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_Qual_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Har_Qual[] = {
- {"4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"16", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"32", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Ste_Qual_i(Fl_Choice* o, void*) {
-  int i = (int) o->value();
-
-switch(i)
-{
-     case 0:
-       rkr->SteQual=4;
-       break;
-     case 1:
-       rkr->SteQual=8;
-       break;
-     case 2:
-       rkr->SteQual=16;	
-	break;
-     case 3:
-       rkr->SteQual=32;	
-	break;
-
-		
-}
-
-
-Show_Next_Time();
-}
-void RKRGUI::cb_Ste_Qual(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Ste_Qual_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Ste_Qual[] = {
- {"4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"16", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"32", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Voc_Bands_i(Fl_Choice* o, void*) {
-  switch((int)o->value())
-{
-  case 0:
-  rkr->VocBands = 16;
-  break;
-
-  case 1:
-  rkr->VocBands = 32;
-  break;
-
-  case 2:
-  rkr->VocBands = 64;
-  break;
-
-  case 3:
-  rkr->VocBands = 128;
-  break;
-
-  case 4:
-  rkr->VocBands = 256;
-  break;
-
-}
-
-Show_Next_Time();
-}
-void RKRGUI::cb_Voc_Bands(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Voc_Bands_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Voc_Bands[] = {
- {"16", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"32", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"64", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"128", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"256", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_FLPosition_i(Fl_Check_Button* o, void*) {
-  rkr->flpos=(int)o->value();
-}
-void RKRGUI::cb_FLPosition(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_FLPosition_i(o,v);
-}
-
-void RKRGUI::cb_DB6B_i(Fl_Check_Button* o, void*) {
-  rkr->db6booster=(int)o->value();
-}
-void RKRGUI::cb_DB6B(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_DB6B_i(o,v);
-}
-
-void RKRGUI::cb_Calibration_i(Fl_Counter* o, void*) {
-  rkr->aFreq=o->value();
-rkr->HarmRecNote->update_freqs(rkr->aFreq);
-rkr->StHarmRecNote->update_freqs(rkr->aFreq);
-rkr->RingRecNote->update_freqs(rkr->aFreq);
-}
-void RKRGUI::cb_Calibration(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Calibration_i(o,v);
-}
-
-void RKRGUI::cb_RTrigger_i(Fl_Counter* o, void*) {
-  rkr->rtrig = o->value();
-rkr->HarmRecNote->trigfact = o->value();
-rkr->StHarmRecNote->trigfact = o->value();
-rkr->RingRecNote->trigfact = o->value();
-}
-void RKRGUI::cb_RTrigger(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RTrigger_i(o,v);
-}
-
-void RKRGUI::cb_RC_Harm_Opti_i(Fl_Choice* o, void*) {
-  rkr->RCOpti_Harm =(int) o->value();
-
-switch(rkr->RCOpti_Harm)
-  {
-  
-  
-    case 0:
-    	rkr->HarmRecNote->setlpf(5500);
-    	rkr->HarmRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	rkr->HarmRecNote->setlpf(4500);
-    	rkr->HarmRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	rkr->HarmRecNote->setlpf(3000);
-    	rkr->HarmRecNote->sethpf(300);
-    	break;
-
-};
-}
-void RKRGUI::cb_RC_Harm_Opti(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_Harm_Opti_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_RC_Harm_Opti[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_RC_St_Harm_Opti_i(Fl_Choice* o, void*) {
-  rkr->RCOpti_Stereo =(int) o->value();
-
-switch(rkr->RCOpti_Stereo)
-  {
-  
-  
-    case 0:
-    	rkr->StHarmRecNote->setlpf(5500);
-    	rkr->StHarmRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	rkr->StHarmRecNote->setlpf(4500);
-    	rkr->StHarmRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	rkr->StHarmRecNote->setlpf(3000);
-    	rkr->StHarmRecNote->sethpf(300);
-    	break;
-
-};
-}
-void RKRGUI::cb_RC_St_Harm_Opti(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_St_Harm_Opti_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_RC_St_Harm_Opti[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_RC_Ring_Opti_i(Fl_Choice* o, void*) {
-  rkr->RCOpti_Ring =(int) o->value();
-
-switch(rkr->RCOpti_Ring)
-  {
-  
-  
-    case 0:
-    	rkr->RingRecNote->setlpf(5500);
-    	rkr->RingRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	rkr->RingRecNote->setlpf(4500);
-    	rkr->RingRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	rkr->RingRecNote->setlpf(3000);
-    	rkr->RingRecNote->sethpf(300);
-    	break;
-
-};
-}
-void RKRGUI::cb_RC_Ring_Opti(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_RC_Ring_Opti_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_RC_Ring_Opti[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Har_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Har_Down=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Har_Downsample(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_Downsample_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Har_Downsample[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"96000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"48000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"44100", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"32000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"22050", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"16000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"12000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"8000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"4000", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Har_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Har_D_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Har_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Har_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Har_U_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Har_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Rev_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Rev_Down=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Rev_Downsample(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Rev_Downsample_i(o,v);
-}
-
-void RKRGUI::cb_Rev_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Rev_D_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Rev_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Rev_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Rev_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Rev_U_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Rev_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Rev_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Con_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Con_Down=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Con_Downsample(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Con_Downsample_i(o,v);
-}
-
-void RKRGUI::cb_Con_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Con_D_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Con_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Con_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Con_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Con_U_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Con_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Con_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Seq_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Seq_Down=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Seq_Downsample(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Seq_Downsample_i(o,v);
-}
-
-void RKRGUI::cb_Seq_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Seq_D_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Seq_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Seq_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Seq_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Seq_U_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Seq_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Seq_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Shi_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Shi_Down=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Shi_Downsample(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Shi_Downsample_i(o,v);
-}
-
-void RKRGUI::cb_Shi_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Shi_D_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Shi_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Shi_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Shi_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Shi_U_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Shi_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Shi_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Voc_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Voc_Down=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Voc_Downsample(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Voc_Downsample_i(o,v);
-}
-
-void RKRGUI::cb_Voc_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Voc_D_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Voc_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Voc_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Voc_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Voc_U_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Voc_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Voc_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Ste_Downsample_i(Fl_Choice* o, void*) {
-  rkr->Ste_Down=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Ste_Downsample(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Ste_Downsample_i(o,v);
-}
-
-void RKRGUI::cb_Ste_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Ste_D_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Ste_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Ste_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Ste_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Ste_U_Q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Ste_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Ste_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Wave_Amo_i(Fl_Choice* o, void*) {
-  rkr->Wave_res_amount=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Wave_Amo(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Wave_Amo_i(o,v);
-}
-
-Fl_Menu_Item RKRGUI::menu_Wave_Amo[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void RKRGUI::cb_Wave_Down_Qua_i(Fl_Choice* o, void*) {
-  rkr->Wave_down_q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Wave_Down_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Wave_Down_Qua_i(o,v);
-}
-
-void RKRGUI::cb_Wave_Up_Qua_i(Fl_Choice* o, void*) {
-  rkr->Wave_up_q=(int)o->value();
-Show_Next_Time();
-}
-void RKRGUI::cb_Wave_Up_Qua(Fl_Choice* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Wave_Up_Qua_i(o,v);
-}
-
-void RKRGUI::cb_D_A_Connect_i(Fl_Check_Button* o, void*) {
-  rkr->aconnect_MI=(int) o->value();
-
-if (rkr->aconnect_MI) BMidiIn->activate();
-else BMidiIn->deactivate();
-}
-void RKRGUI::cb_D_A_Connect(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_D_A_Connect_i(o,v);
-}
-
-void RKRGUI::cb_BMidiIn_i(Fl_Browser* o, void*) {
-  int valor;
-valor = (int) o->value();
-if(o->text(valor) != NULL)
-strcpy(rkr->MID,o->text(valor));
-else return;
-o->select(valor,1);
-rkr->Conecta();
-}
-void RKRGUI::cb_BMidiIn(Fl_Browser* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BMidiIn_i(o,v);
-}
-
-void RKRGUI::cb_Midi_In_Counter_i(Fl_Counter* o, void*) {
-  rkr->MidiCh=(int)o->value()-1;
-}
-void RKRGUI::cb_Midi_In_Counter(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Midi_In_Counter_i(o,v);
-}
-
-void RKRGUI::cb_Har_In_Counter_i(Fl_Counter* o, void*) {
-  rkr->HarCh=(int)o->value()-1;
-}
-void RKRGUI::cb_Har_In_Counter(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Har_In_Counter_i(o,v);
-}
-
-void RKRGUI::cb_Stereo_Har_In_Counter_i(Fl_Counter* o, void*) {
-  rkr->StereoHarCh=(int)o->value()-1;
-}
-void RKRGUI::cb_Stereo_Har_In_Counter(Fl_Counter* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Stereo_Har_In_Counter_i(o,v);
-}
-
-void RKRGUI::cb_Mw0_i(Fl_Check_Button*, void*) {
-  rkr->MIDIway=0;
-ML_Menu->deactivate();
-}
-void RKRGUI::cb_Mw0(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Mw0_i(o,v);
-}
-
-void RKRGUI::cb_Mw1_i(Fl_Check_Button*, void*) {
-  rkr->MIDIway=1;
-ML_Menu->activate();
-}
-void RKRGUI::cb_Mw1(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Mw1_i(o,v);
-}
-
-void RKRGUI::cb_AAssign_i(Fl_Check_Button* o, void*) {
-  rkr->autoassign=o->value();
-}
-void RKRGUI::cb_AAssign(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_AAssign_i(o,v);
-}
-
-void RKRGUI::cb_MTable_i(Fl_Check_Button* o, void*) {
-  rkr->midi_table=o->value();
-if(rkr->midi_table) scroll->activate(); else 
-scroll->deactivate();
-}
-void RKRGUI::cb_MTable(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_MTable_i(o,v);
-}
-
-void RKRGUI::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
-  rkr->aconnect_JA=(int) o->value();
-if (rkr->aconnect_JA) JackCo->activate();
-else JackCo->deactivate();
-}
-void RKRGUI::cb_D_J_Connect(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_D_J_Connect_i(o,v);
-}
-
-void RKRGUI::cb_D_IJ_Connect_i(Fl_Check_Button* o, void*) {
-  rkr->aconnect_JIA=(int) o->value();
-if (rkr->aconnect_JIA) JackIn->activate();
-else JackIn->deactivate();
-}
-void RKRGUI::cb_D_IJ_Connect(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_D_IJ_Connect_i(o,v);
-}
-
-void RKRGUI::cb_Username_i(Fl_Input* o, void*) {
-  rkr->UserRealName=(char*) o->value();
-}
-void RKRGUI::cb_Username(Fl_Input* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_Username_i(o,v);
-}
-
-void RKRGUI::cb_MES_DIS_i(Fl_Check_Button* o, void*) {
-  rkr->mess_dis=(int) o->value();
-}
-void RKRGUI::cb_MES_DIS(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_MES_DIS_i(o,v);
-}
-
-void RKRGUI::cb_T_TIMEOUT_i(Fl_Check_Button* o, void*) {
-  rkr->t_timeout=(int) o->value();
-}
-void RKRGUI::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_T_TIMEOUT_i(o,v);
-}
-
-void RKRGUI::cb_ENA_TOOL_i(Fl_Check_Button* o, void*) {
-  rkr->ena_tool=(int) o->value();
-Fl_Tooltip::enable(rkr->ena_tool);
-}
-void RKRGUI::cb_ENA_TOOL(Fl_Check_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_ENA_TOOL_i(o,v);
-}
-
-void RKRGUI::cb_BF_Browser_i(Fl_Button*, void*) {
-  char *filename;
-filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-BFiname->value(filename);
-strcpy(rkr->BankFilename,filename);
-}
-void RKRGUI::cb_BF_Browser(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_BF_Browser_i(o,v);
-}
-
-void RKRGUI::cb_UD_Browser_i(Fl_Button*, void*) {
-  char *dir;
-dir=fl_dir_chooser("Browse:",NULL,0);
-if (dir==NULL) return;
-Udir->value(dir);
-strcpy(rkr->UDirFilename,dir);
-ScanDir();
-}
-void RKRGUI::cb_UD_Browser(Fl_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->parent()->user_data()))->cb_UD_Browser_i(o,v);
 }
 
 void RKRGUI::cb_MIDILearn_i(MidiLearnWindowGui* o, void*) {
@@ -3630,734 +2759,22 @@ void RKRGUI::make_window() {
     Order->end();
     Order->resizable(Order);
   } // OrderWindowGui* Order
-  { Settings = new Fl_Double_Window(640, 580);
+  { SettingsWindowGui* o = Settings = new SettingsWindowGui(640, 580);
+    Settings->box(FL_NO_BOX);
     Settings->color((Fl_Color)4);
+    Settings->selection_color(FL_BACKGROUND2_COLOR);
+    Settings->labeltype(FL_NO_LABEL);
+    Settings->labelfont(0);
+    Settings->labelsize(14);
+    Settings->labelcolor(FL_FOREGROUND_COLOR);
     Settings->callback((Fl_Callback*)cb_Settings, (void*)(this));
-    { Fondo2 = new Fl_Box(1, 1, 640, 580);
-    } // Fl_Box* Fondo2
-    { STabs = new Fl_Tabs(0, 0, 636, 606);
-      STabs->user_data((void*)(1));
-      { Look = new Fl_Group(5, 26, 630, 554, "Look");
-        Look->box(FL_DOWN_FRAME);
-        Look->labelfont(1);
-        Look->labelcolor(FL_BACKGROUND2_COLOR);
-        Look->user_data((void*)(1));
-        Look->align(Fl_Align(FL_ALIGN_LEFT));
-        Look->hide();
-        { Fondo6 = new Fl_Box(5, 26, 630, 554);
-        } // Fl_Box* Fondo6
-        { scheme_ch = new Fl_Choice(60, 50, 88, 20, "Schema");
-          scheme_ch->down_box(FL_BORDER_BOX);
-          scheme_ch->labelsize(11);
-          scheme_ch->labelcolor(FL_BACKGROUND2_COLOR);
-          scheme_ch->textsize(12);
-          scheme_ch->textcolor(FL_BACKGROUND2_COLOR);
-          scheme_ch->callback((Fl_Callback*)cb_scheme_ch);
-          scheme_ch->menu(menu_scheme_ch);
-        } // Fl_Choice* scheme_ch
-        { Font_Bro = new Fl_Browser(20, 100, 400, 225, "Font");
-          Font_Bro->type(1);
-          Font_Bro->labelsize(11);
-          Font_Bro->labelcolor(FL_BACKGROUND2_COLOR);
-          Font_Bro->callback((Fl_Callback*)cb_Font_Bro);
-          Font_Bro->align(Fl_Align(FL_ALIGN_TOP));
-          Font_Bro->when(FL_WHEN_CHANGED);
-        } // Fl_Browser* Font_Bro
-        { FSLabel = new Fl_Box(10, 333, 60, 17, "Font Size");
-          FSLabel->labelsize(11);
-          FSLabel->labelcolor(FL_BACKGROUND2_COLOR);
-        } // Fl_Box* FSLabel
-        { FSless = new Fl_Button(78, 330, 30, 20, "-");
-          FSless->callback((Fl_Callback*)cb_FSless, (void*)(77));
-        } // Fl_Button* FSless
-        { FSplus = new Fl_Button(113, 330, 30, 20, "+");
-          FSplus->callback((Fl_Callback*)cb_FSplus, (void*)(77));
-        } // Fl_Button* FSplus
-        { FSReset = new Fl_Button(148, 330, 57, 20, "Reset");
-          FSReset->callback((Fl_Callback*)cb_FSReset, (void*)(77));
-        } // Fl_Button* FSReset
-        { CLLabel = new Fl_Box(10, 358, 40, 19, "Colors");
-          CLLabel->labelsize(11);
-          CLLabel->labelcolor(FL_BACKGROUND2_COLOR);
-        } // Fl_Box* CLLabel
-        { B_C = new Fl_Button(15, 380, 90, 25, "Buttons");
-          B_C->callback((Fl_Callback*)cb_B_C, (void*)(77));
-        } // Fl_Button* B_C
-        { A_C = new Fl_Button(120, 380, 90, 25, "Labels");
-          A_C->callback((Fl_Callback*)cb_A_C, (void*)(77));
-        } // Fl_Button* A_C
-        { L_C = new Fl_Button(225, 380, 90, 25, "Leds");
-          L_C->callback((Fl_Callback*)cb_L_C, (void*)(77));
-        } // Fl_Button* L_C
-        { K_C = new Fl_Button(330, 380, 90, 25, "Background");
-          K_C->callback((Fl_Callback*)cb_K_C, (void*)(77));
-        } // Fl_Button* K_C
-        { Enable_Back = new Fl_Check_Button(162, 409, 23, 20, "Enable Background Image");
-          Enable_Back->down_box(FL_DOWN_BOX);
-          Enable_Back->labelsize(11);
-          Enable_Back->labelcolor(FL_BACKGROUND2_COLOR);
-          Enable_Back->callback((Fl_Callback*)cb_Enable_Back);
-          Enable_Back->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* Enable_Back
-        { BackFiname = new Fl_File_Input(10, 445, 390, 30, "Background Image");
-          BackFiname->labelsize(11);
-          BackFiname->labelcolor(FL_BACKGROUND2_COLOR);
-          BackFiname->textsize(12);
-          BackFiname->textcolor(FL_BACKGROUND2_COLOR);
-          BackFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-        } // Fl_File_Input* BackFiname
-        { BI_Browser = new Fl_Button(410, 455, 65, 20, "Browse");
-          BI_Browser->callback((Fl_Callback*)cb_BI_Browser, (void*)(77));
-        } // Fl_Button* BI_Browser
-        { Enable_DeacHide = new Fl_Check_Button(169, 500, 23, 20, "Hide Unused Effect Widgets");
-          Enable_DeacHide->down_box(FL_DOWN_BOX);
-          Enable_DeacHide->labelsize(11);
-          Enable_DeacHide->labelcolor(FL_BACKGROUND2_COLOR);
-          Enable_DeacHide->callback((Fl_Callback*)cb_Enable_DeacHide);
-          Enable_DeacHide->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* Enable_DeacHide
-        Look->end();
-      } // Fl_Group* Look
-      { AUDIO_SET = new Fl_Group(0, 26, 635, 554, "Audio");
-        AUDIO_SET->box(FL_DOWN_FRAME);
-        AUDIO_SET->labelfont(1);
-        AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
-        AUDIO_SET->user_data((void*)(1));
-        AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        { Fondo7 = new Fl_Box(0, 26, 635, 554);
-        } // Fl_Box* Fondo7
-        { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
-          INSTATE->down_box(FL_DOWN_BOX);
-          INSTATE->labelsize(11);
-          INSTATE->labelcolor(FL_BACKGROUND2_COLOR);
-          INSTATE->callback((Fl_Callback*)cb_INSTATE);
-          INSTATE->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* INSTATE
-        { Filter_DC = new Fl_Check_Button(135, 53, 23, 20, "Filter Input DC Offset");
-          Filter_DC->down_box(FL_DOWN_BOX);
-          Filter_DC->labelsize(11);
-          Filter_DC->labelcolor(FL_BACKGROUND2_COLOR);
-          Filter_DC->callback((Fl_Callback*)cb_Filter_DC);
-          Filter_DC->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* Filter_DC
-        { Pre_Serve = new Fl_Check_Button(259, 77, 21, 20, "Preserve Gain/Master when Preset change");
-          Pre_Serve->down_box(FL_DOWN_BOX);
-          Pre_Serve->labelsize(11);
-          Pre_Serve->labelcolor(FL_BACKGROUND2_COLOR);
-          Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
-          Pre_Serve->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* Pre_Serve
-        { Update_TAP = new Fl_Check_Button(239, 100, 21, 20, "Update TapTempo when Preset change");
-          Update_TAP->down_box(FL_DOWN_BOX);
-          Update_TAP->labelsize(11);
-          Update_TAP->labelcolor(FL_BACKGROUND2_COLOR);
-          Update_TAP->callback((Fl_Callback*)cb_Update_TAP);
-          Update_TAP->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* Update_TAP
-        { UPSAMPLE_C = new Fl_Check_Button(83, 124, 23, 20, "Upsampling");
-          UPSAMPLE_C->down_box(FL_DOWN_BOX);
-          UPSAMPLE_C->labelsize(11);
-          UPSAMPLE_C->labelcolor(FL_BACKGROUND2_COLOR);
-          UPSAMPLE_C->callback((Fl_Callback*)cb_UPSAMPLE_C);
-          UPSAMPLE_C->align(Fl_Align(FL_ALIGN_LEFT));
-          UPSAMPLE_C->when(FL_WHEN_CHANGED);
-        } // Fl_Check_Button* UPSAMPLE_C
-        { Upr_Amo = new Fl_Choice(145, 126, 47, 18, "Amount");
-          Upr_Amo->down_box(FL_BORDER_BOX);
-          Upr_Amo->labelsize(10);
-          Upr_Amo->labelcolor(FL_BACKGROUND2_COLOR);
-          Upr_Amo->textsize(10);
-          Upr_Amo->textcolor(FL_BACKGROUND2_COLOR);
-          Upr_Amo->callback((Fl_Callback*)cb_Upr_Amo);
-          Upr_Amo->menu(menu_Upr_Amo);
-        } // Fl_Choice* Upr_Amo
-        { Upr_Qual = new Fl_Choice(217, 126, 72, 18, "Up");
-          Upr_Qual->down_box(FL_BORDER_BOX);
-          Upr_Qual->labelsize(10);
-          Upr_Qual->labelcolor(FL_BACKGROUND2_COLOR);
-          Upr_Qual->textsize(10);
-          Upr_Qual->textcolor(FL_BACKGROUND2_COLOR);
-          Upr_Qual->callback((Fl_Callback*)cb_Upr_Qual);
-          Upr_Qual->menu(menu_Upr_Qual);
-        } // Fl_Choice* Upr_Qual
-        { Fl_Choice* o = Downr_Qual = new Fl_Choice(329, 126, 73, 18, "Down");
-          Downr_Qual->down_box(FL_BORDER_BOX);
-          Downr_Qual->labelsize(10);
-          Downr_Qual->labelcolor(FL_BACKGROUND2_COLOR);
-          Downr_Qual->textsize(10);
-          Downr_Qual->textcolor(FL_BACKGROUND2_COLOR);
-          Downr_Qual->callback((Fl_Callback*)cb_Downr_Qual);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Downr_Qual
-        { L_SIZE = new Fl_Counter(133, 149, 47, 18, "Looper Size Seconds     ");
-          L_SIZE->type(1);
-          L_SIZE->labelsize(10);
-          L_SIZE->labelcolor(FL_BACKGROUND2_COLOR);
-          L_SIZE->minimum(0.5);
-          L_SIZE->maximum(30);
-          L_SIZE->step(0.5);
-          L_SIZE->value(0.5);
-          L_SIZE->textsize(10);
-          L_SIZE->callback((Fl_Callback*)cb_L_SIZE);
-          L_SIZE->align(Fl_Align(FL_ALIGN_LEFT));
-          L_SIZE->when(FL_WHEN_RELEASE);
-        } // Fl_Counter* L_SIZE
-        { LM_Volume = new Fl_Counter(338, 149, 47, 18, "Looper Metronome Volume  ");
-          LM_Volume->type(1);
-          LM_Volume->labelsize(10);
-          LM_Volume->labelcolor(FL_BACKGROUND2_COLOR);
-          LM_Volume->minimum(0);
-          LM_Volume->maximum(100);
-          LM_Volume->step(1);
-          LM_Volume->value(50);
-          LM_Volume->textsize(10);
-          LM_Volume->callback((Fl_Callback*)cb_LM_Volume);
-          LM_Volume->align(Fl_Align(FL_ALIGN_LEFT));
-          LM_Volume->when(FL_WHEN_RELEASE);
-        } // Fl_Counter* LM_Volume
-        { Har_Qual = new Fl_Choice(132, 173, 47, 18, "Harmonizer Quality      ");
-          Har_Qual->down_box(FL_BORDER_BOX);
-          Har_Qual->labelsize(10);
-          Har_Qual->labelcolor(FL_BACKGROUND2_COLOR);
-          Har_Qual->textsize(10);
-          Har_Qual->textcolor(FL_BACKGROUND2_COLOR);
-          Har_Qual->callback((Fl_Callback*)cb_Har_Qual);
-          Har_Qual->menu(menu_Har_Qual);
-        } // Fl_Choice* Har_Qual
-        { Ste_Qual = new Fl_Choice(296, 173, 47, 18, "StereoHarm Quality");
-          Ste_Qual->down_box(FL_BORDER_BOX);
-          Ste_Qual->labelsize(10);
-          Ste_Qual->labelcolor(FL_BACKGROUND2_COLOR);
-          Ste_Qual->textsize(10);
-          Ste_Qual->textcolor(FL_BACKGROUND2_COLOR);
-          Ste_Qual->callback((Fl_Callback*)cb_Ste_Qual);
-          Ste_Qual->menu(menu_Ste_Qual);
-        } // Fl_Choice* Ste_Qual
-        { Voc_Bands = new Fl_Choice(132, 196, 47, 18, "Vocoder Bands              ");
-          Voc_Bands->down_box(FL_BORDER_BOX);
-          Voc_Bands->labelsize(10);
-          Voc_Bands->labelcolor(FL_BACKGROUND2_COLOR);
-          Voc_Bands->textsize(10);
-          Voc_Bands->textcolor(FL_BACKGROUND2_COLOR);
-          Voc_Bands->callback((Fl_Callback*)cb_Voc_Bands);
-          Voc_Bands->menu(menu_Voc_Bands);
-        } // Fl_Choice* Voc_Bands
-        { FLPosition = new Fl_Check_Button(186, 222, 23, 20, "Limiter before Output Volume");
-          FLPosition->down_box(FL_DOWN_BOX);
-          FLPosition->labelsize(11);
-          FLPosition->labelcolor(FL_BACKGROUND2_COLOR);
-          FLPosition->callback((Fl_Callback*)cb_FLPosition);
-          FLPosition->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* FLPosition
-        { DB6B = new Fl_Check_Button(324, 222, 23, 20, "+6dB Final Limiter ");
-          DB6B->down_box(FL_DOWN_BOX);
-          DB6B->labelsize(11);
-          DB6B->labelcolor(FL_BACKGROUND2_COLOR);
-          DB6B->callback((Fl_Callback*)cb_DB6B);
-          DB6B->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* DB6B
-        { Calibration = new Fl_Counter(120, 249, 116, 21, "Tuner Calibration A4 ");
-          Calibration->labelsize(10);
-          Calibration->labelcolor(FL_BACKGROUND2_COLOR);
-          Calibration->minimum(420);
-          Calibration->maximum(460);
-          Calibration->value(440);
-          Calibration->textsize(10);
-          Calibration->callback((Fl_Callback*)cb_Calibration);
-          Calibration->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Counter* Calibration
-        { Fl_Counter* o = RTrigger = new Fl_Counter(367, 249, 116, 21, "Recognize Note Trigger");
-          RTrigger->labelsize(10);
-          RTrigger->labelcolor(FL_BACKGROUND2_COLOR);
-          RTrigger->minimum(0.01);
-          RTrigger->maximum(0.99);
-          RTrigger->step(0.01);
-          RTrigger->value(0.6);
-          RTrigger->textsize(10);
-          RTrigger->callback((Fl_Callback*)cb_RTrigger);
-          RTrigger->align(Fl_Align(FL_ALIGN_LEFT));
-          o->lstep(0.1);
-        } // Fl_Counter* RTrigger
-        { RC_Harm_Opti = new Fl_Choice(165, 297, 72, 18, "Harmonizer");
-          RC_Harm_Opti->down_box(FL_BORDER_BOX);
-          RC_Harm_Opti->labelsize(10);
-          RC_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
-          RC_Harm_Opti->textsize(10);
-          RC_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
-          RC_Harm_Opti->callback((Fl_Callback*)cb_RC_Harm_Opti);
-          RC_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
-          RC_Harm_Opti->menu(menu_RC_Harm_Opti);
-        } // Fl_Choice* RC_Harm_Opti
-        { RC_St_Harm_Opti = new Fl_Choice(265, 297, 72, 18, "Stereo Harmonizer");
-          RC_St_Harm_Opti->down_box(FL_BORDER_BOX);
-          RC_St_Harm_Opti->labelsize(10);
-          RC_St_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
-          RC_St_Harm_Opti->textsize(10);
-          RC_St_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
-          RC_St_Harm_Opti->callback((Fl_Callback*)cb_RC_St_Harm_Opti);
-          RC_St_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
-          RC_St_Harm_Opti->menu(menu_RC_St_Harm_Opti);
-        } // Fl_Choice* RC_St_Harm_Opti
-        { RC_Ring_Opti = new Fl_Choice(365, 297, 72, 18, "Ring");
-          RC_Ring_Opti->down_box(FL_BORDER_BOX);
-          RC_Ring_Opti->labelsize(10);
-          RC_Ring_Opti->labelcolor(FL_BACKGROUND2_COLOR);
-          RC_Ring_Opti->textsize(10);
-          RC_Ring_Opti->textcolor(FL_BACKGROUND2_COLOR);
-          RC_Ring_Opti->callback((Fl_Callback*)cb_RC_Ring_Opti);
-          RC_Ring_Opti->align(Fl_Align(FL_ALIGN_TOP));
-          RC_Ring_Opti->menu(menu_RC_Ring_Opti);
-        } // Fl_Choice* RC_Ring_Opti
-        { Har_Downsample = new Fl_Choice(145, 336, 70, 18, "Harmonizer Downsample ");
-          Har_Downsample->down_box(FL_BORDER_BOX);
-          Har_Downsample->labelsize(10);
-          Har_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
-          Har_Downsample->textsize(10);
-          Har_Downsample->textcolor(FL_BACKGROUND2_COLOR);
-          Har_Downsample->callback((Fl_Callback*)cb_Har_Downsample);
-          Har_Downsample->menu(menu_Har_Downsample);
-        } // Fl_Choice* Har_Downsample
-        { Fl_Choice* o = Har_Down_Qua = new Fl_Choice(250, 336, 72, 18, "Down");
-          Har_Down_Qua->down_box(FL_BORDER_BOX);
-          Har_Down_Qua->labelsize(10);
-          Har_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Har_Down_Qua->textsize(10);
-          Har_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Har_Down_Qua->callback((Fl_Callback*)cb_Har_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Har_Down_Qua
-        { Fl_Choice* o = Har_Up_Qua = new Fl_Choice(343, 336, 72, 18, "Up");
-          Har_Up_Qua->down_box(FL_BORDER_BOX);
-          Har_Up_Qua->labelsize(10);
-          Har_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Har_Up_Qua->textsize(10);
-          Har_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Har_Up_Qua->callback((Fl_Callback*)cb_Har_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Har_Up_Qua
-        { Fl_Choice* o = Rev_Downsample = new Fl_Choice(145, 359, 70, 18, "Reverbtron Downsample  ");
-          Rev_Downsample->down_box(FL_BORDER_BOX);
-          Rev_Downsample->labelsize(10);
-          Rev_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
-          Rev_Downsample->textsize(10);
-          Rev_Downsample->textcolor(FL_BACKGROUND2_COLOR);
-          Rev_Downsample->callback((Fl_Callback*)cb_Rev_Downsample);
-          o->menu(menu_Har_Downsample);
-        } // Fl_Choice* Rev_Downsample
-        { Fl_Choice* o = Rev_Down_Qua = new Fl_Choice(250, 359, 72, 18, "Down");
-          Rev_Down_Qua->down_box(FL_BORDER_BOX);
-          Rev_Down_Qua->labelsize(10);
-          Rev_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Rev_Down_Qua->textsize(10);
-          Rev_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Rev_Down_Qua->callback((Fl_Callback*)cb_Rev_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Rev_Down_Qua
-        { Fl_Choice* o = Rev_Up_Qua = new Fl_Choice(343, 359, 72, 18, "Up");
-          Rev_Up_Qua->down_box(FL_BORDER_BOX);
-          Rev_Up_Qua->labelsize(10);
-          Rev_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Rev_Up_Qua->textsize(10);
-          Rev_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Rev_Up_Qua->callback((Fl_Callback*)cb_Rev_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Rev_Up_Qua
-        { Fl_Choice* o = Con_Downsample = new Fl_Choice(145, 382, 70, 18, "Convolotron Downsample");
-          Con_Downsample->down_box(FL_BORDER_BOX);
-          Con_Downsample->labelsize(10);
-          Con_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
-          Con_Downsample->textsize(10);
-          Con_Downsample->textcolor(FL_BACKGROUND2_COLOR);
-          Con_Downsample->callback((Fl_Callback*)cb_Con_Downsample);
-          o->menu(menu_Har_Downsample);
-        } // Fl_Choice* Con_Downsample
-        { Fl_Choice* o = Con_Down_Qua = new Fl_Choice(250, 382, 72, 18, "Down");
-          Con_Down_Qua->down_box(FL_BORDER_BOX);
-          Con_Down_Qua->labelsize(10);
-          Con_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Con_Down_Qua->textsize(10);
-          Con_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Con_Down_Qua->callback((Fl_Callback*)cb_Con_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Con_Down_Qua
-        { Fl_Choice* o = Con_Up_Qua = new Fl_Choice(343, 382, 72, 18, "Up");
-          Con_Up_Qua->down_box(FL_BORDER_BOX);
-          Con_Up_Qua->labelsize(10);
-          Con_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Con_Up_Qua->textsize(10);
-          Con_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Con_Up_Qua->callback((Fl_Callback*)cb_Con_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Con_Up_Qua
-        { Fl_Choice* o = Seq_Downsample = new Fl_Choice(145, 405, 70, 18, "Sequence Downsample    ");
-          Seq_Downsample->down_box(FL_BORDER_BOX);
-          Seq_Downsample->labelsize(10);
-          Seq_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
-          Seq_Downsample->textsize(10);
-          Seq_Downsample->textcolor(FL_BACKGROUND2_COLOR);
-          Seq_Downsample->callback((Fl_Callback*)cb_Seq_Downsample);
-          o->menu(menu_Har_Downsample);
-        } // Fl_Choice* Seq_Downsample
-        { Fl_Choice* o = Seq_Down_Qua = new Fl_Choice(250, 405, 72, 18, "Down");
-          Seq_Down_Qua->down_box(FL_BORDER_BOX);
-          Seq_Down_Qua->labelsize(10);
-          Seq_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Seq_Down_Qua->textsize(10);
-          Seq_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Seq_Down_Qua->callback((Fl_Callback*)cb_Seq_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Seq_Down_Qua
-        { Fl_Choice* o = Seq_Up_Qua = new Fl_Choice(343, 405, 72, 18, "Up");
-          Seq_Up_Qua->down_box(FL_BORDER_BOX);
-          Seq_Up_Qua->labelsize(10);
-          Seq_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Seq_Up_Qua->textsize(10);
-          Seq_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Seq_Up_Qua->callback((Fl_Callback*)cb_Seq_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Seq_Up_Qua
-        { Fl_Choice* o = Shi_Downsample = new Fl_Choice(145, 428, 70, 18, "Shifter Downsample         ");
-          Shi_Downsample->down_box(FL_BORDER_BOX);
-          Shi_Downsample->labelsize(10);
-          Shi_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
-          Shi_Downsample->textsize(10);
-          Shi_Downsample->textcolor(FL_BACKGROUND2_COLOR);
-          Shi_Downsample->callback((Fl_Callback*)cb_Shi_Downsample);
-          o->menu(menu_Har_Downsample);
-        } // Fl_Choice* Shi_Downsample
-        { Fl_Choice* o = Shi_Down_Qua = new Fl_Choice(250, 428, 72, 18, "Down");
-          Shi_Down_Qua->down_box(FL_BORDER_BOX);
-          Shi_Down_Qua->labelsize(10);
-          Shi_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Shi_Down_Qua->textsize(10);
-          Shi_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Shi_Down_Qua->callback((Fl_Callback*)cb_Shi_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Shi_Down_Qua
-        { Fl_Choice* o = Shi_Up_Qua = new Fl_Choice(343, 428, 72, 18, "Up");
-          Shi_Up_Qua->down_box(FL_BORDER_BOX);
-          Shi_Up_Qua->labelsize(10);
-          Shi_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Shi_Up_Qua->textsize(10);
-          Shi_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Shi_Up_Qua->callback((Fl_Callback*)cb_Shi_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Shi_Up_Qua
-        { Fl_Choice* o = Voc_Downsample = new Fl_Choice(145, 452, 70, 18, "Vocoder Downsample      ");
-          Voc_Downsample->down_box(FL_BORDER_BOX);
-          Voc_Downsample->labelsize(10);
-          Voc_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
-          Voc_Downsample->textsize(10);
-          Voc_Downsample->textcolor(FL_BACKGROUND2_COLOR);
-          Voc_Downsample->callback((Fl_Callback*)cb_Voc_Downsample);
-          o->menu(menu_Har_Downsample);
-        } // Fl_Choice* Voc_Downsample
-        { Fl_Choice* o = Voc_Down_Qua = new Fl_Choice(250, 452, 72, 18, "Down");
-          Voc_Down_Qua->down_box(FL_BORDER_BOX);
-          Voc_Down_Qua->labelsize(10);
-          Voc_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Voc_Down_Qua->textsize(10);
-          Voc_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Voc_Down_Qua->callback((Fl_Callback*)cb_Voc_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Voc_Down_Qua
-        { Fl_Choice* o = Voc_Up_Qua = new Fl_Choice(343, 452, 72, 18, "Up");
-          Voc_Up_Qua->down_box(FL_BORDER_BOX);
-          Voc_Up_Qua->labelsize(10);
-          Voc_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Voc_Up_Qua->textsize(10);
-          Voc_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Voc_Up_Qua->callback((Fl_Callback*)cb_Voc_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Voc_Up_Qua
-        { Fl_Choice* o = Ste_Downsample = new Fl_Choice(145, 477, 70, 18, "StereoHarm Downsample");
-          Ste_Downsample->down_box(FL_BORDER_BOX);
-          Ste_Downsample->labelsize(10);
-          Ste_Downsample->labelcolor(FL_BACKGROUND2_COLOR);
-          Ste_Downsample->textsize(10);
-          Ste_Downsample->textcolor(FL_BACKGROUND2_COLOR);
-          Ste_Downsample->callback((Fl_Callback*)cb_Ste_Downsample);
-          o->menu(menu_Har_Downsample);
-        } // Fl_Choice* Ste_Downsample
-        { Fl_Choice* o = Ste_Down_Qua = new Fl_Choice(250, 477, 72, 18, "Down");
-          Ste_Down_Qua->down_box(FL_BORDER_BOX);
-          Ste_Down_Qua->labelsize(10);
-          Ste_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Ste_Down_Qua->textsize(10);
-          Ste_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Ste_Down_Qua->callback((Fl_Callback*)cb_Ste_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Ste_Down_Qua
-        { Fl_Choice* o = Ste_Up_Qua = new Fl_Choice(343, 477, 72, 18, "Up");
-          Ste_Up_Qua->down_box(FL_BORDER_BOX);
-          Ste_Up_Qua->labelsize(10);
-          Ste_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Ste_Up_Qua->textsize(10);
-          Ste_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Ste_Up_Qua->callback((Fl_Callback*)cb_Ste_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Ste_Up_Qua
-        { Wave_Amo = new Fl_Choice(145, 527, 70, 18, "Waveshape Resampling   ");
-          Wave_Amo->down_box(FL_BORDER_BOX);
-          Wave_Amo->labelsize(10);
-          Wave_Amo->labelcolor(FL_BACKGROUND2_COLOR);
-          Wave_Amo->textsize(10);
-          Wave_Amo->textcolor(FL_BACKGROUND2_COLOR);
-          Wave_Amo->callback((Fl_Callback*)cb_Wave_Amo);
-          Wave_Amo->menu(menu_Wave_Amo);
-        } // Fl_Choice* Wave_Amo
-        { Fl_Choice* o = Wave_Down_Qua = new Fl_Choice(252, 527, 72, 18, "Down");
-          Wave_Down_Qua->down_box(FL_BORDER_BOX);
-          Wave_Down_Qua->labelsize(10);
-          Wave_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Wave_Down_Qua->textsize(10);
-          Wave_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Wave_Down_Qua->callback((Fl_Callback*)cb_Wave_Down_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Wave_Down_Qua
-        { Fl_Choice* o = Wave_Up_Qua = new Fl_Choice(345, 527, 72, 18, "Up");
-          Wave_Up_Qua->down_box(FL_BORDER_BOX);
-          Wave_Up_Qua->labelsize(10);
-          Wave_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-          Wave_Up_Qua->textsize(10);
-          Wave_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-          Wave_Up_Qua->callback((Fl_Callback*)cb_Wave_Up_Qua);
-          o->menu(menu_Upr_Qual);
-        } // Fl_Choice* Wave_Up_Qua
-        { Recognize_Label = new Fl_Box(10, 298, 150, 17, "Recognize Note Optimization");
-          Recognize_Label->labelsize(10);
-          Recognize_Label->user_data((void*)(7));
-          Recognize_Label->when(FL_WHEN_NEVER);
-        } // Fl_Box* Recognize_Label
-        AUDIO_SET->end();
-      } // Fl_Group* AUDIO_SET
-      { MIDI_SET = new Fl_Group(5, 26, 630, 554, "MIDI");
-        MIDI_SET->box(FL_DOWN_FRAME);
-        MIDI_SET->labelfont(1);
-        MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
-        MIDI_SET->user_data((void*)(1));
-        MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        MIDI_SET->hide();
-        { Fondo8 = new Fl_Box(5, 26, 630, 554);
-        } // Fl_Box* Fondo8
-        { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
-          D_A_Connect->down_box(FL_DOWN_BOX);
-          D_A_Connect->labelsize(11);
-          D_A_Connect->labelcolor(FL_BACKGROUND2_COLOR);
-          D_A_Connect->callback((Fl_Callback*)cb_D_A_Connect);
-          D_A_Connect->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* D_A_Connect
-        { BMidiIn = new Fl_Browser(15, 72, 190, 111, "ALSA Sequencer Ports");
-          BMidiIn->type(2);
-          BMidiIn->selection_color(FL_FOREGROUND_COLOR);
-          BMidiIn->labelsize(11);
-          BMidiIn->labelcolor(FL_BACKGROUND2_COLOR);
-          BMidiIn->textsize(12);
-          BMidiIn->textcolor(FL_BACKGROUND2_COLOR);
-          BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
-          BMidiIn->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-        } // Fl_Browser* BMidiIn
-        { Midi_In_Counter = new Fl_Counter(103, 198, 60, 24, "Receive Channel");
-          Midi_In_Counter->type(1);
-          Midi_In_Counter->color((Fl_Color)25);
-          Midi_In_Counter->labelsize(10);
-          Midi_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
-          Midi_In_Counter->minimum(1);
-          Midi_In_Counter->maximum(16);
-          Midi_In_Counter->step(1);
-          Midi_In_Counter->value(1);
-          Midi_In_Counter->textsize(11);
-          Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
-          Midi_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Counter* Midi_In_Counter
-        { Har_In_Counter = new Fl_Counter(162, 235, 60, 24, "Harmonizer Receive Channel");
-          Har_In_Counter->type(1);
-          Har_In_Counter->color((Fl_Color)25);
-          Har_In_Counter->labelsize(10);
-          Har_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
-          Har_In_Counter->minimum(1);
-          Har_In_Counter->maximum(16);
-          Har_In_Counter->step(1);
-          Har_In_Counter->value(1);
-          Har_In_Counter->textsize(11);
-          Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
-          Har_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Counter* Har_In_Counter
-        { Stereo_Har_In_Counter = new Fl_Counter(200, 276, 60, 24, "Stereo Harmonizer Receive Channel");
-          Stereo_Har_In_Counter->type(1);
-          Stereo_Har_In_Counter->color((Fl_Color)25);
-          Stereo_Har_In_Counter->labelsize(10);
-          Stereo_Har_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
-          Stereo_Har_In_Counter->minimum(1);
-          Stereo_Har_In_Counter->maximum(16);
-          Stereo_Har_In_Counter->step(1);
-          Stereo_Har_In_Counter->value(1);
-          Stereo_Har_In_Counter->textsize(11);
-          Stereo_Har_In_Counter->callback((Fl_Callback*)cb_Stereo_Har_In_Counter);
-          Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Counter* Stereo_Har_In_Counter
-        { wMIDI = new Fl_Group(15, 325, 273, 23, "MIDI implementation");
-          wMIDI->box(FL_DOWN_FRAME);
-          wMIDI->labelsize(10);
-          wMIDI->labelcolor(FL_BACKGROUND2_COLOR);
-          wMIDI->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-          { Mw0 = new Fl_Check_Button(72, 327, 18, 18, "Default");
-            Mw0->type(102);
-            Mw0->down_box(FL_DOWN_BOX);
-            Mw0->labelsize(11);
-            Mw0->labelcolor(FL_BACKGROUND2_COLOR);
-            Mw0->callback((Fl_Callback*)cb_Mw0);
-            Mw0->align(Fl_Align(FL_ALIGN_LEFT));
-          } // Fl_Check_Button* Mw0
-          { Mw1 = new Fl_Check_Button(183, 327, 18, 18, "MIDI Learn");
-            Mw1->type(102);
-            Mw1->down_box(FL_DOWN_BOX);
-            Mw1->labelsize(11);
-            Mw1->labelcolor(FL_BACKGROUND2_COLOR);
-            Mw1->callback((Fl_Callback*)cb_Mw1);
-            Mw1->align(Fl_Align(FL_ALIGN_LEFT));
-          } // Fl_Check_Button* Mw1
-          wMIDI->end();
-        } // Fl_Group* wMIDI
-        { AAssign = new Fl_Check_Button(134, 359, 16, 15, "Auto Assign MIDI Learn");
-          AAssign->down_box(FL_DOWN_BOX);
-          AAssign->labelsize(10);
-          AAssign->labelcolor(FL_BACKGROUND2_COLOR);
-          AAssign->callback((Fl_Callback*)cb_AAssign);
-          AAssign->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* AAssign
-        { MTable = new Fl_Check_Button(157, 377, 16, 15, "MIDI Program Change Table");
-          MTable->down_box(FL_DOWN_BOX);
-          MTable->labelsize(10);
-          MTable->labelcolor(FL_BACKGROUND2_COLOR);
-          MTable->callback((Fl_Callback*)cb_MTable);
-          MTable->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* MTable
-        { scroll = new Fl_Scroll(15, 360, 585, 162);
-          scroll->type(6);
-          scroll->user_data((void*)(5000));
-          scroll->end();
-        } // Fl_Scroll* scroll
-        MIDI_SET->end();
-      } // Fl_Group* MIDI_SET
-      { JACK_SET = new Fl_Group(5, 26, 630, 554, "Jack");
-        JACK_SET->box(FL_DOWN_FRAME);
-        JACK_SET->labelfont(1);
-        JACK_SET->labelcolor(FL_BACKGROUND2_COLOR);
-        JACK_SET->user_data((void*)(1));
-        JACK_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        JACK_SET->hide();
-        { Fondo9 = new Fl_Box(5, 26, 630, 554);
-        } // Fl_Box* Fondo9
-        { D_J_Connect = new Fl_Check_Button(114, 40, 25, 20, "Auto Connect Out");
-          D_J_Connect->down_box(FL_DOWN_BOX);
-          D_J_Connect->labelsize(11);
-          D_J_Connect->labelcolor(FL_BACKGROUND2_COLOR);
-          D_J_Connect->callback((Fl_Callback*)cb_D_J_Connect);
-          D_J_Connect->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* D_J_Connect
-        { JackCo = new Fl_Browser(10, 72, 235, 138, "Output Ports");
-          JackCo->type(3);
-          JackCo->selection_color(FL_FOREGROUND_COLOR);
-          JackCo->labelsize(11);
-          JackCo->labelcolor(FL_BACKGROUND2_COLOR);
-          JackCo->textsize(12);
-          JackCo->textcolor(FL_BACKGROUND2_COLOR);
-          JackCo->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-        } // Fl_Browser* JackCo
-        { D_IJ_Connect = new Fl_Check_Button(104, 228, 25, 20, "Auto Connect In");
-          D_IJ_Connect->down_box(FL_DOWN_BOX);
-          D_IJ_Connect->labelsize(11);
-          D_IJ_Connect->labelcolor(FL_BACKGROUND2_COLOR);
-          D_IJ_Connect->callback((Fl_Callback*)cb_D_IJ_Connect);
-          D_IJ_Connect->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* D_IJ_Connect
-        { JackIn = new Fl_Browser(10, 259, 235, 131, "Input Ports");
-          JackIn->type(3);
-          JackIn->selection_color(FL_FOREGROUND_COLOR);
-          JackIn->labelsize(11);
-          JackIn->labelcolor(FL_BACKGROUND2_COLOR);
-          JackIn->textsize(12);
-          JackIn->textcolor(FL_BACKGROUND2_COLOR);
-          JackIn->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-        } // Fl_Browser* JackIn
-        JACK_SET->end();
-      } // Fl_Group* JACK_SET
-      { MISC_SET = new Fl_Group(5, 26, 630, 554, "Misc");
-        MISC_SET->box(FL_DOWN_FRAME);
-        MISC_SET->labelfont(1);
-        MISC_SET->labelcolor(FL_BACKGROUND2_COLOR);
-        MISC_SET->user_data((void*)(1));
-        MISC_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        MISC_SET->hide();
-        { Fondo10 = new Fl_Box(5, 26, 630, 554);
-        } // Fl_Box* Fondo10
-        { Username = new Fl_Input(80, 32, 240, 21, "Username:");
-          Username->labelsize(11);
-          Username->labelcolor(FL_BACKGROUND2_COLOR);
-          Username->textsize(11);
-          Username->textcolor(FL_BACKGROUND2_COLOR);
-          Username->callback((Fl_Callback*)cb_Username);
-        } // Fl_Input* Username
-        { MES_DIS = new Fl_Check_Button(132, 68, 21, 20, "Disable Warnings    ");
-          MES_DIS->down_box(FL_DOWN_BOX);
-          MES_DIS->labelsize(11);
-          MES_DIS->labelcolor(FL_BACKGROUND2_COLOR);
-          MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
-          MES_DIS->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* MES_DIS
-        { T_TIMEOUT = new Fl_Check_Button(132, 88, 21, 20, "Tap Tempo Timeout");
-          T_TIMEOUT->down_box(FL_DOWN_BOX);
-          T_TIMEOUT->labelsize(11);
-          T_TIMEOUT->labelcolor(FL_BACKGROUND2_COLOR);
-          T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
-          T_TIMEOUT->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* T_TIMEOUT
-        { ENA_TOOL = new Fl_Check_Button(132, 108, 21, 20, "Enable Tooltips       ");
-          ENA_TOOL->down_box(FL_DOWN_BOX);
-          ENA_TOOL->labelsize(11);
-          ENA_TOOL->labelcolor(FL_BACKGROUND2_COLOR);
-          ENA_TOOL->callback((Fl_Callback*)cb_ENA_TOOL);
-          ENA_TOOL->align(Fl_Align(FL_ALIGN_LEFT));
-        } // Fl_Check_Button* ENA_TOOL
-        MISC_SET->end();
-      } // Fl_Group* MISC_SET
-      { BANK_SET = new Fl_Group(5, 26, 630, 554, "Bank");
-        BANK_SET->box(FL_DOWN_FRAME);
-        BANK_SET->labelfont(1);
-        BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
-        BANK_SET->user_data((void*)(1));
-        BANK_SET->align(Fl_Align(FL_ALIGN_LEFT));
-        BANK_SET->hide();
-        { Fondo11 = new Fl_Box(5, 26, 630, 554);
-        } // Fl_Box* Fondo11
-        { BFiname = new Fl_File_Input(20, 50, 390, 30, "Bank Filename");
-          BFiname->labelsize(11);
-          BFiname->labelcolor(FL_BACKGROUND2_COLOR);
-          BFiname->textsize(12);
-          BFiname->textcolor(FL_BACKGROUND2_COLOR);
-          BFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-        } // Fl_File_Input* BFiname
-        { BF_Browser = new Fl_Button(415, 60, 65, 20, "Browse");
-          BF_Browser->callback((Fl_Callback*)cb_BF_Browser, (void*)(77));
-        } // Fl_Button* BF_Browser
-        { Udir = new Fl_File_Input(20, 102, 390, 30, "User Directory");
-          Udir->labelsize(11);
-          Udir->labelcolor(FL_BACKGROUND2_COLOR);
-          Udir->textsize(12);
-          Udir->textcolor(FL_BACKGROUND2_COLOR);
-          Udir->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-        } // Fl_File_Input* Udir
-        { UD_Browser = new Fl_Button(415, 112, 65, 20, "Browse");
-          UD_Browser->callback((Fl_Callback*)cb_UD_Browser, (void*)(77));
-        } // Fl_Button* UD_Browser
-        BANK_SET->end();
-      } // Fl_Group* BANK_SET
-      STabs->end();
-    } // Fl_Tabs* STabs
+    Settings->align(Fl_Align(FL_ALIGN_TOP));
+    Settings->when(FL_WHEN_RELEASE);
+    o->initialize(rkr, this);
+    o->hide();
     Settings->size_range(740, 554);
     Settings->end();
-  } // Fl_Double_Window* Settings
+  } // SettingsWindowGui* Settings
   { MidiLearnWindowGui* o = MIDILearn = new MidiLearnWindowGui(640, 480);
     MIDILearn->box(FL_NO_BOX);
     MIDILearn->color((Fl_Color)4);
@@ -4501,9 +2918,9 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
   chfsize(0);
   
   
-  for (int t=0; t<STabs->children();t++)
+  for (int t=0; t<Settings->STabs->children();t++)
     {
-     Fl_Widget *tabg = STabs->child(t);
+     Fl_Widget *tabg = Settings->STabs->child(t);
           tabg->labelcolor(label_color);  
           tabg->selection_color(back_color);
           tabg->color(fore_color);   
@@ -4571,7 +2988,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor) {
        w->color(fore_color);
     }  
   
-  Font_Bro->textcolor(label_color);
+  Settings->Font_Bro->textcolor(label_color);
   Trigger->ACI_LABEL->labelcolor(fl_lighter(label_color));
   Trigger->aux_source->labelcolor(label_color);
   Trigger->aux_midi->labelcolor(label_color);
@@ -4644,8 +3061,8 @@ void RKRGUI::load_stat() {
   rakarrack.get(rkr->PrefNom("Leds Color"),l, -13485824);
   rakarrack.get(rkr->PrefNom("Labels Color"),a, -1075849984);
   rakarrack.get(rkr->PrefNom("Schema"), k,0);
-  scheme_ch->value(k);
-  scheme_ch->do_callback();
+  Settings->scheme_ch->value(k);
+  Settings->scheme_ch->do_callback();
   rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide,0);
   
   
@@ -4741,7 +3158,7 @@ void RKRGUI::load_stat() {
   if(!rkr->MIDIway) ML_Menu->deactivate();
   
   rakarrack.get(rkr->PrefNom("MIDI Table"),rkr->midi_table,0); 
-  if(!rkr->midi_table) scroll->deactivate();
+  if(!rkr->midi_table) Settings->scroll->deactivate();
   
   
   rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
@@ -4781,16 +3198,16 @@ void RKRGUI::load_stat() {
   
   
   rakarrack.get(rkr->PrefNom("Recognize Optimization Harmonizer"),rkr->RCOpti_Harm,0);
-  RC_Harm_Opti->value(rkr->RCOpti_Harm);
-  RC_Harm_Opti->do_callback();
+  Settings->RC_Harm_Opti->value(rkr->RCOpti_Harm);
+  Settings->RC_Harm_Opti->do_callback();
   
   rakarrack.get(rkr->PrefNom("Recognize Optimization Stereo Harm"),rkr->RCOpti_Stereo,0);
-  RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
-  RC_St_Harm_Opti->do_callback();
+  Settings->RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
+  Settings->RC_St_Harm_Opti->do_callback();
   
   rakarrack.get(rkr->PrefNom("Recognize Optimization Ring"),rkr->RCOpti_Ring,0);
-  RC_Ring_Opti->value(rkr->RCOpti_Ring);
-  RC_Ring_Opti->do_callback();
+  Settings->RC_Ring_Opti->value(rkr->RCOpti_Ring);
+  Settings->RC_Ring_Opti->do_callback();
   
   
   //MIDIConverter
@@ -4865,7 +3282,7 @@ void RKRGUI::load_stat() {
   rakarrack.get(rkr->PrefNom("TapTempo Input"),rkr->Tap_Selection,0);
   T_SEL->value(rkr->Tap_Selection);
   rakarrack.get(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout,0);
-  T_TIMEOUT->value(rkr->t_timeout);
+  Settings->T_TIMEOUT->value(rkr->t_timeout);
   rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
   T_SET->value(rkr->Tap_SetValue);
   
@@ -4957,7 +3374,7 @@ void RKRGUI::save_stat(int whati) {
   rakarrack.set(rkr->PrefNom("Foreground Color"), (int)fore_color);
   rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
   rakarrack.set(rkr->PrefNom("Labels Color"),(int) label_color);
-  rakarrack.set(rkr->PrefNom("Schema"), (int) scheme_ch->value());
+  rakarrack.set(rkr->PrefNom("Schema"), (int) Settings->scheme_ch->value());
   rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
   
   
@@ -5144,9 +3561,9 @@ void RKRGUI::save_stat(int whati) {
   
   
   
-  i = BMidiIn->value();
+  i = Settings->BMidiIn->value();
   char *temp;
-  temp = (char*) BMidiIn->text(i);
+  temp = (char*) Settings->BMidiIn->text(i);
   if (temp!=NULL)
   rakarrack.set(rkr->PrefNom("MIDI IN Device"),temp);
   rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
@@ -5180,14 +3597,14 @@ void RKRGUI::save_stat(int whati) {
   {
   
   
-  for(i=1; i<=JackCo->size();i++)
+  for(i=1; i<=Settings->JackCo->size();i++)
   { 
    
-    if (JackCo->selected(i))
+    if (Settings->JackCo->selected(i))
       {
         memset(temp1,0, sizeof(temp1));
         sprintf(temp1,"Jack Port %d",k);
-        rakarrack.set(rkr->PrefNom(temp1),JackCo->text(i));
+        rakarrack.set(rkr->PrefNom(temp1),Settings->JackCo->text(i));
         k++;
       }
         
@@ -5196,14 +3613,14 @@ void RKRGUI::save_stat(int whati) {
    rakarrack.set(rkr->PrefNom("Auto Connect Num"),k-1); 
     
   k=1;
-  for(i=1; i<=JackIn->size();i++)
+  for(i=1; i<=Settings->JackIn->size();i++)
   { 
    
-    if (JackIn->selected(i))
+    if (Settings->JackIn->selected(i))
       {
         memset(temp1,0, sizeof(temp1));
         sprintf(temp1,"Jack Port In %d",k);
-        rakarrack.set(rkr->PrefNom(temp1),JackIn->text(i));
+        rakarrack.set(rkr->PrefNom(temp1),Settings->JackIn->text(i));
         k++;
       }
         
@@ -6420,7 +4837,7 @@ void RKRGUI::MiraClientes() {
   char *name;
   FILE *fp;
   
-  BMidiIn->clear();
+  Settings->BMidiIn->clear();
   
   
   if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
@@ -6439,7 +4856,7 @@ void RKRGUI::MiraClientes() {
                name=strtok(NULL,"\"");
                masque=strtok(NULL,")");
                
-               if ((masque[2]=='R') && (strstr(name,"rakarrack MC OUT")==0)) BMidiIn->add(name);
+               if ((masque[2]=='R') && (strstr(name,"rakarrack MC OUT")==0)) Settings->BMidiIn->add(name);
                
               } 
              } 
@@ -6449,7 +4866,7 @@ void RKRGUI::MiraClientes() {
    
    
      
-   JackCo->clear();
+   Settings->JackCo->clear();
    
    const char **ports;
     
@@ -6468,7 +4885,7 @@ void RKRGUI::MiraClientes() {
     while (ports[i] != NULL)
        {
         if((strstr(ports[i],"rakarrack:in_1")==0) && (strstr(ports[i],"rakarrack:in_2")==0))
-        JackCo->add(ports[i]);
+        Settings->JackCo->add(ports[i]);
         i++; 
        }
        
@@ -6478,7 +4895,7 @@ void RKRGUI::MiraClientes() {
      
      free(ports);
      
-  JackIn->clear();
+  Settings->JackIn->clear();
    
    const char **iports;  
     
@@ -6496,7 +4913,7 @@ void RKRGUI::MiraClientes() {
     while (iports[i] != NULL)
        {
         if((strstr(iports[i],"rakarrack:out_1")==0) && (strstr(iports[i],"rakarrack:out_2")==0))
-        JackIn->add(iports[i]);
+        Settings->JackIn->add(iports[i]);
         i++; 
        }
        
@@ -6510,19 +4927,19 @@ void RKRGUI::MiraClientes() {
 void RKRGUI::MiraConfig() {
   int i = 1;
   int k;
-  while (BMidiIn->text(i) != NULL)
+  while (Settings->BMidiIn->text(i) != NULL)
   {
-  if (strcmp(BMidiIn->text(i),rkr->MID)==0 ) BMidiIn->select(i,1);
+  if (strcmp(Settings->BMidiIn->text(i),rkr->MID)==0 ) Settings->BMidiIn->select(i,1);
   i++; 
   }
   
   i=1;
   
-  while (JackCo->text(i) != NULL)
+  while (Settings->JackCo->text(i) != NULL)
   {
   
   for (k=0; k < rkr->cuan_jack; k++)
-  if (strcmp(JackCo->text(i),rkr->jack_po[k].name)==0 ) JackCo->select(i,1);
+  if (strcmp(Settings->JackCo->text(i),rkr->jack_po[k].name)==0 ) Settings->JackCo->select(i,1);
   
   i++; 
   }
@@ -6530,11 +4947,11 @@ void RKRGUI::MiraConfig() {
   
   i=1;
   
-  while (JackIn->text(i) != NULL)
+  while (Settings->JackIn->text(i) != NULL)
   {
   
   for (k=0; k < rkr->cuan_ijack; k++)
-  if (strcmp(JackIn->text(i),rkr->jack_poi[k].name)==0 ) JackIn->select(i,1);
+  if (strcmp(Settings->JackIn->text(i),rkr->jack_poi[k].name)==0 ) Settings->JackIn->select(i,1);
   
   i++; 
   }
@@ -6542,112 +4959,112 @@ void RKRGUI::MiraConfig() {
   
   
   
-  if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
+  if (rkr->MIDIway) Settings->Mw1->setonly(); else Settings->Mw0->setonly();
   
   rkr->m_displayed = 0;
-  Enable_Back->value(rkr->EnableBackgroundImage);
-  Enable_DeacHide->value(rkr->deachide);
+  Settings->Enable_Back->value(rkr->EnableBackgroundImage);
+  Settings->Enable_DeacHide->value(rkr->deachide);
   
-  BFiname->value(rkr->BankFilename);
-  BackFiname->value(rkr->BackgroundImage);
-  Udir->value(rkr->UDirFilename);
-  Username->value(rkr->UserRealName);
-  Pre_Serve->value(rkr->actuvol);
-  LM_Volume->value(rkr->Metro_Vol);
-  Filter_DC->value(rkr->DC_Offset);
-  FLPosition->value(rkr->flpos);
-  DB6B->value(rkr->db6booster);
-  Har_Downsample->value(rkr->Har_Down);
-  Har_Down_Qua->value(rkr->Har_D_Q);
-  Har_Up_Qua->value(rkr->Har_U_Q);
-  Rev_Downsample->value(rkr->Rev_Down);
-  Rev_Down_Qua->value(rkr->Rev_D_Q);
-  Rev_Up_Qua->value(rkr->Rev_U_Q);
-  Con_Downsample->value(rkr->Con_Down);
-  Con_Down_Qua->value(rkr->Con_D_Q);
-  Con_Up_Qua->value(rkr->Con_U_Q);
-  Seq_Downsample->value(rkr->Seq_Down);
-  Seq_Down_Qua->value(rkr->Seq_D_Q);
-  Seq_Up_Qua->value(rkr->Seq_U_Q);
-  Shi_Downsample->value(rkr->Shi_Down);
-  Shi_Down_Qua->value(rkr->Shi_D_Q);
-  Shi_Up_Qua->value(rkr->Shi_U_Q);
-  Voc_Downsample->value(rkr->Voc_Down);
-  Voc_Down_Qua->value(rkr->Voc_D_Q);
-  Voc_Up_Qua->value(rkr->Voc_U_Q);
-  Ste_Downsample->value(rkr->Ste_Down);
-  Ste_Down_Qua->value(rkr->Ste_D_Q);
-  Ste_Up_Qua->value(rkr->Ste_U_Q);
-  Wave_Amo->value(rkr->Wave_res_amount);
-  Wave_Up_Qua->value(rkr->Wave_up_q);
-  Wave_Down_Qua->value(rkr->Wave_down_q);
-  Calibration->value(rkr->aFreq);
-  RTrigger->value(rkr->HarmRecNote->trigfact);
-  RC_Harm_Opti->value(rkr->RCOpti_Harm);
-  RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
-  RC_Ring_Opti->value(rkr->RCOpti_Ring);
+  Settings->BFiname->value(rkr->BankFilename);
+  Settings->BackFiname->value(rkr->BackgroundImage);
+  Settings->Udir->value(rkr->UDirFilename);
+  Settings->Username->value(rkr->UserRealName);
+  Settings->Pre_Serve->value(rkr->actuvol);
+  Settings->LM_Volume->value(rkr->Metro_Vol);
+  Settings->Filter_DC->value(rkr->DC_Offset);
+  Settings->FLPosition->value(rkr->flpos);
+  Settings->DB6B->value(rkr->db6booster);
+  Settings->Har_Downsample->value(rkr->Har_Down);
+  Settings->Har_Down_Qua->value(rkr->Har_D_Q);
+  Settings->Har_Up_Qua->value(rkr->Har_U_Q);
+  Settings->Rev_Downsample->value(rkr->Rev_Down);
+  Settings->Rev_Down_Qua->value(rkr->Rev_D_Q);
+  Settings->Rev_Up_Qua->value(rkr->Rev_U_Q);
+  Settings->Con_Downsample->value(rkr->Con_Down);
+  Settings->Con_Down_Qua->value(rkr->Con_D_Q);
+  Settings->Con_Up_Qua->value(rkr->Con_U_Q);
+  Settings->Seq_Downsample->value(rkr->Seq_Down);
+  Settings->Seq_Down_Qua->value(rkr->Seq_D_Q);
+  Settings->Seq_Up_Qua->value(rkr->Seq_U_Q);
+  Settings->Shi_Downsample->value(rkr->Shi_Down);
+  Settings->Shi_Down_Qua->value(rkr->Shi_D_Q);
+  Settings->Shi_Up_Qua->value(rkr->Shi_U_Q);
+  Settings->Voc_Downsample->value(rkr->Voc_Down);
+  Settings->Voc_Down_Qua->value(rkr->Voc_D_Q);
+  Settings->Voc_Up_Qua->value(rkr->Voc_U_Q);
+  Settings->Ste_Downsample->value(rkr->Ste_Down);
+  Settings->Ste_Down_Qua->value(rkr->Ste_D_Q);
+  Settings->Ste_Up_Qua->value(rkr->Ste_U_Q);
+  Settings->Wave_Amo->value(rkr->Wave_res_amount);
+  Settings->Wave_Up_Qua->value(rkr->Wave_up_q);
+  Settings->Wave_Down_Qua->value(rkr->Wave_down_q);
+  Settings->Calibration->value(rkr->aFreq);
+  Settings->RTrigger->value(rkr->HarmRecNote->trigfact);
+  Settings->RC_Harm_Opti->value(rkr->RCOpti_Harm);
+  Settings->RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
+  Settings->RC_Ring_Opti->value(rkr->RCOpti_Ring);
   
   
   switch(rkr->VocBands)
   {
     case 16:
-    Voc_Bands->value(0);
+    Settings->Voc_Bands->value(0);
     break;
     case 32:
-    Voc_Bands->value(1);
+    Settings->Voc_Bands->value(1);
     break;
     case 64:
-    Voc_Bands->value(2);
+    Settings->Voc_Bands->value(2);
     break;
     case 128:
-    Voc_Bands->value(3);
+    Settings->Voc_Bands->value(3);
     break;
     case 256:
-    Voc_Bands->value(4);
+    Settings->Voc_Bands->value(4);
     break;
     
   }
     
   
   
-  MTable->value(rkr->midi_table);
+  Settings->MTable->value(rkr->midi_table);
   
-  AAssign->value(rkr->autoassign);
-  Update_TAP->value(rkr->Tap_Updated);
-  INSTATE->value(rkr->init_state);
-  UPSAMPLE_C->value(rkr->upsample);
-  Upr_Qual->value(rkr->UpQual);
-  Downr_Qual->value(rkr->DownQual);
-  MES_DIS->value(rkr->mess_dis);
-  ENA_TOOL->value(rkr->ena_tool);
-  T_TIMEOUT->value(rkr->t_timeout);
+  Settings->AAssign->value(rkr->autoassign);
+  Settings->Update_TAP->value(rkr->Tap_Updated);
+  Settings->INSTATE->value(rkr->init_state);
+  Settings->UPSAMPLE_C->value(rkr->upsample);
+  Settings->Upr_Qual->value(rkr->UpQual);
+  Settings->Downr_Qual->value(rkr->DownQual);
+  Settings->MES_DIS->value(rkr->mess_dis);
+  Settings->ENA_TOOL->value(rkr->ena_tool);
+  Settings->T_TIMEOUT->value(rkr->t_timeout);
   
-  Upr_Amo->value(rkr->UpAmo);
-  L_SIZE->value(rkr->looper_size);
-  D_A_Connect->value(rkr->aconnect_MI);
-  D_J_Connect->value(rkr->aconnect_JA);
-  D_IJ_Connect->value(rkr->aconnect_JIA);
+  Settings->Upr_Amo->value(rkr->UpAmo);
+  Settings->L_SIZE->value(rkr->looper_size);
+  Settings->D_A_Connect->value(rkr->aconnect_MI);
+  Settings->D_J_Connect->value(rkr->aconnect_JA);
+  Settings->D_IJ_Connect->value(rkr->aconnect_JIA);
   
-  Midi_In_Counter->value(rkr->MidiCh+1);
-  Har_In_Counter->value(rkr->HarCh+1);
-  Stereo_Har_In_Counter->value(rkr->StereoHarCh+1);
+  Settings->Midi_In_Counter->value(rkr->MidiCh+1);
+  Settings->Har_In_Counter->value(rkr->HarCh+1);
+  Settings->Stereo_Har_In_Counter->value(rkr->StereoHarCh+1);
   
   switch(rkr->HarQual)
   {
     case 4:
-    Har_Qual->value(0);
+    Settings->Har_Qual->value(0);
     break;
     
     case 8:
-    Har_Qual->value(1);
+    Settings->Har_Qual->value(1);
     break;
     
     case 16:
-    Har_Qual->value(2);
+    Settings->Har_Qual->value(2);
     break;
   
     case 32:
-    Har_Qual->value(3);
+    Settings->Har_Qual->value(3);
     break;
   
   
@@ -6656,19 +5073,19 @@ void RKRGUI::MiraConfig() {
   switch(rkr->SteQual)
   {
     case 4:
-    Ste_Qual->value(0);
+    Settings->Ste_Qual->value(0);
     break;
     
     case 8:
-    Ste_Qual->value(1);
+    Settings->Ste_Qual->value(1);
     break;
     
     case 16:
-    Ste_Qual->value(2);
+    Settings->Ste_Qual->value(2);
     break;
   
     case 32:
-    Ste_Qual->value(3);
+    Settings->Ste_Qual->value(3);
     break;
   
   
@@ -6676,21 +5093,22 @@ void RKRGUI::MiraConfig() {
   
   
   
-  if (rkr->aconnect_MI) BMidiIn->activate();
-  else BMidiIn->deactivate();
+  if (rkr->aconnect_MI) Settings->BMidiIn->activate();
+  else Settings->BMidiIn->deactivate();
   
-  if (rkr->aconnect_JA) JackCo->activate();
-  else JackCo->deactivate();
+  if (rkr->aconnect_JA) Settings->JackCo->activate();
+  else Settings->JackCo->deactivate();
   
-  if (rkr->aconnect_JIA) JackIn->activate();
-  else JackIn->deactivate();
+  if (rkr->aconnect_JIA) Settings->JackIn->activate();
+  else Settings->JackIn->deactivate();
   
   Fl_Menu_Item *p;  
+  Fl_Menu_Item *Har = Settings->get_menu_Har_Downsample();
   unsigned int SR_value=rkr->sample_rate;
   
-  for(int j=0; j<menu_Har_Downsample->size(); j++)
+  for(int j=0; j<Har->size(); j++)
    {
-        p=menu_Har_Downsample->next(j);
+        p=Har->next(j);
         
         switch(j)
          {
@@ -6734,8 +5152,8 @@ void RKRGUI::MiraConfig() {
    }
    
    
-   Font_Bro->clear(); 
-   Font_Bro->textcolor(label_color);
+   Settings->Font_Bro->clear(); 
+   Settings->Font_Bro->textcolor(label_color);
    k=0;
    k = Fl::set_fonts(0);
     for (i = 0; i < k; i++) {
@@ -6753,11 +5171,11 @@ void RKRGUI::MiraConfig() {
       sprintf(buffer, "@F%d@.%s", i, name);
       name = buffer;
   #endif
-      Font_Bro->add(name);
+      Settings->Font_Bro->add(name);
   
   }
   
-  Font_Bro->value(rkr->font+1);
+  Settings->Font_Bro->value(rkr->font+1);
 }
 
 void RKRGUI::BankWin_Label(char *filename) {
@@ -8686,16 +7104,16 @@ void RKRGUI::PutBackground() {
   fondo->image(InOut->image());
   TITTLE_L->image(InOut->image());
   Order->Fondo1->image(InOut->image());
-  Fondo2->image(InOut->image());
+  Settings->Fondo2->image(InOut->image());
   BankWindow->Fondo3->image(InOut->image());
   MIDILearn->Fondo4->image(InOut->image());
   Trigger->Fondo5->image(InOut->image());
-  Fondo6->image(InOut->image());
-  Fondo7->image(InOut->image());
-  Fondo8->image(InOut->image());
-  Fondo9->image(InOut->image());
-  Fondo10->image(InOut->image());
-  Fondo11->image(InOut->image());
+  Settings->Fondo6->image(InOut->image());
+  Settings->Fondo7->image(InOut->image());
+  Settings->Fondo8->image(InOut->image());
+  Settings->Fondo9->image(InOut->image());
+  Settings->Fondo10->image(InOut->image());
+  Settings->Fondo11->image(InOut->image());
   
   
   
@@ -8942,8 +7360,8 @@ void RKRGUI::Put_Skin(int last) {
   leds_color=(Fl_Color)rkr->sleds_color;
   label_color=(Fl_Color)rkr->slabel_color;
   
-  scheme_ch->value(rkr->sschema);
-  scheme_ch->do_callback();
+  Settings->scheme_ch->value(rkr->sschema);
+  Settings->scheme_ch->do_callback();
   PutBackground();
   chfsize(rkr->relfontsize - last);
   Leds_Color_Change(leds_color);
@@ -10003,7 +8421,7 @@ void RKRGUI::Prep_Reorden(int source, int dest) {
 }
 
 void RKRGUI::make_table_window() {
-  scroll->begin();
+  Settings->scroll->begin();
   
     for (intptr_t y=0; y<128; y++)
      {
@@ -10024,23 +8442,23 @@ void RKRGUI::make_table_window() {
       cb->add("U");
       cb->user_data((void *) (1000+y));
       cb->callback((Fl_Callback *)bank_click); 
-      scroll->add(cb);
+      Settings->scroll->add(cb);
       
       Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
       cp->copy_label("Preset");
       cp->labelcolor(FL_WHITE);
       cp->user_data((void *) (2000+y));
       cp->callback((Fl_Callback *)p_click); 
-      scroll->add(cp);
+      Settings->scroll->add(cp);
     
     
     }
-    scroll->end();
+    Settings->scroll->end();
     
   Put_MidiTable();
    
   
-   scroll->position(0,-339);
+   Settings->scroll->position(0,-339);
 }
 
 void RKRGUI::bank_click(Fl_Choice* o, void* v) {
@@ -10067,9 +8485,9 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*) {
 }
 
 void RKRGUI::fill_mptable(int num,int value) {
-  for (int t=0; t<scroll->children();t++)
+  for (int t=0; t<Settings->scroll->children();t++)
     {
-      Fl_Widget *w = scroll->child(t);
+      Fl_Widget *w = Settings->scroll->child(t);
       long long temp = (long long) w->user_data();
       if ((int)temp == num)
       {
@@ -10083,9 +8501,9 @@ void RKRGUI::fill_mptable(int num,int value) {
 }
 
 void RKRGUI::mtfillvalue(int num,int value) {
-  for (int t=0; t<scroll->children();t++)
+  for (int t=0; t<Settings->scroll->children();t++)
     {
-      Fl_Widget *w = scroll->child(t);
+      Fl_Widget *w = Settings->scroll->child(t);
       long long temp = (long long) w->user_data();
       if ((int)temp == num)
       {

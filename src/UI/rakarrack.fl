@@ -215,6 +215,9 @@ decl {class BankWindowGui; // forward declaration} {public global
 decl {class OrderWindowGui; // forward declaration} {public global
 }
 
+decl {class SettingsWindowGui; // forward declaration} {public global
+}
+
 decl {class MidiLearnWindowGui; // forward declaration} {public global
 }
 
@@ -291,8 +294,8 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {153 187 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;}
+      xywh {43 94 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -354,7 +357,7 @@ rkr->sback_color = (int) back_color;
 rkr->sfore_color = (int) fore_color;
 rkr->sleds_color = (int) leds_color;
 rkr->sh = (int) Principal->h();
-rkr->sschema = scheme_ch->value();
+rkr->sschema = Settings->scheme_ch->value();
 
 
 rkr->saveskin(filename);}
@@ -2060,1011 +2063,13 @@ Order->hide();} open
     } {}
     Fl_Window Settings {
       callback {save_stat(3);
-Settings->hide();}
-      xywh {759 407 640 580} type Double color 4 hide size_range {740 554 0 0}
-    } {
-      Fl_Box Fondo2 {
-        xywh {1 1 640 580}
-      }
-      Fl_Tabs STabs {
-        user_data 1 open
-        xywh {0 0 636 606}
-      } {
-        Fl_Group Look {
-          label Look
-          user_data 1
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
-        } {
-          Fl_Box Fondo6 {
-            xywh {5 26 630 554}
-          }
-          Fl_Choice scheme_ch {
-            label Schema
-            callback {switch ((int)o->value())
-
-{
-
-  case 0:
-
-Fl::scheme("");
-Fl::redraw();
-break;
-
-  case 1:
-
-Fl::scheme("none");
-Fl::redraw();
-break;
-
-  case 2:
-
-Fl::scheme("gtk+");
-Fl::redraw();
-break;
-
-  case 3:
-
-Fl::scheme("plastic");
-Fl::redraw();
-break;
-
-}}
-            xywh {60 50 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12 textcolor 7
-          } {
-            MenuItem {} {
-              label X11
-              xywh {10 10 45 26} labelsize 12
-            }
-            MenuItem {} {
-              label fltk
-              xywh {10 10 45 26} labelsize 12
-            }
-            MenuItem {} {
-              label {gtk+}
-              xywh {20 20 45 26} labelsize 12
-            }
-            MenuItem {} {
-              label plastic
-              xywh {30 30 45 26} labelsize 12
-            }
-          }
-          Fl_Browser Font_Bro {
-            label Font
-            callback {rkr->font = (int)o->value()-1;
-chfsize(0);}
-            xywh {20 100 400 225} type Select labelsize 11 labelcolor 7 align 1 when 1
-          }
-          Fl_Box FSLabel {
-            label {Font Size}
-            xywh {10 333 60 17} labelsize 11 labelcolor 7
-          }
-          Fl_Button FSless {
-            label {-}
-            user_data 77
-            callback {rkr->relfontsize--;
-chfsize(-1);}
-            xywh {78 330 30 20}
-          }
-          Fl_Button FSplus {
-            label {+}
-            user_data 77
-            callback {rkr->relfontsize++;
-chfsize(1);}
-            xywh {113 330 30 20}
-          }
-          Fl_Button FSReset {
-            label Reset
-            user_data 77
-            callback {rkr->relfontsize=0;
-chfsize(0);}
-            xywh {148 330 57 20}
-          }
-          Fl_Box CLLabel {
-            label Colors
-            xywh {10 358 40 19} labelsize 11 labelcolor 7
-          }
-          Fl_Button B_C {
-            label Buttons
-            user_data 77
-            callback {uchar r,g,b;
-
-Fl::get_color(fore_color,r,g,b);
-if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
-fore_color=fl_rgb_color(r,g,b);
-Buttons_Color_Change(fore_color);}
-            xywh {15 380 90 25}
-          }
-          Fl_Button A_C {
-            label Labels
-            user_data 77
-            callback {uchar r,g,b;
-Fl::get_color(label_color,r,g,b);
-if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
-label_color=fl_rgb_color(r,g,b);
-Label_Color_Change(label_color);}
-            xywh {120 380 90 25}
-          }
-          Fl_Button L_C {
-            label Leds
-            user_data 77
-            callback {uchar r,g,b;
-Fl::get_color(leds_color,r,g,b);
-if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
-leds_color=fl_rgb_color(r,g,b);
-Leds_Color_Change(leds_color);}
-            xywh {225 380 90 25}
-          }
-          Fl_Button K_C {
-            label Background
-            user_data 77
-            callback {uchar r,g,b;
-Fl::get_color(back_color,r,g,b);
-if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
-back_color=fl_rgb_color(r,g,b);
-Background_Color_Change(back_color);}
-            xywh {330 380 90 25}
-          }
-          Fl_Check_Button Enable_Back {
-            label {Enable Background Image}
-            callback {rkr->EnableBackgroundImage=(int) o->value();
-PutBackground();}
-            xywh {162 409 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_File_Input BackFiname {
-            label {Background Image}
-            xywh {10 445 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
-          }
-          Fl_Button BI_Browser {
-            label Browse
-            user_data 77
-            callback {char *filename;
-filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".png");
-BackFiname->value(filename);
-strcpy(rkr->BackgroundImage,filename);
-PutBackground();}
-            xywh {410 455 65 20}
-          }
-          Fl_Check_Button Enable_DeacHide {
-            label {Hide Unused Effect Widgets}
-            callback {rkr->deachide=(int) o->value();}
-            xywh {169 500 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-        }
-        Fl_Group AUDIO_SET {
-          label Audio
-          user_data 1
-          xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
-        } {
-          Fl_Box Fondo7 {
-            xywh {0 26 635 554}
-          }
-          Fl_Check_Button INSTATE {
-            label {FX On at start}
-            callback {rkr->init_state=(int) o->value();}
-            xywh {96 29 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Check_Button Filter_DC {
-            label {Filter Input DC Offset}
-            callback {rkr->DC_Offset=(int) o->value();}
-            xywh {135 53 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Check_Button Pre_Serve {
-            label {Preserve Gain/Master when Preset change}
-            callback {rkr->actuvol=(int) o->value();}
-            xywh {259 77 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Check_Button Update_TAP {
-            label {Update TapTempo when Preset change}
-            callback {rkr->Tap_Updated = (int) o->value();}
-            xywh {239 100 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Check_Button UPSAMPLE_C {
-            label Upsampling
-            callback {rkr->upsample=(int)o->value();
-Show_Next_Time();}
-            xywh {83 124 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4 when 1
-          }
-          Fl_Choice Upr_Amo {
-            label Amount
-            callback {rkr->UpAmo =(int) o->value();
-
-Show_Next_Time();}
-            xywh {145 126 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label x2
-              xywh {40 40 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label x3
-              xywh {40 40 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label x4
-              xywh {30 30 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x5
-              xywh {20 20 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x6
-              xywh {20 20 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x7
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x8
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x9
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x10
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x11
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x12
-              xywh {0 0 36 21} labelsize 10
-            }
-          }
-          Fl_Choice Upr_Qual {
-            label Up
-            callback {rkr->UpQual =(int) o->value();
-
-Show_Next_Time();}
-            xywh {217 126 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Best
-              xywh {30 30 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Medium
-              xywh {30 30 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Fastest
-              xywh {20 20 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label {Zero Order}
-              xywh {10 10 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label Linear
-              xywh {10 10 36 21} labelsize 10
-            }
-          }
-          Fl_Choice Downr_Qual {
-            label Down
-            callback {rkr->DownQual =(int) o->value();
-
-Show_Next_Time();}
-            xywh {329 126 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Counter L_SIZE {
-            label {Looper Size Seconds     }
-            callback {rkr->looper_size=o->value();
-if(!rkr->m_displayed)
-{
-Show_Next_Time();
-rkr->m_displayed=1;
-}}
-            xywh {133 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
-          }
-          Fl_Counter LM_Volume {
-            label {Looper Metronome Volume  }
-            callback {rkr->Metro_Vol=(int)o->value();
-rkr->efx_Looper->setmvol(rkr->Metro_Vol);}
-            xywh {338 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
-          }
-          Fl_Choice Har_Qual {
-            label {Harmonizer Quality      }
-            callback {int i = (int) o->value();
-
-switch(i)
-{
-     case 0:
-       rkr->HarQual=4;
-       break;
-     case 1:
-       rkr->HarQual=8;
-       break;
-     case 2:
-       rkr->HarQual=16;	
-	break;
-     case 3:
-       rkr->HarQual=32;	
-	break;
-
-		
-}
-
-
-Show_Next_Time();}
-            xywh {132 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label 4
-              xywh {20 20 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 8
-              xywh {20 20 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 16
-              xywh {10 10 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 32
-              xywh {10 10 36 21} labelsize 10
-            }
-          }
-          Fl_Choice Ste_Qual {
-            label {StereoHarm Quality}
-            callback {int i = (int) o->value();
-
-switch(i)
-{
-     case 0:
-       rkr->SteQual=4;
-       break;
-     case 1:
-       rkr->SteQual=8;
-       break;
-     case 2:
-       rkr->SteQual=16;	
-	break;
-     case 3:
-       rkr->SteQual=32;	
-	break;
-
-		
-}
-
-
-Show_Next_Time();}
-            xywh {296 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label 4
-              xywh {30 30 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 8
-              xywh {30 30 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 16
-              xywh {20 20 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 32
-              xywh {20 20 36 21} labelsize 10
-            }
-          }
-          Fl_Choice Voc_Bands {
-            label {Vocoder Bands              }
-            callback {switch((int)o->value())
-{
-  case 0:
-  rkr->VocBands = 16;
-  break;
-
-  case 1:
-  rkr->VocBands = 32;
-  break;
-
-  case 2:
-  rkr->VocBands = 64;
-  break;
-
-  case 3:
-  rkr->VocBands = 128;
-  break;
-
-  case 4:
-  rkr->VocBands = 256;
-  break;
-
-}
-
-Show_Next_Time();}
-            xywh {132 196 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label 16
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 32
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 64
-              xywh {40 40 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 128
-              xywh {30 30 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 256
-              xywh {30 30 36 21} labelsize 10
-            }
-          }
-          Fl_Check_Button FLPosition {
-            label {Limiter before Output Volume}
-            callback {rkr->flpos=(int)o->value();}
-            xywh {186 222 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Check_Button DB6B {
-            label {+6dB Final Limiter }
-            callback {rkr->db6booster=(int)o->value();}
-            xywh {324 222 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Counter Calibration {
-            label {Tuner Calibration A4 }
-            callback {rkr->aFreq=o->value();
-rkr->HarmRecNote->update_freqs(rkr->aFreq);
-rkr->StHarmRecNote->update_freqs(rkr->aFreq);
-rkr->RingRecNote->update_freqs(rkr->aFreq);}
-            xywh {120 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
-          }
-          Fl_Counter RTrigger {
-            label {Recognize Note Trigger}
-            callback {rkr->rtrig = o->value();
-rkr->HarmRecNote->trigfact = o->value();
-rkr->StHarmRecNote->trigfact = o->value();
-rkr->RingRecNote->trigfact = o->value();}
-            xywh {367 249 116 21} labelsize 10 labelcolor 7 align 4 minimum 0.01 maximum 0.99 step 0.01 value 0.6 textsize 10
-            code0 {o->lstep(0.1);}
-          }
-          Fl_Choice RC_Harm_Opti {
-            label Harmonizer
-            callback {rkr->RCOpti_Harm =(int) o->value();
-
-switch(rkr->RCOpti_Harm)
-  {
-  
-  
-    case 0:
-    	rkr->HarmRecNote->setlpf(5500);
-    	rkr->HarmRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	rkr->HarmRecNote->setlpf(4500);
-    	rkr->HarmRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	rkr->HarmRecNote->setlpf(3000);
-    	rkr->HarmRecNote->sethpf(300);
-    	break;
-
-}}
-            xywh {165 297 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Normal
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Guitar
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Voice
-              xywh {40 40 36 21} labelsize 10
-            }
-          }
-          Fl_Choice RC_St_Harm_Opti {
-            label {Stereo Harmonizer}
-            callback {rkr->RCOpti_Stereo =(int) o->value();
-
-switch(rkr->RCOpti_Stereo)
-  {
-  
-  
-    case 0:
-    	rkr->StHarmRecNote->setlpf(5500);
-    	rkr->StHarmRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	rkr->StHarmRecNote->setlpf(4500);
-    	rkr->StHarmRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	rkr->StHarmRecNote->setlpf(3000);
-    	rkr->StHarmRecNote->sethpf(300);
-    	break;
-
-}}
-            xywh {265 297 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Normal
-              xywh {40 40 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Guitar
-              xywh {40 40 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Voice
-              xywh {30 30 36 21} labelsize 10
-            }
-          }
-          Fl_Choice RC_Ring_Opti {
-            label Ring
-            callback {rkr->RCOpti_Ring =(int) o->value();
-
-switch(rkr->RCOpti_Ring)
-  {
-  
-  
-    case 0:
-    	rkr->RingRecNote->setlpf(5500);
-    	rkr->RingRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	rkr->RingRecNote->setlpf(4500);
-    	rkr->RingRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	rkr->RingRecNote->setlpf(3000);
-    	rkr->RingRecNote->sethpf(300);
-    	break;
-
-}}
-            xywh {365 297 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Normal
-              xywh {55 55 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Guitar
-              xywh {55 55 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label Voice
-              xywh {45 45 36 21} labelsize 10
-            }
-          }
-          Fl_Choice Har_Downsample {
-            label {Harmonizer Downsample }
-            callback {rkr->Har_Down=(int)o->value();
-Show_Next_Time();}
-            xywh {145 336 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Normal
-              xywh {30 30 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 96000
-              xywh {30 30 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label 48000
-              xywh {20 20 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 44100
-              xywh {20 20 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 32000
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 22050
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 16000
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 12000
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 8000
-              xywh {0 0 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label 4000
-              xywh {0 0 36 21} labelsize 10
-            }
-          }
-          Fl_Choice Har_Down_Qua {
-            label Down
-            callback {rkr->Har_D_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {250 336 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Har_Up_Qua {
-            label Up
-            callback {rkr->Har_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 336 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Rev_Downsample {
-            label {Reverbtron Downsample  }
-            callback {rkr->Rev_Down=(int)o->value();
-Show_Next_Time();} open
-            xywh {145 359 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Har_Downsample);}
-          } {}
-          Fl_Choice Rev_Down_Qua {
-            label Down
-            callback {rkr->Rev_D_Q=(int)o->value();
-Show_Next_Time();}
-            xywh {250 359 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Rev_Up_Qua {
-            label Up
-            callback {rkr->Rev_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 359 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Con_Downsample {
-            label {Convolotron Downsample}
-            callback {rkr->Con_Down=(int)o->value();
-Show_Next_Time();} open
-            xywh {145 382 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Har_Downsample);}
-          } {}
-          Fl_Choice Con_Down_Qua {
-            label Down
-            callback {rkr->Con_D_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {250 382 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Con_Up_Qua {
-            label Up
-            callback {rkr->Con_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 382 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Seq_Downsample {
-            label {Sequence Downsample    }
-            callback {rkr->Seq_Down=(int)o->value();
-Show_Next_Time();} open
-            xywh {145 405 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Har_Downsample);}
-          } {}
-          Fl_Choice Seq_Down_Qua {
-            label Down
-            callback {rkr->Seq_D_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {250 405 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Seq_Up_Qua {
-            label Up
-            callback {rkr->Seq_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 405 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Shi_Downsample {
-            label {Shifter Downsample         }
-            callback {rkr->Shi_Down=(int)o->value();
-Show_Next_Time();} open
-            xywh {145 428 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Har_Downsample);}
-          } {}
-          Fl_Choice Shi_Down_Qua {
-            label Down
-            callback {rkr->Shi_D_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {250 428 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Shi_Up_Qua {
-            label Up
-            callback {rkr->Shi_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 428 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Voc_Downsample {
-            label {Vocoder Downsample      }
-            callback {rkr->Voc_Down=(int)o->value();
-Show_Next_Time();} open
-            xywh {145 452 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Har_Downsample);}
-          } {}
-          Fl_Choice Voc_Down_Qua {
-            label Down
-            callback {rkr->Voc_D_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {250 452 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Voc_Up_Qua {
-            label Up
-            callback {rkr->Voc_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 452 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Ste_Downsample {
-            label {StereoHarm Downsample}
-            callback {rkr->Ste_Down=(int)o->value();
-Show_Next_Time();} open
-            xywh {145 477 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Har_Downsample);}
-          } {}
-          Fl_Choice Ste_Down_Qua {
-            label Down
-            callback {rkr->Ste_D_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {250 477 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Ste_Up_Qua {
-            label Up
-            callback {rkr->Ste_U_Q=(int)o->value();
-Show_Next_Time();} open
-            xywh {343 477 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Wave_Amo {
-            label {Waveshape Resampling   }
-            callback {rkr->Wave_res_amount=(int)o->value();
-Show_Next_Time();}
-            xywh {145 527 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          } {
-            MenuItem {} {
-              label Normal
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label x2
-              xywh {50 50 45 26} labelsize 10
-            }
-            MenuItem {} {
-              label x4
-              xywh {40 40 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x8
-              xywh {30 30 36 21} labelsize 10
-            }
-            MenuItem {} {
-              label x12
-              xywh {30 30 36 21} labelsize 10
-            }
-          }
-          Fl_Choice Wave_Down_Qua {
-            label Down
-            callback {rkr->Wave_down_q=(int)o->value();
-Show_Next_Time();}
-            xywh {252 527 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Choice Wave_Up_Qua {
-            label Up
-            callback {rkr->Wave_up_q=(int)o->value();
-Show_Next_Time();}
-            xywh {345 527 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-            code0 {o->menu(menu_Upr_Qual);}
-          } {}
-          Fl_Box Recognize_Label {
-            label {Recognize Note Optimization}
-            user_data 7
-            xywh {10 298 150 17} labelsize 10 when 0
-          }
-        }
-        Fl_Group MIDI_SET {
-          label MIDI
-          user_data 1
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
-        } {
-          Fl_Box Fondo8 {
-            xywh {5 26 630 554}
-          }
-          Fl_Check_Button D_A_Connect {
-            label {Auto Connect MIDI In}
-            callback {rkr->aconnect_MI=(int) o->value();
-
-if (rkr->aconnect_MI) BMidiIn->activate();
-else BMidiIn->deactivate();}
-            xywh {135 38 105 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Browser BMidiIn {
-            label {ALSA Sequencer Ports}
-            callback {int valor;
-valor = (int) o->value();
-if(o->text(valor) != NULL)
-strcpy(rkr->MID,o->text(valor));
-else return;
-o->select(valor,1);
-rkr->Conecta();}
-            xywh {15 72 190 111} type Hold selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
-          }
-          Fl_Counter Midi_In_Counter {
-            label {Receive Channel}
-            callback {rkr->MidiCh=(int)o->value()-1;}
-            xywh {103 198 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
-          }
-          Fl_Counter Har_In_Counter {
-            label {Harmonizer Receive Channel}
-            callback {rkr->HarCh=(int)o->value()-1;}
-            xywh {162 235 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
-          }
-          Fl_Counter Stereo_Har_In_Counter {
-            label {Stereo Harmonizer Receive Channel}
-            callback {rkr->StereoHarCh=(int)o->value()-1;}
-            xywh {200 276 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
-          }
-          Fl_Group wMIDI {
-            label {MIDI implementation}
-            xywh {15 325 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
-          } {
-            Fl_Check_Button Mw0 {
-              label Default
-              callback {rkr->MIDIway=0;
-ML_Menu->deactivate();}
-              xywh {72 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-            }
-            Fl_Check_Button Mw1 {
-              label {MIDI Learn}
-              callback {rkr->MIDIway=1;
-ML_Menu->activate();}
-              xywh {183 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-            }
-          }
-          Fl_Check_Button AAssign {
-            label {Auto Assign MIDI Learn}
-            callback {rkr->autoassign=o->value();}
-            xywh {134 359 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
-          }
-          Fl_Check_Button MTable {
-            label {MIDI Program Change Table}
-            callback {rkr->midi_table=o->value();
-if(rkr->midi_table) scroll->activate(); else 
-scroll->deactivate();}
-            xywh {157 377 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
-          }
-          Fl_Scroll scroll {
-            user_data 5000 open
-            xywh {15 360 585 162} type VERTICAL_ALWAYS
-          } {}
-        }
-        Fl_Group JACK_SET {
-          label Jack
-          user_data 1
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
-        } {
-          Fl_Box Fondo9 {
-            xywh {5 26 630 554}
-          }
-          Fl_Check_Button D_J_Connect {
-            label {Auto Connect Out}
-            callback {rkr->aconnect_JA=(int) o->value();
-if (rkr->aconnect_JA) JackCo->activate();
-else JackCo->deactivate();}
-            xywh {114 40 25 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Browser JackCo {
-            label {Output Ports}
-            xywh {10 72 235 138} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
-          }
-          Fl_Check_Button D_IJ_Connect {
-            label {Auto Connect In}
-            callback {rkr->aconnect_JIA=(int) o->value();
-if (rkr->aconnect_JIA) JackIn->activate();
-else JackIn->deactivate();}
-            xywh {104 228 25 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Browser JackIn {
-            label {Input Ports}
-            xywh {10 259 235 131} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
-          }
-        }
-        Fl_Group MISC_SET {
-          label Misc
-          user_data 1
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
-        } {
-          Fl_Box Fondo10 {
-            xywh {5 26 630 554}
-          }
-          Fl_Input Username {
-            label {Username:}
-            callback {rkr->UserRealName=(char*) o->value();}
-            xywh {80 32 240 21} labelsize 11 labelcolor 7 textsize 11 textcolor 7
-          }
-          Fl_Check_Button MES_DIS {
-            label {Disable Warnings    }
-            callback {rkr->mess_dis=(int) o->value();}
-            xywh {132 68 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Check_Button T_TIMEOUT {
-            label {Tap Tempo Timeout}
-            callback {rkr->t_timeout=(int) o->value();}
-            xywh {132 88 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-          Fl_Check_Button ENA_TOOL {
-            label {Enable Tooltips       }
-            callback {rkr->ena_tool=(int) o->value();
-Fl_Tooltip::enable(rkr->ena_tool);}
-            xywh {132 108 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-          }
-        }
-        Fl_Group BANK_SET {
-          label Bank
-          user_data 1 open
-          xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
-        } {
-          Fl_Box Fondo11 {
-            xywh {5 26 630 554}
-          }
-          Fl_File_Input BFiname {
-            label {Bank Filename}
-            xywh {20 50 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
-          }
-          Fl_Button BF_Browser {
-            label Browse
-            user_data 77
-            callback {char *filename;
-filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-BFiname->value(filename);
-strcpy(rkr->BankFilename,filename);}
-            xywh {415 60 65 20}
-          }
-          Fl_File_Input Udir {
-            label {User Directory}
-            xywh {20 102 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
-          }
-          Fl_Button UD_Browser {
-            label Browse
-            user_data 77
-            callback {char *dir;
-dir=fl_dir_chooser("Browse:",NULL,0);
-if (dir==NULL) return;
-Udir->value(dir);
-strcpy(rkr->UDirFilename,dir);
-ScanDir();}
-            xywh {415 112 65 20}
-          }
-        }
-      }
-    }
+o->hide();} open
+      xywh {390 434 640 580} type Double box NO_BOX color 4 selection_color 7 hide
+      code0 {\#include "settingswindow_gui.h"}
+      code1 {o->initialize(rkr, this);}
+      code2 {o->hide();}
+      class SettingsWindowGui size_range {740 554 0 0}
+    } {}
     Fl_Window MIDILearn {
       callback {MIDILearn->CancelRec->do_callback();
 save_stat(5);
@@ -3190,9 +2195,9 @@ if(!rkr->EnableBackgroundImage) back->color_average(back_color,0.0);} {}
 chfsize(0);
 
 
-for (int t=0; t<STabs->children();t++)
+for (int t=0; t<Settings->STabs->children();t++)
   {
-   Fl_Widget *tabg = STabs->child(t);
+   Fl_Widget *tabg = Settings->STabs->child(t);
         tabg->labelcolor(label_color);  
         tabg->selection_color(back_color);
         tabg->color(fore_color);   
@@ -3260,7 +2265,7 @@ for (int t=0; t<MIDILearn->children();t++)
      w->color(fore_color);
   }  
 
-Font_Bro->textcolor(label_color);
+Settings->Font_Bro->textcolor(label_color);
 Trigger->ACI_LABEL->labelcolor(fl_lighter(label_color));
 Trigger->aux_source->labelcolor(label_color);
 Trigger->aux_midi->labelcolor(label_color);
@@ -3329,8 +2334,8 @@ rakarrack.get(rkr->PrefNom("Foreground Color"),f,1602392832);
 rakarrack.get(rkr->PrefNom("Leds Color"),l, -13485824);
 rakarrack.get(rkr->PrefNom("Labels Color"),a, -1075849984);
 rakarrack.get(rkr->PrefNom("Schema"), k,0);
-scheme_ch->value(k);
-scheme_ch->do_callback();
+Settings->scheme_ch->value(k);
+Settings->scheme_ch->do_callback();
 rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide,0);
 
 
@@ -3426,7 +2431,7 @@ rakarrack.get(rkr->PrefNom("MIDI Implementation"),rkr->MIDIway,0);
 if(!rkr->MIDIway) ML_Menu->deactivate();
 
 rakarrack.get(rkr->PrefNom("MIDI Table"),rkr->midi_table,0); 
-if(!rkr->midi_table) scroll->deactivate();
+if(!rkr->midi_table) Settings->scroll->deactivate();
 
 
 rakarrack.get(rkr->PrefNom("UserName"),rkr->UserRealName,"",127);
@@ -3466,16 +2471,16 @@ if(rkr->init_state)
 
 
 rakarrack.get(rkr->PrefNom("Recognize Optimization Harmonizer"),rkr->RCOpti_Harm,0);
-RC_Harm_Opti->value(rkr->RCOpti_Harm);
-RC_Harm_Opti->do_callback();
+Settings->RC_Harm_Opti->value(rkr->RCOpti_Harm);
+Settings->RC_Harm_Opti->do_callback();
 
 rakarrack.get(rkr->PrefNom("Recognize Optimization Stereo Harm"),rkr->RCOpti_Stereo,0);
-RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
-RC_St_Harm_Opti->do_callback();
+Settings->RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
+Settings->RC_St_Harm_Opti->do_callback();
 
 rakarrack.get(rkr->PrefNom("Recognize Optimization Ring"),rkr->RCOpti_Ring,0);
-RC_Ring_Opti->value(rkr->RCOpti_Ring);
-RC_Ring_Opti->do_callback();
+Settings->RC_Ring_Opti->value(rkr->RCOpti_Ring);
+Settings->RC_Ring_Opti->do_callback();
 
 
 //MIDIConverter
@@ -3550,7 +2555,7 @@ tuner_activar->do_callback();
 rakarrack.get(rkr->PrefNom("TapTempo Input"),rkr->Tap_Selection,0);
 T_SEL->value(rkr->Tap_Selection);
 rakarrack.get(rkr->PrefNom("Tap Tempo Timeout"),rkr->t_timeout,0);
-T_TIMEOUT->value(rkr->t_timeout);
+Settings->T_TIMEOUT->value(rkr->t_timeout);
 rakarrack.get(rkr->PrefNom("TapTempo Set"),rkr->Tap_SetValue,0);
 T_SET->value(rkr->Tap_SetValue);
 
@@ -3641,7 +2646,7 @@ rakarrack.set(rkr->PrefNom("Background Color"), (int)back_color);
 rakarrack.set(rkr->PrefNom("Foreground Color"), (int)fore_color);
 rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
 rakarrack.set(rkr->PrefNom("Labels Color"),(int) label_color);
-rakarrack.set(rkr->PrefNom("Schema"), (int) scheme_ch->value());
+rakarrack.set(rkr->PrefNom("Schema"), (int) Settings->scheme_ch->value());
 rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
 
 
@@ -3828,9 +2833,9 @@ rakarrack.set(rkr->PrefNom("MIDI Table"),rkr->midi_table);
 
 
 
-i = BMidiIn->value();
+i = Settings->BMidiIn->value();
 char *temp;
-temp = (char*) BMidiIn->text(i);
+temp = (char*) Settings->BMidiIn->text(i);
 if (temp!=NULL)
 rakarrack.set(rkr->PrefNom("MIDI IN Device"),temp);
 rakarrack.set(rkr->PrefNom("MIDI IN Channel"),rkr->MidiCh+1);
@@ -3864,14 +2869,14 @@ if(whati==3)
 {
 
 
-for(i=1; i<=JackCo->size();i++)
+for(i=1; i<=Settings->JackCo->size();i++)
 { 
  
-  if (JackCo->selected(i))
+  if (Settings->JackCo->selected(i))
     {
       memset(temp1,0, sizeof(temp1));
       sprintf(temp1,"Jack Port %d",k);
-      rakarrack.set(rkr->PrefNom(temp1),JackCo->text(i));
+      rakarrack.set(rkr->PrefNom(temp1),Settings->JackCo->text(i));
       k++;
     }
       
@@ -3880,14 +2885,14 @@ for(i=1; i<=JackCo->size();i++)
  rakarrack.set(rkr->PrefNom("Auto Connect Num"),k-1); 
   
 k=1;
-for(i=1; i<=JackIn->size();i++)
+for(i=1; i<=Settings->JackIn->size();i++)
 { 
  
-  if (JackIn->selected(i))
+  if (Settings->JackIn->selected(i))
     {
       memset(temp1,0, sizeof(temp1));
       sprintf(temp1,"Jack Port In %d",k);
-      rakarrack.set(rkr->PrefNom(temp1),JackIn->text(i));
+      rakarrack.set(rkr->PrefNom(temp1),Settings->JackIn->text(i));
       k++;
     }
       
@@ -5099,7 +4104,7 @@ char *masque;
 char *name;
 FILE *fp;
 
-BMidiIn->clear();
+Settings->BMidiIn->clear();
 
 
 if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
@@ -5118,7 +4123,7 @@ if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
              name=strtok(NULL,"\\"");
              masque=strtok(NULL,")");
              
-             if ((masque[2]=='R') && (strstr(name,"rakarrack MC OUT")==0)) BMidiIn->add(name);
+             if ((masque[2]=='R') && (strstr(name,"rakarrack MC OUT")==0)) Settings->BMidiIn->add(name);
              
             } 
            } 
@@ -5128,7 +4133,7 @@ if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
  
  
    
- JackCo->clear();
+ Settings->JackCo->clear();
  
  const char **ports;
   
@@ -5147,7 +4152,7 @@ if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
   while (ports[i] != NULL)
      {
       if((strstr(ports[i],"rakarrack:in_1")==0) && (strstr(ports[i],"rakarrack:in_2")==0))
-      JackCo->add(ports[i]);
+      Settings->JackCo->add(ports[i]);
       i++; 
      }
      
@@ -5157,7 +4162,7 @@ if ((fp = fopen ("/proc/asound/seq/clients", "r")) != NULL)
    
    free(ports);
    
-JackIn->clear();
+Settings->JackIn->clear();
  
  const char **iports;  
   
@@ -5175,7 +4180,7 @@ JackIn->clear();
   while (iports[i] != NULL)
      {
       if((strstr(iports[i],"rakarrack:out_1")==0) && (strstr(iports[i],"rakarrack:out_2")==0))
-      JackIn->add(iports[i]);
+      Settings->JackIn->add(iports[i]);
       i++; 
      }
      
@@ -5185,22 +4190,23 @@ JackIn->clear();
    
    free(iports);} {}
   }
-  Function {MiraConfig()} {} {
+  Function {MiraConfig()} {open
+  } {
     code {int i = 1;
 int k;
-while (BMidiIn->text(i) != NULL)
+while (Settings->BMidiIn->text(i) != NULL)
 {
-if (strcmp(BMidiIn->text(i),rkr->MID)==0 ) BMidiIn->select(i,1);
+if (strcmp(Settings->BMidiIn->text(i),rkr->MID)==0 ) Settings->BMidiIn->select(i,1);
 i++; 
 }
 
 i=1;
 
-while (JackCo->text(i) != NULL)
+while (Settings->JackCo->text(i) != NULL)
 {
 
 for (k=0; k < rkr->cuan_jack; k++)
-if (strcmp(JackCo->text(i),rkr->jack_po[k].name)==0 ) JackCo->select(i,1);
+if (strcmp(Settings->JackCo->text(i),rkr->jack_po[k].name)==0 ) Settings->JackCo->select(i,1);
 
 i++; 
 }
@@ -5208,11 +4214,11 @@ i++;
 
 i=1;
 
-while (JackIn->text(i) != NULL)
+while (Settings->JackIn->text(i) != NULL)
 {
 
 for (k=0; k < rkr->cuan_ijack; k++)
-if (strcmp(JackIn->text(i),rkr->jack_poi[k].name)==0 ) JackIn->select(i,1);
+if (strcmp(Settings->JackIn->text(i),rkr->jack_poi[k].name)==0 ) Settings->JackIn->select(i,1);
 
 i++; 
 }
@@ -5220,112 +4226,112 @@ i++;
 
 
 
-if (rkr->MIDIway) Mw1->setonly(); else Mw0->setonly();
+if (rkr->MIDIway) Settings->Mw1->setonly(); else Settings->Mw0->setonly();
 
 rkr->m_displayed = 0;
-Enable_Back->value(rkr->EnableBackgroundImage);
-Enable_DeacHide->value(rkr->deachide);
+Settings->Enable_Back->value(rkr->EnableBackgroundImage);
+Settings->Enable_DeacHide->value(rkr->deachide);
 
-BFiname->value(rkr->BankFilename);
-BackFiname->value(rkr->BackgroundImage);
-Udir->value(rkr->UDirFilename);
-Username->value(rkr->UserRealName);
-Pre_Serve->value(rkr->actuvol);
-LM_Volume->value(rkr->Metro_Vol);
-Filter_DC->value(rkr->DC_Offset);
-FLPosition->value(rkr->flpos);
-DB6B->value(rkr->db6booster);
-Har_Downsample->value(rkr->Har_Down);
-Har_Down_Qua->value(rkr->Har_D_Q);
-Har_Up_Qua->value(rkr->Har_U_Q);
-Rev_Downsample->value(rkr->Rev_Down);
-Rev_Down_Qua->value(rkr->Rev_D_Q);
-Rev_Up_Qua->value(rkr->Rev_U_Q);
-Con_Downsample->value(rkr->Con_Down);
-Con_Down_Qua->value(rkr->Con_D_Q);
-Con_Up_Qua->value(rkr->Con_U_Q);
-Seq_Downsample->value(rkr->Seq_Down);
-Seq_Down_Qua->value(rkr->Seq_D_Q);
-Seq_Up_Qua->value(rkr->Seq_U_Q);
-Shi_Downsample->value(rkr->Shi_Down);
-Shi_Down_Qua->value(rkr->Shi_D_Q);
-Shi_Up_Qua->value(rkr->Shi_U_Q);
-Voc_Downsample->value(rkr->Voc_Down);
-Voc_Down_Qua->value(rkr->Voc_D_Q);
-Voc_Up_Qua->value(rkr->Voc_U_Q);
-Ste_Downsample->value(rkr->Ste_Down);
-Ste_Down_Qua->value(rkr->Ste_D_Q);
-Ste_Up_Qua->value(rkr->Ste_U_Q);
-Wave_Amo->value(rkr->Wave_res_amount);
-Wave_Up_Qua->value(rkr->Wave_up_q);
-Wave_Down_Qua->value(rkr->Wave_down_q);
-Calibration->value(rkr->aFreq);
-RTrigger->value(rkr->HarmRecNote->trigfact);
-RC_Harm_Opti->value(rkr->RCOpti_Harm);
-RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
-RC_Ring_Opti->value(rkr->RCOpti_Ring);
+Settings->BFiname->value(rkr->BankFilename);
+Settings->BackFiname->value(rkr->BackgroundImage);
+Settings->Udir->value(rkr->UDirFilename);
+Settings->Username->value(rkr->UserRealName);
+Settings->Pre_Serve->value(rkr->actuvol);
+Settings->LM_Volume->value(rkr->Metro_Vol);
+Settings->Filter_DC->value(rkr->DC_Offset);
+Settings->FLPosition->value(rkr->flpos);
+Settings->DB6B->value(rkr->db6booster);
+Settings->Har_Downsample->value(rkr->Har_Down);
+Settings->Har_Down_Qua->value(rkr->Har_D_Q);
+Settings->Har_Up_Qua->value(rkr->Har_U_Q);
+Settings->Rev_Downsample->value(rkr->Rev_Down);
+Settings->Rev_Down_Qua->value(rkr->Rev_D_Q);
+Settings->Rev_Up_Qua->value(rkr->Rev_U_Q);
+Settings->Con_Downsample->value(rkr->Con_Down);
+Settings->Con_Down_Qua->value(rkr->Con_D_Q);
+Settings->Con_Up_Qua->value(rkr->Con_U_Q);
+Settings->Seq_Downsample->value(rkr->Seq_Down);
+Settings->Seq_Down_Qua->value(rkr->Seq_D_Q);
+Settings->Seq_Up_Qua->value(rkr->Seq_U_Q);
+Settings->Shi_Downsample->value(rkr->Shi_Down);
+Settings->Shi_Down_Qua->value(rkr->Shi_D_Q);
+Settings->Shi_Up_Qua->value(rkr->Shi_U_Q);
+Settings->Voc_Downsample->value(rkr->Voc_Down);
+Settings->Voc_Down_Qua->value(rkr->Voc_D_Q);
+Settings->Voc_Up_Qua->value(rkr->Voc_U_Q);
+Settings->Ste_Downsample->value(rkr->Ste_Down);
+Settings->Ste_Down_Qua->value(rkr->Ste_D_Q);
+Settings->Ste_Up_Qua->value(rkr->Ste_U_Q);
+Settings->Wave_Amo->value(rkr->Wave_res_amount);
+Settings->Wave_Up_Qua->value(rkr->Wave_up_q);
+Settings->Wave_Down_Qua->value(rkr->Wave_down_q);
+Settings->Calibration->value(rkr->aFreq);
+Settings->RTrigger->value(rkr->HarmRecNote->trigfact);
+Settings->RC_Harm_Opti->value(rkr->RCOpti_Harm);
+Settings->RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
+Settings->RC_Ring_Opti->value(rkr->RCOpti_Ring);
 
 
 switch(rkr->VocBands)
 {
   case 16:
-  Voc_Bands->value(0);
+  Settings->Voc_Bands->value(0);
   break;
   case 32:
-  Voc_Bands->value(1);
+  Settings->Voc_Bands->value(1);
   break;
   case 64:
-  Voc_Bands->value(2);
+  Settings->Voc_Bands->value(2);
   break;
   case 128:
-  Voc_Bands->value(3);
+  Settings->Voc_Bands->value(3);
   break;
   case 256:
-  Voc_Bands->value(4);
+  Settings->Voc_Bands->value(4);
   break;
   
 }
   
 
 
-MTable->value(rkr->midi_table);
+Settings->MTable->value(rkr->midi_table);
 
-AAssign->value(rkr->autoassign);
-Update_TAP->value(rkr->Tap_Updated);
-INSTATE->value(rkr->init_state);
-UPSAMPLE_C->value(rkr->upsample);
-Upr_Qual->value(rkr->UpQual);
-Downr_Qual->value(rkr->DownQual);
-MES_DIS->value(rkr->mess_dis);
-ENA_TOOL->value(rkr->ena_tool);
-T_TIMEOUT->value(rkr->t_timeout);
+Settings->AAssign->value(rkr->autoassign);
+Settings->Update_TAP->value(rkr->Tap_Updated);
+Settings->INSTATE->value(rkr->init_state);
+Settings->UPSAMPLE_C->value(rkr->upsample);
+Settings->Upr_Qual->value(rkr->UpQual);
+Settings->Downr_Qual->value(rkr->DownQual);
+Settings->MES_DIS->value(rkr->mess_dis);
+Settings->ENA_TOOL->value(rkr->ena_tool);
+Settings->T_TIMEOUT->value(rkr->t_timeout);
 
-Upr_Amo->value(rkr->UpAmo);
-L_SIZE->value(rkr->looper_size);
-D_A_Connect->value(rkr->aconnect_MI);
-D_J_Connect->value(rkr->aconnect_JA);
-D_IJ_Connect->value(rkr->aconnect_JIA);
+Settings->Upr_Amo->value(rkr->UpAmo);
+Settings->L_SIZE->value(rkr->looper_size);
+Settings->D_A_Connect->value(rkr->aconnect_MI);
+Settings->D_J_Connect->value(rkr->aconnect_JA);
+Settings->D_IJ_Connect->value(rkr->aconnect_JIA);
 
-Midi_In_Counter->value(rkr->MidiCh+1);
-Har_In_Counter->value(rkr->HarCh+1);
-Stereo_Har_In_Counter->value(rkr->StereoHarCh+1);
+Settings->Midi_In_Counter->value(rkr->MidiCh+1);
+Settings->Har_In_Counter->value(rkr->HarCh+1);
+Settings->Stereo_Har_In_Counter->value(rkr->StereoHarCh+1);
 
 switch(rkr->HarQual)
 {
   case 4:
-  Har_Qual->value(0);
+  Settings->Har_Qual->value(0);
   break;
   
   case 8:
-  Har_Qual->value(1);
+  Settings->Har_Qual->value(1);
   break;
   
   case 16:
-  Har_Qual->value(2);
+  Settings->Har_Qual->value(2);
   break;
 
   case 32:
-  Har_Qual->value(3);
+  Settings->Har_Qual->value(3);
   break;
 
 
@@ -5334,19 +4340,19 @@ switch(rkr->HarQual)
 switch(rkr->SteQual)
 {
   case 4:
-  Ste_Qual->value(0);
+  Settings->Ste_Qual->value(0);
   break;
   
   case 8:
-  Ste_Qual->value(1);
+  Settings->Ste_Qual->value(1);
   break;
   
   case 16:
-  Ste_Qual->value(2);
+  Settings->Ste_Qual->value(2);
   break;
 
   case 32:
-  Ste_Qual->value(3);
+  Settings->Ste_Qual->value(3);
   break;
 
 
@@ -5354,21 +4360,22 @@ switch(rkr->SteQual)
 
 
 
-if (rkr->aconnect_MI) BMidiIn->activate();
-else BMidiIn->deactivate();
+if (rkr->aconnect_MI) Settings->BMidiIn->activate();
+else Settings->BMidiIn->deactivate();
 
-if (rkr->aconnect_JA) JackCo->activate();
-else JackCo->deactivate();
+if (rkr->aconnect_JA) Settings->JackCo->activate();
+else Settings->JackCo->deactivate();
 
-if (rkr->aconnect_JIA) JackIn->activate();
-else JackIn->deactivate();
+if (rkr->aconnect_JIA) Settings->JackIn->activate();
+else Settings->JackIn->deactivate();
 
 Fl_Menu_Item *p;  
+Fl_Menu_Item *Har = Settings->get_menu_Har_Downsample();
 unsigned int SR_value=rkr->sample_rate;
 
-for(int j=0; j<menu_Har_Downsample->size(); j++)
+for(int j=0; j<Har->size(); j++)
  {
-      p=menu_Har_Downsample->next(j);
+      p=Har->next(j);
       
       switch(j)
        {
@@ -5412,8 +4419,8 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
  }
  
  
- Font_Bro->clear(); 
- Font_Bro->textcolor(label_color);
+ Settings->Font_Bro->clear(); 
+ Settings->Font_Bro->textcolor(label_color);
  k=0;
  k = Fl::set_fonts(0);
   for (i = 0; i < k; i++) {
@@ -5431,11 +4438,12 @@ for(int j=0; j<menu_Har_Downsample->size(); j++)
     sprintf(buffer, "@F%d@.%s", i, name);
     name = buffer;
 \#endif
-    Font_Bro->add(name);
+    Settings->Font_Bro->add(name);
 
 }
 
-Font_Bro->value(rkr->font+1);} {}
+Settings->Font_Bro->value(rkr->font+1);} {selected
+    }
   }
   Function {BankWin_Label(char *filename)} {open
   } {
@@ -7359,16 +6367,16 @@ Metro->image(InOut->image());
 fondo->image(InOut->image());
 TITTLE_L->image(InOut->image());
 Order->Fondo1->image(InOut->image());
-Fondo2->image(InOut->image());
+Settings->Fondo2->image(InOut->image());
 BankWindow->Fondo3->image(InOut->image());
 MIDILearn->Fondo4->image(InOut->image());
 Trigger->Fondo5->image(InOut->image());
-Fondo6->image(InOut->image());
-Fondo7->image(InOut->image());
-Fondo8->image(InOut->image());
-Fondo9->image(InOut->image());
-Fondo10->image(InOut->image());
-Fondo11->image(InOut->image());
+Settings->Fondo6->image(InOut->image());
+Settings->Fondo7->image(InOut->image());
+Settings->Fondo8->image(InOut->image());
+Settings->Fondo9->image(InOut->image());
+Settings->Fondo10->image(InOut->image());
+Settings->Fondo11->image(InOut->image());
 
 
 
@@ -7610,8 +6618,8 @@ fore_color=(Fl_Color)rkr->sfore_color;
 leds_color=(Fl_Color)rkr->sleds_color;
 label_color=(Fl_Color)rkr->slabel_color;
 
-scheme_ch->value(rkr->sschema);
-scheme_ch->do_callback();
+Settings->scheme_ch->value(rkr->sschema);
+Settings->scheme_ch->do_callback();
 PutBackground();
 chfsize(rkr->relfontsize - last);
 Leds_Color_Change(leds_color);
@@ -8656,7 +7664,7 @@ reordena();
 if (Order->visible())Prepare_Order();} {}
   }
   Function {make_table_window()} {} {
-    code {scroll->begin();
+    code {Settings->scroll->begin();
 
   for (intptr_t y=0; y<128; y++)
    {
@@ -8677,23 +7685,23 @@ if (Order->visible())Prepare_Order();} {}
     cb->add("U");
     cb->user_data((void *) (1000+y));
     cb->callback((Fl_Callback *)bank_click); 
-    scroll->add(cb);
+    Settings->scroll->add(cb);
     
     Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
     cp->copy_label("Preset");
     cp->labelcolor(FL_WHITE);
     cp->user_data((void *) (2000+y));
     cp->callback((Fl_Callback *)p_click); 
-    scroll->add(cp);
+    Settings->scroll->add(cp);
   
   
   }
-  scroll->end();
+  Settings->scroll->end();
   
 Put_MidiTable();
  
 
- scroll->position(0,-339);} {}
+ Settings->scroll->position(0,-339);} {}
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {
@@ -8719,9 +7727,9 @@ int num = (int) kk;
 rkr->M_table[num-2000].preset=o->value();} {}
   }
   Function {fill_mptable(int num,int value)} {} {
-    code {for (int t=0; t<scroll->children();t++)
+    code {for (int t=0; t<Settings->scroll->children();t++)
   {
-    Fl_Widget *w = scroll->child(t);
+    Fl_Widget *w = Settings->scroll->child(t);
     long long temp = (long long) w->user_data();
     if ((int)temp == num)
     {
@@ -8734,9 +7742,9 @@ rkr->M_table[num-2000].preset=o->value();} {}
   }} {}
   }
   Function {mtfillvalue(int num,int value)} {} {
-    code {for (int t=0; t<scroll->children();t++)
+    code {for (int t=0; t<Settings->scroll->children();t++)
   {
-    Fl_Widget *w = scroll->child(t);
+    Fl_Widget *w = Settings->scroll->child(t);
     long long temp = (long long) w->user_data();
     if ((int)temp == num)
     {
@@ -9126,7 +8134,7 @@ if(ok)
 
 return filename;} {}
   }
-  Function {set_save_file()} {open selected return_type void
+  Function {set_save_file()} {open return_type void
   } {
     code {int ok;
 char *filename;
