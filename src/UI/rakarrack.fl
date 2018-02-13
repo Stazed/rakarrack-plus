@@ -295,7 +295,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {43 94 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {109 479 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2082,7 +2082,7 @@ o->hide();} open
     } {}
     Fl_Window AboutWin {
       label {About Rakarrack}
-      callback {o->hide();} open selected
+      callback {o->hide();} open
       xywh {575 380 375 235} type Double color 8 selection_color 7 hide
       code0 {\#include "aboutwindow_gui.h"}
       code1 {o->initialize(this);}
@@ -7667,13 +7667,13 @@ if (Order->visible())Prepare_Order();} {}
    {
     char buf[20]; sprintf(buf,"%d",(int)y);
   
-    Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+    Fl_Box* b = new Fl_Box(20,y*25+22,60,25);
     b->box(FL_DOWN_BOX);
     b->copy_label(buf);
     b->labelcolor(FL_WHITE);
     b->user_data((void *) 8000);
     
-    Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
+    Fl_Choice* cb = new Fl_Choice(130,y*25+25,60,20);
     cb->copy_label("Bank");
     cb->labelcolor(FL_WHITE);
     cb->add("1");
@@ -7698,7 +7698,8 @@ if (Order->visible())Prepare_Order();} {}
 Put_MidiTable();
  
 
- Settings->scroll->position(0,-339);} {}
+ Settings->scroll->position(15,366);} {selected
+    }
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {

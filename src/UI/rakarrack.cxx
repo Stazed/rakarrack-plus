@@ -8425,13 +8425,13 @@ void RKRGUI::make_table_window() {
      {
       char buf[20]; sprintf(buf,"%d",(int)y);
     
-      Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+      Fl_Box* b = new Fl_Box(20,y*25+22,60,25);
       b->box(FL_DOWN_BOX);
       b->copy_label(buf);
       b->labelcolor(FL_WHITE);
       b->user_data((void *) 8000);
       
-      Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
+      Fl_Choice* cb = new Fl_Choice(130,y*25+25,60,20);
       cb->copy_label("Bank");
       cb->labelcolor(FL_WHITE);
       cb->add("1");
@@ -8456,7 +8456,7 @@ void RKRGUI::make_table_window() {
   Put_MidiTable();
    
   
-   Settings->scroll->position(0,-339);
+   Settings->scroll->position(15,366);
 }
 
 void RKRGUI::bank_click(Fl_Choice* o, void* v) {

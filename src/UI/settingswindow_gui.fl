@@ -3,7 +3,7 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class SettingsWindowGui {open
-  xywh {72 351 640 580} type Double
+  xywh {440 213 640 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -870,50 +870,50 @@ m_rkr->Conecta();}
       Fl_Counter Midi_In_Counter {
         label {Receive Channel}
         callback {m_rkr->MidiCh=(int)o->value()-1;}
-        xywh {103 198 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
+        xywh {31 211 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 1 minimum 1 maximum 16 step 1 value 1 textsize 11
       }
       Fl_Counter Har_In_Counter {
         label {Harmonizer Receive Channel}
         callback {m_rkr->HarCh=(int)o->value()-1;}
-        xywh {162 235 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
+        xywh {162 211 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 1 minimum 1 maximum 16 step 1 value 1 textsize 11
       }
       Fl_Counter Stereo_Har_In_Counter {
         label {Stereo Harmonizer Receive Channel}
         callback {m_rkr->StereoHarCh=(int)o->value()-1;}
-        xywh {200 276 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 16 step 1 value 1 textsize 11
+        xywh {355 211 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 1 minimum 1 maximum 16 step 1 value 1 textsize 11
       }
       Fl_Group wMIDI {
         label {MIDI implementation}
-        xywh {15 325 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
+        xywh {15 266 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
       } {
         Fl_Check_Button Mw0 {
           label Default
           callback {m_rkr->MIDIway=0;
 m_rgui->ML_Menu->deactivate();}
-          xywh {72 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          xywh {72 268 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
         }
         Fl_Check_Button Mw1 {
           label {MIDI Learn}
           callback {m_rkr->MIDIway=1;
 m_rgui->ML_Menu->activate();}
-          xywh {183 327 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          xywh {183 268 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
         }
       }
       Fl_Check_Button AAssign {
         label {Auto Assign MIDI Learn}
         callback {m_rkr->autoassign=o->value();}
-        xywh {134 359 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+        xywh {134 308 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
       }
       Fl_Check_Button MTable {
         label {MIDI Program Change Table}
         callback {m_rkr->midi_table=o->value();
 if(m_rkr->midi_table) scroll->activate(); else 
 scroll->deactivate();}
-        xywh {157 377 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+        xywh {157 336 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
       }
       Fl_Scroll scroll {
         user_data 5000 open
-        xywh {15 360 585 162} type VERTICAL_ALWAYS
+        xywh {15 366 585 150} type VERTICAL_ALWAYS
       } {}
     }
     Fl_Group JACK_SET {

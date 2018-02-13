@@ -1425,7 +1425,7 @@ this->when(FL_WHEN_RELEASE);
       BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
       BMidiIn->align(Fl_Align(FL_ALIGN_TOP_LEFT));
     } // Fl_Browser* BMidiIn
-    { Midi_In_Counter = new Fl_Counter(103, 198, 60, 24, "Receive Channel");
+    { Midi_In_Counter = new Fl_Counter(31, 211, 60, 24, "Receive Channel");
       Midi_In_Counter->type(1);
       Midi_In_Counter->color((Fl_Color)25);
       Midi_In_Counter->labelsize(10);
@@ -1436,9 +1436,9 @@ this->when(FL_WHEN_RELEASE);
       Midi_In_Counter->value(1);
       Midi_In_Counter->textsize(11);
       Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
-      Midi_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
+      Midi_In_Counter->align(Fl_Align(FL_ALIGN_TOP));
     } // Fl_Counter* Midi_In_Counter
-    { Har_In_Counter = new Fl_Counter(162, 235, 60, 24, "Harmonizer Receive Channel");
+    { Har_In_Counter = new Fl_Counter(162, 211, 60, 24, "Harmonizer Receive Channel");
       Har_In_Counter->type(1);
       Har_In_Counter->color((Fl_Color)25);
       Har_In_Counter->labelsize(10);
@@ -1449,9 +1449,9 @@ this->when(FL_WHEN_RELEASE);
       Har_In_Counter->value(1);
       Har_In_Counter->textsize(11);
       Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
-      Har_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
+      Har_In_Counter->align(Fl_Align(FL_ALIGN_TOP));
     } // Fl_Counter* Har_In_Counter
-    { Stereo_Har_In_Counter = new Fl_Counter(200, 276, 60, 24, "Stereo Harmonizer Receive Channel");
+    { Stereo_Har_In_Counter = new Fl_Counter(355, 211, 60, 24, "Stereo Harmonizer Receive Channel");
       Stereo_Har_In_Counter->type(1);
       Stereo_Har_In_Counter->color((Fl_Color)25);
       Stereo_Har_In_Counter->labelsize(10);
@@ -1462,14 +1462,14 @@ this->when(FL_WHEN_RELEASE);
       Stereo_Har_In_Counter->value(1);
       Stereo_Har_In_Counter->textsize(11);
       Stereo_Har_In_Counter->callback((Fl_Callback*)cb_Stereo_Har_In_Counter);
-      Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_LEFT));
+      Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_TOP));
     } // Fl_Counter* Stereo_Har_In_Counter
-    { wMIDI = new Fl_Group(15, 325, 273, 23, "MIDI implementation");
+    { wMIDI = new Fl_Group(15, 266, 273, 23, "MIDI implementation");
       wMIDI->box(FL_DOWN_FRAME);
       wMIDI->labelsize(10);
       wMIDI->labelcolor(FL_BACKGROUND2_COLOR);
       wMIDI->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-      { Mw0 = new Fl_Check_Button(72, 327, 18, 18, "Default");
+      { Mw0 = new Fl_Check_Button(72, 268, 18, 18, "Default");
         Mw0->type(102);
         Mw0->down_box(FL_DOWN_BOX);
         Mw0->labelsize(11);
@@ -1477,7 +1477,7 @@ this->when(FL_WHEN_RELEASE);
         Mw0->callback((Fl_Callback*)cb_Mw0);
         Mw0->align(Fl_Align(FL_ALIGN_LEFT));
       } // Fl_Check_Button* Mw0
-      { Mw1 = new Fl_Check_Button(183, 327, 18, 18, "MIDI Learn");
+      { Mw1 = new Fl_Check_Button(183, 268, 18, 18, "MIDI Learn");
         Mw1->type(102);
         Mw1->down_box(FL_DOWN_BOX);
         Mw1->labelsize(11);
@@ -1487,21 +1487,21 @@ this->when(FL_WHEN_RELEASE);
       } // Fl_Check_Button* Mw1
       wMIDI->end();
     } // Fl_Group* wMIDI
-    { AAssign = new Fl_Check_Button(134, 359, 16, 15, "Auto Assign MIDI Learn");
+    { AAssign = new Fl_Check_Button(134, 308, 16, 15, "Auto Assign MIDI Learn");
       AAssign->down_box(FL_DOWN_BOX);
       AAssign->labelsize(10);
       AAssign->labelcolor(FL_BACKGROUND2_COLOR);
       AAssign->callback((Fl_Callback*)cb_AAssign);
       AAssign->align(Fl_Align(FL_ALIGN_LEFT));
     } // Fl_Check_Button* AAssign
-    { MTable = new Fl_Check_Button(157, 377, 16, 15, "MIDI Program Change Table");
+    { MTable = new Fl_Check_Button(157, 336, 16, 15, "MIDI Program Change Table");
       MTable->down_box(FL_DOWN_BOX);
       MTable->labelsize(10);
       MTable->labelcolor(FL_BACKGROUND2_COLOR);
       MTable->callback((Fl_Callback*)cb_MTable);
       MTable->align(Fl_Align(FL_ALIGN_LEFT));
     } // Fl_Check_Button* MTable
-    { scroll = new Fl_Scroll(15, 360, 585, 162);
+    { scroll = new Fl_Scroll(15, 366, 585, 150);
       scroll->type(6);
       scroll->user_data((void*)(5000));
       scroll->end();
