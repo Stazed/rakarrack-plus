@@ -248,11 +248,6 @@ private:
   inline void cb_Acerca_de_i(Fl_Menu_*, void*);
   static void cb_Acerca_de(Fl_Menu_*, void*);
 public:
-  Fl_Box *MT;
-private:
-  inline void cb_MT_i(Fl_Box*, void*);
-  static void cb_MT(Fl_Box*, void*);
-public:
   Fl_Button *TITTLE_L;
 private:
   inline void cb_TITTLE_L_i(Fl_Button*, void*);
@@ -556,6 +551,13 @@ private:
   static void cb_Trigger(TrigWindowGui*, void*);
 public:
   RKRGUI(int argc, char**argv,RKR *rkr_);
+private:
+  /**
+   Main fltk gui timeout.
+  */
+  static void TimeoutStatic(void* ptr){((RKRGUI*) ptr)->GuiTimeout();}; 
+  void GuiTimeout(void);
+public:
   void Background_Color_Change(Fl_Color bcolor);
   void Label_Color_Change(Fl_Color bcolor);
   void Buttons_Color_Change(Fl_Color bcolor);
@@ -564,7 +566,6 @@ public:
   void load_stat();
   void save_stat(int whati);
   void Put_Loaded();
-  static void tick(void* v);
   static void preset_click(Fl_Button* o, void* v);
   inline void preset_click_i(Fl_Button* o, void*);
   void reordena();

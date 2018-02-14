@@ -278,7 +278,7 @@ decl {volatile int got_sigint = 0;} {private local
 decl {volatile int got_sigusr1 = 0;} {private local
 }
 
-class RKRGUI {open selected
+class RKRGUI {open
 } {
   decl {int made;} {private local
   }
@@ -294,7 +294,7 @@ class RKRGUI {open selected
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
+Pexitprogram=1;} open selected
       xywh {139 219 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -494,449 +494,6 @@ put_icon(AboutWin);}
             xywh {0 0 100 20} labelcolor 7
           }
         }
-      }
-      Fl_Box MT {
-        callback {highlight();
-drag_effect();
-check_signals(this);
-
-if (rkr->Tuner_Bypass)
-{
-
-if(rkr->efx_Tuner->note_actual != rkr->note_old)
-{
-char notas[3];
-sprintf(notas,"%-2s",rkr->efx_Tuner->notes[rkr->efx_Tuner->note_actual]);
-WNote->copy_label(notas);
-rkr->note_old=rkr->efx_Tuner->note_actual;
-}
-
-if(rkr->efx_Tuner->nfreq != rkr->nfreq_old)
-{
-char refreq[60];
-sprintf(refreq,"%8.3f",rkr->efx_Tuner->nfreq);
-WRfreq->copy_label(refreq);
-rkr->nfreq_old=rkr->efx_Tuner->nfreq;
-}
-
-//if(rkr->efx_Tuner->afreq != rkr->afreq_old)
-if(fabsf(rkr->efx_Tuner->afreq-rkr->afreq_old)>.2f)
-{
-char nofreq[60];
-sprintf(nofreq,"%8.3f",rkr->efx_Tuner->afreq);
-if (abs(rkr->efx_Tuner->cents)>5) WNfreq->labelcolor(FL_RED); else WNfreq->labelcolor(label_color);
-WNfreq->copy_label(nofreq);
-rkr->afreq_old=rkr->efx_Tuner->afreq;
-}
-
-if(rkr->efx_Tuner->afreq==0.0f)
-{
- char notas[3];
- sprintf(notas,"  ");
- WNote->copy_label(notas);
-} 
-
-
-if(rkr->efx_Tuner->cents != rkr->cents_old)
-{
-tuner_bar->value(rkr->efx_Tuner->cents);
-rkr->cents_old=rkr->efx_Tuner->cents;
-}
-
-}
-
-
-
-if (Principal->w() != rkr->resolution) adjustfont();
-
-
-if(stecla==1)
-{
- if(rkr->Selected_Preset<60) 
- {
- Preset_Counter->value(rkr->Selected_Preset+1);
- Preset_Counter->do_callback();
- }
- stecla=0;
-}
-
-
-if(stecla==2)
-{
- if(rkr->Selected_Preset>1) 
- {
- Preset_Counter->value(rkr->Selected_Preset-1);
- Preset_Counter->do_callback();
- }
- 
- 
- stecla=0;
-}
-
-if(stecla==3)
-{ 
- 
- if(Nivel_Salida->value()>-50) 
- {
-  Nivel_Salida->value(Nivel_Salida->value()-1);
-  Nivel_Salida->do_callback();
-  Nivel_Salida->redraw();
- } 
-  
-  
-  
- stecla=0;
-}   
-
-
-if(stecla==4)
-{ 
- 
- if(Nivel_Salida->value()<50) 
- {
-  Nivel_Salida->value(Nivel_Salida->value()+1);
-  Nivel_Salida->do_callback();
-  Nivel_Salida->redraw();
- } 
- stecla=0;
-}   
-
-
-if(stecla==5)
-{
- update_looper();
- stecla=0;
-} 
-
-
-
-if (preset!=1000)
-{
-
-if(!rkr->midi_table)
-{
- Preset_Counter->value(preset);
- Preset_Counter->do_callback();
-}
-else
-{
- if(rkr->a_bank != rkr->M_table[preset].bank)
-  {
-    switch(rkr->M_table[preset].bank)
-    
-     {
-       case 0:
-       L_B1->do_callback();
-       break;
-
-       case 1:
-       L_B2->do_callback();
-       break;
-     
-       case 2:
-       L_B3->do_callback();
-       break;
-
-       case 3:
-       L_B4->do_callback();
-       break;
-     
-     
-     }   
-   }
- Preset_Counter->value(rkr->M_table[preset].preset+1);
- Preset_Counter->do_callback();
-
-}
-
- preset=1000;
-}
-
-
-
-
-ActMIDI();
-if(rkr->ACI_Bypass) ActACI();
-
-rkr->cpufp++;
-if(rkr->cpufp==40)
-{
-char tmp[8];
-memset(tmp,0, sizeof(tmp));
-sprintf(tmp,"%5.2f%%",rkr->cpuload);
-CPULOAD->copy_label(tmp);
-rkr->cpufp=0;
-}
-
-
-
-
-if(rkr->numpc)
-{
-  if (rkr->numpi) P_IN_ST->show(); else P_IN_ST->hide();
-  if (rkr->numpo) P_OUT_ST->show(); else P_OUT_ST->hide();
-  if (rkr->numpa) P_AUX_ST->show(); else P_AUX_ST->hide();
-  if (rkr->numpmi) P_MIN_ST->show(); else P_MIN_ST->hide();
-  if (rkr->numpmo) P_MOUT_ST->show(); else P_MOUT_ST->hide();
-  rkr->numpc = 0;
-}    
-
-if(error_num>0) rkr->Error_Handle(error_num);
-
-if(rkr->Tap_Bypass)
-{
-   
-
-  if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
-   {
-     T_DIS->value(rkr->Tap_TempoSet);
-     UpdateTGUI();
-     rkr->Tap_Display=0;
-   }  
-
-  if(rkr->Tap_Display==2)
-   {
-     rkr->Tap_Display=0;
-     Tap_activar->value(0);
-     Tap_activar->do_callback();
-   }  
-
- 
-}
-
-
-
-if (rkr->Bypass)
-{ 
-  if (rkr->val_il_sum != rkr->old_il_sum)
-  {
-  input_vul->value(rkr->val_il_sum);
-  rkr->old_il_sum=rkr->val_il_sum;
-  }
-  
-  if (rkr->val_ir_sum != rkr->old_ir_sum)
-  {
-  input_vur->value(rkr->val_ir_sum);
-  rkr->old_ir_sum=rkr->val_ir_sum;
-  }
-
-  if (rkr->val_vl_sum != rkr->old_vl_sum)
-  {
-  output_vul->value(rkr->val_vl_sum);
-  rkr->old_vl_sum=rkr->val_vl_sum;
-  }
-
-  if (rkr->val_vr_sum != rkr->old_vr_sum)
-  {
-  output_vur->value(rkr->val_vr_sum);
-  rkr->old_vr_sum=rkr->val_vr_sum;
-  }
-
-
-if(rkr->efx_FLimiter->clipping)
-{
-CLIP_LED->color(FL_RED);
-CLIP_LED->redraw();
-}
-else
-{
-CLIP_LED->color(fl_darker(FL_RED));
-CLIP_LED->redraw();
-}
-
-if(rkr->efx_FLimiter->limit)
-{
-LMT_LED->color(leds_color);
-LMT_LED->redraw();
-}
-else
-{
-LMT_LED->color(fl_darker(leds_color));
-LMT_LED->redraw();
-}
-
-rkr->efx_FLimiter->clipping=0;
-rkr->efx_FLimiter->limit=0;
-
-
-if(rkr->checkforaux())
-{
- if(VOCODER->vu_vu->value()!=rkr->efx_Vocoder->vulevel)
- VOCODER->vu_vu->value(rkr->efx_Vocoder->vulevel);
-}
-
-if (Sco->get_scope_ON())
-  {
-   Sco->redraw();
-  }
-else { nt = 1;}
-
-if (nt)
-  { 
-  nt = 0;
-  Sco->hide();
-  Tuner->show();
-  Tuner->redraw();
- }  
-
-
-if (Analy->get_analyzer_ON())
-{ 
- at++;
- if(at==3)
-   { Analy->redraw();
-     at=0; 
-   }
-}
-else
-{
-  at=0;
-  tta=1;
-}
-
-if(tta)
-{
- tta=0;
- Analy->hide();
- Etit->show();
- Etit->redraw();
-}  
-
-
-
-if(rkr->Looper_Bypass)
-{
-  if((rkr->efx_Looper->Pplay) && (!rkr->efx_Looper->Pstop))
-   {
-     if(looper_lqua != rkr->efx_Looper->looper_qua)
-         
-         {
-           looper_lqua = rkr->efx_Looper->looper_qua;
-           char tmp[16]; 
-           memset(tmp,0,sizeof(tmp));
-           sprintf(tmp,"%d/%d",rkr->efx_Looper->looper_bar,rkr->efx_Looper->looper_qua);
-           LOOPER->L_TimePos->copy_label(tmp);
-         }
-   
-   }
-   
-   
-   
- }
-
-
-}
-
-
-if ((rkr->Metro_Bypass) && (MetroSound->value()==0))
-{
-  if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
-  
-     {
-       Metro_Led->color(fl_lighter(FL_RED));
-       Metro_Led->redraw();
-     }  
-  
-  if ((rkr->M_Metronome->markctr) && ( (int) Metro_Led->color() != (int) fl_darker(FL_RED)))   
-     {  
-     Metro_Led->color(fl_darker(FL_RED));
-     Metro_Led->redraw();
-     } 
-}
-
-
-if (rkr->MIDIConverter_Bypass)
-{
-  if ((rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_lighter(FL_RED)))
-  
-     {
-       MIDI->Mled->color(fl_lighter(FL_RED));
-       MIDI->Mled->redraw();
-     }  
-  
-  if ((!rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_darker(FL_RED)))   
-     {  
-     MIDI->Mled->color(fl_darker(FL_RED));
-     MIDI->Mled->redraw();
-     } 
-}
-
-
-if (rkr->Harmonizer_Bypass)
-{
-
-    if((rkr->efx_Har->PSELECT)|| (rkr->efx_Har->PMIDI))
-     {
-
-    if (rkr->RC_Harm->cc) 
-    {
-    HAR->har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
-    rkr->RC_Harm->cc=0;
-    HAR->har_chordname->redraw(); 
-    rkr->RC_Harm->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota); 
-    rkr->efx_Har->r_ratio = rkr->RC_Harm->r__ratio[0];//pass the found ratio     
-    }
-     }
-
-}
-
-if (rkr->StereoHarm_Bypass)
-{
-
-    if((rkr->efx_StereoHarm->PSELECT)|| (rkr->efx_StereoHarm->PMIDI))
-     {
-
-    if (rkr->RC_Stereo_Harm->cc) 
-    {
-    SHAR->shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
-    rkr->RC_Stereo_Harm->cc=0;
-    SHAR->shar_chordname->redraw(); 
-    rkr->RC_Stereo_Harm->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
-    rkr->RC_Stereo_Harm->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
-    rkr->efx_StereoHarm->r_ratiol = rkr->RC_Stereo_Harm->r__ratio[1];
-    rkr->efx_StereoHarm->r_ratior = rkr->RC_Stereo_Harm->r__ratio[2];
-
-    }
-     }
-
-}
-
-
-if (rkr->RControl)
-{ 
-   rkr->CountWait++;
-   if (rkr->CountWait==25)
-      {
-        MIDILearn->GMM->color(leds_color);
-        MIDILearn->GMM->redraw();
-       } 
-        
-   if (rkr->CountWait==50)
-       {
-         MIDILearn->GMM->color(fore_color); 
-         MIDILearn->GMM->redraw();
-         rkr->CountWait=0;
-       } 
-      
-
-  if (rkr->ControlGet != 0)
-    {
-      rkr->RControl = 0;
-      MIDILearn->Disp_Control->value(rkr->ControlGet);
-      MIDILearn->Disp_Control->redraw();
-      MIDILearn->GMM->color(fore_color);
-      MIDILearn->GMM->redraw();
-      if((rkr->comemouse) && (rkr->autoassign))
-       {
-        rkr->comemouse=0;
-        MIDILearn->Assign->do_callback();   
-          
-       }
-      
-      
-    }   
-}}
-        xywh {579 128 20 22} labelsize 18
       }
       Fl_Button TITTLE_L {
         callback {if(rkr->Bypass)
@@ -2103,7 +1660,7 @@ o->hide();} open
 sprintf(tmp,"Version %s",VERSION);
 AboutWin->About_Version->copy_label(tmp);} {}
   }
-  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {C
+  Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {open C
   } {
     code {Fl::args(argc,argv);
 fl_open_display();
@@ -2176,10 +1733,457 @@ if(rkr->deachide) HideUE->label("Show");else HideUE->label("Hide");
 HideUE->redraw();
 
 
-void * v=MT;
-Fl::add_timeout(.04,tick,v);
+Fl::add_timeout(.04,this->TimeoutStatic, this);
 Fl::add_handler(prevnext);
 install_signal_handlers();} {}
+  }
+  decl {static void TimeoutStatic(void* ptr){((RKRGUI*) ptr)->GuiTimeout();}} {
+    comment {Main fltk gui timeout.} private local
+  }
+  Function {GuiTimeout(void)} {open private C return_type void
+  } {
+    code {highlight();
+drag_effect();
+check_signals(this);
+
+if (rkr->Tuner_Bypass)
+{
+
+if(rkr->efx_Tuner->note_actual != rkr->note_old)
+{
+char notas[3];
+sprintf(notas,"%-2s",rkr->efx_Tuner->notes[rkr->efx_Tuner->note_actual]);
+WNote->copy_label(notas);
+rkr->note_old=rkr->efx_Tuner->note_actual;
+}
+
+if(rkr->efx_Tuner->nfreq != rkr->nfreq_old)
+{
+char refreq[60];
+sprintf(refreq,"%8.3f",rkr->efx_Tuner->nfreq);
+WRfreq->copy_label(refreq);
+rkr->nfreq_old=rkr->efx_Tuner->nfreq;
+}
+
+//if(rkr->efx_Tuner->afreq != rkr->afreq_old)
+if(fabsf(rkr->efx_Tuner->afreq-rkr->afreq_old)>.2f)
+{
+char nofreq[60];
+sprintf(nofreq,"%8.3f",rkr->efx_Tuner->afreq);
+if (abs(rkr->efx_Tuner->cents)>5) WNfreq->labelcolor(FL_RED); else WNfreq->labelcolor(label_color);
+WNfreq->copy_label(nofreq);
+rkr->afreq_old=rkr->efx_Tuner->afreq;
+}
+
+if(rkr->efx_Tuner->afreq==0.0f)
+{
+ char notas[3];
+ sprintf(notas,"  ");
+ WNote->copy_label(notas);
+} 
+
+
+if(rkr->efx_Tuner->cents != rkr->cents_old)
+{
+tuner_bar->value(rkr->efx_Tuner->cents);
+rkr->cents_old=rkr->efx_Tuner->cents;
+}
+
+}
+
+
+
+if (Principal->w() != rkr->resolution) adjustfont();
+
+
+if(stecla==1)
+{
+ if(rkr->Selected_Preset<60) 
+ {
+ Preset_Counter->value(rkr->Selected_Preset+1);
+ Preset_Counter->do_callback();
+ }
+ stecla=0;
+}
+
+
+if(stecla==2)
+{
+ if(rkr->Selected_Preset>1) 
+ {
+ Preset_Counter->value(rkr->Selected_Preset-1);
+ Preset_Counter->do_callback();
+ }
+ 
+ 
+ stecla=0;
+}
+
+if(stecla==3)
+{ 
+ 
+ if(Nivel_Salida->value()>-50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()-1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+  
+  
+  
+ stecla=0;
+}   
+
+
+if(stecla==4)
+{ 
+ 
+ if(Nivel_Salida->value()<50) 
+ {
+  Nivel_Salida->value(Nivel_Salida->value()+1);
+  Nivel_Salida->do_callback();
+  Nivel_Salida->redraw();
+ } 
+ stecla=0;
+}   
+
+
+if(stecla==5)
+{
+ update_looper();
+ stecla=0;
+} 
+
+
+
+if (preset!=1000)
+{
+
+if(!rkr->midi_table)
+{
+ Preset_Counter->value(preset);
+ Preset_Counter->do_callback();
+}
+else
+{
+ if(rkr->a_bank != rkr->M_table[preset].bank)
+  {
+    switch(rkr->M_table[preset].bank)
+    
+     {
+       case 0:
+       L_B1->do_callback();
+       break;
+
+       case 1:
+       L_B2->do_callback();
+       break;
+     
+       case 2:
+       L_B3->do_callback();
+       break;
+
+       case 3:
+       L_B4->do_callback();
+       break;
+     
+     
+     }   
+   }
+ Preset_Counter->value(rkr->M_table[preset].preset+1);
+ Preset_Counter->do_callback();
+
+}
+
+ preset=1000;
+}
+
+
+
+
+ActMIDI();
+if(rkr->ACI_Bypass) ActACI();
+
+rkr->cpufp++;
+if(rkr->cpufp==40)
+{
+char tmp[8];
+memset(tmp,0, sizeof(tmp));
+sprintf(tmp,"%5.2f%%",rkr->cpuload);
+CPULOAD->copy_label(tmp);
+rkr->cpufp=0;
+}
+
+
+
+
+if(rkr->numpc)
+{
+  if (rkr->numpi) P_IN_ST->show(); else P_IN_ST->hide();
+  if (rkr->numpo) P_OUT_ST->show(); else P_OUT_ST->hide();
+  if (rkr->numpa) P_AUX_ST->show(); else P_AUX_ST->hide();
+  if (rkr->numpmi) P_MIN_ST->show(); else P_MIN_ST->hide();
+  if (rkr->numpmo) P_MOUT_ST->show(); else P_MOUT_ST->hide();
+  rkr->numpc = 0;
+}    
+
+if(error_num>0) rkr->Error_Handle(error_num);
+
+if(rkr->Tap_Bypass)
+{
+   
+
+  if((rkr->Tap_Display==1) && (rkr->Tap_Selection > 0))
+   {
+     T_DIS->value(rkr->Tap_TempoSet);
+     UpdateTGUI();
+     rkr->Tap_Display=0;
+   }  
+
+  if(rkr->Tap_Display==2)
+   {
+     rkr->Tap_Display=0;
+     Tap_activar->value(0);
+     Tap_activar->do_callback();
+   }  
+
+ 
+}
+
+
+
+if (rkr->Bypass)
+{ 
+  if (rkr->val_il_sum != rkr->old_il_sum)
+  {
+  input_vul->value(rkr->val_il_sum);
+  rkr->old_il_sum=rkr->val_il_sum;
+  }
+  
+  if (rkr->val_ir_sum != rkr->old_ir_sum)
+  {
+  input_vur->value(rkr->val_ir_sum);
+  rkr->old_ir_sum=rkr->val_ir_sum;
+  }
+
+  if (rkr->val_vl_sum != rkr->old_vl_sum)
+  {
+  output_vul->value(rkr->val_vl_sum);
+  rkr->old_vl_sum=rkr->val_vl_sum;
+  }
+
+  if (rkr->val_vr_sum != rkr->old_vr_sum)
+  {
+  output_vur->value(rkr->val_vr_sum);
+  rkr->old_vr_sum=rkr->val_vr_sum;
+  }
+
+
+if(rkr->efx_FLimiter->clipping)
+{
+CLIP_LED->color(FL_RED);
+CLIP_LED->redraw();
+}
+else
+{
+CLIP_LED->color(fl_darker(FL_RED));
+CLIP_LED->redraw();
+}
+
+if(rkr->efx_FLimiter->limit)
+{
+LMT_LED->color(leds_color);
+LMT_LED->redraw();
+}
+else
+{
+LMT_LED->color(fl_darker(leds_color));
+LMT_LED->redraw();
+}
+
+rkr->efx_FLimiter->clipping=0;
+rkr->efx_FLimiter->limit=0;
+
+
+if(rkr->checkforaux())
+{
+ if(VOCODER->vu_vu->value()!=rkr->efx_Vocoder->vulevel)
+ VOCODER->vu_vu->value(rkr->efx_Vocoder->vulevel);
+}
+
+if (Sco->get_scope_ON())
+  {
+   Sco->redraw();
+  }
+else { nt = 1;}
+
+if (nt)
+  { 
+  nt = 0;
+  Sco->hide();
+  Tuner->show();
+  Tuner->redraw();
+ }  
+
+
+if (Analy->get_analyzer_ON())
+{ 
+ at++;
+ if(at==3)
+   { Analy->redraw();
+     at=0; 
+   }
+}
+else
+{
+  at=0;
+  tta=1;
+}
+
+if(tta)
+{
+ tta=0;
+ Analy->hide();
+ Etit->show();
+ Etit->redraw();
+}  
+
+
+
+if(rkr->Looper_Bypass)
+{
+  if((rkr->efx_Looper->Pplay) && (!rkr->efx_Looper->Pstop))
+   {
+     if(looper_lqua != rkr->efx_Looper->looper_qua)
+         
+         {
+           looper_lqua = rkr->efx_Looper->looper_qua;
+           char tmp[16]; 
+           memset(tmp,0,sizeof(tmp));
+           sprintf(tmp,"%d/%d",rkr->efx_Looper->looper_bar,rkr->efx_Looper->looper_qua);
+           LOOPER->L_TimePos->copy_label(tmp);
+         }
+   
+   }
+   
+   
+   
+ }
+
+
+}
+
+
+if ((rkr->Metro_Bypass) && (MetroSound->value()==0))
+{
+  if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
+  
+     {
+       Metro_Led->color(fl_lighter(FL_RED));
+       Metro_Led->redraw();
+     }  
+  
+  if ((rkr->M_Metronome->markctr) && ( (int) Metro_Led->color() != (int) fl_darker(FL_RED)))   
+     {  
+     Metro_Led->color(fl_darker(FL_RED));
+     Metro_Led->redraw();
+     } 
+}
+
+
+if (rkr->MIDIConverter_Bypass)
+{
+  if ((rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_lighter(FL_RED)))
+  
+     {
+       MIDI->Mled->color(fl_lighter(FL_RED));
+       MIDI->Mled->redraw();
+     }  
+  
+  if ((!rkr->efx_MIDIConverter->hay) && ( (int) MIDI->Mled->color() != (int) fl_darker(FL_RED)))   
+     {  
+     MIDI->Mled->color(fl_darker(FL_RED));
+     MIDI->Mled->redraw();
+     } 
+}
+
+
+if (rkr->Harmonizer_Bypass)
+{
+
+    if((rkr->efx_Har->PSELECT)|| (rkr->efx_Har->PMIDI))
+     {
+
+    if (rkr->RC_Harm->cc) 
+    {
+    HAR->har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
+    rkr->RC_Harm->cc=0;
+    HAR->har_chordname->redraw(); 
+    rkr->RC_Harm->Vamos(0,rkr->efx_Har->Pinterval-12,rkr->HarmRecNote->reconota); 
+    rkr->efx_Har->r_ratio = rkr->RC_Harm->r__ratio[0];//pass the found ratio     
+    }
+     }
+
+}
+
+if (rkr->StereoHarm_Bypass)
+{
+
+    if((rkr->efx_StereoHarm->PSELECT)|| (rkr->efx_StereoHarm->PMIDI))
+     {
+
+    if (rkr->RC_Stereo_Harm->cc) 
+    {
+    SHAR->shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
+    rkr->RC_Stereo_Harm->cc=0;
+    SHAR->shar_chordname->redraw(); 
+    rkr->RC_Stereo_Harm->Vamos(1,rkr->efx_StereoHarm->Pintervall-12,rkr->StHarmRecNote->reconota);      
+    rkr->RC_Stereo_Harm->Vamos(2,rkr->efx_StereoHarm->Pintervalr-12,rkr->StHarmRecNote->reconota);      
+    rkr->efx_StereoHarm->r_ratiol = rkr->RC_Stereo_Harm->r__ratio[1];
+    rkr->efx_StereoHarm->r_ratior = rkr->RC_Stereo_Harm->r__ratio[2];
+
+    }
+     }
+
+}
+
+
+if (rkr->RControl)
+{ 
+   rkr->CountWait++;
+   if (rkr->CountWait==25)
+      {
+        MIDILearn->GMM->color(leds_color);
+        MIDILearn->GMM->redraw();
+       } 
+        
+   if (rkr->CountWait==50)
+       {
+         MIDILearn->GMM->color(fore_color); 
+         MIDILearn->GMM->redraw();
+         rkr->CountWait=0;
+       } 
+      
+
+  if (rkr->ControlGet != 0)
+    {
+      rkr->RControl = 0;
+      MIDILearn->Disp_Control->value(rkr->ControlGet);
+      MIDILearn->Disp_Control->redraw();
+      MIDILearn->GMM->color(fore_color);
+      MIDILearn->GMM->redraw();
+      if((rkr->comemouse) && (rkr->autoassign))
+       {
+        rkr->comemouse=0;
+        MIDILearn->Assign->do_callback();   
+          
+       }
+      
+      
+    }   
+};
+
+Fl::repeat_timeout(.04, this->TimeoutStatic, this);} {}
   }
   Function {Background_Color_Change(Fl_Color bcolor)} {} {
     code {MenuP->color(bcolor);
@@ -3198,12 +3202,6 @@ for(i=0;i<rkr->NumEffects;i++)
 
 reordena();} {}
   }
-  Function {tick(void* v)} {return_type {static void}
-  } {
-    code {Fl_Box *o = (Fl_Box*)v;
-o->do_callback();
-Fl::repeat_timeout(.04,tick,v);} {}
-  }
   Function {preset_click(Fl_Button* o, void* v)} {return_type {static void}
   } {
     code {((RKRGUI*)(o->parent()->parent()->user_data()))->preset_click_i(o,v);} {}
@@ -4188,8 +4186,7 @@ Settings->JackIn->clear();
    
    free(iports);} {}
   }
-  Function {MiraConfig()} {open
-  } {
+  Function {MiraConfig()} {} {
     code {int i = 1;
 int k;
 while (Settings->BMidiIn->text(i) != NULL)
@@ -4442,8 +4439,7 @@ for(int j=0; j<Har->size(); j++)
 
 Settings->Font_Bro->value(rkr->font+1);} {}
   }
-  Function {BankWin_Label(char *filename)} {open
-  } {
+  Function {BankWin_Label(char *filename)} {} {
     code {char tmp[256];
 
 
@@ -4451,8 +4447,7 @@ memset(tmp,0, sizeof(tmp));
 sprintf(tmp,"%s   v%s - Bank Manager - %s",rkr->jackcliname,VERSION,fl_filename_name(filename));
 BankWindow->copy_label(tmp);} {}
   }
-  Function {is_modified()} {open
-  } {
+  Function {is_modified()} {} {
     code {int ok;
 
 
@@ -8105,7 +8100,7 @@ drag=1000;
   }
   decl {int get_bank_made(){return made;}} {public local
   }
-  Function {get_bank_file()} {open C return_type {char *}
+  Function {get_bank_file()} {C return_type {char *}
   } {
     code {int ok;
 char *filename;
@@ -8123,7 +8118,7 @@ if(ok)
 
 return filename;} {}
   }
-  Function {set_save_file()} {open return_type void
+  Function {set_save_file()} {return_type void
   } {
     code {int ok;
 char *filename;
