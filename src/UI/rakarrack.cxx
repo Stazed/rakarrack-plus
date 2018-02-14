@@ -8420,43 +8420,36 @@ void RKRGUI::Prep_Reorden(int source, int dest) {
 
 void RKRGUI::make_table_window() {
   Settings->scroll->begin();
+    
+      for (intptr_t y=0; y<128; y++)
+      {
+          char buf[20]; sprintf(buf,"%d",(int)y);
+          Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+          b->box(FL_DOWN_BOX);
+          b->copy_label(buf);
+          b->labelcolor(FL_WHITE);
+          b->user_data((void *) 8000);
   
-    for (intptr_t y=0; y<128; y++)
-     {
-      char buf[20]; sprintf(buf,"%d",(int)y);
-    
-      Fl_Box* b = new Fl_Box(20,y*25+22,60,25);
-      b->box(FL_DOWN_BOX);
-      b->copy_label(buf);
-      b->labelcolor(FL_WHITE);
-      b->user_data((void *) 8000);
-      
-      Fl_Choice* cb = new Fl_Choice(130,y*25+25,60,20);
-      cb->copy_label("Bank");
-      cb->labelcolor(FL_WHITE);
-      cb->add("1");
-      cb->add("2");
-      cb->add("3");
-      cb->add("U");
-      cb->user_data((void *) (1000+y));
-      cb->callback((Fl_Callback *)bank_click); 
-      Settings->scroll->add(cb);
-      
-      Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
-      cp->copy_label("Preset");
-      cp->labelcolor(FL_WHITE);
-      cp->user_data((void *) (2000+y));
-      cp->callback((Fl_Callback *)p_click); 
-      Settings->scroll->add(cp);
-    
-    
-    }
-    Settings->scroll->end();
-    
-  Put_MidiTable();
-   
+          Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
+          cb->copy_label("Bank");
+          cb->labelcolor(FL_WHITE);
+          cb->add("1");
+          cb->add("2");
+          cb->add("3");
+          cb->add("U");
+          cb->user_data((void *) (1000+y));
+          cb->callback((Fl_Callback *)bank_click); 
   
-   Settings->scroll->position(15,366);
+          Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
+          cp->copy_label("Preset");
+          cp->labelcolor(FL_WHITE);
+          cp->user_data((void *) (2000+y));
+          cp->callback((Fl_Callback *)p_click); 
+      }
+      Settings->scroll->end();
+      
+      Put_MidiTable();
+      Settings->scroll->scroll_to(0,-344);
 }
 
 void RKRGUI::bank_click(Fl_Choice* o, void* v) {

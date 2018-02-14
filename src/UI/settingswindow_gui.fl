@@ -913,7 +913,7 @@ scroll->deactivate();}
       }
       Fl_Scroll scroll {
         user_data 5000 open
-        xywh {15 366 585 150} type VERTICAL_ALWAYS
+        xywh {15 366 500 162} type VERTICAL_ALWAYS
       } {}
     }
     Fl_Group JACK_SET {

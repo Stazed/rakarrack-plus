@@ -1501,7 +1501,7 @@ this->when(FL_WHEN_RELEASE);
       MTable->callback((Fl_Callback*)cb_MTable);
       MTable->align(Fl_Align(FL_ALIGN_LEFT));
     } // Fl_Check_Button* MTable
-    { scroll = new Fl_Scroll(15, 366, 585, 150);
+    { scroll = new Fl_Scroll(15, 366, 500, 162);
       scroll->type(6);
       scroll->user_data((void*)(5000));
       scroll->end();

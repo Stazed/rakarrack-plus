@@ -278,7 +278,7 @@ decl {volatile int got_sigint = 0;} {private local
 decl {volatile int got_sigusr1 = 0;} {private local
 }
 
-class RKRGUI {open
+class RKRGUI {open selected
 } {
   decl {int made;} {private local
   }
@@ -295,7 +295,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;}
-      xywh {109 479 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {139 219 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -7306,8 +7306,7 @@ if(tecla != last_tecla)
   
 return(1000);} {}
   }
-  Function {ScanDir()} {open
-  } {
+  Function {ScanDir()} {} {
     code {char nombre[64];
   char *nombank;
   nombank = (char *)calloc(1, 256);
@@ -7662,44 +7661,36 @@ if (Order->visible())Prepare_Order();} {}
   }
   Function {make_table_window()} {} {
     code {Settings->scroll->begin();
+  
+    for (intptr_t y=0; y<128; y++)
+    {
+        char buf[20]; sprintf(buf,"%d",(int)y);
+        Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+        b->box(FL_DOWN_BOX);
+        b->copy_label(buf);
+        b->labelcolor(FL_WHITE);
+        b->user_data((void *) 8000);
 
-  for (intptr_t y=0; y<128; y++)
-   {
-    char buf[20]; sprintf(buf,"%d",(int)y);
-  
-    Fl_Box* b = new Fl_Box(20,y*25+22,60,25);
-    b->box(FL_DOWN_BOX);
-    b->copy_label(buf);
-    b->labelcolor(FL_WHITE);
-    b->user_data((void *) 8000);
-    
-    Fl_Choice* cb = new Fl_Choice(130,y*25+25,60,20);
-    cb->copy_label("Bank");
-    cb->labelcolor(FL_WHITE);
-    cb->add("1");
-    cb->add("2");
-    cb->add("3");
-    cb->add("U");
-    cb->user_data((void *) (1000+y));
-    cb->callback((Fl_Callback *)bank_click); 
-    Settings->scroll->add(cb);
-    
-    Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
-    cp->copy_label("Preset");
-    cp->labelcolor(FL_WHITE);
-    cp->user_data((void *) (2000+y));
-    cp->callback((Fl_Callback *)p_click); 
-    Settings->scroll->add(cp);
-  
-  
-  }
-  Settings->scroll->end();
-  
-Put_MidiTable();
- 
+        Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
+        cb->copy_label("Bank");
+        cb->labelcolor(FL_WHITE);
+        cb->add("1");
+        cb->add("2");
+        cb->add("3");
+        cb->add("U");
+        cb->user_data((void *) (1000+y));
+        cb->callback((Fl_Callback *)bank_click); 
 
- Settings->scroll->position(15,366);} {selected
+        Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
+        cp->copy_label("Preset");
+        cp->labelcolor(FL_WHITE);
+        cp->user_data((void *) (2000+y));
+        cp->callback((Fl_Callback *)p_click); 
     }
+    Settings->scroll->end();
+    
+    Put_MidiTable();
+    Settings->scroll->scroll_to(0,-344);} {}
   }
   Function {bank_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {
