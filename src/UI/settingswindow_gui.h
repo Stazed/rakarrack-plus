@@ -427,5 +427,9 @@ private:
 public:
   void initialize(RKR *_rkr,RKRGUI *_rgui );
   Fl_Menu_Item * get_menu_Har_Downsample();
+  void make_table_window();
+  void fill_mptable(int num,int value);
+  void mtfillvalue(int num,int value);
+  void Put_MidiTable();
 };
 #endif

@@ -1636,3 +1636,82 @@ void SettingsWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui ) {
 Fl_Menu_Item * SettingsWindowGui::get_menu_Har_Downsample() {
   return menu_Har_Downsample;
 }
+
+void SettingsWindowGui::make_table_window() {
+  // Fill settings midi table scroll
+    scroll->begin();
+  
+    for (intptr_t y=0; y<128; y++)
+    {
+        char buf[20];
+        sprintf(buf,"%d",(int)y);
+        Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+        b->box(FL_DOWN_BOX);
+        b->copy_label(buf);
+        b->labelcolor(FL_WHITE);
+        b->user_data((void *) 8000);
+  
+        Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
+        cb->copy_label("Bank");
+        cb->labelcolor(FL_WHITE);
+        cb->add("1");
+        cb->add("2");
+        cb->add("3");
+        cb->add("U");
+        cb->user_data((void *) (1000+y));
+        cb->callback((Fl_Callback *)m_rgui->bank_click);
+  
+        Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
+        cp->copy_label("Preset");
+        cp->labelcolor(FL_WHITE);
+        cp->user_data((void *) (2000+y));
+        cp->callback((Fl_Callback *)m_rgui->p_click);
+    }
+  
+    scroll->end();
+  
+    Put_MidiTable();
+    scroll->scroll_to(0,-344);
+}
+
+void SettingsWindowGui::fill_mptable(int num,int value) {
+  // Fill settings scroll
+    for (int t=0; t < scroll->children(); t++)
+    {
+        Fl_Widget *w = scroll->child(t);
+        long long temp = (long long) w->user_data();
+        if ((int)temp == num)
+        {
+            Fl_Choice *p = (Fl_Choice * ) w;
+            p->clear();
+            for(int i=1; i<=60; i++)
+                p->add(rkr->B_Names[value][i].Preset_Name);
+            break;
+        }
+    }
+}
+
+void SettingsWindowGui::mtfillvalue(int num,int value) {
+  // fill settings scroll midi table
+    for (int t=0; t < scroll->children(); t++)
+    {
+        Fl_Widget *w = scroll->child(t);
+        long long temp = (long long) w->user_data();
+        if ((int)temp == num)
+        {
+            Fl_Choice *p = (Fl_Choice * ) w;
+            p->value(value);
+            break;
+        }
+    }
+}
+
+void SettingsWindowGui::Put_MidiTable() {
+  // Put_MidiTable
+    for(int i=0; i<128; i++)
+    {
+        mtfillvalue(i+1000, rkr->M_table[i].bank);
+        fill_mptable(i+2000, rkr->M_table[i].bank);
+        mtfillvalue(i+2000, rkr->M_table[i].preset);
+    }
+}
