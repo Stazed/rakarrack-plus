@@ -618,5 +618,7 @@ public:
   void set_save_file();
   void set_bank_made(int a_made);
   int get_bank_made();
+  void Load_Midi_Program_Change_Table();
+  void Save_Midi_Program_Change_Table();
 };
 #endif

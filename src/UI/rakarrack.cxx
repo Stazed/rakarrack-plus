@@ -100,25 +100,14 @@ void RKRGUI::cb_Save_Skin(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_Load_MTable_i(Fl_Menu_*, void*) {
-  char *filename;
-filename=fl_file_chooser("Load MIDI Table:","(*.rmt)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rmt");
-rkr->loadmiditable(filename);
-Settings->Put_MidiTable();
+  Load_Midi_Program_Change_Table();
 }
 void RKRGUI::cb_Load_MTable(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Load_MTable_i(o,v);
 }
 
 void RKRGUI::cb_Save_MTable_i(Fl_Menu_*, void*) {
-  char *filename;
-#define EXT ".rmt"
-filename=fl_file_chooser("Save MIDI Table:","(*" EXT")","",0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
-#undef EXT
-rkr->savemiditable(filename);
+  Save_Midi_Program_Change_Table();
 }
 void RKRGUI::cb_Save_MTable(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_MTable_i(o,v);
@@ -9152,4 +9141,31 @@ void RKRGUI::set_bank_made(int a_made) {
 int RKRGUI::get_bank_made() {
   // get bank made
     return made;
+}
+
+void RKRGUI::Load_Midi_Program_Change_Table() {
+  // load table
+    char *filename;
+    filename=fl_file_chooser("Load MIDI Table:","(*.rmt)",NULL,0);
+  
+    if (filename==NULL)
+        return;
+  
+    filename=fl_filename_setext(filename,".rmt");
+    rkr->loadmiditable(filename);
+    Settings->Put_MidiTable();
+}
+
+void RKRGUI::Save_Midi_Program_Change_Table() {
+  // save program change table
+    char *filename;
+    #define EXT ".rmt"
+    filename=fl_file_chooser("Save MIDI Table:","(*" EXT")","",0);
+  
+    if (filename==NULL)
+        return;
+  
+    filename=fl_filename_setext(filename,EXT);
+    #undef EXT
+    rkr->savemiditable(filename);
 }

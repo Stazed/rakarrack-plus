@@ -3,7 +3,7 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class SettingsWindowGui {open
-  xywh {1264 399 640 580} type Double
+  xywh {239 341 640 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -187,7 +187,7 @@ m_rgui->PutBackground();}
     }
     Fl_Group AUDIO_SET {
       label Audio
-      user_data 1
+      user_data 1 selected
       xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo7 {
@@ -915,6 +915,16 @@ scroll->deactivate();}
         user_data 5000 open
         xywh {15 366 500 162} type VERTICAL_ALWAYS
       } {}
+      Fl_Button {} {
+        label Load
+        callback {m_rgui->Load_Midi_Program_Change_Table();}
+        tooltip {Load program change table from file} xywh {231 331 70 20}
+      }
+      Fl_Button {} {
+        label Save
+        callback {m_rgui->Save_Midi_Program_Change_Table();}
+        tooltip {Save current program change table to file} xywh {357 331 70 20}
+      }
     }
     Fl_Group JACK_SET {
       label Jack
@@ -1059,8 +1069,7 @@ m_rgui->ScanDir();}
   scroll->end();
 
   Put_MidiTable();
-  scroll->scroll_to(0,-344);} {selected
-    }
+  scroll->scroll_to(0,-344);} {}
   }
   Function {fill_mptable(int num,int value)} {} {
     code {// Fill settings scroll

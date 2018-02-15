@@ -804,6 +804,20 @@ void SettingsWindowGui::cb_MTable(Fl_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MTable_i(o,v);
 }
 
+void SettingsWindowGui::cb_Load_i(Fl_Button*, void*) {
+  m_rgui->Load_Midi_Program_Change_Table();
+}
+void SettingsWindowGui::cb_Load(Fl_Button* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Load_i(o,v);
+}
+
+void SettingsWindowGui::cb_Save_i(Fl_Button*, void*) {
+  m_rgui->Save_Midi_Program_Change_Table();
+}
+void SettingsWindowGui::cb_Save(Fl_Button* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Save_i(o,v);
+}
+
 void SettingsWindowGui::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
   m_rkr->aconnect_JA=(int) o->value();
 if (m_rkr->aconnect_JA) JackCo->activate();
@@ -1506,6 +1520,14 @@ this->when(FL_WHEN_RELEASE);
       scroll->user_data((void*)(5000));
       scroll->end();
     } // Fl_Scroll* scroll
+    { Fl_Button* o = new Fl_Button(231, 331, 70, 20, "Load");
+      o->tooltip("Load program change table from file");
+      o->callback((Fl_Callback*)cb_Load);
+    } // Fl_Button* o
+    { Fl_Button* o = new Fl_Button(357, 331, 70, 20, "Save");
+      o->tooltip("Save current program change table to file");
+      o->callback((Fl_Callback*)cb_Save);
+    } // Fl_Button* o
     MIDI_SET->end();
   } // Fl_Group* MIDI_SET
   { JACK_SET = new Fl_Group(5, 26, 630, 554, "Jack");

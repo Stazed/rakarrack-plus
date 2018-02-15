@@ -365,23 +365,12 @@ rkr->saveskin(filename);}
           }
           MenuItem Load_MTable {
             label {Load MIDI Table}
-            callback {char *filename;
-filename=fl_file_chooser("Load MIDI Table:","(*.rmt)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rmt");
-rkr->loadmiditable(filename);
-Settings->Put_MidiTable();} selected
+            callback {Load_Midi_Program_Change_Table();}
             xywh {10 10 36 21}
           }
           MenuItem Save_MTable {
             label {Save MIDI Table}
-            callback {char *filename;
-\#define EXT ".rmt"
-filename=fl_file_chooser("Save MIDI Table:","(*" EXT")","",0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
-\#undef EXT
-rkr->savemiditable(filename);}
+            callback {Save_Midi_Program_Change_Table();} selected
             xywh {10 10 36 21} divider
           }
           MenuItem ConvertReverb {
@@ -8393,5 +8382,32 @@ AboutWin->About_Version->copy_label(tmp);} {}
   } {
     code {// get bank made
   return made;} {}
+  }
+  Function {Load_Midi_Program_Change_Table()} {C return_type void
+  } {
+    code {// load table
+  char *filename;
+  filename=fl_file_chooser("Load MIDI Table:","(*.rmt)",NULL,0);
+
+  if (filename==NULL)
+      return;
+
+  filename=fl_filename_setext(filename,".rmt");
+  rkr->loadmiditable(filename);
+  Settings->Put_MidiTable();} {}
+  }
+  Function {Save_Midi_Program_Change_Table()} {C return_type void
+  } {
+    code {// save program change table
+  char *filename;
+  \#define EXT ".rmt"
+  filename=fl_file_chooser("Save MIDI Table:","(*" EXT")","",0);
+
+  if (filename==NULL)
+      return;
+
+  filename=fl_filename_setext(filename,EXT);
+  \#undef EXT
+  rkr->savemiditable(filename);} {}
   }
 }

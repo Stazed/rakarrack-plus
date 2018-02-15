@@ -373,6 +373,12 @@ private:
   static void cb_MTable(Fl_Check_Button*, void*);
 public:
   Fl_Scroll *scroll;
+private:
+  inline void cb_Load_i(Fl_Button*, void*);
+  static void cb_Load(Fl_Button*, void*);
+  inline void cb_Save_i(Fl_Button*, void*);
+  static void cb_Save(Fl_Button*, void*);
+public:
   Fl_Group *JACK_SET;
   Fl_Box *Fondo9;
   Fl_Check_Button *D_J_Connect;
