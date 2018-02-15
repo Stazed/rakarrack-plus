@@ -9083,6 +9083,14 @@ void RKRGUI::RandomPreset() {
                 rkr->Vibe_Bypass=0;
             VIBE->vibe_activar->value(rkr->Vibe_Bypass);
             break;
+  
+        case 46://Infinity
+            if (i<numEff)
+                rkr->Infinity_Bypass=1;
+            else
+                rkr->Infinity_Bypass=0;
+            INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
+            break;
         }
   
         Fl_Widget *w = FindWidget(SelEff[i]);

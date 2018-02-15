@@ -8327,6 +8327,14 @@ AboutWin->About_Version->copy_label(tmp);} {}
               rkr->Vibe_Bypass=0;
           VIBE->vibe_activar->value(rkr->Vibe_Bypass);
           break;
+
+      case 46://Infinity
+          if (i<numEff)
+              rkr->Infinity_Bypass=1;
+          else
+              rkr->Infinity_Bypass=0;
+          INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
+          break;
       }
 
       Fl_Widget *w = FindWidget(SelEff[i]);
@@ -8342,7 +8350,8 @@ AboutWin->About_Version->copy_label(tmp);} {}
   Put_Loaded();
 
   ActivarGeneral->value(1);
-  ActivarGeneral->do_callback();} {}
+  ActivarGeneral->do_callback();} {selected
+    }
   }
   Function {drag_effect()} {} {
     code {// drag effect
@@ -8450,7 +8459,6 @@ AboutWin->About_Version->copy_label(tmp);} {}
   {
       strcpy(rkr->Bank_Saved,filename);
       BankWin_Label(filename);
-  }} {selected
-    }
+  }} {}
   }
 }
