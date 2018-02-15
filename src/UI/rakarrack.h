@@ -552,10 +552,7 @@ private:
 public:
   RKRGUI(int argc, char**argv,RKR *rkr_);
 private:
-  /**
-   Main fltk gui timeout.
-  */
-  static void TimeoutStatic(void* ptr){((RKRGUI*) ptr)->GuiTimeout();}; 
+  static void TimeoutStatic(void* ptr);
   void GuiTimeout(void);
 public:
   void Background_Color_Change(Fl_Color bcolor);
@@ -621,9 +618,9 @@ public:
   void drag_effect();
   int AddBankName(const char *name);
   void ClearBankNames();
-  void set_bank_made(int a_made) {made = a_made;}; 
-  int get_bank_made(){return made;}; 
-  char * get_bank_file();
+  char* get_bank_file();
   void set_save_file();
+  void set_bank_made(int a_made);
+  int get_bank_made();
 };
 #endif

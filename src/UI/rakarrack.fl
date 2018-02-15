@@ -1741,8 +1741,11 @@ AboutWin->About_Version->copy_label(tmp);} {}
   Fl::add_handler(prevnext);
   install_signal_handlers();} {}
   }
-  decl {static void TimeoutStatic(void* ptr){((RKRGUI*) ptr)->GuiTimeout();}} {
-    comment {Main fltk gui timeout.} private local
+  Function {TimeoutStatic(void* ptr)} {
+    comment {Main FLTK gui timeout} private C return_type {static void}
+  } {
+    code {// Main gui timeout
+  ((RKRGUI*) ptr)->GuiTimeout();} {}
   }
   Function {GuiTimeout(void)} {private C return_type void
   } {
@@ -8350,8 +8353,7 @@ AboutWin->About_Version->copy_label(tmp);} {}
   Put_Loaded();
 
   ActivarGeneral->value(1);
-  ActivarGeneral->do_callback();} {selected
-    }
+  ActivarGeneral->do_callback();} {}
   }
   Function {drag_effect()} {} {
     code {// drag effect
@@ -8416,11 +8418,7 @@ AboutWin->About_Version->copy_label(tmp);} {}
       free(elem);
   }} {}
   }
-  decl {void set_bank_made(int a_made) {made = a_made;}} {public local
-  }
-  decl {int get_bank_made(){return made;}} {public local
-  }
-  Function {get_bank_file()} {C return_type {char *}
+  Function {get_bank_file()} {C return_type {char*}
   } {
     code {// get bank file
   int ok;
@@ -8460,5 +8458,16 @@ AboutWin->About_Version->copy_label(tmp);} {}
       strcpy(rkr->Bank_Saved,filename);
       BankWin_Label(filename);
   }} {}
+  }
+  Function {set_bank_made(int a_made)} {C return_type void
+  } {
+    code {// set bank made
+  made = a_made;} {}
+  }
+  Function {get_bank_made()} {C return_type int
+  } {
+    code {// get bank made
+  return made;} {selected
+    }
   }
 }

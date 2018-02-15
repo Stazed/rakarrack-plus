@@ -2456,6 +2456,14 @@ RKRGUI::RKRGUI(int argc, char**argv,RKR *rkr_) {
     install_signal_handlers();
 }
 
+/**
+ Main FLTK gui timeout
+*/
+void RKRGUI::TimeoutStatic(void* ptr) {
+  // Main gui timeout
+    ((RKRGUI*) ptr)->GuiTimeout();
+}
+
 void RKRGUI::GuiTimeout(void) {
   // Main gui process on timeout
     highlight();
@@ -9174,7 +9182,7 @@ void RKRGUI::ClearBankNames() {
     }
 }
 
-char * RKRGUI::get_bank_file() {
+char* RKRGUI::get_bank_file() {
   // get bank file
     int ok;
     char *filename;
@@ -9213,4 +9221,14 @@ void RKRGUI::set_save_file() {
         strcpy(rkr->Bank_Saved,filename);
         BankWin_Label(filename);
     }
+}
+
+void RKRGUI::set_bank_made(int a_made) {
+  // set bank made
+    made = a_made;
+}
+
+int RKRGUI::get_bank_made() {
+  // get bank made
+    return made;
 }
