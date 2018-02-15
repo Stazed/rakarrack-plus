@@ -188,10 +188,10 @@ m_rgui->PutBackground();}
     Fl_Group AUDIO_SET {
       label Audio
       user_data 1 selected
-      xywh {0 26 635 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo7 {
-        xywh {0 26 635 554}
+        xywh {5 26 630 554}
       }
       Fl_Check_Button INSTATE {
         label {FX On at start}

@@ -1000,13 +1000,13 @@ this->when(FL_WHEN_RELEASE);
     } // Fl_Check_Button* Enable_DeacHide
     Look->end();
   } // Fl_Group* Look
-  { AUDIO_SET = new Fl_Group(0, 26, 635, 554, "Audio");
+  { AUDIO_SET = new Fl_Group(5, 26, 630, 554, "Audio");
     AUDIO_SET->box(FL_DOWN_FRAME);
     AUDIO_SET->labelfont(1);
     AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
     AUDIO_SET->user_data((void*)(1));
     AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    { Fondo7 = new Fl_Box(0, 26, 635, 554);
+    { Fondo7 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo7
     { INSTATE = new Fl_Check_Button(96, 29, 23, 20, "FX On at start");
       INSTATE->down_box(FL_DOWN_BOX);
