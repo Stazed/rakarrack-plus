@@ -1683,7 +1683,7 @@ void SettingsWindowGui::make_table_window() {
         cb->user_data((void *) (1000+y));
         cb->callback((Fl_Callback *)m_rgui->bank_click);
   
-        Fl_Choice* cp = new Fl_Choice(260,y*25+25,220,20);
+        Fl_Choice* cp = new Fl_Choice(240,y*25+25,230,20);
         cp->copy_label("Preset");
         cp->labelcolor(FL_WHITE);
         cp->user_data((void *) (2000+y));
@@ -1693,7 +1693,7 @@ void SettingsWindowGui::make_table_window() {
     scroll->end();
   
     Put_MidiTable();
-    scroll->scroll_to(0,-344);
+    scroll->scroll_to(-10,-344);
 }
 
 void SettingsWindowGui::fill_mptable(int num,int value) {
