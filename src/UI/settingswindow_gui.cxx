@@ -1708,6 +1708,7 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
             p->clear();
             for(int i=1; i<=60; i++)
                 p->add(rkr->B_Names[value][i].Preset_Name);
+            p->redraw();
             break;
         }
     }

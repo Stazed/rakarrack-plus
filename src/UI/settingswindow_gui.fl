@@ -1035,8 +1035,7 @@ m_rgui->ScanDir();}
   } {
     code {return menu_Har_Downsample;} {}
   }
-  Function {make_table_window()} {open
-  } {
+  Function {make_table_window()} {} {
     code {// Fill settings midi table scroll
   scroll->begin();
 
@@ -1084,6 +1083,7 @@ m_rgui->ScanDir();}
           p->clear();
           for(int i=1; i<=60; i++)
               p->add(rkr->B_Names[value][i].Preset_Name);
+          p->redraw();
           break;
       }
   }} {}
