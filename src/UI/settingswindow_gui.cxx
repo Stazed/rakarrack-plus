@@ -1707,7 +1707,7 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
             Fl_Choice *p = (Fl_Choice * ) w;
             p->clear();
             for(int i=1; i<=60; i++)
-                p->add(rkr->B_Names[value][i].Preset_Name);
+                p->add(m_rkr->B_Names[value][i].Preset_Name);
             p->redraw();
             break;
         }
@@ -1733,8 +1733,8 @@ void SettingsWindowGui::Put_MidiTable() {
   // Put_MidiTable
     for(int i=0; i<128; i++)
     {
-        mtfillvalue(i+1000, rkr->M_table[i].bank);
-        fill_mptable(i+2000, rkr->M_table[i].bank);
-        mtfillvalue(i+2000, rkr->M_table[i].preset);
+        mtfillvalue(i+1000, m_rkr->M_table[i].bank);
+        fill_mptable(i+2000, m_rkr->M_table[i].bank);
+        mtfillvalue(i+2000, m_rkr->M_table[i].preset);
     }
 }
