@@ -3902,7 +3902,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
         }
     }
   
-    if((Fl::event_is_click()==0)&&(Fl::event()==5))
+    if((Fl::event_is_click()==0)&&(Fl::event()==FL_DRAG))
     {
         drag = num;
         return;
@@ -3911,7 +3911,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
         drag = 1000;
   
   
-    if ((Fl::event_button()==3) && (Fl::event()==FL_RELEASE))
+    if ((Fl::event_button()==FL_RIGHT_MOUSE) && (Fl::event()==FL_RELEASE))
     {
         Fl_Widget *w = BankWindow->ob->child(num-1);
   
@@ -3936,7 +3936,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*) {
     }
   
   
-    if ((Fl::event_button()==1) || tecla == 32)
+    if ((Fl::event_button()==FL_LEFT_MOUSE) || tecla == SPACE_BAR)
     {
         if((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
         {
@@ -8291,19 +8291,19 @@ int RKRGUI::prevnext(int e) {
             return 1;
         }
   
-        if(Fl::event_key(65471))      // F2 key - decrease output volume
+        if(Fl::event_key(FL_F + 2))      // F2 key - decrease output volume
         {
             stecla=3;
             return 1;
         }
   
-        if(Fl::event_key(65472))      // F3 key - increase output volume
+        if(Fl::event_key(FL_F + 3))      // F3 key - increase output volume
         {
             stecla=4;
             return 1;
         }
   
-        if(Fl::event_key(65379))      // Insert key - add user preset
+        if(Fl::event_key(FL_Insert))      // Insert key - add user preset
         {
             Fl_Widget *w = Fl::belowmouse();
             if(w == NULL)
@@ -8314,7 +8314,7 @@ int RKRGUI::prevnext(int e) {
             return 1;
         }
   
-        if(Fl::event_key(65535))      // Delete key - delete user preset
+        if(Fl::event_key(FL_Delete))      // Delete key - delete user preset
         {
             Fl_Widget *w = Fl::belowmouse();
             if(w == NULL)
