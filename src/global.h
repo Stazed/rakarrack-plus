@@ -202,7 +202,12 @@ extern Fl_Tiled_Image *back;
 extern Fl_Color leds_color; 
 extern Fl_Color back_color; 
 extern Fl_Color fore_color; 
-extern Fl_Color label_color; 
+extern Fl_Color label_color;
+
+/* These are used by settings midi scroll for identifying the scroll widgets - user data (void *) */
+const int c_bank_used = 1000;
+const int c_preset_used = 2000;
+const int c_bank_number = 8000;
 
 //TODO: move these values into the RKR object
 extern int Pexitprogram, preset;

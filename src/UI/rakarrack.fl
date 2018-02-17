@@ -370,7 +370,7 @@ rkr->saveskin(filename);}
           }
           MenuItem Save_MTable {
             label {Save MIDI Table}
-            callback {Save_Midi_Program_Change_Table();} selected
+            callback {Save_Midi_Program_Change_Table();}
             xywh {10 10 36 21} divider
           }
           MenuItem ConvertReverb {
@@ -7817,8 +7817,8 @@ AboutWin->About_Version->copy_label(tmp);} {}
   long long kk = (long long) o->user_data();
   int num = (int) kk;
 
-  rkr->M_table[num-1000].bank=(int) o->value();
-  Settings->fill_mptable(num+1000,rkr->M_table[num-1000].bank);} {}
+  rkr->M_table[num - c_bank_used].bank=(int) o->value();
+  Settings->fill_mptable(num + c_bank_used,rkr->M_table[num - c_bank_used].bank);} {}
   }
   Function {p_click(Fl_Choice* o, void* v)} {return_type {static void}
   } {
@@ -7831,7 +7831,8 @@ AboutWin->About_Version->copy_label(tmp);} {}
   long long kk = (long long) o->user_data();
   int num = (int) kk;
 
-  rkr->M_table[num-2000].preset=o->value();} {}
+  rkr->M_table[num - c_preset_used].preset=o->value();} {selected
+    }
   }
   Function {RandomPreset()} {} {
     code {// Random select button

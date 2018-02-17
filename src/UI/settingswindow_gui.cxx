@@ -1671,7 +1671,7 @@ void SettingsWindowGui::make_table_window() {
         b->box(FL_DOWN_BOX);
         b->copy_label(buf);
         b->labelcolor(FL_WHITE);
-        b->user_data((void *) 8000);
+        b->user_data((void *) c_bank_number);
   
         Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
         cb->copy_label("Bank");
@@ -1680,13 +1680,13 @@ void SettingsWindowGui::make_table_window() {
         cb->add("2");
         cb->add("3");
         cb->add("U");
-        cb->user_data((void *) (1000+y));
+        cb->user_data((void *) (c_bank_used + y));
         cb->callback((Fl_Callback *)m_rgui->bank_click);
   
         Fl_Choice* cp = new Fl_Choice(240,y*25+25,230,20);
         cp->copy_label("Preset");
         cp->labelcolor(FL_WHITE);
-        cp->user_data((void *) (2000+y));
+        cp->user_data((void *) (c_preset_used + y));
         cp->callback((Fl_Callback *)m_rgui->p_click);
     }
   
@@ -1733,8 +1733,8 @@ void SettingsWindowGui::Put_MidiTable() {
   // Put_MidiTable
     for(int i=0; i<128; i++)
     {
-        mtfillvalue(i+1000, m_rkr->M_table[i].bank);
-        fill_mptable(i+2000, m_rkr->M_table[i].bank);
-        mtfillvalue(i+2000, m_rkr->M_table[i].preset);
+        mtfillvalue(i + c_bank_used, m_rkr->M_table[i].bank);
+        fill_mptable(i + c_preset_used, m_rkr->M_table[i].bank);
+        mtfillvalue(i + c_preset_used, m_rkr->M_table[i].preset);
     }
 }
