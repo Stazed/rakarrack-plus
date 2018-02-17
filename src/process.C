@@ -79,6 +79,11 @@ RKR::RKR ()
     Mvalue = 0;
     actuvol= 0;
     OnCounter=0;
+    IsCoIn=0;
+    Cyoin=0;
+    Pyoin=0;
+    Ccin=0;
+    Pcin=0;
 
 
     sprintf (temp, "%s",jack_client_name);
