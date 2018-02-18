@@ -82,7 +82,5 @@ private:
   static void cb_arpie_pattern(Fl_Choice*, void*);
   static Fl_Menu_Item menu_arpie_pattern[];
   CommonGuiMenu *m_subdiv_menu; 
-public:
-  Fl_Menu_Item *get_menu_arpie_subdiv_type();
 };
 #endif

@@ -86,7 +86,5 @@ private:
   inline void cb_dist_hpf_i(SliderW*, void*);
   static void cb_dist_hpf(SliderW*, void*);
   CommonGuiMenu *m_dist_menu; 
-public:
-  Fl_Menu_Item *get_menu_dist_tipo();
 };
 #endif

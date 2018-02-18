@@ -86,7 +86,5 @@ private:
   inline void cb_chorus_LR_i(SliderW*, void*);
   static void cb_chorus_LR(SliderW*, void*);
   CommonGuiMenu *m_lfo_menu; 
-public:
-  Fl_Menu_Item *get_menu_chorus_lfotype();
 };
 #endif
