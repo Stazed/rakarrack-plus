@@ -123,8 +123,5 @@ public:
 private:
   CommonGuiMenu *m_looper_bar; 
   CommonGuiMenu *m_looper_ms; 
-public:
-  Fl_Menu_Item* get_menu_looper_bar();
-  Fl_Menu_Item* get_menu_looper_ms();
 };
 #endif

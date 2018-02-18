@@ -146,6 +146,8 @@ class TrigWindowGui; // forward declaration
 #include "trigwindow_gui.h"
 
 class RKRGUI {
+  CommonGuiMenu *m_looper_bar; 
+  CommonGuiMenu *m_looper_ms; 
   int made; 
   Fl_Help_Dialog *visor; 
   struct list_element *mBankNameList;

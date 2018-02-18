@@ -247,6 +247,10 @@ decl {RKR *rkr; // extern global} {private global
 
 class RKRGUI {open
 } {
+  decl {CommonGuiMenu *m_looper_bar;} {private local
+  }
+  decl {CommonGuiMenu *m_looper_ms;} {private local
+  }
   decl {int made;} {private local
   }
   decl {Fl_Help_Dialog *visor;} {private local
@@ -255,14 +259,14 @@ class RKRGUI {open
   }
   decl {struct list_element *mBankNameListTail;} {private local
   }
-  Function {make_window()} {return_type void
+  Function {make_window()} {open return_type void
   } {
     Fl_Window Principal {
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;}
-      xywh {231 580 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;} open
+      xywh {231 479 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1037,7 +1041,7 @@ rkr->calculavol(2);}
         class MidiGui
       } {}
       Fl_Group Metro {
-        user_data 1
+        user_data 1 open
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -1092,7 +1096,7 @@ switch(rkr->M_Metro_Bar)
 
  }} open
           xywh {624 98 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(LOOPER->get_menu_looper_bar());}
+          code0 {o->menu(m_looper_bar->get_time_sig());}
         } {}
         Fl_Value_Slider Metro_Volume {
           label Volume
@@ -1119,9 +1123,9 @@ switch(rkr->M_Metro_Sound)
       break;                    
        
 
- }} open
+ }} open selected
           xywh {634 118 28 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->menu(LOOPER->get_menu_looper_ms());}
+          code0 {o->menu(m_looper_ms->get_metronome_sound());}
         } {}
         Fl_Value_Slider Metro_Tempo {
           label Tempo
@@ -1621,7 +1625,7 @@ AboutWin->About_Version->copy_label(tmp);} {}
 They are declared in the rakarrack.h file through the fluid IDE.
 Changes to the declarations should be made in fluid to be included
 in the header file. Changes to the defines can be made directly in the .cxx file.
-} selected C
+} C
   } {}
   Function {TimeoutStatic(void* ptr)} {
     comment {Main FLTK gui timeout} open private C return_type {static void}

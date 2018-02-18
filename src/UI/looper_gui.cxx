@@ -455,17 +455,3 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
 position(X, Y);
 end();
 }
-
-/**
- FIXME - remove when metronome is moved
-*/
-Fl_Menu_Item* LooperGui::get_menu_looper_bar() {
-  return m_looper_bar->get_time_sig();
-}
-
-/**
- FIXME - remove when metronome is done
-*/
-Fl_Menu_Item* LooperGui::get_menu_looper_ms() {
-  return m_looper_ms->get_metronome_sound();
-}
