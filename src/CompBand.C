@@ -326,7 +326,7 @@ CompBand::setpreset(int npreset)
     if (npreset > NUM_PRESETS - 1)
     {
         Fpre->ReadPreset(43, npreset - NUM_PRESETS + 1, pdata);
-        
+
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
     }
@@ -335,7 +335,7 @@ CompBand::setpreset(int npreset)
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, presets[npreset][n]);
     }
-    
+
     Ppreset = npreset;
     cleanup();
 }
@@ -349,18 +349,26 @@ CompBand::changepar(int npar, int value)
         setvolume(value);
         break;
     case 1:
+        if (value < 2) // some old bank files have garbage in them
+            value = 2;
         PLratio = value;
         setratio(0, value);
         break;
     case 2:
+        if (value < 2) // some old bank files have garbage in them
+            value = 2;
         PMLratio = value;
         setratio(1, value);
         break;
     case 3:
+        if (value < 2) // some old bank files have garbage in them
+            value = 2;
         PMHratio = value;
         setratio(2, value);
         break;
     case 4:
+        if (value < 2) // some old bank files have garbage in them
+            value = 2;
         PHratio = value;
         setratio(3, value);
         break;
@@ -381,12 +389,18 @@ CompBand::changepar(int npar, int value)
         setthres(3, value);
         break;
     case 9:
+        if (value < 20) // some old bank files have garbage in them
+            value = 20;
         setCross1(value);
         break;
     case 10:
+        if (value < 1000) // some old bank files have garbage in them
+            value = 1000;
         setCross2(value);
         break;
     case 11:
+        if (value < 2000) // some old bank files have garbage in them
+            value = 2000;
         setCross3(value);
         break;
     case 12:
