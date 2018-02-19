@@ -45,7 +45,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
 
     schmittBuffer = NULL;
     schmittPointer = NULL;
-    static const char *englishNotes[12] ={"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    static const char *englishNotes[12] = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     notes = englishNotes;
     note = 0;
     nfreq = 0;
@@ -69,10 +69,10 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
 #else
     // Open Alsa Seq
     int err = snd_seq_open(&port, "default", SND_SEQ_OPEN_OUTPUT, 0);
-    
+
     if (err < 0)
         printf("Cannot activate ALSA seq client\n");
-    
+
     snd_seq_set_client_name(port, jname);
     snd_config_update_free_global();
 
@@ -81,11 +81,11 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
                                SND_SEQ_PORT_CAP_READ |
                                SND_SEQ_PORT_CAP_SUBS_READ,
                                SND_SEQ_PORT_TYPE_APPLICATION);
-    
+
     // jack
     m_buffSize = NULL;
     m_buffMessage = NULL;
-    
+
 #endif // LV2_SUPPORT
 }
 
@@ -117,11 +117,11 @@ MIDIConverter::out(float * efxoutl, float * efxoutr)
         efxoutl[i] *= Log_I_Gain;
         efxoutr[i] *= Log_I_Gain;
         tmp = fabsf(efxoutr[i]);
-        
+
         if (tmp > ir_sum) ir_sum = tmp;
-        
+
         tmp = fabsf(efxoutl[i]);
-        
+
         if (tmp > il_sum) il_sum = tmp;
     }
 
@@ -174,35 +174,35 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
 
     if (ffreq < 1E-15)
         ffreq = 1E-15f;
-    
+
     lfreq = logf(ffreq);
-    
+
     while (lfreq < lfreqs[0] - LOG_D_NOTE * .5f)
         lfreq += LOG_2;
-    
+
     while (lfreq >= lfreqs[0] + LOG_2 - LOG_D_NOTE * .5f)
         lfreq -= LOG_2;
-    
+
     mldf = LOG_D_NOTE;
-    
+
     for (i = 0; i < 12; i++)
     {
         ldf = fabsf(lfreq - lfreqs[i]);
-        
+
         if (ldf < mldf)
         {
             mldf = ldf;
             note = i;
         }
     }
-    
+
     nfreq = freqs[note];
-    
+
     while (nfreq / ffreq > D_NOTE_SQRT)
     {
         nfreq *= .5f;
         octave--;
-        
+
         if (octave < -2)
         {
             noteoff = 1;
@@ -210,12 +210,12 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
         }
 
     }
-    
+
     while (ffreq / nfreq > D_NOTE_SQRT)
     {
         nfreq *= 2.0f;
         octave++;
-        
+
         if (octave > 9)
         {
             noteoff = 1;
@@ -236,7 +236,7 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
     if ((preparada == lanota) && (lanota != nota_actual))
     {
         hay = 1;
-        
+
         if (nota_actual != -1)
         {
             send_Midi_Note(nota_actual, 0, false); // false = note off: 0 is not used for note off
@@ -270,7 +270,7 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
     for (i = 0; i < PERIOD; i++)
     {
         *schmittPointer++ = indata[i];
-        
+
         if (schmittPointer - schmittBuffer >= blockSize)
         {
             int endpoint, startpoint, t1, t2, A1, A2, tc, schmittTriggered;
@@ -281,24 +281,24 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
             {
                 if (schmittBuffer[j] > 0 && A1 < schmittBuffer[j])
                     A1 = schmittBuffer[j];
-                
+
                 if (schmittBuffer[j] < 0 && A2 < -schmittBuffer[j])
                     A2 = -schmittBuffer[j];
             }
-            
+
             t1 = lrintf((float) A1 * trigfact + 0.5f);
             t2 = -lrintf((float) A2 * trigfact + 0.5f);
             startpoint = 0;
-            
+
             for (j = 1; schmittBuffer[j] <= t1 && j < blockSize; j++);
-            
+
             for (; !(schmittBuffer[j] >= t2 &&
                  schmittBuffer[j + 1] < t2) && j < blockSize; j++);
-            
+
             startpoint = j;
             schmittTriggered = 0;
             endpoint = startpoint + 1;
-            
+
             for (j = startpoint, tc = 0; j < blockSize; j++)
             {
                 if (!schmittTriggered)
@@ -312,7 +312,7 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
                     schmittTriggered = 0;
                 }
             }
-            
+
             if (endpoint > startpoint)
             {
                 afreq =
@@ -335,11 +335,10 @@ MIDIConverter::schmittFloat(float * efxoutl, float * efxoutr, float val_sum, flo
     unsigned int i;
 
     signed short int buf[PERIOD];
-    
+
     for (i = 0; i < PERIOD; i++)
     {
-        buf[i] =
-                (short) ((TrigVal * efxoutl[i] + TrigVal * efxoutr[i]) * 32768);
+        buf[i] = (short) ((TrigVal * efxoutl[i] + TrigVal * efxoutr[i]) * 32768);
     }
     schmittS16LE(buf, val_sum, freqs, lfreqs);
 }
@@ -347,7 +346,7 @@ MIDIConverter::schmittFloat(float * efxoutl, float * efxoutr, float val_sum, flo
 void
 MIDIConverter::fftInit(int size)
 {
-    fftSize = SAMPLE_RATE / size;
+    fftSize = 2 + (SAMPLE_RATE / size);
     fftIn = (float*) fftwf_malloc(sizeof (float) * 2 * (fftSize / 2 + 1));
     fftOut = (fftwf_complex *) fftIn;
     fftPlan = fftwf_plan_dft_r2c_1d(fftSize, fftIn, fftOut, FFTW_MEASURE);
@@ -371,7 +370,7 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         *fftSample++ = indata[i];
-        
+
         if (fftSample - fftSampleBuffer >= fftSize)
         {
             int k;
@@ -390,7 +389,7 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
                 double window = -.5 * cos(2. * M_PI * (double) k / (double) fftSize) + .5;
                 fftIn[k] = fftSampleBuffer[k] * window;
             }
-            
+
             fftwf_execute(fftPlan);
 
             for (k = 0; k <= fftSize / 2; k++)
@@ -412,10 +411,10 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
 
                 /* map delta phase into +/- Pi interval */
                 qpd = tmp / M_PI;
-                
+
                 if (qpd >= 0) qpd += qpd & 1;
                 else qpd -= qpd & 1;
-                
+
                 tmp -= M_PI * (double) qpd;
 
                 /* get deviation from bin frequency from the +/- Pi interval */
@@ -431,14 +430,14 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
                     peaks[0].db = magnitude;
                 }
             }
-            
+
             fftFrameCount++;
-            
+
             if (fftFrameCount > 0 && fftFrameCount % overlap == 0)
             {
                 int l, maxharm = 0;
                 k = 0;
-                
+
                 for (l = 1; l < MAX_PEAKS && peaks[l].freq > 0.0; l++)
                 {
                     int harmonic;
@@ -468,13 +467,13 @@ void
 MIDIConverter::fftFloat(float *efxoutl, float *efxoutr, float val_sum, float *freqs, float *lfreqs)
 {
     signed short int buf[PERIOD];
-    
+
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         buf[i] =
                 (short) ((TrigVal * efxoutl[i] + TrigVal * efxoutr[i]) * 32768);
     }
-    
+
     fftS16LE(buf, val_sum, freqs, lfreqs);
 }
 
@@ -487,7 +486,7 @@ MIDIConverter::fftS16LE(signed short int *indata, float val_sum, float *freqs, f
     {
         buf[i] = indata[i] / 32768.;
     }
-    
+
     fftMeasure(4, buf, val_sum, freqs, lfreqs);
 }
 
@@ -504,7 +503,7 @@ void
 MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
 {
     const uint8_t anota = (uint8_t) nota + (Moctave * 12);
-    
+
     if (anota > 127) return;
 
     if (is_On) // Note On
@@ -513,7 +512,7 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
 
         if (k > 127)
             k = 127;
-        
+
         if (k < 1)
             k = 1;
 
@@ -539,12 +538,12 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
     // ALSA
     snd_seq_event_t ev;
     snd_seq_ev_clear(&ev);
-    
+
     if (is_On)
         snd_seq_ev_set_noteon(&ev, channel, anota, velocity);
     else
         snd_seq_ev_set_noteoff(&ev, channel, anota, velocity);
-    
+
     snd_seq_ev_set_subs(&ev);
     snd_seq_ev_set_direct(&ev);
     snd_seq_event_output_direct(port, &ev);
@@ -574,7 +573,7 @@ MIDIConverter::panic()
 
     for (i = 0; i < 127; i++)
         send_Midi_Note(i, 0, false); // false = note off: 0 is not used for note off
-    
+
     hay = 0;
     nota_actual = -1;
 }
@@ -680,7 +679,7 @@ MIDIConverter::update_freqs(float val) // val = 440.0f - user default settings
 
     FREQS[0] = aFreq;
     LFREQS[0] = logf(FREQS[0]);
-    
+
     for (i = 1; i < 12; i++)
     {
         FREQS[i] = FREQS[i - 1] * D_NOTE;
