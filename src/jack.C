@@ -34,7 +34,7 @@ jack_client_t *jackclient;
 jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
-void *dataout;
+
 int jackprocess(jack_nframes_t nframes, void *arg);
 #ifdef JACK_SESSION
 jack_session_event_t *s_event;
@@ -236,14 +236,16 @@ jackprocess(jack_nframes_t nframes, void * /* arg */)
     void *buffer = jack_port_get_buffer(jack_midi_out, nframes);
     jack_midi_clear_buffer(buffer);
 
-    while (jack_ringbuffer_read_space(JackOUT->efx_MIDIConverter->m_buffSize) > 0)
+    if(JackOUT->efx_MIDIConverter->m_buffSize != NULL && JackOUT->efx_MIDIConverter->m_buffMessage != NULL)
     {
-        jack_ringbuffer_read(JackOUT->efx_MIDIConverter->m_buffSize, (char *) &space, (size_t) sizeof (space));
-        midiData = jack_midi_event_reserve(buffer, 0, space);
+        while (jack_ringbuffer_read_space(JackOUT->efx_MIDIConverter->m_buffSize) > 0)
+        {
+            jack_ringbuffer_read(JackOUT->efx_MIDIConverter->m_buffSize, (char *) &space, (size_t) sizeof (space));
+            midiData = jack_midi_event_reserve(buffer, 0, space);
 
-        jack_ringbuffer_read(JackOUT->efx_MIDIConverter->m_buffMessage, (char *) midiData, (size_t) space);
+            jack_ringbuffer_read(JackOUT->efx_MIDIConverter->m_buffMessage, (char *) midiData, (size_t) space);
+        }
     }
-
 
     memcpy(JackOUT->efxoutl, inl,
            sizeof (jack_default_audio_sample_t) * nframes);
@@ -267,9 +269,15 @@ jackprocess(jack_nframes_t nframes, void * /* arg */)
 void
 JACKfinish()
 {
-    jack_ringbuffer_free(JackOUT->efx_MIDIConverter->m_buffSize);
-    jack_ringbuffer_free(JackOUT->efx_MIDIConverter->m_buffMessage);
-    jack_client_close(jackclient);
+    if(jackclient)
+        jack_client_close(jackclient);
+    
+    if(JackOUT->efx_MIDIConverter->m_buffSize != NULL && JackOUT->efx_MIDIConverter->m_buffMessage != NULL)
+    {
+        jack_ringbuffer_free(JackOUT->efx_MIDIConverter->m_buffSize);
+        jack_ringbuffer_free(JackOUT->efx_MIDIConverter->m_buffMessage);
+    }
+    
     usleep(1000);
 }
 

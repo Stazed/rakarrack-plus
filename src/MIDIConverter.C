@@ -81,9 +81,13 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
                                SND_SEQ_PORT_CAP_READ |
                                SND_SEQ_PORT_CAP_SUBS_READ,
                                SND_SEQ_PORT_TYPE_APPLICATION);
+    
+    // jack
+    m_buffSize = NULL;
+    m_buffMessage = NULL;
+    
 #endif // LV2_SUPPORT
-
-};
+}
 
 MIDIConverter::~MIDIConverter()
 {
