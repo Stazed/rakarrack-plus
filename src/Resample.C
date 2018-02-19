@@ -19,44 +19,36 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Resample.h"
 
-
 Resample::Resample(int type)
 {
-    statel = src_new(type , 1 , &errorl);
-    stater = src_new(type , 1 , &errorr);
-
+    statel = src_new(type, 1, &errorl);
+    stater = src_new(type, 1, &errorr);
 }
-
 
 Resample::~Resample()
 {
-	src_delete(statel);
-	src_delete(stater);
-};
+    src_delete(statel);
+    src_delete(stater);
+}
 
 void
 Resample::cleanup()
 {
     src_reset(statel);
     src_reset(stater);
-
-};
-
-
+}
 
 void
 Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio)
 {
-
-
-    long int o_frames = lrint((double)frames*ratio);
+    long int o_frames = lrint((double) frames * ratio);
     srcinfol.data_in = inl;
     srcinfol.input_frames = frames;
     srcinfol.data_out = outl;
@@ -73,15 +65,11 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
 
     errorl = src_process(statel, &srcinfol);
     errorr = src_process(stater, &srcinfor);
-
-
 }
-
 
 void
 Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_frames)
 {
-
     srcinfol.data_in = inl;
     srcinfol.input_frames = frames;
     srcinfol.data_out = outl;
@@ -90,7 +78,6 @@ Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_fram
     srcinfol.end_of_input = 0;
 
     errorl = src_process(statel, &srcinfol);
-
 }
 
 

@@ -19,17 +19,14 @@
  Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 
 #include "RecChord.h"
 
-
-RecChord::RecChord ()
+RecChord::RecChord()
 {
-
-    memset (Ch, 0, sizeof (Ch));
-
+    memset(Ch, 0, sizeof (Ch));
 
     Ch[0][0] = 1;
     Ch[6][0] = 1;
@@ -223,9 +220,7 @@ RecChord::RecChord ()
     Ch[11][10] = 1;
     Ch[23][10] = 1;
 
-
-
-    memset (ChN, 0, sizeof (ChN));
+    memset(ChN, 0, sizeof (ChN));
 
     {
         static const char *stnom[] = {
@@ -235,8 +230,10 @@ RecChord::RecChord ()
             "7(#11)", "7(13)", "7(b9)", "7(b13)", "7(#9)", "+Maj7", "+7",
             "1+8", "1+5", "(Sus4)", "2"
         };
-        for (int i = 0; i <= 33; i++) {
-            strcpy (ChN[i].Nom, stnom[i]);
+        
+        for (int i = 0; i <= 33; i++)
+        {
+            strcpy(ChN[i].Nom, stnom[i]);
             ChN[i].tipo = i;
         }
     }
@@ -246,7 +243,6 @@ RecChord::RecChord ()
     ChN[9].num = 1;
     ChN[32].num = 1;
 
-
     {
         static const char *stnom[] = {
             "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb",
@@ -254,10 +250,12 @@ RecChord::RecChord ()
         };
 
         for (int i = 0; i <= 11; i++)
-            strcpy (NC[i].Nom, stnom[i]);
+            strcpy(NC[i].Nom, stnom[i]);
+        
         for (int i = 0; i <= 23; i++)
-            strcpy (NCE[i].Nom, stnom[i]);
+            strcpy(NCE[i].Nom, stnom[i]);
     }
+    
     NCE[0].note = 0;
     NCE[1].note = 1;
     NCE[2].note = 2;
@@ -283,36 +281,35 @@ RecChord::RecChord ()
     NCE[22].note = -2;
     NCE[23].note = -1;
 
-    ctipo = 0;//set chord type initial
-    fundi = 0;//set root note initial
+    ctipo = 0; //set chord type initial
+    fundi = 0; //set root note initial
 
-    IniciaChords ();
-    memset (NombreAcorde, 0, sizeof (NombreAcorde));
+    IniciaChords();
+    memset(NombreAcorde, 0, sizeof (NombreAcorde));
 }
-
 
 RecChord::~RecChord()
 {
 }
 
-
 void
-RecChord::cleanup ()
+RecChord::cleanup()
 {
     int i;
-    memset (NombreAcorde, 0, sizeof (NombreAcorde));
-    for (i = 0; i < POLY; i++) {
+    memset(NombreAcorde, 0, sizeof (NombreAcorde));
+    
+    for (i = 0; i < POLY; i++)
+    {
         note_active[i] = 0;
         rnote[i] = 0;
         gate[i] = 0;
     }
 
     cc = 1;
-
 }
 
 void
-RecChord::IniciaChords ()
+RecChord::IniciaChords()
 {
     int i, j;
     int notas = 1;
@@ -322,26 +319,28 @@ RecChord::IniciaChords ()
     NumChord4 = 0;
     NumChord5 = 0;
 
-    memset (Chord3, 0, sizeof (Chord3));
-    memset (Chord4, 0, sizeof (Chord4));
-    memset (Chord5, 0, sizeof (Chord5));
+    memset(Chord3, 0, sizeof (Chord3));
+    memset(Chord4, 0, sizeof (Chord4));
+    memset(Chord5, 0, sizeof (Chord5));
 
-    for (i = 0; i <= 33; i++) {
+    for (i = 0; i <= 33; i++)
+    {
         notas = 1;
-        memset (numno, 0, sizeof (numno));
+        memset(numno, 0, sizeof (numno));
 
-        for (j = 1; j <= 11; j++) {
-            if (Ch[i][j] == 1) {
+        for (j = 1; j <= 11; j++)
+        {
+            if (Ch[i][j] == 1)
+            {
                 notas++;
                 numno[notas] = j;
             }
         }
 
-
-
-        switch (notas) {
+        switch (notas)
+        {
         case 3:
-            strcpy (Chord3[NumChord3].Nom, ChN[i].Nom);
+            strcpy(Chord3[NumChord3].Nom, ChN[i].Nom);
             Chord3[NumChord3].di1 = numno[2];
             Chord3[NumChord3].di2 = numno[3] - numno[2];
             Chord3[NumChord3].fund = 1;
@@ -349,13 +348,13 @@ RecChord::IniciaChords ()
             NumChord3++;
             if (ChN[i].num == 1)
                 break;
-            strcpy (Chord3[NumChord3].Nom, ChN[i].Nom);
+            strcpy(Chord3[NumChord3].Nom, ChN[i].Nom);
             Chord3[NumChord3].di1 = numno[3] - numno[2];
             Chord3[NumChord3].di2 = 12 - numno[3];
             Chord3[NumChord3].fund = 3;
             Chord3[NumChord3].tipo = i;
             NumChord3++;
-            strcpy (Chord3[NumChord3].Nom, ChN[i].Nom);
+            strcpy(Chord3[NumChord3].Nom, ChN[i].Nom);
             Chord3[NumChord3].di1 = 12 - numno[3];
             Chord3[NumChord3].di2 = numno[2];
             Chord3[NumChord3].fund = 2;
@@ -363,7 +362,7 @@ RecChord::IniciaChords ()
             NumChord3++;
             break;
         case 4:
-            strcpy (Chord4[NumChord4].Nom, ChN[i].Nom);
+            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
             Chord4[NumChord4].di1 = numno[2];
             Chord4[NumChord4].di2 = numno[3] - numno[2];
             Chord4[NumChord4].di3 = numno[4] - numno[3];
@@ -372,28 +371,28 @@ RecChord::IniciaChords ()
             NumChord4++;
             if (ChN[i].num == 1)
                 break;
-            strcpy (Chord4[NumChord4].Nom, ChN[i].Nom);
+            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
             Chord4[NumChord4].di1 = numno[3] - numno[2];
             Chord4[NumChord4].di2 = numno[4] - numno[3];
             Chord4[NumChord4].di3 = 12 - numno[4];
             Chord4[NumChord4].fund = 4;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strcpy (Chord4[NumChord4].Nom, ChN[i].Nom);
+            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
             Chord4[NumChord4].di1 = numno[4] - numno[3];
             Chord4[NumChord4].di2 = 12 - numno[4];
             Chord4[NumChord4].di3 = numno[2];
             Chord4[NumChord4].fund = 3;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strcpy (Chord4[NumChord4].Nom, ChN[i].Nom);
+            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
             Chord4[NumChord4].di1 = 12 - numno[4];
             Chord4[NumChord4].di2 = numno[2];
             Chord4[NumChord4].di3 = numno[3] - numno[2];
             Chord4[NumChord4].fund = 2;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strcpy (Chord4[NumChord4].Nom, ChN[i].Nom);
+            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
             Chord4[NumChord4].di1 = numno[2] + (12 - numno[4]);
             Chord4[NumChord4].di2 = numno[3] - numno[2];
             Chord4[NumChord4].di3 = 12 - numno[3];
@@ -403,7 +402,7 @@ RecChord::IniciaChords ()
             break;
 
         case 5:
-            strcpy (Chord5[NumChord5].Nom, ChN[i].Nom);
+            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
             Chord5[NumChord5].di1 = numno[2];
             Chord5[NumChord5].di2 = numno[3] - numno[2];
             Chord5[NumChord5].di3 = numno[4] - numno[3];
@@ -413,7 +412,7 @@ RecChord::IniciaChords ()
             NumChord5++;
             if (ChN[i].num == 1)
                 break;
-            strcpy (Chord5[NumChord5].Nom, ChN[i].Nom);
+            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
             Chord5[NumChord5].di1 = numno[3] - numno[2];
             Chord5[NumChord5].di2 = numno[4] - numno[3];
             Chord5[NumChord5].di3 = numno[5] - numno[4];
@@ -422,7 +421,7 @@ RecChord::IniciaChords ()
             Chord5[NumChord5].fund = 5;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy (Chord5[NumChord5].Nom, ChN[i].Nom);
+            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
             Chord5[NumChord5].di1 = numno[4] - numno[3];
             Chord5[NumChord5].di2 = numno[5] - numno[4];
             Chord5[NumChord5].di3 = 12 - numno[5];
@@ -430,7 +429,7 @@ RecChord::IniciaChords ()
             Chord5[NumChord5].fund = 4;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy (Chord5[NumChord5].Nom, ChN[i].Nom);
+            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
             Chord5[NumChord5].di1 = numno[5] - numno[4];
             Chord5[NumChord5].di2 = 12 - numno[5];
             Chord5[NumChord5].di3 = numno[2];
@@ -438,7 +437,7 @@ RecChord::IniciaChords ()
             Chord5[NumChord5].fund = 3;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy (Chord5[NumChord5].Nom, ChN[i].Nom);
+            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
             Chord5[NumChord5].di1 = 12 - numno[5];
             Chord5[NumChord5].di2 = numno[2];
             Chord5[NumChord5].di3 = numno[3] - numno[2];
@@ -446,7 +445,7 @@ RecChord::IniciaChords ()
             Chord5[NumChord5].fund = 2;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy (Chord5[NumChord5].Nom, ChN[i].Nom);
+            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
             Chord5[NumChord5].di1 = numno[2] + (12 - numno[5]);
             Chord5[NumChord5].di2 = numno[3] - numno[2];
             Chord5[NumChord5].di3 = numno[4] - numno[3];
@@ -455,21 +454,13 @@ RecChord::IniciaChords ()
             Chord5[NumChord5].tipo = i;
             NumChord5++;
             break;
-
         }
-
     }
-
-
-
-};
-
-
+}
 
 void
-RecChord::MiraChord ()
+RecChord::MiraChord()
 {
-
     int i, j;
     int anote[POLY];
     int nnotes = 0;
@@ -478,30 +469,34 @@ RecChord::MiraChord ()
     int labaja;
     char AName[21];
 
-
-    for (i = 0; i < POLY; i++) {
-        if (note_active[i]) {
+    for (i = 0; i < POLY; i++)
+    {
+        if (note_active[i])
+        {
             anote[nnotes] = rnote[i];
             nnotes++;
         }
     }
 
-
-
     if ((nnotes < 3) || (nnotes > 5))
         return;
 
     labaja = anote[0];
+    
     for (i = 1; i < nnotes - 1; i++)
         if (anote[i] < labaja)
             labaja = anote[i];
+    
     for (i = 0; i < nnotes; i++)
         if (anote[i] - labaja > 12)
             anote[i] -= 12;
-    for (i = 1; i < nnotes; i++) {
-        for (j = 0; j < nnotes - 1; j++) {
-
-            if (anote[j] > anote[j + 1]) {
+    
+    for (i = 1; i < nnotes; i++)
+    {
+        for (j = 0; j < nnotes - 1; j++)
+        {
+            if (anote[j] > anote[j + 1])
+            {
                 temp = anote[j];
                 anote[j] = anote[j + 1];
                 anote[j + 1] = temp;
@@ -509,84 +504,84 @@ RecChord::MiraChord ()
         }
     }
 
-
-
     bass = anote[0] % 12;
 
 sigue:
 
-    if (nnotes == 3) {
-
+    if (nnotes == 3)
+    {
         di1 = anote[1] - anote[0];
         di2 = anote[2] - anote[1];
 
         j = -1;
 
         while (j <= NumChord3)
-
         {
             j++;
-            if ((Chord3[j].di1 == di1) && (Chord3[j].di2 == di2)) {
+            
+            if ((Chord3[j].di1 == di1) && (Chord3[j].di2 == di2))
+            {
                 ctipo = Chord3[j].tipo;
                 int elke = anote[Chord3[j].fund - 1];
                 fundi = elke % 12;
-                sprintf (AName, "%s%s", NC[fundi].Nom, Chord3[j].Nom);
+                sprintf(AName, "%s%s", NC[fundi].Nom, Chord3[j].Nom);
 
-                if (bass != fundi) {
-
-                    memset (AName, 0, sizeof (AName));
-                    sprintf (AName, "%s%s/%s", NC[fundi].Nom, Chord3[j].Nom,
-                             NCE[bass + plus (fundi)].Nom);
+                if (bass != fundi)
+                {
+                    memset(AName, 0, sizeof (AName));
+                    sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord3[j].Nom,
+                            NCE[bass + plus(fundi)].Nom);
                 }
 
-                if (strcmp (AName, NombreAcorde) != 0) {
-                    strcpy (NombreAcorde, AName);
+                if (strcmp(AName, NombreAcorde) != 0)
+                {
+                    strcpy(NombreAcorde, AName);
                     cc = 1;
                 }
+                
                 return;
             }
         }
-
     }
 
-    if (nnotes == 4) {
-
+    if (nnotes == 4)
+    {
         di1 = anote[1] - anote[0];
         di2 = anote[2] - anote[1];
         di3 = anote[3] - anote[2];
         j = -1;
 
         while (j <= NumChord4)
-
         {
             j++;
+            
             if ((Chord4[j].di1 == di1) && (Chord4[j].di2 == di2)
-                    && (Chord4[j].di3 == di3)) {
+                && (Chord4[j].di3 == di3))
+            {
                 ctipo = Chord4[j].tipo;
                 int elke = anote[Chord4[j].fund - 1];
                 fundi = elke % 12;
-                sprintf (AName, "%s%s", NC[fundi].Nom, Chord4[j].Nom);
-                if (bass != fundi) {
-                    memset (AName, 0, sizeof (AName));
-                    sprintf (AName, "%s%s/%s", NC[fundi].Nom, Chord4[j].Nom,
-                             NCE[bass + plus (fundi)].Nom);
+                sprintf(AName, "%s%s", NC[fundi].Nom, Chord4[j].Nom);
+                
+                if (bass != fundi)
+                {
+                    memset(AName, 0, sizeof (AName));
+                    sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord4[j].Nom,
+                            NCE[bass + plus(fundi)].Nom);
                 }
 
-                if (strcmp (AName, NombreAcorde) != 0) {
-                    strcpy (NombreAcorde, AName);
+                if (strcmp(AName, NombreAcorde) != 0)
+                {
+                    strcpy(NombreAcorde, AName);
                     cc = 1;
                 }
                 return;
             }
-
         }
-
-
-
     }
 
-    if (nnotes == 5) {
-
+    if (nnotes == 5)
+    {
         di1 = anote[1] - anote[0];
         di2 = anote[2] - anote[1];
         di3 = anote[3] - anote[2];
@@ -594,67 +589,63 @@ sigue:
         j = -1;
 
         while (j < NumChord5)
-
         {
             j++;
+            
             if ((Chord5[j].di1 == di1) && (Chord5[j].di2 == di2)
-                    && (Chord5[j].di3 == di3) && (Chord5[j].di4 == di4)) {
+                && (Chord5[j].di3 == di3) && (Chord5[j].di4 == di4))
+            {
                 ctipo = Chord5[j].tipo;
                 int elke = anote[Chord5[j].fund - 1];
                 fundi = elke % 12;
-                sprintf (AName, "%s%s", NC[fundi].Nom, Chord5[j].Nom);
-                if (bass != fundi) {
-                    memset (AName, 0, sizeof (AName));
-                    sprintf (AName, "%s%s/%s", NC[fundi].Nom, Chord5[j].Nom,
-                             NCE[bass + plus (fundi)].Nom);
+                sprintf(AName, "%s%s", NC[fundi].Nom, Chord5[j].Nom);
+                
+                if (bass != fundi)
+                {
+                    memset(AName, 0, sizeof (AName));
+                    sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord5[j].Nom,
+                            NCE[bass + plus(fundi)].Nom);
                 }
 
-                if (strcmp (AName, NombreAcorde) != 0) {
-                    strcpy (NombreAcorde, AName);
+                if (strcmp(AName, NombreAcorde) != 0)
+                {
+                    strcpy(NombreAcorde, AName);
                     cc = 1;
                 }
                 return;
-
             }
-
         }
-
     }
 
-
-
-    if (nnotes == 5) {
+    if (nnotes == 5)
+    {
         bass = anote[0] % 12;
 
         for (i = 1; i <= 4; i++)
             anote[i - 1] = anote[i];
+        
         nnotes = 4;
         goto sigue;
     }
 
-
-
-    if (nnotes == 5) {
+    if (nnotes == 5)
+    {
         nnotes = 4;
         goto sigue;
     }
 
-    if (nnotes == 4) {
+    if (nnotes == 4)
+    {
         nnotes = 3;
         goto sigue;
     }
-
-
-
-};
-
-
-
+}
 
 int
-RecChord::plus (int nota)
+RecChord::plus(int nota)
 {
-    switch (nota) {
+    switch (nota)
+    {
     case 2:
         return (12);
         break;
@@ -673,20 +664,17 @@ RecChord::plus (int nota)
     default:
         return (0);
     }
-
-};
-
+}
 
 void
-RecChord::Vamos (int voz, int interval, int reconota)
+RecChord::Vamos(int voz, int interval, int reconota)
 {
-
     int n1, h1;
     int hm1, hp1;
     int hm2, hp2;
     int hm3, hp3;
     int ninterval = interval;
-    int tengo=0;
+    int tengo = 0;
     int nota;
     int harmo;
     int typo;
@@ -694,38 +682,44 @@ RecChord::Vamos (int voz, int interval, int reconota)
     nota = reconota % 12;
 
     nota -= fundi;
+    
     if (nota < 0)
         nota += 12;
 
-
     harmo = (12 + nota + interval) % 12;
+    
     if (harmo > 12)
         harmo %= 12;
 
-
-
     hm1 = harmo - 1;
+    
     if (hm1 < 0)
         hm1 += 12;
+    
     hp1 = harmo + 1;
+    
     if (hp1 > 12)
         hp1 %= 12;
 
     hm2 = harmo - 2;
+    
     if (hm2 < 0)
         hm2 += 12;
+    
     hp2 = harmo + 2;
+    
     if (hp2 > 12)
         hp2 %= 12;
 
     hm3 = harmo - 3;
+    
     if (hm3 < 0)
         hm3 += 12;
+    
     hp3 = harmo + 3;
+    
     if (hp3 > 12)
         hp3 %= 12;
-
-
 
     n1 = Ch[ctipo][nota];
     h1 = Ch[ctipo][harmo];
@@ -734,15 +728,14 @@ RecChord::Vamos (int voz, int interval, int reconota)
 
     if ((n1 == 1) && (h1 == 1))
         typo = 0;
+    
     if ((n1 == 2) && (h1 == 2))
         typo = 1;
+    
     if (h1 == 1)
         typo = 2;
 
-
-
     switch (typo)
-
     {
     case 0:
         ninterval = interval;
@@ -756,29 +749,35 @@ RecChord::Vamos (int voz, int interval, int reconota)
     case 3:
         tengo = 0;
 
-        if ((Ch[ctipo][hp1] != 0) && (tengo == 0)) {
+        if ((Ch[ctipo][hp1] != 0) && (tengo == 0))
+        {
             ninterval = interval + 1;
             tengo = 1;
         }
-        if ((Ch[ctipo][hm1] != 0) && (tengo == 0)) {
+        if ((Ch[ctipo][hm1] != 0) && (tengo == 0))
+        {
             ninterval = interval - 1;
             tengo = 1;
         }
 
-        if ((Ch[ctipo][hp2] != 0) && (tengo == 0)) {
+        if ((Ch[ctipo][hp2] != 0) && (tengo == 0))
+        {
             ninterval = interval + 2;
             tengo = 1;
         }
-        if ((Ch[ctipo][hm2] != 0) && (tengo == 0)) {
+        if ((Ch[ctipo][hm2] != 0) && (tengo == 0))
+        {
             ninterval = interval - 2;
             tengo = 1;
         }
 
-        if ((Ch[ctipo][hp3] != 0) && (tengo == 0)) {
+        if ((Ch[ctipo][hp3] != 0) && (tengo == 0))
+        {
             ninterval = interval + 3;
             tengo = 1;
         }
-        if ((Ch[ctipo][hm3] != 0) && (tengo == 0)) {
+        if ((Ch[ctipo][hm3] != 0) && (tengo == 0))
+        {
             ninterval = interval - 1;
             tengo = 1;
         }
@@ -787,12 +786,10 @@ RecChord::Vamos (int voz, int interval, int reconota)
 
     if (ninterval < -12)
         ninterval += 12;
+    
     if (ninterval > 12)
         ninterval %= 12;
 
-
-
-    r__ratio[voz] = powf (2, ((float)ninterval / 12.0f));
-
+    r__ratio[voz] = powf(2, ((float) ninterval / 12.0f));
 }
 

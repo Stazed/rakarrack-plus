@@ -20,14 +20,14 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "Chorus.h"
 #include <stdio.h>
 #include "FPreset.h"
 
-Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
+Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize)
 {
     fSAMPLE_RATE = sample_rate;
     PERIOD = intermediate_bufsize; //correct for rakarrack, may be adjusted for lv2
@@ -35,7 +35,7 @@ Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
 
     dlk = 0;
     drk = 0;
-    maxdelay = lrintf (MAX_CHORUS_DELAY / 1000.0 * (int)sample_rate);
+    maxdelay = lrintf(MAX_CHORUS_DELAY / 1000.0 * (int) sample_rate);
     delayl = new float[maxdelay];
     delayr = new float[maxdelay];
     lfo = new EffectLFO(sample_rate);
@@ -45,8 +45,8 @@ Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
     rdelay = new delayline(tmp, 2, sample_rate);
     ldelay -> set_averaging(0.005f);
     rdelay -> set_averaging(0.005f);
-    ldelay->set_mix( 0.5f );
-    rdelay->set_mix( 0.5f );
+    ldelay->set_mix(0.5f);
+    rdelay->set_mix(0.5f);
 
     Ppreset = 0;
     Pflangemode = 0;
@@ -56,59 +56,63 @@ Chorus::Chorus (double sample_rate, uint32_t intermediate_bufsize)
     oldr = 0.0f;
     oldl = 0.0f;
     awesome_mode = 0;
-    
+
     outvolume = 0.5f;
 
-    lfo->effectlfoout (&lfol, &lfor);
-    dl2 = getdelay (lfol);
-    dr2 = getdelay (lfor);
-    setpreset (0,Ppreset);  // must be set after call to getdelay
-    cleanup ();
-};
+    lfo->effectlfoout(&lfol, &lfor);
+    dl2 = getdelay(lfol);
+    dr2 = getdelay(lfor);
+    setpreset(0, Ppreset); // must be set after call to getdelay
+    cleanup();
+}
 
-Chorus::~Chorus ()
+Chorus::~Chorus()
 {
-	delete[] delayl;
-	delete[] delayr;
-	delete ldelay;
-	delete rdelay;
-	delete lfo;
-};
+    delete[] delayl;
+    delete[] delayr;
+    delete ldelay;
+    delete rdelay;
+    delete lfo;
+}
 
 /*
  * get the delay value in samples; xlfo is the current lfo value
  */
-float Chorus::getdelay (float xlfo)
+float Chorus::getdelay(float xlfo)
 {
     float result = 0;
-    if (Pflangemode == 0) {
+    if (Pflangemode == 0)
+    {
         result = (delay + xlfo * depth) * fSAMPLE_RATE;
-    } else
+    }
+    else
         result = 0;
 
     //check if it is too big delay(caused bu errornous setdelay() and setdepth()
-    if ((result + 0.5) >= maxdelay) {
-        fprintf (stderr, "%s",
-                 "WARNING: Chorus.C::getdelay(..) too big delay (see setdelay and setdepth funcs.)\n");
-        printf ("%f %d\n", result, maxdelay);
+    if ((result + 0.5) >= maxdelay)
+    {
+        fprintf(stderr, "%s",
+                "WARNING: Chorus.C::getdelay(..) too big delay (see setdelay and setdepth funcs.)\n");
+        printf("%f %d\n", result, maxdelay);
         result = (float) maxdelay - 1.0f;
-    };
+    }
     return (result);
-};
+}
 
 /*
  * Apply the effect
  */
 void
-Chorus::out (float * efxoutl, float * efxoutr)
+Chorus::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float tmp;
     dl1 = dl2;
     dr1 = dr2;
-    lfo->effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout(&lfol, &lfor);
 
-    if(awesome_mode) { //use interpolated delay line for better sound
+    if (awesome_mode)
+    { //use interpolated delay line for better sound
         float tmpsub;
 
         dl2 = delay + lfol * depth;
@@ -116,25 +120,27 @@ Chorus::out (float * efxoutl, float * efxoutr)
         if (Poutsub != 0) tmpsub = -1.0f;
         else tmpsub = 1.0f;
 
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             //Left
-            mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
+            mdel = (dl1 * (float) (PERIOD - i) + dl2 * (float) i) / fPERIOD;
             tmp = efxoutl[i] + oldl*fb;
-            efxoutl[i] = tmpsub*ldelay->delay(tmp, mdel, 0, 1, 0);
+            efxoutl[i] = tmpsub * ldelay->delay(tmp, mdel, 0, 1, 0);
             oldl = efxoutl[i];
 
             //Right
-            mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
+            mdel = (dr1 * (float) (PERIOD - i) + dr2 * (float) i) / fPERIOD;
             tmp = efxoutr[i] + oldr*fb;
-            efxoutr[i] = tmpsub*rdelay->delay(tmp, mdel, 0, 1, 0);
-            oldr =  efxoutr[i];
+            efxoutr[i] = tmpsub * rdelay->delay(tmp, mdel, 0, 1, 0);
+            oldr = efxoutr[i];
         }
-
-    } else {
-
-        dl2 = getdelay (lfol);
-        dr2 = getdelay (lfor);
-        for (i = 0; i < PERIOD; i++) {
+    }
+    else
+    {
+        dl2 = getdelay(lfol);
+        dr2 = getdelay(lfor);
+        for (i = 0; i < PERIOD; i++)
+        {
             float inl = efxoutl[i];
             float inr = efxoutr[i];
             //LRcross
@@ -146,72 +152,74 @@ Chorus::out (float * efxoutl, float * efxoutr)
             //Left channel
 
             //compute the delay in samples using linear interpolation between the lfo delays
-            mdel = (dl1 * (float)(PERIOD - i) + dl2 * (float)i) / fPERIOD;
+            mdel = (dl1 * (float) (PERIOD - i) + dl2 * (float) i) / fPERIOD;
+            
             if (++dlk >= maxdelay)
                 dlk = 0;
-            float tmp = (float) dlk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
+            
+            float tmp = (float) dlk - mdel + (float) maxdelay * 2.0f; //where should I get the sample from
 
-            F2I (tmp, dlhi);
+            F2I(tmp, dlhi);
             dlhi %= maxdelay;
 
             dlhi2 = (dlhi - 1 + maxdelay) % maxdelay;
-            dllo = 1.0f - fmodf (tmp, 1.0f);
+            dllo = 1.0f - fmodf(tmp, 1.0f);
             efxoutl[i] = delayl[dlhi2] * dllo + delayl[dlhi] * (1.0f - dllo);
             delayl[dlk] = inl + efxoutl[i] * fb;
 
             //Right channel
 
             //compute the delay in samples using linear interpolation between the lfo delays
-            mdel = (dr1 * (float)(PERIOD - i) + dr2 * (float)i) / fPERIOD;
+            mdel = (dr1 * (float) (PERIOD - i) + dr2 * (float) i) / fPERIOD;
+            
             if (++drk >= maxdelay)
                 drk = 0;
-            tmp = (float)drk - mdel + (float)maxdelay * 2.0f;	//where should I get the sample from
+            
+            tmp = (float) drk - mdel + (float) maxdelay * 2.0f; //where should I get the sample from
 
-            F2I (tmp, dlhi);
+            F2I(tmp, dlhi);
             dlhi %= maxdelay;
 
             dlhi2 = (dlhi - 1 + maxdelay) % maxdelay;
-            dllo = 1.0f - fmodf (tmp, 1.0f);
+            dllo = 1.0f - fmodf(tmp, 1.0f);
             efxoutr[i] = delayr[dlhi2] * dllo + delayr[dlhi] * (1.0f - dllo);
             delayr[dlk] = inr + efxoutr[i] * fb;
-
-        };
-
+        }
 
         if (Poutsub != 0)
-            for (i = 0; i < PERIOD; i++) {
+            for (i = 0; i < PERIOD; i++)
+            {
                 efxoutl[i] *= -1.0f;
                 efxoutr[i] *= -1.0f;
-            };
-
+            }
 
         //for (i = 0; i < period; i++) {
-            //efxoutl[i] *= panning;
-            //efxoutr[i] *= (1.0f - panning);
+        //efxoutl[i] *= panning;
+        //efxoutr[i] *= (1.0f - panning);
         //};
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             efxoutl[i] *= (1.0f - panning);
             efxoutr[i] *= panning;
-        };
-
+        }
     } //end awesome_mode test
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-Chorus::cleanup ()
+Chorus::cleanup()
 {
-    for (int i = 0; i < maxdelay; i++) {
+    for (int i = 0; i < maxdelay; i++)
+    {
         delayl[i] = 0.0;
         delayr[i] = 0.0;
-    };
-
-};
+    }
+}
 
 void
-Chorus::lv2_update_params (uint32_t period)
+Chorus::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     fPERIOD = period;
@@ -222,53 +230,56 @@ Chorus::lv2_update_params (uint32_t period)
  * Parameter control
  */
 void
-Chorus::setdepth (int Pdepth)
+Chorus::setdepth(int Pdepth)
 {
     this->Pdepth = Pdepth;
-    depth = (powf (8.0f, ((float)Pdepth / 127.0f) * 2.0f) - 1.0f) / 1000.0f;	//seconds
-};
+    depth = (powf(8.0f, ((float) Pdepth / 127.0f) * 2.0f) - 1.0f) / 1000.0f; //seconds
+}
 
 void
-Chorus::setdelay (int Pdelay)
+Chorus::setdelay(int Pdelay)
 {
     this->Pdelay = Pdelay;
-    delay = (powf (10.0f, ((float)Pdelay / 127.0f) * 2.0f) - 1.0f) / 1000.0f;	//seconds
-};
+    delay = (powf(10.0f, ((float) Pdelay / 127.0f) * 2.0f) - 1.0f) / 1000.0f; //seconds
+}
 
 void
-Chorus::setfb (int Pfb)
+Chorus::setfb(int Pfb)
 {
     this->Pfb = Pfb;
-    fb = ((float)Pfb - 64.0f) / 64.1f;
-};
+    fb = ((float) Pfb - 64.0f) / 64.1f;
+}
 
 void
-Chorus::setvolume (int Pvolume)
+Chorus::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    if(awesome_mode) { //use interpolated delay line for better sound
-        ldelay->set_mix( ((float)Pvolume / 128.0f) );
-        rdelay->set_mix( ((float)Pvolume / 128.0f) );
+    
+    if (awesome_mode)
+    { //use interpolated delay line for better sound
+        ldelay->set_mix(((float) Pvolume / 128.0f));
+        rdelay->set_mix(((float) Pvolume / 128.0f));
     }
-    outvolume = (float)Pvolume / 127.0f;
-};
+    
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-Chorus::setpanning (int Ppanning)
+Chorus::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    panning = ((float)Ppanning +.5f) / 127.0f;
-};
+    panning = ((float) Ppanning + .5f) / 127.0f;
+}
 
 void
-Chorus::setlrcross (int Plrcross)
+Chorus::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
-    lrcross = (float)Plrcross / 127.0f;
-};
+    lrcross = (float) Plrcross / 127.0f;
+}
 
 void
-Chorus::setpreset (int dgui, int npreset)
+Chorus::setpreset(int dgui, int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 10;
@@ -297,62 +308,68 @@ Chorus::setpreset (int dgui, int npreset)
     };
 
 
-    if((dgui==0) && (npreset>4)) {
-        Fpre->ReadPreset(5,npreset-4, pdata);
+    if ((dgui == 0) && (npreset > 4))
+    {
+        Fpre->ReadPreset(5, npreset - 4, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
+            changepar(n, pdata[n]);
 
-    } else if((dgui==1) && (npreset>9)) {
-        Fpre->ReadPreset(7,npreset-9, pdata);
+    }
+    else if ((dgui == 1) && (npreset > 9))
+    {
+        Fpre->ReadPreset(7, npreset - 9, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            
+            changepar(n, presets[npreset][n]);
     }
     Ppreset = npreset;
-
-
-};
-
+}
 
 void
-Chorus::changepar (int npar, int value)
+Chorus::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
         lfo->Pfreq = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 3:
         lfo->Prandomness = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 4:
         lfo->PLFOtype = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 5:
         lfo->Pstereo = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 6:
-        setdepth (value);
+        setdepth(value);
         break;
     case 7:
-        setdelay (value);
+        setdelay(value);
         break;
     case 8:
-        setfb (value);
+        setfb(value);
         break;
     case 9:
-        setlrcross (value);
+        setlrcross(value);
         break;
     case 10:
         if (value > 1)
@@ -366,19 +383,21 @@ Chorus::changepar (int npar, int value)
         break;
     case 12:
         awesome_mode = value;
-        if(awesome_mode) {
-            ldelay->set_mix(((float)Pvolume/128.0f) );
-            rdelay->set_mix(((float)Pvolume/128.0f) );
+        if (awesome_mode)
+        {
+            ldelay->set_mix(((float) Pvolume / 128.0f));
+            rdelay->set_mix(((float) Pvolume / 128.0f));
         }
-        outvolume = (float)Pvolume / 127.0f;
+        outvolume = (float) Pvolume / 127.0f;
         break;
-    };
-};
+    }
+}
 
 int
-Chorus::getpar (int npar)
+Chorus::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -420,6 +439,5 @@ Chorus::getpar (int npar)
         break;
     default:
         return (0);
-    };
-
-};
+    }
+}

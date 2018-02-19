@@ -18,16 +18,14 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "CoilCrafter.h"
 
-
-
-CoilCrafter::CoilCrafter (double sample_rate, uint32_t intermediate_bufsize)
+CoilCrafter::CoilCrafter(double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted for lv2
 
@@ -35,82 +33,79 @@ CoilCrafter::CoilCrafter (double sample_rate, uint32_t intermediate_bufsize)
     Ppreset = 0;
     Pvolume = 50;
     Ptone = 20;
-    att = 16.0f*powf(PI,sample_rate/44100.0f);
-    
+    att = 16.0f * powf(PI, sample_rate / 44100.0f);
+
     outvolume = 1.5f;
 
-    tfreqs[0]=4000.0f;
-    tfreqs[1]=4400.0f;
-    tfreqs[2]=4200.0f;
-    tfreqs[3]=2900.0f;
-    tfreqs[4]=3000.0f;
-    tfreqs[5]=2700.0f;
-    tfreqs[6]=3300.0f;
-    tfreqs[7]=3300.0f;
-    tfreqs[8]=2800.0f;
+    tfreqs[0] = 4000.0f;
+    tfreqs[1] = 4400.0f;
+    tfreqs[2] = 4200.0f;
+    tfreqs[3] = 2900.0f;
+    tfreqs[4] = 3000.0f;
+    tfreqs[5] = 2700.0f;
+    tfreqs[6] = 3300.0f;
+    tfreqs[7] = 3300.0f;
+    tfreqs[8] = 2800.0f;
 
-    tqs[0]=4.2f;
-    tqs[1]=4.2f;
-    tqs[2]=2.3f;
-    tqs[3]=1.8f;
-    tqs[4]=2.2f;
-    tqs[5]=2.1f;
-    tqs[6]=1.7f;
-    tqs[7]=1.7f;
-    tqs[8]=1.8f;
+    tqs[0] = 4.2f;
+    tqs[1] = 4.2f;
+    tqs[2] = 2.3f;
+    tqs[3] = 1.8f;
+    tqs[4] = 2.2f;
+    tqs[5] = 2.1f;
+    tqs[6] = 1.7f;
+    tqs[7] = 1.7f;
+    tqs[8] = 1.8f;
 
-
-
-    for(int i=0; i<10; i++) {
-        rm[i]=0.0f;
+    for (int i = 0; i < 10; i++)
+    {
+        rm[i] = 0.0f;
     }
-    rm[0]=1.0;
-    rm[2]= -1.0;
-    rm[4]=1.0;
-    rm[6]=-1.0;
-    rm[8]=1.0;
+    
+    rm[0] = 1.0;
+    rm[2] = -1.0;
+    rm[4] = 1.0;
+    rm[6] = -1.0;
+    rm[8] = 1.0;
 
-
-    harm = new HarmEnhancer (rm, 2500.0f,4400.0f,1.0f,sample_rate,PERIOD);
+    harm = new HarmEnhancer(rm, 2500.0f, 4400.0f, 1.0f, sample_rate, PERIOD);
 
     interpbuf = new float[PERIOD];
-    RB1l =  new AnalogFilter(2,2000.0f,1.0f,0,sample_rate, interpbuf);
-    RB1r =  new AnalogFilter(2,2000.0f,1.0f,0,sample_rate, interpbuf);
-    RB2l =  new AnalogFilter(2,2000.0f,1.0f,0,sample_rate, interpbuf);
-    RB2r =  new AnalogFilter(2,2000.0f,1.0f,0,sample_rate, interpbuf);
+    RB1l = new AnalogFilter(2, 2000.0f, 1.0f, 0, sample_rate, interpbuf);
+    RB1r = new AnalogFilter(2, 2000.0f, 1.0f, 0, sample_rate, interpbuf);
+    RB2l = new AnalogFilter(2, 2000.0f, 1.0f, 0, sample_rate, interpbuf);
+    RB2r = new AnalogFilter(2, 2000.0f, 1.0f, 0, sample_rate, interpbuf);
 
+    cleanup();
 
-    cleanup ();
+    setpreset(Ppreset);
+}
 
-    setpreset (Ppreset);
-};
-
-CoilCrafter::~CoilCrafter ()
+CoilCrafter::~CoilCrafter()
 {
-	delete harm;
-	delete RB1l;
-	delete RB1r;
-	delete RB2l;
-	delete RB2r;
-	delete[] interpbuf;
-};
+    delete harm;
+    delete RB1l;
+    delete RB1r;
+    delete RB2l;
+    delete RB2r;
+    delete[] interpbuf;
+}
 
 /*
  * Cleanup the effect
  */
 void
-CoilCrafter::cleanup ()
+CoilCrafter::cleanup()
 {
-    harm->cleanup ();
+    harm->cleanup();
     harm->calcula_mag(rm);
-    harm->set_vol(1,1.0f);
+    harm->set_vol(1, 1.0f);
 
     RB1l->cleanup();
     RB1r->cleanup();
     RB2l->cleanup();
     RB2r->cleanup();
-
-};
+}
 
 void
 CoilCrafter::lv2_update_params(uint32_t period)
@@ -123,51 +118,53 @@ CoilCrafter::lv2_update_params(uint32_t period)
  * Effect output
  */
 void
-CoilCrafter::out (float * efxoutl, float * efxoutr)
+CoilCrafter::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-
-    if(Ppo>0) {
+    if (Ppo > 0)
+    {
         RB1l->filterout(efxoutl, PERIOD);
         RB1r->filterout(efxoutr, PERIOD);
 
-        for (i=0; i<PERIOD; i++) {
-            efxoutl[i]*=att;
-            efxoutr[i]*=att;
+        for (i = 0; i < PERIOD; i++)
+        {
+            efxoutl[i] *= att;
+            efxoutr[i] *= att;
         }
 
     }
-    if(Ppd>0) {
+    
+    if (Ppd > 0)
+    {
         RB2l->filterout(efxoutl, PERIOD);
         RB2r->filterout(efxoutr, PERIOD);
     }
 
-    if(Pmode) harm->harm_out(efxoutl,efxoutr);
+    if (Pmode) harm->harm_out(efxoutl, efxoutr);
 
+    for (i = 0; i < PERIOD; i++)
+    {
+        efxoutl[i] *= outvolume;
+        efxoutr[i] *= outvolume;
 
-    for (i=0; i<PERIOD; i++) {
-        efxoutl[i]*=outvolume;
-        efxoutr[i]*=outvolume;
-
-        if(Pmode) {
-            efxoutl[i]*=.5f;
-            efxoutr[i]*=.5f;
+        if (Pmode)
+        {
+            efxoutl[i] *= .5f;
+            efxoutr[i] *= .5f;
         }
     }
-};
-
+}
 
 /*
  * Parameter control
  */
 void
-CoilCrafter::setvolume (int value)
+CoilCrafter::setvolume(int value)
 {
     Pvolume = value;
-    outvolume = (1.0f + (float)Pvolume) / 127.0f;
-
-};
+    outvolume = (1.0f + (float) Pvolume) / 127.0f;
+}
 
 void
 CoilCrafter::setfreq1()
@@ -190,7 +187,6 @@ CoilCrafter::setq1()
 void
 CoilCrafter::setfreq2()
 {
-
     RB2l->setfreq(freq2);
     RB2r->setfreq(freq2);
 }
@@ -198,77 +194,75 @@ CoilCrafter::setfreq2()
 void
 CoilCrafter::setq2()
 {
-
     RB2l->setq(q2);
     RB2r->setq(q2);
-
-
-
 }
 
 void
-CoilCrafter::sethpf (int value)
+CoilCrafter::sethpf(int value)
 {
-    harm->set_freqh (0,(float)value);
-};
-
+    harm->set_freqh(0, (float) value);
+}
 
 void
-CoilCrafter::setpreset (int npreset)
+CoilCrafter::setpreset(int npreset)
 {
     const int PRESET_SIZE = 9;
     const int NUM_PRESETS = 2;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //H to S
-        {32, 6, 1, 3300, 16,  4400, 42, 20, 0},
+        {32, 6, 1, 3300, 16, 4400, 42, 20, 0},
         //S to H
         {32, 1, 6, 4400, 42, 3300, 16, 20, 0},
-
-
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(33,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(33, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
 
     Ppreset = npreset;
-    cleanup ();
-
-};
-
+    cleanup();
+}
 
 void
-CoilCrafter::changepar (int npar, int value)
+CoilCrafter::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
         Ppo = value;
-        if (Ppo>0) {
+        if (Ppo > 0)
+        {
             freq1 = tfreqs[value];
-            Pfreq1 = (int)freq1;
+            Pfreq1 = (int) freq1;
             setfreq1();
             q1 = tqs[value];
-            Pq1 = (int)(q1*10.0f);
+            Pq1 = (int) (q1 * 10.0f);
             setq1();
         }
         break;
     case 2:
         Ppd = value;
-        if(Ppd>0) {
+        if (Ppd > 0)
+        {
             freq2 = tfreqs[value];
-            Pfreq2 = (int)freq2;
+            Pfreq2 = (int) freq2;
             setfreq2();
             q2 = tqs[value];
-            Pq2 =(int)(q2*10.0f);
+            Pq2 = (int) (q2 * 10.0f);
             setq2();
         }
         break;
@@ -279,7 +273,7 @@ CoilCrafter::changepar (int npar, int value)
         break;
     case 4:
         Pq1 = value;
-        q1 = (float)value/10.0f;
+        q1 = (float) value / 10.0f;
         setq1();
         break;
     case 5:
@@ -289,7 +283,7 @@ CoilCrafter::changepar (int npar, int value)
         break;
     case 6:
         Pq2 = value;
-        q2 = (float)value/10.0f;
+        q2 = (float) value / 10.0f;
         setq2();
         break;
     case 7:
@@ -299,14 +293,14 @@ CoilCrafter::changepar (int npar, int value)
     case 8:
         Pmode = value;
         break;
-
-    };
-};
+    }
+}
 
 int
-CoilCrafter::getpar (int npar)
+CoilCrafter::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -334,8 +328,7 @@ CoilCrafter::getpar (int npar)
     case 8:
         return (Pmode);
         break;
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 

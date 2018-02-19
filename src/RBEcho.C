@@ -21,16 +21,16 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "RBEcho.h"     // Echoverse
 
-RBEcho::RBEcho (double sample_rate, uint32_t intermediate_bufsize)
+RBEcho::RBEcho(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
     //default values
@@ -57,21 +57,21 @@ RBEcho::RBEcho (double sample_rate, uint32_t intermediate_bufsize)
     ldelay = new delayline(2.0f, 3, sample_rate);
     rdelay = new delayline(2.0f, 3, sample_rate);
 
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-RBEcho::~RBEcho ()
+RBEcho::~RBEcho()
 {
-	delete ldelay;
-	delete rdelay;
-};
+    delete ldelay;
+    delete rdelay;
+}
 
 /*
  * Cleanup the effect
  */
 void
-RBEcho::cleanup ()
+RBEcho::cleanup()
 {
     ldelay->cleanup();
     rdelay->cleanup();
@@ -79,52 +79,53 @@ RBEcho::cleanup ()
     rdelay->set_averaging(0.25f);
     oldl = 0.0;
     oldr = 0.0;
-};
+}
 
 void
-RBEcho::lv2_update_params (uint32_t period)
+RBEcho::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+
 /*
  * Initialize the delays
  */
 void
-RBEcho::initdelays ()
+RBEcho::initdelays()
 {
     oldl = 0.0;
     oldr = 0.0;
 
-    if(Plrdelay>0) {
+    if (Plrdelay > 0)
+    {
         ltime = delay + lrdelay;
         rtime = delay - lrdelay;
-    } else {
+    }
+    else
+    {
         ltime = delay - lrdelay;
         rtime = delay + lrdelay;
     }
 
-    if(ltime > 2.0f) ltime = 2.0f;
-    if(ltime<0.01f) ltime = 0.01f;
+    if (ltime > 2.0f) ltime = 2.0f;
+    if (ltime < 0.01f) ltime = 0.01f;
 
-    if(rtime > 2.0f) rtime = 2.0f;
-    if(rtime<0.01f) rtime = 0.01f;
-
-
-};
+    if (rtime > 2.0f) rtime = 2.0f;
+    if (rtime < 0.01f) rtime = 0.01f;
+}
 
 /*
  * Effect output
  */
 void
-RBEcho::out (float * efxoutl, float * efxoutr)
+RBEcho::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float ldl, rdl;
     float avg, ldiff, rdiff, tmp;
 
-
-    for (i = 0; i < PERIOD; i++) {
-
+    for (i = 0; i < PERIOD; i++)
+    {
         //LowPass Filter
         ldl = lfeedback * hidamp + oldl * (1.0f - hidamp);
         rdl = rfeedback * hidamp + oldr * (1.0f - hidamp);
@@ -134,22 +135,21 @@ RBEcho::out (float * efxoutl, float * efxoutr)
         ldl = ldelay->delay_simple((ldl + efxoutl[i]), delay, 0, 1, 0);
         rdl = rdelay->delay_simple((rdl + efxoutr[i]), delay, 0, 1, 0);
 
-
-        if(Preverse) {
-            rvl = ldelay->delay_simple(oldl, delay, 1, 0, 1)*ldelay->envelope();
-            rvr = rdelay->delay_simple(oldr, delay, 1, 0, 1)*rdelay->envelope();
-            ldl = ireverse*ldl + reverse*rvl;
-            rdl = ireverse*rdl + reverse*rvr;
-
+        if (Preverse)
+        {
+            rvl = ldelay->delay_simple(oldl, delay, 1, 0, 1) * ldelay->envelope();
+            rvr = rdelay->delay_simple(oldr, delay, 1, 0, 1) * rdelay->envelope();
+            ldl = ireverse * ldl + reverse*rvl;
+            rdl = ireverse * rdl + reverse*rvr;
         }
-
 
         //lfeedback = lpanning * fb * ldl;
         //rfeedback = rpanning * fb * rdl;
         lfeedback = rpanning * fb * ldl;
         rfeedback = lpanning * fb * rdl;
 
-        if(Pes) {
+        if (Pes)
+        {
             ldl *= cosf(lrcross);
             rdl *= sinf(lrcross);
 
@@ -162,101 +162,94 @@ RBEcho::out (float * efxoutl, float * efxoutr)
 
             tmp = avg + rdiff * pes;
             rdl = 0.5f * tmp;
-
-
         }
         //efxoutl[i] = (ipingpong*ldl + pingpong *ldelay->delay_simple(0.0f, ltime, 2, 0, 0)) * lpanning;
         //efxoutr[i] = (ipingpong*rdl + pingpong *rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * rpanning;
-        efxoutl[i] = (ipingpong*ldl + pingpong *ldelay->delay_simple(0.0f, ltime, 2, 0, 0)) * rpanning;
-        efxoutr[i] = (ipingpong*rdl + pingpong *rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * lpanning;
-
-    };
-
-};
-
+        efxoutl[i] = (ipingpong * ldl + pingpong * ldelay->delay_simple(0.0f, ltime, 2, 0, 0)) * rpanning;
+        efxoutr[i] = (ipingpong * rdl + pingpong * rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * lpanning;
+    }
+}
 
 /*
  * Parameter control
  */
 void
-RBEcho::setvolume (int Pvolume)
+RBEcho::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
-
-};
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-RBEcho::setpanning (int Ppanning)
+RBEcho::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    lpanning = ((float)Ppanning) / 64.0f;
+    lpanning = ((float) Ppanning) / 64.0f;
     rpanning = 2.0f - lpanning;
     lpanning = 10.0f * powf(lpanning, 4);
     rpanning = 10.0f * powf(rpanning, 4);
-    lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
-    rpanning = 1.0f - 1.0f/(rpanning + 1.0f);
+    lpanning = 1.0f - 1.0f / (lpanning + 1.0f);
+    rpanning = 1.0f - 1.0f / (rpanning + 1.0f);
     lpanning *= 1.1f;
     rpanning *= 1.1f;
-};
+}
 
 void
-RBEcho::setreverse (int Preverse)
+RBEcho::setreverse(int Preverse)
 {
     this->Preverse = Preverse;
     reverse = (float) Preverse / 127.0f;
     ireverse = 1.0f - reverse;
-};
+}
 
 void
-RBEcho::setdelay (int Pdelay)
+RBEcho::setdelay(int Pdelay)
 {
     this->Pdelay = Pdelay;
-    fdelay= 60.0f/((float) Pdelay);
+    fdelay = 60.0f / ((float) Pdelay);
     if (fdelay < 0.01f) fdelay = 0.01f;
-    if (fdelay > (float) MAX_DELAY) fdelay = (float) MAX_DELAY;  //Constrains 10ms ... MAX_DELAY
+    if (fdelay > (float) MAX_DELAY) fdelay = (float) MAX_DELAY; //Constrains 10ms ... MAX_DELAY
     delay = subdiv * fdelay;
-    initdelays ();
-};
+    initdelays();
+}
 
 void
-RBEcho::setlrdelay (int Plrdelay)
+RBEcho::setlrdelay(int Plrdelay)
 {
     float tmp;
     this->Plrdelay = Plrdelay;
-    lrdelay = delay * fabs(((float)Plrdelay - 64.0f) / 65.0f);
+    lrdelay = delay * fabs(((float) Plrdelay - 64.0f) / 65.0f);
 
-    tmp = fabs( ((float) Plrdelay - 64.0f)/32.0f);
-    pingpong = 1.0f - 1.0f/(5.0f*tmp*tmp + 1.0f);
+    tmp = fabs(((float) Plrdelay - 64.0f) / 32.0f);
+    pingpong = 1.0f - 1.0f / (5.0f * tmp * tmp + 1.0f);
     pingpong *= 1.05159f;
     ipingpong = 1.0f - pingpong;
-    initdelays ();
-};
+    initdelays();
+}
 
 void
-RBEcho::setlrcross (int Plrcross)
+RBEcho::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
-    lrcross = D_PI * (float)Plrcross / 128.0f;
-
-};
+    lrcross = D_PI * (float) Plrcross / 128.0f;
+}
 
 void
-RBEcho::setfb (int Pfb)
+RBEcho::setfb(int Pfb)
 {
     this->Pfb = Pfb;
-    fb = (float)Pfb / 128.0f;
-};
+    fb = (float) Pfb / 128.0f;
+}
 
 void
-RBEcho::sethidamp (int Phidamp)
+RBEcho::sethidamp(int Phidamp)
 {
     this->Phidamp = Phidamp;
-    hidamp = f_exp(-D_PI * 500.0f * ((float) Phidamp)/fSAMPLE_RATE);
-};
+    hidamp = f_exp(-D_PI * 500.0f * ((float) Phidamp) / fSAMPLE_RATE);
+}
 
 void
-RBEcho::setpreset (int npreset)
+RBEcho::setpreset(int npreset)
 {
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 3;
@@ -265,68 +258,74 @@ RBEcho::setpreset (int npreset)
         //Echo 1
         {64, 64, 90, 64, 64, 64, 64, 0, 1, 96},
         //Echo 2
-        {64, 64, 90, 64, 64, 64, 64, 0, 2 ,96},
+        {64, 64, 90, 64, 64, 64, 64, 0, 2, 96},
         //Echo 3
-        {64, 64, 90, 64, 64, 111, 127, 77, 3 ,96}
+        {64, 64, 90, 64, 64, 111, 127, 77, 3, 96}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(32,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(32, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-};
-
+}
 
 void
-RBEcho::changepar (int npar, int value)
+RBEcho::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
-        setdelay (value);
+        setdelay(value);
         break;
     case 3:
-        setlrdelay (value);
+        setlrdelay(value);
         break;
     case 4:
-        setlrcross (value);
+        setlrcross(value);
         break;
     case 5:
-        setfb (value);
+        setfb(value);
         break;
     case 6:
-        sethidamp (value);
+        sethidamp(value);
         break;
     case 7:
-        setreverse (value);
+        setreverse(value);
         break;
     case 8:
         Psubdiv = value;
-        subdiv = 1.0f/((float)(value + 1));
+        subdiv = 1.0f / ((float) (value + 1));
         delay = subdiv * fdelay;
-        initdelays ();
+        initdelays();
         break;
     case 9:
         Pes = value;
-        pes = 8.0f * (float)Pes / 127.0f;
+        pes = 8.0f * (float) Pes / 127.0f;
         break;
-    };
-};
+    }
+}
 
 int
-RBEcho::getpar (int npar)
+RBEcho::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -357,7 +356,6 @@ RBEcho::getpar (int npar)
     case 9:
         return (Pes);
         break;
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}

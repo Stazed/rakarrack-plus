@@ -24,17 +24,16 @@
  Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "Gate.h"
 
-
-Gate::Gate (double samplerate, uint32_t intermediate_bufsize)
+Gate::Gate(double samplerate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
+    PERIOD = intermediate_bufsize; // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
     fSAMPLE_RATE = samplerate;
-    
+
     initialize();
 
     env = 0.0;
@@ -46,32 +45,30 @@ Gate::Gate (double samplerate, uint32_t intermediate_bufsize)
     setpreset(0);
 }
 
-Gate::~Gate ()
+Gate::~Gate()
 {
     clear_initialize();
 }
 
-
-
 void
-Gate::cleanup ()
+Gate::cleanup()
 {
-    lpfl->cleanup ();
-    hpfl->cleanup ();
-    lpfr->cleanup ();
-    hpfr->cleanup ();
+    lpfl->cleanup();
+    hpfl->cleanup();
+    lpfr->cleanup();
+    hpfr->cleanup();
 }
 
 void
 Gate::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
         initialize();
-        setlpf (Plpf);
-        sethpf (Phpf);
+        setlpf(Plpf);
+        sethpf(Phpf);
     }
     else
     {
@@ -84,10 +81,10 @@ Gate::initialize()
 {
     interpbuf = new float[PERIOD];
 
-    lpfl = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
-    lpfr = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
-    hpfl = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
-    hpfr = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfl = new AnalogFilter(2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter(2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter(3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter(3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
 }
 
 void
@@ -101,45 +98,43 @@ Gate::clear_initialize()
 }
 
 void
-Gate::setlpf (int value)
+Gate::setlpf(int value)
 {
     Plpf = value;
-    float fr = (float)Plpf;
-    lpfl->setfreq (fr);
-    lpfr->setfreq (fr);
-};
+    float fr = (float) Plpf;
+    lpfl->setfreq(fr);
+    lpfr->setfreq(fr);
+}
 
 void
-Gate::sethpf (int value)
+Gate::sethpf(int value)
 {
     Phpf = value;
-    float fr = (float)Phpf;
-    hpfl->setfreq (fr);
-    hpfr->setfreq (fr);
-};
-
+    float fr = (float) Phpf;
+    hpfl->setfreq(fr);
+    hpfr->setfreq(fr);
+}
 
 void
-Gate::changepar (int npar, int value)
+Gate::changepar(int npar, int value)
 {
-
-    switch (npar) {
-
+    switch (npar)
+    {
     case 1:
         Pthreshold = value;
-        t_level = dB2rap ((float)Pthreshold);
+        t_level = dB2rap((float) Pthreshold);
         break;
     case 2:
         Prange = value;
-        cut = dB2rap ((float)Prange);
+        cut = dB2rap((float) Prange);
         break;
     case 3:
         Pattack = value;
-        a_rate = 1000.0f / ((float)Pattack * fs);
+        a_rate = 1000.0f / ((float) Pattack * fs);
         break;
     case 4:
         Pdecay = value;
-        d_rate = 1000.0f / ((float)Pdecay * fs);
+        d_rate = 1000.0f / ((float) Pdecay * fs);
         break;
     case 5:
         setlpf(value);
@@ -149,17 +144,15 @@ Gate::changepar (int npar, int value)
         break;
     case 7:
         Phold = value;
-        hold = (float)Phold;
+        hold = (float) Phold;
         break;
     }
 }
 
 int
-Gate::getpar (int np)
+Gate::getpar(int np)
 {
-
     switch (np)
-
     {
     case 1:
         return (Pthreshold);
@@ -182,18 +175,14 @@ Gate::getpar (int np)
     case 7:
         return (Phold);
         break;
-
     }
 
     return (0);
-
 }
 
-
 void
-Gate::setpreset (int npreset)
+Gate::setpreset(int npreset)
 {
-
     const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
@@ -206,66 +195,77 @@ Gate::setpreset (int npreset)
         {0, -20, 1, 2, 6703, 76, 2}
     };
 
-    if(npreset>NUM_PRESETS-1) {
+    if (npreset > NUM_PRESETS - 1)
+    {
 
-        Fpre->ReadPreset(16,npreset-NUM_PRESETS+1,pdata);
+        Fpre->ReadPreset(16, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n + 1, pdata[n]);
-    } else {
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n + 1, presets[npreset][n]);
     }
-
 }
 
-
-
 void
-Gate::out (float *efxoutl, float *efxoutr)
+Gate::out(float *efxoutl, float *efxoutr)
 {
     unsigned i;
     float sum = 0.0f;
 
+    lpfl->filterout(efxoutl, PERIOD);
+    hpfl->filterout(efxoutl, PERIOD);
+    lpfr->filterout(efxoutr, PERIOD);
+    hpfr->filterout(efxoutr, PERIOD);
 
-    lpfl->filterout (efxoutl,PERIOD);
-    hpfl->filterout (efxoutl,PERIOD);
-    lpfr->filterout (efxoutr,PERIOD);
-    hpfr->filterout (efxoutr,PERIOD);
-
-
-    for (i = 0; i < PERIOD; i++) {
-
-        sum = fabsf (efxoutl[i]) + fabsf (efxoutr[i]);
-
+    for (i = 0; i < PERIOD; i++)
+    {
+        sum = fabsf(efxoutl[i]) + fabsf(efxoutr[i]);
 
         if (sum > env)
             env = sum;
         else
             env = sum * ENV_TR + env * (1.0f - ENV_TR);
 
-        if (state == CLOSED) {
+        if (state == CLOSED)
+        {
             if (env >= t_level)
                 state = OPENING;
-        } else if (state == OPENING) {
+        }
+        else if (state == OPENING)
+        {
             gate += a_rate;
-            if (gate >= 1.0) {
+            if (gate >= 1.0)
+            {
                 gate = 1.0f;
                 state = OPEN;
-                hold_count = lrintf (hold * fs * 0.001f);
+                hold_count = lrintf(hold * fs * 0.001f);
             }
-        } else if (state == OPEN) {
-            if (hold_count <= 0) {
-                if (env < t_level) {
+        }
+        else if (state == OPEN)
+        {
+            if (hold_count <= 0)
+            {
+                if (env < t_level)
+                {
                     state = CLOSING;
                 }
-            } else
+            }
+            else
                 hold_count--;
 
-        } else if (state == CLOSING) {
+        }
+        else if (state == CLOSING)
+        {
             gate -= d_rate;
+            
             if (env >= t_level)
                 state = OPENING;
-            else if (gate <= 0.0) {
+            else if (gate <= 0.0)
+            {
                 gate = 0.0;
                 state = CLOSED;
             }
@@ -273,6 +273,5 @@ Gate::out (float *efxoutl, float *efxoutr)
 
         efxoutl[i] *= (cut * (1.0f - gate) + gate);
         efxoutr[i] *= (cut * (1.0f - gate) + gate);
-
     }
-};
+}

@@ -20,13 +20,13 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "DynamicFilter.h"
 #include <stdio.h>
 
-DynamicFilter::DynamicFilter (double sample_rate, uint32_t intermediate_bufsize)
+DynamicFilter::DynamicFilter(double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize; // correct for rakarrack, many be adjusted for lv2
     fSAMPLE_RATE = sample_rate;
@@ -38,157 +38,159 @@ DynamicFilter::DynamicFilter (double sample_rate, uint32_t intermediate_bufsize)
     Pampsmooth = 0;
     filterl = NULL;
     filterr = NULL;
-    filterpars = new FilterParams (0, 64, 64, sample_rate, PERIOD);
-    setpreset (Ppreset);
-    cleanup ();
-};
+    filterpars = new FilterParams(0, 64, 64, sample_rate, PERIOD);
+    setpreset(Ppreset);
+    cleanup();
+}
 
-DynamicFilter::~DynamicFilter ()
+DynamicFilter::~DynamicFilter()
 {
     delete lfo;
     delete filterpars;
     delete filterl;
     delete filterr;
-};
-
+}
 
 /*
  * Apply the effect
  */
 void
-DynamicFilter::out (float * efxoutl, float * efxoutr)
+DynamicFilter::out(float * efxoutl, float * efxoutr)
 {
     uint32_t i;
     float lfol, lfor;
 
-    if (filterpars->changed) {
+    if (filterpars->changed)
+    {
         filterpars->changed = false;
-        cleanup ();
-    };
+        cleanup();
+    }
 
-    lfo->effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout(&lfol, &lfor);
     lfol *= depth * 5.0f;
     lfor *= depth * 5.0f;
-    float freq = filterpars->getfreq ();
-    float q = filterpars->getq ();
+    float freq = filterpars->getfreq();
+    float q = filterpars->getq();
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         efxoutl[i] = efxoutl[i];
         efxoutr[i] = efxoutr[i];
 
-        float x = (fabsf (efxoutl[i]) + fabsf (efxoutr[i])) * 0.5f;
+        float x = (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) * 0.5f;
         ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
-    };
+    }
 
-
-    float ampsmooth2 = powf (ampsmooth, 0.2f) * 0.3f;
+    float ampsmooth2 = powf(ampsmooth, 0.2f) * 0.3f;
     ms2 = ms2 * (1.0f - ampsmooth2) + ms1 * ampsmooth2;
     ms3 = ms3 * (1.0f - ampsmooth2) + ms2 * ampsmooth2;
     ms4 = ms4 * (1.0f - ampsmooth2) + ms3 * ampsmooth2;
-    float rms = (sqrtf (ms4)) * ampsns;
+    float rms = (sqrtf(ms4)) * ampsns;
 
-    float frl = filterl->getrealfreq (freq + lfol + rms);
-    float frr = filterr->getrealfreq (freq + lfor + rms);
+    float frl = filterl->getrealfreq(freq + lfol + rms);
+    float frr = filterr->getrealfreq(freq + lfor + rms);
 
-    filterl->setfreq_and_q (frl, q);
-    filterr->setfreq_and_q (frr, q);
+    filterl->setfreq_and_q(frl, q);
+    filterr->setfreq_and_q(frr, q);
 
-
-    filterl->filterout (efxoutl, PERIOD);
-    filterr->filterout (efxoutr, PERIOD);
+    filterl->filterout(efxoutl, PERIOD);
+    filterr->filterout(efxoutr, PERIOD);
 
     //panning
     //for (i = 0; i < period; i++) {
-        //efxoutl[i] *= panning;
-        //efxoutr[i] *= (1.0f - panning);
+    //efxoutl[i] *= panning;
+    //efxoutr[i] *= (1.0f - panning);
     //};
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         efxoutl[i] *= (1.0f - panning);
         efxoutr[i] *= panning;
-    };
-
-};
+    }
+}
 
 /*
  * Cleanup the effect
  */
 void
-DynamicFilter::cleanup ()
+DynamicFilter::cleanup()
 {
-    reinitfilter ();
+    reinitfilter();
     ms1 = 0.0;
     ms2 = 0.0;
     ms3 = 0.0;
     ms4 = 0.0;
-};
+}
 
 void
-DynamicFilter::lv2_update_params (uint32_t period)
+DynamicFilter::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         delete filterpars;
-        filterpars = new FilterParams (0, 64, 64, fSAMPLE_RATE, PERIOD);
+        filterpars = new FilterParams(0, 64, 64, fSAMPLE_RATE, PERIOD);
         reinitfilter();
     }
     else
     {
         PERIOD = period;
     }
+    
     lfo->updateparams(period);
 }
+
 /*
  * Parameter control
  */
 
 void
-DynamicFilter::setdepth (int Pdepth)
+DynamicFilter::setdepth(int Pdepth)
 {
     this->Pdepth = Pdepth;
-    depth = powf (((float)Pdepth / 127.0f), 2.0f);
-};
-
+    depth = powf(((float) Pdepth / 127.0f), 2.0f);
+}
 
 void
-DynamicFilter::setvolume (int Pvolume)
+DynamicFilter::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
-
-};
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-DynamicFilter::setpanning (int Ppanning)
+DynamicFilter::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    panning = ((float)Ppanning + .5f) / 127.0f;
-};
-
+    panning = ((float) Ppanning + .5f) / 127.0f;
+}
 
 void
-DynamicFilter::setampsns (int Pampsns)
+DynamicFilter::setampsns(int Pampsns)
 {
-    ampsns = powf ((float)Pampsns / 127.0f, 2.5f) * 10.0f;
+    ampsns = powf((float) Pampsns / 127.0f, 2.5f) * 10.0f;
+    
     if (Pampsnsinv != 0)
         ampsns = -ampsns;
-    ampsmooth = expf ((float)-Pampsmooth / 127.0f * 10.0f) * 0.99f;
+    
+    ampsmooth = expf((float) -Pampsmooth / 127.0f * 10.0f) * 0.99f;
     this->Pampsns = Pampsns;
-};
+}
 
 void
-DynamicFilter::reinitfilter ()
+DynamicFilter::reinitfilter()
 {
     if (filterl != NULL)
         delete (filterl);
+    
     if (filterr != NULL)
         delete (filterr);
-    filterl = new Filter (filterpars);
-    filterr = new Filter (filterpars);
-};
+    
+    filterl = new Filter(filterpars);
+    filterr = new Filter(filterpars);
+}
 
 void
-DynamicFilter::setpreset (int npreset)
+DynamicFilter::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 5;
@@ -206,161 +208,166 @@ DynamicFilter::setpreset (int npreset)
         {64, 64, 50, 0, 0, 96, 64, 0, 0, 60, 4}
     };
 
-    if(npreset>NUM_PRESETS-1) {
+    if (npreset > NUM_PRESETS - 1)
+    {
 
-        Fpre->ReadPreset(10,npreset-NUM_PRESETS+1,pdata);
+        Fpre->ReadPreset(10, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
-//          for (int i=0;i<5;i++){
-//              printf("freq=%d  amp=%d  q=%d\n",filterpars->Pvowels[0].formants[i].freq,filterpars->Pvowels[0].formants[i].amp,filterpars->Pvowels[0].formants[i].q);
-//          };
+    else
+    {
+
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    //          for (int i=0;i<5;i++){
+    //              printf("freq=%d  amp=%d  q=%d\n",filterpars->Pvowels[0].formants[i].freq,filterpars->Pvowels[0].formants[i].amp,filterpars->Pvowels[0].formants[i].q);
+    //          };
 
     Ppreset = npreset;
-
-};
-
+}
 
 void
-DynamicFilter::changepar (int npar, int value)
+DynamicFilter::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
         lfo->Pfreq = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 3:
         lfo->Prandomness = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 4:
         lfo->PLFOtype = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 5:
         lfo->Pstereo = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 6:
-        setdepth (value);
+        setdepth(value);
         break;
     case 7:
-        setampsns (value);
+        setampsns(value);
         break;
     case 8:
         Pampsnsinv = value;
-        setampsns (Pampsns);
+        setampsns(Pampsns);
         break;
     case 9:
         Pampsmooth = value;
-        setampsns (Pampsns);
+        setampsns(Pampsns);
         break;
 
     case 10:
+    {
+        Pmode = value;
+        filterpars->defaults();
+        switch (Pmode)
         {
-            Pmode = value;
-            filterpars->defaults ();
-        switch (Pmode) {
-            case 0:
-                filterpars->Pcategory = 0;
-                filterpars->Ptype = 2;
-                filterpars->Pfreq = 45;
-                filterpars->Pq = 64;
-                filterpars->Pstages = 1;
-                filterpars->Pgain = 64;
-                break;
-            case 1:
-                filterpars->Pcategory = 2;
-                filterpars->Ptype = 0;
-                filterpars->Pfreq = 72;
-                filterpars->Pq = 64;
-                filterpars->Pstages = 0;
-                filterpars->Pgain = 64;
-                break;
-            case 2:
-                filterpars->Pcategory = 0;
-                filterpars->Ptype = 4;
-                filterpars->Pfreq = 64;
-                filterpars->Pq = 64;
-                filterpars->Pstages = 2;
-                filterpars->Pgain = 64;
-                break;
-            case 3:
-                filterpars->Pcategory = 1;
-                filterpars->Ptype = 0;
-                filterpars->Pfreq = 50;
-                filterpars->Pq = 70;
-                filterpars->Pstages = 1;
-                filterpars->Pgain = 64;
+        case 0:
+            filterpars->Pcategory = 0;
+            filterpars->Ptype = 2;
+            filterpars->Pfreq = 45;
+            filterpars->Pq = 64;
+            filterpars->Pstages = 1;
+            filterpars->Pgain = 64;
+            break;
+        case 1:
+            filterpars->Pcategory = 2;
+            filterpars->Ptype = 0;
+            filterpars->Pfreq = 72;
+            filterpars->Pq = 64;
+            filterpars->Pstages = 0;
+            filterpars->Pgain = 64;
+            break;
+        case 2:
+            filterpars->Pcategory = 0;
+            filterpars->Ptype = 4;
+            filterpars->Pfreq = 64;
+            filterpars->Pq = 64;
+            filterpars->Pstages = 2;
+            filterpars->Pgain = 64;
+            break;
+        case 3:
+            filterpars->Pcategory = 1;
+            filterpars->Ptype = 0;
+            filterpars->Pfreq = 50;
+            filterpars->Pq = 70;
+            filterpars->Pstages = 1;
+            filterpars->Pgain = 64;
 
-                filterpars->Psequencesize = 2;
-                // "I"
-                filterpars->Pvowels[0].formants[0].freq = 34;
-                filterpars->Pvowels[0].formants[0].amp = 127;
-                filterpars->Pvowels[0].formants[0].q = 64;
-                filterpars->Pvowels[0].formants[1].freq = 99;
-                filterpars->Pvowels[0].formants[1].amp = 122;
-                filterpars->Pvowels[0].formants[1].q = 64;
-                filterpars->Pvowels[0].formants[2].freq = 108;
-                filterpars->Pvowels[0].formants[2].amp = 112;
-                filterpars->Pvowels[0].formants[2].q = 64;
-                // "A"
-                filterpars->Pvowels[1].formants[0].freq = 61;
-                filterpars->Pvowels[1].formants[0].amp = 127;
-                filterpars->Pvowels[1].formants[0].q = 64;
-                filterpars->Pvowels[1].formants[1].freq = 71;
-                filterpars->Pvowels[1].formants[1].amp = 121;
-                filterpars->Pvowels[1].formants[1].q = 64;
-                filterpars->Pvowels[1].formants[2].freq = 99;
-                filterpars->Pvowels[1].formants[2].amp = 117;
-                filterpars->Pvowels[1].formants[2].q = 64;
-                break;
-            case 4:
-                filterpars->Pcategory = 1;
-                filterpars->Ptype = 0;
-                filterpars->Pfreq = 64;
-                filterpars->Pq = 70;
-                filterpars->Pstages = 1;
-                filterpars->Pgain = 64;
+            filterpars->Psequencesize = 2;
+            // "I"
+            filterpars->Pvowels[0].formants[0].freq = 34;
+            filterpars->Pvowels[0].formants[0].amp = 127;
+            filterpars->Pvowels[0].formants[0].q = 64;
+            filterpars->Pvowels[0].formants[1].freq = 99;
+            filterpars->Pvowels[0].formants[1].amp = 122;
+            filterpars->Pvowels[0].formants[1].q = 64;
+            filterpars->Pvowels[0].formants[2].freq = 108;
+            filterpars->Pvowels[0].formants[2].amp = 112;
+            filterpars->Pvowels[0].formants[2].q = 64;
+            // "A"
+            filterpars->Pvowels[1].formants[0].freq = 61;
+            filterpars->Pvowels[1].formants[0].amp = 127;
+            filterpars->Pvowels[1].formants[0].q = 64;
+            filterpars->Pvowels[1].formants[1].freq = 71;
+            filterpars->Pvowels[1].formants[1].amp = 121;
+            filterpars->Pvowels[1].formants[1].q = 64;
+            filterpars->Pvowels[1].formants[2].freq = 99;
+            filterpars->Pvowels[1].formants[2].amp = 117;
+            filterpars->Pvowels[1].formants[2].q = 64;
+            break;
+        case 4:
+            filterpars->Pcategory = 1;
+            filterpars->Ptype = 0;
+            filterpars->Pfreq = 64;
+            filterpars->Pq = 70;
+            filterpars->Pstages = 1;
+            filterpars->Pgain = 64;
 
-                filterpars->Psequencesize = 2;
-                filterpars->Pnumformants = 2;
-                filterpars->Pvowelclearness = 0;
+            filterpars->Psequencesize = 2;
+            filterpars->Pnumformants = 2;
+            filterpars->Pvowelclearness = 0;
 
-                filterpars->Pvowels[0].formants[0].freq = 70;
-                filterpars->Pvowels[0].formants[0].amp = 127;
-                filterpars->Pvowels[0].formants[0].q = 64;
-                filterpars->Pvowels[0].formants[1].freq = 80;
-                filterpars->Pvowels[0].formants[1].amp = 122;
-                filterpars->Pvowels[0].formants[1].q = 64;
+            filterpars->Pvowels[0].formants[0].freq = 70;
+            filterpars->Pvowels[0].formants[0].amp = 127;
+            filterpars->Pvowels[0].formants[0].q = 64;
+            filterpars->Pvowels[0].formants[1].freq = 80;
+            filterpars->Pvowels[0].formants[1].amp = 122;
+            filterpars->Pvowels[0].formants[1].q = 64;
 
-                filterpars->Pvowels[1].formants[0].freq = 20;
-                filterpars->Pvowels[1].formants[0].amp = 127;
-                filterpars->Pvowels[1].formants[0].q = 64;
-                filterpars->Pvowels[1].formants[1].freq = 100;
-                filterpars->Pvowels[1].formants[1].amp = 121;
-                filterpars->Pvowels[1].formants[1].q = 64;
-                break; 
-            };
-            reinitfilter ();
+            filterpars->Pvowels[1].formants[0].freq = 20;
+            filterpars->Pvowels[1].formants[0].amp = 127;
+            filterpars->Pvowels[1].formants[0].q = 64;
+            filterpars->Pvowels[1].formants[1].freq = 100;
+            filterpars->Pvowels[1].formants[1].amp = 121;
+            filterpars->Pvowels[1].formants[1].q = 64;
+            break;
         }
-    };
-};
+        reinitfilter();
+    }
+    }
+}
 
 int
-DynamicFilter::getpar (int npar)
+DynamicFilter::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -396,6 +403,5 @@ DynamicFilter::getpar (int npar)
         break;
     default:
         return (0);
-    };
-
-};
+    }
+}

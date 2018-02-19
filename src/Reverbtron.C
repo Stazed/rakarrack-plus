@@ -19,17 +19,17 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Reverbtron.h"
 
-Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Reverbtron::Reverbtron(int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
-    nSAMPLE_RATE = (int)sample_rate;
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
+    nSAMPLE_RATE = (int) sample_rate;
     nfSAMPLE_RATE = sample_rate;
     fSAMPLE_RATE = sample_rate;
     //default values
@@ -53,25 +53,25 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     Pfade = 1;
     Pfb = 1;
     error = 0;
-    convlength = 10.0f;  //max reverb time
+    convlength = 10.0f; //max reverb time
 
     level = fb = feedback = levpanl = levpanr = 0.0f;
     roomsize = 1.0f;
     lpanning = rpanning = 0.0f;
     outvolume = 0.5f;
-    
+
     adjust(DS, sample_rate);
 
-    hrtf_size = nSAMPLE_RATE/2;
-    maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
-    time = (int *) malloc (sizeof (int) * 2000);
-    rndtime = (int *) malloc (sizeof (int) * 2000);
-    data = (float *) malloc (sizeof (float) * (1 + hrtf_size));
-    rnddata = (float *) malloc (sizeof (float) * 2000);
-    lxn = (float *) malloc (sizeof (float) * (1 + maxx_size));
-    hrtf =  (float *) malloc (sizeof (float) * (1 + hrtf_size));
-    imax = nSAMPLE_RATE/2;  // 1/2 second available
-    imdelay = (float *) malloc (sizeof (float) * imax);
+    hrtf_size = nSAMPLE_RATE / 2;
+    maxx_size = (int) (nfSAMPLE_RATE * convlength); //just to get the max memory allocated
+    time = (int *) malloc(sizeof (int) * 2000);
+    rndtime = (int *) malloc(sizeof (int) * 2000);
+    data = (float *) malloc(sizeof (float) * (1 + hrtf_size));
+    rnddata = (float *) malloc(sizeof (float) * 2000);
+    lxn = (float *) malloc(sizeof (float) * (1 + maxx_size));
+    hrtf = (float *) malloc(sizeof (float) * (1 + hrtf_size));
+    imax = nSAMPLE_RATE / 2; // 1/2 second available
+    imdelay = (float *) malloc(sizeof (float) * imax);
     imctr = 0;
     offset = 0;
     hoffset = 0;
@@ -80,19 +80,19 @@ Reverbtron::Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t int
     idelay = 1.0f;
     ffade = diffusion = hidamp = 0.0f;
     alpha_hidamp = 1.0f - hidamp;
-    decay = f_exp(-1.0f/(0.2f*nfSAMPLE_RATE));  //0.2 seconds
+    decay = f_exp(-1.0f / (0.2f * nfSAMPLE_RATE)); //0.2 seconds
 
     initialize();
     File = loaddefault();
 
-    U_Resample = new Resample(dq);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
+    U_Resample = new Resample(dq); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
     D_Resample = new Resample(uq);
 
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-Reverbtron::~Reverbtron ()
+Reverbtron::~Reverbtron()
 {
     clear_initialize();
 
@@ -106,40 +106,40 @@ Reverbtron::~Reverbtron ()
 
     delete U_Resample;
     delete D_Resample;
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-Reverbtron::cleanup ()
+Reverbtron::cleanup()
 {
-    memset(lxn,0,sizeof(float)*(maxx_size+1));
-    memset(hrtf,0,sizeof(float)*(hrtf_size+1));
-    
-    memset(imdelay,0,sizeof(float)*imax);
-    memset(rnddata,0,sizeof(float)* 2000);
-    
-    memset(templ,0,sizeof(float)*PERIOD);
-    memset(tempr,0,sizeof(float)*PERIOD);
-    
+    memset(lxn, 0, sizeof (float)*(maxx_size + 1));
+    memset(hrtf, 0, sizeof (float)*(hrtf_size + 1));
+
+    memset(imdelay, 0, sizeof (float)*imax);
+    memset(rnddata, 0, sizeof (float)* 2000);
+
+    memset(templ, 0, sizeof (float)*PERIOD);
+    memset(tempr, 0, sizeof (float)*PERIOD);
+
     feedback = 0.0f;
     oldl = 0.0f;
-    lpfl->cleanup ();
-    lpfr->cleanup ();
+    lpfl->cleanup();
+    lpfr->cleanup();
 }
 
 void
 Reverbtron::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         adjust(DS_state, fSAMPLE_RATE);
         clear_initialize();
         initialize();
-        setlpf (Plpf);
-        sethidamp (Phidamp);
+        setlpf(Plpf);
+        sethidamp(Phidamp);
     }
     else
     {
@@ -151,12 +151,12 @@ Reverbtron::lv2_update_params(uint32_t period)
 void
 Reverbtron::initialize()
 {
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
-    
+    templ = (float *) malloc(sizeof (float) * PERIOD);
+    tempr = (float *) malloc(sizeof (float) * PERIOD);
+
     interpbuf = new float[PERIOD];
-    lpfl =  new AnalogFilter (0, 800, 1, 0, nfSAMPLE_RATE, interpbuf);
-    lpfr =  new AnalogFilter (0, 800, 1, 0, nfSAMPLE_RATE, interpbuf);
+    lpfl = new AnalogFilter(0, 800, 1, 0, nfSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter(0, 800, 1, 0, nfSAMPLE_RATE, interpbuf);
     lpfl->setSR(nSAMPLE_RATE);
     lpfr->setSR(nSAMPLE_RATE);
 }
@@ -176,28 +176,31 @@ Reverbtron::clear_initialize()
  * Effect output
  */
 void
-Reverbtron::out (float * efxoutl, float * efxoutr)
+Reverbtron::out(float * efxoutl, float * efxoutr)
 {
-    int  i, j, xindex, hindex;
-    float l,lyn, hyn;
-    float ldiff,rdiff;
+    int i, j, xindex, hindex;
+    float l, lyn, hyn;
+    float ldiff, rdiff;
     int length = Llength;
     hlength = Pdiff;
     int doffset;
 
-    if(DS_state != 0) {
-        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
-        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
-        U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
+    if (DS_state != 0)
+    {
+        memcpy(templ, efxoutl, sizeof (float)*PERIOD);
+        memcpy(tempr, efxoutr, sizeof (float)*PERIOD);
+        U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
 
-    for (i = 0; i < nPERIOD; i++) {
+    for (i = 0; i < nPERIOD; i++)
+    {
 
-        l = 0.5f*(efxoutr[i] + efxoutl[i]);
-        oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
-        if(Prv) {
-            oldl = 0.5f*oldl - efxoutl[i];
+        l = 0.5f * (efxoutr[i] + efxoutl[i]);
+        oldl = l * hidamp + oldl * (alpha_hidamp); //apply damping while I'm in the loop
+        if (Prv)
+        {
+            oldl = 0.5f * oldl - efxoutl[i];
         }
 
         lxn[offset] = oldl;
@@ -206,28 +209,33 @@ Reverbtron::out (float * efxoutl, float * efxoutr)
         lyn = 0.0f;
         xindex = offset;
 
-        for (j =0; j<length; j++) {
+        for (j = 0; j < length; j++)
+        {
             xindex = offset + time[j];
-            if(xindex>=maxx_size) xindex -= maxx_size;
-            lyn += lxn[xindex] * data[j];		//this is all of the magic
+            if (xindex >= maxx_size) xindex -= maxx_size;
+            lyn += lxn[xindex] * data[j]; //this is all of the magic
         }
 
         hrtf[hoffset] = lyn;
 
-        if(Pdiff > 0) {
+        if (Pdiff > 0)
+        {
             //Convolve again with approximated hrtf
             hyn = 0.0f;
             hindex = hoffset;
 
-            for (j =0; j<hlength; j++) {
+            for (j = 0; j < hlength; j++)
+            {
                 hindex = hoffset + rndtime[j];
-                if(hindex>=hrtf_size) hindex -= hrtf_size;
-                hyn += hrtf[hindex] * rnddata[j];		//more magic
+                if (hindex >= hrtf_size) hindex -= hrtf_size;
+                hyn += hrtf[hindex] * rnddata[j]; //more magic
             }
-            lyn = hyn + (1.0f - diffusion)*lyn;
+            
+            lyn = hyn + (1.0f - diffusion) * lyn;
         }
 
-        if(Pes) { // just so I have the code to get started
+        if (Pes)
+        { // just so I have the code to get started
 
             ldiff = lyn;
             rdiff = imdelay[imctr];
@@ -237,101 +245,109 @@ Reverbtron::out (float * efxoutl, float * efxoutr)
 
             imdelay[imctr] = decay*ldiff;
             imctr--;
-            if (imctr<0) imctr = roomsize;
+            
+            if (imctr < 0) imctr = roomsize;
 
-            templ[i] = (lyn + ldiff ) * levpanl;
-            tempr[i] = (lyn + rdiff ) * levpanr;
+            templ[i] = (lyn + ldiff) * levpanl;
+            tempr[i] = (lyn + rdiff) * levpanr;
 
-            feedback = fb*rdiff*decay;
-
-        } else {
+            feedback = fb * rdiff*decay;
+        }
+        else
+        {
             feedback = fb * lyn;
             templ[i] = lyn * levpanl;
             tempr[i] = lyn * levpanr;
-
         }
 
         offset--;
-        if (offset<0) offset = maxx_size;
+        
+        if (offset < 0) offset = maxx_size;
 
         doffset = (offset + roomsize);
-        if (doffset>maxx_size) doffset -= maxx_size;
+        
+        if (doffset > maxx_size) doffset -= maxx_size;
 
         hoffset--;
-        if (hoffset<0) hoffset = hrtf_size;
+        
+        if (hoffset < 0) hoffset = hrtf_size;
 
         lxn[doffset] += feedback;
 
         xindex = offset + roomsize;
+    }
 
-    };
-
-    if(DS_state != 0) {
-        D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
-
-    } else {
-        memcpy(efxoutl, templ,sizeof(float)*PERIOD);
-        memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
+    if (DS_state != 0)
+    {
+        D_Resample->out(templ, tempr, efxoutl, efxoutr, nPERIOD, u_down);
+    }
+    else
+    {
+        memcpy(efxoutl, templ, sizeof (float)*PERIOD);
+        memcpy(efxoutr, tempr, sizeof (float)*PERIOD);
     }
 }
-
 
 /*
  * Parameter control
  */
 void
-Reverbtron::setvolume (int Pvolume)
+Reverbtron::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
+    outvolume = (float) Pvolume / 127.0f;
+    
     if (Pvolume == 0)
-        cleanup ();
-
-};
+        cleanup();
+}
 
 void
-Reverbtron::setpanning (int value)
+Reverbtron::setpanning(int value)
 {
     Ppanning = value;
-    rpanning = ((float)Ppanning) / 64.0f;
+    rpanning = ((float) Ppanning) / 64.0f;
     lpanning = 2.0f - rpanning;
     lpanning = 10.0f * powf(lpanning, 4);
     rpanning = 10.0f * powf(rpanning, 4);
-    lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
-    rpanning = 1.0f - 1.0f/(rpanning + 1.0f);
+    lpanning = 1.0f - 1.0f / (lpanning + 1.0f);
+    rpanning = 1.0f - 1.0f / (rpanning + 1.0f);
     lpanning *= 1.1f;
     rpanning *= 1.1f;
-    levpanl=level*lpanning;
-    levpanr=level*rpanning;
-};
+    levpanl = level*lpanning;
+    levpanr = level*rpanning;
+}
 
 //legacy
+
 int
 Reverbtron::setfile(int value)
 {
     RvbFile filedata;
-    
+
 #ifdef LV2_SUPPORT
     /* LV2 will only call setfile() directly with Puser set and the value will be always USERFILE.
        This single case occurs upon initialization before Puser is set because setpreset() is called
        by initializer. So we just ignore the initial call for LV2 since the value will be incorrect
        and immediately replaced by the default file set in the ttl */
-    if(value != USERFILE)
+    if (value != USERFILE)
     {
-        return(0);
+        return (0);
     }
 #endif // LV2_SUPPORT
 
-    if(!Puser) {
+    if (!Puser)
+    {
         Filenum = value;
-        memset(Filename,0, sizeof(Filename));
-        sprintf(Filename, "%s/%d.rvb",DATADIR,Filenum+1);//DATADIR comes from  config.h (autotools)
+        memset(Filename, 0, sizeof (Filename));
+        sprintf(Filename, "%s/%d.rvb", DATADIR, Filenum + 1); //DATADIR comes from  config.h (autotools)
     }
-//    printf("Filename %s\n",Filename);
+    //    printf("Filename %s\n",Filename);
     filedata = loadfile(Filename);
     applyfile(filedata);
-    if(error)
-    	return 0;
+    
+    if (error)
+        return 0;
+    
     return 1;
 
     /*
@@ -385,7 +401,7 @@ Reverbtron::setfile(int value)
     cleanup();
     convert_time();
     return(1);
-    */
+     */
 };
 
 RvbFile
@@ -401,83 +417,96 @@ Reverbtron::loadfile(char* filename)
     RvbFile f;
     error = 0;
 
-    if ((fs = fopen (filename, "r")) == NULL) {
+    if ((fs = fopen(filename, "r")) == NULL)
+    {
         f = loaddefault();
         error = 1;
-        return(f);
+        return (f);
     }
-    strcpy(f.Filename,filename);
-    memset(f.tdata, 0, sizeof(float)*2000);
-    memset(f.ftime, 0, sizeof(float)*2000);
+    
+    strcpy(f.Filename, filename);
+    memset(f.tdata, 0, sizeof (float)*2000);
+    memset(f.ftime, 0, sizeof (float)*2000);
 
-
-//Name
-    memset(wbuf,0, sizeof(wbuf));
-    if(fgets(wbuf,sizeof wbuf,fs) == NULL) {
+    //Name
+    memset(wbuf, 0, sizeof (wbuf));
+    
+    if (fgets(wbuf, sizeof wbuf, fs) == NULL)
+    {
         f = loaddefault();
         error = 1;
-        return(f);
+        return (f);
     }
 
-// Subsample Compresion Skip
-    memset(wbuf,0, sizeof(wbuf));
-    if(fgets(wbuf,sizeof wbuf,fs) == NULL) {
+    // Subsample Compresion Skip
+    memset(wbuf, 0, sizeof (wbuf));
+    
+    if (fgets(wbuf, sizeof wbuf, fs) == NULL)
+    {
         f = loaddefault();
         error = 1;
-        return(f);
+        return (f);
     }
 
-    sscanf(wbuf,"%f,%f\n",&compresion,&quality);
+    sscanf(wbuf, "%f,%f\n", &compresion, &quality);
 
-//Length
-    memset(wbuf,0,sizeof(wbuf));
-    if (fgets(wbuf,sizeof wbuf,fs) == NULL) {
+    //Length
+    memset(wbuf, 0, sizeof (wbuf));
+    
+    if (fgets(wbuf, sizeof wbuf, fs) == NULL)
+    {
         f = loaddefault();
         error = 1;
-        return(f);
+        return (f);
     }
+    
     sscanf(wbuf, "%d\n", &f.data_length);
-    if(f.data_length>2000) f.data_length = 2000;
-//Time Data
-    for(i=0; i<f.data_length; i++) {
-        memset(wbuf,0, sizeof(wbuf));
-        if(fgets(wbuf,sizeof wbuf,fs) == NULL) {
+    
+    if (f.data_length > 2000) f.data_length = 2000;
+    //Time Data
+    for (i = 0; i < f.data_length; i++)
+    {
+        memset(wbuf, 0, sizeof (wbuf));
+        
+        if (fgets(wbuf, sizeof wbuf, fs) == NULL)
+        {
             f = loaddefault();
             error = 1;
-            return(f);
+            return (f);
         }
-        sscanf(wbuf,"%f,%f\n",&f.ftime[i],&f.tdata[i]);
+        sscanf(wbuf, "%f,%f\n", &f.ftime[i], &f.tdata[i]);
     }
 
     fclose(fs);
 
     f.maxtime = 0.0f;
     f.maxdata = 0.0f;
-//    float averaget = 0.0f;
-//    float tempor = 0.0f;
-    for(i=0; i<f.data_length; i++) {
-        if(f.ftime[i] > f.maxtime) f.maxtime = f.ftime[i];
-        if(f.tdata[i] > f.maxdata) f.maxdata = f.tdata[i];  //used to normalize so feedback is more predictable
-//        if(i>0) {
-//            tempor = f.ftime[i] - f.ftime[i-1];       // f.ftime does not get altered here 
-//            if(tempor>averaget) averaget = tempor;    // averaget & tempor do not get used elsewhere - this has no effect
-//        }
+    //    float averaget = 0.0f;
+    //    float tempor = 0.0f;
+    for (i = 0; i < f.data_length; i++)
+    {
+        if (f.ftime[i] > f.maxtime) f.maxtime = f.ftime[i];
+        if (f.tdata[i] > f.maxdata) f.maxdata = f.tdata[i]; //used to normalize so feedback is more predictable
+        //        if(i>0) {
+        //            tempor = f.ftime[i] - f.ftime[i-1];       // f.ftime does not get altered here 
+        //            if(tempor>averaget) averaget = tempor;    // averaget & tempor do not get used elsewhere - this has no effect
+        //        }
     }
 
     return f;
-};
+}
 
 void
 Reverbtron::applyfile(RvbFile file)
 {
     File = file;
     convert_time();
-};
+}
 
 RvbFile Reverbtron::loaddefault()
 {
-	RvbFile f;
-	strcpy(f.Filename,"default");
+    RvbFile f;
+    strcpy(f.Filename, "default");
     f.data_length = Llength = 2;
     f.ftime[0] = 1.0f;
     f.ftime[1] = 1.25f;
@@ -498,132 +527,141 @@ void Reverbtron::convert_time()
     float incr = 0.0f;
     float findex;
     float tmpstretch = 1.0f;
-    float normal = 0.9999f/File.maxdata;
+    float normal = 0.9999f / File.maxdata;
 
-    memset(data, 0, sizeof(float)*(1 + hrtf_size));
-    memset(time, 0, sizeof(int)*2000);
-    memset(rndtime, 0, sizeof(int)*2000);
+    memset(data, 0, sizeof (float)*(1 + hrtf_size));
+    memset(time, 0, sizeof (int)*2000);
+    memset(rndtime, 0, sizeof (int)*2000);
 
-    if(Llength>=File.data_length) Llength = File.data_length;
-    if(Llength==0) Llength=400;
-    incr = ((float) Llength)/((float) File.data_length);
+    if (Llength >= File.data_length) Llength = File.data_length;
+    if (Llength == 0) Llength = 400;
+    
+    incr = ((float) Llength) / ((float) File.data_length);
 
-
-    if(fstretch>0.0) {
-        tmpstretch = 1.0f + fstretch * (convlength/File.maxtime);
-    } else {
-        tmpstretch = 1.0f + 0.95f*fstretch;
+    if (fstretch > 0.0)
+    {
+        tmpstretch = 1.0f + fstretch * (convlength / File.maxtime);
     }
-
+    else
+    {
+        tmpstretch = 1.0f + 0.95f * fstretch;
+    }
 
     skip = 0.0f;
     index = 0;
 
-    if(File.data_length>Llength) {
-        for(i=0; i<File.data_length; i++) {
+    if (File.data_length > Llength)
+    {
+        for (i = 0; i < File.data_length; i++)
+        {
             skip += incr;
-            findex = (float)index;
-            if( findex<skip) {
-                if(index<Llength) {
-                    if( (tmpstretch*(idelay + File.ftime[i] )) > 9.9f ) {
-                        File.ftime[i] = 0.0f;//TODO: why are we destroying the file data?
+            findex = (float) index;
+            if (findex < skip)
+            {
+                if (index < Llength)
+                {
+                    if ((tmpstretch * (idelay + File.ftime[i])) > 9.9f)
+                    {
+                        File.ftime[i] = 0.0f; //TODO: why are we destroying the file data?
                         data[i] = 0.0f;
                     }
-                    time[index]=lrintf(tmpstretch*(idelay + File.ftime[i])*nfSAMPLE_RATE);  //Add initial delay to all the samples
-                    data[index]=normal*File.tdata[i];
+                    time[index] = lrintf(tmpstretch * (idelay + File.ftime[i]) * nfSAMPLE_RATE); //Add initial delay to all the samples
+                    data[index] = normal * File.tdata[i];
                     index++;
                 }
             }
         };
         Llength = index;
     } //endif
-    else {
-        for(i=0; i<File.data_length; i++) {
-
-            if( (idelay + File.ftime[i] ) > 5.9f ) File.ftime[i] = 5.9f;
-            time[i]=lrintf(tmpstretch*(idelay + File.ftime[i])*nfSAMPLE_RATE);  //Add initial delay to all the samples
-            data[i]=normal*File.tdata[i];
-
-        };
+    else
+    {
+        for (i = 0; i < File.data_length; i++)
+        {
+            if ((idelay + File.ftime[i]) > 5.9f) File.ftime[i] = 5.9f;
+            
+            time[i] = lrintf(tmpstretch * (idelay + File.ftime[i]) * nfSAMPLE_RATE); //Add initial delay to all the samples
+            data[i] = normal * File.tdata[i];
+        }
+        
         Llength = i;
     }
 
-//generate an approximated randomized hrtf for diffusing reflections:
+    //generate an approximated randomized hrtf for diffusing reflections:
     int tmptime = 0;
     int hrtf_tmp = Pdiff;
-    if(hrtf_tmp>File.data_length) hrtf_tmp = File.data_length -1;
-    if(hlength>File.data_length) hlength =  File.data_length -1;
-    for (i =0; i<hrtf_tmp; i++) {
+    
+    if (hrtf_tmp > File.data_length) hrtf_tmp = File.data_length - 1;
+    
+    if (hlength > File.data_length) hlength = File.data_length - 1;
+    
+    for (i = 0; i < hrtf_tmp; i++)
+    {
         tmptime = (int) (RND * hrtf_size);
-        rndtime[i] = tmptime;  //randomly jumble the head of the transfer function
-        rnddata[i] = 3.0f*(0.5f - RND)*data[tmptime];
+        rndtime[i] = tmptime; //randomly jumble the head of the transfer function
+        rnddata[i] = 3.0f * (0.5f - RND) * data[tmptime];
     }
 
-    if(Pfade > 0) {
+    if (Pfade > 0)
+    {
         count = lrintf(ffade * ((float) index));
         tmp = 0.0f;
-        for (i=0; i<count; i++) { //head fader
+        
+        for (i = 0; i < count; i++)
+        { //head fader
 
-            tmp = ((float) i)/((float) count);
+            tmp = ((float) i) / ((float) count);
             data[i] *= tmp;
             //fade the head here
         }
     }
 
-//guess at room size
-    roomsize = time[0] + (time[1] - time[0])/2;  //to help stagger left/right reflection times
-    if(roomsize>imax) roomsize = imax;
+    //guess at room size
+    roomsize = time[0] + (time[1] - time[0]) / 2; //to help stagger left/right reflection times
+    
+    if (roomsize > imax) roomsize = imax;
+    
     setfb(Pfb);
 
     cleanup();
-};
-
+}
 
 void
-Reverbtron::setlpf (int value)
+Reverbtron::setlpf(int value)
 {
     Plpf = value;
-    float fr = (float)Plpf;
-    lpfl->setfreq (fr);
-    lpfr->setfreq (fr);
-
-};
-
-
+    float fr = (float) Plpf;
+    lpfl->setfreq(fr);
+    lpfr->setfreq(fr);
+}
 
 void
-Reverbtron::sethidamp (int Phidamp)
+Reverbtron::sethidamp(int Phidamp)
 {
     this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float)Phidamp / 127.1f;
+    hidamp = 1.0f - (float) Phidamp / 127.1f;
     alpha_hidamp = 1.0f - hidamp;
-};
+}
 
 void
 Reverbtron::setfb(int value)
 {
-
-    if(Pfb<=0)
-        fb = (float)value/64.0f * 0.3f;
+    if (Pfb <= 0)
+        fb = (float) value / 64.0f * 0.3f;
     else
-        fb = (float)value/64.0f * 0.15f;
+        fb = (float) value / 64.0f * 0.15f;
 
-    fb*=((1627.0f-(float)Pdiff-(float)Llength)/1627.0f);
-    fb*=(1.0f-((float)Plevel/127.0f));
-    fb*=(1.0f-diffusion)*.5f;
-
+    fb *= ((1627.0f - (float) Pdiff - (float) Llength) / 1627.0f);
+    fb *= (1.0f - ((float) Plevel / 127.0f));
+    fb *= (1.0f - diffusion)*.5f;
 }
-
 
 void
 Reverbtron::adjust(int DS, double fSAMPLE_RATE)
 {
+    DS_state = DS;
 
-    DS_state=DS;
-
-
-    switch(DS) {
-
+    switch (DS)
+    {
     case 0:
         nRATIO = 1;
         nSAMPLE_RATE = fSAMPLE_RATE;
@@ -631,71 +669,68 @@ Reverbtron::adjust(int DS, double fSAMPLE_RATE)
         break;
 
     case 1:
-        nRATIO = 96000.0/fSAMPLE_RATE;
+        nRATIO = 96000.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 96000;
         nfSAMPLE_RATE = 96000.0f;
         break;
 
 
     case 2:
-        nRATIO = 48000.0/fSAMPLE_RATE;
+        nRATIO = 48000.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 48000;
         nfSAMPLE_RATE = 48000.0f;
         break;
 
     case 3:
-        nRATIO = 44100.0/fSAMPLE_RATE;
+        nRATIO = 44100.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 44100;
         nfSAMPLE_RATE = 44100.0f;
         break;
 
     case 4:
-        nRATIO = 32000.0/fSAMPLE_RATE;
+        nRATIO = 32000.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 32000;
         nfSAMPLE_RATE = 32000.0f;
         break;
 
     case 5:
-        nRATIO = 22050.0/fSAMPLE_RATE;
+        nRATIO = 22050.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 22050;
         nfSAMPLE_RATE = 22050.0f;
         break;
 
     case 6:
-        nRATIO = 16000.0/fSAMPLE_RATE;
+        nRATIO = 16000.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 16000;
         nfSAMPLE_RATE = 16000.0f;
         break;
 
     case 7:
-        nRATIO = 12000.0/fSAMPLE_RATE;
+        nRATIO = 12000.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 12000;
         nfSAMPLE_RATE = 12000.0f;
         break;
 
     case 8:
-        nRATIO = 8000.0/fSAMPLE_RATE;
+        nRATIO = 8000.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 8000;
         nfSAMPLE_RATE = 8000.0f;
         break;
 
     case 9:
-        nRATIO = 4000.0/fSAMPLE_RATE;
+        nRATIO = 4000.0 / fSAMPLE_RATE;
         nSAMPLE_RATE = 4000;
         nfSAMPLE_RATE = 4000.0f;
         break;
     }
-    
-    nPERIOD = lrintf((float)PERIOD*nRATIO);
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
+
+    nPERIOD = lrintf((float) PERIOD * nRATIO);
+    u_up = (double) nPERIOD / (double) PERIOD;
+    u_down = (double) PERIOD / (double) nPERIOD;
 }
 
-
-
-
 void
-Reverbtron::setpreset (int npreset)
+Reverbtron::setpreset(int npreset)
 {
     const int PRESET_SIZE = 16;
     const int NUM_PRESETS = 9;
@@ -722,36 +757,40 @@ Reverbtron::setpreset (int npreset)
 
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(40,npreset-NUM_PRESETS+1, pdata, Filename);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(40, npreset - NUM_PRESETS + 1, pdata, Filename);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
     Ppreset = npreset;
-};
-
+}
 
 void
-Reverbtron::changepar (int npar, int value)
+Reverbtron::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        Pfade=value;
-        ffade = ((float) value)/127.0f;
+        Pfade = value;
+        ffade = ((float) value) / 127.0f;
         convert_time();
         break;
     case 2:
-        Psafe=value;
+        Psafe = value;
         break;
     case 3:
         Llength = Plength = value;
-        if((Psafe) && (Llength>400)) Llength = 400;
+        if ((Psafe) && (Llength > 400)) Llength = 400;
         convert_time();
         break;
     case 4:
@@ -759,28 +798,28 @@ Reverbtron::changepar (int npar, int value)
         break;
     case 5:
         Pidelay = value;
-        idelay = ((float) value)/1000.0f;
+        idelay = ((float) value) / 1000.0f;
         convert_time();
         break;
     case 6:
-        sethidamp (value);
+        sethidamp(value);
         break;
     case 7:
         Plevel = value;
-        level =  2.0f * dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
-        levpanl=level*lpanning;
-        levpanr=level*rpanning;
+        level = 2.0f * dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
+        levpanl = level*lpanning;
+        levpanr = level*rpanning;
         break;
     case 8:
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
 #else
-        if(!setfile(value))error_num=2;
+        if (!setfile(value))error_num = 2;
 #endif 
         break;
     case 9:
         Pstretch = value;
-        fstretch = ((float) value)/64.0f;
+        fstretch = ((float) value) / 64.0f;
         convert_time();
         break;
     case 10:
@@ -788,7 +827,7 @@ Reverbtron::changepar (int npar, int value)
         setfb(value);
         break;
     case 11:
-        setpanning (value);
+        setpanning(value);
         break;
     case 12:
         Pes = value;
@@ -797,21 +836,21 @@ Reverbtron::changepar (int npar, int value)
         Prv = value;
         break;
     case 14:
-        setlpf (value);
+        setlpf(value);
         break;
     case 15:
-        Pdiff=value;
-        diffusion = ((float) value)/127.0f;
+        Pdiff = value;
+        diffusion = ((float) value) / 127.0f;
         convert_time();
         break;
-
-    };
-};
+    }
+}
 
 int
-Reverbtron::getpar (int npar)
+Reverbtron::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -819,10 +858,10 @@ Reverbtron::getpar (int npar)
         return (Pfade);
         break;
     case 2:
-        return(Psafe);
+        return (Psafe);
         break;
     case 3:
-        return(Plength);
+        return (Plength);
         break;
     case 8:
         return (Filenum);
@@ -834,34 +873,32 @@ Reverbtron::getpar (int npar)
         return (Phidamp);
         break;
     case 7:
-        return(Plevel);
+        return (Plevel);
         break;
     case 4:
-        return(Puser);
+        return (Puser);
         break;
     case 9:
-        return(Pstretch);
+        return (Pstretch);
         break;
     case 10:
-        return(Pfb);
+        return (Pfb);
         break;
     case 11:
-        return(Ppanning);
+        return (Ppanning);
         break;
     case 12:
-        return(Pes);
+        return (Pes);
         break;
     case 13:
-        return(Prv);
+        return (Prv);
         break;
     case 14:
-        return(Plpf);
+        return (Plpf);
         break;
     case 15:
-        return(Pdiff);
+        return (Pdiff);
         break;
-
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}

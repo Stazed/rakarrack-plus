@@ -20,7 +20,7 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,14 +28,14 @@
 #include "Distorsion.h"
 #include "FPreset.h"
 
-Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize)
+Distorsion::Distorsion(int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;
     fSAMPLE_RATE = samplerate;
     WAVE_RES = wave_res;
     WAVE_UPQ = wave_upq;
     WAVE_DNQ = wave_dnq;
-    
+
     initialize();
 
     //default values
@@ -60,36 +60,35 @@ Distorsion::Distorsion (int wave_res, int wave_upq, int wave_dnq, double sampler
     panning = lrcross = 0.0f;
     outvolume = 0.5f;
 
-    setpreset (0,Ppreset);
-    cleanup ();
-};
+    setpreset(0, Ppreset);
+    cleanup();
+}
 
-Distorsion::~Distorsion ()
+Distorsion::~Distorsion()
 {
     clear_initialize();
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-Distorsion::cleanup ()
+Distorsion::cleanup()
 {
-    lpfl->cleanup ();
-    hpfl->cleanup ();
-    lpfr->cleanup ();
-    hpfr->cleanup ();
-    blockDCr->cleanup ();
-    blockDCl->cleanup ();
+    lpfl->cleanup();
+    hpfl->cleanup();
+    lpfr->cleanup();
+    hpfr->cleanup();
+    blockDCr->cleanup();
+    blockDCl->cleanup();
     DCl->cleanup();
     DCr->cleanup();
-
-};
+}
 
 void
-Distorsion::lv2_update_params (uint32_t period)
+Distorsion::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
@@ -106,42 +105,44 @@ Distorsion::lv2_update_params (uint32_t period)
  */
 
 void
-Distorsion::applyfilters (float * efxoutl, float * efxoutr)
+Distorsion::applyfilters(float * efxoutl, float * efxoutr)
 {
-    lpfl->filterout (efxoutl, PERIOD);
-    hpfl->filterout (efxoutl, PERIOD);
+    lpfl->filterout(efxoutl, PERIOD);
+    hpfl->filterout(efxoutl, PERIOD);
 
-    if (Pstereo != 0) {
+    if (Pstereo != 0)
+    {
         //stereo
-        lpfr->filterout (efxoutr, PERIOD);
-        hpfr->filterout (efxoutr, PERIOD);
+        lpfr->filterout(efxoutr, PERIOD);
+        hpfr->filterout(efxoutr, PERIOD);
     }
 }
 
-void 
-Distorsion::initialize ()
+void
+Distorsion::initialize()
 {
-    octoutl = (float *) malloc (sizeof (float) * PERIOD);
-    octoutr = (float *) malloc (sizeof (float) * PERIOD);
+    octoutl = (float *) malloc(sizeof (float) * PERIOD);
+    octoutr = (float *) malloc(sizeof (float) * PERIOD);
     unsigned int i;
-    for(i=0;i<PERIOD;i++)
+    
+    for (i = 0; i < PERIOD; i++)
     {
-    	octoutl[i] = octoutr[i] = 0;
+        octoutl[i] = octoutr[i] = 0;
     }
 
     interpbuf = new float[PERIOD];
-    lpfl = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
-    lpfr = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
-    hpfl = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
-    hpfr = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
-    blockDCl = new AnalogFilter (2, 440.0f, 1, 0, fSAMPLE_RATE, interpbuf);
-    blockDCr = new AnalogFilter (2, 440.0f, 1, 0, fSAMPLE_RATE, interpbuf);
-    blockDCl->setfreq (75.0f);
-    blockDCr->setfreq (75.0f);
-    DCl = new AnalogFilter (3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
-    DCr = new AnalogFilter (3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
-    DCl->setfreq (30.0f);
-    DCr->setfreq (30.0f);
+    lpfl = new AnalogFilter(2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter(2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter(3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter(3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCl = new AnalogFilter(2, 440.0f, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCr = new AnalogFilter(2, 440.0f, 1, 0, fSAMPLE_RATE, interpbuf);
+    blockDCl->setfreq(75.0f);
+    blockDCr->setfreq(75.0f);
+    DCl = new AnalogFilter(3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
+    DCr = new AnalogFilter(3, 30, 1, 0, fSAMPLE_RATE, interpbuf);
+    DCl->setfreq(30.0f);
+    DCr->setfreq(30.0f);
 
     dwshapel = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
     dwshaper = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
@@ -169,81 +170,88 @@ Distorsion::clear_initialize()
  * Effect output
  */
 void
-Distorsion::out (float * efxoutl, float * efxoutr)
+Distorsion::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, lout, rout;
 
-    float inputvol = powf (5.0f, ((float)Pdrive - 32.0f) / 127.0f);
+    float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
+    
     if (Pnegate != 0)
         inputvol *= -1.0f;
 
-    if (Pstereo != 0) {
+    if (Pstereo != 0)
+    {
         //Stereo
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             efxoutl[i] = efxoutl[i] * inputvol * 2.0f;
             efxoutr[i] = efxoutr[i] * inputvol * 2.0f;
-        };
-    } else {
-        for (i = 0; i < PERIOD; i++) {
-            efxoutl[i] =
-                (efxoutl[i]  +  efxoutr[i] ) * inputvol;
-        };
-    };
+        }
+    }
+    else
+    {
+        for (i = 0; i < PERIOD; i++)
+        {
+            efxoutl[i] = (efxoutl[i] + efxoutr[i]) * inputvol;
+        }
+    }
 
     if (Pprefiltering != 0)
-        applyfilters (efxoutl, efxoutr);
+        applyfilters(efxoutl, efxoutr);
 
     //no optimised, yet (no look table)
 
-
-    dwshapel->waveshapesmps (PERIOD, efxoutl, Ptype, Pdrive, 1);
+    dwshapel->waveshapesmps(PERIOD, efxoutl, Ptype, Pdrive, 1);
+    
     if (Pstereo != 0)
-        dwshaper->waveshapesmps (PERIOD, efxoutr, Ptype, Pdrive, 1);
+        dwshaper->waveshapesmps(PERIOD, efxoutr, Ptype, Pdrive, 1);
 
     if (Pprefiltering == 0)
-        applyfilters (efxoutl, efxoutr);
+        applyfilters(efxoutl, efxoutr);
 
-    if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
+    if (Pstereo == 0) memcpy(efxoutr, efxoutl, PERIOD * sizeof (float));
 
-    if (octmix > 0.01f) {
-        for (i = 0; i < PERIOD; i++) {
+    if (octmix > 0.01f)
+    {
+        for (i = 0; i < PERIOD; i++)
+        {
             lout = efxoutl[i];
             rout = efxoutr[i];
 
-
-            if ( (octave_memoryl < 0.0f) && (lout > 0.0f) ) togglel *= -1.0f;
+            if ((octave_memoryl < 0.0f) && (lout > 0.0f)) togglel *= -1.0f;
 
             octave_memoryl = lout;
 
-            if ( (octave_memoryr < 0.0f) && (rout > 0.0f) ) toggler *= -1.0f;
+            if ((octave_memoryr < 0.0f) && (rout > 0.0f)) toggler *= -1.0f;
 
             octave_memoryr = rout;
 
-            octoutl[i] = lout *  togglel;
-            octoutr[i] = rout *  toggler;
+            octoutl[i] = lout * togglel;
+            octoutr[i] = rout * toggler;
         }
 
-        blockDCr->filterout (octoutr,PERIOD);
-        blockDCl->filterout (octoutl,PERIOD);
+        blockDCr->filterout(octoutr, PERIOD);
+        blockDCl->filterout(octoutl, PERIOD);
     }
 
+    float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
 
-
-    float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
-
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         lout = efxoutl[i];
         rout = efxoutr[i];
-
 
         l = lout * (1.0f - lrcross) + rout * lrcross;
         r = rout * (1.0f - lrcross) + lout * lrcross;
 
-        if (octmix > 0.01f) {
+        if (octmix > 0.01f)
+        {
             lout = l * (1.0f - octmix) + octoutl[i] * octmix;
             rout = r * (1.0f - octmix) + octoutr[i] * octmix;
-        } else {
+        }
+        else
+        {
             lout = l;
             rout = r;
         }
@@ -252,72 +260,69 @@ Distorsion::out (float * efxoutl, float * efxoutr)
         //efxoutr[i] = rout * 2.0f * level * (1.0f -panning);
         efxoutl[i] = lout * 2.0f * level * (1.0f - panning);
         efxoutr[i] = rout * 2.0f * level * panning;
+    }
 
-    };
-
-    DCr->filterout (efxoutr,PERIOD);
-    DCl->filterout (efxoutl,PERIOD);
-};
-
+    DCr->filterout(efxoutr, PERIOD);
+    DCl->filterout(efxoutl, PERIOD);
+}
 
 /*
  * Parameter control
  */
 void
-Distorsion::setvolume (int Pvolume)
+Distorsion::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
 
-    outvolume = (float)Pvolume / 127.0f;
+    outvolume = (float) Pvolume / 127.0f;
+    
     if (Pvolume == 0)
-        cleanup ();
-
-};
+        cleanup();
+}
 
 void
-Distorsion::setpanning (int Ppanning)
+Distorsion::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    panning = ((float)Ppanning + 0.5f) / 127.0f;
-};
-
+    panning = ((float) Ppanning + 0.5f) / 127.0f;
+}
 
 void
-Distorsion::setlrcross (int Plrcross)
+Distorsion::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
-    lrcross = (float)Plrcross / 127.0f * 1.0f;
-};
+    lrcross = (float) Plrcross / 127.0f * 1.0f;
+}
 
 void
-Distorsion::setlpf (int value)
+Distorsion::setlpf(int value)
 {
     Plpf = value;
-    float fr = (float)Plpf;
-    lpfl->setfreq (fr);
-    lpfr->setfreq (fr);
-};
+    float fr = (float) Plpf;
+    lpfl->setfreq(fr);
+    lpfr->setfreq(fr);
+}
 
 void
-Distorsion::sethpf (int value)
+Distorsion::sethpf(int value)
 {
     Phpf = value;
-    float fr = (float)Phpf;
+    float fr = (float) Phpf;
 
-    hpfl->setfreq (fr);
-    hpfr->setfreq (fr);
+    hpfl->setfreq(fr);
+    hpfr->setfreq(fr);
     //Prefiltering of 51 is approx 630 Hz. 50 - 60 generally good for OD pedal.
-};
+}
 
 void
-Distorsion::setoctave (int Poctave)
+Distorsion::setoctave(int Poctave)
 {
     this->Poctave = Poctave;
     octmix = (float) (Poctave) / 127.0f;
-};
+}
 
 void
-Distorsion::setpreset (int dgui, int npreset)
+Distorsion::setpreset(int dgui, int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 6;
@@ -326,7 +331,7 @@ Distorsion::setpreset (int dgui, int npreset)
         //Overdrive 1
         {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0, 0, 0},
         //Overdrive 2
-        {85, 64, 35, 29, 45, 1, 0, 25040, 21, 0, 0, 0 , 0},
+        {85, 64, 35, 29, 45, 1, 0, 25040, 21, 0, 0, 0, 0},
         //Distorsion 1
         {0, 64, 0, 87, 14, 6, 0, 3134, 157, 0, 1, 0, 0},
         //Distorsion 2
@@ -334,44 +339,47 @@ Distorsion::setpreset (int dgui, int npreset)
         //Distorsion 3
         {0, 64, 127, 127, 12, 13, 0, 5078, 56, 0, 1, 0, 0},
         //Guitar Amp
-        {84, 64, 35, 63, 50, 2, 0, 824, 21, 0, 0, 0 , 0}
+        {84, 64, 35, 63, 50, 2, 0, 824, 21, 0, 0, 0, 0}
     };
 
 
-    if((dgui==0) && (npreset>5)) {
-        Fpre->ReadPreset(2,npreset-5,pdata);
+    if ((dgui == 0) && (npreset > 5))
+    {
+        Fpre->ReadPreset(2, npreset - 5, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else if((dgui==1) && (npreset>1)) {
-        Fpre->ReadPreset(3,npreset-1,pdata);
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else if ((dgui == 1) && (npreset > 1))
+    {
+        Fpre->ReadPreset(3, npreset - 1, pdata);
+        
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, pdata[n]);
+    }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-    cleanup ();
-
-
-
-
-
-};
-
+    cleanup();
+}
 
 void
-Distorsion::changepar (int npar, int value)
+Distorsion::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
-        setlrcross (value);
+        setlrcross(value);
         break;
     case 3:
         Pdrive = value;
@@ -388,10 +396,10 @@ Distorsion::changepar (int npar, int value)
         Pnegate = value;
         break;
     case 7:
-        setlpf (value);
+        setlpf(value);
         break;
     case 8:
-        sethpf (value);
+        sethpf(value);
         break;
     case 9:
         if (value > 1)
@@ -404,15 +412,16 @@ Distorsion::changepar (int npar, int value)
     case 11:
         break;
     case 12:
-        setoctave (value);
+        setoctave(value);
         break;
-    };
-};
+    }
+}
 
 int
-Distorsion::getpar (int npar)
+Distorsion::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -452,9 +461,9 @@ Distorsion::getpar (int npar)
     case 12:
         return (Poctave);
         break;
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 
 
 

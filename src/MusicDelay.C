@@ -20,16 +20,16 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "MusicDelay.h"
 
-MusicDelay::MusicDelay (double sample_rate, uint32_t intermediate_bufsize)
+MusicDelay::MusicDelay(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
+    PERIOD = intermediate_bufsize; // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
     fSAMPLE_RATE = sample_rate;
 
     //default values
@@ -55,40 +55,42 @@ MusicDelay::MusicDelay (double sample_rate, uint32_t intermediate_bufsize)
     ldelay2 = new float[maxx_delay];
     rdelay2 = new float[maxx_delay];
 
-    dl1 = maxx_delay-1;
-    dl2 = maxx_delay-1;
-    dr1 = maxx_delay-1;
-    dr2 = maxx_delay-1;
-
-
+    dl1 = maxx_delay - 1;
+    dl2 = maxx_delay - 1;
+    dr1 = maxx_delay - 1;
+    dr2 = maxx_delay - 1;
 
     lrdelay = 0;
 
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-MusicDelay::~MusicDelay ()
+MusicDelay::~MusicDelay()
 {
     delete[] ldelay1;
     delete[] rdelay1;
     delete[] ldelay2;
     delete[] rdelay2;
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-MusicDelay::cleanup ()
+MusicDelay::cleanup()
 {
     int i;
+    
     for (i = 0; i < dl1; i++)
         ldelay1[i] = 0.0;
+    
     for (i = 0; i < dr1; i++)
         rdelay1[i] = 0.0;
+    
     for (i = 0; i < dl2; i++)
         ldelay2[i] = 0.0;
+    
     for (i = 0; i < dr2; i++)
         rdelay2[i] = 0.0;
 
@@ -96,10 +98,10 @@ MusicDelay::cleanup ()
     oldr1 = 0.0;
     oldl2 = 0.0;
     oldr2 = 0.0;
-};
+}
 
 void
-MusicDelay::lv2_update_params (uint32_t period)
+MusicDelay::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
@@ -108,55 +110,63 @@ MusicDelay::lv2_update_params (uint32_t period)
  * Initialize the delays
  */
 void
-MusicDelay::initdelays ()
+MusicDelay::initdelays()
 {
     int i;
     kl1 = 0;
     kr1 = 0;
 
-    if (delay1 >= maxx_delay) delay1=maxx_delay-1;
-    if (delay2 >= maxx_delay) delay2=maxx_delay-1;
+    if (delay1 >= maxx_delay) delay1 = maxx_delay - 1;
+    if (delay2 >= maxx_delay) delay2 = maxx_delay - 1;
 
     dl1 = delay1;
+    
     if (dl1 < 1)
         dl1 = 1;
+    
     dr1 = delay1;
+    
     if (dr1 < 1)
         dr1 = 1;
+    
     kl2 = 0;
     kr2 = 0;
     dl2 = delay2 + lrdelay;
+    
     if (dl2 < 1)
         dl2 = 1;
+    
     dr2 = delay2 + lrdelay;
+    
     if (dr2 < 1)
         dr2 = 1;
 
     for (i = dl1; i < maxx_delay; i++)
         ldelay1[i] = 0.0;
+    
     for (i = dl2; i < maxx_delay; i++)
         ldelay2[i] = 0.0;
 
     for (i = dr1; i < maxx_delay; i++)
         rdelay1[i] = 0.0;
+    
     for (i = dr2; i < maxx_delay; i++)
         rdelay2[i] = 0.0;
 
-
-
-    cleanup ();
-};
+    cleanup();
+}
 
 /*
  * Effect output
  */
 void
-MusicDelay::out (float * efxoutl, float * efxoutr)
+MusicDelay::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l1, r1, ldl1, rdl1, l2, r2, ldl2, rdl2;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         ldl1 = ldelay1[kl1];
         rdl1 = rdelay1[kr1];
         l1 = ldl1 * (1.0f - lrcross) + rdl1 * lrcross;
@@ -180,7 +190,6 @@ MusicDelay::out (float * efxoutl, float * efxoutr)
         efxoutl[i] = (ldl1 + ldl2) * 2.0f;
         efxoutr[i] = (rdl1 + rdl2) * 2.0f;
 
-
         //LowPass Filter
         ldelay1[kl1] = ldl1 = ldl1 * hidamp + oldl1 * (1.0f - hidamp);
         rdelay1[kr1] = rdl1 = rdl1 * hidamp + oldr1 * (1.0f - hidamp);
@@ -194,34 +203,33 @@ MusicDelay::out (float * efxoutl, float * efxoutr)
 
         if (++kl1 >= dl1)
             kl1 = 0;
+        
         if (++kr1 >= dr1)
             kr1 = 0;
 
         if (++kl2 >= dl2)
             kl2 = 0;
+        
         if (++kr2 >= dr2)
             kr2 = 0;
-
     }
 }
-
 
 /*
  * Parameter control
  */
 void
-MusicDelay::setvolume (int Pvolume)
+MusicDelay::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
     outvolume = (float) Pvolume / 127.0f;
-
-};
+}
 
 void
-MusicDelay::setpanning (int num, int Ppanning)
+MusicDelay::setpanning(int num, int Ppanning)
 {
-
-    switch (num) {
+    switch (num)
+    {
     case 1:
         this->Ppanning1 = Ppanning;
         panning1 = ((float) Ppanning1 + 0.5f) / 127.0f;
@@ -231,16 +239,16 @@ MusicDelay::setpanning (int num, int Ppanning)
         panning2 = ((float) Ppanning2 + 0.5f) / 127.0f;
         break;
     }
-
-};
+}
 
 void
-MusicDelay::setdelay (int num, int Pdelay)
+MusicDelay::setdelay(int num, int Pdelay)
 {
-
     float ntem = 60.0f / (float) Ptempo;
     float coef;
-    switch (num) {
+    
+    switch (num)
+    {
     case 1:
         this->Pdelay1 = Pdelay;
         break;
@@ -251,48 +259,46 @@ MusicDelay::setdelay (int num, int Pdelay)
         this->Plrdelay = Pdelay;
     }
 
-    delay1 = lrintf ((ntem / (float)Pdelay1) * fSAMPLE_RATE);
+    delay1 = lrintf((ntem / (float) Pdelay1) * fSAMPLE_RATE);
 
     if (Plrdelay != 0)
-        coef = ntem / (float)Plrdelay;
+        coef = ntem / (float) Plrdelay;
     else
         coef = 0;
 
-    delay2 = lrintf ((coef + (ntem / (float)Pdelay2)) * fSAMPLE_RATE);
+    delay2 = lrintf((coef + (ntem / (float) Pdelay2)) * fSAMPLE_RATE);
 
-
-    initdelays ();
-
-};
+    initdelays();
+}
 
 void
-MusicDelay::setgain (int num, int PGain)
+MusicDelay::setgain(int num, int PGain)
 {
-
-    switch (num) {
+    switch (num)
+    {
     case 1:
         this->Pgain1 = PGain;
-        gain1 = (float)Pgain1 / 127.0f;
+        gain1 = (float) Pgain1 / 127.0f;
         break;
     case 2:
         this->Pgain2 = PGain;
-        gain2 = (float)Pgain2 / 127.0f;
+        gain2 = (float) Pgain2 / 127.0f;
         break;
     }
-
-};
+}
 
 void
-MusicDelay::setlrcross (int Plrcross)
+MusicDelay::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
     lrcross = (float) Plrcross / 127.0f * 1.0f;
-};
+}
 
 void
-MusicDelay::setfb (int num, int Pfb)
+MusicDelay::setfb(int num, int Pfb)
 {
-    switch (num) {
+    switch (num)
+    {
     case 1:
         this->Pfb1 = Pfb;
         fb1 = (float) Pfb1 / 127.0f;
@@ -302,40 +308,38 @@ MusicDelay::setfb (int num, int Pfb)
         fb2 = (float) Pfb2 / 127.0f;
         break;
     }
-};
+}
 
 void
-MusicDelay::sethidamp (int Phidamp)
+MusicDelay::sethidamp(int Phidamp)
 {
     this->Phidamp = Phidamp;
     hidamp = 1.0f - (float) Phidamp / 127.0f;
-};
+}
 
 void
-MusicDelay::settempo (int Ptempo)
+MusicDelay::settempo(int Ptempo)
 {
-
     float coef = 0.0;
 
     this->Ptempo = Ptempo;
     float ntem = 60.0f / (float) Ptempo;
 
 
-    delay1 = lrintf ((ntem / (float)Pdelay1) * fSAMPLE_RATE);
+    delay1 = lrintf((ntem / (float) Pdelay1) * fSAMPLE_RATE);
+    
     if (Plrdelay != 0)
-        coef = ntem / (float)Plrdelay;
+        coef = ntem / (float) Plrdelay;
     else
         coef = 0;
-    delay2 = lrintf ((coef + (ntem / (float)Pdelay2)) * fSAMPLE_RATE);
+    
+    delay2 = lrintf((coef + (ntem / (float) Pdelay2)) * fSAMPLE_RATE);
 
-    initdelays ();
-
-
-
-};
+    initdelays();
+}
 
 void
-MusicDelay::setpreset (int npreset)
+MusicDelay::setpreset(int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 2;
@@ -347,71 +351,74 @@ MusicDelay::setpreset (int npreset)
         {67, 0, 3, 7, 0, 59, 0, 127, 6, 69, 60, 127, 127}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-
-        Fpre->ReadPreset(15,npreset-NUM_PRESETS+1, pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(15, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
 
     Ppreset = (int) npreset;
-};
-
+}
 
 void
-MusicDelay::changepar (int npar, int value)
+MusicDelay::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (1, value);
+        setpanning(1, value);
         break;
     case 2:
-        setdelay (1, value);
+        setdelay(1, value);
         break;
     case 3:
-        setdelay (3, value);
+        setdelay(3, value);
         break;
     case 4:
-        setlrcross (value);
+        setlrcross(value);
         break;
     case 5:
-        setfb (1, value);
+        setfb(1, value);
         break;
     case 6:
-        sethidamp (value);
+        sethidamp(value);
         break;
     case 7:
-        setpanning (2, value);
+        setpanning(2, value);
         break;
     case 8:
-        setdelay (2, value);
+        setdelay(2, value);
         break;
     case 9:
-        setfb (2, value);
+        setfb(2, value);
         break;
     case 10:
-        settempo (value);
+        settempo(value);
         break;
     case 11:
-        setgain (1, value);
+        setgain(1, value);
         break;
     case 12:
-        setgain (2, value);
+        setgain(2, value);
         break;
-
-    };
-};
+    }
+}
 
 int
-MusicDelay::getpar (int npar)
+MusicDelay::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -451,7 +458,6 @@ MusicDelay::getpar (int npar)
     case 12:
         return (Pgain2);
         break;
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}

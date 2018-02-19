@@ -31,7 +31,7 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "APhaser.h"
@@ -41,21 +41,21 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Analog_Phaser::Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize)
+Analog_Phaser::Analog_Phaser(double sample_rate, uint32_t intermediate_bufsize)
 {
     float fSAMPLE_RATE = sample_rate;
     PERIOD = intermediate_bufsize;
     fPERIOD = intermediate_bufsize;
 
-    lxn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
+    lxn1 = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES);
 
-    lyn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
+    lyn1 = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES);
 
-    rxn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
+    rxn1 = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES);
 
-    ryn1 = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);
+    ryn1 = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES);
 
-    offset = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES);	//model mismatch between JFET devices
+    offset = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES); //model mismatch between JFET devices
     offset[0] = -0.2509303f;
     offset[1] = 0.9408924f;
     offset[2] = 0.998f;
@@ -69,26 +69,26 @@ Analog_Phaser::Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize)
     offset[10] = 0.2762545f;
     offset[11] = 0.5215785f;
 
-    barber = 0;  //Deactivate barber pole phasing by default
+    barber = 0; //Deactivate barber pole phasing by default
 
     mis = 1.0f;
-    Rmin = 625.0f;	// 2N5457 typical on resistance at Vgs = 0
-    Rmax = 22000.0f;	// Resistor parallel to FET
-    Rmx = Rmin/Rmax;
-    Rconst = 1.0f + Rmx;  // Handle parallel resistor relationship
-    C = 0.00000005f;	     // 50 nF
-    CFs = 2.0f*fSAMPLE_RATE*C;
+    Rmin = 625.0f; // 2N5457 typical on resistance at Vgs = 0
+    Rmax = 22000.0f; // Resistor parallel to FET
+    Rmx = Rmin / Rmax;
+    Rconst = 1.0f + Rmx; // Handle parallel resistor relationship
+    C = 0.00000005f; // 50 nF
+    CFs = 2.0f * fSAMPLE_RATE*C;
     invperiod = 1.0f / fPERIOD;
     outvolume = 0.5f;
-    
+
     lfo = new EffectLFO(sample_rate);
 
     Ppreset = 0;
-    setpreset (Ppreset);//this will get done before out is run
-    cleanup ();
+    setpreset(Ppreset); //this will get done before out is run
+    cleanup();
 };
 
-Analog_Phaser::~Analog_Phaser ()
+Analog_Phaser::~Analog_Phaser()
 {
     delete lfo;
     free(lxn1);
@@ -98,12 +98,11 @@ Analog_Phaser::~Analog_Phaser ()
     free(offset);
 };
 
-
 /*
  * Effect output
  */
 void
-Analog_Phaser::out (float * efxoutl, float * efxoutr)
+Analog_Phaser::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     int j;
@@ -115,9 +114,9 @@ Analog_Phaser::out (float * efxoutl, float * efxoutr)
     hpfl = 0.0;
     hpfr = 0.0;
 
-    lfo->effectlfoout (&lfol, &lfor);
-    lmod = lfol*width + depth;
-    rmod = lfor*width + depth;
+    lfo->effectlfoout(&lfol, &lfor);
+    lmod = lfol * width + depth;
+    rmod = lfor * width + depth;
 
     if (lmod > ONE_)
         lmod = ONE_;
@@ -128,12 +127,13 @@ Analog_Phaser::out (float * efxoutl, float * efxoutr)
     else if (rmod < ZERO_)
         rmod = ZERO_;
 
-    if (Phyper != 0) {
-        lmod *= lmod;  //Triangle wave squared is approximately sin on bottom, tri on top
-        rmod *= rmod;  //Result is exponential sweep more akin to filter in synth with exponential generator circuitry.
+    if (Phyper != 0)
+    {
+        lmod *= lmod; //Triangle wave squared is approximately sin on bottom, tri on top
+        rmod *= rmod; //Result is exponential sweep more akin to filter in synth with exponential generator circuitry.
     };
 
-    lmod = sqrtf(1.0f - lmod);  //gl,gr is Vp - Vgs. Typical FET drain-source resistance follows constant/[1-sqrt(Vp - Vgs)]
+    lmod = sqrtf(1.0f - lmod); //gl,gr is Vp - Vgs. Typical FET drain-source resistance follows constant/[1-sqrt(Vp - Vgs)]
     rmod = sqrtf(1.0f - rmod);
 
     rdiff = (rmod - oldrgain) * invperiod;
@@ -145,55 +145,59 @@ Analog_Phaser::out (float * efxoutl, float * efxoutr)
     oldlgain = lmod;
     oldrgain = rmod;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
 
-        gl += ldiff;	// Linear interpolation between LFO samples
+        gl += ldiff; // Linear interpolation between LFO samples
         gr += rdiff;
 
         float lxn = efxoutl[i];
         float rxn = efxoutr[i];
 
 
-        if (barber) {
-            gl = fmodf((gl + 0.25f) , ONE_);
-            gr = fmodf((gr + 0.25f) , ONE_);
+        if (barber)
+        {
+            gl = fmodf((gl + 0.25f), ONE_);
+            gr = fmodf((gr + 0.25f), ONE_);
         };
 
 
         //Left channel
-        for (j = 0; j < Pstages; j++) {
+        for (j = 0; j < Pstages; j++)
+        {
             //Phasing routine
-            mis = 1.0f + offsetpct*offset[j];
-            d = (1.0f + 2.0f*(0.25f + gl)*hpfl*hpfl*distortion) * mis;  //This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
-            Rconst =  1.0f + mis*Rmx;
-            bl = (Rconst - gl )/ (d*Rmin);  // This is 1/R. R is being modulated to control filter fc.
-            lgain = (CFs - bl)/(CFs + bl);
+            mis = 1.0f + offsetpct * offset[j];
+            d = (1.0f + 2.0f * (0.25f + gl) * hpfl * hpfl * distortion) * mis; //This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
+            Rconst = 1.0f + mis*Rmx;
+            bl = (Rconst - gl) / (d * Rmin); // This is 1/R. R is being modulated to control filter fc.
+            lgain = (CFs - bl) / (CFs + bl);
 
             lyn1[j] = lgain * (lxn + lyn1[j]) - lxn1[j];
             lyn1[j] += DENORMAL_GUARD;
-            hpfl = lyn1[j] + (1.0f-lgain)*lxn1[j];  //high pass filter -- Distortion depends on the high-pass part of the AP stage.
+            hpfl = lyn1[j] + (1.0f - lgain) * lxn1[j]; //high pass filter -- Distortion depends on the high-pass part of the AP stage.
 
             lxn1[j] = lxn;
             lxn = lyn1[j];
-            if (j==1) lxn += fbl;  //Insert feedback after first phase stage
+            if (j == 1) lxn += fbl; //Insert feedback after first phase stage
         };
 
         //Right channel
-        for (j = 0; j < Pstages; j++) {
+        for (j = 0; j < Pstages; j++)
+        {
             //Phasing routine
-            mis = 1.0f + offsetpct*offset[j];
-            d = (1.0f + 2.0f*(0.25f + gr)*hpfr*hpfr*distortion) * mis;   // distortion
-            Rconst =  1.0f + mis*Rmx;
-            br = (Rconst - gr )/ (d*Rmin);
-            rgain = (CFs - br)/(CFs + br);
+            mis = 1.0f + offsetpct * offset[j];
+            d = (1.0f + 2.0f * (0.25f + gr) * hpfr * hpfr * distortion) * mis; // distortion
+            Rconst = 1.0f + mis*Rmx;
+            br = (Rconst - gr) / (d * Rmin);
+            rgain = (CFs - br) / (CFs + br);
 
             ryn1[j] = rgain * (rxn + ryn1[j]) - rxn1[j];
             ryn1[j] += DENORMAL_GUARD;
-            hpfr = ryn1[j] + (1.0f-rgain)*rxn1[j];  //high pass filter
+            hpfr = ryn1[j] + (1.0f - rgain) * rxn1[j]; //high pass filter
 
             rxn1[j] = rxn;
             rxn = ryn1[j];
-            if (j==1) rxn += fbr;  //Insert feedback after first phase stage
+            if (j == 1) rxn += fbr; //Insert feedback after first phase stage
         };
 
         fbl = lxn * fb;
@@ -204,7 +208,8 @@ Analog_Phaser::out (float * efxoutl, float * efxoutr)
     };
 
     if (Poutsub != 0)
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         };
@@ -215,13 +220,14 @@ Analog_Phaser::out (float * efxoutl, float * efxoutr)
  * Cleanup the effect
  */
 void
-Analog_Phaser::cleanup ()
+Analog_Phaser::cleanup()
 {
     fbl = 0.0;
     fbr = 0.0;
     oldlgain = 0.0;
     oldrgain = 0.0;
-    for (int i = 0; i < Pstages; i++) {
+    for (int i = 0; i < Pstages; i++)
+    {
         lxn1[i] = 0.0;
 
         lyn1[i] = 0.0;
@@ -234,7 +240,7 @@ Analog_Phaser::cleanup ()
 };
 
 void
-Analog_Phaser::lv2_update_params (uint32_t period)
+Analog_Phaser::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     fPERIOD = period;
@@ -246,63 +252,61 @@ Analog_Phaser::lv2_update_params (uint32_t period)
  * Parameter control
  */
 void
-Analog_Phaser::setwidth (int Pwidth)
+Analog_Phaser::setwidth(int Pwidth)
 {
     this->Pwidth = Pwidth;
-    width = ((float)Pwidth / 127.0f);
+    width = ((float) Pwidth / 127.0f);
 };
 
-
 void
-Analog_Phaser::setfb (int Pfb)
+Analog_Phaser::setfb(int Pfb)
 {
     this->Pfb = Pfb;
     fb = (float) (Pfb - 64) / 64.2f;
 };
 
 void
-Analog_Phaser::setvolume (int Pvolume)
+Analog_Phaser::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
     // outvolume is needed in calling program
-    outvolume = (float)Pvolume / 127.0f;
+    outvolume = (float) Pvolume / 127.0f;
 };
 
 void
-Analog_Phaser::setdistortion (int Pdistortion)
+Analog_Phaser::setdistortion(int Pdistortion)
 {
     this->Pdistortion = Pdistortion;
-    distortion = (float)Pdistortion / 127.0f;
+    distortion = (float) Pdistortion / 127.0f;
 };
 
 void
-Analog_Phaser::setoffset (int Poffset)
+Analog_Phaser::setoffset(int Poffset)
 {
     this->Poffset = Poffset;
-    offsetpct = (float)Poffset / 127.0f;
+    offsetpct = (float) Poffset / 127.0f;
 };
 
 void
-Analog_Phaser::setstages (int Pstages)
+Analog_Phaser::setstages(int Pstages)
 {
 
     if (Pstages >= MAX_PHASER_STAGES)
-        Pstages = MAX_PHASER_STAGES ;
+        Pstages = MAX_PHASER_STAGES;
     this->Pstages = Pstages;
 
-    cleanup ();
+    cleanup();
 };
 
 void
-Analog_Phaser::setdepth (int Pdepth)
+Analog_Phaser::setdepth(int Pdepth)
 {
     this->Pdepth = Pdepth;
-    depth = (float)(Pdepth - 64) / 127.0f;  //Pdepth input should be 0-127.  depth shall range 0-0.5 since we don't need to shift the full spectrum.
+    depth = (float) (Pdepth - 64) / 127.0f; //Pdepth input should be 0-127.  depth shall range 0-0.5 since we don't need to shift the full spectrum.
 };
 
-
 void
-Analog_Phaser::setpreset (int npreset)
+Analog_Phaser::setpreset(int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 6;
@@ -322,60 +326,63 @@ Analog_Phaser::setpreset (int npreset)
         {64, 20, 1, 10, 1, 64, 110, 40, 12, 10, 0, 70, 1}
     };
 
-    if(npreset>NUM_PRESETS-1) {
+    if (npreset > NUM_PRESETS - 1)
+    {
 
-        Fpre->ReadPreset(18,npreset-NUM_PRESETS+1,pdata);
+        Fpre->ReadPreset(18, npreset - NUM_PRESETS + 1, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
 
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
 
     Ppreset = npreset;
 };
 
-
 void
-Analog_Phaser::changepar (int npar, int value)
+Analog_Phaser::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setdistortion (value);
+        setdistortion(value);
         break;
     case 2:
         lfo->Pfreq = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 3:
         lfo->Prandomness = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 4:
         lfo->PLFOtype = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         barber = 0;
         if (value == 2) barber = 1;
         break;
     case 5:
         lfo->Pstereo = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 6:
-        setwidth (value);
+        setwidth(value);
         break;
     case 7:
-        setfb (value);
+        setfb(value);
         break;
     case 8:
-        setstages (value);
+        setstages(value);
         break;
     case 9:
-        setoffset (value);
+        setoffset(value);
         break;
     case 10:
         if (value > 1)
@@ -383,7 +390,7 @@ Analog_Phaser::changepar (int npar, int value)
         Poutsub = value;
         break;
     case 11:
-        setdepth (value);
+        setdepth(value);
         break;
     case 12:
         if (value > 1)
@@ -394,9 +401,10 @@ Analog_Phaser::changepar (int npar, int value)
 };
 
 int
-Analog_Phaser::getpar (int npar)
+Analog_Phaser::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;

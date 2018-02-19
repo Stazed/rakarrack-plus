@@ -21,26 +21,24 @@
  Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 
 #include "Shifter.h"
 
-
-
-Shifter::Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Shifter::Shifter(long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
     hq = Quality;
-    adjust(DS,sample_rate);
-    
+    adjust(DS, sample_rate);
+
     initialize();
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
 
-    PS = new PitchShifter (window, hq, nfSAMPLE_RATE);
+    PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
 
     state = IDLE;
@@ -53,36 +51,33 @@ Shifter::Shifter (long int Quality, int DS, int uq, int dq, double sample_rate, 
     outvolume = 0.5f;
     Ppreset = 0;
     Pmode = 0;
-    setpreset (Ppreset);
-    cleanup ();
+    setpreset(Ppreset);
+    cleanup();
+}
 
-};
-
-
-
-Shifter::~Shifter ()
+Shifter::~Shifter()
 {
     clear_initialize();
     delete U_Resample;
     delete D_Resample;
     delete PS;
-};
+}
 
 void
-Shifter::cleanup ()
+Shifter::cleanup()
 {
     state = IDLE;
-    memset(outi, 0, sizeof(float)*nPERIOD);
-    memset(outo, 0, sizeof(float)*nPERIOD);
-    
-    memset(templ, 0, sizeof(float)*PERIOD);
-    memset(tempr, 0, sizeof(float)*PERIOD);
-};
+    memset(outi, 0, sizeof (float)*nPERIOD);
+    memset(outo, 0, sizeof (float)*nPERIOD);
+
+    memset(templ, 0, sizeof (float)*PERIOD);
+    memset(tempr, 0, sizeof (float)*PERIOD);
+}
 
 void
 Shifter::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         adjust(DS_state, fSAMPLE_RATE);
@@ -99,11 +94,11 @@ Shifter::lv2_update_params(uint32_t period)
 void
 Shifter::initialize()
 {
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
+    templ = (float *) malloc(sizeof (float) * PERIOD);
+    tempr = (float *) malloc(sizeof (float) * PERIOD);
 
-    outi = (float *) malloc (sizeof (float) * nPERIOD);
-    outo = (float *) malloc (sizeof (float) * nPERIOD);
+    outi = (float *) malloc(sizeof (float) * nPERIOD);
+    outo = (float *) malloc(sizeof (float) * nPERIOD);
 }
 
 void
@@ -118,11 +113,10 @@ Shifter::clear_initialize()
 void
 Shifter::adjust(int DS, double SAMPLE_RATE)
 {
+    DS_state = DS;
 
-    DS_state=DS;
-
-    switch(DS) {
-
+    switch (DS)
+    {
     case 0:
         nRATIO = 1;
         nSAMPLE_RATE = SAMPLE_RATE;
@@ -131,7 +125,7 @@ Shifter::adjust(int DS, double SAMPLE_RATE)
         break;
 
     case 1:
-        nRATIO = 96000.0f/SAMPLE_RATE;
+        nRATIO = 96000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 96000;
         nfSAMPLE_RATE = 96000.0f;
         window = 2048;
@@ -139,193 +133,197 @@ Shifter::adjust(int DS, double SAMPLE_RATE)
 
 
     case 2:
-        nRATIO = 48000.0f/SAMPLE_RATE;
+        nRATIO = 48000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 48000;
         nfSAMPLE_RATE = 48000.0f;
         window = 2048;
         break;
 
     case 3:
-        nRATIO = 44100.0f/SAMPLE_RATE;
+        nRATIO = 44100.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 44100;
         nfSAMPLE_RATE = 44100.0f;
         window = 2048;
         break;
 
     case 4:
-        nRATIO = 32000.0f/SAMPLE_RATE;
+        nRATIO = 32000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 32000;
         nfSAMPLE_RATE = 32000.0f;
         window = 2048;
         break;
 
     case 5:
-        nRATIO = 22050.0f/SAMPLE_RATE;
+        nRATIO = 22050.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 22050;
         nfSAMPLE_RATE = 22050.0f;
         window = 1024;
         break;
 
     case 6:
-        nRATIO = 16000.0f/SAMPLE_RATE;
+        nRATIO = 16000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 16000;
         nfSAMPLE_RATE = 16000.0f;
         window = 1024;
         break;
 
     case 7:
-        nRATIO = 12000.0f/SAMPLE_RATE;
+        nRATIO = 12000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 12000;
         nfSAMPLE_RATE = 12000.0f;
         window = 512;
         break;
 
     case 8:
-        nRATIO = 8000.0f/SAMPLE_RATE;
+        nRATIO = 8000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 8000;
         nfSAMPLE_RATE = 8000.0f;
         window = 512;
         break;
 
     case 9:
-        nRATIO = 4000.0f/SAMPLE_RATE;
+        nRATIO = 4000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 4000;
         nfSAMPLE_RATE = 4000.0f;
         window = 256;
         break;
     }
-    
-    nPERIOD = lrintf((float)PERIOD*nRATIO);
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
+
+    nPERIOD = lrintf((float) PERIOD * nRATIO);
+    u_up = (double) nPERIOD / (double) PERIOD;
+    u_down = (double) PERIOD / (double) nPERIOD;
 }
 
-
 void
-Shifter::out (float *efxoutl, float *efxoutr)
+Shifter::out(float *efxoutl, float *efxoutr)
 {
     int i;
     float sum;
     float use;
 
-    if(DS_state != 0) {
-        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
-        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
-        U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
+    if (DS_state != 0)
+    {
+        memcpy(templ, efxoutl, sizeof (float)*PERIOD);
+        memcpy(tempr, efxoutr, sizeof (float)*PERIOD);
+        U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
-    for (i=0; i < nPERIOD; i++) {
-        if((Pmode == 0) || (Pmode ==2)) {
-            sum = fabsf(efxoutl[i])+fabsf(efxoutr[i]);
-            if (sum>env) env = sum;
-            else env=sum*ENV_TR+env*(1.0f-ENV_TR);
+    for (i = 0; i < nPERIOD; i++)
+    {
+        if ((Pmode == 0) || (Pmode == 2))
+        {
+            sum = fabsf(efxoutl[i]) + fabsf(efxoutr[i]);
+            
+            if (sum > env) env = sum;
+            else env = sum * ENV_TR + env * (1.0f - ENV_TR);
 
-            if (env <= tz_level) {
-                state=IDLE;
+            if (env <= tz_level)
+            {
+                state = IDLE;
                 tune = 0.0;
             }
 
-            if ((state == IDLE) && (env >= t_level)) state=UP;
+            if ((state == IDLE) && (env >= t_level)) state = UP;
 
-            if (state==UP) {
-                tune +=a_rate;
-                if (tune >=1.0f) state = WAIT;
+            if (state == UP)
+            {
+                tune += a_rate;
+                if (tune >= 1.0f) state = WAIT;
             }
 
-            if (state==WAIT) {
+            if (state == WAIT)
+            {
                 tune = 1.0f;
-                if (env<td_level)
-                    state=DOWN;
+                if (env < td_level)
+                    state = DOWN;
             }
 
-            if (state==DOWN) {
+            if (state == DOWN)
+            {
                 tune -= d_rate;
-                if(tune<=0.0) {
+                
+                if (tune <= 0.0)
+                {
                     tune = 0.0;
-                    state=IDLE;
+                    state = IDLE;
                 }
             }
         }
         outi[i] = (efxoutl[i] + efxoutr[i])*.5;
+        
         if (outi[i] > 1.0)
             outi[i] = 1.0f;
         if (outi[i] < -1.0)
             outi[i] = -1.0f;
-
     }
-
 
     if (Pmode == 1) use = whammy;
     else use = tune;
+    
     if ((Pmode == 0) && (Pinterval == 0)) use = tune * whammy;
     if (Pmode == 2) use = 1.0f - tune;
 
-    if(Pupdown)
-        PS->ratio = 1.0f-(1.0f-range)*use;
+    if (Pupdown)
+        PS->ratio = 1.0f - (1.0f - range) * use;
     else
-        PS->ratio = 1.0f+((range-1.0f)*use);
+        PS->ratio = 1.0f + ((range - 1.0f) * use);
 
 
-    PS->smbPitchShift (PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
+    PS->smbPitchShift(PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
 
-    for (i = 0; i < nPERIOD; i++) {
+    for (i = 0; i < nPERIOD; i++)
+    {
         templ[i] = outo[i] * gain * (1.0f - panning);
         tempr[i] = outo[i] * gain * panning;
     }
 
+    if (DS_state != 0)
+    {
+        D_Resample->out(templ, tempr, efxoutl, efxoutr, nPERIOD, u_down);
 
-    if(DS_state != 0) {
-        D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
-
-    } else {
-        memcpy(efxoutl, templ,sizeof(float)*PERIOD);
-        memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
+    }
+    else
+    {
+        memcpy(efxoutl, templ, sizeof (float)*PERIOD);
+        memcpy(efxoutr, tempr, sizeof (float)*PERIOD);
     }
 }
 
-
-
 void
-Shifter::setvolume (int value)
+Shifter::setvolume(int value)
 {
     this->Pvolume = value;
-    outvolume = (float)Pvolume / 127.0f;
-};
-
-
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-Shifter::setpanning (int value)
+Shifter::setpanning(int value)
 {
     this->Ppan = value;
-    panning = (float)Ppan / 127.0f;
-};
-
-
+    panning = (float) Ppan / 127.0f;
+}
 
 void
-Shifter::setgain (int value)
+Shifter::setgain(int value)
 {
     this->Pgain = value;
-    gain = (float)Pgain / 127.0f;
-    gain *=2.0f;
-};
-
+    gain = (float) Pgain / 127.0f;
+    gain *= 2.0f;
+}
 
 void
-Shifter::setinterval (int value)
+Shifter::setinterval(int value)
 {
     interval = (float) value;
-    if ((Pmode == 0) && ( Pinterval == 0)) interval = 1.0f;
-    if(Pupdown) interval *=-1.0f;
-    range = powf (2.0f, interval / 12.0f);
-
-};
-
-
+    
+    if ((Pmode == 0) && (Pinterval == 0)) interval = 1.0f;
+    if (Pupdown) interval *= -1.0f;
+    
+    range = powf(2.0f, interval / 12.0f);
+}
 
 void
-Shifter::setpreset (int npreset)
+Shifter::setpreset(int npreset)
 {
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 5;
@@ -343,48 +341,49 @@ Shifter::setpreset (int npreset)
         {64, 64, 64, 250, 100, -10, 0, 0, 0, 25}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(38,npreset-NUM_PRESETS+1, pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(38, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-
-
-};
-
-
+}
 
 void
-Shifter::changepar (int npar, int value)
+Shifter::changepar(int npar, int value)
 {
-
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
-        setgain (value);
+        setgain(value);
         break;
     case 3:
         Pattack = value;
-        a_rate = 1000.0f / ((float)Pattack * nfSAMPLE_RATE);
+        a_rate = 1000.0f / ((float) Pattack * nfSAMPLE_RATE);
         break;
     case 4:
         Pdecay = value;
-        d_rate = 1000.0f / ((float)Pdecay * nfSAMPLE_RATE);
+        d_rate = 1000.0f / ((float) Pdecay * nfSAMPLE_RATE);
         break;
     case 5:
         Pthreshold = value;
-        t_level = dB2rap ((float)Pthreshold);
-        td_level = t_level*.75f;
-        tz_level = t_level*.5f;
+        t_level = dB2rap((float) Pthreshold);
+        td_level = t_level * .75f;
+        tz_level = t_level * .5f;
         break;
     case 6:
         Pinterval = value;
@@ -402,13 +401,13 @@ Shifter::changepar (int npar, int value)
         whammy = (float) value / 127.0f;
         break;
     }
-};
-
+}
 
 int
-Shifter::getpar (int npar)
+Shifter::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -439,6 +438,5 @@ Shifter::getpar (int npar)
     case 9:
         return (Pwhammy);
     }
-
-    return(0);
-};
+    return (0);
+}

@@ -19,17 +19,17 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Convolotron.h"
 
-Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize)
+Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize)
 {
-    SAMPLE_RATE = (unsigned int)sample_rate;
-    fSAMPLE_RATE = (float)sample_rate;
+    SAMPLE_RATE = (unsigned int) sample_rate;
+    fSAMPLE_RATE = (float) sample_rate;
     PERIOD = intermediate_bufsize;
 
     //default values
@@ -49,70 +49,70 @@ Convolotron::Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t i
     fb = 0.0f;
     feedback = 0.0f;
     outvolume = 0.5f;
-    lpanning = ((float)Ppanning + 0.5f) / 127.0f;
+    lpanning = ((float) Ppanning + 0.5f) / 127.0f;
     rpanning = 1.0f - lpanning;
-    level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
-    levpanl=lpanning*level*2.0f;
-    levpanr=rpanning*level*2.0f;
-    hidamp = 1.0f - (float)Phidamp / 127.1f;
+    level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
+    levpanl = lpanning * level * 2.0f;
+    levpanr = rpanning * level * 2.0f;
+    hidamp = 1.0f - (float) Phidamp / 127.1f;
     alpha_hidamp = 1.0f - hidamp;
-    
+
     adjust(DS, PERIOD);
 
     initialize();
 
-    maxx_size = (int) (nfSAMPLE_RATE * convlength);  //just to get the max memory allocated
-    buf = (float *) malloc (sizeof (float) * maxx_size);
-    memset(buf,0,sizeof(float) * maxx_size);
-    rbuf = (float *) malloc (sizeof (float) * maxx_size);
-    memset(rbuf,0,sizeof(float) * maxx_size);
-    lxn = (float *) malloc (sizeof (float) * maxx_size);
-    memset(lxn,0,sizeof(float) * maxx_size);
+    maxx_size = (int) (nfSAMPLE_RATE * convlength); //just to get the max memory allocated
+    buf = (float *) malloc(sizeof (float) * maxx_size);
+    memset(buf, 0, sizeof (float) * maxx_size);
+    rbuf = (float *) malloc(sizeof (float) * maxx_size);
+    memset(rbuf, 0, sizeof (float) * maxx_size);
+    lxn = (float *) malloc(sizeof (float) * maxx_size);
+    memset(lxn, 0, sizeof (float) * maxx_size);
     maxx_size--;
-    maxx_read = maxx_size / 2;    
+    maxx_read = maxx_size / 2;
     offset = 0;
     length = 1;
     oldl = 0.0f;
-    
+
     M_Resample = new Resample(0);
-    U_Resample = new Resample(dq);//Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
+    U_Resample = new Resample(dq); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
     D_Resample = new Resample(uq);
 
-    setpreset (Ppreset);
-    cleanup ();
+    setpreset(Ppreset);
+    cleanup();
 };
 
-Convolotron::~Convolotron ()
+Convolotron::~Convolotron()
 {
     clear_initialize();
-    
+
     free(buf);
     free(rbuf);
     free(lxn);
-    
+
     delete M_Resample;
     delete U_Resample;
     delete D_Resample;
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-Convolotron::cleanup ()
+Convolotron::cleanup()
 {
-    memset(templ,0,sizeof(float)*PERIOD);
-    memset(tempr,0,sizeof(float)*PERIOD);
+    memset(templ, 0, sizeof (float)*PERIOD);
+    memset(tempr, 0, sizeof (float)*PERIOD);
 
     fb = 0.0f;
     feedback = 0.0f;
     oldl = 0.0f;
-};
+}
 
 void
 Convolotron::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
@@ -122,18 +122,18 @@ Convolotron::lv2_update_params(uint32_t period)
     {
         PERIOD = period;
     }
-    
+
     adjust(DS_state, period);
 }
-    
+
 void
 Convolotron::initialize()
 {
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
-    
-    memset(templ,0,sizeof(float)*PERIOD);
-    memset(tempr,0,sizeof(float)*PERIOD);
+    templ = (float *) malloc(sizeof (float) * PERIOD);
+    tempr = (float *) malloc(sizeof (float) * PERIOD);
+
+    memset(templ, 0, sizeof (float)*PERIOD);
+    memset(tempr, 0, sizeof (float)*PERIOD);
 }
 
 void
@@ -146,12 +146,11 @@ Convolotron::clear_initialize()
 void
 Convolotron::adjust(int DS, uint32_t period)
 {
+    DS_state = DS;
+    fPERIOD = (float) period;
 
-    DS_state=DS;
-    fPERIOD = (float)period;
-
-    switch(DS) {
-
+    switch (DS)
+    {
     case 0:
         nPERIOD = period;
         nSAMPLE_RATE = SAMPLE_RATE;
@@ -159,261 +158,264 @@ Convolotron::adjust(int DS, uint32_t period)
         break;
 
     case 1:
-        nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 96000.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 96000;
         nfSAMPLE_RATE = 96000.0f;
         break;
 
 
     case 2:
-        nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 48000.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 48000;
         nfSAMPLE_RATE = 48000.0f;
         break;
 
     case 3:
-        nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 44100.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 44100;
         nfSAMPLE_RATE = 44100.0f;
         break;
 
     case 4:
-        nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 32000.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 32000;
         nfSAMPLE_RATE = 32000.0f;
         break;
 
     case 5:
-        nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 22050.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 22050;
         nfSAMPLE_RATE = 22050.0f;
         break;
 
     case 6:
-        nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 16000.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 16000;
         nfSAMPLE_RATE = 16000.0f;
         break;
 
     case 7:
-        nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 12000.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 12000;
         nfSAMPLE_RATE = 12000.0f;
         break;
 
     case 8:
-        nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 8000.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 8000;
         nfSAMPLE_RATE = 8000.0f;
         break;
 
     case 9:
-        nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
+        nPERIOD = lrintf(fPERIOD * 4000.0f / fSAMPLE_RATE);
         nSAMPLE_RATE = 4000;
         nfSAMPLE_RATE = 4000.0f;
         break;
     }
-    u_up= (double)nPERIOD / (double)period;
-    u_down= (double)period / (double)nPERIOD;
+    
+    u_up = (double) nPERIOD / (double) period;
+    u_down = (double) period / (double) nPERIOD;
 }
-
-
-
-
 
 /*
  * Effect output
  */
 void
-Convolotron::out (float * efxoutl, float * efxoutr)
+Convolotron::out(float * efxoutl, float * efxoutr)
 {
     int i, j, xindex;
-    float l,lyn;
+    float l, lyn;
 
-    if(DS_state != 0) {
-        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
-        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
-        U_Resample->out(templ,tempr,efxoutl,efxoutr,PERIOD,u_up);
+    if (DS_state != 0)
+    {
+        memcpy(templ, efxoutl, sizeof (float)*PERIOD);
+        memcpy(tempr, efxoutr, sizeof (float)*PERIOD);
+        U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
-    for (i = 0; i < nPERIOD; i++) {
-
+    for (i = 0; i < nPERIOD; i++)
+    {
         l = efxoutl[i] + efxoutr[i] + feedback;
-        oldl = l * hidamp + oldl * (alpha_hidamp);  //apply damping while I'm in the loop
+        oldl = l * hidamp + oldl * (alpha_hidamp); //apply damping while I'm in the loop
         lxn[offset] = oldl;
-
 
         //Convolve left channel
         lyn = 0;
         xindex = offset;
 
-        for (j =0; j<length; j++) {
-            if (--xindex<0) xindex = maxx_size;		//length of lxn is maxx_size.
-            lyn += buf[j] * lxn[xindex];		//this is all there is to convolution
+        for (j = 0; j < length; j++)
+        {
+            if (--xindex < 0) xindex = maxx_size; //length of lxn is maxx_size.
+            
+            lyn += buf[j] * lxn[xindex]; //this is all there is to convolution
         }
 
         feedback = fb * lyn;
         templ[i] = lyn * levpanl;
         tempr[i] = lyn * levpanr;
 
-        if (++offset>maxx_size) offset = 0;
+        if (++offset > maxx_size) offset = 0;
     }
 
-    if(DS_state != 0) {
-        D_Resample->out(templ,tempr,efxoutl,efxoutr,nPERIOD,u_down);
-
-    } else {
-        memcpy(efxoutl, templ,sizeof(float)*PERIOD);
-        memcpy(efxoutr, tempr,sizeof(float)*PERIOD);
+    if (DS_state != 0)
+    {
+        D_Resample->out(templ, tempr, efxoutl, efxoutr, nPERIOD, u_down);
+    }
+    else
+    {
+        memcpy(efxoutl, templ, sizeof (float)*PERIOD);
+        memcpy(efxoutr, tempr, sizeof (float)*PERIOD);
     }
 }
-
 
 /*
  * Parameter control
  */
 void
-Convolotron::setvolume (int Pvolume)
+Convolotron::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
+    outvolume = (float) Pvolume / 127.0f;
+    
     if (Pvolume == 0)
-        cleanup ();
-
-};
+        cleanup();
+}
 
 void
-Convolotron::setpanning (int Ppanning)
+Convolotron::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    rpanning = ((float)Ppanning + 0.5f) / 127.0f;
+    rpanning = ((float) Ppanning + 0.5f) / 127.0f;
     lpanning = 1.0f - rpanning;
-    levpanl=lpanning*level*2.0f;
-    levpanr=rpanning*level*2.0f;
-
-};
+    levpanl = lpanning * level * 2.0f;
+    levpanr = rpanning * level * 2.0f;
+}
 
 int
 Convolotron::setfile(int value)
 {
-
     double sr_ratio;
 
     offset = 0;
     maxx_read = maxx_size / 2;
-    memset(buf,0,sizeof(float) * maxx_size);
-    memset(rbuf,0,sizeof(float) * maxx_size);
-    
+    memset(buf, 0, sizeof (float) * maxx_size);
+    memset(rbuf, 0, sizeof (float) * maxx_size);
+
 #ifdef LV2_SUPPORT
     /* LV2 will only call setfile() directly with Puser set and the value will be always USERFILE.
        This single case occurs upon initialization before Puser is set because setpreset() is called
        by initializer. So we just ignore the initial call for LV2 since the value will be incorrect
        and immediately replaced by the default file set in the ttl */
-    if(value != USERFILE)
+    if (value != USERFILE)
     {
         real_len = 1;
         length = 1;
         rbuf[0] = 1.0f;
         process_rbuf();
-        return(0);
+        return (0);
     }
 #endif // LV2_SUPPORT
-    
-    if(!Puser) {
+
+    if (!Puser)
+    {
         Filenum = value;
-        memset(Filename,0, sizeof(Filename));
-        sprintf(Filename, "%s/%d.wav",DATADIR,Filenum+1);
+        memset(Filename, 0, sizeof (Filename));
+        sprintf(Filename, "%s/%d.wav", DATADIR, Filenum + 1);
     }
 
-//    printf("Convolotron Filename %s: value %d: Filenum %d\n",Filename, value,Filenum);
+    //    printf("Convolotron Filename %s: value %d: Filenum %d\n",Filename, value,Filenum);
     sfinfo.format = 0;
-    if(!(infile = sf_open(Filename, SFM_READ, &sfinfo))) {
+    if (!(infile = sf_open(Filename, SFM_READ, &sfinfo)))
+    {
         real_len = 1;
         length = 1;
         rbuf[0] = 1.0f;
         process_rbuf();
-        return(0);
+        return (0);
     }
 
     if (sfinfo.frames > maxx_read) real_len = maxx_read;
-    else real_len=sfinfo.frames;
-    sf_seek (infile,0, SEEK_SET);
-    sf_readf_float(infile,buf,real_len);
+    else real_len = sfinfo.frames;
+    
+    sf_seek(infile, 0, SEEK_SET);
+    sf_readf_float(infile, buf, real_len);
     sf_close(infile);
 
-
-
-
-    if (sfinfo.samplerate != (int)nSAMPLE_RATE) {
-        sr_ratio = (double)nSAMPLE_RATE/((double) sfinfo.samplerate);
-        M_Resample->mono_out(buf,rbuf,real_len,sr_ratio,lrint((double)real_len*sr_ratio));
-        real_len =lrintf((float)real_len*(float)sr_ratio);
+    if (sfinfo.samplerate != (int) nSAMPLE_RATE)
+    {
+        sr_ratio = (double) nSAMPLE_RATE / ((double) sfinfo.samplerate);
+        M_Resample->mono_out(buf, rbuf, real_len, sr_ratio, lrint((double) real_len * sr_ratio));
+        real_len = lrintf((float) real_len * (float) sr_ratio);
     }
+    else memcpy(rbuf, buf, real_len * sizeof (float));
 
-    else memcpy(rbuf,buf,real_len*sizeof(float));
-    
-    UpdateLength ();  // this calls process_rbuf() as well
+    UpdateLength(); // this calls process_rbuf() as well
 
-    return(1);
-};
-
+    return (1);
+}
 
 void
 Convolotron::process_rbuf()
 {
-    int ii,j,N,N2;
+    int ii, j, N, N2;
     float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp, IRpowa, IRpowb, ngain, maxamp;
-    memset(buf,0, sizeof(float)*real_len);
+    memset(buf, 0, sizeof (float)*real_len);
 
     if (length > real_len) length = real_len;
     /*Blackman Window function
     wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
     a0 = (1 - alpha)/2; a1 = 0.5; a2 = alpha/2
-    */
+     */
     alpha = 0.16f;
-    a0 = 0.5f*(1.0f - alpha);
+    a0 = 0.5f * (1.0f - alpha);
     a1 = 0.5f;
-    a2 = 0.5*alpha;
+    a2 = 0.5 * alpha;
     N = length;
-    N2 = length/2;
-    Nm1p = D_PI/((float) (N - 1));
-    Nm1pp = 4.0f * PI/((float) (N - 1));
+    N2 = length / 2;
+    Nm1p = D_PI / ((float) (N - 1));
+    Nm1pp = 4.0f * PI / ((float) (N - 1));
 
-    for(ii=0; ii<length; ii++) {
-        if (ii<N2) {
+    for (ii = 0; ii < length; ii++)
+    {
+        if (ii < N2)
+        {
             tailfader = 1.0f;
-        } else {
-            tailfader = a0 - a1*cosf(ii*Nm1p) + a2 * cosf(ii*Nm1pp);   //Calculate Blackman Window for right half of IR
+        }
+        else
+        {
+            tailfader = a0 - a1 * cosf(ii * Nm1p) + a2 * cosf(ii * Nm1pp); //Calculate Blackman Window for right half of IR
         }
 
-        buf[ii]= rbuf[ii] * tailfader;   //Apply window function
-
+        buf[ii] = rbuf[ii] * tailfader; //Apply window function
     }
-
 
     //memcpy(buf,rbuf,real_len*sizeof(float));
 
     IRpowa = IRpowb = maxamp = 0.0f;
     //compute IR signal power
-    for(j=0; j<length; j++) {
+    for (j = 0; j < length; j++)
+    {
         IRpowa += fabsf(rbuf[j]);
-        if(maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]);   //find maximum level to normalize
+        if (maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]); //find maximum level to normalize
 
-        if(j < length) {
+        if (j < length)
+        {
             IRpowb += fabsf(buf[j]);
         }
-
     }
 
     //if(maxamp < 0.3f) maxamp = 0.3f;
-    ngain = IRpowa/IRpowb;
+    ngain = IRpowa / IRpowb;
+    
     if (ngain > maxx_read) ngain = maxx_read;
-    for(j=0; j<length; j++) buf[j] *= ngain;
+    
+    for (j = 0; j < length; j++) buf[j] *= ngain;
 
-    if (Psafe) {
+    if (Psafe)
+    {
         impulse.resample_impulse(length, buf);
         length = 156;
-        convlength = length/fSAMPLE_RATE;
+        convlength = length / fSAMPLE_RATE;
     }
     /*
     //This section can be uncommented to make a text file you can plot
@@ -427,22 +429,19 @@ Convolotron::process_rbuf()
     }
     fclose (textfile);
     }
-    */
-
-
-
+     */
 }
 
 void
-Convolotron::sethidamp (int Phidamp)
+Convolotron::sethidamp(int Phidamp)
 {
     this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float)Phidamp / 127.1f;
+    hidamp = 1.0f - (float) Phidamp / 127.1f;
     alpha_hidamp = 1.0f - hidamp;
-};
+}
 
 void
-Convolotron::setpreset (int npreset)
+Convolotron::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
@@ -458,35 +457,41 @@ Convolotron::setpreset (int npreset)
         {67, 60, 1, 100, 0, 64, 30, 20, 3, 0, 0}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(29,npreset-NUM_PRESETS+1, pdata,Filename);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(29, npreset - NUM_PRESETS + 1, pdata, Filename);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
 
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
+    
     Ppreset = npreset;
-};
+}
 
 void
-Convolotron::UpdateLength ()
+Convolotron::UpdateLength()
 {
-    convlength = ((float) Plength)/1000.0f;                   //time in seconds
-    length = (int) (nfSAMPLE_RATE * convlength);        //time in samples
+    convlength = ((float) Plength) / 1000.0f; //time in seconds
+    length = (int) (nfSAMPLE_RATE * convlength); //time in samples
     process_rbuf();
 }
 
 void
-Convolotron::changepar (int npar, int value)
+Convolotron::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
         Psafe = value;
@@ -498,21 +503,21 @@ Convolotron::changepar (int npar, int value)
         break;
     case 8:
 #ifdef LV2_SUPPORT
-        setfile(value);  // This will only be called from changepar() upon initialization for lv2 and is ignored.
+        setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
 #else
-        if(!setfile(value)) error_num=1;
+        if (!setfile(value)) error_num = 1;
 #endif
         break;
     case 5:
         break;
     case 6:
-        sethidamp (value);
+        sethidamp(value);
         break;
     case 7:
         Plevel = value;
-        level =  dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
-        levpanl=lpanning*level*2.0f;
-        levpanr=rpanning*level*2.0f;
+        level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
+        levpanl = lpanning * level * 2.0f;
+        levpanr = rpanning * level * 2.0f;
         break;
     case 4:
         Puser = value;
@@ -521,20 +526,23 @@ Convolotron::changepar (int npar, int value)
         break;
     case 10:
         Pfb = value;
-        if(Pfb<0) {
-            fb = (float) .1f*value/250.0f*.15f;
-        } else {
-            fb = (float) .1f*value/500.0f*.15f;
+        if (Pfb < 0)
+        {
+            fb = (float) .1f * value / 250.0f * .15f;
+        }
+        else
+        {
+            fb = (float) .1f * value / 500.0f * .15f;
         }
         break;
-
-    };
-};
+    }
+}
 
 int
-Convolotron::getpar (int npar)
+Convolotron::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -542,10 +550,10 @@ Convolotron::getpar (int npar)
         return (Ppanning);
         break;
     case 2:
-        return(Psafe);
+        return (Psafe);
         break;
     case 3:
-        return(Plength);
+        return (Plength);
         break;
     case 8:
         return (Filenum);
@@ -557,18 +565,17 @@ Convolotron::getpar (int npar)
         return (Phidamp);
         break;
     case 7:
-        return(Plevel);
+        return (Plevel);
         break;
     case 4:
-        return(Puser);
+        return (Puser);
         break;
     case 9:
-        return(0);
+        return (0);
         break;
     case 10:
-        return(Pfb);
+        return (Pfb);
         break;
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}

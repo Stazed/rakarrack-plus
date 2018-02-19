@@ -20,7 +20,7 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "Phaser.h"
@@ -28,48 +28,46 @@
 #include "FPreset.h"
 #define PHASER_LFO_SHAPE 2
 
-Phaser::Phaser (double sample_rate, uint32_t intermediate_bufsize)
+Phaser::Phaser(double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize; // will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
-    fPERIOD = intermediate_bufsize;// will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
+    fPERIOD = intermediate_bufsize; // will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
 
-    oldl = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES * 2);
-    oldr = (float *) malloc(sizeof(float)* MAX_PHASER_STAGES * 2);
+    oldl = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES * 2);
+    oldr = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES * 2);
 
     lfo = new EffectLFO(sample_rate);
 
     outvolume = 0.5f;
     Ppreset = 0;
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-Phaser::~Phaser ()
+Phaser::~Phaser()
 {
     free(oldl);
     free(oldr);
     delete lfo;
-};
-
+}
 
 /*
  * Effect output
  */
 void
-Phaser::out (float * efxoutl, float * efxoutr)
+Phaser::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     int j;
     float lfol, lfor, lgain, rgain, tmp;
 
-    lfo->effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout(&lfol, &lfor);
     lgain = lfol;
     rgain = lfor;
     lgain =
-        (expf (lgain * PHASER_LFO_SHAPE) - 1.0f) / (expf (PHASER_LFO_SHAPE) - 1.0f);
+            (expf(lgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
     rgain =
-        (expf (rgain * PHASER_LFO_SHAPE) - 1.0f) / (expf (PHASER_LFO_SHAPE) - 1.0f);
-
+            (expf(rgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
 
     lgain = 1.0f - phase * (1.0f - depth) - (1.0f - phase) * lgain * depth;
     rgain = 1.0f - phase * (1.0f - depth) - (1.0f - phase) * rgain * depth;
@@ -78,12 +76,14 @@ Phaser::out (float * efxoutl, float * efxoutr)
         lgain = 1.0f;
     else if (lgain < 0.0)
         lgain = 0.0f;
+    
     if (rgain > 1.0)
         rgain = 1.0f;
     else if (rgain < 0.0)
         rgain = 0.0f;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         float x = (float) i / fPERIOD;
         float x1 = 1.0f - x;
         float gl = lgain * x + oldlgain * x1;
@@ -92,19 +92,21 @@ Phaser::out (float * efxoutl, float * efxoutr)
         float inr = efxoutr[i] * (1.0f - panning) + fbr;
 
         //Left channel
-        for (j = 0; j < Pstages * 2; j++) {
+        for (j = 0; j < Pstages * 2; j++)
+        {
             //Phasing routine
             tmp = oldl[j] + DENORMAL_GUARD;
             oldl[j] = gl * tmp + inl;
             inl = tmp - gl * oldl[j];
-        };
+        }
         //Right channel
-        for (j = 0; j < Pstages * 2; j++) {
+        for (j = 0; j < Pstages * 2; j++)
+        {
             //Phasing routine
             tmp = oldr[j] + DENORMAL_GUARD;
             oldr[j] = (gr * tmp) + inr;
             inr = tmp - (gr * oldr[j]);
-        };
+        }
         //Left/Right crossing
         float l = inl;
         float r = inr;
@@ -115,38 +117,39 @@ Phaser::out (float * efxoutl, float * efxoutr)
         fbr = inr * fb;
         efxoutl[i] = inl;
         efxoutr[i] = inr;
-
-    };
+    }
 
     oldlgain = lgain;
     oldrgain = rgain;
 
     if (Poutsub != 0)
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
-        };
-
-};
+        }
+}
 
 /*
  * Cleanup the effect
  */
 void
-Phaser::cleanup ()
+Phaser::cleanup()
 {
     fbl = 0.0;
     fbr = 0.0;
     oldlgain = 0.0;
     oldrgain = 0.0;
-    for (int i = 0; i < Pstages * 2; i++) {
+    
+    for (int i = 0; i < Pstages * 2; i++)
+    {
         oldl[i] = 0.0;
         oldr[i] = 0.0;
-    };
-};
+    }
+}
 
 void
-Phaser::lv2_update_params (uint32_t period)
+Phaser::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     fPERIOD = period;
@@ -157,60 +160,59 @@ Phaser::lv2_update_params (uint32_t period)
  * Parameter control
  */
 void
-Phaser::setdepth (int Pdepth)
+Phaser::setdepth(int Pdepth)
 {
     this->Pdepth = Pdepth;
-    depth = ((float)Pdepth / 127.0f);
-};
-
+    depth = ((float) Pdepth / 127.0f);
+}
 
 void
-Phaser::setfb (int Pfb)
+Phaser::setfb(int Pfb)
 {
     this->Pfb = Pfb;
-    fb = ((float)Pfb - 64.0f) / 64.1f;
-};
+    fb = ((float) Pfb - 64.0f) / 64.1f;
+}
 
 void
-Phaser::setvolume (int Pvolume)
+Phaser::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
-};
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-Phaser::setpanning (int Ppanning)
+Phaser::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    panning = ((float)Ppanning + .5f)/ 127.0f;
-};
+    panning = ((float) Ppanning + .5f) / 127.0f;
+}
 
 void
-Phaser::setlrcross (int Plrcross)
+Phaser::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
-    lrcross = (float)Plrcross / 127.0f;
-};
+    lrcross = (float) Plrcross / 127.0f;
+}
 
 void
-Phaser::setstages (int Pstages)
+Phaser::setstages(int Pstages)
 {
     if (Pstages > MAX_PHASER_STAGES)
         Pstages = MAX_PHASER_STAGES;
+    
     this->Pstages = Pstages;
-    cleanup ();
-};
+    cleanup();
+}
 
 void
-Phaser::setphase (int Pphase)
+Phaser::setphase(int Pphase)
 {
     this->Pphase = Pphase;
-    phase = ((float)Pphase / 127.0f);
-};
-
+    phase = ((float) Pphase / 127.0f);
+}
 
 void
-Phaser::setpreset (int npreset)
+Phaser::setpreset(int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 6;
@@ -230,56 +232,60 @@ Phaser::setpreset (int npreset)
         {64, 64, 31, 100, 0, 58, 37, 78, 3, 0, 0, 20}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-
-        Fpre->ReadPreset(6,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(6, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-};
-
+}
 
 void
-Phaser::changepar (int npar, int value)
+Phaser::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
         lfo->Pfreq = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 3:
         lfo->Prandomness = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 4:
         lfo->PLFOtype = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 5:
         lfo->Pstereo = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 6:
-        setdepth (value);
+        setdepth(value);
         break;
     case 7:
-        setfb (value);
+        setfb(value);
         break;
     case 8:
-        setstages (value);
+        setstages(value);
         break;
     case 9:
-        setlrcross (value);
+        setlrcross(value);
         break;
     case 10:
         if (value > 1)
@@ -287,15 +293,16 @@ Phaser::changepar (int npar, int value)
         Poutsub = value;
         break;
     case 11:
-        setphase (value);
+        setphase(value);
         break;
     }
-};
+}
 
 int
-Phaser::getpar (int npar)
+Phaser::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -303,7 +310,7 @@ Phaser::getpar (int npar)
         return (Ppanning);
         break;
     case 2:
-        return (lfo->Pfreq);	// tempo
+        return (lfo->Pfreq); // tempo
         break;
     case 3:
         return (lfo->Prandomness);
@@ -312,13 +319,13 @@ Phaser::getpar (int npar)
         return (lfo->PLFOtype);
         break;
     case 5:
-        return (lfo->Pstereo);	// STDL
+        return (lfo->Pstereo); // STDL
         break;
     case 6:
         return (Pdepth);
         break;
     case 7:
-        return (Pfb);			// pfb feedback
+        return (Pfb); // pfb feedback
         break;
     case 8:
         return (Pstages);
@@ -335,4 +342,4 @@ Phaser::getpar (int npar)
     default:
         return (0);
     }
-};
+}

@@ -25,7 +25,7 @@
   You should have received a copy of the GNU General Public License (version 2)
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,11 +38,11 @@
 
 
 
-CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
+CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
-    
+
     initialize();
 
     CL = new Compressor(sample_rate, PERIOD);
@@ -50,22 +50,21 @@ CompBand::CompBand (double sample_rate, uint32_t intermediate_bufsize)
     CMH = new Compressor(sample_rate, PERIOD);
     CH = new Compressor(sample_rate, PERIOD);
 
-    CL->setpreset(0,5);
-    CML->setpreset(0,5);
-    CMH->setpreset(0,5);
-    CH->setpreset(0,5);
-
+    CL->setpreset(0, 5);
+    CML->setpreset(0, 5);
+    CMH->setpreset(0, 5);
+    CH->setpreset(0, 5);
 
     //default values
     Ppreset = 0;
     Pvolume = 50;
     outvolume = 0.5f;
 
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-CompBand::~CompBand ()
+CompBand::~CompBand()
 {
     clear_initialize();
 
@@ -73,26 +72,26 @@ CompBand::~CompBand ()
     delete CML;
     delete CMH;
     delete CH;
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-CompBand::cleanup ()
+CompBand::cleanup()
 {
-    lpf1l->cleanup ();
-    hpf1l->cleanup ();
-    lpf1r->cleanup ();
-    hpf1r->cleanup ();
-    lpf2l->cleanup ();
-    hpf2l->cleanup ();
-    lpf2r->cleanup ();
-    hpf2r->cleanup ();
-    lpf3l->cleanup ();
-    hpf3l->cleanup ();
-    lpf3r->cleanup ();
-    hpf3r->cleanup ();
+    lpf1l->cleanup();
+    hpf1l->cleanup();
+    lpf1r->cleanup();
+    hpf1r->cleanup();
+    lpf2l->cleanup();
+    hpf2l->cleanup();
+    lpf2r->cleanup();
+    hpf2r->cleanup();
+    lpf3l->cleanup();
+    hpf3l->cleanup();
+    lpf3r->cleanup();
+    hpf3r->cleanup();
     CL->cleanup();
     CML->cleanup();
     CMH->cleanup();
@@ -100,22 +99,22 @@ CompBand::cleanup ()
 }
 
 void
-CompBand::lv2_update_params (uint32_t period)
+CompBand::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
         initialize();
-        setCross1 (Cross1);
-        setCross2 (Cross2);
-        setCross3 (Cross3);
+        setCross1(Cross1);
+        setCross2(Cross2);
+        setCross3(Cross3);
     }
     else
     {
         PERIOD = period;
     }
-    
+
     CL->lv2_update_params(period);
     CML->lv2_update_params(period);
     CMH->lv2_update_params(period);
@@ -125,30 +124,30 @@ CompBand::lv2_update_params (uint32_t period)
 void
 CompBand::initialize()
 {
-    lowl = (float *) malloc (sizeof (float) * PERIOD);
-    lowr = (float *) malloc (sizeof (float) * PERIOD);
-    midll = (float *) malloc (sizeof (float) * PERIOD);
-    midlr = (float *) malloc (sizeof (float) * PERIOD);
-    midhl = (float *) malloc (sizeof (float) * PERIOD);
-    midhr = (float *) malloc (sizeof (float) * PERIOD);
-    highl = (float *) malloc (sizeof (float) * PERIOD);
-    highr = (float *) malloc (sizeof (float) * PERIOD);
-
+    lowl = (float *) malloc(sizeof (float) * PERIOD);
+    lowr = (float *) malloc(sizeof (float) * PERIOD);
+    midll = (float *) malloc(sizeof (float) * PERIOD);
+    midlr = (float *) malloc(sizeof (float) * PERIOD);
+    midhl = (float *) malloc(sizeof (float) * PERIOD);
+    midhr = (float *) malloc(sizeof (float) * PERIOD);
+    highl = (float *) malloc(sizeof (float) * PERIOD);
+    highr = (float *) malloc(sizeof (float) * PERIOD);
 
     interpbuf = new float[PERIOD];
-    lpf1l = new AnalogFilter (2, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf1r = new AnalogFilter (2, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf1l = new AnalogFilter (3, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf1r = new AnalogFilter (3, 500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf2l = new AnalogFilter (2, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf2r = new AnalogFilter (2, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf2l = new AnalogFilter (3, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf2r = new AnalogFilter (3, 2500.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf3l = new AnalogFilter (2, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf3r = new AnalogFilter (2, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf3l = new AnalogFilter (3, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf3r = new AnalogFilter (3, 5000.0f,.7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf1l = new AnalogFilter(2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf1r = new AnalogFilter(2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1l = new AnalogFilter(3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1r = new AnalogFilter(3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2l = new AnalogFilter(2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2r = new AnalogFilter(2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2l = new AnalogFilter(3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2r = new AnalogFilter(3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3l = new AnalogFilter(2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3r = new AnalogFilter(2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3l = new AnalogFilter(3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3r = new AnalogFilter(3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
 }
+
 void
 CompBand::clear_initialize()
 {
@@ -175,18 +174,19 @@ CompBand::clear_initialize()
     delete hpf3r;
     delete[] interpbuf;
 }
+
 /*
  * Effect output
  */
 void
-CompBand::out (float * efxoutl, float * efxoutr)
+CompBand::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    memcpy(lowl,efxoutl,sizeof(float) * PERIOD);
-    memcpy(midll,efxoutl,sizeof(float) * PERIOD);
-    memcpy(midhl,efxoutl,sizeof(float) * PERIOD);
-    memcpy(highl,efxoutl,sizeof(float) * PERIOD);
+    memcpy(lowl, efxoutl, sizeof (float) * PERIOD);
+    memcpy(midll, efxoutl, sizeof (float) * PERIOD);
+    memcpy(midhl, efxoutl, sizeof (float) * PERIOD);
+    memcpy(highl, efxoutl, sizeof (float) * PERIOD);
 
     lpf1l->filterout(lowl, PERIOD);
     hpf1l->filterout(midll, PERIOD);
@@ -195,10 +195,10 @@ CompBand::out (float * efxoutl, float * efxoutr)
     lpf3l->filterout(midhl, PERIOD);
     hpf3l->filterout(highl, PERIOD);
 
-    memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
-    memcpy(midlr,efxoutr,sizeof(float) * PERIOD);
-    memcpy(midhr,efxoutr,sizeof(float) * PERIOD);
-    memcpy(highr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(lowr, efxoutr, sizeof (float) * PERIOD);
+    memcpy(midlr, efxoutr, sizeof (float) * PERIOD);
+    memcpy(midhr, efxoutr, sizeof (float) * PERIOD);
+    memcpy(highr, efxoutr, sizeof (float) * PERIOD);
 
     lpf1r->filterout(lowr, PERIOD);
     hpf1r->filterout(midlr, PERIOD);
@@ -207,123 +207,107 @@ CompBand::out (float * efxoutl, float * efxoutr)
     lpf3r->filterout(midhr, PERIOD);
     hpf3r->filterout(highr, PERIOD);
 
+    CL->out(lowl, lowr);
+    CML->out(midll, midlr);
+    CMH->out(midhl, midhr);
+    CH->out(highl, highr);
 
-    CL->out(lowl,lowr);
-    CML->out(midll,midlr);
-    CMH->out(midhl,midhr);
-    CH->out(highl,highr);
-
-
-    for (i = 0; i < PERIOD; i++) {
-        efxoutl[i]=(lowl[i]+midll[i]+midhl[i]+highl[i])*level;
-        efxoutr[i]=(lowr[i]+midlr[i]+midhr[i]+highr[i])*level;
+    for (i = 0; i < PERIOD; i++)
+    {
+        efxoutl[i] = (lowl[i] + midll[i] + midhl[i] + highl[i]) * level;
+        efxoutr[i] = (lowr[i] + midlr[i] + midhr[i] + highr[i]) * level;
     }
 }
-
 
 /*
  * Parameter control
  */
 void
-CompBand::setvolume (int value)
+CompBand::setvolume(int value)
 {
     Pvolume = value;
-    outvolume = (float)Pvolume / 128.0f;
-
-};
-
+    outvolume = (float) Pvolume / 128.0f;
+}
 
 void
-CompBand::setlevel (int value)
+CompBand::setlevel(int value)
 {
     Plevel = value;
-    level = dB2rap (60.0f * (float)value / 127.0f - 36.0f);
-
-
-};
-
-
+    level = dB2rap(60.0f * (float) value / 127.0f - 36.0f);
+}
 
 void
 CompBand::setratio(int ch, int value)
 {
-
-    switch(ch) {
+    switch (ch)
+    {
     case 0:
-        CL->changepar(2,value);
+        CL->changepar(2, value);
         break;
     case 1:
-        CML->changepar(2,value);
+        CML->changepar(2, value);
         break;
     case 2:
-        CMH->changepar(2,value);
+        CMH->changepar(2, value);
         break;
     case 3:
-        CH->changepar(2,value);
+        CH->changepar(2, value);
         break;
     }
 }
-
 
 void
 CompBand::setthres(int ch, int value)
 {
-
-    switch(ch) {
+    switch (ch)
+    {
     case 0:
-        CL->changepar(1,value);
+        CL->changepar(1, value);
         break;
     case 1:
-        CML->changepar(1,value);
+        CML->changepar(1, value);
         break;
     case 2:
-        CMH->changepar(1,value);
+        CMH->changepar(1, value);
         break;
     case 3:
-        CH->changepar(1,value);
+        CH->changepar(1, value);
         break;
     }
 }
 
-
-
-
 void
-CompBand::setCross1 (int value)
+CompBand::setCross1(int value)
 {
     Cross1 = value;
-    lpf1l->setfreq ((float)value);
-    lpf1r->setfreq ((float)value);
-    hpf1l->setfreq ((float)value);
-    hpf1r->setfreq ((float)value);
-
-};
+    lpf1l->setfreq((float) value);
+    lpf1r->setfreq((float) value);
+    hpf1l->setfreq((float) value);
+    hpf1r->setfreq((float) value);
+}
 
 void
-CompBand::setCross2 (int value)
+CompBand::setCross2(int value)
 {
     Cross2 = value;
-    hpf2l->setfreq ((float)value);
-    hpf2r->setfreq ((float)value);
-    lpf2l->setfreq ((float)value);
-    lpf2r->setfreq ((float)value);
-
-};
+    hpf2l->setfreq((float) value);
+    hpf2r->setfreq((float) value);
+    lpf2l->setfreq((float) value);
+    lpf2r->setfreq((float) value);
+}
 
 void
-CompBand::setCross3 (int value)
+CompBand::setCross3(int value)
 {
     Cross3 = value;
-    hpf3l->setfreq ((float)value);
-    hpf3r->setfreq ((float)value);
-    lpf3l->setfreq ((float)value);
-    lpf3r->setfreq ((float)value);
-
-};
-
+    hpf3l->setfreq((float) value);
+    hpf3r->setfreq((float) value);
+    lpf3l->setfreq((float) value);
+    lpf3r->setfreq((float) value);
+}
 
 void
-CompBand::setpreset (int npreset)
+CompBand::setpreset(int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 3;
@@ -337,66 +321,70 @@ CompBand::setpreset (int npreset)
 
         //Loudness 2
         {64, 16, 2, 2, 2, -32, 24, 24, 24, 100, 1000, 5000, 48}
-
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(43,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(43, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-    cleanup ();
-};
-
+    cleanup();
+}
 
 void
-CompBand::changepar (int npar, int value)
+CompBand::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
         PLratio = value;
-        setratio(0,value);
+        setratio(0, value);
         break;
     case 2:
         PMLratio = value;
-        setratio(1,value);
+        setratio(1, value);
         break;
     case 3:
         PMHratio = value;
-        setratio(2,value);
+        setratio(2, value);
         break;
     case 4:
         PHratio = value;
-        setratio(3,value);
+        setratio(3, value);
         break;
     case 5:
         PLthres = value;
-        setthres(0,value);
+        setthres(0, value);
         break;
     case 6:
         PMLthres = value;
-        setthres(1,value);
+        setthres(1, value);
         break;
     case 7:
         PMHthres = value;
-        setthres(2,value);
+        setthres(2, value);
         break;
     case 8:
         PHthres = value;
-        setthres(3,value);
+        setthres(3, value);
         break;
     case 9:
-        setCross1 (value);
+        setCross1(value);
         break;
     case 10:
-        setCross2 (value);
+        setCross2(value);
         break;
     case 11:
         setCross3(value);
@@ -404,15 +392,14 @@ CompBand::changepar (int npar, int value)
     case 12:
         setlevel(value);
         break;
-
-
-    };
-};
+    }
+}
 
 int
-CompBand::getpar (int npar)
+CompBand::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -452,7 +439,7 @@ CompBand::getpar (int npar)
     case 12:
         return (Plevel);
         break;
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 

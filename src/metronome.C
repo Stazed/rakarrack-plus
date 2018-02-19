@@ -21,39 +21,37 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 
 #include "global.h"
 #include "metronome.h"
 
-
-metronome::metronome (double samplerate, uint32_t intermediate_bufsize)
+metronome::metronome(double samplerate, uint32_t intermediate_bufsize)
 {
     interpbuf = new float[intermediate_bufsize];
     SAMPLE_RATE = samplerate;
     fSAMPLE_RATE = float(samplerate);
-    
-    dulltick =  new AnalogFilter(4,1600.0f,80.0f,1,samplerate, interpbuf);   //BPF
-    sharptick =  new AnalogFilter(4,2800.0f,80.0f,1,samplerate, interpbuf);  //BPF
-    hpf =  new AnalogFilter(3,850.0f,60.0f,1,samplerate, interpbuf);  //HPF
+
+    dulltick = new AnalogFilter(4, 1600.0f, 80.0f, 1, samplerate, interpbuf); //BPF
+    sharptick = new AnalogFilter(4, 2800.0f, 80.0f, 1, samplerate, interpbuf); //BPF
+    hpf = new AnalogFilter(3, 850.0f, 60.0f, 1, samplerate, interpbuf); //HPF
     tick_interval = SAMPLE_RATE;
     tickctr = 0;
     markctr = 0;
     ticktype = 4;
     meter = 3;
-    tickper = lrintf(0.012f*fSAMPLE_RATE);
+    tickper = lrintf(0.012f * fSAMPLE_RATE);
+}
 
-};
-
-metronome::~metronome ()
+metronome::~metronome()
 {
     delete[] interpbuf;
     delete dulltick;
     delete sharptick;
     delete hpf;
-};
+}
 
 void
 metronome::cleanup()
@@ -64,73 +62,79 @@ metronome::cleanup()
     sharptick->cleanup();
     hpf->cleanup();
 }
+
 /*
  * Update the changed parameters
  */
 void
-metronome::set_tempo (int bpm)
+metronome::set_tempo(int bpm)
 {
-
-    float tickperiod = 60.0f/((float) bpm);
+    float tickperiod = 60.0f / ((float) bpm);
     tick_interval = lrintf(fSAMPLE_RATE * tickperiod);
-
-};
+}
 
 void
-metronome::set_meter (int counts)  //how many counts to hear the "mark"
+metronome::set_meter(int counts) //how many counts to hear the "mark"
 {
     ticktype = counts; //always dull if 0, always sharp if 1, mark on interval if more
-    if(counts<1) counts = 1;
-    meter = counts - 1;
 
-};
+    if (counts < 1) counts = 1;
+
+    meter = counts - 1;
+}
 
 /*
  * Audible output
  */
 void
-metronome::metronomeout (float * tickout, int period)
+metronome::metronomeout(float * tickout, int period)
 {
     float outsharp, outdull;
     float ticker = 0.0f;
     float hipass = 0.0f;
     int i;
 
-    for(i=0; i<period; i++) {
+    for (i = 0; i < period; i++)
+    {
         tickctr++;
 
-        if (tickctr>tick_interval) {
+        if (tickctr > tick_interval)
+        {
             tickctr = 0;
             markctr++;
-            if(markctr>meter) markctr = 0;
+            if (markctr > meter) markctr = 0;
         }
-        if (tickctr<tickper) ticker = 1.0f;
+
+        if (tickctr < tickper) ticker = 1.0f;
         else ticker = 0.0f;
-        hipass  = hpf->filterout_s(ticker);
-        if(hipass>0.5f) hipass = 0.5f;
-        if(hipass<-0.5f) hipass = -0.5f;
+
+        hipass = hpf->filterout_s(ticker);
+
+        if (hipass > 0.5f) hipass = 0.5f;
+        if (hipass<-0.5f) hipass = -0.5f;
+
         outdull = dulltick->filterout_s(hipass);
         outsharp = sharptick-> filterout_s(hipass);
 
-        switch(ticktype) {
+        switch (ticktype)
+        {
         case 0:
-            tickout[i] = 1.25f*outdull;
+            tickout[i] = 1.25f * outdull;
             break;
         case 1:
-            tickout[i] = 0.65f*outsharp;
+            tickout[i] = 0.65f * outsharp;
             break;
         default:
-            if(markctr==0) {
-                tickout[i] = 0.65f*outsharp;
-            } else {
-                tickout[i] = 1.25f*outdull;
+            if (markctr == 0)
+            {
+                tickout[i] = 0.65f * outsharp;
+            }
+            else
+            {
+                tickout[i] = 1.25f * outdull;
             }
             break;
-
         }
-
     }
-
-
-};
+}
 

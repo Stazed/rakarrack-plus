@@ -19,7 +19,7 @@
   You should have received a copy of the GNU General Public License (version 2)
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,13 +31,11 @@
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
  */
 
-
-
-Shuffle::Shuffle (double sample_rate, uint32_t intermediate_bufsize)
+Shuffle::Shuffle(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
-    
+
     initialize();
 
     //default values
@@ -47,46 +45,45 @@ Shuffle::Shuffle (double sample_rate, uint32_t intermediate_bufsize)
     PvolML = 0;
     PvolMH = 0;
     PvolH = 0;
-    E=0;
+    E = 0;
     outvolume = 0.5f;
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-Shuffle::~Shuffle ()
+Shuffle::~Shuffle()
 {
     clear_initialize();
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-Shuffle::cleanup ()
+Shuffle::cleanup()
 {
-    lr->cleanup ();
-    hr->cleanup ();
-    mlr->cleanup ();
-    mhr->cleanup ();
-
-};
+    lr->cleanup();
+    hr->cleanup();
+    mlr->cleanup();
+    mhr->cleanup();
+}
 
 void
 Shuffle::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
         initialize();
-        setCross1 (Cross1);
-        setCross2 (Cross2);
-        setCross3 (Cross3);
-        setCross4 (Cross4);
-        setGainL (getpar(1));
-        setGainML (getpar(2));
-        setGainMH (getpar(3));
-        setGainH (getpar(4));
+        setCross1(Cross1);
+        setCross2(Cross2);
+        setCross3(Cross3);
+        setCross4(Cross4);
+        setGainL(getpar(1));
+        setGainML(getpar(2));
+        setGainMH(getpar(3));
+        setGainH(getpar(4));
         set_q(PQ);
     }
     else
@@ -98,15 +95,15 @@ Shuffle::lv2_update_params(uint32_t period)
 void
 Shuffle::initialize()
 {
-    inputl = (float *) malloc (sizeof (float) * PERIOD);
-    inputr = (float *) malloc (sizeof (float) * PERIOD);
+    inputl = (float *) malloc(sizeof (float) * PERIOD);
+    inputr = (float *) malloc(sizeof (float) * PERIOD);
 
 
     interpbuf = new float[PERIOD];
-    lr = new AnalogFilter (6, 300.0f, .3f, 0, fSAMPLE_RATE,interpbuf);
-    hr = new AnalogFilter (6, 8000.0f,.3f, 0, fSAMPLE_RATE,interpbuf);
-    mlr = new AnalogFilter (6, 1200.0f,.3f, 0, fSAMPLE_RATE,interpbuf);
-    mhr = new AnalogFilter (6, 2400.0f,.3f, 0, fSAMPLE_RATE,interpbuf);
+    lr = new AnalogFilter(6, 300.0f, .3f, 0, fSAMPLE_RATE, interpbuf);
+    hr = new AnalogFilter(6, 8000.0f, .3f, 0, fSAMPLE_RATE, interpbuf);
+    mlr = new AnalogFilter(6, 1200.0f, .3f, 0, fSAMPLE_RATE, interpbuf);
+    mhr = new AnalogFilter(6, 2400.0f, .3f, 0, fSAMPLE_RATE, interpbuf);
 }
 
 void
@@ -125,110 +122,107 @@ Shuffle::clear_initialize()
  * Effect output
  */
 void
-Shuffle::out (float * efxoutl, float * efxoutr)
+Shuffle::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
 
         inputl[i] = efxoutl[i] + efxoutr[i];
         inputr[i] = efxoutl[i] - efxoutr[i];
     }
 
-    if(E) {
+    if (E)
+    {
 
         lr->filterout(inputr, PERIOD);
         mlr->filterout(inputr, PERIOD);
         mhr->filterout(inputr, PERIOD);
         hr->filterout(inputr, PERIOD);
-    } else {
+    }
+    else
+    {
         lr->filterout(inputl, PERIOD);
         mlr->filterout(inputl, PERIOD);
         mhr->filterout(inputl, PERIOD);
         hr->filterout(inputl, PERIOD);
     }
 
-
-    for (i = 0; i < PERIOD; i++) {
-        efxoutl[i]=(inputl[i]+inputr[i]-efxoutl[i])*.333333f;
-        efxoutr[i]=(inputl[i]-inputr[i]-efxoutr[i])*.333333f;
-
+    for (i = 0; i < PERIOD; i++)
+    {
+        efxoutl[i] = (inputl[i] + inputr[i] - efxoutl[i])*.333333f;
+        efxoutr[i] = (inputl[i] - inputr[i] - efxoutr[i])*.333333f;
     }
 }
-
 
 /*
  * Parameter control
  */
 void
-Shuffle::setvolume (int value)
+Shuffle::setvolume(int value)
 {
     Pvolume = value;
-    outvolume = (float)Pvolume / 128.0f;
-};
+    outvolume = (float) Pvolume / 128.0f;
+}
 
 void
-Shuffle::setCross1 (int value)
+Shuffle::setCross1(int value)
 {
     Cross1 = value;
-    lr->setfreq ((float)value);
-
-};
+    lr->setfreq((float) value);
+}
 
 void
-Shuffle::setCross2 (int value)
+Shuffle::setCross2(int value)
 {
     Cross2 = value;
-    mlr->setfreq ((float)value);
-
-};
-
+    mlr->setfreq((float) value);
+}
 
 void
-Shuffle::setCross3 (int value)
+Shuffle::setCross3(int value)
 {
     Cross3 = value;
-    mhr->setfreq ((float)value);
-
-};
+    mhr->setfreq((float) value);
+}
 
 void
-Shuffle::setCross4 (int value)
+Shuffle::setCross4(int value)
 {
     Cross4 = value;
-    hr->setfreq ((float)value);
-
-};
+    hr->setfreq((float) value);
+}
 
 void
 Shuffle::setGainL(int value)
 {
-    PvolL = value+64;
-    volL = 30.0f * ((float)PvolL - 64.0f) / 64.0f;
+    PvolL = value + 64;
+    volL = 30.0f * ((float) PvolL - 64.0f) / 64.0f;
     lr->setgain(volL);
 }
 
 void
 Shuffle::setGainML(int value)
 {
-    PvolML = value+64;
-    volML = 30.0f * ((float)PvolML - 64.0f) / 64.0f;;
+    PvolML = value + 64;
+    volML = 30.0f * ((float) PvolML - 64.0f) / 64.0f;
     mlr->setgain(volML);
 }
 
 void
 Shuffle::setGainMH(int value)
 {
-    PvolMH = value+64;
-    volMH = 30.0f * ((float)PvolMH - 64.0f) / 64.0f;;
+    PvolMH = value + 64;
+    volMH = 30.0f * ((float) PvolMH - 64.0f) / 64.0f;
     mhr->setgain(volMH);
 }
 
 void
 Shuffle::setGainH(int value)
 {
-    PvolH = value+64;
-    volH = 30.0f * ((float)PvolH - 64.0f) / 64.0f;;
+    PvolH = value + 64;
+    volH = 30.0f * ((float) PvolH - 64.0f) / 64.0f;
     hr->setgain(volH);
 }
 
@@ -236,50 +230,55 @@ void
 Shuffle::set_q(int value)
 {
     PQ = value;
-    value +=64;
-    tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
+    value += 64;
+    tmp = powf(30.0f, ((float) value - 64.0f) / 64.0f);
     lr->setq(tmp);
     mlr->setq(tmp);
     mhr->setq(tmp);
     hr->setq(tmp);
 }
 
-
 void
-Shuffle::setpreset (int npreset)
+Shuffle::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Shuffle 1
-        {64, 10, 0, 0, 0,600, 1200,2000, 6000,-14, 1},
+        {64, 10, 0, 0, 0, 600, 1200, 2000, 6000, -14, 1},
         //Shuffle 2
-        {64, 0, 0, 0, 0, 120, 1000,2400, 8000,-7, 1},
+        {64, 0, 0, 0, 0, 120, 1000, 2400, 8000, -7, 1},
         //Shuffle 3
         {64, 0, 0, 0, 0, 60, 1800, 3700, 12000, 7, 0},
         //Remover
         {0, 17, 0, 7, 5, 600, 1200, 2000, 13865, -45, 1}
     };
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(26,npreset-NUM_PRESETS+1,pdata);
+    
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(26, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-    cleanup ();
-};
-
+    cleanup();
+}
 
 void
-Shuffle::changepar (int npar, int value)
+Shuffle::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
         setGainL(value);
@@ -294,44 +293,45 @@ Shuffle::changepar (int npar, int value)
         setGainH(value);
         break;
     case 5:
-        setCross1 (value);
+        setCross1(value);
         break;
     case 6:
-        setCross2 (value);
+        setCross2(value);
         break;
     case 7:
-        setCross3 (value);
+        setCross3(value);
         break;
     case 8:
-        setCross4 (value);
+        setCross4(value);
         break;
     case 9:
-        set_q (value);
+        set_q(value);
         break;
     case 10:
-        E=value;
+        E = value;
         break;
-    };
-};
+    }
+}
 
 int
-Shuffle::getpar (int npar)
+Shuffle::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
     case 1:
-        return (PvolL-64);
+        return (PvolL - 64);
         break;
     case 2:
-        return (PvolML-64);
+        return (PvolML - 64);
         break;
     case 3:
-        return (PvolMH-64);
+        return (PvolMH - 64);
         break;
     case 4:
-        return (PvolH-64);
+        return (PvolH - 64);
         break;
     case 5:
         return (Cross1);
@@ -350,8 +350,7 @@ Shuffle::getpar (int npar)
         break;
     case 10:
         return (E);
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 

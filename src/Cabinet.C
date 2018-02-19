@@ -18,7 +18,7 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 //this really just wraps eq and has different presets
 
@@ -31,7 +31,6 @@ Cabinet::Cabinet(double sample_frequency, uint32_t intermediate_bufsize)
     setpreset(Cabinet_Preset);
 }
 
-
 Cabinet::~Cabinet()
 {
     delete eq;
@@ -43,7 +42,6 @@ Cabinet::cleanup()
     eq->cleanup();
 }
 
-
 void
 Cabinet::out(float * efxoutl, float * efxoutr)
 {
@@ -53,7 +51,6 @@ Cabinet::out(float * efxoutl, float * efxoutr)
 void
 Cabinet::setpreset(int npreset)
 {
-
     const int PRESET_SIZE = 81;
     const int NUM_PRESETS = 11;
     int presets[NUM_PRESETS][PRESET_SIZE] = {
@@ -150,37 +147,37 @@ Cabinet::setpreset(int npreset)
             0, 64, 64, 64, 0, 0, 64, 64, 64, 0, 0, 64, 64, 64, 0, 0, 64, 64, 64, 0, 67
         }
 
-
     };
 
 
-    if (npreset > (NUM_PRESETS -1))
+    if (npreset > (NUM_PRESETS - 1))
         npreset = 0;
-    for (int n = 0; n < 16; n++) {
-        eq->changepar (n * 5 + 10, presets[npreset][n * 5]);
-        eq->changepar (n * 5 + 11, presets[npreset][n * 5 + 1]);
-        eq->changepar (n * 5 + 12, presets[npreset][n * 5 + 2]);
-        eq->changepar (n * 5 + 13, presets[npreset][n * 5 + 3]);
-        eq->changepar (n * 5 + 14, presets[npreset][n * 5 + 4]);
-
+    
+    for (int n = 0; n < 16; n++)
+    {
+        eq->changepar(n * 5 + 10, presets[npreset][n * 5]);
+        eq->changepar(n * 5 + 11, presets[npreset][n * 5 + 1]);
+        eq->changepar(n * 5 + 12, presets[npreset][n * 5 + 2]);
+        eq->changepar(n * 5 + 13, presets[npreset][n * 5 + 3]);
+        eq->changepar(n * 5 + 14, presets[npreset][n * 5 + 4]);
     }
 
     Cabinet_Preset = npreset;
-};
+}
 
-void 
+void
 Cabinet::changepar(int i, int val)
 {
-    if(i==0)
+    if (i == 0)
     {
-        eq->changepar(0,val);
+        eq->changepar(0, val);
     }
 }
 
-int 
+int
 Cabinet::getpar(int i)
 {
-    if(i==0)
+    if (i == 0)
     {
         return eq->getpar(0);
     }

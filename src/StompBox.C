@@ -16,35 +16,33 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "StompBox.h"
 
-
-
-StompBox::StompBox (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize)
+StompBox::StompBox(int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
     WAVE_RES = wave_res;
     WAVE_UPQ = wave_upq;
     WAVE_DNQ = wave_dnq;
-    
+
     //default values
     Ppreset = 0;
     Pvolume = 50;
     Pgain = 64;
-    Phigh = Pmid = Plow =  0;
+    Phigh = Pmid = Plow = 0;
     Pmode = 0;
     gain = 0.0f;
     pre1gain = 100.0f;
     pre2gain = 3000.0f;
     lowb = midb = highb = 0.0f;
-    volume = (float)Pvolume / 127.0f;
-    
+    volume = (float) Pvolume / 127.0f;
+
     LG = 22.0f;
     MG = 11.0f;
     HG = 11.0f;
@@ -54,20 +52,19 @@ StompBox::StompBox (int wave_res, int wave_upq, int wave_dnq, double sample_rate
 
     initialize();
 
-    setpreset (Ppreset);
-    
-};
+    setpreset(Ppreset);
+}
 
-StompBox::~StompBox ()
+StompBox::~StompBox()
 {
     clear_initialize();
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-StompBox::cleanup ()
+StompBox::cleanup()
 {
     linput->cleanup();
     lpre1->cleanup();
@@ -93,20 +90,19 @@ StompBox::cleanup ()
     lwshape->cleanup();
     rwshape2->cleanup();
     lwshape2->cleanup();
-
-};
+}
 
 void
 StompBox::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
         initialize();
-        init_mode (Pmode);
+        init_mode(Pmode);
         init_tone();
-        cleanup ();
+        cleanup();
     }
     else
     {
@@ -119,33 +115,33 @@ StompBox::initialize()
 {
     //left channel filters
     interpbuf = new float[PERIOD];
-    linput = new AnalogFilter (1, 80.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);  //  AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,unsigned char Fstages);
-    lpre1 = new AnalogFilter (1, 630.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);   // LPF = 0, HPF = 1
-    lpre2 = new AnalogFilter (1, 220.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    lpost = new AnalogFilter (0, 720.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    ltonehg = new AnalogFilter (1, 1500.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    ltonemd = new AnalogFilter (4, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    ltonelw = new AnalogFilter (0, 500.0f, 1.0, 0, fSAMPLE_RATE, interpbuf);
+    linput = new AnalogFilter(1, 80.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf); //  AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,unsigned char Fstages);
+    lpre1 = new AnalogFilter(1, 630.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf); // LPF = 0, HPF = 1
+    lpre2 = new AnalogFilter(1, 220.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    lpost = new AnalogFilter(0, 720.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    ltonehg = new AnalogFilter(1, 1500.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    ltonemd = new AnalogFilter(4, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    ltonelw = new AnalogFilter(0, 500.0f, 1.0, 0, fSAMPLE_RATE, interpbuf);
 
     //Right channel filters
-    rinput = new AnalogFilter (1, 80.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);  //  AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,unsigned char Fstages);
-    rpre1 = new AnalogFilter (1, 630.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);   // , sample_rateLPF = 0, HPF = 1
-    rpre2 = new AnalogFilter (1, 220.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    rpost = new AnalogFilter (0, 720.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    rtonehg = new AnalogFilter (1, 1500.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    rtonemd = new AnalogFilter (4, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-    rtonelw = new AnalogFilter (0, 500.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    rinput = new AnalogFilter(1, 80.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf); //  AnalogFilter (unsigned char Ftype, float Ffreq, float Fq,unsigned char Fstages);
+    rpre1 = new AnalogFilter(1, 630.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf); // , sample_rateLPF = 0, HPF = 1
+    rpre2 = new AnalogFilter(1, 220.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    rpost = new AnalogFilter(0, 720.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    rtonehg = new AnalogFilter(1, 1500.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    rtonemd = new AnalogFilter(4, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+    rtonelw = new AnalogFilter(0, 500.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
 
     //Anti-aliasing for between stages
-    ranti = new AnalogFilter (0, 6000.0f, 0.707f, 1, fSAMPLE_RATE, interpbuf);
-    lanti = new AnalogFilter (0, 6000.0f, 0.707f, 1, fSAMPLE_RATE, interpbuf);
+    ranti = new AnalogFilter(0, 6000.0f, 0.707f, 1, fSAMPLE_RATE, interpbuf);
+    lanti = new AnalogFilter(0, 6000.0f, 0.707f, 1, fSAMPLE_RATE, interpbuf);
 
     rwshape = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
     lwshape = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
     rwshape2 = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
     lwshape2 = new Waveshaper(fSAMPLE_RATE, WAVE_RES, WAVE_UPQ, WAVE_DNQ, PERIOD);
 
-//    cleanup ();
+    //    cleanup ();
 }
 
 void
@@ -183,240 +179,231 @@ StompBox::clear_initialize()
  * Effect output
  */
 void
-StompBox::out (float * efxoutl, float * efxoutr)
+StompBox::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    float hfilter;  //temporary variables
+    float hfilter; //temporary variables
     float mfilter;
     float lfilter;
     float tempr;
     float templ;
 
-    switch (Pmode) {
-    case 0:          //Odie
+    switch (Pmode)
+    {
+    case 0: //Odie
 
         lpre2->filterout(efxoutl, PERIOD);
         rpre2->filterout(efxoutr, PERIOD);
-        rwshape->waveshapesmps (PERIOD, efxoutl, 28, 20, 1);  //Valve2
-        lwshape->waveshapesmps (PERIOD, efxoutr, 28, 20, 1);
+        rwshape->waveshapesmps(PERIOD, efxoutl, 28, 20, 1); //Valve2
+        lwshape->waveshapesmps(PERIOD, efxoutr, 28, 20, 1);
         ranti->filterout(efxoutr, PERIOD);
         lanti->filterout(efxoutl, PERIOD);
         lpre1->filterout(efxoutl, PERIOD);
         rpre1->filterout(efxoutr, PERIOD);
-        rwshape2->waveshapesmps (PERIOD, efxoutl, 28, Pgain, 1);  //Valve2
-        lwshape2->waveshapesmps (PERIOD, efxoutr, 28, Pgain, 1);
+        rwshape2->waveshapesmps(PERIOD, efxoutl, 28, Pgain, 1); //Valve2
+        lwshape2->waveshapesmps(PERIOD, efxoutr, 28, Pgain, 1);
 
         lpost->filterout(efxoutl, PERIOD);
         rpost->filterout(efxoutr, PERIOD);
 
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             //left channel
-            lfilter =  ltonelw->filterout_s(efxoutl[i]);
-            mfilter =  ltonemd->filterout_s(efxoutl[i]);
-            hfilter =  ltonehg->filterout_s(efxoutl[i]);
+            lfilter = ltonelw->filterout_s(efxoutl[i]);
+            mfilter = ltonemd->filterout_s(efxoutl[i]);
+            hfilter = ltonehg->filterout_s(efxoutl[i]);
 
-            efxoutl[i] = 0.5f * volume * (efxoutl[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
+            efxoutl[i] = 0.5f * volume * (efxoutl[i] + lowb * lfilter + midb * mfilter + highb * hfilter);
 
             //Right channel
-            lfilter =  rtonelw->filterout_s(efxoutr[i]);
-            mfilter =  rtonemd->filterout_s(efxoutr[i]);
-            hfilter =  rtonehg->filterout_s(efxoutr[i]);
+            lfilter = rtonelw->filterout_s(efxoutr[i]);
+            mfilter = rtonemd->filterout_s(efxoutr[i]);
+            hfilter = rtonehg->filterout_s(efxoutr[i]);
 
-            efxoutr[i] = 0.5f * volume * (efxoutr[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
+            efxoutr[i] = 0.5f * volume * (efxoutr[i] + lowb * lfilter + midb * mfilter + highb * hfilter);
 
         }
 
         break;
 
-    case 1:  //Grunge
-    case 5:  //Death Metal
-    case 6:  //Metal Zone
+    case 1: //Grunge
+    case 5: //Death Metal
+    case 6: //Metal Zone
         linput->filterout(efxoutl, PERIOD);
         rinput->filterout(efxoutr, PERIOD);
 
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             templ = efxoutl[i] * (gain * pgain + 0.01f);
             tempr = efxoutr[i] * (gain * pgain + 0.01f);
             efxoutl[i] += lpre1->filterout_s(templ);
             efxoutr[i] += rpre1->filterout_s(tempr);
         }
-        rwshape->waveshapesmps (PERIOD, efxoutl, 24, 1, 1);  // Op amp limiting
-        lwshape->waveshapesmps (PERIOD, efxoutr, 24, 1, 1);
+        rwshape->waveshapesmps(PERIOD, efxoutl, 24, 1, 1); // Op amp limiting
+        lwshape->waveshapesmps(PERIOD, efxoutr, 24, 1, 1);
 
         ranti->filterout(efxoutr, PERIOD);
         lanti->filterout(efxoutl, PERIOD);
 
-        rwshape2->waveshapesmps (PERIOD, efxoutl, 23, Pgain, 1);  // hard comp
-        lwshape2->waveshapesmps (PERIOD, efxoutr, 23, Pgain, 1);
+        rwshape2->waveshapesmps(PERIOD, efxoutl, 23, Pgain, 1); // hard comp
+        lwshape2->waveshapesmps(PERIOD, efxoutr, 23, Pgain, 1);
 
 
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             efxoutl[i] = efxoutl[i] + RGP2 * lpre2->filterout_s(efxoutl[i]);
             efxoutr[i] = efxoutr[i] + RGP2 * rpre2->filterout_s(efxoutr[i]);
             efxoutl[i] = efxoutl[i] + RGPST * lpost->filterout_s(efxoutl[i]);
             efxoutr[i] = efxoutr[i] + RGPST * rpost->filterout_s(efxoutr[i]);
 
             //left channel
-            lfilter =  ltonelw->filterout_s(efxoutl[i]);
-            mfilter =  ltonemd->filterout_s(efxoutl[i]);
-            hfilter =  ltonehg->filterout_s(efxoutl[i]);
+            lfilter = ltonelw->filterout_s(efxoutl[i]);
+            mfilter = ltonemd->filterout_s(efxoutl[i]);
+            hfilter = ltonehg->filterout_s(efxoutl[i]);
 
-            efxoutl[i] = 0.1f * volume * (efxoutl[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
+            efxoutl[i] = 0.1f * volume * (efxoutl[i] + lowb * lfilter + midb * mfilter + highb * hfilter);
 
             //Right channel
-            lfilter =  rtonelw->filterout_s(efxoutr[i]);
-            mfilter =  rtonemd->filterout_s(efxoutr[i]);
-            hfilter =  rtonehg->filterout_s(efxoutr[i]);
+            lfilter = rtonelw->filterout_s(efxoutr[i]);
+            mfilter = rtonemd->filterout_s(efxoutr[i]);
+            hfilter = rtonehg->filterout_s(efxoutr[i]);
 
-            efxoutr[i] = 0.1f * volume * (efxoutr[i] + lowb*lfilter + midb*mfilter + highb*hfilter);
+            efxoutr[i] = 0.1f * volume * (efxoutr[i] + lowb * lfilter + midb * mfilter + highb * hfilter);
 
         }
-
-
-
         break;
-    case 2:  //Rat
-    case 3:  //Fat Cat  //Pre gain & filter freqs the only difference
+    case 2: //Rat
+    case 3: //Fat Cat  //Pre gain & filter freqs the only difference
 
         linput->filterout(efxoutl, PERIOD);
         rinput->filterout(efxoutr, PERIOD);
 
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             templ = efxoutl[i];
             tempr = efxoutr[i];
-            efxoutl[i] += lpre1->filterout_s(pre1gain*gain*templ);
-            efxoutr[i] += rpre1->filterout_s(pre1gain*gain*tempr);  //Low freq gain stage
-            efxoutl[i] += lpre2->filterout_s(pre2gain*gain*templ);
-            efxoutr[i] += rpre2->filterout_s(pre2gain*gain*tempr); //High freq gain stage
-
+            efxoutl[i] += lpre1->filterout_s(pre1gain * gain * templ);
+            efxoutr[i] += rpre1->filterout_s(pre1gain * gain * tempr); //Low freq gain stage
+            efxoutl[i] += lpre2->filterout_s(pre2gain * gain * templ);
+            efxoutr[i] += rpre2->filterout_s(pre2gain * gain * tempr); //High freq gain stage
         }
 
-
-        rwshape->waveshapesmps (PERIOD, efxoutl, 24, 1, 1);  // Op amp limiting
-        lwshape->waveshapesmps (PERIOD, efxoutr, 24, 1, 1);
+        rwshape->waveshapesmps(PERIOD, efxoutl, 24, 1, 1); // Op amp limiting
+        lwshape->waveshapesmps(PERIOD, efxoutr, 24, 1, 1);
 
         ranti->filterout(efxoutr, PERIOD);
         lanti->filterout(efxoutl, PERIOD);
 
-        rwshape2->waveshapesmps (PERIOD, efxoutl, 23, 1, 0);  // hard comp
-        lwshape2->waveshapesmps (PERIOD, efxoutr, 23, 1, 0);
+        rwshape2->waveshapesmps(PERIOD, efxoutl, 23, 1, 0); // hard comp
+        lwshape2->waveshapesmps(PERIOD, efxoutr, 23, 1, 0);
 
-
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             //left channel
-            lfilter =  ltonelw->filterout_s(efxoutl[i]);
-            mfilter =  ltonemd->filterout_s(efxoutl[i]);
+            lfilter = ltonelw->filterout_s(efxoutl[i]);
+            mfilter = ltonemd->filterout_s(efxoutl[i]);
 
-            efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (efxoutl[i] + lowb*lfilter + midb*mfilter));
+            efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (efxoutl[i] + lowb * lfilter + midb * mfilter));
 
             //Right channel
-            lfilter =  rtonelw->filterout_s(efxoutr[i]);
-            mfilter =  rtonemd->filterout_s(efxoutr[i]);
+            lfilter = rtonelw->filterout_s(efxoutr[i]);
+            mfilter = rtonemd->filterout_s(efxoutr[i]);
 
-            efxoutr[i] = 0.5f * rtonehg->filterout_s(volume * (efxoutr[i] + lowb*lfilter + midb*mfilter));
-
+            efxoutr[i] = 0.5f * rtonehg->filterout_s(volume * (efxoutr[i] + lowb * lfilter + midb * mfilter));
         }
-
         break;
-    case 4:  //Dist+
+    case 4: //Dist+
 
         linput->filterout(efxoutl, PERIOD);
         rinput->filterout(efxoutr, PERIOD);
 
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             templ = efxoutl[i];
             tempr = efxoutr[i];
-            efxoutl[i] += lpre1->filterout_s(pre1gain*gain*templ);
-            efxoutr[i] += rpre1->filterout_s(pre1gain*gain*tempr);  //Low freq gain stage
+            efxoutl[i] += lpre1->filterout_s(pre1gain * gain * templ);
+            efxoutr[i] += rpre1->filterout_s(pre1gain * gain * tempr); //Low freq gain stage
         }
 
-
-        rwshape->waveshapesmps (PERIOD, efxoutl, 24, 1, 1);  // Op amp limiting
-        lwshape->waveshapesmps (PERIOD, efxoutr, 24, 1, 1);
+        rwshape->waveshapesmps(PERIOD, efxoutl, 24, 1, 1); // Op amp limiting
+        lwshape->waveshapesmps(PERIOD, efxoutr, 24, 1, 1);
 
         ranti->filterout(efxoutr, PERIOD);
         lanti->filterout(efxoutl, PERIOD);
 
-        rwshape2->waveshapesmps (PERIOD, efxoutl, 29, 1, 0);  // diode limit
-        lwshape2->waveshapesmps (PERIOD, efxoutr, 29, 1, 0);
+        rwshape2->waveshapesmps(PERIOD, efxoutl, 29, 1, 0); // diode limit
+        lwshape2->waveshapesmps(PERIOD, efxoutr, 29, 1, 0);
 
-
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             //left channel
-            lfilter =  ltonelw->filterout_s(efxoutl[i]);
-            mfilter =  ltonemd->filterout_s(efxoutl[i]);
+            lfilter = ltonelw->filterout_s(efxoutl[i]);
+            mfilter = ltonemd->filterout_s(efxoutl[i]);
 
-            efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (efxoutl[i] + lowb*lfilter + midb*mfilter));
+            efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (efxoutl[i] + lowb * lfilter + midb * mfilter));
 
             //Right channel
-            lfilter =  rtonelw->filterout_s(efxoutr[i]);
-            mfilter =  rtonemd->filterout_s(efxoutr[i]);
+            lfilter = rtonelw->filterout_s(efxoutr[i]);
+            mfilter = rtonemd->filterout_s(efxoutr[i]);
 
-            efxoutr[i] = 0.5f * rtonehg->filterout_s(volume * (efxoutr[i] + lowb*lfilter + midb*mfilter));
-
+            efxoutr[i] = 0.5f * rtonehg->filterout_s(volume * (efxoutr[i] + lowb * lfilter + midb * mfilter));
         }
-
         break;
 
-    case 7:          //Classic Fuzz
+    case 7: //Classic Fuzz
 
         lpre1->filterout(efxoutl, PERIOD);
         rpre1->filterout(efxoutr, PERIOD);
         linput->filterout(efxoutl, PERIOD);
         rinput->filterout(efxoutr, PERIOD);
-        rwshape->waveshapesmps (PERIOD, efxoutr, 19, 25, 1);  //compress
-        lwshape->waveshapesmps (PERIOD, efxoutl, 19, 25, 1);
+        rwshape->waveshapesmps(PERIOD, efxoutr, 19, 25, 1); //compress
+        lwshape->waveshapesmps(PERIOD, efxoutl, 19, 25, 1);
 
-        for (i = 0; i<PERIOD; i++) {
-
+        for (i = 0; i < PERIOD; i++)
+        {
             //left channel
-            mfilter =  ltonemd->filterout_s(efxoutl[i]);
+            mfilter = ltonemd->filterout_s(efxoutl[i]);
 
             templ = lpost->filterout_s(fabs(efxoutl[i]));
-            tempr = rpost->filterout_s(fabs(efxoutr[i]));   //dynamic symmetry
+            tempr = rpost->filterout_s(fabs(efxoutr[i])); //dynamic symmetry
 
-            efxoutl[i] += lowb*templ + midb*mfilter;      //In this case, lowb control tweaks symmetry
+            efxoutl[i] += lowb * templ + midb*mfilter; //In this case, lowb control tweaks symmetry
 
             //Right channel
-            mfilter =  rtonemd->filterout_s(efxoutr[i]);
-            efxoutr[i] += lowb*tempr + midb*mfilter;
-
+            mfilter = rtonemd->filterout_s(efxoutr[i]);
+            efxoutr[i] += lowb * tempr + midb*mfilter;
         }
 
         ranti->filterout(efxoutr, PERIOD);
         lanti->filterout(efxoutl, PERIOD);
-        rwshape2->waveshapesmps (PERIOD, efxoutr, 25, Pgain, 1);  //JFET
-        lwshape2->waveshapesmps (PERIOD, efxoutl, 25, Pgain, 1);
+        rwshape2->waveshapesmps(PERIOD, efxoutr, 25, Pgain, 1); //JFET
+        lwshape2->waveshapesmps(PERIOD, efxoutl, 25, Pgain, 1);
         lpre2->filterout(efxoutl, PERIOD);
         rpre2->filterout(efxoutr, PERIOD);
 
-        for (i = 0; i<PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             //left channel
-            lfilter =  ltonelw->filterout_s(efxoutl[i]);
-            hfilter =  ltonehg->filterout_s(efxoutl[i]);
+            lfilter = ltonelw->filterout_s(efxoutl[i]);
+            hfilter = ltonehg->filterout_s(efxoutl[i]);
 
-            efxoutl[i] = volume * ((1.0f - highb)*lfilter + highb*hfilter);  //classic BMP tone stack
+            efxoutl[i] = volume * ((1.0f - highb) * lfilter + highb * hfilter); //classic BMP tone stack
 
             //Right channel
-            lfilter =  rtonelw->filterout_s(efxoutr[i]);
-            hfilter =  rtonehg->filterout_s(efxoutr[i]);
+            lfilter = rtonelw->filterout_s(efxoutr[i]);
+            hfilter = rtonehg->filterout_s(efxoutr[i]);
 
-            efxoutr[i] = volume * ((1.0f - highb)*lfilter + highb*hfilter);
-
+            efxoutr[i] = volume * ((1.0f - highb) * lfilter + highb * hfilter);
         }
         break;
     }
-
-
-
-};
-
+}
 
 /*
  * Parameter control
  */
-void StompBox::init_mode (int value)
+void StompBox::init_mode(int value)
 {
     int tinput = 1;
     float finput = 80.0f;
@@ -453,7 +440,8 @@ void StompBox::init_mode (int value)
     float qtonelw = 1.0f;
     int stonelw = 0;
 
-    switch (value) {
+    switch (value)
+    {
     case 0:
         tinput = 1;
         finput = 80.0f;
@@ -492,179 +480,179 @@ void StompBox::init_mode (int value)
         break;
 
     case 1: //Grunge
-// Some key filter stages based upon a schematic for a grunge pedal
-// Total gain up to 25,740/2 (91dB)
-// Fc1 =  999.02  Gain = 110 = 40.8dB
-// Q1 =  2.9502
-// gain stage 1rst order HP @ 340 Hz, Gain = 21.3 ... 234 (26dB ... 47dB)
-// Fc2 =  324.50
-// Q2 =  4.5039
-// Fc3 =  5994.1
-// Q3 =  1.7701
-// Fc4 =  127.80
-// Q4 =  3.7739
+        // Some key filter stages based upon a schematic for a grunge pedal
+        // Total gain up to 25,740/2 (91dB)
+        // Fc1 =  999.02  Gain = 110 = 40.8dB
+        // Q1 =  2.9502
+        // gain stage 1rst order HP @ 340 Hz, Gain = 21.3 ... 234 (26dB ... 47dB)
+        // Fc2 =  324.50
+        // Q2 =  4.5039
+        // Fc3 =  5994.1
+        // Q3 =  1.7701
+        // Fc4 =  127.80
+        // Q4 =  3.7739
 
-        tinput = 4;         //Pre-Emphasis filter
+        tinput = 4; //Pre-Emphasis filter
         finput = 1000.0f;
         qinput = 2.95f;
         sinput = 0;
         pgain = 110.0f;
 
-        tpre1 = 0;         //Gain stage reduce aliasing
+        tpre1 = 0; //Gain stage reduce aliasing
         fpre1 = 6000.0f;
         qpre1 = 0.707f;
         spre1 = 2;
 
-        tpre2 = 4;        //being used as a recovery filter, gain = 10
+        tpre2 = 4; //being used as a recovery filter, gain = 10
         fpre2 = 324.5f;
         qpre2 = 4.5f;
         spre2 = 0;
         RGP2 = 10.0f;
 
-        tpost = 4;       //The other recovery filter, gain = 3
+        tpost = 4; //The other recovery filter, gain = 3
         fpost = 6000.0f;
         qpost = 1.77f;
         spost = 0;
         RGPST = 3.0f;
 
-        ttonehg = 1;       //high shelf ranging 880 to 9700 Hz, gain 10
+        ttonehg = 1; //high shelf ranging 880 to 9700 Hz, gain 10
         ftonehg = 4000.0f;
         qtonehg = 1.0f;
         stonehg = 0;
 
-        ttonemd = 4;       // Pedal has no mid filter so I'll make up my own
+        ttonemd = 4; // Pedal has no mid filter so I'll make up my own
         ftonemd = 1000.0f;
         qtonemd = 2.0f;
         stonemd = 0;
 
-        ttonelw = 4;       //Low Eq band, peaking type, gain = up to 22.
+        ttonelw = 4; //Low Eq band, peaking type, gain = up to 22.
         ftonelw = 128.0f;
         qtonelw = 3.8f;
         stonelw = 0;
         break;
 
     case 2: //ProCo Rat Distortion emulation
-// Some key filter stages based upon a schematic for a grunge pedal
+        // Some key filter stages based upon a schematic for a grunge pedal
 
-        tinput = 0;         //Reduce some noise aliasing
+        tinput = 0; //Reduce some noise aliasing
         finput = 5000.0f;
         qinput = 1.0f;
         sinput = 3;
 
-        tpre1 = 1;         //Gain stage high boost, gain = 1 ... 268 (max)
+        tpre1 = 1; //Gain stage high boost, gain = 1 ... 268 (max)
         fpre1 = 60.0f;
         qpre1 = 1.0f;
         spre1 = 0;
         pre1gain = 268.0f;
 
-        tpre2 = 1;        //being used as a recovery filter, gain = 1 ... 3000
+        tpre2 = 1; //being used as a recovery filter, gain = 1 ... 3000
         fpre2 = 1539.0f;
         qpre2 = 1.0f;
         spre2 = 0;
         pre2gain = 3000.0f;
 
-        tpost = 0;       //Not used...initialized to "something"
+        tpost = 0; //Not used...initialized to "something"
         fpost = 6000.0f;
         qpost = 1.77f;
         spost = 0;
 
-        ttonehg = 0;       //frequency sweeping LPF
+        ttonehg = 0; //frequency sweeping LPF
         ftonehg = 1000.0f;
         qtonehg = 1.0f;
         stonehg = 0;
 
-        ttonemd = 4;       // Pedal has no mid filter so I'll make up my own
+        ttonemd = 4; // Pedal has no mid filter so I'll make up my own
         ftonemd = 700.0f;
         qtonemd = 2.0f;
         stonemd = 0;
 
-        ttonelw = 0;       //Pedal has no Low filter, so make up my own...Low Eq band, peaking type
-        ftonelw = 328.0f;  //Mild low boost
+        ttonelw = 0; //Pedal has no Low filter, so make up my own...Low Eq band, peaking type
+        ftonelw = 328.0f; //Mild low boost
         qtonelw = 0.50f;
         stonelw = 1;
         break;
 
     case 3: //Fat Cat Distortion emulation
     case 4: //MXR Dist+ emulation (many below filters unuse)
-// Some key filter stages based upon a schematic for a grunge pedal
+        // Some key filter stages based upon a schematic for a grunge pedal
 
-        tinput = 0;         //Reduce some noise aliasing
+        tinput = 0; //Reduce some noise aliasing
         finput = 5000.0f;
         qinput = 1.0f;
         sinput = 3;
 
-        tpre1 = 1;         //Gain stage high boost, gain = 1 ... 100 (max)
+        tpre1 = 1; //Gain stage high boost, gain = 1 ... 100 (max)
         fpre1 = 33.0f;
         qpre1 = 1.0f;
         spre1 = 0;
         pre1gain = 100.0f;
 
-        tpre2 = 1;        //being used as a recovery filter, gain = 1 ... 1700
+        tpre2 = 1; //being used as a recovery filter, gain = 1 ... 1700
         fpre2 = 861.0f;
         qpre2 = 1.0f;
         spre2 = 0;
         pre2gain = 1700.0f;
 
-        tpost = 0;       //Not used...initialized to "something"
+        tpost = 0; //Not used...initialized to "something"
         fpost = 6000.0f;
         qpost = 1.77f;
         spost = 0;
 
-        ttonehg = 0;       //frequency sweeping LPF
+        ttonehg = 0; //frequency sweeping LPF
         ftonehg = 1000.0f;
         qtonehg = 1.0f;
         stonehg = 0;
 
-        ttonemd = 4;       // Pedal has no mid filter so I'll make up my own
+        ttonemd = 4; // Pedal has no mid filter so I'll make up my own
         ftonemd = 700.0f;
         qtonemd = 2.0f;
         stonemd = 0;
 
-        ttonelw = 0;       //Pedal has no Low filter, so make up my own...Low Eq band, peaking type
-        ftonelw = 328.0f;  //Mild low boost
+        ttonelw = 0; //Pedal has no Low filter, so make up my own...Low Eq band, peaking type
+        ftonelw = 328.0f; //Mild low boost
         qtonelw = 0.50f;
         stonelw = 1;
         break;
 
     case 5: //Death Metal
-// Some key filter stages based upon a schematic for a grunge pedal
+        // Some key filter stages based upon a schematic for a grunge pedal
 
-        tinput = 4;         //Pre-Emphasis filter
+        tinput = 4; //Pre-Emphasis filter
         finput = 6735.4f;
         qinput = 0.43f;
         sinput = 0;
         pgain = 110.0f;
 
-        tpre1 = 0;         //Gain stage reduce aliasing
+        tpre1 = 0; //Gain stage reduce aliasing
         fpre1 = 6000.0f;
         qpre1 = 0.707f;
         spre1 = 2;
 
-        tpre2 = 4;        //being used as a recovery filter, gain = 10
+        tpre2 = 4; //being used as a recovery filter, gain = 10
         fpre2 = 517.0f;
         qpre2 = 7.17f;
         spre2 = 0;
         RGP2 = 1.0f;
 
-        tpost = 4;       //The other recovery filter, gain = 10
+        tpost = 4; //The other recovery filter, gain = 10
         fpost = 48.0f;
         qpost = 6.68f;
         spost = 0;
         RGPST = 10.0f;
 
-        ttonehg = 1;       //high shelf ranging 880 to 9700 Hz, gain 11
+        ttonehg = 1; //high shelf ranging 880 to 9700 Hz, gain 11
         ftonehg = 4000.0f;
         qtonehg = 1.0f;
         stonehg = 0;
         HG = 11.0f;
 
-        ttonemd = 4;       // Mid band EQ gain 11
+        ttonemd = 4; // Mid band EQ gain 11
         ftonemd = 1017.0f;
         qtonemd = 1.15f;
         stonemd = 0;
         MG = 11.0f;
 
-        ttonelw = 4;       //Low Eq band, peaking type, gain = up to 22.
+        ttonelw = 4; //Low Eq band, peaking type, gain = up to 22.
         ftonelw = 107.0f;
         qtonelw = 3.16f;
         stonelw = 0;
@@ -672,44 +660,44 @@ void StompBox::init_mode (int value)
 
         break;
     case 6: //Metal Zone
-// Some key filter stages based upon a schematic for a grunge pedal
+        // Some key filter stages based upon a schematic for a grunge pedal
 
-        tinput = 4;         //Pre-Emphasis filter
+        tinput = 4; //Pre-Emphasis filter
         finput = 952.53f;
         qinput = 2.8f;
         sinput = 0;
         pgain = 100.0f;
 
-        tpre1 = 0;         //Gain stage reduce aliasing
+        tpre1 = 0; //Gain stage reduce aliasing
         fpre1 = 6000.0f;
         qpre1 = 0.707f;
         spre1 = 2;
 
-        tpre2 = 4;        //being used as a recovery filter, gain = 10
+        tpre2 = 4; //being used as a recovery filter, gain = 10
         fpre2 = 4894.0f;
         qpre2 = 2.16f;
         spre2 = 0;
         RGP2 = 3.3f;
 
-        tpost = 4;       //The other recovery filter, gain = 10
+        tpost = 4; //The other recovery filter, gain = 10
         fpost = 105.0f;
         qpost = 14.62f;
         spost = 0;
         RGPST = 7.0f;
 
-        ttonehg = 1;       //high shelf ranging 880 to 9700 Hz, gain 11
+        ttonehg = 1; //high shelf ranging 880 to 9700 Hz, gain 11
         ftonehg = 4000.0f;
         qtonehg = 1.0f;
         stonehg = 0;
         HG = 10.0f;
 
-        ttonemd = 4;       // Mid band EQ gain 11
+        ttonemd = 4; // Mid band EQ gain 11
         ftonemd = 1017.0f;
         qtonemd = 1.15f;
         stonemd = 0;
         MG = 11.0f;
 
-        ttonelw = 4;       //Low Eq band, peaking type, gain = up to 22.
+        ttonelw = 4; //Low Eq band, peaking type, gain = up to 22.
         ftonelw = 105.50f;
         qtonelw = 3.11f;
         stonelw = 0;
@@ -717,7 +705,7 @@ void StompBox::init_mode (int value)
 
         break;
 
-    case 7:  //Classic Fuzz
+    case 7: //Classic Fuzz
         tinput = 1;
         finput = 80.0f;
         qinput = 1.0f;
@@ -744,7 +732,7 @@ void StompBox::init_mode (int value)
         stonehg = 0;
 
         ttonemd = 4;
-        ftonemd = 515.0f;  //sort of like a stuck wahwah
+        ftonemd = 515.0f; //sort of like a stuck wahwah
         qtonemd = 4.0f;
         stonemd = 0;
 
@@ -775,11 +763,11 @@ void StompBox::init_mode (int value)
     lpost->setstages(spost);
 
     ltonehg->settype(ttonehg);
-    ltonehg->setfreq_and_q(ftonehg,qtonehg);
+    ltonehg->setfreq_and_q(ftonehg, qtonehg);
     ltonehg->setstages(stonehg);
 
     ltonemd->settype(ttonemd);
-    ltonemd->setfreq_and_q(ftonemd,qtonemd);
+    ltonemd->setfreq_and_q(ftonemd, qtonemd);
     ltonemd->setstages(stonemd);
 
     ltonelw->settype(ttonelw);
@@ -805,93 +793,90 @@ void StompBox::init_mode (int value)
     rpost->setstages(spost);
 
     rtonehg->settype(ttonehg);
-    rtonehg->setfreq_and_q(ftonehg,qtonehg);
+    rtonehg->setfreq_and_q(ftonehg, qtonehg);
     rtonehg->setstages(stonehg);
 
     rtonemd->settype(ttonemd);
-    rtonemd->setfreq_and_q(ftonemd,qtonemd);
+    rtonemd->setfreq_and_q(ftonemd, qtonemd);
     rtonemd->setstages(stonemd);
 
     rtonelw->settype(ttonelw);
     rtonelw->setfreq_and_q(ftonelw, qtonelw);
     rtonelw->setstages(stonelw);
+}
 
-};
-
-void StompBox::init_tone ()
+void StompBox::init_tone()
 {
     float varf;
-    switch (Pmode) {
+    switch (Pmode)
+    {
     case 0:
-        varf = 2533.0f + highb*1733.0f;  //High tone ranges from 800 to 6000Hz
+        varf = 2533.0f + highb * 1733.0f; //High tone ranges from 800 to 6000Hz
         rtonehg->setfreq(varf);
         ltonehg->setfreq(varf);
-        if (highb > 0.0f) highb = ((float) Phigh)/8.0f;
+        if (highb > 0.0f) highb = ((float) Phigh) / 8.0f;
         break;
 
     case 1:
-        varf = 3333.0f + highb*2500.0f;  //High tone ranges from 833 to 8333Hz
+        varf = 3333.0f + highb * 2500.0f; //High tone ranges from 833 to 8333Hz
         rtonehg->setfreq(varf);
         ltonehg->setfreq(varf);
 
-        if (highb > 0.0f) highb = ((float) Phigh)/16.0f;
-        if (lowb > 0.0f) lowb = ((float) Plow)/18.0f;
+        if (highb > 0.0f) highb = ((float) Phigh) / 16.0f;
+        if (lowb > 0.0f) lowb = ((float) Plow) / 18.0f;
         break;
 
     case 2:
     case 3:
-        varf = 3653.0f + highb*3173.0f;  //High tone ranges from ~480 to 10k
+        varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
         rtonehg->setfreq(varf);
         ltonehg->setfreq(varf);
         break;
     case 4:
-        varf = gain*700.0f + 20.0f;
+        varf = gain * 700.0f + 20.0f;
         rpre1->setfreq(varf);
         lpre1->setfreq(varf);
         pre1gain = 212.0f;
-        varf = 3653.0f + highb*3173.0f;  //High tone ranges from ~480 to 10k
+        varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
         rtonehg->setfreq(varf);
         ltonehg->setfreq(varf);
         break;
     case 5: //Death Metal
     case 6: //Mid Elves Own
-        varf = 3653.0f + highb*3173.0f;  //High tone ranges from ~480 to 10k
+        varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
         rtonehg->setfreq(varf);
         ltonehg->setfreq(varf);
 
-        if (highb > 0.0f) highb = HG * ((float) Phigh)/64.0f;
-        if (lowb > 0.0f) lowb = LG * ((float) Plow)/64.0f;
-        if (midb > 0.0f) midb = MG * ((float) Pmid)/64.0f;
+        if (highb > 0.0f) highb = HG * ((float) Phigh) / 64.0f;
+        if (lowb > 0.0f) lowb = LG * ((float) Plow) / 64.0f;
+        if (midb > 0.0f) midb = MG * ((float) Pmid) / 64.0f;
         break;
 
     case 7:
-        highb = ((float) Phigh + 64)/127.0f;
+        highb = ((float) Phigh + 64) / 127.0f;
         varf = 40.0f + gain * 200.0f;
         linput->setfreq(varf);
         rinput->setfreq(varf);
-        if (midb > 0.0f) midb = ((float) Pmid)/8.0f;
-        lowb = ((float) Plow)/64.0f;
+        if (midb > 0.0f) midb = ((float) Pmid) / 8.0f;
+        lowb = ((float) Plow) / 64.0f;
 
         varf = 1085.0f - lowb * 1000.0f;
         lpre1->setfreq(varf);
         rpre1->setfreq(varf);
         break;
-
-
     }
     cleanup();
-};
-
+}
 
 void
-StompBox::setvolume (int value)
+StompBox::setvolume(int value)
 {
     Pvolume = value;
-    volume = (float)Pvolume / 127.0f;
-};
+    volume = (float) Pvolume / 127.0f;
+}
 
 void
-StompBox::setpreset (int npreset)
+StompBox::setpreset(int npreset)
 {
     const int PRESET_SIZE = 6;
     const int NUM_PRESETS = 8;
@@ -915,59 +900,63 @@ StompBox::setpreset (int npreset)
         {48, 0, 0, 0, 127, 7}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(39,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(39, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-    cleanup ();
-
-};
-
+    cleanup();
+}
 
 void
-StompBox::changepar (int npar, int value)
+StompBox::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
         Phigh = value;
-        if( value < 0) highb = ((float) value)/64.0f;
-        if( value > 0) highb = ((float) value)/32.0f;
+        if (value < 0) highb = ((float) value) / 64.0f;
+        if (value > 0) highb = ((float) value) / 32.0f;
         break;
     case 2:
         Pmid = value;
-        if( value < 0) midb = ((float) value)/64.0f;
-        if( value > 0) midb = ((float) value)/32.0f;
+        if (value < 0) midb = ((float) value) / 64.0f;
+        if (value > 0) midb = ((float) value) / 32.0f;
         break;
     case 3:
         Plow = value;
-        if( value < 0) lowb = ((float) value)/64.0f;
-        if( value > 0) lowb = ((float) value)/32.0f;
+        if (value < 0) lowb = ((float) value) / 64.0f;
+        if (value > 0) lowb = ((float) value) / 32.0f;
         break;
     case 4:
         Pgain = value;
-        gain = dB2rap(50.0f * ((float)value)/127.0f  - 50.0f);
+        gain = dB2rap(50.0f * ((float) value) / 127.0f - 50.0f);
         break;
     case 5:
         Pmode = value;
-        init_mode (Pmode);
+        init_mode(Pmode);
         break;
-
-    };
-    init_tone ();
-};
+    }
+    init_tone();
+}
 
 int
-StompBox::getpar (int npar)
+StompBox::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -986,8 +975,7 @@ StompBox::getpar (int npar)
     case 5:
         return (Pmode);
         break;
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 

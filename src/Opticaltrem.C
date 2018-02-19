@@ -21,27 +21,27 @@
  Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "Opticaltrem.h"
 
-Opticaltrem::Opticaltrem (double sample_rate, uint32_t intermediate_bufsize)
+Opticaltrem::Opticaltrem(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
-    cSAMPLE_RATE = 1.0f/sample_rate;
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
+    cSAMPLE_RATE = 1.0f / sample_rate;
 
-    R1 = 2700.0f;	   //tremolo circuit series resistance
-    Ra = 1000000.0f;  //Cds cell dark resistance.
-    Ra = logf(Ra);		//this is done for clarity
-    Rb = 300.0f;         //Cds cell full illumination
-    Rp = 100000.0f;      //Resistor in parallel with Cds cell
-    b = exp(Ra/logf(Rb)) - CNST_E;
+    R1 = 2700.0f; //tremolo circuit series resistance
+    Ra = 1000000.0f; //Cds cell dark resistance.
+    Ra = logf(Ra); //this is done for clarity
+    Rb = 300.0f; //Cds cell full illumination
+    Rp = 100000.0f; //Resistor in parallel with Cds cell
+    b = exp(Ra / logf(Rb)) - CNST_E;
     dTC = 0.03f;
     dRCl = dTC;
-    dRCr = dTC;   //Right & left channel dynamic time contsants
-    minTC = logf(0.005f/dTC);
-    alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
+    dRCr = dTC; //Right & left channel dynamic time contsants
+    minTC = logf(0.005f / dTC);
+    alphal = 1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
     alphar = alphal;
     lstep = 0.0f;
     rstep = 0.0f;
@@ -59,128 +59,131 @@ Opticaltrem::Opticaltrem (double sample_rate, uint32_t intermediate_bufsize)
     oldstepr = 0.0f;
 
     lfo = new EffectLFO(sample_rate);
-
 }
 
-Opticaltrem::~Opticaltrem ()
+Opticaltrem::~Opticaltrem()
 {
-	delete lfo;
+    delete lfo;
 }
 
-
 void
-Opticaltrem::cleanup ()
+Opticaltrem::cleanup()
 {
-
-
-};
+}
 
 void
-Opticaltrem::lv2_update_params (uint32_t period)
+Opticaltrem::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     lfo->updateparams(period);
 }
 
 void
-Opticaltrem::out (float *efxoutl, float *efxoutr)
+Opticaltrem::out(float *efxoutl, float *efxoutr)
 {
-
     unsigned int i;
     float lfol, lfor, xl, xr, fxl, fxr;
     float rdiff, ldiff;
-    lfo->effectlfoout (&lfol, &lfor);
+    lfo->effectlfoout(&lfol, &lfor);
 
-    if(Pinvert) {
-    lfol = lfol*fdepth;
-    lfor = lfor*fdepth;
-    } else {
-    lfor = 1.0f - lfor*fdepth;
-    lfol = 1.0f - lfol*fdepth;
+    if (Pinvert)
+    {
+        lfol = lfol*fdepth;
+        lfor = lfor*fdepth;
+    }
+    else
+    {
+        lfor = 1.0f - lfor*fdepth;
+        lfol = 1.0f - lfol*fdepth;
     }
 
     if (lfol > 1.0f)
         lfol = 1.0f;
     else if (lfol < 0.0f)
         lfol = 0.0f;
+    
     if (lfor > 1.0f)
         lfor = 1.0f;
     else if (lfor < 0.0f)
         lfor = 0.0f;
 
     lfor = powf(lfor, 1.9f);
-    lfol = powf(lfol, 1.9f);  //emulate lamp turn on/off characteristic
+    lfol = powf(lfol, 1.9f); //emulate lamp turn on/off characteristic
 
     //lfo interpolation
-    rdiff = (lfor - oldgr)/(float)PERIOD;
-    ldiff = (lfol - oldgl)/(float)PERIOD;
+    rdiff = (lfor - oldgr) / (float) PERIOD;
+    ldiff = (lfol - oldgl) / (float) PERIOD;
     gr = lfor;
     gl = lfol;
     oldgr = lfor;
     oldgl = lfol;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         //Left Cds
-        stepl = gl*(1.0f - alphal) + alphal*oldstepl;
+        stepl = gl * (1.0f - alphal) + alphal*oldstepl;
         oldstepl = stepl;
-        dRCl = dTC*f_exp(stepl*minTC);
-        alphal = 1.0f - cSAMPLE_RATE/(dRCl + cSAMPLE_RATE);
+        dRCl = dTC * f_exp(stepl * minTC);
+        alphal = 1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
         xl = CNST_E + stepl*b;
-        fxl = f_exp(Ra/logf(xl));
-        if(Pinvert) {
-        fxl = fxl*Rp/(fxl + Rp); //Parallel resistance
-        fxl = fxl/(fxl + R1);
-        }
-        else fxl = R1/(fxl + R1);
+        fxl = f_exp(Ra / logf(xl));
         
+        if (Pinvert)
+        {
+            fxl = fxl * Rp / (fxl + Rp); //Parallel resistance
+            fxl = fxl / (fxl + R1);
+        }
+        else fxl = R1 / (fxl + R1);
+
         //Right Cds
-        stepr = gr*(1.0f - alphar) + alphar*oldstepr;
+        stepr = gr * (1.0f - alphar) + alphar*oldstepr;
         oldstepr = stepr;
-        dRCr = dTC*f_exp(stepr*minTC);
-        alphar = 1.0f - cSAMPLE_RATE/(dRCr + cSAMPLE_RATE);
+        dRCr = dTC * f_exp(stepr * minTC);
+        alphar = 1.0f - cSAMPLE_RATE / (dRCr + cSAMPLE_RATE);
         xr = CNST_E + stepr*b;
-        fxr = f_exp(Ra/logf(xr));
-        if(Pinvert) {
-        fxr = fxr*Rp/(fxr + Rp); //Parallel resistance
-        fxr = fxr/(fxr + R1);
-        } 
-        else fxr = R1/(fxr + R1);
+        fxr = f_exp(Ra / logf(xr));
+        
+        if (Pinvert)
+        {
+            fxr = fxr * Rp / (fxr + Rp); //Parallel resistance
+            fxr = fxr / (fxr + R1);
+        }
+        else fxr = R1 / (fxr + R1);
 
         //Modulate input signal
-        efxoutl[i] = lpanning*fxl*efxoutl[i];
-        efxoutr[i] = rpanning*fxr*efxoutr[i];
+        efxoutl[i] = lpanning * fxl * efxoutl[i];
+        efxoutr[i] = rpanning * fxr * efxoutr[i];
 
         gl += ldiff;
-        gr += rdiff;  //linear interpolation of LFO
-
-    };
-
-
-};
+        gr += rdiff; //linear interpolation of LFO
+    }
+}
 
 void
-Opticaltrem::setpanning (int value)
+Opticaltrem::setpanning(int value)
 {
     Ppanning = value;
-    rpanning = ((float)Ppanning) / 64.0f;
+    rpanning = ((float) Ppanning) / 64.0f;
     lpanning = 2.0f - rpanning;
     lpanning = 10.0f * powf(lpanning, 4);
     rpanning = 10.0f * powf(rpanning, 4);
-    lpanning = 1.0f - 1.0f/(lpanning + 1.0f);
-    rpanning = 1.0f - 1.0f/(rpanning + 1.0f);
-    
-    if(Pinvert) {
-    rpanning *= 2.0f;
-    lpanning *= 2.0f;
-    } else {
-    rpanning *= 1.3f;
-    lpanning *= 1.3f;
-    }
+    lpanning = 1.0f - 1.0f / (lpanning + 1.0f);
+    rpanning = 1.0f - 1.0f / (rpanning + 1.0f);
 
-};
+    if (Pinvert)
+    {
+        rpanning *= 2.0f;
+        lpanning *= 2.0f;
+    }
+    else
+    {
+        rpanning *= 1.3f;
+        lpanning *= 1.3f;
+    }
+}
 
 void
-Opticaltrem::setpreset (int npreset)
+Opticaltrem::setpreset(int npreset)
 {
     const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 6;
@@ -201,42 +204,45 @@ Opticaltrem::setpreset (int npreset)
 
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(44,npreset-NUM_PRESETS+1, pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(44, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
-
-};
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+}
 
 void
-Opticaltrem::changepar (int npar, int value)
+Opticaltrem::changepar(int npar, int value)
 {
-
-    switch (npar) {
+    switch (npar)
+    {
 
     case 0:
         Pdepth = value;
-        fdepth = 0.5f + ((float) Pdepth)/254.0f;
+        fdepth = 0.5f + ((float) Pdepth) / 254.0f;
         break;
     case 1:
         lfo->Pfreq = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 2:
         lfo->Prandomness = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 3:
         lfo->PLFOtype = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 4:
         lfo->Pstereo = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 5: // pan
         Ppanning = value;
@@ -244,29 +250,29 @@ Opticaltrem::changepar (int npar, int value)
         break;
     case 6: //Invert
         Pinvert = value;
-        if(Pinvert) {
-          R1 = 68000.0f;   //tremolo circuit series resistance
-          Ra = 500000.0f;  //Cds cell dark resistance.
-        } else {
-          R1 = 2700.0f;	   //tremolo circuit series resistance
-          Ra = 1000000.0f;  //Cds cell dark resistance.
+        if (Pinvert)
+        {
+            R1 = 68000.0f; //tremolo circuit series resistance
+            Ra = 500000.0f; //Cds cell dark resistance.
+        }
+        else
+        {
+            R1 = 2700.0f; //tremolo circuit series resistance
+            Ra = 1000000.0f; //Cds cell dark resistance.
         }
         setpanning(Ppanning);
- 
-        Ra = logf(Ra);		//this is done for clarity
-        Rb = 300.0f;         //Cds cell full illumination
-        b = exp(Ra/logf(Rb)) - CNST_E;
-           break;
-    }
 
-};
+        Ra = logf(Ra); //this is done for clarity
+        Rb = 300.0f; //Cds cell full illumination
+        b = exp(Ra / logf(Rb)) - CNST_E;
+        break;
+    }
+}
 
 int
-Opticaltrem::getpar (int npar)
+Opticaltrem::getpar(int npar)
 {
-
     switch (npar)
-
     {
     case 0:
         return (Pdepth);
@@ -289,11 +295,8 @@ Opticaltrem::getpar (int npar)
     case 6:
         return (Pinvert); //pan
         break;
-
     }
-
     return (0);
-
-};
+}
 
 

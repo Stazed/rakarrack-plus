@@ -21,82 +21,74 @@
  Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 
 #include "StereoHarm.h"
 
-
-
-StereoHarm::StereoHarm (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
-{ 
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+{
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     STE_DOWN = DS;
     hq = Quality;
-    SAMPLE_RATE = (unsigned int)sample_rate;
-    
+    SAMPLE_RATE = (unsigned int) sample_rate;
+
     adjust(STE_DOWN, PERIOD);
-    
+
     initialize();
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
 
-
-    chromel=0.0;
-    chromer=0.0;
+    chromel = 0.0;
+    chromer = 0.0;
     gainl = gainr = 0.5f;
     intervall = intervalr = 0.0f;
     lrcross = 0.5f;
     r_ratiol = 0;
     r_ratior = 0;
 
-    PSl = new PitchShifter (window, hq, nfSAMPLE_RATE);
+    PSl = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PSl->ratio = 1.0f;
-    PSr = new PitchShifter (window, hq, nfSAMPLE_RATE);
+    PSr = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PSr->ratio = 1.0f;
 
     Ppreset = 0;
     PMIDI = 0;
     mira = 0;
     outvolume = 0.5f;
-    setpreset (Ppreset);
+    setpreset(Ppreset);
 
+    cleanup();
+}
 
-    cleanup ();
-
-};
-
-
-
-StereoHarm::~StereoHarm ()
+StereoHarm::~StereoHarm()
 {
     clear_initialize();
     delete U_Resample;
     delete D_Resample;
     delete PSl;
     delete PSr;
-};
+}
 
 void
-StereoHarm::cleanup ()
+StereoHarm::cleanup()
 {
     mira = 0;
-    chromel=0;
-    chromer=0;
-    memset(outil, 0, sizeof(float)*nPERIOD);
-    memset(outir, 0, sizeof(float)*nPERIOD);
-    memset(outol, 0, sizeof(float)*nPERIOD);
-    memset(outor, 0, sizeof(float)*nPERIOD);
+    chromel = 0;
+    chromer = 0;
+    memset(outil, 0, sizeof (float)*nPERIOD);
+    memset(outir, 0, sizeof (float)*nPERIOD);
+    memset(outol, 0, sizeof (float)*nPERIOD);
+    memset(outor, 0, sizeof (float)*nPERIOD);
     memset(templ, 0, sizeof (float)*PERIOD);
     memset(tempr, 0, sizeof (float)*PERIOD);
-
-};
+}
 
 void
 StereoHarm::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         adjust(STE_DOWN, PERIOD);
@@ -113,23 +105,23 @@ StereoHarm::lv2_update_params(uint32_t period)
 void
 StereoHarm::initialize()
 {
-    templ = (float *) malloc (sizeof (float) * PERIOD);
-    tempr = (float *) malloc (sizeof (float) * PERIOD);
+    templ = (float *) malloc(sizeof (float) * PERIOD);
+    tempr = (float *) malloc(sizeof (float) * PERIOD);
 
-    outil = (float *) malloc (sizeof (float) * nPERIOD);
-    outir = (float *) malloc (sizeof (float) * nPERIOD);
+    outil = (float *) malloc(sizeof (float) * nPERIOD);
+    outir = (float *) malloc(sizeof (float) * nPERIOD);
 
-    outol = (float *) malloc (sizeof (float) * nPERIOD);
-    outor = (float *) malloc (sizeof (float) * nPERIOD);
+    outol = (float *) malloc(sizeof (float) * nPERIOD);
+    outor = (float *) malloc(sizeof (float) * nPERIOD);
 
-    memset (outil, 0, sizeof (float) * nPERIOD);
-    memset (outir, 0, sizeof (float) * nPERIOD);
+    memset(outil, 0, sizeof (float) * nPERIOD);
+    memset(outir, 0, sizeof (float) * nPERIOD);
 
-    memset (outol, 0, sizeof (float) * nPERIOD);
-    memset (outor, 0, sizeof (float) * nPERIOD);
-    
-    memset (templ, 0, sizeof (float) * PERIOD);
-    memset (tempr, 0, sizeof (float) * PERIOD);
+    memset(outol, 0, sizeof (float) * nPERIOD);
+    memset(outor, 0, sizeof (float) * nPERIOD);
+
+    memset(templ, 0, sizeof (float) * PERIOD);
+    memset(tempr, 0, sizeof (float) * PERIOD);
 }
 
 void
@@ -143,117 +135,116 @@ StereoHarm::clear_initialize()
     free(outor);
 }
 
-
 void
-StereoHarm::out (float *efxoutl, float *efxoutr)
+StereoHarm::out(float *efxoutl, float *efxoutr)
 {
-
     unsigned int i;
 
-    if(DS_state != 0) {
-        U_Resample->out(efxoutl,efxoutr,templ,tempr,PERIOD,u_up);
+    if (DS_state != 0)
+    {
+        U_Resample->out(efxoutl, efxoutr, templ, tempr, PERIOD, u_up);
     }
     else
     {
-        memcpy(templ, efxoutl,sizeof(float)*PERIOD);
-        memcpy(tempr, efxoutr,sizeof(float)*PERIOD);
+        memcpy(templ, efxoutl, sizeof (float)*PERIOD);
+        memcpy(tempr, efxoutr, sizeof (float)*PERIOD);
     }
 
-
-    for (i = 0; i < nPERIOD; i++) {
-
-
+    for (i = 0; i < nPERIOD; i++)
+    {
         outil[i] = tempr[i];
+        
         if (outil[i] > 1.0)
             outil[i] = 1.0f;
+        
         if (outil[i] < -1.0)
             outil[i] = -1.0f;
 
         outir[i] = templ[i];
+        
         if (outir[i] > 1.0)
             outir[i] = 1.0f;
         if (outir[i] < -1.0)
             outir[i] = -1.0f;
-
     }
 
-    if ((PMIDI) || (PSELECT)) {
+    if ((PMIDI) || (PSELECT))
+    {
         PSl->ratio = r_ratiol;
         PSr->ratio = r_ratior;
     }
 
-    if (PSl->ratio != 1.0f) {
-        PSl->smbPitchShift (PSl->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outil, outol);
-    } else
-        memcpy(outol,outil,sizeof(float)*nPERIOD);
+    if (PSl->ratio != 1.0f)
+    {
+        PSl->smbPitchShift(PSl->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outil, outol);
+    }
+    else
+        memcpy(outol, outil, sizeof (float)*nPERIOD);
+
+    if (PSr->ratio != 1.0f)
+    {
+        PSr->smbPitchShift(PSr->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outir, outor);
+    }
+    else
+        memcpy(outor, outir, sizeof (float)*nPERIOD);
 
 
-    if (PSr->ratio != 1.0f) {
-        PSr->smbPitchShift (PSr->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outir, outor);
-    } else
-        memcpy(outor,outir,sizeof(float)*nPERIOD);
-
-
-    if(DS_state != 0) {
-        D_Resample->out(outol,outor,templ,tempr,nPERIOD,u_down);
-    } else {
-        memcpy(templ, outol,sizeof(float)*PERIOD);
-        memcpy(tempr, outor,sizeof(float)*PERIOD);
-
+    if (DS_state != 0)
+    {
+        D_Resample->out(outol, outor, templ, tempr, nPERIOD, u_down);
+    }
+    else
+    {
+        memcpy(templ, outol, sizeof (float)*PERIOD);
+        memcpy(tempr, outor, sizeof (float)*PERIOD);
     }
 
-
     //for (i = 0; i < PERIOD; i++) {
-        //efxoutl[i] = templ[i] * gainl;
-        //efxoutr[i] = tempr[i] * gainr;
-        
+    //efxoutl[i] = templ[i] * gainl;
+    //efxoutr[i] = tempr[i] * gainr;
+
     //}
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         efxoutl[i] = templ[i] * gainl * (1.0f - lrcross) + tempr[i] * gainr * lrcross;
         efxoutr[i] = tempr[i] * gainr * (1.0f - lrcross) + templ[i] * gainl * lrcross;
     }
-
-};
-
+}
 
 void
-StereoHarm::setvolume (int value)
+StereoHarm::setvolume(int value)
 {
     this->Pvolume = value;
-    outvolume = (float)Pvolume / 127.0f;
-};
-
-
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-StereoHarm::setgain (int chan, int value)
+StereoHarm::setgain(int chan, int value)
 {
-
-    switch(chan) {
+    switch (chan)
+    {
     case 0:
         Pgainl = value;
-        gainl = (float)Pgainl / 127.0f;
-        gainl *=2.0;
+        gainl = (float) Pgainl / 127.0f;
+        gainl *= 2.0;
         break;
     case 1:
         Pgainr = value;
-        gainr = (float)Pgainr / 127.0f;
-        gainr *=2.0;
+        gainr = (float) Pgainr / 127.0f;
+        gainr *= 2.0;
         break;
-
     }
-};
-
+}
 
 void
-StereoHarm::setinterval (int chan, int value)
+StereoHarm::setinterval(int chan, int value)
 {
-
-    switch(chan) {
+    switch (chan)
+    {
     case 0:
         Pintervall = value;
-        intervall = (float)Pintervall - 12.0f;
-        PSl->ratio = powf(2.0f,intervall / 12.0f)+chromel;
+        intervall = (float) Pintervall - 12.0f;
+        PSl->ratio = powf(2.0f, intervall / 12.0f) + chromel;
         if (Pintervall % 12 == 0)
             mira = 0;
         else
@@ -262,74 +253,67 @@ StereoHarm::setinterval (int chan, int value)
 
     case 1:
         Pintervalr = value;
-        intervalr = (float)Pintervalr - 12.0f;
-        PSr->ratio = powf(2.0f,intervalr / 12.0f)+chromer;
+        intervalr = (float) Pintervalr - 12.0f;
+        PSr->ratio = powf(2.0f, intervalr / 12.0f) + chromer;
         if (Pintervalr % 12 == 0)
             mira = 0;
         else
             mira = 1;
         break;
     }
-};
-
-
+}
 
 void
-StereoHarm::setchrome (int chan, int value)
+StereoHarm::setchrome(int chan, int value)
 {
-
-    float max,min;
+    float max, min;
     max = 0.0;
     min = 0.0;
 
-    switch(chan) {
+    switch (chan)
+    {
     case 0:
-        max = powf(2.0f,(intervall+1.0f) / 12.0f);
-        min = powf(2.0f,(intervall-1.0f) / 12.0f);
+        max = powf(2.0f, (intervall + 1.0f) / 12.0f);
+        min = powf(2.0f, (intervall - 1.0f) / 12.0f);
         break;
     case 1:
-        max = powf(2.0f,(intervalr+1.0f) / 12.0f);
-        min = powf(2.0f,(intervalr-1.0f) / 12.0f);
+        max = powf(2.0f, (intervalr + 1.0f) / 12.0f);
+        min = powf(2.0f, (intervalr - 1.0f) / 12.0f);
         break;
     }
 
-    if (max > 2.0) max=2.0f;
-    if (min < 0.5) min=0.5f;
+    if (max > 2.0) max = 2.0f;
+    if (min < 0.5) min = 0.5f;
 
-
-    switch(chan) {
+    switch (chan)
+    {
     case 0:
-        Pchromel=value;
-        chromel=(max-min)/4000.0f*(float)value;
-        PSl->ratio=powf(2.0f,intervall/12.0f)+chromel;
+        Pchromel = value;
+        chromel = (max - min) / 4000.0f * (float) value;
+        PSl->ratio = powf(2.0f, intervall / 12.0f) + chromel;
         break;
     case 1:
-        Pchromer=value;
-        chromer=(max-min)/4000.0f*(float)value;
-        PSr->ratio=powf(2.0f,intervalr/12.0f)+chromer;
+        Pchromer = value;
+        chromer = (max - min) / 4000.0f * (float) value;
+        PSr->ratio = powf(2.0f, intervalr / 12.0f) + chromer;
         break;
     }
-
 }
 
 void
-StereoHarm::setMIDI (int value)
+StereoHarm::setMIDI(int value)
 {
-
     this->PMIDI = value;
 }
-
 
 void
 StereoHarm::adjust(int DS, uint32_t period)
 {
-
-    DS_state=DS;
+    DS_state = DS;
     float fSAMPLE_RATE = SAMPLE_RATE;
 
-
-    switch(DS) {
-
+    switch (DS)
+    {
     case 0:
         //nPERIOD = period;
         nRATIO = 1;
@@ -340,16 +324,15 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 1:
         //nPERIOD = lrintf(fPERIOD*96000.0f/fSAMPLE_RATE);
-        nRATIO = 96000.0f/fSAMPLE_RATE;
+        nRATIO = 96000.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 96000;
         nfSAMPLE_RATE = 96000.0f;
         window = 2048;
         break;
 
-
     case 2:
         //nPERIOD = lrintf(fPERIOD*48000.0f/fSAMPLE_RATE);
-        nRATIO = 48000.0f/fSAMPLE_RATE;
+        nRATIO = 48000.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 48000;
         nfSAMPLE_RATE = 48000.0f;
         window = 2048;
@@ -357,7 +340,7 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 3:
         //nPERIOD = lrintf(fPERIOD*44100.0f/fSAMPLE_RATE);
-        nRATIO = 44100.0f/fSAMPLE_RATE;
+        nRATIO = 44100.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 44100;
         nfSAMPLE_RATE = 44100.0f;
         window = 2048;
@@ -365,7 +348,7 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 4:
         //nPERIOD = lrintf(fPERIOD*32000.0f/fSAMPLE_RATE);
-        nRATIO = 32000.0f/fSAMPLE_RATE;
+        nRATIO = 32000.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 32000;
         nfSAMPLE_RATE = 32000.0f;
         window = 2048;
@@ -373,7 +356,7 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 5:
         //nPERIOD = lrintf(fPERIOD*22050.0f/fSAMPLE_RATE);
-        nRATIO = 22050.0f/fSAMPLE_RATE;
+        nRATIO = 22050.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 22050;
         nfSAMPLE_RATE = 22050.0f;
         window = 1024;
@@ -381,7 +364,7 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 6:
         //nPERIOD = lrintf(fPERIOD*16000.0f/fSAMPLE_RATE);
-        nRATIO = 16000.0f/fSAMPLE_RATE;
+        nRATIO = 16000.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 16000;
         nfSAMPLE_RATE = 16000.0f;
         window = 1024;
@@ -389,7 +372,7 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 7:
         //nPERIOD = lrintf(fPERIOD*12000.0f/fSAMPLE_RATE);
-        nRATIO = 12000.0f/fSAMPLE_RATE;
+        nRATIO = 12000.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 12000;
         nfSAMPLE_RATE = 12000.0f;
         window = 512;
@@ -397,7 +380,7 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 8:
         //nPERIOD = lrintf(fPERIOD*8000.0f/fSAMPLE_RATE);
-        nRATIO = 8000.0f/fSAMPLE_RATE;
+        nRATIO = 8000.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 8000;
         nfSAMPLE_RATE = 8000.0f;
         window = 512;
@@ -405,31 +388,27 @@ StereoHarm::adjust(int DS, uint32_t period)
 
     case 9:
         //nPERIOD = lrintf(fPERIOD*4000.0f/fSAMPLE_RATE);
-        nRATIO = 4000.0f/fSAMPLE_RATE;
+        nRATIO = 4000.0f / fSAMPLE_RATE;
         nSAMPLE_RATE = 4000;
         nfSAMPLE_RATE = 4000.0f;
         window = 256;
         break;
     }
 
-    nPERIOD = lrintf(PERIOD*nRATIO);
-    u_up= (double)nPERIOD / (double)period;
-    u_down= (double)period / (double)nPERIOD;
+    nPERIOD = lrintf(PERIOD * nRATIO);
+    u_up = (double) nPERIOD / (double) period;
+    u_down = (double) period / (double) nPERIOD;
 }
 
-
 void
-StereoHarm::setlrcross (int value)
+StereoHarm::setlrcross(int value)
 {
     Plrcross = value;
-    lrcross = (float)Plrcross / 127.0f;
-
-};
-
-
+    lrcross = (float) Plrcross / 127.0f;
+}
 
 void
-StereoHarm::setpreset (int npreset)
+StereoHarm::setpreset(int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 4;
@@ -443,83 +422,80 @@ StereoHarm::setpreset (int npreset)
         {64, 64, 12, 80, 64, 12, -80, 0, 0, 0, 0, 64},
         //Chorus
         {64, 64, 12, 280, 64, 12, -280, 0, 0, 0, 0, 64}
-
     };
 
     cleanup();
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(42,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(42, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
 
     Ppreset = npreset;
-
-
-};
-
-
+}
 
 void
-StereoHarm::changepar (int npar, int value)
+StereoHarm::changepar(int npar, int value)
 {
-
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setgain (0,value);
+        setgain(0, value);
         break;
     case 2:
-        setinterval(0,value);
+        setinterval(0, value);
         break;
     case 3:
         setchrome(0, value);
         break;
     case 4:
-        setgain (1,value);
+        setgain(1, value);
         break;
     case 5:
-        setinterval(1,value);
+        setinterval(1, value);
         break;
     case 6:
         setchrome(1, value);
         break;
     case 7:
-        PSELECT = value;;
+        PSELECT = value;
+        ;
         break;
     case 8:
         Pnote = value;
         break;
     case 9:
         Ptype = value;
-        if (Ptype==0) {
+        if (Ptype == 0)
+        {
             setchrome(0, Pchromel);
             setchrome(1, Pchromer);
         }
         break;
     case 10:
-        setMIDI (value);
+        setMIDI(value);
         break;
     case 11:
         setlrcross(value);
         break;
-
-
     }
-
-
-};
-
+}
 
 int
-StereoHarm::getpar (int npar)
+StereoHarm::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -554,11 +530,9 @@ StereoHarm::getpar (int npar)
         return (PMIDI);
         break;
     case 11:
-        return(Plrcross);
+        return (Plrcross);
         break;
     default:
         return (0);
-
     }
-
-};
+}

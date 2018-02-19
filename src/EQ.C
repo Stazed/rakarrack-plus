@@ -20,18 +20,18 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ (eq_type type, double samplerate, uint32_t intermediate_bufsize)
+EQ::EQ(eq_type type, double samplerate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize;
     fSAMPLE_RATE = samplerate;
-    
+
     initialize(type);
 
     //default values
@@ -39,11 +39,11 @@ EQ::EQ (eq_type type, double samplerate, uint32_t intermediate_bufsize)
     Pvolume = 50;
     outvolume = 0.7f;
 
-    setpreset (Ppreset);
-    cleanup ();
+    setpreset(Ppreset);
+    cleanup();
 };
 
-EQ::~EQ ()
+EQ::~EQ()
 {
     clear_initialize();
 };
@@ -52,18 +52,19 @@ EQ::~EQ ()
  * Cleanup the effect
  */
 void
-EQ::cleanup ()
+EQ::cleanup()
 {
-    for (int i = 0; i < MAX_EQ_BANDS; i++) {
-        filter[i].l->cleanup ();
-        filter[i].r->cleanup ();
-    };
-};
+    for (int i = 0; i < MAX_EQ_BANDS; i++)
+    {
+        filter[i].l->cleanup();
+        filter[i].r->cleanup();
+    }
+}
 
 void
 EQ::lv2_update_params(eq_type type, uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
@@ -80,42 +81,44 @@ EQ::initialize(eq_type type)
 {
     interpbuf = new float[PERIOD];
 
-    for (int i = 0; i < MAX_EQ_BANDS; i++) {
+    for (int i = 0; i < MAX_EQ_BANDS; i++)
+    {
         filter[i].Ptype = 0;
         filter[i].Pfreq = 64;
         filter[i].Pgain = 64;
         filter[i].Pq = 64;
         filter[i].Pstages = 0;
-        filter[i].l = new AnalogFilter (6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
-        filter[i].r = new AnalogFilter (6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+        filter[i].l = new AnalogFilter(6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
+        filter[i].r = new AnalogFilter(6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
     }
-    
-    if(type == EQ1_REGULAR)
+
+    if (type == EQ1_REGULAR)
     {
         for (int i = 0; i <= 45; i += 5)
         {
-            changepar (i + 10, 7);
-            changepar (i + 14, 0);
+            changepar(i + 10, 7);
+            changepar(i + 14, 0);
         }
-        
-        changepar (11, 31);
-        changepar (16, 63);
-        changepar (21, 125);
-        changepar (26, 250);
-        changepar (31, 500);
-        changepar (36, 1000);
-        changepar (41, 2000);
-        changepar (46, 4000);
-        changepar (51, 8000);
-        changepar (56, 16000);
+
+        changepar(11, 31);
+        changepar(16, 63);
+        changepar(21, 125);
+        changepar(26, 250);
+        changepar(31, 500);
+        changepar(36, 1000);
+        changepar(41, 2000);
+        changepar(46, 4000);
+        changepar(51, 8000);
+        changepar(56, 16000);
     }
-    if(type == EQ2_PARAMETRIC)
+    
+    if (type == EQ2_PARAMETRIC)
     {
         for (int i = 0; i <= 10; i += 5)
         {
-            changepar (i + 10, 7);
-            changepar (i + 13, 64);
-            changepar (i + 14, 0);
+            changepar(i + 10, 7);
+            changepar(i + 13, 64);
+            changepar(i + 14, 0);
         }
     }
 }
@@ -123,52 +126,51 @@ EQ::initialize(eq_type type)
 void
 EQ::clear_initialize()
 {
-    for (int i = 0; i < MAX_EQ_BANDS; i++) {
-    	delete filter[i].l;
-    	delete filter[i].r;
+    for (int i = 0; i < MAX_EQ_BANDS; i++)
+    {
+        delete filter[i].l;
+        delete filter[i].r;
     }
+    
     delete[] interpbuf;
 }
-
 
 /*
  * Effect output
  */
 void
-EQ::out (float * efxoutl, float * efxoutr)
+EQ::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
-    for (i = 0; i < MAX_EQ_BANDS; i++) {
+    for (i = 0; i < MAX_EQ_BANDS; i++)
+    {
         if (filter[i].Ptype == 0)
             continue;
-        filter[i].l->filterout (efxoutl, PERIOD);
-        filter[i].r->filterout (efxoutr, PERIOD);
-    };
+        
+        filter[i].l->filterout(efxoutl, PERIOD);
+        filter[i].r->filterout(efxoutr, PERIOD);
+    }
 
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
         efxoutl[i] = efxoutl[i] * outvolume;
         efxoutr[i] = efxoutr[i] * outvolume;
-    };
-
-};
-
+    }
+}
 
 /*
  * Parameter control
  */
 void
-EQ::setvolume (int Pvolume)
+EQ::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-
-    outvolume = powf (0.005f, (1.0f - (float)Pvolume / 127.0f)) * 10.0f;
-
-
-};
+    outvolume = powf(0.005f, (1.0f - (float) Pvolume / 127.0f)) * 10.0f;
+}
 
 void
-EQ::setpreset (int npreset)
+EQ::setpreset(int npreset)
 {
     const int PRESET_SIZE = 1;
     const int NUM_PRESETS = 2;
@@ -180,83 +182,93 @@ EQ::setpreset (int npreset)
     };
 
     for (int n = 0; n < PRESET_SIZE; n++)
-        changepar (n, presets[npreset][n]);
+        changepar(n, presets[npreset][n]);
+    
     Ppreset = npreset;
-};
-
+}
 
 void
-EQ::changepar (int npar, int value)
+EQ::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
-    };
+    }
+    
     if (npar < 10)
         return;
 
-    int nb = (npar - 10) / 5;	//number of the band (filter)
+    int nb = (npar - 10) / 5; //number of the band (filter)
+    
     if (nb >= MAX_EQ_BANDS)
         return;
-    int bp = npar % 5;		//band paramenter
+    
+    int bp = npar % 5; //band paramenter
 
     float tmp;
-    switch (bp) {
+    switch (bp)
+    {
     case 0:
         if (value > 9)
-            value = 0;		//has to be changed if more filters will be added
+            value = 0; //has to be changed if more filters will be added
         filter[nb].Ptype = value;
-        if (value != 0) {
-            filter[nb].l->settype (value - 1);
-            filter[nb].r->settype (value - 1);
-        };
+        if (value != 0)
+        {
+            filter[nb].l->settype(value - 1);
+            filter[nb].r->settype(value - 1);
+        }
         break;
     case 1:
         filter[nb].Pfreq = value;
-        tmp = (float)value;
-        filter[nb].l->setfreq (tmp);
-        filter[nb].r->setfreq (tmp);
+        tmp = (float) value;
+        filter[nb].l->setfreq(tmp);
+        filter[nb].r->setfreq(tmp);
         break;
     case 2:
         filter[nb].Pgain = value;
-        tmp = 30.0f * ((float)value - 64.0f) / 64.0f;
-        filter[nb].l->setgain (tmp);
-        filter[nb].r->setgain (tmp);
+        tmp = 30.0f * ((float) value - 64.0f) / 64.0f;
+        filter[nb].l->setgain(tmp);
+        filter[nb].r->setgain(tmp);
         break;
     case 3:
         filter[nb].Pq = value;
-        tmp = powf (30.0f, ((float)value - 64.0f) / 64.0f);
-        filter[nb].l->setq (tmp);
-        filter[nb].r->setq (tmp);
+        tmp = powf(30.0f, ((float) value - 64.0f) / 64.0f);
+        filter[nb].l->setq(tmp);
+        filter[nb].r->setq(tmp);
         break;
     case 4:
         if (value >= MAX_FILTER_STAGES)
             value = MAX_FILTER_STAGES - 1;
         filter[nb].Pstages = value;
-        filter[nb].l->setstages (value);
-        filter[nb].r->setstages (value);
+        filter[nb].l->setstages(value);
+        filter[nb].r->setstages(value);
         break;
-    };
-};
+    }
+}
 
 int
-EQ::getpar (int npar)
+EQ::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
-    };
+    }
 
     if (npar < 10)
         return (0);
 
-    int nb = (npar - 10) / 5;	//number of the band (filter)
+    int nb = (npar - 10) / 5; //number of the band (filter)
+    
     if (nb >= MAX_EQ_BANDS)
         return (0);
-    int bp = npar % 5;		//band paramenter
-    switch (bp) {
+    
+    int bp = npar % 5; //band paramenter
+    switch (bp)
+    {
     case 0:
         return (filter[nb].Ptype);
         break;
@@ -272,23 +284,22 @@ EQ::getpar (int npar)
     case 4:
         return (filter[nb].Pstages);
         break;
-    };
+    }
 
-    return (0);			//in case of bogus parameter number
-};
+    return (0); //in case of bogus parameter number
+}
 
-
-
-
-float EQ::getfreqresponse (float freq)
+float EQ::getfreqresponse(float freq)
 {
     float
     resp = 1.0f;
 
-    for (int i = 0; i < MAX_EQ_BANDS; i++) {
+    for (int i = 0; i < MAX_EQ_BANDS; i++)
+    {
         if (filter[i].Ptype == 0)
             continue;
-        resp *= filter[i].l->H (freq);
-    };
-    return (rap2dB (resp * outvolume));
-};
+        
+        resp *= filter[i].l->H(freq);
+    }
+    return (rap2dB(resp * outvolume));
+}

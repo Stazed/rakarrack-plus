@@ -20,160 +20,168 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "RyanWah.h"        // Mutromojo
 #include "AnalogFilter.h"
 #include <stdio.h>
 
-RyanWah::RyanWah (double sample_rate, uint32_t intermediate_bufsize)
+RyanWah::RyanWah(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
     filterl = NULL;
     filterr = NULL;
 
-    base = 7.0f;		//sets curve of modulation to frequency relationship
-    ibase = 1.0f/base;
+    base = 7.0f; //sets curve of modulation to frequency relationship
+    ibase = 1.0f / base;
 
     Pampsns = 0;
-    Pampsnsinv= 0;
-    Pampsmooth= 0;
+    Pampsnsinv = 0;
+    Pampsmooth = 0;
     Pamode = 0;
     maxfreq = 5000.0f;
     minfreq = 40.0f;
     frequency = 40.0f;
     q = 10.0f;
-    Pqm = 1;  //Set backward compatibility mode by default.
+    Pqm = 1; //Set backward compatibility mode by default.
     hpmix = 0.0f;
     lpmix = 0.5f;
     bpmix = 2.0f;
     Ppreset = 0;
-    wahsmooth = 1.0f - expf(-1.0f/(0.02f*sample_rate));  //0.02 seconds
+    wahsmooth = 1.0f - expf(-1.0f / (0.02f * sample_rate)); //0.02 seconds
     outvolume = 0.5f;
 
     lfo = new EffectLFO(sample_rate);
 
     Fstages = 1;
     Ftype = 1;
-    
+
     initialize();
-    setpreset (Ppreset);
+    setpreset(Ppreset);
 
-    cleanup ();
-};
+    cleanup();
+}
 
-RyanWah::~RyanWah ()
+RyanWah::~RyanWah()
 {
     delete lfo;
     clear_initialize();
 }
 
-
-
 /*
  * Apply the effect
  */
 void
-RyanWah::out (float * efxoutl, float * efxoutr)
+RyanWah::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float lmod, rmod;
     float lfol, lfor;
     float rms = 0.0f;
 
-    lfo->effectlfoout (&lfol, &lfor);
-    if (Pamode) {
+    lfo->effectlfoout(&lfol, &lfor);
+    
+    if (Pamode)
+    {
         lfol *= depth;
         lfor *= depth;
-    } else {
+    }
+    else
+    {
         lfol *= depth * 5.0f;
         lfor *= depth * 5.0f;
     }
 
-    for (i = 0; i < PERIOD; i++) {
-
-        float x = (fabsf ( sidechain_filter->filterout_s(efxoutl[i] + efxoutr[i]))) * 0.5f;
+    for (i = 0; i < PERIOD; i++)
+    {
+        float x = (fabsf(sidechain_filter->filterout_s(efxoutl[i] + efxoutr[i]))) * 0.5f;
         ms1 = ms1 * ampsmooth + x * (1.0f - ampsmooth) + 1e-10f;
 
         //oldfbias -= 0.001 * oldfbias2;
-        oldfbias = oldfbias * (1.0f - wahsmooth) + fbias * wahsmooth + 1e-10f;  //smooth MIDI control
+        oldfbias = oldfbias * (1.0f - wahsmooth) + fbias * wahsmooth + 1e-10f; //smooth MIDI control
         oldfbias1 = oldfbias1 * (1.0f - wahsmooth) + oldfbias * wahsmooth + 1e-10f;
         oldfbias2 = oldfbias2 * (1.0f - wahsmooth) + oldfbias1 * wahsmooth + 1e-10f;
 
-        if (Pamode) {
+        if (Pamode)
+        {
             rms = ms1 * ampsns + oldfbias2;
-            if (rms<0.0f) rms = 0.0f;
-            lmod = (minfreq + lfol + rms)*maxfreq;
-            rmod = (minfreq + lfor + rms)*maxfreq;
-            if(variq) q = f_pow2((2.0f*(1.0f-rms)+1.0f));
+            if (rms < 0.0f) rms = 0.0f;
+            lmod = (minfreq + lfol + rms) * maxfreq;
+            rmod = (minfreq + lfor + rms) * maxfreq;
+            
+            if (variq) q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
+            
             filterl->setq(q);
             filterr->setq(q);
             filterl->directmod(rmod);
             filterr->directmod(lmod);
-            efxoutl[i] = filterl->filterout_s (efxoutl[i]);
-            efxoutr[i] = filterr->filterout_s (efxoutr[i]);
-
+            efxoutl[i] = filterl->filterout_s(efxoutl[i]);
+            efxoutr[i] = filterr->filterout_s(efxoutr[i]);
         }
-    };
+    }
 
-    if (!Pamode) {
+    if (!Pamode)
+    {
         rms = ms1 * ampsns + oldfbias2;
 
-        if(rms>0.0f) { //apply some smooth limiting
-            rms = 1.0f - 1.0f/(rms*rms + 1.0f);
-        } else {
-            rms = -1.0f + 1.0f/(rms*rms + 1.0f);
+        if (rms > 0.0f)
+        { //apply some smooth limiting
+            rms = 1.0f - 1.0f / (rms * rms + 1.0f);
+        }
+        else
+        {
+            rms = -1.0f + 1.0f / (rms * rms + 1.0f);
         }
 
-        if(variq) q = f_pow2((2.0f*(1.0f-rms)+1.0f));
+        if (variq) q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
 
-        lmod =(lfol + rms);
+        lmod = (lfol + rms);
         rmod = (lfor + rms);
-        if(lmod>1.0f) lmod = 1.0f;
-        if(lmod<0.0f) lmod = 0.0f;
-        if(rmod>1.0f) rmod = 1.0f;
-        if(rmod<0.0f) rmod = 0.0f;
+        
+        if (lmod > 1.0f) lmod = 1.0f;
+        if (lmod < 0.0f) lmod = 0.0f;
+        if (rmod > 1.0f) rmod = 1.0f;
+        if (rmod < 0.0f) rmod = 0.0f;
 
         //rms*=rms;
-        float frl = minfreq + maxfreq*(powf(base, lmod) - 1.0f)*ibase;
-        float frr = minfreq + maxfreq*(powf(base, rmod) - 1.0f)*ibase;
+        float frl = minfreq + maxfreq * (powf(base, lmod) - 1.0f) * ibase;
+        float frr = minfreq + maxfreq * (powf(base, rmod) - 1.0f) * ibase;
 
         centfreq = frl; //testing variable
 
-        filterl->setfreq_and_q (frl, q);
-        filterr->setfreq_and_q (frr, q);
+        filterl->setfreq_and_q(frl, q);
+        filterr->setfreq_and_q(frr, q);
 
-        filterl->filterout (efxoutl, PERIOD);
-        filterr->filterout (efxoutr, PERIOD);
+        filterl->filterout(efxoutl, PERIOD);
+        filterr->filterout(efxoutr, PERIOD);
     }
-
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-RyanWah::cleanup ()
+RyanWah::cleanup()
 {
-    reinitfilter ();
+    reinitfilter();
     ms1 = 0.0;
     oldfbias = oldfbias1 = oldfbias2 = 0.0f;
     filterl->cleanup();
     filterr->cleanup();
-};
+}
 
 void
 RyanWah::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
         initialize();
-        reinitfilter ();
+        reinitfilter();
         filterl->setstages(Pstages);
         filterr->setstages(Pstages);
         filterl->setmode(Pqm);
@@ -183,7 +191,7 @@ RyanWah::lv2_update_params(uint32_t period)
     {
         PERIOD = period;
     }
-    
+
     lfo->updateparams(period);
 }
 
@@ -191,10 +199,10 @@ void
 RyanWah::initialize()
 {
     interpbuf = new float[PERIOD];
-    filterl = new RBFilter (0, 80.0f, 70.0f, 1, fSAMPLE_RATE,interpbuf);
-    filterr = new RBFilter (0, 80.0f, 70.0f, 1, fSAMPLE_RATE,interpbuf);
-    
-    sidechain_filter = new AnalogFilter (1, 630.0, 1.0, 1, fSAMPLE_RATE,interpbuf);
+    filterl = new RBFilter(0, 80.0f, 70.0f, 1, fSAMPLE_RATE, interpbuf);
+    filterr = new RBFilter(0, 80.0f, 70.0f, 1, fSAMPLE_RATE, interpbuf);
+
+    sidechain_filter = new AnalogFilter(1, 630.0, 1.0, 1, fSAMPLE_RATE, interpbuf);
 }
 
 void
@@ -211,46 +219,48 @@ RyanWah::clear_initialize()
  */
 
 void
-RyanWah::setwidth (int Pwidth)
+RyanWah::setwidth(int Pwidth)
 {
     this->Pwidth = Pwidth;
-    depth = powf (((float)Pwidth / 127.0f), 2.0f);
-};
-
+    depth = powf(((float) Pwidth / 127.0f), 2.0f);
+}
 
 void
-RyanWah::setvolume (int Pvolume)
+RyanWah::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
-};
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-RyanWah::setampsns (int Pp)
+RyanWah::setampsns(int Pp)
 {
     Pampsns = Pp;
-    if(Pampsns>0) {
-        ampsns = expf(0.083f*(float)Pampsns);
-    } else {
-        ampsns = - expf(-0.083f*(float)Pampsns);
+    
+    if (Pampsns > 0)
+    {
+        ampsns = expf(0.083f * (float) Pampsns);
     }
-    fbias  =  ((float)Pampsnsinv )/ 127.0f;
+    else
+    {
+        ampsns = -expf(-0.083f * (float) Pampsns);
+    }
+    
+    fbias = ((float) Pampsnsinv) / 127.0f;
 
-    ampsmooth = f_exp(-1.0f/((((float) Pampsmooth)/127.0f + 0.01f)*fSAMPLE_RATE)); //goes up to 1 second
-
-};
+    ampsmooth = f_exp(-1.0f / ((((float) Pampsmooth) / 127.0f + 0.01f) * fSAMPLE_RATE)); //goes up to 1 second
+}
 
 void
-RyanWah::reinitfilter ()
+RyanWah::reinitfilter()
 {
     //setmix (int mix, float lpmix, float bpmix, float hpmix)
     filterl->setmix(1, lpmix, bpmix, hpmix);
     filterr->setmix(1, lpmix, bpmix, hpmix);
-
-};
+}
 
 void
-RyanWah::setpreset (int npreset)
+RyanWah::setpreset(int npreset)
 {
     const int PRESET_SIZE = 19;
     const int NUM_PRESETS = 6;
@@ -271,28 +281,31 @@ RyanWah::setpreset (int npreset)
 
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(31,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(31, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-
+            changepar(n, pdata[n]);
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
 
     Ppreset = npreset;
 
-    reinitfilter ();
-};
-
+    reinitfilter();
+}
 
 void
-RyanWah::changepar (int npar, int value)
+RyanWah::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
         Pq = value;
@@ -300,48 +313,48 @@ RyanWah::changepar (int npar, int value)
         break;
     case 2:
         lfo->Pfreq = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 3: // LV2 - LFO Randomness (legacy, no slider in rakarrack - set by presets) 0 - 127
         lfo->Prandomness = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 4:
         lfo->PLFOtype = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 5: // LV2 - LFO L/R Delay (legacy, no slider in rakarrack - set by presets) -64 - 63 (0-27 actual + 64 offset)
         lfo->Pstereo = value;
-        lfo->updateparams (PERIOD);
+        lfo->updateparams(PERIOD);
         break;
     case 6:
-        setwidth (value);
+        setwidth(value);
         break;
     case 7:
-        setampsns (value);
+        setampsns(value);
         break;
     case 8:
         Pampsnsinv = value;
-        setampsns (Pampsns);
+        setampsns(Pampsns);
         break;
     case 9:
         Pampsmooth = value;
-        setampsns (Pampsns);
+        setampsns(Pampsns);
         break;
     case 10:
         Plp = value;
-        lpmix = ((float) Plp)/32.0f;
-        reinitfilter ();
+        lpmix = ((float) Plp) / 32.0f;
+        reinitfilter();
         break;
     case 11:
         Pbp = value;
-        bpmix = ((float) Pbp)/32.0f;
-        reinitfilter ();
+        bpmix = ((float) Pbp) / 32.0f;
+        reinitfilter();
         break;
     case 12:
         Php = value;
-        hpmix = ((float) Php)/32.0f;
-        reinitfilter ();
+        hpmix = ((float) Php) / 32.0f;
+        reinitfilter();
         break;
     case 13:
         Pstages = (value - 1);
@@ -351,63 +364,70 @@ RyanWah::changepar (int npar, int value)
         break;
     case 14:
         Prange = value;
-        if(Pamode) maxfreq = ((float) Prange)/(fSAMPLE_RATE/6.0f);
+        if (Pamode) maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
         else maxfreq = ((float) Prange);
         break;
-    case 15:    // LV2 - Starting Frequency (legacy, no slider in rakarrack - set by presets) 30 - 300
+    case 15: // LV2 - Starting Frequency (legacy, no slider in rakarrack - set by presets) 30 - 300
         Pminfreq = value;
-        if (Pamode)  minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
+        if (Pamode) minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
         else minfreq = (float) value;
         break;
-    case 16:    // LV2 - Modulate Resonance (legacy no checkbox in rakarrack, but set by presets)
+    case 16: // LV2 - Modulate Resonance (legacy no checkbox in rakarrack, but set by presets)
         variq = value;
-        if(!variq)          // when variq is unset, we need to reset q back to default (case 1)
+        if (!variq) // when variq is unset, we need to reset q back to default (case 1)
             q = (float) Pq; // or q continues with variq values until user manually moves slider for resonance (q)
         break;
     case 17:
-    	//legacy method of changing Pqm and Pamode, presets use this
-        Pmode=value;
-        if((Pmode==1) || (Pmode==3)) Pqm = 1;
+        //legacy method of changing Pqm and Pamode, presets use this
+        Pmode = value;
+        if ((Pmode == 1) || (Pmode == 3)) Pqm = 1;
         else Pqm = 0;
         filterl->setmode(Pqm);
         filterr->setmode(Pqm);
 
-        if((Pmode==2) || (Pmode==3)) Pamode = 1;
+        if ((Pmode == 2) || (Pmode == 3)) Pamode = 1;
         else Pamode = 0;
-        if(Pamode) {
-            minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
-            maxfreq = ((float) Prange)/(fSAMPLE_RATE/6.0f);
-        } else {
+        if (Pamode)
+        {
+            minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
+            maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
+        }
+        else
+        {
             minfreq = (float) Pminfreq;
             maxfreq = (float) Prange;
         }
 
         break;
-    case 18:    // used by rakarrack to update gui display upon new button 
+    case 18: // used by rakarrack to update gui display upon new button 
         Ppreset = value;
         break;
-    case 19:    // LV2 - Analog Gain Mode (M box in rakarrack) 
-    	Pqm=value;
+    case 19: // LV2 - Analog Gain Mode (M box in rakarrack) 
+        Pqm = value;
         filterl->setmode(Pqm);
         filterr->setmode(Pqm);
         break;
-    case 20:    // LV2 - Exponential Wah (N box in rakarrack)
-    	Pamode=value;
-        if(Pamode) {
-            minfreq = ((float) Pminfreq)/(fSAMPLE_RATE/6.0f);
-            maxfreq = ((float) Prange)/(fSAMPLE_RATE/6.0f);
-        } else {
+    case 20: // LV2 - Exponential Wah (N box in rakarrack)
+        Pamode = value;
+        if (Pamode)
+        {
+            minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
+            maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
+        }
+        else
+        {
             minfreq = (float) Pminfreq;
             maxfreq = (float) Prange;
         }
         break;
-    };
-};
+    }
+}
 
 int
-RyanWah::getpar (int npar)
+RyanWah::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -466,13 +486,12 @@ RyanWah::getpar (int npar)
         return (Ppreset);
         break;
     case 19:
-    	return (Pqm);
-    	break;
+        return (Pqm);
+        break;
     case 20:
-    	return (Pamode);
-    	break;
+        return (Pamode);
+        break;
     default:
         return (0);
-    };
-
-};
+    }
+}

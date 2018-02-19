@@ -17,18 +17,16 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Exciter.h"
 
-
-
-Exciter::Exciter (double sample_rate, uint32_t intermediate_bufsize)
+Exciter::Exciter(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
 
     //default values
     Ppreset = 0;
@@ -37,34 +35,34 @@ Exciter::Exciter (double sample_rate, uint32_t intermediate_bufsize)
     hpffreq = 2500;
     outvolume = 0.5f;
 
-    for(int i=0; i<10; i++) {
-        Prm[i]=0;
-        rm[i]=0.0f;
+    for (int i = 0; i < 10; i++)
+    {
+        Prm[i] = 0;
+        rm[i] = 0.0f;
     }
 
-    harm = new HarmEnhancer (rm, 2500.0f,8000.0,1.0f, sample_rate, PERIOD);
+    harm = new HarmEnhancer(rm, 2500.0f, 8000.0, 1.0f, sample_rate, PERIOD);
 
-    cleanup ();
+    cleanup();
+    setpreset(Ppreset);
+}
 
-    setpreset (Ppreset);
-};
-
-Exciter::~Exciter ()
+Exciter::~Exciter()
 {
     delete harm;
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-Exciter::cleanup ()
+Exciter::cleanup()
 {
-    harm->cleanup ();
-};
+    harm->cleanup();
+}
 
 void
-Exciter::lv2_update_params (uint32_t period)
+Exciter::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     harm->lv2_update_params(period);
@@ -74,52 +72,50 @@ Exciter::lv2_update_params (uint32_t period)
  * Effect output
  */
 void
-Exciter::out (float * efxoutl, float * efxoutr)
+Exciter::out(float * efxoutl, float * efxoutr)
 {
-    harm->harm_out(efxoutl,efxoutr);
-
-};
-
+    harm->harm_out(efxoutl, efxoutr);
+}
 
 /*
  * Parameter control
  */
 void
-Exciter::setvolume (int value)
+Exciter::setvolume(int value)
 {
     Pvolume = value;
-    outvolume = (float)Pvolume / 127.0f;
-    harm->set_vol(0,outvolume);
-};
+    outvolume = (float) Pvolume / 127.0f;
+    harm->set_vol(0, outvolume);
+}
 
 void
-Exciter::setlpf (int value)
+Exciter::setlpf(int value)
 {
-    lpffreq=value;
-    harm->set_freql (0, (float)value);
-};
+    lpffreq = value;
+    harm->set_freql(0, (float) value);
+}
 
 void
-Exciter::sethpf (int value)
+Exciter::sethpf(int value)
 {
-    hpffreq=value;
-    harm->set_freqh (0,(float)value);
-};
+    hpffreq = value;
+    harm->set_freqh(0, (float) value);
+}
 
 void
-Exciter::sethar(int num,int value)
+Exciter::sethar(int num, int value)
 {
-    float har=32.0f*((float)num+1.0f);
-    if (num%2==1) har=11200.0f-64.0f*((float)num+1.0f);
-    Prm[num]=value;
-    rm[num]= (float)value/har;
+    float har = 32.0f * ((float) num + 1.0f);
+    
+    if (num % 2 == 1) har = 11200.0f - 64.0f * ((float) num + 1.0f);
+    
+    Prm[num] = value;
+    rm[num] = (float) value / har;
     harm->calcula_mag(rm);
 }
 
-
-
 void
-Exciter::setpreset (int npreset)
+Exciter::setpreset(int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 5;
@@ -138,56 +134,61 @@ Exciter::setpreset (int npreset)
 
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(22,npreset-NUM_PRESETS+1, pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(22, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
-    Ppreset = npreset;
-    cleanup ();
-};
+    else
+    {
 
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
+    Ppreset = npreset;
+    cleanup();
+}
 
 void
-Exciter::changepar (int npar, int value)
+Exciter::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        sethar(0,value);
+        sethar(0, value);
         break;
     case 2:
-        sethar(1,value);
+        sethar(1, value);
         break;
     case 3:
-        sethar(2,value);
+        sethar(2, value);
         break;
     case 4:
-        sethar(3,value);
+        sethar(3, value);
         break;
     case 5:
-        sethar(4,value);
+        sethar(4, value);
         break;
     case 6:
-        sethar(5,value);
+        sethar(5, value);
         break;
     case 7:
-        sethar(6,value);
+        sethar(6, value);
         break;
     case 8:
-        sethar(7,value);
+        sethar(7, value);
         break;
     case 9:
-        sethar(8,value);
+        sethar(8, value);
         break;
     case 10:
-        sethar(9,value);
+        sethar(9, value);
         break;
     case 11:
         setlpf(value);
@@ -195,14 +196,14 @@ Exciter::changepar (int npar, int value)
     case 12:
         sethpf(value);
         break;
-
-    };
-};
+    }
+}
 
 int
-Exciter::getpar (int npar)
+Exciter::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -242,7 +243,7 @@ Exciter::getpar (int npar)
     case 12:
         return (hpffreq);
         break;
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 

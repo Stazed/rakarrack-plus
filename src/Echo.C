@@ -23,17 +23,17 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Echo.h"
 
-Echo::Echo (double samplerate, uint32_t intermediate_bufsize)
+Echo::Echo(double samplerate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
-    
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
+
     //default values
     Ppreset = 0;
     Pvolume = 50;
@@ -48,26 +48,26 @@ Echo::Echo (double samplerate, uint32_t intermediate_bufsize)
     lrdelay = 0;
     Srate_Attack_Coeff = 1.0f / (samplerate * ATTACK);
     maxx_delay = samplerate * MAX_DELAY;
-    fade = samplerate / 5;    //1/5 SR fade time available
+    fade = samplerate / 5; //1/5 SR fade time available
 
     ldelay = new delayline(2.0f, 1, samplerate);
     rdelay = new delayline(2.0f, 1, samplerate);
 
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-Echo::~Echo ()
+Echo::~Echo()
 {
-	delete ldelay;
-	delete rdelay;
-};
+    delete ldelay;
+    delete rdelay;
+}
 
 /*
  * Cleanup the effect
  */
 void
-Echo::cleanup ()
+Echo::cleanup()
 {
     ldelay->cleanup();
     rdelay->cleanup();
@@ -75,10 +75,10 @@ Echo::cleanup ()
     rdelay->set_averaging(0.25f);
     oldl = 0.0;
     oldr = 0.0;
-};
+}
 
 void
-Echo::lv2_update_params (uint32_t period)
+Echo::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
@@ -87,40 +87,40 @@ Echo::lv2_update_params (uint32_t period)
  * Initialize the delays
  */
 void
-Echo::initdelays ()
+Echo::initdelays()
 {
-
     oldl = 0.0;
     oldr = 0.0;
     ltime = delay + lrdelay;
     rtime = delay - lrdelay;
 
-    if(ltime > 2.0f) ltime = 2.0f;
-    if(ltime<0.01f) ltime = 0.01f;
+    if (ltime > 2.0f) ltime = 2.0f;
+    if (ltime < 0.01f) ltime = 0.01f;
 
-    if(rtime > 2.0f) rtime = 2.0f;
-    if(rtime<0.01f) rtime = 0.01f;
-};
+    if (rtime > 2.0f) rtime = 2.0f;
+    if (rtime < 0.01f) rtime = 0.01f;
+}
 
 /*
  * Effect output
  */
 void
-Echo::out (float * efxoutl, float * efxoutr)
+Echo::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, ldl, rdl, ldlout, rdlout, rvl, rvr;
 
-    for (i = 0; i < PERIOD; i++) {
-
+    for (i = 0; i < PERIOD; i++)
+    {
         ldl = ldelay->delay_simple(oldl, ltime, 0, 1, 0);
         rdl = rdelay->delay_simple(oldr, rtime, 0, 1, 0);
 
-        if(Preverse) {
-            rvl = ldelay->delay_simple(oldl, ltime, 1, 0, 1)*ldelay->envelope();
-            rvr = rdelay->delay_simple(oldr, rtime, 1, 0, 1)*rdelay->envelope();
-            ldl = ireverse*ldl + reverse*rvl;
-            rdl = ireverse*rdl + reverse*rvr;
+        if (Preverse)
+        {
+            rvl = ldelay->delay_simple(oldl, ltime, 1, 0, 1) * ldelay->envelope();
+            rvr = rdelay->delay_simple(oldr, rtime, 1, 0, 1) * rdelay->envelope();
+            ldl = ireverse * ldl + reverse*rvl;
+            rdl = ireverse * rdl + reverse*rvr;
         }
 
         l = ldl * (1.0f - lrcross) + rdl * lrcross;
@@ -130,16 +130,20 @@ Echo::out (float * efxoutl, float * efxoutr)
 
         ldlout = -ldl*fb;
         rdlout = -rdl*fb;
-        if (!Pdirect) {
+        
+        if (!Pdirect)
+        {
             l = ldl = efxoutl[i] * (1.0f - panning) + ldlout;
             r = rdl = efxoutr[i] * panning + rdlout;
-        } else {
+        }
+        else
+        {
             ldl = efxoutl[i] * (1.0f - panning) + ldlout;
             rdl = efxoutr[i] * panning + rdlout;
         }
 
-        efxoutl[i]= l;
-        efxoutr[i]= r;
+        efxoutl[i] = l;
+        efxoutr[i] = r;
 
         //LowPass Filter
         oldl = ldl * hidamp + oldl * (1.0f - hidamp);
@@ -149,39 +153,36 @@ Echo::out (float * efxoutl, float * efxoutr)
     }
 }
 
-
 /*
  * Parameter control
  */
 void
-Echo::setvolume (int Pvolume)
+Echo::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
-
-};
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
-Echo::setpanning (int Ppanning)
+Echo::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    panning = ((float)Ppanning + 0.5f) / 127.0f;
-};
+    panning = ((float) Ppanning + 0.5f) / 127.0f;
+}
 
 void
-Echo::setreverse (int Preverse)
+Echo::setreverse(int Preverse)
 {
     this->Preverse = Preverse;
     reverse = (float) Preverse / 127.0f;
     ireverse = 1.0f - reverse;
-};
+}
 
 void
 Echo::Tempo2Delay(int value)
 {
-
-    Pdelay = 60.0f/(float)value * 1000.0f;
-    delay = (float)Pdelay / 1000.0f;
+    Pdelay = 60.0f / (float) value * 1000.0f;
+    delay = (float) Pdelay / 1000.0f;
     if ((unsigned int) delay > (MAX_DELAY)) delay = MAX_DELAY;
     ldelay->set_averaging(10.0f);
     rdelay->set_averaging(10.0f);
@@ -189,60 +190,63 @@ Echo::Tempo2Delay(int value)
 }
 
 void
-Echo::setdelay (int Pdelay)
+Echo::setdelay(int Pdelay)
 {
     this->Pdelay = Pdelay;
-    delay= ((float) Pdelay)/1000.0f;
+    delay = ((float) Pdelay) / 1000.0f;
     ldelay->set_averaging(0.05f);
     rdelay->set_averaging(0.05f);
-    initdelays ();
-};
+    initdelays();
+}
 
 void
-Echo::setlrdelay (int Plrdelay)
+Echo::setlrdelay(int Plrdelay)
 {
     float tmp;
     this->Plrdelay = Plrdelay;
     tmp =
-        (powf (2.0, fabsf ((float)Plrdelay - 64.0f) / 64.0f * 9.0f) -
-         1.0f) / 1000.0f;
+            (powf(2.0, fabsf((float) Plrdelay - 64.0f) / 64.0f * 9.0f) -
+            1.0f) / 1000.0f;
+    
     if (Plrdelay < 64.0)
         tmp = -tmp;
+    
     lrdelay = tmp;
-    initdelays ();
-};
+    initdelays();
+}
 
 void
-Echo::setlrcross (int Plrcross)
+Echo::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
-    lrcross = (float)Plrcross / 127.0f * 1.0f;
-};
+    lrcross = (float) Plrcross / 127.0f * 1.0f;
+}
 
 void
-Echo::setfb (int Pfb)
+Echo::setfb(int Pfb)
 {
     this->Pfb = Pfb;
-    fb = (float)Pfb / 128.0f;
-};
+    fb = (float) Pfb / 128.0f;
+}
 
 void
-Echo::sethidamp (int Phidamp)
+Echo::sethidamp(int Phidamp)
 {
     this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float)Phidamp / 127.0f;
-};
+    hidamp = 1.0f - (float) Phidamp / 127.0f;
+}
 
 void
-Echo::setdirect (int Pdirect)
+Echo::setdirect(int Pdirect)
 {
     if (Pdirect > 0)
         Pdirect = 1;
+    
     this->Pdirect = Pdirect;
-};
+}
 
 void
-Echo::setpreset (int npreset)
+Echo::setpreset(int npreset)
 {
     const int PRESET_SIZE = 9;
     const int NUM_PRESETS = 9;
@@ -268,57 +272,63 @@ Echo::setpreset (int npreset)
         {62, 64, 456, 64, 100, 90, 55, 0, 0}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(4,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(4, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-
-    for (int n = 0; n < PRESET_SIZE; n++)
-        changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
-    Ppreset = npreset;
-};
+    else
+    {
 
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
+    Ppreset = npreset;
+}
 
 void
-Echo::changepar (int npar, int value)
+Echo::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
-        setdelay (value);
+        setdelay(value);
         break;
     case 3:
-        setlrdelay (value);
+        setlrdelay(value);
         break;
     case 4:
-        setlrcross (value);
+        setlrcross(value);
         break;
     case 5:
-        setfb (value);
+        setfb(value);
         break;
     case 6:
-        sethidamp (value);
+        sethidamp(value);
         break;
     case 7:
-        setreverse (value);
+        setreverse(value);
         break;
     case 8:
-        setdirect (value);
+        setdirect(value);
         break;
-    };
-};
+    }
+}
 
 int
-Echo::getpar (int npar)
+Echo::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -346,7 +356,7 @@ Echo::getpar (int npar)
     case 8:
         return (Pdirect);
         break;
-
     };
-    return (0);			//in case of bogus parameter number
-};
+    
+    return (0); //in case of bogus parameter number
+}

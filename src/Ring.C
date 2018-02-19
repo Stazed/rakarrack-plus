@@ -19,26 +19,22 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Ring.h"
 
-
-
-
-Ring::Ring (double sample_rate, uint32_t intermediate_bufsize)
+Ring::Ring(double sample_rate, uint32_t intermediate_bufsize)
 {
-
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     SAMPLE_RATE = lrintf(sample_rate);
 
-    sin_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
-    tri_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
-    squ_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
-    saw_tbl = (float *) malloc(sizeof(float) * SAMPLE_RATE);
+    sin_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
+    tri_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
+    squ_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
+    saw_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
     //sin_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
     //tri_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
     //squ_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
@@ -47,7 +43,6 @@ Ring::Ring (double sample_rate, uint32_t intermediate_bufsize)
     Create_Tables(sample_rate);
 
     offset = 0;
-
 
     //default values
     Ppreset = 0;
@@ -63,50 +58,45 @@ Ring::Ring (double sample_rate, uint32_t intermediate_bufsize)
     saw = 0.0f;
     squ = 0.0f;
 
-    setpreset (Ppreset);
-    cleanup ();
-};
+    setpreset(Ppreset);
+    cleanup();
+}
 
-Ring::~Ring ()
+Ring::~Ring()
 {
-	//delete [] sin_tbl;
-	//delete [] sin_tbl;
-	//delete [] sin_tbl;
-	//delete [] sin_tbl;
+    //delete [] sin_tbl;
+    //delete [] sin_tbl;
+    //delete [] sin_tbl;
+    //delete [] sin_tbl;
     free(sin_tbl);
     free(tri_tbl);
     free(squ_tbl);
     free(saw_tbl);
-};
+}
 
 /*
-* Create Tables
-*/
+ * Create Tables
+ */
 void
 Ring::Create_Tables(float fSAMPLE_RATE)
 {
     unsigned int i;
     float SR = fSAMPLE_RATE;
 
-
-    for (i=0; i<SAMPLE_RATE; i++) sin_tbl[i]=sinf((float)i*D_PI/SR);
-    for (i=0; i<SAMPLE_RATE; i++) tri_tbl[i]=acosf(cosf((float)i*D_PI/SR))/D_PI-1.0f;
-    for (i=0; i<SAMPLE_RATE; i++) squ_tbl[i]=(i < SAMPLE_RATE/2) ? 1.0f : -1.0f;
-    for (i=0; i<SAMPLE_RATE; i++) saw_tbl[i]=((2.0f*i)-SR)/SR;
-
+    for (i = 0; i < SAMPLE_RATE; i++) sin_tbl[i] = sinf((float) i * D_PI / SR);
+    for (i = 0; i < SAMPLE_RATE; i++) tri_tbl[i] = acosf(cosf((float) i * D_PI / SR)) / D_PI - 1.0f;
+    for (i = 0; i < SAMPLE_RATE; i++) squ_tbl[i] = (i < SAMPLE_RATE / 2) ? 1.0f : -1.0f;
+    for (i = 0; i < SAMPLE_RATE; i++) saw_tbl[i] = ((2.0f * i) - SR) / SR;
 }
-
-
 
 /*
  * Cleanup the effect
  */
 void
-Ring::cleanup ()
+Ring::cleanup()
 {
 
-
-};
+}
 
 void
 Ring::lv2_update_params(uint32_t period)
@@ -118,57 +108,66 @@ Ring::lv2_update_params(uint32_t period)
  * Apply the filters
  */
 
-
 /*
  * Effect output
  */
 void
-Ring::out (float * efxoutl, float * efxoutr)
+Ring::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float l, r, lout, rout, tmpfactor;
 
-    float inputvol = (float) Pinput /127.0f;
+    float inputvol = (float) Pinput / 127.0f;
 
-    if (Pstereo != 0) {
+    if (Pstereo != 0)
+    {
         //Stereo
-        for (i = 0; i < PERIOD; i++) {
+        for (i = 0; i < PERIOD; i++)
+        {
             efxoutl[i] = efxoutl[i] * inputvol;
             efxoutr[i] = efxoutr[i] * inputvol;
-            if(inputvol == 0.0) {
-                efxoutl[i]=1.0;
-                efxoutr[i]=1.0;
+            
+            if (inputvol == 0.0)
+            {
+                efxoutl[i] = 1.0;
+                efxoutr[i] = 1.0;
             }
-        };
-    } else {
-        for (i = 0; i < PERIOD; i++) {
-            efxoutl[i] =
-                (efxoutl[i]  +  efxoutr[i] ) * inputvol;
-            if (inputvol == 0.0) efxoutl[i]=1.0;
-        };
-    };
-
-
-    for (i=0; i < PERIOD; i++) {
-        tmpfactor =  depth * (scale * ( sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset] ) + idepth) ;    //This is now mathematically equivalent, but less computation
-        efxoutl[i] *= tmpfactor;
-
-        if (Pstereo != 0) {
-            efxoutr[i] *= tmpfactor;
         }
-        offset += Pfreq;
-        if (offset >= SAMPLE_RATE) offset -=SAMPLE_RATE;
+    }
+    else
+    {
+        for (i = 0; i < PERIOD; i++)
+        {
+            efxoutl[i] =
+                    (efxoutl[i] + efxoutr[i]) * inputvol;
+            
+            if (inputvol == 0.0) efxoutl[i] = 1.0;
+        }
     }
 
+    for (i = 0; i < PERIOD; i++)
+    {
+        tmpfactor = depth * (scale * (sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset]) + idepth); //This is now mathematically equivalent, but less computation
+        efxoutl[i] *= tmpfactor;
 
-    if (Pstereo == 0) memcpy (efxoutr , efxoutl, PERIOD * sizeof(float));
+        if (Pstereo != 0)
+        {
+            efxoutr[i] *= tmpfactor;
+        }
+        
+        offset += Pfreq;
+        
+        if (offset >= SAMPLE_RATE) offset -= SAMPLE_RATE;
+    }
 
-    float level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+    if (Pstereo == 0) memcpy(efxoutr, efxoutl, PERIOD * sizeof (float));
 
-    for (i= 0; i<PERIOD; i++) {
+    float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
+
+    for (i = 0; i < PERIOD; i++)
+    {
         lout = efxoutl[i];
         rout = efxoutr[i];
-
 
         l = lout * (1.0f - lrcross) + rout * lrcross;
         r = rout * (1.0f - lrcross) + lout * lrcross;
@@ -178,11 +177,10 @@ Ring::out (float * efxoutl, float * efxoutr)
 
         //efxoutl[i] = lout * level * panning;
         //efxoutr[i] = rout * level * (1.0f-panning);
-        efxoutl[i] = lout * level * (1.0f-panning);
+        efxoutl[i] = lout * level * (1.0f - panning);
         efxoutr[i] = rout * level * panning;
     }
 }
-
 
 /*
  * Parameter control
@@ -190,34 +188,32 @@ Ring::out (float * efxoutl, float * efxoutr)
 
 
 void
-Ring::setpanning (int Ppan)
+Ring::setpanning(int Ppan)
 {
     Ppanning = Ppan;
-    panning = (float)(Ppanning+64) / 128.0f;
-// is Ok ...
-
-};
-
+    panning = (float) (Ppanning + 64) / 128.0f;
+    // is Ok ...
+}
 
 void
-Ring::setlrcross (int Plrc)
+Ring::setlrcross(int Plrc)
 {
     Plrcross = Plrc;
-    lrcross = (float)(Plrcross+64) / 128.0f;
-
-};
-
+    lrcross = (float) (Plrcross + 64) / 128.0f;
+}
 
 void
 Ring::setscale()
 {
     scale = sin + tri + saw + squ;
-    if (scale==0.0) scale = 1.0;
+    
+    if (scale == 0.0) scale = 1.0;
+    
     scale = 1.0 / scale;
 }
 
 void
-Ring::setpreset (int npreset)
+Ring::setpreset(int npreset)
 {
     const int PRESET_SIZE = 13;
     const int NUM_PRESETS = 6;
@@ -237,33 +233,37 @@ Ring::setpreset (int npreset)
         {0, 0, 0, 64, 100, 1, 0, 20, 0, 100, 0, 64, 0},
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(21,npreset-NUM_PRESETS+1, pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(21, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-    cleanup ();
-};
-
+    cleanup();
+}
 
 void
-Ring::changepar (int npar, int value)
+Ring::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         Pvolume = value;
-        outvolume = (float)(64+value)/128.0f;
+        outvolume = (float) (64 + value) / 128.0f;
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
-        setlrcross (value);
+        setlrcross(value);
         break;
     case 3:
         Plevel = value;
@@ -274,11 +274,16 @@ Ring::changepar (int npar, int value)
         idepth = 1.0f - depth;
         break;
     case 5:
-        if(value > 20000) {	//Make sure bad inputs can't cause buffer overflow
+        if (value > 20000)
+        { //Make sure bad inputs can't cause buffer overflow
             Pfreq = 20000;
-        } else if (value < 1) {
+        }
+        else if (value < 1)
+        {
             Pfreq = 1;
-        } else {
+        }
+        else
+        {
             Pfreq = value;
         }
         break;
@@ -313,14 +318,14 @@ Ring::changepar (int npar, int value)
     case 12:
         Pafreq = value;
         break;
-
-    };
-};
+    }
+}
 
 int
-Ring::getpar (int npar)
+Ring::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -359,8 +364,7 @@ Ring::getpar (int npar)
         break;
     case 12:
         return (Pafreq);
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 

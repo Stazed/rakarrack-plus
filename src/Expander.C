@@ -22,20 +22,18 @@
  Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <math.h>
 #include "Expander.h"
 
-
-Expander::Expander (double sample_rate, uint32_t intermediate_bufsize)
+Expander::Expander(double sample_rate, uint32_t intermediate_bufsize)
 {
-
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
-    
+
     initialize();
-    
+
     env = 0.0;
     oldgain = 0.0;
     efollower = 0;
@@ -44,50 +42,46 @@ Expander::Expander (double sample_rate, uint32_t intermediate_bufsize)
     setpreset(0);
 }
 
-Expander::~Expander ()
+Expander::~Expander()
 {
     clear_initialize();
 }
 
-
-
 void
-Expander::cleanup ()
+Expander::cleanup()
 {
-    lpfl->cleanup ();
-    hpfl->cleanup ();
-    lpfr->cleanup ();
-    hpfr->cleanup ();
+    lpfl->cleanup();
+    hpfl->cleanup();
+    lpfr->cleanup();
+    hpfr->cleanup();
     oldgain = 0.0f;
-
 }
 
 void
-Expander::lv2_update_params (uint32_t period)
+Expander::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
         initialize();
-        setlpf (Plpf);
-        sethpf (Phpf);
+        setlpf(Plpf);
+        sethpf(Phpf);
     }
     else
     {
         PERIOD = period;
     }
-
 }
 
-void 
+void
 Expander::initialize()
 {
     interpbuf = new float[PERIOD];
-    lpfl = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
-    lpfr = new AnalogFilter (2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
-    hpfl = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
-    hpfr = new AnalogFilter (3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfl = new AnalogFilter(2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    lpfr = new AnalogFilter(2, 22000, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfl = new AnalogFilter(3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
+    hpfr = new AnalogFilter(3, 20, 1, 0, fSAMPLE_RATE, interpbuf);
 }
 
 void Expander::clear_initialize()
@@ -100,47 +94,45 @@ void Expander::clear_initialize()
 }
 
 void
-Expander::setlpf (int value)
+Expander::setlpf(int value)
 {
     Plpf = value;
-    float fr = (float)Plpf;
-    lpfl->setfreq (fr);
-    lpfr->setfreq (fr);
-};
+    float fr = (float) Plpf;
+    lpfl->setfreq(fr);
+    lpfr->setfreq(fr);
+}
 
 void
-Expander::sethpf (int value)
+Expander::sethpf(int value)
 {
     Phpf = value;
-    float fr = (float)Phpf;
-    hpfl->setfreq (fr);
-    hpfr->setfreq (fr);
-};
-
+    float fr = (float) Phpf;
+    hpfl->setfreq(fr);
+    hpfr->setfreq(fr);
+}
 
 void
-Expander::changepar (int np, int value)
+Expander::changepar(int np, int value)
 {
-
-    switch (np) {
-
+    switch (np)
+    {
     case 1:
         Pthreshold = value;
-        tfactor = dB2rap (-((float) Pthreshold));
-        tlevel = 1.0f/tfactor;
+        tfactor = dB2rap(-((float) Pthreshold));
+        tlevel = 1.0f / tfactor;
         break;
     case 2:
         Pshape = value;
-        sfactor = dB2rap ((float)Pshape/2);
+        sfactor = dB2rap((float) Pshape / 2);
         sgain = expf(-sfactor);
         break;
     case 3:
         Pattack = value;
-        a_rate = 1000.0f/((float)Pattack * fs);
+        a_rate = 1000.0f / ((float) Pattack * fs);
         break;
     case 4:
         Pdecay = value;
-        d_rate = 1000.0f/((float)Pdecay * fs);
+        d_rate = 1000.0f / ((float) Pdecay * fs);
         break;
     case 5:
         setlpf(value);
@@ -150,18 +142,15 @@ Expander::changepar (int np, int value)
         break;
     case 7:
         Plevel = value;
-        level = dB2rap((float) value/6.0f);
+        level = dB2rap((float) value / 6.0f);
         break;
-
     }
 }
 
 int
-Expander::getpar (int np)
+Expander::getpar(int np)
 {
-
     switch (np)
-
     {
     case 1:
         return (Pthreshold);
@@ -187,14 +176,11 @@ Expander::getpar (int np)
     }
 
     return (0);
-
 }
 
-
 void
-Expander::setpreset (int npreset)
+Expander::setpreset(int npreset)
 {
-
     const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
@@ -208,34 +194,36 @@ Expander::setpreset (int npreset)
         {-30, 9, 950, 25, 6703, 526, 90}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(25,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(25, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n+1, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n + 1, presets[npreset][n]);
+            changepar(n + 1, pdata[n]);
     }
-
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n + 1, presets[npreset][n]);
+    }
 }
 
 void
-Expander::out (float *efxoutl, float *efxoutr)
+Expander::out(float *efxoutl, float *efxoutr)
 {
     unsigned int i;
     float delta = 0.0f;
     float expenv = 0.0f;
 
+    lpfl->filterout(efxoutl, PERIOD);
+    hpfl->filterout(efxoutl, PERIOD);
+    lpfr->filterout(efxoutr, PERIOD);
+    hpfr->filterout(efxoutr, PERIOD);
 
-    lpfl->filterout (efxoutl, PERIOD);
-    hpfl->filterout (efxoutl, PERIOD);
-    lpfr->filterout (efxoutr, PERIOD);
-    hpfr->filterout (efxoutr, PERIOD);
-
-
-    for (i = 0; i < PERIOD; i++) {
-
-        delta = 0.5f*(fabsf (efxoutl[i]) + fabsf (efxoutr[i])) - env;    //envelope follower from Compressor.C
+    for (i = 0; i < PERIOD; i++)
+    {
+        delta = 0.5f * (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) - env; //envelope follower from Compressor.C
+        
         if (delta > 0.0)
             env += a_rate * delta;
         else
@@ -244,15 +232,19 @@ Expander::out (float *efxoutl, float *efxoutr)
         //End envelope power detection
 
         if (env > tlevel) env = tlevel;
-        expenv = sgain * (expf(env*sfactor*tfactor) - 1.0f);		//Envelope waveshaping
+        
+        expenv = sgain * (expf(env * sfactor * tfactor) - 1.0f); //Envelope waveshaping
 
         gain = (1.0f - d_rate) * oldgain + d_rate * expenv;
-        oldgain = gain;				//smooth it out a little bit
+        oldgain = gain; //smooth it out a little bit
 
-        if(efollower) {
+        if (efollower)
+        {
             efxoutl[i] = gain;
             efxoutr[i] += gain;
-        } else {
+        }
+        else
+        {
             efxoutl[i] *= gain*level;
             efxoutr[i] *= gain*level;
         }

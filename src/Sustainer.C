@@ -18,17 +18,17 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Sustainer.h"
 
-Sustainer::Sustainer (double sample_rate, uint32_t intermediate_bufsize)
+Sustainer::Sustainer(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
-    float cSAMPLE_RATE = 1/sample_rate;
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
+    float cSAMPLE_RATE = 1 / sample_rate;
 
     Pvolume = 64;
     Psustain = 64;
@@ -36,41 +36,41 @@ Sustainer::Sustainer (double sample_rate, uint32_t intermediate_bufsize)
     level = 0.5f;
     input = tmpgain = 0.0f;
     Ppreset = 0;
-    
-    compeak = compg =  compenv = oldcompenv = cpthresh = 0.0f;
 
-    float tmp = 0.01f;  //10 ms decay time on peak detectorS
-    prls = 1.0f - (cSAMPLE_RATE/(cSAMPLE_RATE + tmp));
+    compeak = compg = compenv = oldcompenv = cpthresh = 0.0f;
+
+    float tmp = 0.01f; //10 ms decay time on peak detectorS
+    prls = 1.0f - (cSAMPLE_RATE / (cSAMPLE_RATE + tmp));
 
     tmp = 0.05f; //50 ms att/rel on compressor
-    calpha =  cSAMPLE_RATE/(cSAMPLE_RATE + tmp);
+    calpha = cSAMPLE_RATE / (cSAMPLE_RATE + tmp);
     cbeta = 1.0f - calpha;
     cthresh = 0.25f;
     cratio = 0.25f;
 
     timer = 0;
-    hold = (int) (sample_rate*0.0125);  //12.5ms
+    hold = (int) (sample_rate * 0.0125); //12.5ms
     setpreset(Ppreset);
 
-    cleanup ();
-};
+    cleanup();
+}
 
-Sustainer::~Sustainer ()
+Sustainer::~Sustainer()
 {
 
-};
+}
 
 /*
  * Cleanup the effect
  */
 void
-Sustainer::cleanup ()
+Sustainer::cleanup()
 {
     compeak = 0.0f;
     compenv = 0.0f;
     oldcompenv = 0.0f;
     cpthresh = cthresh; //dynamic threshold
-};
+}
 
 void
 Sustainer::lv2_update_params(uint32_t period)
@@ -78,59 +78,64 @@ Sustainer::lv2_update_params(uint32_t period)
     PERIOD = period;
 }
 
-
 /*
  * Effect output
  */
 void
-Sustainer::out (float * efxoutl, float * efxoutr)
+Sustainer::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
     float auxtempl = 0.0f;
     float auxtempr = 0.0f;
     float auxcombi = 0.0f;
 
-    for (i = 0; i<PERIOD; i++) {  //apply compression to auxresampled
+    for (i = 0; i < PERIOD; i++)
+    { //apply compression to auxresampled
         auxtempl = input * efxoutl[i];
         auxtempr = input * efxoutr[i];
         auxcombi = 0.5f * (auxtempl + auxtempr);
-        if(fabs(auxcombi) > compeak) {
-            compeak = fabs(auxcombi);   //First do peak detection on the signal
+        
+        if (fabs(auxcombi) > compeak)
+        {
+            compeak = fabs(auxcombi); //First do peak detection on the signal
             timer = 0;
         }
-        if(timer>hold) {
+        
+        if (timer > hold)
+        {
             compeak *= prls;
             timer--;
         }
+        
         timer++;
-        compenv = cbeta * oldcompenv + calpha * compeak;       //Next average into envelope follower
+        compenv = cbeta * oldcompenv + calpha * compeak; //Next average into envelope follower
         oldcompenv = compenv;
 
-        if(compenv > cpthresh) {                              //if envelope of signal exceeds thresh, then compress
-            compg = cpthresh + cpthresh*(compenv - cpthresh)/compenv;
-            cpthresh = cthresh + cratio*(compg - cpthresh);   //cpthresh changes dynamically
-            tmpgain = compg/compenv;
-        } else {
+        if (compenv > cpthresh)
+        { //if envelope of signal exceeds thresh, then compress
+            compg = cpthresh + cpthresh * (compenv - cpthresh) / compenv;
+            cpthresh = cthresh + cratio * (compg - cpthresh); //cpthresh changes dynamically
+            tmpgain = compg / compenv;
+        }
+        else
+        {
             tmpgain = 1.0f;
         }
 
-        if(compenv < cpthresh) cpthresh = compenv;
-        if(cpthresh < cthresh) cpthresh = cthresh;
+        if (compenv < cpthresh) cpthresh = compenv;
+        if (cpthresh < cthresh) cpthresh = cthresh;
 
         efxoutl[i] = auxtempl * tmpgain * level;
         efxoutr[i] = auxtempr * tmpgain * level;
-    };
+    }
     //End compression
-};
-
+}
 
 /*
  * Parameter control
  */
-
-
 void
-Sustainer::setpreset (int npreset)
+Sustainer::setpreset(int npreset)
 {
     const int PRESET_SIZE = 2;
     const int NUM_PRESETS = 3;
@@ -145,47 +150,53 @@ Sustainer::setpreset (int npreset)
 
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(36,npreset-NUM_PRESETS+1, pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(36, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
     Ppreset = npreset;
-};
-
+}
 
 void
-Sustainer::changepar (int npar, int value)
+Sustainer::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         Pvolume = value;
-        level = dB2rap(-30.0f * (1.0f - ((float) Pvolume/127.0f)));
+        level = dB2rap(-30.0f * (1.0f - ((float) Pvolume / 127.0f)));
         break;
     case 1:
         Psustain = value;
-        fsustain =  (float) Psustain/127.0f;
+        fsustain = (float) Psustain / 127.0f;
         cratio = 1.25f - fsustain;
-        input = dB2rap (42.0f * fsustain - 6.0f);
+        input = dB2rap(42.0f * fsustain - 6.0f);
         cthresh = 0.25 + fsustain;
         break;
     }
-};
+}
 
 int
-Sustainer::getpar (int npar)
+Sustainer::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
     case 1:
         return (Psustain);
         break;
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
 

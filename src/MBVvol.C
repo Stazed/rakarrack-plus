@@ -19,7 +19,7 @@
   You should have received a copy of the GNU General Public License (version 2)
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,13 +32,13 @@
 
 
 
-MBVvol::MBVvol (double sample_rate, uint32_t intermediate_bufsize)
+MBVvol::MBVvol(double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
     initialize();
-    
+
     lfo1 = new EffectLFO(fSAMPLE_RATE);
     lfo2 = new EffectLFO(fSAMPLE_RATE);
 
@@ -52,16 +52,16 @@ MBVvol::MBVvol (double sample_rate, uint32_t intermediate_bufsize)
     PsL = PsML = PsMH = PsH = 0;
     v1l = v1r = v2l = v2r = 0.0f;
     d1 = d2 = d3 = d4 = 0.0f;
-    volL=volLr=volML=volMLr=volMH=volMHr=volH=volHr=2.0f;
+    volL = volLr = volML = volMLr = volMH = volMHr = volH = volHr = 2.0f;
     one = 1.0f;
     zero = 0.0f;
     outvolume = 0.5f;
-    
-    setpreset (Ppreset);
-    cleanup ();
-};
 
-MBVvol::~MBVvol ()
+    setpreset(Ppreset);
+    cleanup();
+}
+
+MBVvol::~MBVvol()
 {
     clear_initialize();
     delete lfo1;
@@ -72,79 +72,78 @@ MBVvol::~MBVvol ()
  * Cleanup the effect
  */
 void
-MBVvol::cleanup ()
+MBVvol::cleanup()
 {
-    lpf1l->cleanup ();
-    hpf1l->cleanup ();
-    lpf1r->cleanup ();
-    hpf1r->cleanup ();
-    lpf2l->cleanup ();
-    hpf2l->cleanup ();
-    lpf2r->cleanup ();
-    hpf2r->cleanup ();
-    lpf3l->cleanup ();
-    hpf3l->cleanup ();
-    lpf3r->cleanup ();
-    hpf3r->cleanup ();
-
-};
+    lpf1l->cleanup();
+    hpf1l->cleanup();
+    lpf1r->cleanup();
+    hpf1r->cleanup();
+    lpf2l->cleanup();
+    hpf2l->cleanup();
+    lpf2r->cleanup();
+    hpf2r->cleanup();
+    lpf3l->cleanup();
+    hpf3l->cleanup();
+    lpf3r->cleanup();
+    hpf3r->cleanup();
+}
 
 void
-MBVvol::lv2_update_params (uint32_t period)
+MBVvol::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
         initialize();
-        setCross1 (Cross1);
-        setCross2 (Cross2);
-        setCross3 (Cross3);
+        setCross1(Cross1);
+        setCross2(Cross2);
+        setCross3(Cross3);
     }
     else
     {
         PERIOD = period;
     }
-    
-    lfo1->updateparams (PERIOD);
-    lfo2->updateparams (PERIOD);
+
+    lfo1->updateparams(PERIOD);
+    lfo2->updateparams(PERIOD);
 }
 
-void 
-MBVvol::initialize ()
+void
+MBVvol::initialize()
 {
-    lowl = (float *) malloc (sizeof (float) * PERIOD);
-    lowr = (float *) malloc (sizeof (float) * PERIOD);
-    midll = (float *) malloc (sizeof (float) * PERIOD);
-    midlr = (float *) malloc (sizeof (float) * PERIOD);
-    midhl = (float *) malloc (sizeof (float) * PERIOD);
-    midhr = (float *) malloc (sizeof (float) * PERIOD);
-    highl = (float *) malloc (sizeof (float) * PERIOD);
-    highr = (float *) malloc (sizeof (float) * PERIOD);
-    
+    lowl = (float *) malloc(sizeof (float) * PERIOD);
+    lowr = (float *) malloc(sizeof (float) * PERIOD);
+    midll = (float *) malloc(sizeof (float) * PERIOD);
+    midlr = (float *) malloc(sizeof (float) * PERIOD);
+    midhl = (float *) malloc(sizeof (float) * PERIOD);
+    midhr = (float *) malloc(sizeof (float) * PERIOD);
+    highl = (float *) malloc(sizeof (float) * PERIOD);
+    highr = (float *) malloc(sizeof (float) * PERIOD);
+
     unsigned int i;
-    for(i=0;i<PERIOD;i++)
+    
+    for (i = 0; i < PERIOD; i++)
     {
-    	lowl[i] = lowr[i] = 0;
-    	midll[i] = midlr[i] = 0;
+        lowl[i] = lowr[i] = 0;
+        midll[i] = midlr[i] = 0;
         midhl[i] = midhr[i] = 0;
-    	highl[i] = highr[i] = 0;
+        highl[i] = highr[i] = 0;
     }
 
-
     interpbuf = new float[PERIOD];
-    lpf1l = new AnalogFilter (2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf1r = new AnalogFilter (2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf1l = new AnalogFilter (3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf1r = new AnalogFilter (3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf2l = new AnalogFilter (2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf2r = new AnalogFilter (2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf2l = new AnalogFilter (3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf2r = new AnalogFilter (3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf3l = new AnalogFilter (2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    lpf3r = new AnalogFilter (2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf3l = new AnalogFilter (3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
-    hpf3r = new AnalogFilter (3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf1l = new AnalogFilter(2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf1r = new AnalogFilter(2, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1l = new AnalogFilter(3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf1r = new AnalogFilter(3, 500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2l = new AnalogFilter(2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf2r = new AnalogFilter(2, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2l = new AnalogFilter(3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf2r = new AnalogFilter(3, 2500.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3l = new AnalogFilter(2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    lpf3r = new AnalogFilter(2, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3l = new AnalogFilter(3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
+    hpf3r = new AnalogFilter(3, 5000.0f, .7071f, 0, fSAMPLE_RATE, interpbuf);
 }
 
 void
@@ -172,18 +171,19 @@ MBVvol::clear_initialize()
     delete hpf3r;
     delete[] interpbuf;
 }
+
 /*
  * Effect output
  */
 void
-MBVvol::out (float * efxoutl, float * efxoutr)
+MBVvol::out(float * efxoutl, float * efxoutr)
 {
     unsigned int i;
 
-    memcpy(lowl,efxoutl,sizeof(float) * PERIOD);
-    memcpy(midll,efxoutl,sizeof(float) * PERIOD);
-    memcpy(midhl,efxoutl,sizeof(float) * PERIOD);
-    memcpy(highl,efxoutl,sizeof(float) * PERIOD);
+    memcpy(lowl, efxoutl, sizeof (float) * PERIOD);
+    memcpy(midll, efxoutl, sizeof (float) * PERIOD);
+    memcpy(midhl, efxoutl, sizeof (float) * PERIOD);
+    memcpy(highl, efxoutl, sizeof (float) * PERIOD);
 
     lpf1l->filterout(lowl, PERIOD);
     hpf1l->filterout(midll, PERIOD);
@@ -192,10 +192,10 @@ MBVvol::out (float * efxoutl, float * efxoutr)
     lpf3l->filterout(midhl, PERIOD);
     hpf3l->filterout(highl, PERIOD);
 
-    memcpy(lowr,efxoutr,sizeof(float) * PERIOD);
-    memcpy(midlr,efxoutr,sizeof(float) * PERIOD);
-    memcpy(midhr,efxoutr,sizeof(float) * PERIOD);
-    memcpy(highr,efxoutr,sizeof(float) * PERIOD);
+    memcpy(lowr, efxoutr, sizeof (float) * PERIOD);
+    memcpy(midlr, efxoutr, sizeof (float) * PERIOD);
+    memcpy(midhr, efxoutr, sizeof (float) * PERIOD);
+    memcpy(highr, efxoutr, sizeof (float) * PERIOD);
 
     lpf1r->filterout(lowr, PERIOD);
     hpf1r->filterout(midlr, PERIOD);
@@ -204,95 +204,92 @@ MBVvol::out (float * efxoutl, float * efxoutr)
     lpf3r->filterout(midhr, PERIOD);
     hpf3r->filterout(highr, PERIOD);
 
-    lfo1->effectlfoout (&lfo1l, &lfo1r);
-    lfo2->effectlfoout (&lfo2l, &lfo2r);
+    lfo1->effectlfoout(&lfo1l, &lfo1r);
+    lfo2->effectlfoout(&lfo2l, &lfo2r);
 
-    d1=(lfo1l-v1l)/(float)PERIOD;
-    d2=(lfo1r-v1r)/(float)PERIOD;
-    d3=(lfo2l-v2l)/(float)PERIOD;
-    d4=(lfo2r-v2r)/(float)PERIOD;
+    d1 = (lfo1l - v1l) / (float) PERIOD;
+    d2 = (lfo1r - v1r) / (float) PERIOD;
+    d3 = (lfo2l - v2l) / (float) PERIOD;
+    d4 = (lfo2r - v2r) / (float) PERIOD;
 
-    for (i = 0; i < PERIOD; i++) {
+    for (i = 0; i < PERIOD; i++)
+    {
+        updateVols();
 
-    	updateVols();
-
-        efxoutl[i]=lowl[i]*volL+midll[i]*volML+midhl[i]*volMH+highl[i]*volH;
-        efxoutr[i]=lowr[i]*volLr+midlr[i]*volMLr+midhr[i]*volMHr+highr[i]*volHr;
+        efxoutl[i] = lowl[i] * volL + midll[i] * volML + midhl[i] * volMH + highl[i] * volH;
+        efxoutr[i] = lowr[i] * volLr + midlr[i] * volMLr + midhr[i] * volMHr + highr[i] * volHr;
     }
 }
-
 
 /*
  * Parameter control
  */
 void
-MBVvol::setvolume (int value)
+MBVvol::setvolume(int value)
 {
     Pvolume = value;
-    outvolume = (float)Pvolume / 127.0f;
-};
-
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
 MBVvol::updateVols(void)
 {
-    v1l+=d1;
-    v1r+=d2;
-    v2l+=d3;
-    v2r+=d4;
-    
-    volL  = *sourceL;
+    v1l += d1;
+    v1r += d2;
+    v2l += d3;
+    v2r += d4;
+
+    volL = *sourceL;
     volLr = *sourceLr;
     volML = *sourceML;
-    volMLr= *sourceMLr;
+    volMLr = *sourceMLr;
     volMH = *sourceMH;
-    volMHr= *sourceMHr;
-    volH  = *sourceH;
+    volMHr = *sourceMHr;
+    volH = *sourceH;
     volHr = *sourceHr;
-    
 }
 
 //legacy support
 void
 MBVvol::setCombi(int value)
 {
-/*
-NEW         LEGACY
- 0            1         LFO 1
- 1            2         LF0 2
- 2            o         Constant
- 3            x         Muted
+    /*
+    NEW         LEGACY
+     0            1         LFO 1
+     1            2         LF0 2
+     2            o         Constant
+     3            x         Muted
 
 
-                                                             NEW        LEGACY
- {"1122", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0011         0
- {"1221", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0110         1
- {"1212", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0101         2
- {"o11o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 2002         3
- {"o12o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 2012         4
- {"x11x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 3003         5
- {"x12x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 3013         6
- {"1oo1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0220         7
- {"1oo2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0221         8
- {"1xx1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0330         9
- {"1xx2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0331        10
+                                                                 NEW        LEGACY
+     {"1122", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0011         0
+     {"1221", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0110         1
+     {"1212", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0101         2
+     {"o11o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 2002         3
+     {"o12o", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 2012         4
+     {"x11x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 3003         5
+     {"x12x", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 3013         6
+     {"1oo1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0220         7
+     {"1oo2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0221         8
+     {"1xx1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0330         9
+     {"1xx2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0}, == 0331        10
 
- * The above NEW values plus 10000 are the calculated magic numbers for the legacy case defaults = Pcombi new value.
- * All of this is to maintain the legacy file saving structure and still use the more flexible rkr.lv2 method
- * of allowing users to set their own combination. Legacy had only one saved variable for the four sources.
- * Legacy hard coded the above preset combinations, limiting user flexibility. The rkr.lv2 method separated each
- * source into four parts to allow maximum user flexibility. To avoid having to re-write the rakarrack file structure,
- * the four values are saved in the original Pcombi variable and now use CalcCombi() and parseCombi()
- * for the new method saving and loading.
-*/
-    if(value < 0 || value > 13333)  // sanity check
+     * The above NEW values plus 10000 are the calculated magic numbers for the legacy case defaults = Pcombi new value.
+     * All of this is to maintain the legacy file saving structure and still use the more flexible rkr.lv2 method
+     * of allowing users to set their own combination. Legacy had only one saved variable for the four sources.
+     * Legacy hard coded the above preset combinations, limiting user flexibility. The rkr.lv2 method separated each
+     * source into four parts to allow maximum user flexibility. To avoid having to re-write the rakarrack file structure,
+     * the four values are saved in the original Pcombi variable and now use CalcCombi() and parseCombi()
+     * for the new method saving and loading.
+     */
+    if (value < 0 || value > 13333) // sanity check
     {
-        Pcombi = value = 0;         // set to default
+        Pcombi = value = 0; // set to default
     }
-    
-    if(value < 10000)               // legacy value from old files and banks
+
+    if (value < 10000) // legacy value from old files and banks
     {
-        switch(value)
+        switch (value)
         {
         case 0:
             Pcombi = 10011;
@@ -332,17 +329,18 @@ NEW         LEGACY
 
     parseCombi(Pcombi);
 
-// --------------------------------
+    // --------------------------------
 
 #if 0
-/* Legacy method */
-    switch(value) {
+    /* Legacy method */
+    switch (value)
+    {
     case 0:
         sourceL = &v1l;
         sourceLr = &v1r;
         sourceML = &v1l;
         sourceMLr = &v1r;
-        sourceMH  = &v2l;
+        sourceMH = &v2l;
         sourceMHr = &v2r;
         sourceH = &v2l;
         sourceHr = &v2r;
@@ -453,7 +451,7 @@ NEW         LEGACY
 
 // rakarrack only, not lv2
 void
-MBVvol::calcCombi ()
+MBVvol::calcCombi()
 {
     /* To save all four variables in the one Pcombi variable */
     Pcombi = ((PsL * 1000) + (PsML * 100) + (PsMH * 10) + PsH) + 10000;
@@ -461,64 +459,61 @@ MBVvol::calcCombi ()
 
 // rakarrack only, not lv2
 void
-MBVvol::parseCombi (int value)
+MBVvol::parseCombi(int value)
 {
     /* New file saving for the rkr.lv2 method - four variables saved in one variable location */
-    
     value -= 10000;
-    PsL  = value / 1000;
+    PsL = value / 1000;
     setSource(&sourceL, &sourceLr, PsL);
-    
+
     value %= 1000;
     PsML = value / 100;
     setSource(&sourceML, &sourceMLr, PsML);
-    
+
     value %= 100;
     PsMH = value / 10;
     setSource(&sourceMH, &sourceMHr, PsMH);
-    
+
     value %= 10;
-    PsH  = value;
+    PsH = value;
     setSource(&sourceH, &sourceHr, PsH);
 }
 
 void
-MBVvol::setCross1 (int value)
+MBVvol::setCross1(int value)
 {
     Cross1 = value;
-    lpf1l->setfreq ((float)value);
-    lpf1r->setfreq ((float)value);
-    hpf1l->setfreq ((float)value);
-    hpf1r->setfreq ((float)value);
-
-};
+    lpf1l->setfreq((float) value);
+    lpf1r->setfreq((float) value);
+    hpf1l->setfreq((float) value);
+    hpf1r->setfreq((float) value);
+}
 
 void
-MBVvol::setCross2 (int value)
+MBVvol::setCross2(int value)
 {
     Cross2 = value;
-    hpf2l->setfreq ((float)value);
-    hpf2r->setfreq ((float)value);
-    lpf2l->setfreq ((float)value);
-    lpf2r->setfreq ((float)value);
-
-};
+    hpf2l->setfreq((float) value);
+    hpf2r->setfreq((float) value);
+    lpf2l->setfreq((float) value);
+    lpf2r->setfreq((float) value);
+}
 
 void
-MBVvol::setCross3 (int value)
+MBVvol::setCross3(int value)
 {
     Cross3 = value;
-    hpf3l->setfreq ((float)value);
-    hpf3r->setfreq ((float)value);
-    lpf3l->setfreq ((float)value);
-    lpf3r->setfreq ((float)value);
-
-};
+    hpf3l->setfreq((float) value);
+    hpf3r->setfreq((float) value);
+    lpf3l->setfreq((float) value);
+    lpf3r->setfreq((float) value);
+}
 
 void
-MBVvol::setSource (float** ptr, float** ptrr, int val)
+MBVvol::setSource(float** ptr, float** ptrr, int val)
 {
-    switch(val){
+    switch (val)
+    {
     case 0:
         *ptr = &v1l;
         *ptrr = &v1r;
@@ -538,106 +533,112 @@ MBVvol::setSource (float** ptr, float** ptrr, int val)
     default:
         return; //no change
     }
-    
-    calcCombi();    // to update the Pcombi file saving value rakarrack only, not lv2
+
+    calcCombi(); // to update the Pcombi file saving value rakarrack only, not lv2
 }
 
 void
-MBVvol::setpreset (int npreset)
+MBVvol::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Vary1
-        {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0},   // 0, 0, 1, 1
+        {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0}, // 0, 0, 1, 1
         //Vary2
-        {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1},   // 0, 1, 1, 0
+        {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1}, // 0, 1, 1, 0
         //Vary3
-        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2}   // 0, 1, 0, 1
+        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2} // 0, 1, 0, 1
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(28,npreset-NUM_PRESETS+1, pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(28, npreset - NUM_PRESETS + 1, pdata);
+        
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
-
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, pdata[n]);
     }
-    Ppreset = npreset;
-    cleanup ();
-};
+    else
+    {
 
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+    
+    Ppreset = npreset;
+    cleanup();
+}
 
 void
-MBVvol::changepar (int npar, int value)
+MBVvol::changepar(int npar, int value)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
         lfo1->Pfreq = value;
-        lfo1->updateparams (PERIOD);
+        lfo1->updateparams(PERIOD);
         break;
     case 2:
         lfo1->PLFOtype = value;
-        lfo1->updateparams (PERIOD);
+        lfo1->updateparams(PERIOD);
         break;
     case 3:
         lfo1->Pstereo = value;
-        lfo1->updateparams (PERIOD);
+        lfo1->updateparams(PERIOD);
         break;
     case 4:
         lfo2->Pfreq = value;
-        lfo2->updateparams (PERIOD);
+        lfo2->updateparams(PERIOD);
         break;
     case 5:
         lfo2->PLFOtype = value;
-        lfo2->updateparams (PERIOD);
+        lfo2->updateparams(PERIOD);
         break;
     case 6:
         lfo2->Pstereo = value;
-        lfo2->updateparams (PERIOD);
+        lfo2->updateparams(PERIOD);
         break;
     case 7:
-        setCross1 (value);
+        setCross1(value);
         break;
     case 8:
-        setCross2 (value);
+        setCross2(value);
         break;
     case 9:
         setCross3(value);
         break;
     case 10:
-        Pcombi=value;
+        Pcombi = value;
         setCombi(value);
         break;
     case 11:
-    	PsL=value;
-    	setSource(&sourceL, &sourceLr, value);
-    	break;
+        PsL = value;
+        setSource(&sourceL, &sourceLr, value);
+        break;
     case 12:
-    	PsML=value;
-    	setSource(&sourceML, &sourceMLr, value);
-    	break;
+        PsML = value;
+        setSource(&sourceML, &sourceMLr, value);
+        break;
     case 13:
-    	PsMH=value;
-    	setSource(&sourceMH, &sourceMHr, value);
-    	break;
+        PsMH = value;
+        setSource(&sourceMH, &sourceMHr, value);
+        break;
     case 14:
-    	PsH=value;
-    	setSource(&sourceH, &sourceHr, value);
-    	break;
+        PsH = value;
+        setSource(&sourceH, &sourceHr, value);
+        break;
     }
 }
 
 int
-MBVvol::getpar (int npar)
+MBVvol::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -672,19 +673,18 @@ MBVvol::getpar (int npar)
         return (Pcombi);
         break;
     case 11:
-    	return (PsL);
-    	break;
+        return (PsL);
+        break;
     case 12:
-    	return (PsML);
-    	break;
+        return (PsML);
+        break;
     case 13:
-    	return (PsMH);
-    	break;
+        return (PsMH);
+        break;
     case 14:
-    	return (PsH);
-    	break;
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+        return (PsH);
+        break;
+    }
+    return (0); //in case of bogus parameter number
+}
 

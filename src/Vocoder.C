@@ -19,16 +19,16 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "Vocoder.h"
 
-Vocoder::Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Vocoder::Vocoder(float *auxresampled_, int bands, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
 {
-    PERIOD = intermediate_bufsize;  // correct for rakarrack, may be adjusted by lv2
+    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
 
     adjust(DS, sample_rate);
@@ -43,21 +43,21 @@ Vocoder::Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double
     Ppanning = 64;
     Plrcross = 100;
     outvolume = 0.5f;
-    input = dB2rap (75.0f * (float)Pinput / 127.0f - 40.0f);
+    input = dB2rap(75.0f * (float) Pinput / 127.0f - 40.0f);
     vulevel = 0.0f;
 
     initialize();
 
     Pmuffle = 10;
-    float tmp = 0.01f;  //10 ms decay time on peak detectors
-    alpha = ncSAMPLE_RATE/(ncSAMPLE_RATE + tmp);
+    float tmp = 0.01f; //10 ms decay time on peak detectors
+    alpha = ncSAMPLE_RATE / (ncSAMPLE_RATE + tmp);
     beta = 1.0f - alpha;
     prls = beta;
     gate = 0.005f;
 
 
     tmp = 0.05f; //50 ms att/rel on compressor
-    calpha =  ncSAMPLE_RATE/(ncSAMPLE_RATE + tmp);
+    calpha = ncSAMPLE_RATE / (ncSAMPLE_RATE + tmp);
     cbeta = 1.0f - calpha;
     cthresh = 0.25f;
     cpthresh = cthresh; //dynamic threshold
@@ -69,11 +69,10 @@ Vocoder::Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double
 
     setbands(VOC_BANDS, 200.0f, 4000.0f);
     init_filters();
-    setpreset (Ppreset);
+    setpreset(Ppreset);
+}
 
-};
-
-Vocoder::~Vocoder ()
+Vocoder::~Vocoder()
 {
     clear_initialize();
 
@@ -86,28 +85,28 @@ Vocoder::~Vocoder ()
  * Cleanup the effect
  */
 void
-Vocoder::cleanup ()
+Vocoder::cleanup()
 {
-    for(int k=0; k<VOC_BANDS; k++) {
+    for (int k = 0; k < VOC_BANDS; k++)
+    {
         filterbank[k].l->cleanup();
         filterbank[k].r->cleanup();
         filterbank[k].aux->cleanup();
         filterbank[k].speak = 0.0f;
         filterbank[k].gain = 0.0f;
         filterbank[k].oldgain = 0.0f;
-
     }
+
     vhp->cleanup();
     vlp->cleanup();
 
     compeak = compg = compenv = oldcompenv = 0.0f;
-
-};
+}
 
 void
 Vocoder::lv2_update_params(uint32_t period)
 {
-    if(period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         adjust(DS_state, fSAMPLE_RATE);
@@ -123,39 +122,42 @@ Vocoder::lv2_update_params(uint32_t period)
         adjust(DS_state, fSAMPLE_RATE);
     }
 }
+
 void
 Vocoder::initialize()
-{   
-    filterbank = (fbank *) malloc(sizeof(fbank) * VOC_BANDS);
-    tmpl = (float *) malloc (sizeof (float) * nPERIOD);
-    tmpr = (float *) malloc (sizeof (float) * nPERIOD);
-    tsmpsl = (float *) malloc (sizeof (float) * nPERIOD);
-    tsmpsr = (float *) malloc (sizeof (float) * nPERIOD);
-    tmpaux = (float *) malloc (sizeof (float) * nPERIOD);
-    
-    memset(tmpl, 0, sizeof(float)*nPERIOD);
-    memset(tmpr, 0, sizeof(float)*nPERIOD);
-    memset(tsmpsl, 0, sizeof(float)*nPERIOD);
-    memset(tsmpsr, 0, sizeof(float)*nPERIOD);
-    memset(tmpaux, 0, sizeof(float)*nPERIOD);
-    
+{
+    filterbank = (fbank *) malloc(sizeof (fbank) * VOC_BANDS);
+    tmpl = (float *) malloc(sizeof (float) * nPERIOD);
+    tmpr = (float *) malloc(sizeof (float) * nPERIOD);
+    tsmpsl = (float *) malloc(sizeof (float) * nPERIOD);
+    tsmpsr = (float *) malloc(sizeof (float) * nPERIOD);
+    tmpaux = (float *) malloc(sizeof (float) * nPERIOD);
+
+    memset(tmpl, 0, sizeof (float)*nPERIOD);
+    memset(tmpr, 0, sizeof (float)*nPERIOD);
+    memset(tsmpsl, 0, sizeof (float)*nPERIOD);
+    memset(tsmpsr, 0, sizeof (float)*nPERIOD);
+    memset(tmpaux, 0, sizeof (float)*nPERIOD);
+
     float center;
     float qq;
     interpbuf = new float[PERIOD];
-    for (int i = 0; i < VOC_BANDS; i++) {
-        center = (float) i * 20000.0f/((float) VOC_BANDS);
+
+    for (int i = 0; i < VOC_BANDS; i++)
+    {
+        center = (float) i * 20000.0f / ((float) VOC_BANDS);
         qq = 60.0f;
 
-        filterbank[i].l = new AnalogFilter (4, center, qq, 0, fSAMPLE_RATE, interpbuf);
+        filterbank[i].l = new AnalogFilter(4, center, qq, 0, fSAMPLE_RATE, interpbuf);
         filterbank[i].l->setSR(nSAMPLE_RATE);
-        filterbank[i].r = new AnalogFilter (4, center, qq, 0, fSAMPLE_RATE, interpbuf);
+        filterbank[i].r = new AnalogFilter(4, center, qq, 0, fSAMPLE_RATE, interpbuf);
         filterbank[i].r->setSR(nSAMPLE_RATE);
-        filterbank[i].aux = new AnalogFilter (4, center, qq, 0, fSAMPLE_RATE, interpbuf);
+        filterbank[i].aux = new AnalogFilter(4, center, qq, 0, fSAMPLE_RATE, interpbuf);
         filterbank[i].aux->setSR(nSAMPLE_RATE);
-    };
+    }
 
-    vlp = new AnalogFilter (2, 4000.0f, 1.0f, 1, fSAMPLE_RATE, interpbuf);
-    vhp = new AnalogFilter (3, 200.0f, 0.707f, 1, fSAMPLE_RATE, interpbuf);
+    vlp = new AnalogFilter(2, 4000.0f, 1.0f, 1, fSAMPLE_RATE, interpbuf);
+    vhp = new AnalogFilter(3, 200.0f, 0.707f, 1, fSAMPLE_RATE, interpbuf);
 
     vlp->setSR(nSAMPLE_RATE);
     vhp->setSR(nSAMPLE_RATE);
@@ -171,13 +173,15 @@ Vocoder::clear_initialize()
     free(tmpaux);
 
     delete[] interpbuf;
-    for (int i = 0; i < VOC_BANDS; i++) {
-    	delete filterbank[i].l;
-    	delete filterbank[i].r;
-    	delete filterbank[i].aux;
+
+    for (int i = 0; i < VOC_BANDS; i++)
+    {
+        delete filterbank[i].l;
+        delete filterbank[i].r;
+        delete filterbank[i].aux;
     }
-    
-    free(filterbank);   // don't free until after the voc bands are deleted first
+
+    free(filterbank); // don't free until after the voc bands are deleted first
     delete vlp;
     delete vhp;
 }
@@ -185,12 +189,10 @@ Vocoder::clear_initialize()
 void
 Vocoder::adjust(int DS, double SAMPLE_RATE)
 {
+    DS_state = DS;
 
-    DS_state=DS;
-
-
-    switch(DS) {
-
+    switch (DS)
+    {
     case 0:
         nRATIO = 1;
         nSAMPLE_RATE = SAMPLE_RATE;
@@ -198,242 +200,239 @@ Vocoder::adjust(int DS, double SAMPLE_RATE)
         break;
 
     case 1:
-        nRATIO = 96000.0f/SAMPLE_RATE;
+        nRATIO = 96000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 96000;
         nfSAMPLE_RATE = 96000.0f;
         break;
 
 
     case 2:
-        nRATIO = 48000.0f/SAMPLE_RATE;
+        nRATIO = 48000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 48000;
         nfSAMPLE_RATE = 48000.0f;
         break;
 
     case 3:
-        nRATIO = 44100.0f/SAMPLE_RATE;
+        nRATIO = 44100.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 44100;
         nfSAMPLE_RATE = 44100.0f;
         break;
 
     case 4:
-        nRATIO = 32000.0f/SAMPLE_RATE;
+        nRATIO = 32000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 32000;
         nfSAMPLE_RATE = 32000.0f;
         break;
 
     case 5:
-        nRATIO = 22050.0f/SAMPLE_RATE;
+        nRATIO = 22050.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 22050;
         nfSAMPLE_RATE = 22050.0f;
         break;
 
     case 6:
-        nRATIO = 16000.0f/SAMPLE_RATE;
+        nRATIO = 16000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 16000;
         nfSAMPLE_RATE = 16000.0f;
         break;
 
     case 7:
-        nRATIO = 12000.0f/SAMPLE_RATE;
+        nRATIO = 12000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 12000;
         nfSAMPLE_RATE = 12000.0f;
         break;
 
     case 8:
-        nRATIO = 8000.0f/SAMPLE_RATE;
+        nRATIO = 8000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 8000;
         nfSAMPLE_RATE = 8000.0f;
         break;
 
     case 9:
-        nRATIO = 4000.0f/SAMPLE_RATE;
+        nRATIO = 4000.0f / SAMPLE_RATE;
         nSAMPLE_RATE = 4000;
         nfSAMPLE_RATE = 4000.0f;
         break;
-
     }
 
     ncSAMPLE_RATE = 1.0f / nfSAMPLE_RATE;
-    nPERIOD = lrintf((float)PERIOD*nRATIO);
-    u_up= (double)nPERIOD / (double)PERIOD;
-    u_down= (double)PERIOD / (double)nPERIOD;
-
+    nPERIOD = lrintf((float) PERIOD * nRATIO);
+    u_up = (double) nPERIOD / (double) PERIOD;
+    u_down = (double) PERIOD / (double) nPERIOD;
 }
-
-
-
 
 /*
  * Effect output
  */
 void
-Vocoder::out (float * efxoutl, float * efxoutr)
+Vocoder::out(float * efxoutl, float * efxoutr)
 {
     int i, j;
 
     float tempgain;
-    float maxgain=0.0f;
+    float maxgain = 0.0f;
     float auxtemp, tmpgain;
 
-    if(DS_state != 0) {
-        A_Resample->mono_out(auxresampled,tmpaux,PERIOD,u_up,nPERIOD);
-    } else
-        memcpy(tmpaux,auxresampled,sizeof(float)*nPERIOD);
+    if (DS_state != 0)
+    {
+        A_Resample->mono_out(auxresampled, tmpaux, PERIOD, u_up, nPERIOD);
+    }
+    else
+        memcpy(tmpaux, auxresampled, sizeof (float)*nPERIOD);
 
 
-    for (i = 0; i<nPERIOD; i++) {  //apply compression to auxresampled
+    for (i = 0; i < nPERIOD; i++)
+    { //apply compression to auxresampled
         auxtemp = input * tmpaux[i];
-        if(fabs(auxtemp > compeak)) compeak = fabs(auxtemp);   //First do peak detection on the signal
+
+        if (fabs(auxtemp > compeak)) compeak = fabs(auxtemp); //First do peak detection on the signal
+
         compeak *= prls;
-        compenv = cbeta * oldcompenv + calpha * compeak;       //Next average into envelope follower
+        compenv = cbeta * oldcompenv + calpha * compeak; //Next average into envelope follower
         oldcompenv = compenv;
 
-        if(compenv > cpthresh) {                              //if envelope of signal exceeds thresh, then compress
-            compg = cpthresh + cpthresh*(compenv - cpthresh)/compenv;
-            cpthresh = cthresh + cratio*(compg - cpthresh);   //cpthresh changes dynamically
-            tmpgain = compg/compenv;
-        } else {
+        if (compenv > cpthresh)
+        { //if envelope of signal exceeds thresh, then compress
+            compg = cpthresh + cpthresh * (compenv - cpthresh) / compenv;
+            cpthresh = cthresh + cratio * (compg - cpthresh); //cpthresh changes dynamically
+            tmpgain = compg / compenv;
+        }
+        else
+        {
             tmpgain = 1.0f;
         }
 
-
-
-        if(compenv < cpthresh) cpthresh = compenv;
-        if(cpthresh < cthresh) cpthresh = cthresh;
+        if (compenv < cpthresh) cpthresh = compenv;
+        if (cpthresh < cthresh) cpthresh = cthresh;
 
         tmpaux[i] = auxtemp * tmpgain;
 
-        tmpaux[i]=vlp->filterout_s(tmpaux[i]);
-        tmpaux[i]=vhp->filterout_s(tmpaux[i]);
-
-    };
-
+        tmpaux[i] = vlp->filterout_s(tmpaux[i]);
+        tmpaux[i] = vhp->filterout_s(tmpaux[i]);
+    }
 
     //End compression
 
     auxtemp = 0.0f;
 
-    if(DS_state != 0) {
-        U_Resample->out(efxoutl,efxoutr,tsmpsl,tsmpsr,PERIOD,u_up);
-    } else {
-        memcpy(tsmpsl,efxoutl,sizeof(float)*nPERIOD);
-        memcpy(tsmpsr,efxoutr,sizeof(float)*nPERIOD);
+    if (DS_state != 0)
+    {
+        U_Resample->out(efxoutl, efxoutr, tsmpsl, tsmpsr, PERIOD, u_up);
+    }
+    else
+    {
+        memcpy(tsmpsl, efxoutl, sizeof (float)*nPERIOD);
+        memcpy(tsmpsr, efxoutr, sizeof (float)*nPERIOD);
     }
 
+    memset(tmpl, 0, sizeof (float)*nPERIOD);
+    memset(tmpr, 0, sizeof (float)*nPERIOD);
 
-    memset(tmpl,0,sizeof(float)*nPERIOD);
-    memset(tmpr,0,sizeof(float)*nPERIOD);
-
-
-
-    for (j = 0; j < VOC_BANDS; j++) {
-
-        for (i = 0; i<nPERIOD; i++) {
+    for (j = 0; j < VOC_BANDS; j++)
+    {
+        for (i = 0; i < nPERIOD; i++)
+        {
             auxtemp = tmpaux[i];
 
-            if(filterbank[j].speak < gate) filterbank[j].speak = 0.0f;  //gate
-            if(auxtemp>maxgain) maxgain = auxtemp; //vu meter level.
+            if (filterbank[j].speak < gate) filterbank[j].speak = 0.0f; //gate
+            if (auxtemp > maxgain) maxgain = auxtemp; //vu meter level.
 
             auxtemp = filterbank[j].aux->filterout_s(auxtemp);
-            if(fabs(auxtemp) > filterbank[j].speak) filterbank[j].speak = fabs(auxtemp);  //Leaky Peak detector
 
-            filterbank[j].speak*=prls;
+            if (fabs(auxtemp) > filterbank[j].speak) filterbank[j].speak = fabs(auxtemp); //Leaky Peak detector
+
+            filterbank[j].speak *= prls;
 
             filterbank[j].gain = beta * filterbank[j].oldgain + alpha * filterbank[j].speak;
             filterbank[j].oldgain = filterbank[j].gain;
 
 
-            tempgain = (1.0f-ringworm)*filterbank[j].oldgain+ringworm*auxtemp;
+            tempgain = (1.0f - ringworm) * filterbank[j].oldgain + ringworm*auxtemp;
 
-            tmpl[i] +=filterbank[j].l->filterout_s(tsmpsl[i])*tempgain;
-            tmpr[i] +=filterbank[j].r->filterout_s(tsmpsr[i])*tempgain;
-
-        };
-
-
-    };
-
-
-    for (i = 0; i<nPERIOD; i++) {
-        tmpl[i]*=lpanning*level;
-        tmpr[i]*=rpanning*level;
-    };
-
-
-    if(DS_state != 0) {
-        D_Resample->out(tmpl,tmpr,efxoutl,efxoutr,nPERIOD,u_down);
-    } else {
-        memcpy(efxoutl,tmpl,sizeof(float)*nPERIOD);
-        memcpy(efxoutr,tmpr,sizeof(float)*nPERIOD);
+            tmpl[i] += filterbank[j].l->filterout_s(tsmpsl[i]) * tempgain;
+            tmpr[i] += filterbank[j].r->filterout_s(tsmpsr[i]) * tempgain;
+        }
     }
 
-    vulevel = (float)CLAMP(rap2dB(maxgain), -48.0, 15.0);
+    for (i = 0; i < nPERIOD; i++)
+    {
+        tmpl[i] *= lpanning*level;
+        tmpr[i] *= rpanning*level;
+    }
 
+    if (DS_state != 0)
+    {
+        D_Resample->out(tmpl, tmpr, efxoutl, efxoutr, nPERIOD, u_down);
+    }
+    else
+    {
+        memcpy(efxoutl, tmpl, sizeof (float)*nPERIOD);
+        memcpy(efxoutr, tmpr, sizeof (float)*nPERIOD);
+    }
 
-
-};
+    vulevel = (float) CLAMP(rap2dB(maxgain), -48.0, 15.0);
+}
 
 void
-Vocoder::setbands (int numbands, float startfreq, float endfreq)
+Vocoder::setbands(int numbands, float startfreq, float endfreq)
 {
-    float start = startfreq;   //useful variables
+    float start = startfreq; //useful variables
     float endband = endfreq;
     float fnumbands = (float) numbands;
     float output[VOC_BANDS + 1];
     int k;
 
     //calculate intermediate values
-    float pwer = logf(endband/start)/log(2.0f);
+    float pwer = logf(endband / start) / log(2.0f);
 
-    for(k=0; k<=VOC_BANDS; k++) output[k] = start*f_pow2(((float) k)*pwer/fnumbands);
-    for(k=0; k<VOC_BANDS; k++) {
-        filterbank[k].sfreq = output[k] + (output[k+1] - output[k])*0.5f;
-        filterbank[k].sq = filterbank[k].sfreq/(output[k+1] - output[k]);
+    for (k = 0; k <= VOC_BANDS; k++) output[k] = start * f_pow2(((float) k) * pwer / fnumbands);
 
-        filterbank[k].l->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);
-        filterbank[k].r->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);
-        filterbank[k].aux->setfreq_and_q (filterbank[k].sfreq, filterbank[k].sq);
+    for (k = 0; k < VOC_BANDS; k++)
+    {
+        filterbank[k].sfreq = output[k] + (output[k + 1] - output[k])*0.5f;
+        filterbank[k].sq = filterbank[k].sfreq / (output[k + 1] - output[k]);
+
+        filterbank[k].l->setfreq_and_q(filterbank[k].sfreq, filterbank[k].sq);
+        filterbank[k].r->setfreq_and_q(filterbank[k].sfreq, filterbank[k].sq);
+        filterbank[k].aux->setfreq_and_q(filterbank[k].sfreq, filterbank[k].sq);
     }
     cleanup();
-
 }
 
 /*
  * Parameter control
  */
 void
-Vocoder::setvolume (int Pvolume)
+Vocoder::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
-    outvolume = (float)Pvolume / 127.0f;
-    if (Pvolume == 0)
-        cleanup ();
+    outvolume = (float) Pvolume / 127.0f;
 
-};
+    if (Pvolume == 0)
+        cleanup();
+}
 
 void
-Vocoder::setpanning (int Ppanning)
+Vocoder::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
-    rpanning = ((float)Ppanning + 0.5f) / 127.0f;
+    rpanning = ((float) Ppanning + 0.5f) / 127.0f;
     lpanning = 1.0f - rpanning;
-};
-
+}
 
 void
 Vocoder::init_filters()
 {
     float ff, qq;
 
-    for (int ii = 0; ii < VOC_BANDS; ii++) {
+    for (int ii = 0; ii < VOC_BANDS; ii++)
+    {
         ff = filterbank[ii].sfreq;
         qq = filterbank[ii].sq;
-        filterbank[ii].l->setfreq_and_q (ff, qq);
-        filterbank[ii].r->setfreq_and_q (ff, qq);
-        filterbank[ii].aux->setfreq_and_q (ff, qq);
-    };
-
+        filterbank[ii].l->setfreq_and_q(ff, qq);
+        filterbank[ii].r->setfreq_and_q(ff, qq);
+        filterbank[ii].aux->setfreq_and_q(ff, qq);
+    }
 }
 
 void
@@ -443,16 +442,16 @@ Vocoder::adjustq(int value)
     float q = 0;
     q = (float) value;
 
-    for (int ii = 0; ii < VOC_BANDS; ii++) {
-        filterbank[ii].l->setq (q);
-        filterbank[ii].r->setq (q);
-        filterbank[ii].aux->setq (q);
-    };
-
+    for (int ii = 0; ii < VOC_BANDS; ii++)
+    {
+        filterbank[ii].l->setq(q);
+        filterbank[ii].r->setq(q);
+        filterbank[ii].aux->setq(q);
+    }
 }
 
 void
-Vocoder::setpreset (int npreset)
+Vocoder::setpreset(int npreset)
 {
     const int PRESET_SIZE = 7;
     const int NUM_PRESETS = 4;
@@ -468,63 +467,68 @@ Vocoder::setpreset (int npreset)
         {0, 64, 30, 100, 70, 40, 127}
     };
 
-    if(npreset>NUM_PRESETS-1) {
-        Fpre->ReadPreset(35,npreset-NUM_PRESETS+1,pdata);
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(35, npreset - NUM_PRESETS + 1, pdata);
+
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, pdata[n]);
-    } else {
+            changepar(n, pdata[n]);
+    }
+    else
+    {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar (n, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
 
     Ppreset = npreset;
-};
-
+}
 
 void
-Vocoder::changepar (int npar, int value)
+Vocoder::changepar(int npar, int value)
 {
     float tmp = 0;
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
-        setvolume (value);
+        setvolume(value);
         break;
     case 1:
-        setpanning (value);
+        setpanning(value);
         break;
     case 2:
         Pmuffle = value;
         tmp = (float) Pmuffle;
-        tmp *= 0.0001f + tmp/64000;
-        alpha = ncSAMPLE_RATE/(ncSAMPLE_RATE + tmp);
+        tmp *= 0.0001f + tmp / 64000;
+        alpha = ncSAMPLE_RATE / (ncSAMPLE_RATE + tmp);
         beta = 1.0f - alpha;
         break;
     case 3:
         adjustq(value);
-/*        Pqq = value;
-        tmp = (float) value;
-        adjustq(tmp);*/
+        /*        Pqq = value;
+                tmp = (float) value;
+                adjustq(tmp);*/
         break;
     case 4:
         Pinput = value;
-        input = dB2rap (75.0f * (float)Pinput / 127.0f - 40.0f);
+        input = dB2rap(75.0f * (float) Pinput / 127.0f - 40.0f);
         break;
     case 5:
         Plevel = value;
-        level = dB2rap (60.0f * (float)Plevel / 127.0f - 40.0f);
+        level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
         break;
 
     case 6:
         Pring = value;
-        ringworm = (float) Pring/127.0f;
+        ringworm = (float) Pring / 127.0f;
         break;
-    };
-};
+    }
+}
 
 int
-Vocoder::getpar (int npar)
+Vocoder::getpar(int npar)
 {
-    switch (npar) {
+    switch (npar)
+    {
     case 0:
         return (Pvolume);
         break;
@@ -532,10 +536,10 @@ Vocoder::getpar (int npar)
         return (Ppanning);
         break;
     case 2:
-        return(Pmuffle);
+        return (Pmuffle);
         break;
     case 3:
-        return(Pqq);
+        return (Pqq);
         break;
     case 4:
         return (Pinput);
@@ -546,7 +550,6 @@ Vocoder::getpar (int npar)
     case 6:
         return (Pring);
         break;
-
-    };
-    return (0);			//in case of bogus parameter number
-};
+    }
+    return (0); //in case of bogus parameter number
+}
