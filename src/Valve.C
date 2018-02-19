@@ -451,9 +451,8 @@ Valve::changepar(int npar, int value)
         Presence = value;
         setpresence(value);
         break;
-
-        init_coefs();   //FIXME is this correct - cant be!!
     }
+    init_coefs();
 }
 
 int
