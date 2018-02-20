@@ -2,7 +2,7 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class MidiLearnWindowGui {open selected
+widget_class MidiLearnWindowGui {open
   xywh {1151 122 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
@@ -150,13 +150,15 @@ for(i=0; i<128; i++)
     user_data 77
     callback {int i;
 
-int the_one;
+int the_one = 0;
 
-if (m_rkr->ML_filter==0)
- the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = m_rkr->ML_clist[(int)Epar->value()-1];
-
+if((int)Epar->value()-1 >= 0)
+{
+    if (m_rkr->ML_filter==0)
+        the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
+    else
+        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+}
 
 for(i=0;i<20;i++)
 
@@ -178,13 +180,15 @@ for(i=0;i<20;i++)
     label {Assign to All}
     user_data 77
     callback {int i,j;
-int the_one;
+int the_one = 0;
 
-if (m_rkr->ML_filter==0)
- the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = m_rkr->ML_clist[(int)Epar->value()-1];
-
+if((int)Epar->value()-1 >= 0)
+{
+    if (m_rkr->ML_filter==0)
+        the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
+    else
+        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+}
 
 for(j=1;j<61;j++)
 
@@ -203,7 +207,7 @@ for(i=0;i<20;i++)
  
 } 
 
-Assign->do_callback();}
+Assign->do_callback();} selected
     xywh {10 20 98 30}
   }
   Fl_Button CancelRec {

@@ -73,13 +73,15 @@ void MidiLearnWindowGui::cb_ClearP(Fl_Button* o, void* v) {
 void MidiLearnWindowGui::cb_Assign_i(Fl_Button*, void*) {
   int i;
 
-int the_one;
+int the_one = 0;
 
-if (m_rkr->ML_filter==0)
- the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = m_rkr->ML_clist[(int)Epar->value()-1];
-
+if((int)Epar->value()-1 >= 0)
+{
+    if (m_rkr->ML_filter==0)
+        the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
+    else
+        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+}
 
 for(i=0;i<20;i++)
 
@@ -102,13 +104,15 @@ void MidiLearnWindowGui::cb_Assign(Fl_Button* o, void* v) {
 
 void MidiLearnWindowGui::cb_AssignA_i(Fl_Button*, void*) {
   int i,j;
-int the_one;
+int the_one = 0;
 
-if (m_rkr->ML_filter==0)
- the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
- else
- the_one = m_rkr->ML_clist[(int)Epar->value()-1];
-
+if((int)Epar->value()-1 >= 0)
+{
+    if (m_rkr->ML_filter==0)
+        the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
+    else
+        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+}
 
 for(j=1;j<61;j++)
 
