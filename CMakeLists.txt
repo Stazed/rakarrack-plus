@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.1)
 
-set (PACKAGE_VERSION "0.7.0")
+set (PACKAGE_VERSION "0.7.1")
 
 set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
 
