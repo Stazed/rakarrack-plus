@@ -236,9 +236,11 @@ void BankWindowGui::set_bank_CH_UB(char* nombre, char* nombank) {
   // copy the file name (nombank) to temp so it does not get overwritten.
   char *tmp;
   tmp = (char *)calloc(1, 256);
+  char * const forFree = tmp; /* <--- saving calloc() returned value */
   strcpy(tmp,nombank);
     
   CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)tmp, 0);
+  free(forFree);
 }
 
 void BankWindowGui::make_window_banks() {
