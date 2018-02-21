@@ -4,7 +4,7 @@ header_name {.h}
 code_name {.cxx}
 widget_class {this->m_rgui = NULL; this->m_rkr = NULL;} MidiGui {
   user_data 1 open
-  xywh {1550 52 276 52} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1389 231 276 52} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -62,7 +62,7 @@ m_rgui= _rgui;} {}
   break;
 
 }}
-    xywh {104 33 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
+    tooltip {Adjust MIDI note out by octave.} xywh {107 31 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
   } {
     MenuItem {} {
       label {-2}
@@ -87,14 +87,15 @@ m_rgui= _rgui;} {}
   }
   Fl_Counter Midi_out_Counter {
     label Channel
-    callback {m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());}
-    xywh {81 4 60 17} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
+    callback {m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());} selected
+    tooltip {Channel to send MIDI out.} xywh {94 4 50 15} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
   }
   Fl_Check_Button Use_FFT {
     label FFT
     user_data 2
     callback {m_rkr->efx_MIDIConverter->changepar(5, (int)o->value());}
-    xywh {51 34 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+    tooltip {FFT based algorithm which is much more
+CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
   }
   Fl_Value_Slider Trig_Adj {
     label Trigger
@@ -113,7 +114,7 @@ m_rgui= _rgui;} {}
   }
   Fl_Box MIDI_LABEL {
     label MIDI
-    user_data 7 selected
+    user_data 7
     xywh {4 32 44 14} labelfont 1 labelcolor 7 when 0
   }
   decl {RKR  *m_rkr} {private local
