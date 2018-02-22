@@ -20,24 +20,29 @@
 
 <h2><a name="midi"></a>MIDI Converter</h2>
 
-<p>This is a experimental monophonic MIDI converter.
+<p>This is an experimental monophonic MIDI converter.
 The parameters are not stored on presets but are saved as preferences
-and is remembered each time you start the program.</p>
+and are remembered each time you start the program.</p>
 
-<p>The most important thing for a better results is
-<b>tune your guitar.</b> You need to connect with qjackctl or
-whatever Alsa-Seq connect utility the rakarrack MC OUT port to a
-synthesizer or sequencer device in order to produce sound or record
-something.</p>
+<p>The most important thing for better results is to
+<b>tune your guitar.</b> Connect the rakarrack MC OUT port
+with qjackctl, Alsa-Seq, or another connection utility, to a synthesizer
+or sequencer device in order to produce sound or record.</p>
 
-<p>The <b>Trigger</b>parameter controls the volume
+<p>The <b>Trigger</b> parameter controls the volume of sound
 passed to the note recognition algorithm.</p>
 
-<p>The <b>Velocity</b> is for adjust the MIDI velocity
-sensitivity message send.</p>
+<p>The <b>Velocity</b> is for adjusting the MIDI velocity
+sensitivity of the MIDI note message generated.</p>
 
-<p>The <b>Channel</b> is the channel selected for the
-MIDI message, of course.</p>
+<p>The <b>Channel</b> is the MIDI channel selected for sending the generated note
+MIDI message.</p>
+
+<p>The <b>Octave</b> will adjust the MIDI note generated, up or down
+by the selected amount.</p>
+    
+<p>The <b>FFT</b> button will use a FFT algorithm that is much more CPU intensive
+but may provide better MIDI note generation results.</p>
 
 <p><img src="imagenes/midi.jpg" alt="rakarrack Midi Converter" align="bottom" border="0" height="61" width="351"></p>
 <p><a href="help.html">Table of Contents</a> -  <a href="metronome.html">Metronome</a></p>
