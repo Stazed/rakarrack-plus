@@ -140,16 +140,14 @@ unlight_preset(m_rkr->Selected_Preset);
   Fl_Group ob {
     xywh {0 60 800 540} labelsize 18
   } {}
-  Function {set_bank_CH_UB(char* nombre, char* nombank)} {C return_type void
+  Function {set_bank_CH_UB(char* nombre, char* nombank)} {open C return_type void
   } {
     code {// copy the file name (nombank) to temp so it does not get overwritten.
 char *tmp;
 tmp = (char *)calloc(1, 256);
-char * const forFree = tmp; /* <--- saving calloc() returned value */
 strcpy(tmp,nombank);
   
-CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)tmp, 0);
-free(forFree);} {selected
+CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)tmp, 0);} {selected
     }
   }
   Function {make_window_banks()} {} {
