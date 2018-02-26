@@ -19,6 +19,7 @@
       <p><a href="#cmd">Command line options</a> <a href="#screen">The Main Screen</a> 
       <a href="#conn">Connecting</a> <a href="#pyb">Presets &amp; banks</a> 
       <a href="#settings">Preferences</a> <a href="#scuts">Shortcuts</a> 
+      <a href="#session">Session Support</a>
 
 <p>RAKARRACK is a multi-effect processor for guitar players but the
 signal processing engine allows a full range of parameter adjustment
@@ -246,6 +247,28 @@ swing.</p>
       <p>Dump Bank preset names</p>
       </td>
     </tr>
+    <tr>
+      <td>
+      <p>-u uuid </p>
+      </td>
+      <td>
+      <p>--session=#</p>
+      </td>
+      <td>
+      <p>set jack session uuid</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <p>-j Name</p>
+      </td>
+      <td>
+      <p>--jack-client-name=Name</p>
+      </td>
+      <td>
+      <p>set alternate jack/alsa name: default=rakarrack</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -363,7 +386,7 @@ facet.</p>
 
 <p> The "1", "2", "3", "U" buttons are for fast bank loading. These buttons
 load the Default.rkrb, Extra.rkrb, Extra1.rkrb and the user setting defined bank
-set in <a href="#settings">preferences</a>.</p>
+set in <a href="#bprefs">Bank preferences</a>.</p>
 
 <p> The "Random" button generates a random preset</p>
 
@@ -381,7 +404,7 @@ the Key/Chord selected. The harmonizer recognizes what note you play
 and creates a second voice in the Key/Chord selected.</p>
 
 <p> The "User Banks" choice displays the available user banks that are in the
-directory specified in the User Directory settings.</p>
+directory specified by <a href="#bprefs">User Directory</a> in Bank preferences.</p>
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
@@ -736,9 +759,9 @@ will shut off if no (tap) input is received for 8 seconds after the last signal.
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
 
-<h2>Bank Preferences</h2>
+<h2><a name="bprefs"></a>Bank Preferences</h2>
 <p><img alt="Settings Bank" src="imagenes/settings5.jpg"></p>
-<p><b>Bank</b></p>
+<p><b>Bank Filename</b></p>
 <p>Specify the directory and file for the bank file to be loaded and
 associated to the "U" button when the program starts.</p>
 <p><b>User Directory</b></p>
@@ -902,6 +925,29 @@ Shift+(Left/Right Arrow) decrease/increase slider values by "10". Ctrl+(Left/Rig
 Arrow) decrease/increase slider values by "100". You can navigate through the
 parameters from the keyboard using the Tab, Up/Down arrow and select
 with the space bar keys.</p>
+
+
+<p><a href="general.html">General</a></p>
+<p><a href="help.html">Table of Contents</a></p>
+
+<h3><a name="session"></a>Session Support</h3>
+
+<p>Rakarrack supports Jack session management and SIGUSR1 & SIGINT signal capture.
+For session management, only the active current preset is saved per session. Use
+SIGUSR1 for preset saving and SIGINT to quit without saving. LADISH and Non Session
+Manager (NSM) are able to send SIGUSR1 and SIGINT signals. For signal capture, use the
+<a href="#cmd">Command line options</a> -p preset option to set the file to save.
+For NSM use the NSM Proxy to set command line options.</p>
+
+<p>Rakarrack supports multiple occurrences of the program. By default jack will
+name each occurrence with the same name by appending the occurrence number to
+the name: ex "rakarrack-01". For NSM support, using multiple occurrences, the 
+manager will not always start each occurrence in the same order for each session.
+This will result in occasional incorrect jack connections being made from different
+sessions. To solve this problem, use the Command line option "-j Name" to set the
+rakarrack client name to a unique id for each occurrence.</p>
+
+
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a> - <a href="effects.html">Effects</a></p>
