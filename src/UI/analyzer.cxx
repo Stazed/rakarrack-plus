@@ -75,7 +75,7 @@ void Analyzer::draw()
             for (j = 0; j < ns; j++)
             {
                 t = cos(D_PI * (double) j * coeff);
-                image = t * spl[j];
+                image = t * ((spl[j] + spr[j]) * 0.5) ;
                 oldimage = acoeff * image + (1.0 - acoeff) * oldimage;
 
                 y += fabs(oldimage);
