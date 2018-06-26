@@ -78,7 +78,7 @@ void Scope::draw()
         {
             posx = (int) ((double) i * coeff);
 
-            value = spr[i];
+            value = spl[i];
             if (value > 1.0) value = 1.0;
             if (value<-1.0) value = -1.0;
 
@@ -94,7 +94,7 @@ void Scope::draw()
             old_px = px;
             old_py = py;
 
-            value = spl[i];
+            value = spr[i];
             if (value > 1.0) value = 1.0;
             if (value<-1.0) value = -1.0;
 
