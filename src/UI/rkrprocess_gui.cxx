@@ -5919,7 +5919,7 @@ void RKRGUI::ScanDir()
     // scan for default and user banks
     char nombre[64];
     char *nombank;
-    nombank = (char *) calloc(1, 256);
+    nombank = (char *) calloc(1, 512);
     char * const forFree = nombank; /* <--- saving calloc() returned value */
     DIR *dir;
     struct dirent *fs;
