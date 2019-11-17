@@ -147,6 +147,52 @@ Vol3_Efx (RKRLV2* plug, uint32_t period)
     }
 }
 
+/**
+ * Method mix down stereo to mono.
+ * 
+ * @param nframes
+ *      The number of frames to process.
+ * 
+ * @param efx_inputl
+ *      The stereo left channel to process.
+ * 
+ * @param efx_inputr
+ *      The stereo right channel to process.
+ * 
+ * @param output_mono
+ *      The mixed down mono channel.
+ */
+void
+down_to_mono(uint32_t nframes, float* efx_inputl, float* efx_inputr, float *output_mono)
+{
+    for (int i = 0; i < nframes; i++)
+    {
+        output_mono[i] = 0.5 * (efx_inputl[i] + efx_inputr[i]);
+    }
+}
+
+/**
+ *  Mix up mono to stereo.
+ * 
+ * @param nframes
+ *      The number of frames to process.
+ * 
+ * @param input_mono
+ *      The mono channel to mix up to stereo.
+ * 
+ * @param efxoutl
+ *      The stereo left channel. 
+ * 
+ * @param efxoutr
+ *      The stereo right channel.
+ */
+void
+up_to_stereo(uint32_t nframes, float *input_mono, float* efxoutl, float* efxoutr)
+{
+    memcpy(efxoutl, input_mono, nframes * sizeof(float));
+    memcpy(efxoutr, input_mono, nframes * sizeof(float));
+}
+
 
 /**
  * add a midi message to the output port
