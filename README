@@ -1,3 +1,11 @@
+
+As of February 14, 2020 - This repository is not ready for public consumption.
+DO NOT USE THIS YET!!!!!
+Many backwards incompatible changes to come.
+This notice will be removed when updates are completed.
+
+
+
 To build both rakarrack and rkr.lv2:
 From top checkout directory:
     mkdir build
