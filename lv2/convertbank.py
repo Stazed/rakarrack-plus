@@ -14,7 +14,7 @@ import sys
 try:
     datadir = sys.argv[1]
 except IndexError:
-    datadir = "/usr/share/rkr.lv2"
+    datadir = "/usr/share/RakarrackPlus.lv2"
     
 directory = "presets"
 if not os.path.exists(directory):
