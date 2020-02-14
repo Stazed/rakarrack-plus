@@ -1,5 +1,5 @@
 
-install (FILES rakarrack.desktop
+install (FILES rakarrack-plus.desktop
     DESTINATION share/applications)
 
 install (FILES Default.rkrb
@@ -43,7 +43,7 @@ install (FILES Default.rkrb
     bg6.png
     bg_gray_furr.png
     bg.png
-    DESTINATION share/rakarrack)
+    DESTINATION share/rakarrack-plus)
 
 
 

@@ -7,10 +7,10 @@ set (PACKAGE_VERSION "0.7.1")
 set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
 
 add_definitions (-D'VERSION="${PACKAGE_VERSION}"')
-add_definitions(-D'WEBSITE="rakarrack.sf.net"')
-add_definitions(-D'PACKAGE="rakarrack"')
-add_definitions(-D'DATADIR="${CMAKE_INSTALL_PREFIX}/share/rakarrack"')
-add_definitions(-D'HELPDIR="${CMAKE_INSTALL_PREFIX}/share/doc/rakarrack"')
+add_definitions(-D'WEBSITE="https://gitlab.com/stazed/rakarrack-plus"')
+add_definitions(-D'PACKAGE="rakarrack-plus"')
+add_definitions(-D'DATADIR="${CMAKE_INSTALL_PREFIX}/share/rakarrack-plus"')
+add_definitions(-D'HELPDIR="${CMAKE_INSTALL_PREFIX}/share/doc/rakarrack-plus"')
 
 include (CheckCSourceCompiles)
 include(CheckCXXCompilerFlag)
@@ -19,7 +19,7 @@ check_cxx_compiler_flag("-msse2" SUPPORT_SSE)
 check_cxx_compiler_flag("-ftree-vectorize" SUPPORT_VECTOR)
 check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 
-option (BuildRakarrack "Build rakarrack" ON)
+option (BuildRakarrackPlus "Build rakarrack-plus" ON)
 option (BuildLV2Plugins "Build rakarack lv2 plugins (rkrlv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
 option (BuildForDebug "Include gdb debugging support" OFF)
@@ -89,8 +89,8 @@ find_package(Freetype REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(Threads REQUIRED)
 if(THREADS_HAVE_PTHREAD_ARG)
-  set_property(TARGET rakarrack PROPERTY COMPILE_OPTIONS "-pthread")
-  set_property(TARGET rakarrack PROPERTY INTERFACE_COMPILE_OPTIONS "-pthread")
+  set_property(TARGET rakarrack-plus PROPERTY COMPILE_OPTIONS "-pthread")
+  set_property(TARGET rakarrack-plus PROPERTY INTERFACE_COMPILE_OPTIONS "-pthread")
 endif()
 
 pkg_check_modules (JACK REQUIRED jack>=0.115.6)
@@ -143,12 +143,12 @@ mark_as_advanced (FLTK_MATH_LIBRARY)
 mark_as_advanced (LIBDL)
 mark_as_advanced (LIBRT)
 
-if(BuildRakarrack)
+if(BuildRakarrackPlus)
     install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
-        DESTINATION share/doc/rakarrack)
-endif(BuildRakarrack)
+        DESTINATION share/doc/rakarrack-plus)
+endif(BuildRakarrackPlus)
 #TODO move from /data to main
-#install(FILES rakarrack.desktop
+#install(FILES rakarrack-plus-plus.desktop
 #    DESTINATION share/applications)
 
 if (BuildForDebug)
@@ -194,14 +194,14 @@ else (BuildForDebug)
     endif(EnableOptimizations)
 endif (BuildForDebug)
 
-if(BuildRakarrack)
+if(BuildRakarrackPlus)
     add_subdirectory(src)
     add_subdirectory(man)
     add_subdirectory(data)
     add_subdirectory(icons)
     add_subdirectory(doc)
     add_subdirectory(extra)
-endif (BuildRakarrack)
+endif (BuildRakarrackPlus)
 
 if (BuildLV2Plugins)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
@@ -210,7 +210,7 @@ if (BuildLV2Plugins)
             set(LV2_INSTALL_DIR $ENV{LV2_PATH} CACHE PATH
             "Specifies where the LV2 libraries should be installed")
         else()
-            set(LV2_INSTALL_DIR lib/lv2/rkr.lv2 CACHE PATH
+            set(LV2_INSTALL_DIR lib/lv2/RakarrackPlus.lv2 CACHE PATH
             "Specifies where the LV2 libraries should be installed")
         endif()
 
@@ -252,7 +252,7 @@ endif (BuildLV2Plugins)
 ##Summarize The Full Configuration
 message(STATUS)
 message(STATUS "=========================================================")
-message(STATUS "Build Configuration for Rakarrack-${PACKAGE_VERSION} for ${CMAKE_SYSTEM_NAME}")
+message(STATUS "Build Configuration for Rakarrack-plus-${PACKAGE_VERSION} for ${CMAKE_SYSTEM_NAME}")
 message(STATUS "=========================================================")
 message(STATUS)
 
@@ -300,8 +300,8 @@ package_status(EnableVectorization "Vectorization. . . . . . . . . . . . . . . .
 package_status(EnableAltivec       "Use altiveck . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableSSE           "Use sse. . . . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableSSE2          "Use sse2 . . . . . . . . . . . . . . . . . . . . . . . .:"  )
-package_status(BuildRakarrack      "Build Rakarrack. . . . . . . . . . . . . . . . . . . . .:"  )
-package_status(BuildLV2Plugins     "Build LV2s (rkr.lv2) . . . . . . . . . . . . . . . . . .:"  )
+package_status(BuildRakarrackPlus  "Build Rakarrack-plus . . . . . . . . . . . . . . . . . .:"  )
+package_status(BuildLV2Plugins     "Build LV2s (RakarrackPlus.lv2) . . . . . . . . . . . . .:"  )
 package_status(BuildCarlaPresets   "Build Carla lv2 presets. . . . . . . . . . . . . . . . .:"  )
 package_status(BuildForDebug       "Build for debug. . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableJackSessionSupport "JACK Session support . . . . . . . . . . . . . . . . . .:"  )

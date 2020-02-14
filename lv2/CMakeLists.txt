@@ -1,10 +1,10 @@
-#CMake file for LV2 Versions of Rakarrack Effects
+#CMake file for LV2 Versions of Rakarrack-plus Effects
 
-project (rkrlv2)
+project (rakarrack-plus-lv2)
 
 # config libraries
 
-add_library(rkrlv2 SHARED
+add_library(rakarrack-plus-lv2 SHARED
   rkrlv2.C
   ../src/EQ.C
   ../src/AnalogFilter.C
@@ -70,21 +70,21 @@ add_library(rkrlv2 SHARED
 
 set_source_files_properties(../src/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 
-target_sources(rkrlv2 PRIVATE
+target_sources(rakarrack-plus-lv2 PRIVATE
   ../src/MIDIConverter.C
 )
 
-target_compile_definitions(rkrlv2 PRIVATE LV2_SUPPORT=1)
+target_compile_definitions(rakarrack-plus-lv2 PRIVATE LV2_SUPPORT=1)
 
-set_target_properties(rkrlv2 PROPERTIES PREFIX "")
+set_target_properties(rakarrack-plus-lv2 PROPERTIES PREFIX "")
 
-set_target_properties(rkrlv2 PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)
+set_target_properties(rakarrack-plus-lv2 PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)
 
-target_include_directories (rkrlv2 PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${FFTW3_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
-target_link_libraries(rkrlv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${FFTW3_LIBRARIES} ${SNDFILE_LIBRARIES} )
+target_include_directories (rakarrack-plus-lv2 PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${FFTW3_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
+target_link_libraries(rakarrack-plus-lv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${FFTW3_LIBRARIES} ${SNDFILE_LIBRARIES} )
 
 # config install
-install(TARGETS rkrlv2
+install(TARGETS rakarrack-plus-lv2
   LIBRARY
   DESTINATION ${LV2_INSTALL_DIR}
 )
@@ -104,11 +104,11 @@ install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
 #This is a convenience for the user to easily access the data files from the user file lookup
 #which are also be copied to the lv2 bundle folder above. 
 install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
-  DESTINATION share/rkr.lv2
+  DESTINATION share/RakarrackPlus.lv2
 )
 
 if(BuildCarlaPresets)
     install (DIRECTORY presets/
-        DESTINATION share/rkr.lv2
+        DESTINATION share/RakarrackPlus.lv2
     )
 endif(BuildCarlaPresets)

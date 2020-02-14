@@ -1,3 +1,3 @@
 
-install (FILES rakarrack.1
+install (FILES rakarrack-plus.1
     DESTINATION share/man/man1)
