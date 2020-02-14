@@ -165,7 +165,7 @@ Vol3_Efx (RKRLV2* plug, uint32_t period)
 void
 down_to_mono(uint32_t nframes, float* efx_inputl, float* efx_inputr, float *output_mono)
 {
-    for (int i = 0; i < nframes; i++)
+    for (unsigned i = 0; i < nframes; i++)
     {
         output_mono[i] = 0.5 * (efx_inputl[i] + efx_inputr[i]);
     }
