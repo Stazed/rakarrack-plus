@@ -2537,7 +2537,7 @@ RKR::SaveIntPreset(int num, char *name)
     FILE *fn;
     char tempfile[256];
     char buf[256];
-    char sbuf[256];
+    char sbuf[260];
     memset(tempfile, 0, sizeof (tempfile));
     sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
 
