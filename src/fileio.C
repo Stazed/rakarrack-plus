@@ -429,7 +429,7 @@ void RKR::putbuf(char *buf, int j)
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[38][0], &lv[38][1], &lv[38][2], &lv[38][3], &lv[38][4],
                &lv[38][5], &lv[38][6], &lv[38][7], &lv[38][8], &lv[38][9],
-               &lv[38][10], &lv[38][11], &lv[38][12], &lv[38][13], &lv[38][14], &Looper_B);
+               &lv[38][10], &lv[38][11], &lv[38][12], &lv[38][13], &lv[38][14], &Sequence_B);
         break;
 
     case 38:
@@ -2537,7 +2537,7 @@ RKR::SaveIntPreset(int num, char *name)
     FILE *fn;
     char tempfile[256];
     char buf[256];
-    char sbuf[256];
+    char sbuf[260];
     memset(tempfile, 0, sizeof (tempfile));
     sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
 

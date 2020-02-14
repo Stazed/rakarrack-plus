@@ -59,10 +59,14 @@ int SliderW::handle2(int event, int X, int Y, int W, int H)
     switch (event)
     {
     case FL_PUSH:
-        if (!Fl::event_inside(X, Y, W, H)) return 0;
-        handle_push();
     case FL_DRAG:
     {
+        if (event == FL_PUSH)
+        {
+            if (!Fl::event_inside(X, Y, W, H)) return 0;
+            handle_push();
+        }
+        
         if (Fl::event_button() == 3) return 1;
         double val;
         if (minimum() == maximum())

@@ -1182,6 +1182,9 @@ frequencies on the M/S channels.</p>
       <p><b>Tempo</b>: The filter can be modulated by an LFO.  This sets the
        rate.</p>
       
+      <p><b>Rnd</b>: Adds some randomized "noise" to the LFO to help make it sound less
+      mechanical.</p>
+      
       <p><b>LFO Type</b>:  The shape of LFO you wish to use.</p>
       
       <p><b>Subtr.</b>: Subtract.  Make output of filter negative, thus changing which
@@ -1257,11 +1260,11 @@ Cross1-&gt;Cross2 = Mid Low<br>
 Cross2-&gt;Cross3 = High Low<br>
 Cross3-&gt;26 KHz = High<br>
       </p>
-      <p>The <b>Combi</b> choice select the LFO for each band</p>
+      <p>Select the LFO type for each band</p>
       <p>1 = LFO1<br>
 2 = LFO2<br>
-o = Bypass<br>
-x = Disable Band.</p>
+C = Constant (Bypass)<br>
+M = Muted (Disable band)</p>
       </td>
     </tr>
   </tbody>
@@ -1489,6 +1492,9 @@ types of destructive interference between filter bands.  For the
 more technically minded, you can dust off your filter cookbook and tune
 in to a wide variety of filter responses.  This can also be used
 as a sort of parametric EQ or tone stack.</p>
+<p><b>Rnd</b>: Adds some randomized "noise" to the LFO to help make it sound less
+mechanical.</p>
+<p><b>St.df</b> : Stereo difference of LFO.</p>
 <p><b>Stg</b>: Stages. Each filter stage is a second order
 filter.  "Stg" sets the number of filters in series.  The
 number of stages will improve the amount of rejection above/below the
@@ -1514,7 +1520,7 @@ you can ask on the rakarrack IRC channel for a better explanation...or
 look up sample rate conversion and interpolation for discussion of the
 trade-offs and benefits.  Otherwise, just experiment with settings
 that sound good to you, and forget about the technical details of why.</p>
-<p><b>Width</b>: Deviation of the LFO. This describes how far it sweeps.</p>
+<p><b>Depth</b>: Deviation of the LFO. This describes how far it sweeps.</p>
 <p><b>Tempo</b>: LFO Rate expressed in beats per minute. This is synchronized when Tap Tempo is active.</p>
 <p><b>Res.</b>: Resonance.  Increasing this makes a higher and more narrow peak at the filter resonant frequency.</p>
 <p><b>Range</b>: Upper bound on the filter sweep range.</p>
@@ -1530,6 +1536,11 @@ have E. Sens set to something other than zero.  If E. Sens is set to a
 useful level, then the Smooth parameter adjusts how quickly the filter
 center frequency responds to changes in signal dynamics.</p>
 
+<p><b>M</b>: Analog gain mode.
+<p><b>N</b>: Exponential wah.
+<p><b>R</b>: Modulate resonance.
+
+<p><b>St. Freq</b>: Starting frequency.
 
 </td>
 </tr>

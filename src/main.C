@@ -41,7 +41,7 @@ show_help()
     fprintf(stderr, "  -b File, --bank=File \t\t\t loads bank\n");
     fprintf(stderr, "  -p #,    --preset=# \t\t\t set preset\n");
     fprintf(stderr, "  -u uuid, --session=# \t\t\t set jack session uuid\n");
-    fprintf(stderr, "  -j Name, --jack-client-name=Name \t set alternate jack name: default=rakarrack\n");
+    fprintf(stderr, "  -j Name, --jack-client-name=Name \t set alternate jack/alsa name: default=rakarrack\n");
     fprintf(stderr, "  -x, --dump-preset-names \t\t prints bank of preset names and IDs\n\n");
     fprintf(stderr, "FLTK options are:\n\n");
     fprintf(stderr, "  -bg2 color\n");

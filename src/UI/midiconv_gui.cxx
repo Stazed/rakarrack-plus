@@ -105,7 +105,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   midi_activar->callback((Fl_Callback*)cb_midi_activar, (void*)(2));
   midi_activar->when(FL_WHEN_CHANGED);
 } // Fl_Light_Button* midi_activar
-{ MIDIOctave = new Fl_Choice(104, 33, 37, 16, "Octave");
+{ MIDIOctave = new Fl_Choice(107, 31, 37, 16, "Octave");
+  MIDIOctave->tooltip("Adjust MIDI note out by octave.");
   MIDIOctave->down_box(FL_BORDER_BOX);
   MIDIOctave->selection_color(FL_FOREGROUND_COLOR);
   MIDIOctave->labelsize(8);
@@ -116,7 +117,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   MIDIOctave->when(FL_WHEN_CHANGED);
   MIDIOctave->menu(menu_MIDIOctave);
 } // Fl_Choice* MIDIOctave
-{ Midi_out_Counter = new Fl_Counter(81, 4, 60, 17, "Channel");
+{ Midi_out_Counter = new Fl_Counter(94, 4, 50, 15, "Channel");
+  Midi_out_Counter->tooltip("Channel to send MIDI out.");
   Midi_out_Counter->type(1);
   Midi_out_Counter->color((Fl_Color)62);
   Midi_out_Counter->labelsize(9);
@@ -129,6 +131,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Midi_out_Counter->callback((Fl_Callback*)cb_Midi_out_Counter);
 } // Fl_Counter* Midi_out_Counter
 { Use_FFT = new Fl_Check_Button(51, 34, 15, 15, "FFT");
+  Use_FFT->tooltip("FFT based algorithm which is much more\nCPU intensive but may provide better \
+results.");
   Use_FFT->down_box(FL_BORDER_BOX);
   Use_FFT->labelsize(10);
   Use_FFT->labelcolor(FL_BACKGROUND2_COLOR);
