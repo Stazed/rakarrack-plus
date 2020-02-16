@@ -19,7 +19,7 @@
 
 # <https://github.com/Stazed/rakarrack-plus#Reverbtron_ui>
 # 	a ui:X11UI ;
-# 	ui:binary <rkrlv2_ui.so> ;
+# 	ui:binary <rakarrack-plus_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
@@ -33,7 +33,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron>
     a lv2:Plugin, lv2:ReverbPlugin ;
-    doap:name "rkr Reverbtron" ;
+    doap:name "RakarrackPlus Reverbtron" ;
     doap:description "Convolution-Based Reverb" ;
     lv2:project <https://github.com/Stazed/rakarrack-plus>;
     lv2:minorVersion 0 ;

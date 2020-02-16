@@ -10,13 +10,13 @@
 
 # <https://github.com/Stazed/rakarrack-plus#DistBand_ui>
 # 	a ui:X11UI ;
-# 	ui:binary <rkrlv2_ui.so> ;
+# 	ui:binary <rakarrack-plus_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
 <https://github.com/Stazed/rakarrack-plus#DistBand>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        doap:name "rkr DistBand" ;
+        doap:name "RakarrackPlus DistBand" ;
         doap:description "Multi-Band Distortion";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

@@ -11,15 +11,15 @@
 
 # <https://github.com/Stazed/rakarrack-plus#Dual_Flange_ui>
 # 	a ui:X11UI ;
-# 	ui:binary <rkrlv2_ui.so> ;
+# 	ui:binary <rakarrack-plus_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange>
         a lv2:Plugin, lv2:FlangerPlugin ;
-        doap:name "rkr Dual Flange" ;
+        doap:name "RakarrackPlus Dual Flange" ;
         doap:description "Dual Flanger";
-        mod:brand "Rakarrack";
+        mod:brand "RakarrackPlus";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;

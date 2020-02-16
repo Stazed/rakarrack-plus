@@ -11,13 +11,13 @@
 
 # <https://github.com/Stazed/rakarrack-plus#Shifter_ui>
 # 	a ui:X11UI ;
-# 	ui:binary <rkrlv2_ui.so> ;
+# 	ui:binary <rakarrack-plus_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
 <https://github.com/Stazed/rakarrack-plus#Shifter>
         a lv2:Plugin, lv2:PitchPlugin ;
-        doap:name "rkr Shifter" ;
+        doap:name "RakarrackPlus Shifter" ;
         doap:description "whammy effect with envelope triggering";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

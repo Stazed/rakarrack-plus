@@ -12,7 +12,7 @@
 
 # <https://github.com/Stazed/rakarrack-plus#Shuffle_ui>
 # 	a ui:X11UI ;
-# 	ui:binary <rkrlv2_ui.so> ;
+# 	ui:binary <rakarrack-plus_ui.so> ;
 # 	lv2:extensionData ui:idleInterface ;
 # 	.
 
@@ -39,7 +39,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#Shuffle>
         a lv2:Plugin, lv2:SpatialPlugin ;
-        doap:name "rkr Shuffle" ;
+        doap:name "RakarrackPlus Shuffle" ;
         doap:description "Stereo Shuffler (Mid/Side EQ)";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

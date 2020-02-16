@@ -14,13 +14,13 @@
 
 # <https://github.com/Stazed/rakarrack-plus#midi_converter_ui>
 # 	a ui:X11UI ;
-# 	ui:binary <rkrlv2_ui.so> ;
+# 	ui:binary <rakarrack-plus_ui.so> ;
 # 	lv2:extensionData ui:idleInterface ;
 # 	.
 
 <https://github.com/Stazed/rakarrack-plus#midi_converter>
         a lv2:Plugin, lv2:ConverterPlugin ;
-        doap:name "rkr Midi Converter" ;
+        doap:name "RakarrackPlus Midi Converter" ;
         doap:description "Audio to Midi conversion";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
