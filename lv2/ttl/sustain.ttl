@@ -10,22 +10,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Sustainer_ui>
+# <https://github.com/Stazed/rakarrack-plus#Sustainer_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface ;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer>
+<https://github.com/Stazed/rakarrack-plus#Sustainer>
         a lv2:Plugin, lv2:CompressorPlugin ;
         doap:name "rkr Sustainer" ;
         doap:description "Sustain-Enhancing Compression";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A very simple, no-frills soft knee compressor good for making notes sustain. Brighter than the full Rakarrack Compressor." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Sustainer_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Sustainer_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -83,17 +83,17 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer:preset:sustain_1>
+<https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sustainer> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
         rdfs:seeAlso <sustain_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer:preset:sustain_2>
+<https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sustainer> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
         rdfs:seeAlso <sustain_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer:preset:sustain_3>
+<https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sustainer> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
         rdfs:seeAlso <sustain_presets.ttl> .

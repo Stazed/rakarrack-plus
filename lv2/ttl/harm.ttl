@@ -9,24 +9,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#har_ui>
+# <https://github.com/Stazed/rakarrack-plus#har_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#har>
+<https://github.com/Stazed/rakarrack-plus#har>
         a lv2:Plugin, lv2:PitchPlugin ;
         doap:name "rkr Harmonizer" ;
         doap:description "Harmonizing Pitch Shifter";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Pitch shifter that harmonizes with your dry signal. This works best for monophonic sounds (a single note at a time). Also allows selection of root and chord for intelligent harmonies. Midi input can be used to select the harmoization notes." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,
             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#har_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#har_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -246,18 +246,18 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#har_no_mid:preset:plain>
+<https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:plain>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#har_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
         rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#har_no_mid:preset:octavador>
+<https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:octavador>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#har_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
         rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#har_no_mid:preset:3mdown>
+<https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:3mdown>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#har_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
         rdfs:seeAlso <harm_no_midi_presets.ttl> .
 

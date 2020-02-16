@@ -8,24 +8,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#StereoHarm_ui>
+# <https://github.com/Stazed/rakarrack-plus#StereoHarm_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid>
         a lv2:Plugin, lv2:PitchPlugin ;
         doap:name "rkr StereoHarmonizer (no midi)" ;
         doap:description "Dual Harmonizing Pitch Shifters";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Pitch shifter that harmonizes 2 voices with your dry signal. This works best for monophonic sounds (a single note at a time). This version has a detune for stereo chorus effects. Also allows selection of root and chord for intelligent harmonies." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,
             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#StereoHarm_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#StereoHarm_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -243,23 +243,23 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:plain>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:plain>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:octavator>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:octavator>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:chorus>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:hard_chorus>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:hard_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 

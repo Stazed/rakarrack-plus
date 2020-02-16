@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#gate:preset:0dB>
+<https://github.com/Stazed/rakarrack-plus#gate:preset:0dB>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#gate> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> ;
 	rdfs:label "0dB" ;
         lv2:port [
                 lv2:symbol "THRESHOLD" ;
@@ -35,9 +35,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#gate:preset:-10dB>
+<https://github.com/Stazed/rakarrack-plus#gate:preset:-10dB>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#gate> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> ;
 	rdfs:label "-10dB" ;
         lv2:port [
                 lv2:symbol "THRESHOLD" ;
@@ -63,9 +63,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#gate:preset:-20dB>
+<https://github.com/Stazed/rakarrack-plus#gate:preset:-20dB>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#gate> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> ;
 	rdfs:label "-20dB" ;
         lv2:port [
                 lv2:symbol "THRESHOLD" ;

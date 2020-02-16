@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:saturation>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:saturation>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Saturation" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -59,9 +59,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distorsion_1>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distorsion_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Distorsion 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -111,9 +111,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:soft>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:soft>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Soft" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -163,9 +163,9 @@
         ] ;
 	.
    
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:modulated>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:modulated>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Modulated" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -215,9 +215,9 @@
         ] ;
 	.
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:crunch>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:crunch>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Crunch" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -267,9 +267,9 @@
         ] ;
 	.
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distortion_2>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Distortion 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -319,9 +319,9 @@
         ] ;
 	.
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distortion_3>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Distortion 3" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -371,9 +371,9 @@
         ] ;
 	.
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distortion_4>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_4>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:label "Distortion 4" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

@@ -3,242 +3,242 @@
 @prefix doap:  <http://usefulinc.com/ns/doap#> .
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 
-<http://rakarrack.sourceforge.net/effects.html>
+<https://github.com/Stazed/rakarrack-plus>
         a doap:Project;
         doap:license <http://opensource.org/licenses/GPL-2.0> ;
         doap:maintainer [
                 foaf:name "Rakarrack Team" ;
                 foaf:homepage <http://rakarrack.sourceforge.net>;
-                foaf:mbox <mailto:ssjackson71@gmail.com> ;
+                foaf:mbox <mailto:Stazed@web.de> ;
         ] .
 
 # 0
-<http://rakarrack.sourceforge.net/effects.html#eql>
+<https://github.com/Stazed/rakarrack-plus#eql>
         a lv2:Plugin, lv2:MultiEQPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <eql.ttl> .
 # 1
-<http://rakarrack.sourceforge.net/effects.html#comp>
+<https://github.com/Stazed/rakarrack-plus#comp>
         a lv2:Plugin, lv2:CompressorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <comp.ttl> .
 # 2
-<http://rakarrack.sourceforge.net/effects.html#dist>
+<https://github.com/Stazed/rakarrack-plus#dist>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <dist.ttl> .
 # 3
-<http://rakarrack.sourceforge.net/effects.html#eco>
+<https://github.com/Stazed/rakarrack-plus#eco>
         a lv2:Plugin, lv2:ReverbPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <echo.ttl> .
 # 4
-<http://rakarrack.sourceforge.net/effects.html#chor>
+<https://github.com/Stazed/rakarrack-plus#chor>
         a lv2:Plugin, lv2:ChorusPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <chorus.ttl> .
 # 5
-<http://rakarrack.sourceforge.net/effects.html#aphas>
+<https://github.com/Stazed/rakarrack-plus#aphas>
         a lv2:Plugin, lv2:PhaserPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <aphas.ttl> .
 # 6
-<http://rakarrack.sourceforge.net/effects.html#har_no_mid>
+<https://github.com/Stazed/rakarrack-plus#har_no_mid>
         a lv2:Plugin, lv2:PitchPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <harm_no_midi.ttl> .
 # 7
-<http://rakarrack.sourceforge.net/effects.html#Exciter>
+<https://github.com/Stazed/rakarrack-plus#Exciter>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <exciter.ttl> .
 # 8
-<http://rakarrack.sourceforge.net/effects.html#pan>
+<https://github.com/Stazed/rakarrack-plus#pan>
         a lv2:Plugin, lv2:SpatialPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <pan.ttl> .
 # 9
-<http://rakarrack.sourceforge.net/effects.html#awha>
+<https://github.com/Stazed/rakarrack-plus#awha>
         a lv2:Plugin, lv2:PhaserPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <alienwah.ttl> .
 # 10
-<http://rakarrack.sourceforge.net/effects.html#reve>
+<https://github.com/Stazed/rakarrack-plus#reve>
         a lv2:Plugin, lv2:ReverbPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <reve.ttl> .
 # 11
-<http://rakarrack.sourceforge.net/effects.html#eqp>
+<https://github.com/Stazed/rakarrack-plus#eqp>
         a lv2:Plugin, lv2:ParaEQPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <eqp.ttl> .
 # 12
-<http://rakarrack.sourceforge.net/effects.html#cabe>
+<https://github.com/Stazed/rakarrack-plus#cabe>
         a lv2:Plugin, lv2:FilterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <cab.ttl> .
 # 13
-<http://rakarrack.sourceforge.net/effects.html#delm>
+<https://github.com/Stazed/rakarrack-plus#delm>
         a lv2:Plugin, lv2:DelayPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <mdel.ttl> .
 # 14
-<http://rakarrack.sourceforge.net/effects.html#wha>
+<https://github.com/Stazed/rakarrack-plus#wha>
         a lv2:Plugin, lv2:FilterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <wha.ttl> .
 # 15
-<http://rakarrack.sourceforge.net/effects.html#dere>
+<https://github.com/Stazed/rakarrack-plus#dere>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <dere.ttl> .
 # 16
-<http://rakarrack.sourceforge.net/effects.html#Valve>
+<https://github.com/Stazed/rakarrack-plus#Valve>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <valve.ttl> .
 # 17
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange>
         a lv2:Plugin, lv2:FlangerPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <dual_flange.ttl> .
 # 18 
-<http://rakarrack.sourceforge.net/effects.html#Ring>
+<https://github.com/Stazed/rakarrack-plus#Ring>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <ring.ttl> .
 # 19 
-<http://rakarrack.sourceforge.net/effects.html#DistBand>
+<https://github.com/Stazed/rakarrack-plus#DistBand>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <distband.ttl> .
 # 20 
-<http://rakarrack.sourceforge.net/effects.html#Arpie>
+<https://github.com/Stazed/rakarrack-plus#Arpie>
         a lv2:Plugin, lv2:DelayPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <arpie.ttl> .
 # 21 
-<http://rakarrack.sourceforge.net/effects.html#Expander>
+<https://github.com/Stazed/rakarrack-plus#Expander>
         a lv2:Plugin, lv2:ExpanderPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <expander.ttl> .
 # 22 
-<http://rakarrack.sourceforge.net/effects.html#Shuffle>
+<https://github.com/Stazed/rakarrack-plus#Shuffle>
         a lv2:Plugin, lv2:SpatialPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <shuffle.ttl> .
 # 23 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter>
         a lv2:Plugin, lv2:FilterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <synthfilter.ttl> .
 # 24 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand>
+<https://github.com/Stazed/rakarrack-plus#VaryBand>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <varyband.ttl> .
 # 25 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo>
         a lv2:Plugin, lv2:FilterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <mutromojo.ttl> .
 # 26 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse>
+<https://github.com/Stazed/rakarrack-plus#Echoverse>
         a lv2:Plugin, lv2:ReverbPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <echoverse.ttl> . 
 # 27 
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter>
         a lv2:Plugin, lv2:FilterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <coilcrafter.ttl> .
 # 28 
-<http://rakarrack.sourceforge.net/effects.html#ShelfBoost>
+<https://github.com/Stazed/rakarrack-plus#ShelfBoost>
         a lv2:Plugin, lv2:FilterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <shelfboost.ttl> .
 # 29 
-<http://rakarrack.sourceforge.net/effects.html#Vocoder>
+<https://github.com/Stazed/rakarrack-plus#Vocoder>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <vocoder.ttl> .
 # 30 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer>
+<https://github.com/Stazed/rakarrack-plus#Sustainer>
         a lv2:Plugin, lv2:CompressorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <sustain.ttl> .
 # 31 
-<http://rakarrack.sourceforge.net/effects.html#Sequence>
+<https://github.com/Stazed/rakarrack-plus#Sequence>
         a lv2:Plugin, lv2:FilterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <sequence.ttl> .
 # 32 
-<http://rakarrack.sourceforge.net/effects.html#Shifter>
+<https://github.com/Stazed/rakarrack-plus#Shifter>
         a lv2:Plugin, lv2:PitchPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <shifter.ttl> .
 # 33 
-<http://rakarrack.sourceforge.net/effects.html#StompBox>
+<https://github.com/Stazed/rakarrack-plus#StompBox>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <stomp.ttl> .
 # 34 
-<http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz>
+<https://github.com/Stazed/rakarrack-plus#StompBox_fuzz>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <stompfuzz.ttl> .
 # 35 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron>
         a lv2:Plugin, lv2:ReverbPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <reverbtron.ttl> .
 # 36 
-<http://rakarrack.sourceforge.net/effects.html#Echotron>
+<https://github.com/Stazed/rakarrack-plus#Echotron>
         a lv2:Plugin, lv2:DelayPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <echotron.ttl> .
 # 37 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid>
         a lv2:Plugin, lv2:PitchPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <stereoharm_no_midi.ttl> .
 # 38 
-<http://rakarrack.sourceforge.net/effects.html#CompBand>
+<https://github.com/Stazed/rakarrack-plus#CompBand>
         a lv2:Plugin, lv2:CompressorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <compband.ttl> .
 # 39 
-<http://rakarrack.sourceforge.net/effects.html#Otrem>
+<https://github.com/Stazed/rakarrack-plus#Otrem>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <otrem.ttl> .
 # 40 
-<http://rakarrack.sourceforge.net/effects.html#Vibe>
+<https://github.com/Stazed/rakarrack-plus#Vibe>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <vibe.ttl> .
 # 41 
-<http://rakarrack.sourceforge.net/effects.html#Infinity>
+<https://github.com/Stazed/rakarrack-plus#Infinity>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <inf.ttl> .
 # 42
-<http://rakarrack.sourceforge.net/effects.html#phas>
+<https://github.com/Stazed/rakarrack-plus#phas>
         a lv2:Plugin, lv2:PhaserPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <phas.ttl> .
 # 43 
-<http://rakarrack.sourceforge.net/effects.html#gate>
+<https://github.com/Stazed/rakarrack-plus#gate>
         a lv2:Plugin, lv2:GatePlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <gate.ttl> .
 # 44 
-<http://rakarrack.sourceforge.net/effects.html#midi_converter>
+<https://github.com/Stazed/rakarrack-plus#midi_converter>
         a lv2:Plugin, lv2:ConverterPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <midi_converter.ttl> .
 # 45
-<http://rakarrack.sourceforge.net/effects.html#Convolotron>
+<https://github.com/Stazed/rakarrack-plus#Convolotron>
         a lv2:Plugin, lv2:ConvolutionPlugin ;
-        lv2:binary <rkrlv2.so> ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <convolotron.ttl> .

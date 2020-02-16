@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Infinity_ui>
+# <https://github.com/Stazed/rakarrack-plus#Infinity_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity>
+<https://github.com/Stazed/rakarrack-plus#Infinity>
         a lv2:Plugin, lv2:ModulatorPlugin ;
         doap:name "rkr Infinity" ;
         doap:description "Infinite Ascending/Descending Phaser";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "This is the audio equivalent of a barber pole effect, with 8 filter bands continuously sweeping up or down. This has enough flexibility to create effects anywhere from subtle to insane." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Infinity_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Infinity_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -228,53 +228,53 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:basic>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:basic>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:rising_comb>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:rising_comb>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:falling_comb>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:falling_comb>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:laser>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:laser>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:doppler>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:doppler>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:detune>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:detune>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:dizzy_sailor>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:dizzy_sailor>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:stereo_phaser>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:stereo_phaser>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:corkscrew>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:corkscrew>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Infinity:preset:freeqeevox>
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:freeqeevox>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Infinity> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
         rdfs:seeAlso <inf_presets.ttl> .
 

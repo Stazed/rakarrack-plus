@@ -8,9 +8,9 @@
 
 
 
-<http://rakarrack.sourceforge.net/effects.html#Vocoder:preset:vocoder_1>
+<https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vocoder> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
         rdfs:label "Vocoder 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -36,9 +36,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vocoder:preset:vocoder_2>
+<https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vocoder> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
         rdfs:label "Vocoder 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -64,9 +64,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vocoder:preset:vocoder_3>
+<https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vocoder> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
         rdfs:label "Vocoder 3" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -92,9 +92,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vocoder:preset:vocoder_4>
+<https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_4>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vocoder> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
         rdfs:label "Vocoder 4" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

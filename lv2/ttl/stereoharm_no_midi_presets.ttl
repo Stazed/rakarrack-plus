@@ -7,9 +7,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:plain>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:plain>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:label "Plain" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -47,9 +47,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:octavator>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:octavator>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:label "Octavator" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -88,9 +88,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:chorus>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:label "Chorus" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -128,9 +128,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid:preset:hard_chorus>
+<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:hard_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
         rdfs:label "Hard Chorus" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

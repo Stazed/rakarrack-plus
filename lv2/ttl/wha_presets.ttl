@@ -7,9 +7,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:wahwah>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:wahwah>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
 	rdfs:label "WahWah" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -47,9 +47,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:autowah>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:autowah>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
 	rdfs:label "AutoWah" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -87,9 +87,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:sweep>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:sweep>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
 	rdfs:label "Sweep" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -127,9 +127,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:vocalmorph1>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph1>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ; 
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ; 
 	rdfs:label "Vocal Morph 1" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -167,9 +167,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:vocalmorph2>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph2>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
 	rdfs:label "Vocal Morph 2" ;
     lv2:port [
         lv2:symbol "WETDRY" ;

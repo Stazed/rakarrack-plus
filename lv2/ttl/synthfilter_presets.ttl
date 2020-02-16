@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:lowpass>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lowpass>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Lowpass" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -61,9 +61,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:highpass>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:highpass>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Highpass" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -116,9 +116,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:bandpass>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:bandpass>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Bandpass" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -171,9 +171,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:lead_synth>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lead_synth>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Lead Synth" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -226,9 +226,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:water>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:water>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Water" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -281,9 +281,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:pan_filter>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:pan_filter>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Pan Filter" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -336,9 +336,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:multi>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:multi>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Multi" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

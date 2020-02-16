@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_1> 
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_1> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
 	rdfs:label "Phaser 1" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -48,9 +48,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_2> 
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_2> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
 	rdfs:label "Phaser 2" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -90,9 +90,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_3> 
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_3> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
 	rdfs:label "Phaser 3" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -132,9 +132,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_4> 
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_4> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
 	rdfs:label "Phaser 4" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -174,9 +174,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_5> 
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_5> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
 	rdfs:label "Phaser 5" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -216,9 +216,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_6> 
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_6> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
 	rdfs:label "Phaser 6" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;

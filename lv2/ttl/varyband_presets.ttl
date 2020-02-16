@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:preset:vary1>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#VaryBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
     	rdfs:label "Vary 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -56,9 +56,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:preset:vary2>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#VaryBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
     	rdfs:label "Vary 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -105,9 +105,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:preset:vary3>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#VaryBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
     	rdfs:label "Vary 3" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

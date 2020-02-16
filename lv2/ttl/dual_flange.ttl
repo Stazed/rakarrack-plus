@@ -9,23 +9,23 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Dual_Flange_ui>
+# <https://github.com/Stazed/rakarrack-plus#Dual_Flange_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange>
         a lv2:Plugin, lv2:FlangerPlugin ;
         doap:name "rkr Dual Flange" ;
         doap:description "Dual Flanger";
         mod:brand "Rakarrack";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Two flange effects cascaded to create unique and more intense tones than available through a single flanger." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Dual_Flange_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Dual_Flange_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -221,38 +221,38 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:preset1>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:seeAlso <dual_flange_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:flangewah>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flangewah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:seeAlso <dual_flange_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:fbflange>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:fbflange>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:seeAlso <dual_flange_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:softflange>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:softflange>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:seeAlso <dual_flange_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:flanger>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flanger>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:seeAlso <dual_flange_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:chorus1>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:seeAlso <dual_flange_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:chorus2>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:seeAlso <dual_flange_presets.ttl> .
 

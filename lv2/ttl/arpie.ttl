@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Arpie_ui>
+# <https://github.com/Stazed/rakarrack-plus#Arpie_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie>
+<https://github.com/Stazed/rakarrack-plus#Arpie>
         a lv2:Plugin, lv2:DelayPlugin ;
         doap:name "rkr Arpie" ;
         doap:description "Arpeggiated Pitch Shifter";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A pitch shifter that changes the shifting amount in a rhythmic pattern. Adds pulse and brightness to your sound." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Arpie_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Arpie_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -176,47 +176,47 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:arpie_1>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:arpie_2>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:arpie_3>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:simple_arpie>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:simple_arpie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:canyon>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:canyon>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:panning_arpie_1>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:panning_arpie_2>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:panning_arpie_3>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:feedback_arpie>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:feedback_arpie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:seeAlso <arpie_presets.ttl> .

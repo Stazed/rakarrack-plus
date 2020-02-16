@@ -11,23 +11,23 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#MuTroMojo_ui>
+# <https://github.com/Stazed/rakarrack-plus#MuTroMojo_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo>
         a lv2:Plugin, lv2:FilterPlugin ;
         doap:name "rkr MuTroMojo" ;
         mod:brand "Rakarrack";
         doap:description "Envelope Controlled Filter Bank";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "State variable filter with envelope or LFO modulation. Allows it to act like a mixable blend of highpass, lowpass or bandpass filter. Similar to a mutron III. Also useful for classic wah pedal emulation when wah parameter is controlled by an expression pedal." ; 
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#MuTroMojo_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#MuTroMojo_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -258,32 +258,32 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:wahwah>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:wahwah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:seeAlso <mutromojo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:mutron>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:mutron>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:seeAlso <mutromojo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:phase_wah>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phase_wah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:seeAlso <mutromojo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:phaser>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phaser>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:seeAlso <mutromojo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:quack_quack>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:quack_quack>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:seeAlso <mutromojo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:smoothtron>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:smoothtron>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:seeAlso <mutromojo_presets.ttl> .

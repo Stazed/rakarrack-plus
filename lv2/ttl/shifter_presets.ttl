@@ -7,9 +7,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://rakarrack.sourceforge.net/effects.html#Shifter:preset:fast>
+<https://github.com/Stazed/rakarrack-plus#Shifter:preset:fast>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shifter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
         rdfs:label "Fast" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -44,9 +44,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Shifter:preset:slow_up>
+<https://github.com/Stazed/rakarrack-plus#Shifter:preset:slow_up>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shifter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
         rdfs:label "Slow Up" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -81,9 +81,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Shifter:preset:slow_down>
+<https://github.com/Stazed/rakarrack-plus#Shifter:preset:slow_down>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shifter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
         rdfs:label "Slow Down" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -118,9 +118,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Shifter:preset:chorus>
+<https://github.com/Stazed/rakarrack-plus#Shifter:preset:chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shifter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
         rdfs:label "Chorus" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -155,9 +155,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Shifter:preset:trig_chorus>
+<https://github.com/Stazed/rakarrack-plus#Shifter:preset:trig_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shifter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
         rdfs:label "Trigger Chorus" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

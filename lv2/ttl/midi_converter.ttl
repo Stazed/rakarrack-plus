@@ -12,22 +12,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#midi_converter_ui>
+# <https://github.com/Stazed/rakarrack-plus#midi_converter_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface ;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#midi_converter>
+<https://github.com/Stazed/rakarrack-plus#midi_converter>
         a lv2:Plugin, lv2:ConverterPlugin ;
         doap:name "rkr Midi Converter" ;
         doap:description "Audio to Midi conversion";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "An experimental monophonic midi converter." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#midi_converter_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#midi_converter_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;

@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#eql_ui>
+# <https://github.com/Stazed/rakarrack-plus#eql_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#eql>
+<https://github.com/Stazed/rakarrack-plus#eql>
         a lv2:Plugin, lv2:MultiEQPlugin ;
         doap:name "rkr EQ" ;
         doap:description "10 Band Graphical Eq";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:optionalFeature lv2:hardRTCapable ;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "10 band graphical equalizer with resonance control." ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#eql_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#eql_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -170,20 +170,20 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#eql:preset:plain>
+<https://github.com/Stazed/rakarrack-plus#eql:preset:plain>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eql> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
         rdfs:label "Plain" ;
         rdfs:seeAlso <eql_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eql:preset:pop>
+<https://github.com/Stazed/rakarrack-plus#eql:preset:pop>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eql> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
         rdfs:label "Pop" ;
         rdfs:seeAlso <eql_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eql:preset:jazz>
+<https://github.com/Stazed/rakarrack-plus#eql:preset:jazz>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eql> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
         rdfs:label "Jazz" ;
         rdfs:seeAlso <eql_presets.ttl> .

@@ -17,33 +17,33 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Echotron_ui>
+# <https://github.com/Stazed/rakarrack-plus#Echotron_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile>
+<https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile>
     a lv2:Parameter ;
     rdfs:label "dly file" ;
     rdfs:range atom:Path ;
     mediatype: mime:text ;
     .
 
-<http://rakarrack.sourceforge.net/effects.html#Echotron>
+<https://github.com/Stazed/rakarrack-plus#Echotron>
     a lv2:Plugin, lv2:DelayPlugin ;
     doap:name "rkr Echotron" ;
     doap:description "Extremely Configurable Delay" ;
-    lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+    lv2:project <https://github.com/Stazed/rakarrack-plus>;
     lv2:minorVersion 0 ;
     lv2:microVersion 0 ;
     rdfs:comment "An extremely-configurable delay that allows up to 127 taps. Individual tap timing can be customized and loaded through text files. You can also have a custom filter on each tap. Several example files included." ;
     lv2:requiredFeature urid:map, worker:schedule ;
     lv2:optionalFeature lv2:hardRTCapable, state:loadDefaultState ;
     lv2:extensionData worker:interface, state:interface ;
-#    ui:ui  <http://rakarrack.sourceforge.net/effects.html#Echotron_ui> ;
-    patch:writable <http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile> ;
+#    ui:ui  <https://github.com/Stazed/rakarrack-plus#Echotron_ui> ;
+    patch:writable <https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile> ;
 
     lv2:port [
             a lv2:InputPort, lv2:AudioPort ;
@@ -242,31 +242,31 @@
             lv2:portProperty lv2:toggled ; 
     ] ;
     state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Echotron:dlyfile> <SwingPong.dly>
+		<https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile> <SwingPong.dly>
 	] 
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Echotron:preset:summer>
+<https://github.com/Stazed/rakarrack-plus#Echotron:preset:summer>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
         rdfs:seeAlso <echotron_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Echotron:preset:ambience>
+<https://github.com/Stazed/rakarrack-plus#Echotron:preset:ambience>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
         rdfs:seeAlso <echotron_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Echotron:preset:arranjer>
+<https://github.com/Stazed/rakarrack-plus#Echotron:preset:arranjer>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
         rdfs:seeAlso <echotron_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Echotron:preset:suction>
+<https://github.com/Stazed/rakarrack-plus#Echotron:preset:suction>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
         rdfs:seeAlso <echotron_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Echotron:preset:suctionflange>
+<https://github.com/Stazed/rakarrack-plus#Echotron:preset:suctionflange>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
         rdfs:seeAlso <echotron_presets.ttl> .

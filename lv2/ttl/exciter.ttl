@@ -8,24 +8,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Exciter_ui>
+# <https://github.com/Stazed/rakarrack-plus#Exciter_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter>
+<https://github.com/Stazed/rakarrack-plus#Exciter>
         a lv2:Plugin, lv2:DistortionPlugin ;
         doap:name "rkr Exciter" ;
         doap:description "Harmonic Exciter";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Harmonic exciter that allows you to adjust the volume of each of 10 harmonics." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,
             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Exciter_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Exciter_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -183,28 +183,28 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:plain>
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:plain>
 	a pset:Preset ;
 	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:loudness>
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:loudness>
 	a pset:Preset ;
 	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:exciter_1>
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_1>
 	a pset:Preset ;
 	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:exciter_2>
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_2>
 	a pset:Preset ;
 	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:exciter_3>
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_3>
 	a pset:Preset ;
 	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 

@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Marshall_JCM200>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Marshall_JCM200>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Marshall JCM200" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -35,12 +35,12 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Marshall_JCM200.wav>
+		<https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile> <Marshall_JCM200.wav>
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Fender_Superchamp>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Fender_Superchamp>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Fender Superchamp" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -67,12 +67,12 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Fender_Superchamp.wav>
+		<https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile> <Fender_Superchamp.wav>
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Mesa Boogie" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -99,12 +99,12 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Mesa_Boogie.wav>
+		<https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile> <Mesa_Boogie.wav>
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie_2>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie_2>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Mesa Boogie 2" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -131,5 +131,5 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Mesa_Boogie-2.wav>
+		<https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile> <Mesa_Boogie-2.wav>
 	] .

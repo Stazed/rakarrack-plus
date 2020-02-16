@@ -7,9 +7,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://rakarrack.sourceforge.net/effects.html#CompBand:preset:good_start>
+<https://github.com/Stazed/rakarrack-plus#CompBand:preset:good_start>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CompBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
 	    rdfs:label "Good Start" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -53,9 +53,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#CompBand:preset:loudness>
+<https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CompBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
 	    rdfs:label "Loudness" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -99,9 +99,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#CompBand:preset:loudness2>
+<https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CompBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
 	    rdfs:label "Loudness 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Ring_ui>
+# <https://github.com/Stazed/rakarrack-plus#Ring_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Ring>
+<https://github.com/Stazed/rakarrack-plus#Ring>
         a lv2:Plugin, lv2:ModulatorPlugin ;
         doap:name "rkr Ring" ;
         doap:description "Ring Modulator";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A ring modulator with monophonic frequency recognition for synthesis." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Ring_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Ring_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -183,33 +183,33 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:sawsin>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:sawsin>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
         rdfs:seeAlso <ring_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:e_string>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:e_string>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
         rdfs:seeAlso <ring_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:a_string>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:a_string>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
         rdfs:seeAlso <ring_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:dissonance>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:dissonance>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
         rdfs:seeAlso <ring_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:fast_beat>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:fast_beat>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
         rdfs:seeAlso <ring_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:ring_amp>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:ring_amp>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
         rdfs:seeAlso <ring_presets.ttl> .
 

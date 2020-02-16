@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Expander:preset:noise_gate>
+<https://github.com/Stazed/rakarrack-plus#Expander:preset:noise_gate>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Expander> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> ;
 	rdfs:label "Noise Gate" ;
         lv2:port [
                 lv2:symbol "THRESHOLD" ;
@@ -35,9 +35,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Expander:preset:boost_gate>
+<https://github.com/Stazed/rakarrack-plus#Expander:preset:boost_gate>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Expander> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> ;
 	rdfs:label "Boost Gate" ;
         lv2:port [
                 lv2:symbol "THRESHOLD" ;
@@ -63,9 +63,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Expander:preset:treble_swell>
+<https://github.com/Stazed/rakarrack-plus#Expander:preset:treble_swell>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Expander> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> ;
 	rdfs:label "Treble Swell" ;
         lv2:port [
                 lv2:symbol "THRESHOLD" ;

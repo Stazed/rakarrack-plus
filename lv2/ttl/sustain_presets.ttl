@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer:preset:sustain_1>
+<https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sustainer> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
         rdfs:label "Moderate Sustain" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
@@ -19,9 +19,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer:preset:sustain_2>
+<https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sustainer> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
         rdfs:label "Extreme Sustain" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
@@ -32,9 +32,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sustainer:preset:sustain_3>
+<https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sustainer> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
         rdfs:label "Mild Sustain" ;
         lv2:port [
                 lv2:symbol "GAIN" ;

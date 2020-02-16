@@ -10,23 +10,23 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#wha_ui>
+# <https://github.com/Stazed/rakarrack-plus#wha_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#wha>
+<https://github.com/Stazed/rakarrack-plus#wha>
         a lv2:Plugin, lv2:FilterPlugin ;
         doap:name "rkr WahWah" ;
         mod:brand "Rakarrack";
         doap:description "Envelope/LFO Controlled Wah";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Wah effect controllable by the input volume envelope or by LFO." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#wha_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#wha_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -186,27 +186,27 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:wahwah>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:wahwah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
         rdfs:seeAlso <wha_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:autowah>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:autowah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
         rdfs:seeAlso <wha_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:sweep>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:sweep>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
         rdfs:seeAlso <wha_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:vocalmorph1>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
         rdfs:seeAlso <wha_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#wha:preset:vocalmorph2>
+<https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#wha> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
         rdfs:seeAlso <wha_presets.ttl> .

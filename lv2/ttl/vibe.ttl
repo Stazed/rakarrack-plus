@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Vibe_ui>
+# <https://github.com/Stazed/rakarrack-plus#Vibe_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe>
+<https://github.com/Stazed/rakarrack-plus#Vibe>
         a lv2:Plugin, lv2:ModulatorPlugin ;
         doap:name "rkr Vibe" ;
         doap:description "UniVibe Emulation";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "The UniVibe was intended as a rotating speaker emulation. It does a poor job of that, but in its own right became a popular phase-shifter effect. This version has optional feedback to achieve some additional tones." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Vibe_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Vibe_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -177,43 +177,43 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:classic>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:classic>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:stereo_classic>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:stereo_classic>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:wide_vibe>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:wide_vibe>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:classic_chorus>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:classic_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:vibe_chorus>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:vibe_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:lush_chorus>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:lush_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:sick_phaser>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:sick_phaser>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:warble>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:warble>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:seeAlso <vibe_presets.ttl> .
 

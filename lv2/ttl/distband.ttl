@@ -8,24 +8,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#DistBand_ui>
+# <https://github.com/Stazed/rakarrack-plus#DistBand_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#DistBand>
+<https://github.com/Stazed/rakarrack-plus#DistBand>
         a lv2:Plugin, lv2:DistortionPlugin ;
         doap:name "rkr DistBand" ;
         doap:description "Multi-Band Distortion";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A multi-band distortion allowing different character distortion of different frequencies. It is a waveshaping distortion with a different waveshaper selectable for each band." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,
             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#DistBand_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#DistBand_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -296,42 +296,42 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:saturation>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:saturation>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distorsion_1>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distorsion_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:soft>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:soft>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:modulated>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:modulated>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:crunch>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:crunch>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distortion_2>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distortion_3>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .
       
-<http://rakarrack.sourceforge.net/effects.html#DistBand:preset:distortion_4>
+<https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_4>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#DistBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
         rdfs:seeAlso <distband_presets.ttl> .

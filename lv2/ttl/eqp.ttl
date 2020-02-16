@@ -10,38 +10,38 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#eqp_ui>
+# <https://github.com/Stazed/rakarrack-plus#eqp_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#eqp:group:low>
+<https://github.com/Stazed/rakarrack-plus#eqp:group:low>
     a param:ControlGroup ;
     lv2:index 0 ;
     lv2:name "Low Band" ;
     lv2:symbol "low" .
-<http://rakarrack.sourceforge.net/effects.html#eqp:group:mid>
+<https://github.com/Stazed/rakarrack-plus#eqp:group:mid>
     a param:ControlGroup ;
     lv2:index 1 ;
     lv2:name "Mid Band" ;
     lv2:symbol "mid" .
-<http://rakarrack.sourceforge.net/effects.html#eqp:group:high>
+<https://github.com/Stazed/rakarrack-plus#eqp:group:high>
     a param:ControlGroup ;
     lv2:index 2 ;
     lv2:name "High Band" ;
     lv2:symbol "hi" .
 
-<http://rakarrack.sourceforge.net/effects.html#eqp>
+<https://github.com/Stazed/rakarrack-plus#eqp>
         a lv2:Plugin, lv2:ParaEQPlugin ;
         doap:name "rkr Parametric EQ" ;
         doap:description "3 Band Parametric Eq";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "3 band parametric peak-filter equalizer." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#eqp_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#eqp_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -96,7 +96,7 @@
                 lv2:maximum 1000 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:hz ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:low> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:low> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 7 ;
@@ -106,7 +106,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:low> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:low> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 8 ;
@@ -116,7 +116,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:low> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:low> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 9 ;
@@ -127,7 +127,7 @@
                 lv2:maximum 8000 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:hz ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:mid> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:mid> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 10 ;
@@ -137,7 +137,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:mid> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:mid> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 11 ;
@@ -147,7 +147,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:mid> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:mid> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 12 ;
@@ -158,7 +158,7 @@
                 lv2:maximum 26000 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:hz ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:high> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:high> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 13 ;
@@ -168,7 +168,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:high> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:high> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 14 ;
@@ -178,24 +178,24 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#eqp:group:high> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:high> ;
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#eqp:preset:plain>
+<https://github.com/Stazed/rakarrack-plus#eqp:preset:plain>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eqp> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
         rdfs:label "Plain" ;
         rdfs:seeAlso <eqp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eqp:preset:pop>
+<https://github.com/Stazed/rakarrack-plus#eqp:preset:pop>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eqp> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
         rdfs:label "Pop" ;
         rdfs:seeAlso <eqp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eqp:preset:jazz>
+<https://github.com/Stazed/rakarrack-plus#eqp:preset:jazz>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eqp> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
         rdfs:label "Jazz" ;
         rdfs:seeAlso <eqp_presets.ttl> .

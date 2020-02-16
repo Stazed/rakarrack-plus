@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:odie>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:odie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Odie" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -31,9 +31,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:grunger>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:grunger>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Grunger" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -56,9 +56,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:hard_dist>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:hard_dist>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Hard Dist." ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -81,9 +81,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:ratula>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:ratula>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Ratula" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -106,9 +106,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:classic_dist>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_dist>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Classic Dist." ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -131,9 +131,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:mobid_impalement>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:mobid_impalement>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Morbid Impalement" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -156,9 +156,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:sharp_metal>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:sharp_metal>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Sharp Metal" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -181,9 +181,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:classic_fuzz>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_fuzz>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
     	rdfs:label "Classic Fuzz" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -207,9 +207,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz:preset:classic_fuzz>
+<https://github.com/Stazed/rakarrack-plus#StompBox_fuzz:preset:classic_fuzz>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox_fuzz> ;
     	rdfs:label "Classic Fuzz" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;
@@ -230,9 +230,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz:preset:gnasty>
+<https://github.com/Stazed/rakarrack-plus#StompBox_fuzz:preset:gnasty>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox_fuzz> ;
     	rdfs:label "Gnasty" ;
         lv2:port [
                 lv2:symbol "LEVEL" ;

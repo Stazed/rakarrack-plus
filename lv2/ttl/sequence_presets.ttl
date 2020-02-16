@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:jumpy>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:jumpy>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Jumpy" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -58,9 +58,9 @@
         ] ;
 	.  
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:stair_step>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:stair_step>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Stair Step" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -110,9 +110,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:mild>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:mild>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Mild" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -162,9 +162,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:wahwah>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:wahwah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "WahWah" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -214,9 +214,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:filter_pan>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:filter_pan>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Filter Pan" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -266,9 +266,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:stepper>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:stepper>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Stepper" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -318,9 +318,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:shifter>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:shifter>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Shifter" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -370,9 +370,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:tremor>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:tremor>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Tremor" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -422,9 +422,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:boogie>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:boogie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Boogie" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -474,9 +474,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:chorus>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Chorus" ;
         lv2:port [
                 lv2:symbol "S0" ;
@@ -526,9 +526,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:random_mode>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:random_mode>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Random Mode" ;
         lv2:port [
                 lv2:symbol "S0" ;

@@ -7,9 +7,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#dere:preset:dist1>
+<https://github.com/Stazed/rakarrack-plus#dere:preset:dist1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#dere> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
                 pset:value 0.0 
@@ -49,9 +49,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#dere:preset:dist2>
+<https://github.com/Stazed/rakarrack-plus#dere:preset:dist2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#dere> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
                 pset:value 0.0 
@@ -91,9 +91,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#dere:preset:dist3>
+<https://github.com/Stazed/rakarrack-plus#dere:preset:dist3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#dere> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
                 pset:value 0.0 

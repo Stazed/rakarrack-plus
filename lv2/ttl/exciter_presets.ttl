@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:plain> 
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:plain> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> ;
 	rdfs:label "Plain" ;
 	lv2:port [
 		lv2:symbol "GAIN" ;
@@ -51,9 +51,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:loudness> 
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:loudness> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> ;
 	rdfs:label "Loudness" ;
 	lv2:port [
 		lv2:symbol "GAIN" ;
@@ -96,9 +96,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:exciter_1> 
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_1> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> ;
 	rdfs:label "Exciter 1" ;
 	lv2:port [
 		lv2:symbol "GAIN" ;
@@ -141,9 +141,9 @@
 		pset:value 20.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:exciter_2> 
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_2> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> ;
 	rdfs:label "Exciter 2" ;
 	lv2:port [
 		lv2:symbol "GAIN" ;
@@ -186,9 +186,9 @@
 		pset:value 5660.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Exciter:preset:exciter_3> 
+<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_3> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Exciter> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> ;
 	rdfs:label "Exciter 3" ;
 	lv2:port [
 		lv2:symbol "GAIN" ;

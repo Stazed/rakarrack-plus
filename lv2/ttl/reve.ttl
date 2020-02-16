@@ -9,25 +9,25 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#reve_ui>
+# <https://github.com/Stazed/rakarrack-plus#reve_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#reve>
+<https://github.com/Stazed/rakarrack-plus#reve>
         a lv2:Plugin, lv2:ReverbPlugin ;
         doap:name "rkr Reverb" ;
         mod:brand "Rakarrack";
         doap:description "Reverb";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A simple, efficient reverb effect." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,
             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#reve_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#reve_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -161,68 +161,68 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:cathedral_1>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:cathedral_2>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:cathedral_3>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:hall_1>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:hall_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:hall_2>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:hall_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:room_1>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:room_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:room_2>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:room_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:basement>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:basement>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:tunnel>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:tunnel>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:echoed_1>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:echoed_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:echoed_2>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:echoed_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:verylong_1>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:verylong_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#reve:preset:verylong_2>
+<https://github.com/Stazed/rakarrack-plus#reve:preset:verylong_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#reve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
         rdfs:seeAlso <reve_presets.ttl> .
 

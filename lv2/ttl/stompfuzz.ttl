@@ -10,24 +10,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz_ui>
+# <https://github.com/Stazed/rakarrack-plus#StompBox_fuzz_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz>
+<https://github.com/Stazed/rakarrack-plus#StompBox_fuzz>
         a lv2:Plugin, lv2:DistortionPlugin ;
         doap:name "rkr StompBox:Fuzz" ;
         mod:brand "Rakarrack";
         mod:label "Stompbox:Fuzz";
         doap:description "Fuzz Pedal Emulator";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Physically-informed fuzz stompbox emulation. Based on several popular schematics, this is designed to capture the sound of an era more than emulate a specific model." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#StompBox_fuzz_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -111,12 +111,12 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz:preset:classic_fuzz>
+<https://github.com/Stazed/rakarrack-plus#StompBox_fuzz:preset:classic_fuzz>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox_fuzz> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz:preset:gnasty>
+<https://github.com/Stazed/rakarrack-plus#StompBox_fuzz:preset:gnasty>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox_fuzz> ;
         rdfs:seeAlso <stomp_presets.ttl> .

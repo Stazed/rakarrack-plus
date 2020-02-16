@@ -8,9 +8,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse:preset:echo_1>
+<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echoverse> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
         rdfs:label "Echo 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -45,9 +45,9 @@
         ] ;
         .
 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse:preset:echo_2>
+<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echoverse> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
         rdfs:label "Echo 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -82,9 +82,9 @@
         ] ;
         .
 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse:preset:echo_3>
+<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echoverse> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
         rdfs:label "Echo 3" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

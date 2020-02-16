@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:chorus_1> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_1> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Chorus 1" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -48,9 +48,9 @@
 		pset:value 0.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:chorus_2> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_2> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Chorus 2" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -90,9 +90,9 @@
 		pset:value 1.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:chorus_3> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_3> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Chorus 3" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -132,9 +132,9 @@
 		pset:value 0.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:celeste_1> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_1> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Celeste 1" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -174,9 +174,9 @@
 		pset:value 0.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:celeste_2> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_2> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Celeste 2" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -216,9 +216,9 @@
 		pset:value 0.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_1> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_1> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Flange 1" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -258,9 +258,9 @@
 		pset:value 0.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_2> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_2> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Flange 2" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -300,9 +300,9 @@
 		pset:value 0.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_3> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_3> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Flange 3" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -342,9 +342,9 @@
 		pset:value 0.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_4> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_4> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Flange 4" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -384,9 +384,9 @@
 		pset:value 1.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_5> 
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_5> 
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
 	rdfs:label "Flange 5" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;

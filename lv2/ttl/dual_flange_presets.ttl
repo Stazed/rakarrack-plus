@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:preset1>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Preset 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -58,9 +58,9 @@
         ] ;
         .
 	
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:flangewah>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flangewah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ; 
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ; 
         rdfs:label "FlangeWah" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -110,9 +110,9 @@
         ] ;
         .
 	
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:fbflange>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:fbflange>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ; 
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ; 
         rdfs:label "Feedback Flange" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -162,9 +162,9 @@
         ] ;
         .
 	
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:softflange>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:softflange>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Soft Flange" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -214,9 +214,9 @@
         ] ;
         .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:flanger>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flanger>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Flanger" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -266,9 +266,9 @@
         ] ;
         .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:chorus1>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Chorus 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -318,9 +318,9 @@
         ] ;
         .
 
-<http://rakarrack.sourceforge.net/effects.html#Dual_Flange:preset:chorus2>
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Dual_Flange> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Chorus 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

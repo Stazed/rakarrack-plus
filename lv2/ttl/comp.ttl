@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#comp_ui>
+# <https://github.com/Stazed/rakarrack-plus#comp_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#comp>
+<https://github.com/Stazed/rakarrack-plus#comp>
         a lv2:Plugin, lv2:CompressorPlugin ;
         doap:name "rkr Compressor" ;
         doap:description "compressor";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A flexible compressor with optional soft knee and makeup gain." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#comp_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#comp_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -151,27 +151,27 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#comp:preset:2_1>
+<https://github.com/Stazed/rakarrack-plus#comp:preset:2_1>
 	a pset:Preset ;
     rdfs:label "2:1" ;
 	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#comp> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 
-<http://rakarrack.sourceforge.net/effects.html#comp:preset:4_1>
+<https://github.com/Stazed/rakarrack-plus#comp:preset:4_1>
 	a pset:Preset ;
     rdfs:label "4:1" ;
 	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#comp> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 
-<http://rakarrack.sourceforge.net/effects.html#comp:preset:8_1>
+<https://github.com/Stazed/rakarrack-plus#comp:preset:8_1>
 	a pset:Preset ;
     rdfs:label "8:1" ;
 	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#comp> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 
-<http://rakarrack.sourceforge.net/effects.html#comp:preset:limiter>
+<https://github.com/Stazed/rakarrack-plus#comp:preset:limiter>
 	a pset:Preset ;
     rdfs:label "Limiter" ;
 	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#comp> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 

@@ -11,37 +11,37 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#delm_ui>
+# <https://github.com/Stazed/rakarrack-plus#delm_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#delm:group:del1>
+<https://github.com/Stazed/rakarrack-plus#delm:group:del1>
     a param:ControlGroup ;
     lv2:index 0 ;
     lv2:name "Delay 1" ;
     lv2:symbol "delline1" .
-<http://rakarrack.sourceforge.net/effects.html#delm:group:del2>
+<https://github.com/Stazed/rakarrack-plus#delm:group:del2>
     a param:ControlGroup ;
     lv2:index 1 ;
     lv2:name "Delay 2" ;
     lv2:symbol "delline2" .
 
-<http://rakarrack.sourceforge.net/effects.html#delm>
+<https://github.com/Stazed/rakarrack-plus#delm>
         a lv2:Plugin, lv2:DelayPlugin ;
         doap:name "rkr Musical Delay" ;
         mod:brand "Rakarrack";
         mod:label "Musical Delay";
         doap:description "Tempo Selectable Dual Delay";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Dual delay with delay times selectable by tempo and note subdivision." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,
             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#delm_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#delm_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -95,7 +95,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 7 ;
@@ -106,7 +106,7 @@
                 lv2:maximum 6 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:beat ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del1> ;
                 lv2:portProperty lv2:enumeration;
                 lv2:scalePoint [ rdfs:label "1"; rdf:value 1 ] ;
                 lv2:scalePoint [ rdfs:label "1/2"; rdf:value 2 ] ;
@@ -150,7 +150,7 @@
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 11 ;
@@ -169,7 +169,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del2> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 13 ;
@@ -180,7 +180,7 @@
                 lv2:maximum 6 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:beat ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del2> ;
                 lv2:portProperty lv2:enumeration;
                 lv2:scalePoint [ rdfs:label "1"; rdf:value 1 ] ;
                 lv2:scalePoint [ rdfs:label "1/2"; rdf:value 2 ] ;
@@ -197,7 +197,7 @@
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del2> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 15 ;
@@ -216,7 +216,7 @@
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 17 ;
@@ -226,16 +226,16 @@
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#delm:group:del2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del2> ;
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#delm:preset:echo_1>
+<https://github.com/Stazed/rakarrack-plus#delm:preset:echo_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#delm> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
         rdfs:seeAlso <mdel_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#delm:preset:echo_2>
+<https://github.com/Stazed/rakarrack-plus#delm:preset:echo_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#delm> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
         rdfs:seeAlso <mdel_presets.ttl> .

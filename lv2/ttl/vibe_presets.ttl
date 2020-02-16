@@ -7,9 +7,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:classic>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:classic>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Classic" ;
         lv2:port [
            lv2:symbol "WIDTH" ;
@@ -47,9 +47,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:stereo_classic>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:stereo_classic>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Stereo Classic" ;
         lv2:port [
            lv2:symbol "WIDTH" ;
@@ -87,9 +87,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:wide_vibe>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:wide_vibe>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Wide Vibe" ;
         lv2:port [
            lv2:symbol "WIDTH" ;
@@ -127,9 +127,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:classic_chorus>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:classic_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Classic Chorus" ;
         lv2:port [
            lv2:symbol "WIDTH" ;
@@ -167,9 +167,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:vibe_chorus>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:vibe_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Vibe Chorus" ;
         lv2:port [
            lv2:symbol "WIDTH" ;
@@ -207,9 +207,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:lush_chorus>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:lush_chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Lush Chorus" ;
         lv2:port [
            lv2:symbol "WIDTH" ;
@@ -247,9 +247,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:sick_phaser>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:sick_phaser>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Sick Phaser" ;
         lv2:port [
            lv2:symbol "WIDTH" ;
@@ -287,9 +287,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Vibe:preset:warble>
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:warble>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Vibe> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
         rdfs:label "Warble" ;
         lv2:port [
            lv2:symbol "WIDTH" ;

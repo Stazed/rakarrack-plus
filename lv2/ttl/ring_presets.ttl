@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:sawsin>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:sawsin>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "SawSin" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -53,9 +53,9 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:e_string>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:e_string>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "E String" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -99,9 +99,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:a_string>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:a_string>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "A String" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -145,9 +145,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:dissonance>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:dissonance>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "Dissonance" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -191,9 +191,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:fast_beat>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:fast_beat>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "Fast Beat" ;
     lv2:port [
         lv2:symbol "WETDRY" ;
@@ -237,9 +237,9 @@
     ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Ring:preset:ring_amp>
+<https://github.com/Stazed/rakarrack-plus#Ring:preset:ring_amp>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Ring> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "Ring Amp" ;
     lv2:port [
         lv2:symbol "WETDRY" ;

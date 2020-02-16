@@ -10,43 +10,43 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Shuffle_ui>
+# <https://github.com/Stazed/rakarrack-plus#Shuffle_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface ;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:group:low>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:group:low>
     a param:ControlGroup ;
     lv2:index 0 ;
     lv2:name "Low Band" ;
     lv2:symbol "low" .
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:group:mid1>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:group:mid1>
     a param:ControlGroup ;
     lv2:index 1 ;
     lv2:name "Mid Band 1" ;
     lv2:symbol "mid1" .
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:group:mid2>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:group:mid2>
     a param:ControlGroup ;
     lv2:index 2 ;
     lv2:name "Mid Band 2" ;
     lv2:symbol "mid2" .
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:group:high>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:group:high>
     a param:ControlGroup ;
     lv2:index 3 ;
     lv2:name "High Band" ;
     lv2:symbol "hi" .
 
-<http://rakarrack.sourceforge.net/effects.html#Shuffle>
+<https://github.com/Stazed/rakarrack-plus#Shuffle>
         a lv2:Plugin, lv2:SpatialPlugin ;
         doap:name "rkr Shuffle" ;
         doap:description "Stereo Shuffler (Mid/Side EQ)";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Creates interesting spatial effects. Converts stereo signal to Mid/Side and applys a parametric four band EQ to M or S channel. Effect based on Stereo Shuffling paper by Michael Gerzon." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Shuffle_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Shuffle_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -100,7 +100,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:low> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:low> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 7 ;
@@ -110,7 +110,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:mid1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:mid1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 8 ;
@@ -120,7 +120,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:mid2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:mid2> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 9 ;
@@ -130,7 +130,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:high> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:high> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 10 ;
@@ -141,7 +141,7 @@
                 lv2:maximum 1000 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:hz ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:low> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:low> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 11 ;
@@ -152,7 +152,7 @@
                 lv2:maximum 4000 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:hz ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:mid1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:mid1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 12 ;
@@ -163,7 +163,7 @@
                 lv2:maximum 8000 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:hz ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:mid2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:mid2> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 13 ;
@@ -174,7 +174,7 @@
                 lv2:maximum 26000 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:hz ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#Shuffle:group:high> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#Shuffle:group:high> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 14 ;
@@ -200,22 +200,22 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:preset:shuffle_1>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shuffle> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
         rdfs:seeAlso <shuffle_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:preset:shuffle_2>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shuffle> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
         rdfs:seeAlso <shuffle_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:preset:shuffle_3>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shuffle> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
         rdfs:seeAlso <shuffle_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Shuffle:preset:remover>
+<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:remover>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Shuffle> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
         rdfs:seeAlso <shuffle_presets.ttl> .

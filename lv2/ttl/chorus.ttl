@@ -9,24 +9,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#chor_ui>
+# <https://github.com/Stazed/rakarrack-plus#chor_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#chor>
+<https://github.com/Stazed/rakarrack-plus#chor>
         a lv2:Plugin, lv2:ChorusPlugin ;
         doap:name "rkr Flanger/Chorus" ;
         mod:brand "Rakarrack";
         mod:label "Flanger/Chorus";
         doap:description "Flanger/Chorus";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A flanger or chorus (depending on delay time) effect. Allows for fractional delays for a more intense effect." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#chor_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#chor_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -189,52 +189,52 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:chorus_1>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:chorus_2>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:chorus_3>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:celeste_1>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:celeste_2>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_1>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_2>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_3>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_4>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_4>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#chor:preset:flange_5>
+<https://github.com/Stazed/rakarrack-plus#chor:preset:flange_5>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#chor> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
         rdfs:seeAlso <chorus_presets.ttl> .

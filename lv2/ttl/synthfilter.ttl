@@ -10,22 +10,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Synthfilter_ui>
+# <https://github.com/Stazed/rakarrack-plus#Synthfilter_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter>
         a lv2:Plugin, lv2:FilterPlugin ;
         doap:name "rkr Synthfilter" ;
         doap:description "Envelope Controlled Low-Pass Filter";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A filter like what can be found in synthesizers. Up to 12 lowpass + 12 highpass filters with resonance. Cutoff frequency is controllable by LFO or volume envelope." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Synthfilter_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Synthfilter_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -227,37 +227,37 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:lowpass>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lowpass>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
         rdfs:seeAlso <synthfilter_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:highpass>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:highpass>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
         rdfs:seeAlso <synthfilter_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:bandpass>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:bandpass>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
         rdfs:seeAlso <synthfilter_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:lead_synth>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lead_synth>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
         rdfs:seeAlso <synthfilter_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:water>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:water>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
         rdfs:seeAlso <synthfilter_presets.ttl> .
         
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:pan_filter>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:pan_filter>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
         rdfs:seeAlso <synthfilter_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Synthfilter:preset:multi>
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:multi>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Synthfilter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
         rdfs:seeAlso <synthfilter_presets.ttl> .

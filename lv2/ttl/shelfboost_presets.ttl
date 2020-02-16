@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#ShelfBoost:preset:trebble>
+<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:trebble>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#ShelfBoost> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
         rdfs:label "Treble" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
@@ -27,9 +27,9 @@
                 pset:value 24.0
         ] .
 
-<http://rakarrack.sourceforge.net/effects.html#ShelfBoost:preset:mid>
+<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:mid>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#ShelfBoost> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
         rdfs:label "Mid" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
@@ -48,9 +48,9 @@
                 pset:value 24.0
         ] .
 
-<http://rakarrack.sourceforge.net/effects.html#ShelfBoost:preset:bass>
+<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:bass>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#ShelfBoost> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
         rdfs:label "Bass" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
@@ -70,9 +70,9 @@
         ] .
 
 # I worry that this will not work since there is no default limiter
-# <http://rakarrack.sourceforge.net/effects.html#ShelfBoost:preset:distortion_1>
+# <https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:distortion_1>
 #         a pset:Preset ;
-#         lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#ShelfBoost> ;
+#         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
 #         rdfs:label "Distortion 1" ;
 #         lv2:port [
 #                 lv2:symbol "GAIN" ;

@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Echoverse_ui>
+# <https://github.com/Stazed/rakarrack-plus#Echoverse_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse>
+<https://github.com/Stazed/rakarrack-plus#Echoverse>
         a lv2:Plugin, lv2:ReverbPlugin ;
         doap:name "rkr Echoverse" ;
         doap:description "Thick Echo";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Configurable echo designed to be stable for thick, in-your-face walls of sound." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Echoverse_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Echoverse_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -160,20 +160,20 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse:preset:echo_1>
+<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echoverse> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
         rdfs:label "Echo 1" ;
         rdfs:seeAlso <echoverse_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse:preset:echo_2>
+<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echoverse> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
         rdfs:label "Echo 2" ;
         rdfs:seeAlso <echoverse_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Echoverse:preset:echo_3>
+<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Echoverse> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
         rdfs:label "Echo 3" ;
         rdfs:seeAlso <echoverse_presets.ttl> .

@@ -10,23 +10,23 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#StompBox_ui>
+# <https://github.com/Stazed/rakarrack-plus#StompBox_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox>
+<https://github.com/Stazed/rakarrack-plus#StompBox>
         a lv2:Plugin, lv2:DistortionPlugin ;
         doap:name "rkr StompBox" ;
         mod:brand "Rakarrack";
         doap:description "Distortion Pedal Emulator";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Physically-informed distortion stompbox emulation with 8 different distortion-character modes. Intended to allow quick dialing-in to the tone you want." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#StompBox_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#StompBox_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -128,42 +128,42 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:odie>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:odie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:grunger>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:grunger>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:hard_dist>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:hard_dist>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:ratula>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:ratula>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:classic_dist>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_dist>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:mobid_impalement>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:mobid_impalement>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:sharp_metal>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:sharp_metal>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#StompBox:preset:classic_fuzz>
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_fuzz>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#StompBox> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .

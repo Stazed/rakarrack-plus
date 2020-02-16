@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:chamber>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:chamber>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
 	rdfs:label "Chamber" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -56,12 +56,12 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Chamber.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Chamber.rvb>
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:concrete_stairwell>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:concrete_stairwell>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
 	rdfs:label "Concrete Stairwell" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -109,13 +109,13 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Concrete_Stairwell.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Concrete_Stairwell.rvb>
 	] 
     .
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:hall>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:hall>
    	a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
 	rdfs:label "Hall" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -163,13 +163,13 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Hall.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Hall.rvb>
 	] 
     .
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:med_hall>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:med_hall>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
  	rdfs:label "Medium Hall" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -217,13 +217,13 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Med_Hall.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Med_Hall.rvb>
 	] 
     .
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:Room>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:Room>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
   	rdfs:label "Room" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -271,13 +271,13 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Large_Room.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Large_Room.rvb>
 	] 
     .
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:hall2>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:hall2>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
    	rdfs:label "Hall 2" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -325,13 +325,13 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Large_Hall.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Large_Hall.rvb>
 	] 
     .
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:guitar>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:guitar>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
     rdfs:label "Guitar" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -379,13 +379,13 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Guitar_Ambience.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Guitar_Ambience.rvb>
 	] 
     . 
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:studio>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:studio>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
     rdfs:label "Studio" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -433,14 +433,14 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Studio.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Studio.rvb>
 	] 
     . 
    
 
-<http://rakarrack.sourceforge.net/effects.html#Reverbtron:preset:chathedral>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:chathedral>
     a pset:Preset ;
-    lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Reverbtron> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
     rdfs:label "Cathedral" ;
 	lv2:port [
 		lv2:symbol "WETDRY" ;
@@ -488,6 +488,6 @@
 		pset:value 0.0
 	] ;
 	state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Reverbtron:rvbfile> <Santa_Lucia.rvb>
+		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Santa_Lucia.rvb>
 	] 
     . 

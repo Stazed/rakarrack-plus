@@ -9,22 +9,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Sequence_ui>
+# <https://github.com/Stazed/rakarrack-plus#Sequence_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence>
+<https://github.com/Stazed/rakarrack-plus#Sequence>
         a lv2:Plugin, lv2:FilterPlugin ;
         doap:name "rkr Sequence" ;
         doap:description "Arpeggiated Volume/Filter/Pitch";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "8-step modulation sequencer. Each step is user-adjustable. Signal amplitude, filter cutoff frequency, or pitch shifting modulations available." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#Sequence_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Sequence_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -220,58 +220,58 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:jumpy>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:jumpy>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:stair_step>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:stair_step>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:mild>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:mild>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:wahwah>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:wahwah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:filter_pan>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:filter_pan>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:stepper>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:stepper>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:shifter>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:shifter>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:tremor>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:tremor>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:boogie>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:boogie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:chorus>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:chorus>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Sequence:preset:random_mode>
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:random_mode>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Sequence> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .

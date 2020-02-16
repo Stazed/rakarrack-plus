@@ -11,34 +11,34 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#VaryBand_ui>
+# <https://github.com/Stazed/rakarrack-plus#VaryBand_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface ;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo1>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo1>
     a param:ControlGroup ;
     lv2:index 0 ;
     lv2:name "LFO 1" ;
     lv2:symbol "lfo1" .
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo2>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo2>
     a param:ControlGroup ;
     lv2:index 0 ;
     lv2:name "LFO 2" ;
     lv2:symbol "lfo2" .
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand>
+<https://github.com/Stazed/rakarrack-plus#VaryBand>
         a lv2:Plugin, lv2:ModulatorPlugin ;
         doap:name "rkr VaryBand" ;
         mod:brand "Rakarrack" ;
         doap:description "Multi-Band Volume Modulator";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Multi-band tremolo effect allowing 2 LFOs to modulate volume of any combination of 4 frequency bands." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#VaryBand_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#VaryBand_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -93,7 +93,7 @@
                 lv2:maximum 600 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:bpm ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 7 ;
@@ -116,7 +116,7 @@
                 lv2:scalePoint [ rdfs:label "Random Sample and Hold"; rdf:value 9 ] ;
                 lv2:scalePoint [ rdfs:label "Triangle Topped Sine"; rdf:value 10 ] ;
                 lv2:scalePoint [ rdfs:label "Triangle Bottomed Sine"; rdf:value 11 ] ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 8 ;
@@ -126,7 +126,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo1> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo1> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 9 ;
@@ -137,7 +137,7 @@
                 lv2:maximum 600 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:bpm ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo2> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 10 ;
@@ -160,7 +160,7 @@
                 lv2:scalePoint [ rdfs:label "Random Sample and Hold"; rdf:value 9 ] ;
                 lv2:scalePoint [ rdfs:label "Triangle Topped Sine"; rdf:value 10 ] ;
                 lv2:scalePoint [ rdfs:label "Triangle Bottomed Sine"; rdf:value 11 ] ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo2> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 11 ;
@@ -170,7 +170,7 @@
                 lv2:minimum -64 ;
                 lv2:maximum 63 ;
                 lv2:portProperty lv2:integer ;
-                pg:group <http://rakarrack.sourceforge.net/effects.html#VaryBand:group:lfo2> ;
+                pg:group <https://github.com/Stazed/rakarrack-plus#VaryBand:group:lfo2> ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 12 ;
@@ -261,17 +261,17 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:preset:vary1>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#VaryBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
         rdfs:seeAlso <varyband_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:preset:vary2>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#VaryBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
         rdfs:seeAlso <varyband_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#VaryBand:preset:vary3>
+<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#VaryBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
         rdfs:seeAlso <varyband_presets.ttl> .

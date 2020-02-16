@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#pan:preset:autopan>
+<https://github.com/Stazed/rakarrack-plus#pan:preset:autopan>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#pan> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#pan> ;
 	rdfs:label "AutoPan" ;
 	lv2:port [
 		lv2:symbol "AUTO" ;
@@ -39,9 +39,9 @@
 		pset:value 64.0
 	] .
 
-<http://rakarrack.sourceforge.net/effects.html#pan:preset:extra_stereo>
+<https://github.com/Stazed/rakarrack-plus#pan:preset:extra_stereo>
 	a pset:Preset ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#pan> ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#pan> ;
 	rdfs:label "Extra Stereo" ;
 	lv2:port [
 		lv2:symbol "AUTO" ;

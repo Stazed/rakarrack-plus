@@ -9,24 +9,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#aphas_ui>
+# <https://github.com/Stazed/rakarrack-plus#aphas_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#aphas>
+<https://github.com/Stazed/rakarrack-plus#aphas>
         a lv2:Plugin, lv2:PhaserPlugin ;
         doap:name "rkr Analog Phaser" ;
         mod:brand "Rakarrack";
         mod:label "Analog Phaser";
         doap:description "Phaser";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A physically-informed, highly-configurable digital model of an analog FET phaser effect." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#aphas_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#aphas_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -199,33 +199,33 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#aphas:preset:phaser_1>
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:phaser_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#aphas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
         rdfs:seeAlso <aphas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#aphas:preset:phaser_2>
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:phaser_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#aphas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
         rdfs:seeAlso <aphas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#aphas:preset:phaser_3>
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:phaser_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#aphas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
         rdfs:seeAlso <aphas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#aphas:preset:phaser_4>
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:phaser_4>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#aphas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
         rdfs:seeAlso <aphas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#aphas:preset:phaser_5>
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:phaser_5>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#aphas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
         rdfs:seeAlso <aphas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#aphas:preset:phaser_6>
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:phaser_6>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#aphas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
         rdfs:seeAlso <aphas_presets.ttl> .
 

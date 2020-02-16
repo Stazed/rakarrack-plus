@@ -10,22 +10,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#CompBand_ui>
+# <https://github.com/Stazed/rakarrack-plus#CompBand_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface ;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#CompBand>
+<https://github.com/Stazed/rakarrack-plus#CompBand>
         a lv2:Plugin, lv2:CompressorPlugin ;
         doap:name "rkr CompBand" ;
         doap:description "Multi-Band Compressor";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Multi-band compressor with 4 frequency bands and wet/dry mix control. Each band has individual ratio and threshold controls." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#CompBand_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#CompBand_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -189,17 +189,17 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#CompBand:preset:good_start>
+<https://github.com/Stazed/rakarrack-plus#CompBand:preset:good_start>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CompBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
         rdfs:seeAlso <compband_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#CompBand:preset:loudness>
+<https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CompBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
         rdfs:seeAlso <compband_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#CompBand:preset:loudness2>
+<https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CompBand> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
         rdfs:seeAlso <compband_presets.ttl> .

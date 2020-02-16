@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#gate_ui>
+# <https://github.com/Stazed/rakarrack-plus#gate_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#gate>
+<https://github.com/Stazed/rakarrack-plus#gate>
         a lv2:Plugin, lv2:gatePlugin ;
         doap:name "rkr NoiseGate" ;
         doap:description "Dynamic gate";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Based on Gate, Steve Harris LADSPA plugin." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#gate_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#gate_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -130,17 +130,17 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#gate:preset:0dB>
+<https://github.com/Stazed/rakarrack-plus#gate:preset:0dB>
 	a pset:Preset ;
 	rdfs:seeAlso <gate_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#gate> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
 
-<http://rakarrack.sourceforge.net/effects.html#gate:preset:-10dB>
+<https://github.com/Stazed/rakarrack-plus#gate:preset:-10dB>
 	a pset:Preset ;
 	rdfs:seeAlso <gate_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#gate> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
 
-<http://rakarrack.sourceforge.net/effects.html#gate:preset:-20dB>
+<https://github.com/Stazed/rakarrack-plus#gate:preset:-20dB>
 	a pset:Preset ;
 	rdfs:seeAlso <gate_presets.ttl> ;
-	lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#gate> .
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .

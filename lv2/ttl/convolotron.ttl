@@ -17,33 +17,33 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#Convolotron_ui>
+# <https://github.com/Stazed/rakarrack-plus#Convolotron_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile>
     a lv2:Parameter ;
     rdfs:label "Impulse file" ;
     rdfs:range atom:Path ;
     mediatype: mime:audio ;
     .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron>
+<https://github.com/Stazed/rakarrack-plus#Convolotron>
     a lv2:Plugin, lv2:ConvolutionPlugin ;
     doap:name "rkr Convolotron" ;
     doap:description "Convolution-Based Reverb" ;
-    lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+    lv2:project <https://github.com/Stazed/rakarrack-plus>;
     lv2:minorVersion 0 ;
     lv2:microVersion 0 ;
     rdfs:comment "Convolution-based reverb effect." ;
     lv2:requiredFeature urid:map, worker:schedule ;
     lv2:optionalFeature lv2:hardRTCapable, state:loadDefaultState ;
     lv2:extensionData worker:interface, state:interface ;
-#    ui:ui  <http://rakarrack.sourceforge.net/effects.html#Convolotron_ui> ;
-    patch:writable <http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> ;
+#    ui:ui  <https://github.com/Stazed/rakarrack-plus#Convolotron_ui> ;
+    patch:writable <https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile> ;
 
     lv2:port [
             a lv2:InputPort, lv2:AudioPort ;
@@ -164,28 +164,28 @@
             lv2:portProperty lv2:integer ;
     ] ;
     state:state [
-		<http://rakarrack.sourceforge.net/effects.html#Convolotron:sndfile> <Marshall_JCM200.wav>
+		<https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile> <Marshall_JCM200.wav>
 	] 
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Marshall_JCM200>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Marshall_JCM200>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
         rdfs:seeAlso <convolotron_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Fender_Superchamp>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Fender_Superchamp>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
         rdfs:seeAlso <convolotron_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
         rdfs:seeAlso <convolotron_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#Convolotron:preset:Mesa_Boogie_2>
+<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Convolotron> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
         rdfs:seeAlso <convolotron_presets.ttl> .
 
 

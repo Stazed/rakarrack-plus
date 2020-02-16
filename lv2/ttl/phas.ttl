@@ -9,25 +9,25 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#phas_ui>
+# <https://github.com/Stazed/rakarrack-plus#phas_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#phas>
+<https://github.com/Stazed/rakarrack-plus#phas>
         a lv2:Plugin, lv2:PhaserPlugin ;
         doap:name "rkr Phaser" ;
         mod:brand "Rakarrack";
         mod:label "Phaser";
         doap:description "Phaser";
         doap:license <http://opensource.org/licenses/GPL-2.0> ;
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "More mild digital phaser with exponential LFO sweep." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#phas_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#phas_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -190,33 +190,33 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_1>
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
         rdfs:seeAlso <phas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_2>
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
         rdfs:seeAlso <phas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_3>
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
         rdfs:seeAlso <phas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_4>
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_4>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
         rdfs:seeAlso <phas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_5>
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_5>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
         rdfs:seeAlso <phas_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#phas:preset:phaser_6>
+<https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_6>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#phas> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
         rdfs:seeAlso <phas_presets.ttl> .
 

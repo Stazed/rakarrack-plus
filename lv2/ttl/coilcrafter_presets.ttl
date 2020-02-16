@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:htos>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:htos>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "H to S" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
@@ -34,9 +34,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:stoh>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:stoh>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "S to H" ;
         lv2:port [
                 lv2:symbol "GAIN" ;
@@ -63,9 +63,9 @@
 	.
 
 # presets for individual coils (origins)
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofso>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofso>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Fender Strat (old)" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -75,9 +75,9 @@
                 pset:value 42.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofsn>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofsn>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Fender Strat (new)" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -87,9 +87,9 @@
                 pset:value 23.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:oss>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:oss>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Squier Strat" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -99,9 +99,9 @@
                 pset:value 18.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofh>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofh>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Fender Humbucker" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -111,9 +111,9 @@
                 pset:value 22.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogp90>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogp90>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Gibson P90" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -123,9 +123,9 @@
                 pset:value 21.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogs>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogs>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Gibson Standard" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -135,9 +135,9 @@
                 pset:value 17.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogm>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogm>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Gibson Mini" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -147,9 +147,9 @@
                 pset:value 17.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogsl6s>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogsl6s>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Origin: Gibson Super L6S" ;
         lv2:port [
                 lv2:symbol "F1" ;
@@ -161,9 +161,9 @@
 	.
 
 # presets for individual coils (destinations)
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfso>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfso>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Fender Strat (old)" ;
         lv2:port [
                 lv2:symbol "F2" ;
@@ -173,9 +173,9 @@
                 pset:value 42.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfsn>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfsn>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Fender Strat (new)" ;
         lv2:port [
                 lv2:symbol "F2" ;
@@ -185,9 +185,9 @@
                 pset:value 23.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dss>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dss>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Squier Strat" ;
         lv2:port [
                 lv2:symbol "F2" ;
@@ -197,9 +197,9 @@
                 pset:value 18.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfh>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfh>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Fender Humbucker" ;
         lv2:port [
                 lv2:symbol "F2" ;
@@ -209,9 +209,9 @@
                 pset:value 22.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgp90>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgp90>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Gibson P90" ;
         lv2:port [
                 lv2:symbol "F2" ;
@@ -221,9 +221,9 @@
                 pset:value 21.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgs>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgs>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Gibson Standard" ;
         lv2:port [
                 lv2:symbol "F2" ;
@@ -233,9 +233,9 @@
                 pset:value 17.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgm>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgm>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Gibson Mini" ;
         lv2:port [
                 lv2:symbol "F2" ;
@@ -245,9 +245,9 @@
                 pset:value 17.0
         ] ;
 	.
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgsl6s>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgsl6s>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:label "Destination: Gibson Super L6S" ;
         lv2:port [
                 lv2:symbol "F2" ;

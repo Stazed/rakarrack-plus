@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:wahwah>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:wahwah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "WahWah" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -70,9 +70,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:mutron>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:mutron>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Mutron" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -134,9 +134,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:phase_wah>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phase_wah>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Phase Wah" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -198,9 +198,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:phaser>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phaser>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Succulent Phaser" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -262,9 +262,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:quack_quack>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:quack_quack>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Quacky" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -326,9 +326,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#MuTroMojo:preset:smoothtron>
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:smoothtron>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#MuTroMojo> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Smoothtron" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

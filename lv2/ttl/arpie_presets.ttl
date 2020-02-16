@@ -6,9 +6,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:arpie_1>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Arpie 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -46,9 +46,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:arpie_2>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Arpie 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -86,9 +86,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:arpie_3>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Arpie 3" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -126,9 +126,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:simple_arpie>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:simple_arpie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Simple Arpie" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -166,9 +166,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:canyon>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:canyon>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Canyon" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -206,9 +206,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:panning_arpie_1>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Panning Arp 1" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -246,9 +246,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:panning_arpie_2>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Panning Arp 2" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -286,9 +286,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:panning_arpie_3>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Panning Arp 3" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
@@ -326,9 +326,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Arpie:preset:feedback_arpie>
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:feedback_arpie>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Arpie> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Feedback Arpie" ;
         lv2:port [
                 lv2:symbol "WETDRY" ;

@@ -8,24 +8,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#dere_ui>
+# <https://github.com/Stazed/rakarrack-plus#dere_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#dere>
+<https://github.com/Stazed/rakarrack-plus#dere>
         a lv2:Plugin, lv2:DistortionPlugin ;
         doap:name "rkr Derelict" ;
         doap:description "Distortion with Extra Color";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A very configurable waveshaping distortion module with resonance control of the filters for extra color." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,
             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#dere_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#dere_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -207,20 +207,20 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#dere:preset:dist1>
+<https://github.com/Stazed/rakarrack-plus#dere:preset:dist1>
         a pset:Preset ;
         rdfs:label "Distortion 1" ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#dere> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
         rdfs:seeAlso <dere_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#dere:preset:dist2>
+<https://github.com/Stazed/rakarrack-plus#dere:preset:dist2>
         a pset:Preset ;
         rdfs:label "Distortion 2" ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#dere> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
         rdfs:seeAlso <dere_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#dere:preset:dist3>
+<https://github.com/Stazed/rakarrack-plus#dere:preset:dist3>
         a pset:Preset ;
         rdfs:label "Distortion 3" ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#dere> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
         rdfs:seeAlso <dere_presets.ttl> .

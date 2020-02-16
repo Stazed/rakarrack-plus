@@ -11,23 +11,23 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#CoilCrafter_ui>
+# <https://github.com/Stazed/rakarrack-plus#CoilCrafter_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter>
         a lv2:Plugin, lv2:FilterPlugin ;
         doap:name "rkr Coil Crafter" ;
         mod:brand "Rakarrack";
         doap:description "Guitar Pickup Emulator";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "A equalizer that makes your pickups sound like different pickups. Can switch a strat to sound like humbuckers in a strat etc." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#CoilCrafter_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#CoilCrafter_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -134,80 +134,80 @@
 	.
 
 
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:htos>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:htos>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:stoh>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:stoh>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
 
 # presets for individual coils (origins)
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofso>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofso>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofsn>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofsn>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:oss>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:oss>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ofh>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofh>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogp90>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogp90>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogs>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogs>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogm>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogm>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:ogsl6s>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogsl6s>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
 
 # presets for individual coils (destinations)
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfso>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfso>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfsn>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfsn>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dss>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dss>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dfh>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfh>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgp90>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgp90>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgs>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgs>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgm>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgm>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .
-<http://rakarrack.sourceforge.net/effects.html#CoilCrafter:preset:dgsl6s>
+<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgsl6s>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#CoilCrafter> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
         rdfs:seeAlso <coilcrafter_presets.ttl> .

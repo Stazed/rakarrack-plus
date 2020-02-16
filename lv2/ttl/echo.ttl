@@ -8,22 +8,22 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <http://rakarrack.sourceforge.net/effects.html#echo_ui>
+# <https://github.com/Stazed/rakarrack-plus#echo_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rkrlv2_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<http://rakarrack.sourceforge.net/effects.html#eco>
+<https://github.com/Stazed/rakarrack-plus#eco>
         a lv2:Plugin, lv2:ReverbPlugin ;
         doap:name "rkr Echo" ;
         doap:description "Echo";
-        lv2:project <http://rakarrack.sourceforge.net/effects.html>;
+        lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Configurable echo effect with a reverse echo feature." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <http://rakarrack.sourceforge.net/effects.html#eco_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#eco_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -145,56 +145,56 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:echo_1>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:echo_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Echo 1" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:echo_2>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:echo_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Echo 2" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:echo_3>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:echo_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Echo 3" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:simple_echo>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:simple_echo>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Simple Echo" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:canyon>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:canyon>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Canyon" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:panning_echo_1>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:panning_echo_1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Panning Echo 1" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:panning_echo_2>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:panning_echo_2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Panning Echo 2" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:panning_echo_3>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:panning_echo_3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Panning Echo 3" ;
         rdfs:seeAlso <echo_presets.ttl> .
 
-<http://rakarrack.sourceforge.net/effects.html#eco:preset:feedback_echo>
+<https://github.com/Stazed/rakarrack-plus#eco:preset:feedback_echo>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#eco> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         rdfs:label "Feedback Echo" ;
         rdfs:seeAlso <echo_presets.ttl> .

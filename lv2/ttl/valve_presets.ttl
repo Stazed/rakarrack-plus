@@ -7,9 +7,9 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rakarrack.sourceforge.net/effects.html#Valve:preset:valve1>
+<https://github.com/Stazed/rakarrack-plus#Valve:preset:valve1>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Valve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
                 pset:value 0.0 
@@ -52,9 +52,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Valve:preset:valve2>
+<https://github.com/Stazed/rakarrack-plus#Valve:preset:valve2>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Valve> ; 
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ; 
         lv2:port [
                 lv2:symbol "WETDRY" ;
                 pset:value 0.0 
@@ -97,9 +97,9 @@
         ] ;
 	.
 
-<http://rakarrack.sourceforge.net/effects.html#Valve:preset:valve3>
+<https://github.com/Stazed/rakarrack-plus#Valve:preset:valve3>
         a pset:Preset ;
-        lv2:appliesTo <http://rakarrack.sourceforge.net/effects.html#Valve> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
         lv2:port [
                 lv2:symbol "WETDRY" ;
                 pset:value 0.0 

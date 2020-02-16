@@ -82,7 +82,7 @@ def remap_special(efxindex, paramindex, value):
 def remap(efxindex, paramindex):
     return{
 
-         (0, -1) : ('rkr EQ', 'http://rakarrack.sourceforge.net/effects.html#eql') ,
+         (0, -1) : ('rkr EQ', 'https://github.com/Stazed/rakarrack-plus#eql') ,
          (0, 0) : (3, '31 Hz', 'HZ31', -64) ,
          (0, 1) : (4, '63 Hz', 'HZ63', -64) ,
          (0, 2) : (5, '125 Hz', 'HZ125', -64) ,
@@ -97,7 +97,7 @@ def remap(efxindex, paramindex):
          (0, 11) : (2, 'Q', 'Q', -64) ,
          (0, 12) : (-1,) ,
 
-         (1, -1) : ('rkr Compressor', 'http://rakarrack.sourceforge.net/effects.html#comp') ,
+         (1, -1) : ('rkr Compressor', 'https://github.com/Stazed/rakarrack-plus#comp') ,
          (1, 0) : (1, 'Threshold', 'THRESHOLD', 0) ,
          (1, 1) : (2, 'RATIO', 'RATIO', 0) ,
          (1, 2) : (3, 'Output Gain', 'OUTPUT', 0) ,
@@ -109,7 +109,7 @@ def remap(efxindex, paramindex):
          (1, 8) : (9, 'Peak', 'PEAK', 0) ,
          (1, 9) : (-1,) ,
 
-         (2, -1) : ('rkr Distorsion', 'http://rakarrack.sourceforge.net/effects.html#dist') ,
+         (2, -1) : ('rkr Distorsion', 'https://github.com/Stazed/rakarrack-plus#dist') ,
          (2, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (2, 1) : (2, 'Panning', 'PAN', -64) ,
          (2, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
@@ -126,7 +126,7 @@ def remap(efxindex, paramindex):
          (2, 13) : (-1,) ,
 
          #overdrive
-         (3, -1) : ('rkr Distorsion', 'http://rakarrack.sourceforge.net/effects.html#dist') ,
+         (3, -1) : ('rkr Distorsion', 'https://github.com/Stazed/rakarrack-plus#dist') ,
          (3, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (3, 1) : (2, 'Panning', 'PAN', -64) ,
          (3, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
@@ -142,7 +142,7 @@ def remap(efxindex, paramindex):
          (3, 12) : (12, 'Suboctave', 'OCT', 0) ,
          (3, 13) : (-1,) ,
 
-         (4, -1) : ('rkr Echo', 'http://rakarrack.sourceforge.net/effects.html#eco') ,
+         (4, -1) : ('rkr Echo', 'https://github.com/Stazed/rakarrack-plus#eco') ,
          (4, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (4, 1) : (2, 'Panning', 'PAN', -64) ,
          (4, 2) : (3, 'Delay', 'DELAY', 0) ,
@@ -154,7 +154,7 @@ def remap(efxindex, paramindex):
          (4, 8) : (9, 'Direct', 'DIRECT', 0) ,
          (4, 9) : (-1,) ,
 
-         (5, -1) : ('rkr Flanger/Chorus', 'http://rakarrack.sourceforge.net/effects.html#chor') ,
+         (5, -1) : ('rkr Flanger/Chorus', 'https://github.com/Stazed/rakarrack-plus#chor') ,
          (5, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (5, 1) : (2, 'Panning', 'PAN', -64) ,
          (5, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -170,7 +170,7 @@ def remap(efxindex, paramindex):
          (5, 12) : (12, 'Intense', 'INTENSE', 0) ,
          (5, 13) : (-1,) ,
 
-         (6, -1) : ('rkr Phaser', 'http://rakarrack.sourceforge.net/effects.html#phas') ,
+         (6, -1) : ('rkr Phaser', 'https://github.com/Stazed/rakarrack-plus#phas') ,
          (6, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (6, 1) : (2, 'Panning', 'PAN', -64) ,
          (6, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -185,7 +185,7 @@ def remap(efxindex, paramindex):
          (6, 11) : (12, 'Phase', 'PHASE', 0) ,
          (6, 12) : (-1,) ,
 
-         (7, -1) : ('rkr Flanger/Chorus', 'http://rakarrack.sourceforge.net/effects.html#chor') ,
+         (7, -1) : ('rkr Flanger/Chorus', 'https://github.com/Stazed/rakarrack-plus#chor') ,
          (7, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (7, 1) : (2, 'Panning', 'PAN', -64) ,
          (7, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -201,7 +201,7 @@ def remap(efxindex, paramindex):
          (7, 12) : (12, 'Intense', 'INTENSE', 0) ,
          (7, 13) : (-1,) ,
 
-         (8, -1) : ('rkr Reverb', 'http://rakarrack.sourceforge.net/effects.html#reve') ,
+         (8, -1) : ('rkr Reverb', 'https://github.com/Stazed/rakarrack-plus#reve') ,
          (8, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (8, 1) : (2, 'Panning', 'PAN', -64) ,
          (8, 2) : (3, 'Time', 'TIME', 0) ,
@@ -216,7 +216,7 @@ def remap(efxindex, paramindex):
          (8, 11) : (10, 'Room Size', 'RS', 0) ,
          (8, 12) : (-1,) ,
 
-         (9, -1) : ('rkr Parametric EQ', 'http://rakarrack.sourceforge.net/effects.html#eqp') ,
+         (9, -1) : ('rkr Parametric EQ', 'https://github.com/Stazed/rakarrack-plus#eqp') ,
          (9, 0) : (2, 'Frequency', 'LFREQ', 0) ,
          (9, 1) : (3, 'Gain', 'LGAIN', -64) ,
          (9, 2) : (4, 'Width', 'LQ', -64) ,
@@ -229,7 +229,7 @@ def remap(efxindex, paramindex):
          (9, 9) : (1, 'Gain', 'GAIN', -64) ,
          (9, 10) : (-1,) ,
 
-         (10, -1) : ('rkr WahWah', 'http://rakarrack.sourceforge.net/effects.html#wha') ,
+         (10, -1) : ('rkr WahWah', 'https://github.com/Stazed/rakarrack-plus#wha') ,
          (10, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (10, 1) : (2, 'Panning', 'PAN', -64) ,
          (10, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -243,7 +243,7 @@ def remap(efxindex, paramindex):
          (10, 10) : (11, 'Filter Type', 'MODE', 0) ,
          (10, 11) : (-1,) ,
 
-         (11, -1) : ('rkr AlienWah', 'http://rakarrack.sourceforge.net/effects.html#awha') ,
+         (11, -1) : ('rkr AlienWah', 'https://github.com/Stazed/rakarrack-plus#awha') ,
          (11, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (11, 1) : (2, 'Panning', 'PAN', -64) ,
          (11, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -257,12 +257,12 @@ def remap(efxindex, paramindex):
          (11, 10) : (11, 'Phase', 'PHASE', 0) ,
          (11, 11) : (-1,) ,
 
-         (12, -1) : ('rkr Cabinet', 'http://rakarrack.sourceforge.net/effects.html#cabe') ,
+         (12, -1) : ('rkr Cabinet', 'https://github.com/Stazed/rakarrack-plus#cabe') ,
          (12, 0) : (1, 'Preset', 'PRESET', 0) ,
          (12, 1) : (2, 'Gain', 'GAIN', -64) ,
          (12, 2) : (-1,) ,
 
-         (13, -1) : ('rkr Pan', 'http://rakarrack.sourceforge.net/effects.html#pan') ,
+         (13, -1) : ('rkr Pan', 'https://github.com/Stazed/rakarrack-plus#pan') ,
          (13, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (13, 1) : (2, 'Panning', 'PAN', -64) ,
          (13, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -274,7 +274,7 @@ def remap(efxindex, paramindex):
          (13, 8) : (9, 'Extra Stereo Enable', 'EXTRA_ON', 0) ,
          (13, 9) : (-1,) ,
 
-         (14, -1) : ('rkr Harmonizer (no midi)', 'http://rakarrack.sourceforge.net/effects.html#har_no_mid') ,
+         (14, -1) : ('rkr Harmonizer (no midi)', 'https://github.com/Stazed/rakarrack-plus#har_no_mid') ,
          (14, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (14, 1) : (2, 'Pan', 'PAN', -64) ,
          (14, 2) : (3, 'Gain', 'GAIN', -64) ,
@@ -289,7 +289,7 @@ def remap(efxindex, paramindex):
          (14, 10) : (0, 'SKIP', 'SKIP', 0) ,
          (14, 11) : (-1,) ,
 
-         (15, -1) : ('rkr Musical Delay', 'http://rakarrack.sourceforge.net/effects.html#delm') ,
+         (15, -1) : ('rkr Musical Delay', 'https://github.com/Stazed/rakarrack-plus#delm') ,
          (15, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (15, 1) : (2, 'Panning', 'PAN1', -64) ,
          (15, 2) : (3, 'Delay', 'DEL1', 0) ,
@@ -305,7 +305,7 @@ def remap(efxindex, paramindex):
          (15, 12) : (13, 'Gain', 'GAIN2', 0) ,
          (15, 13) : (-1,) ,
 
-         (16, -1) : ('rkr NoiseGate', 'http://rakarrack.sourceforge.net/effects.html#gate') ,
+         (16, -1) : ('rkr NoiseGate', 'https://github.com/Stazed/rakarrack-plus#gate') ,
          (16, 0) : (1, 'Threshold', 'THRESHOLD', 0) ,
          (16, 1) : (2, 'Rang', 'RANGE', 0) ,
          (16, 2) : (3, 'Attack Time', 'ATTACK', 0) ,
@@ -315,7 +315,7 @@ def remap(efxindex, paramindex):
          (16, 6) : (7, 'Hold', 'HOLD', 0) ,
          (16, 7) : (-1,) ,
 
-         (17, -1) : ('rkr Derelict', 'http://rakarrack.sourceforge.net/effects.html#dere') ,
+         (17, -1) : ('rkr Derelict', 'https://github.com/Stazed/rakarrack-plus#dere') ,
          (17, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (17, 1) : (2, 'Panning', 'PAN', -64) ,
          (17, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
@@ -330,7 +330,7 @@ def remap(efxindex, paramindex):
          (17, 11) : (12, 'Suboctave', 'OCT', 0) ,
          (17, 12) : (-1,) ,
 
-         (18, -1) : ('rkr Analog Phaser', 'http://rakarrack.sourceforge.net/effects.html#aphas') ,
+         (18, -1) : ('rkr Analog Phaser', 'https://github.com/Stazed/rakarrack-plus#aphas') ,
          (18, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (18, 1) : (2, 'Distort', 'DISTORT', 0) ,
          (18, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -346,7 +346,7 @@ def remap(efxindex, paramindex):
          (18, 12) : (13, 'Hyper', 'HYPER', 0) ,
          (18, 13) : (-1,) ,
 
-         (19, -1) : ('rkr Valve', 'http://rakarrack.sourceforge.net/effects.html#Valve') ,
+         (19, -1) : ('rkr Valve', 'https://github.com/Stazed/rakarrack-plus#Valve') ,
          (19, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (19, 1) : (2, 'Panning', 'PAN', -64) ,
          (19, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
@@ -362,7 +362,7 @@ def remap(efxindex, paramindex):
          (19, 12) : (13, 'Presence', 'PRES', 0) ,
          (19, 13) : (-1,) ,
 
-         (20, -1) : ('rkr Dual Flange', 'http://rakarrack.sourceforge.net/effects.html#Dual_Flange') ,
+         (20, -1) : ('rkr Dual Flange', 'https://github.com/Stazed/rakarrack-plus#Dual_Flange') ,
          (20, 0) : (1, 'Wet/Dry', 'WETDRY', 64) ,
          (20, 1) : (2, 'Pan', 'PAN', 0) ,
          (20, 2) : (3, 'Left/Right Crossover', 'LRC', 0) ,
@@ -380,7 +380,7 @@ def remap(efxindex, paramindex):
          (20, 14) : (15, 'Intense', 'INTENSE', 0) ,
          (20, 15) : (-1,) ,
 
-         (21, -1) : ('rkr Ring', 'http://rakarrack.sourceforge.net/effects.html#Ring') ,
+         (21, -1) : ('rkr Ring', 'https://github.com/Stazed/rakarrack-plus#Ring') ,
          (21, 0) : (1, 'Wet/Dry', 'WETDRY', 64) ,
          (21, 1) : (2, 'Pan', 'PAN', 0) ,
          (21, 2) : (3, 'Left/Right Crossover', 'LRCr', 64) ,
@@ -396,7 +396,7 @@ def remap(efxindex, paramindex):
          (21, 12) : (13, 'Auto-Frequency', 'AFREQ', 0) ,
          (21, 13) : (-1,) ,
 
-         (22, -1) : ('rkr Exciter', 'http://rakarrack.sourceforge.net/effects.html#Exciter') ,
+         (22, -1) : ('rkr Exciter', 'https://github.com/Stazed/rakarrack-plus#Exciter') ,
          (22, 0) : (1, 'Gain', 'GAIN', 0) ,
          (22, 1) : (2, '1st Harmonic', 'HAR1', 0) ,
          (22, 2) : (3, '2nd Harmonic', 'HAR2', 0) ,
@@ -412,7 +412,7 @@ def remap(efxindex, paramindex):
          (22, 12) : (13, 'High-Pass Filter Cutoff', 'HPF', 0) ,
          (22, 13) : (-1,) ,
 
-         (23, -1) : ('rkr DistBand', 'http://rakarrack.sourceforge.net/effects.html#DistBand') ,
+         (23, -1) : ('rkr DistBand', 'https://github.com/Stazed/rakarrack-plus#DistBand') ,
          (23, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (23, 1) : (2, 'Panning', 'PAN', -64) ,
          (23, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
@@ -430,7 +430,7 @@ def remap(efxindex, paramindex):
          (23, 14) : (15, 'Stereo', 'STEREO', 0) ,
          (23, 15) : (-1,) ,
 
-         (24, -1) : ('rkr Arpie', 'http://rakarrack.sourceforge.net/effects.html#Arpie') ,
+         (24, -1) : ('rkr Arpie', 'https://github.com/Stazed/rakarrack-plus#Arpie') ,
          (24, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (24, 1) : (2, 'Panning', 'PAN', -64) ,
          (24, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -444,7 +444,7 @@ def remap(efxindex, paramindex):
          (24, 10) : (11, 'Subdivision', 'SUBD', 0) ,
          (24, 11) : (-1,) ,
 
-         (25, -1) : ('rkr Expander', 'http://rakarrack.sourceforge.net/effects.html#Expander') ,
+         (25, -1) : ('rkr Expander', 'https://github.com/Stazed/rakarrack-plus#Expander') ,
          (25, 0) : (1, 'Threshold', 'THRESHOLD', 0) ,
          (25, 1) : (2, 'Shape', 'SHAPE', 0) ,
          (25, 2) : (3, 'Attack Time', 'ATTACK', 0) ,
@@ -454,7 +454,7 @@ def remap(efxindex, paramindex):
          (25, 6) : (7, 'Output Gain', 'OUTPUT', 0) ,
          (25, 7) : (-1,) ,
 
-         (26, -1) : ('rkr Shuffle', 'http://rakarrack.sourceforge.net/effects.html#Shuffle') ,
+         (26, -1) : ('rkr Shuffle', 'https://github.com/Stazed/rakarrack-plus#Shuffle') ,
          (26, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (26, 1) : (2, 'Gain', 'LGAIN', 0) ,
          (26, 2) : (3, 'Gain', 'M1GAIN', 0) ,
@@ -468,7 +468,7 @@ def remap(efxindex, paramindex):
          (26, 10) : (11, 'Filtered Band', 'BAND', 0) ,
          (26, 11) : (-1,) ,
 
-         (27, -1) : ('rkr Synthfilter', 'http://rakarrack.sourceforge.net/effects.html#Synthfilter') ,
+         (27, -1) : ('rkr Synthfilter', 'https://github.com/Stazed/rakarrack-plus#Synthfilter') ,
          (27, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (27, 1) : (2, 'Distort', 'DIST', 0) ,
          (27, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -487,7 +487,7 @@ def remap(efxindex, paramindex):
          (27, 15) : (16, 'HPF/LPF Offset', 'OFFSET', 0) ,
          (27, 16) : (-1,) ,
 
-         (28, -1) : ('rkr VaryBand', 'http://rakarrack.sourceforge.net/effects.html#VaryBand') ,
+         (28, -1) : ('rkr VaryBand', 'https://github.com/Stazed/rakarrack-plus#VaryBand') ,
          (28, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (28, 1) : (2, 'Tempo', 'TEMPO1', 0) ,
          (28, 2) : (3, 'LFO Type', 'TYPE1', 0) ,
@@ -507,7 +507,7 @@ def remap(efxindex, paramindex):
          (28, 16) : (-1,) ,
 
          #convo
-         (29, -1) : ('rkr Convolotron', 'http://rakarrack.sourceforge.net/effects.html#Convolotron') ,
+         (29, -1) : ('rkr Convolotron', 'https://github.com/Stazed/rakarrack-plus#Convolotron') ,
          (29, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (29, 1) : (2, 'Pan', 'PAN', -64) ,
          (29, 2) : (3, 'Safe', 'SAFE', 0) ,
@@ -524,7 +524,7 @@ def remap(efxindex, paramindex):
          #looper
          (30,-1) : (0,) ,#not used
 
-         (31, -1) : ('rkr MuTroMojo', 'http://rakarrack.sourceforge.net/effects.html#MuTroMojo') ,
+         (31, -1) : ('rkr MuTroMojo', 'https://github.com/Stazed/rakarrack-plus#MuTroMojo') ,
          (31, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (31, 1) : (2, 'Resonance', 'Q', 0) ,
          (31, 2) : (3, 'Tempo', 'TEMPO', 0) ,
@@ -549,7 +549,7 @@ def remap(efxindex, paramindex):
          (31, 21) : (19, 'Exponential Wah', 'AMODE', 0) ,
          (31, 22) : (-1,) ,
 
-         (32, -1) : ('rkr Echoverse', 'http://rakarrack.sourceforge.net/effects.html#Echoverse') ,
+         (32, -1) : ('rkr Echoverse', 'https://github.com/Stazed/rakarrack-plus#Echoverse') ,
          (32, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (32, 1) : (2, 'Panning', 'PAN', -64) ,
          (32, 2) : (3, 'TEMPO', 'DELAY', 0) ,
@@ -562,7 +562,7 @@ def remap(efxindex, paramindex):
          (32, 9) : (10, 'Extra Stereo', 'ES', 0) ,
          (32, 10) : (-1,) ,
 
-         (33, -1) : ('rkr Coil Crafter', 'http://rakarrack.sourceforge.net/effects.html#CoilCrafter') ,
+         (33, -1) : ('rkr Coil Crafter', 'https://github.com/Stazed/rakarrack-plus#CoilCrafter') ,
          (33, 0) : (1, 'Gain', 'GAIN', 0) ,
          (33, 1) : (2, 'SKIP', 'SKIP', 0) ,#preset         
          (33, 2) : (3, 'SKIP', 'SKIP', 0) ,#origin preset
@@ -574,7 +574,7 @@ def remap(efxindex, paramindex):
          (33, 8) : (9, 'Neck Pickup', 'MODE', 0) ,
          (33, 9) : (-1,) ,
 
-         (34, -1) : ('rkr Shelf Boost', 'http://rakarrack.sourceforge.net/effects.html#ShelfBoost') ,
+         (34, -1) : ('rkr Shelf Boost', 'https://github.com/Stazed/rakarrack-plus#ShelfBoost') ,
          (34, 0) : (1, 'Gain', 'GAIN', 0) ,
          (34, 1) : (2, 'Presence', 'PRES', 0) ,
          (34, 2) : (3, 'Tone', 'TONE', 0) ,
@@ -582,7 +582,7 @@ def remap(efxindex, paramindex):
          (34, 4) : (5, 'Level', 'LEVEL', 0) ,
          (34, 5) : (-1,) ,
 
-         (35, -1) : ('rkr Vocoder', 'http://rakarrack.sourceforge.net/effects.html#Vocoder') ,
+         (35, -1) : ('rkr Vocoder', 'https://github.com/Stazed/rakarrack-plus#Vocoder') ,
          (35, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (35, 1) : (2, 'Pan', 'PAN', -64) ,
          (35, 2) : (3, 'Smear', 'MUF', 0) ,
@@ -594,12 +594,12 @@ def remap(efxindex, paramindex):
          (35, 8) : (9, 'Auxiliary Input Level', 'INPUT', 0) ,
          (35, 9) : (-1,) ,
 
-         (36, -1) : ('rkr Sustainer', 'http://rakarrack.sourceforge.net/effects.html#Sustainer') ,
+         (36, -1) : ('rkr Sustainer', 'https://github.com/Stazed/rakarrack-plus#Sustainer') ,
          (36, 0) : (1, 'Gain', 'GAIN', 0) ,
          (36, 1) : (2, 'Sustain', 'SUS', 0) ,
          (36, 2) : (-1,) ,
 
-         (37, -1) : ('rkr Sequence', 'http://rakarrack.sourceforge.net/effects.html#Sequence') ,
+         (37, -1) : ('rkr Sequence', 'https://github.com/Stazed/rakarrack-plus#Sequence') ,
          (37, 0) : (1, 'Step 1', 'S0', 0) ,
          (37, 1) : (2, 'Step 2', 'S2', 0) ,
          (37, 2) : (3, 'Step 3', 'S3', 0) ,
@@ -617,7 +617,7 @@ def remap(efxindex, paramindex):
          (37, 14) : (15, 'Step Adjustment Range', 'RANGE', 0) ,
          (37, 15) : (-1,) ,
 
-         (38, -1) : ('rkr Shifter', 'http://rakarrack.sourceforge.net/effects.html#Shifter') ,
+         (38, -1) : ('rkr Shifter', 'https://github.com/Stazed/rakarrack-plus#Shifter') ,
          (38, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (38, 1) : (2, 'Pan', 'PAN', -64) ,
          (38, 2) : (3, 'Gain', 'GAIN', -64) ,
@@ -630,7 +630,7 @@ def remap(efxindex, paramindex):
          (38, 9) : (10, 'Interval', 'WHAMMY', 0) ,
          (38, 10) : (-1,) ,
 
-         (39, -1) : ('rkr StompBox', 'http://rakarrack.sourceforge.net/effects.html#StompBox') ,
+         (39, -1) : ('rkr StompBox', 'https://github.com/Stazed/rakarrack-plus#StompBox') ,
          (39, 0) : (1, 'Level', 'LEVEL', 0) ,
          (39, 1) : (2, 'High', 'HI', 0) ,
          (39, 2) : (3, 'Mid', 'MID', 0) ,
@@ -639,7 +639,7 @@ def remap(efxindex, paramindex):
          (39, 5) : (6, 'Mode', 'MODE', 0) ,
          (39, 6) : (-1,) ,
 
-#         (39, -1) : ('rkr StompBox:Fuzz', 'http://rakarrack.sourceforge.net/effects.html#StompBox_fuzz') ,
+#         (39, -1) : ('rkr StompBox:Fuzz', 'https://github.com/Stazed/rakarrack-plus#StompBox_fuzz') ,
 #         (39, 0) : (1, 'Level', 'LEVEL', 0) ,
 #         (39, 1) : (2, 'Tone', 'HI', 0) ,
 #         (39, 2) : (3, 'Mid', 'MID', 0) ,
@@ -647,7 +647,7 @@ def remap(efxindex, paramindex):
 #         (39, 4) : (5, 'Gain', 'GAIN', 0) ,
 #         (39, 5) : (-1,) ,
 
-         (40, -1) : ('rkr Reverbtron', 'http://rakarrack.sourceforge.net/effects.html#Reverbtron') ,
+         (40, -1) : ('rkr Reverbtron', 'https://github.com/Stazed/rakarrack-plus#Reverbtron') ,
          (40, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (40, 1) : (2, 'Fade', 'FADE', 0) ,
          (40, 2) : (3, 'Safe', 'SAFE', 0) ,
@@ -666,7 +666,7 @@ def remap(efxindex, paramindex):
          (40, 15) : (14, 'Diffusion', 'DIFFUSE', 0) ,
          (40, 16) : (-1,) ,
 
-         (41, -1) : ('rkr Echotron', 'http://rakarrack.sourceforge.net/effects.html#Echotron') ,
+         (41, -1) : ('rkr Echotron', 'https://github.com/Stazed/rakarrack-plus#Echotron') ,
          (41, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (41, 1) : (2, 'Filter Depth', 'DEPTH', -64) ,
          (41, 2) : (3, 'LFO Width', 'WIDTH', 0) ,
@@ -685,7 +685,7 @@ def remap(efxindex, paramindex):
          (41, 15) : (14, 'Activate Filters', 'AF', 0) ,
          (41, 16) : (-1,) ,
 
-         (42, -1) : ('rkr StereoHarmonizer (no midi)', 'http://rakarrack.sourceforge.net/effects.html#StereoHarm_no_mid') ,
+         (42, -1) : ('rkr StereoHarmonizer (no midi)', 'https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid') ,
          (42, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (42, 1) : (2, 'Left Gain', 'GAINL', -64) ,
          (42, 2) : (3, 'Left Interval', 'INTL', -12) ,
@@ -701,7 +701,7 @@ def remap(efxindex, paramindex):
          (42, 11) : (11, 'Left/Right Crossover', 'LRC', 0) ,
          (42, 12) : (-1,) ,
 
-         (43, -1) : ('rkr CompBand', 'http://rakarrack.sourceforge.net/effects.html#CompBand') ,
+         (43, -1) : ('rkr CompBand', 'https://github.com/Stazed/rakarrack-plus#CompBand') ,
          (43, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (43, 1) : (2, 'Low Band Ratio', 'LR', 0) ,
          (43, 2) : (3, 'Mid Band 1 Ratio', 'M1R', 0) ,
@@ -717,7 +717,7 @@ def remap(efxindex, paramindex):
          (43, 12) : (13, 'Gain', 'GAIN', 0) ,
          (43, 13) : (-1,) ,
 
-         (44, -1) : ('rkr OpticalTrem', 'http://rakarrack.sourceforge.net/effects.html#Otrem') ,
+         (44, -1) : ('rkr OpticalTrem', 'https://github.com/Stazed/rakarrack-plus#Otrem') ,
          (44, 0) : (1, 'Depth', 'DEPTH', 0) ,
          (44, 1) : (2, 'Tempo', 'TEMPO', 0) ,
          (44, 2) : (3, 'Randomness', 'RND', 0) ,
@@ -727,7 +727,7 @@ def remap(efxindex, paramindex):
          (44, 6) : (7, 'Invert', 'INV', 0) ,
          (44, 7) : (-1,) ,
 
-         (45, -1) : ('rkr Vibe', 'http://rakarrack.sourceforge.net/effects.html#Vibe') ,
+         (45, -1) : ('rkr Vibe', 'https://github.com/Stazed/rakarrack-plus#Vibe') ,
          (45, 0) : (1, 'Width', 'WIDTH', 0) ,
          (45, 1) : (2, 'Tempo', 'TEMPO', 0) ,
          (45, 2) : (3, 'Randomness', 'RND', 0) ,
@@ -741,7 +741,7 @@ def remap(efxindex, paramindex):
          (45, 10) : (11, 'Stereo', 'STEREO', 0) ,
          (45, 11) : (-1,) ,
 
-         (46, -1) : ('rkr Infinity', 'http://rakarrack.sourceforge.net/effects.html#Infinity') ,
+         (46, -1) : ('rkr Infinity', 'https://github.com/Stazed/rakarrack-plus#Infinity') ,
          (46, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (46, 1) : (2, 'Band 1 Gain', 'B1', 0) ,
          (46, 2) : (3, 'Band 2 Gain', 'B2', 0) ,
