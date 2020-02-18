@@ -76,6 +76,7 @@ Echotron
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |      -64 to 64    |  LRC  - Left/Right Crossover
     Depth                       |                |  -64 to 64    |                   |      -64 to 64    |  DEPTH -  Filter Depth
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 64    |  STDF - LFO L/R Delay
+    Number of Taps              |                |Varies - file  |                   |       1 to 127    |  LENGTH
 
 Echoverse
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
@@ -107,6 +108,7 @@ Harmonizer
 Infinity
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |  -64 to 64    |                   |      -64 to 64    |  STDF - Sweep L/R Delay
+    Band (1 to 8)               |                |  -64 to 64    |                   |      -64 to 64    |  B# - Band # Gain
 
 Looper
     Wet/Dry                     |                |  -64 to 63    |                   |       --------    |
@@ -118,6 +120,8 @@ MusicalDelay
 MuTroMojo
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |  -64 to 63    |                   |      -64 to 63    |  STDL - LFO L/R Delay
+    E. Sens                     |                |  -64 to 64    |                   |      -64 to 64    |  SENSE - Envelope Sensitivity
+    LP/BP/HP                    |                |  -64 to 64    |                   |      -64 to 64    |  LP/BP/HP - Lowpass/High/Band Level
 
 NoiseGate
     Wet/Dry                     |                |    none       |                   |       none        |
