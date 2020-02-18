@@ -1,22 +1,22 @@
 
-Effect Name                     | Rakarrack-plus | Rakarrack     | RakarrackPlus.lv2 |   rkr.lv2         |
+Effect Name                     | Rakarrack-plus | Rakarrack     | RakarrackPlus.lv2 |   rkr.lv2         |      Notes       
 -------------------------------- ---------------- --------------- ------------------- -------------------
 
 AlienWah
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - rkrlv2
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCR - Left/Right Crossover
 
 
 Analog Phaser
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |  STDL - rkrlv2
 
 Arpie
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr - Left/Right Crossover
 
 Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -24,8 +24,8 @@ Cabinet
 Chorus
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCR - Left/Right Crossover
 
 Coil Crafter
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -43,94 +43,135 @@ Convolotron
 Derelict
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
 
 DistBand
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 64    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRCr
 
 Distortion
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
 
 Dual Flange
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
+    Left/Right Cross (L/R.Cr)   |                |   0 to 127    |                   |       0 to 127    |  LRC
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
 
 Echo
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
+    L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
 
 Echotron
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |      -64 to 64    |  LRC  - Left/Right Crossover
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 64    |  STDF - LFO L/R Delay
 
 Echoverse
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
 
 EQ
     Wet/Dry                     |                |    none       |                   |       none        |
 
 Exciter
     Wet/Dry                     |                |    none       |                   |       none        |
+    Har 1 to 10                 |                |   -64 to 64   |                   |     -64 to 64     |
 
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
 
 Flanger
-    Wet/Dry                     |                |  -64 to 63    |                   |       --------    |
+    Wet/Dry                     |                |  -64 to 63    |                   |      CHORUS       |
+    Pan                         |                |  -64 to 63    |                   |       --------    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       --------    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       --------    |  
 
 Harmonizer
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Infinity
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)      |                |  -64 to 64    |                   |      -64 to 64    |  STDF - Sweep L/R Delay
 
 Looper
     Wet/Dry                     |                |  -64 to 63    |                   |       --------    |
 
 MusicalDelay
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRC  - Left/Right Crossover
 
 MuTroMojo
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)      |                |  -64 to 63    |                   |      -64 to 63    |  STDL - LFO L/R Delay
 
 NoiseGate
     Wet/Dry                     |                |    none       |                   |       none        |
 
 Opticaltrem
     Wet/Dry                     |                |    none       |                   |       none        |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDF - LFO L/R Delay
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Overdrive
-    Wet/Dry                     |                |  -64 to 63    |                   |      ---------    |
+    Wet/Dry                     |                |  -64 to 63    |                   |      DISTORTION   |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
 
 Pan
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
 
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
 
 Phaser
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |  STDL - LFO L/R Delay
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |      -64 to 64    |  LRCR
 
 Reverb
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Reverbtron
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Ring
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRCr
+    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 Sequence
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Q                           |                |  -64 to 64    |                   |      -64 to 64    | 
+    St.df                       |                |   0 to 7      |                   |       0 to 7      |  LAG - Right Channel Step Lag
 
 ShelfBoost
     Wet/Dry                     |                |     none      |                   |         none      |
 
 Shifter
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Shuffle
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Q                           |                |  -64 to 64    |                   |      -64 to 64    |  Q -  Width
 
 StereoHarm
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRC - Left/Right Crossover
 
 StompBox
     Wet/Dry                     |                |     none      |                   |          none     |
@@ -140,25 +181,33 @@ Sustainer
 
 Synthfilter
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
+    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
+    E.Sens                      |                |  -64 to 64    |                   |      -64 to 64    |  SENSE -  Envelope Sensitivity
 
 Valve
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr - Left/Right Crossover
 
 VaryBand
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)   1  |                |   0 to 127    |                   |      -64 to 63    |  STDL1 - LFO L/R Delay 1
+    LFO L/R Delay  (St.df)   2  |                |   0 to 127    |                   |      -64 to 63    |  STDL2 - LFO L/R Delay 2
 
 Vibe
-    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 128    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
+    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 128    |  LRCR - Left/Right Crossover
+    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 Vocoder
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 WahWah
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
-
-------------------------------------------------
-Pan                             |                |  -64 to 63    |                   |      -64 to 63    |
-LFO L/R Delay  (St.df)          |                |   0 to 127    |                   |      -64 to 63    |
-Left/Right Crossover (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
 
