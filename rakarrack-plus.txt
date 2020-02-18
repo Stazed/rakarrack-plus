@@ -1,0 +1,164 @@
+
+Effect Name                     | Rakarrack-plus | Rakarrack     | RakarrackPlus.lv2 |   rkr.lv2         |
+-------------------------------- ---------------- --------------- ------------------- -------------------
+
+AlienWah
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+
+
+Analog Phaser
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |
+
+Arpie
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+
+Cabinet
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Chorus
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+
+Coil Crafter
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+CompBand
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+Compressor
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Convolotron
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+
+Derelict
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+
+DistBand
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+Distortion
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Dual Flange
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+Echo
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Echotron
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+Echoverse
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+EQ
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Exciter
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Expander
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Flanger
+    Wet/Dry                     |                |  -64 to 63    |                   |       --------    |
+
+Harmonizer
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Infinity
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Looper
+    Wet/Dry                     |                |  -64 to 63    |                   |       --------    |
+
+MusicalDelay
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+MuTroMojo
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+NoiseGate
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Opticaltrem
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Overdrive
+    Wet/Dry                     |                |  -64 to 63    |                   |      ---------    |
+
+Pan
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Parametric EQ
+    Wet/Dry                     |                |    none       |                   |       none        |
+
+Phaser
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Reverb
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Reverbtron
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+Ring
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+Sequence
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+ShelfBoost
+    Wet/Dry                     |                |     none      |                   |         none      |
+
+Shifter
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Shuffle
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+StereoHarm
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+StompBox
+    Wet/Dry                     |                |     none      |                   |          none     |
+
+Sustainer
+    Wet/Dry                     |                |     none      |                   |          none     |
+
+Synthfilter
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Valve
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+VaryBand
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+Vibe
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+Vocoder
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+
+WahWah
+    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+
+
+------------------------------------------------
+Pan                             |                |  -64 to 63    |                   |      -64 to 63    |
+LFO L/R Delay  (St.df)          |                |   0 to 127    |                   |      -64 to 63    |
+Left/Right Crossover (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |
+
