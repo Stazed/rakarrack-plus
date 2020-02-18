@@ -8,10 +8,10 @@ AlienWah
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - rkrlv2
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCR - Left/Right Crossover
 
-
 Analog Phaser
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |  STDL - rkrlv2
+    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
 
 Arpie
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
@@ -39,6 +39,7 @@ Compressor
 Convolotron
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
 
 Derelict
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
@@ -59,7 +60,8 @@ Dual Flange
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
     Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
     Left/Right Cross (L/R.Cr)   |                |   0 to 127    |                   |       0 to 127    |  LRC
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
+    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |  STDL - LFO L/R Delay
 
 Echo
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
@@ -70,13 +72,16 @@ Echo
 Echotron
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |      -64 to 64    |  LRC  - Left/Right Crossover
+    Depth                       |                |  -64 to 64    |                   |      -64 to 64    |  DEPTH -  Filter Depth
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 64    |  STDF - LFO L/R Delay
 
 Echoverse
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
+    Angle                       |                |  -64 to 64    |                   |      -64 to 63    |  ANGLE
 
 EQ
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -87,6 +92,7 @@ Exciter
 
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
+    Level (Output Gain)         |                |   1 to 127    |                   |       1 to 127    |  OUTPUT - Output Gain
 
 Flanger
     Wet/Dry                     |                |  -64 to 63    |                   |      CHORUS       |
