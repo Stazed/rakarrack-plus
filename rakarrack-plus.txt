@@ -143,13 +143,13 @@ Pan
 
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
-    Mid Frequency (Mid F.)      |                |  800 to 8000  |                   |   80 to 8000      |  MFREQ
+    Mid Frequency (Mid F.)      |   800 to 8000  |  800 to 8000  |    800 to 8000    |   80 to 8000      |  MFREQ
 
 Phaser
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |  STDL - LFO L/R Delay
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |      -64 to 64    |  LRCR
+    Left/Right Cross (L/R.Cr)   |   -64 to 63    |  -64 to 63    |     -64 to 63     |      -64 to 64    |  LRCR
 
 Reverb
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
@@ -187,7 +187,7 @@ Check label Rev (Rakarrack) vs. BAND - Filtered Band - rkrlv2
 StereoHarm
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRC - Left/Right Crossover
-    Gain L                      |                |  -64 to 64    |                   |      -64 to 63    |  GAINL -  Left Gain
+    Gain L                      |   -64 to 64    |  -64 to 64    |    -64 to 64      |      -64 to 63    |  GAINL -  Left Gain
 
 StompBox
     Wet/Dry                     |                |     none      |                   |          none     |
