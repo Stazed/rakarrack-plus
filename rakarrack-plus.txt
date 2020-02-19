@@ -143,6 +143,7 @@ Pan
 
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
+    Mid Frequency (Mid F.)      |                |  800 to 8000  |                   |   80 to 8000      |  MFREQ
 
 Phaser
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
@@ -157,6 +158,8 @@ Reverb
 Reverbtron
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
+    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
+    Stretch                     |                |  -64 to 64    |                   |      -64 to 64    |  STRETCH -  Time Stretch
 
 Ring
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
@@ -170,6 +173,7 @@ Sequence
 
 ShelfBoost
     Wet/Dry                     |                |     none      |                   |         none      |
+    Pres.                       |                |  -64 to 64    |                   |      -64 to 64    |  PRES - Presence
 
 Shifter
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
@@ -178,10 +182,12 @@ Shifter
 Shuffle
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
     Q                           |                |  -64 to 64    |                   |      -64 to 64    |  Q -  Width
+Check label Rev (Rakarrack) vs. BAND - Filtered Band - rkrlv2
 
 StereoHarm
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRC - Left/Right Crossover
+    Gain L                      |                |  -64 to 64    |                   |      -64 to 63    |  GAINL -  Left Gain
 
 StompBox
     Wet/Dry                     |                |     none      |                   |          none     |
@@ -197,7 +203,7 @@ Synthfilter
 
 Valve
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
-    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
+    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr - Left/Right Crossover
 
 VaryBand
@@ -216,8 +222,9 @@ Vocoder
     Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
     Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
-WahWah
+WahWah  (DynamicFilter.C)
     Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-
+    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH - LFO L/R Delay
+Check "MODE" - "Filter Type"                                                                  0 to 4        -- Add Selection box
 
