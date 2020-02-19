@@ -428,7 +428,6 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_HPF->labelcolor(FL_BACKGROUND2_COLOR);
   revtron_HPF->maximum(127);
   revtron_HPF->step(1);
-  revtron_HPF->value(26000);
   revtron_HPF->textcolor(FL_BACKGROUND2_COLOR);
   revtron_HPF->callback((Fl_Callback*)cb_revtron_HPF);
   revtron_HPF->align(Fl_Align(FL_ALIGN_LEFT));

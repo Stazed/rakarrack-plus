@@ -370,6 +370,7 @@ Vocoder::out(float * efxoutl, float * efxoutr)
         memcpy(efxoutr, tmpr, sizeof (float)*nPERIOD);
     }
 
+    /* The auxiliary volume level meter */
     vulevel = (float) CLAMP(rap2dB(maxgain), -48.0, 15.0);
 }
 
