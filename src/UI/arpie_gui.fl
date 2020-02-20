@@ -4,7 +4,7 @@ header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} ArpieGui {
   user_data 1 open
-  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -30,7 +30,7 @@ rgui->findpos(24,(int)o->value(),o);}
     user_data 12024
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
-arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
+arpie_WD->value(rkr->efx_Arpie->getpar(0));
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
 arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
@@ -87,8 +87,8 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
  rgui->getMIDIControl(212);
  return;
 } 
-rkr->efx_Arpie->changepar(0,(int)(o->value()+64));}
-    xywh {51 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Arpie->changepar(0,(int)(o->value()));} selected
+    xywh {51 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_arpe {
@@ -127,7 +127,7 @@ rkr->efx_Arpie->changepar(2,(int)o->value());}
   Fl_Choice arpie_subdiv {
     label SubDivision
     user_data 12
-    callback {rkr->efx_Arpie->changepar(10,(int)o->value());} open selected
+    callback {rkr->efx_Arpie->changepar(10,(int)o->value());} open
     xywh {78 82 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
   } {}

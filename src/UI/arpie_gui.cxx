@@ -21,7 +21,7 @@ void ArpieGui::cb_arpie_activar(Fl_Light_Button* o, void* v) {
 void ArpieGui::cb_arpie_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
-arpie_WD->value(rkr->efx_Arpie->getpar(0)-64);
+arpie_WD->value(rkr->efx_Arpie->getpar(0));
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
 arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
@@ -56,7 +56,7 @@ void ArpieGui::cb_arpie_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(212);
  return;
 } 
-rkr->efx_Arpie->changepar(0,(int)(o->value()+64));
+rkr->efx_Arpie->changepar(0,(int)(o->value()));
 }
 void ArpieGui::cb_arpie_WD(SliderW* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_WD_i(o,v);
@@ -212,8 +212,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_WD->labelfont(0);
   arpie_WD->labelsize(10);
   arpie_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  arpie_WD->minimum(-64);
-  arpie_WD->maximum(63);
+  arpie_WD->maximum(127);
   arpie_WD->step(1);
   arpie_WD->textcolor(FL_BACKGROUND2_COLOR);
   arpie_WD->callback((Fl_Callback*)cb_arpie_WD);
