@@ -21,7 +21,7 @@ void AlienwahGui::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
 void AlienwahGui::cb_Alienwah_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
-Alienwah_WD->value(rkr->efx_Alienwah->getpar(0)-64);
+Alienwah_WD->value(rkr->efx_Alienwah->getpar(0));
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
 Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
@@ -51,7 +51,7 @@ void AlienwahGui::cb_Alienwah_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(55);
  return;
 } 
-rkr->efx_Alienwah->changepar(0,(int)(o->value()+64));
+rkr->efx_Alienwah->changepar(0,(int)(o->value()));
 }
 void AlienwahGui::cb_Alienwah_WD(SliderW* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_WD_i(o,v);
@@ -204,8 +204,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_WD->labelfont(0);
   Alienwah_WD->labelsize(10);
   Alienwah_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  Alienwah_WD->minimum(-64);
-  Alienwah_WD->maximum(63);
+  Alienwah_WD->maximum(127);
   Alienwah_WD->step(1);
   Alienwah_WD->textcolor(FL_BACKGROUND2_COLOR);
   Alienwah_WD->callback((Fl_Callback*)cb_Alienwah_WD);
