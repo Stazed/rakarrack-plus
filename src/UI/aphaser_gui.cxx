@@ -21,7 +21,7 @@ void AphaserGui::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
 void AphaserGui::cb_aphaser_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
-aphaser_WD->value(rkr->efx_APhaser->getpar(0)-64);
+aphaser_WD->value(rkr->efx_APhaser->getpar(0));
 aphaser_pan->value(rkr->efx_APhaser->getpar(1));
 aphaser_freq->value(rkr->efx_APhaser->getpar(2));
 aphaser_lfotype->value(rkr->efx_APhaser->getpar(4));
@@ -54,7 +54,7 @@ void AphaserGui::cb_aphaser_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(117);
  return;
 } 
-rkr->efx_APhaser->changepar(0,(int)(o->value()+64));
+rkr->efx_APhaser->changepar(0,(int)(o->value()));
 }
 void AphaserGui::cb_aphaser_WD(SliderW* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_WD_i(o,v);
@@ -207,8 +207,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_WD->labelfont(0);
   aphaser_WD->labelsize(10);
   aphaser_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  aphaser_WD->minimum(-64);
-  aphaser_WD->maximum(63);
+  aphaser_WD->maximum(127);
   aphaser_WD->step(1);
   aphaser_WD->textcolor(FL_BACKGROUND2_COLOR);
   aphaser_WD->callback((Fl_Callback*)cb_aphaser_WD);
