@@ -1,0 +1,90 @@
+@prefix atom: <http://lv2plug.in/ns/ext/atom#> .
+@prefix lv2: <http://lv2plug.in/ns/lv2core#> .
+@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix state: <http://lv2plug.in/ns/ext/state#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/Stazed/rakarrack-plus#Overdrive:preset:overdrive_1>
+	a pset:Preset ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
+#	rdfs:label "overdrive 1" ;
+	lv2:port [
+		lv2:symbol "WETDRY" ;
+		pset:value 84.0
+	] , [
+		lv2:symbol "PAN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LRCr" ;
+		pset:value 99.0
+	] , [
+		lv2:symbol "DRIVE" ;
+		pset:value 56.0
+	] , [
+		lv2:symbol "LEVEL" ;
+		pset:value 40.0
+	] , [
+		lv2:symbol "TYPE" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "NEG" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LPF" ;
+		pset:value 6703.0
+	] , [
+		lv2:symbol "HPF" ;
+		pset:value 21.0
+	] , [
+		lv2:symbol "STEREO" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "PREFILTER" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "OCT" ;
+		pset:value 0.0
+	] .
+
+<https://github.com/Stazed/rakarrack-plus#Overdrive:preset:overdrive_2>
+	a pset:Preset ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
+	lv2:port [
+		lv2:symbol "WETDRY" ;
+		pset:value 85.0
+	] , [
+		lv2:symbol "PAN" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LRCr" ;
+		pset:value 35.0
+	] , [
+		lv2:symbol "DRIVE" ;
+		pset:value 29.0
+	] , [
+		lv2:symbol "LEVEL" ;
+		pset:value 45.0
+	] , [
+		lv2:symbol "TYPE" ;
+		pset:value 1.0
+	] , [
+		lv2:symbol "NEG" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "LPF" ;
+		pset:value 25040.0
+	] , [
+		lv2:symbol "HPF" ;
+		pset:value 21.0
+	] , [
+		lv2:symbol "STEREO" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "PREFILTER" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "OCT" ;
+		pset:value 0.0
+	] .

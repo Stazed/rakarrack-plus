@@ -114,6 +114,8 @@
 #define GATELV2_URI "https://github.com/Stazed/rakarrack-plus#gate"
 #define MIDICLV2_URI "https://github.com/Stazed/rakarrack-plus#midi_converter"
 #define CONVOLOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Convolotron"
+#define FLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Flange"
+#define OVERDRIVELV2_URI "https://github.com/Stazed/rakarrack-plus#Overdrive"
 
 
 #define RVBFILE_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile"
@@ -201,7 +203,9 @@ enum RKRLV2_effects_
 	IPHASE,
 	IGATE,
 	IMIDIC,
-        ICONVO
+        ICONVO,
+        IFLANGE,
+        IOVERDRIVE
 };
 
 typedef struct _RKRLV2
@@ -302,6 +306,9 @@ typedef struct _RKRLV2
     Gate* gate;         //43
     MIDIConverter* midic; //44
     Convolotron* convol;  //45
+    Chorus* flanger;     //46
+    Distorsion* overdrive;   //47
+
     
 } RKRLV2;
 

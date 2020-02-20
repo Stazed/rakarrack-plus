@@ -242,3 +242,13 @@
         a lv2:Plugin, lv2:ConvolutionPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <convolotron.ttl> .
+# 46
+<https://github.com/Stazed/rakarrack-plus#Flange>
+        a lv2:Plugin, lv2:FlangerPlugin ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
+        rdfs:seeAlso <flange.ttl> .
+# 47
+<https://github.com/Stazed/rakarrack-plus#Overdrive>
+        a lv2:Plugin, lv2:DistortionPlugin ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
+        rdfs:seeAlso <overdrive.ttl> .

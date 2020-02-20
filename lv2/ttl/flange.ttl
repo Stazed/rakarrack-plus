@@ -9,24 +9,24 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-# <https://github.com/Stazed/rakarrack-plus#chor_ui>
+# <https://github.com/Stazed/rakarrack-plus#Flange_ui>
 # 	a ui:X11UI ;
 # 	ui:binary <rakarrack-plus_ui.so> ;
 # 	lv2:extensionData ui:idleInterface;
 # 	.
 
-<https://github.com/Stazed/rakarrack-plus#chor>
+<https://github.com/Stazed/rakarrack-plus#Flange>
         a lv2:Plugin, lv2:ChorusPlugin ;
-        doap:name "RakarrackPlus Chorus" ;
+        doap:name "RakarrackPlus Flanger" ;
         mod:brand "RakarrackPlus";
-        mod:label "Chorus";
-        doap:description "Chorus";
+        mod:label "Flanger";
+        doap:description "Flanger";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
-        rdfs:comment "A chorus effect. Allows for fractional delays for a more intense effect." ;
+        rdfs:comment "A flanger effect. Allows for fractional delays for a more intense effect." ;
         lv2:optionalFeature lv2:hardRTCapable ;
-#        ui:ui  <https://github.com/Stazed/rakarrack-plus#chor_ui> ;
+#        ui:ui  <https://github.com/Stazed/rakarrack-plus#Flange_ui> ;
 
         lv2:port [
                 a lv2:InputPort, lv2:AudioPort ;
@@ -124,7 +124,7 @@
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 10 ;
-                lv2:symbol "WIDTH" ;
+                lv2:symbol "WIDTH" ;   
                 lv2:name "LFO L/R Delay" ;
                 lv2:default 16 ;
                 lv2:minimum -64 ;
@@ -189,27 +189,27 @@
         ] ;
 	.
 
-<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_1>
+<https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_1>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+        rdfs:seeAlso <flange_presets.ttl> .
 
-<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_2>
+<https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_2>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+        rdfs:seeAlso <flange_presets.ttl> .
 
-<https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_3>
+<https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_3>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+        rdfs:seeAlso <flange_presets.ttl> .
 
-<https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_1>
+<https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_4>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+        rdfs:seeAlso <flange_presets.ttl> .
 
-<https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_2>
+<https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_5>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+        rdfs:seeAlso <flange_presets.ttl> .

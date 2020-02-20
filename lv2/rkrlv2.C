@@ -593,7 +593,7 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
-///// chorus/flanger /////////
+///// chorus /////////
 LV2_Handle init_choruslv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
@@ -4912,6 +4912,200 @@ static const void* convol_extension_data(const char* uri)
     return NULL;
 }
 
+///// flanger /////////
+LV2_Handle init_flangerlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
+{
+    RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    plug->nparams = 12;
+    plug->effectindex = IFLANGE;
+    plug->prev_bypass = 1;
+    
+    getFeatures(plug,host_features);    // for period_max
+    
+    plug->flanger = new Chorus(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+
+    return plug;
+}
+
+void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
+{
+    if( nframes == 0)
+        return;
+    
+    int i;
+    int val;
+
+    RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        plug->flanger->cleanup();
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->flanger->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //check and set changed parameters
+    i=0;
+    val = (int)*plug->param_p[i];
+    if(plug->flanger->getpar(i) != val)
+    {
+        plug->flanger->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i] +64;// 1 pan offset
+    if(plug->flanger->getpar(i) != val)
+    {
+        plug->flanger->changepar(i,val);
+    }
+    for(i++; i<5; i++) //2-4
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->flanger->getpar(i) != val)
+        {
+            plug->flanger->changepar(i,val);
+        }
+    }
+    val = (int)*plug->param_p[i] +64;// 5 LR Del. offset
+    if(plug->flanger->getpar(i) != val)
+    {
+        plug->flanger->changepar(i,val);
+    }
+    for(i++; i<10; i++) // 6-9
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->flanger->getpar(i) != val)
+        {
+            plug->flanger->changepar(i,val);
+        }
+    }
+    //skip param 10
+    for(; i<plug->nparams; i++)
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->flanger->getpar(i+1) != val)
+        {
+            plug->flanger->changepar(i+1,val);
+        }
+    }
+
+    //now run
+    plug->flanger->out(plug->output_l_p, plug->output_r_p);
+
+    //and for whatever reason we have to do the wet/dry mix ourselves
+    wetdry_mix(plug, plug->flanger->outvolume, nframes);
+
+    xfade_check(plug,nframes);
+    return;
+}
+
+///// overdrive /////////
+LV2_Handle init_overdrivelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
+{
+    RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    plug->nparams = 12;
+    plug->effectindex = IDIST;
+    plug->prev_bypass = 1;
+
+    getFeatures(plug,host_features);
+
+    plug->overdrive = new Distorsion(/*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+
+    return plug;
+}
+
+void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
+{
+    if( nframes == 0)
+        return;
+    
+    int i;
+    int val;
+
+    RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        plug->overdrive->cleanup();
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->overdrive->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //check and set changed parameters
+    i=0;
+    val = (int)*plug->param_p[i];//0 Wet/dry
+    if(plug->overdrive->getpar(i) != val)
+    {
+        plug->overdrive->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i]+64;//1 pan
+    if(plug->overdrive->getpar(i) != val)
+    {
+        plug->overdrive->changepar(i,val);
+    }
+    for(i++; i<plug->nparams-1; i++) //2-10
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->overdrive->getpar(i) != val)
+        {
+            plug->overdrive->changepar(i,val);
+        }
+    }
+    val = (int)*plug->param_p[i++];//skip one index, 12 octave
+    if(plug->overdrive->getpar(i) != val)
+    {
+        plug->overdrive->changepar(i,val);
+    }
+
+    //now run
+    plug->overdrive->out(plug->output_l_p, plug->output_r_p);
+
+    //and for whatever reason we have to do the wet/dry mix ourselves
+    wetdry_mix(plug, plug->overdrive->outvolume, nframes);
+
+    xfade_check(plug,nframes);
+    return;
+}
+
+
 /////////////////////////////////
 //       END OF FX
 /////////////////////////////////
@@ -5071,6 +5265,13 @@ void cleanup_rkrlv2(LV2_Handle handle)
         delete plug->convol;
      //   delete plug->wavfile;
         break;
+    case IFLANGE:
+        delete plug->flanger;
+        break;
+    case IOVERDRIVE:
+        delete plug->overdrive;
+        break;
+
     }
     free(plug);
 }
@@ -5806,6 +6007,30 @@ static const LV2_Descriptor convollv2_descriptor=
     convol_extension_data
 };
 
+static const LV2_Descriptor flangerlv2_descriptor=
+{
+    FLANGELV2_URI,
+    init_flangerlv2,
+    connect_rkrlv2_ports,
+    0,//activate
+    run_flangerlv2,
+    0,//deactivate
+    cleanup_rkrlv2,
+    0//extension
+};
+
+static const LV2_Descriptor overdrivelv2_descriptor=
+{
+    OVERDRIVELV2_URI,
+    init_overdrivelv2,
+    connect_rkrlv2_ports,
+    0,//activate
+    run_overdrivelv2,
+    0,//deactivate
+    cleanup_rkrlv2,
+    0//extension
+};
+
 LV2_SYMBOL_EXPORT
 const LV2_Descriptor* lv2_descriptor(uint32_t index)
 {
@@ -5903,6 +6128,11 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &midiclv2_descriptor ;
     case ICONVO:
         return &convollv2_descriptor ;
+    case IFLANGE:
+        return &flangerlv2_descriptor ;
+    case IOVERDRIVE:
+        return &overdrivelv2_descriptor ;
+
     default:
         return 0;
     }
