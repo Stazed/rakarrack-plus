@@ -6111,6 +6111,14 @@ void RKRGUI::check_signals(void *usrPtr)
     }
 }
 
+/**
+ *  This pops up the midi learn window and sets the item (num) to be set with 
+ *  midi learn. It is triggered by right mouse click on any efx parameter (slider, etc)
+ *  that has midi learn capability.
+ * 
+ * @param num
+ *  The efx parameter number that is to be used by midi learn.
+ */
 void RKRGUI::getMIDIControl(int num)
 {
     /* Don't pop up the midi learn window unless the user checked the box
@@ -6120,7 +6128,6 @@ void RKRGUI::getMIDIControl(int num)
     if (!rkr->MIDIway)
         return;
 
-    // getMIDIControl
     int i = 0;
     rkr->comemouse = 1;
     PrepareML();
