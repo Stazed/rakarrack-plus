@@ -1657,7 +1657,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 212:
-        efx_Arpie->changepar(0, value - 64);
+        efx_Arpie->changepar(0, value);
         break;
 
     case 213:

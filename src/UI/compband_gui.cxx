@@ -21,7 +21,7 @@ void CbandGui::cb_cband_activar(Fl_Light_Button* o, void* v) {
 void CbandGui::cb_cband_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12043))rkr->efx_CompBand->setpreset((int)o->value());
-cband_WD->value(rkr->efx_CompBand->getpar(0)-64);
+cband_WD->value(rkr->efx_CompBand->getpar(0));
 cband_Lratio->value(rkr->efx_CompBand->getpar(1));
 cband_MLratio->value(rkr->efx_CompBand->getpar(2));
 cband_MHratio->value(rkr->efx_CompBand->getpar(3));
@@ -53,7 +53,7 @@ void CbandGui::cb_cband_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(368);
  return;
 }
-rkr->efx_CompBand->changepar(0,(int)(o->value()+64));
+rkr->efx_CompBand->changepar(0,(int)(o->value()));
 }
 void CbandGui::cb_cband_WD(SliderW* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_WD_i(o,v);
@@ -238,8 +238,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_WD->labelfont(0);
   cband_WD->labelsize(10);
   cband_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  cband_WD->minimum(-64);
-  cband_WD->maximum(64);
+  cband_WD->maximum(127);
   cband_WD->step(1);
   cband_WD->textcolor(FL_BACKGROUND2_COLOR);
   cband_WD->callback((Fl_Callback*)cb_cband_WD);

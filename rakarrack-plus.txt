@@ -31,7 +31,7 @@ Coil Crafter
     Wet/Dry                     |                |    none       |                   |       none        |
 
 CompBand
-    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
 
 Compressor
     Wet/Dry                     |                |    none       |                   |       none        |
