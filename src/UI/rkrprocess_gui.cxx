@@ -6113,6 +6113,13 @@ void RKRGUI::check_signals(void *usrPtr)
 
 void RKRGUI::getMIDIControl(int num)
 {
+    /* Don't pop up the midi learn window unless the user checked the box
+     * in Settings/Preferences/MIDI/Midi Learn - Really confusing when
+     * it pops up but nothing happens when set. The menu item for Midi Learn
+     * is set inactive unless the box is checked as well. For consistency here */
+    if (!rkr->MIDIway)
+        return;
+
     // getMIDIControl
     int i = 0;
     rkr->comemouse = 1;
