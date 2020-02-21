@@ -3140,11 +3140,11 @@ void RKRGUI::ActMIDI()
                 HAR->har_WD->redraw();
                 break;
             case 52:
-                CHORUS->chorus_WD->value(rkr->efx_Chorus->getpar(0) - 64);
+                CHORUS->chorus_WD->value(rkr->efx_Chorus->getpar(0));
                 CHORUS->chorus_WD->redraw();
                 break;
             case 53:
-                FLANGER->flanger_WD->value(rkr->efx_Flanger->getpar(0) - 64);
+                FLANGER->flanger_WD->value(rkr->efx_Flanger->getpar(0));
                 FLANGER->flanger_WD->redraw();
                 break;
             case 54:

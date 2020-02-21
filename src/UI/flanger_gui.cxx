@@ -21,7 +21,7 @@ void FlangerGui::cb_flanger_activar(Fl_Light_Button* o, void* v) {
 void FlangerGui::cb_flanger_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
-flanger_WD->value(rkr->efx_Flanger->getpar(0)-64);
+flanger_WD->value(rkr->efx_Flanger->getpar(0));
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));
 flanger_rnd->value(rkr->efx_Flanger->getpar(3));
@@ -53,7 +53,7 @@ void FlangerGui::cb_flanger_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(53);
  return;
 } 
-rkr->efx_Flanger->changepar(0,(int)(o->value()+64));
+rkr->efx_Flanger->changepar(0,(int)(o->value()));
 }
 void FlangerGui::cb_flanger_WD(SliderW* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_WD_i(o,v);
@@ -206,8 +206,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   flanger_WD->labelfont(0);
   flanger_WD->labelsize(10);
   flanger_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  flanger_WD->minimum(-64);
-  flanger_WD->maximum(63);
+  flanger_WD->maximum(127);
   flanger_WD->step(1);
   flanger_WD->textcolor(FL_BACKGROUND2_COLOR);
   flanger_WD->callback((Fl_Callback*)cb_flanger_WD);
