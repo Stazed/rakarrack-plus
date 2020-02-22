@@ -3919,7 +3919,7 @@ void RKRGUI::ActMIDI()
                 SHUFFLE->shuffle_Q->redraw();
                 break;
             case 237:
-                SYNTHFILTER->synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0) - 64);
+                SYNTHFILTER->synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0));
                 SYNTHFILTER->synthfilter_WD->redraw();
                 break;
             case 238:

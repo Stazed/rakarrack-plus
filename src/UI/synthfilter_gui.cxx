@@ -21,7 +21,7 @@ void SynthfilterGui::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
 void SynthfilterGui::cb_synthfilter_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
-synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0)-64);
+synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0));
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
 synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
@@ -59,7 +59,7 @@ void SynthfilterGui::cb_synthfilter_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(237);
  return;
 }
-rkr->efx_Synthfilter->changepar(0,(int)(o->value()+64));
+rkr->efx_Synthfilter->changepar(0,(int)(o->value()));
 }
 void SynthfilterGui::cb_synthfilter_WD(SliderW* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_WD_i(o,v);
@@ -260,8 +260,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_WD->labelfont(0);
   synthfilter_WD->labelsize(10);
   synthfilter_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  synthfilter_WD->minimum(-64);
-  synthfilter_WD->maximum(63);
+  synthfilter_WD->maximum(127);
   synthfilter_WD->step(1);
   synthfilter_WD->textcolor(FL_BACKGROUND2_COLOR);
   synthfilter_WD->callback((Fl_Callback*)cb_synthfilter_WD);
