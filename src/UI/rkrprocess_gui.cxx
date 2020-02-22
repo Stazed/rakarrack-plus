@@ -3647,7 +3647,7 @@ void RKRGUI::ActMIDI()
                 DFLANGE->dflange_rnd->redraw();
                 break;
             case 169:
-                VALVE->valve_WD->value(rkr->efx_Valve->getpar(0) - 64);
+                VALVE->valve_WD->value(rkr->efx_Valve->getpar(0));
                 VALVE->valve_WD->redraw();
                 break;
             case 170:

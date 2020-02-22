@@ -202,7 +202,7 @@ Synthfilter
     E.Sens                      |                |  -64 to 64    |                   |      -64 to 64    |  SENSE -  Envelope Sensitivity
 
 Valve
-    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr - Left/Right Crossover
 

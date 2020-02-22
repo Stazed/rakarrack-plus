@@ -21,7 +21,7 @@ void ValveGui::cb_valve_activar(Fl_Light_Button* o, void* v) {
 void ValveGui::cb_valve_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
-valve_WD->value(rkr->efx_Valve->getpar(0)-64);
+valve_WD->value(rkr->efx_Valve->getpar(0));
 valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
 valve_drive->value(rkr->efx_Valve->getpar(3));
 valve_level->value(rkr->efx_Valve->getpar(4));
@@ -52,7 +52,7 @@ void ValveGui::cb_valve_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(169);
  return;
 } 
-rkr->efx_Valve->changepar(0,(int)(o->value()+64));
+rkr->efx_Valve->changepar(0,(int)(o->value()));
 }
 void ValveGui::cb_valve_WD(SliderW* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_WD_i(o,v);
@@ -217,8 +217,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_WD->labelfont(0);
   valve_WD->labelsize(10);
   valve_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  valve_WD->minimum(-64);
-  valve_WD->maximum(63);
+  valve_WD->maximum(127);
   valve_WD->step(1);
   valve_WD->textcolor(FL_BACKGROUND2_COLOR);
   valve_WD->callback((Fl_Callback*)cb_valve_WD);
