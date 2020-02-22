@@ -24,7 +24,7 @@ void SharGui::cb_shar_activar(Fl_Light_Button* o, void* v) {
 void SharGui::cb_shar_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12042))rkr->efx_StereoHarm->setpreset((int)o->value());
-shar_WD->value(rkr->efx_StereoHarm->getpar(0)-64);
+shar_WD->value(rkr->efx_StereoHarm->getpar(0));
 shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
 shar_intl->value(rkr->efx_StereoHarm->getpar(2)-12);
 shar_chl->value(rkr->efx_StereoHarm->getpar(3));
@@ -56,7 +56,7 @@ void SharGui::cb_shar_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(358);
  return;
 }
-rkr->efx_StereoHarm->changepar(0,(int)(o->value()+64));
+rkr->efx_StereoHarm->changepar(0,(int)(o->value()));
 }
 void SharGui::cb_shar_WD(SliderW* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_WD_i(o,v);
@@ -239,8 +239,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shar_WD->labelfont(0);
   shar_WD->labelsize(10);
   shar_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  shar_WD->minimum(-64);
-  shar_WD->maximum(63);
+  shar_WD->maximum(127);
   shar_WD->step(1);
   shar_WD->textcolor(FL_BACKGROUND2_COLOR);
   shar_WD->callback((Fl_Callback*)cb_shar_WD);

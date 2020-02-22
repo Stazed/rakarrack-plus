@@ -185,7 +185,7 @@ Shuffle
 Check label Rev (Rakarrack) vs. BAND - Filtered Band - rkrlv2
 
 StereoHarm
-    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRC - Left/Right Crossover
     Gain L                      |   -64 to 64    |  -64 to 64    |    -64 to 64      |      -64 to 63    |  GAINL -  Left Gain
 
