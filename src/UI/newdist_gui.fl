@@ -1,10 +1,10 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} NewdistGui {
-  user_data 1 open selected
-  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  user_data 1 open
+  xywh {1550 57 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -30,7 +30,7 @@ rgui->findpos(17,(int)o->value(),o);}
     user_data 12017
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12017))rkr->efx_NewDist->setpreset((int) o->value());
-newdist_WD->value(rkr->efx_NewDist->getpar(0)-64);
+newdist_WD->value(rkr->efx_NewDist->getpar(0));
 newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
 newdist_drive->value(rkr->efx_NewDist->getpar(3));
 newdist_level->value(rkr->efx_NewDist->getpar(4));
@@ -64,8 +64,8 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
  rgui->getMIDIControl(125);
  return;
 } 
-rkr->efx_NewDist->changepar(0,(int)(o->value()+64));}
-    xywh {52 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_NewDist->changepar(0,(int)(o->value()));} selected
+    xywh {52 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider newdist_LRc {
