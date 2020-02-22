@@ -21,7 +21,7 @@ void EchotronGui::cb_echotron_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12041))rkr->efx_Echotron->setpreset((int) o->value());
 echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
-echotron_WD->value(rkr->efx_Echotron->getpar(0)-64);
+echotron_WD->value(rkr->efx_Echotron->getpar(0));
 echotron_damp->value(rkr->efx_Echotron->getpar(6));
 echotron_fnum->value(rkr->efx_Echotron->getpar(8));
 echotron_user->value(rkr->efx_Echotron->getpar(4));
@@ -58,7 +58,7 @@ void EchotronGui::cb_echotron_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(348);
  return;
 }
-rkr->efx_Echotron->changepar(0,(int)(o->value()+64));
+rkr->efx_Echotron->changepar(0,(int)(o->value()));
 }
 void EchotronGui::cb_echotron_WD(SliderW* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_WD_i(o,v);
@@ -282,8 +282,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_WD->labelfont(0);
   echotron_WD->labelsize(10);
   echotron_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  echotron_WD->minimum(-64);
-  echotron_WD->maximum(64);
+  echotron_WD->maximum(127);
   echotron_WD->step(1);
   echotron_WD->textcolor(FL_BACKGROUND2_COLOR);
   echotron_WD->callback((Fl_Callback*)cb_echotron_WD);
