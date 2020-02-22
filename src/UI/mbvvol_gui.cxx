@@ -21,7 +21,7 @@ void MbvvolGui::cb_mbvvol_activar(Fl_Light_Button* o, void* v) {
 void MbvvolGui::cb_mbvvol_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12028))rkr->efx_MBVvol->setpreset((int)o->value());
-mbvvol_WD->value(rkr->efx_MBVvol->getpar(0)-64);
+mbvvol_WD->value(rkr->efx_MBVvol->getpar(0));
 mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
 mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
 mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
@@ -54,7 +54,7 @@ void MbvvolGui::cb_mbvvol_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(248);
  return;
 }
-rkr->efx_MBVvol->changepar(0,(int)(o->value()+64));
+rkr->efx_MBVvol->changepar(0,(int)(o->value()));
 }
 void MbvvolGui::cb_mbvvol_WD(SliderW* o, void* v) {
   ((MbvvolGui*)(o->parent()))->cb_mbvvol_WD_i(o,v);
@@ -253,8 +253,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbvvol_WD->labelfont(0);
   mbvvol_WD->labelsize(10);
   mbvvol_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  mbvvol_WD->minimum(-64);
-  mbvvol_WD->maximum(63);
+  mbvvol_WD->maximum(127);
   mbvvol_WD->step(1);
   mbvvol_WD->textcolor(FL_BACKGROUND2_COLOR);
   mbvvol_WD->callback((Fl_Callback*)cb_mbvvol_WD);

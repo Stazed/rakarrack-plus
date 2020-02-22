@@ -3963,7 +3963,7 @@ void RKRGUI::ActMIDI()
                 SYNTHFILTER->synthfilter_Offset->redraw();
                 break;
             case 248:
-                MBVVOL->mbvvol_WD->value(rkr->efx_MBVvol->getpar(0) - 64);
+                MBVVOL->mbvvol_WD->value(rkr->efx_MBVvol->getpar(0));
                 MBVVOL->mbvvol_WD->redraw();
                 break;
             case 249:
