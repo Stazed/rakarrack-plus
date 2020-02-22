@@ -21,7 +21,7 @@ void InfinityGui::cb_infinity_activar(Fl_Light_Button* o, void* v) {
 void InfinityGui::cb_infinity_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12046))rkr->efx_Infinity->setpreset((int) o->value());
-infinity_WD->value(rkr->efx_Infinity->getpar(0)-64);
+infinity_WD->value(rkr->efx_Infinity->getpar(0));
 infinity_Q->value(rkr->efx_Infinity->getpar(9));
 infinity_1->value(rkr->efx_Infinity->getpar(1));
 infinity_2->value(rkr->efx_Infinity->getpar(2));
@@ -64,7 +64,7 @@ void InfinityGui::cb_infinity_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(395);
  return;
 } 
-rkr->efx_Infinity->changepar(0,(int)(o->value()+64));
+rkr->efx_Infinity->changepar(0,(int)(o->value()));
 }
 void InfinityGui::cb_infinity_WD(SliderW* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_WD_i(o,v);
@@ -259,8 +259,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_WD->labelfont(0);
   infinity_WD->labelsize(10);
   infinity_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  infinity_WD->minimum(-64);
-  infinity_WD->maximum(63);
+  infinity_WD->maximum(127);
   infinity_WD->step(1);
   infinity_WD->textcolor(FL_BACKGROUND2_COLOR);
   infinity_WD->callback((Fl_Callback*)cb_infinity_WD);

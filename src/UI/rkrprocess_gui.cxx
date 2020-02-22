@@ -4553,7 +4553,7 @@ void RKRGUI::ActMIDI()
                 VIBE->vibe_pan->redraw();
                 break;
             case 395:
-                INFINIT->infinity_WD->value(rkr->efx_Infinity->getpar(0) - 64);
+                INFINIT->infinity_WD->value(rkr->efx_Infinity->getpar(0));
                 INFINIT->infinity_WD->redraw();
                 break;
             case 396:
