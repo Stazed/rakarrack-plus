@@ -4275,7 +4275,7 @@ void RKRGUI::ActMIDI()
                 SEQUENCE->seq_stdf->redraw();
                 break;
             case 326:
-                SHIFTER->shifter_WD->value(rkr->efx_Shifter->getpar(0) - 64);
+                SHIFTER->shifter_WD->value(rkr->efx_Shifter->getpar(0));
                 SHIFTER->shifter_WD->redraw();
                 break;
             case 327:

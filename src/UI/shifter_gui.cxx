@@ -21,7 +21,7 @@ void ShifterGui::cb_shifter_activar(Fl_Light_Button* o, void* v) {
 void ShifterGui::cb_shifter_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12038))rkr->efx_Shifter->setpreset((int)o->value());
-shifter_WD->value(rkr->efx_Shifter->getpar(0)-64);
+shifter_WD->value(rkr->efx_Shifter->getpar(0));
 shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
 shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
 shifter_int->value(rkr->efx_Shifter->getpar(6));
@@ -52,7 +52,7 @@ void ShifterGui::cb_shifter_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(326);
  return;
 }
-rkr->efx_Shifter->changepar(0,(int)(o->value()+64));
+rkr->efx_Shifter->changepar(0,(int)(o->value()));
 }
 void ShifterGui::cb_shifter_WD(SliderW* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_WD_i(o,v);
@@ -199,8 +199,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_WD->labelfont(0);
   shifter_WD->labelsize(10);
   shifter_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  shifter_WD->minimum(-64);
-  shifter_WD->maximum(63);
+  shifter_WD->maximum(127);
   shifter_WD->step(1);
   shifter_WD->textcolor(FL_BACKGROUND2_COLOR);
   shifter_WD->callback((Fl_Callback*)cb_shifter_WD);

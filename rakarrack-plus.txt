@@ -176,7 +176,7 @@ ShelfBoost
     Pres.                       |                |  -64 to 64    |                   |      -64 to 64    |  PRES - Presence
 
 Shifter
-    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Shuffle
