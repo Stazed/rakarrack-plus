@@ -21,7 +21,7 @@ void LooperGui::cb_looper_activar(Fl_Light_Button* o, void* v) {
 void LooperGui::cb_looper_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12030))rkr->efx_Looper->setpreset((int) o->value());
-looper_WD->value(rkr->efx_Looper->getpar(0)-64);
+looper_WD->value(rkr->efx_Looper->getpar(0));
 looper_play->value(rkr->efx_Looper->getpar(1));
 looper_record->value(rkr->efx_Looper->getpar(3));
 looper_rv->value(rkr->efx_Looper->getpar(5));
@@ -54,7 +54,7 @@ void LooperGui::cb_looper_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(267);
  return;
 }
-rkr->efx_Looper->changepar(0,(int)(o->value()+64));
+rkr->efx_Looper->changepar(0,(int)(o->value()));
 }
 void LooperGui::cb_looper_WD(SliderW* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_WD_i(o,v);
@@ -280,8 +280,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_WD->labelfont(0);
   looper_WD->labelsize(10);
   looper_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  looper_WD->minimum(-64);
-  looper_WD->maximum(63);
+  looper_WD->maximum(127);
   looper_WD->step(1);
   looper_WD->textcolor(FL_BACKGROUND2_COLOR);
   looper_WD->callback((Fl_Callback*)cb_looper_WD);
