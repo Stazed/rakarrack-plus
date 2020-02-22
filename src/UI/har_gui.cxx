@@ -23,7 +23,7 @@ void HarGui::cb_har_activar(Fl_Light_Button* o, void* v) {
 void HarGui::cb_har_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12014))rkr->efx_Har->setpreset((int)o->value());
-har_WD->value(rkr->efx_Har->getpar(0)-64);
+har_WD->value(rkr->efx_Har->getpar(0));
 har_pan->value(rkr->efx_Har->getpar(1)-64);
 har_gan->value(rkr->efx_Har->getpar(2)-64);
 har_int->value(rkr->efx_Har->getpar(3)-12);
@@ -53,7 +53,7 @@ void HarGui::cb_har_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(31);
  return;
 } 
-rkr->efx_Har->changepar(0,(int)(o->value()+64));
+rkr->efx_Har->changepar(0,(int)(o->value()));
 }
 void HarGui::cb_har_WD(SliderW* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_WD_i(o,v);
@@ -187,8 +187,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_WD->labelfont(0);
   har_WD->labelsize(10);
   har_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  har_WD->minimum(-64);
-  har_WD->maximum(63);
+  har_WD->maximum(127);
   har_WD->step(1);
   har_WD->textcolor(FL_BACKGROUND2_COLOR);
   har_WD->callback((Fl_Callback*)cb_har_WD);
