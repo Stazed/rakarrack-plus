@@ -22,7 +22,7 @@ void WhawhaGui::cb_WhaWha_preset_i(Fl_Choice* o, void* v) {
   rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
-WhaWha_WD->value(rkr->efx_WhaWha->getpar(0)-64);
+WhaWha_WD->value(rkr->efx_WhaWha->getpar(0));
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
 WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
@@ -53,7 +53,7 @@ void WhawhaGui::cb_WhaWha_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(28);
  return;
 } 
-rkr->efx_WhaWha->changepar(0,(int)(o->value()+64));
+rkr->efx_WhaWha->changepar(0,(int)(o->value()));
 }
 void WhawhaGui::cb_WhaWha_WD(SliderW* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_WD_i(o,v);
@@ -197,8 +197,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_WD->labelfont(0);
   WhaWha_WD->labelsize(10);
   WhaWha_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_WD->minimum(-64);
-  WhaWha_WD->maximum(63);
+  WhaWha_WD->maximum(127);
   WhaWha_WD->step(1);
   WhaWha_WD->textcolor(FL_BACKGROUND2_COLOR);
   WhaWha_WD->callback((Fl_Callback*)cb_WhaWha_WD);

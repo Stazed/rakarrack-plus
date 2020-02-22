@@ -223,7 +223,7 @@ Vocoder
     Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 WahWah  (DynamicFilter.C)
-    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH - LFO L/R Delay
 Check "MODE" - "Filter Type"                                                                  0 to 4        -- Add Selection box

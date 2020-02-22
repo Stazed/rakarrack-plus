@@ -3124,7 +3124,7 @@ void RKRGUI::ActMIDI()
                 HAR->har_int->redraw();
                 break;
             case 28:
-                WHAWHA->WhaWha_WD->value(rkr->efx_WhaWha->getpar(0) - 64);
+                WHAWHA->WhaWha_WD->value(rkr->efx_WhaWha->getpar(0));
                 WHAWHA->WhaWha_WD->redraw();
                 break;
             case 29:
