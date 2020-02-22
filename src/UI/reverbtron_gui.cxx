@@ -22,7 +22,7 @@ void RevtronGui::cb_revtron_preset_i(Fl_Choice* o, void* v) {
 if((ud==0)||(ud==12040))rkr->efx_Reverbtron->setpreset((int) o->value());
 revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
 revtron_level->value(rkr->efx_Reverbtron->getpar(7));
-revtron_WD->value(rkr->efx_Reverbtron->getpar(0)-64);
+revtron_WD->value(rkr->efx_Reverbtron->getpar(0));
 revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
 revtron_fnum->value(rkr->efx_Reverbtron->getpar(8));
 revtron_length->value(rkr->efx_Reverbtron->getpar(3));
@@ -62,7 +62,7 @@ void RevtronGui::cb_revtron_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(339);
  return;
 }
-rkr->efx_Reverbtron->changepar(0,(int)(o->value()+64));
+rkr->efx_Reverbtron->changepar(0,(int)(o->value()));
 }
 void RevtronGui::cb_revtron_WD(SliderW* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_WD_i(o,v);
@@ -276,8 +276,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_WD->labelfont(0);
   revtron_WD->labelsize(10);
   revtron_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  revtron_WD->minimum(-64);
-  revtron_WD->maximum(64);
+  revtron_WD->maximum(127);
   revtron_WD->step(1);
   revtron_WD->textcolor(FL_BACKGROUND2_COLOR);
   revtron_WD->callback((Fl_Callback*)cb_revtron_WD);
