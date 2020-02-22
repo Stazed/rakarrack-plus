@@ -21,7 +21,7 @@ void RbechoGui::cb_rbecho_activar(Fl_Light_Button* o, void* v) {
 void RbechoGui::cb_rbecho_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12032))rkr->efx_RBEcho->setpreset((int) o->value());
-rbecho_WD->value(rkr->efx_RBEcho->getpar(0)-64);
+rbecho_WD->value(rkr->efx_RBEcho->getpar(0));
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
 rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
@@ -49,7 +49,7 @@ void RbechoGui::cb_rbecho_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(303);
  return;
 }
-rkr->efx_RBEcho->changepar(0,(int)(o->value()+64));
+rkr->efx_RBEcho->changepar(0,(int)(o->value()));
 }
 void RbechoGui::cb_rbecho_WD(SliderW* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_WD_i(o,v);
@@ -193,8 +193,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_WD->labelfont(0);
   rbecho_WD->labelsize(10);
   rbecho_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  rbecho_WD->minimum(-64);
-  rbecho_WD->maximum(63);
+  rbecho_WD->maximum(127);
   rbecho_WD->step(1);
   rbecho_WD->textcolor(FL_BACKGROUND2_COLOR);
   rbecho_WD->callback((Fl_Callback*)cb_rbecho_WD);

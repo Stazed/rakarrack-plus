@@ -78,8 +78,8 @@ Echotron
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 64    |  STDF - LFO L/R Delay
     Number of Taps              |                |Varies - file  |                   |       1 to 127    |  LENGTH
 
-Echoverse
-    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+Echoverse (RBEcho)
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
     Angle                       |                |  -64 to 64    |                   |      -64 to 63    |  ANGLE

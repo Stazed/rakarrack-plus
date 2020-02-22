@@ -4183,7 +4183,7 @@ void RKRGUI::ActMIDI()
                 VOCODER->vo_level->redraw();
                 break;
             case 303:
-                RBECHO->rbecho_WD->value(rkr->efx_RBEcho->getpar(0) - 64);
+                RBECHO->rbecho_WD->value(rkr->efx_RBEcho->getpar(0));
                 RBECHO->rbecho_WD->redraw();
                 break;
             case 304:
