@@ -180,7 +180,7 @@ Shifter
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Shuffle
-    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Q                           |                |  -64 to 64    |                   |      -64 to 64    |  Q -  Width
 Check label Rev (Rakarrack) vs. BAND - Filtered Band - rkrlv2
 

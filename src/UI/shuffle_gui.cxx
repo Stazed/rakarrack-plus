@@ -30,7 +30,7 @@ shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
-shuffle_WD->value(rkr->efx_Shuffle->getpar(0)-64);
+shuffle_WD->value(rkr->efx_Shuffle->getpar(0));
 shuffle_E->value(rkr->efx_Shuffle->getpar(10));
 }
 void ShuffleGui::cb_shuffle_preset(Fl_Choice* o, void* v) {
@@ -51,7 +51,7 @@ void ShuffleGui::cb_shuffle_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(227);
  return;
 } 
-rkr->efx_Shuffle->changepar(0,(int)o->value()+64);
+rkr->efx_Shuffle->changepar(0,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_WD(SliderW* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_WD_i(o,v);
@@ -207,8 +207,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_WD->labelfont(0);
   shuffle_WD->labelsize(10);
   shuffle_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  shuffle_WD->minimum(-64);
-  shuffle_WD->maximum(64);
+  shuffle_WD->maximum(127);
   shuffle_WD->step(1);
   shuffle_WD->textcolor(FL_BACKGROUND2_COLOR);
   shuffle_WD->callback((Fl_Callback*)cb_shuffle_WD);

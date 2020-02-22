@@ -3879,7 +3879,7 @@ void RKRGUI::ActMIDI()
                 EXPANDER->expander_HPF->redraw();
                 break;
             case 227:
-                SHUFFLE->shuffle_WD->value(rkr->efx_Shuffle->getpar(0) - 64);
+                SHUFFLE->shuffle_WD->value(rkr->efx_Shuffle->getpar(0));
                 SHUFFLE->shuffle_WD->redraw();
                 break;
             case 228:
