@@ -21,7 +21,7 @@ void VibeGui::cb_vibe_activar(Fl_Light_Button* o, void* v) {
 void VibeGui::cb_vibe_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12045))rkr->efx_Vibe->setpreset((int)o->value());
-vibe_WD->value(rkr->efx_Vibe->getpar(6)-64);
+vibe_WD->value(rkr->efx_Vibe->getpar(6));
 vibe_width->value(rkr->efx_Vibe->getpar(0));
 vibe_dpth->value(rkr->efx_Vibe->getpar(8));
 vibe_freq->value(rkr->efx_Vibe->getpar(1));
@@ -55,7 +55,7 @@ void VibeGui::cb_vibe_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(386);
  return;
 }
-rkr->efx_Vibe->changepar(6,(int)(o->value())+64);
+rkr->efx_Vibe->changepar(6,(int)(o->value()));
 }
 void VibeGui::cb_vibe_WD(SliderW* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_WD_i(o,v);
@@ -206,8 +206,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_WD->labelfont(0);
   vibe_WD->labelsize(10);
   vibe_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  vibe_WD->minimum(-64);
-  vibe_WD->maximum(64);
+  vibe_WD->maximum(127);
   vibe_WD->step(1);
   vibe_WD->textcolor(FL_BACKGROUND2_COLOR);
   vibe_WD->callback((Fl_Callback*)cb_vibe_WD);

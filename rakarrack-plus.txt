@@ -212,7 +212,7 @@ VaryBand    (MBVvol)
     LFO L/R Delay  (St.df)   2  |                |   0 to 127    |                   |      -64 to 63    |  STDL2 - LFO L/R Delay 2
 
 Vibe
-    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 128    |
+    Wet/Dry                     |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 128    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
     FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 128    |  LRCR - Left/Right Crossover

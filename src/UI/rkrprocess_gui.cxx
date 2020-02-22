@@ -4517,7 +4517,7 @@ void RKRGUI::ActMIDI()
                 OTREM->otrem_pan->redraw();
                 break;
             case 386:
-                VIBE->vibe_WD->value(rkr->efx_Vibe->getpar(6) - 64);
+                VIBE->vibe_WD->value(rkr->efx_Vibe->getpar(6));
                 VIBE->vibe_WD->redraw();
                 break;
             case 387:
