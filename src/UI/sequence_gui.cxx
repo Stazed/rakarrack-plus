@@ -21,7 +21,7 @@ void SequenceGui::cb_seq_activar(Fl_Light_Button* o, void* v) {
 void SequenceGui::cb_seq_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12037))rkr->efx_Sequence->setpreset((int) o->value());
-seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
+seq_WD->value(rkr->efx_Sequence->getpar(8));
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
 seq_amp->value(rkr->efx_Sequence->getpar(11));
 seq_tempo->value(rkr->efx_Sequence->getpar(9));
@@ -61,7 +61,7 @@ void SequenceGui::cb_seq_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(314);
  return;
 }
-rkr->efx_Sequence->changepar(8,(int)(o->value()+64));
+rkr->efx_Sequence->changepar(8,(int)(o->value()));
 }
 void SequenceGui::cb_seq_WD(SliderW* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_WD_i(o,v);
@@ -268,8 +268,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   seq_WD->labelfont(0);
   seq_WD->labelsize(10);
   seq_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  seq_WD->minimum(-64);
-  seq_WD->maximum(64);
+  seq_WD->maximum(127);
   seq_WD->step(1);
   seq_WD->textcolor(FL_BACKGROUND2_COLOR);
   seq_WD->callback((Fl_Callback*)cb_seq_WD);

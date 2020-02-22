@@ -3,8 +3,8 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class SequenceGui {
-  user_data 1 open selected
-  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  user_data 1 open
+  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -29,7 +29,7 @@ rgui->findpos(37,(int)o->value(),o);}
     user_data 12037
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12037))rkr->efx_Sequence->setpreset((int) o->value());
-seq_WD->value(rkr->efx_Sequence->getpar(8)-64);
+seq_WD->value(rkr->efx_Sequence->getpar(8));
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
 seq_amp->value(rkr->efx_Sequence->getpar(11));
 seq_tempo->value(rkr->efx_Sequence->getpar(9));
@@ -94,8 +94,8 @@ seq_range->value(rkr->efx_Sequence->getpar(14));}
  rgui->getMIDIControl(314);
  return;
 }
-rkr->efx_Sequence->changepar(8,(int)(o->value()+64));}
-    xywh {49 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+rkr->efx_Sequence->changepar(8,(int)(o->value()));} selected
+    xywh {49 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider seq_1 {

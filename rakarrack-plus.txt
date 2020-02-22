@@ -111,7 +111,7 @@ Infinity
     Band (1 to 8)               |                |  -64 to 64    |                   |      -64 to 64    |  B# - Band # Gain
 
 Looper
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |      ----------   |
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |      ----------   |      // FIXME Function call
 
 MusicalDelay
     Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -162,12 +162,12 @@ Reverbtron
     Stretch                     |                |  -64 to 64    |                   |      -64 to 64    |  STRETCH -  Time Stretch
 
 Ring
-    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |      // FIXME Function offset
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRCr
     Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 Sequence
-    Wet/Dry                     |                |  -64 to 64    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |      // FIXME use function
     Q                           |                |  -64 to 64    |                   |      -64 to 64    | 
     St.df                       |                |   0 to 7      |                   |       0 to 7      |  LAG - Right Channel Step Lag
 
