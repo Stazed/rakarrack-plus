@@ -21,7 +21,7 @@ void VocoderGui::cb_vo_activar(Fl_Light_Button* o, void* v) {
 void VocoderGui::cb_vo_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
         if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
-        vo_WD->value(rkr->efx_Vocoder->getpar(0)-64);
+        vo_WD->value(rkr->efx_Vocoder->getpar(0));
         vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
         vo_mu->value(rkr->efx_Vocoder->getpar(2));
         vo_q->value(rkr->efx_Vocoder->getpar(3));
@@ -47,7 +47,7 @@ void VocoderGui::cb_vo_WD_i(SliderW* o, void*) {
          rgui->getMIDIControl(296);
          return;
         }
-        rkr->efx_Vocoder->changepar(0,(int)(o->value()+64));
+        rkr->efx_Vocoder->changepar(0,(int)(o->value()));
 }
 void VocoderGui::cb_vo_WD(SliderW* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_WD_i(o,v);
@@ -160,8 +160,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_WD->labelfont(0);
   vo_WD->labelsize(10);
   vo_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  vo_WD->minimum(-64);
-  vo_WD->maximum(64);
+  vo_WD->maximum(127);
   vo_WD->step(1);
   vo_WD->textcolor(FL_BACKGROUND2_COLOR);
   vo_WD->callback((Fl_Callback*)cb_vo_WD);
