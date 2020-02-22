@@ -21,7 +21,7 @@ void RyanwahGui::cb_ryanwah_activar(Fl_Light_Button* o, void* v) {
 void RyanwahGui::cb_ryanwah_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12031))rkr->efx_RyanWah->setpreset((int) o->value());
-ryanwah_WD->value(rkr->efx_RyanWah->getpar(0)-64);
+ryanwah_WD->value(rkr->efx_RyanWah->getpar(0));
 
 int temp=rkr->efx_RyanWah->getpar(17);
 
@@ -68,7 +68,7 @@ void RyanwahGui::cb_ryanwah_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(256);
  return;
 }
-rkr->efx_RyanWah->changepar(0,(int)(o->value()+64));
+rkr->efx_RyanWah->changepar(0,(int)(o->value()));
 }
 void RyanwahGui::cb_ryanwah_WD(SliderW* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_WD_i(o,v);
@@ -308,8 +308,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_WD->labelfont(0);
   ryanwah_WD->labelsize(10);
   ryanwah_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  ryanwah_WD->minimum(-64);
-  ryanwah_WD->maximum(63);
+  ryanwah_WD->maximum(127);
   ryanwah_WD->step(1);
   ryanwah_WD->textcolor(FL_BACKGROUND2_COLOR);
   ryanwah_WD->callback((Fl_Callback*)cb_ryanwah_WD);
