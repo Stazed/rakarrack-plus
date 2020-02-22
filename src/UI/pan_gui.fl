@@ -4,7 +4,7 @@ header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} PanGui {
   user_data 1 open
-  xywh {1333 108 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1333 108 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -30,7 +30,7 @@ rgui->findpos(13,(int)o->value(),o);}
     user_data 12013
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12013))rkr->efx_Pan->setpreset((int) o->value());
-pan_WD->value(rkr->efx_Pan->getpar(0)-64);
+pan_WD->value(rkr->efx_Pan->getpar(0));
 pan_pan->value(rkr->efx_Pan->getpar(1)-64);
 pan_freq->value(rkr->efx_Pan->getpar(2));
 pan_rnd->value(rkr->efx_Pan->getpar(3));
@@ -57,8 +57,8 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
  rgui->getMIDIControl(58);
  return;
 } 
-rkr->efx_Pan->changepar(0,(int)(o->value()+64));}
-    xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Pan->changepar(0,(int)(o->value()));} selected
+    xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider pan_pan {
@@ -102,7 +102,7 @@ rkr->efx_Pan->changepar(3,(int)o->value());}
   }
   Fl_Choice pan_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Pan->changepar(4,(int)o->value());} open selected
+    callback {rkr->efx_Pan->changepar(4,(int)o->value());} open
     xywh {61 103 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}

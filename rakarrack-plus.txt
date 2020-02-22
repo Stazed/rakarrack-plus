@@ -137,7 +137,7 @@ Overdrive
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
 
 Pan
-    Wet/Dry                     |                |  -64 to 63    |                   |       0 to 127    |
+    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
 

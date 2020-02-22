@@ -21,7 +21,7 @@ void PanGui::cb_pan_activar(Fl_Light_Button* o, void* v) {
 void PanGui::cb_pan_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12013))rkr->efx_Pan->setpreset((int) o->value());
-pan_WD->value(rkr->efx_Pan->getpar(0)-64);
+pan_WD->value(rkr->efx_Pan->getpar(0));
 pan_pan->value(rkr->efx_Pan->getpar(1)-64);
 pan_freq->value(rkr->efx_Pan->getpar(2));
 pan_rnd->value(rkr->efx_Pan->getpar(3));
@@ -47,7 +47,7 @@ void PanGui::cb_pan_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(58);
  return;
 } 
-rkr->efx_Pan->changepar(0,(int)(o->value()+64));
+rkr->efx_Pan->changepar(0,(int)(o->value()));
 }
 void PanGui::cb_pan_WD(SliderW* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_WD_i(o,v);
@@ -164,8 +164,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_WD->labelfont(0);
   pan_WD->labelsize(10);
   pan_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  pan_WD->minimum(-64);
-  pan_WD->maximum(63);
+  pan_WD->maximum(127);
   pan_WD->step(1);
   pan_WD->textcolor(FL_BACKGROUND2_COLOR);
   pan_WD->callback((Fl_Callback*)cb_pan_WD);
