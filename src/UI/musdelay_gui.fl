@@ -3,8 +3,8 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class MusdelayGui {
-  user_data 1 open selected
-  xywh {1640 159 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  user_data 1 open
+  xywh {1640 159 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -30,7 +30,7 @@ rgui->findpos(15,(int)o->value(),o);}
     callback {rkr->MusDelay_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
-musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
+musdelay_WD->value(rkr->efx_MusDelay->getpar(0));
 musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
 musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
 musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
@@ -62,8 +62,8 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
  rgui->getMIDIControl(56);
  return;
 } 
-rkr->efx_MusDelay->changepar(0,(int)o->value()+64);}
-    xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_MusDelay->changepar(0,(int)o->value());} selected
+    xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider musdelay_LRc {

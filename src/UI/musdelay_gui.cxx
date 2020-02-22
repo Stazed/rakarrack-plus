@@ -22,7 +22,7 @@ void MusdelayGui::cb_musdelay_preset_i(Fl_Choice* o, void* v) {
   rkr->MusDelay_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
-musdelay_WD->value(rkr->efx_MusDelay->getpar(0)-64);
+musdelay_WD->value(rkr->efx_MusDelay->getpar(0));
 musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
 musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
 musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
@@ -53,7 +53,7 @@ void MusdelayGui::cb_musdelay_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(56);
  return;
 } 
-rkr->efx_MusDelay->changepar(0,(int)o->value()+64);
+rkr->efx_MusDelay->changepar(0,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_WD(SliderW* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_WD_i(o,v);
@@ -242,8 +242,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_WD->labelfont(0);
   musdelay_WD->labelsize(10);
   musdelay_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  musdelay_WD->minimum(-64);
-  musdelay_WD->maximum(63);
+  musdelay_WD->maximum(127);
   musdelay_WD->step(1);
   musdelay_WD->textcolor(FL_BACKGROUND2_COLOR);
   musdelay_WD->callback((Fl_Callback*)cb_musdelay_WD);
