@@ -3,8 +3,8 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} PhaserGui {
-  user_data 1 open selected
-  xywh {1064 123 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  user_data 1 open
+  xywh {1064 123 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -30,7 +30,7 @@ rgui->findpos(6,(int)o->value(),o);}
     user_data 12006
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12006))rkr->efx_Phaser->setpreset((int) o->value());
-phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
+phaser_WD->value(rkr->efx_Phaser->getpar(0));
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
 phaser_rnd->value(rkr->efx_Phaser->getpar(3));
@@ -77,8 +77,8 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
  rgui->getMIDIControl(54);
  return;
 } 
-rkr->efx_Phaser->changepar(0,(int)(o->value()+64));}
-    xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Phaser->changepar(0,(int)(o->value()));} selected
+    xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider phaser_pan {

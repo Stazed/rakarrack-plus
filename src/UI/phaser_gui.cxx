@@ -21,7 +21,7 @@ void PhaserGui::cb_phaser_activar(Fl_Light_Button* o, void* v) {
 void PhaserGui::cb_phaser_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12006))rkr->efx_Phaser->setpreset((int) o->value());
-phaser_WD->value(rkr->efx_Phaser->getpar(0)-64);
+phaser_WD->value(rkr->efx_Phaser->getpar(0));
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
 phaser_rnd->value(rkr->efx_Phaser->getpar(3));
@@ -55,7 +55,7 @@ void PhaserGui::cb_phaser_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(54);
  return;
 } 
-rkr->efx_Phaser->changepar(0,(int)(o->value()+64));
+rkr->efx_Phaser->changepar(0,(int)(o->value()));
 }
 void PhaserGui::cb_phaser_WD(SliderW* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_WD_i(o,v);
@@ -213,8 +213,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   phaser_WD->labelfont(0);
   phaser_WD->labelsize(10);
   phaser_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  phaser_WD->minimum(-64);
-  phaser_WD->maximum(63);
+  phaser_WD->maximum(127);
   phaser_WD->step(1);
   phaser_WD->textcolor(FL_BACKGROUND2_COLOR);
   phaser_WD->callback((Fl_Callback*)cb_phaser_WD);
