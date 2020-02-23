@@ -256,3 +256,8 @@ Go with Him.carxp:12:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
 RandYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
 AutoYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
 Mono Arpeg.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+
+
+Presets that need fixes:
+
+Bank 3: Oxygenated - Parametric EQ - Mid F. (704 vs 800 min) - High F. (5896 vs 6000 min)
