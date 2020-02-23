@@ -1134,6 +1134,12 @@ RKR::savefile(char *filename)
     fclose(fn);
 }
 
+/**
+ *  This parses the preset files *.rkr types, from the menu  File/Load Preset
+ * 
+ * @param filename
+ *      The user selected filename.
+ */
 void
 RKR::loadfile(char *filename)
 {
@@ -1762,6 +1768,9 @@ RKR::Actualizar_Audio()
     }
 }
 
+/**
+ *  Loads the default banks preset names and information for the bank manager window.
+ */
 void
 RKR::loadnames()
 {
@@ -1817,6 +1826,15 @@ RKR::loadnames()
     }
 }
 
+/**
+ *  This parses the rakarrack bank files *.rkrb types.
+ * @param filename
+ *      The bank file to parse.
+ * 
+ * @return 
+ *      Zero (0) if an error occurs.
+ *      One (1) if successful parsing.
+ */
 int
 RKR::loadbank(char *filename)
 {
