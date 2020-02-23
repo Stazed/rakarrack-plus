@@ -125,8 +125,7 @@ def remap(efxindex, paramindex):
          (2, 12) : (12, 'Suboctave', 'OCT', 0) ,
          (2, 13) : (-1,) ,
 
-         #overdrive
-         (3, -1) : ('RakarrackPlus Distorsion', 'https://github.com/Stazed/rakarrack-plus#dist') ,
+         (3, -1) : ('RakarrackPlus Overdrive', 'https://github.com/Stazed/rakarrack-plus#Overdrive') ,
          (3, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
          (3, 1) : (2, 'Panning', 'PAN', -64) ,
          (3, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,

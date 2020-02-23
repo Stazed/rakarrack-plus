@@ -228,3 +228,31 @@ WahWah  (DynamicFilter.C)
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH - LFO L/R Delay
 Check "MODE" - "Filter Type"                                                                  0 to 4        -- Add Selection box
 
+
+___________________________________________________________________________________________________________________________________
+
+Presets that use Dual_Flange:
+
+Backward Tumble.carxp:135:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Warm Chorus.carxp:249:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Noise Synth.carxp:440:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Stereo Ecstasy.carxp:359:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Jazz Bright Chorus.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Clean Smack Back.carxp:170:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+PongChor.carxp:205:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Helicopter.carxp:456:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Dark Alley.carxp:214:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Reverse delay ambience.carxp:205:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Succulent Clean.carxp:240:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+D Flange.carxp:84:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+
+Preset that use Ring:
+
+AutoYiYa.carxp:275:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+Talk to me.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+Envelope YaYa.carxp:275:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+C Melody.carxp:12:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+Go with Him.carxp:12:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+RandYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+AutoYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+Mono Arpeg.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
