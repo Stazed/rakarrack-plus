@@ -355,13 +355,13 @@ void SliderW::draw()
 
     /* The slider value text amount */
     int datasize;
-    if (textsize() < 11)
+    if (textsize() < 16)
     {
         datasize = textsize();
     }
     else
     {
-        datasize = 11;
+        datasize = 16;
     }
 
     char buf[128];
