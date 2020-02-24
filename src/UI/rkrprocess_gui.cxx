@@ -4935,6 +4935,7 @@ void RKRGUI::chfsize(int value)
             w->selection_color(leds_color);
 
 
+        /* EFX, tuner, tap, volume control, etc */
         if (ud == 1)
         {
             Fl_Group *g = (Fl_Group *) w;
@@ -4943,8 +4944,16 @@ void RKRGUI::chfsize(int value)
             {
                 Fl_Widget *c = g->child(i);
                 long long uh = (long long) c->user_data();
-
-
+                
+                /* SliderW - for the value text size */
+                if (uh == SLIDERW_USER_DATA)
+                {
+                    SliderW *s = (SliderW *) c;
+                    unsigned char tt = s->textsize();
+                    tt += value;
+                    s->textsize(tt);
+                }
+                
                 k = c->labelsize();
                 k += value;
 

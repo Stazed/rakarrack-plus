@@ -23,6 +23,7 @@
 
 SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
 {
+    this->user_data((void*)(SLIDERW_USER_DATA));
 }
 
 int SliderW::handle(int event)
@@ -229,7 +230,9 @@ void SliderW::draw()
 
     double val;
     if (minimum() == maximum())
+    {
         val = 0.5;
+    }
     else
     {
         val = (value() - minimum()) / (maximum() - minimum());
@@ -274,8 +277,7 @@ void SliderW::draw()
     {
         draw_box(FL_THIN_DOWN_BOX, X + W / 2 - 2, Y, 4, H, black);
     }
-    else
-        if (type() == FL_HOR_NICE_SLIDER)
+    else if (type() == FL_HOR_NICE_SLIDER)
     {
         draw_box(FL_THIN_DOWN_BOX, X, Y + H / 2 - 2, W - 4, 4, black);
     }
@@ -318,8 +320,7 @@ void SliderW::draw()
 
         draw_box(FL_THIN_DOWN_BOX, xsl + 2, ysl + d, wsl - 4, hsl - 2 * d, juan);
     }
-    else
-        if (type() == FL_HOR_NICE_SLIDER)
+    else if (type() == FL_HOR_NICE_SLIDER)
     {
         draw_box(box1, xsl, ysl, wsl, hsl, fore_color);
         int d = (wsl - 6) / 2;
@@ -352,18 +353,31 @@ void SliderW::draw()
         back->draw(bxx,byy);
      */
 
+    /* The slider value text amount */
     int datasize;
-
-    if (labelsize() < 11) datasize = labelsize();
-    else datasize = 11;
+    if (textsize() < 11)
+    {
+        datasize = textsize();
+    }
+    else
+    {
+        datasize = 11;
+    }
 
     char buf[128];
     format(buf);
     fl_font(textfont(), datasize);
+    
     if ((Fl::scheme_) && (strcmp(Fl::scheme_, "plastic") == 0))
+    {
         fl_color(active_r() ? leds_color : fl_inactive(textcolor()));
+    }
     else
+    {
         fl_color(active_r() ? luis : fl_inactive(textcolor()));
+    }
+    
+    /* The value box and amount */
     fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP, back);
     fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
 }
