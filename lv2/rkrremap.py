@@ -243,7 +243,7 @@ def remap(efxindex, paramindex):
          (10, 11) : (-1,) ,
 
          (11, -1) : ('RakarrackPlus AlienWah', 'https://github.com/Stazed/rakarrack-plus#awha') ,
-         (11, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (11, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (11, 1) : (2, 'Panning', 'PAN', -64) ,
          (11, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (11, 3) : (4, 'Randomness', 'RND', 0) ,

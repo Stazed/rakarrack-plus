@@ -11,7 +11,7 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
 	rdfs:label "AlienWah 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
+		lv2:symbol "DRYWET" ;
 		pset:value 64.0
 	] , [
 		lv2:symbol "PAN" ;
@@ -50,7 +50,7 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
 	rdfs:label "AlienWah 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
+		lv2:symbol "DRYWET" ;
 		pset:value 64.0
 	] , [
 		lv2:symbol "PAN" ;
@@ -89,7 +89,7 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
 	rdfs:label "AlienWah 3" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
+		lv2:symbol "DRYWET" ;
 		pset:value 64.0
 	] , [
 		lv2:symbol "PAN" ;
@@ -128,7 +128,7 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
 	rdfs:label "AlienWah 4" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
+		lv2:symbol "DRYWET" ;
 		pset:value 64.0
 	] , [
 		lv2:symbol "PAN" ;

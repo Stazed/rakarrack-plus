@@ -1182,7 +1182,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];//0 Wet/Dry
+    val = DRY_WET((int)*plug->param_p[i]);//0 Wet/Dry
     if(plug->alien->getpar(i) != val)
     {
         plug->alien->changepar(i,val);

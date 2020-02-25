@@ -30,7 +30,7 @@ rgui->findpos(11,(int)o->value(),o);}
     user_data 12011
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
-Alienwah_WD->value(rkr->efx_Alienwah->getpar(0));
+Alienwah_WD->value(DRY_WET(rkr->efx_Alienwah->getpar(0)));
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
 Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
@@ -61,13 +61,13 @@ Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));}
     }
   }
   Fl_Value_Slider Alienwah_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(55);
  return;
 } 
-rkr->efx_Alienwah->changepar(0,(int)(o->value()));}
+rkr->efx_Alienwah->changepar(0,DRY_WET((int)(o->value())));} selected
     xywh {48 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -169,7 +169,7 @@ rkr->efx_Alienwah->changepar(7,(int)o->value());}
  rgui->getMIDIControl(96);
  return;
 } 
-rkr->efx_Alienwah->changepar(9,(int)(o->value()));} selected
+rkr->efx_Alienwah->changepar(9,(int)(o->value()));}
     xywh {48 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

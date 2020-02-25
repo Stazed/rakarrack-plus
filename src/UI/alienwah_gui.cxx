@@ -21,7 +21,7 @@ void AlienwahGui::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
 void AlienwahGui::cb_Alienwah_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
-Alienwah_WD->value(rkr->efx_Alienwah->getpar(0));
+Alienwah_WD->value(DRY_WET(rkr->efx_Alienwah->getpar(0)));
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(1)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
 Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
@@ -51,7 +51,7 @@ void AlienwahGui::cb_Alienwah_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(55);
  return;
 } 
-rkr->efx_Alienwah->changepar(0,(int)(o->value()));
+rkr->efx_Alienwah->changepar(0,DRY_WET((int)(o->value())));
 }
 void AlienwahGui::cb_Alienwah_WD(SliderW* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_WD_i(o,v);
@@ -195,7 +195,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
   Alienwah_preset->menu(menu_Alienwah_preset);
 } // Fl_Choice* Alienwah_preset
-{ Alienwah_WD = new SliderW(48, 29, 100, 10, "Wet/Dry");
+{ Alienwah_WD = new SliderW(48, 29, 100, 10, "Dry/Wet");
   Alienwah_WD->type(5);
   Alienwah_WD->box(FL_FLAT_BOX);
   Alienwah_WD->color((Fl_Color)178);

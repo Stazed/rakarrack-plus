@@ -3152,7 +3152,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_WD->redraw();
                 break;
             case 55:
-                ALIENWAH->Alienwah_WD->value(rkr->efx_Alienwah->getpar(0));
+                ALIENWAH->Alienwah_WD->value(DRY_WET(rkr->efx_Alienwah->getpar(0)));
                 ALIENWAH->Alienwah_WD->redraw();
                 break;
             case 56:
