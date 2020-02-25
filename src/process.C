@@ -44,7 +44,7 @@ char *s_uuid;
 char *statefile;
 char *filetoload = NULL;
 char *banktoload;
-char *jack_client_name = (char*) "rakarrack";
+char *jack_client_name = (char*) "rakarrack-plus";
 
 Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
