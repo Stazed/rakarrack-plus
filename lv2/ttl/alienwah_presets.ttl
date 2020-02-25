@@ -27,7 +27,7 @@
 		pset:value 0.0
 	] , [
 		lv2:symbol "STDL" ;
-		pset:value -2.0
+		pset:value 62.0
 	] , [
 		lv2:symbol "DEPTH" ;
 		pset:value 60.0
@@ -66,7 +66,7 @@
 		pset:value 0.0
 	] , [
 		lv2:symbol "STDL" ;
-		pset:value 35.0
+		pset:value 101.0
 	] , [
 		lv2:symbol "DEPTH" ;
 		pset:value 60.0
@@ -105,7 +105,7 @@
 		pset:value 1.0
 	] , [
 		lv2:symbol "STDL" ;
-		pset:value 36.0
+		pset:value 100.0
 	] , [
 		lv2:symbol "DEPTH" ;
 		pset:value 112.0
@@ -144,7 +144,7 @@
 		pset:value 1.0
 	] , [
 		lv2:symbol "STDL" ;
-		pset:value 2.0
+		pset:value 66.0
 	] , [
 		lv2:symbol "DEPTH" ;
 		pset:value 101.0

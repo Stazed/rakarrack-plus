@@ -3336,7 +3336,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_LRc->redraw();
                 break;
             case 96:
-                ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(9) - 64);
+                ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(9));
                 ALIENWAH->Alienwah_LR->redraw();
                 break;
             case 97:

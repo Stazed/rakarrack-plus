@@ -39,8 +39,8 @@ Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
 Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
 Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
 Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
-Alienwah_LR->value(rkr->efx_Alienwah->getpar(9)-64);
-Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));} selected
+Alienwah_LR->value(rkr->efx_Alienwah->getpar(9));
+Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));}
     xywh {76 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -169,8 +169,8 @@ rkr->efx_Alienwah->changepar(7,(int)o->value());}
  rgui->getMIDIControl(96);
  return;
 } 
-rkr->efx_Alienwah->changepar(9,(int)(o->value()+64));}
-    xywh {48 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Alienwah->changepar(9,(int)(o->value()));} selected
+    xywh {48 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
