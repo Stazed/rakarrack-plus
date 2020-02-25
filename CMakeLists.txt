@@ -1,6 +1,7 @@
 #CMake file for Rakarrack & LV2
 
 cmake_minimum_required(VERSION 3.1)
+project (rakarrack-plus)
 
 set (PACKAGE_VERSION "0.7.1")
 
@@ -82,6 +83,7 @@ endif (HasJackSession)
 find_package (PkgConfig REQUIRED)
 
 #dependencies
+SET(FLTK_SKIP_OPENGL TRUE) 
 find_package (FLTK REQUIRED)
 find_package (ALSA REQUIRED alsa>=1.0.17)
 find_package(X11 REQUIRED)
