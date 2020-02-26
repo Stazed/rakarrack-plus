@@ -463,7 +463,7 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];//0 Wet/dry
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->dist->getpar(i) != val)
     {
         plug->dist->changepar(i,val);
@@ -5072,7 +5072,7 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];//0 Wet/dry
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->overdrive->getpar(i) != val)
     {
         plug->overdrive->changepar(i,val);

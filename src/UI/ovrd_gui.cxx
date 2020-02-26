@@ -21,7 +21,7 @@ void OvrdGui::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
 void OvrdGui::cb_ovrd_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
-ovrd_WD->value(rkr->efx_Overdrive->getpar(0));
+ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(0)));
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
 ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
@@ -49,7 +49,7 @@ void OvrdGui::cb_ovrd_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(29);
  return;
 } 
-rkr->efx_Overdrive->changepar(0,(int)(o->value()));
+rkr->efx_Overdrive->changepar(0,Dry_Wet((int)(o->value())));
 }
 void OvrdGui::cb_ovrd_WD(SliderW* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_WD_i(o,v);
@@ -181,7 +181,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ovrd_preset->menu(menu_ovrd_preset);
 } // Fl_Choice* ovrd_preset
-{ ovrd_WD = new SliderW(51, 35, 100, 10, "Wet/Dry");
+{ ovrd_WD = new SliderW(51, 35, 100, 10, "Dry/Wet");
   ovrd_WD->type(5);
   ovrd_WD->box(FL_FLAT_BOX);
   ovrd_WD->color((Fl_Color)178);

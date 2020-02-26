@@ -3128,11 +3128,11 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_WD->redraw();
                 break;
             case 29:
-                OVRD->ovrd_WD->value(rkr->efx_Overdrive->getpar(0));
+                OVRD->ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(0)));
                 OVRD->ovrd_WD->redraw();
                 break;
             case 30:
-                DIST->dist_WD->value(rkr->efx_Distorsion->getpar(0));
+                DIST->dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(0)));
                 DIST->dist_WD->redraw();
                 break;
             case 31:

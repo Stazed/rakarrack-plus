@@ -11,8 +11,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
 #	rdfs:label "overdrive 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 84.0
+		lv2:symbol "DRYWET" ;
+		pset:value 43.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -52,8 +52,8 @@
 	a pset:Preset ;
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 85.0
+		lv2:symbol "DRYWET" ;
+		pset:value 42.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0

@@ -110,7 +110,7 @@ def remap(efxindex, paramindex):
          (1, 9) : (-1,) ,
 
          (2, -1) : ('RakarrackPlus Distorsion', 'https://github.com/Stazed/rakarrack-plus#dist') ,
-         (2, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (2, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (2, 1) : (2, 'Panning', 'PAN', -64) ,
          (2, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
          (2, 3) : (4, 'Drive', 'DRIVE', 0) ,
@@ -126,7 +126,7 @@ def remap(efxindex, paramindex):
          (2, 13) : (-1,) ,
 
          (3, -1) : ('RakarrackPlus Overdrive', 'https://github.com/Stazed/rakarrack-plus#Overdrive') ,
-         (3, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (3, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (3, 1) : (2, 'Panning', 'PAN', -64) ,
          (3, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
          (3, 3) : (4, 'Drive', 'DRIVE', 0) ,

@@ -50,7 +50,7 @@ DistBand (MBDist)
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRCr
 
 Distortion
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
 
@@ -130,7 +130,7 @@ Opticaltrem
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Overdrive
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |     DISTORTION    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |     DISTORTION    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
 

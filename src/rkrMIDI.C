@@ -955,11 +955,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 29:
-        efx_Overdrive->changepar(0, value);
+        efx_Overdrive->changepar(0, Dry_Wet(value));
         break;
 
     case 30:
-        efx_Distorsion->changepar(0, value);
+        efx_Distorsion->changepar(0, Dry_Wet(value));
         break;
 
     case 31:
