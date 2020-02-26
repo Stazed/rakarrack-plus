@@ -276,7 +276,7 @@ def readBankFile(filename):
                         makePort(of,rkrremap.remap(j,sd[2*n+1]),sd[2*n+2])
                    #else skipped
                 else:
-                    if data[1] == "Dry/Wet":
+                    if data[2] == "DRYWET":
                         makePort(of,data,127 - params[k])
                     else:
                         makePort(of,data,params[k])

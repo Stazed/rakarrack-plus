@@ -11,8 +11,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Marshall JCM200" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -43,8 +43,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Fender Superchamp" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -75,8 +75,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Mesa Boogie" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 11.0
@@ -107,8 +107,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
 	rdfs:label "Mesa Boogie 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value -4.0

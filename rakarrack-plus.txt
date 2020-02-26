@@ -35,7 +35,7 @@ Compressor
     Wet/Dry                     |                |    none       |                   |       none        |
 
 Convolotron
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
 

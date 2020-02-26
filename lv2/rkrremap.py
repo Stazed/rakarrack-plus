@@ -507,7 +507,7 @@ def remap(efxindex, paramindex):
 
          #convo
          (29, -1) : ('RakarrackPlus Convolotron', 'https://github.com/Stazed/rakarrack-plus#Convolotron') ,
-         (29, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (29, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (29, 1) : (2, 'Pan', 'PAN', -64) ,
          (29, 2) : (3, 'Safe', 'SAFE', 0) ,
          (29, 3) : (4, 'Length', 'LENGTH', 0) ,

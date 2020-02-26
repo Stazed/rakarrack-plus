@@ -4091,7 +4091,7 @@ void RKRGUI::ActMIDI()
                 update_looper();
                 break;
             case 280:
-                CONVOLOTRON->convo_WD->value(rkr->efx_Convol->getpar(0));
+                CONVOLOTRON->convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(0)));
                 CONVOLOTRON->convo_WD->redraw();
                 break;
             case 281:
