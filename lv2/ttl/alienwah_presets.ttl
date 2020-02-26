@@ -12,7 +12,7 @@
 	rdfs:label "AlienWah 1" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
-		pset:value 64.0
+		pset:value 63.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -51,7 +51,7 @@
 	rdfs:label "AlienWah 2" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
-		pset:value 64.0
+		pset:value 63.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -90,7 +90,7 @@
 	rdfs:label "AlienWah 3" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
-		pset:value 64.0
+		pset:value 63.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -129,7 +129,7 @@
 	rdfs:label "AlienWah 4" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
-		pset:value 64.0
+		pset:value 63.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
