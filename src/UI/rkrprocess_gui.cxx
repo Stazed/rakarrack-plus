@@ -3779,7 +3779,7 @@ void RKRGUI::ActMIDI()
                 EXCITER->ex_10->redraw();
                 break;
             case 202:
-                MBDIST->mbdist_WD->value(rkr->efx_MBDist->getpar(0));
+                MBDIST->mbdist_WD->value(Dry_Wet(rkr->efx_MBDist->getpar(0)));
                 MBDIST->mbdist_WD->redraw();
                 break;
             case 203:

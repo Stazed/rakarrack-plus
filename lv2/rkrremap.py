@@ -412,7 +412,7 @@ def remap(efxindex, paramindex):
          (22, 13) : (-1,) ,
 
          (23, -1) : ('RakarrackPlus DistBand', 'https://github.com/Stazed/rakarrack-plus#DistBand') ,
-         (23, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (23, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (23, 1) : (2, 'Panning', 'PAN', -64) ,
          (23, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
          (23, 3) : (4, 'Drive', 'DRIVE', 0) ,
