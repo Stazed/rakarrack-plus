@@ -10,8 +10,8 @@
 	a pset:Preset ;
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -42,8 +42,8 @@
 	a pset:Preset ;
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -74,8 +74,8 @@
 	a pset:Preset ;
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 11.0
@@ -106,8 +106,8 @@
 	a pset:Preset ;
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value -4.0
@@ -138,8 +138,8 @@
 	a pset:Preset ;
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value -4.0
@@ -170,8 +170,8 @@
 	a pset:Preset ;
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 67.0
+		lv2:symbol "DRYWET" ;
+		pset:value 60.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -202,8 +202,8 @@
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         lv2:port [
-            lv2:symbol "WETDRY" ;
-            pset:value 81.0
+            lv2:symbol "DRYWET" ;
+            pset:value 46.0
         ] , [
             lv2:symbol "PAN" ;
             pset:value -4.0
@@ -234,8 +234,8 @@
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         lv2:port [
-            lv2:symbol "WETDRY" ;
-            pset:value 81.0
+            lv2:symbol "DRYWET" ;
+            pset:value 46.0
         ] , [
             lv2:symbol "PAN" ;
             pset:value -4.0
@@ -266,8 +266,8 @@
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
         lv2:port [
-            lv2:symbol "WETDRY" ;
-            pset:value 62.0
+            lv2:symbol "DRYWET" ;
+            pset:value 65.0
         ] , [
             lv2:symbol "PAN" ;
             pset:value 0.0

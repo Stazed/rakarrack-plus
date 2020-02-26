@@ -142,7 +142,7 @@ def remap(efxindex, paramindex):
          (3, 13) : (-1,) ,
 
          (4, -1) : ('RakarrackPlus Echo', 'https://github.com/Stazed/rakarrack-plus#eco') ,
-         (4, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (4, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (4, 1) : (2, 'Panning', 'PAN', -64) ,
          (4, 2) : (3, 'Delay', 'DELAY', 0) ,
          (4, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', -64) ,

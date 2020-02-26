@@ -3168,7 +3168,7 @@ void RKRGUI::ActMIDI()
                 PAN->pan_WD->redraw();
                 break;
             case 59:
-                ECHO->echo_WD->value(rkr->efx_Echo->getpar(0));
+                ECHO->echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(0)));
                 ECHO->echo_WD->redraw();
                 break;
             case 46:

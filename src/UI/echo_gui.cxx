@@ -21,7 +21,7 @@ void EchoGui::cb_echo_activar(Fl_Light_Button* o, void* v) {
 void EchoGui::cb_echo_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12004))rkr->efx_Echo->setpreset((int) o->value());
-echo_WD->value(rkr->efx_Echo->getpar(0));
+echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(0)));
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
 echo_LRdl->value(rkr->efx_Echo->getpar(3));
@@ -54,7 +54,7 @@ void EchoGui::cb_echo_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(59);
  return;
 } 
-rkr->efx_Echo->changepar(0,(int)(o->value()));
+rkr->efx_Echo->changepar(0,Dry_Wet((int)(o->value())));
 }
 void EchoGui::cb_echo_WD(SliderW* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_WD_i(o,v);
@@ -157,7 +157,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echo_preset->menu(menu_echo_preset);
 } // Fl_Choice* echo_preset
-{ echo_WD = new SliderW(51, 35, 100, 10, "Wet/Dry");
+{ echo_WD = new SliderW(51, 35, 100, 10, "Dry/Wet");
   echo_WD->type(5);
   echo_WD->box(FL_FLAT_BOX);
   echo_WD->color((Fl_Color)178);
