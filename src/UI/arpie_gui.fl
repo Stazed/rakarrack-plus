@@ -30,7 +30,7 @@ rgui->findpos(24,(int)o->value(),o);}
     user_data 12024
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
-arpie_WD->value(rkr->efx_Arpie->getpar(0));
+arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
 arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
@@ -81,13 +81,13 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
     }
   }
   Fl_Value_Slider arpie_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(212);
  return;
 } 
-rkr->efx_Arpie->changepar(0,(int)(o->value()));} selected
+rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));} selected
     xywh {51 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

@@ -11,8 +11,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Arpie 1" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 67.0
+                lv2:symbol "DRYWET" ;
+                pset:value 60.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -51,8 +51,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Arpie 2" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 67.0
+                lv2:symbol "DRYWET" ;
+                pset:value 60.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -91,8 +91,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Arpie 3" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 67.0
+                lv2:symbol "DRYWET" ;
+                pset:value 60.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 11.0
@@ -131,8 +131,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Simple Arpie" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 67.0
+                lv2:symbol "DRYWET" ;
+                pset:value 60.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value -4.0
@@ -171,8 +171,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Canyon" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 67.0
+                lv2:symbol "DRYWET" ;
+                pset:value 60.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value -4.0
@@ -211,8 +211,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Panning Arp 1" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 67.0
+                lv2:symbol "DRYWET" ;
+                pset:value 60.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -251,8 +251,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Panning Arp 2" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 81.0
+                lv2:symbol "DRYWET" ;
+                pset:value 46.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value -4.0
@@ -291,8 +291,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Panning Arp 3" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 81.0
+                lv2:symbol "DRYWET" ;
+                pset:value 46.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value -4.0
@@ -331,8 +331,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
         rdfs:label "Feedback Arpie" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 62.0
+                lv2:symbol "DRYWET" ;
+                pset:value 65.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0

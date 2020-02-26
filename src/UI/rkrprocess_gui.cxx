@@ -3819,7 +3819,7 @@ void RKRGUI::ActMIDI()
                 MBDIST->mbdist_pan->redraw();
                 break;
             case 212:
-                ARPIE->arpie_WD->value(rkr->efx_Arpie->getpar(0));
+                ARPIE->arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
                 ARPIE->arpie_WD->redraw();
                 break;
             case 213:

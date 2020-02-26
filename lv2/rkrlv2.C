@@ -2162,7 +2162,7 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];//w/d
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->arp->getpar(i) != val)
     {
         plug->arp->changepar(i,val);

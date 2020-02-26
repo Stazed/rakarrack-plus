@@ -430,7 +430,7 @@ def remap(efxindex, paramindex):
          (23, 15) : (-1,) ,
 
          (24, -1) : ('RakarrackPlus Arpie', 'https://github.com/Stazed/rakarrack-plus#Arpie') ,
-         (24, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (24, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (24, 1) : (2, 'Panning', 'PAN', -64) ,
          (24, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (24, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', -64) ,

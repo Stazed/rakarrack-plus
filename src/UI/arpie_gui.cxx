@@ -21,7 +21,7 @@ void ArpieGui::cb_arpie_activar(Fl_Light_Button* o, void* v) {
 void ArpieGui::cb_arpie_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
-arpie_WD->value(rkr->efx_Arpie->getpar(0));
+arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
 arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
@@ -56,7 +56,7 @@ void ArpieGui::cb_arpie_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(212);
  return;
 } 
-rkr->efx_Arpie->changepar(0,(int)(o->value()));
+rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));
 }
 void ArpieGui::cb_arpie_WD(SliderW* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_WD_i(o,v);
@@ -203,7 +203,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
   arpie_preset->menu(menu_arpie_preset);
 } // Fl_Choice* arpie_preset
-{ arpie_WD = new SliderW(51, 28, 100, 10, "Wet/Dry");
+{ arpie_WD = new SliderW(51, 28, 100, 10, "Dry/Wet");
   arpie_WD->type(5);
   arpie_WD->box(FL_FLAT_BOX);
   arpie_WD->color((Fl_Color)178);
