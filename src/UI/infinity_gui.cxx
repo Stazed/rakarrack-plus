@@ -21,7 +21,7 @@ void InfinityGui::cb_infinity_activar(Fl_Light_Button* o, void* v) {
 void InfinityGui::cb_infinity_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12046))rkr->efx_Infinity->setpreset((int) o->value());
-infinity_WD->value(rkr->efx_Infinity->getpar(0));
+infinity_WD->value(Dry_Wet(rkr->efx_Infinity->getpar(0)));
 infinity_Q->value(rkr->efx_Infinity->getpar(9));
 infinity_1->value(rkr->efx_Infinity->getpar(1));
 infinity_2->value(rkr->efx_Infinity->getpar(2));
@@ -64,7 +64,7 @@ void InfinityGui::cb_infinity_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(395);
  return;
 } 
-rkr->efx_Infinity->changepar(0,(int)(o->value()));
+rkr->efx_Infinity->changepar(0,Dry_Wet((int)(o->value())));
 }
 void InfinityGui::cb_infinity_WD(SliderW* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_WD_i(o,v);
@@ -250,7 +250,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_preset->when(FL_WHEN_RELEASE_ALWAYS);
   infinity_preset->menu(menu_infinity_preset);
 } // Fl_Choice* infinity_preset
-{ infinity_WD = new SliderW(52, 27, 100, 10, "Wet/Dry");
+{ infinity_WD = new SliderW(52, 27, 100, 10, "Dry/Wet");
   infinity_WD->type(5);
   infinity_WD->box(FL_FLAT_BOX);
   infinity_WD->color((Fl_Color)178);

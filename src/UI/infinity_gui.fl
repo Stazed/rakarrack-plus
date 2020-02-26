@@ -29,7 +29,7 @@ rgui->findpos(46,(int)o->value(),o);}
     user_data 12046
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12046))rkr->efx_Infinity->setpreset((int) o->value());
-infinity_WD->value(rkr->efx_Infinity->getpar(0));
+infinity_WD->value(Dry_Wet(rkr->efx_Infinity->getpar(0)));
 infinity_Q->value(rkr->efx_Infinity->getpar(9));
 infinity_1->value(rkr->efx_Infinity->getpar(1));
 infinity_2->value(rkr->efx_Infinity->getpar(2));
@@ -46,7 +46,7 @@ infinity_stdf->value(rkr->efx_Infinity->getpar(13));
 infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
 infinity_pan->value(rkr->efx_Infinity->getpar(15));
 infinity_rev->value(rkr->efx_Infinity->getpar(16));
-infinity_stages->value(rkr->efx_Infinity->getpar(17));}
+infinity_stages->value(rkr->efx_Infinity->getpar(17));} selected
     xywh {80 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -91,13 +91,13 @@ infinity_stages->value(rkr->efx_Infinity->getpar(17));}
     }
   }
   Fl_Value_Slider infinity_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(395);
  return;
 } 
-rkr->efx_Infinity->changepar(0,(int)(o->value()));} selected
+rkr->efx_Infinity->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {52 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

@@ -104,7 +104,7 @@ Harmonizer
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Infinity
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |  -64 to 64    |                   |      -64 to 64    |  STDF - Sweep L/R Delay
     Band (1 to 8)               |                |  -64 to 64    |                   |      -64 to 64    |  B# - Band # Gain
 

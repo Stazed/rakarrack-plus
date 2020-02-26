@@ -4371,7 +4371,14 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)//0-17
+    i=0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->inf->getpar(i) != val)
+    {
+        plug->inf->changepar(i,val);
+    }
+
+    for(i++; i<plug->nparams; i++)//1-17
     {
         val = (int)*plug->param_p[i];
         if(plug->inf->getpar(i) != val)

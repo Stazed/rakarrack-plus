@@ -741,7 +741,7 @@ def remap(efxindex, paramindex):
          (45, 11) : (-1,) ,
 
          (46, -1) : ('RakarrackPlus Infinity', 'https://github.com/Stazed/rakarrack-plus#Infinity') ,
-         (46, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (46, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (46, 1) : (2, 'Band 1 Gain', 'B1', 0) ,
          (46, 2) : (3, 'Band 2 Gain', 'B2', 0) ,
          (46, 3) : (4, 'Band 3 Gain', 'B3', 0) ,

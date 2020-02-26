@@ -12,8 +12,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
 	rdfs:label "Basic" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 64.0
+        lv2:symbol "DRYWET" ;
+        pset:value 63.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -73,8 +73,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
 	rdfs:label "Rising Comb" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 64.0
+        lv2:symbol "DRYWET" ;
+        pset:value 63.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -134,8 +134,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
 	rdfs:label "Falling Comb" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 64.0
+        lv2:symbol "DRYWET" ;
+        pset:value 63.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -195,8 +195,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
 	rdfs:label "Laser" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 0.0
+        lv2:symbol "DRYWET" ;
+        pset:value 127.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -256,8 +256,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
 	rdfs:label "Doppler" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 0.0
+        lv2:symbol "DRYWET" ;
+        pset:value 127.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -317,8 +317,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
     rdfs:label "Detune" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 0.0
+        lv2:symbol "DRYWET" ;
+        pset:value 127.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -378,8 +378,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
     rdfs:label "Dizzy Sailor" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 0.0
+        lv2:symbol "DRYWET" ;
+        pset:value 127.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -439,8 +439,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
     rdfs:label "Stereo Phaser" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 42.0
+        lv2:symbol "DRYWET" ;
+        pset:value 85.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -500,8 +500,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
     rdfs:label "Corkscrew" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 64.0
+        lv2:symbol "DRYWET" ;
+        pset:value 63.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
@@ -561,8 +561,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
     rdfs:label "FreeqeeVox" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-        pset:value 0.0
+        lv2:symbol "DRYWET" ;
+        pset:value 127.0
     ], [
         lv2:symbol "B1" ;
         pset:value 64.0
