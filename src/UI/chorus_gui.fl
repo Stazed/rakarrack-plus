@@ -30,7 +30,7 @@ rgui->findpos(5,(int)o->value(),o);}
     user_data 12005
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
-chorus_WD->value(rkr->efx_Chorus->getpar(0));
+chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(0)));
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
 chorus_rnd->value(rkr->efx_Chorus->getpar(3));
@@ -66,13 +66,13 @@ chorus_awesome->value(rkr->efx_Chorus->getpar(12));}
     }
   }
   Fl_Value_Slider chorus_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(52);
  return;
 } 
-rkr->efx_Chorus->changepar(0,(int)(o->value()));} selected
+rkr->efx_Chorus->changepar(0,Dry_Wet((int)(o->value())));} selected
     xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

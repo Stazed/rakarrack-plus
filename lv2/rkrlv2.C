@@ -646,7 +646,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->chorus->getpar(i) != val)
     {
         plug->chorus->changepar(i,val);
@@ -4960,7 +4960,7 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->flanger->getpar(i) != val)
     {
         plug->flanger->changepar(i,val);

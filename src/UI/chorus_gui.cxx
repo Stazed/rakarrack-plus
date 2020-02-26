@@ -21,7 +21,7 @@ void ChorusGui::cb_chorus_activar(Fl_Light_Button* o, void* v) {
 void ChorusGui::cb_chorus_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
-chorus_WD->value(rkr->efx_Chorus->getpar(0));
+chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(0)));
 chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(2));
 chorus_rnd->value(rkr->efx_Chorus->getpar(3));
@@ -53,7 +53,7 @@ void ChorusGui::cb_chorus_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(52);
  return;
 } 
-rkr->efx_Chorus->changepar(0,(int)(o->value()));
+rkr->efx_Chorus->changepar(0,Dry_Wet((int)(o->value())));
 }
 void ChorusGui::cb_chorus_WD(SliderW* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_WD_i(o,v);
@@ -197,7 +197,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   chorus_preset->menu(menu_chorus_preset);
 } // Fl_Choice* chorus_preset
-{ chorus_WD = new SliderW(49, 29, 100, 10, "Wet/Dry");
+{ chorus_WD = new SliderW(49, 29, 100, 10, "Dry/Wet");
   chorus_WD->type(5);
   chorus_WD->box(FL_FLAT_BOX);
   chorus_WD->color((Fl_Color)178);

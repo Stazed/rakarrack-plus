@@ -12,7 +12,7 @@ Analog Phaser
     FIXME Add slider for Randomness - as per LV2
 
 Arpie
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (LRdl.)      |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY -  Left/Right Delay Offset
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr - Left/Right Crossover
 
@@ -20,7 +20,7 @@ Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |
 
 Chorus
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCR - Left/Right Crossover
@@ -94,7 +94,7 @@ Expander
     Level (Output Gain)         |                |   1 to 127    |                   |       1 to 127    |  OUTPUT - Output Gain
 
 Flanger
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
     Pan                         |                |  -64 to 63    |                   |       --------    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       --------    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       --------    |  

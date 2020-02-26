@@ -967,11 +967,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 52:
-        efx_Chorus->changepar(0, value);
+        efx_Chorus->changepar(0, Dry_Wet(value));
         break;
 
     case 53:
-        efx_Flanger->changepar(0, value);
+        efx_Flanger->changepar(0, Dry_Wet(value));
         break;
 
     case 54:

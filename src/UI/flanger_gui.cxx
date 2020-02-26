@@ -21,7 +21,7 @@ void FlangerGui::cb_flanger_activar(Fl_Light_Button* o, void* v) {
 void FlangerGui::cb_flanger_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
-flanger_WD->value(rkr->efx_Flanger->getpar(0));
+flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(0)));
 flanger_pan->value(rkr->efx_Flanger->getpar(1)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(2));
 flanger_rnd->value(rkr->efx_Flanger->getpar(3));
@@ -53,7 +53,7 @@ void FlangerGui::cb_flanger_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(53);
  return;
 } 
-rkr->efx_Flanger->changepar(0,(int)(o->value()));
+rkr->efx_Flanger->changepar(0,Dry_Wet((int)(o->value())));
 }
 void FlangerGui::cb_flanger_WD(SliderW* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_WD_i(o,v);
@@ -197,7 +197,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   flanger_preset->when(FL_WHEN_RELEASE_ALWAYS);
   flanger_preset->menu(menu_flanger_preset);
 } // Fl_Choice* flanger_preset
-{ flanger_WD = new SliderW(52, 29, 100, 10, "Wet/Dry");
+{ flanger_WD = new SliderW(52, 29, 100, 10, "Dry/Wet");
   flanger_WD->type(5);
   flanger_WD->box(FL_FLAT_BOX);
   flanger_WD->color((Fl_Color)178);

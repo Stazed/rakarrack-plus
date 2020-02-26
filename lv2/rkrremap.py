@@ -154,7 +154,7 @@ def remap(efxindex, paramindex):
          (4, 9) : (-1,) ,
 
          (5, -1) : ('RakarrackPlus Chorus', 'https://github.com/Stazed/rakarrack-plus#chor') ,
-         (5, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (5, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (5, 1) : (2, 'Panning', 'PAN', -64) ,
          (5, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (5, 3) : (4, 'Randomness', 'RND', 0) ,
@@ -185,7 +185,7 @@ def remap(efxindex, paramindex):
          (6, 12) : (-1,) ,
 
          (7, -1) : ('RakarrackPlus Flanger', 'https://github.com/Stazed/rakarrack-plus#Flange') ,
-         (7, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (7, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (7, 1) : (2, 'Panning', 'PAN', -64) ,
          (7, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (7, 3) : (4, 'Randomness', 'RND', 0) ,
