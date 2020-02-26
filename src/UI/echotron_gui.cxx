@@ -21,7 +21,7 @@ void EchotronGui::cb_echotron_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12041))rkr->efx_Echotron->setpreset((int) o->value());
 echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
-echotron_WD->value(rkr->efx_Echotron->getpar(0));
+echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(0)));
 echotron_damp->value(rkr->efx_Echotron->getpar(6));
 echotron_fnum->value(rkr->efx_Echotron->getpar(8));
 echotron_user->value(rkr->efx_Echotron->getpar(4));
@@ -58,7 +58,7 @@ void EchotronGui::cb_echotron_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(348);
  return;
 }
-rkr->efx_Echotron->changepar(0,(int)(o->value()));
+rkr->efx_Echotron->changepar(0,Dry_Wet((int)(o->value())));
 }
 void EchotronGui::cb_echotron_WD(SliderW* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_WD_i(o,v);
@@ -273,7 +273,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echotron_preset->menu(menu_echotron_preset);
 } // Fl_Choice* echotron_preset
-{ echotron_WD = new SliderW(52, 25, 100, 10, "Wet/Dry");
+{ echotron_WD = new SliderW(52, 25, 100, 10, "Dry/Wet");
   echotron_WD->type(5);
   echotron_WD->box(FL_FLAT_BOX);
   echotron_WD->color((Fl_Color)178);

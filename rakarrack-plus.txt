@@ -68,7 +68,7 @@ Echo
     L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
 
 Echotron
-    Wet/Dry                     |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |      -64 to 64    |  LRC  - Left/Right Crossover

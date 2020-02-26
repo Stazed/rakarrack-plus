@@ -666,7 +666,7 @@ def remap(efxindex, paramindex):
          (40, 16) : (-1,) ,
 
          (41, -1) : ('RakarrackPlus Echotron', 'https://github.com/Stazed/rakarrack-plus#Echotron') ,
-         (41, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (41, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (41, 1) : (2, 'Filter Depth', 'DEPTH', -64) ,
          (41, 2) : (3, 'LFO Width', 'WIDTH', 0) ,
          (41, 3) : (4, 'Number of Taps', 'LENGTH', 0) ,

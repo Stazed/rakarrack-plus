@@ -3604,7 +3604,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];//0 w/d
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->echotron->getpar(i) != val)
     {
         plug->echotron->changepar(i,val);

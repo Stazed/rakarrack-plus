@@ -4363,7 +4363,7 @@ void RKRGUI::ActMIDI()
                 REVERBTRON->revtron_fade->redraw();
                 break;
             case 348:
-                ECHOTRON->echotron_WD->value(rkr->efx_Echotron->getpar(0));
+                ECHOTRON->echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(0)));
                 ECHOTRON->echotron_WD->redraw();
                 break;
             case 349:

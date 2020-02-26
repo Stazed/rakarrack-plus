@@ -2221,7 +2221,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 348:
-        efx_Echotron->changepar(0, value);
+        efx_Echotron->changepar(0, Dry_Wet(value));
         break;
 
     case 349:

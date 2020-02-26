@@ -11,8 +11,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
 	rdfs:label "Summer" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "DEPTH" ;
 		pset:value -19.0
@@ -65,8 +65,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
 	rdfs:label "Ambience" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 96.0
+        lv2:symbol "DRYWET" ;
+		pset:value 31.0
     ], [
         lv2:symbol "DEPTH" ;
 		pset:value 0.0
@@ -119,8 +119,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
 	rdfs:label "Arranjer" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "DEPTH" ;
 		pset:value 0.0
@@ -173,8 +173,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
 	rdfs:label "Suction" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 0.0
+        lv2:symbol "DRYWET" ;
+		pset:value 127.0
     ], [
         lv2:symbol "DEPTH" ;
 		pset:value -17.0
@@ -227,8 +227,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
 	rdfs:label "Suction Flange" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "DEPTH" ;
 		pset:value -28.0
