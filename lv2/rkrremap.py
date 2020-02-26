@@ -274,7 +274,7 @@ def remap(efxindex, paramindex):
          (13, 9) : (-1,) ,
 
          (14, -1) : ('RakarrackPlus Harmonizer (no midi)', 'https://github.com/Stazed/rakarrack-plus#har_no_mid') ,
-         (14, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (14, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (14, 1) : (2, 'Pan', 'PAN', -64) ,
          (14, 2) : (3, 'Gain', 'GAIN', -64) ,
          (14, 3) : (4, 'Interval', 'INT', -12) ,

@@ -11,8 +11,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
 	rdfs:label "plain" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -47,8 +47,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
 	rdfs:label "Octavador" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -83,8 +83,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
 	rdfs:label "min3rd Down" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0

@@ -23,7 +23,7 @@ void HarGui::cb_har_activar(Fl_Light_Button* o, void* v) {
 void HarGui::cb_har_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12014))rkr->efx_Har->setpreset((int)o->value());
-har_WD->value(rkr->efx_Har->getpar(0));
+har_WD->value(Dry_Wet(rkr->efx_Har->getpar(0)));
 har_pan->value(rkr->efx_Har->getpar(1)-64);
 har_gan->value(rkr->efx_Har->getpar(2)-64);
 har_int->value(rkr->efx_Har->getpar(3)-12);
@@ -53,7 +53,7 @@ void HarGui::cb_har_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(31);
  return;
 } 
-rkr->efx_Har->changepar(0,(int)(o->value()));
+rkr->efx_Har->changepar(0,Dry_Wet((int)(o->value())));
 }
 void HarGui::cb_har_WD(SliderW* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_WD_i(o,v);
@@ -178,7 +178,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_preset->when(FL_WHEN_RELEASE_ALWAYS);
   har_preset->menu(menu_har_preset);
 } // Fl_Choice* har_preset
-{ har_WD = new SliderW(50, 30, 100, 10, "Wet/Dry");
+{ har_WD = new SliderW(50, 30, 100, 10, "Dry/Wet");
   har_WD->type(5);
   har_WD->box(FL_FLAT_BOX);
   har_WD->color((Fl_Color)178);

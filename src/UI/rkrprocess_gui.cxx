@@ -3136,7 +3136,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_WD->redraw();
                 break;
             case 31:
-                HAR->har_WD->value(rkr->efx_Har->getpar(0));
+                HAR->har_WD->value(Dry_Wet(rkr->efx_Har->getpar(0)));
                 HAR->har_WD->redraw();
                 break;
             case 52:
