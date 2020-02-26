@@ -979,7 +979,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 55:
-        efx_Alienwah->changepar(0, DRY_WET(value));
+        efx_Alienwah->changepar(0, Dry_Wet(value));
         break;
 
     case 56:
@@ -1247,7 +1247,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 117:
-        efx_APhaser->changepar(0, DRY_WET(value));
+        efx_APhaser->changepar(0, Dry_Wet(value));
         break;
 
     case 118:

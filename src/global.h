@@ -91,7 +91,7 @@
 #define JACK_RINGBUFFER_SIZE 16384 // Default size for ringbuffer
 #define SPACE_BAR 32    // for space bar pressed
 
-inline int DRY_WET (int x) {return 127 - x;}
+inline int Dry_Wet (int x) {return 127 - x;}
 
 typedef union {
     float f;
