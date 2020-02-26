@@ -750,7 +750,14 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<7; i++) //0-6
+    i=0;
+    val = DRY_WET((int)*plug->param_p[i]);//0 Wet/Dry
+    if(plug->aphase->getpar(i) != val)
+    {
+        plug->aphase->changepar(i,val);
+    }
+    
+    for(i++; i<7; i++) //1-6
     {
         val = (int)*plug->param_p[i];
         if(plug->aphase->getpar(i) != val)

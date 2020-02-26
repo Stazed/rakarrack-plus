@@ -3419,7 +3419,7 @@ void RKRGUI::ActMIDI()
                 ActOnOff();
                 break;
             case 117:
-                APHASER->aphaser_WD->value(rkr->efx_APhaser->getpar(0));
+                APHASER->aphaser_WD->value(DRY_WET(rkr->efx_APhaser->getpar(0)));
                 APHASER->aphaser_WD->redraw();
                 break;
             case 118:

@@ -330,7 +330,7 @@ def remap(efxindex, paramindex):
          (17, 12) : (-1,) ,
 
          (18, -1) : ('RakarrackPlus Analog Phaser', 'https://github.com/Stazed/rakarrack-plus#aphas') ,
-         (18, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (18, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (18, 1) : (2, 'Distort', 'DISTORT', 0) ,
          (18, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (18, 3) : (4, 'Randomness', 'RND', 0) ,

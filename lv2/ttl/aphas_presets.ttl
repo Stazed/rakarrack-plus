@@ -11,8 +11,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
 	rdfs:label "Phaser 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 20.0
@@ -56,8 +56,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
 	rdfs:label "Phaser 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 20.0
@@ -101,8 +101,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
 	rdfs:label "Phaser 3" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 20.0
@@ -146,8 +146,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
 	rdfs:label "Phaser 4" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 20.0
@@ -191,8 +191,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
 	rdfs:label "Phaser 5" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 25.0
+		lv2:symbol "DRYWET" ;
+		pset:value 102.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 20.0
@@ -236,8 +236,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
 	rdfs:label "Phaser 6" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 20.0
