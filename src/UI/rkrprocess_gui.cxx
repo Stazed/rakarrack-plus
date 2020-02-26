@@ -3451,7 +3451,7 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_stdf->redraw();
                 break;
             case 125:
-                NEWDIST->newdist_WD->value(rkr->efx_NewDist->getpar(0));
+                NEWDIST->newdist_WD->value(Dry_Wet(rkr->efx_NewDist->getpar(0)));
                 NEWDIST->newdist_WD->redraw();
                 break;
             case 126:

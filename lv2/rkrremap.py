@@ -315,7 +315,7 @@ def remap(efxindex, paramindex):
          (16, 7) : (-1,) ,
 
          (17, -1) : ('RakarrackPlus Derelict', 'https://github.com/Stazed/rakarrack-plus#dere') ,
-         (17, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (17, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (17, 1) : (2, 'Panning', 'PAN', -64) ,
          (17, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
          (17, 3) : (4, 'Drive', 'DRIVE', 0) ,
