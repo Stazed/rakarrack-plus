@@ -21,7 +21,7 @@ void CbandGui::cb_cband_activar(Fl_Light_Button* o, void* v) {
 void CbandGui::cb_cband_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12043))rkr->efx_CompBand->setpreset((int)o->value());
-cband_WD->value(rkr->efx_CompBand->getpar(0));
+cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(0)));
 cband_Lratio->value(rkr->efx_CompBand->getpar(1));
 cband_MLratio->value(rkr->efx_CompBand->getpar(2));
 cband_MHratio->value(rkr->efx_CompBand->getpar(3));
@@ -53,7 +53,7 @@ void CbandGui::cb_cband_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(368);
  return;
 }
-rkr->efx_CompBand->changepar(0,(int)(o->value()));
+rkr->efx_CompBand->changepar(0,Dry_Wet((int)(o->value())));
 }
 void CbandGui::cb_cband_WD(SliderW* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_WD_i(o,v);
@@ -229,7 +229,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   cband_preset->menu(menu_cband_preset);
 } // Fl_Choice* cband_preset
-{ cband_WD = new SliderW(52, 27, 100, 10, "Wet/Dry");
+{ cband_WD = new SliderW(52, 27, 100, 10, "Dry/Wet");
   cband_WD->type(5);
   cband_WD->box(FL_FLAT_BOX);
   cband_WD->color((Fl_Color)178);

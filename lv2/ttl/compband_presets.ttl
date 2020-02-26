@@ -12,8 +12,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
 	    rdfs:label "Good Start" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "LR" ;
                 pset:value 16.0
@@ -58,8 +58,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
 	    rdfs:label "Loudness" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "LR" ;
                 pset:value 16.0
@@ -104,8 +104,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
 	    rdfs:label "Loudness 2" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "LR" ;
                 pset:value 16.0

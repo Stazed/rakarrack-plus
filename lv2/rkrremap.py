@@ -701,7 +701,7 @@ def remap(efxindex, paramindex):
          (42, 12) : (-1,) ,
 
          (43, -1) : ('RakarrackPlus CompBand', 'https://github.com/Stazed/rakarrack-plus#CompBand') ,
-         (43, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (43, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (43, 1) : (2, 'Low Band Ratio', 'LR', 0) ,
          (43, 2) : (3, 'Mid Band 1 Ratio', 'M1R', 0) ,
          (43, 3) : (4, 'Mid Band 2 Ratio', 'M2R', 0) ,

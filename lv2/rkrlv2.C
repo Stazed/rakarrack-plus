@@ -751,7 +751,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);//0 Wet/Dry
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->aphase->getpar(i) != val)
     {
         plug->aphase->changepar(i,val);
@@ -4120,7 +4120,14 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    i=0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->mbcomp->getpar(i) != val)
+    {
+        plug->mbcomp->changepar(i,val);
+    }
+
+    for(i++; i<plug->nparams; i++)
     {
         val = (int)*plug->param_p[i];
         if(plug->mbcomp->getpar(i) != val)

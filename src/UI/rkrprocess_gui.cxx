@@ -4445,7 +4445,7 @@ void RKRGUI::ActMIDI()
                 Chord(1);
                 break;
             case 368:
-                COMPBAND->cband_WD->value(rkr->efx_CompBand->getpar(0));
+                COMPBAND->cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(0)));
                 COMPBAND->cband_WD->redraw();
                 break;
             case 369:
