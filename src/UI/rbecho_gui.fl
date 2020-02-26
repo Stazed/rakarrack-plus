@@ -30,7 +30,7 @@ rgui->findpos(32,(int)o->value(),o);}
     user_data 12032
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12032))rkr->efx_RBEcho->setpreset((int) o->value());
-rbecho_WD->value(rkr->efx_RBEcho->getpar(0));
+rbecho_WD->value(Dry_Wet(rkr->efx_RBEcho->getpar(0)));
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
 rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
@@ -39,7 +39,7 @@ rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
 rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
 rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
 rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
-rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
+rbecho_es->value(rkr->efx_RBEcho->getpar(9));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -56,13 +56,13 @@ rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
     }
   }
   Fl_Value_Slider rbecho_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(303);
  return;
 }
-rkr->efx_RBEcho->changepar(0,(int)(o->value()));} selected
+rkr->efx_RBEcho->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {51 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

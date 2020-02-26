@@ -549,7 +549,7 @@ def remap(efxindex, paramindex):
          (31, 22) : (-1,) ,
 
          (32, -1) : ('RakarrackPlus Echoverse', 'https://github.com/Stazed/rakarrack-plus#Echoverse') ,
-         (32, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (32, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (32, 1) : (2, 'Panning', 'PAN', -64) ,
          (32, 2) : (3, 'TEMPO', 'DELAY', 0) ,
          (32, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', -64) ,

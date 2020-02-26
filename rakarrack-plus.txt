@@ -77,7 +77,7 @@ Echotron
     Number of Taps              |                |Varies - file  |                   |       1 to 127    |  LENGTH
 
 Echoverse (RBEcho)
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
     Angle                       |                |  -64 to 64    |                   |      -64 to 63    |  ANGLE

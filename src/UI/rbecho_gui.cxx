@@ -21,7 +21,7 @@ void RbechoGui::cb_rbecho_activar(Fl_Light_Button* o, void* v) {
 void RbechoGui::cb_rbecho_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12032))rkr->efx_RBEcho->setpreset((int) o->value());
-rbecho_WD->value(rkr->efx_RBEcho->getpar(0));
+rbecho_WD->value(Dry_Wet(rkr->efx_RBEcho->getpar(0)));
 rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
 rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
 rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
@@ -49,7 +49,7 @@ void RbechoGui::cb_rbecho_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(303);
  return;
 }
-rkr->efx_RBEcho->changepar(0,(int)(o->value()));
+rkr->efx_RBEcho->changepar(0,Dry_Wet((int)(o->value())));
 }
 void RbechoGui::cb_rbecho_WD(SliderW* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_WD_i(o,v);
@@ -184,7 +184,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_preset->when(FL_WHEN_RELEASE_ALWAYS);
   rbecho_preset->menu(menu_rbecho_preset);
 } // Fl_Choice* rbecho_preset
-{ rbecho_WD = new SliderW(51, 27, 100, 10, "Wet/Dry");
+{ rbecho_WD = new SliderW(51, 27, 100, 10, "Dry/Wet");
   rbecho_WD->type(5);
   rbecho_WD->box(FL_FLAT_BOX);
   rbecho_WD->color((Fl_Color)178);
