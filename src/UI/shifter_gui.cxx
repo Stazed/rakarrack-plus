@@ -21,7 +21,7 @@ void ShifterGui::cb_shifter_activar(Fl_Light_Button* o, void* v) {
 void ShifterGui::cb_shifter_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12038))rkr->efx_Shifter->setpreset((int)o->value());
-shifter_WD->value(rkr->efx_Shifter->getpar(0));
+shifter_WD->value(Dry_Wet(rkr->efx_Shifter->getpar(0)));
 shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
 shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
 shifter_int->value(rkr->efx_Shifter->getpar(6));
@@ -52,7 +52,7 @@ void ShifterGui::cb_shifter_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(326);
  return;
 }
-rkr->efx_Shifter->changepar(0,(int)(o->value()));
+rkr->efx_Shifter->changepar(0,Dry_Wet((int)(o->value())));
 }
 void ShifterGui::cb_shifter_WD(SliderW* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_WD_i(o,v);
@@ -190,7 +190,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shifter_preset->menu(menu_shifter_preset);
 } // Fl_Choice* shifter_preset
-{ shifter_WD = new SliderW(50, 30, 100, 10, "Wet/Dry");
+{ shifter_WD = new SliderW(50, 30, 100, 10, "Dry/Wet");
   shifter_WD->type(5);
   shifter_WD->box(FL_FLAT_BOX);
   shifter_WD->color((Fl_Color)178);

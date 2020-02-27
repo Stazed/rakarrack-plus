@@ -3160,7 +3160,7 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];//wet/dry
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->shift->getpar(i) != val)
     {
         plug->shift->changepar(i,val);

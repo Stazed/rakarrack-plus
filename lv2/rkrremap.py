@@ -617,7 +617,7 @@ def remap(efxindex, paramindex):
          (37, 15) : (-1,) ,
 
          (38, -1) : ('RakarrackPlus Shifter', 'https://github.com/Stazed/rakarrack-plus#Shifter') ,
-         (38, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (38, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (38, 1) : (2, 'Pan', 'PAN', -64) ,
          (38, 2) : (3, 'Gain', 'GAIN', -64) ,
          (38, 3) : (4, 'Attack', 'ATACK', 0) ,
