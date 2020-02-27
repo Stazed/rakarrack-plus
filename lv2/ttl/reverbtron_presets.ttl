@@ -11,8 +11,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
 	rdfs:label "Chamber" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0
@@ -64,8 +64,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
 	rdfs:label "Concrete Stairwell" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0
@@ -118,8 +118,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
 	rdfs:label "Hall" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0
@@ -172,8 +172,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
  	rdfs:label "Medium Hall" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 16.0
@@ -226,8 +226,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
   	rdfs:label "Room" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0
@@ -280,8 +280,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
    	rdfs:label "Hall 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 88.0
+		lv2:symbol "DRYWET" ;
+		pset:value 39.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0
@@ -334,8 +334,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
     rdfs:label "Guitar" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0
@@ -388,8 +388,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
     rdfs:label "Studio" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0
@@ -443,8 +443,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
     rdfs:label "Cathedral" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 64.0
+		lv2:symbol "DRYWET" ;
+		pset:value 63.0
 	] , [
 		lv2:symbol "FADE" ;
 		pset:value 0.0

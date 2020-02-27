@@ -154,7 +154,7 @@ Reverb
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Reverbtron
-    Wet/Dry                     |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
     Stretch                     |                |  -64 to 64    |                   |      -64 to 64    |  STRETCH -  Time Stretch

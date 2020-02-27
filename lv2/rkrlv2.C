@@ -3320,7 +3320,14 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<4; i++)//skip user
+    i=0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->revtron->getpar(i) != val)
+    {
+        plug->revtron->changepar(i,val);
+    }
+
+    for(i++; i<4; i++)//skip user
     {
         val = (int)*plug->param_p[i];
         if(plug->revtron->getpar(i) != val)

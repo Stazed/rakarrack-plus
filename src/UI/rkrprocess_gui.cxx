@@ -4327,7 +4327,7 @@ void RKRGUI::ActMIDI()
                 STOMPBOX->stomp_high->redraw();
                 break;
             case 339:
-                REVERBTRON->revtron_WD->value(rkr->efx_Reverbtron->getpar(0));
+                REVERBTRON->revtron_WD->value(Dry_Wet(rkr->efx_Reverbtron->getpar(0)));
                 REVERBTRON->revtron_WD->redraw();
                 break;
             case 340:

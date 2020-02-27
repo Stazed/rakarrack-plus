@@ -647,7 +647,7 @@ def remap(efxindex, paramindex):
 #         (39, 5) : (-1,) ,
 
          (40, -1) : ('RakarrackPlus Reverbtron', 'https://github.com/Stazed/rakarrack-plus#Reverbtron') ,
-         (40, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (40, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (40, 1) : (2, 'Fade', 'FADE', 0) ,
          (40, 2) : (3, 'Safe', 'SAFE', 0) ,
          (40, 3) : (4, 'Length', 'LENGTH', 0) ,
