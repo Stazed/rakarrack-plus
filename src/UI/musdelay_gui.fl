@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class MusdelayGui {
@@ -30,7 +30,7 @@ rgui->findpos(15,(int)o->value(),o);}
     callback {rkr->MusDelay_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
-musdelay_WD->value(rkr->efx_MusDelay->getpar(0));
+musdelay_WD->value(Dry_Wet(rkr->efx_MusDelay->getpar(0)));
 musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
 musdelay_pan1->value(rkr->efx_MusDelay->getpar(1)-64);
 musdelay_pan2->value(rkr->efx_MusDelay->getpar(7)-64);
@@ -43,7 +43,7 @@ musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
 musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
 musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
 musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
+if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -56,13 +56,13 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     }
   }
   Fl_Value_Slider musdelay_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(56);
  return;
 } 
-rkr->efx_MusDelay->changepar(0,(int)o->value());} selected
+rkr->efx_MusDelay->changepar(0,Dry_Wet((int)o->value()));}
     xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

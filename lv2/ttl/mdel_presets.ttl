@@ -11,8 +11,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
         rdfs:label "Echo 1" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "PAN1" ;
                 pset:value -64.0
@@ -57,8 +57,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
         rdfs:label "Echo 2" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 67.0
+                lv2:symbol "DRYWET" ;
+                pset:value 60.0
         ], [
                 lv2:symbol "PAN1" ;
                 pset:value -64.0

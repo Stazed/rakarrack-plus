@@ -3156,7 +3156,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_WD->redraw();
                 break;
             case 56:
-                MUSDELAY->musdelay_WD->value(rkr->efx_MusDelay->getpar(0));
+                MUSDELAY->musdelay_WD->value(Dry_Wet(rkr->efx_MusDelay->getpar(0)));
                 MUSDELAY->musdelay_WD->redraw();
                 break;
             case 57:

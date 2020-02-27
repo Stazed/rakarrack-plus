@@ -289,7 +289,7 @@ def remap(efxindex, paramindex):
          (14, 11) : (-1,) ,
 
          (15, -1) : ('RakarrackPlus Musical Delay', 'https://github.com/Stazed/rakarrack-plus#delm') ,
-         (15, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (15, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (15, 1) : (2, 'Panning', 'PAN1', -64) ,
          (15, 2) : (3, 'Delay', 'DEL1', 0) ,
          (15, 3) : (4, 'Delay Offset', 'OFFS', 0) ,

@@ -1531,19 +1531,20 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i = 0;
-
-    val = (int)*plug->param_p[0];//wetdry
-    if(plug->mdel->getpar(0) != val)
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->mdel->getpar(i) != val)
     {
-        plug->mdel->changepar(0,val);
+        plug->mdel->changepar(i,val);
     }
-    val = (int)*plug->param_p[1]+64;//pan1
-    if(plug->mdel->getpar(1) != val)
+    
+    i++;
+    val = (int)*plug->param_p[i]+64;//pan1
+    if(plug->mdel->getpar(i) != val)
     {
-        plug->mdel->changepar(1,val);
+        plug->mdel->changepar(i,val);
     }
 
-    for(i=2; i<7; i++) //2-6
+    for(i++; i<7; i++) //2-6
     {
         val = (int)*plug->param_p[i];
         if(plug->mdel->getpar(i) != val)
