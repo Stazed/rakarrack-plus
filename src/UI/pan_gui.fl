@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} PanGui {
@@ -30,7 +30,7 @@ rgui->findpos(13,(int)o->value(),o);}
     user_data 12013
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12013))rkr->efx_Pan->setpreset((int) o->value());
-pan_WD->value(rkr->efx_Pan->getpar(0));
+pan_WD->value(Dry_Wet(rkr->efx_Pan->getpar(0)));
 pan_pan->value(rkr->efx_Pan->getpar(1)-64);
 pan_freq->value(rkr->efx_Pan->getpar(2));
 pan_rnd->value(rkr->efx_Pan->getpar(3));
@@ -38,7 +38,7 @@ pan_lfotype->value(rkr->efx_Pan->getpar(4));
 pan_stdf->value(rkr->efx_Pan->getpar(5));
 pan_extra->value(rkr->efx_Pan->getpar(6));
 pan_autopan->value(rkr->efx_Pan->getpar(7));
-pan_extraon->value(rkr->efx_Pan->getpar(8));}
+pan_extraon->value(rkr->efx_Pan->getpar(8));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -51,13 +51,13 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
     }
   }
   Fl_Value_Slider pan_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(58);
  return;
 } 
-rkr->efx_Pan->changepar(0,(int)(o->value()));} selected
+rkr->efx_Pan->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

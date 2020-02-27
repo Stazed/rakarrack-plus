@@ -262,7 +262,7 @@ def remap(efxindex, paramindex):
          (12, 2) : (-1,) ,
 
          (13, -1) : ('RakarrackPlus Pan', 'https://github.com/Stazed/rakarrack-plus#pan') ,
-         (13, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (13, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (13, 1) : (2, 'Panning', 'PAN', -64) ,
          (13, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (13, 3) : (4, 'Randomness', 'RND', 0) ,

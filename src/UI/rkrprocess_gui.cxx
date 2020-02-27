@@ -3164,7 +3164,7 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_WD->redraw();
                 break;
             case 58:
-                PAN->pan_WD->value(rkr->efx_Pan->getpar(0));
+                PAN->pan_WD->value(Dry_Wet(rkr->efx_Pan->getpar(0)));
                 PAN->pan_WD->redraw();
                 break;
             case 59:
