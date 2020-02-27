@@ -30,7 +30,7 @@ shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
-shuffle_WD->value(rkr->efx_Shuffle->getpar(0));
+shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(0)));
 shuffle_E->value(rkr->efx_Shuffle->getpar(10));
 }
 void ShuffleGui::cb_shuffle_preset(Fl_Choice* o, void* v) {
@@ -51,7 +51,7 @@ void ShuffleGui::cb_shuffle_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(227);
  return;
 } 
-rkr->efx_Shuffle->changepar(0,(int)o->value());
+rkr->efx_Shuffle->changepar(0,Dry_Wet((int)o->value()));
 }
 void ShuffleGui::cb_shuffle_WD(SliderW* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_WD_i(o,v);
@@ -198,7 +198,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shuffle_preset->menu(menu_shuffle_preset);
 } // Fl_Choice* shuffle_preset
-{ shuffle_WD = new SliderW(55, 31, 100, 10, "Wet/Dry");
+{ shuffle_WD = new SliderW(55, 31, 100, 10, "Dry/Wet");
   shuffle_WD->type(5);
   shuffle_WD->box(FL_FLAT_BOX);
   shuffle_WD->color((Fl_Color)178);

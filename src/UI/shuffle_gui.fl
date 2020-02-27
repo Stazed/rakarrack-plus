@@ -38,8 +38,8 @@ shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
 shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
 shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
 shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
-shuffle_WD->value(rkr->efx_Shuffle->getpar(0));
-shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
+shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(0)));
+shuffle_E->value(rkr->efx_Shuffle->getpar(10));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -60,13 +60,13 @@ shuffle_E->value(rkr->efx_Shuffle->getpar(10));}
     }
   }
   Fl_Value_Slider shuffle_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(227);
  return;
 } 
-rkr->efx_Shuffle->changepar(0,(int)o->value());} selected
+rkr->efx_Shuffle->changepar(0,Dry_Wet((int)o->value()));}
     xywh {55 31 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

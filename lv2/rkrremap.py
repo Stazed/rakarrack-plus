@@ -454,7 +454,7 @@ def remap(efxindex, paramindex):
          (25, 7) : (-1,) ,
 
          (26, -1) : ('RakarrackPlus Shuffle', 'https://github.com/Stazed/rakarrack-plus#Shuffle') ,
-         (26, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (26, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (26, 1) : (2, 'Gain', 'LGAIN', 0) ,
          (26, 2) : (3, 'Gain', 'M1GAIN', 0) ,
          (26, 3) : (4, 'Gain', 'M2GAIN', 0) ,

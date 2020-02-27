@@ -2319,7 +2319,14 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++) //rest are not offset
+    i=0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->shuf->getpar(i) != val)
+    {
+        plug->shuf->changepar(i,val);
+    }
+
+    for(i++; i<plug->nparams; i++) //rest are not offset
     {
         val = (int)*plug->param_p[i];
         if(plug->shuf->getpar(i) != val)
