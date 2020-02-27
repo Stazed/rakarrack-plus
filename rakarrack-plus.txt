@@ -109,7 +109,7 @@ Infinity
     Band (1 to 8)               |                |  -64 to 64    |                   |      -64 to 64    |  B# - Band # Gain
 
 Looper
-    Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |      ----------   |      // FIXME Function call
+    Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |  -------------    |      ----------   |
 
 MusicalDelay
     Wet/Dry                     |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

@@ -248,6 +248,13 @@ Looper::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 
+void
+Looper::setvolume(int volume)
+{
+    Pvolume = volume;
+    outvolume = (float) volume / 127.0f;
+}
+
 void Looper::setmvol(int value)
 {
     mvol = 2.0f * (float) value / 100.0f;
@@ -374,9 +381,7 @@ Looper::changepar(int npar, int value)
     switch (npar)
     {
     case 0:
-        Pvolume = value;
-        outvolume = (float) Pvolume / 127.0f;
-
+        setvolume(value);
         break;
 
     case 1: //Play at current pointer position

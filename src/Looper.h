@@ -64,7 +64,7 @@ private:
     void timeposition(int value);
     int set_len(int value);
     int cal_len(int value);
-
+    void setvolume (int volume);
 
 
     //Parameters

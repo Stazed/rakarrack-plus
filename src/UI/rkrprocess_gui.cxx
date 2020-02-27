@@ -4039,7 +4039,7 @@ void RKRGUI::ActMIDI()
                 RYANWAH->ryanwah_smooth->redraw();
                 break;
             case 267:
-                LOOPER->looper_WD->value(rkr->efx_Looper->getpar(0));
+                LOOPER->looper_WD->value(Dry_Wet(rkr->efx_Looper->getpar(0)));
                 LOOPER->looper_WD->redraw();
                 break;
             case 268:
