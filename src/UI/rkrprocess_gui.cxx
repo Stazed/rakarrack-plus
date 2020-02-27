@@ -3995,7 +3995,7 @@ void RKRGUI::ActMIDI()
                 MBVVOL->mbvvol_cross3->redraw();
                 break;
             case 256:
-                RYANWAH->ryanwah_WD->value(rkr->efx_RyanWah->getpar(0));
+                RYANWAH->ryanwah_WD->value(Dry_Wet(rkr->efx_RyanWah->getpar(0)));
                 RYANWAH->ryanwah_WD->redraw();
                 break;
             case 257:

@@ -524,7 +524,7 @@ def remap(efxindex, paramindex):
          (30,-1) : (0,) ,#not used
 
          (31, -1) : ('RakarrackPlus MuTroMojo', 'https://github.com/Stazed/rakarrack-plus#MuTroMojo') ,
-         (31, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (31, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (31, 1) : (2, 'Resonance', 'Q', 0) ,
          (31, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (31, 3) : (4, 'LFO Randomness', 'RND', 0) ,

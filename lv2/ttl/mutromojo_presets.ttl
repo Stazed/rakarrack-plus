@@ -11,8 +11,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "WahWah" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 16.0
+                lv2:symbol "DRYWET" ;
+                pset:value 111.0
         ], [
                 lv2:symbol "Q" ;
                 pset:value 10.0
@@ -75,8 +75,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Mutron" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "Q" ;
                 pset:value 15.0
@@ -139,8 +139,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Phase Wah" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "Q" ;
                 pset:value 50.0
@@ -203,8 +203,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Succulent Phaser" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "Q" ;
                 pset:value 8.0
@@ -267,8 +267,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Quacky" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 16.0
+                lv2:symbol "DRYWET" ;
+                pset:value 111.0
         ], [
                 lv2:symbol "Q" ;
                 pset:value 10.0
@@ -331,8 +331,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
         rdfs:label "Smoothtron" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "Q" ;
                 pset:value 15.0

@@ -1833,7 +1833,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 256:
-        efx_RyanWah->changepar(0, value);
+        efx_RyanWah->changepar(0, Dry_Wet(value));
         break;
 
     case 257:
