@@ -21,7 +21,7 @@ void ValveGui::cb_valve_activar(Fl_Light_Button* o, void* v) {
 void ValveGui::cb_valve_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
-valve_WD->value(rkr->efx_Valve->getpar(0));
+valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(0)));
 valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
 valve_drive->value(rkr->efx_Valve->getpar(3));
 valve_level->value(rkr->efx_Valve->getpar(4));
@@ -52,7 +52,7 @@ void ValveGui::cb_valve_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(169);
  return;
 } 
-rkr->efx_Valve->changepar(0,(int)(o->value()));
+rkr->efx_Valve->changepar(0,Dry_Wet((int)(o->value())));
 }
 void ValveGui::cb_valve_WD(SliderW* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_WD_i(o,v);
@@ -208,7 +208,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_preset->when(FL_WHEN_RELEASE_ALWAYS);
   valve_preset->menu(menu_valve_preset);
 } // Fl_Choice* valve_preset
-{ valve_WD = new SliderW(53, 31, 100, 10, "Wet/Dry");
+{ valve_WD = new SliderW(53, 31, 100, 10, "Dry/Wet");
   valve_WD->type(5);
   valve_WD->box(FL_FLAT_BOX);
   valve_WD->color((Fl_Color)178);

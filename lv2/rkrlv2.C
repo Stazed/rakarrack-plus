@@ -1808,7 +1808,7 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];//0 Wet/dry
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->valve->getpar(i) != val)
     {
         plug->valve->changepar(i,val);

@@ -346,7 +346,7 @@ def remap(efxindex, paramindex):
          (18, 13) : (-1,) ,
 
          (19, -1) : ('RakarrackPlus Valve', 'https://github.com/Stazed/rakarrack-plus#Valve') ,
-         (19, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (19, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (19, 1) : (2, 'Panning', 'PAN', -64) ,
          (19, 2) : (3, 'Left/Right Crossover', 'LRCr', 0) ,
          (19, 3) : (4, 'Drive', 'DRIVE', 0) ,

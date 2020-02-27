@@ -29,7 +29,7 @@ rgui->findpos(19,(int)o->value(),o);}
     user_data 12019
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
-valve_WD->value(rkr->efx_Valve->getpar(0));
+valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(0)));
 valve_LRc->value(rkr->efx_Valve->getpar(2)-64);
 valve_drive->value(rkr->efx_Valve->getpar(3));
 valve_level->value(rkr->efx_Valve->getpar(4));
@@ -41,7 +41,7 @@ valve_lpf->value(rkr->efx_Valve->getpar(6));
 valve_hpf->value(rkr->efx_Valve->getpar(7));
 valve_Q->value(rkr->efx_Valve->getpar(10));
 valve_ed->value(rkr->efx_Valve->getpar(11));
-valve_Pre->value(rkr->efx_Valve->getpar(12));}
+valve_Pre->value(rkr->efx_Valve->getpar(12));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -58,13 +58,13 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));}
     }
   }
   Fl_Value_Slider valve_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(169);
  return;
 } 
-rkr->efx_Valve->changepar(0,(int)(o->value()));} selected
+rkr->efx_Valve->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {53 31 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
