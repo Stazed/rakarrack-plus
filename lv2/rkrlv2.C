@@ -2489,7 +2489,14 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<3; i++)
+    i=0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->mbvol->getpar(i) != val)
+    {
+        plug->mbvol->changepar(i,val);
+    }
+
+    for(i++; i<3; i++)  // 1-2
     {
         val = (int)*plug->param_p[i];
         if(plug->mbvol->getpar(i) != val)

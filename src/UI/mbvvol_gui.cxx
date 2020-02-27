@@ -21,7 +21,7 @@ void MbvvolGui::cb_mbvvol_activar(Fl_Light_Button* o, void* v) {
 void MbvvolGui::cb_mbvvol_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12028))rkr->efx_MBVvol->setpreset((int)o->value());
-mbvvol_WD->value(rkr->efx_MBVvol->getpar(0));
+mbvvol_WD->value(Dry_Wet(rkr->efx_MBVvol->getpar(0)));
 mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
 mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
 mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
@@ -54,7 +54,7 @@ void MbvvolGui::cb_mbvvol_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(248);
  return;
 }
-rkr->efx_MBVvol->changepar(0,(int)(o->value()));
+rkr->efx_MBVvol->changepar(0,Dry_Wet((int)(o->value())));
 }
 void MbvvolGui::cb_mbvvol_WD(SliderW* o, void* v) {
   ((MbvvolGui*)(o->parent()))->cb_mbvvol_WD_i(o,v);
@@ -244,7 +244,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbvvol_preset->when(FL_WHEN_RELEASE_ALWAYS);
   mbvvol_preset->menu(menu_mbvvol_preset);
 } // Fl_Choice* mbvvol_preset
-{ mbvvol_WD = new SliderW(54, 28, 100, 10, "Wet/Dry");
+{ mbvvol_WD = new SliderW(54, 28, 100, 10, "Dry/Wet");
   mbvvol_WD->type(5);
   mbvvol_WD->box(FL_FLAT_BOX);
   mbvvol_WD->color((Fl_Color)178);

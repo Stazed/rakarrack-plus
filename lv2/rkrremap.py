@@ -487,7 +487,7 @@ def remap(efxindex, paramindex):
          (27, 16) : (-1,) ,
 
          (28, -1) : ('RakarrackPlus VaryBand', 'https://github.com/Stazed/rakarrack-plus#VaryBand') ,
-         (28, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (28, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (28, 1) : (2, 'Tempo', 'TEMPO1', 0) ,
          (28, 2) : (3, 'LFO Type', 'TYPE1', 0) ,
          (28, 3) : (4, 'LFO L/R Delay', 'STDL1', -64) ,
