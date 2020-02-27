@@ -201,7 +201,7 @@ def remap(efxindex, paramindex):
          (7, 13) : (-1,) ,
 
          (8, -1) : ('RakarrackPlus Reverb', 'https://github.com/Stazed/rakarrack-plus#reve') ,
-         (8, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (8, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (8, 1) : (2, 'Panning', 'PAN', -64) ,
          (8, 2) : (3, 'Time', 'TIME', 0) ,
          (8, 3) : (4, 'Initial Delay', 'IDEL', 0) ,

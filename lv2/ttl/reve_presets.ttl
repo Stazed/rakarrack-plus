@@ -11,8 +11,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Cathedral 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 80.0
+		lv2:symbol "DRYWET" ;
+		pset:value 47.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -47,8 +47,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Cathedral 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 80.0
+		lv2:symbol "DRYWET" ;
+		pset:value 47.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -83,8 +83,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Cathedral 3" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 80.0
+		lv2:symbol "DRYWET" ;
+		pset:value 47.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -119,8 +119,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Hall 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 90.0
+		lv2:symbol "DRYWET" ;
+		pset:value 37.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -155,8 +155,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Hall 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 90.0
+		lv2:symbol "DRYWET" ;
+		pset:value 37.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -191,8 +191,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Room 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 100.0
+		lv2:symbol "DRYWET" ;
+		pset:value 27.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -227,8 +227,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Room 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 100.0
+		lv2:symbol "DRYWET" ;
+		pset:value 27.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -263,8 +263,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Basement" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 110.0
+		lv2:symbol "DRYWET" ;
+		pset:value 17.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -299,8 +299,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Tunnel" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 85.0
+		lv2:symbol "DRYWET" ;
+		pset:value 42.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 16.0
@@ -335,8 +335,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Echoed 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 95.0
+		lv2:symbol "DRYWET" ;
+		pset:value 32.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -371,8 +371,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Echoed 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 90.0
+		lv2:symbol "DRYWET" ;
+		pset:value 37.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -407,8 +407,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Very Long 1" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 90.0
+		lv2:symbol "DRYWET" ;
+		pset:value 37.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -443,8 +443,8 @@
 	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
 	rdfs:label "Very Long 2" ;
 	lv2:port [
-		lv2:symbol "WETDRY" ;
-		pset:value 90.0
+		lv2:symbol "DRYWET" ;
+		pset:value 37.0
 	] , [
 		lv2:symbol "PAN" ;
 		pset:value 0.0

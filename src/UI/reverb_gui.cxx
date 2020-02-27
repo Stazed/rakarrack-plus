@@ -22,7 +22,7 @@ void ReverbGui::cb_reverb_preset_i(Fl_Choice* o, void* v) {
   rkr->Reverb_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12008))rkr->efx_Rev->setpreset((int) o->value());
-reverb_WD->value(rkr->efx_Rev->getpar(0));
+reverb_WD->value(Dry_Wet(rkr->efx_Rev->getpar(0)));
 reverb_pan->value(rkr->efx_Rev->getpar(1)-64);
 reverb_time->value(rkr->efx_Rev->getpar(2));
 reverb_ldel->value(rkr->efx_Rev->getpar(3));
@@ -61,7 +61,7 @@ void ReverbGui::cb_reverb_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(57);
  return;
 } 
-rkr->efx_Rev->changepar(0,(int)(o->value()));
+rkr->efx_Rev->changepar(0,Dry_Wet((int)(o->value())));
 }
 void ReverbGui::cb_reverb_WD(SliderW* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_WD_i(o,v);
@@ -186,7 +186,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_preset->when(FL_WHEN_RELEASE_ALWAYS);
   reverb_preset->menu(menu_reverb_preset);
 } // Fl_Choice* reverb_preset
-{ reverb_WD = new SliderW(51, 27, 100, 10, "Wet/Dry");
+{ reverb_WD = new SliderW(51, 27, 100, 10, "Dry/Wet");
   reverb_WD->type(5);
   reverb_WD->box(FL_FLAT_BOX);
   reverb_WD->color((Fl_Color)178);

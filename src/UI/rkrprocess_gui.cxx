@@ -3160,7 +3160,7 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_WD->redraw();
                 break;
             case 57:
-                REVERB->reverb_WD->value(rkr->efx_Rev->getpar(0));
+                REVERB->reverb_WD->value(Dry_Wet(rkr->efx_Rev->getpar(0)));
                 REVERB->reverb_WD->redraw();
                 break;
             case 58:

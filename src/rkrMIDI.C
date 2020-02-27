@@ -987,7 +987,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 57:
-        efx_Rev->changepar(0, value);
+        efx_Rev->changepar(0, Dry_Wet(value));
         break;
 
     case 58:
