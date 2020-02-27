@@ -3603,7 +3603,7 @@ void RKRGUI::ActMIDI()
                 PEQ->eqp_HQ->redraw();
                 break;
             case 158:
-                DFLANGE->dflange_WD->value(rkr->efx_DFlange->getpar(0));
+                DFLANGE->dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(0)));
                 DFLANGE->dflange_WD->redraw();
                 break;
             case 159:

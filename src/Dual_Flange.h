@@ -48,6 +48,7 @@ public:
     int Ppreset;
 
 private:
+    void setvolume(int value);
     //Parameters
     int Pwetdry;		// 0 //Wet/Dry mix.  Range -64 to 64
     int Ppanning;		// 1 //Panning.  Range -64 to 64

@@ -362,7 +362,7 @@ def remap(efxindex, paramindex):
          (19, 13) : (-1,) ,
 
          (20, -1) : ('RakarrackPlus Dual Flange', 'https://github.com/Stazed/rakarrack-plus#Dual_Flange') ,
-         (20, 0) : (1, 'Wet/Dry', 'WETDRY', 64) ,
+         (20, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (20, 1) : (2, 'Pan', 'PAN', 0) ,
          (20, 2) : (3, 'Left/Right Crossover', 'LRC', 0) ,
          (20, 3) : (4, 'Depth', 'DEPTH', 0) ,

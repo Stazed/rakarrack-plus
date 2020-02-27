@@ -399,31 +399,36 @@ Dflange::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 
+void 
+Dflange::setvolume(int value)
+{
+    Pwetdry = value;
+    dry = (float) Pwetdry / 127.0f;
+    wet = 1.0f - dry;
+
+    if (Psubtract)
+    {
+        ldelayline0->set_mix(-dry);
+        rdelayline0->set_mix(-dry);
+        ldelayline1->set_mix(-dry);
+        rdelayline1->set_mix(-dry);
+    }
+    else
+    {
+        ldelayline0->set_mix(dry);
+        rdelayline0->set_mix(dry);
+        ldelayline1->set_mix(dry);
+        rdelayline1->set_mix(dry);
+    }
+}
+
 void
 Dflange::changepar(int npar, int value)
 {
     switch (npar)
     {
     case 0:
-        Pwetdry = value;
-        dry = (float) (Pwetdry + 64) / 128.0f;
-        wet = 1.0f - dry;
-
-        if (Psubtract)
-        {
-            ldelayline0->set_mix(-dry);
-            rdelayline0->set_mix(-dry);
-            ldelayline1->set_mix(-dry);
-            rdelayline1->set_mix(-dry);
-        }
-        else
-        {
-            ldelayline0->set_mix(dry);
-            rdelayline0->set_mix(dry);
-            ldelayline1->set_mix(dry);
-            rdelayline1->set_mix(dry);
-        }
-
+        setvolume(value);
         break;
     case 1:
         Ppanning = value;

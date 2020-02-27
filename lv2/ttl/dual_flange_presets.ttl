@@ -11,8 +11,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Preset 1" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 32.0
+                lv2:symbol "DRYWET" ;
+                pset:value 95.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -63,8 +63,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ; 
         rdfs:label "FlangeWah" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -115,8 +115,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ; 
         rdfs:label "Feedback Flange" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -167,8 +167,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Soft Flange" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 32.0
+                lv2:symbol "DRYWET" ;
+                pset:value 95.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -219,8 +219,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Flanger" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 32.0
+                lv2:symbol "DRYWET" ;
+                pset:value 95.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -271,8 +271,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Chorus 1" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 49.0
+                lv2:symbol "DRYWET" ;
+                pset:value 78.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -323,8 +323,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
         rdfs:label "Chorus 2" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 24.0
+                lv2:symbol "DRYWET" ;
+                pset:value 103.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0

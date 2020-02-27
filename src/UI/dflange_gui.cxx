@@ -21,7 +21,7 @@ void DflangeGui::cb_dflange_activar(Fl_Light_Button* o, void* v) {
 void DflangeGui::cb_dflange_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
-dflange_WD->value(rkr->efx_DFlange->getpar(0));
+dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(0)));
 dflange_pan->value(rkr->efx_DFlange->getpar(1));
 dflange_freq->value(rkr->efx_DFlange->getpar(10));
 dflange_rnd->value(rkr->efx_DFlange->getpar(13));
@@ -58,7 +58,7 @@ void DflangeGui::cb_dflange_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(158);
  return;
 } 
-rkr->efx_DFlange->changepar(0,(int)(o->value()));
+rkr->efx_DFlange->changepar(0,Dry_Wet((int)(o->value())));
 }
 void DflangeGui::cb_dflange_WD(SliderW* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_WD_i(o,v);
@@ -238,7 +238,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dflange_preset->when(FL_WHEN_RELEASE_ALWAYS);
   dflange_preset->menu(menu_dflange_preset);
 } // Fl_Choice* dflange_preset
-{ dflange_WD = new SliderW(52, 24, 100, 10, "Wet/Dry");
+{ dflange_WD = new SliderW(52, 24, 100, 10, "Dry/Wet");
   dflange_WD->type(5);
   dflange_WD->box(FL_FLAT_BOX);
   dflange_WD->color((Fl_Color)178);
@@ -247,8 +247,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dflange_WD->labelfont(0);
   dflange_WD->labelsize(10);
   dflange_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  dflange_WD->minimum(-64);
-  dflange_WD->maximum(64);
+  dflange_WD->maximum(127);
   dflange_WD->step(1);
   dflange_WD->textcolor(FL_BACKGROUND2_COLOR);
   dflange_WD->callback((Fl_Callback*)cb_dflange_WD);
