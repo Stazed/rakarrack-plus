@@ -21,7 +21,7 @@ void SequenceGui::cb_seq_activar(Fl_Light_Button* o, void* v) {
 void SequenceGui::cb_seq_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12037))rkr->efx_Sequence->setpreset((int) o->value());
-seq_WD->value(rkr->efx_Sequence->getpar(8));
+seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(8)));
 seq_q->value(rkr->efx_Sequence->getpar(10)-64);
 seq_amp->value(rkr->efx_Sequence->getpar(11));
 seq_tempo->value(rkr->efx_Sequence->getpar(9));
@@ -61,7 +61,7 @@ void SequenceGui::cb_seq_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(314);
  return;
 }
-rkr->efx_Sequence->changepar(8,(int)(o->value()));
+rkr->efx_Sequence->changepar(8,Dry_Wet((int)(o->value())));
 }
 void SequenceGui::cb_seq_WD(SliderW* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_WD_i(o,v);
@@ -259,7 +259,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   seq_preset->when(FL_WHEN_RELEASE_ALWAYS);
   seq_preset->menu(menu_seq_preset);
 } // Fl_Choice* seq_preset
-{ seq_WD = new SliderW(49, 25, 100, 10, "Wet/Dry");
+{ seq_WD = new SliderW(49, 25, 100, 10, "Dry/Wet");
   seq_WD->type(5);
   seq_WD->box(FL_FLAT_BOX);
   seq_WD->color((Fl_Color)178);

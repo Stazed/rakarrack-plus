@@ -11,7 +11,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Jumpy" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 20.0
         ], [
                 lv2:symbol "S2" ;
@@ -35,8 +35,8 @@
                 lv2:symbol "S8" ;
                 pset:value 127.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 90.0
@@ -63,7 +63,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Stair Step" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 10.0
         ], [
                 lv2:symbol "S2" ;
@@ -87,8 +87,8 @@
                 lv2:symbol "S8" ;
                 pset:value 127.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 90.0
@@ -115,7 +115,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Mild" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 20.0
         ], [
                 lv2:symbol "S2" ;
@@ -139,8 +139,8 @@
                 lv2:symbol "S8" ;
                 pset:value 50.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 90.0
@@ -167,7 +167,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "WahWah" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 11.0
         ], [
                 lv2:symbol "S2" ;
@@ -191,8 +191,8 @@
                 lv2:symbol "S8" ;
                 pset:value 36.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 30.0
+                lv2:symbol "DRYWET" ;
+                pset:value 97.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 80.0
@@ -219,7 +219,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Filter Pan" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 28.0
         ], [
                 lv2:symbol "S2" ;
@@ -243,8 +243,8 @@
                 lv2:symbol "S8" ;
                 pset:value 24.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 180.0
@@ -271,7 +271,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Stepper" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 30.0
         ], [
                 lv2:symbol "S2" ;
@@ -295,8 +295,8 @@
                 lv2:symbol "S8" ;
                 pset:value 80.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 240.0
@@ -323,7 +323,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Shifter" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 0.0
         ], [
                 lv2:symbol "S2" ;
@@ -347,8 +347,8 @@
                 lv2:symbol "S8" ;
                 pset:value 127.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 114.0
@@ -375,7 +375,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Tremor" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 30.0
         ], [
                 lv2:symbol "S2" ;
@@ -399,8 +399,8 @@
                 lv2:symbol "S8" ;
                 pset:value 80.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 240.0
@@ -427,7 +427,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Boogie" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 0.0
         ], [
                 lv2:symbol "S2" ;
@@ -451,8 +451,8 @@
                 lv2:symbol "S8" ;
                 pset:value 0.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 220.0
@@ -479,7 +479,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Chorus" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 64.0
         ], [
                 lv2:symbol "S2" ;
@@ -503,8 +503,8 @@
                 lv2:symbol "S8" ;
                 pset:value 15.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 120.0
@@ -531,7 +531,7 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:label "Random Mode" ;
         lv2:port [
-                lv2:symbol "S0" ;
+                lv2:symbol "S1" ;
                 pset:value 0.0
         ], [
                 lv2:symbol "S2" ;
@@ -555,8 +555,8 @@
                 lv2:symbol "S8" ;
                 pset:value 0.0
         ], [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "TEMPO" ;
                 pset:value 120.0

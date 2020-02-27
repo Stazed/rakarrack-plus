@@ -599,7 +599,7 @@ def remap(efxindex, paramindex):
          (36, 2) : (-1,) ,
 
          (37, -1) : ('RakarrackPlus Sequence', 'https://github.com/Stazed/rakarrack-plus#Sequence') ,
-         (37, 0) : (1, 'Step 1', 'S0', 0) ,
+         (37, 0) : (1, 'Step 1', 'S1', 0) ,
          (37, 1) : (2, 'Step 2', 'S2', 0) ,
          (37, 2) : (3, 'Step 3', 'S3', 0) ,
          (37, 3) : (4, 'Step 4', 'S4', 0) ,
@@ -607,7 +607,7 @@ def remap(efxindex, paramindex):
          (37, 5) : (6, 'Step 6', 'S6', 0) ,
          (37, 6) : (7, 'Step 7', 'S7', 0) ,
          (37, 7) : (8, 'Step 8', 'S8', 0) ,
-         (37, 8) : (9, 'Wet/Dry', 'WETDRY', 0) ,
+         (37, 8) : (9, 'Dry/Wet', 'DRYWET', 0) ,
          (37, 9) : (10, 'Tempo', 'TEMPO', 0) ,
          (37, 10) : (11, 'Q', 'Q', -64) ,
          (37, 11) : (12, 'Amplitude/Alt. Mode', 'AMP', 0) ,

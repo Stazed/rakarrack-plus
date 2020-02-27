@@ -2085,7 +2085,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 314:
-        efx_Sequence->changepar(8, value);
+        efx_Sequence->changepar(8, Dry_Wet(value));
         break;
 
     case 315:

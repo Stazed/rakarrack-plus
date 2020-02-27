@@ -4227,7 +4227,7 @@ void RKRGUI::ActMIDI()
                 SUSTAINER->sus_sus->redraw();
                 break;
             case 314:
-                SEQUENCE->seq_WD->value(rkr->efx_Sequence->getpar(8));
+                SEQUENCE->seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(8)));
                 SEQUENCE->seq_WD->redraw();
                 break;
             case 315:

@@ -3059,7 +3059,7 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<10; i++)
+    for(i=0; i<8; i++)
     {
         val = (int)*plug->param_p[i];
         if(plug->seq->getpar(i) != val)
@@ -3067,6 +3067,21 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
             plug->seq->changepar(i,val);
         }
     }
+    
+    val = Dry_Wet((int)*plug->param_p[i]);// 8 Dry/Wet
+    if(plug->seq->getpar(i) != val)
+    {
+        plug->seq->changepar(i,val);
+    }
+    i++;
+    
+    val = (int)*plug->param_p[i];   // 9 tempo
+    if(plug->seq->getpar(i) != val)
+    {
+        plug->seq->changepar(i,val);
+    }
+    i++;
+    
     val = (int)*plug->param_p[i]+64;//Q or panning
     if(plug->seq->getpar(i) != val)
     {

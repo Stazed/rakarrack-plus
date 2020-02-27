@@ -51,6 +51,8 @@ public:
     float outvolume;
 
 private:
+    
+    void setvolume (int volume);
     //Parametrii
     int Pvolume;	       //Output Level
     int Psequence[8];	//Sequence.  Each value is 0...127

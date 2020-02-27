@@ -763,6 +763,12 @@ Sequence::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 
+void
+Sequence::setvolume(int volume)
+{
+    Pvolume = volume;
+    outvolume = (float) Pvolume / 127.0f;
+}
 
 void
 Sequence::setranges(int value)
@@ -986,8 +992,7 @@ Sequence::changepar(int npar, int value)
         }
         break;
     case 8:
-        Pvolume = value;
-        outvolume = (float) Pvolume / 127.0f;
+        setvolume(value);
         break;
     case 9:
         Ptempo = value;
