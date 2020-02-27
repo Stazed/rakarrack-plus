@@ -30,7 +30,7 @@ rgui->findpos(27,(int)o->value(),o);}
     user_data 12027
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
-synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0));
+synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(0)));
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
 synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
@@ -45,7 +45,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -78,13 +78,13 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
     }
   }
   Fl_Value_Slider synthfilter_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(237);
  return;
 }
-rkr->efx_Synthfilter->changepar(0,(int)(o->value()));} selected
+rkr->efx_Synthfilter->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {49 25 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

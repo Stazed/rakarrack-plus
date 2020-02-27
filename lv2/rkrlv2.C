@@ -2398,7 +2398,14 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<5; i++) //0-4
+    i = 0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->synth->getpar(i) != val)
+    {
+        plug->synth->changepar(i,val);
+    }
+
+    for(i++; i<5; i++) //1-4
     {
         val = (int)*plug->param_p[i];
         if(plug->synth->getpar(i) != val)

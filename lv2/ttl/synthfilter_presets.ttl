@@ -11,8 +11,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Lowpass" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "DIST" ;
                 pset:value 20.0
@@ -66,8 +66,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Highpass" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "DIST" ;
                 pset:value 20.0
@@ -121,8 +121,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Bandpass" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "DIST" ;
                 pset:value 20.0
@@ -176,8 +176,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Lead Synth" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "DIST" ;
                 pset:value 89.0
@@ -231,8 +231,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Water" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 20.0
+                lv2:symbol "DRYWET" ;
+                pset:value 107.0
         ], [
                 lv2:symbol "DIST" ;
                 pset:value 69.0
@@ -286,8 +286,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Pan Filter" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 0.0
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
         ], [
                 lv2:symbol "DIST" ;
                 pset:value 20.0
@@ -341,8 +341,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
     	rdfs:label "Multi" ;
         lv2:port [
-                lv2:symbol "WETDRY" ;
-                pset:value 64.0
+                lv2:symbol "DRYWET" ;
+                pset:value 63.0
         ], [
                 lv2:symbol "DIST" ;
                 pset:value 45.0

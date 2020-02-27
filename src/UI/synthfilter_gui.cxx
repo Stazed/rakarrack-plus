@@ -21,7 +21,7 @@ void SynthfilterGui::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
 void SynthfilterGui::cb_synthfilter_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
-synthfilter_WD->value(rkr->efx_Synthfilter->getpar(0));
+synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(0)));
 synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
 synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
 synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
@@ -59,7 +59,7 @@ void SynthfilterGui::cb_synthfilter_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(237);
  return;
 }
-rkr->efx_Synthfilter->changepar(0,(int)(o->value()));
+rkr->efx_Synthfilter->changepar(0,Dry_Wet((int)(o->value())));
 }
 void SynthfilterGui::cb_synthfilter_WD(SliderW* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_WD_i(o,v);
@@ -251,7 +251,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   synthfilter_preset->menu(menu_synthfilter_preset);
 } // Fl_Choice* synthfilter_preset
-{ synthfilter_WD = new SliderW(49, 25, 100, 9, "Wet/Dry");
+{ synthfilter_WD = new SliderW(49, 25, 100, 9, "Dry/Wet");
   synthfilter_WD->type(5);
   synthfilter_WD->box(FL_FLAT_BOX);
   synthfilter_WD->color((Fl_Color)178);

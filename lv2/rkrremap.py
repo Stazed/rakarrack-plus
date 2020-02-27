@@ -468,7 +468,7 @@ def remap(efxindex, paramindex):
          (26, 11) : (-1,) ,
 
          (27, -1) : ('RakarrackPlus Synthfilter', 'https://github.com/Stazed/rakarrack-plus#Synthfilter') ,
-         (27, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (27, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (27, 1) : (2, 'Distort', 'DIST', 0) ,
          (27, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (27, 3) : (4, 'Randomness', 'RND', 0) ,
