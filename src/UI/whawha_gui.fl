@@ -31,7 +31,7 @@ rgui->findpos(10,(int)o->value(),o);}
     callback {rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
-WhaWha_WD->value(rkr->efx_WhaWha->getpar(0));
+WhaWha_WD->value(Dry_Wet(rkr->efx_WhaWha->getpar(0)));
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
 WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
@@ -41,7 +41,7 @@ WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
 WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
 WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
 WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
-if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
+if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -66,13 +66,13 @@ if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
     }
   }
   Fl_Value_Slider WhaWha_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(28);
  return;
 } 
-rkr->efx_WhaWha->changepar(0,(int)(o->value()));} selected
+rkr->efx_WhaWha->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

@@ -22,7 +22,7 @@ void WhawhaGui::cb_WhaWha_preset_i(Fl_Choice* o, void* v) {
   rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
-WhaWha_WD->value(rkr->efx_WhaWha->getpar(0));
+WhaWha_WD->value(Dry_Wet(rkr->efx_WhaWha->getpar(0)));
 WhaWha_pan->value(rkr->efx_WhaWha->getpar(1)-64);
 WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
 WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
@@ -53,7 +53,7 @@ void WhawhaGui::cb_WhaWha_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(28);
  return;
 } 
-rkr->efx_WhaWha->changepar(0,(int)(o->value()));
+rkr->efx_WhaWha->changepar(0,Dry_Wet((int)(o->value())));
 }
 void WhawhaGui::cb_WhaWha_WD(SliderW* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_WD_i(o,v);
@@ -188,7 +188,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
   WhaWha_preset->menu(menu_WhaWha_preset);
 } // Fl_Choice* WhaWha_preset
-{ WhaWha_WD = new SliderW(49, 29, 100, 10, "Wet/Dry");
+{ WhaWha_WD = new SliderW(49, 29, 100, 10, "Dry/Wet");
   WhaWha_WD->type(5);
   WhaWha_WD->box(FL_FLAT_BOX);
   WhaWha_WD->color((Fl_Color)178);

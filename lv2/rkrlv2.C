@@ -1629,7 +1629,7 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i=0;
-    val = (int)*plug->param_p[i];
+    val = Dry_Wet((int)*plug->param_p[i]);
     if(plug->wah->getpar(i) != val)
     {
         plug->wah->changepar(i,val);

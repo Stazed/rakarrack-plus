@@ -229,7 +229,7 @@ def remap(efxindex, paramindex):
          (9, 10) : (-1,) ,
 
          (10, -1) : ('RakarrackPlus WahWah', 'https://github.com/Stazed/rakarrack-plus#wha') ,
-         (10, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (10, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (10, 1) : (2, 'Panning', 'PAN', -64) ,
          (10, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (10, 3) : (4, 'Randomness', 'RND', 0) ,
