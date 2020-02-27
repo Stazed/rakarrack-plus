@@ -4340,7 +4340,7 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
             plug->vibe->changepar(i,val);
         }
     }
-    val = (int)*plug->param_p[i];//6 wet/dry
+    val = Dry_Wet((int)*plug->param_p[i]);//6 
     if(plug->vibe->getpar(i) != val)
     {
         plug->vibe->changepar(i,val);

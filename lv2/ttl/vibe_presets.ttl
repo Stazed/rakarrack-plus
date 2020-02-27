@@ -30,8 +30,8 @@
            lv2:symbol "PAN" ;
            pset:value 0.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 64.0
+           lv2:symbol "DRYWET" ;
+           pset:value 63.0
         ], [
            lv2:symbol "FB" ;
            pset:value 0.0
@@ -70,8 +70,8 @@
            lv2:symbol "PAN" ;
            pset:value 0.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 64.0
+           lv2:symbol "DRYWET" ;
+           pset:value 63.0
         ], [
            lv2:symbol "FB" ;
            pset:value 0.0
@@ -110,8 +110,8 @@
            lv2:symbol "PAN" ;
            pset:value 0.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 64.0
+           lv2:symbol "DRYWET" ;
+           pset:value 63.0
         ], [
            lv2:symbol "FB" ;
            pset:value 0.0
@@ -150,8 +150,8 @@
            lv2:symbol "PAN" ;
            pset:value 0.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 0.0
+           lv2:symbol "DRYWET" ;
+           pset:value 127.0
         ], [
            lv2:symbol "FB" ;
            pset:value 0.0
@@ -190,8 +190,8 @@
            lv2:symbol "PAN" ;
            pset:value 0.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 0.0
+           lv2:symbol "DRYWET" ;
+           pset:value 127.0
         ], [
            lv2:symbol "FB" ;
            pset:value 0.0
@@ -230,8 +230,8 @@
            lv2:symbol "PAN" ;
            pset:value 6.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 0.0
+           lv2:symbol "DRYWET" ;
+           pset:value 127.0
         ], [
            lv2:symbol "FB" ;
            pset:value -15.0
@@ -270,8 +270,8 @@
            lv2:symbol "PAN" ;
            pset:value 0.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 64.0
+           lv2:symbol "DRYWET" ;
+           pset:value 63.0
         ], [
            lv2:symbol "FB" ;
            pset:value -50.0
@@ -310,8 +310,8 @@
            lv2:symbol "PAN" ;
            pset:value 0.0
         ], [
-           lv2:symbol "WETDRY" ;
-           pset:value 0.0
+           lv2:symbol "DRYWET" ;
+           pset:value 127.0
         ], [
            lv2:symbol "FB" ;
            pset:value -64.0

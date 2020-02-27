@@ -30,7 +30,7 @@ rgui->findpos(45,(int)o->value(),o);}
     user_data 12045
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12045))rkr->efx_Vibe->setpreset((int)o->value());
-vibe_WD->value(rkr->efx_Vibe->getpar(6));
+vibe_WD->value(Dry_Wet(rkr->efx_Vibe->getpar(6)));
 vibe_width->value(rkr->efx_Vibe->getpar(0));
 vibe_dpth->value(rkr->efx_Vibe->getpar(8));
 vibe_freq->value(rkr->efx_Vibe->getpar(1));
@@ -40,7 +40,7 @@ vibe_stdf->value(rkr->efx_Vibe->getpar(4));
 vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
 vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
 vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
-vibe_stereo->value(rkr->efx_Vibe->getpar(10));}
+vibe_stereo->value(rkr->efx_Vibe->getpar(10));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -77,13 +77,13 @@ vibe_stereo->value(rkr->efx_Vibe->getpar(10));}
     }
   }
   Fl_Value_Slider vibe_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(386);
  return;
 }
-rkr->efx_Vibe->changepar(6,(int)(o->value()));} selected
+rkr->efx_Vibe->changepar(6,Dry_Wet((int)(o->value())));}
     xywh {52 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

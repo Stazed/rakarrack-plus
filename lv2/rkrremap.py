@@ -733,7 +733,7 @@ def remap(efxindex, paramindex):
          (45, 3) : (4, 'LFO Type', 'TYPE', 0) ,
          (45, 4) : (5, 'LFO L/R Delay', 'STDL', -64) ,
          (45, 5) : (6, 'Pan', 'PAN', -64) ,
-         (45, 6) : (7, 'Wet/Dry', 'WETDRY', 0) ,
+         (45, 6) : (7, 'Dry/Wet', 'DRYWET', 0) ,
          (45, 7) : (8, 'Feedback', 'FB', -64) ,
          (45, 8) : (9, 'Depth', 'DEPTH', 0) ,
          (45, 9) : (10, 'Left/Right Crossover', 'LRCR', 0) ,

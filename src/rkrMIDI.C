@@ -2373,7 +2373,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 386:
-        efx_Vibe->changepar(6, value);
+        efx_Vibe->changepar(6, Dry_Wet(value));
         break;
 
     case 387:

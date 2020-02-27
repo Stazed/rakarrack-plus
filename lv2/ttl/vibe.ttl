@@ -131,9 +131,9 @@
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 11 ;
-                lv2:symbol "WETDRY" ;
-                lv2:name "Wet/Dry" ;
-                lv2:default 64 ;
+                lv2:symbol "DRYWET" ;
+                lv2:name "Dry/Wet" ;
+                lv2:default 63 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;

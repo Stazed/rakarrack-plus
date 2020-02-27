@@ -21,7 +21,7 @@ void VibeGui::cb_vibe_activar(Fl_Light_Button* o, void* v) {
 void VibeGui::cb_vibe_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12045))rkr->efx_Vibe->setpreset((int)o->value());
-vibe_WD->value(rkr->efx_Vibe->getpar(6));
+vibe_WD->value(Dry_Wet(rkr->efx_Vibe->getpar(6)));
 vibe_width->value(rkr->efx_Vibe->getpar(0));
 vibe_dpth->value(rkr->efx_Vibe->getpar(8));
 vibe_freq->value(rkr->efx_Vibe->getpar(1));
@@ -55,7 +55,7 @@ void VibeGui::cb_vibe_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(386);
  return;
 }
-rkr->efx_Vibe->changepar(6,(int)(o->value()));
+rkr->efx_Vibe->changepar(6,Dry_Wet((int)(o->value())));
 }
 void VibeGui::cb_vibe_WD(SliderW* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_WD_i(o,v);
@@ -197,7 +197,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vibe_preset->menu(menu_vibe_preset);
 } // Fl_Choice* vibe_preset
-{ vibe_WD = new SliderW(52, 29, 100, 10, "Wet/Dry");
+{ vibe_WD = new SliderW(52, 29, 100, 10, "Dry/Wet");
   vibe_WD->type(5);
   vibe_WD->box(FL_FLAT_BOX);
   vibe_WD->color((Fl_Color)178);
