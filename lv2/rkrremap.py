@@ -380,7 +380,7 @@ def remap(efxindex, paramindex):
          (20, 15) : (-1,) ,
 
          (21, -1) : ('RakarrackPlus Ring', 'https://github.com/Stazed/rakarrack-plus#Ring') ,
-         (21, 0) : (1, 'Wet/Dry', 'WETDRY', 64) ,
+         (21, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (21, 1) : (2, 'Pan', 'PAN', 0) ,
          (21, 2) : (3, 'Left/Right Crossover', 'LRCr', 64) ,
          (21, 3) : (4, 'Level', 'LEVEL', 0) ,

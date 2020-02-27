@@ -11,8 +11,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "SawSin" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 0.0
+        lv2:symbol "DRYWET" ;
+		pset:value 127.0
     ], [
         lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -58,8 +58,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "E String" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -104,8 +104,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "A String" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -150,8 +150,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "Dissonance" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -196,8 +196,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "Fast Beat" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "PAN" ;
 		pset:value 0.0
@@ -242,8 +242,8 @@
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
     rdfs:label "Ring Amp" ;
     lv2:port [
-        lv2:symbol "WETDRY" ;
-		pset:value 64.0
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
     ], [
         lv2:symbol "PAN" ;
 		pset:value 0.0

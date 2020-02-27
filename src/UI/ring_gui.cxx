@@ -21,7 +21,7 @@ void RingGui::cb_ring_activar(Fl_Light_Button* o, void* v) {
 void RingGui::cb_ring_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12021))rkr->efx_Ring->setpreset((int) o->value());
-ring_WD->value(rkr->efx_Ring->getpar(0));
+ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(0)));
 ring_LRc->value(rkr->efx_Ring->getpar(2));
 ring_input->value(rkr->efx_Ring->getpar(11));
 ring_level->value(rkr->efx_Ring->getpar(3));
@@ -55,7 +55,7 @@ void RingGui::cb_ring_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(178);
  return;
 } 
-rkr->efx_Ring->changepar(0,(int)o->value());
+rkr->efx_Ring->changepar(0,Dry_Wet((int)o->value()));
 }
 void RingGui::cb_ring_WD(SliderW* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_WD_i(o,v);
@@ -221,7 +221,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ring_preset->menu(menu_ring_preset);
 } // Fl_Choice* ring_preset
-{ ring_WD = new SliderW(51, 29, 100, 10, "Wet/Dry");
+{ ring_WD = new SliderW(51, 29, 100, 10, "Dry/Wet");
   ring_WD->type(5);
   ring_WD->box(FL_FLAT_BOX);
   ring_WD->color((Fl_Color)178);
@@ -230,8 +230,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_WD->labelfont(0);
   ring_WD->labelsize(10);
   ring_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  ring_WD->minimum(-64);
-  ring_WD->maximum(64);
+  ring_WD->maximum(127);
   ring_WD->step(1);
   ring_WD->textcolor(FL_BACKGROUND2_COLOR);
   ring_WD->callback((Fl_Callback*)cb_ring_WD);

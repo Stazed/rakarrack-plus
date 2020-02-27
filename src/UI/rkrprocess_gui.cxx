@@ -3683,7 +3683,7 @@ void RKRGUI::ActMIDI()
                 VALVE->valve_hpf->redraw();
                 break;
             case 178:
-                RING->ring_WD->value(rkr->efx_Ring->getpar(0));
+                RING->ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(0)));
                 RING->ring_WD->redraw();
                 break;
             case 179:

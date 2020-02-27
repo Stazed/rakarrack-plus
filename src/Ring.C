@@ -186,6 +186,12 @@ Ring::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 
+void
+Ring::setvolume (int volume)
+{
+    Pvolume = volume;
+    outvolume = (float) volume / 127.0f;
+}
 
 void
 Ring::setpanning(int Ppan)
@@ -256,8 +262,7 @@ Ring::changepar(int npar, int value)
     switch (npar)
     {
     case 0:
-        Pvolume = value;
-        outvolume = (float) (64 + value) / 128.0f;
+        setvolume(value);
         break;
     case 1:
         setpanning(value);
