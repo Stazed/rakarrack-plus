@@ -21,7 +21,7 @@ void VocoderGui::cb_vo_activar(Fl_Light_Button* o, void* v) {
 void VocoderGui::cb_vo_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
         if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
-        vo_WD->value(rkr->efx_Vocoder->getpar(0));
+        vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(0)));
         vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
         vo_mu->value(rkr->efx_Vocoder->getpar(2));
         vo_q->value(rkr->efx_Vocoder->getpar(3));
@@ -47,7 +47,7 @@ void VocoderGui::cb_vo_WD_i(SliderW* o, void*) {
          rgui->getMIDIControl(296);
          return;
         }
-        rkr->efx_Vocoder->changepar(0,(int)(o->value()));
+        rkr->efx_Vocoder->changepar(0,Dry_Wet((int)(o->value())));
 }
 void VocoderGui::cb_vo_WD(SliderW* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_WD_i(o,v);
@@ -151,7 +151,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vo_preset->menu(menu_vo_preset);
 } // Fl_Choice* vo_preset
-{ vo_WD = new SliderW(52, 30, 100, 10, "Wet/Dry");
+{ vo_WD = new SliderW(52, 30, 100, 10, "Dry/Wet");
   vo_WD->type(5);
   vo_WD->box(FL_FLAT_BOX);
   vo_WD->color((Fl_Color)178);

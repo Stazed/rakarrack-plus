@@ -30,13 +30,13 @@ rgui->findpos(35,(int)o->value(),o);}
     user_data 12035
     callback {long long ud= (long long) v;
         if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
-        vo_WD->value(rkr->efx_Vocoder->getpar(0));
+        vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(0)));
         vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
         vo_mu->value(rkr->efx_Vocoder->getpar(2));
         vo_q->value(rkr->efx_Vocoder->getpar(3));
         vo_input->value(rkr->efx_Vocoder->getpar(4));
         vo_ring->value(rkr->efx_Vocoder->getpar(6));
-        vo_level->value(rkr->efx_Vocoder->getpar(5));}
+        vo_level->value(rkr->efx_Vocoder->getpar(5));} selected
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -57,13 +57,13 @@ rgui->findpos(35,(int)o->value(),o);}
     }
   }
   Fl_Value_Slider vo_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(296);
          return;
         }
-        rkr->efx_Vocoder->changepar(0,(int)(o->value()));} selected
+        rkr->efx_Vocoder->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {52 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

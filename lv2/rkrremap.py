@@ -582,7 +582,7 @@ def remap(efxindex, paramindex):
          (34, 5) : (-1,) ,
 
          (35, -1) : ('RakarrackPlus Vocoder', 'https://github.com/Stazed/rakarrack-plus#Vocoder') ,
-         (35, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (35, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (35, 1) : (2, 'Pan', 'PAN', -64) ,
          (35, 2) : (3, 'Smear', 'MUF', 0) ,
          (35, 3) : (4, 'Q', 'Q', 0) ,

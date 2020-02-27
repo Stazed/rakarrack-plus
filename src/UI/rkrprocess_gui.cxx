@@ -4155,7 +4155,7 @@ void RKRGUI::ActMIDI()
                 SHELFBOOST->shelf_q1->redraw();
                 break;
             case 296:
-                VOCODER->vo_WD->value(rkr->efx_Vocoder->getpar(0));
+                VOCODER->vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(0)));
                 VOCODER->vo_WD->redraw();
                 break;
             case 297:
