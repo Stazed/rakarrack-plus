@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} PhaserGui {
@@ -30,7 +30,7 @@ rgui->findpos(6,(int)o->value(),o);}
     user_data 12006
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12006))rkr->efx_Phaser->setpreset((int) o->value());
-phaser_WD->value(rkr->efx_Phaser->getpar(0));
+phaser_WD->value(Dry_Wet(rkr->efx_Phaser->getpar(0)));
 phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
 phaser_freq->value(rkr->efx_Phaser->getpar(2));
 phaser_rnd->value(rkr->efx_Phaser->getpar(3));
@@ -42,7 +42,7 @@ phaser_fb->value(rkr->efx_Phaser->getpar(7));
 phaser_stages->value(rkr->efx_Phaser->getpar(8));
 phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
 phaser_subs->value(rkr->efx_Phaser->getpar(10));
-phaser_phase->value(rkr->efx_Phaser->getpar(11));}
+phaser_phase->value(rkr->efx_Phaser->getpar(11));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -71,13 +71,13 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
     }
   }
   Fl_Value_Slider phaser_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(54);
  return;
 } 
-rkr->efx_Phaser->changepar(0,(int)(o->value()));} selected
+rkr->efx_Phaser->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

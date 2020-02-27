@@ -3148,7 +3148,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_WD->redraw();
                 break;
             case 54:
-                PHASER->phaser_WD->value(rkr->efx_Phaser->getpar(0));
+                PHASER->phaser_WD->value(Dry_Wet(rkr->efx_Phaser->getpar(0)));
                 PHASER->phaser_WD->redraw();
                 break;
             case 55:

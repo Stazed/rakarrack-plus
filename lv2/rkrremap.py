@@ -170,7 +170,7 @@ def remap(efxindex, paramindex):
          (5, 13) : (-1,) ,
 
          (6, -1) : ('RakarrackPlus Phaser', 'https://github.com/Stazed/rakarrack-plus#phas') ,
-         (6, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (6, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (6, 1) : (2, 'Panning', 'PAN', -64) ,
          (6, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (6, 3) : (4, 'Randomness', 'RND', 0) ,

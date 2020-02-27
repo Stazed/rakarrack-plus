@@ -4465,7 +4465,14 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<1; i++) //0-4
+    i = 0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->phase->getpar(i) != val)
+    {
+        plug->phase->changepar(i,val);
+    }
+
+    for(i++; i<1; i++) //1-4
     {
         val = (int)*plug->param_p[i];
         if(plug->phase->getpar(i) != val)
