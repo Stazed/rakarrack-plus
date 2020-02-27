@@ -685,7 +685,7 @@ def remap(efxindex, paramindex):
          (41, 16) : (-1,) ,
 
          (42, -1) : ('RakarrackPlus StereoHarmonizer (no midi)', 'https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid') ,
-         (42, 0) : (1, 'Wet/Dry', 'WETDRY', 0) ,
+         (42, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (42, 1) : (2, 'Left Gain', 'GAINL', -64) ,
          (42, 2) : (3, 'Left Interval', 'INTL', -12) ,
          (42, 3) : (4, 'Left Chroma', 'CHRML', 0) ,

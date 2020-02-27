@@ -24,7 +24,7 @@ void SharGui::cb_shar_activar(Fl_Light_Button* o, void* v) {
 void SharGui::cb_shar_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12042))rkr->efx_StereoHarm->setpreset((int)o->value());
-shar_WD->value(rkr->efx_StereoHarm->getpar(0));
+shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(0)));
 shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
 shar_intl->value(rkr->efx_StereoHarm->getpar(2)-12);
 shar_chl->value(rkr->efx_StereoHarm->getpar(3));
@@ -56,7 +56,7 @@ void SharGui::cb_shar_WD_i(SliderW* o, void*) {
  rgui->getMIDIControl(358);
  return;
 }
-rkr->efx_StereoHarm->changepar(0,(int)(o->value()));
+rkr->efx_StereoHarm->changepar(0,Dry_Wet((int)(o->value())));
 }
 void SharGui::cb_shar_WD(SliderW* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_WD_i(o,v);
@@ -230,7 +230,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shar_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shar_preset->menu(menu_shar_preset);
 } // Fl_Choice* shar_preset
-{ shar_WD = new SliderW(50, 26, 100, 10, "Wet/Dry");
+{ shar_WD = new SliderW(50, 26, 100, 10, "Dry/Wet");
   shar_WD->type(5);
   shar_WD->box(FL_FLAT_BOX);
   shar_WD->color((Fl_Color)178);

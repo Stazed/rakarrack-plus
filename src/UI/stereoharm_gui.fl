@@ -32,7 +32,7 @@ rgui->findpos(42,(int)o->value(),o);}
     user_data 12042
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12042))rkr->efx_StereoHarm->setpreset((int)o->value());
-shar_WD->value(rkr->efx_StereoHarm->getpar(0));
+shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(0)));
 shar_ganl->value(rkr->efx_StereoHarm->getpar(1)-64);
 shar_intl->value(rkr->efx_StereoHarm->getpar(2)-12);
 shar_chl->value(rkr->efx_StereoHarm->getpar(3));
@@ -44,7 +44,7 @@ shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
 shar_MIDI->value(rkr->efx_StereoHarm->getpar(10));
-if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(1);}
+if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(1);} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -65,13 +65,13 @@ if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(
     }
   }
   Fl_Value_Slider shar_WD {
-    label {Wet/Dry}
+    label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(358);
  return;
 }
-rkr->efx_StereoHarm->changepar(0,(int)(o->value()));} selected
+rkr->efx_StereoHarm->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {50 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

@@ -4403,7 +4403,7 @@ void RKRGUI::ActMIDI()
                 ECHOTRON->echotron_length->redraw();
                 break;
             case 358:
-                SHAR->shar_WD->value(rkr->efx_StereoHarm->getpar(0));
+                SHAR->shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(0)));
                 SHAR->shar_WD->redraw();
                 break;
             case 359:
