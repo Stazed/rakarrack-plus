@@ -31,7 +31,7 @@ rgui->findpos(23,(int)o->value(),o);}
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12023))rkr->efx_MBDist->setpreset((int)o->value());
 mbdist_WD->value(Dry_Wet(rkr->efx_MBDist->getpar(0)));
-mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
+mbdist_LRc->value(rkr->efx_MBDist->getpar(2));
 mbdist_drive->value(rkr->efx_MBDist->getpar(3));
 mbdist_level->value(rkr->efx_MBDist->getpar(4));
 mbdist_tipoL->value(rkr->efx_MBDist->getpar(5));
@@ -44,7 +44,7 @@ mbdist_neg->value(rkr->efx_MBDist->getpar(11));
 mbdist_st->value(rkr->efx_MBDist->getpar(14));
 mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
 mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
-mbdist_cross2->value(rkr->efx_MBDist->getpar(13));} selected
+mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -98,8 +98,8 @@ rkr->efx_MBDist->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(203);
  return;
 } 
-rkr->efx_MBDist->changepar(2,(int)(o->value()+64));}
-    xywh {52 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+rkr->efx_MBDist->changepar(2,(int)(o->value()));}
+    xywh {52 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_drive {
@@ -201,8 +201,8 @@ rkr->efx_MBDist->changepar(13,(int)o->value());}
  rgui->getMIDIControl(211);
  return;
 } 
-rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
-    xywh {52 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+rkr->efx_MBDist->changepar(1,(int)(o->value()+64));} selected
+    xywh {52 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button mbdist_st {

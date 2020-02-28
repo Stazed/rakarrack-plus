@@ -48,8 +48,9 @@ FIXME Default diff LV2 vs rakarrack
 
 DistBand (MBDist)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 64    |                   |      -64 to 63    |
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRCr
+    Pan                         |   -64 to 63    |  -64 to 64    |  -64 to 63        |      -64 to 63    |
+    Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |  LRCr
+FIXME Default LV2
 
 Distortion
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

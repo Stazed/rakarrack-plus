@@ -3783,7 +3783,7 @@ void RKRGUI::ActMIDI()
                 MBDIST->mbdist_WD->redraw();
                 break;
             case 203:
-                MBDIST->mbdist_LRc->value(rkr->efx_MBDist->getpar(2) - 64);
+                MBDIST->mbdist_LRc->value(rkr->efx_MBDist->getpar(2));
                 MBDIST->mbdist_LRc->redraw();
                 break;
             case 204:

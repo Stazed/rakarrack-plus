@@ -22,7 +22,7 @@ void MbdistGui::cb_mbdist_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12023))rkr->efx_MBDist->setpreset((int)o->value());
 mbdist_WD->value(Dry_Wet(rkr->efx_MBDist->getpar(0)));
-mbdist_LRc->value(rkr->efx_MBDist->getpar(2)-64);
+mbdist_LRc->value(rkr->efx_MBDist->getpar(2));
 mbdist_drive->value(rkr->efx_MBDist->getpar(3));
 mbdist_level->value(rkr->efx_MBDist->getpar(4));
 mbdist_tipoL->value(rkr->efx_MBDist->getpar(5));
@@ -71,7 +71,7 @@ void MbdistGui::cb_mbdist_LRc_i(SliderW* o, void*) {
  rgui->getMIDIControl(203);
  return;
 } 
-rkr->efx_MBDist->changepar(2,(int)(o->value()+64));
+rkr->efx_MBDist->changepar(2,(int)(o->value()));
 }
 void MbdistGui::cb_mbdist_LRc(SliderW* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_LRc_i(o,v);
@@ -259,8 +259,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_LRc->labelfont(0);
   mbdist_LRc->labelsize(10);
   mbdist_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-  mbdist_LRc->minimum(-64);
-  mbdist_LRc->maximum(64);
+  mbdist_LRc->maximum(127);
   mbdist_LRc->step(1);
   mbdist_LRc->textcolor(FL_BACKGROUND2_COLOR);
   mbdist_LRc->callback((Fl_Callback*)cb_mbdist_LRc);
@@ -421,7 +420,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_pan->labelsize(10);
   mbdist_pan->labelcolor(FL_BACKGROUND2_COLOR);
   mbdist_pan->minimum(-64);
-  mbdist_pan->maximum(64);
+  mbdist_pan->maximum(63);
   mbdist_pan->step(1);
   mbdist_pan->textcolor(FL_BACKGROUND2_COLOR);
   mbdist_pan->callback((Fl_Callback*)cb_mbdist_pan);

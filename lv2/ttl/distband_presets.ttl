@@ -364,7 +364,7 @@
 				pset:value 800.0
         ], [
                 lv2:symbol "MHCR" ;
-				pset:value 1300.0
+				pset:value 1200.0
         ], [
                 lv2:symbol "STEREO" ;
 				pset:value 0.0
