@@ -32,7 +32,7 @@ rgui->findpos(3,(int)o->value(),o);}
 if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
 ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(0)));
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
-ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
+ovrd_LRc->value(rkr->efx_Overdrive->getpar(2));
 ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
 ovrd_level->value(rkr->efx_Overdrive->getpar(4));
 ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
@@ -40,7 +40,7 @@ ovrd_neg->value(rkr->efx_Overdrive->getpar(6));
 ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
 ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
 ovrd_st->value(rkr->efx_Overdrive->getpar(9));
-ovrd_pf->value(rkr->efx_Overdrive->getpar(10));} selected
+ovrd_pf->value(rkr->efx_Overdrive->getpar(10));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -70,8 +70,8 @@ rkr->efx_Overdrive->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(94);
  return;
 } 
-rkr->efx_Overdrive->changepar(2,(int)(o->value()+64));}
-    xywh {51 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Overdrive->changepar(2,(int)(o->value()));} selected
+    xywh {51 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ovrd_drive {

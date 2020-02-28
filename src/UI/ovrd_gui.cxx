@@ -23,7 +23,7 @@ void OvrdGui::cb_ovrd_preset_i(Fl_Choice* o, void* v) {
 if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
 ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(0)));
 ovrd_pan->value(rkr->efx_Overdrive->getpar(1)-64);
-ovrd_LRc->value(rkr->efx_Overdrive->getpar(2)-64);
+ovrd_LRc->value(rkr->efx_Overdrive->getpar(2));
 ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
 ovrd_level->value(rkr->efx_Overdrive->getpar(4));
 ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
@@ -61,7 +61,7 @@ void OvrdGui::cb_ovrd_LRc_i(SliderW* o, void*) {
  rgui->getMIDIControl(94);
  return;
 } 
-rkr->efx_Overdrive->changepar(2,(int)(o->value()+64));
+rkr->efx_Overdrive->changepar(2,(int)(o->value()));
 }
 void OvrdGui::cb_ovrd_LRc(SliderW* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_LRc_i(o,v);
@@ -206,8 +206,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_LRc->labelfont(0);
   ovrd_LRc->labelsize(10);
   ovrd_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-  ovrd_LRc->minimum(-64);
-  ovrd_LRc->maximum(63);
+  ovrd_LRc->maximum(127);
   ovrd_LRc->step(1);
   ovrd_LRc->textcolor(FL_BACKGROUND2_COLOR);
   ovrd_LRc->callback((Fl_Callback*)cb_ovrd_LRc);

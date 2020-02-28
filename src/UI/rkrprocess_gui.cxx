@@ -3328,11 +3328,11 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_LR->redraw();
                 break;
             case 94:
-                OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(2) - 64);
+                OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(2));
                 OVRD->ovrd_LRc->redraw();
                 break;
             case 95:
-                DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(2) - 64);
+                DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(2));
                 DIST->dist_LRc->redraw();
                 break;
             case 96:
