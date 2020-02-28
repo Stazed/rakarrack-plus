@@ -13,8 +13,8 @@ Analog Phaser
 
 Arpie
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    LFO L/R Delay  (LRdl.)      |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY -  Left/Right Delay Offset
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr - Left/Right Crossover
+    LFO L/R Delay  (LRdl.)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  LR_DELAY -  Left/Right Delay Offset
+    Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr - Left/Right Crossover
 
 Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |

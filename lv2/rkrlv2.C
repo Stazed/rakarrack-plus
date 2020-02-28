@@ -2174,18 +2174,7 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->arp->changepar(i,val);
     }
-    i++;//delay is not offset
-    val = (int)*plug->param_p[i];
-    if(plug->arp->getpar(i) != val)
-    {
-        plug->arp->changepar(i,val);
-    }
-    i++;//LR delay is offset
-    val = (int)*plug->param_p[i]+64;
-    if(plug->arp->getpar(i) != val)
-    {
-        plug->arp->changepar(i,val);
-    }
+
     for(i++; i<plug->nparams; i++) //rest are not offset
     {
         val = (int)*plug->param_p[i];

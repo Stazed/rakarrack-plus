@@ -34,13 +34,13 @@ arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
 arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(2));
 arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
-arpie_LRc->value(rkr->efx_Arpie->getpar(4)-64);
+arpie_LRc->value(rkr->efx_Arpie->getpar(4));
 arpie_fb->value(rkr->efx_Arpie->getpar(5));
 arpie_damp->value(rkr->efx_Arpie->getpar(6));
 arpie_arpe->value(rkr->efx_Arpie->getpar(7));
 arpie_harm->value(rkr->efx_Arpie->getpar(8));
 arpie_pattern->value(rkr->efx_Arpie->getpar(9));
-arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
+arpie_subdiv->value(rkr->efx_Arpie->getpar(10));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -87,7 +87,7 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
  rgui->getMIDIControl(212);
  return;
 } 
-rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));} selected
+rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {51 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -149,8 +149,8 @@ rkr->efx_Arpie->changepar(3,(int)o->value());}
  rgui->getMIDIControl(217);
  return;
 } 
-rkr->efx_Arpie->changepar(4,(int)(o->value()+64));}
-    xywh {51 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Arpie->changepar(4,(int)(o->value()));}
+    xywh {51 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_fb {
