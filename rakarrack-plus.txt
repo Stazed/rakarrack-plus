@@ -229,31 +229,31 @@ Check "MODE" - "Filter Type"                                                    
 
 ___________________________________________________________________________________________________________________________________
 
-Presets that use Dual_Flange:
-
-Backward Tumble.carxp:135:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Warm Chorus.carxp:249:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Noise Synth.carxp:440:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Stereo Ecstasy.carxp:359:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Jazz Bright Chorus.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Clean Smack Back.carxp:170:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-PongChor.carxp:205:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Helicopter.carxp:456:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Dark Alley.carxp:214:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Reverse delay ambience.carxp:205:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-Succulent Clean.carxp:240:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
-D Flange.carxp:84:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>
+Presets that use Dual_Flange:                                                                         Bank        Original      RackPlus
+                                                                                                                            (127 - (Original + 64)
+Backward Tumble.carxp:135:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>            2           -15             78
+Warm Chorus.carxp:249:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>                2           -15             78
+Noise Synth.carxp:440:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>                1           -15             78
+Stereo Ecstasy.carxp:359:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>             3           -15             78
+Jazz Bright Chorus.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>         3           -13             76    
+Clean Smack Back.carxp:170:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>           2           -32             95
+PongChor.carxp:205:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>                   3           -13             76
+Helicopter.carxp:456:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>                 3             0             63
+Dark Alley.carxp:214:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>                 1           -32             95
+Reverse delay ambience.carxp:205:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>     3           -13             76
+Succulent Clean.carxp:240:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>            1           -40            103   
+D Flange.carxp:84:   <URI>https://github.com/Stazed/rakarrack-plus#Dual_Flange</URI>                    1           -32             95
 
 Preset that use Ring:
 
-AutoYiYa.carxp:275:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
-Talk to me.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
-Envelope YaYa.carxp:275:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
-C Melody.carxp:12:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
-Go with Him.carxp:12:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
-RandYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
-AutoYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
-Mono Arpeg.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
+AutoYiYa.carxp:275:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                          3           -64            127
+Talk to me.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                        3           -45            108     
+Envelope YaYa.carxp:275:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                     3           -64            127
+C Melody.carxp:12:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                           3            50             13 
+Go with Him.carxp:12:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                        1           -64            127
+RandYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                            3           -32             95
+AutoYa.carxp:361:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                            3           -50            113 
+Mono Arpeg.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>                        2           -42            105
 
 
 Presets that need fixes:
