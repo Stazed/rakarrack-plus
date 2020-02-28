@@ -39,9 +39,9 @@ flanger_stdf->value(rkr->efx_Flanger->getpar(5));
 flanger_dpth->value(rkr->efx_Flanger->getpar(6));
 flanger_delay->value(rkr->efx_Flanger->getpar(7));
 flanger_fb->value(rkr->efx_Flanger->getpar(8));
-flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
+flanger_LR->value(rkr->efx_Flanger->getpar(9));
 flanger_subs->value(rkr->efx_Flanger->getpar(11));
-flanger_awesome->value(rkr->efx_Flanger->getpar(12));} selected
+flanger_awesome->value(rkr->efx_Flanger->getpar(12));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -173,8 +173,8 @@ rkr->efx_Flanger->changepar(8,(int)o->value());}
  rgui->getMIDIControl(92);
  return;
 } 
-rkr->efx_Flanger->changepar(9,(int)(o->value()+64));}
-    xywh {52 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Flanger->changepar(9,(int)(o->value()));} selected
+    xywh {52 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local

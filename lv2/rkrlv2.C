@@ -657,20 +657,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->chorus->changepar(i,val);
     }
-    for(i++; i<5; i++) //2-4
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->chorus->getpar(i) != val)
-        {
-            plug->chorus->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64;// 5 LR Del. offset
-    if(plug->chorus->getpar(i) != val)
-    {
-        plug->chorus->changepar(i,val);
-    }
-    for(i++; i<10; i++) // 6-9
+    for(i++; i<10; i++) // 2-9
     {
         val = (int)*plug->param_p[i];
         if(plug->chorus->getpar(i) != val)
@@ -5032,20 +5019,7 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->flanger->changepar(i,val);
     }
-    for(i++; i<5; i++) //2-4
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->flanger->getpar(i) != val)
-        {
-            plug->flanger->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64;// 5 LR Del. offset
-    if(plug->flanger->getpar(i) != val)
-    {
-        plug->flanger->changepar(i,val);
-    }
-    for(i++; i<10; i++) // 6-9
+    for(i++; i<10; i++) // 2-9
     {
         val = (int)*plug->param_p[i];
         if(plug->flanger->getpar(i) != val)

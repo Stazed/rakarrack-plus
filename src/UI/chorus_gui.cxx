@@ -30,7 +30,7 @@ chorus_stdf->value(rkr->efx_Chorus->getpar(5));
 chorus_dpth->value(rkr->efx_Chorus->getpar(6));
 chorus_delay->value(rkr->efx_Chorus->getpar(7));
 chorus_fb->value(rkr->efx_Chorus->getpar(8));
-chorus_LR->value(rkr->efx_Chorus->getpar(9)-64);
+chorus_LR->value(rkr->efx_Chorus->getpar(9));
 chorus_subs->value(rkr->efx_Chorus->getpar(11));
 chorus_awesome->value(rkr->efx_Chorus->getpar(12));
 }
@@ -165,7 +165,7 @@ void ChorusGui::cb_chorus_LR_i(SliderW* o, void*) {
  rgui->getMIDIControl(91);
  return;
 } 
-rkr->efx_Chorus->changepar(9,(int)(o->value()+64));
+rkr->efx_Chorus->changepar(9,(int)(o->value()));
 }
 void ChorusGui::cb_chorus_LR(SliderW* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_LR_i(o,v);
@@ -358,8 +358,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_LR->labelfont(0);
   chorus_LR->labelsize(10);
   chorus_LR->labelcolor(FL_BACKGROUND2_COLOR);
-  chorus_LR->minimum(-64);
-  chorus_LR->maximum(63);
+  chorus_LR->maximum(127);
   chorus_LR->step(1);
   chorus_LR->textcolor(FL_BACKGROUND2_COLOR);
   chorus_LR->callback((Fl_Callback*)cb_chorus_LR);

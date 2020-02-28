@@ -22,8 +22,9 @@ Cabinet
 Chorus
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCR - Left/Right Crossover
+    LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  WIDTH
+    Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCR - Left/Right Crossover
+FIXME LV2 default diff from rakarrack
 
 Coil Crafter
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -96,8 +97,9 @@ Expander
 Flanger
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
     Pan                         |                |  -64 to 63    |                   |       --------    |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       --------    |
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       --------    |  
+    LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |       --------    |
+    Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       --------    |  
+FIXME LV2 Default settings diff from rakarrack
 
 Harmonizer
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

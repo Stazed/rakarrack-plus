@@ -30,7 +30,7 @@ flanger_stdf->value(rkr->efx_Flanger->getpar(5));
 flanger_dpth->value(rkr->efx_Flanger->getpar(6));
 flanger_delay->value(rkr->efx_Flanger->getpar(7));
 flanger_fb->value(rkr->efx_Flanger->getpar(8));
-flanger_LR->value(rkr->efx_Flanger->getpar(9)-64);
+flanger_LR->value(rkr->efx_Flanger->getpar(9));
 flanger_subs->value(rkr->efx_Flanger->getpar(11));
 flanger_awesome->value(rkr->efx_Flanger->getpar(12));
 }
@@ -165,7 +165,7 @@ void FlangerGui::cb_flanger_LR_i(SliderW* o, void*) {
  rgui->getMIDIControl(92);
  return;
 } 
-rkr->efx_Flanger->changepar(9,(int)(o->value()+64));
+rkr->efx_Flanger->changepar(9,(int)(o->value()));
 }
 void FlangerGui::cb_flanger_LR(SliderW* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_LR_i(o,v);
@@ -358,8 +358,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   flanger_LR->labelfont(0);
   flanger_LR->labelsize(10);
   flanger_LR->labelcolor(FL_BACKGROUND2_COLOR);
-  flanger_LR->minimum(-64);
-  flanger_LR->maximum(63);
+  flanger_LR->maximum(127);
   flanger_LR->step(1);
   flanger_LR->textcolor(FL_BACKGROUND2_COLOR);
   flanger_LR->callback((Fl_Callback*)cb_flanger_LR);

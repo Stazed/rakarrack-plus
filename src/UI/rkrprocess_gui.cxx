@@ -3316,11 +3316,11 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_HPF->redraw();
                 break;
             case 91:
-                CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(9) - 64);
+                CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(9));
                 CHORUS->chorus_LR->redraw();
                 break;
             case 92:
-                FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(9) - 64);
+                FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(9));
                 FLANGER->flanger_LR->redraw();
                 break;
             case 93:
