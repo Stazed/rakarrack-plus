@@ -3459,7 +3459,7 @@ void RKRGUI::ActMIDI()
                 NEWDIST->newdist_pan->redraw();
                 break;
             case 127:
-                NEWDIST->newdist_LRc->value(rkr->efx_NewDist->getpar(2) - 64);
+                NEWDIST->newdist_LRc->value(rkr->efx_NewDist->getpar(2));
                 NEWDIST->newdist_LRc->redraw();
                 break;
             case 2:

@@ -22,7 +22,7 @@ void NewdistGui::cb_newdist_preset_i(Fl_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12017))rkr->efx_NewDist->setpreset((int) o->value());
 newdist_WD->value(Dry_Wet(rkr->efx_NewDist->getpar(0)));
-newdist_LRc->value(rkr->efx_NewDist->getpar(2)-64);
+newdist_LRc->value(rkr->efx_NewDist->getpar(2));
 newdist_drive->value(rkr->efx_NewDist->getpar(3));
 newdist_level->value(rkr->efx_NewDist->getpar(4));
 newdist_tipo->value(rkr->efx_NewDist->getpar(5));
@@ -63,7 +63,7 @@ void NewdistGui::cb_newdist_LRc_i(SliderW* o, void*) {
  rgui->getMIDIControl(127);
  return;
 } 
-rkr->efx_NewDist->changepar(2,(int)(o->value()+64));
+rkr->efx_NewDist->changepar(2,(int)(o->value()));
 }
 void NewdistGui::cb_newdist_LRc(SliderW* o, void* v) {
   ((NewdistGui*)(o->parent()))->cb_newdist_LRc_i(o,v);
@@ -225,8 +225,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   newdist_LRc->labelfont(0);
   newdist_LRc->labelsize(10);
   newdist_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-  newdist_LRc->minimum(-64);
-  newdist_LRc->maximum(63);
+  newdist_LRc->maximum(127);
   newdist_LRc->step(1);
   newdist_LRc->textcolor(FL_BACKGROUND2_COLOR);
   newdist_LRc->callback((Fl_Callback*)cb_newdist_LRc);
