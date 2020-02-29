@@ -21,7 +21,6 @@ Cabinet
 
 Chorus
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  WIDTH
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCR - Left/Right Crossover
 FIXME LV2 default diff from rakarrack
@@ -37,12 +36,9 @@ Compressor
 
 Convolotron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
 
 Derelict (newdist)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr
 FIXME Default diff LV2 vs rakarrack
 
@@ -54,26 +50,18 @@ FIXME Default LV2
 
 Distortion
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr
 
 Dual Flange
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
-    Left/Right Cross (L/R.Cr)   |                |   0 to 127    |                   |       0 to 127    |  LRC
-    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |  STDL - LFO L/R Delay
 
 Echo
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr
     L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
 
 Echotron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |      -64 to 64    |  LRC  - Left/Right Crossover
     Depth                       |                |  -64 to 64    |                   |      -64 to 64    |  DEPTH -  Filter Depth
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 64    |  STDF - LFO L/R Delay
@@ -81,7 +69,6 @@ Echotron
 
 Echoverse (RBEcho)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
     Angle                       |                |  -64 to 64    |                   |      -64 to 63    |  ANGLE
 
@@ -98,19 +85,15 @@ Expander
 
 Flanger
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
-    Pan                         |                |  -64 to 63    |                   |       --------    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |       --------    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       --------    |  
 FIXME LV2 Default settings diff from rakarrack
 
 Harmonizer
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Infinity
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    LFO L/R Delay  (St.df)      |                |  -64 to 64    |                   |      -64 to 64    |  STDF - Sweep L/R Delay
-    Band (1 to 8)               |                |  -64 to 64    |                   |      -64 to 64    |  B# - Band # Gain
 
 Looper
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |  -------------    |      ----------   |
@@ -122,8 +105,6 @@ MusicalDelay
 MuTroMojo   (RyanWah)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |  -64 to 63    |                   |      -64 to 63    |  STDL - LFO L/R Delay
-    E. Sens                     |                |  -64 to 64    |                   |      -64 to 64    |  SENSE - Envelope Sensitivity
-    LP/BP/HP                    |                |  -64 to 64    |                   |      -64 to 64    |  LP/BP/HP - Lowpass/High/Band Level
 
 NoiseGate
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -131,16 +112,13 @@ NoiseGate
 Opticaltrem
     Wet/Dry                     |                |    none       |                   |       none        |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDF - LFO L/R Delay
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Overdrive
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |     DISTORTION    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr
 
 Pan
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
 
 Parametric EQ
@@ -149,41 +127,29 @@ Parametric EQ
 
 Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |       0 to 127    |  STDL - LFO L/R Delay
     Left/Right Cross (L/R.Cr)   |   -64 to 63    |  -64 to 63    |     -64 to 63     |      -64 to 64    |  LRCR
 
 Reverb
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Reverbtron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
-    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
-    Stretch                     |                |  -64 to 64    |                   |      -64 to 64    |  STRETCH -  Time Stretch
 
 Ring
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 127    |  LRCr
-    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 Sequence
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-    Q                           |                |  -64 to 64    |                   |      -64 to 64    | 
-    St.df                       |                |   0 to 7      |                   |       0 to 7      |  LAG - Right Channel Step Lag
 
 ShelfBoost
     Wet/Dry                     |                |     none      |                   |         none      |
-    Pres.                       |                |  -64 to 64    |                   |      -64 to 64    |  PRES - Presence
 
 Shifter
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
 
 Shuffle
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-    Q                           |                |  -64 to 64    |                   |      -64 to 64    |  Q -  Width
 Check label Rev (Rakarrack) vs. BAND - Filtered Band - rkrlv2
 
 StereoHarm
@@ -200,12 +166,9 @@ Sustainer
 Synthfilter
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
-    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
-    E.Sens                      |                |  -64 to 64    |                   |      -64 to 64    |  SENSE -  Envelope Sensitivity
 
 Valve
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |                |  -64 to 63    |                   |       0 to 127    |  LRCr - Left/Right Crossover
 
 VaryBand    (MBVvol)
@@ -216,17 +179,13 @@ VaryBand    (MBVvol)
 Vibe
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 128    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDL - LFO L/R Delay
-    FB                          |                |  -64 to 64    |                   |      -64 to 64    |  FB -  Feedback
     Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |       0 to 128    |  LRCR - Left/Right Crossover
-    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 Vocoder
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 64    |                   |      -64 to 64    |
 
 WahWah  (DynamicFilter.C)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    Pan                         |                |  -64 to 63    |                   |      -64 to 63    |
     LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH - LFO L/R Delay
 Check "MODE" - "Filter Type"                                                                  0 to 4        -- Add Selection box
 
