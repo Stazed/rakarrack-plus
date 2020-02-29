@@ -83,9 +83,9 @@
                 lv2:index 7 ;
                 lv2:symbol "LRCr" ;
                 lv2:name "Left/Right Crossover" ;
-                lv2:default 0 ;
-                lv2:minimum 0 ;
-                lv2:maximum 127 ;
+                lv2:default -64 ;
+                lv2:minimum -64 ;
+                lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:bpm ;
         ], [

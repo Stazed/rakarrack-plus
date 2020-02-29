@@ -1946,13 +1946,8 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->ring->changepar(i,val);
     }
-    i++;
-    val = (int)*plug->param_p[i] - 64;// 2 L/R cross
-    if(plug->ring->getpar(i) != val)
-    {
-        plug->ring->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //3-12
+
+    for(i++; i<plug->nparams; i++) //2-12
     {
         val = (int)*plug->param_p[i];
         if(plug->ring->getpar(i) != val)

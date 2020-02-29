@@ -18,7 +18,7 @@
 		pset:value 0.0
     ], [
         lv2:symbol "LRCr" ;
-		pset:value 0.0
+		pset:value -64.0
     ], [
         lv2:symbol "LEVEL" ;
 		pset:value 64.0
@@ -65,7 +65,7 @@
 		pset:value 0.0
     ], [
         lv2:symbol "LRCr" ;
-		pset:value 64.0
+		pset:value 0.0
     ], [
         lv2:symbol "LEVEL" ;
 		pset:value 64.0
@@ -111,7 +111,7 @@
 		pset:value 0.0
     ], [
         lv2:symbol "LRCr" ;
-		pset:value 64.0
+		pset:value 0.0
     ], [
         lv2:symbol "LEVEL" ;
 		pset:value 64.0
@@ -157,7 +157,7 @@
 		pset:value 0.0
     ], [
         lv2:symbol "LRCr" ;
-		pset:value 64.0
+		pset:value 0.0
     ], [
         lv2:symbol "LEVEL" ;
 		pset:value 64.0
@@ -203,7 +203,7 @@
 		pset:value 0.0
     ], [
         lv2:symbol "LRCr" ;
-		pset:value 64.0
+		pset:value 0.0
     ], [
         lv2:symbol "LEVEL" ;
 		pset:value 64.0
@@ -249,7 +249,7 @@
 		pset:value 0.0
     ], [
         lv2:symbol "LRCr" ;
-		pset:value 64.0
+		pset:value 0.0
     ], [
         lv2:symbol "LEVEL" ;
 		pset:value 64.0
