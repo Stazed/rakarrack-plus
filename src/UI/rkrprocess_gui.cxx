@@ -3108,11 +3108,11 @@ void RKRGUI::ActMIDI()
                 CHORUS->chorus_dpth->redraw();
                 break;
             case 24:
-                MUSDELAY->musdelay_gain1->value(rkr->efx_MusDelay->getpar(11) - 64);
+                MUSDELAY->musdelay_gain1->value(rkr->efx_MusDelay->getpar(11));
                 MUSDELAY->musdelay_gain1->redraw();
                 break;
             case 25:
-                MUSDELAY->musdelay_gain2->value(rkr->efx_MusDelay->getpar(12) - 64);
+                MUSDELAY->musdelay_gain2->value(rkr->efx_MusDelay->getpar(12));
                 MUSDELAY->musdelay_gain2->redraw();
                 break;
             case 26:
@@ -3344,7 +3344,7 @@ void RKRGUI::ActMIDI()
                 ECHO->echo_LRc->redraw();
                 break;
             case 98:
-                MUSDELAY->musdelay_LRc->value(rkr->efx_MusDelay->getpar(4) - 64);
+                MUSDELAY->musdelay_LRc->value(rkr->efx_MusDelay->getpar(4));
                 MUSDELAY->musdelay_LRc->redraw();
                 break;
             case 99:

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class MusdelayGui {
@@ -39,9 +39,9 @@ musdelay_delay2->value(rkr->efx_MusDelay->getpar(8)-1);
 musdelay_delay3->value(rkr->efx_MusDelay->getpar(3)-1);
 musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
 musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
-musdelay_LRc->value(rkr->efx_MusDelay->getpar(4)-64);
-musdelay_gain1->value(rkr->efx_MusDelay->getpar(11)-64);
-musdelay_gain2->value(rkr->efx_MusDelay->getpar(12)-64);
+musdelay_LRc->value(rkr->efx_MusDelay->getpar(4));
+musdelay_gain1->value(rkr->efx_MusDelay->getpar(11));
+musdelay_gain2->value(rkr->efx_MusDelay->getpar(12));
 musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
@@ -73,8 +73,8 @@ rkr->efx_MusDelay->changepar(0,Dry_Wet((int)o->value()));}
  rgui->getMIDIControl(98);
  return;
 } 
-rkr->efx_MusDelay->changepar(4,(int)o->value()+64);}
-    xywh {53 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_MusDelay->changepar(4,(int)o->value());}
+    xywh {53 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider musdelay_pan1 {
@@ -189,8 +189,8 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
  rgui->getMIDIControl(24);
  return;
 } 
-rkr->efx_MusDelay->changepar(11,(int)o->value()+64);}
-    xywh {53 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_MusDelay->changepar(11,(int)o->value());}
+    xywh {53 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider musdelay_gain2 {
@@ -200,8 +200,8 @@ rkr->efx_MusDelay->changepar(11,(int)o->value()+64);}
  rgui->getMIDIControl(25);
  return;
 } 
-rkr->efx_MusDelay->changepar(12,(int)o->value()+64);}
-    xywh {53 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_MusDelay->changepar(12,(int)o->value());}
+    xywh {53 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider musdelay_fb1 {
