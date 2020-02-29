@@ -4206,7 +4206,7 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<4; i++)//0-4
+    for(i=0; i< 5; i++)//0-4
     {
         val = (int)*plug->param_p[i];
         if(plug->otrem->getpar(i) != val)
@@ -4214,14 +4214,12 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
             plug->otrem->changepar(i,val);
         }
     }
-    for(; i<6; i++)//4-5 pan and st del
+    val = (int)*plug->param_p[i]+64;    //5 pan offset
+    if(plug->otrem->getpar(i) != val)
     {
-        val = (int)*plug->param_p[i]+64;
-        if(plug->otrem->getpar(i) != val)
-        {
-            plug->otrem->changepar(i,val);
-        }
+        plug->otrem->changepar(i,val);
     }
+    i++;
     val = (int)*plug->param_p[i];//6 invert
     if(plug->otrem->getpar(i) != val)
     {

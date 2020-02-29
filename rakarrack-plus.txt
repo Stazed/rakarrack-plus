@@ -110,7 +110,8 @@ NoiseGate
 
 Opticaltrem
     Wet/Dry                     |                |    none       |                   |       none        |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  STDF - LFO L/R Delay
+    LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDF - LFO L/R Delay
+FIXME LV2 default
 
 Overdrive
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |     DISTORTION    |

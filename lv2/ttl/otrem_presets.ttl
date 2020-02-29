@@ -24,7 +24,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDF" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -53,7 +53,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDF" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -81,7 +81,7 @@
                 pset:value 5.0
         ], [
                 lv2:symbol "STDF" ;
-                pset:value -64.0
+                pset:value 0.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -109,7 +109,7 @@
                 pset:value 1.0
         ], [
                 lv2:symbol "STDF" ;
-                pset:value -48.0
+                pset:value 16.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -137,7 +137,7 @@
                 pset:value 3.0
         ], [
                 lv2:symbol "STDF" ;
-                pset:value -32.0
+                pset:value 32.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
@@ -165,7 +165,7 @@
                 pset:value 3.0
         ], [
                 lv2:symbol "STDF" ;
-                pset:value -32.0
+                pset:value 32.0
         ], [
                 lv2:symbol "PAN" ;
                 pset:value 0.0
