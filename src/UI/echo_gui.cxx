@@ -25,7 +25,7 @@ echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(0)));
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
 echo_LRdl->value(rkr->efx_Echo->getpar(3));
-echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
+echo_LRc->value(rkr->efx_Echo->getpar(4));
 echo_fb->value(rkr->efx_Echo->getpar(5));
 echo_damp->value(rkr->efx_Echo->getpar(6));
 echo_RV->value(rkr->efx_Echo->getpar(7));
@@ -99,7 +99,7 @@ void EchoGui::cb_echo_LRc_i(SliderW* o, void*) {
  rgui->getMIDIControl(97);
  return;
 } 
-rkr->efx_Echo->changepar(4,(int)(o->value()+64));
+rkr->efx_Echo->changepar(4,(int)(o->value()));
 }
 void EchoGui::cb_echo_LRc(SliderW* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_LRc_i(o,v);
@@ -249,8 +249,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_LRc->labelfont(0);
   echo_LRc->labelsize(10);
   echo_LRc->labelcolor(FL_BACKGROUND2_COLOR);
-  echo_LRc->minimum(-64);
-  echo_LRc->maximum(63);
+  echo_LRc->maximum(127);
   echo_LRc->step(1);
   echo_LRc->textcolor(FL_BACKGROUND2_COLOR);
   echo_LRc->callback((Fl_Callback*)cb_echo_LRc);

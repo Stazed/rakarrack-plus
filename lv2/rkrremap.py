@@ -145,7 +145,7 @@ def remap(efxindex, paramindex):
          (4, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (4, 1) : (2, 'Panning', 'PAN', -64) ,
          (4, 2) : (3, 'Delay', 'DELAY', 0) ,
-         (4, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', -64) ,
+         (4, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', 0) ,
          (4, 4) : (5, 'Left/Right Crossover', 'LRCr', 0) ,
          (4, 5) : (6, 'Feedback', 'FEEDBACK', 0) ,
          (4, 6) : (7, 'Damping', 'DAMP', 0) ,

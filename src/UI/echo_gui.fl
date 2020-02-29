@@ -33,7 +33,7 @@ echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(0)));
 echo_pan->value(rkr->efx_Echo->getpar(1)-64);
 echo_delay->value(rkr->efx_Echo->getpar(2));
 echo_LRdl->value(rkr->efx_Echo->getpar(3));
-echo_LRc->value(rkr->efx_Echo->getpar(4)-64);
+echo_LRc->value(rkr->efx_Echo->getpar(4));
 echo_fb->value(rkr->efx_Echo->getpar(5));
 echo_damp->value(rkr->efx_Echo->getpar(6));
 echo_RV->value(rkr->efx_Echo->getpar(7));
@@ -124,8 +124,8 @@ rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(97);
  return;
 } 
-rkr->efx_Echo->changepar(4,(int)(o->value()+64));}
-    xywh {51 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Echo->changepar(4,(int)(o->value()));}
+    xywh {51 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_fb {

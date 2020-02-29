@@ -3340,7 +3340,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_LR->redraw();
                 break;
             case 97:
-                ECHO->echo_LRc->value(rkr->efx_Echo->getpar(4) - 64);
+                ECHO->echo_LRc->value(rkr->efx_Echo->getpar(4));
                 ECHO->echo_LRc->redraw();
                 break;
             case 98:

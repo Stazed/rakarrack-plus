@@ -20,7 +20,7 @@
 		pset:value 565.0
 	] , [
 		lv2:symbol "LR_DELAY" ;
-		pset:value 0.0
+		pset:value 64.0
 	] , [
 		lv2:symbol "LRCr" ;
 		pset:value 30.0
@@ -52,7 +52,7 @@
 		pset:value 357.0
 	] , [
 		lv2:symbol "LR_DELAY" ;
-		pset:value 0.0
+		pset:value 64.0
 	] , [
 		lv2:symbol "LRCr" ;
 		pset:value 30.0
@@ -84,7 +84,7 @@
 		pset:value 955.0
 	] , [
 		lv2:symbol "LR_DELAY" ;
-		pset:value 0.0
+		pset:value 64.0
 	] , [
 		lv2:symbol "LRCr" ;
 		pset:value 30.0
@@ -116,7 +116,7 @@
 		pset:value 705.0
 	] , [
 		lv2:symbol "LR_DELAY" ;
-		pset:value 0.0
+		pset:value 64.0
 	] , [
 		lv2:symbol "LRCr" ;
 		pset:value 30.0
@@ -148,7 +148,7 @@
 		pset:value 1610.0
 	] , [
 		lv2:symbol "LR_DELAY" ;
-		pset:value -14.0
+		pset:value 50.0
 	] , [
 		lv2:symbol "LRCr" ;
 		pset:value 30.0
@@ -180,7 +180,7 @@
 		pset:value 705.0
 	] , [
 		lv2:symbol "LR_DELAY" ;
-		pset:value -47.0
+		pset:value 17.0
 	] , [
 		lv2:symbol "LRCr" ;
 		pset:value 0.0
@@ -212,7 +212,7 @@
             pset:value 737.0
         ] , [
             lv2:symbol "LR_DELAY" ;
-            pset:value 52.0
+            pset:value 118.0
         ] , [
             lv2:symbol "LRCr" ;
             pset:value 100.0
@@ -244,7 +244,7 @@
             pset:value 472.0
         ] , [
             lv2:symbol "LR_DELAY" ;
-            pset:value 34.0
+            pset:value 100.0
         ] , [
             lv2:symbol "LRCr" ;
             pset:value 127.0
@@ -276,7 +276,7 @@
             pset:value 456.0
         ] , [
             lv2:symbol "LR_DELAY" ;
-            pset:value 0.0
+            pset:value 64.0
         ] , [
             lv2:symbol "LRCr" ;
             pset:value 100.0

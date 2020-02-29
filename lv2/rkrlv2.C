@@ -562,18 +562,7 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->echo->changepar(i,val);
     }
-    i++;//delay is not offset
-    val = (int)*plug->param_p[i];
-    if(plug->echo->getpar(i) != val)
-    {
-        plug->echo->changepar(i,val);
-    }
-    i++;//LR delay is offset
-    val = (int)*plug->param_p[i]+64;
-    if(plug->echo->getpar(i) != val)
-    {
-        plug->echo->changepar(i,val);
-    }
+
     for(i++; i<plug->nparams; i++)
     {
         val = (int)*plug->param_p[i];

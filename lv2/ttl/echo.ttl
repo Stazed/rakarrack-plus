@@ -92,9 +92,9 @@
                 lv2:index 8 ;
                 lv2:symbol "LR_DELAY" ;
                 lv2:name "Left/Right Delay Offset" ;
-                lv2:default 0 ;
-                lv2:minimum -64 ;
-                lv2:maximum 63 ;
+                lv2:default 64 ;
+                lv2:minimum 0 ;
+                lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
