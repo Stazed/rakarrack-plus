@@ -675,7 +675,7 @@ def remap(efxindex, paramindex):
          (41, 6) : (6, 'Dampening', 'DAMP', 0) ,
          (41, 7) : (7, 'Left/Right Crossover', 'LRC', -64) ,
          (41, 8) : (0, 'SKIP', 'SKIP', 0) ,#file number
-         (41, 9) : (8, 'LFO L/R Delay', 'STDF', -64) ,
+         (41, 9) : (8, 'LFO L/R Delay', 'STDF', 0) ,
          (41, 10) : (9, 'Feedback', 'FB', 0) ,
          (41, 11) : (10, 'Pan', 'PAN', -64) ,
          (41, 12) : (11, 'Modulate Delays', 'MD', 0) ,

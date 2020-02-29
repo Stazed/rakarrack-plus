@@ -3658,12 +3658,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->echotron->changepar(i+1,val);
     }
-    i++;
-    val = (int)*plug->param_p[i]+64;//9 LFO l/R cross
-    if(plug->echotron->getpar(i+2) != val)//skip file num
-    {
-        plug->echotron->changepar(i+2,val);
-    }
+
     for(i++; i+2<11; i++)
     {
         val = (int)*plug->param_p[i];

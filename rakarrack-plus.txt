@@ -62,10 +62,8 @@ Echo
 
 Echotron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-    Left/Right Cross (L/R.Cr)   |                |  -64 to 64    |                   |      -64 to 64    |  LRC  - Left/Right Crossover
-    Depth                       |                |  -64 to 64    |                   |      -64 to 64    |  DEPTH -  Filter Depth
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 64    |  STDF - LFO L/R Delay
-    Number of Taps              |                |Varies - file  |                   |       1 to 127    |  LENGTH
+    LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 64    |  STDF - LFO L/R Delay
+FIXME add LV2-Default
 
 Echoverse (RBEcho)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

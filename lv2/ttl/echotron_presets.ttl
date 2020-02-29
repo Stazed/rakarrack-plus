@@ -35,7 +35,7 @@
         #skip file
     ], [
         lv2:symbol "STDF" ;
-		pset:value 32.0
+		pset:value 96.0
     ], [
         lv2:symbol "FB" ;
 		pset:value -13.0
@@ -89,7 +89,7 @@
         #skip file
     ], [
         lv2:symbol "STDF" ;
-		pset:value 32.0
+		pset:value 96.0
     ], [
         lv2:symbol "FB" ;
 		pset:value -4.0
@@ -143,7 +143,7 @@
         #skip file
     ], [
         lv2:symbol "STDF" ;
-		pset:value 32.0
+		pset:value 96.0
     ], [
         lv2:symbol "FB" ;
 		pset:value -8.0
@@ -197,7 +197,7 @@
         #skip file
     ], [
         lv2:symbol "STDF" ;
-		pset:value -32.0
+		pset:value 32.0
     ], [
         lv2:symbol "FB" ;
 		pset:value 0.0
@@ -251,7 +251,7 @@
         #skip file
     ], [
         lv2:symbol "STDF" ;
-		pset:value -32.0
+		pset:value 32.0
     ], [
         lv2:symbol "FB" ;
 		pset:value 0.0
