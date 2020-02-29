@@ -219,14 +219,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_threshold->align(Fl_Align(FL_ALIGN_LEFT));
   expander_threshold->when(FL_WHEN_CHANGED);
 } // SliderW* expander_threshold
-{ expander_level = new SliderW(50, 125, 100, 10, "Level");
+{ expander_level = new SliderW(50, 125, 100, 10, "Out Gain");
   expander_level->type(5);
   expander_level->box(FL_FLAT_BOX);
   expander_level->color((Fl_Color)178);
   expander_level->selection_color((Fl_Color)62);
   expander_level->labeltype(FL_NORMAL_LABEL);
   expander_level->labelfont(0);
-  expander_level->labelsize(10);
+  expander_level->labelsize(9);
   expander_level->labelcolor(FL_BACKGROUND2_COLOR);
   expander_level->minimum(1);
   expander_level->maximum(127);

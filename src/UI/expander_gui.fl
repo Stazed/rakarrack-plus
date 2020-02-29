@@ -3,8 +3,8 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class ExpanderGui {
-  user_data 1 open selected
-  xywh {1550 52 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  user_data 1 open
+  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -94,14 +94,14 @@ rkr->efx_Expander->changepar(1, (int)o->value());}
     class SliderW
   }
   Fl_Value_Slider expander_level {
-    label Level
+    label {Out Gain}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(224);
  return;
 } 
-rkr->efx_Expander->changepar(7, (int) o->value());}
-    xywh {50 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
+rkr->efx_Expander->changepar(7, (int) o->value());} selected
+    xywh {50 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider expander_LPF {

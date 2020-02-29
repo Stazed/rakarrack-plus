@@ -76,11 +76,9 @@ EQ
 
 Exciter
     Wet/Dry                     |                |    none       |                   |       none        |
-    Har 1 to 10                 |                |   -64 to 64   |                   |     -64 to 64     |
 
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
-    Level (Output Gain)         |                |   1 to 127    |                   |       1 to 127    |  OUTPUT - Output Gain
 
 Flanger
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
