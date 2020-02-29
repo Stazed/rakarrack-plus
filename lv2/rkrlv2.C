@@ -1080,20 +1080,8 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->pan->changepar(i,val);
     }
-    for(i++; i<5; i++) //2-4
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->pan->getpar(i) != val)
-        {
-            plug->pan->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64;// 5 LR Del. offset
-    if(plug->pan->getpar(i) != val)
-    {
-        plug->pan->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //6-8
+
+    for(i++; i<plug->nparams; i++) //2-8
     {
         val = (int)*plug->param_p[i];
         if(plug->pan->getpar(i) != val)

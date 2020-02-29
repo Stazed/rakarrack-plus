@@ -27,7 +27,7 @@
 		pset:value 0.0
 	] , [
 		lv2:symbol "STDL" ;
-		pset:value -64.0
+		pset:value 0.0
 	] , [
 		lv2:symbol "TEMPO" ;
 		pset:value 26.0
@@ -60,7 +60,7 @@
 		pset:value 0.0
 	] , [
 		lv2:symbol "STDL" ;
-		pset:value -64.0
+		pset:value 0.0
 	] , [
 		lv2:symbol "TEMPO" ;
 		pset:value 80.0

@@ -267,7 +267,7 @@ def remap(efxindex, paramindex):
          (13, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (13, 3) : (4, 'Randomness', 'RND', 0) ,
          (13, 4) : (5, 'LFO Type', 'TYPE', 0) ,
-         (13, 5) : (6, 'LFO L/R Delay', 'STDL', -64) ,
+         (13, 5) : (6, 'LFO L/R Delay', 'STDL', 0) ,
          (13, 6) : (7, 'Extra Stereo Amount', 'EXTRA_AMOUNT', 0) ,
          (13, 7) : (8, 'Autopan', 'AUTO', 0) ,
          (13, 8) : (9, 'Extra Stereo Enable', 'EXTRA_ON', 0) ,
