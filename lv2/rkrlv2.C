@@ -2677,21 +2677,24 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->echoverse->changepar(i,val);
     }
-    i++;//2 delay is not offset
-    val = (int)*plug->param_p[i];
-    if(plug->echoverse->getpar(i) != val)
+    
+    for(i++; i<4; i++) //2,3 Delay, LR delay not offset
     {
-        plug->echoverse->changepar(i,val);
-    }
-    for(i++; i<5; i++) //3,4 LR delay and angle is offset
-    {
-        val = (int)*plug->param_p[i]+64;
+        val = (int)*plug->param_p[i];
         if(plug->echoverse->getpar(i) != val)
         {
             plug->echoverse->changepar(i,val);
         }
     }
-    for( ; i<plug->nparams; i++)
+    
+    i++;//4 angle is  offset
+    val = (int)*plug->param_p[i]+64;
+    if(plug->echoverse->getpar(i) != val)
+    {
+        plug->echoverse->changepar(i,val);
+    }
+   
+    for(i++; i<plug->nparams; i++)  // 5-9 no offset
     {
         val = (int)*plug->param_p[i];
         if(plug->echoverse->getpar(i) != val)

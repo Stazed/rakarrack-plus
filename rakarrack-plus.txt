@@ -67,8 +67,9 @@ FIXME add LV2-Default
 
 Echoverse (RBEcho)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    L/R Delay Offset (LRdl)     |                |   0 to 127    |                   |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
-    Angle                       |                |  -64 to 64    |                   |      -64 to 63    |  ANGLE
+    L/R Delay Offset (LRdl)     |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
+    Angle                       |   -64 to 64    |  -64 to 64    |   -64 to 64       |      -64 to 63    |  ANGLE
+FIXME add LV2 default
 
 EQ
     Wet/Dry                     |                |    none       |                   |       none        |

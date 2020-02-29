@@ -552,7 +552,7 @@ def remap(efxindex, paramindex):
          (32, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (32, 1) : (2, 'Panning', 'PAN', -64) ,
          (32, 2) : (3, 'TEMPO', 'DELAY', 0) ,
-         (32, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', -64) ,
+         (32, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', 0) ,
          (32, 4) : (5, 'Angle', 'ANGLE', -64) ,
          (32, 5) : (6, 'Feedback', 'FEEDBACK', 0) ,
          (32, 6) : (7, 'Damping', 'DAMP', 0) ,
