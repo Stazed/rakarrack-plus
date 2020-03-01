@@ -4545,7 +4545,7 @@ void RKRGUI::ActMIDI()
                 VIBE->vibe_fb->redraw();
                 break;
             case 393:
-                VIBE->vibe_LR->value(rkr->efx_Vibe->getpar(9) - 64);
+                VIBE->vibe_LR->value(rkr->efx_Vibe->getpar(9));
                 VIBE->vibe_LR->redraw();
                 break;
             case 394:

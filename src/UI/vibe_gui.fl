@@ -39,8 +39,8 @@ vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
 vibe_stdf->value(rkr->efx_Vibe->getpar(4));
 vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
 vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
-vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
-vibe_stereo->value(rkr->efx_Vibe->getpar(10));} selected
+vibe_LR->value(rkr->efx_Vibe->getpar(9));
+vibe_stereo->value(rkr->efx_Vibe->getpar(10));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -166,8 +166,8 @@ rkr->efx_Vibe->changepar(7,(int)(o->value()+64));}
  rgui->getMIDIControl(393);
  return;
 }
-rkr->efx_Vibe->changepar(9,(int)(o->value()+64));}
-    xywh {52 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+rkr->efx_Vibe->changepar(9,(int)(o->value()));} selected
+    xywh {52 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 128 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider vibe_pan {

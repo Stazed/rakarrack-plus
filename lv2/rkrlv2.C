@@ -4230,7 +4230,7 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    for(i=0; i<4; i++)//0-4
+    for(i=0; i<5; i++)//0-5
     {
         val = (int)*plug->param_p[i];
         if(plug->vibe->getpar(i) != val)
@@ -4238,14 +4238,13 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
             plug->vibe->changepar(i,val);
         }
     }
-    for(; i<6; i++)//4-5 pan and st del
+
+    val = (int)*plug->param_p[i]+64; // 5 pan
+    if(plug->vibe->getpar(i) != val)
     {
-        val = (int)*plug->param_p[i]+64;
-        if(plug->vibe->getpar(i) != val)
-        {
-            plug->vibe->changepar(i,val);
-        }
+        plug->vibe->changepar(i,val);
     }
+    i++;
     val = Dry_Wet((int)*plug->param_p[i]);//6 
     if(plug->vibe->getpar(i) != val)
     {

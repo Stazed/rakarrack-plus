@@ -731,7 +731,7 @@ def remap(efxindex, paramindex):
          (45, 1) : (2, 'Tempo', 'TEMPO', 0) ,
          (45, 2) : (3, 'Randomness', 'RND', 0) ,
          (45, 3) : (4, 'LFO Type', 'TYPE', 0) ,
-         (45, 4) : (5, 'LFO L/R Delay', 'STDL', -64) ,
+         (45, 4) : (5, 'LFO L/R Delay', 'STDL', 0) ,
          (45, 5) : (6, 'Pan', 'PAN', -64) ,
          (45, 6) : (7, 'Dry/Wet', 'DRYWET', 0) ,
          (45, 7) : (8, 'Feedback', 'FB', -64) ,

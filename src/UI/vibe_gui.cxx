@@ -30,7 +30,7 @@ vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
 vibe_stdf->value(rkr->efx_Vibe->getpar(4));
 vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
 vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
-vibe_LR->value(rkr->efx_Vibe->getpar(9)-64);
+vibe_LR->value(rkr->efx_Vibe->getpar(9));
 vibe_stereo->value(rkr->efx_Vibe->getpar(10));
 }
 void VibeGui::cb_vibe_preset(Fl_Choice* o, void* v) {
@@ -146,7 +146,7 @@ void VibeGui::cb_vibe_LR_i(SliderW* o, void*) {
  rgui->getMIDIControl(393);
  return;
 }
-rkr->efx_Vibe->changepar(9,(int)(o->value()+64));
+rkr->efx_Vibe->changepar(9,(int)(o->value()));
 }
 void VibeGui::cb_vibe_LR(SliderW* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_LR_i(o,v);
@@ -330,8 +330,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_LR->labelfont(0);
   vibe_LR->labelsize(10);
   vibe_LR->labelcolor(FL_BACKGROUND2_COLOR);
-  vibe_LR->minimum(-64);
-  vibe_LR->maximum(64);
+  vibe_LR->maximum(128);
   vibe_LR->step(1);
   vibe_LR->textcolor(FL_BACKGROUND2_COLOR);
   vibe_LR->callback((Fl_Callback*)cb_vibe_LR);
