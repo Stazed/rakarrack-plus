@@ -234,7 +234,7 @@ def remap(efxindex, paramindex):
          (10, 2) : (3, 'Tempo', 'TEMPO', 0) ,
          (10, 3) : (4, 'Randomness', 'RND', 0) ,
          (10, 4) : (5, 'LFO Type', 'TYPE', 0) ,
-         (10, 5) : (6, 'LFO L/R Delay', 'WIDTH', -64) ,
+         (10, 5) : (6, 'LFO L/R Delay', 'WIDTH', 0) ,
          (10, 6) : (7, 'Depth', 'DEPTH', 0) ,
          (10, 7) : (8, 'Sensitivity', 'SENSE', 0) ,
          (10, 8) : (9, 'Invert', 'INV', 0) ,

@@ -190,8 +190,8 @@ Vocoder
 
 WahWah  (DynamicFilter.C)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    LFO L/R Delay  (St.df)      |                |   0 to 127    |                   |      -64 to 63    |  WIDTH - LFO L/R Delay
-Check "MODE" - "Filter Type"                                                                  0 to 4        -- Add Selection box
+    LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  WIDTH - LFO L/R Delay
+FIXME add "MODE" - "Filter Type"                                                                  0 to 4        -- Add Selection box
 
 
 ___________________________________________________________________________________________________________________________________
