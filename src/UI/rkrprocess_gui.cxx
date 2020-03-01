@@ -3651,7 +3651,7 @@ void RKRGUI::ActMIDI()
                 VALVE->valve_WD->redraw();
                 break;
             case 170:
-                VALVE->valve_LRc->value(rkr->efx_Valve->getpar(2) - 64);
+                VALVE->valve_LRc->value(rkr->efx_Valve->getpar(2));
                 VALVE->valve_LRc->redraw();
                 break;
             case 171:
