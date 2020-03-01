@@ -1255,7 +1255,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 119:
-        efx_APhaser->changepar(2, value);
+        efx_APhaser->changepar(2, ret_Tempo(value));
         break;
 
     case 120:

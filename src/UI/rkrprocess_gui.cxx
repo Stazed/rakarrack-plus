@@ -3423,8 +3423,8 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_WD->redraw();
                 break;
             case 118:
-                APHASER->aphaser_pan->value(rkr->efx_APhaser->getpar(1));
-                APHASER->aphaser_pan->redraw();
+                APHASER->aphaser_distort->value(rkr->efx_APhaser->getpar(1));
+                APHASER->aphaser_distort->redraw();
                 break;
             case 119:
                 APHASER->aphaser_freq->value(rkr->efx_APhaser->getpar(2));
@@ -3435,16 +3435,16 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_phase->redraw();
                 break;
             case 121:
-                APHASER->aphaser_dpth->value(rkr->efx_APhaser->getpar(6));
-                APHASER->aphaser_dpth->redraw();
+                APHASER->aphaser_width->value(rkr->efx_APhaser->getpar(6));
+                APHASER->aphaser_width->redraw();
                 break;
             case 122:
                 APHASER->aphaser_fb->value(rkr->efx_APhaser->getpar(7) - 64);
                 APHASER->aphaser_fb->redraw();
                 break;
             case 123:
-                APHASER->aphaser_LR->value(rkr->efx_APhaser->getpar(9));
-                APHASER->aphaser_LR->redraw();
+                APHASER->aphaser_mismatch->value(rkr->efx_APhaser->getpar(9));
+                APHASER->aphaser_mismatch->redraw();
                 break;
             case 124:
                 APHASER->aphaser_stdf->value(rkr->efx_APhaser->getpar(5));
