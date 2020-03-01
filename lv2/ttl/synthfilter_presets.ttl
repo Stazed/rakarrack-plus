@@ -27,7 +27,7 @@
                 pset:value 1.0
         ], [
                 lv2:symbol "STDL" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "WIDTH" ;
                 pset:value 110.0
@@ -82,7 +82,7 @@
                 pset:value 1.0
         ], [
                 lv2:symbol "STDL" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "WIDTH" ;
                 pset:value 110.0
@@ -137,7 +137,7 @@
                 pset:value 1.0
         ], [
                 lv2:symbol "STDL" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "WIDTH" ;
                 pset:value 110.0
@@ -192,7 +192,7 @@
                 pset:value 1.0
         ], [
                 lv2:symbol "STDL" ;
-                pset:value 31.0
+                pset:value 95.0
         ], [
                 lv2:symbol "WIDTH" ;
                 pset:value 38.0
@@ -247,7 +247,7 @@
                 pset:value 6.0
         ], [
                 lv2:symbol "STDL" ;
-                pset:value -64.0
+                pset:value 0.0
         ], [
                 lv2:symbol "WIDTH" ;
                 pset:value 76.0
@@ -302,7 +302,7 @@
                 pset:value 5.0
         ], [
                 lv2:symbol "STDL" ;
-                pset:value 64.0
+                pset:value 127.0
         ], [
                 lv2:symbol "WIDTH" ;
                 pset:value 127.0
@@ -357,7 +357,7 @@
                 pset:value 1.0
         ], [
                 lv2:symbol "STDL" ;
-                pset:value 64.0
+                pset:value 127.0
         ], [
                 lv2:symbol "WIDTH" ;
                 pset:value 81.0

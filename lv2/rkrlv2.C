@@ -2353,20 +2353,7 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
         plug->synth->changepar(i,val);
     }
 
-    for(i++; i<5; i++) //1-4
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->synth->getpar(i) != val)
-        {
-            plug->synth->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64;// 5 LR Del. offset
-    if(plug->synth->getpar(i) != val)
-    {
-        plug->synth->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //6-10
+    for(i++; i<plug->nparams; i++) //1-10
     {
         val = (int)*plug->param_p[i];
         if(plug->synth->getpar(i) != val)
