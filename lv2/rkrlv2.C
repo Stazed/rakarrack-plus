@@ -2431,7 +2431,7 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
         plug->mbvol->changepar(i,val);
     }
 
-    for(i++; i<3; i++)  // 1-2
+    for(i++; i<10; i++)  // 1-9
     {
         val = (int)*plug->param_p[i];
         if(plug->mbvol->getpar(i) != val)
@@ -2439,32 +2439,7 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
             plug->mbvol->changepar(i,val);
         }
     }
-    val = (int)*plug->param_p[i] +64;//3 LR delay
-    if(plug->mbvol->getpar(i) != val)
-    {
-        plug->mbvol->changepar(i,val);
-    }
-    for(i++; i<6; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->mbvol->getpar(i) != val)
-        {
-            plug->mbvol->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64;//6 LR delay
-    if(plug->mbvol->getpar(i) != val)
-    {
-        plug->mbvol->changepar(i,val);
-    }
-    for(i++; i<10; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->mbvol->getpar(i) != val)
-        {
-            plug->mbvol->changepar(i,val);
-        }
-    }
+
     for(i=10; i<plug->nparams; i++)
     {
         val = (int)*plug->param_p[i];

@@ -21,7 +21,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDL1" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "TEMPO2" ;
                 pset:value 80.0
@@ -30,7 +30,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDL2" ;
-                pset:value -64.0
+                pset:value 0.0
         ], [
                 lv2:symbol "LMCR" ;
                 pset:value 500.0
@@ -71,7 +71,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDL1" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "TEMPO2" ;
                 pset:value 40.0
@@ -80,7 +80,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDL2" ;
-                pset:value -64.0
+                pset:value 0.0
         ], [
                 lv2:symbol "LMCR" ;
                 pset:value 120.0
@@ -120,7 +120,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDL1" ;
-                pset:value 0.0
+                pset:value 64.0
         ], [
                 lv2:symbol "TEMPO2" ;
                 pset:value 40.0
@@ -129,7 +129,7 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "STDL2" ;
-                pset:value -64.0
+                pset:value 0.0
         ], [
                 lv2:symbol "LMCR" ;
                 pset:value 800.0

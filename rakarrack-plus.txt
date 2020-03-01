@@ -175,8 +175,9 @@ FIXME LV2 Default
 
 VaryBand    (MBVvol)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-    LFO L/R Delay  (St.df)   1  |                |   0 to 127    |                   |      -64 to 63    |  STDL1 - LFO L/R Delay 1
-    LFO L/R Delay  (St.df)   2  |                |   0 to 127    |                   |      -64 to 63    |  STDL2 - LFO L/R Delay 2
+    LFO L/R Delay  (St.df)   1  |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL1 - LFO L/R Delay 1
+    LFO L/R Delay  (St.df)   2  |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL2 - LFO L/R Delay 2
+FIXME LV2 default
 
 Vibe
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 128    |
