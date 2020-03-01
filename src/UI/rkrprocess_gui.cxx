@@ -4431,7 +4431,7 @@ void RKRGUI::ActMIDI()
                 SHAR->shar_ganr->redraw();
                 break;
             case 365:
-                SHAR->shar_lrc->value(rkr->efx_StereoHarm->getpar(11) - 64);
+                SHAR->shar_lrc->value(rkr->efx_StereoHarm->getpar(11));
                 SHAR->shar_lrc->redraw();
                 break;
             case 366:
