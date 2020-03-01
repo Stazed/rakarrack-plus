@@ -274,7 +274,7 @@ wave at half the fundamental frequency (sub octave). </p>
       </td>
       <td bgcolor="#fbfbfb">
       <p>Adapted from the ZynAddSubFX Echo</p>
-      <p><b>Wet/Dry</b>: Mix level of echo with original.</p>
+      <p><b>Dry/Wet</b>: Mix level of echo with original.</p>
       <p><b>Reverse</b>: Mixes reverse delay with forward delay.</p>
       <p>More about reverse: Echo works by storing audio samples in
 memory and playing back samples that were stored a while ago. At a
@@ -422,7 +422,7 @@ Circuit' is an original creation. Finally, some of the non-perfect
 physical components and distortion were modeled in a simplistic way to
 add a certain warmth to the effect without sinking your CPU into an ice
 age.</p>
-      <p><b>Wet/Dry</b>: At zero, both the phase shifted signal and input
+      <p><b>Dry/Wet</b>: At zero, both the phase shifted signal and input
 signal are mixed equally. This creates the deepest notch filter. Why
 would you want to mix all Wet? Modulating the all-pass filter stages
 can create frequency shifting at faster modulation rates. This produces
@@ -801,12 +801,12 @@ sounds, it can also be configured for interesting subtle comb filtering
 sounds for shaping a rather beautiful timbre onto an instrument.&nbsp;
 It is a truly amazing effect.</p>
 <p>Here is a description of the parameters:</p>
-<p><b>Wet/Dry</b>: Being a delay-based effect, Wet/Dry does more than
-simply mix Wet/Dry sounds.&nbsp; Destructive interference occurs
+<p><b>Dry/Wet</b>: Being a delay-based effect, Dry/Wet does more than
+simply mix Dry/Wet sounds.&nbsp; Destructive interference occurs
 between the effected signal and clean so a proper blend can be used
 also to voice the effect.</p>
 <p><b>Pan</b>: Put effect more to the left or right channel.&nbsp; Used in
-conjunction with Wet/Dry mix, one can voice the effect differently
+conjunction with Dry/Wet mix, one can voice the effect differently
 between left right.</p>
 <p><b>Tempo</b>: LFO rate</p>
 <p><b>Rnd</b>: Add random noise to LFO to make it sound somewhat more
@@ -817,7 +817,7 @@ modulation offset between the two delay lines.&nbsp; On either extreme
 it has a lower "closed mouth" sound, while in the middle it creates
 more of an "open mouth" sound.&nbsp; This parameter "centers" the LFO
 around the point it is set.</p>
-<p><b>St. df</b>: Stereo Difference between left &amp; right LFO.&nbsp; A setting
+<p><b>Stereo Df.</b>: Stereo Difference between left &amp; right LFO.&nbsp; A setting
 of 64 has both LFOs in phase between left/right.&nbsp; This parameter
 used with L/R Cr. is like having a second "Phase" parameter, so more
 interesting interaction can be achieved by using this control.&nbsp;
@@ -832,9 +832,9 @@ the sound of the filter.</p>
 feedback, the effect is rather dull.&nbsp; It's the perpetual
 regeneration along the delay line that creates&nbsp; the interesting
 phase cancellations and resonances that sound alien.</p>
-<p><b>L/R Cr.</b>: Left/Right Crossing.&nbsp; Amount of left to mix into
-right and right into left.&nbsp; Less than zero subtracts left from
-right, right from left, while greater than zero adds them.
+<p><b>L/R cross</b>: Left/Right Crossing.&nbsp; Amount of left to mix into
+right and right into left.&nbsp; Less than 64 subtracts left from
+right, right from left, while greater than 64 adds them.
 </p>
       </td>
     </tr>
@@ -889,7 +889,7 @@ at its maximum severity.  Mixing in the clean signal reduces the
 depth of the notches, but also creates a complex and interesting
 frequency response.  The result is a unique color to the tone not
 available by a standard flanger.</p>
-      <p><b>Wet/Dry</b>:  Mix delayed
+      <p><b>Dry/Wet</b>:  Mix delayed
 signal with Dry</p>
       <p><b>Pan</b>:</p>
       <p><b>L/R.Cr</b>:</p>
@@ -1018,7 +1018,7 @@ beautiful soundscapes as well as very edgy electronic trance and techno
 sounds.  Of course, with slower  tempos such that several
 phrases are repeated one can get the tempo-doubling side effect to lay
 out paint-pealing leads without hardly moving your fingers.</p>
-      <p><b>Wet/Dry</b>: Amount of
+      <p><b>Dry/Wet</b>: Amount of
 arpeggiated accompaniment in the mix</p>
       <p><b>Arpe's</b>: Mix pitch
 shifted delay line with normal delay</p>
@@ -1169,8 +1169,8 @@ frequencies on the M/S channels.</p>
       allow this. Finally, the SynthFilter comes with wet/dry mix so you can
       accomplish interesting phase-wah sounds.</p>
       
-      <p><b>Wet/Dry</b>:  Like many other filtering effects, it is not as simple as
-      Wet/Dry.  Destructive interference happens between the wet and dry
+      <p><b>Dry/Wet</b>:  Like many other filtering effects, it is not as simple as
+      Dry/Wet.  Destructive interference happens between the wet and dry
       signals to varying degrees as this slider is adjusted, so new &amp;
       interesting notch and comb filtering effects evolve as you move this
       from wet to dry.</p>
@@ -1188,7 +1188,7 @@ frequencies on the M/S channels.</p>
       <p><b>LFO Type</b>:  The shape of LFO you wish to use.</p>
       
       <p><b>Subtr.</b>: Subtract.  Make output of filter negative, thus changing which
-      parts of the signal will cancel when using Wet/Dry mix.</p>
+      parts of the signal will cancel when using Dry/Wet mix.</p>
       
       <p><b>St. df</b>: Stereo Difference.  Delay between LFO's for left and right
       channels.</p>
@@ -1326,7 +1326,7 @@ some quality to reduce  processing load.  As a result, Rakarrack requires some
 "horsepower", but is better suited to amplifier/cabinet modeling
 assuming your CPU can handle it.</p>
       <p> <b>Parameters</b></p>
-      <p><b>Wet/Dry</b>:  Self explanatory. 
+      <p><b>Dry/Wet</b>:  Self explanatory. 
 For amp responses, most of the time you will want this all wet.</p>
       <p><b>Pan</b>: The effect is processed in mono (L &amp; R are mixed
 on the
@@ -1384,7 +1384,7 @@ Edition copyright ©2000 by Houghton Mifflin Company)<br>
       <br>
 It's a joke...<br>
       </p>
-      <p><b>Wet/Dry</b>: Balance the mix of the recorded loop with the
+      <p><b>Dry/Wet</b>: Balance the mix of the recorded loop with the
 incoming signal to the output.</p>
       <p><b>Level 1</b>: Volume level of track 1. '64' is unity. 
 Higher is louder than the original signal, lower is more quiet.</p>
@@ -1439,7 +1439,7 @@ probably confuse yourself if you try to use the master metronome and Looper
 metronome simultaneously.</p>
 
 <p>Example sequence of operation:<br>
-Set Wet/Dry to 0, Level 1 to 64, Auto Play Active, Track 1 active, R1
+Set Dry/Wet to 127, Level 1 to 64, Auto Play Active, Track 1 active, R1
 active. Press record and begin to play into the loop. When finished,
 press record again, and your loop will immediately start up from the
 beginning.  Play along, or press record again to add more parts to
@@ -1479,7 +1479,7 @@ LFO synchronized to Tempo.  This means Tap Tempo will set the rate
 of the LFO effect. </p>
 <p>Additionally, you have the envelope follower applied with the E. Sens
 parameter, and smoothed by Smooth.  Here's the breakdown:</p>
-<p><b>Wet/Dry</b>: It's obvious that this
+<p><b>Dry/Wet</b>: It's obvious that this
 mixes wet and dry signals, but this interacts like a phaser or flanger. By
 mixing some Dry into higher order filters (increase Stages) you can
 create notches in the frequency response. With individualized
@@ -1562,7 +1562,7 @@ center frequency responds to changes in signal dynamics.</p>
 <p>This effect is intended to be an "in your face" wall of sound.<br>
 This has been adapted from the normal "Echo" effect, but with some
 modifications that help improve the sound and behavior.  With
-Wet/Dry mix, you will  notice it is possible to get 100% wet
+Dry/Wet mix, you will  notice it is possible to get 100% wet
 (echoes only).  The reverse is a little more "clean".  More
 importantly, this effect synchronizes to master Tempo, and is
 responsive to TapTempo control.</p>
@@ -1570,7 +1570,7 @@ responsive to TapTempo control.</p>
 measure.  Also added is "Extra Stereo" effect that makes the
 effect come alive in 3D space (assuming you're amplifying or recording
 in stereo).</p>
-<p><b>Wet/Dry</b>: Direct/Reverberant mix. It's like
+<p><b>Dry/Wet</b>: Direct/Reverberant mix. It's like
 changing the distance you are located from the sound source.</p>
 <p><b>Reverse</b>: Same as Echo</p>
 <p><b>Pan</b>: Move the effect to the left or right</p>
@@ -1735,7 +1735,7 @@ the Input level parameter gives you a lot of power over the dynamics of
 the microphone input, and can help in getting a good consistent vocal
 sound onto the instrument being processed.</p>
 <p>Here is the list of parameters:</p>
-<p><b>Wet/Dry</b>: We have been over this many times.</p>
+<p><b>Dry/Wet</b>: We have been over this many times.</p>
 <p><b>Pan</b>: Move the processed signal to the left or right</p>
 <p><b>Input</b>: Microphone input level.  Explained in detail above.</p>
 <p><b>Muf.</b>: "Muffle".  Maybe more like "blur" or
@@ -1805,7 +1805,7 @@ something akin to the Sample/Hold filter (Stepper mode), or a sequenced
 wah wah (lineal).</p>
 <p><b>Preset</b>: Several built-in preset configurations exist to showcase the possibilities of the
 effect.</p>
-<p><b>Wet/Dry</b>: Nothing special here.</p>
+<p><b>Dry/Wet</b>: Nothing special here.</p>
 <p><b>Sliders 1 - 8</b>: Level of effect at each step in
 the sequence.  If a filter, sliders set filter center
 frequency.  If Tremor, sets volume of signal at the corresponding
@@ -1879,7 +1879,7 @@ bending is set by Attack.  Time to return to normal pitch after
 the signal has fallen below the threshold is set by Decay.  A
 second mode is available to make use of the Whammy slider for a pedal
 controlled digital whammy effect.</p>
-<p><b>Wet/Dry</b>: Mix some of the unaffected signal to the output.</p>
+<p><b>Dry/Wet</b>: Mix some of the unaffected signal to the output.</p>
 <p><b>Int</b>: Musical interval setting the maximum pitch deviation. In
 Trigger Mode with interval value set to "0", the real interval is set
 to "1" and can be controlled by the Whammy slider.</p>
@@ -2098,7 +2098,7 @@ although this may be acceptable to you if your CPU is too slow to handle
 the higher quality selections. Almost all selections of resampling will 
 be faster than processing at a higher samplerate.</p>
 <p>Here are the parameters:</p>
-<p><b>Wet/Dry</b>: Amount of dry signal to mix with the convolved
+<p><b>Dry/Wet</b>: Amount of dry signal to mix with the convolved
 signal.  Notice that the IR file defines the maximum
 wetness.  The Fade parameter fades the head end of the IR where
 the amount of dry is defined.  Usually this works well by mixing
@@ -2217,7 +2217,7 @@ stereo spatialization techniques.&nbsp; Hopefully we have done a good
 job demonstrating the most noteworthy possibilities in the default
 files installed with Rakarrack.</p>
 <p>Here is a description of the parameters:</p>
-<p><b>Wet/Dry</b>: Mix unprocessed signal with processed output.</p>
+<p><b>Dry/Wet</b>: Mix unprocessed signal with processed output.</p>
 <p><b>Pan</b>: Pan processed output to left or right channel.</p>
 <p><b>Tempo</b>: Beats per minute. Synchronizes with master TapTempo.</p>
 <p><b>Damp</b>: High frequency damping in the feedback loop.</p>
@@ -2343,7 +2343,7 @@ program.</p>
       <p><img style="width: 185px; height: 250px;" src="imagenes/cpb.jpg" alt="rakarrack CompBand"></p>
       </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
       <p>CompBand</p>
-<p>Is Four band Compressor, using the Compressor effect, the Wet/Dry
+<p>Is Four band Compressor, using the Compressor effect, the Dry/Wet
 parameter is included&nbsp; for&nbsp; mastering purposes,&nbsp;
 probably if you use with a single instrument you will want to hear the
 Wet. </p>
@@ -2457,11 +2457,11 @@ using several extra electronics components to properly apply to a real
 analog unit.  In software this is more elegant and produces a lovely phasing
 effect.</p>
 
-<p><b>Wet/Dry</b>: The original 'Vibe had a switch allowing you to select "Chorus" or
+<p><b>Dry/Wet</b>: The original 'Vibe had a switch allowing you to select "Chorus" or
 "Vibrato".  Internal to the circuit, this switch only selected between
 different amounts of wet/dry in the final mix.  The "Chorus" setting is a
-bit of a misnomer because it is actually more of a Phaser.  A Wet/Dry of 0
-(50/50) corresponds to the "Chorus" setting.  A wet/dry setting of -64 (all
+bit of a misnomer because it is actually more of a Phaser.  A Dry/Wet of 64
+(50/50) corresponds to the "Chorus" setting.  A wet/dry setting of 127 (all
 wet) corresponds to the "Vibrato" setting of the original analog unit. 
 Later clones of the circuit added the wet/dry mix as a pot so you could mix
 anything in between.  Rakarrack applies this philosophy.</p>
@@ -2498,7 +2498,7 @@ can be used to make a tremolo effect, particularly when St.df is set to 32
 (quadrature).</p>
 
 <p><b>Pan</b>: Pan the effect to the left or right.  This can be used to change the
-color of the effect between left and right channels if Wet/Dry mix is set to
+color of the effect between left and right channels if Dry/Wet mix is set to
 a certain amount dry.</p>
 </td></tr></tbody>
 </table>
@@ -2542,7 +2542,7 @@ subtle swirls or stereo panning and doppler shift effects possible.</p>
 spectrum to the top of the range, then starts over at the bottom.  This will
 give an understanding for adjusting the level on the bands #1-8.</p>
 
-<p><b>Wet/Dry</b>:  Mix un-filtered signal with the filtered signal.</p>
+<p><b>Dry/Wet</b>:  Mix un-filtered signal with the filtered signal.</p>
 
 <p><b>Res</b>:  Filter resonance, also known as an adjustment of the Q factor.  More
 positive is more resonance, negative is less resonance.   It is suggested to
