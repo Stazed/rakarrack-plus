@@ -6,8 +6,8 @@ AlienWah
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL - rkrlv2
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCR - Left/Right Crossover 
-FIXME Help .png
 ---Done---
+FIXME Help .png
 
 Analog Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -17,6 +17,7 @@ Arpie
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (LRdl.)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  LR_DELAY -  Left/Right Delay Offset
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr - Left/Right Crossover
+FIXME Default LV2
 
 Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |
