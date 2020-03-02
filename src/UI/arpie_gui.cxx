@@ -38,6 +38,7 @@ void ArpieGui::cb_arpie_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item ArpieGui::menu_arpie_preset[] = {
+ {"Tremolo", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Arpie 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Arpie 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Arpie 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},

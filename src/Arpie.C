@@ -346,9 +346,11 @@ void
 Arpie::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
-    const int NUM_PRESETS = 9;
+    const int NUM_PRESETS = 10;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
+        // Tremolo
+        {0, 64, 126, 64, 30, 59, 0, 127, 1, 0, 3},
         //Arpie 1
         {67, 64, 35, 64, 30, 59, 0, 127, 4, 0, 0},
         //Arpie 2
